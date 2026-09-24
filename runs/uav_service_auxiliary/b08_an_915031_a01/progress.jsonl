@@ -1,0 +1,2060 @@
+{"count": 1, "event": "evaluation_attempt", "panel": "initial_development"}
+{"count": 1000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 2000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 3000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 1, "event": "evaluation_world", "panel": "initial_development"}
+{"count": 2, "event": "evaluation_attempt", "panel": "initial_development"}
+{"count": 4000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 5000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 6000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 2, "event": "evaluation_world", "panel": "initial_development"}
+{"count": 3, "event": "evaluation_attempt", "panel": "initial_development"}
+{"count": 7000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 8000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 9000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 3, "event": "evaluation_world", "panel": "initial_development"}
+{"count": 4, "event": "evaluation_attempt", "panel": "initial_development"}
+{"count": 10000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 11000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 12000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 4, "event": "evaluation_world", "panel": "initial_development"}
+{"count": 5, "event": "evaluation_attempt", "panel": "initial_development"}
+{"count": 13000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 14000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 15000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 5, "event": "evaluation_world", "panel": "initial_development"}
+{"count": 6, "event": "evaluation_attempt", "panel": "initial_development"}
+{"count": 16000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 17000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 18000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 6, "event": "evaluation_world", "panel": "initial_development"}
+{"count": 7, "event": "evaluation_attempt", "panel": "initial_development"}
+{"count": 19000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 20000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 21000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 7, "event": "evaluation_world", "panel": "initial_development"}
+{"count": 8, "event": "evaluation_attempt", "panel": "initial_development"}
+{"count": 22000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 23000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 24000, "event": "evaluation_transition", "panel": "initial_development"}
+{"count": 8, "event": "evaluation_world", "panel": "initial_development"}
+{"event": "panel_complete", "panel": "initial_development"}
+{"count": 9, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 25000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 26000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 27000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 9, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 10, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 28000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 29000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 30000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 10, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 11, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 31000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 32000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 33000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 11, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 12, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 34000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 35000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 36000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 12, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 13, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 37000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 38000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 39000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 13, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 14, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 40000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 41000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 42000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 14, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 15, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 43000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 44000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 45000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 15, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 16, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 46000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 47000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 48000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 16, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 17, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 49000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 50000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 51000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 17, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 18, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 52000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 53000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 54000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 18, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 19, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 55000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 56000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 57000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 19, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 20, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 58000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 59000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 60000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 20, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 21, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 61000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 62000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 63000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 21, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 22, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 64000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 65000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 66000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 22, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 23, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 67000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 68000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 69000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 23, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 24, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 70000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 71000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 72000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 24, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 25, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 73000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 74000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 75000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 25, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 26, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 76000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 77000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 78000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 26, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 27, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 79000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 80000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 81000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 27, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 28, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 82000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 83000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 84000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 28, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 29, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 85000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 86000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 87000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 29, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 30, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 88000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 89000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 90000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 30, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 31, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 91000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 92000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 93000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 31, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 32, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 94000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 95000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 96000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 32, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 33, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 97000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 98000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 99000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 33, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 34, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 100000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 101000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 102000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 34, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 35, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 103000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 104000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 105000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 35, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 36, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 106000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 107000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 108000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 36, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 37, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 109000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 110000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 111000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 37, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 38, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 112000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 113000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 114000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 38, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 39, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 115000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 116000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 117000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 39, "event": "evaluation_world", "panel": "initial_final"}
+{"count": 40, "event": "evaluation_attempt", "panel": "initial_final"}
+{"count": 118000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 119000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 120000, "event": "evaluation_transition", "panel": "initial_final"}
+{"count": 40, "event": "evaluation_world", "panel": "initial_final"}
+{"event": "panel_complete", "panel": "initial_final"}
+{"arm": "N", "event": "fit_start"}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 1, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 1}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 2, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 2}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 3, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 3}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 4, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 4}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 5, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 5}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 6, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 6}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 7, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 7}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 8, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 8}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 9, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 9}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 10, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 10}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 11, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 11}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 12, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 12}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 13, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 13}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 14, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 14}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 15, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 15}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 16, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 16}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 17, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 17}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 18, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 18}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 19, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 19}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 20, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 20}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 21, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 21}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 22, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 22}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 23, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 23}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 24, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 24}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 25, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 25}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 26, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 26}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 27, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 27}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 28, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 28}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 29, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 29}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 100}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 200}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 300}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 400}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 500}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 600}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 700}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 800}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 900}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 1000}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 1100}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 1200}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 1300}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 1400}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 1500}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 1600}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 1700}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 1800}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 1900}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 2000}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 2100}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 2200}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 2300}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 2400}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 2500}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 2600}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 2700}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 2800}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 2900}
+{"arm": "N", "event": "collection", "phase": 30, "steps": 3000}
+{"arm": "N", "event": "phase_complete", "phase": 30}
+{"arm": "N", "event": "training_exit", "status": "COMPLETE"}
+{"count": 41, "event": "evaluation_attempt", "panel": "N_development"}
+{"count": 121000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 122000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 123000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 41, "event": "evaluation_world", "panel": "N_development"}
+{"count": 42, "event": "evaluation_attempt", "panel": "N_development"}
+{"count": 124000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 125000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 126000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 42, "event": "evaluation_world", "panel": "N_development"}
+{"count": 43, "event": "evaluation_attempt", "panel": "N_development"}
+{"count": 127000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 128000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 129000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 43, "event": "evaluation_world", "panel": "N_development"}
+{"count": 44, "event": "evaluation_attempt", "panel": "N_development"}
+{"count": 130000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 131000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 132000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 44, "event": "evaluation_world", "panel": "N_development"}
+{"count": 45, "event": "evaluation_attempt", "panel": "N_development"}
+{"count": 133000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 134000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 135000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 45, "event": "evaluation_world", "panel": "N_development"}
+{"count": 46, "event": "evaluation_attempt", "panel": "N_development"}
+{"count": 136000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 137000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 138000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 46, "event": "evaluation_world", "panel": "N_development"}
+{"count": 47, "event": "evaluation_attempt", "panel": "N_development"}
+{"count": 139000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 140000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 141000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 47, "event": "evaluation_world", "panel": "N_development"}
+{"count": 48, "event": "evaluation_attempt", "panel": "N_development"}
+{"count": 142000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 143000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 144000, "event": "evaluation_transition", "panel": "N_development"}
+{"count": 48, "event": "evaluation_world", "panel": "N_development"}
+{"event": "panel_complete", "panel": "N_development"}
+{"count": 49, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 145000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 146000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 147000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 49, "event": "evaluation_world", "panel": "N_final"}
+{"count": 50, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 148000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 149000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 150000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 50, "event": "evaluation_world", "panel": "N_final"}
+{"count": 51, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 151000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 152000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 153000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 51, "event": "evaluation_world", "panel": "N_final"}
+{"count": 52, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 154000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 155000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 156000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 52, "event": "evaluation_world", "panel": "N_final"}
+{"count": 53, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 157000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 158000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 159000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 53, "event": "evaluation_world", "panel": "N_final"}
+{"count": 54, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 160000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 161000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 162000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 54, "event": "evaluation_world", "panel": "N_final"}
+{"count": 55, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 163000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 164000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 165000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 55, "event": "evaluation_world", "panel": "N_final"}
+{"count": 56, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 166000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 167000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 168000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 56, "event": "evaluation_world", "panel": "N_final"}
+{"count": 57, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 169000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 170000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 171000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 57, "event": "evaluation_world", "panel": "N_final"}
+{"count": 58, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 172000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 173000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 174000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 58, "event": "evaluation_world", "panel": "N_final"}
+{"count": 59, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 175000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 176000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 177000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 59, "event": "evaluation_world", "panel": "N_final"}
+{"count": 60, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 178000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 179000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 180000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 60, "event": "evaluation_world", "panel": "N_final"}
+{"count": 61, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 181000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 182000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 183000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 61, "event": "evaluation_world", "panel": "N_final"}
+{"count": 62, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 184000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 185000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 186000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 62, "event": "evaluation_world", "panel": "N_final"}
+{"count": 63, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 187000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 188000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 189000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 63, "event": "evaluation_world", "panel": "N_final"}
+{"count": 64, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 190000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 191000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 192000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 64, "event": "evaluation_world", "panel": "N_final"}
+{"count": 65, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 193000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 194000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 195000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 65, "event": "evaluation_world", "panel": "N_final"}
+{"count": 66, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 196000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 197000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 198000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 66, "event": "evaluation_world", "panel": "N_final"}
+{"count": 67, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 199000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 200000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 201000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 67, "event": "evaluation_world", "panel": "N_final"}
+{"count": 68, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 202000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 203000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 204000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 68, "event": "evaluation_world", "panel": "N_final"}
+{"count": 69, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 205000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 206000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 207000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 69, "event": "evaluation_world", "panel": "N_final"}
+{"count": 70, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 208000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 209000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 210000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 70, "event": "evaluation_world", "panel": "N_final"}
+{"count": 71, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 211000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 212000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 213000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 71, "event": "evaluation_world", "panel": "N_final"}
+{"count": 72, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 214000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 215000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 216000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 72, "event": "evaluation_world", "panel": "N_final"}
+{"count": 73, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 217000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 218000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 219000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 73, "event": "evaluation_world", "panel": "N_final"}
+{"count": 74, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 220000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 221000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 222000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 74, "event": "evaluation_world", "panel": "N_final"}
+{"count": 75, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 223000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 224000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 225000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 75, "event": "evaluation_world", "panel": "N_final"}
+{"count": 76, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 226000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 227000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 228000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 76, "event": "evaluation_world", "panel": "N_final"}
+{"count": 77, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 229000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 230000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 231000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 77, "event": "evaluation_world", "panel": "N_final"}
+{"count": 78, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 232000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 233000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 234000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 78, "event": "evaluation_world", "panel": "N_final"}
+{"count": 79, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 235000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 236000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 237000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 79, "event": "evaluation_world", "panel": "N_final"}
+{"count": 80, "event": "evaluation_attempt", "panel": "N_final"}
+{"count": 238000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 239000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 240000, "event": "evaluation_transition", "panel": "N_final"}
+{"count": 80, "event": "evaluation_world", "panel": "N_final"}
+{"event": "panel_complete", "panel": "N_final"}
+{"arm": "A", "event": "fit_start"}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 1, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 1}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 2, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 2}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 3, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 3}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 4, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 4}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 5, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 5}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 6, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 6}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 7, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 7}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 8, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 8}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 9, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 9}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 10, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 10}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 11, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 11}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 12, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 12}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 13, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 13}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 14, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 14}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 15, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 15}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 16, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 16}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 17, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 17}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 18, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 18}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 19, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 19}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 20, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 20}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 21, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 21}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 22, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 22}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 1000}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 1100}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 1200}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 1300}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 1400}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 1500}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 1600}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 1700}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 1800}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 1900}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 2000}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 2100}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 2200}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 2300}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 2400}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 2500}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 2600}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 2700}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 2800}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 2900}
+{"arm": "A", "event": "collection", "phase": 23, "steps": 3000}
+{"arm": "A", "event": "phase_complete", "phase": 23}
+{"arm": "A", "event": "collection", "phase": 24, "steps": 100}
+{"arm": "A", "event": "collection", "phase": 24, "steps": 200}
+{"arm": "A", "event": "collection", "phase": 24, "steps": 300}
+{"arm": "A", "event": "collection", "phase": 24, "steps": 400}
+{"arm": "A", "event": "collection", "phase": 24, "steps": 500}
+{"arm": "A", "event": "collection", "phase": 24, "steps": 600}
+{"arm": "A", "event": "collection", "phase": 24, "steps": 700}
+{"arm": "A", "event": "collection", "phase": 24, "steps": 800}
+{"arm": "A", "event": "collection", "phase": 24, "steps": 900}
+{"arm": "A", "event": "collection", "phase": 24, "steps": 1000}
