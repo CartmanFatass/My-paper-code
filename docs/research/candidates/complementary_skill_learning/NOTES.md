@@ -5862,3 +5862,74 @@ Main was refreshed at `e256dc73e73dda2167bd29d28d28d4f3c908dbfe`; our scope, lea
 pause are unchanged. Next publish these exact source bytes and run the already specified small
 actual4070 CUDA fixture through the new adapter. Only after that check may the fixed first M
 fit enter native admission. No production B06 attempt has started at this entry.
+
+## 2026-09-23 — B06 actual4070 CUDA fixture accepted; M remains first
+
+Published source `c23363a5a71932f037fa0274750fa1c150b9a812` was materialized cleanly at
+`/home/wu/hmasd-worktrees/complementary-skill-b06-20260923`. All four new files matched the
+accepted digests. With configured `/home/wu/.venvs/hmasd/bin/python` and its bin on PATH,
+`pytest -q tests/experiments/candidates/complementary_skill_learning/b06/test_b06.py -k actual_cuda_pair_uses_new_adapter`
+passed on the actual4070:1passed/9deselected in6.55s, with14 dependency deprecation warnings.
+The fixture used two short artificial rollouts per arm:160training+240evaluation transitions,
+four native updates and six panels combined. It verified actual CUDA M/U initialization
+pairing, both native low/discriminator learning paths, M high updates, U high0, label-flow
+checks and the adapter's completed-output guards. Pytest removed its owned scratch; tracked
+source remained clean. No production checkpoint was evaluated and no scientific fit was added.
+
+DM accepts the implementation and freezes that published source for both B06 scientific arms.
+New main `8810bcc10` was inspected: the other direction's S7 result/next-investment update
+changes neither this S1 comparison nor pause/lead. No main edit is needed for this routine
+engineering milestone. Fixed first tag is `b06_m_260923961_c23363a5a`; U follows only after
+M's complete collection and technical acceptance, at the same source and fixed addresses.
+Fresh native admission still owns the actual resource, published-control, source and
+duplicate checks. At this entry, no B06 production attempt has started.
+
+Before native acceptance, supervisor `csl-b06-m-c23363a5a` exited4 after9s with exact refusal
+`hmasd launch refused: published control head has no docs/research/RESEARCH.md`. Its logs and
+`temp/b06_m_launch.{stdout.json,stderr.txt}` remain on the node. No output directory, matching
+claim or source snapshot existed afterward; the unchanged kernel performs this control read
+before any of those effects. Thus no scientific child or B06 fit started in this refusal.
+Direct configured-shell Git reading then succeeded for published main
+`8810bcc10978941638470aec79460faf1e4ff0c0`; remote and local control-file SHA256 both were
+`0ba48ef17ade38a9bb388a8cbb2e1c4fb80f754ba0b7763f4818c5b7ab6dc6e3`. The kernel had hidden
+the failing Git stderr behind the generic message, so lazy-fetch/network trouble is only a
+possible explanation, not a reproduced root cause. No control text or kernel was modified.
+
+DM decision: with the control bytes now available and absence of an accepted/reserved
+operation established, submit the identical native request again through the configured
+supervisor, preserving the first supervisor record and using separate reconciliation stdout/
+stderr scratch. Source, output tag, arm, seeds, horizon and panels are unchanged. This is
+reconciliation of a pre-effect control-read refusal, not a replacement of a started fit.
+
+## 2026-09-23 — B06 M natively admitted and observation adopted
+
+The identical request was natively accepted at2026-09-24T03:55:40.019216Z. B06 now has
+one started scientific fit, M; U remains the fixed second fit after complete M collection
+and technical acceptance. The frozen comparison, source and exposure are unchanged.
+
+The actual-node [manifest](../../../../runs/complementary_skill_learning/b06_m_260923961_c23363a5a/launch-manifest.json),
+[preflight](../../../../runs/complementary_skill_learning/b06_m_260923961_c23363a5a/admission-preflight.json)
+and [native status](../../../../runs/complementary_skill_learning/b06_m_260923961_c23363a5a/launch-status.json)
+were collected and hash-matched against the originals. Their SHA256 values in that order are
+`467ca392142952805e6e33284f754e15a3bf8945849211fb965da5a623a1acf1`,
+`edb4e2b895a2af3d30a0a202455da6f6ffa118b5baeaf485f4b7f521582f3c7c`,
+`08bdb52784e6152bcd85092b7f83f26e3db75809e3a06af10a6684694d13c8e8`.
+The manifest retains the exact command, control/source revisions, native process identities,
+output path and recovery handle. Fresh effective available memory14601461760bytes passed
+the4294967296-byte floor; cgroup headroom is unavailable, not measured as unlimited.
+At03:55:49Z, supervisor and runner were both running with matching recorded/observed identities,
+consistent records and no exit witness. The initial absence of summary was a startup observation,
+not a terminal missing-artifact finding.
+
+Detached observer request `temp/b06_m_wait_request.json` registered the same operation at
+generation50 with1500s window. First drain at03:56:36Z actually observed accepted/running,
+matching process identities, a now-present summary, zero observation errors and no pending
+events. This establishes handle adoption beyond registration. Earlier generation49 had no
+remaining pending events; no prior worker or Pro request was restarted. On a checkpoint rearm
+the returned generation/wake/event IDs for this same handle; on completion collect and read
+the complete required output before scientific acceptance. The live source snapshot stays intact.
+
+Engineering checks and admission establish no service advantage, replication or acceptance of
+a scientific result. All45 training rows, actual tensor/RNG pairing, native/head optimizer
+counts, complete uniform/own panels, adverse worlds and cost remain to be read. No main/index
+edit is made for this unchanged-plan start; detailed progress remains here and in runs.
