@@ -28,7 +28,10 @@ The gap is also as large at the trained N6 as at N8, so the "count transfer" fra
 show. B15 (already admitted on the branch at 2026-09-24T02:02Z, first cell `b1_h6`) is correctly
 pre-registered and its analyzer is arithmetically right, but with n = 3 and df = 2 its joint rule has
 roughly a 30–40 % chance of passing even if the B14 effect is real; the most likely outcome is
-"inconclusive". Not publishable as an HMASD result in its current form.
+"inconclusive". A cross-check requested by the DM2 review confirms a further structural problem: in every logged H6 fit the
+coordinator objective is ~100 % the λ_h = 0.07 entropy bonus, label entropies end at 96–99.8 % of ln 6 and both
+discriminators stay at chance, so the "skills" are an unlearned, near-uniform random context rather than a
+discovered hierarchy (F11). Not publishable as an HMASD result in its current form.
 
 ## 1. Evidence chain B01 → B15
 
@@ -159,6 +162,45 @@ cannot be tested without changing the state contract; `StateSetEncoder` (`models
 `s1_bounded_confirmation_b15_b1_h6_s994101` with manifest, launch SHA `e0a20add`). Main has not been
 updated. Any "before launch" change is now an amendment to a running frozen batch and should not be made.
 
+**F11 — Cross-check with the DM2 review: H6's high level is entropy-pinned; the "learned skills" are not learned. Severity: blocker for any hierarchy/skill interpretation; changes the B15 framing.**
+Verified from `training.jsonl` of the three H6 fits that have logs (B14 `s1_fresh_learning_b14_h6_s974201`,
+B07 `s1_bounded_package_b07_h6_l05_s952201`, B03 `s1_action_law_b03_h6_clip_s942201`), config `lambda_h = 0.07`
+(`configs/config_1.py:165`, echoed in each run's `config.json`), coordinator update `entropy_loss = -lambda_h * entropy`
+(`hmasd/agent.py:6200`, summed over the team categorical and the six individual categoricals):
+
+| Fit | Final team-label entropy (% of ln 6 = 1.792) | Final individual-label entropy | Coordinator loss = policy + value + entropy term | Team / individual discriminator accuracy (chance .167) | Discriminator CE (ln 6 = 1.79) |
+|---|---|---|---|---|---|
+| B14 H6 | 1.733 (96.7 %) | 1.785 (99.6 %) | −0.853 = −0.047 + 0.066 **− 0.871** | .273 / .309 | 1.72 / 1.71 |
+| B07 H6 | 1.760 (98.2 %) | 1.787 (99.8 %) | −0.827 = +0.009 + 0.038 **− 0.874** | .233 / .297 | 1.76 / 1.74 |
+| B03 H6/clip | 1.711 (95.5 %) | 1.783 (99.5 %) | −0.895 = −0.089 + 0.063 **− 0.869** | .282 / .306 | 1.72 / 1.73 |
+
+The entropy bonus is essentially the whole coordinator objective from rollout 1 to 45 (entropies *rise*
+toward ln 6 over training), the policy-gradient term is an order of magnitude smaller and changes sign,
+and the discriminators never leave chance (their CE ≈ ln 6; the recorded reward components
+`avg_team_disc_comp ≈ −.042`, `avg_ind_disc_comp ≈ −.017` are constant across rollouts and consistent
+with mean log q ≈ −1.7 under the applied coefficients, exactly the DM2 reviewer's reading). So during
+training the high level is a near-uniform sampler of a team label and six individual labels every
+k = 10 steps, and the intrinsic reward is a constant offset of roughly −.06 per step. At evaluation the
+runner takes the argmax of near-uniform logits, which yields arbitrary but stable labels (B07/B10: team
+3 / individual 5 throughout; B14: team {4,5}, individual {0,2,4,5}), and B10 showed that freezing the
+opening labels changes N8 J by only +.009.
+
+Implications. (i) Mechanistically H6 is a local-observation recurrent actor with a 6-way FiLM context
+that is *randomly resampled every ten steps* during training and *frozen* at test, plus a constant reward
+offset; the coordinator and discriminators are inert. Any advantage over SET is therefore attributable to
+architecture (local actor vs central-snapshot actor, F1), to the temporally-extended random context acting
+as a regulariser/exploration prior, and to the action-noise regime (F2) — not to discovered team or
+individual skills. (ii) The count-invariance question for the coordinator (F3) is moot in practice: a
+uniform sampler is trivially count-invariant, which is the real reason the extrapolation to N8 did no harm.
+(iii) The B15 claim remains well-defined as a *package* comparison, but the words "hierarchical skill
+package" and any HMASD attribution must be dropped from its framing before results are read; the honest
+label is "local actor with random temporally-extended context and constant shaping vs central-snapshot
+flat actor". (iv) The decisive controls become cheaper and sharper: a skills-off local actor (F1, item 1
+below) and a *random-context* control (same H6 architecture, coordinator replaced by a uniform sampler
+with no coordinator/discriminator updates and no intrinsic reward) would together separate the
+architecture effect from the random-context effect at 3 fits each. If the random-context arm matches
+H6, the direction's finding is a regularisation effect, and the HMASD connection is nominal.
+
 ## 3. Scientific assessment
 
 **Is the claim well-posed?** Yes, narrowly: a conditional-mean (over training-program realisations)
@@ -231,7 +273,11 @@ that the count-transfer question is at least addressed descriptively with the sa
    (i.e. `apply_algorithm_config("mappo")` without the SET base). Run one per B15 block with the same
    learning seeds, exogenous lane bases and the B15 panels so it pairs with both B15 arms. Prediction if
    skills matter: H6 − flat > 0 with the same sign pattern as H6 − SET. Prediction if F1 is right:
-   flat ≈ H6 > SET. This single batch decides whether the direction has an HMASD result at all.
+   flat ≈ H6 > SET. This single batch decides whether the direction has an HMASD result at all. Given F11,
+   add a *random-context* arm (H6 architecture, coordinator replaced by a uniform label sampler, no
+   coordinator/discriminator updates, no intrinsic reward; +3 fits) so that architecture and random
+   temporally-extended context are separated; H6 ≈ random-context ≫ skills-off would mean the effect is
+   a regulariser, not a hierarchy.
 2. *Squashed-policy replication (6 fits, ≈ 7 h).* Both B15 arms with `TanhDiagGaussian`
    (`continuous_action_distribution = "tanh_gaussian"`, entropy on the squashed sample), same seeds and
    panels. Prediction if the gap is genuine: it survives with σ no longer saturating. Prediction if
@@ -247,7 +293,7 @@ the response is seed-dominated). The N8-trained SET recipe (B11/B12). Per-batch 
 1 MB notebook is adviser transcript, and the material advice (fresh seeds, fixed panels, ordinary
 control strength) was available from constitution §8 alone.
 
-**Publishability.** Not publishable as an HMASD/variable-N contribution now: bespoke task, n ≤ 3, an
+**Publishability.** Not publishable as an HMASD/variable-N contribution now: an inert, entropy-pinned high level (F11), bespoke task, n ≤ 3, an
 effect of the same size as documented seed-to-seed reversals, a non-standard biased action law, an
 untuned and non-standard control, and no skills-off ablation. The provenance and pre-registration
 discipline are genuinely strong and would make a clean negative or bounded result credible, but
