@@ -7087,3 +7087,143 @@ that output root and hashes are also present in the original summary.
 | B05/trajectories/final_F.npz | 46358433 | `a5fda1fa3d121d8d7d2440e3b88e5e8ec73d5743ef2312aee320cbcfb7b0231b` |
 | B05/trajectories/final_O.npz | 46337207 | `adba5176519eee5bfcadf22a1e645fd2002798bbbf4b58f7415078c5c000a8fc` |
 
+## Pro question 2026-09-23 b06-feedback-use-and-next-investment
+
+Conversation: reuse this direction's existing Jev conversation; its URL remains in local operation metadata only.
+
+Question: B06 的固定合法余量反馈已在两个旧 N 制品的两个面板上改善平均原生 J、成本与服务，但没有到站充电，且最低电池变差。下一笔科学投入应优先检验更长原生运行中的持续服务/能量循环，还是需要一个新的学习比较，或有理由止于当前有限用途？请判断这个具体选择，给出最有信息价值且可执行的下一观察及反面分支；不需要再次批准 B06，不要求新增架构或固定数量候选。
+
+### Standing and decision boundary
+
+B06 已完整收取、独立数值核验并按事前分支保留有限反馈包。完整新条目是本文件
+`2026-09-23 — B06 complete fixed feedback preserves mean service while reducing return-margin cost`，
+含全部80个配对世界、绝对数值、服务/电池损失、六段250-step描述和原始产物定位。
+原执行 O 与 retained B04/B05 N 的共同数组完全复现；全部先于首次实际覆盖的保留诊断前缀一致。
+规则/汇总独立核验未调用候选答案作证明，数值差0。完整 actor observation/state 数组未记录，
+不可把诊断前缀匹配说成对全部 actor 输入的独立逐数组核验。源码/测试另核验合法信息和真实历史。
+
+两份历史 N：B04 seed914021，B05 seed914173，最终 update30/各180k训练；不是新训练。
+此次固定 CUDA FP32/TF32off/4threads、S7-S2、N8、k10、每世界1500步，O/F各80回合，
+0新fits、0更新、共240k评价team transitions、1.92M成员观察、runner99.300211min。
+原生评价 J 保持 QoS − 2×capped return cost − 原事件罚 + 原 PBRS，不改奖励/需求/电量。
+两来源都用 development937001–937008、final938001–938032；final是各制品主要用途读数，
+开发约束范围。这些世界已曝光，不能当新 held-out 确认，世界数不增加训练 n。
+
+| 来源/面板 | J O→F；差 | QoS O→F | capped cost O→F | J正/平/负 | 零服务O→F |
+| --- | --- | --- | --- | --- | --- |
+| B04 dev8 | 50.842834→366.759692；+315.916858 | .252992371→.253492381 | .105076924→.000017033 | 5/3/0 | 0→0 |
+| B04 final32 | −496.301830→258.691011；+754.992840 | .158025257→.181629811 | .239923270→.000042644 | 27/5/0 | 6→1 |
+| B05 dev8 | −72.367636→418.260942；+490.628577 | .276942462→.287947935 | .158086006→.000038551 | 6/2/0 | 0→0 |
+| B05 final32 | −232.025030→320.851159；+552.876189 | .216057847→.223176241 | .180828987→.000042278 | 22/10/0 | 1→1 |
+
+风险账面节省主导J变化，吞吐与QoS固定倍数不增加证据。不是所有服务都改善：四格有2/4/1/8个
+QoS损失世界，最差依次−.008551409/−.005573438/−.000377888/−.010742923。B04 final938030、
+B05 final938021仍为零服务，F J为−14.356006/−13.116204，尽管各自J差+1491.681624/+1211.353471。
+四格最低电池均值依次从.366579732/.353111020/.378313489/.361645883降至
+.355666712/.337402785/.366323025/.348680473；P10也全低。B04/B05 final的P10为
+.325910225→.298954994、.319035567→.270643692，最差电池.311067401→.285397155、
+.307733819→.258197998。成本不是电量，两个指标必须分读。
+
+F 保持原网络/normalizer，actor在F实际历史每步运行，skill/GRU仅原生episode reset，不用影子O动作。
+它只读当前合法观察里的自身raw margin和有效站点相对坐标：margin<=0进入，>=.05退出；
+按当前3D最近站点、固定30m/s水平/5m/s垂直尺度，T=max(1,||r_xy||/30,|r_z|/5)，
+v=r/T，提交(vx/30,vy/30,vz/5,1)；d<=160时提交(0,0,0,1)。第四维及原backhaul guard
+例外也是包的一部分，没有纯速度因果主张。未激活时传递当前actor基于当前F历史的原命令。
+
+实际60/80来源-世界激活，20个未激活仍全留在均值。共13330成员覆盖步，每步都有约30m朝站点
+实际位移、合法margin增加(.002063539–.002116784)，同时消耗电量。覆盖段中位24步，最多25步；
+最近站点距离仍至少1330.946661m，没有覆盖进入160m docking半径。所有160回合均在1500原生
+truncation结束，充电/输入能量/排队/切断/耗尽全零。它是短时空间余量修复，没有观察完整能量循环。
+
+之前的负证据仍成立：B03两个D/S/G完整共同学习区组的收益未复制、共同事实MSE不选择原生用途；
+B04/B05训练系数2→4的最终J收益复制，但开发均值均负，B05最终QoS下降且R有8个零服务世界。
+这些配方不复活。B06给了更强的简单可执行对照，不能因新平均正值就宣称预测、critic或更强学习必需。
+
+上一轮完整Pro回答已明确覆盖“双方最终与开发有用则保留有限包、无自动训练/确认”的分支，本次
+保留据此完成；它没有选择后继持续运行任务或新的学习比较。现在问的是发生实质变化的下一投入选择，
+不是每批结果的重复评审。当前无运行中的结果批次、无重复Send、无待验收的旧Pro答复。
+
+### The source-defined distinction that may change the next choice
+
+我的暂定偏好是先问当前强简单反馈在完整能量使用过程中还剩什么服务问题，再买新训练。
+直接改评价horizon可能有信息，但不是把旧轨迹无改动地接长：独立只读Scout发现原生
+`current_step/max_steps`进入actor观察和中央state，排队等待也按max_steps归一化。
+将max_steps1500改3000从step1就改变时间信息，冻结策略动作/循环历史可能随即改变。
+因此“头1499步应完全复现B06”不是可用合同；固定动作序列的物理前缀与策略闭环前缀是两回事。
+只为保前缀而另造时间分母/剪裁也会是新的观察干预，不能偷偷叫原生长时运行。
+
+冻结B06 source verifier要求保存checkpoint的episode_length=1500，新研究必须保留该训练身份，
+另显式声明评价配置差异，不能改旧config/digest或放松B06再重跑。当前actor/技能代码没有1500步
+强制结构reset，k10刷新仍可继续；评价config/buffer语义及时间输入要分别处理。
+
+实际S2源配置：160Wh，初始比例uniform[.75,1]，reserve.1，emergency.05，cutoff.02；
+两站每站容量1、1000W充电、160m docking、20m capture、实际速度<=1m/s且有合法dock请求才可入站；
+每步先耗能再充电，所有成员电池耗尽可提前terminate。更长运行仅增加机会，代码并不保证这些策略会
+到站充电；不造低电量开局、掉线、oracle位置或强制排队来追求阳性事件。
+
+请基于这些源事实判断：若选原生更长任务，它回答的是冻结策略+F在新时间信息/任务范围下的用途，
+而非纯延长能量暴露机制；这个代价是否仍值得？如果不值得，指出比它更有决策价值的实际学习或其他
+窄比较，说明哪个中间变化和原生服务/风险后果能区分最强替代解释。也可建议不再支付计算，给出真实
+信息价值/机会成本理由；完成一个配方本身不是停止理由。不要按B06结果搜阈值、速度或站点协调参数。
+
+### Prospective cost and constraints
+
+这是科学选择咨询，尚非新实验注册。长时路线的具体可比成本尺度是两旧N×O/F×40旧世界×3000步，
+**0新fits、160次episode尝试、最多480k评价team transitions/3.84M成员观察**；H3000是待论证的
+任务候选，不是从新运行中选择、也不保证充电。按B06吞吐约198.6 runner分钟仅作量级参考，实际新增
+低电量/充電逻辑与存储成本未知。可以据源码和问题选择更小且诚实的固定比较，不能事后加长直到事件出现。
+保留开发/最终、两个来源、实际早终及全部损失的科学价值，需要同成本一起比较。
+
+若主张新的完整学习比较，成本参照是一对独立新训练实例、每臂180k的2fits/360k训练，加原B05式
+两臂192k评价，至少552k team transitions和实施/核验；这只是成本参照，不指定新网络/种子/配方，
+也不是确认。必须说明为何当前简单反馈这个更强参照仍留下值得学的缺口。要做确认须另有实际claim、
+3–5新独立训练seed/arm的固定前瞻与批评，本问题不批准确认。
+
+Owner pause当前lifted；owner于2026-09-23授权DM自主选题/转向、失败或完成后回看项目证据并选有价值
+的下一步，继续保留全部反证。这个授权不改B06冻结合同，不接管其他DM，不要求新任务或跨task通信。
+Pro只给建议，不启动实验、不改代码/阈值/控制，不建立新许可门槛。当前仅此一个科学选择。
+
+### Context and source precedence
+
+- **当前治理/方法/项目背景**明确用main `4f1f1f9eecf00c4218d827033bf858dd7f79a740`：
+  `docs/project/OPERATING_CONSTITUTION.md` §§1–5、7–8；`.agents/skills/hmasd-scientific-tools/SKILL.md`
+  的 Update the working explanation、Comparators、Statistics、Cost and exposure、Pro；
+  `.agents/skills/hmasd-research-engineering/SKILL.md` 的 Checks and review、Publishing direction results。
+  `docs/research/RESEARCH.md` topic6中服务/风险条目和 Current research plan 的服务线：旧B05反证促成B06
+  的服务保留读法；本问题给出的新B06事实更新该背景。其他方向的用途/部署区别可用来约束类比，
+  不要求读完整项目历史或接管其工作。
+- **新结果与旧咨询**用本次 `source_sha` 的
+  `docs/research/candidates/uav_service_auxiliary/NOTES.md`：上面的完整B06结果、
+  `2026-09-23 — B05 advice adopted; B06 fixed observation-only return feedback`，
+  `Pro question 2026-09-23 b05-risk-service-next-intervention` 的完整Answer，及
+  `2026-09-23 — B05 complete endpoint risk savings recur service gains do not`。
+  `runs/uav_service_auxiliary/b06_of_a01/{config,summary,launch-manifest,process-exit}.json`为本次完整结果；
+  必要时读取B04/B05 N/R summary，不能把summary核对说成自己读到了仓库外二进制原始轨迹。
+- **冻结实现/源事实**用 `f92a94b017816467662115dbbc1409793858613c`：
+  `experiments/candidates/uav_service_auxiliary/b06/{feedback,native}.py`（合法F、原执行、保存配置和身份），
+  `experiments/candidates/uav_service_auxiliary/b01/native.py`（make_config、make_env），
+  `experiments/candidates/uav_service_auxiliary/b04/evaluation.py`，
+  `envs/pettingzoo/relay/routed_core.py`（truncation、time_ratio actor/state），
+  `envs/pettingzoo/relay/energy_aware.py`（margin、能量/充电、等待归一化、终止和原reward），
+  `hmasd/agent.py`（step、reset_env_state、原skill clock），`configs/config_1.py`。
+  重点核对max_steps/观察与实际低电量/充电规则；不要求改已冻结实现。
+
+当前明确的治理/方法替代旧会话中冲突的指令；历史/冻结材料只按其原实验含义使用。
+不要用移动branch或聊天记忆替代给定revision。若关键源不可读，指出影响哪个判断，其他可支持的推理继续。
+不需要资料读取回执表或额外结果文件。
+
+Constraints: no training, no experiment launch, no source/control edits. Write only inside the
+empty `### Answer` subsection of this exact question in
+`docs/research/candidates/uav_service_auxiliary/NOTES.md` on branch
+`codex/uav-service-predictive-control`, repository `CartmanFatass/My-paper-code`.
+Read at the supplied immutable source_sha, but fetch the latest target file before
+writing and use its actual blob SHA. Preserve the question and every other byte;
+stop on overlapping edits. Return the actual answer commit on successful write.
+If GitHub writeback fails, return the complete answer in chat, not a receipt or link.
+
+Return: 说明哪些判断被加强/削弱/保持，最强反对意见，选定下一投入及其信息价值。
+若建议新比较，给最小完整的可前瞻方案、匹配条件/必要配置区别、实际成本、先于结果的中间与原生
+预测、失败/非激活如何改变投入；不要把建议变成新增许可要求或自动排队实验。
+给出MATERIAL_DISSENT: yes/no，引用实际使用的关键源并说明未读的关键材料。
+
+### Answer
