@@ -14313,3 +14313,31 @@ No source copy is removed; the frozen large summary is not converted or replaced
 | `trace_stage45_n8.npz` | 141921340 | `19daa014ac381a4699732833c651c1c0b4502f88d831f3aa3dcb8c5cc6058772` |
 | `training.jsonl` | 383240 | `5d443e392a936b847663428d4e295a2a7216056298992e92b67a46bff3e4a929` |
 | `training_reset_scenes.npz` | 2972180 | `c100565e6b08e4188925c1d21340acebf5821bec22a154e689c45c1902ec5fb8` |
+
+## 2026-09-23 — B15 block2 H6 admitted and observation adopted
+
+The fixed fourth cell was admitted once after complete b2_set reading. The
+[native manifest](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/launch-manifest.json)
+retains its original operation and process identities, frozen scientific source
+`e0a20add999ded53943f99df15f596822e6c13dc` and retained snapshot. Fresh published
+control `d2e34d45c724c4248e5966d6c323afdda02b31e9` agrees with the canonical node on
+lifted pause, confirming state and the same lead. The [actual-node preflight](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/admission-preflight.json)
+passed with12,540,002,304 available physical/effective bytes. These records and the
+[fixed configuration](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/config.json)
+were collected byte-exactly with matching hashes.
+
+The first reading verifies seed994102, lanes2994200–2994215 and unchanged H6 recipe,
+panels and all12 source hashes. Native H6 starts from fresh owned parameters and
+empty optimizers/buffer; its initial learner and learning/sampler RNG differ from
+block1, while its initial training environment matches the block2 SET partner.
+Initial0 N8 then N6 completes32k evaluation team steps/64 episodes with zero
+optimizer/storage calls and every stage0 isolation field preserved. A subsequent
+saved reading confirms training started:8k collected/stored team steps,16 episodes,
+zero completed updates yet. This is partial exposure, not scientific acceptance.
+
+The b2_set READY event was consumed with its returned generation134/wake/event IDs
+and rearmed as135. The b2_h6 observer is adopted at generation136, PID3086552,
+window1500s, job `launch-s1-bounded-confirmation-b15-b2-h6`; its first probe reports
+the original runner/supervisor running and consistent, with no pending event.
+There are4 started/3 complete B15 fits. Complete and read this partner before the
+already fixed b3_h6 and b3_set; no extra fit, worker restart or Pro resend.
