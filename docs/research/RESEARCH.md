@@ -477,6 +477,22 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 下一比较见[方向表](#active)。当前已接受的批次按原绑定完成，低分、完成一个配方或暂时无新候选
 都不自动结束 DM 的科学责任。可依据项目证据继续、复现、简化、转向或有理由停止。
 
+**当前工作解释（待检验）：** 层级训练可能通过训练目标与技能条件化，塑造能迁移到不同人数的低层
+反馈控制；其中部分用途可以在不持续采用高层新分配时保留，而部署时如何使用学得分配又可能损耗
+这种用途。人数线 B14 的新学习包收益、B10 的开局标签复用均值，以及技能线 B04 的 uniform 库收益
+与贪心部署损失共同提示这一解释。它们来自不同对照与训练实例，不能合并成机制证明或增加同一主张的
+训练 n；B10 的较大局部服务损失也反对“在线分配无用”的普遍结论。
+[B14](candidates/agent_count_generalization/NOTES.md#2026-09-23--b14-complete-fresh-learning-reproduces-a-bounded-package-benefit)、
+[B10](candidates/agent_count_generalization/NOTES.md#2026-09-23--b10-complete-opening-assignment-replay-improves-means-with-consequential-local-losses)、
+[技能 B04](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b04-complete-training-bank-gain-and-greedy-deployment-loss-coexist)。
+
+竞争解释仍包括普通 SET 在当前表示/优化预算下不足，以及 S1 特定几何与干扰结构偏好当前配方。
+S1 的单用户单资格性质简化了冻结几何下的连接分配，却没有消除联合位置选择造成的干扰耦合。
+因此 B15 只检验固定新面板上的训练程序平均包差，B05 只检验固定技能库的部署后果；即使都得到正面
+结果，仍需分别解决基线竞争力、训练成因和跨任务适用性。基线开发与机制区分是现有解释的缺口，
+不是本轮追加调参或修改确认对照的指令。外部任务必须先匹配数量迁移、信息与动作条件，其接入和
+训练成本尚未测量；一个外部正结果也不能自动建立通用 MARL 优势。
+
 ### 三条主线和近期动作
 
 | 主线 | 当前固定比较与成本 | 这次观察改变什么 |
