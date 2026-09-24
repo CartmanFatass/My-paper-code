@@ -8874,3 +8874,33 @@ Verified remote/local artifact inventory (bulk remains external to Git):
 | `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `summary.json` | 372053 | `4634f0722d7980c2a784db9de432fa3de442997c1c8ab9d75cc9142ca9bf7fcc` |
 | `training.jsonl` | 1478644 | `a9053049412e2cb4b300b855ff8f02da0ae19a6da8304d6c7614cff0a50d73ad` |
+
+
+## 2026-09-24 — B08 E admitted on the verified new M reference
+
+Complete M reading, compact outputs and the prospective E reference binding were published
+and remotely verified at18b8791e89fb6e026f9c224aa3de861dd5ed5790 before E dispatch. E was sent
+once through the configured supervisor/kernel, on the unchanged fixed execution sourcec9217f0ae.
+The first status read arrived before its manifest existed and returned a missing-reference
+response; the same outer command subsequently finished0 and the native manifest confirmed
+acceptance. This was an observation during preparation, not a failed scientific fit or a
+reason to resend. The
+[accepted E manifest](../../../../runs/complementary_skill_learning/b08_e_260924041_c9217f0ae/launch-manifest.json)
+and [native status](../../../../runs/complementary_skill_learning/b08_e_260924041_c9217f0ae/native-status.json)
+retain exact invocation, source, identities, paths and the stable operation reference.
+
+Fresh native control observation used main6f29d276baa205c5eca03e665360020657d21b90 and accepted
+the same exploring direction/lead with lifted pause. Actual memory admission passed with
+12474466304physical/effective available bytes against4294967296required; cgroup headroom was
+unavailable. Manifest/preflight/config were byte-count/SHA256 verified after collection. E's
+recorded reference hash and complete metadata exactly match the verified new M-final pool.
+M/E configs differ only in arm, declared training law and reference binding; actual Spec,
+source and adapter/engine identities match. This does not yet replace the eventual actual
+initial-tensor/trajectory/update and complete scoring checks.
+
+The detached observer actually adopted E: generation78, job`launch-csl-b08-e-c9217f0ae`,
+1500s window/30s interval/20s timeout, reports running/0errors at2026-09-24T13:12:27Z with
+consistent native identities and no exit witness. No pending events remain. B08 fits started
+are2/3: M fully accepted, E running, U unstarted. E retains360ktrain+160keval and the fixed
+6400context scoring; U remains the already declared next cell after full E reading. The
+batch question and limits remain unchanged; native liveness is not scientific acceptance.
