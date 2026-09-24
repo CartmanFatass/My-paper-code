@@ -159,3 +159,63 @@ is used merely to decide whether to run the batch.
 
 Pending the focused pre-confirmation critique and DM decision. No confirmation
 execution, acceptance or result is asserted here.
+
+
+### 2026-09-23 pre-run adoption and clarifications
+
+The DM adopts the fixed three-block/six-fit proposal after reading the complete
+focused Pro critique (NOTES: `B15 advice adopted: fixed conditional-mean confirmation
+and L0`). These clarifications precede every B15 initial panel and training fit.
+The original proposal above remains intact. Algorithm, arms, seeds, worlds, order,
+horizon, endpoints, exposure and thresholds are unchanged. No confirmation outcome
+is known; source implementation/review and native admission must still complete.
+
+**Estimand and random inputs.** Let W8 be the fixed32 N8 evaluation worlds above.
+For Y in {J,S}, d_b,Y(W8) is the mean across W8 of final45 H6 minus SET in block b.
+The claim concerns mu_Y(W8)=E_xi[d_b,Y(W8)] over repeated independent realizations
+of this declared training program, not a confidence interval for the finite three
+chosen seeds themselves. Each fresh process independently constructs the native
+training worlds/lane RNGs from its block base before seeding Python/NumPy/Torch
+learning construction and the rollout sampler from its learning seed; no state,
+checkpoint, optimizer or learned normalization is shared across blocks. These
+pseudorandom addresses are fixed without scoring. Within a block the two arms
+share verified actual exogenous reset scenes/RNG, while architecture-specific
+initialization, endogenous trajectories and later learning draws differ. Treating
+these separately seeded program realizations as independent draws and approximately
+normal block differences is an explicit model assumption, not guaranteed by seed
+labels. The same W8 conditions the evaluation function and contributes no estimated
+world-population variance. Means do not certify next-training success probability,
+predictive reliability, world-population benefit or tail harmlessness.
+
+**Analysis fixed before initial evaluation.** For each metric compute three block
+means from all32 final paired worlds, sampleSD with denominator2, and mean ±
+4.302652729749464*sampleSD/sqrt(3). Compare unrounded stored values: lowerJ>0 AND
+lowerS>1; equality does not pass. This is the sole joint primary claim. Under valid
+marginal t models, requiring both one-sided .025 tests to pass controls erroneous
+joint support at no more than .025 by event inclusion, without independence of J/S;
+the two marginal intervals are not a simultaneous95% region. No post-result method,
+normality-test selection, threshold change or sample-size expansion. Missing or
+invalid primary inputs prevent confirmation; never substitute zero/old assets.
+
+**Threshold and adoption.** One actual served user per step is2 percentage points
+among50 users and500 user-time-steps over a500-step episode, not500 distinct users.
+Holding other components fixed, its coverage contribution is+.014 native J. This
+is a task-scale practical threshold selected using development experience, not an
+economic return, physical safety or no-local-loss requirement. A positive J bound
+also rules out merely improving mean service while losing the overall native
+objective, but may still be a small net gain. Read the statistical result separately
+from whether all N6 consequences, own-learning regressions, paired loss worlds,
+quality/height/eligibility outcomes and additional compute justify use. Secondary
+regressions limit that application judgment; they are not a new unplanned statistical
+veto or rescue. Keep initial panels and all secondary readings as proposed.
+
+**Freezing and incomplete attempts.** All scientific bindings, implementation,
+analysis and this rule are fixed/published before the first production initial
+panel. Complete each block and remaining planned arms independent of observed
+scores unless genuine technical invalidity, physical resource limits or owner
+pause intervene. Preserve partial exposure and errors; a valid low-score fit is
+not technical failure. A technical failure counts as started if training started;
+no automatic replacement, changed seed or extra fit. An incomplete fixed batch
+cannot support the joint claim. Outcome branches and costs remain those above.
+The implementation source and actual launch records will be appended without
+rewriting this plan.
