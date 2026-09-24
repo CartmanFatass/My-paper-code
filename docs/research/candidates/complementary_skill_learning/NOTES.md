@@ -7708,3 +7708,252 @@ Consumed this checkpoint and rearmed the same `launch-csl-b07-u-455536ebd` handl
 30sinterval/20stimeout/1500swindow,observerPID3232125. Refreshed native status is retained;
 no worker was restarted, no Pro was resent and no cross-task message was sent. Await U's
 terminal evidence for full readback and the fixed E-S−U-R primary comparison.
+
+
+## 2026-09-24 — B07 complete: entropy intervention improves this package without learned-readout gain
+
+**U terminal evidence and acceptance.** Consumed generation69 READY
+`da94658e4c2ef010d6b03858`, wake`ff6232f5-121b-4d7c-8364-bbcdbf7ba22e`, only after reading
+all saved U training/evaluation artifacts and the complete three-arm contrasts. Native U
+finished2026-09-24T10:40:39Z with a valid exit0 witness, consistent claim/manifest records,
+and absent runner537481/supervisor537480; the terminal observation is10:41:04Z. Frozen
+science remains source`455536ebd0e6e23466ed40244bcf1e5ab6462826`; later notebook commits
+change no inputs. Fresh published main retains lifted pause and the same direction lead.
+Readiness and exit alone were not acceptance. All M/E/U outputs are now fully read and accepted
+within the prospectively fixed B07 protocol; no additional fit, stream or checkpoint was added.
+
+[U compact summary](../../../../runs/complementary_skill_learning/b07_u_260924001_455536ebd/summary.json),
+[terminal native status](../../../../runs/complementary_skill_learning/b07_u_260924001_455536ebd/native-status.json)
+and [exit witness](../../../../runs/complementary_skill_learning/b07_u_260924001_455536ebd/process-exit.json)
+retain the native result and handle. U's23files total108342198bytes. Every byte was copied and
+SHA256-verified between these two retained locations:
+`/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_u_260924001_455536ebd`
+on configured`wsl_4070`, and
+`/home/fires/.codex/worktrees/5916/hmasd-wsl/runs/complementary_skill_learning/b07_u_260924001_455536ebd`.
+Compact summary674029bytes SHA256`db3cfff475493898f120d8875cb13780fcf28ca1313f0064fd16248c850f0071`.
+The recovery inventory below preserves every original run-file identity; terminal native-status
+is a separate read-only control snapshot, not part of the runner inventory. Bulk remains outside
+Git in both locations; these files were not discarded after collection.
+
+| Retained U artifact | Bytes | SHA256 |
+| --- | ---: | --- |
+| admission-preflight.json | 772 | `2cc5131035d394f783da4cfef34433a9d93e747e4ebabe41ac98f04c0ae60e17` |
+| auxiliary_predictions.jsonl | 2464022 | `58152658975fb14571fdf8cf26988218fa15cdf721632ba8a8abfad8af6eca78` |
+| config.json | 736 | `a804b516ef7e3793daed7c571dc58f13c5713f0bf140d3cd35a3c7a214318a3e` |
+| final.pt | 26931903 | `5224552930ba84ed3082dade9ffaff4f1946a5edd66a6baf85cb9d5637d2ed5e` |
+| initial.pt | 23750397 | `84b892a45095c16462ef7b8d9ecd979bbf8ff962dc75203f9ffc513c1ef7b1a5` |
+| launch-manifest.json | 4323 | `1662abdc5d3e3853e21bb017402a6c48062fc40823c48c538a9dff4cdbecab0b` |
+| launch-status.json | 651 | `d0124de8bac1b083541d8ed74897335db7389a0a436a08589349f9598dd489b3` |
+| process-exit.json | 550 | `a35340513ac09759ce0a349509abe91330dd3aff1aceddf2d8ee43e9339effc4` |
+| raw/final_R0.json | 11233 | `8759fa97d8a621d2d7a97a5401e5621e0791f4e6768ca6309cda9cd540cd71de` |
+| raw/final_R0_trajectory.npz | 10831741 | `4c9022131ed80b00f43b9452f435df5151caefeb3a2af9e2501c8f59268a0765` |
+| raw/final_R1.json | 11229 | `2c974edab50b7a26fb172482a3c0eea8034fa71e050bed3b3bc1adbad7fbc61b` |
+| raw/final_R1_trajectory.npz | 10882288 | `3422272c864d54bb119320d2842fe459648d1fadee8487ec50c7553d6d216f82` |
+| raw/final_R2.json | 11166 | `65f2ff482750f8739f0a6e0f4f60b7b1f0e9cdae84cac3a0e0a2f4cbb0135a45` |
+| raw/final_R2_trajectory.npz | 10868313 | `f4938fa7e426a8df31076e0aed4680591057f3560d3a5b82c2da2c631af80f1e` |
+| raw/final_R3.json | 11243 | `0b27b86f77420ab4bbb216222e04b6d639607e10a04f399e52d6255da7cdcf6d` |
+| raw/final_R3_trajectory.npz | 10832350 | `1fdd66b3a1d8c4fc056c0f62470ec5641586ee37f509acc8fa64ef5521eba414` |
+| raw/initial_R0.json | 11320 | `e6946a429e64915c1d5a042c67ddfe5f0fbf214520680d577b02caadffcd8e5a` |
+| raw/initial_R0_trajectory.npz | 9621055 | `fc2f472777e4046317807b9aa5f8fcb3c10536a37094dd83ef0b153c9256846a` |
+| raw/training_occupancy.json | 810270 | `3091eefe2d54f0744e1fd29551168dedb4d992a9a475a764fc107d531682d5a6` |
+| stderr.log | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| stdout.log | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| summary.json | 674029 | `db3cfff475493898f120d8875cb13780fcf28ca1313f0064fd16248c850f0071` |
+| training.jsonl | 612607 | `453720e9bd2652674d852acadb3c396bf89b76eb60f3ccc3d4017eeafaf8c387` |
+
+**Independent readback.** The DM's saved-artifact verifier passed on its first U run in
+3.533003s on the configured CPU interpreter. It read all45training rows,90G/P factual MSE
+readings (maximum recomputation error0),360000storage rows,all80000evaluation transitions
+and90before/after uniform-factor audits. Checks covered finite arrays, full raw components,
+mean-clipped action identity, k10label holding, recurrent storage, PCG64 label streams,
+initial/final checkpoint and frozen evaluation identities, and zero evaluation mutation.
+The disabled high-level module has0changed native tensors; low/team-discriminator/individual-
+discriminator have29/24/29changed tensors. Its zero training entropy field is a disabled-module
+placeholder; the actual independent uniform conditional entropy is log6 for both label factors.
+
+All initial native/G/P tensors and the full initialR0trajectory equal M/E. Actual final R
+numeric labels and label RNG identities match across all three arms. The45low-action/private
+remaining-sampler states and default-after RNG states match M; U's high-update RNG remains
+unused. Different high-level collection laws do not imply shared high-level RNG states.
+U performs1fit/360000train transitions/720episodes/45updates; actor and critic101250updates
+each, team/individual discriminator675/2700, G/P315each, trunk0 and high0. The summary's
+lambda_h=.07 is unused because U disables coordinator training; lowlambda=.05 stays active.
+No S or common-context scoring occurs in U.
+
+The U initial checkpoint hash is`84b892a45095c16462ef7b8d9ecd979bbf8ff962dc75203f9ffc513c1ef7b1a5`;
+its native and frozen identities match M/E. U final native identity is
+`5aebd0e6e99fd1bf696b51ec47418df22fd143b70131e60722e43d7efb196796`, frozen identity
+`0127e56c6cb2526f702feb130be23db28cf150f467f235308ff21a03dc8b8087`.
+The terminal drain display helper initially assumed a list for a dictionary-valued jobs field;
+this affected only its display after a successful saved drain. Reading the actual mapping
+recovered the same event; there was no worker restart, lost evidence or scientific parser failure.
+
+| U panel | J | Users | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| initial_R0 | 0.276963725391 | 18.632750000000 | 0.372655000000 | 0.104718785579 | 0.015310410283 |
+| final_R0 | 0.431270600805 | 29.222687500000 | 0.584453750000 | 0.163546886217 | 0.026911090060 |
+| final_R1 | 0.432594229189 | 29.394562500000 | 0.587891250000 | 0.161352684601 | 0.027335451192 |
+| final_R2 | 0.435724774787 | 29.528937500000 | 0.590578750000 | 0.163433755927 | 0.026710476991 |
+| final_R3 | 0.430439367058 | 29.241000000000 | 0.584820000000 | 0.162141587997 | 0.027577109341 |
+| final R four-stream mean | 0.432507242960 | 29.346796875000 | 0.586935937500 | 0.162618728685 | 0.027133531896 |
+
+Actual U learning uses finalR0−initialR0, not four-stream final minus a single-stream initial:
++.154306875414J/+10.5899375users,31positive/1negative world for both. World1700225 loses
+.001293468414J/.358users. Mean quality improves.058828100638 but worsens at1700203 by
+.065404605458 and1700221 by.000897438966. Height penalty increases.011600679777,29higher/
+3lower worlds. The45row training curve beginsJ.239566252, reaches.191543027atrow14, and
+ends.406856287; training action saturation rises.317027778→.783465278. Final deterministic
+R saturation is.515260..523358, a different context. These are observations, not a diagnosed
+saturation mechanism. U is a seriously trained recurrent-control comparator.
+
+**Complete fixed B07 comparisons.** S samples each bank's actual state-conditional team law
+and its individual.9pi+.1/6 law; team has no added floor. R is independent uniform. Four
+complete streams are averaged within each of32exposed worlds, then worlds. E/M use matched
+S innovations but their own states/prefixes; all R numeric label streams match. S uses Torch
+and R PCG64, so equal indices are not common innovations. Four streams and32worlds are
+nested in one new training instance per arm, not independent training replications or a
+confirmation sample. B04/B06's different old R stream remains its own frozen evidence.
+
+| Fixed four-stream contrast | dJ | dUsers | J positive/negative worlds | Users positive/negative worlds |
+| --- | ---: | ---: | --- | --- |
+| P_E_S_minus_U_R | +0.061758309143 | +3.519843750 | 31/1 | 31/1 |
+| D_E_S_minus_M_S | +0.040099335296 | +1.060843750 | 31/1 | 28/4 |
+| G_E | -0.001302210170 | -0.133000000 | 19/13 | 19/13 |
+| G_M | +0.000951450903 | +0.105671875 | 16/16 | 16/16 |
+| I | -0.002253661073 | -0.238671875 | 17/15 | 18/14 |
+| bank_E_R_minus_M_R | +0.042352996369 | +1.299515625 | 32/0 | 28/4 |
+| E_R_minus_U_R | +0.063060519313 | +3.652843750 | 32/0 | 32/0 |
+| M_R_minus_U_R | +0.020707522944 | +2.353328125 | 30/2 | 32/0 |
+| M_S_minus_U_R | +0.021658973847 | +2.459000000 | 30/2 | 32/0 |
+
+The primary P is+.061758309143J/+3.51984375users. Mean coverage/quality/height changes are
++.070396875/+.015962741672/−.007691674142; quality is higher and height penalty lower in
+all32worlds. The adverse world1700203 still loses.010310384571J/2.0015users, with coverage
+−.04003 despite quality+.055396362119 and height penalty−.001091706793. Improvement in
+other components does not erase service loss. Strongest J world1700217 gains.105784218954J/
+6.5655users. All primary world differences are retained below; height is a penalty.
+
+| World | P J | P users | P coverage | P quality | P height | E-R minus U-R J | E-R minus U-R users |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | +0.068453930 | +3.974500000 | +0.079490000 | +0.006733423 | -0.010790903 | +0.056976787 | +3.505500000 |
+| 1700201 | +0.069817243 | +4.118500000 | +0.082370000 | +0.014224656 | -0.007890846 | +0.084188094 | +5.187000000 |
+| 1700202 | +0.058640467 | +3.685500000 | +0.073710000 | +0.011878422 | -0.003479941 | +0.060455232 | +3.833500000 |
+| 1700203 | -0.010310385 | -2.001500000 | -0.040030000 | +0.055396362 | -0.001091707 | +0.080067266 | +5.201000000 |
+| 1700204 | +0.063848788 | +3.356500000 | +0.067130000 | +0.024184515 | -0.009602434 | +0.056855207 | +2.947000000 |
+| 1700205 | +0.030449257 | +0.719500000 | +0.014390000 | +0.035217023 | -0.009811151 | +0.068100137 | +3.389500000 |
+| 1700206 | +0.060138377 | +3.398000000 | +0.067960000 | +0.009629442 | -0.009677544 | +0.056254882 | +3.032000000 |
+| 1700207 | +0.059422132 | +3.256000000 | +0.065120000 | +0.016741336 | -0.008815732 | +0.061981921 | +3.110000000 |
+| 1700208 | +0.030965264 | +0.946500000 | +0.018930000 | +0.031432504 | -0.008284513 | +0.043243807 | +1.954000000 |
+| 1700209 | +0.058120354 | +3.164000000 | +0.063280000 | +0.013062221 | -0.009905688 | +0.053958225 | +2.905500000 |
+| 1700210 | +0.023292514 | +1.140000000 | +0.022800000 | +0.015398055 | -0.002713097 | +0.051395918 | +2.962000000 |
+| 1700211 | +0.029112854 | +1.009000000 | +0.020180000 | +0.029631539 | -0.006097393 | +0.068570791 | +3.944000000 |
+| 1700212 | +0.074443767 | +4.072500000 | +0.081450000 | +0.019803633 | -0.011487677 | +0.048786799 | +2.467500000 |
+| 1700213 | +0.068754931 | +4.239000000 | +0.084780000 | +0.011491859 | -0.005961374 | +0.064277237 | +3.989500000 |
+| 1700214 | +0.056077780 | +3.004000000 | +0.060080000 | +0.012306173 | -0.010329928 | +0.055256277 | +3.038500000 |
+| 1700215 | +0.074760377 | +4.410000000 | +0.088200000 | +0.010451236 | -0.009885006 | +0.051366718 | +2.402000000 |
+| 1700216 | +0.066614657 | +4.012000000 | +0.080240000 | +0.010055739 | -0.007429935 | +0.055014636 | +3.008500000 |
+| 1700217 | +0.105784219 | +6.565500000 | +0.131310000 | +0.016239001 | -0.008995519 | +0.108716156 | +6.860000000 |
+| 1700218 | +0.073813127 | +4.069500000 | +0.081390000 | +0.017595512 | -0.011561473 | +0.084597568 | +4.878000000 |
+| 1700219 | +0.056724467 | +3.686500000 | +0.073730000 | +0.007051806 | -0.002997926 | +0.042963701 | +2.458000000 |
+| 1700220 | +0.088741005 | +5.276000000 | +0.105520000 | +0.017541909 | -0.009614433 | +0.077527589 | +4.677000000 |
+| 1700221 | +0.060902936 | +3.416000000 | +0.068320000 | +0.013015942 | -0.009174153 | +0.064750726 | +3.710500000 |
+| 1700222 | +0.065436374 | +3.860000000 | +0.077200000 | +0.011417613 | -0.007971090 | +0.061192574 | +3.758000000 |
+| 1700223 | +0.083009977 | +5.019000000 | +0.100380000 | +0.005536660 | -0.011082979 | +0.070907240 | +4.178000000 |
+| 1700224 | +0.094782140 | +5.742000000 | +0.114840000 | +0.017885214 | -0.009028576 | +0.076905238 | +4.521000000 |
+| 1700225 | +0.094936865 | +5.769000000 | +0.115380000 | +0.012899076 | -0.010301143 | +0.089006966 | +5.431500000 |
+| 1700226 | +0.063291318 | +4.100500000 | +0.082010000 | +0.009292623 | -0.003096531 | +0.067776349 | +4.539000000 |
+| 1700227 | +0.074722213 | +4.478500000 | +0.089570000 | +0.010152198 | -0.008977554 | +0.061609225 | +3.678500000 |
+| 1700228 | +0.051713420 | +3.319500000 | +0.066390000 | +0.007744905 | -0.002916948 | +0.041300539 | +2.711500000 |
+| 1700229 | +0.071237114 | +4.525000000 | +0.090500000 | +0.010621508 | -0.004700661 | +0.053995987 | +2.982500000 |
+| 1700230 | +0.061651947 | +3.660500000 | +0.073210000 | +0.011256599 | -0.007027968 | +0.049703645 | +2.569000000 |
+| 1700231 | +0.046916462 | +2.643500000 | +0.052870000 | +0.014919031 | -0.005431753 | +0.050233182 | +3.061500000 |
+
+Primary same-index descriptive stream means have J+.057329903654,+.065163043886,
++.063772073955,+.060768215079 and users+3.2210625,+3.7161875,+3.7243125,+3.4178125.
+All16S/R stream-mean combinations are positive: J+.052875729672..+.069057481683,
+users+2.9148125..+4.0305625. They reuse the same banks and trajectories; this is finite
+readout sensitivity, not16replicates. It does not describe individual-episode safety.
+
+Under shared R, E−U is+.063060519313J/+3.65284375users,positive32/32for both. Mean quality
+is+.009380209899 (29higher/3lower),height penalty−.009106643843 (all32lower). M−U is again
+positive in this new block, +.020707522944J/+2.353328125users, but J falls at1700228 by
+.006599518368 and1700230 by.000913772967. M−U quality is−.005989993549 (24lower) and height
+penalty+.010442072741 (all32higher). The B07 M result does not erase B06's negative block,
+revive an automatic original-M replication route, or become a strict unchanged replication
+of the old one-stream evaluation. E−M's full differences and adverse worlds are already read
+in the preceding E acceptance; those remain part of this completed batch.
+
+**Single-episode losses as well as world means.** Primary P has per-index-stream negative-J
+counts2,2,0,3 and negative-user counts3,3,1,3. For J the adverse worlds are S0/R0:1700203,
+1700216; S1/R1:1700208,1700210; S2/R2:none; S3/R3:1700203,1700208,1700211. For users they
+are S0/R0:1700203,1700210,1700216; S1/R1:1700203,1700208,1700210; S2/R2:1700205;
+S3/R3:1700203,1700208,1700211. Worst same-index individual episode is S0/R0 world1700203:
+−.094017893888J/−7.836users. Four-stream world averaging must not replace that tail.
+D's per-stream negative-J counts2/3/2/4 and negative-user counts7/6/6/10 include worst
+S0 world1700203−.131579870980J/−11.212users. G_E's counts are17/11/11/13 and19/15/10/14;
+its worst S0/R0 world1700203 is−.167032433984J/−12.652users. All adverse values were read
+from saved trajectory arrays; no world or stream was removed, and no post-hoc acceptable-loss
+threshold is supplied. The E acceptance's four-stream worst G_E world−.090377650104J/
+−7.2025users and D world−.051017290283J/−5.391users remain distinct summaries.
+
+**Belief update and the decision this creates.** The narrow E intervention was activated and
+real learning occurred. On the fixed M-S context pool, E team/individual conditional entropy
+falls by.189656079/.394272327; own-context readings agree in direction. E learns useful
+native service from its actual initial weights, and P and D are positive in this block.
+Those facts support a conditional improvement of the zero-high-entropy training package.
+They do not satisfy the whole repair prediction: G_E=−.001302210170J/−.133users and
+I=G_E−G_M=−.002253661073J/−.238671875users. The retained result is predominantly a better
+bank under both readouts, with no positive mean learned-readout increment. I is algebra,
+not an identified interaction or an additional independent observation.
+
+The prior complete Pro answer explicitly anticipated this result branch: a generally improved
+bank may be retained as a fact while the explanation that lower entropy releases useful
+learned selection fails. That advice is directly reused for interpreting B07; a new generic
+result-review request is unnecessary. Changing one incentive also changes joint clipping,
+optimizer history, label/state exposure and endogenous low/critic/discriminator data. Neither
+entropy concentration nor the E/M score difference identifies the causal share of conditional
+selection. The strongest surviving alternative is competent recurrent low-level control plus
+changed randomized context/optimization and joint adaptation. This weakens the learned-selection
+repair story, leaves conditional package utility plausible, and leaves complementarity,
+necessity and stable ranking unestablished. U's actual learning and past G/D and M/U reversals
+are substantive constraints, not controls to discard after a positive E score.
+
+The completed batch is not extended. The new scientific choice is whether the positive E/M
+and E/U package contrasts justify a separate independent training-block recurrence check,
+or whether that purchase would only stabilize an optimization recipe without answering the
+useful-skill question. A materially different context-control comparison has a different
+estimand and is not a pure label ablation; six-to-one labels alter FiLM shape, fixed labels
+alter active parameters/exposure, and removing mixed reward repeats B02's confounding change.
+I tentatively favor asking about one unchanged three-arm recurrence before choosing a broader
+comparator: the earlier block reversals make stability of this new E result decision-relevant,
+while another within-bank stream read cannot answer it. This is a proposed investment, not
+selection or admission of new fits. Consult Pro specifically on that renewed-investment
+judgment under section5, with the failed G_E/I prediction and the ordinary-context alternative.
+No seeds, coefficient grid, confirmation or new training batch are selected here.
+
+Relevant current shared topic3 and current-plan discussion reinforce this separation of
+actual learning, bank formation and deployed selection. DM1's new B15 reading also illustrates
+that positive block means need not clear a fixed training-program claim; it is different N/
+comparison evidence, not another E replicate or a comparator for this direction. The direction
+continues scientific judgment under the same lead; no other DM's ordinary-control proposal
+is taken over and no App task is contacted.
+
+**Cost, recovery and observation closure.** U runner body2552.292795s=42.538213min; the sum
+of45rollout times2494.068122s is included. User/system CPU2400.012664/247.933267s; peakRSS
+1928176KiB; peakCUDA allocated594044928/reserved1218445312bytes. Shared-node occupancy and
+peak scratch remain unmeasured. M/E/U runner bodies total9696.652346s=161.610872min,
+3fits,1.08Mtrain+400keval=1.48Menvironment transitions,2160train/800evalepisodes. Totals:
+1350high updates,303750actor and303750critic,2025team/8100individual discriminator,
+1890G/P head updates combined,trunk0. E's200common-input scoring batches/3.322081s are
+included in its runner wall and consume no environment steps. Compilation, tests/review,
+launch, collection and readback support are extra; shared-node wall is not an algorithm-speed
+claim. All fixed panels and support costs remain counted despite partial hypothesis failure.
+
+After verification of both retained output copies, preview and apply of the maintained
+collector removed only terminal U's disposable source snapshot
+`0c0e00394aba4a0db30d767279dc59e2`. Author/output roots, raw data, claim, M staged reference
+and the unclaimed pre-admission E preparation snapshot remain. Consumed the terminal event
+and rearmed69→70,1500s,observerPID3248184. All existing scientific launch jobs are terminal
+and historical Pro jobs already delivered/read; no remaining B07 worker or Pro request needs
+restarting. The next observation, if any, will be for a separately committed new scientific
+consultation. No additional task message or repeated Pro Send occurred in this event handling.
