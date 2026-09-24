@@ -5829,3 +5829,682 @@ scientific measurements or change the fixed evaluation distribution.
 READY event`d049ec8dc89c9537b794e1df` under wake`356d5e64-f636-41ec-ade9-612462b4a731`
 was consumed after delivery verification and full reading by rearming generation48 to49.
 All earlier accepted operations remain terminal; no worker was restarted or old question resent.
+
+## 2026-09-23 — B06 adapter accepted; actual CUDA check remains
+
+The Implementer returned only the four new B06 package/entry/test files named in L0. DM read
+all four and accepts the narrow immutable Spec adapter: exactly the seven new training seeds
+and training-world base differ from B04. The admitted entry passes that actual Spec into the
+unchanged B04 engine. It preserves the old raw engine identity, native optimizer guards, U's
+trained low/discriminator law, private streams and six-panel plan. The new wrapper restores
+the production uniform-stream guard before work and validates actual uniform panel identities
+afterward; adapter failure preserves outputs and records `failed` before raising.
+
+Independent Reviewer `/root/review_b06_recurrence` reviewed the files against author base
+`54373f0d59c1479fc5a2f1ed524b2b7373013dc5` and returned no material finding or requested repair.
+DM independently matched the returned file digests and confirmed no working-tree edits to
+B01–B05 or core. Reviewed SHA256 values, in package-init/runner/CLI/test order:
+`91faf890d3f61a3ee38e1fce6ad1234050dbbcae96b0004fbaee799381576721`,
+`ba75b8f150083072788fd056ad20af10349f0a761bf4d08e5cdc718404931ba3`,
+`8b007c4c9ac51a065e27ea92182d4b6fe035ade207282d690ef9c55776a75d58`,
+`24d24473652014ebce82fee9c487e2134e74857cf5552268241c949c26c8fa40`.
+
+Implementer CPU suite:9passed/1CUDA-skipped in3.64s. Independent Reviewer:9passed/1CUDA-skipped
+in3.54s. Each suite's artificial paired fits used80training+240evaluation transitions and
+two native updates combined. Checks read actual initial native/head/private/sampler differences
+from B04 addresses, M/U initialization and initial-uniform pairing, new learner movement,
+uniform factors/label flow, RNG/evaluation isolation, fixed CLI propagation/refusal and failure
+preservation. Test scratch was pytest-owned and removed on normal teardown. These artificial
+checks are engineering evidence, not production training instances or native performance results.
+Full-scale optimizer counts remain verified by the unchanged guards, not exercised by these tests.
+
+Main was refreshed at `e256dc73e73dda2167bd29d28d28d4f3c908dbfe`; our scope, lead and lifted
+pause are unchanged. Next publish these exact source bytes and run the already specified small
+actual4070 CUDA fixture through the new adapter. Only after that check may the fixed first M
+fit enter native admission. No production B06 attempt has started at this entry.
+
+## 2026-09-23 — B06 actual4070 CUDA fixture accepted; M remains first
+
+Published source `c23363a5a71932f037fa0274750fa1c150b9a812` was materialized cleanly at
+`/home/wu/hmasd-worktrees/complementary-skill-b06-20260923`. All four new files matched the
+accepted digests. With configured `/home/wu/.venvs/hmasd/bin/python` and its bin on PATH,
+`pytest -q tests/experiments/candidates/complementary_skill_learning/b06/test_b06.py -k actual_cuda_pair_uses_new_adapter`
+passed on the actual4070:1passed/9deselected in6.55s, with14 dependency deprecation warnings.
+The fixture used two short artificial rollouts per arm:160training+240evaluation transitions,
+four native updates and six panels combined. It verified actual CUDA M/U initialization
+pairing, both native low/discriminator learning paths, M high updates, U high0, label-flow
+checks and the adapter's completed-output guards. Pytest removed its owned scratch; tracked
+source remained clean. No production checkpoint was evaluated and no scientific fit was added.
+
+DM accepts the implementation and freezes that published source for both B06 scientific arms.
+New main `8810bcc10` was inspected: the other direction's S7 result/next-investment update
+changes neither this S1 comparison nor pause/lead. No main edit is needed for this routine
+engineering milestone. Fixed first tag is `b06_m_260923961_c23363a5a`; U follows only after
+M's complete collection and technical acceptance, at the same source and fixed addresses.
+Fresh native admission still owns the actual resource, published-control, source and
+duplicate checks. At this entry, no B06 production attempt has started.
+
+Before native acceptance, supervisor `csl-b06-m-c23363a5a` exited4 after9s with exact refusal
+`hmasd launch refused: published control head has no docs/research/RESEARCH.md`. Its logs and
+`temp/b06_m_launch.{stdout.json,stderr.txt}` remain on the node. No output directory, matching
+claim or source snapshot existed afterward; the unchanged kernel performs this control read
+before any of those effects. Thus no scientific child or B06 fit started in this refusal.
+Direct configured-shell Git reading then succeeded for published main
+`8810bcc10978941638470aec79460faf1e4ff0c0`; remote and local control-file SHA256 both were
+`0ba48ef17ade38a9bb388a8cbb2e1c4fb80f754ba0b7763f4818c5b7ab6dc6e3`. The kernel had hidden
+the failing Git stderr behind the generic message, so lazy-fetch/network trouble is only a
+possible explanation, not a reproduced root cause. No control text or kernel was modified.
+
+DM decision: with the control bytes now available and absence of an accepted/reserved
+operation established, submit the identical native request again through the configured
+supervisor, preserving the first supervisor record and using separate reconciliation stdout/
+stderr scratch. Source, output tag, arm, seeds, horizon and panels are unchanged. This is
+reconciliation of a pre-effect control-read refusal, not a replacement of a started fit.
+
+## 2026-09-23 — B06 M natively admitted and observation adopted
+
+The identical request was natively accepted at2026-09-24T03:55:40.019216Z. B06 now has
+one started scientific fit, M; U remains the fixed second fit after complete M collection
+and technical acceptance. The frozen comparison, source and exposure are unchanged.
+
+The actual-node [manifest](../../../../runs/complementary_skill_learning/b06_m_260923961_c23363a5a/launch-manifest.json),
+[preflight](../../../../runs/complementary_skill_learning/b06_m_260923961_c23363a5a/admission-preflight.json)
+and [native status](../../../../runs/complementary_skill_learning/b06_m_260923961_c23363a5a/launch-status.json)
+were collected and hash-matched against the originals. Their SHA256 values in that order are
+`467ca392142952805e6e33284f754e15a3bf8945849211fb965da5a623a1acf1`,
+`edb4e2b895a2af3d30a0a202455da6f6ffa118b5baeaf485f4b7f521582f3c7c`,
+`08bdb52784e6152bcd85092b7f83f26e3db75809e3a06af10a6684694d13c8e8`.
+The manifest retains the exact command, control/source revisions, native process identities,
+output path and recovery handle. Fresh effective available memory14601461760bytes passed
+the4294967296-byte floor; cgroup headroom is unavailable, not measured as unlimited.
+At03:55:49Z, supervisor and runner were both running with matching recorded/observed identities,
+consistent records and no exit witness. The initial absence of summary was a startup observation,
+not a terminal missing-artifact finding.
+
+Detached observer request `temp/b06_m_wait_request.json` registered the same operation at
+generation50 with1500s window. First drain at03:56:36Z actually observed accepted/running,
+matching process identities, a now-present summary, zero observation errors and no pending
+events. This establishes handle adoption beyond registration. Earlier generation49 had no
+remaining pending events; no prior worker or Pro request was restarted. On a checkpoint rearm
+the returned generation/wake/event IDs for this same handle; on completion collect and read
+the complete required output before scientific acceptance. The live source snapshot stays intact.
+
+Engineering checks and admission establish no service advantage, replication or acceptance of
+a scientific result. All45 training rows, actual tensor/RNG pairing, native/head optimizer
+counts, complete uniform/own panels, adverse worlds and cost remain to be read. No main/index
+edit is made for this unchanged-plan start; detailed progress remains here and in runs.
+
+
+## 2026-09-23 — B06 M complete and accepted; fixed U remains
+
+**Acceptance and scope.** M exited0 with a valid native witness and absent matching runner/
+supervisor. DM collected every output, matched all12files/59,759,887bytes to the actual-node
+SHA256 inventory, then read the full saved training, prediction, checkpoint and four-panel
+results through the independent saved-artifact reader. No environment, training or policy
+execution was added by collection/analysis. All required checks passed; M is accepted as
+one complete exploratory training instance, with the fixed U comparison still outstanding.
+Current published main through `d2e34d45c` was inspected; pause, lead and this plan are unchanged.
+
+Source remains `c23363a5a71932f037fa0274750fa1c150b9a812`, actual B06 entry/Spec and seed block
+260923961..967, train-world base2200000. The inherited raw B04 object/schema identity is
+intentional. The actual initial native modules, both factual heads, private RNG states and
+remaining-learner sampler seed differ from B04; the latter is13282568567721161451. This is
+not a seed-string-only repetition. Actual M/U initialization and trajectory-independent
+stream pairing will be checked against U's saved artifacts, not assumed from this M read.
+
+Completed exposure:1fit/360000training and stored transitions,720training episodes,45native
+updates;64000evaluation transitions/128episodes across initial-own/initial-uniform/final-own/
+final-uniform. Every one of45training rows and45raw prediction batches matched its saved hash,
+rollout order and counts. All90G/P raw MSEs recomputed exactly, and all tensors/readings were
+finite. Native optimizer calls were coordinator675, low actor101250, low critic101250,
+team discriminator675 and individual discriminator2700; factual heads315each, auxiliary
+trunk0. Actual final changed tensor counts were87/29/24/29 for coordinator/discoverer/team/
+individual modules; both factual heads also moved. Auxiliary trunk0 means no auxiliary
+trunk update, not a frozen native learner.
+
+All360000 stored rows and22500action/reward/factual/storage batches verified with0failures.
+All45native mixture replay probes (32 sampled rows per rollout) retained the actual prefix
+and forced-factor convention, maximum
+sampled log-mu discrepancy6.4373016357421875e-6. Checkpoint native/frozen digests, default and
+private CPU/CUDA RNG states, both sampler states and their entire saved row-to-row chains
+recomputed. The uniform selected-label digest remains
+`a45d59f80fca20321df3803745068bb841f30e6c25b6b8c01dd7d0d250a67190`; all four panels share old
+physical initialization`b36474bb458d4c72efb2feed5b6653583cf0cbaf02fa264e097111209827d6d1`.
+All32worlds1700200..1700231,500steps,50renewals, mean-clipped physical actions and zero
+evaluation optimizer/normalizer updates were checked. Native J and service were recomputed
+from saved return/components, retaining quality and height costs separately.
+
+**Complete M reading.** Means below use all32 fixed exposed worlds. `height` is S1's native
+energy_penalty component, not measured S7 battery/return risk.
+
+| Panel | J | Connected users/step | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| initial_own | 0.157296011864 | 14.327250000 | 0.286545000 | 0.077401679869 | 0.066505992097 |
+| initial_uniform | 0.200619029543 | 15.978687500 | 0.319573750 | 0.086950230287 | 0.049167664543 |
+| final_own | 0.438033418018 | 29.689375000 | 0.593787500 | 0.169575163531 | 0.028490381041 |
+| final_uniform | 0.441924910082 | 30.349812500 | 0.606996250 | 0.157056649982 | 0.030089459913 |
+
+Initial→final own: mean J+.280737406155/users+15.362125; uniform:+.241305880538/+14.371125.
+Both readings improve J and users in all32 worlds relative to their actual initialization.
+Minimum own learning J+.095514452500/users+2.394 at1700210; minimum uniform learning
+J+.105341763378/users+3.552 at1700207. This supports actual useful learning of this M instance;
+it does not establish M-over-U bank value or a high-gradient/complementarity mechanism.
+Own quality falls.036525037071 at1700203; uniform quality falls.079625376814 there and
+0.000704570057 at1700221. Own height penalty decreases in all32; uniform height rises.004762898608
+at1700208. Positive J/service learning does not erase these component losses.
+
+Final A=own−uniform is J−.003891492064 (15positive/17negative), users−.660437500
+(12positive/20negative), coverage−.013208750, quality+.012518513549 (29positive/3negative)
+and height penalty−.001599078872 (13positive/19negative). Worst J/users A occurs at1700203:
+−.107493207233/−7.058, despite quality+.025996239 and with height+.016480079. Largest positive
+A at1700223 is+.095391042811/+5.974. Worlds1700205,1700209,1700218 have positive J A but
+negative users A. Preserve these tradeoffs without a service tolerance or deployment rescue.
+The narrower A gap than old B04 is another training instance's observation; it is not an
+extra intervention or proof that the old deployment failure was repaired. Do not reopen B05.
+
+All fixed-world M readings follow. Learning columns subtract the corresponding actual
+initial panel; A columns are final own−uniform. Exact full precision and all native component
+arrays remain in the retained raw summary at its verified digest.
+
+| World | Final own J | Final uniform J | Own users | Uniform users | Own learning J | Uniform learning J | A quality | A height |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | 0.452351757 | 0.462011936 | 31.168000000 | 31.754000000 | 0.531298640 | 0.517903843 | 0.006414813 | 0.003380622 |
+| 1700201 | 0.464417945 | 0.405824338 | 30.544000000 | 28.070000000 | 0.310217113 | 0.252070704 | 0.030749943 | -0.014732625 |
+| 1700202 | 0.337472665 | 0.433470011 | 23.520000000 | 29.494000000 | 0.205473295 | 0.253041885 | -0.005171058 | 0.010810029 |
+| 1700203 | 0.307480654 | 0.414973861 | 21.290000000 | 28.348000000 | 0.114919865 | 0.177372450 | 0.025996239 | 0.016480079 |
+| 1700204 | 0.468378772 | 0.410033793 | 30.892000000 | 27.460000000 | 0.304179145 | 0.153360159 | 0.021263063 | -0.003918061 |
+| 1700205 | 0.467425233 | 0.454560088 | 31.104000000 | 31.176000000 | 0.376220109 | 0.222998409 | 0.019972311 | -0.007881452 |
+| 1700206 | 0.459361847 | 0.428490227 | 30.614000000 | 29.568000000 | 0.335260586 | 0.217049682 | 0.015713182 | -0.011513666 |
+| 1700207 | 0.466094006 | 0.441305354 | 31.552000000 | 29.754000000 | 0.175157808 | 0.105341763 | -0.003123880 | -0.000553816 |
+| 1700208 | 0.453710471 | 0.500510684 | 30.856000000 | 33.754000000 | 0.265497298 | 0.244937249 | 0.004720359 | 0.007644320 |
+| 1700209 | 0.451534252 | 0.448409123 | 30.428000000 | 30.946000000 | 0.192604982 | 0.203237430 | 0.014799059 | -0.005937411 |
+| 1700210 | 0.430674871 | 0.459536898 | 28.886000000 | 31.550000000 | 0.095514453 | 0.133985543 | 0.022700810 | -0.001623730 |
+| 1700211 | 0.483559932 | 0.481454139 | 33.236000000 | 32.904000000 | 0.268999847 | 0.218049683 | 0.010871888 | 0.005803774 |
+| 1700212 | 0.421550435 | 0.457267689 | 28.766000000 | 31.604000000 | 0.304248378 | 0.300370944 | 0.002929853 | -0.003135790 |
+| 1700213 | 0.443051840 | 0.477353123 | 29.692000000 | 32.936000000 | 0.314967513 | 0.293479932 | 0.006201922 | -0.009254140 |
+| 1700214 | 0.349989503 | 0.417820369 | 23.768000000 | 28.690000000 | 0.179276253 | 0.133024908 | 0.012864143 | 0.002782109 |
+| 1700215 | 0.396141193 | 0.368704462 | 26.724000000 | 25.528000000 | 0.301176351 | 0.254050713 | 0.016601912 | -0.005712158 |
+| 1700216 | 0.393358575 | 0.419082900 | 27.180000000 | 29.416000000 | 0.258670772 | 0.243476652 | 0.006545589 | -0.003615998 |
+| 1700217 | 0.399898566 | 0.477730303 | 26.466000000 | 32.332000000 | 0.181273693 | 0.176479092 | 0.000579905 | -0.004118291 |
+| 1700218 | 0.459397964 | 0.457625859 | 31.202000000 | 31.386000000 | 0.393640498 | 0.359216237 | 0.022774055 | 0.002484111 |
+| 1700219 | 0.420434522 | 0.437693419 | 28.282000000 | 30.638000000 | 0.266668562 | 0.201767468 | 0.020543226 | -0.009562136 |
+| 1700220 | 0.486185647 | 0.425570981 | 33.306000000 | 29.344000000 | 0.477662231 | 0.370209443 | 0.025054957 | 0.002369822 |
+| 1700221 | 0.462532799 | 0.426944162 | 31.030000000 | 29.506000000 | 0.230752053 | 0.175309245 | 0.024212074 | -0.006989015 |
+| 1700222 | 0.453347141 | 0.471895344 | 31.284000000 | 32.412000000 | 0.245032582 | 0.218204052 | 0.006240572 | 0.004628375 |
+| 1700223 | 0.474829831 | 0.379438788 | 32.318000000 | 26.344000000 | 0.426865543 | 0.332262019 | 0.010552017 | -0.008589438 |
+| 1700224 | 0.455548295 | 0.462970781 | 31.132000000 | 31.636000000 | 0.377101324 | 0.354213085 | 0.012562663 | 0.004135285 |
+| 1700225 | 0.463497598 | 0.467695037 | 31.844000000 | 32.152000000 | 0.230362515 | 0.201696948 | 0.010406090 | 0.003007266 |
+| 1700226 | 0.445444421 | 0.433120451 | 30.076000000 | 29.980000000 | 0.356970262 | 0.258869630 | 0.013306978 | -0.006987876 |
+| 1700227 | 0.374080015 | 0.382247106 | 25.568000000 | 26.104000000 | 0.232222271 | 0.198513913 | -0.001434762 | 0.000232663 |
+| 1700228 | 0.442505947 | 0.429492430 | 29.992000000 | 29.534000000 | 0.247586907 | 0.189573515 | 0.012787804 | -0.002765175 |
+| 1700229 | 0.433729050 | 0.457572964 | 30.322000000 | 31.784000000 | 0.171875152 | 0.255043771 | 0.003350376 | 0.004381026 |
+| 1700230 | 0.461710127 | 0.476270937 | 31.038000000 | 32.536000000 | 0.265982462 | 0.308472638 | 0.017513193 | -0.001157232 |
+| 1700231 | 0.537373502 | 0.474519564 | 35.980000000 | 32.554000000 | 0.345918533 | 0.198205173 | 0.012093139 | -0.011261996 |
+
+**Cost, retention and continuation.** Runner body3185.679382341s=53.094656372min; native
+admission→exit54.526968614min includes startup outside that body. User/system CPU2942.134757/
+326.056913s; process-lifetime peak RSS1894824KiB (1940299776bytes), peak CUDA allocated/
+reserved1531556352/2111832064bytes. Shared-node simultaneous occupancy and peak scratch remain
+unmeasured. Final collected output is59759887bytes; runner's excluding-summary measurement
+was54808842bytes. Its different point in time preceded the process-exit witness and terminal
+status rewrite; it is not a measured peak scratch size. Support work and the earlier9s
+pre-effect refusal are additional costs, not a second fit or zero-cost work.
+
+Durable bulk remains on `hmasd-wsl-node` at
+`/home/wu/hmasd-worktrees/complementary-skill-b06-20260923/runs/complementary_skill_learning/b06_m_260923961_c23363a5a/`,
+with the fully verified collection copy in this authoring checkout's same `runs/` path.
+Only compact config/native records are committed; the large raw summary, checkpoints and
+training/prediction streams retain their original bytes outside Git. Complete inventory:
+
+| File | Bytes | SHA256 |
+| --- | ---: | --- |
+| `admission-preflight.json` | 772 | `edb4e2b895a2af3d30a0a202455da6f6ffa118b5baeaf485f4b7f521582f3c7c` |
+| `auxiliary_predictions.jsonl` | 2461734 | `9e18a08c9be8393947ba9e7c6ee4b13add2d7bbc8c8e5cb5e9ed2179c381ecd9` |
+| `config.json` | 650 | `93c91794fed155be69d111c71ee746949d1e3bdde8bd6e21d67a4b67f5bb65d4` |
+| `final.pt` | 27128639 | `7b65717e936da4fdd8e0f1f2ab530b4cd557e1673360cdc66de5ce2e13b42a7f` |
+| `initial.pt` | 23750333 | `79192d119dfdfcad979b2aa8245316f145771f2a38a01e83ae533acee980fe9b` |
+| `launch-manifest.json` | 4323 | `467ca392142952805e6e33284f754e15a3bf8945849211fb965da5a623a1acf1` |
+| `launch-status.json` | 2620 | `3e96b6b3a73ba4634f285c24906729fe41d41fce37731e393c8c6a7bdb9cce68` |
+| `process-exit.json` | 549 | `7c4fc3bc838ccaaac09904979d7aeabb05335df31f67b47f762e00a3262d9320` |
+| `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `summary.json` | 4950820 | `8dbd3f900fbd0a5facf5247fa155543ee79031533736d63c7eb30bf8be7b5fe7` |
+| `training.jsonl` | 1459447 | `e0557f2ceea6bc9d26a311cf6fce416154912711dee2fb8aec6f9ce168d3776c` |
+
+After complete collection/hash verification, actual-node snapshot GC preview marked only
+`598c17876c594d62b109dcddd15d5f8e` eligible with durable direction-branch reachability; apply
+removed that disposable source successfully. Both output copies, native claim/status records
+and authoring/source branch remain. This creates no restart permission.
+
+Continue the prewritten second U fit, source/seed/360k horizon/32k uniform evaluation unchanged.
+The primary final uniform M−U and original Gamma cannot yet be computed. Do not compare M
+against old U as a substitute or treat32worlds as training replications. The fixed pair still
+has only one completed arm; neither its result nor the running time selects a new recipe.
+M's READY event`7d43bced24d43d8a0b8001f9` under wake`649adef4-d5ce-4427-8d3e-9b9e1b84f7ac`
+was consumed after this reading by rearming generation52 to53. U needs fresh native admission
+and its own accepted-handle observation. This cell does not change the material
+research plan, so no per-cell RESEARCH/main edit is made.
+
+## 2026-09-23 — B06 fixed U admitted; actual initial pairing verified
+
+After M's complete acceptance and result publication at `54a9caef1`, the prospectively fixed
+second U fit was accepted at2026-09-24T05:02:32.423681Z. Its source remains
+`c23363a5a71932f037fa0274750fa1c150b9a812`, with the original U law, new paired seed block,
+360k training and initial/final uniform32k evaluation. No additional test fit, altered recipe,
+selector panel or score-dependent choice was inserted. B06 has2started fits,1complete accepted
+M and1running U; the completed paired scientific reading is still outstanding.
+
+The actual-node [manifest](../../../../runs/complementary_skill_learning/b06_u_260923961_c23363a5a/launch-manifest.json),
+[preflight](../../../../runs/complementary_skill_learning/b06_u_260923961_c23363a5a/admission-preflight.json)
+and [native status](../../../../runs/complementary_skill_learning/b06_u_260923961_c23363a5a/launch-status.json)
+were copied and hash-matched. Their respective SHA256 values are
+`a10f7fa3bf2c7f00c9d1450f2aee2b0f4b51109c6830d94622d22a39b2d049ab`,
+`d0651604fdb434c29fbfa9bc367abb44aaae4fcfe05b884eda91c4d7d64cfc80`,
+`847dbeb872d5199bb328385eb1c9a3c6046ef39977786633d83ecbd251576c8a`.
+The manifest carries source, command, control, native process identities and recovery handle.
+Current control main was `d2e34d45c724c4248e5966d6c323afdda02b31e9`. Fresh effective memory
+13592113152bytes passed the4294967296-byte floor; cgroup headroom remains unavailable.
+Initial native status reported matching running supervisor/runner and consistent records.
+
+Actual initial artifacts were then available and checked without executing the policy again.
+Config650bytes/SHA256`a62bca4813252c7d8c5abcb90ffcf72391b5de9652570578674e67b28b24c06f` and
+initial checkpoint23750333bytes/SHA256`80044745af3ce621112d56f3d8ce64acec414ba904fd53abf4c8a52c50e850b4`
+match the node. Loading both M/U initial checkpoints independently showed exact equality of
+all native tensors, both auxiliary heads, initial target calibration, normalizers, config,
+default/private CPU/CUDA RNG states and both sampler states. U's original initial-uniform
+panel equals M's complete initial-uniform panel, including all32native scores, service,
+components and physical/label identities. Their J=.20061902954325744 and users=15.9786875
+are the paired starting observation, not U's trained result. Initial native/frozen digests
+match M's`fbb1516296e838d5661e56ad3ce43be0ea23175f3f681645012fa3a9607a2c61` /
+`dbd3aabae7b5f0f543c804521547dce2e4ef12c30d7f6db799a16e97994859c7`.
+The two checkpoint file hashes differ because their arm metadata differs; actual numerical
+pairing was read from tensors and state rather than inferred from a filename or file hash.
+
+Observer `temp/b06_u_wait_request.json` registered this accepted handle at generation54,
+1500s window. Its first drain actually observed accepted/running with matching process
+identities, present summary, consistent records,0errors and no pending events at05:04:37Z.
+Checkpoints rearm this same handle; they do not relaunch U. Its live source snapshot remains
+intact. Complete U counts, learner movement, all45training rows and stream pairing, final
+uniform worlds, primary M−U and original Gamma remain for terminal collection and full reading.
+No material plan or shared judgment changes at this routine cell start, so no RESEARCH/main
+edit is made. Compact records are published; the initial checkpoint stays outside Git.
+
+
+## 2026-09-23 — B06 complete; learned-high bank advantage reverses while both arms learn
+
+**Acceptance.** The fixed second U exited0 with a valid native witness and absent recorded
+runner/supervisor. The terminal status read at2026-09-24T06:04:39.322739Z is consistent. All12
+output files,57,188,184bytes, were copied from the actual node and matched byte count/SHA256
+before reading. The independent artifact parser read all45training rows,45raw prediction
+batches,90G/P MSEs, actual initial/final tensors and complete RNG/sampler states, and both
+32-world panels. Every promised check passed. The separate full-pair parser checked actual
+M/U initialization, all45stream transitions and all original contrasts. No environment step,
+policy evaluation, optimizer call or new fit was added by these readers. This is a completed
+exploratory pair, not acceptance from process exit alone. Published main through
+`d2e34d45c724c4248e5966d6c323afdda02b31e9` remains unchanged for our pause, lead and fixed plan.
+
+Source for both arms is`c23363a5a71932f037fa0274750fa1c150b9a812`; B06's new Spec actually reaches
+native initialization, heads, default/private CPU/CUDA streams, both samplers and training
+world base2200000. Raw object_id/RNG schema retain the inherited B04 engine identity by design.
+Actual initial native/head tensors and all initial state match between M/U and differ from
+the old B04 block, as already checked at U admission and again with the complete pair.
+Initial-uniform panels match in full, not just their means. Across all45rollouts the270private
+before/after stream comparisons,90remaining-learner sampler comparisons and45default-state
+comparisons agree. High-update sampler states differ after every rollout as intended: only
+M uses that sampler. Final actual default/private/remaining-sampler bytes agree; high sampler
+bytes differ. Equal draw streams do not require equal endogenous trajectories or targets.
+
+U completed1fit/360000train and stored transitions,720episodes,45native updates,32000eval
+transitions/64episodes. Its coordinator optimizer calls and actual changed coordinator tensors
+are0; low actor/critic calls101250each, team/individual discriminators675/2700, heads315each,
+auxiliary trunk0. Actual changed discoverer/team/individual tensor counts29/24/29 and both
+heads move. This is a genuinely trained recurrent low-level comparator, not a frozen policy.
+All360000storage rows and22500action/reward/factual/storage batches pass with0failures. Each
+of45uniform audits checks800team and4800individual factors at log(1/6). Raw prediction losses
+recompute with maximum difference0; checkpoints, digests, state chains and numeric finiteness
+pass. M's previously accepted mixture replay maximum remains6.4373016357421875e-6.
+
+All six panels have the fixed32worlds1700200..1700231, horizon500, k10, mean-clipped physical
+actions and zero evaluation optimizer/normalizer updates. The original uniform label digest
+`a45d59f80fca20321df3803745068bb841f30e6c25b6b8c01dd7d0d250a67190` and physical initial digest
+`b36474bb458d4c72efb2feed5b6653583cf0cbaf02fa264e097111209827d6d1` match the frozen conditions.
+J and connected-users arrays were independently checked against native returns/components.
+
+**Original endpoint and service reading.** Equal-weight means over the fixed32 exposed worlds
+follow. Height is S1's native height/energy proxy, not measured battery depletion or S7 risk.
+
+| Panel | J | Users/step | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| M_initial_own | 0.157296011864 | 14.327250000000 | 0.286545000000 | 0.077401679869 | 0.066505992097 |
+| M_initial_uniform | 0.200619029543 | 15.978687500000 | 0.319573750000 | 0.086950230287 | 0.049167664543 |
+| M_final_own | 0.438033418018 | 29.689375000000 | 0.593787500000 | 0.169575163531 | 0.028490381041 |
+| M_final_uniform | 0.441924910082 | 30.349812500000 | 0.606996250000 | 0.157056649982 | 0.030089459913 |
+| U_initial_uniform | 0.200619029543 | 15.978687500000 | 0.319573750000 | 0.086950230287 | 0.049167664543 |
+| U_final_uniform | 0.454199255637 | 31.822312500000 | 0.636446250000 | 0.155857343629 | 0.038070322451 |
+
+The prewritten primary Delta=M-final-uniform−U-final-uniform is **−.012274345556J and
+−1.472500users/step**. J has12positive/20negative worlds; users8positive/24negative. Coverage
+−.029450 contributes−.020615J; quality+.001199306354 contributes+.000359791906; lower height
+penalty−.007980862538 contributes+.007980862538. M has a lower height penalty in all32worlds,
+yet coverage loss exceeds that saving. Quality is16positive/16negative, not a uniform service
+improvement. Worst Delta J/users occurs at1700227:−.091264752201/−7.010. Best J is+.037022331318
+at1700225; best users+1.888 at1700219. Positive-J/negative-users worlds1700213,1700217,1700222,
+1700231 remain explicit tradeoffs.
+
+A=M-final-own−M-final-uniform remains−.003891492064J/−.660437500users,15/17J and12/20user signs.
+Original Gamma=M-final-own−U-final-uniform is **−.016165837619J/−2.132937500users**,
+13positive/19negative J and9positive/23negative users. Its coverage/quality/height means are
+−.042658750/+.013717819903/−.009579941410. Quality improves31/32 and height falls30/32, while
+service is worse on average. Worst Gamma is−.143867142585J/−10.120users at1700203, with height
++.011385078788;1700208 is the other higher-height world. Gamma positive-J/negative-users
+worlds1700219,1700220,1700221,1700230 cannot be called complete service wins. The full arrays
+satisfy Gamma=Delta+A and the native J component identity; that algebra is not extra evidence.
+
+Both arms nevertheless learn useful service from their actual shared uniform initialization:
+M uniform learning+.241305880538J/+14.371125users; U+.253580226094J/+15.843625users, each32/32
+positive in J and users. M own learning is+.280737406155J/+15.362125users, also32/32positive.
+U's smallest learning J is+.108456304289 at1700210, smallest service gain+4.992 at1700207.
+U quality worsens at1700203(−.084288925523) and1700221(-0.001634931878); height worsens on7worlds,
+most+.009880577951 at1700208. These losses remain despite positive J/service learning.
+M's complete learning/component losses are retained in the preceding M entry.
+
+Final absolute J/users minima: M-own .307480653550/21.290 at1700203; M-uniform
+.368704461530/25.528 at1700215; U-uniform .401206199340/28.024 at1700215. There are no negative
+final J or zero-service worlds in these panels. This is a scope-limited observation, not a
+safety certificate. All final values, learning changes and signed contrasts are below; native
+component arrays remain at full precision in the retained summaries.
+
+| World | U final J | U users | U learning J | U learning users | Delta J | Delta users | Delta quality | Delta height | A J | A users | Gamma J | Gamma users |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | 0.443081478 | 31.116000000 | 0.498973385 | 30.104000000 | 0.018930458 | 0.638000000 | -0.003763866 | -0.011127618 | -0.009660178 | -0.586000000 | 0.009270280 | 0.052000000 |
+| 1700201 | 0.434379375 | 30.384000000 | 0.280625741 | 16.730000000 | -0.028555037 | -2.314000000 | 0.002381369 | -0.003126552 | 0.058593607 | 2.474000000 | 0.030038570 | 0.160000000 |
+| 1700202 | 0.439004357 | 31.026000000 | 0.258576230 | 16.766000000 | -0.005534345 | -1.532000000 | 0.006782105 | -0.013879023 | -0.095997347 | -5.974000000 | -0.101531692 | -7.506000000 |
+| 1700203 | 0.451347796 | 31.410000000 | 0.213746385 | 16.866000000 | -0.036373935 | -3.062000000 | 0.004663549 | -0.005095000 | -0.107493207 | -7.058000000 | -0.143867143 | -10.120000000 |
+| 1700204 | 0.429291611 | 30.040000000 | 0.172617977 | 11.056000000 | -0.019257818 | -2.580000000 | 0.017522061 | -0.011605564 | 0.058344980 | 3.432000000 | 0.039087162 | 0.852000000 |
+| 1700205 | 0.478378663 | 33.668000000 | 0.246816984 | 14.888000000 | -0.023818575 | -2.492000000 | 0.008292620 | -0.008581639 | 0.012865145 | -0.072000000 | -0.010953430 | -2.564000000 |
+| 1700206 | 0.419120184 | 29.548000000 | 0.207679639 | 13.954000000 | 0.009370042 | 0.020000000 | 0.000265738 | -0.009010321 | 0.030871621 | 1.046000000 | 0.040241663 | 1.066000000 |
+| 1700207 | 0.448057286 | 31.194000000 | 0.112093695 | 4.992000000 | -0.006751932 | -1.440000000 | 0.021548846 | -0.006943414 | 0.024788653 | 1.798000000 | 0.018036721 | 0.358000000 |
+| 1700208 | 0.510812516 | 35.028000000 | 0.255239081 | 17.058000000 | -0.010301832 | -1.274000000 | 0.008054962 | -0.005117679 | -0.046800213 | -2.898000000 | -0.057102045 | -4.172000000 |
+| 1700209 | 0.461913921 | 32.478000000 | 0.216742228 | 14.464000000 | -0.013504798 | -1.532000000 | 0.005938972 | -0.006161510 | 0.003125128 | -0.518000000 | -0.010379669 | -2.050000000 |
+| 1700210 | 0.434007659 | 30.508000000 | 0.108456304 | 6.508000000 | 0.025529239 | 1.042000000 | 0.005132367 | -0.009401529 | -0.028862027 | -2.664000000 | -0.003332788 | -1.622000000 |
+| 1700211 | 0.467325195 | 32.138000000 | 0.203920739 | 12.292000000 | 0.014128944 | 0.766000000 | -0.009378541 | -0.006218507 | 0.002105793 | 0.332000000 | 0.016234737 | 1.098000000 |
+| 1700212 | 0.473426747 | 33.298000000 | 0.316530002 | 20.130000000 | -0.016159058 | -1.694000000 | -0.000508142 | -0.007709385 | -0.035717255 | -2.838000000 | -0.051876313 | -4.532000000 |
+| 1700213 | 0.470599659 | 33.134000000 | 0.286726468 | 16.262000000 | 0.006753464 | -0.198000000 | -0.000011396 | -0.009528883 | -0.034301284 | -3.244000000 | -0.027547820 | -3.442000000 |
+| 1700214 | 0.445326292 | 30.816000000 | 0.160530832 | 10.016000000 | -0.027505924 | -2.126000000 | -0.006342274 | -0.004160759 | -0.067830866 | -4.922000000 | -0.095336790 | -7.048000000 |
+| 1700215 | 0.401206199 | 28.024000000 | 0.286552451 | 17.116000000 | -0.032501738 | -2.496000000 | -0.000538352 | -0.002603768 | 0.027436732 | 1.196000000 | -0.005065006 | -1.300000000 |
+| 1700216 | 0.449728608 | 31.988000000 | 0.274122359 | 17.730000000 | -0.030645708 | -2.572000000 | -0.005234471 | -0.006932634 | -0.025724325 | -2.236000000 | -0.056370032 | -4.808000000 |
+| 1700217 | 0.472489655 | 32.966000000 | 0.171238445 | 10.312000000 | 0.005240648 | -0.634000000 | 0.003711453 | -0.013003212 | -0.077831738 | -5.866000000 | -0.072591090 | -6.500000000 |
+| 1700218 | 0.486881957 | 33.918000000 | 0.388472335 | 25.002000000 | -0.029256098 | -2.532000000 | -0.006109806 | -0.008024844 | 0.001772105 | -0.184000000 | -0.027483993 | -2.716000000 |
+| 1700219 | 0.406980555 | 28.750000000 | 0.171054604 | 9.956000000 | 0.030712864 | 1.888000000 | -0.009262535 | -0.007059624 | -0.017258896 | -2.356000000 | 0.013453968 | -0.468000000 |
+| 1700220 | 0.482300314 | 33.404000000 | 0.426938776 | 26.320000000 | -0.056729333 | -4.060000000 | -0.010402885 | -0.003231533 | 0.060614665 | 3.962000000 | 0.003885332 | -0.098000000 |
+| 1700221 | 0.455759826 | 32.062000000 | 0.204124909 | 14.112000000 | -0.028815665 | -2.556000000 | 0.000930362 | -0.006689227 | 0.035588637 | 1.524000000 | 0.006772973 | -1.032000000 |
+| 1700222 | 0.460871066 | 32.884000000 | 0.207179773 | 14.388000000 | 0.011024278 | -0.472000000 | 0.012945867 | -0.013748518 | -0.018548203 | -1.128000000 | -0.007523925 | -1.600000000 |
+| 1700223 | 0.456125507 | 31.926000000 | 0.408948737 | 25.198000000 | -0.076686718 | -5.582000000 | -0.006477716 | -0.003404597 | 0.095391043 | 5.974000000 | 0.018704324 | 0.392000000 |
+| 1700224 | 0.467428657 | 32.346000000 | 0.358670961 | 21.792000000 | -0.004457876 | -0.710000000 | -0.005661864 | -0.007180683 | -0.007422486 | -0.504000000 | -0.011880362 | -1.214000000 |
+| 1700225 | 0.430672706 | 30.394000000 | 0.164674617 | 8.864000000 | 0.037022331 | 1.758000000 | -0.000034602 | -0.012420712 | -0.004197439 | -0.308000000 | 0.032824893 | 1.450000000 |
+| 1700226 | 0.458725770 | 32.470000000 | 0.284474949 | 18.638000000 | -0.025605319 | -2.490000000 | -0.001963664 | -0.009843780 | 0.012323969 | 0.096000000 | -0.013281349 | -2.394000000 |
+| 1700227 | 0.473511859 | 33.114000000 | 0.289778665 | 17.630000000 | -0.091264752 | -7.010000000 | -0.004321377 | -0.008171661 | -0.008167092 | -0.536000000 | -0.099431844 | -7.546000000 |
+| 1700228 | 0.460648234 | 32.206000000 | 0.220729319 | 14.654000000 | -0.031155803 | -2.672000000 | -0.003580730 | -0.007326416 | 0.013013517 | 0.458000000 | -0.018142287 | -2.214000000 |
+| 1700229 | 0.440542565 | 31.046000000 | 0.238013372 | 14.132000000 | 0.017030399 | 0.738000000 | 0.001642118 | -0.006205764 | -0.023843914 | -1.462000000 | -0.006813515 | -0.724000000 |
+| 1700230 | 0.452857135 | 31.826000000 | 0.285058836 | 16.756000000 | 0.023413802 | 0.710000000 | 0.008482726 | -0.010928984 | -0.014560810 | -1.498000000 | 0.008852992 | -0.788000000 |
+| 1700231 | 0.471572828 | 33.204000000 | 0.195258437 | 12.310000000 | 0.002946736 | -0.650000000 | 0.003674911 | -0.010944263 | 0.062853938 | 3.426000000 | 0.065800674 | 2.776000000 |
+
+**Training-path reading and limits.** All45saved training curves were read. First/last5rollout
+mean training J is M .262276026614/.406765035345 and U .256406108832/.395808261906. This is
+endogenous training data under different laws, not a substitute for final uniform evaluation;
+M's higher late training mean does not rescue its adverse prewritten endpoint. U's rollout
+28–31 dip and later recovery remain in the original trace. Raw action saturation rises from
+.317236/.317361 to.781951/.785181 for M/U. The common high saturation is an unresolved property
+of this Gaussian/clip training recipe; no clipping or entropy cause was identified here.
+
+Final detached-head raw G/P MSE is M .006900906141/.006474955636 and U
+.006632731582/.005775876366, on each arm's own factual data. Those are not matched-target
+predictive advantages and neither is the native endpoint. Final train discriminator team/
+individual accuracy is M .259000/.301833 and U .245500/.294333. M final reported conditional
+team/agent entropy is1.714147567749/1.784518957138, or95.6684%/99.5959% of ln6; U's coordinator
+loss/entropy fields are zero because training is disabled, not because uniform sampling has
+zero entropy. M's near-max averages do not prove an independent uniform joint law or an
+entropy-gradient domination. Actual M/U training team counts respectively
+[4982,8406,4439,5163,5986,7024]/[5936,5994,5982,6090,6024,5974], with33560/33695distinct full
+joint labels among36000renewals, preserve their different exposure. These are descriptive,
+not held-out complementarity measurements.
+
+**Belief update and next decision.** The working prediction was positive M−U J and service
+again, with both arms learning. Only the learning part recurs. B04's+.035434871140J/+1.843375
+users and B06's−.012274345556J/−1.472500users remain separate. The primary contrast used the
+same external worlds/label stream, so a changed evaluation panel cannot explain its sign
+reversal; initialization, training worlds and other independent training randomness changed
+together and are not separately identified. The repeated lower M height penalty is real
+within these two blocks, but the native bank/service benefit did not recur. Both greedy
+Gamma readings are negative. This lowers the priority of the unchanged learned-high recipe;
+it establishes neither U's population superiority nor equivalence nor a general failure of
+high-level learning, skill conditioning, mutual information or complementarity.
+
+Reuse the preceding complete training-recurrence Pro answer's explicit reversal branch to
+end automatic investment in the unchanged B04/B06 positive-bank recipe. No third pair,
+confirmation, extra evaluation stream, alternative checkpoint or reopening of B05 is selected.
+That prior advice already covered this outcome and decision; it does not cover a new entropy
+intervention or the competence of a new constant-context baseline. Ending the recipe is not
+ending the scientific question or waiting for a new owner assignment.
+
+Current shared background at
+[d2e34d45c](https://github.com/CartmanFatass/My-paper-code/blob/d2e34d45c724c4248e5966d6c323afdda02b31e9/docs/research/RESEARCH.md#current-research-plan)
+changes the next choice concretely: both M/U retain trained local recurrent control, random
+context is a live competitor, and changing6labels to1 would alter FiLM parameter shape while
+removing discriminator rewards would change the objective. B02's adverse task-only result
+makes simultaneous reward removal a poor attribution control. Agent-count B10's frozen-bank
+opening-label reuse is a relevant deployment precedent, not new training evidence for this
+bank or proof of a competent skill-free control; that direction remains its own DM's work.
+B03's generic auxiliary reversal and B01 pair-auxiliary service loss rule out treating another
+unmodified auxiliary run as the missing test. B05's stochastic-vs-greedy gain does not supply
+a trained-bank advantage and does not warrant more sampling of that old bank.
+
+The remaining concrete scientific choice is whether the high-level entropy incentive is a
+modifiable obstacle worth one narrow learning intervention, or whether a simpler fixed/random
+context comparison (or stopping current S1 investment) offers more information. The actual
+coordinator uses lambda_h=.07, low-level entropy lambda_l=.05. A proposed zero-high-entropy
+intervention would retain the .1 uniform mixture floor, unchanged low-level/discriminator
+objectives and all architecture/information; reduced conditional entropy alone would not
+count as success. A useful repair must also improve native service through learned selection
+relative to uniform readout and a genuinely trained uniform comparator. Its untested causal
+story is a conjecture, not the B06 explanation. The strongest alternative is that state-based
+high-level selection adds little for this S1 task, while local feedback/context/optimization
+carry the useful learning. This is a material new investment decision: ask a focused Pro
+follow-up before selecting or implementing a new comparison, with no automatic new fit.
+
+**Cost and recovery.** U runner body3527.911886596s=58.798531443min; native admission→exit
+60.556075621min includes startup outside the body. User/system CPU3267.871510/363.116530s;
+process-lifetime peak RSS1914000KiB(1959936000bytes), CUDA allocated/reserved peaks
+594044928/1184890880bytes. Shared simultaneous node occupancy and peak scratch are unmeasured.
+Runner excluding-summary output53754459bytes and later fully collected57188184bytes are
+point-in-time byte counts, not peak scratch. U being slower here despite less high-level and
+evaluation work does not identify algorithm speed or shared-node resource causes.
+
+B06 total2fits/720000train+96000eval=816000transitions,1440training/192evaluation episodes;
+M/U runner bodies53.094656372/58.798531443min, sum111.893187816min. Preparation, checks, collection,
+analysis and publication are additional unmeasured support, not zero. Cumulative B01–B06 cost
+is11started fits,3.96Mtrain/753280eval, approximately587.406440runner minutes plus support and
+the recorded pre-effect launch refusal. Two M/U training blocks remain exploratory;32nested
+worlds, six panels and deterministic identity checks do not increase training n.
+
+U bulk is retained at `hmasd-wsl-node:/home/wu/hmasd-worktrees/complementary-skill-b06-20260923/runs/complementary_skill_learning/b06_u_260923961_c23363a5a/`
+and `/home/fires/.codex/worktrees/5916/hmasd-wsl/runs/complementary_skill_learning/b06_u_260923961_c23363a5a/`.
+Both copies were hash-verified. Compact config/native records are versioned; the original
+large summary, checkpoints and prediction/training streams remain outside Git, unchanged.
+
+| File | Bytes | SHA256 |
+| --- | ---: | --- |
+| `admission-preflight.json` | 772 | `d0651604fdb434c29fbfa9bc367abb44aaae4fcfe05b884eda91c4d7d64cfc80` |
+| `auxiliary_predictions.jsonl` | 2464911 | `446e499eb694d11d62490fb8be5d1930b1b726cbfe77e615f740faa070b711e4` |
+| `config.json` | 650 | `a62bca4813252c7d8c5abcb90ffcf72391b5de9652570578674e67b28b24c06f` |
+| `final.pt` | 26931903 | `83517bd37b17cdfd3e731a02d21b3f8f7d4abb06e738a7aa2d2f2cae64abd330` |
+| `initial.pt` | 23750333 | `80044745af3ce621112d56f3d8ce64acec414ba904fd53abf4c8a52c50e850b4` |
+| `launch-manifest.json` | 4323 | `a10f7fa3bf2c7f00c9d1450f2aee2b0f4b51109c6830d94622d22a39b2d049ab` |
+| `launch-status.json` | 2621 | `022a4005085ef4d871a27e212a80516fb1b28f30f1d54a1b5b199959e648b62c` |
+| `process-exit.json` | 550 | `857ae5016ab638124032cfe467aebdd7cefc661f936a8dd7d0be66bd9e27d798` |
+| `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `summary.json` | 3433498 | `3f48db9c9b9553a619028759bea927d1740b04f94387e5aa16163f8514b8c7c5` |
+| `training.jsonl` | 598623 | `1b3e73b59c942c384a1e6f77dea91e34525aed5125af721f0626aadb0cfacfd7` |
+
+After full readback and verified retention, source snapshot`f12612d6274b4cb8bda4e855c8d2ae99`
+passed native GC preview and was removed by exact-snapshot apply. Outputs, claims, authoring
+worktree and published source remain. U READY event`52529a957e3e39b1583c2ec9`, wake
+`314ff01e-de6d-4bbb-bba6-2003f118ba7c`, was consumed by generation56→57 after the complete
+reading. No research process or accepted Pro request remains outstanding from B06. Publish
+this material result and its reusable scope limitation to the owned main standing/background;
+continue the scientific decision locally without messages to another task.
+
+## Pro question 2026-09-23 high-entropy-intervention-after-bank-reversal
+
+Conversation: reuse the current direction conversation through its locally retained Jev
+operation; private address remains outside shared records.
+
+**Question and decision.** B06 has now completed with the prewritten learned-high bank-value
+prediction reversed, while both M and genuinely trained uniform-high U learn useful service.
+The preceding complete training-recurrence advice already supports ending unchanged M/U
+replication on this outcome. The new decision is whether to invest in a targeted removal of
+the high-level entropy incentive, or whether a simpler context baseline or stopping the
+current S1 route is more informative. Challenge the proposed investment below; do not assume
+that every completed batch deserves another. This is a scientific route/hypothesis decision
+under constitution section5, not another engineering acceptance or per-batch approval.
+
+**New evidence and current explanation.** Read the full B06 entry immediately above, including
+its32-world signed results, both learning panels, adverse service/height cases, actual pairing
+checks, complete cost and recoverable artifact identities. Source execution was
+`c23363a5a71932f037fa0274750fa1c150b9a812`, each arm360k at fixed N6/k10, scenarioS1 with50users.
+The two actual paired initializations/streams are matched and differ from B04. B06 final
+uniform M/U J=.441924910082/.454199255637; primary Delta=−.012274345556J/−1.472500users,
+12/20J signs and8/24service signs. Lower M height penalty in32/32 worlds saves+.007980862538J,
+but coverage contributes−.020615J. Both M/U uniform learning J/users are32/32positive; M-own
+also learns in32/32. A=M-own−M-uniform=−.003891492064J/−.6604375users; original
+Gamma=M-own−U-uniform=−.016165837619J/−2.1329375users, worst service−10.120 at1700203.
+
+Keep B04's primary+.035434871140J/+1.843375users and negative greedy Gamma separate from
+this new reversal. Both blocks have lower M height penalty, not repeated bank/service gain.
+B05 fixed-bank stochastic S improves old greedy O but not uniform R: S−R mean
+−.000470478212J/+.068265625users, prewritten no-old-R0 sensitivity−.001850778453J/−.034333333users.
+That0fit study cannot add training n or reopen a failed training prediction. B03's G−D uniform
+reversal and B01 P's service losses also remain contrary evidence for unmodified auxiliary
+recipes. B02 removing low discriminator rewards (.5→0) lost .124783uniform J despite useful
+own learning: it does not identify discriminator semantics, but argues against casually
+combining reward removal with a new context ablation.
+
+The actual B06 M coordinator has lambda_h=.07. Its final logged conditional team/individual
+entropy is1.714147567749/1.784518957138,95.6684%/99.5959% of ln6; training discriminator
+accuracies .259000/.301833 are not held-out skill usefulness. These averages do not establish
+independent-uniform joint conditionals, entropy-gradient domination or a diagnosed cause of
+B06. Native high-level loss sums sampled team and individual entropy factors with coefficient
+lambda_h; low-level lambda_l=.05 is separate. Both arms have high raw-action saturation
+(~.782/.785), which is another shared unresolved training property, not a demonstrated high-
+level failure cause. U has genuine trained recurrent low-level feedback; it is not skill-free.
+
+**Tentative action to criticize, not an execution contract.** My current preference is to
+consider one direct high-level-entropy intervention before concluding that this S1 learned-
+selection opportunity lacks a worthwhile feasible test. Proposed arms: E retains the same
+learned .9pi+.1/6 training law but sets only lambda_h=.07→0; M retains .07; U uses independent
+uniform team/individual labels with0coordinator updates and full low/discriminator learning.
+Keep architecture, actor/critic information, N6/k10/H500, clip execution, low-level lambda_l,
+native mixed rewards, detached heads and all actual initialization/private/sampler pairing.
+Use a fresh single training block,360k per arm, with no inherited old U endpoint as its paired
+control. The .1 uniform mixture floor remains, so zero entropy incentive does not mean
+no exploration. No schedule/coefficient grid or extra optimizer epochs is proposed.
+
+Unlike B06's greedy own, this new question concerns a learned stochastic selector S executing
+the trained .9pi+.1/6 law versus independent uniform R. Tentatively read initial/final S/R on
+both E/M and initial/final R on U, fixed32worlds/H500 and prospectively fixed random innovations:
+10panels,160000eval transitions/320episodes. A single fixed realization is a conditional
+reading, not the expectation over selector randomness. The B05 four-stream evidence makes
+this limitation material; advise whether the new decision warrants extra fixed streams or a
+smaller, differently framed design before any contract is frozen. Do not silently inherit
+B06's greedy Gamma definition for S or rewrite B04/B06 after the fact.
+
+The native primary use question would be E-S versus genuinely trained U-R J and service;
+E-S versus M-S isolates the incentive-change package on the same learning block, while
+within-bank E-S versus E-R tests whether the learned readout has any conditional use. The
+working prediction is reduced conditional entropy with better learned-selector native
+service; lower entropy alone, or better E bank with no S-over-R use, would fail that full
+explanation. Neither one new block nor these correlated contrasts establishes a mechanism.
+Ask whether all three fits are needed for the decision, or whether this is unjustified rescue
+of a recipe with little task-relevant high-level opportunity. I have not established the
+entropy mechanism or selected a new source, seed block, evaluator or run.
+
+**Strong alternatives and purpose.** A fixed-context vs random-context learning comparison
+could ask a simpler question about what useful conditioning contributes. Merely setting6labels
+to1 alters FiLM parameter shapes; holding labels constant while retaining mixed discriminator
+rewards alters target semantics/exposure; deleting those rewards adds the B02 objective
+confound. A competent ordinary recurrent baseline must name these differences rather than
+claim a pure skill ablation. Agent-count B10's fixed opening assignments are useful frozen-
+deployment evidence but do not answer this new training question or make another DM's result
+our replication. An unchanged third M/U pair, another B05 stream, or a snapshot gradient
+measurement alone would not test whether a modified incentive produces native service.
+Stopping this S1 route after useful negative constraints is a legitimate choice if none of
+these observations is worth its cost; do not confuse that investment judgment with proving
+all skill learning futile. No new architecture or predetermined number of ideas is owed.
+
+**Prospective cost and exposure.** Consultation adds0fits/0environment transitions. The tentative
+three-arm action would add3started fits/1.08Mtrain+160keval=1.24Mtransitions, with4/4/2panels
+and2160training/320evaluation episodes. The observed B06 sum was111.893188runner minutes for
+2fits including96keval; three fit bodies may be on the order of168minutes by rough extrapolation,
+not a time/resource guarantee. Conditional-law instrumentation, testing/review, staging,
+collection and publication are additional unmeasured support. A two-fit alternative is720k
+train plus its explicitly justified evaluation; a zero-fit diagnosis cannot be called new
+learning. Prior11fits/3.96Mtrain/753280eval/~587.406440runner minutes do not create an obligation
+to continue. No confirmation, extension, tuning sweep or result-bearing execution is currently
+selected; the DM will record the actual fixed scope after advice if an action is worthwhile.
+
+**Context and source precedence.** All paths marked source_sha use the full question commit
+supplied in the transport message. Other named sources retain their own full revisions.
+
+- Current governance at source_sha: `docs/project/OPERATING_CONSTITUTION.md` sections1–5,7–8.
+  The owner authorizes independent DM scientific selection and publication; our pause is
+  lifted, lead remains `Codex DM (independent session)`. No App cross-task message is requested.
+  Pro advises; it grants no permission, new approval flow or scientific acceptance.
+- Current methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections
+  Explore an idea, Update the working explanation, Comparators and MARL information,
+  Statistics, Cost and exposure, Pro; `.agents/skills/hmasd-research-engineering/SKILL.md`,
+  Core versus experimental, Checks and review, Publishing direction results. Use these for
+  causal scope, competent comparator and full-work cost, not an engineering certification.
+- Shared background at `d2e34d45c724c4248e5966d6c323afdda02b31e9`:
+  `docs/research/RESEARCH.md` topic3 and Current research plan paragraphs on high-level entropy,
+  random/fixed contexts, B02/B04/B05 and agent-count B10. This informed the proposed narrow
+  intervention and comparator caveats, but is revisable understanding, not a required answer.
+  Our current B06 complete result above supersedes that index's old pending-B06 status.
+- Direction evidence at source_sha: this NOTES entry `B06 complete; learned-high bank advantage
+  reverses while both arms learn`, preceding complete M and U-admission entries for actual
+  pairing/retention, `Training recurrence advice adopted; fixed B06 M/U and L0`, and the full
+  prior `Pro question 2026-09-23 training-recurrence-after-b05` Answer. Also the complete B01/B02/B03/B04/B05 entries named in the preceding
+  result reasoning, for supporting/contrary evidence; no recursive full history preload.
+- Frozen B06 engine/source at `c23363a5a71932f037fa0274750fa1c150b9a812`:
+  `experiments/candidates/complementary_skill_learning/b06/runner.py`,
+  `experiments/candidates/complementary_skill_learning/b04/runner.py`,
+  `experiments/candidates/complementary_skill_learning/b04/learning.py`, and `hmasd/agent.py` coordinator D2 update around the entropy loss.
+  `runs/complementary_skill_learning/b06_m_260923961_c23363a5a/config.json` and
+  `runs/complementary_skill_learning/b06_u_260923961_c23363a5a/config.json` and their native
+  manifests/status at source_sha document executed identity.
+  Raw large summaries/checkpoints are externally retained at the exact paths/hashes above,
+  not silently available via GitHub. If unavailable to you, distinguish the DM's verified
+  readings from your own direct byte-level reading; do not demand a new fit or claim that
+  you independently reran the checks. Historical frozen B04/B05 contracts stay unchanged.
+
+**Return.** Give a source-grounded scientific recommendation for this one investment decision.
+State what B06 strengthens, weakens or leaves unresolved; the strongest explanation that
+competes with the entropy story; whether any currently feasible next comparison is worth its
+cost; and the smallest design that would change that judgment, including native/intermediate
+predictions and adverse-outcome interpretation. A simple-model analogy is useful only if its
+mapping and missing MARL coupling clarify this decision. Prefer primary sources for any
+external factual claim; no literature ceremony is required. Preserve sign reversals,
+training-vs-deployment distinctions and the two-block exploratory scope. Explicitly challenge
+my preferred proposal if needed and return MATERIAL_DISSENT: yes/no. No automatic additional
+question, fixed idea count, new record type, confirmation or experiment is requested.
+
+Write only in the empty `### Answer` subsection below on branch
+`codex/complementary-skill-learning`, target
+`docs/research/candidates/complementary_skill_learning/NOTES.md`. Read reasoning at the pinned
+source_sha, but fetch the latest target file and use its actual blob SHA when writing.
+Preserve every other byte; stop on overlapping edits. On success return the actual answer
+commit. If GitHub writeback fails, return the complete answer in chat, not only a SHA, link,
+receipt or status. Name consequential sources actually read and decision-critical gaps.
+Do not execute code, train, evaluate policies or edit any other subsection/file.
+
+### Answer
