@@ -18668,3 +18668,342 @@ that planned work has occurred; actual started/completed fits and exposure will 
 the runner's outputs. No B18 scientific result, final model or learning claim is available at
 this boundary. N5/N7's four fixed signs, each arm's own learning, N6 deployment cost, adverse
 worlds and the no-extension rule remain the selected interpretation contract.
+
+
+## 2026-09-24 — B18 technical failure: paired endpoint missing, fixed-N6 own learning retained
+
+The fixed B18 pair is incomplete after a native SIGSEGV. This is a technical failure, not
+a failed scientific prediction, a valid M−F comparison, or permission to restart an arm.
+F completed its predeclared45 updates and all10 initial/final panels before M began. M's
+last persisted training record contains8 completed updates and its5 initial panels; it has
+no learned endpoint. The separate runner/supervisor exit witness supersedes stale running
+labels in the interrupted JSON. The process is gone and no scientific worker was restarted.
+
+### Terminal operation and trustworthy frontier
+
+Scientific source remains `0f4671475c275db52abc19219d42b4fe9ee664fa`, seed1004101, object
+`s1_ordinary_roster_training_b18`, tag `s1_ordinary_roster_training_b18_b1_s1004101`.
+The admitted operation is preserved in the [manifest](../../../../runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/launch-manifest.json).
+Its [exit witness](../../../../runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/process-exit.json)
+records signal11/exit−11 at epoch1790273351.2847428; admitted runnerPID590142 and supervisor
+identities agree with the manifest. The final launch-status observation is consistent and
+both processes are absent. There was no Python traceback: stdout and stderr are empty.
+
+The batch summary updates an arm's aggregate only when run_arm returns. Its M
+`fit_started:false` is stale: M's own persisted summary and eight training rows show
+`fit_started:true`, nonzero parameter movement,64,000stored training team steps and17,250
+actual actor plus17,250critic calls. **Two fits started; one fit completed.** An independent
+Reviewer checked the source and returned the same frontier. M's last recorded adapter,
+after rollout8, successfully changed N6→N8 with all parameter/optimizer/normalizer/global
+and private sampler RNG preservation checks true. No next completed rollout is recorded.
+
+Reset scenes accumulate in memory and are written at the end of training or in the Python
+exception handler. Signal11 bypassed those paths. F's45 reset scenes are retained; M's
+reset-scene NPZ is absent, including its earlier completed episodes. Thus the promised
+common-N6 training-world comparison cannot be verified from persisted M scenes. This is a
+demonstrated persistence limitation; it does not explain why the process crashed. Evaluation
+initial physical worlds and the complete F/M initial trajectories are retained and checked.
+
+### Read-only crash investigation
+
+The exact WSL CaptureCrash dump was found using the documented default
+[WSL crash-dump location](https://learn.microsoft.com/zh-cn/windows/wsl/wsl-config).
+The core is retained privately, never staged as a repository result or uploaded externally:
+
+- Native: `/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1790273302-590142-_home_wu_.local_share_uv_python_cpython-3.10.21-linux-x86_64-gnu_bin_python3.10-11.dmp`.
+- Local: `/home/fires/.codex/worktrees/7fef/hmasd-wsl/temp/agent_count_generalization/b18_private_core/wsl-crash-1790273302-590142-_home_wu_.local_share_uv_python_cpython-3.10.21-linux-x86_64-gnu_bin_python3.10-11.dmp`.
+- Size: 4,338,720,768bytes; SHA256 `c21e942e47850525ad992344b2a8a7923bfaf71302ea5f443c2bbc9c34f52998`; native/local copies match.
+
+The independent Reviewer reconciled the interpreter before accepting symbols. The venv
+python and canonical CPython3.10.21 are the same inode and SHA256
+`ca420bd4614ae7757b4cd4938b3c663e98d2b631bda518610071d9a4ca0b509e`.
+The core-resident ELF header and GNU build-ID note match the executable, build ID
+`afb5e1790bd84db7ed2c50d21b86fd33a96784bf`. GDB's generic executable warning persists;
+the matching core build identity supports CPython symbols. NumPy's build-ID note was not
+resident in the dump and could not be independently matched. The libcuda build-ID mismatch
+is retained as a warning, not adopted as an explanation of the crash.
+
+The core's faulting main LWP is590142, matching the admitted PID and fault IP
+0x6133851bb4fc. WSL CaptureCrash independently names590142. The kernel's separate fault
+line names597143; that relationship remains unresolved. No PID identity is silently replaced.
+
+From frame/code metadata and captured line tables, the Reviewer reconstructed this Python
+stack, innermost first, with project paths pointing to the admitted source snapshot:
+
+| Function | File and line |
+| --- | --- |
+| `_clip` | NumPy `core/_methods.py:99` |
+| `_wrapfunc` | NumPy `core/fromnumeric.py:59` |
+| `clip` | NumPy `core/fromnumeric.py:2169` |
+| `_compute_reward` | `envs/pettingzoo/scenario1.py:98` |
+| `step` | `envs/pettingzoo/uav_env.py:303` |
+| `step` | `envs/pettingzoo/scenario1.py:185` |
+| `step` | `envs/pettingzoo/env_adapter.py:224` |
+| `step` | `experiments/candidates/agent_count_generalization/adapter.py:83` |
+| `collect_complete_episode` | B18 `runner.py:223` |
+| `run_arm` | B18 `runner.py:792` |
+| `run_batch` | B18 `runner.py:1076` |
+| `main` / module | B18 CLI `:41` / `:47` |
+
+Only whitelisted scientific scalars were additionally read: rollout9,N8,t383,lane13,
+with the step and lane zero-based; run_arm independently agrees. The pending clip caller
+contains `numpy.float64(0.06302368927190827)`, lower bound0 and upper bound1; the wrapper
+agrees, and its inner array is finite zero-dimensional float64. The top frame is in
+`FRAME_UNWINDING`; its cleared max slot is not a missing-argument finding. Its last opcode
+is `CALL_FUNCTION_EX`, and the faulting interpreter instruction is a reference decrement.
+The ninth PPO update had not begun. This localizes the crash to the environment reward's
+scalar SINR clipping call chain and interpreter cleanup, without establishing the original
+corruption cause. It is not a demonstrated failure inside the numerical clipping loop.
+
+The final thread-state check found a pending TypeError whose traceback contains only
+`numpy/core/_methods.py:99` (`_clip`); there is no handled exception. The matched
+executable's PyThreadState_Get located the current thread-state pointer, and its active
+frame equals the previously verified clip frame. The matching
+[CPython exception-unwind implementation](https://github.com/python/cpython/blob/v3.10.21/Python/ceval.c#L4132)
+sets FRAME_UNWINDING; [normal return](https://github.com/python/cpython/blob/v3.10.21/Python/ceval.c#L2262)
+sets FRAME_RETURNED. The supported sequence is TypeError in clip, then exception unwinding,
+then the signal11 reference-decrement fault. An ordinary successful return is excluded by
+this recorded state, but the TypeError's origin and the invalid reference's cause are still
+undetermined.
+
+This inspection reads the existing crash image; it executes no training, evaluation,
+resume, replacement arm or reproduction. Crash-site localization does not identify the
+earlier cause of memory corruption or establish a repair. The exact accepted source and
+all original outputs remain unchanged.
+
+### Independent retained-evidence audit
+
+All47 runner files,1,732,410,668bytes, were copied from the native manifest's output root to
+the matching local runs directory and independently verified by size and SHA256. The final
+inventory below includes the exit witness. Compact runner JSON/JSONL is published; all
+checkpoint/trace binaries remain recoverable on both native and local paths.
+
+The DM's artifact-only NumPy/Torch reader constructs no environment or learner and imports
+no candidate reducer. It checked15 complete panels/360arrays for shape, dtype and finite
+values; independently recomputed native eligible E, served S, eligible-unserved U, per-UAV
+cap10, single eligibility, C=S/50, Q=connected_quality_sum/max(S,1), height penalty
+P=.1(mean(height)−50)/100 and J=.7C+.3Q−P=N*scalar_reward. Per-world J/returns, service
+arrays, current/next state-observation continuity and raw-action clipping agree. All
+same-N initial states/observations and actual UAV/user positions agree across F0/F45/M0.
+F/M's five entire initial traces match exactly:120array comparisons. Frozen evaluation
+parameters/normalizers and zero evaluation storage/optimizer calls agree with the saved
+checkpoints and stage-isolation records. These B18 traces contain24arrays and do not record
+termination/skill-flag arrays; no independent flag-array check is claimed.
+
+The three saved checkpoints' parameter/normalizer digests were independently reconstructed,
+including identical F0/M0 and changed F45. All53 persisted training rows agree with their
+arm summaries. Actual minibatch sizes are32, time chunks10, no recorded tails; expected
+N4/N6/N8 calls1500/2250/3000 per rollout agree with observed yields and optimizer deltas.
+F's45 reset-world seeds match3044100+100*r+lane with unchanged reset RNG. Source identities
+match the accepted commit; F's before/after source hashes agree. M has no final source
+hash/complete-study record, so no such missing final check is invented.
+
+Scratch reader: `temp/agent_count_generalization/read_b18_retained_evidence.py` and
+`b18_independent_retained_reading.json`. Its6.987122861s is analysis cost, not new native
+evidence or a fit. Independent Reviewer agreement adds no scientific replication.
+
+### F's predeclared own-learning result, without substituting for M−F
+
+Each N uses its fixed32worlds of500steps, matched across initial/final stages. N5/N7 are
+untrained exact counts for F. The columns below report the full single-instance own-learning
+reading; the N5/N7 M−F joint prediction is unavailable, not evaluated using these increments.
+
+| N | initial J | final J | ΔJ | initial S | final S | ΔS | J-or-S adverse worlds |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 5 | 0.315054287993 | 0.458151388799 | +0.143097100805 | 21.095250000 | 31.691437500 | +10.596187500 | 3/32 |
+| 7 | 0.265426140340 | 0.362015574569 | +0.096589434228 | 17.690500000 | 24.853500000 | +7.163000000 | 2/32 |
+| 6 | 0.291024608686 | 0.419710850504 | +0.128686241818 | 19.448250000 | 28.993437500 | +9.545187500 | 2/32 |
+| 4 | 0.325356606344 | 0.445817945017 | +0.120461338673 | 21.307687500 | 31.103187500 | +9.795500000 | 1/32 |
+| 8 | 0.238383130364 | 0.318798924178 | +0.080415793814 | 16.027312500 | 22.138375000 | +6.111062500 | 4/32 |
+
+All five own-learning means improve in both J and service, including the two primary unseen
+counts. This strengthens the competing explanation that fixed-N6 ordinary local training
+can already provide useful transfer in a fresh instance. It does not decide whether mixed
+training adds use, provide a population training ranking, or establish a pure count mechanism.
+
+Mean component changes preserve contrary accounting: eligible-user gains accompany higher
+eligible-unserved counts and greater height penalties at every N. Neither reducing U nor
+reducing height cost is necessary for these observed own-learning gains. This is descriptive
+native accounting, not a causal intervention or a new mechanism claim.
+
+| N | ΔC | ΔQ | ΔP | ΔE | ΔS | ΔU |
+| --- | --- | --- | --- | --- | --- | --- |
+| 5 | +0.211923750000 | +0.048771771858 | +0.019881055752 | +11.529687500000 | +10.596187500000 | +0.933500000000 |
+| 7 | +0.143260000000 | +0.038988392169 | +0.015389083422 | +7.395937500000 | +7.163000000000 | +0.232937500000 |
+| 6 | +0.190903750000 | +0.045161034257 | +0.018494693459 | +10.468500000000 | +9.545187500000 | +0.923312500000 |
+| 4 | +0.195910000000 | +0.052571263955 | +0.032447040514 | +11.175562500000 | +9.795500000000 | +1.380062500000 |
+| 8 | +0.122221250000 | +0.038922735867 | +0.016815901946 | +6.880250000000 | +6.111062500000 | +0.769187500000 |
+
+The averages are not all-world guarantees. At N5,29/32 worlds improve each of J and S;
+three are adverse. At N7,31/32 improve each quantity but the losing worlds differ, leaving
+two adverse worlds in the union. N6 loses as much4.602users/step in one world; N8 loses
+3.59users/step in one world. All own-learning adverse worlds are retained below. A positive
+service increment with a negative J is a native objective tradeoff, not silently relabeled.
+
+| N | World | ΔJ | ΔC | ΔQ | ΔP | ΔE | ΔS | ΔU |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 5 | 2245502 | -0.014878987462 | -0.024000000000 | +0.005290839008 | -0.000333760835 | +1.424000000000 | -1.200000000000 | +2.624000000000 |
+| 5 | 2245507 | -0.030803292891 | -0.011520000000 | -0.007987285115 | +0.020343107357 | -4.286000000000 | -0.576000000000 | -3.710000000000 |
+| 5 | 2245529 | -0.005013116427 | -0.005920000000 | +0.065544027910 | +0.020532324800 | +1.952000000000 | -0.296000000000 | +2.248000000000 |
+| 7 | 2245724 | -0.004861600812 | +0.010400000000 | +0.031149545398 | +0.021486464431 | -0.478000000000 | +0.520000000000 | -0.998000000000 |
+| 7 | 2245727 | +0.003075570146 | -0.002240000000 | +0.067892856190 | +0.015724286711 | +1.192000000000 | -0.112000000000 | +1.304000000000 |
+| 6 | 2245604 | -0.075211058890 | -0.092040000000 | +0.028277457005 | +0.019266295991 | -3.524000000000 | -4.602000000000 | +1.078000000000 |
+| 6 | 2245621 | -0.067896098161 | -0.091160000000 | +0.033824522223 | +0.014231454828 | -4.340000000000 | -4.558000000000 | +0.218000000000 |
+| 4 | 2245424 | -0.019912680969 | +0.034840000000 | +0.014969214871 | +0.048791445430 | +1.968000000000 | +1.742000000000 | +0.226000000000 |
+| 8 | 2245805 | -0.050071270282 | -0.057400000000 | +0.067361184595 | +0.030099625660 | +0.864000000000 | -2.870000000000 | +3.734000000000 |
+| 8 | 2245816 | -0.066611306919 | -0.071800000000 | +0.023041655346 | +0.023263803522 | -3.496000000000 | -3.590000000000 | +0.094000000000 |
+| 8 | 2245822 | -0.023005756099 | -0.021200000000 | -0.004038459511 | +0.006954218245 | -0.456000000000 | -1.060000000000 | +0.604000000000 |
+| 8 | 2245823 | -0.056235989490 | -0.055520000000 | -0.007280701462 | +0.015187779051 | -2.662000000000 | -2.776000000000 | +0.114000000000 |
+
+All160 paired initial/final world values and their separate component distributions remain
+in F's runner summary and panel JSON. No extra worlds, endpoint, seed, score threshold or
+confidence interval was introduced. Final-only raw scores must not be compared across N as
+a pure size effect: worlds, geometry and physical interactions differ.
+
+### Cost and current scientific decision
+
+Two fits started; F completed and M is incomplete. Persisted lower bounds are:
+- Training: F360,000 + M64,000 =424,000team steps;2,528,000UAV steps;848episodes;53outer
+  updates;26,500batched training policy calls;118,500actor and118,500critic optimizer calls.
+- Evaluation:10F+5M=15panels;240,000team/1,440,000UAV steps;480episodes/resets;
+  7,500batched policy calls;0training storage and0optimizer calls during evaluation.
+- Combined persisted interaction:664,000team/3,968,000UAV steps. This is the file-backed
+  lower bound, not a claim that M did no further work.
+
+The recovered core independently places M in rollout9,N8,step383,lane13 (zero-based).
+By the accepted collector's step-return-then-count ordering, M completed70,141environment
+step returns/417,128UAV-step returns;70,128team transitions had been stored. The current
+lane's physical update had begun but its reward and step return were incomplete. Combining
+F and M gives430,141completed training team-step returns/2,577,128UAV-step returns and
+430,128stored team transitions. With evaluation, this is670,141completed team-step returns
+and4,017,128UAV-step returns. These additions are explicitly core-derived, not newly found
+trajectory files. The ninth rollout's optimizer update had not begun; completed updates and
+optimizer calls remain53 and118,500per actor/critic. No completed M ninth episode/rollout
+or learned endpoint is fabricated from this partial state.
+
+F's measured arm wall is2211.136841533s, scientific-process cumulative user/system CPU
+8937.712889/19.632706s and peakRSS4,266,920KiB at that boundary. These are not final pair
+resources. The admitted process lived approximately2867.9s through its exit witness, including
+WSL crash-capture delay; this is not a clean fit-body timing comparison. Final M CPU/RSS
+and exact extra work are unavailable. Output retention costs1,732,410,668bytes at each
+native/local copy, plus4,338,720,768bytes per private core copy; support work is not zero.
+
+The wake event was fully read and consumed with generation174/wake
+`a12caf7e-8616-4b9c-9d38-81b64388bdfa`/event`521b962121ec255e88e7593a`.
+Rearm returned generation175 without resuming the failed observation; there is no remaining
+live scientific operation or pending Pro. Published main was refreshed at this decision,
+with owner pause still lifted and the lead unchanged. No App task was messaged.
+
+- Strengthened: one fresh fixed-N6 ordinary training instance has positive own-learning
+  J/service means at unseen N5/N7, with the retained contrary worlds. A competent fixed-count
+  comparator remains necessary for judging the value of mixed training.
+- Weakened: any presumption that unseen exact counts alone imply a lack of useful learning,
+  or that useful service gains in this instance require reduced U or height cost.
+- Unresolved: the B18 four-sign M−F prediction, M's own learning and N6 tradeoff, a pure
+  support mechanism, and population-level superiority. B15 stays inconclusive; B17's
+  finite deployment results and local adverse worlds are unchanged.
+
+This accepted batch is closed as technically incomplete. The fixed protocol forbids an
+automatic replay, tail completion or replacement. The read-only crash diagnosis above is
+the completed next technical action; a fresh fit would require a concrete repair/diagnostic
+case and a new prospective scientific decision, not reinterpretation of this failure as a
+negative or a recovered pair. No new scientific run is selected by this collection event.
+
+### Complete runner output identity inventory
+
+All paths below are relative to the B18 run directory. The original JSON status fields are
+preserved even where the process-exit witness and arm-specific records supersede them.
+
+| File | Bytes | SHA256 |
+| --- | --- | --- |
+| `F/checkpoint_00.pt` | 19694959 | `404a6800c7f13ddcad0deaa82f6d802db1f3842468d74edd6fc277d419fe6198` |
+| `F/checkpoint_45.pt` | 19694959 | `518f63dae6c54685828487d77887af975a2da440a2ca1e0b6d7772bff2dcc0f6` |
+| `F/config.json` | 3029 | `95e1bcf3fb327e2ee613e48e1d498901961de1632968f6248a711bb26b74e5c1` |
+| `F/panel_stage00_n4.json` | 15614 | `ae7b63eec1dd344a199191fed8c950a198b67a3d0a41183c0dc9374193cded9c` |
+| `F/panel_stage00_n5.json` | 15606 | `08859d159220f993f40235bff831a291b0bf5015ed9abc6049fcbab868a86435` |
+| `F/panel_stage00_n6.json` | 15635 | `bd1211f2696a84a22a9d15ff7fecb82738f5cf77bf8da84f94185e2b57ce6fff` |
+| `F/panel_stage00_n7.json` | 15637 | `b3dd6d2e961fde2aec309fd40d9c6fecf1abc4aeca04012ea7fece9fda8d0e68` |
+| `F/panel_stage00_n8.json` | 15611 | `a3b5835dd6154ac0fabfdacf66502a50d8d7774765f9664d0f667827d8745770` |
+| `F/panel_stage45_n4.json` | 15604 | `0657466b282692ae75d6cfef1e1aa232f085f364596f38b15e5bb344f8534b8c` |
+| `F/panel_stage45_n5.json` | 15623 | `2fb920bf9afd6957a55163cf2d3ea0c78572682f09b35dbd8a54d29d3ad306a4` |
+| `F/panel_stage45_n6.json` | 15623 | `dbcc767b86848c627f72584b166d937e45ffdb017402102caa5f04ce1c9e5a0a` |
+| `F/panel_stage45_n7.json` | 15655 | `9da2fa7965f2e81e77d548537e941c35f8cf446df609d87ecd370e2d082b561d` |
+| `F/panel_stage45_n8.json` | 15663 | `7fd33f1023842d380642c970d38fa225bbb5328143bb152fd7f8bf922ed5091b` |
+| `F/summary.json` | 3848581 | `b47c660343d72af9639bf45c51645fdf0a29cb5d01253650338f77ca4f380fd3` |
+| `F/trace_stage00_n4.npz` | 79945314 | `55b45b8377a7817626549202e832578d91e27e5ddd1d6d437aacbcdbbac8f657` |
+| `F/trace_stage00_n5.npz` | 95447394 | `12ee778ea1c16713f306038c0e518b4256af475e3023e062ce1ef0ae36cf9418` |
+| `F/trace_stage00_n6.npz` | 110949474 | `90a95d63f2fd9f5538b29249484273f389f603ce2a57dfa5d86112602a783f34` |
+| `F/trace_stage00_n7.npz` | 126451554 | `a389c074005824dc9ed0d28a022d6eea5e696fc8b206af11f31724e13ef1d225` |
+| `F/trace_stage00_n8.npz` | 141953634 | `3217356c26e315196377a28fbac127f7f054cb8ba0a6c8686eab76e8156ef306` |
+| `F/trace_stage45_n4.npz` | 79945314 | `f97fe69aa9a4a9e93e27ddba461b9bfa3cde029d267d0959bd7a8884d0f52e53` |
+| `F/trace_stage45_n5.npz` | 95447394 | `31e2d65fc319aa84d6e35dcfc38efde7abffe0c59d6d04e29b56199b666ae74c` |
+| `F/trace_stage45_n6.npz` | 110949474 | `b9663ed58d542f63094fc69e2cdc0f3f49cc635aead3ed50718793aa9d3a6406` |
+| `F/trace_stage45_n7.npz` | 126451554 | `7cd46c5e396ca81c55f345f9dabe73c5c95b999d7c39cc875934655920e4d9d7` |
+| `F/trace_stage45_n8.npz` | 141953634 | `e81544d09b5bb9fbffc35c95c6a9ec49423ef7baa9a0227b5ae753f17f198edf` |
+| `F/training.jsonl` | 1157688 | `fa50a733dc09d5ddc7e1c41413927d49fe7704390f3304fb3e870e0a0636fbdf` |
+| `F/training_reset_scenes.npz` | 2898270 | `843a45190685c26d7804548773bdd7501487c23210475ff14902076cada208e6` |
+| `M/checkpoint_00.pt` | 19694959 | `404a6800c7f13ddcad0deaa82f6d802db1f3842468d74edd6fc277d419fe6198` |
+| `M/config.json` | 3029 | `33554da84fea2c0aa5fa23b2d09c1c551a70bab77b4a5aa54d4b69cee3b9b212` |
+| `M/panel_stage00_n4.json` | 15614 | `92372e1b044b8466e16dd2d4688f04d68fb3fad9abcac80411df90990effc236` |
+| `M/panel_stage00_n5.json` | 15606 | `fc886db9bc6d82772302b2010053fb1a37b8d66d43afb0a398988f14660b3495` |
+| `M/panel_stage00_n6.json` | 15635 | `541d9243ba06b3d6dc8446eca0a0b2965482462b300511b81f98aec52d71d7f9` |
+| `M/panel_stage00_n7.json` | 15637 | `64f2b115e0e9441230a497676c7e25b8ea32701c1b369195a2056281bbaa2999` |
+| `M/panel_stage00_n8.json` | 15611 | `d9ae8ebf33398262ff336f6fee1b3e1c2189699442e16d3b2d2a1e25402bb568` |
+| `M/summary.json` | 729238 | `4ac17d412a199c75e6cadf0b6917ca3c1beef040c97f5376932460b67488f0e8` |
+| `M/trace_stage00_n4.npz` | 79945314 | `55b45b8377a7817626549202e832578d91e27e5ddd1d6d437aacbcdbbac8f657` |
+| `M/trace_stage00_n5.npz` | 95447394 | `12ee778ea1c16713f306038c0e518b4256af475e3023e062ce1ef0ae36cf9418` |
+| `M/trace_stage00_n6.npz` | 110949474 | `90a95d63f2fd9f5538b29249484273f389f603ce2a57dfa5d86112602a783f34` |
+| `M/trace_stage00_n7.npz` | 126451554 | `a389c074005824dc9ed0d28a022d6eea5e696fc8b206af11f31724e13ef1d225` |
+| `M/trace_stage00_n8.npz` | 141953634 | `3217356c26e315196377a28fbac127f7f054cb8ba0a6c8686eab76e8156ef306` |
+| `M/training.jsonl` | 199774 | `24a8e66192ec14a70a317338cd4d018fc76a66585e10707be9bdc1d808c4f95d` |
+| `admission-preflight.json` | 770 | `da6e3c6481c04600097c9fcc81149d03cfc88660afe0ed431e074e7010285d28` |
+| `launch-manifest.json` | 4111 | `00e84cd6c5eac34e260f24b1c00a4a4168a4d26de12cfd77a3f8758b9acc7dd0` |
+| `launch-status.json` | 633 | `53ab64fdf653a8c1525dce26ada0ae2093467ee7e865a3be67038ddd3f984b89` |
+| `process-exit.json` | 546 | `e29cd53036a77769b86e1ca63f23e820a0c19e169b6f0875709408a50633b360` |
+| `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `summary.json` | 3638 | `44aba13a4b26c32adcc3f540bef618bb147771470ddd72070a3968d6122d8a16` |
+
+
+### B18 exception-message refinement and one no-fit runtime check
+
+The final bounded Reviewer read recovered the pending TypeError message exactly:
+`'int' object is not callable`. `curexc_value` is an unnormalized string, not an
+exception instance with an `args` tuple. Only that short message was read. Together
+with the verified `_clip` line99/CALL_FUNCTION_EX frame it establishes a callable-type
+failure during the clipping call followed by SIGSEGV in exception cleanup. It does
+not identify the callable, establish an overwritten `um.clip`, or identify the
+underlying corruption.
+
+Prospective technical follow-through: the DM will run exactly one fresh subprocess
+on the same native interpreter and NumPy, executing
+`np.clip(np.float64(0.06302368927190827), 0, 1)` once. It will report the returned
+scalar/type, Python and NumPy identities, and success or exception; it imports no
+project environment or learner, starts no fit, performs no evaluation or state replay,
+and changes no installed library or accepted B18 input. A normal return narrows the
+failure to circumstances absent from this fresh scalar check; it cannot validate the
+long-running training process or prove a repair. Immediate failure would instead
+provide a minimal runtime reproduction. Stop after the single check; do not turn
+success into a replacement arm, repeated stress loop, or scientific retry. This is
+bounded technical diagnosis of the recorded crash, with zero fits and zero native
+team/UAV environment steps. The original B18 terminal decision and costs stand.
+
+The one check completed normally: NumPy 1.26.3 returned
+`numpy.float64(0.06302368927190827)`, exactly equal to its finite input, with exit 0
+and empty stderr. The canonical Python 3.10.21 executable SHA256 was again
+`ca420bd4614ae7757b4cd4938b3c663e98d2b631bda518610071d9a4ca0b509e`, matching the
+crash-symbol identity. Native NumPy path:
+`/home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/__init__.py`.
+Whole SSH/check wall was 0.921104565 s; the reported 0.016966804 s body interval
+includes executable hashing and is not a measurement of the clip call alone.
+One scalar call, zero fits, zero environment steps; no second trial was run.
+The exact command source and output remain in
+`temp/agent_count_generalization/b18_exact_scalar_check.json`.
+
+This did not reproduce the crash in a fresh NumPy-only process. It weakens an
+immediate failure of this finite scalar under the installed interpreter/NumPy alone;
+it leaves process history, imports/extensions and invalid-reference origins
+unresolved. It does not prove a NumPy defect, a roster defect, a hardware fault or
+that a future training run would succeed. No code repair or new scientific batch is
+justified by this check alone. The meaningful boundary is the published incomplete
+B18 reading and retained fixed-N6 learning; the missing M endpoint remains missing.

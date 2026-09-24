@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "object_id": "s1_ordinary_roster_training_b18",
+  "direction": "agent_count_generalization",
+  "tag": "s1_ordinary_roster_training_b18_b1_s1004101",
+  "seed": 1004101,
+  "launch_sha": "0f4671475c275db52abc19219d42b4fe9ee664fa",
+  "admission": {
+    "schema_version": 1,
+    "direction": "agent_count_generalization",
+    "sha": "0f4671475c275db52abc19219d42b4fe9ee664fa",
+    "command_sha256": "ff8ac2e4018c0cb3029cd2a03baeb13339f9a67db1c61075d9161172fbcb650a",
+    "parent_pid": 590141,
+    "child_pid": 590142,
+    "accepted_at_epoch": 1790270483.3829212
+  },
+  "status": "running",
+  "arm_order": [
+    "F",
+    "M"
+  ],
+  "arms": {
+    "F": {
+      "status": "complete",
+      "fit_started": true,
+      "counts": {
+        "fits": 1,
+        "training_team_steps": 360000,
+        "stored_team_steps": 360000,
+        "training_uav_steps": 2160000,
+        "training_episodes": 720,
+        "updates": 45,
+        "training_policy_step_calls": 22500,
+        "panels": 10,
+        "evaluation_team_steps": 160000,
+        "evaluation_uav_steps": 960000,
+        "evaluation_episodes": 320,
+        "evaluation_resets": 320,
+        "evaluation_policy_step_calls": 5000,
+        "evaluation_storage_calls": 0,
+        "evaluation_optimizer_calls": 0
+      },
+      "summary": "F/summary.json"
+    },
+    "M": {
+      "status": "running",
+      "fit_started": false
+    }
+  },
+  "source_hashes_before": {
+    "experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/runner.py": "893416e222e26f11b5bb206508e3eabb553ede49fd75706b9afa631d4962084a",
+    "experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/__init__.py": "6e575d69fc128d32084d2ac67a6472566133b8384e341b4c04840363f5e87f7a",
+    "scripts/run_agent_count_ordinary_roster_training_b18.py": "159111b7c8a7cb7ed566ab948d48995eb098d305a9d5a749848f8ce85b9d4795",
+    "experiments/candidates/agent_count_generalization/local_ordinary_b16/runner.py": "b693393b8c0298cfe6b51483f7a937d94f506f86f17c932f842f697e0974b4f5",
+    "experiments/candidates/agent_count_generalization/bounded_confirmation_b15/runner.py": "861ebd6362baa99eeea0a04fbce04195d189f7fb71e52eec294d2dbc399335f7",
+    "experiments/candidates/agent_count_generalization/action_law_b03/runner.py": "d9ed78a5dd6faeb1017747d46a428dc61d40929133dd17478348841bb1a03ddb",
+    "experiments/candidates/agent_count_generalization/training_condition_b11/runner.py": "beb7c1dbb9ddb8c78f989c630b0bb66de4703a861d99ac6d5c3a1ea34d940abb",
+    "experiments/candidates/agent_count_generalization/configuration.py": "dd2f03dfcebf71e28d43cc5fe58b0808815fc8c93934d356a8cf777cd6c6bd24",
+    "experiments/candidates/agent_count_generalization/models.py": "a92cd142a1b310fce404e52abe9728d54834e4193a281b79b969c9779d082e32",
+    "experiments/candidates/agent_count_generalization/adapter.py": "b59d7028771b5acc4148f7dd90b5480c3143ae88580bb1b8154944831e2c0fbc",
+    "hmasd/agent.py": "4ee01ccc80322c0bd22b02cbe45cf4134a3b7ca2a2071c3aec8907d3b3c2ebb0",
+    "hmasd/utils.py": "24018171879485afd5547e03b052333f51986ac1ee57cca6354fc8c8c50c6d47"
+  },
+  "wall_seconds": 2211.272568549961,
+  "counts": {
+    "training_uav_steps": 2160000,
+    "stored_team_steps": 360000,
+    "evaluation_storage_calls": 0,
+    "training_episodes": 720,
+    "updates": 45,
+    "evaluation_team_steps": 160000,
+    "evaluation_episodes": 320,
+    "evaluation_policy_step_calls": 5000,
+    "panels": 10,
+    "training_policy_step_calls": 22500,
+    "evaluation_optimizer_calls": 0,
+    "evaluation_resets": 320,
+    "evaluation_uav_steps": 960000,
+    "fits": 1,
+    "training_team_steps": 360000
+  }
+}
