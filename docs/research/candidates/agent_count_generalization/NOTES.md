@@ -13845,3 +13845,56 @@ analysis-test SHA256 is
 Source remains to be committed/pushed and freshly admitted on the actual node.
 At this acceptance boundary there are0 B15 scientific fits/panel exposures;
 next action is the fixed first cell b1_h6, not an additional performance pilot.
+
+## 2026-09-23 — B15 first fixed cell admitted with observation adopted
+
+The accepted implementation, fixed reducer and unchanged adopted claim were
+committed and pushed as
+[`e0a20add999ded53943f99df15f596822e6c13dc`](https://github.com/CartmanFatass/My-paper-code/commit/e0a20add999ded53943f99df15f596822e6c13dc)
+before any production initial evaluation. The actual node fetched this published
+source and current main`ea88eae3e97ff0ef77bba392077143ee2088201e`; all12 declared
+source-path hashes matched the accepted local bytes. Canonical and freshly
+published owner-pause/confirming-state/lead projections agreed. Native fetch still
+reports the previously observed unrelated missing historical commit-graph object;
+fetch returned0 and the requested published source blobs and controls were verified.
+No shared Git history, other direction or unrelated process was changed.
+
+First fixed cell `b1_h6`, seed994101, tag
+`s1_bounded_confirmation_b15_b1_h6_s994101`, was admitted once at
+2026-09-24T02:02:26.831610Z (2026-09-23 PDT). The configured agent-task supervisor
+invoked the native admission kernel, which retained the detached source snapshot
+and scientific process. Actual-node physical/effective available memory was
+14,591,041,536 bytes (13.588966 GiB), above the4 GiB floor. Admission and live
+runner/supervisor identities were checked independently of supervisor submission.
+
+Preserved native evidence, copied byte-for-byte with matching SHA256:
+[launch manifest and original operation reference](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/launch-manifest.json),
+[fresh actual-node preflight](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/admission-preflight.json),
+and [actual fixed configuration](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/config.json).
+The operation remains on wsl_4070 at
+`/home/wu/projects/HMASD/.git/hmasd-admission/521f87fdc02cb4339c5fddc09758ff2e022e911eface4e665442342a86b48fd9.json`;
+runner463675/supervisor463674 use the manifest's recorded boot/start identities.
+No replacement or retry was launched.
+
+First scientific progress read confirms seed994101 in config/learning construction,
+actual training lanes2994100–2994115, N8/N6 bases1945800/1945600 and fixed0/45
+evaluation order. Native H6 starts from fresh owned parameters/empty optimizer
+state, not copied learned weights; initial sampler seed1114871436577968650 is
+recorded. All12 run-reported source hashes equal the pre-launch accepted hashes.
+Initial0 N8 then N6 evaluation completed32,000 team steps/64 episodes, zero
+optimizer/storage calls. All stage0 isolation fields, including actual before/after
+learner, optimizer, global/sampler RNG, runtime, buffer and training environment,
+match. At the first read, rollout1 had collected8,000 training/stored team steps,
+48,000 UAV steps,16 episodes and no completed update yet. This is partial exposure,
+not a completed fit, final-panel result or scientific acceptance.
+
+Detached observation was registered and then adopted after its first native status
+probe: generation124, observer PID2957287, window1500 seconds, job
+`launch-s1-bounded-confirmation-b15-b1-h6`. The drain returned no pending event and
+both native identities running/consistent. It observes the same operation on
+completion, failure or bounded checkpoint; a future wake consumes/rearms only its
+returned generation/wake/event IDs and never repeats this launch or the completed
+Pro send. There is1 started/0 complete B15 fit, five fixed cells unlaunched, and no
+pending Pro. Next is complete collection/verification of b1_h6, followed by the
+already fixed b1_set and remaining block order independent of observed scores,
+subject only to the stated genuine technical/resource/owner-stop conditions.
