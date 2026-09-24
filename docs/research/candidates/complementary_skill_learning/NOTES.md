@@ -9207,3 +9207,32 @@ Verified remote/local artifact inventory (bulk remains outside Git):
 | `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
 | `summary.json` | 374485 | `6335f37979208dee748ba870a513790cbf4037443ad2ec15b95c8ff5a5572309` |
 | `training.jsonl` | 1479450 | `f72bd690a28563c8556e41375873ec65cd40ae38d563d00704e4b2b03a048201` |
+
+
+## 2026-09-24 — B08 U admitted; final fixed cell observed
+
+Full E reading and compact records were published and remotely verified at
+60580824895c992345adaddd408b5a9a95ead420 before the fixed U dispatch. U was sent once
+through the configured supervisor/kernel on unchanged execution sourcec9217f0ae,
+seed260924041. An early native-status read arrived while source/admission preparation was
+still running and the output reference did not yet exist. The same outer operation later
+finished0; no request was resent. Native acceptance at2026-09-24T14:27:37.951507Z is
+retained in the [manifest](../../../../runs/complementary_skill_learning/b08_u_260924041_c9217f0ae/launch-manifest.json)
+and [native status](../../../../runs/complementary_skill_learning/b08_u_260924041_c9217f0ae/native-status.json),
+with the actual claim, source snapshot and process identities.
+
+Native fresh control used main9c324551295df847a1a4e1a777f59430ae0aa2ed. Local refresh
+confirms lifted pause, the same exploring lead and unchanged operating/compute controls.
+Actual-node physical/effective memory was13859889152bytes against4294967296required;
+cgroup headroom was unavailable. Manifest, preflight and config were recovered with exact
+byte-count/SHA256 checks. M/U configs differ only in arm and declared training law; Spec,
+source and adapter/engine identities match. U has independent uniform team/individual
+labels, no high updates and no reference input. Actual tensor/trajectory/update acceptance
+awaits the complete output.
+
+The detached observer has actually adopted the native U claim: generation82,
+job`launch-csl-b08-u-c9217f0ae`,1500s window/30s interval/20s timeout. Observation at
+2026-09-24T14:29:02.598566Z reports accepted/running, consistent identities,0errors and
+no exit witness. No pending events remain. B08 started fits are3/3: M and E accepted,
+U running its fixed360ktrain+80keval. P and the full block decision remain open until U
+is read. No additional fit, worker restart, Pro resend or other-task message occurred.
