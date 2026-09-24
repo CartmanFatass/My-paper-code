@@ -1,0 +1,11 @@
+{
+  "claim_key": "24b2d1be41134b7b5df562d54c06e46644fc7a8e915a845d48cd30724fbe6015",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/24b2d1be41134b7b5df562d54c06e46644fc7a8e915a845d48cd30724fbe6015.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/complementary-skill-b08-20260924/runs/complementary_skill_learning/b08_e_260924041_c9217f0ae/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/24b2d1be41134b7b5df562d54c06e46644fc7a8e915a845d48cd30724fbe6015.json",
+  "pid": 563154,
+  "runner_pid": 563155,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-24T13:10:53.735373Z"
+}

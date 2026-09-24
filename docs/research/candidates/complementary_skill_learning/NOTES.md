@@ -8945,3 +8945,265 @@ Fresh main6f29d276baa205c5eca03e665360020657d21b90 retains lifted pause and the 
 The exact generation/wake/event were acknowledged and rearmed79→80 for the same operation
 with1500s window. M remains accepted, E remains incomplete, and fixed U remains unstarted.
 No worker restart, extra fit, Pro resend or other-task message occurred.
+
+
+## 2026-09-24 — B08 E complete; the entropy incentive increment reverses
+
+**Reading and bounded update.** E completed the fixed second fit at source
+`c9217f0ae5b32aa2a13e228cc87899f545a0111b`, with 360000 training transitions and
+160000 evaluation transitions. Its lower conditional entropy recurs on the new M pool,
+but the predicted positive incentive increment does not: D=E-S−M-S is
+-0.0140048154120 J / -0.433406250000 users.
+B07's +.040099335296 J/+1.06084375 users was a bounded first-block result, not a stable rank.
+This actual second-block reversal weakens zero high entropy as a reproducible improvement
+over M. It does not yet settle P=E-S−U-R, because the fixed U cell has not started.
+Complete U as prospectively specified; do not substitute an old U, select a new stream,
+extend the horizon or buy a rescue fit from this result.
+
+E still actually learns from its matched initialization. G_E remains negative, and I is
+also negative; the failed learned-selection repair is not restored. Lower entropy alone
+does not imply higher native service. Ordinary recurrent low control, optimization and
+training coadaptation remain live explanations; this cell does not isolate complementary
+skill semantics or make a necessity claim. Final batch investment judgment follows U.
+
+**Acceptance evidence.** READY event`6134ede055daf6e495f42281`, wake
+`2b24da12-302f-4c36-8089-83d71e3d9a30`, at generation80 reported a valid exit0,
+matching source/claim/process identities and0observer errors. All 34 files /
+164641190 bytes were recovered and SHA256/byte-count matched at both
+`/home/wu/hmasd-worktrees/complementary-skill-b08-20260924/runs/complementary_skill_learning/b08_e_260924041_c9217f0ae` and
+`/home/fires/.codex/worktrees/5916/hmasd-wsl/runs/complementary_skill_learning/b08_e_260924041_c9217f0ae`.
+The compact [summary](../../../../runs/complementary_skill_learning/b08_e_260924041_c9217f0ae/summary.json),
+[manifest](../../../../runs/complementary_skill_learning/b08_e_260924041_c9217f0ae/launch-manifest.json),
+[exit witness](../../../../runs/complementary_skill_learning/b08_e_260924041_c9217f0ae/process-exit.json)
+and [terminal status](../../../../runs/complementary_skill_learning/b08_e_260924041_c9217f0ae/native-status.json)
+retain the actual operation. Summary identity: 374485bytes,
+SHA256`6335f37979208dee748ba870a513790cbf4037443ad2ec15b95c8ff5a5572309`. Process exit alone was not acceptance.
+
+Independent saved-byte reading covered all45 training rows,90 raw G/P MSE reductions,
+160000 evaluation transitions in all10 panels, complete initial/final tensors, heads,
+normalizers and RNG chains, and all44800 common-reference factors. The actual B08 Spec,
+adapter/source and production CUDA identity match the fixed contract. Native calls are
+675/101250/101250/675/2700 in coordinator/low actor/low critic/team/individual order;
+G/P heads315 each and auxiliary trunk0. All22500 storage/label batches and360000 rows
+pass with0failures. Evaluation records0updates,0stores and0normalizer mutations.
+All45 E coordinator readings have lambda_h=0 and nonzero finite post-update gradients;
+maximum reconstructed zero-entropy-objective residual is
+2.23517417908e-7. High PPO remained active.
+
+M/E initial native and head tensors match elementwise; both complete initial S0/R0 raw
+trajectories match elementwise. Initial native/frozen, first-rollout facts and raw targets
+match. All45 private/sampler/default RNG state records agree between M/E. Every R panel
+shares actual label streams, all physical initial states match, and S shares fixed
+innovations while selected labels may differ. Learner configs differ only in lambda_h,
+0 versus .07. B08 initialization/head/training RNG identities differ from B07; the fixed
+exposed evaluation worlds and streams remain unchanged. No old fit supplies this result.
+
+Native changed-tensor counts are87/29/24/29 across coordinator/discoverer/team/individual.
+Final relative movement is coordinator0.0600556407428,
+low actor1.14349883015, low critic0.467778988773,
+team0.0765313219431, individual0.159954341516.
+Maximum native mu replay discrepancy is0.0000114440917969;
+raw MSE re-reduction discrepancy0, complete saved entropy reduction error
+4.55499468144e-7, selected-probability/log error
+4.76837158203e-7. Raw actions/clip, native J and components,
+renewals, labels, independent PCG64 label reconstruction and frozen-state identities were
+checked. This is not a second model/environment or hidden-state replay; recurrence
+carry/reset semantics retain the previously reviewed code and fixtures.
+
+**Common-input entropy.** E scored the prospectively fixed new M-final S0..3 reference:
+6400contexts/44800factors,200batches,0environment transitions and0scoring RNG draws,
+3.78300191695s. Input SHA256
+`1ae33f058ffc43d5e8f95f63e842dd0ae7eaf636eec03b1feaf77900ae85579f` binds the verified M-final checkpoint/native/frozen
+identities, actual B08 Spec/source and all original rows/prefixes. Output SHA256
+`8101b65960193349da373137d9de0f3555bb3e70fdaedc13abfa13c7b98b8243`; all saved M probabilities exactly match the pool,
+and complete distributions were independently reduced with maximum entropy error
+3.00053894842e-7.
+
+| Conditional entropy | E on new M pool | M on same pool | E−M | Lower / higher factors |
+| --- | ---: | ---: | ---: | ---: |
+| team | 1.13414132595 | 1.76947724819 | -0.635335922241 | 6396 / 4 |
+| individual | 1.52995324135 | 1.78501629829 | -0.255062907934 | 38354 / 46 |
+
+Opposite rows remain: team E−M ranges[-1.10472404957,0.0119640827179],
+individual[-0.963787198067,0.0124412775040].
+Four streamwise team differences are-0.630647063255, -0.638749241829, -0.639667153358, -0.632280349731;
+individual differences are-0.254496991634, -0.255530625582, -0.254928141832, -0.255295842886.
+E's own final-S mean entropies 1.12158897519/1.52027472854
+are a separate state/prefix population. Cross-block M pools differ; comparing their entropy
+deltas does not establish identical state populations or corresponding skill meanings.
+
+**Complete endpoint readings.** Means below use all32 exposed worlds per panel. Final
+contrasts first average allfour streams within each world; worlds/streams are not
+independent training replicates. Height is the native penalty (larger is worse).
+
+| E panel | J | Users | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| initial_S0 | 0.140057654718 | 13.7357500000 | 0.274715000000 | 0.0721436219621 | 0.0738859318705 |
+| initial_R0 | 0.143236773657 | 13.9807500000 | 0.279615000000 | 0.0719341288675 | 0.0740739650030 |
+| final_S0 | 0.431777501996 | 29.6292500000 | 0.592585000000 | 0.156389701982 | 0.0299489085990 |
+| final_R0 | 0.432784039217 | 29.6901250000 | 0.593802500000 | 0.156816943253 | 0.0299227937591 |
+| final_S1 | 0.434851023688 | 29.8757500000 | 0.597515000000 | 0.156169102312 | 0.0302602070059 |
+| final_R1 | 0.435940693502 | 29.9163750000 | 0.598327500000 | 0.157142604012 | 0.0300313377012 |
+| final_S2 | 0.430720130527 | 29.6113750000 | 0.592227500000 | 0.154502296245 | 0.0301898083471 |
+| final_R2 | 0.436228330406 | 30.0848125000 | 0.601696250000 | 0.153336180968 | 0.0309598988844 |
+| final_S3 | 0.429879530612 | 29.6385000000 | 0.592770000000 | 0.152863246955 | 0.0309184434748 |
+| final_R3 | 0.437949799047 | 30.1151875000 | 0.602303750000 | 0.155283583984 | 0.0302479011481 |
+
+| Four-stream contrast | J | Users | Coverage | Quality | Height penalty | J positive/negative worlds | Users positive/negative worlds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| D: E-S−M-S | -0.0140048154120 | -0.433406250000 | -0.00866812500000 | -0.0177427380629 | 0.00261430649314 | 11/21 | 12/20 |
+| E-R−M-R | -0.00843070511844 | 0.0209687500000 | 0.000419375000000 | -0.0185856772827 | 0.00314856443362 | 9/23 | 12/20 |
+| G_E: E-S−E-R | -0.00391866883764 | -0.262906250000 | -0.00525812500000 | -0.000663741180483 | 0.0000388589834932 | 10/22 | 11/21 |
+| G_M: M-S−M-R | 0.00165544145592 | 0.191468750000 | 0.00382937500000 | -0.00150668040034 | 0.000573116923979 | 15/17 | 16/16 |
+| I: G_E−G_M | -0.00557411029356 | -0.454375000000 | -0.00908750000000 | 0.000842939219856 | -0.000534257940486 | 13/19 | 11/21 |
+
+D quality declines in all32 worlds; D height penalty rises in31/32. In E-R−M-R,
+quality also declines in all32 and height penalty rises in30/32. Consequently its tiny
++.02096875 user mean does not imply improved native J. These components are preserved,
+not reduced to coverage alone.
+
+| Stream index | D J / users (same S innovations) | E-R−M-R J / users (same R labels) | G_E J / users (descriptive same index) | I J / users (descriptive same index) |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | -0.00812597342301 / -0.0160000000000 | -0.0168805283617 / -0.604312500000 | -0.00100653722104 / -0.0608750000000 | 0.00875455493874 / 0.588312500000 |
+| 1 | -0.0118312392464 / -0.295687500000 | 0.0000775743266524 / 0.568062500000 | -0.00108966981463 / -0.0406250000000 | -0.0119088135731 / -0.863750000000 |
+| 2 | -0.0234201844543 / -1.14231250000 | -0.0113809466896 / -0.0819375000000 | -0.00550819987945 / -0.473437500000 | -0.0120392377647 / -1.06037500000 |
+| 3 | -0.0126418645242 / -0.279625000000 | -0.00553891974902 / 0.202062500000 | -0.00807026843544 / -0.476687500000 | -0.00710294477517 / -0.481687500000 |
+
+All16 E-S/M-S stream-mean combinations have negative J, range
+[-0.0242607843691,-0.00505245173100]; users range
+[-1.14231250000,0.230500000000], with one positive combination. These
+cross-stream summaries do not create extra replicates or justify selecting a stream.
+Allfour corresponding G_E means are negative in J/users; same S/R index is not common
+innovations.
+
+**Actual learning and adverse detail.** E S0 final−initial is
+0.291719847278 J/15.8935000000 users;
+R0 is0.289547265559 J/15.7093750000 users.
+All32 J/users changes are positive for both, and height penalty decreases in all32.
+Quality still decreases for S0 world1700203 (-0.0559884564720)
+and R0 worlds1700203 (-0.0522168579800) and1700221
+(-0.00692636481130). Positive learning from a weak initialization
+does not override the negative E/M increment.
+
+Worst D world1700217 is−.058214170412 J/−3.8505users. World1700211 gains+.3345users
+but loses−.006651821430J; world1700204 gains J/users while quality falls−.044710094715.
+Worst G_E world1700228 is−.030877243090J/−2.4875users. At the individual episode level,
+same-S D J is41positive/87negative; worst J is S2/world1700203,
+−.0840987569274. Worst service is S3/world1700217,−5.536users. The largest positive
+D episode, S3/world1700212, is+.088649287598J/+6.458users and is retained too.
+Same-R E/M has40positive/88negative J episodes, worst R2/world1700200,
+−.082141170809J/−4.838users, and best R0/world1700227,
++.128477718797J/+9.768users. Descriptive same-index E S/R has55positive/73negative
+J episodes; worst S3/R3 world1700228 is−.070678370873J/−5.364users. These tails
+are read along with world means, not treated as independent training outcomes.
+
+All45 training-curve rows were read; mean J starts .229360968643, reaches its minimum
+.213394652302 at rollout6 and maximum .412761813749 at36, and ends .408019358791.
+No best checkpoint is selected. Training saturation rises .315326388889→.793409722222;
+deterministic final-S saturation is about .6181–.6188 and final-R .6281–.6298.
+These distributions differ; saturation is not established as the cause of the rank reversal.
+Detached G/P raw MSE starts 0.0225516717084/0.0215692623730
+and ends 0.00534467685965/0.00460118136870;
+these are factual monitors, not a replacement for native service or a trunk-learning claim.
+
+All32 world-level differences are retained below; full component arrays, four streams and
+actual-learning arrays remain in the compact runner summaries and recovered trajectories.
+
+| World | D J | D users | D quality | D height | E-R−M-R J | E-R−M-R users | G_E J | G_E users | I J | I users |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | 0.0213279378163 | 2.17750000000 | -0.0163492011700 | 0.00425230183272 | -0.0312770344412 | -1.66350000000 | 0.0396662307621 | 2.82700000000 | 0.0526049722575 | 3.84100000000 |
+| 1700201 | -0.0207602225308 | -0.817000000000 | -0.0249013991911 | 0.00185180277350 | -0.0205993173674 | -0.780500000000 | 0.000798731607886 | 0.210500000000 | -0.000160905163477 | -0.0365000000000 |
+| 1700202 | 0.00439818763049 | 0.515500000000 | -0.00575784373990 | 0.00109145924754 | -0.0289928816134 | -1.51400000000 | 0.00788343770608 | 0.372500000000 | 0.0333910692439 | 2.02950000000 |
+| 1700203 | -0.0532679778959 | -2.31650000000 | -0.0313995837720 | 0.0114171027643 | -0.0345773268969 | -1.32500000000 | 0.00973450759104 | 1.00600000000 | -0.0186906509990 | -0.991500000000 |
+| 1700204 | 0.00701115770419 | 1.63550000000 | -0.0447100947155 | 0.00247281388117 | -0.00108770833923 | 0.633500000000 | 0.00342749243743 | 0.316000000000 | 0.00809886604342 | 1.00200000000 |
+| 1700205 | 0.0201968048827 | 2.04200000000 | -0.0270019091854 | 0.000290622361676 | 0.0246328257083 | 2.24400000000 | -0.00180336349409 | -0.177500000000 | -0.00443602082558 | -0.202000000000 |
+| 1700206 | 0.00916168070319 | 0.983500000000 | -0.00943568969870 | 0.00177661238720 | 0.0155260684056 | 1.56600000000 | -0.0133845056882 | -0.983500000000 | -0.00636438770242 | -0.582500000000 |
+| 1700207 | -0.0349871648796 | -1.98900000000 | -0.0152700149413 | 0.00256016039726 | -0.0168374441464 | -0.494500000000 | -0.0138069406907 | -1.12400000000 | -0.0181497207332 | -1.49450000000 |
+| 1700208 | -0.0166737206191 | -0.658000000000 | -0.0263109466653 | -0.000431563380505 | 0.0181668383784 | 2.09150000000 | -0.0258250234516 | -1.74100000000 | -0.0348405589975 | -2.74950000000 |
+| 1700209 | -0.0308403563146 | -1.68150000000 | -0.0207112869059 | 0.00108597024283 | -0.0180080717122 | -0.486500000000 | -0.00871644925278 | -0.681000000000 | -0.0128322846024 | -1.19500000000 |
+| 1700210 | -0.0225685995664 | -0.803000000000 | -0.0318625396199 | 0.00176783768044 | -0.0220538969455 | -0.750500000000 | -0.0114085782834 | -0.815500000000 | -0.000514702620932 | -0.0525000000000 |
+| 1700211 | -0.00665182142968 | 0.334500000000 | -0.0331528053808 | 0.00138897981544 | 0.00780382492646 | 1.46800000000 | -0.0144930624375 | -0.733000000000 | -0.0144556463561 | -1.13350000000 |
+| 1700212 | -0.00669643607845 | -0.141000000000 | -0.0132156293490 | 0.000757747273746 | 0.0225649095750 | 1.95650000000 | -0.00189370992149 | -0.153500000000 | -0.0292613456535 | -2.09750000000 |
+| 1700213 | 0.0184150358227 | 1.72050000000 | -0.00531915448072 | 0.00407621783310 | 0.0105015062693 | 1.07200000000 | 0.000315573841303 | 0.306500000000 | 0.00791352955338 | 0.648500000000 |
+| 1700214 | -0.0256897046017 | -1.50400000000 | -0.00773386259367 | 0.00231354582358 | -0.0415789652320 | -2.74350000000 | -0.00454776456687 | -0.172000000000 | 0.0158892606303 | 1.23950000000 |
+| 1700215 | 0.000130176533235 | 0.329000000000 | -0.0103467557919 | 0.00137179672918 | -0.0189027125623 | -0.826000000000 | 0.00850623165114 | 0.613000000000 | 0.0190328890955 | 1.15500000000 |
+| 1700216 | 0.00833777547835 | 0.944500000000 | -0.00996115915207 | 0.00189687677603 | -0.0177843399824 | -1.04200000000 | 0.0163378950499 | 1.22950000000 | 0.0261221154608 | 1.98650000000 |
+| 1700217 | -0.0582141704117 | -3.85050000000 | -0.00701057341939 | 0.00220399838584 | 0.00950376544920 | 1.34100000000 | -0.0161831831422 | -1.42050000000 | -0.0677179358609 | -5.19150000000 |
+| 1700218 | -0.00777492598342 | -0.135500000000 | -0.0161392414314 | 0.00103615355401 | -0.0127351928861 | -0.0955000000000 | -0.00311242278483 | -0.385500000000 | 0.00496026690264 | -0.0399999999999 |
+| 1700219 | -0.0229668332378 | -1.26000000000 | -0.00971421755680 | 0.00241256797072 | -0.0237538982752 | -1.18950000000 | -0.0126675005342 | -0.986000000000 | 0.000787065037466 | -0.0705000000000 |
+| 1700220 | 0.00117901647678 | 0.479500000000 | -0.0109203539501 | 0.00225787733821 | -0.0251002821700 | -1.33600000000 | -0.0110376551050 | -0.738000000000 | 0.0262792986468 | 1.81550000000 |
+| 1700221 | -0.0191290571440 | -0.822000000000 | -0.00862709469056 | 0.00503292873687 | -0.0149549354586 | -0.603500000000 | -0.00328467809692 | -0.214000000000 | -0.00417412168548 | -0.218500000000 |
+| 1700222 | -0.0198955343007 | -0.774000000000 | -0.0196992150346 | 0.00314976979037 | -0.0156759876489 | -0.548500000000 | -0.00235543526037 | -0.0680000000000 | -0.00421954665180 | -0.225500000000 |
+| 1700223 | -0.0442423674511 | -2.83900000000 | -0.00472003339153 | 0.00308035743361 | -0.0235681427099 | -1.02650000000 | 0.00560783934153 | 0.304000000000 | -0.0206742247412 | -1.81250000000 |
+| 1700224 | -0.0351772417906 | -1.70200000000 | -0.0240474654006 | 0.00413500217038 | -0.0245104338762 | -1.07150000000 | -0.000545999823938 | -0.00599999999999 | -0.0106668079144 | -0.630500000000 |
+| 1700225 | 0.00187796467689 | 0.835000000000 | -0.0225956462238 | 0.00303334145597 | -0.0112101904174 | -0.000500000000002 | -0.000523853220105 | 0.0940000000000 | 0.0130881550943 | 0.835500000000 |
+| 1700226 | 0.00127145647491 | 0.898000000000 | -0.0183331528513 | 0.00580059766970 | -0.00104175716897 | 0.638500000000 | -0.00389657502859 | -0.242500000000 | 0.00231321364388 | 0.259500000000 |
+| 1700227 | -0.0221367611574 | -1.10800000000 | -0.0119752579306 | 0.00303218377822 | 0.0747386875284 | 5.89100000000 | -0.0282315988897 | -2.06800000000 | -0.0968754486858 | -6.99900000000 |
+| 1700228 | -0.0194380068051 | -1.04050000000 | -0.0162203189878 | 0.00000491110877561 | -0.00252524259216 | 0.671000000000 | -0.0308772430901 | -2.48750000000 | -0.0169127642129 | -1.71150000000 |
+| 1700229 | -0.00664166081402 | -0.0755000000000 | -0.0130284223375 | 0.00167613411276 | -0.0367441167371 | -2.17800000000 | 0.0265135966730 | 1.74450000000 | 0.0301024559231 | 2.10250000000 |
+| 1700230 | -0.0471316417703 | -2.47750000000 | -0.0261980003938 | 0.00458724165217 | -0.0271110881465 | -0.953500000000 | -0.0129729254573 | -0.792500000000 | -0.0200205536238 | -1.52400000000 |
+| 1700231 | -0.0205770826013 | -0.769500000000 | -0.0250987480591 | 0.00227445818361 | 0.0174099772951 | 1.72700000000 | -0.0226204712460 | -1.44700000000 | -0.0379870598964 | -2.49650000000 |
+
+**Cost, retention and continuation.** E used1fit/360ktrain/720training episodes and
+160keval/320evaluation episodes,45updates. Runner wall 3827.65130749s
+(63.7941884581min), with 3678.41979234s of rollout
+time included; common scoring3.783001917s is included. Peak process RSS1948948KiB,
+CUDA allocated1531556352/reserved2183135232bytes. Peak scratch/shared occupancy were
+not measured. Collection/hash took14.0471025330s; saved-byte E and
+E/M readbacks took9.94348808401s and6.63635677699s, without
+additional environment/model/optimizer execution.
+
+After complete recovery and reading, the maintained collector previewed and removed only
+eligible source snapshot`0a4ac3a4f2cd45ed9ee0f94de32599ff`. Author root, all output
+copies, claims, staged new-M reference and source branch remain. Generation80 READY was
+acknowledged/rearmed80→81 using its returned wake/event. No worker restarted and no Pro
+question or other-task message was sent. Fresh main
+`6f29d276baa205c5eca03e665360020657d21b90` retains lifted pause and the same lead.
+
+Publish this E reading and compact records before the fixed U admission. U remains source
+`c9217f0ae5b32aa2a13e228cc87899f545a0111b`, seed260924041, output
+`runs/complementary_skill_learning/b08_u_260924041_c9217f0ae`, independent uniform
+team/individual labels, no high updates,360ktrain+80keval, one fit. No reference input,
+extra seed or comparison is added. The original total remains3fits/1.08Mtrain+400keval.
+This unchanged-batch cell acceptance does not require an index/main change; publish the
+full block judgment after U. A later continuation or closure will consider the actual
+P/D recurrence failure/success and inherited adverse evidence, not entropy alone.
+
+Verified remote/local artifact inventory (bulk remains outside Git):
+
+| Artifact | Bytes | SHA256 |
+| --- | ---: | --- |
+| `admission-preflight.json` | 772 | `57e354586077253b7649a48663f1b9e706b3356a0936de058a52008eb0abbf11` |
+| `auxiliary_predictions.jsonl` | 2460807 | `38d01e083e1d097d5a19dfa03097179ef31b975372ac578e5e3feb9452e04711` |
+| `config.json` | 4298 | `e8fd5b413d3958dfe0f273fd512e5bfacbaac074315451a95b064297155f0a8a` |
+| `final.pt` | 27128639 | `e4ef86f96566b6f9bec186c6a1b7a023e14105abac8481c056aa568a8d2b8c6e` |
+| `initial.pt` | 23750461 | `8e28ba268c0a01349b7d7d7d31d75a552af7f71260ad7698577b5de5c1cbe0e0` |
+| `launch-manifest.json` | 4962 | `8019aa4436edc905ba7090338c88551e2b612c41c4242714f9666954c3d98ede` |
+| `launch-status.json` | 651 | `b9681c2833834e42ad442ec3c68bb6b4b8f23279b21cd775c69c74d8da0f40ae` |
+| `process-exit.json` | 550 | `26a9233219205f22910f53d5fa54b2aa18515fc81e0ccd199d63b889b6dee463` |
+| `raw/E_on_M_final_S_reference.npz` | 2297263 | `8101b65960193349da373137d9de0f3555bb3e70fdaedc13abfa13c7b98b8243` |
+| `raw/final_R0.json` | 11189 | `90993106ece5d3813e442b137fbe6a58817cee71f20fd5d63f6ef34bceb50167` |
+| `raw/final_R0_trajectory.npz` | 10849065 | `0fd5b93818e5ce070938232993e0a4700355c1ae0343661dd83e0d6d3e557104` |
+| `raw/final_R1.json` | 11251 | `92909c1ef4f7a1185a004ccd65daa46a1e6d44ea405546be3a442d771ce1de40` |
+| `raw/final_R1_trajectory.npz` | 10879830 | `0392e196b81cfba383999da081cfdd609b090f01e50dd31a50a01754fea6067e` |
+| `raw/final_R2.json` | 11186 | `0fe2f825d71a5f3bd4db826c0484d767d23ddde62e28ac157daf6153b9f61c2b` |
+| `raw/final_R2_trajectory.npz` | 10900898 | `7cb883e04693c72baeebc8fd1f5e2d3c11a39f4886232bdba8bf58846e6b2637` |
+| `raw/final_R3.json` | 11206 | `cb275217ac336c5985c4f5dd47b8377253126f1163b9ecea5439be6337c399c5` |
+| `raw/final_R3_trajectory.npz` | 10881258 | `e7bf8922b01ca8329d34e7befa9b30f5d0d4ed60706e5ce4736982a2ada88242` |
+| `raw/final_S0.json` | 12160 | `03e909d47a0d2258c2c2870306f62a639d611a615ecd9efc8dca5f030eba7ba3` |
+| `raw/final_S0_trajectory.npz` | 11148419 | `b23a6f456ed8c12770377f5a3f07840240327fe2ef345e3e76ff8d15b05f9548` |
+| `raw/final_S1.json` | 12137 | `3d70a30504dc1fec0a7eae4ff792119eb9e7b58a9a59c741ead65983fd66b160` |
+| `raw/final_S1_trajectory.npz` | 11196402 | `06fa299e60441dc123246b2d7420aef038bbc562ca371924461ce493aff13f52` |
+| `raw/final_S2.json` | 12143 | `e08fb170f4e01a877d28b156240ce992a0463466ea610df5cdfc0936b5eb0951` |
+| `raw/final_S2_trajectory.npz` | 11176446 | `e12661e551dac36fbd055ed778b592647dca506468d7b21b9205b0c2f1aab2a9` |
+| `raw/final_S3.json` | 12136 | `dd96e60e27f1713edb73b06bce3ebb21c45da04f55687331869e952afa552b8e` |
+| `raw/final_S3_trajectory.npz` | 11161880 | `58901edde18894a61e1c539848a20e105b18a3af746a20109c702635211456d7` |
+| `raw/initial_R0.json` | 11276 | `3cf7c942b09aa3cbae2339b1b93fc2c9212dd9a40bb331168eaf710295b57fed` |
+| `raw/initial_R0_trajectory.npz` | 8963064 | `278cb53f0ecd21491353e180a5ac98cae9419d02b6b94f6e5db5727adc227173` |
+| `raw/initial_S0.json` | 12237 | `8fb06263d6fec1e8c7111db114b4d62944b6ebb1ff230d19d80dffc4f6db6eb0` |
+| `raw/initial_S0_trajectory.npz` | 9239376 | `a73dc51234ae217d205a07c404e3d563c55cd9000a50709defccda3b4d5fe903` |
+| `raw/training_occupancy.json` | 625293 | `291ef6e54caeb6735572dd51a108890ef9ea959d1f800f577b780d8d9bc7bcc2` |
+| `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `summary.json` | 374485 | `6335f37979208dee748ba870a513790cbf4037443ad2ec15b95c8ff5a5572309` |
+| `training.jsonl` | 1479450 | `f72bd690a28563c8556e41375873ec65cd40ae38d563d00704e4b2b03a048201` |
