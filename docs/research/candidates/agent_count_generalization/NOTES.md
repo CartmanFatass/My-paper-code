@@ -13294,3 +13294,607 @@ Include MATERIAL_DISSENT yes/no, sources actually used and any decision-critical
 No fixed number of ideas, mechanism story or extra approval requirement is requested.
 
 ### Answer
+
+Saved from chat after verified NOT_DELIVERED; complete answer follows verbatim.
+
+GitHub读取正常，但本轮可调用的GitHub接口没有文件写入动作，因此未发起写入，也没有产生新提交。 最新回读确认，指定分支上本题的 ### Answer 仍为空。以下是完整答复。
+
+Answer
+一、建议：选择固定六fit的B15，但确认对象必须是条件化平均用途，而不是“训练可靠性已经解决”
+
+我支持把下一笔投入用于提议的B15：三个新训练区组、每块一份H6和一份SET，共六fit；保留每臂360k的N6训练、固定的新N8/N6面板、initial0与final45评价，以及现有的联合门槛。暂不先做mixed-N普通学习，也不把它附加到B15。 这是一项明确的、模型假设下的确认设计，不是B14的追加区组。草案正确地将B01—B14全部留在开发证据中，没有把B14算进三个新块。
+
+hmasd-pro-question-b14-bounded-… +1
+
+这笔投入要改变的判断是：
+
+在所选算法、训练程序和固定新评价面板下，重新训练所产生的H6，是否具有高于所选普通SET的训练随机性平均终点价值，而且平均多服务超过一个用户／步；还是现有开发优势不足以支持这一更严格、预先固定的陈述？
+
+最强的反对理由是：六fit可能只买到一个依赖三点分布假设、对普通配方仍有选择依赖的窄结论。 三个区组不足以检验训练结果的分布形状；即便通过平均值门槛，也没有直接证明下一次训练大概率获益，更没有证明新世界总体、局部服务损失或额外计算已经可接受。另一方面，B14的新SET确实学习了，却没有达到此前较强B12 T6的水平——“新鲜且真实的普通学习”不等于“充分强的普通学习”。
+
+我仍支持这次确认，因为B14已经补上此前最关键的缺口：优势不再只来自保留旧H6权重，也不是普通对照退化造成的相对领先。此时再做一个结果驱动的开发对，容易继续改变比较对象，而不回答已选配方的平均用途能否经受固定检验。当前没有已识别的普通学习缺陷或已实现的mixed-N升级，足以使这个有范围的主对照失去研究价值。 这不要求先证明普通方法已经最优，也不意味着这六fit足以完成原方向的一切主张。
+
+二、B14带来的更新：重新产生了有用学习，但没有抹去普通强度与局部代价
+
+B14的关键证据应把终点、各自学习和相对差分开：
+
+测试N	H6最终J／服务S	SET最终J／服务S	最终H6−SET J／S	各自初末J增量：H6／SET
+8	.417914297／28.419188	.346557082／23.136500	+.071357215／+5.282688	+.353293692／+.261502674
+6	.513508479／34.528250	.463567527／31.826688	+.049940952／+2.701563	+.370646214／+.303743788
+
+S为每原生步实际服务用户数。两包在两个N的全部32个自身比较世界上都提高J与S；H6在两个N的初始平均J／S均落后，最终平均排名反转。这些是完整结果和八份原始面板所支持的读法，不是把优化器调用或参数移动当作用途改善。
+
+hmasd-pro-question-b14-bounded-…
+
+因此，加强的是：这套完整H6学习程序能够在一个新的、预先固定的训练区组中产生实际N8服务增量，并超过同块新训练的普通策略。削弱的是：本块优势只能由保留有利旧H6、初始平均排名领先，或者SET自身退化来解释。仍未解决的是：跨训练程序随机性的平均优势、训练失败或不利结果的频率、未读世界总体表现、普通配方充分性，以及技能、内在目标、表示和计算各自的贡献。初始排名反转没有消除初始化对后续优化的影响，差中之差仍不是因果份额。
+
+hmasd-pro-question-b14-bounded-…
+
+不利后果也不能因为准备确认就退到脚注。B14的全部最终J或S损失世界是：N8的1645808损失约.002864 J和1.102用户／步；N6的1645607、1645609虽J略高，服务分别少.820和.398；1645626同时损失.012176 J和2.488用户／步。H6较高的绝对最低服务不取消这些配对损失。
+
+hmasd-pro-question-b14-bounded-…
+
+N8的正均值也不是所有分量共同改善：覆盖贡献约+.073958，质量贡献约−.000112，高度代价约−.002489，合成+.071357 J；质量在17/32世界更低，高度惩罚在20/32世界更高。两包自身U都随资格与服务人口增长而上升，同时H6最终U平均低于SET，二者并不矛盾。这些是不同比较的原生后果，不是已识别的独立修复路径。
+
+hmasd-pro-question-b14-bounded-…
+
+B04—B06的噪声响应反号、B11/B12的目标人数训练反号和B13的损失世界继续限制更强解释。它们使训练区组变异值得认真购买，却不构成“B15必然反号”的预测，也不能把别的配方的变异当作本协议的已知方差。
+
+三、普通比较器：最强质疑是“确实学习”仍不等于“充分强”，但目前不足以改选mixed-N
+
+这里有一个应明确保留的数值参照。B12 T6在同一开发N8面板达到：
+
+J=.405497332961,S=26.0768125.
+
+B14的新H6相对这份较强旧SET，按已发表均值作描述性相减，只剩：
+
+ΔJ=.012416963579,ΔS=2.342375.
+
+它们明显小于B14同块的+.071357 J／+5.282688 S。这不是B15的替代主比较，也不是新的配对学习结果；它具体说明了普通实例强度如何改变实际可见的余量。 两份历史学习过程不同，不能将这个差距变化全归因于某个原因。 
+
+hmasd-pro-question-b14-bounded-…
+
+这个质疑需要与另一条证据同时保留：B13的两份保留H6面对较强B12 T6，仍有约3.648／4.779用户／步的N8平均增量，而非只有面对较弱S1才有用途。因此，现有证据既不支持“普通方法已充分调优”，也不支持“只要面对已实现的较强普通水平，H6用途就消失”。
+
+我接受所选SET作为这项限定配方比较的主对照，理由包括实际学习、合法中心信息和局部反馈、真实循环控制、原生动作与存储语义，以及此前被保留的较强普通实例。源码显示它不是只有局部信息的刻意弱化flat：其actor融合当前局部观测、持有的联合观测集合、ego信息及状态集合编码；但这仍不等于H6的信息编码、带宽或学习难度。H6的额外技能／协调／判别目标和计算必须继续作为包差异呈现。
+
+不应在B15新SET表现较低时，将它换成B12权重；也不应在H6不利时换回B07。 一个有效完成但分数不理想的fit是研究对象，不是应删掉的技术失败。更不能通过新增“SET必须超过某个历史分数”的结果后门槛，只保留方便解释的区组。
+
+mixed-N6/8对N6-only普通学习仍是最强替代，但它回答的是另一问题：固定总曝光下，普通策略的宽条件用途能否改善。B11/B12没有证明N8曝光不足，且等分360k只给混合臂每个N180k，同时改变agent行数和更新组织；不能把它称为已经识别出的B12修复。
+
+若当前唯一有价值的目标是尽快获得最好的N6/N8普通控制器，mixed-N会更贴近目标。但对本题已经明确选出的N6→N8包用途主张，它不会替代三个新H6／SET区组的证据。因此本轮不先购买它，也不同时购买两个方案。
+
+四、估计量与配对：固定新世界是有效条件化，不是世界总体推断
+
+建议在启动前把总体对象写得更明确。令 W
+8
+	​
+
+ 为固定的32个新N8世界，ξ
+b
+	​
+
+ 为第 b 块的完整训练随机输入，包括初始化、学习采样及共同外生训练场景。对 Y∈{J,S}，定义
+
+d
+b,Y
+	​
+
+(W
+8
+	​
+
+)=
+32
+1
+	​
+
+w∈W
+8
+	​
+
+∑
+	​
+
+[Y(π
+H,b,45
+	​
+
+,w)−Y(π
+SET,b,45
+	​
+
+,w)],μ
+Y
+	​
+
+(W
+8
+	​
+
+)=E
+ξ
+	​
+
+[d
+b,Y
+	​
+
+(W
+8
+	​
+
+)].
+
+B15检验的是
+
+μ
+J
+	​
+
+(W
+8
+	​
+
+)>0且μ
+S
+	​
+
+(W
+8
+	​
+
+)>1.
+
+这与草案的条件化范围一致；不是三个选定seed的有限均值本身需要置信区间，而是用三个块推断所声明训练程序的重复结果均值。 所以训练随机化程序及独立性假设属于结论的一部分。
+
+hmasd-pro-question-b14-bounded-… +1
+
+同一块内共享真实外生场景可以支持预先指定的配对，但不要求H6与SET权重一致，也不要求后续动作、访问状态、采样消耗一致。反过来，共用seed整数不自动保证配对成立。B14的完整训练reset记录已由DM核对为相同，这是新实现应继承的实际契约，不只是命名习惯。
+
+hmasd-pro-question-b14-bounded-…
+
+三个块使用同一 W
+8
+	​
+
+，不会在“条件于该面板”的分析中自动破坏训练块独立性；它让各块面对同一个评价函数。但若把世界面板也看作随机对象，未估计的面板共同影响仍然存在。不能用三个训练块的标准差声称已经计入世界总体不确定性，更不能将96个block×world差值当作96次独立训练。草案对此已经采取了正确限制。
+
+hmasd-pro-question-b14-bounded-…
+
+N8对两臂都是未训练数量，但这个设计没有N4、回合内成员变化或cross-play。N6与N8也有不同世界及物理条件；不要求N8包差大于N6包差，不把二者原始分数差叫作纯人数效应。
+
+五、三块t区间：可以改变判断，但假设、辨别能力和联合规则都要具体说明
+三块不是“达到最低数量就有足够精度”
+
+对三项区组差，用样本标准差 s
+Y
+	​
+
+（分母为 3−1）计算：
+
+CI
+Y
+	​
+
+=
+d
+ˉ
+Y
+	​
+
+±t
+.975,2
+	​
+
+3
+	​
+
+s
+Y
+	​
+
+	​
+
+=
+d
+ˉ
+Y
+	​
+
+±2.4841377s
+Y
+	​
+
+,
+
+其中 t
+.975,2
+	​
+
+=4.3026527。这是标准t均值区间公式；其可靠覆盖依赖相应分布假设，小样本时不能依靠一般的大样本稳健性。
+NIST
++2
+NIST
++2
+
+因此现有支持规则等价于：
+
+d
+ˉ
+J
+	​
+
+>2.4841377s
+J
+	​
+
+,
+d
+ˉ
+S
+	​
+
+>1+2.4841377s
+S
+	​
+
+.
+
+一个纯算术示例，不是预测或实验：三个服务差若为2、5、8用户／步，每块都超过1，均值为5，但样本标准差为3，95%区间约为 [−2.452, 12.452]，仍不能支持预写服务主张。三块都同号并不够。
+
+同样，仅为展示门槛的要求，若未来均值恰好等于B14的+.071357 J与+5.282688 S，则观察到的区组标准差需分别小于约 .028725 J、1.724014用户／步 才可能通过。这是由规则反推的数值条件，不是功效分析、预期方差或成功概率。B14只有一块，不能用其32世界的离散程度补出这个区组标准差；B13的四个相关差值也不能补。
+
+hmasd-pro-question-b14-bounded-…
+
+最值得警惕的情形，是训练结果存在不同模式，而三个块碰巧只出现其中一种。三个数无法排除这种可能。平均优势的区间即使通过，也不是下一次训练结果的预测区间，更不是“大多数重新训练都会获胜”的证明。我接受三块作为这项有范围检验的有限投入，不声称其精度或实际覆盖已经由开发数据证明。 不建议靠结果后的正态性检验、世界bootstrap、改用另一种检验或从三块扩到五块来补救。
+
+两项必须同时成立，不需要为这个联合成功事件机械添加校正
+
+这里应区分“两个边际区间”和“唯一联合主张”。草案的原假设是：
+
+H
+0
+	​
+
+: (μ
+J
+	​
+
+≤0) 或 (μ
+S
+	​
+
+≤1),
+
+只有两个分量都被排除，才支持联合主张。
+
+在每个t检验具有标称有效性的模型下，使用双侧95%区间的下端越过门槛，相当于各自单侧2.5%的检验。若联合原假设成立，至少有一个分量原假设为真；而“两个都通过”的事件必然包含对这个真原假设的错误拒绝。因此，其联合错误支持概率不超过该分量的2.5%。这个逻辑不要求J和S独立，也不要求再作一次Bonferroni校正。 这是由预写“AND”规则得到的推导；t分位数与单／双侧关系见NIST说明。
+NIST
+
+这并没有把两个边际区间变成一个同时95%的矩形置信区域，也没有消除三块的分布假设。草案对此已经写对了。建议保留现有较严格的规则，既不在结果不利时改成单侧95%，也不为了形式上的“多指标”临时加严。
+
+一用户／步可以作为任务尺度门槛，但不是全面采用标准
+
+我接受1用户／步这个固定服务阈值。它相当于50用户中的2个百分点；在500步回合上，平均差为1对应500个用户—时间步的增量，不是新增500名不同用户。仅固定其他分量作记账，它对应+.014的覆盖项J贡献。该阈值在读取确认结果之前固定、并承认受开发证据影响，是诚实的选择。
+
+hmasd-pro-question-b14-bounded-… +1
+
+需要补充的理由是它在当前模拟任务中代表什么用途，而不是“它小于B14，所以应容易通过”。联合要求J也为正，可防止只靠服务数量而忽视原生总目标；但J门槛为零仍允许很小的净J优势，S平均过1也不保证服务公平或每世界收益。这一规则不是额外计算值得付出的经济证明，不是高度／能耗安全门槛，也不是尾部无害证明。 不能在通过后将它改称无条件推荐部署。
+
+六、保留初始面板：它不提高主终点训练n，但能防止确认后的学习叙述失真
+
+我建议保留六fit各自的initial0评价。相对于仅final45，新增的是 12个面板、192k评价团队步、1.344M UAV步、384个episodes和6,000次批量策略调用；不增加fit，也不增加主终点的独立训练样本量。这是原计划评价工作的一半，而不是免费诊断。
+
+hmasd-pro-question-b14-bounded-… +1
+
+它的用途是读取这六份新初始化自己的学习变化。B14的正自身增量不能代替新块的初始参照；若某块最终领先却自身退化，或者领先主要伴随SET自身损失，初始面板会限制“新学习普遍改善服务”的叙述。已有B14实现已把这一测量与训练隔离，并保存实际阶段的权重、normalizer和闭环轨迹，复用具有具体基础。
+
+但要保留主次关系：初始面板不是另一个挑seed的机会，也不是新增共同主要终点。 原定final45联合规则若通过，而某些自身增量不利，应分别报告“限定终点主张得到支持”和“自身学习叙述受到限制”，不能临时把后者变成未预写的统计否决门槛。同样，Δ=I
+H
+	​
+
+−I
+SET
+	​
+
+为负，不会自动否定H6自身有用学习或较高最终水平。
+
+这12个初始面板对解释有用，但不能用来宣称收敛速度、训练中途单调性，或技能造成了多少差距。没有理由因此加回15／30面板。
+
+七、必要的启动前澄清，以及固定批次应怎样结束
+
+我保留草案的实际绑定：
+
+区组	两臂学习seed	训练lane地址	顺序
+1	994101	2994100—2994115	H6→SET
+2	994102	2994200—2994215	SET→H6
+3	994103	2994300—2994315	H6→SET
+
+两阶段均为N8→N6，使用1945800—1945831／1945600—1945631及对应评价RNG 1945851／1945651。无需因为只有三个块而再加一个块来平衡顺序；上述顺序也不能建立受控速度比较。
+
+hmasd-pro-question-b14-bounded-…
+
+建议启动前在现有claim中补充以下四项澄清；不改变fit数、门槛、面板或算法：
+
+总体与措辞。 明确这是固定面板条件下、声明训练程序随机性的平均终点比较；“可靠性”不表示下一次训练获胜概率、世界总体或尾部保障。列出训练随机程序与独立性假设，而非仅列seed整数。
+
+计算与联合规则。 明写按块先平均世界、再计算三块样本标准差和df2区间；使用未四舍五入数值比较，等于门槛不算超过；保留唯一的“J与S同时通过”规则，不作结果后的方法切换。
+
+阈值与应用判断。 保留1用户／步的任务尺度理由、开发选择说明；将统计主张是否通过，与N6／自身回归／损失世界及计算成本是否支持采用分开，不能用后者篡改前者。
+
+冻结时点与失败处理。 所有算法、绑定、分析和阈值在首个initial面板产生之前固定；完成各块和第二臂不以已见分数为条件。保留技术失败、部分曝光和缺失，明确不以旧资产补格、不自动换seed或扩样。
+
+新的有限入口确有必要，而不是只改旧输出名。冻结B14的CELLS、输出tag、学习seed、训练世界基数和评价世界都受固定约束。新入口应使这些声明的新绑定进入实际构造、配置、sampler、环境及输出身份，同时保留环境先构造、学习后设seed的顺序。H6原生构造与SET新canonical-N6同步应保持各自语义，不能借“匹配”复制跨架构权重。
+
+针对性检查应覆盖实际随机路径、共同reset、checkpoint身份、评价对学习器与训练环境的隔离，以及原始高斯样本／old log-prob存储和独立物理裁剪。完整参数恢复不是冻结GRU、技能timer或快照；评价运行状态仍需正常演化。B14的已有检查可按未变范围复用，不需要生产规模的“先试一fit”、旧开发面板重放或无关学习器重写。
+
+固定批次结束后的读法应当是：
+
+结果	正确结论与投资更新
+两个下界均越过门槛	在声明假设和固定面板条件下支持这项联合平均主张。提高保留该包用途的理由；仍报告所有自身变化、N6及损失，不自动推出技能消融或全面采用
+J通过，S未通过	未建立“超过1用户／步”的联合服务主张。S仍可能为正、只是重要性或精度不足；不能说没有任何服务收益
+S通过，J未通过	服务门槛得到支持，但原生联合用途未建立；不得重加权J或忽略质量／高度来恢复成功
+区间跨越相应门槛	不确定，哪怕三个点估计都为正。保留数值和假设限制；不自动从三块扩到五块，也不换区间方法
+区间整体低于某门槛	在相同假设下，反对该分量在此曝光下的主张；降低继续重复未修改包的理由。S整体低于1不等于S不正，结果也不否定所有技能或普通方法变体
+批次缺臂、缺块或存在影响主终点的技术无效	不能确认。保留较窄可信事实与实际成本，不补零、不拿旧权重替代、不将技术故障写成科学负结果
+
+这些分支中，没有一条自动产生下一批。未建立主张可以结束这项配方的确认尝试，而不等于数量泛化问题已被否定；通过也可以与“不值得在某种用途上采用”并存。草案已经允许N6和局部损失限制应用判断，不需要再发明尾部接受区域。
+
+hmasd-pro-question-b14-bounded-…
+
+八、完整成本、证据范围与最终判断
+
+建议购买的工作保持为：
+
+工作	固定总量
+新训练	6fit，2.16M团队步，12.96M UAV行
+完整rollout更新	270次
+Actor／critic优化器调用	各607,500次
+H6额外优化器调用	协调器2,025；团队判别器2,025；个体判别器8,100
+评价	24面板，384k团队步，2.688M UAV步，768episodes，12,000批量策略调用
+总团队交互	2.544M
+
+初始面板的额外工作已包含在表内。实际B14两臂的计数与这些按三块扩展的核算相符；评价没有训练存储或优化器更新。 
+
+hmasd-pro-question-b14-bounded-…
+
+推理成本另行计数，不能把SET关闭高层学习误写成无协调器前向。按保留的B14路径，每fit训练采集有2,250次批量协调器调用，每fit四个评价面板有200次；还包括团队／逐成员解码，SET另有快照刷新。优化器重放的前向与环境采集推理应分开，以免重复计数——这正是B14实现审阅中曾纠正过的实际风险。
+
+hmasd-pro-question-b14-bounded-…
+
+B14每对137.854759分钟推算三对约 6.893个科学命令累计小时，只是已有测量的规模外推，不是日历用时或节点占用承诺。约3.3GB原始产物还不包括第二份收集副本；实现、检查、独立审阅、收集与完整阅读另外付费，实际资源需记录，未知成本不作零。
+
+hmasd-pro-question-b14-bounded-…
+
+本次已读取附件全文、固定问题与完整claim、完整B14结果、同源笔记中的前次完整Answer及采纳，并直接读取八份B14原始面板的J、回报、服务与分量数组，两臂config和summary的相关计数、初始化、优化器与隔离记录。执行语义核对使用冻结88b67e5…的B14 runner、configuration和models；治理、方法及相关共享背景使用指定33fa909…。其中共享背景的B14自身学习叙述早于完整双臂结果，不能用其当时SET待完成状态覆盖本题的完整证据。
+
+我没有加载检查点二进制或NPZ，没有重做DM的逐转移／远端字节审计，也没有运行策略、环境、技术测试或fit。 文中的成组经验统计以已读取的完整结果为依据；新增计算是区间规则的代数与数值核对，以及B14 H6对较强历史SET的描述性均值差。统计公式与小样本假设另核对了NIST资料，未以外部文献替代本项目证据。
+
+没有发现阻止当前设计判断的关键未读来源。尚不存在的是B15的新实现、三个块的真实结果及实际成本；因此，本答复支持的是有明确假设、可能得到不确定或不利结论的固定检验，不是宣称确认已经完成。
+
+MATERIAL_DISSENT: no。 我支持现有三个新块、六fit及原联合门槛，不要求先开发mixed-N或补一个新机制。必须收紧的是结论语言与预写分析：确认固定面板上的训练程序平均终点用途，不确认下一次训练的可靠获胜、世界总体或尾部无害；真实新SET不等于充分调优；三块t区间的假设风险不能被最低seed数、世界数或正号数量掩盖。上述限制仍允许B15改变一项值得改变的判断，并且比继续增加结果驱动的开发对更直接。
+
+## 2026-09-23 — B15 advice adopted: fixed conditional-mean confirmation and L0
+
+Transport and full reading: same accepted key
+`hmasd:577f4d6ba746d0bfffb66159eb0e364a826e986ca88e7cf5d685f6e1469687dc`,
+source `7df314e63a4b951fb6698e8be0c428f35e5fe273`. The detached observer collected
+9,190 characters, SHA256 `919ce7129e5e2b9b0f231204d69a090df7db15f741556c985592ab93bf5842e2`.
+`deliver` returned NOT_DELIVERED with no candidate commits; remote branch and local
+question were byte-identical to that source and the assigned Answer remained empty.
+The complete chat answer above is saved verbatim, including the extracted citation/math
+layout; the answer file adds one terminal LF (file SHA256
+`3b7cf709dbfd5c65bdf2368754281617501d5679b7f724bcc54fee20dc2595ba`). I read the full
+answer, including the ordinary-control objection, statistical limits, adverse branches
+and resource account. No question was resent and no App task was contacted.
+
+**DM choice:** adopt the actual six-fit B15 plan and the four pre-run clarifications
+appended to the existing claim. MATERIAL_DISSENT is no. Advice is scientific criticism,
+not permission or independent empirical evidence. Direction enters confirming for this
+one fixed, bounded claim after publication; no scientific fit or final-panel exposure
+has started at this entry. Keep H6/SET recipes, three blocks, initial0/final45, all world
+addresses, order, horizon, threshold and uncertainty method exactly as proposed.
+
+The worthwhile discriminator is now the training-program mean endpoint difference on
+a fixed unread panel. I expect positive mean N8 J and service differences, but do not
+predict their t bounds will necessarily pass: block dispersion can make even three
+positive effects inconclusive. A stronger ordinary-development pair would instead
+change the selected recipe, with no identified defect requiring it first. I therefore
+buy six fixed fits, not mixed-N development as well. B01–B14 are development only.
+
+This strengthens the reason to test the selected package; it does not settle ordinary
+tuning sufficiency or turn B14 into a population result. Pro's strongest comparator
+objection was checked against the saved native panels: B12 T6 N8 J .405497332961 and
+S26.0768125 versus B14 H6 .417914296540/S28.4191875 give only +.012416963579/+2.342375
+by descriptive mean subtraction. This smaller historical margin is retained, not used
+to replace the new SET or as another paired fresh-learning result. H6 may fail or
+ordinary SET may do better in the new blocks. Every valid completed fit stays in the
+primary analysis, regardless of whether it exceeds a historical score.
+
+Current shared background read at main `ac232d3b8c97656bda51a0f4555599b566ea95b5`,
+[task count and control interpretation](https://github.com/CartmanFatass/My-paper-code/blob/ac232d3b8c97656bda51a0f4555599b566ea95b5/docs/research/RESEARCH.md).
+The B14 own-learning/terminal distinction, B11/B12 reversals and B13 competent-control
+limits concretely require fresh independent learning, fixed endpoints, ordinary
+information access, retained adverse worlds and no mechanism interpretation. Those
+judgments remain applicable; other DMs' outcomes do not enlarge this claim. The current
+published pause is lifted for this DM; Claude FSD remains stopped and G33 frozen.
+
+**Consequential advice verification.** Checked the two-sided t formula and df2/.975
+quantile against the [NIST mean-interval definition](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm)
+and [NIST t table](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3672.htm).
+Independent df2 algebra gives t=sqrt(2*.95^2/(1-.95^2))=4.302652729749464 and
+half-width multiplier t/sqrt(3)=2.484137711750331. The purely arithmetic service
+example [2,5,8] has mean5, sampleSD3, CI[-2.452413135251,12.452413135251]. At the
+B14 means, SD would have to be <.028725144577 J and <1.724013721036 service to pass;
+this is a threshold illustration, not power, expected variance or a new observation.
+For the single AND claim, rejecting both true-or-false component nulls requires
+rejecting any true component; under valid marginal t models the joint false-support
+probability is bounded by that component's one-sided .025. This is a direct event
+inclusion argument, not a claim of a simultaneous95% rectangle or distribution-free
+coverage. Three blocks cannot check shape or rule out multimodal learning outcomes.
+
+**Fixed plan and cost.** The claim's appended adoption is operative before any new
+initial panel. Six fresh fits: blocks1/2/3 learning seeds994101/994102/994103,
+common training lane bases2994100/2994200/2994300; serial H6→SET,SET→H6,H6→SET.
+Each N6/360k,16x500x45,CPU float32/Torch4 and native thread settings as B14;
+N8→N6 initial0/final45 on1945800…31/1945600…31. No endpoint/world/seed replacement,
+score-conditioned second arm, early score stop, ordinary-baseline swap, old-world
+run, automatic failure retry or expansion. Six fits cost2.16M train team/12.96M UAV;
+24 eval panels,384k team/2.688M UAV,768 episodes/12,000 policy calls;2.544M totalteam.
+Actor/critic calls607,500 each; H6 extras2,025 coordinator/2,025 teamdisc/8,100 inddisc.
+Initial evaluation accounts for half the eval cost and adds no independent training n.
+About6.9 summed scientific-command hours and3.3GB artifacts before collected copies
+are B14-based estimates; actual resource/support costs remain measured separately.
+
+**L0 — bounded B15 implementation.** Deliver one fixed confirmation entry and a saved-output
+reducer; the declared six cells are the only production choices. Implementer owns
+`experiments/candidates/agent_count_generalization/bounded_confirmation_b15/__init__.py`,
+`.../bounded_confirmation_b15/runner.py`,
+`scripts/run_agent_count_bounded_confirmation_b15.py`, and
+`tests/experiments/candidates/agent_count_generalization/bounded_confirmation_b15/test_runner.py`.
+DM owns this notebook, claim, publication and a separate `.../bounded_confirmation_b15/analysis.py`
+plus `.../test_analysis.py`. No shared learner, native environment, configuration, older
+B14 source/CLI/test or other direction change. Preserve B14 scientific loops, all
+initialization/normalizer/optimizer ownership and runtime semantics, raw Gaussian
+storage/old-logprob with clipped execution, true successor/reset, actual training
+scene recording, initial/final isolation, inference/update counters, complete outputs
+and failure status. Reusing unmodified helpers is fine; a scoped experimental copy
+with only explicit bindings changed is preferable to mutating B14 globals or runtime
+code generation. New object/cell/block/world/source identities must describe B15.
+
+Production entry calls require_admission before any scientific effects, checks the
+exact seed/output/cell/source, and exposes no technical bypass. Six cell bindings must
+reach config, learning RNG, actual training lanes, eval world/RNG and summary. Tests
+check all bindings and wrong combinations, actual initialization/sampler and common
+reset across a pair plus differing block streams, evaluation isolation/runtime,
+raw-action storage/native clip/terminal path and output identity. Keep real-path
+technical mini runs small under pytest-owned scratch with disjoint technical seed/world
+addresses; do not execute any actual confirmation panel for a test. Reuse existing
+B14 semantics evidence when unchanged; no production-scale pilot or extra scientific fit.
+The reducer takes all six valid completed outputs, first averages32 worlds perblock,
+then computes n3 sampleSD/df2 t intervals and the strict unrounded AND rule; reject
+missing/duplicate/mismatched input and retain all secondary/per-world outcomes.
+Independent Reviewer checks high-risk bindings/analysis and preserved semantics.
+Implementer launches nothing and returns diff/checks/risks; DM accepts, commits and
+pushes exact inputs, performs fresh actual-node admission, then starts the fixed
+serial batch. Stop only dependent work for real semantics, source, resource or owner
+conflicts. No changes to the claim after results, automatic retry or added cells.
+
+## 2026-09-23 — B15 implementation accepted before confirmation exposure
+
+DM read and accepts the six scoped source/test files. The execution entry binds
+the exact six cells and fixed order, each actual learning/config/sampler seed,
+block-specific training lane base, and common new initial/final N8 then N6 panel.
+The native learner, action/storage/reset law, optimization exposure, evaluator and
+isolation path are the unchanged B14 scientific recipe. The B14 runner/CLI and
+shared configuration/models remain byte-identical to source88b67e5e. The B15 source
+manifest includes its fixed analysis and adopted claim; the CLI checks cell/seed/tag
+and admission SHA before importing or constructing scientific objects.
+
+The fixed reducer requires all six complete outputs, exact source/configuration,
+exposure, runtime, panel/checkpoint/trace identity, common actual reset trace within
+each block and distinct block initializations. It first averages the32 final N8
+worlds within each independent training block, then applies the prewritten n3/df2
+t rule. It retains initial/final absolute values, each arm's own change, N6, native
+components, all paired loss worlds and minima. Missing or invalid evidence raises
+an incomplete-batch error; there is no score exclusion, imputation or alternate
+success rule. File verification checks saved bytes and panel/summary agreement;
+DM must still read native trajectories, checkpoints and process evidence after
+each completed attempt. Passing code tests is not acceptance of a scientific result.
+
+Independent Reviewer read the analysis and execution diff, actual RNG/initialization,
+admission and frozen B14 dependencies. It found one substantive accounting defect:
+an initial-panel failure inherited B14's premature fit-start marker. The B15-only
+repair starts counting after a recorded training transition and reconciles from
+recorded transitions in the exception handler, including native-component failure
+before the ordinary transition hook. Initial evaluation exposure is preserved
+separately. This changes incomplete-attempt accounting, not complete-run science.
+The final bounded re-review closes the P2; no material assigned finding remains.
+
+Checks used the scientific CPU venv and pytest-owned scratch. Analysis:17 passed
+in1.66s. Initial execution check:6 passed in5.40s; after the initial failure repair,
+7 passed in5.77s; after the pre-hook exception repair, only the three affected
+failure/CLI checks reran,3 passed/5 deselected in2.84s. Each scientific-package
+invocation reported14 dependency deprecation warnings. The last change affects
+failure accounting only, so unchanged completed-loop and analysis checks were
+reused. No production45-rollout trial or confirmation seed/world was used by tests.
+All real-path fixtures used disjoint8_994xxx/8_945xxx addresses, hidden16,
+2 lanes,20-step horizon and one update. Across the three execution-test invocations
+there were14 started miniature technical fits:10 complete and4 intentionally failed
+after one transition, plus2 unstarted initial-evaluation failures. Total successful
+technical exposure was404 training +1280 evaluation =1684 team interactions; the
+two initial-evaluation failures additionally recorded4 resets/2 policy calls and
+zero successful environment steps. These costs are separate from the six scientific
+fits. Arithmetic fixtures and read-only review add no environment interactions.
+
+The repository-wide admission source regression returned1 failed/1 passed in.15s:
+the failure names the pre-existing, unchanged FSD B12 entry lacking that AST call.
+The B15 entry itself passes the same source predicate and its admission ordering,
+exact SHA/cell/seed/tag checks were reviewed. This unrelated historical entry was
+not edited or executed. No blanket claim of a clean repository-wide suite is made.
+
+Accepted runner SHA256:
+`861ebd6362baa99eeea0a04fbce04195d189f7fb71e52eec294d2dbc399335f7`;
+analysis SHA256:
+`05ac2ba97edefb8c19ce6a3063526b79bc5895337c510e0ba93c2cef0a6f0a9e`.
+The final runner-test SHA256 is
+`66a2eb5529b226d324078e8b44dc4bec8c41a957c559631aa1af0e8878bdb76a`;
+analysis-test SHA256 is
+`27d6e84fa6a9f017471f7405eeac58b8f1e0670677e7fdd1a942ca07a21d67bb`.
+Source remains to be committed/pushed and freshly admitted on the actual node.
+At this acceptance boundary there are0 B15 scientific fits/panel exposures;
+next action is the fixed first cell b1_h6, not an additional performance pilot.
+
+## 2026-09-23 — B15 first fixed cell admitted with observation adopted
+
+The accepted implementation, fixed reducer and unchanged adopted claim were
+committed and pushed as
+[`e0a20add999ded53943f99df15f596822e6c13dc`](https://github.com/CartmanFatass/My-paper-code/commit/e0a20add999ded53943f99df15f596822e6c13dc)
+before any production initial evaluation. The actual node fetched this published
+source and current main`ea88eae3e97ff0ef77bba392077143ee2088201e`; all12 declared
+source-path hashes matched the accepted local bytes. Canonical and freshly
+published owner-pause/confirming-state/lead projections agreed. Native fetch still
+reports the previously observed unrelated missing historical commit-graph object;
+fetch returned0 and the requested published source blobs and controls were verified.
+No shared Git history, other direction or unrelated process was changed.
+
+First fixed cell `b1_h6`, seed994101, tag
+`s1_bounded_confirmation_b15_b1_h6_s994101`, was admitted once at
+2026-09-24T02:02:26.831610Z (2026-09-23 PDT). The configured agent-task supervisor
+invoked the native admission kernel, which retained the detached source snapshot
+and scientific process. Actual-node physical/effective available memory was
+14,591,041,536 bytes (13.588966 GiB), above the4 GiB floor. Admission and live
+runner/supervisor identities were checked independently of supervisor submission.
+
+Preserved native evidence, copied byte-for-byte with matching SHA256:
+[launch manifest and original operation reference](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/launch-manifest.json),
+[fresh actual-node preflight](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/admission-preflight.json),
+and [actual fixed configuration](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b1_h6_s994101/config.json).
+The operation remains on wsl_4070 at
+`/home/wu/projects/HMASD/.git/hmasd-admission/521f87fdc02cb4339c5fddc09758ff2e022e911eface4e665442342a86b48fd9.json`;
+runner463675/supervisor463674 use the manifest's recorded boot/start identities.
+No replacement or retry was launched.
+
+First scientific progress read confirms seed994101 in config/learning construction,
+actual training lanes2994100–2994115, N8/N6 bases1945800/1945600 and fixed0/45
+evaluation order. Native H6 starts from fresh owned parameters/empty optimizer
+state, not copied learned weights; initial sampler seed1114871436577968650 is
+recorded. All12 run-reported source hashes equal the pre-launch accepted hashes.
+Initial0 N8 then N6 evaluation completed32,000 team steps/64 episodes, zero
+optimizer/storage calls. All stage0 isolation fields, including actual before/after
+learner, optimizer, global/sampler RNG, runtime, buffer and training environment,
+match. At the first read, rollout1 had collected8,000 training/stored team steps,
+48,000 UAV steps,16 episodes and no completed update yet. This is partial exposure,
+not a completed fit, final-panel result or scientific acceptance.
+
+Detached observation was registered and then adopted after its first native status
+probe: generation124, observer PID2957287, window1500 seconds, job
+`launch-s1-bounded-confirmation-b15-b1-h6`. The drain returned no pending event and
+both native identities running/consistent. It observes the same operation on
+completion, failure or bounded checkpoint; a future wake consumes/rearms only its
+returned generation/wake/event IDs and never repeats this launch or the completed
+Pro send. There is1 started/0 complete B15 fit, five fixed cells unlaunched, and no
+pending Pro. Next is complete collection/verification of b1_h6, followed by the
+already fixed b1_set and remaining block order independent of observed scores,
+subject only to the stated genuine technical/resource/owner-stop conditions.
