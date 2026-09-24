@@ -5176,3 +5176,167 @@ generation46 to47 against the same operation. Native snapshot GC first previewed
 to the snapshot), then removed only source snapshot`1553c10f58d8427c953cd70c24de0174`.
 Exact source remains published on the direction branch; both complete output copies, original
 M input and author checkouts remain. No evaluator restart, old Pro resend or App message occurred.
+
+
+## Pro question 2026-09-23 training-recurrence-after-b05
+
+Conversation: reuse the current direction's Jev conversation from its private local operation
+record; do not publish the account URL. This is a new scientific question, not a resend of
+`hmasd:ef1a1f242d71ee4e2b77013ca1bfebdd3935246efb06593b2872af3d9382d75d`.
+
+**Question.** Given the completed B05 result—sampling the learned law improves greedy but
+has no demonstrated advantage over independent uniform—is one fresh matched M/U training
+pair the next useful investment to challenge B04's conditional bank-formation gain, or does
+an evidence-grounded material learning revision or stopping this training-law route have
+higher decision value now? Please advise on this one investment choice and its discriminator,
+not on how to make the same frozen S win. The DM leans toward the fresh pair, with the narrow
+fixed proposal below, but has not selected, implemented or launched it. No new architecture
+or positive insight is owed.
+
+**Why this question now.** The prior full deployment-law advice covered the B05 branch and
+its bounded end. We have reused it: fixed nine panels end without extra streams, temperature,
+selector fitting, low-action noise, checkpoint/world selection or a rewritten Gamma. It did
+not select the next training investment; it explicitly treated the fresh M/U pair as a
+competing use, not a debt. The actual S−R result and finite-stream sensitivity are new. We
+now need a choice about training-formation recurrence, not another result-review approval.
+The owner authorizes autonomous direction choices/publication under constitution §§2–5;
+pause is lifted, this session remains the same exploring lead, and other DMs' accepted work
+is left alone. Pro advises; DM owns the decision.
+
+**Standing and consequential evidence.** Read the complete latest B05 entry immediately
+above, including every world, four-stream means/dispersion, sensitivity, cost and recovery
+locations, and the selected B04/B03 entries below. The compact B05 native summary has all
+panel/world arrays and trajectory identities; all26 outputs and every saved trajectory were
+independently read by the DM. These are recorded checks, not checks the adviser may claim
+it newly performed. Bulk trajectories remain outside Git with two verified retained copies.
+
+- B04 (one actual paired initialization, new training worlds and separated private/sampler
+  RNG) M-final-uniform minus U-final-uniform: J+.035434871140, users+1.843375, J27/32 positive,
+  users24/32 positive, quality+.007564467331 and height−.007358280940. Both arms themselves
+  improve J/users in all32 worlds from actual identical initial-uniform policies. Eight
+  relative service losses remain, worst−1.928 users; three J-positive worlds lose service.
+  M is native learned high-level joint training; U uses exogenous independent-uniform labels
+  and skips high coordinator updates, retaining the same mixed low-level task/discriminator
+  objective and all required native low/discriminator learning. This is a training-regime
+  package intervention, not a clean isolated high-policy-gradient effect.
+- B04 M-greedy minus its uniform: J−.044004890887/users−2.3471875. Original full-deployment
+  Gamma=M-greedy−U-uniform is J−.008570019747/users−.5038125, with a−11.598 service world.
+  This adverse original endpoint remains frozen; it is not revised by B05.
+- B05 restored the same M-final only: native team categorical, individual AR actual-prefix
+  mixture .9pi+.1/6, mean-clipped low actions, unchanged k10/GRU and fixed32 exposed worlds.
+  O/R0 exactly reproduce old controls. Four-stream S−R primary is J−.000470478212 (17+/15−),
+  users+.068265625 (19+/13−), quality−.001144899930, height+.001082726983. Prespecified
+  S4−Rnew3 is J−.001850778453/users−.034333333333. Median within-world S/R J ranges are
+  .024439724/.032450235: small means do not show equivalence or adequate precision.
+  S4−O is J+.047675313398/users+2.72325, but has8 J and9 service loss worlds. Worst S−R
+  is1700203:−.035829642700 J/−2.6225users; worst S−O is1700219:−.031356133252/−1.959.
+  Randomization is conditionally useful versus this greedy extraction; learned-selectivity
+  value over uniform is not demonstrated. It does not imply learned training is useless.
+- Contrary recurrence evidence: old generic G−D uniform+.019697695 became−.010459129 in
+  the new B03 learning pair under the same evaluation worlds/label stream (11+/21−), while
+  both learned positively from initialization. Do not pool unlike G/D and M/U effects.
+  B02's mixed-vs-task-only deletion cost also does not isolate discriminator semantics or
+  establish a generally superior target. Original P/G additions and task-only deletion
+  recipes remain ended, without universal claims about learning/auxiliaries.
+
+Current shared background atmain`5fabdf2b8c60f327b7425522480d4a92994c0c00` (§3 and
+Current research plan) makes training-formed feedback control a working explanation, informed
+by DM1 B14/B10 and our B04/B05. Its explicit rivals include ordinary SET underdevelopment
+and S1 geometry/optimization. Those cross-direction observations cannot supply extra M/U
+training n or justify claiming a common mechanism. B05 narrows the deployment reading but
+leaves the training explanation unresolved. DM1's own fixed B15 package confirmation is not
+our matched comparison and must not be changed or duplicated here.
+
+**Proposed next observation if selected (B06, exploratory).** One fresh matched M/U training
+pair on native S1, N6/50users/k10,45 rollouts x16 lanes x500 steps=360k team transitions per
+arm, original mixed low-level reward and all B04 loss/architecture/physical-action semantics.
+M then U, once each, new actual initialization/head/training/private seeds260923961..967
+(respectively init, head, default training, auxiliary, low action, high collection, high
+update), new training-world base2200000. Verify actual native tensors and matching intra-pair
+initial/stream states, with distinct prior-block identities. Preserve eval RNG260923905,
+worlds1700200..1700231 and old uniform PCG seed262624105; do not falsely call these new or
+held-out worlds. M has initial-own/initial-uniform/final-own/final-uniform; U has
+initial-uniform/final-uniform. Six32x500 panels,96k evaluation transitions. Do not add S panels
+or compare new S against an old U control. Original B04 CLI is bound to its old init seed;
+a new narrow adapter/spec and appropriate checks would be needed, preserving old executable
+inputs rather than passing a cosmetic seed argument.
+
+Primary: final uniform native J(M)−J(U), equal weight across the same32 worlds. Read users,
+coverage, quality and height with the same complete pairing. Also preserve each arm's actual
+initial→final uniform learning, M initial→final own learning, M-own−M-uniform and the original
+form of Gamma=M-own−U-uniform. Both package and learning differences matter: a positive
+interaction caused only by U failure is not equivalent to both arms learning useful service.
+No world/endpoint selection or post-hoc service-loss tolerance.
+
+Working prediction: the M uniform bank advantage in native J and service recurs, while
+positive own-package Gamma is not promised. A second positive instance would strengthen a
+conditional recurrence judgment and could motivate a later, separately chosen attribution
+or confirmation question; it would still be only two exploratory pairs and cannot establish
+training-population advantage, complementarity, MI or the isolated effect of high gradients.
+A reversal or mixed service result would weaken using this fixed training recipe as an
+explanation that generalizes across learning instances. Preserve both blocks separately;
+no automatic third pair, pooled-score rescue or renamed retry. Technical failure is a
+separate recorded outcome, not a scientific negative or an automatic rerun.
+
+**Prospective cost and strongest rival.** Proposed pair:2started fits/720k train+96k eval,
+816k team transitions total, same preferred wsl_4070 after fresh native admission. B04's
+observed paired runner total109.310170min is a reference, not a fresh shared-node wall-time
+guarantee. Implementation/seed checks, input staging, full tensor/output reading, retained
+bulk and publication are extra work with time not yet measured. Existing B01–B05 total is
+9fits/3.24M train/657,280eval/about475.513252 summed runner minutes, plus separately recorded
+technical/support costs. No allowance is being consumed and a cheap experiment is not owed.
+
+The strongest rival to repeating the training recipe is to end investment in this particular
+M/U recurrence and pursue a material learning question that distinguishes a concrete surviving
+explanation—only if there is an executable comparison whose observation would change a use or
+scientific judgment. A new opaque auxiliary, entropy/temperature sweep, more frozen-bank
+streams, or a duplicate full hierarchy-vs-flat comparison has no such new basis here. If
+another targeted comparison is better, state what present evidence locates its bottleneck,
+its intermediate and native predictions, its matched simpler alternative, cost and unresolved
+confounds. If neither repetition nor a revision is worthwhile, explain a bounded stop without
+turning this into a universal negative or an invented external dependency. No exhaustive
+candidate search, required number of ideas or independent project review is requested.
+
+**Context to read (all source_sha unless explicitly pinned otherwise).**
+- Current governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8. Especially one
+  independent DM, proactive advice, no new approval layer, no automatic batch extension,
+  exploratory n versus confirmation, and durable bulk outside Git.
+- Current methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the working
+  explanation; Use and revise shared understanding; Comparators and MARL information;
+  Statistics; Cost and exposure; Pro. Engineering feasibility: `.agents/skills/hmasd-research-engineering/SKILL.md`,
+  Checks and review; Publishing direction results. These guide reasoning, not retroactive changes.
+- Shared background: `docs/research/RESEARCH.md` topic3, our direction standing, and Current
+  research plan at`5fabdf2b8c60f327b7425522480d4a92994c0c00`; explain its concrete implication.
+- This notebook: B03 complete; Training-law advice accepted/prospective B04; B04 complete;
+  the full Answer under `Pro question 2026-09-23 deployment-law-after-b04`; the B05 adopted
+  fixed design and complete result immediately preceding this question. Read adverse results,
+  not only summaries favorable to replication. Earlier auxiliary history only as needed.
+- Frozen B04 science: `experiments/candidates/complementary_skill_learning/b04/runner.py`,
+  `learning.py`, and `scripts/run_complementary_skill_learning_b04.py` at
+  `483819ebaa8286d24641f4947e646a765c761003`, especially Spec, TrainingLawAgent, run_fit and
+  the fixed-seed entry. Original M/U config and summary at source_sha under
+  `runs/complementary_skill_learning/b04_m_260923931_483819eba/` and
+  `runs/complementary_skill_learning/b04_u_260923931_483819eba/`. These are frozen evidence;
+  do not relaunch or modify them, or claim to independently rehash unavailable checkpoints.
+- B05 config/summary and panel JSON at source_sha under
+  `runs/complementary_skill_learning/b05_osr_a5bb71ec3/`. Evaluator meaning is pinned to
+  `a5bb71ec32f56bd6e4e9479cc91ef1463d473a3b` under
+  `experiments/candidates/complementary_skill_learning/b05/runner.py`. Git has compact results;
+  the preceding result note gives verified durable raw locations/hashes. State which direct
+  sources you could not access and how that limits the decision, without inventing new checks.
+
+**Constraints and return.** Give an evidence-based choice, the strongest objection to it,
+what B04/B05 strengthens/weakens/leaves untouched, and the bounded next discriminator with
+actual fit/non-fit exposure. A mathematical/simple-model explanation is welcome if it changes
+this choice, with its mapping and omitted closed-loop/MARL coupling; do not decorate the answer
+with unrelated literature. If you disagree materially with the proposed fresh M/U pair,
+return `MATERIAL_DISSENT: yes` and the consequential reason; otherwise say `no` with limitations.
+No scientific runs or code changes. Edit only the empty `### Answer` below on branch
+`codex/complementary-skill-learning`, target
+`docs/research/candidates/complementary_skill_learning/NOTES.md`. Read reasoning at the pinned
+source_sha supplied in the message, then fetch the latest target blob and actual SHA for
+writing; preserve the question and every other byte, and stop on overlapping edits. On success
+return the actual answer commit. If writing fails or you cannot safely preserve the whole
+file, return your COMPLETE answer in chat, not a receipt, SHA or link alone.
+
+### Answer
