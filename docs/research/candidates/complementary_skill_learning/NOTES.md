@@ -4948,3 +4948,36 @@ will remain in the durable node output with a verified collection copy and artif
 compact config/summary/native status and the scientific reading are published at the material
 result boundary. Historical tracked outputs remain unchanged. This updates storage/publication
 practice, not B05's required trajectories, fixed nine panels, zero-update scope or endpoints.
+
+
+## 2026-09-23 — B05 fixed deployment evaluation admitted
+
+After the accepted CPU/Reviewer and actual CUDA checks, the fixed nine-panel evaluation was
+admitted once. The fresh node guard checked current published main and matching local
+pause/exploring/lead, exact published source, duplicate claims and actual memory immediately
+before release. Original M input bytes were rehashed on the node and remain the three fixed
+identities. The old input directory is external to the new source/author checkout and remains
+bound in the actual admitted command.
+
+The runner-written [manifest](../../../../runs/complementary_skill_learning/b05_osr_a5bb71ec3/launch-manifest.json),
+[fresh memory assessment](../../../../runs/complementary_skill_learning/b05_osr_a5bb71ec3/admission-preflight.json)
+and [accepted native status](../../../../runs/complementary_skill_learning/b05_osr_a5bb71ec3/launch-status.json)
+are collected verbatim. Their claim/source identities agree. The first native status query
+matches both live runner and supervisor identities with no terminal witness; the summary
+file exists. These are execution facts, not complete output or scientific acceptance.
+
+Current main advanced to`f58384f3a` during preparation; the native admission observes that
+fresh control revision and the owner pause/assigned lead remain unchanged. The fixed
+0fit/0training-update comparison is still O,R0,S0,R1,S1,R2,S2,R3,S3 on the original32worlds,
+144k evaluation steps/288episodes. No new high/low law, fit, stream or endpoint was introduced.
+The full original O/R0 reproduction and the complete array reading remain outstanding.
+
+Fresh effective available memory was 11.226311GiB; this is the admission-time reading, not peak occupancy.
+
+Detached observation is armed atgeneration46 with a1500-second bounded window. Its first
+actual probe adopts the same accepted native operation and reports both processes running,
+consistent records,0observer errors and no pending event. On wake, drain all evidence,
+read/verify completed outputs or rearm the remaining observation against the returned
+generation/wake/event IDs; do not restart the evaluator, repeat the Pro Send or message
+another App task. Scientific acceptance still requires complete trajectories and the
+independent old-control/aggregate readback.
