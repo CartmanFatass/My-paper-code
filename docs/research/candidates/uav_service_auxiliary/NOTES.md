@@ -9000,3 +9000,713 @@ that remains supported. State MATERIAL_DISSENT yes/no about the unamended B08 tr
 source use and any unread consequential evidence. The DM decides after reading the full advice.
 
 ### Answer
+
+**GitHub 读取成功，但本轮未完成写回，实际 Answer commit：无。**本轮可见的文件写入动作要求整份文件替换；我没有完成能够逐字节保留其余长笔记的完整替换载荷，因此没有发出修改请求，不能将其说成 GitHub 拒绝了写入。最后核对的目标 blob 为 f91e1c60d0e4cb2cd114cc7a6f4177f8fe575818，指定 ### Answer 仍为空。没有修改仓库、另建答复文件或运行实验。以下是完整答复。
+
+B08 边界前提：保留固定交互预算，明确采用完成段延期更新及最终删失
+
+MATERIAL_DISSENT: yes。
+
+异议针对未修订的 B08 训练前提：现在不能再同时声称“只需候选目录接线”“普通高层估计器的含义未变”“跨更新保留全部技能后果”而不规定高层存储、完成资格和最终尾段。它不是对 A/N 科学问题的否定，也不意味着 B07 的服务损失已经被诊断为训练边界故障。新发现明确发生在尚未启动的训练实现上。
+
+hmasd-pro-question-usa-ordinary…
+
+我选择的合同是：保留每臂精确 180k 实际训练 transitions 和 30 个更新阶段；两臂共同采用独立的决策时刻高层记录，真实终止立即闭合，跨采集边界的技能保持执行，完整段在首次完成后的更新阶段进入高层训练；固定最后端点的未完成段显式删失，不补采、不伪造闭合。
+
+这一方案可以支持明确修订后的、有限预算的普通 HMASD 学习包比较。它保留原生损失公式，但改变高层样本的更新资格、部分 bootstrap 连接和最终信用覆盖；跨低层更新完成的高层段是混合行为版本的数据，不能称为严格 on-policy，也不能视为单纯存储重构的数学等价实现。
+
+一、三个缺陷需要一起修，单独保存 live state 不够
+
+附件给出的代码足以支持以下区别。
+
+**真实终止不是未完成数据。**当前 strict 路径仅在 skill_timer == k-1 时存高层样本，随后 reset_env_state 又移除 pending 决策。一个在技能中途结束的真实 episode 因此可能丢掉其最后高层决策的已实现奖励，并使高层序列错误地接到下一 episode。原生“全部耗尽且无人充电”的终止路径确实存在，不能把它当成不允许出现的运行异常。
+
+hmasd-pro-question-usa-ordinary… +2
+
+清训练存储不是重置执行历史。clear_buffers 清除 timers、pending 和累计奖励；下一次 step 发现 timer 缺失，会初始化技能并重置循环数组。只保留物理环境和 F 模式，不能阻止这个执行变化。
+
+hmasd-pro-question-usa-ordinary… +1
+
+**pending 字典不是自足的高层样本。**当前决策保存 rollout-local time_step，闭合用局部行差求持续时间；高层 sampler 又从那一低层行读取 state、observation 和技能。复制旧字典到新 buffer 后，即使 log-probability 数值仍正确，也可能把它配到另一个决策输入上。
+
+hmasd-pro-question-usa-ordinary… +2
+
+所以，共同修复至少要覆盖决策事实的所有权、终止闭合、执行状态与存储分离，以及高层序列的真实相邻关系。不能仅做 snapshot/restore，也不能开启具有另一套片段合同的 D2 来替代普通参照。
+
+hmasd-pro-question-usa-ordinary…
+
+二、我建议采用的精确共同合同
+1. 高层记录在真实决策时刻建立，不依附低层行
+
+对每个环境 lane，用持续递增的交互计数、episode ID 和决策 ID 标识样本。一次真实高层采样建立一份独立记录，复制保存：
+
+决策时实际使用的 state、observations、团队／个体技能及其各自行为 log-probability。
+
+决策时的团队／个体 value，按当时 ValueNorm 还原到真实回报单位保存。
+
+决策开始位置、行为高层版本、实际持续步数、逐步累计奖励及闭合原因；跨更新时另保留低层版本的变化。
+
+这些数据必须拥有自己的存储，不能是随后会被 reset 或复用的低层数组视图。高层 sampler 的输入、回报、ValueNorm 数据和相关诊断，都从同一批独立记录构造；不能只替换 sampler，却仍让别的高层读取函数沿用低层有效行索引。
+
+**再次抽到相同技能标签仍是一次真实新决策；F 进入、退出或覆盖命令本身不是高层重采样。**执行更新频率仍遵循原生 k10，而不按标签是否改变判定决策。
+
+2. 真实终止立即闭合，之后才 reset
+
+每次原生转移先保存真实 reward、next observation/state 和结束标志，更新该高层段的奖励累计与持续步数，然后按以下顺序处理：
+
+**出现原生 termination 或本任务的有限 H3000 truncation时，立即把当前高层决策闭合为 terminal。**即使只执行了 1 至 9 步，也是一条已经完整观察到终点的高层样本；其 duration 使用真实步数，后继 value 为零，GAE 不能越过 reset。
+
+正常执行到 k 步而未结束 episode 时，闭合为 nonterminal。结束标志与 k 边界同时出现时，只闭合一次，并保留 terminal 语义。完成记录保存后，才允许原生 reset 清除该 lane 的执行状态。
+
+这里将 H3000 truncation 按既定有限任务结束处理，不是在新比较中采用另一个无限任务的 time-limit bootstrap。环境奖励及终端 PBRS 也不重新计算。原生代码已经把实际 episode 结束传入奖励构造。
+
+hmasd-pro-question-usa-ordinary…
+
+3. 中途采集边界只改变学习阶段，不制造决策或终止
+
+在每个 3000-step/lane 采集边界：
+
+低层和判别器使用本阶段实际采集的数据，按原定 epochs 和 sampler 规则获得一次阶段资格。“一次资格”不是只做一次梯度使用；PPO 的多 epoch 保留。上一阶段的低层前缀不能因为高层段尚未完成而在下一阶段重放一遍。
+
+仍在执行的物理 episode 保留其 F 模式、held skills、技能时钟、actor/critic hidden state，以及独立 pending 高层记录。清除的只是已消费的训练存储，不是这些 live state。
+
+参数更新后，下一真实动作由更新后的网络、保留下来的实际循环状态和下一观察产生。保留 hidden state 不等于它已由新参数从 episode 起点重新计算；这是明确的跨更新执行合同，不增设整段历史重建。原来的高层动作继续持有到真实 k 边界或原生结束，不为后缀虚构另一次技能采样。
+
+4. 完成资格采用“首次完成后的阶段”，不按开始行或回报筛选
+
+记第 j 个采集阶段结束时的每-lane 交互位置为 B
+j
+	​
+
+=3000j。本阶段高层训练集合为：
+
+E
+j
+	​
+
+={d: d 已真实闭合，闭合位置不晚于 B
+j
+	​
+
+， d 尚未获得过高层阶段资格}.
+
+这包括上一阶段开始、这一阶段才完成的段，也包括这一阶段内真实提前终止的短段。未完成段不进入 E
+j
+	​
+
+。所有 eligible 记录统一使用既定高层 PPO epochs；末尾不足整 minibatch 的真实记录也应保留，不能按回报、版本年龄或是否发生 F 覆盖筛选。
+
+更新前冻结这一集合及其 targets。一个高层样本完成该阶段训练后即标记为已消费，不因下一阶段得到了更长未来而回头修改它或再次训练它。低层的阶段资格和高层的完成资格是两条不同时间线。
+
+这一合同保留 30 次计划更新阶段，却不保证两臂高层样本数或实际 optimizer steps 完全相同。提前终止会改变决策数量和 minibatch 数量；人为复制样本来配平不是相同训练机会。原高层 sampler 本来就是遍历实际有效样本并保留最后一个小批。
+
+hmasd-pro-question-usa-ordinary…
+
+三、高层 GAE：必须沿决策序列，不沿全局 buffer 末行
+保留原生数值约定，而不是悄悄换成另一种回报
+
+冻结普通路径累计的是段内未折扣奖励和；高层 continuation discount 则是 γ
+τ
+。其辅助函数递推使用一次 lam，并不是 λ
+τ
+。这三点应原样保留：不能借边界修复加入段内折扣、改固定 γ
+k
+，或改成逐 primitive 的 lambda 权重。
+
+hmasd-pro-question-usa-ordinary… +1
+
+对已完成高层段 i，定义
+
+R
+i
+	​
+
+=
+t=s
+i
+	​
+
+∑
+s
+i
+	​
+
++τ
+i
+	​
+
+−1
+	​
+
+r
+t
+	​
+
+,d
+i
+	​
+
+=γ
+τ
+i
+	​
+
+,D
+i
+	​
+
+=1{原生 episode 在该段结束}.
+
+分别对团队 value 和每个个体 value 使用下式，记相应决策时真实单位的旧估计为 V
+i
+b
+	​
+
+：
+
+δ
+i
+	​
+
+=R
+i
+	​
+
++d
+i
+	​
+
+(1−D
+i
+	​
+
+)V
+i
++
+	​
+
+−V
+i
+b
+	​
+
+,
+A
+i
+	​
+
+=δ
+i
+	​
+
++d
+i
+	​
+
+λ
+h
+	​
+
+(1−D
+i
+	​
+
+)
+A
+next
+	​
+
+,
+G
+i
+	​
+
+=
+A
+i
+	​
+
++V
+i
+b
+	​
+
+.
+
+其中 
+A
+next
+	​
+
+ 只在同一 episode、同一冻结资格集合中的真实连续下一决策存在时递推；资格集合的末端取零尾 trace。terminal 同时切断 bootstrap 和 trace。
+
+这是对当前宏段奖励约定的保留，不应包装成对逐 primitive 折扣目标的精确重新表达。边界修复改变的是哪些真实记录进入递推以及后继在哪里，而不是偷偷统一整个项目的折扣约定。
+
+V
+i
++
+	​
+
+ 的四种情况必须固定
+已完成段的实际后继	使用的 bootstrap
+该段原生 terminal/truncated	零；不读下一 episode 的值
+下一真实高层决策已采样，且也在本次 eligible 序列	下一决策记录中保存的真实单位 value
+下一真实决策已采样，但它的段仍 pending	该 pending 决策开始时保存的 value；本次 trace 在这里截断
+段恰好在采集末端完成，下一决策尚未采样	在这个实际下一决策边界，用更新前网络作一次纯 value 查询；不抽技能、不推进环境或循环历史
+
+第三行是本题的关键：若 pending 段在 row10 开始、采集在 row12 停止，前一完整段的后继是 row10 的决策 value，不是 row12 的全局 collector-boundary value。
+
+第四行是普通的边界 bootstrap，并不伪造一个后继高层动作。它也不应要求跨更新后的实际下一决策 value 与这次更新前的 bootstrap 完全相同。查询所用参数与 normalizer 版本必须确定，不能在高层更新后再改变已构造的 target。
+
+pending 段在下阶段完成时，用它保存的原始 V
+i
+b
+	​
+
+、完整实际奖励和真实后继，构造自己的首次 target。不把它的前缀奖励提前塞进上一完整段，不以其未来 advantage 回填已训练的前一段。
+
+所有已存 value 均已是决策时还原的真实单位，不能用更新后的 ValueNorm 再反归一化一次。原高层 loss 仍按本次 eligible returns 更新统计并归一化 targets；原有 clipping、优势归一化、团队／个体 PPO 比率及熵项不变。
+
+hmasd-pro-question-usa-ordinary… +2
+
+四、旧 likelihood 正确，不代表混合高层转移变成严格 on-policy
+
+我同意题面指出的区别：**决策时的行为 log-probability 本身不因延期就损坏。**应保持
+
+ρ
+i
+	​
+
+(θ)=
+π
+b
+i
+	​
+
+	​
+
+(z
+i
+	​
+
+∣x
+i
+	​
+
+)
+π
+θ
+	​
+
+(z
+i
+	​
+
+∣x
+i
+	​
+
+)
+	​
+
+,
+
+团队和个体分别沿原实现计算。不能在段闭合时把分母刷新成当前策略概率，也不能把旧动作绑定到新 buffer 中恰好同号的行。冻结代码明确使用新旧 log-probability 之差形成比率。
+
+hmasd-pro-question-usa-ordinary…
+
+但跨边界段的前缀由低层版本 ϕ
+j
+	​
+
+ 执行，后缀由 ϕ
+j+1
+	​
+
+ 执行；它首次进入高层训练时，高层也可能已经对其他样本更新过一次。这个单一高层比率没有校正低层策略变化、随之改变的转移分布，或跨阶段 GAE 的全部分布差异。
+
+一个最小反例
+
+考虑一个两步技能，高层在开始时选 z∈{−1,+1}，两种选择概率一直都是 1/2。每步回报为 r
+t
+	​
+
+=za
+t
+	​
+
+。
+
+旧低层总选 a=+1，新低层总选 a=−1。若两步都由旧低层执行，段回报是 2z；两步都由新低层执行，则为 −2z。若恰好在两步中间更新低层，实际段回报为零。
+
+高层概率完全没变，ρ=1，却不能把这个零回报变成任一冻结低层的回报。这个推理例子只去掉了 UAV、队友和神经优化的复杂性，说明：
+
+保存正确旧 likelihood 解决的是“这个动作由谁采样”，不是“完整技能由同一低层行为过程生成”。
+
+因此，我接受的是有明确行为版本和完成资格的经验 PPO 近似更新，不是一个已证明无偏的高层策略梯度。保留原损失代数并不意味着统计估计对象完全不变。
+
+这仍可用于有限包比较：两臂共同使用同一明确算法，分别真实训练，再在共同 F 下测量完整服务。它测量的是 F 训练接入与该共同更新制度一起产生的有限学习后果，不能把结果唯一归因为“学会了干预后的历史恢复”。
+
+两臂使用同一修复也不保证偏差相消。F 可能改变提前终止频率、段跨界数量以及旧记录进入下一次高层更新的比例。应保留这些实际计数，不把“共用代码”当作忽略它们的依据。
+
+五、固定最后端点：未完成段删失，不伪造终止
+
+第 30 次采集结束时，按既定预算停止环境交互，然后执行第 30 次更新。处理如下。
+
+所有已经完成的段，包括在最后一条实际转移上 terminal 或刚完成 k 步的段，正常进入最后的高层资格集合。
+
+仍然 pending 的段保留其原始决策事实、已观察 duration、奖励前缀和末端状态，标记为“训练预算端点删失”。它不变成 terminal，不被强制闭合成一个短技能，不用当前高层 state value 假装还剩技能的精确 continuation，也不制造一个用于后缀的 sampled action。
+
+该前缀的每条原始转移仍留在原生轨迹和成本中，并接受第 30 阶段既定的低层／判别器训练资格；只是没有形成该决策的完整高层训练 target。最后一个完成段仍按上一节规则，在真实下一决策处 bootstrap。
+
+**这不是“所有已观察奖励都获得了高层信用”。**最终 pending 前缀没有作为完整高层段被训练，必须明确报告。它也不是依 F 状态添加的 loss mask，而是两臂共同的完整样本资格规则；最终删失依赖实际 episode 相位，不能假定随机缺失。
+
+在固定 k10、两 lanes 下，最终至多有两条这样的 pending 段，每条已观察前缀最多 9 个 transitions，即至多 18 个团队 transitions 的前缀未形成完整高层 target。这个计数上界不证明其科学影响可以忽略，尤其不能忽略其中的有符号奖励或极端事件。
+
+同理，29 个内部边界至多各留下每 lane 一条跨界段，即至多 58 条延期高层段；它们在下一阶段开始后的至多 9 步内应正常完成或遇到原生结束。这里的“一阶段延迟”包含那一阶段实际发生的多次 optimizer 更新，不能理解为参数只走了一个很小的梯度步。
+
+若坚持“每个已采集奖励最终都必须进入一个完整高层样本”，那么精确预算端点与这一完整段规则就不能同时保证；必须改暴露、终点，或引入另一个截断 target 估计器。我在本建议中选择保留预算与终点，明确放弃无删失的高层信用覆盖。
+
+六、最小复现应直接检验这些语义，而不是再跑一个阳性 pilot
+
+题面给出的 k4、collection12、row5 原生结束已经是一个很好的最小复现。建议用两次采集阶段，并让另一 lane 保持正常对齐；以下 row 为该 lane 持续递增的真实交互位置。
+
+hmasd-pro-question-usa-ordinary…
+
+高层决策开始位置	实际奖励范围	闭合与首次资格
+0	r
+0
+	​
+
+,…,r
+3
+	​
+
+	正常完整段；更新1
+4	r
+4
+	​
+
+,r
+5
+	​
+
+	row5 terminal，duration2；更新1
+6	r
+6
+	​
+
+,…,r
+9
+	​
+
+	新 episode 的完整段；更新1
+10	更新1前 r
+10
+	​
+
+,r
+11
+	​
+
+，更新1后 r
+12
+	​
+
+,r
+13
+	​
+
+	保留原决策，duration4；更新2
+14、18	各自四个实际奖励	更新2
+22	r
+22
+	​
+
+,r
+23
+	​
+
+	固定两阶段端点未完成，删失；不进入高层更新
+
+这个复现至少要有以下可区分预期。
+
+**终止链条正确。**row4 的 target 含两次奖励、bootstrap 零；row0 的 trace 可以接 row4，但不能接 row6 的新 episode。
+
+**第一次边界正确。**row6 的最后 delta 为
+
+δ
+6
+	​
+
+=R
+6
+	​
+
++γ
+4
+V
+10
+b
+	​
+
+−V
+6
+b
+	​
+
+,
+
+并在 pending row10 处截断本次 trace。令 fixture 中 V
+10
+	​
+
+ 与 V
+12
+	​
+
+ 明显不同，就能检测错误地使用 collector 末端 bootstrap；不需要 UAV 成绩来判断。
+
+**延期身份正确。**第二阶段的 local row0/1 只是原 row10 技能的后两步。高层重放必须得到原 row10 的 state、observations、标签、旧 likelihood/value 和四个奖励，不能得到第二个 buffer 的 local row10。让后者拥有刻意不同的数据，可以直接检出错配。
+
+**更新资格正确。**低层 row0–11 只属于更新1，row12–23 只属于更新2；规定的每个 epoch 内照原 sampler 使用，不因延期高层而重复旧低层前缀。高层 row10 只在更新2获得一次阶段资格，row22 不进入最终高层集合，但其原始奖励仍可恢复。
+
+**概率与版本检查正确。**在更新1中确实改变高层／低层参数。更新2开始时，延期 row10 的当前概率可以不同于其保存的行为概率；不能要求其比率必为1。要检查的是分母确实来自决策时刻，而不是拿当前网络反算后覆盖。
+
+再以实际 terminal/truncation 重合边界、无提前结束的对齐路径覆盖相邻情况。独立算术预期应直接从已知奖励、duration、value 和 episode ID 计算，不复用候选 GAE 函数作答案。正常对齐路径应尽可能保留原样本顺序、归一化和随机流行为，任何差异按实际改变解释。
+
+这些是给修复者的工程复现要求，本轮没有执行它们。此前 12 项检查通过仍是题面报告的既有证据，不能冒充已覆盖这条新边界路径。工程方法也明确要求区分重放、统计复制和算法等价。
+
+hmasd-pro-question-usa-ordinary…
+
+七、最强替代不是忽略尾段，而是先完成技能再更新
+
+最有力的竞争合同是：
+
+每阶段先采集每 lane 3000 步，再在更新前的同一网络版本下继续完成该 lane 当前技能；已到真实技能／episode 边界的 lane 暂停，待各 lane 都闭合后再更新。
+
+这可以避免一个高层段的低层执行跨参数更新，并消除最终未完成高层段。它不是坏方案；其额外交互上界甚至不大：固定 k10 下每 lane 每阶段至多再需要 9 步，因此每臂
+
+T
+arm
+	​
+
+=180000+
+j=1
+∑
+30
+	​
+
+ℓ=1
+∑
+2
+	​
+
+ϵ
+jℓ
+	​
+
+,0≤ϵ
+jℓ
+	​
+
+≤9,
+
+即至多 180540 个实际训练 transitions。
+
+但必须承认它换了什么：
+
+**实际暴露和更新时刻变为轨迹依赖，两臂不再保证精确相等。**不能把这些额外步称作“仅 bookkeeping、不计训练”；也不能只采高层尾段而丢弃其真实低层训练数据。
+
+**两 lane 的技能相位可能不同，继续同步推进固定步数并不保证两者同时闭合。**需要处理真实暂停／非矩形采集，不能靠伪造 no-op 转移填满数组。低层 sampler 的不足整 chunk 尾部也要明确处理；当前源码存在按整 chunk 取有效长度的路径，因此“追加几步即可、其余全部原样”并不成立。
+
+若进一步要求每次更新只使用整个完整 episode，则代价更大。每阶段各 lane 恰好一个完整 episode、共30阶段时，实际训练量是两臂各自 episode 长度之和，最多180k但可能不同；收集更多完整 episodes 直到达到固定步数，又会产生不同的超额暴露。不能把这些合同与精确180k视为等价。
+
+我仍优先选固定暴露、延期完整段的合同，因为本题要比较有限相同交互预算下接入 F 的用途；独立高层记录可以把变更集中在高层事实、资格和连接上，不必同时重做可变长度低层收集与尾部采样。其代价是明确接受跨版本的近似高层更新，而不是声称这个代价不存在。
+
+若 DM 的实际研究目标必须要求每个高层段在单一冻结低层下执行，那么上述“完成技能后更新”应成为一个明确改暴露的替代计划；不应继续使用我选的延期合同又称其严格 on-policy。若两种共同修订的工程成本都已不值这一次探索，保留 B07、结束未启动的 B08 也是有根据的选择，不产生额外审批或必须建设基础设施的义务。
+
+八、哪些原条件保留，哪些必须修订
+条件	本建议的处理
+seed915031、N后A、两 lane、每 lane每阶段3000步、30阶段	保留
+每臂180k实际训练；共同初始F评价和两个终点F评价	保留
+新初始化、H3000、N8、k10、原生目标、全部学习器组、F本身	保留
+原团队／个体PPO、价值损失、熵项及原生段奖励／折扣代数	保留其公式，不借修复换算法组件
+strict终止闭合、live state与storage clear分离	共同正确性修复
+依附低层行的高层存储与sampler	改为独立决策记录
+高层完成资格、跨资格边界的bootstrap／trace、最终pending处理	明确修订
+每条高层转移严格来自同一冻结低层；所有观察奖励均形成最终高层target	不再声称
+
+原 L0 限制只改候选目录，已经不足以容纳这个正确性合同。需要 DM 明确调整共有学习接口的实现范围，至少涉及 hmasd/agent.py 与 RolloutBuffer 高层消费路径；不能用候选 monkeypatch 或旧字典复原来隐藏这项改变。历史 B01–B07 代码和结果仍按各自冻结版本解释，不追溯修改。核心变更采用现有的相应检查与独立 review，不增加新的审批制度。
+
+hmasd-pro-question-usa-ordinary… +1
+
+所选合同仍为 2 fits／360k训练，加最多360k评价 transitions、120评价 episodes。高层延期记录不增加环境交互；每 lane 只需持有至多一个 open 决策及当前 eligible 记录，不需要长期经验库或新模型。但独立高层数据消费、GAE连接、终止/reset分离与回归检查，是实质新增工程，不能记为零成本。实际高层样本数、各优化器步数、跨版本段数、最终删失前缀及其有符号回报都应保留；实际 wall 和支持成本目前未知。
+
+hmasd-pro-question-usa-ordinary…
+
+九、剩下可支持的科学判断
+
+**被加强的是共同边界修复的必要性；被削弱的是上一答复把它留作普通接线细节即可的前提。**这次明确的错误路径要求修改训练合同，而不是再提醒一次“保留状态”。
+
+**保持的是 A/N 的有限用途问题及 B07 的既有解释。**共享背景要求一个真正完成学习、拥有相同训练权利并共同部署 F 的普通对照；这里的修复应同时作用于 N/A，不应成为候选专属增强。B07 的物理补能与服务损失仍然是旧制品上的观察，不能从源码缺陷反推其某个坏世界的原因。
+
+hmasd-pro-question-usa-ordinary…
+
+修订后的比较仍可以问：**在这套精确预算、完成段近似更新制度下，A 是否相对共同初始化学到实际服务，并在同 F 部署下超过新训练的 N，同时保留原生 J／风险和全部不利世界。**它不单独识别历史恢复机制、终止修复的贡献或训练总体排名；一次训练对仍是每臂 n=1。
+
+原先的投入结束分支继续适用：没有值得保留的额外完整服务，只有成本节省或条件窗口改善，或者候选自己并未学到有用服务，都不足以继续这一固定配方。边界处理正确只使这些读数有意义，不提供阳性结果，也不自动授权第二对、训练延长或新的估计器。
+
+hmasd-pro-question-usa-ordinary…
+
+来源与未完成的工作
+
+我已阅读全文附件，包括上轮完整 Answer、固定 B08、边界发现、治理／方法、共享背景和全部选定代码；并读取了指定提交的 GitHub 问题、治理与方法、主线 owner/方向状态，以及精确实现中的 GAE辅助函数和低层尾部采样路径。正文中的修订合同与两步反例是基于这些代码提出的推理，不是已实现结果。
+
+没有独立运行新的边界复现、验证一个修复后的共有学习器，也没有重审 B07 的仓库外原始轨迹；本题不需要以那项原始重审来决定边界语义。目前没有缺少到必须猜测的关键文字来源，真正未完成的是所选共同修复的实现、数值／资格回归和实际训练观察。
+
+最终建议：以 MATERIAL_DISSENT: yes 修订未加说明的 B08 前提，保留固定交互预算，采用独立决策记录、首次完成资格、真实决策后继 GAE，以及最后未完成段的显式删失。可以继续的是这个范围清楚的近似学习包比较，不是“所有 estimator 与行为前提都原封不动”的 B08。
+
+## 2026-09-24 — B08 boundary advice saved; common completed-segment contract adopted and core L0
+
+### Complete reading, material dissent and DM choice
+
+The new question at `640b6665e6fead6544543488f9310814ea26d0d9` was sent once with key
+`hmasd:3a29755582c377fb921faa938b5d3c279c795419f913c0e3620737fc73aa4b8b`. The generation100
+READY event `25372edd00edbdde5391299a` under wake `1f9cf746-579d-41b5-bf14-6399eee3e3c9`
+collected the complete11198-character body, SHA-256
+`330e09b3e70046d278405808485086ea92cc21bfbd6781c54d262967ad5baa53`.
+The saved11199-character/25079-byte file including final newline has SHA-256
+`102d6a9573fdc575e0f0d8d9879b5245c51dc43d685fbbd64d2ba3ac26f9429e`.
+The full text above is **saved from chat**, verbatim. Deliver returned NOT_DELIVERED, with
+no Answer commits. Before taking the subsection back, the local and fetched target still
+matched the pinned empty question. Pro reported a visible whole-file write action but did not
+construct/send its replacement payload; this is not a rejected GitHub write or missing write
+capability. The reported hash is a blob identity, not a delivered commit.
+
+The DM read the full answer and accepts MATERIAL_DISSENT:yes about the unamended training
+premise. Keeping actual interaction exposure, state continuity and complete high-decision facts
+requires an explicit eligibility/return contract; it cannot be called an equivalent candidate-only
+rewiring. I choose Pro's completed-segment contract as a bounded common repair for both N/A.
+It retains the scientific question and original fixed exposure while honestly narrowing the
+meaning to a matched approximate learning package. The strongest alternative, completing each
+lane's skill before updates, would require nonrectangular low-level collection and trajectory-
+dependent extra exposure (at most540 additional transitions per arm under fixed k10). That is
+not selected. Neither original zero-cost equivalence nor strict on-policy high transitions is claimed.
+
+The source confirms decision values are already denormalized in `_batched_assign_skills` and
+ordinary GAE is called with `value_normalizer=None`; the new path must preserve real units
+across ValueNorm changes. Native high reward is the undiscounted actual segment reward sum;
+continuation uses gamma**duration and one native high GAE lambda factor. The browser-flattened
+formula in the verbatim answer is not executable authority: PPO remains exp(new_logp-old_logp).
+The two-step counterexample correctly shows that a valid high likelihood cannot correct a
+low-policy change inside a held skill. This is a reasoning example, not empirical evidence.
+
+Current main `426c33aa9b50f227eff7bac1dc98e91cd32d61f3` was refreshed; relevant shared topic6 is
+unchanged from the prior reading, pause remains lifted, and the direction/lead remains active.
+B07's finite physical benefit, service losses and unresolved explanations are untouched. Its
+fixed-policy bad worlds are not retrospectively diagnosed by these prospective learner defects.
+The revised comparison still has training n1 per arm and cannot identify recovery mediation,
+repair contribution or population superiority. The already fixed service/J/risk interpretation,
+adverse-world retention and no automatic extension branches remain in force.
+
+### Revised common contract before any B08 fit
+
+All original seed915031, N-then-A order, lane seeds, native H3000/N8/k10, reward coefficients,
+model/normalizer initialization equality, native learner groups, F definition, evaluation worlds,
+common initial panel, two endpoints and physical/opportunity readings remain fixed. Cost stays
+2fits/360k actual training plus at most360k evaluation transitions,120 evaluation episodes.
+Each arm has exactly2 synchronous lanes ×3000 actual steps ×30 update phases. Actual optimizer
+counts need not be equal when native endings create different high sample counts; retain them.
+No extra environment interaction, low-level prefix replay, loss mask, input, network or panel.
+No B08 fit has started. Engineering work and actual wall remain additional, presently unknown costs.
+
+For both arms:
+
+- A genuine high decision creates an owned record of its lane, episode and persistent decision
+  identity, global lane interaction index, copied decision state/observation/skills, original
+  team/agent likelihoods and real-unit values, high behavior version, and accumulated actual
+  reward/duration. Repeated sampled labels are distinct decisions. F mode changes are not decisions.
+- Actual terminal or finite-H3000 truncated transitions close immediately, with actual duration
+  and terminal flag, before reset. A k-boundary coincident with native ending closes once.
+  Nonterminal k-complete segments also close once. Episode identity prevents cross-reset GAE.
+- Completed, not-yet-consumed records receive high training eligibility at the first subsequent
+  update phase. Freeze that collection and its targets before parameter/ValueNorm updates; apply
+  unchanged PPO epochs, shuffle and remainder-minibatch rules. Consume each record in one phase.
+  Every low/discriminator row keeps only its own original phase's native training eligibility.
+- GAE follows true consecutive high decisions within lane/episode and this eligible set. A terminal
+  successor is zero; an eligible next decision supplies its saved value and recursive advantage;
+  an already sampled pending next decision supplies its saved value but ends this phase's trace;
+  when the next decision has not yet been sampled at a true boundary, query the pre-update value
+  there without sampling skills, stepping the environment or advancing GRU. No global-boundary
+  substitution when a pending successor started earlier, no later backfill of consumed targets.
+- Preserve the original undiscounted segment reward sum, gamma**actual_duration, one native GAE
+  lambda factor, team/agent losses, advantage normalization, entropy and ValueNorm conventions.
+  Saved decision values remain real-unit values, never denormalized again under newer statistics.
+- At a nonterminal update boundary retain physical/F state, held skills/timers, actor/critic
+  history and the independent open decision. Updated networks act from the retained history;
+  it is not reconstructed under new weights. A crossing segment records all actual lower-policy
+  versions; its complete target enters the next phase. This is a bounded mixed-behavior PPO
+  approximation. Correct behavior denominators neither establish unbiasedness nor cancel bias
+  between arms; record crossing/staleness counts and signed rewards.
+- After the thirtieth collection, train all completed records normally. Remaining open records
+  are explicitly budget-censored: preserve their original facts, observed reward prefix/duration
+  and last state; do not force terminal/closure, bootstrap an invented suffix or top up interactions.
+  Their observed low/discriminator rows still train in phase30. At most2 final prefixes/18 actual
+  transitions lack a complete high target, and at most58 segments cross the29 internal boundaries.
+  Preserve their signed rewards and events; these count bounds do not prove negligible impact.
+
+### L0: shared ordinary completed-segment path, then candidate integration
+
+The immediate Implementer task owns only `hmasd/agent.py`, `hmasd/utils.py` and a focused
+`tests/hmasd/test_ordinary_completed_segments.py`. Implement this contract in shared code,
+not candidate monkeypatches. DM owns NOTES, scientific choices, candidate integration,
+publication and launch. Other writers may work in candidate files; do not revert their edits.
+No result-bearing run, additional consultation, commit/push or child is assigned to the Implementer.
+
+Use a narrowly enabled config field `ordinary_completed_segments=True`, selected identically
+by B08 N/A; default false preserves existing callers and frozen/default behavior. Restrict this
+new path to ordinary strict fixed-k HMASD, reject D2/HA or incompatible alternate flow. B08's
+state/observation normalizers are disabled; explicitly reject those unsupported input-normalized
+combinations in this first path rather than silently replay a changed input scale. ValueNorm is
+supported and covered by tests. Do not modify frozen B01–B07, environment physics, models,
+control/transport/admission or another direction. This opt-in is a common baseline repair and
+explicit eligibility change for B08, not an arm-specific treatment or retroactive historical fix.
+
+Agent transition storage must create/copy/open/advance/close ordinary records through the real
+existing collector API. RolloutBuffer supplies an independent high data view for count checks,
+likelihood diagnostics, GAE, get_all_high_level_returns, sampler and update statistics; none may
+fall back to a stale low row. Preserve the real standard coordinator optimizer/loss implementation.
+All high consumers must read the same frozen eligible collection. New records should retain the
+old time-major/lane-major sample order in the aligned case where feasible. Incompatible R39A
+same-policy likelihood-equals-current checks must not silently reject valid deferred behavior;
+likelihood provenance is checked at sampling and preserved, while current ratios may differ.
+
+On this enabled path, `clear_buffers()` disposes only consumed rollout/discriminator/high training
+storage and per-rollout diagnostics, preserving live execution and open decisions. Native
+`reset_env_state` owns actual episode resets and must not silently discard an unclosed record.
+Provide `ordinary_high_level_snapshot(final=False)` for the caller to copy current completed/
+consumed records, pending records and counters for raw artifacts; `final=True` reports pending
+records as budget-censored after the last update without manufacturing credit or another action.
+Expose lane/episode/decision IDs, start/end/duration/rewards, behavior and consumed phase versions,
+terminal/reason, successor/bootstrap facts and cross-version information needed to audit targets.
+Keep storage bounded to the current phase plus at most one open record per lane, not a replay bank.
+Return the concrete snapshot field schema to the DM for candidate integration.
+
+Required checks use real step/store/storage/sampler/update paths: k4, collection12, row5 native
+ending in one of two lanes, two phases with actual high/low parameter movement, preserved live
+skill/GRU/F-compatible state, exact original row10 decision facts across buffer reset, original
+likelihoods despite a changed current policy, and row22 final censoring. Independently calculate
+known reward/duration/value GAE with V10 different from V12; prove terminal cuts and pending
+successor trace cutoff. Check high phase eligibility and original low row membership under all
+native epochs, ValueNorm real-unit stability, same-label resampling, exact-boundary terminal once,
+aligned/default-path compatibility, and final prefix recoverability. Pytest owns/cleans scratch.
+Use existing scientific venv with its bin on PATH for Ninja; install nothing. Independent Reviewer
+checks the actual diff and reproduction after author checks; DM accepts before integration/launch.
+
+The DM will then complete the candidate collector/runner in the already assigned B08 paths,
+select this same shared contract for both arms, retain fixed initialization/evaluation isolation,
+and write raw high records/censoring plus proposal/submission/actual-transition diagnostics.
+That integration and an active-F native smoke also require independent engineering review before
+exact input publication and admission. This is scoped implementation within the revised choice,
+not another scientific decision round.
