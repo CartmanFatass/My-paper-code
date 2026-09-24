@@ -1,0 +1,78 @@
+{
+  "object_id": "complementary_skill_b09",
+  "batch_seed_identity": 260924051,
+  "launch_sha": "a7b0b09ef4ef60a8aa438ba99a1f96a2fdc257b4",
+  "device": "cuda",
+  "panel_order": [
+    "B07_R0",
+    "B07_R1",
+    "B07_R2",
+    "B07_R3",
+    "B08_R0",
+    "B08_R1",
+    "B08_R2",
+    "B08_R3",
+    "B07_H0",
+    "B07_H1",
+    "B07_H2",
+    "B07_H3",
+    "B08_H0",
+    "B08_H1",
+    "B08_H2",
+    "B08_H3"
+  ],
+  "source_roots": {
+    "B07": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_u_260924001_455536ebd",
+    "B08": "/home/wu/hmasd-worktrees/complementary-skill-b08-20260924/runs/complementary_skill_learning/b08_u_260924041_c9217f0ae"
+  },
+  "source_launch_shas": {
+    "B07": "455536ebd0e6e23466ed40244bcf1e5ab6462826",
+    "B08": "c9217f0ae5b32aa2a13e228cc87899f545a0111b"
+  },
+  "evaluation": {
+    "worlds": [
+      1700200,
+      1700201,
+      1700202,
+      1700203,
+      1700204,
+      1700205,
+      1700206,
+      1700207,
+      1700208,
+      1700209,
+      1700210,
+      1700211,
+      1700212,
+      1700213,
+      1700214,
+      1700215,
+      1700216,
+      1700217,
+      1700218,
+      1700219,
+      1700220,
+      1700221,
+      1700222,
+      1700223,
+      1700224,
+      1700225,
+      1700226,
+      1700227,
+      1700228,
+      1700229,
+      1700230,
+      1700231
+    ],
+    "non_label_seed": 260924105,
+    "R_seeds": {
+      "R0": 262625201,
+      "R1": 262625202,
+      "R2": 262625203,
+      "R3": 262625204
+    },
+    "H": "hold each lane/agent opening individual label H500; preserve every k10 proposal",
+    "R": "original independent-uniform k10 delivery",
+    "low_action": "current local observation and recurrent state; deterministic mean then physical clip[-1,1]"
+  }
+}

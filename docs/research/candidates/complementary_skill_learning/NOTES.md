@@ -10209,3 +10209,26 @@ idle newly constructed native optimizers because the original checkpoint did not
 their histories. No result-bearing panel or additional training has been run in preparation.
 Next: publish this exact accepted source, submit the one fixed B09 native operation on the
 original node and adopt its status handle with detached observation.
+
+
+## 2026-09-24 — B09 admitted; fixed evaluation under observation
+
+The one B09 native operation was accepted. Its initial observed runner and supervisor
+identities match the recorded identities and both are running; record consistency is clean
+and there is no exit witness. The [native manifest](../../../../runs/complementary_skill_learning/b09_hr_260924051_a7b0b09ef/launch-manifest.json)
+binds the published source, exact command, original-node execution snapshot, durable output,
+control revision and same-operation status reference. The [initial native status](../../../../runs/complementary_skill_learning/b09_hr_260924051_a7b0b09ef/native-status.json)
+is an observation of that accepted operation, not scientific acceptance.
+
+Live canonical and fresh published controls agree on lifted owner pause, exploring state and
+the assigned lead; the canonical checkout's unrelated dirty content was preserved. The fresh
+[admission preflight](../../../../runs/complementary_skill_learning/b09_hr_260924051_a7b0b09ef/admission-preflight.json)
+passed the actual-node memory floor. Compact config, external input identities and native
+records have been collected; full trajectory retention and scientific reading await the run.
+
+The deterministic observer's first actual status adopted this exact handle at generation 87,
+with no observation error or pending event. The fixed window is 1,500 s, after which any
+checkpoint rearms the same worker. There is no repeated Send, restarted fit or second B09
+dispatch. Both trained-asset restoration and all eight exact R reconstructions remain part
+of this batch; no H/R outcome is accepted here. Per-cell progress stays in these run records
+and NOTES. The published B09 plan and scientific standing remain unchanged until reading.

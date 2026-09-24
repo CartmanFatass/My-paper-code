@@ -1,0 +1,166 @@
+{
+  "B07": {
+    "root": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_u_260924001_455536ebd",
+    "source_launch_sha": "455536ebd0e6e23466ed40244bcf1e5ab6462826",
+    "adapter_protocol_id": null,
+    "source_spec": {
+      "n_agents": 6,
+      "n_users": 50,
+      "k": 10,
+      "horizon": 500,
+      "lanes": 16,
+      "rollouts": 45,
+      "eval_lanes": 32,
+      "init_seed": 260924001,
+      "head_seed": 260924002,
+      "train_rng_seed": 260924003,
+      "aux_seed": 260924004,
+      "low_action_seed": 260924005,
+      "high_collection_seed": 260924006,
+      "high_update_seed": 260924007,
+      "train_world_base": 2300000,
+      "eval_world_base": 1700200,
+      "threads": 4,
+      "small_model": false
+    },
+    "files": {
+      "config.json": {
+        "path": "config.json",
+        "bytes": 736,
+        "sha256": "a804b516ef7e3793daed7c571dc58f13c5713f0bf140d3cd35a3c7a214318a3e"
+      },
+      "summary.json": {
+        "path": "summary.json",
+        "bytes": 674029,
+        "sha256": "db3cfff475493898f120d8875cb13780fcf28ca1313f0064fd16248c850f0071"
+      },
+      "final.pt": {
+        "path": "final.pt",
+        "bytes": 26931903,
+        "sha256": "5224552930ba84ed3082dade9ffaff4f1946a5edd66a6baf85cb9d5637d2ed5e"
+      },
+      "raw/final_R0.json": {
+        "path": "raw/final_R0.json",
+        "bytes": 11233,
+        "sha256": "8759fa97d8a621d2d7a97a5401e5621e0791f4e6768ca6309cda9cd540cd71de"
+      },
+      "raw/final_R0_trajectory.npz": {
+        "path": "raw/final_R0_trajectory.npz",
+        "bytes": 10831741,
+        "sha256": "4c9022131ed80b00f43b9452f435df5151caefeb3a2af9e2501c8f59268a0765"
+      },
+      "raw/final_R1.json": {
+        "path": "raw/final_R1.json",
+        "bytes": 11229,
+        "sha256": "2c974edab50b7a26fb172482a3c0eea8034fa71e050bed3b3bc1adbad7fbc61b"
+      },
+      "raw/final_R1_trajectory.npz": {
+        "path": "raw/final_R1_trajectory.npz",
+        "bytes": 10882288,
+        "sha256": "3422272c864d54bb119320d2842fe459648d1fadee8487ec50c7553d6d216f82"
+      },
+      "raw/final_R2.json": {
+        "path": "raw/final_R2.json",
+        "bytes": 11166,
+        "sha256": "65f2ff482750f8739f0a6e0f4f60b7b1f0e9cdae84cac3a0e0a2f4cbb0135a45"
+      },
+      "raw/final_R2_trajectory.npz": {
+        "path": "raw/final_R2_trajectory.npz",
+        "bytes": 10868313,
+        "sha256": "f4938fa7e426a8df31076e0aed4680591057f3560d3a5b82c2da2c631af80f1e"
+      },
+      "raw/final_R3.json": {
+        "path": "raw/final_R3.json",
+        "bytes": 11243,
+        "sha256": "0b27b86f77420ab4bbb216222e04b6d639607e10a04f399e52d6255da7cdcf6d"
+      },
+      "raw/final_R3_trajectory.npz": {
+        "path": "raw/final_R3_trajectory.npz",
+        "bytes": 10832350,
+        "sha256": "1fdd66b3a1d8c4fc056c0f62470ec5641586ee37f509acc8fa64ef5521eba414"
+      }
+    }
+  },
+  "B08": {
+    "root": "/home/wu/hmasd-worktrees/complementary-skill-b08-20260924/runs/complementary_skill_learning/b08_u_260924041_c9217f0ae",
+    "source_launch_sha": "c9217f0ae5b32aa2a13e228cc87899f545a0111b",
+    "adapter_protocol_id": "complementary_skill_b08",
+    "source_spec": {
+      "n_agents": 6,
+      "n_users": 50,
+      "k": 10,
+      "horizon": 500,
+      "lanes": 16,
+      "rollouts": 45,
+      "eval_lanes": 32,
+      "init_seed": 260924041,
+      "head_seed": 260924042,
+      "train_rng_seed": 260924043,
+      "aux_seed": 260924044,
+      "low_action_seed": 260924045,
+      "high_collection_seed": 260924046,
+      "high_update_seed": 260924047,
+      "train_world_base": 2400000,
+      "eval_world_base": 1700200,
+      "threads": 4,
+      "small_model": false
+    },
+    "files": {
+      "config.json": {
+        "path": "config.json",
+        "bytes": 1727,
+        "sha256": "b837606dcfe6d6ee18d65bb1f9eca9889332c33c2316d614c02281efe9d3aa49"
+      },
+      "summary.json": {
+        "path": "summary.json",
+        "bytes": 674922,
+        "sha256": "6a7cf0407f142c4b7dfffd5e03f3eebbe0607625b6677d25c7ba4836116764a0"
+      },
+      "final.pt": {
+        "path": "final.pt",
+        "bytes": 26931967,
+        "sha256": "b74920de0e5548662fa37ead0a862ab26d7865e003084dba13e6a12ff5198978"
+      },
+      "raw/final_R0.json": {
+        "path": "raw/final_R0.json",
+        "bytes": 11256,
+        "sha256": "0ba27de1a047ebc5a4d7e9ee01933eb1705c8338aaf46f5a6c3110b009a775cc"
+      },
+      "raw/final_R0_trajectory.npz": {
+        "path": "raw/final_R0_trajectory.npz",
+        "bytes": 10853982,
+        "sha256": "a7fd88838834786bcf9c2981ddcc3d392d646d59b9467b0fadad949b4b6431fe"
+      },
+      "raw/final_R1.json": {
+        "path": "raw/final_R1.json",
+        "bytes": 11149,
+        "sha256": "2c710872b970999cdc50a2d91e5c820f8c39d5d87f4999fbc0d2349527f776be"
+      },
+      "raw/final_R1_trajectory.npz": {
+        "path": "raw/final_R1_trajectory.npz",
+        "bytes": 10747283,
+        "sha256": "aeb407451f38710e09555d82ad04a68a28020e9e4d1510fd347bae1ed6b2c890"
+      },
+      "raw/final_R2.json": {
+        "path": "raw/final_R2.json",
+        "bytes": 11257,
+        "sha256": "045d2aed5cb9e4318509b8235c9bc0f710b1b4aecd34762be0b255df6677f835"
+      },
+      "raw/final_R2_trajectory.npz": {
+        "path": "raw/final_R2_trajectory.npz",
+        "bytes": 10763521,
+        "sha256": "b1f72bcd1f61c3562f9d5179198ec6642096d8eaf3348487a533de68a812cffa"
+      },
+      "raw/final_R3.json": {
+        "path": "raw/final_R3.json",
+        "bytes": 11208,
+        "sha256": "947199db1e7ab6c5376ae70e33e7a8e44515c236064ab1acb67d73bb8696ea1a"
+      },
+      "raw/final_R3_trajectory.npz": {
+        "path": "raw/final_R3_trajectory.npz",
+        "bytes": 10795371,
+        "sha256": "9c73632b0b6f504a5e82e61a9e5ced11801902c7195ad8bebea98d685baa275c"
+      }
+    }
+  }
+}
