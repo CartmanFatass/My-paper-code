@@ -7657,3 +7657,34 @@ discriminator learning and detached G/P heads,360ktrain+80keval, initialR0andfin
 No extra streams, seeds, coefficient search or scientific redesign follows from E. Publish this
 E acceptance and fixed U continuation on the direction branch before native U admission;
 finish the remaining primary comparison before a material B07 index judgment.
+
+
+The fixed U cell was accepted at2026-09-24T09:56:29Z after E acceptance publication
+`bc04362d65a6c5f6ae27d3527bc4ab3ce46abe38`. Native claim is
+`/home/wu/projects/HMASD/.git/hmasd-admission/257558fafe0eeaba9fd0e0b0b33aef8900da25face1aa595784348f627d64d78.json`;
+[the exact manifest](../../../../runs/complementary_skill_learning/b07_u_260924001_455536ebd/launch-manifest.json)
+binds source455536ebd and the declared U output. Admission refreshed actual-node main to
+`1d9196d76d4d58e0d138d2094923a03510df89a8`, with lifted pause and unchanged lead. The later
+local refresh confirms it; concurrent DM1/DM3 result changes do not modify this accepted batch.
+Preflight available/effective memory15,405,010,944bytes passed the4GiB floor. Outer configured
+supervisor`csl-b07-u-455536ebd` finished the launch command0after20s; the scientific child
+continues independently. Native supervisor537480andrunner537481 have matching recorded
+identities, consistent records and no exit witness. Live source snapshot is
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/0c0e00394aba4a0db30d767279dc59e2`.
+
+At09:57:18Z the incomplete U summary contains initialR0,16000evaluation transitions/
+32episodes,CUDA,high-level training disabled,lambda_l=.05,no reference binding and no S or
+common-context work. Its persisted fit/training counters are still0at this pre-rollout write;
+that does not establish current or final training cost. Both output logs are empty. Collected
+manifest/preflight/config/launch-status bytes were verified against actual-node SHA256:
+`1662abdc5d3e3853e21bb017402a6c48062fc40823c48c538a9dff4cdbecab0b`,
+`2cc5131035d394f783da4cfef34433a9d93e747e4ebabe41ac98f04c0ae60e17`,
+`a804b516ef7e3793daed7c571dc58f13c5713f0bf140d3cd35a3c7a214318a3e`,
+`d0124de8bac1b083541d8ed74897335db7389a0a436a08589349f9598dd489b3`.
+Read-only native status is stored beside them.
+
+Observer`launch-csl-b07-u-455536ebd` is registered and actually adopted at generation68,
+30sinterval/20stimeout/1500swindow,observerPID3216844. Drained09:56:51Zfacts show the same
+accepted running handle,0errors,no pending event/wake. Await this fixed U handle; E and M are
+fully read, no Pro is pending, and no worker or send is restarted. U terminal evidence and the
+complete P comparison remain the next work; no U scientific acceptance is asserted here.

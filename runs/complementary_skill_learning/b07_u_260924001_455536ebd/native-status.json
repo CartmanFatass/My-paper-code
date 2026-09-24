@@ -1,0 +1,77 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_u_260924001_455536ebd/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_u_260924001_455536ebd/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_u_260924001_455536ebd/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/257558fafe0eeaba9fd0e0b0b33aef8900da25face1aa595784348f627d64d78.json",
+  "direction": "complementary_skill_learning",
+  "execution": {
+    "exit_witness": {
+      "path": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_u_260924001_455536ebd/process-exit.json",
+      "state": "absent"
+    },
+    "runner": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 537481,
+        "session_id": 537480,
+        "start_ticks": 60270283
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 537481,
+        "session_id": 537480,
+        "start_ticks": 60270283
+      },
+      "state": "running"
+    },
+    "state": "running",
+    "supervisor": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 537480,
+        "session_id": 537480,
+        "start_ticks": 60270280
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 537480,
+        "session_id": 537480,
+        "start_ticks": 60270280
+      },
+      "state": "running"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_u_260924001_455536ebd/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-24T09:56:51.077324Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/257558fafe0eeaba9fd0e0b0b33aef8900da25face1aa595784348f627d64d78.json",
+  "output_root": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_u_260924001_455536ebd",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "455536ebd0e6e23466ed40244bcf1e5ab6462826",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/0c0e00394aba4a0db30d767279dc59e2"
+}
