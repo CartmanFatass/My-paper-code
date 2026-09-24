@@ -303,6 +303,15 @@ def test_declared_production_cost_totals():
     }
 
 
+def test_production_cli_satisfies_native_kernel_guard_contract():
+    from scripts.hmasd_launch import _validate_guard_contract
+
+    _validate_guard_contract(
+        b17.REPOSITORY_ROOT / "scripts/run_agent_count_fresh_world_deployment_b17.py",
+        b17.DIRECTION,
+    )
+
+
 def test_cli_admits_before_candidate_import_and_passes_only_fixed_bindings(tmp_path, monkeypatch):
     from scripts import run_agent_count_fresh_world_deployment_b17 as cli
 

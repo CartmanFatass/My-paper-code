@@ -17315,3 +17315,44 @@ panels inside the single accepted invocation. Current published main
 same lead. Next: publish these exact inputs, obtain fresh native kernel admission, retain the
 manifest/process handle, and arm deterministic observation for this task. B17 still has0fits;
 B15's original inconclusive confirmation and all B16 contrary evidence remain unchanged.
+
+
+## 2026-09-24 — B17 pre-admission refusal reconciled; immutable inputs staged
+
+The supervisor submission from published source
+`b35a55654b27be76a84f47bb23f8694baf340aee` exited4 before scientific admission.
+Its preserved native task log reports:
+`absolute author input is absent from published snapshot: /home/wu/projects/HMASD/runs/agent_count_generalization`.
+The snapshot mapper correctly treats an absolute path inside the author repository as a
+published source path; retained ignored model/trace files are not in that snapshot. No
+scientific result follows from this supervisor command. I inspected the actual native kernel
+and existing operation store: preparation raises before claim creation or child spawn, the
+fixed B17 output does not exist, and there is no matching operation claim. The refused
+supervisor/log and prepared source snapshot are preserved. No accepted scientific worker is
+being restarted, and no output tag or claim was removed to obtain another attempt.
+
+Resolve the existing input requirement using the configured external staging root:
+`/home/wu/hmasd-inputs/agent-count-b17-final45/agent_count_generalization`.
+All42 fixed input files were copied as independent bytes, made read-only, and checked against
+the same expected SHA-256 values both at the source and at the copy. Their total is
+985227587bytes; original retained assets remain unchanged. This adds985227587bytes of native
+input storage beyond retained outputs and the planned B17 outputs; staging wall/CPU was not
+separately metered. No new checkpoint, observation, fit, world, seed or comparison was created.
+The CLI will bind this explicit external directory, which snapshot rewriting preserves.
+
+This inspection also caught a production guard integration gap: the kernel's AST validator
+requires a literal direction argument, whereas the new CLI supplied a constant variable.
+I changed that one call to the same literal `agent_count_generalization` and clarified the
+input-root help text. A new focused regression invokes the real kernel guard validator.
+The two CLI/guard tests passed in3.22s (10other tests deselected); staged-diff whitespace
+checking passed. The evaluator itself and all scientific bindings remain unchanged.
+Corrected CLI SHA-256 is
+`54cdf984b3ab236b8eb9a265e06eae5be984e84451744abe2968359518b5a0ff`;
+current test SHA-256 is
+`c279eafdea935c5138844d002093c9b14bd2e668156cb742f997775764c80652`.
+The independent Reviewer checked the correction, snapshot mapping, recorded42-file identity
+and refusal ordering against the matching native kernel source, and found no remaining
+material integration issue. It reused the two passing checks, without claiming a new remote
+rehash or production evaluation. After publishing the exact corrected source, submit once
+with this staged input root to the same unused fixed B17 output. Native replay agreement
+remains unverified; only the prescribed six replay gates can release the18fresh panels.

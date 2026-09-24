@@ -36,17 +36,17 @@ def main(argv=None, *, run_fn=None):
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument(
         "--input-root", type=Path, required=True,
-        help="canonical runs/agent_count_generalization containing the six bound retained assets",
+        help="declared retained-input directory containing the six digest-bound assets",
     )
     args = parser.parse_args(argv)
     if args.out.name != TAG:
         parser.error(f"--out basename must be {TAG}")
     if not args.input_root.is_absolute() or args.input_root.name != DIRECTION:
-        parser.error(f"--input-root must be an absolute canonical {DIRECTION} run directory")
+        parser.error(f"--input-root must be an absolute retained {DIRECTION} directory")
 
     # Admission is deliberately the first scientific operation. Candidate imports,
     # checkpoint loading, model construction, and environment interaction follow it.
-    admission = require_admission(__file__, direction=DIRECTION)
+    admission = require_admission(__file__, direction="agent_count_generalization")
     if args.launch_sha != admission["sha"]:
         raise ValueError("launch SHA disagrees with admission")
     from experiments.candidates.agent_count_generalization.fresh_world_deployment_b17.runner import (
