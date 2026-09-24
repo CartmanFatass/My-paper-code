@@ -486,23 +486,51 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 下一比较见[方向表](#active)。当前已接受的批次按原绑定完成，低分、完成一个配方或暂时无新候选
 都不自动结束 DM 的科学责任。可依据项目证据继续、复现、简化、转向或有理由停止。
 
-**当前工作解释（待检验）：** 层级训练可能通过训练目标与技能条件化，塑造能迁移到不同人数的低层
-反馈控制；其中部分用途可以在不持续采用高层新分配时保留，而部署时如何使用学得分配又可能损耗
-这种用途。人数线 B14 的新学习包收益、B10 的开局标签复用均值，以及技能线 B04 的 uniform 库收益
-与贪心部署损失共同提示这一解释。B05进一步显示固定M库的随机化可改善贪心，但学得分配尚未显示
-超过uniform的额外用途。这些结果来自不同对照与训练实例，不能合并成机制证明或增加同一主张的
-训练 n；B10/B05的局部服务损失也反对“在线分配无用”或随机化逐世界占优的普遍结论。
-[B14](candidates/agent_count_generalization/NOTES.md#2026-09-23--b14-complete-fresh-learning-reproduces-a-bounded-package-benefit)、
-[B10](candidates/agent_count_generalization/NOTES.md#2026-09-23--b10-complete-opening-assignment-replay-improves-means-with-consequential-local-losses)、
-[技能 B04](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b04-complete-training-bank-gain-and-greedy-deployment-loss-coexist)、
-[技能 B05](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)。
+**当前工作解释（待检验）：** H6 的有限包收益可能来自局部循环控制、技能上下文或优化差别；
+“学得的高层选择产生了收益”尚无识别性证据。2026-09-24 外部 review 后核对已完成训练日志：
+人数 B03/B07/B14 的最终团队条件熵约为上限的95.5%/98.2%/96.7%，技能 B04 M 为95.2%，
+个体熵均接近上限。这加强了随机上下文这一竞争解释，降低以已有正差支持学得技能作用的理由。
+但熵项的标量大小不能证明其梯度压制任务梯度；均值接近最大也不等于逐状态/联合分布独立均匀。
+B14 与技能 B04 M 的最终判别器训练准确率分别为.273/.309与.317/.293，不能直接称为六类随机
+猜测的1/6；这些是训练集指标，尚非留出可辨识性证据。裁剪后 log-q 的平均奖励也不能证明奖励
+对状态/标签恒定。[人数 B14 原始日志与配置](../../runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/summary.json)、
+[技能 B04 原始日志与配置](../../runs/complementary_skill_learning/b04_m_260923931_483819eba/summary.json)、
+[外部 DM1 review 含F11](https://github.com/CartmanFatass/My-paper-code/blob/bb5824caa7bde0ed40cc260074b1f794df2d3617/docs/Claude_docs/reviews/DM1_AGENT_COUNT_GENERALIZATION_REVIEW_20260924.md)。
+
+部署读取仍有用：B10 的开局复用均值改善伴随局部服务损失；技能 B02 M/B03 D/B03 G/B04 M 的
+own−uniform 平均服务差为−2.47/−2.01/−1.31/−2.35人，但 B02 task-only T 为 **+1.02人**
+（J差−.00158）。四个混合奖励实例的同向服务现象不能推广到全部已训练策略，B03 D/G又共享
+初始化与训练区组，不能作为四个独立同配方训练重复。新发布B05中，S−O为+.0477 J/+2.72人，
+S−R为−.000470 J/+.0683人；固定库随机化改善贪心，学得选择尚未显示额外用途，亦未证明等价。
+Root随后对已验收九份NPZ核对原哈希，只取renewal行作补充描述性读取（无新环境步或fit）：
+O的个体标签计数为[158,1452,2061,3618,770,1541]，六机同标签仅9/1600次，个体相邻重选
+改变1180/9408次；S四流团队标签4占1767/6400，R为1053/6400。这反对review的“贪心
+把所有机变成同标签”解释，不能据此识别收益成因或推断总体占优。选中标签的单个log-prob
+不是完整分类分布的逐决策熵；本次补读不修改B05主判读。
+[B05完整结果与数组哈希](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b05-complete-stochastic-deployment-improves-greedy-but-not-uniform)、
+[B02 T反例](../../runs/complementary_skill_learning/b02_t_260923911_e232332a0/summary.json)、
+[B10原范围](candidates/agent_count_generalization/NOTES.md#2026-09-23--b10-complete-opening-assignment-replay-improves-means-with-consequential-local-losses)、
+[技能 B04](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b04-complete-training-bank-gain-and-greedy-deployment-loss-coexist)。
 
 竞争解释仍包括普通 SET 在当前表示/优化预算下不足，以及 S1 特定几何与干扰结构偏好当前配方。
 S1 的单用户单资格性质简化了冻结几何下的连接分配，却没有消除联合位置选择造成的干扰耦合。
-因此 B15 只检验固定新面板上的训练程序平均包差，B05的已读结果只回答固定技能库的部署后果。
-基线竞争力、训练形成收益的复现与成因、跨任务适用性仍需分别解决。基线开发与机制区分是现有解释的缺口，
-不是本轮追加调参或修改确认对照的指令。外部任务必须先匹配数量迁移、信息与动作条件，其接入和
-训练成本尚未测量；一个外部正结果也不能自动建立通用 MARL 优势。
+SET也保留当前自身局部观察，另有k10刷新中央快照；它与H6的差别不能简化成“旧观察对新观察”。
+B15仍只检验N6训练后固定新N8面板上的平均包差，既不识别技能成因，也不确认比SET更小的迁移损失；
+B14的N8/N6包差约.0714/.0499，其差.0214只是单实例描述。主张、终点、对照和判读保持原绑定。
+后继对照应区分局部结构、固定上下文、随机上下文与学得选择；直接把标签数6改1会改变FiLM参数形状，
+同时删除判别器奖励又改变学习目标。随机上下文与H6差异不显著不能证明等价或把作用唯一归为正则化。
+降低高层熵系数是可检验干预，尚非已证实修复；其信息价值在于是否改变条件分布并提高相对uniform的
+原生用途，不能仅以熵降低为成功。这些问题尚未注册为新增结果批次。
+
+动作饱和及原始高斯熵的优化激励是实际疑点，但“保存原始动作/log-prob，执行裁剪”本身不推出
+score-function梯度有偏；CAPG原文给出同期望、较低方差估计器。这不宣称PPO/GAE完整实现无偏，
+也不替代对执行分布的研究。[CAPG原文§3](https://proceedings.mlr.press/v80/fujita18a/fujita18a.pdf)。
+S7目前实测的风险节省具体是返航余量罚降低：B04/B05的256个评价回合均未发生切断、耗尽或充电，
+不能推出其他策略轨迹不可能触发事件。B05前三个正差世界占净J差72.5%，8个R零吞吐世界占51.9%，
+强化服务丧失的用途限制；它们不授权删尾、改B06判读或追加20/32及.02阈值。
+[B05完整服务/余量记录](candidates/uav_service_auxiliary/NOTES.md#2026-09-23--b05-complete-endpoint-risk-savings-recur-service-gains-do-not)、
+[外部DM3 review](https://github.com/CartmanFatass/My-paper-code/blob/5ec6e1dff/docs/Claude_docs/reviews/DM3_UAV_SERVICE_AUXILIARY_REVIEW_20260924.md)。
+外部任务的接入与训练成本尚未测量；一个外部正结果也不能自动建立通用MARL优势。
 
 ### 三条主线和近期动作
 
