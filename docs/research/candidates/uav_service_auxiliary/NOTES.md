@@ -5890,3 +5890,136 @@ After complete evidence reading, READY `053f99b959628ed7c3eede34` is consumed
 with generation75/wake`a66ccde2-1f5b-4c21-830d-c6c14fe2ad29`, advancing to76.
 Both original B05 workers are finished; no experiment, unconsumed event or old
 Pro answer remains pending. No worker restart, repeat Send or App message occurs.
+
+
+## Pro question 2026-09-23 b05-risk-service-next-intervention
+
+Conversation: reuse the current Jev adviser conversation; its address remains
+only in local operation state. The completed prior question is identified by
+key `hmasd:9c663dfbd9d85af2ad743a57b23ff3bc2d7e48878eff62bd5252c071b8ece5c5`.
+This is a new scientific question after a fully accepted new experiment, not a
+retry, delivery repair or repetition of that accepted question.
+
+**Question / impending choice.** B05重复了最终平均J/风险成本优势和开发终点损失，却没有
+重复服务收益。当前固定系数4配方不再追加训练，也不升级为默认或确认。DM继续负责服务—风险
+这个问题：**下一笔工作是否应先检验一个只用合法当前观察、按返航余量触发的简单执行反馈，
+而不是再次改变整段训练的成本权重？** 请与最强的具体学习修订或有理由暂不新增实验比较，
+选择最值得做的一个判别；不要把正最终均值当自动继续资格，也不要仅因两个区组便要求停掉
+整个研究问题。这不是Portfolio、方向名额选择或请求owner逐项批准。
+
+**Standing and changed evidence.** 请先读紧邻上方完整B05条目与全部40个端点世界表，
+不是只看这里的均值。科学source3de3e3f71c747e2422656126b52ae88beafb562a，S7-S2/v3/reward-v2，
+8UAV、30users、k10，30×1500×4=180k训练team transitions/臂，完整高低层与判别器学习。
+N/R同实际初始化与首轮物理数据，唯一干预是训练中额外减2倍实际post-transition
+`return_constraint_cost`，原生评价均系数2。R的真实buffer reward、两层GAE、实际优化器和
+最终checkpoint均独立核验；不是失活机制或单纯固定策略。每臂180k train/96k eval，B05
+实耗2fits、259.992391 runner min。原始二进制保留在条目指明的本地/节点；Git摘要和核验结果
+不冒充你实际读取过二进制。四个endpoint格子必须分开：
+
+| 区组/面板 | R−N J | R−N QoS | R−N capped cost |
+| --- | ---: | ---: | ---: |
+| B04 development30 | −218.433452 | −.091920514 | +.027256861 |
+| B04 final32 | +549.393528 | +.108482684 | −.129009370 |
+| B05 development30 | −37.659662 | −.117039433 | −.045606817 |
+| B05 final32 | +241.885454 | −.026788931 | −.094165509 |
+
+B05最终N/R的J−232.025030/+9.860423，QoS.216057847/.189268916，throughput
+6.481735/5.678067Mbps；14胜18负，中位ΔJ−99.441797，最差−676.258092，最大+2042.732101。
+R有13负J、8零QoS（N为14/1），其中6个J胜出世界仍零服务；但另6世界同时增服务降成本，
+所以“全靠不服务”也过度。最终mean/P10/最差电池min提高，18world提高14降低；开发mean
+电池min略降。开发R自身30−0 J+112.065545、QoS+.054655545，N相应+149.725207/+.171694978；
+两臂有真实学习，不能用R的自身改善代替相对用途。R开发J20→30下降252.952693，不选较早
+checkpoint。final没有初始化评价。两面板均已曝光，世界/时间/agent rows不增加独立训练n。
+
+此前完整咨询已预写“最终正、开发负→有限面板用途，不支持一般默认”；我们据此保留观察而
+不追加原样训练。这次新问题关注一个不同干预的投入价值，并非再次咨询该旧分支。B03的
+服务/普通预测辅助在两块反号、共同MSE与用途相反的负证据也保留；没有新原因复活旧头。
+原生N控制自身有实际服务学习，不能因为当前R较低绝对服务就废弃N为主控制。
+
+**One concrete alternative to challenge, not an accepted experiment.** 当前policy合法观察
+已经包含UAV电池、raw return margin/threshold、相对充电站位置；不是“缺一个风险标量”
+的问题。native return cost是最差成员margin负部/.05并cap1，mean battery不是它的替代。
+当前native motion law只有极低绝对电池的limp-home强制处理；请求dock在站点附近会改变动作。
+可否用这些已开放的当前观察给两份原生N最终策略加一个事前固定、单一规则的margin-conditioned
+返航反馈（含必要的确定性进入/退出约定），在未触发时原样执行，在触发时用已有station信息
+调整该成员动作？比较每份相同N参数的原执行和反馈执行，仍按完整原生J/QoS/throughput/cost/
+事件/真实battery尾部评价。不得读取未来、oracle rollout、其他策略隐藏状态或新的特权输入；
+不得改physics、reward系数、终止、horizon或挑world；反馈也不自称安全保证。
+
+这个候选的工作预测是：改变已实现的风险接近轨迹而无需把所有状态的学习目标统一增重，
+有机会保留有用原生服务；最强反例是触发过晚/不可恢复、提前撤走关键relay、群体同时返航和
+站点竞争，使成本不降或服务损失更大。只有运行真实的干预后轨迹才能读这些后果；对旧轨迹
+换一个reward或挑零服务world不能检验它。现有保留数据没有逐成员ownership/动作影响诊断，
+不能把共享cost归因缺陷、缺信息或不可逆风险当已证明的失败原因。
+
+零交互的**事后描述**用六个250步bin检查final旧轨迹：B05 N/R cost为0/0、0/.000008349、
+.052370/.002454、.212646/.046231、.325313/.140988、.494646/.330299；QoS为
+.088980/.083865、.161533/.126308、.211554/.163596、.262310/.194234、.263353/.257090、
+.308617/.310520。末bin cap饱和41.7375%/23.95%。这支持询问执行期条件动作，却不识别
+延迟信用失败，也不证明feedback可恢复。你可以否定此候选，若别的实际学习修订更有信息价值，
+请给一个有源码契约和不同预测支撑的具体选择；不泛列所有潜在解释或强制生成新模块。
+
+**Prospective cost / exposure for advice, not a frozen launch.** 上述零更新候选可用全部两份
+现存N最终策略（B04/B05，非挑最好），各比较两种执行规则，在全部旧8+32世界各一次：
+2旧策略×2规则×40world×1500=**240k eval transitions upper bound、0新fits、0updates**，
+原执行重现与干预都计成本。按B05 192k evaluation实际80.883842min粗参照，约101min evaluator
+wall，主机并发等使未来时间未知；规则实现、合法信息检查、必要审阅与收取另计。旧学习是
+已付成本，未形成新训练replicates；新反馈world也仅是开发条件下的执行证据。若更小固定设计
+已能改变选择，请具体说明减少哪些工作而不选择有利旧实例；不能用“0fits”等同免费。
+一个真正不同的完整学习比较若更合适，参考2臂×180k train、同原生评估预算、约260min
+summed runner的量级，并说明为何其信息值得该额外成本。尚未决定阈值/公式、试验或任何新fit。
+不得自动扫系数、第三对原样R/N、遍历规则、追加世界或确认；固定新协议由DM读完后另写。
+
+**Context and source precedence.** Repository `CartmanFatass/My-paper-code`.
+The actual send supplies full `source_sha`; references marked source_sha mean
+that immutable question commit, not a moving branch.
+
+- Current owner/governance at **2a736e873b72d7ca150668383d052e7ca7bb234d**:
+  `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8; and RESEARCH top owner/pause,
+  own `uav_service_auxiliary` row, topic6. Owner resumed this DM, granted continued
+  scientific autonomy after recipe failure and requested continuation; pause is
+  lifted here, Claude FSD remains paused and G33 frozen. Advice does not change
+  those states or require new owner/Root approval. This is one direction only.
+- Current methods at that same published revision:
+  `.agents/skills/hmasd-scientific-tools/SKILL.md`, Explore an idea, Update the
+  working explanation, Comparators, Statistics and Cost and exposure. The new
+  shared topic6 revision treats positive mean/tail savings and complete service
+  failures together; it motivates comparison with a conditional intervention,
+  not a claim that either risk weighting or risk feedback is generally useful.
+- Primary local evidence at source_sha: this NOTES B05 complete entry and the
+  earlier `2026-09-23 — B04 advice adopted; B05 fixed independent-training recurrence`
+  entry including the immediately preceding full Pro Answer; B04 complete entry;
+  `runs/uav_service_auxiliary/b05_n_914173_a01/summary.json` and corresponding R,
+  and both B04 `b04_n_914021_a01` / `b04_r_914021_a01` summaries/configs.
+  Check paired losses and absolute service, not only aggregate differences.
+- Frozen numerical implementation at **3de3e3f71c747e2422656126b52ae88beafb562a**:
+  `experiments/candidates/uav_service_auxiliary/b05/native.py` and reused
+  `b04/native.py` (actual objective/storage/evaluation),
+  `envs/pettingzoo/relay/energy_aware.py` methods `_energy_observation`,
+  `_raw_return_energy_margins`, `_prepare_energy_actions`, `_is_uav_in_limp_home`,
+  `_limp_home_velocity`, and reward construction around lines796–813. Read the
+  matching B05 config for units and active settings. An approximate return-energy
+  estimate, existing docking action and an actual hard feasibility guarantee are
+  different things. If implementation facts differ, correct the premise.
+
+The raw binary gap is explicit. Cite source passages actually used; do not claim
+that a Git summary verifies raw trajectories you cannot read. No external paper
+is required; use a verified primary passage only if an analogy changes the choice.
+
+**Return.** 给出一个清晰的下一投入建议及最强替代，说明B05加强/削弱/未触及什么。重点判断
+上述执行反馈是否现在值得做，若是，给最小但可执行的前瞻比较、合法信息/精确触发和退出语义、
+中间与原生结果预测、反面结果怎样改变选择；不以观察到的收益反推阈值或任意服务容忍线。
+若拒绝，说明缺哪一条可改变量/判别，选择一个更值得的明确学习比较或有证据的停止理由。
+无需确认任何总体优势、创造固定数量候选或要求先做昂贵完整诊断。写明MATERIAL_DISSENT yes/no，
+实质批评由DM回应，Pro不作批准或否决。
+
+**Answer-only write constraint.** No training or repository changes except the
+empty `### Answer` subsection of this question in
+`docs/research/candidates/uav_service_auxiliary/NOTES.md`, branch
+`codex/uav-service-predictive-control`. Read reasoning inputs at the pinned
+source. For writing, fetch the latest target file and use its actual blob SHA;
+preserve the question and every other byte, stopping on overlapping edits.
+Return the actual commit on success. If GitHub writeback fails, return the
+**complete substantive answer in chat**, not a SHA, receipt, link or promise.
+
+### Answer
