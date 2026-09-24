@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-23T23:28:03.860065Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/0879eb574fab4ffeb4df753f01569d36/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/0879eb574fab4ffeb4df753f01569d36/scripts/run_agent_count_fresh_learning_b14.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201",
+    "--",
+    "--cell",
+    "set",
+    "--seed",
+    "974201",
+    "--launch-sha",
+    "88b67e5e0110ae05c440588a2b19ab0b6c0f021c",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201"
+  ],
+  "claim_key": "380ba398e2af9b667314ee8775e103a606c5b04ec452c700a874c01e1112ceb0",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/380ba398e2af9b667314ee8775e103a606c5b04ec452c700a874c01e1112ceb0.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/0879eb574fab4ffeb4df753f01569d36/scripts/run_agent_count_fresh_learning_b14.py",
+    "--cell",
+    "set",
+    "--seed",
+    "974201",
+    "--launch-sha",
+    "88b67e5e0110ae05c440588a2b19ab0b6c0f021c",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201"
+  ],
+  "command_sha256": "caba807f24b50940c4ee24a8378f2a8fe0aa46b89ea047f4230ac6b64a2c3d23",
+  "control_observation": {
+    "observed_at": "2026-09-23T23:28:03.746322Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "9095b89d30f854e385493d79eed98d64690f30a7"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-23T23:28:03.757613Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/0879eb574fab4ffeb4df753f01569d36",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_fresh_learning_b14.py",
+    "--cell",
+    "set",
+    "--seed",
+    "974201",
+    "--launch-sha",
+    "88b67e5e0110ae05c440588a2b19ab0b6c0f021c"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/380ba398e2af9b667314ee8775e103a606c5b04ec452c700a874c01e1112ceb0.json",
+  "output_root": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201",
+  "preflight": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 445236,
+      "session_id": 445236,
+      "start_ticks": 56588868
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 445236,
+    "process_group_id": 445236
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 445237,
+      "session_id": 445236,
+      "start_ticks": 56588871
+    },
+    "pid": 445237,
+    "process_group_id": 445236,
+    "supervisor_pid": 445236
+  },
+  "schema_version": 1,
+  "sha": "88b67e5e0110ae05c440588a2b19ab0b6c0f021c",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/0879eb574fab4ffeb4df753f01569d36",
+  "stderr": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_set_s974201/stdout.log"
+}
