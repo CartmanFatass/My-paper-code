@@ -10232,3 +10232,258 @@ checkpoint rearms the same worker. There is no repeated Send, restarted fit or s
 dispatch. Both trained-asset restoration and all eight exact R reconstructions remain part
 of this batch; no H/R outcome is accepted here. Per-cell progress stays in these run records
 and NOTES. The published B09 plan and scientific standing remain unchanged until reading.
+
+
+## 2026-09-24 — B09 complete; persistent U contexts lose service and do not give a shared deployment improvement
+
+### Result and fixed-rule decision
+
+The full 16-panel batch completed and I accept its limited deployment observations after
+reading and checking the complete saved outputs. The prewritten joint prediction fails:
+B07 U loses both J and served users; B08 U gains mean J but loses served users. Every one
+of the four paired streams loses users in each bank. I retain original R as the working
+rule for these two assets and do not promote H as a default replacement. This finishes B09;
+there is no additional stream, opening-vector selection, dwell-time search, fit or confirmation.
+B08's favorable score tradeoff and B07's one favorable world are retained, not renamed failures.
+
+This is the mixed-asset / J-service-tradeoff branch already addressed by the complete
+[renewal advice](#pro-question-2026-09-24-random-renewal-use-after-b08) and adopted in the
+[fixed contract](#2026-09-24--renewal-advice-adopted-fixed-b09-hr-and-l0).
+MATERIAL_DISSENT: no. It requires no repeated Pro question to apply that unchanged reading rule.
+No service-loss tolerance, pooled success statistic or world-wise H/R choice was introduced.
+
+The executed source is `a7b0b09ef4ef60a8aa438ba99a1f96a2fdc257b4` and the accepted
+operation remains bound by its [manifest](../../../../runs/complementary_skill_learning/b09_hr_260924051_a7b0b09ef/launch-manifest.json).
+The [complete summary](../../../../runs/complementary_skill_learning/b09_hr_260924051_a7b0b09ef/summary.json)
+contains both banks, every panel, per-world and paired stream values, artifact locators and costs.
+
+| Bank | R mean J | H mean J | H−R J | R users/step | H users/step | H−R users/step |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| B07 U | 0.432507242960 | 0.384310999838 | -0.048196243121 | 29.346796875 | 26.430093750 | -2.916703125 |
+| B08 U | 0.402253740348 | 0.412506866213 | +0.010253125865 | 29.155968750 | 28.387156250 | -0.768812500 |
+
+These means first average the four streams inside each world and then weight the 32 worlds
+equally, separately by bank. This is two existing learned assets, not two new training runs;
+their shared exposed S1 worlds and random streams are not independent generalization evidence.
+The 512 evaluation episodes and all per-step readings do not increase training n.
+
+B07 has 31/32 worlds worse in both J and users. Its favorable exception, world1700217,
+is +.019442996685 J / +.8405 users. The worst world1700204 is −.126025734727 J /
+−7.9185 users. Across 128 paired stream-world episodes,105 lose J and104 lose users;
+the worst H0−R0 world1700228 loses .229383493124 J and14.368 users/step. All four stream
+means lose both J and users. Quality improves in29 worlds but the height penalty rises in
+all32; those component changes do not recover the native service loss.
+
+B08 has20 positive/12 negative J worlds, but12 positive/20 negative service worlds;
+8 worlds gain J while losing users. Its worst J world1700202 is −.044211067669 J /
+−4.6865 users; the worst service world1700217 is −5.1815 users with −.039029621593 J.
+Among128 paired episodes,45 lose J and75 lose users. H1−R1 world1700211 is the worst J
+pair: −.160935553329 J / −10.5 users; H0−R0 world1700202 is the worst service pair:
+−11.35 users / −.140258886629 J. Quality improves and height penalty falls in every
+world average, but seven individual episodes still lose quality and nine raise height penalty.
+H0−R0's J stream mean is negative, while H1..3 have positive J means; all four lose users.
+The B08 mean J gain remains a real objective tradeoff, without authorizing a service guarantee.
+
+| Bank / paired stream | H−R J | H−R users/step |
+| --- | ---: | ---: |
+| B07 H0−R0 | -0.058728778597 | -3.329375000 |
+| B07 H1−R1 | -0.051440023115 | -2.957187500 |
+| B07 H2−R2 | -0.041070323218 | -2.746312500 |
+| B07 H3−R3 | -0.041545847554 | -2.633937500 |
+| B08 H0−R0 | -0.003313082052 | -1.559562500 |
+| B08 H1−R1 | +0.009570826090 | -0.767187500 |
+| B08 H2−R2 | +0.017369753611 | -0.475750000 |
+| B08 H3−R3 | +0.017385005813 | -0.272750000 |
+
+### Native components and behavior
+
+| Bank | H−R coverage | H−R quality | H−R height penalty | .7×coverage contribution | .3×quality contribution | negative-height contribution |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| B07 | -0.058334062500 | +0.013832748991 | +0.011512224069 | -0.040833843750 | +0.004149824697 | -0.011512224069 |
+| B08 | -0.015376250000 | +0.028251701792 | -0.012540990328 | -0.010763375000 | +0.008475510538 | +0.012540990328 |
+
+These are the original reward's algebraic components, not independently identified mediators
+or percentages of a causal mechanism. B07's coverage and height costs exceed its quality gain.
+B08's quality and height benefits exceed its coverage cost in J while connected users fall.
+The S1 height penalty is not measured battery use or real energy savings.
+
+All eight H/R pairs share exact first-ten transitions, delivered labels, raw and clipped
+actions, and state/observation frames through10. After the second draw at zero-based t10,
+all eight pairs have some changed labels, raw actions, physical actions, next states and native
+components at each remaining step; entering hidden state first differs at t11 and outgoing
+hidden state at t10. Every world's physical trajectory differs after the initial segment.
+This is closed-loop behavior change, not just an input label change. The aggregate step mask
+means at least one lane differs, not that every agent at every step differs.
+
+| Pair | Raw action-different agent steps | Executed action-different agent steps | Raw-different but executed-identical agent steps |
+| --- | ---: | ---: | ---: |
+| B07_H0 vs R0 | 94040 | 93736 | 304 |
+| B07_H1 vs R1 | 94041 | 93763 | 278 |
+| B07_H2 vs R2 | 94041 | 93698 | 343 |
+| B07_H3 vs R3 | 94045 | 93768 | 277 |
+| B08_H0 vs R0 | 94041 | 93618 | 423 |
+| B08_H1 vs R1 | 94044 | 93581 | 463 |
+| B08_H2 vs R2 | 94050 | 93673 | 377 |
+| B08_H3 vs R3 | 94041 | 93583 | 458 |
+
+Each pair contains96,000 agent steps. Clipping absorbs some raw differences, as explicitly
+preserved above; they are not counted as changed physical actions. The full real recurrent
+carry continues at every step, including k10 renewals. No trajectory or hidden state from R
+was fed into H after divergence. Later H individual delivery is conditional log-probability0;
+all50 original team-then-individual PCG64 proposals are still generated and recorded separately.
+H's labels remain each member's own opening vector; no shared team label is substituted.
+
+### Interpretation and remaining question
+
+The intervention occurred, changed physical behavior, and failed the selected joint native-use
+prediction. This weakens the proposed persistent-context simplification for these U weights.
+It also prevents extending DM1's learned-opening B10 result into a general assertion that
+holding a random opening context improves every learned bank. It does not contradict that
+other asset's measured scope or remove its local losses.
+
+Two explanations remain compatible with the losses: repeated context refresh is useful for
+these controllers, or the H500 context/observation/GRU history is poorly supported by k10
+redraw training. H and R having the same uniform marginal law at a fixed time does not make
+their temporal joint input laws equal. The present study cannot distinguish these explanations,
+identify harmless/harmful jitter, prove training-context necessity, establish semantic skill
+complementarity, or call the six-context policy equivalent to an ordinary recurrent controller.
+Fixed labels still support adaptive local control. No label category or model shape was removed.
+
+Shared background topic3 at main `ad029443a784f85923caa9fff648b69e9953875f` keeps B07/B08's
+conditional E/U package benefits, the reversed E/M entropy increment and negative learned
+selection increments, and B04/B06's opposite M/U bank effects. This reading leaves all those
+numbers and meanings fixed; U-H is not substituted into any old comparison. Main's topic3 and
+current-plan comparison of local, persistent, random and learned context can now incorporate
+this additional asset dependence and J/service tradeoff. B17's ordinary-policy transfer and
+DM3's incomplete batch belong to their owners and need no duplicate experiment here.
+
+The useful next explanation would have to separate temporal training support from renewal use
+without changing the question after seeing these worlds. I have no selected purchase that
+currently justifies further fits or a same-S1 diagnostic sweep. B09 ends with R retained and
+that distinction explicitly unresolved; this does not declare the whole skill-learning question
+solved or require a new owner permission gate. No broader claim, new batch or pending Pro is created.
+
+### Complete world reading
+
+All entries below are H−R, with four streams averaged inside the world. Positive height means
+higher penalty. All individual stream-world values, including every adverse episode, remain in
+summary `aggregates/<bank>/<metric>/paired_stream_H_minus_R_world` and the retained raw files.
+
+| Bank / world | J | users/step | quality | height penalty |
+| --- | ---: | ---: | ---: | ---: |
+| B07 / 1700200 | -0.094559125592 | -5.202000000000 | +0.030143195771 | +0.030774084324 |
+| B07 / 1700201 | -0.060838905995 | -3.357000000000 | +0.008968434056 | +0.016531436211 |
+| B07 / 1700202 | -0.061745696737 | -2.829500000000 | +0.003551986219 | +0.023198292602 |
+| B07 / 1700203 | -0.019327935176 | -2.114000000000 | +0.039359096839 | +0.001539664228 |
+| B07 / 1700204 | -0.126025734727 | -7.918500000000 | +0.016077490508 | +0.019989981879 |
+| B07 / 1700205 | -0.058573267649 | -3.869000000000 | +0.017576028603 | +0.009680076230 |
+| B07 / 1700206 | -0.054661059360 | -3.198000000000 | +0.000721575115 | +0.010105531895 |
+| B07 / 1700207 | -0.032227896753 | -1.448000000000 | -0.003475735435 | +0.010913176122 |
+| B07 / 1700208 | -0.032036871347 | -1.925000000000 | +0.004494773731 | +0.006435303466 |
+| B07 / 1700209 | -0.018235164725 | -0.599500000000 | -0.003259605560 | +0.008864283058 |
+| B07 / 1700210 | -0.031800173102 | -1.792500000000 | +0.013272497996 | +0.010686922501 |
+| B07 / 1700211 | -0.035205140316 | -1.642000000000 | +0.007901199846 | +0.014587500270 |
+| B07 / 1700212 | -0.022327898239 | -1.285000000000 | +0.007600477941 | +0.006618041621 |
+| B07 / 1700213 | -0.045396429917 | -2.626500000000 | +0.001916890259 | +0.009200496995 |
+| B07 / 1700214 | -0.025120393901 | -1.688000000000 | +0.013357468701 | +0.005495634511 |
+| B07 / 1700215 | -0.039895790907 | -2.436000000000 | +0.019129120863 | +0.011530527166 |
+| B07 / 1700216 | -0.022165658956 | -1.374500000000 | +0.022605908079 | +0.009704431379 |
+| B07 / 1700217 | +0.019442996685 | +0.840500000000 | +0.026547436173 | +0.000288234166 |
+| B07 / 1700218 | -0.058843343237 | -3.866000000000 | +0.014772498678 | +0.009151092840 |
+| B07 / 1700219 | -0.067072340421 | -4.104500000000 | +0.015026728384 | +0.014117358936 |
+| B07 / 1700220 | -0.101886069767 | -7.075500000000 | +0.033328403760 | +0.012827590895 |
+| B07 / 1700221 | -0.036756435474 | -2.107500000000 | +0.012128943732 | +0.010890118593 |
+| B07 / 1700222 | -0.055555004902 | -3.312500000000 | +0.016700908440 | +0.014190277434 |
+| B07 / 1700223 | -0.125597843888 | -7.192000000000 | -0.002032919262 | +0.024299968110 |
+| B07 / 1700224 | -0.027334437118 | -1.481000000000 | +0.010847001096 | +0.009854537447 |
+| B07 / 1700225 | -0.057641042381 | -3.604500000000 | +0.015926881576 | +0.011956106853 |
+| B07 / 1700226 | -0.058874708118 | -3.167000000000 | +0.011250429541 | +0.017911836981 |
+| B07 / 1700227 | -0.026368156673 | -2.356500000000 | +0.030355410443 | +0.002483779806 |
+| B07 / 1700228 | -0.101034789503 | -6.873000000000 | +0.022609368706 | +0.011595600115 |
+| B07 / 1700229 | -0.008399452175 | -0.072500000000 | +0.001858913152 | +0.007942126120 |
+| B07 / 1700230 | -0.024637763573 | -1.619500000000 | +0.014689358994 | +0.006371571271 |
+| B07 / 1700231 | -0.031578245937 | -2.038000000000 | +0.018697800771 | +0.008655586168 |
+| B08 / 1700200 | +0.008426800281 | -0.360500000000 | +0.031807755821 | -0.003931473534 |
+| B08 / 1700201 | -0.015480779021 | -2.499000000000 | +0.025051118177 | -0.011989885526 |
+| B08 / 1700202 | -0.044211067669 | -4.686500000000 | +0.031938612740 | -0.011818348509 |
+| B08 / 1700203 | +0.039514262253 | +0.560000000000 | +0.039968186978 | -0.019683806160 |
+| B08 / 1700204 | -0.023587497569 | -2.126000000000 | +0.004445121287 | -0.004842966045 |
+| B08 / 1700205 | +0.041526818150 | +1.517500000000 | +0.017417057158 | -0.015056701002 |
+| B08 / 1700206 | -0.003474917964 | -1.568000000000 | +0.021906031212 | -0.011905272673 |
+| B08 / 1700207 | +0.027161196399 | +0.235500000000 | +0.024074554272 | -0.016641830117 |
+| B08 / 1700208 | +0.016714370492 | -0.496000000000 | +0.032938134710 | -0.013776930079 |
+| B08 / 1700209 | -0.007319629594 | -2.075000000000 | +0.027522133781 | -0.013473730272 |
+| B08 / 1700210 | +0.020497245205 | +0.531000000000 | +0.023281272801 | -0.006078863365 |
+| B08 / 1700211 | -0.035680202612 | -3.169000000000 | +0.004978014409 | -0.007192393065 |
+| B08 / 1700212 | -0.007617924967 | -1.652500000000 | +0.018056140845 | -0.010100232780 |
+| B08 / 1700213 | +0.042496628407 | +1.347000000000 | +0.030552244835 | -0.014472954956 |
+| B08 / 1700214 | +0.032940492441 | +0.575500000000 | +0.033196631683 | -0.014924502936 |
+| B08 / 1700215 | +0.047588433955 | +1.846500000000 | +0.020215687878 | -0.015672727591 |
+| B08 / 1700216 | +0.037734580939 | +1.444500000000 | +0.027678861498 | -0.009207922490 |
+| B08 / 1700217 | -0.039029621593 | -5.181500000000 | +0.050466182408 | -0.018371523685 |
+| B08 / 1700218 | +0.039230192375 | +1.346000000000 | +0.021989511543 | -0.013789338912 |
+| B08 / 1700219 | +0.034237432073 | +1.054000000000 | +0.025825478529 | -0.011733788515 |
+| B08 / 1700220 | -0.004937226290 | -1.535500000000 | +0.026270157617 | -0.008678726425 |
+| B08 / 1700221 | +0.009878481960 | -0.732000000000 | +0.028168542550 | -0.011675919195 |
+| B08 / 1700222 | +0.028721800983 | +0.577500000000 | +0.024970776012 | -0.013145568179 |
+| B08 / 1700223 | -0.006897631035 | -0.837500000000 | +0.011115207179 | -0.001492806811 |
+| B08 / 1700224 | +0.011027410193 | -0.997000000000 | +0.026546447134 | -0.017021476053 |
+| B08 / 1700225 | -0.016967114198 | -2.826000000000 | +0.039192014164 | -0.010839281553 |
+| B08 / 1700226 | +0.019520534164 | +0.407500000000 | +0.018559883380 | -0.008247569150 |
+| B08 / 1700227 | +0.017292096777 | -0.641500000000 | +0.042338455414 | -0.013571560153 |
+| B08 / 1700228 | +0.032854426612 | -0.166500000000 | +0.048587477755 | -0.020609183286 |
+| B08 / 1700229 | -0.019263562834 | -3.291500000000 | +0.047372217854 | -0.012605771810 |
+| B08 / 1700230 | +0.018163859380 | -1.112500000000 | +0.041376047878 | -0.021326045016 |
+| B08 / 1700231 | +0.027040139996 | -0.090500000000 | +0.036248497854 | -0.017432590640 |
+
+### Verification, actual cost and retention
+
+The native terminal witness is exit0 with absent runner/supervisor and consistent identities;
+that alone was not accepted as a result. An offline NumPy reader consumed all16 raw panel
+JSON files and56 NPZ files, compared all eight R trajectories byte-for-byte at array level to
+the original B07/B08 files (same keys/shapes/dtypes/values, including NaN positions), checked
+all H proposal/delivery laws against independent PCG64 draws, first-k identity, clipping,
+termination, recurrent hash/norm continuity, divergence traces and all per-world/stream
+reductions. Every required input/output hash and locator checked. All original R arrays match;
+reduction/physical-score arithmetic checks used the declared float64 roundoff scale2e−12,
+not a relaxation of exact R reconstruction. No model/environment was executed by this reader.
+Its completed read took4.222932177s; initial reader metadata hashing was corrected to include
+the declared dtype/shape prefix before the successful pass. No runner or saved output changed.
+
+Both restored final native/frozen digests match their bound source assets. Every panel begins
+with its corresponding frozen final state, and final state/private/sampler RNG matches it;
+all modules remain in evaluation mode. All observed training, optimizer, storage and normalizer
+call counts are0. The frozen evaluation context and final audit report no parameter/buffer or
+optimizer mutation. Native optimizer histories were not present in the old checkpoints and
+were not invented; idle native optimizers and restored serialized auxiliary optimizers are
+explicit in the summary.
+
+Actual exposure is0new fits/0training,16panels/512episodes,256,000team transitions and
+1,536,000agent transitions,8,000batched low-policy forwards,800renewal proposal batches.
+Of the team transitions,128,000 reproduce existing R and128,000 observe new H on old worlds;
+there are25,600 team and153,600 individual proposals. No extra partial or replacement panel.
+
+Runner measured wall172.673561403s, user CPU180.240010s, system CPU3.136773s. Its timer
+starts after input validation/deserialization; acceptance-to-native-exit is186.768027782s,
+which is not exclusive GPU occupancy. Peak process-lifetime RSS is1,335,386,112bytes;
+CUDA peak allocated115,385,344bytes and reserved123,731,968bytes for the two-bank process.
+Peak scratch, full preparation/implementation/review/collection time and shared-node occupancy
+are unmeasured; no efficiency, latency, power or real-energy claim follows from0fits.
+
+All82 original output files /182,073,807bytes were collected and checked for identical size
+and SHA256 against the retained original-node copies. The runner's earlier output-byte sample
+was182,073,257bytes; the terminal witness accounts for the later550bytes. Local native-status
+is a separate read-only status capture. Summary is552,544bytes, SHA256
+`8132696f580771bf31d4dca4e2b7d03c53896969761c48dede28e3ebe702179e`;
+its locators bind all56 bulk NPZ files. Compact config/source/progress/summary and native
+records are published; raw trajectories, label probabilities, recurrent traces, divergence,
+per-panel JSON and logs stay at both durable roots:
+
+- Node `wsl_4070`: `/home/wu/hmasd-worktrees/complementary-skill-b09-20260924/runs/complementary_skill_learning/b09_hr_260924051_a7b0b09ef`.
+- Local collection: `/home/fires/.codex/worktrees/5916/hmasd-wsl/runs/complementary_skill_learning/b09_hr_260924051_a7b0b09ef`.
+
+After verified retention and reading, the native GC preview found only the operation's source
+snapshot eligible; apply removed that exact disposable snapshot. Both output roots, original
+B07/B08 inputs, author checkout, branch and native claim remain. READY event
+`849a82fc0d6b371787d92b2c` was consumed using generation87 and its returned wake ID;
+observation generation88 has no remaining scientific worker. No worker or Pro question was restarted.
