@@ -9637,7 +9637,7 @@ other evidence retains its own stated revision):
   `c9217f0ae5b32aa2a13e228cc87899f545a0111b`.
   `experiments/candidates/complementary_skill_learning/b07/runner.py::evaluate_panel` is the
   R evaluator actually reused by B08; B08's `runner.py` binds the new training block and private
-  seeds. `experiments/candidates/complementary_skill_learning/b01/learning.py::low_actions`
+  seeds. `experiments/candidates/complementary_skill_learning/b01/runner.py::low_actions`
   identifies the delivered individual context and recurrent policy path. Verify function/path
   at the supplied source before drawing a code-based conclusion.
 - Fresh shared background and routing, main
