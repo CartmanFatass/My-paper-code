@@ -558,4 +558,3 @@ def test_actual_cuda_full_b07_batch(tmp_path, spec):
     result = r.aggregate_batch(summaries["M"], summaries["E"], summaries["U"])
     assert summaries["M"]["status"] == summaries["E"]["status"] == summaries["U"]["status"] == "complete"
     assert result["J"]["P_E_S_minus_U_R_world"].shape == (spec.eval_lanes,)
-

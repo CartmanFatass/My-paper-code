@@ -1649,4 +1649,3 @@ __all__ = [
     "score_reference",
     "validate_reference",
 ]
-

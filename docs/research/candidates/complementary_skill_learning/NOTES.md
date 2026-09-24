@@ -7126,3 +7126,12 @@ source/advice`d094ae1f367cbc4211844a186bd160a77ea8d9b7` was also remotely verifi
 and owner controls remain unchanged. Production B07 started fits=0 at this entry. Publish the
 accepted code, perform the declared actual4070 CUDA small-batch check, then admit fixed first M.
 No new main/index edit is needed for this unchanged-plan engineering milestone.
+
+The staged diff check caught one surplus terminal blank line in each of the four new files.
+The DM removed exactly that one LF per file; every parsed Python AST is unchanged. This is a
+format-only correction to the reviewed bytes, not new executable behavior or a repeated test
+requirement. Final file identities in the same table order above are:
+`3a2b9ea856925fbbe835e447e6be81563125aedc6f79d2c31c1b1fcd618cd06b`
+`4f0d81c934bbfb92034969a7848b68e610cb69fabde7ba52fe464fe6f7361136`
+`9b7e1a62704156ff7bfba3ef2ee8ec92252578577184e9f985a02458d0bf2814`
+`b28b1d82d9743ead0402bfb9005a33a1f1ce382d816f77282b19a20839715fbf`
