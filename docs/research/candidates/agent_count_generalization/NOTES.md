@@ -17268,3 +17268,50 @@ The Implementer returns its diff and checks, launches nothing, commits nothing a
 children. Source is committed/pushed after review and before the configured native admission.
 After one accepted launch preserve its handle, arm same-task deterministic observation and
 end the turn. Subsequent terminal collection and full scientific interpretation remain here.
+
+
+## 2026-09-24 — B17 engineering accepted before native execution
+
+The bounded Implementer returned only the new B17 candidate package, production CLI and
+mirrored focused tests. I read the executable route and accept the implementation against
+the preceding fixed L0. The explicit canonical `--input-root` keeps the six retained assets
+available to an isolated source snapshot without copying a moving checkpoint or faking an
+old arm identity. All42 embedded input hashes independently match the native/local inventory:
+985227587bytes across the six checkpoint/config/summary/old N8/N6 panel/old N8 trace/manifest
+sets. This read-only availability check constructed no model and produced no new scientific
+observation. The fixed B17 output did not yet exist on the native node.
+
+The initial focused suite passed10tests in9.05s (reported test-process peak RSS about700MiB),
+including true LOCAL1/H6 strict restoration at full N4/6/8 dimensions, reduced native fixtures
+with k10 state and terminal successor evidence, frozen weights/normalizers and zero learning,
+array comparison, reducer/cost readings, admission-before-candidate-import and a replay
+mismatch that blocks all fresh calls. Compile, CLI help and whitespace checks passed.
+Mid-panel exceptions retain the available trace, completed-timestep boundary and actual
+interaction/inference counters; preallocated incomplete rows are explicitly marked partial.
+These tests are implementation evidence, not any of the24production panels or learning fits.
+
+An independent registered Reviewer inspected the high-risk restore/RNG/evaluation/admission
+paths and found one P2: phase step/UAV costs and observed storage/optimizer calls could be
+underreported when a completed replay mismatched or a fresh panel failed. I accepted that
+finding. The repair records actual phase work in the live progress callback, counts observed
+calls once on success or failure, and keeps successful-panel counts distinct. The updated
+replay-mismatch test has nonzero work; a new partial-fresh-failure regression preserves
+replay/fresh/total team steps18/2/20 and UAV steps144/16/160, with one storage call and three
+optimizer calls recorded rather than erased. The3affected tests passed (8unchanged tests
+deselected); compile and whitespace checks passed after the repair. The same independent
+Reviewer inspected the correction and closed P2 with no material finding remaining, reusing
+these check results. No production run was used to obtain engineering acceptance.
+
+Accepted runner SHA-256 is
+`b1be150f44d6992acf64a82e08ef359ff37160a3bfe25f608e90a1fea63a5f2c`;
+accepted test SHA-256 is
+`5f332e9bea03a7c92216d0e203288708bcffbd5e2a9b9abef92ec7c029bb851f`.
+DM staged-diff checking removed an extra blank EOF line in the new package initializer and
+test file; these whitespace-only changes leave the reviewed executable behavior unchanged.
+No scientific premise, policy, seed, tolerance, endpoint, cost scope or reading rule changed.
+Full agreement of the six native old N8 replays remains unverified and will gate the fresh
+panels inside the single accepted invocation. Current published main
+`5a99d6075a6cae539c7b05eb5fba88d1e6f6c499` retains the lifted owner pause, active direction and
+same lead. Next: publish these exact inputs, obtain fresh native kernel admission, retain the
+manifest/process handle, and arm deterministic observation for this task. B17 still has0fits;
+B15's original inconclusive confirmation and all B16 contrary evidence remain unchanged.
