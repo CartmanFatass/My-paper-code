@@ -7065,3 +7065,64 @@ new code/test paths and returns diff/checks, with no production launch or record
 After verified fallback saving and the full scientific reading, READY event
 `dee95456a466f1876dcfe3cc`, wake`e6b0dd2e-bef6-470d-840c-5fff580a40e4`, was consumed
 with generation58→59. No Pro operation remains pending; no Send or worker was repeated.
+
+
+## 2026-09-24 — B07 implementation and independent CPU review accepted
+
+The DM read the new candidate loop, admitted entry and focused tests, then accepts the four
+B07 files against the preceding L0. Core and frozen B01–B06 have no diff. The candidate-local
+loop reuses audited B04 learning/storage/RNG/checkpoint semantics and B05 evaluation primitives;
+E's public identity follows the same detached-head path as M, with only actual lambda_h=.07→0.
+Initial configuration comparison, actual matched first rollout and native loss/gradient/update
+readings exercise that change. No extra scientific arm, stream, step or coefficient was added.
+
+Three issues found during implementation/review were repaired before any production attempt:
+S0 initial/final repeat innovations, not learned labels; full conditional entropy handles team
+zero probabilities without changing the sampling law; and E refuses a reference made at a
+different batch source SHA before output/environment/model creation. Reference dimensions,
+integer labels, row/law metadata, probability mass and canonical final SHA256 fields are also
+checked before fitting. The file hash binds the entire reference. Before E admission the DM
+will additionally match its claimed M-final checkpoint/native/frozen identities to the actual
+verified M outputs and compare all6400 reference rows to the retained four final S trajectories.
+The runner's syntactic digest checks are not that empirical reading.
+
+The compact `summary.json` keeps per-world/per-stream native arrays, actual learning curves,
+coefficient/gradient/entropy readings, optimizer counts, state and artifact identities. Complete
+training/prediction rows, occupancy and trajectories remain losslessly in the run and `raw/`
+with hashed locators. No old summary or other historical artifact was converted or deleted.
+Both evaluation and reference scoring preserve learner, optimizers, normalizers, module modes,
+private/default/sampler streams; low hidden state resets only between episodes/panels and
+persists across k10 label renewals. Individual decoder output already includes its mixture.
+
+Final Implementer CPU module:21passed/1CUDA-skipped in6.35s; targeted reference-repair check:
+4passed/18deselected in6.08s. Independent Reviewer `/root/review_b06_recurrence` traced the full
+changed path and ran21passed/1CUDA-skipped in6.10s, with no remaining material finding. Each
+successful module invocation's artificial M/E/U fixture used120training transitions/6episodes,
+3native updates and25panels/1000evaluation transitions/50episodes, plus16E common-context rows/
+112factor outputs. Own S probability instrumentation adds20batches/40contexts/280factors across
+M/E in that fixture. These are H20 engineering checks, not360k scientific observations. Earlier
+17-pass checks and other support are additional cost, not zero or another scientific seed.
+All scratch followed pytest ownership/teardown. The14 warnings were dependency deprecations.
+
+Reviewed file SHA256 values (also matched by the DM):
+
+| File | SHA256 |
+| --- | --- |
+| `b07/__init__.py` | `adf47c72497b2f4354cae8c41e0bd9eb34f370adb68c9266c5567cea86c3f29b` |
+| `b07/runner.py` | `05a6a4247f53e7c27fc29568eaf5d001be7ee1cb06cde0db897179c778c431fb` |
+| `scripts/run_complementary_skill_learning_b07.py` | `5625fccdff9fb926e389418c3f5181e0dac26c0001b765c6e0fabc879945d14f` |
+| `tests/experiments/candidates/complementary_skill_learning/b07/test_b07.py` | `4af44d1e2f2ecf58e6983dcb730dbbc4849fe84ea556920a2301c971548d583e` |
+
+An independent direct PCG64 calculation over the frozen production R seed/order gives label
+stream SHA256 R0=`2b70d8abb8a69b646fdb4906a978ec6038f04450b4991f7515599088a80a7de9`,
+R1=`e175b22a34c4a6a748fe6fe620a9b9c29f0baa8e67c4393a2603ada53257152e`,
+R2=`74d2c5d4c2463da56ba0697a47db395bbdf58e691386f49ce15447881595a706`,
+R3=`e1a7b4d520dc7fe901ab91b08f5d55d33679c4a9372c468716f6b25c15f6965b`.
+These contain no policy evaluation; actual panels still need verification.
+
+The complete Pro answer, adopted plan and directly affected shared scope were published to
+main`24cf6faee0a565e3778b53d0e57c9d5ce670339e` from the owned publication checkout; direction
+source/advice`d094ae1f367cbc4211844a186bd160a77ea8d9b7` was also remotely verified. Other leads
+and owner controls remain unchanged. Production B07 started fits=0 at this entry. Publish the
+accepted code, perform the declared actual4070 CUDA small-batch check, then admit fixed first M.
+No new main/index edit is needed for this unchanged-plan engineering milestone.
