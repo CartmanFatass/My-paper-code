@@ -1,0 +1,11 @@
+{
+  "claim_key": "611be99a1abca575de04aaa50f1bdcc20e4525b81e4ad09ab8ef76469710a6ea",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/611be99a1abca575de04aaa50f1bdcc20e4525b81e4ad09ab8ef76469710a6ea.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/611be99a1abca575de04aaa50f1bdcc20e4525b81e4ad09ab8ef76469710a6ea.json",
+  "pid": 544625,
+  "runner_pid": 544626,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-24T11:27:28.545535Z"
+}

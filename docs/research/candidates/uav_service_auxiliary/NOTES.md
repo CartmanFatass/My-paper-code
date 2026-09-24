@@ -9813,3 +9813,75 @@ scientific findings. The fixed runner will proceed from this one common initial 
 N then A, independent of their scores; no extra fit, panel, retry or early scientific judgment
 was added. Completion/error/checkpoint wakes return to this task for same-handle reconciliation
 and full artifact reading. B07 and the explicit B08 approximation/censoring limits remain intact.
+
+## 2026-09-24 — B08 technical failure during A collection; fixed pair incomplete
+
+The accepted B08 process terminated at2026-09-24T16:17:42.931522Z with exit code-11
+(SIGSEGV), recorded by the native supervisor in the
+[unchanged exit witness](../../../../runs/uav_service_auxiliary/b08_an_915031_a01/process-exit.json).
+The same operation reports both original process identities absent, consistent admission/manifest
+records and no explicit retry. The terminal observation was read and consumed at generation114;
+no running observation or pending event remains. No worker was restarted, no additional fit or
+Pro question was submitted, and no other App task was contacted. Current main still records
+the owner pause as lifted; the failure itself is not permission to extend this fixed batch.
+
+**Observed execution and preservation.** The two planned fits started; N completed all30 phases
+and180,000 native transitions, with its endpoint saved. The common initial and N endpoint F
+panels each completed all40 episodes:80 episodes and240,000 evaluation transitions in total.
+A completed23 phases (138,000 fully persisted transitions); its separate
+[arm summary](../../../../runs/uav_service_auxiliary/b08_an_915031_a01/A/summary.json)
+records140,000 transitions and the last progress event is phase24, step1000 across two lanes.
+The [batch summary](../../../../runs/uav_service_auxiliary/b08_an_915031_a01/summary.json)
+lags this by200 transitions: it reports A139,800 and total319,800. These source files are copied
+verbatim, not reconciled by overwriting runner evidence. The arm/progress evidence therefore
+establishes **at least320,000 total training transitions**, not an exact terminal count.
+Further execution after the last persisted notification is unknown. A has no phase24 raw tape,
+partial tape, final checkpoint, final-prefix record or endpoint evaluation.
+
+The [progress stream](../../../../runs/uav_service_auxiliary/b08_an_915031_a01/progress.jsonl),
+[N summary](../../../../runs/uav_service_auxiliary/b08_an_915031_a01/N/summary.json), admission
+status and exit witness are preserved with the existing config, manifest and preflight. The
+batch and A summaries remain `INCOMPLETE` with `failure: null`; the asynchronous signal bypassed
+their ordinary Python exception/finally path. A null exception field does not negate the native
+exit witness. The admission-only `launch-status.json` is not the terminal process status.
+
+Read-only artifact checks verified all219 recorded SHA256 references, totaling1,626,056,941bytes,
+with no missing file or digest mismatch. All30 N and23 A training NPZ files load with full
+3000-by-2 masks: valid execution, diagnostics and stored-transition counts each total180,000
+for N and138,000 for A; none is marked partial. This checks preservation and recorded coverage,
+not every numerical result or the missing phase24 trajectory. Full raw files and both available
+checkpoints remain at the manifest's output root:
+`/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01`.
+No remote file was removed. Copied batch/A/N summary SHA256s are respectively
+`ccf880cca55bdba7881afd53e938fc05a2733cec82e66bd1b4ffc75e5f837e1c`,
+`8ab9263f940e5a5d9d98494aadb68786a0c640aa6247555dd542c3fbe7da7fd9` and
+`8365f168498f012cf42132627c27ec703b9df924bb021a3ae51480f75991585b`.
+
+**Diagnostic limit and cost.** Stderr is empty; stdout ends after A phase23. Neither the run
+source directory nor the standard Linux crash directories contain a usable core. The inspected
+kernel segfault line names a different PID and cannot be bound to this process, so it is not
+used to identify a cause. No recorded stack or reproduction identifies a faulty component;
+the cause remains unresolved. The latest progress places the failure after A phase24 collection
+step1000, but does not identify the crashing instruction. No GPU, memory, interpreter, native
+environment or learning defect is inferred from the signal alone.
+
+Cost is2 started fits,1 completed training fit and1 technically failed fit on `wsl_4070`, plus
+the80 completed evaluation episodes. Admission-to-exit elapsed wall time from the two native
+timestamps is17,414.392244s (290.239871min), including evaluation. N's runner-measured training
+wall is6,692.306691s (111.538445min), and its process high-water RSS is3,447,460KiB at that
+boundary. A and final batch resource telemetry did not execute; their peak RSS and CPU times
+are `resources_unmeasured`, not zero. The earlier N process peak is not the missing batch peak.
+
+**Reading and next action.** This is a technical failure and an incomplete fixed comparison.
+There is no A endpoint with which to calculate the predeclared A-minus-N or A self-learning
+effects, and no full-pair acceptance. Preserved N/initial outputs remain narrower artifacts;
+their existence is not acceptance of a replacement one-arm scientific study. The failure does
+not strengthen or weaken the feedback-training hypothesis, invalidate B07's bounded physical
+observations, or establish a negative learning result. No directly affected shared scientific
+background requires revision from this signal.
+
+The fixed attempt is over and the direction remains exploring with **no selected next run**,
+pending Pro request or active producer. A future retry would require a concrete diagnostic or
+repair reason and a new prospective decision that retains this failed fit and all selection
+exposure; it cannot be labeled continuation or recovered from an absent A checkpoint. No new
+scientific route closure, confirmation, seed, arm, host or training budget is selected here.
