@@ -18568,3 +18568,103 @@ Use tiny non-result fixtures without changing production protocol. Tests own scr
 pytest. The DM accepts the diff and an independent high-risk Reviewer examines RNG, recurrent
 state, native readings, checkpoint identity and admission before result execution. No helper
 chooses science, adds fits, launches, writes NOTES/RESEARCH or spawns children.
+
+
+### B18 engineering clarification before implementation acceptance
+
+Source inspection of `RolloutBuffer.get_discoverer_sampler` confirms a private shuffle RNG
+separate from the global NumPy stream. The boundary adapter must transfer its current state
+via `get_sampler_rng_state`/`set_sampler_rng_state` when replacing storage; constructing a
+fresh buffer must not restart the continuing shuffle stream. This is preservation of the
+already selected training program, not another scientific treatment. A real-update check
+will compare the boundary's before/after private state as well as global RNG/Adam state.
+
+With500steps/k10,16lanes and batch32, each PPO epoch has3200/4800/6400sequences at N4/6/8,
+respectively100/150/200full minibatches. At15epochs this predicts1500/2250/3000calls per
+actor or critic per rollout. Both full schedules therefore predict101,250actor and101,250
+critic calls per arm, with no time-chunk or minibatch tail in production. These are source
+derivations awaiting measured sampler yields, not reported execution. Equal final counts
+still leave intermediate ordering, reward normalization, experience composition and gradients
+different. The implementation must report actual yields/sizes/tails/calls and reject a
+missing update rather than infer work from these expected totals.
+
+
+## 2026-09-24 — B18 implementation accepted for the fixed native paired batch
+
+
+The DM read the full candidate runner/CLI, the focused tests and each consequential repair,
+and accepts the implementation within the selected L0. The independent registered Reviewer
+returned no remaining material finding on the final executable bytes below. Source ownership
+returned from the Implementer before the DM's final one-field repair and regression. No shared
+learner, environment, control-plane code or frozen B03/B11/B15/B16/B17 runner was changed.
+This is engineering acceptance, not a B18 scientific result; no production fit has started.
+
+The initial code's mixed first-N check, admission-output collision and delayed initial-trace
+comparison were corrected before execution. Native initial UAV/user arrays now accompany
+state/observation arrays and are checked across stages/arms; common-N6 training reset worlds
+are checked from actual arrays. Partial collection/update/reset data and explicit per-N
+exposure are retained. The reviewer and DM caught repeated or misattributed optimizer counts
+on exceptional paths. The final collected-publication regression reproduced12reported calls
+where6occurred, then passed after carrying the current rollout's optimizer baseline into the
+collected record. These defects spent no scientific fits and did not alter the frozen program.
+
+Checks read and accepted:
+- Implementer final full suite:9passed/13.25s on runner6536e187; independent Reviewer same
+  suite9passed/13.09s and shared real entry-mask tests2passed/3.22s.
+- DM targeted second-rollout collected-publication failure:1failed/4.48s before the one-field
+  repair;1passed/4.39s after it (9unselected). Reviewer inspected the final fixture/correction
+  and confirmed final file hashes; the unchanged nine tests were not needlessly repeated.
+- The fixtures run real collect/store/GAE/recurrent PPO for F6→6 and M4→6→8→4, and preserve
+  parameters/optimizers/Adam/value normalization/private sampler/global RNG at boundaries.
+  They exercise exact initial native trajectories, N5/N7 evaluation, partial transition and
+  optimizer failures, later-rollout failure, post-update failure, and admission-before-import.
+- Scientific test interpreter `/home/fires/.venvs/hmasd-linux-cpu/bin/python`; reduced
+  20step/2lane/hidden16 fixtures, not production-scale performance or training evidence.
+  Expected Matplotlib/PyParsing deprecation warnings only. Pytest owned and cleaned its
+  temporary outputs. Earlier intermediate test passes are technical development cost and
+  are not new scientific replication or multiple fits. The DM removed one surplus EOF blank
+  line in the docstring-only __init__.py during final staged whitespace checking; its new
+  digest below replaces reviewed d259f092 without changing executable behavior.
+
+Final accepted file SHA256 identities:
+
+| File | SHA256 |
+| --- | --- |
+| `experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/runner.py` | `893416e222e26f11b5bb206508e3eabb553ede49fd75706b9afa631d4962084a` |
+| `experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/__init__.py` | `6e575d69fc128d32084d2ac67a6472566133b8384e341b4c04840363f5e87f7a` |
+| `scripts/run_agent_count_ordinary_roster_training_b18.py` | `159111b7c8a7cb7ed566ab948d48995eb098d305a9d5a749848f8ce85b9d4795` |
+| `tests/experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/test_runner.py` | `35813ca442817f4b2e7b2a279d03b20802ffb1088bd47db92512539b65ff7817` |
+
+The next operation is the already selected single native admitted batch F→M, with exact
+committed/published inputs and no old checkpoints. Fresh actual-node memory/pause/lead/source
+checks remain launch admission; no new owner or Pro decision is required. Preserve the
+returned operation reference and arm detached observation. The planned two fits and all
+fixed N5/N7 signs, N6 costs, own-learning readings and no-extension rules remain unchanged.
+
+
+## 2026-09-24 — B18 paired batch admitted and under detached observation
+
+The single fixed F→M batch was accepted at2026-09-24T17:21:23.383233Z on native node
+`wsl_4070`, using published source `0f4671475c275db52abc19219d42b4fe9ee664fa` and seed1004101.
+Native admission read main `d7877e4c166f10079deac3b78ad1df46b0272f3f`, checked the current
+owner pause/lead, source publication, fresh actual-node memory and duplicate claim, then
+created the detached operation. The [runner-written manifest](../../../../runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/launch-manifest.json)
+preserves the exact command, immutable source snapshot, operation reference and process
+identities; the [admission preflight](../../../../runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/admission-preflight.json)
+preserves the launch checks. Both files were copied without modification and their SHA256
+digests independently matched the native files.
+
+The first detached observation at2026-09-24T17:25:57.970052Z reads admission/claim accepted,
+execution running and consistent records, with recorded and actual runnerPID590142 and
+supervisorPID590141 identities equal (including start ticks and boot identity). There is no
+exit witness. Observation job `launch-s1-ordinary-roster-training-b18` is armed in generation173
+for completion, failure or a bounded25-minute checkpoint; its probe only reads this operation.
+A checkpoint rearms observation and never restarts the worker.
+
+Planned cost remains two fresh fits,720k training team steps and320k evaluation team steps
+across the complete paired batch. The runner performs initial evaluation before the first
+training transition. A running process does not establish that both fits have started or
+that planned work has occurred; actual started/completed fits and exposure will be read from
+the runner's outputs. No B18 scientific result, final model or learning claim is available at
+this boundary. N5/N7's four fixed signs, each arm's own learning, N6 deployment cost, adverse
+worlds and the no-extension rule remain the selected interpretation contract.

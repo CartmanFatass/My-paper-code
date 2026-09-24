@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-24T17:21:23.383233Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b802933fe420445ebfa078d33e9f1539/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b802933fe420445ebfa078d33e9f1539/scripts/run_agent_count_ordinary_roster_training_b18.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101",
+    "--",
+    "--seed",
+    "1004101",
+    "--launch-sha",
+    "0f4671475c275db52abc19219d42b4fe9ee664fa",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101"
+  ],
+  "claim_key": "cf736af3700610cf95506c98a42e0b771af6eb58886b7edec040f0adaf0e01e8",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/cf736af3700610cf95506c98a42e0b771af6eb58886b7edec040f0adaf0e01e8.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b802933fe420445ebfa078d33e9f1539/scripts/run_agent_count_ordinary_roster_training_b18.py",
+    "--seed",
+    "1004101",
+    "--launch-sha",
+    "0f4671475c275db52abc19219d42b4fe9ee664fa",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101"
+  ],
+  "command_sha256": "ff8ac2e4018c0cb3029cd2a03baeb13339f9a67db1c61075d9161172fbcb650a",
+  "control_observation": {
+    "observed_at": "2026-09-24T17:21:23.244949Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "d7877e4c166f10079deac3b78ad1df46b0272f3f"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-24T17:21:23.295913Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b802933fe420445ebfa078d33e9f1539",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_ordinary_roster_training_b18.py",
+    "--seed",
+    "1004101",
+    "--launch-sha",
+    "0f4671475c275db52abc19219d42b4fe9ee664fa"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/cf736af3700610cf95506c98a42e0b771af6eb58886b7edec040f0adaf0e01e8.json",
+  "output_root": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101",
+  "preflight": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 590141,
+      "session_id": 590141,
+      "start_ticks": 62810668
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 590141,
+    "process_group_id": 590141
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 590142,
+      "session_id": 590141,
+      "start_ticks": 62810670
+    },
+    "pid": 590142,
+    "process_group_id": 590141,
+    "supervisor_pid": 590141
+  },
+  "schema_version": 1,
+  "sha": "0f4671475c275db52abc19219d42b4fe9ee664fa",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b802933fe420445ebfa078d33e9f1539",
+  "stderr": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/stdout.log"
+}
