@@ -4396,3 +4396,470 @@ Cite only sources actually used, report decision-critical unread sources, and do
 mandatory diagnostic ladder, permission gate, fixed number of ideas or automatic follow-on.
 
 ### Answer
+
+GitHub 读取可用，但本次没有完成 Answer 写回。 我核对了最新目标文件：本题的 ### Answer 仍为空，当前 blob SHA 为 79d0920afe28355b5dc936fcc2f9c4c5b4800540。现有写入接口要求替换整个文件；我未能构造并验证一个保证其余字节完全不变的完整替换内容，因此没有提交写请求、没有改动仓库，也没有生成 Answer commit。这不是 GitHub 返回的权限拒绝。以下给出完整答复。
+
+Answer
+一、选择：先做冻结 M bank 的 O/S/R 比较，不同时追加独立 M/U 区组
+
+MATERIAL_DISSENT: no。 我支持题面提出的零-fit、九面板 O/S/R 比较作为下一项投资。保留其 checkpoint、部署规则、世界、暴露量及主次终点；不增加温度搜索、低层噪声臂、selector 训练或第三个训练臂。需要收紧的是估计量的解释，尤其是已暴露的原 R 流，而不是扩大实验。
+
+这次能够改变的具体判断是：
+
+对于已经存在的这份 B04 M bank，在相同信息接口、k10 时钟和 mean-clipped 低层执行条件下，实际 learned stochastic 高层分配，是否比 greedy 提取和外生 uniform 分配更值得使用？
+
+这不是“高层训练是否稳定有效”的另一种问法。它是一个尚未执行过、能直接影响这份 bank 部署选择的问题。B04 的 own 确实使用确定性高层解码；因此 O 的结果不能代替 S 的结果。题面的新比较也没有义务修复已经完成的 B04。
+
+最强反对理由是：目前只有一个 M/U 训练区组，选择这份已有正 bank 增益的 M 来研究部署，可能把资源继续集中在偶然有利的训练实例上。 B03 在固定评价条件下出现的增量反转，使“先检验训练结果能否再现”成为实质性的竞争用途，而不是例行统计要求。冻结比较即使非常有利，也不能降低独立训练对训练制度结论的重要性。
+
+我仍选冻结比较，是因为本次决策明确落在现有 bank 的可执行部署规则上。新增 M/U 区组能改变训练制度的复现判断，却仍不直接回答这份 M 的 S 是否值得采用。反过来，冻结比较能够回答它自己的问题，且不需要新增训练。这是问题针对性的优势，不是“零 fit 所以必做”。若当前实际决策改为推广某种训练制度，而不再关心这份 bank 的使用，那么独立 M/U 区组就会成为更合适的下一步。
+
+二、B04 加强、削弱和留下的判断
+
+B04 的重要结果不是一个可以脱离部署规则的“正结果”或“负结果”，而是两个同时成立的事实。
+
+它加强了这一个训练实例中的条件性 bank 形成价值。 最终 uniform 下，M 的 J 为 0.453674108416，U 为 0.418239237276，差值为 +0.035434871140 J、+1.843375 users/step。两臂从完全相同的初始 uniform 面板出发，J 和服务人数均在 32/32 世界改善；因此主要差值不是 U 没有学习造成的。但相对优势并非逐世界支配：27 个世界 J 为正，仍有 8 个服务损失世界。其中 1700218、1700222、1700224 的 J 为正而人数减少，1700224 少了 0.94 人。
+
+它同时削弱了“直接 greedy 使用该 M bank 就是更好完整方案”的判断。 同 bank 的 A
+M
+	​
+
+=O−R 为 −0.044004890887 J、−2.3471875 users/step；预先保留的
+Γ=M
+own
+	​
+
+−U
+uniform
+	​
+
+
+为 −0.008570019747 J、−0.5038125 users/step。Gamma 在 1700224 的服务损失为 −11.598 人，不能被主要终点的正均值覆盖。与此同时，M-own 本身相对初始化也确实学到了服务，不能把“输给另一部署规则”改述为“没有学会”。
+
+未解决的则是实际 S 的部署价值和训练制度的再现性。 B04 没有执行 S；也没有识别高层策略梯度的独立贡献、技能必要性或互补形成机制。M/U 改变的是训练制度，包括标签携带的信息、相关性、内生经验及混合奖励过程，而非只改变一项梯度。此前完整训练-law 答复已经预见了 Delta-positive/Gamma-negative 分支，当前不需要重新解释成另一个成功终点。
+
+B04 也没有复活原 P/G 辅助或 task-only 删除配方。共享背景中的 DM1 B10 是另一份 bank 的标签持续时间干预，不是这里的 stochastic-law 结果；B14/SET 属于另一 DM 的完整方案问题，不能借来当作本题的匹配对照。DM3 的端点及服务风险结果同样只能提供有限的阅读背景。
+
+三、保留比较，但把它的随机估计量写准确
+
+令 w 表示固定的 32 个开发世界，r=1,…,4 表示每种随机规则的完整流，Y
+Lwr
+	​
+
+ 表示规则 L∈{S,R} 的一条完整 500 步 episode 的 J。定义：
+
+Y
+ˉ
+Lw
+	​
+
+=
+4
+1
+	​
+
+r=1
+∑
+4
+	​
+
+Y
+Lwr
+	​
+
+,
+Δ
+SR
+	​
+
+=
+32
+1
+	​
+
+w
+∑
+	​
+
+(
+Y
+ˉ
+Sw
+	​
+
+−
+Y
+ˉ
+Rw
+	​
+
+).
+
+这是我支持的主要读数。次要读数为：
+
+Δ
+SO
+	​
+
+=
+32
+1
+	​
+
+w
+∑
+	​
+
+(
+Y
+ˉ
+Sw
+	​
+
+−Y
+Ow
+	​
+
+).
+
+Coverage、quality、height penalty 和 users 使用同样的聚合顺序，并保留逐世界差值。先在世界内平均全部四条流，再等权汇总世界，不能挑最佳流，也不能把不同规则得到的有利世界拼成一个“策略”。题面已给出的九面板安排符合这个定义。
+
+四条流增加的是部署抽样，不是训练重复
+
+同一 bank、同一世界中的四次执行，是随机部署的嵌套实现。它们不是四份独立学到的 bank，128 个随机规则 episode 也不是 128 个训练样本。固定且已暴露的世界集合不提供 held-out 泛化结论；S 和 R 使用不同生成器，按流编号相减不会自动获得共同随机数的方差削减。可以配对的是世界条件，不是把 S 的第一条流与 R 的第一条流宣称为同一组随机创新。
+
+我建议同时呈现每条完整流的 32 世界均值和逐世界四次结果的离散程度，用来判断均值是否主要依赖少量随机实现。这是已有输出的阅读，不增加执行。只有四条流时，随机部署均值的精度可能仍很有限；小差值不能自动支持等价。对世界进行重采样回答的也不是训练重复不确定性，不能把其区间标成训练制度效应的区间。
+
+O 只做一次并不构成需要补齐的“不公平”：在固定世界初始化和确定性执行语义下，额外复制相同 O 不会创造独立信息。一次原 O 和一次原 R 的重现可以验证新 evaluator 保留了已声明的执行身份，但不能被算作新训练复制。
+
+原 R 流已经暴露，不能把四个 R 面板写成四份全新盲测
+
+这是方案最值得明确的一点。原流 262624105 的结果已经进入 B04 阅读和本次选题，而另外三条 R 流尚未执行。继续将原流纳入四流主均值可以保留题面指定的有限开发比较，但该均值不能被描述为在未看过结果的条件下获得的四份新控制样本。
+
+这不要求额外流或更换主终点。一个有用的、可在执行前写定的配套读取，是利用同一批输出显示原流对结果的影响。令 R
+0
+	​
+
+ 为原流的世界均值，
+R
+ˉ
+new
+	​
+
+ 为三条新流的均值，则：
+
+R
+ˉ
+4
+	​
+
+=
+4
+R
+0
+	​
+
++3
+R
+ˉ
+new
+	​
+
+	​
+
+,
+Δ
+SR,4
+	​
+
+−
+Δ
+SR,new3
+	​
+
+=
+4
+R
+ˉ
+new
+	​
+
+−R
+0
+	​
+
+	​
+
+.
+
+这个恒等式不提供另一份独立证据；它只是防止把已知控制流的影响藏在一个总平均里。仍以四流比较为原定主要读数，不在看到结果后选择四流或三流中更有利者。 若两者符号或用途解释明显不同，应报告这一敏感性，而不是追加随机流直到得到期望答案。
+
+因此，最诚实的范围是：这份固定 M bank、这组暴露过的开发世界、这些预先固定执行流上的有限随机部署比较，并对其条件期望提供有限精度的观察。 它不是新训练总体效应，也不是后选择偏差已经消失的确认试验。
+
+四、为什么 S 值得执行，但不应预期它必然获胜
+
+一个简单的自构反例足以说明：标签概率的 argmax 不等于服务价值的 argmax。设两个标签的概率为 (0.6,0.4)，单步服务为 (0,1)。Greedy 选第一项，得到 0；按该分布采样的期望为 0.4；均匀采样为 0.5。于是可以出现：
+
+S>O,S<R.
+
+这只是数学上的可能性，不是 B04 的证据。它说明“采样改善 greedy”与“learned assignment 比 uniform 更有用”是两个不同预测，后者不能由前者推出。
+
+真实系统的遗漏因素更多：team 与个体 AR 前缀共同决定组合，低层循环状态积累历史，标签持续十步，物理动作改变后续状态，后续高层分布又依赖这些状态；训练还包含不同于本次评价的低层随机动作。逐因子 greedy 既不等于最大化长程服务，也不应不加证明地称作整个 AR 联合分布的全局最优组合。上述玩具例子没有处理这些循环、MARL 和物理耦合。
+
+我接受题面两个正号作为待挑战的工作预测：
+
+Δ
+SO
+	​
+
+>0,
+Δ
+SR
+	​
+
+>0.
+
+但目前证据对第二个正号没有保证。B04 只显示 O 不如原 R；它没有把缺失价值定位到确定性提取，更没有显示随机 learned law 能拿回这种价值。S 改变访问状态与组合频率，可能改善，也可能恶化。这正是比较值得做的未知，而不是支持 S 必胜的先验事实。
+
+还应避免把“有用服务”缩成只看 J 的正号。B04 已出现 J 上升而人数下降的世界，本次也完全可能如此。J、服务人数及质量—高度取舍应共同决定用途解释；没有预写的服务损失容忍规则，就不要在结果出来后发明一个恰好让候选过关的阈值。
+
+五、执行对象必须真的是所称的 S，而不是另一个策略
+
+冻结代码为可实施性提供了明确依据，但不是“新比较已经实现”的验收。
+
+MixtureSkillDecoder 在 team 的第零步直接保留原始 logits；只有个体步骤返回混合后的 logμ。因此 S 的联合规则应是原 learned team categorical，再按原顺序、以实际已采样的前缀生成各个体的 μ=.9π+.1/6。不能把 team 也改成这种 mixture，不能对个体只采样 plain π，也不能先独立生成个体标签再宣称保留 AR。
+
+B04 的 own 评价经 B03/B01 调用 assign_partial_batch(..., deterministic=True)。新 S 应只把高层选择切到对应的 native stochastic 路径，同时保留 mean-clipped 低层动作；不能为了使高层随机而无意中把低层也改成训练时的 Gaussian 采样。单纯恢复训练 RNG 也不会把一个明确调用确定性选择器的评价变成 S。
+
+我认为本次独立 review 最有价值的范围是这一条实际因果链：指定 checkpoint → 正确的高层标签因子及抽样 → 原低层与循环状态 → 原物理执行 → 原生输出。具体需要保持的不是 seed 名字，而是规则与状态的真实身份：
+
+使用题面唯一的 M-final checkpoint；S 的私有评价 Torch 流与 R 的 PCG64 流不消耗或更新训练状态，参数、buffer、normalizer 保持冻结。
+
+每个面板从相同定义的世界初始化及独立评价 hidden state 开始；episode 内保留原 recurrent 演化，不在技能重选时擅自新增 hidden reset。
+
+O、S、R 使用相同的合法标签、k10 重选时点、AR 信息接口、500 步边界及低层裁剪语义；保留实际标签因子、轨迹和服务分量，不能用高层概率或熵代替物理结果。
+
+这些是对新 evaluator 科学含义的针对性检查，不是要求重新审计整个 B04，更不是追加一串实验前置门槛。题面已有的 O/R 身份控制可嵌入九面板中，不需要另购买一个诊断批次。
+
+尤其要保留这条解释边界：即使 S 正确实现，它也只恢复了高层抽样这一部分，不恢复完整训练行为分布。 本次低层仍使用均值，模型固定，访问轨迹内生变化；不能把 S 胜负解释成已经检验了全部 train–deployment mismatch。
+
+六、不同结果应怎样改变下一步判断
+结果模式	应保留的判断
+S 同时胜过 O、R，且服务分量与不利世界支持实际用途	加强“这份 bank 在该条件下应考虑 learned stochastic 部署”的判断；不升级为稳定训练制度优势或互补机制。
+S 胜 O，但不胜 R	支持随机化相对 greedy 的条件性改善；不支持 learned assignment 比外生 uniform 有额外价值。R 仍是必须认真保留的简单部署参照。
+S 不胜 O	削弱题面的 greedy-extraction 改善预测。不能通过改温度、加噪声、换 checkpoint 或挑世界，把原预测悄悄变成另一个问题。
+S 的 J 较好，但服务人数或具体世界明显恶化	记录为用途取舍，不自动宣布 useful-service 成功。均值上的优势不能抹去局部损失。
+差值小、跨流变化大，或结论明显依赖原 R 流	保留未决与抽样敏感性；不宣称等价，也不自动追加流数。
+
+这里还要防止两个事后解释错误。
+
+第一，S−O 即便为正，也只能支持在固定条件下把部署规则由 O 换成 S 的总后果。它不识别某个互补机制，也不足以证明 B04 的 A
+M
+	​
+
+ 完全由 greedy 提取造成。S 的闭环轨迹、组合频率和访问状态都可能同时改变。
+
+第二，B04 Gamma 永远按其原定义和原数据保留。 新的 S 结果不能改名为 B04 的 own 结果；本次也没有重新评价 U 的多流部署。不能把 S 的四流均值与旧 U 单流结果拼接成一个“完整系统胜出”的新主要结论。题面明确排除了这种终点替换。
+
+若新的四流 R 与原 R 不同，S−O 与 S−R 的符号组合还可能不同于从旧 A
+M
+	​
+
+ 直觉外推的排序。应直接读取三种规则，不强迫结果服从旧单流的相对关系。
+
+七、实际成本、最强替代和有界结束
+
+保留题面的曝光，而不是把“零 fit”写成“无成本”。
+
+工作	冻结 O/S/R	新独立 M/U 区组
+新训练 fit	0	2
+训练 team transitions	0	720,000
+评价 team transitions	144,000	96,000
+总 team transitions	144,000	816,000
+新增的主要信息	固定 M 的部署法则后果	训练制度差异是否在另一训练实例再现
+
+冻结方案中 O 为 16,000 步，S 为 64,000 步，R 为 64,000 步，合计 288 episodes、九面板。它避免 720,000 训练步，但比独立训练区组的原定评价部分多 48,000 评价步；不能只看 fit 数就宣称某个具体总加速比。
+
+B04 的 109.310170 summed runner minutes 仅是既有工作量参考，不是新训练区组的共享节点墙钟保证，也不是冻结评价的计时。新比较目前没有单独测得的评价 wall estimate。实现、检查、独立 review、checkpoint/轨迹读写、收取和发布都是真实工作；未知时间不能计为零。
+
+最强替代是新的独立 M/U 区组，不是第三次原样 G、全层级对 flat 的重复研究或一轮新 selector 拟合。 它使用新的真实初始化、训练世界和随机地址，同时保留旧评价定义，能够检验 B04 的条件 bank 优势是否沿另一学习轨迹出现。它完成后仍只有两个训练区组，不足以宣称稳定排序；但其信息也不会被一千次同 bank 评价替代。
+
+我的建议只选择本次冻结比较，不把独立 M/U 区组列为必须随后偿还的“统计债务”。完成九面板后，按预写主要量、次要量和全部服务后果读取并结束本批。正结果可以使某个固定-bank 部署选择更值得采用；不利或未决结果也可以使本次部署假说停止投入。任何再训练、再抽样或策略修改都应有其能够改变的具体判断，而不是为了让 S 赢而自动延长。
+
+技术失败、身份控制不符或实际规则错误，应限制依赖它的比较并保留已发生成本；它们既不是 S 的科学负结果，也不是自动获得额外执行的理由。
+
+八、阅读范围与信息缺口
+
+本答复以附件指定的 516367f8055b67d5ac51784e20646118b6852ab6 为推理输入，代码含义使用 483819ebaa8286d24641f4947e646a765c761003，共享背景使用 ac232d3b8c97656bda51a0f4555599b566ea95b5。最新分支只用于检查写入位置，没有替代固定来源。
+
+已读取本题、完整 B04 接受结果及不利世界、B04 prospective 内容与此前完整建议的相关部分、指定治理和方法、共享背景及相关冻结函数；也读取了 M/U 原始 summary、config、manifest 和训练记录中的相关内容。对大型输出采用了所需字段与记录阅读，没有逐条重新计算全部原始输出。
+
+预测文件的直接读取曾返回空内容和 blob 元数据；随后取得了 M 的预测记录，但没有完成全量误差重算，U 的预测数组内容仍未取得。没有重新加载 checkpoint tensors，也没有独立重算 checkpoint 或所有输出文件的 SHA256。 B04 记录的全量张量、RNG 和预测验收属于 DM 已完成并写入来源的检查，不能冒充本次新做的审计。
+
+这些缺口限制的是本次独立工程复核的范围；它们不提供任何 S 的性能证据，也不应由记忆补齐。当前选题判断所依赖的 B04 原生端点、部署定义和新比较预算已经可读。仍真正未知的是 S 的原生服务结果、随机部署精度及新评价的实际时间成本，而这些正是尚未执行的工作，不能预先报成已知。
+
+最终建议：保留九面板冻结 M 比较，以 S−R 为主、S−O 为次，明确旧 R 流的暴露和四流抽样的有限性；把它用于决定这份 bank 的部署规则，而不是改写 B04 Gamma 或替代训练重复。MATERIAL_DISSENT: no。
+
+本次实际新增 0 fit、0 环境评价、0 代码修改、0 仓库写入。
+
+## 2026-09-23 — Deployment advice adopted; fixed B05 frozen-M O/S/R and L0
+
+**Complete advice and reconciliation.** Same key
+`hmasd:ef1a1f242d71ee4e2b77013ca1bfebdd3935246efb06593b2872af3d9382d75d`
+completed after one accepted Send, without recovery or resend. The entire7805-character
+answer above was read. `deliver` returned `NOT_DELIVERED`, no answer commit. Its cited
+79d0920afe28355b5dc936fcc2f9c4c5b4800540 is the actual target file blob, not a commit;
+the other cited SHAs are reasoning/code/background sources, not evidence of writeback.
+I matched the latest fetched branch, local file and pinned question source516367f8055b67d5ac51784e20646118b6852ab6;
+the unique Answer was still empty and every other byte unchanged. The exact complete reply
+was then saved from chat in that subsection. The collector's text SHA256 is
+65ac86f3d1846d5695745f6eec97a99251a0923178632e8e07a1e244dd032953; the saved17787-byte file
+includes a terminal newline (7806 characters), SHA256
+dbd42dffd5f315fe9f0c51d10c161421e6ba483e632b33983b20de5bf0e9e65e.
+A readback assertion initially compared that file including newline against the collector's
+text digest; checking both exact forms reconciled it without altering the answer or sending
+again. READY ae86b7a6a0a8453eeae73de0 was consumed atgeneration44 with wake30f86f27-5592-4fe4-8e5f-cc14db3d13e3,
+advancing to45. No prior result operation or question remains pending.
+
+**Decision and material criticism.** MATERIAL_DISSENT=no. Adopt the proposed nine-panel,
+zero-fit comparison as the one next investment. Pro correctly treats original uniform R0 as
+already exposed; adopt its additional algebraic R0 sensitivity and stream dispersion reads
+from the same outputs, without changing the primary or adding draws. Original R0 is retained
+both as an identity control and one fourth of the R main mean. Three new R streams do not
+retroactively make the whole control blind. The simple two-label example S>O yet S<R is
+arithmetically correct (.4>0, .4<.5), illustrating only logical separation of the two
+predictions; it omits recurrent/AR/physical feedback and provides no performance evidence.
+
+I verified consequential code facts directly: `MixtureSkillDecoder` leaves team step0
+unchanged and uses .9pi+.1/6 only for individuals. `select_skills` invokes native partial
+assignment with deterministic=True; native stochastic assignment conditions each individual
+on the actual sampled team and preceding tokens. Low evaluation separately requests
+mean actions. The answer's new S is feasible but not yet implemented. Pro did not reload
+checkpoint tensors or independently rehash/recompute all artifacts, and U prediction arrays
+were unavailable to it; those are limits of its independent audit, not missing B04 evidence,
+which our complete actual-checkpoint and raw-output readers already verified. Advice is not
+new empirical evidence or engineering acceptance.
+
+Current main was refreshed atea88eae3e before the choice; owner pause and our lead are
+unchanged. Relevant [shared topics3 and6](../../RESEARCH.md#研究背景与共享认识) and the complete
+B04 update at4ffcc4779 remain applicable. DM1 has adopted its separately owned bounded
+full-package confirmation; DM3's zero-update S7 feedback execution is separate. No task is
+contacted or taken over. The strongest alternative remains a fresh M/U learning block,
+2fits/720k train/96k eval. Choose this fixed-bank deployment question first because the
+actual learned stochastic law is unmeasured and can change use of the existing M. This
+neither creates a debt to run the alternative afterward nor resolves training recurrence.
+
+**Fixed B05 object and evaluation.** One native admitted zero-training invocation, source
+fixed after implementation and review. Use only the original B04 M final checkpoint,
+SHA256 `df222836fca1b4a4aaf87408d4f024fbb796e7107c004a40f1f5ecc64201c39f`, native digest
+`d6b22033f9c84901db42015d01b7c58238002ea5ba301a0daf5d919035dc4058` and frozen digest
+`7e9ee5542474cca2ba0281ebeb5000bc3947e254a6cf48b80e59d33010bd17f0`.
+Bind its original summary SHA256
+`248d3e04c32b4684738676aa5491dc4da5848874c243e5f6e34bb11ba5bb1299`
+and config at their original hashes. Input locations are the retained B04 M run directory
+from its manifest; loading them does not create a new trained instance. All native networks,
+factual heads/calibration, normalizers and saved RNG/sampler state must be restored and their
+actual content verified before evaluation. No checkpoint substitution or new fitting.
+
+Native S1/N6/50users/k10, six team/individual labels,500steps,32 parallel evaluation lanes;
+worlds1700200..1700231 are exposed development conditions. All low actions remain means with
+physical component clip[-1,1], the existing native Gaussian/physical conventions and J units.
+Each panel resets the same physical worlds and starts independent zero hidden state; within
+episodes carry the real GRU state through all boundaries, with no added skill-boundary reset.
+All parameters, buffers, heads, calibrations and normalizers stay frozen; training/default/
+private/object-sampler states are preserved outside evaluation. There is no optimizer, store,
+auxiliary fitting, trained selector, new reward, label remapping, temperature or low-noise arm.
+
+Nine panels in fixed order: O, R0, S0, R1, S1, R2, S2, R3, S3. O uses original greedy team and
+canonical individual AR argmax. S uses the original native learned team categorical followed
+by original AR individual mu=.9pi+.1/6, with all factors renewed eachk10; it uses actual sampled
+prefixes. Each S panel has its own isolated persistent Torch stream, seeds260923951..260923954
+respectively. R uses independent PCG64 labels with exact seeds262624105..262624108, respectively,
+32 team then32x6 individual draws at each of50 renewals. Keep the original non-label evaluation
+reset/RNG convention at262624105 for every panel; only each assigned label stream changes.
+Record actual CPU/CUDA RNG use and restore outer streams. Do not call equal-numbered S/R
+streams common random numbers; they use different laws/generators. O is deterministic and is
+run once, not replicated for artificial symmetry.
+
+O and R0 must reproduce the full original B04 final-own/final-uniform per-world J/returns,
+service and native component arrays, physical start hash and label stream at the same actual
+4070 device/dtype path. Original physical hash is
+`b36474bb458d4c72efb2feed5b6653583cf0cbaf02fa264e097111209827d6d1`; R0 label hash is
+`a45d59f80fca20321df3803745068bb841f30e6c25b6b8c01dd7d0d250a67190`.
+These identity controls are part of the nine panels. Report observed numerical discrepancies
+rather than silently relaxing a failed comparison; a genuine identity/semantics failure
+quarantines dependent readings and keeps its actual cost. No blind retry or extra diagnostic
+batch follows. Small artificial technical fixtures are separate correctness tests, not new
+scientific evidence or extra production-checkpoint panels.
+
+**Estimands and predictions.** For each world first average all four complete S episodes,
+and all four complete R episodes, then equally average the32 world differences. Primary
+Delta_SR4=mean_world(mean4 S-mean4 R), in native J. Secondary Delta_SO=mean_world(mean4 S-O).
+Apply the same aggregation to users/coverage/quality/height; report all signed worlds,
+absolute endpoints/tails and each complete stream's32-world means. Preserve within-world
+four-realization ranges/dispersion, without converting them into training n or a training
+population interval. Four streams may have poor deployment precision; small/mixed values
+are not equivalence. No best-stream/world/panel/checkpoint selection or bootstrap claim of
+independent training effects.
+
+Predeclared sensitivity, using only these same outputs: let R_new3 average R1..R3; report
+Delta_SRnew3=mean_world(mean4 S-mean3 Rnew) beside the unchanged primary, and verify
+Delta_SR4-Delta_SRnew3=(mean R_new3-mean R0)/4. It is an algebraic exposed-control influence
+read, not independent evidence or an alternative selectable endpoint. Retain opposing signs
+or important changes instead of choosing the favorable aggregation.
+
+Working predictions remain Delta_SO>0 and Delta_SR4>0. S>O alone supports only the conditional
+deployment change and cannot establish learned assignment's value over R. If both are positive,
+read service and all adverse worlds before judging practical usefulness; J gains with fewer
+users or worse native components remain a tradeoff, with no post-result tolerance threshold.
+If S<=O, weaken the greedy-extraction improvement conjecture; if S>O but S<=R, retain uniform
+as the useful simpler comparator. Large stream/sensitivity variation is uncertainty, not a
+reason to add draws. No result identifies why B04 A_M occurred, isolates a complementarity
+mechanism or rewrites B04 Gamma. In particular, do not pair new S four-stream means with old
+U's single stream as a new full-system success. One retained trained M remains training n=1.
+
+**Cost and bounded end.**0fits,0train/optimizer/normalizer updates,9panels x32episodes x500
+=144000 evaluation team transitions/288episodes. O16000, S64000, R64000. At each panel there
+are50renewals x32 decisions, with6 AR individual factors in O/S and6 independent factors inR;
+low forwarding spans500x32x6 agent steps/panel. Save full scientific trajectory outputs,
+not only summary scores, and record runner wall/user/system CPU, scoped peak RSS/CUDA and
+output bytes; peak scratch/shared-node occupancy may remain explicitly unmeasured. Evaluation
+wall is not separately measured in the prior fits, so there is no invented speed ratio or
+guaranteed estimate. New initialization/optimizer work is0; model construction/loading and
+technical checking are real support costs. Preferwsl_4070 with fresh actual-node admission;
+other active work does not waive resource checks. End after this fixed nine-panel reading;
+no automatic extra random stream, seed, selector fit, M/U block or confirmation.
+
+**L0 — one candidate-local frozen deployment evaluator.** Owned executable paths:
+`experiments/candidates/complementary_skill_learning/b05/`,
+`scripts/run_complementary_skill_learning_b05.py`, and mirrored
+`tests/experiments/candidates/complementary_skill_learning/b05/`. Reuse frozen B01/B03/B04
+native modules/evaluation helpers by composition; do not modify their files or shared core.
+Deliver fixed-spec runner and admitted CLI with input-root/launch-sha/out parameters and
+exact original artifact identity checks; production CLI cannot select additional panels,
+checkpoints, seeds or technical-small-model overrides. Small synthetic fixture helpers may
+expose technical dimensions only under direct tests. Preserve actual production config and
+native float32 model/float64 reward aggregation,4threads and CUDA runtime conventions.
+
+Restore one agent from the complete M checkpoint, verify native/frozen digests and input
+hashes, freeze it, then execute only the nine panels. Output runner-written config, summary,
+per-panel summaries and complete recoverable trajectories: pre/post native states and joint
+observations, actual labels/renewal order and applicable factor log-probabilities, raw mean
+and clipped physical actions, native reward/components and episode ends. Record the exact
+checkpoint and physical/label hashes, per-panel stream states and outer-state preservation,
+counts and0-update/frozen evidence. Preserve partial/error results and all completed panels;
+never overwrite an output root. Use compact arrays/NPZ when appropriate, one panel at a time;
+no generalized deployment framework or parameter search. Assert component/J/users identities
+and the fixed aggregate/sensitivity calculations. Missing important instrumentation limits
+acceptance even when the process exits normally.
+
+Checks and independent Reviewer: actual restored weights/normalizers, no training or hidden
+state-reset path, S's unchanged team law and AR mu with real sampled prefix, R0 draw order,
+private evaluation RNG isolation/reproducibility, old O/R equivalence on artificial technical
+fixtures, full native trajectory-to-summary and aggregate arithmetic, admission refusal and
+partial output handling. Run focused CPU tests and a bounded actual4070 CUDA technical
+fixture before production admission. Reviewer examines scientific meaning/RNG/checkpoint/
+evaluator identity; DM accepts the diff and checks. No mandatory broader suite or new fit.
+Implementer owns only these code/test paths, makes no scientific choice, edits no records,
+launches no result, communicates with no other App task and spawns no child. DM owns this
+notebook, input verification, publication, native launch, observation and full final reading.
