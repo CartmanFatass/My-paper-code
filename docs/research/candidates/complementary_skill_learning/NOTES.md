@@ -7196,3 +7196,21 @@ Main`63e382485f2a37cccd378436212b911b0fb4d2ae` also clarifies one ambiguous shar
 phrase: the unselected fixed-label training control differs from B07's already selected
 M-S-context conditional-distribution scoring. This is wording clarification, with no new
 arm, plan, pause or lead change and no archive. Routine M progress stays in this notebook/run.
+
+Checkpoint2026-09-24T07:54Z: generation60 event`d34fc3ec4bb3c12575f011af`,
+wake`8f9be0c7-4f9c-4382-a871-0f9f18c09b60`, was fully read. The native observation and a fresh
+same-operation status query agree: admission accepted, runner/supervisor still running with
+their original identities, records consistent, no exit witness. Fresh published main remains
+`63e382485f2a37cccd378436212b911b0fb4d2ae`, with owner pause lifted and this lead unchanged.
+The07:54:28Z incomplete runner summary reports1started fit,18/45rollouts,144000training/stored
+transitions,288training episodes and18native updates, plus the unchanged initial32000evaluation
+transitions/64episodes. Latest rollout retains lambda_h=.07, finite reported losses/entropies,
+15coordinator/2250actor/2250critic/15team-discriminator/60individual-discriminator steps,
+G/P7head steps each and0auxiliary-trunk steps. Its measured wall was80.889839s; this is a
+single rollout, not completed-fit wall time. stdout/stderr were empty; actual MemAvailable was
+9,949,872KiB. The interim summary read was97609bytes/SHA256
+`71e3142061ea48356a48f6d2a629435f620465345932d40ab0e01b4e6ad6d301`.
+These facts establish ongoing progress only; final raw-output verification and scientific
+reading remain due. No horizon, intervention, seed or evaluation panel changed; E/U have not
+started. The exact checkpoint was consumed and observation rearmed for the same handle at
+generation61,1500s window. No worker restart, Pro Send or cross-task message occurred.

@@ -64,7 +64,7 @@
   "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd/launch-manifest.json",
   "node": "wsl_4070",
-  "observed_at": "2026-09-24T07:28:23.256544Z",
+  "observed_at": "2026-09-24T07:54:28.245353Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/48b893b0aba584d2ec603ab308f36a76f31cec8069fd4a5cfddce20708f3bba9.json",
   "output_root": "/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_m_260924001_455536ebd",
   "record_consistency": {
