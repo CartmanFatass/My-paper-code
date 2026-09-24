@@ -6084,3 +6084,47 @@ M's READY event`7d43bced24d43d8a0b8001f9` under wake`649adef4-d5ce-4427-8d3e-9b9
 was consumed after this reading by rearming generation52 to53. U needs fresh native admission
 and its own accepted-handle observation. This cell does not change the material
 research plan, so no per-cell RESEARCH/main edit is made.
+
+## 2026-09-23 — B06 fixed U admitted; actual initial pairing verified
+
+After M's complete acceptance and result publication at `54a9caef1`, the prospectively fixed
+second U fit was accepted at2026-09-24T05:02:32.423681Z. Its source remains
+`c23363a5a71932f037fa0274750fa1c150b9a812`, with the original U law, new paired seed block,
+360k training and initial/final uniform32k evaluation. No additional test fit, altered recipe,
+selector panel or score-dependent choice was inserted. B06 has2started fits,1complete accepted
+M and1running U; the completed paired scientific reading is still outstanding.
+
+The actual-node [manifest](../../../../runs/complementary_skill_learning/b06_u_260923961_c23363a5a/launch-manifest.json),
+[preflight](../../../../runs/complementary_skill_learning/b06_u_260923961_c23363a5a/admission-preflight.json)
+and [native status](../../../../runs/complementary_skill_learning/b06_u_260923961_c23363a5a/launch-status.json)
+were copied and hash-matched. Their respective SHA256 values are
+`a10f7fa3bf2c7f00c9d1450f2aee2b0f4b51109c6830d94622d22a39b2d049ab`,
+`d0651604fdb434c29fbfa9bc367abb44aaae4fcfe05b884eda91c4d7d64cfc80`,
+`847dbeb872d5199bb328385eb1c9a3c6046ef39977786633d83ecbd251576c8a`.
+The manifest carries source, command, control, native process identities and recovery handle.
+Current control main was `d2e34d45c724c4248e5966d6c323afdda02b31e9`. Fresh effective memory
+13592113152bytes passed the4294967296-byte floor; cgroup headroom remains unavailable.
+Initial native status reported matching running supervisor/runner and consistent records.
+
+Actual initial artifacts were then available and checked without executing the policy again.
+Config650bytes/SHA256`a62bca4813252c7d8c5abcb90ffcf72391b5de9652570578674e67b28b24c06f` and
+initial checkpoint23750333bytes/SHA256`80044745af3ce621112d56f3d8ce64acec414ba904fd53abf4c8a52c50e850b4`
+match the node. Loading both M/U initial checkpoints independently showed exact equality of
+all native tensors, both auxiliary heads, initial target calibration, normalizers, config,
+default/private CPU/CUDA RNG states and both sampler states. U's original initial-uniform
+panel equals M's complete initial-uniform panel, including all32native scores, service,
+components and physical/label identities. Their J=.20061902954325744 and users=15.9786875
+are the paired starting observation, not U's trained result. Initial native/frozen digests
+match M's`fbb1516296e838d5661e56ad3ce43be0ea23175f3f681645012fa3a9607a2c61` /
+`dbd3aabae7b5f0f543c804521547dce2e4ef12c30d7f6db799a16e97994859c7`.
+The two checkpoint file hashes differ because their arm metadata differs; actual numerical
+pairing was read from tensors and state rather than inferred from a filename or file hash.
+
+Observer `temp/b06_u_wait_request.json` registered this accepted handle at generation54,
+1500s window. Its first drain actually observed accepted/running with matching process
+identities, present summary, consistent records,0errors and no pending events at05:04:37Z.
+Checkpoints rearm this same handle; they do not relaunch U. Its live source snapshot remains
+intact. Complete U counts, learner movement, all45training rows and stream pairing, final
+uniform worlds, primary M−U and original Gamma remain for terminal collection and full reading.
+No material plan or shared judgment changes at this routine cell start, so no RESEARCH/main
+edit is made. Compact records are published; the initial checkpoint stays outside Git.
