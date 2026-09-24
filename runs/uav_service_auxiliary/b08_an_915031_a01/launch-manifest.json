@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-24T11:27:28.539278Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f0f3c71e236f4d9aa2cdbe7a126e037c/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f0f3c71e236f4d9aa2cdbe7a126e037c/scripts/run_uav_service_auxiliary_b08.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01",
+    "--",
+    "--out",
+    "/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01",
+    "--launch-sha",
+    "8725d2f3e924a9d3c0dc8d87c7ff470850854081",
+    "--seed",
+    "915031",
+    "--device",
+    "cuda",
+    "--threads",
+    "4"
+  ],
+  "claim_key": "611be99a1abca575de04aaa50f1bdcc20e4525b81e4ad09ab8ef76469710a6ea",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/611be99a1abca575de04aaa50f1bdcc20e4525b81e4ad09ab8ef76469710a6ea.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f0f3c71e236f4d9aa2cdbe7a126e037c/scripts/run_uav_service_auxiliary_b08.py",
+    "--out",
+    "/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01",
+    "--launch-sha",
+    "8725d2f3e924a9d3c0dc8d87c7ff470850854081",
+    "--seed",
+    "915031",
+    "--device",
+    "cuda",
+    "--threads",
+    "4"
+  ],
+  "command_sha256": "58d47373bd8da5f5a5a49f7d935e17b37fbbd6520c52bf66373a46980140ce3f",
+  "control_observation": {
+    "observed_at": "2026-09-24T11:27:28.419724Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "ae30db181b930f07cfd1eb55341ba6078dacc466"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-24T11:27:28.431385Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f0f3c71e236f4d9aa2cdbe7a126e037c",
+  "direction": "uav_service_auxiliary",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_uav_service_auxiliary_b08.py",
+    "--launch-sha",
+    "8725d2f3e924a9d3c0dc8d87c7ff470850854081",
+    "--seed",
+    "915031",
+    "--device",
+    "cuda",
+    "--threads",
+    "4"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/611be99a1abca575de04aaa50f1bdcc20e4525b81e4ad09ab8ef76469710a6ea.json",
+  "output_root": "/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01",
+  "preflight": "/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 544625,
+      "session_id": 544625,
+      "start_ticks": 60794299
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 544625,
+    "process_group_id": 544625
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 544626,
+      "session_id": 544625,
+      "start_ticks": 60794302
+    },
+    "pid": 544626,
+    "process_group_id": 544625,
+    "supervisor_pid": 544625
+  },
+  "schema_version": 1,
+  "sha": "8725d2f3e924a9d3c0dc8d87c7ff470850854081",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/f0f3c71e236f4d9aa2cdbe7a126e037c",
+  "stderr": "/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/usa-b08-8725d2f3e/runs/uav_service_auxiliary/b08_an_915031_a01/stdout.log"
+}

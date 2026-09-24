@@ -9781,3 +9781,35 @@ The separate core test's final digest is
 The earlier scientific interpretation is unchanged: this tests one finite trained package pair
 under an explicit mixed-behavior/eligibility approximation, not an unbiased estimator, recovery
 mediator, universal superiority or cancellation of approximation bias between arms.
+
+## 2026-09-24 — B08 fixed batch admitted and initial F panel running
+
+The actual `wsl_4070` CUDA collector/update/evaluator checks for N and A passed:2 passed,
+3 deselected in8.69s, using committed input8725d2f3e924a9d3c0dc8d87c7ff470850854081.
+The four reviewed production-file digests on the node match the accepted local files; the
+prepared source has no tracked diff. These are short technical fixtures, not B08 fits or
+scientific worlds. During preparation, an HTTP helper fetching a missing partial-clone object
+stalled in the plain shell. Only that retained Git helper was terminated; Git removed the
+uncompleted checkout itself. Preparation in the configured network shell completed at the same
+SHA, followed by the actual CUDA tests. No scientific operation existed during that recovery.
+Unrelated commit-graph/auto-gc warnings were observed; no repository-wide repair or reset was
+attempted, and exact requested source plus admission were independently verified.
+
+The fixed batch has now received actual native admission. The recoverable
+[runner-written manifest](../../../../runs/uav_service_auxiliary/b08_an_915031_a01/launch-manifest.json),
+[fresh node preflight](../../../../runs/uav_service_auxiliary/b08_an_915031_a01/admission-preflight.json)
+and [runner-written configuration](../../../../runs/uav_service_auxiliary/b08_an_915031_a01/config.json)
+are copied verbatim here. The manifest is authoritative for the exact source, output, command,
+node, controls, native process identities and stable operation handle. Fresh effective memory
+was13,808,148,480bytes against the4GiB floor. Runner config confirms the common opt-in, seed,
+N8/k10/H3000/two-lane/180k binding, native return coefficient2 and N-then-A intervention mapping.
+
+The first detached observation reports accepted admission, consistent records and both original
+native processes running; no exit witness exists. The same task's observation controller is
+armed at generation102 against that operation. A subsequent compact progress read shows the
+common initial F evaluation underway:4,000 actual evaluation transitions,2 episodes attempted,
+1 completed;0 fits and0 training transitions yet. These are operational counts, not accepted
+scientific findings. The fixed runner will proceed from this one common initial panel through
+N then A, independent of their scores; no extra fit, panel, retry or early scientific judgment
+was added. Completion/error/checkpoint wakes return to this task for same-handle reconciliation
+and full artifact reading. B07 and the explicit B08 approximation/censoring limits remain intact.
