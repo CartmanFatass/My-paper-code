@@ -7135,3 +7135,31 @@ requirement. Final file identities in the same table order above are:
 `4f0d81c934bbfb92034969a7848b68e610cb69fabde7ba52fe464fe6f7361136`
 `9b7e1a62704156ff7bfba3ef2ee8ec92252578577184e9f985a02458d0bf2814`
 `b28b1d82d9743ead0402bfb9005a33a1f1ce382d816f77282b19a20839715fbf`
+
+## 2026-09-24 — B07 actual4070 CUDA check accepted; frozen first M launch
+
+The configured actual4070 interpreter ran `test_actual_cuda_full_b07_batch` from the clean
+owned remote checkout at published source`455536ebd0e6e23466ed40244bcf1e5ab6462826`.
+The command verified all four final file SHA256 values above before pytest. Result:1passed,
+21deselected,14dependency-deprecation warnings in12.17s, exit0; the CUDA case was not skipped.
+The DM read the full returned output and the exercised test. Its artificial H20 M/E/U batch
+performed120training transitions/6episodes/3native updates and25panels/1000evaluation
+transitions/50episodes, with16E common-context rows/112factor outputs plus the own-S forwards.
+This is additional engineering exposure, not a production360k fit or scientific acceptance.
+The test's scratch followed pytest cleanup; no test outputs become the M reference for E.
+
+The four final executable files retain their independently reviewed ASTs. The complete fixed
+B07 batch uses source`455536ebd0e6e23466ed40244bcf1e5ab6462826` even if later notebook-only
+commits advance this branch. The first production request is M, seed260924001, at
+`runs/complementary_skill_learning/b07_m_260924001_455536ebd`, through the configured4070
+supervisor and native admission kernel with a retained source snapshot. Source and plan are
+already published. Fresh local and actual-node fetches still report main
+`24cf6faee0a565e3778b53d0e57c9d5ce670339e`, owner pause lifted, direction exploring and
+unchanged lead `Codex DM (independent session)`; kernel admission must recheck these controls
+and actual memory before release. At this prelaunch entry production B07 started fits=0.
+
+Recovery drained the observation store at generation59: no pending event, wake or observation
+job remained. The earlier Pro answer stays reconciled and read; no Send, completed worker or
+other task was contacted again. After accepted M admission, observe its native handle and
+preserve E/U as the already fixed remaining arms. E still awaits complete M output reading,
+reference-to-trajectory and checkpoint checks, and the empirical reference hash binding.
