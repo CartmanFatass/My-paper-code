@@ -14180,3 +14180,30 @@ No copy is removed. The large frozen summary is preserved without conversion:
 | `trace_stage45_n8.npz` | 141921340 | `8bf1db4a959bdf1d988283a5fb13e7cfe830c9d916a3f5ba5f094102f58be13c` |
 | `training.jsonl` | 383648 | `7d66cc0728ff17594af8bec833e992ac4ae044c8cb5414d763c901b6a4e94828` |
 | `training_reset_scenes.npz` | 2972180 | `a1c6d26ae3eafbd1aa270e4c3f0203a3110cffbb1787d37e947ad4ab8961aa3f` |
+
+## 2026-09-23 — B15 block2 SET admitted and observation adopted
+
+The fixed third cell was admitted once after complete block1 reading, at unchanged
+scientific source `e0a20add999ded53943f99df15f596822e6c13dc`. The [native manifest](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_set_s994102/launch-manifest.json)
+retains its original operation/process identities and actual source snapshot.
+Fresh control main `8810bcc10978941638470aec79460faf1e4ff0c0` and the canonical node
+agree on lifted pause, confirming state and the same lead. The [actual-node preflight](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_set_s994102/admission-preflight.json)
+passed with13,593,931,776 available physical/effective bytes. These files and the
+[fixed configuration](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_set_s994102/config.json)
+were collected byte-exactly and hash-verified.
+
+The first reading confirms seed994102, training lanes2994200–2994215 and unchanged
+N8/N6 panels, recipe and all12 source hashes. Canonical fresh SET construction has
+target-owned empty optimizers/buffer; its initial learner, global/sampler RNG and
+training-environment digests differ from block1. Stage0 N8 then N6 completes32k
+evaluation team steps/64 episodes with zero optimizer/storage calls and every
+isolation field preserved. Training has collected/stored8k team steps/16 episodes;
+the saved reading precedes the first completed update. This is partial exposure.
+
+The block1 SET READY event was consumed with its returned generation130/wake/event
+IDs and rearmed as131. The new block2 SET observer is adopted at generation132,
+PID3055627, window1500s, job `launch-s1-bounded-confirmation-b15-b2-set`; its first
+native probe reports the original runner/supervisor running and consistent, with
+no pending event. There are3 started/2 complete B15 fits and1 complete paired
+block. After b2_set, the fixed remainder is b2_h6, b3_h6, b3_set. No worker restart,
+duplicate launch, Pro resend or change to the claim follows from these events.
