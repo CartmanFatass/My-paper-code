@@ -5646,3 +5646,247 @@ first collection and actual reward/GAE separation, then read both endpoint panel
 and all loss worlds against N and the prewritten recurrence branches. Admission
 does not establish R's scientific result. Current state: **1 completed/accepted
 B05 fit, 1 fixed fit running**, no extra fit, Pro Send or App message.
+
+
+## 2026-09-23 — B05 complete: endpoint risk savings recur, service gains do not
+
+**Acceptance and source.** The original R operation has a consistent native
+exit-0 witness (finished epoch1790209597.9591453), with both recorded processes
+absent. All **46 remote files / 113,135,103 bytes** were collected and matched by
+SHA256, including immutable admission/manifest records. The complete traces,
+first-rollout audit and checkpoint remain locally under
+`runs/uav_service_auxiliary/b05_r_914173_a01/` and on configured4070 at
+`/home/wu/hmasd-worktrees/usa-b05-3de3e3f71/runs/uav_service_auxiliary/b05_r_914173_a01/`.
+[Summary](../../../../runs/uav_service_auxiliary/b05_r_914173_a01/summary.json),
+[configuration](../../../../runs/uav_service_auxiliary/b05_r_914173_a01/config.json),
+[exit witness](../../../../runs/uav_service_auxiliary/b05_r_914173_a01/process-exit.json)
+and [final native status](../../../../runs/uav_service_auxiliary/b05_r_914173_a01/launch-status.json)
+are retained. Summary SHA256 is
+`ed0210e281390f612e9b616e1f2767ae347f1bc93c353347cb9babb71f4c1969`;
+checkpoint SHA256 is
+`fd338b75475289fb01c6b9bfc2576ea3b042756e1094b65e0b2e08d5cd92f226`.
+Both arms bind unchanged scientific source
+`3de3e3f71c747e2422656126b52ae88beafb562a`, seed914173 and actual lanes914173–914176.
+
+Independent arithmetic reproduces all30 raw training rollout returns/metrics,
+all64 evaluation worlds and aggregates, original reward decomposition, capped
+actual cost and the R training objective `native - 2*actual_cost`. All37 runner
+artifact hashes and the config hash pass. Raw original-reward error is at most
+4.441e-16; the training-objective identity is exact. R completes **180k training /
+1.44M agent rows / 30 updates / 120 episodes**, plus **96k evaluation / 64 episodes
+with zero evaluation optimizer updates**. All observed episodes truncate at1500;
+there are no early ends or rollout-boundary straddles, and stderr is empty. This
+is an observation, not an exclusion rule for adverse or short episodes.
+
+The real first-rollout low GAE/returns independently recompute within maximum
+errors4.192e-6/7.909e-6. High team/agent GAE and returns pass the existing combined
+`atol=5e-5, rtol=3e-6` tolerance, maximum absolute error2.266e-4; all600 valid high
+rows have their ten-step span and actual terminal masks. Every learner moves at
+every update; final steps are high2250, low actor/critic67500 each, team
+discriminator450, individual discriminator1800. Loaded optimizer tensor counts
+agree. L2 movement from initialization is high12.765128, low actor36.607234,
+critic31.673184, team2.818533, individual8.040014. All checkpoint tensors are finite;
+actual parameter bytes independently reproduce the final policy fingerprint.
+
+**Matched intervention.** N/R config differences are exactly arm and extra
+training cost0/2. The two recorded initialization and first physical-collection
+hashes match, and differ from B04. Independently retained first-rollout actions,
+native rewards, all metrics and episode ends are array-identical; initialization
+evaluation traces match in every world. Actual first-buffer values, masks,
+intrinsic components and return cost also match. Thus the intervention is active
+on the same physical data, before subsequent policy trajectories diverge.
+
+- Shared initialization: `9cec1f0e1b0f0cb965c120af9587a7ca8bcd0b2a9deddbbd09570c4c35209d43`.
+- Shared first collection: `55d27fc4802d687ecb0a5bb793d5db40dca143e71515d5d531ed83d9494c9bc8`.
+- R first update: `c7762254c17506ff0bb7b6497ecbab918bce74524e5682e26d92dcc1d29371fe`.
+- R final policy: `fc9db9351e74f38bcda00faef5e5686b22ac46f71ad91eaaaba46723ebebaea5`.
+
+Training reward differs at1306/6000 first-rollout team transitions, mean delta
+−.377832337 and maximum absolute2. Stored agent environment reward differs at
+10448 entries, low GAE maximum delta33.613453, and high agent GAE maximum
+142.007660. High reward changes at131 valid intervals. Both first-update and
+final policy hashes differ from N; final development30 and final32 share R's
+same final checkpoint. These checks establish real storage/learning exposure,
+not which component of the subsequent adaptation caused the outcome.
+
+**Complete fixed reading.** The protocol and investment branches were written
+[before B05](#2026-09-23--b04-advice-adopted-b05-fixed-independent-training-recurrence).
+Both panels are exposed development worlds; `final` is a fixed endpoint label,
+not new held-out confirmation. QoS, cost and throughput below are per-step means;
+J is the original raw episode return. No checkpoint/world/arm is selected out.
+
+| Panel | N J | R J | R−N J | R−N QoS | R−N capped cost | J wins/losses |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Development0 | -222.092843 | -222.092843 | +0.000000 | +0.000000000 | +0.000000000 | 0/0 |
+| Development10 | -26.407571 | +26.283545 | +52.691116 | -0.019354809 | -0.027283942 | 5/3 |
+| Development20 | +87.562908 | +142.925395 | +55.362487 | -0.003838285 | -0.020360990 | 6/2 |
+| Development30 | -72.367636 | -110.027297 | -37.659662 | -0.117039433 | -0.045606817 | 3/5 |
+| Final32 | -232.025030 | +9.860423 | +241.885454 | -0.026788931 | -0.094165509 | 14/18 |
+
+The primary endpoint improves **+241.885454 J**, but its median paired difference
+is **−99.441797** with **14 wins / 18 losses**, range[−676.258092,+2042.732101].
+Total positive differences are12783.176162 and losses−5042.841640. Final QoS
+falls **.216057847→.189268916**, throughput **6.481735→5.678067 Mbps/step**;
+QoS rises12/falls19/ties1 worlds. Capped cost falls **.180828987→.086663479**
+(16 lower/12 higher/4 ties), uncapped cost **.369444984→.173588333**
+(14 lower/14 higher/4 ties). The original-J accounting identity is service
+**−40.183396**, the coefficient2 cost term **+282.496526**, PBRS **−.427676**.
+Those terms sum to the observed difference; they are not independent causal shares.
+
+R has **13 negative-J worlds**, eight zero-QoS worlds
+**938004/06/07/08/09/14/21/23**, versus N's14 negative-J and one zero-QoS938021.
+Six of R's14 J wins still deliver zero service:938004/06/07/09/21/23. Six worlds
+improve both QoS and capped cost (938001/05/12/15/19/28); nine lower both QoS
+and cost. Thus neither a universal no-service explanation nor a generally
+service-compatible risk gain is supported. R's worst absolute J is
+**−1343.076641 at938008**, with zero service and cost.442745031; best J is
++550.916909 at938001. Its J P10 is−598.208581 (N−1561.212995). The largest
+relative losses are938030−676.258092,938016−648.502144 and938014−517.531872;
+938030 also loses.221761384 QoS. The largest win938005+2042.732101 corrects
+N's worst absolute world, including lower cost and more service.
+
+Final true episode minimum battery mean rises **.361645883→.368945925**,
+P10 **.319035567→.325502468**, worst **.307733819→.320263605**. Individual
+minima improve18 and worsen14, worst difference−.056616208 at938031; R's
+lowest absolute minimum is938032. Battery and geometric return cost remain
+separate outcomes, not interchangeable risk measures.
+
+On development30, R is **−37.659662 J** despite lower mean cost; QoS is
+**.276942462→.159903029**, throughput8.308274→4.797091. There are3 wins/5 losses,
+median−42.418403; strongest losses937001−446.897103,937002−433.814113 and
+937005−419.076393. R has5 negative-J and2 zero-QoS worlds (937005/937007),
+versus N's4 and0. Development R's own30−0 learning is **+112.065545 J**,
+QoS+.054655545, cost−.010202154 and throughput+1.639666, with J5 up/3 down;
+N's corresponding J+149.725207, QoS+.171694978 and cost+.035404663 remain.
+R's QoS improves5/falls1/ties2 versus initialization; all8 battery minima improve.
+The unchanged-panel R J falls **252.952693** from update20 to30; no earlier
+checkpoint replaces the endpoint. No initialization measurement exists on the
+final32 worlds, so their own learning increment cannot be inferred.
+
+All endpoint worlds are retained below. Length is1500 for both arms in every
+row; no event or length adjustment generates the ordering.
+
+| Panel/world | N J | R J | ΔJ | N QoS | R QoS | N cost | R cost | N battery min | R battery min |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 937001 | 281.006204 | -165.890898 | -446.897103 | 0.194734 | 0.261912 | 0.000000 | 0.182190 | 0.393162 | 0.408536 |
+| 937002 | -258.928491 | -692.742604 | -433.814113 | 0.244954 | 0.048203 | 0.204764 | 0.251673 | 0.436937 | 0.416640 |
+| 937003 | 366.571828 | 349.894878 | -16.676950 | 0.465480 | 0.242311 | 0.105640 | 0.000000 | 0.371493 | 0.367136 |
+| 937004 | -94.156202 | 57.338046 | 151.494248 | 0.393540 | 0.170040 | 0.223451 | 0.062200 | 0.370602 | 0.351079 |
+| 937005 | 409.080037 | -9.996357 | -419.076393 | 0.281843 | 0.000000 | 0.000000 | 0.000000 | 0.432866 | 0.385667 |
+| 937006 | 206.564970 | 479.237063 | 272.672093 | 0.210094 | 0.343866 | 0.031467 | 0.007039 | 0.346310 | 0.368186 |
+| 937007 | -1023.588074 | -364.407295 | 659.180778 | 0.174786 | 0.000000 | 0.423721 | 0.116464 | 0.330786 | 0.381442 |
+| 937008 | -465.491357 | -533.651212 | -68.159855 | 0.250110 | 0.212892 | 0.275646 | 0.280268 | 0.344352 | 0.333894 |
+| 938001 | -187.990277 | 550.916909 | 738.907185 | 0.281652 | 0.377377 | 0.198643 | 0.000000 | 0.341567 | 0.362548 |
+| 938002 | 304.681632 | -102.323559 | -407.005191 | 0.211052 | 0.255619 | 0.000000 | 0.157826 | 0.332845 | 0.376799 |
+| 938003 | -285.235167 | -545.928645 | -260.693478 | 0.210874 | 0.045500 | 0.196347 | 0.201364 | 0.340932 | 0.335112 |
+| 938004 | -1040.922537 | -1029.767743 | 11.154793 | 0.097845 | 0.000000 | 0.391483 | 0.338319 | 0.373240 | 0.383787 |
+| 938005 | -1796.058763 | 246.673338 | 2042.732101 | 0.037220 | 0.174528 | 0.612961 | 0.000000 | 0.313620 | 0.369798 |
+| 938006 | -880.517761 | -726.349576 | 154.168185 | 0.143121 | 0.000000 | 0.360789 | 0.237178 | 0.318845 | 0.355499 |
+| 938007 | -297.303106 | -57.896777 | 239.406329 | 0.125488 | 0.000000 | 0.157258 | 0.014247 | 0.327238 | 0.361498 |
+| 938008 | -1257.431391 | -1343.076641 | -85.645250 | 0.125527 | 0.000000 | 0.477848 | 0.442745 | 0.329083 | 0.357346 |
+| 938009 | -1611.942492 | -36.492755 | 1575.449736 | 0.004222 | 0.000000 | 0.534817 | 0.007058 | 0.320755 | 0.370444 |
+| 938010 | 385.535197 | 240.674779 | -144.860418 | 0.273256 | 0.169340 | 0.003335 | 0.000000 | 0.349557 | 0.345817 |
+| 938011 | 595.705532 | 197.846947 | -397.858585 | 0.407251 | 0.205530 | 0.000000 | 0.032037 | 0.381638 | 0.359382 |
+| 938012 | 182.694045 | 492.807143 | 310.113099 | 0.211788 | 0.337729 | 0.041053 | 0.000000 | 0.413075 | 0.437684 |
+| 938013 | 607.339525 | 318.304534 | -289.034992 | 0.414423 | 0.220527 | 0.000000 | 0.000000 | 0.377124 | 0.326996 |
+| 938014 | 262.644013 | -254.887859 | -517.531872 | 0.183699 | 0.000000 | 0.000000 | 0.082098 | 0.373599 | 0.322278 |
+| 938015 | -1520.376718 | 383.874273 | 1904.250991 | 0.052689 | 0.293913 | 0.528511 | 0.013836 | 0.328531 | 0.372824 |
+| 938016 | 131.370650 | -517.131494 | -648.502144 | 0.272036 | 0.178501 | 0.087564 | 0.257443 | 0.363861 | 0.340034 |
+| 938017 | 418.179523 | 405.147445 | -13.032078 | 0.374194 | 0.279853 | 0.042493 | 0.000000 | 0.378572 | 0.360934 |
+| 938018 | 583.507255 | 329.257722 | -254.249533 | 0.399342 | 0.246235 | 0.000000 | 0.008550 | 0.400974 | 0.365729 |
+| 938019 | -754.504727 | 482.213228 | 1236.717955 | 0.009889 | 0.331413 | 0.252212 | 0.000000 | 0.386119 | 0.430694 |
+| 938020 | 666.535107 | 493.590489 | -172.944618 | 0.454361 | 0.348868 | 0.000000 | 0.005132 | 0.413796 | 0.408802 |
+| 938021 | -1224.469675 | -133.741015 | 1090.728660 | 0.000000 | 0.000000 | 0.404020 | 0.039640 | 0.307734 | 0.372870 |
+| 938022 | 333.905437 | 220.667093 | -113.238344 | 0.230813 | 0.339106 | 0.000000 | 0.091376 | 0.351441 | 0.388137 |
+| 938023 | -1565.750359 | -15.063101 | 1550.687258 | 0.012033 | 0.000000 | 0.523557 | 0.000000 | 0.323128 | 0.371432 |
+| 938024 | -210.134824 | -604.017463 | -393.882639 | 0.293700 | 0.275246 | 0.211844 | 0.333911 | 0.365200 | 0.325337 |
+| 938025 | 362.754967 | 134.035486 | -228.719481 | 0.252247 | 0.259704 | 0.000000 | 0.080185 | 0.410062 | 0.354122 |
+| 938026 | 348.324970 | 141.536994 | -206.787975 | 0.279101 | 0.371549 | 0.018936 | 0.133474 | 0.364079 | 0.369205 |
+| 938027 | 121.856158 | 337.312915 | 215.456757 | 0.088756 | 0.234015 | 0.000000 | 0.000000 | 0.388113 | 0.422108 |
+| 938028 | -1607.928730 | 58.873495 | 1666.802225 | 0.060830 | 0.149371 | 0.562183 | 0.050078 | 0.313952 | 0.374587 |
+| 938029 | 344.417567 | 391.018454 | 46.600888 | 0.237934 | 0.269794 | 0.000000 | 0.000000 | 0.471270 | 0.488481 |
+| 938030 | 372.052300 | -304.205793 | -676.258092 | 0.386593 | 0.164832 | 0.064218 | 0.179108 | 0.374128 | 0.350860 |
+| 938031 | 446.204619 | 329.051651 | -117.152968 | 0.306687 | 0.227842 | 0.000000 | 0.000000 | 0.381478 | 0.324862 |
+| 938032 | 348.057057 | 232.613075 | -115.443982 | 0.475228 | 0.300214 | 0.116458 | 0.067628 | 0.357114 | 0.320264 |
+
+**Recurrence, without pooling.** Read the four preselected endpoint cells:
+
+| Training block | Panel | R−N J | R−N QoS | R−N capped cost |
+| --- | --- | ---: | ---: | ---: |
+| B04 | Development30 | -218.433452 | -0.091920514 | +0.027256861 |
+| B04 | Final32 | +549.393528 | +0.108482684 | -0.129009370 |
+| B05 | Development30 | -37.659662 | -0.117039433 | -0.045606817 |
+| B05 | Final32 | +241.885454 | -0.026788931 | -0.094165509 |
+
+The fixed final-panel J/cost signs recur in the independent new training pair,
+weakening the narrow explanation that B04's final net gain was unique to that
+one realized training instance. The development/final sign split also recurs,
+strengthening the scope restriction. However, B04's final service improvement
+does **not** recur: B05 has lower mean service, majority J losses and eight
+zero-service worlds. It is not a repeated general service/risk improvement, a
+coefficient ranking, a panel classifier or a validated controller. Two training
+pairs, and nested worlds/lanes/checkpoints, do not establish population reliability.
+No aggregate across B04/B05 or across panels rescues these adverse cells.
+
+This is the previously advised **positive final / negative development** branch,
+with a stronger service tradeoff. It is not the branch claiming disappearance of
+the primary benefit. Keep the useful conditional risk-cost observation, but do
+**not** select more training of the same fixed coefficient4 recipe, a third pair,
+a coefficient sweep, an earlier checkpoint or confirmation. The evidence does
+not justify further spending toward a general default controller through this
+unchanged weighting intervention. That investment choice is not a universal
+rejection of direct risk learning and does not end this DM's service/risk task.
+The complete earlier Pro advice already covers this reading and its limits;
+a materially different next intervention requires a focused new consultation.
+
+Current published background was read at main
+`9c9a5d2c1c1fc482a7215734f6751613b81ddabc`, topic6. The new result narrows its
+B04 opportunity: **repeated final mean J/cost benefit can coexist with majority
+paired losses and increased complete service failures**. Native N remains a
+necessary control; returning to old service/MSE auxiliaries is not justified.
+The owner pause remains lifted for this direction, and its exact lead is unchanged.
+
+A **post-result, descriptive inspection** of retained final traces (zero new
+interactions/updates) used six equal250-step bins, without selecting worlds.
+In B05, N/R mean costs are respectively0/0,0/.000008349,.052370/.002454,
+.212646/.046231,.325313/.140988,.494646/.330299. Their QoS means are
+.088980/.083865,.161533/.126308,.211554/.163596,.262310/.194234,
+.263353/.257090,.308617/.310520. Last-bin cap saturation is41.7375%/23.95%
+of world-steps. B04 last-bin costs are.633737/.489203, cap saturation52.875%/
+38.7875%. This localizes much of the *recorded cost*, but does not identify a
+credit-assignment failure or prove those states were recoverable. B05 service
+loss appears before material evaluated cost; training objectives may change the
+whole policy, not just late risky decisions.
+
+Source inspection at3de confirms current actor observations already include UAV
+battery, raw return margin/threshold and relative station features
+(`energy_aware.py::_energy_observation`); adding those same scalars is not a new
+information intervention. `_raw_return_energy_margins` uses present battery minus
+nearest-station return-energy estimate and reserve. A possible distinct question
+is whether a fixed, observation-legal, margin-conditioned return feedback can
+preserve useful N behavior while reducing late cost. It might instead disrupt
+relay service or fail to avert cost. No heuristic rule, threshold, trial or
+learning redesign is selected here. The **next action is a focused Pro comparison
+of that cheaper execution intervention with a justified learning revision or
+stopping**, using these full results and the actual information/action contract.
+It will not reopen an old Pro key or turn the positive endpoint into automatic
+additional fits. Any selected experiment needs its own prospective protocol.
+
+**Cost and observation closure.** R uses **135.364231 runner minutes**, CPU
+user/system7762.451981/370.666898s, collection/update/evaluation3448.894897/
+2056.114872/2613.010093s. High-water RSS is2,994,108KiB/**2.855404GiB**, not
+simultaneous machine memory. R local files including final status total
+113,136,871bytes; both B05 outputs total226,460,053bytes. The batch is exactly
+**2 completed fits /360k train /192k eval /552k total team interactions /
+2.88M training agent rows**, **259.992391 summed runner minutes**, including
+80.883842 evaluation minutes; N admission to R exit spans270.252281min.
+Implementation, checks/review, collection and independent arithmetic are extra
+engineering work, not additional fits or episodes. R has no charging, charger
+input, cutoff or depletion in training/evaluation; N's three training charging
+UAV-steps remain. Zero failures do not establish catastrophe prevention or
+charging recovery.
+
+After complete evidence reading, READY `053f99b959628ed7c3eede34` is consumed
+with generation75/wake`a66ccde2-1f5b-4c21-830d-c6c14fe2ad29`, advancing to76.
+Both original B05 workers are finished; no experiment, unconsumed event or old
+Pro answer remains pending. No worker restart, repeat Send or App message occurs.
