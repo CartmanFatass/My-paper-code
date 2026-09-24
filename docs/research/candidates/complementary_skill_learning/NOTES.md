@@ -5829,3 +5829,36 @@ scientific measurements or change the fixed evaluation distribution.
 READY event`d049ec8dc89c9537b794e1df` under wake`356d5e64-f636-41ec-ade9-612462b4a731`
 was consumed after delivery verification and full reading by rearming generation48 to49.
 All earlier accepted operations remain terminal; no worker was restarted or old question resent.
+
+## 2026-09-23 — B06 adapter accepted; actual CUDA check remains
+
+The Implementer returned only the four new B06 package/entry/test files named in L0. DM read
+all four and accepts the narrow immutable Spec adapter: exactly the seven new training seeds
+and training-world base differ from B04. The admitted entry passes that actual Spec into the
+unchanged B04 engine. It preserves the old raw engine identity, native optimizer guards, U's
+trained low/discriminator law, private streams and six-panel plan. The new wrapper restores
+the production uniform-stream guard before work and validates actual uniform panel identities
+afterward; adapter failure preserves outputs and records `failed` before raising.
+
+Independent Reviewer `/root/review_b06_recurrence` reviewed the files against author base
+`54373f0d59c1479fc5a2f1ed524b2b7373013dc5` and returned no material finding or requested repair.
+DM independently matched the returned file digests and confirmed no working-tree edits to
+B01–B05 or core. Reviewed SHA256 values, in package-init/runner/CLI/test order:
+`91faf890d3f61a3ee38e1fce6ad1234050dbbcae96b0004fbaee799381576721`,
+`ba75b8f150083072788fd056ad20af10349f0a761bf4d08e5cdc718404931ba3`,
+`8b007c4c9ac51a065e27ea92182d4b6fe035ade207282d690ef9c55776a75d58`,
+`24d24473652014ebce82fee9c487e2134e74857cf5552268241c949c26c8fa40`.
+
+Implementer CPU suite:9passed/1CUDA-skipped in3.64s. Independent Reviewer:9passed/1CUDA-skipped
+in3.54s. Each suite's artificial paired fits used80training+240evaluation transitions and
+two native updates combined. Checks read actual initial native/head/private/sampler differences
+from B04 addresses, M/U initialization and initial-uniform pairing, new learner movement,
+uniform factors/label flow, RNG/evaluation isolation, fixed CLI propagation/refusal and failure
+preservation. Test scratch was pytest-owned and removed on normal teardown. These artificial
+checks are engineering evidence, not production training instances or native performance results.
+Full-scale optimizer counts remain verified by the unchanged guards, not exercised by these tests.
+
+Main was refreshed at `e256dc73e73dda2167bd29d28d28d4f3c908dbfe`; our scope, lead and lifted
+pause are unchanged. Next publish these exact source bytes and run the already specified small
+actual4070 CUDA fixture through the new adapter. Only after that check may the fixed first M
+fit enter native admission. No production B06 attempt has started at this entry.
