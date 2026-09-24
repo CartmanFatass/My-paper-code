@@ -4000,3 +4000,39 @@ After full collection/verification, native snapshot GC first refused protected p
 the documented read-only sudo process scan made preview eligible and apply removed only M's
 disposable source snapshot. Original outputs, native claims/handles and the authoring checkout
 remain. The M observation event is consumed; no M worker is restarted.
+
+
+## 2026-09-23 — B04 fixed U admitted; actual initial pairing verified
+
+The previously fixed U was natively admitted at2026-09-24T00:35:36.496481Z (September23 local)
+on the same published source and initialization block after full M acceptance. Native
+[manifest](../../../../runs/complementary_skill_learning/b04_u_260923931_483819eba/launch-manifest.json),
+[resource preflight](../../../../runs/complementary_skill_learning/b04_u_260923931_483819eba/admission-preflight.json)
+and [operation/status reference](../../../../runs/complementary_skill_learning/b04_u_260923931_483819eba/launch-status.json)
+were collected byte-for-byte. Their respective SHA256 values are
+`4032fe657c2733561d349db404511113ae9cd101b1f417f04652bd5968feaf4b`,
+`0a7ec21717ea63dce6e5c0526486279dfb93bf04469e50773208a33766a9caca`, and
+`f2a50dd3f0adf512112750dac64d50a246705cdc4170146ab688ee9f26517781`.
+The fresh preflight passed with14438277120 effective available bytes against4294967296
+required, with cgroup headroom unavailable. Read-only native status at00:36:41.021865Z
+reported accepted/running with both recorded identities matching, consistent records and no
+exit witness. The current count is1 fully accepted M plus1 running U, not a complete pair.
+
+U's actual saved initial checkpoint was also collected with matching native SHA256
+`5a3769f2cc7d9796d3e1207e3b945b7268011c80aeadaa906f1097a37472b88c`.
+Independent recursive comparison of M/U initial checkpoints checked199 tensors,8 arrays and
+2692 scalar fields: all native weights, factual heads, head optimizer state, normalizers,
+default/private RNG and both sampler states match exactly; only the assigned M/U arm fields
+differ. The differing checkpoint file hashes are expected because those arm fields differ.
+Both native/frozen digests match. The original integer sampler seed was retained exactly as
+17960616156650407380 in the Python readback. The complete initial uniform panels match
+exactly across all32 worlds and all recorded components, mean J .0853949344956147, with the
+fixed physical initialization and uniform label stream. This is actual production evidence,
+not only the earlier technical fixture.
+
+The primary final M−U uniform comparison, each arm's actual learning, A_M and Gamma retain
+their original definitions. No final U result is accepted yet; its fixed360000 train/32000
+eval workload remains in progress. Its incomplete initial-summary counters do not establish
+the current training position. Full U artifacts, all45 updates, its two panels, unchanged
+coordinator and complete zero-high-update/law/RNG evidence must be read before the paired
+judgment. The observer follows this accepted handle; preserve its source snapshot while live.
