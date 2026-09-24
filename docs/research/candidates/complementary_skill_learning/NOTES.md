@@ -8639,3 +8639,19 @@ exploring direction/lead. The exact generation/wake/event were acknowledged and 
 with the same operation and1500s window; no pending events remain. No worker was restarted,
 no Pro question repeated and no other task contacted. E/U remain unstarted fixed subsequent
 cells pending complete M reading and its new reference binding.
+
+
+## 2026-09-24 — B08 M second checkpoint; same handle continues
+
+Generation75 CHECKPOINT`d55dca053e13fd712112d02d`, wake
+`294dab1b-1d5e-46d3-877e-d2f88d102f8a`, was fully read. The same accepted operation remains
+running with consistent native identities,0observer errors and no exit witness. Its incomplete
+summary records36/45native updates,288000training/stored transitions,576training episodes,
+32000initial-evaluation transitions/64episodes. All18000storage batches/288000rows verified
+with0failures. Native optimizer calls are540/81000/81000/540/2160 in coordinator/low actor/
+low critic/team/individual order. Only initial S0/R0 panels are present; no failure is recorded
+and stderr is empty. These are execution-progress facts, not scientific acceptance. Fresh
+maine25eb49b19ffbd51a94dc16454afa766df0998ce retains lifted pause and the same exploring lead.
+The returned generation/wake/event were acknowledged and rearmed75→76 with the same operation
+and1500s window; no pending event remains. No restart, extra fit, repeated Pro Send or other-
+task message occurred. E/U remain the fixed unstarted later cells after complete M readback.
