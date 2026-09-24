@@ -3910,3 +3910,129 @@ are progress evidence only. Complete checkpoints, all training/prediction rows, 
 world panel and native process-exit evidence still require full collection and independent
 reading before any scientific acceptance. The deterministic observer follows this same native
 operation; a checkpoint, read failure or terminal notice cannot authorize another M launch.
+
+
+## 2026-09-23 — B04 M fully accepted; fixed U follows unchanged
+
+M's native exit witness is valid with exit0 and both recorded processes absent. DM collected
+all12 original files,59766952 bytes, and matched every byte count/SHA256 against the executing
+node before reading and accepting the scientific output. The original
+[summary](../../../../runs/complementary_skill_learning/b04_m_260923931_483819eba/summary.json),
+[all training rows](../../../../runs/complementary_skill_learning/b04_m_260923931_483819eba/training.jsonl),
+[all factual predictions](../../../../runs/complementary_skill_learning/b04_m_260923931_483819eba/auxiliary_predictions.jsonl),
+[config](../../../../runs/complementary_skill_learning/b04_m_260923931_483819eba/config.json)
+and [exit witness](../../../../runs/complementary_skill_learning/b04_m_260923931_483819eba/process-exit.json)
+remain linked to the admitted manifest above. Actual initial/final checkpoints are retained
+both locally and at the manifest's remote output directory, with SHA256
+`be0668d078d85e779c6785d4f4f44cec695d9238e36e0248322d79b819a6034e` and
+`df222836fca1b4a4aaf87408d4f024fbb796e7107c004a40f1f5ecc64201c39f`.
+The complete summary SHA256 is
+`248d3e04c32b4684738676aa5491dc4da5848874c243e5f6e34bb11ba5bb1299`.
+
+**Execution and evidence acceptance.** Exactly1 cold fit,360000 train/stored transitions,
+720 training episodes,45 updates,64000 evaluation transitions and128 evaluation episodes.
+All22500 native batch stores account for360000 verified rows with0 failures. All22500 action,
+reward, factual and storage label-flow checks agree. Every update retains800 team decisions,
+4800 individual factors and549 coordinator inference calls. Actual optimizer exposure is675
+coordinator,101250 low actor,101250 low critic,675 team discriminator and2700 individual
+discriminator calls; both detached heads have315 calls and auxiliary trunk has0. All native
+modules and both factual heads actually moved. The independent reader recomputed the actual
+checkpoint tensor/frozen digests, head optimizer state, normalizers, default process RNG,
+three private process streams and both object-private sampler states, including every
+recorded before/after chain. The high process stream legitimately remains unchanged while
+its private native sampler advances;675 actual high updates must not be inferred from an
+artificial RNG draw. Initial native/head tensors differ from old B01 as the new seed requires.
+
+All45 training rows and45 batches of800 factual samples were read, including fixed calibration,
+terminal/reset masks, full predictions and target digests. Independently recomputed raw MSEs
+match exactly; sampled native mu replay error is at most1.680850983e-5, below the fixed1e-4
+check. A provisional supplementary reader used `rows` for prediction metadata; the native
+field is `batches`. Correcting that readback key and rerunning the complete reader passed,
+with no artifact or executable change. This was not an experiment failure or added run.
+
+All four32-world panels use the fixed physical initialization,16000 transitions each,0
+optimizer/normalizer updates and mean-clipped low actions. Both uniform panels match the
+original prospective label-stream hash. Native J is independently recomputed from both
+returns and .7coverage + .3quality - height penalty for every world; service equals50coverage.
+
+| M panel | Mean native J | Users per step | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| initial own | .087403388784 | 11.6436875 | .23287375 | .060182268054 | .093662916632 |
+| initial uniform | .085394934496 | 11.5635625 | .23127125 | .059931136615 | .094474281489 |
+| final own | .409669217529 | 28.9897500 | .57979500 | .157823478034 | .043534325882 |
+| final uniform | .453674108416 | 31.3369375 | .62673875 | .157693454756 | .032351053011 |
+
+M has actual useful within-instance learning: own initial-to-final J +.322265828745 and
+service +17.3460625; uniform +.368279173920 and +19.773375. Both J and service improve in32/32
+worlds, with smallest J gains+.130744731 own and+.206822483 uniform, both world1700210.
+Height penalty falls in all32 under both rules. Quality falls in world1700203 despite its
+net J/service gain: own -.058529242 and uniform -.023801188; keep this counterexample.
+
+The secondary same-bank deployment difference A_M is **-.044004890887 J**,8 positive and24
+negative worlds; service -2.3471875,10 positive/22 negative. Coverage -.04694375, quality
++.000130023278 (17 positive/15 negative) and height penalty +.011183272870 (24 increases).
+All32 signed differences were read. The worst J difference is-.179784204 at1700224 with
+-10.658 users and+.028527105 height penalty. The worst service difference is-11.65 users
+at1700220, J-.177890034. Own does win J in8 worlds, up to+.035016631 at1700215, so this is not
+uniform dominance in every environment.
+
+**Working explanation and fixed continuation.** This strengthens the evidence that the native
+mixed-objective recipe can learn useful service in this new instance; it weakens default use
+of this instance's learned-own selector relative to its frozen uniform deployment. It leaves
+M versus U skill-bank formation, the main delta_uniform prediction and the full-regime Gamma
+unanswered. Same-bank deployment does not reveal training necessity or identify a gradient,
+MI or complementary-skill mechanism. The low initial values belong to this new training block;
+old B01/B03 endpoints are not substituted for the new matched U. The relevant shared distinction
+between actual learning, incremental recipe value and deployment consequence remains unchanged.
+
+U is still the prospectively fixed second arm at source483819ebaa8286d24641f4947e646a765c761003,
+seed260923931, tag `b04_u_260923931_483819eba`, with360000 train/32000 eval and no high updates.
+Proceed after current native admission; no score-based recipe, endpoint, source or cost change.
+Read actual initial native/head tensors and initial uniform matching before the final paired
+judgment; first training trajectories/targets are treatment-dependent and need not match.
+
+**Actual cost and preservation.** Runner body3970.970696690s =66.182844945min, user/system CPU
+3572.518059/398.463249s; lifetime peak RSS1892300KiB, peak CUDA allocated/reserved
+1531556352/2111832064 bytes. Shared-node occupancy and peak scratch are unmeasured. Runner
+recorded54813471 durable output bytes excluding summary before the supervisor wrote its
+549-byte exit witness; complete collected output is59766952 bytes. No efficiency inference.
+After full collection/verification, native snapshot GC first refused protected process660;
+the documented read-only sudo process scan made preview eligible and apply removed only M's
+disposable source snapshot. Original outputs, native claims/handles and the authoring checkout
+remain. The M observation event is consumed; no M worker is restarted.
+
+
+## 2026-09-23 — B04 fixed U admitted; actual initial pairing verified
+
+The previously fixed U was natively admitted at2026-09-24T00:35:36.496481Z (September23 local)
+on the same published source and initialization block after full M acceptance. Native
+[manifest](../../../../runs/complementary_skill_learning/b04_u_260923931_483819eba/launch-manifest.json),
+[resource preflight](../../../../runs/complementary_skill_learning/b04_u_260923931_483819eba/admission-preflight.json)
+and [operation/status reference](../../../../runs/complementary_skill_learning/b04_u_260923931_483819eba/launch-status.json)
+were collected byte-for-byte. Their respective SHA256 values are
+`4032fe657c2733561d349db404511113ae9cd101b1f417f04652bd5968feaf4b`,
+`0a7ec21717ea63dce6e5c0526486279dfb93bf04469e50773208a33766a9caca`, and
+`f2a50dd3f0adf512112750dac64d50a246705cdc4170146ab688ee9f26517781`.
+The fresh preflight passed with14438277120 effective available bytes against4294967296
+required, with cgroup headroom unavailable. Read-only native status at00:36:41.021865Z
+reported accepted/running with both recorded identities matching, consistent records and no
+exit witness. The current count is1 fully accepted M plus1 running U, not a complete pair.
+
+U's actual saved initial checkpoint was also collected with matching native SHA256
+`5a3769f2cc7d9796d3e1207e3b945b7268011c80aeadaa906f1097a37472b88c`.
+Independent recursive comparison of M/U initial checkpoints checked199 tensors,8 arrays and
+2692 scalar fields: all native weights, factual heads, head optimizer state, normalizers,
+default/private RNG and both sampler states match exactly; only the assigned M/U arm fields
+differ. The differing checkpoint file hashes are expected because those arm fields differ.
+Both native/frozen digests match. The original integer sampler seed was retained exactly as
+17960616156650407380 in the Python readback. The complete initial uniform panels match
+exactly across all32 worlds and all recorded components, mean J .0853949344956147, with the
+fixed physical initialization and uniform label stream. This is actual production evidence,
+not only the earlier technical fixture.
+
+The primary final M−U uniform comparison, each arm's actual learning, A_M and Gamma retain
+their original definitions. No final U result is accepted yet; its fixed360000 train/32000
+eval workload remains in progress. Its incomplete initial-summary counters do not establish
+the current training position. Full U artifacts, all45 updates, its two panels, unchanged
+coordinator and complete zero-high-update/law/RNG evidence must be read before the paired
+judgment. The observer follows this accepted handle; preserve its source snapshot while live.
