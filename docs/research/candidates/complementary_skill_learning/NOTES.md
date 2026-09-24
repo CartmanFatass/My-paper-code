@@ -8566,3 +8566,31 @@ with no pending events or active observation; the complete Pro answer remains re
 Publish the exact accepted code, perform the fixed CUDA check and, if successful, admit M via
 the configured node/supervisor/kernel. E still awaits the new M's complete scientific reading
 and empirical reference binding; U remains the fixed third cell. No prior worker is restarted.
+
+
+## 2026-09-24 — B08 actual4070 CUDA check accepted; frozen first M request
+
+The configured actual-node interpreter ran
+`tests/experiments/candidates/complementary_skill_learning/b08/test_b08.py::test_actual_4070_cuda_fixture_uses_b08_adapter`
+from the clean owned4070checkout at published source
+`c9217f0ae5b32aa2a13e228cc87899f545a0111b`. All five accepted source-file hashes matched before
+execution. Runtime was PyTorch2.7.0+cu118, CUDA11.8, NVIDIA GeForce RTX4070Laptop GPU.
+The DM read the complete returned check output:1passed,14dependency-deprecation warnings,
+pytest-reported12.77s, exit0; this was an actual CUDA test, not a skip. Its artificial N6/8users/
+H20,2lanes×2rollouts per arm exercised the B08 adapter and reused real engine for M/E/U,
+240training transitions/12episodes/6native updates,25panels/1000evaluation transitions/50episodes,
+new M reference and E scoring over16contexts/112factors. M/E high updates were positive and U
+high updates zero. Test scratch followed pytest cleanup. This support exposure is distinct
+from the prospective360k fits; no test artifact is the scientific M reference. Peak test RSS,
+CUDA allocation and scratch were not separately measured; no resource-efficiency claim follows.
+
+The complete B08 batch is frozen to execution source`c9217f0ae5b32aa2a13e228cc87899f545a0111b`,
+even when notebook-only commits advance the branch. Source and accepted checks are published.
+The first production request is M, seed260924041, fresh tag`b08_m_260924041_c9217f0ae`, through
+the configured4070supervisor/native kernel with a retained source snapshot. Local and actual-node
+fresh main are380e82cd19069b6dd8d99f5372cf15aa47b7a559; canonical pause/state/lead agree with
+published lifted/exploring/`Codex DM (independent session)`. The kernel must recheck controls,
+published inputs, duplicates and fresh actual memory immediately before release. At this
+prelaunch record B08 production fits started=0. After native acceptance observe that same
+handle; E/U stay the already fixed later cells. E requires full new M readback and reference
+identity/trajectory checks before its own admission. No recipe or budget changed at this step.
