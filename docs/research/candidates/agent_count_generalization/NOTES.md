@@ -15153,3 +15153,504 @@ Report the actual commit after successful write. If writeback is unavailable,
 return the complete answer in chat, not a status, receipt, SHA or download link.
 
 ### Answer
+
+本轮未完成 GitHub 写回。 所需研究材料已能读取，文件更新接口也可调用；但它要求整文件替换，而目标大笔记未能通过当前读取方式提供可完整核验的替换文本。末次回读的目标 blob 与本题固定版本一致。为避免破坏其他内容，我没有调用更新接口，也没有产生新提交。以下是完整 Answer。
+
+Answer
+一、建议：选择三个 local1 开发 fit，但把问题收紧为普通实现的实际用途，而不是 SET 故障诊断
+
+我支持提议的三个 local1（下称 L）fit：在三个已曝光的 B15 训练区组上各训练一份新的 L，保留 initial0／final45、N8／N6 评价，与对应区组的全部既有 H6、SET 结果比较。 不追加 H6／SET 训练，不重放已核验面板，不先运行 constant6，也不附加 mixed-N、动作分布或熵系数修改。这是一项新的普通比较器开发研究，不能补入或挽救已经结束的 B15。附件给出的三个区组和评价范围足以定义这项比较。
+
+hmasd-pro-question-b15-local-or…
+
+建议将它要回答的问题明确写成：
+
+在相同 N6 训练曝光、外生训练场景和固定评价条件下，减少 actor 的中央快照／集合编码、采用普通局部循环控制，能否产生比所选 SET 更有实际价值的 N8 服务结果；由此，继续将 SET 作为唯一普通参照是否仍合适？
+
+这比“SET 是否已经足够强”更可回答。L 获胜，可以提供一个实际更好的普通实现；L 落败，却不能认证 SET 已充分调优。 对这个不对称的、但有实际决策价值的问题，三个 fit 是合理投入。
+
+最强的反对理由是：该干预同时改变 actor 的可用信息、编码、参数化、初始化及有限优化过程，不能单独检验“集合编码造成学习困难”。 尤其是 L 落败时，缺少部署信息与编码／优化不利可以相互混合；L 获胜时，也可能主要体现较好的初始策略、归纳偏好或较少的有限训练负担，而不是发现了 SET 的某个错误。再加上三个区组和世界已经曝光，这项研究不能独立验证新的总体排名。
+
+我仍支持它，理由不是 B15“不显著，所以基线一定有问题”，而是当前存在一个具体、较简单、尚未实际训练的普通实现，它的好坏会改变后续比较器选择。B15 已经给出完整、可复用的三块参照；直接训练 L，比继续解释旧权重或再添一对原样 H6／SET，更直接地检验这项实际选择。负结果也有用，但只能降低这一个 local1 配方在 360k 曝光下的优先级，不能将所有剩余解释转交给技能。
+
+二、B15加强了有限包用途的证据，没有建立原联合主张，也没有诊断出 SET 较弱的原因
+
+我从六份 N8 final45 原始面板的 J、S 数组重算了三个区组差值、均值、样本标准差、区间和损失世界并集，结果与固定记录一致：
+
+B15区组	N8最终 H6−SET J	N8最终 H6−SET S，用户／步	N8自身J增量之差	N6最终 H6−SET J／S
+1	+.086521035196	+6.5001875	+.117311401439	−.010112368586／−.2698750
+2	+.088585517663	+4.1626875	+.017179222186	+.059717812813／+2.9714375
+3	+.038041318442	+2.3203125	−.057299186001	+.045664546260／+2.3396875
+
+N8 的平均 J 差为 .071049290434，95% df2 配对 t 区间约为 [−.000007912493, .142106493360]；平均服务差为 4.327729166667，区间为 [−.876090407179, 9.531548740512]。因此，原先严格的 lowerJ>0 AND lowerS>1 未通过。J 下界接近零不允许四舍五入成成功，服务区间也并非只差一个数值舍入问题。冻结 claim 已按此记为 inconclusive／未建立。
+
+应保留三类不同更新。
+
+加强的是有限用途证据。 三个新训练区组在当时未读的 W8 上都出现了正的最终 J／服务均值；全部六份策略在两个 N 都有正的平均自身学习。这使“正端点只存在于此前保留的旧 H6 或旧开发世界”成为更不充分的解释。它不是没有学到东西的一批运行。
+
+削弱的是更强的学习和无损叙述。 第三块 H6 初始已领先约 .095341 J／3.934875 用户，随后两包都学习，SET 的自身增量更大，最终差距收缩。N6 的自身 J 增量之差在三个区组都为负，尽管最终 H6 在其中两块领先。因此，“最终较好”不能升级成“一致学得更多”；第一块的 N6 负均值也排除了对这批结果作统一的训练人数无损解释。
+
+仍未解决的是原联合平均主张、下一次训练获益的概率、世界总体用途、普通方法调优充分性，以及技能、信息路径、目标和优化各自的作用。原区间条件于固定 W8，并假定独立、近似正态的训练区组差；三个区组不能诊断该分布假设。增加世界数、换一种检验或加入 B14，都不能追溯改变 B15 的预写判定。冻结 reducer 本身明确区分了条件化均值主张与下一次训练胜率、世界总体、技能因果及采用判断。
+
+局部后果对新比较同样重要。三个区组的最终 J 或 S 损失世界并集在 N8 为 3／4／10，N6 为 20／7／4。第三块 N8 世界1945810的 H6−SET 为 −.132738822 J、−9.166 用户／步。与此同时，第三块 SET 在世界1945804相对自身初始化的 J 提高约 .023495，却少服务 2.542 用户／步。这些不是技术失败，也不能被正均值删除；后一个反例尤其说明，L 的评价必须同时读取 J 与实际服务。
+
+B15 未通过，不等于 SET 是稻草人。 它真实学习了服务，第一块在 N6 还超过 H6；此前 B12 又产生过更强的普通实例。B13面对该较强实例仍保留包用途。当前共享背景保留了这些相反方向的证据，因此 local1 的理由只能是“值得实测的普通替代”，而不是先宣布 SET 不合格。
+
+三、local1具体改变了什么：L−SET是主比较，H6−L是完整包剩余差
+L与SET：相同单类别任务奖励程序，不同actor输入与编码
+
+这个比较的优点是，两边都采用单类别条件、普通循环控制、任务奖励学习，没有高层／判别器训练或内在奖励。L 保留中央 critic 的 StateSetEncoder，但 actor 改走当前局部观测的原生循环路径。它因而比 H6−L 更贴近“普通实现选择”这一问题。
+
+hmasd-pro-question-b15-local-or…
+
+不过，不能将 SET 描述为只收到陈旧观测。实际 SetActorBase 同时使用当前局部观测、持有的 ego 观测、联合观测集合的均值／最大值、人数特征以及状态集合编码，再融合进入循环策略。L 删除的是额外快照／集合路径，并改变了前处理结构，不是简单地把“旧观测”换成“新观测”。
+
+因此，更准确的处理名称是：
+
+所选普通 actor 的信息—表示简化包，在固定学习曝光下的净用途。
+
+“保持 critic”也只能指保持所声明的 critic 架构和信息契约。L 的动作改变以后，训练数据、价值目标、critic 参数与后续策略更新都可能改变；不能据此声称已隔离一个与 critic 适应无关的 actor 直接效应。
+
+L与H6：不仅技能数量不同，actor和critic条件化都不同
+
+原生代码中，actor 使用 Linear(n_z, 2*hidden_size) 产生 FiLM 参数，critic 使用 Linear(n_Z, 2*hidden_size)。所以将 n_z=n_Z=6 改为1，会同时改变两个网络的条件化参数形状。保留 StateSetEncoder 并不保留完整 H6 critic。
+
+此外，H6 的局部 actor 通过技能标签接收高层选择的影响；L 没有这条动态中央信息路径。H6 的内在目标、协调器和判别器共同学习也不在 L 中。故 H6−L 是包含这些变化的完整学习程序差，不是“H6减去一个技能开关”，更不是匹配 actor 信息的技能必要性检验。
+
+这产生明确的不对称解释：
+
+L比H6好：在这些条件与曝光下，存在一个更简单、使用较少直接部署信息的普通程序，能够替代当前包的相应平均用途。
+
+L比H6差：可能涉及部署信息、条件化、内在目标、初始化和共同适应；不能据此指定学得技能是必要原因。
+
+L 仍有局部反馈和循环记忆，中央 critic 仍在训练中发挥作用；它既不是随机动作控制器，也不是无协作学习程序。关闭显式中央人数路径，也没有消除实际 N 对局部观测、干扰、几何、轨迹和学习数据的影响。不能从结构简化直接推出人数不变性或隐藏状态充分性。
+
+四、为什么本轮不先选constant6
+
+constant6的最强理由是真实的：它可以保留 H6 actor／critic 的条件化张量形状，比 local1 更接近一个固定上下文的形状控制。当问题是“保留原形状和选定初始化语义之后，固定上下文训练能保留多少用途”时，它会更合适。 但这不是当前优先的普通 local1 实现强度问题，而且关闭高层和内在学习后，constant6仍同时改变信息与学习目标。
+
+hmasd-pro-question-b15-local-or…
+
+还有一个直接来自实际 FiLM 层的局部代数区别。对固定标签 e
+j
+	​
+
+，
+
+(γ,β)=We
+j
+	​
+
++b=W
+:,j
+	​
+
++b.
+
+单类别时则为
+
+(γ,β)=W[1]+b.
+
+两者都可以产生一个可训练的常量仿射调制，而不是恒等变换。 所以保留六列本身并不提供六种被访问的上下文；只访问固定标签时，其余列不会因为“维度为六”就变成被使用的技能。这一推导只对应已读代码中“一热标签→FiLM仿射→循环特征”的局部路径。
+
+它不证明两种构造有相同初始化、随机消耗、优化轨迹或最终效果，更不证明 local1 足以替代 H6。它只是说明，当前没有必要仅为保留名义上的六维条件而优先购买 constant6。反过来，也不要把 local1 中的 FiLM 删除或固定成恒等映射；那又改变了提议的普通程序。
+
+我因此选择 local1，而不把 constant6列为自动下一格。随机上下文是另一问题；当前共享背景已纠正“高平均熵就是独立均匀控制”和“.273／.309等于六类随机猜测”这类过强读法。local1并不检验随机上下文训练，也不需要等待或重复技能方向已经声明的 B07 E／M／U。
+
+五、估计量与判别预测：分开读取较好终点、自身学习及差距变化
+
+令 b=1,2,3，n∈{8,6}，阶段 r∈{0,45}，指标 Y∈{J,S}。定义每个策略在该 N 的全部32个世界上的均值为 
+Y
+ˉ
+a,r,b,n
+	​
+
+。
+
+本次主比较为
+
+A
+b,n
+Y
+	​
+
+=
+Y
+ˉ
+L,45,b,n
+	​
+
+−
+Y
+ˉ
+SET,45,b,n
+	​
+
+.
+
+它回答所选普通简化是否改善最终用途。各包自身增量为
+
+I
+a,b,n
+Y
+	​
+
+=
+Y
+ˉ
+a,45,b,n
+	​
+
+−
+Y
+ˉ
+a,0,b,n
+	​
+
+.
+
+再定义初始普通差 A
+0,b,n
+Y
+	​
+
+，则
+
+A
+b,n
+Y
+	​
+
+−A
+0,b,n
+Y
+	​
+
+=I
+L,b,n
+Y
+	​
+
+−I
+SET,b,n
+Y
+	​
+
+.
+
+最后，剩余完整包差为
+
+B
+b,n
+Y
+	​
+
+=
+Y
+ˉ
+H6,45,b,n
+	​
+
+−
+Y
+ˉ
+L,45,b,n
+	​
+
+=D
+H6−SET,b,n
+Y
+	​
+
+−A
+b,n
+Y
+	​
+
+.
+
+B 的缩小与 A 的增加是同一代数事实，不能算两份独立支持。 同样，初末差分恒等式不能把初始化和训练拆成独立因果份额。附件提出的比较顺序是正确的，应在新结果中保留。
+
+hmasd-pro-question-b15-local-or…
+
+建议保留的工作预测
+
+我接受这样的有限预测：L在三个区组中都产生有用的自身N8 J／S学习，并在final45相对对应SET产生有实际意义的N8 J／S改善。 报告每块符号、幅度、绝对水平及世界分布，而不是只保留三块平均；N6作为单独后果，不事后与N8加权形成“成功”。
+
+但需要删除更强的逻辑连接：“只要 SET 的集合编码存在学习困难，L 就必然获胜。”这一蕴含并不成立，因为移除信息的代价可能超过降低学习负担的收益。更准确的假说是：
+
+对这个具体简化，减少信息与结构复杂度带来的有限学习收益，能够超过其信息损失。
+
+这使正负结果都能约束所选方案，同时不要求先完成机制诊断。
+
+还要分开两种可能的支持：
+
+实际比较器改善要求较好的最终 J／S和有用的自身学习，不要求 I
+L
+	​
+
+>I
+SET
+	​
+
+。L可能开始得更好、两边都学习、L最终仍较好；这依然有实际价值。
+
+“L的相对学习改善更大”这一附加叙述则需要读取上式的差距变化。即使它为正，也只说明这两个完整学习过程的相对增量，不识别编码或优化的因果贡献。若差距变化为负，不能据此否定较好的L终点；B15第三块已经提供了这种区分的实际理由。
+
+不需要再增加“sigma必须下降”“训练损失必须更低”“某种标签统计必须更好”的成功条件。技术上确实更新了参数，与科学上提高了服务，是两件事。
+
+结果分支
+新L的观察	应改变的判断，以及不能推出的结论
+各块L自身学习有用，N8 J／S均超过SET；H6仍高于L	SET不应继续作为未经挑战的唯一普通参照；L是值得保留的普通实现，完整包仍有有范围的剩余用途。不能把剩余差归给技能
+L自身学习有用，并在这些条件下超过SET及H6	提供实际普通替代，降低重复未修改H6包以获得相同用途的优先级。不是普通方法总体优越、所有世界占优或技能普遍无用
+L学习有用，但相对SET在各块持续较差	降低这个local1简化在360k下的使用价值，保留SET作为工作参照。不能证明集合信息必要、local历史不足、SET充分调优或H6技能必要
+J与S相反、区组反号，或N8改善伴随N6／局部重要损失	记录具体取舍与条件依赖，不用总均值抹掉反证，也不事后选区组、N或策略组成胜者包
+L最终较好，但相对自身初始化没有有用改善	保留终点水平，但“这次学习产生了用途改善”的预测未获支持。不是自动开展初始化筛选的理由
+差值小、方向不清或技术合同未兑现	小差值不等于等价；技术无效与科学不利分别处理。保留可信窄事实，不补零、不替换旧资产、不自动重试或扩批
+
+“跨三个区组的预测未完整兑现”也不应抹去一个真实有用实例；只是不能再把它称为该简化的统一改善。
+
+原生后果继续用
+
+J=.7C+.3Q−P,S=50C,S=E−U
+
+读取。多服务可能来自更多资格，也可能来自更少资格内未服务，或两者共同变化；不要求 U 必须下降。所有J或S损失世界、分量取舍、中位数／范围和每份策略的最低绝对服务都应保留。资格与高度项的账面分解不是可独立修复的因果路径，P也不是实测电池能耗。
+
+六、保留三个已曝光区组和初始面板，不把它改造成另一项确认
+
+我保留以下具体绑定：
+
+区组	L学习seed	实际训练lane地址
+1	994101	2994100—2994115
+2	994102	2994200—2994215
+3	994103	2994300—2994315
+
+每份 L 都在真实 N6、50用户、c10、k10下训练360k团队步；initial0与final45均先评N8，再评N6，世界和评价RNG保持附件指定值。全部三个 L 在看到第一份结果前固定，不因先完成的分数改变余下区组。
+
+hmasd-pro-question-b15-local-or…
+
+三个fit不是所有探索的普遍最低要求。这里保留三块，是因为要回答这个简化面对既有区组变化是否仍有用途；只挑第一块或第三块，会丢掉正在购买的判断。B15的N6排序和相对学习增量确实随块改变，因此这一成本有具体理由。
+
+共同外生设计支持按对应区组比较，不要求跨架构张量相等。训练环境需先构造，再设学习随机状态；实际reset场景与环境RNG要与对应B15块核对。相同seed不意味着相同动作、优化样本、随机消耗或后续训练数据，不能为了“匹配”复制旧训练权重。
+
+我保留初始评价。 三份L的初始N8／N6面板新增96k评价团队步、672k UAV步、192episodes和3,000次批量策略调用，已包含在总评价成本中。它不给主终点增加训练样本量，但使这三份新L的自身学习可读，避免把较好的初始策略当作训练修复。旧SET／H6的对应初始结果直接复用，不需要重放。
+
+本次建议预写输出每块的完整差值、均值和区组离散程度；不要沿用B15的“超过1用户／步＋t区间”规则，为新L制造一项确认。 B15世界已经读过，L的选择又使用了其结果。这种开发选择不使比较失去价值，但限制了结论。世界bootstrap不能提供训练总体精度，三个块也不能支持精确的成功概率。
+
+对本次新问题，B15是已曝光的历史参照；对B15自身，它仍是一项按原合同完成、判为不确定的确认尝试。 不将它追溯改名为成功，也不把L当作追加实验臂，改变原比较的主对照或样本量。新增L有三份训练实例，既有H6和SET仍各三份；三类九份策略不是每个比较有九个独立训练样本。
+
+七、实施上需要有限新路径，不能绕过原构造器或悄悄改变学习语义
+
+源码足以支持可行性判断，但local1尚未实现和验证。当前 build_agent只接受H6／SET，并要求SET开启中央快照、H6关闭；直接把L伪装成SET再绕过断言，会失去记录的真实含义。新研究应有明确L身份及候选目录内的有限构造路径，复用适用模块，而不修改冻结B15。
+
+需要在新L0里固定以下实际语义。
+
+第一，先固定配置再构造网络。 MAPPO开关之后恢复k10及相应buffer／循环片段组织；在actor构造前关闭中央快照，使它走原生局部MLP／FiLM／GRU路径。保留单类别可训练FiLM，以及StateSetEncoder中央critic。所有模块替换完成后，核对受影响优化器确实拥有各自的可训练参数且不重复；checkpoint00必须代表最终实际构造，不是尚未完成替换的临时对象。
+
+hmasd-pro-question-b15-local-or…
+
+第二，明确新初始化的来源。 每份L只能来自该块声明的新初始化程序。可以复用适用的fresh-N6构造／同步方法，但模板也必须是新local1，不能是训练后的SET或H6。实际构造次序、返回的学习RNG、sampler和优化器所有权应固定并记录；不要求跨形状权重相等，也不按初始服务筛选seed。
+
+第三，检查真实actor路径，而不只看配置名称。 采集、循环重放和评价都应使用L的局部输入，不能残留快照数据进入actor。中央状态供critic使用是所选契约，不是泄漏；关键是它不能经意外路径进入部署动作。单类别标签应始终有效，k10不能变成每十步清空GRU历史。仍保存原始高斯样本及old log-prob，独立裁剪副本执行，真实终止后继先入存储再reset。
+
+第四，跨N恢复和评价隔离必须仍成立。 N8运行时使用同一份L的完整权重和该阶段normalizer，不引入未训练的新头或误用别的阶段统计；每回合正确重置运行状态。评价中GRU等状态正常演化，但不能改变训练学习器、优化器、buffer、sampler／全局RNG及训练环境的随机序列。可以复用未变范围的已有检查，将新技术检查集中在local1路径和新增构造风险上。
+
+这类检查应是针对实际新路径的缩小技术fixture，而不是另一个生产规模pilot、旧策略全套重放或阳性学习前置条件。现行工程方法要求按科学语义风险检查和独立审阅，也允许复用未变证据，不要求另建一套流程。
+
+此外，关闭高层学习不自动意味着没有协调器推理。 若复用原框架仍执行单类别协调器／顺序解码，就将其计入成本；不必为了把L称为“普通”而在本轮顺便删除这一执行路径。关闭快照后，L的快照刷新应为零，但其他实际前向仍需按执行记录报告。
+
+八、成本、读取边界与最终判断
+
+建议新增工作保持如下，不再训练或评价旧H6／SET：
+
+项目	三份L合计
+新训练fit	3
+训练团队步／UAV步	1,080,000／6,480,000
+完整rollout更新	135
+Actor／critic优化器调用	各303,750
+高层／判别器优化器更新	0
+Initial＋final评价	12面板，192,000团队步，1,344,000 UAV步
+评价episodes／批量策略调用	384／6,000
+训练＋评价总交互	1,272,000团队步，7,824,000 UAV步
+
+这些是按提议契约计算的工作量，不是已经执行的计数。实际新路径仍须记录更新、推理和存储；等量团队步和优化器调用次数也不等于等算力。
+
+hmasd-pro-question-b15-local-or…
+
+B15三份SET命令累计约2.866053小时，能提供数量级参照，不能作为local1已经测得的运行时间、资源承诺或停止上限。约1.6GB原生产物及收集副本，初始化、有限入口实现、检查／独立审阅、核验、收集与完整阅读，都是额外工作。L的actor计算可能减少，但在实际测量前不能宣布速度优势；不同时间、不同节点争用条件下的旧命令耗时也不是受控效率比较。B15已支付的六fit及6.521557科学命令小时作为历史曝光保留，复用不使原训练免费。
+
+hmasd-pro-question-b15-local-or…
+
+本次读取以附件全文和固定d1f59a…材料为依据，包括B15完成记录、三个区组验收中的科学读数／技术核验／成本说明、保留原案与采纳并附最终结果的claim，以及24个初末面板的J、回报、C／Q／P和E／S／U数组。大笔记的相关新段落通过固定提交读取；前次完整Answer与采纳使用经提交比较确认仍被继承的段落，而非聊天记忆。接口判断依据冻结e0a20a…的MAPPO配置、actor／critic、count构造和恢复路径；方法与共享解释使用指定03a9f17…。
+
+我独立重算的是N8主终点的三个区组差、区间和损失并集，并核对了所讨论的局部反例；没有加载二进制checkpoint或NPZ，没有重做DM全部逐转移、远端字节或优化器审计，也没有执行冻结reducer、策略前向、环境步骤、技术测试或训练。 这些全面核验仍是已发表的DM事实。可选外部review未作为本答复的独立证据；所采用的是当前共享解释对其相关断言的限定。
+
+没有发现阻止当前设计和投资判断的关键未读证据。真正尚未产生的是L的实现核验、三份训练结果和实际资源成本，因此当前支持的是一次有范围的普通实现比较，不是local1已经合格、更强或已解释H6优势。
+
+MATERIAL_DISSENT: no。 我支持三个local1开发fit，保留全部既有区组、对称初末评价和原生J／服务后果，不先增加constant6或其他学习修改。必要收紧是：把L−SET作为实际普通实现的主比较，把H6−L作为剩余完整包差；L胜出可以挑战当前普通参照，L落败却不能认证SET充分或技能必要。B15的不确定判定保持不变，新研究的价值在于改变下一项比较器选择，而不是替旧确认寻找另一种成功读法。
+
+## 2026-09-24 — Pro advice adopted and B16 local ordinary comparison fixed
+
+The complete preceding Answer is saved from chat, byte-for-byte apart from its final
+newline, after read-only recovery of the same accepted operation
+`hmasd:0c7cff910b466ba2e26fce5ec94c45217f0056c64964486dcd1c76985606e7aa`.
+The original observer collected a 158-character provider network error; that was not an
+answer and was not accepted. A subsequent same-key read observed the accepted request still
+generating, and the recovery observation collected the 9,736-character answer above
+(SHA-256 `79ea90cf46f36dee85e4d7cf095d42a67e54944327bde409ac72e27d0ab06367`).
+`deliver` then verified `NOT_DELIVERED`, with no answer commits on the specified branch.
+Pro explicitly reported no update call and relinquished the section; the branch and local
+notebook still equalled source `d1f59a354a05ca13f1b9a286fde2e3d8ea7178f9` before this insertion.
+No repeat Send, Retry, Regenerate, new conversation or training restart occurred. Private
+conversation details remain solely in local transport state. Both observation events were
+read; the stale error remains in local scratch, distinct from the recovered full answer.
+
+### Scientific response and decision
+
+I read the full answer and adopt the three-fit **B16 local ordinary comparator development**
+study. This is the DM's investment decision within the owner's resumed direction, not a Pro
+approval or a new B15 confirmation arm. B15 remains complete and inconclusive under its
+original strict joint rule; its six fits and all adverse evidence remain unchanged.
+
+The useful question is whether this concrete ordinary local actor, under the same N6
+exposure and exogenous training blocks, offers better native N8 J and actual service than
+the selected SET. The strongest simpler explanation is an initially better ordinary policy
+or a more favourable finite information/representation/optimization package, not necessarily
+a discovered SET defect. I adopt Pro's asymmetry: a useful L victory supplies an ordinary
+alternative and challenges SET as the sole working reference; a loss lowers the priority of
+this local1 recipe at 360k, but neither certifies SET's tuning nor identifies skills as
+necessary. Removing information may cost more than simplifying structure helps. Accordingly,
+I reject the stronger implication that SET encoding difficulty would force L to win.
+
+The current shared background was read from main
+`e63e3a4cbb954733879560c4b707d33893695b97`, especially
+[MARL information and complete-package evidence](https://github.com/CartmanFatass/My-paper-code/blob/e63e3a4cbb954733879560c4b707d33893695b97/docs/research/RESEARCH.md#3-marl-增加的是联合行为和信息结构)
+and [finite learning versus representation](https://github.com/CartmanFatass/My-paper-code/blob/e63e3a4cbb954733879560c4b707d33893695b97/docs/research/RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面).
+Its B11/B12 reversal, stronger ordinary B13 reference, and B14/B15 initial-to-final learning
+observations make a fresh ordinary implementation useful while forbidding an a priori
+strawman diagnosis. Its fixed-policy versus learned-program distinction requires actual
+new learning and both initial and final panels. The sibling skill question about random
+context/entropy remains separate; B16 neither duplicates B07 E/M/U nor waits on it.
+
+Consequential source claims were checked directly: `SetActorBase.forward` combines current
+local observation with held ego/joint observations, count and encoded central state, so SET
+is not merely stale observation. `R_Actor` and `R_Critic` use separate
+`Linear(n_z, 2*hidden_size)` and `Linear(n_Z, 2*hidden_size)` FiLM maps. A constant one-hot
+context produces W[:,j]+b, and local1 produces W[:,0]+b; both are trainable constant affine
+modulations, without equal-initialization or equal-optimization implications. The current
+count `build_agent` accepts only H6/SET; L needs an honest new construction path. The
+previously independently checked B15 arrays/reducer and the local Critic's retained concerns
+agree with Pro's numerical reading. Pro did not inspect binary checkpoints or repeat the
+full engineering audit, and adviser agreement is not additional empirical replication.
+
+**Prediction and reading, fixed before any L score.** L should show positive mean own-learning
+J and S at N8 in each block, and improve final N8 J and S over that block's SET. This is a
+falsifiable development prediction about the net effect of one simplification; no p-value,
+MEI, equivalence or B15 t-interval decision is attached. Report every block, its magnitude,
+absolute J/S and world distribution. N6 is a separate consequence, never pooled into an
+N8 success score. Preserve partial useful instances if uniform improvement fails.
+
+Primary comparison is final L minus corresponding SET. Also report each program's own
+final-minus-initial change, the initial L-minus-SET difference, and the difference of those
+learning increments. A better final L need not learn more than SET to be useful; a better
+initial L without useful own improvement fails the learning prediction. The remaining final
+H6-minus-L difference is a full-program difference, with information, actor and critic
+conditioning, reward, initialization and joint adaptation confounded. Its contraction equals
+L-minus-SET algebraically and is not separate corroboration. No skill necessity or causal
+initialization share will be inferred. Report J/S disagreements, N6 costs, every J-or-S-loss
+world, component tradeoffs, medians/ranges and minimum absolute service. Read native
+J=.7C+.3Q-P, S=50C and S=E-U; do not require U to fall, call P battery energy, or interpret
+accounting components as independent causal remedies.
+
+### Prospective B16 exposure and stopping
+
+All three new local1 cells are fixed now, in order b1, b2, b3:
+
+| Cell | Arm | New learning seed | Training environment lanes | Output tag |
+| --- | --- | --- | --- | --- |
+| b1_local1 | LOCAL1 | 994101 | 2994100–2994115 | s1_local_ordinary_b16_b1_local1_s994101 |
+| b2_local1 | LOCAL1 | 994102 | 2994200–2994215 | s1_local_ordinary_b16_b2_local1_s994102 |
+| b3_local1 | LOCAL1 | 994103 | 2994300–2994315 | s1_local_ordinary_b16_b3_local1_s994103 |
+
+Each fit: native S1, actual N6, 50 users, cap10, fixed k10; 16 lanes × 500 steps × 45 complete
+rollouts = 360,000 training team steps. Actor/critic learning uses the existing ordinary
+MAPPO task-reward program, n_z=n_Z=1, no high-level/discriminator learning or intrinsic reward,
+native local 104-wide actor input, trainable single-category FiLM, existing GRU/PPO/normalizers,
+and a StateSetEncoder centralized critic. Keep Gaussian entropy coefficient .05 without
+annealing/targets; store raw samples and old log probabilities and execute a separately
+clipped [-1,1] copy. No action-law, entropy, mixed-N or horizon change is purchased.
+Construct training environments before learning seeding. Use a genuinely fresh N6 LOCAL1
+initialization, never old trained H6/SET weights or an initialization chosen by service.
+Match actual reset scenarios and environment RNG against the corresponding B15 block;
+common external conditions do not imply identical actions, optimizer samples or trajectories.
+
+Save actual checkpoints 00 and 45. At each, evaluate N8 then N6, 32 worlds each, 500 steps:
+N8 world seeds 1945800–1945831 with evaluation RNG 1945851;
+N6 world seeds 1945600–1945631 with evaluation RNG 1945651.
+Use the same stage's complete weights and normalizers across N, reset evaluation runtime at
+each episode and preserve all training state/RNG/environment state around evaluation.
+Reuse all six B15 initial/final records as already-exposed historical comparators; no replay
+or retraining of those arms and no best-block choice. These worlds and blocks are development
+exposure for B16, and three classes of three policies do not become nine independent pairs.
+
+Cost justified by the known block-dependent N6 ranking and learning increments: three started
+fits, 1.08M training team / 6.48M UAV steps, 135 updates, 303,750 actor and 303,750 critic
+optimizer calls, zero high-level/discriminator optimizer calls; 12 evaluation panels,
+192k team / 1.344M UAV steps, 384 episodes and 6,000 batched action calls. Total new interaction
+is 1.272M team / 7.824M UAV steps. Retained one-category coordinator/decode inference is
+counted if executed; L central-snapshot refreshes must be zero. Expected native results use
+`wsl_4070` with CPU float32 and four Torch threads as in the B15 comparison. Prior three SET
+commands took 2.866053 h, only an approximate planning reference, not a measured L speed claim
+or a hard endpoint. Allow approximately 1.6GB native artifacts plus the collection copy and
+measure actual wall/RSS/storage. Record unknown telemetry as unknown.
+
+The batch ends after these three cells with all results read. Do not change remaining seeds,
+architecture, endpoint or number of fits after seeing a score. No automatic fourth fit,
+constant6, initialization search or extra H6/SET pair. A technical failure is retained and
+counted if training began; the DM diagnoses it and records any retry decision separately.
+No current fit has started. This is exploration, so no new confirmation CLAIM is created.
+
+### L0 — implement the explicit local1 path without changing frozen B15
+
+Deliver one new admission-guarded B16 entry with honest LOCAL1 identity, new fresh-local1
+construction, collector/recurrent replay/evaluation and required native artifacts.
+Owned production paths: `experiments/candidates/agent_count_generalization/local_ordinary_b16/`
+and `scripts/run_agent_count_local_ordinary_b16.py`; focused tests mirror the new candidate at
+`tests/experiments/candidates/agent_count_generalization/local_ordinary_b16/`.
+Reuse applicable existing direction modules/helpers, but do not edit the frozen B15 runner,
+claim, reducers or its historical records, change core learner/env code, alias LOCAL1 as H6/SET
+through an old guard, or monkeypatch another module's globals. A concrete need beyond these
+paths returns to the DM before editing, without inventing new science.
+
+Freeze config before network construction, restore k10/buffer sizes after MAPPO configuration,
+disable actor snapshots before actor creation, preserve trainable local1 FiLM and count-stable
+critic/coordinator state encoding as needed for strict across-N weight loading. Rebuild any
+optimizer whose module was replaced and verify all trainable actor/critic parameters appear
+exactly once; checkpoint00 must be the final constructed learner. Count actual transitions,
+optimizer calls, all retained inference and snapshot work; preserve true terminal successor
+before reset and the raw-action likelihood contract. Record actual reset scenes/RNG arrays,
+full per-world native arrays, all required learner/checkpoint identities, initial/final
+parameter movement, evaluation-isolation evidence, source hashes and resource measurements.
+Production CLI accepts only the three declared cells/seeds/tags and checks native admission
+before any scientific effect; technical fixtures use reduced in-process specs, not production
+fit roots or an admission bypass in the CLI.
+
+Focused checks must demonstrate the new reachable paths: native LOCAL1 forward/collection,
+storage and recurrent update use 104-wide local actor input with valid constant labels and
+live GRU history across k boundaries; centralized state cannot leak through an accidental
+actor snapshot; all disabled optimizer counts stay zero and actor/critic really move;
+raw sample/logprob versus physical clip and terminal-successor semantics remain valid;
+strict N6-to-N8 stage weight/normalizer transfer leaves no new heads; initial/final evaluation
+preserves learning/optimizer/buffer/sampler/global and training-environment RNG state;
+new cell, endpoint, native-component and failure-output bindings are honest. Reuse unchanged
+checks where they cover the requirement. Tests own scratch via pytest below temp/ and clean
+it. Do not run a production pilot or require positive service as technical admission.
+
+The DM owns NOTES, science, index and Git publication; a bounded Implementer may own the new
+code/test paths without staging, committing, launching, editing records or spawning children.
+Independent Reviewer checks the resulting scientific semantics/RNG/replay/identity risks
+before the DM accepts and publishes exact inputs. Ordinary in-scope implementation choices
+need no new consultation. Scope/semantic conflicts stop the dependent edit; genuine resource
+or owner-pause failures stop only result execution. After review and focused checks, commit
+and push exact inputs, admit on the real node, retain native handles and observe each accepted
+cell without restarts. Later result reading and comparison are the DM's responsibility.
