@@ -5933,3 +5933,154 @@ Engineering checks and admission establish no service advantage, replication or 
 a scientific result. All45 training rows, actual tensor/RNG pairing, native/head optimizer
 counts, complete uniform/own panels, adverse worlds and cost remain to be read. No main/index
 edit is made for this unchanged-plan start; detailed progress remains here and in runs.
+
+
+## 2026-09-23 — B06 M complete and accepted; fixed U remains
+
+**Acceptance and scope.** M exited0 with a valid native witness and absent matching runner/
+supervisor. DM collected every output, matched all12files/59,759,887bytes to the actual-node
+SHA256 inventory, then read the full saved training, prediction, checkpoint and four-panel
+results through the independent saved-artifact reader. No environment, training or policy
+execution was added by collection/analysis. All required checks passed; M is accepted as
+one complete exploratory training instance, with the fixed U comparison still outstanding.
+Current published main through `d2e34d45c` was inspected; pause, lead and this plan are unchanged.
+
+Source remains `c23363a5a71932f037fa0274750fa1c150b9a812`, actual B06 entry/Spec and seed block
+260923961..967, train-world base2200000. The inherited raw B04 object/schema identity is
+intentional. The actual initial native modules, both factual heads, private RNG states and
+remaining-learner sampler seed differ from B04; the latter is13282568567721161451. This is
+not a seed-string-only repetition. Actual M/U initialization and trajectory-independent
+stream pairing will be checked against U's saved artifacts, not assumed from this M read.
+
+Completed exposure:1fit/360000training and stored transitions,720training episodes,45native
+updates;64000evaluation transitions/128episodes across initial-own/initial-uniform/final-own/
+final-uniform. Every one of45training rows and45raw prediction batches matched its saved hash,
+rollout order and counts. All90G/P raw MSEs recomputed exactly, and all tensors/readings were
+finite. Native optimizer calls were coordinator675, low actor101250, low critic101250,
+team discriminator675 and individual discriminator2700; factual heads315each, auxiliary
+trunk0. Actual final changed tensor counts were87/29/24/29 for coordinator/discoverer/team/
+individual modules; both factual heads also moved. Auxiliary trunk0 means no auxiliary
+trunk update, not a frozen native learner.
+
+All360000 stored rows and22500action/reward/factual/storage batches verified with0failures.
+All45native mixture replay probes (32 sampled rows per rollout) retained the actual prefix
+and forced-factor convention, maximum
+sampled log-mu discrepancy6.4373016357421875e-6. Checkpoint native/frozen digests, default and
+private CPU/CUDA RNG states, both sampler states and their entire saved row-to-row chains
+recomputed. The uniform selected-label digest remains
+`a45d59f80fca20321df3803745068bb841f30e6c25b6b8c01dd7d0d250a67190`; all four panels share old
+physical initialization`b36474bb458d4c72efb2feed5b6653583cf0cbaf02fa264e097111209827d6d1`.
+All32worlds1700200..1700231,500steps,50renewals, mean-clipped physical actions and zero
+evaluation optimizer/normalizer updates were checked. Native J and service were recomputed
+from saved return/components, retaining quality and height costs separately.
+
+**Complete M reading.** Means below use all32 fixed exposed worlds. `height` is S1's native
+energy_penalty component, not measured S7 battery/return risk.
+
+| Panel | J | Connected users/step | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| initial_own | 0.157296011864 | 14.327250000 | 0.286545000 | 0.077401679869 | 0.066505992097 |
+| initial_uniform | 0.200619029543 | 15.978687500 | 0.319573750 | 0.086950230287 | 0.049167664543 |
+| final_own | 0.438033418018 | 29.689375000 | 0.593787500 | 0.169575163531 | 0.028490381041 |
+| final_uniform | 0.441924910082 | 30.349812500 | 0.606996250 | 0.157056649982 | 0.030089459913 |
+
+Initial→final own: mean J+.280737406155/users+15.362125; uniform:+.241305880538/+14.371125.
+Both readings improve J and users in all32 worlds relative to their actual initialization.
+Minimum own learning J+.095514452500/users+2.394 at1700210; minimum uniform learning
+J+.105341763378/users+3.552 at1700207. This supports actual useful learning of this M instance;
+it does not establish M-over-U bank value or a high-gradient/complementarity mechanism.
+Own quality falls.036525037071 at1700203; uniform quality falls.079625376814 there and
+0.000704570057 at1700221. Own height penalty decreases in all32; uniform height rises.004762898608
+at1700208. Positive J/service learning does not erase these component losses.
+
+Final A=own−uniform is J−.003891492064 (15positive/17negative), users−.660437500
+(12positive/20negative), coverage−.013208750, quality+.012518513549 (29positive/3negative)
+and height penalty−.001599078872 (13positive/19negative). Worst J/users A occurs at1700203:
+−.107493207233/−7.058, despite quality+.025996239 and with height+.016480079. Largest positive
+A at1700223 is+.095391042811/+5.974. Worlds1700205,1700209,1700218 have positive J A but
+negative users A. Preserve these tradeoffs without a service tolerance or deployment rescue.
+The narrower A gap than old B04 is another training instance's observation; it is not an
+extra intervention or proof that the old deployment failure was repaired. Do not reopen B05.
+
+All fixed-world M readings follow. Learning columns subtract the corresponding actual
+initial panel; A columns are final own−uniform. Exact full precision and all native component
+arrays remain in the retained raw summary at its verified digest.
+
+| World | Final own J | Final uniform J | Own users | Uniform users | Own learning J | Uniform learning J | A quality | A height |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | 0.452351757 | 0.462011936 | 31.168000000 | 31.754000000 | 0.531298640 | 0.517903843 | 0.006414813 | 0.003380622 |
+| 1700201 | 0.464417945 | 0.405824338 | 30.544000000 | 28.070000000 | 0.310217113 | 0.252070704 | 0.030749943 | -0.014732625 |
+| 1700202 | 0.337472665 | 0.433470011 | 23.520000000 | 29.494000000 | 0.205473295 | 0.253041885 | -0.005171058 | 0.010810029 |
+| 1700203 | 0.307480654 | 0.414973861 | 21.290000000 | 28.348000000 | 0.114919865 | 0.177372450 | 0.025996239 | 0.016480079 |
+| 1700204 | 0.468378772 | 0.410033793 | 30.892000000 | 27.460000000 | 0.304179145 | 0.153360159 | 0.021263063 | -0.003918061 |
+| 1700205 | 0.467425233 | 0.454560088 | 31.104000000 | 31.176000000 | 0.376220109 | 0.222998409 | 0.019972311 | -0.007881452 |
+| 1700206 | 0.459361847 | 0.428490227 | 30.614000000 | 29.568000000 | 0.335260586 | 0.217049682 | 0.015713182 | -0.011513666 |
+| 1700207 | 0.466094006 | 0.441305354 | 31.552000000 | 29.754000000 | 0.175157808 | 0.105341763 | -0.003123880 | -0.000553816 |
+| 1700208 | 0.453710471 | 0.500510684 | 30.856000000 | 33.754000000 | 0.265497298 | 0.244937249 | 0.004720359 | 0.007644320 |
+| 1700209 | 0.451534252 | 0.448409123 | 30.428000000 | 30.946000000 | 0.192604982 | 0.203237430 | 0.014799059 | -0.005937411 |
+| 1700210 | 0.430674871 | 0.459536898 | 28.886000000 | 31.550000000 | 0.095514453 | 0.133985543 | 0.022700810 | -0.001623730 |
+| 1700211 | 0.483559932 | 0.481454139 | 33.236000000 | 32.904000000 | 0.268999847 | 0.218049683 | 0.010871888 | 0.005803774 |
+| 1700212 | 0.421550435 | 0.457267689 | 28.766000000 | 31.604000000 | 0.304248378 | 0.300370944 | 0.002929853 | -0.003135790 |
+| 1700213 | 0.443051840 | 0.477353123 | 29.692000000 | 32.936000000 | 0.314967513 | 0.293479932 | 0.006201922 | -0.009254140 |
+| 1700214 | 0.349989503 | 0.417820369 | 23.768000000 | 28.690000000 | 0.179276253 | 0.133024908 | 0.012864143 | 0.002782109 |
+| 1700215 | 0.396141193 | 0.368704462 | 26.724000000 | 25.528000000 | 0.301176351 | 0.254050713 | 0.016601912 | -0.005712158 |
+| 1700216 | 0.393358575 | 0.419082900 | 27.180000000 | 29.416000000 | 0.258670772 | 0.243476652 | 0.006545589 | -0.003615998 |
+| 1700217 | 0.399898566 | 0.477730303 | 26.466000000 | 32.332000000 | 0.181273693 | 0.176479092 | 0.000579905 | -0.004118291 |
+| 1700218 | 0.459397964 | 0.457625859 | 31.202000000 | 31.386000000 | 0.393640498 | 0.359216237 | 0.022774055 | 0.002484111 |
+| 1700219 | 0.420434522 | 0.437693419 | 28.282000000 | 30.638000000 | 0.266668562 | 0.201767468 | 0.020543226 | -0.009562136 |
+| 1700220 | 0.486185647 | 0.425570981 | 33.306000000 | 29.344000000 | 0.477662231 | 0.370209443 | 0.025054957 | 0.002369822 |
+| 1700221 | 0.462532799 | 0.426944162 | 31.030000000 | 29.506000000 | 0.230752053 | 0.175309245 | 0.024212074 | -0.006989015 |
+| 1700222 | 0.453347141 | 0.471895344 | 31.284000000 | 32.412000000 | 0.245032582 | 0.218204052 | 0.006240572 | 0.004628375 |
+| 1700223 | 0.474829831 | 0.379438788 | 32.318000000 | 26.344000000 | 0.426865543 | 0.332262019 | 0.010552017 | -0.008589438 |
+| 1700224 | 0.455548295 | 0.462970781 | 31.132000000 | 31.636000000 | 0.377101324 | 0.354213085 | 0.012562663 | 0.004135285 |
+| 1700225 | 0.463497598 | 0.467695037 | 31.844000000 | 32.152000000 | 0.230362515 | 0.201696948 | 0.010406090 | 0.003007266 |
+| 1700226 | 0.445444421 | 0.433120451 | 30.076000000 | 29.980000000 | 0.356970262 | 0.258869630 | 0.013306978 | -0.006987876 |
+| 1700227 | 0.374080015 | 0.382247106 | 25.568000000 | 26.104000000 | 0.232222271 | 0.198513913 | -0.001434762 | 0.000232663 |
+| 1700228 | 0.442505947 | 0.429492430 | 29.992000000 | 29.534000000 | 0.247586907 | 0.189573515 | 0.012787804 | -0.002765175 |
+| 1700229 | 0.433729050 | 0.457572964 | 30.322000000 | 31.784000000 | 0.171875152 | 0.255043771 | 0.003350376 | 0.004381026 |
+| 1700230 | 0.461710127 | 0.476270937 | 31.038000000 | 32.536000000 | 0.265982462 | 0.308472638 | 0.017513193 | -0.001157232 |
+| 1700231 | 0.537373502 | 0.474519564 | 35.980000000 | 32.554000000 | 0.345918533 | 0.198205173 | 0.012093139 | -0.011261996 |
+
+**Cost, retention and continuation.** Runner body3185.679382341s=53.094656372min; native
+admission→exit54.526968614min includes startup outside that body. User/system CPU2942.134757/
+326.056913s; process-lifetime peak RSS1894824KiB (1940299776bytes), peak CUDA allocated/
+reserved1531556352/2111832064bytes. Shared-node simultaneous occupancy and peak scratch remain
+unmeasured. Final collected output is59759887bytes; runner's excluding-summary measurement
+was54808842bytes. Its different point in time preceded the process-exit witness and terminal
+status rewrite; it is not a measured peak scratch size. Support work and the earlier9s
+pre-effect refusal are additional costs, not a second fit or zero-cost work.
+
+Durable bulk remains on `hmasd-wsl-node` at
+`/home/wu/hmasd-worktrees/complementary-skill-b06-20260923/runs/complementary_skill_learning/b06_m_260923961_c23363a5a/`,
+with the fully verified collection copy in this authoring checkout's same `runs/` path.
+Only compact config/native records are committed; the large raw summary, checkpoints and
+training/prediction streams retain their original bytes outside Git. Complete inventory:
+
+| File | Bytes | SHA256 |
+| --- | ---: | --- |
+| `admission-preflight.json` | 772 | `edb4e2b895a2af3d30a0a202455da6f6ffa118b5baeaf485f4b7f521582f3c7c` |
+| `auxiliary_predictions.jsonl` | 2461734 | `9e18a08c9be8393947ba9e7c6ee4b13add2d7bbc8c8e5cb5e9ed2179c381ecd9` |
+| `config.json` | 650 | `93c91794fed155be69d111c71ee746949d1e3bdde8bd6e21d67a4b67f5bb65d4` |
+| `final.pt` | 27128639 | `7b65717e936da4fdd8e0f1f2ab530b4cd557e1673360cdc66de5ce2e13b42a7f` |
+| `initial.pt` | 23750333 | `79192d119dfdfcad979b2aa8245316f145771f2a38a01e83ae533acee980fe9b` |
+| `launch-manifest.json` | 4323 | `467ca392142952805e6e33284f754e15a3bf8945849211fb965da5a623a1acf1` |
+| `launch-status.json` | 2620 | `3e96b6b3a73ba4634f285c24906729fe41d41fce37731e393c8c6a7bdb9cce68` |
+| `process-exit.json` | 549 | `7c4fc3bc838ccaaac09904979d7aeabb05335df31f67b47f762e00a3262d9320` |
+| `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `summary.json` | 4950820 | `8dbd3f900fbd0a5facf5247fa155543ee79031533736d63c7eb30bf8be7b5fe7` |
+| `training.jsonl` | 1459447 | `e0557f2ceea6bc9d26a311cf6fce416154912711dee2fb8aec6f9ce168d3776c` |
+
+After complete collection/hash verification, actual-node snapshot GC preview marked only
+`598c17876c594d62b109dcddd15d5f8e` eligible with durable direction-branch reachability; apply
+removed that disposable source successfully. Both output copies, native claim/status records
+and authoring/source branch remain. This creates no restart permission.
+
+Continue the prewritten second U fit, source/seed/360k horizon/32k uniform evaluation unchanged.
+The primary final uniform M−U and original Gamma cannot yet be computed. Do not compare M
+against old U as a substitute or treat32worlds as training replications. The fixed pair still
+has only one completed arm; neither its result nor the running time selects a new recipe.
+M's READY event`7d43bced24d43d8a0b8001f9` under wake`649adef4-d5ce-4427-8d3e-9b9e1b84f7ac`
+was consumed after this reading by rearming generation52 to53. U needs fresh native admission
+and its own accepted-handle observation. This cell does not change the material
+research plan, so no per-cell RESEARCH/main edit is made.
