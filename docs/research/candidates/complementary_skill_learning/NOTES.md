@@ -9256,3 +9256,260 @@ Fresh main9c324551295df847a1a4e1a777f59430ae0aa2ed retains lifted pause and the 
 The exact generation/wake/event were acknowledged and rearmed82→83 for the same operation,
 1500s window. M/E remain accepted, U remains incomplete and P/full-block judgment remain
 open. No worker restart, additional fit, Pro resend or other-task message occurred.
+
+
+## 2026-09-24 — B08 complete; package benefit recurs but entropy increment reverses
+
+The fixed M→E→U purchase is complete, with all three native outputs read. The second
+training block preserves positive E-S versus competent U-R package use, but reverses the
+E-S versus M-S incentive increment. This is the prewritten **P positive / D negative**
+branch, not failure of both comparisons and not a technical failure. The complete prior
+[Pro advice](#pro-question-2026-09-24-recurrence-or-revision-after-b07) already covers this
+reading: retain P, give removal of high entropy no credit merely from P, and end the
+unchanged purchase without automatic fits, streams, tuning or confirmation. I adopt that
+branch and lower priority of the unchanged zero-high-entropy recipe. Neither this decision
+nor the failed selection prediction closes the wider useful-skill question.
+
+### Native acceptance and complete U reading
+
+U source remains `c9217f0ae5b32aa2a13e228cc87899f545a0111b`, tag
+`b08_u_260924041_c9217f0ae`, seed260924041. READY event
+`416133ff66aa833654beaa2c`, wake `8575b913-bf3d-4476-bec6-53191cc3baf9`, generation83,
+reported accepted/exited0 at2026-09-24T15:16:37.611924Z with consistent identities,
+valid exit witness and0observer errors. The event was read and consumed83→84; a later
+drain shows no pending event and no remaining active science worker. Process exit was
+followed by the full artifact and scientific reading below, not used as its substitute.
+No worker restart, Pro resend, other-task message or extra fit occurred.
+
+All23U files/107433866bytes were recovered from
+`/home/wu/hmasd-worktrees/complementary-skill-b08-20260924/runs/complementary_skill_learning/b08_u_260924041_c9217f0ae`
+to the same run-relative directory in `/home/fires/.codex/worktrees/5916/hmasd-wsl`.
+Every remote/local byte count and SHA256 matched. Full saved-byte verification read all45
+training rows,90G/P prediction/MSE records,80k evaluation transitions/160episodes across
+all5panels, checkpoints/tensors/head optimizers/normalizers/RNG chains and90uniform factor
+audits. It recomputed labels, native rewards, physical action clipping, all per-world
+aggregates and E/M/U contrasts. The full records and scientific tails were read by the DM.
+This was a saved-byte reading, not a second model/hidden-state/environment rollout;
+recurrence carry/reset remains supported by the accepted code and fixtures.
+
+U actually trained360k transitions/720episodes/45updates. Native optimizer calls were
+coordinator0, low actor101250, low critic101250, team675, individual2700; each detached
+G/P head315, auxiliary trunk0. All22500storage/label batches and360krows passed with0
+failures. All45high optimizer/loss/gradient rows were zero, while29discoverer,24team and
+29individual tensors changed; coordinator tensor changes were0. Initial native/head
+parameters and complete initial R0 trajectory matched M/E exactly. All45low-action,
+remaining-sampler and default RNG after-states matched M; all four final R numerical label
+streams matched M/E. Initial parameters differ from B07. Frozen evaluation made0updates,
+0stores and0normalizer mutations. Equal numerical labels across trained banks do not imply
+equal semantics. Independently recomputed raw prediction MSE error was0.
+
+U final R0−initial R0 was+.264058324954J/+15.55275served users, both positive in all32
+worlds. The minimum was+.056115558930J/+1.306users at1700210. Coverage increased.311055,
+quality increased.071123672043 on average but fell.059207031378 at1700203 and.013753743969
+at1700221; mean height penalty fell.024982723341 in all32worlds. Training mean J moved
+from.229376888339 to.407017602546, with a rollout2 low.1959449; all45rows were retained,
+not selected by best checkpoint. Final actor/critic movement norms were1.141819944/.466382724;
+team/individual movement .077770301/.162727863. G/P raw MSE moved from.022553680508/
+.023409141515 to.006468613967/.005131220197. Final discriminator training accuracies
+.251125/.310292 are diagnostics, not held-out skill evidence. Training raw-action saturation
+rose from.3153611 to.7812014; final R evaluation saturation was.5566–.5633. These do not
+identify an action-clipping mechanism. U is a learned control package with local
+recurrent feedback, not a frozen random low policy.
+
+### Fixed endpoint contrasts and service consequences
+
+Four complete final streams were averaged within each of the32exposed worlds, then worlds
+were equally weighted. One newly trained bank per arm remains the independent unit in B08;
+B07 and B08 are two exploratory training blocks, not confirmation. Four streams,32worlds,
+16stream-pair combinations and multiple checkpoints add no training replicates. Same S/R
+indices are descriptive pairings, not common random innovations.
+
+| Final policy/readout | J | Served users per step | Coverage | Quality | Height penalty |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| U-R | 0.402253740348 | 29.155968750000 | 0.583119375000 | 0.142784272198 | 0.048765103812 |
+| M-S | 0.445811862117 | 30.122125000000 | 0.602442500000 | 0.172723824937 | 0.027715035364 |
+| M-R | 0.444156420662 | 29.930656250000 | 0.598613125000 | 0.174230505337 | 0.027141918440 |
+| E-S | 0.431807046705 | 29.688718750000 | 0.593774375000 | 0.154981086874 | 0.030329341857 |
+| E-R | 0.435725715543 | 29.951625000000 | 0.599032500000 | 0.155644828054 | 0.030290482873 |
+
+| Contrast | ΔJ | Δusers | Δcoverage | Δquality | Δheight | J worlds +/− | User worlds +/− |
+| --- | ---: | ---: | ---: | ---: | ---: | --- | --- |
+| P: E-S−U-R | +0.029553306358 | +0.532750000000 | +0.010655000000 | +0.012196814676 | -0.018435761955 | 31/1 | 23/9 |
+| D: E-S−M-S | -0.014004815412 | -0.433406250000 | -0.008668125000 | -0.017742738063 | +0.002614306493 | 11/21 | 12/20 |
+| E-R−U-R | +0.033471975195 | +0.795656250000 | +0.015913125000 | +0.012860555856 | -0.018474620939 | 32/0 | 26/6 |
+| M-R−U-R | +0.041902680314 | +0.774687500000 | +0.015493750000 | +0.031446233139 | -0.021623185372 | 31/1 | 26/6 |
+| M-S−U-R | +0.043558121770 | +0.966156250000 | +0.019323125000 | +0.029939552738 | -0.021050068448 | 32/0 | 24/8 |
+| G_E: E-S−E-R | -0.003918668838 | -0.262906250000 | -0.005258125000 | -0.000663741180 | +0.000038858983 | 10/22 | 11/21 |
+| G_M: M-S−M-R | +0.001655441456 | +0.191468750000 | +0.003829375000 | -0.001506680400 | +0.000573116924 | 15/17 | 16/16 |
+| I: G_E−G_M | -0.005574110294 | -0.454375000000 | -0.009087500000 | +0.000842939220 | -0.000534257940 | 13/19 | 11/21 |
+| E-R−M-R | -0.008430705118 | +0.020968750000 | +0.000419375000 | -0.018585677283 | +0.003148564434 | 9/23 | 12/20 |
+
+P is positive in all16combinations of the four E-S and four U-R stream means, ΔJ
++.022584432000..+.035927122585 and Δusers+.077875..+.9215625. That is sensitivity within
+these final banks, not16replications. Same-index P stream means are J
++.024482403384/+.034417162845/+.031796229424/+.027517429779 and users
++.09575/+.8669375/+.6571875/+.511125. E-R−U-R and M-R−U-R have positive means in all4
+matched numerical R streams, without identifying common label semantics.
+
+P's aggregate J difference decomposes algebraically into+.0074585 coverage contribution,
++.003659044403 quality contribution and+.018435761955 saved height penalty. These are
+native S1 objective terms, not causal shares or battery/energy savings. P has9worlds with
+fewer users;1700228 is worst in both J/users (−.000348123571/−1.773). Among128same-index
+nested episodes,11lose J and50lose users; S3/R3 world1700228 loses.041417150669J/4.804users.
+Quality improves in31/32worlds but falls.001616463489 at1700201; height penalty falls in
+all32. No post-result service-loss tolerance is invented to declare a pass.
+
+D loses J in21/32worlds and users in20/32;1700217 is worst on both (−.058214170412/
+−3.8505). Quality is lower in all32worlds and height penalty is higher in31/32. The earlier
+full E/M reading preserves its episode tails, including S2 world1700203 ΔJ−.084098756927
+and S3 world1700217 Δusers−5.536. These are scientific adverse results of an active
+intervention, not an invalid implementation or grounds to exclude the cell.
+
+E-R−U-R improves all32world J means but loses users in6; worst users1700223−1.084.
+It still loses16/128episode J and36/128episode user comparisons; R0 world1700229 loses
+.038019693477J/4.524users. M-R−U-R loses one world J mean at1700227
+(−.040570736283/−4.852users); its R0 episode loses.115793040011J/10.16users.
+M-S−U-R improves all32world J means while8lose users; at episode level7lose J and36
+lose users, including S3/R3 world1700212 ΔJ−.037817487797 and S1/R1 world1700226
+Δusers−4.264. Positive averages do not erase these deployment consequences.
+
+All32world means for the full-block net-use and bank comparisons are retained below.
+The preceding E acceptance entry retains the detailed E/M selection, entropy and D readings;
+raw compact summaries and external trajectories preserve all five native components.
+
+| World | P ΔJ | P Δusers | D ΔJ | D Δusers | E-R−U-R ΔJ | E-R−U-R Δusers | M-R−U-R ΔJ | M-R−U-R Δusers |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | +0.048016564239 | +1.861000000000 | +0.021327937816 | +2.177500000000 | +0.008350333477 | -0.966000000000 | +0.039627367918 | +0.697500000000 |
+| 1700201 | +0.029710449295 | +0.984500000000 | -0.020760222531 | -0.817000000000 | +0.028911717687 | +0.774000000000 | +0.049511035055 | +1.554500000000 |
+| 1700202 | +0.024046447780 | -0.098500000000 | +0.004398187630 | +0.515500000000 | +0.016163010074 | -0.471000000000 | +0.045155891687 | +1.043000000000 |
+| 1700203 | +0.012158559564 | +0.018000000000 | -0.053267977896 | -2.316500000000 | +0.002424051973 | -0.988000000000 | +0.037001378870 | +0.337000000000 |
+| 1700204 | +0.040560592584 | +1.552000000000 | +0.007011157704 | +1.635500000000 | +0.037133100147 | +1.236000000000 | +0.038220808486 | +0.602500000000 |
+| 1700205 | +0.061088093970 | +2.355500000000 | +0.020196804883 | +2.042000000000 | +0.062891457464 | +2.533000000000 | +0.038258631756 | +0.289000000000 |
+| 1700206 | +0.032914310319 | +0.910000000000 | +0.009161680703 | +0.983500000000 | +0.046298816008 | +1.893500000000 | +0.030772747602 | +0.327500000000 |
+| 1700207 | +0.039431558323 | +0.977500000000 | -0.034987164880 | -1.989000000000 | +0.053238499013 | +2.101500000000 | +0.070075943160 | +2.596000000000 |
+| 1700208 | +0.032193685658 | +0.481000000000 | -0.016673720619 | -0.658000000000 | +0.058018709109 | +2.222000000000 | +0.039851870731 | +0.130500000000 |
+| 1700209 | +0.024821414017 | +0.095000000000 | -0.030840356315 | -1.681500000000 | +0.033537863270 | +0.776000000000 | +0.051545934982 | +1.262500000000 |
+| 1700210 | +0.033480272390 | +1.128000000000 | -0.022568599566 | -0.803000000000 | +0.044888850673 | +1.943500000000 | +0.066942747618 | +2.694000000000 |
+| 1700211 | +0.032229668294 | +0.784500000000 | -0.006651821430 | +0.334500000000 | +0.046722730731 | +1.517500000000 | +0.038918905805 | +0.049500000000 |
+| 1700212 | +0.021714995806 | +0.010000000000 | -0.006696436078 | -0.141000000000 | +0.023608705728 | +0.163500000000 | +0.001043796153 | -1.793000000000 |
+| 1700213 | +0.033503922453 | +0.876000000000 | +0.018415035823 | +1.720500000000 | +0.033188348612 | +0.569500000000 | +0.022686842342 | -0.502500000000 |
+| 1700214 | +0.024210533201 | -0.076500000000 | -0.025689704602 | -1.504000000000 | +0.028758297768 | +0.095500000000 | +0.070337263000 | +2.839000000000 |
+| 1700215 | +0.052786419778 | +2.367000000000 | +0.000130176533 | +0.329000000000 | +0.044280188127 | +1.754000000000 | +0.063182900689 | +2.580000000000 |
+| 1700216 | +0.046303971517 | +1.751500000000 | +0.008337775478 | +0.944500000000 | +0.029966076467 | +0.522000000000 | +0.047750416450 | +1.564000000000 |
+| 1700217 | +0.008406994127 | -1.491000000000 | -0.058214170412 | -3.850500000000 | +0.024590177269 | -0.070500000000 | +0.015086411820 | -1.411500000000 |
+| 1700218 | +0.043473744219 | +1.471000000000 | -0.007774925983 | -0.135500000000 | +0.046586167004 | +1.856500000000 | +0.059321359890 | +1.952000000000 |
+| 1700219 | +0.015580102282 | -0.376000000000 | -0.022966833238 | -1.260000000000 | +0.028247602816 | +0.610000000000 | +0.052001501091 | +1.799500000000 |
+| 1700220 | +0.027403677287 | +0.085000000000 | +0.001179016477 | +0.479500000000 | +0.038441332392 | +0.823000000000 | +0.063541614562 | +2.159000000000 |
+| 1700221 | +0.031286072265 | +0.553500000000 | -0.019129057144 | -0.822000000000 | +0.034570750362 | +0.767500000000 | +0.049525685820 | +1.371000000000 |
+| 1700222 | +0.044362822271 | +1.568500000000 | -0.019895534301 | -0.774000000000 | +0.046718257532 | +1.636500000000 | +0.062394245181 | +2.185000000000 |
+| 1700223 | +0.007950103396 | -0.780000000000 | -0.044242367451 | -2.839000000000 | +0.002342264055 | -1.084000000000 | +0.025910406765 | -0.057500000000 |
+| 1700224 | +0.028915835316 | +0.532500000000 | -0.035177241791 | -1.702000000000 | +0.029461835140 | +0.538500000000 | +0.053972269016 | +1.610000000000 |
+| 1700225 | +0.041485706934 | +1.410500000000 | +0.001877964677 | +0.835000000000 | +0.042009560154 | +1.316500000000 | +0.053219750571 | +1.317000000000 |
+| 1700226 | +0.023975035781 | +0.500500000000 | +0.001271456475 | +0.898000000000 | +0.027871610810 | +0.743000000000 | +0.028913367979 | +0.104500000000 |
+| 1700227 | +0.005936352356 | -1.029000000000 | -0.022136761157 | -1.108000000000 | +0.034167951245 | +1.039000000000 | -0.040570736283 | -4.852000000000 |
+| 1700228 | -0.000348123571 | -1.773000000000 | -0.019438006805 | -1.040500000000 | +0.030529119519 | +0.714500000000 | +0.033054362111 | +0.043500000000 |
+| 1700229 | +0.037180984451 | +0.868000000000 | -0.006641660814 | -0.075500000000 | +0.010667387778 | -0.876500000000 | +0.047411504515 | +1.301500000000 |
+| 1700230 | +0.022953444919 | -0.095000000000 | -0.047131641770 | -2.477500000000 | +0.035926370377 | +0.697500000000 | +0.063037458523 | +1.651000000000 |
+| 1700231 | +0.017971592229 | -0.374000000000 | -0.020577082601 | -0.769500000000 | +0.040592063475 | +1.073000000000 | +0.023182086179 | -0.654000000000 |
+
+### Working explanation and next decision
+
+| Fixed reading | B07 ΔJ / Δusers | B08 ΔJ / Δusers |
+| --- | ---: | ---: |
+| P: E-S−U-R | +.061758309143 / +3.51984375 | +.029553306358 / +.53275 |
+| D: E-S−M-S | +.040099335296 / +1.06084375 | −.014004815412 / −.43340625 |
+| E-R−U-R | +.063060519313 / +3.65284375 | +.033471975195 / +.79565625 |
+| E-R−M-R | +.042352996369 / +1.299515625 | −.008430705118 / +.02096875 |
+| G_E | −.001302210170 / −.133 | −.003918668838 / −.26290625 |
+| I | −.002253661073 / −.238671875 | −.005574110294 / −.454375 |
+
+B08 E's common-input team/individual entropy fell.635335922/.255062908 relative to M on
+all6400new-M contexts/44800factors. The intervention therefore achieved the distributional
+change again, yet its incremental J/service advantage did not recur, and learned S did not
+improve E over R. A lower common-input entropy is insufficient evidence for useful learned
+selection or a stable zero-entropy improvement. The tiny positive E-R−M-R user mean does
+not reverse its negative J, universally lower quality or mostly higher height penalty.
+
+E has useful actual learning and positive net package use against a competent learned U
+in both exploratory blocks. That strengthens a conditional package observation; it does
+not credit zero entropy for the benefit shared with M, distinguish optimization from training
+exposure/co-adaptation, or establish complementary roles. The original failed selection
+prediction remains failed. B04/B06 M−U reversal, B01 P-versus-D loss and B03 auxiliary
+reversal remain contrary evidence; the newer M−U positive signs do not erase them. There is
+no stable arm ranking, confirmation, general UAV result or inferred necessity from these blocks.
+
+Fresh main `5a99d6075a6cae539c7b05eb5fba88d1e6f6c499` retains the lifted pause and this
+lead. Its topic3/ordinary-baseline results and current plan materially affect continuation:
+DM1 already owns ordinary local L versus skill packages and fresh-world transfer (B16/B17),
+so repeating that programme here would not address a distinct gap. DM1 B10's opening-label
+hold preserved recurrent feedback and improved means for one learned H6, with consequential
+local service losses; it does not answer what repeated uniform renewals contribute in our
+competent U banks. A possible narrower use question is whether retaining each U bank's
+first random assignment through the episode preserves or improves its service relative to
+redrawing every10steps. It removes neither skill conditioning nor learned recurrent feedback,
+and would say nothing by itself about training-time necessity or a fixed-label-trained baseline.
+
+The strongest current alternative is to end further same-S1 diagnostic investment now,
+keeping the bounded positive package observations. No extra training, held-label evaluation,
+new architecture, confirmation or automatic successor is selected by this result. Before
+choosing a material continuation or closing broader investment, ask one focused Pro follow-up
+about whether this particular zero-fit deployment simplification would change understanding
+or use enough to merit its non-fit cost, versus that stopping alternative. The earlier advice
+is reused for ending B08; it does not already decide the new renewal question.
+
+### Cost and durable retention
+
+B08 started3fits exactly as fixed:1.08Mtraining+400kevaluation=1.48Mteam transitions,
+2160training episodes/800evaluation episodes. Total high updates1350, low actor/critic
+303750each, team2025/individual8100, G/P945each, auxiliary trunk0. M/E's own S probability
+recording totals500batches/16000contexts/112000conditional factors, in addition to200batches/
+6400contexts/44800factors scoring E on new M inputs. That scoring used0environment steps
+and is included in E wall time; U's zero high updates are not zero sampler/inference work.
+
+Node: `wsl_4070`, CUDA float32, fixed configured runtime and native thread teams.
+Runner body walls: M3806.372019700939s, E3827.651307485998s, U2794.368200527970s;
+sum10428.391527714906s=173.806525462min. First M admission to U exit elapsed12105.202521801s
+=201.753375363min, including intercell reading/waiting. Neither is exclusive GPU occupancy.
+U rollout-wall sum2731.195297981496s is included, not added again; U user/system CPU
+2664.46282/270.680853s, lifetime process RSS1921296KiB, peak CUDA allocated/reserved
+594044928/1218445312bytes. Peak scratch and shared-node occupancy remain unmeasured.
+U collection/hash comparison cost9.884556457s, saved-byte verifier3.720046060s, with no
+new training/evaluation. Preparation, broader reading and publication are not fully timed;
+unknown time is not zero. This is research cost disclosure, not a speed claim.
+
+U summary674922bytes/SHA256`6a7cf0407f142c4b7dfffd5e03f3eebbe0607625b6677d25c7ba4836116764a0`.
+The23file inventory below binds both durable copies. Compact config/summary/status/source
+records are versioned; bulk checkpoints, logs and raw streams remain at the recorded roots.
+After both copies and full reading were verified, native snapshot GC preview confirmed no
+active process and a durable published source. Apply removed only U source snapshot
+`1e444014e82544cda215823809baaa35`. Its admission claim
+`/home/wu/projects/HMASD/.git/hmasd-admission/57699b51101076586ceca4949a8d39c85c11d99349616fbb9a7c6c8ca015948e.json`,
+authoring checkout and all scientific outputs remain. No unrelated cleanup was performed.
+
+| U artifact relative path | Bytes | SHA256 |
+| --- | ---: | --- |
+| `admission-preflight.json` | 772 | `4833b0b9eb2dfaa76354e2c48a93bb507d83e8072e86ffa7a31e8f764959ee9c` |
+| `auxiliary_predictions.jsonl` | 2466146 | `4df653feb4d7d2d8c2c5cb2df5aa0ccd0a134bc9c305bb120291ece79edfbeeb` |
+| `config.json` | 1727 | `b837606dcfe6d6ee18d65bb1f9eca9889332c33c2316d614c02281efe9d3aa49` |
+| `final.pt` | 26931967 | `b74920de0e5548662fa37ead0a862ab26d7865e003084dba13e6a12ff5198978` |
+| `initial.pt` | 23750461 | `2c41c464437c9b83e8c0a17f11b25ecfd52dee4e0ee815c4dd00ac018e08bef5` |
+| `launch-manifest.json` | 4323 | `f91f7e3c19ca1c2564631b9217d4a0574422579846afdc5ce6ba14d20e6bc3bf` |
+| `launch-status.json` | 651 | `8cb6cf4a4a0ab150deb507eafbd08a015ea6abe7a02938f21a926bc91d65b233` |
+| `process-exit.json` | 550 | `a657f4eaf3c2b0a7bd2153b78c9cb909a4421891f6cc4a0484af4163fb444f9a` |
+| `raw/final_R0.json` | 11256 | `0ba27de1a047ebc5a4d7e9ee01933eb1705c8338aaf46f5a6c3110b009a775cc` |
+| `raw/final_R0_trajectory.npz` | 10853982 | `a7fd88838834786bcf9c2981ddcc3d392d646d59b9467b0fadad949b4b6431fe` |
+| `raw/final_R1.json` | 11149 | `2c710872b970999cdc50a2d91e5c820f8c39d5d87f4999fbc0d2349527f776be` |
+| `raw/final_R1_trajectory.npz` | 10747283 | `aeb407451f38710e09555d82ad04a68a28020e9e4d1510fd347bae1ed6b2c890` |
+| `raw/final_R2.json` | 11257 | `045d2aed5cb9e4318509b8235c9bc0f710b1b4aecd34762be0b255df6677f835` |
+| `raw/final_R2_trajectory.npz` | 10763521 | `b1f72bcd1f61c3562f9d5179198ec6642096d8eaf3348487a533de68a812cffa` |
+| `raw/final_R3.json` | 11208 | `947199db1e7ab6c5376ae70e33e7a8e44515c236064ab1acb67d73bb8696ea1a` |
+| `raw/final_R3_trajectory.npz` | 10795371 | `9c73632b0b6f504a5e82e61a9e5ced11801902c7195ad8bebea98d685baa275c` |
+| `raw/initial_R0.json` | 11276 | `3cf7c942b09aa3cbae2339b1b93fc2c9212dd9a40bb331168eaf710295b57fed` |
+| `raw/initial_R0_trajectory.npz` | 8963064 | `278cb53f0ecd21491353e180a5ac98cae9419d02b6b94f6e5db5727adc227173` |
+| `raw/training_occupancy.json` | 810270 | `7d58d7fda6840ca13718b289fc374eee80f3be7ca2f336396340754a2c5f0e45` |
+| `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `summary.json` | 674922 | `6a7cf0407f142c4b7dfffd5e03f3eebbe0607625b6677d25c7ba4836116764a0` |
+| `training.jsonl` | 612710 | `578566e478681fc4113451638df2ee50fff19e93ba067e9b192be1e26c3da22a` |
+
+U final native digest `e157afae86ff2b287242ef6ec46b71b5a1ae7f547363e1ab0c9ae76f7a6b7863`; final frozen digest `46c1975444592979dd4679709c1ea183c8fe61973db0f0d541c28f8eb649faa4`.
