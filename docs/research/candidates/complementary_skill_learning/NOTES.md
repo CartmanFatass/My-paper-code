@@ -7214,3 +7214,17 @@ These facts establish ongoing progress only; final raw-output verification and s
 reading remain due. No horizon, intervention, seed or evaluation panel changed; E/U have not
 started. The exact checkpoint was consumed and observation rearmed for the same handle at
 generation61,1500s window. No worker restart, Pro Send or cross-task message occurred.
+
+Checkpoint2026-09-24T08:20Z: generation61 event`af1cfc8f3a1cca309e486f37`,
+wake`368ec22f-96c7-4e37-a9dd-cbcda1b304ac`, was read and consumed. Fresh main is unchanged;
+pause remains lifted and this lead remains assigned. The08:20:23Z native read retains the
+same accepted/running/consistent process identities with no exit witness. The incomplete M
+summary now reports35/45rollouts,280000training/stored transitions,560training episodes and
+35native updates, with1started fit and the same32000initial evaluation transitions. Latest
+rollout retained lambda_h=.07, expected optimizer exposure,0auxiliary-trunk steps and finite
+reported losses/entropies; its wall was87.442477s. stdout/stderr remain empty and actual
+MemAvailable is9,907,784KiB. Interim summary identity:154814bytes/SHA256
+`775afd0bb5859589e5b0e9392e3b052b00f435acf15712fd5d14d66f620f7dc5`.
+This is progress, not final scientific acceptance. E/U and the fixed scientific scope remain
+unchanged. The same handle is rearmed at generation62 with1500s window; nothing was restarted
+or resent and no other task was messaged.
