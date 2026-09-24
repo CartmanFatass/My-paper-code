@@ -16841,3 +16841,430 @@ Cite sources actually read, identify decision-critical sources you could not rea
 advice from fresh evidence. No mandatory new idea, compulsory control census or new approval layer.
 
 ### Answer
+
+本轮未写入 GitHub。 小文件和提交记录可以读取，但目标大笔记的完整正文未能通过当前连接器取回；更新接口要求提供整文件替换内容。最新目标 blob 与固定题目版本一致，但为了保证其他字节不被破坏，我没有发起更新请求，也没有产生提交。我让出该 Answer 子节，以下为完整答复。
+
+Answer
+一、建议：选择 B17，但它检验的是部署范围，不是再次决定 LOCAL1 是否有资格成为普通参照
+
+我支持拟议的 B17：保留全部三份 LOCAL1（下称 L）和对应三份 H6 的 final45 策略，在新的 N8、N6、N4 面板上作零更新部署比较。 保留18个新面板，以及新共同评价器所需的6个旧 N8 一致性重放；不增加 SET、不重评初始策略、不附加新训练或部署干预。其范围与附件提出的固定资产、人数、世界和执行语义一致。
+
+hmasd-pro-question-agent-count-…
+
+这里必须分开两个判断。
+
+L 已经值得作为后续工作的普通参照。 B16 的结果已经落在前次完整建议所覆盖的分支：L 自身确实学习，在三个 N8 区组的最终 J／服务均值上都超过 SET，也超过对应 H6。这个结果足以降低继续仅以 H6−SET 正差论证包用途的优先级，不需要再通过 B17 才准许采用 L 作比较器。
+
+hmasd-pro-question-agent-count-…
+
+尚值得购买的判断，是这种普通替代在部署条件上的范围。 对这六份已经训练好的策略，换一套 N8 世界是否仍保留原排序？向未训练的较小人数 N4 部署时，是否出现 H6 的条件性优势？N6 的取舍是否继续存在？这些结果会改变后续研究应围绕“较广条件下的普通控制用途”，还是一个明确受限的 H6 使用条件展开。它们不是对已知 N8 均值再做一次同义确认。
+
+最强的反对理由是：新世界没有提供新的训练实现。 L 配方是在开发中选出的，三个区组已经曝光；即使 B17 全部有利，也不能据此断言重新训练通常能获得同样排序。全部保留、没有挑最佳 seed，避免了进一步的挑选，却没有消除既往开发选择。这是 B17 的真实限制，不应靠“新世界”三个字掩盖。
+
+hmasd-pro-question-agent-count-… +1
+
+我仍选择 B17，是因为本题的即时目标确实包括这些资产的双向人数部署范围，而 N4 尚无这六份策略的结果，现有 N8／N6 也存在足以影响范围判断的反例。若唯一待决事项只是“下一次研究要不要带上 L”，B16 已经回答，无须为此追加面板；B17 的价值来自更窄、也更明确的新增问题，而不只是因为它不花 fit。
+
+二、B16 的主要更新：普通替代已经存在，但平均领先并未消除 H6 的局部用途
+
+B16 加强的是：普通局部循环控制在这一 S1、N6/k10/360k 学习程序下，可以产生实际的 N8 用途，而不是仅有一个好看的未训练端点。 三份 L 在 N8 的自身服务增量分别为19.2543125、13.0180625、20.598125用户／步，且每块在 N8／N6 的全部32个自身比较世界上，J 和服务都提高。与此同时，第二块 L 的 J 学习增量小于 SET，因此不存在统一的“L 总是学得更多 J”解释。
+
+hmasd-pro-question-agent-count-…
+
+我对已发表的六份 N8 服务数组作了算术核对。下面同时保留平均比较和各策略自己的最低回合平均服务；J 差使用已发表的区组读数：
+
+旧 N8 区组	L−H6 平均 J	L−H6 平均 S，用户／步	L 的最低回合平均 S	H6 的最低回合平均 S
+1	+.001365977	+.6391875	23.010	23.202
+2	+.026012892	+2.2562500	19.446	21.184
+3	+.014597115	+1.7254375	17.650	19.718
+
+第一块的两个最小值分别位于不同世界1945826、1945830；第二、三块的两策略最小值也不是同一个配对世界。因此，这张表不是配对最坏损失，更不是总体尾部保证。它说明：三个平均排序一致，与三个观测最小服务排序相反，可以同时成立。 不能用其中任何一列取消另一列。
+
+其他反证也应继续承担实质作用。L−SET 的 J 或 S 损失世界并集，在 N8 为6／2／5，在 N6 为18／8／9；N6 第一块 L−SET 为−.012776829 J、+.0260625 S。N6 的 H6−L 三块均值分别为：
+
++.002664460 J／−.2959375 S；
+
+−.000502041 J／−.2488125 S；
+
++.026644084 J／+.843625 S。
+
+所以，不论相对 SET 还是 H6，都不能把 B16 写成所有人数条件下的统一替代。
+
+hmasd-pro-question-agent-count-…
+
+第三块 N8 世界1945830中，L只服务17.650用户／步，H6多服务8.362人且 J 高.128855205；第三块 N6 世界1945608中，H6又多服务6.834人且 J 高.101609582。这些差值可以从所读的原始最终面板直接对照，不是根据算法名称推测的优势。
+
+由此，削弱的是“普通循环控制不足以获得这项 N8 用途”，以及把 H6−SET 正差直接当作技能作用证据的理由；未解决的是训练总体排序、新世界上的范围、N4部署，以及信息、FiLM参数化、内在目标、初始化和共同优化分别贡献了什么。B16没有诊断出 SET 实现错误，也没有证明局部信息充分、技能无用或某个损失项有害。当前共享解释关于完整包、信息结构和有限学习的区分仍适用，其他方向的熵／随机上下文研究不能补作 B16 的重复。
+
+hmasd-pro-question-agent-count-…
+
+B15 的原判定则不动：H6−SET 的 N8 平均值虽为+.071049290 J、+4.327729 S，但原95%区间下界分别为−.000007912493和−.876090407179，未超过预写的0和1。B17换比较器、换世界或者得到正结果，都不能改变这项已经完成的联合确认。
+
+三、B17 的估计对象：固定六份策略、固定新面板、逐 N 的部署差
+
+我保留附件列出的全部六个 final45 文件及其 SHA-256 绑定。既不选较强的 L，也不选较弱的 H6；不恢复初始或中间 checkpoint，不把 SET 加回来重复已经发生的比较器更新。此处不纳入 SET 是因为当前问题已改变，不是删除它的历史正面或反面证据。
+
+hmasd-pro-question-agent-count-…
+
+保留新世界地址：
+
+N8：2145800—2145831；N6：2145600—2145631；N4：2145400—2145431，相应评价随机种子为2145851、2145651、2145451，按 N8→N6→N4读取。每份策略、每个 N 都是32个世界、各500步，真实人数、50用户、cap10和原 uniform/free-space S1 不变。这些地址是本题声明未使用的前瞻绑定；本答复没有通过运行它们检查或筛选世界。
+
+hmasd-pro-question-agent-count-…
+
+令 W
+n
+17
+	​
+
+ 为该 N 的新32世界，π
+L,b
+	​
+
+、π
+H,b
+	​
+
+ 为第 b 块的两个固定 final45 策略。对 Y∈{J,S}，本次主要读数为：
+
+d
+b,n
+Y
+	​
+
+=
+32
+1
+	​
+
+w∈W
+n
+17
+	​
+
+∑
+	​
+
+[Y(π
+L,b
+	​
+
+,w;n)−Y(π
+H,b
+	​
+
+,w;n)].
+
+先报告三个 d
+b,n
+Y
+	​
+
+，再给逐 N 的描述性汇总。它不是对训练随机性重新取期望的实验，也不是96次独立训练。 三个区组在同一 N 使用同一批世界，还意味着不能把96个区组×世界值当作96个独立的新世界抽样。增加评价世界没有增加原来的训练 n。这个范围与题目声明的有限策略／有限面板对象相符。
+
+hmasd-pro-question-agent-count-…
+
+同一 N 内，应核对各策略实际初始状态与观测相同，而不仅是 seed 标签相同；随后让它们各自闭环演化，不能要求内生轨迹仍相同。不同 N 的世界则不是配对反事实，不能按世界编号尾数机械配对，也不能将原始 N8−N6 或 N4−N6 分数差命名为纯人数效应。
+
+新 N8／N6 结果还允许一个不增加执行成本的描述性读取：
+
+d
+b,n
+Y,new
+	​
+
+−d
+b,n
+Y,old
+	​
+
+.
+
+它描述同一对固定策略的比较随面板变化多少。排序反转可以直接显示这些资产的面板敏感性，却不是“训练退化”，也没有分解出世界总体方差或某个机制的因果份额。旧面板仍单独保留，不把新旧世界合并来稀释反号。N4没有这六份策略的对应旧结果，不能补造这一列。
+
+N4 的原生服务边界需要特别明确
+
+继续使用：
+
+J=
+500
+Nscalar return
+	​
+
+=.7C+.3Q−P,S=50C,U=E−S.
+
+由4架 UAV、每架10个连接上限可得每步 S≤40。因此每步至少有10名用户未被服务，但这不意味着 U≥10，也不意味着固定的10人整个回合从未得到服务：
+
+50−S=(50−E)+U.
+
+不具资格的人数与具资格但未服务的人数必须分开。这个边界来自任务配置，不是需要“修复”的评价缺陷；不能把 N4 的覆盖分母改成40、提高其容量，或者加一个 N4 专家来让表面条件平衡。
+
+hmasd-pro-question-agent-count-…
+
+同时，名义容量较少并不单独预言实际服务一定比 N6 低，因为几何、干扰与所到达的轨迹也变了。应读原生 J、服务、质量与高度代价，而不是用一个容量归一化总分取代它们。P仍是该任务的高度惩罚，不能升级为实测电池能耗或安全保证。
+
+不重评初始策略是合理的范围选择
+
+B17可以回答“N6训练所得固定策略在N4的零更新部署表现”，但不回答“训练使该策略在这些N4世界上比初始化改善多少”。 为了当前部署问题，不需要再购买初始面板；因此也不应在结果有利时补写新的自身学习叙述。B16已有的自身学习事实仍保留在原面板上，但不能直接移植为新 N4 的初末对照。
+
+hmasd-pro-question-agent-count-…
+
+四、预测与结果分支：让每种结果改变范围判断，而不是寻找一种通过方式
+
+我保留提议的主要方向性预测：
+
+在新 N8 面板上，每份保留 L 相对对应 H6 的平均 J 与平均 S 仍为正。
+
+它是值得检验的工作预测，不是已经得到证据支持的高成功概率。第一块旧差只有+.001365977 J／+.6391875 S，尤其不能把“三块都正”误写成宽裕余量。N4则没有足够依据预写某个方向；它要购买的是向下迁移的实际读数，而不是强行制造一个“L应该继续赢”的预测。N6保留为独立取舍，不预设无损。
+
+hmasd-pro-question-agent-count-…
+
+“统一替代需要没有均值反转”应收紧为：在这些固定区组和新人数面板中，是否观察到均值方向一致的替代模式。 即使九个区组×N条件都没有反号，也不等于所有世界占优、总体非劣、尾部无害或普通方法总体优越。微小正值也不自动构成值得采用的实际优势；这里不另造一个统计通过门槛或等效界限。
+
+B17观察	应改变的判断
+三块新N8均保留L的J／S优势，N4也出现有用L优势，N6没有足以改变用途判断的新取舍	扩大这六份资产支持的普通替代范围，进一步降低只为重现未修改H6平均优势而投入的理由。仍不能宣布训练总体排序或无局部损失
+新N8支持L，N4却出现H6的有用J／S优势	将H6保留为明确N4条件下的候选用途；不再用统一替代概括。它可使一个窄人数条件问题值得考虑，但不证明技能选择造成了收益
+新N8有区组反号	原“每块均正”的预测未完整兑现；缩小替代范围，保留全部区组的符号与幅度。不能挑剩下两块、换世界或用整体均值宣布原预测成立
+J与S相反，或N6／局部世界出现重要损失	作为原生目标与服务的取舍读取；不改J权重、不跨N池化，也不以更高最低值取消配对损失
+差值很小、近零或不同区组方向混合	保留有限且不明确的比较，不宣布等价或“没有任何用途”。这项固定观察仍可在此结束，不自动扩面板或进入确认
+恢复、重放或原生语义核验出现未解释偏差	暂停其依赖的新面板解释，保留部分曝光与错误。技术问题不是H6或L的科学失败，也不推翻旧冻结结果
+
+上述分支没有一条自动生成下一批训练。B17应在预定资产、世界和端点上结束，除真正的技术无效、资源或owner控制外，不以已见分数决定是否完成余下面板。
+
+hmasd-pro-question-agent-count-…
+
+还有一个容易被忽略的限制：“H6在这些世界更好”不等于已经拥有一个可部署的策略选择器。 不能按事后回报在每个世界挑 L 或 H6，再把组合分数记为新控制器表现。真实 N 是部署前已知的条件，因此人数条件下的使用问题可以成立；但事后挑最有利的区组、世界或策略仍是另一项选择，不能算作本次固定比较额外获得的用途。
+
+五、最强替代是新的 H6／LOCAL1 学习区组，但目前不应先购买它
+
+一个具体、能与 B17 区分的替代是：
+
+三个新的共同外生训练区组，每块新训练一份 H6 和一份 LOCAL1；两者仍为 N6/k10/360k、同一原生动作与各自已选学习程序，在固定 N8／N6 面板上读取initial0和final45。
+
+采用已曝光的同一评价面板，可以把新增观察集中在“重新训练是否再产生相对用途”，而不是同时改变训练实现和评价世界。它的工作预测应是两包自身有用学习，以及新 L 相对新 H6 的 N8 终点服务／J比较；不能用旧最佳权重补格，也不要求跨架构初始张量相等。这是一个具体的学习程序比较，不是开放式增加seed。
+
+按这个范围计算，替代方案需要6个新fit、2.16M训练团队步／12.96M UAV步；initial／final各评N8／N6，共24面板、384k评价团队步／2.688M UAV步，总计2.544M团队交互。实现绑定、检查／审阅、原生产物、收取与独立读取另外付费。三个新块仍不保证精度或可靠性，不能仅因达到三个seed就宣布确认。计数依据两包已执行的360k训练及初末评价合同。
+
+hmasd-pro-question-agent-count-… +1
+
+当即时问题变成“下一次重新训练，应优先使用哪个程序”时，这个替代更直接。 B17无论增加多少世界都不能替它回答。相反，新训练即使重现 N8 排序，也不直接给出当前六份资产的 N4 部署范围；若同时更换世界，新的差异又不能单独定位于训练变化。
+
+当前没有已读证据显示一个必须先用新训练修复的关键有效性缺陷：L已经完成真实学习，所需二进制有明确保留身份，跨 N 恢复有现成接口基础。尚未回答的N4和新世界问题也并非无论结果如何都不改变行动。因此，我把新增训练留作未选中的竞争投入，不是B17之后自动排队的阶段。这个选择不表示训练变异不重要，而是先购买本题指定的、可直接区分部署范围的观察。
+
+六、可行性：需要新而有限的评价入口，不能直接套用旧 runner 的固定绑定
+
+源码支持构建这个有限评价器，但不支持声称它已经验证完毕。CountAdapter提供真实N4／6／8与八槽状态布局；strict_sync提供模块键／形状和参数／normalizer同步；B16有独立LOCAL1构造器；B13提供固定资产恢复和零更新评价的先例。这些是实现基础，不是新的性能证据。
+
+hmasd-pro-question-agent-count-… +1
+
+资产恢复与人数布局。 新入口应明确区分LOCAL1和H6，绑定六份实际final45及各自配置、normalizer和源码来源。恢复所有需要的模块状态，不允许静默留下随机初始化的新头、漏载FiLM或使用别的阶段统计。真实N4意味着四个动作／运行时成员，而不是运行八架再屏蔽四行输出。状态填充及有效槽、共享价值头和每回合GRU／技能状态都按真实人数配置。不能绕过旧build_agent的H6／SET身份守卫把LOCAL1伪装进去，也不修改冻结B15／B16的常量或入口。
+
+部署语义与随机状态。 权重和normalizer保持冻结，但GRU、技能、计时器及其他原生运行状态必须正常演化；k10不是每十步清空循环记忆。保留原确定性高层选择和低层mean-then-clip，不替换成随机标签、开局标签复用或新的动作映射。新B17不需要重建训练过程；只需保证各评价面板的恢复、初始状态和随机流不被先前面板污染。
+
+这里有一个需要实际核对的代码差别：B16的_evaluate_stage在环境／目标构造之前设置面板随机种子，而B13的evaluate_policy使用构造种子，恢复后又在reset／rollout前重设面板种子。 所以相同seed整数不足以证明两条路径相同。新入口应保留所选资产原评价路径的实际随机语义，并用重放检查恢复后的行为；不能仅把B13的设seed位置复制过来就宣称已经等价。这是待验证的恢复差别，不是本轮已经发现B16错误或必然产生轨迹分叉。
+
+六个旧N8重放具有具体用途。 它们检查的是新共同入口对六份实际资产的恢复和动作路径，而非重新审查旧科学结论。应对照已有数值轨迹及原始身份，而不只是看到均值接近；初始场景、离散记录、原始／执行动作和后继连续性都涉及这个判断。比较规则应在读取新结果前固定，沿用适用的数值合同，不为了通过而放宽容差。新NPZ文件因元数据或封装不同而有不同文件hash，与数值轨迹不同也要区分：旧输入文件hash用于绑定原证据，不能用一个新封装hash替代实际数组比较。B13本身也区分精确的离散／初始数组比较和连续数值比较。
+
+旧N8重放不能单独验证N4。已有证据和针对变化的缩小检查应覆盖N4／6／8的真实尺寸、mask、恢复状态和执行路径；无需因此追加完整旧N6重放、初始N4生产面板或新的训练pilot。B16的完整状态／观测、raw／executed action、后继和原生连接证据应继续保留；不能因为复用B13辅助函数就退回较窄的证据内容。现行工程方法支持按实际变化检查、复用未变证据，并对高风险评价语义作独立审阅，不需要新增批准层。 
+
+hmasd-pro-question-agent-count-…
+
+若六个旧N8中出现未解释的偏差，应定位最早差异并保留实际曝光，暂停其依赖的新面板读取。不能自动重跑直到一致，也不能把恢复错误命名为策略随机性或新的科学反转。旧结果仍按原输入和原合同保留。
+
+hmasd-pro-question-agent-count-…
+
+七、完整边际成本：保留拟议规模，重放不算免费或新证据
+
+在新共同评价器方案下，完整执行量为：
+
+工作	面板	团队步	UAV步	Episodes	批量policy调用
+六策略×新N8／N6／N4	18	288,000	1,728,000	576	9,000
+六个旧final45 N8一致性重放	6	96,000	768,000	192	3,000
+合计	24	384,000	2,496,000	768	12,000
+
+新增fit、训练存储步和优化器更新均为0。 其中四分之一的总团队交互用于一致性重放，它增加成本，但不增加新的部署世界证据或训练重复。上述乘法与附件核算一致。
+
+hmasd-pro-question-agent-count-…
+
+还应分别记录协调器、team／individual解码及actor／critic前向等实际工作。LOCAL1没有高层训练，不等于原框架中没有单类别协调器推理；其实际中央快照刷新应保持为零。不能从优化器为零推导整个评价几乎没有成本，也不能为了宣称L更便宜，在本轮顺便删除原执行路径。
+
+约3GB原生产物加一份校验收集副本，是约6GB数量级的计划存储，尚未包括既有保留资产、临时峰值和其他进程资源。实现、针对性检查／审阅、加载和hash核验、收取及完整科学读取都是非fit工作。实际wall、CPU、RSS及存储需要测量；B16三份命令累计约2.436507小时是已支付的历史运行成本，不是B17时长或相对速度预测。
+
+hmasd-pro-question-agent-count-…
+
+我不建议在这份成本表上再增加SET、初始策略、新随机读出、额外N或新的世界流。一次完整B17已经能够回答选定的有限问题；更广的目标需要另有信息价值，而不是把未决事项都附加进来。
+
+八、读取范围、未独立核验的部分与最终判断
+
+本次已阅读全文附件，包括固定题目、B16累计解释、前次完整Answer／采纳以及治理、方法和源码摘录；并通过GitHub读取固定题目提交、B16完整完成段及前两块结果／原生清单、B15完整完成记录和保留原案／采纳／结果的claim。相关大笔记段落通过该源版本的提交历史补读，而不是用旧聊天叙述替代。共享背景使用指定的6f29d276baa205c5eca03e665360020657d21b90的相关部分，未以其当时“B16仍运行”的旧状态覆盖新完成结果。
+
+原始紧凑证据读取了指定六份策略的12份final45 N8／N6面板核心数组；接口判断采用附件中固定的adapter／strict_sync源码摘录，并另行核对B16与B13的构造、恢复和评价实现。本轮独立算术核对限于已发表N8服务数组的均值、配对差、观测最小值，以及执行量乘法；没有把这一读取称为新的实验。
+
+没有加载二进制checkpoint或NPZ，没有复做DM的完整逐转移、远端字节或优化器审计，也没有执行策略、环境、技术测试或训练。 自身学习和这些完整审计使用已发表的DM证据。本轮没有独立确认节点当前文件的可用状态；这限制了执行验收，而不使已有明确资产身份和结果支持的设计判断失效。新B17评价器及其真实重放／新面板结果尚不存在，不能预先宣称恢复或预测已经通过。
+
+没有发现必须先购买新训练来处理的已证实关键前提缺陷。未能取得NOTES.md整文件字节，阻止的是安全的整文件写回；已读取的题目、相关完整结果段、面板数组和接口材料足以支持上述建议。
+
+MATERIAL_DISSENT: no。 支持原定零新fit、六份固定策略的B17部署范围研究，保留18个新面板与6个必要的一致性重放。需要收紧的是结论：L作为普通参照不再等待此研究认证；B17检验这些资产在新世界及双向人数条件下的用途，不增加训练总体证据、不建立统一无损替代、不识别技能机制，也不修改B15。
+
+
+## 2026-09-24 — B17 advice adopted: fixed fresh-world deployment comparison and L0
+
+The complete preceding Answer is saved from chat. Its 9422-character body has SHA-256
+`afa6a14f7203c21a4d0e7f87f8e25ddf893a796dd11433ee8961f25eb78ae31a`;
+the collected file includes one final newline (9423 characters, raw file SHA-256
+`6646b2acfed576b4df3bdd1426605203659ef340325bd4241c694707b6533d21`).
+`deliver` verifies NOT_DELIVERED with no answer commits; source and latest branch notebook
+blob are identical at `8941e686e15b0c43f6a241b593040289bbcabde5`. Pro explicitly made no write
+and relinquished the subsection. The same accepted key
+`hmasd:13e9b672265d2bc607e81053050504dbf4a6ed1e7e69df8e7313d114be8f92fa` was collected without
+resend; its passive observer closes its owned tab on exit, preserving other tabs. Account
+identifiers remain private. No scientific acceptance is inferred from collected status alone.
+
+### Scientific adoption and verification
+
+I read the full answer and adopt the bounded B17 deployment study. MATERIAL_DISSENT is no.
+The clarification changes the intended judgment: **LOCAL1 is already an ordinary working
+reference from B16. B17 tests the deployment breadth of six retained learned policies; it is
+not another admission test for the comparator.** Positive average N8 use is distinct from
+a lower observed minimum service and adverse paired worlds. I independently recomputed
+Pro's minima from all six raw final N8 panels: L/H6 minima are23.010/23.202,
+19.446/21.184,17.650/19.718. Their minimizing worlds differ within every block, so these are
+not paired worst losses or guarantees about population tails. All B16 component/adverse data
+remain as recorded. Advice and arithmetic checks add no independent learning evidence.
+
+I verified the consequential interface warning in source: B15 and B16 seed the panel RNG
+before environment/target construction and do not reseed immediately before reset/rollout;
+B13 seeds construction and then reseeds before reset. B17 will preserve the B15/B16 path for
+these assets rather than copy B13's seed placement. This is an implementation requirement,
+not evidence of an existing scientific defect or necessary rollout difference. CountAdapter
+has eight slots and real N4/6/8 constructors; N10 remains excluded. Pro did not load binaries,
+execute tests or inspect the current node, so its feasibility judgment is not launch acceptance.
+
+Relevant shared background is now published at main
+`9c324551295df847a1a4e1a777f59430ae0aa2ed` (RESEARCH sections3/4, own standing and current plan),
+read alongside its prior `6f29d276baa205c5eca03e665360020657d21b90` version. B16's stronger
+ordinary alternative weakens using H6−SET alone to support N8 package use; B11/B12 reversals,
+B15's failed joint lower bounds and observed local losses continue to prevent universal
+claims. Other directions' random-context/entropy results are not replications of this study.
+No newer owner pause or lead change is present. The direction remains exploring.
+
+### Fixed B17 exposure, prediction and reading
+
+This adoption fixes the proposal in the preceding question, with the six final45 checkpoint
+hashes in its asset table unchanged. Use all three LOCAL1 and corresponding H6 policies;
+no SET, initial policy, best seed, new training, skill intervention or new action law.
+Actual checkpoint source is B16 `c95e57201dd7177fc8158b22a3379b56a5be8800` for LOCAL1 and
+B15 `e0a20add999ded53943f99df15f596822e6c13dc` for H6. Preserve original configs, all modules,
+normalizers, deterministic high-level selection and raw-low-level-mean clipping to[-1,1].
+Actual learned weights stay fixed; recurrent/skill/timer states evolve normally with k10,
+reset only at the native episode boundary. Use CPU float32/four Torch threads on wsl_4070.
+
+Output object `s1_fresh_world_deployment_b17`, one tag `s1_fresh_world_deployment_b17_final45`.
+No fit starts. Fixed policy order is b1_LOCAL1, b1_H6, b2_LOCAL1, b2_H6, b3_LOCAL1, b3_H6.
+First execute all six old final N8 consistency replays in that order, using worlds
+1945800–1945831 and panel RNG1945851. Check all replay evidence before any fresh panel.
+Then use the same policy order, each policy N8→N6→N4, with fresh world ranges
+2145800–2145831 /2145600–2145631 /2145400–2145431 and panel RNG2145851/2145651/2145451.
+Each is32lanes×500steps, native uniform/free-space S1,50users,cap10, actual physical N.
+The fixed eight-slot adapter/observation layout is unchanged; N4 is four real UAVs, not
+masked N8 execution. Preserve all partial outputs if a failure prevents completion.
+
+There are18new panels,288000team/1.728M UAVsteps,576episodes/9000policy calls, plus6old
+replays,96000team/768000UAVsteps,192episodes/3000calls. Complete execution is24panels,
+384000team/2.496M UAVsteps,768episodes/12000policy calls,0fits,0training storage and0optimizer
+updates. The replays buy implementation evidence and do not add new deployment observations.
+Record actual actor/critic, coordinator/team/individual decoder inference, actual snapshot
+refresh work, wall/CPU/own-process peak RSS and output bytes; keep unmeasured resource scope
+explicit. LOCAL1 retains its one-category inference and zero central actor snapshots. No
+inference optimization is part of B17. Approximately3GB native outputs plus local collection
+copy is planning only; existing retained assets and scratch are additional. Use fresh actual
+node memory admission (4GiB minimum) for the eventual detached accepted launch. There is no
+score-dependent wall endpoint; observation windows are operational checkpoints only.
+
+The working N8 prediction remains that each retained L exceeds its paired H6 in both mean J
+and mean S on the new panel. The first old block's small margin makes reversal credible;
+three old positive signs do not imply high confidence. N4 has no claimed sign prediction;
+it measures downward-transfer use. N6 is a separate tradeoff. Read each N and each block,
+absolute J/C/Q/P/E/S/U, mean/median/range of paired L−H6, every J-or-S loss and each policy's
+minimum absolute service with its world. Report block means and descriptive dispersion,
+not a pooled-N winner, equivalence, new p-value or confirmation test. If all nine block×N
+means favour L, call that only an observed consistent pattern in these finite conditions.
+No extra panel or fit follows a small, adverse, mixed or favourable result automatically.
+
+Also report each block's new−old L−H6 gap at N8/N6, using retained old panels without new
+old-N6 execution. This is panel sensitivity of a fixed policy pair, not training deterioration
+or a causal world effect. Never merge old/new worlds to dilute reversals; N4 has no old pair.
+The same32worlds within N are shared across blocks, not96 independent world draws or
+training replicas. No initial N4 panel means no new own-learning claim at N4. World returns
+cannot serve as an oracle to choose L/H6 per world or best seed and report a fictitious
+combined controller. N is known before deployment; conditional use still requires honest
+pre-result policy choice for an actual controller.
+
+Native units remain J=N*scalar_return/500=.7C+.3Q−P, S=50C, U=E−S. For N4,
+S≤40 at every step and50−S=(50−E)+U; this does not require U≥10 or imply the same10users
+are never served. Keep coverage denominator50 and cap10. Different N changes geometry,
+capacity, interference and trajectories, so cross-N raw score differences are not a pure N
+intervention; P is the native height penalty, not measured battery energy.
+
+Preserve the result branches in Pro's answer: N8 reversal fails the all-block sign prediction;
+N4 H6 benefit preserves a narrow use question, not identified skill causality; native metric
+tradeoffs and local losses remain material. B17 ends after the fixed24panels. New matched
+training (the unselected alternative is3new blocks×2programs=6fits/2.16M train+384k eval)
+would answer training-program recurrence, not the immediate fixed-policy deployment question.
+It is not queued by accepting B17. B15 remains closed and inconclusive under its original rule.
+
+### L0 — one fixed, admission-guarded deployment evaluator
+
+Deliver a narrow new evaluator and reducer under
+`experiments/candidates/agent_count_generalization/fresh_world_deployment_b17/`, with
+`scripts/run_agent_count_fresh_world_deployment_b17.py` and focused tests mirrored at
+`tests/experiments/candidates/agent_count_generalization/fresh_world_deployment_b17/`.
+These are the only production/test edit paths lent to the Implementer. Do not edit shared
+learners/environments, frozen B13/B15/B16 modules, governance, records or other candidates.
+Existing pure helpers may be imported where semantics are compatible; ordinary implementation
+choices are delegated, scientific scope is not. Do not make B16/H6 identities lie to an old
+arm guard, monkeypatch module globals or create a general experiment framework.
+
+Bind each of the six actual checkpoint/config/summary and old N8/N6 panel identities before
+execution, verifying saved hashes, original source SHA, stage45, actual360k exposure and
+checkpoint modules/normalizers. Old N8 NPZ hash binds the replay reference. Assets must be
+available from declared paths; the runner does not fetch moving branch files or missing models.
+Load each program through its true builder; strict restoration verifies all applicable module
+keys/shapes and the same parameter/normalizer digest across N4/6/8. Runtime buffers start empty,
+modules remain frozen, and all optimizers/storage are guarded and counted. Record RNG identities
+before/after construction and rollout, with the original seed-before-construction ordering.
+Preserve outer RNG around each panel and verify same-N initial scenarios across all six assets.
+
+Use full B15/B16 trace schema: initial/current/next states and observations, raw/executed
+actions, terminal flags, scalar/native rewards, positions/connection/eligibility/counts,
+quality and height penalty, plus actual skill choices and inference as available. Validate
+native identities and capacity/exclusivity per transition; N4 additionally enforces S≤40.
+No model calls or interaction may occur before admission in the production CLI. A strict CLI
+accepts only this object/tag and validates the exact source/repository/output binding; fixture
+APIs may reduce horizon/lanes under pytest scratch but must not expose production bypass flags.
+
+Replay criteria fixed now: exact shapes/dtypes, reference file identity and discrete counts,
+masks/skills/initial-state arrays; finite continuous arrays compared using the existing
+ATOL1e−7/RTOL1e−6 contract. Report actual maximum absolute differences and first out-of-tolerance
+location per array; continuous exact equality, when present, is recorded. NPZ container hashes
+need not equal after reserialization; every required underlying reference array must compare.
+Do not drop arrays that make a mismatch visible or widen tolerance after observing outcomes.
+Any unexplained replay failure stops fresh panels in this invocation and preserves error plus
+partial artifacts; no auto-rerun, replacement seed, new panel selection or scientific negative.
+Check restored/evaluated checkpoint digests and original normalizers, not just close means.
+
+Meaningful focused checks cover the new restoration route for BOTH programs and all actual
+N4/6/8 dimensions; temporal state through k boundaries; seed ordering and panel isolation;
+zero storage/updates and frozen weights/normalizers; full native trace including real terminal
+successor and mean-clip action separation; corruption/missing-module/changed binding rejection;
+replay reducer exact/discrete versus tolerance/continuous handling; N-specific paired readings,
+all adverse worlds, old/new gap calculation and declared cost totals. Small native fixtures
+must use pytest tmp_path below temp and clean at teardown. No production fit or panel is a test.
+Reuse unchanged evidence rather than repeating unrelated suites. Independent Reviewer checks
+new high-risk checkpoint/RNG/evaluation/identity paths after the bounded implementation.
+
+The DM owns science, NOTES, shared index, staging/publication, acceptance and result launch.
+The Implementer returns its diff and checks, launches nothing, commits nothing and spawns no
+children. Source is committed/pushed after review and before the configured native admission.
+After one accepted launch preserve its handle, arm same-task deterministic observation and
+end the turn. Subsequent terminal collection and full scientific interpretation remain here.
