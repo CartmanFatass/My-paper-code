@@ -9236,3 +9236,23 @@ job`launch-csl-b08-u-c9217f0ae`,1500s window/30s interval/20s timeout. Observati
 no exit witness. No pending events remain. B08 started fits are3/3: M and E accepted,
 U running its fixed360ktrain+80keval. P and the full block decision remain open until U
 is read. No additional fit, worker restart, Pro resend or other-task message occurred.
+
+
+## 2026-09-24 — B08 U first checkpoint; same handle continues
+
+Generation82 CHECKPOINT`d41784f7a0dcc94d179be303`, wake
+`402ca286-1855-4a95-b637-a3fa06388666`, was fully read. The same accepted U operation
+remains running with consistent native identities,0observer errors and no exit witness
+at2026-09-24T14:53:11.843788Z. Its incomplete summary records25/45native updates,
+200000training/stored transitions/400episodes and16000initial-evaluation transitions/
+32episodes. All12500storage batches/200000rows pass with0failures. Native optimizer calls
+are0/56250/56250/375/1500 in coordinator/low actor/low critic/team/individual order;
+the high coordinator remains unupdated, as fixed for U. Only initial R0 exists. Initial
+native/frozen digests match accepted M/E; this does not replace full tensor/trajectory
+acceptance. Sourcec9217f0ae is unchanged, no failure is recorded and stderr is empty.
+Interim summary identity:102678bytes/SHA256
+`35b772a5fe28a27b21d0bf3a5a10a4cbe675e977ffa3151a37ef0c21fa38e184`.
+Fresh main9c324551295df847a1a4e1a777f59430ae0aa2ed retains lifted pause and the same lead.
+The exact generation/wake/event were acknowledged and rearmed82→83 for the same operation,
+1500s window. M/E remain accepted, U remains incomplete and P/full-block judgment remain
+open. No worker restart, additional fit, Pro resend or other-task message occurred.
