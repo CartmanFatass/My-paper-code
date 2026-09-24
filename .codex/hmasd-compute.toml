@@ -22,6 +22,7 @@ ref = "refs/heads/main"
 role = "control_plane_and_optional_compute"
 project_root = "C:/Projects/HMASD"
 python = "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe"
+control_plane_python = "C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe"
 task_supervisor = "powershell_start_process"
 result_memory_floor_gib = 4
 

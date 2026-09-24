@@ -7,77 +7,13 @@ or historical record conflicts with it, this page prevails. Historical scientifi
 their meaning as evidence. Only the owner amends this page. Adoption did not lift the owner's
 research pause of 2026-09-15 22:23 PDT.
 
-Amendments: 2026-09-16 18:32 PDT (owner): Implementer role added to section 2; carried-over
-engineering standards named in section 6.
-2026-09-16 (owner request): remove engineering size, time and formatting quotas; retain
-scientific allowances, runtime responsibilities and actual resource-safety checks.
-2026-09-16 (owner request in the alignment follow-up): clarify existing leaf methods,
-shared writing and within-direction idea preparation. Source publication does not prove
-adoption by live sessions; research remains paused until explicitly resumed.
-2026-09-16 (owner follow-up): replace facility-name prohibitions with task-proportionate
-engineering judgment, permit useful reuse and dependency reading, and use author self-checks
-for non-code control documentation rather than automatic repeated Reviewer passes.
-
-2026-09-20 (owner, in the Claude session on the WSL host: "这个额度制似乎不是一个很好的设计 我们取消掉"): the fit allowance of section 3 is removed; fits remain the unit in which cost is recorded, and the
-rules that protect a reading (declare before running, no extension after scores, fixed confirmation
-batch) stay. Where a skill, role body or notebook still speaks of an allowance or a consumed budget,
-this page prevails; publication alone does not establish adoption by another live session.
-
-2026-09-19 owner-requested PR revision: cumulative research understanding, simple-model
-reasoning and advisory roles. These changes take effect on owner merge/adoption; publication
-alone does not establish live-session adoption. No direction, pause, fit allowance, frozen
-experiment or accepted operation is changed by this revision.
-
-2026-09-20 (owner, Codex session workflow): a Codex session may coordinate multiple directions
-as Root or directly own one direction as an independent DM. Root may coordinate existing
-independent DM sessions as well as DM children. The owner explicitly keeps Claude as a
-single-direction DM. This formalizes session routing and ownership; it does not resume
-research, change model settings or restart accepted work.
-
-2026-09-20 (owner, independent-session autonomy): direction DM sessions work independently.
-They do not routinely message one another or Root, synchronize progress, or acknowledge
-control publication. Root coordinates assignments and shared integration when needed;
-the existing direction records carry evidence without an inter-session reporting loop.
-
-2026-09-20 (owner, direction result publication): each DM may update and publish its own
-direction's results and RESEARCH standing to main, including while a Root is acting. Routine
-result publication does not require Root integration, approval, handover or notification.
-Separate checkouts and ordinary Git conflict resolution protect concurrent writers.
-Directions normally change separate content: check current main and the affected rows at
-update time rather than introduce standing coordination between their sessions.
-
-2026-09-20 (owner, Codex App cross-session communication): no autonomous conversation or
-message between independent tasks inside Codex App. Only an explicit user request authorizes
-such a send; completion, dependency, conflict, handover or publication is not an exception.
-The owner explicitly limits this rule to the App: Jev Pro and internal bounded helpers retain
-their existing workflows. Independent sessions finish their own work and handle concurrent Git changes.
-
-2026-09-20 (owner, Pro's scientific role): adopt proactive Pro consultation at the four
-scientific decision points in section 5, with reuse of advice that still covers the decision.
-The DM retains scientific responsibility; this adds no approval layer or per-batch round.
-The amendment applies to subsequent decisions, without reopening completed work, changing
-frozen contracts or resuming paused research.
-
-2026-09-21 (owner, scripted waiting): retire Transport and Monitor as subagent roles. Detached
-repository scripts observe accepted experiment and Pro operations and wake the assigning Codex
-session on completion, error or a bounded checkpoint. Browser interaction may still use Jev where
-the UI requires it; passive waiting and ordinary task observation do not require Jev or a model.
-Claude uses the same deterministic external observation where available and returns through its
-native runtime or a manual continuation; Codex queue is not a cross-runtime wake mechanism.
-
-2026-09-23 (owner, scientific project management and DM autonomy): the owner asks the current
-Codex session to manage the project as a scientist, and DMs to show greater freedom and
-resilience: after failures they may reconsider the whole project, recommend a broader useful
-course and continue. This delegates research prioritization and direction revision within the
-project's purpose to Root and DMs; it does not require another owner decision for each pivot.
-Closing a tested recipe does not end their research responsibility. The specific Claude FSD
-pause, frozen G33, existing ownership and accepted-operation contracts remain in force.
-
-2026-09-23 (owner follow-up, concurrency): plan research around three concurrent direction
-DMs, with the assigning session continuing as scientific project manager. Root is additional
-coordination capacity, not a fourth research direction; if it directly owns a direction, that
-work counts among the three. Existing accepted operations are reconciled, not cancelled or
-duplicated to change the concurrency setting.
+The current sections incorporate the owner's amendments through 2026-09-23: independent
+DM responsibility and publication, cost without allowances, proportional engineering,
+scripted observation, proactive Pro advice, shared research understanding, and scientific
+project management with three concurrent direction DMs. The owner's adopted workflow reduction
+is reflected in section 4. This consolidation changes no pause, ownership, accepted operation,
+scientific minimum or frozen contract. The [prior amendment chronology](https://github.com/CartmanFatass/My-paper-code/blob/382009f85e46039cc11c275165a03987307dd2b6/docs/project/OPERATING_CONSTITUTION.md)
+remains available in Git; the sections below state the current rules.
 
 ## 1. What this project is
 
@@ -241,7 +177,12 @@ resource-safety checks are unchanged.
    Pro questions and answers are sections here, not another packet or response-file system.
 2. `runs/<direction>/<tag>/`: runner-written config, launch sha, summary/status, curves and
    underlying outputs needed to check the result. Keep failed and adverse runs. Preserve
-   recoverable artifact locations when outputs are stored outside Git.
+   recoverable artifact locations when outputs are stored outside Git. For new work, version
+   the compact result/config/status and source identity; retain bulk trajectories, checkpoints,
+   prediction streams and logs outside Git at durable recorded locations, with content hashes
+   in the existing run metadata or NOTES. Verify recovery before deleting any source copy.
+   This changes storage, not required measurements; frozen outputs and already tracked evidence
+   retain their original contracts. No history rewrite or new artifact registry is implied.
 3. `docs/research/candidates/<direction>/CLAIM_<slug>.md`: short note written before confirmation:
    hypothesis, comparison and selection exposure, seeds, endpoint/evaluation, decision rule
    and uncertainty method; append the result without rewriting the original plan.
@@ -252,17 +193,25 @@ Session contact and checkout information belong in this existing index, not a se
 registry. Keep the lead-runtime value used by an accepted launch contract stable; task
 addresses and any actual handover route belong in standing/coordination prose. Unknown contact details
 are reconciled through the native runtime, not replaced with invented ids or a duplicate DM.
+Owner clarification 2026-09-23 (workflow reduction): publish index changes at material scientific
+result/plan boundaries or when direction, lead, pause or a real shared dependency changes.
+Starting, polling, collecting or accepting an individual cell of an unchanged batch does not
+require a main/index update. Keep process handles, observer generations, detailed checks and
+per-cell progress in the existing run records and NOTES, linked from a concise standing.
+Publish exact inputs on the direction branch before execution; this is separate from updating
+the shared index. Ordinary continuation needs neither a new index edit nor a Root acknowledgment.
 Record any owner pause there; a state label does not cancel a pause. It replaces PORTFOLIO,
 APPROVED_SET, tracking, dossiers and lifecycle-decision paperwork. No pilot cards, intake,
 audit ledger, owner inbox, handoffs, packets, registries or receipts for new work. Historical files stay unmaintained.
 
 Owner amendment 2026-09-21 (research-index retirement): maintain RESEARCH as a current view,
 not an append-only project log. Replace superseded standing and retain the current plan,
-useful conclusions and direct evidence links. When a project review completes or a plan or
-coordination account is superseded, retire the obsolete material in the same publication to
+useful conclusions and direct evidence links. When a project review completes or a substantive
+project plan is superseded, retire that material in the same publication to
 `docs/research/archive/<YYYY-MM-DD>/RESEARCH.md`, dated by retirement; use a new suffix for
 another retirement that day, never overwrite a snapshot. These are unmaintained historical
-copies of the index, not additional standing records. Preserve full retired questions, answers,
+copies of the retired material, not additional standing records. Ordinary status, routing,
+wording or per-cell progress edits use Git history and do not generate snapshots. Preserve full retired questions, answers,
 decisions and source revision; keep existing citations usable. Date alone does not expire a
 still-current decision. Keep pause, direction state, lead, frozen bindings and unresolved work
 recoverable in the current index. Do not move an in-flight Pro answer target or retire unresolved

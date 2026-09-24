@@ -10,8 +10,10 @@ research/candidates/<direction>/NOTES.md, CLAIM_<slug>.md when confirming, and r
 runs/<direction>/<tag>/ for recoverable run artifacts. Do not create pilot cards, intakes,
 DIRECTION updates, dossiers or handoffs merely to satisfy an older record convention.
 
-Keep RESEARCH current under constitution section 4: replace obsolete standing and retire
-completed/superseded project review material by date under research/archive/. Preserve source
+Keep RESEARCH current under constitution section 4: update concise standing at material scientific
+or control changes, and retire completed reviews or substantively superseded project plans under
+research/archive/. Per-cell progress, routine routing and wording edits use Git history, not new
+snapshots. Put runtime handles and detailed checks in NOTES/runs; keep task routing in one index block. Preserve source
 revisions and citations; historical snapshots are read on demand. Direction NOTES remain the
 append-only notebooks. Index retirement changes neither direction status nor research permission.
 

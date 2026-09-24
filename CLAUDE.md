@@ -3,20 +3,22 @@
 @AGENTS.md
 
 The Claude session is the DM for one direction at a time (constitution section 2): no Root/DM
-split. Research work uses the `hmasd-research-hub` skill. The session may implement, launch and
-observe directly. When useful it delegates a bounded task to `hmasd-implementer` (Opus, high effort),
-`hmasd-experiment-operator` or `hmasd-experiment-tracker`; it accepts the returned work.
-The tracker observes one bounded window and returns facts; `hmasd-pro-transport`
-sends one committed Pro question and collects the answer; `hmasd-reviewer` reviews core changes.
+split. Read the generated `hmasd-research-hub` skill for the DM responsibility body.
+Research methods live in `.agents/skills/hmasd-scientific-tools` and
+`.agents/skills/hmasd-research-engineering`. The session may implement, launch and observe
+directly. When useful it delegates a bounded code task to `hmasd-implementer` (Opus, high
+effort), a bounded execution batch to `hmasd-experiment-operator`, or high-risk executable
+review to `hmasd-reviewer`; it accepts the returned work. Detached repository scripts observe
+accepted operations and report completion, error or a bounded checkpoint. Claude uses native
+or manual return for observation; the Codex queue does not wake a Claude session.
 
-Interpreters are two roles, and the file name depends on the host the session runs on.
-Scientific: 3.10 with torch and pytest. Control-plane: 3.11+ for `tomllib`, no torch, and it
-runs `tools/publish_claude_control.py`. Never install into any of them.
-
-| host | scientific | control-plane |
-|---|---|---|
-| Windows, `C:/Projects/HMASD` | `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` | `C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe` |
-| WSL2 Ubuntu, `/home/fires/hmasd-wsl` | `/home/fires/.venvs/hmasd-linux-cpu/bin/python` | `/home/fires/.venvs/hmasd-linux-science-tools/bin/python` |
+Interpreters are two independent roles. Scientific needs Python 3.10 with torch and pytest;
+control-plane needs Python 3.11+ and runs `tools/publish_claude_control.py`. The current
+per-host paths are in `.codex/hmasd-compute.toml`; query them with
+`tools.research_support.interpreters.scientific_interpreter()` and
+`control_plane_interpreter()` from the checkout root. The
+`HMASD_SCIENTIFIC_PYTHON` / `HMASD_CONTROL_PLANE_PYTHON` variables override those paths.
+Never install into either environment. See `tests/AGENTS.md` for commands on both hosts.
 
 A WSL session uses the Linux venvs. Never reach across `/mnt/c` for `python.exe`: that runs a
 Windows torch build against a Linux checkout and no record would show the run crossed hosts.

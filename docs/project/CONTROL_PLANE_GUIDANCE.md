@@ -144,7 +144,7 @@ Monitor/Transport 子代理已经退役，不保留兼容角色或改名替代�
 Codex queue 只唤醒分配该等待的当前 Codex session；Claude 使用确定性的外部等待，之后由原生 runtime
 或人工继续，不能假定 Codex queue 能跨 runtime 唤醒。
 
-新实验按任务选择本地或远端；配置的默认节点是便利值，不是 remote-first 硬绑定。
+新实验遵循 owner 当前的节点优先级，并按实际资源与任务适用性选择执行节点。
 本地节点（Windows 或 `local_linux`）按[本地执行说明](../../.agents/skills/hmasd-research-engineering/references/local-execution.md)
 用配置的解释器直接调用准入内核，不生成一次性 wrapper；远端在 agent-task 命令内调用同一内核；两者均先准入再启动并保留可核对的进程事实。
 在途实验不能借换节点绕过原语义或制造重复进程。
@@ -158,12 +158,12 @@ Git 的分支/worktree 服务于真实隔离需要，不再每方向强制建立
 拒绝终态不明、进程引用、独有文件或源码提交无持久引用的快照。普通 DM/发布 worktree
 需另行核对任务与产物依赖；完整流程见[执行说明](../../.agents/skills/hmasd-research-engineering/references/local-execution.md#source-and-publication-worktree-reclamation)。
 
-每个 DM 拥有本方向记录和 RESEARCH 中自己的结果摘要、证据链接、standing 与下一步；即使
-Root 正在工作，也可自行发布到 main，不等待 Root 代更、批准、交接或确认。Root 负责被分配的
-跨方向协调与共享控制面维护。各方向通常修改不同内容：动笔前刷新 main、查看相关差异，只更新
-本方向条目；推送前再检查一次，保留其他方向和 owner 控制字段，正常 push。偶发并发推进由本地
-合并处理，不为它建立跨会话协调。需要隔离未合入实验历史时使用自有发布 checkout，不覆盖旧整表
-或共用 index。详细步骤见 engineering 的 Publishing direction results。
+发布边界与写入责任见[宪章 §4](OPERATING_CONSTITUTION.md#4-three-record-types-and-one-repository-table)，
+具体操作见 engineering 的 Publishing direction results。科学结果/计划或控制发生实质变化时更新
+RESEARCH；同批次各 cell 的启动、观察、收取和验收留在 NOTES/runs，不逐次维护 main 或生成快照。
+方向分支发布运行输入与共享索引发布分开。索引用一个路由区保留 task/checkouts；运行 handle、
+generation、哈希和详细检查通过原记录恢复。新大产物按 engineering 的保留流程存放在 Git 之外，
+在现有记录中保留位置与哈希，清理任何源副本前验证可恢复性；已有冻结输出与版本化证据不搬迁。
 Pro 临时写指定 answer subsection，不能覆盖整个旧版本文件。
 启动/发送是否被接受不确定时核对原操作；修改控制面不是再次启动/发送的理由。
 
@@ -220,21 +220,15 @@ Pro 临时写指定 answer subsection，不能覆盖整个旧版本文件。
 - publisher/可执行路由修改：运行现有 publication/alignment 测试；core 或高风险可执行行为改动按 engineering 方法独立审查。
 - 非代码说明、skills 正文、导航/手册修改：作者检查链接、事实、意图、来源与消费者一致性；不自动派发 Reviewer，不启动实验或发送 Pro 作为验收。可执行配置的行为变化按实际风险判断，不能仅凭扩展名归为文档。
 
-在仓库根目录，现有 3.11 工具环境可执行：
+在仓库根目录使用计算配置中当前主机的 `control_plane_python`；解析和调用示例见
+[测试入口](../../tests/AGENTS.md)及[解释器解析器](../../tools/research_support/interpreters.py)。
 
-```powershell
-& 'C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe' tools/publish_claude_control.py
-& 'C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe' tools/publish_claude_control.py --check
+```text
+<configured-control-plane-python> tools/publish_claude_control.py
+<configured-control-plane-python> tools/publish_claude_control.py --check
 ```
 
-WSL 主机（`local_linux`）的等价命令：
-
-```bash
-~/.venvs/hmasd-linux-science-tools/bin/python tools/publish_claude_control.py
-~/.venvs/hmasd-linux-science-tools/bin/python tools/publish_claude_control.py --check
-```
-
-这是当前本机的开发命令，解释器事实见 CLAUDE/compute；不用于覆盖科学运行环境。
+这是当前本机的开发命令，解释器事实以 compute 为准；不用于覆盖科学运行环境。
 `drift: 0` 只说明生成副本一致，不证明科学方法完整、Claude effective effort/权限生效，
 也不证明任何运行中会话采纳。只随入口或职责变化更新 MAP 与本手册的相关段落，
 不要为每个实验产生控制面文书。
