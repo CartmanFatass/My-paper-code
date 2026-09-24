@@ -8904,3 +8904,23 @@ consistent native identities and no exit witness. No pending events remain. B08 
 are2/3: M fully accepted, E running, U unstarted. E retains360ktrain+160keval and the fixed
 6400context scoring; U remains the already declared next cell after full E reading. The
 batch question and limits remain unchanged; native liveness is not scientific acceptance.
+
+
+## 2026-09-24 — B08 E first checkpoint; same handle continues
+
+Generation78 CHECKPOINT`c15e0701862275ac3c47bb8f`, wake
+`b586e238-459f-4781-b7d8-955943984d6f`, was fully read. The same E operation remains
+accepted/running with matching native identities,0observer errors and no exit witness. The
+incomplete summary records17/45native updates,136000training/stored transitions/272episodes,
+32000initial-evaluation transitions/64episodes; all8500storage batches/136000rows pass with
+0failures. Native optimizer calls are255/38250/38250/255/1020 in coordinator/low actor/low
+critic/team/individual order. Latest native update records lambda_h=0 with high PPO still
+active; only initial S0/R0 panels exist and common-reference scoring has not begun. Reported
+initial native/frozen and first-rollout fact digests exactly match the accepted M, as does
+the pinned new-reference hash. These partial checks do not replace full E checkpoint/trajectory/
+scoring acceptance. No failure is recorded and stderr is empty. Interim summary identity:
+97843bytes/SHA256`89ae4c4c6ec376a6452700f2a0cacbf11adac9e8be13684baf225fd85054b6c4`.
+Fresh main6f29d276baa205c5eca03e665360020657d21b90 retains lifted pause and the same lead.
+The exact generation/wake/event were acknowledged and rearmed78→79 for the same operation
+with1500s window. No worker restart, extra fit, Pro resend or other-task message occurred.
+M remains accepted, E remains incomplete, and fixed U remains unstarted.
