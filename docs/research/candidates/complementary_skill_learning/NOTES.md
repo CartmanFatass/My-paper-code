@@ -4863,3 +4863,16 @@ evaluator identity; DM accepts the diff and checks. No mandatory broader suite o
 Implementer owns only these code/test paths, makes no scientific choice, edits no records,
 launches no result, communicates with no other App task and spawns no child. DM owns this
 notebook, input verification, publication, native launch, observation and full final reading.
+
+### B05 original-input verification before implementation acceptance
+
+Read-only checks on this checkout and the actual4070 node match all three original inputs:
+final.pt27128511bytes/SHA256df222836fca1b4a4aaf87408d4f024fbb796e7107c004a40f1f5ecc64201c39f;
+summary.json4952932bytes/SHA256248d3e04c32b4684738676aa5491dc4da5848874c243e5f6e34bb11ba5bb1299;
+config.json650bytes/SHA2563135dcb1ac17f10208375b6705d0f3b9c5e4ac2f376f1f058cd598fc9887787f.
+Native input root remains the B04 M directory in
+`/home/wu/hmasd-worktrees/complementary-skill-b04-20260923/runs/complementary_skill_learning/`.
+The new candidate loader must enforce the fixed content itself; the shared launcher has no
+generic input-artifact binding flag. This check ran no environment, policy or optimizer.
+The existing Implementer received the one bounded B05 L0 and code/test ownership; DM keeps
+all records, Git/index, scientific choices, launch and acceptance responsibility.
