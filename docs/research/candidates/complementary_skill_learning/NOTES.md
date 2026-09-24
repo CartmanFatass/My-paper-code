@@ -4876,3 +4876,51 @@ The new candidate loader must enforce the fixed content itself; the shared launc
 generic input-artifact binding flag. This check ran no environment, policy or optimizer.
 The existing Implementer received the one bounded B05 L0 and code/test ownership; DM keeps
 all records, Git/index, scientific choices, launch and acceptance responsibility.
+
+
+## 2026-09-23 — B05 evaluator accepted before CUDA and production execution
+
+DM read the complete candidate evaluator, entry and tests and accepts this bounded
+implementation against the fixed preceding L0. No scientific B05 evaluation has run.
+Independent Reviewer found that changing the float64 users reduction order could falsely
+quarantine exact old-panel identity; the candidate now retains `(coverage_sum*n_users)/horizon`.
+The DM also repaired the native launcher's pre-created output-root compatibility, replaced
+constant-only zero-update assertions with actual prohibited-call counters and frozen-state
+checks, retained lane-level partial transition counts, and required genuine old-evaluator
+references and recurrent-state checks. These were engineering defects, not adverse research
+outcomes or changes to the fixed comparison.
+
+Final CPU suite: Implementer14passed/1CUDA skipped in4.86s; independent Reviewer14passed/
+1CUDA skipped in4.94s, with no remaining material finding. The references directly execute
+frozen B04 on an artificial fixture. Native/head parameters, value normalizers, calibration
+and saved default/private/sampler RNG are deliberately perturbed before saving, so same-seed
+reinitialization cannot stand in for restoration. The real GRU's next hidden output is the
+next input through the k10 boundary. Admission refusal and a correctly bound five-file native
+metadata root are checked, including refusal to overwrite its scientific outputs. Tests use
+owned scratch and run no retained production-checkpoint policy/environment probe.
+
+Reviewed SHA256: runner`eb0949e924bfae7cdaa1b382fdcc0ab2f139371d989db8780aee1a82013d5c80`;
+entry`2e73067411ad6b9cbbe427143ebf91087c91c32c0c244b794a7d5d83d9bfd9d2`;
+tests`7345433558db413ac8f91f291a5c4fa516a46cd38fdfb2ddb0eb2f5077a85e8e`;
+package initializer`58693c1fc69aee1f09971864cba850a8f13b1944d1acca69cd6bdf032cdc3ea7`.
+Only the L0's three code/test locations are added; frozen B01/B03/B04 and shared code remain
+at their bound versions. Independent saved-array reading is prepared in private scratch;
+it will rehash complete arrays and recompute all metrics, PCG streams, old controls and
+four-stream/sensitivity arithmetic without additional environment/model execution.
+
+The original B04 checkpoint does not serialize the five native optimizer histories. They
+are constructed empty and remain unused; their empty states are measured and labeled as
+such. Saved auxiliary optimizer states are restored and compared before/after. This is a
+zero-update deployment comparison and makes no resumed-training claim. Actual zero mutation
+calls, unchanged native/head/normalizer/calibration digests and preserved training/default/
+private/sampler state remain required. Peak scratch/shared occupancy remain unmeasured.
+
+Next: publish these exact source bytes, run the one already specified artificial CUDA
+fixture onwsl_4070, then perform fresh native admission for only the fixed nine production
+panels if the technical check passes. The old M input stays outside the new B05 author root,
+so source-snapshot path rebinding cannot silently substitute an input location. No extra
+production-checkpoint probe, fit, stream, retry or cross-task message is introduced.
+
+Staging exposed one redundant final blank line in the runner and initializer, which an
+untracked-file diff check had not inspected. DM removed only those terminal blank lines;
+no executable token changed. Published byte identities after this whitespace repair: experiments/candidates/complementary_skill_learning/b05/__init__.py SHA256`2a589903c50668814e050ee595441c54fe4711ff58a8a35f4bf96926d9855796`; experiments/candidates/complementary_skill_learning/b05/runner.py SHA256`263c9b33e5ff3a436e9ef86cea3d8c00135c7d7421e6360209bfb91fdff673a7`.
