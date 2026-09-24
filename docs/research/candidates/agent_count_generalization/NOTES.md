@@ -14670,3 +14670,35 @@ remain byte-exact and unmodified outside Git at both durable roots:
 The generation143 READY event was consumed with its exact wake/event IDs and
 remaining observations rearmed as144. The unchanged per-cell progression remains
 in NOTES/runs; no main-index update or App cross-task delivery is made.
+
+## 2026-09-24 — B15 final SET cell admitted and observation adopted
+
+The sixth and final prescribed cell was admitted once after complete b3_h6
+acceptance and publication as `baae3fc8d`. Fresh published control
+`63e382485f2a37cccd378436212b911b0fb4d2ae` and the canonical node agree on lifted pause,
+confirming state and unchanged lead. The [native manifest](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/launch-manifest.json)
+retains its original operation/process identities, source snapshot and fixed
+scientific source `e0a20add999ded53943f99df15f596822e6c13dc`. Actual-node
+[preflight](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/admission-preflight.json) passed with11,959,107,584
+physical/effective available bytes. These native records and the [configuration](../../../../runs/agent_count_generalization/s1_bounded_confirmation_b15_b3_set_s994103/config.json)
+were collected with exact byte/size/hash agreement.
+
+Initial reading verifies b3_set, seed994103, lanes2994300–2994315, all12 source
+hashes, the same fixed spec/panels and the unchanged SET/.05 recipe. Fresh canonical
+N6 initialization is synchronized into the target's owned parameters with empty
+optimizers/buffer, preserving the canonical post-initialization RNG. Its learner,
+returned global RNG and sampler seed differ from both previous SET blocks. The
+initial training environment and sampler seed match its block3 H6 partner.
+Initial0 N8 then N6 completes32k evaluation team steps/64 episodes with zero
+optimizer/storage calls and all stage0 isolation fields preserved. A later saved
+reading confirms training began:8k collected/stored team steps,16 episodes and
+one completed update (2250 actor/2250 critic calls, zero coordinator/discriminator
+updates). This is partial exposure, not scientific acceptance.
+
+The final-cell observer is adopted at generation145, PID3177611,
+window1500s, job `launch-s1-bounded-confirmation-b15-b3-set`; its saved probe sees
+the original runner/supervisor running consistently with no pending event. All6
+prescribed fits have started and5 are complete. After this cell completes, collect
+and independently read all outputs, verify the full block3 pairing, and apply the
+unchanged six-cell reducer and prewritten joint confirmation rule. No seventh fit,
+replacement, changed endpoint, Pro resend or App cross-task message is implied.
