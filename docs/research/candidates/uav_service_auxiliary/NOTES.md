@@ -6655,3 +6655,52 @@ subdelegation. An independent registered Reviewer checks changed scientific/inpu
 RNG semantics before DM acceptance. DM owns interpretation, source publication,
 actual-node admission and full collection. Stop dependent work for an actual
 semantic/input/admission failure; report it, do not broaden the study.
+
+## 2026-09-23 — B06 implementation accepted for actual-node validation
+
+The registered Implementer returned the five new paths fixed in the B06 L0;
+no shared/frozen learner, environment or previous evaluator changed. I read the
+rule, source restoration, evaluation and failure paths and accepted the bounded
+diff after independent registered Reviewer inspection. This accepts engineering
+for further checks, not a scientific result or a result launch.
+
+Two concrete defects were resolved before execution. A freshly constructed
+config had the current checkout's unused absolute baseline-metrics path rather
+than the historical source path. Both real retained inputs now pass verification:
+the exact saved checkpoint config is restored, its materialized active fields
+must match digest-bound config.json, and only the known path difference against
+a freshly reconstructed config is allowed while both recorded consumers are
+disabled. Other configuration differences refuse. No scientific field or old
+checkpoint is edited. Independent review also found that nullable first-entry
+and override times could crash a panel containing both activating and nonactivating
+worlds. These are now conditional timing diagnostics with explicit observed-world
+counts; all worlds remain in the primary outcome means. Both orderings are tested.
+
+O reproduces retained common arrays immediately before its dependent F panel.
+Legal pre/post observation fields and higher-precision physical telemetry are
+separately labeled. Returned transitions and attempted episodes are counted before
+subsequent telemetry validation; completed worlds and a failing world's partial
+trace remain recoverable. Mode intervals, actual commands and realized displacement
+are recorded separately. These changes preserve the fixed study and its adverse
+branches; no new arm, world, threshold or optimizer update is introduced.
+
+Implementer CPU checks: **11 passed, 2 CUDA cases skipped**,4.50s. The short O
+path compares against the unchanged B04 evaluator's raw arrays, rather than a
+second candidate implementation; it is a correctness fixture, not another full
+production panel. Checks also cover legal decoding/rule boundaries, real native
+movement/docking/depletion blocking, recurrent/skill reset continuity, mixed
+activation summaries, raw-array mismatch, partial-failure retention and guarded
+CLI refusal. Both actual local B04/B05 source bundles passed verify_source, using
+their complete checkpoint configs. The independent Reviewer inspected the nullable
+repair and regression and reported **no outstanding material findings**. Syntax
+and whitespace checks passed. I additionally made the pending CUDA fixtures use
+four Torch threads and explicitly compare CUDA RNG state before/after; TF32 stays
+disabled. No production result interaction has started. Full original endpoint
+reproduction remains a runtime condition inside B06, not established by the short
+fixtures. Publish this source, run the two actual-node CUDA correctness cases,
+then admit the unchanged batch only if those checks pass.
+
+The adopted B06 plan and exact Pro answer are already published on main
+`ac232d3b8c97656bda51a0f4555599b566ea95b5`. A read-only browser cleanup check found
+zero targets for this operation and three unrelated targets; no tab was closed
+by that check and no question was resent.
