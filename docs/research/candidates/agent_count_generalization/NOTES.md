@@ -15654,3 +15654,65 @@ need no new consultation. Scope/semantic conflicts stop the dependent edit; genu
 or owner-pause failures stop only result execution. After review and focused checks, commit
 and push exact inputs, admit on the real node, retain native handles and observe each accepted
 cell without restarts. Later result reading and comparison are the DM's responsibility.
+
+
+## 2026-09-24 — B16 implementation accepted before first native admission
+
+The DM accepts the bounded LOCAL1 implementation against the preceding L0. The Implementer
+owned only the new candidate module, entry script and mirrored tests; frozen B15 and core
+source are unchanged. LOCAL1 is built directly from task-only MAPPO before constructing its
+native 104-wide MLP/FiLM/GRU actor. The new count-stable critic/coordinator substitutions have
+fresh exact-ownership optimizers. Initialization is one genuinely fresh true-N6 LOCAL1
+construction (not the old SET-only canonical helper); no trained tensor or initial service
+selection is involved. This is within the declared fresh-N6 construction choice and is
+reported by `fresh_true_n_local1_construction_no_cross_architecture_copy`.
+
+The full collector/storage/recurrent update and stage evaluator were read by the DM.
+An independent `hmasd-reviewer` found no material issue in construction, optimizer ownership,
+local actor/central critic separation, raw-action likelihood versus clipped execution,
+terminal successor ordering, stage checkpoint identity, strict N8/N6 synchronization,
+learning/optimizer/buffer/sampler/global/environment RNG isolation, counting and CLI admission.
+The one-category coordinator has only its constant category as actor-facing output;
+central snapshots and compact actor context are disabled. Refresh telemetry wraps actual
+instance refresh calls and verifies zero, instead of inferring zero from the arm label.
+
+Accepted production SHA-256 identities: runner and entry exactly match the independent review;
+`__init__.py` differs only by removal of one trailing blank line, with identical parsed AST:
+
+- B16 `__init__.py`: `ace63e9cab740946cd4069b0c4106b8d40c2641a3303bc9ba14694c8693e08ea`.
+- B16 `runner.py`: `b693393b8c0298cfe6b51483f7a937d94f506f86f17c932f842f697e0974b4f5`.
+- `scripts/run_agent_count_local_ordinary_b16.py`: `3172a010f04d1d69ab1501cdf516d787f22498b9d1d09964843067d3a335527d`.
+
+The Implementer's seven focused checks passed in 3.45 s; the Reviewer independently obtained
+7 passed in 3.30 s and 2 passed in the existing recurrent-entry-mask regression in 1.43 s.
+The DM then added only a direct-CLI refusal check to the new test file: without the native
+admission token, valid B16 cell arguments must exit before creating output. The resulting
+B16 suite passed **8 tests in 3.39 s**, with 14 existing dependency deprecation warnings.
+Runner and entry source remained exactly the reviewed bytes; the initializer only received
+the nonsemantic whitespace cleanup stated above. Technical fixtures use separate
+seeds/worlds, two lanes, horizon20, one rollout and smaller networks; they exercise actual
+native collection/replay/update and initial/final N8/N6 evaluation, including nonzero GRU
+history at k10, raw versus executed actions, terminal storage, disabled optimizer calls,
+parameter movement and initial-evaluation/no-initial-evaluation learning identity. They
+include both a pre-fit failure and a counted first-transition failure. No production pilot,
+old policy evaluation or full training exposure was run as a test.
+
+A broader unchanged runner-admission scan returned 1 failed/1 passed in .12 s, naming
+`scripts/run_fsd_commitment_visibility_b12.py` for a missing source-level admission call.
+That file is unchanged from HEAD and outside this direction; the scan is not reported green
+or repaired by editing historical FSD input. B16's explicit admission source ordering and
+new real missing-token test cover its own boundary. This unrelated scan finding does not
+establish a failure of the B16 path.
+
+A DM saved-panel reader was prepared in task-local scratch and checked against all 24 retained
+B15 panels: field identities, native J/C/S/E/U equalities, block differences and adverse-world
+reading agreed with published values. It executes no policy, adds no training/evaluation
+exposure and defines no new significance/confirmation rule. It will read B16's same native
+panel schema and all blocks separately, retaining the existing prospective interpretation.
+
+The three-cell scientific plan is unchanged. Exact source is committed/pushed before each
+native request. At this acceptance boundary no B16 fit has started; the next action is the
+first declared b1_local1 cell on wsl_4070 under fresh kernel admission, followed by native
+same-handle observation. The full production trajectory and exact measured costs remain
+unobserved, not certified by the reduced fixture. Implementation/review acceptance is not
+scientific acceptance.
