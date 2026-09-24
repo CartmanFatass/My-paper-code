@@ -8520,3 +8520,49 @@ reward, sampler-law, recurrence or evaluator-numeric changes, no scientific laun
 no installs, and no broad shared-core refactor. Stop for any evidence that the adapter would
 need a new scientific contract. The DM owns NOTES/main/index and acceptance; helpers return
 facts/diff/checks and may not commit, launch, send Pro or spawn children.
+
+
+## 2026-09-24 — B08 implementation and independent CPU review accepted
+
+The DM read and accepts the candidate adapter, admitted entry and focused checks against the
+fixed L0. The only B07 changes pass an explicit expected protocol through validation,
+reference binding and result identity; its default Spec, CLI and learning/evaluation laws
+remain unchanged. B08 preserves the B07 engine/checkpoint object identity and separately records
+its own protocol, actual Spec and source. It refuses old B07 reference metadata before native
+construction. No shared learner, environment or evaluator numerics changed.
+
+Implementer checks: B08 15passed/1CUDA-skipped in6.63s; B07 regression21passed/1CUDA-skipped
+in6.28s, py_compile and diff whitespace checks passed. Independent Reviewer
+`/root/review_b08_recurrence` traced all seven changed seeds into native/head initialization,
+auxiliary/default/private/sampler RNG and the new worlds into actual initialization. It checked
+within-block tensors and trajectories, strict production drift/reference refusal, real E/M/U
+update exposure, frozen evaluation, admitted import ordering and failed-summary retention.
+Its combined real-engine check was36passed/2CUDA-skipped in10.05s with no material finding.
+The DM matched all five reviewed hashes. Two surplus terminal LF bytes in the new package's
+init/runner files were then removed; parsed ASTs were verified identical, so executable review
+and CPU results remain applicable. Final source identities are:
+
+| File | SHA256 |
+| --- | --- |
+| `experiments/candidates/complementary_skill_learning/b07/runner.py` | `53b6206490dc2dc27c654cb7e868217cc1ea2251c7e654069ff3b8d105b5857f` |
+| `experiments/candidates/complementary_skill_learning/b08/__init__.py` | `abbfbefa702df76897482cd6487cc4cbce65cc14e33cb808359a4daeec828cc4` |
+| `experiments/candidates/complementary_skill_learning/b08/runner.py` | `2a1f7daed90d328c5d52db76bfd09acea288a2865fe233e2aefae176c8f8e293` |
+| `scripts/run_complementary_skill_learning_b08.py` | `4effd840aacd7545b46277d05369522a7fd76e46aa62e8e785d42f5b0331664a` |
+| `tests/experiments/candidates/complementary_skill_learning/b08/test_b08.py` | `9996b421b2231fbad3ec18ddfb58f8c74ca47a64fa22d792c062a093a61e714e` |
+
+Each module's main artificial CPU M/E/U fixture uses120training transitions/6episodes and
+25panels/1000evaluation transitions/50episodes, plus16M-reference/E-scoring contexts and112
+factors. Implementer and Reviewer module invocations are separate technical exposure; other
+seed/world/reference support checks add construction/scoring cost. These are not independent
+scientific training blocks. The fixed actual4070 CUDA test will use2rollouts per arm, totaling
+240training transitions/12episodes and1000evaluation transitions/50episodes. Production B08
+started fits remain0. Remote admission, actual-device execution and durable new M reference
+staging have not yet been verified and are not implied by CPU completion.
+
+Fresh main380e82cd19069b6dd8d99f5372cf15aa47b7a559 retains lifted owner pause, exploring state
+and the original lead. It already publishes the fixed B08 purchase. This unchanged engineering
+milestone needs no new main/index edit. The repeated c930 wake was drained at generation73
+with no pending events or active observation; the complete Pro answer remains read/reconciled.
+Publish the exact accepted code, perform the fixed CUDA check and, if successful, admit M via
+the configured node/supervisor/kernel. E still awaits the new M's complete scientific reading
+and empirical reference binding; U remains the fixed third cell. No prior worker is restarted.

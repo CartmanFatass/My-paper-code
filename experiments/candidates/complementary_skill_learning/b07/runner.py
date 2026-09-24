@@ -93,6 +93,22 @@ class Spec:
 
 
 DEFAULT_SPEC = Spec()
+
+
+@dataclass(frozen=True)
+class ExpectedProtocol:
+    """Adapter-owned protocol identity accepted by the unchanged B07 engine."""
+
+    protocol_id: str
+    default_spec: Spec
+    source_module: str
+
+
+DEFAULT_PROTOCOL = ExpectedProtocol(
+    protocol_id=OBJECT,
+    default_spec=DEFAULT_SPEC,
+    source_module=__name__,
+)
 jsonable = b01.jsonable
 write_json = b01.write_json
 seed_rng = b01.seed_rng
@@ -126,10 +142,12 @@ def _fixed_addresses(spec: Spec) -> dict[str, int]:
     return {name: int(getattr(spec, name)) for name in names}
 
 
-def _validate_protocol(spec: Spec) -> None:
-    if _fixed_addresses(spec) != _fixed_addresses(DEFAULT_SPEC):
+def _validate_protocol(
+    spec: Spec, expected_protocol: ExpectedProtocol = DEFAULT_PROTOCOL
+) -> None:
+    if _fixed_addresses(spec) != _fixed_addresses(expected_protocol.default_spec):
         raise ValueError("B07 fixed RNG/world addresses differ")
-    if not spec.small_model and spec != DEFAULT_SPEC:
+    if not spec.small_model and spec != expected_protocol.default_spec:
         raise ValueError("B07 production Spec differs from the fixed protocol")
     if spec.n_agents != 6 or spec.k != 10 or spec.horizon % spec.k:
         raise ValueError("B07 requires six agents and complete k10 renewals")
@@ -664,9 +682,13 @@ def _compact_summary(summary: Mapping[str, Any], out: Path) -> dict[str, Any]:
 
 
 def _reference_metadata(
-    summary: Mapping[str, Any], spec: Spec, state_dim: int, obs_dim: int
+    summary: Mapping[str, Any],
+    spec: Spec,
+    state_dim: int,
+    obs_dim: int,
+    expected_protocol: ExpectedProtocol = DEFAULT_PROTOCOL,
 ) -> dict[str, Any]:
-    return {
+    metadata = {
         "schema": REFERENCE_SCHEMA,
         "object_id": OBJECT,
         "arm": "M",
@@ -685,6 +707,10 @@ def _reference_metadata(
         "individual_probability_law": "MixtureSkillDecoder output mu=.9*pi+.1/6 exactly once",
         "team_probability_law": "unchanged native team logits with no mixture floor",
     }
+    if expected_protocol != DEFAULT_PROTOCOL:
+        metadata["adapter_protocol_id"] = expected_protocol.protocol_id
+        metadata["adapter_source_module"] = expected_protocol.source_module
+    return metadata
 
 
 def save_reference(
@@ -692,6 +718,8 @@ def save_reference(
     captures: Mapping[str, Mapping[str, np.ndarray]],
     summary: Mapping[str, Any],
     spec: Spec,
+    *,
+    expected_protocol: ExpectedProtocol = DEFAULT_PROTOCOL,
 ) -> dict[str, Any]:
     expected_streams = [f"S{i}" for i in range(4)]
     if list(captures) != expected_streams:
@@ -701,7 +729,11 @@ def save_reference(
         for name in next(iter(captures.values()))
     }
     metadata = _reference_metadata(
-        summary, spec, arrays["states"].shape[-1], arrays["observations"].shape[-1]
+        summary,
+        spec,
+        arrays["states"].shape[-1],
+        arrays["observations"].shape[-1],
+        expected_protocol,
     )
     arrays["metadata_json"] = np.asarray(
         json.dumps(metadata, sort_keys=True, allow_nan=False)
@@ -727,6 +759,7 @@ def validate_reference(
     spec: Spec,
     *,
     expected_source_launch_sha: str,
+    expected_protocol: ExpectedProtocol = DEFAULT_PROTOCOL,
 ) -> dict[str, Any]:
     path = Path(path)
     if not path.is_file():
@@ -763,13 +796,6 @@ def validate_reference(
             or any(character not in "0123456789abcdef" for character in value)
         ):
             raise ValueError(f"B07 E reference has malformed {name}")
-    schema_envs = make_envs(spec, 1, spec.eval_world_base)
-    try:
-        expected_state_dim = int(schema_envs[0].state_dim)
-        expected_obs_dim = int(schema_envs[0].obs_dim)
-    finally:
-        for env in schema_envs:
-            env.close()
     expected_metadata = {
         "schema": REFERENCE_SCHEMA,
         "object_id": OBJECT,
@@ -780,12 +806,26 @@ def validate_reference(
         "stream_seeds": S_SEEDS,
         "worlds": list(range(spec.eval_world_base, spec.eval_world_base + spec.eval_lanes)),
         "row_order": "stream,renewal,world; individual prefixes are canonical agent order",
-        "state_dim": expected_state_dim,
-        "obs_dim": expected_obs_dim,
         "individual_probability_law": "MixtureSkillDecoder output mu=.9*pi+.1/6 exactly once",
         "team_probability_law": "unchanged native team logits with no mixture floor",
     }
+    if expected_protocol != DEFAULT_PROTOCOL:
+        expected_metadata["adapter_protocol_id"] = expected_protocol.protocol_id
+        expected_metadata["adapter_source_module"] = expected_protocol.source_module
     for name, value in expected_metadata.items():
+        if metadata.get(name) != value:
+            raise ValueError(f"B07 E reference metadata differs: {name}")
+    schema_envs = make_envs(spec, 1, spec.eval_world_base)
+    try:
+        expected_state_dim = int(schema_envs[0].state_dim)
+        expected_obs_dim = int(schema_envs[0].obs_dim)
+    finally:
+        for env in schema_envs:
+            env.close()
+    for name, value in {
+        "state_dim": expected_state_dim,
+        "obs_dim": expected_obs_dim,
+    }.items():
         if metadata.get(name) != value:
             raise ValueError(f"B07 E reference metadata differs: {name}")
     r, b, n = spec.horizon // spec.k, spec.eval_lanes, spec.n_agents
@@ -1177,11 +1217,12 @@ def run_fit(
     admission: dict[str, Any] | None = None,
     reference_path: Path | str | None = None,
     reference_sha256: str | None = None,
+    expected_protocol: ExpectedProtocol = DEFAULT_PROTOCOL,
 ):
     arm = str(arm).upper()
     if arm not in ARMS:
         raise ValueError(arm)
-    _validate_protocol(spec)
+    _validate_protocol(spec, expected_protocol)
     reference = None
     if arm == "E":
         if reference_path is None or reference_sha256 is None:
@@ -1191,6 +1232,7 @@ def run_fit(
             reference_sha256,
             spec,
             expected_source_launch_sha=launch_sha,
+            expected_protocol=expected_protocol,
         )
     elif reference_path is not None or reference_sha256 is not None:
         raise ValueError("B07 M/U do not accept an external reference")
@@ -1247,6 +1289,18 @@ def run_fit(
             }
         ),
     }
+    if expected_protocol != DEFAULT_PROTOCOL:
+        summary["adapter_protocol"] = {
+            "protocol_id": expected_protocol.protocol_id,
+            "source_module": expected_protocol.source_module,
+            "launch_sha": launch_sha,
+            "spec": asdict(spec),
+            "reused_engine": {
+                "object_id": OBJECT,
+                "module": __name__,
+                "callable": f"{run_fit.__module__}.{run_fit.__qualname__}",
+            },
+        }
     summary["runtime"] = {
         "python": sys.version,
         "numpy": np.__version__,
@@ -1263,18 +1317,18 @@ def run_fit(
         "cudnn_allow_tf32": torch.backends.cudnn.allow_tf32,
         "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
     }
-    write_json(
-        out / "config.json",
-        {
-            "object_id": OBJECT,
-            "arm": arm,
-            "spec": asdict(spec),
-            "launch_sha": launch_sha,
-            "device": str(device),
-            "training_law": training_law,
-            "reference_binding": summary["reference_binding"],
-        },
-    )
+    config_body = {
+        "object_id": OBJECT,
+        "arm": arm,
+        "spec": asdict(spec),
+        "launch_sha": launch_sha,
+        "device": str(device),
+        "training_law": training_law,
+        "reference_binding": summary["reference_binding"],
+    }
+    if "adapter_protocol" in summary:
+        config_body["adapter_protocol"] = summary["adapter_protocol"]
+    write_json(out / "config.json", config_body)
 
     envs: list[Any] = []
     agent = counters = None
@@ -1557,7 +1611,11 @@ def run_fit(
         )
         if arm == "M":
             summary["M_final_S_reference"] = save_reference(
-                out, captures, summary, spec
+                out,
+                captures,
+                summary,
+                spec,
+                expected_protocol=expected_protocol,
             )
         if arm == "E":
             assert reference is not None
@@ -1632,6 +1690,7 @@ def run_fit(
 __all__ = [
     "ARMS",
     "DEFAULT_SPEC",
+    "DEFAULT_PROTOCOL",
     "EXPECTED_NATIVE_OPTIMIZER_CALLS",
     "FIXED_SEED",
     "NON_LABEL_SEED",
@@ -1639,6 +1698,7 @@ __all__ = [
     "REFERENCE_SCHEMA",
     "S_SEEDS",
     "Spec",
+    "ExpectedProtocol",
     "TrainingLawAgent",
     "aggregate_arm",
     "aggregate_batch",
