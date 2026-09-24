@@ -17356,3 +17356,29 @@ material integration issue. It reused the two passing checks, without claiming a
 rehash or production evaluation. After publishing the exact corrected source, submit once
 with this staged input root to the same unused fixed B17 output. Native replay agreement
 remains unverified; only the prescribed six replay gates can release the18fresh panels.
+
+
+## 2026-09-24 — B17 admitted on native node; fixed evaluation running
+
+The corrected, published inputs obtained kernel acceptance at2026-09-24T15:38:11Z.
+The runner-written [launch manifest](../../../../runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/launch-manifest.json)
+is the authoritative source/command/input path, process identity and stable operation reference.
+The [fresh native preflight](../../../../runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/admission-preflight.json)
+passed both physical and effective memory floors:12935204864bytes available against the fixed
+4294967296byte minimum. The accepted [launch status](../../../../runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/launch-status.json)
+and these three files were collected byte-for-byte with native/local SHA-256 verification.
+A read-only operation check found matching running runner/supervisor identities, no exit witness
+and no record conflict. The earlier refused supervisor is distinct from this first accepted
+scientific operation and remains preserved.
+
+The initial runner summary reports all6assets restored/validated, one old N8 replay completed
+and the second starting, with0fresh panels,0fits,0stored training steps and0optimizer calls.
+This is an operational progress reading, not final replay verification or scientific acceptance.
+The complete fixed scope remains6old replays plus18fresh N8/N6/N4 panels,384000team steps,
+2496000UAV steps and768episodes. Only the full six replay comparison records can certify that
+the old consistency gate passed; terminal collection must still verify and read all artifacts.
+The same operation is retained for deterministic observation by this task. Checkpoint wakes
+only rearm observation; they neither restart this process nor authorize an extra panel or fit.
+Next scientific duty remains full collection and the fixed per-N/per-block reading, including
+all adverse worlds, absolute minima and old/new gap sensitivity. No performance claim has yet
+changed and no B17 extension or new Pro question is queued.

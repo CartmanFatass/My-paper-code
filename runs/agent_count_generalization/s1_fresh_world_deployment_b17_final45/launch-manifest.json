@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-24T15:38:11.672312Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/efce0b283f074bf8996931b46aa21523/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/efce0b283f074bf8996931b46aa21523/scripts/run_agent_count_fresh_world_deployment_b17.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45",
+    "--",
+    "--seed",
+    "2145851",
+    "--launch-sha",
+    "452223270723a5957ee15db53e4953b31db1352f",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45",
+    "--input-root",
+    "/home/wu/hmasd-inputs/agent-count-b17-final45/agent_count_generalization"
+  ],
+  "claim_key": "a36f49c0b83ea7b6af2c35a15a68d939f06d865349addf5090befb6cc3f79acf",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a36f49c0b83ea7b6af2c35a15a68d939f06d865349addf5090befb6cc3f79acf.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/efce0b283f074bf8996931b46aa21523/scripts/run_agent_count_fresh_world_deployment_b17.py",
+    "--seed",
+    "2145851",
+    "--launch-sha",
+    "452223270723a5957ee15db53e4953b31db1352f",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45",
+    "--input-root",
+    "/home/wu/hmasd-inputs/agent-count-b17-final45/agent_count_generalization"
+  ],
+  "command_sha256": "ebc9b5ef76edb2d5b54516ccf74c5cab62b312d6702be00dbd500053292acad4",
+  "control_observation": {
+    "observed_at": "2026-09-24T15:38:11.511605Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "5a99d6075a6cae539c7b05eb5fba88d1e6f6c499"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-24T15:38:11.562425Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/efce0b283f074bf8996931b46aa21523",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_fresh_world_deployment_b17.py",
+    "--seed",
+    "2145851",
+    "--launch-sha",
+    "452223270723a5957ee15db53e4953b31db1352f",
+    "--input-root",
+    "/home/wu/hmasd-inputs/agent-count-b17-final45/agent_count_generalization"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a36f49c0b83ea7b6af2c35a15a68d939f06d865349addf5090befb6cc3f79acf.json",
+  "output_root": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45",
+  "preflight": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 584840,
+      "session_id": 584840,
+      "start_ticks": 62227301
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 584840,
+    "process_group_id": 584840
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 584841,
+      "session_id": 584840,
+      "start_ticks": 62227305
+    },
+    "pid": 584841,
+    "process_group_id": 584840,
+    "supervisor_pid": 584840
+  },
+  "schema_version": 1,
+  "sha": "452223270723a5957ee15db53e4953b31db1352f",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/efce0b283f074bf8996931b46aa21523",
+  "stderr": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/stdout.log"
+}
