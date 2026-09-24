@@ -8131,3 +8131,19 @@ answer commit on success. If GitHub writeback fails, return the complete answer 
 not a blob SHA, short receipt, link or status. The DM retains the decision and other sections.
 
 ### Answer
+
+
+## 2026-09-24 — B07 publication and focused recurrence question prepared
+
+Complete B07 evidence is published at`37af70b00`; the exact new question is at
+`86e919cc47b10e1c1caa7f045001f8e5dcb3c46b`. Material standing, affected shared understanding
+and the retired B07 plan are published on main at`06d8adbe513c2492baa5ec49b0deabe62da0fcb8`.
+Ordinary adjacent-row merge conflicts preserved this direction's completed result and the
+concurrent DM3 revision; all other upstream direction/routing rows remain unchanged.
+The new question's prepared key is
+`hmasd:000029387f5f6ccf704e2b8f45383ec4e382ec3779534f5a0776a0f80a3830d3`;
+its source-pinned question and empty Answer were checked. The complete attachment includes
+that question, the full B07 result and the prior E acceptance verbatim. It will use the
+existing direction conversation and one new Send. Only its Answer is lent to Pro; account
+addresses remain local. Generation70 has no pending events or active old jobs. No additional
+fit, training seed, readout stream or confirmation has been selected.
