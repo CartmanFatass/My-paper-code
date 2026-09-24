@@ -6508,3 +6508,560 @@ receipt or status. Name consequential sources actually read and decision-critica
 Do not execute code, train, evaluate policies or edit any other subsection/file.
 
 ### Answer
+
+GitHub 读取可用，但本次未完成写回。 最新目标中，本题的 ### Answer 仍为空，实际 blob SHA 为 fb99dfcdce82636c498b180ebd8d5a745a76f64e。可用文件更新接口要求整文件替换；我未能安全构造并校验一个仅填入本 Answer、其余字节完全不变的完整替换内容，因此没有发出写请求、没有改动仓库，也没有生成 Answer commit。以下给出完整答复。
+
+Answer
+一、建议：值得做一次高层熵干预，但修改评价暴露和成功解释
+
+MATERIAL_DISSENT: yes。 我支持一次新的、只去掉高层熵激励的 E/M/U 学习比较；实质分歧是：不采用暂定的十个单次随机实现面板来承担这次用途判断，而建议保留五个初始单流面板，为五个最终策略／读出组合各固定四条评价流，共 25 面板、400,000 评价 transitions。 三次训练仍各为 360,000 transitions，总计 3 fits、1.08M train＋400k eval＝1.48M team transitions。
+
+题面已经承认单次随机实现不等于随机部署期望。我赞同这个限定，但在本次准备投入三次完整训练、且 B05 已展示流敏感性的情况下，我认为应在冻结设计前购买一些最终评价重复，而不是事后用“条件性单流结果”承受本可避免的不确定性。四条流是此次有界成本选择，不是精度充分的保证，也不是任何后续研究的固定门槛。
+
+hmasd-pro-question-complementar…
+
+这项投资应回答的可执行问题是：
+
+在当前 S1、N6、k10 和混合奖励学习制度下，只移除高层熵激励，能否产生比原激励更有用的 learned-stochastic 完整方案，而且其实际服务值得超过认真训练的 uniform-high 对照？
+
+它不应被表述为“验证已经诊断出的熵压制机制”，也不直接回答“状态依赖的高层选择是否必要”。我建议做它，是因为存在一个明确、可独立修改的学习激励，以及能够失败的中间—原生后果预测；不是因为 B06 完成后必须再选一个修复。
+
+最强反对理由是：接近最大熵可能只是标签之间缺乏足够可学、可利用的任务差异的表现，而非阻碍学习的原因。此时去掉激励可能只让任意标签偏好或共同适应更强，并不增加服务。花三次训练仍只能得到一个新区组，还可能把“更依赖自身标签分布”误读成“学出了有价值的选择”。这个反对目前没有被排除。
+
+我仍认为该干预比立即切换固定上下文训练更有针对性：它只修改一个已读到的实际损失项，保留现有信息、结构和混合目标；固定上下文则同时改变曝光、参数使用和判别任务，未必更容易解释。最强的实际替代是有界结束当前 S1 learned-selection 修复路线，而不是强行制造一个新的上下文或辅助架构实验。下面的建议只选择这一项熵干预，不同时购买替代方案。
+
+二、B06 改变了什么，不能改变什么
+有用学习再次出现，原样 M 的额外 bank 价值没有再现
+
+B06 的最终 uniform M−U 为 −0.012274345556 J、−1.472500 users/step，J 为 12 正／20 负，服务人数为 8 正／24 负。M 的高度罚在全部 32 个世界更低，贡献 +0.007980862538 J；但覆盖下降贡献 −0.020615 J，超过这项节省。最差配对世界 1700227 损失 0.091264752201 J、7.010 人/步。这不是一个可以通过扣掉高度项来宣称“服务收益仍然存在”的结果。
+
+hmasd-pro-question-complementar…
+
+同时，M/U 从实际共同初始化出发，uniform J 和人数都在 32/32 世界改善；M-own 也在 32/32 世界改善。U 是一个真正训练的循环低层对照，不是随机动作、冻结权重或没有学好的占位基线。因此，得到加强的是两种制度都能形成有用行为；受到削弱的是原样 learned-high 制度能跨学习实例提供额外 bank 服务的解释。
+
+hmasd-pro-question-complementar… +1
+
+B04 的 +0.035434871140 J、+1.843375 人与 B06 的反号必须分别保留。两块都出现较低 M 高度罚，这是仍成立的有限现象；bank 的净 J／服务优势却没有重复。相同外部评价世界与流排除了“这次换了评价面板”的解释，但初始化、训练世界及其他训练随机性一起改变，不能分账指定某一项为反转原因。两块依然是探索，不证明 U 总体优越、两者等价或所有高层训练无用。
+
+hmasd-pro-question-complementar…
+
+原 greedy 部署后果同样不重写。B06 的 Gamma 为 −0.016165837619 J、−2.1329375 人，1700203 少服务 10.120 人；平均 quality 更高、height 更低，并没有使它成为服务人数上的胜者。B04 的负 Gamma 也继续成立。新的 stochastic 问题必须另命名，不能把 S 偷换成旧记录中的 own。
+
+hmasd-pro-question-complementar…
+
+历史结果约束新实验，而不为熵假说投票
+
+B05 支持同一旧 M bank 的 S 相对 greedy O 的有限改善，却没有显示 S 超过 uniform R；预写去旧 R0 的敏感性还使人数差转负。它既不提供新的训练样本，也不说明降低训练熵就会产生更好的 S。B03 的 generic auxiliary 反转、B01 的局部正配对但完整服务损失，则继续反对以中间诊断改善代替净用途。
+
+B02 的低层奖励删除失败，支持本次不同时删除判别奖励，但不建立判别语义或互信息的必要性。共享背景对随机／固定上下文、局部循环控制与学得选择的区分也应保留；其中旧“B06 尚未完成”的状态已由本题完整结果取代。其他方向的 B10/B14 不是这里的新训练对照，也不能增加 M/U 的训练样本量。
+
+hmasd-pro-question-complementar…
+
+三、熵假说有一个可检验环节，但还不是失败诊断
+实际损失的归一化方式值得注意
+
+冻结 D2 coordinator 更新不是简单地对所有项采用同一种平均。代码中，高层熵按每个样本的有效 team 因子与个体因子求和，再对样本数平均；个体策略损失则除以有效个体因子数，team 策略损失另行平均，最后相加。高层总损失包含
+
+L
+high
+	​
+
+=L
+policy
+	​
+
++c
+v
+	​
+
+L
+value
+	​
+
+−λ
+h
+	​
+
+B
+1
+	​
+
+b=1
+∑
+B
+	​
+
+[H
+Z
+	​
+
+(b)+
+i=1
+∑
+6
+	​
+
+H
+i
+	​
+
+(b)]
+
+——这里展示的是所有因子有效时的当前 N6 形式。
+
+这说明有效因子数量与归一化约定会影响各项的相对权重，因而直接检查 .07→0 有实际对象。它不证明熵梯度大六倍、不证明熵压制任务梯度，也不证明这段代码错误。 优势标准化、共享参数、梯度方向、裁剪和 Adam 都参与实际更新。不能把损失标量与原生 J 作同单位比较，更不能据标量大小计算一个“被熵解释的失败比例”。
+
+一个数学区别尤其重要：对 softmax logits z
+j
+	​
+
+，分类熵满足
+
+∂z
+j
+	​
+
+∂H
+	​
+
+=−p
+j
+	​
+
+(logp
+j
+	​
+
++H).
+
+在精确均匀分布处，熵值最大而这一梯度为零。因此，大熵值与大熵梯度不是同一个观察。B06 的 95.6684%／99.5959% 上限比例并不提供梯度主导证据；而且这些记录是训练更新中的条件熵汇总，不应直接当作最终冻结策略在评价状态上的逐决策熵。
+
+hmasd-pro-question-complementar…
+
+最强竞争解释：缺少可利用的标签优势，而非被熵掩盖的优势
+
+一个自构的单步模型可以澄清区别。固定动作价值 q
+a
+	​
+
+，最大化
+
+a
+∑
+	​
+
+p
+a
+	​
+
+q
+a
+	​
+
++αH(p)
+
+时，α>0 的最优分布为 p
+a
+	​
+
+∝exp(q
+a
+	​
+
+/α)。若真实价值差异存在而激励使分布过平，降低熵激励可能改善任务收益；若各 q
+a
+	​
+
+ 基本相同，或有限学习只能得到噪声排序，降低熵也可能仅制造更尖锐的任意偏好。
+
+这个推导不把 .07 校准成 HMASD 的物理服务温度。它省略了低层伙伴同时学习、AR 前缀、循环状态、十步承诺、物理干扰、PPO 裁剪以及变化中的 critic／判别奖励。它只说明：相同的高熵现象兼容两种不同解释，必须读取干预后的真实学习与执行后果。
+
+去掉 λ
+h
+	​
+
+ 也不是去掉所有探索。个体因子仍是 μ=.9π+.1/6，每个标签保留至少 1/60 的概率；team 因子没有这项 .1/6 混合下界，它保持原 learned categorical。因而不能声称该下界保证 team 不集中，或保证整个联合组合得到充分曝光。
+
+这里还有一个必须收窄的解释：即使 E-S 胜过 E-R，也可能来自与状态无关的有利标签偏好，或者来自更窄的 bank—selector 共同适应；独立 uniform 对照同时改变边际频率和条件相关性。因此，本次能建立的是某个学得分配法则的条件性用途，不是状态依赖协调或互补性的独立贡献。不把额外打乱状态、匹配边际或跨 bank selector 对照暗中加进本批。
+
+四、为什么保留三臂，以及哪些差值真正有用
+
+对题面同时关心的“激励是否有益”和“方案是否值得采用”，E/M/U 是最小的训练对照结构：
+
+E 与 M只有高层熵系数不同，保留相同学习法则形式、网络、信息、混合奖励、低层熵及优化暴露。
+
+U保留真正的低层 actor／critic、discriminators 和 detached factual heads 学习，以独立均匀标签训练、不更新 coordinator。
+
+只做 E/M，可以发现比原 M 改善，却不知道是否值得超过 U；只做 E/U，可以发现新方案有用，却不能把相对改善归于去掉熵激励而非原 learned-high 制度在这个新区组本来就有利。旧 U 或旧 M 不能替代新区组中的对应 fit。
+
+hmasd-pro-question-complementar…
+
+设 V
+a,r
+	​
+
+ 为最终 bank a 在部署规则 r 下，先在每个世界内平均四条完整流，再等权平均 32 个世界的原生结果。建议预写以下读数：
+
+P
+D
+G
+E
+	​
+
+G
+M
+	​
+
+	​
+
+=V
+E,S
+	​
+
+−V
+U,R
+	​
+
+=V
+E,S
+	​
+
+−V
+M,S
+	​
+
+=V
+E,S
+	​
+
+−V
+E,R
+	​
+
+=V
+M,S
+	​
+
+−V
+M,R
+	​
+
+	​
+
+	​
+
+主要净用途比较,
+激励改变的整体后果,
+E bank 的学得读出用途,
+原激励的对应读出用途.
+	​
+
+
+再从同一批输出计算
+
+I=G
+E
+	​
+
+−G
+M
+	​
+
+=D−(V
+E,R
+	​
+
+−V
+M,R
+	​
+
+).
+
+I 区分“E 在共同 R 下整体变好”与“E 相对 R 的 learned-readout 增量更大”，但只是代数关系，不增加独立证据。所有量都保留 J、人数、coverage、quality 和 height 的完整配对，不只保留一个有利标量。
+
+这次完整工作预测应为：条件熵下降，E 本身学到有用服务，且 P,D,G
+E
+	​
+
+ 的 J 与服务人数为正。 对更具体的“选择增量改善”解释，预期 I>0。它们不是若干可以择一宣布成功的终点；主要用途仍是 P，其他量决定能否把用途变化解释为本题提出的激励修订。
+
+必须防止一个很容易出现的假阳性：G
+E
+	​
+
+ 或 I 变大，可能只是 E-R 变差。 如果更集中的训练使 E bank 对均匀读出脆弱，S−R 会扩大，但 E-S 未必比 M-S 更好。只有把 D、P、绝对服务和实际学习放在一起，才不会把“对随机读出更脆弱”包装成“学得选择更有用”。
+
+E/M 是单项激励改动，仍不是固定数据下的纯中介实验。首次高层更新后，标签分布、访问状态、低层数据、critic 和判别器学习会内生分叉；共同初始化不要求它们继续获得同一训练轨迹。去掉一个损失项还会改变共享梯度裁剪及优化器的后续路径。因此，结果支持的是激励改变的整体效果，不是被隔离的“熵下降所占因果份额”。
+
+五、评价：把额外抽样用于最终用途，而非重复所有初始面板
+推荐的有限设计
+
+保留初始五面板：E-S、E-R、M-S、M-R、U-R，各一条完整流；最终同样五个组合，各用四条前瞻固定的完整流。
+
+评价阶段	E	M	U	合计
+初始单流面板	2	2	1	5
+最终四流面板	8	8	4	20
+实际评价 transitions	160,000	160,000	80,000	400,000
+
+每面板仍为 32 世界×500 步。相对题面的十面板方案，增加 15 面板／240,000 评价步，不增加训练 fit，不增加部署法则，不搜索温度或 checkpoint。
+
+我建议继续采用原 32 个开发世界 1700200..1700231，但为这个新问题前瞻固定四条新的 S 流和四条新的 R 流，不把已经反复看过的旧 R0 强行纳入新的主要随机平均。新的流不使旧世界成为 held-out，也不把本次变成确认；它只是避免让已知控制流的特殊表现继续参与新问题的控制选择。历史 B04/B06 的旧流与旧读数完全不变。
+
+初始面板使用最终四条流中的第一条。实际学习按相同实现读取：
+
+L
+a,r,1
+	​
+
+=V
+a,r,1
+final
+	​
+
+−V
+a,r,1
+initial
+	​
+
+.
+
+最终四流均值另报。不能把“四流最终均值减去单流初始值”写成四份配对学习观察。 在 E/M 初始参数和 S 法则相同、R 外生输入一致时，相关初始读数应实际匹配；这些匹配不是额外训练重复。
+
+随机输入、闭环和统计范围
+
+R 的四条数值标签流可以在 E/M/U 之间共用；E/M 的 S 可以使用匹配的私有随机地址，但各自必须依自己的状态、team 抽样和实际 AR 前缀生成标签，不能把 M 的标签复制给 E。S 与 R 若采用不同生成器，不因流编号相同就宣称共同随机数或方差削减。
+
+每个面板重置世界和评价 hidden state，episode 内则按原规则携带 GRU 状态穿过 k10 边界。低层仍用 mean-clipped 动作；本次只改变高层训练激励与所声明的随机读出，不恢复完整训练期低层噪声。
+
+保留所有完整流均值、逐世界平均差、各流中的不利 episode、原生分量与离散程度。四流的世界均值尾部不能代替单个 episode 尾部。若给出任何不确定性描述，其范围只能是固定 bank／世界上的有限部署抽样；每臂仍只有一个新的训练实例。B04、B06 的两块反号、B05 的四条流，以及本批的多个代数对比，都不能合成 E 的多个训练重复。
+
+B05 的已测流波动使增加最终抽样值得考虑，但它不能提供本批 E 的方差、可靠性或功效保证。四流结果仍可能小而混合；这种情形允许本批以未决结束，而不是自动增加流数。
+
+中间预测要读取完整条件分布，不读取“熵系数乘出来的零”
+
+将 λ
+h
+	​
+
+ 设为零后，entropy loss 为零是实现事实，不是“行为熵降低”。应记录真正的六类条件熵，team 与个体分别报告，并标明训练更新或冻结评价的取样分布。选中标签的一个 log-prob 是该事件的 surprise，不是完整分类分布的熵；label histogram 也不是逐状态／前缀条件熵。
+
+为避免 E/M 访问不同状态造成的混淆，我建议在同一批材料上增加一个有限的、不增加环境步的共同输入读取：预先指定最终四条 M-S 轨迹的全部 renewal 状态、观测与实际前缀作为参考池，在这些相同元组上读取 E 的条件分布，与 M 已记录的分布比较。共 4×32×50＝6,400 个 ordered context rows；E 增加一次对应评分，包含 44,800 个分类因子输出。实际批处理调用数和运行时间另记，不能称为零计算。
+
+这个参考池只覆盖 M-S 访问到的条件，数字标签也不保证跨 bank 语义相同；它有助于检验“同一数值输入上分布是否更集中”，不是独立机制证明，也不提供未执行组合的服务真值。无需再把一次 gradient snapshot 设为运行学习比较前的门槛。
+
+六、结果应如何改变判断
+新观察	科学更新与投入含义
+熵确实下降，E 自身学习，且 E-S 优于 M-S、U-R 和 E-R，服务与不利世界支持用途	支持这一次激励改变产生条件性净用途。可以保留这一具体配方，但不证明 B06 的失败由熵主导，也不识别状态依赖协调或互补性。
+熵下降，但 E-S 不比 M-S 好，或实际服务恶化	中间改动发生，原生预测失败。降低这项熵修复的投入优先级；不因“熵终于正常”而继续救援。
+E-S 胜过 M-S，却不胜 U-R	相对原 M 的修复存在，但没有赢得相对认真训练的简单对照的净用途。不能用弱对照改善替代主要结果。
+E-S 胜 U-R，但不胜 M-S	新区组的 learned-high 方案可能有利，不能据此把收益记在去掉熵激励名下。新 M 的正号也不重新打开原样 M/U 的自动复现路线。
+E-R bank 改善，而 E-S 没有相对 E-R 的用途	可以保留一个一般学习／bank 改善事实，但“降低熵释放了有用 learned selection”的完整解释失败。反之，读出差扩大却主要来自 E-R 退化，也不是成功。
+J 与人数相反、平均改善伴随重要局部损失，或结论跨流敏感	保留用途取舍或未决；不设事后服务损失容忍值、不删世界、不宣布等价。
+
+若正确实施后条件熵没有明显降低，这削弱的是“只去掉该激励就会改变所需分布”的中间预测；它不自动是技术失败。真正的技术失败是系数没有进入实际损失、误停 coordinator、错用法则／权重或发生评价更新等，需要限制依赖这些执行的结论。
+
+尤其不应要求所有有利结果都出现，才允许报告任何有用事实；但报告一个较窄的有利事实，不等于完整假说通过。即使整组预测一致，也只有一个新训练区组，没有训练总体结论。任何反结果或未决都不自动附带系数扫描、第三个低层噪声因子、更多训练种子或确认批次。
+
+七、成本、可实施范围与不选的替代
+
+推荐方案总计 3 个新 fit、1.08M 训练步、400k 评价步，2,160 个训练 episodes、800 个评价 episodes。上述共同条件分布评分是额外模型读取，已单独计数；没有额外环境分支或训练更新。
+
+若保留原优化暴露，E/M 各有 675 次 coordinator 更新，U 为零；三臂各有 101,250 次 low actor 和 101,250 次 low critic 更新、675／2,700 次 team／individual discriminator 更新、每个 factual head 315 次更新，auxiliary trunk 为零。合计 high 1,350、actor／critic 各 303,750、team discriminator 2,025、individual discriminator 8,100、两头合计 1,890 次。E 的熵损失为零不等于停高层 PPO；U 的零高层更新也不等于零高层采样／存储工作。
+
+hmasd-pro-question-complementar…
+
+B06 两臂 runner 合计 111.893187816 分钟，只能提供规模参考。该块 U 在更少高层及评价工作的情况下反而更慢，恰好反对从这些共享节点时间推断算法速度。题面的三 fit 约 168 分钟是粗略外推，不是本建议的时间保证。B05 曾以 147.4358 秒 runner wall 完成 144k 固定评价，说明评价和训练的实际成本结构不同，但也不能按步数直接保证本次 evaluator 的速度；新增条件分布记录、测试、review、收取及发布均另有成本。
+
+hmasd-pro-question-complementar…
+
+已有代码支持窄实现，但不能靠给 B06 换一个参数名完成。B06 是固定 seed/Spec 适配器；B04 的公开臂和面板集合仍限制为 M/U、own/uniform。新设计需要将 E 的实际 λ
+h
+	​
+
+ 传入高层损失，并接入规定的 S/R 面板和计数，同时保留旧源文件的冻结含义。针对这条变化路径检查配置、真实梯度项、采样／log-prob 一致性、private sampler 隔离、初始化配对和评价冻结即可；不需要重做整段历史工程验收。
+
+两臂方案并非无效，只是回答得更窄。 例如 E/M、四个初始单流面板加四个最终组合各四流，为 2 fits、720k train＋320k eval＝1.04M transitions；它能检验激励改变及同 bank 读出，却必须放弃相对新 U 的主要净用途判断。我不选择它，是因为 B01 已经提供“优于较差对照却没有净用途”的具体反例，当前 U 又已证明自己能够认真学到服务。省去 U 会丢掉这次决策中重要的对照，而不是只降低精度。
+
+固定上下文对随机上下文是另一个合法问题，但不是更纯净的替代。把六标签改一标签会改变 FiLM 形状；保留六行却固定标签虽然保留形状，也改变可训练参数的实际使用、覆盖和判别目标。保留混合奖励不能保证其实际作用不变，删除它又加入 B02 已显示重要的目标变化。这样的实验可以比较两个完整上下文训练方案，却不能称为纯技能消融。当前材料没有使这个更宽的改动，比单一高层激励改变更值得优先购买。
+
+hmasd-pro-question-complementar…
+
+若 DM 判断上述条件性用途即便得到支持也不会改变后续选择，现在停止当前 S1 路线就是更好的投资决策：新增科学暴露为零，保留已有有用学习与失败约束，不声称高层、技能或 MARL 普遍无用。停止不要求找一个外部依赖，也不欠下一种架构。我推荐干预，是因为目前这个窄选择仍能改变是否采用及是否继续研究该激励，而不是因为历史 11 fits 需要一个正结局。
+
+八、来源范围与未读取部分
+
+本次读取以题目固定版本 68b9d4dd9d8fedd8f739d021104fd1b01eaefafb 为准；共享背景使用 d2e34d45c724c4248e5966d6c323afdda02b31e9；实际学习路径按 c23363a5a71932f037fa0274750fa1c150b9a812 阅读。最新分支仅用于写入位置核对，没有替代固定推理来源。
+
+hmasd-pro-question-complementar… +1
+
+已读附件全文及其中完整 B06 表格，指定 notebook 中 B01–B05 的相关完整结果、前次 training-recurrence Answer、B06 采纳／前瞻、M 完整接受与 U 实际初始化配对条目；读取了指定治理、科学与工程方法、共享背景，以及 B06/B04 适配器和 coordinator 熵损失代码。M/U 的 compact config、manifest、terminal status 也已直接读取。
+
+没有取得外部留存的 B06 大 summary、checkpoint 张量及完整 training／prediction 字节，没有重新计算这些文件的哈希或独立重放全部张量、RNG 和预测检查。 实际初始化、完整 45 行学习链及原生数组验收，依据的是本题明确提供的 DM 已验证记录，不冒充本顾问的新一次全量审计。外部留存位置与恢复身份已给出；本次未访问这些字节，不意味着原始证据丢失，也不构成要求新 fit 的理由。
+
+hmasd-pro-question-complementar… +1
+
+决策上仍未知的是熵激励改变能否改变条件分布、能否改善原生服务、以及改善是否只体现为一般训练或标签偏好。这些不是可以凭记忆补齐的事实，正是建议比较应承担的未知。
+
+结论：选一次新的 E/M/U 高层熵干预，而非原样 M/U 第三次复现；保留三个训练对照，增加固定最终随机实现，并把净服务、激励改动、bank 与读出用途分开。只有熵下降不够，只有同 bank 的 S−R 扩大也不够。本批结束不自动附带修复、扩样或确认。
+
+本次实际执行为 0 fit、0 环境 transitions、0 代码执行、0 仓库写入。
+
+
+## 2026-09-23 — Entropy intervention advice adopted; fixed B07 E/M/U and L0
+
+**Transport and reading.** The complete 396-line answer above was collected under the accepted
+same Jev key `hmasd:ff1e30a05a00dd96323c7374856659e02844e5bcbaa7776cbdf8401489825c1c`.
+The DM read all lines, then verified delivery: `NOT_DELIVERED`, no answer commit. The apparent
+receipt `fb99dfcdce82636c498b180ebd8d5a745a76f64e` was the unchanged target blob, not a commit;
+Pro explicitly made no write request. Latest remote, question-source and local target bytes
+were identical and the assigned Answer was empty. The DM therefore saved the complete chat
+answer verbatim here, including its rendered mathematical/citation fragments; no resend or
+second question. Collected UTF-8 bytes=23174, SHA256
+`4f68824687ae77864dff6de0c589582b7c8728e2d34644fe173706741a005563`;
+stripped-text SHA256=`7da454cc57a5feeccabe68129c3c491fb920775c83a30dcd6c826dca9f0644b9`.
+Pro read the specified source/records but not externally retained large B06 artifacts; its
+advice is not another empirical replication or an independent full artifact audit.
+
+**Decision and explanation.** Adopt the material dissent: one E/M/U block with four NEW final
+selector streams, not the tentative single-stream endpoint. B06 weakens repeatable extra
+bank/service value from unchanged M, while both M and U genuinely learn. The strongest working
+alternative remains useful recurrent low control with randomized context and ordinary joint
+adaptation, without extra value from the learned high selector. B05 weakens a greedy-only
+explanation and motivates measuring stochastic deployment across fixed streams. B02 cautions
+against simultaneously removing discriminator rewards. A direct entropy-incentive intervention
+can still change the decision to retain that incentive; it has a distinct intermediate and
+native prediction, unlike another unchanged M/U pair or another old-bank sampling panel.
+Fixed-context versus random-context would alter label exposure and effective mixed rewards;
+this broader comparator is not selected. No positive result is owed, and this batch authorizes
+no grid, extra stream, seed, low-entropy factor or confirmation.
+
+Current main `4b6a5d64f4a61db761f407cdad7c076f40e46a18`, RESEARCH shared topic3 and current
+plan's entropy/context reasoning inform this choice: preserve useful learning and contrary
+package results, discriminate conditional label law from native use, and do not treat high
+entropy, selected-token surprise or histogram counts as proof of an entropy-gradient diagnosis.
+The simple fixed-q model max(p.q + alpha H(p)) predicts concentration as alpha falls, but
+endogenous multi-agent data, changing low policies, mixed rewards and shared gradients are
+missing. The entropy derivative is zero at exact uniform; a large loss scalar is not evidence
+that its gradient dominates. This is a working intervention hypothesis, not an established
+explanation of B06.
+
+**Correction to prior shorthand.** `b01/learning.py::MixtureSkillDecoder.forward` returns the
+unchanged team logits at step0, and log(.9*pi + .1/6) only at individual steps. The actual
+native categorical sampler and ordered replay consume these outputs. The .1/6 floor therefore
+applies only to each individual conditional; it does NOT apply to the team factor or guarantee
+joint-context coverage. Earlier broad wording in the question/notes was imprecise. B06's
+executed law and its summary already say learned team plus mixed individual; those frozen
+records/results are unchanged. B07 preserves this exact law and never adds a second mixture.
+
+**Frozen scope.** B07 is exploratory, one new matched initialization/training-world block,
+three started fits M, E, U in that execution order. Each uses S1, N6/50users, k10, H500,
+16 training lanes x45 rollouts=360000 transitions/720 episodes. Initial seed260924001,
+head260924002, default training RNG260924003, auxiliary260924004, low-action260924005,
+high-collection260924006, high-update260924007; training-world base2300000. Every arm
+constructs its own genuinely fresh matched native/head/optimizer/RNG state. M and E retain
+high-level PPO and the learned team/mixed-individual law. E changes ONLY lambda_h=.07 to0;
+M stays .07. U retains .07 in configuration but disables coordinator updates and uses independent
+uniform team/individual labels. All three keep original architecture and information, native
+D2/low recurrent replay, physical mean/clip semantics, low lambda_l=.05, original mixed
+reward scale, discriminator learning, detached G/P factual heads and isolated process/sampler
+streams. No initial/final checkpoint from B04/B06 supplies this block's learner.
+
+**Frozen evaluation.** Worlds1700200..1700231 remain previously exposed development worlds,
+not held-out evidence. Every panel resets these32 physical worlds and low hidden state, runs
+500 steps, carries low GRU across k10 renewals, takes low means then clips, and changes no
+learner/optimizer/storage/normalizer/RNG state. S executes the learned native law on each bank's
+own evolving state, own team token and own canonical autoregressive prefix. R is independent
+uniform team/individual. New S0..S3 private Torch seeds=260924101..260924104; new R0..R3 PCG64
+seeds=262625201..262625204. These names belong to B07 and do not reuse B05/B06 R0. Non-label
+panel seed260924105; every panel starts its declared stream afresh. At each R renewal draw
+team[32] then individual[32,6] in canonical lane/agent order. Share each R label stream across
+E/M/U, and share S RNG addresses across E/M, without copying actual learned labels. S and R
+use different generators; same numeric stream index is bookkeeping, not S/R common random
+numbers or a variance-reduction claim.
+
+M and E initial order S0,R0; final order S0,R0,S1,R1,S2,R2,S3,R3. U initial R0; final R0,R1,R2,R3.
+Thus initial5+final20=25 panels, 400000 eval transitions/800 episodes: M160k/E160k/U80k.
+Compute each final rule's four-stream mean WITHIN world, then equal-weight the32 worlds.
+Keep every stream and world, physical/component arrays, negative-service/J tails and raw
+trajectory. Actual learning uses final stream0 minus its own matched initial stream0; never
+portray a four-stream endpoint minus one initial stream as four paired learning observations.
+
+**Intermediate reading and reference pool.** Report actual six-class conditional entropy for
+team and individual separately, including logged native training-update entropy and frozen S
+evaluation entropy with their distinct context distributions. Save the actual complete factor
+probabilities at S renewals; native decoder individual outputs already represent the mixture.
+An entropy-loss value zero is not a behavior-entropy measurement. Selected log-prob and label
+histogram remain separate diagnostics.
+
+M saves all renewal states, observations, actual team and individual-prefix labels and full
+factor probabilities of final S0..S3 in `raw/final_S_reference.npz`, ordered stream, renewal,
+world. This fixed pool has6400 context rows/44800 factor distributions. After M has been read
+and verified, E takes exactly that file with its actual SHA256 and validates its source/spec/
+M-final identity. The prospective CLI accepts the declared path/hash for E only; its identity
+is bound before E admission, with no result-dependent row selection. After its unchanged
+training and prescribed evaluations, E scores those same6400 contexts once through canonical
+held-label conditionals; no new environment transition, low action, update or RNG draw. Record
+actual scoring batches, factor counts, elapsed wall, distributions and entropy differences.
+This extra E scoring is44800 factor outputs; M's full-probability instrumentation and all
+support are also nonzero computation and must be timed/counted. A bounded extra forward is
+permitted where the native sampler does not expose full probabilities. The reference only
+covers M-S contexts; numeric label equality across banks is not semantic skill equality or
+an unexecuted service counterfactual. No extra reference pool or gradient diagnosis is selected.
+
+**Readings and predictions.** Primary P=E-S minus U-R in native J and connected users/step.
+Read accompanying coverage, quality, height penalty and every adverse episode. D=E-S minus
+M-S reads the entropy-incentive package; G_E=E-S minus E-R and G_M=M-S minus M-R read each
+learned allocation law's use. I=G_E minus G_M is descriptive, with the array identity
+I=D-(E-R minus M-R), not independent evidence. The working prediction is lower true entropy
+on own and common contexts, useful E learning, and positive J/service P,D,G_E; a positive I
+would additionally support improved conditional readout use. P remains primary: no choosing
+whichever correlated contrast is favorable. Also report E-R minus M-R as the bank reading.
+
+Lower entropy without native improvement fails the repair prediction. E beating M but not U
+does not establish net use; E beating U but not M does not credit entropy removal. A better
+bank without useful S-over-R supports only that narrower fact. G_E or I growing through E-R
+deterioration is not success without E-S, D, P and actual learning. J/service disagreement,
+material local costs, small/mixed differences or stream-sensitive signs remain tradeoff or
+unresolved. No new acceptance threshold, 32/32 requirement, posthoc world deletion, equivalence
+claim or automatic extension. Even all predictions agreeing gives one exploratory training
+block, not high-level necessity, state-dependent coordination, complementarity or mechanism.
+Failure of entropy to fall under a correctly implemented zero coefficient is a scientific
+intermediate failure, not a reason to label the fit broken and retry.
+
+**Cost and stop.** Fixed3fits/1.08M train+400k eval=1.48M environmental transitions,
+2160training/800evaluation episodes plus the declared model-only reads. E/M each675 coordinator
+steps; U0. Each arm actor/critic101250 each, team/individual discriminator675/2700,
+G/P heads315 each, auxiliary trunk0. Totals coordinator1350, actor/critic303750 each,
+team/individual2025/8100, head updates1890 combined. Count actual partial/failed attempts and
+all support; do not equate zero environment steps with zero compute. Configured WSL4070 CUDA,
+float32 learner/float64 native rewards, four CPU threads. Prior B06 pair111.893188runner min
+suggests roughly168min for three fit bodies, without a speed/resource guarantee; extra eval,
+conditional reads, checking, staging and collection are measured separately. End this fixed
+batch after all intended readings; no execution past a newer owner pause or uncertain launch.
+
+**L0 implementation.** Deliver one B07 candidate package under
+`experiments/candidates/complementary_skill_learning/b07/`, admitted entry
+`scripts/run_complementary_skill_learning_b07.py`, and focused tests under
+`tests/experiments/candidates/complementary_skill_learning/b07/`. Preserve core and frozen
+B01–B06 bytes/interfaces. Reuse the audited training/storage/RNG/checkpoint helpers and B05
+frozen-evaluation primitives where appropriate; keep changed orchestration candidate-local.
+The new runner must bind actual E coefficient, distinguish E public identity from learned-law
+implementation, emit compact aggregate/per-world summaries, retain raw arrays/checkpoints/
+training/predictions under the durable run, and refuse output overwrite/contract drift before
+scientific work. Validate E's external reference digest and metadata before its fit. No CLI
+science knobs beyond fixed arm, fixed seed, launch identity/output and E reference path/hash.
+
+Required focused evidence: matched E/M/U initialization and private/sampler isolation; actual
+coordinator loss/gradient changes with only lambda_h while E remains trained and U stays fixed;
+S sampler/log-probs and held-prefix full distributions use the SAME native individual mixture
+once and no team floor; correct new R streams and physical pairing; recurrent carry/reset and
+frozen evaluation preserve weights, optimizers, normalizers and RNG; all panel/count/output
+contracts; reference-prefix scoring and corrupt-input refusal. Run a small full learner/eval
+fixture including actual primary arrays, then a focused CUDA check on the declared-node path.
+Independent read-only Reviewer examines these high-risk RNG/evaluation changes. The DM owns
+science, NOTES, Git index, main publication and launch; any Implementer owns only these named
+new code/test paths and returns diff/checks, with no production launch or record edits.
+
+After verified fallback saving and the full scientific reading, READY event
+`dee95456a466f1876dcfe3cc`, wake`e6b0dd2e-bef6-470d-840c-5fff580a40e4`, was consumed
+with generation58→59. No Pro operation remains pending; no Send or worker was repeated.
