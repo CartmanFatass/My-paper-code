@@ -8282,3 +8282,569 @@ comparison is worthwhile, state what it can and cannot establish and the outcome
 end that specific investment. The DM owns the final choice.
 
 ### Answer
+
+GitHub 读取可用，但本轮连接器没有仓库文件写入动作，因此未写回；实际 Answer commit：无。 最后核对到目标文件的 blob SHA 为 ebc62816e1aabd4569622ac50ab2c0a81ab69689，本次指定问题的 ### Answer 仍为空。本轮没有修改仓库或启动实验。以下是完整答复。
+
+B07 后的投入选择：支持一次同部署 F 的匹配训练比较，但收紧中间预测
+
+MATERIAL_DISSENT: no。
+
+**我支持这一次两臂、每臂 H3000／180k transitions 的探索性训练比较：候选在训练时接入完全不变的 F，对照在训练时不接入 F，两者最终都在同一个 F 下评价。**保留相同新初始化、完整普通 HMASD 学习和原生目标，不增加网络、模式输入、损失遮罩、阈值搜索、额外部署模式或确认批次。
+
+需要实质落实的不是第三个对照，而是两处设计细节：**把训练时域、采集边界和更新机会写清楚；把“更有服务的反馈后行为”变成带机会分母、实际服务量和删失标记的读数。**原提议足以作为有限训练包比较，却不能仅凭“充电后又出现过服务”来区分恢复能力，也不能把正终点差直接解释成历史适应机制。
+
+一、B07 改变了什么，为什么现在可以问这个训练问题
+加强的是反馈参照的实际用途，不是某个学习缺陷
+
+B07 的两个 final 面板分别增加 3781.140317／3624.592395 原生 J，平均 QoS 增加 .066866785／.047859413，两个 development 面板的平均服务和 J 也改善。O 实际出现了 275 次 cutoff 和 212 次 depletion，F 在这些有限轨迹中没有出现两类事件。这比 B06 的“几何余量修复、没有充电和失效事件”多了一条重要证据：当前简单执行反馈在真实能量压力下仍有有限用途。
+
+hmasd-pro-question-usa-feedback…
+
+实际补能也不再是假定。每个 F 世界都有充电输入和正储能增量；998 个输入承载区间在时域内退出 F，退出前均有正净储能恢复，其中 977 个区间之后出现过正的联合服务。不过，另有 502 个区间尚未结束；“后来有联合服务”不能归属于那个刚充电的成员。
+
+hmasd-pro-question-usa-feedback…
+
+因此，被削弱的是“电池进一步消耗后，反馈收益必然消失”的解释。没有被证明的是：剩余服务不足来自没有在 F 历史上训练。
+
+服务损失使恢复假说值得检验，却没有把它诊断出来
+
+最有约束力的反证不是平均 QoS 仍低，而是补能和持续服务可以明显分离。B04 final938030 在 1607–2999 步没有服务，尽管 1946 步开始充电；B05 final938028 获得 258.055556 Wh 输入，却仅在 2146–2324 步有服务；B05 final938021 充电后仍全程零服务。前两个世界的平均 QoS 损失分别达到 .194845487 和 .240545272。
+
+hmasd-pro-question-usa-feedback…
+
+这些事实反驳“补能发生就足以恢复服务”，但不能在训练历史、几何／backhaul、原生动作包装、站点竞争之间选定原因。尤其是部分缺口在充电前已经开始，不能把它们全部叫作“充电后不会恢复”。
+
+同时，F 平均耗能更多、全回合储能变化仍为负，最差电池降到 .086567360。有限的零 cutoff／depletion 不是储备余量不变量，也不是无限持续运行的证明。新训练比较应保留这些实际风险读数，不能将 F 当成已经解决安全问题的外部保证。
+
+hmasd-pro-question-usa-feedback…
+
+既有负证据保持不变
+
+B03 的辅助收益未重复、共同 MSE 不排序原生用途，以及 B04/B05 风险重加权中的服务交换，均没有被 B07 撤销。共享背景的具体作用是：**新候选必须面对“新训练的普通 HMASD＋F”，而不是只打败旧 O；也没有理由复活预测头或系数 4。**本次选择检验训练与实际执行过程的匹配，而不是把简单反馈的阳性转成某种新架构的资格。
+
+hmasd-pro-question-usa-feedback…
+
+二、为什么这两次训练比继续描述旧轨迹更有信息价值
+
+这次比较有一个清楚的、可以失败的用途问题：
+
+在相同原生 H3000 任务、初始化和训练预算下，训练时接入部署中必有的 F，是否比训练时不接入 F，得到更有服务用途的最终策略？
+
+两臂都从 H3000 开始训练，排除了“候选只是获得了长任务训练，对照仍停留在 H1500”的明显混杂；两臂都部署 F，又排除了“候选只是多了执行保护”。这正是原提议中最有价值的匹配。
+
+hmasd-pro-question-usa-feedback…
+
+最强的替代解释是：即使补能成功，原生网络几何、包装规则与资源约束仍会限制服务；或者同样预算的普通 H3000 训练本来就足以改善这些轨迹，专门接入 F 没有额外价值。相同的新训练机会使后一种解释在本次比较中真正有机会成立。前一种解释则不能被这个两臂比较完全识别，但会约束实际能得到的服务增量。
+
+**最强的投入替代是保留现有有限 F 参照，不再支付 fits。**它的理由很实在：现有包已经有用途，180k 不保证学到更好的联合恢复行为，而一次训练对也无法估计训练结果的总体稳定性。不能把未解决的服务缺口自动兑换成重训义务。
+
+我仍倾向购买这一次比较，因为干预直接作用于部署时实际存在的训练—执行差异，而且不需要先引入一个未经定位的模块。旧轨迹上的几何分析、服务区间重算或固定参数回放可以描述失败，却不能产生“普通策略在 F 过程中更新后会怎样”的闭环结果。要回答这次学习用途问题，一个真正匹配的学习对通常比进一步堆叠固定策略诊断更直接；这不是认定其成功概率高，也不是认定所有诊断都无价值。现行方法同样允许有限学习比较先于穷尽机制诊断。
+
+hmasd-pro-question-usa-feedback… +1
+
+三、最小完整比较：保留两臂，明确 180k 到底包含什么
+
+建议采用下面这一组，不附带第三臂：
+
+项目	候选 A：反馈条件训练	对照 B：普通训练
+初始化	同一份新初始化的真实副本	同一份新初始化的真实副本
+训练环境	原生 H3000，actor 提议经过固定 F 再进入原环境	原生 H3000，actor 提议直接进入原环境
+训练目标与学习器	原生 N 目标、完整高／低层及判别器学习	完全匹配
+训练暴露	180k 实际团队 transitions	180k 实际团队 transitions
+最终评价	固定终点，在同一个 F 下评价	固定终点，在同一个 F 下评价
+
+历史 N 的目标应准确写成 lambda_return=2、额外训练成本系数为 0。额外系数为零并不是取消原生风险惩罚。B04/B05 N 的配置及继承的训练代码支持这一点。原生混合奖励、熵项、判别器学习也保持，不顺手变成另一种“纯服务”算法。
+
+训练时域与更新机会
+
+为把该预算具体化，我建议两臂均采用：
+
+2 个同步环境×3000 步×30 个完整更新阶段=180,000 团队 transitions.
+
+这使每阶段仍采集 6000 个团队 transitions，保留 30 个完整联合更新阶段，同时不在 1500 步处人为切断 H3000 历史。它是本次建议的采集组织方式，不是已经存在的新训练实现，也不是声称改变并行数没有影响。
+
+源码中 make_config 将 episode_length 与 spec.rollout_length 联系起来；旧 B04 收集器在每阶段更新后调用 clear_buffers()。因此，不能只改一个评价 horizon，或不经核对沿用旧采集循环，就宣称接通了完整 H3000 训练。应区分环境终止、采集边界和学习更新边界，并核对它们是否意外改变技能／循环状态。
+
+在没有提前终止时，上述配置每臂包含 60 个完整 H3000 训练回合。这提供了多次完整能量过程的学习机会，但不是 60 次独立训练复制，也不是已经证明暴露充分。若发生提前终止，则记录实际回合数、剩余采集段和状态连续性；未结束的物理回合不能仅因清理训练 buffer 而重置 F、技能或 GRU。两臂使用同一个处理合同。
+
+各优化器的 epochs、minibatch、归一化、GAE 和技能时钟也应按共同配置固定，实际 optimizer 步数另行记录。30 个更新阶段不等于 30 个 optimizer steps，总 transitions 相等也不自动证明更新机会匹配。
+
+初始化与评价
+
+共享初始评价成立的条件，应包括实际模型参数、必要 buffers、normalizer 与评价状态一致，而不只是 seed 名字相同。评价必须隔离 RNG 和训练状态，不能让先运行的初始面板改变某一臂后续训练。两臂训练轨迹在 F 实际干预后理应分开，不要求继续逐数组一致。
+
+保留原提议的一次共同初始 F 面板＋两次最终 F 面板，每个面板为新固定的 8 个 development 世界与 32 个 final 世界。final32 是主要用途读数，development8 约束范围；不因其中一面板有利而池化掩盖另一面板。训练和世界种子由 DM 在选择后前瞻固定，不按 B07 的有利或不利世界挑选。历史两份 N 仅作背景，不加一轮旧制品评价。
+
+hmasd-pro-question-usa-feedback… +1
+
+四、动作覆盖不必使训练成为“伪 on-policy”，但存储和信用路径不能含混
+
+设 u
+t
+	​
+
+ 是 actor 实际采样、具有原生 log-probability 的提议，m
+t
+	​
+
+ 是 F 的模式状态，提交命令为
+
+a
+t
+	​
+
+=g
+F
+	​
+
+(o
+t
+	​
+
+,m
+t
+	​
+
+,u
+t
+	​
+
+).
+
+固定 F 激活时替换命令，未激活时传递当前提议；原生环境还可能进一步解释 docking 或改变实际运动。**actor 提议、提交命令和实际物理运动是三个不同对象。**冻结反馈代码已经给出了这种替换／传递结构。
+
+我的训练语义建议是：
+
+**学习存储保留 u
+t
+	​
+
+ 与采样它时的 log-probability；执行日志另存 a
+t
+	​
+
+。**用于收益、价值目标、两层 GAE、判别器数据和下一观察的，必须是实际执行 a
+t
+	​
+
+ 后得到的真实轨迹，而不是无 F 的影子后果。PPO 比率针对同一个被采样变量构造：
+
+ρ
+t
+	​
+
+(θ)=
+π
+old
+	​
+
+(u
+t
+	​
+
+∣h
+t
+	​
+
+,z
+t
+	​
+
+)
+π
+θ
+	​
+
+(u
+t
+	​
+
+∣h
+t
+	​
+
+,z
+t
+	​
+
+)
+	​
+
+.
+
+原策略自身的动作变换及概率计算照旧；这里不需要把 F 强制命令伪装成 actor 样本，也不需要为 F 的硬覆盖另套一个动作密度 Jacobian。这是把固定、无待学习参数的 F 看作实际交互过程一部分的推导，不是对现有 PPO／GAE 实现无偏性或收敛性的证明。
+
+被忽略的提议确实可能造成信用效率问题。条件于完整历史，若某成员被全部覆盖，而且其本次提议不经其他通道影响后果，则其当前提议对于相应外部后果没有行动区分作用；有限样本、近似 advantage、PPO clipping、熵和混合学习仍可能产生更新。关于普通动作裁剪的研究也区分了“按原采样变量学习仍有正确概率语义”与“利用执行等价性降低估计方差”；但那个结论不能直接移植成此处多智能体滞回反馈的现成估计器。
+arXiv
+
+因此，我不建议默默遮掉覆盖步的 actor loss，更不能一起删掉高层／critic 的这些转移。那会把比较改成“F 条件训练＋新信用规则”。高层技能、其他成员的行动及之前的路径仍可能影响这些时段，循环状态也应继续随真实观察演化。
+
+另一个边界是：F 的滞回模式属于实际过程状态，但不能据此给候选新增模式特征。两臂部署时保持相同的信息权限；模式未显式输入可能带来部分可观测性，不能预先认定现有记忆一定能解决它。原提议已正确要求不新增这种特权输入。
+
+hmasd-pro-question-usa-feedback…
+
+这项实现最值得检查的是提议／log-probability 一致、命令未覆盖掉存储样本、实际 reward／next observation 贯穿全部学习路径，以及更新边界没有假 reset。这些是既有工程方法下的针对性检查，不是额外的科学许可阶段。
+
+hmasd-pro-question-usa-feedback…
+
+五、让中间预测真正提供额外信息
+
+原提议的中间预测方向合理，但“更多有服务的行为”仍接近终点目标的重述。特别是 B07 的“补能退出后曾有正联合服务”已经覆盖 78/80 个世界，容易出现天花板；最大服务缺口也不能单独代表用途——B04 final938030 的最大缺口缩短，却同时损失大量累计服务。
+
+hmasd-pro-question-usa-feedback… +1
+
+我建议不加新面板，只在已有训练和评价轨迹上固定一个较窄的描述：
+
+以实际恢复后的行动机会为锚，而不是以“发生充电”为成功
+
+每个世界取第一次某成员经历实际输入、具有正净储能恢复，并退出 F 的时刻作为描述性锚点；每世界至多一个，避免拥有大量短区间的世界支配结果。退出 F 只表示 F 恢复传递该成员提议，不保证原生包装不会再改变其命令。
+
+以随后固定 250 个原始时间步为窗口，记录实际累计 QoS／交付量、正服务步数及服务空窗，并区分锚点时队伍已经有服务，还是从零服务恢复。250 步沿用现有描述尺度，不是按新结果选择最有利时窗，也不替代完整终点。
+
+同时保留机会分母：多少世界激活 F，多少有输入，多少完成退出；没有输入、输入后未退出、退出后剩余时间不足的世界分别标记。窗口只有 e<250 个实际步时，报告 e 和已观察服务，不把未观察部分填成成功或失败。窗口内再次进入 F 是实际后果，不能删去以美化恢复读数；所有未完成区间继续右删失。训练阶段另记录实际未被 F 覆盖的提议机会，不能用 180k 总步数代替可学习的服务行动暴露。
+
+这个中间预测是：候选在真实恢复后的有限机会中产生更多服务量，而不只是多完成一次模式切换或更快出现一次微小正值。
+
+但事件由策略自身决定。候选和对照的退出时间、位置与入选世界可能不同，所以这一条件读数不是相同状态上的因果对照。它用于解释完整包结果，而不能证明“恢复能力”中介，更不能把联合服务归属于刚恢复电量的成员。世界均权的完整终点仍覆盖所有未激活、未退出及不利世界。
+
+主读数仍是完整任务的实际服务
+
+对每个世界报告
+
+S=
+t=0
+∑
+L−1
+	​
+
+q
+t
+	​
+
+,
+S
+ˉ
+H
+	​
+
+=
+3000
+S
+	​
+
+,
+
+其中 L 为真实 episode 长度。累计交付量使用实际 delivered throughput 及原生时间步长，不用链路容量替代。若提前结束，实际每步平均另报；共同计划窗口的分母避免把“较早停止服务”误读成较高服务效率。
+
+主要比较是最终 S
+A
+	​
+
+−S
+B
+	​
+
+，并列读取原生 J、返航成本、零服务世界、全部损失、真实最低电池及尾部、cutoff／depletion、消耗与输入能量。仅 J 或充电量上升不支持服务修复。风险与服务发生冲突时，报告幅度和任务范围，不事后发明一个综合分数消掉冲突。
+
+相对胜出与自身学习分开
+
+用真实共同初始化在 F 下的服务 S
+0
+	​
+
+，分别读取
+
+I
+A
+	​
+
+=S
+A
+	​
+
+−S
+0
+	​
+
+,I
+B
+	​
+
+=S
+B
+	​
+
+−S
+0
+	​
+
+.
+
+S
+A
+	​
+
+−S
+B
+	​
+
+=I
+A
+	​
+
+−I
+B
+	​
+
+ 只是恒等式，不是初始化与学习的因果份额。**候选仅比一个退化的对照少退化，不足以称作有用服务学习。**候选自身改善、对照也改善而候选更多，是更有力的有限用途模式；即便如此，也不证明普通基线已经充分调优。共同初始 F 面板正是为这个区别付出的必要评价成本。
+
+hmasd-pro-question-usa-feedback… +1
+
+六、一对训练能改变什么，以及什么结果应结束这个配方的投入
+
+先于结果的完整预测是：A 相对共同初始化有实际服务学习，并在共同 F 下超过新训练的 B；恢复机会中的服务量与完整累计服务方向相容，原生 J／风险没有出现抵消用途的严重代价。
+
+最强的相反预测是：两臂即使都学到服务，F 条件训练仍没有额外累计服务价值；或者其局部恢复改善被较差的其他时段、几何布局或风险尾部抵消。也可能 F 条件训练只是改变了惩罚规模和优化过程，而没有改善服务。
+
+固定终点观察	应怎样更新判断与投入
+A 有自身服务学习，超过 B，完整服务／J／风险相容，中间读数也有支持	保留这一有限训练包及“与恢复假说相容”的解释；不宣称机制已识别，不自动追加复制或确认。
+两臂都学习，但 A 没有值得保留的额外服务增量，或 A 服务更差	结束这一固定 180k 配方的继续投入。保留普通学习和 F 的已有用途；不将小差说成等价，也不自动延长训练。
+只有 J／返航成本／充电输入改善，累计服务不改善；或相对胜出而候选自身也没有有用服务学习	不接受所提服务修复。保留真实风险收益或相对退化事实，但不据此继续买同一配方。
+恢复窗口看似更好，完整任务服务或风险明显更坏	局部预测不够形成净用途；不能只选择有退出机会的世界。结束该用途扩展。
+完整服务确有有用增量，但恢复窗口预测不支持	保留包收益，削弱“更会充电后恢复”的解释；收益也可能来自提前规避、保持布局或其他共同变化，不补做控制来追认机制。
+
+如果训练中 F 很少激活、几乎没有恢复后的有效提议机会，或者大量机会在终点删失，这会限制对恢复假说的检验，不是活跃机制的负效应证据。但“未充分区分”也不产生追加预算的义务；在固定成本下没有获得值得继续追问的读数，可以有理由结束该配方，而不延长到它出现阳性。
+
+一对训练只能提供一个匹配训练实现下的探索结果。40 个世界、多个恢复区间和更多时间步都不能增加训练样本数，也不能通过 world bootstrap 变成训练总体精度。新世界避免重复使用 B07 结果，却不把这次结果驱动提出的假说和单对训练升级为确认。
+
+hmasd-pro-question-usa-feedback…
+
+七、成本：这不是免费接线，也不需要先购买额外诊断批次
+
+本建议保留原提议的支出边界：
+
+工作	固定规模
+新训练	2 fits，合计 360k 实际团队 transitions
+共同初始 F 评价	40 个 episode，最多 120k transitions
+两个最终 F 评价	80 个 episode，最多 240k transitions
+合计	360k 训练＋最多 360k 评价＝最多 720k transitions
+
+名义训练回合为每臂 60 个，评价为 120 次 episode；提前终止时评价 transitions 按实际计，不通过补跑填满。没有另购 O 部署评价、旧制品评价、probe、阈值扫描或训练中间 checkpoint 面板。训练阶段已有 rollout 读数和最终轨迹可以支持上述诊断。
+
+B07 的 480k 固定策略评价用了 230.542804 runner 分钟。按同吞吐缩放，360k 评价约为 172.9 分钟的工作量尺度，但新策略访问、资源并发和实现会改变它；尤其不能据此给出新 fits 的校准耗时。学习 wall、接线与检查、必要审阅、轨迹保存、收取和完整判读仍有未知成本。
+
+hmasd-pro-question-usa-feedback… +1
+
+支持支出的理由，是这一次训练比较可以直接改变是否保留“训练时接入 F”的决定，而不是成本很小。若接线实际要求更换信用估计器、扩大信息接口或重写一套循环学习算法，原先“小型匹配比较”的成本前提就变了，不应把那些工作默认为本建议的一部分。
+
+八、来源范围与未完成的独立核验
+
+本答复已读完整附件，包括新问题、完整 B07 结果与全部 80 个配对世界、所附治理／方法／共享背景，以及前次完整 B06 Answer；并按指定版本读取了 GitHub 上的新问题和相关 notebook、H3000 采纳条目、共享研究状态、反馈与继承训练代码、B04/B05 N 的目标配置，以及 B07 配置和启动／退出记录。推理依据区分了本次 e49da2a…、治理方法 63e3824… 与冻结实现 47d56c9…，没有用最新可写分支替换它们。
+
+有两类限制需要保留。
+
+**其一，GitHub 大文件读取限制使我未完成约 2 MB summary.json 正文的逐项核对。**文件正文接口没有返回可读内容，另一路报告过大或不支持；blob 路径取得的是 Base64 响应，不能据此声称完成了摘要审计。这里的详细结果依据已完整读取的结果条目与全部世界表，而不是我重新生成的机器汇总。
+
+**其二，没有独立取得并重算仓库外 NPZ／checkpoint。**37402 项检查、能量闭合与全部前缀匹配，是所读 DM 核验的结果，不是本次重新执行的核验；完整 observation／state／GRU 和成员交付归属未保存，也不能补成已知事实。新训练实现尚不存在，因此以上给出的是应保持的语义和可执行范围，不是对新 collector／learner 已通过验证的声明。
+
+hmasd-pro-question-usa-feedback… +2
+
+这些缺口限制独立数值审计和机制归因，但已有完整结果记录足以支持这次有限投入建议。
+
+最终判断：选择这一次两臂、同部署 F 的真实学习比较，而不是先增加模块或继续堆叠旧轨迹诊断。它应以候选自身有用学习、对新普通＋F 对照的累计服务增量，以及完整风险与损失共同决定去留。若只有惩罚节省、更多充电或局部窗口变好，就结束这一固定训练配方的继续投入；若完整用途成立而恢复解释不成立，保留用途、修订解释。最终选择仍由 DM 作出。
+
+
+## 2026-09-24 — Feedback-training advice saved from chat; fixed B08 A/N comparison and L0
+
+### Delivery, complete reading and adoption
+
+The new question at `e49da2a9d2a69bb6750afa5ecadc372e36ebe848` was sent once with key
+`hmasd:a1a242eb51cff8e9a319c7e277e036505e6369827198029853ebf134aaee2f5f`, 6 Pro, exact attachment
+seen. The READY observation was generation97, wake `2386ed41-343b-47a2-a2c7-a12abce82ccc`, event
+`f134ff54a9825ff602ec491b`; it was consumed at generation98 after full reading. The complete
+answer above is **saved from chat**, verbatim: body9246 characters, body SHA-256
+`f3dbd881ff6e86cc574a24d99e48aec4485a19a200c239026c264b16a10e286e`; saved file9247 characters,
+21,960 bytes including final newline, file SHA-256
+`61534b7066f88ff7131e34585569de9e7160b8e47e2bd793ff1f450aa89f3533`.
+The deliver verifier returned NOT_DELIVERED. The cited `ebc62816e1aabd4569622ac50ab2c0a81ab69689`
+is the unchanged target blob, not an Answer commit; the actual branch still held the unique
+empty subsection and unchanged question. Pro explicitly reported no write capability and
+relinquished it. No answer or other author's edit was overwritten. No operation tab remains;
+14 unrelated targets were preserved. Private conversation details remain in local operation state.
+
+The DM read the full answer. It supports the proposed two-fit comparison, with MATERIAL_DISSENT:no,
+and makes two useful refinements: 2 synchronous lanes ×3000 collection steps ×30 joint updates,
+and a first-recovery opportunity description with actual exposure and service, not an almost
+saturated indicator of any eventual service. I adopt both. The current source confirms that
+`make_config` binds both native episode_length/max_steps and collection length explicitly;
+B04 calls `clear_buffers` after updates, and that method resets temporal bookkeeping. B08
+must distinguish buffer clearing from physical termination and preserve live state if a native
+early ending offsets a lane from the fixed collection boundary. `energy_aware.step` can end
+when all batteries are exhausted without charging, so this case is reachable, not assumed away.
+
+The historical N objective is native lambda_return=2 plus zero extra penalty coefficient, as
+verified in both saved N configs and B04 code. The current Pro text contains flattened math
+and citation labels from browser extraction; it is preserved rather than silently repaired.
+Implementation keeps the existing native proposal/log-prob/PPO contract, including the native
+new-versus-behavior probability ratio; the flattened formula is not executable authority. I do
+not use the unlinked clipped-action literature mention to claim an unbiased MARL estimator.
+Pro could not independently audit the large summary body or off-Git NPZ/checkpoints. Its advice
+uses the complete result entry and source code; our prior direct numerical reading remains the
+empirical evidence, not a newly independent validation by Pro.
+
+Shared background was refreshed from published main
+`1d9196d76d4d58e0d138d2094923a03510df89a8`, especially topic6's B03–B07 service/risk evidence.
+Owner pause is lifted and this direction/lead remains active. F's finite energy/service
+usefulness is strengthened, but representation or recurrent-history deficiency remains
+unidentified. The new B15 confirmation uncertainty in the shared programme is consistent with
+keeping actual training units separate from worlds; it neither vetoes nor confirms this S7
+one-pair development test. The useful ordinary baseline must get the same H3000 learning
+opportunity and F deployment. Reusing old H1500 weights as the main comparator would not test
+this choice. No learned predictor, coefficient4 repair or extra deployment control is selected.
+
+I choose this one new training pair because it directly tests whether learning in the actual
+F-conditioned process improves finite native service beyond fresh ordinary learning plus F.
+The strongest alternative remains keeping B07 and spending no fits. A new module or more old
+trajectory descriptions would not answer the same learning question. This is a selected
+exploration, not confirmation, a diagnosed history mechanism or an extension of B07.
+
+### Fixed scientific scope and cost, before implementation or results
+
+Object `UAV-SERVICE-FEEDBACK-TRAINING-B08`, direction `uav_service_auxiliary`. One new matched
+training block, seed **915031**, fixed order **N then A**, both complete HMASD:
+
+| Arm | Training action path | Evaluation action path | Actual training budget |
+| --- | --- | --- | --- |
+| N | Native actor proposal into the original adapter/environment | The unchanged B06/B07 F | 2lanes ×3000steps ×30rollouts =180,000 transitions |
+| A | Same actor proposal, then unchanged F, then original adapter/environment | That same F | 2lanes ×3000steps ×30rollouts =180,000 transitions |
+
+S7-S2, N8, k10,30users, native H3000 from reset; complete high/low actor/critic and both
+discriminator learning, native mixed rewards and entropy terms unchanged. Both use native
+return coefficient2, extra training-cost coefficient0. No auxiliary head, extra actor input,
+loss mask, estimator change, mode feature, station scheduler, altered physics, coefficient
+search or best-checkpoint selection. Both receive identical ordinary training/tuning rights.
+The only between-arm treatment is whether F transforms commands during training.
+
+Use 2 synchronous training environments, lane initial seeds915031 and915032 and each native
+environment's continued seeded reset stream. Both arms start with identical newly initialized
+parameters, model buffers, normalizers and required evaluation state; seed_everything is
+explicit for each arm and equality is checked over actual artifacts, not just seed labels.
+Both get 30 joint update phases containing6000 transitions each, with the same original PPO
+and discriminator epochs/minibatches/normalization settings. Retain actual optimizer counters,
+parameter displacement and per-rollout learning curves. The changed lane count and horizon are
+common to both arms, not claimed equivalent to old4×1500 training.
+
+Fresh fixed evaluation worlds are **development941001–941008** and **final942001–942032**.
+No such seed occurs in this direction's prior code/config/NOTES search. One actual common
+initial F evaluation (40episodes, at most120k transitions) and both fixed final endpoints
+(40episodes each, at most240k combined). The final32 panel is the primary descriptive package
+comparison; development8 is reported separately. No intermediate checkpoint panel or O
+readout, no old-checkpoint panel, no world selection or extra random streams. Reuse the B07
+native deterministic evaluation rule and RNG isolation, with common policy initialization seed
+915031. The common initial evaluation is reused only after both arms' actual initial state
+matches; mismatch is an implementation failure, not a second quietly added panel.
+
+The proposed single admission-guarded batch writes one root
+`runs/uav_service_auxiliary/b08_an_915031_a01/`, a common initialization/evaluation and separate
+N/A fit records. Fits started are recorded per arm; an error stops the dependent batch and
+retains partial output, with no automatic retry. Sequential execution is an engineering
+choice, not an outcome-based choice of whether A runs. A is the fixed second arm when the
+unchanged first arm completes technically, irrespective of its scientific score.
+
+**Planned: 2fits at180k each =360k training transitions, plus at most360k evaluation transitions;
+120 evaluation episodes and at most720k total transitions.** A nonterminal training trajectory
+continues across a collection/update boundary: no invented environment, F, skill or GRU reset.
+Native terminal/truncated lanes reset through the original path; true early endings, episode
+lengths, ended episodes and straddling lanes are counted. Evaluation attempts stop on the
+native ending; no replacement or top-up toH3000. Nominal no-early-end training is60 full
+H3000 episodes per arm, not60 independent training seeds. One pair gives training n=1 per arm.
+
+Execution node is configured `wsl_4070`, CUDA FP32, TF32off,4Torch threads, after exact-source
+publication and fresh native admission. Actual fit/phase wall, CPU and runner peak RSS are
+measured. B07's throughput would scale360k fixed-policy evaluation to about172.9 minutes;
+that is an uncalibrated workload scale, not new learner wall or a stop rule. Integration,
+checks/review, actual training wall and collection support remain unknown. No speed claim.
+No additional fits, threshold/horizon changes, tuning, replication or confirmation are bundled.
+
+### Native readings, opportunity description and interpretation
+
+Retain full raw J, cumulative actual QoS S, S/3000 planned-window service, actual-step mean,
+actual delivered volume using native timestep duration, native costs, zero-service worlds,
+all signed per-world N/A effects, min/P10 battery, cutoff/depletion, consumed/input/stored
+energy and partial horizons. Report final A−N and each arm minus the **actual common initial**
+service/J. A beating a deteriorated N while itself failing to learn useful service is not a
+service-learning success. Do not pool development and final or count worlds as training n.
+
+The intermediate description uses at most one anchor per world: the first chronologically
+completed F interval in which a member received actual charger input, gained positive net
+physical stored energy from first input through exit, and exited F. Break simultaneous exits
+by member index. The exit-step decision is the anchor; the window covers that transition and
+at most the next249 transitions, capped by the real ending. Record member, interval, input,
+net stored gain, anchor time, time remaining, actual e<=250, cumulative QoS/delivered volume,
+positive-service steps, zero-service intervals and re-entry into F. Distinguish service already
+present immediately before the exit from new positive service afterward; step0 has no prior
+transition and is marked unknown. No joint delivery is attributed to the selected member.
+
+Include denominators for F activation, input, qualifying exit, no input, input without qualifying
+exit, no positive-gain exit, and insufficient residual window. Never impute the unobserved
+part of e<250 as success or failure. Do not drop a world or re-entry because it worsens the
+window. Every unfinished feedback interval is right-censored. Training additionally records
+actual per-member proposal opportunities passed by F (for N, all proposals pass this external
+controller), native wrapper changes separately where available, and actual post-recovery
+opportunity exposure. Restored proposal transmission is not guaranteed physical execution.
+The world-uniform complete task result includes all no-opportunity and adverse worlds.
+
+Prediction: A has native service learning from the common initialization and exceeds N under
+common F deployment; post-recovery service quantity is directionally compatible, with full
+J/risk and loss tails retained. Event time/position/eligibility are policy-dependent, so that
+window is descriptive support, not matched-state causality or a learned-recovery mediator.
+A true full-package service gain without window support retains the package observation but
+weakens that recovery explanation. Only risk penalty, charger input, entropy or window gains
+without complete-task service learning do not support the proposed service repair. Adverse,
+small or mixed effects can end this fixed recipe without proving equality or universal harm.
+Rare activation or censoring limits discrimination, not proof of an active mechanism's failure;
+it does not automatically authorize longer training. No arbitrary new significance or MEI
+gate is imposed on this single-pair exploration; all magnitudes and practical costs are read.
+
+### L0: bounded candidate implementation and checks
+
+Deliver a fixed B08 native training/evaluation batch under
+`experiments/candidates/uav_service_auxiliary/b08/`, one admission-guarded entry
+`scripts/run_uav_service_auxiliary_b08.py`, and focused tests under
+`tests/experiments/candidates/uav_service_auxiliary/b08/`. These are the only executable edit
+paths. Reuse B01/B04 configuration/learning helpers, unchanged B06 feedback and B07 physical
+telemetry/evaluation where they fit. Do not modify frozen B01–B07, shared HMASD/learner/env,
+transport, launch kernel, control files or existing results; report a necessary shared repair
+before broadening this implementation. DM owns NOTES, publication, scientific choices and launches.
+
+Keep the actor proposal and its existing sampled log-prob/step_data coupled through storage;
+keep the submitted F command separate, and store actual executed reward/next observation/state
+through both hierarchy returns, discriminator input and subsequent recurrent history. No shadow
+reward/trajectory or treating a forced command as a sampled proposal. F observes only its
+unchanged legal fields, uses unchanged mode thresholds/closest-station command, and resets
+only on genuine native environment resets. F state is not an actor feature. Native wrapper
+energy/backhaul changes remain in the actual path. Snapshot/clear only genuinely rollout-scoped
+storage at updates; preserve live-lane temporal state when an episode straddles a boundary,
+without carrying stale buffer indices or double-counting a closed high-level transition.
+Any inability to maintain this ordinary interface is a concrete engineering issue to resolve
+before launching, not silent introduction of a new credit rule.
+
+Output compact source/config/native status, per-fit counters/curves, per-world readings,
+initial-state identities, endpoint comparisons, opportunity denominators and costs in summary.
+Keep necessary checkpoint, per-transition training proposal/submission/ends/reward/storage
+telemetry, physical state and evaluation trajectories off Git under the run's raw/ or equivalent
+subdirectories, with bytes and hashes in summary. Retain all failures. A large interval/trajectory
+array does not become compact merely by being placed in summary.json. Partial output and native
+exit evidence remain recoverable. Do not mutate a runner summary during publication.
+
+Tests must exercise the real collector→storage→update path with active F: proposal/log-prob
+consistency, actual reward/next-state, genuine updates of all learner groups, F mode continuity,
+normal and early-end reset handling, and preservation across a nonterminal collection boundary.
+Compare training configuration rights exactly; test common initialization and evaluation
+isolation/RNG preservation. Test first-exit anchor/tie/censor/re-entry/zero-service cases against
+independent known arrays and actual delivered-time units. Preserve existing raw energy-closure
+checks and native H3000 semantics. Tests are engineering fixtures, not outcome-bearing pilot
+fits; they own and clean scratch through pytest. Use existing local scientific venv; install
+nothing. Independent engineering Reviewer checks the resulting high-risk collector/evaluator
+and boundary changes; the DM accepts. No result-bearing launch before exact reviewed inputs
+are committed, pushed and admitted on the actual configured node.
