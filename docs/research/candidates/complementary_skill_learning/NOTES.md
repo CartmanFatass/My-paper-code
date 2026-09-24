@@ -9665,6 +9665,300 @@ fit/non-fit cost. No fixed number of alternatives and no forced new idea. Cite t
 actually read and identify any decision-critical unread gap. Include MATERIAL_DISSENT yes/no.
 
 ### Answer
+GitHub 读取可用，但本会话提供的 GitHub 操作均为只读，未发现可调用的文件更新或提交接口，因此未能写回。 我已核对最新目标，本题的 ### Answer 仍为空；没有发出写请求、改动仓库或生成 Answer commit。以下给出完整答复。
+
+Answer
+一、建议：保留这一次 H/R 比较，研究个体上下文持续方式的部署后果
+
+MATERIAL_DISSENT: no。 我推荐题面这一个零-fit 比较：仅使用 B07、B08 的两个 final U，保留原四流、原世界、全部八个 R 重现面板和八个 H 面板。总计 0 新 fit、256,000 个评价 team transitions，不增加训练、标签搜索、其他持续时间、S 面板或新世界。
+
+它值得回答的判断是：
+
+对这两份已经学到服务的 U 控制器，继续每十步接受独立重抽的个体上下文，是否比保留开局上下文更有用？
+
+这不是继续检验熵修复，也不是测量技能训练是否必要。它可以改变两个具体判断：是否把 H 保留为这些现有资产的部署选项，以及能否继续把它们当前的用途描述为依赖持续重抽上下文。
+
+最强的停止理由是：即使成功，这仍可能只是一个已经弱于其他方案、只在旧 S1 世界上测量的 U 的局部部署修补。 它不能解释 E/U 的训练差距，不能区分普通循环控制与技能训练的贡献，也不直接测得计算节省。若继续研究只是为了不断找到某个有利的同库干预，那么这个实验虽然便宜，也不值得做。
+
+我仍选择本次比较，因为它没有被现有结果回答，而且处理对象明确：在没有学得高层选择的 U 中，干预输入上下文的时间结构，同时保留已训练权重和真实反馈控制。 正结果可以给出一个有限、可执行的部署替代；负结果可以否定这个具体简化，而不必先解决全部训练机制。已有两份真实 U 和完整原 R 轨迹，使这个有限问题无需另买学习或搜索才能观察。这个理由足以支持本次有界比较，但不支持一条自动延伸的诊断路线。题面已经明确了这一用途及其局限。
+
+hmasd-pro-question-b08-renewal
+
+二、B08 的结论保留，不把 H 当成新的熵修复出口
+
+B08 加强了有用学习和条件性 E/U 方案收益的观察，削弱了零高层熵激励具有可重复额外价值的解释。E-S−U-R 仍为 +0.029553306358 J、+0.53275 人/步，但 E-S−M-S 变为 −0.014004815412 J、−0.43340625 人/步；E 的共同输入熵确实再次下降，学得读出增量 G_E、I 却仍为负。因此，不能仅由正 P 给去掉熵激励记功，也不能将中间变化本身称为修复成功。
+
+hmasd-pro-question-b08-renewal +1
+
+这个正 P 也不是无代价的服务改善。它在九个世界均值上损失人数，最差少 1.773 人/步；128 个同编号流的嵌套 episode 中有 50 个损失人数，最差少 4.804 人/步。D 的平均质量以及全部 32 个世界的质量都更低，不能用另一个有利分量掩盖。B07 的正 D 与 B08 的负 D 分别保留，不以两块池化均值挽救反号。
+
+hmasd-pro-question-b08-renewal
+
+U 则仍是严肃的学习对照。B08 U 的 R0 初末改善为 +0.264058324954 J、+15.55275 人/步，两项都在全部 32 个世界为正；B07 U 对应改善为 +0.154306875414 J、+10.5899375 人/步，31 个世界为正，并保留一个不利世界。它们不是冻结的随机低层动作策略，也不是因为没有学好才值得被简化。
+
+hmasd-pro-question-b08-renewal
+
+hmasd-pro-question-complementar…
+
+这些结果没有告诉我们持续重抽对 U 的部署是否有益。此前主要比较改变训练制度、熵激励，或者在另一份 bank 上比较学得采样与 greedy；它们不提供固定 U 的 H 反事实。本次即使得到正结果，也不应修改 B08 的 P、D、G_E、I，或把新的 U-H 填回旧主要比较来重新判读 B08。
+
+前次完整 Answer 已覆盖 P 正／D 负的结束分支，我维持该处理。新 H/R 的价值须由自身问题支持，不能从“更大的技能问题还未解决”直接推出。
+
+hmasd-pro-question-b08-renewal
+
+三、H/R 真正改变的是时间依赖，不是上下文类别或反馈能力
+1. 固定个体标签，不等于固定动作
+
+附件所附冻结 evaluate_panel 在 R 分支独立生成 team 与 individual 标签；实际低层调用为：
+
+low_actions(agent, observations, individual, hidden, deterministic=True).
+
+low_actions 将当前局部观测、个体标签和进入的循环状态交给低层策略，返回动作及下一循环状态。team 标签不直接进入这次低层调用；环境执行也接收动作，而不是技能标签。B08 的适配器保留了 B07 的这一评价路径与原评价地址。
+
+hmasd-pro-question-b08-renewal +1
+
+因此，H 中仍然是：
+
+(a
+t
+	​
+
+,h
+t+1
+	​
+
+)=F
+θ
+	​
+
+(o
+t
+	​
+
+,z
+0
+	​
+
+,h
+t
+	​
+
+),a
+t
+exec
+	​
+
+=clip(a
+t
+	​
+
+,−1,1).
+
+观测和循环状态不断变化，动作也可以持续适应环境。H 不是开环动作、冻结 hidden state、同一个动作保持 500 步，也不是把六个成员强制赋予同一标签。它保留每个成员各自开局抽到的标签，并保留六类 FiLM 参数及既有训练历史。
+
+我支持只保持个体输入、继续生成原 team 序列。这避免把一个与实际动作路径不一致的“移除团队协调器”叙述带入比较。这个代码事实仅适用于当前冻结 R 执行路径，不能反推 team 标签在训练时没有作用。
+
+2. 两种法则的标签边际可以相同，闭环输入分布却不同
+
+按题面法则，令 q
+j
+	​
+
+ 是第 j 个 k10 机会生成的六成员均匀个体标签向量：
+
+z
+j
+R
+	​
+
+=q
+j
+	​
+
+,z
+j
+H
+	​
+
+=q
+0
+	​
+
+,j=0,…,49.
+
+在概率法则层面，H 和 R 的每个固定时点都可以有相同的均匀标签边际；但 R 不断引入新的随机标签，H 在开局后完全持续。这不是说四条实际轨迹的标签直方图会相同，也不是说标签与观测、hidden state 的联合分布相同。 在 H 中，开局标签已经影响此前动作与状态，后续观测分布自然会与它相关。
+
+这说明比较有辨别价值：它不必改变标签数、网络形状或训练目标，便能直接改变上下文的时间相关性。不过，结果识别的是这一持续规则的完整闭环后果，不是一个孤立的“切换次数效应”。物理轨迹、服务分配、干扰以及循环状态都可能随之变化。
+
+3. 长时间保持是实质性分布变化，不能仅列作附带统计限制
+
+U 在每十步重新抽取上下文的制度下训练。H 将整个 episode 置于一个开局向量之下，可能产生训练中少见的长持续输入—循环状态组合。所有单个标签仍合法，并不意味着这种时间结构已得到相同训练曝光。
+
+因此，H 受损至少兼容两种不同解释：持续重抽本来就有利于该控制器的行为；或者控制器在原重抽训练分布下学得不错，却不适应这种长持续部署。这两个解释在本次比较中不能分离。反之，H 获益也可能来自较长承诺、偶然有利的初始上下文或新的闭环访问轨迹，不能仅凭获益断言“原重抽引起了有害抖动”。题面已经正确保留这一竞争解释。
+
+hmasd-pro-question-b08-renewal
+
+这种限制不使部署比较无效。部署决策可以依据规则的总后果，而不必先识别总后果中的每一条路径。 但它限制了结果的外推：H 失败反驳的是这个开局保持策略；H 成功提供的是这些权重下的有限替代，不是固定上下文训练充分性的证明。
+
+四、为什么 B10、B16 使这个问题更明确，却不能提前回答它
+
+我已读取指定版本下 DM1 的 B10 完整结果。它保留 learned H6 的真实开局分配、继续局部反馈，并在 N4/N6/N8 的均值上改善 J；但 N8 的两个世界仍分别少服务 5.302、3.198 人/步。实际动作及轨迹发生变化，且有 raw 动作差被裁剪吸收的情况。B10 支持“持久化部署值得具体测量”，并反对仅看均值推广替代；它没有在本题 U 上执行 H。
+
+本题相对 B10 的实质差异在于：U 的开局和后续上下文本来都是外生随机的。因此，H 的后果无需混入“保留 learned 开局协调，却去掉 learned 后续选择”的叙述。它仍可能保留训练形成的不同条件行为，但不把开局向量的来源称为学得协调。
+
+B16 则给出了三个有用的普通局部循环 L 实例，削弱了以较弱普通对照上的差距主张技能用途的理由。但 L 的单类别可训练 FiLM、task-only 目标、输入和训练条件不同于当前六上下文、混合奖励的 U；它不是 U 的匹配删标签对照。其 N6 反例与局部损失也保留，不能只引用 N8 平均优势。
+
+hmasd-pro-question-b08-renewal
+
+B17 已固定了这些资产的新世界／N 部署研究，属于 DM1 的独立工作。本题不需要再购买一套 L/H6 比较，也不应等待其结果才能处理 U 的这个窄问题。共享证据在这里的作用是防止重复研究与夸大解释，不是提供一个免费、已匹配的 H/R 结果。
+
+hmasd-pro-question-b08-renewal
+
+五、保留原设计，重点保护“生成的建议”和“实际交付的上下文”之间的区别
+
+我不建议删掉一个 bank、挑一条流或先测一个标签。两份 U 是已经存在的真实学习产物；全部四条流减少对某个开局向量的选择依赖。保留全部八个 R 重现，是这次跨资产恢复和新评价路径的一致性检查，而不是给所有未来研究增加一个同样规模的前置要求。
+
+估计量与配对
+
+对 bank b∈{B07 U,B08 U}，世界 w，原流 r，令
+
+d
+bwr
+J
+	​
+
+=J(H
+bwr
+	​
+
+)−J(R
+bwr
+	​
+
+),
+
+并按题面聚合：
+
+Δ
+b
+J
+	​
+
+=
+32
+1
+	​
+
+w
+∑
+	​
+
+[
+4
+1
+	​
+
+r
+∑
+	​
+
+d
+bwr
+J
+	​
+
+].
+
+服务人数及其他原生分量采用同样顺序。两个 Δ
+b
+	​
+
+ 分别报告，不定义一个池化成功指标。 这里的 H/R 共享真实开局标签、初始世界和建议随机流，具有明确的区组内配对基础；它不同于此前 S 与 R 仅有同编号、但使用不同生成器的比较。不过，共同随机输入仍不保证方差必然减小。
+
+第一段十步必须一致。此后两种模式在各自状态上继续执行；不得用 R 的观测或 hidden state 喂给 H，也不得为了“控制其他变量”强行让轨迹继续一致。否则得到的就不是可执行的 H 部署。
+
+四项关键执行含义
+
+随机流继续完整生成。 在全部 50 个机会，保持 team[32] 后 individual[32,6] 的原顺序和生成器；H 只是拒绝采用后续个体建议。不能停止后续抽样、改变抽样形状或跳过 team 抽样，导致后续外生输入错位。重抽也允许抽回相同标签，不能强行制造每次切换。
+
+hmasd-pro-question-b08-renewal
+
+建议与交付记录分开。 后续建议仍来自均匀因子，其建议 log-prob 为 −log6；但 H 已知开局标签后的交付是确定性持续，对被持续交付标签的条件概率为 1。不能把建议概率记录成 H 每次交付都是新的均匀选择，也不能由跨 episode 的标签直方图推断 H 的逐机会条件熵。这不要求增加熵诊断面板，只要求日志不误述实际规则。
+
+循环状态必须真实持续。 两模式都在 episode／面板开始按原规则重置，而不是每逢 k10 重置。标签保持不允许顺带冻结或重置 GRU。要保留原始均值动作与裁剪后实际动作，避免把只发生在裁剪外的差异称为物理行为改变。附件的冻结路径明确区分了这两种动作。
+
+hmasd-pro-question-b08-renewal +1
+
+恢复身份与零更新不靠最终均值判断。 两个 checkpoint 必须对应原 U，而不是为了适配新代码重新构造了相似策略。原 R 的数组、世界、流、动作及原生结果按原要求重现；H/R 的参数、normalizer、训练状态不得发生更新。未解释的重现失败限制相应比较，保留错误和已发生成本，不放宽标准或将其记为科学负结果。对这些新恢复／评价路径作针对性独立 review 即可，不需要重新认证整个 B01–B08 历史。
+
+hmasd-pro-question-b08-renewal
+
+六、前瞻预测和反结果：不把任何变化都变成成功
+
+我保留题面的可证伪工作预测：两份 U 各自的 H−R 平均 J 与服务人数均为正。 这是待检验的方向，不是从 B08 或 B10 推导出的高成功概率。没有依据承诺效应量、每个世界都改善，或 quality／height 同时沿某个固定方向变化。
+
+应区分三层读取。
+
+处理发生：后续建议仍生成，但交付个体向量保持开局值。这是实现条件，不是用途证据。
+
+行为后果：在标签确实不同后，原始动作、实际动作和后续状态何时出现差异，差异是否被裁剪吸收。可以从原定保留轨迹读取，不需新增模型评分或环境分支。标签不同不必造成动作不同；动作不同也不证明原来存在“无用抖动”。
+
+原生用途：完整 500 步 J、人数、quality、height 及全部不利 episode。只有这一层能决定 H 是否是值得保留的部署选项。
+
+观察	应改变的判断
+两库的 J／人数均有有用改善，同时完整保留局部后果	支持 H 作为这两份资产的有限部署替代；削弱它们这些平均用途必须依赖持续重抽的解释，不证明训练期重抽无用
+两库均受损，且处理与执行路径正确	反驳题面的改善预测，保留 R 作为这些资产的工作规则；不区分重抽本身有益与 H 的离训练分布问题
+一库获益、一库受损	两库共同改善预测失败。保留资产依赖性，不用池化均值、挑 bank 或挑流构造“稳定简化”
+J 上升但人数下降，或均值改善伴随重要局部服务损失	记录用途取舍，不自动替换 R；不能在结果后创造服务损失容忍值使 H 通过
+差值小、跨流混合或不足以改变用途	本次可结束为未决；不宣称等价／非劣，不追加开局向量、流或持续时间以寻找更清楚结果
+
+如果交付标签大量改变而物理行为几乎不变，这也是有限信息：当前部署路径对这组标签变化的响应较弱。它不能证明六类参数相同、所有状态都不依赖标签，或训练时上下文只是正则化。
+
+四条流也只为每个世界提供四个开局向量，不是穷举开局分配、最优持久上下文或标签总体平均的精确测量。512 个 episode、两个模式和反复读取都不增加训练样本量；这里是两份既有训练资产上的新部署观察，零新增训练实例。两库使用相同世界和流，还保留共同评价条件的依赖，不能称为两个完全独立的泛化验证。
+
+hmasd-pro-question-b08-renewal
+
+若 H 改善且局部代价明显，最诚实的结论可能仍只是“有一个具体部署取舍”，而不是全面替代。这个结果依然可以有信息价值，但不应被用于事后选择哪个世界用 H、哪个世界用 R，再报告一个未经执行的组合控制器。
+
+七、成本和最强替代：保留本次完整暴露，不预购下一轮
+工作	新 fit	面板／episodes	Team transitions
+两库×四流的原 R 重现	0	8／256	128,000
+两库×四流的 H 新执行	0	8／256	128,000
+合计	0	16／512	256,000
+
+这对应 1,536,000 agent transitions、8,000 次 32-lane 低层批量前向、800 个计划重选抽样批次。其中一半环境步购买恢复一致性，只有 H 部分增加本题未见的部署结果。没有候选枚举、嵌套轨迹搜索、额外训练更新或共同输入评分。
+
+hmasd-pro-question-b08-renewal
+
+两份 U 各自原来的 360k 训练是已有资产成本，不记作本次新 fit，也不能把它们描述为没有训练成本的普通控制器。checkpoint 加载、环境构造、轨迹保留、数组比较、实现／review 和完整结果读取都有非-fit 成本；新增墙钟和共享节点占用尚未测得。
+
+尤其，本设计没有测量计算简化。R 本就不作 learned coordinator 选择，H 又保留全部随机建议生成和每步低层前向；不能从“少采用标签变化”推出省算力、低时延或省电。它简化的是交付的上下文序列，不是已证明更便宜的执行系统。
+
+最强替代是现在结束这条同-S1 诊断投入，新增科学暴露为零，保留已有 E/U 方案收益及熵增量反转。我不另推荐固定标签训练、持续时间网格或更多旧 bank：它们要么改变问题，要么尚无足够证据说明能比当前比较更有用。
+
+我选择本次 H/R，而非停止，是因为其两种相反结果都会改变一个真实的固定资产部署判断；不是因为它能解决整个互补技能问题。 停止理由仍然有力：若研究目的只接受新任务泛化或训练机制归因，而不再关心这些 U 的部署用途，那么此项信息就不值其成本。当前题面明确保留了这个用途，所以我判断这一次有界购买仍值得。
+
+完成预定十六面板后结束本批。正结果不自动产生固定标签训练，负结果不自动产生驻留时间搜索，混合结果不自动产生更多流。这里结束的是这项诊断购买；任何更广续作都须有能够改变的具体判断，而不是为了维持方向活动不断追加实验。
+
+八、已读来源与仍未做的直接核验
+
+本答复的科学输入为 9b97ec121174c74a68694b223a70983fe549ff32；共享背景及 DM1 直接证据按 5a99d6075a6cae539c7b05eb5fba88d1e6f6c499 阅读；冻结执行含义保留 B07 的 455536ebd0e6e23466ed40244bcf1e5ab6462826 与 B08 的 c9217f0ae5b32aa2a13e228cc87899f545a0111b。最新分支只用于 Answer 位置核对，没有替代固定推理输入。
+
+hmasd-pro-question-b08-renewal +1
+
+已阅读全文附件，包括完整 B08 结果、前次完整 recurrence Answer、所附共享背景、治理／方法及冻结 R／低层接口代码；补读了 repository 中 B08 前瞻与 M/E 完整条目、相关历史完整结果，以及 DM1 的 B10、B16 完整结果和 B17 采纳范围。直接读取了 B08 三臂 config、summary 的身份／暴露量字段、native status 和 exit witness，以及冻结 B08 地址适配器；工程方法按当前指定版本读取。共享背景中旧的 B08 进度没有被误用为当前结果状态。
+
+本次没有访问外部留存的完整 checkpoint 和 NPZ 字节，没有逐元素复算全部原始 summary、训练／预测流，也没有重新执行模型、环境、hidden-state 回放或哈希验收。 完整学习配对及轨迹验收属于已读的 DM 记录，不冒充本次独立审计。文件记录给出了两份 U 的可恢复位置和身份；本次未读取这些 bulk 不等于证据丢失，也不构成要求新 fit 的理由。
+
+hmasd-pro-question-complementar…
+
+hmasd-pro-question-b08-renewal +1
+
+现有可读证据足以支持这次投资建议；尚未知的关键量仍是 H 的实际原生后果及本次评价的真实成本，不能从 B10、低熵或 U 的既有学习增益中补齐。
+
+最终建议：保留题面的双 U、四流 H/R 比较，分别读取每份 bank 的 J、服务与局部代价。将它解释为个体上下文时间结构的冻结部署干预，认真保留离训练分布的竞争解释；不将其写成移除协调器、证明固定上下文训练充分，或挽救 B08 熵修复。MATERIAL_DISSENT: no。
+
+本次实际新增 0 fit、0 环境 transitions、0 代码修改、0 仓库写入。
 
 
 ## 2026-09-24 — B08 published; new renewal-use question accepted and observed
@@ -9697,3 +9991,166 @@ The answer has not yet been collected or delivery-verified; Pro owns only this q
 Answer subsection. On its return, read the complete text and verify the actual answer-only
 write (or preserve a verified full fallback) before making the prospective choice. The proposed
 0-fit evaluation remains unselected and unexecuted. No science worker is running.
+
+
+## 2026-09-24 — Renewal advice adopted; fixed B09 H/R and L0
+
+READY event `d2c1eff4e77ed4195628adf3`, wake `025de521-b871-4d55-b27e-38d6616c87eb`,
+generation85 reported a complete8452-character chat answer for the accepted key
+`hmasd:f8674bc5eb0910ac49af20bc2621165d22ca570a17cbc199085af808693f6085`,0recoveries.
+The driver delivery check returned `NOT_DELIVERED`, no answer commit or receipt commit.
+The latest remote target retained the identical question and empty Answer. I saved the
+complete recovered text verbatim into that Answer, **saved from chat**, preserving every
+other existing byte. Local file19662bytes/8453characters includes the final LF, SHA256
+`2313ec41a6c4303944cfd6d3fc7557af5f37c3672b4f9c9492a26624e0e46cb9`;
+the collector's no-final-LF hash is
+`ae1e96a27b9dbb13ef90971b60410ef9986c6e212ac8ab678a71ec33e6ce5017`.
+The full answer has been read. Event consumption/rearm85→86 continues observation only;
+there is no remaining scientific worker or pending Pro request, and no request was resent.
+
+### Scientific choice and fixed prospective comparison
+
+I adopt the advised single double-bank H/R comparison as B09. MATERIAL_DISSENT:no. Its
+limited practical discrimination is worth this one purchase: opposite native outcomes change
+whether to retain a persistent individual context as a deployment option for these two actual
+U assets. It does not need to explain E/U learning or make the whole skill programme successful.
+The strongest zero-cost alternative—end this same-S1 diagnostic investment—remains reasonable,
+but current evidence has not observed the proposed intervention in U and the two required assets
+already exist. I choose the fixed observation, not further training or a search over persistence.
+
+The useful theoretical distinction in the answer is adopted: H and R can have the same marginal
+uniform label law at a fixed time while their label/observation/hidden-state joint history differs.
+Fixing each member's own opening label does not fix its action or remove local recurrent feedback.
+The intervention changes closed-loop temporal context, not isolated switch counts. If H loses,
+useful redraw and harmful out-of-training persistence remain competing explanations; if H wins,
+a specific deployment alternative is supported without identifying harmful jitter as its cause.
+No causal statement about training necessity, random-context regularization, semantic role
+complementarity, ordinary-policy equivalence, computation or real energy savings is selected.
+
+The answer used the pinned question, full recorded B08 result and prior advice, current methods,
+actual R/low-action path, B08 adapter, and DM1's B10/B16/B17 context. It did not independently
+read all external checkpoints/NPZ or execute validation; its agreement is not another experiment
+or artifact acceptance. Its code claim was directly checked: the frozen low-action call consumes
+current local observations, individual labels and recurrent state, not the random team label.
+Fresh main `aed4aab0f8ac4dd3d2a69d7623a5bddc5f65195a` retains lifted pause and this lead;
+DM1 B17 is now natively running. Relevant scientific background is unchanged from the question:
+B16 supplies stronger ordinary comparators but does not match this U ablation; B10 motivates
+measuring persistence but preserves material losses. Their new-world/count programme is not
+replicated or taken over. B08's P/D/G/I and all prior counterevidence remain frozen.
+
+Fixed assets: the complete final45 U from B07 seed260924001 at
+`455536ebd0e6e23466ed40244bcf1e5ab6462826`, and final45 U from B08 seed260924041 at
+`c9217f0ae5b32aa2a13e228cc87899f545a0111b`. Do not replace, retrain, choose an earlier/better
+checkpoint or subset by score. Their original configs, native/frozen digests, complete four
+final-R arrays and source identities bind the restoration; essential byte identities follow.
+
+Fixed deployment: S1, six agents,50users,H500,k10,32lanes/worlds1700200..1700231;
+all R0..3 PCG64 seeds262625201..262625204, non-label evaluation seed260924105; CUDA
+float32 on configured `wsl_4070` to preserve the original physical/numerical replay. Both
+modes retain six FiLM categories/parameter shapes, original current-local actor inputs,
+trained weights/normalizers, deterministic raw mean then physical clip, and real per-episode
+recurrent carry. Reset only by the original episode semantics, not at k10 renewals.
+
+R is the original native evaluator law. H changes only the delivered individual vector:
+keep each member's own first draw for all500steps. Still draw team[32], then individual[32,6]
+at every one of50opportunities in both modes. Team proposals and delivered team labels stay
+original. Keep every later individual proposal and its probability separate from H's delivered
+label. Proposal log-prob is−log6; initial delivered labels are uniform and later H delivery
+conditioned on the opening vector is deterministic (log-prob0). No probability score from the
+proposal may falsely describe H's delivered law. Redraw may naturally repeat the same label;
+never force a change. H follows its own observations, actions and GRU, never R's future state.
+
+Fixed order: B07 R0..3, B08 R0..3, then B07 H0..3 and B08 H0..3. All eight original R
+panels must reproduce their saved complete arrays before any H panel is released. This is
+this batch's cross-asset recovery check, not a future blanket prerequisite. Preserve exact
+array keys/shapes/dtypes/values for original R and first ten physical/label/state steps in each
+H/R pair. A replay discrepancy is a technical limitation: retain it and actual cost, no relaxed
+threshold, hidden extra panel or automatic rerun. Source/dtype/device differences must not be
+passed off as successful continuation. Later H/R divergence is allowed and is the intervention.
+
+Primary native readings are H−R J and served users, reported separately for each bank:
+first average four streams within each world, then32worlds equally. Keep all world and nested
+episode losses, each stream, coverage/quality/height components, original values, and label,
+raw-action, executed-action and physical-state divergence. Read activation, behaviour and service
+as distinct observations; clipped-away raw differences do not establish physical effects.
+Prediction: both banks have positive mean H−R J and users. Two-bank disagreement fails that
+shared prediction; two negatives reject this H improvement; J/user tradeoffs or consequential
+local losses do not authorize blanket replacement; small/mixed differences can end undecided.
+No pooled success metric, post-result service tolerance, equivalence/noninferiority, world-wise
+H/R switching, extra label vector/stream/duration or automatic successor. Complete all fixed
+panels once, preserve all adverse data, then end B09. No training or confirmation follows
+merely from either sign. This is new deployment observation on two old assets, zero new
+training instances; exposed worlds/four opening vectors per world limit interpretation.
+
+Cost:0new fits/0training;16panels/512episodes/256kteam transitions/1.536Magent transitions.
+R reconstruction is8panels/128ksteps, H is8panels/128knew observations. At32lanes there are
+8000batched low-policy forwards and800renewal draw batches (team then individual). No
+learned-S panel, candidate enumeration, extra model scoring, training update or branch search.
+Artifact loading, environment construction, full array comparison, implementation/review,
+retention and reading are real additional costs. Actual wall/CPU/RSS/CUDA/bytes will be
+recorded; preparation and shared-node occupancy not measured stay unknown. No speed or
+power claim is made: H still computes every low action and every random proposal. Restoring
+existing360k assets does not count a new fit or erase their historical training cost.
+
+### L0 — one disposable B09 frozen evaluator
+
+Deliverable: implement `experiments/candidates/complementary_skill_learning/b09/runner.py`
+(and its package init), explicit CLI `scripts/run_complementary_skill_b09.py`, and focused
+`tests/experiments/candidates/complementary_skill_learning/b09/test_b09.py`. The entry takes
+`--seed 260924051` as batch identity, `--launch-sha`, `--b07-input-root`, `--b08-input-root`,
+`--out` and declared device; it does not change any frozen evaluation RNG address. The owned
+paths are only those new B09 files. Shared learner, native environment, B01–B08 code, old runs,
+NOTES and RESEARCH are outside Implementer edit ownership. Reuse small established helpers;
+do not make a general deployment framework. Reading may follow necessary dependencies.
+
+Use original complete checkpoint/config identities and strict state loading, including native
+modules, normalizers, auxiliary state, private and sampler RNG where present. The historical
+checkpoint does not serialize native optimizer states: construct idle native optimizers and
+report that fact rather than claiming restored original optimizer history. Preserve serialized
+auxiliary optimizer state. Freeze all evaluation training/optimizer/store/normalizer routes,
+record actual calls and compare pre/post parameter, buffer and optimizer state. Restore actual
+final native/frozen digests and use provenance-bound input summaries/configs/arrays. Hash all
+inputs before evaluation; reject wrong arm/stage/source/spec/hash or missing required artifact.
+All eight R reconstruction panels plus sixteen total panels are scientific execution under
+native admission, never a hidden launch check. A small independent fixture may test the path.
+
+Candidate must call `require_admission` before scientific effects and publish compact
+config/summary/source/progress/cost/identity plus per-bank/world/component contrasts. Raw
+trajectories/proposals/delivery/hidden-state or state-divergence evidence and errors stay under
+raw/ or equivalent durable output, bound by hashes/bytes/locators. Do not put bulk label,
+probability or state arrays into compact summary. Write useful partial status on failure;
+no overwrite, resume-by-restart or automatic retry. Report0new learning and actual exposure.
+
+Checks: a small actual-policy/environment fixture comparing new R to the unchanged original
+B07 evaluator (not to another invocation of new R); independent NumPy draw-order/proposal/
+delivery-law expectations; first-k identity and continued local GRU flow; actual clipping and
+behaviour divergence; restoration of both source schemas and normalization/RNG, rejection of
+wrong source/artifact; no learning/mutation; aggregation preserves bank/world/stream/tail units
+and errors remain readable. Use pytest-owned scratch under temp/ and configured interpreters.
+Focused CPU fixtures support code meaning but do not substitute for the eight fixed CUDA
+reconstructions. Independent read-only Reviewer must inspect this evaluator/restoration/RNG
+change before DM accepts it. No repeat review of untouched historical science is needed.
+
+The Implementer returns diff, commands/results, deviations and open risks, edits no record and
+launches no result-bearing work. The DM owns scientific choice, review/acceptance, explicit-path
+commit/publication, artifact staging and single native dispatch. Native current pause/lead,
+published inputs and actual destination memory/duplicate checks remain in force. Stop the
+dependent action for an actual missing artifact, replay, control, ownership or resource failure;
+no additional experiment or relaxed scientific contract is implied by a technical failure.
+
+| Fixed source artifact | Bytes | SHA256 |
+| --- | ---: | --- |
+| `B07/config.json` | 736 | `a804b516ef7e3793daed7c571dc58f13c5713f0bf140d3cd35a3c7a214318a3e` |
+| `B07/summary.json` | 674029 | `db3cfff475493898f120d8875cb13780fcf28ca1313f0064fd16248c850f0071` |
+| `B07/final.pt` | 26931903 | `5224552930ba84ed3082dade9ffaff4f1946a5edd66a6baf85cb9d5637d2ed5e` |
+| `B07/raw/final_R0_trajectory.npz` | 10831741 | `4c9022131ed80b00f43b9452f435df5151caefeb3a2af9e2501c8f59268a0765` |
+| `B07/raw/final_R1_trajectory.npz` | 10882288 | `3422272c864d54bb119320d2842fe459648d1fadee8487ec50c7553d6d216f82` |
+| `B07/raw/final_R2_trajectory.npz` | 10868313 | `f4938fa7e426a8df31076e0aed4680591057f3560d3a5b82c2da2c631af80f1e` |
+| `B07/raw/final_R3_trajectory.npz` | 10832350 | `1fdd66b3a1d8c4fc056c0f62470ec5641586ee37f509acc8fa64ef5521eba414` |
+| `B08/config.json` | 1727 | `b837606dcfe6d6ee18d65bb1f9eca9889332c33c2316d614c02281efe9d3aa49` |
+| `B08/summary.json` | 674922 | `6a7cf0407f142c4b7dfffd5e03f3eebbe0607625b6677d25c7ba4836116764a0` |
+| `B08/final.pt` | 26931967 | `b74920de0e5548662fa37ead0a862ab26d7865e003084dba13e6a12ff5198978` |
+| `B08/raw/final_R0_trajectory.npz` | 10853982 | `a7fd88838834786bcf9c2981ddcc3d392d646d59b9467b0fadad949b4b6431fe` |
+| `B08/raw/final_R1_trajectory.npz` | 10747283 | `aeb407451f38710e09555d82ad04a68a28020e9e4d1510fd347bae1ed6b2c890` |
+| `B08/raw/final_R2_trajectory.npz` | 10763521 | `b1f72bcd1f61c3562f9d5179198ec6642096d8eaf3348487a533de68a812cffa` |
+| `B08/raw/final_R3_trajectory.npz` | 10795371 | `9c73632b0b6f504a5e82e61a9e5ced11801902c7195ad8bebea98d685baa275c` |
