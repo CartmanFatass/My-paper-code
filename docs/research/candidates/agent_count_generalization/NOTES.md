@@ -15716,3 +15716,44 @@ first declared b1_local1 cell on wsl_4070 under fresh kernel admission, followed
 same-handle observation. The full production trajectory and exact measured costs remain
 unobserved, not certified by the reduced fixture. Implementation/review acceptance is not
 scientific acceptance.
+
+
+## 2026-09-24 — B16 first fixed local ordinary cell admitted
+
+The accepted B16 inputs were committed and published as
+[`c95e57201dd7177fc8158b22a3379b56a5be8800`](https://github.com/CartmanFatass/My-paper-code/commit/c95e57201dd7177fc8158b22a3379b56a5be8800)
+before the first result-bearing request. The actual node verified all five changed-file
+SHA-256 identities against those published bytes. The initial administrative fetch used
+a shell without the configured network environment and timed out; using the configured
+network shell restored fresh GitHub reads. The stale owned control probe was reconciled
+and stopped without affecting any scientific worker. Only this direction's canonical
+RESEARCH row was synchronized to current main, preserving all other local lines. Main
+`06d8adbe513c2492baa5ec49b0deabe62da0fcb8` retained the lifted owner pause and expected lead.
+The existing unrelated historical-object auto-GC warning remains; requested source reads
+and snapshot preparation succeeded. No repository cleanup or history repair was performed.
+
+The first declared LOCAL1 cell was admitted once at 2026-09-24T11:10:11.694419Z.
+The [native launch manifest](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/launch-manifest.json)
+preserves its exact command, source snapshot, original operation reference and native process
+identities. The [actual-node preflight](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/admission-preflight.json)
+measured 15,411,314,688 bytes of physical/effective available memory, above the 4 GiB floor.
+The [runner-written configuration](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b1_local1_s994101/config.json)
+matches the fixed b1_local1 seed, local actor, k10, 16-by-500 collection, 45 rollouts,
+initial/final N8-then-N6 panels and CPU float32/four-thread runtime. All three files were
+copied from the native run and their remote/local SHA-256 values matched.
+
+At the 11:11 UTC startup read, the scientific child and its native supervisor were live with
+consistent recorded identities. The interim summary had `fit_started=true`, two initial
+panels (32,000 evaluation team steps), and the first 8,000 collected/stored training team
+steps. It had not yet recorded a completed optimizer update; stderr was empty. This is
+one started fit and ongoing execution, not a completed trajectory or a service result.
+Complete native arrays, endpoint checkpoints, learning movement, isolation and actual final
+costs still require terminal collection and DM reading.
+
+Detached observation was armed against that original operation; generation154 adopted a
+live, consistent native status with zero observation errors. It wakes only this assigning
+task on completion, error or a bounded checkpoint. The earlier Pro events are consumed;
+the full recovered answer and adoption above remain authoritative, with no new Send.
+The other two fixed cells remain unstarted. After this cell is collected and read, continue
+the already fixed ascending block order without changing seeds, worlds, architecture or
+exposure. B15 remains inconclusive, and no B16 scientific conclusion is asserted here.
