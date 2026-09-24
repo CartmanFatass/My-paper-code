@@ -15976,3 +15976,51 @@ the already adopted b2_local1, then b3_local1, with all prior choices unchanged.
 Pro question, threshold, extra world, fit extension or tuning is selected. Fresh published
 main still has owner pause lifted and the same exploring direction/lead. Technical acceptance
 of block1 permits the planned continuation, without interpreting one favorable mean as success.
+
+
+## 2026-09-24 — B16 second fixed local ordinary cell admitted
+
+After complete block1 collection and reading, the already declared `b2_local1` cell was
+admitted once at 2026-09-24T12:00:44.116150Z on wsl_4070. Published scientific source remains
+`c95e57201dd7177fc8158b22a3379b56a5be8800`; seed 994102 and training-world base 2994200 are
+the original second block. Fresh admission read main
+`380e82cd19069b6dd8d99f5372cf15aa47b7a559`, with owner pause lifted, direction exploring and
+the same independent DM lead. Physical/effective available memory was 12,238,086,144 bytes,
+above the 4 GiB floor. The [native launch manifest](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b2_local1_s994102/launch-manifest.json),
+[preflight](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b2_local1_s994102/admission-preflight.json)
+and [runner configuration](../../../../runs/agent_count_generalization/s1_local_ordinary_b16_b2_local1_s994102/config.json)
+were copied byte-exactly; their native/local SHA-256 values respectively match
+`daef14d073dbe09a886eb70ba2cf4ceb440eb690eaee164a12276f9a92a47ebf`,
+`eebb4b9d3e728e52bc083d8a6cf8851710f5befcf2b151ddc389b2cea50e466b` and
+`e9bef338ea9c0f0abc8a44f594fd91866503f1a3afa8239121021fb562d2e2d3`.
+
+The native operation is
+`/home/wu/projects/HMASD/.git/hmasd-admission/4c72cc08bd59120b4b3ad27eca97c025dee1b29ece8c984d34ba4ea25efdcb2e.json`.
+The manifest binds its source snapshot and runner PID 549686/start 60984621, supervised by
+PID 549685/start60984618 on boot `bb732fcb-1a33-4659-a786-331110ae41d3`.
+The configured submission supervisor's exit 0 means acceptance, not scientific completion.
+
+At 12:01:49 UTC the interim native summary was training with `fit_started=true`, no failure
+and empty stderr. Both initial panels were complete: 32k evaluation team steps/224k UAV steps,
+64 episodes and 1000 policy calls, with zero evaluation storage/optimizer calls. The first
+8k training team steps/48k UAV steps and 16 episodes/resets were collected/stored; no update
+had yet completed in that snapshot. All 16 initial source hashes match the fixed source and
+block1. The fresh true-N6 LOCAL1 construction, 104-wide local MLP/GRU actor, trainable
+one-category FiLM, disabled central snapshot and exact empty optimizer/buffer ownership pass.
+
+Initial parameter/normalizer digest is
+`5dca63df0a3be775af7e5936e90ec7c28b703e1f0dacbbfbc9a3bc19b91e0fad`, post-initialization
+RNG digest is `e1710a999902d48e27b6e03b5de689d3c19d273e50380074a027667c51a6ac42`, and
+sampler seed is 10994758382475032327; each differs from block1 as planned. Every stage 0
+isolation field is preserved, and the initial training-environment digest matches both
+same-block retained B15 arms. These are startup checks; full trajectory, final panels,
+checkpoint movement and cost still require completion and independent reading.
+
+The block1 completion event was consumed and rearmed before registering the second cell.
+Detached observation generation 157 is adopted against this same native operation;
+the 12:05:50 UTC drain has no pending event, zero observation errors, and live runner/supervisor
+identities with consistent records. B16 now has 2 started fits, 1 completely read fit and
+the fixed third cell unstarted. The next action is full block2 collection and reading,
+then the original block3 under fresh admission. The three-cell design and the bounded
+block1 interpretation remain unchanged. Per-cell progress stays in this notebook and run
+records until the full batch or a material scientific/control change warrants an index update.
