@@ -7470,3 +7470,190 @@ Consumed this event and rearmed the same `launch-csl-b07-e-455536ebd` handle at 
 30s interval/20s timeout/1500s window, observerPID3199988. Native-status readback is refreshed;
 the E fit was not restarted, no Pro request was resent, and no cross-task message was sent.
 Continue awaiting the fixed E terminal evidence before its full readback and the fixed U cell.
+
+
+## 2026-09-24 — B07 E complete: entropy falls and E/M service improves, without learned-readout repair
+
+**Acceptance and retained evidence.** The original accepted E fit finished at09:47:16Z,
+exit0 with valid native witness and absent runner/supervisor. Generation65's CHECKPOINT
+`971c34102c9b6e265d5711a1` arrived just before exit; direct actual-node read at09:47:22Z found
+complete artifacts. Consumed that checkpoint with wake`6a362b77-7b44-413e-9bcd-339831be80cd`
+and rearmed65→66; the same observer then supplied READY`20231b5f753518fdb380ddd8`, wake
+`3a759891-2e7b-4f91-94e0-8a5a15bc8520`. After the full artifact reading below it was consumed
+66→67. All pending E evidence is read; neither checkpoint nor exit0 alone was acceptance.
+Fresh origin/main`03a9f17ff67b6d83a00313b5e37c2801aa927527` retains lifted pause and the same
+lead; its service-direction result update does not alter this fixed batch.
+
+All34actual-node files,169571411bytes, were copied and SHA256 matched at both retained roots:
+`/home/wu/hmasd-worktrees/complementary-skill-b07-20260924/runs/complementary_skill_learning/b07_e_260924001_455536ebd`
+and `/home/fires/.codex/worktrees/5916/hmasd-wsl/runs/complementary_skill_learning/b07_e_260924001_455536ebd`.
+[Compact E summary](../../../../runs/complementary_skill_learning/b07_e_260924001_455536ebd/summary.json)
+is373256bytes, SHA256`95759ab36beb9b6f7d0b65c55a38f1d6034863b93f5c2fce00c91c610eeb115a`.
+Initial/final checkpoint hashes are
+`6181f6cd34c2a1df138cdf14fe6d85f1c66b27b74aec2f66744ed95b59c57acc` /
+`99b8756a8d84921aa8a8e8ba214ee4725f282e65f02ad6fff67152cfea0168b9`.
+Final recomputed native/frozen digests are
+`6c7413ecd02eb34f10cb7afd013b8b4f0421e72dbff943fd12f621554bfb3bda` /
+`2a6e5a0f113ac79fa0501b326bf281cb09cc1c870ed4514a9597da40688fd7be`.
+
+The independent saved-artifact reader checked all45training rows,90raw prediction-MSE
+readings,360000storage rows, all160000panel transitions and all checkpoint tensors/RNG
+identities. Label-flow/storage failures0; maximum sampled-mu replay error7.390976e-6 is
+within the frozen1e-4 bound, maximum MSE error0, full-entropy reconstruction error4.095930e-7,
+selected log-probability discrepancy4.768372e-7. Counts are1fit/360ktrain/720train episodes,
+45rollouts,160keval/320eval episodes,675coordinator/101250actor/101250critic/675team-disc/
+2700individual-disc optimizer calls,315each G/P head and0auxiliary trunk steps. Initial native
+modules, both detached heads and RNG streams exactly match M; both complete initial S0/R0
+trajectories also match array-for-array. Across all45rows, private/sampler before/after states
+and reported default-after RNG digests match M. Final R streams have identical numerical
+labels; final S shares innovations with M, not necessarily labels. The sole differing learner
+configuration field is lambda_h:0versus.07. The private readback parser initially assumed an
+additional config alias difference and a nonexistent default-before field; those parser
+assumptions were corrected to the actual recorded schema. No scientific artifact was changed
+and no fit, trajectory or policy call was repeated for readback.
+
+All native modules change from initialization (87coordinator/29discoverer/24team-disc/
+29individual-disc tensors), both auxiliary heads change, and B07 initialization differs from
+B06. Panel audit calls remain0for optimizers, normalization, storage and observed mutation;
+checkpoint/native/frozen hashes, physical reset arrays, component sums, label holding/order,
+R PCG64 streams, clipping and probability normalization/floors were independently checked.
+
+**Absolute evaluation and actual learning.** Panels are the fixed32development worlds;
+initial readings are shared with M. All four final streams are retained without selection.
+
+| E panel | Native J | Users per step |
+| --- | ---: | ---: |
+| initial_S0 | 0.273943484943 | 18.470125000 |
+| initial_R0 | 0.276963725391 | 18.632750000 |
+| final_S0 | 0.488600504459 | 32.443750000 |
+| final_R0 | 0.496519054411 | 33.059937500 |
+| final_S1 | 0.497757273074 | 33.110750000 |
+| final_R1 | 0.497095693787 | 33.153937500 |
+| final_S2 | 0.499496848742 | 33.253250000 |
+| final_R2 | 0.491580360290 | 32.660875000 |
+| final_S3 | 0.491207582137 | 32.658812500 |
+| final_R3 | 0.497075940603 | 33.123812500 |
+
+Averaging four streams within each world and then worlds, E-S is.494265552103J/
+32.866640625users; E-R is.495567762273J/32.999640625users. Actual finalS0−initialS0 learning
+is+.214657019516J/+13.973625users; R0 learning+.219555329020J/+14.4271875users. Both improve
+J/users in32/32worlds. S0 quality improves in all32; R0 quality declines at1700203 by.057108882.
+Both learning comparisons increase mean height penalty (+.003573535/+.002697713), with20
+higher and12lower worlds. All45training rows were read: meanJ starts.239530, falls to.166430
+at12, and ends.437050. Training action saturation rises.317021→.787569; final deterministic
+S/R saturation is about.610/.626, a different context. These observations do not identify a
+saturation mechanism or remove local costs.
+
+**Intervention and conditional entropy.** Native final training-minibatch team/individual
+entropy is1.509867/1.363367. On final own-S contexts E averages1.518641263/1.345211625 versus
+M1.708123416/1.785240620. The prescribed fixed-input score uses all6400M-finalS0..3 contexts
+and44800factor distributions, with the original canonical prefixes and validated M reference
+hash`2445d48504935df1f6d69321030e0e1f13ecaf116d77bd83888b3141a9b98fc1`.
+Its2318305byte output`raw/E_on_M_final_S_reference.npz` has SHA256
+`9928adf776e710b9a43ffd5368952ed48f6bd93b6d54bddbf18a8d2bbeef9b24`. M probabilities match the
+pinned reference exactly. E/M full arrays are finite/normalized and individual mixture floor
+is retained; team has no added floor. Independently recomputed entropies differ from stored
+float32 by at most2.775105e-7. Common team E/M means1.518467307/1.708123446 give−.189656079;
+individual1.390968323/1.785240650 give−.394272327. E is lower on6398/6400team and38374/38400
+individual factors, preserving2/26opposite rows. All four stream mean differences are negative.
+This is real conditional-distribution movement, not an inference from lambda alone. The
+200scoring batches cost3.322081s, included in runner wall,0environment steps and0RNG draws;
+the audited frozen-state/optimizer guard completed. Readback performs only saved-array math,
+not a second scoring call. Own contexts and common M contexts remain distinct populations.
+
+**Partial B07 contrasts; U primary still pending.**
+
+| Four-stream contrast | dJ | dUsers | J positive/negative worlds | Users positive/negative worlds |
+| --- | ---: | ---: | --- | --- |
+| D_E_S_minus_M_S | +0.040099335296 | +1.060843750 | 31/1 | 28/4 |
+| bank_E_R_minus_M_R | +0.042352996369 | +1.299515625 | 32/0 | 28/4 |
+| G_E | -0.001302210170 | -0.133000000 | 19/13 | 19/13 |
+| G_M | +0.000951450903 | +0.105671875 | 16/16 | 16/16 |
+| I | -0.002253661073 | -0.238671875 | 17/15 | 18/14 |
+
+D=E-S−M-S improves mean coverage+.021216875, quality+.022587283 and height penalty−.018471338;
+quality is higher and height lower in32/32worlds. However, E-S still loses service at1700203,
+1700205,1700211,1700218 by5.391/1.730/2.1245/.304users;1700203also loses.051017290J despite
+better quality and height. E-R−M-R has positiveJ in all32 but loses users at1700208/1700215/
+1700220/1700229 by.441/1.1095/.2955/.047; quality is lower on1700203, height lower in all32.
+Its mean coverage/quality/height changes are+.025990313/+.015370203/−.019548717. These are
+native component differences, not separately identified causal shares.
+
+The working prediction of a positive learned-law advantage is not met by E: G_E mean is
+negativeJ/users despite19positive worlds. Worst1700203loses.090377650J/7.2025users relative
+to its own R while quality increases.050893763 and height penalty increases.004810779.
+Mean G_E quality improves.006582532 (28/32), height penalty rises.001414970 (26/32), and
+coverage falls.00266. Same-index S−R J means are−.007918550,+.000661579,+.007916488,−.005868358;
+users−.6161875,−.0431875,+.592375,−.465. Across16descriptive S/R stream combinations meanJ
+spans−.008495189..+.007916488 and users−.7101875..+.592375. S Torch versus R PCG64 indices
+are not common innovations. I=G_E−G_M remains an algebraic difference, not a mechanistic
+interaction; its mean is negative even while the E training package improves both readouts.
+
+D with matched S innovations is positive in all four stream means: J+.035771988,+.046653760,
++.046063058,+.031908534; users+.6561875,+1.5255,+1.554875,+.5068125. Across16descriptive
+E-S/M-S combinations, meanJ+.029301456..+.048393336 and users+.29175..+1.668. This supports
+a useful E/M intervention difference in this one training block; the readout advantage has
+not improved, and no stable ranking, entropy-gradient mechanism, coordination or necessity
+claim follows. P=E-S−U-R remains unobserved until the real fixed U fit. The observed entropy
+reduction and E/M gain alone do not complete the proposed service-repair criterion.
+
+All world-level E-S−E-R and E-S−M-S differences were read; height is a penalty:
+
+| World | G_E J | G_E users | G_E coverage | G_E quality | G_E height | D J | D users | D coverage | D quality | D height |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1700200 | +0.011477143 | +0.469000000 | +0.009380000 | +0.012181816 | -0.001256599 | +0.036299102 | +0.667000000 | +0.013340000 | +0.027629104 | -0.018672371 |
+| 1700201 | -0.014370852 | -1.068500000 | -0.021370000 | +0.002706157 | +0.000223699 | +0.038086830 | +0.948000000 | +0.018960000 | +0.017452185 | -0.019579175 |
+| 1700202 | -0.001814765 | -0.148000000 | -0.002960000 | +0.002900215 | +0.000612830 | +0.043156968 | +0.943000000 | +0.018860000 | +0.025171650 | -0.022403473 |
+| 1700203 | -0.090377650 | -7.202500000 | -0.144050000 | +0.050893763 | +0.004810779 | -0.051017290 | -5.391000000 | -0.107820000 | +0.056938524 | -0.007375152 |
+| 1700204 | +0.006993582 | +0.409500000 | +0.008190000 | +0.004712070 | +0.000153039 | +0.031597573 | +0.517500000 | +0.010350000 | +0.022908668 | -0.017479973 |
+| 1700205 | -0.037650880 | -2.670000000 | -0.053400000 | +0.016743535 | +0.005293940 | +0.004346807 | -1.730000000 | -0.034600000 | +0.035410006 | -0.017943805 |
+| 1700206 | +0.003883495 | +0.366000000 | +0.007320000 | +0.001465940 | +0.001680287 | +0.039257792 | +0.936500000 | +0.018730000 | +0.018915122 | -0.020472256 |
+| 1700207 | -0.002559789 | +0.146000000 | +0.002920000 | -0.007165798 | +0.002454049 | +0.043138451 | +1.303000000 | +0.026060000 | +0.012050409 | -0.021281328 |
+| 1700208 | -0.012278543 | -1.007500000 | -0.020150000 | +0.007531024 | +0.000432850 | +0.036600025 | +0.314000000 | +0.006280000 | +0.033172097 | -0.022252396 |
+| 1700209 | +0.004162129 | +0.258500000 | +0.005170000 | +0.002466548 | +0.000196835 | +0.046865816 | +1.458000000 | +0.029160000 | +0.016907424 | -0.021381589 |
+| 1700210 | -0.028103404 | -1.822000000 | -0.036440000 | +0.004706456 | +0.004007341 | +0.021203972 | +0.239000000 | +0.004780000 | +0.012934640 | -0.013977580 |
+| 1700211 | -0.039457937 | -2.935000000 | -0.058700000 | +0.013611538 | +0.002451398 | +0.000071035 | -2.124500000 | -0.042490000 | +0.039848186 | -0.017859580 |
+| 1700212 | +0.025656968 | +1.605000000 | +0.032100000 | +0.009779203 | -0.000253207 | +0.071102557 | +3.294500000 | +0.065890000 | +0.020728417 | -0.018761032 |
+| 1700213 | +0.004477695 | +0.249500000 | +0.004990000 | +0.007342161 | +0.001217954 | +0.032336813 | +0.448500000 | +0.008970000 | +0.024988188 | -0.018561356 |
+| 1700214 | +0.000821503 | -0.034500000 | -0.000690000 | +0.003546285 | -0.000240617 | +0.044086488 | +1.282000000 | +0.025640000 | +0.014388752 | -0.021821863 |
+| 1700215 | +0.023393658 | +2.008000000 | +0.040160000 | -0.010201301 | +0.001657951 | +0.038571213 | +1.085500000 | +0.021710000 | +0.011738015 | -0.019852809 |
+| 1700216 | +0.011600021 | +1.003500000 | +0.020070000 | +0.002215590 | +0.003113656 | +0.038364590 | +1.143500000 | +0.022870000 | +0.017826000 | -0.017007790 |
+| 1700217 | -0.002931937 | -0.294500000 | -0.005890000 | +0.003639336 | -0.000099262 | +0.085301065 | +4.219000000 | +0.084380000 | +0.017081887 | -0.021110499 |
+| 1700218 | -0.010784442 | -0.808500000 | -0.016170000 | +0.004899508 | +0.000935294 | +0.020935459 | -0.304000000 | -0.006080000 | +0.020171740 | -0.019139937 |
+| 1700219 | +0.013760766 | +1.228500000 | +0.024570000 | +0.001055526 | +0.003754891 | +0.048434982 | +1.933000000 | +0.038660000 | +0.017897076 | -0.016003859 |
+| 1700220 | +0.011213417 | +0.599000000 | +0.011980000 | +0.008278753 | -0.000343791 | +0.032116658 | +0.429000000 | +0.008580000 | +0.025889610 | -0.018343774 |
+| 1700221 | -0.003847790 | -0.294500000 | -0.005890000 | +0.005652397 | +0.001420509 | +0.035406795 | +0.628500000 | +0.012570000 | +0.022710907 | -0.019794523 |
+| 1700222 | +0.004243800 | +0.102000000 | +0.002040000 | +0.010633534 | +0.000374261 | +0.049138749 | +1.828000000 | +0.036560000 | +0.020390321 | -0.017429652 |
+| 1700223 | +0.012102736 | +0.841000000 | +0.016820000 | +0.002694808 | +0.000479706 | +0.065422404 | +2.886500000 | +0.057730000 | +0.023158553 | -0.018063838 |
+| 1700224 | +0.017876902 | +1.221000000 | +0.024420000 | +0.004420436 | +0.000543229 | +0.064815817 | +2.768000000 | +0.055360000 | +0.017620150 | -0.020777772 |
+| 1700225 | +0.005929900 | +0.337500000 | +0.006750000 | +0.002345435 | -0.000501269 | +0.073340186 | +3.534000000 | +0.070680000 | +0.018586876 | -0.018288123 |
+| 1700226 | -0.004485031 | -0.438500000 | -0.008770000 | +0.009570738 | +0.001217252 | +0.055565120 | +2.265000000 | +0.045300000 | +0.026171103 | -0.016003789 |
+| 1700227 | +0.013112988 | +0.800000000 | +0.016000000 | +0.007419847 | +0.000312966 | +0.053490472 | +1.888500000 | +0.037770000 | +0.017203595 | -0.021890394 |
+| 1700228 | +0.010412881 | +0.608000000 | +0.012160000 | +0.013056423 | +0.002016046 | +0.056167498 | +2.185500000 | +0.043710000 | +0.030081503 | -0.016546047 |
+| 1700229 | +0.017241127 | +1.542500000 | +0.030850000 | -0.001976078 | +0.003761050 | +0.052748197 | +2.193500000 | +0.043870000 | +0.016538808 | -0.017077555 |
+| 1700230 | +0.011948303 | +1.091500000 | +0.021830000 | -0.000053342 | +0.003316695 | +0.047714920 | +2.026000000 | +0.040520000 | +0.009527947 | -0.016492536 |
+| 1700231 | -0.003316720 | -0.418000000 | -0.008360000 | +0.013568496 | +0.001535268 | +0.028511665 | +0.132000000 | +0.002640000 | +0.030755582 | -0.017436991 |
+
+All bank and I differences remain available by world in the two retained compact summaries
+and the independent arithmetic readback; the full32world table was read, not only its extrema.
+
+**Cost and continuation.** E runner body3270.073064s=54.501218min; summed45rollout wall
+3131.334742s is included. Process peakRSS1,943,096KiB; CUDA allocated1,531,556,352/reserved
+2,183,135,232bytes. Shared-node occupancy and peak scratch remain unmeasured. M+E now total
+2fits/720ktrain+320keval=1.04Menvironment transitions and7144.359551s=119.072659runner min.
+Setup/launch/collection and parser support are additional wall outside those runner bodies.
+Successful saved-artifact checks took5.633037s for E plus1.486329s for E/M; failed parser schema
+assertions were support work only. No new environment or model-forward work came from reading.
+
+After verifying both retained copies and full acceptance, the maintained collector previewed
+then removed only disposable E source`37a1a1c690a74f86bf519fd05124853c`. Author/output roots,
+all raw artifacts, native claim, manifests and the staged M reference remain. The old unclaimed
+pre-admission snapshot remains preserved. No other task was messaged and no Pro was resent.
+
+Continue the originally fixed third U cell at source`455536ebd0e6e23466ed40244bcf1e5ab6462826`,
+seed260924001, output`runs/complementary_skill_learning/b07_u_260924001_455536ebd`. It uses
+independent uniform team/individual labels, no high-level updates, otherwise matched low/
+discriminator learning and detached G/P heads,360ktrain+80keval, initialR0andfinalR0..3.
+No extra streams, seeds, coefficient search or scientific redesign follows from E. Publish this
+E acceptance and fixed U continuation on the direction branch before native U admission;
+finish the remaining primary comparison before a material B07 index judgment.
