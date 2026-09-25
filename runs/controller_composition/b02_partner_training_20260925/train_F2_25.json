@@ -1,0 +1,206 @@
+{
+  "rollout": 25,
+  "status": "complete",
+  "world": {
+    "rollout": 25,
+    "lane_world_seeds": [
+      92532500,
+      92532501,
+      92532502,
+      92532503,
+      92532504,
+      92532505,
+      92532506,
+      92532507,
+      92532508,
+      92532509,
+      92532510,
+      92532511,
+      92532512,
+      92532513,
+      92532514,
+      92532515
+    ],
+    "states": {
+      "shape": [
+        16,
+        133
+      ],
+      "dtype": "float32",
+      "sha256": "378a99eb412ec3d4581e1d4e72a99d9e109fb1fa6d881e41cc804160fce5a813"
+    },
+    "observations": {
+      "shape": [
+        16,
+        6,
+        104
+      ],
+      "dtype": "float32",
+      "sha256": "e87ccd8491f84c72cfd7b3ea8c5f4eb74955084f7b8783314ae1045de3bca58b"
+    },
+    "uav_positions": {
+      "shape": [
+        16,
+        6,
+        3
+      ],
+      "dtype": "float64",
+      "sha256": "a39dc23bc56659e34d775a4759a17859355af4d5ce1372350d2ca2bebbbcbca9"
+    },
+    "user_positions": {
+      "shape": [
+        16,
+        50,
+        2
+      ],
+      "dtype": "float64",
+      "sha256": "21b03e7c96518593305c02d4ecec0770f71d27b405a97ba4dd7f1585051b31f5"
+    },
+    "reset_convention": "constructor then explicit reset(seed=base+lane)",
+    "raw_artifact": {
+      "path": "raw/reset_F2_25.npz",
+      "sha256": "3a42beba5e3447b8b6164d8638d2a6c1cad756de321d1cb82891fdf952f6c365",
+      "bytes": 27938
+    }
+  },
+  "assignment": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "source_digest_before": {
+    "2": "5df0955de03809678ae80e6488974ab2afb0f24118fde4c2c8112da28a689ded"
+  },
+  "source_digest_after": {
+    "2": "5df0955de03809678ae80e6488974ab2afb0f24118fde4c2c8112da28a689ded"
+  },
+  "per_lane_scalar_return": [
+    41.82241894823351,
+    36.724385000493264,
+    40.52031988274815,
+    37.76790438074976,
+    37.13499337559866,
+    42.8121671647794,
+    35.127295709960435,
+    36.59887303719764,
+    40.26180102248575,
+    40.09693245851641,
+    38.68859443327241,
+    39.92599588307228,
+    37.68925873504289,
+    35.46840461751303,
+    35.84776238961339,
+    42.27321115600261
+  ],
+  "per_lane_J": [
+    0.5018690273788021,
+    0.44069262000591913,
+    0.4862438385929777,
+    0.4532148525689972,
+    0.4456199205071839,
+    0.5137460059773529,
+    0.42152754851952523,
+    0.43918647644637177,
+    0.483141612269829,
+    0.48116318950219694,
+    0.4642631331992688,
+    0.4791119505968674,
+    0.4522711048205147,
+    0.4256208554101564,
+    0.4301731486753607,
+    0.5072785338720314
+  ],
+  "per_lane_served_per_step": [
+    32.74,
+    28.686,
+    31.79,
+    29.862,
+    29.192,
+    33.34,
+    26.452,
+    28.532,
+    32.064,
+    32.018,
+    30.662,
+    31.782,
+    29.576,
+    27.788,
+    27.566,
+    33.412
+  ],
+  "counts": {
+    "team_steps": 8000,
+    "environment_step_attempts": 8000,
+    "learner_inference_calls": 500,
+    "learner_inferred_rows": 48000,
+    "partner_inference_calls": 500,
+    "partner_inferred_rows": 48000,
+    "executed_learner_rows": 24000,
+    "executed_partner_rows": 24000
+  },
+  "raw_artifact": {
+    "path": "raw/train_F2_25.npz",
+    "sha256": "8065479142fa747dc297438b944c389166366bf5a587cd11313215e1673182f7",
+    "bytes": 1158119
+  },
+  "update_audit": {
+    "time_steps": 500,
+    "expected_sequences_per_epoch": 2400,
+    "minibatches": 1125,
+    "sampled_sequences": 36000,
+    "learner_roles": [
+      0,
+      1,
+      2
+    ],
+    "physical_n": 6,
+    "update_n": 3,
+    "batch_size_min": 32,
+    "batch_size_max": 32,
+    "batch_size_histogram": {
+      "32": 1125
+    },
+    "chunk_length_min": 10,
+    "chunk_length_max": 10,
+    "chunk_length_histogram": {
+      "10": 1125
+    },
+    "raw_artifact": {
+      "path": "raw/sampler_F2_25.npz",
+      "sha256": "dda2556f2d85223bc1d4617d26c14df0f800af1e322b4cbf5fe041acf61a166a",
+      "bytes": 488
+    }
+  },
+  "losses": [
+    -0.34830206632614136,
+    -0.012861995957791805,
+    0.0016834826674312353,
+    6.742469668388367,
+    0.07734504342079163,
+    0.07734504342079163,
+    0.0,
+    0.0,
+    6.525609970092773
+  ],
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 1125,
+    "discoverer_critic": 1125,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "parameter_normalizer_digest_after": "56b4625b6429496b983f7465119a607ff241ded58ee571480cdad394d54c074e"
+}
