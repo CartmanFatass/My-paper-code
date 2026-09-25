@@ -1232,3 +1232,33 @@ remain consumed. The observer is a read-only status probe of this accepted handl
 restart or Pro resend occurred. Two of five paired blocks have complete scientific readings;
 the running third block is not another accepted result. No endpoint, seed, budget, decision
 rule or claim changes follow this admission, and no per-block main/index update is made.
+
+### C01 block 2 checkpoint — 2026-09-25T10:45Z
+
+Read the sole pending generation-17 checkpoint `dec98280bbbccc621318c6a3`, wake
+`542bcb79-6f07-4f2f-8d73-3d035830668f`. The 10:43:45Z native observation retained the same
+accepted claim, matching live supervisor/runner identities, consistent records, no exit
+witness and zero observer errors. At 10:45:29Z U's live arm record was at rollout 33's update
+boundary: 264,000 training/stored team steps, 1,584,000 UAV steps, 528 episodes and 32 completed
+updates. Actor and critic had each completed 72,000 optimizer calls. Its three initialization
+panels account for 48,000 evaluation team steps and 96 episodes/resets, with zero evaluation
+storage/optimizer calls and all recorded evaluation-isolation digests preserved. U arm wall
+was 1,701.374959 seconds; the failure field was null. M was unstarted and stderr was empty.
+The batch-level U fit flag remains its earlier boundary snapshot; these current counts come
+from the live arm record. This is progress, not a complete third paired result.
+
+Fresh main remained `da5344e044ed1ed381c58dfc7ade15774079231e`, retaining the confirming
+standing, recorded lead and lifted owner pause; the canonical-node pause was also lifted.
+Consumed the checkpoint and rearmed the same `spatial-c01-b2-s263000103` handle to generation
+**18**, window 1,500 seconds. No worker restart, Pro resend, new launch, scientific conclusion
+or main/index update follows this checkpoint.
+
+The owner's intervening Git-status question prompted a read-only check of the original shared
+store. The previously empty object `3d2f7a36340ecb1a1a520909f729becf14c0347e` was now 190 bytes
+and readable as a commit, and the formerly unreadable branch tip was readable. Full
+`git fsck --full --no-dangling` completed with exit 0 and no output. Thus the earlier statement
+that the damage still remained was stale and was corrected to the owner; this task did not
+perform the intervening repair and does not infer a hardware fault. The notebook agrees with
+the publication copy, and the earlier retained C01 evidence checks remain recorded above.
+Keep using the already established independent publication checkout without moving the
+native author checkout or changing the accepted source and protocol.
