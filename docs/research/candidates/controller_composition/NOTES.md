@@ -517,3 +517,24 @@ extra fit. Stop the dependent path on checkpoint/source mismatch, illegal inform
 state/row misalignment, insufficient resources or uncertain external acceptance. Return
 diff, check outputs and limits to the DM. The DM accepts after reading them and independent
 review, then commits/pushes exact inputs and launches once through the configured kernel.
+
+### Source recovery and preparation facts
+
+The DM restored 22 missing files (418,294 bytes), each byte-identical to
+`424bbe4db1351db70d73560ece913150c2b20ed4`: the agent_count_generalization root
+`__init__/adapter/configuration/models/runner`; B20 `__init__/bindings/reducer/runner`
+and its original script; B02 `__init__/probe`; and B03/B15/B16/B13/B11 `__init__/runner`.
+Existing B08 `__init__/runner` already match. The nine directly checked shared dependencies
+(`hmasd/agent.py`, `utils.py`, `baselines.py`, `networks.py`, `configs/config_1.py`, the
+PettingZoo `env_adapter.py`, `scenario1.py`, `uav_env.py`, and `scripts/hmasd_admission.py`)
+also match byte-for-byte and were not overwritten. No historical branch was merged.
+The new evaluator's source identity will include the required frozen dependency bytes.
+
+WSL4070 read-only readiness reached configured host LAPTOP-U9TDKC8A and interpreter
+Python3.10.21/Torch2.7.0+cu118/NumPy1.26.3; MemAvailable was15,629,496,320 bytes at that
+observation. This is suitability evidence, not the fresh launch admission. Shell prompt
+plugin warnings did not prevent commands. The canonical checkout has unrelated tracked
+and untracked work; it is preserved. Source/outputs will use this direction's own node
+checkout. Initial canonical direction/lead registration is published by Root; no DM change
+to the user's canonical index is needed. Main plan publication is
+`a9a95d5b67056e41bb2454bc371e26ae371aa8a7`; it contains no new empirical result.
