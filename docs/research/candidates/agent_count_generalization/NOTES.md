@@ -20466,3 +20466,37 @@ outside Git. Representative complete-file identities:
 | artifact_readback.json | 225963 | 8d146634e0141449c0ddf6b6eec6c9f9149b8e471243b47c80ac2eaf8a650136 |
 | contract_readback.json | 224359 | 1a0b32ae7b5d13d0daa19095d72b0497559f461349595211fb031b9d5cc1e6e2 |
 | process-exit.json | 550 | de3faacdca8288bd2b369da0fdb7a91d5060f45ead185afc2d748db68d6f89b6 |
+
+The interrupted publication command was followed by discovery of 13 empty newly written
+Git objects belonging to this result commit. All four blobs, eight trees and the commit
+were reconstructed from the intact files/index and matched their original object IDs,
+including commit `3d2f7a36340ecb1a1a520909f729becf14c0347e`. The two damaged final entries
+in this branch's own reflogs were restored from those same identities. The branch ref,
+authoring index and canonical index digests were unchanged by recovery; normal push
+then published the original commit. The cause of the empty objects is unresolved.
+A fresh byte-count/SHA256 comparison of all 130 retained files passed again (2.256s),
+including the previously recorded readback identities. No scientific artifact changed.
+
+After verified recovery/retention/publication, guarded snapshot-GC preview and apply
+removed only block 2's disposable source snapshot `bcbb212d5b4045cda4d7bac90646b999`,
+using the existing read-only sudo process scan. Outputs, retained copies, native
+claim/exit witnesses and the frozen published input remain. The block 2 READY event
+was consumed; its completed worker was not restarted.
+
+### B20 block 3 accepted under the unchanged fixed plan
+
+The last predeclared pair was accepted on 2026-09-25 after fresh native admission.
+The [launch manifest](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b3_s1018101/launch-manifest.json)
+and [actual-node preflight](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b3_s1018101/admission-preflight.json)
+record its exact source, published control, invocation, processes and available memory.
+It retains block3 / seed1018101, training-world base3446100, the fixed evaluation
+worlds, F-then-M order and common full source SHA above. Both native process identities
+were observed running, records were consistent and no terminal witness existed.
+
+Detached observation follows this accepted operation. Its checkpoint is a reason to
+rearm the same handle; eventual exit requires complete artifact reading before the
+fixed three-block reduction. The two adverse completed blocks remain included. No
+fourth pair, changed endpoint or continuation chosen from the scores is authorized
+by this cell's acceptance. Broader question responsibility remains with this DM under
+the updated owner governance; any next scientific investment needs its own reason
+after reading the fixed batch, not an automatic extension of B20.
