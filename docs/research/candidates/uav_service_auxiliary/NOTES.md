@@ -11714,6 +11714,282 @@ Constraints and return: give a complete source-grounded answer in Chinese or Eng
 
 ### Answer
 
+Saved from chat by the direction DM, 2026-09-25. The owner-requested retry submitted the same question/key and attachment once successfully; `send_effect: sent` and `attachment_seen: true` were observed. The deterministic observer collected the complete answer. `deliver` returned **NOT_DELIVERED**, with no answer-writing commit on the target branch. The reported `073afd73019d250c3a01778e2be5248fd69b9132` is the actual NOTES **blob**, not a commit or proof of writeback; the target Answer was still empty at branch head `917e94e293142a2c8fcb65b3359c3b6667927ba9`. Writer ownership is reconciled before this insertion.
+
+Complete collected answer below, unchanged, including its rendered citation/math text: **8,808 characters**, SHA-256 **cb7941ee96c392e1dc6b70d0fcfce304b33fc72dda45ce7325d8a467c21a5e3b**. The local saved file adds one final newline (8,809 characters), SHA-256 **fcfad9d036d8d35b3e89befc2571c035d2e41d932c7f47553162d7ede144186b**. This is the chat fallback, not a claimed repository delivery by Pro.
+
+**GitHub 读取可用，但本轮连接器没有仓库文件写入动作，因此未写回；实际 Answer commit：无。**末次读取目标分支时，文件 blob 为 073afd73019d250c3a01778e2be5248fd69b9132，本次问题的 ### Answer 仍为空。本轮没有修改仓库、启动实验或联系其他任务。以下是完整答复。
+
+B11 后的投入选择：保留 O＋F，停止本轮固定策略 S7 修补，不购买接近模型比较
+
+MATERIAL_DISSENT: yes。
+
+**我建议现在停止进一步固定策略 S7 修补的新增结果性投入，不购买题面提出的接近感知反馈比较，也不先购买常数提前返航对照。**保留普通站端分配 O、历史 N925031 和现有 F；已经结束的 G 不重开。
+
+这里的实质异议针对这笔新比较目前是否值得购买，而不是否认题面的物理观察。源码确实支持：原生返航余量使用的简化能耗，与 F 请求后实际执行的接近运动不一致；这个差异能够在下降接近时产生真实储能代价。但它尚不足以把“更准确的自由接近估计”提升为当前最值得支付的完整服务—风险改进。题面并未把新比较当作已选实验，我也不把这份建议当作批准或否决。
+
+一、B11 更新的是“恢复改善的用途”，不是证明所有反馈修订无效
+
+此前支持 G 的理由，是它可能保留 O 之外的连续恢复机会，同时避免无条件 C 的等待风险。B11 不是没有干预机会：G 在全部32个世界中共有 6,665 次实际非 O 站端选择，正储能增益后退出 F 从 460 增至715，F 模式成员步和总等待暴露下降。因而，“原生分配顺序可以改变实际恢复过程”继续得到支持。
+
+hmasd-pro-question-b11-approach…
+
+但需要购买的完整用途没有兑现：
+
+B11 读数	O	G	对判断的影响
+平均完整原生 J	989.098880037	985.751826316	G−O 为 −3.347053721
+平均累计 QoS	1019.694174327	1018.276019573	G−O 为 −1.418154754
+平均原生返航成本和	1.226179790	2.190412388	风险成本增加，而非只是服务交换
+等待 tick 年龄 P95	13	106	总等待减少没有消除长等待
+实际负余量等待成员步	28	320	guard 不等于恢复负余量等待者
+
+J 是16个世界提高、16个降低，中位差仍为负；最低电池在24/32世界降低。与此同时，平均“世界内部时间序列的 QoS P10”有所提高，不能因为完整均值不利而删除这一反面证据。这里支持的是结束固定 G 的投入，不是总体等价、统计显著伤害或所有条件分配都无价值。
+
+hmasd-pro-question-b11-approach… +1
+
+此前完整建议的“实际改变分配、改善恢复，但没有值得保留的完整增量”的分支已经覆盖这一结局。B11 也没有把风险全部修回 O：负等待和电池尾部仍有代价。因此不能把它简化成“风险已解决，唯一剩下的问题就是接近模型”。
+
+hmasd-pro-question-b11-approach…
+
+共同前缀之后的读数进一步排除了“过程窗口根本没看到干预，所以完整结论暂不成立”的说法。每条实际后缀有212–920步，后缀中的正增益退出仍为302→557，而完整 J、服务和成本差与后缀差一致。这个一致性来自相同前缀的算术关系，不是额外复现；18/32个首恢复250步窗口先于分配分歧结束，只限制那些窗口，不撤销完整任务结果。
+
+hmasd-pro-question-b11-approach…
+
+**本次进一步降低的是：继续改善局部恢复过程，就有足够理由期待完整服务增量。**没有被 B11 检验、因而也不能宣布失败的，是接近感知 F 本身。
+
+二、接近暴露是真实的新观察，但不能直接变成新瓶颈诊断
+
+954002 的事实很重要：G 的 member2 在 tick2949 仍距站21米，电池为 .080363065，F 激活，却尚无充电资格；下一 tick 到20米才获得输入。它是在下降接近，不是卡住、没有收到返航命令，或已经合格却被站端拒绝供电。作用于当前合格集合的 G，当然不能在这一时刻分配它尚不具备资格的槽位。
+
+hmasd-pro-question-b11-approach…
+
+不过，完整世界表同时限制了这个解释。最大 J／服务损失954001主要是服务损失，不是最差电池事件；954030则在 O 中出现类似的21米接近低电量，同时 G 改善服务、返航成本和最低电池。954010也同时改善服务和风险。另一方面，954015仍全程零服务，且集中了 G 的317/320个负等待成员步。这不是一个可以用单一“接近过晚”故事统一解释的面板。
+
+hmasd-pro-question-b11-approach… +1
+
+还应严格区分两个分母：
+
+**O/G 的3,181/3,794个“非充电合格状态下的负步末余量成员步”，不等于3,181/3,794次下降接近失败。**非合格集合也包括其他位置、运动和请求状态；F 在观察余量到零后才响应，本身也可能产生短暂的进入前后负值。没有按实际阶段分解，不能把这些成员步全部算作垂直接近误差，更不能从“占负值的大多数”推断其占完整损失的大多数。
+
+hmasd-pro-question-b11-approach…
+
+这些步末负余量计数，也不能与 28/320 个耗能后、供电前的实际负等待成员步混用。B11 的后者要求当前合格且实际没有输入；B07 继承的步末诊断则在真实转移完成后记录。原生风险成本使用每步最差成员的负余量，经缩放和封顶，并不是所有负成员步的简单求和。
+
+因此，新观察支持的是一个具体控制机会的候选解释，不是已经定位的完整服务瓶颈，也不是对 G−O 总效应的重新归因。
+
+三、源码支持模型不一致，但不支持把它称为必须修复的接口错误
+1. F 的命令与原生接口没有在这里失配
+
+现有 F 从合法观察解码自身原生 raw margin 和有效站点相对向量，按 margin <= 0 进入、margin >= .05 退出。远处提交朝最近站点的速度和 docking 请求；160米以内提交的零运动分量并不表示要求原地停留，因为第四维请求会让原生环境调用 _docking_velocity。
+
+原生接近速度分别限制水平和垂直分量：水平最多3 m/s，垂直最多1 m/s。20米以内返回零速度；实际充电资格还要求请求有效、成员未失效、目标有效，以及本步实际速度模长不超过1 m/s。先运动和耗能，后判断资格、分配和供电。
+
+这条路径说明命令得到了解释，不能把954002称作执行器没有执行 F。
+
+2. 原生 margin 是一个既定诊断设计，不是实际 F 路径的精确能量证书
+
+源码中的量是
+
+m
+native
+	​
+
+=b−r
+reserve
+	​
+
+−
+3600B
+P(3,0)
+	​
+
+3
+d
+	​
+
+,
+
+其中 d 是到最近站中心的三维距离，B=160 Wh，reserve 为 .10。它既没有按实际水平／垂直速度积分，也没有显式处理20米捕获与速度资格，更不包含未来等待。另一个裁剪到最小／最大范围的 return threshold 不是这个 raw margin，不能替换它。
+
+与此同时，物理耗能按实际位移产生的速度计算，垂直项为 15∣v
+z
+	​
+
+∣：下降也耗能，不是零代价或回收能量。因此，“该诊断不等于实际接近能耗”是成立的源码结论；“源码违反了一个已承诺的精确到站能量接口”则没有依据。尤其不能为了让新估计显得正确，直接修改原生 reward 中的 margin。
+
+3. 合法信息足以构造更细估计，但不提供未来后果
+
+观察后缀已经含自身电池和站点相对三维向量。基于这些值与已知物理常数做确定性估计，不需要新增 actor 信息、预测头或训练标签；但这种估计仍不知道到站时的队列、其他成员后续行动或联合服务后果。原生观察还含部分当前站点状态，也不能据此假定未来队列已知。
+
+所以这里应保留四层判断：**接口实际执行正常；诊断采用了简化模型；存在可能可改的控制机会；完整用途仍未测得。**不能跳过后两层。
+
+四、一个确定性反例：几何估计确有区别，但不是“统一提前一点”
+
+以下仅按已读源码做名义算术：固定站点、无故障、无位置边界截断、没有队列，保持返航请求；时间步1秒。它不是新环境运行，也不声称对应某个已观察世界。用源码功率式得到
+
+P(3,0)≈157.555532 W,P(0,−1)=183.49 W.
+
+后一个值包含悬停功率和下降的垂直耗能。
+
+**先看站点正上方100米的接近。**原生 margin 扣除的返航能量为
+
+E
+native
+	​
+
+=
+3
+100
+	​
+
+3600
+157.555532
+	​
+
+≈1.45885 Wh.
+
+但按1 m/s下降到20米，需要名义上的80个转移，首次可能供电前已经耗掉
+
+E
+vertical
+	​
+
+=
+3600
+80×183.49
+	​
+
+≈4.07756 Wh.
+
+差约 2.61871 Wh，即电池容量的 .01637。这里已经承认捕获发生在20米而非站中心，仍然有明显差额。下降接近、尚未充电时，每一步的原生 margin 变化为
+
+m
+t+1
+	​
+
+−m
+t
+	​
+
+=−
+3600×160
+183.49−157.555532/3
+	​
+
+≈−.00022738.
+
+因此，持续朝站点正确移动，与原生 margin 持续变差并不矛盾；它也解释了为什么不能把下降中的负余量归成站端等候。
+
+**再看同样100米距离的纯水平接近。**按3 m/s移动27步后距站19米，但最后一步实际速度仍为3 m/s，尚不符合1 m/s资格条件；下一步停留才符合。忽略浮点边界误差，其供电前能量约为
+
+E
+horizontal
+	​
+
+=
+3600
+27P(3,0)+P(0,0)
+	​
+
+≈1.22847 Wh,
+
+反而低于原生扣除的1.45885 Wh。速度资格与捕获位置必须同时计算，不能把“到达捕获半径”直接当作“已经可以供电”。
+
+这个反例带来两项实际更新。
+
+第一，同样的电量和原生 margin，可以对应不同的自由接近能耗；几何估计不是没有内容的重新命名。第二，常数提前量不能同时精确修正这两种状态，“模型总是低估，所以所有状态更早返航”是错误的推广。外段 F 的高速运动还可能使原生低速估计更保守。
+
+但该简化去掉了队友响应、站端竞争、无线拓扑与服务、F 提前退出和随后 actor 行为。它说明为何两个估计不同，不证明哪一个闭环更有用，也不是物理 UAV 安全证书。
+
+五、为什么在承认这个新物理理由后，我仍不购买比较
+直接风险节省的参照应是 O＋F，不是 G 的最差病例
+
+B11 中 O 的平均原生返航成本和只有 1.226179790，且没有 cutoff／depletion 罚项。只看返航罚项这一项，即使把该面板 O 的这项成本全部消掉，最多释放
+
+2×1.226179790=2.452359580
+
+个平均 J 单位；相当于每3000步约 .000817453 的平均 QoS 变化所对应的累计服务量。这个算术尺度明显小于若干已观察的正负服务交换。
+
+hmasd-pro-question-b11-approach… +1
+
+**这不是整体可达收益上界。**新轨迹可能改善服务和 PBRS，也可能减少未见世界中的风险；低电量尾部亦不能被均值抹去。它只约束当前最直接的论证：“通过避免接近负余量，节省原生风险罚项”。不能拿 G954002 的损失幅度当作 O＋F 下新方法可回收的收益。
+
+风险-only 的原生收益仍然是真实收益，我没有要求每个有用控制都必须同时增加 QoS。但在本题既定完整用途下，这一有限节省理由，尚不足以压过提前撤走中继的服务风险和新增工程成本。若日后研究用途明确改为一个储备约束问题，那会是新目标与新对照，而不是本次结果的另一种通过读法。
+
+“自由接近能耗”还不是现有 F 的实际到站后果模型
+
+现有 F 不是承诺一直返航到站。它在原生 margin 达到 .05 时可以退出，把提议重新交给 actor。因而，从当前位置计算“假定持续返航到资格点所需能量”，描述的是一个条件性运动方案，不是现有 F 必然会完成的未来轨迹。B11 也保留了大量没有任何充电输入的 F 区间，不能把它们全部叫作无用触发或到站失败。
+
+hmasd-pro-question-b11-approach…
+
+只替换进入判断、保留原退出判断，可以定义成一个合法的新反馈包，但“模型预测了完整自由接近”不等于控制器会坚持执行它。连退出量也改掉，则会同时改变模式驻留、充电后释放和 actor 获得行动机会的时间。两种选择均可研究，却不是无须说明语义的微小纠错。
+
+同样，若允许几何估计在外段减少原生估计的保守性，新反馈可能更晚而非更早返航。它可能保留服务，也可能让到站后的队列缓冲更薄。这个双向机会是支持新比较的最强理由；我承认它比“把负 margin 清零”更有价值。但是，它同时说明新包改变的是完整返航时机与恢复过程，而非只消除一个接近末端的小误差。
+
+能实现、能产生不同结果，不等于现在值得支付
+
+一个窄模型在工程上并非不可行：外段按当前合法向量与 F 的速度映射估计，内段按独立水平／垂直速度上限分段累计耗能，再处理捕获和速度资格。它不需要轨迹树、学习器或未来队列标签。不过，仅用一次 max(水平时间, 垂直时间) 再以恒速积分，也不能冒充内段原生运动：两个方向可能先后完成，功率阶段随之改变。
+
+**我拒绝的不是这个比较有辨别力，而是当前辨别力的用途不足以优先购买。**已有证据连续提醒我们，个体恢复、局部风险和完整服务之间的连接并不牢固；本次新证据充分定位了一个简化模型差异，却尚未给出超出“可能少受罚，或可能改善返航时机”的较强完整用途理由。这里不需要证明模型必定失败才可以停止，也不需要先增加一个必须成功的 pilot 才允许停止。
+
+这个结论是可争论的投入判断，不是由 B11 数学推出的唯一选择，更不是按失败次数自动关停。
+
+六、常数提前返航对照：对几何归因重要，对有限包比较不必强制加入
+
+虽然本次不建议购买实验，仍应明确对照问题，避免把停止归因于一个人为膨胀的三臂要求。
+
+若问题只是“这个固定接近感知反馈包是否比现有包更有用途”，同一 N925031、原站端 O 下的现有 F，对比一个事前固定的接近感知反馈，已经是有能力的主对照。双方保留相同合法观察、物理规律、原生奖励、H3000、学习器零更新及各自真实循环历史。两臂可以回答这个包的条件用途，不必为了完整组件归因自动多买一臂。
+
+但正结果只能叫作这一反馈包的用途，不能单凭它宣称几何建模优于一般提前返航。原有 F 对照并不是经过相同新调节机会优化过的“最佳常数提前反馈”。
+
+若主张是“几何选择性比一般提前返航更有价值”，一个有合理、结果外依据的固定常数提前规则才是关键竞争者。其进入、退出和模式状态必须有一致的定义；不能给几何包完整设计权，却随意挑一个很弱的常数让它取胜，也不能在 B11 世界上反复挑常数而把调节曝光写成零成本。
+
+此时保留原 F 的第三臂有明确作用：只比较几何规则与常数规则，可能两者都比原 F 差。三臂增加的是对这种退化和解释竞争的辨别，而非“所有研究必须三臂”的规则。即使几何规则胜过一个固定常数，也不能外推为胜过全部常数阈值或已分离所有模式驻留效应。
+
+题面的成本因此应如实分开：两臂最多 192k 团队 transitions；三臂 288k，多出96k、即50%的评价暴露。本次我两者都不选；不是因为第三臂不可缺少，才把原本值得做的两臂否决。
+
+hmasd-pro-question-b11-approach…
+
+七、什么会改变这个判断，什么不会
+
+值得重新提高投入价值的，不是又出现一个更低的模型误差、一次更漂亮的到站，或在 G 的极端病例上看见风险改善，而是接近选择的改变同时有可区分的过程预测和完整用途预测。
+
+过程预测应落在真正受影响的时段：在原估计低估接近需要的几何中，控制确实改变进入返航的时机，并在首次获得资格之前改善实际电池／余量缺口；在原估计保守的几何中，减少不必要的提前覆盖，而不是把风险移到更晚的排队阶段。未到站、提前退出 F、时域结束和真实物理事件都必须保留，不能只在成功获电者上计算“更好的到站电池”。
+
+完整预测则是相对 O＋F 的原生 J、累计 QoS／实际交付量与风险尾部形成值得保留的用途，而不是换用新模型定义的 margin 后宣布成功。只节省风险但不增服务，仍可保留风险用途，但不能称作服务恢复；少量均值收益也不能隐藏大的服务损失或新增低电量后果。
+
+相应结束分支应真正生效：**接近估计或到站储能改善，但没有值得保留的完整增量，就结束该固定接近规则，不自动调整提前量、退出阈值、速度或排队模型。**若完整包有用而过程预测不支持，保留包收益、降低原解释，不为追认几何机制强制追加控制。若实际行动几乎不变或机会不足，则承认检验范围有限；也没有自动加世界或延长 H3000 的义务。
+
+这些是判断会如何被改变的内容，不是建议现在先购买这些数据的依赖链。目前没有选中的接近模型实验，其未观测收益保持未知；停止投资不把未知改写成负结果。
+
+八、机会成本与本题内剩余的有用工作
+
+这不是免费接入一个标量。历史 N 仍是一个支付过180k训练步的制品；新世界不能增加训练重复数。B11 的两规则实际准入至退出为 85.820020分钟，完整保留输出约 335.5 MB，另有复制核验、原始读取、工程及独立审阅。模型的新单步计算、输出与阅读还会增加成本；三规则没有实测墙钟，不能把旧两规则时间直接当成新运行承诺。
+
+hmasd-pro-question-b11-approach… +1
+
+指定共享背景对本次选择的实际影响是：B03 的代理／表示改进不能代替用途；B04/B05 的风险节省须与服务交换一起读；B09 已经让普通 N＋F 成为更强的实际参照，而不是允许继续只打败无反馈或已结束的 C/G。B11进一步降低局部恢复修补的投入价值，但没有撤销 B07 中普通 F 已有的有限物理和服务用途。
+
+C2 的24,576步、零-fit比较是一个已明确接口与竞争解释的机会成本参照；它不因步数少就被证明价值更高，也不由本答复接管或启动。B3 的总体、目标和尾部评价成本尚未定义，不能把它包装成已经准备好的替代。B20/C01仍属于其他负责人。
+
+**在本题的限定范围内，当前值得完成的工作是把物理解释纠正清楚，并据此记录不再购买新固定策略修补的判断；不是再维持一项常驻模型校准或阈值搜索。**上面的源码与确定性论证已经回答了“是否存在真实模型差异”；剩下的闭环收益不确定性，并不自动构成必须付费消除的缺口。
+
+这结束的是当前固定策略 S7 修补的新增投入，不是更广服务—风险问题、方向的全部科学价值或 DM 的其他自主选择。指定计划也明确区分这些层次，不要求为保留主题制造工作。
+
+九、来源边界与未完成的独立核验
+
+本答复阅读全文附件，并按指定版本读取了本次问题、B11完整结果及全部32个有符号世界、前次完整 b10-continuity-risk-next-investment 答复、B11采纳／前瞻与实现验收。治理及方法按本次 source_sha 读取；共享背景使用指定的 da5344e044ed1ed381c58dfc7ade15774079231e，没有用其旧“B11尚待执行”状态覆盖附件中的已完成结果。
+
+关键物理与计量结论来自 529df1b9ec4cf16ca4d78fecd1e47ce11e432ee5 的 B11 station／metrics／native、B06反馈、B07真实闭环与能量读取、原生能量环境和继承功率函数。上述算术反例只是对这些公式的计算，没有运行环境或新策略。
+
+**机器证据读取仍有限制。**已读取配置中的物理／任务绑定以及完整 launch manifest、退出见证和最终状态；summary.json 返回的大段正文被工具输出截断，我核对了可见的身份、零更新／执行计数和部分世界记录，没有完成整份机器摘要的逐项审阅或独立重算。本文完整面板数值依据是已完整读取的 B11结果条目和全世界表，而不是把截断摘要称作完整审计。
+
+仓库外 NPZ、压缩详细记录和 checkpoint 没有被本轮独立读取；137个文件、129个引用、完整物理／选择重算和具体21米轨迹的核验，明确属于 DM 已报告的读取与审计。因此我没有独立估计“其中多少损失可由接近模型避免”，也没有为新规则提供成功概率。这个限制不妨碍核对源码上的模型差异，但限制数值审计和机制归因。
+
+hmasd-pro-question-b11-approach…
+
+最终建议：保留 O＋F，结束 G，并停止本轮固定策略 S7 修补的新增结果性投入。接近模型差异是真实、可解释且可构造候选的事实；它目前仍不是足以优先购买另一组完整比较的用途理由。不要把停止写成模型不可行，也不要把未试验写成已证伪。最终选择仍由 DM 承担。
+
 
 ## 2026-09-25 — B11 publication complete; new approach question remains unsent
 
@@ -11724,3 +12000,34 @@ The new `b11-approach-model-or-stop` question has key **hmasd:a0ce5fad1f6ec911a4
 After closing only that invocation's identified empty page, one recovery of the **same key, same text, same attachment and same conversation** reached the same pre-send navigation failure. The operation was reread and still has `send_attempted: false`; its second empty page alone was closed. Chrome and unrelated tabs were preserved. Both local error transcripts remain under task-local `temp/pro_transport/`; private conversation/account identifiers remain solely local. No Pro question was submitted, no old Pro was resent and no actual answer exists to verify or interpret. The empty Answer stays empty; the direction does not pretend an accepted adviser producer is running.
 
 B11's READY event has been consumed; generation27 has **no pending event and no active job**, only already-reconciled native completions/collected old advice. An observer for an unsubmitted question is not armed. The dependent next scientific choice awaits restoration of the browser navigation path; a later attempt must reconcile this same pre-send operation and its unchanged prompt after a concrete repair, never replace the key or duplicate an uncertain send. The complete B11 decision is unaffected: fixed G investment ends and O+F is retained. No new experiment is selected or launched while that separate investment question is unresolved.
+
+
+## 2026-09-25 — Complete approach advice read; end current S7 repair investment and retain O plus F
+
+**Decision.** I accept the adviser's `MATERIAL_DISSENT: yes` on renewed investment: do not buy the proposed approach-aware fixed-policy comparison or a constant-earlier-return comparison. Retain ordinary station rule O, historical N925031 and F; fixed C/G and the prior auxiliary/risk/feedback-training recipes remain ended. After considering the broader alternatives below, end this direction's current S7 investment with no selected successor, no new fit/evaluation and no unresolved Pro or native result. The broader service–risk question remains scientifically open. This is an investment closure, not a negative result for the unimplemented approach model, a claim that O is optimal, or a new owner pause. The Pro advice informs this choice; it does not make it for the DM.
+
+### Consequential claims checked and explanation updated
+
+I read the entire saved answer, including its contrary cases, comparator alternatives, cost and explicit limitations. I checked the consequential physical statements against execution **529df1b9ec4cf16ca4d78fecd1e47ce11e432ee5**: `_raw_return_energy_margins`, `_prepare_energy_actions`, `_docking_velocity`, `_apply_energy_dynamics`, `_charging_candidates_by_station`, inherited `_calculate_power_consumption`, and B06's legal decode/mode mapping. The request is executed: inside160 m docking uses horizontal3/vertical1 m/s; charging requires post-motion distance<=20 m and actual speed<=1 m/s, after physical consumption. F can exit at native margin>=.05 before arrival. A sustained-return estimate therefore describes a conditional motion programme, not F's guaranteed future. This is a simplified native diagnostic, not a demonstrated actuator/interface defect or a reason to rewrite the frozen native reward.
+
+A compact independent arithmetic check of the pinned power formula gives `P(3,0)=157.555532161 W`, `P(0,-1)=183.49 W`, and `P(0,0)=168.49 W`. With the adviser's stated nominal assumptions, a100 m vertical approach consumes4.077555556 Wh over80 descent steps before first possible input, against the native estimate1.458847520 Wh; the gap is2.618708036 Wh/.016366925 battery ratio. Each descent step changes native raw margin by−.000227381058. A100 m horizontal approach instead takes27 motion steps plus one hover step for eligibility and consumes1.228469269 Wh. These are formula evaluations, **not new environment trajectories or performance observations**. They support a real geometry-dependent difference and refute the blanket explanation that the native estimate always underestimates return energy. They do not predict joint service, queues or net utility.
+
+The B11 post-step noneligible-negative-margin counts **3181/3794** are not counts of descent failures. The eligible negative-wait counts **28/320** use a different pre-input snapshot and actual noninput condition. Neither is the native team's worst-member risk sum. The retained 954002 descent is a concrete example, while favorable954030 has an analogous O approach;954001's large service loss and954015's concentrated negative waiting remain competing cases. I do not reattribute the full G−O effect to approach modelling. B11's actual recovery improvement and slightly better within-world service P10 remain evidence; the negative complete means, long waits and lower battery minima also remain unchanged.
+
+I recomputed mean native return-cost sums from all32 summary worlds: O **1.226179790**, G **2.190412388**. Removing only O's observed return penalty term would release about **2.452359580 J**, equivalent in this accounting to .000817453 QoS/step over3000 steps. This is a scale for one component on the exposed panel, **not an upper bound on attainable total J, service, PBRS, unseen-world risk or tail improvement**. It is not a headroom admission test. No new raw-trajectory audit is claimed here; the earlier complete B11 readback and retained artifacts remain the original evidence. Pro explicitly did not independently read external NPZ/checkpoints and received a truncated machine summary; its synthesis used the full notebook world table. That limit is preserved rather than promoted into another independent numerical replication.
+
+### How the current structural background changes this choice
+
+The adopted [structural background](https://github.com/CartmanFatass/My-paper-code/blob/2e2becaae8d376908d74364dca7e4713bdcb4a2a/docs/research/RESEARCH.md#structural-research-background), corresponding scientific-tools section and DM body were actually read. I then refreshed main to **4d396827edf0adf621287af75c5cef37e2f6dee2**, including its new programme and directly relevant S7/C2 synthesis. A geometry-based feedback rule here changes the deployment decision/mode mapping using already legal battery/station geometry and known physical constants; it does not add information or training data. Correct individual free-approach energy still omits the action externalities from shared scarce charging slots, relay topology, teammate response and lost service opportunities. These are the unproved coupling in the single-member bridge, not a demand to solve the joint simulator before exploration.
+
+This reading changes the comparator question: **a fixed package-versus-O+F comparison could be scientifically sufficient** for conditional package utility. A third competent constant-earlier rule is relevant only to the stronger geometry-specific attribution, not a universal prerequisite. I decline the two-arm comparison on its own value/cost, rather than inflating it to three arms or requiring a positive toy, theorem, exact suffix study, exhaustive phase classification or mechanism proof. A direct modest full experiment would remain permissible if its conjectured use warranted it. The present difference is informative about the margin, but I do not judge the expected decision value of another local timing correction sufficient now: B07 retains useful ordinary feedback, B09 supplies a stronger actually learned N+F reference, and B10/B11 show that substantial recovery changes need not deliver extra complete service–risk value. Earlier return may sacrifice useful service; later outer return may thin queue reserves. Neither direction has a measured new package gain.
+
+### Broader alternatives and stopping scope
+
+I reconsidered the parent question rather than treating the end of G as an automatic end of responsibility. Replicating G or another threshold/exit/queue tweak does not supply a newly valuable comparison after its complete failed prediction. Repeating the B09 training-with-F or B03 auxiliary recipes would reuse adverse premises; a materially different direct learning experiment would require its own concrete intervention and prediction, not a renamed repeat. A team-level return/slot rule based on service opportunity is a different plausible conjecture, but current evidence does not select a competent service-opportunity rule or learning comparison whose prospective value I prefer to its engineering, learning and complete evaluation cost. I do not purchase a generic predictor or exhaustive counterfactual programme merely to create that reason.
+
+A service-tail or reserve-constrained objective could also be legitimate, but changing the objective/population would answer a different question; B11's favorable temporal P10 is not a preselected across-world tail result. I have not selected that new objective or a defensible tail-learning comparison, and do not reinterpret the old mean-based results as a pass. These are unselected research possibilities, not pending prerequisites or silently queued successors. This stopping judgment may be challenged by a new useful physical consequence or comparative conjecture; there is no claim of universal impossibility or obligation to keep rescuing the same host.
+
+The question's old C2 opportunity-cost reference is now historical: current main records its complete FAST_ONLY/RR/NONE result and closure. I did not treat it as an available pending launch, repeat it or contact its lead. The new ordinary-controller composition matrix belongs to the newly assigned independent DM. The separate unknown-model information question changes the information/learning problem rather than correcting this known physical margin; its existence alone is not a reason for this session to create another study. The latest plan also leaves tail/resource questions as choices rather than an automatic B3 queue. No owner/Root response is needed to make the present scoped stop effective; no other lead or paused session is taken over.
+
+The two-rule proposal would have added up to192,000 team transitions; a third rule288,000. The prior B11's85.820020 min and335.5 MB are a cost reference, not a promised runtime for new modelling. This turn adds **0 fits,0 optimizer updates,0 environment transitions**: delivery verification, source reading and scalar arithmetic only; unmeasured authoring/readback time is not zero. The accepted answer is reconciled and the generation28 completion event consumed with its original wake/event IDs; remaining observation uses the same handles, with no restart or Send. Publish the complete fallback and this decision in the direction notebook, update the owned main standing to **archived for current investment**, and preserve the existing scientific positives, adverse evidence and frozen contracts. No new experiment is selected.
