@@ -764,3 +764,168 @@ complete cost, versus ending this recipe and considering the parent question's o
 feasible opportunities. The previous Pro answer covers this bounded result reading;
 newly observed tie/MC structure and any renewed investment or route closure need a
 focused follow-up at the actual choice. A positive result or a new architecture is not owed.
+
+## 2026-09-25 — Independent reading and the finite-simulation investment question
+
+A bounded read-only ResearchCritic independently reproduced the primary native means,
+signs and intervals and found no material dissent from the bounded B01 reading. It
+correctly distinguished the selected first-divergence diagnostics from evidence that
+either action was erroneous, and cautioned that more particles can expose small nonzero
+values and increase disagreement. It modestly favors one fresh finite-budget interaction
+comparison, while declining to infer that MC hid a beneficial uncertainty mechanism.
+
+The Critic found a useful uncensored reading in the existing records: every context's
+first optional root is tick0. On this common root population the P/U action disagreement
+is32/256 at k4 and10/256 at k32; estimated-value disagreement is147/256 and64/256.
+DM independently verified those exact counts and identical initial tick. This preserves
+the successful intermediate data-dose prediction without relying on unequal later
+prefix exposure. It does not recover the failed native-benefit or native-dose prediction.
+The previous paragraph's finite-knowledge example is an observed separation of these
+quantities, not a theorem or population-equivalence counterexample.
+
+I adopt the Critic's distinction between the budget interaction and each policy's own
+budget response: `(U256−P256)−(U32−P32)>0` caused only by P getting worse is not evidence
+that a better-resolved U improves use. Sampling precision, model approximation and AF
+continuation remain different potential limits. No additional same-root rollout census
+or preliminary screening study is warranted merely to establish a reason to explore.
+The candidate below is a complete fresh comparison, with an initial-root diagnostic
+already contained in its runs. I add one cheap AF evaluation per fresh context to keep
+absolute package use visible; it is not needed to identify the four-policy interaction.
+
+Current result/background publication is
+`9fc287e0487cb66fb91b5c6eb4a84e39bafeb3cf` on main. No other direction was edited or
+messaged. Current published evidence supports ordinary planning and the separation of
+better estimates from native usefulness; it neither mandates another budget nor forbids
+a modest direct experiment. Old C07 LONG and VSP independent-calibration routes remain
+closed. Controller composition has its own owner; archived S7/spatial recipes bring no
+specific new finite-model intervention here. Reopening them or inventing a UAV unknown
+would cost more implementation and change more premises than the candidate below. This
+is the concrete remaining local opportunity, not a claim that all broader questions are
+exhausted. Prior Pro advice covers B01's interpretation, but not investment after this
+newly measured finite-estimate/tie pattern. The new consultation informs that choice.
+
+## Pro question 2026-09-25 simulation-budget-interaction-after-b01
+
+Conversation: reuse the existing Jev conversation; its address remains only in local
+transport state. This is a new scientific question after completed B01, not a resend.
+
+**Question.** Should I buy the following single new exploration of simulation budget's
+effect on uncertainty integration, or end this NEAR recipe now and preserve its bounded
+result? Please decide whether the comparison would usefully change explanation or use,
+and correct a decision-critical defect if present. Neither a positive result, a new
+architecture nor an exact solution is owed. This is not confirmation or an extension of B01.
+
+**Standing and what changed.** Read the two preceding dated entries and the full B01
+outputs. B01 primary U4−P4 is0 total jobs (3+/4−/249 ties); k32 is+3 (3+/1−/252 ties),
+both approximate intervals span0. P4 and U4 each beat AF by36 jobs with4 adverse contexts.
+Calibration variance/MSE contract, and at the common tick0 root action disagreement falls
+32→10 across data doses. At selected first divergences, however,121/135 and58/65 involve
+an exact-zero estimate; no paired difference exceeds twice its particle SE. That last
+fact is selected and does not prove noise, mistaken actions or a hidden beneficial target.
+The fixed program's complete benefit is not identified by its local estimate precision.
+
+**Candidate B02, still a proposal.** Keep k4, H96, the four-point persistent physical
+parameter/prior, fixed nominal-.75 receiver, lawful shared joint physical inference,
+NEAR endpoint, AF continuation and exact-zero AF fallback. Draw256 fresh independent
+contexts, paired across `P_k4_M32`, `U_k4_M32`, `P_k4_M256`, `U_k4_M256`, and AF.
+Here M is root-particle count, not the calibration dose. The high/low policies receive
+exactly the same initial calibration and each thereafter uses its own lawful observations.
+Both P and U retain identical inference; P's future law is the global posterior mean,
+U samples theta conditionally on the common root state and holds it across each future.
+No k32, true-model, LONG, threshold scan, new receiver or policy learner is purchased.
+
+Use world/calibration master925831, planner master926073, phases50/51/52 and context
+IDs0..255, selected now before new scores. Collect only4 controlled calibration moves
+from distance33, with no saturation, then256 shared closed-form posteriors. Evaluation
+and model streams remain independent. Existing per-context/tick/category RNG addressing
+allows the first32 particles to be nested in256 on the same history, with separate
+state, parameter, movement and job streams; verify that unchanged sampling contract.
+No root-state/process truth from evaluation is available to the planner.
+
+The primary exploratory estimand is the context mean
+`I=(jobs(U_M256)−jobs(P_M256))−(jobs(U_M32)−jobs(P_M32))`.
+Jointly read both U−P contrasts, `U_M256−U_M32`, `P_M256−P_M32`, every policy versus
+the fresh AF row, complete adverse worlds/components, and full work. Ordinary paired
+approximate intervals use n256 contexts and their actual paired differences; roots,
+particles and the four nested policies add no n. Read fixed H96 endpoints once; no
+score-based extension, seed replacement or extra particle values.
+
+Tentative hypothesis: if finite root estimation materially limits the extra usefulness
+of retained uncertainty, M256 may yield a positive U−P contrast and positive interaction
+alongside an absolute U budget improvement. This is a conjecture, not an implication of
+smaller MC SE. Equal gains in P and U instead support generic simulation value; positive
+interaction solely from P loss does not establish improved U use. More stable estimates
+without native improvement weaken this particular repair rationale. Mixed/sparse readings
+can remain inconclusive and do not automatically trigger a larger-M scan.
+
+At the predeclared tick0 root shared by all policies, compare the stored M32/M256
+estimates/actions and paired sample SE descriptively. This uses particles already paid
+for by the complete runs, no extra branches or selection on first divergent histories.
+The intermediate expectation is greater estimator precision in distribution, not a
+guaranteed reduction in action flips: rare-event zeros can become small signed values.
+NEAR/AF continuation and the omitted peer-send likelihood remain uncorrected, so even a
+positive native interaction does not isolate a pure MC, curvature or dependence mechanism.
+
+**Prospective complete price.** 0 neural/policy fits or optimizer updates;256 closed-form
+calibration fits and1,024 one-robot moves;5×256=1,280 full episodes/122,880 team ticks.
+Four planner arms mean1,024 planning episodes and at most
+`256*2*72*(32+256)*2*32 = 679,477,248` model branch transitions, plus sampling,
+initialization,88-entry physical filtering, output and reading. Scaling B01's observed
+P4/U4 branch counts by9 under unchanged visits gives210,714,624 transitions, a conditional
+work estimate only. B01's P4/U4 pair took49.525907 arm-batch seconds, including29.080789
+filter and18.903771 planning seconds; higher-M wall time is not measured and not assumed
+to scale uniformly. Fresh AF adds256 episodes/24,576 ticks (historical256-context AF wall
+.450734s is not a new guarantee). Engineering/review, preparation and consultation are
+additional. One native scientific process, threads1, configured node and fresh admission;
+all frozen B01 outputs remain intact. No implementation or B02 result run has started.
+
+**Strongest alternative.** Decision-relevant target differences may be tiny or have weak
+closed-loop value despite real uncertainty; approximate inference, finite NEAR and AF
+continuation may dominate. True-law B01 is only2 jobs above P4, which lowers enthusiasm
+but supplies no ceiling. A more precise model target may still cost more than its use.
+Ending this recipe is legitimate without declaring all finite-knowledge MARL questions
+solved. If a different concrete feasible next observation is materially better, explain
+its changed estimand/prediction and full price; do not prescribe a generic architecture
+search or a mandatory exhaustive diagnosis.
+
+**Context and sources.** Paths marked source_sha resolve at the full question commit
+supplied in the transport message; historical/frozen inputs keep their own revisions.
+
+* Governance: `docs/project/OPERATING_CONSTITUTION.md` sections1–5 and8 at source_sha;
+  independent DM owns this question and may revise it. Owner pause remains lifted except
+  FSD; G33 frozen. Advice is not new authority or approval.
+* Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections Explore an idea,
+  Update the working explanation, Statistics, Cost and exposure, Pro; and
+  `.agents/skills/hmasd-research-engineering/SKILL.md`, Retain outputs and Execution.
+* Current shared understanding: `docs/research/RESEARCH.md` at
+  `9fc287e0487cb66fb91b5c6eb4a84e39bafeb3cf`, sections2,5,6,8 and the finite-model row.
+  Its C07/VSP ordinary-method assets and bounded negative/uncertain readings inform the
+  comparator and cost judgment; do not reconstruct other directions' histories.
+* This notebook at source_sha: complete prior Pro answer, its adoption, B01 full result
+  and independent reading above. The result entry separates observations from conjecture.
+* Evidence at `69e6287ea9fd24fb9e0500b41146d5d6b39ea6e4`:
+  `runs/finite_model_decision_value/b01_finite_knowledge_s925731/summary.json`,
+  `episodes.json`, `common_prefix.json`, config and native manifest/status. Raw-array
+  hashes and durable locations are recorded; a summary is not raw evidence. No assertion
+  that Pro can inspect executing-node raw NPZ is made.
+* Frozen executable B01 at `b40ea0965788f0d04b023870c34f47e86a00ceff`:
+  `experiments/candidates/finite_model_decision_value/b01/{host,belief,planning,study}.py`
+  and `scripts/run_fmdv_b01.py`; inspect only definitions needed for the disputed premise.
+
+**Return.** Recommend the actual next choice with its strongest reason and alternative.
+State what B01 strengthens/weakens/leaves unresolved. If retaining the comparison,
+identify any necessary comparator, prediction, estimand or full-cost correction and
+what each outcome could change. Do not demand a positive toy, exact headroom, same-root
+census or repeated mechanism screens as admission. End `MATERIAL_DISSENT: yes/no` for
+material disagreement with the proposed reading/comparison. Cite sources actually read
+and state decision-critical unread gaps; no training or result simulation.
+
+**Write contract.** On branch `codex/finite-model-decision-value-sept25`, write only the
+empty `### Answer` subsection immediately below this unique question in
+`docs/research/candidates/finite_model_decision_value/NOTES.md`. Read reasoning inputs
+at the pinned source, but fetch the latest target blob before writing and use its actual
+blob SHA. Preserve every other byte; stop on overlapping changes. Report the actual
+answer commit on success. On connector failure return the complete answer in chat,
+not a receipt, abbreviated summary or link. No other file edit or experiment launch.
+
+### Answer
