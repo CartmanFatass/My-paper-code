@@ -19,12 +19,12 @@ import torch
 from experiments.candidates.agent_count_generalization.action_law_b03 import runner as b03
 from experiments.candidates.spatial_demand_generalization.a2.adapter import make_envs
 from experiments.candidates.agent_count_generalization.bounded_confirmation_b15 import runner as b15
-from experiments.candidates.agent_count_generalization.configuration import DEFAULT_SPEC, FitSpec
+from experiments.candidates.agent_count_generalization.configuration import DEFAULT_SPEC, FitSpec, config_dict
 from experiments.candidates.agent_count_generalization.local_ordinary_b16 import runner as b16
 from experiments.candidates.agent_count_generalization.models import strict_sync
 from experiments.candidates.agent_count_generalization.runner import (
-    COMPONENTS, capture_parameters, digest_agent, finite, jsonable, model_modules,
-    native_components, optimizer_counts, parameter_motion, preserve_rng, save_checkpoint,
+    COMPONENTS, NORMALIZERS, capture_parameters, digest_agent, finite, jsonable, model_modules,
+    native_components, optimizer_counts, parameter_motion, preserve_rng,
     seed_rng, write_json,
 )
 from experiments.candidates.agent_count_generalization.training_condition_b11 import runner as b11
@@ -87,6 +87,40 @@ def _source_hashes() -> dict[str, str]:
     return {
         path.relative_to(REPOSITORY_ROOT).as_posix(): b15.file_sha256(path)
         for path in _source_paths()
+    }
+
+
+def save_a2_checkpoint(agent: Any, out: Path, rollout: int, config: Any,
+                       launch_sha: str, arm: Arm) -> dict[str, Any]:
+    """Persist evaluation weights with the A2 identity; there is no resume contract."""
+    path = out / f"checkpoint_{rollout:02d}.pt"
+    payload = {
+        "schema": 1, "direction": "spatial_demand_generalization",
+        "object_id": OBJECT_ID, "tag": TAG, "arm": arm.key,
+        "launch_sha": launch_sha, "rollout": rollout,
+        "config": config_dict(config),
+        "modules": {name: module.state_dict() for name, module in model_modules(agent).items()},
+        "normalizers": {
+            name: jsonable(vars(norm)) if (norm := getattr(agent, name, None)) is not None else None
+            for name in NORMALIZERS
+        },
+        "usage": "Evaluation weights; no training resume contract or optimizer restoration.",
+    }
+    partial = path.with_suffix(".pt.partial")
+    with partial.open("wb") as stream:
+        torch.save(payload, stream)
+        stream.flush()
+        os.fsync(stream.fileno())
+    partial.replace(path)
+    directory_fd = os.open(path.parent, os.O_RDONLY)
+    try:
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
+    return {
+        "path": path.name, "sha256": b15.file_sha256(path), "bytes": path.stat().st_size,
+        "direction": payload["direction"], "object_id": OBJECT_ID, "tag": TAG, "arm": arm.key,
+        "rollout": rollout,
     }
 
 
@@ -197,6 +231,49 @@ def _write_training_world(path: Path, row: dict[str, Any]) -> dict[str, Any]:
         "sha256": b15.file_sha256(path), "bytes": path.stat().st_size,
         "rollout": row["rollout"], "n": row["n"],
         "explicit_seeded_reset": True, "no_throwaway_terminal_reset": True,
+    }
+
+
+def _write_partial_evaluation_trace(
+    path: Path, trace: Mapping[str, np.ndarray], observed: np.ndarray, recorded: np.ndarray,
+) -> dict[str, Any]:
+    """Keep all available arrays while distinguishing observed and fully recorded transitions."""
+    arrays = {name: np.asarray(value) for name, value in trace.items()}
+    arrays["observed_transition_mask"] = observed
+    arrays["recorded_transition_mask"] = recorded
+    if any(value.dtype == object for value in arrays.values()):
+        raise ValueError("A2 partial trace contains an object array")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    partial = path.with_suffix(".npz.partial")
+    with partial.open("wb") as stream:
+        np.savez(stream, **arrays)
+        stream.flush()
+        os.fsync(stream.fileno())
+    partial.replace(path)
+    directory_fd = os.open(path.parent, os.O_RDONLY)
+    try:
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
+    def finite_sums(value: np.ndarray, mask: np.ndarray) -> list[float | None]:
+        totals = np.where(mask, value, 0).sum(axis=0)
+        return [float(total) if np.isfinite(total) else None for total in totals]
+
+    return {
+        "path": path.relative_to(path.parent.parent).as_posix(),
+        "sha256": b15.file_sha256(path), "bytes": path.stat().st_size,
+        "format": "NumPy npz with allow_pickle=False",
+        "observed_transitions": int(observed.sum()),
+        "recorded_transitions": int(recorded.sum()),
+        "observed_unrecorded_transitions": int((observed & ~recorded).sum()),
+        "scalar_returns_observed_by_world": finite_sums(arrays["scalar_reward"], observed),
+        "component_sums_recorded_by_world": {
+            name: finite_sums(arrays[name], recorded)
+            for name in COMPONENTS
+        },
+        "nonfinite_fields": [name for name, value in arrays.items()
+                             if np.issubdtype(value.dtype, np.floating) and not np.isfinite(value).all()],
+        "unobserved_array_rows_are_not_measurements": True,
     }
 
 
@@ -453,6 +530,7 @@ def _evaluate_stage(
             seed_rng(base + 51)
             envs = make_envs((family,) * spec.eval_lanes, seeds, spec.horizon)
             target, inference, hooks = None, None, []
+            trace = observed_mask = recorded_mask = None
             storage_calls = 0
             original_store = None
             row = {
@@ -520,6 +598,8 @@ def _evaluate_stage(
                 row["reset_scene"] = _write_training_world(scene_path, reset_scene)
                 publish(f"stage {stage} {family} reset complete")
                 trace = b15._new_panel_trace(spec, n)
+                observed_mask = np.zeros((spec.horizon, spec.eval_lanes), dtype=bool)
+                recorded_mask = np.zeros((spec.horizon, spec.eval_lanes), dtype=bool)
                 trace["initial_states"], trace["initial_observations"] = states.copy(), observations.copy()
                 trace["initial_uav_positions"] = np.stack([
                     np.asarray(env.env.env.uav_positions).copy() for env in envs
@@ -554,11 +634,15 @@ def _evaluate_stage(
                         for lane, env in enumerate(envs):
                             obs, reward, term, trunc, info = env.step(executed[lane])
                             done = bool(term or trunc)
+                            observed_mask[t, lane] = True
                             row["steps"] += 1
                             row["episodes"] += int(done)
                             summary["counts"]["evaluation_team_steps"] += 1
                             summary["counts"]["evaluation_uav_steps"] += n
                             summary["counts"]["evaluation_episodes"] += int(done)
+                            trace["scalar_reward"][t, lane] = reward
+                            trace["next_states"][t, lane] = info["next_state"]
+                            trace["next_observations"][t, lane] = obs
                             parts = native_components(info, reward, n)
                             returns[lane] += reward
                             for name in COMPONENTS:
@@ -567,8 +651,8 @@ def _evaluate_stage(
                             next_states.append(info["next_state"])
                             next_observations.append(obs)
                             dones[lane] = done
+                            recorded_mask[t, lane] = True
                         states, observations = np.stack(next_states), np.stack(next_observations)
-                        trace["next_states"][t], trace["next_observations"][t] = states, observations
                         steps += 1
                         if dones.any() and (t != spec.horizon - 1 or not dones.all()):
                             raise ValueError("unexpected A2 evaluation terminal boundary")
@@ -621,6 +705,18 @@ def _evaluate_stage(
                 publish(f"stage {stage} evaluation N={n} complete")
             except Exception as exc:
                 row.update(status="failed", failure=f"{type(exc).__name__}: {exc}")
+                if trace is not None and observed_mask is not None and recorded_mask is not None:
+                    partial_path = out / "raw" / f"partial_trace_stage{stage:02d}_{family}.npz"
+                    try:
+                        row["partial_trace"] = _write_partial_evaluation_trace(
+                            partial_path, trace, observed_mask, recorded_mask,
+                        )
+                    except Exception as trace_exc:
+                        row["partial_trace_write_failure"] = (
+                            f"{type(trace_exc).__name__}: {trace_exc}"
+                        )
+                else:
+                    row["partial_trace_status"] = "unavailable_before_trace_allocation"
                 write_json(out / f"panel_stage{stage:02d}_{family}.json", row)
                 raise
             finally:
@@ -797,7 +893,7 @@ def run_arm(
             name: sum(parameter.numel() for parameter in module.parameters())
             for name, module in model_modules(agent).items()
         }
-        checkpoint = save_checkpoint(agent, out / "raw", 0, config, launch_sha)
+        checkpoint = save_a2_checkpoint(agent, out / "raw", 0, config, launch_sha, arm)
         summary["checkpoints"].append({**checkpoint, "relative_to_arm": f"raw/{checkpoint['path']}"})
         if common_stage0_panels is None:
             _evaluate_stage(agent, arm, 0, out, summary, spec, publish, world_seed_bases)
@@ -919,7 +1015,7 @@ def run_arm(
                     **reset_checks})
             publish(f"rollout {rollout} N={n} updated")
 
-        checkpoint = save_checkpoint(agent, out / "raw", spec.rollouts, config, launch_sha)
+        checkpoint = save_a2_checkpoint(agent, out / "raw", spec.rollouts, config, launch_sha, arm)
         summary["checkpoints"].append({**checkpoint, "relative_to_arm": f"raw/{checkpoint['path']}"})
         summary["checkpoint_semantics"] = (
             "initial/final evaluation weights and normalizers only; no resume or optimizer-restoration claim"

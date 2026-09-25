@@ -217,3 +217,42 @@ checked, without touching research processes. Configured-context fetch succeeded
 background automatic repack reported an existing bad-tree warning; no repository cleanup
 or unrelated repair is attempted. The actual A2 source snapshot and required artifacts
 will be verified separately before execution.
+
+## 2026-09-24 — A2 implementation accepted for actual-node verification
+
+DM read the implementation and accepts the fixed comparison after the independent Reviewer
+closed both concrete findings. Exception-time evaluation now retains available raw arrays,
+observed/fully-recorded transition masks, component sums and content hashes; a failed
+unstarted panel reports that trace allocation never happened. Hard process termination
+cannot execute this exception handler and remains an incomplete technical event. An A2-owned
+checkpoint writer keeps the inherited weight/normalizer payload but correctly identifies
+the direction, object, tag, U/M arm, rollout and launch SHA. It adds no training-resume claim.
+The fixed dependency bytes and successful-run scientific exposure remain unchanged.
+
+On the configured local CPU interpreter, the final focused A2 suite passed **7 tests in
+9.00 seconds**. The small native test uses 16 training lanes, two H20 rounds, separate
+technical worlds and reduced model/update sizes; it exercises uniform/cluster storage and
+updates, actual common initialization, world/reset identity, private sampling, evaluation
+isolation, checkpoint loading and independently reconstructed native J/service. Fault tests
+cover before/after the first training step, evaluation failure after two actual transitions
+(two observed, one fully recorded), and failure before trace allocation. The unchanged
+`tests/hmasd/test_discoverer_entry_masks.py` also passed both parametrized cases in
+1.63 seconds, covering previous-done masks through the real discoverer update path.
+These are technical checks, not exposure to the declared production evaluation worlds.
+
+Final reviewed A2 runner SHA256 is
+`3d0e07348075e6cd46b2a85525a166af2901f41089b2b9a83237e5424afb19cb`;
+test SHA256 is `ed6760a92a85e43e074290524634a1b06f8bbd179fc1fca71c1ff1302a345921`.
+Reviewer traced layout generation, initialization/RNG, fixed-N reset, raw actions/logprobs,
+storage/entry masks/bootstrap/private sampler, evaluator and admission, then read the two
+repairs; no material finding remains. Cold imports, compilation and whitespace checks passed.
+Run the same focused suite once on the configured actual node to check its distinct runtime,
+then release this accepted, published implementation through the native launcher after its
+fresh resource/pause/lead checks. No result-bearing A2 attempt has yet been accepted.
+
+The pre-release refresh reached main `ee734907ecc936b27a99d83597d613efaf8bb9bf`.
+Its [B19 background update](https://github.com/CartmanFatass/My-paper-code/blob/ee734907ecc936b27a99d83597d613efaf8bb9bf/docs/research/RESEARCH.md)
+reports a complete, bounded positive ordered-roster comparison and a competent fixed-N6 arm;
+it does not answer spatial-family coverage. This supports retaining our ordinary LOCAL1
+reference without changing the A2 comparator, prediction, fixed worlds or cost. B19 is now
+complete rather than still executing as at registration; A2 pause/lead/routing are unchanged.

@@ -4,6 +4,7 @@ from dataclasses import replace
 import json
 
 import numpy as np
+import torch
 
 from experiments.candidates.spatial_demand_generalization.a2.adapter import make_envs
 from experiments.candidates.spatial_demand_generalization.a2 import runner as a2
@@ -117,6 +118,20 @@ def test_real_small_batch_storage_update_and_eval_isolation(tmp_path):
     for arm in ("U", "M"):
         row = json.loads((out / arm / "summary.json").read_text())
         assert row["counts"]["updates"] == 2
+        assert len(row["checkpoints"]) == 2
+        for checkpoint, stage in zip(row["checkpoints"], (0, 2)):
+            path = out / arm / checkpoint["relative_to_arm"]
+            assert checkpoint["sha256"] == a2.b15.file_sha256(path)
+            assert checkpoint["bytes"] == path.stat().st_size
+            payload = torch.load(path, map_location="cpu", weights_only=True)
+            expected_identity = {
+                "direction": "spatial_demand_generalization",
+                "object_id": a2.OBJECT_ID, "tag": a2.TAG,
+                "arm": arm, "rollout": stage, "launch_sha": "technical-sha",
+            }
+            assert {key: payload[key] for key in expected_identity} == expected_identity
+            assert {key: checkpoint[key] for key in ("direction", "object_id", "tag", "arm", "rollout")} == \
+                   {key: expected_identity[key] for key in ("direction", "object_id", "tag", "arm", "rollout")}
         expected_families = {"U": (640, 0), "M": (320, 320)}[arm]
         assert tuple(row["training_exposure_by_family"][family]["team_steps"]
                      for family in ("uniform", "cluster")) == expected_families
@@ -188,3 +203,64 @@ def test_pre_step_fault_keeps_actual_reset_and_zero_fit(tmp_path):
     assert u["incomplete_rollout"]["phase"].endswith("failed")
     scene = out / "U/raw/training_reset_r01_n6.npz"
     assert scene.exists() and u["training_reset_scenes"][0]["sha256"] == a2.b15.file_sha256(scene)
+
+
+def test_evaluation_fault_preserves_observed_and_recorded_frontiers(tmp_path, monkeypatch):
+    out = tmp_path / a2.TAG
+    original_observe = a2.b11._observe_post_transition
+
+    def fail_second_observation(trace, t, lane, env, reward, parts, n):
+        if t == 0 and lane == 1:
+            raise RuntimeError("injected evaluation instrumentation failure")
+        return original_observe(trace, t, lane, env, reward, parts, n)
+
+    monkeypatch.setattr(a2.b11, "_observe_post_transition", fail_second_observation)
+    code = a2.run_batch(out, "technical-sha", {"sha": "technical-sha"},
+                        spec=_fault_spec(), technical_seed=270000104,
+                        schedules={"U": (6, 6), "M": (6, 6)})
+    assert code == 1
+    batch = json.loads((out / "summary.json").read_text())
+    panel = json.loads((out / "U/panel_stage00_uniform.json").read_text())
+    assert batch["status"] == panel["status"] == "failed"
+    assert batch["arms"]["U"]["fit_started"] is False
+    assert batch["arms"]["M"]["status"] == "unstarted"
+    assert panel["steps"] == 2 and panel["episodes"] == 0
+    assert "J" not in panel and "service_arrays" not in panel
+    partial = panel["partial_trace"]
+    path = out / "U" / partial["path"]
+    assert path.exists() and partial["sha256"] == a2.b15.file_sha256(path)
+    assert partial["bytes"] == path.stat().st_size
+    assert partial["observed_transitions"] == 2
+    assert partial["recorded_transitions"] == 1
+    assert partial["observed_unrecorded_transitions"] == 1
+    with np.load(path, allow_pickle=False) as trace:
+        observed, recorded = trace["observed_transition_mask"], trace["recorded_transition_mask"]
+        assert observed.shape == recorded.shape == (10, 2)
+        assert observed[0].tolist() == [True, True]
+        assert recorded[0].tolist() == [True, False]
+        assert not observed[1:].any() and not recorded[1:].any()
+        assert np.any(trace["next_states"][0, 0])
+        assert np.any(trace["next_states"][0, 1])
+        assert np.any(trace["next_observations"][0, 0])
+        assert np.any(trace["next_observations"][0, 1])
+        np.testing.assert_allclose(partial["scalar_returns_observed_by_world"],
+                                   trace["scalar_reward"][0])
+    assert (out / "U/raw/evaluation_reset_stage00_uniform.npz").exists()
+
+
+def test_evaluation_failure_before_trace_allocation_claims_no_partial_trace(tmp_path, monkeypatch):
+    out = tmp_path / a2.TAG
+
+    def reject_environment(*args, **kwargs):
+        raise RuntimeError("injected before evaluation trace allocation")
+
+    monkeypatch.setattr(a2.b11, "_assert_native_envs", reject_environment)
+    code = a2.run_batch(out, "technical-sha", {"sha": "technical-sha"},
+                        spec=_fault_spec(), technical_seed=270000105,
+                        schedules={"U": (6, 6), "M": (6, 6)})
+    assert code == 1
+    panel = json.loads((out / "U/panel_stage00_uniform.json").read_text())
+    assert panel["partial_trace_status"] == "unavailable_before_trace_allocation"
+    assert "partial_trace" not in panel
+    assert panel["steps"] == 0
+    assert not (out / "U/raw/partial_trace_stage00_uniform.npz").exists()
