@@ -693,7 +693,7 @@ Nash均衡或学习方法优越性。共享参数策略可以有真实合作，�
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
 | `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | exploring | Codex DM (independent session) | **已完整读取定向Pro并接受B01，实施与独立审查中。** 固定全部三个B20-F45、角色0–2/3–5、S1 N6/c10 LOCAL1，九格×32新世界×H500＝144k团队步，0新fit；尚无结果launch。联合读取J/真实服务、同源匹配差、完整去行列残差、每格相对两来源同源参照及不利世界。有限非加性、实际混编用途与训练可修复性分开，世界bootstrap不增加训练n；不预购后继训练。[完整建议、决定与L0](candidates/controller_composition/NOTES.md#2026-09-25--complete-pro-reading-scientific-acceptance-and-l0)。[任务路由](#session-routing)。 |
-| `finite_model_decision_value` | 同一有限合法数据和计算下，环境参数与隐状态的不确定性何时改变有用的动作排序与完整团队后果？ | exploring | Codex DM (independent session) | **新独立Astra Max DM已实际接续。** 保留AF与普通plug-in，研究有明确知识合同的不确定性处理；先界定物理律/过滤器/固定接收器中的常数与完整数据/分支成本，再前瞻选择有限比较。非线性提供猜想而非收益保证；无证明、正toy或单步诊断前置要求。当前0新结果操作，未虚构fit总价。[本轮计划](#current-research-plan)；[实际任务](#session-routing)。 |
+| `finite_model_decision_value` | 同一有限合法数据和计算下，环境参数与隐状态的不确定性何时改变有用的动作排序与完整团队后果？ | exploring | Codex DM (independent session) | **B01六臂完整探索已选，尚无结果。** 固定接收器、四点持久运动律，公共校准4/32步；共享联合物理过滤后比较后验均值前向P与联合采样U，保留AF和真参数NEAR知识参照。256配对context、0策略fit/512闭式模型拟合、147,456评价团队步，分支上界188,743,680；并列计量收益和成本。联合不确定性增量及数据剂量预测可失败，不识别纯曲率或一般MARL收益。完整Pro已核验并由DM采纳，下一步实施审查、准入执行。[设计、完整建议及决定](https://github.com/CartmanFatass/My-paper-code/blob/66f1bbe6397ecfd2c0c91b1024550bc537beb2b4/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--full-pro-reading-adoption-and-b01-implementation-scope)；[任务路由](#session-routing)。 |
 | `spatial_demand_generalization` | 有限空间任务训练覆盖如何影响普通多智能体控制在留出布局上的用途与专门化代价？ | archived | Codex DM (independent session) | **C01完整，当前空间混合路线新增投入结束；保留U。** hotspot M−U为J −.025632493、服务−1.191150人/步，t95为[−.067046834,+.015781848]/[−3.827524,+1.445224]；联合正均值未建立，不宣称等价或确定有害。十fit各自三个家族的J/服务均值均改善，uniform/cluster额外均值均不利，A2/C01第二配对正例与局部损失保留。10 fits/4.32M团队步完整保全。完整Pro答复已核验保存并逐项判断；旧/新面板回放有有限解释价值，但当前不值得全部成本，四中心与泛化调参也未选。无第六块、活动操作、开放Pro或已选后继；不外推为所有覆盖学习无用。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/b35996ba188d31cc01b3a422a47c24b1fde6bce3/docs/research/candidates/spatial_demand_generalization/NOTES.md#2026-09-25--c01-complete-joint-positive-mean-not-established)；[完整建议与DM决定](https://github.com/CartmanFatass/My-paper-code/blob/287d16776ca93d5ea0bfa56e15adfedb05501097/docs/research/candidates/spatial_demand_generalization/NOTES.md#2026-09-25--decline-panel-replay-and-end-current-spatial-mixing-investment)。[任务路由](#session-routing)。 |
 | `uav_service_auxiliary` | 在 S7 能源约束下，怎样把能量恢复与控制转成完整服务及返航风险的净收益？ | archived | Codex DM (independent session) | **当前S7修补投入结束，保留O+F。** 完整Pro已核验保存，DM不购买进站模型或常数提前比较；几何相关估算差异真实，但未测试闭环收益仍未知。B11的恢复增加、完整J−3.347054及等待/电池代价和全部有利世界保留；不否定普通反馈既有用途或更广服务—风险问题。0追加fit/评价，无活动操作、开放Pro或已选后继。[完整B11](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--b11-complete-guarded-continuity-changes-recovery-but-adds-no-mean-complete-utility)；[完整建议与DM决定](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--complete-approach-advice-read-end-current-s7-repair-investment-and-retain-o-plus-f)。[任务路由](#session-routing)。 |
 | `goal_conditioned_entity_aggregation` | 当前技能条件化的实体聚合，能否比原始 MLP 或普通条件化池化提供有用的完整共同学习收益？ | reserve | Codex DM (independent session) | 原直接 DM task `01a0c7e4-e1aa-7460-a6bb-43db5c1b0898`，host `local`；原 checkout `/home/fires/.codex/worktrees/query-aggregation-sept22/hmasd-wsl` 已缺失，branch `codex/goal-conditioned-aggregation-20260922` 与原 lead 保留。固定 B01 O/P/E 的 3 fits 全部完成：每臂360k，共1.08M train/48k eval。Root 已从原节点取回并完整核对 E，三臂 J=.509137/.159861/.183016；P−O=−.349276、E−O=−.326121，均32/32世界不利；E−P=+.023155（20正/12负）。fit-body O/P/E=89.9204/109.7429/91.5859 min。每臂一个训练实例，结束这两个具体配方当前投入，不否定整个表示类；不新增第四条持续研究线。无运行中训练，原 DM 最终 notebook 补录仍待其承接，不声称已重载或交接。[P完整记录](candidates/goal_conditioned_entity_aggregation/NOTES.md#2026-09-22--b01-p-complete-and-read-e-remains-the-fixed-third-arm)、[E原生输出](../../runs/goal_conditioned_entity_aggregation/b01_e_s922611/summary.json)、[恢复事实与项目判断](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)。 |
@@ -812,10 +812,13 @@ A2于本轮更新期间完整关闭当前路线并发表；释放的研究资源
 该单agent/POMDP桥接可以直接启发有限MARL比较，无需先完成理论或正toy。固定接收规则、数据取得、评价总体
 和规划预算怎样匹配，是首项设计要具体化的内容；不是先买旧C07的一套全量分支来证明值得研究。
 
-Root的定向只读批评指出`.75`在旧物理filter、rollout和接收器投影/选路中含义可能不同。新DM已被要求核对
-精确来源，防止候选隐含保留真模型信息或把接收器改动归因于估值。旧LONG与VSP独立校准不重做。该DM负责
-尽快提出有完整价格的最小有用比较、取得针对实际设计的Pro意见并自主推进；未知总价不冒充0成本，也不是
-永久停留在准备阶段的理由。与策略组合研究保持独立所有权和估计对象，不要求互相等一个阳性结果。
+DM已核对旧`.75`边界：真实运动、物理过滤和前向模拟随所声明未知律一起改变；缓存投影/选路中的`.75`
+保留为双方固定控制器常数。选定B01在四点持久共享参数总体中比较P4/U4/P32/U32/AF/真参数NEAR，P与U
+具有同一联合推断资源，差异在前向估值；不把P称作最廉价点过滤流水线。32次校准由自身位置观测取得，
+各剂量只消费自己的前缀，在线仍用各自合法私有历史。256 contexts共8,192校准步、512闭式拟合、
+1,536完整回合/147,456团队步，模型分支上界188,743,680，实际过滤/采样/存储/读回与墙钟另计。
+完整定向Pro及DM选择已[发布](https://github.com/CartmanFatass/My-paper-code/blob/66f1bbe6397ecfd2c0c91b1024550bc537beb2b4/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--full-pro-reading-adoption-and-b01-implementation-scope)；
+现进入实施与独立审查，尚无新结果。旧LONG与VSP独立校准不重做，与策略组合研究保持独立所有权和估计对象。
 
 ### 后续选择、文献与DM连续性
 
