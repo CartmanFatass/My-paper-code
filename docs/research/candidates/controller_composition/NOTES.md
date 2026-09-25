@@ -399,3 +399,121 @@ implementation, 864k executed action rows may require 1.728M policy action-row i
 this adds compute but no environmental transitions or new fits. Exact implementation
 cost and correctness remain to be measured. No choice of controller, split or endpoint
 has changed in response to outcomes.
+
+## 2026-09-25 — Complete Pro reading, scientific acceptance and L0
+
+### Same-request reconciliation and full reading
+
+The one accepted Jev operation is
+`hmasd:a3dc9551a847129b3ea2a74b8f99da20cfa60a5dda16d6615e8b6cea82baf578`, source
+`8238a040afb7dc074ce92a76476adf652818ea5e`. Native observation returned COMPLETE, a
+760-character chat receipt and no new Send. The standard deliver command reported CONFLICT
+for first answer commit `efeac0c0738a3565b96efba52e79cecff9ac8c54`: Pro had omitted the
+question sentence "Background is revisable evidence, not governance." Pro's subsequent
+`6437cfe7303d4e74da3ecd65c5f746113f58f9e0` restored that exact sentence. Both versions are
+preserved in Git. Direct byte comparison of the final version against the pinned source
+confirmed that only the formerly empty Answer changed; the question, later source map and
+every byte outside Answer are identical, and only the assigned file changed. The final
+commit is on the published direction branch and was fast-forwarded into this checkout.
+This independently resolves delivery despite the first-insertion detector's CONFLICT;
+the conflict return is not relabeled as a clean automated delivery.
+
+I read all 11,509 characters of the substantive answer, including sources and limitations.
+The extracted complete answer plus trailing newline has SHA256
+`eefbb249f4eaea40d1c27fa6518f9093869b8a3426fea2a7a237366c91b93689`.
+The response reports MATERIAL_DISSENT: no; that is advice, not empirical confirmation.
+The passive observer closes its own browser tab in its finalizer. No unrelated tab, Pro
+question, worker or independent task was touched. The collected event was consumed through
+the same wait generation; there are no remaining Pro jobs to restart.
+
+### DM decision and fixed B01 reading
+
+I accept the complete matrix as B01. Its finite composition question warrants 144k native
+evaluation team steps and bounded restoration work; no inspected direct-learning alternative
+has a known comparable complete price. This is a positive investment decision about a useful
+observation, not an expectation of a positive matching score. I retain all three F45 sources,
+the 0–2/3–5 split, all nine ordered cells, 32 worlds 92525000–92525031, H500, deterministic
+native action selection/clipping, N6/c10 and LOCAL1. Runtime construction seed is 92525051
+under the source RNG isolation. No parameter or normalizer changes; zero new fits/updates.
+The source map's strict restoration, ordered-row and separate recurrent-state checks remain.
+
+I adopt Pro's distinction between finite nonadditivity, useful mixed deployment and a
+trainable compatibility remedy. The relevant current main still supports this distinction
+and has registered this direction as exploring with lead `Codex DM (independent session)`.
+Current main now records the other DMs' completed A2/S7 route decisions and a separately
+assigned finite-model question; those publications do not change this comparison or its lead.
+
+The primary readings remain J and actual served users per step, jointly by cell/world.
+Alongside V/C/D/R, retain per-world r, the symmetric and antisymmetric parts of R, and the
+cyclic contrast kappa=(V12+V23+V31−V21−V32−V13)/6. I checked algebraically that
+D=mean(C)=trace(R)/2; none is independent evidence. For every mixed cell retain its
+differences from both source diagonals, including each world's differences, rather than
+calling a negative C a usable improvement. Coverage, quality, height penalty, eligible,
+eligible-unserved and mean height remain native descriptive components. No invented S1
+battery-risk endpoint or causal cooperation percentage is added.
+
+Use 10,000 paired-world bootstrap draws with analysis seed 92525999, resampling the entire
+world's J/service nine-cell block together. Publish pointwise 2.5/97.5 percentiles for V,
+C, D, R, kappa and the source-diagonal differences, labeled conditional on this fixed
+library/partition and a world-generator iid/exchangeability model. The exact finite panel
+means require no bootstrap to define them. Intervals are not simultaneous and do not
+increase training n or establish equivalence. World-level residuals preserve cancellations.
+All prewritten outcome/investment branches above remain; no after-score additions, winner
+verification claim or automatic training purchase. The full Pro advice is adopted with these
+explicit finite-panel/statistical distinctions; no material scientific objection is rejected.
+
+### L0 — one frozen nine-cell native evaluator
+
+Deliverable: implement a checkpoint-restoring, zero-update native evaluator and compact
+reducer for this accepted B01, with one admission-guarded argparse entry. Own new files under
+`experiments/candidates/controller_composition/b01/`,
+`tests/experiments/candidates/controller_composition/b01/`, and
+`scripts/run_controller_composition_b01.py`. An Implementer may edit those paths only;
+the DM keeps the notebook, index, commits, exact-source dependency restoration, node staging,
+launch and publication. The Implementer is not alone in the repository and must preserve
+other writers. No training, result-bearing launch, Pro call, new scientific arm or children.
+
+Reuse the minimum necessary B20-native helper closure from exact source
+`424bbe4db1351db70d73560ece913150c2b20ed4`; restore missing candidate dependencies byte-for-byte
+under their original paths, recording the list/digests here when known. Do not merge the
+old experimental branch history or overwrite divergent shared core. A genuine shared-core
+incompatibility returns to the DM rather than silently changing the source policy meaning.
+
+Bind the three exact source file hashes/configs/seeds/F45/launch SHA; use safe strict tensor
+loading where compatible, restore every serialized model and normalizer, check identity and
+finite state, and forbid optimizer/storage/update calls. Use two independent full N6 runtime
+instances for every cell, including the diagonals, observing one real mixed environment per
+world. Use the first runtime's action rows 0–2 and the second's rows 3–5; each sees the same
+legal actual observations and keeps private lane/role RNN state. Keep dtype/device CPU float32,
+source torch_threads=4 and source clipping/order/reset/time semantics. No two-N3 shortcut.
+The straightforward implementation computes 1.728M action rows and executes 864k of them.
+Keep native environment RNG isolated from model construction and cell order. Record actual
+native-agent row identities and initial-world hashes across all cells. Assert no unexpected
+early termination, complete 500 steps/world, finite outputs and unchanged model/normalizer
+digests before/after all cells. Preserve failure artifacts instead of filling missing cells.
+
+The new runner calls `require_admission` before output creation or scientific effects and
+requires `--launch-sha` to match admission. Source identity includes frozen dependency bytes
+and declared external checkpoint digests. CLI has seed=92525000 and frozen scientific
+configuration; no production bypass/smoke selector. Tests use explicit mocked admission.
+Write config, progress, complete compact per-world/cell summary with V/C/D/R and joint
+uncertainty, actual transitions/inference/optimizer counts, all source/digest identities,
+wall/CPU/RSS telemetry and artifact metadata. Raw step actions/native component streams live
+under raw/ for durable retention, sufficient to audit actual components/counts; avoid storing
+unneeded bulk intermediate tensors or duplicating trajectories inside summary.json.
+
+Focused checks: exact checkpoint/config rejection; actual safe load/restore and unchanged
+normalizers; independent hidden-state/reset and ordered-row routing; homogeneous composition
+agrees with the unchanged native evaluator path on a bounded non-result fixture; native
+component/J/service reconstruction; RNG/initial-world invariance under cell order; forbidden
+update/storage calls; and independent algebra fixtures including additive role-specific
+quality, cyclic interaction invisible to C, opposing per-world residuals and paired bootstrap
+coupling. Tests own/clean temp scratch through pytest. Report actual fixture transition cost
+separately; never consume or score the production world panel as a test.
+
+Budget/stop: one implementation of the fixed study, no framework or tuning. Necessary tests
+and independent high-risk review are paid correctness work; there is no result pilot or
+extra fit. Stop the dependent path on checkpoint/source mismatch, illegal information,
+state/row misalignment, insufficient resources or uncertain external acceptance. Return
+diff, check outputs and limits to the DM. The DM accepts after reading them and independent
+review, then commits/pushes exact inputs and launches once through the configured kernel.
