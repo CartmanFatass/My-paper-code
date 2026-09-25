@@ -1431,3 +1431,174 @@ The metadata and initial/final checkpoint hashes match the node. M had26 rollout
 and rollout27 updating when collected; no evaluation cell was complete. Main/control remain
 unchanged at`56c660d6353782612d236b8f1e1c0e1b6830ca71`. Continue the same fixed batch and observer;
 the complete13-cell reading and full raw-artifact recovery remain pending.
+
+## 2026-09-25 — B02 complete: learned responses, conditional transfer gain and seen-partner cost
+
+**Complete exploratory reading, not confirmation.** All three declared fits and all13 evaluation
+cells completed under the original native admission. The valid process-exit witness records0;
+both native identities are absent and records are consistent. I read all training curves,
+the full cell/contrast table, conditional intervals, component readings and adverse worlds.
+The full fixed comparison is accepted as executed; no fit, partner, world or endpoint was
+replaced or added after seeing its result. Inputs remain pinned by the
+[manifest](../../../../runs/controller_composition/b02_partner_training_20260925/launch-manifest.json)
+and [configuration](../../../../runs/controller_composition/b02_partner_training_20260925/config.json).
+
+### Execution, independent reading and cost
+
+The [runner summary](../../../../runs/controller_composition/b02_partner_training_20260925/summary.json),
+three fit files, all135 rollout files,13 cell files and final progress/exit records retain the
+complete output. Actual exposure is3 fits,1,080,000 training team steps and208,000 evaluation
+team steps, with416 evaluation episodes. Training executed3.24M learner and3.24M partner rows;
+evaluation executed1.248M rows. Actual inference was6.48M learner training rows,8.64M partner
+training rows and2.496M evaluation rows: M inferred both frozen sources over the full physical
+batch, including unused rows. Equal executed exposure does not imply equal inference cost.
+Actor and critic each made151,875 optimizer calls in total; every other optimizer made zero.
+All three actual initial learner/normalizer/optimizer states and corresponding training reset
+identities match. Every M rollout retained its prescribed8/8 assignment. Actor/critic parameters
+moved, coordinator parameters did not; evaluation had zero updates/storage and frozen digests.
+
+Independent Reviewer read all135 training rollouts and13 evaluation cells from retained raw
+arrays, checked all424 recorded raw-artifact hashes, routing/clipping, native reward/service
+reconstruction, counts, reset identities, assignments and parameter movement. Its independent
+algebra and all10,000 joint paired-world bootstrap draws matched the complete reported analysis
+within2.10e-14; no material mismatch was found. This readback added zero fits or environment
+transitions. Training raw files do not retain terminal masks: their boundary check rests on
+the previously reviewed collector and completion evidence. Digest consistency is not a replay
+of every transient runtime state. These limits do not turn technical checks into mechanism proof.
+
+Measured fit-body wall seconds were F1=1283.584114, F2=1305.628709, M=1446.956275. Runner wall
+was4268.298203s (71.14min), process CPU17046.358477s, peak process RSS5,161,316KiB (4.922GiB).
+Admission-to-native-exit elapsed4464.830169s (74.41min) uses a wider timing boundary. RSS is one
+batch-process peak, not three independent fit peaks. Implementation, fixtures, consultation,
+transfer and reading are additional support work; their earlier measured/unmetered boundaries
+remain above. The old three-source training cost is historical, not counted again as new fits.
+
+All584 native files,329,264,228 bytes, were copied from the recorded node output to durable
+`/home/fires/hmasd-retained-runs/controller_composition/b02_partner_training_20260925` and every
+file/byte count/SHA256 was matched to the node. This includes424 raw files totaling325,919,113
+bytes, with content identities in the summary. The158 unchanged compact JSON files total
+3,345,115 bytes and are versioned here. Summary SHA256 is
+`56bde4a6a7c8812295c9dc0a24dd18fa53e4bd5c77ce9bd38fbbff50ef2456fc`.
+The original node output remains; no source or artifact cleanup was needed. The READY event
+was consumed using its actual generation10/wake/event binding. There are no remaining active
+result or Pro operations; completed handles were not restarted.
+
+### Complete native readings
+
+Each entry below is panel mean J / served users per step on the same32 new worlds.
+
+| Learner | Partner1 | Partner2 | Partner3 |
+| --- | ---: | ---: | ---: |
+| Common initialization I | .355892005 /25.523125 | .357561214 /25.638625 | .366923664 /26.266063 |
+| F1 | .533323077 /34.320375 | .532879881 /34.420375 | .533275198 /34.369188 |
+| F2 | .537987006 /34.658625 | .542755224 /35.043563 | .531383597 /34.098313 |
+| M | .532898943 /34.331125 | .528974611 /34.122500 | .539079685 /34.704063 |
+| Old source3 reuse | — | — | .527135327 /33.785375 |
+
+All nine final-versus-initial mean differences are positive: J+.164460 to+.185194 and
+service+7.832250 to+9.404938. Every J world improves, but preserve two service exceptions:
+F2@2 loses.934 at world92540019 and F2@3 loses1.026 at92540009 versus their respective initial
+cells. These observations and real parameter updates establish that these particular response
+learners learned useful behavior; they do not establish M's incremental training advantage.
+
+The following intervals are the predeclared pointwise95% paired-world percentiles, conditional
+on these fitted weights, fixed library, partition, deterministic law and selection exposure.
+They do not include training-realization uncertainty or form simultaneous table-wide intervals.
+
+| Contrast | J mean [conditional interval] | Service mean [conditional interval] |
+| --- | ---: | ---: |
+| Primary M−F2@3 | +.007696088 [−.006551225,+.021045987] | +.605750 [−.4728875,+1.6165844] |
+| M−F2@1 | −.005088063 [−.017505699,+.007010931] | −.327500 [−1.2282516,+.5362344] |
+| M−F2@2 | −.013780613 [−.026468646,−.002411090] | −.9210625 [−1.8174484,−.0868609] |
+| M−F1@3 | +.005804487 [−.008392410,+.019928695] | +.334875 [−.6720656,+1.3481406] |
+| F1−old3/3@3 | +.006139870 [−.006873254,+.019629136] | +.5838125 [−.3839547,+1.5790641] |
+| F2−old3/3@3 | +.004248269 [−.006440015,+.015706448] | +.3129375 [−.4640078,+1.1467547] |
+| M−old3/3@3 | +.011944357 [−.003696423,+.027260448] | +.9186875 [−.2585797,+2.0591281] |
+| T, fixed-response specialization | +.002605707 [−.003707959,+.009043179] | +.1424688 [−.3142516,+.5986563] |
+| H, partner3 relative gain | +.017130426 [+.003176017,+.031828945] | +1.2300313 [+.1908711,+2.3308703] |
+
+Primary J has19 favorable/13 adverse worlds; service has18/14, with18 jointly favorable,
+13 jointly adverse and one sign conflict at92540008. World92540027 is adverse against all
+three partner3 references: M−F2=−.135428817 J/−9.952 service, M−F1=−.133446024/−9.556, and
+M−old3/3=−.114869509/−8.592. The largest primary gain is at92540009:+.114522181/+8.686.
+M−old3/3 is favorable in22/32 worlds on both metrics; M−F1@3 has only15 favorable/17 adverse
+service worlds despite its positive mean. The partner2 primary-comparator loss occurs in21/32
+worlds, with a worst−.133617501 J/−9.092 service at92540010. No world is discarded or reweighted.
+
+The positive T mean does not show that both fixed learners specialize in their own partner:
+F1−F2@1 is−.004663929 J/−.338250 service, while F2−F1@2 is+.009875343/+.6231875. H is positive
+in22/32 worlds, but six of its favorable J worlds and seven favorable service worlds have
+an adverse primary difference. H includes the seen-partner losses; it cannot replace the
+primary comparison or prove transfer/partner-inference causality.
+
+Component arithmetic is coherent with the native totals. M−F2@3 changes coverage by+.012115,
+quality by−.003014468 and height penalty by−.000119928; E/S/U change by+.453875/+.605750/−.151875.
+At partner2, E/S/U change by−.5351875/−.9210625/+.385875, with a+.000548098 height penalty.
+M−old3/3@3 improves coverage/quality but pays+.001987744 height penalty (mean height+1.987744);
+its E/S/U changes are+.4984375/+.9186875/−.420250. These describe geometry/service and the
+declared J=.7 coverage+.3 quality−height penalty. They do not measure S7 battery/return risk.
+
+### Working explanation after B01 and B02
+
+B01 weakened the premise of a uniform old-bank matching loss, without establishing
+interchangeability or trainable headroom. B02 now supplies the direct learning observation
+that B01 lacked. Finite response learnability is strengthened by all three learners' own gains.
+The mixed program's partner3 mean advantage, its positive H and its positive old-reuse mean
+are genuine finite observations worth retaining, not zeroed because intervals cross zero.
+They give a tentative partner-conditioned pattern, alongside a clear seen-partner2 panel cost.
+They do not establish a stable training-program advantage, a pure overall-quality improvement,
+mutual fixed-response specialization or learned online identification. Ordinary fixed response,
+state visitation/regularization and this training realization remain live explanations; this
+table does not isolate their causal shares. Partner3 remains training-excluded but previously
+observed. No generic unseen-partner, coordination-mechanism or MARL/UAV claim is made.
+
+This uses current main`56c660d6353782612d236b8f1e1c0e1b6830ca71`'s structural background:
+changing partner exposure with unchanged deployment information/architecture tests a finite
+training program, not the information or policy-class optimum. The result adds a useful
+qualification to its collaboration discussion: own learning and a favorable transfer contrast
+can coexist with seen-partner losses and uncertain incremental value over a reusable asset.
+
+## 2026-09-25 — End current fixed-bank mixing investment; retain the complete response assets
+
+I do not purchase another result batch or confirmation for this fixed three-source50:50 recipe
+now. This is an investment decision, not equivalence, falsification of broader coordination or
+a finding that M is useless. Its primary and old-reuse panel means are favorable; the honest
+remaining uncertainty includes both training recurrence and the cost on already-seen partners.
+There was no predeclared deployment mixture or acceptable service-loss threshold, so I do not
+invent one after the results or turn H's interval into an alternative pass rule. The current
+comparison does not justify selecting a general replacement for the retained ordinary assets.
+
+I reuse the complete, verified partner-training Pro Answer's sections6–8: they explicitly
+separate own learning, primary transfer, reuse value, seen-partner tradeoffs, conditional
+uncertainty and the decision to stop when the next information lacks a worthwhile use. These
+premises and outcome branches still apply. The favorable observations and counterevidence
+above are my actual reading; the adviser has not retrospectively reviewed this batch. I adopt
+its instruction to retain both, and decline automatic confirmation or a new module. I introduce
+no new failure diagnosis, broader claim or changed question requiring another consultation.
+
+I considered concrete continuations rather than treating a completed recipe as the end of the
+question. Three fresh matched F2/M training pairs are feasible: six further360k fits would buy
+recurrence evidence at2.16M additional training steps and about2.3 fit-hours if the measured
+F2/M rates recur on this node, before evaluation/support. Recurrence could strengthen a narrow fixed-partner claim,
+but would still not settle a deployment tradeoff or establish broader partner-population value.
+I have not identified a current use decision for which that precision warrants the complete
+cost. This is not a prohibition on replication or a significance-based sample-size rule.
+
+More worlds with the same weights would only refine conditional precision; more partner sources,
+role partitions or a different interaction-heavy host would change the population/question.
+They can be legitimate future studies, but are not selected from this result. Ratio/horizon
+tuning or an inference/latent-coordination module would additionally assume a modifiable cause
+that the present T/H table does not identify. Such exploration is not required to prove a
+mechanism first; I simply do not choose its new engineering and fitting cost on the current
+evidence. The old B01 matrix is not extended into a controller-selection search.
+
+I also reconsidered current project background rather than assuming this asset route must be
+rescued. Its C01/B20 learning-versus-increment distinction and the retained ordinary methods in
+the communication, service and finite-model work favor keeping competent baselines and full
+adverse evidence; none supplies a concrete, independently motivated pivot I select here.
+Other directions' ownership and FSD/G33 controls remain intact. This ends the present fixed-bank
+asset investment and releases its runtime resource use, while leaving the broader useful
+coordination question open. F1/F2/M checkpoints, old sources and every positive/adverse reading
+are retained. There is no active operation, pending Pro answer, selected successor or external
+dependency being used to defer a decision. Publish the completed result, affected shared
+understanding and this bounded stopping scope under this direction's own standing.
