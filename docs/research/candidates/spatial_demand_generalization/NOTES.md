@@ -845,3 +845,35 @@ was touched. The node's previously recorded bad-tree auto-GC and missing-object 
 warnings remain unrepaired; source/worktree creation completed, and no history was rewritten.
 Subsequent sparse materialization used only per-command Git cache/auto-GC settings. Actual-node
 tests and fresh native admission remain the next checks; no C01 production fit has started.
+
+## 2026-09-25 — C01 native checks and explicit pre-admission command repair
+
+Published fixed input for **all five blocks** is
+`9e44adde3d54fcd0363a2ebdbc1468494141c27b`. The configured wsl_4070 interpreter verified all
+four reviewed file digests and passed the same six focused tests in **7.72 seconds** (14
+upstream Pyparsing warnings). Source is unchanged after that check. Fresh published main
+advanced to `5dda303f93` with this direction still confirming, the same lead and pause lifted.
+No scientific choice, seed, endpoint or output changes.
+
+The first outer supervisor delivery, `c01_b0_s263000101_9e44adde`, exited zero in its recorded
+0-second duration without reaching native admission. Native status reported the expected
+output absent; the exact C01 block tag had **no native claim**, and no matching kernel/runner
+process existed. Its original wrapper, log, exit, PID and start record remain under
+`/home/wu/.agent-tasks/c01_b0_s263000101_9e44adde`. Production cost is zero started fits and
+zero environment steps, not a completed or failed training result.
+
+The cause was reproduced without scientific effects: the configured supervisor joins its
+command argv with `COMMAND="$*"` before eval, so passing zsh, -lic and its command as separate
+arguments lost that command boundary. Zsh executed only `exec` and returned zero. An inert
+printf test reproduced the zero/empty output; preserving the shell-quoted zsh invocation as
+**one supervisor argument** returned the sentinel as expected. No launcher or supervisor code
+is changed. I explicitly select this bounded invocation repair after reconciliation; it is
+not an automatic restart or replacement of any accepted fit. The original native request has
+not entered the admission kernel.
+
+The corrected delivery will use a distinct outer task
+`c01_b0_s263000101_9e44adde_native`, preserving the failed delivery's evidence, and the **same**
+published source, native block-0 output, direction/lead, seed and admission identity. A kernel
+claim found during reconciliation must be observed under that identity, never bypassed by a
+new tag. The no-fit-retry/no-sixth-block confirmation rule remains unchanged. Only actual
+native admission and observed runner identity will establish that C01 began.
