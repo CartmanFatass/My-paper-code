@@ -20352,3 +20352,117 @@ original seed/world bindings and the same frozen input commit as block1, with a 
 process and F then M. The adverse first block remains in the fixed batch unchanged.
 Observation follows this new accepted operation; completion still requires full reading
 before the predeclared third pair. No new endpoint, seed, panel or fit was added.
+
+
+## 2026-09-25 — B20 block 2 terminal artifact reading
+
+The second pair's native witness reports exit0 with both recorded processes absent.
+Reuse the block1 reading scope and independent-check method: change only the raw
+reader's two block labels and training-world base3246100→3346100 in this output directory,
+and run the unchanged reviewed B20 contract reader for block2. Recompute all nine actual
+panels and inspect the complete resets, training rows, checkpoints, identity, native
+components and adverse/own-learning results. These artifact-only reads use zero new
+fits or environment interactions. Preserve a verified durable copy, then reclaim only
+this operation's disposable snapshot. Technical validity governs continuation to the
+already fixed third block; observed signs do not change the plan or its final rule.
+
+### Second-pair evidence accepted after complete readback
+
+The DM accepts block 2 as technically valid after the raw trajectory reader and the
+unchanged B20 `_block_reading(2, ...)` both passed. The independent Reviewer verified
+the exact three-line reader adaptation, native terminal/process identities, seed and
+world bindings, recorded source hashes against the common input
+`424bbe4db1351db70d73560ece913150c2b20ed4`, and the actual checkpoint/reset/training/panel
+artifacts. Its independent raw reductions agree with the DM's reports; no material
+technical-validity finding remains. This accepts one completed pair, not a two-block
+confirmation verdict.
+
+All nine actual raw panels reproduce native J=.7C+.3Q−P, scalar J/N, S=50C and U=E−S,
+eligible legal connections/capacity10, clipping and transition continuity. Common
+physical worlds match across initialization/F45/M45. Each measured eligible user has
+at most one eligible UAV and the capacity-clipped eligible-count identity holds in
+these panels; neither observation is generalized to unmeasured hosts. F/M initial
+checkpoint tensors and full normalizer/optimizer/runtime/RNG identities match within
+the pair, while initialization is fresh relative to block 1. All 90 reset/training
+rows and the 15 matched N6 scenes satisfy the fixed contract. Training numbers are
+finite, with the declared order, exposure and sampler counts and no sequence/time
+tail loss. Evaluation preserves the training state and adds no storage/optimizer
+calls. Actual actor/critic parameter movement is present in both arms; coordinator
+and state-embedding parameters remain unchanged.
+
+Actual cost is two started/completed fits, each 360,000 team / 2,160,000 UAV training
+steps, 45 outer updates, and 101,250 actor plus 101,250 critic optimizer calls. The
+common initial evaluation runs once, F has six actual panels and M three, totaling
+144,000 evaluation team / 864,000 UAV steps and 288 episodes. Total pair exposure is
+864,000 team / 5,184,000 UAV steps. Runner wall is 7,228.580678s (120.476345min);
+complete-process RUSAGE_SELF peak is 4,473,572KiB (4.266331GiB), not a sum of arm
+peaks. Scratch peak and other-process use remain unmeasured. Raw and contract reads
+took 3.302s and 1.597s; independent review and retention are support cost with zero
+new fits or environment steps.
+
+| N | Initial J | F45 J | M45 J | M−F J | Initial S | F45 S | M45 S | M−F S |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 5 | .181338854 | .549004122 | .443929892 | -.105074230 | 17.4538125 | 35.4243750 | 28.6330625 | -6.7913125 |
+| 7 | .079755074 | .487213934 | .419990598 | -.067223337 | 10.7129375 | 31.6665625 | 27.3146250 | -4.3519375 |
+| 6 | .159016014 | .532626456 | .441047417 | -.091579040 | 15.6168750 | 34.6233750 | 28.7061250 | -5.9172500 |
+
+| N | F own ΔJ / ΔS | M own ΔJ / ΔS | M−F ΔC | ΔQ | ΔP | ΔE | ΔU | Δheight |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 5 | +.367665268 / +17.9705625 | +.262591038 / +11.1792500 | -.13582625 | -.011242030 | +.006623246 | -4.6296875 | +2.1616250 | +6.623246 |
+| 7 | +.407458861 / +20.9536250 | +.340235524 / +16.6016875 | -.08703875 | -.007804809 | +.003954769 | -3.9669375 | +.3850000 | +3.954769 |
+| 6 | +.373610442 / +19.0065000 | +.282031402 / +13.0892500 | -.11834500 | -.012704545 | +.004926176 | -5.2360625 | +.6811875 | +4.926176 |
+
+Both arms improve J and service from the actual common initialization in every world
+at all three N values. M nevertheless has lower mean J and service than F at N5/N7/N6,
+and all four co-primary block means are negative. Lower mean coverage/quality/eligible
+users and greater height penalty/unserved users contribute to the measured M−F loss.
+This decomposition does not establish count support, order, recency or clipping as
+its cause. Both fresh blocks are adverse to B19's apparent package advantage; they
+share the fixed B20 evaluation worlds and vary the prescribed training block. These
+observations remain within the fixed program and do not alter B15's reading.
+
+At N5/N7/N6, paired J signs are 0+/32−, 4+/28−, 1+/31− and service signs are 0+/32−,
+3+/29−, 1+/31−, with no ties. The adverse J-or-S counts are 32/29/31 of 32 worlds.
+Worst paired J/S differences occur together at world2446523
+(−.257869870/−18.428), world2446717 (−.207288050/−14.482), and world2446627
+(−.188695803/−13.598). World2446710 has positive ΔJ (+.005670059) but negative ΔS
+(−.356), so its adverse service is retained. Mean losses do not hide the positive
+paired worlds at N7/N6. Lower Q occurs in 25/24/26 worlds; higher P in 30/27/29;
+higher U in 27/23/24. Every adverse world and every J,C,Q,P,E,S,U,height value remains
+in [raw readback](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b2_s1017101/artifact_readback.json)
+and [contract readback](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b2_s1017101/contract_readback.json),
+alongside the initial/endpoint/own-learning results and exact artifact bindings.
+
+All 90 training rows were read, including nonmonotone behavior. F training J goes
+from .255940 to .398978 and reaches .462496 at rollout8. M's first/final within-N
+readings are .351963/.352446 (N4), .268398/.347731 (N6), .216808/.322719 (N8);
+the N8 low is .098876 at rollout6. Raw coordinate clipping rises from about .315
+to .833 for F and .844 for M. These diagnostics are neither an endpoint-selection
+rule nor a causal explanation of the package difference.
+
+The unchanged plan continues with block 3 / seed1018101 from the same full source
+commit, subject to fresh native admission. This is the last predeclared pair of the
+original six-fit batch. No interim t interval, aggregate confirmation decision,
+replacement seed, extra fit or amended efficacy gate is introduced. Its eventual
+complete technical reading is required before the fixed n=3 reduction.
+
+### Second-pair durable recovery
+
+All 130 scientific/native/analysis files, 1,087,116,670 bytes, were copied to
+`/home/fires/hmasd-retained-runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b2_s1017101`
+on local_linux. Every relative path, byte count and SHA256 matched the source output;
+copy and verification took 2.541s. Full bulk artifact identities remain in the
+versioned F/M summaries and panel records; raw arrays/checkpoints/streams remain
+outside Git. Representative complete-file identities:
+
+| Run-relative path | Bytes | SHA256 |
+| --- | --- | --- |
+| summary.json | 141003 | e8e874f2d1b76e64d7dcff51975246e6aba35f3d0be35e39791ccd3b81078f1c |
+| F/summary.json | 363584 | 232ea569cf7124738314cf7247f93dafbec34b40937b93b9d941383abe691c2f |
+| M/summary.json | 303711 | beb83d83e0d8788aad2d18bdbc8b51fbba4cca4bf0c4a2ac2de22d5ce655905b |
+| F/raw/training.jsonl | 1156796 | 3d493e08e8f1dcbe0498be51ee564167b5b02d4be1897844e22c4bf0a8d58a0c |
+| M/raw/training.jsonl | 1155399 | 2288fd4ca4812157a527de1a02b31f86e024364cc3e991561a75b3cd9a94fcc0 |
+| artifact_readback.py | 11345 | 1ad79649d6af0f1fa4a495708acb4e7c6052f2671e98a0138357796726bd0f44 |
+| artifact_readback.json | 225963 | 8d146634e0141449c0ddf6b6eec6c9f9149b8e471243b47c80ac2eaf8a650136 |
+| contract_readback.json | 224359 | 1a0b32ae7b5d13d0daa19095d72b0497559f461349595211fb031b9d5cc1e6e2 |
+| process-exit.json | 550 | de3faacdca8288bd2b369da0fdb7a91d5060f45ead185afc2d748db68d6f89b6 |
