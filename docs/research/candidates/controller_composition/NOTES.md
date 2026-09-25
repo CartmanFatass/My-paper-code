@@ -162,7 +162,7 @@ FSD remains owner-paused; G33 frozen. Read these specific sources as needed for 
   without growing Git history, only for the restoration/cost/retention claims here.
 - Shared scientific background: `docs/research/RESEARCH.md` §8 and Current research plan at
   `da8890fc3f6d9e714eaab9c9c472862db0af0fd3`; the relevant adopted background change is
-  `2e2becaae8d376908d74364dca7e4713bdcb4a2a`.
+  `2e2becaae8d376908d74364dca7e4713bdcb4a2a`. Background is revisable evidence, not governance.
 - Prior complete advice: `docs/research/archive/2026-09-24/RESEARCH-question-led-programme-adopted.md`,
   Answer C1/D1 and Decision. Reuse its separation of task/partner diversity and independent
   basic-research value; it did not accept this matrix or purchase the old training design.
