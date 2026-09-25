@@ -10178,3 +10178,58 @@ flags are true and the complete identity records match. The journal read reaches
 remains INCOMPLETE, stderr is empty and no paired result is available. Fresh main retains the
 same lead and lifted pause. Preserve the completed N evidence and continue only the already
 fixed A fit/panel; rearm the same operation without altering the comparison.
+
+### B09 seventh observation checkpoint — 2026-09-24
+
+Generation 7 returned only CHECKPOINT `2e0d085118e06f336d781c7e`, with both original native
+identities running, consistent records, zero probe errors and no exit witness. A has collected
+48,000/180,000 transitions: phase 8 collection is complete while seven updates are recorded;
+all five learner groups moved in update 7. N remains complete and the two completed evaluation
+panels total 64 worlds / 192,000 transitions. A has no endpoint yet. The batch is INCOMPLETE
+without a recorded failure and stderr is empty. Fresh main retains the same lead and lifted
+pause. Rearm the same accepted operation; there is no change to the fixed comparison.
+
+### B09 eighth observation checkpoint — 2026-09-24
+
+Generation 8 returned only CHECKPOINT `c1970404404e0aea8733a816`: original native identities
+running, consistent records, zero probe errors and no exit witness. A's boundary summary is
+90,000 transitions / 15 completed updates / 30 native episodes; the journal reaches 90,400
+transitions during phase 16 collection. All five learner groups moved in update 15. N and the
+initial/N panels remain complete; A has no endpoint. The batch is INCOMPLETE with no recorded
+failure and empty stderr. Fresh main retains the same lead and lifted pause. Rearm the same
+operation with the comparison unchanged.
+
+### B09 ninth observation checkpoint — 2026-09-24
+
+Generation 9 returned only CHECKPOINT `9b2962f1d11c25b5ccb0d4fe`, with original native
+identities running, consistent records, zero probe errors and no exit witness. A has collected
+132,000/180,000 transitions: phase 22 collection is complete while 21 updates are recorded.
+All five learner groups moved in update 21. N and the initial/N panels remain complete, while
+A has no endpoint. The batch remains INCOMPLETE without a recorded failure, stderr is empty,
+and fresh main retains the same lead and lifted pause. Rearm the same accepted operation;
+the declared comparison and reading remain unchanged.
+
+### B09 tenth observation checkpoint — 2026-09-24
+
+Generation 10 returned only CHECKPOINT `03d91bd4a38c5d1fd628865a`, with original native
+identities running, consistent records, zero probe errors and no exit witness. A's completed
+boundary is 174,000 transitions / 29 updates / 58 native episodes; the journal reaches
+177,200 transitions during phase 30 collection. All five learner groups moved in update 29.
+The initial and N panels remain the only completed evaluations (64 worlds / 192,000 steps).
+The batch is INCOMPLETE without a recorded failure, stderr is empty, and fresh main retains
+the same lead and lifted pause. Rearm the same operation; A's fit completion and fixed endpoint
+panel are still pending, so no paired conclusion is available.
+
+### B09 both fits complete; A endpoint panel underway — 2026-09-24
+
+Generation 11 returned only CHECKPOINT `f02e8c2ad4ac6d3d2b4e583c`, with original native
+identities running, consistent records, zero probe errors and no exit witness. The runner
+reports both N and A training COMPLETE, each exactly 180,000 transitions / 30 updates /
+60 native episodes, totaling two completed fits and 360,000 training transitions. All five
+learner groups moved in A's final update. Training completion alone does not accept the pair.
+
+A's fixed endpoint panel has completed 20/32 worlds and attempted the 21st; its journal read
+reaches 62,400 transitions (254,400 across all evaluation panels). Only initial_primary and
+N_primary are complete panels in the summary. The batch remains INCOMPLETE without a recorded
+failure, stderr is empty, and fresh main retains the same lead and lifted pause. Rearm the
+same operation for the remaining fixed evaluation and final collection; no extension is selected.
