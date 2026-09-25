@@ -252,3 +252,29 @@ C2 row into the canonical Active table, without applying it or touching that ind
 All authorized preparation and independent review are complete; that narrow control-file
 exception is the remaining owner dependency before fresh native resource admission.
 No result-bearing launch, worker restart, repeated Pro Send or App task message occurred.
+
+## 2026-09-25 — Owner's one-line exception applied; fixed C2 accepted
+
+The owner explicitly replied “允许，仅新增 C2 这一行” to the prepared patch. The DM
+inserted exactly that published row into the canonical RESEARCH Active table. Removing
+the inserted bytes recovers the complete original file; no other cell/prose was changed.
+The canonical file SHA256 is now
+`9e288bef4e6f85749edb13fbd28343ef2bc14366d12e83d8f9d1035fa249e44e`;
+its Git index remained byte-identical at SHA256
+`157ed55613277433a9ad6e4af9dc574bcbf265727c30d68a488578439b96c490`.
+The exception is consumed; it does not authorize broader canonical checkout/index edits.
+
+The one fixed B01 invocation was natively accepted on the selected local_linux node from
+published input `22ddf7b8fb9d2a02d01734939a9631866ff9a59e`. Its
+[native manifest](../../../../runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/launch-manifest.json)
+retains the complete source snapshot, invocation, operation reference and process identities;
+the [fresh preflight](../../../../runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/admission-preflight.json)
+passed both physical and effective memory floors. The first same-handle status read found
+consistent running child/supervisor identities, a real summary, and no exit witness.
+This is technical acceptance, not a completed or scientifically accepted comparison.
+
+The accepted scope remains RR/FAST_ONLY/NONE ×32 fresh worlds ×H256, zero new fits,
+24,576 team/122,880 UAV steps, with the same RR9302 checkpoint and declared streams.
+This task's deterministic observer follows the manifest's existing operation; checkpoints
+rearm that handle, without another launch or retry. Complete raw reading and durable
+retention follow the actual terminal evidence. No score is used to extend or alter the batch.

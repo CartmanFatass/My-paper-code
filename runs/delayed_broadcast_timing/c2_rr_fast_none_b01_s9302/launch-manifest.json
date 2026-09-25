@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-25T13:25:47.498769Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6bfdc64cb7d447f0882a654f10e564f1/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6bfdc64cb7d447f0882a654f10e564f1/scripts/run_delayed_broadcast_timing_b01.py",
+    "--output",
+    "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302",
+    "--",
+    "--seed",
+    "9302",
+    "--launch-sha",
+    "22ddf7b8fb9d2a02d01734939a9631866ff9a59e",
+    "--out",
+    "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302"
+  ],
+  "claim_key": "1933849620f42e2ac59a38f436c2d3af4ee4a10d1d0abcc79d2c215aa5b51e6c",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1933849620f42e2ac59a38f436c2d3af4ee4a10d1d0abcc79d2c215aa5b51e6c.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6bfdc64cb7d447f0882a654f10e564f1/scripts/run_delayed_broadcast_timing_b01.py",
+    "--seed",
+    "9302",
+    "--launch-sha",
+    "22ddf7b8fb9d2a02d01734939a9631866ff9a59e",
+    "--out",
+    "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302"
+  ],
+  "command_sha256": "24e78ae0dbc0675299831ccd8e4d0f77cc58adc49e754766749771edab685b12",
+  "control_observation": {
+    "observed_at": "2026-09-25T13:25:47.332186Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "c41a10c21ed6d1722c84fc813c3e2c4718684129"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-25T13:25:47.346298Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6bfdc64cb7d447f0882a654f10e564f1",
+  "direction": "delayed_broadcast_timing",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_delayed_broadcast_timing_b01.py",
+    "--seed",
+    "9302",
+    "--launch-sha",
+    "22ddf7b8fb9d2a02d01734939a9631866ff9a59e"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1933849620f42e2ac59a38f436c2d3af4ee4a10d1d0abcc79d2c215aa5b51e6c.json",
+  "output_root": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302",
+  "preflight": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "ae78c2b3-4661-4e9e-af97-ab02322b309f",
+      "kind": "linux_pid_start_ticks",
+      "pid": 103200,
+      "session_id": 103200,
+      "start_ticks": 1237383
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 103200,
+    "process_group_id": 103200
+  },
+  "process_exit": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "ae78c2b3-4661-4e9e-af97-ab02322b309f",
+      "kind": "linux_pid_start_ticks",
+      "pid": 103201,
+      "session_id": 103200,
+      "start_ticks": 1237387
+    },
+    "pid": 103201,
+    "process_group_id": 103200,
+    "supervisor_pid": 103200
+  },
+  "schema_version": 1,
+  "sha": "22ddf7b8fb9d2a02d01734939a9631866ff9a59e",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6bfdc64cb7d447f0882a654f10e564f1",
+  "stderr": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/stdout.log"
+}
