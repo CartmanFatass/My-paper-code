@@ -101,3 +101,17 @@ Any new investment after this batch needs its own reason and prospective decisio
 No confirmation run has been accepted. This draft is being compared against a cheaper
 prospective frozen-policy spatial-dependence observation and stopping; Pro advises, then
 the DM adopts, revises or rejects the actual next action in NOTES.
+
+## Adoption 2026-09-24
+
+The preceding proposal is now adopted unchanged as the fixed C01 confirmation plan, following
+the complete Pro critic pass at `ca77013402426ce5254ab260d688b651e3664178` and the DM decision
+in NOTES, "C01 adopted: five fresh paired blocks, one fixed conditional-mean confirmation".
+The original proposal/selection record above is preserved. No run has started at adoption.
+
+Two interpretation clarifications are adopted without changing the rule: C01 changes both
+training instances and the fixed evaluation panel, so it cannot uniquely attribute A2's sign
+to training randomness versus program-by-panel interaction. A zero-margin statistical pass
+does not establish an approximately one-user increment or automatically justify replacing U
+or further investment in this recipe. The t assumptions, all adverse evidence, exact five
+blocks and no-rescue stopping rule remain as written.

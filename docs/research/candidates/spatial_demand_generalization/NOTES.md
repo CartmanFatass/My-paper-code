@@ -688,3 +688,111 @@ A2 的原 hotspot 主项本来就是前瞻指定的，不是从三个家族中�
 [research]: https://github.com/CartmanFatass/My-paper-code/blob/4fde2d73466fc80d91c3afbbbf0e3afc9f3ba8a1/docs/research/RESEARCH.md
 [prior]: https://github.com/CartmanFatass/My-paper-code/blob/f3fb9bb6b0c5a6b49e2165113a35586a61f02f1c/docs/research/archive/2026-09-24/RESEARCH-question-led-programme-adopted.md
 [nist]: https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm
+
+## 2026-09-24 — C01 adopted: five fresh paired blocks, one fixed conditional-mean confirmation
+
+**Decision and belief update.** I adopt the concrete C01 plan in
+`CLAIM_layout_coverage_conditional_mean_20260924.md` unchanged: five fresh paired training
+blocks, U then M in each, ten fits, final45 and the two predeclared marginal t95 lower bounds
+both strictly positive. This is one fixed confirmation, not an extension of A2. A2 has already
+ended with its complete result and contrary worlds preserved. About .94 more served users per
+step above a strongly learning U, at unchanged training counts and deployment architecture,
+is enough native value to justify this finite replication purchase. The new information is
+the conditional training-program mean, not a mechanism or next-training reliability claim.
+The same argument does not promise a next purchase after C01, even if it passes.
+
+The shared training-coverage discussion at main
+`4fde2d73466fc80d91c3afbbbf0e3afc9f3ba8a1` (RESEARCH, ordinary training coverage/A2 paragraphs)
+remains the relevant background. It keeps the competent ordinary U, fixed LOCAL1 rights and
+all original-family losses central, while separating training/layout coverage from partner
+compatibility or causal support coverage. B19/B20 do not supply training replication for A2.
+This preserves the exact comparator and selects fresh training blocks over an architecture
+change. Current published pause is lifted, the lead is unchanged, and no new owner stop has
+arrived; this direction keeps only this one result-bearing study within the three-track ceiling.
+
+**Pro reading and response.** The one question key was
+`hmasd:7fd87e60e0e6e62278905abf17cf75de575192127c36cd8e47d0d17447183d1e` at
+source `f3fb9bb6b0c5a6b49e2165113a35586a61f02f1c`. Send was observed as sent with the complete
+attachment. Native observation collected completion; the short chat text was a receipt-like
+summary, not the scientific answer. Delivery independently verified commit
+`ca77013402426ce5254ab260d688b651e3664178`, whose only change filled the empty Answer above:
+question and every other byte unchanged. I read all 11,869 answer characters, including its
+source-use limitations. The operation's tabs are closed (zero matching conversation tabs);
+the private address remains solely in local transport state. Observation generation 6,
+wake `af774582-831b-4bf7-836c-79ed5de7ec33`, event `444367c48c92619babe6f3a1` were consumed;
+generation 7 has no remaining accepted observation to advance. No resend occurred.
+
+Pro returned MATERIAL_DISSENT no and favored the actual five-pair plan. I accept its reason
+that the four-center 0-fit observation cannot replace new training: a location-dependent gain
+can coexist with either sign of the conditional training mean. Neither sign from those fixed
+policies decides this investment. I therefore do not run that observation or a smaller
+sign-screening pilot. Its extra caveat is useful: the proposed four-center panel omitted the
+old center, so comparing it directly with A2 would confound center and new-world batch too.
+
+The strongest objection survives adoption: roughly 7.43 hours purchases a five-block,
+model-dependent, zero-margin result that may be too imprecise or too small for use. Five
+blocks cannot establish normality, power, rare training-failure behavior, general hotspot
+robustness, or the probability that the next training pair wins. No extra block, weak-U
+filter, post-result interval selection or retry is justified by an unfavorable reading.
+C01 changes the evaluation panel as well as training instances, so its result cannot uniquely
+attribute A2's sign to optimization randomness versus program-by-panel interaction. A positive
+zero-margin result would not establish an approximately one-user gain or justify replacing U.
+These are adopted interpretation clarifications, not new success gates.
+
+**Consequential claims checked.** I independently recomputed the t and noncentral-t arithmetic
+with the existing scientific interpreter and checked the primary
+[NIST mean-confidence-limit formula](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm).
+For n5, t(.975,4)=2.7764451052 and half-width/s=1.2416639982. At the old point means, positive
+lower bounds require sample SD below .0149549205 J and .757652635 users; these are arithmetic
+conditions, not a power estimate. Conditional normal-model service-power scenarios for true
+SD .5/.75/1.0 are .875248/.564911/.364145. No training variance is inferred from the 32 A2
+worlds. The joint all-positive rule is an intersection of tests; under a true component null
+its rejection probability is bounded by that marginal .025 if the working t assumptions hold.
+This is not a simultaneous 95% interval claim, and correlated J/service are not independent
+replications. Actual empirical A2 inputs were already reconstructed from native data; Pro
+read published summaries/arrays but not the retained binaries and does not add an independent
+native verification or any new training evidence.
+
+**Fixed scope and cost.** Model seeds 263000101..105; block b training reset
+264000000+100000*b+1000*r+lane; constructor 269900000+1000*b+lane. Shared fresh evaluation
+worlds start 265000000/265010000/265020000 for uniform/cluster/hotspot, each 32 worlds H500.
+The CLAIM fixes the full unchanged A2 algorithm/rights and all readings. Five pairs cost
+3.6M training +720k evaluation =4.32M team steps /25.92M UAV rows, ten fits, 450 updates,
+1,012,500 calls of each optimizer, 1,440 evaluation episodes. Five times A2's measured
+5,350.806522 seconds is 7.431675725 hours; expected native files about 5,440,029,495 bytes
+plus independently verified copies. New wall and support/reading costs are unmeasured.
+This is a prospective estimate, not a time promise, fit allowance or entitlement.
+
+**L0 implementation scope.** Deliver a C01 block runner and final five-block aggregation
+under `experiments/candidates/spatial_demand_generalization/c01/`, its guarded entry
+`scripts/run_spatial_demand_generalization_c01.py`, and focused tests under
+`tests/experiments/candidates/spatial_demand_generalization/c01/`. Reuse frozen A2 code and
+its dependency semantics without editing A2, shared learners, environments or launch tools.
+The implementation may isolate A2's module-local configuration per invocation; it must not
+leak mutable configuration between blocks or leave A2 default arm seeds bound accidentally.
+Explicitly bind model/learner, private sampler, constructor, reset and evaluation seed paths;
+persist C01 direction/object/block/seed/tag identity in configs, summaries and checkpoints,
+and hash every actual source dependency including C01's entry and adapter/wrapper.
+
+Publish all five blocks before the first result. Run one pair per native invocation, ordered
+block 0..4, with fresh admission for each on the configured `wsl_4070` CPU/float32 host and
+four torch threads. Tags are `s1_spatial_coverage_c01_b<b>_s<model-seed>`; each has its own
+run root and accepted native handle. This topology keeps one direction study active and
+allows resource admission between blocks; later blocks do not depend on earlier scores.
+No aggregate scientific verdict until all five matching blocks are complete. The aggregator
+must reject missing/duplicated/mismatched blocks and incompatible source/protocol/panels,
+use five block means as units with df4, and retain all block/world/component/own-learning and
+adverse readings. No pooling A2, substitute endpoint, alternate seed or resume path.
+
+Required checks target changed behavior: real seed flow and common initialization within
+blocks, independent streams across blocks, identical fixed physical evaluation panels,
+unchanged A2 outputs for the same small technical configuration, exact production counts,
+checkpoint/output identity, the admission-before-effects CLI, and missing/incorrect aggregate
+inputs plus known-statistic interval cases. Technical fixtures use separate seeds/reduced
+dimensions and never production evaluation addresses for learned-policy scores. Reuse A2's
+passed real recurrent/storage and partial-failure evidence where unchanged. Obtain independent
+review of seed binding, identity, CLI and statistical aggregation; the DM accepts the diff.
+Only the named implementation/test/entry paths are delegated; NOTES, CLAIM, shared index,
+Git index and launches remain DM-owned. Helpers launch no result-bearing work or children.
+At this adoption entry, no C01 fit or evaluation has started. A technical failure preserves
+its actual cost and incomplete fixed batch and triggers no automatic retry or replacement.
