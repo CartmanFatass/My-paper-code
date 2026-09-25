@@ -19506,7 +19506,7 @@ Context (paths marked source_sha resolve at the full immutable source supplied i
   Current research plan, especially A1/A2/C2. Its B19-pending prose is superseded by our new
   complete result above; other directions are context, not delegated ownership.
 - Full applicable earlier advice: docs/research/archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md
-  at source_sha, Answer section “第二选择：DM1” and Root Decision item3. It motivated the present
+  at source_sha, Answer section “四、第二科学优先：DM1 用 L/F 回答混合训练增量，不再解释旧 H6−SET 优势” and Root Decision item3. It motivated the present
   narrower exploration but did not review the actual post-B19 confirmation claim.
 - Exact development result: this notebook's B19 prospective and complete entries; the batch,
   F/M compact summaries, nine panel summaries and artifact_readback.json/.py under
