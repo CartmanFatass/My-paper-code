@@ -134,6 +134,9 @@ def run_native(*, out: Path, launch_sha: str, device_name="cuda", threads=4,
         summary["artifacts"][str(raw_path.relative_to(out))] = sha256_file(raw_path)
         for world in result["worlds"]:
             world["recovery_opportunity"] = compact_opportunity(world["recovery_opportunity"])
+            for bulk_field in ("service_free_intervals", "mode_durations_by_uav",
+                               "descriptive_250_step_bins"):
+                world.pop(bulk_field, None)
         result["raw_detail"] = str(raw_path.relative_to(out))
         summary["evaluations"][label] = result
         summary["artifacts"][str(path.relative_to(out))] = result["trace_sha256"]

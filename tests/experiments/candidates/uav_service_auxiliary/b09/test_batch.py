@@ -51,6 +51,12 @@ def test_fixed_batch_uses_one_primary_panel_and_never_retries(tmp_path, monkeypa
                          "intervals": [{"member": 0, "start_step": 0}],
                          "first_qualifying_exit_anchor": None,
                          "denominators": {"feedback_activation_intervals": 1}},
+                     "service_free_intervals": [{"start_step": 2, "actual_steps": 3}],
+                     "service_free_interval_count": 1,
+                     "mode_durations_by_uav": [[2], [], [], [], [], [], [], []],
+                     "descriptive_250_step_bins": [{"actual_steps": 250, "qos_sum": 4.0}],
+                     "first_half": {"actual_steps": 1500, "qos_sum": 8.0},
+                     "second_half": {"actual_steps": 1500, "qos_sum": 9.0},
                      **{field: offset for field in native.ENDPOINT_FIELDS}}
             progress("attempt", 1)
             progress("transition", 1)
@@ -88,6 +94,15 @@ def test_fixed_batch_uses_one_primary_panel_and_never_retries(tmp_path, monkeypa
     with gzip.open(out / "raw" / "evaluation_initial_primary.json.gz", "rt") as handle:
         raw = json.load(handle)
     assert raw["worlds"][0]["recovery_opportunity"]["intervals"][0]["member"] == 0
+    compact_world = result["evaluations"]["initial_primary"]["worlds"][0]
+    raw_world = raw["worlds"][0]
+    for field in ("service_free_intervals", "mode_durations_by_uav",
+                  "descriptive_250_step_bins"):
+        assert field not in compact_world
+        assert field in raw_world and raw_world[field]
+    assert compact_world["service_free_interval_count"] == 1
+    assert compact_world["first_half"] == raw_world["first_half"]
+    assert compact_world["second_half"] == raw_world["second_half"]
     assert "raw/evaluation_initial_primary.json.gz" in result["artifacts"]
     with pytest.raises(FileExistsError):
         native.run_native(out=out, launch_sha="fixture")
