@@ -471,3 +471,96 @@ KNOW_P_NEAR 不是单调上界：真实参数知识不消除部分状态、近�
 [planning]: https://github.com/CartmanFatass/My-paper-code/blob/3ca4cb1f83ea869e1efca852a099db31c52b0e2c/experiments/candidates/skill_information_refresh/c06/planning.py
 [BAMCP]: https://proceedings.nips.cc/paper_files/paper/2012/file/35051070e572e47d2c26c241ab88307f-Paper.pdf
 [BAPOMDP]: https://papers.nips.cc/paper_files/paper/2007/file/3b3dbaf68507998acd6a5a5254ab2d76-Paper.pdf
+
+## 2026-09-25 — Full Pro reading, adoption and B01 implementation scope
+
+Read the complete 13,093-character Answer at
+`8a40ed97ecca2a0ef91f09ee3fbab2975a91ddf5`. The deterministic observer collected a
+533-character chat receipt, not the scientific answer; `deliver` verified the actual
+answer commit on the intended branch, the initially empty subsection, unchanged question
+and unchanged remainder. Jev key is
+`hmasd:b27ac79065f0f87e3bb81b0d3c4df4d2de5af2a0f8000d29f740185a3475d4ff`;
+Send accepted at6 Pro, completion COMPLETE, delivery DELIVERED, zero recoveries/resends.
+The owned conversation has zero remaining browser tabs; four unrelated tabs are preserved.
+The answer-only writer lease is reconciled. Latest published main inspected at
+`dee97605e9f25243ed8587a67b4bc122aeb32180` still has lifted project pause and this
+direction's selected independent lead. Its new S7 evidence does not change this design.
+
+**DM decision: execute the proposed six-arm B01 as exploration.** Pro's no-material-dissent
+is advice, not data. I retain P4/U4/P32/U32/AF/KNOW_P_NEAR, the four-point law, calibration
+and 256 contexts, and all declared costs/readings. I considered the four-arm k4 alternative:
+it saves49,152 team ticks and up to75,497,472 branch ticks but loses the useful initial-data
+dose contrast; that observation is worth the extra finite work. No LONG or point-filter
+pipeline arm is added. The projection comparison deliberately conditions on an inference
+resource supplied to both planners and does not certify the cheapest plug-in pipeline.
+
+The source audit already verified the consequential packet-likelihood issue: old
+`_condition_packet` resets a compatible state to unit mass, which cannot be copied
+independently across parameter hypotheses without preserving each likelihood. I adopt
+one global normalization over parameter×state, permitting a single parameter's mass to
+become zero and failing only for impossible joint evidence. No peer truth fallback.
+The posterior is still a physical-law approximation that omits send/silence likelihood.
+
+I also adopt Pro's tighter root coupling: sample x from the shared state marginal using
+the same addressed uniform, then U samples theta conditional on that x using a separate
+uniform; P uses the overall posterior parameter mean. This exactly targets the stated
+joint distribution, with no extra particles or branches. The same U theta governs both
+robots, both root branches and every simulated tick. The local covariance derivation is
+algebraically correct; the shared-parameter two-trial identity E[theta^2]−E[theta]^2
+also clarifies why mean-parameter Bernoulli dynamics are not necessarily the full joint
+posterior-predictive kernel. Neither supplies a sign for native benefit. The larger-data
+variance identity holds in expectation for exact nested calibration; we will retain
+per-context increases and any native dose reversals. Existing primary-source readings
+support only the limited model-persistence/joint-belief bridge already recorded.
+
+**Final prospective identifiers.** B01 uses context IDs0..255, world master925731,
+parameter/calibration phase40 (separate stream0/1), evaluation phase41, planner
+master925973/phase42. The same addressed state/parameter/process/job streams apply
+across arms and doses where applicable. Context IDs only address randomness; the
+controller never sees the hidden theta or actual future arrays. Batch16, H96, P32,
+one native compute process, BLAS/OpenMP threads1. No tuning or endpoint selection.
+The runner will assert the fixed scientific configuration. Counts remain512 shared
+closed-form calibration fits,0 policy fits/optimizer updates,8,192 calibration steps,
+1,536 full evaluation episodes/147,456 team ticks and the188,743,680 branch-tick bound.
+Implementation/test inputs are separate fixtures, not the 256 evaluation contexts.
+
+**L0 — one bounded core adaptation.** Implement disposable B01 code under
+`experiments/candidates/finite_model_decision_value/b01/` and mirrored tests. Recover
+only the required C01 host/C06 belief/planner from explicit source
+`3ca4cb1f83ea869e1efca852a099db31c52b0e2c` into this direction; preserve provenance in
+module docstrings. Do not restore historical experiment history into main or edit old
+code. Core deliverable: parameterized world law, lawful joint physical filter and
+matched P/U root estimates with exact inherited NEAR/AF semantics. Independent Reviewer
+must examine information access, global likelihood normalization, RNG addressing,
+conditional sampling, masks/endpoints, costs and output identity before result execution.
+
+The bounded Implementer owns only `b01/host.py`, `b01/belief.py`, `b01/planning.py` and
+`tests/experiments/candidates/finite_model_decision_value/b01/test_core.py` in this
+checkout. It returns facts/diff/checks, never edits NOTES or index, launches results,
+sends Pro or creates children. DM owns `b01/study.py`, the admission entry
+`scripts/run_fmdv_b01.py`, study tests, records and acceptance. These are compatible
+concurrent edits; neither writer reverts the other's work or stages the other's paths.
+
+Interface: `Worlds.make(..., probabilities=...)` creates the retained host; only actual
+world generation receives true theta. `JointPhysicalBelief(record, theta_values,
+parameter_weights)` stores theta values as B×K and joint weights B×K×22, initializes
+the original peer-state distribution, and updates from copied `LocalRecord` only.
+Properties expose state/parameter marginals, parameter mean/variance and counters.
+For KNOW, K=1 with per-context true parameter supplied explicitly. Planner
+`paired_values(record, weights, theta_values, states, ids, seed=..., phase=...,
+particles=32, mode='POSTERIOR_MEAN'|'JOINT', counters=...)` returns per-root `delta`
+and `mc_se` arrays, plus bounded optional details; it uses only this lawful input.
+Calibration in the DM-owned study derives likelihood counts from observed corridor
+positions, never an environment success label. P/U share initial calibration fits,
+not their diverged online observations or private robot beliefs.
+
+Checks use small held-out fixtures, not result-bearing panels: known-law compatibility
+against source; packet/own likelihood with an independently hand-computed case;
+parameter-state dependence and per-component zero mass; degenerate-parameter P/U
+identity; own-boundary masking; common root states and persistent shared theta; preserved
+.75 receiver; RNG batch/order invariance and no future/peer-truth leakage; exact NEAR
+endpoint and full runner counts/artifact roundtrip under mocked admission. Stop and
+return any semantic ambiguity, unsupported required measurement or contradiction.
+Do not change scientific arms, prior, data doses, seeds or budgets during implementation.
+Actual inputs will be committed/pushed before fresh wsl_4070 admission. Tests and review
+costs are recorded separately; no scientific performance or model-fit result exists yet.
