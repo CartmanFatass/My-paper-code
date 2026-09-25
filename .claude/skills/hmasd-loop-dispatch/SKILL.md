@@ -8,7 +8,7 @@ description: Coordinate user-requested Codex Root assignments and cross-directio
 
 Authority: `docs/project/OPERATING_CONSTITUTION.md`. Current state and session routing:
 `docs/research/RESEARCH.md`. Root manages the scientific project under the owner's delegation;
-a DM owns a revisable research direction and its three records.
+a DM owns a scientific question through revisable approaches and its three records.
 An independent DM session and a DM child have the same scientific responsibility.
 Claude remains a single-direction DM through its generated `hmasd-research-hub`.
 
@@ -33,10 +33,13 @@ owner to repeat an already clear choice.
   cost of next investments, address concrete stagnation, and select useful work within the
   owner's delegated scope. Coordinate existing ownership and shared dependencies; maintain
   the current scientific plan and assigned controls. DMs publish their own result entries; Root is not a
-  routine result-publication gate. Count independent DMs and children
-  together with any assigning session that becomes a direct DM toward the current
-  owner-selected level of three concurrent direction DMs (2026-09-23). A Root doing only
-  project management is additional coordination capacity, not a fourth direction. Do not fill slots
+  routine result-publication gate. The owner clarified on 2026-09-24 that three is a runtime
+  resource concurrency ceiling, not a limit on the full plan's questions or a permanent mapping
+  of three DMs to three directions. Maintain worthwhile ordered replacements in the current plan,
+  including their evidence, first useful comparison and cost; preparation is not launch.
+  Count independent DMs, children and an assigning session directly executing a direction
+  together. A Root doing only project management is coordination capacity, not a fourth
+  research track. Training and evaluation both need actual node resources. Do not fill slots
   without a worthwhile authorized task or duplicate a direct DM's scientific work.
 - **Direct DM:** the session itself owns one direction. Explicitly read the
   `developer_instructions` body in `.codex/agents/hmasd-direction-manager.toml`, then the
@@ -107,12 +110,18 @@ Keep unknowns explicit; do not backfill addresses for dormant historical directi
    configured direction-manager child under existing research authority. Do not create a
    sidebar task merely because a subtask exists. Preserve current/default session model
    settings unless the owner explicitly chooses them; a role name does not set a main model.
-5. **Give one concrete assignment.** Supply direction, notebook, prior judgment and contrary
+5. **Assign a question and its current concrete work.** Supply the scientific question,
+   direction/notebook, prior judgment and contrary
    evidence, relevant shared-background topics and how they bear on the question, what changed,
    next deliverable, declared scope/cost, pause and any actual owner
    deadline and checkout/index ownership. A child returns to its parent; a standalone DM
    works in its own task and publishes its records without a routine Root reporting route.
-   The DM accepts the science.
+   The DM accepts the science. Explain the present approach's purpose and relevant alternatives;
+   do not define the DM's whole responsibility as completing or closing the named batch.
+   Keep one result-bearing study active, with useful continuations considered in existing NOTES.
+   Question families organize the full plan but do not give a DM ownership of every related
+   direction. Root may split independent estimands or combine truly equivalent work; one named
+   lead/writer still owns each direction and accepted work remains bound to its current inputs.
    Independent preparation continues while a real shared dependency is resolved; already
    valid admission does not need another Root ACK for each batch.
 6. **Integrate assigned shared changes.** DMs publish their own standing/results/evidence
