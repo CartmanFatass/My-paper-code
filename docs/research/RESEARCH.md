@@ -714,6 +714,220 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 
 [已完成三线投入复盘：完整答复与采纳决定](archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md#portfolio-review-2026-09-24-next-investment-after-b18-b09-b08)。
 
+## Portfolio review 2026-09-24 question-led-programme-and-dm-continuity
+
+Conversation: Jev account; private conversation locator stays in local transport state.
+Standing: unresolved scientific portfolio advice; no new fit, result batch, task, or direction is activated by this question.
+
+**Decision asked.** Help Root choose a complete, ranked research programme from our accumulated
+results and primary literature, and make DM responsibility follow a scientific question across
+revisable approaches. The owner explicitly says three is a **runtime resource concurrency
+limit**, not a limit of three directions in the research plan; a completed/closed activity can
+be replaced. Root is to work above existing direction boundaries, considering new directions,
+closures, mergers and independently useful subquestions. The owner also asks to change the rigid
+DM–direction relationship. This is a scientific project, not a requirement to keep three jobs busy.
+
+This materially broadens the prior review, which selected B19/B09 and a zero-fit cross-play
+preparation. We reuse that completed advice for the two accepted comparisons, but it does not
+cover this new programme. Recommend the next useful investments and their order; Root decides
+under the existing owner delegation. Do not require a new owner permission, invent a new role,
+or interpret the present S1 deployment use case as the limit of all basic research.
+
+**Context (repository paths inherit the full source_sha in the send message).**
+
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5, 7–8, with the owner's newer
+  clarification above overriding the old wording that ties the project to three named DMs or
+  only k/N. Project pause remains lifted; **Claude FSD is still owner-manually paused and G33
+  remains frozen**. Actual accepted inputs/lead bindings cannot change through this review.
+- Methods: `.agents/skills/hmasd-portfolio-task/SKILL.md` Steps/Boundaries;
+  `.agents/skills/hmasd-scientific-tools/SKILL.md` Explore, working explanation, literature
+  bridges, Comparators, Statistics, Cost and exposure. One training block is exploration;
+  worlds/events do not increase training n. Confirmation has 3–5 fresh training seeds per arm
+  and a fixed prospective claim. There is no fit allowance and no mandatory toy/proof/pilot gate.
+- Shared evidence: this file's background §§3–7, active/reserve/archived rows and current plan.
+  Existing detailed notebooks/claims are evidence, not extra operating authority. The prior
+  complete review is `docs/research/archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md`.
+- Current accepted count source: `bfb4fd356a01024ef04c967c4768263f114e5a17`, branch
+  `codex/agent-count-generalization-b19`, `docs/research/candidates/agent_count_generalization/NOTES.md`,
+  entry `2026-09-24 -- new DM continuation and B19 prospective matched ordinary training`.
+  B19 was actually admitted and F was training at this review's read boundary; do not amend it.
+- Current accepted service source: `e5e53534c2c0c4a059cfdfa5f3aff4cbc2166f46`, branch
+  `codex/uav-service-feedback-b09`, `docs/research/candidates/uav_service_auxiliary/NOTES.md`;
+  B09 actually admitted and was evaluating its common initial policy. Do not amend it.
+- DM2 completed preparation: `e38a8ec4744cf9c1ffacbaac21b241658cc1014c`,
+  `docs/research/candidates/complementary_skill_learning/NOTES.md`, final cross-play preparation
+  entry. Main `2eec4adbdff9c1092899bcc0aa2340277ed96f10` closes current investment.
+- Information/opportunity predecessors: `docs/research/candidates/skill_information_refresh/NOTES.md`
+  C07 result and final re-entry audit (lines around 3130–3285 at the base revision),
+  `CLAIM_near_commit_c07.md`; `docs/research/candidates/vsp_03/NOTES.md` B11 and
+  `CLAIM_fitted_opportunity_b09.md`. Do not substitute the claim's prospective text for the result.
+- Feasibility sources: `envs/pettingzoo/uav_env.py::_generate_user_positions` for layouts;
+  service source above, `configs/config_1.py`, `envs/pettingzoo/relay/energy_aware.py`,
+  `experiments/candidates/uav_service_auxiliary/b06/feedback.py`, `b09/training.py` for charging
+  and fixed F. CADC's actual delayed-message interface is at source
+  `22e009c9387f2507aab6ebab4555d92e27f5070e`; the C07 notebook audit identifies `cadc_b01`
+  channel/model/learner and its preserved receiver artifact. Read engineering only where a
+  proposed information right, interface or cost needs it; no recursive historical preload.
+
+**What we have learned, and what remains uncertain.**
+
+1. The original H6–SET difference conflated architecture/information/optimization. High label
+   entropy and chance discriminators are diagnostics, not causal proof that H6 is literally a
+   uniform sampler plus constant shaping. B15's frozen joint confirmation was inconclusive.
+   LOCAL1 gives a stronger ordinary reference at N8; N6 is mixed and H6 retains finite N4 J uses.
+   B18's fixed-N6 F learned useful N5/N7 deployment behaviour; M's missing endpoint after SIG11
+   gives no M−F result. B19 now tests matched F versus N4/6/8 training (2×360k); N5/N7 are
+   interpolation within M's count support, not extrapolation outside [4,8]. Full cost is 720k
+   training + 144k evaluation = 864k team steps. Both current repeats are new, prospective
+   attempts with explicit technical choices, not silent continuation of crashed cells.
+2. The capacity audit found opposite interaction signs at N4 and N8 (−.020377/+ .023481).
+   Fixed-geometry service obeys a capacity-limited eligible-user relation; capacity was not an
+   actor input and the matched capacity changes left trajectories unchanged. This limits the
+   old package attribution, not general load/capability adaptation. N changes interference and
+   spatial density too, so capacity matching does not isolate count.
+3. In skills B07/B08, reducing high-level entropy actually sharpened selection, but E−M native
+   J/service signs reversed between banks. Uniform was a strong control. B09's persistent
+   opening-context hold lost service on all eight streams relative to redraw. Temporal joint
+   context law has conditional effects; no stable learned-selection advantage was identified.
+   Dense and skill-query/pooling packages were adverse at full training; one block per arm does
+   not rule out representation classes. Variable-duration packages were also costlier and
+   below the fixed reference in the tested setting; this is not a universal temporal claim.
+4. S7 auxiliary/proxy improvements do not reliably track native service. Old risk-coefficient
+   tests had no physical cutoff/depletion/charging at H1500, so they did not test safety. At
+   H3000 B07's ordinary F enabled real charging and improved mean J/QoS across the two existing
+   policies and their finite panels. O had 275 cutoffs/212 depletions, F zero in that panel;
+   F charged in all 80 worlds. Some worlds still lost service (including zero-service cases).
+   These are not energy-efficiency guarantees or proof of same-UAV recovery. B09 tests whether
+   training with this same F improves final deployment under F: 2×180k + ≤288k evaluation =
+   ≤648k steps. It does not test a new scheduler. B08 missing A endpoint is a technical failure.
+5. C07's known-model ordinary NEAR beat ACTIVE_FIRST by 102 jobs/1280 worlds (+.0796875 per
+   episode); its finite LONG analysis is program-specific. It used known movement p=.75 and
+   distance law. Legal own APPROACH histories can estimate p from adjacent active ticks without
+   peer truth/future information. Merely hiding .75 and recovering it is not a new hierarchy
+   mechanism. VSP03's fitted ordinary opportunity rule beat G512 in all five fresh training
+   blocks, mean +.01757788, t95 interval [.01069936,.02445640]; the lower bound is below the
+   old .02 practical scale. VSP B11 already used independent R0 calibration data (512 episodes
+   per block): O_R0−R0 positive in all three blocks, O_R0−O_full mean −.000271. It still assumes
+   the correct small model family. This does not establish a UAV neural result.
+6. S1 cross-play preparation was correctly declined for that **local** homogeneous-controller
+   use case at its cost: 4 population fits/8 private learners, 2.88M training + .768M evaluation
+   steps including normal pairing. It is not a verdict against zero-shot coordination as
+   basic research or a requirement to find a real outside customer before studying partners.
+7. Real coupling exists in S7: eight UAVs, two charging stations with one slot each; queue is
+   only eligible arrived-but-not-admitted UAVs, not in-transit reservation. Actor observation
+   legally includes battery, peer energy/returning/load and station occupancy/queue. Current F
+   uses nearest-station geometry. Environment dock action and its energy margin also use
+   nearest station; explicit station intent is absent. A far-station allocator may change
+   energy use or fight this guard. Service reassignment is driven by wireless geometry and
+   soft handover, not an actor user-assignment action. Residual service losses alone do not
+   diagnose queue contention as their cause. S7 backhaul RF is not a learned-policy mailbox.
+   Separately, archived CADC really has a UAV actor-message interface: seven legal-observation
+   fields, delays of 1/5 ticks, age, concurrent collisions and .001 attempt charge. Its old
+   learned send/motion package was adverse (−.0133549 net service, one pair), with a recoverable
+   frozen receiver. A new controlled timing question may reuse this, retaining that negative.
+
+**Local literature read for this review, with external primary records.**
+
+The actual processed library is `Inst-sci/papers/MyLib`: 238 real catalog records with both
+source JSON and LLM readings present. We selected primary passages, not all 238 papers.
+`My-lib` CLI fixture registry is synthetic and was excluded. The local JSON/page references
+below report what our Scouts checked; Pro cannot be assumed to have read inaccessible local
+files and should disclose any important source it cannot retrieve. Interpret the cross-host
+bridges as conjectures, not our results or a novelty proof.
+
+- CEC, MARL-0457, ICML 2025, [official paper](https://proceedings.mlr.press/v267/jha25b.html),
+  source p4 elements 230/250 and p7 346: task diversity and partner diversity are distinct;
+  multi-task self-play can aid unseen partners/tasks, but specialization can hurt new tasks.
+  Motivates separating layout/task generalization from real held-out-partner coordination.
+- MIPI, MARL-0561, NeurIPS 2023,
+  [primary record](https://papers.neurips.cc/paper_files/paper/2023/hash/0799492e7be38b66d10ead5e8809616d-Abstract-Conference.html),
+  p2 159–162, p10 452/table2: team composition includes unit types; approximate MI marginal
+  changes matter. Not a reason to copy an MI bonus into homogeneous S1.
+- Deep Sets, DMOD-CCA390C5FE, p2 theorem2: invariant representation under its assumptions;
+  ADAPT, MARL-0104, AAAI 2026 p1/p6/p7: object-centric transfer in benchmark tasks. These
+  distinguish representation capacity from observed finite learning and native UAV usefulness.
+- M3FC, MARL-0438, ICML 2024,
+  [primary record](https://proceedings.mlr.press/v235/cui24a.html), p3 1089/1091, p6 1191:
+  weak minor-agent versus influential major-agent assumptions; not an N4–8 theorem.
+  Kaleidoscope, MARL-0578, NeurIPS 2024 p7 311–314: heterogeneous type masks, strong shared+ID
+  baseline; not evidence for unseen capability-composition transfer.
+- DACOM, MARL-0006, AAAI 2023,
+  [primary record](https://ojs.aaai.org/index.php/AAAI/article/view/26389), p3–4:
+  wait-for-information versus delay cost. CoDe, MARL-0066, AAAI 2025,
+  [primary record](https://ojs.aaai.org/index.php/AAAI/article/view/34497), p1–2/p4/p7:
+  intent and stale-message alignment, including cross-step delays and limits at extreme delay.
+  VIL2C, MARL-0203, AAAI 2026 p4–5: information value under latency/resource cost; its entropy/
+  action-impact surrogate and training rights do not establish our native task benefit.
+- Option-Critic DMOD-36D7E10458 and UTE VS-0005 primary passages support testing termination/
+  uncertainty in their single-agent settings; neither licenses reopening our unchanged
+  multi-agent duration recipe. Literature is a source of mechanisms and controls, not labels.
+
+**Provisional programme: question families are a map, not permanent DM territories.**
+
+| Candidate / relationship | Smallest useful comparison and what it separates | Planned first-study cost / scope | Provisional place |
+| --- | --- | --- | --- |
+| A1 Training over team counts | Finish accepted LOCAL1 B19 F/M; conditional usefulness and N6 specialization cost | Accepted 2 fits / 864k total team steps; no extension after results | Running; read as fixed |
+| A2 Training-task coverage under changed spatial demand | Fixed N6/c10 and same LOCAL1: uniform training versus uniform+cluster; hotspot family wholly held out; evaluate fresh uniform/cluster/hotspot worlds, retaining uniform cost. Hotspot's center is fixed, so do not market broad distributional robustness | Provisional 2×360k fits + common init/two endpoints ×3 families×32 worlds×500 =144k eval, 864k total; exact mixture and seed sets must be prospective before execution | First replacement candidate; independent of B19's sign, related to its training-distribution question |
+| A3 Capability/critical-member transfer | Change actual member capabilities and legal capability observations, fixed count first. Ordinary shared actor+capability features is primary baseline; type masks/MI/attention only if needed by the question | Not selected for launch: semantics/interface and native objective must be specified; a matched exploratory pair at 360k would be 2 fits before full evaluation cost. Do not promise this fit total as complete | Reserve; substantive new variable, not old capacity-package relabel |
+| A4 Join/leave recovery | Separate from static A1/A3: survivor history, identity, changed opportunities and censoring; ordinary recurrent/refresh control before caches or skill reuse | No accepted fits; old churn evidence and two SIG11 attempts preserved. Cost depends on native join/leave schedule and private histories, not a fabricated universal 2-fit figure | Conditional derived question, not automatic retry |
+| B1 Learn service under physical feedback | Finish accepted B09 same deployed F, A versus N training | Accepted 2 fits, ≤648k total team steps | Running |
+| B2 Service recovery and shared charging | Freeze policy; compare one lawful scheduling change against F using the same information/action interface. Distinguish queue-time reduction from end-to-end service recovery, travel cost, censoring and native J. Do not label the remaining loss as queue-caused before evidence | Possible first deployment comparison: 0 fits, 2 variants×32 new worlds×H3000 =192k eval on one frozen policy; implementing selected action semantics/review and actual wall time also cost. Which change is worthwhile remains a decision | Strong successor if a concrete causal comparison exists; common station-intent interface for both arms if introduced |
+| B3 Lower-tail service objective | Service floor/lower-tail against competent scalar(c,eta) conditioned baseline; physical failures versus geometric margin distinguished. No automatic Q32 revival | Not selected for launch; same-horizon 180k matched pair would cost 2 fits plus its own tail-appropriate panel, whose size must be justified. Existing B01 positive and B02 reversal retained | Reserve until exact event/population/objective is meaningful; can share S7 assets with B1/B2 without merging estimands |
+| C1 Decision value of a finite legal opportunity model | Fixed data budget and model family: determine when estimation error changes send/retain ranking and native return. Ordinary plug-in NEAR and cheap AF are core controls; known-model NEAR only a knowledge reference. VSP independent data is already done | No PPO fits necessarily, but fitted models count and calibration, evaluation and branch transitions must be costed. C07's old run took ~138.6M model branch transitions; copying its planner is not free | Conditional successor using C/VSP lessons, not merge of their experiments or learning back .75 as a novelty claim |
+| C2 Native communication timing with latency/collision cost | Reuse CADC legal delayed-message channel and frozen receiver; match payload, observation rights, execution cost and quotas while changing a declared timing rule. Native net service vs ordinary timing comparator | Potential 0 fits, two declared timings×32 fresh worlds×500 =32k env steps for one fixed receiver, plus measurable planner cost; no learned-policy claim. All-send/no-send ceilings may require an additional prospective reference, not added after scores | Competes for early slot once a specific timing hypothesis is written; preserve old adverse learned send/motion package |
+| D1 Unseen partners and tasks | Independent partner conventions held out separately from task families; ordinary shared architecture/training exposure and normal self-pairing retained. Task diversity and partner-mixing are separate axes | DM2 existing preparation estimates4 population fits/8 learners, 3.648M total for its S1 design; a different cooperation host needs its own cost and may be cheaper. Do not transplant that cost as a promise or require an external customer | Separate basic-research reserve, not a successor automatically justified by skills B09 |
+
+Root's preliminary ordering after accepted A1/B1: A2 as the cleanest directly executable
+learning question; B2 or C2 if its first fixed-policy intervention has an actual distinct
+prediction and reasonable total cost; C1 as a bounded model-learning question; D1 and A3/A4/B3
+as explicit later branches. This is open to your scientific criticism: a zero-fit label does
+not beat a learning experiment by itself. A2 need not be positive to permit D1, and a toy result
+is not an admission ticket for native work. No full queue is being launched by this plan.
+
+Close current routine rescue of the tested skill selector/entropy/hold, dense/query aggregation,
+auxiliary-proxy and duration packages; carry their contrary and conditional positive evidence
+into any materially different future use. Keep FSD's pause and G33 untouched. Fuse **shared
+scientific background/assets** for generalization and for information/timing where useful;
+fuse actual directions only if question, comparator, estimand and next step are materially the
+same. Split partners from counts, dynamic churn from static composition, deployment scheduling
+from training feedback. Do not create a new slug for every trivial recipe variation.
+
+**DM responsibility change proposed for direct implementation under the owner's request.**
+
+DM responsibility is the continuity of an assigned scientific question and its explanations,
+not finishing a fixed slug or purchasing its next batch. Assign a question, current evidence,
+credible alternatives and the next useful observation; keep one result-bearing study/idea active
+per DM and one writer/lead per direction. Related candidate branches can remain in the same
+NOTES reasoning without being launched or maintained as a new registry. After a result, the DM
+compares continuation/replication/material revision/pivot/stopping and executes a worthwhile
+unowned choice within delegated scope. Negative result, completed batch or no preassigned
+successor alone is not a stop reason; neither endless search nor a positive result is owed.
+Parent questions do not monopolize all related directions: a materially independent estimand
+can have another DM, with explicit ownership. Root may reframe, merge, split or reprioritize
+across the complete programme. New task creation and App messaging keep their existing explicit
+user-authorization rules; no automatic cross-task dialogue, takeover or pause lift. Accepted
+handles/frozen batches remain untouched. Update existing NOTES/RESEARCH only, with no new
+handoff form, candidate quota, approval layer or standing diagnostic ceremony.
+
+**Answer requested.** Give your strongest material objection, then a usable ranked programme
+and earliest replacement choice, with discriminating comparisons, meaningful costs/dependencies,
+what should merge/split/close, and what result would change the order. Challenge both overly
+narrow current-use gating and unjustified mechanism rescue. Say whether the proposed DM
+relationship actually improves scientific continuity or merely renames the old assignment.
+Suggest concise corrections, not another operating bureaucracy. Return MATERIAL_DISSENT yes/no.
+Advise only: do not execute, dispatch, change frozen studies or edit control files.
+
+**Write scope.** Read this pinned question, then fetch the latest target blob on
+`codex/project-management-sept23`; write only its empty `### Answer` subsection. Preserve
+all other bytes, including `### Decision`, direction rows and current plan; stop on overlap.
+Return the actual commit if writeback succeeds; otherwise provide the complete answer in chat.
+
+### Answer
+
+### Decision
+
+Pending the complete answer and Root's evidence-based adoption; the accepted B19/B09 continue unchanged.
+
 ## Session routing
 
 地址用于恢复与用户明确要求的联系；不产生 App 消息/回复循环。表中是责任路由，任务是否运行、
