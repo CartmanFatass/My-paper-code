@@ -297,3 +297,141 @@ window. The first drain observed accepted/running with consistent records and ze
 errors at 2026-09-25T04:18:17.644765Z. No result has been interpreted. Yield to this
 observer; a checkpoint rearms this same handle, and terminal evidence is reconciled and
 read without an automatic runner retry. This unchanged batch start needs no main/index edit.
+
+### First observation checkpoint — 2026-09-25 04:42 UTC
+
+Drained generation 1 / wake `6bebbac8-26e6-46ad-8529-1ec4928c0c4f`, checkpoint event
+`ebe3f0c9d7397378618fb27c`. The same native operation remains accepted/running, its process
+identities and records agree, and observation has zero errors. Current U arm summary reports
+one started fit, 208,000/360,000 training team steps collected/stored and 25 completed updates;
+its 48,000-step common-initial evaluation completed with zero evaluation storage/optimizer
+calls. M is unstarted. The batch summary's initial arm fields are not a live fit counter;
+the more recent arm summary supplies this progress. No endpoint is read. Current node control
+still records the lifted pause, and no newer owner stop/pause has arrived. Consume this
+checkpoint and rearm the same operation; retain routine progress here until the result boundary.
+
+At the second checkpoint (2026-09-25 05:08 UTC), generation 2 / wake
+`66a4d160-90df-4d4c-bb25-04955b414f0f` / event `71732bee4ad65d0a6c81e531`, the same
+operation remains accepted/running with consistent identities and zero observation errors.
+U reports complete: 360,000 training steps, 45 updates, and 96,000 common-initial/final
+evaluation steps with zero evaluation storage/optimizer calls. M has started its fit and
+reports 56,000/360,000 training steps collected/stored and six completed updates. Thus
+two fits have actually started; the batch-level aggregate still reflects the completed U
+arm while M is live. No paired scientific result is read or investment changed. Current
+node pause remains lifted. Consume the checkpoint and continue observing the same handle.
+
+At the third checkpoint (2026-09-25 05:34 UTC), generation 3 / wake
+`75887af3-e353-4585-b778-49ac4a3ae5ab` / event `2ac9e4e65b0f34e262b0977d`, native
+execution remains accepted/running and consistent with zero observation errors. M reports
+264,000/360,000 training steps collected/stored and 33 completed updates, without a reported
+failure; its final evaluation has not started. U remains complete. No newer pause is recorded
+or owner stop received. Consume this checkpoint and rearm the same operation for its remaining
+training/evaluation and terminal evidence; no endpoint interpretation or new launch occurs.
+
+## 2026-09-24 — A2 complete: modest held-out gain and heterogeneous local costs
+
+The fixed A2 batch completed and DM acceptance is complete. The native witness reports
+ordinary exit 0 at 2026-09-25T05:46:27.102003Z, with the original accepted supervisor/runner
+identities. Generation 4 wake `c96fc795-ff8f-4f92-9f8c-667b60db7ac6` and READY event
+`ef057baf6478cdd5605e6938` were read in full and consumed after collection/reading; no launch
+observation remains active. Neither exit zero nor the observer was used as scientific acceptance.
+
+### Complete evidence, actual cost and retention
+
+Both arms finished 45 updates and 360,000 training team steps, with 101,250 actor and 101,250
+critic optimizer calls per arm. U received 720 uniform lane-episodes; M received 360 uniform
+and 360 cluster. Actual totals are **2 started/completed fits, 720,000 training + 144,000
+evaluation team steps, 5,184,000 UAV action rows**, nine panels and 288 evaluation episodes.
+Evaluation stored nothing and executed zero optimizer calls. U/M scientific arm wall times
+were 43.9839/42.7403 minutes; paired scientific wall was 86.7289 minutes, and native admission
+to exit was 89.1801 minutes, including startup outside the timed scientific body. Process CPU
+user/system were 20,474.0635/48.9532 seconds; process peak RSS was 1,830,112 KiB (1.7453 GiB).
+This scope excludes other processes and peak scratch usage. Implementation, review, retrieval,
+verification and reading are additional work, not hidden extra fits.
+
+Independent post-run reconstruction covered all 144,000 evaluation transitions: service and
+eligibility from link matrices, c10/unique-user/eligibility constraints, quality and height
+components, native J versus six times learner scalar reward, action clipping and transition
+continuity. Every per-world metric/difference and adverse-world list matches the summaries;
+maximum panel-J roundoff was 1.28e-15. Actual initial scenes agree across the three policies
+within each family. All 90 training reset scenes match the fixed seeds/family schedule and
+shared uniform lanes; all four checkpoints load with the right identity and identical U/M
+initial tensors/normalizers. All 45 sampler/update rows per arm and 44 reset boundaries pass,
+evaluation preserves learner/optimizer/RNG/runtime state, and all 21 recorded source digests
+match the accepted published commit. Both logs are empty; no failure or replacement endpoint.
+
+The **136 original native files / 1,088,005,899 bytes** were copied and checked individually
+against the actual node, then independently copied and rechecked at
+`/home/fires/hmasd-artifacts/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101`.
+The native output directory recorded above and this task's local run directory also remain.
+Canonical inventory SHA256 is `e7d60fe78da56f81a437b29da3f165005f9f1e20d96c9d0013db3544f840ffcd`:
+UTF-8 JSON array ordered by relative path, objects with path/bytes/sha256, sorted object keys,
+comma/colon separators and no final newline. The original batch summary SHA256 is
+`c766f6642fad258357f4fd555a122569ad5e13e2484e9a603b009b39cc82a71b`.
+Compact original JSON is published without alteration; raw traces/checkpoints/streams remain
+outside Git with their runner hashes. The derived world-difference figure is separate from
+this original-file inventory.
+
+Source-snapshot GC first refused to inspect protected own process 660. Its documented
+read-only sudo process scan then found the original snapshot eligible; preview and apply
+removed only `2fc6a6f7e27347e983ce2e7589756d8c` after the verified retention above. Claims,
+manifest, exit witness, outputs and authoring checkout remain, and source d22b608e8 stays
+durably reachable. No other operation or worktree was removed.
+
+### Fixed endpoint and every adverse family
+
+Values below are **native J / served users per step**, averaged over each family's 32 worlds.
+These are one trained U and one trained M; world count does not increase training n.
+
+| Family | Common initial | U45 | M45 | M45 minus U45 |
+| --- | --- | --- | --- | --- |
+| hotspot, primary held-out generator | .111314273 / 12.160938 | .361673636 / 23.241375 | .380242622 / 24.182125 | **+.018568986 / +.940750** |
+| uniform, original training family | .154089815 / 14.979688 | .479379473 / 31.712687 | .488402765 / 31.712625 | +.009023292 / -.0000625 |
+| cluster, seen by M | .134416911 / 13.669563 | .457801889 / 30.079625 | .497966756 / 32.167438 | +.040164866 / +2.087813 |
+
+The prewritten **two hotspot mean directions are met**. This is an exploratory directional
+observation, not confirmation or equivalence. On hotspot, J improves in 22/32 worlds and
+service in 20/32; 12 worlds lose at least one. On uniform the corresponding counts are 19/32,
+15/32 and 17 adverse worlds; near-zero mean service difference is not proof of no cost.
+Cluster has 24/32 J gains, 22/32 service gains and ten adverse worlds. The worst paired
+J/service losses are hotspot seed 262020012 (-.074145446 / -5.690), uniform 262000008
+(-.067627130 / -5.442), and cluster 262010028 (-.069422559 / -5.266).
+All 96 paired differences and every adverse seed/value remain in the
+[original summary](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101/summary.json);
+the [derived figure](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101/a2_world_differences.svg)
+shows their spread without a training-population interval.
+
+U/M own-learning J and service gains are respectively hotspot
+(.250359362, 11.080438)/(.268928349, 12.021188), uniform
+(.325289658, 16.733000)/(.334312950, 16.732938), and cluster
+(.323384978, 16.410063)/(.363549844, 18.497875). Both policies improve J in every world;
+hotspot service still falls below initialization for U at 262020011 (-3.466) and for M at
+262020015 (-.460). All uniform/cluster own-learning J/service differences are positive.
+Ordinary uniform training is a competent source of substantial held-out use.
+
+Hotspot M-minus-U changes are coverage +.018815, quality +.017815886, height penalty
+-.000053721, eligible users +2.264125 and eligible-but-unserved users **+1.323375**. More
+eligibility did not all become service. Uniform's J increase accompanies higher quality
+and lower height penalty, with essentially unchanged mean service and fewer eligible users.
+Cluster has service +2.087813, eligibility +1.796000 and eligible-unserved -.291813.
+Height is the S1 penalty term, not measured battery energy or safety risk.
+
+### Explanation update and next decision
+
+This pair strengthens the limited proposition that the fixed ordinary mixture can add use on
+the held-out hotspot generator beyond a strong U endpoint. The observed gain is not confined
+to seen cluster, and a substantial *mean* uniform service loss did not appear. It does not
+identify pure task-support coverage, a learned spatial representation, or a training-population
+effect. Sampling/optimization variation between complete training programs and a specific
+fixed-center preference remain live alternatives. The small mean gain and many adverse worlds
+also make blanket replacement unwarranted. Generator holdout is not disjoint physical support,
+arbitrary hotspot locations, moving demand or new-partner coordination.
+
+Current main `c543bc7efe5af9e497c67859f47e9ea0ba50202c` preserves B19's bounded roster result
+and its own fixed B20 confirmation; neither is an independent replication of A2. The original
+adopted Pro advice covers reading this fixed batch, but explicitly requires a concrete next
+choice between reproducibility and changed task family. It does not cover a new actual
+confirmation claim and seeds. I will now obtain that focused criticism, comparing a fixed
+fresh-training replication proposal with a cheaper frozen-policy spatial-dependence observation
+and stopping if neither changes a worthwhile judgment. No extra fit, alternative endpoint,
+mixture search or moved-hotspot evaluation has been accepted; the existing A2 batch is closed.
