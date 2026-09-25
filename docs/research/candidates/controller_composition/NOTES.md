@@ -660,3 +660,173 @@ native hmasd-wait state. Native observer PID188685 is observation only. A future
 rearms that operation; terminal evidence will be fully collected/read without automatic retry.
 This is routine batch progress, so the accepted B01 main standing is not republished solely
 for launch. No scientific result is claimed.
+
+## 2026-09-25 — B01 complete: no uniform matching advantage, heterogeneous worlds
+
+### Execution, retention and reading
+
+The accepted operation exited0 with a valid native witness and absent runner/supervisor
+identities. All nine cells completed all32 H500 worlds. I read the complete per-world J/service
+nine-cell arrays, all source-pair and mixed-to-source contrasts, native components, conditional
+intervals and adverse worlds. Independent read-only verification reconstructed every NPZ and
+all10,000 joint-world bootstrap draws without importing the candidate reducer. There were no
+integrity or numerical findings: maximum discrepancy was1.78e-15 for reconstructed J,
+2.11e-15 for J contrasts/intervals and3.51e-14 for service contrasts/intervals, consistent with
+roundoff. Routing/clipping, unserved/height identities and diagonal action agreement were exact.
+All attempt/return/validation masks were complete, streams finite and all288 episodes ended
+at500. Checkpoint and34 dependency hashes, unchanged runtime digests and matched initial-world
+identities reconciled. Raw initial states and connection/SINR matrices were not retained, so
+their physical identities additionally rest on the reviewed runtime assertions. No environment
+replay was performed. I accept the complete finite evaluation.
+
+Actual result cost:0 fits/optimizer updates/storage calls;144,000 team transitions,864,000
+executed UAV rows,1,728,000 inferred policy rows and288 world episodes. Runner command wall
+was158.860747s, process CPU459.946858s and peak process RSS2,650,016KiB (about2.527GiB).
+These exclude engineering, review, transfer and reading; development-wide fixture reruns were
+not metered. The reused three360k fits remain1.08M historical training steps, not new fits.
+
+All27 original output files,30,365,172 bytes, are retained at
+`/home/fires/hmasd-retained-runs/controller_composition/b01_fixed_matrix_20260925`.
+Every relative path, byte count and SHA256 was verified against the terminal node copy.
+The nine raw NPZs total29,395,670 bytes; individual hashes are in the unchanged
+[runner summary](../../../../runs/controller_composition/b01_fixed_matrix_20260925/summary.json).
+Summary SHA256 is`221b0a7ac8b589046f164cddf42dd016abce3d48be7eef2da15b7c2574022d50`.
+Native stdout/stderr are empty (SHA256
+`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+The original node output also remains at the manifest's path. This launch used a fixed owned
+checkout, so there is no automatic source snapshot to reclaim. No source artifact, shared
+checkout or operation was deleted. Generation3 event`769ce77ba1d54fa524468c81` was consumed
+into generation4; no operation was restarted.
+
+### Full finite matrix
+
+Rows are the controller of original roles0–2 and columns the controller of roles3–5.
+Source1/2/3 are the preselected B20 F45 seeds1016101/1017101/1018101. All intervals in this
+reading are pointwise paired-world bootstrap percentiles conditional on the fixed library,
+partition and iid/exchangeable world-generator model. They are not simultaneous intervals or
+training-population inference. The32-world means are direct observations; no equivalence
+margin was specified. Full cell intervals and every world remain in the runner summary.
+
+| Cell | J | Served users/step |
+| --- | --- | --- |
+| 1/1 | .515900754 | 33.105625000 |
+| 1/2 | .514350664 | 33.109125000 |
+| 1/3 | .528779228 | 34.014312500 |
+| 2/1 | .519565873 | 33.462000000 |
+| 2/2 | .527602867 | 34.227750000 |
+| 2/3 | .529224046 | 34.159812500 |
+| 3/1 | .531776767 | 34.172375000 |
+| 3/2 | .536117327 | 34.628937500 |
+| 3/3 | .535900708 | 34.469375000 |
+
+### Matching and residuals
+
+| Contrast | J [conditional95%] | Served users/step [conditional95%] |
+| --- | --- | --- |
+| C12 | +.004793542 [−.007305101,+.015535376] | +.381125000 [−.467721875,+1.134259375] |
+| C13 | −.004377267 [−.015811077,+.006757756] | −.305843750 [−1.104324219,+.479638281] |
+| C23 | −.000918899 [−.009869241,+.007485924] | −.045812500 [−.674970313,+.550764062] |
+| D | −.000167541 [−.009459302,+.007918611] | +.009822917 [−.643086198,+.579832552] |
+| kappa | −.001518492 [−.005500516,+.002521722] | −.110656250 [−.390621354,+.170005729] |
+
+D=mean(C)=trace(R)/2 remains one algebraic reading, not three replications. Mean residual R:
+
+```text
+J
+  +.000389211  −.004770034  +.004380823
+  −.001733050  +.002694790  −.000961740
+  +.001343839  +.002075244  −.003419083
+S
+  +.043638889  −.361465278  +.317826389
+  −.140152778  +.216993056  −.076840278
+  +.096513889  +.144472222  −.240986111
+```
+
+Every C interval and every mean R entry's interval spans zero. The exact finite mean residual
+is nonzero, but a uniform matching penalty is not established under this world model. Small
+means conceal heterogeneous worlds: per-world residual RMS min/median/max is
+.002898097/.015870364/.046685589 J and.210514713/1.114620445/3.263127138 users; RMS of mean R
+is only.002810482 J/.209356100 users. Positive/negative world counts for C12,C13,C23 are
+20/12,12/20,17/15 in J and20/12,11/21,18/14 in service. J D is positive in16/32 worlds and
+ranges−.096656687 to+.040825201. World92525008 has strongly favorable mixed-team
+D=−.096656687 J/−6.759333333 users; worlds92525015,92525029 and92525025 have J D about+.04.
+All remain in the original panel; none is excluded as an outlier.
+
+### Every mixed cell against both source diagonals
+
+Each delta below gives J / served-users-per-step for the same cell and source baseline.
+Complete per-world differences and all their intervals remain in the runner summary.
+
+| Mixed i/j | Delta versus i/i: J / S | Delta versus j/j: J / S |
+| --- | --- | --- |
+| 1/2 | −.001550090 / +.003500000 | −.013252203 / −1.118625000 |
+| 1/3 | +.012878474 / +.908687500 | −.007121480 / −.455062500 |
+| 2/1 | −.008036994 / −.765750000 | +.003665119 / +.356375000 |
+| 2/3 | +.001621179 / −.067937500 | −.006676663 / −.309562500 |
+| 3/1 | −.004123941 / −.297000000 | +.015876014 / +1.066750000 |
+| 3/2 | +.000216619 / +.159562500 | +.008514460 / +.401187500 |
+
+The3/2 cell has the largest observed panel mean in both outcomes, only+.000216619 J and
++.159562500 users above3/3, with intervals[−.012507486,+.012719216] J and
+[−.759678125,+1.049250000] users. It also exceeds2/2 in the finite mean. This is a maximum
+among prewritten cells after reading the table, not an independently validated deployment
+choice. Its world92525005 loses−.094276693 J/−6.516 users versus3/3 and−.085264661 J/−6.128
+users versus2/2. Negative C13/C23 therefore supplies no general mixed-team recommendation.
+
+The1/2 cell versus2/2 loses−.013252203 J and−1.118625 users, with intervals
+[−.026851993,−.000406209] and[−2.049626562,−.249810937]. Against1/1 its mean J is slightly
+lower while service is+.0035. Source1's lower ordinary quality remains a viable part of this
+comparison; a mixed-cell loss alone does not identify a same-source convention. World92525025
+loses−.130216761 J/−9.466 users versus2/2. Other cells' worst source-relative J losses are
+also retained:1/3−.122984732;2/1−.109911525;2/3−.085043492;3/1−.108995505. Their full
+source-specific world differences remain in the original outputs.
+
+The2/3 versus2/2 comparison trades J+.001621179 for service−.067937500. Its quality increase
+and lower height penalty offset the coverage loss in J's arithmetic. This is not a battery-risk
+benefit or a causal mechanism identification. Native arithmetic components for every cell:
+
+| Cell | Coverage | Quality | Height penalty | Eligible | Eligible-unserved | Mean height |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1/1 | .662112500 | .184266759 | .002858024 | 33.773625 | .6680000 | 52.858023963 |
+| 1/2 | .662182500 | .184235060 | .004447604 | 34.156250 | 1.0471250 | 54.447603989 |
+| 1/3 | .680286250 | .184811360 | .002864555 | 34.856625 | .8423125 | 52.864554828 |
+| 2/1 | .669240000 | .184483367 | .004247137 | 34.468125 | 1.0061250 | 54.247137496 |
+| 2/2 | .684555000 | .182106768 | .006217664 | 35.536500 | 1.3087500 | 56.217663636 |
+| 2/3 | .683196250 | .185766851 | .004743385 | 35.312500 | 1.1526875 | 54.743384730 |
+| 3/1 | .683447500 | .187133305 | .002776474 | 35.0821875 | .9098125 | 52.776474423 |
+| 3/2 | .692578750 | .185791674 | .004425300 | 35.6143125 | .9853750 | 54.425300194 |
+| 3/3 | .689387500 | .188367375 | .003180754 | 35.6098125 | 1.1404375 | 53.180754362 |
+
+### Belief update and next decision
+
+Shared background at main`adf68344620a2439276bdf3061b2e0e0fc94f48d`, section8
+"协作结构与单策略质量分开", separates finite source substitution from convention, physical
+complementarity and trainable remedies. B01 supplies a concrete reason not to interpret near-zero
+aggregate D as interchangeability: pair signs and world effects differ, while a universally
+useful mixed replacement is not established. The mean matrix is broadly compatible with
+source/role quality plus smaller residuals; per-world consequences are less additive. This
+does not prove physical separability, general partner failure or absent coordination value.
+
+I adopt the already-read Pro branches for small/mixed mean contrasts and world cancellation:
+do not extend this matrix, switch its bank/partition, or purchase compatibility repair on a
+uniform same-source-loss premise. Preserve the small finite3/2 advantage and adverse worlds
+without selected-winner validation. This completes the diagnostic's exposure; it does not
+answer whether directly training over partner distributions adds value under LOCAL1, or end
+the parent question just because this recipe finished.
+
+A bounded source inspection found a concrete implementation issue for a direct learning
+comparison. B20 stores all six roles; existing buffer validity masks are time/env masks, and
+ordinary LOCAL1 minibatches do not expose role identity to the loss. Splicing source actions
+alone would incorrectly train on learner samples for unexecuted roles. A direction-local
+collector/sampler/update must explicitly restrict actor and critic samples to learner roles0–2,
+retain physical N6 state and preserve the source's private recurrent runtime. There is no
+existing configuration switch. Relevant code: B20 runner193–245, `hmasd/utils.py`223–247 and
+1350–1406, B16 runner182–231, and `hmasd/agent.py`6473–6515. B20 uses16 lanes,H500 and45 full
+rollouts/updates for360k team steps. The footprint is bounded but reaches recurrent learning
+semantics; this source inspection consumed no new environment transition.
+
+The next decision is whether a complete matched partner-training comparison warrants its
+learning and engineering cost despite the weak uniform-matching premise, or the current S1
+asset route should end. The first Pro answer did not assess or price that concrete learner
+comparison. I will obtain focused advice before accepting its implementation or fits.
+No successor is accepted or launched by this result reading.
