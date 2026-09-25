@@ -10135,3 +10135,14 @@ The newer constitution clarification of question continuity and the three-track 
 ceiling changes neither this accepted pair nor its frozen inputs. Continue observation of
 the same operation and rearm with the returned generation/wake/event; no new execution or
 scientific conclusion is selected from this checkpoint.
+
+### B09 fourth observation checkpoint — 2026-09-24
+
+Generation 4 returned only CHECKPOINT `4790e5d9b9b99d5eebb3d346`, with consistent original
+native identities running, zero probe errors and no exit witness. N's completed boundary is
+150,000 transitions / 25 updates / 50 native episodes; the later journal read reaches
+153,200 transitions during phase 26 collection. All five learner groups moved in update 25.
+Initial evaluation remains the sole completed panel (32 worlds, 96,000 transitions); neither
+endpoint evaluation nor A has started. The summary is INCOMPLETE without a recorded failure,
+stderr is empty, and fresh main retains the same lead and lifted owner pause. Rearm the same
+accepted operation; this checkpoint supplies no endpoint comparison or change in scope.
