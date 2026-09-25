@@ -1384,3 +1384,33 @@ training base 264300000 and constructor 269903000, at the unchanged source, fixe
 worlds and budget. Main `da5344e044ed1ed381c58dfc7ade15774079231e` retains the same confirming
 standing, lead and lifted owner pause. This block reading is published on the direction
 branch; main/index publication remains at the material study boundary.
+
+### C01 block 3 accepted; fixed fourth pair running
+
+The complete block-2 evidence and adverse reading above are published at
+`b37ce87421f4fb154f56b0b0c0025fbd32894d33`. Before dispatch, the native author checkout was
+tracked-clean at the fixed C01 input, the planned block-3 output and outer task were absent,
+and the canonical pause was lifted. The first status probe preceded native admission and
+found no output reference; the same outer launch was reconciled through its manifest and
+native status without another dispatch. Its short outer process exit is not the fit result.
+
+Block 3 / model seed 263000104 received native admission at **2026-09-25T11:48:52.689422Z**.
+The kernel read current main `da5344e044ed1ed381c58dfc7ade15774079231e` and passed fresh
+actual-node resource admission: 14,987,096,064 physical/effective available bytes against the
+4,294,967,296-byte floor. The native
+[manifest and accepted operation reference](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b3_s263000104/launch-manifest.json)
+and [preflight](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b3_s263000104/admission-preflight.json)
+were copied with initial launch status and U config; all four byte counts and SHA256 values
+match the executing node. Manifest SHA256 is
+`04a2a75c77afb0e96e794ca03be42cb52e194a990360bea90489c1e244dff861`.
+Actual U configuration verifies model seed 263000104, constructor 269903000, training base
+264300000 and the unchanged evaluation worlds and algorithm settings. Accepted source stays
+`9e44adde3d54fcd0363a2ebdbc1468494141c27b`; existing native outputs remain in the author checkout.
+
+Native status and the adopted observer both saw the same accepted operation running with
+matching supervisor/runner identities, consistent records and no exit witness. At
+**2026-09-25T11:50:20.438150Z**, `spatial-c01-b3-s263000104` was active at generation **22**,
+window 1,500 seconds, with zero errors and no pending events. All earlier completion events
+remain consumed. A fresh publication-side fetch retained that same main and direction tip.
+Three of five pairs have complete scientific readings; the fourth is running, with unchanged
+protocol, budget and five-block decision rule. No worker restart or Pro resend occurred.
