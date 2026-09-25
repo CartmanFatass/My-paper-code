@@ -1201,3 +1201,34 @@ world-pooled training n, filtering or early confirmation verdict is used. Contin
 third pair, block 2 / seed 263000103, training base 264200000 and constructor 269902000, at
 the unchanged source, worlds, budget and five-block decision rule. The local crash did not
 create a replacement fit or a new scientific investment decision.
+
+### C01 block 2 accepted; observation restored
+
+The crash-recovery record and complete block-1 compact evidence are published on the same
+direction branch at `79a02989fe2fbe7c4759e7e27cbc00989bd58b51`, using the independent owned
+publication checkout described above. A fresh fetch before this entry retained main
+`da5344e044ed1ed381c58dfc7ade15774079231e`, the confirming standing, recorded lead and lifted
+owner pause. Its relevant change from `66aed19c5e6df050f7bc5340be9127cf24bda9a9` concerns S7 B11
+adoption/plans/routing; this direction's fixed protocol and shared controls remain unchanged.
+
+The third prespecified pair, block 2 / model seed 263000103, received native admission at
+**2026-09-25T10:15:19.058772Z**. The kernel observed that same current main and passed fresh
+actual-node resource admission: 15,035,584,512 physical/effective available bytes against the
+4,294,967,296-byte floor. The native
+[manifest and accepted operation reference](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b2_s263000103/launch-manifest.json)
+and [preflight](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b2_s263000103/admission-preflight.json)
+were copied with initial launch status and U config; all four byte counts and SHA256 values
+match the executing node. Manifest SHA256 is
+`00d99af9d8531c7c189a409d0105d72bce002bb4f9fb64f540474db87648a3b1`.
+Actual U configuration verifies constructor 269902000, training base 264200000, model seed
+263000103 and the unchanged fixed evaluation worlds. Input remains
+`9e44adde3d54fcd0363a2ebdbc1468494141c27b`; native outputs retain their existing author checkout.
+
+Native status and the adopted observer both saw the accepted operation running with matching
+supervisor/runner identities, consistent records and no exit witness. At
+**2026-09-25T10:20:12.343999Z**, observer `spatial-c01-b2-s263000103` was active at generation
+**17**, window 1,500 seconds, with zero errors and no pending event. Earlier completed events
+remain consumed. The observer is a read-only status probe of this accepted handle; no worker
+restart or Pro resend occurred. Two of five paired blocks have complete scientific readings;
+the running third block is not another accepted result. No endpoint, seed, budget, decision
+rule or claim changes follow this admission, and no per-block main/index update is made.

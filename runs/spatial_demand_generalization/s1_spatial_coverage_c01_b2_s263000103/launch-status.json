@@ -1,0 +1,11 @@
+{
+  "claim_key": "794c3f82a0daa31f2ddc433297f4d9db7e01f916a50f6a5e1bb928223040e854",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/794c3f82a0daa31f2ddc433297f4d9db7e01f916a50f6a5e1bb928223040e854.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/spatial-c01-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_c01_b2_s263000103/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/794c3f82a0daa31f2ddc433297f4d9db7e01f916a50f6a5e1bb928223040e854.json",
+  "pid": 646957,
+  "runner_pid": 646958,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-25T10:15:19.063967Z"
+}
