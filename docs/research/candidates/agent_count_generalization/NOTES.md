@@ -19155,3 +19155,380 @@ seeds and small non-result specs in pytest-owned temp/, never production result 
 Use the selected local scientific interpreter with PATH from compute config. Independent
 Reviewer checks high-risk state/RNG/checkpoint/output/admission behavior; DM reads and accepts.
 No helper owns science, notebook/index, Git staging or result execution, and none spawns children.
+
+## 2026-09-24 — B19 engineering accepted on the selected independent CPU path
+
+The DM accepts the bounded B19 implementation after reading the diff, real-path checks and
+independent registered Reviewer findings/repairs. The historical source import preserved all
+77 candidate/test/entrypoint files from `eba71809c` byte-for-byte; only new B19 paths change.
+The complete pre-continuation notebook prefix (1,401,793bytes) remains unchanged. Current main
+was refreshed and relevant concurrent ownership/standing changes retained through `2eec4adbd`;
+DM2's completed no-fit decision does not change the already selected F/M comparison. Our own
+route/prospective note is published on main at `ae1ed7adb`. No App task was messaged.
+
+**Accepted behavior.** Every complete training reset writes its own
+`<arm>/raw/training_reset_rNN_nN.npz` before collection, using file flush/fsync, atomic replace
+and directory fsync. A later abrupt termination no longer depends on Python exception cleanup
+to preserve earlier reset scenes. Training rows are fsynced individually; the arm summary binds
+path, bytes, SHA256 and completed-row frontier for the acknowledged stream prefix. A later
+unacknowledged append is retained and distinguished from that prefix, not truncated. Full
+initialization manifests, checkpoints, traces and verbose training diagnostics stay under raw/;
+compact config/panels/summaries retain native per-world values, counters and artifact references.
+The one common stage0 is actually evaluated under F's untouched initialization; M reuses it
+only after complete parameter/normalizer/runtime/optimizer/sampler/config identity checks.
+Its borrowed baseline explicitly reports zero new environment steps. Actual panels are F6+M3.
+
+The DM's normalized AST comparison found collect_complete_episode, _audited_update and
+adapt_roster identical to frozen B18 except the diagnostic B18→B19 labels. The evaluator
+preserves its construction/seeding/strict-copy/reset, terminal, no-storage/no-update and RNG
+isolation paths, with the new fixed counts/worlds and raw locations. This is source and focused
+runtime evidence, not a claim that independent installations or long runs are bit-equivalent.
+The current core's only agent.py difference from the old direction tip is the entry-mask
+comment plus equivalent `size(0)`→`shape[0]`; no scientific core repair was introduced here.
+
+**Concrete review repairs.** (1) Newly persisted reset/collecting records originally lacked
+an optimizer baseline: a later boundary JSON-write failure could count old optimizer calls
+again. Capture and persist the baseline before that boundary. (2) An exception on the first
+training policy call left raw ±infinite motion bounds and broke failure JSON; use the existing
+zero-observation motion finalizer before writing the incomplete record. (3) Bind the raw
+training stream's acknowledged prefix and add initialization JSON byte count. The associated
+regressions retain zero/partial steps, current-roster accounting and explicit unstarted M.
+These are evidence/accounting repairs, not assertions about the prior SIGSEGV root cause.
+
+**Checks and costs (technical fixtures, zero result-bearing fits).** On
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python`, the unchanged B18 suite passed10 tests in11.70s.
+The repaired B19 suite passed16 tests in12.80s; after a test-only change, its affected successful
+full-cycle checks passed2/2 in5.66s with Torch4 threads on this selected host. Failure fixtures
+remain Torch1. They exercise real N6→6 and N4→6→8→4 collect/store/GAE/PPO paths, actual N5/7/6
+evaluation, matched initialization/private sampler and runtime preservation, nine-panel counts,
+identity mismatch rejection, admission-before-science/existing-output refusal, complete/partial
+raw prefix hashing and abrupt subprocess exit after a later reset. Technical seed9191019 and
+world addresses shifted by10,000,000 separate these from B19 production inputs. The tests clean
+only their pytest-owned scratch. The14 warnings are existing Matplotlib/Pyparsing deprecations.
+The Reviewer separately read the state path and verified affected repairs (6 checks plus the
+latest stream-prefix regression); no material finding remains. Repeated check time is support
+cost, not independent training replication; no total wall is inferred from overlapping passes.
+
+Final reviewed SHA256 identities:
+
+- B19 runner: `e2c92a2e32165a05aa1f6aa000cfbb7df8d280959508f34b905afe67ae66daf5`.
+- Guarded CLI: `f2845fdb696f1c00da42efe8c18876ebf2cb1b0a7a3fd7509d87c3c1f2b99d7e`.
+- B19 tests: `fa76843b7cfac72d749c7b08e88066c73a79730fafd431eda736713ad2f30290`.
+- B19 package init: `d5230cd413cbfe89e9cb0a8260df0f971a38ad24b9d3feae2994e063eee701b9`.
+
+The native local CPU installation reports Python3.10.20, NumPy1.26.3, Torch2.7.0+cpu and
+no CUDA build, boot `ef111e89-19ab-42f4-bc0a-c1773533e920` on Jacob. Resolved interpreter
+SHA256 is `3303d2b5dc566818e412d2b5b6cd8e792bd360865da47593429a635f72668226`;
+NumPy `_multiarray_umath` SHA256 `e62046dd78f14a2d7bc483253c4ced45cabb5872ccd3bd3da9989982ebbbc015`.
+These are inspected module identities, not a full dependency seal. CLI sets OMP/MKL/OpenBLAS/
+NumExpr thread variables to1 before scientific imports and uses the fixed Torch4 setting.
+A preparation-only memory read passed with11,404,406,784 available physical/effective bytes;
+launch must perform its own fresh admission. The canonical user checkout's unchanged
+pause/state/lead matches published main, and its selected local_linux node configuration equals
+this checkout's; no user-checkout/index write or synchronization was needed.
+
+**Limits and next action.** These reduced checks do not establish production-H500 duration
+stability or diagnose the old crashes. Abrupt-exit retention was tested without exception/finally;
+no power-loss test is claimed. A newly failed invocation remains terminal and is not retried
+by the observer. Publish the exact accepted inputs, admit the new B19 invocation on local_linux,
+then arm this task's fresh observer against its own native handle. Once terminal, independently
+read all native arrays/counts/checkpoints, verify a durable collection copy and publish the
+bounded complete or incomplete reading. An artifact-only independent reader is prepared under
+this task's ignored temp/directions/agent_count_generalization/; it imports no project environment,
+learner or candidate reducer and has not read or generated scientific data.
+
+## 2026-09-24 — B19 accepted on local_linux with this task's native observation
+
+The new B19 invocation was admitted at `2026-09-25T01:37:51.019926Z` (18:37:51 PDT), from
+published exact input `bfb4fd356a01024ef04c967c4768263f114e5a17`, on the prospectively selected
+local_linux node. Its [native manifest](../../../../runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/launch-manifest.json)
+binds the immutable source snapshot, command, node, supervisor/runner identities, stable operation
+reference and output root; the [fresh admission preflight](../../../../runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/admission-preflight.json)
+is the actual release check. No old B18 handle, fit or checkpoint was reused. The F→M batch
+is running under the fixed contract; admission is not a scientific result or proof of completion.
+
+This task's private request `temp/directions/agent_count_generalization/b19-wait-request.json`
+observes only that accepted operation via `hmasd_launch status`, every30s with20s probe timeout
+and a1500s observation window. Arm `tools/hmasd_wait.py` in this task UUID's own default state;
+a checkpoint rearms the same handle, never the worker. No Root/old-task observer is adopted.
+On return, reconcile native exit and last completed artifact boundaries before interpreting
+counts; an abrupt exit can leave the batch aggregate stale relative to arm records. No retry,
+resume-jobs, endpoint substitution, extra panel or scientific extension is authorized by a wake.
+
+## 2026-09-24 — B19 complete fixed ordered roster mixing adds bounded service beyond fixed N6
+
+### Native acceptance and complete reading
+
+The single admitted operation at input SHA `bfb4fd356a01024ef04c967c4768263f114e5a17`
+finished normally on `local_linux` at 2026-09-25 03:49:54 UTC (September 24 PDT).
+The native exit witness is valid, exit code 0; both native process identities are absent and
+claim/source records agree. The generation-6 READY event belongs to the original invocation.
+No worker was restarted, no fit/endpoint was appended, and no old B18 endpoint enters B19.
+
+The DM recomputed all nine complete H500/32-world traces directly from saved arrays with
+an artifact-only reader (no environment, learner or project reducer import). Checks cover
+all finite trace values, unique user assignment and capacity 10, eligible/served/unserved
+counts, C=S/50, Q=connected quality sum/max(S,1), P=.1(mean height-50)/100,
+J=.7C+.3Q-P and scalar J/N; clipping, transition continuity, identical evaluation initial
+worlds, per-world panel/reducer equality, checkpoint hashes/tensors, complete training-stream
+hashes, 90 persisted reset-scene hashes/seeds and RNG preservation, and the 15 shared N6
+reset scenes. All nine traces also satisfy single-eligible-UAV per user and
+S=Σmin(e_i,10), U=Σmax(e_i−10,0). Readback completed in 3.118592 seconds.
+An independent bounded Reviewer found no material inconsistency in the admitted identity,
+source/checkpoint/init/reset/stream records, actual costs or independent panel reductions.
+
+Actual common initialization matches modules and normalizers, optimizer ownership/state,
+post-initialization global/private RNG, runtime/buffers and canonical config. F alone
+executed the three common initial panels; M reused their digests after the full guard.
+There are no M stage0 execution artifacts, and reuse adds no environment steps. Both actors
+and critics moved; coordinator/discriminator optimizer calls remained zero as specified.
+Each arm made exactly 101,250 actor and 101,250 critic optimizer calls, with no sampler tails.
+
+Evidence: [native batch summary](https://github.com/CartmanFatass/My-paper-code/blob/b98a0d893d3b7065710f3c0fe6bb7471849a4eeb/runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/summary.json),
+[F summary](https://github.com/CartmanFatass/My-paper-code/blob/b98a0d893d3b7065710f3c0fe6bb7471849a4eeb/runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/F/summary.json), [M summary](https://github.com/CartmanFatass/My-paper-code/blob/b98a0d893d3b7065710f3c0fe6bb7471849a4eeb/runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/M/summary.json),
+[artifact-only reader](https://github.com/CartmanFatass/My-paper-code/blob/b98a0d893d3b7065710f3c0fe6bb7471849a4eeb/runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/artifact_readback.py) and
+[full recomputation, including every per-world difference](https://github.com/CartmanFatass/My-paper-code/blob/b98a0d893d3b7065710f3c0fe6bb7471849a4eeb/runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/artifact_readback.json).
+
+### Actual cost and endpoint readings
+
+Two started and two completed fits, learner seed 1015101. Each arm completed 45 updates,
+360,000 stored/executed team training steps, 2,160,000 UAV training steps and 720 episodes.
+F had 45 N6 rollouts; M had 15 each at N4/N6/N8 in the fixed [4,6,8] order.
+Total training is 720,000 team/4,320,000 UAV steps. Nine actual evaluation panels are
+144,000 team/864,000 UAV steps and 288 episodes, with zero optimizer/storage calls.
+Total exposure is 864,000 team/5,184,000 UAV steps. B18's earlier two started fits and
+technical failure remain separately charged and scientifically unchanged.
+
+Runner wall time was 7917.869104s (131.964485min);
+F/M measured arm walls were 4046.725245/3870.243431s. Whole-process peak RSS was
+4,220,460 KiB (4.024944 GiB); user/system CPU was 28733.767170/258.091009s.
+RSS is cumulative RUSAGE_SELF across the pair; peak scratch and other processes were not
+measured. All source digests were unchanged. stdout and stderr are empty. Successful completion
+on this distinct CPU path does not diagnose or demonstrate a repair for B18/B08's remote faults.
+
+Means are native J / served users per step, separately for each N; no across-N score.
+
+| Test N | Common initial J / S | F45 J / S | M45 J / S | M−F J / S | F own ΔJ / ΔS | M own ΔJ / ΔS |
+| --- | --- | --- | --- | --- | --- | --- |
+| 5 | 0.257138696 / 20.056875 | 0.455819826 / 28.926750 | 0.533868074 / 34.949500 | +0.078048248 / +6.022750 | +0.198681130 / +8.869875 | +0.276729378 / +14.892625 |
+| 7 | 0.148716629 / 13.533687 | 0.415298541 / 26.494563 | 0.509345352 / 33.235000 | +0.094046811 / +6.740438 | +0.266581912 / +12.960875 | +0.360628724 / +19.701313 |
+| 6 | 0.195505263 / 16.567000 | 0.436412864 / 27.734938 | 0.538326935 / 35.198813 | +0.101914071 / +7.463875 | +0.240907601 / +11.167937 | +0.342821672 / +18.631813 |
+
+All four prospective signs D5J, D5S, D7J and D7S are positive. This meets the **exploratory
+directional prediction**, not a confirmation rule. Initial-to-final differences show useful
+learning by F as well as M. Because the baseline is genuinely common, M−F own-learning
+increments equal M−F endpoints algebraically; these are not two independent findings.
+N6 has positive average J/service differences here, without eliminating its local loss.
+
+### Native composition, adverse worlds and training history
+
+| N / endpoint | C | Q | P | E eligible | S served | U eligible-unserved | Mean height |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 5 / F45 | 0.578535000 | 0.186760574 | 0.005182846 | 33.078437500 | 28.926750000 | 4.151687500 | 55.182846236 |
+| 5 / M45 | 0.698990000 | 0.199249498 | 0.015199776 | 36.566687500 | 34.949500000 | 1.617187500 | 65.199775514 |
+| 5 / M−F | +0.120455000 | +0.012488924 | +0.010016929 | +3.488250000 | +6.022750000 | -2.534500000 | +10.016929278 |
+| 7 / F45 | 0.529891250 | 0.165270096 | 0.005206363 | 27.815687500 | 26.494562500 | 1.321125000 | 55.206362680 |
+| 7 / M45 | 0.664700000 | 0.177845861 | 0.009298406 | 33.663125000 | 33.235000000 | 0.428125000 | 59.298405969 |
+| 7 / M−F | +0.134808750 | +0.012575765 | +0.004092043 | +5.847437500 | +6.740437500 | -0.893000000 | +4.092043289 |
+| 6 / F45 | 0.554698750 | 0.178366155 | 0.005386107 | 30.280625000 | 27.734937500 | 2.545687500 | 55.386106962 |
+| 6 / M45 | 0.703976250 | 0.188839155 | 0.011108186 | 35.905125000 | 35.198812500 | 0.706312500 | 61.108186271 |
+| 6 / M−F | +0.149277500 | +0.010473001 | +0.005722079 | +5.624500000 | +7.463875000 | -1.839375000 | +5.722079309 |
+
+Higher M service accompanies both more eligible users and less eligible-but-unserved mass.
+That decomposition is descriptive, not a causal count-support mechanism. Mean Q also rises,
+while mean height/P increases at every N; P rises in 32/31/32 worlds at N5/7/6. Q falls in
+8/3/8 worlds, and U rises in three worlds at each N despite its lower mean. None of these
+proxy directions was an extra pass condition. Higher mean service is not a no-loss guarantee.
+
+All worlds with nonpositive J **or** S differences are below; M own learning has none.
+F own J is positive in every world but its service falls in two N5 and one N6 worlds.
+
+| Comparison | N | World | ΔJ | ΔS | ΔQ | ΔP | ΔE | ΔU |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| F_own | 5 | 2345507 | +0.008510596 | -3.284000000 | +0.079130731 | -0.030747377 | +1.674000000 | +4.958000000 |
+| F_own | 5 | 2345524 | +0.063328728 | -0.076000000 | +0.076132892 | -0.041552860 | +1.934000000 | +2.010000000 |
+| M_minus_F | 5 | 2345523 | -0.022551725 | -1.774000000 | +0.044192317 | +0.010973420 | -6.162000000 | -4.388000000 |
+| M_minus_F | 5 | 2345525 | -0.002441977 | -0.288000000 | +0.029974666 | +0.007402377 | -0.018000000 | +0.270000000 |
+| M_minus_F | 7 | 2345720 | -0.002950281 | -0.214000000 | +0.018738895 | +0.005575950 | +2.764000000 | +2.978000000 |
+| M_minus_F | 7 | 2345728 | -0.017758809 | -1.614000000 | +0.025803921 | +0.002903985 | -2.128000000 | -0.514000000 |
+| F_own | 6 | 2345630 | +0.016191021 | -4.280000000 | +0.103080426 | -0.045186894 | -2.246000000 | +2.034000000 |
+| M_minus_F | 6 | 2345605 | -0.001457358 | -0.032000000 | +0.023768726 | +0.008139976 | +0.214000000 | +0.246000000 |
+
+All 90 training rows were read and retained, including nonmonotone behavior. F's native
+training J per step moves from .238834 at rollout1 to .349716 at rollout45, with a .482735
+maximum at rollout22 and a later decline. For M the first/final readings within each N are
+N4 .299365/.479970, N6 .264416/.412449 and N8 .169001/.353474. These are stochastic-policy
+training worlds, not deployment panels or alternative endpoints; the prewritten final45
+comparison remains the reading. No curve maximum or interim snapshot was selected.
+
+### Durable recovery
+
+All 129 scientific/native/analysis files (1,086,856,068 bytes) were copied from
+`/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101`
+to the separate persistent directory
+`/home/fires/hmasd-retained-runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101`
+on `local_linux`. Every file's length and SHA256 was compared between the two locations;
+all matched. Bulk traces/checkpoints/streams/reset scenes stay outside Git. Their full relative
+paths, byte counts and hashes are in the versioned F/M summaries, panel trace fields and
+training_stream/reset/checkpoint/initialization fields. Restore under the same run-relative
+layout. Compact configs, per-world/aggregate readings and native manifest/status are versioned.
+Representative complete-file identities (not merely a prefix) are:
+
+| Run-relative path | Bytes | SHA256 |
+| --- | --- | --- |
+| `F/raw/training.jsonl` | 1155843 | `7fdbb8f126eec23ce4af9c07c9be13906ad0603940eb70d5d464f0569772a435` |
+| `F/summary.json` | 363243 | `ea19350d4a601f46d7a939c4b038695be9f84e65b2e9c2e1aca2d80a5dd71cec` |
+| `M/raw/training.jsonl` | 1155435 | `c134d9ed7daef59ff392e852fe3c4c88f0f6d2cd2c702deb4dd741b193841f2b` |
+| `M/summary.json` | 302790 | `c1ea90363493af266acbf0baea8a2cdc3dbacdd8eea712963f1913d4da24f843` |
+| `artifact_readback.json` | 196270 | `c39664c226dc2433935972dfe27e5866ea461ed32c87a3c1a3e1fbbc54c201ea` |
+| `artifact_readback.py` | 11329 | `0997bdcfb59484ca457c610c7eaa02718fb03c1c69bfc24c9f4b133eaf6f92e6` |
+| `process-exit.json` | 555 | `7b261337ce90b0949f0d2678a877a357b3dbdef2d15d9c3a5fc72c2df22e56be` |
+| `stderr.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `stdout.log` | 0 | `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855` |
+| `summary.json` | 136728 | `7c94e2d334e1359e65e3839930e0d78a7e9769c37591c135a89f3aefbf6bcec1` |
+
+### Belief update and next decision
+
+Strengthened: this complete matched pair shows an incremental native-use advantage for the
+**specific ordered ordinary training package**, beyond a competent fixed-N6 policy that
+itself learned and transferred. It removes the particular missing-M endpoint uncertainty
+left by B18. Weakened in this block: the hypothesis that fixed N6 gives at least as much
+mean N5/N7 J and service at this cost. Preserved: five paired adverse worlds and F's own
+service losses; higher mean height cost; B15's fixed inconclusive verdict; B17's mixed-N
+limitations and all historical tuning/development exposure.
+
+Unresolved: recurrence over independent training instances and the reason for the package
+benefit. Changing the roster program changes data composition, reward/N, optimizer exposure
+by N, training order and last-N8 recency together. N5/N7 were untrained exact counts for
+both arms, but are interpolation inside M's [4,8] training range. There are no N4/N8 deployment
+panels. Neither a pure support mechanism, stable ranking, arbitrary count generalization nor
+a learned-skill advantage follows. All 32 worlds per N condition one fitted pair, not 32
+training replications.
+
+At this material boundary I read current published main's question-led plan and owner
+continuity amendment (`943e3e9a72852017840d1fdb0ef595a9e44f8a3d`, retaining the substantive
+plan at `2802f26d6`). A2 spatial coverage already has its own DM; it is not this task's successor.
+The inherited finite ordinary-baseline judgment is now strengthened by the bounded M result,
+while the plan's cheap C2 opportunity competes with spending six more fits on confirmation.
+The current batch is finished without extension. The next chosen action is a focused Pro
+critique of whether a **new fixed, fresh three-pair confirmation of this exact package** is
+worth that cost, with the actual claim/population/joint rule below, versus retaining this
+exploratory result or taking one more discriminating action. No confirmation is admitted,
+no claim is treated as established, and no new result-bearing operation starts before the
+independent decision is recorded. This is a section-5 claim/investment decision, not a routine
+post-result consultation or a new Root/owner approval requirement.
+
+The snapshot collector initially refused inspection of protected own process 365 (`/proc/365/cwd`,
+Permission denied). Its explicitly supported read-only sudo process scan then passed preview;
+apply rechecked all guards and removed only disposable source snapshot
+`9ac263972499483082187af6bbc31a4a`. Both complete output locations, accepted source Git commit,
+claim and terminal records remain. The original READY event was acknowledged at generation7;
+no running observation remains for B19 and no worker was restarted.
+
+## Pro question 2026-09-24 ordered-roster-confirmation-after-b19
+
+Conversation: reuse the completed direction adviser conversation through private local
+operation `hmasd:13e9b672265d2bc607e81053050504dbf4a6ed1e7e69df8e7313d114be8f92fa`;
+its address and account identity remain only in local transport state.
+
+Question: After the fully read positive B19 pair, should this DM purchase the **specific
+fresh six-fit confirmation draft** below to learn whether the exact ordinary ordered-roster
+program's benefit recurs, or retain the exploratory result and choose a more informative
+next observation? Critique the actual claim, comparator, population, fixed decision rule,
+precision assumptions and complete cost. If the confirmation is worthwhile, identify any
+material change needed before committing its final contract. If not, give the strongest
+feasible alternative and the judgment it would change; no quota of new ideas is requested.
+
+Standing: The immediately preceding complete B19 entry is the authoritative new result.
+LOCAL1 F=45×N6 versus M=[4,6,8]×15, each 360k team/2.16M UAV steps and 45 updates, was
+admitted once at `bfb4fd356a01024ef04c967c4768263f114e5a17`. One actual identity-checked
+common initial evaluation and two final45 endpoints produced nine panels/144k team steps.
+Full trajectories and an independent artifact review agreed. Source/native/compact evidence
+is pinned at `b98a0d893d3b7065710f3c0fe6bb7471849a4eeb`; bulk files are private, hash-verified
+at the two recorded local paths, and are not accessible to you through GitHub. Do not claim
+to have independently read those private arrays. The published readback preserves all
+per-world recomputations and reader source, separate from the runner's own reduction.
+
+At N5/N7, M−F J is +.078048247781/+.094046811229 and service is +6.02275/+6.7404375
+users/step; all four prewritten directional signs hold. N6 is +.101914070926 J/+7.463875
+service. There remain 2/2/1 paired adverse worlds. Mean P/height increases at every N;
+quality falls in 8/3/8 worlds despite positive Q means. F itself gained .198681129867/
+.266581912356 J and 8.869875/12.960875 service at N5/N7; it is a strong alternative.
+M own learning was positive in all read worlds; F has three service-loss worlds across
+N5/N6. World counts do not change training n=1. Common initial-to-final learning-increment
+differences and endpoint differences are algebraically the same contrast.
+
+B15 stays inconclusive under its original rule. B16/B17 ordinary control and smaller-N
+counterevidence stay intact. B18 stays an incomplete two-started-fit technical failure,
+not a negative M−F observation or a source of matched endpoints. The new CPU path completed
+in 131.964485 runner minutes and 4.025GiB peak RSS; it does not explain old remote SIGSEGV.
+
+The scientific target is the finite ordered program's native use. Roster composition,
+reward/N, per-N optimizer weighting, sequence/order, last-N8 recency and finite optimization
+are bundled. Neither mechanism identification nor invariance to schedule is claimed.
+The strongest simpler explanation is that competent fixed-N learning is sufficient more
+generally and this one M advantage is a fitted-instance/ordered-training occurrence.
+Another fixed-policy panel would probe world sensitivity but would not resolve training
+recurrence. Reversing the roster order would test a different program and isolate only part
+of the alternative; do not assume that mechanism identification is owed before a package
+utility claim, or that a positive single pair automatically merits expensive confirmation.
+
+Proposed actual claim/plan: read **CLAIM_ordered_roster_interpolation_20260924.md** in this
+directory, marked draft and not admitted. It specifies three fresh paired training blocks
+(six fits), actual equal initialization per block, exact new training/world seeds, final45,
+a fixed shared new 32-world panel at each of N5,N7,N6, and no sweep/added seed. Its sole
+conjunctive claim requires all four N5/N7 paired mean J/S t-interval lower limits >0 across
+training blocks (n3, df2, two-sided95%, conditional on that panel). No B15 margin, pooled N,
+world-as-n, no-loss claim or post-result rule adjustment. The draft openly states the n3
+normal-effect assumption and that it cannot establish its adequacy. N6 tradeoff, all worlds,
+initial/final learning and native components remain required. Assess the value of this narrow
+conditional claim and whether this exact uncertainty/selection design is defensible.
+
+Prospective cost: six new fits, 2.16M team training +432k evaluation =2.592M team steps,
+15.552M UAV steps, about 6.6h if the measured CPU pair rate recurs, around 3.3GB scientific
+outputs before the independent retention copy, plus implementation/review/reading. No allowance
+to fill. No confirmation launch is accepted. Retaining the B19 result without these fits is
+a real alternative. Current project C2 is a distinct cheap delayed-message question (0 fits,
+24,576 evaluation steps plus implementation/asset review); A2 spatial coverage already has
+another DM, and its result is not required for our choice. Do not take over another owner.
+
+Context (paths marked source_sha resolve at the full immutable source supplied in the send):
+- Current governance at source_sha: docs/project/OPERATING_CONSTITUTION.md §§1–5,7–8, including
+  the 2026-09-24 question-continuity/resource-concurrency amendment. Owner pause is lifted for
+  this direction; Claude FSD remains manually paused and G33 frozen. The DM owns this choice,
+  one result-bearing study at a time, and publishes without cross-App approval/messaging.
+- Current methods at source_sha: .agents/skills/hmasd-scientific-tools/SKILL.md, Update the
+  working explanation / Confirm a claim / Comparators / Statistics / Cost and exposure;
+  .agents/skills/hmasd-research-engineering/SKILL.md, Checks / Runtime notes / output retention,
+  only as needed for proposed equality and measured feasibility. They are methods, not governance.
+- Current shared background/priority: docs/research/RESEARCH.md at
+  `943e3e9a72852017840d1fdb0ef595a9e44f8a3d`, the S1 ordinary-control B15–B18 discussion and
+  Current research plan, especially A1/A2/C2. Its B19-pending prose is superseded by our new
+  complete result above; other directions are context, not delegated ownership.
+- Full applicable earlier advice: docs/research/archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md
+  at source_sha, Answer section “四、第二科学优先：DM1 用 L/F 回答混合训练增量，不再解释旧 H6−SET 优势” and Root Decision item3. It motivated the present
+  narrower exploration but did not review the actual post-B19 confirmation claim.
+- Exact development result: this notebook's B19 prospective and complete entries; the batch,
+  F/M compact summaries, nine panel summaries and artifact_readback.json/.py under
+  runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/ at
+  `b98a0d893d3b7065710f3c0fe6bb7471849a4eeb`.
+- Actual proposed claim: docs/research/candidates/agent_count_generalization/CLAIM_ordered_roster_interpolation_20260924.md
+  at source_sha. Frozen B15 is historical contrary evidence; do not rewrite or reuse its exposed
+  instances or decision margins for this claim. Historical chat instructions do not govern new work.
+
+Constraints: no training, no launch and no edits outside the empty “### Answer” subsection
+of this question in docs/research/candidates/agent_count_generalization/NOTES.md on branch
+`codex/agent-count-generalization-b19`. Read the pinned question and selected sources; for
+writing fetch the latest target file and actual blob SHA, preserve all other bytes and stop
+on overlapping edits. Successful write must report the actual commit. If writeback fails,
+return the complete answer in chat, not merely a receipt/hash/link. No private account or
+conversation address in shared text. Advice is not approval or new scientific evidence.
+
+Return: your source-grounded belief update and investment choice, strongest material
+objection/alternative, whether the actual claim/uncertainty design should change, and the
+smallest useful discriminator with full fit/non-fit cost. Give **MATERIAL_DISSENT yes/no**
+for the proposed confirmation decision/plan, and explicitly name consequential sources you
+could not read. Do not manufacture a mechanism diagnosis, simultaneous-interval claim or
+precision unavailable from three independent training blocks.
+
+### Answer
