@@ -1414,3 +1414,24 @@ window 1,500 seconds, with zero errors and no pending events. All earlier comple
 remain consumed. A fresh publication-side fetch retained that same main and direction tip.
 Three of five pairs have complete scientific readings; the fourth is running, with unchanged
 protocol, budget and five-block decision rule. No worker restart or Pro resend occurred.
+
+### C01 block 3 checkpoint — 2026-09-25T12:15Z
+
+Read the sole pending generation-22 checkpoint `ead35aeaa9482a022590db5a`, wake
+`ef93f402-ddaa-472c-9ad4-69a9c0782b44`. At 12:14:28Z the same accepted operation retained
+matching live supervisor/runner identities, consistent records, no exit witness and zero
+observer errors. At 12:15:39Z U's live arm record was at rollout 32's update boundary:
+256,000 training/stored team steps, 1,536,000 UAV steps, 512 episodes, 31 completed updates
+and 69,750 actor/critic optimizer calls each. Its three initialization panels account for
+48,000 evaluation team steps and 96 episodes/resets, with zero evaluation storage/optimizer
+calls and all recorded isolation flags preserved. U arm wall was 1,506.880065 seconds; the
+failure field was null. M was unstarted and stderr was empty. The batch-level U fit flag
+remains its earlier boundary snapshot; the progress above is from U's live arm record.
+
+Fresh main advanced to `63e92fd69e7e1bed7365e93ae6c01fc80715dce9`. The relevant diff updates
+S7 B11 results, shared interpretation, standing and routing. This direction's confirming
+standing, lead and fixed plan are unchanged; the constitution and compute controls did not
+change. Both published and canonical-node owner pauses remain lifted. Consumed the checkpoint
+and rearmed the same `spatial-c01-b3-s263000104` handle to generation **23**, window 1,500
+seconds. Three of five pairs have complete scientific readings; no new launch, worker
+restart, Pro resend, scientific verdict or main/index update follows this checkpoint.
