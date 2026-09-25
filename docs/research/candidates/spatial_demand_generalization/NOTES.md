@@ -2333,3 +2333,19 @@ Additional scientific execution for this consultation/closure is **0 fits, 0 pol
 total wall was not separately measured. All original A2/C01 costs and retained assets remain.
 The directly affected shared interpretation, own standing, plan and routing are updated in
 the normal independent main publication; no App report/ACK/forwarding is sent.
+
+### Concurrent project replan read before main publication
+
+The next refresh found main `da8890fc3f6d9e714eaab9c9c472862db0af0fd3`, replacing and
+archiving the earlier project plan while leaving this DM's actual spatial decision intact.
+I read that change. The preceding C1/A3/D1 map assessment refers specifically to the
+`2e2becaae8d376908d74364dca7e4713bdcb4a2a` snapshot; D1 is no longer an unassigned current
+opportunity in the new plan. Root now assigns a separate third DM a fixed ordinary-policy
+composition question, with a proposed 3x3 B20-F matrix (0 fits/144k evaluation team steps),
+while C1 remains an independent reserve and capability/churn questions are no longer an
+ordered activation queue. This does not supply a spatial-mixture repair or transfer another
+lead's comparison to this task. Its shared role-quality/interaction question is distinct
+from our fixed-N training-layout contrast. The present closure and frozen C01 reading stand;
+no new question, experiment or takeover is selected here. Main publication preserves the
+new project plan and its historical archive, updating only this direction's actual result,
+standing, routing and directly affected spatial interpretation.
