@@ -1147,3 +1147,153 @@ $$
 [pi-buffer]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/hmasd/utils.py
 [pi-agent]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/hmasd/agent.py#L6280-L6580
 [pi-source-config]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101/F/config.json
+
+## 2026-09-25 — Adopt the partner-training revision; B02 prospective comparison and L0
+
+### Full advice and scientific choice
+
+The accepted question key is
+`hmasd:ca26bc8c37acb867f7ac9474bec018d1cc04d4a70ab7e2091b214b22de194349`.
+The short collected chat text was a receipt/summary despite its transport `chat answer` label;
+it was not the full scientific response. Same-key `deliver` returned `DELIVERED` for
+`fa1289d7e5f17a3ace66178abf023c8f4954e6a9`, directly after the pinned question source
+`fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4`: exactly the assigned NOTES file, initially empty
+Answer, whole question and outside bytes unchanged. I read the complete 13,145-character
+Answer above, including all eight sections, limits and cited source identities. No resend,
+worker restart or App message was made. The READY event was consumed using its actual
+generation6/wake/event binding; the completed operations need no further observation.
+
+**MATERIAL_DISSENT: yes, adopted.** I retain the three fresh response fits and the named
+primary M−F2 comparison on partner3. I add exactly one old source3/source3 reuse cell on the
+same new evaluation worlds. This separates usefulness of a new training regime from usefulness
+relative to an existing controller, without misrepresenting the latter as an exposure-matched
+fourth fit. Source3 and its previously observed quality are selected knowledge, not a blind
+holdout or an upper bound. The fixed-policy B01 remains complete and unchanged.
+
+Current published main was refreshed and its relevant structural §8/current plan read at
+`636db7ec5574081a7eade10446075eeb7f1faeaa`. Its separation of information, policy class and
+finite training changes the interpretation here: B02 changes the learner's partner-conditioned
+training distribution while holding deployment information/architecture fixed. The B01 finite
+interaction does not promise trainable headroom. S7's independently published closure and the
+finite-model DM's ownership remain intact; this is one active study of the already assigned
+partner question, not a new allocation. FSD remains paused and G33 frozen.
+
+The strongest alternative remains ordinary fixed-partner response quality plus geometric
+feedback; the mixed arm may simply dilute source2 exposure. A positive package difference
+could arise through state coverage/regularization or this optimization realization. I accept
+one complete direct comparison because its primary, seen-partner, own-learning and reuse
+readings distinguish consequential next choices; neither a positive B01 screen nor a theorem
+is needed. I do not accept a population, role/partner scan, midpoint selection or automatic
+confirmation. If the implementation needs broad shared-core redesign, reconsider this cost
+before execution rather than expanding the engineering by default.
+
+### Frozen B02 scope, exposure and reading
+
+The preceding question and full Answer specify the comparison; the following resolves its
+remaining implementation bindings prospectively. Object `controller_composition_b02`, proposed
+tag `b02_partner_training_20260925`. Physical S1 N6/c10, learner original roles0–2 and frozen
+partner roles3–5. LOCAL1 actor104, full N6 critic133, raw Gaussian actions with native clipping,
+hidden/GRU256, CPU float32 and four torch threads. Ordinary B16 task-only settings and B20
+training recipe remain, including gamma.99, GAE.95, entropy.05, learning rates1e-4, PPO clip.2,
+max grad norm.5, ValueNorm enabled and observation/state normalization disabled. There is no
+high-level/discriminator learning, source-ID feature, extra actor truth or shared partner state.
+
+- Three fresh learner fits in fixed order F1,F2,M, identical actual parameter/normalizer initial
+  states from seed92526001, private mutable optimizers/buffers/runtime and isolated sampling
+  streams. F1 always partner1, F2 always partner2; M uses each for8 of16 lanes per rollout,
+  shuffled by independent NumPy generator seed92526002, fixed for the full episode.
+- Each fit has45 complete H500 rollouts of16 lanes =360,000 physical team steps and1,080,000
+  executed learner decision rows. M has180,000 team steps/540,000 learner rows per source.
+  Training uses B20's actual explicit-seeded-reset convention: constructor base
+  `92530000 + 100*rollout`, then `env.reset(seed=base+lane)`, rollout1–45. Construction/reset
+  must preserve learner RNG. This deliberately states the training convention separately
+  from the source evaluation convention rather than conflating their two reset calls.
+- Filter original learner roles before GAE/statistics and sequence minibatch formation.
+  Each epoch has50 chunks×16 lanes×3 roles=2,400 valid sequences; chunk length10, batch32,
+  15 epochs, no dropped tail. Expected per fit:1,125 minibatches/update phase×45=50,625
+  actor and50,625 critic optimizer calls; no coordinator/discriminator calls. The inherited
+  nominal `num_mini_batch=4` is not the actual sampler count. Actual counts must be recorded.
+- Evaluate the common initialization against partners1/2/3, each of the three final learners
+  against partners1/2/3, and old source3/source3 once:13 cells on the same32 constructor worlds
+  92540000–92540031, H500. Evaluation uses B01/B20's constructor followed by `env.reset()`
+  without explicit reseed, runtime-construction seed92526051, private N6 runtime per controller,
+  deterministic clipped native law and no learning/storage/normalizer updates. The old reference
+  uses two independent source3 runtimes. Initial and final learner evaluation uses fresh runtime
+  copies with strictly restored learner parameters and normalizers. Preserve source checkpoint
+  identities already fixed in B01. No evaluation result is used to admit or tune the fits.
+- New batch cost:3 fits,1,080,000 training plus208,000 evaluation team steps =1,288,000;
+  3.24M learner and3.24M frozen-partner executed training rows,416 evaluation episodes and
+  1.248M evaluation action rows. Historical sources cost1.08M training steps separately.
+  Inference may exceed executed rows; record actual controller calls/rows, fitting wall/CPU/RSS,
+  update counts, output bytes, collection and support cost. Unknown training wall is not B01's
+  fixed-policy wall scaled by transition count. Correctness fixtures consume additional steps
+  and are reported separately, using worlds outside every production panel.
+
+Primary finite difference is M−F2 on partner3 for both native J and served users/step. Retain
+M−F1 and seen-partner differences, each final learner's change from the shared initialization,
+and each final response on partner3 minus the old3/3 reuse cell. Read T and its two constituent
+fixed-response advantages for J and service, plus the descriptive H=Delta3−(Delta1+Delta2)/2;
+these describe the same table, not extra replications or replacement primary endpoints.
+Report every world and native coverage/quality/height penalty, eligible/served/unserved counts
+and mean height. No battery-risk claim. Keep J/service conflicts and large losses, even when
+the panel means improve. There is no fabricated practical-equivalence or significance gate.
+
+Use10,000 pointwise paired-world bootstrap draws, NumPy generator seed92526999, resampling
+the whole13-cell×2-metric block per world. Also retain deterministic world means/contrasts.
+Intervals are conditional on the particular learned weights, fixed library, partition,
+deterministic law and selection history; exchangeable-world assumptions do not create training
+replication. This is one exploratory realization per arm. Full Answer §6 supplies the outcome
+branches I adopt: distinguish useful mixing, useful ordinary response, insufficient reuse
+value, specialization without primary gain, adverse tradeoffs and unresolved differences.
+No outcome automatically buys another fit, seed, partner, panel or confirmation.
+
+### L0 — direction-private learner-row path and complete B02 runner
+
+**Deliverable and owned paths.** A runnable, admitted complete comparison under
+`experiments/candidates/controller_composition/b02/`, entry
+`scripts/run_controller_composition_b02.py`, focused checks under
+`tests/experiments/candidates/controller_composition/b02/`. Reuse B01 source restoration,
+identity, physical metrics and frozen B16/B20 helpers where it avoids duplication. Do not
+modify B01, recovered historical candidates or shared hmasd/environment/launch code. The
+Implementer owns only those new code/test paths, not NOTES/RESEARCH, Git publication or launches.
+
+**Critical state flow.** Keep physical N6 and original role mapping through collector,
+storage, recurrent chunk replay and evaluation. An explicit compact update-only learner buffer
+is permissible if it carries full133-wide physical state and original roles0–2 without
+changing the physical/global config to N3. Full N6 private runtimes may infer unused rows;
+count that work. Only executed learner raw actions/old log-probabilities, returns, advantage
+statistics, ValueNorm samples, entropy and actor/critic gradients may enter learning. Source
+outputs must never masquerade as learner samples. I verified the consequential Pro warnings
+in current `hmasd/agent.py`: all buffer returns update ValueNorm before loss filtering, entropy
+is consumed separately; ordinary sampler count uses sequence_batch_size32, not nominal4.
+Preselecting the update view must cover these paths, not just mask the final losses.
+
+Maintain private lane/role actor and critic recurrent states for learner and each frozen source;
+frozen sources see the real mixed physical history. Entry masks use preceding done, initial
+chunk states are retained, reward remains scaled for physicalN6, and terminal H500 does not
+silently reset into an uncounted episode. Preserve all module/normalizer state for sources and
+prove exact common learner initialization. M assignment, source construction and evaluation
+cannot perturb learner sampling/update RNG. No transient physical source/hidden identity reaches
+the LOCAL1 actor. Frozen partners remain responsive policies, not replayed action streams.
+
+**Checks and required review.** Trace at least one real native nonproduction
+collector→storage→GAE→sampler→optimizer update. Verify valid sequence identity/counts, raw versus
+executed action/log-probability, physical N6 reward/state and recurrent reset. Perturb unused
+learner rows in fixed physical data and prove unchanged valid losses/gradients/ValueNorm/update;
+do not confuse legitimate partner-induced reward/state changes with contamination. Verify
+frozen source state, matched initialization, independent RNGs, inference/update accounting,
+13-cell statistics/contrasts, partial failure preservation and admission-before-effects.
+Tests use pytest-owned scratch and declared tiny fixture worlds; no production panel exposure.
+Independent Reviewer reads the actual path and checks before DM acceptance. Do not build a
+general row-masking framework or invent an extra pilot study for performance selection.
+
+**Output and stop.** Runner writes compact config/source identities, progress/status and
+complete per-world summaries/paired reading plus durable raw training curves, reset identities,
+evaluation traces and initial/final checkpoints with hashes. Record parameter movement and
+optimizer state/counts separately from evaluation learning. Preserve any incomplete arm and
+the actual counts on exceptions; no automatic rerun/resume and no failed cell replaced with
+zero. Require native admission before effects; allow only kernel-owned preexisting output files.
+Only one sequential result-bearing batch is planned on the configured node. Implementation and
+checks are now accepted; exact run inputs will be reviewed, committed and published before a
+fresh native launch. The DM will reconsider scope if source semantics cannot be preserved
+locally or the practical cost ceases to be proportionate.
