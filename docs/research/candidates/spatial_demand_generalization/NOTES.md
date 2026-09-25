@@ -877,3 +877,43 @@ published source, native block-0 output, direction/lead, seed and admission iden
 claim found during reconciliation must be observed under that identity, never bypassed by a
 new tag. The no-fit-retry/no-sixth-block confirmation rule remains unchanged. Only actual
 native admission and observed runner identity will establish that C01 began.
+
+### C01 block 0 accepted; same-handle native observation active
+
+The Reviewer independently checked the installed supervisor and retained failed wrapper and
+found no material objection to the explicit command-boundary repair. The corrected outer
+delivery reached the unchanged native request. **Native admission accepted block 0 at
+2026-09-25T07:05:10.526330Z**, at fixed source
+`9e44adde3d54fcd0363a2ebdbc1468494141c27b`. Actual-node physical/effective available memory
+was 15,005,155,328 bytes against the 4,294,967,296-byte floor; the kernel's fresh checks passed.
+The failed outer delivery remains unchanged and is not a training attempt or native retry.
+
+The [native manifest](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b0_s263000101/launch-manifest.json),
+[preflight](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b0_s263000101/admission-preflight.json),
+initial launch status and U config were copied from the node and byte/SHA256-matched.
+Manifest SHA256 is `9cfc2e3b7d6219123667998229acf4e581c9c38128448c38e64c0286eff4a538`.
+The actual U config identifies C01/block0/seed263000101, constructor269900000, training base
+264000000 and the three shared 26500/26501/26502 evaluation prefixes as fixed above.
+
+Accepted operation reference:
+`/home/wu/projects/HMASD/.git/hmasd-admission/be72b81809bf6d81a05dce15db290f2848fac679a2f4fe850d1a9564a1d1df8c.json`.
+Native outputs remain at
+`/home/wu/hmasd-worktrees/spatial-c01-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_c01_b0_s263000101`;
+the retained source snapshot is
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/6dcb68c53a144a38bf330aed7f217329`.
+Detailed node, process start identities, source and argv remain in the manifest. Status
+confirmed consistent records and both supervisor/runner alive, with no exit witness.
+
+The task-local deterministic observer is generation **8**, job
+`spatial-c01-b0-s263000101`; its first observed fact at 07:06:46Z was accepted/running with
+matching native identities. No pending event, error or stop was present. Earlier A2 and Pro
+observations remain consumed. Checkpoints rearm this handle, never the outer supervisor or
+scientific request. Subsequent blocks use the same fixed source and their own already-planned
+seeds/tags after this pair terminates and is collected; they are not chosen by its scores.
+
+An initial semantic check found U actually training: one started fit, one completed update,
+8,000 recorded training team steps and 48,000 initialization-evaluation steps; M was
+unstarted. This is progress only, not a result or confirmation verdict. Preserve the remote
+authoring checkout at the fixed input while it owns live outputs; later notebook commits do
+not require checking out over those untracked native files. Read and retain the whole pair
+on completion, and apply the no-retry/incomplete-batch rule to any genuine technical failure.
