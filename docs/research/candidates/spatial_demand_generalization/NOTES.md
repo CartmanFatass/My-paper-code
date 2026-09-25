@@ -435,3 +435,121 @@ confirmation claim and seeds. I will now obtain that focused criticism, comparin
 fresh-training replication proposal with a cheaper frozen-policy spatial-dependence observation
 and stopping if neither changes a worthwhile judgment. No extra fit, alternative endpoint,
 mixture search or moved-hotspot evaluation has been accepted; the existing A2 batch is closed.
+
+The complete result is published at `3453c67f1c9eb748300a4dca9746bf88e52119b9` on this
+direction branch. Its owned RESEARCH standing, directly affected training-coverage background,
+A2 plan and routing were independently published to main at
+`4fde2d73466fc80d91c3afbbbf0e3afc9f3ba8a1`, preserving the other DMs' B20/B09 entries.
+
+## Pro question 2026-09-24 a2-replication-or-spatial-dependence
+
+Conversation: new. Subject: `spatial_demand_generalization`.
+
+Question: Given the complete modest A2 gain and its adverse evidence, should the next useful
+investment be the concrete five-pair conditional-mean confirmation below, the cheaper
+frozen-policy location-dependence observation below, a justified smaller/materially different
+comparison, or stopping current investment? Criticize the **actual claim and fixed five-pair
+plan**, including whether its inferential and practical value warrants roughly 7.43 hours.
+If the frozen-policy observation cannot change that investment decision, say so rather than
+selecting it just because it costs no fit. This is a direction decision, not a project review
+or a request for more architectures. Return MATERIAL_DISSENT yes/no and the decisive reason.
+
+Standing: A2 is fully read and accepted, 2/2 fits and nine panels. Hotspot M-minus-U is
+J +.0185689864 / served users +.940750; 12/32 worlds are adverse in either quantity, including
+a worst -5.690 users. Uniform is +.009023292 / -.0000625 with 17 adverse worlds, not an
+equivalence result. Cluster is +.0401648661 / +2.0878125 with ten adverse worlds. U itself
+gains +.250359362 J / +11.080438 users on hotspot relative to true initialization. M adds
+eligibility +2.264125 but also eligible-unserved +1.323375. Complete per-world arrays,
+components, both own-learning readings, hashes and native-count checks are in the preceding
+result entry and original summaries. One training instance per arm leaves optimization/seed
+variation unresolved; fixed-center spatial dependence is another live explanation, not a
+diagnosed mechanism. The previous adopted Pro answer covered this comparison and its reading,
+but not the new actual claim, seeds or uncertainty rule below.
+
+Preferred proposal to challenge: **C01, five new paired blocks / ten fits**. Read
+`CLAIM_layout_coverage_conditional_mean_20260924.md` at source_sha in this direction directory.
+It specifies fresh model seeds 263000101..105; independent per-block training worlds starting
+264000000+100000*b, plus 1000*r+lane; shared new evaluation worlds beginning 265000000,
+265010000 and 265020000. The actual A2 U/M program, 360k per arm, common initialization,
+final45, lawful LOCAL1 inputs, raw-action PPO and frozen evaluation remain unchanged.
+The five block-mean hotspot J and service differences are the units. Both marginal two-sided
+95% Student-t lower bounds (df4) must be above zero under the fixed joint sign rule; otherwise
+the joint claim is not established. Uniform costs, cluster, own learning and every loss remain
+parallel secondary readings. There is no noninferiority, next-run reliability or arbitrary-
+hotspot claim; no pooling A2 or treating worlds as training n. About one added served user
+at equal training/inference is a practical reference scale, not a fabricated minimum margin.
+Five seeds do not establish the t model or sufficient power. No additional block or rescue.
+My current reason to favor replication is that neither more worlds nor another demand center
+can tell whether the positive training-program contrast survives fresh training. Challenge
+whether this narrow conditional program-mean answer is important enough at the observed scale.
+
+Concrete cheaper alternative: a **new, separately prospective 0-fit observation** of the
+two retained A2 final policies. Use 32 fresh base worlds (267000000..267000031) and four
+predeclared hotspot centers at (.35,.35), (.35,.65), (.65,.35), (.65,.65) times area size.
+Keep the same 35 radial/angle draws, radius area/3, remaining 15 uniform users and initial
+UAV positions within each base world; shift only the dense group's center and recompute the
+actual initial observation/state/physical metrics before evaluation. These centers keep the
+radial disk inside bounds, avoiding an added clipping rule. Two policies ×4 centers×32×500
+=128,000 team steps /256 episodes, no training and no initial-policy evaluation. Read each
+center's paired J/service mean, the equal-weight center average and all adverse worlds;
+do not pool this with A2 or call centers training replicates. A gain reversal would show
+location dependence of this fixed pair, not identify a learned center mechanism or refute
+the original fixed-center result. Consistent gains would still not establish training
+reproducibility or arbitrary-center robustness. No such worlds have been executed. This
+would need a small disposable layout/evaluator change, native-scene checks and review.
+Does this discriminate the investment decision, or is it a peripheral
+observation? Do not treat it as a route to rescue or broaden the original A2 claim by default.
+
+Prospective cost: C01 is 3.6M training +720k evaluation =4.32M team steps /25.92M UAV action
+rows, ten fits, 450 updates and 1,012,500 calls of each optimizer. A2 measured 89.18 minutes
+admission-to-exit per pair, so five sequential pairs suggest 7.43h before new contention/support;
+around 5.44GB native artifacts plus verified copies. The alternative is 0 fit/128k evaluation
+steps, 256 episodes; actual new wall is unknown and its implementation/scene validation,
+review, staging, collection and reading are not free. No next run is accepted. A complete
+positive A2 does not entitle either proposal to compute; stopping is a valid reasoned choice.
+
+Context (paths marked source_sha resolve at the full question commit supplied in the message):
+
+- Governance: `docs/project/OPERATING_CONSTITUTION.md` sections 1–5, 7–9 at source_sha.
+  Owner delegated this direct DM's scientific continuity and ordinary decisions; pause is
+  lifted, three result-track runtime ceiling remains, and no newer owner stop has arrived.
+  Pro advises; the DM chooses and independently publishes. No App cross-task messages.
+- Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the working explanation,
+  Confirm a claim, Comparators and MARL information, Statistics, Cost and exposure, Pro, at
+  source_sha. Use engineering Checks and review / Execution and admission only if a disputed execution/cost
+  premise needs them; no extra ceremony or new record types.
+- Current shared understanding: `docs/research/RESEARCH.md` at
+  `4fde2d73466fc80d91c3afbbbf0e3afc9f3ba8a1`, the A2 training-coverage paragraph, A2 standing
+  and A2 plan. B19/B20 concern roster coverage and are not A2 replications or evidence that
+  this five-pair plan will succeed. Their existing work is not this task's responsibility.
+- Frozen A2: the initial prospective entry in this NOTES and accepted implementation
+  `d22b608e8d063ceac5c944426bd35a2289c5ebf6`. Complete result entry, original batch/arm
+  summaries and nine panel JSON files under
+  `runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101/` are published at
+  `3453c67f1c9eb748300a4dca9746bf88e52119b9` and also present at source_sha. Read the means,
+  adverse arrays and cost, not just the boolean directional verdict. Native NPZ/checkpoints
+  are retained outside Git at the recorded paths; I verified them, but do not claim you read
+  them if the connector cannot access them.
+- Prior advice: `docs/research/archive/2026-09-24/RESEARCH-question-led-programme-adopted.md`
+  at source_sha, Answer section four (A2) and section eleven (results that change priorities).
+  It recommended a concrete choice between repetition and changed task family after a
+  useful A2, rather than automatic encoder changes. Other archived rules are not governance.
+- Actual proposed confirmation: the draft CLAIM named above at source_sha. Address its
+  estimand, pairing, shared-world conditioning, power/interval assumptions, practical scale,
+  selection exposure, costs and fixed failure/stopping rule. No fresh data have been exposed.
+
+Constraints: no training or evaluation, no experiment implementation, no edits outside the
+empty `### Answer` under this unique question heading. On branch
+`codex/spatial-demand-generalization-a2`, fetch the latest target NOTES blob before writing
+and use its actual blob SHA. Preserve the question and every other byte; stop on overlapping
+edits. Report the actual commit on success; if writing fails, return the complete answer in
+chat rather than a SHA, receipt or link. No chat-memory substitution for pinned sources.
+
+Return: distinguish observations, strengthened/weakened judgments and still-live explanations;
+choose the smallest useful next investment with its discriminating prediction and actual scope.
+For the C01 draft, give MATERIAL_DISSENT yes/no, strongest material objection and any concrete
+necessary revision of the actual claim/plan. A hypothesis or narrower comparison is welcome
+only when it changes the question; no candidate count, architecture or positive answer is owed.
+Cite consequential sources actually read and state decision-critical reading gaps honestly.
+
+### Answer
