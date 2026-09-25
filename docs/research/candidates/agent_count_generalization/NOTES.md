@@ -19532,3 +19532,553 @@ could not read. Do not manufacture a mechanism diagnosis, simultaneous-interval 
 precision unavailable from three independent training blocks.
 
 ### Answer
+
+Saved from chat, 2026-09-24. Same accepted question key `hmasd:d6e333c2c605b4a55d58d0fb5350abc127cecbf8f68a36ab8fe4e1a83179dc22`; completion COMPLETE, actual delivery NOT_DELIVERED, no receipt commit. The entire collected answer follows unchanged, including its delivery explanation and browser-rendered mathematics. Answer text SHA-256 `9edc1f358c16573a9f9d6ca0ed8c99e44737149e729fedfbd9e4943f9a0f9d6c`; saved UTF-8 file (one terminal newline) SHA-256 `7755e9d74501fbe4e00adef133a4474a375c6aa8edda86561898e0aab0713fe6`. Latest target equals the pinned source byte-for-byte and its sole exact Answer heading was empty before this insertion; Pro explicitly returned subsection ownership without attempting a write. Operation tab is already absent.
+
+本轮未写回 GitHub，也未产生提交。 已读取指定材料、通过 blob 内容补读笔记相关段落，并取得最新目标 blob；但可用写入接口只支持整文件替换，不提供局部补丁。我未能形成并逐字节核验这份大笔记的完整替换输入，因此没有发起更新请求。以下为完整 Answer，并交还该子节的写入权。
+
+Answer
+一、投入选择：支持这次固定六-fit 确认，但只确认明确的程序均值主张
+
+我建议选择草案所列的 B20：三个全新配对训练区组、六个新 fit，比较固定的 M=[4,6,8]×15 与 F=45×N6，保留新固定 N5／N7／N6 面板、共同初始评价和 final45。 不增加顺序反转、H6、SET、奖励缩放、其他人数或额外世界；不把 B19 当作其中一个确认区组。核心的四项联合判读规则可以保留。草案已经明确这些范围，不是在要求为“混合训练普遍有效”作确认。
+
+这笔投入现在有价值，原因是待决问题已经从“普通固定人数控制能否学习并迁移”变成：
+
+在同一个有能力的普通学习器、相同总训练曝光下，这个确切的有序人数程序，是否在重复独立训练时，对两个指定未训练人数都产生正的平均原生目标与服务增量？
+
+B19 给出了值得检验这一均值问题的实例，而不只是一个尚未完成的对比或未训练基线上的正差。此前建议选择的是一对探索，不能充当本次实际确认计划的预先认可；当前项目计划中“A1 完成 B19”的安排也不是六个后续 fit 的额度。这里需要、也正在作的是新的投入判断。
+
+最强反对理由不是尚未识别机制，而是这项确认购买的结论很窄、精度依赖很强。 六个 fit 加上评价和工程工作，仍只能检验一个固定新面板条件下的训练程序均值；三个训练区组不足以检验效应分布形状，也不能估计下一次训练可靠获益的概率。即使通过零边际规则，也可能只建立很小的正差，不能直接证明采用 M 值得。这些限制真实存在，C2 也是有具体内容和更低交互成本的竞争投入，而不是形式上的备选。
+
+我仍支持 B20，是因为当前比较器、执行路径和有限主张已经足够具体，而新增训练实例正面对应剩余的训练程序均值问题。通过、明确不利和精度不足都能改变该程序的证据地位；没有必要先用另一套部署世界或改变顺序的程序，迂回回答它。这个判断不意味着已经知道 B20 功效充足，或已经证明它比所有其他项目问题的信息价值都高。
+
+二、B19 的实质更新：混合程序有增量实例，固定 N6 对照并未失去竞争资格
+
+B19 的原生终点如下。S 是每步实际服务用户数，三个 N 分开读取：
+
+测试 N	F45：J／S	M45：J／S	M−F：J／S
+5	.455819826／28.926750	.533868074／34.949500	+.078048248／+6.022750
+7	.415298541／26.494563	.509345352／33.235000	+.094046811／+6.740438
+6	.436412864／27.734938	.538326935／35.198813	+.101914071／+7.463875
+
+这些数值及相应的自身学习来自实际共同初始化和完整终点，不来自拼接 B18 的 F 与新 M。N5／N7 的服务增量约对应覆盖率增加 12.05／13.48 个百分点，是值得关注的任务尺度，但仍只是一个已曝光训练区组的观察。
+
+加强了什么
+
+加强了确切有序普通训练程序的有限增量用途。 F 在 N5／N7 自身增加了 .198681130／.266581912 J，以及 8.869875／12.960875 用户／步；M 在同一共同初始参照上增加得更多。因而，本次正差不能概括为“普通对照没有学习”。真正相同的初始模型与学习状态，也排除了同一对中 M 单纯从一个更有利的实际初始模型起步的解释。
+
+但这没有排除初始化与训练程序之间的交互：某一共同初始化仍可能特别有利于 M 的后续优化。共同初始化使配对更有解释力，却不会把一对训练变成一般性结论。
+
+由于两臂的初始参照确实相同，
+
+(M
+45
+	​
+
+−M
+0
+	​
+
+)−(F
+45
+	​
+
+−F
+0
+	​
+
+)=M
+45
+	​
+
+−F
+45
+	​
+
+.
+
+因此，“M 最终更好”和“M 的自身学习增量更大”在这里是同一对比，不能计为两份独立支持。共同初始评价的价值在于判断双方是否真实改善以及绝对用途，不在于增加主比较的样本数。
+
+削弱了什么
+
+在这个区组中，削弱了“相同成本下固定 N6 至少能提供同样好的 N5／N7 平均 J 和服务”的判断。 这不是削弱普通控制本身，因为 F 和 M 都是普通 LOCAL1；它加强的是普通学习程序选择的重要性，而不是恢复旧 H6−SET 的技能解释。
+
+同时，不能把 F 后段训练记录的回落诊断为已知实现错误，或改用其较早高点充当主终点。B19 已保留 F 第22轮训练 J 较高、随后回落的事实；这些是随机训练轨迹，不是可替换 final45 的部署评价。该非单调性提示有限优化仍重要，不授权事后挑 checkpoint。
+
+仍未解决什么
+
+未解决的是跨训练实现的增量均值、效应分布，以及程序收益的原因。 人数组成、J/N、每个 N 的优化工作、顺序、最后 N8 的近期经验和有限优化共同变化；B19 没有将这些拆开。N6 的平均差甚至大于 N5／N7，因而也没有证据把收益解释成“未见人数专属的修复”。这不否定 N5／N7 的用途，只限制机制和专属性叙述。
+
+N5／N7 是两臂都没训练过的精确人数，但只有 M 将它们夹在 [4,8] 的训练范围内。不能把该比较写成超出训练区间的泛化，更不能推出 N4／N8 部署、任意人数、动态成员或技能学习的结论。
+
+反证不能只留在附录
+
+五个最终配对不利世界必须继续可见：
+
+N	世界	M−F ΔJ	M−F ΔS，用户／步
+5	2345523	−.022551725	−1.774
+5	2345525	−.002441977	−.288
+7	2345720	−.002950281	−.214
+7	2345728	−.017758809	−1.614
+6	2345605	−.001457358	−.032
+
+此外，F 相对自身初始化在 N5 有两处服务损失，在 N6 有一处，尽管这些世界的自身 J 都提高。M 自身 J／S 在所读世界均提高，不等于 M 相对 F 处处更好。
+
+M 的平均高度惩罚在 N5／N7／N6 全部上升，平均高度分别多约 10.017／4.092／5.722 米；Q 虽平均提高，却分别在 8／3／8 个世界降低。服务增加同时伴随更多资格和更少资格内未服务量，例如 N5：
+
+ΔS=3.48825−(−2.5345)=6.02275.
+
+这是原生账目，不是两个独立可修复的因果渠道；P 仍是 S1 高度项，不是实测电池能耗。
+
+B15 原联合确认仍不确定；B16／B17 的普通控制用途和较小人数反证保持原范围。B18 的缺失 M 终点仍是技术不完整，不能计作阴性，也不能成为 B20 的配对数据。新的本地 CPU 路径完成 B19，不解释或证明修复了旧远端故障。
+
+三、比较器与总体：保留程序包比较，把“独立训练”写到实际随机状态上
+F 是合适的主比较器，不需要先补一轮普通基线普查
+
+F 与 M 使用相同 LOCAL1 的 actor／critic 信息和参数化、动作约束、低层熵设置、回合边界及部署语义。F 已有自身学习与迁移能力，因此它是当前训练程序问题的有力参照；不需要再把 SET 或 H6 加入确认，才能说明 M 是否有相对增量。它并不因此成为最优或充分调优的普通方法。
+
+基线的资格不能变成事后筛选规则。 新区组中一个合法完成但较差的 F 必须保留，不能以“这次 F 不够 competent”为由换 seed、增加训练或改用旧 F。评价的是事前固定的学习程序在该曝光下产生的结果。
+
+总工作匹配是真实优点，但不是每种人数同权
+
+两臂各有 360k 团队训练步、2.16M UAV 步和 45 次更新。M 每个 N 各用120k团队步，只有 F 三分之一的 N6 团队曝光；对应 N4／N6／N8 的 UAV 行为480k／720k／960k。按 B19 实际每轮 375N 次 actor、critic 优化器调用计算，M 三种人数分别贡献22,500／33,750／45,000次，总数仍为101,250。总数相等，没有使每种人数的数据或优化贡献相等。
+
+这不是确认的无效混杂，而是当前明确命名的完整程序处理。若将来要断言“支持范围本身”或“最后一次 N8 更新”造成收益，才需要对应的识别比较；本次无需先支付那笔费用。
+
+建议把总体定义补成明确公式
+
+令 ξ 表示一次完整新训练区组的随机实现，包括共同初始化、训练场景和学习／采样随机状态；W
+n
+	​
+
+ 为事前固定的新32世界面板。对 Y∈{J,S}：
+
+D
+b,n,Y
+	​
+
+(W
+n
+	​
+
+)=
+32
+1
+	​
+
+w∈W
+n
+	​
+
+∑
+	​
+
+[Y(π
+45
+M
+	​
+
+(ξ
+b
+	​
+
+),w;n)−Y(π
+45
+F
+	​
+
+(ξ
+b
+	​
+
+),w;n)],
+μ
+n,Y
+	​
+
+(W
+n
+	​
+
+)=E
+ξ
+	​
+
+[D
+b,n,Y
+	​
+
+(W
+n
+	​
+
+)].
+
+确认主张是四个 μ
+n,Y
+	​
+
+(W
+n
+	​
+
+) 都大于零，不是这三组固定整数 seed 本身的有限平均，也不是对任意新世界取期望的主张。这使草案目前的“averaging over fresh independent training blocks”更明确。
+
+实际执行上，应保持区组间全新构造，不共享已训练权重、normalizer、Adam状态、buffer或延续中的随机状态；区组内则按已选合同获得真实共同初始状态，并让各臂的学习状态独立持续。不同 seed 整数不是独立性的证明；将这些事前固定的伪随机地址视为同一程序总体的独立实现，是需要明说的建模假设。
+
+同一块的 F／M 可以匹配15个共同 N6 重置时点，但不同真实 N 的场景不能称为相同物理世界。共同初始化也不要求后续内生轨迹或随机数消耗相同。B19 的批次记录明确保留了这些初始化与共同 N6 场景核对，为复用此设计提供依据。
+
+四、四项 t 区间规则可以保留；主要风险是模型与精度，不是遗漏多重比较修正
+1. 单一合取主张的逻辑是正确的
+
+保留每个分量的区间：
+
+D
+ˉ
+j
+	​
+
+±t
+.975,2
+	​
+
+3
+	​
+
+s
+j
+	​
+
+	​
+
+,s
+j
+2
+	​
+
+=
+2
+1
+	​
+
+b=1
+∑
+3
+	​
+
+(D
+b,j
+	​
+
+−
+D
+ˉ
+j
+	​
+
+)
+2
+,
+
+其中 j 表示 N5-J、N5-S、N7-J、N7-S，t
+.975,2
+	​
+
+≈4.302652730。这是对配对差值作单样本 t 区间，而不是把六个臂当作六个独立差值。标准公式与单双侧临界值关系可由 NIST 核对。
+NIST
++1
+
+所选假设是：
+
+H
+0
+	​
+
+=
+j
+⋃
+	​
+
+{μ
+j
+	​
+
+≤0},H
+1
+	​
+
+=
+j
+⋂
+	​
+
+{μ
+j
+	​
+
+>0}.
+
+在每个分量的区组效应满足独立同分布正态模型时，“该95%双侧区间下界大于零”对应单侧水平 .025 的检验。若合取主张为假，至少有一个分量原假设为真；“四项全部通过”必然包含这个真实原假设也被拒绝的事件。因此，由事件包含关系：
+
+Pr(错误支持四项全正)≤Pr(拒绝一个真实分量原假设)≤.025.
+
+这个推导不要求 J、S 或两个 N 之间独立。 因而，没有必要为这一个“全部为正”的主张机械地再作四项 Bonferroni 修正。另一方面，四个边际95%区间不是同时95%置信区域；联合失败后，也不能改成“从通过的分量中任选一个就算确认成功”。这些与草案的 intersection-union 表述一致。
+
+上面的控错结论依赖分量检验有效。若只把正态当近似，其 .025 也是模型下的名义保证，不能写成任意训练分布都成立的有限样本保证。
+
+2. n=3 的限制应具体呈现，不能靠免责声明带过
+
+按草案公式，区间半宽为：
+
+h
+j
+	​
+
+=
+3
+	​
+
+4.302652730
+	​
+
+s
+j
+	​
+
+≈2.484137712s
+j
+	​
+
+.
+
+于是，在均值为正时，通过所需的关系是 s
+j
+	​
+
+/
+D
+ˉ
+j
+	​
+
+<.402554172。三个区组都为正仍然不够；区组间的幅度差会实质影响结果。 这是对预写区间公式的算术改写，不是另加一个标准差门槛。
+NIST
++1
+
+为说明精度尺度，假设未来三个区组的均值恰好等于 B19 的观察，则单项下界为正要求的样本标准差上界约为：
+
+分量	假设的新均值等于 B19	对应 s 须小于
+N5-J	.078048248	.031419
+N5-S	6.022750	2.424483
+N7-J	.094046811	.037859
+N7-S	6.740438	2.713391
+
+这些不是对未来标准差的估计，更不是功效或通过概率。 B19 只有一个训练区组，既不能估计这些分量的跨训练标准差，也不能估计四项共同通过的概率；新世界还可能改变效应水平。不能由“观察到六人以上服务增量”推导“三块肯定足够”。
+
+同样，32个评价世界是在同一套训练权重上读取，不能据此证明训练效应已经近似正态。世界 bootstrap、把500个时步拆样本、用旧 B15 的标准差替代本程序标准差，都不解决这里的问题。草案已经承认小样本假设不能验证，我支持保留这一诚实范围，而不是增加一个用三点数据挑选统计方法的流程。
+
+3. 零边际是合法的窄主张，但不要把“正”改写成“值得采用”
+
+本次声明明确不要求最低实际增量，因此不应搬用 B15 的一用户边际，也无需为了看起来更严格临时制造一个新边际。同时应明确：
+
+四项下界均正，只支持所述条件均值方向；
+
+不保证收益达到值得部署或继续开发的程度；
+
+不提供下一次训练获胜概率、N6非劣、逐世界无损或尾部保障。
+
+实际采用判断仍需读取效果量、绝对服务、N6后果、所有损失世界和完整成本。可能出现“统计主张得到支持，但 N6 或局部代价使统一采用不合适”；这不是改写统计规则，而是区分两个判断。反之，某些均值有实用价值但区间未越零，也不能改写为确认通过。草案对此已有基础，应在结果措辞中坚持。
+
+五、定稿建议：不改变数字设计，澄清总体、失败分支与结论措辞
+
+我建议保留草案的确切输入：
+
+三个学习 seed 为 1016101／1017101／1018101，训练世界基数为 3246100／3346100／3446100；继续使用 base+100×rollout+lane。评价按 N5→N7→N6，世界分别为 2446500–2446531、2446700–2446731、2446600–2446631，runtime seed 各为基数加51。每块真正执行一次共同初始化评价，再评 F45 和 M45。
+
+需要澄清的是以下三方面，而不是重新设计确认。
+
+第一，将“repeatable utility”收紧为条件程序均值的模型性支持。 建议结果模板使用：
+
+在所声明的训练区组模型下，数据支持该确切有序程序在固定新 N5／N7 面板上的四项正平均差。
+
+不要仅写“已证明可重复获益”，因为这容易被理解成下一次训练高概率获益或各实例稳定排名。真正的区组值和区间必须紧邻该句。
+
+第二，将整体失败称为“联合主张未建立”，再区分其原因。 若某个区间跨零，称该分量未决；若整个区间落在负侧，应如实报告该分量的不利证据，而不是让笼统的 inconclusive 抹去反证。草案已经要求报告 clear adverse estimate，这里只是把它与整体结论的关系写清。任何一项未通过，四项合取主张都不成立；不改规则、不改 N、不用其余较大正差补偿。
+
+第三，把统计判读与自身学习、技术有效性分开。 自身学习仍须完整报告，但不是新增第五、第六个统计门槛。理论上，M−F为正也可能来自两臂都低于初始化、M退化较少；若出现这种情况，必须限制“学习产生有用改善”的叙述，不能隐藏在终点差中。另一方面，合法完成的低分或非单调训练不是技术失败，不能替换。只有实际缺失、合同未兑现或相关实现无效才使依赖的确认不完整。
+
+读取应使用未舍入值、ddof=1和固定临界值；严格大于零，等于零不通过。保留所有计划区组，不按早期分数决定是否完成后续 fit；不追加第四块、不借旧权重补格、不以零填缺失。技术失败后保留已完成与部分输出，任何修复和新尝试另作前瞻判断，不能隐藏成原批次的自动续跑。
+
+这次不需要重演 B17 的旧 N8 重放合同，也不需要追加 N4／N8 部署。工程上应复用 B19 已验证的完整回合适配、初始化核对、随机状态隔离和持久化边界，仅对新的区组绑定、状态重置和四项 reducer 作有针对性的检查。不能在人数切换时重置原本应持续的 optimizer、value normalization 或私有采样器；也不能将上一训练区组的这些状态带入下一独立区组。B19 提供可复用的实现依据，不提供 B20 已经通过检查或不会崩溃的保证。
+
+六、完整成本与可行性：六个 fit 是选择，不是额度
+
+草案的交互量核算正确：
+
+工作	团队步	UAV步	其他主要计数
+六个训练 fit	2,160,000	12,960,000	270次更新、4,320训练回合
+27个实际评价面板	432,000	2,592,000	864评价回合、13,500批量policy调用
+合计	2,592,000	15,552,000	评价存储与优化器更新均为0
+
+每个 fit 的 actor、critic 各101,250次优化器调用，六个 fit 合计各607,500次；仍需记录实际发生的推理和单类别协调器工作，不能把“没有高层更新”记成“没有这部分计算”。共同初始每块只执行一次、只计一次，但不能从 B19 借用。
+
+B19 测得约131.964485 runner分钟；乘三得到约6.598小时的尺度估计，不是完成时限、节点预留或算法速度保证。B19 的4.024944GiB是整个配对进程累计的 RUSAGE_SELF 峰值，不能当作两个独立臂峰值相加，也不能由此推定并发运行三对安全。
+
+约3.3GB产物在独立保留副本后是约6.6GB数量级，历史资产和临时峰值另计。完整边际工作还包括新绑定与 reducer 实现、针对性检查和必要审阅、初始化／文件hash检查、产物收取、独立读取及解释。B19 的数秒 artifact-only readback 不是全部支持成本，更不是本轮确认的总审阅成本。
+
+选择已实际完成 B19 的本地 CPU 路径有具体工程依据，但仍按实际节点准入和当前配置执行；它不要求先彻底诊断旧远端故障，也不允许宣布旧故障已被修复。应保留 B19 的重置场景、训练流和部分失败证据持久化方法，而不是仅凭一次 exit0 推定长运行无风险。
+
+七、最强替代及其判别力：一对训练更便宜，C2问的是另一个问题
+同一人数问题的最小替代：一对新 F／M，沿用 B19 的评价世界
+
+若即时目的只是判断另一个独立训练实现能否保留这项增量，最直接的较小替代是：
+
+从全新共同初始化和全新训练随机状态训练一对 F／M，程序、曝光和 final45 不变；评价沿用 B19 的 N5／N7／N6 世界，而非同时更换世界面板。仍执行真实共同初始和两个终点，共九面板。这样，若对比反号，至少不能将其解释为换了评价面板。
+
+它的完整主要成本是 2个新fit、720k训练＋144k评价＝864k团队步、5.184M UAV步、288评价回合和4,500评价批量policy调用；actor、critic优化器调用各202,500次。按 B19 规模约2.2 runner小时、约1.1GB产物加保留副本，实际时间及实现／审阅／读取工作仍须另计。这是从既定配置推得的替代方案成本，不是已获准或已执行的批次。
+
+正结果会加强同一面板下的实例再现，反转会降低直接采用 M 的理由；它仍只有第二个探索区组，不是本草案的新三块确认，也不能补入 B19 冒充三个新区组。 选择它必须接受结论更窄，而不能默认随后再购买六 fit。
+
+我没有优先选择它，是因为本题已经提出了一个值得直接检验的条件程序均值主张。若只是想再观察一次同号，确实不必购买六 fit；但那也没有完成现在拟购买的推断。我的建议不是建立“两fit探索后必须六fit”的阶梯，而是在两个不同信息目标中选择后者。
+
+项目级机会成本：C2是实质备选，但不能替代训练复现
+
+指定项目计划中的 C2 已有具体比较：固定旧 RR 接收器、载荷与通道，比较原 RR、只在当前快信道发送的 RR、以及 no-send，N5／H256，三规则×32世界×256步，0新fit、24,576评价团队步；按固定N5计122,880 UAV步、96回合，无嵌套规划。实现和资产检查、实际墙钟、缓存／费用／原生服务读取都不为零。
+
+它能区分“消息在实际行动时产生有用信息”与“主要只是减少发送费用”。慢信道跳过不能转让时隙、增加合法信息或读取未来；只挑快包造成的平均延迟下降也不能直接叫作信息价值提升。若 no-send 同样好或更好，仍是有范围的有用结论。
+
+C2的便宜是真实优势，但它并不估计 M−F 的训练均值。 要转向它，应明确接受“当前人数线只保留 B19 探索结果，暂不购买程序均值确认”，而不是说 C2 更便宜地解决了同一不确定性。当前 B19 的增量、比较器匹配和已测实施成本，使我仍把这一次固定 B20 放在它之前；不同时启动 C2，不接管已有 A2 的 DM，也不等待 A2 阳性作为本题前提。当前计划本身将顺位定义为可比较的投入选择，而非必须运行的流水线。
+
+八、来源边界与最终判断
+
+本次已阅读全文当前附件，并读取固定题目／草案、笔记中 B19 前瞻与完成相关段落、指定版本的治理与研究方法、共享背景的 B15–B18 和 A1／A2／C2计划，以及前次适用建议的普通 F／M 部分和采纳决定。研究判断以 94972a9ae2e536fc824d3ce263379e019426f5d7 为题目版本，共享背景使用指定的 943e3e9a72852017840d1fdb0ef595a9e44f8a3d，没有用移动分支替代固定输入。
+
+原生证据读取采用 b98a0d893d3b7065710f3c0fe6bb7471849a4eeb 下的批次／F／M摘要相关字段、九个真实评价面板的原生结果字段，以及公开的 artifact_readback.json 和读取器源码。这些是对已发表材料的读取，不是本轮再次执行了独立轨迹审计。 读取器确实包含从保存的连接、资格、质量和高度数组重构原生量、核对训练流与检查点的路径，但本轮没有运行它。
+
+未读取的关键原始制品是题目明确位于私有存储的 checkpoint、NPZ、完整训练流和现场运行环境；没有加载、重放或重新验证它们。 对其完整验收使用的是已发表的 DM／独立 Reviewer 记录。B20 实现、实际三区组效应、训练效应分布、实际运行成本和当前节点准入也尚未发生或未在本轮验证，不能预先当作已知。不存在阻止上述设计建议的未读关键文本来源；这些原始制品与未来结果缺口限制的是独立验收和实证结论。
+
+MATERIAL_DISSENT: no。 我支持这次明确的六-fit 条件程序均值确认，保留既定程序、输入、四项严格正下界规则及固定批次结束方式。定稿时应把训练总体、模型依赖和“联合未建立”的不同原因写清，并将正平均差与实际采用、下一次训练可靠性及机制解释分开。该建议不增加实验、不修改 B15／B18／B19，也不产生新的批准层或自动后续批次。
+
+
+## 2026-09-24 — B20 adopt a fixed fresh-block conditional program-mean confirmation
+
+The complete same-key Pro answer above is read, including its contrary evidence, cheaper
+one-pair alternative, C2 opportunity cost and raw-artifact/source limitations. It reports
+`MATERIAL_DISSENT: no`, but this DM owns the new investment decision. Actual delivery was
+NOT_DELIVERED; the exact collected chat answer is preserved after latest-target reconciliation.
+No Pro resend or cross-task message occurred. The owner-requested constitution at
+`/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl/docs/project/OPERATING_CONSTITUTION.md`
+was read in full and is byte-identical to this checkout (SHA-256
+`7ce2b8b53ad3bf1ea8a5d5197030c8aa6cbf318f53d8748d26f9269d72c72730`). Its current authority
+includes DM question continuity and a three-track runtime ceiling, not permanent recipes or
+fit allowances. Project pause remains lifted; Claude FSD pause/G33 freeze and A2 ownership
+are unaffected.
+
+**Judgment and choice.** B19 strengthened the bounded usefulness of this exact ordinary
+ordered program over a competent fixed-N6 program: both learned from the same initialization,
+and M adds native J/service in all three read mean panels. Five paired adverse worlds,
+higher height cost and larger N6 than N5/N7 differences constrain the explanation. A
+same-initialization program interaction remains possible; one block does not establish the
+training-program mean or next-run reliability. B15's fixed inconclusive finding and B18's
+missing endpoint retain their original meanings. The remaining worthwhile question is the
+four conditional mean differences, rather than a pure support/order mechanism or a generic
+skill claim. I choose the six-fit B20 proposed in the actual critique and adopt the appended
+clarifications in [the original claim](CLAIM_ordered_roster_interpolation_20260924.md#2026-09-24--adopted-b20-plan-after-the-actual-pro-critique).
+
+The relevant current shared background and A1/A2/C2 plan were refreshed from published main
+before this choice (B19 result publication `ee734907ecc936b27a99d83597d613efaf8bb9bf`).
+[Ordinary control, B15-B19 evidence and the current programme](https://github.com/CartmanFatass/My-paper-code/blob/ee734907ecc936b27a99d83597d613efaf8bb9bf/docs/research/RESEARCH.md)
+make the concrete difference: F remains the comparator; no weaker SET or old H6 is added,
+no old B19 pair is counted as fresh, no A2 takeover or simultaneous C2 is selected. One new
+pair on B19 worlds would buy another exploratory instance for about 864k team steps, not
+this mean inference. C2 would buy a different useful communication reading for 24,576 team
+steps, but does not answer training-block variability. I judge the known B19 effect scale,
+matched capable control and exercised execution path sufficient reason to spend the fixed
+six fits now, while accepting narrow scope and genuinely uncertain precision. It is not
+an automatic exploration-to-confirmation ladder or a claim of globally optimal priority.
+
+**Response to criticism and verified implications.** Adopt the explicit xi/W_N conditional
+estimand and iid pseudorandom-training-realization assumption; fresh integers alone are not
+proof of independence. Replace “repeatable utility” with support for conditional program
+means under the declared model. The joint claim is not established when any lower bound
+fails; crossing-zero components remain unresolved and wholly negative intervals are adverse.
+Own learning, statistical support and technical validity stay distinct: legitimate poor F
+runs remain; neither poor scores nor nonmonotone learning permit replacement. A positive
+endpoint difference may coexist with both arms declining from initialization, which would
+limit useful-learning language without adding post hoc gates.
+
+The DM checked the mean-CI formula against the primary
+[NIST t-interval reference](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm)
+and computed the critical value with the existing SciPy installation: t(.975,2) =
+4.302652729696142, half-width/sample-SD =2.4841377117195456, and positive-mean pass requires
+s/mean <.40255417213073497. This is arithmetic, not a future variance or power estimate.
+The intersection-union event is contained in rejection of any true component null, giving
+at most .025 false joint support when those one-sided component tests are valid; no
+cross-component independence or additional Bonferroni term is needed. The approximate
+normal model remains unverifiable with n3; four marginal 95% intervals are not simultaneous
+95% coverage. Reusing world/time samples or B15 variance would not repair that limitation.
+The adviser did not re-run the B19 raw-artifact reader; the DM and independent review's
+actual readback remain the evidence for those artifacts.
+
+**Fixed execution and complete price.** Three sequential new pair processes, blocks 1→2→3,
+F then M, with the exact seeds, training addresses, new evaluation panels and final45 in the
+claim. Six planned fits, 2.16M training plus 432k evaluation =2.592M team /15.552M UAV steps;
+270 updates, 4,320 training episodes, 864 evaluation episodes/13,500 batched policy calls.
+Actor and critic each 607,500 optimizer calls total; coordinator inference remains counted
+although no coordinator learning is expected. About 6.598 runner hours and 3.3GB outputs from
+B19's observed scale are estimates, not deadlines; a verified second copy is about 6.6GB
+combined, with old assets/temporary peaks and engineering/readback cost additional. Fresh
+local_linux CPU admission applies to each separate invocation. No extra N, checkpoint,
+order arm, seed, reward scaling, sweep, early score stop or fourth block. Any incomplete
+pair preserves partial evidence/started-fit cost and stops the fixed batch; no automatic
+restart or stitching. Subsequent cells are already fixed, conditional only on valid prior
+completion and current owner/resource controls, never on favorable scores.
+
+### L0 — B20 fresh block bindings and artifact-only fixed reducer
+
+- Deliverable: a disposable B20 entry using the exercised B19 ordinary-roster training and
+  native-evaluation path, with explicit fixed block1/2/3 bindings and a zero-interaction
+  three-block reducer for the four claim intervals. Each pair is a separate admitted
+  Python process; no learned model, normalizer, Adam, replay/buffer or RNG crosses blocks.
+- Owned paths: `experiments/candidates/agent_count_generalization/ordered_roster_confirmation_b20/`,
+  `scripts/run_agent_count_ordered_roster_confirmation_b20.py`, and focused tests under
+  `tests/experiments/candidates/agent_count_generalization/ordered_roster_confirmation_b20/`.
+  Read root, scripts and tests AGENTS before edits. NOTES/CLAIM/index belong to the DM;
+  frozen B19 and shared core/launch/admission are unchanged. A bounded B19-derived copy
+  with explicit block context is acceptable to preserve historical code and avoid mutating
+  another module's globals; no new generic experiment framework.
+- Interface: explicit argparse block, seed, launch SHA and output; validate the selected
+  block's exact seed/tag/world bases against its immutable mapping. Production rejects
+  reduced horizons or mismatched seed/root. Technical unit fixtures stay under pytest-owned
+  temp with disjoint seed addresses and cannot be accepted as confirmation inputs.
+- Semantics: same local104/central133 MAX8 LOCAL1, trainable single-category FiLM, J/N,
+  entropy .05, raw Gaussian stored actions/logprobs and clipped execution, recurrent masks,
+  real complete episodes, value normalization and initialization/optimizer/RNG identity.
+  Within-arm models/optimizers/normalizers/private sampler persist across roster changes;
+  evaluations preserve all training state. Same N6 reset scenes match within each pair.
+  Initialization is actually evaluated once after full shared identity; F45/M45 follow the
+  frozen 45-update schedules. All nine actual panels retain raw native traces, learning
+  deltas, adverse worlds and measured calls/counts/costs from B19.
+- Bindings: block1(seed1016101,train-base3246100), block2(1017101,3346100),
+  block3(1018101,3446100); world=train-base+100*rollout+lane. Evaluation N5,N7,N6 in that
+  order, bases2446500,2446700,2446600,32 worlds,H500,runtime-base+51. Tag convention
+  `s1_ordered_roster_confirmation_b20_b<block>_s<seed>`. Source metadata hashes actual B20
+  code/entry and actual reused dependencies, preserving the accepted source identity.
+- Reducer: requires exactly these three complete production blocks and both exact final45
+  arms, common input/learner contract and fixed panel worlds; refuse missing/duplicate/
+  substituted block or endpoint, technical fixture, mismatched sources, nonfinite values
+  or invalid pairing. Use actual per-world paired J/S, all three raw block effects,
+  ddof1, fixed df2 t95 and strict unrounded lower>0. Output one joint verdict plus individual
+  supported/unresolved/adverse intervals, complete descriptive own-learning/N6/adverse
+  readings and counts. Technical invalidity is distinct from scientific joint failure;
+  zero fill, pooling worlds as n, endpoint selection and score-based exclusions are forbidden.
+- Checks: focused seed/world/tag binding, independent fresh construction and persistent
+  within-arm state, technical-vs-production separation, common-init and eval-RNG isolation,
+  count/source integrity, reducer missing/duplicate/wrong-world/endpoint/nonfinite cases,
+  and t intervals including all-positive block effects whose interval still crosses zero.
+  Reuse B19's already-read full native semantics; no repeated B17 N8 replay or new full fit
+  merely for review. Independent Reviewer checks the executable diff and fresh bindings/
+  reducer before DM acceptance. Unit fixture costs are technical checks, reported separately.
+- Stop: no result launch, scientific choice, Pro send, child spawn or shared-record edit by
+  Implementer. Return the explicit diff, checks, deviations and remaining gaps. DM handles
+  review, exact-source publication, fresh admission, ordered execution and complete reading.
