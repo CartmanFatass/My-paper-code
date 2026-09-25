@@ -10566,3 +10566,250 @@ competent ordinary controller and making no new purchase; do not invent a third-
 policy constraint solely to create demand. No future batch, idle wait or confirmation is
 created by this entry. Source/asset reading, design, helper effort and publication take
 real time; wall and node occupancy not measured remain unknown rather than zero.
+
+
+## 2026-09-24 — Cross-play preparation complete; decline current population-training investment
+
+**Decision.** Preparation is complete: 0 started fits, 0 new environment steps, 0 model
+construction/loading/scoring, 0 optimizer updates and no submitted science operation. A
+bounded ordinary comparison is technically plausible and its full work is specified below,
+but I do **not** select its implementation or population training for the current S1 use.
+There is no worthwhile executable purchase selected now, no waiting producer/Pro, and no
+standing search to fill the DM slot. Archive investment in `complementary_skill_learning`;
+keep the separate unimplemented cross-play candidate in reserve with this conclusion.
+This is an investment decision, not evidence that independent teammates are compatible or
+that all useful collaborative learning is exhausted.
+
+### The use question and the strongest ordinary alternative
+
+The concrete conditional use would be: two separately developed fleets contribute three
+UAVs each to a six-UAV S1 service mission, the roster is fixed before the episode, and each
+fleet must retain its independently learned controller with no joint retraining or evaluation
+adaptation. The measured deliverable would be native served users/J of those predetermined
+mixed fleets, while retaining the cost to ordinary familiar teams. This has different
+information/development structure from DM1's same-policy train-N/test-N transfer.
+
+However, neither the current S1 task nor an adopted deployment requirement needs the two
+fleets to retain different controllers. The inspected contract has homogeneous UAVs with
+the same local observation/action interface and a deployable shared policy. There is no
+specified third-party controller interface, immutable partner-policy requirement, private
+weight restriction or independently sourced fleet to preserve. Those could motivate a real
+future study, but introducing one merely to make the reserve attractive would change the
+application premise. This finding is scoped to the assigned S1 contract and current project
+purpose; it is not an assertion that such fleet pooling never occurs outside the project.
+
+The concrete simpler option is to distribute one competent ordinary local controller to all
+six members. B16/B17 and completed B18 F support that controller as a serious working asset;
+its permitted current-local execution route is compatible with all six homogeneous slots.
+They do not prove optimality or cross-play compatibility. Changing the requirement from
+service by an owned homogeneous fleet to mandatory independent-controller mixing is optional
+here, so a measured mixing benefit would not yet change the currently available deployment
+choice. No defect inference from B09 supplies that missing purpose.
+
+A cheaper frozen mix of predetermined existing L weights could measure the consequences of
+that artificial pooling choice. It still would not compare mixed training to matched self-play
+or establish why retaining independent controllers is needed; selecting L weights after their
+B16/B17 results would add development exposure. I do not buy this diagnostic first merely to
+find a reason for four later fits. Time-law training remains a legitimate alternative for
+renewal versus support, but would need H/H to compete with R/R in native service/J; B09's
+R/H losses alone do not make that next purchase valuable. DM1's ordinary-control/count
+programme and DM3's unresolved service-feedback training already address more concrete uses;
+they are not reassigned or duplicated. No new architecture or renamed rescue is selected.
+
+### What the source actually supports
+
+The read-only Scout returned an initial core map and then resolved the missing ordinary
+runner source from published B18 SHA `0f4671475c275db52abc19219d42b4fe9ee664fa` using `git show`.
+The DM read the relevant source, stored configuration and completed F summary. There was
+no target import, model construction, fit, environment call, new checkpoint restoration or
+raw-trajectory replay. These are engineering/source facts, not an implemented runner or a
+new empirical validation.
+
+| Boundary | Evidence and consequence for an ordinary mixed-team runner |
+| --- | --- |
+| Ordinary policy | [B16 builder and config](https://github.com/CartmanFatass/My-paper-code/blob/0f4671475c275db52abc19219d42b4fe9ee664fa/experiments/candidates/agent_count_generalization/local_ordinary_b16/runner.py#L120) supplies LOCAL1: local104 actor, one trainable FiLM category, GRU256, task-only MAPPO, native Gaussian/physical clip, low entropy .05; no active high or discriminator learning. The builder's critic uses the count-stable state encoder; this is not the historical proposed GRU64/DENSE learner. |
+| Information | [CountAdapter](https://github.com/CartmanFatass/My-paper-code/blob/0f4671475c275db52abc19219d42b4fe9ee664fa/experiments/candidates/agent_count_generalization/adapter.py#L43) has a133-wide state: up to8 scaled UAV positions and validity bits,50 user positions and time. Both private critics may receive the same legal full physical six-UAV state; privacy of learning state does not require different critic information. Local actor peers are ordered by observed signal/local features, not persistent peer-policy identity. Population/member identity is only routing metadata, never an extra actor input. |
+| Reward | [Native reward](https://github.com/CartmanFatass/My-paper-code/blob/40eb5c0e79bf0ff023e9458dc7fc301edbf9afab/envs/pettingzoo/scenario1.py#L77) is J=.7 coverage+.3 quality-height penalty. [Native split](https://github.com/CartmanFatass/My-paper-code/blob/40eb5c0e79bf0ff023e9458dc7fc301edbf9afab/envs/pettingzoo/uav_env.py#L303) and [array adapter](https://github.com/CartmanFatass/My-paper-code/blob/40eb5c0e79bf0ff023e9458dc7fc301edbf9afab/envs/pettingzoo/env_adapter.py#L251) produce J/physical-N per factual action row. For physical N6 the learner must keep J/6; changing its buffer to3 owned rows must not divide reward by3 or replace the physical six-agent transition. S1 height is not measured battery cost. |
+| Private state | Separate HMASDAgent instances own parameters, actor/critic optimizers, ValueNorm state, sampler RNG, buffers and runtime hidden arrays. No aliasing or global shared normalizer is required. The config retains ValueNorm=true; observation/state norm=false. Each learner updates only its factual owned rows, with its old log-probabilities/values and entering recurrent states; global reward/critic state is legitimately shared information. |
+| Storage/update | [RolloutBuffer sampler](https://github.com/CartmanFatass/My-paper-code/blob/40eb5c0e79bf0ff023e9458dc7fc301edbf9afab/hmasd/utils.py#L1167) forms time chunks per environment-agent trajectory. [Real PPO update](https://github.com/CartmanFatass/My-paper-code/blob/40eb5c0e79bf0ff023e9458dc7fc301edbf9afab/hmasd/agent.py#L6272) reduces valid time/member rows within each minibatch and performs private actor/critic steps. Do not pad non-owner rows with zeros and count them as samples. The entry mask is1 at the chunk's stored initial hidden state, then1-done[t-1]. |
+| Shapes | [B18 completed-boundary adapter](https://github.com/CartmanFatass/My-paper-code/blob/0f4671475c275db52abc19219d42b4fe9ee664fa/experiments/candidates/agent_count_generalization/ordinary_roster_training_b18/runner.py#L348) shows buffers/runtime shapes can change while preserving actual parameters and optimizer objects. That supports feasibility of learner-owned row subsets; it does not implement policy routing. No actual environment roster should change inside a cross-play episode. |
+| Randomness | [Gaussian sampling](https://github.com/CartmanFatass/My-paper-code/blob/40eb5c0e79bf0ff023e9458dc7fc301edbf9afab/hmasd/r_mappo_utils.py#L73) uses Torch's default RNG. Separate buffer sampler RNGs alone do not isolate action sampling. A new collector must explicitly own per-member action randomness, preserve actual distribution/log-probabilities, and use physical slot addresses before packing; serially calling two models on one global RNG is not a matched member-stream contract. |
+| Checkpoints | [Candidate save_checkpoint](https://github.com/CartmanFatass/My-paper-code/blob/0f4671475c275db52abc19219d42b4fe9ee664fa/experiments/candidates/agent_count_generalization/runner.py#L175) saves evaluation weights/normalizers, not training optimizer histories. [Core save_model](https://github.com/CartmanFatass/My-paper-code/blob/40eb5c0e79bf0ff023e9458dc7fc301edbf9afab/hmasd/agent.py#L7355) has optimizer and sampler state support. A new complete population checkpoint would also bind both private bundles, role/slot mapping, private action RNG and completed-update count. No automatic resume is selected. |
+
+Between pinned B18 and the new worktree base, the inspected shared files are identical except
+for an equivalent spelling/comment change in the recurrent entry-mask block of agent.py.
+This comparison does not certify all dependencies or runtime libraries. Future code must be
+reviewed at its own exact published SHA. Existing observer repair does not repair SIGSEGV.
+
+There is no existing two-private-learner population collector/evaluator in the inspected
+ordinary path. The minimum new engineering is a disposable collector/router, correct private
+buffer packing, explicit action RNG, full-state save/load and predetermined team evaluator.
+The shared model/learner and physical S1 environment need no conceptual redesign. Its main
+risk is assigning a physical slot's action, old probability or hidden state to the wrong
+learner, plus accidentally changing reward scaling or normalization exposure. Meaningful
+checks would exercise real collector-storage-sampler-update, isolation of the untouched
+member, episode reset masks, reward J/6 and evaluation with zero mutation; independent
+review would be needed before any scientific execution. No such new checks were run during
+this zero-step preparation. Engineering is feasible in principle, not already accepted or
+a disproportional-rewrite diagnosis.
+
+**Existing assets.** The B07/B08 U weights are two genuinely trained six-context mixed-reward
+controllers; their random individual labels are not independently parameterized private
+learners. They cannot be relabeled as the two-member ordinary populations. B16 has three
+independently trained ordinary L instances; B17 only reevaluates retained policies. They could
+supply a prospectively selected frozen self-play-side deployment diagnostic, but contain no
+mixed-partner-trained counterpart or matched four-fit population protocol. The completed
+B18 F is another ordinary asset; M has no endpoint and cannot complete a population pair.
+Copies of any one weight file do not create independent training provenance. Checkpoints'
+absence from this fresh checkout is not loss of evidence: existing external locators remain;
+no bulk recovery was needed to reject reuse as a matched training comparison.
+
+### Conditional comparison and full cost, not an accepted batch
+
+To make the price concrete, the following fully specified work structure uses the demonstrated
+ordinary LOCAL1 exposure, not old CPCP H256, GRU64, four epochs, MEI .01 or wall allowances.
+It is a costed rejected design, not new training authorization or an executable-code claim.
+A future change of use would require its own prospective seeds/inputs and scientific decision;
+no seed, output tag or deferred run has been reserved now.
+
+- Methods S (ordinary self-play) and M (within-population partner mixing). Each method has
+  independent populations A and B, each with private learners0 and1. A and B never share
+  training episodes, weights, normalizers, memory, optimizers or random streams. Pair only
+  corresponding S/M initialization/exogenous addresses, never the two populations. All four
+  populations train from scratch; no old weight is selected as favorable initialization.
+- Physical task is S1 N6/50 uniform users, free-space channel, cap10, H500 and primitive
+  bounded continuous actions. Membership/policy assignment is fixed inside the episode.
+  Keep LOCAL1's real parameters/information, gamma .99, GAE .95, learning rates1e-4,
+  PPO clip .2, grad-norm .5, low entropy .05, ValueNorm and15epochs. k10 is the recurrent
+  chunk length here; there is no learned high-level partner/skill selector.
+- A population update collects32 complete episodes from16 predetermined exogenous-world
+  pairs. For each pair, S executes one all0 team and one all1 team. M executes0 on slots
+  {0,1,2}/1 on {3,4,5}, then the complementary assignment on the paired episode. The two
+  episodes share that pair's initial exogenous world but have separate physical trajectories.
+  Each member therefore owns exactly six physical-slot episodes per pair in both methods,
+  including every physical slot once. Neither method gets additional member-action data.
+  State visitation, other-agent responses and outcome correlations still differ; matching
+  exposure does not claim identical training distributions or component identification.
+- The two members remain frozen during the entire collection. Pack S member data as
+ 500x16x6 and M member data as500x32x3 factual rows; both yield48000 rows per member/update.
+  Preserve each row's physical slot identity. No intra-episode policy switch, shared gradient,
+  off-policy reuse of the partner's actions, or transition between unrelated trajectories
+  inside a recurrent sequence. Each member gets45 updates, 2.16M factual action rows and
+ 101250 actor plus101250 critic Adam calls. That is the per-learner exposure of a competent
+  ordinary360k-team-step fit. Packing order/sample law must be fixed prospectively; equality
+  of counts alone does not certify equivalent minibatch normalization or numerical replay.
+- A deterministic member action generator should draw Gaussian noise by population/member,
+  update, world-pair, physical-slot and time, gathered only for that member's actual roles.
+  A corresponding S/M stream is paired while A/B streams remain independent. Matching cannot
+  be implemented by feeding one trajectory's observations or future actions to the other.
+  Private PPO sampler streams and evaluation isolation are separate from this action stream.
+- All32 final worlds are new, fixed before training and shared as exogenous conditions across
+  methods/compositions. Evaluate final45 only, deterministic mean followed by native clip,
+  reset hidden state per episode; no selection or online update. Evaluate one genuinely
+  common initial bundle only after corresponding initial module/normalizer/hidden-state
+  identity is checked; mismatch is a technical error, not a reason to silently drop initial
+  measurement. No checkpoint, partner, composition or world is selected by performance.
+
+Let P={0,1,2} and Q={3,4,5}. Per method, the cross-population panel is exactly the eight
+(A_i on P, B_j on Q) and (B_j on P, A_i on Q) teams for all i,j in{0,1}. All eight receive
+all32 worlds. Equal-composition averaging defines this fixed panel; it does not sample all
+20 three-of-six partitions or compatibility with arbitrary outside agents.
+
+For normal-team consequences use all four within-population ordered tuples(0,0),(0,1),
+(1,0),(1,1) on P/Q, for each of A/B, in both methods: eight teams/method. This contains S's
+familiar all0/all1 teams, M's familiar mixed teams, and the same-composition consequences
+in the other method. It prevents calling an easier deployment or degraded own team a repair.
+No extra swap duplicates are counted for the within-population tuples.
+
+| Work item | Fits | Team episodes | Team steps | UAV action rows |
+| --- | ---: | ---: | ---: | ---: |
+| Four populations, each45x32x500 training | 4 population fits / 8 private actor-critic learners | 5760 | 2880000 | 17280000 |
+| Final cross-play:2 methods x8 teams x32 worlds | 0 | 512 | 256000 | 1536000 |
+| Final within-population:2 methods x8 teams x32 worlds | 0 | 512 | 256000 | 1536000 |
+| Common actual initialization:16 teams x32 worlds | 0 | 512 | 256000 | 1536000 |
+| Complete conditional comparison | 4 population fits / 8 trained learners | 7296 | 3648000 | 21888000 |
+
+Per learner/update, 48000 rows /10 steps =4800 sequences; /32 sequences=150 minibatches;
+x15epochs=2250 calls per actor/critic optimizer. Across45updates and8learners:810000 actor
+and810000 critic Adam calls, 1.62M combined. There are180 population update boundaries and
+360 member updates. Collection has4x45x500=90000 physical32-lane ticks and180000 member
+batched actor/critic inference calls. Evaluation is48panelsx500=24000 physical32-lane ticks,
+768000 team steps, zero training updates; routing may use one or two forward calls per
+physical tick, so it cannot be priced as a single shared-policy forward. No candidate search,
+partner tournament, deployment adaptation or third training arm is hidden in the counts.
+
+A superficially cheaper four x360k-population-step design would give each private member
+only1.08M rows, half the existing ordinary exposure. It could be declared as a different
+lower-exposure exploration, but cannot be sold as preserving the ordinary360k learner
+comparison. The older CPCP 524288train+131072cross-play ticks likewise omits these new
+normal-team/initial panels and uses a different horizon/learner/update law; it is not reused
+as the price of this proposal. These are planned arithmetic counts, not incurred costs.
+
+The recorded B18 F is a useful scale reference, not a wall prediction:1fit/360000train+
+160000eval team steps,101250 calls to each low optimizer; arm wall2211.136844s and command
+wall2212.923292s on its recorded node. Process-cumulative peak RSS4266920KiB and CPU
+user/system8937.712889/19.632706s have the recorded paired-process scope. The doubled
+private learner/collector topology has no measured wall or peak RSS; do not multiply this
+wall by a fit label and call it an estimate. Compilation, construction, check/review, source
+staging, input/output hashing, storage, collection and full reading are additional real costs.
+No profiling fit is required or started to fill those unknowns.
+
+If a later worthwhile use selected this structure, start from configured wsl_4070 with
+ordinary CPU float32/4 Torch threads (the demonstrated LOCAL1 path), separate sequential
+population processes, two private learners per population and actual destination-memory
+admission. A/B are never trained together; concurrency across populations is unnecessary.
+No current process or runtime is modified. New execution would need a declared reason and
+actual-path checks despite unresolved shared SIGSEGV causes; state/output persistence is
+separate from proving a crash repair. The exact hardware-library cost and memory remain
+unknown, and this preparation does not claim CUDA validation or failure-free long training.
+
+### What this design would discriminate, and why it is not bought now
+
+The native prediction would be M-minus-S positive mean J **and** served users across the
+complete eight-team cross-play panel. First reduce compositions within each world and then
+worlds equally. Preserve each composition, each world, raw components, all losses, absolute
+service and actual initial-to-final learning. Also report all within-population matched
+composition contrasts, the familiar S and M deployment values, and worst tails separately;
+do not create an ex-post service tolerance or pool them into a favorable scalar. A smaller
+cross-play-to-own-team gap caused only by damaging own-team performance does not support
+better cross-play service. A positive cross-play result with own-team losses is a tradeoff,
+not a default replacement. A negative result with correct training is scientific evidence for
+this recipe; a missing endpoint/ownership/RNG violation is a technical failure. Small/mixed
+results remain unresolved, not equivalence. No automatic extension follows any branch.
+
+This is one matched comparison of two-population method bundles. Four fits, eight learners,
+48 panels,1536 evaluation episodes and5760 training episodes do not create independent
+method replications. It can establish only exploratory program consequences at fixed N6 and
+this S1 partner family, not skill necessity, open-world teamwork, pure compatibility mechanism,
+train-N generalization, real battery benefit, broad MARL superiority or confirmation.
+
+The source map removes an absolute technical objection: private state is available and a
+bounded router can be built. It does not supply the operational reason to retain different
+controllers. The larger fully counted work is not forbidden by a fit allowance; it is simply
+not currently buying a decision that improves the adopted S1 deployment over sharing an
+ordinary policy. Lowering exposure or using old policies would reduce cost without resolving
+that missing purpose. Consequently I choose **no current investment**, rather than implement
+an unnecessary population runner and seek a favorable result to justify it afterward.
+
+This applies the explicit no-worthwhile-use branch of the complete September24 project Pro
+Answer/Root Decision already read above. There is no new cross-play empirical result, new
+hypothesis being accepted, changed failure explanation, or confirmation plan needing another
+consultation. I adopt its requirement for private states, all combinations, normal-team losses
+and complete cost, and its permission to end preparation with a reasoned no-purchase decision.
+The historical CPCP answer itself also declines its starter object absent a concrete independent-
+source teammate use. Adviser agreement is not evidence of compatibility or an approval gate.
+
+Main `2c8faff0c353fd5d6c38544dc0f9453e2f72f21b` was refreshed before this decision. Its relevant
+topic3 leaves B07/B08 package benefits, reversed entropy increments, negative learned-readout
+increments and B09 service losses intact; those constraints directly rule out another automatic
+same-S1 rescue. The current project plan and resumed DM1/DM3 work do not create a fourth line.
+No new empirical shared-background claim is warranted, so that background is preserved.
+
+Actual new cost is only source/record/asset-provenance reading, two bounded Scout turns,
+design/arithmetic and publication: **0 fits,0 environment steps**. Full human/model wall,
+node occupancy and readback effort are not instrumented. All existing historical costs and
+adverse evidence remain at their original identities. The complete inherited notebook prefix
+is preserved. Publish this conclusion and own routing/state from an owned main-based index;
+no App report, automatic restart, Pro resend, heartbeat or owner-approval request is created.
+A future concrete need to retain independent controllers would be a new reason to reconsider,
+not a promised next batch or an external dependency this task is waiting for.
