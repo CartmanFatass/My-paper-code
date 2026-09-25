@@ -1297,3 +1297,53 @@ Only one sequential result-bearing batch is planned on the configured node. Impl
 checks are now accepted; exact run inputs will be reviewed, committed and published before a
 fresh native launch. The DM will reconsider scope if source semantics cannot be preserved
 locally or the practical cost ceases to be proportionate.
+
+### Plan publication and implementation handoff
+
+The complete second question/Answer, adoption and B02 scope are published on main at
+`fc3778b9ac3bb46add596f62bd6327106cfc21dc`. Before editing, the owned publication checkout
+refreshed to`6d2e2ff3e`, inspected and preserved the finite-model DM's new budget-interaction
+plan. Only this NOTES, own standing/plan/routing changed; B01 evidence and other owners remain.
+The Implementer received the exact L0 at`930cb1aaa`; the independent early Reviewer found the
+enabled LOCAL1 compact-buffer route feasible without shared-core edits and identified hidden
+getter slicing, compact bootstrap shape, complete-buffer admission and persistent sampler RNG
+as integration risks. This feasibility reading is not final code acceptance or a result launch.
+
+For a measured cost reference I read the three already-published B20 F summaries: their
+`arm_wall_seconds` are3850.053037,3624.169078 and3391.902633 seconds (about57–64 minutes per
+historical full-six-role fit). These are old arm measurements, not a B02 training quote;
+the old process RSS/CPU fields are cumulative and cannot be added as simultaneous resource
+peaks. B02 has fewer effective optimizer minibatches but additional frozen-partner inference,
+so its own full wall remains unknown. This order of existing learning cost does not change my
+decision to implement the complete three-fit exploration; no extra timing pilot is purchased.
+
+### B02 implementation returned for full review
+
+The Implementer returned only the assigned new B02 code, entry and tests. The direction-local
+update buffer stores original roles0–2 before core GAE/ValueNorm/entropy and genuine low-level
+PPO; the physical agent/config remain N6. A persistent compact buffer preserves its sampler
+state. No shared-core or B01 source changes were needed.
+
+Early independent review caught a test normalizer-copy loop using nonexistent attributes and
+insufficient one-chunk coverage. Both were repaired: the real H20/two-lane fixture captures
+pre-action actor/critic states and12 chunk/lane/role sequences, uses nontrivial actual ValueNorm,
+checks an independent GAE reference and normalizer inputs, sampler state across reset, and
+rejects partial/nonterminal input before normalization. Excluded-row perturbations leave valid
+samples, losses, parameters/normalizers and Adam state unchanged. The independent repaired-subset
+run passed in3.38s with40 nonproduction team steps; the earlier independent pass had10 steps.
+
+DM full-runner reading found a training-curve normalization error (N times summed reward under
+the `per_lane_J` label), while evaluation J was already correct. It now uses N times mean reward,
+with scalar return separate and a native-component check. Post-update finite/accounting
+failures now retain the collected row and actual optimizer counts; injected failures verify
+that evidence survives. Per-minibatch audit lists are retained under raw with hashes, while
+compact metadata keeps complete counts/histograms/extrema rather than repeated bulk arrays.
+DM separately checked six key contrasts and world-bootstrap intervals using an independent
+coefficient/frequency-weight calculation on synthetic arrays, with no environment transition.
+
+Latest Implementer suite:9 passed in6.83s,164 confirmed nonproduction team transitions per
+invocation. Exact production-spec source1 restoration/digest was also checked on nonproduction
+world81 with zero transitions. Earlier development invocations were repeated and their cumulative
+transition cost was not metered; these are correctness fixtures, not new production results.
+All production world panels remain untouched. Full independent runner/integration review and
+the actual-node checks are still outstanding; this entry is not launch acceptance.
