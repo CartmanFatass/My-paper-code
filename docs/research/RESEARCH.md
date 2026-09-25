@@ -652,28 +652,31 @@ S7的B04/B05在H1500评价未激活切断、耗尽或充电，风险学习的有
 
 ### 三条主线和近期动作
 
-| 主线 | 当前固定比较与成本 | 这次观察改变什么 |
+2026-09-24 项目复盘已完成，[完整建议与Root决定](archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md#decision)。
+优先准备服务反馈学习，其次普通人数训练分布比较；技能线转为一次有明确用途的cross-play准备。
+这些是项目选择，原三个DM当前均无已接受的新producer；各自完成NOTES前瞻、技术选择与实施后执行，
+不需要另一次Root选题批准。出版计划不等于已向独立App任务发送启动消息。
+
+| 责任 | 选定下一工作与成本 | 可改变的判断与最强替代 |
 | --- | --- | --- |
-| DM1：泛化与训练条件 | B18固定F→M批次不完整，2started/1completed fits；F45轮，M8轮落盘，转储恢复M第9轮的部分已返回/已存储步。文件证明424k训练，转储与循环顺序证明至少430,141训练团队步；15面板/240k评价。[故障、完整保留证据与判读](candidates/agent_count_generalization/NOTES.md#2026-09-24--b18-technical-failure-paired-endpoint-missing-fixed-n6-own-learning-retained)。 | 固定N6的一个新实例已在未见N5/N7取得正自身学习均值，支持保留有能力的固定人数对照，仍有不利世界。四项M−F主预测、M自身学习及N6代价均不可判断；技术崩溃不是负结果。本次只读转储诊断已完成，不自动重跑、补尾或替换。 |
-| DM2：有用技能与协作学习 | B09双U的固定16面板已完整读取：8原R严格复现，0fits/256k团队评价步/512episodes。B07 H−R为−.048196243J/−2.916703人；B08为+.010253126J/−.7688125人。[完整B09、全部配对与判读](https://github.com/CartmanFatass/My-paper-code/blob/6f7e1eaccdea00cafe8813e621d4bb5b14a363f4/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b09-complete-persistent-u-contexts-lose-service-and-do-not-give-a-shared-deployment-improvement)。 | 共同J/服务改善预测失败；两库各四条流均少服务，保留全部世界及回合损失。保留原R工作规则，结束本次持续上下文诊断；重抽用途与长驻留偏离训练分布仍未分离，没有选定新的fit、流、驻留网格或确认。 |
-| DM3：服务收益与风险控制 | B08固定A/N批次技术失败：N训练/端点评价完成，A第24阶段采集中信号11退出，A端点缺失。2 started fits、1 completed fit；落盘训练轨迹318k，进度证明至少320k已执行，评价240k/80回合。[退出、完整保存及判读边界](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b08-technical-failure-during-a-collection-fixed-pair-incomplete)。 | 本批不能回答A−N或A自身学习，B07有限结论不变。根因尚未复现；本次不重跑、不补尾、不换种子或主机。没有选定下一运行；后续需具体诊断/修复理由及新的前瞻决定，保留失败成本和已曝光结果。 |
+| DM3：服务收益与风险控制 | 优先准备同部署F的新N/A配对：新匹配初始化，各180k训练，2 fits；32新世界，共同初始及两终点，至多288k评价。保留H3000/N8/k10、原F和普通完成段合同，不混入新学习器。 | A−N未被旧技术失败回答。读完整服务、J/风险及不利世界；补能退出后250步团队服务为有删失的中间解释，非同机恢复。最强替代是保留已有F，不买新fit。旧N和失败A不能拼新配对。 |
+| DM1：泛化与训练条件 | 准备LOCAL1的新F/M：45个N6 vs [4,6,8]×15，各360k，2 fits；N5/N7主比较与N6代价，各32新世界，共同初始加两终点，9面板/144k评价。新运行在完成边界持久化必需reset场景。 | 固定N6已经能产生有用迁移；检验M是否增加N5/N7的J和服务四项正差，同时读取N6得失。保留F是强替代。没有新N4/N8部署评价就不作其结论；B15不重开，B18仍是不完整技术失败。 |
+| DM2：有用协作学习的后继准备 | 一次普通cross-play可行性与完整成本设计，0 fits/0新环境步；核清独立组队用途、私有actor/critic与混编路径，以及全部预定组合和正常搭配代价。沿用原DM，暂未激活population训练或变更方向lead。 | B09只约束当前上下文保持，不证明伙伴兼容缺陷。设计有明确用途且可执行才值得后续训练，否则有理由暂不投入。当前不买时间法则两fit、系数/驻留网格或旧CPCP四population训练。 |
 
 ### 推进与投入选择
 
-B16使普通局部循环成为人数线更强的工作参照，降低继续购买不变H6−SET差的优先级；
-B11/B12反号和B15联合确认不确定仍保留。下一比较针对部署广度，不为B15补成功；
-不确定性、实际用途、局部代价和机制解释分别判断。技能线的条件性库优势复现失败，转入有判别力的修订或简化选择；服务线保留风险与服务的共同后果。
-其他线不因出现一个正均值就同时扩成昂贵确认，新的投入须说明能改变哪个判断与实际成本。
+Root本轮既有转储核查已完成，详见[共享故障定位](#shared-runtime-diagnosis)。两次故障根因未明，
+不将技术失败记作科学阴性；也不把完整查明共同根因设为所有研究的无限前置条件。
+原DM应给出具体执行配置、覆盖所用路径的检查与保留风险，新尝试有新前瞻身份并保留旧失败成本；
+不原配置盲目重跑、补尾或换种子救结果。已证实的证据保存缺陷与未知崩溃原因分别处理。
 
-每名 DM 保留支持、相反证据和开发曝光；在材料变化时使用相关共享背景及适用的既有 Pro 建议。
-普通实施、运行观察和同方案的继续不重复咨询或等待 Root ACK。结束一个配方后回顾相关项目证据，
-自主选择值得执行的下一观察；没有可行且有信息价值的问题时可以有理由停止。表示、周期、churn、
-cross-play与异质能力是可选后继问题，不另设第四条常驻研究线。
+每条学习配对仍是一个初始化块的探索，非确认，世界/事件/流不增加训练n。DM2准备可独立开展，
+一条线可执行时不等另一条线；无需为三个名额强行制造新方向。复用完整适用的Pro建议，普通实施、
+观察和判读不重复咨询或等待Root ACK。各DM保留依据全项目证据修订问题和有理由停止的责任。
 
-计算优先使用 `wsl_4070`，实际训练并发依节点资源准入；保持已接受进程及原始绑定。fit成本按各自
-horizon读取，评价、实现、检查、收取和支持成本另计；0fit不等于零成本。详细累计成本与操作阶段
-保留在各方向 NOTES/runs，本索引不复制进程号、观察代数或逐 cell 的验收记录。
-聚合O/P/E已全部完成、项目级解释结束，原 lead 的最终 notebook 补录仍待承接；其两个当前配方不追加。
+计算优先使用 `wsl_4070`；替代配置需说明实际原因，按实际节点资源准入，不迁移已接受进程。
+评价、实现、收取、存储及阅读成本另计，0fit不等于零成本；上述步数不是墙钟估计。
+聚合O/P/E及两个当前配方已结束，原lead最终notebook补录责任保留。
 **Claude FSD 仍须 owner 手动恢复，G33继续冻结。**
 
 ### Shared runtime diagnosis
@@ -705,144 +708,9 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 `264e2aa2105ef36a842e33bef68e51f9a2cc9e5542e760f952a3b30a28cc2271`。
 这是当前科学投入的真实共享依赖，不改变各方向 notebook 的原始故障记录或实验判读。
 
-## Portfolio review 2026-09-24 next-investment-after-b18-b09-b08
+<a id="portfolio-review-2026-09-24-next-investment-after-b18-b09-b08"></a>
 
-Conversation: reuse the existing Portfolio Jev conversation; its address remains private local transport state.
-Owner request: “查看各研究情况 继续指导研究项目的进展”. Root retains the existing scientific-management
-delegation and three independent DM owners. Owner pause remains lifted; Claude FSD manual-resume and
-G33 freeze remain unchanged. This review selects worthwhile next work, not a fourth DM or a claim of
-live-session adoption. App-task messages still require an explicit delivery request.
-
-**Decision asked.** Given two incomplete technical pairs and completed negative/conditional skill
-interventions, how should the three DM responsibilities now be used? Recommend a concrete priority
-order and the smallest useful next purchase for each, including a justified pivot or no new fits.
-Distinguish ending a recipe from abandoning an unanswered question and from idle ownership.
-The earlier Portfolio advice predates these material results; routine original-batch reading already
-used each DM's complete prior Pro advice. This question concerns the changed project investment.
-
-**Current standing and evidence.** Main evidence below resolves at `source_sha` unless explicitly pinned
-otherwise. These are completed notebook/run readings, not independent replications by Root.
-
-- DM1, `agent_count_generalization`: B15's three N8 H6−SET block means were positive, but the fixed
-  joint confirmation failed: 95% t intervals J [−.0000079125,.1421064934], service [−.8760904072,9.5315487405]
-  do not pass lower J>0 and lower service>1. No extension/reinterpretation of B15 is proposed. B16/B17
-  make ordinary local recurrent L a stronger working comparator: on B17 fresh N8 worlds L−H6 means
-  across the three fixed policy pairs are +.0255781 J/+2.30065 service users per step; N6 ordering is
-  mixed and N4 mean J favors H6. L is task-only/single-category trainable FiLM, not a matched
-  six-category architecture ablation. B18's fixed-N6 F completed 360k training; mixed-roster M crashed
-  in rollout9 after eight stored updates and has no learned endpoint. The two started fits are an
-  incomplete comparison, not adverse M−F evidence. F alone learns positive mean J/service at previously
-  untrained N5/N7 (+.143097101/+10.5961875 and +.096589434/+7.163), with respectively 3/2 adverse worlds.
-  This both supports a competent ordinary transfer reference and raises the bar for buying mixed
-  training. [B15 and successors](candidates/agent_count_generalization/NOTES.md#2026-09-24--b18-technical-failure-paired-endpoint-missing-fixed-n6-own-learning-retained);
-  read the B15 complete, B16 complete, B17 complete, `ordinary-roster-training-after-b17` complete
-  Answer, B18 prospective and terminal entries in the same notebook. B18 inputs remain
-  `0f4671475`; neither replacement endpoint nor continuation is selected.
-- DM2, `complementary_skill_learning`: E actually changed high entropy coefficient **.07 to 0**, with
-  architecture, mixed reward and low entropy retained. E−M mean J/service was +.040099335/+1.060844 in
-  B07 and −.014004815/−.433406 in B08, despite lower common-input entropy in both. E-S−U-R package
-  benefit was positive in both exploratory training blocks (+.061758309/+3.519844 and
-  +.029553306/+.53275), while E's learned S−uniform R increment was negative in both. These results
-  weaken the proposed entropy repair and learned-readout account without proving hierarchy inert,
-  uniform equivalence or a unique regularization mechanism. B09's predeclared H500 opening-context
-  hold versus k10 redraw on both U banks then lost mean service in every stream: B07 ΔJ/service
-  −.048196243/−2.916703; B08 +.010253126/−.7688125. All eight original R panels reproduced exactly;
-  sixteen panels, 0 fits, 256k evaluation steps are complete. Keeping R is covered by the existing
-  advice. H's loss cannot distinguish useful renewal from exposure mismatch under k10 training.
-  Source: [complete B07–B09 results, prior Pro and decision](https://github.com/CartmanFatass/My-paper-code/blob/6f7e1eaccdea00cafe8813e621d4bb5b14a363f4/docs/research/candidates/complementary_skill_learning/NOTES.md),
-  specifically B08 complete, `random-renewal-use-after-b08` complete Answer, and B09 complete.
-- DM3, `uav_service_auxiliary`: B07 is a material change from the earlier H1500 no-event diagnosis.
-  At H3000 with two frozen old N policies, ordinary O had 275 cutoff/212 depletion events; feedback F
-  had zero in this finite panel and every F world received actual charging. 78/80 worlds contain
-  replenishment/positive storage gain/feedback exit followed by team service, not identified
-  same-aircraft service recovery. Final QoS mean gains are +.066866785/+.047859413, but 5/32 and 3/32
-  final worlds lose service, with worst losses −.194845487/−.240545272. Charging with no later service
-  and one all-episode zero-service world remain. Total consumption rises; this is no safety or energy
-  efficiency guarantee. B08 A/N asked whether training with that same feedback helps when both deploy
-  with F. N completed 180k/30 phases; A crashed during phase24 with no endpoint. Two fits started;
-  at least 320k train and 240k eval retained. No A−N result exists. Original Pro already addressed the
-  common ordinary completed-segment repair and explicit mixed-behavior PPO limitation; do not silently
-  replace that contract or call the approximation strictly on-policy.
-  [B07, complete feedback-aware and boundary advice, B08 contract/failure](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b07-complete-native-h3000-feedback-restores-energy-with-material-service-loss-worlds).
-
-**Shared technical dependency, currently investigated by Root (0 fits).** Both failures were signal11
-on `wsl_4070`, one CPU B18 and one CUDA B08, using the same configured Python path and boot. B18 has
-an identity-checked core: NumPy scalar clip call, pending `TypeError: 'int' object is not callable`,
-then CPython reference-decrement failure during exception unwind. The finite scalar succeeds in the
-already completed fresh process check. This locates the crash but does not diagnose NumPy, GPU,
-threading or hardware. Root's current read-only node audit newly found a B08 WSL dump named for
-PID544626 and signal11 (3,172,958,208 bytes); its internal identity and stack are still being checked.
-Current installed Python3.10.21/NumPy1.26.3/Torch2.7.0+cu118 files predate the runs; this does not prove
-all B08 runtime bytes. Private cores are not published or supplied to Pro. No original worker is alive,
-no accepted request is being restarted, and a common root cause has not been established.
-
-**Options and Root's provisional preference (not yet a new run specification).**
-
-1. **First remove the concrete shared technical uncertainty.** Complete the bounded existing-core
-   reading before spending another long fit. This is 0 fits/0 new environment steps, with real read,
-   storage and engineering cost. A located error may justify a narrow repair and meaningful test;
-   a generic interpreter upgrade or a successful scalar call is not a verified repair. The alternative
-   is indefinite diagnosis, which should be declined if no informative next action remains. Advice
-   should say what unresolved technical facts actually prevent a useful next scientific purchase,
-   rather than create a blanket requirement to prove absence of crashes.
-2. **First scientific priority: DM3's feedback-aware learning question survives.** The mechanism is now
-   active, the ordinary feedback reference is useful, and the A−N question was never answered.
-   Conditional on a concrete technical path, consider one new paired exploration (2 new fits at
-   180k each, evaluation frozen prospectively, one initialization block). Preserve all failed costs
-   and N exposure; do not simply append a replacement A to old N. Compare this with a 0-fit retained
-   trajectory reading of the charge-to-service failure cases: useful only if it changes the next
-   intervention, not as a compulsory preliminary research programme. Is a new pair still the best
-   next purchase, or has a simpler learning/control comparator become more informative?
-3. **Second: DM1's ordinary training-distribution question.** A new F/M pair would cost 2 new
-   360k fits plus fixed evaluation, retain N5/N7 as counts unseen by either arm and read N6 tradeoff.
-   F already has useful N5/N7 learning; a mixed-roster gain is uncertain and cannot explain H6.
-   Compare buying this missing contrast with preserving the bounded ordinary transfer result and
-   shifting to a genuinely distinct deployment question. No reopening B15 or unchanged H6−SET
-   confirmation. Reuse competent L/F rather than demand exhaustive baseline optimization.
-4. **DM2: stop automatic same-S1 entropy/hold searches and make an explicit broader investment choice.**
-   One possible discriminator is a prospectively matched temporal-training comparison (k10 redraw
-   versus opening hold, six-way context/ordinary feedback unchanged), evaluated under both temporal
-   laws. At least 2 new 360k fits for one block plus four deployment conditions; this can separate
-   training-law interaction from one frozen-policy switch but need not establish useful skills or a
-   publishable new MARL finding. Root currently ranks it below the two unanswered native questions.
-   A distinct reserve is `cross_play_compatible_population_learning`: independently trained teammate
-   compatibility, mixed-partner training versus matched-exposure self-play, fixed within-episode
-   roster. Existing reserve has no implemented or admitted first batch. Its old design contains four
-   population fits/eight actor–critic instances, not two cheap fits; old seconds allowances/MEI rules
-   are historical, not current authorization. Read only its [scientific design §6](https://github.com/CartmanFatass/My-paper-code/blob/b793cf69b4935306708ad744b355acc4d5b33712/docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md)
-   if recommending it. Alternative is 0-fit preparation of one concrete ordinary cross-play design,
-   with actual code/asset feasibility and whole cost established before selecting training. A vacant
-   DM slot and an unanswered category do not by themselves justify this pivot. Recommend whether
-   this preparation, temporal-training test, another evidence-grounded question, or an explicit end
-   of current investment is worth doing now; explain what would change the choice.
-
-**Context and source precedence.** At `source_sha`, read constitution §§1–5,7–8, the relevant shared
-RESEARCH topics 3/5 and current rows, `.agents/skills/hmasd-portfolio-task/SKILL.md` Steps/Boundaries,
-and `.agents/skills/hmasd-scientific-tools/SKILL.md` Update the working explanation, Comparators,
-Statistics, Cost and exposure. They supply current purpose, autonomy, inference units and decision
-method. `.agents/skills/hmasd-research-engineering/SKILL.md` applies only for technical feasibility;
-old frozen inputs retain their own meaning. The previous Portfolio decision is in
-`docs/research/archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision`; it is history,
-not a requirement to repeat an old choice. Current user instructions and constitution are governance,
-skills are methods, reviews/notebooks/runs are evidence. Do not import obsolete allowances, admission
-gates or fixed candidate quotas from old chat or reserve documents.
-
-**Return.** Give a concise scientific assessment, which judgments changed, the concrete next action
-for each responsibility and its fit/non-fit cost, the strongest alternative, and a falsifiable
-intermediate/native prediction for any targeted revision. Distinguish a selected preparation task
-from an accepted training batch. Address why the current stop pattern is or is not justified without
-requiring endless rescue. Include MATERIAL_DISSENT yes/no and source gaps that affect recommendations.
-Do not launch work, change direction ownership, send App messages or manufacture a result. Write only
-the empty `### Answer` below on branch `codex/project-management-sept23`; fetch the latest file/blob
-for writing, preserve every other byte, stop on overlapping edits, and return the actual commit.
-If writing is unavailable, return the complete answer in chat. Root makes the decision within the
-existing delegation after reading the complete advice; no new owner approval stage is added.
-
-### Answer
-
-### Decision
-
-Pending full advice and the independent technical reading; no new scientific batch selected by this review yet.
+[已完成三线投入复盘：完整答复与采纳决定](archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md#portfolio-review-2026-09-24-next-investment-after-b18-b09-b08)。
 
 ## Session routing
 
@@ -851,7 +719,7 @@ Pending full advice and the independent technical reading; no new scientific bat
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [当前三线投入复盘](#portfolio-review-2026-09-24-next-investment-after-b18-b09-b08)已发送一次 Pro，待完整答复与决定；[共享技术核查](#shared-runtime-diagnosis)已找回并定位 B08 core。无新增科学批次、跨任务消息或方向接管。[前次项目决定](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)保留为历史。 |
+| Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [三线投入复盘](archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md#decision)已完整读取并决定；[共享技术核查](#shared-runtime-diagnosis)已找回并定位B08 core。当前准备范围见项目计划，无新增producer、跨任务消息或方向接管。原Pro已收齐，唤醒路径故障在本任务修复，非待生成。 |
 | DM1：智能体数量泛化 DM | `01a0c6ef-cdd4-7113-b2d9-20487e35171b` / `local` | `/home/fires/.codex/worktrees/7fef/hmasd-wsl` · `codex/agent-count-generalization` | B18源`0f4671475`的原生进程信号11退出；F完整、M无端点。47产物双副本哈希核验，私有崩溃转储亦已保全；从原始转储恢复第9轮N8奖励clip调用链和部分成本。终态事件已消费（generation175），无运行中科学操作、待收Pro或选定重跑。[故障、完整保留证据与判读](candidates/agent_count_generalization/NOTES.md#2026-09-24--b18-technical-failure-paired-endpoint-missing-fixed-n6-own-learning-retained)。 |
 | DM2：实际互补技能学习 DM | `01a0cdb8-10c9-7743-a05a-6dcfc42621c5` / `local` | `/home/fires/.codex/worktrees/5916/hmasd-wsl` · `codex/complementary-skill-learning` | B09完整结果和固定规则判读已发布：[完整B09、全部配对与判读](https://github.com/CartmanFatass/My-paper-code/blob/6f7e1eaccdea00cafe8813e621d4bb5b14a363f4/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b09-complete-persistent-u-contexts-lose-service-and-do-not-give-a-shared-deployment-improvement)。本任务完成双副本留存及自身结果发布，无运行中科学批次或待收Pro；本次诊断已结束，更广续作尚未选择。 |
 | DM3：控制用途预测小模块 DM | `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e` / `local` | `/home/fires/.codex/worktrees/d319/hmasd-wsl` · `codex/uav-service-predictive-control` | [B08技术失败已收取并记录](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b08-technical-failure-during-a-collection-fixed-pair-incomplete)；输入8725d2f3e的原始进程信号11退出，终态事件已消费（generation114），无运行中观察或待收Pro。原始轨迹保留在manifest路径；无选定重跑，也未选择新的研究路线。完整既有Pro答复、合同及工程证据仍在NOTES。 |
