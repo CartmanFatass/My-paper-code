@@ -992,3 +992,158 @@ after a successful write. If writing fails, return the complete substantive answ
 not only a status, link or SHA. You advise; the DM decides, with no new approval requirement.
 
 ### Answer
+
+MATERIAL_DISSENT: yes
+
+**建议：保留 F1/F2/M 的三次直接训练，不再购买诊断矩阵；作一项小而实质的比较修订——在相同新评价世界上增加固定旧 source3/source3 的一格复用参照。** 原来的 M−F2@partner3 仍是主要、曝光匹配的训练制度比较，不更换主对照、不增加训练臂。新增参照只需 0 fits、32×500=16,000 评价团队步，使总计划由 1.272M 变为 **1.288M 团队步：1.08M 训练＋208k 评价，3 fits、416 评价回合**；工程、检查、推理、读回和存储另计，训练墙钟仍未知。
+
+这里的实质异议不是“B01 不阳性，所以不得学习”，而是：**三臂相对差足以回答一个有限训练问题，却还不足以回答这次资产投入所关心的另一半——新增训练是否比直接复用已有有用控制器更有用途。** 这是两个不同参照，不应由一个 M−F2 数字代答。仅研究训练制度时，原三臂本身是有效的探索；我推荐补这一格，因为它能以很小的边际评价量改变后续采用、停止或确认的选择，而不是为探索新设性能门槛。[本题及完整 B01][pi-notes] [当前结构背景与计划][pi-background]
+
+#### 1. B01 应怎样改变这次投资，而不替新训练预判结果
+
+B01 的 J 匹配汇总 D=−.000167541，条件区间[−.009459302,+.007918611]；服务 D=+.009822917，区间[−.643086198,+.579832552]。三个 C 反号，世界残差又显著大于均值残差。3/2 比 3/3 的有限优势只有+.000216619 J/+.1595625人，且同世界存在−.094276693 J/−6.516人的损失。这些读数削弱“有统一混编损失，应该训练修复”的投资依据；既没有量出学习可用的 headroom，也不能把残差 RMS 当作可兑现增益。[B01 完成记录][pi-result] [原生摘要][pi-summary]
+
+但 B01 从未训练一个面对固定外部伙伴的响应者。它没有观察 F1、F2 或 M；原 F45 来源自身有用，也不意味着新固定伙伴响应已经吸收了全部机会。因此，不能把旧九格近可加当作新三臂必然无差异的证据，也不必先训练残差预测器或证明对称性。这里值得购买的具体未知量是：**在相同的半队学习曝光下，把 source2 的一半训练经历换为 source1，会怎样改变面对训练排除伙伴3的完整用途，以及对已见伙伴的代价？** 这比继续解释旧矩阵的每个反号更直接。[前次完整 Answer][pi-prior-answer] [科学方法][pi-method]
+
+最强的简单竞争解释是，普通几何反馈和一个合格固定伙伴响应已经足够；M 或许只是稀释 source2 经历。即使 M 正面，也可能是较广状态覆盖、正则化或这一次优化实现的总体质量，而不是在线识别伙伴、解除约定冲突。冻结伙伴仍会根据真实观测和自己的循环状态反应；“冻结参数”不等于固定动作或开放环路。这个设计研究的是对固定伙伴库的响应学习，不是双方共同学习、伙伴群体演化或一般 ad hoc teamwork。
+
+我仍倾向购买一次修订后的完整比较，而不是现在结束全部 S1 资产工作。理由是它有可执行的直接干预、两个普通固定响应控制和明确终点，正负结果都能改变后续选择；不是因为“尚未回答”本身就产生继续投入义务。若实际实现演变为广泛的共享核心重构，新增成本可以使停止资产路线更合理，不应为维护本推荐而继续扩建。
+
+#### 2. 唯一新增比较：旧 3/3 是复用参照，不是第四个匹配训练臂
+
+保持全部新训练、种子、半队划分和原十二个评价格。另在同一92540000–92540031面板、H500、相同构造/重置、确定性裁剪和合法 LOCAL1 下，令两个角色组都使用**已经固定的旧 source3 F45**，得到 $B_3^Q$，其中 $Q$ 分别为 J 和服务人数/步。不要使用 B01 的旧均值直接相减；它来自另一面板。不要改成事后最高的旧3/2，也不展开另外两列、扫描库或重新训练 source3。[B01 来源和执行绑定][pi-config] [原生 launch manifest][pi-manifest]
+
+令 $V_{a,p}^Q$ 为新训练臂 $a\in\{F1,F2,M\}$ 对伙伴 $p$ 的新面板均值。保留
+$$
+\Delta_3^Q=V_{M,3}^Q-V_{F2,3}^Q
+$$
+作为主要训练比较；新增
+$$
+U_a^Q=V_{a,3}^Q-B_3^Q
+$$
+作为每个新响应者相对于直接复用旧资产的用途比较。一个参照格即可支持这三个差，无需再增加评价。
+
+其区别确实影响投入：M 可能超过新 F2 却仍明显不如旧3/3，此时有有限训练制度差，却没有立即替换已有控制的理由；也可能 F2 与 M 都超过旧3/3而彼此无有用差别，此时普通固定伙伴响应学习值得保留，伙伴混合的额外投入却缺乏支持。原设计不能在同世界区分这两种情况。
+
+**旧3/3不是曝光匹配的训练方法对照。** 它历史上训练了六个角色；新臂只学习三个角色，伙伴冻结，训练分布与实际学习决策量不同。$U_a$ 因而不能识别混合训练的因果贡献，也不是最优上界。它回答“现在直接复用已有物件怎么样”，其历史成本继续披露，但不再次列为本批新 fit。source3 的选择受已读 B01 影响，这个参照也不包装成盲选或总体最强基线。只有新三臂之间承担匹配制度比较。
+
+增加这一格不应成为先跑旧参照、看分数再决定三次训练的筛选。若 DM 采纳，应在任何新结果前写入同一完整比较；它不是 B01 的结果驱动延长，也不是进入学习的阳性 pilot。它改善的是本次新研究的实际用途解释，不使“必须胜旧3/3”成为所有基本研究的准入条件。
+
+#### 3. F1/F2/M、共同初始化与伙伴排除：基本设计保留，但作用不要混写
+
+**F2 是合理的命名主对照，不是已经证实的最佳响应。** 原 source2 比 source1 的某些普通部署均值更好，不推出“用 source2 训练出来的响应者必然更强”。伙伴行为既影响即时服务，也影响学习数据的难度与覆盖。因此 F1 有真正的对照价值，不能因旧 source1 较弱就删除。仅胜 F1、不胜 F2，不能支持预写的主要增量；胜 F2而不胜 F1，应保留主要有限差，同时承认另一固定伙伴响应足以竞争，不能宣称混合训练优于固定训练这个类别。[本题][pi-notes]
+
+F1 的边际价格并非零：相对于仅 F2/M，增加360k训练和三个终点伙伴格的48k评价，共 **408k团队步**。原两臂版含共同初始化时是864k；原三臂版是1.272M。我认为这408k值得保留，因为它同时防止弱对照叙事并使固定响应专门化可读；不建议再把它扩成固定伙伴/比例搜索。
+
+**共同初始化要核对实际状态，不只核对整数92526001。** 三臂须有相同初始 actor、critic、相关可训练编码和 normalizer 状态，但各自拥有参数、优化器、buffer、循环状态及私有采样 RNG，不能共享可变对象。伙伴构造/恢复、M 的 lane 分配和评估不得改变 learner 的模型、动作或 sampler 随机流。共同初始化及共同外生世界能减少无关差别，不能消除训练波动，更不产生三个独立重复。不同伙伴导致的真实动作、奖励和访问分布分叉正是干预的一部分，不应强行配成同一轨迹。[B20 初始化、世界与更新循环][pi-b20]
+
+M 的8/8整回合分配合理：45次 rollout 中每源180k物理团队步，每源对应540k实际 learner 决策行；F1/F2各有1.08M learner 决策行，总曝光相同而 source-specific 曝光不同。这个替换/稀释是干预本身，不是需要给 M 补样本的“不公平”。不要为匹配每源经历把 M 加倍训练，也不要按来源分开归一化优势或调更新权重而不声明新干预。整 rollout 的8/8平衡不保证每个随机 minibatch 都8/8，更不保证两源梯度贡献相同。
+
+**partner3只是被这次新训练排除。** 它已被研究者观察、参与 B01 的所有组合，并影响当前选择；新世界不能洗掉这种曝光。因此可称“对训练排除、先前已观察的固定伙伴3的迁移”，不能称盲测、任意未见伙伴泛化或伙伴总体效果。三个源属于相近的普通训练程序，未覆盖不同算法、信息权利、能力或协作规则；本比较无需扩库才能成立，但外推必须止于实际范围。
+
+#### 4. 源码核对：半队限制必须覆盖整个学习通路，不是末端乘一个 mask
+
+题面的工程警告属实，而且有两个容易漏掉的具体路径。B20 collector 用六角色 learner 的 raw actions 与旧 log-probabilities 写 buffer；`RolloutBuffer.masks` 只有时间×环境维度，sampler 展平顺序为 chunk、env、agent，并默认遍历全部角色。LOCAL1 分支没有把该内部 ego 索引交给损失作为学习归属。单独替换环境执行动作会让未执行 learner 决策进入其 PPO 更新。[B20 collector][pi-b20] [buffer 与 sampler][pi-buffer]
+
+更重要的是，`update_discoverer_from_rollout` 在 minibatch 损失过滤之前以 `returns.reshape(-1)` 更新 ValueNorm；而 entropy 来自 `actor.evaluate_actions` 的返回值，随后直接用于 entropy loss，并没有沿后面的 `valid_indices` 再做角色筛选。**只屏蔽 policy/value 的终端损失不足以落实题面的“只学习0–2”。** 对某种状态无关高斯熵，重复角色可能数值上碰巧不改变均值；这不等于已经建立了完整行归属语义，也不能据此泛称当前熵梯度一定已受污染。这里报告的是可见代码路径及必须覆盖的检查，不是已执行新候选后发现的故障。[真实 update 热路径][pi-agent]
+
+我建议的简单实现边界是：物理环境和执行 runtime 保持 N6；方向私有 sampler **先按原始角色0–2筛选完整序列索引，再打乱、组32条有效 learner chunk 的 minibatch**。全局 state 仍是完整 N6 的133维表示，actor仍只取104维合法局部输入；所有动作仍有六行。GAE、return统计、优势归一化、ValueNorm、actor/critic损失和熵项只消费相同的有效 learner 样本。六角色存储加事前序列筛选，或一个明确映射原角色的三角色学习 buffer，都可以；后者不等于创建 N3 物理任务，但不能只改全局 `config.n_agents` 就假定可用。[B16 构造][pi-b16] [源配置][pi-source-config]
+
+这个边界保留已有普通学习机制，而不构造常驻框架。尤其应保留：learner自己的真实 raw Gaussian 采样及对应旧log-probability，环境执行其裁剪值；不能以伙伴动作回填 learner 样本，也不能把裁剪后动作密度偷偷换成原始动作密度。critic合法观察伙伴的物理后果，不意味着允许训练伙伴的动作概率；限制学习行也不意味着删除 critic 中伙伴的状态。保持原团队奖励缩放中的物理N=6，而非因只学三行就改成除以3；原生部署 J 仍按6×scalar_return/H还原，服务仍是完整六机团队人数/步。
+
+循环 replay 保持实际 lane、原角色和 chunk起始隐藏状态；原代码中 done[t]结束离开t的转移，进入t+1才重置，chunk首行使用存下的起始状态。来源在回合开始确定、全回合不变；每个冻结来源沿真实混合环境推进自己的状态，不拼接想象的同源历史。共同critic并不自动拥有伙伴隐状态或来源标签，不能把测试工具看到的内容传入actor。[buffer GAE 与 sampler][pi-buffer] [update 的入行 mask][pi-agent]
+
+必要的真实热路径检查应能证明：在物理样本固定时，改变未执行 learner 行的占位动作、log-probability或return，不会改变有效learner损失、梯度、ValueNorm计数与更新；冻结伙伴参数和normalizer前后不变；每条受训序列可追溯到实际执行learner角色；采集/回放的时序和动作法则一致。伙伴实际改变物理状态与奖励当然可以改变学习，不应把这种合法影响误当泄漏。检查还应走过真实一次collector→GAE→sampler→optimizer路径，而不是只有mock数组形状。它们是已提出半队干预的正确性工作，不是效果预筛选；成本另计，并沿现有独立工程review处理。[工程方法][pi-engineering]
+
+#### 5. 真实优化曝光与完整价格：四个 nominal minibatches 不是实际调用数
+
+源码直接显示，普通低层更新取 `sequence_batch_size=32` 和 `chunk_length=config.k=10`；`num_mini_batch=4`不是这条 sampler 的实际分批参数。若采用上面事前筛选后的32条有效 learner 序列、保留H500和15 epochs，按代码循环计算：
+$$
+50\text{ chunks/trajectory}\times16\text{ lanes}\times3\text{ learner roles}=2400\text{ sequences/epoch},
+$$
+$$
+2400/32=75\text{ minibatches/epoch},\qquad
+75\times15\times45=50{,}625.
+$$
+因此无跳过、无尾部丢弃时，每fit应有 **50,625次actor和50,625次critic optimizer调用**；三fit分别合计151,875次。不是每个optimizer总计135×15×4=8,100次。这是对已读源路径及建议筛选方式的预算推导，不是新实现已经测得的计数。实际需要由runner记录验证。[配置][pi-source-config] [sampler][pi-buffer] [update][pi-agent]
+
+若先把六角色分成batch、再在batch内丢掉三角色，通常会产生更多、有效样本较少的更新；它不是上述32条有效序列方案的同一优化曝光。即便三个臂都这么做，也应如实声明实际batch大小与调用次数，不能把它暗算为原报价。三行学习也不与历史B20六行学习完全等曝光：新每fit1.08M learner决策，原六行fit为2.16M。这里要求的是新三臂彼此匹配，不是假装恢复了历史六角色的全部学习量。
+
+| 工作 | 原三臂 | 建议修订后 |
+| --- | ---: | ---: |
+| 新训练fits／团队步 | 3／1,080,000 | 不变 |
+| 实际learner决策行／冻结伙伴决策行 | 3,240,000／3,240,000 | 不变 |
+| rollout更新阶段 | 135 | 不变 |
+| 共同初始化＋新终点评价格 | 3＋9 | 不变 |
+| 旧3/3复用参照格 | 0 | 1 |
+| 评价团队步／H500回合 | 192,000／384 | 208,000／416 |
+| 新增原生总团队步 | 1,272,000 | **1,288,000** |
+
+修订后实际环境执行动作行共7.728M；这仍不是模型推理量。learner若推理所有六行再截取，或M对全部lane都调用两个冻结来源，都会增加未执行的推理与内存工作；不能按实际动作行隐去它，也不能据B01的两runtime路径推断训练墙钟。B01的158.860747秒、2,650,016KiB进程峰值和29,395,670原始NPZ字节是那次固定评价的测量，不是本训练报价。[摘要计数与遥测][pi-summary]
+
+三份源已有1.08M历史训练团队步；本批新增1.08M不是免费，也不再把历史资产训练算一遍新fit。新实现、独立检查、运行推理/反向传播、完整输出保留、传输和阅读的墙钟/RSS/存储仍未知。已知循环数应现在写清，未知时间无需用另一个profiling研究补齐；在必要实现和检查发现成本显著升高时，DM应重新判断是否仍值得，而不是为完成三臂表无限扩大工程。
+
+#### 6. 完整表应该读出什么：专门化、总体质量和复用价值分开
+
+首先读每臂对每个伙伴的绝对J/服务，以及相对于**同一伙伴下共同初始化**的自身变化。相同初始化使臂间“学习增量之差”等于终点差，它不是额外一份独立证据。参数位移、真实更新和自身服务学习也不能代替M的增量。反之，某个固定臂真正更新却没有改善，是有效的有限结果，不能因为它弱就换seed或将其自动判为技术失败。
+
+T的消项是正确的，但应同时读两个具体固定响应优势：
+$$
+s_1=V_{F1,1}^J-V_{F2,1}^J,\qquad
+s_2=V_{F2,2}^J-V_{F1,2}^J,\qquad T=(s_1+s_2)/2.
+$$
+T>0并不保证$s_1,s_2$都正。只有一个很大的正差也能使T正；此时不能称“两种固定响应都各擅其长”。同样的四格算术可以用于服务，保留J/服务反号。T是最终策略表的交互描述，不是已经先于收益观测的因果中介；它不识别在线伙伴辨认。新T的训练臂轴与旧B01的来源轴也不同，不能把两个数的差称作修复了多少旧约定损失。
+
+对已有输出可再读取一个不用加评价的差中差：令$\Delta_p^Q=V_{M,p}^Q-V_{F2,p}^Q$，看
+$$
+H^Q=\Delta_3^Q-\frac{\Delta_1^Q+\Delta_2^Q}{2}.
+$$
+若M对三个伙伴都近似同样提高，较一般的响应质量改善仍是强解释；若伙伴3的增量更突出，才更符合“训练排除伙伴上的相对保留”这部分预测。H也不是机制识别或新的主门槛；H不正不抹掉真实的$\Delta_3>0$，更不能用H正而$\Delta_3<0$冒充主要收益。所有这些只是同一完整表的代数，不添加残差模型、反事实rollout或选择服务。
+
+建议按以下不同后果改变下一笔投入，而不是只给一个通过/失败标签：
+
+| 观察 | 投入与解释更新 |
+| --- | --- |
+| M相对F2的partner3双指标增量有任务意义，F1不足以吸收它，且M相对旧3/3也有用途；已见伙伴代价可接受 | 增强这个有限混合程序的学习及资产用途理由。下一问题可变为是否跨独立新训练实现保留；这不是已经确认，也不自动购买确认批次或新模块。 |
+| M−F2@3正，但M仍不如旧3/3，或差别对本任务过小 | 保留有限制度差，却不主张替换旧资产或为部署追加训练。基本研究价值仍可存在；在没有更值得付费的具体未知量时，结束当前资产配方的追加更合理。 |
+| F2超过旧3/3，而M没有额外用途；或F1已提供相当/更好的有限响应 | 保留普通固定伙伴学习的用途，降低混合训练的必要性。不能把较弱固定源的失败当作整个固定训练类别失败，也不在结果后更换主对照。 |
+| T显示固定响应专门化，但M−F2@3无有用增量或不利 | 说明存在有限专门化不等于这套50:50训练能克服它。结束原样混合配方的追加，不用T的阳性救回主要预测。 |
+| M−F2@3有用而T弱，或M在三伙伴上普遍提高 | 保留训练包的真实用途，削弱“解除固定响应专门化是必要中介”的叙事；不改称已学会伙伴推断或约定。 |
+| 仅已见伙伴改善、J与服务冲突，或均值由少数大世界支配 | 如实报告适用范围、原生目标—服务取舍和全部损失。不能用见过条件或另一指标救回partner3的联合预测，不按结果重加权、换伙伴或补世界。 |
+| 差异小/不稳定或区间宽，且没有清楚的实际用途 | 降低这套资产路线的新增投入理由，可以停止；不能宣布等价或一般协调无效。更多样本只有在其精度确实改变一个值得购买的选择时才有价值，不因“不显著”自动追加。 |
+
+“任务意义”在这里用原生J与人数/步以及成本解释，不临时制造一条显著性、MEI或seed标准差门槛。若DM有实际可接受的服务损失或继续投资尺度，应在读结果前说明；没有这样的尺度就保留完整数值和条件判断，不伪造精确阈值。覆盖、质量、高度罚、资格和未服务可解释算术取舍，不能分离几何、推断或优化机制；S1高度罚也不是S7电池/返航安全测量。[B01完整分量与限制][pi-result]
+
+#### 7. 不确定性：一组匹配训练实现，而不是“3×3×32”的训练n
+
+保留条件配对世界区间是有用的。修订后每个世界有13格×J/服务，即26维结果块；原设计是24维。对世界索引整块重采样，所有主要差、T、H、自身变化和旧参照差都用同一索引，分析随机种子与draw数在结果前固定。不能分别bootstrap各格、各指标或将三个伙伴当作独立训练重复。[统计方法][pi-method]
+
+区间所需要的假设是这32个世界代表所声明生成器的近似独立/可交换抽样；固定面板均值本身是直接观测。区间条件于这批具体已训练权重、旧伙伴库、角色划分、确定性部署和选择历史。它不覆盖下一次初始化、优化或训练伙伴抽样的变化，也不消除source3已被观察的事实。逐格点态区间不是整张表的同时置信区域；多个同向区间不能给这一个训练实现投成多次复现。
+
+共同seed、45次更新、720个训练回合/臂、384或416个评价回合、bootstrap重复都不增加独立训练n。这里是每臂一个新训练实例的匹配探索。若将来主张训练程序通常有益，需另行设计真实独立训练重复并明确伙伴总体；那项未来研究既不由本答复预购，也不能拿B20原来的独立训练数替代。[宪法科学最低要求][pi-constitution]
+
+#### 8. 推荐的下一行动、来源边界与停止范围
+
+**下一行动是一个直接学习研究的最小落实，而不是再做效果诊断：**在现有NOTES中选择是否采纳上述单格复用参照；固定三臂/seed/世界/完整终点，明确有效learner序列与ValueNorm归属、32序列batch及实际计数合同；实现方向私有半队通路，进行必要的真实热路径检查与独立工程review。若成本仍与这个有限问题相称，再由DM按现有授权和节点准入执行一次完整批次。没有附加Root/owner批准、阳性toy、对称性证明、残差预测器、全划分搜索或逐步反事实门槛。[工程方法][pi-engineering] [宪法][pi-constitution]
+
+我的选择是修订后继续一次，而不是目前关闭全部S1伙伴资产研究。范围只到这个有固定库、固定角色、一个训练实现/臂的比较；如果实现价格不再相称，或完整结果没有值得继续的用途/区别，结束当前资产路线是有效结论，不意味着整个协调问题无效，也不要求另造一个后继保持忙碌。FSD暂停、G33冻结和其他DM的所有权均不改变。
+
+**实际读取与缺口。** 本答复以`fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4`为问题/代码来源，完整读取了本问、前次Answer与B01完成段，并读取B01的config、launch manifest及summary中的身份、计数、遥测和相关统计；没有把summary的正文摘录冒充对所有NPZ的重新数值审计。共享§8和本方向计划使用指定main`636db7ec5574081a7eade10446075eeb7f1faeaa`，不是移动分支的新科学输入。宪法及scientific-tools在本次指定版本的blob分别仍为`f776de2a7150b87e55a2e71a2fb9ffde98c7fc09`和`741287f56530c5db34b9dc063ed97922a76020b6`，与本会话前次完整读取相同；本次核对版本后复用其全文，工程相关章节另行重读。
+
+工程结论来自本次实际读取的B20 `_training_worlds`、collector、`_audited_update`和训练循环，B16配置/构造，RolloutBuffer的GAE/序列sampler，以及普通低层update，而非只转述Scout。未声称已读全部34依赖、验证新半队实现或执行测试。远端checkpoint和原始NPZ仍未由本次会话访问或加载；其保全、恢复和独立算术审计来自已发表记录。容器直接取得GitHub原始字节的辅助路径未成功，GitHub连接器读取可用；没有用这个失败推断仓库不可读。新墙钟、内存、完整推理量、存储及工程工作量仍是明确缺口。没有新训练、环境评价或科学运行；本轮只作来源阅读、代数/计数推导与建议。没有以外部文献的新颖性、Other-Play迁移或一般PPO性能定理支撑这项投资判断。
+
+[pi-notes]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/docs/research/candidates/controller_composition/NOTES.md#pro-question-2026-09-25-partner-training-after-complete-matrix
+[pi-result]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/docs/research/candidates/controller_composition/NOTES.md#2026-09-25--b01-complete-no-uniform-matching-advantage-heterogeneous-worlds
+[pi-prior-answer]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/docs/research/candidates/controller_composition/NOTES.md#answer
+[pi-summary]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/runs/controller_composition/b01_fixed_matrix_20260925/summary.json
+[pi-config]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/runs/controller_composition/b01_fixed_matrix_20260925/config.json
+[pi-manifest]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/runs/controller_composition/b01_fixed_matrix_20260925/launch-manifest.json
+[pi-background]: https://github.com/CartmanFatass/My-paper-code/blob/636db7ec5574081a7eade10446075eeb7f1faeaa/docs/research/RESEARCH.md#structural-research-background
+[pi-constitution]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/docs/project/OPERATING_CONSTITUTION.md
+[pi-method]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/.agents/skills/hmasd-scientific-tools/SKILL.md
+[pi-engineering]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/.agents/skills/hmasd-research-engineering/SKILL.md
+[pi-b20]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/experiments/candidates/agent_count_generalization/ordered_roster_confirmation_b20/runner.py
+[pi-b16]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/experiments/candidates/agent_count_generalization/local_ordinary_b16/runner.py#L119-L231
+[pi-buffer]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/hmasd/utils.py
+[pi-agent]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/hmasd/agent.py#L6280-L6580
+[pi-source-config]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101/F/config.json
