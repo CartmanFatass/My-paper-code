@@ -19236,3 +19236,21 @@ read all native arrays/counts/checkpoints, verify a durable collection copy and 
 bounded complete or incomplete reading. An artifact-only independent reader is prepared under
 this task's ignored temp/directions/agent_count_generalization/; it imports no project environment,
 learner or candidate reducer and has not read or generated scientific data.
+
+## 2026-09-24 — B19 accepted on local_linux with this task's native observation
+
+The new B19 invocation was admitted at `2026-09-25T01:37:51.019926Z` (18:37:51 PDT), from
+published exact input `bfb4fd356a01024ef04c967c4768263f114e5a17`, on the prospectively selected
+local_linux node. Its [native manifest](../../../../runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/launch-manifest.json)
+binds the immutable source snapshot, command, node, supervisor/runner identities, stable operation
+reference and output root; the [fresh admission preflight](../../../../runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/admission-preflight.json)
+is the actual release check. No old B18 handle, fit or checkpoint was reused. The F→M batch
+is running under the fixed contract; admission is not a scientific result or proof of completion.
+
+This task's private request `temp/directions/agent_count_generalization/b19-wait-request.json`
+observes only that accepted operation via `hmasd_launch status`, every30s with20s probe timeout
+and a1500s observation window. Arm `tools/hmasd_wait.py` in this task UUID's own default state;
+a checkpoint rearms the same handle, never the worker. No Root/old-task observer is adopted.
+On return, reconcile native exit and last completed artifact boundaries before interpreting
+counts; an abrupt exit can leave the batch aggregate stale relative to arm records. No retry,
+resume-jobs, endpoint substitution, extra panel or scientific extension is authorized by a wake.
