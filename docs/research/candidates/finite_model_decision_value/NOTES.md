@@ -607,3 +607,33 @@ native identity will be bound by its launch manifest; no result-bearing operatio
 yet been accepted. The unchanged counts are above; no adapted wall-time estimate is
 invented from the old C07 or test fixture. CPU-only single-process evaluation is suitable
 for this NumPy host; threads remain1, and actual memory admission occurs on wsl_4070.
+
+## 2026-09-25 — B01 native admission and observation
+
+The fixed six-arm B01 is now admitted. The authoritative
+[launch manifest](../../../../runs/finite_model_decision_value/b01_finite_knowledge_s925731/launch-manifest.json)
+binds its exact published source, native operation, process identities and output paths;
+the copied [actual-node preflight](../../../../runs/finite_model_decision_value/b01_finite_knowledge_s925731/admission-preflight.json)
+passed the configured memory floor. The
+[initial native status](../../../../runs/finite_model_decision_value/b01_finite_knowledge_s925731/native-status.initial.json)
+reports accepted admission, consistent records and both native processes running. The
+outer supervisor's successful exit only records the launch command; it is not the
+scientific child's completion or acceptance. No endpoint result has been read.
+
+Before admission the same12 focused checks passed on the configured executing-node
+interpreter in0.87s, and its source checkout was clean. Two source-preparation commands
+initially stalled because the non-login SSH environment omitted the configured network
+proxy: the explicit fetch, then the partial clone's on-demand object fetch during
+worktree creation. Only those verified preparation process trees were terminated.
+Repeating preparation through the configured `zsh -lic` environment completed the
+checkout and checks; no scientific worker or accepted result operation was restarted.
+Git also reported pre-existing historical object/commit-graph maintenance warnings;
+we did not alter shared Git configuration, canonical owned files or old worktrees.
+The required current source was materialized and the native admission succeeded.
+
+Observe the accepted operation with the task-local `tools/hmasd_wait.py` launch probe.
+Retain the fixed256 contexts, six arms, calibration doses, seeds, endpoints and declared
+cost bound. On return, reconcile the same operation and read complete output, costs,
+adverse evidence and raw-artifact hashes before any scientific acceptance. A terminal
+failure is preserved and requires a separate diagnosis/decision; observation never
+restarts the worker or creates a replacement run.
