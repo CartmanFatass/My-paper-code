@@ -1625,3 +1625,24 @@ tag, world/model seeds, exposure and expected lead stay fixed; only the outer co
 label distinguishes this post-refresh submission and preserves the first log. This
 does not replace a terminal accepted operation or bypass its native claim. Any subsequent
 accepted/uncertain handle must be reconciled as itself without another worker launch.
+
+## 2026-09-25 — B02 admitted and observing the original operation
+
+After fetching published control head `fc3778b9ac3bb46add596f62bd6327106cfc21dc`,
+the identical request was accepted on wsl_4070. The
+[native manifest](../../../../runs/finite_model_decision_value/b02_budget_interaction_s925831/launch-manifest.json)
+binds source `5b5d73100ae8554b8005758055b181d03fb6603e`, the native claim,
+snapshot and stable output root. The copied
+[fresh memory preflight](../../../../runs/finite_model_decision_value/b02_budget_interaction_s925831/admission-preflight.json)
+passed with14,967,615,488 available bytes versus the4GiB floor. The
+[initial native status](../../../../runs/finite_model_decision_value/b02_budget_interaction_s925831/native-status.initial.json)
+reports accepted admission, consistent records and running scientific/supervisor
+identities; summary and exit witness were absent at that observation. This is
+technical admission, with no B02 endpoint reading or scientific acceptance yet.
+
+The task-local wait controller observes this exact native claim with the new B02
+launch job; prior Pro/B01 terminal jobs remain consumed. At completion or checkpoint,
+drain and reconcile this same handle, preserving failure or missing evidence. Collect
+and verify all required raw/native outputs, full paired outcomes, initial-root diagnostics
+and actual cost before the scientific reading. No restart, replacement seed, changed
+budget, extra root census or score-based continuation is authorized by an observation.
