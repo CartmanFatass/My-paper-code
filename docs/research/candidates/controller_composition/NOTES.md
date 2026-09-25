@@ -640,3 +640,23 @@ is0 fits/updates,288 world episodes,144,000 team transitions,864,000 executed UA
 1,728,000 inferred policy action rows. Actual wall/RSS and any failed work will be read from
 the accepted operation. The native kernel still decides current pause/lead, exact publication,
 duplicate identity and fresh actual-node memory admission. No result has yet been launched.
+
+### B01 accepted operation and native observation
+
+The one invocation was natively accepted at2026-09-25T16:31:55Z. Its durable
+[launch manifest](../../../../runs/controller_composition/b01_fixed_matrix_20260925/launch-manifest.json)
+is the source of truth for exact source/command, node, output, native process identities and
+operation reference. The associated
+[fresh preflight](../../../../runs/controller_composition/b01_fixed_matrix_20260925/admission-preflight.json)
+passed with15,546,216,448 effective available bytes against the4GiB floor. The first native
+status read reported accepted/running and consistent records; runner-written progress was
+cell[1,1], with no completed cells. The outer agent-task command's exit0 only means the
+launcher returned; the actual scientific child remained running.
+
+The manifest, launch status, preflight and fixed config were copied locally and their byte
+counts/SHA256 verified against the node. Observation is registered against the manifest's
+same operation reference through read-only SSH status, interval30s/window1500s, in this task's
+native hmasd-wait state. Native observer PID188685 is observation only. A future checkpoint
+rearms that operation; terminal evidence will be fully collected/read without automatic retry.
+This is routine batch progress, so the accepted B01 main standing is not republished solely
+for launch. No scientific result is claimed.
