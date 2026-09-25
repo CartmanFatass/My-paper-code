@@ -20210,3 +20210,19 @@ and fixed reading/stopping rules remain those in the claim. The first invocation
 block 1 / seed 1016101. Complete valid cells permit the next predeclared cell regardless
 of their scores; a missing/invalid arm stops the remaining launches without automatic
 retry. No result-bearing B20 operation has been accepted at this preparation boundary.
+
+
+### B20 block 1 accepted; observation and complete reading pending
+
+The first fixed pair was accepted by the native kernel on 2026-09-24 PDT. Its
+[launch manifest](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101/launch-manifest.json)
+is the authoritative command, input, process and operation reference; its
+[fresh actual-node preflight](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101/admission-preflight.json)
+passed. The same-operation status read found matching live supervisor/runner identities,
+consistent records and no terminal witness. A present in-progress summary is not a result.
+
+Detached observation uses this manifest's existing operation reference. On a checkpoint,
+rearm that reference without starting another worker. On terminal evidence, reconcile the
+native exit and read the complete promised artifacts before deciding technical validity
+and proceeding to the next fixed block. Blocks 2 and 3 are not launched concurrently and
+retain the frozen common input above. No confirmation conclusion exists yet.
