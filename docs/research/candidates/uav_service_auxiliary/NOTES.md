@@ -10065,3 +10065,31 @@ No repository-wide repair, reset or cleanup of others' work was attempted. Prepa
 started zero result-bearing fits. Proceed with the fixed new pair after this accepted input is
 published and fresh kernel memory/control admission; no further Pro/Root/owner approval is
 needed for the already adopted comparison.
+
+## 2026-09-24 — B09 fixed new pair admitted; common initial F evaluation underway
+
+The new fixed batch received actual kernel admission from published input
+`e5e53534c2c0c4a059cfdfa5f3aff4cbc2166f46`. The unchanged
+[launch manifest](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/launch-manifest.json),
+[fresh preflight](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/admission-preflight.json),
+[admission status](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/launch-status.json) and
+[runner configuration](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/config.json)
+are copied here. The manifest owns command, executing source/output paths, native identities,
+node, source and stable operation reference. The actual node had 14,939,668,480 effective
+available bytes against the 4 GiB floor. Config readback confirms seed 925031, two lanes,
+30 phases/H3000, 32 primary worlds, no development panel and the same F/action-path contract.
+All four reviewed B09 executable digests on the node match the accepted files.
+
+The assigning task's own observer is armed at generation 1. Its first probe reports accepted
+admission, consistent records, both native process identities running, and no exit witness.
+The first arm registration was refused before creating a job because the request used a
+nonabsolute `ssh` executable; replacing only that probe argv with `/usr/bin/ssh` registered
+observation of the same accepted operation. No scientific Send/launch was repeated, no old
+observer state adopted, and no `--resume-jobs` was used. Private request/state stay task-local.
+
+A compact progress read shows the real common-initial F panel in progress: 5,700 evaluation
+transitions, 2 episodes attempted and 1 completed; zero training fits/transitions started at
+that observation. The fixed N-then-A sequence follows this panel independently of scores.
+These are execution facts, not an A-minus-N finding. Same-handle checkpoints/terminal notices
+return to this task for collection, complete reading and its own result publication. B08's
+failed attempt and cost remain separate. No automatic repeat or extension is selected.
