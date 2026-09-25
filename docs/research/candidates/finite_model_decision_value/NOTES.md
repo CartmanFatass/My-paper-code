@@ -564,3 +564,46 @@ return any semantic ambiguity, unsupported required measurement or contradiction
 Do not change scientific arms, prior, data doses, seeds or budgets during implementation.
 Actual inputs will be committed/pushed before fresh wsl_4070 admission. Tests and review
 costs are recorded separately; no scientific performance or model-fit result exists yet.
+
+## 2026-09-25 — B01 code acceptance and source publication
+
+Accepted the bounded Implementer's host/filter/planner after DM source review and an
+independent Reviewer pass. The reviewer independently compared a full H48 fixture with
+the retained C01 source: physical/cache/quota arrays, rewards, metrics and endpoint rows
+matched. The host diff is limited to the declared probability parameterization and
+provenance text; fixed receiver/channel semantics remain. Joint normalization, lawful
+information boundaries, conditional root sampling, NEAR endpoint, AF continuation and
+paired statistics had no material finding. The executable production entry requires
+native admission before output/science and refuses substituted seeds or SHA.
+
+One P2 recovery finding was repaired before any result execution. An exception after
+a real planner call originally kept the trajectory but lost the current batch's completed
+model work counters/times. The failure path now retains current-batch `.cost.json`,
+observed/completed ticks, filtering/model work and timings, and the FAILED summary hashes
+the partial raw artifacts. An injected-after-planner test verifies this actual path.
+The persistent-parameter test was strengthened to intercept simulated advances across
+both robots, all future ticks and both branches, using the independently specified
+theta0/1 conditional law rather than the planner's returned parameter as its oracle.
+
+All12 focused tests passed in1.14s on configured local scientific Python3.10.20/
+NumPy1.26.3. This includes one complete six-arm correctness fixture with2 contexts,
+H48/P2, separate seeds441731/442973 and mocked admission checks; it is not a B01 result
+panel or score-selection exposure. The reviewer independently ran all prior11 tests
+(1.11s), then the3 affected follow-up tests (1.05s) and closed P2 with no remaining
+material finding. Abrupt termination and inability to write any metadata remain outside
+the tested exception-recovery path; native exit/partial evidence will retain that scope.
+
+The plan is already independently published to main as
+`adf68344620a2439276bdf3061b2e0e0fc94f48d`, preserving concurrent controller-composition
+and S7 changes; no archive or App notification was made. Its six-arm scientific exposure
+is unchanged. Source publication below precedes actual node preparation/admission.
+Remote wsl_4070 is reachable, with configured Python3.10.21 and NumPy1.26.3, and its
+canonical direction/lead is present. The node's canonical checkout has unrelated owned
+dirty/untracked work; we will not edit or clean it. A separate exact-source worktree and
+kernel snapshot will hold this direction, with outputs durably retained there.
+
+Result tag selected before execution: `b01_finite_knowledge_s925731`. Run source and
+native identity will be bound by its launch manifest; no result-bearing operation has
+yet been accepted. The unchanged counts are above; no adapted wall-time estimate is
+invented from the old C07 or test fixture. CPU-only single-process evaluation is suitable
+for this NumPy host; threads remain1, and actual memory admission occurs on wsl_4070.
