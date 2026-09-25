@@ -10119,3 +10119,19 @@ complete and phase 7 collection had finished; all five learner groups moved in t
 update. This distinction prevents counting a collected phase as an already finished update.
 The original initial-plus-N-then-A batch continues, stderr is empty, and A has not started.
 No endpoint contrast is available. Rearm the same operation; no scientific scope or index change.
+
+### B09 third observation checkpoint — 2026-09-24
+
+Generation 3 returned only CHECKPOINT `2ac9e4e65b0f34e262b0977d`: both original native
+identities remain running, records are consistent, observation errors are zero and no exit
+witness exists. The boundary summary records N at 96,000 transitions, 16 completed updates
+and 32 native episodes; the subsequent journal read reaches 97,800 transitions during phase
+17 collection. The 16th update moved all five learner groups. Initial evaluation remains
+32/32 worlds and 96,000 transitions; neither endpoint evaluation nor A has started. Stderr
+is empty and the batch summary remains INCOMPLETE without a recorded failure.
+
+Fresh main controls still record owner pause lifted and this task as the same direction lead.
+The newer constitution clarification of question continuity and the three-track resource
+ceiling changes neither this accepted pair nor its frozen inputs. Continue observation of
+the same operation and rearm with the returned generation/wake/event; no new execution or
+scientific conclusion is selected from this checkpoint.
