@@ -692,7 +692,7 @@ Nash均衡或学习方法优越性。共享参数策略可以有真实合作，�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | exploring | Codex DM (independent session) | **新独立Astra Max DM已实际接续。** 从三个完整B20-F普通终点出发，首项候选为固定角色组的3×3完整组合评价，0新fit/144k团队步；定向科学审查与实际前瞻由该DM接受，尚未有结果launch。有限匹配效应不等于纯约定因果、层级必要性或训练方法优越。[本轮计划](#current-research-plan)；[实际任务](#session-routing)。 |
+| `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | exploring | Codex DM (independent session) | **已完整读取定向Pro并接受B01，实施与独立审查中。** 固定全部三个B20-F45、角色0–2/3–5、S1 N6/c10 LOCAL1，九格×32新世界×H500＝144k团队步，0新fit；尚无结果launch。联合读取J/真实服务、同源匹配差、完整去行列残差、每格相对两来源同源参照及不利世界。有限非加性、实际混编用途与训练可修复性分开，世界bootstrap不增加训练n；不预购后继训练。[完整建议、决定与L0](candidates/controller_composition/NOTES.md#2026-09-25--complete-pro-reading-scientific-acceptance-and-l0)。[任务路由](#session-routing)。 |
 | `finite_model_decision_value` | 同一有限合法数据和计算下，环境参数与隐状态的不确定性何时改变有用的动作排序与完整团队后果？ | exploring | Codex DM (independent session) | **新独立Astra Max DM已实际接续。** 保留AF与普通plug-in，研究有明确知识合同的不确定性处理；先界定物理律/过滤器/固定接收器中的常数与完整数据/分支成本，再前瞻选择有限比较。非线性提供猜想而非收益保证；无证明、正toy或单步诊断前置要求。当前0新结果操作，未虚构fit总价。[本轮计划](#current-research-plan)；[实际任务](#session-routing)。 |
 | `spatial_demand_generalization` | 有限空间任务训练覆盖如何影响普通多智能体控制在留出布局上的用途与专门化代价？ | archived | Codex DM (independent session) | **C01完整，当前空间混合路线新增投入结束；保留U。** hotspot M−U为J −.025632493、服务−1.191150人/步，t95为[−.067046834,+.015781848]/[−3.827524,+1.445224]；联合正均值未建立，不宣称等价或确定有害。十fit各自三个家族的J/服务均值均改善，uniform/cluster额外均值均不利，A2/C01第二配对正例与局部损失保留。10 fits/4.32M团队步完整保全。完整Pro答复已核验保存并逐项判断；旧/新面板回放有有限解释价值，但当前不值得全部成本，四中心与泛化调参也未选。无第六块、活动操作、开放Pro或已选后继；不外推为所有覆盖学习无用。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/b35996ba188d31cc01b3a422a47c24b1fde6bce3/docs/research/candidates/spatial_demand_generalization/NOTES.md#2026-09-25--c01-complete-joint-positive-mean-not-established)；[完整建议与DM决定](https://github.com/CartmanFatass/My-paper-code/blob/287d16776ca93d5ea0bfa56e15adfedb05501097/docs/research/candidates/spatial_demand_generalization/NOTES.md#2026-09-25--decline-panel-replay-and-end-current-spatial-mixing-investment)。[任务路由](#session-routing)。 |
 | `uav_service_auxiliary` | 在 S7 能源约束下，怎样把能量恢复与控制转成完整服务及返航风险的净收益？ | archived | Codex DM (independent session) | **当前S7修补投入结束，保留O+F。** 完整Pro已核验保存，DM不购买进站模型或常数提前比较；几何相关估算差异真实，但未测试闭环收益仍未知。B11的恢复增加、完整J−3.347054及等待/电池代价和全部有利世界保留；不否定普通反馈既有用途或更广服务—风险问题。0追加fit/评价，无活动操作、开放Pro或已选后继。[完整B11](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--b11-complete-guarded-continuity-changes-recovery-but-adds-no-mean-complete-utility)；[完整建议与DM决定](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--complete-approach-advice-read-end-current-s7-repair-investment-and-retain-o-plus-f)。[任务路由](#session-routing)。 |
@@ -765,7 +765,7 @@ C07已知模型NEAR与VSP拟合机会规则提供普通决策方法的正面资�
 
 | 问题族 | 要区分的判断与普通参照 | 当前安排与完整成本边界 |
 | --- | --- | --- |
-| **联合决策与伙伴组成** | 成员策略各自质量能否解释团队收益，还是同源/混合组合产生额外非可加作用？保持任务、人数、接口不变，先用完整部署矩阵定义有限问题；不先假定技能或约定机制 | **新独立Astra Max DM已实际主持。** 首选候选是复用三个B20-F终点的3×3组合，0新fit、144k团队评价步；实际比较经该DM的定向Pro审查与前瞻选择。旧D1的4population fits/8学习器/3.648M步不是默认采购。 |
+| **联合决策与伙伴组成** | 成员策略各自质量能否解释团队收益，还是同源/混合组合产生额外非可加作用？保持任务、人数、接口不变，先用完整部署矩阵定义有限问题；不先假定技能或约定机制 | **独立DM已完整读取定向Pro并接受B01。** 复用三个B20-F45终点的固定3×3组合，0新fit、144k团队评价步，当前恢复实现/审查，尚无结果launch。读取完整交互和具体混编用途，区分其与训练可修复性；旧D1的4population fits/8学习器/3.648M步未采购。 |
 | **决策相关信息与模型知识** | 同样合法数据与规划资源下，参数/状态不确定性何时改变有用动作？便宜AF、普通plug-in与不确定性处理各自代表什么知识条件？ | **A2完成关闭后，已另派独立Astra Max DM主持。** 不只隐藏再估回.75；物理过滤、前向模型、缓存投影和固定接收器中的常数须分清。小模型fit、校准、完整评价和分支均需计量，实际合同与价格由DM具体化，当前无新结果launch。可以直接做有限学习实验，不以伙伴矩阵阳性为前提。 |
 | **有限学习与动态资源条件** | 给定合法信息，数据覆盖/表示/反馈规则怎样影响完整任务用途及代价？资源分配中的共同收益是否被局部代理误代？ | **S7由原DM完成投入判断，当前修补路线结束。** A2已读新背景、完成完整建议采纳并关闭当前空间混合路线，其无活动操作，保留U及全部正反证据。S7已核验并保全完整Pro答复，保留O+F，不购买接近模型比较；更广服务—风险问题仍开放，当前无新实验、开放Pro或已选后继。[DM决定](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--complete-approach-advice-read-end-current-s7-repair-investment-and-retain-o-plus-f)。 |
 
@@ -773,10 +773,12 @@ S7最新关闭已在本轮合入；当前实际推进的是两名新DM，第三�
 继续属于完整研究计划，但没有自动排队的实验。新的独立比较可因其自身解释价值和完整成本直接补入，
 无需等待前两项阳性、完成或证明；当前不以资源空闲为理由购买尚未选定的尾部目标或S7修补。
 
-### 新DM的首项候选：固定普通控制器的完整组合价值
+### 首项B01：固定普通控制器的完整组合价值
 
 选择有限问题：在固定S1、N6/c10、LOCAL1合法观测与原生目标下，来自同一训练实现的成员组合，是否比
 混合来源的成员组合更有完整用途？它研究普通控制器组合，不恢复人数混合配方，不把结果称作未见N泛化。
+
+DM已完整读取定向Pro并接受固定九格B01；[答复、决定与工程范围](candidates/controller_composition/NOTES.md#2026-09-25--complete-pro-reading-scientific-acceptance-and-l0)记录源恢复及统计边界。32新世界固定为92525000–92525031，采用原确定性部署法则。三对匹配差不能穷尽所有交互；同批九格同时保留去行列残差及每世界残差，并将每个混合格与两个来源的同源队伍并列。条件世界区间不作训练方法推断；当前尚无新的科学结果。
 
 按来源角色事前选择B20全部三个F45终点，种子1016101、1017101、1018101；不用M，不挑最佳训练块或早期
 checkpoint。Root已从独立保留目录核对三个文件的实际字节和SHA256，均与已发布F/summary.json一致；
@@ -785,7 +787,7 @@ checkpoint。Root已从独立保留目录核对三个文件的实际字节和SHA
 资产位置为`/home/fires/hmasd-retained-runs/agent_count_generalization/`下三个B20块的
 `F/raw/checkpoint_45.pt`，历史训练成本为三个360k fits，复用不会变成零历史成本。
 
-首项候选固定角色组0–2和3–5：组1使用策略i，组2使用策略j，i,j遍历三个固定终点，完整评价全部九格。
+首项B01固定角色组0–2和3–5：组1使用策略i，组2使用策略j，i,j遍历三个固定终点，完整评价全部九格。
 同源三格与混合六格均读取，预先固定32个新世界和H500，统一合法输入、初始化/重置、评价动作方式、模型
 和normalizer各自归属。总计288回合、144,000团队步/864,000UAV行动行、0新fit/optimizer更新。
 这是完整闭环评价，不做每一步四分支反事实。绝对J和服务、全部组合、世界损失与方向相反的案例都保留。
