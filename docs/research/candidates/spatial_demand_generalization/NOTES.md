@@ -1628,3 +1628,199 @@ are unchanged; published and canonical-node owner pauses remain lifted. Consumed
 checkpoint and rearmed the same `spatial-c01-b4-s263000105` handle to generation **28**,
 window 1,500 seconds. Four of five pairs have complete scientific readings; no new launch,
 worker restart, Pro resend, scientific verdict or main/index update follows this checkpoint.
+
+## 2026-09-25 — C01 block 4 complete: final paired evidence retained
+
+The fifth fixed pair, model seed 263000105 at input
+`9e44adde3d54fcd0363a2ebdbc1468494141c27b`, exited normally with code 0 at
+**2026-09-25T14:31:23.256248Z**. Generation-28 READY event `cbc3f6d44d70a497a59b3884`, wake
+`89a07e01-3a64-40d9-bd2e-f2fbf0055bde`, retained the original accepted native identities,
+their absent post-exit state, a valid ordinary exit witness and consistent records. The
+[manifest and operation reference](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b4_s263000105/launch-manifest.json)
+remain the launch authority. This pair is scientifically accepted after the full reading below.
+
+### Integrity, retention and actual cost
+
+All **136 original native files / 1,088,016,909 bytes** were copied and individually checked
+against the executing node, then independently copied and rehashed at
+`/home/fires/hmasd-artifacts/spatial_demand_generalization/s1_spatial_coverage_c01_b4_s263000105`.
+Canonical inventory SHA256 is `28c08574b1580f0c9bea2dadc19e9e839c17ce9470065ba5e911a06822ed3ca7`;
+the original summary SHA256 is `64993678657301c8cba111197087979e4b004a94adfbd99027178294efbd909e`.
+The unchanged read-only reader checked all 23 source digests, 144,000 evaluation transitions,
+90 training rows/reset records, 88 reset boundaries, four checkpoints, metric reconstruction
+and evaluation isolation. Maximum panel-J roundoff was 1.4989e-15; both native logs were empty.
+Within-pair initialization matches. Actual physical initial evaluation scenes match all four
+earlier blocks; initial model tensors and post-initialization RNG differ from each earlier
+block. Source bytes remain those of the accepted input.
+
+Durable reports in `/home/fires/hmasd-artifacts/spatial_demand_generalization/c01-postrun-reading/`
+are `block4-verification.json` (SHA256
+`f8803b5f8c5f7e1fd11edbbc0697491fd4402a884233e566ab8b223359642ec5`),
+`block4-collection.json` (`af125d2b3dde5f13a9eccbfc02dbd1fb9d349e4f7dd59510d3d383d1f75f61c5`) and
+`blocks0-4-integrity.json` (`23d076d25772a87fd6152e0d1c0d54c0e467aaab35069bea4d2ae4b326474858`).
+Raw files remain outside Git; compact original JSON and this reading are published unchanged.
+
+Actual cost is two fits, 720,000 training plus 144,000 evaluation team steps, 5,184,000 UAV
+action rows, 90 updates, nine panels and 288 evaluation episodes. Each arm has 101,250 actor
+and 101,250 critic optimizer calls; evaluation storage and optimization are zero. Scientific
+wall was 4,302.471504 seconds (71.7079 minutes), with U/M arm wall 2,184.306805/2,117.931727
+seconds; admission to exit was 4,527.375832 seconds (75.4563 minutes). Process user/system
+CPU was 17,375.032377/36.360711 seconds, and peak RSS was 1,840,372 KiB within RUSAGE_SELF.
+Other processes and peak scratch remain unmeasured. After verified retention and full reading,
+snapshot-GC preview and apply reclaimed only `0640dc084682484ab7d1833e7e20f9d3`, preserving
+native claim, outputs and author checkout. Consuming READY advanced observation to generation
+**29**; all five C01 native operations are complete, with no worker or Pro request restarted.
+
+### Native results and adverse worlds
+
+Values are native J / served users per step over all 32 fixed worlds per family.
+
+| Family | Common initial | U45 | M45 | M45 minus U45 | Adverse J or service worlds |
+| --- | --- | --- | --- | --- | --- |
+| hotspot, primary | .197685995 / 14.752063 | .402396680 / 25.558625 | .338386841 / 21.360875 | **-.064009839 / -4.197750** | 27/32 |
+| uniform | .207615475 / 15.926688 | .532502780 / 34.596312 | .495952357 / 32.652000 | -.036550424 / -1.944312 | 26/32 |
+| cluster | .195827047 / 15.202625 | .502064859 / 32.483313 | .413800835 / 26.852250 | -.088264024 / -5.631063 | 28/32 |
+
+Both arms improve their mean J and service in every family. U improves both in every world.
+M's own-service exceptions are uniform 265000026 (-1.340 users/step), cluster 265010027
+(-4.038), hotspot 265020009 (-1.602) and 265020012 (-3.042); cluster 265010027 also has its
+only own-J loss, -.023944508. These are preserved beside positive own-learning means.
+Hotspot own means are U +.204710685 J / +10.806562 service and M +.140700846 / +6.608812.
+
+Hotspot M-minus-U components are coverage -.083955000, quality -.010414995, height penalty
++.002116841, eligibility -3.686312 and eligible-but-unserved +.511438; height is +2.116841.
+This is a descriptive decomposition, not causal attribution or measured battery energy.
+J is lower for M in 27 hotspot, 26 uniform and 28 cluster worlds; service is lower in 25,
+24 and 28 respectively. The largest paired J/service losses coincide at hotspot 265020011
+(-.209699959 / -14.314), uniform 265000026 (-.204191854 / -13.492) and cluster 265010027
+(-.303702695 / -20.008). All 96 differences, own-learning cases and components remain in the
+[original summary](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b4_s263000105/summary.json).
+No block, world or endpoint is replaced or excluded.
+
+## 2026-09-25 — C01 complete: joint positive mean not established
+
+**Fixed result.** All five fresh paired blocks and all ten fits are complete and accepted.
+Under the prewritten df4, marginal two-sided t95 rule, the joint positive hotspot J/service
+claim is **not established**. Both point estimates are adverse, while both intervals span
+zero: this is an imprecise conditional mean result with adverse observations, not equivalence,
+a confirmed negative population effect or technical incompleteness. The exact five-block
+confirmation ends here; there is no sixth block, substitute seed, chosen endpoint or retry.
+
+The frozen `aggregate_five_blocks` from input `9e44adde3d54fcd0363a2ebdbc1468494141c27b`
+read all five accepted original summaries. Its code hash is
+`c9855ae98052ff4ffd5300399512ffffec82098375eaa34f08825ef6ce257899`. Its guards passed source,
+identity, count, configuration, endpoint and shared-physical-panel checks. Independent NumPy
+reconstruction from the transition-verified block readings and SciPy's df4 t quantile matched
+all 24 metric intervals. This is post-run arithmetic with zero new policy/environment calls.
+The [complete aggregate](../../../../runs/spatial_demand_generalization/c01_five_block_confirmation_20260925/summary.json)
+has SHA256 `904cf37507b7cc8c83d74d0c95797dd975db5c70740e04ee3dcffa0e612d453a`;
+[reading provenance and actual costs](../../../../runs/spatial_demand_generalization/c01_five_block_confirmation_20260925/reading.json)
+have SHA256 `3c006c1a757021ae6c48ce0969cf3924dbd4053bfdc77dd250682e4b2dae96b2`.
+Both have verified independent copies under
+`/home/fires/hmasd-artifacts/spatial_demand_generalization/c01_five_block_confirmation_20260925/`.
+
+### All five paired effects and fixed uncertainty
+
+Each entry is a mean over the same 32 worlds, in native J / served users per step. The five
+training-block differences, not the 160 world rows or the ten separate arms, are the units.
+
+| Block / model seed | Hotspot M-U | Uniform M-U | Cluster M-U | Adverse worlds H / U / C |
+| --- | --- | --- | --- | --- |
+| 0 / 263000101 | -.014721197 / +.007938 | -.014554794 / -.161438 | -.024690750 / -.436500 | 22 / 24 / 22 |
+| 1 / 263000102 | +.019314215 / +1.482312 | +.012645452 / +.523875 | +.026099004 / +2.083625 | 9 / 15 / 13 |
+| 2 / 263000103 | -.052880403 / -1.752813 | -.077779140 / -3.171438 | -.057642580 / -2.769063 | 31 / 32 / 25 |
+| 3 / 263000104 | -.015865239 / -1.495438 | -.021334129 / -1.565438 | -.004865920 / -.607687 | 23 / 27 / 19 |
+| 4 / 263000105 | -.064009839 / -4.197750 | -.036550424 / -1.944312 | -.088264024 / -5.631063 | 27 / 26 / 28 |
+
+| Family / endpoint | Mean M-U | Sample SD | Two-sided marginal t95 interval | Positive / zero / negative blocks |
+| --- | --- | --- | --- | --- |
+| **Hotspot J, primary** | **-.025632493** | .033353903 | **[-.067046834, +.015781848]** | 1 / 0 / 4 |
+| **Hotspot service, primary** | **-1.191150** | 2.123258803 | **[-3.827524015, +1.445224015]** | 2 / 0 / 3 |
+| Uniform J, secondary | -.027514607 | .033268434 | [-.068822823, +.013793609] | 1 / 0 / 4 |
+| Uniform service, secondary | -1.263750 | 1.466641423 | [-3.084825853, +.557325853] | 1 / 0 / 4 |
+| Cluster J, secondary | -.029872854 | .044625487 | [-.085282714, +.025537006] | 1 / 0 / 4 |
+| Cluster service, secondary | -1.472138 | 2.891450216 | [-5.062347136, +2.118072136] | 1 / 0 / 4 |
+
+Primary J range is [-.064009839, +.019314215]; service range is [-4.197750, +1.4823125].
+The fixed t critical value is 2.7764451051977987. Neither lower bound is positive; neither
+upper bound is negative. The service interval contains both zero and the declared approximately
+one-user reference scale, as well as substantial loss. Thus the data neither establish the
+positive mean nor rule out a one-user gain under the working model. No post-result margin,
+equivalence test, world bootstrap, alternate interval or A2 pooling is introduced. Shared
+fixed worlds condition this inference; five blocks do not establish iid-normal validity,
+power, arbitrary-layout robustness or next-training reliability. The two marginal intervals
+are not a simultaneous 95% region and the correlated endpoints are not independent replications.
+
+### Own learning, components and working explanation
+
+All ten fits have positive mean own J and service in all three families, with nonzero actor
+and critic parameter movement and the declared updates. Across five blocks, hotspot common
+initial / U45 / M45 averages are .135611713 / .404331134 / .378698641 J and
+12.512563 / 25.774463 / 24.583313 served users. U and M own-learning means are respectively
++.268719420 / +13.261900 and +.243086928 / +12.070750. Uniform own means are U
++.351563649 / +18.791863 and M +.324049042 / +17.528113; cluster own means are U
++.332388063 / +17.492800 and M +.302515209 / +16.020663. Own learning does not substitute
+for incremental benefit. U has no own-J/service loss on these worlds; M's one own-J and five
+own-service exceptions across the batch are retained in the block-2 and block-4 readings.
+
+Across-block hotspot M-U means are C -.023823000, Q -.005178767, P +.007402763,
+eligibility -1.341013, eligible-but-unserved -.149863 and height +7.402763. The J identity
+is .7C+.3Q-P and S=E-U; these arithmetic components do not identify a repair mechanism.
+Every family's components and every block/world difference remain in the aggregate. Even
+the M-exposed cluster family has an adverse mean difference in four of five blocks, so this
+batch does not support a simple observed story of buying a consistent cluster benefit with
+uniform specialization loss. It also does not prove that such a tradeoff is impossible.
+
+The prior A2 positive pair remains valid selection evidence (+.018568986 J / +.940750
+hotspot service), and C01 block 1 is a further positive instance. What weakens is the reason
+to replace ordinary U by this fixed 8/8 program on the strength of the initial increment.
+Useful ordinary U learning is reinforced. This is not an absence of learning by M, failure
+to execute, evidence for a new architecture, or proof that training coverage never matters.
+C01 changed both training instances and the evaluation panel relative to A2, so it cannot
+attribute the reversal uniquely to training randomness, spatial preferences or panel interaction.
+Those are unresolved explanations, not reasons to erase adverse evidence or automatically
+purchase more training.
+
+### Complete cost, prior advice and next scientific decision
+
+C01 cost **10 fits, 3.6M training +720k evaluation =4.32M team steps /25.92M UAV action
+rows**, 450 updates, 1,012,500 actor and 1,012,500 critic optimizer calls, 45 panels and
+1,440 evaluation episodes. Actual scientific walls sum to **22,685.868930 seconds /6.301630h**;
+the ten arm walls sum to 22,684.674419 seconds. Sum of native admission-to-exit is
+23,650.418796 seconds /6.569561h. First admission through final exit spans
+26,772.730281 seconds /7.436870h, including inter-block collection/publication/recovery gaps.
+These are different scopes, not a speed comparison. Process user/system CPU sums are
+90,701.458210/196.290596 seconds; maximum per-process peak RSS is 1,843,748 KiB with four
+torch threads, not summed simultaneous memory. Full engineering, review, consultation,
+publication, readback, other-process resource use and peak scratch totals remain unmeasured.
+
+The five native inventories contain **680 files /5,440,071,755 bytes**. Each block has a
+verified local mirror and an independent retained copy; the latter alone adds the same
+5.440 GB, with the local mirror another copy. Aggregate/report files are additional and
+small. Prior A2's two fits and 864k team steps remain separate selection cost, never part
+of confirmation n. No sixth fit-pair or new evaluation follows from completing this batch.
+
+The complete prior Pro answer at `ca77013402426ce5254ab260d688b651e3664178`, sections 3–7,
+already covers this final-reading branch: preserve the intervals and all blocks, decline
+automatic sixth-block or location rescue, and separate zero-margin statistical support from
+adoption. I reuse that advice for the fixed result rather than seek a new verdict on the
+same rule. This ends the confirmation, not by itself ownership of the broader question.
+
+Current shared background at main `c3fadf6c293f6b794f7e80aa2b66711b1aa60c7d` was read at this
+material boundary. B20's separate adverse/uncertain confirmation and declined panel replay
+reinforce the need for a next observation to change a concrete investment, but do not supply
+C01 replication or its cause. C2's completed sending comparison and S7's still-owned model
+question are separate opportunities, not assets to take over. The unowned C1, A3 and D1
+planning questions remain distinct and are not automatically selected by C01's outcome.
+
+The next decision is whether any feasible spatial comparison now has enough explanatory
+and actionable value to justify its full cost, or to end the current mixed-layout route.
+A fixed-policy old/new-panel crossover could separate finite policy-pair and panel patterns;
+it would add no training n and would not itself identify a useful data intervention. A
+four-center replay asks position sensitivity, not the failed conditional mean. Neither
+observation is selected merely to explain away the negative means; changing mixture,
+horizon or architecture also needs a new discriminating prediction. This new evidence can
+materially change route investment, so a focused Pro follow-up will challenge that decision
+under constitution section 5 before choosing a continuation or wider closure. The fixed
+C01 result and directly affected shared understanding are ready for independent publication;
+no additional experiment has been selected or launched.

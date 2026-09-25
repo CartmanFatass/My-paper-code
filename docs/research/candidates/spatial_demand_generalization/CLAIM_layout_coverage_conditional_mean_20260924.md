@@ -115,3 +115,64 @@ to training randomness versus program-by-panel interaction. A zero-margin statis
 does not establish an approximately one-user increment or automatically justify replacing U
 or further investment in this recipe. The t assumptions, all adverse evidence, exact five
 blocks and no-rescue stopping rule remain as written.
+
+## Result 2026-09-25 — complete fixed batch; joint positive mean not established
+
+All five prespecified blocks, seeds 263000101..105, completed both 360k-step arms at
+`9e44adde3d54fcd0363a2ebdbc1468494141c27b`. All native outputs were collected, individually
+hashed against the executing node and independently retained. Source/protocol, within-pair
+initialization, distinct block model/RNG streams, common physical evaluation panels, all
+720k evaluation transitions and optimizer/storage isolation passed the recorded checks.
+No block, world, endpoint or seed was removed, replaced or extended. A2 was not pooled.
+
+The unchanged precommitted aggregator used five paired training-block means and
+t(.975,4)=2.7764451051977987. Independent arithmetic from the verified native readings
+matched all reported intervals. Primary hotspot block values are:
+
+| Block / model seed | M-U native J | M-U served users per step |
+| --- | ---: | ---: |
+| 0 / 263000101 | -.014721197478491 | +.007937500 |
+| 1 / 263000102 | +.019314215066089 | +1.482312500 |
+| 2 / 263000103 | -.052880403081985 | -1.752812500 |
+| 3 / 263000104 | -.015865239350722 | -1.495437500 |
+| 4 / 263000105 | -.064009839064661 | -4.197750000 |
+
+| Family / endpoint | Mean M-U | Sample SD | Fixed marginal two-sided t95 interval |
+| --- | ---: | ---: | --- |
+| **Hotspot J, primary** | **-.025632492782** | .033353903349 | **[-.067046833771, +.015781848207]** |
+| **Hotspot service, primary** | **-1.191150000** | 2.123258803 | **[-3.827524015, +1.445224015]** |
+| Uniform J, secondary | -.027514606844 | .033268433539 | [-.068822823046, +.013793609359] |
+| Uniform service, secondary | -1.263750000 | 1.466641423 | [-3.084825853, +.557325853] |
+| Cluster J, secondary | -.029872854046 | .044625486530 | [-.085282714073, +.025537005981] |
+| Cluster service, secondary | -1.472137500 | 2.891450216 | [-5.062347136, +2.118072136] |
+
+Primary J has 1 positive/4 negative blocks, range [-.064009839065, +.019314215066]; service
+has 2 positive/3 negative, range [-4.197750, +1.4823125]. Neither lower bound is positive,
+so the joint claim is **not established**. Both point estimates are adverse, but both
+intervals span zero; neither sign is resolved by this working-model interval. The service
+interval also includes +1 user/step: no approximately one-user gain is established or ruled
+out. This is not equivalence, a confirmed harmful population effect, or technical failure.
+No simultaneous-coverage, next-training, arbitrary-panel or causal-coverage claim is made.
+
+All ten fits improve their own mean J/service in every family. Hotspot mean U45/M45 service
+is 25.7744625/24.5833125, versus common-initial 12.5125625; ordinary U remains a competent
+reference. Local losses survive positive own means: hotspot adverse J-or-service world counts
+are 22/9/31/23/27 by block. M also has one own-J and five own-service loss cases across all
+families, preserved in NOTES. Uniform and cluster results, all components, five-block own
+learning and every paired world remain secondary readings and cannot replace the primary rule.
+A2's positive pair and C01 block 1 remain contrary evidence; training-instance and panel
+changes between A2/C01 are not separately attributed.
+
+Actual C01 cost is ten fits, 3.6M train +720k evaluation =4.32M team steps /25.92M UAV action
+rows, 450 updates, 1,012,500 calls of each optimizer and 1,440 evaluation episodes. Scientific
+wall sums to 6.301630h; admission-to-exit sums to 6.569561h; first-admission to final-exit
+elapsed is 7.436870h, including gaps. The five native inventories total 680 files /
+5,440,071,755 bytes, with verified local and independent copies. Support/reading and
+other-process costs are not claimed to be fully measured.
+
+The fixed batch ends with this result and no sixth block. Later route investment is a
+separate decision, not a rescue extension or a revision to this claim. The complete prior
+Pro advice's failed-rule branch is reused for this reading.
+[Full result, exceptions, costs and next decision](NOTES.md#2026-09-25--c01-complete-joint-positive-mean-not-established);
+[unchanged five-block aggregation](../../../../runs/spatial_demand_generalization/c01_five_block_confirmation_20260925/summary.json);
+[input hashes and cost provenance](../../../../runs/spatial_demand_generalization/c01_five_block_confirmation_20260925/reading.json).
