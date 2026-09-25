@@ -20500,3 +20500,175 @@ fourth pair, changed endpoint or continuation chosen from the scores is authoriz
 by this cell's acceptance. Broader question responsibility remains with this DM under
 the updated owner governance; any next scientific investment needs its own reason
 after reading the fixed batch, not an automatic extension of B20.
+
+## 2026-09-25 — B20 block 3 and fixed-batch artifact reading
+
+The last native pair has an exit0 witness with both recorded processes absent. This
+is technical completion pending full reading. Reuse the accepted block 2 raw reader,
+changing only its two block labels and training-world base3346100→3446100 in the
+block 3 output. Recompute all nine panels and inspect every training/reset record,
+checkpoint, initial identity, optimizer count, own-learning outcome, N6 tradeoff and
+adverse world. Run the unchanged reviewed B20 per-block contract reader, then its
+fixed three-block reducer once all three blocks validate. The independent Reviewer
+checks the bounded adaptation and final arithmetic against the original claim.
+
+These artifact-only reads add zero fits, environment interactions or optimizer calls.
+The source remains `424bbe4db1351db70d73560ece913150c2b20ed4`; the fixed n=3 unit,
+ddof=1, df2 t interval and strict four-positive-lower-bounds rule remain unchanged.
+Preserve complete block 3 outputs at a verified durable location before reclaiming its
+disposable snapshot. Publish the result and affected shared understanding at this
+completed-batch boundary; any next investment is a separate scientific decision.
+
+### Third-pair evidence accepted after complete readback
+
+The DM accepts block 3 as technically valid after both raw reconstruction and the
+unchanged per-block contract reader passed. The independent Reviewer confirmed the
+exact three-line adaptation, fixed input/seed/worlds, native terminal identities, all
+90 training/reset records, checkpoint hashes and actual tensors, nine paired panels,
+and correct optimizer exposure. F/M initialization matches within this block and is
+distinct from blocks 1 and 2. There is no material technical finding.
+
+The raw panels independently reproduce native J=.7C+.3Q−P, scalar J/N, S=50C and
+U=E−S, legal eligible connections/capacity10, clipping, transition continuity and
+matched physical worlds. All nine measured panels again have at most one eligible
+UAV per eligible user and satisfy the capacity-clipped eligible-count identity.
+This does not describe unmeasured worlds or identify a policy mechanism. All 15 common
+N6 training resets match; there are no sampler/time tails. Full evaluation isolation
+preserves parameters, normalizers, global/runtime/sampler RNG, optimizer, buffer and
+training environment. Both actors and critics moved; coordinator/state embedding did
+not. Every numeric training row is finite. No extra M initialization panel was run.
+
+Each arm completed one fit, 360k team /2.16M UAV training steps, 45 updates and101,250
+actor plus101,250 critic optimizer calls. Nine actual panels add144k team /864k UAV
+evaluation steps and288 episodes. Pair total is864k team /5.184M UAV steps. Runner wall
+is6,366.980150s (106.116336min); RUSAGE_SELF peak is4,371,992KiB (4.169460GiB) for
+the complete pair process. Scratch peak/other processes remain unmeasured. Raw and
+contract reads took2.434s and1.210s and added zero fits/interactions/optimizer calls.
+
+| N | Initial J | F45 J | M45 J | M−F J | Initial S | F45 S | M45 S | M−F S |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 5 | .182502359 | .543679679 | .496152009 | -.047527670 | 16.5261875 | 34.905375 | 33.736500 | -1.168875 |
+| 7 | .102908816 | .510710696 | .432228841 | -.078481855 | 11.4605625 | 32.779625 | 29.299625 | -3.480000 |
+| 6 | .169291376 | .530344274 | .470560682 | -.059783592 | 15.2126250 | 34.012875 | 31.994750 | -2.018125 |
+
+| N | F own ΔJ / ΔS | M own ΔJ / ΔS | M−F ΔC | ΔQ | ΔP | ΔE | ΔU | Δheight |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 5 | +.361177320 / +18.3791875 | +.313649650 / +17.2103125 | -.0233775 | -.022846879 | +.024309356 | -1.9186875 | -.7498125 | +24.309356 |
+| 7 | +.407801880 / +21.3190625 | +.329320025 / +17.8390625 | -.0696000 | -.025848061 | +.022007437 | -3.4969375 | -.0169375 | +22.007437 |
+| 6 | +.361052898 / +18.8002500 | +.301269306 / +16.7821250 | -.0403625 | -.027503735 | +.023278722 | -2.5214375 | -.5033125 | +23.278722 |
+
+Both arms improve J and S from initialization in every world at every N. M still loses
+mean J and service relative to F at all three N values. Unlike block 2, its mean U is
+lower while service is worse: the decrease in eligible users is larger. Lower eligible
+unserved counts alone therefore do not establish improved service. Mean coverage and
+quality are lower, and height/P higher; this is a native component accounting, not a
+causal decomposition. M height/P is higher in all96 worlds; Q is lower in30/32/32 at
+N5/7/6, respectively.
+
+Paired J signs at N5/7/6 are2+/30−,1+/31−,3+/29−; service signs are5+/27−,
+5+/1zero/26−,8+/24−. The service tie at N7 world2446720 retains its adverse J.
+There are30/31/29 adverse J-or-S worlds. Worst paired J/S values occur together at
+world2446530 (−.094396195/−4.630),2446726 (−.179537248/−11.132), and2446631
+(−.119002266/−6.760). Positive service with negative J remains visible, including
+N5 worlds2446521/2446522/2446528 and the corresponding N7/N6 tradeoffs. All adverse
+worlds and full J,C,Q,P,E,S,U,height arrays were read and remain in
+[raw readback](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b3_s1018101/artifact_readback.json)
+and [contract readback](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b3_s1018101/contract_readback.json).
+
+The 90 retained training rows show nonmonotone native rewards. F starts at.230821,
+reaches.456724 at rollout18 and ends.455160. M first/final within-N means are
+.288464/.445646 (N4),.267840/.397516 (N6),.228954/.311821 (N8); N6 falls to.190102
+at rollout5. Raw coordinate clipping starts near.319 and ends.818/.840 for F/M.
+Neither these diagnostics nor an earlier high training value selects an endpoint or
+explains the program difference. The fixed final45 endpoint is retained.
+
+### Third-pair and aggregate durable recovery
+
+All130 block 3 scientific/native/analysis files,1,087,107,638 bytes, have a verified
+copy at `/home/fires/hmasd-retained-runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b3_s1018101`.
+Every relative path, byte count and SHA256 matched; copy/verification took2.265s.
+The aggregate's single770,030-byte summary is also copied and verified at
+`/home/fires/hmasd-retained-runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_aggregate_20260925`
+(0.003s). Raw trajectories/checkpoints/streams stay outside Git with their identities
+in the existing summary/panel records. Representative complete-file identities:
+
+| Run-relative path | Bytes | SHA256 |
+| --- | --- | --- |
+| summary.json | 136113 | 64871772f868d92ea795db8c6d346f105a5a954cd1fda90c2ac5dbfcc4250840 |
+| F/summary.json | 363804 | 230f0d29534a269eff0ab533c30842d6c7264643caaacdd5aacaa520a0ff7c6c |
+| M/summary.json | 303438 | a98225556f665cb923e6f37d47d3f62556b3c938006eab96fe6ca780361352f5 |
+| F/raw/training.jsonl | 1156349 | 13ca72e01743adc067b271f29cf77e059d25b3f33b97f01a0c76c72a0ece05de |
+| M/raw/training.jsonl | 1155632 | 2480eed7e4d7ac10539366749dce1eadd0c34ef905d3008fe5b6c94dc5561b55 |
+| artifact_readback.py | 11345 | bcce03ef653ee38b48aa9817ac34e6ce45bd51827a4728e2487347843707136d |
+| artifact_readback.json | 225628 | ed33cc881c1f0b9b27fb0e6bb5b43c2e43404145d12637cc65096ea480bbbbcf |
+| contract_readback.json | 220853 | a328ec7447139c8a832cd4f7596f2b573cae921589438d5cb507b1e62df8e994 |
+| process-exit.json | 539 | 70e9d71a53dd3afbe1e08e4d5c574ad13074ce7646545c14c307b642ee73b600 |
+| aggregate/summary.json (separate tag above) | 770030 | 14ca9eded85178d7b60272fc7019e816d2ee522cf4158a6b0e1d32c22f5658c2 |
+
+## 2026-09-25 — B20 complete: joint claim not established, N7 adverse and N5 unresolved
+
+All three original blocks are complete and technically valid at the identical published
+input SHA. The unchanged reviewed reducer read exactly those three blocks and passed
+all source/config/initialization/world/exposure contracts. Independent arithmetic agrees
+with its saved [aggregate](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_aggregate_20260925/summary.json)
+and its SHA256 above. The artifact-only reduction took3.622s with zero new interactions.
+
+| Co-primary M−F quantity | Block 1 | Block 2 | Block 3 | Mean | Sample SD | Fixed 95% df2 interval | Reading |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| N5 J | -.034130940 | -.105074230 | -.047527670 | -.062244280 | .037691797 | [-.155875895, +.031387335] | unresolved |
+| N5 S | +.6670625 | -6.7913125 | -1.1688750 | -2.431041667 | 3.886082594 | [-12.084605990, +7.222522657] | unresolved |
+| N7 J | -.104765005 | -.067223337 | -.078481855 | -.083490066 | .019265405 | [-.131347985, -.035632146] | adverse |
+| N7 S | -5.3653125 | -4.3519375 | -3.4800000 | -4.399083333 | .943540064 | [-6.742966789, -2.055199877] | adverse |
+
+The prewritten strict rule fails: none of the four unrounded lower bounds exceeds zero.
+The joint all-positive claim is **not established**. Under the declared conditional
+fixed-world, approximately iid-normal training-block model, both N7 intervals are
+wholly negative; these are adverse conditional program-mean readings, not merely a
+lack of significance. Both N5 intervals cross zero, so their population signs remain
+unresolved. These marginal intervals are not a simultaneous confidence region; n=3
+does not verify the model or establish next-run reliability. This is not equivalence,
+general ineffectiveness of count mixing, or a pure support/order mechanism result.
+
+N6 descriptive M−F J/S effects are −.081106074/−3.084375,
+−.091579040/−5.917250, −.059783592/−2.018125; their means are
+−.077489569/−3.673250. They were never an extra confirmation gate. All six fits improve
+their mean own J and S at N5/N7/N6. Block1's own-learning losses (F:N5 world2446518;
+M:N7 worlds2446703/2446708/2446724 and N6 world2446626) are retained; blocks2/3 improve
+both quantities in every evaluated world. Paired adverse J-or-S counts at N5/N7/N6
+are26/31/28 in block1,32/29/31 in block2,30/31/29 in block3. Worlds remain nested
+within three training blocks and do not increase n.
+
+Actual production cost is six started/completed fits,2.16M training team /12.96M UAV
+steps plus432k evaluation team /2.592M UAV steps: **2.592M team /15.552M UAV steps**,
+270 outer updates,27 actual panels and864 evaluation episodes. Actor/critic each used
+607,500 optimizer calls; there were zero coordinator/discriminator updates and zero
+evaluation optimizer/storage calls, not zero coordinator inference. The three pair
+runner walls are7,955.429869/7,228.580678/6,366.980150s, totaling21,550.990698s
+(5.986386h), distinct from end-to-end calendar and support time. Their process peaks
+are4,175,744/4,473,572/4,371,992KiB; the largest is4.266331GiB, not a sum. Implementation,
+review, Pro, artifact reads, copies and the recorded Git-object repair add support cost;
+scratch peaks and other-process resource use remain unmeasured. No fourth block is added.
+
+### Belief update and next decision
+
+The relevant published background at `da5344e044ed1ed381c58dfc7ade15774079231e`,
+RESEARCH sections3/6 and Current research plan A1/A2, treats competent ordinary
+feedback, useful own learning and marginal package benefit separately. B20 strengthens
+that distinction: fixed-N6 LOCAL1 learns useful untrained-N behavior in all three fresh
+blocks, while the chosen mixed program adds no confirmed benefit and is adverse at N7
+under the fixed model. B19's positive development pair is preserved, but no longer
+supports an expectation of broadly beneficial repetition of this exact program.
+Observed quality/height and eligibility differences describe outcomes, not attribution.
+The changed B19→B20 training blocks and evaluation worlds leave the reversal's source
+unidentified. B15's original inconclusive result and B18's missing M endpoint are unchanged.
+
+The fixed B20 batch ends by its original rule. Before a new fit, rescue variant or route
+closure, the scientific decision is whether a bounded replay of the exposed B19 F/M
+pair on the fixed B20 N5/N7 worlds is worth its cost. A same-policy panel change can
+test whether the old positive survives that change; it cannot isolate sources of
+training randomness or add an independent training block. The full original-world
+replay would establish the frozen evaluator/checkpoint bridge first. No such replay
+has been launched or selected yet. Pro will be asked about this concrete discrimination
+and the strongest alternative, because the complete adverse confirmation materially
+changes the premise for any renewed investment. This is not a repeat of the old
+confirmation-design request or a required generic result-review round.

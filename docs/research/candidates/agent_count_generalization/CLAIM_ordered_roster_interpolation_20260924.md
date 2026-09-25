@@ -169,3 +169,41 @@ native --snapshot; later notebook commits do not change the accepted input. The 
 requires this shared SHA as well as the recorded file hashes and fixed learner/config
 contract. This closes the transitive-source identity gap identified in independent
 engineering review without changing any numerical condition or statistical rule.
+
+## 2026-09-25 — Fixed B20 result
+
+All three prospective pairs completed and passed full native-artifact, source,
+initialization/world/optimizer and raw-trajectory checks, plus independent review.
+All used input `424bbe4db1351db70d73560ece913150c2b20ed4`. No arm was replaced,
+no fourth block was added, and the original endpoint and decision rule were retained.
+
+| M−F quantity | Block 1 | Block 2 | Block 3 | Mean | Fixed 95% df2 t interval | Reading |
+| --- | --- | --- | --- | --- | --- | --- |
+| N5 J | -.034130940 | -.105074230 | -.047527670 | -.062244280 | [-.155875895, +.031387335] | unresolved |
+| N5 service | +.6670625 | -6.7913125 | -1.1688750 | -2.431041667 | [-12.084605990, +7.222522657] | unresolved |
+| N7 J | -.104765005 | -.067223337 | -.078481855 | -.083490066 | [-.131347985, -.035632146] | adverse |
+| N7 service | -5.3653125 | -4.3519375 | -3.4800000 | -4.399083333 | [-6.742966789, -2.055199877] | adverse |
+
+**The joint claim is not established:** none of the four unrounded lower bounds is
+strictly positive. Both N7 intervals are wholly negative under the specified conditional
+fixed-world, approximate iid-normal training-block model. N5 intervals cross zero;
+their signs remain unresolved. n=3 does not validate the model or show next-run
+reliability; the marginal intervals are not simultaneous coverage. No equivalence,
+arbitrary-world claim or pure count-support/order attribution follows.
+
+All six fits have positive mean own J/service learning at N5/N7/N6; all local losses
+remain recorded. M−F adverse J-or-service worlds at N5/N7/N6 are26/31/28,32/29/31,
+30/31/29 in the three blocks. N6 descriptive effects are negative in all three, with
+mean−.077489569 J/−3.673250 served users per step; N6 does not alter the primary rule.
+The complete raw components, own-learning arrays, training curves and adverse worlds
+are in the [full notebook reading](NOTES.md#2026-09-25--b20-complete-joint-claim-not-established-n7-adverse-and-n5-unresolved)
+and [fixed aggregate](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_aggregate_20260925/summary.json).
+Aggregate SHA256: `14ca9eded85178d7b60272fc7019e816d2ee522cf4158a6b0e1d32c22f5658c2`.
+
+Actual production cost: six fits,2.16M training plus432k evaluation team steps
+(2.592M total;15.552M UAV steps),270 updates and27 panels/864 evaluation episodes.
+Actor and critic each used607,500 optimizer calls. Summed pair runner wall is
+21,550.990698s (5.986386h); highest complete-process RSS is4.266331GiB.
+Engineering, consultation, reading and retention costs are additional; full recovery
+locations and hashes are in NOTES. This batch is complete; any different follow-up
+requires its own scientific reason and prospective comparison, preserving this result.
