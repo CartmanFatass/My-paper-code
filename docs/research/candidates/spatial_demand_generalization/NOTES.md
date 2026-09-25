@@ -183,3 +183,37 @@ actual training/evaluation/optimizer counts and measured resource scope. Publish
 direction's registration/routing to main before launch, then publish material read results
 and useful affected shared understanding independently. Accepted work is observed by this
 task's `tools/hmasd_wait.py`; checkpoints rearm the same handle without restarting it.
+
+## 2026-09-24 — Prospective implementation checks and node choice
+
+The complete 45-round schedule check corrects a descriptive arithmetic error above, before
+any production exposure. Under the unchanged rule `(lane+r)%16<8`, M's per-lane uniform
+counts are `[24,23,22,21,21,21,21,21,21,22,23,24,24,24,24,24]`, with cluster counts 45 minus
+these values. Thus the per-lane range is **21–24**, not the previously written 22/23.
+Every rollout remains exactly 8/8, each family has 360 training lane-episodes, and all seed
+addresses, fits and team-step costs remain unchanged. The executable rule takes precedence
+over that mistaken explanation; no outcome-based schedule alteration occurs.
+
+Source mapping and DM byte check found 17 required candidate dependency files (320,351 bytes)
+materialized exactly from `bfb4fd356a01024ef04c967c4768263f114e5a17`; the LOCAL1 builder,
+native adapter, action/RNG helpers and B11/B15 trace/isolation helpers retain their frozen
+bytes. B13/B02 are necessary transitive imports, not active scientific comparisons. Shared
+learner/config/environment core in this closure already matches main; no core repair is
+included. A2 uses its own disposable factory and runner instead of mutating frozen modules.
+
+Select **wsl_4070 CPU**, the configured remote node, preserving LOCAL1's CPU/float32 path
+and four torch threads. The first read-only suitability snapshot showed 20 logical CPUs,
+13,920,055,296 bytes MemAvailable and the already-running S7 B09 GPU process at about
+2 GB RSS; this snapshot is not launch admission. Interpreter is the configured
+`/home/wu/.venvs/hmasd/bin/python` (Python3.10.21, NumPy1.26.3, Torch2.7.0+cu118), supervisor
+`/usr/local/bin/agent-task`. Recheck actual physical/effective memory at release. No old
+SIGSEGV is claimed repaired, and neither existing research process is altered.
+
+Registration and exact prospective notebook are published on main/direction at
+`943e3e9a72852017840d1fdb0ef595a9e44f8a3d`, preserving the concurrent Root start update.
+Remote network Git operations require the configured `zsh -lic` environment; two initial
+source-transfer helpers without that context were stopped after their identities were
+checked, without touching research processes. Configured-context fetch succeeded. Its
+background automatic repack reported an existing bad-tree warning; no repository cleanup
+or unrelated repair is attempted. The actual A2 source snapshot and required artifacts
+will be verified separately before execution.
