@@ -1285,3 +1285,23 @@ protocol and owner pause are unchanged, and the canonical-node pause is lifted. 
 this checkpoint and rearmed the same `spatial-c01-b2-s263000103` handle to generation **19**,
 window 1,500 seconds. There is no worker restart, Pro resend, new launch, scientific verdict
 or main/index change. Two of five paired blocks have complete scientific readings.
+
+### C01 block 2 checkpoint — 2026-09-25T11:37Z
+
+Read the sole pending generation-19 checkpoint `99b3cbb66bd9adb59d72c9a5`, wake
+`b357457a-359f-48c2-a7a9-cd7ece8ef318`. The checkpoint observation at 11:35:53Z and direct
+reconciliation at 11:37:14Z both retained the same accepted operation, matching live process
+identities, consistent records and no exit witness; the observer had zero errors.
+
+U's completed counts remain unchanged from the previous checkpoint. At 11:37:14Z M's live
+record was at rollout 44's update boundary: 352,000 training/stored team steps, 2,112,000 UAV
+steps, 704 episodes, 43 completed updates and 96,750 actor/critic optimizer calls each. No M
+evaluation transitions had occurred yet. M arm wall was 2,254.098570 seconds; both failure
+fields were null and stderr remained empty. The batch-level M fit flag still reflects its
+earlier boundary snapshot; these progress counts come from the live arm record.
+
+Fresh main remains `da5344e044ed1ed381c58dfc7ade15774079231e` with the same confirming standing,
+lead, protocol and lifted pause; the canonical-node pause is also lifted. Consumed this
+checkpoint and rearmed the same `spatial-c01-b2-s263000103` handle to generation **20**, window
+1,500 seconds. No worker restart, Pro resend, new launch or scientific verdict was made.
+Complete third-pair collection and reading are still pending; main/index is unchanged.
