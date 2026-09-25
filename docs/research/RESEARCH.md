@@ -654,20 +654,22 @@ S7的B04/B05在H1500评价未激活切断、耗尽或充电，风险学习的有
 
 2026-09-24 项目复盘已完成，[完整建议与Root决定](archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md#decision)。
 优先准备服务反馈学习，其次普通人数训练分布比较；技能线转为一次有明确用途的cross-play准备。
-这些是项目选择，原三个DM当前均无已接受的新producer；各自完成NOTES前瞻、技术选择与实施后执行，
-不需要另一次Root选题批准。出版计划不等于已向独立App任务发送启动消息。
+Owner 随后明确要求按更新后的配置新建会话接续。三个新的 Astra Max 独立DM均已创建，
+Root于2026-09-24核实原生任务为active/inProgress，并读到各自新接续NOTES与准备提交；
+实际地址见[任务路由](#session-routing)。当前正在实施或设计准备，任务运行不等于训练批次已准入。
+各自完成NOTES前瞻、技术选择与实施后执行，不需要另一次Root选题批准。旧任务和失败批次保留历史。
 
 | 责任 | 选定下一工作与成本 | 可改变的判断与最强替代 |
 | --- | --- | --- |
 | DM3：服务收益与风险控制 | 优先准备同部署F的新N/A配对：新匹配初始化，各180k训练，2 fits；32新世界，共同初始及两终点，至多288k评价。保留H3000/N8/k10、原F和普通完成段合同，不混入新学习器。 | A−N未被旧技术失败回答。读完整服务、J/风险及不利世界；补能退出后250步团队服务为有删失的中间解释，非同机恢复。最强替代是保留已有F，不买新fit。旧N和失败A不能拼新配对。 |
 | DM1：泛化与训练条件 | 准备LOCAL1的新F/M：45个N6 vs [4,6,8]×15，各360k，2 fits；N5/N7主比较与N6代价，各32新世界，共同初始加两终点，9面板/144k评价。新运行在完成边界持久化必需reset场景。 | 固定N6已经能产生有用迁移；检验M是否增加N5/N7的J和服务四项正差，同时读取N6得失。保留F是强替代。没有新N4/N8部署评价就不作其结论；B15不重开，B18仍是不完整技术失败。 |
-| DM2：有用协作学习的后继准备 | 一次普通cross-play可行性与完整成本设计，0 fits/0新环境步；核清独立组队用途、私有actor/critic与混编路径，以及全部预定组合和正常搭配代价。沿用原DM，暂未激活population训练或变更方向lead。 | B09只约束当前上下文保持，不证明伙伴兼容缺陷。设计有明确用途且可执行才值得后续训练，否则有理由暂不投入。当前不买时间法则两fit、系数/驻留网格或旧CPCP四population训练。 |
+| DM2：有用协作学习的后继准备 | 一次普通cross-play可行性与完整成本设计，0 fits/0新环境步；核清独立组队用途、私有actor/critic与混编路径，以及全部预定组合和正常搭配代价。新独立DM继承原方向责任，暂未激活population训练；launch-bound lead runtime不变。 | B09只约束当前上下文保持，不证明伙伴兼容缺陷。设计有明确用途且可执行才值得后续训练，否则有理由暂不投入。当前不买时间法则两fit、系数/驻留网格或旧CPCP四population训练。 |
 
 ### 推进与投入选择
 
 Root本轮既有转储核查已完成，详见[共享故障定位](#shared-runtime-diagnosis)。两次故障根因未明，
 不将技术失败记作科学阴性；也不把完整查明共同根因设为所有研究的无限前置条件。
-原DM应给出具体执行配置、覆盖所用路径的检查与保留风险，新尝试有新前瞻身份并保留旧失败成本；
+接续DM应给出具体执行配置、覆盖所用路径的检查与保留风险，新尝试有新前瞻身份并保留旧失败成本；
 不原配置盲目重跑、补尾或换种子救结果。已证实的证据保存缺陷与未知崩溃原因分别处理。
 
 每条学习配对仍是一个初始化块的探索，非确认，世界/事件/流不增加训练n。DM2准备可独立开展，
@@ -719,10 +721,10 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [三线投入复盘](archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md#decision)已完整读取并决定；[共享技术核查](#shared-runtime-diagnosis)已找回并定位B08 core。当前准备范围见项目计划，无新增producer、跨任务消息或方向接管。原Pro已收齐，唤醒路径故障在本任务修复，非待生成。 |
-| DM1：智能体数量泛化 DM | `01a0d622-53d3-7f43-9740-6eaef625899a` / `local` | `/home/fires/.codex/worktrees/a138/hmasd-wsl` · `codex/agent-count-generalization-b19` | Owner授权的新会话已实际接续，当前准备B19新配对及保存修复；独立完成并出版，不发送App消息。旧task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`、7fef checkout和B18终态/47产物保留历史；无旧运行或Pro被重启、无旧观察状态被接管。[接续、前瞻与技术选择](candidates/agent_count_generalization/NOTES.md#2026-09-24--new-dm-continuation-and-b19-prospective-matched-ordinary-training)。 |
-| DM2：实际互补技能学习 DM | `01a0cdb8-10c9-7743-a05a-6dcfc42621c5` / `local` | `/home/fires/.codex/worktrees/5916/hmasd-wsl` · `codex/complementary-skill-learning` | B09完整结果和固定规则判读已发布：[完整B09、全部配对与判读](https://github.com/CartmanFatass/My-paper-code/blob/6f7e1eaccdea00cafe8813e621d4bb5b14a363f4/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b09-complete-persistent-u-contexts-lose-service-and-do-not-give-a-shared-deployment-improvement)。本任务完成双副本留存及自身结果发布，无运行中科学批次或待收Pro；本次诊断已结束，更广续作尚未选择。 |
-| DM3：控制用途预测小模块 DM | `01a0d621-fad7-7863-ab0a-89b148926205` / `local` | `/home/fires/.codex/worktrees/31f5/hmasd-wsl` · `codex/uav-service-feedback-b09` | Owner要求新建任务接续，现会话已实际承担同一方向DM责任；B09前瞻与技术准备见NOTES。旧任务`01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`、`d319` checkout/`codex/uav-service-predictive-control`及B08终态完整保留；无旧producer或待收Pro接管。本任务使用自己的观察状态，不自动重启旧批次或发送App消息。 |
+| Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [三线投入复盘](archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md#decision)已完整读取并决定；[共享技术核查](#shared-runtime-diagnosis)已完成。按owner新会话要求创建下列三个Astra Max独立DM，并核实实际接续；各自自主实施和出版。原Pro已收齐；唤醒故障修复`f7d2b40d7`通过26项测试及本任务实际收到的一次原生队列自检。配置更新`40eb5c0e7`已进入三个新工作区。 |
+| DM1 普通策略人数泛化 | `01a0d622-53d3-7f43-9740-6eaef625899a` / `local` | `/home/fires/.codex/worktrees/a138/hmasd-wsl` · `codex/agent-count-generalization-b19` | Owner授权的新会话已实际接续，当前准备B19新配对及保存修复；独立完成并出版，不发送App消息。旧task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`、7fef checkout和B18终态/47产物保留历史；无旧运行或Pro被重启、无旧观察状态被接管。[接续、前瞻与技术选择](candidates/agent_count_generalization/NOTES.md#2026-09-24--new-dm-continuation-and-b19-prospective-matched-ordinary-training)。 |
+| DM2 独立队友兼容性研究 | `01a0d623-621b-7a70-96b2-2e7bf0b6b1a9` / `local` | `/home/fires/.codex/worktrees/fb7c/hmasd-wsl` · `codex/dm2-crossplay-feasibility` | Owner授权的新会话已实际接续，当前承担0fit/0新环境步的普通cross-play可行性与完整成本准备；私有学习器混编和数据归属路径仍需具体设计，尚未接受population训练。[接续记录](https://github.com/CartmanFatass/My-paper-code/blob/5989910de/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--dm2-continuation-ordinary-cross-play-feasibility-preparation)。旧task `01a0cdb8-10c9-7743-a05a-6dcfc42621c5`、原方向branch及B09完整证据保留，无旧worker或Pro被恢复。 |
+| DM3 S7 服务反馈学习 | `01a0d621-fad7-7863-ab0a-89b148926205` / `local` | `/home/fires/.codex/worktrees/31f5/hmasd-wsl` · `codex/uav-service-feedback-b09` | Owner要求新建任务接续，现会话已实际承担同一方向DM责任；B09前瞻与技术准备见NOTES。旧任务`01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`、`d319` checkout/`codex/uav-service-predictive-control`及B08终态完整保留；无旧producer或待收Pro接管。本任务使用自己的观察状态，不自动重启旧批次或发送App消息。 |
 
 未活动方向的历史联系人及证据工作区仍在各自 standing 中，不能据此新建或重启任务。
 
