@@ -1824,3 +1824,174 @@ materially change route investment, so a focused Pro follow-up will challenge th
 under constitution section 5 before choosing a continuation or wider closure. The fixed
 C01 result and directly affected shared understanding are ready for independent publication;
 no additional experiment has been selected or launched.
+
+## Pro question 2026-09-25 c01-next-spatial-investment
+
+Conversation: reuse the existing Jev-account direction conversation; its address stays in
+local operation state. The earlier A2/C01 question is complete and closed. This is a new
+route-investment question based on the complete C01 evidence, not a resend or a request to
+change the frozen confirmation rule.
+
+Question type: research-route choice and working-explanation update under constitution
+sections 2 and 5. C01 is finished. Is there now a feasible spatial/task-distribution
+comparison whose explanatory or practical value justifies its cost, or should we end the
+current mixed-layout route while retaining ordinary U and the bounded positive instances?
+Challenge the reasoning below, including the strongest case for a worthwhile continuation.
+Do not manufacture a successor merely because the batch ended or all uncertainty is not resolved.
+
+Standing: all five fresh paired blocks and all ten fits have been read and independently
+retained. The complete fixed result is published at
+`b35996ba188d31cc01b3a422a47c24b1fde6bce3`. Its material standing and directly affected shared
+understanding were published to main at `026e3e6e7904f288a7bdab05471e7e37195028f5`.
+No native experiment remains active; no sixth block, new fit or additional evaluation has
+been selected. Current owner pause is lifted; there is no newer owner stop. DM scientific
+continuity, three-track resource ceiling, existing owners and App-message boundaries remain.
+
+Evidence and current interpretation:
+
+- The original A2 single-pair hotspot M-U gain was +.018568986 J / +.940750 served users
+  per step, with 12/32 adverse worlds. Uniform service was approximately zero with 17/32
+  adverse worlds, not noninferiority. This positive instance is preserved, not pooled into C01.
+- C01 kept N6/c10, 50 users, LOCAL1 and legal actor/critic inputs, ordinary PPO, the actual
+  same within-pair initialization, recurrent/update semantics, 360k train steps per arm and
+  final45. U uses 16 uniform lanes per update; M substitutes eight cluster lanes, rotating
+  by the fixed rule. Nothing about actor information, architecture, horizon or endpoint was
+  chosen after outcomes. Hotspot participates only in evaluation. New model seeds are
+  263000101..263000105; the same fresh 32-world panel per family is shared across those
+  pairs, with hotspot seeds 265020000..265020031. A2 used hotspot 262020000..262020031.
+- Five hotspot J differences are -.014721197, +.019314215, -.052880403, -.015865239,
+  -.064009839; service differences are +.0079375, +1.4823125, -1.7528125, -1.4954375,
+  -4.197750. The prewritten marginal two-sided df4 t95 intervals are J
+  -.025632493 [-.067046834,+.015781848] and service -1.191150 [-3.827524015,+1.445224015].
+  The required joint positive mean is not established. Both means are adverse and both
+  intervals cross zero; neither equivalence nor a certain harmful population effect follows.
+  The service interval still includes the approximately one-user reference and substantial loss.
+- C01 block 1 is positive in all three family means. Across the five blocks, uniform means
+  are -.027514607 J / -1.263750 service and cluster means -.029872854 / -1.472138;
+  each endpoint/family has one positive and four negative blocks. Thus a consistent observed
+  cluster benefit buying uniform loss is not the pattern of this batch.
+- Every one of the ten fits improves its own J/service mean in each family relative to its
+  real initialization. Hotspot U/M own means are +.268719420/+13.261900 and
+  +.243086928/+12.070750. U has no own-J/service loss on any evaluated world; M has one
+  own-J and five own-service exceptions, retained in the block readings. Ordinary U is a
+  competent learning comparator. M learned too; its failure to add mean utility is distinct.
+- Eligibility, service, quality and height components are read, including local large losses;
+  their algebra does not identify an optimization/representation mechanism. A2 to C01
+  changed both training instances and evaluation worlds. Neither training randomness nor
+  panel dependence has been isolated. n5 and fixed shared worlds do not establish arbitrary
+  layout transfer, next-training reliability or iid-normal validity.
+
+My current leaning is to retain U and decline more investment in the same 8/8 replacement
+recipe. The initial positive did justify a fixed replication, but the complete result now
+weakens its case. Merely widening intervals, preserving possible benefit, or listing
+"optimization/capacity/seeds" does not supply a targeted intervention. That is a cost/value
+judgment to challenge, not a claim that spatial coverage cannot matter. A consequential
+explanatory result can be worthwhile in its own right; it need not promise a performance win.
+
+The strongest concrete low-fit alternative I can presently specify is a retrospective
+**old/new hotspot-panel crossover of all six retained policy pairs**, not just the favorable
+pair: A2 and all five C01 pairs, U45/M45, on both existing 32-world hotspot panels. A complete
+rerendering is 6 pairs x 2 policies x 2 panels x 32 worlds x H500 = **384,000 evaluation team
+steps /2.304M UAV rows**, 768 episodes, 24 panels, twelve retained policy/normalizer assets,
+zero new fits or optimizer calls. Twelve diagonal panels/192k steps already have native
+readings; rerendering those would check replay identity, with twelve off-diagonal panels/192k
+steps adding the missing comparisons. Reusing verified diagonal evidence instead could avoid
+some repeat evaluation, but requires an explicit prospective semantic/provenance comparison.
+No crossover has been selected or executed. Implementation, checkpoint loading, actual
+physical-panel identity, review, fresh resource admission, raw retention and reading all cost
+work; standalone wall/storage have not been measured. Zero fits is not a zero-cost claim.
+
+If signs follow the pair on both panels, this would weaken a purely panel-specific account
+for these policies; if M-U varies systematically with panel within pairs, it would support
+finite policy/panel interaction. Neither pattern estimates the population variance of
+training or diagnoses a causal optimizer/coverage defect. Both panels and all policies are
+already result-exposed; this is new exploratory explanation, not a new confirmation n or a
+rescue of C01. Which resulting distinction would materially improve our scientific answer or
+change a warranted next comparison, and is that gain worth even this smaller cost? If no
+branch does, recommend declining it. Do not assume the separate B20 panel-replay decision
+settles this spatial question.
+
+The prior four-center A2-only alternative (0 fits/128k evaluation team steps) tests the
+location sensitivity of one already selected pair, not the C01 program mean. New mixture
+ratios, longer horizons, curriculum or representation changes need a distinct, evidence-linked
+intermediate prediction and native consequence; the current loss does not select one. If
+a concrete alternative is stronger than crossover or closure, describe its ordinary matched
+comparator, information rights, discrimination, likely scope and dominant work. No fixed
+number of proposals, architecture, exhaustive diagnostic campaign or new learning is owed.
+
+Relevant project context: B20's roster comparison, C2's sending decisions and S7's still-owned
+approach-model question have different estimands; their results are not C01 replications or
+its cause, and this task does not take over those owners. The current plan has unowned C1
+finite-model decision value, A3 genuine capability composition and D1 partner composition.
+They show that closing one recipe need not end DM responsibility, but they are not selected
+by this result. This question is a focused investment choice for the present spatial work,
+not a project-wide portfolio review. A materially justified nearby pivot can be proposed;
+do not use a reserve label or an unspecified future discovery to postpone a decision.
+
+Cost and exposure: completed C01 used 10 fits, 3.6M train +720k evaluation =4.32M team steps,
+450 updates and 1,012,500 calls of each optimizer. Actual scientific wall sum is 6.301630h,
+admission-to-exit sum 6.569561h, max single-process RSS 1,843,748 KiB, four torch threads.
+680 native files/5,440,071,755 bytes have local and independent retained copies; full
+engineering/review/consultation/readback and peak scratch totals are unmeasured. A2's two
+fits/864k team steps remain separate selection exposure. Prospective selected experiment
+cost is currently zero because none is chosen; candidate crossover/four-center costs above
+are discussion estimates, not accepted operations or entitlements.
+
+Context sources (source_sha means this question's full published commit, supplied in the
+actual message; other revisions below are immutable):
+
+- Current governance: `docs/project/OPERATING_CONSTITUTION.md` sections 1-5, 7-8 at source_sha.
+  Ordinary choices are delegated to this direct DM; Pro advises, does not allocate compute
+  or add approval requirements. Frozen C01 is not reopened by current methods.
+- Current methods: `.agents/skills/hmasd-scientific-tools/SKILL.md` at source_sha, Update the
+  working explanation, Use and revise shared understanding, Comparators and MARL information,
+  Statistics, Cost and exposure, Pro. Use these to separate explanation/value/precision;
+  there is no mandatory toy test, tuned-headroom gate or duty to rescue the package.
+- Current shared understanding and opportunity cost: `docs/research/RESEARCH.md` at
+  `026e3e6e7904f288a7bdab05471e7e37195028f5`, section 3's ordinary learning/roster/A2-C01
+  passages, own Active row, Current research plan question map, and running/ownership scope.
+  This is revisable understanding, not governance or independent evidence for our mechanism.
+- Fixed contract: `docs/research/candidates/spatial_demand_generalization/CLAIM_layout_coverage_conditional_mean_20260924.md`
+  at `b6c6836a7221a31429b6b4665d077b9097dd8e10`, original claim/batch/estimand/cost and Adoption.
+  Read its appended complete result at `b35996ba188d31cc01b3a422a47c24b1fde6bce3`.
+- Complete C01: this NOTES at `b35996ba188d31cc01b3a422a47c24b1fde6bce3`, "C01 complete:
+  joint positive mean not established" and the five complete block entries as needed for
+  adverse cases; `runs/spatial_demand_generalization/c01_five_block_confirmation_20260925/summary.json`
+  (`units`, `interval`, `by_family`, `primary_hotspot`, fixed joint decision) and `reading.json`
+  at the same revision. The aggregate retains every block/world result; read sufficient
+  supporting and contrary fields rather than only the decision boolean.
+- A2 selection and assets: this NOTES's "A2 complete: modest held-out gain and heterogeneous
+  local costs" and `runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101/summary.json`
+  at `3453c67f1c9eb748300a4dca9746bf88e52119b9`. Native NPZ/checkpoints are retained at paths
+  recorded in NOTES but are not GitHub-readable; I verified them, you must not claim that you did.
+- Prior advice to reuse, not repeat: this NOTES at
+  `ca77013402426ce5254ab260d688b651e3664178`, Answer under "Pro question 2026-09-24
+  a2-replication-or-spatial-dependence", especially sections 3-7 on C01 scope, final reading, four-center alternative and
+  no automatic extension. Its fixed-rule advice still applies; the five new results now
+  motivate this focused investment follow-up.
+- Only if a feasibility or causal premise requires source inspection: accepted C01
+  `9e44adde3d54fcd0363a2ebdbc1468494141c27b`,
+  `experiments/candidates/spatial_demand_generalization/c01/runner.py` and reused
+  `experiments/candidates/spatial_demand_generalization/a2/runner.py` / `adapter.py`.
+  A2 accepted source is `d22b608e8d063ceac5c944426bd35a2289c5ebf6`; do not infer a source
+  equivalence or replay guarantee from identical labels alone.
+
+Constraints: advice only, no training/evaluation, experiment implementation or cross-task
+messages. Write only the empty `### Answer` under this unique heading in
+`docs/research/candidates/spatial_demand_generalization/NOTES.md` on branch
+`codex/spatial-demand-generalization-a2`. Read the pinned question, then fetch the latest
+target file for writing and use its actual blob SHA. Preserve the question and all other
+bytes; stop on overlapping edits. Report the actual commit on success. On write failure,
+return the complete answer in chat, not just a receipt, SHA or link.
+
+Return a focused recommendation with MATERIAL_DISSENT yes/no and the strongest objection to
+my current leaning. State what the new evidence strengthens, weakens and leaves unresolved;
+whether crossover, a specific alternative or ending this route is now the useful next choice,
+and why its distinct possible observations matter. For any proposed intervention, name an
+intermediate prediction, native outcome, simplest competent comparator, exposure and fit/
+non-fit costs; retain assumptions and uncertain cost honestly. Distinguish ending this
+recipe, ending current spatial investment and becoming idle. No positive result, new idea
+quota, rule revision or automatic confirmation is requested. Cite sources actually used for
+consequential claims and state unread decision-critical gaps without pretending verification.
+
+### Answer
