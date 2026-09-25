@@ -191,3 +191,64 @@ rules within this one runtime. That makes the proven available CPU path appropri
 this new fixed-policy evaluation; it neither diagnoses the remote faults nor proves a
 repair. The old CADC score is not a bitwise target across the two installations. A fresh
 local node admission, exact committed inputs and native control checks remain required.
+
+## 2026-09-25 — C2 engineering accepted; canonical control row remains unsynchronised
+
+The existing registered Implementer delivered only the three owned code/test paths.
+The direct DM read the runner/CLI/tests and requested concrete corrections before acceptance:
+distinguish returned native steps, batched actor calls, sampled UAV motions and durably
+traced ticks; retain compact summaries and full raw message sequences; compare actual
+float64 reset scenes rather than only the adapter's float32 projection. The final runner
+also retains event-level packet counts through caught partial episodes, exact initial
+scene dtype/shape/digests, native post-motion positions, and the live numerical versions
+and thread environment. Each episode closes its environment. These measurements do not
+enter policy inputs or change any scientific rule/seed/endpoint.
+
+The registered independent Reviewer read the final paths, frozen dependencies and tests.
+No material engineering finding remained. It independently matched all eight pinned
+dependency digests to frozen source `22e009c9387f2507aab6ebab4555d92e27f5070e`, and
+verified stochastic RR sampling/GRU/private streams, delivery-before-action and pre-motion
+payloads, native reward/fee/service units, missing-message denominators and censoring,
+signed paired reductions, and admission before scientific imports. Final accepted SHA256:
+
+- runner.py: `d3e7c5ad73212af4e32bd2e159fdfab0e7242d8a41e330757e368b76e337af25`.
+- CLI: `8db1b45bd79d9863af4fb068e836b92f3af9771228b5564bbd58952437211b91`.
+- test_runner.py: `9793db93eb494b28814074f6fe3be700a2d15fea17486a2b5e02cf8bd63be4b9`.
+- __init__.py: `529770d07be47a0fbedfefd84999bfdf9d34b7824c316186ba274979e8d1f937`.
+
+The Implementer's final focused pytest invocation under the configured CPU Python with
+its venv bin on PATH reported **7 passed, 14 inherited Matplotlib/Pyparsing warnings in
+4.98 s**. The DM and Reviewer read the test evidence and reconciled final file hashes;
+they did not repeat already-passed checks. That final suite used a synthetic untrained
+archive and disjoint 941/942-million addresses: six native steps in the complete three-rule
+H2 fixture, three in a caught post-step failure, and three in the abrupt-exit fixture
+(its last native step never returns to the runner). Thus this final invocation spent
+12 technical native steps, zero fits and zero production-world exposure. Earlier
+engineering checks are additional support work and were not aggregated into that number.
+
+The hard-exit test preserves the completed prefix and fsynced partial trace; a transition
+between native mutation and durable recording can remain unknown. No summary is allowed
+to turn that unknown interval into an invented exact count or paired result. Actual-native
+fixtures cover H2; H256 completion and the full 96-episode resources remain unobserved.
+Endpoint handling was read against the frozen native source and terminal-channel check.
+Measured production wall/RSS/output bytes and durable bulk retention remain future work,
+not facts established by these engineering checks. The DM accepts this bounded code for
+the already written exploratory comparison; this is not scientific acceptance of a result.
+
+The B20 closure, complete last Pro advice and C2 registration were published to main at
+`a2b074546db70db5062bb418c295f97abd9ac351`, preserving all other direction rows and owner
+controls. The author index now includes that published current state. Read-only inspection
+of the configured canonical checkout still finds no C2 row, so its native policy parser
+refuses `delayed_broadcast_timing`. Its RESEARCH SHA256 remains
+`49696c4871550833c2f772547c4f6e73e2b56c8160f70bf18d0fc59f52d86ef7`.
+The selected local_linux compute entry and published-control binding match the author
+configuration exactly; an unrelated Windows interpreter metadata difference needs no edit.
+
+The initial continuation instruction prohibits modifying `/home/fires/hmasd-wsl` or its
+Git index. The owner's earlier one-cell exception covered only the old direction's
+exploring→confirming state and has already been used. It does not cover adding C2.
+The DM therefore prepared a reviewable one-line patch that only inserts the published
+C2 row into the canonical Active table, without applying it or touching that index.
+All authorized preparation and independent review are complete; that narrow control-file
+exception is the remaining owner dependency before fresh native resource admission.
+No result-bearing launch, worker restart, repeated Pro Send or App task message occurred.
