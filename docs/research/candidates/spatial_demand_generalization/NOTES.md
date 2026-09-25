@@ -1048,3 +1048,28 @@ Continue the already fixed block 1, seed 263000102, training base 264100000, con
 budget, stopping-rule or claim change. Fresh main `3ad84d020cf4b44b6dae0d317025b410148940d2`
 retained the lead, confirming standing and lifted owner pause. This individual-block acceptance
 is recorded on the direction branch; main/index publication remains at the material study boundary.
+
+### C01 block 1 accepted; fixed study continues
+
+Block-0 compact original evidence and the complete reading above are published on the
+direction branch at `dec1ab78f`. The remote authoring checkout remains clean for tracked
+inputs at the fixed C01 source; its retained block-0 native output was not checked out over.
+
+The planned second pair, block 1 / model seed 263000102, received native admission at
+**2026-09-25T08:38:04.165311Z**. The kernel observed current main
+`3ad84d020cf4b44b6dae0d317025b410148940d2` and passed fresh actual-node resource admission:
+13,997,506,560 physical/effective available bytes against the 4,294,967,296-byte floor.
+The native [manifest and accepted operation reference](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b1_s263000102/launch-manifest.json)
+and [preflight](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b1_s263000102/admission-preflight.json)
+were copied with initial launch status and U config; all four byte counts and SHA256 values
+match the executing node. Manifest SHA256 is
+`a14b31d4447f1c9aeae46de747d8e2459c63835dd20e27cc48738ed4f6bcd4d9`.
+Actual U configuration verifies constructor 269901000, training base 264100000 and the
+unchanged fixed evaluation worlds. Input remains `9e44adde3d54fcd0363a2ebdbc1468494141c27b`.
+
+Native status and the registered observer both saw the accepted operation running with
+matching supervisor/runner identities, consistent records and no exit witness. At
+08:38:59Z the same-handle observer `spatial-c01-b1-s263000102` was active at generation
+**12**, window 1,500 seconds, with no errors or pending events. The completed block-0 event
+remains consumed. This is the second prespecified pair in the one C01 study; no confirmation
+verdict, additional block, revised claim or new scientific investment has been selected.
