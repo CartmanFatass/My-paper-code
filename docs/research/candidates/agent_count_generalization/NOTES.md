@@ -20082,3 +20082,114 @@ completion and current owner/resource controls, never on favorable scores.
 - Stop: no result launch, scientific choice, Pro send, child spawn or shared-record edit by
   Implementer. Return the explicit diff, checks, deviations and remaining gaps. DM handles
   review, exact-source publication, fresh admission, ordered execution and complete reading.
+
+
+### B20 preparation control-state observation
+
+The adopted plan and scoped index standing are published to main at
+`f08696dc5ad2543676aca11aa7c0f27eb77970ef`. A read-only call to the existing native
+policy check finds canonical and fresh-published pause=lifted and the same unchanged
+`Codex DM (independent session)` lead, but canonical state=exploring versus published
+state=confirming. It returns: `fresh published control state does not authorize this
+direction and lead`. This was a read-only preparation check, not a launch or failed fit;
+no new claim/output root or scientific process was created.
+
+The original task-creation instruction explicitly says not to modify the user's
+`/home/fires/hmasd-wsl` checkout/index or the old DM's checkout. The DM therefore prepared
+an unapplied task-local patch that changes only this direction's State cell to the
+published confirming value, and requested the owner's narrow exception in this task.
+The canonical checkout and index remain unchanged. Do not relabel the actual confirmation
+as exploration to evade the mismatch. Implementer work, independent review and publication
+in owned worktrees continue; execution needs the real control agreement and fresh admission.
+This is not an owner research pause or a new scientific approval request.
+
+
+### B20 implementation accepted after focused checks and independent review
+
+The Implementer returned only the assigned new B20 candidate, guarded CLI and tests. The DM
+read the source differences and accepts the implementation. Normalized AST comparison
+against B19 (only B19/B20 diagnostic labels normalized) leaves the collector, recurrent PPO,
+roster adapter, evaluator, persistence and count helpers unchanged. Differences are the
+explicit Arm/block context, source paths, metadata and run_batch's exact block bindings.
+No frozen B19 or shared learner/environment/admission source was edited.
+
+The new artifact-only reducer reads the exact three complete production blocks, validates
+config/seed/world/endpoint/pairing/counts/source and actual retained artifact hashes, and
+computes paired-world effects followed by the fixed n3/ddof1/df2 t95 rule. It reports the
+complete per-world own learning/N6 comparison and separate component/joint readings.
+As in B19, the field named adverse_J_or_S_worlds includes nonpositive differences (ties as
+well as losses); sign counts and raw values distinguish strict negative evidence. No tied
+world will be described as a strict loss solely because it occurs in that field.
+
+Two independent Reviewer findings were repaired before acceptance:
+
+1. A seemingly stdlib-only bindings import still executed the scientific parent package
+   before admission. The CLI now validates a tiny stdlib block/seed map first, performs
+   admission, then imports and cross-checks the actual bindings. A fresh subprocess import
+   blocker verifies that --help/refusal cannot import NumPy/Torch before the guard.
+2. The recorded per-file source list is not the complete transitive learner/config closure.
+   In addition to those file hashes, the reducer now requires valid lowercase full40-hex
+   launch SHAs and **one identical input commit across all three blocks**. This fixed
+   batch will launch all cells from that one published commit using native --snapshot,
+   even while later notebook/publication commits advance. This reuses Git's full tracked
+   input identity and does not invent a dependency registry. It does not claim hermetic
+   installed-library state or global bitwise replay.
+
+The Reviewer found no remaining material issue after checking both repairs and the new
+reducer. It independently checked the critical value with SciPy and compared the consumed
+schema with actual B19 producer outputs. The successful unmocked serialized three-block
+fixture exercises all reader layers and the direct-file reducer CLI; its checkpoint and
+raw evaluation payloads are compact synthetic hashable stand-ins, not scientific evidence.
+Their internal tensor/trajectory numerics are not certified by that fixture. Actual B20
+outputs still require native terminal reconciliation and full DM raw-artifact reading.
+
+**Verification and support cost.** Configured local scientific Python, final focused B20
+suite: 23 passed in9.34s; 14 existing Matplotlib/Pyparsing deprecation warnings. The Reviewer
+ran the earlier complete19-test suite in8.18s and the final affected17 reducer tests in5.27s.
+These are repeated technical checks, not independent training replications or an aggregate
+wall-time estimate. The full-suite successful real fixture uses H20/two training and
+2 evaluation lanes/Torch4, F=(6,6,6,6), M=(4,6,8,4), disjoint seed9201019 and technical
+world offsets. It performs160 team training steps **per arm**,320 total, plus360 evaluation
+team steps, eight actual updates and nine actual panels. The injected first-training-step
+failure fixture adds120 evaluation team steps and zero training transitions; M remains
+unstarted. Thus these two fixtures in one full suite account for800 team /4,720 UAV
+transitions, not a production fit or confirmation data. The Implementer's initial short
+handback counted160 training steps without multiplying by two arms; this record corrects
+that arithmetic using the passing per-arm assertions. Development/review repetitions add
+support cost; no full H500 pair was launched for testing.
+
+The DM's repository-wide new-runner source check was red on the unchanged historical
+`scripts/run_fsd_commitment_visibility_b12.py`, which is byte-identical to HEAD (SHA-256
+`ae82ef7a2e21eaaa61919196f9b9ec1910d9b5cdf2fcad2126c091e6eec869e8`). The focused B20
+source guard check passes, as do the new CLI's runtime/fresh-process tests. The unrelated
+FSD file remains unchanged. No broad test success is claimed.
+
+Final independently reviewed file SHA-256 identities:
+
+| B20 owned path | SHA-256 |
+| --- | --- |
+| candidate __init__.py | ff51619a2b00faf51f09275f54cc10a2d88209b97f69e074e10308674b960f3d |
+| candidate bindings.py | 8707d1cea9c6d984ca0e9a8f54e2debcd478c50ea31d0251d7c9ab590374dfe7 |
+| candidate runner.py | 52b6c9fea35dd92ee6b82332d837bbb2abaabd60d0f8f6dcbf450e78eaca230d |
+| candidate reducer.py | 1008c73f7a943b6378282f4486683782a5e3ff948e5e1a52faa5fc141bd9370a |
+| guarded CLI | dbab544dd7c17d9bbda2fd0b5c5eb795dd8c3934f754f1dc50861756470a03e7 |
+| test_runner.py | 54f51c8f11a6ae516df3228cd7179b77c0e6f737a18a5b31971671819e56e24e |
+| test_reducer.py | 38c2966c80767d8c93e87fee09a28e9726b8159410596f02a28436ecfa8a861b |
+
+The final three-block production horizon and statistical outcome are unrun. The original
+six-fit exposure, one input commit, block order and fixed stopping rule are retained. The
+canonical control-state exception remains pending in this task; no new result launch,
+old worker restart, repeated Pro Send or App cross-task message has occurred.
+
+
+### Owner-authorized B20 control-state alignment
+
+The owner answered the pending narrow exception: “允许，只同步该状态单元格”. The DM changed
+only agent_count_generalization's State cell in the canonical RESEARCH file from exploring
+to the published confirming value. Before/after file SHA-256 are
+`5aad4e85d8a81ecad84d31516ca15bfc155b822a3749b6d7e528317cae5c0161` and
+`49696c4871550833c2f772547c4f6e73e2b56c8160f70bf18d0fc59f52d86ef7`;
+all other file bytes are preserved and the canonical Git index digest is unchanged.
+This resolves the specific preparation mismatch. The six-fit plan remains fixed and actual
+node admission must still occur for the first new operation. This exception does not change
+ownership, pause, the frozen prior operations or the scientific reading.
