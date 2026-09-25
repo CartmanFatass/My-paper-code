@@ -180,3 +180,14 @@ path check at separate technical seeds. Independent registered Reviewer must ins
 this high-risk state/RNG/checkpoint/native-metric path. The DM reads and accepts the diff
 and checks; helpers choose no science, edit no notebooks/index, commit nothing and launch
 no result-bearing operation. No child delegation or App message is part of this scope.
+
+### Execution-node reason
+
+The owner prefers `wsl_4070` before local resources. This comparison selects the configured
+`local_linux` CPU path because the two prior unexplained remote SIGSEGVs remain unresolved,
+whereas this existing independent Python3.10.20/Torch2.7.0+cpu installation completed B19
+and all six B20 fits with retained native evidence. C2 needs no GPU and compares all three
+rules within this one runtime. That makes the proven available CPU path appropriate for
+this new fixed-policy evaluation; it neither diagnoses the remote faults nor proves a
+repair. The old CADC score is not a bitwise target across the two installations. A fresh
+local node admission, exact committed inputs and native control checks remain required.
