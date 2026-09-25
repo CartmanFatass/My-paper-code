@@ -606,3 +606,93 @@ world 0 尤其限制 RR 的推荐范围：RR−NONE 为净 J −.045931681168、
 [c2-policy]: https://github.com/CartmanFatass/My-paper-code/blob/22ddf7b8fb9d2a02d01734939a9631866ff9a59e/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py
 [c2-background]: https://github.com/CartmanFatass/My-paper-code/blob/c41a10c21ed6d1722c84fc813c3e2c4718684129/docs/research/RESEARCH.md
 [c2-prior]: https://github.com/CartmanFatass/My-paper-code/blob/c41a10c21ed6d1722c84fc813c3e2c4718684129/docs/research/archive/2026-09-24/RESEARCH-question-led-programme-adopted.md
+
+## 2026-09-25 — Adopt the complete advice and end RR9302 timing modifications
+
+The DM read the complete 10,701-character Answer above at immutable commit
+`4e4630a364a111cbea79598f479cfd070b1b0fc8`. Same-key delivery verification found exactly
+one answer commit, touching only this notebook, with the question and every other original
+byte unchanged and the assigned subsection previously empty. The first collected chat
+text was a 1,093-character delivery receipt/summary, despite its observer classification
+as “chat answer”; it was not accepted as the scientific answer. The complete exported
+Answer, including its final newline, is 19,362 bytes with SHA256
+`49cefa11df4c3b73fd24867b6505c24decaead986f208b5cb69c4b353e86793e`.
+The operation key is `hmasd:9712f425184b661c2bce7ddd561626dcadbbfd2f771248bd44324aa43f4af9f5`.
+An initial composer-loading timeout occurred before any Send; a read-only check found the
+composer recovered and the same unchanged key/text was then sent once. No submitted
+question was repeated. The operation is COMPLETE, delivery is DELIVERED, and a read-only
+browser check finds no tab for that operation's conversation; unrelated tabs were preserved.
+Private account addresses remain solely in local transport state.
+
+**Decision: adopt the recommendation, preserve RR, and end further timing-intervention
+investment on this frozen RR9302 asset.** FAST_ONLY does not replace RR, and NONE is not
+the default on the observed panel. No additional rule, age threshold, new panel, receiver
+fit, confirmation or diagnostic is queued. This closes the chosen asset's investment,
+not communication science, the unresolved payload/pending mechanism, or the DM's ability
+to own a materially different question. The direction is archived for investment only.
+The new advice reports MATERIAL_DISSENT: no; agreement is advice, not another experiment.
+
+The DM checked its consequential static claims against the executed source
+`22ddf7b8fb9d2a02d01734939a9631866ff9a59e`. In CADC `Channel`, each sender's RR period
+is five ticks, both delivery delays are at most five, and `begin_tick` delivers and clears
+pending before the actor input and request. `advance` uses an action-independent channel
+stream. The runner preserves that order and only the current physical owner may request.
+Thus a slow RR packet cannot block its sender's next RR slot. For a rule retaining these
+slots and only deleting requests, send/delivery times are subsets of RR's on the same
+channel sequence. Where both caches are valid, its latest delivered send timestamp cannot
+be newer; it cannot create validity where RR lacks it. This is a timestamp/validity fact,
+not an inequality between different valid-only pooled denominators, identical payload
+values on diverged trajectories, or a reward-dominance theorem. It does not cover slot
+transfer, changed delays, new bandwidth or a different pending/receiver contract.
+
+The strongest feasible local repair is an age/gap guard that restores some slow sends.
+It should improve the FAST_ONLY update process, but its serious comparator is RR, which
+already supplies those opportunities. Current evidence identifies no lawful trigger that
+separates a dispensable update from one important to complete service. The fee identity
+`delta J_net = delta J_physical + .001 * fraction_of_RR_attempts_saved` is exact for the
+fixed objective; the maximum fee space is .001/tick, whereas B01's observed mean physical
+loss was .009529851234. This is a scale comparison, not a new margin, proof that a gentler
+rule must lose, or a requirement that future hypotheses be known positive in advance.
+Age tuning, payload replacement and rate-matched thinning are implementable but do not
+currently justify their full comparison cost: their clearest predictions either restore
+what RR already provides or refine an internal explanation without selecting a better
+use rule. Reordering slots leaves the subset argument but displaces other RR opportunities;
+no specific supported tradeoff or distinct complete-use prediction has been selected.
+
+The advice's final-tick fee example also follows the execution order: suppressing only
+the last request after motion sampling cannot influence a later action inside H256, and
+saves .001/256 for RR. Earlier terminal-censored sends may still affect later own-pending
+inputs, so that conclusion does not extend to all censored packets. This static boundary
+example is not a fourth observed arm or useful new timing study; no source or result was
+changed to implement it. World 0's silence advantage, world 8/19 fee reversals, world 21's
+exact service tie, all favorable FAST_ONLY worlds and the old learned-send loss remain.
+
+The interpretation strengthens finite RR process usefulness and rejects FAST_ONLY's
+prewritten use prediction, while leaving content causality, age causality, trained-policy
+population ranking and other hosts unresolved. Pro read the specified compact records
+and source, not the local raw traces or checkpoint; the DM's complete readback and verified
+retention remain the underlying evidence. No Pro consensus is reported as independent
+raw verification. Advice/reading/static reasoning added zero fits, environment steps,
+policy inference, optimizer/storage calls or model branches; text and review costs remain
+additional. The managed execution snapshot was reclaimed only after its native terminal
+witness, published source reachability, external outputs and independent retained copy
+were verified; the native claim, source commit and all outputs remain recoverable.
+
+For continuity the DM refreshed published main `0f4b705dc322fa9866b29c670166ba6293e4de07`
+and reconsidered the current plan's nearby alternatives. C1 asks a distinct finite-data
+model-knowledge question, with plug-in NEAR versus uncertainty-aware value and cheap AF;
+the prior plan explicitly leaves its lawful calibration exposure, parameter prior and
+decision-changing comparison unselected. C07's known-model positive is already complete;
+estimating its .75 constant again or repeating its LONG comparison is not a missing C2
+obligation. D1's existing population preparation is retained with its recorded owner and
+cost; A2/C01 and S7 retain their active leads, and Claude FSD/G33 controls are unchanged.
+These independent questions remain in the project map, not a hidden continuation queue
+or evidence that their scientific possibilities are exhausted. The current C2 alternatives
+above are closed on their specific value-of-next-observation reasoning; no new direction
+is registered just to replace a finished batch or keep a runtime occupied.
+
+Publish this actual decision and the directly affected scoped timestamp insight in the
+normal main update, preserving all other writers. The canonical checkout's previously
+approved one-line insertion remains the only C2 edit there; its file/index permissions
+are not expanded to mirror this publication. No worker restart, new Pro Send or App
+cross-task message is part of processing this completion.
