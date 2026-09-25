@@ -1435,3 +1435,28 @@ change. Both published and canonical-node owner pauses remain lifted. Consumed t
 and rearmed the same `spatial-c01-b3-s263000104` handle to generation **23**, window 1,500
 seconds. Three of five pairs have complete scientific readings; no new launch, worker
 restart, Pro resend, scientific verdict or main/index update follows this checkpoint.
+
+### C01 block 3 checkpoint — 2026-09-25T12:42Z
+
+Read the sole pending generation-23 checkpoint `17b041d97dcfba0e94caa6d3`, wake
+`6ffc1cf3-8d96-42cd-8033-f0c13c6e418f`. At 12:40:52Z the same accepted operation retained
+matching live supervisor/runner identities, consistent records, no exit witness and zero
+observer errors. At 12:42:03Z U reported complete: 360,000 training/stored team steps,
+2,160,000 UAV steps, 720 episodes, 45 updates and 101,250 actor/critic optimizer calls each.
+Its six evaluation panels account for 96,000 team steps and 192 episodes/resets; evaluation
+storage/optimizer calls are zero, and all initial/final isolation flags are preserved.
+U arm wall was 2,200.950139 seconds. Whole-pair collection and reading remain pending.
+
+M's live arm record was at rollout 19's update boundary: 152,000 training/stored team steps,
+912,000 UAV steps, 304 episodes, 18 completed updates and 40,500 actor/critic optimizer calls
+each. It had no evaluation transitions yet; arm wall was 860.519234 seconds. Both failure
+fields were null and stderr was empty. The batch-level M fit flag remains its earlier
+boundary snapshot; these current counts come from the live arm record.
+
+Fresh main advanced to `cb2afd9eae37529420539695ec11943de7f1a754`. Read the B20 completion and
+shared interpretation: its joint claim is unestablished, with N7 adverse and N5 unresolved;
+that other fixed confirmation does not change this accepted C01 protocol or provide a C01
+verdict. This direction's standing, lead, pause and shared controls remain unchanged, and
+the canonical-node pause is lifted. Consumed the checkpoint and rearmed the same
+`spatial-c01-b3-s263000104` handle to generation **24**, window 1,500 seconds. No worker restart,
+Pro resend, new launch, scientific verdict or main/index update follows this checkpoint.
