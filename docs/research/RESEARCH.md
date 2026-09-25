@@ -607,7 +607,7 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 | 问题组 / 工作 | 需要区分的判断、首项比较 | 当前选择与完整已知成本 | 可改变下一步的结果 |
 | --- | --- | --- | --- |
 | **训练条件与泛化 A1：人数覆盖** | LOCAL1固定N6训练F，对比[4,6,8]训练M；N5/N7用途与N6代价 | **已接受B19，原DM完成。** 2×360k训练＋144k评价＝864k团队步 | 固定N6已有用；M是否提供额外用途尚待配对。N5/N7对M是支持内插值，不是超出[4,8] |
-| **A2：空间任务覆盖** | 固定N6/c10，uniform训练对比等量uniform/cluster混合；hotspot家族全程留出 | **已由独立DM实际承接，前瞻与实现中。** 2×360k训练＋144k评价＝864k团队步；新墙钟未知，尚未接受launch | hotspot的J与服务增量、uniform代价及各自学习；仅cluster改善是已见条件专门化 |
+| **A2：空间任务覆盖** | 固定N6/c10，uniform训练对比等量uniform/cluster混合；hotspot家族全程留出 | **owner已同意执行，新独立Astra Max DM已实际接续前瞻/实现。** 2×360k训练＋144k评价＝864k团队步；新墙钟未知，尚未接受launch | hotspot的J与服务增量、uniform代价及各自学习；仅cluster改善是已见条件专门化 |
 | **A3：真实能力组成** | 固定人数、改变一种真实物理能力及合法能力信息；普通共享actor＋能力特征作主参照 | **后备，顺位6。** 留出组成、能力语义和评价尚未定价，不立即购买fit | 有别于总容量/人数的可行动差异，及未见组成上的实际用途；不先选MI/掩码/attention |
 | **A4：回合内成员变化** | 明确加入/退出、实体身份、幸存者历史和删失；普通循环/刷新对照与所选历史处理 | **后备，顺位8。** 事件与历史合同未定；旧两次SIG11及缺终点保留 | 静态人数不能解释的动态恢复问题；不自动复跑旧失败 |
 | **能源约束下的服务 B1：反馈下学习** | 同一部署F，训练时采用F的A对比N；H3000完整J、服务与风险 | **已接受B09，原DM完成。** 2×180k训练＋至多288k评价＝至多648k团队步 | A−N有限增量及服务损失；不与旧失败A/旧N拼接，不宣称能量恢复即同机服务恢复 |
@@ -670,10 +670,14 @@ D1固定任务分布、单独改变伙伴训练；若改任务与伙伴两项，
 
 ### 运行安排、DM连续性与停止
 
-当前两个原DM完成B19/B09；原生返回已确认B19的F完成、M在训，B09的N在训，尚无最终配对判读。
-DM2的准备工作已完成且无活动producer。**下一研究运行名额优先给A2**，随后在新结果与完整成本下比较C2/B2
-等候选。准备、登记计划和任务实际承接是不同事实；本次复盘新增0fits/0环境步，未创建或唤醒新App任务。
-两批各自已经接受的来源、句柄、结束规则和负责人保持不变；技术失败不作科学阴性、不拼接旧端点。
+Owner于2026-09-24同意计划并要求开始推进。两个原DM继续B19/B09；已核验前者F完成、M在训，
+后者N仍在执行，尚无最终配对判读。旧DM2准备已完成且无活动producer。
+**第三个研究运行名额由新独立任务「DM A2 布局训练泛化」实际接续。** 原生任务已运行、创建研究分支，
+已读当前DM职责及完整已采纳建议，开始固定来源核对与前瞻/实现；模型/effort核验为gpt-6-astra/max。
+2 fits/864k团队步仍是前瞻成本，尚未有新结果launch接受。新DM自行登记本方向及路由、实施、准入、
+观察、完整判读和发布；不等Root ACK。根任务只更新本轮启动的协调事实，不代写其NOTES或实验结果。
+随后依新结果和完整成本比较C2/B2等后继；当前不同时启动第四条研究。两批既有来源、句柄、结束规则
+和负责人保持不变；技术失败不作科学阴性，不拼接旧端点。Claude的FSD暂停及G33冻结不变。
 
 DM接到的是一个有限而可修订的问题及当前有价值的比较：解释如何变化、下一观察为何值得做，都属于职责。
 一次只推进一个结果性研究；结果后自主选择继续、复现、实质修订、转向或有依据地结束，不欠阳性或无穷候选。
@@ -742,7 +746,7 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [完整计划与DM关系审查](archive/2026-09-24/RESEARCH-question-led-programme-adopted.md#decision)已核验交付、读完并采纳；[现行计划](#current-research-plan)选择A2为首个补位，保留两个已接受研究及完整后备。控制`55d4957d3`已发布，不声称现有任务已热加载。唤醒修复`f7d2b40d7`已有26项测试和真实队列送达证据；本轮没有跨任务消息、新任务或新科学运行。 |
+| Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [完整计划与采纳](archive/2026-09-24/RESEARCH-question-led-programme-adopted.md#decision)后，owner已同意执行。Root创建并原生核验「DM A2 布局训练泛化」task `01a0d6ab-ccf0-76d3-8aa3-4489b9d2ee10` / `local`，checkout `/home/fires/.codex/worktrees/c2a5/hmasd-wsl`，branch `codex/spatial-demand-generalization-a2`，运行配置gpt-6-astra/max；已读当前规则/建议并开始前瞻准备。该DM负责自己的初始方向/路由登记及之后的独立发布。现有B19/B09继续，旧DM2无活动producer；本次未重启或重发旧操作，也不形成App报告循环。 |
 | DM1 普通策略人数泛化 | `01a0d622-53d3-7f43-9740-6eaef625899a` / `local` | `/home/fires/.codex/worktrees/a138/hmasd-wsl` · `codex/agent-count-generalization-b19` | Owner授权的新会话已实际接续，当前准备B19新配对及保存修复；独立完成并出版，不发送App消息。旧task `01a0c6ef-cdd4-7113-b2d9-20487e35171b`、7fef checkout和B18终态/47产物保留历史；无旧运行或Pro被重启、无旧观察状态被接管。[接续、前瞻与技术选择](candidates/agent_count_generalization/NOTES.md#2026-09-24--new-dm-continuation-and-b19-prospective-matched-ordinary-training)。 |
 | DM2 独立队友兼容性研究 | `01a0d623-621b-7a70-96b2-2e7bf0b6b1a9` / `local` | `/home/fires/.codex/worktrees/fb7c/hmasd-wsl` · `codex/dm2-crossplay-feasibility` | 已实际接续并完整完成0fit/0环境步的ordinary cross-play准备，现决定结束当前投入、无运行中科学操作或待收Pro；[完整设计与决定](https://github.com/CartmanFatass/My-paper-code/blob/e38a8ec47/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--cross-play-preparation-complete-decline-current-population-training-investment)。旧task `01a0cdb8-10c9-7743-a05a-6dcfc42621c5`、5916工作区和B07–B09证据保留；未激活population训练，无跨任务消息或旧批次重启。 |
 | DM3 S7 服务反馈学习 | `01a0d621-fad7-7863-ab0a-89b148926205` / `local` | `/home/fires/.codex/worktrees/31f5/hmasd-wsl` · `codex/uav-service-feedback-b09` | Owner要求新建任务接续，现会话已实际承担同一方向DM责任；B09前瞻与技术准备见NOTES。旧任务`01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`、`d319` checkout/`codex/uav-service-predictive-control`及B08终态完整保留；无旧producer或待收Pro接管。本任务使用自己的观察状态，不自动重启旧批次或发送App消息。 |
