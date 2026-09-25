@@ -509,3 +509,190 @@ communication is exhausted. Return MATERIAL_DISSENT yes/no on the DM's interpret
 and current lean toward retaining RR; scientific choice remains with the DM.
 
 ### Answer
+
+**建议：保留普通 RR，结束这份冻结 RR9302 资产上的进一步时序干预投入；本次不选择后继实验。**
+
+**MATERIAL_DISSENT: no.** 我同意 DM 对 B01 的限定解释及当前保留 RR 的倾向，并建议把倾向落实为当前投入的结束，而不是维持一个等待第四条规则的开放任务。这是对下一笔观察价值的判断，不是 RR 最优性证明，不是“通信已经研究完”，也不把结束一个资产的修改等同于结束 DM 的科学责任。科学选择仍由 DM 作出。[固定问题与完整结果][c2-notes]；[治理 §§2、5][c2-governance]。
+
+#### 1. B01 改变了什么判断
+
+预写预测不是“被选中的包传得更快”，而是 FAST_ONLY 相对 RR 提高平均净 J、不丢失平均物理 J 或服务，并保留相对 NONE 的物理用途。它的前半部分失败，后半部分仍成立。RR 的平均净 J / 物理 J / 服务为 .186992805337 / .187992805337 / 11.224243164 人每 tick；FAST_ONLY 为 .177958071290 / .178462954103 / 10.608886719；NONE 为 .107579821977 / .107579821977 / 6.066040039。完整配对读数如下，符号计数依次为正／负／平：[原生 summary][c2-summary]。
+
+| 配对差 | 平均净 J 差 | 平均物理 J 差 | 平均服务人数/tick 差 | 净 J；物理 J；服务的符号计数 |
+| --- | ---: | ---: | ---: | --- |
+| FAST_ONLY − RR | −.009034734047 | −.009529851234 | −.615356445313 | 7/25/0；6/26/0；7/24/1 |
+| FAST_ONLY − NONE | +.070378249313 | +.070883132125 | +4.542846679688 | 30/2/0；31/1/0；31/1/0 |
+| RR − NONE | +.079412983360 | +.080412983360 | +5.158203125000 | 31/1/0；31/1/0；31/1/0 |
+
+**加强的是这份已训练资产的完整发送—接收过程的有限使用价值。** 保持权重不变时，RR 相对静默既增加物理 J 和服务，也在付费后保留相当大的平均净收益；不是只凭费用字段制造的阳性。FAST_ONLY 也没有把通信的全部用途消掉。因此，此时丢弃 RR、默认静默，或把普通发送视为无用，都不受这个面板支持。[c2-summary]
+
+**削弱的是“按当前短传输信道删包，便能得到更好的使用方案”这一具体机会。** FAST_ONLY 少尝试 4,056 次，即减少 49.51171875%；每 tick 节省 .000495117188，却伴随 .009529851234 的物理损失。覆盖和质量也分别下降 .012307128906 和 .003049536667。更少费用是真实好处，不能因 summary 的通用 `adverse` 计数把负费用差误写成科学损失；但它不足以抵消本次物理损失。高度在这个目标中没有惩罚项，不能借平均高度差改写排名或宣称节能。[c2-summary]；[执行器的奖励、费用与服务读法][c2-runner]。
+
+**仍未解决的是收益的内部机制及其他学习／部署条件。** 本次一起改变了 payload 历史、有效性、年龄、own-pending、GRU 输入历史和相对 RR 训练分布的偏离；不能把 RR−NONE 分成“真实内容贡献”与其他输入作用，也不能把 FAST_ONLY 的损失单独归因于缓存年龄。它没有比较另行训练的 no-communication 接收器，更没有增加独立训练实例。旧 LEARNED−RR 的 −.013354921301 净 J 仍是旧世界上的另一完整学习包结果，不与 B01 池化、不被这里的 RR 用途抵销。[c2-notes]；[CADC actor 与采样][c2-model]。
+
+#### 2. 不只是 transit 代理失败：源码限制了直接的“时序修复”机会
+
+行动时的信息读数确实恶化。RR / FAST_ONLY 的已交付包平均传输为 2.971914265 / 1 tick，但有效缓存的合并年龄为 4.962411630 / 13.032098121 tick，缺消息比例为 1.923828125% / 6.4453125%。各规则共有 163,840 个非自身 receiver/sender 行动机会；有效年龄的分母不包括缺失项。NONE 的年龄未定义，不能记为零。FAST_ONLY 的初始边界缺口均值 16.5 tick、最长 74；更新间隔均值 9.274519717、最长 100。它不是用同样密集的更新换取较短延迟，而是漏掉许多更新。[c2-notes]；[c2-summary]
+
+源码还允许一个不需要新运行的、比相关性更窄的判断。RR 的同一物理发送者每 5 tick 轮到一次；传输最长恰为 5 tick；`begin_tick()` 在 actor 输入和当期请求之前交付并清除 pending。只有一个请求者时没有碰撞，信道的演化也不由请求改变。因此，**某次慢发送不会阻塞该发送者下一次普通 RR 轮次；删掉它并不提前获得下一次本机时隙。** B01 的 RR 确有 8,192 次尝试、8,192 次接受、零碰撞，符合这个结构。[c2-channel]；[c2-runner]；[c2-summary]
+
+更具体地说，对任何“保留同一 RR 轮值、只删除部分请求”的规则，在同一外生信道序列上，每个发送者的发送时刻和到达时刻都是 RR 相应集合的子集。到任一行动时刻，其最新已到达包的发送时间戳不可能比 RR 更新；该规则有有效记录时 RR 也有。共同有效项上的时间年龄因而不会优于 RR。这个结论针对时间戳与有效性，不把不同分母的 pooled valid-only 均值当作同一比较，也不要求不同闭环轨迹的 payload 数值相同。[根据 c2-channel 与 c2-runner 的静态推导][c2-channel]
+
+这**不是原生 J 的支配定理**。更旧的信息仍可能偶然更合适，删包可能节省费用，pending 和循环历史的改变也可能使某些世界改善；反例已经存在。但它排除了一个直接投资理由：在不转让时隙的删包家族内，不能声称靠过滤慢包、再调整过滤力度，就能获得比 RR 更好的更新机会。若改为重排成员或跨时隙延后发送，则已离开这个子集论证；RR 原本每 tick 用一个成功发送机会，移动一个发送必须计入对其他成员、pending 和时钟关系的影响，不能凭空多出带宽或免费的等待。[c2-channel]；[c2-runner]
+
+这里具体采用了共享背景 §§2、3、5、6 的区别：固定参数仍会通过合法观测和记忆响应；信息权利按真实接口算；发送、到达与接收者行动机会不能混同；最终用途不能由中间量替代。先前采纳的 C2 答复已经警告删包不保证缓存更鲜，本次增加的是实际反例和有用 RR 的直接比较，不是把旧警告重新命名为下一项实验。[共享背景及 C2 计划][c2-background]；[先前完整答复的 C2 部分][c2-prior]
+
+#### 3. 为什么我不购买最接近的后继比较
+
+**年龄／最长断更间隔保护的 FAST_ONLY，是值得认真考虑、但本次不选的最强直接修补。** 它可以只使用当前公共信道、原轮值、本机 pending 与本机既往发送／确定性到达时间，在断更过长时恢复 BAD 轮次发送；不需要未来信道或读取队友真状态。它相对 FAST_ONLY 可预期恢复更新、降低缺失和长缺口，同时增加费用。问题在于，最强简单对照必须是普通 RR，而不是已失败的 FAST_ONLY：恢复到比 FAST_ONLY 好，并不构成额外用途；在保留轮值的情况下，它仍不能超过 RR 的时间戳／有效性机会。[c2-channel]；[c2-runner]
+
+它真正可能赢 RR 的路线，只剩在保留足够原生用途时省下一部分尝试费，或选择性避免有害输入。前者不是无价值，后者也未被证明不可能；但目前没有一个由现有结果支持的合法边界，能区分“这一次可以省掉”与“这一次对完整闭环重要”。把年龄阈值从失败轨迹中调到看起来合适，会购买新的结果导向搜索，而不是已定位的修复。我的判断不是要求候选先证明会赢，而是：在 RR 已有完整用途、删包已显示具体损失、该修补只明确恢复 RR 已提供机会的情况下，没有足够理由优先购买它的工程、完整执行和阅读。
+
+费用尺度使这个判断更具体。对仍然只删 RR 请求的规则 X，令 r 为相对 RR 省掉的尝试比例，令 ΔP 为其平均物理 J 减 RR，则由固定目标直接有：
+
+`ΔJ_net = ΔP + .001 r，且 0 ≤ r ≤ 1。`
+
+全部通信费也只有 .001/tick；B01 这一次实际省下的约 .000495，对应的物理损失却约 .009530。这个恒等式不是新 MEI 或显著性门槛，不证明较温和删包也必输；它说明，若没有新的服务增益路线，候选必须非常好地保留物理用途，才能兑现有限的费用空间。净 J 通过服务取舍而改善仍可以是合法用途，必须如实命名和完整读取；不能事后改称信息改善。[c2-summary]；[c2-config]
+
+**率匹配删包、payload 置零或 foreign-cache 不是当前更值得买的替代。** 率匹配可以细分 FAST_ONLY 的通道选择与更新频率；内容替换可以测量该替换造成的闭环响应。但替换后的 RR-trained 输入分布不是另行训练的合法静默策略，也不单凭符号识别真实内容的独立价值。假如某种置零无害，仍未给出什么时候少发；假如有害，仍未给出怎样比 RR 发得更好。一个率匹配规则胜过 FAST_ONLY、却不能改善相对 RR 的完整用途，也不会改变当前使用选择。没有额外的具体决策问题，我不为这些区分单独启动面板。[c2-notes]；[c2-model]；[方法：working explanation / comparators][c2-methods]
+
+同样，局部 payload 创新量可以是合法触发，但数值变化小不保证 RR-trained actor 对时间戳、年龄和 pending 的后续响应小；改变谁在 GOOD 时隙发送，也不自动产生净服务改善。这些是尚可提出的研究假说，不是本次已经得到的新机会。不能因“任何第四条规则若赢了就会采用”这一普遍事实，就认定值得为它付费。
+
+一个边界例子也不能被夸大：由执行顺序可推导，在仅取消最后一个 tick 的请求、此前过程完全不变时，当期运动已采样，此包也不会在 H256 内再次参与动作，故只省 .001/256 的净 J，即 .00000390625。较早取消终点删失包则还可能改变后续 own-pending，不能同样保证物理不变。这种最后一步的费用清理不需要另买完整 32-world 比较，也不是对内部信息时机的研究后继；本答复不据此改写 RR 或向 B01 加第四规则。[c2-runner]；[c2-channel]
+
+#### 4. 保留反例，不把均值变成逐世界规则
+
+FAST_ONLY 相对 RR 的净收益在 worlds 0、2、8、10、16、17、23 为正。world 2 是最大改善：净 J +.017518817992、服务 +1.3203125 人/tick。最大损失 world 4 为净 J −.048325024106、物理 J −.048942211606、服务 −3.6484375；worlds 28、1 还分别损失净 J .040062157686、.034539688989，以及服务 2.7890625、2.5390625。它们既反对“删包处处有害”，也反对用七个净胜世界掩盖平均损失。[c2-summary]
+
+world 0 尤其限制 RR 的推荐范围：RR−NONE 为净 J −.045931681168、物理 J −.044931681168、服务 −2.97265625；FAST_ONLY−NONE 也为净 J −.037574234806、物理 J −.036914078556、服务 −2.43359375。这个世界支持保留静默可能有利的未决问题，但世界编号和事后知道的整回合收益不是部署时可用的触发器。没有识别出一个合法、可迁移的开局或历史条件，就不能据此安装“坏世界用 NONE”的 oracle。[c2-summary]；[合法 actor 输入][c2-channel]
+
+费用翻转与数值平局必须分开：world 8 的 FAST_ONLY−RR 净 J +.000200284786，实际物理 J −.000299715214、服务 −.0390625，是 .0005 费用节省翻转净符号；world 19 的 FAST_ONLY−NONE 物理 J +.000043872112、服务 +.09765625，却在收费后净 J −.000378002888，而 RR 在该世界的三项仍为正。world 21 两种发送规则均为 3,184 served-user ticks；coverage 的 +3.0531133177191805e-16 是累计浮点舍入，不是第八个服务改善世界，FAST_ONLY 的质量和物理 J 仍下降。不修改原 summary，只保留这一正确读法。[c2-notes]；[c2-summary]
+
+所以，保留 RR 是这份资产和面板下有根据的工作选择，不是逐世界无损、安全保证、训练总体排序或等效判断。32 个配对世界、96 回合和独立阅读都没有把训练 n 从 1 增大。[c2-methods]；[c2-background]
+
+#### 5. 现在具体做什么，以及不花什么
+
+建议把这次咨询后的科学选择记为：**B01 已完整回答其固定问题；FAST_ONLY 不替换 RR，NONE 不作为默认；当前 RR9302 时序修改不再追加规则、阈值搜索、面板或训练。** 保留已有 RR、三规则全结果、原始证据及独立保全。可在正常结果发布中保留一个共享认识：选中包的短 transit 不是行动时信息新鲜度；普通 RR 的完整用途与其未分离的机制可以同时成立。本次只提供这个建议，不编辑共享索引或其他记录。[c2-notes]；[c2-background]
+
+这不是因为 runner 很贵，也不是因为 0 fits 很便宜。B01 的实际科学量为 0 fits、96 回合、24,576 team steps、122,880 UAV motion decisions、24,576 batched actor calls；runner wall 133.813762369 秒，runner 自身峰值 RSS 256,840 KiB，不是 supervisor/reader 合并峰值。96 个原始轨迹共 639,329,225 bytes，104 件全部产物共 639,563,125 bytes，独立保全副本另占存储。工程、咨询、原生阅读、复核和保全是额外工作；不能把最后七测试的 12 个技术 native steps 当作全部工程历史。[c2-summary]；[c2-notes]
+
+未来每增加一条完整 32×H256 规则，科学执行量仍是 8,192 team /40,960 UAV steps；若另开全新两规则配对面板，则是 16,384 team /81,920 UAV steps，尚未计工程与读取。这只是固定规格下的算术，不是选择该批，也不是把 B01 wall 或 bytes 直接承诺给新实现。若改为学习、搜索或分支估值，还要计各自数据、fits、optimizer 和所有分支／执行成本。这里没有理由为弄清一个暂不改变值得采用方案的区别，自动承担这些增量。[c2-config]；[c2-methods]
+
+**本咨询实际新增：0 fits、0 环境步、0 actor/policy 推理步、0 optimizer/training-storage 调用、0 实验模型分支；只做材料读取、静态推理和 Answer 写入。** 人机阅读与文本处理成本不因此被称为零。
+
+结束当前资产投入不要求机制被完全解释，也不关闭以后有独立价值的通信或接收器学习问题。一个未来的合法触发若有不同的完整用途预测和相应实际选择，可以作为新的研究问题竞争投入；不需要先把全部机制鉴别完、先得到阳性诊断、满足固定候选数或新增批准程序。本答复不选择这样的未来批次，不接管 A2/C01 或 S7，不改变 Claude FSD pause、G33 freeze，也不扩大已用完的 canonical-row 例外。[c2-governance]；[c2-notes]
+
+#### 6. 实际阅读范围与仍然存在的证据缺口
+
+推理输入保持题目指定版本：`3c933a2d925a55851335e6894bb4c45899364b6f` 的完整固定 NOTES（初始前瞻、B01 完整读数及本题）、constitution 指定各节、scientific-tools 指定方法，以及 `summary.json`、`config.json`、`launch-manifest.json`、`process-exit.json`；执行实现使用 `22ddf7b8fb9d2a02d01734939a9631866ff9a59e` 的完整 runner、CADC channel/model、UCOPE environment/policy；共享背景 §§2、3、5、6、C2 计划及先前答复的 C2 部分使用 `c41a10c21ed6d1722c84fc813c3e2c4718684129`。该 main 的 pre-result C2 standing 不替代本题已完成结果，也不重新产生等待旧控制行例外的依赖。[c2-config]；[c2-manifest]；[c2-exit]；[c2-environment]；[c2-policy]；[c2-background]；[c2-prior]
+
+我已读取 compact summary 中的 96 个 outcomes、21 组配对向量／归约和记录的模型前后摘要，但**没有访问本地 639 MB 原始 JSONL，没有加载 checkpoint 二进制，没有独立重做 DM 的 24,576 tick readback 或 Reviewer 的 12-trace 重构，也没有重新执行 actor、native 环境或测试**。原始轨迹正确性、原始文件的全部哈希及独立保全的实际一致性，仍依赖固定 NOTES 中 DM/Reviewer 的报告与所发布摘要，而不是本咨询的新验证。旧 learned-send 数值也按本题固定材料引用，不冒称本轮重新审计旧训练包。[c2-notes]；[c2-summary]
+
+没有因 GitHub 无法读取而缺失的本题关键指定文本；缺的是上述独立原始证据复核和任何未执行规则的实际闭环后果。前者限制“已独立复现／全面验证”的说法，后者限制“RR 已证明最优／所有其他规则都无用”的说法；两者都不妨碍在现有记录没有显现决策关键矛盾时作出这项有范围的投入判断。最新目标 blob 仅用于安全交付，不替换固定推理来源。
+
+**最终判断：有用的是保留 RR 及这个完整反例，而不是为了留下一个通信研究后继，再买一次尚不能说明为什么值得改变 RR 的比较。**
+
+[c2-notes]: https://github.com/CartmanFatass/My-paper-code/blob/3c933a2d925a55851335e6894bb4c45899364b6f/docs/research/candidates/delayed_broadcast_timing/NOTES.md
+[c2-summary]: https://github.com/CartmanFatass/My-paper-code/blob/3c933a2d925a55851335e6894bb4c45899364b6f/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/summary.json
+[c2-config]: https://github.com/CartmanFatass/My-paper-code/blob/3c933a2d925a55851335e6894bb4c45899364b6f/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/config.json
+[c2-manifest]: https://github.com/CartmanFatass/My-paper-code/blob/3c933a2d925a55851335e6894bb4c45899364b6f/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/launch-manifest.json
+[c2-exit]: https://github.com/CartmanFatass/My-paper-code/blob/3c933a2d925a55851335e6894bb4c45899364b6f/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/process-exit.json
+[c2-governance]: https://github.com/CartmanFatass/My-paper-code/blob/3c933a2d925a55851335e6894bb4c45899364b6f/docs/project/OPERATING_CONSTITUTION.md
+[c2-methods]: https://github.com/CartmanFatass/My-paper-code/blob/3c933a2d925a55851335e6894bb4c45899364b6f/.agents/skills/hmasd-scientific-tools/SKILL.md
+[c2-runner]: https://github.com/CartmanFatass/My-paper-code/blob/22ddf7b8fb9d2a02d01734939a9631866ff9a59e/experiments/candidates/delayed_broadcast_timing/c2_rr_fast_none_b01/runner.py
+[c2-channel]: https://github.com/CartmanFatass/My-paper-code/blob/22ddf7b8fb9d2a02d01734939a9631866ff9a59e/experiments/candidates/contention_aware_decentralized_communication/cadc_b01/channel.py
+[c2-model]: https://github.com/CartmanFatass/My-paper-code/blob/22ddf7b8fb9d2a02d01734939a9631866ff9a59e/experiments/candidates/contention_aware_decentralized_communication/cadc_b01/model.py
+[c2-environment]: https://github.com/CartmanFatass/My-paper-code/blob/22ddf7b8fb9d2a02d01734939a9631866ff9a59e/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py
+[c2-policy]: https://github.com/CartmanFatass/My-paper-code/blob/22ddf7b8fb9d2a02d01734939a9631866ff9a59e/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py
+[c2-background]: https://github.com/CartmanFatass/My-paper-code/blob/c41a10c21ed6d1722c84fc813c3e2c4718684129/docs/research/RESEARCH.md
+[c2-prior]: https://github.com/CartmanFatass/My-paper-code/blob/c41a10c21ed6d1722c84fc813c3e2c4718684129/docs/research/archive/2026-09-24/RESEARCH-question-led-programme-adopted.md
+
+## 2026-09-25 — Adopt the complete advice and end RR9302 timing modifications
+
+The DM read the complete 10,701-character Answer above at immutable commit
+`4e4630a364a111cbea79598f479cfd070b1b0fc8`. Same-key delivery verification found exactly
+one answer commit, touching only this notebook, with the question and every other original
+byte unchanged and the assigned subsection previously empty. The first collected chat
+text was a 1,093-character delivery receipt/summary, despite its observer classification
+as “chat answer”; it was not accepted as the scientific answer. The complete exported
+Answer, including its final newline, is 19,362 bytes with SHA256
+`49cefa11df4c3b73fd24867b6505c24decaead986f208b5cb69c4b353e86793e`.
+The operation key is `hmasd:9712f425184b661c2bce7ddd561626dcadbbfd2f771248bd44324aa43f4af9f5`.
+An initial composer-loading timeout occurred before any Send; a read-only check found the
+composer recovered and the same unchanged key/text was then sent once. No submitted
+question was repeated. The operation is COMPLETE, delivery is DELIVERED, and a read-only
+browser check finds no tab for that operation's conversation; unrelated tabs were preserved.
+Private account addresses remain solely in local transport state.
+
+**Decision: adopt the recommendation, preserve RR, and end further timing-intervention
+investment on this frozen RR9302 asset.** FAST_ONLY does not replace RR, and NONE is not
+the default on the observed panel. No additional rule, age threshold, new panel, receiver
+fit, confirmation or diagnostic is queued. This closes the chosen asset's investment,
+not communication science, the unresolved payload/pending mechanism, or the DM's ability
+to own a materially different question. The direction is archived for investment only.
+The new advice reports MATERIAL_DISSENT: no; agreement is advice, not another experiment.
+
+The DM checked its consequential static claims against the executed source
+`22ddf7b8fb9d2a02d01734939a9631866ff9a59e`. In CADC `Channel`, each sender's RR period
+is five ticks, both delivery delays are at most five, and `begin_tick` delivers and clears
+pending before the actor input and request. `advance` uses an action-independent channel
+stream. The runner preserves that order and only the current physical owner may request.
+Thus a slow RR packet cannot block its sender's next RR slot. For a rule retaining these
+slots and only deleting requests, send/delivery times are subsets of RR's on the same
+channel sequence. Where both caches are valid, its latest delivered send timestamp cannot
+be newer; it cannot create validity where RR lacks it. This is a timestamp/validity fact,
+not an inequality between different valid-only pooled denominators, identical payload
+values on diverged trajectories, or a reward-dominance theorem. It does not cover slot
+transfer, changed delays, new bandwidth or a different pending/receiver contract.
+
+The strongest feasible local repair is an age/gap guard that restores some slow sends.
+It should improve the FAST_ONLY update process, but its serious comparator is RR, which
+already supplies those opportunities. Current evidence identifies no lawful trigger that
+separates a dispensable update from one important to complete service. The fee identity
+`delta J_net = delta J_physical + .001 * fraction_of_RR_attempts_saved` is exact for the
+fixed objective; the maximum fee space is .001/tick, whereas B01's observed mean physical
+loss was .009529851234. This is a scale comparison, not a new margin, proof that a gentler
+rule must lose, or a requirement that future hypotheses be known positive in advance.
+Age tuning, payload replacement and rate-matched thinning are implementable but do not
+currently justify their full comparison cost: their clearest predictions either restore
+what RR already provides or refine an internal explanation without selecting a better
+use rule. Reordering slots leaves the subset argument but displaces other RR opportunities;
+no specific supported tradeoff or distinct complete-use prediction has been selected.
+
+The advice's final-tick fee example also follows the execution order: suppressing only
+the last request after motion sampling cannot influence a later action inside H256, and
+saves .001/256 for RR. Earlier terminal-censored sends may still affect later own-pending
+inputs, so that conclusion does not extend to all censored packets. This static boundary
+example is not a fourth observed arm or useful new timing study; no source or result was
+changed to implement it. World 0's silence advantage, world 8/19 fee reversals, world 21's
+exact service tie, all favorable FAST_ONLY worlds and the old learned-send loss remain.
+
+The interpretation strengthens finite RR process usefulness and rejects FAST_ONLY's
+prewritten use prediction, while leaving content causality, age causality, trained-policy
+population ranking and other hosts unresolved. Pro read the specified compact records
+and source, not the local raw traces or checkpoint; the DM's complete readback and verified
+retention remain the underlying evidence. No Pro consensus is reported as independent
+raw verification. Advice/reading/static reasoning added zero fits, environment steps,
+policy inference, optimizer/storage calls or model branches; text and review costs remain
+additional. The managed execution snapshot was reclaimed only after its native terminal
+witness, published source reachability, external outputs and independent retained copy
+were verified; the native claim, source commit and all outputs remain recoverable.
+
+For continuity the DM refreshed published main `0f4b705dc322fa9866b29c670166ba6293e4de07`
+and reconsidered the current plan's nearby alternatives. C1 asks a distinct finite-data
+model-knowledge question, with plug-in NEAR versus uncertainty-aware value and cheap AF;
+the prior plan explicitly leaves its lawful calibration exposure, parameter prior and
+decision-changing comparison unselected. C07's known-model positive is already complete;
+estimating its .75 constant again or repeating its LONG comparison is not a missing C2
+obligation. D1's existing population preparation is retained with its recorded owner and
+cost; A2/C01 and S7 retain their active leads, and Claude FSD/G33 controls are unchanged.
+These independent questions remain in the project map, not a hidden continuation queue
+or evidence that their scientific possibilities are exhausted. The current C2 alternatives
+above are closed on their specific value-of-next-observation reasoning; no new direction
+is registered just to replace a finished batch or keep a runtime occupied.
+
+Publish this actual decision and the directly affected scoped timestamp insight in the
+normal main update, preserving all other writers. The canonical checkout's previously
+approved one-line insertion remains the only C2 edit there; its file/index permissions
+are not expanded to mirror this publication. No worker restart, new Pro Send or App
+cross-task message is part of processing this completion.
