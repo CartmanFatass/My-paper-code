@@ -1073,3 +1073,131 @@ matching supervisor/runner identities, consistent records and no exit witness. A
 **12**, window 1,500 seconds, with no errors or pending events. The completed block-0 event
 remains consumed. This is the second prespecified pair in the one C01 study; no confirmation
 verdict, additional block, revised claim or new scientific investment has been selected.
+
+### C01 block 1 checkpoint — 2026-09-25T09:04Z
+
+Read generation-12 checkpoint `b0e1297798d2ccf3479bf41c`, wake
+`a793590e-6982-4b92-ab51-f30099a3fb34`. At 09:03:04Z the same accepted operation had matching
+live supervisor/runner identities, consistent records, no exit witness and zero observer errors.
+At 09:04:15Z U was training at the rollout-28 update boundary: 224,000 training/stored team
+steps, 1,344,000 UAV steps, 448 episodes and 27 completed updates. Its three initialization
+panels accounted for 48,000 evaluation team steps and 96 episodes/resets, with zero evaluation
+storage/optimizer calls. U arm wall was 1,481.835082388 seconds; its failure field was null.
+M was unstarted and stderr was empty. These are progress counters, not a second paired result.
+
+Fresh main remained `3ad84d020cf4b44b6dae0d317025b410148940d2`, preserving the confirming
+standing, lead and lifted owner pause; the canonical node pause was also lifted. Consumed the
+checkpoint above and rearmed the same `spatial-c01-b1-s263000102` handle to generation **13**
+for 1,500 seconds. Fixed inputs and decision rule remain unchanged; no worker, Pro request or
+scientific launch was repeated, and no main/index update was made.
+
+### C01 block 1 checkpoint — 2026-09-25T09:29Z
+
+Read the sole pending generation-13 checkpoint `175775feaa759b8c6abee047`, wake
+`04a10094-6da5-4643-b750-3e55bf7dd0fe`. The 09:28:41Z native observation retained the same
+accepted claim, matching live process identities, consistent records, no exit witness and
+zero observer errors. At 09:29:51Z U reported complete with 360,000 training/stored team
+steps, 2,160,000 training UAV steps, 720 episodes and 45 updates. Its six panels account for
+96,000 evaluation team steps and 192 episodes/resets; evaluation storage/optimizer calls
+are zero. U arm wall was 2,367.842392656 seconds. Whole-pair collection and reading remain.
+
+M's live arm record reported training at the rollout-14 update boundary: one started fit,
+112,000 training/stored team steps, 672,000 UAV steps, 224 episodes and 13 completed updates;
+no evaluation steps yet, arm wall 616.386184085 seconds. Both failure fields were null and
+stderr was empty. The batch-level M fit flag remains its earlier boundary snapshot; current
+progress above comes from M's live arm record, preserving that distinction.
+
+Fresh main advanced to `66aed19c5e6df050f7bc5340be9127cf24bda9a9`. The relevant diff only
+updates the S7 B10 result/next-question background and routing; this direction's lead,
+confirming standing, pause and the shared constitution/compute controls are unchanged.
+Both published and canonical-node owner pauses remain lifted. Consumed the checkpoint and
+rearmed the same `spatial-c01-b1-s263000102` job to generation **14**, window 1,500 seconds.
+No scientific conclusion, protocol change, new launch or main/index update follows this checkpoint.
+
+## 2026-09-25 — Crash recovery and complete C01 block 1 reading
+
+The owner reported a system crash and asked this task to continue. Generation 14 had no
+pending event and retained an old 09:52:33Z running observation. Direct reconciliation of the
+**same accepted operation** found a valid ordinary exit 0 at **09:56:32.188968Z**, with the
+original supervisor/runner identities absent and consistent records. No worker, fit or Pro
+question was restarted. Rearming only the observer produced generation-15 READY event
+`ad1688dc76ae9df76f6f3eb4`, wake `fa79b208-c8b0-435c-845a-445ea34b1dda`; this was fully read
+and consumed after artifact verification, advancing to generation 16.
+
+### Local publication recovery
+
+The crash left an empty object `3d2f7a36340ecb1a1a520909f729becf14c0347e` in the local shared
+Git store. Fetch failed while validating another direction's branch reference. This task's
+HEAD remains `649030b9bb5c5c677c7deae393cb4a723c802c9c`; its physical NOTES and the two
+uncommitted checkpoint entries survived. Before further editing, the complete 96,555-byte
+notebook was independently copied to
+`/home/fires/hmasd-recovery/spatial-demand-01a0d6ab-20260925/NOTES-before-recovery.md`
+(SHA256 `cb3156e98e64fd5867df601ff395ce9d6c5d1e136e420f80959f36a7f2e878b2`).
+
+The shared damaged store and other branch references are preserved. Subsequent Git fetches
+and publication use the independent owned checkout
+`/home/fires/hmasd-recovery/spatial-demand-01a0d6ab-20260925/publication`, on the same
+`codex/spatial-demand-generalization-a2` branch and existing published parent. The source
+input commit is also independently retrievable there. Initial branch tracking in this
+single-branch clone required adding this direction's exact fetch mapping; that local setup
+was corrected without changing remote history. Current main was independently read at
+`66aed19c5e6df050f7bc5340be9127cf24bda9a9`: owner pause lifted, same direction/lead/plan.
+This is recovery of task-local publication, not a claim that the shared Git store is repaired.
+
+### Evidence, retention and actual cost
+
+The second fixed pair is scientifically accepted after reconstruction. Both arms completed
+360,000 training steps and 45 updates, with 101,250 actor and critic optimizer calls per arm.
+Actual total is **two fits, 720,000 training plus 144,000 evaluation team steps**, 5,184,000
+UAV action rows, nine panels and 288 evaluation episodes; no evaluation storage or optimization.
+Scientific wall was 4,529.081527 seconds (75.4847 minutes), U/M arm wall
+2,367.842393/2,161.006548 seconds, and admission to exit 4,708.024017 seconds (78.4671 minutes).
+Process user/system CPU was 18,065.071202/37.974791 seconds, process peak RSS 1,841,496 KiB;
+other processes and peak scratch remain unmeasured. Recovery/collection/reading adds no fit.
+
+The unchanged read-only reader checked all 23 source digests against the published input,
+all 144,000 evaluation transitions and reconstructed metrics/differences, all 90 training
+rows/reset records, 88 reset boundaries, four checkpoints and evaluation isolation. Maximum
+panel-J roundoff was 1.44e-15; both native logs were empty. Actual U/M initialization agrees
+within block. Across blocks 0 and 1, the physical initial evaluation panels are identical,
+while initial model tensors and learner RNG digests differ at the declared model seeds.
+After the crash, all 136 original block-0 files were also rehashed in both this checkout and
+its independent durable copy against the pre-crash inventory: every size and digest matched.
+
+The **136 original block-1 native files / 1,088,009,210 bytes** were copied and individually
+verified against the node, then independently copied and rechecked at
+`/home/fires/hmasd-artifacts/spatial_demand_generalization/s1_spatial_coverage_c01_b1_s263000102`.
+Canonical inventory SHA256 is `1e351474cd3668c84fbae8ff30f27ce2d1361799e6423038c9650651c186a70e`;
+original batch summary SHA256 is `fe1d96f2cfc08fad235711221bec2b4db5870f5ac110d6e756eefa6e49d09dd3`.
+The durable `c01-postrun-reading/block1-verification.json` report has SHA256
+`5495c448114c3c9991cbf85be66ffefa555aae589af1c928b3b5b15a82d56b5e`; the two-block/post-crash
+integrity report there has SHA256 `42b22e680f3d8fd28698be089f9ba141e6a2c85742f6b605b6739c62a05bcb54`.
+After retention, native snapshot GC preview and apply reclaimed only
+`c44bc313bd554b54876055d02c1d549d`, with its claim, manifest, outputs and author checkout retained.
+
+### Fixed per-block results and continuation
+
+Values are native J / served users per step, averaging every one of the 32 fixed worlds.
+
+| Family | Common initial | U45 | M45 | M45 minus U45 | Adverse J or service worlds |
+| --- | --- | --- | --- | --- | --- |
+| hotspot, primary | .113518372 / 12.189313 | .420736318 / 26.676438 | .440050533 / 28.158750 | **+.019314215 / +1.482313** | 9/32 |
+| uniform | .167739278 / 16.141750 | .538818830 / 35.209438 | .551464282 / 35.733313 | +.012645452 / +.523875 | 15/32 |
+| cluster | .134816294 / 13.738875 | .498273280 / 31.780750 | .524372283 / 33.864375 | +.026099004 / +2.083625 | 13/32 |
+
+Both arms improve J and service from their common initialization in every evaluated world.
+Hotspot own-learning changes are U +.307217946 J / +14.487125 service and M +.326532161 /
++15.969438. Hotspot M-minus-U components are coverage +.029646250, quality -.007868743,
+height penalty -.000922463, eligibility -.714750 and eligible-but-unserved -2.197063.
+All world differences, component readings and adverse cases remain in the
+[original block summary](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b1_s263000102/summary.json).
+Largest paired J/service losses coincide at hotspot seed 265020000 (-.095157101 / -7.196),
+uniform seed 265000010 (-.053734432 / -4.646) and cluster seed 265010018 (-.074269624 / -5.090).
+
+C01 now has **two of five complete paired blocks**, with opposite hotspot J contrast signs
+on the same verified physical panel. This documents variation between the observed training
+instances; it does not yet decide the conditional program mean. No partial-batch interval,
+world-pooled training n, filtering or early confirmation verdict is used. Continue the fixed
+third pair, block 2 / seed 263000103, training base 264200000 and constructor 269902000, at
+the unchanged source, worlds, budget and five-block decision rule. The local crash did not
+create a replacement fit or a new scientific investment decision.
