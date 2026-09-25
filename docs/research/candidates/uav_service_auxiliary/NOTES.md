@@ -9987,3 +9987,565 @@ are not result-bearing fits or scientific pilots, and pytest owns all scratch. I
 Reviewer inspects this high-risk runner/persistence diff. DM owns NOTES, acceptance, publication
 and launch; helpers own no index or scientific decision. Stop only a dependent action if a
 material contract conflict emerges; do not substitute a new learning algorithm.
+
+### B09 persistence refinement and preparation checks
+
+The preserved B08 batch summary is 6,549,333 bytes (3,829,104 bytes with compact JSON); the
+A arm summary is 1,661,785 bytes. These are file-structure measurements only, not new outcome
+readings. Much of the nested detail is completed-world/episode recovery intervals, repeatedly
+walked during later collection. In B09 keep compact scalar world/episode readings, the selected
+anchor and all denominators in the main summary; retain full interval-level detail in hashed
+raw gzip JSON at its completion boundary. Preserve the original NPZ/high-segment evidence.
+This is a storage/persistence refinement within the L0, with no change in metric definitions,
+selection, exposure or planned readings. Full detail remains recoverable, not dropped to claim
+speed. The native launch waiter uses process identity, native exit witness and artifact presence;
+it does not require a whole-summary rewrite at each hundred-step notification.
+
+The restored opt-in core, B08 opportunity metrics and evaluation/configuration interface checks
+passed locally: 22 passed in 6.42 s using the configured scientific interpreter. The two core
+files matched the old patch's parent exactly before recovery; old reviewed implementations
+were imported byte-for-byte. The configured result node was read-only checked: the named
+Python/NumPy/Torch stack and CUDA are available. This is not launch admission or a diagnosis of
+the old crash; actual-source CUDA checks, independent review and fresh memory admission remain.
+The new-task routing/prospective note was published to main at `68b9d762d67db1db0714882b02d3685437ac6b6a`;
+concurrent DM1 publication was merged without changing its records. Scientific preparation has
+started no B09 fit and made no new Pro request.
+
+### B09 implementation handback and residual before actual-node checks
+
+The Implementer returned the B09-only diff and checks without changing scientific scope,
+historical candidate/core code, the index or notebook. The successor collector differs from
+B08 only in persistence/imports/messages: actual environment, proposal/likelihood storage,
+learner update and completed-segment flow are retained. Local focused suite: 12 passed,
+2 CUDA cases skipped in 11.20 s; after extending the old/new equivalence assertion to all four
+native module state dictionaries, that single check passed in 3.91 s. It also compares actual
+raw NPZ arrays, training counts, episode scalars, opportunity totals, optimizer counts and
+parameter displacement. This is a short fixed CPU fixture, not long-run equivalence or proof
+against native crashes. Independent review and actual-source CUDA checks are in progress.
+
+Full completed panel/episode opportunity detail, including omitted interval lists and window
+zero-service intervals, is retained in hashed raw gzip JSON; the main summary keeps anchors,
+denominators and scalar readings. The inherited B07 evaluator supplies full panel arrays only
+at panel completion. Consequently `evaluation_world` persists completed-episode counters but
+not that world's complete required measurements. A fatal signal inside a panel can still lose
+its in-memory world measurements; a Python exception follows the inherited partial-NPZ path.
+The current evaluation panel is not counted as a complete scientific result from counters alone.
+No broader evaluator rewrite is selected merely to eliminate every possible loss. Training
+phase raw NPZ/high records are saved at their existing boundaries; signal-time in-flight loss
+remains possible. These residuals are accepted for a new bounded attempt, not described as fixed.
+
+### B09 engineering acceptance and actual-node execution decision
+
+Independent Reviewer ran the original focused suite (12 passed, 2 CUDA skips, 11.03 s) and
+found one concrete persistence gap: three B07 world-detail lists still entered the compact
+summary. The repair at `3c8e4a1c4292f57eb01586a4f65b727c54d17812` saves the complete raw panel
+first, then omits service-free intervals, per-UAV mode durations and descriptive 250-step bins
+from summary worlds. All scalar counts, half-window summaries, opportunity anchors and
+denominators stay. The real-shaped fixture verifies raw retention and compact omission;
+3 focused checks passed in 5.24 s. The Reviewer reread this patch and returned no remaining
+material finding. DM accepts this narrow implementation, with the documented signal-time
+loss and unknown crash cause unchanged.
+
+On the configured actual `wsl_4070` stack, the full B09 focused suite at that published source
+passed **14 tests in 12.74 s**, including both CUDA N/A collector/update/evaluator cases with
+four torch threads and TF32 disabled. No CUDA case was skipped. This covers real native
+proposal/storage/reward flow, F activation, native endings, cross-phase execution state,
+learner movement, final-prefix censoring and evaluation isolation, together with persistence
+and fixed-batch fixtures. No performance score or positive pilot was used to authorize the
+comparison. The test source was clean; no interpreter or numerical library was installed or
+upgraded. These short checks do not guarantee a multi-hour run cannot crash.
+
+Accepted executable SHA256s: B09 native `4de8e49e9123898c23d1e0efe09efc3e5a4bc5b5e8209cd119a031d904cc7be3`,
+persistence `ea1b0b0596887a776266dc162228de4a3d63b9df6f68dab8719ff99f07350586`,
+collector `1272932ddac374e031a67fb7603a95e69d32462a539cc887e633bba21af4c13b`,
+entry `8b43dfbb801f6a003ddb6d6bf5ac32b2cb455e9abc5cc5dcabfdcc4e29037bdd`.
+The node's pre-existing commit-graph/automatic-GC warnings occurred during successful Git
+preparation; exact requested checkout, tracked-byte checks and the actual tests succeeded.
+No repository-wide repair, reset or cleanup of others' work was attempted. Preparation/tests
+started zero result-bearing fits. Proceed with the fixed new pair after this accepted input is
+published and fresh kernel memory/control admission; no further Pro/Root/owner approval is
+needed for the already adopted comparison.
+
+## 2026-09-24 — B09 fixed new pair admitted; common initial F evaluation underway
+
+The new fixed batch received actual kernel admission from published input
+`e5e53534c2c0c4a059cfdfa5f3aff4cbc2166f46`. The unchanged
+[launch manifest](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/launch-manifest.json),
+[fresh preflight](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/admission-preflight.json),
+[admission status](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/launch-status.json) and
+[runner configuration](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/config.json)
+are copied here. The manifest owns command, executing source/output paths, native identities,
+node, source and stable operation reference. The actual node had 14,939,668,480 effective
+available bytes against the 4 GiB floor. Config readback confirms seed 925031, two lanes,
+30 phases/H3000, 32 primary worlds, no development panel and the same F/action-path contract.
+All four reviewed B09 executable digests on the node match the accepted files.
+
+The assigning task's own observer is armed at generation 1. Its first probe reports accepted
+admission, consistent records, both native process identities running, and no exit witness.
+The first arm registration was refused before creating a job because the request used a
+nonabsolute `ssh` executable; replacing only that probe argv with `/usr/bin/ssh` registered
+observation of the same accepted operation. No scientific Send/launch was repeated, no old
+observer state adopted, and no `--resume-jobs` was used. Private request/state stay task-local.
+
+A compact progress read shows the real common-initial F panel in progress: 5,700 evaluation
+transitions, 2 episodes attempted and 1 completed; zero training fits/transitions started at
+that observation. The fixed N-then-A sequence follows this panel independently of scores.
+These are execution facts, not an A-minus-N finding. Same-handle checkpoints/terminal notices
+return to this task for collection, complete reading and its own result publication. B08's
+failed attempt and cost remain separate. No automatic repeat or extension is selected.
+
+### B09 first observation checkpoint — 2026-09-24
+
+Generation 1 returned only a CHECKPOINT, with the same accepted operation and both original
+native process identities running, consistent records, zero probe errors and no exit witness.
+The compact progress read reached 77,000 initial-primary evaluation transitions: 25/32 worlds
+completed, the 26th attempted; zero training fits/transitions yet. The last boundary summary
+records 75,000 transitions/25 worlds, with no completed panel, no failure and empty stderr.
+This is expected boundary-versus-journal cadence, not a rewritten count discrepancy. No result
+is accepted before the full required panel artifacts are available. Continue the fixed batch
+and rearm the same handle; no new launch, fit, panel, Pro request or shared-index change.
+
+### B09 common initial panel complete; N learning underway — 2026-09-24
+
+Generation 2 returned a CHECKPOINT on the same running native identities, with consistent
+records and no observation errors or exit witness. The initial F panel completed all 32 fixed
+worlds 952001–952032 and 96,000 actual evaluation transitions, with zero new optimizer updates
+and the recorded full-state immutability check. All four root artifact references (config,
+common initial checkpoint, full raw panel JSON and NPZ) match their recorded SHA256s on node;
+no artifact was removed or promoted into a complete paired result.
+
+N has started and collected 42,000/180,000 transitions. At the read boundary six updates were
+complete and phase 7 collection had finished; all five learner groups moved in the sixth
+update. This distinction prevents counting a collected phase as an already finished update.
+The original initial-plus-N-then-A batch continues, stderr is empty, and A has not started.
+No endpoint contrast is available. Rearm the same operation; no scientific scope or index change.
+
+### B09 third observation checkpoint — 2026-09-24
+
+Generation 3 returned only CHECKPOINT `2ac9e4e65b0f34e262b0977d`: both original native
+identities remain running, records are consistent, observation errors are zero and no exit
+witness exists. The boundary summary records N at 96,000 transitions, 16 completed updates
+and 32 native episodes; the subsequent journal read reaches 97,800 transitions during phase
+17 collection. The 16th update moved all five learner groups. Initial evaluation remains
+32/32 worlds and 96,000 transitions; neither endpoint evaluation nor A has started. Stderr
+is empty and the batch summary remains INCOMPLETE without a recorded failure.
+
+Fresh main controls still record owner pause lifted and this task as the same direction lead.
+The newer constitution clarification of question continuity and the three-track resource
+ceiling changes neither this accepted pair nor its frozen inputs. Continue observation of
+the same operation and rearm with the returned generation/wake/event; no new execution or
+scientific conclusion is selected from this checkpoint.
+
+### B09 fourth observation checkpoint — 2026-09-24
+
+Generation 4 returned only CHECKPOINT `4790e5d9b9b99d5eebb3d346`, with consistent original
+native identities running, zero probe errors and no exit witness. N's completed boundary is
+150,000 transitions / 25 updates / 50 native episodes; the later journal read reaches
+153,200 transitions during phase 26 collection. All five learner groups moved in update 25.
+Initial evaluation remains the sole completed panel (32 worlds, 96,000 transitions); neither
+endpoint evaluation nor A has started. The summary is INCOMPLETE without a recorded failure,
+stderr is empty, and fresh main retains the same lead and lifted owner pause. Rearm the same
+accepted operation; this checkpoint supplies no endpoint comparison or change in scope.
+
+### B09 N fit complete; endpoint panel underway — 2026-09-24
+
+Generation 5 returned only CHECKPOINT `9287472100b050314382ffe6`, with both original native
+identities running, consistent records, zero probe errors and no exit witness. The runner
+reports N training COMPLETE at exactly 180,000 transitions / 30 updates / 60 native episodes;
+all five learner groups moved in update 30. This is a training completion record, not final
+paired scientific acceptance. The N endpoint panel has completed 10/32 worlds and attempted
+the 11th; the journal records 30,500 N evaluation transitions (126,500 including the 96,000
+common initial transitions). Only initial_primary is a completed panel in the summary.
+
+A has not started; the batch remains INCOMPLETE without a recorded failure and stderr is
+empty. Fresh main keeps the same lead and lifted owner pause; its project-plan wording does
+not change this accepted comparison. Continue the fixed N endpoint-then-A sequence and
+rearm the same operation. Full panel artifacts and the A endpoint remain required for reading
+the declared contrast; this checkpoint does not select or extend a run.
+
+### B09 N endpoint panel complete; matched A started — 2026-09-24
+
+Generation 6 returned only CHECKPOINT `9b3688ab7d8e3d3477827b23`, with original native
+identities running, consistent records, zero probe errors and no exit witness. N's endpoint
+panel now contains all 32 fixed worlds and 96,000 actual transitions; together with the initial
+panel, 64 episodes / 192,000 evaluation transitions are complete. The N panel reports zero
+new optimizer updates and full-state immutability. Its endpoint checkpoint, full raw JSON and
+NPZ each match the registered SHA256 on the node (three new artifact references checked).
+
+A has started with its recorded initialization equal to N/common initial; both per-arm equality
+flags are true and the complete identity records match. The journal read reaches A phase 1,
+200 collection steps per lane (400 transitions), with no completed A update yet. The batch
+remains INCOMPLETE, stderr is empty and no paired result is available. Fresh main retains the
+same lead and lifted pause. Preserve the completed N evidence and continue only the already
+fixed A fit/panel; rearm the same operation without altering the comparison.
+
+### B09 seventh observation checkpoint — 2026-09-24
+
+Generation 7 returned only CHECKPOINT `2e0d085118e06f336d781c7e`, with both original native
+identities running, consistent records, zero probe errors and no exit witness. A has collected
+48,000/180,000 transitions: phase 8 collection is complete while seven updates are recorded;
+all five learner groups moved in update 7. N remains complete and the two completed evaluation
+panels total 64 worlds / 192,000 transitions. A has no endpoint yet. The batch is INCOMPLETE
+without a recorded failure and stderr is empty. Fresh main retains the same lead and lifted
+pause. Rearm the same accepted operation; there is no change to the fixed comparison.
+
+### B09 eighth observation checkpoint — 2026-09-24
+
+Generation 8 returned only CHECKPOINT `c1970404404e0aea8733a816`: original native identities
+running, consistent records, zero probe errors and no exit witness. A's boundary summary is
+90,000 transitions / 15 completed updates / 30 native episodes; the journal reaches 90,400
+transitions during phase 16 collection. All five learner groups moved in update 15. N and the
+initial/N panels remain complete; A has no endpoint. The batch is INCOMPLETE with no recorded
+failure and empty stderr. Fresh main retains the same lead and lifted pause. Rearm the same
+operation with the comparison unchanged.
+
+### B09 ninth observation checkpoint — 2026-09-24
+
+Generation 9 returned only CHECKPOINT `9b2962f1d11c25b5ccb0d4fe`, with original native
+identities running, consistent records, zero probe errors and no exit witness. A has collected
+132,000/180,000 transitions: phase 22 collection is complete while 21 updates are recorded.
+All five learner groups moved in update 21. N and the initial/N panels remain complete, while
+A has no endpoint. The batch remains INCOMPLETE without a recorded failure, stderr is empty,
+and fresh main retains the same lead and lifted pause. Rearm the same accepted operation;
+the declared comparison and reading remain unchanged.
+
+### B09 tenth observation checkpoint — 2026-09-24
+
+Generation 10 returned only CHECKPOINT `03d91bd4a38c5d1fd628865a`, with original native
+identities running, consistent records, zero probe errors and no exit witness. A's completed
+boundary is 174,000 transitions / 29 updates / 58 native episodes; the journal reaches
+177,200 transitions during phase 30 collection. All five learner groups moved in update 29.
+The initial and N panels remain the only completed evaluations (64 worlds / 192,000 steps).
+The batch is INCOMPLETE without a recorded failure, stderr is empty, and fresh main retains
+the same lead and lifted pause. Rearm the same operation; A's fit completion and fixed endpoint
+panel are still pending, so no paired conclusion is available.
+
+### B09 both fits complete; A endpoint panel underway — 2026-09-24
+
+Generation 11 returned only CHECKPOINT `f02e8c2ad4ac6d3d2b4e583c`, with original native
+identities running, consistent records, zero probe errors and no exit witness. The runner
+reports both N and A training COMPLETE, each exactly 180,000 transitions / 30 updates /
+60 native episodes, totaling two completed fits and 360,000 training transitions. All five
+learner groups moved in A's final update. Training completion alone does not accept the pair.
+
+A's fixed endpoint panel has completed 20/32 worlds and attempted the 21st; its journal read
+reaches 62,400 transitions (254,400 across all evaluation panels). Only initial_primary and
+N_primary are complete panels in the summary. The batch remains INCOMPLETE without a recorded
+failure, stderr is empty, and fresh main retains the same lead and lifted pause. Rearm the
+same operation for the remaining fixed evaluation and final collection; no extension is selected.
+
+### B09 bounded post-result trace inspection scope — 2026-09-24
+
+The complete fixed pair has returned. Before choosing renewed investment, inspect the already
+saved 96 evaluation trajectories for the current shared-plan B2 station-continuity question:
+count a loss of charging after a charged tick while the member remains eligible at the same
+station, plus all eligible waiting exposure and continuous charging spell lengths/censoring.
+Read every world and the existing first/second-half service summaries. This is post-result
+existing-data diagnosis, not a new prospective result, a causal explanation of A-minus-N,
+or permission for a queue intervention. It has zero new fits/environment steps and bounded
+NPZ/source-reading cost. Its purpose is to decide whether a concrete station rule remains a
+worthwhile next comparison; no source or frozen B09 measurement is altered.
+
+## 2026-09-24 — B09 complete: both arms learn service, feedback training adds no mean endpoint gain
+
+### Execution, collection and acceptance
+
+The fixed new pair completed at input `e5e53534c2c0c4a059cfdfa5f3aff4cbc2166f46` on
+`wsl_4070`, seed 925031. Native exit is 0 at 2026-09-25 06:32:18.666692 UTC, with matching
+recorded identities and no stderr. I accept the **complete exploratory comparison** after
+reading the outputs and verifying the evidence, not from exit status alone. The
+[summary](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/summary.json),
+[configuration](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/config.json),
+[manifest](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/launch-manifest.json),
+[terminal status](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/launch-status.json)
+and [exit witness](../../../../runs/uav_service_auxiliary/b09_an_925031_a01/process-exit.json)
+retain the accepted source and operation identity.
+
+Both arms have exactly 180,000 actual team transitions, 30 completed updates, 60 native
+episodes and 1,440,000 action rows. Each consumed 18,000 complete high records; none remained
+pending, unconsumed or finally censored. Cross-version completion was zero in these actual
+trajectories; the common implementation's general mixed-behavior limitation is unchanged.
+Both initial identity records equal the real common initialization. Each fit made 2,250 high,
+67,500 low actor, 67,500 low critic, 450 team discriminator and 1,800 individual discriminator
+optimizer steps; every phase moved all five learner groups. All 60 training NPZs reconcile
+360,000 actual transitions and per-lane native J with their phase summaries; none is partial.
+All three evaluation panels contain exactly seeds 952001–952032, 32 native H3000 truncations,
+96,000 steps each, zero new fits/updates and unchanged full learner/normalizer state. The raw
+96-world NPZs reproduce recorded cumulative QoS/J, consumption/input/stored-energy and the
+selected 250-step service windows. Total exposure is **2 started / 2 completed fits,
+360,000 training + 288,000 evaluation = 648,000 team transitions**, without top-up or selection.
+
+All **382 files / 1,926,640,753 bytes** were copied from the manifest's node output root to
+`/home/fires/hmasd-artifacts/uav_service_auxiliary/b09_an_925031_a01`, outside this worktree.
+Every file's SHA256 and size agree between source and collection. The **370 registered artifact
+references / 1,923,375,867 bytes** also match their existing root/arm metadata, including all
+checkpoints, raw gzip details, NPZs and high-state snapshots. Full files remain at both locations;
+only compact source/config/summary/native status are versioned here. The runner summary is
+1,215,991 bytes, SHA256 `a96db3a1e945af8099e54ad2a22173ff050df134bb95918818357f16502458cf`.
+The 1,277,033-byte progress journal and logs remain in those verified complete copies.
+
+Measured runner wall is 17,441.906742 s (290.698446 min); fit bodies are N 5,022.150777 s
+(83.702513 min) and A 6,092.920086 s (101.548668 min). Admission-to-exit wall is
+17,870.138655 s (297.835644 min). Runner user/system CPU is 17,108.175704 / 774.306820 s;
+peak RSS is 3,488,380 KiB for this runner process high-water mark, not whole-node memory.
+These are measurements under concurrent node use, not a causal speed comparison. Preparation,
+checks, publication and reading are additional work. B08's failed two-started/one-completed
+attempt and at least 320k training / 240k evaluation cost remain separate; no old N was reused.
+This successful execution does not establish that the unknown B08 SIGSEGV cause was repaired.
+The terminal observer event was consumed on the same handle; no result worker was restarted.
+
+### Native endpoint reading
+
+All policies in the following table deploy the unchanged F. QoS per actual step equals
+planned-window QoS because all worlds ran 3000 steps. J and cumulative QoS are per-world
+sums; return cost is the per-world sum of the native cost term, before its reward coefficient 2.
+This is one independent training initialization per arm; the 32 worlds do not increase training n.
+
+| Reading | Common initial | N endpoint | A endpoint |
+| --- | ---: | ---: | ---: |
+| Native J | 609.522260919 | 986.436461366 | 904.269870649 |
+| Cumulative QoS | 642.397611880 | 1016.228609224 | 934.664387959 |
+| QoS / planned step | 0.214132537 | 0.338742870 | 0.311554796 |
+| Delivered megabits | 19271.928356388 | 30486.858276725 | 28039.931638772 |
+| Minimum battery, mean across worlds | 0.098619260 | 0.108617649 | 0.106018764 |
+| Minimum battery, world P10 | 0.092561647 | 0.101310513 | 0.100450564 |
+| Minimum battery, worst world | 0.089335503 | 0.100904998 | 0.093677673 |
+| Consumed Wh | 1180.086051713 | 1113.432139283 | 1144.108479887 |
+| Charger input Wh | 193.776041667 | 158.237847222 | 185.312500000 |
+| Signed stored-energy change Wh | -986.310010047 | -955.194292060 | -958.795979887 |
+| Return cost sum | 3.344579281 | 0.832824334 | 1.147486809 |
+| Zero-service / negative-J worlds | 4 / 4 | 1 / 1 | 2 / 2 |
+| Cutoff / depletion events | 0 / 0 | 0 / 0 | 0 / 0 |
+
+Both arms show useful **finite own learning** on these worlds: N−initial mean J +376.914200447,
+QoS/step +.124610332; A−initial +294.747609731 and +.097422259. N has 25 favorable and seven
+adverse J worlds, with service 25 favorable / six adverse / one tied; A has 25 favorable /
+seven adverse J worlds and service 24 / seven / one. Their worst own J differences are
+−106.979245725 and −705.300524119. Own learning does not imply an A training advantage.
+
+The predeclared incremental service prediction fails here: **A−N mean J −82.166590716,
+cumulative QoS −81.564221265, QoS/step −.027188074, delivered volume −2446.926637953 Mb**.
+J has 16 favorable and 16 adverse worlds; service has 16 favorable / 15 adverse / one tied.
+The J median is nevertheless +10.787658751 and service median +.003939476 per step. Preserve
+both signs: a favorable median/half the worlds does not erase the negative mean, while one
+negative mean does not establish general harm or equivalence. The worst world is 952016:
+A has zero service, N QoS .323065444, J difference −970.330951537. The largest positive J
+difference is +454.004581453 on 952009. A's additional zero-service world is 952016; 952014
+is zero service for both. Initial zero-service worlds are 952014/17/21/23; A and N both
+recover service on 17/21/23 under their own trajectories.
+
+A's mean return cost is .314662475 higher, despite a median decrease of .018488422 and
+17/32 cost-favorable worlds; 952007 contributes +8.590514712 cost while still improving service.
+A's mean minimum battery is .002598885 lower (18 worlds lower, 14 higher), worst A battery
+.093677673 versus N .100904998. All three panels have zero cutoff/depletion, including the
+initial policy, so this comparison establishes no incremental prevention of those events.
+A consumes 30.676340605 Wh more and takes 27.074652778 Wh more charger input per world,
+leaving signed stored-energy change 3.601687827 Wh more negative. All panels have real charging
+and positive per-step storage in every world, yet their total stored energy declines.
+No safety invariant, indefinite operation or same-UAV service restoration follows.
+
+### All fixed worlds
+
+Columns show full J, QoS/step, and the signed A−N return-cost sum. All other per-world energy,
+minimum battery, opportunity, half-window and censor fields remain in the linked summary/raws.
+
+| World | Initial J | N J | A J | Initial QoS | N QoS | A QoS | A−N J | A−N cost |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 952001 | 921.376223964 | 862.701430320 | 711.017863648 | 0.316405537 | 0.298512455 | 0.247875296 | -151.683566672 | -0.052873576 |
+| 952002 | 948.302040941 | 1255.708904364 | 1295.562059789 | 0.325018666 | 0.428782673 | 0.441911508 | 39.853155425 | -0.181376850 |
+| 952003 | 924.646912109 | 1204.785707656 | 1131.376425046 | 0.317485039 | 0.410993636 | 0.387207965 | -73.409282610 | -0.093763834 |
+| 952004 | 440.153882583 | 658.181633755 | 401.147730127 | 0.165108422 | 0.229240936 | 0.142804383 | -257.033903628 | 0.220018262 |
+| 952005 | 441.203504037 | 1372.606343033 | 1228.415781454 | 0.160450664 | 0.467739751 | 0.420164023 | -144.190561579 | 0.274664333 |
+| 952006 | 872.368412407 | 912.128795187 | 857.821655500 | 0.302323238 | 0.312702195 | 0.294699055 | -54.307139687 | 0.159049974 |
+| 952007 | 728.537533505 | 834.059026890 | 1131.469222502 | 0.263873098 | 0.286567226 | 0.391737015 | 297.410195612 | 8.590514712 |
+| 952008 | 814.716594819 | 1424.122615724 | 1560.301865587 | 0.281349872 | 0.485936187 | 0.530774766 | 136.179249862 | -0.715485338 |
+| 952009 | 547.029125889 | 548.075865273 | 1002.080446726 | 0.190979979 | 0.193258230 | 0.344677761 | 454.004581453 | -0.029120082 |
+| 952010 | 703.419801556 | 814.858816351 | 710.988651500 | 0.245183429 | 0.282296045 | 0.247872987 | -103.870164850 | 0.322268109 |
+| 952011 | 1090.121201823 | 1197.633523704 | 1265.864378066 | 0.372629655 | 0.409709948 | 0.432769378 | 68.230854362 | 0.517911152 |
+| 952012 | 467.650430830 | 1357.199756963 | 1251.174646150 | 0.163895357 | 0.462984865 | 0.427840003 | -106.025110812 | 0.428385275 |
+| 952013 | 498.589479476 | 1503.187608162 | 949.996636729 | 0.174834012 | 0.511704388 | 0.327110044 | -553.190971433 | -0.099890454 |
+| 952014 | -30.493015458 | -32.650748632 | -32.810844093 | 0.000000000 | 0.000000000 | 0.000000000 | -0.160095461 | 0.126660221 |
+| 952015 | 747.169592192 | 724.797829238 | 755.568474939 | 0.265829862 | 0.250842656 | 0.261272849 | 30.770645702 | -0.187822425 |
+| 952016 | 672.674298366 | 937.704725784 | -32.626225753 | 0.233979121 | 0.323065444 | 0.000000000 | -970.330951537 | 0.472567286 |
+| 952017 | -69.113460094 | 759.234203182 | 1180.331314875 | 0.000000000 | 0.263300977 | 0.403940470 | 421.097111693 | 0.141612364 |
+| 952018 | 357.480263721 | 634.158956816 | 669.927753901 | 0.130490176 | 0.219956263 | 0.231806389 | 35.768797084 | -0.212650450 |
+| 952019 | 733.036167862 | 903.319273439 | 1010.299661339 | 0.254403774 | 0.310566714 | 0.346599717 | 106.980387900 | 0.013450539 |
+| 952020 | 609.479165443 | 737.565727190 | 898.877845628 | 0.211409525 | 0.254069722 | 0.308187510 | 161.312118438 | -0.024368923 |
+| 952021 | -38.330032041 | 1640.580187551 | 770.194978928 | 0.000000000 | 0.557599819 | 0.267542682 | -870.385208623 | -0.065559446 |
+| 952022 | 363.714958342 | 1494.584592279 | 799.008993139 | 0.128562098 | 0.508543639 | 0.276078886 | -695.575599139 | -0.012607922 |
+| 952023 | -30.134270331 | 866.057971018 | 773.038043734 | 0.000000000 | 0.298606475 | 0.267847288 | -93.019927284 | -0.034085517 |
+| 952024 | 604.037741180 | 715.711177756 | 1109.175703365 | 0.210205671 | 0.249099032 | 0.379943811 | 393.464525609 | -0.429820609 |
+| 952025 | 857.938765044 | 1490.277241464 | 1512.012654427 | 0.294906527 | 0.507519373 | 0.515398325 | 21.735412963 | 1.013654172 |
+| 952026 | 627.204697818 | 566.349083150 | 897.899544798 | 0.218168771 | 0.197551272 | 0.308550171 | 331.550461648 | -0.207986017 |
+| 952027 | 870.856441019 | 1540.038069952 | 974.336226116 | 0.299429655 | 0.523703451 | 0.334593224 | -565.701843836 | 0.242814474 |
+| 952028 | 1090.352231811 | 995.457842129 | 1115.330097586 | 0.372264456 | 0.341558551 | 0.381404047 | 119.872255457 | -0.304527192 |
+| 952029 | 479.933303711 | 1174.547119672 | 573.364248437 | 0.167744054 | 0.401436622 | 0.199504431 | -601.182871236 | -0.347493785 |
+| 952030 | 678.733672935 | 577.249731236 | 638.870737087 | 0.235625918 | 0.201469367 | 0.221957420 | 61.621005851 | 0.076470204 |
+| 952031 | 901.519017189 | 1322.175332067 | 1211.326352526 | 0.309597579 | 0.450981026 | 0.414416125 | -110.848979541 | 0.659102490 |
+| 952032 | 680.537666756 | 573.558421031 | 615.292936978 | 0.240087038 | 0.199472894 | 0.213265943 | 41.734515947 | -0.190511953 |
+
+### Intermediate prediction and censoring
+
+Initial/N/A all have a qualifying first actual-input/positive-net-storage/F-exit anchor in
+32/32 worlds, and all selected windows have the full 250 steps; no missing selected event or
+short selected window is silently discarded. Mean window cumulative team QoS is
+82.960640149 / 110.222368002 / 110.295557785. Thus A−N is only +.073189783 in this descriptive
+window; positive-service ticks total 7000 / 7216 / 7500 out of 8000. Positive-window worlds
+are 28 / 29 / 30. Every selected window has a feedback re-entry; these are not uninterrupted
+recovery intervals. The two zero-service A windows are 952014/16, while N also has a zero
+window on 952009 despite later full-episode service. On 952021, A's selected-window QoS
+190.298716924 exceeds N's 186.467373559, yet full QoS/step is .267542682 versus .557599819.
+This directly limits using a favorable local window as a substitute for full service.
+
+Initial/N/A feedback activation intervals are 1777 / 2710 / 2772; input intervals
+467 / 624 / 638, qualifying positive-gain exits 215 / 408 / 413, input intervals without a
+qualifying exit 252 / 216 / 225, and right-censored feedback intervals 253 / 231 / 238.
+Completed input intervals without positive gain are zero. Counts refer to different native
+interval populations, not independent samples or per-member causal service attribution.
+A's training really activates F: 341,431/1,440,000 proposal rows are mapped, all 60 training
+episodes have qualifying anchors, and 592 positive-gain exits occur. The other 1,098,569
+proposal rows pass through. No F mapping occurs in N training. Nonactivation is therefore
+not an explanation of this finite A−N outcome.
+
+The existing half-window reading is also adverse for A: first-half cumulative QoS means
+N/A 374.452624363 / 312.191779644; second-half 641.775984862 / 622.472608315. The first half
+already includes some F use, so this does not identify a pure pre-feedback causal effect.
+Post-charge local opportunity and complete service consequences remain separate judgments.
+
+### Post-result station-continuity inspection and next judgment
+
+The bounded read declared above finds losses of charging while still eligible at the same
+station in every world: initial/N/A totals **17,361 / 12,093 / 15,319**. Their continuous
+charging spells number 17,608 / 12,536 / 15,771, of which 17,259 / 12,024 / 15,251 last one
+tick. Median and P90 spell length are both one tick; maxima are 35 / 35 / 36. Spells active
+at the observation horizon are 32 / 35 / 38 and are right-censored. Eligible waiting exposure
+is 92,685 / 52,814 / 67,090 UAV-ticks; waiting-age median/P95/max is 4/16/121, 3/11/78,
+and 3/12/98. Minimum post-battery while waiting is .089335503 / .100904998 / .093677673.
+These are post-result trace facts, not added training n or a causal explanation of A's loss.
+They describe a concrete action of the existing lowest-battery-first station rule. Source
+inspection confirms that current charging is cleared before selection and the old rule ranks
+eligible arrivals each tick by battery, wait age and member id. A successor must preserve the
+previous-tick actual charging snapshot if it tests persistence; power/capacity/eligibility/F
+and the selected policy must otherwise match.
+
+**Working update and decision:** the service-learning opportunity itself is active: both arms
+learn useful service under F deployment. The stronger claim that matching training to F is
+sufficient to add mean full-task service over ordinary N is weakened by this complete pair;
+local window support and more charging do not rescue it. Retain N+F as the stronger ordinary
+reference in this finite reading, while preserving A's favorable worlds and the n=1 limit.
+Reuse the complete prior Pro advice's no-additional-use branch to end investment in this
+unchanged B09 recipe: no top-up, replacement seed, threshold tuning, additional arm or
+confirmation is selected. This does not close the energy-constrained service question.
+
+The current published shared plan's B2 candidate has a concrete observable intervention site,
+but its value remains untested: retaining still-eligible charging members may reduce switching
+while making lower-battery waiters worse, or alter energy without restoring wireless service.
+I will obtain focused Pro criticism of that next investment using this new evidence and the
+strong alternative of retaining N+F without further execution. Proposed scope to assess is
+one role-fixed ordinary N checkpoint, original versus incumbent-retaining station allocation,
+32 new fixed H3000 worlds, 0 new fits / 192k evaluation steps plus implementation/review and
+full physical/service evidence. This is a new scientific comparison, not repair of B09 or
+proof that queues caused its outcome. No successor result run has been selected or launched.
+
+## Pro question 2026-09-24 b09-result-and-station-continuity
+
+Conversation: reuse the direction's current Jev adviser conversation; its private address
+stays only in local operation metadata. This is a new scientific question after a complete
+new result, not a resend of any prior accepted question.
+
+Question: Given the complete B09 result and the bounded post-result station trace reading
+above, is the existing shared-plan B2 station-continuity comparison now worth executing, or
+should this DM retain ordinary N+F and choose a different next observation/no further execution?
+Criticize my tentative choice of the narrow B2 comparison, including its strongest competing
+explanation, actual estimand and adverse branch. I own the energy-constrained service question,
+not a duty to rescue the unchanged feedback-training recipe.
+
+Standing: The previous complete investment advice already covered ending the unchanged
+training recipe if both arms learn without an additional A use; I apply that branch to B09.
+This question concerns the next investment under materially new evidence. B09 is one fresh
+matched initialization, N then A, each 180k native H3000/N8/k10 steps; all three 32-world panels
+deploy identical F. Counts, real updates, state immutability and all 382 files/370 registered
+artifact references are verified. Both arms improve mean J/service versus the actual common
+initial policy. A−N mean J is −82.166590716 and QoS/step −.027188074, with 16/32 J wins and
+positive J/service medians. Worst A−N J is −970.330951537 and A adds a zero-service world.
+All cutoff/depletion counts are zero, including the initialization; A consumes more energy,
+charges more and has slightly lower minimum battery than N. The first qualifying exit's
+250-step mean team-service difference is only +.073189783 cumulative QoS; it does not rescue
+the complete service prediction. This is n=1 exploration, not general harm or equivalence.
+The complete reading, every signed world, censoring and source identities are in the entry above.
+
+The new bounded NPZ reading finds same-station loss of actual charging while still eligible:
+12,093 N events across all 32 worlds, versus 15,319 for A. N has 12,536 charging spells,
+12,024 only one tick long; 35 spells remain active at the horizon. N eligible waiting exposure
+is 52,814 UAV-ticks; waiting-age median/P95/max 3/11/78 and worst waiting battery .100904998.
+These data identify a modifiable allocation behavior, not its responsibility for lost service.
+The current source clears `uav_charging` before selection and sorts eligible candidates each
+tick by battery, descending wait age, then member id. The prospective incumbent rule needs
+the preceding tick's actual charging snapshot. The full result also retains B07's benefits
+and service-loss counterexamples and B08's incomplete technical failure/cost.
+
+Tentative comparator to assess: freeze the **ordinary N925031 endpoint** by its role as the
+primary no-feedback-trained baseline, not by a new score search. Deploy the same unchanged F
+under (O) original tickwise station allocation and (C) still-eligible incumbents retain their
+station slots; empty slots use the unchanged original ordering. Keep eligibility definition,
+station-local information, capacity, power, nearest-station rule, reward and all policy weights
+fixed. Each rule executes its own full closed-loop trajectory; actual eligibility sets can
+then differ. No new actor mode input, loss mask, learning head, remote-station intention,
+reservation or power/threshold change. Use one predeclared set of 32 fresh H3000 worlds with
+paired initial worlds and fixed evaluation semantics, and read all outcomes. This changes a
+station resource-allocation rule; it is not an actor ablation in an unchanged environment.
+
+Prospective cost if selected: 0 new fits, 2 rules × 32 worlds × 3000 = at most 192k actual
+team evaluation transitions (1.536M UAV action rows), no nested planner/search, plus a bounded
+station implementation, independent high-risk review, complete traces, storage and reading.
+New wall time is unmeasured; B09's complete three-panel/two-fit runner wall was 290.698446 min,
+with N/A fit bodies 83.702513/101.548668 min. The strongest alternative is retain N+F without
+buying this observation. This is not an additional B09 batch or a confirmation plan.
+
+Context and source precedence:
+- Current governance and plan at **4fde2d73466fc80d91c3afbbbf0e3afc9f3ba8a1**:
+  `docs/project/OPERATING_CONSTITUTION.md` §§1–5, 7–9; owner pause is lifted, this task remains
+  the independent DM, ordinary choices need no renewed approval, and three tracks is a runtime
+  ceiling. Claude FSD stays owner-paused and G33 frozen. No App cross-task messaging is requested.
+  `docs/research/RESEARCH.md` shared topic 6 and Current research plan, especially B1/B2 and
+  “B2明确改变站端规则”; the source-picked B2 suggestion is revisable, not permission or a diagnosis.
+- Existing advice at the same current-main revision:
+  `docs/research/archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md`, Answer's DM3
+  comparison/branches and Decision item 2; and
+  `docs/research/archive/2026-09-24/RESEARCH-question-led-programme-adopted.md`, Answer section
+  “六、B2” and its Decision. These support prior investment reasoning, not new B09 measurements.
+- Current methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, Update the
+  working explanation / Comparators / Statistics / Cost and exposure / Pro;
+  `.agents/skills/hmasd-research-engineering/SKILL.md`, Core versus experimental / Checks and
+  review. Use them proportionately, not as extra approval stages.
+- Evidence at source_sha: this notebook's B09 prospective entry, complete B09 result and
+  post-result inspection scope, and `runs/uav_service_auxiliary/b09_an_925031_a01/summary.json`
+  plus its config/manifest/exit/status. Raw NPZs/checkpoints are retained at the two verified
+  filesystem locations in the result entry, outside Git; they are not remotely readable via
+  the connector. Do not claim to have independently read those bytes. Their summary and the
+  DM's explicit verification/derived-read scope are available here.
+- Frozen B09 inputs remain **e5e53534c2c0c4a059cfdfa5f3aff4cbc2166f46**. At source_sha,
+  `envs/pettingzoo/relay/energy_aware.py` methods `_apply_energy_dynamics`,
+  `_charging_candidates_by_station`, `_select_charging_uavs` and
+  `experiments/candidates/uav_service_auxiliary/b07/native.py` energy diagnostics show the
+  relevant unchanged rule and saved observation semantics. This is feasibility evidence,
+  not an implemented successor.
+
+Return: identify what B09 strengthens, weakens and leaves unresolved; decide whether the
+narrow B2 investment is worth its real cost and why. If yes, sharpen the intermediate and
+whole-episode predictions, useful adverse reading (especially waiters, failed exits and
+censoring), and any smallest necessary comparator correction. Explain what observation would
+make the allocation interpretation less credible without inventing a numerical pass gate or
+requiring positive pilots. If no, identify a materially more informative feasible observation
+or explain why no additional investment is warranted now. A new idea is not owed. Distinguish
+mean/tail tradeoffs, post-result diagnosis and causal claims; return MATERIAL_DISSENT yes/no.
+Answer in Chinese. Cite sources actually used and state consequential unread gaps.
+
+Constraints: Give advice only; do not train, evaluate, change governance, launch a successor,
+or edit outside the empty `### Answer` below on branch `codex/uav-service-feedback-b09`.
+Read the pinned question, then fetch the latest target file before writing and use its actual
+blob SHA. Preserve the question and all other bytes; stop on overlapping edits. On successful
+write return the actual commit. If writing fails, return the **complete answer in chat**,
+not only a status, link or purported SHA. Advice is not approval; the DM will own the choice.
+
+### Answer
