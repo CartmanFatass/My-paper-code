@@ -9987,3 +9987,49 @@ are not result-bearing fits or scientific pilots, and pytest owns all scratch. I
 Reviewer inspects this high-risk runner/persistence diff. DM owns NOTES, acceptance, publication
 and launch; helpers own no index or scientific decision. Stop only a dependent action if a
 material contract conflict emerges; do not substitute a new learning algorithm.
+
+### B09 persistence refinement and preparation checks
+
+The preserved B08 batch summary is 6,549,333 bytes (3,829,104 bytes with compact JSON); the
+A arm summary is 1,661,785 bytes. These are file-structure measurements only, not new outcome
+readings. Much of the nested detail is completed-world/episode recovery intervals, repeatedly
+walked during later collection. In B09 keep compact scalar world/episode readings, the selected
+anchor and all denominators in the main summary; retain full interval-level detail in hashed
+raw gzip JSON at its completion boundary. Preserve the original NPZ/high-segment evidence.
+This is a storage/persistence refinement within the L0, with no change in metric definitions,
+selection, exposure or planned readings. Full detail remains recoverable, not dropped to claim
+speed. The native launch waiter uses process identity, native exit witness and artifact presence;
+it does not require a whole-summary rewrite at each hundred-step notification.
+
+The restored opt-in core, B08 opportunity metrics and evaluation/configuration interface checks
+passed locally: 22 passed in 6.42 s using the configured scientific interpreter. The two core
+files matched the old patch's parent exactly before recovery; old reviewed implementations
+were imported byte-for-byte. The configured result node was read-only checked: the named
+Python/NumPy/Torch stack and CUDA are available. This is not launch admission or a diagnosis of
+the old crash; actual-source CUDA checks, independent review and fresh memory admission remain.
+The new-task routing/prospective note was published to main at `68b9d762d67db1db0714882b02d3685437ac6b6a`;
+concurrent DM1 publication was merged without changing its records. Scientific preparation has
+started no B09 fit and made no new Pro request.
+
+### B09 implementation handback and residual before actual-node checks
+
+The Implementer returned the B09-only diff and checks without changing scientific scope,
+historical candidate/core code, the index or notebook. The successor collector differs from
+B08 only in persistence/imports/messages: actual environment, proposal/likelihood storage,
+learner update and completed-segment flow are retained. Local focused suite: 12 passed,
+2 CUDA cases skipped in 11.20 s; after extending the old/new equivalence assertion to all four
+native module state dictionaries, that single check passed in 3.91 s. It also compares actual
+raw NPZ arrays, training counts, episode scalars, opportunity totals, optimizer counts and
+parameter displacement. This is a short fixed CPU fixture, not long-run equivalence or proof
+against native crashes. Independent review and actual-source CUDA checks are in progress.
+
+Full completed panel/episode opportunity detail, including omitted interval lists and window
+zero-service intervals, is retained in hashed raw gzip JSON; the main summary keeps anchors,
+denominators and scalar readings. The inherited B07 evaluator supplies full panel arrays only
+at panel completion. Consequently `evaluation_world` persists completed-episode counters but
+not that world's complete required measurements. A fatal signal inside a panel can still lose
+its in-memory world measurements; a Python exception follows the inherited partial-NPZ path.
+The current evaluation panel is not counted as a complete scientific result from counters alone.
+No broader evaluator rewrite is selected merely to eliminate every possible loss. Training
+phase raw NPZ/high records are saved at their existing boundaries; signal-time in-flight loss
+remains possible. These residuals are accepted for a new bounded attempt, not described as fixed.
