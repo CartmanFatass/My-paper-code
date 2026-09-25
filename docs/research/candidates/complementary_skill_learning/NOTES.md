@@ -10813,3 +10813,28 @@ is preserved. Publish this conclusion and own routing/state from an owned main-b
 no App report, automatic restart, Pro resend, heartbeat or owner-approval request is created.
 A future concrete need to retain independent controllers would be a new reason to reconsider,
 not a promised next batch or an external dependency this task is waiting for.
+
+
+## 2026-09-24 — Feasibility decision published and source checks complete
+
+The decision/source map and conditional cost are published at
+`e38a8ec4744cf9c1ffacbaac21b241658cc1014c`. Own standing, reserve note, completed preparation
+and routing are published to main at `2eec4adbdff9c1092899bcc0aa2340277ed96f10`; remote refs
+were read back. Concurrent DM1/DM3 adoption and Root routing updates were preserved through
+ordinary merges in this task's owned publication checkout/index. No other author checkout
+or old DM index was edited; no App message was sent.
+
+The full845972-byte inherited prefix still matches SHA256
+`069bed52915c605d92ecaa9f8dc5895873ddb6c0a0e279f9e0f1a116928adbce`; all11 new pinned source
+links resolve locally, count arithmetic and current state/routing checked, git diff --check
+passed, and the five owner configuration files remain identical to40eb5c0e7. This is a
+document/source review; no runtime test, model, environment or fit was run. Original
+historical relative artifact links retain their meaning at the
+[complete inherited source](https://github.com/CartmanFatass/My-paper-code/blob/6f7e1eaccdea00cafe8813e621d4bb5b14a363f4/docs/research/candidates/complementary_skill_learning/NOTES.md);
+missing historical code/bulk outputs were not all copied into this new branch.
+
+The conditional collection count180000 above denotes member inference pairs:180000 actor
+forwards and180000 critic forwards, not180000 combined primitive module calls. No work
+count or endpoint changes. The complete proposal remains unselected and unimplemented.
+Current investment is closed, with0new fits/0environment steps and no producer or pending
+advice; compatibility and broader useful-skill questions remain scientifically unanswered.
