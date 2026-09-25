@@ -20672,3 +20672,205 @@ has been launched or selected yet. Pro will be asked about this concrete discrim
 and the strongest alternative, because the complete adverse confirmation materially
 changes the premise for any renewed investment. This is not a repeat of the old
 confirmation-design request or a required generic result-review round.
+
+## 2026-09-25 — B20 published and follow-up decision scoped
+
+The complete result, all three blocks' compact/native records and aggregate, unchanged
+claim prefix plus result, and appended notebook were published to main at
+`cb2afd9eae37529420539695ec11943de7f1a754`, from direction result
+`c41c53579051cf8c5bde4eb90a2645594c7a5d2b`. The owned publication checkout refreshed
+main through `63e92fd69e7e1bed7365e93ae6c01fc80715dce9` and preserved other writers'
+S7/A2 changes. The own direction is exploring after completion of the fixed confirmation;
+its shared background, standing, A1 plan and routing now distinguish B19's positive
+development pair from B20's adverse/unresolved result. No new experiment is selected.
+The canonical user checkout and its index were not changed by this publication.
+
+All three native observations are terminal and reconciled. The last READY event was
+consumed with generation 28 and its actual wake/event IDs. After verified bulk retention
+and direction publication, snapshot `12d5ab40b8cc409c96d4081a78e3a790` was found eligible
+by the native collector and removed; source Git, original outputs, durable copies and
+accepted operation record remain. No worker was restarted and no old Pro question resent.
+
+## Pro question 2026-09-25 panel-or-training-after-b20
+
+Conversation: reuse the completed adviser conversation through private local operation
+`hmasd:d6e333c2c605b4a55d58d0fb5350abc127cecbf8f68a36ab8fe4e1a83179dc22`.
+Its address and account identity remain only in local transport state.
+
+Question: After the fixed B20 confirmation failed, **is one bounded, zero-fit replay of
+the exposed B19 F/M policies on the B20 N5/N7 panels worth doing before choosing further
+investment in this ordinary count-training question?** Critique the concrete candidate
+below against ending this recipe's further investment and moving to a more informative
+question. Identify what each possible replay result could actually change. A recommendation
+not to replay is valid; do not invent a rescue variant, quota of ideas or new approval gate.
+
+Standing and changed premise: the previous complete consultation in this notebook,
+`Pro question 2026-09-24 ordered-roster-confirmation-after-b19`, concerned whether to buy
+the actual six-fit confirmation after B19. The DM adopted that fixed comparison; its
+execution and reading required no additional Pro round. That answer specified the failure
+branch and discussed one new F/M pair on the old panel as an alternative, but did not
+choose the post-B20 replay now at issue. All three new pairs are now complete, fully read
+and technically valid, with the unchanged common input
+`424bbe4db1351db70d73560ece913150c2b20ed4`. The material new evidence is:
+
+| Native M−F quantity | B19 development pair | B20 block 1 | Block 2 | Block 3 | B20 mean | Fixed df2 t95 interval |
+| --- | --- | --- | --- | --- | --- | --- |
+| N5 J | +.078048248 | -.034130940 | -.105074230 | -.047527670 | -.062244280 | [-.155875895,+.031387335] |
+| N5 service, users/step | +6.022750 | +.6670625 | -6.7913125 | -1.1688750 | -2.431041667 | [-12.084605990,+7.222522657] |
+| N7 J | +.094046811 | -.104765005 | -.067223337 | -.078481855 | -.083490066 | [-.131347985,-.035632146] |
+| N7 service, users/step | +6.7404375 | -5.3653125 | -4.3519375 | -3.4800000 | -4.399083333 | [-6.742966789,-2.055199877] |
+
+The strict prewritten conjunction is not established. N7 is adverse under the conditional
+fixed-panel, approximate iid-normal training-block model; N5 remains unresolved. These are
+three independent training blocks, not 96 independent training runs, and the model is not
+validated by n=3. No fourth block, altered endpoint, removed weak F, B19 pooling or changed
+margin is permitted. B15 remains inconclusive; B18 remains an incomplete technical failure.
+The original plan and appended result must stay intact whatever this advice recommends.
+
+Both arms in all three B20 blocks improve their own mean J and service at N5/N7/N6.
+The ordinary F comparator is useful without mixed training. Its few block-1 own-learning
+loss worlds remain; blocks 2 and 3 improve both quantities in every world. Paired adverse
+J-or-service world counts at N5/N7/N6 are 26/31/28, 32/29/31, and 30/31/29 in blocks 1–3.
+N6 descriptive M−F means are -.077489569 J/-3.673250 service; they were not a primary gate.
+B19 retains its 2/2/1 paired adverse worlds and positive N6 effect. In B20 block 3, M has
+lower eligible-unserved counts while service is worse because eligibility falls more;
+the measured identity S=E-U is accounting, not a causal explanation. Full components,
+training curves and every adverse world are retained in the cited readbacks.
+
+The fixed programs were ordinary LOCAL1 F=45×N6 and M=[4,6,8]×15, each 360k team steps,
+2.16M UAV training steps, 45 updates and 101,250 actor plus 101,250 critic optimizer calls.
+Within each block they started from actually equal complete initial parameters/normalizers;
+blocks were fresh. Local 104-input actors, central 133-input critic/MAX8, single-category
+trainable FiLM, native J/N reward, entropy .05, raw-Gaussian PPO with clipped execution,
+recurrent semantics and fixed final45 were retained. Total calls being matched does not
+equalize each N's reward scale, number of samples or optimization weight. Roster support,
+order/last-N8 recency and finite training remain a package. Native component differences
+do not yet identify a modifiable mechanism or justify reweighting/entropy/order searches.
+
+The present explanation is narrower than "mixed support does not work": B19 is a positive
+realization, but B20 weakens an expectation that this exact finite program usefully improves
+over F in repeated training. B19→B20 changed training initialization/RNG/training worlds
+and evaluation panels together. Their signs alone do not identify a panel effect or a
+training-realization effect. A material same-policy comparison could remove one of those
+ambiguities, but its value depends on whether that distinction changes a real next choice.
+The strongest alternative is to retain competent F and the bounded positive/negative
+records, decline further investment in this recipe, and consider a different worthwhile
+question rather than pay to explain a failed candidate completely. That would be an
+investment decision, not a proof that count-conditioned learning generally has no value.
+
+Concrete replay candidate, not yet selected or implemented:
+
+- Use only the actual frozen B19 F45 and M45 checkpoints from seed 1015101. Zero new fits,
+  optimizer calls, calibration or checkpoint selection; no initialization or N6 panel.
+  The original weights, normalizers, recurrent reset and deterministic clip evaluator
+  must be preserved. Evaluate both policies in paired worlds, with complete raw native
+  J,C,Q,P,E,S,U,height, policy actions and adverse-world readings.
+- First reproduce the four original B19 final panels (F/M at N5/N7, 32 worlds each, H500),
+  verifying checkpoint identity, original initial physical states and the full old trace
+  arrays. This is an engineering bridge using already exposed policies/worlds, not new
+  evidence for the old mean. If exact replay cannot be established, preserve the mismatch
+  and stop the new-panel comparison; do not reinterpret code/runtime drift as world sensitivity.
+- Then use exactly the same frozen policies on the existing B20 N5/N7 panels. Old bases
+  are 2345500 and 2345700; new bases are 2446500 and 2446700; each uses base through
+  base+31 and its native evaluator runtime seed base+51. No new-world selection, tuning,
+  significance test or extra training replicate is created. These B20 panels are exposed.
+  Deterministic actions and the complete native reset/RNG contract are retained.
+- Record the old and new M−F J/service contrasts separately for both N values and their
+  between-panel difference. If the B19 advantage persists on B20's panel, changing the
+  panel alone cannot explain why this old pair differs from the three new trained pairs
+  there. If the same B19 pair reverses there, panel conditioning materially changes that
+  old advantage, but this would not prove that panels alone caused every B20 negative.
+  Mixed J/service signs remain mixed. No result identifies a particular source of training
+  randomness, pure roster support, a broad world-population mean or next-run reliability.
+- This asymmetric observation omits the three B20 pairs on the old B19 worlds. Assess
+  whether it is useful at all without that larger crossed design. Do not automatically
+  expand it into every pair×panel combination, a seed sweep or another confirmation.
+
+Prospective cost: eight actual panels ×32 worlds ×500 steps = **128,000 team /768,000 UAV
+evaluation steps**, 256 episodes and 4,000 batched policy calls; zero new fits or updates,
+no model-trajectory search. Four old panels are bridge work and four new panels the actual
+new observation. In the current retained raw format, each N5 trace is 95,447,394 bytes
+and each N7 trace 126,451,554 bytes, so eight traces project 887,595,792 bytes before
+summaries/logs and a second durable copy. The two existing final checkpoints total
+39,389,918 bytes and are already retained. Isolated evaluation wall time is not separately
+measured; it is not zero. Implementation, focused runtime checks, independent review,
+artifact readback and retention are additional. Any selected design would prospectively
+declare the actual node/input and complete costs before admission, not infer permission
+from this consultation or the completed B20 wake.
+
+For scale, B20 used six fits, 2.592M total team/15.552M UAV steps, 270 updates and 27 panels,
+with 5.986386h summed complete-pair runner wall and about 3.26GB of retained pair outputs
+before the independent copies. It is sunk evidence, not a reason to rescue the recipe.
+The shared plan's unowned reserve C2 is a concrete opportunity-cost alternative: fixed
+old RR receiver/channel/payload, original RR versus fast-channel-only sending versus
+no-send, N5/H256, 0 fits and 24,576 team steps, with additional engineering and reading.
+It asks about information versus fee saving, not this program mean or training variability.
+Do not take over A2/C01 (another active DM) or S7, revive paused FSD/G33, or require an
+owner/Root portfolio review for an ordinary authorized direction choice. This question
+does not ask for a project-wide reranking or for a finished design of C2.
+
+Context (source_sha is the full immutable revision in the actual message):
+- Current governance at source_sha: docs/project/OPERATING_CONSTITUTION.md §§1–5,7–8.
+  Owner pause is lifted for this direction. The DM owns the continuing question and may
+  revise/select a worthwhile unowned continuation; one result-bearing study at a time,
+  three runtime research slots total, no cross-App messages. Pro advises, the DM decides.
+- Methods at source_sha: .agents/skills/hmasd-scientific-tools/SKILL.md, Update the working
+  explanation / Use and revise shared understanding / Comparators and MARL information /
+  Statistics / Cost and exposure / Pro. These are methods under the constitution. Use the
+  engineering skill's Checks/Runtime notes only if a technical bridge claim needs scrutiny.
+- Current shared background/standing/choice at
+  `cb2afd9eae37529420539695ec11943de7f1a754`: docs/research/RESEARCH.md, section 3's ordinary
+  LOCAL1 B15–B20 discussion, section 6's inference limits, own active row and Current
+  research plan A1/A2/C2. This published result supersedes the source branch's older index.
+  The relevant change is to separate useful F learning from M's unconfirmed increment and
+  retain the panel/training ambiguity; none of those shared judgments bind your advice.
+- Previous advice at source_sha: this notebook's complete Answer in
+  `Pro question 2026-09-24 ordered-roster-confirmation-after-b19`, especially its fixed
+  failure branch and alternatives; the next adoption entry froze B20. This new question
+  changes the decision because the full adverse result now exists.
+- Frozen B20 contract/input at `424bbe4db1351db70d73560ece913150c2b20ed4`:
+  docs/research/candidates/agent_count_generalization/CLAIM_ordered_roster_interpolation_20260924.md;
+  experiments/candidates/agent_count_generalization/ordered_roster_confirmation_b20/bindings.py
+  and reducer.py for exact endpoint/world/unit/rule. The appended CLAIM result and this
+  notebook's `B20 complete` entry are at source_sha; do not rewrite the original plan.
+- Complete B20 compact evidence at `c41c53579051cf8c5bde4eb90a2645594c7a5d2b`:
+  runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_aggregate_20260925/summary.json
+  (SHA256 14ca9eded85178d7b60272fc7019e816d2ee522cf4158a6b0e1d32c22f5658c2), and summary.json,
+  artifact_readback.json/.py and contract_readback.json in the three run directories
+  s1_ordered_roster_confirmation_b20_b1_s1016101,
+  s1_ordered_roster_confirmation_b20_b2_s1017101 and
+  s1_ordered_roster_confirmation_b20_b3_s1018101 under runs/agent_count_generalization/.
+  The aggregate retains block effects, own learning, all world components and cost.
+- B19 development evidence at `b98a0d893d3b7065710f3c0fe6bb7471849a4eeb`:
+  runs/agent_count_generalization/s1_ordinary_roster_training_b19_b1_s1015101/,
+  its batch/F/M summaries, F/M panel_stage45_n5.json and panel_stage45_n7.json,
+  and artifact_readback.json/.py. Full interpretation is this notebook's B19 complete
+  entry at source_sha. B19 evaluator source is
+  experiments/candidates/agent_count_generalization/ordinary_roster_training_b19/runner.py,
+  _evaluate_stage, at accepted input `bfb4fd356a01024ef04c967c4768263f114e5a17`.
+  Read exact code only where it changes the proposed bridge or interpretation.
+- Raw trajectories and checkpoints are private, hash-verified retained files at the
+  locations recorded in NOTES, not available through GitHub. Published independent
+  readback and runner reductions are evidence of their respective checks, not your own
+  access to raw tensors. State any consequential gap; do not claim raw verification.
+
+Constraints: no training, no launch, no implementation and no edits outside this question's
+empty `### Answer` in docs/research/candidates/agent_count_generalization/NOTES.md on
+`codex/agent-count-generalization-b19`. Read the pinned question and selected sources for
+reasoning; fetch the latest target file and actual blob SHA for writing. Preserve the
+question and every other byte, and stop on overlapping edits. Report the actual answer
+commit on success. If writing fails or is unavailable, return the complete answer in chat,
+not only a receipt, SHA or link. Keep private account/conversation addresses out of all
+shared text. No imposed read-receipt table or extra record is requested.
+
+Return: a focused source-grounded recommendation and the judgment it would change;
+what the new data strengthen, weaken and leave unresolved; the strongest alternative
+to the candidate and the smallest discriminating observation if one is worth buying.
+In particular, distinguish an interesting retrospective explanation from an observation
+that would change the next investment. Give **MATERIAL_DISSENT yes/no** for this proposed
+replay and identify any material modification and its cost. If no useful feasible next
+count comparison follows, say so without universalizing the negative result; no rescue
+idea is owed. Cite sources actually used for consequential claims and name unread
+decision-critical sources rather than silently assuming they were verified.
+
+### Answer
