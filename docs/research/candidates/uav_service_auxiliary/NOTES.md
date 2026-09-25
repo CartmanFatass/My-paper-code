@@ -11065,3 +11065,479 @@ Return the choice you recommend and why the next observation is or is not worth 
 Constraints: advice only, no experiment, no new task, no repository edits outside the empty `### Answer` subsection below on branch `codex/uav-service-feedback-b09`. Read at the pinned source; for writing fetch the latest target blob, preserve the question and all other bytes, stop on overlap, and report the actual commit on success. If writeback is unavailable, return the complete answer in chat, not a receipt, hash or link alone. Do not repeat any private Jev conversation/account URL in published text.
 
 ### Answer
+
+
+Saved from chat by the direction DM after the full answer was read and same-key delivery verification returned `NOT_DELIVERED`. Key: `hmasd:68fd973993a73d719a03b5b2a2b05e9ad274dea516982a1bb891d0633f6d1d92`; source `88496691f605e19874893ef74180841497e94edf`. The reported `cd057bf69c183616894c393069139d688388638f` is the unchanged target blob, not an Answer commit. Source, current local target and freshly fetched target were byte-identical with an empty Answer before this insertion. Complete collected text follows unchanged (9,591 characters; transport text SHA256 `b12873010341d1a74600849dc8bd57b7f1192462e61dac980c3f412271986e2c`; saved UTF-8 file including the driver-added newline: 22,360 bytes, SHA256 `f162930ef518d0cf93bef27c0b8652dc9330365108787f6bf9a54847d26b5ea9`). No resend or App message; generation-21 completion event acknowledged by rearm to generation 22.
+
+**本轮未完成 GitHub 写回，实际 Answer commit：无。**读取和整文件更新接口可用，但我未能构造并核验“仅填入本次 Answer、其余字节完全不变”的整文件替换内容，因此没有发出写请求；这不是 GitHub 拒绝了写入。末次读取的目标 blob 为 cd057bf69c183616894c393069139d688388638f，指定 ### Answer 仍为空。本轮没有修改仓库或运行实验。以下为完整答复。
+
+B10 后：支持一次固定的余量触发比较，但它必须争取 O 之外的净用途
+
+MATERIAL_DISSENT: no。
+
+**我建议购买一次题面所述的原生余量触发连续准入比较：固定同一份 N925031 最终策略和 F，比较原站端规则 O 与一个固定的 guarded continuity 规则 G，在 32 个新配对 H3000 世界上执行完整闭环。**保持 0 新 fits、0 更新、64 次 episode 尝试、最多 192k 团队评价 transitions，不同时加入无条件 C、更多策略、训练、阈值网格或确认。
+
+这不是建议保留已经结束的无条件 C，也不是认为 guard 必然成功。**值得检验的判断是：只有在等待者尚未违反原生返航余量时保留连续准入，能否保住一部分有用的恢复顺序，同时取得原 O 之外的完整用途。**若它只是把 C 造成的风险修回 O 附近，没有额外服务或净收益，就没有理由继续支付这一配方的成本。
+
+一、B10 的实质更新：恢复顺序可改，但连续占位不是净用途的充分条件
+
+B10 不应被概括成“连续性没有生效”或“所有中间预测都失败”。它已经消除了所针对的在充成员替换，充电段中位数从 1 步增至 22 步，正储能增益后退出 F 的次数从 405 增至 741，F 模式成员步和总等待暴露都下降。这加强了准入顺序确实能改变恢复过程的判断，而不只是证明代码分支接通。
+
+hmasd-pro-question-b10-continui…
+
+但完整服务—风险结果明显限制了这种物理改善的用途：
+
+主要读数	O	无条件 C	C−O
+完整原生 J 均值	998.466631	952.563768	−45.902864
+累计 QoS 均值	1031.045534	1034.291868	+3.246334
+原生返航成本和均值	2.203137	26.776885	+24.573748
+episode 最低电池均值	0.106652	0.092160	−0.014492
+合格但始终未获电的成员—世界数	2	19	+17
+
+J 在 23/32 世界下降，返航成本在 30/32 世界升高，最低电池在 29/32 世界下降。小的正服务均值必须保留，不能四舍五入为零；但它不能抵消原目标中更大的风险代价。其账面关系是：
+
+ΔJ=
+Δ累计 QoS
+3.246333896
+	​
+
+	​
+
+−2
+Δ返航成本和
+(24.573747967)
+	​
+
+	​
+
+−
+PBRS 差的负项
+0.001701463
+	​
+
+	​
+
+.
+
+这是原奖励的算术分解，不是三个独立机制的因果份额。
+
+hmasd-pro-question-b10-continui… +1
+
+**被加强的竞争解释是：原逐 tick 低电量优先具有实际的均衡价值。**C 把较少的总等待集中成部分成员更长的连续等待：总等待成员步从 52,197 降至 16,959，但等待 tick 内的年龄 P95 从 13 升至 137，最低等待电池从约 .0883 降至 .0397。因此，“总等待更少”与“重要等待风险更差”完全可以同时成立。
+
+hmasd-pro-question-b10-continui…
+
+不能只靠最差世界讲这个故事，也不能把它隐藏掉。953026 的 J 损失为 −677.003693；成员 1 在 tick2977 等待年龄已达 211，最低电池约 .039724，下一 tick 才获电。同世界的成员 6 最后 252 个合格 tick 始终未充电，是另一条观察。最长 298 步等待后实际获电的又是成员 4。这些都是真实有限时域代价，但不是永久饥饿的证明。相反，953032 有最大服务和 J 增益，却仍承担更高返航成本；953012 的最低电池改善却损失服务和 J。不能只选择符合一种解释的世界。
+
+hmasd-pro-question-b10-continui…
+
+由此，**“碎片化是完整服务的主要障碍”被削弱；“分配顺序影响恢复与等待风险”得到支持；“怎样的条件连续性还有增量价值”仍未回答。**B10 没有识别 B09 的 A−N 原因，没有诊断 actor 表示或学习缺陷，也没有证明 O 最优。零 cutoff／depletion 仍只是本批有限观察，不使 .0397 的低储能后果变成无风险。
+
+hmasd-pro-question-b10-continui… +1
+
+二、为什么我仍支持这一项修订，而不是把它当作自动补丁
+
+最强的反对理由是：B10 已经实现了相当大的恢复过程变化，却只得到很小的完整服务增量；更好的补能顺序可能本来就不是这个固定策略的主要服务约束。O 已有可用表现，guard 可能大部分时间回到 O，最后只花钱再发现“原方法足够好”。而且分配干预在这些世界直到 tick2117–2805 才首次改变轨迹，剩余时间不足以保证释放出的行动机会转成有用服务。
+
+hmasd-pro-question-b10-continui… +1
+
+这使“不再买站端实验、保留 O＋F”成为有力替代。我不以“尚未证伪全部连续性”或“还有一个参数可以改”作为继续理由。
+
+仍值得买这一次的理由更窄：**B10 不只是一个负总分，它同时产生了真实恢复改善和具体、可在当前分配时刻识别的等待风险。**题面的 guard 恰好改变二者的连接——不再无条件维持在充者的优先权，而是在会被 C 留下等待的成员已经违反原生余量时，退回已有 O。这个判断使用宿主已有的零余量边界，不需要从 953026 的最低电池拟合一个新阈值，也不需要先增加服务预测器。
+
+它尚未证明非负余量时的连续准入有价值；这正是要由新比较回答的部分。在等待者尚有余量、在充者接近退出 F 的一些状态下，保留连续供能可能让该成员较早返回有用执行；在另一些状态下，O 的均衡可能更重要。B10 已验证两种后果都涉及真实物理过程，固定 guard 能给出不同于全 C、也不恒等于 O 的轨迹。因此，其信息价值比重复无条件 C 或继续描述旧抢占次数更直接。
+
+我的支持不包括“guard 后再调驻留、再换阈值”的后续序列。**本次比较的对手是 O，不是已造成风险的 C；恢复到 O 不是超越 O。**这条边界使一次修订与无限救援有实质区别。
+
+三、拟议 guard 可以执行，但应按以下准确含义理解
+
+令 E
+s
+	​
+
+(t) 为站点 s 在当前运动与耗能之后、任何充电输入之前的合格集合。分别计算：
+
+O
+s
+	​
+
+(t)：当前原生排序产生的集合；
+
+C
+s
+	​
+
+(t)：上一 tick 在本站实际获电、当前仍合格者优先保留，再按 O 填空位的集合。
+
+令当前重新计算的 raw margin 为
+
+m
+i
+	​
+
+(t)=
+b
+i
+	​
+
+(t)−
+v
+limp
+	​
+
+3600C
+battery
+	​
+
+P(v
+limp
+	​
+
+,0)
+	​
+
+d
+i
+	​
+
+(t)−r
+reserve
+	​
+
+,
+
+其中 
+b
+i
+	​
+
+ 是本步耗能后的电池比例，d
+i
+	​
+
+ 是当前到最近站点的距离。保留原生 r
+reserve
+	​
+
+=.10。拟议规则应准确写为
+
+R
+s
+	​
+
+(t)={i∈E
+s
+	​
+
+(t)∖C
+s
+	​
+
+(t):
+m
+i
+	​
+
+(t)<0},
+G
+s
+	​
+
+(t)={
+O
+s
+	​
+
+(t),
+C
+s
+	​
+
+(t),
+	​
+
+R
+s
+	​
+
+(t)
+
+=∅,
+R
+s
+	​
+
+(t)=∅.
+	​
+
+
+这与题面的候选一致；没有新增驻留长度、迟滞或预测。原生 _raw_return_energy_margins 确实按当前电池、最近站距离和 reserve 重算该量；不能替换成裁剪后的 return threshold，也不能把负 margin 简化成所有位置都相同的“电池低于10%”。
+
+当前时刻和实际 incumbent 是两个关键状态
+
+冻结代码的调用顺序是先耗能、再计算资格和分配、最后供能及更新等待年龄。因而在站端选择函数里重算 margin 是适当的位置；上一观察中的缓存 margin 和本步充电后的 margin 都不是同一个判断变量。各站应在尚未给任何成员充电的快照上作选择，不能让站点遍历顺序使后一个站看到先一个站的充电后电量。原代码当前就是先产生各站选择，再实际供能。
+
+B10 已在 _prepare_energy_actions 清除／重算目标站之前，保存上一 tick 实际正输入的站点身份。后继可以复用这一事实路径，而不是重新从当前目标站或一个已清空的充电标志推断 incumbent。
+
+这里还有一个影响解释的细节：**G 一次退回 O 后，O 实际选中并供电的成员，会成为下一 tick 的真实 incumbent。**所以它不是“给等待者抢救一拍，下一拍必定把槽还给原占位者”。但它也没有保证新成员获得固定长度连续供能：若另一个会被 C 留下的成员又出现负 margin，下一 tick 可以再次回退。
+
+O/C 候选集合只作无副作用的当前排序，实际只执行一次所选分配、一次供能和一次等待状态更新。回退仅作用于触发的站点，不把另一站也全局切回 O。模式和 incumbent 在真实 episode reset 清空，不在技能刷新、计量边界或规则切换时清空。
+
+严格 <0 的零边界来源明确，但“来源明确”不等于最优阈值或安全边界。恰好为零不触发该 guard，仍可能在后续一步变负；它也不能撤销本步已经发生的耗能。保持这个候选的原意，比为了“更保险”悄悄加入提前量更重要。
+
+四、一个局部反例说明：回退 O 不等于保证负余量者获得救援
+
+考虑同一站、一个槽、两个当前都合格的成员。以下是用于检验规则逻辑的假设快照，不是声称 B10 实际出现过这一精确状态。
+
+在充者 h 的站距为零，耗能后电量为 r
+reserve
+	​
+
+，故 
+m
+h
+	​
+
+=0。等待者 j 的站距为一个 capture 范围内的小正数 d，电量为
+
+b
+j
+	​
+
+=r
+reserve
+	​
+
++
+2
+κd
+	​
+
+,κ=
+v
+limp
+	​
+
+3600C
+battery
+	​
+
+P(v
+limp
+	​
+
+,0)
+	​
+
+>0.
+
+于是 
+m
+j
+	​
+
+=−κd/2<0，但 
+b
+j
+	​
+
+>
+b
+h
+	​
+
+。C 留下 h，因 j 负余量而触发 guard；O 按电池比例排序，仍选择 h。因此这一步可以有 G=O=C，触发成员仍等待。原排序确实是电量、负等待年龄、成员编号，而不是 raw margin 排序。
+
+这个简化去掉了移动、队友后续响应和无线服务，只说明一个局部性质：**正确触发不保证改变实际选择，更不保证触发者当步获电。**多个负余量成员竞争有限槽位时，保证全部恢复也更不成立。
+
+这不使 guard 失去经验比较价值。它是“连续优先与原生均衡之间切换”的候选，不是一个已经满足储备不变式的控制器。也不能因这个反例就默默把 O 改成 margin 排序、让触发者固定占位到某个目标，或加入最长等待时间；那些是不同干预，目前没有必要追加。
+
+正向的局部机会同样清楚：当 C 与 O 会选不同成员、但被 C 留下的等待者 margin 都非负时，G 确实保留连续准入。若这段连续输入足以让在充者获得更早的有用退出，而不使其他人随后承担大的余量缺口，可能形成额外用途。这只是可失败的推理，不是对新轨迹中机会频率或收益大小的预测保证。
+
+五、最小完整比较与因果范围
+
+我建议保留题面的一组 O/G，而不增加第三臂。固定同一角色选择的 N925031 最终 checkpoint、原训练身份、F、S7-S2／N8／k10／H3000、原奖励、功率、容量、资格和最近站逻辑。两规则各自从真实 reset 执行，actor 和循环状态使用各自产生的真实观察历史，评价不更新任何学习器或 normalizer。新世界、随机性匹配、顺序和固定终点由 DM 在前瞻条目中确定，不依据旧 953001–953032 的效果挑选。
+
+hmasd-pro-question-b10-continui…
+
+对每个世界 w，报告
+
+ΔS
+w
+	​
+
+=
+t=0
+∑
+L
+w
+G
+	​
+
+−1
+	​
+
+q
+w,t
+G
+	​
+
+−
+t=0
+∑
+L
+w
+O
+	​
+
+−1
+	​
+
+q
+w,t
+O
+	​
+
+,ΔJ
+w
+	​
+
+=J
+w
+G
+	​
+
+−J
+w
+O
+	​
+
+.
+
+完整 J 是原目标下的净用途读数，累计 QoS／实际交付量说明服务是否改善；二者与原生返航成本、真实最低电池及尾部、零服务世界、cutoff／depletion、能量输入和消耗并列读取。保留计划窗口 S/3000 和实际 episode 长度，避免提前结束后只报“每执行步服务”造成误读。不补跑、不填造剩余奖励、不删除不利世界。
+
+**估计对象是：在这份固定历史策略、同一个 F 和所选世界分布下，替换站端分配法则的完整闭环总效果。**它不是 actor 消融，不是新的学习收益，也不是证明“连续性”这一中介贡献了多少服务。后续电量、位置、资格集合、F 模式和 actor 响应一起变化，是这项总效果的组成部分，不应被强制保持成 O 的轨迹。
+
+没有 C 新面板，就不估计“G 相对 C 消除了多少风险”的新世界因果差；旧 C 用于提出问题和解释边界，不与新 G 拼成同期配对。为了回答 G 是否值得取代 O，并不需要自动再购买 C。
+
+32 个世界给出这份固定策略的条件世界差异，不增加训练重复数。新世界也不会清除“看过 B10 后才设计 guard”的选择历史；本次仍是一次新的探索，不是原 C 的确认。
+
+六、改进中间读数：看实际分配分歧后的剩余任务，不让旧窗口先于干预
+
+B10 有 16/32 个首恢复 250 步窗口在任何 O/C 实际分配差异之前已经结束。这削弱的是该窗口对晚期站端干预的辨别力，不是削弱完整 H3000 的不利结果。不能据此改写 B10 的端点，也没有理由延长时域直到候选看起来更好。
+
+hmasd-pro-question-b10-continui…
+
+对新的 O/G，我建议不增加评价，只把主要过程描述移到两个直接相关的位置。
+
+在站端判定时，区分“触发”“改变选择”和“实际获电”
+
+每个实际站点快照保存当前 margin、O 集合、C 集合、guard 条件及最终选择。重点分开：
+
+触发但 O/C 相同；触发且从 C 改为 O；不触发且保留了与 O 不同的 C。
+
+第三类是候选在原 O 之外保留连续机会的直接暴露。只有 guard 触发计数，没有这些分母，会把“几乎复现 O”错写成一个充分检验过的有用混合规则。
+
+同时记录负余量等待者是否实际获电、仍未获电者的连续等待与 margin 缺口，以及充电后的真实储能结果。判定时的预充电 margin 与步末物理结果分开保存；不能用所选规则自己构造的“应当安全”标志替代实际读数。这些都是当前快照和真实转移的计量，不需要影子 rollout 或额外规划搜索。
+
+在首次真实 O/G 分配分歧后，读取同一个剩余任务区间
+
+对每个配对世界，记首次实际获配集合不同的时刻为 t
+w
+∗
+	​
+
+。核对此前共同前缀，再从该共同分歧时刻读取两条轨迹直到各自原生结束的服务、风险、等待和恢复过程，报告实际剩余暴露长度。
+
+这样，过程描述必然覆盖干预发生后的机会，而不是先于干预结束。若共同前缀完全相同，完整差值也就是相应后缀差值；这是计量恒等关系，不是第二份独立证据，也不是把短后缀平均放大后替换完整 J。没有实际分歧的世界全部保留；不能为了形成事件窗口而剔除它们。
+
+已有首恢复 250 步窗口可以继续作为次要描述，但不再独自承担 guard 的中间预测。仍不把联合服务归属于某个刚获电成员，也不把两条轨迹在不同时间发生的退出事件当成相同状态的因果对照。
+
+等待者、未获电者和未退出者必须同时保留
+
+中间正预测应是：**保留了一部分 O 之外的有用连续恢复机会，同时减少连续准入所诱发的低余量等待；这种变化最终转为相对 O 的完整用途。**不要求总充电量或退出次数必须增加——更少的反复充电也可能有用。
+
+等待读数继续包括每成员累计等待、连续等待长度、等待中的电池／raw margin、所有合格却从未获电者，以及是否在实际时域内退出 F。对仍在等待、仍在充电和输入后未退出的区间分别标记，不混成一个“未完成”分母。真实耗尽或 cutoff 是已观察事件，不是普通右删失；时域终点尚未获电，不等于永远不会获电。
+
+B10 已经说明只看完成者会漏掉重要后果：C 的19个合格未获电成员中，有121、171、188、252步的实际剩余暴露，不能都叫作“最后一刻才来”。而最终获电者的首输入延迟分位数只对获电者成立，不是所有到站者的无条件等待分布。
+
+hmasd-pro-question-b10-continui…
+
+七、什么结果应改变下一步，而不是再产生一个补丁
+新 O/G 的固定完整读数	建议的判断与投入变化
+G 保留实际非 O 的连续机会，完整 J／服务有值得保留的增量，等待风险和损失尾部不抵消用途	保留这个固定包的有限用途；不称安全保证、一般调度优势或学习机制，也不自动增加确认或训练。
+G 大部分行为回到 O，风险接近 O，但没有额外完整用途	结束这一固定 guard 的追加投入。它可能修正了 C 的问题，却没有给 O 增加价值；小差也不证明严格等价。
+连续恢复读数改善，但完整服务无增量，或等待风险仍显著恶化、J 变差	降低这条条件连续性的用途判断，保留物理响应，结束当前规则；不自动加迟滞、驻留时间或更早阈值。
+完整用途成立，但所预期的恢复顺序解释不成立	保留包收益，修订解释。不要补做一系列控制来追认原机制，也不要把收益归为已识别的同机服务恢复。
+新世界缺少实际非 O 选择或足够后续暴露	说明本次对额外连续机会的检验有限，不是活跃机制被证伪；仍无自动追加世界、延长 H3000 或制造拥塞的理由。
+
+**最能削弱当前投入理由的观察，是 guard 确实改变了有竞争的选择，低余量等待得到处理，却仍没有相对 O 的完整增量。**这会直接打击“风险受限的更快恢复具有额外服务价值”，而不只是发现一个实现未接通的分支。
+
+另一方面，只获得风险节省仍可以是真实的原生收益；应如实保留，而不改称服务改善。是否值得采用，要看服务代价、风险尾部和完整成本，不能仅凭候选的一项正数。当前没有材料提供合适的实用差异区间或尾部容忍线，我不从 B10 的效果倒推一个数值通过门槛。
+
+支持一次修订的同时，必须接受结束的可能：**如果最有利的可信解释只剩“它没有比 O 差多少”，就不应继续为连续性本身付费。**同样，一个结果性研究结束并不否定更广服务—风险问题，但也不欠一个立即启动的新点子。
+
+八、成本、机会成本和工程范围
+
+所建议的新增工作仍是
+
+2 规则×32 世界×3000≤192,000
+
+实际评价团队 transitions，最多1.536M UAV行动行、0新fits／0更新。历史 N 已支付180k训练，不能因本次固定策略评价而把它称作免费或无学习的控制器。B10 的实际 runner wall 为81.895812分钟，准入至退出84.876253分钟，保留输出约310.6 MB；这些只是这台主机及已有实现的成本尺度，不是本次耗时承诺。
+
+hmasd-pro-question-b10-continui… +1
+
+新增工程应局限于站端选择中的固定 guard、当前预充电 margin 记录和上述实际分支／等待描述。已有 B10 的真实 incumbent 保存、原排序和能量路径可复用；不需要建立一般调度框架。针对性检查应能区分缓存 margin 与耗能后 margin、严格零边界、回退后的真实 incumbent 更新、触发但实际集合不变、多负余量成员竞争，以及 reset 和原 O 路径不变。相应高风险审阅、完整输出收取和判读都是实质成本，但不需要再做一个必须取得正服务的 pilot。
+
+C2 的24,576零-fit步比较可作为机会成本提醒，却回答另一种消息时机问题；不能仅按步数判定它必然比本站端问题更值得，也不能在本答复中接管其负责人。B3 还没有明确成本／主对照，不能把它虚构成一个已经更便宜可执行的替代。若本次 guard 接线实际扩展成更大的信息接口或新控制框架，当前“小而直接”的投入理由就应重新降低，而不是默认扩大范围。
+
+hmasd-pro-question-b10-continui…
+
+九、来源范围与尚未完成的独立核验
+
+本答复已读完整当前附件、固定版本的本次问题、B10前瞻／实现采纳／完整结果及全部32个有符号世界、前次完整站端建议和B10采纳；并读取指定治理、共享背景与方法，以及冻结的 b10/station.py、metrics.py、native.py、原生能量／资格／排序／margin路径和不变F。主要来源版本分别是：
+
+**问题及结果 88496691f605e19874893ef74180841497e94edf；治理、方法和共享背景 3ad84d020cf4b44b6dae0d317025b410148940d2；冻结实现 3be662f4ae599c49042626c00f9d33ac3d005697。**最新分支仅用于核对写入目标，没有替换这些推理输入。
+
+本轮 summary.json 读取可用，核对了可见的执行计数、身份／资源及部分世界记录，并读取config、manifest、exit和最终status；**没有独立逐项重算整份机器摘要，更没有读取仓库外NPZ／checkpoint。**本文数值判断主要依赖完整B10结果条目和逐世界表；全部物理闭合、选择／前缀复算及137文件／129引用的核验，明确属于DM已报告的审计，不是我的新复现。
+
+hmasd-pro-question-b10-continui…
+
+新的guard尚未实现或执行，其触发频率、实际偏离O的机会、等待风险与完整收益均未知。上面的局部反例和条件性正向机会是源码支持的推理，不是额外实验，也未引入外部文献作为成功依据。
+
+最终建议保持为：保留 O＋F，结束无条件 C；支持仅一次原生零余量触发的 O/G 完整比较。它值得购买，是因为B10给出了真实恢复变化与具体等待风险这一新的可区分连接，而不是因为连续性必须被救活。新规则必须在原 O 之外取得值得保留的完整用途；若只修回 O、改善过程计数或把代价转移到等待者，就结束这一固定guard的追加投入。最终选择由DM承担。
+
+## 2026-09-25 — B11 adopt one fixed native-margin guarded continuity comparison
+
+### Scientific decision and response to the complete advice
+
+Read the complete `b10-continuity-risk-next-investment` answer above; `MATERIAL_DISSENT: no` is adviser agreement, not another empirical replication. Adopt one new exploratory O/G comparison, **UAV-SERVICE-GUARDED-CONTINUITY-B11**, under the existing direct DM assignment. Original unconditional C remains ended and ordinary O+F remains the retained default. This is a material rule revision motivated by B10's joint physical-recovery improvement and concentrated low-margin waiting, not an extension, retry, confirmation, or relabeling of B10.
+
+Current shared context was refreshed from published main **66aed19c5e6df050f7bc5340be9127cf24bda9a9**: [topic 6 and the B1/B2/B3/C2 plan](https://github.com/CartmanFatass/My-paper-code/blob/66aed19c5e6df050f7bc5340be9127cf24bda9a9/docs/research/RESEARCH.md). Topic 6 supplies the crucial constraint: recovery sequencing, total waiting and complete service-risk utility are separate judgments; one historical policy and new worlds do not enlarge training n. B09 leaves N+F as the competent ordinary reference and does not identify its A−N cause. B10 supports actual physical sensitivity to allocation and the value of O's low-battery balancing, while weakening fragmentation as the main complete-service bottleneck. Its favorable service mean and all positive worlds remain, alongside the larger J loss and waiting tails. The latest owner-adopted constitution at the owner's named project-management checkout was read and is unchanged in the relevant authority; owner pause remains lifted, Claude FSD stays paused and G33 frozen. This is this DM's single active study, within the three-track runtime ceiling; no other lead is assigned or messaged.
+
+The strongest alternative is to retain O and buy no more station comparison: ordinary balancing may already supply the useful allocation, while geometry, the fixed policy, or the late remaining task limits the service value of earlier recovery. C2's 24,576-step zero-fit proposal addresses a distinct message-timing question; it is a relevant cost comparison, not permission to take another lead's work. B3's tail-objective proposal is not yet priced or specified and is not invented as a ready substitute. Choose this one narrower revision because it intervenes on the observed connection between continuous recovery and low-margin waiting using an existing physical variable and boundary, without a learned predictor, new information, dwell grid or extra fit. Its useful discriminator is whether it preserves actual non-O continuous opportunities **and** yields worthwhile complete native utility, not whether it repairs a deliberately weaker C comparator.
+
+Consequential code claims were checked directly against `envs/pettingzoo/relay/energy_aware.py`: `_apply_energy_dynamics` subtracts current movement/hover energy, computes eligibility, then selects all stations before any supply; `_raw_return_energy_margins` recomputes current battery minus nearest-station return-energy ratio minus the native reserve; `_select_charging_uavs` sorts battery, negative wait age and member id. B10's `_prepare_energy_actions` captures the previous actual positive-input station before native target preparation clears/recomputes it. These findings support the proposed timing; they do not predict its success.
+
+Adopt Pro's local counterexample as a limitation: a negative-margin waiter can have more battery than a slightly closer incumbent, so triggering O may leave the same member waiting. Strictly zero does not trigger, and a tick's fallback does not establish safety, rescue, or a reserve invariant. A member actually supplied during a fallback is the next true incumbent. Do not silently replace O with margin sorting, retain an earlier incumbent after fallback, add hysteresis, or modify the reserve. Adviser source statements are preserved with its explicit limit: it did not independently recompute all external raw artifacts. No external literature premise is required for this source-grounded comparison.
+
+### Fixed prospective comparison, endpoints and cost
+
+- Assets: the role-selected B09 ordinary N925031 final checkpoint and exact B09 config/summary bindings used by B10. Original source execution **e5e53534c2c0c4a059cfdfa5f3aff4cbc2166f46**; checkpoint SHA256 **2ba395b9f2761a9a761bd648d399b525c61b7babdb84edbe293319d269eeff5a**; config **176fa470ae682a6218b4690de33f4727afe0ee7c4cf2f22508bd0f1ddfd96084**; summary **a96db3a1e945af8099e54ad2a22173ff050df134bb95918818357f16502458cf**. Keep the original node root `/home/wu/hmasd-worktrees/usa-b09-48388289d/runs/uav_service_auxiliary/b09_an_925031_a01` and its verified independent copy; no fit or checkpoint selection is added.
+- Two complete closed-loop rules, ordered **O then G**. O is the unchanged native allocation. For each station on the common current post-motion/post-consumption, pre-input snapshot, compute O and true-incumbent C with the existing capacity and sort. Recompute all raw native return-energy margins at that selection point. If any **currently eligible member excluded by that station's C set** has margin **strictly below 0**, use O at that station for this tick; otherwise use C. Recompute each tick. The native reserve stays **0.10**. No current-observation cached margin, future input, counterfactual trajectory, dwell parameter, new station-intent information or global fallback is used. Every station decision precedes all supply; execute one allocation, one physical supply and one wait-state update.
+- Fixed fresh world seeds **954001–954032**, in increasing order in both panels; these do not appear in this direction's prior source/NOTES. Same S7-S2, N8, k10, H3000, original reward including lambda_return=2, original charging power/capacity/eligibility, nearest-station logic and unchanged B06 F. Both policies see their own real closed-loop observations and recurrent histories, with true episode reset. Actor/critic architecture, information, refresh, action constraints, termination/truncation, saved normalizers and all parameter/optimizer state remain unchanged. No training, optimizer or normalizer update. No artificial continuation of a terminated episode.
+- **0 new fits, 0 training transitions, 0 new optimizer updates; 64 episode attempts, at most 192,000 real team evaluation transitions / 1,536,000 UAV action rows.** Reused N still has its original 180k training cost. No C third arm, extra policy, threshold sweep, pilot selected by reward, extra worlds, episode replacement, H extension or confirmation. New exploration remains conditioned on one historical policy and post-B10 design exposure.
+- Native full-episode J and cumulative QoS / delivered service are the complete-use readings; also report QoS per planned 3000 and actual length, native and raw return costs, true minimum battery / lower tail / minimum raw margin, zero-service worlds and longest service-free interval, cutoff/depletion, physical consumption/input/signed storage and energy closure. Preserve all signed world differences, mean/median/wins/losses with cost directions interpreted correctly, and adverse worlds. No numerical adoption threshold is fitted to B10 and no population significance, equivalence or general safety claim is planned.
+- Intermediate prediction: G creates real allocations different from O in some competing states, allows useful uninterrupted input / positive-gain F exits, and avoids some low-margin waiting incurred by unconditional continuity; the final intended prediction is worthwhile native J/service relative to O without an offsetting waiting-risk tail. The comparison estimates the **whole station-rule closed-loop effect** at the fixed policy and world distribution. It does not identify a recovery-mediated causal effect, B09's learning mechanism, or new G−old C effects on fresh worlds.
+- Retain O/C/final station sets, current pre-input raw margins, actual input, true prior station and waiting ages each tick. Separately count trigger with O=C, trigger changing C to O, and no-trigger non-O continuity, with station/tick denominators. Distinguish negative members excluded by C from actual negative-margin waiters; record which receive real input and which remain waiting, plus their margin deficits and observed waiting lengths. Keep all eligibility/never-input, input/no-exit, completed and right-censored denominators. Cutoff/depletion is an event, not censoring.
+- Use the **first actual paired allocation difference** as the descriptive common suffix start. Verify identical physical/action prefix and identical preselection inputs at that tick; preserve worlds with no difference. For both worlds report remaining actual exposure, cumulative native J/QoS/return cost, waiting and recovery in that same suffix. Interval events crossing the boundary retain their original start and censoring; suffix counts are descriptive, not matched independent recovery samples. Full effects equal suffix effects when the prefix is identical; this is an accounting identity, not extra evidence or a replacement normalized endpoint. Keep the prior first-recovery 250-step reading only as secondary description, including whether it precedes intervention.
+- Outcome branches: meaningful complete utility with real non-O exposure supports only this fixed package's conditional use; utility with a failed recovery prediction changes the explanation. Return close to O without additional utility, recovery-only improvements, continued adverse J/waiting tails, or too little non-O exposure do not justify automatic rescue, tuning, extra seeds or training. Risk-only benefit remains real native benefit and is not renamed service improvement. The broader scientific question remains revisable; no immediate successor or positive result is owed.
+- Use configured **wsl_4070**, CUDA FP32, four Torch threads, TF32 disabled, subject to fresh native memory and ownership admission. B10 measured 81.90 min runner / 84.88 min admission-to-exit and 310.6 MB retained output; that is an order-of-cost reference, not a new runtime promise. New margin/branch records increase storage. Record actual wall, CPU and runner high-water RSS, collection bytes and recoverability; engineering, independent review and readback remain costs with unknown total wall, not free work. Keep compact config/summary/status in Git and full hashed raw traces at the native output and an independent durable copy.
+
+### B11 L0 implementation scope
+
+Deliver the fixed comparison above using candidate-local `experiments/candidates/uav_service_auxiliary/b11/{station.py,metrics.py,native.py}`, admission entry `scripts/run_uav_service_auxiliary_b11.py`, and focused tests under `tests/experiments/candidates/uav_service_auxiliary/b11/`. Reuse well-understood B09/B10 and unchanged F/native helpers where useful; do not edit B10 or shared production code to reinterpret its frozen contract, and do not create a general station scheduler. Preserve source binding, actual production counters, physical/reward traces, compact summaries and raw hash references; a partial/failed attempt stays incomplete with surviving evidence.
+
+One Implementer owns those B11 code/test paths in the current author checkout and returns its diff/checks without staging or committing. The DM owns NOTES and publication; other writers' edits must be preserved. Read applicable AGENTS. No scientific run, Pro send, branch/index edit, scientific choice or helper delegation by that leaf. Expected code work is bounded to guard selection and its measurements/evaluator integration; if substantially broader framework or information-interface change is necessary, report before expanding.
+
+Focused checks must exercise native physical paths and distinguish raw current margin from stale/cache or post-charge values, strict zero/nonnegative versus negative boundaries, station-local fallback, trigger without changed allocation, multiple endangered waiters, actual fallback recipient becoming next incumbent, true reset, and unchanged O physics/RNG ordering. Check fixed O/G/fresh-world production binding, no learner/optimizer/normalizer mutation, admission-before-scientific-effects, one supply/update per step, branch/negative-wait denominators, prefix and suffix endpoints (including no divergence and early end), and required raw/config/summary retention. Small synthetic fixtures are correctness checks only, not new scientific evidence. Use managed pytest scratch and the configured scientific interpreter. Independent read-only review is required for this evaluator/physical allocation change before exact inputs are accepted and launched. Commit/push the fixed inputs and declare the source SHA before the native launch; never restart B09/B10 or resend the finished Pro question.
