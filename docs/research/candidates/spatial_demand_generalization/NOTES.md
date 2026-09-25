@@ -1601,3 +1601,30 @@ Consumed this checkpoint and rearmed the same `spatial-c01-b4-s263000105` handle
 generation **27**, window 1,500 seconds. Four of five pairs have complete scientific
 readings; no new launch, worker restart, Pro resend, scientific verdict or main/index
 update follows this checkpoint.
+
+### C01 block 4 checkpoint — 2026-09-25T14:07Z
+
+Read the sole pending generation-27 checkpoint `2c466dc9405bef50400e0b79`, wake
+`758f625a-4adf-4fc8-81d9-2f3571bce18f`. At 14:06:23Z the same accepted operation retained
+matching live supervisor/runner identities, consistent records, no exit witness and zero
+observer errors. At 14:07:59Z U reported complete: 360,000 training/stored team steps,
+2,160,000 UAV steps, 720 episodes, 45 updates and 101,250 actor/critic optimizer calls each.
+Its six evaluation panels account for 96,000 team steps and 192 episodes/resets; evaluation
+storage/optimizer calls are zero and all recorded initial/final isolation flags are preserved.
+U arm wall was 2,184.306805 seconds. Whole-pair collection and scientific reading remain pending.
+
+M's live record was at rollout 17's update boundary: 136,000 training/stored team steps,
+816,000 UAV steps, 272 episodes, 16 completed updates and 36,000 actor/critic optimizer
+calls each. It had no evaluation transitions yet; arm wall was 748.047404 seconds. Both
+failure fields were null and both native logs were empty. These progress counts are from
+the live arm records rather than the batch's earlier boundary snapshot.
+
+Fresh main advanced to `0f4b705dc322fa9866b29c670166ba6293e4de07`. Read the complete relevant
+diff: the separate C2 B01 comparison is complete and preserves RR, with FAST_ONLY adverse
+despite shorter transit and lower attempt cost; its pending/history/age changes do not
+identify a pure content mechanism. This does not alter the accepted C01 protocol or decide
+its claim. This direction's standing, lead, fixed plan, constitution and compute controls
+are unchanged; published and canonical-node owner pauses remain lifted. Consumed this
+checkpoint and rearmed the same `spatial-c01-b4-s263000105` handle to generation **28**,
+window 1,500 seconds. Four of five pairs have complete scientific readings; no new launch,
+worker restart, Pro resend, scientific verdict or main/index update follows this checkpoint.
