@@ -796,3 +796,52 @@ Only the named implementation/test/entry paths are delegated; NOTES, CLAIM, shar
 Git index and launches remain DM-owned. Helpers launch no result-bearing work or children.
 At this adoption entry, no C01 fit or evaluation has started. A technical failure preserves
 its actual cost and incomplete fixed batch and triggers no automatic retry or replacement.
+
+### C01 implementation accepted for configured-node verification
+
+The fixed decision is published on main at `3889d40627612179188df21af7b1ee8018f69218`;
+only this direction's standing, directly affected A2/C01 paragraph, plan and routing changed.
+The temporary publication checkout was clean, durably published and reclaimed. Other leads,
+pauses and directions are preserved. The original proposal's five blocks and rule are unchanged.
+
+The Implementer returned four new C01-owned files. I read the code and focused tests and
+accept the bounded implementation. It uses a fresh private A2 module namespace per block,
+binding C01 seeds/identity and its checkpoint/JSON writer, with no changes to frozen A2 or
+its shared dependencies. The offline aggregator requires all five complete production blocks,
+same source/SHA, full exposure dictionaries and common actual physical panels; it reports
+block-level t95 intervals and retains all per-world/component/own-learning readings.
+During self-check, I required JSON-normalized spec comparison and mandatory initialization
+identity fields, avoiding tuple/list mismatch and vacuous success on absent equality fields.
+Those corrections and the corresponding refusal cases are in the final implementation.
+
+Final local focused check: six tests passed in 12.63 seconds (14 upstream Pyparsing warnings).
+The real reduced paths compare two independent technical blocks, paired U/M initialization,
+distinct weights/private sampler state/RNG, shared evaluation geometry, and the unchanged A2
+numerical path on the same technical inputs. Separate checks cover fixed seed/count arithmetic,
+checkpoint/source identity, admission refusal/SHA mismatch before execution, and known t
+arithmetic with missing/duplicate/failed/source-mismatched/physical-mismatched aggregation.
+Statistical fixtures use synthetic scores only for software tests and the tracked native A2
+JSON schema; they are not scientific observations. Each successful focused invocation performs
+720 reduced technical training and 720 evaluation team steps across the real-path tests;
+these are development checks with private addresses, not C01 production fits or extra n.
+
+Independent Reviewer read the final diff and tests without duplicating their execution;
+no material finding remained. Reviewed and DM-verified SHA256 bindings:
+
+- C01 runner: `c9855ae98052ff4ffd5300399512ffffec82098375eaa34f08825ef6ce257899`.
+- C01 entry: `07f38f923ea06c5f92b88cb6a7d5fa62faff67148439141650bf33b4b5e3ccf0`.
+- C01 tests: `d74777b92940649184fe586a4f06fe30b1c3008da8be4dbcb82207259101c3ec`.
+- C01 initializer: `85b4989ffad2104bc1c26c00e27c155a6347ba1c7623e3bb26e4084fa6a09ede`.
+
+The actual-node authoring checkout is `/home/wu/hmasd-worktrees/spatial-c01-01a0d6ab`;
+only committed source will be staged there and launched through a retained source snapshot.
+Its sparse selection includes the tracked A2 compact JSON used by the schema test. The live
+canonical research file was updated only in this direction's row, from current published main;
+every other byte was checked unchanged, including its owner pause and other writers' work.
+Node preparation initially stalled in a read-only Git promisor fetch from a plain SSH shell;
+I terminated only that identified fetch tree before any policy write/worktree creation and
+completed the same preparation through the configured network shell. No scientific process
+was touched. The node's previously recorded bad-tree auto-GC and missing-object commit-graph
+warnings remain unrepaired; source/worktree creation completed, and no history was rewritten.
+Subsequent sparse materialization used only per-command Git cache/auto-GC settings. Actual-node
+tests and fresh native admission remain the next checks; no C01 production fit has started.
