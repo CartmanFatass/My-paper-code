@@ -1305,3 +1305,82 @@ lead, protocol and lifted pause; the canonical-node pause is also lifted. Consum
 checkpoint and rearmed the same `spatial-c01-b2-s263000103` handle to generation **20**, window
 1,500 seconds. No worker restart, Pro resend, new launch or scientific verdict was made.
 Complete third-pair collection and reading are still pending; main/index is unchanged.
+
+## 2026-09-25 — C01 block 2 complete: adverse paired results retained
+
+The third fixed pair, model seed 263000103 at input
+`9e44adde3d54fcd0363a2ebdbc1468494141c27b`, exited normally with code 0 at
+**2026-09-25T11:39:19.017409Z**. Generation-20 READY event `6e43f2ef012838704c8c490e`, wake
+`59d97f53-a86a-4e5c-bcf4-a951dfa054eb`, retained the original native identities, their absent
+post-exit state, a valid exit witness and consistent records. Its
+[manifest and operation reference](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b2_s263000103/launch-manifest.json)
+remain the authority for the launch. The complete result is accepted after the evidence
+reconstruction below; this does not decide the five-block confirmation claim.
+
+### Integrity, retention and actual cost
+
+All **136 original native files / 1,088,014,981 bytes** were copied and individually checked
+against the executing node, then independently copied and rehashed at
+`/home/fires/hmasd-artifacts/spatial_demand_generalization/s1_spatial_coverage_c01_b2_s263000103`.
+The canonical inventory SHA256 is `9b44cd9520a1bc091a91913dd763d8635d93b391795a48bfa2b8ed0ae8652ff3`;
+the original batch summary SHA256 is `57d9963761bb3114506c566b603a68c2d8ee41e2220354fa7a0cd220103ea962`.
+Raw outputs remain outside Git; compact original JSON and this reading are published on the
+direction branch. The durable `c01-postrun-reading/block2-verification.json` report has SHA256
+`77fe5499a05107b29aa4e338f4c21fae66f105e775ba5fa1191a9e3ad1eacf56`; the three-block integrity report
+there has SHA256 `7e5cee6c5957a3889cca584ed0dd7defd52a9f7d983f77936493039aec3d77c2`.
+
+The unchanged read-only reader checked all 23 source digests against the published input,
+all 144,000 evaluation transitions and reconstructed metrics/differences, all 90 training
+rows/reset records, 88 reset boundaries, four checkpoints and evaluation isolation. Maximum
+panel-J roundoff was 1.11e-15, and both native logs were empty. U/M initialization matches
+within the pair. Physical initial evaluation scenes match blocks 0 and 1 for every family;
+the actual initial model tensors and post-initialization RNG digest differ from both prior
+blocks at the declared fresh seed. This is an integrity check, not additional training n.
+
+Actual cost is **two fits, 720,000 training plus 144,000 evaluation team steps**, 5,184,000
+UAV action rows, 90 updates, nine panels and 288 evaluation episodes. Each arm has 101,250
+actor and 101,250 critic optimizer calls; evaluation storage and optimization are zero.
+Scientific wall was 4,821.488311 seconds (80.3581 minutes), with U/M arm wall
+2,425.643046/2,395.595983 seconds; admission to exit was 5,039.958982 seconds (83.9993 minutes).
+Process user/system CPU was 19,323.603700/40.055437 seconds, and peak RSS was 1,838,916 KiB
+within Linux RUSAGE_SELF. Other processes and peak scratch remain unmeasured. Collection and
+read-only reconstruction add no fit. After verified retention and full reading, snapshot-GC
+preview and apply reclaimed only `21aaa188de1c4b0a89f1012aca444f9e`, preserving the native claim,
+manifest, outputs and author checkout. Consuming the READY event advanced observation to
+generation **21**; no worker or Pro request was restarted.
+
+### Native results and adverse worlds
+
+Values are native J / served users per step, averaging all 32 fixed worlds in each family.
+
+| Family | Common initial | U45 | M45 | M45 minus U45 | Adverse J or service worlds |
+| --- | --- | --- | --- | --- | --- |
+| hotspot, primary | .060253383 / 9.871875 | .382806631 / 25.401625 | .329926228 / 23.648813 | **-.052880403 / -1.752813** | 31/32 |
+| uniform | .114896721 / 13.687563 | .520312359 / 34.587250 | .442533219 / 31.415813 | -.077779140 / -3.171438 | 32/32 |
+| cluster | .092969299 / 12.023313 | .468799727 / 31.890000 | .411157147 / 29.120938 | -.057642580 / -2.769063 | 25/32 |
+
+U improves its own J and service in every evaluated world. M improves its own J everywhere,
+but its cluster service at seed 265010024 falls **2.324 users/step below its initialization**;
+all other M own-service changes are positive. Both hotspot own-learning means are positive:
+U +.322553248 J / +15.529750 service and M +.269672845 / +13.776938. Thus the paired disadvantage
+does not mean an absence of mean learning by M; the own-service exception is retained.
+
+Hotspot M-minus-U components are coverage -.035056250, quality +.000554198, height penalty
++.028507287, eligibility +.924563 and eligible-but-unserved +2.677375; mean height is +28.507287.
+These are descriptive readings of the same pair, not a causal attribution. Height penalty
+is not measured battery energy. J is lower for M in 31 hotspot, 32 uniform and 25 cluster
+worlds; service is lower in 27, 31 and 23 worlds respectively. Largest paired J/service losses
+coincide at hotspot seed 265020005 (-.099345781 / -4.654), uniform seed 265000029
+(-.168564333 / -9.504) and cluster seed 265010024 (-.253994554 / -16.120). All 96 paired world
+differences, components, own-learning readings and adverse cases remain in the
+[original batch summary](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b2_s263000103/summary.json).
+No world or block is removed.
+
+C01 now has **three of five complete paired blocks**. This block is adverse for M on both
+mean endpoints in every family, while observed block signs remain heterogeneous. Preserve
+the fixed five-block rule without an interim interval, world-pooled training n, early claim
+verdict or extra fit. Continue the prespecified fourth pair, block 3 / model seed 263000104,
+training base 264300000 and constructor 269903000, at the unchanged source, fixed evaluation
+worlds and budget. Main `da5344e044ed1ed381c58dfc7ade15774079231e` retains the same confirming
+standing, lead and lifted owner pause. This block reading is published on the direction
+branch; main/index publication remains at the material study boundary.
