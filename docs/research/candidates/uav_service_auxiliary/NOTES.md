@@ -10033,3 +10033,35 @@ The current evaluation panel is not counted as a complete scientific result from
 No broader evaluator rewrite is selected merely to eliminate every possible loss. Training
 phase raw NPZ/high records are saved at their existing boundaries; signal-time in-flight loss
 remains possible. These residuals are accepted for a new bounded attempt, not described as fixed.
+
+### B09 engineering acceptance and actual-node execution decision
+
+Independent Reviewer ran the original focused suite (12 passed, 2 CUDA skips, 11.03 s) and
+found one concrete persistence gap: three B07 world-detail lists still entered the compact
+summary. The repair at `3c8e4a1c4292f57eb01586a4f65b727c54d17812` saves the complete raw panel
+first, then omits service-free intervals, per-UAV mode durations and descriptive 250-step bins
+from summary worlds. All scalar counts, half-window summaries, opportunity anchors and
+denominators stay. The real-shaped fixture verifies raw retention and compact omission;
+3 focused checks passed in 5.24 s. The Reviewer reread this patch and returned no remaining
+material finding. DM accepts this narrow implementation, with the documented signal-time
+loss and unknown crash cause unchanged.
+
+On the configured actual `wsl_4070` stack, the full B09 focused suite at that published source
+passed **14 tests in 12.74 s**, including both CUDA N/A collector/update/evaluator cases with
+four torch threads and TF32 disabled. No CUDA case was skipped. This covers real native
+proposal/storage/reward flow, F activation, native endings, cross-phase execution state,
+learner movement, final-prefix censoring and evaluation isolation, together with persistence
+and fixed-batch fixtures. No performance score or positive pilot was used to authorize the
+comparison. The test source was clean; no interpreter or numerical library was installed or
+upgraded. These short checks do not guarantee a multi-hour run cannot crash.
+
+Accepted executable SHA256s: B09 native `4de8e49e9123898c23d1e0efe09efc3e5a4bc5b5e8209cd119a031d904cc7be3`,
+persistence `ea1b0b0596887a776266dc162228de4a3d63b9df6f68dab8719ff99f07350586`,
+collector `1272932ddac374e031a67fb7603a95e69d32462a539cc887e633bba21af4c13b`,
+entry `8b43dfbb801f6a003ddb6d6bf5ac32b2cb455e9abc5cc5dcabfdcc4e29037bdd`.
+The node's pre-existing commit-graph/automatic-GC warnings occurred during successful Git
+preparation; exact requested checkout, tracked-byte checks and the actual tests succeeded.
+No repository-wide repair, reset or cleanup of others' work was attempted. Preparation/tests
+started zero result-bearing fits. Proceed with the fixed new pair after this accepted input is
+published and fresh kernel memory/control admission; no further Pro/Root/owner approval is
+needed for the already adopted comparison.
