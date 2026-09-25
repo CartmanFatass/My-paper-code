@@ -1602,3 +1602,26 @@ Fixed result tag: `b02_budget_interaction_s925831`. One CPU scientific process,
 threads1, original seeds/phases/n256/H96/arms and full cost bound above. Native fresh
 resource admission remains before execution. No B02 result has been launched or read;
 this commit publishes the exact accepted inputs, and the eventual manifest binds its SHA.
+
+## 2026-09-25 — B02 pre-admission control refresh; no scientific attempt yet
+
+Exact input source is `5b5d73100ae8554b8005758055b181d03fb6603e`. Its new remote
+authoring checkout is clean and all9 B02 tests passed there in1.36s on the configured
+Python3.10.21/NumPy1.26.3. Latest published controls still lift pause except FSD,
+retain this lead and leave two selected research tracks within the three-track ceiling.
+
+The first outer supervisor command (`fmdv-b02-sept25-s925831`) exited4 after17s:
+`canonical control checkout has not fetched the published control head; sync it before launch`.
+Main had advanced after the earlier remote fetch. Read the full supervisor log and
+the launch source ordering: this refusal precedes claim reservation and worker spawn.
+Read-only reconciliation found no B02 output/status root and zero matching native
+claims. Thus there is no accepted operation or worker to restart, and0 scientific
+fits/calibration/evaluation/model work occurred. Preserve the supervisor log in private
+scratch and its original durable node task path; it is a technical pre-launch failure.
+
+DM chooses to fetch the new published control commit and resubmit the identical
+scientific request after the missing-control condition is resolved. Source, output
+tag, world/model seeds, exposure and expected lead stay fixed; only the outer command
+label distinguishes this post-refresh submission and preserves the first log. This
+does not replace a terminal accepted operation or bypass its native claim. Any subsequent
+accepted/uncertain handle must be reconciled as itself without another worker launch.
