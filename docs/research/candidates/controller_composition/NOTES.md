@@ -1347,3 +1347,34 @@ world81 with zero transitions. Earlier development invocations were repeated and
 transition cost was not metered; these are correctness fixtures, not new production results.
 All production world panels remain untouched. Full independent runner/integration review and
 the actual-node checks are still outstanding; this entry is not launch acceptance.
+
+### B02 engineering accepted for one native batch
+
+I accept executable commit`4b2290f32a571a83fa31007a22ea41b078eb70a8` under the unchanged B02
+scope. The full independent Reviewer found no remaining material finding: physical N6 and
+legal LOCAL1 inputs, only executed learner rows through all update statistics, persistent
+sampler state, private responsive sources, actual optimizer hooks, all13 cells and paired
+world reduction, and caught-failure records match the contract. Its independent full suite
+was9 passed/14 upstream warnings in7.24s,164 nonproduction team steps. On the configured
+`wsl_4070` node the same commit and exact checkpoint files passed the same9 checks/14 warnings
+in6.81s, another164 fixture team steps. No production world/fit was used to screen performance.
+
+This is source/engineering acceptance, not scientific acceptance of future scores. Full
+H500×45 execution remains to be observed. Abrupt process death can lose the active in-memory
+slab; caught exceptions preserve available partial arrays/counters, and terminal failure never
+authorizes resume/retry. RSS is cumulative for the single batch process, not an independently
+measured per-fit peak. Native row/optimizer counts, learning movement and all outcomes still
+require reading after execution.
+
+Before updating the dedicated node checkout, I reconciled B01's valid exit and absent native
+processes and verified all16 published compact B01 files against retained hashes. Git first
+refused staging those paths outside its sparse selection; adding only their existing run
+directory to that selection and adopting the same bytes in the owned index allowed an ordinary
+detached checkout of the reviewed commit. All16 bytes/hashes were verified again, all raw B01
+outputs remain, and the source checkout is clean. The previously known unrelated Git repack
+warning remains unmodified. These were preparation operations, not experiment launches.
+
+Exact final inputs will be published before release. Use the same dedicated source checkout
+and configured Python/supervisor, with fresh native admission and one sequential F1/F2/M batch;
+there is no separate performance pilot or change to the selected exposure. Start/checkpoints
+stay in this notebook/native records; the material B02 plan is already published to main.
