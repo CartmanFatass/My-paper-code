@@ -10549,3 +10549,363 @@ write return the actual commit. If writing fails, return the **complete answer i
 not only a status, link or purported SHA. Advice is not approval; the DM will own the choice.
 
 ### Answer
+
+Saved from chat, 2026-09-25. The same accepted key `hmasd:182a489922f30764dcc02897f2eeea7ffceca02db9071056a0834a82d1a92a4b` completed. Delivery verification returned `NOT_DELIVERED`, with no answer commits and the pinned Answer still empty. The reply explicitly reports read-only GitHub access. Its `e6edf89575cf05d17a42b25e01724c5c58c56a6a` is the verified original NOTES blob, not an answer commit. Complete collected text follows unchanged; body SHA256 `a86fa17648b2e5db6da9d44e060ee9d5218920e2220c778feec12e75aff4d3d8` (9525 characters, before the collector newline). The observer closes its owned read tab in its finally path; no resend or cross-task message.
+
+**GitHub 读取可用，但本轮可调用接口没有仓库文件写入或提交动作，因此未发出修改请求，实际 Answer commit：无。**最后核对的目标 blob 为 e6edf89575cf05d17a42b25e01724c5c58c56a6a，指定问题下的 ### Answer 仍为空。本轮没有修改仓库或运行实验。以下为完整答复。
+
+B09 后的投入：支持一次站端连续准入比较，但不把“少抢占”当作服务成功
+
+MATERIAL_DISSENT: no。
+
+**我支持这一次窄 B2 比较：按原主要普通对照的角色固定 N925031 最终策略，保留完全相同的 F，在一组事前固定的 32 个新 H3000 世界上，比较原逐 tick 站端分配 O 与仍合格在充成员优先保留的 C。**总量保持为 0 新 fits、0 更新、64 次 episode 尝试、最多 192k 团队评价 transitions，不加入 A、额外策略、功率／阈值搜索或新训练。
+
+支持它的理由是：新的完整结果与事后读取把一个实际发生、能被单独改变的站端分配行为明确了出来；它不再只是“有队列，所以可能需要调度”的泛泛猜测。需要收紧的是解释和读数：减少仍合格充电者被替换，是规则直接保证的行为变化；它既不自动增加供能，也不自动恢复无线服务。真正值得购买的观察，是这种能量分配时序能否改善完整服务，以及它会不会伤害被延后的等待者。
+
+一、B09 加强了普通学习的用途，削弱了原样反馈训练的追加理由
+
+B09 的共同初始策略和两个终点都部署同一个 F。以下是完整结果条目的原始尺度，不能用旧 B07 的终点代替，也不能把训练时是否接入 F 与部署时是否接入 F 混为一谈。
+
+读数	共同初始化	N 终点	A 终点
+原生完整回报 J	609.522261	986.436461	904.269871
+累计 QoS	642.397612	1016.228609	934.664388
+QoS／计划步	0.214133	0.338743	0.311555
+平均充电输入 Wh	193.776042	158.237847	185.312500
+平均 episode 最低电池比例	0.098619	0.108618	0.106019
+零服务世界数	4	1	2
+
+**被加强的是有限预算下的实际服务学习。**N 和 A 相对共同初始化的平均 J 分别增加 376.914200、294.747610，平均服务也均提高。真实训练、参数更新和 F 激活已有记录支持；本次不能用“候选没有真正训练”或“F 没有进入训练”解释结果。它也不是候选只比退化对照少退化的情形。
+
+**被削弱的是：这套固定反馈条件训练能在同部署 F 下增加完整服务的预测。**A−N 的平均 J 为 −82.166590716，累计 QoS 为 −81.564221265，每步 QoS 为 −0.027188074。同时必须保留相反的一面：J 有 16 胜、16 负，J 中位差为正，服务中位差也为正。负均值不是逐世界伤害，正中位数也不能替代事前完整均值。最差世界 952016 中，N 的 QoS 为 0.323065444，A 为零，J 损失 −970.330951537；而 952009 的 A−N J 又提高 454.004581453。
+
+局部恢复窗口没有挽救完整预测。两终点的首个合格退出后窗口都有完整 250 步，平均窗口累计 QoS 的 A−N 仅为 +0.073189783；每个选中窗口又都包含 F 再进入。世界 952021 尤其清楚：A 的窗口累计 QoS 高于 N，但完整每步服务只有约 0.267543，对照为 0.557600。这里不能把窗口叫作不受干扰的恢复阶段，更不能把那一点局部增量当作完整任务收益。
+
+**仍未解决的是收益和损失的机制。**A 消耗更多能量、获得更多输入，却没有更高完整服务；所有三面板的 cutoff／depletion 均为零，包含初始化，所以本比较也没有识别出“新训练学会了避免这些事件”。站点分配、几何与 backhaul、策略访问历史和有限学习过程仍需区分。B08 的不完整技术失败及已付成本必须单列，不能拼作另一份完整 A/N 科学反例。
+
+因此，我支持 DM 沿已有分支结束原样 B09 训练配方的追加投入。B2 是一个改变站端规则的新问题，不是为 A 找到一个有利环境后重新宣布 B09 成功。既有 B2 建议也明确把它视为资源分配干预，而非未变环境中的 actor 消融。
+
+二、站点读数为何值得重视，又为何不足以诊断服务损失
+
+新的事后读取比简单的“charge start/end 很多”更有针对性：N 在全部 32 世界中，共有 12,093 次上一 tick 实际充电、当前仍在同站合格却失去充电的事件。N 的 12,536 个连续充电段中，12,024 个只有一 tick，另有 35 个在观察终点仍未结束。它还保留了 52,814 个合格等待成员 tick，等待年龄的中位数／P95／最大值为 3／11／78，等待中的最低电池比例为 0.100904998。
+
+这些事实加强了存在可修改分配时序的判断，却没有说明有多少服务能够因此恢复。A 的对应抢占次数更高，但两策略的到站、合格、驻留和充电暴露都由各自轨迹产生；原始次数差不能直接承担 A−N 的因果解释。
+
+最强的竞争解释：原规则在做低电量均衡，而不只是制造无用切换
+
+源码每步先按实际运动扣除能量，再在当前合格成员中排序，主键是电池比例，等待年龄和成员编号是后续排序键。一个成员充上一 tick 后电量提高，下次换给另一个较低电量成员，正可能是该规则的行为，而不是一次损坏的会话。等待年龄也不是严格的先来先服务保证。
+
+更重要的是，当前这条能量路径没有额外的换人停机、重新接入耗能或充电启动损失项。每次获选成员直接取得本 tick 的充电量，受电池剩余容量限制。因此，对于同一个瞬时合格集合、相同容量和功率，且各获选者都有足够未充容量的情形，任一填满可用槽位的规则都有相同的瞬时总输入：
+
+G
+t
+	​
+
+=
+3600
+PΔt
+	​
+
+s
+∑
+	​
+
+min(c
+s
+	​
+
+,∣E
+s
+	​
+
+(t)∣).
+
+这是从当前代码推出的局部计量关系，不是说 O/C 的完整闭环总能量必然相同。两条轨迹会改变资格集合、运动、剩余容量和后续占位。它说明的是：不能把“减少切换”直接写成“省下切换能量”。
+
+C 可能把相同的能量集中给一位成员，使其更早满足退出 F 的条件并回到服务过程；也可能让它继续占位，而较低电量的等待者持续耗能，延迟关键成员返回。甚至可能充得更连续，却仍不能恢复有用的无线几何。这是应当与候选正预测同等认真对待的反解释。
+
+另外，当前 charging_wait_steps 在获选或不再合格时归零；逐 tick 记录的等待年龄分位数，并不是“每个到站成员完成等待时间”的分布。**不能把 P95=11 解释成 95% 的到站成员在 11 步内完成充电准入。**只读完成充电段，也会漏掉最需要关注的未获准入和仍在等待者。
+
+三、为什么仍选择这次比较，而不是继续训练或立即停止
+
+**最强的投入替代仍是保留 N＋F，不再支付这项观察。**普通参照已经有用；当前等待年龄并没有单独证明重大拥塞成本；连续优先还可能削弱低电量保护。192k 评价、站端实现和完整判读并非免费，不能因为 B2 已出现在共享计划中就自动执行。
+
+我仍支持这一次比较，理由是它现在同时具备三个条件：干预位置已经由实际轨迹和源码定位；两规则能在不改 actor、F、功率和容量的情况下明确区分；正反结果都会改变是否保留这种分配方式的判断。它购买的是能量分配顺序的实际用途，不是再重复一次“多充电能否提高代理指标”。
+
+这也解释了为什么不先再买一个反馈训练 fit 或新的预测头。B09 已对原样训练的增量作出不利观察，站端干预则作用于一个不同环节；无需先把全部学习或几何机制诊断完，才能检验这个有限选择。反过来，当前也没有理由扩成多个调度规则、多个策略或 A×站端规则网格。已有建议支持这条窄比较及其反面分支，但不替本次新证据作出决定。
+
+四、C 的最小明确合同：保留真实在充成员，而不是保留意图或旧目标
+
+这里我不要求新增对照臂，必要修订集中在上一 tick 的事实状态及其使用时刻。
+
+1. 在正确的位置保存“谁实际在本站充电”
+
+_apply_energy_dynamics 会先复制 charging_before，随后清空 uav_charging；更早的 _prepare_energy_actions 又会把当前 uav_target_stations 清为 −1 后重新赋值。因此，C 不能在清空后的数组上寻找 incumbent，也不能将本 tick 新产生的目标站误当作上一 tick 的实际服务站。
+
+应保留上一 tick 实际有充电输入的成员及其当时获配站点，或者等价的站端实际服务集合。在 episode reset 时清空。它不是“曾经充过电”的永久权利，不包含仍在路上的返站意图，也不包含仅提出 docking 请求却未获电的成员。
+
+2. 当前资格仍由原代码计算
+
+当前合格集合仍在实际运动和耗能之后，由原条件产生：充电启用、成员未故障、有 docking 请求、实际速度满足条件、当前目标站合法且已进入 capture 范围。不得因为它是 incumbent 就豁免这些条件。原代码没有额外的“已经充满即不合格”或“退出 F 即不合格”条件，也不能在这个比较里默默补上。
+
+对站点 s，令 E
+s
+	​
+
+(t) 为本轨迹当前合格集合，P
+s
+	​
+
+(t−1) 为上一 tick 在该站实际充电的集合。则
+
+I
+s
+	​
+
+(t)=P
+s
+	​
+
+(t−1)∩E
+s
+	​
+
+(t),
+S
+s
+C
+	​
+
+(t)=I
+s
+	​
+
+(t) ∪ Top
+c
+s
+	​
+
+−∣I
+s
+	​
+
+(t)∣
+	​
+
+(E
+s
+	​
+
+(t)∖I
+s
+	​
+
+(t); b
+i
+	​
+
+,−w
+i
+	​
+
+,i).
+
+空槽按原电量、等待年龄、成员编号顺序补足。排序使用原执行时刻的电量与等待状态，保留先选择、再按本次选择更新等待年龄的原顺序；不能通过提前更新等待状态再悄悄改变第二个优先级。
+
+仍合格的本地 incumbent 保留；失去资格即释放。换到另一站不能把旧站的优先权带过去；中断后重新到站按新候选参加排序。F 的进入／退出、最近站点选择、运动与 docking 请求完全不变。
+
+**这不是“充满再离开”规则，也不是最低驻留时间、超时抢占或紧急电量优先规则。**C 可能在 F 已退出而 actor 仍发出合法 docking 请求时继续保留服务；应读这个实际后果，而不是以更“合理”的隐含释放条件替换候选。若出现饥饿或无用占位，它就是当前固定规则需要承受的反面结果。
+
+3. 相同的是资格定义和信息权限，不是实际资格集合
+
+两规则各自运行完整闭环。充电分配第一次不同时，电量及下一观察就可能分叉，随后 actor、GRU、F、位置和资格集合都可能不同。不能把 O 的合格集合、动作或循环状态用于 C 的后续执行。
+
+因此，应将旧建议中“相同候选集合”理解为相同定义和同一快照上的可比决策，而不是强迫两条已分叉轨迹保持同一集合。题面已经明确了这一点。这是一项站端规则干预；没有新增 actor 输入特征，但 actor 读到的原有电量、等待、占用等数值可以随新环境过程改变。
+
+hmasd-pro-question-b09-result-a…
+
+五、比较和估计对象：条件于一份策略的完整环境干预效果
+
+固定 N925031 的实际最终 checkpoint、模型与 normalizer 状态以及原训练身份。选择它的依据是原主要普通对照的角色，不是在多个 checkpoint 中重新搜分数；但规则是在看过 B09 后提出的，新世界不会清除这段开发选择历史。
+
+本次 O 是“原站端分配＋同一个 F”，不是 B06/B07 中没有外部 F 的旧 O。C 则是“连续准入站端分配＋同一个 F”。两者都从真实 reset 开始，保持 S7-S2、N8、k10、H3000、原生奖励、确定性评价、实际物理常数和信息接口。新 32 世界及匹配随机性在执行前固定，不选择旧抢占最多或服务最差的世界，不因前几个结果改变后续面板。
+
+hmasd-pro-question-b09-result-a…
+
+对每个世界 w，分别计算实际 episode 长度内的
+
+S
+w
+r
+	​
+
+=
+t=0
+∑
+L
+w
+r
+	​
+
+−1
+	​
+
+q
+w,t
+r
+	​
+
+,J
+w
+r
+	​
+
+=
+t=0
+∑
+L
+w
+r
+	​
+
+−1
+	​
+
+r
+w,t
+r
+	​
+
+,r∈{O,C}.
+
+主要读数是 32 世界等权的 S
+C
+−S
+O
+ 与 J
+C
+−J
+O
+，并列保留累计实际交付量、S/3000 的计划窗口尺度、实际每步服务和 episode 长度。真实早终不能被替换、补跑或填成虚构奖励；仅用实际每步均值，会掩盖提前停止服务的代价。
+
+**这是一个可以解释为固定策略及所选任务条件下、改变站端分配规则的总效果比较。**它比事后抢占次数与服务的相关关系更有判别力。但总效果包含后续电量分配、状态访问、actor 反馈和联合几何的全部变化，不等于“充电连续性”作为独立中介的因果份额。即使 C 成功，也不能反推 B09 的 A−N 损失由原分配规则造成，更不能宣布 A 已被修复。
+
+32 个新世界可以描述这份固定策略的世界差异，不增加独立训练重复数；本次没有检验训练程序在 C 下重新学习会怎样，也不建立所有普通策略或所有调度器的排名。
+
+六、把中间预测分成三个环节，等待者与未完成者始终在分母内
+第一环节：规则是否真的改变了有竞争的分配
+
+保留每 tick 的上一实际充电成员／站点、当前合格集合、原排序键、获选集合和实际输入。一个廉价且有用的诊断是：在 C 自己当前的同一快照上，另算原排序会选择谁。这只是确定性局部排序，不启动影子环境或分支规划，也不把它当作完整 O 的反事实轨迹。它可以区分“C 处于启用状态”和“C 确实保留了一位原规则会替换的 incumbent”。
+
+同站仍合格抢占在正确 C 下应被规则排除；其归零主要是实现和暴露证据，不能被当作收益已成立的中间发现。充电段结束还应区分：失去资格、目标站变化、规则替换、实际 episode 结束，不能全部标成“无效抢占”。
+
+第二环节：连续准入是否改变了恢复的机会，而不只是段长度
+
+有区别的中间预测应是：
+
+在实际有竞争的准入机会中，C 将供能集中给仍合格成员，使其更早完成实际净储能恢复并获得退出 F、恢复 actor 提议执行的机会；这种变化没有仅仅把长等待和低电量风险转嫁给其他成员。
+
+不要求总充电 Wh 增加，也不要求“充电次数”更多。较少再进入、较少重复充电可能与更好用途相容；反之，长连续段可能只是长期占位。实际储能使用物理 pre/post 电池差，并保留输入、消耗和 clipping 的能量账，不能把源码的 max(0,input−consumed) 字段当作全程有符号储能变化。
+
+等待者是这个预测的核心反面，不是补充图表。至少应读取每世界合格但未获电的成员 tick、每成员累计等待、等待中的最低电量及尾部、实际首次获电时刻，以及一直没有获电的合格成员。原 wait_age 可以保留，但要与完整等待区间分开，不能只统计最终成功充电者。
+
+对连续合格等待区间，应区分“获得实际输入”“未获输入就失去资格或离站”“观察终点仍在等待”。前两种是不同的已观察结局，第三种才是仍未观察到结局的删失。真实耗尽、cutoff 或任务提前结束另行保留，不能统统包装成无害的未完成。
+
+第三环节：恢复是否转成完整服务
+
+沿用既有第一合格恢复退出后的 250 步描述是合理的，不需要另加评价面板。但应继续记录实际窗口长度、退出前是否已有服务、窗口内再进入 F、实际离站／继续停留及联合服务量。F 退出只恢复提议传递，不保证已经离站，不保证后续命令原样转成运动，也不保证队伍恢复服务。
+
+“失败退出”应具体说明是退出后仍无服务、很快再进入 F、或未离开占位；不要把几种现象混成一个新成功分数。输入后未退出的 F 区间、仍在充电的连续段、仍在等待的区间，是三个不同分母。仅因 H3000 到达而未完成，不能断言永远失败；只观察到很短的退出后窗口，也不能填成成功。
+
+B09 已展示这种分母区别：N 有 624 个输入承载 F 区间、408 个合格退出、216 个输入后无合格退出，以及 231 个整体右删失 F 区间；这些不能与终点仍在充电的 35 个连续充电段互换。
+
+最终仍以所有世界的完整服务承接结论。退出事件和发生时间由规则影响，所以退出后窗口不是相同状态上的随机对照；没有成员拥有的链路／交付证据时，也不能把后续联合服务归因于刚充过电的那一架 UAV。
+
+七、什么结果会削弱分配解释，什么结果值得保留
+固定比较的观察	判断与投入变化
+有竞争的实际分配改变；净恢复／有效退出更及时；完整服务和 J 有值得保留的增量，等待者风险与不利世界未抵消用途	保留这份 N＋F＋C 的有限用途，以及与分配时序解释相容的证据；不升级为一般调度优势、训练收益或安全保证。
+连续段变长、抢占归零，但恢复没有更及时，等待尾部或最低电量更差	明显削弱“碎片化是当前可用恢复瓶颈”的解释。原最低电量优先可能在维持有价值的均衡；不通过追加紧急阈值或最长占位时间挽救本规则。
+净储能恢复／退出改善，却没有完整服务增量	说明这一物理环节可改变，但不足以兑现所求服务用途。保留物理响应，结束当前 C 的服务改进投入；不能直接宣布几何就是唯一剩余原因。
+平均服务或 J 提高，但少数等待者出现严重低电量、长服务空窗、新增零服务世界或事件	保留真实收益和真实代价，不能称作普遍改进或默认替换。平均值、正中位数和“已完成者更快”均不能隐去这些后果。
+新世界中几乎没有实际 O/C 分配分歧	属于干预机会不足，不能据此否定活跃连续准入的作用；但也不自动筛选拥塞世界、加长时域或制造低电量开局来追求阳性。
+
+其中，**最能降低当前分配解释可信度的不是 C 的切换数没下降，而是它已经按合同消除了相应替换、也充分改变了实际获电顺序，却仍没有改善可用恢复机会或完整服务，甚至损害等待者。**前者才是在机制已真正作用时得到的反面证据。若残余“仍合格同站 incumbent 被替换”来自保存了已清空状态或错误站点身份，则是实现问题，不能算作候选的科学失败。
+
+我不从 B09 均值或历史等待 P95 反推一个数值通过线。服务、J、低电量尾部、零服务世界和实际成本发生冲突时，应公开其幅度并据用途判断，而不是事后挑一个有利指标。一次比较可以留下有用认识，却不值得继续支付同一规则的改造成本；正面结果也不自动接上重训、扩样或确认。
+
+八、成本和最小必要工程
+
+所选比较仍为：
+
+2 规则×32 世界×3000=192,000
+
+团队评价 transitions 上限，64 次 episode 尝试、1.536M UAV 动作行。O/C 各自真实执行，不能用旧 B09 的 O 类轨迹替代新世界中的原分配对照。旧 N 的 180k 训练是已有资产成本，0 新 fits 不等于一个未训练或免费控制器。
+
+hmasd-pro-question-b09-result-a…
+
+主要新增工程是：正确保存上一实际服务站点、一个有明确默认 O 路径的窄站端选择入口，以及支持上述等待／恢复／删失读数的完整轨迹。无需一般预约框架、全局调度器或多候选规划。
+
+最小有判别力的工程复现可以让两架同站合格 UAV 竞争一个槽位：上一 tick 实际在充者当前电量较高，原 O 应选择较低电量等待者，C 应保留前者；随后分别改变 incumbent 的资格、目标站和 episode reset，检查优先权是否正确消失。再核对原顺序下的耗能、等待年龄更新、实际输入和能量闭合。这是规则语义检查，不是要求先有一个正面服务 pilot，也不是另一次科学面板。
+
+新 O/C 的诊断共同前缀应保持到首次实际站端分配不同，不是到首次 F 覆盖。两臂 F 完全相同，早先共同发生 F 覆盖不会破坏配对；分配后的观察／动作分叉则是应保留的真实后果。模型、normalizer、optimizer 与评价随机性保持原零更新合同。
+
+B09 的 290.698446 分钟是两 fits 加三面板的实际 runner 总耗时，N/A fit body 为 83.702513／101.548668 分钟；它们不能直接当作本次 192k 评价的校准耗时或规则固有速度。新 wall、站端实现、相应检查／独立高风险 review、存储、收取和完整判读均需计入，尚未测得的成本保持未知。
+
+九、来源边界与最后判断
+
+本答复阅读全文附件，并按指定版本读取了 B09 前瞻与完整结果、全部 32 个有符号世界、事后检查范围，当前治理／共享计划、两份指定旧建议中的 DM3／B2 段及采纳决定，以及相关方法、站端分配和能量诊断代码。推理输入分别保持为：
+
+问题与 B09 证据：a8981446675a4b238da3a36940299fc67062b375。
+
+指定治理与共享计划：4fde2d73466fc80d91c3afbbbf0e3afc9f3ba8a1。
+
+B09 原执行身份：e5e53534c2c0c4a059cfdfa5f3aff4cbc2166f46，不因后继建议而改写。
+
+**独立核验仍有明确缺口。**较大的 summary.json 正文读取返回空内容，另一读取接口报告文件过大或不支持；blob 接口得到 Base64 内容，但我没有完成解码后的逐项审阅。因此，本文数值依据是已完整读取的 B09 结果条目和逐世界表，并以 config／manifest／exit／status 核对执行记录，不能称为我独立重算了完整机器摘要。
+
+仓库外 NPZ 与 checkpoint 没有被本次读取。382 个文件、370 个注册引用的核验，以及 12,093 次事件等派生计数，均明确归属于 DM 已报告的核验与限定范围事后读取。本站端后继规则尚未实现，新世界的暴露、等待者代价和完整服务效果都未知。现有来源足以支持这个事前投入判断，但不足以预先确认机制或收益。
+
+**最终选择：结束原样 B09 训练配方的追加，保留普通 N＋F；同时支持仅一次上述窄 B2，以真实上一 tick 充电身份定义 incumbent，用完整服务和等待者的代价检验连续准入是否值得使用。**它值得做，是因为现在存在明确可改的分配行为和会改变判断的反面分支，不是因为 B2 已被写入计划，也不是为了挽救反馈训练。若只得到更长充电段、更少抢占或更多输入，而没有值得保留的完整用途，就结束这一固定规则的追加投入。
+
+## 2026-09-25 — B10 adopted: one fixed-policy station-continuity comparison
+
+### Decision, source use and limits
+
+I read the complete preceding Pro answer, including its source-access limits and adverse branches. Adopt its narrow B2 investment as **B10 / UAV-SERVICE-STATION-CONTINUITY-B10**, not another B09 training attempt. `MATERIAL_DISSENT: no` is advice, not acceptance evidence. Pro did not independently recompute the large machine summary or inspect external NPZ/checkpoints; the B09 counts retain their existing DM verification provenance.
+
+Current published main consulted at `5dda303f935ba8f4b6fa068179dd3bb6f6a83ad3`: [shared topic 6 and B09](https://github.com/CartmanFatass/My-paper-code/blob/5dda303f935ba8f4b6fa068179dd3bb6f6a83ad3/docs/research/RESEARCH.md#6-实证研究是在具体条件下缩小解释空间), [current B1/B2 investment](https://github.com/CartmanFatass/My-paper-code/blob/5dda303f935ba8f4b6fa068179dd3bb6f6a83ad3/docs/research/RESEARCH.md#current-research-plan). The B09 native gain of both trained arms strengthens the ordinary learned reference, while the negative A−N full-service mean and positive recovery-window/median counterexamples weaken unchanged feedback-training investment. The B07 physical recovery plus remaining service losses, B04/B05 reward/service trade-offs and B03 proxy reversals are inherited constraints: a longer charging spell, more input, or lower proxy cannot stand in for full service. Keep B08 technical failure separate. B2 remains the third project-plan priority; this direction owns the selected bounded comparison and does not take over another lead.
+
+Verified the consequential code claims in `envs/pettingzoo/relay/energy_aware.py`: `_prepare_energy_actions` clears/recomputes targets before `_apply_energy_dynamics`; the latter snapshots then clears `uav_charging`, consumes motion energy, computes current eligibility, selects, supplies per-tick charge, updates waits and clips battery. Original sorting is post-consumption battery, negative prior wait age, member index. There is no extra switching/startup energy term on this path. Thus preserve the prior actual charging station before preparation resets it; neither return intent nor a cleared current mask defines incumbency. No new literature premise is needed for this code-local comparison.
+
+Choose this once over stopping at N+F because observed switching is widespread and this intervention has distinct favorable and adverse predictions at affordable zero-new-fit exposure. Do not treat the retrospective 12,093 N replacements as a diagnosis of A−N loss. The strongest alternative is useful low-battery balancing: continuing incumbents may delay lower-battery waiters, waste occupancy or fail to restore useful wireless geometry. No additional feedback-training seed, auxiliary head, A arm, threshold search, dwell timer, emergency override or population training is selected.
+
+### Fixed comparison and costs, before implementation or new outcomes
+
+- One retained policy: B09 ordinary N925031 final endpoint, selected by its original primary-baseline role, with the exact saved model/config/normalizers. Source execution `e5e53534c2c0c4a059cfdfa5f3aff4cbc2166f46`; source root `b09_an_925031_a01`; checkpoint `N/endpoint/agent.pt`, SHA256 `2ba395b9f2761a9a761bd648d399b525c61b7babdb84edbe293319d269eeff5a`. Durable copy `/home/fires/hmasd-artifacts/uav_service_auxiliary/b09_an_925031_a01`; original node output `/home/wu/hmasd-worktrees/usa-b09-48388289d/runs/uav_service_auxiliary/b09_an_925031_a01`. No selection among other checkpoints or arms. Old N construction cost remains 180k training; B09/B08/full direction exposure remains recorded above.
+- Two station rules **O then C**, both always deploy unchanged B06/B07 F. Here O means original station allocation WITH F; it is not old B06/B07's no-F O. S7-S2, N8/k10, native H3000 from reset, deterministic policy evaluation, native reward coefficients including return coefficient 2, same physical constants, eligibility definition, information features, adapter, F, nearest station, reset and recurrent semantics. Derive only one-lane evaluation storage from the saved H3000 config; do not rewrite training identity.
+- **32 new paired evaluation world seeds 953001 through 953032 inclusive**, all fixed now; no prior result from this panel read or run. Complete O panel then C panel in increasing seed order. Same per-world policy/RNG initialization and exogenous reset identity; each trajectory thereafter evolves independently. Preserve prefix equality through the first differing station selection (which can occur after earlier common F overrides); no shadow rollout, reused O candidate sets after divergence, branching simulator or optimizer update.
+- **0 new fits, 0 training transitions, 0 optimizer updates; 64 episode attempts, at most 192,000 team evaluation transitions / 1,536,000 UAV action rows.** Real native early terminations reduce actual exposure and remain outcomes; no padding reward, replacement world, top-up, interim checkpoint or development panel. No new trained-seed inference: 32 worlds are conditional on one historical trained policy and these chosen task conditions. New world seeds do not erase post-B09 design exposure.
+- Configured `wsl_4070`, CUDA FP32, 4 torch threads, TF32 off, same native backend. Fresh actual-node admission after source publication. Dominant work is the 192k closed-loop native steps plus bounded same-snapshot ordering over 8 members, not another learned model or trajectory search. Full new wall is not yet measured; B09's 290.70 min includes two fits, three panels and other work and is not a B10 calibration. Record runner/evaluation wall, CPU user/system, RSS scope, preparation/check/review and collection cost; unknown is not zero. No score-dependent extension; a technical failure is retained and never automatically retried.
+
+### C rule and discriminating readings
+
+For each station, retain members who actually received positive charging input at that station on the previous tick AND are currently eligible there under the original definition. Fill remaining original-capacity slots with the original `(battery, -wait_age, member_id)` ordering at the original execution point. Reset clears incumbency; ineligibility or a station change releases it; interruption confers no persistent priority. Do not add a full-battery, F-exit, minimum-stay or emergency-release clause. Capacity, power and all other environment rules stay as in the original host; state values, eligibility sets and later actions may differ in the two complete closed loops.
+
+Primary finite comparisons are equal-world mean **C−O cumulative native QoS and native J** on all 32 paired worlds, with each signed world, mean/median/wins/losses, actual delivered Mb, QoS/3000 planned-window scale, actual per-step service and episode length. Keep return cost, minimum battery and its lower tail, cutoff/depletion/failure, zero-service worlds, longest service-free intervals, input/consumed/signed stored Wh and clipping. No calibrated training-population CI, equivalence or universal scheduler/safety claim. Conflicting service/J/risk outcomes must be read together rather than choosing a favorable score after the fact.
+
+The useful positive prediction is that, where C really changes contested allocation, energy reaches a retained member in a sequence that improves net recovery and availability to exit F/resume actor proposals, WITHOUT merely shifting long waits or low-battery exposure onto others, and that complete service/J show useful benefit. Zero remaining same-station eligible-incumbent replacement is primarily implementation/exposure evidence, not a gain. More total charge is not required because no switching loss is modeled.
+
+Retain per-tick prior actual charging mask/station, current eligibility/target, post-consumption battery and prior wait-age keys, actual selected members/input, and deterministic original-rule selection on C's own snapshot. That extra sort is diagnostic only. Charging-spell endings distinguish ineligibility, station change, actual rule replacement and end-of-observation censoring. Preserve all eligible waiting UAV ticks, per-member cumulative waits, waiting battery tails, first actual input and eligible members never charged. Contiguous eligible waiting intervals keep three different endings: actual input, loss of eligibility/station departure without input, and still waiting at observation end. True depletion/cutoff/early terminal events remain explicit. Wait-age percentiles are tick-weighted ages, not completed arrival-wait-time quantiles.
+
+Reuse the full physical ledger and B08 opportunity intervals, including input-bearing F intervals without qualifying exit, no-positive-gain intervals, and right-censored F intervals. Keep the first qualifying physical-recovery/F-exit 250-step team-service window with actual length, pre-exit service, F re-entry, actual station departure/continued occupancy and signed stored energy. Charging spells, waiting intervals and F intervals are different denominators. A qualifying exit restores proposal passing; it does not guarantee departure or same-UAV delivery. Post-exit windows are descriptive, not matched-state causal estimates.
+
+Decision branches fixed now: useful complete service/J with tolerable observed waiting/risk costs retains only this conditional package; longer spells with no recovery/use, or worsened waiting, weakens the current fragmentation explanation and ends unchanged C investment. Physical recovery improvement without full service ends this service-improvement recipe while preserving physical facts. Gains with serious adverse worlds are trade-offs, not default replacement. Little actual rule disagreement means opportunity insufficient in this panel, with no automatic congestion selection/horizon extension. No branch automatically buys retraining, another policy, another rule, extra worlds or confirmation. The result cannot diagnose B09 A−N loss or repair A retrospectively. Further responsibility follows the scientific question, not an endless rescue of C.
+
+### L0 — bounded B10 implementation and acceptance
+
+Deliver a station-rule evaluator plus the diagnostics above under new owned paths `experiments/candidates/uav_service_auxiliary/b10/`, `scripts/run_uav_service_auxiliary_b10.py`, and `tests/experiments/candidates/uav_service_auxiliary/b10/`. Prefer a candidate-local `UAVEnergyAwareRelayEnv` subclass/adapter with an explicit O default and C override, using the existing native eligibility/energy/reward path, so frozen B01–B09 and shared environment sources remain byte-identical. Reuse B07 `evaluate_world`, B08 opportunity metrics, B09 persistence and standard policy-state utilities where adequate; do not globally monkeypatch a frozen module. Capture prior station/charging before target preparation, snapshot ordering inputs at selection, and collect matching diagnostics for O and C. Current rules do not require a general reservation framework.
+
+The new runner must call native admission before scientific imports/effects; enforce fixed source checkpoint/config/summary digests and saved config identity, production seeds/horizon/rules/device/threads. Restore the checkpoint and normalizers, compare full learner/optimizer/normalizer states before/after each panel and keep zero new updates explicit. Write compact aggregate/per-world summary/config/progress and content-hashed per-world raw NPZ/details outside Git; retain completed and partial traces on failure with no output overwrite or resume. Test fixtures may use tiny horizons/seeds only in internal APIs, never weaken production CLI bindings.
+
+Focused checks: two eligible UAVs/one slot shows O chooses the lower battery waiter and C retains the true prior incumbent; real preparation/energy path captures original station before clearing; eligibility loss/station switch/reset release priority; original wait ordering, capacity, energy closure and input facts; O off-path native equality; correct interval endings and incomplete/no-input denominators; independent paired prefixes through first differing allocation, immutable policy state and zero updates on a tiny native fixture; source-binding and admission-before-effects failures. All test scratch follows `tests/AGENTS.md`. Use the registered independent Reviewer for this change's scientific state and result identity risk. Implementer, if used, owns only those new executable/test paths, makes no scientific decision or launch, and does not edit NOTES/index; DM reads the diff/checks, resolves findings and accepts. No result-bearing launch until accepted exact inputs are published. B10 source SHA and launch manifest will be linked after acceptance; this is a new prospective operation, not a B09 restart.
+
+Prior housekeeping reconciled: after B09's two copies and all hashes were verified, its terminal disposable launch snapshot `aec8e9ed68e44668899fa55c7a3b1060` was removed by the native snapshot collector. Initial preview refused an inaccessible `/proc/660/cwd`; documented read-only `--sudo-process-scan` then proved eligibility and `--apply` returned removed. Original output, independent durable copy, authoring checkout, published source and admission claim remain. The clean main publication worktree was removed only after remote commit verification; its branch is retained.
