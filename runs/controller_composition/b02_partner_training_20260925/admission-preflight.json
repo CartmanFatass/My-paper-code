@@ -1,0 +1,21 @@
+{
+  "assessed_at": "2026-09-25T18:03:32.603866Z",
+  "available_physical_bytes": 15597907968,
+  "captured_at": "2026-09-25T18:03:32.603560Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "claim_key": "2bc39e185de1527e92a43f366fda64e91a2077493b5bdbacf299aaabb5dc484e",
+  "direction": "controller_composition",
+  "effective_available_bytes": 15597907968,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "node": "wsl_4070",
+  "passed": true,
+  "physical_floor_pass": true,
+  "preflight_id": "resource_03ad3d1ea65044fea73577b9b1247b3c",
+  "schema_version": 1,
+  "sha": "a92f51022e35857300d87ee79e645c10eef3ce86"
+}

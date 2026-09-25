@@ -1378,3 +1378,27 @@ Exact final inputs will be published before release. Use the same dedicated sour
 and configured Python/supervisor, with fresh native admission and one sequential F1/F2/M batch;
 there is no separate performance pilot or change to the selected exposure. Start/checkpoints
 stay in this notebook/native records; the material B02 plan is already published to main.
+
+### B02 native admission and first observation
+
+The single submitted request reached native admission; see the runner's
+[launch manifest](../../../../runs/controller_composition/b02_partner_training_20260925/launch-manifest.json),
+[fresh memory preflight](../../../../runs/controller_composition/b02_partner_training_20260925/admission-preflight.json)
+and [actual configuration](../../../../runs/controller_composition/b02_partner_training_20260925/config.json).
+The outer supervisor's successful exit was the launcher returning its detached handle, not
+the training batch finishing. Native status at 2026-09-25 18:09 UTC was accepted/running with
+consistent records and matching live runner/supervisor identities; no exit witness or final
+summary existed. The subsequent progress snapshot had F1 rollouts 1–11 complete and rollout12
+updating, with no completed fit or evaluation cell. This is partial execution evidence only.
+
+The four copied native metadata files, including initial launch status, match the node's
+SHA256 values byte for byte. Actual configuration retains all three fits, all13 evaluation
+cells including OLD3/3, the frozen seeds/reset semantics and the exact source/checkpoint
+bindings. The dedicated node source stays fixed while authoring continues here.
+
+After refreshing published main to `56c660d6353782612d236b8f1e1c0e1b6830ca71`, I checked that
+owner pause remains lifted and this direction's lead/scope are unchanged; the other DM's
+finite-model result/closure does not change this accepted comparison. Observe the operation
+reference in the manifest with `tools/hmasd_wait.py`; rearm that same handle at checkpoints.
+No duplicate launch, intermediate selection, extra fit or scientific acceptance follows from
+this first running observation. The final reading remains the complete fixed comparison.
