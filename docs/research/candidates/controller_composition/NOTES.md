@@ -830,3 +830,470 @@ learning and engineering cost despite the weak uniform-matching premise, or the 
 asset route should end. The first Pro answer did not assess or price that concrete learner
 comparison. I will obtain focused advice before accepting its implementation or fits.
 No successor is accepted or launched by this result reading.
+
+### Publication boundary
+
+The complete reading, compact native outputs, current standing and directly affected structural
+background were published to main at`636db7ec5574081a7eade10446075eeb7f1faeaa`. The owned
+publication checkout refreshed main to`9fc287e04` first, preserved the other DM's new finite-model
+result and touched only this direction's records/standing, own plan/routing and the affected
+composition background. The scientific question and project allocation are unchanged; this
+replaces obsolete execution progress with the result, not a new project-wide plan. No App
+notification or integration request was sent. Result evidence on the direction branch is
+`4913b8fc9cb790dcdfc40b0086b77448ba4c2666`.
+
+## Pro question 2026-09-25 partner-training-after-complete-matrix
+
+Conversation: reuse this direction's Jev conversation; its address stays in local operation
+state. Prior question key is`hmasd:a3dc9551a847129b3ea2a74b8f99da20cfa60a5dda16d6615e8b6cea82baf578`.
+This is a new scientific investment question, not a retry or delivery repair.
+
+**Decision.** After the complete B01 above, is the following matched three-arm direct
+partner-training exploration worth its full learning/engineering cost, should it be revised
+in one consequential way, or should current S1 asset-based partner work end? The parent question
+is how partner composition can yield useful coordination under legal information. B01 weakens
+uniform same-source-loss repair but leaves the direct training question untested. I lean toward
+paying for one complete direct comparison if its baseline and practical scope survive criticism;
+I do not propose another diagnostic matrix or buy training merely because worlds differ.
+
+The earlier full answer's outcome branches explain the B01 reading, but did not assess this
+concrete learner comparison. New evidence: all nine cells are complete, J D=−.000167541
+with conditional95%[−.009459302,+.007918611], service D=+.009822917 with
+[−.643086198,+.579832552]; the three C signs are mixed. Per-world J residual RMS has
+median.015870364 versus mean-matrix residual RMS.002810482. Cell3/2 is the finite maximum
+but only+.000216619 J/+.159562500 users over3/3, with intervals crossing zero and an adverse
+world of−.094276693 J/−6.516 users. No failed run or hidden cell is being repaired. Fixed-policy
+evaluation cost158.86s and0 new fits; it does not price recurrent training or establish its gain.
+
+**Concrete candidate, not accepted.** Keep physical S1 N6/c10, original learner roles0–2,
+frozen partner roles3–5, LOCAL1 actor104 and the same full N6 centralized critic information.
+Use a fresh ordinary B16/B20-style recurrent MAPPO learner, shared across its three controlled
+roles; no high-level/discriminator learning, source labels, parameter/hidden-state sharing or
+extra actor truth. Each frozen partner is an exact B20 F45 source from B01 and uses the same
+deterministic clipped native law with private lane/role states and unchanged normalizers.
+The learner samples its training actions as in the ordinary source recipe and uses native
+deterministic deployment at evaluation. Actor/critic architecture, reward, discount, normalization,
+optimizer, state reset and learner sampling/update exposure match across arms.
+
+Three arms share the same prospective learner initialization seed92526001:
+
+- F1: partner source1 throughout training.
+- F2: partner source2 throughout training; this is the named primary ordinary comparator.
+- M: source1 or source2 fixed for each full episode, with8 lanes each in each16-lane rollout,
+  a reproducible shuffled lane assignment from separate seed92526002. Thus each source supplies
+  180k team steps, rather than granting M extra total samples or online partner switches.
+
+All arms get45 H500 rollouts on16 lanes =360k physical team transitions each. Proposed common
+world constructors use92530000+100*rollout+lane, rollout1–45 and lane0–15, with source-native
+constructor/reset ordering and isolated model/assignment RNG. Preserve the ordinary15 PPO
+epochs and4 nominal minibatches per rollout update. Train only executed learner rows0–2 in
+both actor and critic losses. Full N6 observations/state and physical actions stay intact;
+unexecuted learner samples for source-controlled rows cannot enter PPO. A buffer containing
+only explicitly identified learner decision rows would not mean constructing an N3 task,
+but its storage/sampler/update semantics still require actual verification.
+
+Evaluate the one common initialization and all three fixed final endpoints against every
+frozen partner1/2/3 on32 new constructor worlds92540000–92540031 at H500. This gives the full
+3-learner by3-partner endpoint table plus the common initial3-partner row. No intermediate
+endpoint, best-arm selection, bank/role scan or result-dependent extension. Source3 is excluded
+only from this new learner's training; it was fully observed in B01, and I have seen its better
+ordinary mean. It is not an unseen asset, random draw from a partner population or a blind
+holdout. The new world panel is separate from B01 and all proposed training constructors.
+
+Primary finite reading: M−F2 J and served users/step on partner3, with per-world gains/losses
+and conditional paired-world uncertainty. Retain M−F1, both seen-partner readings, complete
+components and each learner's movement from the common initialization. F1 is an explicit
+additional fixed-source control: superiority over a weak source1-trained response alone will
+not be called diversity benefit. F2's selection is informed by B01's source quality but does
+not establish that a freshly trained F2 response is best. This is one exploratory training
+instance per arm, not confirmation or a method-population estimate.
+
+**Working conjecture and alternative.** Different frozen partners induce different closed-loop
+learning distributions. A single-partner ordinary response may specialize; M might learn actions
+that retain use under both training partners and transfer better to partner3 under the same
+LOCAL1 interface. An intermediate finite specialization contrast is
+T=(J(F1,1)+J(F2,2)−J(F1,2)−J(F2,1))/2, which cancels additive response/partner terms but is
+not a pure adaptation mechanism. The conjecture predicts positive fixed-response specialization
+and a joint native M−F2 gain on partner3, with seen-partner costs retained. Neither prediction
+is guaranteed. Ordinary partner quality, a competent fixed-partner response and broad geometric
+feedback may absorb the opportunity; M could also dilute useful experience. If M improves,
+changed state coverage/regularization and training stochasticity remain alternatives to online
+partner inference. A gain is a package observation, not proof of convention learning.
+
+**Complete proposed price and feasibility.** Three started fits×360k =1.08M training team
+steps,3.24M learner decisions and3.24M frozen-partner decisions;135 rollout/update phases with
+15 epochs/4 nominal minibatches each. Initial3 plus final9 partner cells×32×500 =192k evaluation
+team steps/384 episodes. Total planned native exposure1.272M team steps, before correctness
+fixtures. Historical sources already cost1.08M training steps. Full runtime inference can exceed
+executed rows, especially if M evaluates both frozen sources on all lanes; actual inference,
+optimizer calls, wall, process RSS, storage and support cost must be counted. Training wall and
+the new recurrent-mask implementation cost are not yet measured; do not scale158.86s into a
+training quote. Use the configured WSL4070 node and one result-bearing study at a time.
+
+The source map found no existing ordinary per-role learning mask. B20 runner stores all six
+roles; buffer masks are time/env validity and LOCAL1 does not return roster identity for loss
+selection. Action splicing alone would contaminate the policy update. A private candidate
+collector/sampler/update intervention is required (or a simpler verified equivalent), followed
+by focused real-hot-path tests and independent engineering review. No code task or fit is
+accepted yet; extensive shared-core redesign would increase the price and can change this choice.
+
+**Advice requested.** Assess the decision value of this full triplet against ending the current
+asset route. In particular, does F1/F2/M with a training-excluded but previously observed partner3
+answer a useful finite question at this price, or is the predicted use too weak/poorly distinguished?
+Address whether the primary comparator, shared initialization, half-team loss restriction and
+seen-partner tradeoffs are adequate. Identify the strongest simpler explanation and what the
+proposed complete reading would actually change. If a small direct revision is more informative,
+give its concrete prediction/comparator and complete price rather than adding an exploratory
+search service, more matrices or an unpriced population. No new idea is owed; stopping an
+unworthwhile route is legitimate, without declaring general coordination or partner training
+ineffective. Do not require a symmetry proof, positive toy, exact headroom, residual predictor or
+exhaustive counterfactuals before a reasonable complete learning experiment.
+
+**Context and source precedence.** Paths below use the message's full source_sha unless an
+explicit revision is given. The current owner delegation authorizes direct DM scientific choices,
+implementation, consultation, native execution and own publication, without a Root/owner gate
+for each action. FSD remains owner-paused; G33 frozen. Read the decision-relevant sections:
+
+- `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8: scientific ownership, full cost, consultation
+  and exploratory versus confirmation claims.
+- `.agents/skills/hmasd-scientific-tools/SKILL.md`: Mathematics/conjectures, Explore, Update the
+  working explanation, Comparators, Statistics, Cost and exposure, Pro. Current methods supersede
+  conflicting old chat instructions; they do not rewrite B01 or other frozen evidence.
+- `.agents/skills/hmasd-research-engineering/SKILL.md`: L0/Implementer, Checks and review,
+  scope/semantics and cost. Do not turn a possible row-mask repair into a new standing framework.
+- `docs/research/RESEARCH.md` structural-background §8 and this direction's current plan at
+  main`636db7ec5574081a7eade10446075eeb7f1faeaa`. Its distinction among source quality, finite
+  interaction and training value shapes this proposal. Other directions remain owned by their DMs.
+- This NOTES entry `2026-09-25 — B01 complete: no uniform matching advantage, heterogeneous worlds`,
+  and the full prior Answer to `finite-controller-matrix-value`, especially outcome branches,
+  fixed-interface meaning and complete cost. Do not substitute a chat receipt for that full answer.
+- `runs/controller_composition/b01_fixed_matrix_20260925/summary.json`, `config.json` and
+  `launch-manifest.json`: complete finite outcomes, bindings and counts. Raw NPZs are locally
+  retained at the recorded hashes, not available to the GitHub connector; the independent
+  arithmetic audit is stated above, not an invitation to claim you inspected inaccessible arrays.
+- Real source for the candidate's engineering premise: B20
+  `experiments/candidates/agent_count_generalization/ordered_roster_confirmation_b20/runner.py`
+  `_training_worlds`, collection and update loop; B16 `local_ordinary_b16/runner.py` runtime builder;
+  `hmasd/utils.py` RolloutBuffer sequence sampler; `hmasd/agent.py` ordinary MAPPO update.
+  The source1 B20 `F/config.json` confirms16 lanes,H500,45 rollouts,15 epochs/4 minibatches.
+
+No literature novelty claim is proposed. If a theorem or extra empirical source changes the
+recommendation, verify its primary passage and name its assumptions and omitted MARL coupling.
+An unread decision-critical source is a stated gap, not a fabricated verification.
+
+**Return and writing constraints.** Give the strongest material criticism and a recommended
+investment decision with its scope/price; return `MATERIAL_DISSENT: yes/no` for the proposed
+comparison. No training, evaluation, files outside this target or control edits. Write only in
+the empty `### Answer` below this unique heading on branch`codex/controller-composition-sept25`,
+path`docs/research/candidates/controller_composition/NOTES.md`. Read pinned inputs, then fetch
+the latest target blob and use its actual SHA for an answer-only insertion. Preserve every
+other byte, including this entire question; stop on overlapping edits. Report the actual commit
+after a successful write. If writing fails, return the complete substantive answer in chat,
+not only a status, link or SHA. You advise; the DM decides, with no new approval requirement.
+
+### Answer
+
+MATERIAL_DISSENT: yes
+
+**建议：保留 F1/F2/M 的三次直接训练，不再购买诊断矩阵；作一项小而实质的比较修订——在相同新评价世界上增加固定旧 source3/source3 的一格复用参照。** 原来的 M−F2@partner3 仍是主要、曝光匹配的训练制度比较，不更换主对照、不增加训练臂。新增参照只需 0 fits、32×500=16,000 评价团队步，使总计划由 1.272M 变为 **1.288M 团队步：1.08M 训练＋208k 评价，3 fits、416 评价回合**；工程、检查、推理、读回和存储另计，训练墙钟仍未知。
+
+这里的实质异议不是“B01 不阳性，所以不得学习”，而是：**三臂相对差足以回答一个有限训练问题，却还不足以回答这次资产投入所关心的另一半——新增训练是否比直接复用已有有用控制器更有用途。** 这是两个不同参照，不应由一个 M−F2 数字代答。仅研究训练制度时，原三臂本身是有效的探索；我推荐补这一格，因为它能以很小的边际评价量改变后续采用、停止或确认的选择，而不是为探索新设性能门槛。[本题及完整 B01][pi-notes] [当前结构背景与计划][pi-background]
+
+#### 1. B01 应怎样改变这次投资，而不替新训练预判结果
+
+B01 的 J 匹配汇总 D=−.000167541，条件区间[−.009459302,+.007918611]；服务 D=+.009822917，区间[−.643086198,+.579832552]。三个 C 反号，世界残差又显著大于均值残差。3/2 比 3/3 的有限优势只有+.000216619 J/+.1595625人，且同世界存在−.094276693 J/−6.516人的损失。这些读数削弱“有统一混编损失，应该训练修复”的投资依据；既没有量出学习可用的 headroom，也不能把残差 RMS 当作可兑现增益。[B01 完成记录][pi-result] [原生摘要][pi-summary]
+
+但 B01 从未训练一个面对固定外部伙伴的响应者。它没有观察 F1、F2 或 M；原 F45 来源自身有用，也不意味着新固定伙伴响应已经吸收了全部机会。因此，不能把旧九格近可加当作新三臂必然无差异的证据，也不必先训练残差预测器或证明对称性。这里值得购买的具体未知量是：**在相同的半队学习曝光下，把 source2 的一半训练经历换为 source1，会怎样改变面对训练排除伙伴3的完整用途，以及对已见伙伴的代价？** 这比继续解释旧矩阵的每个反号更直接。[前次完整 Answer][pi-prior-answer] [科学方法][pi-method]
+
+最强的简单竞争解释是，普通几何反馈和一个合格固定伙伴响应已经足够；M 或许只是稀释 source2 经历。即使 M 正面，也可能是较广状态覆盖、正则化或这一次优化实现的总体质量，而不是在线识别伙伴、解除约定冲突。冻结伙伴仍会根据真实观测和自己的循环状态反应；“冻结参数”不等于固定动作或开放环路。这个设计研究的是对固定伙伴库的响应学习，不是双方共同学习、伙伴群体演化或一般 ad hoc teamwork。
+
+我仍倾向购买一次修订后的完整比较，而不是现在结束全部 S1 资产工作。理由是它有可执行的直接干预、两个普通固定响应控制和明确终点，正负结果都能改变后续选择；不是因为“尚未回答”本身就产生继续投入义务。若实际实现演变为广泛的共享核心重构，新增成本可以使停止资产路线更合理，不应为维护本推荐而继续扩建。
+
+#### 2. 唯一新增比较：旧 3/3 是复用参照，不是第四个匹配训练臂
+
+保持全部新训练、种子、半队划分和原十二个评价格。另在同一92540000–92540031面板、H500、相同构造/重置、确定性裁剪和合法 LOCAL1 下，令两个角色组都使用**已经固定的旧 source3 F45**，得到 $B_3^Q$，其中 $Q$ 分别为 J 和服务人数/步。不要使用 B01 的旧均值直接相减；它来自另一面板。不要改成事后最高的旧3/2，也不展开另外两列、扫描库或重新训练 source3。[B01 来源和执行绑定][pi-config] [原生 launch manifest][pi-manifest]
+
+令 $V_{a,p}^Q$ 为新训练臂 $a\in\{F1,F2,M\}$ 对伙伴 $p$ 的新面板均值。保留
+$$
+\Delta_3^Q=V_{M,3}^Q-V_{F2,3}^Q
+$$
+作为主要训练比较；新增
+$$
+U_a^Q=V_{a,3}^Q-B_3^Q
+$$
+作为每个新响应者相对于直接复用旧资产的用途比较。一个参照格即可支持这三个差，无需再增加评价。
+
+其区别确实影响投入：M 可能超过新 F2 却仍明显不如旧3/3，此时有有限训练制度差，却没有立即替换已有控制的理由；也可能 F2 与 M 都超过旧3/3而彼此无有用差别，此时普通固定伙伴响应学习值得保留，伙伴混合的额外投入却缺乏支持。原设计不能在同世界区分这两种情况。
+
+**旧3/3不是曝光匹配的训练方法对照。** 它历史上训练了六个角色；新臂只学习三个角色，伙伴冻结，训练分布与实际学习决策量不同。$U_a$ 因而不能识别混合训练的因果贡献，也不是最优上界。它回答“现在直接复用已有物件怎么样”，其历史成本继续披露，但不再次列为本批新 fit。source3 的选择受已读 B01 影响，这个参照也不包装成盲选或总体最强基线。只有新三臂之间承担匹配制度比较。
+
+增加这一格不应成为先跑旧参照、看分数再决定三次训练的筛选。若 DM 采纳，应在任何新结果前写入同一完整比较；它不是 B01 的结果驱动延长，也不是进入学习的阳性 pilot。它改善的是本次新研究的实际用途解释，不使“必须胜旧3/3”成为所有基本研究的准入条件。
+
+#### 3. F1/F2/M、共同初始化与伙伴排除：基本设计保留，但作用不要混写
+
+**F2 是合理的命名主对照，不是已经证实的最佳响应。** 原 source2 比 source1 的某些普通部署均值更好，不推出“用 source2 训练出来的响应者必然更强”。伙伴行为既影响即时服务，也影响学习数据的难度与覆盖。因此 F1 有真正的对照价值，不能因旧 source1 较弱就删除。仅胜 F1、不胜 F2，不能支持预写的主要增量；胜 F2而不胜 F1，应保留主要有限差，同时承认另一固定伙伴响应足以竞争，不能宣称混合训练优于固定训练这个类别。[本题][pi-notes]
+
+F1 的边际价格并非零：相对于仅 F2/M，增加360k训练和三个终点伙伴格的48k评价，共 **408k团队步**。原两臂版含共同初始化时是864k；原三臂版是1.272M。我认为这408k值得保留，因为它同时防止弱对照叙事并使固定响应专门化可读；不建议再把它扩成固定伙伴/比例搜索。
+
+**共同初始化要核对实际状态，不只核对整数92526001。** 三臂须有相同初始 actor、critic、相关可训练编码和 normalizer 状态，但各自拥有参数、优化器、buffer、循环状态及私有采样 RNG，不能共享可变对象。伙伴构造/恢复、M 的 lane 分配和评估不得改变 learner 的模型、动作或 sampler 随机流。共同初始化及共同外生世界能减少无关差别，不能消除训练波动，更不产生三个独立重复。不同伙伴导致的真实动作、奖励和访问分布分叉正是干预的一部分，不应强行配成同一轨迹。[B20 初始化、世界与更新循环][pi-b20]
+
+M 的8/8整回合分配合理：45次 rollout 中每源180k物理团队步，每源对应540k实际 learner 决策行；F1/F2各有1.08M learner 决策行，总曝光相同而 source-specific 曝光不同。这个替换/稀释是干预本身，不是需要给 M 补样本的“不公平”。不要为匹配每源经历把 M 加倍训练，也不要按来源分开归一化优势或调更新权重而不声明新干预。整 rollout 的8/8平衡不保证每个随机 minibatch 都8/8，更不保证两源梯度贡献相同。
+
+**partner3只是被这次新训练排除。** 它已被研究者观察、参与 B01 的所有组合，并影响当前选择；新世界不能洗掉这种曝光。因此可称“对训练排除、先前已观察的固定伙伴3的迁移”，不能称盲测、任意未见伙伴泛化或伙伴总体效果。三个源属于相近的普通训练程序，未覆盖不同算法、信息权利、能力或协作规则；本比较无需扩库才能成立，但外推必须止于实际范围。
+
+#### 4. 源码核对：半队限制必须覆盖整个学习通路，不是末端乘一个 mask
+
+题面的工程警告属实，而且有两个容易漏掉的具体路径。B20 collector 用六角色 learner 的 raw actions 与旧 log-probabilities 写 buffer；`RolloutBuffer.masks` 只有时间×环境维度，sampler 展平顺序为 chunk、env、agent，并默认遍历全部角色。LOCAL1 分支没有把该内部 ego 索引交给损失作为学习归属。单独替换环境执行动作会让未执行 learner 决策进入其 PPO 更新。[B20 collector][pi-b20] [buffer 与 sampler][pi-buffer]
+
+更重要的是，`update_discoverer_from_rollout` 在 minibatch 损失过滤之前以 `returns.reshape(-1)` 更新 ValueNorm；而 entropy 来自 `actor.evaluate_actions` 的返回值，随后直接用于 entropy loss，并没有沿后面的 `valid_indices` 再做角色筛选。**只屏蔽 policy/value 的终端损失不足以落实题面的“只学习0–2”。** 对某种状态无关高斯熵，重复角色可能数值上碰巧不改变均值；这不等于已经建立了完整行归属语义，也不能据此泛称当前熵梯度一定已受污染。这里报告的是可见代码路径及必须覆盖的检查，不是已执行新候选后发现的故障。[真实 update 热路径][pi-agent]
+
+我建议的简单实现边界是：物理环境和执行 runtime 保持 N6；方向私有 sampler **先按原始角色0–2筛选完整序列索引，再打乱、组32条有效 learner chunk 的 minibatch**。全局 state 仍是完整 N6 的133维表示，actor仍只取104维合法局部输入；所有动作仍有六行。GAE、return统计、优势归一化、ValueNorm、actor/critic损失和熵项只消费相同的有效 learner 样本。六角色存储加事前序列筛选，或一个明确映射原角色的三角色学习 buffer，都可以；后者不等于创建 N3 物理任务，但不能只改全局 `config.n_agents` 就假定可用。[B16 构造][pi-b16] [源配置][pi-source-config]
+
+这个边界保留已有普通学习机制，而不构造常驻框架。尤其应保留：learner自己的真实 raw Gaussian 采样及对应旧log-probability，环境执行其裁剪值；不能以伙伴动作回填 learner 样本，也不能把裁剪后动作密度偷偷换成原始动作密度。critic合法观察伙伴的物理后果，不意味着允许训练伙伴的动作概率；限制学习行也不意味着删除 critic 中伙伴的状态。保持原团队奖励缩放中的物理N=6，而非因只学三行就改成除以3；原生部署 J 仍按6×scalar_return/H还原，服务仍是完整六机团队人数/步。
+
+循环 replay 保持实际 lane、原角色和 chunk起始隐藏状态；原代码中 done[t]结束离开t的转移，进入t+1才重置，chunk首行使用存下的起始状态。来源在回合开始确定、全回合不变；每个冻结来源沿真实混合环境推进自己的状态，不拼接想象的同源历史。共同critic并不自动拥有伙伴隐状态或来源标签，不能把测试工具看到的内容传入actor。[buffer GAE 与 sampler][pi-buffer] [update 的入行 mask][pi-agent]
+
+必要的真实热路径检查应能证明：在物理样本固定时，改变未执行 learner 行的占位动作、log-probability或return，不会改变有效learner损失、梯度、ValueNorm计数与更新；冻结伙伴参数和normalizer前后不变；每条受训序列可追溯到实际执行learner角色；采集/回放的时序和动作法则一致。伙伴实际改变物理状态与奖励当然可以改变学习，不应把这种合法影响误当泄漏。检查还应走过真实一次collector→GAE→sampler→optimizer路径，而不是只有mock数组形状。它们是已提出半队干预的正确性工作，不是效果预筛选；成本另计，并沿现有独立工程review处理。[工程方法][pi-engineering]
+
+#### 5. 真实优化曝光与完整价格：四个 nominal minibatches 不是实际调用数
+
+源码直接显示，普通低层更新取 `sequence_batch_size=32` 和 `chunk_length=config.k=10`；`num_mini_batch=4`不是这条 sampler 的实际分批参数。若采用上面事前筛选后的32条有效 learner 序列、保留H500和15 epochs，按代码循环计算：
+$$
+50\text{ chunks/trajectory}\times16\text{ lanes}\times3\text{ learner roles}=2400\text{ sequences/epoch},
+$$
+$$
+2400/32=75\text{ minibatches/epoch},\qquad
+75\times15\times45=50{,}625.
+$$
+因此无跳过、无尾部丢弃时，每fit应有 **50,625次actor和50,625次critic optimizer调用**；三fit分别合计151,875次。不是每个optimizer总计135×15×4=8,100次。这是对已读源路径及建议筛选方式的预算推导，不是新实现已经测得的计数。实际需要由runner记录验证。[配置][pi-source-config] [sampler][pi-buffer] [update][pi-agent]
+
+若先把六角色分成batch、再在batch内丢掉三角色，通常会产生更多、有效样本较少的更新；它不是上述32条有效序列方案的同一优化曝光。即便三个臂都这么做，也应如实声明实际batch大小与调用次数，不能把它暗算为原报价。三行学习也不与历史B20六行学习完全等曝光：新每fit1.08M learner决策，原六行fit为2.16M。这里要求的是新三臂彼此匹配，不是假装恢复了历史六角色的全部学习量。
+
+| 工作 | 原三臂 | 建议修订后 |
+| --- | ---: | ---: |
+| 新训练fits／团队步 | 3／1,080,000 | 不变 |
+| 实际learner决策行／冻结伙伴决策行 | 3,240,000／3,240,000 | 不变 |
+| rollout更新阶段 | 135 | 不变 |
+| 共同初始化＋新终点评价格 | 3＋9 | 不变 |
+| 旧3/3复用参照格 | 0 | 1 |
+| 评价团队步／H500回合 | 192,000／384 | 208,000／416 |
+| 新增原生总团队步 | 1,272,000 | **1,288,000** |
+
+修订后实际环境执行动作行共7.728M；这仍不是模型推理量。learner若推理所有六行再截取，或M对全部lane都调用两个冻结来源，都会增加未执行的推理与内存工作；不能按实际动作行隐去它，也不能据B01的两runtime路径推断训练墙钟。B01的158.860747秒、2,650,016KiB进程峰值和29,395,670原始NPZ字节是那次固定评价的测量，不是本训练报价。[摘要计数与遥测][pi-summary]
+
+三份源已有1.08M历史训练团队步；本批新增1.08M不是免费，也不再把历史资产训练算一遍新fit。新实现、独立检查、运行推理/反向传播、完整输出保留、传输和阅读的墙钟/RSS/存储仍未知。已知循环数应现在写清，未知时间无需用另一个profiling研究补齐；在必要实现和检查发现成本显著升高时，DM应重新判断是否仍值得，而不是为完成三臂表无限扩大工程。
+
+#### 6. 完整表应该读出什么：专门化、总体质量和复用价值分开
+
+首先读每臂对每个伙伴的绝对J/服务，以及相对于**同一伙伴下共同初始化**的自身变化。相同初始化使臂间“学习增量之差”等于终点差，它不是额外一份独立证据。参数位移、真实更新和自身服务学习也不能代替M的增量。反之，某个固定臂真正更新却没有改善，是有效的有限结果，不能因为它弱就换seed或将其自动判为技术失败。
+
+T的消项是正确的，但应同时读两个具体固定响应优势：
+$$
+s_1=V_{F1,1}^J-V_{F2,1}^J,\qquad
+s_2=V_{F2,2}^J-V_{F1,2}^J,\qquad T=(s_1+s_2)/2.
+$$
+T>0并不保证$s_1,s_2$都正。只有一个很大的正差也能使T正；此时不能称“两种固定响应都各擅其长”。同样的四格算术可以用于服务，保留J/服务反号。T是最终策略表的交互描述，不是已经先于收益观测的因果中介；它不识别在线伙伴辨认。新T的训练臂轴与旧B01的来源轴也不同，不能把两个数的差称作修复了多少旧约定损失。
+
+对已有输出可再读取一个不用加评价的差中差：令$\Delta_p^Q=V_{M,p}^Q-V_{F2,p}^Q$，看
+$$
+H^Q=\Delta_3^Q-\frac{\Delta_1^Q+\Delta_2^Q}{2}.
+$$
+若M对三个伙伴都近似同样提高，较一般的响应质量改善仍是强解释；若伙伴3的增量更突出，才更符合“训练排除伙伴上的相对保留”这部分预测。H也不是机制识别或新的主门槛；H不正不抹掉真实的$\Delta_3>0$，更不能用H正而$\Delta_3<0$冒充主要收益。所有这些只是同一完整表的代数，不添加残差模型、反事实rollout或选择服务。
+
+建议按以下不同后果改变下一笔投入，而不是只给一个通过/失败标签：
+
+| 观察 | 投入与解释更新 |
+| --- | --- |
+| M相对F2的partner3双指标增量有任务意义，F1不足以吸收它，且M相对旧3/3也有用途；已见伙伴代价可接受 | 增强这个有限混合程序的学习及资产用途理由。下一问题可变为是否跨独立新训练实现保留；这不是已经确认，也不自动购买确认批次或新模块。 |
+| M−F2@3正，但M仍不如旧3/3，或差别对本任务过小 | 保留有限制度差，却不主张替换旧资产或为部署追加训练。基本研究价值仍可存在；在没有更值得付费的具体未知量时，结束当前资产配方的追加更合理。 |
+| F2超过旧3/3，而M没有额外用途；或F1已提供相当/更好的有限响应 | 保留普通固定伙伴学习的用途，降低混合训练的必要性。不能把较弱固定源的失败当作整个固定训练类别失败，也不在结果后更换主对照。 |
+| T显示固定响应专门化，但M−F2@3无有用增量或不利 | 说明存在有限专门化不等于这套50:50训练能克服它。结束原样混合配方的追加，不用T的阳性救回主要预测。 |
+| M−F2@3有用而T弱，或M在三伙伴上普遍提高 | 保留训练包的真实用途，削弱“解除固定响应专门化是必要中介”的叙事；不改称已学会伙伴推断或约定。 |
+| 仅已见伙伴改善、J与服务冲突，或均值由少数大世界支配 | 如实报告适用范围、原生目标—服务取舍和全部损失。不能用见过条件或另一指标救回partner3的联合预测，不按结果重加权、换伙伴或补世界。 |
+| 差异小/不稳定或区间宽，且没有清楚的实际用途 | 降低这套资产路线的新增投入理由，可以停止；不能宣布等价或一般协调无效。更多样本只有在其精度确实改变一个值得购买的选择时才有价值，不因“不显著”自动追加。 |
+
+“任务意义”在这里用原生J与人数/步以及成本解释，不临时制造一条显著性、MEI或seed标准差门槛。若DM有实际可接受的服务损失或继续投资尺度，应在读结果前说明；没有这样的尺度就保留完整数值和条件判断，不伪造精确阈值。覆盖、质量、高度罚、资格和未服务可解释算术取舍，不能分离几何、推断或优化机制；S1高度罚也不是S7电池/返航安全测量。[B01完整分量与限制][pi-result]
+
+#### 7. 不确定性：一组匹配训练实现，而不是“3×3×32”的训练n
+
+保留条件配对世界区间是有用的。修订后每个世界有13格×J/服务，即26维结果块；原设计是24维。对世界索引整块重采样，所有主要差、T、H、自身变化和旧参照差都用同一索引，分析随机种子与draw数在结果前固定。不能分别bootstrap各格、各指标或将三个伙伴当作独立训练重复。[统计方法][pi-method]
+
+区间所需要的假设是这32个世界代表所声明生成器的近似独立/可交换抽样；固定面板均值本身是直接观测。区间条件于这批具体已训练权重、旧伙伴库、角色划分、确定性部署和选择历史。它不覆盖下一次初始化、优化或训练伙伴抽样的变化，也不消除source3已被观察的事实。逐格点态区间不是整张表的同时置信区域；多个同向区间不能给这一个训练实现投成多次复现。
+
+共同seed、45次更新、720个训练回合/臂、384或416个评价回合、bootstrap重复都不增加独立训练n。这里是每臂一个新训练实例的匹配探索。若将来主张训练程序通常有益，需另行设计真实独立训练重复并明确伙伴总体；那项未来研究既不由本答复预购，也不能拿B20原来的独立训练数替代。[宪法科学最低要求][pi-constitution]
+
+#### 8. 推荐的下一行动、来源边界与停止范围
+
+**下一行动是一个直接学习研究的最小落实，而不是再做效果诊断：**在现有NOTES中选择是否采纳上述单格复用参照；固定三臂/seed/世界/完整终点，明确有效learner序列与ValueNorm归属、32序列batch及实际计数合同；实现方向私有半队通路，进行必要的真实热路径检查与独立工程review。若成本仍与这个有限问题相称，再由DM按现有授权和节点准入执行一次完整批次。没有附加Root/owner批准、阳性toy、对称性证明、残差预测器、全划分搜索或逐步反事实门槛。[工程方法][pi-engineering] [宪法][pi-constitution]
+
+我的选择是修订后继续一次，而不是目前关闭全部S1伙伴资产研究。范围只到这个有固定库、固定角色、一个训练实现/臂的比较；如果实现价格不再相称，或完整结果没有值得继续的用途/区别，结束当前资产路线是有效结论，不意味着整个协调问题无效，也不要求另造一个后继保持忙碌。FSD暂停、G33冻结和其他DM的所有权均不改变。
+
+**实际读取与缺口。** 本答复以`fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4`为问题/代码来源，完整读取了本问、前次Answer与B01完成段，并读取B01的config、launch manifest及summary中的身份、计数、遥测和相关统计；没有把summary的正文摘录冒充对所有NPZ的重新数值审计。共享§8和本方向计划使用指定main`636db7ec5574081a7eade10446075eeb7f1faeaa`，不是移动分支的新科学输入。宪法及scientific-tools在本次指定版本的blob分别仍为`f776de2a7150b87e55a2e71a2fb9ffde98c7fc09`和`741287f56530c5db34b9dc063ed97922a76020b6`，与本会话前次完整读取相同；本次核对版本后复用其全文，工程相关章节另行重读。
+
+工程结论来自本次实际读取的B20 `_training_worlds`、collector、`_audited_update`和训练循环，B16配置/构造，RolloutBuffer的GAE/序列sampler，以及普通低层update，而非只转述Scout。未声称已读全部34依赖、验证新半队实现或执行测试。远端checkpoint和原始NPZ仍未由本次会话访问或加载；其保全、恢复和独立算术审计来自已发表记录。容器直接取得GitHub原始字节的辅助路径未成功，GitHub连接器读取可用；没有用这个失败推断仓库不可读。新墙钟、内存、完整推理量、存储及工程工作量仍是明确缺口。没有新训练、环境评价或科学运行；本轮只作来源阅读、代数/计数推导与建议。没有以外部文献的新颖性、Other-Play迁移或一般PPO性能定理支撑这项投资判断。
+
+[pi-notes]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/docs/research/candidates/controller_composition/NOTES.md#pro-question-2026-09-25-partner-training-after-complete-matrix
+[pi-result]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/docs/research/candidates/controller_composition/NOTES.md#2026-09-25--b01-complete-no-uniform-matching-advantage-heterogeneous-worlds
+[pi-prior-answer]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/docs/research/candidates/controller_composition/NOTES.md#answer
+[pi-summary]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/runs/controller_composition/b01_fixed_matrix_20260925/summary.json
+[pi-config]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/runs/controller_composition/b01_fixed_matrix_20260925/config.json
+[pi-manifest]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/runs/controller_composition/b01_fixed_matrix_20260925/launch-manifest.json
+[pi-background]: https://github.com/CartmanFatass/My-paper-code/blob/636db7ec5574081a7eade10446075eeb7f1faeaa/docs/research/RESEARCH.md#structural-research-background
+[pi-constitution]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/docs/project/OPERATING_CONSTITUTION.md
+[pi-method]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/.agents/skills/hmasd-scientific-tools/SKILL.md
+[pi-engineering]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/.agents/skills/hmasd-research-engineering/SKILL.md
+[pi-b20]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/experiments/candidates/agent_count_generalization/ordered_roster_confirmation_b20/runner.py
+[pi-b16]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/experiments/candidates/agent_count_generalization/local_ordinary_b16/runner.py#L119-L231
+[pi-buffer]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/hmasd/utils.py
+[pi-agent]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/hmasd/agent.py#L6280-L6580
+[pi-source-config]: https://github.com/CartmanFatass/My-paper-code/blob/fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101/F/config.json
+
+## 2026-09-25 — Adopt the partner-training revision; B02 prospective comparison and L0
+
+### Full advice and scientific choice
+
+The accepted question key is
+`hmasd:ca26bc8c37acb867f7ac9474bec018d1cc04d4a70ab7e2091b214b22de194349`.
+The short collected chat text was a receipt/summary despite its transport `chat answer` label;
+it was not the full scientific response. Same-key `deliver` returned `DELIVERED` for
+`fa1289d7e5f17a3ace66178abf023c8f4954e6a9`, directly after the pinned question source
+`fadb09e7a24120f8c5c41b6d7037a8bf2eeafeb4`: exactly the assigned NOTES file, initially empty
+Answer, whole question and outside bytes unchanged. I read the complete 13,145-character
+Answer above, including all eight sections, limits and cited source identities. No resend,
+worker restart or App message was made. The READY event was consumed using its actual
+generation6/wake/event binding; the completed operations need no further observation.
+
+**MATERIAL_DISSENT: yes, adopted.** I retain the three fresh response fits and the named
+primary M−F2 comparison on partner3. I add exactly one old source3/source3 reuse cell on the
+same new evaluation worlds. This separates usefulness of a new training regime from usefulness
+relative to an existing controller, without misrepresenting the latter as an exposure-matched
+fourth fit. Source3 and its previously observed quality are selected knowledge, not a blind
+holdout or an upper bound. The fixed-policy B01 remains complete and unchanged.
+
+Current published main was refreshed and its relevant structural §8/current plan read at
+`636db7ec5574081a7eade10446075eeb7f1faeaa`. Its separation of information, policy class and
+finite training changes the interpretation here: B02 changes the learner's partner-conditioned
+training distribution while holding deployment information/architecture fixed. The B01 finite
+interaction does not promise trainable headroom. S7's independently published closure and the
+finite-model DM's ownership remain intact; this is one active study of the already assigned
+partner question, not a new allocation. FSD remains paused and G33 frozen.
+
+The strongest alternative remains ordinary fixed-partner response quality plus geometric
+feedback; the mixed arm may simply dilute source2 exposure. A positive package difference
+could arise through state coverage/regularization or this optimization realization. I accept
+one complete direct comparison because its primary, seen-partner, own-learning and reuse
+readings distinguish consequential next choices; neither a positive B01 screen nor a theorem
+is needed. I do not accept a population, role/partner scan, midpoint selection or automatic
+confirmation. If the implementation needs broad shared-core redesign, reconsider this cost
+before execution rather than expanding the engineering by default.
+
+### Frozen B02 scope, exposure and reading
+
+The preceding question and full Answer specify the comparison; the following resolves its
+remaining implementation bindings prospectively. Object `controller_composition_b02`, proposed
+tag `b02_partner_training_20260925`. Physical S1 N6/c10, learner original roles0–2 and frozen
+partner roles3–5. LOCAL1 actor104, full N6 critic133, raw Gaussian actions with native clipping,
+hidden/GRU256, CPU float32 and four torch threads. Ordinary B16 task-only settings and B20
+training recipe remain, including gamma.99, GAE.95, entropy.05, learning rates1e-4, PPO clip.2,
+max grad norm.5, ValueNorm enabled and observation/state normalization disabled. There is no
+high-level/discriminator learning, source-ID feature, extra actor truth or shared partner state.
+
+- Three fresh learner fits in fixed order F1,F2,M, identical actual parameter/normalizer initial
+  states from seed92526001, private mutable optimizers/buffers/runtime and isolated sampling
+  streams. F1 always partner1, F2 always partner2; M uses each for8 of16 lanes per rollout,
+  shuffled by independent NumPy generator seed92526002, fixed for the full episode.
+- Each fit has45 complete H500 rollouts of16 lanes =360,000 physical team steps and1,080,000
+  executed learner decision rows. M has180,000 team steps/540,000 learner rows per source.
+  Training uses B20's actual explicit-seeded-reset convention: constructor base
+  `92530000 + 100*rollout`, then `env.reset(seed=base+lane)`, rollout1–45. Construction/reset
+  must preserve learner RNG. This deliberately states the training convention separately
+  from the source evaluation convention rather than conflating their two reset calls.
+- Filter original learner roles before GAE/statistics and sequence minibatch formation.
+  Each epoch has50 chunks×16 lanes×3 roles=2,400 valid sequences; chunk length10, batch32,
+  15 epochs, no dropped tail. Expected per fit:1,125 minibatches/update phase×45=50,625
+  actor and50,625 critic optimizer calls; no coordinator/discriminator calls. The inherited
+  nominal `num_mini_batch=4` is not the actual sampler count. Actual counts must be recorded.
+- Evaluate the common initialization against partners1/2/3, each of the three final learners
+  against partners1/2/3, and old source3/source3 once:13 cells on the same32 constructor worlds
+  92540000–92540031, H500. Evaluation uses B01/B20's constructor followed by `env.reset()`
+  without explicit reseed, runtime-construction seed92526051, private N6 runtime per controller,
+  deterministic clipped native law and no learning/storage/normalizer updates. The old reference
+  uses two independent source3 runtimes. Initial and final learner evaluation uses fresh runtime
+  copies with strictly restored learner parameters and normalizers. Preserve source checkpoint
+  identities already fixed in B01. No evaluation result is used to admit or tune the fits.
+- New batch cost:3 fits,1,080,000 training plus208,000 evaluation team steps =1,288,000;
+  3.24M learner and3.24M frozen-partner executed training rows,416 evaluation episodes and
+  1.248M evaluation action rows. Historical sources cost1.08M training steps separately.
+  Inference may exceed executed rows; record actual controller calls/rows, fitting wall/CPU/RSS,
+  update counts, output bytes, collection and support cost. Unknown training wall is not B01's
+  fixed-policy wall scaled by transition count. Correctness fixtures consume additional steps
+  and are reported separately, using worlds outside every production panel.
+
+Primary finite difference is M−F2 on partner3 for both native J and served users/step. Retain
+M−F1 and seen-partner differences, each final learner's change from the shared initialization,
+and each final response on partner3 minus the old3/3 reuse cell. Read T and its two constituent
+fixed-response advantages for J and service, plus the descriptive H=Delta3−(Delta1+Delta2)/2;
+these describe the same table, not extra replications or replacement primary endpoints.
+Report every world and native coverage/quality/height penalty, eligible/served/unserved counts
+and mean height. No battery-risk claim. Keep J/service conflicts and large losses, even when
+the panel means improve. There is no fabricated practical-equivalence or significance gate.
+
+Use10,000 pointwise paired-world bootstrap draws, NumPy generator seed92526999, resampling
+the whole13-cell×2-metric block per world. Also retain deterministic world means/contrasts.
+Intervals are conditional on the particular learned weights, fixed library, partition,
+deterministic law and selection history; exchangeable-world assumptions do not create training
+replication. This is one exploratory realization per arm. Full Answer §6 supplies the outcome
+branches I adopt: distinguish useful mixing, useful ordinary response, insufficient reuse
+value, specialization without primary gain, adverse tradeoffs and unresolved differences.
+No outcome automatically buys another fit, seed, partner, panel or confirmation.
+
+### L0 — direction-private learner-row path and complete B02 runner
+
+**Deliverable and owned paths.** A runnable, admitted complete comparison under
+`experiments/candidates/controller_composition/b02/`, entry
+`scripts/run_controller_composition_b02.py`, focused checks under
+`tests/experiments/candidates/controller_composition/b02/`. Reuse B01 source restoration,
+identity, physical metrics and frozen B16/B20 helpers where it avoids duplication. Do not
+modify B01, recovered historical candidates or shared hmasd/environment/launch code. The
+Implementer owns only those new code/test paths, not NOTES/RESEARCH, Git publication or launches.
+
+**Critical state flow.** Keep physical N6 and original role mapping through collector,
+storage, recurrent chunk replay and evaluation. An explicit compact update-only learner buffer
+is permissible if it carries full133-wide physical state and original roles0–2 without
+changing the physical/global config to N3. Full N6 private runtimes may infer unused rows;
+count that work. Only executed learner raw actions/old log-probabilities, returns, advantage
+statistics, ValueNorm samples, entropy and actor/critic gradients may enter learning. Source
+outputs must never masquerade as learner samples. I verified the consequential Pro warnings
+in current `hmasd/agent.py`: all buffer returns update ValueNorm before loss filtering, entropy
+is consumed separately; ordinary sampler count uses sequence_batch_size32, not nominal4.
+Preselecting the update view must cover these paths, not just mask the final losses.
+
+Maintain private lane/role actor and critic recurrent states for learner and each frozen source;
+frozen sources see the real mixed physical history. Entry masks use preceding done, initial
+chunk states are retained, reward remains scaled for physicalN6, and terminal H500 does not
+silently reset into an uncounted episode. Preserve all module/normalizer state for sources and
+prove exact common learner initialization. M assignment, source construction and evaluation
+cannot perturb learner sampling/update RNG. No transient physical source/hidden identity reaches
+the LOCAL1 actor. Frozen partners remain responsive policies, not replayed action streams.
+
+**Checks and required review.** Trace at least one real native nonproduction
+collector→storage→GAE→sampler→optimizer update. Verify valid sequence identity/counts, raw versus
+executed action/log-probability, physical N6 reward/state and recurrent reset. Perturb unused
+learner rows in fixed physical data and prove unchanged valid losses/gradients/ValueNorm/update;
+do not confuse legitimate partner-induced reward/state changes with contamination. Verify
+frozen source state, matched initialization, independent RNGs, inference/update accounting,
+13-cell statistics/contrasts, partial failure preservation and admission-before-effects.
+Tests use pytest-owned scratch and declared tiny fixture worlds; no production panel exposure.
+Independent Reviewer reads the actual path and checks before DM acceptance. Do not build a
+general row-masking framework or invent an extra pilot study for performance selection.
+
+**Output and stop.** Runner writes compact config/source identities, progress/status and
+complete per-world summaries/paired reading plus durable raw training curves, reset identities,
+evaluation traces and initial/final checkpoints with hashes. Record parameter movement and
+optimizer state/counts separately from evaluation learning. Preserve any incomplete arm and
+the actual counts on exceptions; no automatic rerun/resume and no failed cell replaced with
+zero. Require native admission before effects; allow only kernel-owned preexisting output files.
+Only one sequential result-bearing batch is planned on the configured node. Implementation and
+checks are now accepted; exact run inputs will be reviewed, committed and published before a
+fresh native launch. The DM will reconsider scope if source semantics cannot be preserved
+locally or the practical cost ceases to be proportionate.
