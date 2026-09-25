@@ -929,3 +929,460 @@ answer commit on success. On connector failure return the complete answer in cha
 not a receipt, abbreviated summary or link. No other file edit or experiment launch.
 
 ### Answer
+
+Saved from chat after same-key delivery verification found no repository answer. Complete collected text follows verbatim, including its source limitations and the explicit distinction between the cited file blob and an answer commit.
+
+本轮 GitHub 读取部分可用，但没有可调用的仓库文件更新或提交动作，也未取得可用的替代写入通道。因此没有修改仓库，没有新的 Answer commit。 已重新读取指定分支：本次问题下的 ### Answer 仍为空，当前文件 blob 为 04f5ed1f3c8b82451a1a8f369390fc5e0657accb；它不是答复提交。以下给出完整答复。
+
+读取范围有一项重要限制：episodes.json 的完整正文未能取得，common_prefix.json 未完成全量逐条审阅，执行节点上的原始 NPZ 也未读取。下面区分直接核对的汇总与源码、NOTES 中作者的完整数据归约，以及本次条件推导，不声称完成了独立原始数据审计。
+
+Answer — simulation-budget-interaction-after-b01
+一、直接建议：执行这一次五臂 B02，不在现在结束该配方
+
+建议保留题面的五臂、256 个新 context、k4、M32/M256 和完整 H96 评价，执行这一项新的探索。主估计对象仍为预算交互 I，不替换总体、主对照、接收器、continuation 或零值回退规则。
+
+我选择继续一次，不是因为 B01 已经证明“Monte Carlo 噪声遮住了有益的不确定性处理”，而是因为现在存在一个具体、可单独改变的计算因素，并且完整比较能够区分三种有不同使用含义的结果：更多模拟特别帮助 U、同时帮助 P/U，或者只是更精确地计算了一个没有额外完整用途的目标。现有实现已经提供了相应的配对采样与可变粒子参数，不必同时发明新的物理未知量、校准来源或控制架构。
+
+这仍是有机会成本的研究选择，而不是必须补齐的诊断。B01 应降低对 U 特有增量的期待；B02 也可能稀疏、不利或没有足够辨别力。但题面已经把“增加计算”落实为一个完整策略比较，而不是不断追加同根采样寻找有利排序。按当前方法规范，这足以成为一次有理由的新探索，不需要先取得阳性 toy、精确 headroom 或完整机制证明。
+
+需要落实的修正主要在实现与解释上：显式分开校准剂量 k 和粒子数 M；验证嵌套采样与逐粒子终点；将九倍分支量外推补上批内填充不变的条件；不能只按 I>0 判断采用 U。 这些不要求改变五臂科学设计。
+
+二、B01 实际加强、削弱和留下了什么
+加强：有限合法信息处理确实改变行为，普通规划包仍有有限用途
+
+B01 中，k4 与 k32 分别有 135/256、65/256 个 context 出现 P/U 首次实际发送分歧。更重要的是，在不按后续分歧选择的共同 tick0 根上，动作分歧为 32/256 和 10/256。因此，不能把结果解释为“不确定性处理从未激活”，也不能说所有相关机会到来前不确定性都已消失。不同后期共同前缀的长度和存活范围不同，不能再把那些根的比例当作同一根总体上的受控频率比较。
+
+完整用途与这一行为事实要分开。AF、P4、U4 的总完成量分别为 2,958、2,994、2,994；P4/U4 各比 AF 多完成 36 个任务，但各有四个不利 context，最差少完成两个任务。这个普通规划资产应保留，不因 U−P 主增量未出现而一起抹去。
+
+削弱：小数据下保留不确定性会产生额外完成收益的预测
+
+固定读数如下，单位是每 context 完成任务数：
+
+B01 比较	均值	近似配对 95% 区间	正／负／平 context
+U4−P4	0	[−0.030685, +0.030685]	3／4／249
+U32−P32	+0.011719	[−0.008526, +0.031964]	3／1／252
+(U32−P32)−(U4−P4)	+0.011719	[−0.015903, +0.039340]	5／2／249
+
+这些数值来自固定结果条目，并与已读取的 summary 相应统计一致；它们不是等价、零效应或确认结论。
+
+初始校准的平均参数方差由约 0.022359 降到 0.004035，参数均值 MSE 也下降；共同 tick0 的动作分歧减少。但预期的小数据原生增量，以及该增量随更多数据衰减的模式，都没有出现。U4 相对 P4 还多了 33 个等待 tick，虽然总冲突少一个、完成量相同。这正是“估计、中间行为与完整用途不是同一件事”的一个有限观察，而不是某类模型积分无效的定理。
+
+留下：有限采样敏感性是合理解释之一，不是已定位的原因
+
+首次分歧中，121/135 和 58/65 涉及一个精确零估值；作者对已有配对粒子的读取没有发现估值差超过其两倍配对 MC SE。它们使有限采样与 tie fallback 敏感性成为具体候选解释，但这些根经过“发生分歧”的选择，不能由此推出哪一方选错、真实优势为零，或者 U 的有益目标被噪声掩盖。
+
+同样，KNOW_P_NEAR 只比 P4 多两个任务，会降低再投入的吸引力，却不是剩余增益上界。它仍使用有限粒子、近似物理过滤、固定接收器与 NEAR/AF continuation；该面板上它还比 U32 少两个任务。不能把知识参照的差值当作最优可达收益。
+
+三、B02 的比较对象成立，但交互量不是采用判据
+
+令 R
+A,M,i
+	​
+
+ 表示 context i 中，方法 A∈{P,U}、根预算 M∈{32,256} 的完整 H96 完成量。保留：
+
+g
+32,i
+	​
+
+=R
+U,32,i
+	​
+
+−R
+P,32,i
+	​
+
+,g
+256,i
+	​
+
+=R
+U,256,i
+	​
+
+−R
+P,256,i
+	​
+
+,
+u
+i
+	​
+
+=R
+U,256,i
+	​
+
+−R
+U,32,i
+	​
+
+,p
+i
+	​
+
+=R
+P,256,i
+	​
+
+−R
+P,32,i
+	​
+
+,
+I
+i
+	​
+
+=g
+256,i
+	​
+
+−g
+32,i
+	​
+
+=u
+i
+	​
+
+−p
+i
+	​
+
+.
+
+最后一个等式直接说明：正交互可能来自 U 改善，也可能来自 P 恶化。 因而，题面要求同时读取两个 U−P、两个自身预算响应及 AF，是必要而非装饰性的。不能将主终点保留为 I，却在结果后仅展示其中最有利的一项。
+
+hmasd-pro-question-finite-model…
+
+P 仍是本题合适的普通主对照：它获得相同的联合推断资源，但将全局参数后验均值用于前向动力学；U 保留联合参数—状态分布。提高 M 时，不应悄悄把 P 换成更弱的点过滤器，也不应把比较写成 U256 对 P32——后者同时改变方法与预算，不能代替预算交互。当前源码确实按状态边缘共同采样，再为 U 抽取条件参数，并让该参数贯穿两机器人、两根分支及模拟未来。
+
+“相同推断”仍指同一算法在相同合法历史上的输出相同，不是四个部署程序分叉后继续共享后验。四臂可以共用 D4，但之后必须各自消费实际收到的合法观察；不能为保持配对而跨臂复制消息或过滤状态。预算干预引起的后续历史变化，是完整策略响应的一部分。
+
+统计上，直接对 256 个 I
+i
+	​
+
+ 计算均值和样本标准差除以 
+256
+	​
+
+。不要将四臂区间端点相减，也不要假设四臂独立后相加方差。根 MC 随机性已进入每个 context 的完整结果，不再把根 SE 加到世界 SE 中。B01 不并入 B02 的主估计，也不拿旧低预算面板直接减新高预算面板。独立单位与近似区间的范围，按题面保持不变。
+
+hmasd-pro-question-finite-model…
+
+四、提高 M 的数学预测，比“更稳定的动作”窄
+
+以下是对已读采样结构的条件推导，不是 B02 实测结果。
+
+在同一固定合法历史 h、同一过滤分布与同一估值规则下，设单个配对粒子的 SEND−HOLD 完成差为 Z
+A,j
+	​
+
+(h)。在声明的独立同分布粒子模型下，
+
+Δ
+A,M
+	​
+
+(h)=
+M
+1
+	​
+
+j=1
+∑
+M
+	​
+
+Z
+A,j
+	​
+
+(h),Var(
+Δ
+A,M
+	​
+
+∣h)=
+M
+σ
+A
+2
+	​
+
+(h)
+	​
+
+.
+
+因此，在目标与历史不变时，M32 到 M256 将估计量方差缩为八分之一、标准差缩为 1/
+8
+	​
+
+。这里降低的是围绕该近似规划目标的采样误差，不是获得了更多真实物理知识。 k4 没变；被省略的发送似然、固定 continuation 与真实闭环之间的偏差，也没有因此消失。源码中的 NEAR 估值、联合过滤和 AF 后续策略正是这些条件的具体来源。
+
+这不保证每个根的样本 SE 都下降：M32 可能没看到稀有非零样本，M256 才看到，此时报告的 SE 反而可能从零升高。也不保证 P/U 动作分歧减少。当前动作映射在估值零点不连续：正值 SEND、负值 HOLD、精确零使用 AF。目标很小或恰为零时，估值更接近目标，不必使动作更稳定，更不必收敛到精确计算下的 AF tie 选择。当前 threshold_requests 明确使用这个映射。
+
+所以，我保留题面的中间预测，并作如下收紧：
+
+在预先指定的共同 tick0 根上，更多粒子提供对相同近似目标更高的分布意义精度；已保存样本用于描述估值、配对 SE、零值状态和动作变化，不宣称已经测到了相对未知精确目标的实际误差。
+
+配对 SE 还应使用正确的样本对象。比较 U 与 P 时，先形成同编号粒子的
+
+D
+j
+	​
+
+=Z
+U,j
+	​
+
+−Z
+P,j
+	​
+
+,
+
+再计算其样本 SE，而不是把 U、P 的 SE 当独立量合并。比较嵌套预算时也不能忽略重用。例如，同一固定根上若前 32 个 D
+j
+	​
+
+ 包含在 256 个中，则
+
+Var(
+D
+ˉ
+256
+	​
+
+−
+D
+ˉ
+32
+	​
+
+∣h)=σ
+D
+2
+	​
+
+(h)(
+32
+1
+	​
+
+−
+256
+1
+	​
+
+),
+
+而不是两个均值方差之和。这是嵌套样本的代数性质，不是新的检验门槛。
+
+tick0 是合适的有限中间读法，因为它不按后续分歧筛选；但它不能代表所有后期根。即使 tick0 精度和完整收益都改善，也不能把全程增益归给这个根。反过来，tick0 没有醒目变化，也不证明后期预算无用。无需因此购买后期同根 census。
+
+hmasd-pro-question-finite-model…
+
+五、需要落实的实现修正与正确性检查
+最重要的具体修正：彻底分开 k 与 M
+
+冻结 B01 的 run_study 使用：
+
+Python
+运行
+dose = 32 if arm.endswith("32") else 4
+
+来选择校准后验；collect_calibration 又明确要求 32 次校准，汇总器也绑定原六臂及两个剂量。不能只把臂名改成 P_k4_M32 等就复用这条路径，否则后缀 32 会被误读为校准剂量，或触发错误的完整性与计数逻辑。
+
+B02 应显式记录每臂的 mode、calibration_k=4 和 particles=32/256；只生成四次位置差，只构造一个 D4 后验供四臂初始化。同步调整五臂完整性、256 次拟合、1,024 次校准移动及按各臂 M 求和的成本计数。原 B01 CLI 还固定了旧种子，因此应保留它，使用新的 B02 入口绑定题面的新种子与阶段，而不是放松旧合同。
+
+嵌套必须核对样本及其收益，不只核对 seed
+
+当前规划器按 context、tick 和类别分别生成状态、参数、运动和任务随机数，数组采用粒子优先布局；这支持所需的前缀嵌套设计。可是 NumPy 的正式兼容保证把请求数组大小也视为参数，并不对任意不同大小调用承诺前缀相同。因此需要在选定的执行版本上，用独立小型正确性 fixture 检查 M32 与 M256 前 32 个状态、条件参数、过程/任务抽样及最终 sample_delta 的一致性。不能仅凭“seed 相同”宣布合同成立。 
+NumPy
+
+这也应覆盖批次拆分、顺序和可选根筛选：随机地址不要包含 arm、M、批内位置或此前已消耗的根数。不同 context 的流独立性仍按声明的伪随机模型理解，不把主种子相同自动等同于只有一个实验单位。 
+NumPy
+
+保留逐粒子 NEAR 终点，而不是改成批最大终点计分
+
+源码会为整批模拟到所需的最晚时刻，但最终用每个粒子的 near_mask 截断收益。更多粒子可能增加批内最大终点，却不应改变已有粒子的计分终点；若丢掉这个逐粒子 mask，就会把“增加 M”混成“部分粒子看得更远”。这是本题特别值得保留的检查。
+
+其余科学不变量不需要重新设计：联合似然质量与全局归一化不变，U 的 θ 持久共享，P 使用全局均值，真实与模拟接收器都保留名义 .75，AF continuation 与精确零回退不变。不要将“置信区间包含零”改成 AF 回退，也不要增加容差零区间；那会成为另一项决策规则干预。
+
+这些是确保执行了题面比较的工程检查，不是结果性 pilot、精确解证明或新的审批。
+
+六、完整价格成立，但九倍外推需要补充条件
+
+题面的主要整数核算正确：
+
+工作	B02 前瞻数量
+神经／策略 fits、optimizer updates	0
+共享闭式校准 fits	256
+单机器人校准移动	1,024
+完整评价 episodes	1,280
+实际团队 ticks	122,880
+规划 episodes	1,024
+模型分支转移上界	679,477,248
+
+上界是
+
+256×2×72×(32+256)×2×32.
+
+其中 72 是每 episode 可选根数的保守上界，两个“2”分别对应 P/U 与 HOLD/SEND。AF 的 256 episodes、24,576 ticks 已包含在总评价量中，不要再次加到 122,880 上。
+
+hmasd-pro-question-finite-model…
+
+按照当前源码仍为每个粒子生成完整 H96 数组的路径，进一步的保守整数计数为：根粒子最多 10,616,832 个，配对分支模型初始化最多 21,233,664 个；运动与任务随机值各最多生成 2,038,431,744 个。这些是由上述配置和源码形状推得的数量，不是新增执行结果，也不等于内存峰值。过滤、复制、数组构造、保存和读取仍在这些计数之外。
+
+需要修正的是 210,714,624 的条件描述，而不是否定这个量级参考。 九倍外推不仅需要旧的访问次数不变，还需要相近的每批模拟长度／填充结构。M256 可能抽到更晚的 NEAR 终点，让整批粒子执行更多转移；预算改变动作后，后续根数和过滤工作也会变。因此应将它写成“在旧访问与批内模拟长度结构均保持时的比例外推”，不能当作预期成本上界。真正的声明上界仍是 679,477,248。
+
+B01 P4/U4 的约 49.526 秒中，过滤约 29.081 秒、规划约 18.904 秒。不能把整个时间乘九：过滤不按粒子数直接倍增，而规划又不保证线性缩放。B01 全科学进程约 116.093 秒也不是 B02 的墙钟承诺。按题面在实际运行中测量完整时间、CPU、RSS、模型根与分支、抽样、输出大小和读取成本即可，不需要为取得报价额外做结果性 profile。
+
+若只删 AF，四格交互仍可计算，评价会降为 1,024 episodes／98,304 ticks，但主导的模型分支上界不变。鉴于 AF 在本题承担完整包用途参照，且旧实现的这部分测量成本很低，我不建议为省掉它牺牲解释；也不把历史耗时当作新保证。原始输出按现有保全方法保存，不新增记录体系。
+
+七、各结果应改变什么，而不是只留下一个交互符号
+
+以下是前瞻解释方向，不是新增多重显著性门槛。所有方向都要连同区间、完整差值与负尾部读取；几个点估计同号不自动构成已建立的联合结论。
+
+完整读数模式	可以更新的判断与使用含义
+g
+256
+	​
+
+>0、I>0，且 U 自身预算响应 u>0	支持“在已测两个预算间，U 的额外完整用途对模拟预算敏感”的有限解释；再看 U256 相对 AF 的绝对用途与代价。不能据此追认为 B01 的失败已由纯 MC 机制解释。
+P、U 都有正的自身预算响应，交互没有清楚方向	更多模拟可能有普通规划价值，但 U 特有的预算收益未建立。不能因交互接近零就宣称两种响应等价。
+I>0 主要来自 P 退步，U 不改善或也退步	不支持“更充分积分让 U 变得更有用”。应记录 P 的预算敏感性，而不是用相对胜出推动 U 升级。
+U 自身改善，但 U256 仍不超过 P256	支持 U 对计算有响应，不支持积分优于同预算 plug-in；普通对照的使用理由仍在。
+样本估值看起来更稳定，但完整收益没有相应改善，或更多计算使用途恶化	削弱这项有限精度修复理由。保留所有有利世界，但不靠局部精度或行为分歧为继续加 M 辩护。
+结果仍稀疏、区间宽或方向混合	保留“不确定”；不把它改称等价，也不自动接 M512、换 seed、改阈值或增加世界。
+
+这张表落实的是题面已经提出的“交互、自身改善、AF 与完整后果联合读取”，不是用另一个 endpoint 替换主估计对象。
+
+hmasd-pro-question-finite-model…
+
+无论哪一行，都应报告每个 context 的四个规划结果、AF、I
+i
+	​
+
+、自身预算差及冲突／等待／包量。总量优势不能删除不利 context，少冲突也不能代替更多完成。技术失败或缺失配对另行保留，不补零、不替换种子；不将较窄的可信事实冒充完整固定批次。
+
+采用问题还多一步：当前并没有把每秒计算换算为多少任务损失的部署效用函数。即使完成量提高，也应将成本并列报告，而不是仅凭“涨分”称为净部署收益。反过来，离线慢很多也不是已测的在线期限违规。
+
+八、最强停止理由成立，但此刻还不足以压过这一次具体比较
+
+支持现在结束的最强理由是：B01 已有较多实际行为分歧，绝大多数却没有转成完成量差；KNOW 也没有显示醒目的剩余用途。再花计算可能只是更稳定地采用微小、受模型偏差影响的优势，甚至失去低预算随机性的偶然有利作用。这个理由比“没有显著性所以关闭”强得多，必须保留。
+
+我仍选择 B02，是因为它没有同时扩展接收器、先验、环境或学习器，也没有把问题缩成一个与完整用途脱节的局部诊断。五臂结果能够直接改变下一项实际判断：是否保留低预算普通程序，是否值得增加普通规划预算，或者是否出现了 U 特有、但仍有范围限制的预算响应。所需主要采样路径已存在，工程任务具体，成本虽明显增加但已有配置上界；这比泛化地寻找新架构或重新打开旧 LONG 更直接。
+
+这不是承诺 B02 一定能决定采用，也不是规定它之后必须继续。若没有获得足以改变使用或解释的完整收益模式，我倾向结束这条通过增加粒子修复当前 NEAR 配方的投入，保留 P/AF 和已有正反证据。即使区间还宽，这也可以是机会成本判断，而不是声称无限预算无效或所有有限模型知识问题已经解决。当前规范允许这种区分：既不以负结果自动结束科学责任，也不要求无限救援。
+
+九、来源与未读缺口
+
+本答复的科学输入是 82d5f663d404350990a1db9bb4a5fe68cdc26d72 的本次问题、先前 Pro 答复及采纳、B01 完整结果条目和独立读法，以及该版本的治理／方法。共享认识使用指定的 9fc287e0487cb66fb91b5c6eb4a84e39bafeb3cf；其 finite-model 行仍将 B01 记为主增量预测未获支持、下一步比较或结束尚待决定，没有把这次咨询当作已接受运行。
+
+直接证据核对覆盖 69e6287ea9fd24fb9e0500b41146d5d6b39ea6e4 的 summary 相关统计、计数与资源字段、config、launch manifest 和 final native status。后者记录正常退出及一致的终止证据；这与 summary 的 COMPLETE 一致，但不是本次重新查询执行节点。代码使用冻结的 b40ea0965788f0d04b023870c34f47e86a00ceff，重点检查参数化 host、联合过滤、采样与终点、study 分派和原 CLI。
+
+未完成的读取要求必须明确保留： episodes.json 的文件接口未给出可用完整正文，其他读取路径也未成功；这不证明仓库文件为空或实验失败。common_prefix.json 只检查了局部正文，未完成全部 512 条逐条复核；原始 NPZ、全部文件哈希和配对粒子 SE 没有在本次重新归约。因此，全部不利 context 与选中根诊断的全量一致性，仍依赖已读 NOTES 中作者及独立 Critic 的归约记录，而不是我的新增原始审计。这个缺口限制独立验证强度，但已读的固定汇总、结果解释和实际源码足以支持上述前瞻设计建议。
+
+本次外部核对仅用 NumPy 官方文档说明随机流与跨数组大小兼容性的边界；它不验证 B01 的实测结果。本文的方差关系和工作量细化是明示条件下的代数与整数计算。没有运行训练、宿主／模型 rollout、B02 实验或结果性试跑，也没有接受新的实现或替代实际节点准入。
+
+最终建议：保留并执行这一项 B02 五臂探索；修正 k/M 分派风险，核对嵌套与逐粒子终点，补充九倍成本外推的条件。用完整预算交互、自身预算响应、AF 和实际成本决定它改变了什么，不用更小的 MC SE 替代用途，也不预购后续粒子扫描。
+
+MATERIAL_DISSENT: no
+
+## 2026-09-25 — B02 advice read and one complete budget interaction adopted
+
+Read the complete answer above. Same-key transport delivery was `NOT_DELIVERED`:
+`04f5ed1f3c8b82451a1a8f369390fc5e0657accb` is the original notebook blob, not an
+answer commit. The branch still matched question source
+`82d5f663d404350990a1db9bb4a5fe68cdc26d72` with the answer empty before local
+fallback insertion. The saved text is 20,630 bytes including its final newline,
+SHA256 `7ed1c21afaa8f967adaafed000c6390bbd368fc03f90bd0186d14fba82a9d677`;
+the observer's body hash without that newline is
+`9f949f6cb4e40ae28cb26e2ba270b4e43e9b08047cd52708d6b63db90dda6289`.
+Verified one verbatim copy in this notebook. No question was resent. No owned
+conversation tab remained at cleanup; all five unrelated targets were preserved.
+Consumed generation6 / wake `22645685-0597-4f11-9597-cfea88614b34` /
+event `670f4b930430b45cf9532ac0`, rearmed generation7 with no worker restart.
+
+**DM decision.** Adopt the proposed single five-arm B02 exploration, with all fixed
+seeds, arms, k4, H96, 256 contexts, primary interaction and joint readings as stated
+in the question. This is a prospective computational intervention after the weak B01
+native prediction, not confirmation, a B01 extension or a diagnosis that noise hid
+beneficial uncertainty. B01 remains frozen and adverse evidence carries forward.
+The useful alternatives are a U-specific budget response, generic planning response,
+or greater estimator precision without worthwhile complete use. The direct complete
+comparison is currently a smaller premise change than a new unknown physical quantity,
+receiver or learner; the AF reference preserves actual usefulness and its full cost.
+No M512, seed extension, threshold tuning or later-root census is selected.
+
+Current main `636db7ec5574081a7eade10446075eeb7f1faeaa` still lifts the project
+pause except FSD, freezes G33 and assigns this question to this DM. Its shared
+finite-model/estimate-versus-use reading retains the B01 limitation. The independently
+completed controller-composition result does not provide a new finite-model intervention
+or change the matched P comparator. No other direction or App task is taken over.
+
+**Advice response and checked claims.** Accept the k/M separation, nested sample and
+per-particle endpoint requirements. Frozen B01's arm-suffix dose parser is unsuitable;
+reuse its per-arm evaluator only through an explicit B02 arm specification. Independently
+checked the official [NumPy 1.26 compatibility policy](https://numpy.org/doc/1.26/reference/random/compatibility.html):
+array sizes are part of RNG calls, so same seed alone does not prove prefix nesting.
+Verify actual state/theta/process/job draws and credited particle outcomes on the
+configured NumPy build, using correctness fixtures distinct from result contexts.
+For fixed-root iid paired samples, the conditional nested-budget difference variance
+is sigma-squared times `(1/32 - 1/256)`; four-policy outcome intervals instead use
+the actual context interaction, without adding root SE or treating arms independently.
+The precision prediction is distributional, not a guarantee that every estimated SE
+or action disagreement decreases. Positive I from P deterioration alone is not improved
+U use. Keep own-budget effects and every policy-minus-AF outcome, including all losses.
+
+Correct the conditional cost extrapolation: 210,714,624 branch transitions additionally
+assumes unchanged batch simulation lengths/padding as well as root visits. It is not
+an upper bound. The fixed conservative model bound is 679,477,248 branch transitions,
+10,616,832 root particles, 21,233,664 branch-world initializations, and at most
+2,038,431,744 advance draws plus the same number of job draws. These exclude filtering,
+initialization overhead, raw output, review and reading. Full exposure remains 256
+closed-form fits, 1,024 calibration moves, 0 policy fits/updates, 1,280 H96 episodes
+and 122,880 team ticks. Wall time is measured, not the old entire pipeline times nine.
+Pro's incomplete episodes/common-prefix/raw access limits its independent audit;
+the previously recorded complete DM and Critic reductions remain the evidence for
+B01. Adviser agreement adds no empirical replicate. There is no material dissent.
+
+### B02 L0 — explicit budget arms over the frozen NEAR evaluator
+
+Deliver `experiments/candidates/finite_model_decision_value/b02/study.py`, an admitted
+`scripts/run_fmdv_b02.py`, and mirrored B02 tests. Frozen B01 files are read-only.
+Explicit arm records contain name, mode, `calibration_k=4`, and particles32/256;
+AF is separate. The callable small-fixture Config may vary context/horizon/particle
+counts, but the result CLI binds exactly the question's defaults and seeds925831/926073,
+phases50/51/52, batch16 and threads1. Only four position differences from distance33
+enter one shared q4 posterior per context. Each arm then consumes its own lawful
+history. No new model, receiver, likelihood, RNG address, threshold or endpoint rule.
+
+The study reuses B01 `evaluate_batch` with a per-arm Config and validates its mode
+mapping; it never calls B01 `run_study` or its 32-step calibration collector. Save raw
+calibration and complete trajectories, sample deltas, individual NEAR endpoints,
+initial-root comparisons, all per-context outcomes/contrasts, compact summary, config,
+status, counts, time/RSS and artifact hashes. Primary is paired I; include both U-P,
+both own-budget effects and four planner-minus-AF readings. Initial-root diagnostics
+compare actual stored particles, paired U-P SE and nested-budget variance estimates,
+zero/actions and nesting; they are descriptive and buy no extra rollouts. Preserve
+partial artifacts and actual completed work on failure, refusing any existing output.
+
+Bounded Implementer ownership is the B02 study and its `test_study.py` only, with no
+Git/index or notebook writes. DM owns the entry, `test_entry.py`, independent
+`test_nested_sampling.py`, notebook and publication. Both use this same authoring
+checkout without overlapping file/index writes. Checks cover k4 versus M32 dispatch,
+five-arm pairing and context arithmetic, admitted entry, failure cost retention,
+actual M32/M256 random and outcome prefixes, batch/order/optional-root invariance,
+and per-particle endpoint masks. Fixture seeds differ from B02's fresh panel.
+Independent high-risk review precedes DM acceptance; selected-node focused checks
+precede one committed/published native launch. Stop only the dependent action on a
+real semantics, ownership, resource or uncertain-operation conflict; no silent repair
+of an accepted result or duplicate attempt. Remaining result/interpretation ownership
+stays with this DM after implementation and collection.
