@@ -1262,3 +1262,26 @@ perform the intervening repair and does not infer a hardware fault. The notebook
 the publication copy, and the earlier retained C01 evidence checks remain recorded above.
 Keep using the already established independent publication checkout without moving the
 native author checkout or changing the accepted source and protocol.
+
+### C01 block 2 checkpoint — 2026-09-25T11:11Z
+
+Read the sole pending generation-18 checkpoint `a80041fd9b4cd5782575b02d`, wake
+`6c53a6a0-38de-4df9-a4ac-9fdfeeddf3e1`. At 11:10:05Z the same accepted operation retained
+matching live supervisor/runner identities, consistent records, no exit witness and zero
+observer errors. At 11:11:22Z U reported complete: 360,000 training/stored team steps,
+2,160,000 training UAV steps, 720 episodes, 45 updates and 101,250 actor/critic optimizer
+calls each. Its six evaluation panels account for 96,000 team steps and 192 episodes/resets;
+evaluation storage/optimizer calls remain zero, and all initial/final isolation flags are
+preserved. U arm wall was 2,425.643046 seconds. Complete paired collection and reading remain.
+
+M's live arm record was at rollout 16's update boundary: 128,000 training/stored team steps,
+768,000 UAV steps, 256 episodes, 15 completed updates and 33,750 actor/critic optimizer calls
+each. It had no evaluation transitions yet; arm wall was 788.632531 seconds. Both failure
+fields were null and stderr was empty. The batch-level M fit flag is still its earlier
+boundary snapshot; current progress above comes from the live arm record.
+
+Fresh main remained `da5344e044ed1ed381c58dfc7ade15774079231e`; confirming standing, lead,
+protocol and owner pause are unchanged, and the canonical-node pause is lifted. Consumed
+this checkpoint and rearmed the same `spatial-c01-b2-s263000103` handle to generation **19**,
+window 1,500 seconds. There is no worker restart, Pro resend, new launch, scientific verdict
+or main/index change. Two of five paired blocks have complete scientific readings.
