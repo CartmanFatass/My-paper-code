@@ -1995,3 +1995,341 @@ quota, rule revision or automatic confirmation is requested. Cite sources actual
 consequential claims and state unread decision-critical gaps without pretending verification.
 
 ### Answer
+
+Saved from chat on 2026-09-25 after `deliver` returned `NOT_DELIVERED` and the latest
+branch/file was verified to remain at the pinned empty Answer. The complete collected
+text follows verbatim; browser-extracted math/table layout and source-chip text are preserved.
+No GitHub write was attempted by Pro, as its opening statement explains.
+
+本轮未完成 GitHub 写回。 GitHub 读取正常，指定的 ### Answer 仍为空；但我未完成整文件替换载荷中“其他字节保持不变”的校验，因此没有发出写请求，也没有产生提交。这不是 GitHub 拒绝了写入。以下是完整答复。
+
+Answer
+
+MATERIAL_DISSENT: no。
+
+建议保留普通 U，结束当前 8/8 混合布局配方的追加训练，同时结束当前空间路线的新增实验投入。 不选择六对策略的旧／新 hotspot 面板交叉回放，也不选择 A2 单对的四中心观察；不以改变比例、延长训练或增加表示机制作为默认后继。
+
+决定性理由不是“确认没有通过，所以必须停止”，而是：新证据同时削弱了该配方的增量用途和一个明确的专门化取舍解释；已有分量没有选出值得修复的具体环节，而候选回放的主要新增信息仍是两个已曝光有限面板之间的表现归属。 这个信息并非无价值，但我认为目前不足以购买相应实施、核验、执行和完整阅读。
+
+对你当前倾向的最强反对意见是：不能把“能否立即选出下一项性能干预”当成解释研究的唯一价值标准。交叉回放确实能够产生独立的、有限范围的科学答案，而且复用既有对角证据可能把新增评价降到 192k 团队步。不能仅因它不增加训练重复、不识别优化器机制，就把它说成没有意义。下面的停止建议是在承认这个最强理由后，仍对其当前边际解释价值作出的判断，不是给所有诊断研究设新门槛。
+
+一、固定结果应保留为“均值不利、精度有限、联合正主张未建立”
+
+C01 原规则检验的是：在固定的新 hotspot 面板上，两个完整训练程序的训练区组平均差，其 J 与服务的边际双侧 95% t 区间下界是否都严格大于零。它不是要求五块全正，也不是按正负块数多数表决。原计划、Adoption 和最后结果没有提供改写这个规则的理由。
+
+五个主项必须一起保留；服务单位为用户／步，不利世界指 J 或服务至少一项下降：
+
+区组／模型种子	Hotspot M−U：J	Hotspot M−U：服务	Hotspot 不利世界
+0／263000101	−0.014721197	+0.0079375	22／32
+1／263000102	+0.019314215	+1.4823125	9／32
+2／263000103	−0.052880403	−1.7528125	31／32
+3／263000104	−0.015865239	−1.4954375	23／32
+4／263000105	−0.064009839	−4.1977500	27／32
+
+这些是同一固定面板上的五个训练区组差，不是 160 个训练重复；不利世界数也不是未来训练的失败概率。
+
+完整的主、次要均值和预写区间为：
+
+家族	平均 J 差及 t95 区间	平均服务差及 t95 区间
+Hotspot，主项	−0.025632493；[−0.067046834，+0.015781848]	−1.191150；[−3.827524015，+1.445224015]
+Uniform，次要	−0.027514607；[−0.068822823，+0.013793609]	−1.263750；[−3.084825853，+0.557325853]
+Cluster，次要	−0.029872854；[−0.085282714，+0.025537006]	−1.472138；[−5.062347136，+2.118072136]
+
+我按原始五块主项复算了均值、样本标准差和 df4 t 区间，得到与发布汇总一致的结果。两个主项下界均未过零，联合主张未建立；两个上界也都不是负数，因此不能把它升级为已确认的有害总体效应。服务区间仍包含约一人增益，也包含较大的损失。
+
+“尚未排除有益效应”与“值得继续购买同一比较”是不同判断。 当前不应把区间跨零写成等价或无效，也不应反过来把区间包含正值写成追加训练的依据。t 区间的解释仍依赖其工作模型；小样本不能自行验证近似正态性，置信区间也不是下一次训练获益的预测区间。这里沿用原分析，而不以新统计方法重新裁定 C01。外部方法核对仅用于确认这些统计解释，不提供任何新的 HMASD 实验事实。
+NIST
++1
+
+二、这批数据已经改变了什么，而不只是“仍有不确定性”
+
+加强的是普通 U 的有限学习用途。 在 C01 的 hotspot 上，跨五块的共同初始化、U45、M45 平均服务分别为 12.512563、25.774463、24.583313；U／M 自身服务增量为 +13.261900／+12.070750，J 自身增量为 +0.268719420／+0.243086928。十次训练在三个家族的自身 J、服务均值都改善。M 学习了，只是未建立超出 U 的平均增量；这不是没有运行真实学习，也不是 M 整体没有用途。
+
+削弱的是当前 8/8 替换程序作为普通 U 默认升级的理由。 Uniform 和 cluster 的两个端点都分别是一正四负，而且正的是同一个区组 1。因而，这批数据没有呈现“稳定获得 cluster 的专门化收益，代价是 uniform 损失”的简单模式。尤其是 cluster 本来已经进入 M 的训练，不能在它也平均不利时，仍把失败概括为只发生在未见 hotspot 的迁移问题。这个观察不证明所有专门化取舍不存在，但确实让当前这一解释失去支持。
+
+这里有一项值得收紧的解释，而不需要新增评价：
+
+A2 到 C01 的反转尚未分离训练实例与面板变化；但 C01 内部已经在完全相同的评价面板上出现训练配对之间的正负差异。
+
+因此，“尚未分离 A2→C01 的反转来源”不等于“目前没有任何证据区分固定面板下的策略配对差异”。区组 1 为正、其他四块的 J 为负，不需要换面板才能发生。再加上三家族的区组方向大体共同变化，一个只把问题定位为新 hotspot 面板特别不利的解释，已经不足以概括全部观察。 这仍然没有分离初始化、训练世界、采样和优化各自的贡献，更不能命名为已诊断的“优化器缺陷”。
+
+正面证据不能因停止而被删除。A2 的 +0.018568986 J／+0.940750 服务仍是一个有效的有限正例；C01 区组 1 则在新面板上给出另一正例。但区组 1 的正 hotspot 均值仍伴随九个不利世界，其中世界 265020000 少服务 7.196 人／步；区组 4 在世界 265020011 的配对损失达到 14.314 人／步。正例不是虚假结果，正均值也不是局部无损。不能选择性保留正区组作为今后的默认权重，或者选择性保留负区组作为总体有害证明。
+
+三、原生分量没有选出一个应当立即修复的环节
+
+以 U
+e
+	​
+
+ 表示“具资格但未服务人数”，避免与训练臂 U 混淆。C01 hotspot 的平均差为：
+
+ΔE=−1.3410125,ΔU
+e
+	​
+
+=−0.1498625,ΔS=ΔE−ΔU
+e
+	​
+
+=−1.191150.
+
+这与 A2 的“资格增加，但其中一部分没有转成服务”并不是同一个总体分量模式。A2 中资格增加 +2.264125，同时具资格未服务增加 +1.323375；C01 中资格平均减少，未服务资格的减少远不足以补偿。不能沿用 A2 的分量描述，直接宣布 C01 的核心问题仍是“把新增资格转成服务”。
+
+同样，按原生公式作描述性代数分解：
+
+ΔJ=0.7ΔC+0.3ΔQ−ΔP=−0.016676100−0.001553630−0.007402763=−0.025632493.
+
+高度代价增加是一个不利分量，但覆盖和质量的加权小计本身也为负，约 −0.018229730。把高度罚从账面上扣掉，不等于存在一个保持其他后果不变、能够回收这部分损失的物理或训练干预。S1 的这个项仍然是高度罚，不是实测电池能耗或安全风险。
+
+区组层面的反例进一步限制单一修复解释。区组 2 的 hotspot 资格增加约 +0.924563，服务却减少 −1.752813，具资格未服务增加 +2.677375；区组 3 的高度罚已经降低、质量已经提高，服务和 J 仍然下降。于是，“更多资格”“更低高度”都不是一条已经得到一致支持、只差实现的修复链。它们可以参与未来假说，但本批没有选中其中一条。
+
+这不是要求探索前必须证明机制或最优性。当前方法允许合理启发式和小规模探索；我的判断只是：现有证据尚未让某个具体数据或训练改动，比其他可想象的改动更值得购买。 不能用候选名称代替这一缺失的理由。
+
+四、六对旧／新面板交叉回放的最强价值，以及为什么本次仍不选择
+
+交叉回放能回答一个真实但有限的问题。令
+
+d
+p,w
+	​
+
+=
+J(M
+p
+	​
+
+,w)−J(U
+p
+	​
+
+,w)
+	​
+
+
+表示固定策略配对 p 在面板 w 上的差，服务同理。补齐旧、新面板后，可以直接读取同一配对的
+
+δ
+p
+	​
+
+=d
+p,new
+	​
+
+−d
+p,old
+	​
+
+.
+
+现在 A2 的旧面板读数与 C01 的新面板均值之间，J 相差约 −0.044201479，服务相差 −2.131900。这是跨训练实例、跨面板的观察差，不是训练因素或面板因素的因果份额。 补齐缺失格，确实能够使这张有限表的解释更完整。
+
+最值得考虑的结果分支如下。这里没有预测这些尚未执行的结果会出现。
+
+可能观察	真正增加的认识	对当前投入判断的影响
+A2、区组 1 在两面板均有利，其他配对大体仍不利	削弱“仅更换面板就解释历史反转”的说法；支持这些固定策略配对的差异跨两面板保留	使解释更具体，但同面板配对差异已被 C01 观察到；没有指出新的训练干预
+同一批配对普遍在旧面板更有利，在新面板更不利，甚至反号	表明两个有限面板对 M−U 差具有实质影响，不能把 A2→C01 全归给训练实例	这是最强的继续理由；但旧／新只是同一生成器的两组已曝光抽样，不是已定义的、可在部署前识别的两类空间条件
+不同配对的面板响应不同，或者 J、服务响应不同	得到更细的有限交互与原生取舍	不自动选择混合比例、训练时域、中心分布或表示改动，也不改变 C01 原判读
+
+这些分支来自题面拟议设计及上述差值定义，不是新的经验结果。符号是否保留也不能独自代表敏感性：符号不变时，幅度仍可能明显改变；所有配对同方向、近似同量变化，与只有少数配对大幅变化，也不应合并为同一种解释。
+
+第二种分支是我认为最可能实质改变历史解释、因而最值得认真对待的反对停止理由。 我不把它说成“即使出现也没有信息”。但它仍主要告诉我们：这六对已曝光策略对两组有限抽样的平均差不同。它没有把差异绑定到一个独立定义的需求属性，也不能把其中较有利的一组重新命名为目标总体。若据此再挑世界、拟合分组或寻找几何解释，那是额外的结果后探索，不能混进本次 crossover 的既定价值里。
+
+因此，我仍不选择它。现有结果已经足以形成有内容的科学答案：普通 U 在这些条件下学到显著自身用途；8/8 程序的初始增量没有建立新面板上的正条件均值；配对差异在同一面板、多个家族上已存在。 为进一步确定历史变化在两个有限面板上的分布位置，再投入一次资产加载、执行和完整原生阅读，我认为当前不相称。
+
+这是一项可争论的价值判断，不是“所有结果分支都毫无意义”的断言，也不是“解释研究必须保证性能改善”的规则。它不依赖 B20 已经作出的回放选择；本次理由来自 C01 自身的五块、三家族和原生分量。
+
+五、成本比较应承认复用可能性，但不能把它写成现成的免费执行
+
+题面提供的成本算术成立：
+
+候选	新 fits／优化更新	新评价团队步	回合数	当前状态
+六对策略、两个面板全部重新执行	0／0	384,000	768	未选择
+复用全部已验证对角证据，只执行缺失格	0／0	192,000	384	依赖明确的语义与来源一致性比较；未选择
+A2 单对、四个新中心	0／0	128,000	256	未选择
+本答复建议：结束当前新增实验投入	0／0	0	0	方向建议，不是已完成的 DM 决定
+
+完整 crossover 的 UAV 行动行为 2.304M；仅缺失格为 1.152M。前两行包含的是同一张最终交叉表，但新增执行量不同。既有对角数据的历史取得成本仍保留，不能把复用写成这些数据从未花费过资源。
+
+192k 是可以讨论的较小执行范围，不是本轮已经验证可直接执行的方案。 真正复用需确认旧证据与新评价在策略／normalizer 身份、执行动作法则、循环状态重置、H500 终止、物理初态以及 J／服务计算上的对应关系。相同标签、同一 seed 名称，或“代码主要复用”都不能代替这些对应。若需要额外对角回放来验证加载或执行路径，它们必须计入新增成本，而不是隐含在 192k 中。本轮没有加载这些二进制资产，也没有建立回放保证。
+
+既有 C01 的实际科学过程墙钟合计为 6.301630 小时，准入至退出合计 6.569561 小时，首次准入到最终退出跨度 7.436870 小时；三个数是不同口径。十个 fits、4.32M 团队步、680 个原生文件及 5,440,071,755 字节是已经发生的成本，工程、审查、咨询、读取和峰值临时存储并没有被完整计量。不能把包含训练的大批次墙钟按评价步数比例缩放，冒充 standalone crossover 的实测费用。
+
+停止也不意味着收尾、保存和更新解释没有工作成本。我的建议是不再购买新的结果性实验，不是声称研究收尾免费。已经投入六个多小时既不是必须继续的理由，也不是必须停止的理由；下一项观察要凭新增价值，而不是凭沉没成本或空闲名额成立。
+
+六、四中心、比例和训练时域变化目前都没有成为更强的替代项
+
+四中心方案检验的是两份 A2 终点对指定相对几何变化的敏感性。它不代表五个 C01 训练区组，也不能替代新训练下的程序差。此前建议还指出：四个新中心没有原来的 (0.5,0.5)，所以把新中心负结果与旧 A2 正结果直接比较，会同时改变中心和世界批次；只有同一新 base world 内的中心比较才隔离了该中心变化。现在没有新的证据使这一项成为当前空间投资的首选。
+
+改变混合比例、延长训练、调整 curriculum 或更换表示，不是被禁止，也不需要先取得理论证明。但本次没有观察到一条足够明确的中间预测，例如某项可识别的学习失配，在一个具体改动后应减少，并伴随原生服务／J 的改善。只说“混合任务可能需要更多训练”“减少 cluster 或许保留 uniform”“新表示可能更稳”，还不足以在这些选择之间作出有依据的选择。尤其是延长训练会改变预算问题，改比例会改变程序，不能把它们称为原 C01 的简单延续。
+
+普通 U 的用途因此应保留为工作参照，但不能被提升为“充分调优”“空间问题已饱和”或“任何混合训练都无用”的认证。当前共享背景中的 LOCAL1 经验使这个参照有具体意义；B20、C2 和 S7 的其他结果则只提供各自范围内的经验，不能作为 C01 的复制样本或机制证据。
+
+七、把三个“结束”分开，并现在作出明确选择
+
+结束配方。 不再为相同的 8/8 替换程序购买第六区组、另一轮确认、早期端点救援或无新预测的调参。C01 原判读保持不变，A2 和区组 1 的正例也保持不变。这与此前已交付建议的固定终局读取和不自动延长分支一致。
+
+结束当前空间投入。 本次不把停止训练包装成仍持续购买 crossover、四中心或其他常驻诊断。我建议在现有 NOTES／RESEARCH 中将“当前无值得选定的新增空间实验、当前混合路线投入结束”写清楚，同时保留问题、全部正反结果、来源和可恢复资产。它是当前投资状态，不是空间任务分布研究的科学否定。
+
+DM 责任不等于必须维持一个正在运行的空间实验。 当前计划中的 C1、A3、D1 是独立问题，但它们不被 C01 的结果自动选中，也不能用它们的 reserve 标签或某个未具体化的未来发现来推迟本次停止决定。本答复不重排项目组合、不接管已有负责人，也不替 DM 宣布已经承接了新任务。宪章允许在没有值得选择的工作时释放运行资源；不欠阳性，不欠无限后继，更不欠把三个名额占满。
+
+若 DM 采纳，当前科学结论可以压缩为：
+
+在固定 S1／N6／c10、LOCAL1、360k 训练预算与 final45 条件下，普通 uniform 训练在所评布局上具有明显自身学习用途。8/8 uniform／cluster 替换程序保留了探索正例，但五个新配对在新固定 hotspot 面板上未建立联合正条件均值，平均方向不利且区间仍宽；uniform 和已见 cluster 的增量均值也不利。现有证据没有识别一个值得针对性修复的环节，旧／新面板交叉回放的额外解释价值不足以支持当前投入，因此结束这条混合路线的新增实验，保留 U、正例、反例和尚未解决的归因边界。
+
+这不是把未知原因判成无效，也不是因为一个批次完成就结束责任；它是对已经获得的答案与尚可购买的信息作出的明确取舍。
+
+八、读取范围与剩余缺口
+
+本答复依据的是新题固定提交 2afd0915dffe00c3b66dfecc5c59d959c394d3f5 的完整问题、指定宪章章节和科学方法；共享背景使用指定的 026e3e6e7904f288a7bdab05471e7e37195028f5，包括普通学习／A2–C01 段、当前方向行、问题地图及负责人范围，没有用移动分支的新结果替换科学输入。
+
+固定合同与 Adoption 使用 b6c6836a7221a31429b6b4665d077b9097dd8e10；C01 完成条目、追加结果、聚合 summary.json 的分析单位、区间、家族／区组值、原生分量及支持／不利世界字段，以及完整 reading.json 使用 b35996ba188d31cc01b3a422a47c24b1fde6bce3。A2 使用指定 3453c67f1c9eb748300a4dca9746bf88e52119b9 的完成记录和原始汇总；既有建议重新读取了 ca77013402426ce5254ab260d688b651e3664178 的有关完整章节，不以旧聊天结论代替这些来源。
+
+没有读取 Git 外的 native NPZ、训练流和 checkpoint 二进制，也没有亲自重做 720k 原生评价转移的核验。 原生完整性与独立保全属于所读 DM 验收记录；本轮独立计算只覆盖上述五块主统计和明确展示的代数。也没有重新审查 C01／A2 的完整执行源码或验证二者可逐字节回放等价，因此我没有把 192k 复用方案当作已经准备好的执行承诺。题面将这种源码检查列为存在相关可行性争议时的条件读取；本次停止建议不依赖一个未经验证的回放保证。
+
+没有缺失的指定关键文本阻止上述方向建议。真正未获得的是尚未执行的交叉结果、它的 standalone 墙钟／存储、以及训练变化与面板变化的更细归因；这些不能用别的方向、文献类比或记忆补全。
+
+最终建议：MATERIAL_DISSENT: no。保留 U 和全部有界正反证据，结束当前 8/8 配方及当前空间路线的新增实验投入；不附带交叉回放、移中心救援或自动后继。
+
+## 2026-09-25 — decline panel replay and end current spatial mixing investment
+
+**DM decision.** I adopt the complete advice's recommendation to retain ordinary U and end
+new result-bearing investment in the current spatial mixing route. C01's fixed confirmation
+is already complete; I also decline the proposed old/new-panel crossover, the A2-only
+four-center observation and a new mixture/horizon/representation search. The direction's
+current investment state becomes **archived**, with no selected successor, pending fit,
+evaluation or Pro answer. This ends the present route after assessing its concrete remaining
+options, not the scientific possibility of useful task-distribution learning. It does not
+convert the adverse point means into confirmed harm, equivalence or a universal negative.
+
+### Complete answer, delivery reconciliation and source limits
+
+The new question was published at `2afd0915dffe00c3b66dfecc5c59d959c394d3f5`, key
+`hmasd:2ccc38bf565731d6bcc1e2da74b734b26413ec88dffe2f75d7ae580c86669f4f`.
+An initial composer-load timeout happened before any Send. A read-only check of the same
+conversation found its composer ready, no login/challenge/page error and only the two old
+turns. The original key, exact text and attachment were then used; one Send was accepted
+with observed `6 Pro`, `send_effect=sent` and attachment present. Nothing was resent after
+acceptance, and the prior A2 consultation remained closed.
+
+The deterministic generation-30 observer collected the complete 7,954-character visible
+answer. Its trimmed-text SHA256 is
+`b243c62e8c42ee4c15fee0545855d962810b798e932af04fdd0c3af68db1383a`;
+the 19,131-byte UTF-8 fallback file, including its terminal newline, has SHA256
+`472c6cf2182a11b38ed517d22adde466d130117c5e94508f18b688948092cd51`.
+I read the entire answer. `deliver` returned `NOT_DELIVERED`, with no answer-writing commit;
+the two hashes classified by the observer as receipts were the question and shared-context
+inputs, not delivery commits. Pro explicitly says it made no write request because it did
+not finish checking preservation of the rest of the file. This was not a GitHub rejection.
+
+Immediately before saving, the remote branch still resolved to the pinned question commit,
+the unique Answer was empty, and both owned authoring/publication copies exactly matched
+that file. I therefore saved the complete collected text verbatim above, marked **saved
+from chat**, preserving the question and all previous bytes. No answer was overwritten or
+duplicated. The READY event `61b24aa7cde1415ab8970094` from wake
+`d06bbd86-d180-4a5d-899a-ce9cf6194aa2` was consumed and the same controller reconciled to
+generation **31**; every registered experiment and Pro observation is terminal. The browser
+workflow closed only its owned tab. No worker, accepted request or other task was restarted.
+
+The adviser names the pinned question, constitution/methods, main background, original
+CLAIM/Adoption, full C01 aggregate and reading, A2 evidence and prior advice as its inputs.
+It explicitly did not read Git-external binaries or certify replay equivalence. Those limits
+are compatible with this investment judgment; no feasibility guarantee for a 192k replay is
+being adopted. The extracted answer preserves its math/table display and the unresolved
+external citation chip text (`NIST`, `+1`). I do not claim to have verified those external
+citations or use them as new evidence: the statistical reading remains the frozen local rule
+and the already independently checked five-block arithmetic. Advice is not another experiment.
+
+### What I adopt, refine and leave unresolved
+
+I adopt **MATERIAL_DISSENT: no** as the adviser's position, not as a scientific acceptance
+test. All five pairs, both primary intervals, secondary families, own learning and local
+losses stay as published. I checked the adviser's additional concrete examples against the
+retained aggregate: block 1 hotspot world 265020000 has service M-U -7.196 despite the
+positive block mean; block 4 world 265020011 is -14.314. Block 2 increases mean eligibility
+by +.9245625 but increases eligible-unserved by +2.677375, leaving service -1.7528125.
+Block 3 reduces height penalty by .003683035 and improves quality by .004626167, yet J and
+service remain adverse. No single "more eligibility" or "lower height" repair follows from
+these components. This check used saved JSON, with zero new policy/environment calls.
+
+One useful refinement already follows from C01, without buying another panel: at each
+fixed family panel, the five paired J differences have signs [-,+,-,-,-]. Pair 1 is positive
+across all three families; the other four are negative across all three. Thus the evidence
+already exhibits policy-pair differences while the evaluation panel is held fixed. This
+does **not** attribute A2-to-C01's changed mean to training rather than panel, identify which
+training randomness matters, establish cross-family independence or prove an optimizer defect.
+It does prevent treating the situation as if no within-panel variation were observed.
+
+The average component identities also constrain an inherited explanation. C01 hotspot has
+eligibility -1.3410125 and eligible-unserved -.1498625, yielding service -1.191150; A2's
+positive-eligibility/partly-unconverted story is not this batch's mean pattern. The weighted
+coverage/quality subtotal is -.018229729983 before the additional height penalty
+.007402762799. This is descriptive algebra, not an intervention holding all other physical
+consequences fixed. It neither selects a height controller nor implies measured energy loss.
+
+I adopt the strongest objection to stopping: finite-panel explanation can be valuable in
+its own right and need not first promise a performance repair. Full crossover costs 384k
+evaluation team steps; reuse of valid diagonals could reduce new execution to 192k, plus
+any needed replay checks. A systematic old/new-panel shift would materially refine the
+historical account, even if it added no training n. Sign retention would not imply magnitude
+invariance. I therefore reject the stronger dismissal that crossover has no information or
+that a diagnostic must select a new performance intervention to be legitimate.
+
+I nevertheless decline it here. The six-policy-pair/two-exposed-panel table would localize
+finite historical differences, but neither bank is an independently defined deployment
+subpopulation. C01 already provides the conditional-program result, own learning and
+within-panel pair variation in three families. Completing that finite table currently adds
+less to this answer than its loading/semantic comparison, execution, storage and full reading
+would cost. Retrospectively mining a geometry subgroup would be further exploration, not
+included free in crossover's stated value. This is a scoped, contestable marginal-value
+judgment. It is not a theorem against replay, a claim that every possible branch is useless,
+or an inference from B20's separate decision.
+
+Four-center A2-only evaluation asks the location sensitivity of a selected pair and would
+not answer the five-pair program question. Generic ratio, duration or architecture changes
+alter the program again without a currently preferred concrete conjecture among them.
+Their lack of selection is not a prohibition on heuristic exploration or a requirement to
+identify a causal component before learning. No positive result or exhaustive rescue search
+is owed, and the existing positive A2/block-1 examples remain scientifically useful.
+
+### Current structural background and question continuity
+
+Before publishing this decision I refreshed main and read owner update
+`2e2becaae8d376908d74364dca7e4713bdcb4a2a`: RESEARCH's **Mathematics, information and game
+structure** background, scientific-tools' **Mathematics, conjectures and experiments**, and
+the direct-DM body's matching paragraph. This naturally sharpens the present judgment;
+it does not alter the accepted question or require another Send. The prior answer's caveat
+against making diagnostics or a proved repair chain prerequisites remains applicable.
+
+For this comparison, actor information, legal policy class, partner count and physical
+capacity were fixed; the intervention changes the finite training-data distribution under
+a fixed budget. Writing the resulting policies as A(D_U,r_b) and A(D_M,r_b), C01 measures
+their native J/service difference on the same finite evaluation panel. The common r_b label
+does not assert identical consumed random draws along different trajectories. The observed
+result cannot identify an information ceiling or policy-class approximation gap. There is
+no need to solve those unknown ideal values before considering an experiment. Crossover
+would vary the evaluation panel at fixed learned policies, a distinct finite object; its
+value/cost judgment above concerns that object, not proof of a generalization theorem.
+
+I apply the update's positive permission as well as its limits: a concrete single-agent,
+simple-game or empirical conjecture could justify a small complete MARL comparison with
+the unproved coupling stated. Strict proof, positive toys, exact headroom, one-step
+counterfactuals and exact suffixes are not entry gates here. None is being required as a
+condition for selecting a new data-distribution experiment. At this boundary the specific
+remaining proposals have been considered and not chosen on their own marginal value; I
+have not inferred that all possible spatial conjectures are exhausted or infeasible.
+
+The refreshed question map still leaves C1 finite-model decision value, A3 actual capability
+composition and D1 partner composition as materially different unowned possibilities. They
+change uncertainty in decisions, physical composition or partner coupling respectively,
+rather than merely repeat this layout-mixture comparison. C01 neither selects them nor
+supplies their mechanism, comparator or price. I do not register an unspecified pivot to
+keep a runtime slot occupied, nor take over S7 or another lead's accepted work. Ending this
+route is a present scientific investment decision; the records and revisable question stay
+recoverable, and no Root/owner approval gate or indefinite external wait is added.
+
+Additional scientific execution for this consultation/closure is **0 fits, 0 policy calls,
+0 training/evaluation steps**. Reading, transport and publication are real non-fit work whose
+total wall was not separately measured. All original A2/C01 costs and retained assets remain.
+The directly affected shared interpretation, own standing, plan and routing are updated in
+the normal independent main publication; no App report/ACK/forwarding is sent.
