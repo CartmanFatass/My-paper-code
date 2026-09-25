@@ -1646,3 +1646,229 @@ drain and reconcile this same handle, preserving failure or missing evidence. Co
 and verify all required raw/native outputs, full paired outcomes, initial-root diagnostics
 and actual cost before the scientific reading. No restart, replacement seed, changed
 budget, extra root census or score-based continuation is authorized by an observation.
+
+## 2026-09-25 — B02 complete: precision changed, native budget response remains small and uncertain
+
+The original admitted operation completed with exit0, a valid native exit witness,
+absent runner/supervisor identities and consistent records. Read the full structured
+[summary](../../../../runs/finite_model_decision_value/b02_budget_interaction_s925831/summary.json),
+[episodes](../../../../runs/finite_model_decision_value/b02_budget_interaction_s925831/episodes.json),
+[paired context readings](../../../../runs/finite_model_decision_value/b02_budget_interaction_s925831/per_context.json)
+and [all initial-root diagnostics](../../../../runs/finite_model_decision_value/b02_budget_interaction_s925831/initial_roots.json).
+The [final native status](../../../../runs/finite_model_decision_value/b02_budget_interaction_s925831/native-status.final.json)
+reconciles the accepted handle; its process exit alone was not scientific acceptance.
+No seed, arm, horizon, threshold, fallback or output was replaced or extended.
+
+**Integrity and reading.** Copied all173 remote files,13,006,919 bytes, and matched
+all byte counts/SHA256 values against an independently read remote inventory. Also
+verified all166 runner-manifest artifacts. Independently reconstructed all1,280 raw
+H96 endpoints, cumulative completion rewards and packet counts; matched all256 initial
+histories/joint weights, both exact M32 prefixes of M256 sample deltas/endpoints, all
+45 contrast-metric reductions and context entries, and every actual model root/branch/
+initialization/draw count from the raw eligibility masks and per-batch simulation lengths.
+Recomputed q4 using observed position differences and log likelihood, never hidden
+success flags. Every arm has contexts0..255,14 jobs started and24 packets per context.
+The scientific config exactly matches the five-arm contract and input
+`5b5d73100ae8554b8005758055b181d03fb6603e`; stdout/stderr are empty.
+
+The readback's first strict MC-SE equality check used float64 reduction on stored
+float64 samples and exposed only the inherited float32 reduction rounding. Recomputing
+in the planner's actual float32 dtype matches every stored SE exactly; maximum float64
+versus stored difference is1.11634e-8. No action, endpoint or result was repaired.
+
+### Fixed primary reading and all required complete comparisons
+
+Here P/U32/256 abbreviate the explicit k4 arms, not calibration doses. Every interval
+is the predeclared paired normal approximation over256 new contexts; particles, roots,
+agents and nested policies add no independent n. The sparse sample and zero/tied rows
+are not equivalence or confirmation. B01 is not pooled into these estimates.
+
+| Completed-jobs comparison | Total difference | Mean per context | Approximate95% interval | Positive / negative / tied |
+| --- | ---: | ---: | --- | --- |
+| I = (U256−P256)−(U32−P32) | +4 | +0.01562500 | [-0.01686479, +0.04811479] | 7 / 2 / 247 |
+| U32−P32 | -1 | -0.00390625 | [-0.01718459, +0.00937209] | 1 / 2 / 253 |
+| U256−P256 | +3 | +0.01171875 | [-0.01590290, +0.03934040] | 5 / 2 / 249 |
+| U256−U32 | +4 | +0.01562500 | [-0.01686479, +0.04811479] | 10 / 5 / 241 |
+| P256−P32 | +0 | +0.00000000 | [-0.03254635, +0.03254635] | 8 / 7 / 241 |
+| P32−AF | +32 | +0.12500000 | [+0.06862807, +0.18137193] | 25 / 3 / 228 |
+| U32−AF | +31 | +0.12109375 | [+0.06511672, +0.17707078] | 24 / 3 / 229 |
+| P256−AF | +32 | +0.12500000 | [+0.06363002, +0.18636998] | 29 / 6 / 221 |
+| U256−AF | +35 | +0.13671875 | [+0.07719123, +0.19624627] | 30 / 5 / 221 |
+
+Total completed jobs are AF2824, P32=2856, U32=2855, P256=2856 and U256=2859.
+All three conjectured native point-estimate signs (I, U256−P256 and U's own budget
+response) are positive. This is weak, directionally compatible evidence, not a
+falsification of their signs and not an established useful repair. Each interval
+includes0; the high-budget U−P is nonzero in only7 contexts. A context-level statement
+that ordinary planning helps must retain AF losses and its much greater compute.
+
+The positive interaction has heterogeneous origins. Contexts22/31/95/176 contribute
++5 interaction jobs through P worsening while U is unchanged;70/82/245 contribute+3
+through U improving. Context120 has U−1 and P+1 (I−2);137 has U−2 and P0 (I−2).
+Across the whole panel P's budget total is0 and U's is+4, so the aggregate is not solely
+P degradation. Across the nine interaction-bearing contexts, however, U's budget total
+is0 and P's is−4; the remaining contexts share a net+4 budget change in each policy.
+Neither decomposition identifies a pure noise or uncertainty-integration mechanism.
+
+All nonzero primary/U−P completed-job differences, as context:signed jobs:
+
+I = (U256−P256)−(U32−P32): 22:+2, 31:+1, 70:+1, 82:+1, 95:+1, 120:-2, 137:-2, 176:+1, 245:+1.
+
+U32−P32: 31:-1, 120:+1, 176:-1.
+
+U256−P256: 22:+2, 70:+1, 82:+1, 95:+1, 120:-1, 137:-2, 245:+1.
+
+Own-budget losses remain P:22(−2),31/38/95/149/176/188(−1);
+U:137(−2),38/120/149/188(−1). Against AF, adverse contexts are
+P32:70/120/220(−1); U32:31/70/220(−1); P256:22(−2),31/38/70/149/188(−1);
+U256:31/38/120/149/188(−1). All favorable and adverse components remain in the
+complete linked per-context table; no world is discarded for an inconvenient reading.
+
+Greater budget reduces total waits by84 for P and91 for U: means−.328125
+[−.477357,−.178893] and−.355469[−.524001,−.186936] per context. The wait interaction
+is−.027344[−.144392,+.089705], and each high-budget policy has one additional conflict.
+Both are real native components, but the generic waiting reduction does not replace the
+completed-jobs endpoint or establish a U-selective effect. All arms use6,144 packets.
+Parameter-stratum counts .35/.55/.75/.95 are79/58/56/63; their I totals are+2/+4/−2/0.
+These are random realized strata, not balanced blocks or additional training replicates.
+
+### Intermediate prediction and its limits
+
+All256 predeclared common tick0 roots have identical initial legal records and q4,
+and verified nested samples/endpoints. Their initial theta variance averages.021813787,
+parameter-mean MSE .022781398. At this root q4(theta) and hidden peer state factorize.
+It does not test later parameter-state dependence or identify the missing send likelihood.
+
+| Tick0 description | M32 | M256 |
+| --- | ---: | ---: |
+| P mean reported particle SE | .0568470 | .0245918 |
+| U mean reported particle SE | .0591957 | .0247015 |
+| Paired U−P mean reported particle SE | .0504536 | .0225052 |
+| P RMS reported particle SE | .0792975 | .0287417 |
+| U RMS reported particle SE | .0799466 | .0286400 |
+| Paired U−P RMS reported particle SE | .0694745 | .0246278 |
+| P exact-zero means / all-zero particle sets |114 /109|16 /10|
+| U exact-zero means / all-zero particle sets |104 /99|16 /8|
+| P sends / U sends |216 /213|173 /177|
+| U/P action disagreements |25|32|
+
+P changes53 initial actions and U46;47/38 of those involve an exact-zero estimate.
+P/U/paired SE decrease at147/157/152 roots, increase at99/91/100 and tie at10/8/4.
+Every increase starts from a zero low-budget SE. The precision intervention therefore
+changed the finite estimator in the intended limited sense, with rare outcomes absent
+from M32 appearing in M256; it did not promise fewer disagreements or every SE falling.
+These are sample-based precision descriptions, not observed error against an exact
+model target. No extra diagnostic rollout was purchased. Smaller SE and fewer zeros
+coexist with a small uncertain differential completion effect and adverse worlds.
+The data weaken the rationale for a readily useful MC-budget repair; they do not
+identify approximate filtering, NEAR/AF continuation or closed-loop response as its cause.
+
+### Complete cost, retention and independent reading
+
+Started/completed256 closed-form calibration fits,1,024 single-robot calibration moves,
+0 policy/neural fits or parameter/optimizer updates;1,280 complete episodes and122,880
+team ticks. Actual model work is36,428 roots,5,307,456 root particles,10,614,912 branch
+world initializations and215,389,184 branch transitions (bound679,477,248). Synthetic
+advance and job draws are each1,019,031,552. The old210,714,624 conditional extrapolation
+was not a bound; changed root visits and batch padding were explicitly permitted.
+
+| Arm | Sum of arm-batch wall seconds | Filtering seconds | Planning seconds |
+| --- | ---: | ---: | ---: |
+| P_k4_M32 | 22.509729 | 13.183812 | 8.647278 |
+| U_k4_M32 | 22.473792 | 13.134860 | 8.658137 |
+| P_k4_M256 | 51.564095 | 13.443885 | 37.120021 |
+| U_k4_M256 | 51.596460 | 13.404638 | 37.188595 |
+| AF | 0.374633 | 0.000000 | 0.000000 |
+
+Full scientific process wall through artifact hashing149.267414s, CPU158.123655s,
+peak single-process RSS92,508,160 bytes, raw artifacts11,060,483 bytes. Manifest-to-exit
+elapsed157.116284s additionally includes native startup/finalization; the separate
+pre-admission refusal cost17s and no scientific work. Measured file collection/verification
+was4.189881s. Preparation, fixture checks, code/independent review, Pro consultation and
+scientific reading are additional support work, not zero or included in the scientific
+wall. No full human/agent effort or general speedup claim is made. Each high-budget arm
+cost about2.29x its low-budget arm wall, rather than8x/9x the whole pipeline. AF wall
+is .374633s; these are offline batch costs, not an invented deployment deadline.
+
+Durable complete outputs remain on wsl_4070 at
+`/home/wu/hmasd-worktrees/fmdv-b02-sept25/runs/finite_model_decision_value/b02_budget_interaction_s925831/`,
+with the fully verified local collection in the linked run directory. Compact config,
+summary, per-context/episode/initial-root results and native records are versioned;
+raw NPZ and logs remain at both recorded locations with runner artifact hashes.
+Summary SHA256 `f6ce8b8b3fec1c5fb30808ad135a1bf0e3918756d67a93af73294d27d6085444`.
+Only source snapshot `3a57f2b7358f44d7b8265c462443e3a6` was reclaimed after eligible
+preview and apply with the permitted read-only sudo process scan; the collector verified
+terminal identities, durable Git reachability and preserved outputs. Claims, authoring
+checkout and native/raw evidence remain. Generation8 / wake
+`68dc3241-c10f-4d33-957b-8f884807a1ba` / event `4457aaffb45d2d4e3d481340` was
+consumed and rearmed as generation9, with no remaining active observation job.
+
+The independent ResearchCritic rederived all45 contrast-metric readings from the full
+JSON evidence, inspected all initial-root summaries and the heterogeneous interaction,
+and agreed with the weak compatible reading above. It favors ending additional MC
+rescue investment absent a concrete use decision that recurrence would change.
+It did not repeat the exhaustive NPZ/hash audit or query the node; its review adds no
+new empirical replicate. MATERIAL_DISSENT: no. DM independently accepts this complete
+fixed result and retains the positive, adverse and unresolved observations.
+
+## 2026-09-25 — End current NEAR budget-repair investment; retain the finite result
+
+**Decision.** End the current finite-knowledge NEAR recipe's additional investment and
+archive this direction for current investment. Retain ordinary P32/AF as useful assets,
+the full U/M256 observations and the shared waiting response; do not elevate a small
+uncertain differential to a new default or suppress its favorable point estimates.
+This closes the tested recipe and the presently selected work, not the general question
+of when finite model knowledge helps MARL/UAV decisions. No confirmation, further
+simulation budget, extra contexts or selected successor is pending, and there is no
+external dependency being used to defer this choice.
+
+Reuse the complete Pro advice already read above, including the delivered answer at
+`a0ca3dc907551c6f476ff48df0cc8236487476a2`, sections4–7 and its explicit branches for
+joint positive points, sparse/mixed native readings, precision without decisive complete
+utility, and ending investment without an equivalence claim. Those cases cover this
+fixed comparison and the present keep/end decision; the physical/comparator premises
+have not changed. Its advice did not require another per-batch consultation. This is
+DM's information-value choice, not an adviser approval or a conclusion inferred from
+process completion. The Critic's agreement does not replace that prior Pro consultation.
+
+The intermediate intervention worked: more simulations resolve many sample zeros and
+reduce aggregate reported uncertainty. The native response is weakly compatible with
+U-specific value, yet rare, heterogeneous and too uncertain to locate a robust method
+advantage. I therefore lower enthusiasm for further MC rescue, rather than calling the
+prediction falsified or the methods equivalent. The ordinary P-versus-AF completed-job
+asset recurs on this new panel (+32 versus B01 +36); different context populations and
+B01 dose arms remain separate evidence, not a pooled confirmatory test. Native waiting
+improves in both budget arms and remains a secondary useful observation.
+
+Considered what could be done next beyond merely ending this batch:
+
+* M512/M1024 or a changed tie threshold has no distinct currently supported complete-use
+  prediction beyond making the same approximate target more precise or changing policy.
+  The former link was exercised; the latter would add a new intervention without a
+  located native bottleneck. Neither is selected.
+* An unchanged fresh comparison at the existing budgets is feasible, and measured149s
+  means machine cost alone is not prohibitive. It could sharpen this simulator's small
+  effect or test recurrence. I do not buy it now: no concrete method-use choice currently
+  turns on that small difference, and it would not distinguish the surviving target,
+  inference and closed-loop explanations. This is opportunity-cost judgment, not a
+  post-hoc equivalence margin or a claim that replication has no information.
+* Incorporating policy-conditioned send/silence likelihood or changing NEAR/continuation
+  would test a different model/decision bias. Neither has been diagnosed by B02. Exact
+  recursive teammate-policy likelihood, longer branches or a new receiver are not
+  obligatory repairs; no narrow, fully specified comparison here is presently more
+  useful than retaining the bounded result. A direct learner/UAV test remains possible,
+  but choosing a new unknown law, host and training comparison would introduce premises
+  that these two panels do not currently select. No generic architecture proposal or
+  positive-toy prerequisite is substituted for that missing research reason.
+* Current shared main retains controller-composition's separately owned direct partner
+  training question; this DM does not take it. Closed S7/spatial recipes and other
+  reserve questions retain their own adverse constraints. B02 supplies no new evidence
+  that would make reopening them, or renaming this MC repair, worthwhile now. Reading
+  them as alternatives does not create a new track or require a Root message.
+
+Across B01+B02, retained exposure is768 closed-form calibrations,9,216 calibration moves,
+0 policy fits,2,816 full episodes/270,336 team ticks and273,822,016 model branch
+transitions; combined scientific wall is about265.36s, with support work additional.
+These finite costs and all results carry forward if a materially new information/decision
+comparison is chosen later. The current state is closed investment with no active
+producer or queue, not an indefinite admission/re-entry wait and not a universal negative.
