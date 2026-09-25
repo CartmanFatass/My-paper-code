@@ -1578,3 +1578,26 @@ window 1,500 seconds, with zero errors and no pending events. All earlier comple
 remain consumed. A fresh publication-side fetch retained that same main and direction tip.
 Four of five pairs have complete scientific readings; the fifth is running, with unchanged
 protocol, budget and five-block decision rule. No worker restart or Pro resend occurred.
+
+### C01 block 4 checkpoint — 2026-09-25T13:41Z
+
+Read the sole pending generation-26 checkpoint `c02b2ad97a8b90fbf8df8b52`, wake
+`30a73974-e093-4b7c-8cf8-0e75dfb1c4ef`. At 13:40:14Z the same accepted operation retained
+matching live supervisor/runner identities, consistent records, no exit witness and zero
+observer errors. At 13:41:49Z U's live arm record reported 248,000 training/stored team
+steps, 1,488,000 UAV steps, 496 episodes, 30 completed updates and 67,500 actor/critic
+optimizer calls each. Its three initialization panels account for 48,000 evaluation team
+steps and 96 episodes/resets; evaluation storage/optimizer calls are zero, and all recorded
+initial-stage isolation flags are preserved. U arm wall was 1,449.213197 seconds and its
+failure field was null. M was unstarted; both native logs were empty. These progress counts
+come from the live U record, not the batch's earlier boundary snapshot. The pair remains
+running and is not yet scientifically accepted.
+
+Fresh main advanced to `c41a10c21ed6d1722c84fc813c3e2c4718684129`. Read the complete relevant
+diff: C2's engineering is accepted and its owner-specific control-row restriction remains
+pending. This direction's confirming standing, lead, fixed plan, constitution and compute
+controls are unchanged. Both published and canonical-node owner pauses remain lifted.
+Consumed this checkpoint and rearmed the same `spatial-c01-b4-s263000105` handle to
+generation **27**, window 1,500 seconds. Four of five pairs have complete scientific
+readings; no new launch, worker restart, Pro resend, scientific verdict or main/index
+update follows this checkpoint.
