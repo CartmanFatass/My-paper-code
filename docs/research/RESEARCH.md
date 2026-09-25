@@ -676,6 +676,35 @@ horizon读取，评价、实现、检查、收取和支持成本另计；0fit不
 聚合O/P/E已全部完成、项目级解释结束，原 lead 的最终 notebook 补录仍待承接；其两个当前配方不追加。
 **Claude FSD 仍须 owner 手动恢复，G33继续冻结。**
 
+### Shared runtime diagnosis
+
+Root 于 2026-09-24 完成一次跨方向只读核查，新增 0 fits、0 环境步，未重启原批次或改运行环境。
+B18 与 B08 使用同一 `wsl_4070` boot 和 Python 路径；当前 Python3.10.21、NumPy1.26.3、
+Torch2.7.0+cu118 的所查模块文件时间早于两批，但这不追溯证明全部运行库字节相同。
+
+**新证据：B08 原进程的 WSL core 已找到并完成身份绑定。** 该转储的 ELF 主 LWP544626、
+SIGSEGV 和 manifest/exit witness 一致；驻留 executable ELF header/GNU notes 与磁盘解释器
+一致，build-ID `afb5e1790bd84db7ed2c50d21b86fd33a96784bf`。恢复的外层 Python 栈为
+`json.encoder` 字典/列表编码 → `json.dumps` → B01 `_write_progress:485` → B08 `progress:460`
+→ `notify:113` → `train_arm:262`，即 collection 通知的 summary 序列化。
+冻结源码 `8725d2f3e924a9d3c0dc8d87c7ff470850854081` 的调用点与之相符。
+故障指令是 `_PyEval_EvalFrameDefault+1097` 的间接读取，地址寄存器值为1；
+最内层 frame 的指令偏移超出 code 长度，不能恢复其精确源码行。原生栈展开不完整；
+`libcuda` build-ID mismatch 仍未解决，不能以已匹配 CPython 身份代替全部扩展身份。
+
+B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与引用递减。
+**两条即时路径不同，共同根因仍未确定。** 不能据此诊断 JSON、NumPy、CUDA 或硬件缺陷；
+定位也不是修复。B08 的 A 端点仍缺失，B18 的 M 端点仍缺失，原不完整比较及成本不变。
+下一技术投入需说明哪项检查能区分原因或验证具体修复；不无限深挖转储，也不靠重跑代替诊断。
+
+原 B08 core 保留在节点 Windows Temp 的 `wsl-crashes/` 下，basename
+`wsl-crash-1790266623-544626-_home_wu_.local_share_uv_python_cpython-3.10.21-linux-x86_64-gnu_bin_python3.10-11.dmp`，
+3,172,958,208 bytes，SHA256 `647314aa77e25d6468f277b36dca818d22354b0c13f3a958fdeba0deedd7cfc6`。
+未上传 core。Root 工作区的 ignored `temp/private_core/` 保存受限读取命令、符号身份输出与
+`b08_python_frames_ascii.txt`；`b08_review_summary.txt` SHA256 为
+`264e2aa2105ef36a842e33bef68e51f9a2cc9e5542e760f952a3b30a28cc2271`。
+这是当前科学投入的真实共享依赖，不改变各方向 notebook 的原始故障记录或实验判读。
+
 ## Portfolio review 2026-09-24 next-investment-after-b18-b09-b08
 
 Conversation: reuse the existing Portfolio Jev conversation; its address remains private local transport state.
@@ -822,7 +851,7 @@ Pending full advice and the independent technical reading; no new scientific bat
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [项目判断与已完成咨询](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)；原负载操作已完整结束，旧源码/轨迹留在方向表所列原工作区。 |
+| Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | [当前三线投入复盘](#portfolio-review-2026-09-24-next-investment-after-b18-b09-b08)已发送一次 Pro，待完整答复与决定；[共享技术核查](#shared-runtime-diagnosis)已找回并定位 B08 core。无新增科学批次、跨任务消息或方向接管。[前次项目决定](archive/2026-09-23/RESEARCH-scientific-management-adopted.md#decision)保留为历史。 |
 | DM1：智能体数量泛化 DM | `01a0c6ef-cdd4-7113-b2d9-20487e35171b` / `local` | `/home/fires/.codex/worktrees/7fef/hmasd-wsl` · `codex/agent-count-generalization` | B18源`0f4671475`的原生进程信号11退出；F完整、M无端点。47产物双副本哈希核验，私有崩溃转储亦已保全；从原始转储恢复第9轮N8奖励clip调用链和部分成本。终态事件已消费（generation175），无运行中科学操作、待收Pro或选定重跑。[故障、完整保留证据与判读](candidates/agent_count_generalization/NOTES.md#2026-09-24--b18-technical-failure-paired-endpoint-missing-fixed-n6-own-learning-retained)。 |
 | DM2：实际互补技能学习 DM | `01a0cdb8-10c9-7743-a05a-6dcfc42621c5` / `local` | `/home/fires/.codex/worktrees/5916/hmasd-wsl` · `codex/complementary-skill-learning` | B09完整结果和固定规则判读已发布：[完整B09、全部配对与判读](https://github.com/CartmanFatass/My-paper-code/blob/6f7e1eaccdea00cafe8813e621d4bb5b14a363f4/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b09-complete-persistent-u-contexts-lose-service-and-do-not-give-a-shared-deployment-improvement)。本任务完成双副本留存及自身结果发布，无运行中科学批次或待收Pro；本次诊断已结束，更广续作尚未选择。 |
 | DM3：控制用途预测小模块 DM | `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e` / `local` | `/home/fires/.codex/worktrees/d319/hmasd-wsl` · `codex/uav-service-predictive-control` | [B08技术失败已收取并记录](candidates/uav_service_auxiliary/NOTES.md#2026-09-24--b08-technical-failure-during-a-collection-fixed-pair-incomplete)；输入8725d2f3e的原始进程信号11退出，终态事件已消费（generation114），无运行中观察或待收Pro。原始轨迹保留在manifest路径；无选定重跑，也未选择新的研究路线。完整既有Pro答复、合同及工程证据仍在NOTES。 |
