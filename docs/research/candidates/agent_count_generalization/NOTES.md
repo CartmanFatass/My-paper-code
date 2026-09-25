@@ -19007,3 +19007,151 @@ unresolved. It does not prove a NumPy defect, a roster defect, a hardware fault 
 that a future training run would succeed. No code repair or new scientific batch is
 justified by this check alone. The meaningful boundary is the published incomplete
 B18 reading and retained fixed-N6 learning; the missing M endpoint remains missing.
+
+## 2026-09-24 — New DM continuation and B19 prospective matched ordinary training
+
+### Continuity, applicable advice and scientific choice
+
+Owner authorized replacement sessions for the stopped DMs after updating configuration.
+This session directly adopts DM1 responsibility: task `01a0d622-53d3-7f43-9740-6eaef625899a`,
+checkout `/home/fires/.codex/worktrees/a138/hmasd-wsl`, branch
+`codex/agent-count-generalization-b19`. The old task and checkout remain historical;
+no accepted operation, observer state or pending Pro is inherited or restarted. The new
+checkout started at published main `40eb5c0e79bf0ff023e9458dc7fc301edbf9afab`, including the
+owner's helper settings and `f7d2b40d7` observer repair. The complete existing notebook
+already matches published direction tip `eba71809c400d425dcc0db2339242b8080d5c8fc`.
+Direction source and tests are selectively restored from that pinned tip, not merged
+as all historical direction commits into main. This entry appends to every prior byte.
+
+Read the current shared background topics 1–3 and Current research plan / Shared runtime
+diagnosis at `40eb5c0e7`, the full `ordinary-roster-training-after-b17` advice above, and
+the complete [next-investment Pro Answer and Root Decision](../../archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md#answer).
+That completed consultation directly covers the present F/M comparison and its narrower
+evaluation purchase; reuse it under constitution section 5 without another preparation
+consultation. The direction keeps responsibility for implementation, reading and publication.
+
+Adopt the existing decision: **one new matched F/M exploration, B19**, after the concrete
+evidence-saving repair and an actual-path engineering check. B15 remains inconclusive under
+its original joint rule. B16/B17 make ordinary LOCAL1 the stronger working reference at N8,
+while N6 mixtures and H6's N4 J uses remain; LOCAL1 is not a clean six-category ablation.
+B18 F's positive own learning at unseen N5/N7 strengthens the simpler fixed-count alternative,
+and raises the incremental value required of mixing. Missing M is not adverse M−F evidence.
+The old 2 started fits, partial counts, 47 artifacts and private core remain B18 evidence.
+No old F endpoint enters this new pair and no historical seed, margin or panel is amended.
+
+The question is finite ordinary training-program usefulness, not a diagnosed count-support
+mechanism or another H6−SET confirmation. The treatment includes data composition, native
+reward/N, optimizer weighting, roster order and last-N8 recency. These cannot be subtracted
+from the program effect. There is no prediction that U or height cost must fall: B18's
+useful F learning already opposes making either proxy direction necessary.
+
+### Fixed B19 inputs, prediction and cost
+
+Object `s1_ordinary_roster_training_b19`, tag
+`s1_ordinary_roster_training_b19_b1_s1015101`, fresh learner seed **1015101**.
+One new invocation trains **F then M** sequentially from actually identical fresh canonical
+N6 LOCAL1 model and normalizer tensors; compare the complete initialization manifests before
+M training. Modules, optimizers, Adam state, scalar normalization and continuing global/private
+sampler RNG persist within each arm. No old checkpoint, tuning grid, extra seed or endpoint.
+
+- F: 45 complete N6 rollouts. M: `[4,6,8]` repeated 15 times. Each rollout is 16 native lanes
+  × H500, followed by the same real low-level PPO update before boundary adaptation; 360,000
+  team and 2,160,000 UAV training steps, 720 episodes and 45 updates per arm. Both F's N6→N6
+  and M's roster changes use the established complete-episode adapter.
+- Retain S1 uniform/free-space, 50 users, capacity10/UAV; LOCAL1 local104 recurrent actor,
+  trainable one-category FiLM, padded133 central critic/MAX_UAVS8, task-only MAPPO, k10,
+  native scalar J/N, raw Gaussian actions/logprobs stored with clipped execution, low entropy
+  .05, hidden256, 8 heads, 2 layers, 15 PPO epochs, sequence batch32, coordinator batch1280,
+  disabled observation/state normalization and the existing scalar value normalization.
+- New training scene addresses are `3145100 + 100 * rollout + lane`, rollout1..45, lane0..15.
+  Construction and explicit native reset preserve learner RNG. Same-N6 reset arrays must
+  match F/M; different physical counts are not called identical worlds. Save every required
+  reset state/observation/UAV/user array as soon as its reset boundary completes, before
+  collection, and preserve the last complete file across a later abrupt process death.
+- Evaluate only **N5,N7,N6**, in that order, 32 worlds each, H500. World ranges respectively
+  **2345500..2345531**, **2345700..2345731**, **2345600..2345631**, runtime seeds base+51.
+  Preserve the existing evaluator's seeding/construction/copy/reset sequence, native actor
+  information, frozen weights/normalizers, zero storage/optimizer calls and RNG isolation.
+  Perform one real common stage0 evaluation and F45/M45 endpoint evaluations: **9 panels**.
+  Reuse stage0 for M only after actual model/normalizer and initial runtime/RNG checks establish
+  identity; explicitly refer to the common artifact, never count it twice or invent an M run.
+  Match actual initial physical arrays across stage0/F45/M45 within each N.
+- Final45 is the sole learned endpoint; M ends after N8. No N4/N8 deployment panels, checkpoint
+  averaging, extension, world replacement or outcome-selected endpoint.
+
+Planned new cost: **2 fits at360k each**, 720k team/4.32M UAV training steps plus144k team/864k
+UAV evaluation steps (288 episodes), total **864k team/5.184M UAV steps**. Each arm is expected
+to produce101,250 actor and101,250 critic optimizer calls with no production sequence or
+minibatch tails; actual yields/calls remain measured. Equal totals do not equalize composition
+or cost: M spends120k team steps each at N4/6/8 and only a third of F's N6 exposure. Engineering,
+reading, collection and storage cost is separate. New-host wall time is unknown; the old F
+2211.14s is context only, not a speed promise or stopping rule. No wall-based scientific endpoint.
+
+For n=5,7 separately report `DnJ=mean(J_M45-J_F45)` and `DnS=mean(S_M45-S_F45)` on paired worlds.
+The joint directional prediction requires **all four positive**. Report both arms' own initial
+to endpoint J/S learning and absolute service; an unlearned F is retained, not screened out.
+N6 J/S tradeoff has equal visibility. Retain per-world C/Q/P/E/S/U, scalar/native identities,
+all adverse J-or-S worlds, minima and quality/height conflicts; no pooled-N score, borrowed B15
+threshold or claim of training-population precision. The common baseline makes endpoint and
+learning-increment differences algebraically dependent, not independent evidence.
+
+N5/N7 are exact counts unseen in both training programs; only M brackets them and tests
+interpolation within[4,8]. No interval-extrapolation, churn, pure-count/skill mechanism,
+N4/N8 deployment or general MARL/UAV claim. A missing primary sign leaves the joint prediction
+unmet. Even four positive signs do not automatically justify replacing F if gains are small
+or N6 losses material. If no useful increment appears, retaining simpler F and ending this
+mixing recipe is covered by the applicable advice; not a universal claim against curricula.
+Technical failure preserves all partial facts/cost and grants no automatic retry or old/new splice.
+
+### Technical execution choice and remaining uncertainty
+
+Choose the already configured **local_linux** node for this new attempt, existing interpreter
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python`, CPU float32, Torch4 threads as before.
+Read-only inspection here finds host Jacob, Python3.10.20, NumPy1.26.3, Torch2.7.0+cpu;
+the two prior failures were on wsl_4070's other host/boot and Python3.10.21/Torch2.7.0+cu118.
+This selects an independent existing CPU runtime/host after two unexplained failures on the
+shared remote installation, avoids importing its CUDA-enabled Torch build, and permits
+direct actual-path checking. It requires no upgrade or change to either installed environment.
+It is an explicit engineering alternative, **not a diagnosed fix or universal numerical
+equivalence claim**; both new arms use this one host, never migrate old accepted processes.
+Fresh physical/effective memory admission must pass on this actual node immediately at launch.
+The canonical user checkout remains read-only; only this authoring checkout and its own
+publication/snapshot state may be written.
+
+Root's bounded core comparison located different immediate paths (B18 clip exception unwind,
+B08 JSON serialization), without a common cause. The scalar clip already succeeded and is not
+repeated. Do not require indefinite core analysis or a promise of no future crash. The separately
+verified saving defect is repaired below. A passing actual-path smoke narrows implementation
+risk but cannot prove that long-run native memory corruption is absent.
+
+### L0 — B19 runner and completion-boundary evidence persistence
+
+Deliver one candidate-owned B19 runner and guarded CLI, reusing unchanged B18/B16 helpers where
+clear or copying the frozen B18 runner into the new object where its fixed globals/contracts
+make direct reuse inappropriate. Own only
+`experiments/candidates/agent_count_generalization/ordinary_roster_training_b19/`,
+`scripts/run_agent_count_ordinary_roster_training_b19.py` and matching tests. Historical B18 and
+other candidate/core files retain their pinned bytes. No new framework or resume interface.
+
+Implement the fixed inputs, the true common initial evaluation and honest actual9-panel cost.
+Write required reset-scene arrays at each completed reset boundary via a same-filesystem
+temporary file plus atomic replace (flush/fsync as appropriate); later SIGSEGV must leave
+previous complete scenes readable without relying on except/finally. Persist complete training
+rows and partial progress with unambiguous completion stage. Initial/final checkpoints remain
+evaluation assets, not optimizer-resume claims. Store large arrays, tensor/runtime manifests
+and verbose training diagnostics under raw/; keep config/status, counts, compact per-world
+native readings, source identities and recoverable raw locators/digests in readable summaries.
+Do not delete promised measurements merely to shrink summary JSON. Refuse existing outputs,
+validate source/seed before scientific effects, then require native admission before importing
+or constructing environments/learners. A failed arm stops the pair with explicit unstarted arms.
+
+Preserve the actual collect/store/terminal/GAE/recurrent PPO and complete boundary semantics,
+private sampler RNG, no throwaway reset, actor/critic information, numerical objective and
+normalizer/optimizer lifetimes. Check actual N4→6→8→4 and N6→6 updates, initializer/common
+stage0 identity and rejection of mismatch, N5/N7/N6 native evaluation and nine-panel accounting,
+RNG/evaluation isolation, preservation after abrupt subprocess termination, source identity,
+failure/count frontiers and admission-before-import. Engineering fixtures use distinct test
+seeds and small non-result specs in pytest-owned temp/, never production result exposure.
+Use the selected local scientific interpreter with PATH from compute config. Independent
+Reviewer checks high-risk state/RNG/checkpoint/output/admission behavior; DM reads and accepts.
+No helper owns science, notebook/index, Git staging or result execution, and none spawns children.
