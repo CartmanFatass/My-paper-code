@@ -1,0 +1,11 @@
+{
+  "claim_key": "26554e747b4ca70a190c69b3dfdb73fcc4f60210dfa405a61967f85115a6573c",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/26554e747b4ca70a190c69b3dfdb73fcc4f60210dfa405a61967f85115a6573c.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/26554e747b4ca70a190c69b3dfdb73fcc4f60210dfa405a61967f85115a6573c.json",
+  "pid": 677102,
+  "runner_pid": 677103,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-25T16:31:05.185640Z"
+}

@@ -637,3 +637,130 @@ cost bound. On return, reconcile the same operation and read complete output, co
 adverse evidence and raw-artifact hashes before any scientific acceptance. A terminal
 failure is preserved and requires a separate diagnosis/decision; observation never
 restarts the worker or creates a replacement run.
+
+## 2026-09-25 — B01 complete: decision changes without the predicted small-data native gain
+
+**Technical acceptance.** The same native operation exited0 with a valid exit witness;
+runner and supervisor are absent and records consistent in the
+[final status](../../../../runs/finite_model_decision_value/b01_finite_knowledge_s925731/native-status.final.json).
+All256 contexts completed all six H96 arms:1,536 episodes/147,456 team ticks,512/512
+closed-form calibration fits and8,192 calibration moves;0 policy fits, optimizer or
+policy-parameter updates. All96 arm batches are COMPLETE with no filter contradiction.
+No replacement context, extra result run, changed threshold or endpoint was used.
+
+Read the complete structured [summary](../../../../runs/finite_model_decision_value/b01_finite_knowledge_s925731/summary.json),
+[per-context results](../../../../runs/finite_model_decision_value/b01_finite_knowledge_s925731/episodes.json)
+and [common-prefix records](../../../../runs/finite_model_decision_value/b01_finite_knowledge_s925731/common_prefix.json).
+Independent existing-array readback checked all197 runner-listed hashes, every endpoint
+against its raw trajectory, all contrast means/SE/sign counts and all512 common-prefix
+rows against actual histories and identical joint root beliefs. Calibration posteriors
+were independently reconstructed from observed position differences using log likelihoods.
+All checks agree. Stored root MC SE uses float32 arithmetic: exact float32 recomputation
+agrees; the maximum float64 rounding difference is1.8021e-8, not a scientific discrepancy.
+No environment or model rollout was added by this readback (successful readback body0.547s).
+
+**Complete outcomes.** Counts are completed jobs; every arm begins14 jobs/context and
+sends24 packets/context. Context, not tick/robot/particle, is the paired unit (n256).
+The four realized parameter strata each contain64 contexts; this is the realized draw,
+not a post-score allocation or extra independent panel.
+
+| Arm | Total jobs | Mean jobs | Total difference from AF | Arm-batch wall seconds |
+| --- | ---: | ---: | ---: | ---: |
+| AF | 2958 | 11.554688 | 0 | 0.450734 |
+| P4 | 2994 | 11.695313 | +36 | 24.579910 |
+| U4 | 2994 | 11.695313 | +36 | 24.945998 |
+| P32 | 2995 | 11.699219 | +37 | 24.813000 |
+| U32 | 2998 | 11.710938 | +40 | 24.703007 |
+| KNOW_P_NEAR | 2996 | 11.703125 | +38 | 15.180398 |
+
+Primary U4−P4 mean is **0**, approximate paired normal95% interval
+**[−.030685,+.030685]**:3 positive,4 negative and249 tied contexts; range[−2,+2].
+U32−P32 is **+.01171875** jobs/context (total+3), interval[−.008526,+.031964],
+3 positive/1 negative/252 tied, range[−1,+2]. The paired dose contrast
+`(U32−P32)−(U4−P4)` is+.01171875, interval[−.015903,+.039340],5 positive/2 negative/249 tied.
+These exploratory intervals are not confirmation, equivalence or proof of zero benefit;
+the sparse observed differences leave tail and programme-population uncertainty.
+
+All nonzero primary differences are retained here (remaining contexts tie):
+
+| Dose | Context: U−P jobs |
+| --- | --- |
+| k4 | 87:+2;109:−1;181:+2;209:−1;235:+1;240:−2;252:−1 |
+| k32 | 181:+2;187:+1;226:+1;252:−1 |
+
+At theta .35/.55/.75/.95, U4−P4 totals are−1/+1/0/0; U32−P32 totals0/+3/0/0.
+These are descriptive predeclared strata, not a selected subpopulation claim. U4−P4
+has one fewer conflict overall but **33 more wait ticks** (mean+.12890625,
+approximate interval[+.019139,+.238674]); k32 has one fewer conflict and one more wait
+tick. Local component improvements cannot substitute for the complete primary outcome.
+The k32−k4 native means are+.00390625 for P and+.015625 for U, with intervals spanning0.
+
+The planning package's conditional positive comparison with AF remains: P4 and U4 each
+have31 positive/4 negative/221 tied contexts versus AF, total+36; P32 has33/6/217,total+37;
+U32 has33/3/220,total+40; KNOW has32/4/220,total+38. Every planning arm loses up to2 jobs
+against AF on a context. Losses occur at P4:60,181,197,231; U4:60,197,209,231;
+P32:181,187,197,209,226,231; U32:197,209,231; KNOW:160,197,209,231. Complete values and
+all wait/conflict/packet components stay in the linked output. KNOW exceeds P4 by only2
+jobs and is below U32 by2 on this panel; it is not a monotone or global upper bound.
+
+**Intermediate prediction and limits.** Calibration mean parameter variance contracts
+from.022359153 at k4 to.004034720 at k32 (all256 contexts contract here); posterior-mean
+parameter MSE also falls from.023788144 to.004241332. Yet the primary native gain and
+predicted decrease of the U increment with more data are not observed.
+The recorded same-history roots number5,521/7,381 for k4/k32, with508/284 different
+estimated values. First actual-send divergence occurs in135/256 and65/256 contexts;
+first-divergence tick medians17/24 and joint parameter-variance medians.010237922/.004840154.
+Thus this is not a nonactivation result or a case of uncertainty disappearing before
+every differing decision. Different prefix survival/exposure means those root rates
+are not a controlled frequency comparison on one common root population.
+
+At121/135 and58/65 first action differences, one estimate is exactly zero and invokes
+the fixed AF tie fallback. A descriptive read of existing paired particle differences
+finds no first value gap greater than twice its paired MC SE. Those selected-root,
+finite-sample diagnostics do not prove pure sampling noise or zero target advantage;
+they make finite-estimation/tie sensitivity a live alternative to useful model integration.
+128/135 and61/65 diverging contexts still tie in full completed jobs. No causal job
+credit is assigned to the first root, and histories after divergence are not compared
+as if they remained identical. Parameter dispersion, state association, approximate
+filtering and closed-loop consequences remain combined, not separately identified.
+
+**Cost and retention.** Actual44,778 model roots initialized2,865,792 paired-branch
+worlds and consumed58,432,832 model branch transitions (below188,743,680 bound), with
+275,116,032 synthetic advance draws and the same number of job draws. P/U filtering
+has the shared88-entry joint support; KNOW has22. Calibration collection/fitting took
+.007918/.000727s; P4/U4/P32/U32 filtering sums14.3984/14.6824/14.6453/14.5784s,
+planning9.4115/9.4923/9.3972/9.3631s. The scientific process reports116.092555s through
+artifact hashing,122.611940 CPU seconds and62,996,480-byte peak single-process RSS;
+the manifest-to-exit-witness interval is123.575550s. Final summary write and supervisor
+are excluded from the scientific-process timer. Engineering, Pro, source preparation,
+publication and readback are additional work, not zero; no end-to-end support total was
+measured. Arm-batch times above include their filtering/environment/saving work, not the
+shared calibration or all support. Roughly55× AF batch wall for P/U is an offline cost
+observation, not a measured online deadline violation or deployment loss.
+
+The durable executing-node output is the `output_root` in the launch manifest, outside
+the disposable source snapshot; the complete204-file collection (10,844,290 bytes) was
+copied here and independently SHA256-matched to the remote inventory. Raw artifacts
+occupy9,180,567 bytes; their individual hashes/bytes/relative paths are in the summary.
+Summary SHA256 is `043f9cfe970bea29b17ee995080cc83f89105e8679c5ff6e84882b16fb01b93b`.
+Bulk raw traces and logs remain on that retained authoring worktree and in the verified
+local collection, outside Git. The operation's source snapshot was reclaimed only after
+verification: ordinary preview refused protected `/proc/660/cwd`; configured read-only
+sudo process inspection then passed preview and apply. Claim, manifests, outputs,
+authoring worktree and source branch remain. The completed wait event was consumed;
+there is no remaining result-bearing operation.
+
+**Working update and decision boundary.** Current main `adf68344620a2439276bdf3061b2e0e0fc94f48d`
+still supports the C07/VSP distinction between an information-processing method and its
+complete utility. B01 now adds a finite-knowledge counterexample to treating narrower
+parameter uncertainty or frequent decision changes as sufficient for extra native gain.
+It weakens the particular small-data integration prediction while preserving the ordinary
+NEAR-versus-AF asset under this new population. It does not invalidate all posterior
+integration, establish P/U equivalence, revive LONG or establish UAV/MARL transfer.
+
+No confirmation or B01 extension is selected. I am deciding whether one prospective
+finite-estimation comparison would change the interpretation/use enough to justify its
+complete cost, versus ending this recipe and considering the parent question's other
+feasible opportunities. The previous Pro answer covers this bounded result reading;
+newly observed tie/MC structure and any renewed investment or route closure need a
+focused follow-up at the actual choice. A positive result or a new architecture is not owed.

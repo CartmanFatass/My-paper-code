@@ -1,0 +1,35 @@
+{
+  "arms": [
+    "P4",
+    "U4",
+    "P32",
+    "U32",
+    "AF",
+    "KNOW_P_NEAR"
+  ],
+  "batch": 16,
+  "calibration_phase": 40,
+  "calibration_steps": 32,
+  "contexts": 256,
+  "evaluation_phase": 41,
+  "horizon": 96,
+  "launch_sha": "b40ea0965788f0d04b023870c34f47e86a00ceff",
+  "model_phase": 42,
+  "model_seed": 925973,
+  "nominal_receiver_probability": 0.75,
+  "parameter_support": [
+    0.35,
+    0.55,
+    0.75,
+    0.95
+  ],
+  "particles": 32,
+  "retained_source": "3ca4cb1f83ea869e1efca852a099db31c52b0e2c",
+  "seed": 925731,
+  "state_count": 22,
+  "threads": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  }
+}
