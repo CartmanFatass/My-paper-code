@@ -30,7 +30,7 @@ description = "Direction owner under the constitution: cumulative understanding,
 config_file = "./agents/hmasd-direction-manager.toml"
 
 [agents.HMASDImplementer]
-description = "DM-owned Sol/high implementer for one bounded code task from an L0 note."
+description = "DM-owned 6-Sol/high implementer for one bounded code task from an L0 note."
 config_file = "./agents/hmasd-implementer.toml"
 
 [agents.HMASDScout]
