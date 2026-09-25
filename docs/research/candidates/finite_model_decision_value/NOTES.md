@@ -1554,3 +1554,51 @@ against the preserved common-prefix record: context6/k4/tick0 has U delta0 and
 MC SE .08980265259742737. An exact-zero mean does not imply all-zero particles.
 These points refine the already planned descriptive initial-root reading; they do not
 add a later-root census, new threshold or result exposure. The adopted L0 above stands.
+
+## 2026-09-25 — B02 implementation accepted for the fixed prospective run
+
+Accepted the bounded Implementer's new study after DM inspection and independent
+high-risk review. All B01 host, filter, planner, study, CLI and tests match their
+frozen `b40ea0965788f0d04b023870c34f47e86a00ceff` bytes. B02 uses explicit
+`P_k4_M32/U_k4_M32/P_k4_M256/U_k4_M256/AF` specifications; four observed moves
+initialize q4 and each deployed arm updates only its own legal history. The primary
+and native component contrasts are computed from complete paired context outcomes.
+All-context tick0 diagnostics consume existing samples, with no extra model rolls.
+
+DM review repaired four implementation issues before any B02 result operation:
+allow the native-prepared output root while refusing existing scientific files;
+hash only study-owned artifacts rather than changing native logs; require exactly
+contexts0..255 in every arm rather than accepting a jointly missing context; and
+pin reuse to the original B01 SHA. The independent Reviewer verified these repairs
+and reported no remaining material finding. The common native admission call precedes
+scientific imports/output and rejects missing admission, mismatched SHA and other seeds.
+
+All9 B02 correctness checks passed locally (Implementer1.57s; independent Reviewer1.59s).
+Fixtures use unrelated seeds and small complete H48 panels; the RNG/endpoint checks
+also use actual M32/M256 with H96 at fixed correctness roots. They verify all four
+RNG stream prefixes, conditional theta/state sampling, batch split/reorder/selected-root
+invariance, individual HOLD/SEND and delta credit, and a forced extra slow particle
+that expands batch padding16->32 without expanding the first32 particles' credited
+endpoints. Complete five-arm counts/hashes, independent contrast arithmetic and partial
+second-arm failure retention also pass. They are correctness exposure, not B02 outcomes.
+
+An additional combined run was10 passed/1 failed in1.73s: the failure is the existing
+repository-wide admission AST scan at unchanged
+`scripts/run_fsd_commitment_visibility_b12.py` (blob
+`0eeae9f93d1a3d500a202cd7c57379fdfd7ac897`), which lacks the scanned direct call.
+The B02 AST/native boundary and all B02 tests pass. FSD is paused, its file is unchanged,
+and no unrelated repair or result execution is introduced. Abrupt termination and
+total metadata-write failure remain outside the exception-retention fixture.
+
+Published the material B02 plan independently to main at
+`6d2e2ff3e18d5b1fcadeaa89272cf724f15613fc`, preserving other writers and controls.
+The configured wsl_4070 reports Python3.10.21/NumPy1.26.3; prepare a new source
+worktree there and check these focused tests on that actual interpreter before launch.
+Remote fetch succeeds through the configured login shell; its pre-existing Git gc
+bad-tree warning persists and does not establish whole-repository integrity. Required
+input materialization and the native source/admission checks still apply.
+
+Fixed result tag: `b02_budget_interaction_s925831`. One CPU scientific process,
+threads1, original seeds/phases/n256/H96/arms and full cost bound above. Native fresh
+resource admission remains before execution. No B02 result has been launched or read;
+this commit publishes the exact accepted inputs, and the eventual manifest binds its SHA.
