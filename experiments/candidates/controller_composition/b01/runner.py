@@ -177,7 +177,7 @@ def _eval_cell(i: int, j: int, payloads: dict[int, dict], out: Path) -> dict:
         envs = make_envs(len(WORLDS), WORLDS[0], N, HORIZON)
         agents = []
         guarded_normalizer_classes = {}
-        completed_steps = 0
+        active_t = -1
         try:
             b11._assert_native_envs(envs, N)
             rows = [list(env.env.agents) for env in envs]
@@ -217,23 +217,33 @@ def _eval_cell(i: int, j: int, payloads: dict[int, dict], out: Path) -> dict:
             initial_per_world = [{name: _identity(value[lane]) for name, value in initial_arrays.items()}
                                  for lane in range(len(WORLDS))]
             steps, dones = np.zeros(len(WORLDS), dtype=np.int64), np.zeros(len(WORLDS), dtype=bool)
-            raw_first = np.empty((HORIZON, len(WORLDS), N, 3), dtype=np.float32)
-            raw_second = np.empty_like(raw_first)
-            executed = np.empty_like(raw_first)
-            stream = {name: np.empty((HORIZON, len(WORLDS)), dtype=np.float64)
+            raw_first = np.full((HORIZON, len(WORLDS), N, 3), np.nan, dtype=np.float32)
+            raw_second = np.full_like(raw_first, np.nan)
+            executed = np.full_like(raw_first, np.nan)
+            stream = {name: np.full((HORIZON, len(WORLDS)), np.nan, dtype=np.float64)
                       for name in (*COMPONENTS, "scalar_reward", "E", "S", "U", "height")}
+            inference_attempted = np.zeros((HORIZON, 2), dtype=bool)
+            inference_returned = np.zeros_like(inference_attempted)
+            environment_attempted = np.zeros((HORIZON, len(WORLDS)), dtype=bool)
+            environment_returned = np.zeros_like(environment_attempted)
+            components_validated = np.zeros_like(environment_attempted)
+            terminated = np.zeros_like(environment_attempted)
+            truncated = np.zeros_like(environment_attempted)
             before = [digest_agent(agent) for agent in agents]
             with torch.no_grad():
                 for t in range(HORIZON):
+                    active_t = t
                     actions = []
-                    for agent in agents:
+                    for side, agent in enumerate(agents):
+                        inference_attempted[t, side] = True
                         raw, _, data = agent.step(states, observations, steps, dones,
                                                   deterministic=True, return_step_data=True, build_infos=False)
+                        inference_returned[t, side] = True
+                        (raw_first if side == 0 else raw_second)[t] = raw
                         finite((raw, data), "B01 deterministic policy output")
                         if raw.shape != (len(WORLDS), N, 3) or raw.dtype != np.float32:
                             raise ValueError("B01 policy output roster/dtype mismatch")
                         actions.append(raw)
-                    raw_first[t], raw_second[t] = actions
                     joined = route_actions(*actions)
                     mapped = b03.map_training_actions(joined, "clip")
                     if mapped.shape != joined.shape or not np.array_equal(joined, route_actions(*actions)):
@@ -243,23 +253,34 @@ def _eval_cell(i: int, j: int, payloads: dict[int, dict], out: Path) -> dict:
                     executed[t] = mapped
                     next_pairs = []
                     for lane, env in enumerate(envs):
+                        environment_attempted[t, lane] = True
                         obs, reward, term, trunc, info = env.step(mapped[lane])
+                        environment_returned[t, lane] = True
+                        terminated[t, lane], truncated[t, lane] = bool(term), bool(trunc)
+                        stream["scalar_reward"][t, lane] = float(reward)
+                        # Preserve the returned reward data before native identity checks.
+                        raw_parts = info.get("reward_components", {}).get("reward_info", {})
+                        for name in COMPONENTS:
+                            if name in raw_parts:
+                                stream[name][t, lane] = float(raw_parts[name])
                         parts = native_components(info, reward, N)
                         e, s, u, h = _service(env, parts)
-                        for name in COMPONENTS:
-                            stream[name][t, lane] = parts[name]
-                        for name, value in (("scalar_reward", reward), ("E", e), ("S", s), ("U", u), ("height", h)):
+                        for name, value in (("E", e), ("S", s), ("U", u), ("height", h)):
                             stream[name][t, lane] = value
+                        components_validated[t, lane] = True
                         next_pairs.append((obs, info))
                         dones[lane] = bool(term or trunc)
                     states = np.stack([info["next_state"] for _, info in next_pairs])
                     observations = np.stack([obs for obs, _ in next_pairs])
                     steps += 1
-                    completed_steps = t + 1
                     if dones.any() and (t != HORIZON - 1 or not dones.all()):
                         raise ValueError("unexpected native terminal boundary")
             if not dones.all() or not np.all(steps == HORIZON):
                 raise ValueError("incomplete native world panel")
+            if (not inference_attempted.all() or not inference_returned.all() or
+                not environment_attempted.all() or not environment_returned.all() or
+                not components_validated.all()):
+                raise ValueError("B01 complete panel has missing returned policy/environment work")
             if [digest_agent(agent) for agent in agents] != before:
                 raise ValueError("runtime model/normalizer drift")
             if any(np.any(agent.rollout_buffer.env_lengths) for agent in agents):
@@ -274,26 +295,63 @@ def _eval_cell(i: int, j: int, payloads: dict[int, dict], out: Path) -> dict:
                 raise ValueError("native aggregate identity failed")
             raw_path = out / "raw" / f"cell_{i}{j}.npz"
             np.savez_compressed(raw_path, source_i_raw_actions=raw_first, source_j_raw_actions=raw_second,
-                                executed_actions=executed, **stream)
+                                executed_actions=executed, inference_attempted=inference_attempted,
+                                inference_returned=inference_returned,
+                                environment_attempted=environment_attempted,
+                                environment_returned=environment_returned,
+                                components_validated=components_validated,
+                                terminated=terminated, truncated=truncated, **stream)
             return {"cell": [i, j], "status": "complete", "world_seeds": WORLDS,
                     "native_agent_rows": rows, "initial_world_identity": initial,
                     "initial_world_identity_per_world": initial_per_world,
                     "per_world": {"J": jvalue.tolist(), "scalar_return": (means["scalar_reward"] * HORIZON).tolist(),
                                   **{name: value.tolist() for name, value in means.items()}},
-                    "counts": {"team_steps": HORIZON * len(WORLDS), "executed_uav_action_rows": HORIZON * len(WORLDS) * N,
-                               "inferred_policy_action_rows": HORIZON * len(WORLDS) * N * 2,
-                               "policy_step_calls": 2 * HORIZON, "optimizer_updates": 0, "storage_calls": 0},
+                    "counts": {"team_steps": int(environment_returned.sum()),
+                               "environment_step_attempts": int(environment_attempted.sum()),
+                               "executed_uav_action_rows": int(environment_returned.sum()) * N,
+                               "inference_step_attempts": int(inference_attempted.sum()),
+                               "inferred_policy_action_rows": int(inference_returned.sum()) * len(WORLDS) * N,
+                               "policy_step_calls": int(inference_returned.sum()),
+                               "optimizer_updates": 0, "storage_calls": 0},
                     "runtime_digest_before": before, "runtime_digest_after": [digest_agent(agent) for agent in agents],
                     "raw_artifact": {"path": raw_path.relative_to(out).as_posix(), "sha256": sha256(raw_path),
                                      "bytes": raw_path.stat().st_size}}
-        except Exception:
-            # Keep every fully recorded transition of an incomplete cell for diagnosis.
-            if completed_steps and "stream" in locals():
+        except Exception as exc:
+            failure_counts = {"inference_step_attempts": 0, "inference_step_returns": 0,
+                              "inference_action_rows_requested": 0, "inferred_policy_action_rows_returned": 0,
+                              "environment_step_attempts": 0, "environment_step_returns": 0,
+                              "environment_outcomes_unknown": 0, "components_validated": 0,
+                              "executed_uav_action_rows_confirmed": 0}
+            failure = {"cell": [i, j], "status": "failed", "failure": f"{type(exc).__name__}: {exc}",
+                       "active_step": active_t if active_t >= 0 else None, "counts": failure_counts}
+            if "stream" in locals():
+                failure_counts.update(
+                    inference_step_attempts=int(inference_attempted.sum()),
+                    inference_step_returns=int(inference_returned.sum()),
+                    inference_action_rows_requested=int(inference_attempted.sum()) * len(WORLDS) * N,
+                    inferred_policy_action_rows_returned=int(inference_returned.sum()) * len(WORLDS) * N,
+                    environment_step_attempts=int(environment_attempted.sum()),
+                    environment_step_returns=int(environment_returned.sum()),
+                    environment_outcomes_unknown=int((environment_attempted & ~environment_returned).sum()),
+                    components_validated=int(components_validated.sum()),
+                    executed_uav_action_rows_confirmed=int(environment_returned.sum()) * N,
+                )
+            if active_t >= 0 and "stream" in locals():
+                length = active_t + 1
                 partial = out / "raw" / f"cell_{i}{j}_partial.npz"
-                np.savez_compressed(partial, source_i_raw_actions=raw_first[:completed_steps],
-                                    source_j_raw_actions=raw_second[:completed_steps],
-                                    executed_actions=executed[:completed_steps],
-                                    **{key: value[:completed_steps] for key, value in stream.items()})
+                np.savez_compressed(partial, source_i_raw_actions=raw_first[:length],
+                                    source_j_raw_actions=raw_second[:length],
+                                    executed_actions=executed[:length],
+                                    inference_attempted=inference_attempted[:length],
+                                    inference_returned=inference_returned[:length],
+                                    environment_attempted=environment_attempted[:length],
+                                    environment_returned=environment_returned[:length],
+                                    components_validated=components_validated[:length],
+                                    terminated=terminated[:length], truncated=truncated[:length],
+                                    **{key: value[:length] for key, value in stream.items()})
+                failure["raw_artifact"] = {"path": partial.relative_to(out).as_posix(),
+                                           "sha256": sha256(partial), "bytes": partial.stat().st_size}
+            write_json(out / f"cell_{i}{j}.json", failure)
             raise
         finally:
             for cls, original in guarded_normalizer_classes.items():
@@ -306,12 +364,19 @@ def run_study(out: Path, launch_sha: str, admission: dict, checkpoint_paths: dic
               *, seed: int, command_start: float) -> dict:
     if seed != WORLDS[0] or launch_sha != admission["sha"]:
         raise ValueError("B01 seed/launch admission mismatch")
+    out = Path(out).resolve()
+    bound_output = admission.get("output_root")
+    if bound_output is not None and out != Path(bound_output).resolve():
+        raise ValueError("B01 output path disagrees with admission")
+    if not out.is_dir():
+        raise ValueError("B01 requires the launcher-created output directory")
+    scientific_prefixes = ("config.json", "progress.json", "summary.json", "cell_")
+    collisions = [entry.name for entry in out.iterdir()
+                  if entry.name == "raw" or entry.name.startswith(scientific_prefixes)]
+    if collisions:
+        raise ValueError(f"B01 scientific output already exists: {sorted(collisions)}")
     torch.set_num_threads(4)
     payloads, dependencies = validate_sources(checkpoint_paths)
-    out = Path(out)
-    if out.exists():
-        raise ValueError("B01 output path already exists")
-    out.mkdir(parents=True)
     (out / "raw").mkdir()
     config = {"object": "controller_composition_b01", "launch_sha": launch_sha,
               "admission": jsonable(admission), "world_seeds": WORLDS, "horizon": HORIZON,
@@ -342,6 +407,8 @@ def run_study(out: Path, launch_sha: str, admission: dict, checkpoint_paths: dic
             write_json(out / f"cell_{i}{j}.json", row)
             progress["completed_cells"].append([i, j])
             write_json(out / "progress.json", progress)
+        progress["active_cell"] = None
+        write_json(out / "progress.json", progress)
         def panel(name: str) -> np.ndarray:
             return np.stack([np.array([[cells[3 * i + j]["per_world"][name][world]
                                         for j in range(3)] for i in range(3)])
@@ -373,5 +440,12 @@ def run_study(out: Path, launch_sha: str, admission: dict, checkpoint_paths: dic
         return summary
     except Exception as exc:
         progress.update(status="failed", failure=f"{type(exc).__name__}: {exc}")
+        active = progress.get("active_cell")
+        if active is not None:
+            cell_record = out / f"cell_{active[0]}{active[1]}.json"
+            if cell_record.exists():
+                recorded = json.loads(cell_record.read_text())
+                if recorded.get("status") == "failed":
+                    progress["failed_cell"] = recorded
         write_json(out / "progress.json", progress)
         raise

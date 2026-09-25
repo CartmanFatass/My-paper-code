@@ -538,3 +538,71 @@ and untracked work; it is preserved. Source/outputs will use this direction's ow
 checkout. Initial canonical direction/lead registration is published by Root; no DM change
 to the user's canonical index is needed. Main plan publication is
 `a9a95d5b67056e41bb2454bc371e26ae371aa8a7`; it contains no new empirical result.
+
+### Initial implementation and independent review in progress
+
+Implementation `bc8f4bf522fa66dc04e8bbc32d1b157136c5ed44` is published for review, not yet
+accepted for execution. The Implementer reported ten focused tests passing in4.37s and
+py_compile passing; the final suite at that point executes18 nonproduction team transitions
+(108 actual UAV action rows,240 inferred rows including a no-transition recurrent reset
+probe). These are per-suite fixture counts, not a claim that all development checks cost
+only18 transitions. Earlier development checks/support were not fully metered. Checkpoint
+loading used weights_only=True for all three files. The committed version pins33 source
+files; an earlier handoff's23 count was superseded before the commit.
+
+Both DM/source comparison and fixture hashes identified a reset distinction before any
+production result: B20's environment constructor seeds and resets, then its evaluator calls
+`env.reset()` without reseeding. Explicitly repeating `reset(seed=world)` would choose a
+different initial scene. The implementation now follows the original constructor plus
+unseeded reset convention;92525000–92525031 remain constructor/world labels. This is an
+outcome-blind correctness repair, with no world or endpoint selection.
+
+The independent Reviewer confirmed the source/local-information, private RNN, action-row,
+J/service and paired-world algebra paths, and found two remaining executable issues. First,
+run_study rejected an existing output directory even though hmasd_launch creates it before
+child admission. Second, a later-lane failure could discard completed earlier-lane transitions
+in the current time slab and omit actual failure counts. The Implementer is repairing these
+and adding boundary/failure regressions before final review. The Reviewer also verified
+`hmasd/r_mappo_utils.py` matches the frozen source but was omitted from the hash map; its hash
+will be added. No accepted result attempt, incomplete scientific panel or retry exists.
+
+Node preparation: the three checkpoints were copied to
+`/home/wu/hmasd-inputs/controller_composition/b01/b1_s1016101_F45.pt`,
+`b2_s1017101_F45.pt`, and`b3_s1018101_F45.pt`; each remote copy's19,694,959 bytes and full
+SHA256 match the fixed source. The owned node checkout is
+`/home/wu/hmasd-worktrees/controller-composition-sept25`. Its initial checkout reported
+pre-existing commit-graph/object warnings; the current source content check and actual
+published-SHA validator nevertheless passed. This does not certify all old Git history.
+
+The first sparse metadata materialization used an ordinary SSH shell, leaving its promisor
+HTTPS child stalled. After verifying that child's ancestry belonged only to this owned
+sparse-checkout command, the DM terminated that HTTPS child; the original command exited128
+with `git-remote-https died of signal 15` and a missing-promisor-blob error. This was a Git
+preparation failure, not a scientific worker failure. Reconciliation showed no remaining
+owned process; the same paths then materialized through the configured `zsh -lic` network
+shell. All six F config/summary file hashes match the fixed bindings. No repository/index
+belonging to another DM was overwritten. Remote `_require_policy` confirmed exploring and
+lead`Codex DM (independent session)` against freshly published main; actual launch still
+requires fresh native admission.
+
+### Repair candidate ready for final engineering review
+
+The Implementer returned a bounded repair of the two review findings. The runner now accepts
+the launcher's precreated output directory, preserves its control files and refuses existing
+scientific outputs before loading sources. Failed cells retain per-side inference and per-lane
+environment attempt/return masks, component-validation masks, returned reward/component data,
+partial raw artifacts and actual count records. Attempted calls without a return remain unknown.
+The missing identical `hmasd/r_mappo_utils.py` dependency is pinned, bringing the map to34 files.
+Tests alone accept a JSON list of the three checkpoint locations via
+`HMASD_CONTROLLER_COMPOSITION_CHECKPOINTS`; production identities and CLI are unchanged.
+
+The DM read the repair diff and its new real-runner serialization, output-collision and
+later-lane failure regressions. The Implementer's final focused suite reports23 passed in4.81s
+with16 upstream warnings and a clean diff check. That suite executes22 actual nonproduction
+team transitions on worlds81/82. Development-wide reruns were not metered; the earlier18 count
+was the preceding suite, not cumulative development cost. Final review and configured-node
+verification remain before result execution.
+
+The repeated native wake was drained: generation2 contains no pending events and its only Pro
+job is collected. The already-read, repository-verified full answer and repaired answer-only
+write remain the evidence; no Send, worker restart or cross-task message was made.

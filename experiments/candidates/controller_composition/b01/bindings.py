@@ -61,4 +61,5 @@ SOURCE_DEPENDENCY_SHA256 = {
     'envs/pettingzoo/scenario1.py': 'e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e',
     'envs/pettingzoo/uav_env.py': 'f50d74cdba92d5ef976c8ba53d2697fc72742683fcb746b404b8c8807f463803',
     'scripts/hmasd_admission.py': '0faa5d53fba5af9b1a2fc4979bde5bd50bcbcaac2dbef938e90a64680156cf4d',
+    'hmasd/r_mappo_utils.py': 'b953c49b7ab5d64e6cf52c7d201104914659386b0d9535c2b66e7845d21e15b5',
 }
