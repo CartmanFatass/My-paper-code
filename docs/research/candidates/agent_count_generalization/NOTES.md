@@ -20193,3 +20193,20 @@ all other file bytes are preserved and the canonical Git index digest is unchang
 This resolves the specific preparation mismatch. The six-fit plan remains fixed and actual
 node admission must still occur for the first new operation. This exception does not change
 ownership, pause, the frozen prior operations or the scientific reading.
+
+
+### B20 frozen production input before block 1
+
+All three prospective pair operations are bound to published input commit
+`424bbe4db1351db70d73560ece913150c2b20ed4` on
+`codex/agent-count-generalization-b19`. This is the reviewed implementation plus the
+reconciled published notebook/claim, with all seven reviewed B20 file hashes unchanged.
+The full input commit is the same for blocks 1, 2 and 3; documentation-only commits after
+this entry do not replace it. Native source snapshots preserve that input while the
+direction notebook continues to advance.
+
+The adopted six-fit batch, sequential block order, F-then-M order, fresh seed/world bindings
+and fixed reading/stopping rules remain those in the claim. The first invocation uses
+block 1 / seed 1016101. Complete valid cells permit the next predeclared cell regardless
+of their scores; a missing/invalid arm stops the remaining launches without automatic
+retry. No result-bearing B20 operation has been accepted at this preparation boundary.
