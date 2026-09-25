@@ -1,0 +1,11 @@
+{
+  "claim_key": "20eac62196612252c489858ddcd0c34e7900de8b96ad3c8bbe0af6a9f7713d61",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/20eac62196612252c489858ddcd0c34e7900de8b96ad3c8bbe0af6a9f7713d61.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b2_s1017101/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/20eac62196612252c489858ddcd0c34e7900de8b96ad3c8bbe0af6a9f7713d61.json",
+  "pid": 257187,
+  "runner_pid": 257188,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-25T07:42:19.961874Z"
+}

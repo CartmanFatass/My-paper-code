@@ -20335,3 +20335,20 @@ Representative complete-file identities:
 | artifact_readback.json | 226437 | 575ba4267199de8710f2e268d6ea5f91414c94b02f0f3b9fd66c838c7df1db15 |
 | contract_readback.json | 222234 | fe830c761ae93b1343961e8aeca0fccfd166f3591be8b40d42d8638ddcb07078 |
 | process-exit.json | 550 | 945de3898bbff4f4f9d5aaaeed21cefab37dc129715f857ce433d8025b9f48ab |
+
+After verified retention and publication, the snapshot collector's guarded preview/apply
+removed only block1's disposable source snapshot `8d9392997b9c4d21b9ec410a249ef61f`.
+The configured read-only sudo process scan handled the previously identified protected
+process-inspection boundary. All outputs, retained copies, native claim/terminal records
+and the published source remain. The block1 READY event was consumed; no worker restarted.
+
+### B20 block 2 accepted under the unchanged fixed plan
+
+The second predeclared pair has passed fresh native admission. Its
+[launch manifest](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b2_s1017101/launch-manifest.json)
+and [actual-node preflight](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b2_s1017101/admission-preflight.json)
+retain the accepted identity and resource observation. This invocation uses block2's
+original seed/world bindings and the same frozen input commit as block1, with a fresh
+process and F then M. The adverse first block remains in the fixed batch unchanged.
+Observation follows this new accepted operation; completion still requires full reading
+before the predeclared third pair. No new endpoint, seed, panel or fit was added.
