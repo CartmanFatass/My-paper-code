@@ -10162,3 +10162,19 @@ empty. Fresh main keeps the same lead and lifted owner pause; its project-plan w
 not change this accepted comparison. Continue the fixed N endpoint-then-A sequence and
 rearm the same operation. Full panel artifacts and the A endpoint remain required for reading
 the declared contrast; this checkpoint does not select or extend a run.
+
+### B09 N endpoint panel complete; matched A started — 2026-09-24
+
+Generation 6 returned only CHECKPOINT `9b3688ab7d8e3d3477827b23`, with original native
+identities running, consistent records, zero probe errors and no exit witness. N's endpoint
+panel now contains all 32 fixed worlds and 96,000 actual transitions; together with the initial
+panel, 64 episodes / 192,000 evaluation transitions are complete. The N panel reports zero
+new optimizer updates and full-state immutability. Its endpoint checkpoint, full raw JSON and
+NPZ each match the registered SHA256 on the node (three new artifact references checked).
+
+A has started with its recorded initialization equal to N/common initial; both per-arm equality
+flags are true and the complete identity records match. The journal read reaches A phase 1,
+200 collection steps per lane (400 transitions), with no completed A update yet. The batch
+remains INCOMPLETE, stderr is empty and no paired result is available. Fresh main retains the
+same lead and lifted pause. Preserve the completed N evidence and continue only the already
+fixed A fit/panel; rearm the same operation without altering the comparison.
