@@ -9885,3 +9885,105 @@ pending Pro request or active producer. A future retry would require a concrete 
 repair reason and a new prospective decision that retains this failed fit and all selection
 exposure; it cannot be labeled continuation or recovered from an absent A checkpoint. No new
 scientific route closure, confirmation, seed, arm, host or training budget is selected here.
+
+## 2026-09-24 — New direct DM continuation and B09 prospective matched feedback learning
+
+The owner-requested new independent DM task is `01a0d621-fad7-7863-ab0a-89b148926205`
+on `local`, authoring `/home/fires/.codex/worktrees/31f5/hmasd-wsl` on
+`codex/uav-service-feedback-b09`. This task actually adopts the existing direction; it does
+not create a second DM or resume the old task/failed process. The launch-bound lead remains
+`Codex DM (independent session)`. Main was fetched at
+`40eb5c0e79bf0ff023e9458dc7fc301edbf9afab`; the clean new checkout already contains that revision
+and the owner's helper configurations. The complete existing notebook is present on main and
+matches published direction tip `da1e68dbd6b6935dd6ba742730b8454b24c9fcde`; no historical text is
+replaced. B08 and its costs, missing A endpoint, old N exposure and all B07 adverse worlds remain.
+
+### Scientific reading, decision and cost
+
+I read the full Answer and Root Decision in
+[the completed September 24 investment review](../../archive/2026-09-24/RESEARCH-next-investment-after-b18-b09-b08.md),
+and the current shared background (especially topic 6), Current research plan and Shared runtime
+diagnosis at the main revision above. I adopt its selected new N/A exploration. The opportunity
+is B07's observed replenishment under F with remaining service failures; it does not diagnose
+an auxiliary prediction/representation bottleneck. B08 provides no A-minus-N endpoint. The
+strongest alternative is retaining F without buying training, not adding a third learner.
+A complete new pair can resolve whether training inside the deployment feedback has incremental
+finite service value. The prior complete advice covers this comparison, completed-segment
+contract and investment; routine implementation needs no repeated consultation.
+
+B09 is one fresh initialization block: training seed **925031**, lane seeds **925031/925032**,
+N then A, two lanes, 30 phases of 3000 actual steps per lane, native S7-S2/H3000/N8/k10.
+Each arm starts from genuinely matched parameters, buffers, normalizers, RNG and evaluation
+state. N sends the native proposal to the original adapter; A maps that proposal through the
+unchanged B06/B07 F first. All native learners, rewards (return coefficient 2), entropy terms,
+information, optimizer schedules and common ordinary completed-segment eligibility remain.
+Cross-version high segments remain an explicit mixed-behavior PPO approximation; correct old
+likelihoods do not make it strictly on-policy or establish cancellation between arms.
+
+The single fixed primary evaluation panel is **952001 through 952032**, with original native
+H3000 endings, one real common initial F evaluation and both fixed endpoint F evaluations.
+There is no development panel, interim selection, replacement episode or interaction top-up.
+These seeds are new to this direction's recorded source/inputs; implementation will assert the
+actual panel order and common initial identity. Planned cost is **2 fits x 180,000 = 360,000
+training team transitions**, plus **96 episodes and at most 288,000 evaluation transitions**,
+thus at most **648,000 total team transitions**. Checks, engineering, collection/storage and
+reading have additional cost; actual wall time is unknown and will be measured. This is n=1
+per arm exploration, not confirmation. No old N is paired with a replacement A.
+
+Read every world: cumulative native QoS, planned-window and actual-step service, delivered
+volume, J, return cost, minimum/low battery, cutoff/depletion, charging/consumption/storage,
+zero service and all adverse signed effects. Prediction: A learns useful full-task service
+relative to the actual common initialization and adds service over N under common F deployment.
+Report each arm's own learning and A-minus-N. The first qualifying actual-input/positive-net-
+stored-gain/F-exit event followed by 250 steps of team service is descriptive intermediate
+support only; retain no event, no exit, re-entry and incomplete-window denominators. It is
+neither a same-state effect nor same-aircraft recovery. Full service improvement without that
+window pattern weakens the recovery account; penalty savings, charging or local-window gains
+alone do not fulfill the service prediction. Mixed/adverse outcomes are preserved without
+automatic extension, threshold change, another arm or confirmation.
+
+### Technical execution choice and L0
+
+Root's completed, identity-bound B08 core inspection localizes the immediate failure to
+`b01.native._write_progress` serializing the whole nested batch summary, reached from B08
+collection progress. The CPython instruction/metadata anomaly does not identify a JSON, NumPy,
+CUDA or hardware defect. It is different from B18's clip-error cleanup path; common cause
+remains unknown. I reuse the supplied bounded core summary instead of repeating a large dump
+investigation. No verified root-cause repair is claimed.
+
+The new execution path keeps configured `wsl_4070`, CUDA FP32/TF32 off and four torch threads,
+but removes repeated growing whole-summary serialization from collection/step progress. B09
+will append compact progress with actual counters and persist complete summaries atomically at
+completed episode/phase/panel/fit/error boundaries, using compact `json.dumps` (no indented
+Python generator walk) where it owns JSON writing. Existing raw training/high-segment and
+evaluation evidence remains required; snapshots are not silently omitted for speed. This is a
+bounded reduction of the observed repeated persistence path and torn-summary risk, not proof
+that the unknown native crash is cured. Short actual-node collector/update/evaluator and
+persistence checks cover the chosen path before a new long fit. A native signal can still lose
+in-flight work; the supervisor exit witness and last durable counters remain authoritative.
+No automatic retry follows another failure.
+
+First recover only the published direction source dependencies and checks from
+`da1e68dbd6b6935dd6ba742730b8454b24c9fcde`: `experiments/candidates/uav_service_auxiliary/`,
+its matching tests and runner entries, plus the already reviewed common opt-in code in
+`hmasd/agent.py`, `hmasd/utils.py` and `tests/hmasd/test_ordinary_completed_segments.py`.
+Current main's two core files exactly match the pre-B08 commit, so this recovery introduces
+only the accepted completed-segment patch, with no removal of later shared changes. The old
+checks/review are reusable; targeted current integration checks will verify restored imports
+and interfaces. Do not import unrelated branch history, old run artifacts or control/config files.
+
+The bounded new implementation owns `experiments/candidates/uav_service_auxiliary/b09/`,
+`scripts/run_uav_service_auxiliary_b09.py`, and corresponding `tests/experiments/candidates/`
+`uav_service_auxiliary/b09/` only. Reuse unchanged B08 identity/endpoint/metrics and B07 evaluator
+helpers; create successor-specific spec/batch/persistence and, if needed, a local collector copy
+with only persistence changes. Preserve B01-B08, common learner/env, F and all historical contracts.
+The admission guard must precede scientific effects. Check fixed exposure/panel/seed and actual
+initial equality, score-independent N-then-A execution, reuse refusal and partial failure,
+compact progress versus completed-boundary persistence, atomic readable summary replacement,
+actual proposal/storage/reward/update/F/reset/censor semantics, raw artifacts, evaluation RNG
+isolation, and early-ending counts. Compare the old/new short collector's substantive outputs
+where practicable; no claim of historical long-run bitwise equivalence. Engineering fixtures
+are not result-bearing fits or scientific pilots, and pytest owns all scratch. Independent
+Reviewer inspects this high-risk runner/persistence diff. DM owns NOTES, acceptance, publication
+and launch; helpers own no index or scientific decision. Stop only a dependent action if a
+material contract conflict emerges; do not substitute a new learning algorithm.
