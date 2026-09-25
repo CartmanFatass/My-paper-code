@@ -19155,3 +19155,84 @@ seeds and small non-result specs in pytest-owned temp/, never production result 
 Use the selected local scientific interpreter with PATH from compute config. Independent
 Reviewer checks high-risk state/RNG/checkpoint/output/admission behavior; DM reads and accepts.
 No helper owns science, notebook/index, Git staging or result execution, and none spawns children.
+
+## 2026-09-24 — B19 engineering accepted on the selected independent CPU path
+
+The DM accepts the bounded B19 implementation after reading the diff, real-path checks and
+independent registered Reviewer findings/repairs. The historical source import preserved all
+77 candidate/test/entrypoint files from `eba71809c` byte-for-byte; only new B19 paths change.
+The complete pre-continuation notebook prefix (1,401,793bytes) remains unchanged. Current main
+was refreshed and relevant concurrent ownership/standing changes retained through `2eec4adbd`;
+DM2's completed no-fit decision does not change the already selected F/M comparison. Our own
+route/prospective note is published on main at `ae1ed7adb`. No App task was messaged.
+
+**Accepted behavior.** Every complete training reset writes its own
+`<arm>/raw/training_reset_rNN_nN.npz` before collection, using file flush/fsync, atomic replace
+and directory fsync. A later abrupt termination no longer depends on Python exception cleanup
+to preserve earlier reset scenes. Training rows are fsynced individually; the arm summary binds
+path, bytes, SHA256 and completed-row frontier for the acknowledged stream prefix. A later
+unacknowledged append is retained and distinguished from that prefix, not truncated. Full
+initialization manifests, checkpoints, traces and verbose training diagnostics stay under raw/;
+compact config/panels/summaries retain native per-world values, counters and artifact references.
+The one common stage0 is actually evaluated under F's untouched initialization; M reuses it
+only after complete parameter/normalizer/runtime/optimizer/sampler/config identity checks.
+Its borrowed baseline explicitly reports zero new environment steps. Actual panels are F6+M3.
+
+The DM's normalized AST comparison found collect_complete_episode, _audited_update and
+adapt_roster identical to frozen B18 except the diagnostic B18→B19 labels. The evaluator
+preserves its construction/seeding/strict-copy/reset, terminal, no-storage/no-update and RNG
+isolation paths, with the new fixed counts/worlds and raw locations. This is source and focused
+runtime evidence, not a claim that independent installations or long runs are bit-equivalent.
+The current core's only agent.py difference from the old direction tip is the entry-mask
+comment plus equivalent `size(0)`→`shape[0]`; no scientific core repair was introduced here.
+
+**Concrete review repairs.** (1) Newly persisted reset/collecting records originally lacked
+an optimizer baseline: a later boundary JSON-write failure could count old optimizer calls
+again. Capture and persist the baseline before that boundary. (2) An exception on the first
+training policy call left raw ±infinite motion bounds and broke failure JSON; use the existing
+zero-observation motion finalizer before writing the incomplete record. (3) Bind the raw
+training stream's acknowledged prefix and add initialization JSON byte count. The associated
+regressions retain zero/partial steps, current-roster accounting and explicit unstarted M.
+These are evidence/accounting repairs, not assertions about the prior SIGSEGV root cause.
+
+**Checks and costs (technical fixtures, zero result-bearing fits).** On
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python`, the unchanged B18 suite passed10 tests in11.70s.
+The repaired B19 suite passed16 tests in12.80s; after a test-only change, its affected successful
+full-cycle checks passed2/2 in5.66s with Torch4 threads on this selected host. Failure fixtures
+remain Torch1. They exercise real N6→6 and N4→6→8→4 collect/store/GAE/PPO paths, actual N5/7/6
+evaluation, matched initialization/private sampler and runtime preservation, nine-panel counts,
+identity mismatch rejection, admission-before-science/existing-output refusal, complete/partial
+raw prefix hashing and abrupt subprocess exit after a later reset. Technical seed9191019 and
+world addresses shifted by10,000,000 separate these from B19 production inputs. The tests clean
+only their pytest-owned scratch. The14 warnings are existing Matplotlib/Pyparsing deprecations.
+The Reviewer separately read the state path and verified affected repairs (6 checks plus the
+latest stream-prefix regression); no material finding remains. Repeated check time is support
+cost, not independent training replication; no total wall is inferred from overlapping passes.
+
+Final reviewed SHA256 identities:
+
+- B19 runner: `e2c92a2e32165a05aa1f6aa000cfbb7df8d280959508f34b905afe67ae66daf5`.
+- Guarded CLI: `f2845fdb696f1c00da42efe8c18876ebf2cb1b0a7a3fd7509d87c3c1f2b99d7e`.
+- B19 tests: `fa76843b7cfac72d749c7b08e88066c73a79730fafd431eda736713ad2f30290`.
+- B19 package init: `d5230cd413cbfe89e9cb0a8260df0f971a38ad24b9d3feae2994e063eee701b9`.
+
+The native local CPU installation reports Python3.10.20, NumPy1.26.3, Torch2.7.0+cpu and
+no CUDA build, boot `ef111e89-19ab-42f4-bc0a-c1773533e920` on Jacob. Resolved interpreter
+SHA256 is `3303d2b5dc566818e412d2b5b6cd8e792bd360865da47593429a635f72668226`;
+NumPy `_multiarray_umath` SHA256 `e62046dd78f14a2d7bc483253c4ced45cabb5872ccd3bd3da9989982ebbbc015`.
+These are inspected module identities, not a full dependency seal. CLI sets OMP/MKL/OpenBLAS/
+NumExpr thread variables to1 before scientific imports and uses the fixed Torch4 setting.
+A preparation-only memory read passed with11,404,406,784 available physical/effective bytes;
+launch must perform its own fresh admission. The canonical user checkout's unchanged
+pause/state/lead matches published main, and its selected local_linux node configuration equals
+this checkout's; no user-checkout/index write or synchronization was needed.
+
+**Limits and next action.** These reduced checks do not establish production-H500 duration
+stability or diagnose the old crashes. Abrupt-exit retention was tested without exception/finally;
+no power-loss test is claimed. A newly failed invocation remains terminal and is not retried
+by the observer. Publish the exact accepted inputs, admit the new B19 invocation on local_linux,
+then arm this task's fresh observer against its own native handle. Once terminal, independently
+read all native arrays/counts/checkpoints, verify a durable collection copy and publish the
+bounded complete or incomplete reading. An artifact-only independent reader is prepared under
+this task's ignored temp/directions/agent_count_generalization/; it imports no project environment,
+learner or candidate reducer and has not read or generated scientific data.
