@@ -256,3 +256,44 @@ reports a complete, bounded positive ordered-roster comparison and a competent f
 it does not answer spatial-family coverage. This supports retaining our ordinary LOCAL1
 reference without changing the A2 comparator, prediction, fixed worlds or cost. B19 is now
 complete rather than still executing as at registration; A2 pause/lead/routing are unchanged.
+
+## 2026-09-24 — A2 accepted and native observation armed
+
+The actual configured `wsl_4070` interpreter passed the same **7 focused tests in 7.13 seconds**.
+Its dedicated authoring checkout is `/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab`.
+Source staging completed despite the shared clone's pre-existing automatic-Git-maintenance
+and missing commit-graph-object warnings; no shared Git repair or history rewrite was made.
+The accepted source is published `d22b608e8d063ceac5c944426bd35a2289c5ebf6`, including the
+reviewed runner/test bytes above. This is the first A2 result-bearing launch request.
+
+Configured supervisor task `a2_s260925101_d22b608e` entered the configured network/run shells
+and invoked `scripts/hmasd_launch.py launch --node wsl_4070 --snapshot`, bound to the fixed
+direction, lead, SHA, output tag and entry seed. **Native admission accepted at
+2026-09-25T04:17:16.295481Z** (2026-09-24 PDT), independently of the outer task-start signal.
+Actual-node preflight measured 13,010,100,224 physical/effective available bytes against
+4,294,967,296 required; current published control was main
+`ee734907ecc936b27a99d83597d613efaf8bb9bf`.
+
+Operation reference:
+`/home/wu/projects/HMASD/.git/hmasd-admission/2f5e96dfbf13660f91219817c5a01198a6725b919d74e9e85425d86c37272446.json`.
+The retained source snapshot is
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/2fc6a6f7e27347e983ce2e7589756d8c`.
+Native supervisor/runner PIDs are 609757/609758, with start identities in the
+[manifest](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101/launch-manifest.json).
+Complete outputs remain under
+`/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101`;
+stdout, stderr, eventual process-exit and raw evidence use the normal runner layout.
+The launch manifest, admission preflight, launch status and U/config were copied to this
+direction's local run folder and byte-hash matched to the native files. Configs are per-arm;
+there is no batch-root config file. Bulk evidence remains on the actual node for terminal
+collection and verified recovery; nothing is deleted.
+
+`tools/hmasd_wait.py` is armed for this task, generation 1, at
+`/home/fires/.local/state/hmasd-wait/01a0d6ab-ccf0-76d3-8aa3-4489b9d2ee10`.
+Its private request is
+`temp/directions/spatial_demand_generalization/a2-native-wait/request.json` and names the
+same operation through native status, with a 30-second read-only probe and 1500-second
+window. The first drain observed accepted/running with consistent records and zero probe
+errors at 2026-09-25T04:18:17.644765Z. No result has been interpreted. Yield to this
+observer; a checkpoint rearms this same handle, and terminal evidence is reconciled and
+read without an automatic runner retry. This unchanged batch start needs no main/index edit.
