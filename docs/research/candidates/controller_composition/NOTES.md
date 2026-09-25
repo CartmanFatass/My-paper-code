@@ -1418,3 +1418,16 @@ At collection F2 had19 rollouts complete and rollout20 updating; no evaluation c
 Published main remains`56c660d6353782612d236b8f1e1c0e1b6830ca71`, with pause lifted and unchanged
 ownership. Continue the predeclared batch and rearm the same operation; no plan or selection
 change follows from F1's training curves. The complete13-cell comparison remains the reading.
+
+### B02 generation9 checkpoint, 2026-09-25
+
+The same native operation remains accepted/running with consistent identities.
+[F2 metadata](../../../../runs/controller_composition/b02_partner_training_20260925/fit_F2.json)
+now records45 completed rollouts,360,000 team steps,1.08M executed rows for each half-team,
+50,625 actor and50,625 critic optimizer calls, and zero other optimizer calls. Its measured
+fit wall is1305.628709s. All45 accounting, source-immutability, sampling and finite-curve/loss
+checks passed; F1/F2 initial learner/normalizer/optimizer state and actual reset worlds match.
+The metadata and initial/final checkpoint hashes match the node. M had26 rollouts complete
+and rollout27 updating when collected; no evaluation cell was complete. Main/control remain
+unchanged at`56c660d6353782612d236b8f1e1c0e1b6830ca71`. Continue the same fixed batch and observer;
+the complete13-cell reading and full raw-artifact recovery remain pending.
