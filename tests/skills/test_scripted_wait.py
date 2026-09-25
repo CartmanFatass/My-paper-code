@@ -20,22 +20,26 @@ def launch_body(code=0):
             'record_consistency': {'state': 'consistent'}}
 
 
+def fake_codex(binary, calls, queue_help='--thread --message'):
+    binary.write_text(f'''#!{sys.executable}
+import sys
+from pathlib import Path
+if '--help' in sys.argv:
+ print({queue_help!r})
+else:
+ with Path({str(calls)!r}).open('a') as out: out.write('queued\\n')
+ print('queued test message')
+''')
+    binary.chmod(0o700)
+
+
 @pytest.fixture
 def setup(tmp_path, monkeypatch):
     monkeypatch.setenv('CODEX_THREAD_ID', str(uuid.uuid4()))
     folder = tmp_path/'state'
     binary = tmp_path/'codex'
     calls = tmp_path/'calls'
-    binary.write_text(f'''#!{sys.executable}
-import sys
-from pathlib import Path
-if '--help' in sys.argv:
- print('--thread --message')
-else:
- with Path({str(calls)!r}).open('a') as out: out.write('queued\\n')
- print('queued test message')
-''')
-    binary.chmod(0o700)
+    fake_codex(binary, calls)
     job = {'id': 'one', 'protocol': 'launch', 'argv': [sys.executable, '-c', 'print("{}")'],
            'cwd': str(tmp_path), 'interval': 1}
     monkeypatch.setattr(wait, 'spawn', lambda folder: 0)
@@ -102,6 +106,108 @@ def test_uncertain_send_claim_survives_and_never_retries(setup, monkeypatch):
         state['wake']['status'] = 'attempting'
     wait.submit(folder)
     assert len(sent) == 1
+
+
+def test_reused_arm_replaces_missing_binary_before_one_submit(setup, tmp_path):
+    folder, old_binary, old_calls, job = setup
+    new_binary, new_calls = tmp_path/'new-codex', tmp_path/'new-calls'
+    fake_codex(new_binary, new_calls)
+    old_binary.unlink()
+    wait.arm(folder, {'jobs': [job]}, str(new_binary), 1500)
+    with wait.transaction(folder) as state:
+        assert state['codex'] == str(new_binary)
+        assert state['jobs']['one']['spec'] == job
+        wait.event(state, 'done', 'READY', {})
+    wait.submit(folder)
+    wait.submit(folder)
+    assert new_calls.read_text().splitlines() == ['queued']
+    assert not old_calls.exists()
+    assert wait.drain(folder)['delivery']['status'] == 'queued'
+
+
+@pytest.mark.parametrize('explicit_codex', [False, True])
+def test_rearm_cli_refreshes_missing_binary_and_consumes_original_event(
+    setup, tmp_path, monkeypatch, capsys, explicit_codex
+):
+    folder, old_binary, old_calls, job = setup
+    new_binary, new_calls = tmp_path/'new-codex', tmp_path/'new-calls'
+    fake_codex(new_binary, new_calls)
+    old_binary.unlink()
+    with wait.transaction(folder) as state:
+        event_id = wait.event(state, 'original', 'READY', {'job_id': 'one'})
+    seen = wait.drain(folder)
+    monkeypatch.setattr(wait.shutil, 'which', lambda name: str(new_binary))
+    argv = ['hmasd_wait.py', 'rearm', '--state-dir', str(folder),
+            '--generation', str(seen['generation']), '--wake-id', seen['wake_id'],
+            '--event-ids', event_id]
+    if explicit_codex:
+        argv.extend(['--codex', str(new_binary)])
+    monkeypatch.setattr(sys, 'argv', argv)
+    wait.main()
+    assert json.loads(capsys.readouterr().out)['generation'] == seen['generation'] + 1
+    with wait.transaction(folder) as state:
+        assert state['codex'] == str(new_binary)
+        assert state['events'][event_id]['consumed'] is True
+        assert state['jobs']['one']['spec'] == job
+        wait.event(state, 'next', 'READY', {})
+    wait.submit(folder)
+    assert new_calls.read_text().splitlines() == ['queued']
+    assert not old_calls.exists()
+    assert wait.drain(folder)['delivery']['status'] == 'queued'
+
+
+@pytest.mark.parametrize('invalid', ['missing', 'no-queue'])
+def test_rearm_bad_binary_does_not_consume_or_change_state(setup, tmp_path, invalid):
+    folder, old_binary, _calls, _job = setup
+    with wait.transaction(folder) as state:
+        event_id = wait.event(state, 'original', 'READY', {})
+    seen = wait.drain(folder)
+    before = json.loads((folder/'state.json').read_text())
+    candidate = tmp_path/'new-codex'
+    if invalid == 'no-queue':
+        fake_codex(candidate, tmp_path/'new-calls', queue_help='no queue support')
+    with pytest.raises((OSError, ValueError)):
+        wait.rearm(folder, seen['generation'], seen['wake_id'], [event_id], 1500, binary=str(candidate))
+    assert json.loads((folder/'state.json').read_text()) == before
+    assert old_binary.exists()
+
+
+def test_binary_refresh_keeps_owner_pending_and_generation_guards(setup, tmp_path, monkeypatch):
+    folder, old_binary, _calls, job = setup
+    candidate = tmp_path/'new-codex'
+    fake_codex(candidate, tmp_path/'new-calls')
+    with wait.transaction(folder) as state:
+        event_id = wait.event(state, 'original', 'READY', {})
+    seen = wait.drain(folder)
+    before = json.loads((folder/'state.json').read_text())
+    with pytest.raises(ValueError, match='drain and rearm'):
+        wait.arm(folder, {'jobs': [job]}, str(candidate), 1500)
+    with pytest.raises(ValueError, match='stale'):
+        wait.rearm(folder, seen['generation'] - 1, seen['wake_id'], [event_id], 1500, binary=str(candidate))
+    with pytest.raises(ValueError, match='blocked observation'):
+        wait.rearm(folder, seen['generation'], seen['wake_id'], [event_id], 1500,
+                   resume_jobs=['one'], binary=str(candidate))
+    with monkeypatch.context() as patch:
+        patch.setenv('CODEX_THREAD_ID', str(uuid.uuid4()))
+        with pytest.raises(ValueError, match='different'):
+            wait.rearm(folder, seen['generation'], seen['wake_id'], [event_id], 1500, binary=str(candidate))
+    assert json.loads((folder/'state.json').read_text()) == before
+    assert before['codex'] == str(old_binary)
+
+
+def test_submit_missing_binary_records_executable_and_errno_once(setup):
+    folder, binary, _calls, _job = setup
+    binary.unlink()
+    with wait.transaction(folder) as state:
+        wait.event(state, 'done', 'READY', {})
+    wait.submit(folder)
+    wait.submit(folder)
+    delivery = wait.drain(folder)['delivery']
+    assert delivery['status'] == 'delivery_unknown'
+    assert delivery['error_type'] == 'FileNotFoundError'
+    assert delivery['executable'] == str(binary)
+    assert delivery['errno'] == 2
+    assert str(binary) in delivery['error']
 
 
 def test_unknown_handle_retries_are_bounded_then_report_blocker(setup, monkeypatch):
