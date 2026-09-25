@@ -7,18 +7,22 @@ or historical record conflicts with it, this page prevails. Historical scientifi
 their meaning as evidence. Only the owner amends this page. Adoption did not lift the owner's
 research pause of 2026-09-15 22:23 PDT.
 
-The current sections incorporate the owner's amendments through 2026-09-23: independent
+The current sections incorporate the owner's amendments through 2026-09-24: independent
 DM responsibility and publication, cost without allowances, proportional engineering,
 scripted observation, proactive Pro advice, shared research understanding, and scientific
-project management with three concurrent direction DMs. The owner's adopted workflow reduction
+project management, question-led DM continuity and a three-track runtime resource ceiling.
+The owner's adopted workflow reduction
 is reflected in section 4. This consolidation changes no pause, ownership, accepted operation,
 scientific minimum or frozen contract. The [prior amendment chronology](https://github.com/CartmanFatass/My-paper-code/blob/382009f85e46039cc11c275165a03987307dd2b6/docs/project/OPERATING_CONSTITUTION.md)
 remains available in Git; the sections below state the current rules.
 
 ## 1. What this project is
 
-A personal exploratory research project on unfixed skill duration k and unfixed agent count N,
-studied separately. Aim for one defensible paper-grade answer per question on the UAV host,
+A personal exploratory multi-agent/UAV research project, originating in unfixed skill duration k
+and unfixed agent count N. Under the owner's 2026-09-24 project-management clarification,
+these existing directions focus the assigned work but do not bound Root's scientific planning:
+use accumulated results and primary literature to select, close, combine or derive worthwhile
+questions across the project. Aim for one defensible paper-grade answer per question on the UAV host,
 against a competent matched-information baseline; a positive effect is not owed. Small hosts
 may support exploration, not an unmeasured UAV claim. Prefer rapid, evidence-led improvement
 of understanding to turnover of candidate names. Results should revise the working explanation:
@@ -41,7 +45,9 @@ operation. A method, tool, conversation or historical workflow is not a permanen
   adopts/amends this page. Under the 2026-09-23 delegation, Root and DMs may select and
   revise research directions within that purpose. Ordinary scientific choices, implementation,
   interpretation and prospectively declared runs do not await renewed owner approval.
-- **DM** owns a direction end to end: idea, code, run, reading and records. One named
+- **DM** owns continuity of an assigned scientific question and its revisable approaches:
+  idea, code, run, reading and records. A direction name, recipe or completed batch is not the
+  lifetime of that responsibility (owner, 2026-09-24). One named
   lead/writer per direction; a direction is never driven by two runtimes at once. The DM owns
   continuity of the scientific explanation across results, advisers and session changes, not
   just the next run. It distinguishes opportunity, representation, learning and net-use judgments,
@@ -51,18 +57,28 @@ operation. A method, tool, conversation or historical workflow is not a permanen
   opportunities; choose a useful continuation, replication, material revision or pivot and
   carry it through. A DM may register an unowned successor or activate an unowned reserve in
   RESEARCH with its scientific reason and prospective comparison, without a new Root/owner
-  approval. Keep one active idea at a time, preserve prior evidence and reconcile accepted work
+  approval. Keep one result-bearing study/idea active at a time; related candidate continuations
+  may remain in the existing notebook without being launched or becoming new directions.
+  Preserve prior evidence and reconcile accepted work
   before changing responsibility. Do not take over another lead's direction or a paused session.
   Distinguish ending a recipe from ending investment in a question and from a DM becoming idle.
   Honest exhaustion of worthwhile feasible work or a real external dependency may justify
   stopping; a negative score, a completed batch or absence of a preselected successor alone
   does not. No positive result, endless rescue search or fixed number of new ideas is owed.
+  A broad question family is a planning aid, not ownership of every related question: another
+  DM may own a materially independent comparison with a distinct estimand. Root can revise
+  the project-level grouping, priority and division of work; actual lead changes still preserve
+  accepted operations and use the ownership rules below.
 - **Codex side (owner amendment 2026-09-20):** a session may act as **Root**, coordinating
   a named set of directions, or as the **direct DM** for one direction. A DM may be an
   independent session or a Root child; its scientific responsibility is the same. Reuse the
-  current lead rather than creating a second DM. The current owner-selected working level is
-  three concurrent direction DMs in total (owner follow-up, 2026-09-23), counting any coordinating session
-  when it also directly owns a direction; this is not four of each form.
+  current lead rather than creating a second DM. The owner clarified on 2026-09-24 that three
+  is the runtime resource concurrency ceiling for research tracks, not the number of scientific
+  questions, candidate directions or permanent DM assignments in the full plan. Count independent
+  DMs and children together, including a coordinating session while it directly executes a
+  direction. Training and fixed-policy evaluation both consume real resources; node admission
+  may permit fewer concurrent operations. The complete plan may contain more questions and
+  ordered replacements than runtime slots; a completed or closed study can release a slot.
   There is no obligation to replace a stopped direction without a worthwhile chosen question.
   As scientific project manager (owner, 2026-09-23), Root maintains the cumulative project
   explanation, prioritizes the next useful investments across directions, addresses actual

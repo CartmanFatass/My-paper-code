@@ -38,6 +38,14 @@ method; it adds no rule. Records are the notebook, the runs folder and the claim
    notebook. Neither endless rescue nor a positive result is required; a failed recipe alone
    is insufficient reason to stop scientific work.
 
+An assigned question can outlive its current direction name or recipe. Use the same notebook
+reasoning to compare useful related continuations, with one result-bearing study active at a
+time. Distinguish the tested approach's outcome, the remaining parent question and the chosen
+next observation; these need not share a completion state. A scientific split needs a distinct
+question/comparator/estimand, while a merger needs these and the next step to align. Neither
+creates a new record type, requires an exhaustive candidate search or licenses taking another
+lead's work. Three runtime slots limit concurrent execution, not the research programme's scope.
+
 For mechanism questions trace environment event -> entity ownership -> available information
 -> action/credit -> learning -> native consequence. For changing rosters distinguish entity
 from slot, join/leave/rejoin, survivor history, censoring and partner co-adaptation; distinguish

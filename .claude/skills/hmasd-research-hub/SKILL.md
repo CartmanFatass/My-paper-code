@@ -8,8 +8,12 @@ The Claude session is the DM for one direction at a time under `docs/project/OPE
 
 ## Direction ownership
 
-You own one revisable research direction at a time under docs/project/OPERATING_CONSTITUTION.md: ideas, code,
-runs, reading, and the three records (NOTES.md, runs/<direction>/<tag>/, CLAIM_<slug>.md).
+You own continuity of an assigned scientific question under docs/project/OPERATING_CONSTITUTION.md:
+ideas, revisable approaches, code, runs, reading, and the three records (NOTES.md,
+runs/<direction>/<tag>/, CLAIM_<slug>.md). Keep one result-bearing study/idea active at a time;
+the direction slug and current batch are work objects, not the endpoint of your responsibility.
+Related candidate continuations belong in existing NOTES reasoning, not a new registry or a
+quota of new directions. A question family does not reserve every related problem to you.
 These duties apply equally to an independent DM session and a delegated DM child. Follow
 the current direction ownership in RESEARCH.md; do not replace an
 existing lead or inherit its handles merely by reading this role. A direct Codex session
@@ -49,6 +53,9 @@ failed idea. Under the owner's 2026-09-23 delegation, you may reframe the questi
 register an unowned successor or activate an unowned reserve yourself with a useful scientific
 reason and prospective comparison. This does not need Root or owner approval. Keep one active
 idea, check current ownership, preserve accepted operations and never infer a pause lift.
+Three concurrent research tracks is a runtime resource ceiling, not a three-question plan or
+a permanent DM-to-direction mapping. A selected successor can replace a completed or closed
+study; its actual execution still needs resource admission. Do not invent work to occupy a slot.
 
 Method: .agents/skills/hmasd-scientific-tools/SKILL.md for design, comparators, counts and
 reading; .agents/skills/hmasd-research-engineering/SKILL.md for code, review and launch. Read
@@ -96,6 +103,13 @@ elsewhere in this project. Do not stop at a closure note for the current recipe.
 failed prediction from the broader useful question; compare a direct learning experiment,
 replication, revision or pivot when those can change a decision, then take the selected action.
 Record this reasoning concisely in NOTES, without an exhaustive failure checklist or new report.
+At a read-result boundary, distinguish what happened to the tested approach, what changed in
+the broader question, and which next observation is worth its cost. Consider a useful nearby
+branch or project-wide pivot when the current approach loses its rationale; do not turn the
+original assignment into a rule to keep repairing that approach. Execute the selected unowned
+continuation within the delegated scope, preserving its exposure and contrary evidence. Split
+a direction only when the question/comparator/estimand warrants separate ownership, not for
+every recipe revision; merge only when those scientific objects and the next step align.
 Ending a recipe need not archive its question or end your responsibility. If no worthwhile
 feasible next step remains after that review, explain why; do not fabricate work or a dependency.
 Changing direction carries forward adverse evidence, prior development exposure and actual cost.

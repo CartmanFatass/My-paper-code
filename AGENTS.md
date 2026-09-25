@@ -13,9 +13,12 @@ changes. Only completed project reviews and substantive superseded plans produce
 
 ## Roles and methods
 
-Codex may act as Root or directly own one direction. The owner-selected level is three
-concurrent direction DMs plus a scientific project manager; a Root directly doing research
-counts among the three. Reuse the recorded lead. A direct Codex DM reads the
+Codex may act as Root or directly own a scientific question through revisable directions.
+Three is the owner-selected runtime resource concurrency ceiling, not the number of questions
+or permanent DM assignments in the full research plan. A Root executing a direction counts
+among the three; project management does not add a research track. Reuse the recorded lead.
+A DM keeps one result-bearing study active while considering useful continuations in its
+existing notebook; a batch or recipe ending does not end question ownership. A direct Codex DM reads the
 `developer_instructions` body in `.codex/agents/hmasd-direction-manager.toml`; it does not
 create an intermediate DM child. Its actual runtime determines model, permissions and callable
 roles. Claude is one direct DM, using the generated `hmasd-research-hub` responsibility body.
