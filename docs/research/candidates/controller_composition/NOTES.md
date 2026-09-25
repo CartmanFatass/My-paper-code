@@ -195,3 +195,37 @@ a successful write. If writeback is unavailable, return the complete substantive
 chat, not just a receipt, SHA or link. No new files, control changes or approval requirements.
 
 ### Answer
+
+## 2026-09-25 — Read-only B20 source and asset map
+
+The bounded Scout returned facts from `424bbe4db1351db70d73560ece913150c2b20ed4` and the
+three published summaries; no simulation, evaluation, tensor unpickling or training ran.
+It independently checked all three retained checkpoint files as PyTorch zip archives and
+matched their full byte counts/SHA256 against metadata. This verifies recoverable bytes,
+not tensor restoration or trajectory equivalence.
+
+The B20 evaluator makes a native LOCAL1 N6 runtime, calls `reset_env_state` for each lane,
+uses `step(..., deterministic=True)`, clips actions to [-1,1], and sends rows in the array
+adapter's ordered native-agent list. Native per-world J is `N * scalar_return / H`;
+other saved quantities are coverage/quality/height components, eligible users E, served
+users S, eligible-unserved U and mean height. S1 has no separate battery/return-risk
+endpoint in this evaluator; this study should retain adverse native worlds rather than
+invent such a measure. Both policy runtimes need independent hidden states by lane and
+role, aligned with the same actual environment rows.
+
+The original evaluation uses `preserve_rng` and a runtime seed `world_base + 51`; native
+world seeds are `world_base + lane`. The proposed 92525000–92525031 worlds are disjoint
+from B20 evaluation 2446500–2446531, 2446600–2446631, 2446700–2446731 and its production
+training addresses generated from bases 3246100/3346100/3446100 plus `100*rollout + lane`
+for rollouts 1–45 and lanes 0–15. Freshness here means no reuse of those source worlds;
+it does not promise disjoint physical state support.
+
+The checkpoint has model state dicts, config and four normalizer fields, and explicitly
+does not support optimizer/training resume. Obs/state normalizers are null in these
+configs; value normalizers are present. A true checkpoint loader and composed evaluator
+still need implementation and independent review. The simple inferred boundary uses two
+full N6 policy runtimes, taking rows 0–2 from the first and 3–5 from the second. At that
+implementation, 864k executed action rows may require 1.728M policy action-row inferences;
+this adds compute but no environmental transitions or new fits. Exact implementation
+cost and correctness remain to be measured. No choice of controller, split or endpoint
+has changed in response to outcomes.
