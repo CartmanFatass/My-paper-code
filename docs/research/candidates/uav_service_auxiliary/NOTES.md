@@ -10146,3 +10146,19 @@ Initial evaluation remains the sole completed panel (32 worlds, 96,000 transitio
 endpoint evaluation nor A has started. The summary is INCOMPLETE without a recorded failure,
 stderr is empty, and fresh main retains the same lead and lifted owner pause. Rearm the same
 accepted operation; this checkpoint supplies no endpoint comparison or change in scope.
+
+### B09 N fit complete; endpoint panel underway — 2026-09-24
+
+Generation 5 returned only CHECKPOINT `9287472100b050314382ffe6`, with both original native
+identities running, consistent records, zero probe errors and no exit witness. The runner
+reports N training COMPLETE at exactly 180,000 transitions / 30 updates / 60 native episodes;
+all five learner groups moved in update 30. This is a training completion record, not final
+paired scientific acceptance. The N endpoint panel has completed 10/32 worlds and attempted
+the 11th; the journal records 30,500 N evaluation transitions (126,500 including the 96,000
+common initial transitions). Only initial_primary is a completed panel in the summary.
+
+A has not started; the batch remains INCOMPLETE without a recorded failure and stderr is
+empty. Fresh main keeps the same lead and lifted owner pause; its project-plan wording does
+not change this accepted comparison. Continue the fixed N endpoint-then-A sequence and
+rearm the same operation. Full panel artifacts and the A endpoint remain required for reading
+the declared contrast; this checkpoint does not select or extend a run.
