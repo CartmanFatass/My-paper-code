@@ -917,3 +917,134 @@ unstarted. This is progress only, not a result or confirmation verdict. Preserve
 authoring checkout at the fixed input while it owns live outputs; later notebook commits do
 not require checking out over those untracked native files. Read and retain the whole pair
 on completion, and apply the no-retry/incomplete-batch rule to any genuine technical failure.
+
+### C01 block 0 checkpoint — 2026-09-25T07:31Z
+
+Read the generation-8 checkpoint event `c1970404404e0aea8733a816` under wake
+`4644e172-97bb-4e40-84c1-f368064e6f0b`. The 07:30:22Z native observation found the same
+accepted claim, matching live supervisor/runner identities, consistent records and no exit
+witness or observation error. No replacement scientific request was made.
+
+At 07:31:39Z the native progress record showed U training at the rollout-32 update boundary:
+256,000 training/stored team steps (1,536,000 UAV steps), 512 training episodes and 31
+completed updates; one fit had started. Its three initialization panels accounted for
+48,000 evaluation team steps, 96 episodes/resets, zero evaluation storage calls and zero
+evaluation optimizer calls. Recorded U arm wall time was 1,509.750150632 seconds. M was
+unstarted, failure was null and stderr was empty. These are intermediate progress counters,
+not a completed arm, paired result or confirmation verdict.
+
+Fresh published main `3ad84d020cf4b44b6dae0d317025b410148940d2` retained this direction's
+confirming standing and lead and the lifted owner pause; the actual node also retained the
+lifted pause. With no newer control change, the same accepted job
+`spatial-c01-b0-s263000101` was rearmed to generation **9** for another 1,500-second bounded
+observation window, consuming the event above. Fixed source, seeds, counts and decision rule
+remain unchanged. No main/index update is needed for this checkpoint.
+
+### C01 block 0 checkpoint — 2026-09-25T08:01Z
+
+Read the sole pending generation-9 checkpoint event `9b2962f1d11c25b5ccb0d4fe`, wake
+`653fb6cb-2b99-4e74-ac94-43b996dc06ab`. At 07:59:32Z the same accepted native operation
+retained matching live supervisor/runner identities, consistent records and no exit witness
+or observation errors. Earlier A2/Pro events remain consumed; no new Pro answer was pending.
+
+At 08:01:25Z U's arm summary reported complete: 360,000 training/stored team steps,
+2,160,000 training UAV steps, 720 episodes and 45 updates. Its six panels recorded 96,000
+evaluation team steps, 576,000 evaluation UAV steps and 192 episodes/resets, with zero
+evaluation storage/optimizer calls; arm wall time was 2,232.744182191 seconds. This is
+technical arm progress, pending whole-pair evidence collection and scientific reading.
+
+M's live arm summary reported one started fit and training at the rollout-20 update boundary:
+160,000 training/stored team steps, 960,000 UAV steps, 320 episodes and 19 completed updates;
+evaluation had not started. Recorded M arm wall time was 1,020.585341265 seconds. Both arm
+failure fields were null; stderr was empty at 08:01:01Z. The batch summary still showed its
+U-completion counts and M as running/fit_started=false; retain that snapshot distinction and
+use M's own live record for these current progress counters. No paired effect or confirmation
+verdict is available.
+
+Fresh main remained `3ad84d020cf4b44b6dae0d317025b410148940d2`, with unchanged confirming
+standing and lead and owner pause lifted; the canonical node pause was also lifted. Consumed
+the checkpoint above and rearmed the same `spatial-c01-b0-s263000101` observation to
+generation **10**, window 1,500 seconds. No worker restart, new launch, Pro resend, cross-task
+message or main/index update was made.
+
+## 2026-09-25 — C01 block 0 accepted: adverse J, near-zero hotspot service difference
+
+The first of the fixed five paired blocks is fully collected and read. The native witness
+records ordinary exit 0 at 2026-09-25T08:25:47.469621Z with the originally accepted process
+identities. Generation-10 READY event `8c2c2e03bdcbdab67c9d751c`, wake
+`6da59375-af45-468e-9241-22b575d713cc`, was consumed after this evidence reading (generation
+11). Scientific acceptance below rests on the artifacts and reconstruction, not the exit code.
+
+### Evidence and actual cost
+
+Both U and M completed their fixed 360,000 training steps and 45 updates, with 101,250 actor
+and 101,250 critic optimizer calls each. Total exposure is **two fits, 720,000 training plus
+144,000 evaluation team steps, 5,184,000 UAV action rows**, nine evaluation panels and 288
+evaluation episodes. Evaluation storage and optimizer calls are zero. Scientific wall was
+4,674.513675 seconds (77.9086 minutes), U/M arm wall 2,232.744182/2,441.522985 seconds;
+native admission to exit was 4,836.943655 seconds (80.6157 minutes). The process recorded
+18,527.012349 user CPU seconds, 44.240376 system CPU seconds and peak RSS 1,839,288 KiB.
+RSS is paired-process RUSAGE_SELF, excluding other processes; peak scratch was unmeasured.
+Collection, verification and reading are additional costs and introduce no fit or evaluation.
+
+All 23 actual source digests match fixed published input
+`9e44adde3d54fcd0363a2ebdbc1468494141c27b`. Post-run reconstruction checked every one of the
+144,000 evaluation transitions: unique-user/c10/eligibility constraints, service and unserved
+counts from link matrices, coverage/quality/height components, native J against six times
+scalar reward, executed clipping and state/observation continuity. All per-world metrics and
+differences agree with the original summaries; maximum panel-J roundoff is 1.11e-15.
+Initial physical scenes match within each family across the three evaluated policies.
+All 90 training reset records retain their fixed seeds and family schedule; shared uniform
+lanes match between arms. The four checkpoints carry the correct identity, and actual U/M
+initial tensors and normalizers agree. All 90 training rows, 88 reset boundaries and recorded
+evaluation preservation checks pass. Both native logs are empty. The read-only collector's
+initial schema assumptions were corrected for cumulative training step counters and checkpoint
+paths relative to the raw directory; original runner code and native evidence were unchanged.
+
+The **136 original native files / 1,088,016,261 bytes** were copied from the recorded native
+output, individually size/SHA256-checked, then independently copied and rechecked at
+`/home/fires/hmasd-artifacts/spatial_demand_generalization/s1_spatial_coverage_c01_b0_s263000101`.
+Canonical inventory SHA256 is `43dfd66fe93afd660f41055accff234b3df1a16923df8d97293ef8faa378fe5e`,
+using the same ordered compact JSON definition as A2. Original batch summary SHA256 is
+`9d350bde1d8dd69ec6223f2247bb7c08c25d644626829c4304bc51c11cffb3f8`.
+The independent reading report is retained outside the checkout under
+`/home/fires/hmasd-artifacts/spatial_demand_generalization/c01-postrun-reading/block0-verification.json`
+(SHA256 `f55ea400e6c97ce31d8ba73b43d4e3a463e882aabb2b054eedcdd3ccaace35bf`), alongside its
+read-only reader (SHA256 `187b51a47cce6435359383f92f3e51f56f6b63d66f25276568aebe47a5097f59`).
+After verified retention, native snapshot GC preview and apply reclaimed only
+`6dcb68c53a144a38bf330aed7f217329`; native outputs, claim, manifest and authoring checkout remain.
+The documented read-only sudo process scan was used for the previously observed protected
+process visibility requirement. No experimental process was restarted.
+
+### Fixed per-block reading
+
+Entries are native J / served users per step, averaged over all 32 fixed worlds per family.
+
+| Family | Common initial | U45 | M45 | M45 minus U45 | Adverse J or service worlds |
+| --- | --- | --- | --- | --- | --- |
+| hotspot, primary | .229825258 / 15.459750 | .414168154 / 26.206250 | .399446957 / 26.214188 | **-.014721197 / +.007938** | 22/32 |
+| uniform | .273289499 / 18.741938 | .532726414 / 34.601250 | .518171620 / 34.439813 | -.014554794 / -.161438 | 24/32 |
+| cluster | .259819117 / 17.804625 | .511600493 / 32.797063 | .486909743 / 32.360563 | -.024690750 / -.436500 | 22/32 |
+
+Both arms improve their own J and service in every evaluated world. Mean hotspot own-learning
+gains are U +.184342896 J / +10.746500 service and M +.169621698 / +10.754438. Thus this
+block's adverse paired J is not absence of learning by either program. Hotspot M-minus-U has
+coverage +.000158750, quality -.012790460, height penalty +.010995184 (mean height +10.995184),
+eligibility -1.866500 and eligible-but-unserved -1.874438. Fewer unserved eligible users alone
+does not establish extra delivered service. Height penalty is not measured battery energy.
+
+All 96 paired J/service world differences and all component/own-learning readings remain in
+the [original batch summary](../../../../runs/spatial_demand_generalization/s1_spatial_coverage_c01_b0_s263000101/summary.json).
+The largest hotspot paired J and service losses coincide at seed 265020027:
+-.082920548 J / -4.754 service. Uniform's largest J loss is seed 265000031 (-.076849165),
+while its largest service loss is seed 265000027 (-4.144); cluster seed 265010004 loses
+-.170850631 J / -11.888 service. These worlds remain in every reported mean.
+
+This fresh block does not reproduce A2's joint positive direction. It is one of five planned
+training units, not a population conclusion or a confirmation verdict. The new panel and new
+training instance also prevent attribution of the sign change to either source alone.
+Continue the already fixed block 1, seed 263000102, training base 264100000, constructor
+269901000 and the same evaluation panels/input SHA. There is no endpoint, mixture, seed,
+budget, stopping-rule or claim change. Fresh main `3ad84d020cf4b44b6dae0d317025b410148940d2`
+retained the lead, confirming standing and lifted owner pause. This individual-block acceptance
+is recorded on the direction branch; main/index publication remains at the material study boundary.
