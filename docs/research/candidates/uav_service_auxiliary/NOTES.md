@@ -10093,3 +10093,29 @@ that observation. The fixed N-then-A sequence follows this panel independently o
 These are execution facts, not an A-minus-N finding. Same-handle checkpoints/terminal notices
 return to this task for collection, complete reading and its own result publication. B08's
 failed attempt and cost remain separate. No automatic repeat or extension is selected.
+
+### B09 first observation checkpoint — 2026-09-24
+
+Generation 1 returned only a CHECKPOINT, with the same accepted operation and both original
+native process identities running, consistent records, zero probe errors and no exit witness.
+The compact progress read reached 77,000 initial-primary evaluation transitions: 25/32 worlds
+completed, the 26th attempted; zero training fits/transitions yet. The last boundary summary
+records 75,000 transitions/25 worlds, with no completed panel, no failure and empty stderr.
+This is expected boundary-versus-journal cadence, not a rewritten count discrepancy. No result
+is accepted before the full required panel artifacts are available. Continue the fixed batch
+and rearm the same handle; no new launch, fit, panel, Pro request or shared-index change.
+
+### B09 common initial panel complete; N learning underway — 2026-09-24
+
+Generation 2 returned a CHECKPOINT on the same running native identities, with consistent
+records and no observation errors or exit witness. The initial F panel completed all 32 fixed
+worlds 952001–952032 and 96,000 actual evaluation transitions, with zero new optimizer updates
+and the recorded full-state immutability check. All four root artifact references (config,
+common initial checkpoint, full raw panel JSON and NPZ) match their recorded SHA256s on node;
+no artifact was removed or promoted into a complete paired result.
+
+N has started and collected 42,000/180,000 transitions. At the read boundary six updates were
+complete and phase 7 collection had finished; all five learner groups moved in the sixth
+update. This distinction prevents counting a collected phase as an already finished update.
+The original initial-plus-N-then-A batch continues, stderr is empty, and A has not started.
+No endpoint contrast is available. Rearm the same operation; no scientific scope or index change.
