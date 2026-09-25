@@ -606,3 +606,37 @@ verification remain before result execution.
 The repeated native wake was drained: generation2 contains no pending events and its only Pro
 job is collected. The already-read, repository-verified full answer and repaired answer-only
 write remain the evidence; no Send, worker restart or cross-task message was made.
+
+### Engineering acceptance and prospective native execution
+
+Independent read-only review of `3b5ee2c813532aa0c058d1c3b11bd88e139d8121` found no remaining
+material findings. It verified both repairs, the34th dependency identity and the test-only
+path override, with the accepted world/horizon, restore/reset/RNG/routing, native metrics and
+bootstrap semantics preserved. The review did not rerun tests. Partial retention handles
+caught exceptions; abrupt process termination may leave the active cell's in-memory work
+unrecoverable and must be reported as unknown rather than reconstructed.
+
+The DM ran the same focused suite once at that exact published commit on configured WSL4070
+using its configured interpreter and the three staged, hash-checked assets:23 passed,
+16 upstream warnings in6.79s, exit0, source checkout clean afterward. This adds22 nonproduction
+fixture team transitions; no production worlds were evaluated. Git fetch/fast-forward succeeded
+but reported an existing automatic-repack failure (`bad tree object
+9e40125ee3e24973b69754649226d18847b45862`). The tested current source and required metadata are
+available; no shared history repair, gc-log deletion or broad Git maintenance is attempted.
+
+I accept the implementation and its checks. Fresh main
+`adf68344620a2439276bdf3061b2e0e0fc94f48d` retains the lifted owner pause and this direction's
+stable independent-DM lead; its other active finite-model question does not change B01.
+The prospective output tag is `b01_fixed_matrix_20260925`, with supervisor name
+`controller-composition-b01-20260925`. Use the existing dedicated node checkout as the fixed
+source, leave it unchanged until terminal collection, and run without an extra snapshot.
+That choice reuses the already verified source/metadata without requiring another full
+materialization of unrelated historical objects. Local authoring remains separate.
+
+Publish this record before invoking the configured supervisor and admission kernel once.
+The three staged checkpoint locations, frozen CLI seed92525000,32 worlds, nine ordered cells,
+H500, CPU float32/torch4 and all prior analysis bindings remain unchanged. Planned result cost
+is0 fits/updates,288 world episodes,144,000 team transitions,864,000 executed UAV rows and
+1,728,000 inferred policy action rows. Actual wall/RSS and any failed work will be read from
+the accepted operation. The native kernel still decides current pause/lead, exact publication,
+duplicate identity and fresh actual-node memory admission. No result has yet been launched.
