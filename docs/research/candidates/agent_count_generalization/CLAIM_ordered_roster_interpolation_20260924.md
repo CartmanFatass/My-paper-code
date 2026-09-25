@@ -105,3 +105,58 @@ on the fixed new panel and host. It does not resolve order versus support or the
 claims. An inconclusive result ends this batch without relabeling exposed instances as
 fresh evidence. The DM separately assesses whether an additional different question is
 worth its cost; success does not require an architecture or another confirmation.
+
+## 2026-09-24 — Adopted B20 plan after the actual Pro critique
+
+The DM adopts the complete numerical design above, following the complete same-question
+Pro answer in NOTES. The draft remains intact as selection history. The following
+clarifications govern interpretation; there is no change to seeds, worlds, programs,
+endpoints, six-fit cost, strict four-test rule or stopping. This is the prospective
+confirmation decision, not evidence of successful execution or node admission.
+
+Let xi be the complete fresh training-block realization (initialization, training scenes,
+learner and sampler randomness), and W_N the fixed 32-world evaluation panel. For Y in
+{J,S}, D_b,N,Y = mean over w in W_N of Y(M45(xi_b),w;N) - Y(F45(xi_b),w;N).
+The target is mu_N,Y(W_N) = E_xi[D_b,N,Y(W_N)], for N5 and N7. It is conditional on
+these worlds, not their arbitrary-world population and not just the finite average of
+three integer seeds. Treating the disjoint, prospectively fixed pseudorandom addresses
+as independent identically distributed block realizations is an explicit model
+assumption. Distinct seeds alone do not prove it. Blocks use fresh processes and fresh
+model, optimizer, normalizer, buffer and RNG state. Each arm retains its own learning
+state throughout the 45 rollouts, including across roster changes.
+
+Use the three unrounded block effects, sample SD with ddof=1, and
+t(.975,2)=4.302652729696142. The two-sided 95% interval is mean ± t*s/sqrt(3).
+The four lower bounds must each be strictly positive. Under valid iid-normal component
+tests, the all-positive intersection-union decision has false-support probability at
+most .025; it needs no independence between the four components. With only approximate
+normality this is nominal model-based control, not a distribution-free guarantee.
+The marginal intervals are not a simultaneous 95% confidence region. n=3 cannot check
+the distribution assumption or establish adequate power; the half-width is 2.484137712
+times sample SD. No future SD or pass probability is inferred from B19.
+
+If all four pass, report support for four positive conditional program means under the
+declared model, with all block values and intervals. Replace the draft's "repeatable
+utility" shorthand with this wording: no next-run success probability or stable
+per-instance ranking is established. Zero margins do not establish practical adoption.
+If any fails, the joint claim is not established: intervals crossing zero are unresolved,
+and intervals wholly negative are adverse evidence. Do not select passing components to
+rescue the conjunction. A legitimate weak F is retained without replacement.
+
+Own-learning changes, N6 tradeoffs and all adverse worlds are fully reported separately
+from statistical support and technical validity. They are not extra statistical gates;
+if both arms degrade from initialization, an M−F advantage does not establish useful
+learning. Legal low scores or nonmonotone training are not technical failures. A missing
+or invalid arm makes this fixed confirmation incomplete; preserve cost and evidence,
+stop remaining launches and decide any repair prospectively, without automatic retries.
+
+Execute blocks 1, 2 and 3 in that order as three separate sequential native-admitted
+pair processes, F then M within each. The whole batch is fixed before block 1. Per-cell
+collection checks validity, not whether the score warrants another cell. The artifact-only
+three-block reducer adds zero interactions or optimizer calls. Training totals are
+2.16M team /12.96M UAV steps; evaluation totals 432k team /2.592M UAV steps, 864 episodes
+and 13,500 batched policy calls. Actor and critic each total 607,500 optimizer calls;
+zero high-level updates does not mean zero coordinator inference. B19's 6.598h projected
+three-pair wall and about 3.3GB outputs (about 6.6GB with a second copy) are estimates;
+implementation, review, complete reading and temporary/old storage add cost. Its 4.025GiB
+peak is for one complete pair process, not evidence that three pairs can run in parallel.
