@@ -160,3 +160,12 @@ zero high-level updates does not mean zero coordinator inference. B19's 6.598h p
 three-pair wall and about 3.3GB outputs (about 6.6GB with a second copy) are estimates;
 implementation, review, complete reading and temporary/old storage add cost. Its 4.025GiB
 peak is for one complete pair process, not evidence that three pairs can run in parallel.
+
+
+### Engineering input binding before execution
+
+All three sequential pair invocations use one identical full published Git input SHA via
+native --snapshot; later notebook commits do not change the accepted input. The reducer
+requires this shared SHA as well as the recorded file hashes and fixed learner/config
+contract. This closes the transitive-source identity gap identified in independent
+engineering review without changing any numerical condition or statistical rule.
