@@ -84,6 +84,13 @@ RESEARCH background from current published main. In the existing prospective NOT
 link the topic/revision and its concrete effect on the design or prediction, or explain the
 scope mismatch. Reuse unchanged relevant reading; no per-fit reread or adoption receipt.
 Treat shared understanding as revisable evidence, not a veto on testing a contrary prediction.
+Use its mathematical, information and game structure to locate the proposed intervention and
+its competing explanation. Mathematics, conjectures and empirical tests work together here;
+follow scientific-tools' Mathematics, conjectures and experiments section. A single-agent or
+simple-game idea may justify direct MARL exploration with its missing coupling stated. Do not
+turn rigorous proof, positive toys, single-step counterfactuals, exact suffix replay or exhaustive
+mechanism checks into admission gates. Prefer the smallest useful complete experiment when
+that is more informative per total cost; retain necessary correctness checks and honest scope.
 
 Own the working explanation, not just the next candidate. Read the latest relevant notebook
 interpretation and contrary evidence; append what the result strengthens, weakens or leaves

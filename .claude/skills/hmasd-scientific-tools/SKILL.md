@@ -9,6 +9,34 @@ description: Develop cumulative HMASD research understanding - update judgments 
 Authority: `docs/project/OPERATING_CONSTITUTION.md` sections 3, 4, 5 and 8. This skill is the
 method; it adds no rule. Records are the notebook, the runs folder and the claim note.
 
+## Mathematics, conjectures and experiments
+
+Owner clarification, 2026-09-25: use mathematical, information-theoretic and game-theoretic
+reasoning to choose questions and competing explanations, together with experiments and
+explicit conjectures. Read the relevant structural background in RESEARCH.md. Identify which
+information, joint-action/partner coupling, policy restriction, finite learning or deployment
+distribution a proposed intervention changes. A familiar mathematical term or a proxy trend
+does not supply that connection. These are reasoning aids in the existing NOTES, not additional
+forms or a requirement to formalize every axis before acting.
+
+MARL often advances from a bandit, single-agent result, simple game or empirical regularity
+whose extension is not yet proved. Such a bridge may directly motivate a modest complete
+learning experiment: state the useful mechanism, the assumptions that carry over, the coupling
+that does not, and the prediction being conjectured. A rigorous theorem, exact headroom,
+identifiability proof, complete simulator solution or positive simple-host result is not an
+entry requirement. Use a derivation, approximation or counterexample when it changes a
+comparator, prediction or reading; do not manufacture a theorem to justify ordinary exploration.
+
+Choose verification in proportion to the decision and its full cost. Single-step counterfactual
+branches, exact suffix replay, exhaustive joint-action enumeration and repeated mechanism
+screens are optional studies, not default gates before native learning. Prefer a small direct
+complete experiment when it answers the scientific question more efficiently. A bounded
+diagnostic needs a concrete interpretation/use that warrants its marginal work; zero new fits
+does not erase evaluation, branching, engineering or readback cost. Necessary correctness and
+information-leakage checks remain. Exploratory evidence may support a conjecture without
+proving its mechanism; retain that uncertainty instead of claiming proof or forbidding the next
+useful experiment. Confirmation still follows the fixed scientific minimums below.
+
 ## Explore an idea
 
 1. Start from the direction's current explanation and the observation or gap motivating this
