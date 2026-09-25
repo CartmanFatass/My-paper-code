@@ -1402,3 +1402,19 @@ finite-model result/closure does not change this accepted comparison. Observe th
 reference in the manifest with `tools/hmasd_wait.py`; rearm that same handle at checkpoints.
 No duplicate launch, intermediate selection, extra fit or scientific acceptance follows from
 this first running observation. The final reading remains the complete fixed comparison.
+
+### B02 checkpoint, 2026-09-25 18:36 UTC
+
+Generation8 delivered a checkpoint for the same accepted operation. The native processes remain
+running with consistent identities. [F1 metadata](../../../../runs/controller_composition/b02_partner_training_20260925/fit_F1.json)
+records all45 rollouts complete:360,000 team steps,1.08M executed learner rows and1.08M partner
+rows; actor/critic each50,625 optimizer calls and all other optimizers zero. Its measured fit
+wall is1283.584114s. I checked every rollout's declared worlds/assignment, frozen-source digest,
+row counts, compact sampling counts, finite losses/curves and J normalization. The metadata
+copy and both checkpoint-file hashes match the node. This is partial engineering/accounting
+reading; the complete batch's raw-artifact recovery and scientific evaluation remain pending.
+
+At collection F2 had19 rollouts complete and rollout20 updating; no evaluation cell was complete.
+Published main remains`56c660d6353782612d236b8f1e1c0e1b6830ca71`, with pause lifted and unchanged
+ownership. Continue the predeclared batch and rearm the same operation; no plan or selection
+change follows from F1's training curves. The complete13-cell comparison remains the reading.
