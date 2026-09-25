@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-25T16:31:55.355633Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/controller-composition-sept25/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/hmasd-worktrees/controller-composition-sept25/scripts/run_controller_composition_b01.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/controller-composition-sept25/runs/controller_composition/b01_fixed_matrix_20260925",
+    "--",
+    "--seed",
+    "92525000",
+    "--launch-sha",
+    "b7e99092f859d780deb4b9feb7f8404c4731a3f2",
+    "--out",
+    "runs/controller_composition/b01_fixed_matrix_20260925",
+    "--checkpoints",
+    "/home/wu/hmasd-inputs/controller_composition/b01/b1_s1016101_F45.pt",
+    "/home/wu/hmasd-inputs/controller_composition/b01/b2_s1017101_F45.pt",
+    "/home/wu/hmasd-inputs/controller_composition/b01/b3_s1018101_F45.pt"
+  ],
+  "claim_key": "f8d63f7ac67864ac2c6ea117abd07d0623553497a2f9a4f57d51d0b1e8f3b41e",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f8d63f7ac67864ac2c6ea117abd07d0623553497a2f9a4f57d51d0b1e8f3b41e.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/hmasd-worktrees/controller-composition-sept25/scripts/run_controller_composition_b01.py",
+    "--seed",
+    "92525000",
+    "--launch-sha",
+    "b7e99092f859d780deb4b9feb7f8404c4731a3f2",
+    "--out",
+    "runs/controller_composition/b01_fixed_matrix_20260925",
+    "--checkpoints",
+    "/home/wu/hmasd-inputs/controller_composition/b01/b1_s1016101_F45.pt",
+    "/home/wu/hmasd-inputs/controller_composition/b01/b2_s1017101_F45.pt",
+    "/home/wu/hmasd-inputs/controller_composition/b01/b3_s1018101_F45.pt"
+  ],
+  "command_sha256": "2fa41df03edf43659a8d53e4149f7dbe9ff9d90b4426b5b03ce9f71b95abdf79",
+  "control_observation": {
+    "observed_at": "2026-09-25T16:31:55.258081Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "adf68344620a2439276bdf3061b2e0e0fc94f48d"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-25T16:31:55.268592Z",
+  "cwd": "/home/wu/hmasd-worktrees/controller-composition-sept25",
+  "direction": "controller_composition",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_controller_composition_b01.py",
+    "--seed",
+    "92525000",
+    "--launch-sha",
+    "b7e99092f859d780deb4b9feb7f8404c4731a3f2",
+    "--checkpoints",
+    "/home/wu/hmasd-inputs/controller_composition/b01/b1_s1016101_F45.pt",
+    "/home/wu/hmasd-inputs/controller_composition/b01/b2_s1017101_F45.pt",
+    "/home/wu/hmasd-inputs/controller_composition/b01/b3_s1018101_F45.pt"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/controller-composition-sept25/runs/controller_composition/b01_fixed_matrix_20260925/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/f8d63f7ac67864ac2c6ea117abd07d0623553497a2f9a4f57d51d0b1e8f3b41e.json",
+  "output_root": "/home/wu/hmasd-worktrees/controller-composition-sept25/runs/controller_composition/b01_fixed_matrix_20260925",
+  "preflight": "/home/wu/hmasd-worktrees/controller-composition-sept25/runs/controller_composition/b01_fixed_matrix_20260925/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 677590,
+      "session_id": 677590,
+      "start_ticks": 70919448
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 677590,
+    "process_group_id": 677590
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/controller-composition-sept25/runs/controller_composition/b01_fixed_matrix_20260925/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 677591,
+      "session_id": 677590,
+      "start_ticks": 70919451
+    },
+    "pid": 677591,
+    "process_group_id": 677590,
+    "supervisor_pid": 677590
+  },
+  "schema_version": 1,
+  "sha": "b7e99092f859d780deb4b9feb7f8404c4731a3f2",
+  "source_root": "/home/wu/hmasd-worktrees/controller-composition-sept25",
+  "stderr": "/home/wu/hmasd-worktrees/controller-composition-sept25/runs/controller_composition/b01_fixed_matrix_20260925/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/controller-composition-sept25/runs/controller_composition/b01_fixed_matrix_20260925/stdout.log"
+}

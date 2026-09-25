@@ -685,6 +685,12 @@ Nash均衡或学习方法优越性。共享参数策略可以有真实合作，�
 [Other-Play](https://proceedings.mlr.press/v119/hu20a/hu20a.pdf)给出这种有明确假设的协调思路，
 不是所有UAV任务都具备其对称性，也不是要求先证明对称性定理才能探索其他伙伴训练。
 
+完整组合的平均差也可能掩盖世界差异。固定三个B20普通F45、S1 N6/c10 LOCAL1和0–2/3–5划分的B01，
+平均同源差在J和服务上均近零，三对方向混合；逐世界去行列残差明显大于均值残差。因此，平均匹配差小
+不能推出控制器可互换，非零有限残差也不识别可由训练修复的原因。一个混合格的有限最高均值及其损失世界
+须同时保留，不能把事后最大值当作已验证部署。这些读数降低该库“统一兼容性修复”的投入理由，仍未回答
+直接伙伴训练的独立用途；条件世界区间不增加训练n。[九格、全部世界、反例和完整成本](candidates/controller_composition/NOTES.md#2026-09-25--b01-complete-no-uniform-matching-advantage-heterogeneous-worlds)。
+
 **以有区别的猜想选择下一步。** 在现有NOTES中，把来源中的已知结论、此处的条件推导、尚未验证的MARL猜想
 和原生观测区分清楚；保留最有力的简单解释，并说明什么结果会削弱当前判断。信息结构、伙伴组成、表示和
 训练覆盖是不同干预，多个同时改变时可以研究包用途，但解释保持在该层次。B20/C01的各自学习与配方增量
@@ -701,7 +707,7 @@ Nash均衡或学习方法优越性。共享参数策略可以有真实合作，�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | exploring | Codex DM (independent session) | **已完整读取定向Pro并接受B01，实施与独立审查中。** 固定全部三个B20-F45、角色0–2/3–5、S1 N6/c10 LOCAL1，九格×32新世界×H500＝144k团队步，0新fit；尚无结果launch。联合读取J/真实服务、同源匹配差、完整去行列残差、每格相对两来源同源参照及不利世界。有限非加性、实际混编用途与训练可修复性分开，世界bootstrap不增加训练n；不预购后继训练。[完整建议、决定与L0](candidates/controller_composition/NOTES.md#2026-09-25--complete-pro-reading-scientific-acceptance-and-l0)。[任务路由](#session-routing)。 |
+| `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | exploring | Codex DM (independent session) | **B01九格完整，同源统一优势未建立。** D为J−.000167541、服务+.009822917人/步，条件区间跨0；来源对反号且世界残差明显大于均值残差。3/2有微小面板最高均值，仍有明显损失世界，不作赢家验证或等价。0新fit、144k团队步、158.86s、全部原始证据已保全。不追加矩阵；下一决策是固定/多伙伴训练的直接匹配探索是否值得，尚未接受新fit。[完整结果、边界与下一判断](candidates/controller_composition/NOTES.md#2026-09-25--b01-complete-no-uniform-matching-advantage-heterogeneous-worlds)；[任务路由](#session-routing)。 |
 | `finite_model_decision_value` | 同一有限合法数据和计算下，环境参数与隐状态的不确定性何时改变有用的动作排序与完整团队后果？ | exploring | Codex DM (independent session) | **B01六臂完整验收，主增量预测未获支持。** U4−P4总完成差0、3正4负249平；U32−P32总差+3，近似区间均跨0。动作分歧135/65个context，不能归成未激活；多数首处分歧含零估值，采样与完整后效未分离。P4/U4各保留AF+36任务及不利世界。512闭式拟合、0策略fit、147,456团队步、58,432,832模型分支、116.09s科学墙钟已保全；不宣称等价或纯机制。下一步定向判断有限估计比较的新增价值或结束此配方，未选确认/追加实验。[完整结果与判断](https://github.com/CartmanFatass/My-paper-code/blob/69e6287ea9fd24fb9e0500b41146d5d6b39ea6e4/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--b01-complete-decision-changes-without-the-predicted-small-data-native-gain)；[任务路由](#session-routing)。 |
 | `spatial_demand_generalization` | 有限空间任务训练覆盖如何影响普通多智能体控制在留出布局上的用途与专门化代价？ | archived | Codex DM (independent session) | **C01完整，当前空间混合路线新增投入结束；保留U。** hotspot M−U为J −.025632493、服务−1.191150人/步，t95为[−.067046834,+.015781848]/[−3.827524,+1.445224]；联合正均值未建立，不宣称等价或确定有害。十fit各自三个家族的J/服务均值均改善，uniform/cluster额外均值均不利，A2/C01第二配对正例与局部损失保留。10 fits/4.32M团队步完整保全。完整Pro答复已核验保存并逐项判断；旧/新面板回放有有限解释价值，但当前不值得全部成本，四中心与泛化调参也未选。无第六块、活动操作、开放Pro或已选后继；不外推为所有覆盖学习无用。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/b35996ba188d31cc01b3a422a47c24b1fde6bce3/docs/research/candidates/spatial_demand_generalization/NOTES.md#2026-09-25--c01-complete-joint-positive-mean-not-established)；[完整建议与DM决定](https://github.com/CartmanFatass/My-paper-code/blob/287d16776ca93d5ea0bfa56e15adfedb05501097/docs/research/candidates/spatial_demand_generalization/NOTES.md#2026-09-25--decline-panel-replay-and-end-current-spatial-mixing-investment)。[任务路由](#session-routing)。 |
 | `uav_service_auxiliary` | 在 S7 能源约束下，怎样把能量恢复与控制转成完整服务及返航风险的净收益？ | archived | Codex DM (independent session) | **当前S7修补投入结束，保留O+F。** 完整Pro已核验保存，DM不购买进站模型或常数提前比较；几何相关估算差异真实，但未测试闭环收益仍未知。B11的恢复增加、完整J−3.347054及等待/电池代价和全部有利世界保留；不否定普通反馈既有用途或更广服务—风险问题。0追加fit/评价，无活动操作、开放Pro或已选后继。[完整B11](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--b11-complete-guarded-continuity-changes-recovery-but-adds-no-mean-complete-utility)；[完整建议与DM决定](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--complete-approach-advice-read-end-current-s7-repair-investment-and-retain-o-plus-f)。[任务路由](#session-routing)。 |
@@ -774,7 +780,7 @@ C07已知模型NEAR与VSP拟合机会规则提供普通决策方法的正面资�
 
 | 问题族 | 要区分的判断与普通参照 | 当前安排与完整成本边界 |
 | --- | --- | --- |
-| **联合决策与伙伴组成** | 成员策略各自质量能否解释团队收益，还是同源/混合组合产生额外非可加作用？保持任务、人数、接口不变，先用完整部署矩阵定义有限问题；不先假定技能或约定机制 | **独立DM已完整读取定向Pro并接受B01。** 复用三个B20-F45终点的固定3×3组合，0新fit、144k团队评价步，当前恢复实现/审查，尚无结果launch。读取完整交互和具体混编用途，区分其与训练可修复性；旧D1的4population fits/8学习器/3.648M步未采购。 |
+| **联合决策与伙伴组成** | 成员策略各自质量能否解释团队收益，还是同源/混合组合产生额外作用？直接伙伴训练能否在合法信息下增加完整用途？ | **独立DM已完成并读取B01九格。** 0新fit、144k团队评价步、158.86s。平均同源差近零但世界作用异质；不把诊断当作互换、约定或训练收益证据。正在就直接固定/多伙伴训练比较的价值作定向判断，未采购旧D1或新fits。 |
 | **决策相关信息与模型知识** | 同样合法数据与规划资源下，参数/状态不确定性何时改变有用动作？便宜AF、普通plug-in与不确定性处理各自代表什么知识条件？ | **A2完成关闭后，已另派独立Astra Max DM主持。** 不只隐藏再估回.75；物理过滤、前向模型、缓存投影和固定接收器中的常数须分清。小模型fit、校准、完整评价和分支均需计量，实际合同与价格由DM具体化，当前无新结果launch。可以直接做有限学习实验，不以伙伴矩阵阳性为前提。 |
 | **有限学习与动态资源条件** | 给定合法信息，数据覆盖/表示/反馈规则怎样影响完整任务用途及代价？资源分配中的共同收益是否被局部代理误代？ | **S7由原DM完成投入判断，当前修补路线结束。** A2已读新背景、完成完整建议采纳并关闭当前空间混合路线，其无活动操作，保留U及全部正反证据。S7已核验并保全完整Pro答复，保留O+F，不购买接近模型比较；更广服务—风险问题仍开放，当前无新实验、开放Pro或已选后继。[DM决定](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--complete-approach-advice-read-end-current-s7-repair-investment-and-retain-o-plus-f)。 |
 
@@ -784,34 +790,23 @@ S7最新关闭已在本轮合入；当前实际推进的是两名新DM，第三�
 
 ### 首项B01：固定普通控制器的完整组合价值
 
-选择有限问题：在固定S1、N6/c10、LOCAL1合法观测与原生目标下，来自同一训练实现的成员组合，是否比
-混合来源的成员组合更有完整用途？它研究普通控制器组合，不恢复人数混合配方，不把结果称作未见N泛化。
+B01现已完整执行并读取：S1、N6/c10、LOCAL1，全部三个B20-F45来源，固定角色0–2/3–5，九格×32新世界×H500。
+原生源码、恢复/重置/私有RNN、完整统计及独立数值核对均保留于[完整NOTES](candidates/controller_composition/NOTES.md#2026-09-25--b01-complete-no-uniform-matching-advantage-heterogeneous-worlds)；
+[runner summary](../../runs/controller_composition/b01_fixed_matrix_20260925/summary.json)含全部世界与点态条件区间。
+实际0新fit/更新、288回合、144,000团队步、864,000执行UAV行及1,728,000推理行；科学命令墙钟158.86s、
+峰值进程RSS约2.527GiB，工程/检查/转运/读取另计。复用的三个360k历史fits仍是1.08M既有训练步。
+完整27文件已逐一验哈希并持久保全，原生退出证据一致，无活动结果进程。
 
-DM已完整读取定向Pro并接受固定九格B01；[答复、决定与工程范围](candidates/controller_composition/NOTES.md#2026-09-25--complete-pro-reading-scientific-acceptance-and-l0)记录源恢复及统计边界。32新世界固定为92525000–92525031，采用原确定性部署法则。三对匹配差不能穷尽所有交互；同批九格同时保留去行列残差及每世界残差，并将每个混合格与两个来源的同源队伍并列。条件世界区间不作训练方法推断；当前尚无新的科学结果。
+平均同源差D为J−.000167541、服务+.009822917人/步，95%条件区间分别为[−.009459302,+.007918611]与
+[−.643086198,+.579832552]。C12为正，C13/C23为负；均值残差较小，但逐世界残差和损失不能忽略。
+世界92525008有明显混合优势，92525015/29/25有反向J同源优势；完整保留，不删离群世界。
+3/2的面板均值最高，但仅比3/3多+.000216619 J、+.159562500人/步，两个区间均跨0；世界92525005反而
+损失−.094276693 J、−6.516人/步。1/2相对2/2的均值损失及2/3相对2/2的J/服务取舍也保留。
 
-按来源角色事前选择B20全部三个F45终点，种子1016101、1017101、1018101；不用M，不挑最佳训练块或早期
-checkpoint。Root已从独立保留目录核对三个文件的实际字节和SHA256，均与已发布F/summary.json一致；
-共59,084,877 bytes。本次没有加载策略、重算原始轨迹或执行新评价。源训练合同是
-`424bbe4db1351db70d73560ece913150c2b20ed4`；代码恢复、完整运行路由和recurrent语义仍由新DM核验。
-资产位置为`/home/fires/hmasd-retained-runs/agent_count_generalization/`下三个B20块的
-`F/raw/checkpoint_45.pt`，历史训练成本为三个360k fits，复用不会变成零历史成本。
-
-首项B01固定角色组0–2和3–5：组1使用策略i，组2使用策略j，i,j遍历三个固定终点，完整评价全部九格。
-同源三格与混合六格均读取，预先固定32个新世界和H500，统一合法输入、初始化/重置、评价动作方式、模型
-和normalizer各自归属。总计288回合、144,000团队步/864,000UAV行动行、0新fit/optimizer更新。
-这是完整闭环评价，不做每一步四分支反事实。绝对J和服务、全部组合、世界损失与方向相反的案例都保留。
-独立评价墙钟和新轨迹字节尚未知，工程、审阅、读取、存储与必要正确性检查另计，不以0fit称为免费。
-
-令Vij为固定世界分布下的完整收益。匹配对比为
-`(Vii + Vjj - Vij - Vji)/2`；可加的角色组质量项消去，剩余仍包含物理非线性、空间偏好和访问分布改变。
-正值不证明约定因果、Nash均衡、层级必要性或某训练方法优越；九格及三对差不是九次或三次独立方法训练。
-推断首先限于这个预先固定策略库与角色划分，世界数不增加训练n，有限平均差也不证明等价。
-
-这个完整问题本身有解释价值，其不同结果还可能改变下一投入：若同源匹配普遍有利，可比较公平曝光下的
-伙伴训练，或一个有具体预测的更简单角色/公共参照方法；若差异小或方向混合，降低为该库购买昂贵伙伴
-训练的理由，保留有限结论并考虑更直接的合作宿主；若混合反而更好，考察其完整用途和代价，不将其包装成
-兼容性失败。每条后续都要有自己的理由，不预购训练、不扫所有拆分，也不要求这份矩阵成为其他研究的pilot。
-DM可根据实际源码和定向批评选择更直接且更合算的完整比较，并在既有NOTES说明改变。
+这削弱统一同源惩罚与原样兼容性修复的投入理由，不建立等价、纯约定因果或已验证混编赢家。
+世界bootstrap不增加训练n；D、三个C的均值和trace(R)/2为同一代数阅读。下一步不追加世界、拆分或策略库。
+DM正具体评估固定伙伴与多伙伴训练的直接完整比较，必须有自己的预测、普通参照和完整学习/工程价格；
+B01不充当其阳性准入条件。新学习方案尚未接受，原D1的population训练包也未采购。
 
 ### 有限模型知识的独立接续
 
@@ -905,7 +900,7 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| DM 协作结构与策略组合 | `01a0d932-4e5c-7782-bbb5-d6237b2c3e08` / `local` | `/home/fires/.codex/worktrees/ab18/hmasd-wsl` · `codex/controller-composition-sept25` | 新任务原生active/inProgress，已读当前规范/背景并创建独立分支；gpt-6-astra/max。负责controller_composition的定向科学设计、Pro、实施/审查、原生评价与独立出版；首项3×3固定资产比较仍是待其具体接受的候选，未有新结果launch。不恢复旧DM1或它的操作。[分工与范围](#current-research-plan)。 |
+| DM 协作结构与策略组合 | `01a0d932-4e5c-7782-bbb5-d6237b2c3e08` / `local` | `/home/fires/.codex/worktrees/ab18/hmasd-wsl` · `codex/controller-composition-sept25` | B01九格已原生完成、完整读取及哈希保全，结果运行与首轮Pro均收清。现具体比较直接伙伴训练投入与结束当前S1资产路线；无新增fit接受或结果操作。独立出版，无App消息，不恢复旧DM1操作。[完整结果](candidates/controller_composition/NOTES.md#2026-09-25--b01-complete-no-uniform-matching-advantage-heterogeneous-worlds)。 |
 | DM 有限模型知识与决策价值 | `01a0d937-e2f7-7d03-982a-d16bf16385cc` / `local` | `/home/fires/.codex/worktrees/3839/hmasd-wsl` · `codex/finite-model-decision-value-sept25` | B01全部六臂已完成、完整核验及独立保全，结果运行和原Pro均已收清。正在对有限估计解释与下一投入做定向科学判断；无追加结果操作。不接管C07旧DM或其他方向，独立出版，无App消息。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/69e6287ea9fd24fb9e0500b41146d5d6b39ea6e4/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--b01-complete-decision-changes-without-the-predicted-small-data-native-gain)。 |
 | Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | Owner要求的数学/信息/博弈背景及探索尺度已发布，更新科学方法和DM职责；已一次性向原A2/S7送达阅读要求并核实读取动作，A2已在实际判断中采用。按[新计划](#current-research-plan)创建并原生核实两名Astra Max独立DM：策略组合与有限模型决策，当前均实际准备，未声称已接受结果运行。Root仅承担本轮初始共享控制/路由登记与项目安排，之后各DM独立科学发布；不产生App报告循环。 |
 | DM1 延迟消息发送时机 | `01a0d622-53d3-7f43-9740-6eaef625899a` / `local` | `/home/fires/.codex/worktrees/a138/hmasd-wsl` · `codex/delayed-broadcast-timing-c2` | B19/B20及C2全部结果和完整Pro均已核验读取保全；人数配方追加和RR9302时序改造投入均结束，保留B19正例、RR有限用途及全部不利证据。无活动producer、排队实验或开放Pro，不以常驻搜索占用运行名额。[C2完整决定](candidates/delayed_broadcast_timing/NOTES.md#2026-09-25--adopt-the-complete-advice-and-end-rr9302-timing-modifications)；[结果与保全](candidates/delayed_broadcast_timing/NOTES.md#2026-09-25--b01-complete-fast-only-loses-service-despite-shorter-transit-retain-rr)。旧人数分支`codex/agent-count-generalization-b19`保留在`439bc7b99`，旧task/7fef与B18技术失败保留。canonical仅新增C2行的例外已消耗，不扩大文件/index权限；无App消息。 |
