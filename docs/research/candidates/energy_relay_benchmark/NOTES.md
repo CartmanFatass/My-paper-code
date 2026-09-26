@@ -2668,3 +2668,30 @@ over c00, gaps to H_central (.774) and H_local (.597), J / return cost / events 
 tail against the same comparators, with the package references H_spawn .232 and H_park2 .379 and
 N .328 / .313 beside them; both evaluation modes per checkpoint; 957001–957032 once, final model
 only, with `--final`.
+
+### Stage 1 fit: measured rate, and the c00 evaluation launched beside it (2026-09-26)
+
+Rollouts 1–2 of `b02_s1_set_a01` (6,000 transitions each, CUDA): collection 107.9 / 101.7 s,
+update 42.1 / 41.3 s → ≈ 150 s per rollout → **≈ 8.3 h for 200 rollouts** (end ≈ 02:45 UTC on
+2026-09-27), replacing the ≈ 11 h upper bound; runner RSS 2.4 GB at 107 % CPU on a 20-core node,
+9.3 GB RAM free, no live lane at either boundary, shield-mapping share .243 / .225; training
+QoS/step per lane .265 / .239 then .348 / .000 (sampled actions during collection; early, not a
+reading). `action_entropy` is absent from the rollout event (recorded in the summary/PPO block or
+null; checked at the read). Stage 1 reader `read_stage1.py` committed at `d3f6bda93` before any
+checkpoint panel exists (verified on a synthetic tree copied from the B01 N panel).
+
+**c00 (initialisation) evaluation launched during the fit.** The admission kernel refused the
+checkpoint under the node's author root ("absolute author input is absent from published
+snapshot"), so the c00 directory was copied unchanged to
+`/home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01/checkpoints/c00/` (agent.pt sha256
+`9d5806c1…` equals `record.json`; the loader re-checks it) — the convention for every checkpoint
+evaluation of this fit. `launch_b02_eval.sh 759927b5e8ca… b02_s1_eval_c00_a01 <that path> 8 2`
+(`evaluate-checkpoint --worlds 955001-955032 --modes deterministic,stochastic --device cpu`):
+`acceptance: accepted`, `accepted_at 2026-09-26T18:31:34Z` on measured memory beside the running
+fit; operation ref
+`/home/wu/projects/HMASD/.git/hmasd-admission/53663d6bd47382e38c41af64f1cfd6725caae0eb154ea12f1021e820746bf3c0.json`
+(claim key `53663d6b…bf3c0`); command sha256 `4b6bff081d3b93441067b0acc14afbee87c4ccd4d450ee20d23f9c0a755e760e`;
+supervisor pid 727107, runner pid 727108; outputs under
+`/home/wu/projects/HMASD/runs/energy_relay_benchmark/b02_s1_eval_c00_a01/checkpoint-eval/`
+(panels `L_c00_deterministic_e0.00_x0.05`, `L_c00_stochastic_e0.00_x0.05`, traces). c00 gives the
+"improvement over the model's own initialisation" baseline; it is read with the curve, not alone.
