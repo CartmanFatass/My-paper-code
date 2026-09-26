@@ -1171,6 +1171,838 @@
     "clip_fraction": null,
     "qos_per_step": 0.11671901797190706,
     "native_J": 315.14364011275
+   },
+   {
+    "rollout": 40,
+    "transitions": 240000,
+    "lane_native_J": [
+     820.8429963539821,
+     18.157267580032464
+    ],
+    "lane_qos_per_step": [
+     0.2842757609267273,
+     0.016442884972756908
+    ],
+    "shield_mapping_share": 0.24797916666666667,
+    "f_mode_uav_step_share": 0.24797916666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 109.6224426170811,
+    "update_seconds": 45.89274131599814,
+    "shield_entries": 137,
+    "shield_exits": 122,
+    "action_entropy": 1.0783466510474682,
+    "discoverer_policy_loss": -0.0073795015923678875,
+    "discoverer_value_loss": 0.01913904771208763,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.1503593229497421,
+    "native_J": 419.5001319670073
+   },
+   {
+    "rollout": 41,
+    "transitions": 246000,
+    "lane_native_J": [
+     22.322998724140177,
+     733.7342593150329
+    ],
+    "lane_qos_per_step": [
+     0.018066292626961904,
+     0.25486138579604256
+    ],
+    "shield_mapping_share": 0.2164375,
+    "f_mode_uav_step_share": 0.2164375,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 106.52076391095761,
+    "update_seconds": 39.90078173298389,
+    "shield_entries": 85,
+    "shield_exits": 70,
+    "action_entropy": 1.0950878262519836,
+    "discoverer_policy_loss": -0.007379370741546154,
+    "discoverer_value_loss": 0.018114639446139336,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.13646383921150224,
+    "native_J": 378.02862901958656
+   },
+   {
+    "rollout": 42,
+    "transitions": 252000,
+    "lane_native_J": [
+     802.0702707335624,
+     717.4677014170811
+    ],
+    "lane_qos_per_step": [
+     0.27827208826927186,
+     0.24807556164482314
+    ],
+    "shield_mapping_share": 0.2540208333333333,
+    "f_mode_uav_step_share": 0.2540208333333333,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 114.08740278601181,
+    "update_seconds": 39.359849259024486,
+    "shield_entries": 99,
+    "shield_exits": 83,
+    "action_entropy": 1.093235332518816,
+    "discoverer_policy_loss": -0.003220719052478671,
+    "discoverer_value_loss": 0.005981957074254751,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.2631738249570475,
+    "native_J": 759.7689860753218
+   },
+   {
+    "rollout": 43,
+    "transitions": 258000,
+    "lane_native_J": [
+     1052.1512402307574,
+     701.2126120013997
+    ],
+    "lane_qos_per_step": [
+     0.36529138989487325,
+     0.24267958799712636
+    ],
+    "shield_mapping_share": 0.28839583333333335,
+    "f_mode_uav_step_share": 0.28839583333333335,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 116.78570376406424,
+    "update_seconds": 49.43516278802417,
+    "shield_entries": 112,
+    "shield_exits": 96,
+    "action_entropy": 1.11550809815526,
+    "discoverer_policy_loss": -0.004393321927636862,
+    "discoverer_value_loss": 0.009897761978209019,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.3039854889459998,
+    "native_J": 876.6819261160786
+   },
+   {
+    "rollout": 44,
+    "transitions": 264000,
+    "lane_native_J": [
+     -30.56587721112397,
+     -31.3192109251597
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.26585416666666667,
+    "f_mode_uav_step_share": 0.26585416666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 96.98837305605412,
+    "update_seconds": 39.18273516499903,
+    "shield_entries": 99,
+    "shield_exits": 83,
+    "action_entropy": 1.098661683499813,
+    "discoverer_policy_loss": -0.00802203081548214,
+    "discoverer_value_loss": 0.0033751209266483784,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -30.942544068141835
+   },
+   {
+    "rollout": 45,
+    "transitions": 270000,
+    "lane_native_J": [
+     1214.5187804260613,
+     -31.19259706356396
+    ],
+    "lane_qos_per_step": [
+     0.4183386015710369,
+     0.0
+    ],
+    "shield_mapping_share": 0.2289375,
+    "f_mode_uav_step_share": 0.2289375,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 108.85418183193542,
+    "update_seconds": 46.211731411051005,
+    "shield_entries": 94,
+    "shield_exits": 78,
+    "action_entropy": 1.1424764059484005,
+    "discoverer_policy_loss": -0.006699879188090563,
+    "discoverer_value_loss": 0.0014842372620478272,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.20916930078551846,
+    "native_J": 591.6630916812487
+   },
+   {
+    "rollout": 46,
+    "transitions": 276000,
+    "lane_native_J": [
+     565.865569577718,
+     -31.582412465587183
+    ],
+    "lane_qos_per_step": [
+     0.1996366869500719,
+     0.0
+    ],
+    "shield_mapping_share": 0.22516666666666665,
+    "f_mode_uav_step_share": 0.22516666666666665,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 104.43884953903034,
+    "update_seconds": 39.45152197696734,
+    "shield_entries": 113,
+    "shield_exits": 97,
+    "action_entropy": 1.1003568768501282,
+    "discoverer_policy_loss": -0.005560861900448799,
+    "discoverer_value_loss": 0.0029637515544891357,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.09981834347503594,
+    "native_J": 267.14157855606544
+   },
+   {
+    "rollout": 47,
+    "transitions": 282000,
+    "lane_native_J": [
+     188.73587591920594,
+     -33.40483683752318
+    ],
+    "lane_qos_per_step": [
+     0.07293142036617052,
+     0.0
+    ],
+    "shield_mapping_share": 0.32760416666666664,
+    "f_mode_uav_step_share": 0.32760416666666664,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 98.53929104399867,
+    "update_seconds": 39.764271960943006,
+    "shield_entries": 162,
+    "shield_exits": 146,
+    "action_entropy": 1.0860880836844444,
+    "discoverer_policy_loss": -0.007787222974002361,
+    "discoverer_value_loss": 0.0038476961199194193,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.03646571018308526,
+    "native_J": 77.66551954084139
+   },
+   {
+    "rollout": 48,
+    "transitions": 288000,
+    "lane_native_J": [
+     313.8370410058595,
+     1372.7327083547727
+    ],
+    "lane_qos_per_step": [
+     0.11330709985457509,
+     0.4679849092613905
+    ],
+    "shield_mapping_share": 0.2511041666666667,
+    "f_mode_uav_step_share": 0.2511041666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 116.57273263495881,
+    "update_seconds": 46.40571030508727,
+    "shield_entries": 136,
+    "shield_exits": 121,
+    "action_entropy": 1.127740554511547,
+    "discoverer_policy_loss": -0.004327884875237942,
+    "discoverer_value_loss": 0.0016580278752371669,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.2906460045579828,
+    "native_J": 843.2848746803161
+   },
+   {
+    "rollout": 49,
+    "transitions": 294000,
+    "lane_native_J": [
+     856.243333560239,
+     851.2906046481897
+    ],
+    "lane_qos_per_step": [
+     0.29626440534867776,
+     0.2999549733137281
+    ],
+    "shield_mapping_share": 0.3385416666666667,
+    "f_mode_uav_step_share": 0.3385416666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 112.84736382798292,
+    "update_seconds": 40.14880667102989,
+    "shield_entries": 195,
+    "shield_exits": 179,
+    "action_entropy": 1.0902021080255508,
+    "discoverer_policy_loss": -0.005557012744247913,
+    "discoverer_value_loss": 0.0021198734175413847,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.29810968933120296,
+    "native_J": 853.7669691042144
+   },
+   {
+    "rollout": 50,
+    "transitions": 300000,
+    "lane_native_J": [
+     -33.35765996999498,
+     -30.483649935338605
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.33739583333333334,
+    "f_mode_uav_step_share": 0.33739583333333334,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 98.93140870390926,
+    "update_seconds": 39.03029517503455,
+    "shield_entries": 185,
+    "shield_exits": 169,
+    "action_entropy": 1.0788828134536743,
+    "discoverer_policy_loss": -0.01171905267983675,
+    "discoverer_value_loss": 0.0004643854626920074,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -31.92065495266679
+   },
+   {
+    "rollout": 51,
+    "transitions": 306000,
+    "lane_native_J": [
+     1021.8283420979225,
+     -33.26507330874471
+    ],
+    "lane_qos_per_step": [
+     0.3494481153259103,
+     0.0
+    ],
+    "shield_mapping_share": 0.21710416666666665,
+    "f_mode_uav_step_share": 0.21710416666666665,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 107.89687391999178,
+    "update_seconds": 50.955129778943956,
+    "shield_entries": 115,
+    "shield_exits": 99,
+    "action_entropy": 1.1435849592089653,
+    "discoverer_policy_loss": -0.010004769079387188,
+    "discoverer_value_loss": 0.0007692125509493053,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.17472405766295515,
+    "native_J": 494.2816343945889
+   },
+   {
+    "rollout": 52,
+    "transitions": 312000,
+    "lane_native_J": [
+     -31.43067452231722,
+     -39.62703754993839
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.3069375,
+    "f_mode_uav_step_share": 0.3069375,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 98.90017824992537,
+    "update_seconds": 38.82583130802959,
+    "shield_entries": 159,
+    "shield_exits": 143,
+    "action_entropy": 1.143592968583107,
+    "discoverer_policy_loss": -0.011259515769779682,
+    "discoverer_value_loss": 0.00029937358340248466,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -35.528856036127806
+   },
+   {
+    "rollout": 53,
+    "transitions": 318000,
+    "lane_native_J": [
+     646.1642252438737,
+     -30.389818086818316
+    ],
+    "lane_qos_per_step": [
+     0.2259463959663994,
+     0.0
+    ],
+    "shield_mapping_share": 0.305875,
+    "f_mode_uav_step_share": 0.305875,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 103.6677179049002,
+    "update_seconds": 46.82655239000451,
+    "shield_entries": 142,
+    "shield_exits": 126,
+    "action_entropy": 1.1468356475234032,
+    "discoverer_policy_loss": -0.007173134945333004,
+    "discoverer_value_loss": 0.0015264444518834352,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.1129731979831997,
+    "native_J": 307.8872035785277
+   },
+   {
+    "rollout": 54,
+    "transitions": 324000,
+    "lane_native_J": [
+     1062.6791560632573,
+     486.23391024459033
+    ],
+    "lane_qos_per_step": [
+     0.36508906977483746,
+     0.16979984997600497
+    ],
+    "shield_mapping_share": 0.16327083333333334,
+    "f_mode_uav_step_share": 0.16327083333333334,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 117.23320784803946,
+    "update_seconds": 39.182427354040556,
+    "shield_entries": 76,
+    "shield_exits": 62,
+    "action_entropy": 1.1920953169465065,
+    "discoverer_policy_loss": -0.006477374583482742,
+    "discoverer_value_loss": 0.002492849715054035,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.2674444598754212,
+    "native_J": 774.4565331539238
+   },
+   {
+    "rollout": 55,
+    "transitions": 330000,
+    "lane_native_J": [
+     495.75971057944156,
+     -30.782099609978804
+    ],
+    "lane_qos_per_step": [
+     0.17607365808831943,
+     0.0
+    ],
+    "shield_mapping_share": 0.20852083333333332,
+    "f_mode_uav_step_share": 0.20852083333333332,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 104.56086169707123,
+    "update_seconds": 39.57128079398535,
+    "shield_entries": 90,
+    "shield_exits": 74,
+    "action_entropy": 1.164121925830841,
+    "discoverer_policy_loss": -0.007753239944577217,
+    "discoverer_value_loss": 0.0010215494548901916,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.08803682904415971,
+    "native_J": 232.4888054847314
+   },
+   {
+    "rollout": 56,
+    "transitions": 336000,
+    "lane_native_J": [
+     789.1885707673603,
+     -34.645601217391956
+    ],
+    "lane_qos_per_step": [
+     0.2739893193310449,
+     0.0
+    ],
+    "shield_mapping_share": 0.4137708333333333,
+    "f_mode_uav_step_share": 0.4137708333333333,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 105.8770701669855,
+    "update_seconds": 47.28823143604677,
+    "shield_entries": 224,
+    "shield_exits": 208,
+    "action_entropy": 1.0942578315734863,
+    "discoverer_policy_loss": -0.00909191370010376,
+    "discoverer_value_loss": 0.002422828460112214,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.13699465966552246,
+    "native_J": 377.2714847749842
+   },
+   {
+    "rollout": 57,
+    "transitions": 342000,
+    "lane_native_J": [
+     715.0468800204399,
+     -31.184220982029863
+    ],
+    "lane_qos_per_step": [
+     0.24746416390543902,
+     0.0
+    ],
+    "shield_mapping_share": 0.25897916666666665,
+    "f_mode_uav_step_share": 0.25897916666666665,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 103.24500722798984,
+    "update_seconds": 39.090815166942775,
+    "shield_entries": 116,
+    "shield_exits": 100,
+    "action_entropy": 1.152070239186287,
+    "discoverer_policy_loss": -0.007953024469316006,
+    "discoverer_value_loss": 0.007969272322952747,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.12373208195271951,
+    "native_J": 341.931329519205
+   },
+   {
+    "rollout": 58,
+    "transitions": 348000,
+    "lane_native_J": [
+     -31.718421092602522,
+     -31.344205744073655
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.2759375,
+    "f_mode_uav_step_share": 0.2759375,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 96.59462720796,
+    "update_seconds": 41.101770253968425,
+    "shield_entries": 137,
+    "shield_exits": 121,
+    "action_entropy": 1.1242522858083248,
+    "discoverer_policy_loss": -0.010822067968547344,
+    "discoverer_value_loss": 0.00010207360901404172,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -31.531313418338087
+   },
+   {
+    "rollout": 59,
+    "transitions": 354000,
+    "lane_native_J": [
+     1060.276247414146,
+     -106.40897034536107
+    ],
+    "lane_qos_per_step": [
+     0.3629007845284143,
+     0.0
+    ],
+    "shield_mapping_share": 0.3554791666666667,
+    "f_mode_uav_step_share": 0.3554791666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 108.24642307404429,
+    "update_seconds": 39.73899929597974,
+    "shield_entries": 135,
+    "shield_exits": 119,
+    "action_entropy": 1.1627374216914177,
+    "discoverer_policy_loss": -0.006940782070159912,
+    "discoverer_value_loss": 0.0020248093642294407,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.18145039226420714,
+    "native_J": 476.93363853439246
+   },
+   {
+    "rollout": 60,
+    "transitions": 360000,
+    "lane_native_J": [
+     1097.5313177933533,
+     -32.42569272240054
+    ],
+    "lane_qos_per_step": [
+     0.37759546311946324,
+     0.0
+    ],
+    "shield_mapping_share": 0.255625,
+    "f_mode_uav_step_share": 0.255625,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 115.26080883503892,
+    "update_seconds": 39.501636966946535,
+    "shield_entries": 123,
+    "shield_exits": 107,
+    "action_entropy": 1.1601833626627922,
+    "discoverer_policy_loss": -0.011241846717894077,
+    "discoverer_value_loss": 0.0043429164215922356,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.18879773155973162,
+    "native_J": 532.5528125354764
+   },
+   {
+    "rollout": 61,
+    "transitions": 366000,
+    "lane_native_J": [
+     1292.8117072093673,
+     388.5829580039439
+    ],
+    "lane_qos_per_step": [
+     0.44197840166512636,
+     0.1383064860910691
+    ],
+    "shield_mapping_share": 0.1715,
+    "f_mode_uav_step_share": 0.1715,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 117.66435577091761,
+    "update_seconds": 44.8607283369638,
+    "shield_entries": 107,
+    "shield_exits": 92,
+    "action_entropy": 1.2004485353827477,
+    "discoverer_policy_loss": -0.009012464433908463,
+    "discoverer_value_loss": 0.0018676264444366097,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.29014244387809773,
+    "native_J": 840.6973326066557
+   },
+   {
+    "rollout": 62,
+    "transitions": 372000,
+    "lane_native_J": [
+     1326.8640932753042,
+     895.8014014104581
+    ],
+    "lane_qos_per_step": [
+     0.45233004679824196,
+     0.30912665588063926
+    ],
+    "shield_mapping_share": 0.19629166666666667,
+    "f_mode_uav_step_share": 0.19629166666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 121.12203737196978,
+    "update_seconds": 39.47261997603346,
+    "shield_entries": 82,
+    "shield_exits": 69,
+    "action_entropy": 1.1800697073340416,
+    "discoverer_policy_loss": -0.009193980135023594,
+    "discoverer_value_loss": 0.008913027122616768,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.3807283513394406,
+    "native_J": 1111.3327473428812
+   },
+   {
+    "rollout": 63,
+    "transitions": 378000,
+    "lane_native_J": [
+     598.5625990799928,
+     995.8485484888737
+    ],
+    "lane_qos_per_step": [
+     0.23066042866065517,
+     0.3411941815245239
+    ],
+    "shield_mapping_share": 0.24697916666666667,
+    "f_mode_uav_step_share": 0.24697916666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 119.12497618596535,
+    "update_seconds": 39.17575175897218,
+    "shield_entries": 129,
+    "shield_exits": 113,
+    "action_entropy": 1.1966344900429249,
+    "discoverer_policy_loss": -0.007789471186697483,
+    "discoverer_value_loss": 0.005671386141330004,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.28592730509258957,
+    "native_J": 797.2055737844332
+   },
+   {
+    "rollout": 64,
+    "transitions": 384000,
+    "lane_native_J": [
+     1334.7062041036977,
+     636.5069182074917
+    ],
+    "lane_qos_per_step": [
+     0.45519241701603147,
+     0.2242477370885224
+    ],
+    "shield_mapping_share": 0.30183333333333334,
+    "f_mode_uav_step_share": 0.30183333333333334,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 119.05891042994335,
+    "update_seconds": 48.03384149505291,
+    "shield_entries": 126,
+    "shield_exits": 111,
+    "action_entropy": 1.1923442594707012,
+    "discoverer_policy_loss": -0.00699212122708559,
+    "discoverer_value_loss": 0.0064156632870435715,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.3397200770522769,
+    "native_J": 985.6065611555947
+   },
+   {
+    "rollout": 65,
+    "transitions": 390000,
+    "lane_native_J": [
+     -38.56616160558515,
+     -31.177011935141316
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.35835416666666664,
+    "f_mode_uav_step_share": 0.35835416666666664,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 99.24703678605147,
+    "update_seconds": 39.17523682699539,
+    "shield_entries": 189,
+    "shield_exits": 173,
+    "action_entropy": 1.1402791365981102,
+    "discoverer_policy_loss": -0.015441794879734516,
+    "discoverer_value_loss": 0.0008965193410404027,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -34.87158677036324
+   },
+   {
+    "rollout": 66,
+    "transitions": 396000,
+    "lane_native_J": [
+     -31.135607183038097,
+     -57.9097037616285
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.31475,
+    "f_mode_uav_step_share": 0.31475,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 100.28373537398875,
+    "update_seconds": 39.63839966210071,
+    "shield_entries": 131,
+    "shield_exits": 115,
+    "action_entropy": 1.1419089511036873,
+    "discoverer_policy_loss": -0.012451451271772385,
+    "discoverer_value_loss": 0.000372741196770221,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -44.5226554723333
+   },
+   {
+    "rollout": 67,
+    "transitions": 402000,
+    "lane_native_J": [
+     889.8465259944606,
+     -34.7359343693205
+    ],
+    "lane_qos_per_step": [
+     0.30761991167008673,
+     0.0
+    ],
+    "shield_mapping_share": 0.25172916666666667,
+    "f_mode_uav_step_share": 0.25172916666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 104.7579988068901,
+    "update_seconds": 48.54042939597275,
+    "shield_entries": 84,
+    "shield_exits": 68,
+    "action_entropy": 1.2047328054904938,
+    "discoverer_policy_loss": -0.01284477487206459,
+    "discoverer_value_loss": 0.0018308470025658607,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.15380995583504337,
+    "native_J": 427.5552958125701
+   },
+   {
+    "rollout": 68,
+    "transitions": 408000,
+    "lane_native_J": [
+     650.1783265640825,
+     -32.35518103286329
+    ],
+    "lane_qos_per_step": [
+     0.2345064924861329,
+     0.0
+    ],
+    "shield_mapping_share": 0.2811458333333333,
+    "f_mode_uav_step_share": 0.2811458333333333,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 104.49455450300593,
+    "update_seconds": 86.20144382910803,
+    "shield_entries": 146,
+    "shield_exits": 130,
+    "action_entropy": 1.1272395960986614,
+    "discoverer_policy_loss": -0.011503179557621479,
+    "discoverer_value_loss": 0.0026915317866951227,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.11725324624306645,
+    "native_J": 308.9115727656096
+   },
+   {
+    "rollout": 69,
+    "transitions": 414000,
+    "lane_native_J": [
+     1075.0926939572378,
+     884.2270595561245
+    ],
+    "lane_qos_per_step": [
+     0.36853886519725576,
+     0.30484397925662365
+    ],
+    "shield_mapping_share": 0.22595833333333334,
+    "f_mode_uav_step_share": 0.22595833333333334,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 216.68460534489714,
+    "update_seconds": 89.67974995193072,
+    "shield_entries": 101,
+    "shield_exits": 86,
+    "action_entropy": 1.2498230673372746,
+    "discoverer_policy_loss": -0.008081537671387196,
+    "discoverer_value_loss": 0.0034452953841537237,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.3366914222269397,
+    "native_J": 979.6598767566811
+   },
+   {
+    "rollout": 70,
+    "transitions": 420000,
+    "lane_native_J": [
+     585.8766412346571,
+     488.8491584239419
+    ],
+    "lane_qos_per_step": [
+     0.20548987976705527,
+     0.18255635242369714
+    ],
+    "shield_mapping_share": 0.36204166666666665,
+    "f_mode_uav_step_share": 0.36204166666666665,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 194.4269218199188,
+    "update_seconds": 88.11338344507385,
+    "shield_entries": 204,
+    "shield_exits": 188,
+    "action_entropy": 1.2403981760144234,
+    "discoverer_policy_loss": -0.006385528016835451,
+    "discoverer_value_loss": 0.00457635335624218,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.1940231160953762,
+    "native_J": 537.3628998292995
+   },
+   {
+    "rollout": 71,
+    "transitions": 426000,
+    "lane_native_J": [
+     640.2899469841068,
+     -31.898533931092217
+    ],
+    "lane_qos_per_step": [
+     0.23114210167337884,
+     0.0
+    ],
+    "shield_mapping_share": 0.2521041666666667,
+    "f_mode_uav_step_share": 0.2521041666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 182.22510773001704,
+    "update_seconds": 48.119025751017034,
+    "shield_entries": 133,
+    "shield_exits": 117,
+    "action_entropy": 1.1495237238705158,
+    "discoverer_policy_loss": -0.012388166971504688,
+    "discoverer_value_loss": 0.0022986391559243202,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.11557105083668942,
+    "native_J": 304.1957065265073
    }
   ],
   "checkpoints": [
@@ -1185,27 +2017,37 @@
     "rollout": 34,
     "transitions": 204000,
     "wall_seconds": 5435.50129256607
+   },
+   {
+    "checkpoint": "c02",
+    "rollout": 67,
+    "transitions": 402000,
+    "wall_seconds": 10767.081387739046
    }
   ],
-  "n_rollouts": 39,
-  "seconds_per_rollout_mean": 167.99525865998703,
+  "n_rollouts": 71,
+  "seconds_per_rollout_mean": 165.83737338938369,
   "seconds_per_rollout_first_two": [
    149.97905104106758,
    142.974010168924
   ],
-  "projected_total_hours_at_mean_rate": 9.333069925554835,
+  "projected_total_hours_at_mean_rate": 9.213187410521316,
   "live_lane_boundaries": 0,
-  "mapping_share_mean": 0.2506298076923077,
+  "mapping_share_mean": 0.26028433098591547,
   "action_entropy_first_last": [
    1.1555347591638565,
-   1.0850251652300358
+   1.1495237238705158
   ],
-  "zero_service_lane_rollouts": 21,
+  "zero_service_lane_rollouts": 40,
   "qos_per_step_by_10_rollouts": [
    0.19145718685523264,
    0.16134429726122346,
    0.21034464360906033,
-   0.18055527518889522
+   0.1775356799649799,
+   0.1637832201447375,
+   0.12741534100079166,
+   0.20982959177628305,
+   0.11557105083668942
   ],
   "qos_per_step_first_five": [
    0.25229310281861594,
@@ -1215,11 +2057,11 @@
    0.25862531934616373
   ],
   "qos_per_step_last_five": [
-   0.15794148227103597,
-   0.20816177054485865,
-   0.26297918130735276,
-   0.1374342114435806,
-   0.11671901797190706
+   0.15380995583504337,
+   0.11725324624306645,
+   0.3366914222269397,
+   0.1940231160953762,
+   0.11557105083668942
   ]
  },
  "checkpoints": {
@@ -2552,6 +3394,722 @@
      "conflict": null
     }
    }
+  },
+  "c02_deterministic": {
+   "summary": {
+    "qos_satisfaction_ratio_per_step": 0.31809791231397544,
+    "raw_native_J": 920.4801364095325,
+    "return_constraint_cost_sum": 3.280849387745018,
+    "cutoff_event_count_sum": 0.0,
+    "depletion_event_count_sum": 0.0,
+    "min_decoded_battery": 0.10593396076001227,
+    "mode_uav_step_fraction": 0.199078125,
+    "first_entry_step": 1332.03125,
+    "first_input_step": 2128.0,
+    "qos_per_step_pre_entry": 0.17157151264628653,
+    "qos_per_step_entry_to_input": 0.36233573968772337,
+    "qos_per_step_post_input": 0.4748139769155263,
+    "charger_input_wh": 162.49999999999997,
+    "wait_ticks_total": 2081.09375,
+    "guard_blocked_actions": 764.4375,
+    "guard_checked_actions": 10035.625,
+    "feedback_entry_count": 65.25,
+    "boundary_share_normal_mode": 0.4284142636374371,
+    "altitude_floor_share_normal_mode": 0.32145040861845403,
+    "anchor_uav_steps_within_300m": 3429.5,
+    "centre_uav_steps_within_300m": 737.8125,
+    "first_service_step": 322.741935483871,
+    "zero_service": 0.03125,
+    "n": 32,
+    "zero_service_worlds": 1,
+    "failed_worlds": 0,
+    "min_battery_p10": 0.09169253706932068,
+    "guard_blocked_share": 0.07617238587531917
+   },
+   "record": {
+    "checkpoint": "c02",
+    "transitions": 402000,
+    "policy_seed": 925031,
+    "draw": null,
+    "policy_identity": [
+     {
+      "checkpoint": "c02",
+      "checkpoint_sha256": "dd9dcec8bcd6cb1eee699dfefa5701878af741004683ab756cf2ef4ae3846cc1",
+      "policy_fingerprint": "f2e7a0da5ca5f12d384eb0d520883e5ae1263d368c25d7e76439e6e8f9d7c4f9",
+      "rollout": 67,
+      "transitions": 402000
+     }
+    ],
+    "controller_information": "flat recurrent actor on the legal observation + held central snapshot (state, all observations, ego one-hot) refreshed every k = 10 steps (SET, use_central_snapshot_in_flat_actor)"
+   },
+   "milestone_reached": false,
+   "worlds_at_or_above_milestone": 0,
+   "vs_c00": {
+    "qos_satisfaction_ratio_per_step": {
+     "n": 32,
+     "mean": 0.10929147890110322,
+     "paired_se": 0.017328088902101003,
+     "positive": 29,
+     "min": -0.031290073815450986,
+     "max": 0.3554220751415007
+    },
+    "raw_native_J": {
+     "n": 32,
+     "mean": 333.4288000781527,
+     "paired_se": 51.948070139483136,
+     "positive": 29,
+     "min": -77.3094444912083,
+     "max": 1083.8339308678492
+    },
+    "return_constraint_cost_sum": {
+     "n": 32,
+     "mean": -3.35639528054668,
+     "paired_se": 2.556813857425014,
+     "positive": 11,
+     "min": -41.85999949696371,
+     "max": 41.63987403201746
+    },
+    "cutoff_event_count_sum": {
+     "n": 32,
+     "mean": 0.0,
+     "paired_se": 0.0,
+     "positive": 0,
+     "min": 0.0,
+     "max": 0.0
+    },
+    "depletion_event_count_sum": {
+     "n": 32,
+     "mean": 0.0,
+     "paired_se": 0.0,
+     "positive": 0,
+     "min": 0.0,
+     "max": 0.0
+    },
+    "min_decoded_battery": {
+     "n": 32,
+     "mean": 0.008759701857343316,
+     "paired_se": 0.0021969118185275415,
+     "positive": 28,
+     "min": -0.027852162718772888,
+     "max": 0.03445356339216232
+    },
+    "conflict": null
+   },
+   "gaps": {
+    "H_central": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.4559262159845304,
+      "paired_se": 0.01875848853190445,
+      "positive": 0,
+      "min": -0.7423316005269962,
+      "max": -0.20566589082787423
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -1361.4072372827159,
+      "paired_se": 55.96967377028657,
+      "positive": 0,
+      "min": -2178.747537925003,
+      "max": -613.7349322030213
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -1.541122551365504,
+      "paired_se": 2.099357185589777,
+      "positive": 5,
+      "min": -38.38316366538772,
+      "max": 41.55483998371359
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.0063483756966888905,
+      "paired_se": 0.0020737638148761433,
+      "positive": 21,
+      "min": -0.028013087809085846,
+      "max": 0.02553446590900421
+     },
+     "conflict": null
+    },
+    "H_local": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.27884083669007514,
+      "paired_se": 0.02895583932289501,
+      "positive": 3,
+      "min": -0.48506385532015384,
+      "max": 0.10498048226464893
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -707.9661788857057,
+      "paired_se": 95.42670137203957,
+      "positive": 5,
+      "min": -1412.0364811564534,
+      "max": 625.1962823513986
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -62.64274745511454,
+      "paired_se": 14.691453140872355,
+      "positive": 1,
+      "min": -290.4342917767998,
+      "max": 6.300292030512563
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.01869926869403571,
+      "paired_se": 0.0026898287702929002,
+      "positive": 31,
+      "min": -0.004405573010444641,
+      "max": 0.060908008366823196
+     },
+     "conflict": null
+    },
+    "N_deterministic": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.010228143698228949,
+      "paired_se": 0.019190659658166243,
+      "positive": 13,
+      "min": -0.2764422547628351,
+      "max": 0.3323178412420834
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -34.49606662698593,
+      "paired_se": 57.08558726713956,
+      "positive": 12,
+      "min": -825.6272651573258,
+      "max": 997.6495155710447
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": 2.084115763506585,
+      "paired_se": 1.5852634787521431,
+      "positive": 14,
+      "min": -12.271631090605531,
+      "max": 41.700618953430265
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": -0.0022316931281238794,
+      "paired_se": 0.002480749093183368,
+      "positive": 16,
+      "min": -0.02938409149646759,
+      "max": 0.033827781677246094
+     },
+     "conflict": null
+    },
+    "H_spawn": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": 0.08611169147339115,
+      "paired_se": 0.017017003744272285,
+      "positive": 26,
+      "min": -0.07078689612616332,
+      "max": 0.3272440592746676
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": 428.1871144822325,
+      "paired_se": 60.514270722770895,
+      "positive": 31,
+      "min": -65.06612596977243,
+      "max": 1417.7812192802041
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -85.37575912641451,
+      "paired_se": 20.107801051215713,
+      "positive": 1,
+      "min": -357.43812948460754,
+      "max": 9.39717194353286
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.022068290621973574,
+      "paired_se": 0.00344517438035629,
+      "positive": 28,
+      "min": -0.009619943797588348,
+      "max": 0.06529310718178749
+     },
+     "conflict": null
+    },
+    "H_park2": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.06047893323882812,
+      "paired_se": 0.022175016849392958,
+      "positive": 11,
+      "min": -0.475681834001742,
+      "max": 0.15033701403897193
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -145.73536158861052,
+      "paired_se": 60.27273909553501,
+      "positive": 11,
+      "min": -1098.2892066552743,
+      "max": 468.91834552498267
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -16.218957311120512,
+      "paired_se": 5.45093641577102,
+      "positive": 3,
+      "min": -164.06087917874018,
+      "max": 31.618510665996762
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.012235142989084125,
+      "paired_se": 0.002147365399872525,
+      "positive": 29,
+      "min": -0.021732211112976074,
+      "max": 0.041791558265686035
+     },
+     "conflict": null
+    }
+   }
+  },
+  "c02_stochastic": {
+   "summary": {
+    "qos_satisfaction_ratio_per_step": 0.3025875782317159,
+    "raw_native_J": 863.9090182618489,
+    "return_constraint_cost_sum": 8.146845032927109,
+    "cutoff_event_count_sum": 0.0,
+    "depletion_event_count_sum": 0.0,
+    "min_decoded_battery": 0.10060202027671039,
+    "mode_uav_step_fraction": 0.26532421875,
+    "first_entry_step": 1147.90625,
+    "first_input_step": 1924.0,
+    "qos_per_step_pre_entry": 0.16940478381057725,
+    "qos_per_step_entry_to_input": 0.3376368241063753,
+    "qos_per_step_post_input": 0.41040827001181124,
+    "charger_input_wh": 231.82291666666663,
+    "wait_ticks_total": 3390.09375,
+    "guard_blocked_actions": 486.28125,
+    "guard_checked_actions": 8200.40625,
+    "feedback_entry_count": 65.375,
+    "boundary_share_normal_mode": 0.1362179092373232,
+    "altitude_floor_share_normal_mode": 0.05633100263977884,
+    "anchor_uav_steps_within_300m": 3974.28125,
+    "centre_uav_steps_within_300m": 1967.75,
+    "first_service_step": 290.2258064516129,
+    "zero_service": 0.03125,
+    "n": 32,
+    "zero_service_worlds": 1,
+    "failed_worlds": 0,
+    "min_battery_p10": 0.08544488251209259,
+    "guard_blocked_share": 0.05929965359947868
+   },
+   "record": {
+    "checkpoint": "c02",
+    "transitions": 402000,
+    "policy_seed": 925031,
+    "draw": 0,
+    "policy_identity": [
+     {
+      "checkpoint": "c02",
+      "checkpoint_sha256": "dd9dcec8bcd6cb1eee699dfefa5701878af741004683ab756cf2ef4ae3846cc1",
+      "policy_fingerprint": "f2e7a0da5ca5f12d384eb0d520883e5ae1263d368c25d7e76439e6e8f9d7c4f9",
+      "rollout": 67,
+      "transitions": 402000
+     }
+    ],
+    "controller_information": "flat recurrent actor on the legal observation + held central snapshot (state, all observations, ego one-hot) refreshed every k = 10 steps (SET, use_central_snapshot_in_flat_actor)"
+   },
+   "milestone_reached": false,
+   "worlds_at_or_above_milestone": 0,
+   "vs_c00": {
+    "qos_satisfaction_ratio_per_step": {
+     "n": 32,
+     "mean": 0.05972531417854585,
+     "paired_se": 0.025889464919343307,
+     "positive": 21,
+     "min": -0.31268441916922424,
+     "max": 0.3040740102433633
+    },
+    "raw_native_J": {
+     "n": 32,
+     "mean": 170.96744388551474,
+     "paired_se": 79.22635693589368,
+     "positive": 21,
+     "min": -946.6622262392407,
+     "max": 911.6720238808804
+    },
+    "return_constraint_cost_sum": {
+     "n": 32,
+     "mean": 3.5281899645841976,
+     "paired_se": 2.7590942002467074,
+     "positive": 8,
+     "min": -4.985134279029487,
+     "max": 73.03845709071867
+    },
+    "cutoff_event_count_sum": {
+     "n": 32,
+     "mean": 0.0,
+     "paired_se": 0.0,
+     "positive": 0,
+     "min": 0.0,
+     "max": 0.0
+    },
+    "depletion_event_count_sum": {
+     "n": 32,
+     "mean": 0.0,
+     "paired_se": 0.0,
+     "positive": 0,
+     "min": 0.0,
+     "max": 0.0
+    },
+    "min_decoded_battery": {
+     "n": 32,
+     "mean": 0.0016113210003823042,
+     "paired_se": 0.0013667030090801498,
+     "positive": 25,
+     "min": -0.022679835557937622,
+     "max": 0.01924656331539154
+    },
+    "conflict": "service higher but risk worse: return_constraint_cost_sum"
+   },
+   "gaps": {
+    "H_central": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.47143655006678997,
+      "paired_se": 0.02613671325861367,
+      "positive": 0,
+      "min": -0.8212457130960767,
+      "max": -0.1486431989954573
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -1417.9783554303995,
+      "paired_se": 80.20765068964467,
+      "positive": 0,
+      "min": -2471.8383399896893,
+      "max": -443.7306687070993
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": 3.3248730938165862,
+      "paired_se": 2.6297815278729044,
+      "positive": 11,
+      "min": -12.24580445833565,
+      "max": 72.6861534958591
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.0010164352133870125,
+      "paired_se": 0.0014308515343832286,
+      "positive": 17,
+      "min": -0.021619997918605804,
+      "max": 0.018177270889282227
+     },
+     "conflict": null
+    },
+    "H_local": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.29435117077233475,
+      "paired_se": 0.03769600490426523,
+      "positive": 3,
+      "min": -0.7213936539579642,
+      "max": 0.2632435186763825
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -764.5372970333895,
+      "paired_se": 124.19364221800639,
+      "positive": 4,
+      "min": -2109.7566492619544,
+      "max": 1176.904330271619
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -57.77675180993244,
+      "paired_se": 15.456873363026451,
+      "positive": 4,
+      "min": -289.8465651082075,
+      "max": 70.68835350730359
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.013367328210733831,
+      "paired_se": 0.002906575523280432,
+      "positive": 28,
+      "min": -0.0198819637298584,
+      "max": 0.05351535603404045
+     },
+     "conflict": null
+    },
+    "N_deterministic": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.025738477780488517,
+      "paired_se": 0.028513208030418142,
+      "positive": 12,
+      "min": -0.26671268747057386,
+      "max": 0.3970543162289646
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -91.0671847746696,
+      "paired_se": 85.02922335405758,
+      "positive": 12,
+      "min": -820.7008418863004,
+      "max": 1192.0069928937544
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": 6.9501114086886755,
+      "paired_se": 3.186446691060972,
+      "positive": 24,
+      "min": -9.291642077524282,
+      "max": 73.70044507626915
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": -0.007563633611425757,
+      "paired_se": 0.0021488263367941654,
+      "positive": 8,
+      "min": -0.031776830554008484,
+      "max": 0.019909463822841644
+     },
+     "conflict": null
+    },
+    "H_spawn": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": 0.07060135739113158,
+      "paired_se": 0.025729531056302456,
+      "positive": 27,
+      "min": -0.2877476259062107,
+      "max": 0.3235535031451513
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": 371.61599633454887,
+      "paired_se": 79.56182225073863,
+      "positive": 29,
+      "min": -573.2189126127894,
+      "max": 1301.9325801978923
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -80.50976348123243,
+      "paired_se": 19.020918710772204,
+      "positive": 2,
+      "min": -352.182928873644,
+      "max": 17.21835452027136
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.016736350138671696,
+      "paired_se": 0.002918958274051169,
+      "positive": 28,
+      "min": -0.018220096826553345,
+      "max": 0.05111470818519592
+     },
+     "conflict": null
+    },
+    "H_park2": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.07598926732108768,
+      "paired_se": 0.028823693900452585,
+      "positive": 10,
+      "min": -0.48406175469470986,
+      "max": 0.20735970587138886
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -202.3064797362942,
+      "paired_se": 85.56998121356324,
+      "positive": 11,
+      "min": -1338.7154748326961,
+      "max": 641.6742675261917
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -11.352961665938423,
+      "paired_se": 5.2604879461053,
+      "positive": 3,
+      "min": -129.04126726995122,
+      "max": 64.2089310726364
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.006903202505782247,
+      "paired_se": 0.001501582553412002,
+      "positive": 29,
+      "min": -0.017025329172611237,
+      "max": 0.02488367259502411
+     },
+     "conflict": null
+    }
+   }
   }
  },
  "final_holdout": {},
@@ -2559,76 +4117,92 @@
   "deterministic": {
    "checkpoints": [
     "c00",
-    "c01"
+    "c01",
+    "c02"
    ],
    "qos_satisfaction_ratio_per_step": [
     0.20880643341287225,
-    0.24086622017172904
+    0.24086622017172904,
+    0.31809791231397544
    ],
    "raw_native_J": [
     587.0513363313798,
-    692.4209539988926
+    692.4209539988926,
+    920.4801364095325
    ],
    "return_cost": [
     6.637244668291698,
-    1.6202065745992456
+    1.6202065745992456,
+    3.280849387745018
    ],
    "min_battery": [
     0.09717425890266895,
-    0.10762251145206392
+    0.10762251145206392,
+    0.10593396076001227
    ],
    "boundary_share": [
     0.058266677291459186,
-    0.42587218776462826
+    0.42587218776462826,
+    0.4284142636374371
    ],
    "first_service_step": [
     363.57142857142856,
-    281.25925925925924
+    281.25925925925924,
+    322.741935483871
    ],
    "zero_service_worlds": [
     4,
-    5
+    5,
+    1
    ],
-   "last_step_delta": 0.03205978675885679,
-   "still_improving_at_end": false,
-   "best_checkpoint": 1
+   "last_step_delta": 0.0772316921422464,
+   "still_improving_at_end": true,
+   "best_checkpoint": 2
   },
   "stochastic": {
    "checkpoints": [
     "c00",
-    "c01"
+    "c01",
+    "c02"
    ],
    "qos_satisfaction_ratio_per_step": [
     0.24286226405317002,
-    0.24984948656705125
+    0.24984948656705125,
+    0.3025875782317159
    ],
    "raw_native_J": [
     692.9415743763342,
-    708.7280912974393
+    708.7280912974393,
+    863.9090182618489
    ],
    "return_cost": [
     4.618655068342911,
-    6.871148542661084
+    6.871148542661084,
+    8.146845032927109
    ],
    "min_battery": [
     0.09899069927632809,
-    0.10469983564689755
+    0.10469983564689755,
+    0.10060202027671039
    ],
    "boundary_share": [
     0.011208130538639217,
-    0.17076085424040413
+    0.17076085424040413,
+    0.1362179092373232
    ],
    "first_service_step": [
     346.8965517241379,
-    233.44444444444446
+    233.44444444444446,
+    290.2258064516129
    ],
    "zero_service_worlds": [
     3,
-    5
+    5,
+    1
    ],
-   "last_step_delta": 0.0069872225138812305,
-   "still_improving_at_end": false,
-   "best_checkpoint": 1
+   "last_step_delta": 0.052738091664664644,
+   "still_improving_at_end": true,
+   "best_checkpoint": 2
   }
  },
  "failure_explanations_pro_table": {
@@ -2637,8 +4211,8 @@
    {
     "observation": "users seen late / access late / little useful service exposure in training",
     "proxies": {
-     "first_service_step_last": 281.25925925925924,
-     "qos_pre_entry_last": 0.13321846909912477,
+     "first_service_step_last": 322.741935483871,
+     "qos_pre_entry_last": 0.17157151264628653,
      "training_qos_first_five": [
       0.25229310281861594,
       0.17380183280289688,
@@ -2646,7 +4220,7 @@
       0.24938514831220568,
       0.25862531934616373
      ],
-     "mapping_share_mean": 0.2506298076923077
+     "mapping_share_mean": 0.26028433098591547
     },
     "would_strengthen": "insufficient opportunity to reach useful states",
     "would_not_follow": "an identified exploration defect; that a curriculum works"
@@ -2654,16 +4228,18 @@
    {
     "observation": "users and paths present, delivery not held or improved",
     "proxies": {
-     "first_service_step_last": 281.25925925925924,
-     "qos_last": 0.24086622017172904,
+     "first_service_step_last": 322.741935483871,
+     "qos_last": 0.31809791231397544,
      "curve": {
       "deterministic": [
        0.20880643341287225,
-       0.24086622017172904
+       0.24086622017172904,
+       0.31809791231397544
       ],
       "stochastic": [
        0.24286226405317002,
-       0.24984948656705125
+       0.24984948656705125,
+       0.3025875782317159
       ]
      }
     },
@@ -2673,8 +4249,8 @@
    {
     "observation": "early service good, gap widens after F / recharging",
     "proxies": {
-     "learner_pre_entry": 0.13321846909912477,
-     "learner_post_input": 0.3645272049510287,
+     "learner_pre_entry": 0.17157151264628653,
+     "learner_post_input": 0.4748139769155263,
      "H_central_pre_entry": 0.8099960107159845,
      "H_central_post_input": 0.7252324599096243
     },
@@ -2684,9 +4260,9 @@
    {
     "observation": "targets not reached, non-zero proposals often guard-blocked",
     "proxies": {
-     "guard_blocked_share_last": 0.21586970436926578,
+     "guard_blocked_share_last": 0.07617238587531917,
      "H_central_guard_blocked_share": 0.07722774393502191,
-     "boundary_share_last": 0.42587218776462826
+     "boundary_share_last": 0.4284142636374371
     },
     "would_strengthen": "action filtering under specific geometry may limit execution",
     "would_not_follow": "H's global blocked share diagnoses SET"
@@ -2695,12 +4271,12 @@
     "observation": "still improving at the end with a large gap",
     "proxies": {
      "still_improving_at_end": {
-      "deterministic": false,
-      "stochastic": false
+      "deterministic": true,
+      "stochastic": true
      },
      "gap_to_H_central_last": {
-      "deterministic": -0.5331579081267768,
-      "stochastic": -0.5241746417314546
+      "deterministic": -0.4559262159845304,
+      "stochastic": -0.47143655006678997
      }
     },
     "would_strengthen": "the exposure may not describe the plateau",
@@ -2714,7 +4290,7 @@
      "identity_per_panel_present": true,
      "curve_flat": {
       "deterministic": false,
-      "stochastic": true
+      "stochastic": false
      }
     },
     "would_strengthen": "this fixed programme performs limitedly at this exposure",

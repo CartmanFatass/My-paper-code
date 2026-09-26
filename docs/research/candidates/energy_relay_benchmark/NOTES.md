@@ -2746,3 +2746,36 @@ H_spawn's level; reported, not read further. Training-time QoS/step (sampled act
 by 10-rollout blocks: r1–10 0.191, r11–20 0.161, r21–30 0.210, r31–39 0.181; F-mapped-command share 0.227 → 0.257; F-mode share 0.227 → 0.257; action entropy not in the rollout events; rollouts with a zero-service lane: [2, 6, 7, 8, 9, 11, 12, 13, 14, 16, 20, 23, 24, 25, 27, 28, 34, 35, 36, 38, 39].
 Fit at the read: 39 rollouts, ≈ 168 s per rollout with the two evaluations sharing the CPUs
 (projection ≈ 9.3 h), 0 live lanes at any boundary.
+
+### Stage 1, c02 (402k transitions, rollout 67) evaluated (`b02_s1_eval_c02_a01`, operation c498afec)
+
+Checkpoint written 21:26 UTC, copied to the artifacts directory (agent.pt sha256 `dd9dcec8…` equals
+its record), evaluation accepted 21:26:38Z beside the fit (command sha256 `60530acb…`, supervisor
+pid 732497, runner 732498), `COMPLETE` in 871.4 s, 64 episodes, 0 failed, diagnostics parity equal
+in all rows. Reader unchanged since `a1767f1de`; readings JSON regenerated (c00–c02).
+
+| 955001–955032 | c00 | c01 | c02 det | c02 stoch |
+|---|---|---|---|---|
+| QoS/step (det / stoch) | .209 / .243 | .241 / .250 | .318 | .303 |
+| paired vs c00 | — | +.032 / +.007 | +.109 (SE .017, 29/32) | +.060 (SE .026, 21/32) |
+| vs H_central .774 | | | −.456 (SE .019) | −.471 (SE .026) |
+| vs H_local .597 | | | −.279 (SE .029) | −.294 (SE .038) |
+| vs H_park2 .379 | | | −.060 (SE .022) | −.076 (SE .029) |
+| vs H_spawn .232 | | | +.086 (SE .017) | +.071 (SE .026) |
+| vs N .328 (det) | | | −.010 (SE .019) | −.026 (SE .029) |
+| boundary share / altitude-floor share (normal mode) | | | .428 / .321 | .136 / .056 |
+| QoS before first entry / after first input | | | .172 / .475 | .169 / .410 |
+| F-mode share; return cost; min battery | | | .199; 3.28; .106 | .265; 8.15; .101 |
+| zero-service worlds; worlds ≥ .60 | | | 1; 0 | 1; 0 |
+
+At a third of the exposure the frozen learner has moved a full threshold above its
+initialisation in both modes and sits within the threshold of N (B09's HMASD checkpoint, 180k
+transitions) in the deterministic mode, still below H_park2 and far below H_local and H_central;
+no milestone. Under deterministic evaluation this learner too parks on the walls (.43 of
+normal-mode UAV-steps; .14 under sampled actions) — the same mode dependence Stage 0 found for N.
+Training-time QoS/step (sampled actions during collection) stays flat and noisy by 10-rollout
+blocks (.19, .16, .21, .18, .16, .13, .21, .12), a zero-service lane in 40 of 71 rollouts, action
+entropy 1.156 → 1.150, F-mode share rising: the curve separates training-time stochastic service
+from frozen evaluation, as Pro asked it to. Reported, not read further; the next checkpoints
+decide whether this is a rising curve or a plateau at N's level. Fit at the read: 71 rollouts,
+≈ 166 s per rollout (projection ≈ 9.2 h → end ≈ 03:35 UTC), 0 live lanes.
