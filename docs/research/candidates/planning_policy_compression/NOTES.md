@@ -1352,3 +1352,30 @@ targets these new data/numerical/execution paths; no duplicate scientific consul
 Implementer returns diff/checks/risks, no Git/index/NOTES writes, result launch, Pro or children.
 DM accepts and publishes; a real material scientific disagreement stops only its dependent new
 effect and stays in this notebook for Root's decision. Other authors' edits must be preserved.
+
+### 2026-09-26 — implementation accepted for the selected B03
+
+The bounded Implementer returned the new direction-local `b03/study.py`, admitted `b03/run.py`
+and mirrored focused tests. I read the implementation and checks. Independent engineering
+Reviewer `/root/review_b01` reviewed these paths against the fixed draft/L0 and found **no
+material engineering finding**. It independently ran the seven focused tests (7 passed in
+5.61s; Implementer final pass5.28s), verified the production archive read-only against its
+declared hash/size and stage counts, and confirmed the unchanged B01/B02 helpers. These were
+small engineering fixtures, not production-data learning or production-seed deployment.
+
+Accept the explicit O/S/BC training path, fixed saved stage/label permutations, paired initial
+tensors and epoch order, full-sequence recurrence and continuous Adam. Original-weight
+diagnostics are read at each **stage endpoint** on that stage's data; only final stage2 models
+are deployed. Review also covered common worlds/three-contrast arithmetic, raw/checkpoint
+identity and partial optimizer/later-deployment failure retention. The fixed six-fit counts
+match the selected note. Native admission and result execution remain pending at this entry.
+
+Remote preparation retains D at the existing node archive path and uses the configured
+canonical `/home/wu/projects/HMASD` as author/output root. This leaves D external to the new
+native snapshot and avoids remapping an untracked archive into source. Materialized only the
+published maintained launcher and compute config in that canonical checkout, and aligned its
+owned PPC state from confirming to the published exploring value; its owner pause/lead and
+other rows/edits were preserved. No authoring worktree, data copy, new Pro request or App
+message was created. The maintained launcher includes the published snapshot/admission lock
+repair. After committing/pushing these accepted inputs, invoke the configured supervisor and
+native immutable-snapshot launch once, then retain and observe that same operation reference.
