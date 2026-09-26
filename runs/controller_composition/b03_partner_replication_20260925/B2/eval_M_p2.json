@@ -1,0 +1,1531 @@
+{
+  "cell": [
+    "M",
+    2
+  ],
+  "status": "complete",
+  "world_seeds": [
+    92590000,
+    92590001,
+    92590002,
+    92590003,
+    92590004,
+    92590005,
+    92590006,
+    92590007,
+    92590008,
+    92590009,
+    92590010,
+    92590011,
+    92590012,
+    92590013,
+    92590014,
+    92590015,
+    92590016,
+    92590017,
+    92590018,
+    92590019,
+    92590020,
+    92590021,
+    92590022,
+    92590023,
+    92590024,
+    92590025,
+    92590026,
+    92590027,
+    92590028,
+    92590029,
+    92590030,
+    92590031
+  ],
+  "reset_convention": "constructor then unseeded reset()",
+  "initial_world_identity": {
+    "states": {
+      "shape": [
+        32,
+        133
+      ],
+      "dtype": "float32",
+      "sha256": "9b4bd925b6ae8732a5cd221012cbdc61b91069be13a1a52699782f3f42723eb8"
+    },
+    "observations": {
+      "shape": [
+        32,
+        6,
+        104
+      ],
+      "dtype": "float32",
+      "sha256": "5ab13bcaaf792cc3b8a5f0aa80647868098629f59a058eadf4b29b1ebe6fdd00"
+    },
+    "uav_positions": {
+      "shape": [
+        32,
+        6,
+        3
+      ],
+      "dtype": "float64",
+      "sha256": "360f88d1501f863487c53da59d5513023c1af2f49ae6359f2a2963360232b3af"
+    },
+    "user_positions": {
+      "shape": [
+        32,
+        50,
+        2
+      ],
+      "dtype": "float64",
+      "sha256": "9ee861ddadd480fe7c1c1e2c9e13029c04479822585b6f66f10b64f1b756e8af"
+    }
+  },
+  "initial_world_identity_per_world": [
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "0288f91d91d27f806415443f697b5efddeb21e62fedc8c4577e3b7edcae816d9"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "92de6ed55ce8c22fcd6375c580b880e386c9b043c453fb1a6dd6faf5f884573e"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "96199c31defbb2369dacf3de0c4bfcabd5ed8d772a093fae8b6f5e298cc9785e"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "8924172b35df33e481fdd4e6906c4ba9ffcd44838b29cb2be162b194d5b2451f"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "3d9d024bb6f1502d1dd128c6cb9d9cbf7b2b79bd9032653bf54ec882325e7949"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "30ceaf3d8ee57b86d85124b4a002e5bccfbc057992c08fe9bbb7fb4b22f1a13f"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "1035d22ba639dd8565f7f58335883a864c535a44602d371490d2dc407a3b1b93"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "ec84e3d5e843ec38f298833642c05cb477f15fff0d1da2875806a1faa302527f"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "b16ca7097871bd70172dca643314618540a546061ca21f373c0dbac4bb0000e5"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "b820f2a396d5daba1ce713a46e1f902f7764aaa95151fccde9be578085d6da0b"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "f488608789bd6ae1a61dc5b83506efc32005ca1c48be15e538dee10c84ee8b70"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "e9fd7671f7fa9862d7e1b893067d9bb9f2108bf361ec764e23de4e25eb95eb30"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "bb836ddb9b6ecdd4e9abcf257460d9b4205292b92274ebf08475bee6e26122d5"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "bb67d41c8ca4c08958f37bafded3122cce66c63e027d1f7bd6c42e2a2cb9d804"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "5831e649a453a3a9d8a6e3b62ddc0ba99e3e4c9c65ba84b77b083c0922361d55"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "6b756ba5cfc23053abc8eaafc0632baabff73957c9c2b6c4359cdd5e3ca07447"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "3f51b494c117fc4dd487285a3ac040849f188b5f0e8753245ac9a03fa51c5bdb"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "da3e37ef3af3dfa31965ec76edd2a8af73b98ee8cf61ec338445a093405d1985"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "5ea6f668e6260fe146dc8c9701442e18640643eb2e7973a7f4f0e094f7c7a29c"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "602883ecb1dc17aeb1bfd4869862ab791ca53900a66f9d3e9640f752e8b9a831"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "0558b129774fffae13739a1f0634b277afe25ac8c659df7df6f57e2077ba17bf"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "167910ca63c9274c3ebf04d64462a411e031b226661330d1a232c7b2883b7935"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "3e411d7d06d455ff2656df32c6af62fdce179716e814eaafcd8e7335130d6acb"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "a008fadaf83456bf3f61762d90bf542b1739a82fadebd6cfcd5b217abfe41f94"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "2210fc12df23da625b267df2504464b8977fbfcaf3126c7a8077f62ba889f0f9"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "0cfff832e397dc4af959a85a6d0953926212642d00ae202a4278a5757ca341d1"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "e7a38f346628719cf1ae4aa0c8c4fe7977eaa1346044efd571ec705ca06ba226"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "0e962b383e4b91690f7e890c1ba862cf3ecebc0692bc9853c878216ba61f6c6a"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "fd8df3a0051166d13af260e28cd2ebcec04d269c9e8e3a1adaa86e8dc8389263"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "0ded7b5abd239adb9284d28fed714f8209a8f50f5d4112a786826a99e6a9f77e"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "8f5073f9a96ac9f47beada79166b732d6dca4230388a18c245202e15056fbf2b"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "bc8e11f375c2dc2a3482e5d182d737ffbd810dae610e70cf1bd7276169bcfbf0"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "6c6893707dd65e1b3ecd97a0dadcfbb14d769d36c238be56341b754dee47671e"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "3c7ede7632e0f422bf82c64b2bfe307cafba6f11350da9f801c1ccd36a25ebda"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "ffab9c72076f8e3e8c480f07e3b9990d180e2bba93b183c9371142a92adea003"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "30726e4217f20902684cf9ed984ef9ce6f7a25deae6e20d898cb97371efb57e7"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "3003cc593ae554bd13bbbdd481f80d79e6b402f625523caa8a214cda03d29dc8"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "9f6229aeb59b3cdaa9ce6935591dddea41df81bf4c63c30a4385d26c28f6cdb9"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "ce4cd5bff3044cc74c400aee195ab196028263036546c15bd338cb6c2f3698cb"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "3528d5a6a09b9ee7fe0f13fc6f30be173bfedbb0e93fabbe9dc89d28808767cc"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "9efee0ddc1a2a7e6b705f2a35af4d32dd504c880ccdc859296894e3d1ca36549"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "78313efd72fbda8d5217b8d8ea75f142175a785d9278d58a6e843a7d8b1a6338"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "f203f8a6fd0a8ed77e52c96a07cf628ee00e8bbc1220351959594036f3eb33c2"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "cc2a5d73c2471477401fb1d04706fca0c80317cc66eb94e6987f4735db0e2d97"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "4703a4e3f8af09eff01738a62ed14af282f5f01b217f83967242be4af41605ed"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "22d9cea518ed6a27543e633ac5dbda6fdf74e6c4cebc174410099bb522b781ea"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "878ec0fd20a5b67c37a72b8e561916e28493989d8cfa3d4c9301b960b20c60d9"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "59d11caec0fcf769231642509fde3d4c59da0adf5f973c5cb3da9a3afaefecba"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "16cf6613bb574420ea9ab26ad54405a1f11ac2e2d5fef8d07099845158496ba3"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "5f6ecbf3194ecd77f2345905881aeb0a11357b5d519669e3ad3d46fa16caa806"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "b5e187dca79721830b82d319df9241eb25a79e180417b1c615d6d803d06dd72e"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "72f1e06a9e46926cadfaa5be37e7823c23e00830888b3698a7e58f95dc3b5e63"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "259d54f40e0ec82c9e9e465e0fe0b66cb35973f0f34784b98718055503ce2c64"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "f2ccdbe88d889cef10f1b6905937fe33e02da00c2db89eac5ac386cfe26b565a"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "53a2c35309baf48295a1802e94befc4be5f7547144ce89fc1b9579bb2c4e3f5d"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "cf958903f73c460b093b1f63e7825ddc6a364e147db2954a333a4b963b37605e"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "f25888d8a3453a0cdbad59a3f1bdbbabcd5dfc1aef043c4ebb295753a87a5972"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "79fa9f19e05a63f768bccb0a766d7c4e34ef18d56d42135cba38d81d861255b9"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "79f93d70c159d852c5b682904c3096762f97e6dfbe73fd083124bbaf4ce49ad7"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "1dc45790c31afa620d1ad5910986c2d2a4f2cecf191d559713919a34ef24e66e"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "d09508073724ac9325c5bfd02ac72eee865946e9b093c7aa030aded7827973c6"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "2241510157f9a77ef413de5e42f5f444b4e05735abe886264cd6634a2f68a2c9"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "25023578e3be234bf93cdc812c3eb0eb341260bac38573ecf0975b68a966dafc"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "6c47a29195a0b871473e80428ca318630e1ac541ab163bbb65f7253fd8c46d12"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "37c0b0df2170ea2e2684bc3f85ebc16dedf2a35ad703fee4fa75d6ebe58da11b"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "27ceff9c974d0d84ce070ced78527be76cd331ee1e13600971858200ba4370e8"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "dcb9b2b1d56b69e662c8af40e9a33326bb81423475fc13b4a9edb6588f869763"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "4afcf36f42727460f57e79ea79af9c87fe92617d16a069a809768ca447704f2e"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "1fe6a29faf163d00668e2b55be388126b411fd70fc198da6a3cac6c07d5e4e17"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "ea77edfe66edacfecf30f0412a57b770245009af2ad30ef9490330cf91c4c7da"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "9e884dbb4e7b01693832acd47d2435a07ad36a988b23b7fabd814768e954ccf7"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "d56b39c35e222f68810d308ef6a953902e6e4382edaa949f8da17d1aab4b055a"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "a57adc81fdac54463c0f30c44a9875184dc20fc4f281559883d3eb8eedf57bbb"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "45b19f39b41d7eb730eed16ed545728b070afc3de5981a57b9fd82143a62960f"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "47e0595af7d1794f2023fa73195eb09fef4739da70d476b492d548bdb4745475"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "15f3e5b874faf3b8d4931ad166a8872d60196429946affa9cb5186f5f64e28e1"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "96226b2a4ecc54de4a6619769962c046d7442ff8df02c92228c159cdafaa0f10"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "a325fb724ff5c393014508dc6e8a357031ce3800f2a928fc11555b92d820c23d"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "da642cfa8e75527123138e23bb3768879df1d3eb6395905b8fc05929dba451ec"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "c8d7cac71b121ffa239d68a2a85ed4bad18c90f9234f9ef58f2f0b019f16f07e"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "265e277fe00cf0ac1831b4093bc1b17c61b026dfab5cd1d10b31e06ab584463f"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "ffeea860a5189f39068bebbece13b7ff2ccc8ece5fdff41eea7204de768ad2e6"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "84a61c489ee95ba1e3c7c95bfa59be9fffc3e032b8afc2999df4861c1295b699"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "a871ff43ffb7cb7ed7eb6fb812fd98dddb26c9865f33359db7c81ee8cf84a54a"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "293da082bf282d847b7ae3ae9f2f918fad022eb02d8b100672473b83f015f1fb"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "0b101ca9d17993458e0d3cfb785468806194ad78ecf8ad995b00a5f254f5ec7d"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "983bd51e1269fc22d55ca53f4d1825c4fd6de63ea120aeec2007f69ddc881710"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "27369c34c3ad3803c363c023ac8f55641397594182d3ccc88b32e74aa772bd06"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "b6a2c642b772ce7e349018be32b90860464eb5031c3086db13d1859c2a86f72c"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "8ce951cfbd87fa846ff61afbac3de437495d63b76d486ce8c909a932b0c52f8d"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "15f93e4910a9330db4595c6b7d5917be562dad28eae1bbc89d4c0ba5bc69cac6"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "bffef153aadb273744a085c3d2ec36a3c419fd6b944714fe1e796e738cefd081"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "5a3f2aaef94ea74eaf9a698a090f663a7993d1e3fafc3c5df6989c927bdfa5c2"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "627b1c2f729145835f50e003530adf3577f8490cb5e3404a07f65e027b0fc2bf"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "4cf1ea4adefb55ab33f5b2f2f6e56990beeee0711d10749afad2d58e53fa3730"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "fad4bf01d85a5893eb13bfea909ee9fe673d68f524428b680166a4decffce8c4"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "30937cab3f2915eadc9730fcfaafa6ded5b624f3686efd643ef0a94875e05b91"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "63d5df7701a143c6d305dfcf46dd01173c862c18ca25beade3705e438c411301"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "7cc101e800c996f6f02f6065cc5f03eb64497240105cb72366e5eaec2b7862a9"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "91bb41745f5b3873141ab15e2c1882fea8e48356c3142bfcadfec3d99cb08c92"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "0cbcc7dc69b733a2485b9c6e8106d85f4f5e1b3f1e80f0238926ab9b7ca619ab"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "b266e9f25ac0b1beba58f334e35fd7ba6c34b5f2c0abcfa0bccc585d3174928d"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "af47aab20982cf1670bd61adc5fc2555052c9d16630b046949aed6a79f1db0e8"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "11cbfda7de3ded01aa70d0ac4ba0e8be7601ab1a5bbc546e70e35887d130ceb4"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "42d48781edc2906c6eeba93abef924b88a828581d5e60076b0f7383192832dc3"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "fd7e8584be70b2df2699c18ffd5df8e98b899870b35e37cb6d23a78fedd6c409"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "375a690dba254fe5d232abf300543bdda252ce005e591ac8194393512cc349bb"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "165533649a92dc29d4472e9149799c6087a05c286a2c39c6609a18d1e15e8679"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "65aed679f1ff16fe79d2ab5f4f489d2f98f1147c3e0f9bc8f28cf46011fe6ced"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "1a68a6681fc414d9a1a1d135af2ebdf420fdc837ad514d25486e0dbb5bc398f8"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "22642bf1f3b41fdeab227c41d44fc5b4ebcaea8fb477dbcc538bcdbc96b32691"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "34f59edaf4c8fd35414f496846749a578ab74b456aed9356cff918198902c758"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "166474ed36dcbc6e77f0ecc233ad7f713a01cc4e421af84fe274482d2d4febe4"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "28636f46c4707e274c0b9242c73f35c8701cd74d0e2e6c8ce60e3533962ba7f3"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "4058fd7439d0657a17eca0b31f26cee6225eefbddff7475307449e310e4091af"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "6712759b530a8a491dd8c5dc23e40f64ec865289796ace2582d2758d7e04dbb6"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "755257d3ad121a2e8935b28e78b1c0f22c1f558e5e6389da0c6700372e98e28d"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "499fec3960a6a886d0dfb1dc95ed817204c090d0f03942b56edea1387f75cf6e"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "0ebd9f283be46998ff0d6cf06d0b847d1f13df727c4ed4986507f90dc332aeb5"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "b7b526a56ae16c898b0c14369cc735938d3402dde6b9748beb9a242a186f75bd"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "3f485f6fbfb0512229caf5a8eda4a6bd5fd08e0fef8d33515f8dad804a157451"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "8140362912d283f42464a7180f67ccf7fd794bb736098e465f43c385733a18ca"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "7ee66bc285db675c2840b01a684b520940f93d499c62059b86da2d57eb56eb9d"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "f9071fd32dab6f8478fa223e44f8c9933bbe7d141f48fde45f3b5a42bbf39b0e"
+      }
+    },
+    {
+      "states": {
+        "shape": [
+          133
+        ],
+        "dtype": "float32",
+        "sha256": "5423cd22913509a4f86ae262345b50a54ccdff0a1382f9a627b3a355d193f04c"
+      },
+      "observations": {
+        "shape": [
+          6,
+          104
+        ],
+        "dtype": "float32",
+        "sha256": "d0dd1151347640d66682515373d95f4f3bff2414595bd5c6a7ba2273bf639072"
+      },
+      "uav_positions": {
+        "shape": [
+          6,
+          3
+        ],
+        "dtype": "float64",
+        "sha256": "315191fa7c776c03e027680172048a09d0dc16e72bb2a73316e7f82fd7211edd"
+      },
+      "user_positions": {
+        "shape": [
+          50,
+          2
+        ],
+        "dtype": "float64",
+        "sha256": "2e76c2d9e88d93ed8f48cd484887942405c20f86d4a8b97e3e19ee455d285a7c"
+      }
+    }
+  ],
+  "per_world": {
+    "J": [
+      0.4619200086576132,
+      0.5276118886880469,
+      0.48918238803455416,
+      0.4848243867616596,
+      0.46599699781670867,
+      0.5325079043680818,
+      0.4645961066545036,
+      0.5304265170369844,
+      0.475482583112742,
+      0.48676573584576427,
+      0.48849925551372697,
+      0.502122677534639,
+      0.5240226184019776,
+      0.5387920760149749,
+      0.5616660873174224,
+      0.4730890574181461,
+      0.5066534843033179,
+      0.5130594564676598,
+      0.5142546715687817,
+      0.49614212942723634,
+      0.5272114186655079,
+      0.4698120993274332,
+      0.4876156343637136,
+      0.4846121120848552,
+      0.43544686965644974,
+      0.4104749937465981,
+      0.5302582968280246,
+      0.4797684846871952,
+      0.4447844483784923,
+      0.5199584719528341,
+      0.511685105910701,
+      0.45723951655101225
+    ],
+    "scalar_return": [
+      38.493334054801096,
+      43.967657390670574,
+      40.76519900287951,
+      40.4020322301383,
+      38.83308315139239,
+      44.37565869734016,
+      38.716342221208635,
+      44.20220975308203,
+      39.6235485927285,
+      40.563811320480355,
+      40.70827129281058,
+      41.84355646121992,
+      43.66855153349813,
+      44.899339667914575,
+      46.80550727645187,
+      39.424088118178844,
+      42.22112369194316,
+      42.75495470563832,
+      42.854555964065135,
+      41.345177452269695,
+      43.93428488879233,
+      39.151008277286095,
+      40.63463619697613,
+      40.38434267373794,
+      36.28723913803748,
+      34.20624947888318,
+      44.188191402335384,
+      39.980707057266265,
+      37.065370698207694,
+      43.32987266273618,
+      42.64042549255842,
+      38.10329304591769
+    ],
+    "coverage_reward": [
+      0.5838000000000013,
+      0.6922800000000008,
+      0.6275999999999988,
+      0.6439999999999998,
+      0.6196399999999995,
+      0.7068800000000011,
+      0.606839999999999,
+      0.7085600000000006,
+      0.6143199999999976,
+      0.6368800000000002,
+      0.6376,
+      0.6678399999999989,
+      0.6880000000000007,
+      0.7038000000000013,
+      0.7432000000000007,
+      0.6244000000000003,
+      0.6726400000000009,
+      0.6795200000000007,
+      0.6880800000000008,
+      0.6598400000000002,
+      0.6908399999999999,
+      0.6204799999999989,
+      0.6444399999999998,
+      0.6392,
+      0.5656799999999991,
+      0.5337199999999998,
+      0.7091200000000019,
+      0.6176799999999982,
+      0.5730399999999995,
+      0.6913600000000014,
+      0.6702800000000002,
+      0.5965599999999994
+    ],
+    "quality_reward": [
+      0.22060293318821697,
+      0.18891431984778445,
+      0.20419001153888824,
+      0.16477415746266308,
+      0.14703182670783183,
+      0.1696370242150498,
+      0.17151166329156817,
+      0.16792610090915516,
+      0.19600007577487621,
+      0.1851981400583801,
+      0.1912461658296067,
+      0.17355429335811098,
+      0.18487918479834486,
+      0.19472388329536006,
+      0.18577510801282027,
+      0.1676526278578613,
+      0.1622574865155607,
+      0.1678930492540842,
+      0.15606787718844178,
+      0.15927107994089143,
+      0.18361569836141284,
+      0.1768073496419731,
+      0.15502818758206993,
+      0.16554819308127314,
+      0.16747942443527258,
+      0.1569260092944809,
+      0.1679904921579628,
+      0.1985790003318431,
+      0.18070052451044996,
+      0.1689227499138496,
+      0.18525290432016026,
+      0.16682822057888247
+    ],
+    "energy_penalty": [
+      0.012920871298852327,
+      0.013658407266288395,
+      0.011394615427112412,
+      0.01540786047713919,
+      0.011860550195640694,
+      0.013199202896432907,
+      0.011645392332967073,
+      0.01594331323576204,
+      0.013341439619720561,
+      0.014609706171749982,
+      0.015194594235155175,
+      0.017431610472793593,
+      0.013041137037526266,
+      0.012285088973632622,
+      0.014306445086423153,
+      0.014286730939212774,
+      0.012871761651350169,
+      0.012972458308565145,
+      0.014221691587751115,
+      0.0135271945550306,
+      0.011461290842915653,
+      0.017566105565158707,
+      0.0100008219109075,
+      0.012492345839526716,
+      0.010772957674131911,
+      0.010206809041745892,
+      0.01652285081936383,
+      0.012181215412357177,
+      0.010553708974642372,
+      0.014670353021320491,
+      0.013086765385346501,
+      0.01040094962265218
+    ],
+    "total_reward": [
+      0.46192000865761296,
+      0.527611888688047,
+      0.4891823880345541,
+      0.48482438676166006,
+      0.46599699781670934,
+      0.5325079043680822,
+      0.46459610665450307,
+      0.5304265170369843,
+      0.4754825831127429,
+      0.48676573584576405,
+      0.48849925551372714,
+      0.5021226775346402,
+      0.5240226184019772,
+      0.5387920760149755,
+      0.5616660873174232,
+      0.4730890574181456,
+      0.5066534843033186,
+      0.5130594564676602,
+      0.5142546715687814,
+      0.4961421294272373,
+      0.5272114186655084,
+      0.46981209932743306,
+      0.48761563436371375,
+      0.48461211208485505,
+      0.43544686965644946,
+      0.41047499374659835,
+      0.5302582968280249,
+      0.4797684846871959,
+      0.4447844483784925,
+      0.5199584719528343,
+      0.511685105910702,
+      0.45723951655101297
+    ],
+    "scalar_reward": [
+      0.0769866681096022,
+      0.08793531478134115,
+      0.08153039800575902,
+      0.0808040644602766,
+      0.07766616630278478,
+      0.08875131739468031,
+      0.07743268444241727,
+      0.08840441950616407,
+      0.079247097185457,
+      0.08112762264096071,
+      0.08141654258562116,
+      0.08368711292243984,
+      0.08733710306699627,
+      0.08979867933582915,
+      0.09361101455290374,
+      0.07884817623635769,
+      0.08444224738388632,
+      0.08550990941127663,
+      0.08570911192813027,
+      0.0826903549045394,
+      0.08786856977758466,
+      0.0783020165545722,
+      0.08126927239395226,
+      0.08076868534747587,
+      0.07257447827607495,
+      0.06841249895776635,
+      0.08837638280467076,
+      0.07996141411453253,
+      0.07413074139641539,
+      0.08665974532547235,
+      0.08528085098511684,
+      0.07620658609183538
+    ],
+    "E": [
+      33.64,
+      35.286,
+      33.586,
+      32.412,
+      31.298,
+      35.646,
+      31.192,
+      37.148,
+      33.244,
+      33.402,
+      32.524,
+      36.034,
+      34.544,
+      36.104,
+      37.18,
+      31.874,
+      33.736,
+      34.97,
+      34.912,
+      33.086,
+      34.732,
+      34.366,
+      32.254,
+      32.436,
+      28.72,
+      26.93,
+      37.114,
+      32.832,
+      30.796,
+      34.8,
+      34.216,
+      30.03
+    ],
+    "S": [
+      29.19,
+      34.614,
+      31.38,
+      32.2,
+      30.982,
+      35.344,
+      30.342,
+      35.428,
+      30.716,
+      31.844,
+      31.88,
+      33.392,
+      34.4,
+      35.19,
+      37.16,
+      31.22,
+      33.632,
+      33.976,
+      34.404,
+      32.992,
+      34.542,
+      31.024,
+      32.222,
+      31.96,
+      28.284,
+      26.686,
+      35.456,
+      30.884,
+      28.652,
+      34.568,
+      33.514,
+      29.828
+    ],
+    "U": [
+      4.45,
+      0.672,
+      2.206,
+      0.212,
+      0.316,
+      0.302,
+      0.85,
+      1.72,
+      2.528,
+      1.558,
+      0.644,
+      2.642,
+      0.144,
+      0.914,
+      0.02,
+      0.654,
+      0.104,
+      0.994,
+      0.508,
+      0.094,
+      0.19,
+      3.342,
+      0.032,
+      0.476,
+      0.436,
+      0.244,
+      1.658,
+      1.948,
+      2.144,
+      0.232,
+      0.702,
+      0.202
+    ],
+    "height": [
+      62.92087129885227,
+      63.658407266288435,
+      61.39461542711242,
+      65.40786047713922,
+      61.8605501956407,
+      63.19920289643286,
+      61.64539233296711,
+      65.94331323576208,
+      63.3414396197205,
+      64.60970617175002,
+      65.19459423515518,
+      67.43161047279358,
+      63.0411370375263,
+      62.28508897363268,
+      64.30644508642315,
+      64.28673093921279,
+      62.87176165135017,
+      62.97245830856511,
+      64.22169158775112,
+      63.52719455503058,
+      61.46129084291568,
+      67.56610556515865,
+      60.0008219109075,
+      62.49234583952671,
+      60.77295767413192,
+      60.20680904174593,
+      66.52285081936378,
+      62.18121541235718,
+      60.55370897464243,
+      64.67035302132052,
+      63.08676538534652,
+      60.400949622652135
+    ]
+  },
+  "counts": {
+    "team_steps": 16000,
+    "environment_step_attempts": 16000,
+    "executed_action_rows": 96000,
+    "policy_step_calls": 1000,
+    "inferred_action_rows": 192000,
+    "optimizer_updates": 0,
+    "storage_calls": 0
+  },
+  "runtime_digest_before_after": [
+    "06c99e385e2a44e867ce833544f536dce8f96a833950dac54ff2acdcfb03da79",
+    "5df0955de03809678ae80e6488974ab2afb0f24118fde4c2c8112da28a689ded"
+  ],
+  "raw_artifact": {
+    "path": "raw/eval_M_p2.npz",
+    "sha256": "f43e8ee77dc77f9b5b1d7c22a3261a819edcf6d2ec121b83224ad41d7eb3d893",
+    "bytes": 3271826
+  }
+}
