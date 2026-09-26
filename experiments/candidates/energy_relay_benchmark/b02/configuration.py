@@ -48,9 +48,15 @@ RECIPE_NOTES = {
         "the legacy path (env_timers and pending high-level records emptied at each update).  "
         "The team decision, and with it the central-snapshot refresh, stays on the episode step "
         "(_batched_assign_skills: env_steps % k == 0 | dones), so a lane live at a rollout "
-        "boundary keeps its k = 10 cadence; only its skill-timer count restarts (none are live "
-        "at production sizes when every episode is truncated at 3000 = rollout length; counted "
-        "per rollout)"),
+        "boundary keeps its k = 10 cadence, but at the next step() the agent treats every lane "
+        "missing from env_timers as new: timer 0, two np.random.randint draws per lane (n_Z = "
+        "n_z = 1, skill always 0) and a zeroed actor/critic GRU state (hmasd/agent.py step "
+        "re-init; engineering review of 34824de1d).  At production sizes every episode is "
+        "truncated at 3000 = rollout length, so both lanes are done and already reset at each "
+        "boundary and only the four numpy draws differ from B09's ordinary path; a lane live at "
+        "a boundary (early termination: all eight UAVs at zero battery, never seen in B09) would "
+        "have its recurrent state zeroed mid-episode, as in ACG/MAPPO legacy semantics; live "
+        "lanes are counted per rollout in progress.jsonl"),
     "discriminator_batch_size": (
         "not set (ACG sets it to batch_size); hmasd/agent.py reads it only in "
         "update_discriminators, which the mappo switch disables, with default batch_size"),
