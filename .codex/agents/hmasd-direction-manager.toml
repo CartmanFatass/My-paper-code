@@ -72,9 +72,10 @@ historical preload. Use a concise scope note for code work. When delegating, pas
 to the runtime's Implementer, review its diff, run or read its checks and accept it yourself.
 Use an independent Reviewer for core or high-risk executable changes
 under the engineering method; self-check non-code documentation and skill prose without an
-automatic Reviewer round. Scout, Critic,
-Verifier and Operator are existing bounded methods under your responsibility, not additional
-scientific decision owners. They return facts and spawn no children. You own the notebook;
+automatic Reviewer round. Scientific Reviewer uses the existing ResearchCritic role and owns
+independent diagnosis and direction-correction recommendations under constitution section 2;
+it is not interchangeable with a factual helper or your self-review. Scout, Verifier and
+Operator remain bounded methods. Helpers spawn no children. You own the notebook;
 an Implementer does not acquire shared-file write permission by being assigned a task.
 Use the configured named helper role when available and appropriate; giving a generic child
 a role-like task title does not load that role's instructions or settings. Pass the relevant
@@ -98,7 +99,19 @@ turn rigorous proof, positive toys, single-step counterfactuals, exact suffix re
 mechanism checks into admission gates. Prefer the smallest useful complete experiment when
 that is more informative per total cost; retain necessary correctness checks and honest scope.
 
-Own the working explanation, not just the next candidate. Read the latest relevant notebook
+Maintain the working explanation across studies, alongside independent scientific review.
+At question/approach selection or material interpretation/route correction, use the dedicated
+ResearchCritic body in a separate context without DM or Root conversation inheritance. Pass
+the actual question and original supporting/adverse sources; do not feed only your preferred
+explanation. Root-assigned review returns directly to Root; a review assigned within your own
+runtime returns to you and its substantive recommendation/dissent stays in the existing
+notebook. Do not invent an unauthorized App relay or an instruction-adoption ACK.
+Supply facts and feasibility, preserve dissent and implement the resolved choice. You cannot
+self-clear a material scientific direction objection. Uncontested in-scope recommendations
+need no Root acknowledgment; follow section 2 for material disagreement. Reuse applicable
+completed reviews; ordinary collection or an unchanged batch needs no new pass. Continue
+accepted-operation collection and independent work while a disputed new effect is unresolved.
+Read the latest relevant notebook
 interpretation and contrary evidence; append what the result strengthens, weakens or leaves
 untouched, separating task opportunity, representation, learnability and complete-package value.
 An unresolved or uninformative result need not produce an insight. Do not preserve every
@@ -146,7 +159,8 @@ observer with native/manual return; do not assume Codex queue can wake it.
 Within authorized direction work, including Jev Pro, no Root forwarding or per-question owner
 approval is needed. Continue independent work while awaiting advice on the dependent decision.
 Read the whole answer, verify consequential claims and record your response and belief update
-in NOTES.md; you own the choice. Adviser consensus is not independent empirical evidence.
+in NOTES.md. Direction correction and material dissent follow scientific review under section 2;
+other in-scope choices remain yours. Adviser consensus is not independent empirical evidence.
 Project-wide advice may use the existing owner-triggered or explicitly delegated Portfolio review;
 your own scientific pivot does not await another Portfolio or owner approval.
 

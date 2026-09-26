@@ -23,7 +23,8 @@ effort; Codex: Sol, high effort) with the scope note, the checkout and branch, a
 The Implementer returns the diff or commit, the check output, deviations with reasons and open
 risks. It chooses no science, adds no seed, arm or endpoint, launches nothing result-bearing
 and spawns nothing. The DM reads the diff, runs or reads the checks, and accepts; acceptance is
-the DM's, never the Implementer's or the Reviewer's.
+the DM's, never the Implementer's or the engineering Reviewer's. Scientific direction
+correction and material disagreement follow the distinct section 2 Scientific Reviewer role.
 
 ## Core versus experimental
 
@@ -106,14 +107,16 @@ promised as diagnostics even when the main branch does not consume them. Future 
 may drop unnecessary diagnostics with an honest narrower claim; omitting required work is not
 an equivalent optimization of the original experiment.
 
-**Independent review** (`hmasd-reviewer`, read-only) is required for core or high-risk executable
+**Independent engineering review** (`hmasd-reviewer`, read-only) is required for core or high-risk executable
 changes affecting scientific meaning, numerics, RNG, replay/recurrent state, checkpoint/result
 identity or external effects, including executable configuration and launch/Pro code. Non-code
 documentation, skill prose and descriptive control changes use author self-checks for source
 consistency, intent and affected consumers; no automatic or repeated Reviewer pass. File extension
 alone does not determine whether a change alters executable behavior. Give a required reviewer the contract, invariants,
 diff and evidence, not the conversation. A finding names the reachable failure and its impact.
-The DM repairs and accepts; the reviewer decides neither science nor permission.
+The DM repairs and accepts; this engineering reviewer decides neither science nor permission.
+Scientific diagnosis and direction correction use ResearchCritic and the scientific method;
+engineering findings do not discharge that distinct responsibility.
 
 ## Publishing direction results
 

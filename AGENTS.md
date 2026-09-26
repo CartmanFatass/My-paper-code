@@ -53,15 +53,19 @@ Methods under `.agents/skills/` are execution detail, not a second rulebook:
 - `hmasd-chatgpt-pro-transport` / `hmasd-jev-pro-transport`: the applicable direct Pro workflow.
 - `hmasd-portfolio-task`: owner-requested or delegated project review.
 
-The named Implementer, Reviewer, Operator, Scout, Verifier and ResearchCritic roles have the
-bounded responsibilities in constitution section 2 and their registered bodies. Read the nearest
+Scientific Reviewer uses the existing ResearchCritic role and its dedicated instruction body,
+with separate context and evidence-first reconstruction; it owns independent diagnosis and
+direction-correction recommendations under constitution section 2. Engineering Reviewer remains
+separate. Root resolves material direction disagreements; DM executes the resolved choice.
+The named roles have the responsibilities in section 2 and their registered bodies. Read the nearest
 directory AGENTS.md before code edits. There are no Monitor/Transport subagents; detached
 scripts observe accepted operations. No additional role or renamed authority is implied.
 
 Pi: the session acts as the DM for one direction under prompt cache protection. The DM
 maintains cumulative science and actively delegates bounded execution to its registered subagents
 via the native `subagent` tool: `scout` for log/tensor recon, `implementer` from a concise L0 scope
-note, `reviewer` for numerical/RNG safety, `critic` for hypothesis stress-testing, and `operator`
+note, `reviewer` for numerical/RNG safety, `critic` for independent scientific diagnosis and
+direction correction in a separate context, and `operator`
 for batch execution. This preserves the DM's clean context without creating unassigned roles.
 
 ## Evidence, execution and publication

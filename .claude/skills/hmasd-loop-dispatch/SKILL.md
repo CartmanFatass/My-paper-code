@@ -41,6 +41,16 @@ owner to repeat an already clear choice.
   together. A Root doing only project management is coordination capacity, not a fourth
   research track. Training and evaluation both need actual node resources. Do not fill slots
   without a worthwhile authorized task or duplicate a direct DM's scientific work.
+  Assign independent scientific review through the existing ResearchCritic role at question/
+  approach selection or material interpretation/route correction. Use its dedicated body and
+  a separate context without inherited DM/Root turns (`fork_turns="none"` for Codex children).
+  Give source identities and original supporting/adverse evidence, not a preferred verdict.
+  Root-assigned review returns directly here; preserve independent recommendations and resolve
+  material direction disagreement in existing RESEARCH/NOTES with evidence. DM-hosted reviews
+  use their actual parent and notebook; no automatic App relay or routine Root ACK. Reviewer
+  owns diagnosis/correction recommendations, Root project allocation and disputed choices,
+  DM hypotheses, continuity and execution. Ordinary code/collection or unchanged batches do
+  not add a scientific review pass; an applicable completed review can be reused.
 - **Direct DM:** the session itself owns one direction. Explicitly read the
   `developer_instructions` body in `.codex/agents/hmasd-direction-manager.toml`, then the
   relevant notebook and scientific/engineering methods. Main sessions do not automatically
@@ -116,7 +126,8 @@ Keep unknowns explicit; do not backfill addresses for dormant historical directi
    next deliverable, declared scope/cost, pause and any actual owner
    deadline and checkout/index ownership. A child returns to its parent; a standalone DM
    works in its own task and publishes its records without a routine Root reporting route.
-   The DM accepts the science. Explain the present approach's purpose and relevant alternatives;
+   Apply section 2's independent scientific review and disagreement resolution. Explain the
+   present approach's purpose and relevant alternatives;
    do not define the DM's whole responsibility as completing or closing the named batch.
    Keep one result-bearing study active, with useful continuations considered in existing NOTES.
    Question families organize the full plan but do not give a DM ownership of every related

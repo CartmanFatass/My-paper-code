@@ -952,14 +952,75 @@ Constraints：不运行实验、不创建任务、不改治理。只在`main`的
 
 ### Decision
 
-Pending：待完整读完并核验本次答复后由Root记录采纳/修改/拒绝及实际计划；不自动激活B/C。
+本次项目咨询仍未完成；`### Answer`保持空白，不自动激活B/C。
+
+**Owner职责修订，2026-09-25：** owner随后明确要求把独立诊断和方向纠偏责任交给有自己
+instructions和上下文的Reviewer，不能仅要求DM承认判断失误。本会话已据此修改宪法§2及具名角色：
+科学Reviewer复用`hmasd-research-critic`／Pi `critic`，工程Reviewer继续负责代码正确性。科学Reviewer
+独立重建证据并给出纠偏建议，DM保留假说提出、研究连续性和执行，Root负责项目取舍与重大科学分歧。
+未修改Pro四类咨询、统计最低标准、任何冻结实验或owner暂停。普通批次不增加审查；适用的既有独立意见可复用。
+
+**实际独立审查：** Root启动内部`/root/independent_scientific_review`，使用具名ResearchCritic、
+`fork_turns=none`，不继承Root/DM会话。审查者先读原始claim、原生汇总及结果，返回独立初判，再读
+本节Root假说和DM解释；本轮中另实际读取修订后的专用角色正文。以下保留实质意见和Root处理，
+不是第二模型一致性带来的实验证据。未产生训练、评价、源文件改动或额外Pro请求。
+
+- **证据读数：** PPC B02固定正号主张通过，五块+22/+11/+18/+16/+12；该规则不提供总体平均收益
+  下界，所有块仍落后教师。伙伴B01汇总匹配差−.000168J；B02伙伴3 M−F2为+.007696J/+.605750人，
+  B03两块为−.009834/−.049463J，且三个伙伴都不利，自身学习仍有用。审查者核对了原生汇总，
+  包括B03保全summary的记录SHA256；没有重做所有轨迹/权重审计。两新拟合块共享一个新面板，
+  不能把训练变化与换面板的影响分开，冻结伙伴也不构成相互学习的证据。
+- **对Root/owner因果解释的异议：** A曾放弃“不可避免的完成量—等待权衡”解释，R曾在B03之后
+  降低“伙伴3获益/伙伴2代价”解释；因此这些案例不能证明DM不会纠偏，更未识别LLM层面的原因。
+  A的692.9秒原生确认回答了先前两fit共享一个面板留下的复现问题；窄主张与方便的显著性本身
+  不证明该投入错误。R复制也是Root选择，不能都归为DM惯性。Root采纳这些修正，撤回把它们
+  当作既定失误的倾向；仍把选题价值、独立纠偏和支持成本作为需要改善的问题。
+- **方向建议：** 保持伙伴50:50配方关闭，不自动递补B/C。首选续项候选是PPC的条件性权重对应问题：
+  在固定存档数据、训练阶段和动作标签权重分布下，原权重与分层置乱权重的历史对应是否改善原生完成量？
+  不是由教师差距识别出的修复，也不是“真实后果权重”的机制证明。原数据增广由旧BC/WBC共同生成，
+  固定这些数据只研究条件性重新训练，不能检验完整收集过程中的加权价值。
+- **候选设计与代价：** 两个配对起点、原WBC与阶段/动作标签内置乱权重，四个新fit；两臂均重新训练，
+  不能把新置乱模型与旧选中WBC比较。审查者从现有训练路径报价3840更新、23592960处理agent-time行；
+  两个新256-context面板共98304评价团队tick。既有速率约95秒拟合占用仅为估计，工程、评价和读取
+  另计。BC第三臂购买额外的普通模仿/一般重加权比较，非此窄对应问题的自动义务。实际冻结数据可用性、
+  置乱范围及报价由前瞻实现确认；本条是准备候选，没有授权或启动新结果批次。
+- **预期后果：** 原权重在原生完成量上占优，保留历史—权重对应的有限用途，仍有难度/优化等替代解释；
+  仅加权分歧诊断改善而原生不改善，降低该诊断的用途；置乱相当或更优，降低对精细权重对应的投资偏好，
+  不宣称等效；混合/不精确结果不自动加种子，只有仍影响具体下一选择才另作前瞻投入。
+- **R诊断降级：** 旧伙伴3增益是否在新面板保持，只需两格、64回合、32000团队步、0新fit；
+  六格只有研究完整三伙伴模式才有理由。旧增益保持可排除“单纯换面板足以解释所有差异”，反转支持
+  旧配对的面板敏感性；两者都不会使B03新M端点变优。Root采纳不为补一个解释而自动购买此评价。
+- **职责草稿异议：** 审查发现旧“scientific acceptance remains with DM”会冲淡独立纠偏裁决，
+  已改为DM拥有方向和技术验收，科学分歧遵循新§2。也明确保留DM提出/修订假说，避免把它降成机械执行者。
+  内部审查按真实父会话返回：Root分配的直接返回Root；DM分配的保留实质意见与异议在现有NOTES，
+  不虚构跨App报告通路。无争议且在授权内的建议不等Root ACK；重大科学分歧不能由被审DM自清。
+
+**MATERIAL_DISSENT: yes。** 异议针对把DM缺陷当已证实成因、把权重对应上升为真实后果机制，以及
+没有不同科学决策价值的续项投资；不反对PPC冻结判据或伙伴的有限结论。Root已采纳上述限缩，
+保留所提候选排序供后续咨询和前瞻设计，
+但新的科学投入仍待所需咨询和前瞻设计，不能把本次角色修订当运行许可。
+
+**来源：** [PPC claim](candidates/planning_policy_compression/CLAIM_weighted_partial_compression.md)、
+[PPC原生summary](../../runs/planning_policy_compression/b02_confirm_s925951_20260925/summary.json)、
+[PPC解释更新](candidates/planning_policy_compression/NOTES.md)、
+[伙伴结果与解释](candidates/controller_composition/NOTES.md)。审查未重新独立复核B/C全部底层证据。
+
+**咨询传输事实：** 问稿已发布于`30110603b9616dbc170c054f80d4b0e01432da1a`。原操作key
+`hmasd:5842743c1944891f3dbfb11482c3070d06a85c4296440ec26d468a1e4cfa110f`
+两次在发送前因模型菜单校验失败，界面状态修复后Jev模型服务返回HTTP403，未执行发送动作。
+本地operation核实`send_attempted=false`，没有已接受Pro请求、答复或已arm等待器。问题未发出，不能
+写成咨询完成；当前owner新增职责及独立异议需进入后续有效咨询上下文，不得自动重发旧稿或换路逃避403。
+
+**发布范围与采用边界：** Codex源与Claude生成正文已同步；Pi本机`critic`正文、DM调用说明、快捷
+prompt与工具描述同步，未改模型、工具权限或子进程执行逻辑。Pi/Claude运行中的旧上下文是否重新载入
+未验证；此次Codex独立审查的实际读取与独立上下文有上述运行证据，不能据磁盘发布声称所有会话已采用。
 
 ## Current research plan
 
 Owner现已要求重新审视下列计划及研究/DM工作方式，见[当前复盘](#portfolio-review-2026-09-25-research-method-and-dm-reset)。
 下列A/R为已完成安排，B/C仍是待审后备，尚未派发新实验；这不是恢复任何历史操作或修改owner暂停。
 
-2026-09-25，Root已完成全部旧方向收尾复核及本轮完整Pro咨询，选择下一波优先研究：
+2026-09-25，前一轮Root完成全部旧方向收尾复核及当轮完整Pro咨询后，选择优先研究：
 **压缩已有规划用途，以及检验伙伴曝光的训练取舍是否可重复。**
 [完整问题、实质异议和Root决定](archive/2026-09-25/RESEARCH-decision-learning-adopted.md#decision)
 保留成本、替代方案和解释边界。此前owner要求推进A/R并派发两个独立DM；A现已完成B01/B02并结束当前CrossingHost投入，R的进展以其独立记录为准。以下保留各项比较与边界；派发事实不替代原生执行。
@@ -1050,7 +1111,7 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 | DM 规划压缩学习 | `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / `local` | `/home/fires/.codex/worktrees/fsd-a/hmasd-wsl` · `codex/planning-policy-compression-sept25`；持久数据 `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/` | B01/B02均完成、核验和独立出版，合计14fits；固定B02窄确认通过，当前CrossingHost投入结束。Pro完整建议已落实，原生操作终态、无未读证据/活动observer/开放Pro/已选后继。两个源snapshot已回收；fsd-a不在本任务原生附件中，保留目录待原归属工具归档，数据已独立保全。没有接管R或发送App消息。[结果与收尾](candidates/planning_policy_compression/NOTES.md#2026-09-25--b02-complete-narrow-recurrence-confirmed-with-a-persistent-teacher-gap)。 |
 | DM 伙伴曝光独立复制 | `01a0db8f-1fab-7503-ae4b-feff2d4da8f5` / `local` | `/home/fires/.codex/worktrees/fsd-c/hmasd-wsl` · 当前`codex/partner-exposure-b03-publication`；源码/证据分支`codex/partner-exposure-replication-sept25`保留 | B03两新F2/M区组已完整执行、核验、判读并独立出版；结束当前50:50固定库投入，无活动操作、未读证据、开放Pro或已选后继。全量数据在`/home/fires/hmasd-retained-runs/controller_composition/b03_partner_replication_20260925`逐文件核验保全。fsd-c不在本任务原生附件中，节点源树也非launcher snapshot，两目录保留待可用原生归档路径，不使用shell删除。旧B01/B02及ab18来源/原分支保持终态；无App消息。[完整结果和生命周期边界](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)。 |
 | DM 有限模型知识与决策价值 | `01a0d937-e2f7-7d03-982a-d16bf16385cc` / `local` | `/home/fires/.codex/worktrees/3839/hmasd-wsl` · `codex/finite-model-decision-value-sept25` | B01/B02均已完整核验、保全并独立发表；两次Pro已收清，当前NEAR预算修补投入结束，无活动结果操作、未读证据或已选后继。保留原输入/原始产物与本任务地址；未接管其他方向、未发App消息。[完整结果与决定](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--end-current-near-budget-repair-investment-retain-the-finite-result)。 |
-| Root：科学项目管理 | `01a0cd93-9107-7701-a7e5-84fb071ea8f7` / `local` | `/home/fires/.codex/worktrees/project-management-sept23/hmasd-wsl` · `codex/project-management-sept23` | 已核对全部收尾、完整读取并核验本轮咨询，采纳[下一轮A/R优先、B/C后备的计划](#current-research-plan)，并按owner要求合并有价值的源码/证据、回收可安全回收的工作树。旧方向结果与终态保留；本次已按owner要求派发两名新Astra Max DM，并完成最小共享控制登记；Root本身0新结果运行，没有恢复旧操作或开启跨任务消息循环。DM独立出版规则不变。 |
+| Root：本轮项目复盘与科学Reviewer落实 | `01a0dc51-5688-7ef1-894b-51c2964f2be0` / `local` | `/home/fires/hmasd-wsl` · `main` | owner本轮要求审视科学计划、DM及工作流，并明确授权独立科学Reviewer。已读取两DM自查并完成一次不继承会话的独立科学审查，保留对Root的异议，按owner决定落实角色责任。完整咨询因发送前HTTP403未提交，B/C及新PPC候选均未启动；[当前审查与处理](#decision)保留未决依赖。仅承接本轮职责，不接管或重启任何既有操作。 |
 | DM1 延迟消息发送时机 | `01a0d622-53d3-7f43-9740-6eaef625899a` / `local` | `/home/fires/.codex/worktrees/a138/hmasd-wsl` · `codex/delayed-broadcast-timing-c2` | B19/B20及C2全部结果和完整Pro均已核验读取保全；人数配方追加和RR9302时序改造投入均结束，保留B19正例、RR有限用途及全部不利证据。无活动producer、排队实验或开放Pro，不以常驻搜索占用运行名额。[C2完整决定](candidates/delayed_broadcast_timing/NOTES.md#2026-09-25--adopt-the-complete-advice-and-end-rr9302-timing-modifications)；[结果与保全](candidates/delayed_broadcast_timing/NOTES.md#2026-09-25--b01-complete-fast-only-loses-service-despite-shorter-transit-retain-rr)。旧人数分支`codex/agent-count-generalization-b19`保留在`439bc7b99`，旧task/7fef与B18技术失败保留。canonical仅新增C2行的例外已消耗，不扩大文件/index权限；无App消息。 |
 | DM2 独立队友兼容性研究 | `01a0d623-621b-7a70-96b2-2e7bf0b6b1a9` / `local` | `/home/fires/.codex/worktrees/fb7c/hmasd-wsl` · `codex/dm2-crossplay-feasibility` | 已实际接续并完整完成0fit/0环境步的ordinary cross-play准备，现决定结束当前投入、无运行中科学操作或待收Pro；[完整设计与决定](https://github.com/CartmanFatass/My-paper-code/blob/e38a8ec47/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--cross-play-preparation-complete-decline-current-population-training-investment)。旧task `01a0cdb8-10c9-7743-a05a-6dcfc42621c5`、5916工作区和B07–B09证据保留；未激活population训练，无跨任务消息或旧批次重启。 |
 | DM3 S7 能源约束服务 | `01a0d621-fad7-7863-ab0a-89b148926205` / `local` | `/home/fires/.codex/worktrees/31f5/hmasd-wsl` · `codex/uav-service-feedback-b09` | B09–B11完整验收并独立保全；原问题已成功发送，完整聊天答复经交付核验后保存入NOTES。DM采纳批评，结束当前S7修补新增投入并保留O+F；进站模型未测试，不宣称无效。无活动结果操作、待收Pro或已选后继。[完整建议与决定](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--complete-approach-advice-read-end-current-s7-repair-investment-and-retain-o-plus-f)。旧task `01a0c9af-d5cd-7d70-b5e8-9db2c598ad4e`、d319/旧分支及B08技术失败终态保留；独立出版，无App消息。 |

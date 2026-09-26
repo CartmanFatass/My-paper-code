@@ -23,6 +23,11 @@ require this review; DM reflection and pivots may use their existing NOTES and s
    prediction or investment choice in the direction's NOTES, and whether reusable changes reached
    RESEARCH. Judge those consequences, not citation counts; absent evidence is unverified use.
    This check belongs to the owner-triggered review, not a new watch or adoption-report cycle.
+   Use the section 2 Scientific Reviewer for an independent evidence-first diagnosis and
+   direction-correction recommendation, in a separate context rather than a DM/Root history
+   fork. Preserve material disagreement with Root as well as with DMs. Reuse that same review
+   across overlapping project/claim questions; do not add a second critic ceremony. Root owns
+   the reasoned project decision, and the reviewer does not replace section 5 Pro consultation.
 2. **Write the working section.** Add the current review to `RESEARCH.md`. It stays here
    while its question, answer or decision is unresolved; completed reviews are retired in step 5,
    not retained as an accumulating project log. Use:

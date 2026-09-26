@@ -89,6 +89,27 @@ scope, never new learning. Use an informative horizon, without a prerequisite le
 
 ## Update the working explanation
 
+Independent scientific diagnosis and direction correction belong to the Scientific Reviewer
+(existing ResearchCritic) under constitution section 2. DM still formulates hypotheses and
+maintains the explanation, but self-reflection is not the independent check. Use the dedicated
+role body with separate context: Codex children use `fork_turns="none"`; other runtimes use
+their actual history-isolated child mechanism. A role-like task title or read-only permission
+alone does not establish context independence. Pass the question and original evidence first,
+then the proponents' interpretations; the reviewer reconstructs its reading before considering
+DM/Root preferences. It may disagree with both. Disclose any inherited conversation or missing
+source rather than claiming independence from the role name.
+
+Use this review at question/approach selection and material interpretation or route correction,
+not each completed cell or unchanged batch. Reuse applicable independent analysis and combine
+overlapping claim/direction criticism in the same pass. Return through the actual parent;
+preserve the substantive recommendation, material dissent and disposition in existing NOTES
+or the assigned RESEARCH review. Uncontested in-scope recommendations need no Root ACK;
+Root resolves material direction disagreements, or the owner in a direct DM's own task when
+no Root is assigned. No automatic App relay. Do not silently treat an objection as resolved
+because DM/Root prefers its earlier explanation. Preserve accepted-operation collection and
+unrelated authorized work while the disputed new effect is unresolved. This review neither
+replaces section 5 Pro nor establishes empirical truth by model agreement.
+
 In the existing notebook, connect the prior judgment and prediction to the observation and
 the resulting interpretation. Use only distinctions relevant to the question: task opportunity,
 representation, finite learnability, and complete-package benefit/cost are not interchangeable.
@@ -233,9 +254,10 @@ need a focused follow-up through `hmasd-pro-research-prompt-author`: synthesis, 
 simple-model/source bridge, targeted revision, hypothesis search or criticism as appropriate.
 
 Read the whole answer; in `NOTES.md` record what you adopt, modify or reject, which judgment
-changes and why. A local Critic or engineering Reviewer can assist but does not replace Pro's
-consultation. The DM chooses; adviser agreement, a fixed idea count and a separate approval
-are not required. The DM can complete the authorized Pro browser workflow without Root forwarding
+changes and why. Independent scientific review and engineering review do not replace Pro's
+consultation. Direction correction and material disagreements follow section 2; other in-scope
+choices remain with DM. Adviser agreement and a fixed idea count are not required.
+The DM can complete the authorized Pro browser workflow without Root forwarding
 or a per-question owner approval. Continue work independent of the pending scientific decision.
 Existing frozen review exceptions remain tied to their original object, not expanded by this method.
 

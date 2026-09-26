@@ -8,7 +8,10 @@ Research methods live in `.agents/skills/hmasd-scientific-tools` and
 `.agents/skills/hmasd-research-engineering`. The session may implement, launch and observe
 directly. When useful it delegates a bounded code task to `hmasd-implementer` (Opus, high
 effort), a bounded execution batch to `hmasd-experiment-operator`, or high-risk executable
-review to `hmasd-reviewer`; it accepts the returned work. Detached repository scripts observe
+review to `hmasd-reviewer`; it accepts the returned technical work.
+Scientific diagnosis and direction correction use `hmasd-research-critic` with
+its dedicated body and separate context; apply constitution section 2's responsibility and
+material-disagreement resolution, not DM self-clearance. Detached repository scripts observe
 accepted operations and report completion, error or a bounded checkpoint. Claude uses native
 or manual return for observation; the Codex queue does not wake a Claude session.
 

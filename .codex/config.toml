@@ -50,7 +50,7 @@ description = "Optional executor for a bounded launch and collection batch."
 config_file = "./agents/hmasd-experiment-operator.toml"
 
 [agents.HMASDResearchCritic]
-description = "Optional independent criticism of claims, belief updates and discriminating predictions."
+description = "Independent scientific Reviewer for evidence reconstruction, explanation diagnosis and direction correction."
 config_file = "./agents/hmasd-research-critic.toml"
 
 # The agentify MCP server is registered per host in the user-level configuration of each

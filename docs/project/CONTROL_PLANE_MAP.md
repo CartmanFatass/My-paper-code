@@ -41,7 +41,8 @@ HMASD 生成文件；不自动删除孤儿文件，不检查真实会话是否�
 | --- | --- | --- | --- |
 | 方向推进 | owner 2026-09-24 明确三个是运行资源并发上限；Root 规划完整问题与后继，DM 对问题连续性负责、每次推进一个结果性研究，并自主修订或转向 | session 本身是 DM，同样持续负责问题、一次推进一个研究 | Root 用 loop-dispatch；独立 Codex DM 由 AGENTS 直接读取共享 DM 正文；Claude 用 research-hub；direction lead 拥有 NOTES，问题族不等于永久归属 |
 | 实现 | DM 直接实现，或按需 Sol/high Implementer | session 直接实现，或按需 Opus/high Implementer | research-engineering；原生 Claude effort 未实测，不能从描述证明 |
-| Review／事实 | Reviewer，既有 Scout／Verifier／ResearchCritic | 对应原生 leaves | engineering／scientific-tools；是受限方法，不是额外决策者 |
+| 科学纠偏 | ResearchCritic，作为独立科学 Reviewer | 对应具名角色，独立上下文 | scientific-tools；独立诊断、方向纠偏建议，重大分歧按宪法 §2 裁决 |
+| 工程审查／事实 | 工程 Reviewer、Scout／Verifier | 对应原生 leaves | engineering；代码正确性与事实核查，不代替科学纠偏 |
 | 启动 | DM 直接启动或按需 Operator | session 直接启动或按需 Operator | engineering execution；精确来源、fresh preflight、accepted handle |
 | 观察 | `tools/hmasd_wait.py` detached 观察，queue 唤醒当前 Codex session | 确定性外部观察，native runtime／人工继续 | 同一 accepted handle；checkpoint 只续设观察，不重启 worker |
 | Pro | 当前 session 直接执行浏览器 Send，之后脚本观察 | session 自行 Agentify，之后确定性外部观察 | 目标由问题作者指定；等待无需 Transport 子代理 |

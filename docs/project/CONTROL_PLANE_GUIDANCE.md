@@ -29,7 +29,7 @@
 | --- | --- |
 | 单一治理来源、任务方法自包含、按需加载 | 与前次修整原则一致。AGENTS 导航，角色管责任，skills 提供方法；不能要求普通任务沿多层历史索引拼义务 |
 | 简化手续，保留科学判断 | 与 Pro 修订一致。探索可以粗糙、单种子；确认需要适合主张的推断。更多表格不自动增加可信度，减少文件也不证明方法完整 |
-| DM 端到端负责；Root 不逐步审批 | 与两轮修整方向一致。Pro 提建议、Reviewer 返回发现，不能替代 DM 的判断及 owner 授权范围内的科学选题 |
+| DM 连续负责；独立科学纠偏；Root 不逐步审批 | DM 提出假说并负责执行与记录；科学 Reviewer（ResearchCritic）独立诊断并提出纠偏结论；Root 负责项目取舍和重大科学分歧。工程 Reviewer 单独负责正确性；普通批次不增加审批 |
 | Pro 最终裁决、周额度、旧记录系统 | 后来经 owner 采纳有意替换为 adviser、per-idea fits、NOTES/runs/CLAIM；这些不是本次要恢复的遗漏 |
 | runtime 分工、Implementer、工程数字配额 | owner 后续明确修订：Codex Root/DM、Claude session DM、可用 Implementer，以及取消工程行数/时长配额。不是与 Pro 原稿逐字一致，也不是擅自遗漏 |
 | 设施选择、阅读范围与非代码审阅 | owner 后续同意以需求、成本、科学语义和维护负担判断技术选择，允许合理复用及依赖阅读；普通非代码改动由作者自检，不自动增加 Reviewer 轮次 |
@@ -143,7 +143,9 @@ flowchart TD
 
 图表示职责与数据流，不要求每个 idea 顺序走遍每个节点。暂停时没有科研启动路径；
 确认才增加 CLAIM；Portfolio 在 owner 请求或明确的项目管理委托内使用 RESEARCH 的 review section。
-科学设计和结果解释属于 DM；Implementer 返回实现与 checks；Reviewer 返回可达问题。
+DM 保持科学思考与连续性；科学 Reviewer 独立重建证据、诊断并提出方向纠偏，重大分歧按宪法 §2
+处理。Implementer 返回实现与 checks；工程 Reviewer 返回可达问题。科学审查不继承 DM/Root
+聊天历史，原始证据先于提案者解释；不以第二个模型的赞同充当实验证据。
 Monitor/Transport 子代理已经退役，不保留兼容角色或改名替代。当前会话执行启动与单次发送；
 `tools/hmasd_wait.py` 在模型回合之外观察已接受的 operation，不作科学判断，也不启动或重发。
 Codex queue 只唤醒分配该等待的当前 Codex session；Claude 使用确定性的外部等待，之后由原生 runtime

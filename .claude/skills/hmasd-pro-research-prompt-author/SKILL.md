@@ -8,7 +8,8 @@ description: Write a focused Pro question in NOTES.md at constitution section 5 
 
 Authority: `docs/project/OPERATING_CONSTITUTION.md` section 5. The DM proactively consults Pro
 at its four scientific decision points; no owner reminder or Root forwarding is needed within
-authorized direction work. Pro advises and the DM decides; consultation is not approval.
+authorized direction work. Pro advises; scientific direction correction and material dissent
+follow constitution section 2, and other in-scope choices remain with DM. Consultation is not approval.
 Select the reasoning needed: evidence synthesis, competing failure explanations,
 simple-model/literature bridge, targeted revision, candidate generation or confirmation criticism.
 Do not turn every result into a consultation or require a fixed number of new ideas.
@@ -23,7 +24,9 @@ remain materially applicable. Reuse that reasoning for routine implementation, p
 execution and collection; no new question or reuse receipt is needed. For confirmation the advice
 must cover the actual claim, comparison and fixed plan. If the question, premise or evidence has
 materially changed at a section 5 decision point, ask a focused follow-up and show what changed.
-A local Critic or engineering Reviewer does not replace this consultation. Keep any frozen
+Independent Scientific Reviewer (ResearchCritic) and engineering Reviewer do not replace this
+consultation. Preserve consequential independent-review disagreement in the existing question
+when it bears on the decision; do not present only DM's preferred interpretation. Keep any frozen
 review exception within its original object. Portfolio follows an owner request or explicit
 project-management delegation under constitution section 2.
 
@@ -80,7 +83,8 @@ project-management delegation under constitution section 2.
 6. **Respond in writing.** In the next notebook entry record what you adopt, modify or reject,
    which prior judgment changes (or remains unresolved), and why the selected next action follows.
    Preserve contrary evidence and hypotheses inherited from prior work. Advice or consensus is
-   not an independent experiment; the DM chooses. Do not create a second reflection report.
+   not an independent experiment. Apply section 2's scientific-review responsibility and
+   material-disagreement resolution; do not create a second reflection report.
 
 ## Method context
 

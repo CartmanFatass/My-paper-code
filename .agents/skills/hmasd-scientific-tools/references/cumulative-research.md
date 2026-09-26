@@ -71,10 +71,12 @@ design precedents, not validation that the local workflow improves discovery.
 | [Kosmos, Section 2.1](https://arxiv.org/html/2511.02824v2) | Maintain source-linked research state that both analysis and literature work can consume | A knowledge-graph service, permanent ontology or new documentation system for this personal project |
 
 Here, source-linked state is ordinary prose and links in NOTES. The DM owns it. Scout supplies
-primary passages and labelled conditional mappings; Critic challenges the update and prediction;
+primary passages and labelled conditional mappings; Scientific Reviewer (ResearchCritic) owns
+independent evidence reconstruction, diagnosis and direction-correction recommendations;
 Implementer/engineering Reviewer preserve executable semantics. Portfolio considers the remaining
 reasons for hope and the cost of the next information when the owner actually triggers a review.
-Innovation, diagnosis and synthesis are work modes, not mandatory serialized agents.
+DM retains innovation and synthesis. Apply constitution section 2's independent-review and
+material-disagreement responsibilities at the actual decision, without a per-batch agent chain.
 
 ## Reasoning cases for author/reviewer inspection
 

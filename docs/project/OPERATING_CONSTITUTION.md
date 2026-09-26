@@ -20,6 +20,10 @@ Owner amendment 2026-09-25: author on main in direction-owned directories; retir
 files to release disk space. Full backups, duplicate retention packages and backup chains
 are not cleanup prerequisites. Sections 4 and 9 carry this decision.
 
+Owner amendment 2026-09-25: independent scientific review owns diagnosis and direction
+correction, with its own instructions and context, rather than relying on DM self-correction.
+Section 2 assigns this function to ResearchCritic; engineering Reviewer remains separate.
+
 ## 1. What this project is
 
 A personal exploratory multi-agent/UAV research project, originating in unfixed skill duration k
@@ -104,18 +108,51 @@ operation. A method, tool, conversation or historical workflow is not a permanen
   L0 scope note, the Implementer returns a diff and its checks, the DM reviews, accepts and owns the
   result. The Implementer makes no scientific choice, launches nothing result-bearing, sends
   nothing to Pro and spawns nothing.
-- **Reviewer** independently checks changes to shared learners, runners, environments or evaluators.
-- Existing **Operator, Scout, Verifier and ResearchCritic** names are bounded execution,
-  fact-finding or review methods under DM/Reviewer responsibility, not extra scientific
-  decision owners. The DM/session may implement, launch and observe directly, and may delegate
+- **Engineering Reviewer** (`hmasd-reviewer`) independently checks changes to shared learners,
+  runners, environments or evaluators. It does not own scientific direction correction.
+- **Scientific Reviewer** (the existing `ResearchCritic` / `hmasd-research-critic`, `critic`
+  on Pi) owns independent reconstruction of the evidence, diagnosis of the working explanation
+  and the direction-correction recommendation. This responsibility is separate from DM
+  execution and self-reflection. It applies when selecting a question/approach or making a
+  material interpretation or route-correction decision, including renewed investment after
+  failed predictions and ending investment in a question. Routine implementation, collection
+  and an unchanged planned batch do not acquire another review. Reuse an applicable completed
+  review; combine overlapping scientific review work rather than stack critic passes.
+  Give this reviewer its dedicated instructions and a separate context, without inheriting
+  the DM's or Root's conversation. Supply the actual question, source identities, frozen
+  comparison and supporting/adverse outputs; reconstruct these before reading the proponents'
+  explanations and prior advice. The reviewer can retrieve missing evidence and challenge
+  Root's priorities as well as the DM's proposal. Different context or model agreement is
+  not evidence of correctness. No fixed number of critics or debate rounds is required.
+  Its delivery is a reasoned correction or justified retention of the current approach:
+  strongest competing explanation/simple alternative, consequential evidence, next useful
+  comparison or stop, differing outcome implications, cost and unresolved facts. It may find
+  no material problem and owes neither novelty nor a rescue experiment. It does not edit
+  direction records, launch, replace the lead or own an additional research track.
+  DM still formulates hypotheses, supplies facts and feasibility, and implements the resolved
+  choice; DM self-review does not discharge this independent duty. A Root-assigned review
+  returns directly to Root. A DM-assigned internal reviewer returns through that runtime's
+  actual parent; preserve its substantive recommendation and material dissent in the existing
+  notebook, without filtering them into agreement or inventing a cross-task messaging route.
+  Uncontested recommendations within delegated scope need no Root acknowledgment. Root owns
+  project investment choices and resolves material direction disagreements with adoption,
+  modification or reasoned rejection in existing NOTES or RESEARCH. DM cannot silently
+  dismiss or self-clear a material direction objection. Without an assigned Root, unresolved
+  material disagreement is put to the owner in that DM's own task. Only the disputed new
+  investment or expanded claim awaits resolution;
+  collect accepted work and continue independent authorized work. Ordinary result publication
+  still needs no Root approval. App messaging restrictions and section 5 Pro duties remain.
+- Existing **Operator, Scout and Verifier** names are bounded execution,
+  fact-finding or verification methods, not extra scientific decision owners.
+  The DM/session may implement, launch and observe directly, and may delegate
   bounded implementation, review or execution work when useful. These leaves spawn nothing.
 - **Retire Transport, Monitor, Grok clerk and Sonnet clerk as standing roles.** Accepted-operation
   waiting is a detached script responsibility, not a model task. Mechanical edits belong to the
   direction lead. No compatibility role or renamed equivalent is retained; no additional role
   without owner amendment.
 
-Innovation, diagnosis and prototype reasoning are work modes of the DM, assisted when useful
-by the existing Scout or ResearchCritic; they are not additional standing roles. Scout can map
+Innovation and prototype reasoning remain work modes of the DM; independent diagnosis and
+direction correction belong to scientific review above. Scout can map
 code/evidence or retrieve a primary-source bandit/single-agent prototype, stating assumptions
 and the MARL coupling it omits. Critic challenges belief updates and discriminating predictions,
 not only claim strength. Portfolio review follows an owner request or the owner's explicit
@@ -125,7 +162,8 @@ It is not a leaderboard, a required post-failure ceremony or permission gate for
 Role limits allocate responsibility for the assigned task; they are not project-wide bans on
 the underlying capability. Necessary reading may follow dependencies beyond owned edit paths.
 Shared-control repairs and owner-requested analysis remain work for the acting Root/session;
-direction ownership and scientific acceptance remain with the assigned DM.
+direction ownership and technical acceptance remain with the assigned DM. Scientific direction
+correction and material disagreements follow the independent-review responsibility above.
 
 Session ownership is recoverable from RESEARCH.md: identify the acting Root and
 its coordination scope, and the current DM's native address and authoring checkout in the
@@ -289,9 +327,11 @@ Ask for the reasoning the decision needs: evidence synthesis, competing failure 
 a simple-model/literature bridge, targeted revision, hypothesis generation or criticism, with
 no fixed idea count. Pro is an adviser, not an approval stage or veto. The DM reads the full
 answer, verifies consequential claims and records its response to material criticism and the
-resulting belief changes in NOTES.md, then owns the choice. A local ResearchCritic or engineering
-Reviewer can assist, but does not by itself satisfy a Pro consultation. Scientific reflection
-uses the existing notebook, not a new agent, registry, score, checklist service or record type.
+resulting belief changes in NOTES.md. Scientific direction-review responsibility and resolution
+of material disagreements follow section 2; other in-scope choices remain with the DM.
+Scientific Reviewer and engineering Reviewer do not by themselves satisfy a Pro consultation.
+Scientific reflection and independent review use the existing notebook or assigned RESEARCH
+review, not a new registry, score, checklist service or record type.
 
 Within authorized direction work, the DM initiates and completes Pro consultation directly
 through the applicable browser procedure, without Root forwarding or a new per-question owner approval.
