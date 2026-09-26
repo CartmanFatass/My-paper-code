@@ -29,7 +29,16 @@ from experiments.candidates.uav_service_auxiliary.b01.native import (
 )
 from experiments.candidates.uav_service_auxiliary.b09.persistence import write_summary
 
-from .evaluation import PLAN_SOURCE, WorldTask, aggregate, make_eval_config, run_tasks, trace_arrays
+from .evaluation import (
+    N_CONTROLLER_INFORMATION,
+    PLAN_SOURCE,
+    TRACE_TIMING,
+    WorldTask,
+    aggregate,
+    make_eval_config,
+    run_tasks,
+    trace_arrays,
+)
 from .feedback import PRODUCTION_PARAMS, FeedbackParams
 from .heuristic import CONTROLLER_INFORMATION, VARIANTS, HeuristicParams
 from .observation import S7S2_LAYOUT
@@ -175,7 +184,7 @@ def heuristic_params(name: str, spec: B01Spec, selected: str | None = None) -> H
 
 def controller_information(controller: str, spec: B01Spec, selected: str | None = None) -> str:
     if controller == "N":
-        return "legal-observation"
+        return N_CONTROLLER_INFORMATION
     return CONTROLLER_INFORMATION[heuristic_params(controller, spec, selected).information]
 
 
@@ -194,6 +203,19 @@ def phase_panels(phase: str, spec: B01Spec, controllers=None):
         return [(controller, params, tuple(spec.worlds))
                 for controller in chosen for params in feedback_grid(spec)]
     raise ValueError(f"phase must be one of {RUN_PHASES}")
+
+
+def planned_episodes(spec: B01Spec, phase: str) -> int:
+    """Worlds summed over the planned panels.  For ``all`` the grid runs N + the selected
+    heuristic, so its count does not depend on which variant heuristic-dev selects."""
+    if phase not in PHASES:
+        raise ValueError(f"phase must be one of {PHASES}")
+    phases = RUN_PHASES if phase == "all" else (phase,)
+    total = 0
+    for name in phases:
+        controllers = ("N", spec.heuristic) if (name == "grid" and phase == "all") else None
+        total += sum(len(worlds) for _, _, worlds in phase_panels(name, spec, controllers))
+    return total
 
 
 def panel_name(controller: str, params: FeedbackParams) -> str:
@@ -272,6 +294,8 @@ def config_record(spec: B01Spec, phase: str, *, launch_sha: str, checkpoint, dev
         "checkpoint_sha256": None if checkpoint is None else sha256_file(Path(checkpoint)),
         "grid_settings": grid_record(spec),
         "planned_panels": planned,
+        "planned_episodes": planned_episodes(spec, phase),
+        "trace_timing": TRACE_TIMING,
         "heuristic_selection_rule": ("max panel mean raw_native_J at (0, .05) over H1-H3 on "
                                      "dev_worlds; tie -> lower H index"),
         "heuristic_variants": {name: heuristic_params(name, spec).record() for name in VARIANTS},
@@ -287,12 +311,19 @@ def config_record(spec: B01Spec, phase: str, *, launch_sha: str, checkpoint, dev
                                "worlds": {str(k): {"raw_native_J": v[0], "qos_per_actual_step": v[1]}
                                           for k, v in B10_O_REFERENCE.items()}},
         "null_percentiles": list(NULL_PERCENTILES),
-        "controller_boundary": ("N: legal per-UAV observation only. H1-H3: central-information "
-                                "reference; k-means/relay planning from ground-truth user and BS "
-                                "xy at replan steps, own position/modes/shield from the legal "
-                                "observation. Hlocal: the selected variant planned from the legal "
-                                "observations only (pooled decoded users, observed BS, station-1 "
-                                "ring search prior while fewer than n_service users are visible)."),
+        "controller_boundary": (
+            f"N: {N_CONTROLLER_INFORMATION}; hmasd/networks.py "
+            "SkillCoordinator.assign_and_value_batch(state, observations) embeds the central "
+            "state into the skill decision. "
+            f"H1-H3: {CONTROLLER_INFORMATION['central']}; central-information reference, "
+            "k-means/relay planning from ground-truth user and BS xy at replan steps, own "
+            "position/modes/shield from the legal observation. "
+            f"Hlocal: {CONTROLLER_INFORMATION['local']}; the selected variant planned in one "
+            "planner from the eight legal observations pooled (decoded users, observed BS, "
+            "station-1 ring search prior while fewer than n_service users are visible), not a "
+            "per-UAV local controller. "
+            "station 1 is a jittered anchor: reset user centroid + uniform ±0.12·area_size per "
+            "axis (configs/config_1.py line 529; energy_aware.py lines 393–398)"),
     }
 
 
@@ -337,6 +368,7 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
         "os_cpu_count": os.cpu_count(),
         "world_roles": world_roles(spec),
         "grid_settings": grid_record(spec),
+        "planned_episodes": planned_episodes(spec, phase),
         "controller_information": {name: controller_information(name, spec)
                                    for name in (*CONTROLLERS, LOCAL_CONTROLLER)},
         "heuristic_plan_source": PLAN_SOURCE,

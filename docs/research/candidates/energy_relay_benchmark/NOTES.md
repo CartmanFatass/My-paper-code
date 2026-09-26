@@ -1366,3 +1366,80 @@ the node itself:
   reads `hmasd_launch.py status <operation ref>` and the progress journal every 10 minutes into
   `poll_b01_ref_a01.log`; it exits on a terminal state and the session is woken by the native
   background return. Expected wall ≈ 4.5–5.5 h for 316 episodes.
+
+### DM response to the Pro answer (2026-09-26) and relaunch decision
+
+Read in full. Pro states material dissent against parts of the interpretation and reading rules,
+not against one corrected zero-training reference study; it recommends keeping the seven settings,
+the panels and zero new fits. Point by point:
+
+- **Accepted, verified from source, applied before any record exists.** (i) N is not a
+  legal-observation-only controller: `hmasd/networks.py::SkillCoordinator.assign_and_value_batch`
+  embeds the central state into the skill decision (state_embedding, line 712/751), and
+  `PolicyController.propose` passes the state exactly as B07 does. N is relabelled "central-state
+  skill conditioning (HMASD coordinator) + local low-level actors". (ii) H_local is a
+  legal-observation *pooled central planner*, not a per-UAV local controller; relabelled. (iii)
+  Station 1 is a jittered anchor: `charging_station_jitter_m = 0.12 × area_size` = ±960 m per axis
+  uniform around the reset user centroid (`configs/config_1.py` line 529; `energy_aware.py` 393–398);
+  the ring prior is lawful as a known-model prior, and the wording "at the centroid" is withdrawn.
+  (iv) P2′ is demoted from a causal "information versus learning" split to two descriptive signed
+  differences: central-truth layout package minus pooled-observation layout package, and
+  pooled-observation heuristic minus the historical hierarchical policy package; the predicted size
+  relation is kept as a descriptive prediction and no bottleneck attribution is read from it.
+  (v) The 447 m tether and the 24 s release are conditional quantities (from the exit position,
+  radial flight, unchanged nearest station), not universal radii; wording adjusted where used.
+  (vi) Episode count: 4 + 32 + 24 + 32 + 2 × 7 × 32 = **540** episodes (the "316" above undercounted
+  the two-controller grid; the 1.62 M transitions and the 4.5–5.5 h estimate already assumed 540).
+  (vii) The saved traces lacked the fields that make the tether and herding readings checkable;
+  they are added now (own positions, return margin, nearest-station index and distance, per-station
+  occupancy and queue, guard counts per step, H targets, station positions, post-exit recapture
+  distances). Without them the study could only claim package responses.
+- **Accepted for the reading, no code change.** τ_w from the null phase is a descriptive
+  sensitivity reference, not a per-world significance threshold; branch (e) yields candidates only.
+  P1′ is an approximate prediction, not a source invariant; three matched pairs, not four. P1c's
+  sign alone does not establish herding; the process fields above must agree. P2 failure reads
+  "this reference did not reach its expected level", never "ordinary control cannot". P3 stays as
+  registered and gains a post-hoc common-window reading from the same traces (the earlier of the
+  two controllers' first entries), no extra episodes. Branches (a)–(g) are not exhaustive or
+  exclusive: uncovered states (technical failure or identity mismatch, incomplete panels, too few
+  intervention opportunities, effects near the practical threshold, package effect without process
+  support, one controller responding and the other not) are reported as such, and (g) covers both
+  conflict directions. (f)'s "nearest free station" is a separate question with an interface
+  problem (the action carries no station target), not a queued rescue. .03 is a pre-chosen
+  practical threshold, not a calibrated significance bound. Results never trigger the prepared
+  B02 grid automatically; B02 arms are matched by actual deployment interfaces (central state,
+  pooled observation, local observation, memory, refresh period, hand priors), not by names.
+- **Not adopted.** A different search seed for H_local (Pro names a partitioned expansion around
+  station 1 as a candidate, unverified): the ring stays; the alternative is noted for a later,
+  separately justified reference, never added after reading these worlds.
+
+**Relaunch decision.** The operation accepted at 13:33:25 UTC (`73a990e5…fb60ff`) had produced
+no readable result (equivalence and part of the null phase; no score read by the DM). Because the
+wrong N information label would be written into every panel record and the traces would lack the
+mechanism fields, the DM stops that operation, publishes the corrected inputs and relaunches under
+a new tag. The stopped output directory is retained with its process-exit record as evidence of
+a superseded launch; nothing from it is read or reused. Cost: about one hour of node time.
+
+Disclosure before the stop: the poller's progress excerpt printed one development-panel value
+that the DM therefore saw before stopping the run: `heuristic-dev/H2_e0.00_x0.05` mean raw native
+J 2196.87 on 956001–956008 (the operation had already finished equivalence, null and two of the
+three development panels; N runs faster on the node than the local estimate, so the whole
+operation projects to well under two hours). The value belongs to the superseded operation, is
+not reused, and cannot influence the fixed selection rule; it is recorded so that no later reader
+mistakes the relaunch for a reaction to it.
+
+### Stop record: operation 73a990e5 superseded (2026-09-26, ≈13:46 UTC)
+
+Stopped by the DM with SIGTERM to the launcher's posix session (pid 706986, runner 706987) from
+the node. The supervisor and runner exited without writing `process-exit.json`, so
+`hmasd_launch.py status` reports `admission.state accepted`, `execution.state unknown`, runner
+and supervisor `absent`, exit witness `absent`, records consistent. The runner's `summary.json`
+stays `INCOMPLETE`: 60 episodes and 180,000 steps completed (equivalence 4, null 32,
+heuristic-dev 24; five panels), the `reference` phase had just started; 0 fits, 0 optimizer
+updates, no failed world. Output directory
+`/home/wu/projects/HMASD/runs/energy_relay_benchmark/b01_ref_a01/` is retained unchanged as the
+evidence of a superseded launch; its panels are not read or reused (the one disclosed value
+above excepted). Reason and replacement: previous subsection. The relaunch uses tag
+`b01_ref_a02`, the corrected published SHA and the same node, worlds, settings and rules.
+Observed throughput of the superseded run: 60 episodes in ≈ 13 min at 8 workers × 2 threads,
+so the complete 540-episode operation projects to roughly 2 h, not 4.5–5.5 h.

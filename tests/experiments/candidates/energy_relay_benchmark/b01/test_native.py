@@ -12,6 +12,30 @@ from experiments.candidates.energy_relay_benchmark.b01 import native
 from experiments.candidates.energy_relay_benchmark.b01.feedback import FeedbackParams
 from scripts import run_energy_relay_benchmark_b01 as entry
 
+N_LABEL = "central-state skill conditioning (HMASD coordinator) + local low-level actors"
+LOCAL_LABEL = "legal-observation pooled central planner (station-1 ring search prior)"
+JITTER = ("station 1 is a jittered anchor: reset user centroid + uniform ±0.12·area_size per axis "
+          "(configs/config_1.py line 529; energy_aware.py lines 393–398)")
+MECHANISM_TRACE = {"own_xyz": ((8, 3), np.float32), "return_margin": ((8,), np.float32),
+                   "nearest_station": ((8,), np.int8),
+                   "nearest_station_distance_m": ((8,), np.float32),
+                   "guard_checked": ((), np.int32), "guard_blocked": ((), np.int32),
+                   "station_occupancy": ((2,), np.int8), "station_queue": ((2,), np.int8)}
+MECHANISM_ROW = ("station_xy", "mean_nearest_station_distance_m",
+                 "post_exit_recapture_distances_m", "post_exit_recapture_count",
+                 "post_exit_recapture_median_m")
+
+
+def _assert_mechanism_trace(trace, steps, heuristic):
+    for key, (shape, dtype) in MECHANISM_TRACE.items():
+        array = trace[f"world_0_{key}"]
+        assert array.shape == (steps, *shape) and array.dtype == dtype, key
+    if heuristic:
+        target = trace["world_0_target_xy"]
+        assert target.shape == (steps, 8, 2) and target.dtype == np.float32
+    else:
+        assert "world_0_target_xy" not in trace.files
+
 
 def test_fixed_spec_worlds_grid_and_phases():
     spec = native.B01Spec()
@@ -49,10 +73,13 @@ def test_fixed_spec_worlds_grid_and_phases():
     assert local == replace(native.heuristic_params("H3", spec), information="local")
     assert native.panel_name("Hlocal", native.PRODUCTION_PARAMS) == "Hlocal_e0.00_x0.05"
     assert native.controller_information("H2", spec) == "central-positions"
-    assert native.controller_information("N", spec) == "legal-observation"
-    assert native.controller_information("Hlocal", spec) == \
-        "legal-observation (station-1 ring search prior)"
+    assert native.controller_information("N", spec) == N_LABEL
+    assert native.controller_information("Hlocal", spec) == LOCAL_LABEL
     assert not hasattr(native, "heuristics_blocked")
+    assert native.planned_episodes(spec, "all") == 540 == 4 + 32 + 24 + 32 + 2 * 7 * 32
+    assert [native.planned_episodes(spec, phase) for phase in native.RUN_PHASES] == [
+        4, 32, 24, 32, 448]
+    assert native.planned_episodes(replace(spec, controllers=("N",)), "grid") == 224
 
 
 def test_null_block_percentiles():
@@ -146,6 +173,12 @@ def test_tiny_grid_run_writes_records(tmp_path, fresh_checkpoint):
     with np.load(out / "grid" / "traces" / "N_e0.00_x0.25.npz") as trace:
         assert trace["world_0_reward"].dtype == np.float32
         assert trace["world_0_battery"].shape == (20, 8)
+        _assert_mechanism_trace(trace, 20, heuristic=False)
+    assert all(key in row for key in MECHANISM_ROW)
+    assert row["controller_information"] == panel["controller_information"] == N_LABEL
+    assert config["planned_episodes"] == written["planned_episodes"] == 2
+    assert config["controller_information"]["N"] == N_LABEL
+    assert "decision time" in config["trace_timing"]
     with pytest.raises(FileExistsError):
         native.run_native(out=out, launch_sha="fixture", checkpoint=fresh_checkpoint,
                           phase="grid", spec=spec)
@@ -178,6 +211,14 @@ def test_phase_all_end_to_end(tmp_path, fresh_checkpoint):
         f"grid/{selected}_e0.00_x0.05", f"grid/{selected}_e0.20_x0.25",
         f"grid/{selected}_e0.00_x0.85"}
     assert written["counts"]["episodes_completed"] == 12 and written["counts"]["steps"] == 360
+    assert config["planned_episodes"] == written["planned_episodes"] == 12
+    boundary = config["controller_boundary"]
+    assert JITTER in boundary and N_LABEL in boundary and LOCAL_LABEL in boundary
+    assert "central-positions" in boundary
+    for record in (written, config):
+        assert record["controller_information"] == {
+            "N": N_LABEL, "H1": "central-positions", "H2": "central-positions",
+            "H3": "central-positions", "Hlocal": LOCAL_LABEL}
     assert written["counts"]["failed_worlds"] == 0
     null = written["null"]
     assert null["worlds"][0]["seed"] == 953001 and null["compared_worlds"] == 1
@@ -194,6 +235,12 @@ def test_phase_all_end_to_end(tmp_path, fresh_checkpoint):
         assert row["guard_blocked_actions"] <= row["guard_checked_actions"]
         assert row["failed"] is False
         assert all(f"observed_{key}" in panel["aggregate"] for key in PHASE_SPLIT[:3])
+        assert all(key in row for key in MECHANISM_ROW), name
+        assert row["post_exit_recapture_count"] == len(row["post_exit_recapture_distances_m"])
+        assert len(row["station_xy"]) == 2
+        phase_dir, panel_file = name.split("/")
+        with np.load(out / phase_dir / "traces" / f"{panel_file}.npz") as trace:
+            _assert_mechanism_trace(trace, 30, heuristic=panel["controller"].startswith("H"))
         if name.startswith("grid/"):
             assert (row["width"], row["matched_pair_id"]) == (
                 panel["width"], panel["matched_pair_id"])
@@ -201,7 +248,7 @@ def test_phase_all_end_to_end(tmp_path, fresh_checkpoint):
                         "e0.00_x0.85": (0.85, None)}[name.split("_", 1)[1]]
             assert (row["width"], row["matched_pair_id"]) == expected
         if panel["controller"] == "Hlocal":
-            assert panel["controller_information"] == "legal-observation (station-1 ring search prior)"
+            assert panel["controller_information"] == LOCAL_LABEL
             assert row["controller_information"] == panel["controller_information"]
             assert panel["plan_source"] == "legal-observation" and row["plan_input_steps"] == 0
             assert panel["params_from_variant"] == selected
@@ -209,10 +256,12 @@ def test_phase_all_end_to_end(tmp_path, fresh_checkpoint):
             assert panel["heuristic_params"]["n_service"] == native.VARIANTS[selected].n_service
         elif panel["controller"].startswith("H"):
             assert panel["controller_information"] == "central-positions"
+            assert row["controller_information"] == panel["controller_information"]
             assert panel["plan_source"] == "env-ground-truth"
             assert row["plan_input_steps"] == 1
         else:
-            assert panel["controller_information"] == "legal-observation"
+            assert panel["controller_information"] == N_LABEL
+            assert row["controller_information"] == N_LABEL
     assert not [key for key in _keys(written) if "presen" in key]
     for phase in native.RUN_PHASES:
         for kind in ("panels", "traces"):

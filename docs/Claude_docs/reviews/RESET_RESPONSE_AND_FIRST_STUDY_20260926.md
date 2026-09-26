@@ -200,10 +200,14 @@ decomposition) are retracted.*
   comparison; nothing moves → not consequential in the H3000 transient; per-world regime above the
   null threshold → rule study, no adoption; large negative response → scheduler question opened
   separately; QoS up but J down → not a gain.
-- **Cost**: 0 fits; 1.62 M evaluation transitions; ≈ 4.5–5.5 h on `wsl_4070` at 8 workers × 2
-  threads (above the ≈ 2 h first given; the null, development and local-reference phases were
-  added); one implementer task; one engineering review (done, accepted) plus the DM's own read of
-  the heuristic and runner before commit.
+- **Cost**: 0 fits; 540 episodes, 1.62 M evaluation transitions; the first launch's observed
+  throughput on `wsl_4070` (60 episodes in ≈ 13 min at 8 workers × 2 threads) projects ≈ 2 h for
+  the whole operation; one implementer task per revision; one engineering review (done, accepted)
+  plus the DM's own read of the heuristic and runner before each commit. A same-day Pro review
+  (notebook, "### Answer" and the DM response) corrected the information labels (N conditions
+  its skill choice on the central state; H_local is a pooled-observation planner), demoted the
+  gap split to descriptive differences, and added mechanism trace fields; the first operation was
+  stopped unread and relaunched with those corrections.
 
 **B02** (conditional on branch (a) or (c)): LOCAL1 / SET / HMASD-k10 against the corrected
 reference, ≥ 3 seeds, exposure decided from B01's reference level and development curves, paired

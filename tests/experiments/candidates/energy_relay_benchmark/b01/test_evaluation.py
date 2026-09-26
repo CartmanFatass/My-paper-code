@@ -43,6 +43,18 @@ def _assert_b07_parity(ours, arrays, b07_result, steps):
     assert np.array_equal(ours["arrays"]["waiting_steps"], arrays["episode_0_charging_wait_age"])
     np.testing.assert_allclose(ours["arrays"]["battery"], arrays["episode_0_post_legal_battery"], rtol=0, atol=0)
     assert ours["row"]["raw_native_J"] == b07_result["worlds"][0]["raw_native_J"]
+    # Mechanism fields are the shield's own decision-time decode (B07 pre-step records).
+    mine = ours["arrays"]
+    assert np.array_equal(mine["return_margin"], arrays["episode_0_pre_legal_margin"])
+    assert np.array_equal(mine["nearest_station"], arrays["episode_0_selected_station"])
+    assert np.array_equal(mine["nearest_station_distance_m"],
+                          arrays["episode_0_station_distance_m"].astype(np.float32))
+    np.testing.assert_allclose(mine["own_xyz"], arrays["episode_0_pre_position_m"], rtol=0, atol=0.01)
+    assert mine["own_xyz"].shape == (steps, 8, 3) and "target_xy" not in mine
+    assert mine["station_occupancy"].shape == mine["station_queue"].shape == (steps, 2)
+    assert np.array_equal(mine["station_occupancy"].sum(axis=1)[1:],
+                          mine["charging"].sum(axis=1)[:-1])   # decision time = previous post-step
+    assert ours["row"]["controller_information"] == ev.N_CONTROLLER_INFORMATION
 
 
 # Shield-ON parity: 50 steps at (0.25, 0.45) on 952001 enter but never exit with the fresh
@@ -110,10 +122,26 @@ def test_local_heuristic_world_runs_from_legal_observations(tmp_path):
     row = result["row"]
     assert row["failed"] is False and row["actual_length"] == 40
     assert row["plan_source"] == "legal-observation" and row["plan_input_steps"] == 0
-    assert row["controller_information"] == "legal-observation (station-1 ring search prior)"
+    assert row["controller_information"] == \
+        "legal-observation pooled central planner (station-1 ring search prior)"
     assert row["replans"] == 2 and 1 <= row["search_replans"] <= 2
     assert isinstance(row["guard_checked_actions"], int) and row["guard_blocked_actions"] >= 0
-    assert result["arrays"]["guard_checked"].shape == (40,)
+    arrays = result["arrays"]
+    assert arrays["guard_checked"].shape == (40,)
+    assert arrays["target_xy"].shape == (40, 8, 2)
+    assert np.isfinite(arrays["target_xy"][0]).all()   # every UAV available at reset
+    assert len(row["station_xy"]) == 2 and all(len(xy) == 2 for xy in row["station_xy"])
+    assert isinstance(row["mean_nearest_station_distance_m"], float)
+    assert row["post_exit_recapture_count"] == len(row["post_exit_recapture_distances_m"])
+    traces = ev.trace_arrays([result])
+    expected = {"own_xyz": ((40, 8, 3), np.float32), "return_margin": ((40, 8), np.float32),
+                "nearest_station": ((40, 8), np.int8),
+                "nearest_station_distance_m": ((40, 8), np.float32),
+                "guard_checked": ((40,), np.int32), "guard_blocked": ((40,), np.int32),
+                "station_occupancy": ((40, 2), np.int8), "station_queue": ((40, 2), np.int8),
+                "target_xy": ((40, 8, 2), np.float32)}
+    for key, (shape, dtype) in expected.items():
+        assert traces[f"world_0_{key}"].shape == shape and traces[f"world_0_{key}"].dtype == dtype, key
 
 
 def test_unobserved_regime_marks_the_world_failed(tmp_path, monkeypatch):
@@ -245,3 +273,36 @@ def test_world_row_definitions():
     assert agg["zero_service_worlds"] == 1 and agg["actual_transitions"] == 12
     assert agg["input_before_entry_worlds"] == 1 and agg["failed_worlds"] == []
     assert not [key for key in agg if "presen" in key]
+
+
+def test_mechanism_readings_definitions(config_60):
+    entered = np.zeros((8, 8), dtype=bool)
+    exited = np.zeros((8, 8), dtype=bool)
+    distances = np.arange(64, dtype=np.float32).reshape(8, 8)
+    entered[0, 0] = True                     # entry before any exit: no recapture
+    exited[2, 0], entered[5, 0] = True, True  # exit -> next entry at step 5
+    entered[7, 0] = True                     # second entry without an exit in between
+    exited[1, 3], entered[4, 3] = True, True  # earlier exit, listed first
+    exited[6, 5] = True                      # exit never followed by an entry
+    assert ev.recapture_distances(entered, exited, distances) == [
+        float(distances[4, 3]), float(distances[5, 0])]
+    assert ev.recapture_distances(entered, np.zeros_like(exited), distances) == []
+    steps = {"entered": entered, "exited": exited, "nearest_station_distance_m": distances}
+    row = ev.mechanism_row(steps, [[1.0, 2.0], [3.0, 4.0]])
+    assert row["post_exit_recapture_count"] == 2
+    assert row["post_exit_recapture_median_m"] == float(np.median([distances[4, 3], distances[5, 0]]))
+    assert row["mean_nearest_station_distance_m"] == 31.5
+    empty = ev.mechanism_row(dict(steps, exited=np.zeros_like(exited)), [[1.0, 2.0], [3.0, 4.0]])
+    assert empty["post_exit_recapture_distances_m"] == [] and empty["post_exit_recapture_median_m"] is None
+    counts = ev.station_counts(np.asarray((0, 1, 1, 0, 1, 1, 1, 0)),
+                               np.asarray((1, 1, 0, 0, 1, 1, 1, 1), dtype=bool))
+    assert counts.dtype == np.int8 and counts.tolist() == [2, 4]
+    # Absolute station xy from the first legal observation equals the environment's stations.
+    env = make_env(config_60, 955001)
+    try:
+        obs, _ = env.reset(seed=955001)
+        truth = np.asarray(env.env.charging_station_positions, dtype=np.float64)[:2, :2]
+    finally:
+        env.close()
+    np.testing.assert_allclose(ev.absolute_station_xy(np.asarray(obs, dtype=np.float32)), truth,
+                               rtol=0, atol=0.01)

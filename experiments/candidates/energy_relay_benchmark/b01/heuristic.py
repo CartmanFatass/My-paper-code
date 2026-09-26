@@ -12,8 +12,9 @@ Information modes:
   user xy (n_users, 2) and BS xy (n_bs, 2) from the raw environment; k-means seeds on the env's
   user indices exactly as the estimator does and the relay line starts at the BS mean.  This
   is a central-information reference ("central-positions"), not a legal-observation controller.
-- ``"local"`` (Hlocal): plan inputs from the legal observations only.  Users = union over the
-  UAVs of the decoded user slots (absolute xy = own xy + rel xy), de-duplicated within
+- ``"local"`` (Hlocal): plan inputs from the legal observations only, pooled over the eight
+  UAVs in one planner (a pooled central planner, not a per-UAV local controller).  Users =
+  union over the UAVs of the decoded user slots (absolute xy = own xy + rel xy), de-duplicated within
   ``dedup_tolerance_m``; BS xy from the legal BS slots (in-radius or cached); station 1's xy
   from the always-present station records of the energy suffix.  At a replan with fewer than
   ``n_service`` distinct visible users the plan uses k = (visible users) centroids, relays only
@@ -50,7 +51,8 @@ except Exception:  # pragma: no cover - depends on the interpreter
 UNOBSERVED_RULES = ("station-ring",)
 INFORMATION_MODES = ("central", "local")
 CONTROLLER_INFORMATION = {"central": "central-positions",
-                          "local": "legal-observation (station-1 ring search prior)"}
+                          "local": ("legal-observation pooled central planner "
+                                    "(station-1 ring search prior)")}
 SEARCH_STATION = 1   # index of the station record whose xy centres the search ring
 
 

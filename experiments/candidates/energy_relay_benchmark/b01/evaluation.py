@@ -46,15 +46,27 @@ from experiments.candidates.uav_service_auxiliary.b06.native import (
 )
 from hmasd.agent import HMASDAgent
 
-from .feedback import N_UAVS, FeedbackParams, apply_feedback_params
+from .feedback import N_UAVS, STATION_COUNT, FeedbackParams, apply_feedback_params
 from .heuristic import CONTROLLER_INFORMATION, HeuristicParams, LayoutHeuristic, UnobservedRegime
-from .observation import S7S2_LAYOUT, own_energy
+from .observation import S7S2_LAYOUT, own_energy, own_positions, station_records
 
 DOCK_REQUEST_THRESHOLD = 0.5  # env ``dock_request_threshold``
 QOS = TRACE_FIELDS.index("qos_satisfaction_ratio")
 THROUGHPUT = TRACE_FIELDS.index("delivered_end_to_end_throughput_mbps")
 CHARGER_INPUT = TRACE_FIELDS.index("step_charger_input_wh")
 BATTERY_MIN = TRACE_FIELDS.index("battery_min_ratio")
+# HMASD ``SkillCoordinator.assign_and_value_batch(state, observations)`` embeds the central
+# state into the skill decision, so N is not a legal-observation-only controller.
+N_CONTROLLER_INFORMATION = ("central-state skill conditioning (HMASD coordinator) "
+                            "+ local low-level actors")
+# Timing of the mechanism trace fields (config.json ``trace_timing``).
+TRACE_TIMING = (
+    "Row t of own_xyz, return_margin, nearest_station, nearest_station_distance_m, "
+    "station_occupancy, station_queue and target_xy is decoded from the legal observation the "
+    "controller and shield act on at step t (decision time, same as mode/entered/exited). "
+    "charging, waiting_steps and battery row t are decoded from the post-step observation "
+    "(t+1), so station_occupancy[t].sum() pairs with charging[t-1].sum(). guard_checked/"
+    "guard_blocked row t count the guard actions of step t.")
 
 
 def make_eval_config(horizon: int, policy_seed: int):
@@ -127,6 +139,11 @@ class HeuristicController:
         if replans and self.heuristic.last_plan["search"]:
             self.search_replan_steps.append(int(step))
         return actions
+
+    @property
+    def targets_xy(self) -> np.ndarray:
+        """Per-UAV target xy used by the last ``act`` (NaN = no target); a copy."""
+        return self.heuristic.targets_xy.copy()
 
 
 def raw_guard_env(env):
@@ -234,9 +251,62 @@ def world_row(seed: int, rewards: np.ndarray, metrics: np.ndarray, ends: np.ndar
     return row
 
 
+def station_counts(stations: np.ndarray, flags: np.ndarray) -> np.ndarray:
+    """(STATION_COUNT,) int8: number of UAVs with ``flags`` True per station index."""
+    return np.bincount(np.asarray(stations, dtype=np.int64)[np.asarray(flags, dtype=bool)],
+                       minlength=STATION_COUNT).astype(np.int8)
+
+
+def absolute_station_xy(observations) -> list[list[float]]:
+    """(STATION_COUNT, 2) absolute station xy from the first observer whose record is valid."""
+    records = station_records(observations)
+    result = []
+    for index in range(STATION_COUNT):
+        valid = np.flatnonzero(records["valid"][:, index])
+        result.append([float(v) for v in records["xyz_m"][valid[0], index, :2]]
+                      if valid.size else [None, None])
+    return result
+
+
+def recapture_distances(entered: np.ndarray, exited: np.ndarray,
+                        distances: np.ndarray) -> list[float]:
+    """For each shield exit of a UAV, the nearest-station distance at that UAV's next shield
+    entry in the same episode (exits never followed by an entry contribute nothing).
+
+    Ordered chronologically by exit step, then by UAV index.  Distances are the shield's
+    decision-time decode (``nearest_station_distance_m``) at the entry step.
+    """
+    entered = np.asarray(entered, dtype=bool)
+    exited = np.asarray(exited, dtype=bool)
+    result = []
+    for step, uav in zip(*np.nonzero(exited)):   # row-major: step, then UAV
+        later = np.flatnonzero(entered[step + 1:, uav])
+        if later.size:
+            result.append(float(distances[step + 1 + later[0], uav]))
+    return result
+
+
+def mechanism_row(steps: dict[str, np.ndarray], station_xy) -> dict[str, Any]:
+    """Row readings from the decision-time trace fields (existing readings unchanged)."""
+    recaptures = recapture_distances(steps["entered"], steps["exited"],
+                                     steps["nearest_station_distance_m"])
+    return {
+        "station_xy": station_xy,
+        "mean_nearest_station_distance_m": float(
+            np.mean(steps["nearest_station_distance_m"], dtype=np.float64)),
+        "post_exit_recapture_distances_m": recaptures,
+        "post_exit_recapture_count": len(recaptures),
+        "post_exit_recapture_median_m": (float(np.median(recaptures)) if recaptures else None),
+    }
+
+
 def evaluate_world(controller, env, config, seed: int, params: FeedbackParams, *,
                    progress: Callable[[int], None] | None = None):
-    """Run one deterministic episode; returns (row, per-step arrays)."""
+    """Run one deterministic episode; returns (row, per-step arrays).
+
+    The mechanism fields are read-only decodes of the step-t legal observation and the
+    shield decision (see ``TRACE_TIMING``); they never feed back into an action.
+    """
     controller.reset()
     observations, info = env.reset(seed=int(seed))
     observations = np.asarray(observations, dtype=np.float32)
@@ -245,12 +315,27 @@ def evaluate_world(controller, env, config, seed: int, params: FeedbackParams, *
     modes = np.zeros(N_UAVS, dtype=bool)
     rewards, metrics, ends = [], [], []
     keys = ("mode", "entered", "exited", "charging", "waiting_steps", "battery", "dock_bit",
-            "guard_checked", "guard_blocked")
+            "guard_checked", "guard_blocked", "own_xyz", "return_margin", "nearest_station",
+            "nearest_station_distance_m", "station_occupancy", "station_queue")
     steps: dict[str, list] = {key: [] for key in keys}
+    targets: list[np.ndarray] = []
     layout = replace(S7S2_LAYOUT, max_steps=int(config.max_steps))  # waiting = steps/max_steps
+    station_xy = absolute_station_xy(observations)
     for step in range(int(config.episode_length)):
         proposed = controller.propose(observations, state, step, previous_done, modes.copy())
+        target_xy = getattr(controller, "targets_xy", None)
+        if target_xy is not None:
+            targets.append(target_xy)
         decision = apply_feedback_params(observations, proposed, modes, params)
+        held = own_energy(observations, layout)
+        steps["own_xyz"].append(own_positions(observations, layout))
+        steps["return_margin"].append(decision.margins)
+        steps["nearest_station"].append(decision.selected_stations)
+        steps["nearest_station_distance_m"].append(decision.station_distances_m)
+        steps["station_occupancy"].append(station_counts(decision.selected_stations,
+                                                         held["charging"]))
+        steps["station_queue"].append(station_counts(decision.selected_stations,
+                                                     held["waiting_steps"] > 0))
         modes = decision.modes
         submitted = decision.submitted_actions
         next_obs, reward, terminated, truncated, next_info = env.step(submitted)
@@ -284,8 +369,11 @@ def evaluate_world(controller, env, config, seed: int, params: FeedbackParams, *
     step_arrays = {key: np.asarray(value) for key, value in steps.items()}
     step_arrays["guard_checked"] = step_arrays["guard_checked"].astype(np.int64)
     step_arrays["guard_blocked"] = step_arrays["guard_blocked"].astype(np.int64)
+    if targets:
+        step_arrays["target_xy"] = np.asarray(targets, dtype=np.float64)
     row = world_row(seed, reward_array, metric_array, end_array, step_arrays,
                     time_step_s=float(config.time_step))
+    row.update(mechanism_row(step_arrays, station_xy))
     step_arrays.update(reward=reward_array, metrics=metric_array, ends=end_array)
     return row, step_arrays
 
@@ -367,7 +455,7 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
                     or not _same_snapshot(_normalizer_snapshot(agent), before[2])
                 ):
                     raise RuntimeError("evaluation mutated the restored policy")
-                row["controller_information"] = "legal-observation"
+                row["controller_information"] = N_CONTROLLER_INFORMATION
                 row["failed"] = False
             elif task.controller.startswith("H"):
                 if task.heuristic is None:
@@ -423,8 +511,16 @@ def run_tasks(tasks: Iterable[WorldTask], workers: int, *,
     return sorted(results, key=lambda item: item["row"]["seed"])
 
 
+TRACE_DTYPES = {  # mechanism fields (float32 unless stated in the L0)
+    "own_xyz": np.float32, "return_margin": np.float32, "nearest_station": np.int8,
+    "nearest_station_distance_m": np.float32, "guard_checked": np.int32,
+    "guard_blocked": np.int32, "station_occupancy": np.int8, "station_queue": np.int8,
+    "target_xy": np.float32,   # H controllers only
+}
+
+
 def trace_arrays(results: list[dict[str, Any]]) -> dict[str, np.ndarray]:
-    """float32 per-step arrays per world for ``traces/<panel>.npz``."""
+    """Per-step arrays per world for ``traces/<panel>.npz`` (float32 unless in TRACE_DTYPES)."""
     arrays: dict[str, np.ndarray] = {}
     for index, result in enumerate(results):
         prefix = f"world_{index}_"
@@ -438,6 +534,9 @@ def trace_arrays(results: list[dict[str, Any]]) -> dict[str, np.ndarray]:
         arrays[prefix + "qos"] = data["metrics"][:, QOS].astype(np.float32)
         for key in ("mode", "charging", "waiting_steps", "battery", "dock_bit"):
             arrays[prefix + key] = data[key].astype(np.float32)
+        for key, dtype in TRACE_DTYPES.items():
+            if key in data:
+                arrays[prefix + key] = data[key].astype(dtype)
     return arrays
 
 
