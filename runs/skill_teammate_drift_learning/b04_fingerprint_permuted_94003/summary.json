@@ -1,0 +1,129 @@
+{
+  "object": "STDL_JOINT_RESPONSE_B04",
+  "direction": "skill_teammate_drift_learning",
+  "arm": "fingerprint_permuted",
+  "learner_arm": "fingerprint_full",
+  "source_schedule": "permuted",
+  "seed": 94003,
+  "launch_sha": "6a1a7e221cdc8f35bda0cc48d2efa2982dcb2a4b",
+  "status": "complete",
+  "started_fits": 1,
+  "scientific_scope": "exploratory paired source-support intervention; known scripted controller law",
+  "source_design": {
+    "cooperative_source_rows": 1019,
+    "saturated_source_singular_values": [
+      16.837297847963775,
+      5.267907459462676,
+      3.499279489973367,
+      1.0788853400109044
+    ],
+    "saturated_source_rank": 4,
+    "rank_tolerance": 3.809665140480664e-12,
+    "source_product_min": 0.05320421078438884,
+    "source_product_max": 0.4954478509890746,
+    "first_target_raw_predictions": [
+      0.5926285160038798,
+      0.47607660463208357
+    ],
+    "first_target_true_values": [
+      0.6,
+      0.6702118312072755
+    ],
+    "first_target_greedy_action": 0,
+    "first_target_value_mae": 0.10075335528565604,
+    "source_design_svd_calls": 1
+  },
+  "learning": {
+    "object": "STDL_JOINT_RESPONSE_B04",
+    "status": "COMPLETE",
+    "arm": "fingerprint_full",
+    "seed": 94003,
+    "config": {
+      "source_macros": 2048,
+      "target_macros": 256,
+      "skill_ticks": 3,
+      "recent_window": 64,
+      "prior_strength": 2.0,
+      "source_schedule": "permuted"
+    },
+    "counts": {
+      "source_macros": 2048,
+      "target_macros": 256,
+      "total_macros": 2304,
+      "primitive_ticks": 6912,
+      "sampled_reward_labels": 2304,
+      "learner_updates": 2304,
+      "evaluation_panels": 2304,
+      "evaluation_sampled_rewards": 0,
+      "evaluation_learner_updates": 0,
+      "regression_solves": 2304
+    },
+    "primary_target_panel_count": 64,
+    "primary_native_return": 0.6033322106218337,
+    "primary_value_mae": 0.0818177012692845,
+    "full_target_panel_count": 256,
+    "full_target_native_return": 0.7239213283377885,
+    "full_target_value_mae": 0.04463886452102293,
+    "late_target_panel_count": 64,
+    "late_target_native_return": 0.8075824885559082,
+    "late_target_value_mae": 0.011043205211743535,
+    "source_support": {
+      "sample_count": 2048,
+      "skill_counts": [
+        1029,
+        1019
+      ],
+      "cooperative_joint_outcome_counts": [
+        [
+          294,
+          175
+        ],
+        [
+          362,
+          188
+        ]
+      ],
+      "cooperative_joint_outcomes_observed": 4,
+      "skill_outcome_cells_observed": 5,
+      "distinct_contexts": 2048
+    },
+    "target_support": {
+      "sample_count": 256,
+      "skill_counts": [
+        125,
+        131
+      ],
+      "cooperative_joint_outcome_counts": [
+        [
+          5,
+          17
+        ],
+        [
+          7,
+          102
+        ]
+      ],
+      "cooperative_joint_outcomes_observed": 4,
+      "skill_outcome_cells_observed": 5,
+      "distinct_contexts": 256
+    },
+    "source_estimate_l2_movement": 0.6625978093119786,
+    "target_estimate_l2_movement": 0.4770019319485438,
+    "source_regression_solve_count": 2048,
+    "target_regression_solve_count": 256,
+    "source_cumulative_regression_solve_count": 2048
+  },
+  "artifacts": [
+    "config.json",
+    "summary.json",
+    "curves.json",
+    "transitions.npz",
+    "learner_state.npz"
+  ],
+  "runner_wall_seconds": 0.3658601990027819,
+  "runner_cpu_seconds": 0.256513172,
+  "resource_scope": "single scientific child process; CPU user plus system",
+  "peak_rss_kib": 48228,
+  "user_cpu_seconds": 0.23846499999999998,
+  "system_cpu_seconds": 0.031795
+}

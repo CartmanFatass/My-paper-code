@@ -1,0 +1,10 @@
+{
+  "calibration_fits_completed": 256,
+  "calibration_fits_started": 256,
+  "completed_arm_contexts": 1280,
+  "completed_batches": 16,
+  "last_arm": "AF",
+  "last_context_exclusive": 256,
+  "planned_arm_contexts": 1280,
+  "state": "COMPLETE"
+}

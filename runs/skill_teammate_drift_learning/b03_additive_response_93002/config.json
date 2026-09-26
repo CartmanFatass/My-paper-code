@@ -1,0 +1,21 @@
+{
+  "object": "STDL_JOINT_RESPONSE_B03",
+  "direction": "skill_teammate_drift_learning",
+  "arm": "additive_response",
+  "seed": 93002,
+  "launch_sha": "458cd9479533b435314d86cfb868757af0001caa",
+  "config": {
+    "source_macros": 2048,
+    "target_macros": 256,
+    "skill_ticks": 3,
+    "recent_window": 64,
+    "prior_strength": 2.0
+  },
+  "python": "3.10.20 (main, Aug  7 2026, 02:25:15) [Clang 22.1.3 ]",
+  "numpy": "1.26.3",
+  "numeric_thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "claim_key": "6b21c8affae00da11b2049b4a87e0c057d9362d8416c50c890ee129f2f174ef1",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6b21c8affae00da11b2049b4a87e0c057d9362d8416c50c890ee129f2f174ef1.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a02_long_behavior_91031_20260920/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6b21c8affae00da11b2049b4a87e0c057d9362d8416c50c890ee129f2f174ef1.json",
+  "pid": 2304273,
+  "runner_pid": 2304274,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-20T14:13:43.426087Z"
+}

@@ -982,3 +982,23 @@ service/risk work and information from the ongoing complementary-skill compariso
 See [current project review](../../RESEARCH.md#portfolio-review-2026-09-23-scientific-management-and-next-learning-investment).
 The current owner delegation permits choosing and continuing useful work after this advice,
 without treating a recipe failure as the end of research or requesting another direction approval.
+
+
+## 2026-09-25 — Owner-requested publication and source checkout retirement
+
+The owner requested consolidation of useful results into main and retirement of unused
+worktrees. B01 remains closed; this is evidence preservation, not another evaluation.
+The load-capacity source checkout was archived through the Codex worktree lifecycle,
+with its source commit `bc2134f4df523dcb68a52ea4085a3493f18b3d8f` and branch
+`codex/load-capacity-sept23` retained. The dedicated runner, candidate implementation
+and tests are being consolidated into main without changing their source blobs.
+
+Before archival, all 160 ignored NPZ trajectories (244,283,369 bytes) were individually
+matched by byte size and SHA-256 against the original executing-node copy at
+`hmasd-wsl-node:/home/wu/hmasd-worktrees/load-capacity-b01-20260923/runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923`.
+The sorted local hash-list digest was
+`d88c0f8576edaecad1c0e04879da198b1e6a461b766e9dcae7a5318d1a0bafad`.
+The node copy remains the raw-data location; ignored trajectories are not part of the
+Codex archive snapshot. Compact runner results and this notebook remain in main.
+No live process depended on the retired checkout. No fit, Send, relaunch or scientific
+claim change occurred during reclamation.

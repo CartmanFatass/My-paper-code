@@ -1,0 +1,41 @@
+{
+  "object": "UCOPE_FROZEN_MEAN_GATE_B08",
+  "launch_sha": "d39483ace5767817cc7df45247516eab642b8a41",
+  "files": {
+    "experiments/candidates/ucope/uav_motion_prefix_b01/policy.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/17bd06419ba0442a881cacde08756f38/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+      "bytes": 6887,
+      "sha256": "e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614"
+    },
+    "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/17bd06419ba0442a881cacde08756f38/experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "bytes": 4819,
+      "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6"
+    },
+    "experiments/candidates/ucope/uav_motion_prefix_b01/learner.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/17bd06419ba0442a881cacde08756f38/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+      "bytes": 14150,
+      "sha256": "466ec7b0efabdf474f838b662e781a2b7a3b5e1c1a41096b6ccf0f00eb0471f1"
+    },
+    "experiments/candidates/ucope/lower_scale_reuse_b07/study.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/17bd06419ba0442a881cacde08756f38/experiments/candidates/ucope/lower_scale_reuse_b07/study.py",
+      "bytes": 49401,
+      "sha256": "9564709a8ec48375116df9500ef7aa924bb429005753951ef7a289da8eaa968b"
+    },
+    "experiments/candidates/ucope/frozen_mean_gate_b08/engine.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/17bd06419ba0442a881cacde08756f38/experiments/candidates/ucope/frozen_mean_gate_b08/engine.py",
+      "bytes": 21063,
+      "sha256": "a2401bccecd1fb9ebad772188c69a1bf9fca55af3e12a99dbb748af0ed961e40"
+    },
+    "experiments/candidates/ucope/frozen_mean_gate_b08/study.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/17bd06419ba0442a881cacde08756f38/experiments/candidates/ucope/frozen_mean_gate_b08/study.py",
+      "bytes": 20695,
+      "sha256": "7d10bfee01921e648c9acdf581fe660cbb39613044f3e8a0e9a2d58ff6bfff50"
+    },
+    "scripts/run_ucope_frozen_mean_gate_b08.py": {
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/17bd06419ba0442a881cacde08756f38/scripts/run_ucope_frozen_mean_gate_b08.py",
+      "bytes": 1470,
+      "sha256": "962b0b0eee03f0e6897280a698f3c83e4186e17ba29e6edcac0cb304b97881b4"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "object": "STDL_JOINT_RESPONSE_B03",
+  "direction": "skill_teammate_drift_learning",
+  "arm": "fingerprint_full",
+  "seed": 93003,
+  "launch_sha": "458cd9479533b435314d86cfb868757af0001caa",
+  "status": "complete",
+  "started_fits": 1,
+  "scientific_scope": "exploratory constructed joint-response existence test; known scripted controller law and stationary outcome-conditioned reward",
+  "learning": {
+    "object": "STDL_JOINT_RESPONSE_B03",
+    "status": "COMPLETE",
+    "arm": "fingerprint_full",
+    "seed": 93003,
+    "config": {
+      "source_macros": 2048,
+      "target_macros": 256,
+      "skill_ticks": 3,
+      "recent_window": 64,
+      "prior_strength": 2.0
+    },
+    "counts": {
+      "source_macros": 2048,
+      "target_macros": 256,
+      "total_macros": 2304,
+      "primitive_ticks": 6912,
+      "sampled_reward_labels": 2304,
+      "learner_updates": 2304,
+      "evaluation_panels": 2304,
+      "evaluation_sampled_rewards": 0,
+      "evaluation_learner_updates": 0,
+      "regression_solves": 2304
+    },
+    "primary_target_panel_count": 64,
+    "primary_native_return": 0.6302942609858513,
+    "primary_value_mae": 0.08299241136368285,
+    "full_target_panel_count": 256,
+    "full_target_native_return": 0.732997931663394,
+    "full_target_value_mae": 0.04162875883374342,
+    "late_target_panel_count": 64,
+    "late_target_native_return": 0.8075824885559082,
+    "late_target_value_mae": 0.029843510006526165,
+    "source_support": {
+      "sample_count": 2048,
+      "skill_counts": [
+        1002,
+        1046
+      ],
+      "cooperative_joint_outcome_counts": [
+        [
+          325,
+          173
+        ],
+        [
+          387,
+          161
+        ]
+      ],
+      "cooperative_joint_outcomes_observed": 4,
+      "skill_outcome_cells_observed": 5,
+      "distinct_contexts": 2048
+    },
+    "target_support": {
+      "sample_count": 256,
+      "skill_counts": [
+        124,
+        132
+      ],
+      "cooperative_joint_outcome_counts": [
+        [
+          1,
+          15
+        ],
+        [
+          9,
+          107
+        ]
+      ],
+      "cooperative_joint_outcomes_observed": 4,
+      "skill_outcome_cells_observed": 5,
+      "distinct_contexts": 256
+    },
+    "source_estimate_l2_movement": 0.6060411165782068,
+    "target_estimate_l2_movement": 0.6828084645271102,
+    "source_regression_solve_count": 2048,
+    "target_regression_solve_count": 256,
+    "source_cumulative_regression_solve_count": 2048
+  },
+  "artifacts": [
+    "config.json",
+    "summary.json",
+    "curves.json",
+    "transitions.npz",
+    "learner_state.npz"
+  ],
+  "runner_wall_seconds": 0.3625642440165393,
+  "runner_cpu_seconds": 0.28079901500000004,
+  "resource_scope": "single scientific child process; CPU user plus system",
+  "peak_rss_kib": 47288,
+  "user_cpu_seconds": 0.254781,
+  "system_cpu_seconds": 0.040441
+}

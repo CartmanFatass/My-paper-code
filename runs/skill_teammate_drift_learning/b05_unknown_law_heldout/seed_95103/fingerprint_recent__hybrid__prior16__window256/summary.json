@@ -1,0 +1,66 @@
+{
+  "compute_wall_scope": "learner expiry, prediction, and observation only",
+  "compute_wall_seconds": 0.04564187317737378,
+  "cooperative_observations": 1111,
+  "cooperative_posterior_updates": 0,
+  "expiration_recomputations": 973,
+  "full_target_cumulative_regret": 8.254999999999995,
+  "initial_to_final_l2_movement": 0.2755277444690995,
+  "initial_to_source_l2_movement": 0.2378430570038002,
+  "launch_sha": "1d311f8d5ef03b02886ebfedda881091d16b5526",
+  "learner_observations": 2304,
+  "object": "unknown_joint_law_b05",
+  "posterior_updates": 1193,
+  "regression_solves": 2084,
+  "regression_statistic_updates": 1111,
+  "safe_posterior_updates": 1193,
+  "seed": 95103,
+  "setting_id": "fingerprint_recent__hybrid__prior16__window256",
+  "source_to_final_l2_movement": 0.3077666326939721,
+  "spec": {
+    "family": "fingerprint_recent",
+    "prior_strength": 16.0,
+    "recent_window": 256,
+    "representation": "hybrid"
+  },
+  "spec_id": "fingerprint_recent__hybrid__prior16__window256",
+  "stage": "heldout",
+  "target_by_endpoint": {
+    "first64": {
+      "action_counts": [
+        13,
+        51
+      ],
+      "cumulative_regret": 5.184999999999999,
+      "mean_expected_return": 0.5814843749999999,
+      "mean_regret": 0.08101562499999998,
+      "mean_value_mae": 0.08527978148966944,
+      "panel_count": 64,
+      "sign_mistakes": 31
+    },
+    "full": {
+      "action_counts": [
+        63,
+        193
+      ],
+      "cumulative_regret": 8.254999999999995,
+      "mean_expected_return": 0.6302539062499999,
+      "mean_regret": 0.03224609374999998,
+      "mean_value_mae": 0.05901301108983708,
+      "panel_count": 256,
+      "sign_mistakes": 77
+    },
+    "late64": {
+      "action_counts": [
+        14,
+        50
+      ],
+      "cumulative_regret": 1.349999999999999,
+      "mean_expected_return": 0.64140625,
+      "mean_regret": 0.021093749999999984,
+      "mean_value_mae": 0.04818209330513034,
+      "panel_count": 64,
+      "sign_mistakes": 18
+    }
+  }
+}

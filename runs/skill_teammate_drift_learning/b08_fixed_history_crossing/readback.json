@@ -1,0 +1,594 @@
+{
+  "blocks": [
+    {
+      "by_endpoint": {
+        "first64": {
+          "R_history_minus_F_history_for_F": 0.017749999999999932,
+          "R_history_minus_F_history_for_R": 0.0068749999999999645,
+          "R_minus_F_on_F_history": 0.008562500000000028,
+          "R_minus_F_on_R_history": -0.0023124999999999396,
+          "means": {
+            "F_on_F": 0.5946875,
+            "F_on_R": 0.6124375,
+            "R_on_F": 0.6032500000000001,
+            "R_on_R": 0.610125
+          }
+        },
+        "full": {
+          "R_history_minus_F_history_for_F": 0.0022343750000000107,
+          "R_history_minus_F_history_for_R": 0.009015624999999972,
+          "R_minus_F_on_F_history": -0.009000000000000119,
+          "R_minus_F_on_R_history": -0.002218750000000158,
+          "means": {
+            "F_on_F": 0.635140625,
+            "F_on_R": 0.637375,
+            "R_on_F": 0.6261406249999999,
+            "R_on_R": 0.6351562499999999
+          }
+        },
+        "late64": {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": 0.0,
+          "R_minus_F_on_F_history": 0.0,
+          "R_minus_F_on_R_history": 0.0,
+          "means": {
+            "F_on_F": 0.649,
+            "F_on_R": 0.649,
+            "R_on_F": 0.649,
+            "R_on_R": 0.649
+          }
+        }
+      },
+      "context_rows": [
+        {
+          "R_history_minus_F_history_for_F": 0.0033593749999999965,
+          "R_history_minus_F_history_for_R": 0.0,
+          "R_minus_F_on_F_history": 0.004031249999999996,
+          "R_minus_F_on_R_history": 0.0006718749999999993,
+          "context": 0,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 46,
+              "greedy_cooperation_count": 48,
+              "last_estimated_p11": 0.8334177592120653,
+              "last_raw_cooperative_prediction": 0.8280945714054098
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 52,
+              "greedy_cooperation_count": 53,
+              "last_estimated_p11": 0.8522761260937183,
+              "last_raw_cooperative_prediction": 0.8566552288918547
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 46,
+              "greedy_cooperation_count": 54,
+              "last_estimated_p11": 0.8334177592120653,
+              "last_raw_cooperative_prediction": 0.8134931337026137
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 52,
+              "greedy_cooperation_count": 54,
+              "last_estimated_p11": 0.8522761260937183,
+              "last_raw_cooperative_prediction": 0.8311485212901643
+            }
+          },
+          "true_p11": 0.8499999999999999
+        },
+        {
+          "R_history_minus_F_history_for_F": 0.0003437500000000003,
+          "R_history_minus_F_history_for_R": 0.002406250000000002,
+          "R_minus_F_on_F_history": -0.0027500000000000024,
+          "R_minus_F_on_R_history": -0.0006875000000000006,
+          "context": 1,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 10,
+              "greedy_cooperation_count": 3,
+              "last_estimated_p11": 0.5142195569139226,
+              "last_raw_cooperative_prediction": 0.4971517281188864
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 12,
+              "greedy_cooperation_count": 1,
+              "last_estimated_p11": 0.5121881916405051,
+              "last_raw_cooperative_prediction": 0.4797663448646092
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 10,
+              "greedy_cooperation_count": 19,
+              "last_estimated_p11": 0.5142195569139226,
+              "last_raw_cooperative_prediction": 0.5372711937171923
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 12,
+              "greedy_cooperation_count": 5,
+              "last_estimated_p11": 0.5121881916405051,
+              "last_raw_cooperative_prediction": 0.5327246045684959
+            }
+          },
+          "true_p11": 0.55
+        },
+        {
+          "R_history_minus_F_history_for_F": -0.00146875,
+          "R_history_minus_F_history_for_R": 0.006609375000000001,
+          "R_minus_F_on_F_history": -0.01028125,
+          "R_minus_F_on_R_history": -0.0022031250000000002,
+          "context": 2,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 9,
+              "greedy_cooperation_count": 1,
+              "last_estimated_p11": 0.47005769845155193,
+              "last_raw_cooperative_prediction": 0.4516585359971599
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 13,
+              "greedy_cooperation_count": 3,
+              "last_estimated_p11": 0.47804231219780474,
+              "last_raw_cooperative_prediction": 0.48594294974300634
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 9,
+              "greedy_cooperation_count": 15,
+              "last_estimated_p11": 0.47005769845155193,
+              "last_raw_cooperative_prediction": 0.48563138621965424
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 13,
+              "greedy_cooperation_count": 6,
+              "last_estimated_p11": 0.47804231219780474,
+              "last_raw_cooperative_prediction": 0.49388797286441255
+            }
+          },
+          "true_p11": 0.35
+        },
+        {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": 0.0,
+          "R_minus_F_on_F_history": 0.0,
+          "R_minus_F_on_R_history": 0.0,
+          "context": 3,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 44,
+              "greedy_cooperation_count": 47,
+              "last_estimated_p11": 0.7149029929548237,
+              "last_raw_cooperative_prediction": 0.6535731769121936
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 44,
+              "greedy_cooperation_count": 47,
+              "last_estimated_p11": 0.7149029929548237,
+              "last_raw_cooperative_prediction": 0.6532118283106072
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 44,
+              "greedy_cooperation_count": 47,
+              "last_estimated_p11": 0.7149029929548237,
+              "last_raw_cooperative_prediction": 0.7067607465937575
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 44,
+              "greedy_cooperation_count": 47,
+              "last_estimated_p11": 0.7149029929548237,
+              "last_raw_cooperative_prediction": 0.7069153158205713
+            }
+          },
+          "true_p11": 0.6499999999999999
+        }
+      ],
+      "seed": 95301
+    },
+    {
+      "by_endpoint": {
+        "first64": {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": 0.0,
+          "R_minus_F_on_F_history": -0.001375000000000015,
+          "R_minus_F_on_R_history": -0.001375000000000015,
+          "means": {
+            "F_on_F": 0.633,
+            "F_on_R": 0.633,
+            "R_on_F": 0.631625,
+            "R_on_R": 0.631625
+          }
+        },
+        "full": {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": -0.0001718749999999325,
+          "R_minus_F_on_F_history": -0.00034375000000008704,
+          "R_minus_F_on_R_history": -0.0005156250000000195,
+          "means": {
+            "F_on_F": 0.63975,
+            "F_on_R": 0.63975,
+            "R_on_F": 0.63940625,
+            "R_on_R": 0.639234375
+          }
+        },
+        "late64": {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": 0.0,
+          "R_minus_F_on_F_history": 0.0,
+          "R_minus_F_on_R_history": 0.0,
+          "means": {
+            "F_on_F": 0.642,
+            "F_on_R": 0.642,
+            "R_on_F": 0.642,
+            "R_on_R": 0.642
+          }
+        }
+      },
+      "context_rows": [
+        {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": 0.0,
+          "R_minus_F_on_F_history": 0.0,
+          "R_minus_F_on_R_history": 0.0,
+          "context": 0,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 52,
+              "greedy_cooperation_count": 61,
+              "last_estimated_p11": 0.8332830468068297,
+              "last_raw_cooperative_prediction": 0.8072649479981449
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 52,
+              "greedy_cooperation_count": 61,
+              "last_estimated_p11": 0.8332830468068297,
+              "last_raw_cooperative_prediction": 0.8068227910477367
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 52,
+              "greedy_cooperation_count": 61,
+              "last_estimated_p11": 0.8332830468068297,
+              "last_raw_cooperative_prediction": 0.7968359361086813
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 52,
+              "greedy_cooperation_count": 61,
+              "last_estimated_p11": 0.8332830468068297,
+              "last_raw_cooperative_prediction": 0.7968790941053557
+            }
+          },
+          "true_p11": 0.8499999999999999
+        },
+        {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": -0.00017187500000000015,
+          "R_minus_F_on_F_history": -0.0003437500000000003,
+          "R_minus_F_on_R_history": -0.0005156250000000005,
+          "context": 1,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 9,
+              "greedy_cooperation_count": 2,
+              "last_estimated_p11": 0.5603637709783614,
+              "last_raw_cooperative_prediction": 0.4428428189362722
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 11,
+              "greedy_cooperation_count": 2,
+              "last_estimated_p11": 0.5510770369816904,
+              "last_raw_cooperative_prediction": 0.45504142750346777
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 9,
+              "greedy_cooperation_count": 4,
+              "last_estimated_p11": 0.5603637709783614,
+              "last_raw_cooperative_prediction": 0.5466152539808731
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 11,
+              "greedy_cooperation_count": 5,
+              "last_estimated_p11": 0.5510770369816904,
+              "last_raw_cooperative_prediction": 0.5384346802718896
+            }
+          },
+          "true_p11": 0.55
+        },
+        {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": 0.0,
+          "R_minus_F_on_F_history": 0.0,
+          "R_minus_F_on_R_history": 0.0,
+          "context": 2,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 8,
+              "greedy_cooperation_count": 0,
+              "last_estimated_p11": 0.4164001480761976,
+              "last_raw_cooperative_prediction": 0.414219312167039
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 8,
+              "greedy_cooperation_count": 0,
+              "last_estimated_p11": 0.4164001480761976,
+              "last_raw_cooperative_prediction": 0.41554679406857076
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 8,
+              "greedy_cooperation_count": 0,
+              "last_estimated_p11": 0.4164001480761976,
+              "last_raw_cooperative_prediction": 0.41865177899370365
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 8,
+              "greedy_cooperation_count": 0,
+              "last_estimated_p11": 0.4164001480761976,
+              "last_raw_cooperative_prediction": 0.4186777927875681
+            }
+          },
+          "true_p11": 0.35
+        },
+        {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": 0.0,
+          "R_minus_F_on_F_history": 0.0,
+          "R_minus_F_on_R_history": 0.0,
+          "context": 3,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 9,
+              "greedy_cooperation_count": 1,
+              "last_estimated_p11": 0.3785455891601796,
+              "last_raw_cooperative_prediction": 0.35697694218891396
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 9,
+              "greedy_cooperation_count": 1,
+              "last_estimated_p11": 0.3785455891601796,
+              "last_raw_cooperative_prediction": 0.3546135054923457
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 9,
+              "greedy_cooperation_count": 1,
+              "last_estimated_p11": 0.3785455891601796,
+              "last_raw_cooperative_prediction": 0.38089160141511524
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 9,
+              "greedy_cooperation_count": 1,
+              "last_estimated_p11": 0.3785455891601796,
+              "last_raw_cooperative_prediction": 0.38086424084106746
+            }
+          },
+          "true_p11": 0.6499999999999999
+        }
+      ],
+      "seed": 95302
+    },
+    {
+      "by_endpoint": {
+        "first64": {
+          "R_history_minus_F_history_for_F": -0.0010624999999999662,
+          "R_history_minus_F_history_for_R": -0.0040000000000000036,
+          "R_minus_F_on_F_history": -0.0003750000000000142,
+          "R_minus_F_on_R_history": -0.0033125000000000515,
+          "means": {
+            "F_on_F": 0.6359375,
+            "F_on_R": 0.6348750000000001,
+            "R_on_F": 0.6355625,
+            "R_on_R": 0.6315625
+          }
+        },
+        "full": {
+          "R_history_minus_F_history_for_F": -0.002296875000000087,
+          "R_history_minus_F_history_for_R": -0.0019687499999999636,
+          "R_minus_F_on_F_history": -0.006296875000000091,
+          "R_minus_F_on_R_history": -0.005968749999999967,
+          "means": {
+            "F_on_F": 0.639515625,
+            "F_on_R": 0.63721875,
+            "R_on_F": 0.6332187499999999,
+            "R_on_R": 0.63125
+          }
+        },
+        "late64": {
+          "R_history_minus_F_history_for_F": -0.00725000000000009,
+          "R_history_minus_F_history_for_R": -0.00043749999999997957,
+          "R_minus_F_on_F_history": -0.013375000000000137,
+          "R_minus_F_on_R_history": -0.006562500000000027,
+          "means": {
+            "F_on_F": 0.6452500000000001,
+            "F_on_R": 0.638,
+            "R_on_F": 0.631875,
+            "R_on_R": 0.6314375
+          }
+        }
+      },
+      "context_rows": [
+        {
+          "R_history_minus_F_history_for_F": 0.004921874999999985,
+          "R_history_minus_F_history_for_R": -0.0007656249999999976,
+          "R_minus_F_on_F_history": -0.00010937499999999966,
+          "R_minus_F_on_R_history": -0.005796874999999983,
+          "context": 0,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 13,
+              "greedy_cooperation_count": 10,
+              "last_estimated_p11": 0.5159610859703364,
+              "last_raw_cooperative_prediction": 0.5640060840976905
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 8,
+              "greedy_cooperation_count": 55,
+              "last_estimated_p11": 0.5803839115094122,
+              "last_raw_cooperative_prediction": 0.7651079564125749
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 13,
+              "greedy_cooperation_count": 9,
+              "last_estimated_p11": 0.5159610859703364,
+              "last_raw_cooperative_prediction": 0.5121762805716097
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 8,
+              "greedy_cooperation_count": 2,
+              "last_estimated_p11": 0.5803839115094122,
+              "last_raw_cooperative_prediction": 0.5694863345226511
+            }
+          },
+          "true_p11": 0.6499999999999999
+        },
+        {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": 0.0,
+          "R_minus_F_on_F_history": 0.0,
+          "R_minus_F_on_R_history": 0.0,
+          "context": 1,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 7,
+              "greedy_cooperation_count": 0,
+              "last_estimated_p11": 0.24705057817607884,
+              "last_raw_cooperative_prediction": 0.2186545844654333
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 7,
+              "greedy_cooperation_count": 0,
+              "last_estimated_p11": 0.24705057817607884,
+              "last_raw_cooperative_prediction": 0.22526234561037256
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 7,
+              "greedy_cooperation_count": 0,
+              "last_estimated_p11": 0.24705057817607884,
+              "last_raw_cooperative_prediction": 0.2678192438249939
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 7,
+              "greedy_cooperation_count": 0,
+              "last_estimated_p11": 0.24705057817607884,
+              "last_raw_cooperative_prediction": 0.27080802336881926
+            }
+          },
+          "true_p11": 0.35
+        },
+        {
+          "R_history_minus_F_history_for_F": -0.007218750000000006,
+          "R_history_minus_F_history_for_R": -0.001203125000000001,
+          "R_minus_F_on_F_history": -0.0061875000000000055,
+          "R_minus_F_on_R_history": -0.00017187500000000015,
+          "context": 2,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 14,
+              "greedy_cooperation_count": 13,
+              "last_estimated_p11": 0.7014659502240443,
+              "last_raw_cooperative_prediction": 0.5682426314461323
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 49,
+              "greedy_cooperation_count": 55,
+              "last_estimated_p11": 0.7102638275212687,
+              "last_raw_cooperative_prediction": 0.6588382395441527
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 14,
+              "greedy_cooperation_count": 49,
+              "last_estimated_p11": 0.7014659502240443,
+              "last_raw_cooperative_prediction": 0.6754109319858798
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 49,
+              "greedy_cooperation_count": 56,
+              "last_estimated_p11": 0.7102638275212687,
+              "last_raw_cooperative_prediction": 0.6842338944882784
+            }
+          },
+          "true_p11": 0.55
+        },
+        {
+          "R_history_minus_F_history_for_F": 0.0,
+          "R_history_minus_F_history_for_R": 0.0,
+          "R_minus_F_on_F_history": 0.0,
+          "R_minus_F_on_R_history": 0.0,
+          "context": 3,
+          "panels": {
+            "F_on_F": {
+              "donor_cooperation_count": 57,
+              "greedy_cooperation_count": 62,
+              "last_estimated_p11": 0.8173466983658425,
+              "last_raw_cooperative_prediction": 0.7044917662046117
+            },
+            "F_on_R": {
+              "donor_cooperation_count": 57,
+              "greedy_cooperation_count": 62,
+              "last_estimated_p11": 0.8173466983658425,
+              "last_raw_cooperative_prediction": 0.7051951634534757
+            },
+            "R_on_F": {
+              "donor_cooperation_count": 57,
+              "greedy_cooperation_count": 62,
+              "last_estimated_p11": 0.8173466983658425,
+              "last_raw_cooperative_prediction": 0.7803015094028416
+            },
+            "R_on_R": {
+              "donor_cooperation_count": 57,
+              "greedy_cooperation_count": 62,
+              "last_estimated_p11": 0.8173466983658425,
+              "last_raw_cooperative_prediction": 0.7801668133364185
+            }
+          },
+          "true_p11": 0.8499999999999999
+        }
+      ],
+      "seed": 95303
+    }
+  ],
+  "checks": [
+    "science/input digests",
+    "complete source-state equality",
+    "donor record equality",
+    "first-target fidelity",
+    "pre-feedback counters",
+    "all SAFE/response predictions",
+    "final counts and ridge sufficient statistics/normal equations without solve",
+    "reused diagonals",
+    "both recommendation readouts",
+    "all 2x2 and context contrasts"
+  ],
+  "counts": {
+    "cooperative_observations": 600,
+    "cooperative_posterior_updates": 278,
+    "decision_observations": 1536,
+    "expiration_recomputations": 0,
+    "regression_solves": 322,
+    "regression_statistic_updates": 322,
+    "safe_posterior_updates": 936
+  },
+  "input_digests_verified": 25,
+  "launch_sha": "52cc7b71a0fd9433a1f7c093e8c77076f8732abc",
+  "process_resources": {
+    "cpu_scope": "single sequential native process, user plus system",
+    "peak_rss_kib": 39988,
+    "rss_scope": "single process high-water mark on local_linux",
+    "runner_cpu_seconds": 0.29328370200000003,
+    "runner_wall_seconds": 0.4764195109892171
+  },
+  "science_artifact_digests_verified": 32,
+  "scope": "Existing arrays and arithmetic only; no imported learner, solve, optimizer, simulator, new policy input, reward draw or evaluation rollout. Intermediate F ridge coefficients were not reconstructed.",
+  "status": "VERIFIED",
+  "three_block_means": {
+    "first64": {
+      "R_history_minus_F_history_for_F": 0.0055624999999999885,
+      "R_history_minus_F_history_for_R": 0.0009583333333333203,
+      "R_minus_F_on_F_history": 0.002270833333333333,
+      "R_minus_F_on_R_history": -0.0023333333333333353
+    },
+    "full": {
+      "R_history_minus_F_history_for_F": -2.0833333333358794e-05,
+      "R_history_minus_F_history_for_R": 0.002291666666666692,
+      "R_minus_F_on_F_history": -0.0052135416666667656,
+      "R_minus_F_on_R_history": -0.002901041666666715
+    },
+    "late64": {
+      "R_history_minus_F_history_for_F": -0.0024166666666666967,
+      "R_history_minus_F_history_for_R": -0.00014583333333332651,
+      "R_minus_F_on_F_history": -0.004458333333333379,
+      "R_minus_F_on_R_history": -0.002187500000000009
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "object": "UCOPE_GAUSSIAN_SCALE_INITIALIZATION_B06",
+  "launch_sha": "7ad9a8668d17a25724b9649dece7d5479e7d22c5",
+  "runner": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/dc29a801746a452497ce1faead7c7740/scripts/run_ucope_gaussian_scale_initialization_b06.py",
+    "present": true,
+    "bytes": 1683,
+    "sha256": "93666bf84ba541c79893c60f29e6f3905ad827abf254b1a9fbac7c5d4ff99342"
+  },
+  "study": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/dc29a801746a452497ce1faead7c7740/experiments/candidates/ucope/gaussian_scale_initialization_b06/study.py",
+    "present": true,
+    "bytes": 29494,
+    "sha256": "d3539ca0354d65cf3f1f6696338fc1bd195ea7ad7623713cb72fe0745208266d"
+  },
+  "shared_collector": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/dc29a801746a452497ce1faead7c7740/experiments/candidates/ucope/uav_motion_prefix_b01/learner.py",
+    "present": true,
+    "bytes": 14150,
+    "sha256": "466ec7b0efabdf474f838b662e781a2b7a3b5e1c1a41096b6ccf0f00eb0471f1"
+  },
+  "shared_policy": {
+    "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/dc29a801746a452497ce1faead7c7740/experiments/candidates/ucope/uav_motion_prefix_b01/policy.py",
+    "present": true,
+    "bytes": 6887,
+    "sha256": "e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614"
+  }
+}

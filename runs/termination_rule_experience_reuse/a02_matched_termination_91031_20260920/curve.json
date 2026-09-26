@@ -1,0 +1,30 @@
+[
+  {
+    "mean_J": 0.5719563802083336,
+    "nonzero_q_entries": 0,
+    "q_l2_from_initial": 0.0,
+    "train_episodes": 0,
+    "train_team_steps": 0
+  },
+  {
+    "mean_J": 0.6930175781250003,
+    "nonzero_q_entries": 360,
+    "q_l2_from_initial": 46.667387037754565,
+    "train_episodes": 32,
+    "train_team_steps": 3072
+  },
+  {
+    "mean_J": 0.7012207031250002,
+    "nonzero_q_entries": 485,
+    "q_l2_from_initial": 144.31837941760566,
+    "train_episodes": 128,
+    "train_team_steps": 12288
+  },
+  {
+    "mean_J": 0.7392415364583335,
+    "nonzero_q_entries": 666,
+    "q_l2_from_initial": 258.00238785960596,
+    "train_episodes": 512,
+    "train_team_steps": 49152
+  }
+]

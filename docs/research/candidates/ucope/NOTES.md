@@ -3595,3 +3595,3228 @@ against competent ordinary control, and its cost. That is the unresolved scienti
 not an automatically queued batch or an additional standing approval rule. The current
 scalar package stays idle, UCOPE stays exploring, and all 15 allocated fits and both Pro
 calls remain consumed with the original deadline unchanged.
+
+## 2026-09-20 12:05 UTC — owner reassignment: future FSD team-conditioned termination
+
+**Scope and ownership.** The owner now assigns this Codex session directly to the FSD-family
+question of team-conditioned skill termination and commitment reorganization. Claude continues
+to own the persistent closed-loop skill/mode foundation and its current B07. This is future
+FSD research preparation in the existing notebook, **not another UCOPE batch or result**.
+There is no new Root layer. I work in the author checkout on
+`codex/team-conditioned-termination`, based on merged source
+`5d56acf7b97a2f485538fa4ca27c1183005c3d33` (PR #28). Claude's checkout, notebook, running
+code and the shared `RESEARCH.md` are read-only for this work. The table still describes the
+previous assignment; this entry records the owner's newer division without concurrently
+rewriting that table.
+
+This authorization is reading, scientific synthesis and concrete preparation only. The
+**15 started fits and both Pro calls remain consumed**; no native evaluation, replay,
+training, new Pro request or replacement allowance is created by this topic change. The old
+deadline remains **2026-09-21 04:06:07 UTC**, and the UCOPE scheduler remains paused.
+
+### Safe closure and what the new question inherits
+
+The last UCOPE work has reached a scientific stopping point. All three B07 summaries are
+COMPLETE with exit code zero at source `088d0ca32fd50f6264904a5a0d7e01b9a5b0f6e8`;
+the original manifests and OS-exit witnesses identify the completed operations. No accepted
+UCOPE operation or observer remains outstanding. The 11:13 and 11:23 entries already contain
+the result, contrary panels, independent reconstruction, criticism and the completed
+conditional-identification/logging analysis. Those tasks are not repeated here.
+
+The resulting constraints are substantive, not a reason to delete the evidence:
+
+- Ordinary-controller preparation and deployment matter. B06's mean-mode improvement from
+  initial sigma .5 is retained for its particular construction and exposure; it is not an
+  FSD hyperparameter prescription. B07's sampled-B minus retained-mean-G differences were
+  -.07870 / -.02033 / -.01943, while mean-B minus mean-G retained two favorable panels.
+  Selection of the ordinary construction and changed trajectories limit causal attribution.
+- An input-independent renewal rate, a feedback-conditioned gate, repeated velocity commands
+  and a persistent feedback-conditioned skill label are four different interventions.
+  The scalar-copy package is left idle. Its result does not falsify adaptive termination of
+  a closed-loop skill, and no switching penalty will be added to make persistence pay.
+- Randomization can identify a local conditional END-minus-KEEP value under its fixed
+  continuation. That does not establish improvement after learning a new termination policy
+  and visiting different histories. The logged projection is not the complete legal history.
+
+Recoverable source/checkpoints, manifests, complete runs and the tested likelihood,
+forced-action and private-randomness accounting remain useful assets. The UCOPE controllers
+themselves are not an FSD skill library: their five-agent, 256-tick command-copy construction
+differs from the six-agent, 500-tick FSD host. No copy-rate sweep, noise sweep, local slope,
+observation reconstruction or rescue fit is selected.
+
+### Present skill foundation, rather than an assumed option library
+
+I read Claude's [current FSD notebook](../flexible_skill_duration/NOTES.md), including B05,
+B06 and the prospective/accepted B07 entries. The latest published notebook change at this
+read is `a5d178a3c`; its last entry is 2026-09-20 01:10 PDT. **B07 has no completed
+interpretation yet.** Its two OOM attempts count toward Claude's allocation and its remaining
+operations stay Claude's responsibility; I do not read partial scores or manage those runs.
+
+B05 repaired a real flat-actor input-scale defect and demonstrated movement/learning from
+initialization, without establishing that its final level is better than the old flat
+construction. D1280 still has a higher attained level on those reused blocks, but the old
+B01 +.29 is not a competent matched-information gap estimate. B06 shows that the coordinator
+responds to state/observations; near-uniform training skill probabilities do not establish
+randomness of deterministic argmax deployment. These facts leave useful learned skill
+semantics and useful learned termination unresolved.
+
+B07 compares retraining with D_K10 and D_K1. It changes both the local and team skill caps,
+coordinator sample pool, segment boundaries/discounting and conditioning-label cadence; the
+low-level TBPTT `config.k` remains 10. Its interpretation must be read before this draft is
+turned into an actual experiment. Those runners do not save foundation checkpoints, so a
+free frozen-skill comparison cannot be assumed.
+
+The actual interface at the source above is precise:
+
+- [R_Actor](../../../../hmasd/networks.py) applies local skill `z_i` through FiLM before its
+  GRU and computes a fresh continuous action from current feedback every tick. Team `Z`
+  conditions selection/value machinery; it is not the local actor's FiLM label. KEEP holds
+  `z_i`, not a velocity. END asks for a new draw, which may return the same label. The GRU
+  carries through either choice; [batched action selection](../../../../hmasd/agent.py)
+  resets recurrent state on episode dones, not on skill renewal.
+- `_batched_assign_skills_d2` knows held `Z`, all held `z_i`, elapsed ages and forced caps.
+  A team renewal forces every local label to be redrawn. Between team boundaries,
+  `assign_partial_batch` first teacher-forces kept labels, then autoregressively chooses the
+  resampled labels. **Replacement identities are already coordinated.** The missing proposed
+  learning object is the joint decision about which labels become replaceable.
+- The current D2 logit gap is a difference between skill-policy logits, not an END/KEEP
+  return advantage. Ages supply time until the latest forced renewal; for example
+  `min(k_max-age_i, k_Z-age_Z)`. They do not promise that a teammate will actually continue
+  that long. Under a learned optional gate, its current KEEP commits only to this tick.
+
+### The one team question selected
+
+**Does learning which subset of agents may renew within a held team-skill cycle improve
+service, compared with fully informed independent renewal and the accepted fixed clock?**
+The first conjecture is that avoidable simultaneous replacement can destroy temporarily
+substitutable service: one UAV can change its feedback mode while another maintains service,
+whereas both changing together may leave users without any serving UAV. The reverse is
+also possible: neither unilateral change resolves mutual interference, but a joint change
+does. Neither sign pattern has been established in this FSD host.
+
+The physical path is specific. In
+[Scenario1](../../../../envs/pettingzoo/scenario1.py), six UAVs serve 50 static users;
+the task has no relay queue or synthetic shared submission slot. After all UAVs move,
+[the native environment](../../../../envs/pettingzoo/uav_env.py) recomputes interference
+and assigns users by descending SINR, at most one UAV per user and ten users per UAV.
+Movement across a coverage/interference boundary can therefore change another UAV's useful
+service capacity. The team reward combines .7 coverage fraction, .3 normalized SINR quality,
+and the **existing** .1 normalized mean-altitude penalty. This is the real consequence to
+learn; there is no new skill-switch fee or invented service-absorption event.
+
+The coordinator legally receives current central positions/user positions/time and all
+current local observations. It also owns the issued labels and their ages. These connect a
+possible service overlap to which modes remain in force and which may be replaced. The
+proposal does not grant local actors central observations, provide the gate private actor
+GRU states, expose future random draws, or feed it postdecision connections/outcomes.
+Predecision channel/assignment snapshots may label analysis strata, but are not additional
+policy inputs. In particular, a learned label cannot simply be called a "serve this region"
+option: its actual behavioral effect must survive Claude's B07 reading and our observations.
+
+Why this is worth one learning comparison: the host supplies an actual nonadditive service
+consequence, the coordinator already has the relevant lawful team context, and optional
+renewal can be inserted without replacing the skill object. The strongest simpler account
+is equally live: closed-loop actors and the existing joint label selector already resolve
+the interaction, while a fixed/age clock supplies all useful persistence. That account can
+win; there is no obligation to build a more complicated gate.
+
+### Narrow historical constraints on this judgment
+
+The read-only Scouts mapped the assigned questions; I retain their adverse evidence and
+decline to turn their missing factorial controls into a mandatory prerequisite experiment.
+
+| Evidence read | Consequence for this proposal |
+| --- | --- |
+| [VSP-03 B02 shared-slot law](../vsp_03/VSP03_B02_SCIENCE_CARD_20260907.md), B02/B03/B04 outcomes, and [B07 result](../vsp_03/VSP03_B07_RESULT_EVIDENCE_20260910.md) | A submission at t=26 locks a shared slot through t=34 and removes partner opportunities at t=28/32. That is real team coupling in the old two-agent host, not proof of beneficial waiting or of the FSD conjecture. Learned-versus-rule outcomes and execution-mode effects were mixed; B07's positive endpoint also had negative 128-to-512 continuation. No paired joint-END sign reversal was tested. |
+| [CRTO RAW pilot](../commitment_residual_triggered_options/CRTO_RAW_PILOT_EVIDENCE_20260831.md) and [K8 census](../commitment_residual_triggered_options/CRTO_K8_FIRST_BOUNDARY_SUPPORT_CENSUS_RESULT_20260831.md) | Old four-agent queue/relay dynamics and a legal commitment summary make the question meaningful, but these specific executed probes stopped before learner evidence: the census had KEEP 0 / MIDDLE 353 / REPLAN 159 under its material threshold. A possible host-level branch is not demonstrated support on the generated decision distribution. Do not import its renewal charge or queues into Scenario1. |
+| [VSP-C1 B01](../vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B01_RESULT_EVIDENCE_20260908.md) and [B13](../vsp_c1/VSPC1_NATIVE_HOLD_VALUE_B13_RESULT_EVIDENCE_20260909.md) | The favorable single-pair value-gate result was followed by an adverse native GATED-V minus MLP-V result of -.03207. These opening-command-hold/critic interventions neither test FSD termination nor license substituting value accuracy for policy benefit. |
+| [SCDMP native mapping](../semigroup_consistent_duration_model_policy/SCDMP_NATIVE_RETURN_COMPOSITION_P56_SOURCE_INTAKE_20260908.md) and [opportunity-law analysis](../semigroup_consistent_duration_model_policy/SCDMP_OPPORTUNITY_LAW_CONVERGENCE_RESULT_INTAKE_20260830.md) | Coupling values across a real release boundary changes credit/optimization, not directly the termination policy. An unbiased value for a finite selector's chosen action is not oracle opportunity or learned-policy improvement. The old graph host's absorbing holds are not a property of Scenario1. |
+| [Temporal-alignment note at 646ab539](https://github.com/CartmanFatass/My-paper-code/blob/646ab539d2a2ef689d0e4ee977f327f79cf2215b/docs/research/designs/TEMPORAL_BEHAVIOR_STATE_ALIGNMENT_20260919.md) | Training exposure and fixed-weight deployment are different estimands; persistent skill labels differ from copied commands. A local advantage or calendar-exchange identity cannot be summed into a changed-policy return claim, and conditional joint likelihoods must match execution. No new toy/prototype run is needed before preparing the native learning comparison. |
+
+### Selected learning comparison, conditional on the foundation update
+
+The provisional foundation is Claude's accepted D_K10 construction: `k_max=k_Z=10`,
+unchanged local actors, six labels per level, intrinsic low-level learning objective,
+physical host and existing reward. Team `Z` keeps its fixed clock. The study concerns
+**optional local interruptions within that cycle**; it cannot prevent mandatory all-agent
+renewal at the team boundary and makes no claim about fully flexible team-Z duration.
+
+| Arm | Optional termination rule | Common object and rights |
+| --- | --- | --- |
+| **J: joint learned renewal** | A central actor samples a six-bit END mask autoregressively in fixed agent-ID order. Each bit sees the same predecision context plus previously chosen bits in this mask. It can choose none, one, several or all. | Current central state/all observations, held Z/z and all ages/caps; the unchanged partial label selector receives the resulting mask. |
+| **I: fully informed independent renewal** | Six conditionally independent Bernoulli bits, each seeing the full same team context and agent identities, with the same encoder/head capacity, critic, initialization, objective and tuning rights. No within-mask sampled prefix. | The same information, caps, available masks and already-autoregressive replacement-label selector as J. It can learn state/age-dependent deterministic coordination. |
+| **F: accepted fixed clock** | No optional early renewal; retain the accepted fixed/age rule after Claude's B07 reading, provisionally D_K10. | Same skill construction, low-level information/reward and learning horizon. No deliberately weakened local-information or unscaled-flat baseline. |
+
+J versus I asks about a finite-learning advantage of coordinating stochastic renewal
+choices, **not** new external information or a larger set of deterministic optimal masks.
+I can represent any deterministic joint mask given the central context and identities.
+It is the strongest simpler learned reference chosen here, and F is the practical reference.
+Existing replacement-label autoregression might make J redundant. No "at most one END"
+constraint, forced change to a different label, hand-labelled skill semantics or extra
+reward is introduced to manufacture its advantage.
+
+Both learned gates start from the same product-Bernoulli law and use the same full-mask
+PPO likelihood/clipping and a predecision team-value baseline. Native-return credit must
+include **KEEP as well as END** at every optional decision. Forced bits have probability
+one and no learned gate term. Record the actual mask order/prefix for teacher-forced
+replay; the existing D2 boundary-only label sampler is not a termination learner by itself.
+The gate has its own actor/value parameters and optimizer; its gradients do not silently
+change the foundation's shared encoder or its low-level objective. No learned counterfactual
+Q-search or enumeration of native successor trajectories is proposed.
+
+Within a seed block, copy common initial parameters before gate construction, give J/I
+matching gate initialization, and use paired reset worlds with separately addressed policy
+randomness. All three arms retrain the same skill construction; their learned skill weights
+can co-adapt differently. Renewal frequencies change visited histories, label-segment
+populations and possibly optimizer exposure. Equal hyperparameters do not erase those
+differences. Before implementation, pin the coordinator sampling/update budget with Claude;
+retain its fifteen optimizer calls per rollout if compatible, rather than silently taking
+extra updates as the decision pool grows. Actual sampled rows/valid label terms and compute
+must still be reported. A J gain is initially a learning-package result, not isolated
+termination causality on a shared frozen skill library.
+
+### Predictions, smallest proposed cost, and losing outcomes
+
+Primary outcome: final-checkpoint **J minus I** on complete native team return; a practical
+retention decision also requires **J minus F** to be favorable. Provisionally use 45
+rollouts, 16 training lanes and 500 ticks, then one deterministic final panel of 32 fresh
+worlds per fit. Both gate and replacement-label execution modes are fixed in advance;
+no sampled/mean or checkpoint selection after results. This final-only endpoint is a new
+prospective choice, not the historical B07 late-window endpoint.
+
+The concrete exploratory proposal is **three arms times two fresh training seeds = six
+new fits**, not nine. It would use 2,160,000 training team steps and 96,000 final evaluation
+team steps (192 evaluation episodes), totaling **2,256,000 native team steps**. Two seeds
+support an exploratory investment judgment only; they do not meet the constitution's
+three-seed minimum for an empirical learning claim. No automatic third seed, tuning fit,
+failure refund, mode panel or confirmation batch is attached. The 32 worlds measure
+conditional evaluation uncertainty, not 32 independent learned policies.
+
+For a discriminating intermediate prediction, declare a service-overlap proxy before the
+run: among UAVs each currently serving users, select the pair most often appearing as a
+user's serving link and strongest other eligible link; break ties by fixed IDs, and report
+the frequency of histories with no such pair. This uses the **predecision** snapshot only,
+as an analysis label. On optional histories so labelled, predict that J tends to negatively
+correlate the two END bits at the same full gate input:
+
+`C_ij(X) = P_J(END_i, END_j | X) - P_J(END_i | X) P_J(END_j | X) < 0`.
+
+I has zero conditional excess by construction; pooling different states is not this test.
+Thus merely lowering both marginal END rates does not satisfy the prediction. Inspect at
+most 64 outcome-blind sampled optional states per learned fit from the last training
+rollout, retaining their contemporaneous gate parameters. With six bits, exact joint
+probabilities cost at most 64 masks per state: at most 16,384 complete-mask likelihood
+evaluations across four learned fits, with no cloned environment or new native step.
+This analysis is part of the future cost proposal, not executed under today's reading grant.
+
+The corresponding task prediction is fewer previously served users becoming **unserved
+by the whole team** on the next tick, on every predeclared opportunity history, together
+with improved final native J. Count requested ENDs and actual label changes separately;
+report forced boundaries, all reward components, and how behavior differs by age/time to
+the team cap. A gain due only to altitude cost does not support the service-continuity
+story. This stochastic-dependence prediction primarily concerns training; deterministic
+deployment and subsequent co-adaptation are different laws. Different visited histories
+also prevent treating these observations as causal mediation or identifying the native
+four-cell END/KEEP interaction.
+
+The opposite interaction remains admissible: J can put positive mass on joint changes
+when they are complementary. If J improves return without the predicted negative dependence
+and service pattern, keep a bounded package observation and weaken this particular
+anti-coincidence explanation. If it only improves a local predictor/behavior statistic,
+or beats I while losing to F, do not retain it for task performance. If the simpler rule
+is as useful at this resolution, its lower complexity is a legitimate final choice;
+two noisy seeds do not prove equivalence. A null or adverse result does not justify adding
+a switching fee, new reward or a post hoc longer cap.
+
+The independent ResearchCritic supports this six-fit exploratory design with
+**MATERIAL_DISSENT: no**. I adopt its strongest objection: even J minus I cannot identify
+beneficial service coupling by itself, because marginal hazards, stochastic exploration,
+entropy geometry and skill co-adaptation remain alternatives. I also adopt the conditional
+co-renewal prediction in place of an uninformative aggregate "fewer simultaneous ENDs"
+claim. A native factorial branch audit is not made a compulsory stage.
+
+### What must be supplied or agreed with Claude next
+
+After Claude publishes B07's completed interpretation, read and cite that update before
+fixing an actual experiment. The necessary common interface is concrete:
+
+1. Pin the accepted foundation construction/source: what B07 supports about held labels,
+   behavior and native return; the accepted local/team caps; actor/critic/discriminator
+   objectives, normalization, initialization, update and deterministic execution settings.
+   No assumption of saved B07 checkpoints or semantically stable label IDs across fits.
+2. Confirm the predecision hook: current state/all observations, held Z/z, elapsed ages,
+   reset/cap masks, and its output to `assign_partial_batch`. Fix forced-team precedence,
+   same-label redraw semantics, GRU carry, segment close/bootstrap rules and legal info.
+3. Agree the gate's separate credit buffer and the foundation's sampler/update exposure.
+   Optional KEEP must be trained; gate likelihood must not be confused with replacement
+   label likelihood. Fix gate initialization/entropy and update batches equally for J/I,
+   without a tuning search. Keep bounded minibatches: B07's full 8,000-row attention pool
+   caused real OOMs, so identical nominal update counts are not a memory-safety argument.
+4. Agree source ownership and compute availability after Claude's accepted operations are
+   accounted for. Future implementation belongs on this separate branch/isolated experiment
+   path with reviewed hooks, not an edit to Claude's live runner or notebook.
+
+If B07 weakens the case for useful held modes, revise or abandon this within-cycle proposal;
+do not silently manufacture a new skill object or a longer commitment to preserve it.
+If its result supports an age/fixed clock as the useful choice, that remains a permissible
+outcome. B07's retraining result alone still does not identify a fixed-weight termination
+effect.
+
+Only after that revision and a concrete implementation plan is an execution increment
+decision-ready. The present estimate would require **six additional started fits (15 to
+21 total under the carried budget), the explicitly counted evaluation and likelihood
+analysis above, and zero new Pro calls**. It grants none of them. Actual gate/selector
+optimizer work and wall/memory estimates remain to be fixed with the shared interface;
+UCOPE's small-fit timings are not an estimate for this host. The original deadline is
+not extended; if the agreed work cannot fit, a time increment must be explicit as well.
+For now the next action is the B07-informed revision, not a launch or a routine-step
+approval request. No empirical result was produced in this preparation.
+
+## 2026-09-20 12:50 UTC — B07-informed revision: establish an actionable skill before learning team termination
+
+**Current decision.** Withdraw the priority of the previous all-arms-retrained J / I / F
+proposal. B07 makes behavioural content of the held label a live doubt, and Claude's B08
+is the selected observation that can change that judgment. No termination fit, native
+evaluation, checkpoint forward pass, Pro call or code change is performed here. This is
+future FSD termination research in my existing notebook, not a reopened UCOPE experiment.
+Claude owns B08, its runner, notebook, outputs and acceptance; I own this conditional
+termination design. The owner explicitly requested this reading and preparation only.
+
+### Fixed sources read and governance adopted
+
+I read the repository texts, not the owner's abbreviated account:
+
+- [B07 read and next judgment, 05:30 / 05:35 PDT](https://github.com/CartmanFatass/My-paper-code/blob/409f78de469521fa91d11fe75d9ac77ded413522/docs/research/candidates/flexible_skill_duration/NOTES.md).
+- [The FSD row in RESEARCH](https://github.com/CartmanFatass/My-paper-code/blob/468f3c7208013d6aa909d9d2fa4e7bf6f0f9d8b7/docs/research/RESEARCH.md).
+- [B08 prospective entry, 05:45 PDT](https://github.com/CartmanFatass/My-paper-code/blob/4c41378ed8552890983e7568ff93ed2cf168ee0f/docs/research/candidates/flexible_skill_duration/NOTES.md).
+- [Owner-amended constitution, especially section 3](https://github.com/CartmanFatass/My-paper-code/blob/c827d2ebc99d39ca43a13b3a594ad6b7c5dc7163/docs/project/OPERATING_CONSTITUTION.md).
+
+All four commits are in published main, whose tip at this read is `c827d2ebc`. The relevant
+actor, partial-assignment and host source files are unchanged between my draft's base
+`5d56acf7b` and that main tip. I also reread the actual predecision/partial-decoder path;
+no model was loaded to do so.
+
+**Section 3 is adopted now.** There is no fit allowance, consumed/remaining balance, refund
+or reset. The earlier phrases "15 ... consumed", "15 to 21" and "execution increment"
+in the 12:05 draft are superseded, not current requirements. Fifteen UCOPE attempts and
+two completed Pro consultations remain historical execution facts. Any stale allowance
+wording in skills, the shared table or B08's original entry does not override the amended
+constitution. I preserve the dated notebook entries rather than rewrite their history;
+I do not edit the shared table or Claude's records.
+
+Future work states its planned arms, horizon, seeds, fit count, native exposure and reason
+before execution, reports actual node/wall time and technical failures, and does not enlarge
+a batch after seeing its scores. A further batch needs a new scientific reason and
+prospective entry. Confirmation still requires 3–5 fresh independent training seeds per
+arm and its fixed claim note. These are reading protections, not an entitlement to run.
+Today's explicit no-fit instruction stands. The old execution window is not silently
+extended or used to schedule this proposal; there is no accepted termination batch.
+
+### What B07 changes, and what it does not
+
+The batch is closed at **four started attempts: two completions and two technical OOM
+failures without scores**. The two proposed retries were withdrawn. No accepted B07
+operation is inherited by me, and there is no completion exercise left to perform.
+`D_K10@772803` reproduces all nine recorded D1280 panels bit for bit. Only block 773003
+compares new K1 with a recorded, same-construction D1280 J: late-window .4565 versus .4517;
+the final panel instead is .464 versus .499. I retain both rather than select an endpoint.
+The new K10 and K1 behaviour captures are on different blocks, so they are descriptive.
+
+Training label changes rise from .082 to .833 per agent-step, but captured paths, cells,
+near-white executed-action autocorrelations and low-level learning do not show the predicted
+persistence advantage. All four prespecified predictions failed in the evidence available.
+This weakens the persistent-mode explanation and the case for immediately paying for three
+termination recipes. One J block and unpaired behaviour do not establish equivalence, an
+inert label, or a general failure of adaptive termination. Fixed-input action-mean effects
+and fixed-weight execution interventions were not measured by B07.
+
+Deployment changes the interpretation further: K1 argmax changes an agent label on only
+.028 of steps, although it may reselect every step. K10 changes it on roughly 10–15% of
+decision points (about .015 of primitive steps in the reported last panel). A decision,
+a new label draw, and a different executed label are distinct events. I will read a learned
+gate's sampled training law separately from its deterministic deployed masks and actual
+label changes; a change in a training hazard is not proof of a deployment intervention.
+
+B07 also supplies a concrete engineering limit: the K1 full-pool minibatch reached 14.1 GB
+RSS and killed two attempts. Any later gate uses bounded minibatches. Equal numbers of
+optimizer calls do not establish equal memory demand. The accepted foundation remains
+D_K10 / recorded D1280: local/team caps 10, `config.k=10`, six labels per level,
+coordinator batch 1280, original reward/objectives, deterministic evaluation. I do not
+change these to rescue the termination idea.
+
+### Two outcomes of B08 and the resulting research choice
+
+**If the label is practically inert on B08's tested support:** do not run the current
+within-cycle J / I / F comparison. The expected three-way null would confound an ineffective
+termination rule with an ineffective object. Small mean spread and small frozen/random J
+differences support this investment decision; their point thresholds are not an equivalence
+proof or a statement about every unvisited history. A small one-step effect also need not
+exclude a later GRU effect, which is why B08's trajectory interventions matter.
+
+The termination question should then target **a continuing, closed-loop service
+responsibility**, implemented by a behaviourally effective skill: for example, a mode
+conditioned on an assigned, legally observable user group or service region. KEEP would
+retain that service intent while computing fresh feedback actions; END would release it
+for reassignment while teammates' current intents remain relevant. One UAV can relinquish
+an overlapping responsibility while another still covers users; simultaneous relinquishing
+could lose service. Conversely, a coordinated reassignment might resolve interference
+that neither isolated reassignment resolves. Those are hypotheses about the existing
+coverage/SINR/capacity reward, not a new switching cost or a guaranteed handover mechanism.
+
+This is my preferred *object requirement to discuss with Claude*, not an assertion that
+the current six labels already implement user-group skills, and not permission for me to
+build them. Claude still selects and validates how a meaningful mode is learned. Scenario1
+currently has a greedy serving assignment, not an explicit service contract; that assignment
+alone is a diagnostic consequence, not a policy variable I can pretend to terminate.
+I will not substitute repeated velocities, reset the GRU at END, prolong the cap, or relabel
+an inert token as a commitment. If no accepted closed-loop object gives this question a
+concrete intervention, leave termination implementation idle. A future useful object is a
+new recorded reason to reopen it, not an automatic rescue batch or a takeover of Claude's
+intrinsic-learning work.
+
+**If B08 establishes behavioural content and task sensitivity:** use all three accepted
+checkpoints as the foundation, subject to its bit-exact rerun/load acceptance. Random-label
+loss of .05 J or mean spread comparable to action noise is evidence that the label can
+matter. It does not by itself show that local early renewal within a held team cycle can
+access a useful change. Before choosing the learning batch, read the accessible-END and
+phase measurements proposed below. If useful variation appears only when changing team Z
+or at mandatory boundaries, this local-mask study still lacks its intended intervention;
+keep the fixed rule and revise the question explicitly rather than quietly free the team
+clock.
+
+I adopt B08 as a foundation test but **do not adopt its frozen/random J differences as an
+upper bound on termination gains**. Uniform replacement changes label quality as well as
+timing; B08 changes team and local labels together; freezing changes the whole episode.
+These are informative fixed-weight stress tests, not a maximization over legal termination
+policies. A large random-label loss may show that the selector matters while F is already
+adequate. A small average loss does not logically exclude rare, useful local changes.
+Mean effects without a native J effect would lower the priority of this comparison; I
+would not claim task-value equivalence or manufacture a switch penalty to make it valuable.
+
+### Revised first learning comparison if that foundation survives
+
+Choose a **frozen-foundation termination-learning comparison**, replacing the draft's
+immediate full co-adaptation test. The saved B08 weights make this possible without fitting
+a skill library again. Freeze low-level actors/critics, coordinator, discriminators and
+normalization state; carry recurrent state normally as feedback arrives. Only the new
+termination actor and its separate native-return critic learn. Learning a gate is a fit;
+executing a frozen foundation is not new foundation learning.
+
+| Arm | What changes inside a team cycle | What is shared |
+| --- | --- | --- |
+| J | Learn the autoregressive joint END mask in fixed agent-ID order. | One accepted B08 checkpoint per block; full same legal central context, held Z/z and ages; original partial label selector and mandatory clocks. |
+| I | Learn conditionally independent END bits with the same complete context, identities, capacity, initialization, native objective and update exposure. | The same frozen checkpoint and selector, and the same available masks; independent bits can still learn any deterministic coordinated mask. |
+| F | No optional END; use the accepted fixed caps of 10. No gate fit is required. | The same checkpoint and the same fresh final worlds; this remains the practical reference. |
+
+The team label still renews at its fixed boundary; an optional local END may select the
+same label and never resets the actor GRU. J and I have identical full-mask PPO likelihood,
+clipping and KEEP/END credit at every optional decision; forced choices have no gate actor
+term. Common initial gate laws and private random streams remain required. Their training
+uses the same sampled frozen foundation law, and final evaluation fixes deterministic
+gate, selector and primitive-action execution in advance. Sampled-law diagnostics and
+deterministic task performance are separate readings, not selectable reporting modes.
+
+The resulting claim would be conditional: **can termination learning improve use of these
+already learned skills?** It would not establish that joint skill/termination training is
+better, or how Claude's skill learner benefits. It removes skill co-adaptation as an
+explanation of J minus I, but not differences in exploration, visited states or gate
+optimization. I already has all team information; J's extra sampled-prefix conditioning
+is not an informational or deterministic expressivity advantage.
+
+An additional source-level limitation is explicit. `assign_partial_batch` puts kept agents
+before resampled agents, with decode-position encodings. The fixed-clock foundation trained
+on full renewal need not be calibrated on these partial orders. Its operational distribution
+is **not** a Bayes conditional of the original canonical full-mask distribution. Both J/I
+use exactly that existing interface; no decoder rewrite is hidden here. Gains could involve
+which decoder order a mask exposes, not timing alone. The measurements below make this
+accessible intervention visible without claiming to solve the distribution shift.
+
+Keep the previous task prediction, with the corrected proxy below: on prespecified
+currently-serving/competing-link histories, J
+should show negative conditional excess of joint ENDs at a fixed input, fewer previously
+served users becoming unserved by the whole team, and better native J. Positive dependence
+is also allowed where changes are complementary. Aggregate END correlations, lower marginal
+END rates or an altitude-only reward gain do not establish the service mechanism. J minus I
+is primary, and J minus F must also support practical retention. A behaviour-only gain does
+not suffice; the fixed/age rule may be the final choice. None of B07/B08 identifies the
+four-cell native END/KEEP interaction or proves that this sign pattern exists.
+
+**Planned cost and reason, not an allowance.** Provisionally one fresh gate-training seed
+on each of the three accepted B08 foundation blocks for each of J/I: **six gate fits**,
+plus zero-fit F evaluation. The reason for six is to retain three different learned
+foundations and the strongest learned/simple references without retraining the skill
+library or fitting a dummy F gate. This supersedes the old six-fit allocation of three jointly
+trained arms times two seeds. Do not select only the best B08 checkpoint. If a foundation
+is not accepted, write a revised plan rather than silently remove its block.
+
+At 45 rollouts × 16 lanes × 500 ticks, six gate fits cost 2,160,000 training team steps.
+One final deterministic panel of 32 fresh worlds × 500 ticks for all three rules on each
+of three foundations costs 144,000 evaluation team steps (288 episodes), giving a planned
+**2,304,000 native team steps**. F's evaluation is counted even though it has no gate fit.
+The three B08 fits are Claude's already declared work, not hidden extra fits in my proposal.
+Conditional-mask analysis of at most 64 stored training states per gate fit and 64 masks
+per state would add at most 24,576 complete-mask likelihood evaluations, no native branch.
+Model inference is work, not free merely because its fit count is zero.
+
+This would remain exploration on reused development foundations, not a confirmation batch.
+Fresh gate RNG seeds are not fresh independent skill-library training seeds, and 32 worlds
+are not 32 learned policies. One J/I gate-seed pair on each foundation yields three paired
+outcomes but cannot separate foundation variation from gate-training variation. Exact new
+gate/reset/evaluation seeds, implementation source,
+optimizer/minibatch counts, node and wall-time estimate must be fixed in its prospective
+launch entry after B08; none is being launched from this conditional design. There is no
+automatic tuning, additional seed, retry or follow-up batch. Actual failures and resource
+cost are reported under the revised constitution, without balance arithmetic.
+
+### Requested B08 measurement before its probe scores: actionable END, stratified by phase
+
+The lowest-cost missing link is **the behaviour reachable through the actual optional-END
+interface while team Z stays held**. Six arbitrary local labels can have a large mean
+spread while the deployed partial selector almost always returns the current label.
+Conversely, two ENDs can expose different decoder choices from either unilateral END.
+Neither case is answered by changing team/local labels uniformly together for a whole panel.
+
+I request the following bounded addition for Claude to accept, modify or decline *before
+seeing probe scores*. It belongs to his B08 probe, not a second experiment run by me.
+
+1. From the already planned as-trained rollout-45 panel, retain at most **64 team decision
+   histories per foundation**, chosen by a fixed outcome-blind rule over world ID/tick,
+   excluding reset, done and forced team boundaries. Retain current state/observations,
+   actor input hidden states and masks, held Z/z, **predecision** ages, normalizer identity,
+   and existing predecision serving/SINR/capacity information for analysis. No future outcome
+   selects these states. Use `a_i` and `a_Z` before resetting/incrementing; `_d2_last_step`
+   contains execution ages and is not interchangeable with that snapshot.
+2. Reuse B08's six-label actor means at exactly those inputs. Hold Z and other labels fixed
+   and score the actual kept-first partial decoder for each single-agent END mask. Record
+   its greedy replacement, `1-q_i(held z_i)`, and the categorical-law weighted squared
+   action-mean change from KEEP, normalized per dimension by the policy variance. Here
+   `q_i` is the actual single-END decoder law, not the teacher-forced canonical held-label
+   logits. Report the deterministic END-versus-KEEP change separately, including native
+   action conversion/clipping and absolute action units. A small mean/noise ratio in
+   sampled training can still matter when deployment executes the mean without that noise.
+   This scores probabilities; it does not draw Monte Carlo labels or execute successors.
+3. On each saved state, choose at most one pair by this precise predecision rule. For every
+   currently served user, take its serving UAV and the highest-SINR other UAV among those
+   also currently serving at least one user (ID ties). The competitor is allowed to be
+   below the service threshold. Count unordered serving/competitor pair occurrences, pick
+   the largest positive count with ID tie-breaking, otherwise report no pair. Retain both
+   SINRs and UAV service loads; do not call the competitor a currently feasible backup.
+   Also query the **pair-END** greedy mask. KEEP, each singleton and the
+   pair then expose reachable labels and action means under the same held Z/input history.
+   Reuse the singleton results; do not enumerate every subset or all pair labels. These
+   four fixed-input descriptions are not four native Q values and cannot establish that
+   unilateral ENDs help but joint END hurts, or the reverse.
+4. Report spread, accessible change, same-label reselection and pair counts by time to the
+   forced team cap, `10-a_Z`: **1, 2–4, 5–9 ticks**, with counts and per-foundation values.
+   Record `min(10-a_i, 10-a_Z)` too; it is the latest forced-renewal distance, not a promise
+   that another agent will KEEP. In baseline D_K10 the local/team clocks are synchronized:
+   local age and time to team cap are collinear. These strata can locate effects within a
+   cycle but cannot identify a distinct causal effect of another agent's remaining time.
+   Keep serving/nonserving and selected-pair/no-pair counts; do not hunt for favorable subgroups
+   after observing probe values.
+
+The ResearchCritic identified a material ambiguity in my earlier "other eligible link"
+proxy, which this entry corrects. Scenario1 uses full co-channel interference and a 0 dB
+service threshold: two links to one user cannot both pass it, since each would need received
+power at least the other's plus positive noise and the remaining interference. Requiring a
+second currently service-eligible link would make the proposed pair set structurally empty.
+The corrected competitor proxy above marks possible interference/service reallocation, not
+two simultaneous eligible servers or demonstrated substitutability. This is a source-level
+correction before a run, not a new native observation.
+
+This adds **no fit, optimizer step or native trajectory** if captured in the existing
+faithful-load/as-trained panel and scored offline on frozen copies. At most 3 × 64 × 6 =
+1,152 single-END partial-decoder queries and 3 × 64 = 192 pair-END queries are proposed;
+each complete partial query has six agent-token decoding positions. Their logits supply
+both the greedy and single-END categorical readings, without extra sampling. At most
+3 × 64 × 6 agents × 6 labels = 6,912 agent-level actor evaluations are the existing
+label-mean work on this subset, not a new environment rollout. Retain next-GRU-state
+differences from those same forwards as a warning against calling a zero immediate action
+difference a zero recurrent effect; they are not a surrogate task reward. Wall time is
+unmeasured, not zero; bounded offline batches must preserve B08's live RNG and normalizers.
+
+These measurements address actionability and decision-phase support at fixed histories.
+They do not provide a learned END-minus-KEEP value, characterize the new gate's visited
+histories, or establish native joint-action interaction. The saved histories come from
+deterministic deployment; applying categorical selector probabilities there describes a
+different action law on those histories, not observed stochastic-training occupancy.
+Six singleton masks and one greedy pair do not cover all joint masks or stochastic pair
+replacements. Small effects can justify declining investment on this support, not rule
+out every actionable mask. Conversely, every accessible change could still be worse than
+KEEP; pair-dependent labels could come entirely from decoder ordering rather than useful
+native team coupling. No exhaustive successor probe is required to resolve all of this.
+If the necessary states are not captured during an already planned panel, obtaining them
+through another replay is additional native exposure and must be declared before it is
+run; it cannot be described as zero native cost merely because no fitting occurs.
+This is a small pre-score request, not a mandatory diagnostic ladder or a demand for new
+counterfactual environment branches.
+
+The independent ResearchCritic read this revision and returned **MATERIAL_DISSENT: no**.
+I adopt its pair-proxy correction, the limited-mask/occupancy qualification, the distinction
+between accessible and useful END, and its qualification of the three paired outcomes.
+
+### Interface and next responsibility
+
+The common surface stays the predecision END-mask hook in `_batched_assign_skills_d2`
+before `assign_partial_batch`. Any implementation is later on my branch, behind a switch
+whose disabled path is bit-identical, with independent Reviewer review. Forced team
+precedence, legal context, partial-decoder order, same-label draws and GRU carry are held
+fixed. B08 must supply accepted checkpoint/config/normalizer identities and faithful-load
+results; its runner and acceptance remain Claude's. The extra probe request above may be
+implemented only by Claude on his side if adopted. I do not modify his notebook, code,
+runs or shared index, and I do not send a message to an external service on his behalf.
+
+The scientific reason to wait for B08 execution is now specific: does a legal local END
+have a behaviourally effective object to reorganize before the next team boundary? Design
+and reading can continue, but the current owner instruction launches nothing. UCOPE's
+negative scalar-copy results, contrary panels and local-versus-policy-value distinctions
+remain inherited. No new empirical result is claimed by this revision.
+
+
+## 2026-09-20 13:35 UTC — future FSD termination: L0 for isolated implementation before B08
+
+The owner relayed Claude's recommendation to implement the hook and J/I learners now,
+while the six proposed scientific gate fits still depend on B08. I proceed with that
+engineering preparation on `codex/team-conditioned-termination`. This is future FSD
+termination work, not another UCOPE experiment. The revised constitution section 3
+continues to apply: planned cost with reasons, no allowance/balance/reset arithmetic.
+
+Read Claude's published `eaa1401c9` notebook: the three B08 operations are already
+accepted and remain his responsibility; he adopted the accessible-END probe with an
+explicit read-only pair fallback and withdrew the claimed upper bound. No B08 probe
+result is available to this implementation. I merged published main into this own
+checkout to use its current interfaces; no Claude checkout, notebook, runner, runs,
+shared index or operation is edited or taken over.
+
+**Deliverable and ownership.** One opt-in predecision local END-mask callback in
+`hmasd/agent.py`; independent J/I mask policies, their native-return critics and bounded
+PPO updates in `experiments/candidates/team_conditioned_termination/`; focused tests
+mirrored under `tests/`. The DM owns the hook, frozen-foundation adapter/collector,
+integration checks and this notebook. A Sol/high Implementer may own only the mask
+policy/PPO module and its unit tests in a separate checkout. Independent read-only
+Reviewer examines the combined executable change. No result launch entry is created yet.
+
+**Hook contract.** Explicit installation only on D2 with both interruption costs infinite.
+Disabled means the existing path, RNG, outputs and checkpoint format remain unchanged.
+Before partial assignment, expose copied predecision states/observations, held Z/z,
+local/team ages, reset flags, mandatory END bits and eligible bits. A callback returns a
+boolean optional-END mask of the exact batch/agent shape; reject bits outside eligibility.
+Reset/invalid/team-cap forces all agents and team renewal; local cap remains mandatory.
+The callback cannot cancel a forced event or alter the team clock. Original kept-first
+partial-decoder order, same-label reselection, fresh low-level feedback, GRU carry and
+native reward are preserved. Optional END gets its own diagnostic cause, not a gap label.
+
+**Learner contract.** J and I share architecture, dimensions, initialization, full legal
+context and per-agent IDs. J additionally consumes the realized canonical-order prefix;
+I zeros that input. A zero-initialized logit head gives the same initial independent
+END probability (0.1, a technical default subject to a prospective scientific plan).
+Use a private torch generator for sampling/shuffling; never silently reseed global
+foundation RNG. Sum log probabilities across eligible bits for one team action; KEEP
+and END both receive credit, forced bits receive no actor term, and a forced bit's
+executed value may condition subsequent J bits. The critic has context only, no sampled
+mask or future information. Teacher-forced replay uses the stored whole mask. PPO clips
+one full-mask ratio; bounded minibatches keep tails and visit each planned sample once
+per epoch. Advantages normalize once over optional decision rows, not separately per
+minibatch. Critic targets span forced ticks too. No intrinsic reward, switching penalty,
+per-bit advantage or foundation update. Entropy coefficient defaults to zero; any
+conditional-entropy diagnostic is not claimed to be exact entropy under changed prefixes.
+
+The adapter freezes foundation parameters and normalization state, preserves recurrent
+state evolution, and does not call foundation optimizers or populate its training buffer.
+It encodes central geometry with explicit fixed task scales, observations, held labels,
+ages and reset/forced masks equally for J/I; no raw-metre saturation or hidden future
+service information. Training samples the frozen foundation law; evaluation uses greedy
+gate/selector/actions without learning. Native finite episodes have zero terminal
+bootstrap, including the host's finite time limit; a generic GAE utility must distinguish
+an actual terminal from continuation truncation and stop traces at either boundary.
+
+**Checks and planned technical exposure.** Algebraic distribution/replay/forced-bit,
+KEEP credit, bootstrap, minibatch tail and RNG-isolation checks; disabled-hook identity
+against the existing D2 route plus the frozen off fingerprint; reset/team/local-cap,
+partial-order and same-label/GRU tests; then a small real Scenario1 smoke using its own
+small foundation, never B08 checkpoints. Plan one foundation construction/training
+fixture (seed 920611, two lanes, 20 ticks, at most two rollouts) and one gate-update smoke
+per J/I (seeds 920621/920622, two lanes, 20 ticks, two rollouts); deterministic reload/
+execution checks use only this test fixture. These are correctness fixtures on local CPU,
+not native research evaluation or evidence of learning benefit. Report actual optimizer
+and transition counts and wall time in the acceptance entry; failures motivate targeted
+repairs, not scientific seed expansion. No scientific gate fit, B08 probe, Pro call or
+node launch is authorized or performed here. All scratch belongs to pytest under temp/.
+
+**Stop and next science.** Finish reviewable implementation and scaled-host checks without
+waiting for scores. Once B08 is published, read its actual acceptance and measurements:
+inert labels end this comparison; service-responsibility skills remain a design request
+for Claude, not an object I construct. Content plus useful accessible variation permits
+writing a concrete prospective J/I/F launch entry, not an automatic launch from this L0.
+
+
+## 2026-09-20 13:51 UTC — future FSD termination implementation accepted; scientific comparison still conditional
+
+**Engineering accepted by this DM.** Executable source is `dac80c84a`, consisting of
+`63631c198` (J/I policy and PPO), `cb25c67a0` (hook, frozen adapter and native checks),
+and `dac80c84a` (numerical/RNG guards), against the L0 at `56b203dfc`. This is preparation
+for the same conditional frozen-foundation comparison, not a new UCOPE result.
+The independent Reviewer examined `56b203dfc..dac80c84a` and returned **no material
+findings remain**. I read the Implementer's diffs and checks and accept the combined
+implementation within its CPU correctness scope.
+
+The shared core change is 55 additive lines in `hmasd/agent.py`: explicit installation
+of an instance-only optional-END callback, copied predecision context, eligibility
+validation and its own diagnostic cause. No checkpoint/config format changes. An absent
+or removed callback takes the original path. Team/reset/invalid/local-cap events retain
+precedence. The real partial selector and actor execute normally; END may reselect the
+same label and does not reset recurrent state. No Claude-owned source/notebook/runs or
+shared index was edited. His current B08 probe implementation remains in his checkout.
+
+Candidate code is under `experiments/candidates/team_conditioned_termination/`:
+`policy.py` implements J/I mask laws, a separate context-only value critic, native-return
+GAE and full-mask PPO; `runtime.py` freezes the accepted-shaped D_K10 foundation and
+collects complete finite Scenario1 episodes. Both gates see explicitly scaled current
+geometry, observations, held labels, clocks and forced/reset flags. They share network
+shape and initialization; only J uses the realized preceding mask bits. This matches
+nominal architecture/parameter count, not a theorem of equal effective capacity or
+optimization. The initial law is the same independent 0.1 END probability. The critic
+never receives the sampled mask. KEEP likelihoods are retained; forced positions have
+no actor term, including skipping the actor optimizer on all-forced minibatches.
+
+Minibatches are bounded and retain the tail. Sampling and permutation use private
+streams, and initialization seeds only the CPU generator inside a preserving context.
+PPO refuses active nonfinite logits, overflowed ratios/objectives and nonfinite gradients
+before the corresponding optimizer step. This is fail-fast numerical detection, not
+transactional rollback of preceding valid minibatches. The generic GAE distinguishes
+terminal and continuation truncation; the finite native host's time limit is terminal
+for this collector. No intrinsic term, new switch fee, skill co-adaptation or alternative
+label decoder is introduced.
+
+**Checks, interpreted at their actual scope.** 37 distinct checks across the focused
+sets: 13 existing D2 regressions, 7 new hook tests, 12 mask/PPO tests and 5 native adapter
+checks. The core plus existing D2 invocation passed 20 in 13.60 s, including the frozen
+pre-D2 off fingerprint and an independent reference extracted from the committed pre-hook
+D2 method (outputs and RNG). Final Reviewer reran hook plus policy at `dac80c84a`: 19 passed
+in 2.65 s. The final policy unit suite alone passed 12 in 2.54 s. The five real tiny-host
+checks passed in 5.16 s before the added finite/RNG guard patch; Reviewer reused these
+finite-domain results because the adapter was unchanged and the new guards add failure
+detection. No repeated native fixture was requested merely for review.
+
+One initial native-test setup failed before any environment step or optimizer update:
+I had treated `RunningMeanStd` as a torch module. Source inspection showed numpy mean,
+variance and count; the adapter now freezes torch parameter owners through eval mode and
+the tests snapshot all three ValueNorm fields explicitly. This was a technical error,
+not a negative learning observation. The corrected invocation then passed.
+
+**Actual new technical fixture exposure (local Linux CPU).** One small foundation at
+seed 920611, six agents/twelve users, two lanes, two 20-tick rollouts: 80 native team
+steps; optimizer calls coordinator 2, actor 4, critic 4, team discriminator 2, individual
+discriminator 8; fixture wall 1.43 s. From its saved weights, J at gate seed 920621 and I
+at 920622 each used two 40-row gate rollouts: 80 team steps, 16 gate actor and 16 gate
+critic optimizer calls per arm, walls .73/.67 s. Each rollout had 36 optional decision
+rows; minibatches 13 retained their one-row tail. Base-network and ValueNorm snapshots
+were bit-identical throughout, and foundation optimizer/storage calls were forbidden by
+the tests. Both gates and their critics moved; that establishes executed updates only.
+One paired deterministic fixed-clock/initial-KEEP execution added 80 total native team
+steps, and its actions, labels and GRU states matched exactly. Total new fixture native
+exposure was 320 team steps, plus a two-forward GRU-carry check per lane without native
+steps. These three tiny training fixtures are engineering cost, not the six proposed
+scientific gate fits. The unchanged D2 regression fixtures have their own recorded test
+scope; none of their outputs is promoted into new research evidence. Resource RSS was not
+measured, so no memory-use claim is made.
+
+**Remaining boundary.** This is a tested CPU component/collector, not a result-launcher
+or B08 checkpoint acceptance. Production binding of accepted checkpoint/config/digest,
+gate checkpoint metadata and optimizer/RNG state, fresh seed addresses, native metrics,
+runner admission and a concrete prospective cost entry still precedes a scientific run.
+No B08 weights, probes, Pro calls, research evaluations or result-bearing gate fits were
+used here. The 0.1 hazard, small-test optimizer settings and fixture scores are not tuning
+or scientific choices for the future six-fit batch.
+
+Claude's published B08 foundation/probe decision remains the next scientific dependency.
+I will read its original committed interpretation, acceptance and phase-stratified
+accessible-END results in this independent task. An inert object closes the current-label
+comparison; the next design conversation concerns a legally observable service intent
+that Claude constructs and validates, not a new label semantics silently supplied here.
+A meaningful object alone is insufficient: local renewal must access a relevant behavioral
+change before the team boundary. If that evidence warrants J/I/F, record the exact next
+comparison and planned cost/reason; these engineering checks do not authorize its launch.
+This task's existing follow-up is being repurposed to read B08 when published, quietly while
+unchanged, with no automatic fits, probes or takeover of Claude's operations.
+
+
+## 2026-09-20 16:00 UTC — B08-informed termination judgment: an active label, an unproven renewal opportunity
+
+**Decision.** Do not turn the conditional six-fit J / I / F proposal into a launch. B08
+rejects the practically inert-label explanation on its measured support and establishes
+that an optional local END can change behaviour. It does not establish the proposed
+team-conditioned reason to renew. The strong simple alternative has also changed:
+fixed-clock uniform label assignment competes with the trained selector. I therefore
+retain the reviewed termination implementation at `d2dcb4188`, leave its production binding
+unstarted, and read Claude's already selected label-to-J comparison before choosing the
+next native study. This is an investment decision for this construction, not a finding
+that adaptive termination is ineffective. No scientific fit, native evaluation, checkpoint
+forward pass, Pro request or repeated tiny-host test was performed in this update.
+
+This supersedes the two-outcome shortcut in my 12:50 entry: **behavioural content does not
+automatically select the six-fit comparison**. Nor does this result activate the
+inert-label/service-responsibility fallback. The current labels do have behavioural content;
+I do not replace Claude's skill object to obtain a more convenient termination story.
+
+### Fixed evidence and technical acceptance
+
+Read the complete new B08 notebook entries and runner-written artifacts at published main
+[`9ade1733724d4a2d4eb5d44bd4f2bad62a63d985`](https://github.com/CartmanFatass/My-paper-code/commit/9ade1733724d4a2d4eb5d44bd4f2bad62a63d985),
+including the preceding technical decision at `1c21cbc93`. The relevant original reading
+is [FSD NOTES, 08:34 / 08:41 PDT](https://github.com/CartmanFatass/My-paper-code/blob/9ade1733724d4a2d4eb5d44bd4f2bad62a63d985/docs/research/candidates/flexible_skill_duration/NOTES.md).
+The [B08 reduction](https://github.com/CartmanFatass/My-paper-code/blob/9ade1733724d4a2d4eb5d44bd4f2bad62a63d985/runs/flexible_skill_duration/b08_reduce/summary.json)
+has SHA256 `2e63ac3bfcd5d4e426280c36ea016fd64db7c915c9ff9c33f76042ac3f31bdcd`,
+recomputed from its published bytes in this reading. I used Git/JSON arithmetic only.
+
+- All three `b08_save_<block>_a01` fits are complete at source
+  `fbae667d9731f081a6fdcaf0a08e5df3005b8524`. I independently compared the published
+  learner/evaluation configs and all nine panels per block against their recorded B01
+  D1280 counterparts: equal, excluding only `coordinator_inference_seconds` from the panels.
+- All three accepted probes are `b08_probe_<block>_n02`, source
+  `1c21cbc93e0d756de4db28b7e654469cace267de`, on the fit's `wsl_4070` host. Direct comparison
+  of their as-trained world-score lists with both B08 and B01 confirms exact equality on
+  32/32 worlds per block. Each records zero optimizer steps and matching checkpoint hashes.
+  I checked the published metadata bindings, not the binary weight files afresh.
+- The three failed local probes remain technical failures of faithful-load on the AMD host;
+  the three `_n01` node attempts failed before a panel because the sparse checkout lacked
+  the reference summary. Their acceptance identities and failure roots are preserved by
+  Claude. Successful same-host reproduction supports his host-numerics explanation. It
+  does not prove that every other host must fail or that no other implementation can port
+  these weights faithfully. Any future production acceptance must bind the actual runtime.
+- The accessibility probe reproduces four real decoder decisions per block. Its held-label
+  actor check has a recorded exact-equality failure: maximum action differences are
+  1.91e-6 / 1.91e-6 / 1.43e-6. Decoder q batch differences are at most 7.46e-8 and leave
+  the tested greedy label unchanged. These are reported numerical limits, not silently
+  converted to bit-exact checks. The separate 4,800-row label-effect recomputation is exact.
+
+Recoverable checkpoint bindings (each `final_weights.pt`, 66,030,843 bytes, under
+`/home/wu/projects/HMASD/runs/flexible_skill_duration/b08_save_<block>_a01/`):
+
+| Block | Checkpoint SHA256 from the accepted sidecar/probe |
+| --- | --- |
+| 772803 | `7cb214151d4e954af541391013686fd712a66655e050d27d2f0f2903134b08f7` |
+| 772903 | `87a703fc18120738c25f7812a0248f5aab0e66a4959de8711aef76a6f1c85eca` |
+| 773003 | `9a8ebe9057455b1b8fd6fe9bcfa41f4530ced9b84820f364985de13c61c1a14d` |
+
+This supplies the missing foundation identities, without requiring another foundation fit.
+D_K10 still means both caps and config.k 10, six labels per layer, coordinator batch 1280,
+the saved ValueNorm state, input normalization off, and deterministic reference evaluation.
+My CPU engineering fixture is not a substitute for this production acceptance.
+
+### What the native and fixed-input observations change
+
+The fixed-weight J readings below are copied from the raw rule panels, on the same 32 worlds
+within each block. They are development observations on three repeatedly used foundations,
+one checkpoint and one random-label realization per world/rule, not a new confirmation.
+
+| Block | As trained | Frozen at reset | Uniform each step | Uniform each 10 steps |
+| --- | ---: | ---: | ---: | ---: |
+| 772803 | .455875 | .439067 | .421642 | .433871 |
+| 772903 | .354697 | .343033 | .419531 | .420505 |
+| 773003 | .499352 | .505819 | .474782 | .473545 |
+
+Uniform-10 minus as-trained is **-.022004 / +.065808 / -.025807** (mean +.005999).
+Frozen minus as-trained is -.016807 / -.011664 / +.006467. Uniform-every-step minus
+uniform-10 is -.012229 / -.000974 / +.001237. These weaken the case that persistence or
+the existing argmax selector explains the score. They establish neither equivalence nor
+a population ranking. The approximate .03 J noise cited in FSD is not a universal
+significance threshold for a paired contrast; I do not discard the two negative
+uniform-minus-trained blocks or turn a small three-block mean into a zero-value theorem.
+
+At fixed observation and actor hidden state, label RMS spread / action std is
+.2312 / .2043 / .1854. Mean per-dimension RMS spread is .6564 / .6145 / .5426 action units.
+At 30 metres per unit this is about 16–20 metres of **commanded displacement**, before
+position clipping, not a measured increase in coverage or actual trajectory distance.
+The actor's Gaussian std is 2.74–3.16 units across blocks/dimensions; evaluation uses its
+mean, so a small ratio to *training* noise does not make the deployed effect unimportant.
+The label does matter; a useful continuing service role has not thereby been identified.
+I adopt the correction to the earlier near-white-action argument: large sampled action
+noise can conceal a label-dependent mean, so autocorrelation did not isolate persistence.
+
+Each block contributes 64 outcome-blind mid-cycle histories, with 384 singleton queries
+and one serving/strongest-competitor pair per history. This is the operational kept-first
+partial decoder, not a conditional distribution derived from its usual full-renewal law.
+
+| Block | Greedy single END changes label | Mean greedy action change / std | Mean next-GRU relative difference | Pair changes neither / one / both |
+| --- | ---: | ---: | ---: | --- |
+| 772803 | 42/384 (10.94%) | .07137 | .06740 | 54 / 8 / 2 |
+| 772903 | 42/384 (10.94%) | .05427 | .06972 | 52 / 9 / 3 |
+| 773003 | 143/384 (37.24%) | .16967 | .21638 | 25 / 26 / 13 |
+
+This strengthens **reachability**, especially on 773003; it is not universal nonactivation.
+On these same deterministic histories, sampling q would change a singleton label with
+probability about .798 / .798 / .813. That is a hypothetical sampled law on deployment
+histories, not a measurement of stochastic-training occupancy. The gate-learning design's
+sampled foundation and deterministic deployment therefore still implement materially
+different END interventions. A learned training hazard alone would be insufficient evidence.
+
+The time-to-team-cap strata contain 7 / 22 / 35 histories (42 / 132 / 210 singleton queries)
+per block. Greedy label-change fractions at 1, 2–4, 5–9 ticks are respectively
+19.05 / 9.09 / 10.48% on 772803; 7.14 / 13.64 / 10.00% on 772903; and
+30.95 / 43.18 / 34.76% on 773003. There is no consistent monotone pattern. These small,
+correlated, fixed-history samples contain no return comparison, and synchronized local/team
+clocks make local age and time to the team boundary collinear. They cannot dismiss an age
+rule or identify the effect of a teammate's independently varying remaining commitment.
+
+Most importantly, the pair counts are **label changes, not four native KEEP/END values**.
+The selected pair is a serving UAV and a strong interfering/service competitor, not two
+simultaneously feasible servers under Scenario1's 0 dB co-channel threshold. A different
+pair outcome can arise from decoder order. No native successor was executed for these
+queries, so they do not show that the two singleton ENDs help while the joint END harms,
+or the reverse. Whether service is lost, reassigned, or improved remains unresolved.
+
+### My next choice and the comparison that remains worth developing
+
+I agree with postponing the original six-fit batch, but **do not adopt a zero upper bound
+from average selector value**. A globally unhelpful replacement rule can still be useful
+when applied only at favourable histories; opposite signed END effects can average to
+zero. Many same-label queries likewise do not bound the value of the remaining changes,
+other masks, or histories a learned rule visits. Nothing in B08 bounds termination benefit
+by uniform-minus-argmax J. My reason for postponement is the weak present case for *team
+timing*, the newly competitive simple selection rule, and the already selected, finite
+next observation—not a requirement to prove useful END before exploratory learning.
+
+The question I retain is concrete: **when a currently serving UAV could change its
+closed-loop label, does the other UAV's continuing service/interference role make that
+same renewal preferable or harmful before the common team renewal?** KEEP retains the
+label and recurrent feedback; END calls the existing partial selector, possibly returning
+the same label. The gate sees the same lawful central state/observations, held labels and
+clocks in J and I. Serving/SINR annotations describe the task event; logging them does not
+silently add them as gate inputs. The native consequence sought is preservation or
+improvement of team service, accompanied by native J, not just more label diversity.
+
+If this comparison is selected later, retain J versus the full-information independent-bit
+I as the primary learning contrast; I can express any deterministic coordinated mask, so J
+does not get a claimed information advantage. Retain F (caps 10, original selector) and add
+**R10 (`uniform_every_10`)** as the strongest currently observed simple practical reference.
+R10 changes the replacement law as well as the policy package; it is not an identifying
+control for mask dependence. A gain only against F while losing to R10 would not support
+retaining a more complex package. Match frozen foundation, worlds and native objective;
+keep the sampled-versus-greedy distinction explicit and retain ordinary fixed/age rules
+as possible final choices. Any change to the accepted selector or skill object requires a
+new explicit interface decision with Claude, not a hidden change in my termination arm.
+
+The old three-rule cost paragraph is consequently incomplete. Under its otherwise unchanged
+illustrative geometry, six gate fits remain 2,160,000 training team steps; four final rules
+on three foundations at 32 worlds x 500 ticks require **192,000 evaluation team steps**
+(384 episodes), 48,000 more than the old J/I/F-only plan. Total 2,352,000 native team steps,
+plus its at-most 24,576 complete-mask likelihood forwards. This is a cost correction to a
+conditional design, not a selected batch, seed reservation or launch declaration. Exact
+gate/world seeds, optimizer exposure, native endpoint and production runner binding will
+be fixed only when the next actual experiment is chosen; no allowance is being consumed
+or reset. No additional fit is justified merely by having implemented its learner.
+
+**Concrete next dependency.** Read Claude's published constant-label map and his resulting
+object/selector decision. His 08:41 proposal is six homogeneous constant-label panels per
+block; that costs 18 x 32 x 500 = 288,000 native evaluation steps if executed as described,
+despite zero fits. I neither launch nor enlarge it. For my use, keep all six labels,
+per-world scores, rule definitions and exact checkpoint/runtime bindings. A better
+constant label can weaken the need for timing, but does not locate a critic or optimizer
+defect. If a random mixture beats all six homogeneous policies, that does not isolate
+simultaneous role diversity: time variation and heterogeneous assignments changed together.
+The per-world best label uses outcome information; it is an empirical upper envelope over
+six tested constant policies, not a deployable selector or an upper bound on dynamic ones.
+Selecting the best constant on these same worlds is development selection; its winning
+score is not an independently tested baseline advantage.
+
+The lowest-cost missing contrast *if that mixture interpretation becomes decisive* is
+an outcome-independent heterogeneous assignment held for an episode, distinguished from
+periodic random reassignment. B08's frozen-at-reset arm is not this control: it freezes the
+trained selector's concentrated initial assignment. This is an interface/interpretation
+request, not an addition to Claude's batch. Even that contrast would distinguish assignment
+diversity from renewal, not by itself prove useful team-conditioned timing. I will make one
+new prospective choice after the map, rather than accumulate automatic diagnostic stages
+or condition advancement on a guaranteed positive mechanism result.
+
+Service responsibility remains a conditional future object requirement if Claude eventually
+finds no useful continuing label/selection construction. It would need an explicit intent
+identifier tied to a legally observed user group or region, a held responsibility and its
+age/forced boundary, and a replacement law with the other intents held. KEEP must continue
+feedback control for that intent; END must release/reassign it without resetting the GRU.
+Existing greedy connections alone are consequences, not contracts we can terminate. Task
+credit would remain actual coverage/SINR/capacity reward, with no added switching fee.
+Claude owns construction and validation; I own the team-conditioned release decision once
+that object is agreed. B08 does not yet justify taking this alternative.
+
+**Cost and continuity.** B08 cost belongs to Claude's completed object: three 45-rollout
+fits, 360,000 training team steps each, reported fit walls 7,573.61 / 7,513.42 / 7,397.96 s
+(sum 22,485.00 s, not batch elapsed), and 675 coordinator / 101,250 actor updates each.
+Their nine evaluation panels cost 144,000 team steps each. The accepted zero-update probes
+add 64,000 steps per block, walls 170.00 / 167.75 / 171.38 s; failed probe attempts are
+retained separately and are not free or negative science. This read adds zero native work.
+UCOPE's closed scalar-copy evidence and local-value-versus-new-policy distinction remain
+inherited. This update completes the one B08 dependency reading, so the `fsd-b07` heartbeat
+is to be paused after publication. The research direction remains open with the concrete
+selection-map/interface dependency above; no Claude operation or shared index is taken over.
+
+An independent ResearchCritic checked this DM's proposed belief update against the fixed
+B08 evidence and returned **MATERIAL_DISSENT: no**. I adopt its emphasis on both practical
+references, the selected-history scope of same-label re-query, and the limits of the
+constant-label map. I explicitly do not require Claude to first make the selector better
+before any future termination exploration. The arithmetic above uses the raw published
+panels; the critic's rounded first R10 contrast was corrected to -.022004 here.
+
+
+## 2026-09-20 22:33 UTC — owner B08 decision adopted; arm expectations and a concrete service-intent interface
+
+**Owner instruction adopted.** The owner, through the FSD lead, explicitly defers the six
+frozen-foundation gate fits, permits independent engineering and service-responsibility
+design, and requires **both `as_trained` and `uniform_every_10` in every later termination
+comparison on this learner**. I apply that requirement. The same message withdraws the
+earlier bound wording. The historical FSD entry at `9ade17337` still contains it; its later
+withdrawal is recorded here, without editing another lead's notebook. There is no new fit,
+evaluation or Pro authorization in this message. The implementation and its 37 distinct
+checks at `d2dcb4188` remain accepted engineering preparation; they are not repeated.
+
+The fixed B08 evidence is the source already read and verified in my 16:00 entry at
+[`6515b6c6c`](https://github.com/CartmanFatass/My-paper-code/commit/6515b6c6cdef84be0c4753e99b4ff95acca60897):
+main [`9ade17337`](https://github.com/CartmanFatass/My-paper-code/commit/9ade1733724d4a2d4eb5d44bd4f2bad62a63d985),
+the FSD 08:34/08:41 notebook entries, `b08_reduce/summary.json`, and the three `_n02`
+probe summaries. Published main still points there at this read. I reuse the prior direct
+JSON checks, rather than manufacture a second result or reload the weights. This entry
+adds the requested arm-specific judgment and a concrete object interface, not another B08
+analysis batch or an attempt to take over Claude's selected constant-label study.
+
+### Accept, modify, and decline
+
+**Accept:** these labels have an observable action/hidden-state effect; the checkpoints
+passed the recorded same-host acceptance; simple random replacement is a serious practical
+reference; local deterministic END frequently reselects the held label on the histories
+queried. The results reduce the priority of the proposed termination learning batch. The
+owner's division of work also stands: Claude owns object/selector learning and its
+validation; I own team-conditioned release/reassignment questions and their learning design.
+
+**Modify the scientific wording:** "selection has no value" becomes **no consistent
+selection advantage has been demonstrated over uniform replacement in these three reused
+blocks**. The signed R10 differences (-.022004, +.065808, -.025807) matter as well as their
+small mean. "Persistence makes no difference" becomes no demonstrated consistent advantage
+of the tested persistence rules under these fixed weights, alongside the limited B07
+retraining evidence. Neither is an equivalence result or a statement about all conditional
+histories. Noise quoted for a panel is not a universal paired-effect decision threshold.
+
+**Decline automatic causal readings of the next map:** a better constant label would show
+that the deployed selector fails to exploit that simple alternative on those development
+worlds; it would not locate the failure in the critic, learning signal, optimizer, or
+sampled-training versus argmax-deployment choice. A random rule better than all six
+homogeneous constant policies would leave simultaneous diversity, temporal mixing and
+trajectory feedback combined. It would not by itself demonstrate role diversity or useful
+team-conditioned termination. I accept the owner's assignment of responsibility for the
+relevant next question, while keeping these scientific alternatives visible. The per-world
+best constant remains an outcome-selected reference, not a lawful END policy.
+
+### Answer to the I versus F question: first fix the intervention identity
+
+There is a naming mismatch in the incoming message. In both my initial draft and the
+12:50 revision, **F has always meant the fixed clock**, not a learned team-reorganization
+arm. Preserve the recorded labels:
+
+| Recorded arm | Actual decision | Updated expectation after B08 |
+| --- | --- | --- |
+| I | Full same central information; conditionally independent END bits; original partial selector. | Lower confidence that learning early renewal beats F or R10. No supported sign for I minus F; frequent same-label re-query weakens the simple rescue argument, without proving zero value. |
+| J | The same context and selector; autoregressive joint distribution over the END mask. | Lower confidence in practical gain over F/R10 too. B08 establishes no sign for J minus I and no observed team interaction to attribute a gain to. |
+| F | No optional END, caps 10, original selector: the `as_trained` practical reference. | No intervention or score changes because of this reading; its relative competitiveness is stronger than our earlier motivating story suggested. |
+
+I is not restricted to one agent ending at a time. With the full context and identities,
+it can deterministically output **any** mask, including all agents ending together. J's
+distinction is the stochastic joint law and potentially its finite learning/exploration,
+not exclusive access to simultaneous reorganization or team information. Neither I nor J
+is established to improve; a conditional-dependence argument is not an expressivity proof.
+
+For the owner's intended **team-reorganization** question there are two distinct operations:
+
+1. All local labels become replaceable while Z stays held. This all-END mask is already
+   available to both J and I. The current hook supports it, and its return still comes from
+   the same partial decoder. More agents being replaceable need not help: the query may
+   return the same labels, displace useful service, or change the autoregressive order.
+   Conversely it may access a complementary assignment unreachable through one singleton
+   query. B08's one-pair label-change counts do not decide which case applies to native J.
+2. Z also terminates early, resetting the team clock and making every local label replaceable.
+   This changes the scope of the proposed experiment. The implemented optional local hook
+   cannot request it. It would require a separate explicit design and source review, not
+   renaming F or interpreting a local all-END mask as a team-Z renewal. I do not implement
+   or launch this extra intervention from the incoming wording.
+
+**My directional answer is therefore asymmetric in certainty, not in a claimed performance
+sign:** I withdraw confidence in a positive individual-renewal gain, but do not transfer
+that confidence to whole-team reorganization. If whole-team reorganization uses the same
+selector, its expected advantage is also uncertain. If it uses a new learned heterogeneous
+assignment rule, a gain would mix assignment and timing changes unless the comparison arms
+share that rule. It would not answer the original J/I question by itself.
+
+The condition that could reverse a preference for singleton versus joint END is a real
+service interaction. For example, under two held service intents, replacing only one UAV's
+mode could concentrate both UAVs on the same demand while leaving another area without
+service; replacing both might give complementary destinations and recover native reward.
+Conversely each isolated release might be tolerable while simultaneous departure removes
+the team service that made either isolated release acceptable. These are possible sign
+patterns, not observations from B08. Even a verified "single harmful, pair useful" pattern
+would not imply J beats I: I can deterministically choose that pair. A J advantage would
+need a finite-learning explanation and a native learning comparison against I.
+
+### Independent design completed now: a held regional service intent
+
+I choose one concrete candidate interface for the permitted service-responsibility design:
+**a closed-loop policy conditioned on a held, public service-region identifier**. This is
+a future object proposal for Claude to construct or reject, not a semantic relabeling of
+the six B08 latents and not a decision to replace the current foundation. It is relevant
+if explicit service intent becomes the useful next object; the B08 label-content result
+alone does not trigger that change.
+
+For definiteness the candidate has six public rectangles in a fixed 3-by-2 partition of
+the current square. A user's region is determined by its position, with half-open cells
+and the outer boundary assigned to the last cell. Region r = x-bin + 3 * y-bin. The map
+is fixed from geometry, independent of scores, learned labels, channel outcomes and the
+current greedy connection assignment. This retains a six-way intent interface without
+claiming six optimal regions. A region may be empty or need multiple UAVs; duplicate
+intent assignments are allowed. There is no one-UAV-per-region constraint, reserved user,
+new resource lock or obligation to keep a region served at the expense of native reward.
+
+Why regions rather than currently served user identities: the existing low-level
+observation exposes own position and relative positions/SINR of observed users, not a
+stable user-ID contract. It can identify the region of a genuinely observed user from
+those coordinates and the public map without receiving all users or a private team state.
+The coordinator already receives all UAV/user positions, time and current local
+observations. This object can therefore have a legal interface without silently giving
+the low level the coordinator's global information.
+
+I checked the native source, unchanged between `9ade17337` and my accepted branch for
+these paths: `envs/pettingzoo/uav_env.py` state/observation, motion and connection code;
+`envs/pettingzoo/scenario1.py` reward; and `hmasd/networks.py::assign_partial_batch`.
+Every motion is followed by the native interference/SINR calculation and greedy connection
+assignment (at most one serving UAV per user, ten users per UAV). A region intent changes
+what a policy tries to do, not that connection rule or which users it is allowed to serve.
+
+| Interface item | Concrete semantics and information rights |
+| --- | --- |
+| Held object | One `intent_id[env,agent]` in 0..5 plus the public region geometry. A new accepted foundation must give it actual behavioural content; B08 label 0 is not retrospectively region 0. |
+| Low-level continuation | `policy(local_observation, own_hidden_state, intent_id)` produces fresh feedback action and next hidden state each tick. The intent persists; the velocity command does not. No new global state, user identities, serving matrix or future channel is injected. |
+| Gate context | The same scaled current central state/all native observations, held team/local intents, ages, mandatory and eligibility masks for J and I. Existing private low-level hidden states stay outside the gate. |
+| Optional decision | Boolean local END mask before `assign_partial_batch`; mandatory/reset decisions take precedence. KEEP preserves the intent; END makes it replaceable under a shared accepted assignment law, which may return the same intent. |
+| Replacement ownership | Claude pins the effective object and assignment law, including treatment of kept intents and sampled/greedy modes. My termination arms use that same law and its exact input information; I do not attach a better selector only to J. |
+| Time semantics | Ages and distance to the next forced cap are reported separately from any guarantee of continuation. With optional decisions every tick, a teammate's current KEEP promises this tick, not the whole remaining cap interval. No minimum commitment window is invented. |
+| Recurrent and boundary semantics | Hidden state carries across KEEP and END; reset only at the existing episode boundary. Initially preserve the accepted mandatory clock. Early team-Z renewal remains a distinct unimplemented intervention. |
+| Task feedback | The unmodified Scenario1 reward: coverage, SINR quality and existing altitude penalty. No extra release penalty, switching bonus, regional quota reward or perfect-handover flag. |
+| Analysis only | Read predecision/postdecision native connections and SINR to measure service lost or gained by the team and whether the hypothesized pair actually interacts. Their availability in environment `info` does not make them extra gate inputs. |
+
+The question this interface makes testable is whether **which service intents remain held**
+changes the value of releasing another one. Physical interference/capacity can couple
+regions as well as agents assigned the same region. An agent that is an interfering
+competitor is not a simultaneously feasible backup server under the current threshold;
+the design assumes no instant handover or guarantee that another intent preserves service.
+
+The predicted mechanism, if it exists, is an appropriate change in joint release choices
+conditioned on the existing team intents and observable demand/interference geometry,
+followed by fewer avoidable team service losses or better service gains and improved native
+J. Marginal END rate, label diversity, region occupancy or a gain due solely to lower
+altitude would not establish that service mechanism. A fixed assignment/age rule that
+performs as well remains a valid final choice. The actor may also prove robust enough that
+intent changes and their timing add no useful decision; that would weaken this design.
+
+What Claude would need to provide before this *object* can be used is specific: a fixed
+mapping from intent ID to public conditioning input, a policy that reacts to current
+observations while holding that input, the actual reassignment law with kept intents, and
+recoverable weights/config/runtime acceptance with its simplest competent controls. The
+object's behavioural validation is Claude's, and the existing J/I engine supplies no such
+evidence. I do not request a new diagnosis or a model fit as a prerequisite to his present
+constant-label map, and I do not require him to adopt regional skills.
+
+### Consequence for the next actual comparison
+
+The only selected question here remains team-conditioned termination, with J versus the
+fully informed I as its candidate learning comparison once a foundation/assignment choice
+warrants it. Any later study on the present learner includes the owner's `as_trained` and
+R10 references; changing the object or selector is explicit and common to the compared
+termination rules. Whether a heterogeneous assignment can simply stay fixed is the
+strong simpler explanation to preserve if the constant-label map favors mixing. That
+map does not automatically activate a new team-reassignment fit, a semantic-region fit,
+or an extra full-Z arm. The owner has deferred the six gate fits and that decision stands.
+
+Independent ResearchCritic: **MATERIAL_DISSENT: no**, with two adopted tightenings:
+"no consistent selection advantage" rather than "a poor/valueless selector", and the
+fact that I can already end the whole team of local skills. Its counterexample clarified
+possible singleton/joint preference reversals, not a native result or a J-over-I theorem.
+This update is notebook design only: zero new native steps, model forwards, fits or Pro.
+No new record type, shared index, FSD notebook/runner/runs edit or repeated engineering
+fixture is introduced. The previously completed B08 heartbeat remains paused; this owner
+message authorizes the independent work completed here, not automatic resumption of a
+scientific batch. Next empirical choice will use Claude's published map and concrete
+object/selector decision, with the above interpretation limits and baseline requirement.
+
+
+## 2026-09-20 22:46 UTC — L0: complete independent evaluation and gate-checkpoint preparation
+
+The owner asks to do the currently possible work. The scientific six-fit pause remains;
+the useful unfinished engineering is a common evaluator for the now-required controls and
+recoverable gate state. This does not choose a scientific batch or alter Claude's object.
+
+**Deliverable and ownership.** On `codex/team-conditioned-termination`, add
+`experiments/candidates/team_conditioned_termination/evaluation.py` and its mirrored tests
+(DM), and `checkpoint.py` with mirrored tests (one Sol/high Implementer). The Implementer
+owns only those checkpoint files, shares no Git staging, and edits no notebook. Leave core,
+Claude's runner/tests/notebook/runs and the shared index unchanged. Reuse the already
+published B08 `ExecutionRule`/label-generator semantics read-only for R10, not a new random
+baseline. This source dependency stays recoverable at the branch's committed revision.
+
+**Evaluation semantics.** One separate CPU evaluation agent and its own seeded complete
+Scenario1 episodes; no learner updates or buffers. Support as_trained, uniform_every_10,
+joint and independent. J/I use the existing hook and deterministic masks/selector/actions;
+R10 uses the original caps and independent uniform team/local replacements, with a private
+rule generator; count executed label changes separately from decision opportunities.
+All arms share world seeds, horizon, reward and native J conversion. Carry GRU through
+renewal; reset at episode start. Protect caller RNG, reject an agent with a live gate/hook,
+restore temporary attachments on success/error, retain actual partial counts on failure.
+This is an importable component, not an unadmitted command or automatic batch launcher.
+
+**Checkpoint semantics.** Save/load the new gate actor and critic, both Adam states,
+private sampling and minibatch-permutation RNG states, feature/config/arm metadata, an
+explicit frozen-foundation digest and source identity, and completed-episode/update counts.
+Resume support is at complete-episode/update boundaries only; it does not claim to restore
+native environment or foundation sampling streams/mid-episode recurrent state. Caller must
+provide the intended binding on load; mismatched arm/foundation/features/config are refused
+before mutating a live learner. Use plain tensor/primitive payloads and strict state loads.
+No checkpoint infrastructure is added to the core learner or Claude's artifact format.
+
+**Checks and cost.** Unit tensor checkpoints must reproduce the next gate sample and next
+PPO update, including nonempty optimizer moments, and reject binding/config mismatches.
+Native evaluator checks use initialized small CPU foundations, not the trained fixture from
+the prior 37 checks: six agents/twelve users, two lanes, 20 ticks, hidden width 32. Compare
+fixed and initial-KEEP paths, both learned mask modes, R10's held-label cadence/private RNG,
+native reward accounting, and attachment cleanup after a controlled failure. No foundation
+fit, B08 forward, research evaluation or remote execution. Report actual technical episode
+steps and synthetic optimizer updates; do not promote their scores to research evidence.
+Independent Reviewer examines checkpoint/RNG/evaluation semantics; DM accepts the diff.
+Stop this implementation at tested/reviewed components and a published notebook acceptance,
+without inferring that scientific training is authorized or that a skill object is settled.
+
+
+## 2026-09-20 22:59 UTC — Accepted evaluation and checkpoint components; scientific gate batch remains paused
+
+**DM acceptance.** The preceding L0 produced two bounded components on the existing
+termination branch: evaluator `6365c72557a3eb93b32357241645c20633e549d0` (short
+`6365c7255`) and gate checkpoint `2b76fc3a9b19ef7f2394d61af062a5dc620970f2`.
+The DM read the source and checks and accepts the implementation. The independent
+Reviewer found no material finding in the combined `0eaca9744..2b76fc3a9` diff,
+reusing the reported checks and adding no execution. No Claude-owned or shared
+learner/runner/result path changed. This is future FSD termination preparation, not
+another UCOPE result.
+
+The L0's heading says 22:46 UTC; that was a timestamp transcription error. Its
+commit `0eaca97445147168a901cefab8c83d79c21ed6a7` is timestamped 22:44:05 UTC and
+the post-publication clock read 22:44:08 UTC. The prospective scope preceded all
+checks; this append-only correction preserves the published entry.
+
+**What is ready.** `evaluation.evaluate_episode` gives as_trained (F), R10
+(uniform_every_10), J and I the same separate evaluation worlds, seeds, finite
+horizon and native objective. Native J is agent count times adapter return divided
+by horizon. It reuses B08's execution-rule and label-generator definitions read-only:
+R10 draws its private stream every tick and applies labels only at the original
+clock decisions. Those two definitions were checked structurally equal to
+`main@9ade17337`; the local script remains recoverable in this branch. Primitive
+actions, J/I masks and their selector are deterministic; R10 label draws remain
+random. Executed label changes and decision queries are counted separately.
+GRU state carries through END, and temporary hooks/wrappers and caller RNG are
+restored even after a controlled failure. Actual returned native steps survive
+failure reporting.
+
+`save_gate_checkpoint` / `load_gate_checkpoint` preserve actor/critic tensors,
+both Adam states, gate/private-policy/shuffle streams, and completed episode/update
+counts. Load requires exact intended arm/mode, foundation digest, source SHA,
+feature/rule metadata, architecture and PPO configuration, and returns fresh
+objects. It refuses binding mismatches and malformed tensor/Adam states without
+mutating a live learner. The format uses tensor/primitive data and
+`torch.load(weights_only=True)`. This is the current CPU gate format, checked
+on the current float32 learner; it restores gate-owned state at completed
+episode/update boundaries, not native environments, foundation/global random
+streams or mid-episode GRU state. It does not independently authenticate a
+foundation artifact or implement result admission/publication. Future binding must
+include actual feature/collection rules, including horizon and GAE settings;
+a declared digest alone is not verification of an artifact's bytes.
+
+**Checks and actual technical cost.** Eighteen new distinct checks pass: eight
+evaluator checks and ten checkpoint checks. The evaluator command used the
+configured scientific interpreter and took 4.04 seconds (14 existing
+matplotlib/pyparsing warnings). Its initialized, untrained six-agent/twelve-user,
+two-lane, 20-tick fixtures used seeds 920701 (foundation), 920711 + lane (worlds)
+and 920721 (gate initialization). Eleven initialized models executed 362 native
+team steps in total: per-test 80, 80, 80, 80, 40, 1, 1, 0. Foundation and gate
+optimizer steps were both zero. The fixed path matches an independently written
+native loop exactly; initial KEEP J/I match it, and nonzero END, R10's draw cadence,
+caller isolation and partial-failure accounting are covered. Their returns are
+correctness fixtures, not scientific performance evidence.
+
+Checkpoint tests use synthetic tensors only and establish nonempty Adam moments
+before checking exact next private/gate sample and next PPO update. Development
+had six pytest invocations: 8 passed/1 failed (1.76 s), 9 passed (1.92 s),
+10 passed (2.34 s), 22 passed (1.93 s), 10 passed (1.88 s), 22 passed (1.88 s).
+The first failure was an incorrect expected actor-step count in the test;
+the assertion was corrected. The two 22-test invocations each include twelve
+existing policy checks; they are not 22 new checks. Total reported pytest time is
+11.71 s. Across checkpoint tests, 62 synthetic PPO calls executed 364 actor and
+372 critic Adam steps (736 total). The two repeated policy suites also performed
+synthetic optimizer work whose exact total was not measured; all-invocation
+optimizer work therefore exceeds 736, rather than being reported as zero or as
+the 132 steps of one final focused checkpoint run. Checkpoint work used no native
+steps or foundation forward. Final combined-check process wall was 2.70 s and
+maximum RSS 299,064 KiB; that peak describes one process, not all development work.
+No peak/scratch total was measured for the complete batch.
+
+**Scientific standing and next dependency.** This preparation adds no scientific
+fit, B08 checkpoint forward/probe, native research panel or Pro use. The previously
+accepted tiny trained foundation checks were not repeated. It supplies reusable
+evaluation and recovery components, not evidence that learned termination helps
+and not a production launcher. The six scientific J/I gate fits remain paused
+under the owner's B08 investment-order decision. The next empirical choice still
+depends on Claude's published label-to-J map and resulting object/selector
+decision; service-responsibility semantics and the limits on interpreting mixed
+versus homogeneous labels remain as recorded in the preceding entries. Any future
+comparison on this learner must retain both as_trained and R10. No new record
+system or automation is introduced, and the completed B08 follow-up remains paused.
+
+## 2026-09-20 23:55 UTC — Owner reopens original UCOPE; selected frozen-mean gate learning B08
+
+**Scope and reason to reopen.** The owner explicitly clarified: "恢复原 UCOPE，保留负结果并选择新的研究比较".
+This restores the original velocity-command KEEP/END question, independent of Claude's
+FSD progress. New work uses `codex/ucope-frozen-feedback`; the accepted future-FSD code
+and interpretation remain recoverable on `codex/team-conditioned-termination@fd7e77635`.
+This is not a rename of Claude's B08 and does not take over his skill object or B11.
+Before this clarification I read `main@37f13aebc` B09/B10 and verified the three-way
+B08/B09/B10 as-trained score identity, common checkpoint digests, complete probe counts,
+and zero updates from the raw published summaries. No FSD comparison or code extension
+was executed. B09's development-selected constants (2,1,0) and B10's persisting label
+spread lower the priority of our old frozen-label six-fit proposal; they do not bound
+conditional END value. That separate proposal stays inactive.
+
+UCOPE B03 already tested state-conditioned R against scalar B with joint controller/gate
+learning: R-B = -.06887, -.02620, +.01195. B05's fixed mean-agreement proxy was not
+retained. B07's sampled scalar reuse lost to retained Ghalf mean control on all three
+primary panels; two favorable mean-B secondary panels remain contrary evidence. These
+results and the B06 initialization-selection exposure stand. I will not infer that
+feedback termination was never tested, or that an omitted log field proves opportunity.
+
+**One new comparison.** Object `UCOPE_FROZEN_MEAN_GATE_B08`: after freezing an attained
+ordinary controller, is a gate with richer legal context more useful than a learned
+command-disagreement rule? This removes gate-to-controller adaptation and sampled fresh
+velocity from the present learning question. It does not retrospectively identify why
+old R failed: several package conditions differ. Neither gate is input-independent.
+
+The task event is a change in local service/interference geometry or own history after
+the last executed command. At the same difference between that command and the current
+ordinary controller's fresh mean, retaining the previous command for one more tick may
+have different team consequences. Both branches take fresh observations and update the
+frozen GRU. The rich gate can use those differences; the simple gate tests whether a
+learned command-distance rule already suffices. Smoother motion or fewer renewals is not
+itself a reward benefit: native coverage/quality/altitude reward is unchanged, with no
+switching fee, bonus, minimum-service obligation or new observation.
+
+**Fixed foundation and semantics.** Use all three retained B06 Ghalf actors at masters
+8941/8942/8943 and their already published hashes, without choosing a favorable subset.
+They are development-selected controllers, not new ordinary-learning replications.
+Every tick, including KEEP, their original actor input is local observation + actual
+previous command + phase **zero**. Feeding the gate eligibility into this frozen ordinary
+actor would silently change its interface and is forbidden. Parameters/log-std stay
+unchanged; actual observations, previous commands and GRU histories evolve on each arm's
+own trajectory. Fresh command is always `tanh(mu)`; no Gaussian is drawn. The original
+reactive law stands: reset is forced fresh; eligible KEEP copies the last actual command
+and makes the next tick forced fresh; eligible END sends the current mean and remains
+eligible. Maximum command lifetime is two ticks, and there is no GRU reset at END.
+
+Let `d = sum((fresh_mean_command - previous_command)^2)/12`, bounded in [0,1]. Arms:
+
+- `agreement`: learned KEEP logit `b0 + b1*d`, with free sign/intercept. It contains a
+  scalar rate and either monotone agreement direction; finite PPO does not guarantee it
+  dominates every separately fitted scalar. It is a competitive simple reference, not a
+  proven optimum.
+- `contextual`: the same affine term plus a 175->32->1 tanh residual network. Inputs are
+  the 104 current local observation values, own previous command (3), current fresh mean
+  command (3), frozen actor recurrent output (64), and the identical scalar d (1). This
+  is a legal finite history representation, not all possible lawful history. The affine
+  parameters and final residual layer start at zero; both arms initially KEEP with .5.
+- `ordinary`: that identical frozen Ghalf actor executes its fresh mean every tick,
+  with no gate or new fit. This is the mandatory practical reference.
+
+The two learned arms sample their gates in both training and final evaluation. All five
+local actors share one gate within an arm but access only their own stated inputs. A
+separate centralized critic sees the original normalized state, all actual prior commands
+and actual gate eligibility, identically in both learned arms. It is freshly initialized
+identically within a block, not the frozen controller's historical critic. Gate and critic
+use separate Adam optimizers at 3e-4, separate norm clipping .5, no entropy bonus. PPO uses
+per-agent eligible-bit likelihoods and the common team return; clip .2 and the native
+finite undiscounted return-to-go divided by horizon, no terminal bootstrap. Advantages
+are centered/scaled over the complete two-episode rollout. Masked actor terms sum over
+agents and average over team-time rows, including forced rows in the denominator. Critic
+loss is .5 times squared error. Four epochs, random minibatches of at most 256 team rows;
+the frozen actor's recorded gate inputs need no gradient/recurrent replay. This common
+gate-learning package is new; a gain does not separately identify information value.
+
+**Prospective exposure.** Three new gate/world masters 8951/8952/8953 map in order to
+foundations 8941/8942/8943. Per block train `agreement` then `contextual`, each for 2048
+complete 256-tick episodes, two episodes per rollout, 1024 updates. Six new gate fits,
+no new foundation fit. Each arm has 524288 training team steps; at the declared batch
+sizes each complete fit has 8192 gate and 8192 critic Adam calls. Whole training cost:
+3145728 team steps and 98304 optimizer calls. Evaluate only the final learned gates plus
+ordinary on the same 64 new worlds per block: 576 episodes / 147456 evaluation team steps,
+zero evaluation updates. Total planned native work is 3293184 team steps. No earlier
+checkpoint choice, deterministic-gate selection, rate/noise sweep, hover arm, extra seed,
+or post-score extension belongs to this batch.
+
+For base=100000*new master, critic initialization is base+12; the contextual residual uses
+base+11 (the affine gate needs no random initialization). Train worlds are base+10000+e,
+e=0..2047. A private full [tick,agent] uniform array uses base+50000+e in both arms, so
+endogenous eligibility cannot shift later coin addresses. Minibatch generators are
+base+41 for agreement and base+51 for contextual. Final world seeds are base+30000+e,
+e=0..63, and shared addressed gate coins base+70000+e. Ordinary consumes no gate coins.
+World and coin coupling does not make different learned histories identical. Current
+source and exact inherited bytes are pinned before admission on `local_linux`, CPU FP32,
+one Torch/BLAS thread per invocation. Up to three paired invocations may run concurrently.
+The inherited hard deadline remains 2026-09-21 04:06:07 UTC; no reset on returning to UCOPE.
+Fit allowances have been abolished by constitution section 3: these are planned costs and
+their reason, not an extension of 15 or a replenished balance. No additional Pro is used.
+
+**Prediction and reading.** Primary is final contextual-minus-agreement; retain all three
+per-block vectors, means/range and conditional world-panel SEs. Also report contextual-
+minus-ordinary and agreement-minus-ordinary. The working prediction is that comparable d
+can require different decisions across observed contexts, the rich gate learns an active
+nonconstant residual, and its actual changed trajectories improve native J over both
+references. Conditional gate variation alone does not verify the mechanism; nonlinear
+use of d and finite optimization remain alternative explanations. Rich only beating the
+simple gate while losing to ordinary is insufficient practical retention. If agreement
+is as useful or better, prefer it; if ordinary suffices, retain ordinary. Mixed or small
+results may leave no successor selected. The .01 J scale is context, not an equivalence
+claim or new significance rule. The three selected foundations and three fresh gate
+fits per arm support exploratory conditional learning evidence, not confirmation over
+freshly trained ordinary controllers. An independent ResearchCritic found no material
+dissent and these scope/interpretation tightenings are adopted.
+
+### L0: frozen-controller gate engine, bounded study, and native admission
+
+Owned new paths: `experiments/candidates/ucope/frozen_mean_gate_b08/{engine,study}.py`,
+its package initializer, `scripts/run_ucope_frozen_mean_gate_b08.py`, and mirrored tests.
+One Sol/high Implementer owns engine.py and test_engine.py only; DM owns study/runner,
+remaining checks and this notebook. No shared index, native environment, old experiment,
+FSD runner/notebook/test/result or frozen foundation source changes. Preserve all original
+artifacts and hashes. The entry has fixed master/exposure arguments and calls
+`require_admission(..., direction="ucope")` before scientific effects. The production
+loop has no fixture bypass and retains original handles and partial failures.
+
+Reuse the old Actor/Critic/environment interface read-only. Verify inherited checkpoint,
+summary and source against the B07-pinned B06 digests before a foundation forward. Save
+input provenance, config/source/admission, complete episode/update rows, final gate/critic
+weights and curves, optimizer/native-step counts, unchanged foundation digests and actual
+wall/CPU/RSS. Final primitive arrays retain all commands, means, gate probabilities,
+eligibility, branches, fixed coin slots and rewards. For prospectively fixed evaluation
+world indices 0,8,16,24,32,40,48,56 additionally retain every full 175-value predecision
+gate input; this is current study instrumentation, not reconstruction of old logs. Training
+inputs exist in each live two-episode rollout; storing every training history is not promised.
+
+Tests use the existing synthetic adapter only, with fixed small exposure, plus pure tensor
+checks. Cover phase-zero frozen feedback on all ticks, KEEP/END/forced and terminal credit,
+private fixed-slot RNG, identical initial arms, ordinary exact execution, eligible masking,
+normalized full return, bounded minibatches, actual gate/critic learning and zero foundation
+movement, fixed hashes/identity/admission before effects, partial counts and final return
+reduction. No new trained foundation smoke or B08 FSD forward. Reuse unchanged old checks;
+report actual synthetic updates. Independent engineering review and DM acceptance precede
+published-input launch. A technical failure remains a failure, not a negative scientific
+score or automatic retry. Read the complete batch together, then update the research
+explanation; finishing this batch does not by itself finish UCOPE.
+
+### 2026-09-21 00:11 UTC — B08 implementation acceptance, before native launch
+
+Accepted source `5c76145bbfd86f24e2c7c7ad4b15f245e1c5ccbe`, implementing the preceding
+prospective contract. I read the Implementer's engine and the complete collector/update/
+study/publication path. Independent Reviewer read `425746713..5c76145bb` and found no
+material reachable defect. Review traced phase-zero recurrent feedback, KEEP/END state,
+private paired coin slots, eligible-bit PPO/critic credit, fixed inherited hashes, admission
+before effects, native-J reduction, and partial-failure accounting. Review used existing
+evidence and performed no new execution. I accept the code as DM; this is engineering
+acceptance, not evidence for the scientific prediction.
+
+Fourteen distinct focused checks pass (10 engine + 4 study). Implementer development used
+three synthetic invocations: 9/9/10 passed, 85 synthetic transitions and 99 optimizer calls
+in total, pytest 5.70 s, measured process wall 8.15 s, largest process RSS 307252 KiB.
+DM integration used one combined invocation and two study invocations: 13 passed/1 failed,
+3 passed/1 failed, then 4 passed; pytest 1.96/1.85/1.80 s. The two failures were test-writing
+errors: the counter is `max_minibatch`, and independent NumPy/Torch float64 summations need
+not have identical last bits (observed difference 5.55e-17). Corrected assertions use the
+actual counter and atol 1e-14 for the double reduction, while counts/signs stay exact.
+The synthetic study itself completed on all three invocations; no scientific source was
+changed to repair those assertions. DM executions added 445 synthetic transitions and
+129 optimizer calls. Total development: 530 synthetic transitions / 228 optimizer calls;
+zero native worlds, saved-foundation forwards, scientific fits, Gaussian command draws,
+or Pro calls. DM full-process wall/RSS were not separately measured. Test scratch was
+owned and cleaned by pytest. Existing FSD tests and old UCOPE fits were not repeated.
+
+Production exposure remains exactly the preceding six-gate-fit declaration. The current
+canonical table still lists `ucope` as exploring with lead `Codex session (direct DM)` and
+owner pause lifted. Its old scalar-standing/fit-cap prose is historical and is superseded
+for this new work by the owner's explicit reopening and constitution section 3. Claude
+has active uncommitted FSD work in the canonical checkout; it is left untouched. Source
+snapshots and this direction's author index isolate the forthcoming runs. Native runtime
+cost and scientific outcomes are not yet measured. The original 04:06:07 UTC deadline
+and 7200 s per-invocation watchdog remain enforced.
+
+### 2026-09-21 00:14 UTC — B08 admitted operations
+
+The three paired invocations were accepted from the published immutable source
+`d39483ace5767817cc7df45247516eab642b8a41`. Their original native identities, preflights,
+source snapshots and outputs are bound by these manifests:
+
+- [8951](../../../../runs/ucope/frozen_mean_gate_b08_8951/launch-manifest.json)
+- [8952](../../../../runs/ucope/frozen_mean_gate_b08_8952/launch-manifest.json)
+- [8953](../../../../runs/ucope/frozen_mean_gate_b08_8953/launch-manifest.json)
+
+No operation was retried. Initial technical progress is valid with no error. A bounded
+Monitor owns observation of these exact handles; DM retains scientific reading and any
+decision. Only process/count/resource facts are read while the batch is incomplete;
+the three final score panels will be interpreted together. Accepted operations remain
+our responsibility through native exit, artifact collection and the resulting judgment.
+
+### 2026-09-21 00:16 UTC — Source-level clarification while scores remain unread
+
+Direct reading of `envs/pettingzoo/uav_env.py` and `env_adapter.py` corrects one phrase in
+the prospective explanation: the unchanged non-paper reward is **0.7 connected-user
+fraction + 0.3 mean normalized SINR of connected users**, with zero extra altitude term.
+The preceding phrase "coverage/quality/altitude reward" was inaccurate. Height affects
+geometry/channels and is clipped at the existing bounds; it is not separately rewarded.
+No reward or running input is changed by this correction. The collector already sums the
+native `rewards_dict` exactly as intended and does not use the adapter's mean scalar.
+
+The legal local observation contains own normalized position, up to 20 user relative
+positions/SINR values and up to 10 other-UAV relative positions/SINR values, thresholded
+and sorted by SINR, plus episode time. Those sorted slots do not promise stable entity
+identities. A contextual-gate gain could therefore arise from clock dependence, nonlinear
+command-distance response or local geometry/history. It would not alone establish a
+service-event or teammate-coupling mechanism. After all panels finish, use the already
+declared primitive/context arrays to describe probability variation, the affine term's
+actual range over observed d, and clock dependence. These are artifact reductions, not
+extra policy panels, predictor fits or a causal counterfactual analysis. They keep a
+successful complex gate from being mistaken for proof that every provided input mattered.
+
+### 2026-09-21 00:19 UTC — Command equality does not erase the continuation decision
+
+Reasoning-only check, with independent ResearchCritic agreement and no new execution:
+even at exactly d=0, current KEEP and END need not have equal value under a fixed learned
+gate continuation. With equal actually executed commands and coupled teammate/environment
+choices, the immediate reward, next physical state and foundation inputs/hidden state are
+equal. Gate-action history and eligibility differ: KEEP removes the next tick's optional
+decision, END preserves it. Thus END-minus-KEEP can equal a difference of next-state values
+at eligibility 1 versus 0, and can have either sign for a fixed nonoptimal continuation.
+
+For a purely logical two-step example, current old/fresh commands are both 0; final-tick
+fresh is 1 and final reward equals the command. Current KEEP forces final fresh and return
+1. Current END lets a continuation with KEEP probability q obtain expected return 1-q.
+Current d=0 yet END-minus-KEEP=-q. This is a counterexample to an inference, not a UAV
+measurement or evidence that useful native opportunity actually exists.
+
+Under ALWAYS_END continuation, exact command equality does yield equal physical outcomes:
+both next actions are fresh and thereafter coincide. Exact equality on the final tick also
+has no future eligibility value. Near-zero d alone cannot provide a vanishing value bound
+for the learned continuation; service thresholds, observation reordering and future feedback
+would require additional assumptions even without the eligibility difference. B08 may learn
+to schedule its own future decisions or avoid a poor continuation choice. Small d is not
+proof of an ineffective gate, and gate activity is not proof of net benefit; the actual
+whole-trajectory comparison with ordinary feedback remains decisive for practical retention.
+
+## 2026-09-21 00:43 UTC — B08 completed: active rich gating, no retained return gain
+
+All three original admitted handles exited 0, with consistent native identities and valid
+exit witnesses (last exit 00:37:58 UTC). Six gate fits completed at the fixed 2048-episode
+horizon; no retry, expansion, new foundation fit or Pro call. Source is
+`d39483ace5767817cc7df45247516eab642b8a41`. All 576 final evaluation episodes completed.
+Actual training/evaluation team steps are 3145728/147456, total 3293184. Gate/critic Adam
+calls are 49152/49152, total 98304; evaluations have zero updates. These equal the declared
+exposure. Full invocation walls were 1454.61/1450.62/1454.95 s; CPU seconds
+1453.47/1449.34/1453.64; single-process peak RSS 364972/362000/362824 KiB. From first
+acceptance to last exit the parallel batch elapsed 1533.52 s, not the sum of fit walls.
+
+I independently checked every retained artifact hash/byte count, actual saved Adam step
+counters, frozen-foundation digests, exact command/previous-command and eligibility laws,
+coin-based KEEP decisions, paired coin tensors, equal first two predecision contexts,
+all complete reward arrays reduced back to J, and the declared context columns. The native
+status tool also reports all three handles exited with consistent records. No model
+forward, native transition or optimizer call was added by this reconstruction. Episode
+and update logs have exactly 4288 and 2048 rows per block, the correct world seeds and
+256-row update minibatches. Summary hashes, in block order:
+
+- 8951: `3b5f8e7f7835487a7d0934452333b51c7dd6bf8becbf26ff30f4965a01e207f5`
+- 8952: `628b4ba3175faf3291d62a026a2d0f2c43230fb1ec0a91514eba029424f1fd3e`
+- 8953: `a031cbd469079f77f64a43c288dfd6de83f2be9c4ab91d8151bfa41a5da65522`
+
+R denotes contextual, S the learned affine command-distance gate, G the frozen ordinary
+mean controller. Positive contrasts favor the first arm.
+
+| Gate/world block (foundation) | R J | S J | G J | R-S | R-G | S-G |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 8951 (8941) | .28024186 | .28034141 | .27998354 | -.00009955 | +.00025833 | +.00035787 |
+| 8952 (8942) | .26728878 | .26788283 | .26743957 | -.00059405 | -.00015079 | +.00044326 |
+| 8953 (8943) | .24596557 | .24552155 | .24602927 | +.00044402 | -.00006370 | -.00050773 |
+| Mean of three development blocks | | | | -.00008319 | +.00001461 | +.00009780 |
+
+Conditional paired-world SEs are .00035263/.00112511/.00119289 for R-S and
+.00081462/.00014979/.00009394 for R-G. These describe each 64-world panel conditional
+on its learned policies; they do not turn worlds into independent training replicates.
+There is no equivalence or population-effect claim, and these selected foundations are
+still exploratory development instances. The predicted useful R improvement over both
+references did not occur. The practical choice on these retained bases is G, without the
+additional gate training or gate computation.
+
+**Behavior and learning.** R's eligible KEEP probabilities average .1995/.0558/.0253 with
+SD .03928/.01522/.002672. R gate displacement is 4.194/5.263/5.908 and critic displacement
+4.007/5.307/5.576. Its first-to-last training-quarter KEEP means fall .417->.272,
+.529->.107 and .482->.0237; final evaluation uses the final weights, not a quarter choice.
+Both critics' last-512-minibatch losses are lower than their first-512 losses. The
+corresponding R and S training-quarter J values remain very close on their common worlds;
+no ordinary training-return panel exists. The rich module learned and changed behavior,
+but that does not establish that its conditional decisions were beneficial. Particularly
+on the last two foundations, approaching G is consistent with suppressing reuse.
+
+S's probabilities stay near .485/.484/.488 with SD only 3.4e-6/5.3e-7/1.0e-6. Observed
+eligible d has median near 1e-7 and p90 around 1.4e-5 to 1.9e-5. Its learned slopes
+(-.08756,+.02558,+.03221) generate p90-minus-p10 logit ranges around 1e-6. Thus the realized
+S is nearly scalar: the study does **not** establish failure of a numerically well-conditioned
+learned distance rule. R also fails to improve G, however, so rescaling S or enlarging its
+learning solely to complete a comparator matrix lacks a practical retention reason here.
+
+Mean similarity must not erase contrary trajectory evidence. R-G on 8951 ranges from
+-.02194 to +.04677 across individual worlds; S-G reaches +.06990 on 8952 and ranges from
+-.06248 to +.04177 on 8953. These are single fixed-coin realizations of full-trajectory
+differences, not proof of predictable conditional expected END advantage. Small immediate
+d is not a global value bound. Neither the old B03/B05/B07 adverse evidence nor their
+favorable exceptions is rewritten by B08.
+
+**Update and one remaining observation.** Independent ResearchCritic read the completed
+summaries and agrees with keeping G and not starting confirmation or a d-rescaling repair
+fit. Its material caution about world-level cancellation is adopted above. This weakens
+the investment case for further gate learning on the present frozen bases; it does not
+disprove adaptive termination or conditional opportunity under other controllers.
+
+Before closing this specific learning attempt, perform one bounded, post-result reduction
+of already saved ordinary trajectories: the prospectively saved world indices 0,8,...,56,
+eight per foundation. Jointly inspect normalized own positions, outward commands at exact
+boundaries and next recorded position changes by fixed quarters of the episode. A boundary
+fraction alone cannot distinguish clipping from stable commands that still move the UAV.
+This is a fixed subsample description, not a new policy panel or identification of failure
+cause. No fit, model forward, environment/replay step, selected-world reconstruction or new
+Pro is planned. The observation can sharpen a re-entry condition; it does not automatically
+authorize another study. The running-operation observation responsibility is now closed;
+scientific judgment and publication continue in this notebook.
+
+### 2026-09-21 00:47 UTC — Saved motion reduction and current research standing
+
+The bounded reduction is complete, using only the eight prospectively saved ordinary
+worlds per foundation. Own-position observations are FP32 normalized coordinates; physical
+displacements multiply successive differences by (1000,1000,100) metres. An outward
+component is a nonzero command pointing beyond an exact 0 or 1 coordinate boundary.
+"No resolved motion" means all three successive saved coordinates are equal, at that
+logging precision. Jointly checking outward commands avoids identifying clipping from
+boundary occupancy alone. The final action has no following saved observation and is
+excluded: 8 worlds x 255 transitions x 5 agents = 10200 recorded agent transitions per
+foundation, 30600 in total. No new environment/replay step, model forward, optimizer call
+or predictor fit was executed; the reduction itself took .016 s in the measured process.
+
+| Foundation / gate block | Last-quarter requested displacement norm, m/tick | Observed displacement, m/tick | Median observed displacement | No resolved motion with outward command |
+| --- | ---: | ---: | ---: | ---: |
+| 8941 / 8951 | 16.947 | .851 | .378 | 30.79% |
+| 8942 / 8952 | 11.513 | 2.123 | 1.773 | 23.81% |
+| 8943 / 8953 | 14.355 | 1.033 | .478 | 2.38% |
+
+Last quarter here is ticks 192–254, 2520 recorded agent transitions per block. From
+tick 64 onward every sampled agent row is at a height boundary with an outward height
+component. First-quarter observed displacement averages 3.456/3.160/3.291 m/tick; late
+displacement is reduced but not universally absent. Nonzero commands can therefore be
+substantially clipped while horizontal movement continues. The equality between the
+fully outward-command fraction and the no-resolved-motion fraction corroborates those
+particular recorded stationary rows. It does not make the 24-world subset a population
+estimate, or establish that clipping caused the gate comparison's near-zero mean.
+
+**Cumulative judgment.** The new study was worth separating from the old jointly trained
+or sampled-copy packages: it directly trained conditional gates on fixed, retained mean
+controllers, and retained full input samples and propensity/trajectory evidence. It has
+now supplied a negative investment update rather than a new gain: R changes its decisions
+and moves toward frequent END, with no useful observed improvement over frozen ordinary
+feedback. S's nearly scalar realized behavior limits the distance-rule claim. Substantial
+clipping, persistent motion, small instantaneous command differences and occasional large
+world-level return changes coexist; none alone resolves conditional expected opportunity.
+The B03/B05/B07 adverse findings and favorable exceptions remain intact. No switching cost,
+controller change, noise sweep, extra seed, selected checkpoint or post-score continuation
+was introduced to obtain this reading.
+
+Keep G as the practical choice on these three foundations. Do not confirm or extend B08,
+and do not repair the distance scale merely because it could be repaired. Current UCOPE
+stays **exploring, with this frozen-command gate package idle**. A useful re-entry would
+have a new reason to expect that lawful predecision information can select favorable
+expected continuations, or a concretely different controller whose KEEP/END alternatives
+produce informative feasible motion. These are possible scientific reasons, not a new
+certification requirement or a claim that all such alternatives must first be proved.
+The present single-coin tail worlds do not yet supply that reason. No next native study
+is selected from this result, and unused time before the inherited deadline is not itself
+a reason to run one. The future FSD label-termination work remains separate and parked;
+Claude's paths, operations and shared index were not changed. All B08 raw results and
+weights are retained in Git at `de81d2850`; the author's current notebook supplies the
+updated standing until shared-index integration by its owner.
+
+
+## 2026-09-21 03:19 UTC — B09 prospective: normalized distance versus a fresh scalar gate
+
+The owner has reopened original UCOPE through the acting Root, who supplied the complete
+external review and authorized implementation, independent review, six gate fits and reading.
+This changes my earlier decision to leave the frozen-controller package idle. B08 remains a
+valid negative result for its tested learners. Its raw-distance S barely expressed distance
+conditioning (eligible probability SD about 1e-6), while the richer R changed behavior without
+beating G. The new reason for one bounded comparison is finite optimization of an affine
+logistic distance gate: failure of one rich finite learner is not an upper bound on a
+well-conditioned two-parameter gate. Scaling is not new information, a new policy class, or
+proof that scale caused R's failure. We preserve B02–B07 evidence, including the selected
+foundation exposure and contrary/favorable blocks, and add no switching reward or penalty.
+This is original velocity-command KEEP/END, separate from Claude's FSD skill-object work.
+
+**Fixed input-only scale.** For each foundation use its complete B08 ordinary evaluation:
+64 worlds, ticks 1..255 (exclude reset), all five agents, 81,600 rows. Compute FP32
+`d = sum((tanh(saved raw means) - saved previous actual command)^2)/12`, matching B08.
+Fix `m = median(d)` and `s = q90(d)-q10(d)` with NumPy linear quantiles. No reward value
+is read for scale selection. No alternate quantiles, clipping, scale sweep, adaptation,
+raw-S refit or richer architecture. A zero scale is degeneracy to report, not a reason to
+drop a foundation. These exact numbers/input digests are fixed before any B09 score:
+
+| B09 master / foundation / B08 source | m | q10 | q90 | s | ordinary NPZ SHA256 |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 8961 / 8941 / 8951 | 9.9423232313711196e-08 | 1.0031816621847156e-08 | 1.6814243281260173e-05 | 1.6804211464638325e-05 | `ce5f4e392eae6ede4c5e310b00721368633bb9b52334cbdb5c838bddde45771f` |
+| 8962 / 8942 / 8952 | 9.6604960475588086e-08 | 2.9043207838697075e-08 | 1.4529350755765342e-05 | 1.4500307547926645e-05 | `010aa6d2958b83acb981fd6faecbed7fe56a826cca864f8ed57fc10cf6f307cc` |
+| 8963 / 8943 / 8953 | 7.5684258860064801e-08 | 7.2331322709118241e-09 | 1.8341485338169162e-05 | 1.833425220589825e-05 | `8555a2399344944d63d17c61f26a18dccbf3d9764dbbbdd18fc4b9543333ad59` |
+
+The source paths and formulas are also fixed in
+`experiments/candidates/ucope/normalized_distance_gate_b09/scales.json`. Each invocation
+verifies its NPZ hash, shape, complete arithmetic and scale before any environment/fit.
+Scale extraction is saved-array arithmetic only: zero model forwards, native steps or fits.
+The FP32 scale/median buffers and their source provenance are retained with each gate.
+
+**Single comparison and exact scope.** S_N (`normalized`) learns
+`p(KEEP)=sigmoid(a+b*((d-m)/s))`; B_0 (`scalar`) learns `sigmoid(c)`. Both start at zero
+logits, with two/one trainable gate parameters respectively. The normalized gate retains
+a free intercept and slope; in raw coordinates they are `a-b*m/s` and `b/s`.
+G (`ordinary`) uses the same frozen fresh-mean Actor without a gate or new fit.
+Use all B06 Ghalf bases 8941/8942/8943 and new masters 8961/8962/8963 respectively.
+Each learned arm trains 2048 complete episodes of 256 team ticks. Evaluate only final
+weights stochastically on the same 64 new worlds per block; G is deterministic. Arm order
+is S_N then B_0 then G evaluation; no intermediate-score model choice. For base=100000*master:
+critic seed=base+12; both zero gate initializations identify seed=base+11; train worlds
+base+10000+episode, final worlds base+30000+episode; full pre-generated [tick,agent] gate
+coins use base+50000+episode for training and base+70000+episode for evaluation. Update
+shuffle generators use base+41 for S_N and base+51 for B_0. The critics receive identical
+information/initialization and exposure, with subsequent trajectories allowed to diverge.
+
+The B08 collector and update implementation are reused without modification: fresh command
+is tanh(mu), no Gaussian draw; frozen Actor/GRU advances with phase zero on every tick.
+Reset forces fresh; eligible KEEP copies the actual prior command and forces next-tick
+fresh; END executes fresh and remains eligible next tick. Lifetime is at most two ticks,
+without GRU reset. Reward remains 0.7 connected-user fraction + 0.3 mean normalized
+connected-user SINR, with no new switching/altitude term. Same centralized critic,
+undiscounted finite episode return divided by horizon, no terminal bootstrap, two episodes
+per rollout, full-rollout advantage normalization; per-eligible-bit PPO ratio clip .2,
+masked bit sum over five agents divided by all team rows, four epochs, minibatches <=256,
+critic .5 MSE, separate Adam3e-4 and norm clipping .5, no entropy bonus. Updates use the
+existing B08 implementation, not a parallel reimplementation of these semantics.
+
+**Cost and execution.** Plan six new gate fits, zero foundation fits and zero Pro calls.
+Training costs 6*2048*256=3,145,728 team ticks; final evaluation costs 3*3*64*256=147,456;
+total 3,293,184. Planned gate/critic Adam calls are 49,152/49,152 (98,304 total). Foundations
+remain byte-bound B06-selected developmental instances. Run three admitted paired-block
+invocations on local_linux with one Torch/BLAS thread each, source snapshots, fresh control,
+publication, duplicate and memory checks. Prior equal-cost B08 batch took 25.56 minutes of
+parallel wall time; this is an estimate, not a promise. Original hard deadline remains
+2026-09-21 04:06:07 UTC. Do not shorten horizon, drop seeds, silently extend the deadline,
+expand after scores or retry an uncertain accepted invocation. Retain partial costs and
+technical failures if the deadline or another failure prevents completion. Fit allowances
+are abolished; six is this question's declared scope and cost, not a remaining budget.
+
+**Prospective reading and next action.** Retain S_N for further investment only if its
+mean J exceeds both B_0 and G separately in every one of the three blocks, AND the arithmetic
+mean of the three block contrasts is >=0.01 against each comparator. This is a bounded
+exploratory investment rule, not an equivalence, significance, MEI-confirmation or population
+claim. Preserve all block/world scores and conditional world uncertainty; worlds are nested
+inside fits and foundations were selected in B06. Distance-dependent probability variation,
+parameter movement, KEEP rate and copy rate are mechanism checks, not success endpoints.
+Only beating G but not B_0 would not support distance conditioning; at most it motivates a
+separately reasoned scalar question, not an automatic new batch. Mixed/tiny effects or no
+net gain over G stop this frozen-controller route, with no further scale rescue. Any next
+scientific question must have a new recorded reason; a favorable result still needs fresh
+foundation evidence before a broader UCOPE claim.
+
+**Implementation scope.** New files live in `normalized_distance_gate_b09/` and its runner
+and focused tests. The B08 engine, original foundation/environment, Claude's FSD paths,
+runs and shared index are untouched. DM authors and accepts implementation; an independent
+Reviewer checks scale provenance, actual one/two-parameter distinction and production binding.
+Focused synthetic checks may exercise the new gate through existing collection/update, with
+synthetic transitions and updates reported separately from native scientific cost.
+
+
+### B09 readiness, 2026-09-21 03:20 UTC
+
+Independent Reviewer reviewed the prospective plan, all three scale reconstructions, new
+source diff, and focused tests with no blocking findings. All 11 new-package checks passed:
+four study checks (2.54 s) and seven gate/scale cases (0.96 s). Engineering cost was one
+complete synthetic pair/reference (136 synthetic team ticks, 32 synthetic Adam calls),
+plus a deliberate transition-failure test that returned two synthetic ticks and zero
+updates. No native transition, checkpoint forward, new scientific fit or Pro call was
+added. The unchanged B08 test suite and previous tiny native fits were not repeated.
+
+Fresh published and canonical control both register UCOPE as exploring with exact lead
+`Codex session (direct DM; resumed original UCOPE task)`. This descriptive lead string
+identifies the same direct DM; launch uses the actual current string. Shared canonical
+checkout and index remain Root/Claude-owned. Resource snapshot before publication showed
+about 11.3 GiB available; each actual launch performs its own fresh memory check.
+
+
+### B09 accepted operation identities, 2026-09-21 03:23 UTC
+
+All three original paired-block invocations were accepted on local_linux from fixed,
+reviewed source `a20583ee128bb04e2e638804a0b5493322a3edf6`. Each has its own retained
+source snapshot and fresh memory/control/publication checks. No launch refusal or retry.
+These are three accepted invocations containing the declared six gate fits; acceptance
+alone does not assert that both fits or any final panel have completed. The original
+04:06:07 UTC deadline remains enforced. Result collection belongs to this same DM.
+
+| Master | Accepted UTC | Claim key | Runner PID / Linux start ticks |
+| --- | --- | --- | --- |
+| 8961 | 2026-09-21T03:21:23.908237Z | `b23ff2acc5449784c0f82818ccce3ab3c82473145757ee53bb1307358b5da69b` | 2981825 / 22331414 |
+| 8962 | 2026-09-21T03:22:02.843456Z | `1983609a790a4dbe319b84ad178b9b36c18095ed487b02fc43780b64728a3e52` | 2982554 / 22335307 |
+| 8963 | 2026-09-21T03:22:31.095333Z | `391b876183d5651ca591b5e61a795f5bb9882ee6be84a7aba6bf9533f93a2d02` | 2983138 / 22338131 |
+
+The authoritative handles and source-snapshot paths are in each output's
+`launch-manifest.json`; claims remain in the common Git directory's `hmasd-admission/`.
+The owner requested autonomous work without further routine reports; ongoing progress and
+scientific decisions are recorded here. No unrelated automation, FSD runner or Root control
+path was changed or reactivated.
+
+
+### Session-workflow adoption, 2026-09-21 03:34 UTC
+
+Read constitution section 2, `hmasd-loop-dispatch/SKILL.md`, the actual
+`hmasd-direction-manager.toml` instruction body, and its scientific/engineering methods
+at published `0b4acaa29`. Adopt the direct-DM responsibilities and existing Root return
+route. This formalizes current ownership; it changes no native model/effort/permission,
+launch-bound lead string, accepted source/handle, experiment, exposure or deadline.
+Stale allowance/up-to-six wording in the scientific method is superseded by constitution
+section 3; the owner's withdrawal of prior AGENTS instructions remains respected. No
+new Root child, direction owner, shared-index write or notebook system is introduced.
+The three B09 invocations continue under their original accepted identities; collection
+and scientific reading remain this DM's responsibility.
+
+
+## 2026-09-21 03:50 UTC — B09 read: distance response expressed, no retained task gain
+
+All three original operations exited zero, with valid exit witnesses and consistent native
+records. Last exit was 2026-09-21 03:45:36.693530 UTC, before the original 04:06:07 deadline.
+All six planned gate fits completed 2048 episodes each; all 576 final evaluation episodes
+completed. No retry, expansion, foundation fit, new noise setting or Pro call. Exact producing
+source remains `a20583ee128bb04e2e638804a0b5493322a3edf6`; later notebook/method-adoption
+commits never changed an accepted snapshot. Training/evaluation steps were exactly
+3,145,728 / 147,456, total 3,293,184 team ticks. Gate/critic Adam calls were
+49,152 / 49,152, total 98,304; final evaluations had zero optimizer updates.
+
+The DM checked all recorded artifact sizes/hashes, frozen Actor digests against inherited
+weights, exact foundation/scale bindings, saved optimizer step counters and actual one/two
+parameter ownership, complete episode/update counts, phase-zero context layout, actual
+previous-command/KEEP/forced-fresh laws, paired coin arrays, equal first two predecision
+contexts, final-gate probability reconstruction and raw float64 rewards against all panels.
+Every check passed. Saved-gate arithmetic reconstructed 61,440 probabilities on the eight
+predeclared context worlds per learned arm. This added no native step, Actor/Critic forward,
+optimizer step or scientific fit. A separate Reviewer waited for all three COMPLETE summaries
+and independently recomputed every contrast from the raw reward NPZs; its reading agrees.
+The reproducible readback and reduction are retained under
+`runs/ucope/normalized_distance_gate_b09_reduce/` alongside the three full original run folders.
+
+| Master / frozen basis | S_N J | B_0 J | G J | S_N-G | S_N-B_0 | B_0-G |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 8961 / 8941 | 0.2980710839 | 0.2980397859 | 0.2976663554 | +0.0004047285 | +0.0000312980 | +0.0003734305 |
+| 8962 / 8942 | 0.2441950038 | 0.2442722626 | 0.2453086819 | -0.0011136781 | -0.0000772588 | -0.0010364193 |
+| 8963 / 8943 | 0.2481845763 | 0.2477292431 | 0.2473407077 | +0.0008438687 | +0.0004553333 | +0.0003885354 |
+| Mean of three development blocks | | | | +0.0000449730 | +0.0001364575 | -0.0000914845 |
+
+The predeclared continuation rule fails twice: each S_N comparison has one negative block,
+and both mean contrasts are below .01 J. B_0 also fails to offer a consistent net advantage
+over G. Retain G as the practical controller; stop this frozen-controller distance/scalar
+route. This is a research investment decision from the observed package comparisons, not
+an equivalence test or a proof of zero possible benefit.
+
+Conditional paired-world SEs for S_N-G are .0006065171/.0006936748/.0006789688; for
+S_N-B_0 they are .0000260770/.0000792646/.0004685290. The 64 worlds are nested inside
+each fitted gate and its selected foundation, not independent fit replications. Each block
+has only one stochastic gate realization per world. Preserve the positive exceptions: blocks
+8961 and 8963 have positive means against both comparators. Conversely, positive world counts
+for S_N-G are only 22/21/27 out of 64, with observed single-world changes from -.0398744
+to +.0366382. The trajectories are not universally inert; these occasional changes do not
+establish a predictable beneficial decision rule or rescue the failed prospective criterion.
+
+**What the targeted revision changed.** The normalized gate does express distance dependence.
+Its eligible KEEP probability SD is .0117024/.0161530/.0393870, while the new scalar gate is
+exactly constant within each final policy. This is materially different from B08 raw S's
+roughly 1e-6 probability SD. Final normalized slopes are -.00516517/-.01219790/+.04273443
+(raw-distance equivalents -307.37/-841.22/+2330.85); the direction reverses on the third
+foundation. Both normalized and scalar parameters moved, and critic parameter displacements
+are about 3.8/5.1/5.7. Thus a non-started learner or a wholly inactive gate does not explain
+this batch's absence of a retained gain.
+
+The behavioral qualification matters. S_N's mean eligible KEEP probabilities remain
+.490584/.482356/.519408; scalar probabilities are .492617/.486732/.510864. S_N's p10–p90
+widths are only .001589/.002946/.009301; the wider SD comes mainly from large-distance tails.
+Its full probability ranges are .1676–.4922/.1776–.4852/.5121–.9988, and actual copying occupies
+32.85/32.66/34.10 percent of all primitive ticks. We therefore observed an expressed,
+tail-concentrated response, not broadly strong modulation, converged optimal gating, or a
+uniformly learned 'copy when closer' rule. Training-quarter native returns remain close
+between the two arms; parameter change and input conditioning are not by themselves useful
+credit assignment.
+
+**Scientific update and next action.** The review was right that B08's raw S could not stand
+in for a well-scaled finite distance learner, and that R's failure was no class-wide upper
+bound. B09 directly addressed that specific unresolved comparison. Its intermediate numerical
+prediction partly succeeds (observable conditional response); its predicted worthwhile native
+consequence fails. This weakens scale alone as a reason to keep investing in this frozen-basis
+package. It does not turn B08 into a technical failure, prove that scaling caused R's behavior,
+or remove B06's foundation-selection exposure. Command disagreement remains a lawful input,
+not an END-minus-KEEP value label. Identifying a local intervention contrast is also different
+from learning a gate that earns more return on its changed trajectories.
+
+No further normalization, clipping, learning-rate, training-length, copy-rate/noise or rich-gate
+rescue batch is selected. The practical package is G, with the retained trained gates, frozen
+bases, scale bindings, critic/optimizer states, full reward/command panels and reusable
+collector available for later work. Original UCOPE is idle with a concrete re-entry condition:
+new evidence or a materially different task-grounded hypothesis must identify why the original
+lawful velocity commitment should have reproducible beneficial opportunity over ordinary
+feedback and why a learner should exploit it. Merely changing another scale or noting that
+all adaptive termination has not been disproved does not meet that condition. No such producer
+or next comparison is presently selected; this is not a fabricated wait on Claude. Claude's
+FSD skill-object work and the separate team-termination design remain independent. The narrow
+frozen route is stopped; the broader research question is not declared disproven or complete.
+
+**Observed cost and retained identity.** Per-fit training walls (S_N/B_0 seconds) were
+662.44/661.03, 688.74/667.96 and 660.52/641.05. Full invocation walls were
+1383.91/1413.34/1356.92 s (sum 4154.17 s), with process CPU 1382.47/1412.22/1353.10 s
+(sum 4147.79 s). First acceptance to last exit was 1452.79 s, or 24.21 minutes of parallel
+batch time. Per-process peak RSS was 364592/364052/361664 KiB; these are separate process
+peaks, not a simultaneous sum. Admission/source preparation and publication are outside those
+fit-training intervals; no end-to-end speed claim is made. Final summary SHA256 values:
+
+- 8961: `5d995c3ba3b7a449ab87b29f4cbd9a9341424a2046c88ba82fb3fbe571365485`
+- 8962: `3b34fe474e16a44a4dca40e0dcdd1858f5946d5c9a798739ef6e313d413b779f`
+- 8963: `222493e1bf793c1005e22f882b8140b01201fb1ad42f8791f401022456b8279a`
+
+All original handles are terminal and the read-only monitor has exited. The producing snapshots
+and recorded outputs remain recoverable. Both older automations stay paused. The acting Root
+continues to own shared main/RESEARCH integration; this branch owns the published scientific
+record, with no shared-index edit made by this DM.
+
+
+## 2026-09-21 03:57 UTC — Owner correction: independent UCOPE updates; no cross-session interaction
+
+The owner explicitly corrected the workflow: "你没有和root的任何交互流程 因该做独立的更新"
+and then "禁止你启动跨session会话 除非由我明确指令". This task has no Root reporting,
+acknowledgement, handoff or integration dependency. The current session directly owns UCOPE
+research, its notebook/code/results, and its UCOPE index updates and publication. Earlier
+entries describing a Root return route or delegated index integration are historical and
+are superseded by these owner instructions.
+
+Do not create, fork, start/resume, dispatch work to, or send messages to another session
+unless the owner explicitly requests that cross-session action. A repository method, role
+body, previous return address, or incoming coordination notice does not grant that permission.
+Routine progress stays in the notebook; no proactive status exchanges are needed. Reading
+published repository evidence and independently publishing scoped Git changes remain allowed.
+Use an isolated checkout and normal fast-forward publication to preserve concurrent writers;
+do not edit Claude's running checkout, FSD paths or another task's index. No research run,
+accepted handle, B09 evidence, native deadline or scientific stopping judgment is changed.
+
+Independent publication is complete: `main@f3b79ffba85833e13b06f1c29b52a9b65df203d9`
+updates only the shared RESEARCH index, from a fresh isolated checkout owned by this task.
+The UCOPE B09 standing and owner correction are published; every other direction row and
+the parsed pause/state/lead remain unchanged. The remote main SHA was verified after a normal
+fast-forward push. No cross-session creation, dispatch or messaging was used for this update,
+and no other session's checkout was modified.
+
+
+## 2026-09-21 — B10 preparation: actual paired branch credit versus full-data PPO
+
+**Decision and boundary.** The owner's "请你继续任务" continues original UCOPE in this
+independently owned task. B09's negative investment reading stands; I do not extend its
+distance/scalar PPO recipe. I select one different learning comparison for preparation:
+execute actual KEEP and END continuations from the same predecision history, and learn from
+their difference, versus the existing rich gate's full-data PPO at the same native-step cost.
+The object, observations, reward, foundations, distance scale and horizon stay fixed. A scalar
+learner with the same paired credit and ordinary G are necessary references. The question is
+whether cancelling common outcome variation is worth the simulations and lost coverage.
+
+The owner-retained native deadline, **2026-09-21 04:06:07 UTC**, has elapsed. No B10 scientific
+fit, native evaluation, checkpoint forward or Pro call is accepted or started. This work is
+source reading, a concrete prospective design and isolated synthetic checks. No cross-session
+action, Root dependency or automatic wakeup is created. Fit allowances remain abolished;
+the numbers below are planned cost and reasons, not a consumed/remaining budget.
+
+**New reason, with contrary evidence.** The old
+[8801 credit package](UCOPE_UAV_CONTINUE_END_CREDIT_B01_8801_RESULT_EVIDENCE_20260911.md)
+already separated velocity/duration clipping and used a conditional suffix baseline; its
+single matched pair returned L-F = -.0241056. The September 20 predictive-target and
+randomization entries already established the factual score's conditional contrast identity.
+The "Team-credit check returned" entry ruled out omitted teammate rewards. Renaming that
+score, regressing the same factual outcome, or adding another conditional baseline would not
+meet the re-entry burden. B08/B09 weaken a feature/scale-only rescue, and occasional favorable
+worlds still do not establish a predictable local rule.
+
+The new method would actually observe both alternative suffixes. In this static, free-space,
+no-shadow host it can attempt complete prefix reproduction and address future policy coins
+by tick and agent. Common realized outcome components then cancel before a critic must
+predict them. This is a source/estimator argument; native prefix reproduction for this new
+collector and useful native branch differences remain unmeasured. The method is worth
+preparing because it changes the information obtained during learning, and can fail even
+when cancellation works. It does not diagnose B09 as a credit failure or guarantee net value.
+
+**Task and information.** The unchanged observation exposes own position, visible user
+relative xy/normalized SINR, visible UAV relative xyz/normalized SINR, and time
+(`uav_env.py::_get_observation_vectorized`). Holding the last velocity versus taking the
+fresh mean can lead to different service/interference geometry. Subsequent connected users,
+link quality and teammate feedback determine the team consequence. Native non-paper reward
+remains .7 connected-user fraction + .3 mean connected-user SINR quality. No service obligation,
+switching fee, new penalty or new actor observation is added. Opposite consequences at similar
+command distances are a hypothesis, not an observed native crossover. Logged user IDs, global
+state, teammate hidden state, reset seeds and future random slots are not legal gate features.
+
+Both rich learners use B08's unchanged 175-dimensional context (local observation 104,
+previous command 3, fresh mean command 3, frozen recurrent output 64, raw disagreement 1),
+the same affine-plus-175->32->1 gate and zero-logit initialization. Foundations are exactly
+B06 Ghalf 8941/8942/8943, retaining their selected-development exposure and byte bindings.
+Every frozen GRU advances every tick on its branch's own history, with foundation phase zero.
+Reset is fresh; eligible KEEP copies the last command and forces fresh next tick; END sends
+the fresh deterministic mean and leaves eligibility true. No GRU reset; lifetime at most two
+ticks. All future teammate actions are recomputed, not replayed from the other branch.
+
+**Actual paired credit.** Freeze the behavior gate for one collection round. Select one agent
+uniformly from five and a tick uniformly from 1..255, independently of outcomes. Run two full
+256-tick episodes in the same fresh world with shared addressed policy coins. If the chosen
+coordinate was eligible, force KEEP in one and END in the other; all other decisions follow
+the frozen behavior policy on that branch's actual history. If ineligible, keep an inactive
+zero-credit pair; do not resample a convenient event. Both full prefixes count as native work.
+Accept a pair only after exact prefix/context checks. A mismatch is a technical failure, not
+a noisy label or grounds to substitute another world. Final-tick credit is retained.
+
+Let Y_K,Y_E be each complete suffix's team reward divided by 256, p the old KEEP probability,
+and delta=Y_K-Y_E. Old advantages are `A_K=(1-p)*delta`, `A_E=-p*delta`. With per-action
+probability ratios r_K,r_E, maximize
+
+`p*min(r_K*A_K, clip(r_K)*A_K) + (1-p)*min(r_E*A_E, clip(r_E)*A_E)`.
+
+Targets and p are detached; ratio clip is [0.8,1.2]. Average over all scheduled pairs,
+including inactive rows, and multiply by **5*255=1275**, since Y already divides by 256.
+No data-dependent advantage normalization. At the first update the logit derivative is
+`1275*p*(1-p)*delta` per active sampled coordinate. Averaging coordinates and other policy
+randomness gives the usual shared-gate first-order policy gradient. Changed eligibility,
+motion and teammate responses are inside Y. Later clipped epochs and a fitted shared gate
+do not inherit a policy-improvement theorem.
+
+Conditional on the two potential suffixes and a pre-outcome baseline b, the unscaled derivative
+is the expectation of `(Z-p)*(Y_Z-b)` for Z~Bernoulli(p), or of two independent current-Z
+draws averaged together. Marginalization removes that current-choice variation and cancels
+common outcome components. Strict variance improvement is not universal: at p=.5, deterministic
+branch outcomes and their exact midpoint baseline, even a factual score can have zero
+conditional variance. Variation over histories/future coins and finite approximation remain.
+The connection is action-marginalized credit, as in
+[COMA, Foerster et al.](https://www.cs.ox.ac.uk/people/shimon.whiteson/pubs/foersteraaai18.pdf).
+COMA evaluates a learned centralized Q critic; this proposal pays for actual suffixes. That
+paper and this algebra establish neither native opportunity nor better finite UAV learning.
+
+**Proposed batch.** `UCOPE_PAIRED_BRANCH_CREDIT_B10` uses masters **8971/8972/8973** on frozen
+8941/8942/8943, without foundation selection or refitting. Per block:
+
+| Arm | Learning method | Native training allocation |
+| --- | --- | --- |
+| R_CF, candidate | Rich local gate; actual paired suffix credit; no learned critic | 1,024 pairs = 2,048 full episodes |
+| R_FULL, primary learning reference | Identical rich gate/context/initialization; unchanged B08 full-data PPO and central critic; all eligible factual rows | 2,048 full episodes on distinct training worlds |
+| S_CF, simple reference | One state-independent KEEP logit; paired credit; same schedule/worlds as R_CF | 1,024 pairs = 2,048 full episodes |
+| G, practical reference | Same frozen ordinary mean controller, fresh every tick | 0 new training episodes |
+
+R_FULL keeps the advantage of every factual decision and more distinct training worlds.
+A focal-only factual learner would be a useful algebraic control but a weak native reference;
+**that extra native arm is not selected**. The two-factual-rollout surrogate in the preparation
+code is only a correctness reference. This is a matched-native-cost package comparison, not
+an isolated causal effect of variance, data coverage, update count or PPO clipping.
+
+R_CF/S_CF collect 16 pairs under one fixed gate, then four full-batch gate-only Adam updates
+at 3e-4 with gradient norm clip .5: 64 rounds, **256 Adam calls per fit**. CPU FP32; subtract
+the raw FP64 suffixes before casting delta. Initial p=.5; no saturation repair or probability
+clipping sweep. Numerical loss of binary support fails the attempt. R_FULL keeps B08's
+two-episode rollout, four epochs, minibatch 256, separate gate/critic Adam 3e-4, gamma one,
+zero entropy bonus, old targets and original advantage normalization: **8,192 gate + 8,192
+critic Adam calls per fit**. Different update counts are explicit package costs. No shared
+optimizer/model state. The unchanged B09 scalar class in scalar mode supplies S_CF; its
+median/scale arguments are unused and do not constitute another normalization choice.
+
+For master m, b=100000*m. Rich initialization b+11; full-data critic b+12. Paired schedule
+uses private seed b+81; paired training world b+10000+j, j=0..1023; shared coin slots
+b+50000+j; separately addressed focal-reference slots b+60000+j. R_FULL worlds b+10000+e,
+e=0..2047, private gate slots b+50000+e and advancing shuffle generator b+91. Final worlds
+b+30000+e, e=0..63; learned-arm evaluation coins b+70000+e. Every arm gets all 64 same final
+worlds. Learned gates remain sampled; G uses no gate coin. No interim evaluation, selected
+epoch, extra diagnostic native panel, Pro call or automatically queued successor.
+
+Planned cost: **9 gate-learning attempts**, **4,718,592 training + 196,608 evaluation =
+4,915,200 native team ticks**, including both prefixes; **26,112 gate + 24,576 critic =
+50,688 Adam calls**. One foundation forward per tick, or 24,576,000 agent recurrent rows;
+zero foundation optimizer steps. G evaluation consumes 49,152 of these team ticks. Use
+local_linux CPU FP32 with one Torch/BLAS thread per invocation, fresh >=4 GiB memory admission,
+at most three block invocations concurrently and sequential arms within each block. B09's
+observed cost scaled by native steps suggests roughly 100 CPU minutes and 35-70 elapsed
+minutes; the changed collection/update mix makes this only an estimate. The proposed time
+extension is one **90-minute native window from the first accepted operation**, not a granted
+extension. Record actual wall/CPU/RSS and technical failures; no post-score batch expansion.
+
+**Prediction and reading.** Useful native gain is uncertain. If lawful service consequences
+are repeatable enough to outweigh the lost coverage, R_CF should learn a conditional rule
+and beat R_FULL and G; it must also beat S_CF to justify context-dependent termination.
+Parameter motion, probability variation, training alignment or oracle-positive deltas are
+insufficient. Retain raw paired episodes, sampled coordinates, eligibility and deltas, plus
+training/evaluation copying and probability dispersion. They describe behavior and learning;
+they are not independent fit replications or a substitute for changed-trajectory performance.
+
+Retain R_CF for further investment only if R_CF-R_FULL and R_CF-G are each strictly positive
+in all three blocks and each three-block mean is >=.01 J. A useful conditional increment
+also requires that same criterion for R_CF-S_CF. If S_CF alone achieves a >=.01 mean gain and
+three positive signs against G, prefer that simpler rule. Preserve a favorable R_FULL result
+as a reference-package finding. If paired credit works as designed but no learned package
+improves G, keep G and stop this method on these foundations. No new seeds, scales, architecture
+or local-value probe follow automatically. These are investment criteria, not equivalence or
+significance tests. The 64 worlds remain nested within each fit/foundation; B06-selected bases
+make this a development comparison, not fresh-population confirmation or a class upper bound.
+
+**Implemented preparation and actual validation.** Isolated modules under
+`experiments/candidates/ucope/paired_branch_credit_b10/` implement full-reset pair collection,
+action-marginalized clipping, the factual algebraic reference and a four-epoch paired update.
+They import no native environment and accept a supplied adapter. B08/B09 shared code and all
+Claude FSD paths are unchanged. The focused suite passed **16 tests in 1.07 s**. It checked
+the factual/paired expectation at three probabilities, non-strict variance example, fixed
+targets, clipping, all-scheduled-row denominator, private RNG, prefix failure, final-tick
+credit, KEEP's next eligibility, continued recurrence, changed teammate reaction in a
+handwritten coupled fixture, and update call semantics. Across the final suite, collection
+used 58 non-UAV synthetic team ticks; its fixed feedback rule was handwritten. Four mocked
+optimizer step calls changed no parameters or optimizer state. There were **zero actual Adam
+updates, scientific fits, native ticks or checkpoint forwards**. The earlier 13-test suite
+also passed in 1.05 s before the optional-critic/update additions, using 52 synthetic ticks;
+these two checks are engineering work, not scientific replication.
+
+Production admission/runner, durable raw-pair output and result reduction still require binding
+and review before execution. This is a concrete costed proposal with tested learning/collection
+primitives, not a launched or fully reviewed experiment. Writing it does not extend the original
+deadline. UCOPE owns the remaining preparation directly; no Claude result or Root action is
+required, and the stopped B09 route remains stopped.
+
+
+## 2026-09-21 — Owner removes the running window; updated Pro method adopted
+
+After the time-extension question the owner answered **"不设窗口限制 允许自由研究"**.
+This removes the inherited 04:06:07 UTC deadline and does not install the proposed 90-minute
+window. Original completed operations retain their identities. Further UCOPE research,
+implementation and prospectively justified runs are authorized without per-batch approval;
+fit cost, fixed declared exposure and resource admission still apply. The earlier window's
+two-Pro-question limit is no longer used as a standing restriction on this newly authorized
+research. No fit allowance or new entitlement is created. No autonomous App cross-session
+creation, dispatch or messaging is authorized, and no Claude paths are taken over.
+
+At the owner's request I read the published control update
+`d5f9775a0806f590b0ed8aa435948642107bfc13`, including constitution section 5, the direction-DM
+body and the shared scientific-tools, Pro-question, reading-context and engineering methods.
+The amendment calls for proactive Pro consultation at consequential scientific decisions,
+with reuse where prior complete advice still covers the current evidence and choice. It
+applies prospectively; completed B09 is not reopened for another obligatory review. The
+updated source expressly permits the authorized Jev workflow without Root relay or a new
+owner approval, and distinguishes it from App cross-task messaging.
+
+B10 changes the learning premise and reference after B08/B09. I read the complete prior
+post-B04 Pro answer: it rightly distinguishes lawful opportunity from privileged branch
+differences and permits concrete direct learner tests without a mandatory diagnostic. It
+does not cover the newer frozen-foundation negatives, B09's expressed distance dependence,
+actual paired simulation or the proposed sparse-credit/full-data comparison. Those changes
+justify the single focused follow-up below. Await that advice only for the consequential
+choice to proceed/revise/decline B10; continue independent correctness and publication work.
+
+
+## Pro question 2026-09-21 ucope-paired-credit-after-b09
+
+Conversation: reuse the existing Jev UCOPE conversation from the local operation identified
+by `hmasd:f97583aa427f639c2e13af7542091198b50ce8f3e022ed14fa1652841ff87ffd`.
+Private conversation/account details remain solely in local transport state.
+
+Question: Does actual paired KEEP/END suffix credit supply a worthwhile new native learning
+comparison after B08/B09, against a rich full-data PPO reference and ordinary G? Assess the
+specific B10 preparation immediately above, including whether its loss of state coverage
+and sparse update design make nine fits poor value. Recommend proceeding unchanged, one
+concretely justified revision, or declining this method. The DM owns the decision; a new
+idea or positive recommendation is not owed. This is one direction's route/comparator
+judgment, not a Portfolio request or another review of completed B09.
+
+Standing: Original velocity-command commitment only. B06-selected ordinary mean controllers
+8941/8942/8943 remain the bases. Earlier jointly learned rich/scalar and sampled-reuse results
+are negative/mixed with favorable exceptions retained. B08's rich gate changed behavior but
+did not improve G (three-block mean R-G +.00001461); raw distance barely conditioned. B09
+normalized distance expressed a finite, mostly tail response yet failed both its practical
+contrasts: S_N-G +.00040473/-.00111368/+.00084387, S_N-B_0
++.00003130/-.00007726/+.00045533. It failed the fixed all-positive/mean>=.01 rule. G remains
+the practical choice; finite failures are neither class upper bounds nor proof of no lawful
+opportunity. There is no diagnosed omission of team reward, no newly identified score signal,
+and no demonstration that current branch preferences are useful or locally predictable.
+
+The new candidate changes sampling: both complete suffixes are actually executed under a
+fixed behavior gate on their own changed histories. No model-based counterfactual prediction
+or replay of the other branch's commands. One outcome-independent random agent/tick per pair,
+inactive coordinates retained, full-prefix replay charged. It analytically averages the
+current Bernoulli score; two full episodes buy one direct branch difference. R_FULL instead
+keeps all factual credit rows and distinct training worlds at the same native-step allocation.
+Scalar S_CF asks whether any net gain requires context; G asks whether any gate is worth using.
+The native comparison is a package comparison, not a pure component attribution.
+
+Context (read only what directly supports this judgment):
+
+- Current owner instruction is the preceding "不设窗口限制 允许自由研究"; no owner pause,
+  native deadline, fit allowance or new per-question approval applies to this direction work.
+  Governance is `docs/project/OPERATING_CONSTITUTION.md` sections 1–6 and 8 at
+  **d5f9775a0806f590b0ed8aa435948642107bfc13**. The UCOPE row at that revision predates this
+  preparation; the newer notebook is its scientific update. No App cross-task sends.
+- Methods at that same **d5f9775a0806f590b0ed8aa435948642107bfc13**:
+  `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections Update the working explanation,
+  Simple-model and literature bridges, Comparators and MARL information, Statistics,
+  Cost and exposure, Pro; `.agents/skills/hmasd-research-engineering/SKILL.md`, sections
+  Checks and review, Execution and admission. These guide evidence/cost interpretation,
+  not an approval process or obligation to manufacture another experiment.
+- Science/code at **source_sha** (the full published question commit supplied in the message):
+  this notebook's B08 reading, "2026-09-21 03:50 UTC — B09 read", the B10 preparation and
+  owner correction directly above; `experiments/candidates/ucope/paired_branch_credit_b10/`
+  (`collection.py`, `credit.py`, `learning.py`), and unchanged B08 `engine.py` for the full-data
+  reference. The preparation still lacks a production runner/raw-output/reducer binding.
+- Raw B09 evidence at **b7aa5f31f4db26d1905fbcb95b68904f8fdf500b**:
+  `runs/ucope/normalized_distance_gate_b09_reduce/summary.json` and each
+  `runs/ucope/normalized_distance_gate_b09_896{1,2,3}/summary.json`. B08 raw summaries and
+  contrasts are under `runs/ucope/frozen_mean_gate_b08_895{1,2,3}/summary.json` at source_sha.
+  These are finished native results, distinct from the new synthetic checks.
+- Reuse the full "Pro question 2026-09-19 post-b04-next-discrimination / Answer" in this
+  notebook at source_sha for its conditional-opportunity argument; it is advice on older
+  evidence, not current governance or a native finding. The September 20 predictive-target
+  and randomization entries prevent treating the score identity as a new discovery.
+- Source for task grounding at source_sha: `envs/pettingzoo/uav_env.py`, local observations,
+  selected free-space/no-shadow transition, connection assignment and non-paper reward;
+  `experiments/candidates/ucope/uav_motion_prefix_b01/environment.py` for the selected host
+  and actor/critic inputs. No other FSD candidate/history review is requested.
+- Primary analogy only: Foerster et al., COMA,
+  https://www.cs.ox.ac.uk/people/shimon.whiteson/pubs/foersteraaai18.pdf, section 4. Its learned
+  Q marginalization is not evidence of native paired-branch utility or current critic failure.
+
+Prospective cost: 9 gate fits, 2048 full 256-step training episodes each, 64 final worlds
+for each of four arms per block; **4,915,200 total native team ticks**, including duplicated
+prefixes; **50,688 Adam calls**, no foundation updates, additional diagnostics or Pro calls
+inside the experiment. The preceding preparation fixes all masters, stream addresses,
+updates and comparisons. Owner removed the time limit; this does not make analyst/compute
+cost free. Production binding and independent engineering review remain work to complete
+only as justified by the scientific choice. The 16 tests are synthetic (zero actual fits,
+native steps, checkpoint forwards or optimizer updates); they establish no native signal.
+
+Please focus on these decision-bearing points:
+
+1. Is the paired estimator and its 1275 sampling factor correct for shared local gates,
+   endogenous eligibility and genuine joint continuation? Separate first-update expectation,
+   conditional current-coin cancellation, multi-epoch PPO and changed-trajectory benefit.
+2. Does the native task/evidence supply a sufficient reason to try this learning package,
+   or is it another unsupported credit rescue? Consider nearly constant fresh means and
+   hidden team conditions, not just the availability of a variance identity. No obligation
+   to prove headroom or run a diagnostic before every learner comparison.
+3. Is R_FULL plus S_CF and G a strong and economical comparison? R_CF uses only 1024 focal
+   targets and 256 Adam calls per fit versus R_FULL's full-data 8192 gate updates. Would a
+   specific different allocation make the test substantially more interpretable? Any revision
+   must state changed fit/native/forward/update cost and predictions, not a generic sweep.
+4. State the strongest reason against your recommendation and what outcome would change it.
+   A paired-gradient improvement without gain over G is not a useful UCOPE result; a constant
+   rule may be the final choice. Do not turn three selected foundations or 64 nested worlds
+   into population confirmation. Do not infer global impossibility from rejecting this route.
+
+Constraints: no training, no new native evaluation or checkpoint forwards, no Pro subrequest,
+no App task messages, no new approval requirements and no edits outside the empty `### Answer`
+subsection under this unique question heading, on branch `codex/ucope-frozen-feedback` in
+`CartmanFatass/My-paper-code`, target `docs/research/candidates/ucope/NOTES.md`. Reason from
+the pinned source; before writing fetch the latest target blob and use its actual blob SHA.
+Preserve the question and every other byte; stop on overlapping edits. Return the actual
+write commit. If writeback is unavailable, return the complete answer in chat, not a receipt,
+SHA, status message or link. Cite consequential sources actually read and state material
+unread inputs. Return **MATERIAL_DISSENT: yes/no**, the scientific reasoning, and the smallest
+useful next action. Pro advises; the direct DM decides and writes the response here.
+
+### Answer
+
+Saved from chat by the DM after the accepted Jev request completed. Pro reported no GitHub write capability; the read-only delivery check returned NOT_DELIVERED with no answer commit. The complete captured answer follows unchanged, including rendered mathematical-layout artifacts. Question key: `hmasd:7abcbf28a029682dbba9cd522ed52947a807fdd28d839e3b7ebb997153d5a8a3`. Transport text SHA-256: `b330cfa047d3649aee4a768cf5342324ef66b839eff69228d04a29c48c696db4`; saved file SHA-256 including the driver-added final newline: `6c467564dc0e46d1544bdaab42660b4fa6dee1357a6acc6dedf1f3f4abb2afd4`. No private account or conversation address is published.
+
+附件及相关固定版本源码均可读取。指定分支上的 ### Answer 仍为空；但当前 GitHub 工具没有文件写入操作，无法提交本次答复。没有生成 commit，也没有修改仓库文件。 以下为完整答复。
+
+Answer
+
+MATERIAL_DISSENT: yes。我的建议是：不按当前稀疏配对方案推进 B10 的九个原生拟合，暂不完成这一路线的生产绑定。
+
+分歧不在于“配对估计器错误”，也不在于旧时间窗口、拟合额度或审批。1275 的采样校正及初始策略处的原始梯度恒等式成立；实际执行两条后续轨迹也确实改变了训练时获得的信息。 但当前方案以大量事实信用行、世界覆盖和策略更新机会，换取每个拟合至多 1,024 个焦点差分。更具体的问题是：若沿用通常的 Adam 默认参数，单标量 S_CF 在 256 次更新内的可达概率范围受到很强限制；因此它并不是一个充分探索了常数续期概率的参照。结合 B08/B09 的已知结果，我认为当前九拟合方案的信息价值不足，而不是认为实际配对信用在任何实现中都不值得研究。
+
+本判断依据科学输入 37cb539622fa55517006b0289f7e863695174771、指定的 B09 原始证据版本及治理版本。所有旧原生运行窗口和拟合额度均已被当前 owner 指令取代；下面讨论的是研究成本与判别价值，不是权限。
+
+hmasd-pro-question-ucope-paired…
+
+一、B08/B09 改变了什么，而 B10 真正新增了什么
+
+B08 的 rich gate 确实学动了，其最终平均 KEEP 概率约为 .1995/.0558/.0253；但 R−G 的三块均值分别为 +.00025833/−.00015079/−.00006370，描述性均值仅 +.00001461。这不是一个完全没有执行门控的阴性结果；尤其后两块向频繁 END 移动，与减少无益复制的解释相容，但不能证明它已经找到最优规则。
+
+B09 又排除了一个更具体的解释：原始距离输入几乎未形成可观概率调制，不等于经过固定尺度变换的有限学习器也无法表达调制。B09 的条件响应实际出现了，主要集中在距离尾部，却未满足任务收益标准。其 S_N−G 为 +.0004047285/−.0011136781/+.0008438687，S_N−B_0 为 +.0000312980/−.0000772588/+.0004553333；相应三块均值为 +.0000449730 和 +.0001364575，两项均未通过既定规则。两块正结果及偶发较大的单世界变化仍需保留，不能据此推导所有条件机会为零。
+
+因此，现在没有依据把失败诊断为“缺少团队奖励”“完全不表达状态响应”或“从未得到分支偏好方向的 score”。September 20 的记录已经说明，随机事实样本在适当条件下识别分支条件期望，而事实策略梯度已经含有相应方向。B10 的新意不是发现一个此前不存在的 score，而是在同一前决策历史上，实际取得两条互为替代的后续结果，从而在相减时消去部分共同结果变动。 这是实质不同的采样方案，不是对旧信用公式换名。
+
+这个新理由足以使 B10 成为一个可讨论的研究假设；但它尚不足以证明当前采样和更新配置值得九个拟合。
+
+二、1275 与配对估计：原始一阶期望正确，但不能扩大其保证
+
+以下统一令 Z=1 表示 KEEP，与较早使用 END 编码的记录区分。
+
+固定一轮收集时的行为门控参数 θ
+0
+	​
+
+。令 X
+it
+	​
+
+ 为第 i 个 agent 在 tick t 的合法门控输入，e
+it
+	​
+
+ 为是否 eligible，且
+
+p
+it
+	​
+
+=σ(f
+θ
+0
+	​
+
+	​
+
+(X
+it
+	​
+
+)).
+
+在一个 eligible 焦点坐标上，定义
+
+Y
+z
+	​
+
+=
+256
+1
+	​
+
+u=t
+∑
+255
+	​
+
+r
+u
+(z)
+	​
+
+,δ=Y
+K
+	​
+
+−Y
+E
+	​
+
+.
+
+两条后续轨迹均执行同一个行为策略规则，但必须作用于各自实际产生的历史。队友当前动作在相同前缀和相同当前随机槽下保持一致；之后的队友动作则随各自观测和递归状态重新计算。当前 collect_pair 的确采用这种做法，并保留完整前缀、上下文及终止边界检查，而非把一条分支的命令序列移植到另一条。
+
+在声明的随机核及通常的可微 score 模型下，团队目标的原始策略梯度可以写成
+
+∇
+θ
+	​
+
+J(θ
+0
+	​
+
+)=
+t=1
+∑
+255
+	​
+
+i=1
+∑
+5
+	​
+
+E
+θ
+0
+	​
+
+	​
+
+[e
+it
+	​
+
+p
+it
+	​
+
+(1−p
+it
+	​
+
+)Δ
+it
+	​
+
+∇
+θ
+	​
+
+f
+θ
+	​
+
+(X
+it
+	​
+
+)
+	​
+
+θ
+0
+	​
+
+	​
+
+],
+
+其中 Δ
+it
+	​
+
+ 是对该历史下两条后续轨迹差异取期望后的分支差；其中包括后续 eligibility、运动、奖励及队友反馈。
+
+因此，对独立于结果、均匀抽取的坐标 C=(i,t)，单对估计
+
+g
+	​
+
+=1275e
+C
+	​
+
+p
+C
+	​
+
+(1−p
+C
+	​
+
+)δ
+C
+	​
+
+∇
+θ
+	​
+
+f
+θ
+	​
+
+(X
+C
+	​
+
+)
+	​
+
+θ
+0
+	​
+
+	​
+
+
+具有上述期望，因为共有 5×255=1275 个可抽取坐标。这里不应再除以 5，也不应再除以 256；后一个归一化已经在 Y
+z
+	​
+
+ 中。 对所有安排好的 pair 求平均、让不合格坐标贡献零但留在分母中，是保持这个目标所需的处理。当前 credit.py 和 learning.py 与此一致。
+
+三个容易混淆的边界需要明确。
+
+内生 eligibility 不要求额外乘一个导数。 它是动作历史的一部分；早先门控改变它所带来的影响，已经由早先动作的 score 与完整未来团队回报承担。均匀抽取所有非重置坐标并保留 inactive pair，使早先和晚些坐标的贡献在期望中都存在。只重抽到 eligible，或除以实际 eligible 数，会改成不同的加权对象。
+
+共享门控参数要求对所有 agent/tick 的 score 求和，不要求物理轨迹独立。 独立的是给定联合前决策历史后的当前私有门控抽样；物理状态、服务竞争、干扰、共同奖励和后续队友反应可以高度耦合。这里并未漏掉这些团队后果，也不能把一个 pair 当作五个独立样本。
+
+“首次更新正确”应指新旧参数重合处、裁剪和 Adam 变换之前的损失梯度。 它不是“第一步 Adam 参数位移是目标梯度的无偏估计”。梯度范数裁剪和 Adam 都是非线性变换；后续 PPO epochs 又固定旧目标、旧访问分布和旧后续策略，而新策略已经改变。即使代码计算无误，也没有逐步改进 native J 的定理。R_FULL 还使用经验优势标准化，因此该一阶恒等式不能直接扩展成“两个实际有限 PPO 优化器具有相同期望”。
+
+此外，本轮不能继续套用早期 jointly learned package 的全部优化解释：B10 的 foundation 已冻结，R_FULL 的 gate 与 critic 也是分开的优化器和范数裁剪，并非旧的 actor/critic/gate 联合裁剪配置。
+
+三、消除了哪一种方差：可以精确说明，但没有同成本总方差排序
+
+给定前缀、焦点坐标、除焦点当前硬币外的随机量，以及预结果、与当前动作无关的 baseline b，把两条潜在后续结果视为已固定。事实 score 的标量部分是
+
+F=(Z−p)(Y
+Z
+	​
+
+−b),Z∼Bernoulli(p).
+
+直接计算得
+
+E[F]=p(1−p)(Y
+K
+	​
+
+−Y
+E
+	​
+
+),
+
+以及
+
+Var(F)=p(1−p)[(1−p)Y
+K
+	​
+
++pY
+E
+	​
+
+−b]
+2
+.
+
+在相同潜在后续结果上，两个独立当前硬币的事实 score 取平均，其这部分条件方差减半；配对边缘化则直接得到条件期望，去掉这一项。这也说明为何不能宣称严格优势：当 p=.5 且 b 等于两分支结果的中点时，事实 score 的这部分条件方差本来就是零。以上是对此二值模型的推导，不是对 native 结果的测量。
+
+配对之后仍然存在历史、隐藏团队条件、未来门控硬币、焦点位置和有限拟合的变动。共同随机数只有在两条分支中产生相同或相关的结果成分时才有利；“用了相同随机槽”本身不保证正协方差。
+
+尤其不能把这里的两个焦点事实抽样，等同于 R_FULL 的两条完整事实 episode。 R_FULL 从不同世界获得轨迹，并使用每条轨迹的全部合格信用行；配对方案只更新一个焦点目标。前面的条件方差恒等式没有证明，在相同 512 个团队 tick 的费用下，后者优于前者。
+
+hmasd-pro-question-ucope-paired… +1
+
+COMA 第 4 节提供的是恰当的类比：用集中式 Q 对单个 agent 的当前动作作边缘化，其他 agent 的当前动作作为条件；它不是要求冻结队友未来的动作序列。COMA 的实现用学习到的 critic 避免额外反事实仿真，B10 则支付完整后续轨迹成本。论文不能证明这里的 critic 已失败，也不能把其收敛假设移植到 B10 的有限多轮 PPO。
+牛津大学计算机科学系
+
+四、当前配置的两个主要成本问题
+
+第一，1275 恢复期望尺度，却不能恢复信用覆盖。
+
+在固定 p=.5 的声明时序模型中，每个 agent 一回合的期望 eligible 数为
+
+N(p,256)=
+1+p
+255
+	​
+
++
+(1+p)
+2
+p
+	​
+
+[1−(−p)
+255
+].
+
+代入得到 N(.5,256)=170.2222。因此均匀抽取的焦点坐标有约 .667538 的概率合格，1,024 个 pair 约对应 683.56 个合格焦点差分。另一方面，同样 2,048 个完整事实 episode，在该固定概率模型下约有 1,743,075.56 个合格事实信用行。
+
+两者相差 2,550 倍的信用行数量，不是 2,550 倍的独立样本量或有效信息量。事实行高度相关，配对标签也可能远比单行事实回报干净；但这个数量差说明，方案牺牲的并不只是“一半世界”。实际 rich gate 会改变概率，因此这些是固定半概率模型的成本说明，不是 B10 的预测计数。
+
+同时，均匀抽取 tick 1…255 的平均焦点位置是 128。两条完整 episode 平均有 256 个团队 tick 用于重复焦点之前的前缀，约占每对总成本的一半。前缀用于生成正确的前决策分布，并非没有用途；但它必须计费，且没有在主配对损失中成为额外信用目标。当前实现确实按完整双回合收集。
+
+第二，256 次 Adam 对单标量参照的限制比“更新较少”更具体。
+
+S_CF 的唯一可训练量是初始为零的 logit c，输出 p=σ(c)；它没有 rich network 的多参数路径来累积输出变化。
+
+下面给出一个条件性、实数算术下的可达性界。条件是沿用普通 Adam：β
+1
+	​
+
+=.9,β
+2
+	​
+
+=.999，零初始矩，无额外参数更新或重参数化，恒定学习率 η=3×10
+−4
+。这些是默认 Adam 的更新定义；B10 生产优化器工厂尚未绑定，因而不能把这些条件冒充已验收的生产事实。
+PyTorch Docs
+
+令 g
+s
+	​
+
+ 为进入 Adam 的梯度，包含此前可能进行的范数裁剪。偏差修正后的矩可写为
+
+m
+t
+	​
+
+=
+s=1
+∑
+t
+	​
+
+a
+ts
+	​
+
+g
+s
+	​
+
+,
+v
+t
+	​
+
+=
+s=1
+∑
+t
+	​
+
+b
+ts
+	​
+
+g
+s
+2
+	​
+
+,
+
+其中
+
+a
+ts
+	​
+
+=
+1−β
+1
+t
+	​
+
+(1−β
+1
+	​
+
+)β
+1
+t−s
+	​
+
+	​
+
+,b
+ts
+	​
+
+=
+1−β
+2
+t
+	​
+
+(1−β
+2
+	​
+
+)β
+2
+t−s
+	​
+
+	​
+
+.
+
+由 Cauchy–Schwarz，
+
+v
+t
+	​
+
+	​
+
++ϵ
+∣
+m
+t
+	​
+
+∣
+	​
+
+≤C
+t
+	​
+
+,
+C
+t
+	​
+
+=
+1−β
+1
+t
+	​
+
+1−β
+1
+	​
+
+	​
+
+1−β
+2
+	​
+
+1−β
+2
+t
+	​
+
+	​
+
+1−β
+1
+2
+	​
+
+/β
+2
+	​
+
+1−(β
+1
+2
+	​
+
+/β
+2
+	​
+
+)
+t
+	​
+
+	​
+
+.
+
+故无论这 256 步的有限梯度序列如何，
+
+∣c
+256
+	​
+
+∣≤η
+t=1
+∑
+256
+	​
+
+C
+t
+	​
+
+≈0.184450,
+
+从而
+
+p
+256
+	​
+
+∈[0.454018,0.545982].
+
+这是基于更新公式和有限求和的新推导；我只做了纯算术核算，没有运行优化器、门控或 checkpoint。它不是对 FP32 每个舍入误差的机器级证明。注意不能简单用 256η 当一般上界，因为 Adam 单步位移可能超过学习率。
+
+这使当前 S_CF 更接近“允许在半概率附近有限移动的标量学习器”，而非充分竞争的常数续期规则。 即使它始终收到方向正确的配对信用，当前更新暴露也很难让它表现出 B08 rich gate 那样的大幅整体概率变化。R_CF−S_CF 因而可能来自整体续期率的可达范围、参数化及有限优化差异，而不必来自对上下文的有用利用。
+
+这不使 S_CF 成为非法参照，也不证明其收益一定差；它仍是一个明确的有限学习 package。但它显著削弱了“赢过 S_CF 就说明上下文值得保留”的解释力度，也降低了同时支付这三个 scalar fits 的判别价值。
+
+五、任务条件提供了一个真实假设，但没有定位信用瓶颈
+
+本轮 END 是冻结 foundation 的新鲜确定性均值命令，不是早期 G 每 tick 重新抽取的 Gaussian innovation。实际随机性主要来自世界抽样及门控硬币。因而不能继续以“去掉新鲜速度噪声”作为 B10 的未加区分的动机。当前源代码每 tick 推进冻结 GRU，使用自身实际上一命令和 phase zero；门控输入保持 175 维，未增加全局状态或隐藏队友信息。
+
+原生任务确实允许耦合后果：移动会改变干扰与 SINR，连接按阈值、排序、单用户分配和 UAV 容量形成；非论文奖励仍为 .7 × connected-user fraction + .3 × mean connected-user SINR quality。局部观测并不直接提供完整全局连接分配。实际配对可以在保持合法 actor 输入的同时，让训练信用包含所有这些后果。
+
+但近乎恒定的新鲜均值和被裁剪的运动，构成了实质的反方解释：很多决策的物理差异可能很小，剩余较大的后果可能由局部不可见的团队条件决定。B08 保存轨迹中的运动缩减和边界裁剪支持重视这个解释，但那个有限子集不能充当 B10 差分分布的估计。
+
+还必须保留 notebook 已经指出的反例：当前命令完全相同也不保证 KEEP 和 END 的未来价值相同，因为下一 tick 的 eligibility 不同。因此不能根据小距离就筛掉坐标、宣布差分为零，或只在“大运动”位置重抽。B10 的完整后续轨迹和 inactive 保留设计，在这一点上是正确的。
+
+一个简化模型可以把未解决之处说清楚。设
+
+Y
+K
+	​
+
+=C+
+2
+1
+	​
+
+S,Y
+E
+	​
+
+=C−
+2
+1
+	​
+
+S.
+
+配对精确消去共同项 C，取得 S。若 S=aX，而 X 是合法输入，配对可能大幅改善可学习的方向信号；若 S=aU，其中隐藏符号 U 与所有合法输入独立且均值为零，那么即使每次都精确观察 S，局部门控仍没有可泛化的偏好方向。差分测得准确，与差分可由 actor 使用，是两件事。
+
+这正是旧 Pro 的条件机会论证在新证据下仍适用的部分，而不是要求先证明 headroom 才能做实验。B10 可以用直接学习检验第二个环节；只是当前配置以很少的焦点目标承担这个检验，不能靠一个正确的方差恒等式保证其信息价值。
+
+六、比较组应保留其强度，但不应靠弱化参照或机械补步数挽救本设计
+
+R_FULL、S_CF、G 分别服务于不同决策：
+
+比较	实际可回答的问题	不能自动推出的结论
+R_CF−R_FULL	支付配对与覆盖损失的完整学习方案，是否胜过保留全部事实数据的 rich PPO	纯粹的方差因果效应，或匹配算力后的普遍效率优势
+R_CF−S_CF	当前两种参数化及有限优化 package 的差别	上下文本身必不可少；尤其受上述 scalar 可达范围限制
+R_CF−G、S_CF−G	新学出的门控是否有实际使用价值	所有 foundation 或任务上的总体优越性
+
+这些定位与原提案的 package 边界相容。不应把 R_FULL 改成焦点-only 事实学习器来制造更漂亮的配对优势；保留全数据参照，是此设计正确的一部分。没有收益超过 G，则仅有更清楚的配对梯度或优于另一个 gate learner，都不构成实用 UCOPE 进展。
+
+hmasd-pro-question-ucope-paired… +1
+
+对于“换一种分配是否更有解释力”，我的回答是：当前最明显的问题值得指出，但没有一个仅靠重新分配更新次数的改动，已经有足够依据让我转而建议启动。
+
+增加 epochs 可以扩大参数位移，却不会增加独立世界或焦点标签；它也会改变旧目标重用和 PPO 裁剪的作用。缩小每轮 pair 数能增加行为策略刷新次数，却减少每次更新的目标数。让重复前缀或强制分支的所有行直接进入普通事实 PPO，也不是免费复用：这些轨迹包含人为强制选择，需要重新说明权重与目标，不能默认为原来的 on-policy 数据。上述都是可能的另一个学习方案，不是无需新科学理由的机械修补。
+
+我因此选择题目允许的decline，而不是报一个未经支持的新 batch size 或学习率，事后再依靠它解释结果。此建议没有新增原生比较：新增拟合、原生 tick、foundation forward 和 Adam 调用均为零。
+
+原方案的成本计算本身是正确的：
+
+9×2048×256=4,718,592
+
+个训练团队 tick，加上
+
+3×4×64×256=196,608
+
+个评估团队 tick，总计 4,915,200；其中 foundation 前向调用数同为 4,915,200，对应 24,576,000 个 agent recurrent rows。Gate Adam 为 6×256+3×8192=26,112，critic Adam 为 24,576，合计 50,688。这是前瞻成本，不是已执行工作；生产绑定、检查、输出与实际运行时间仍有成本，不能把旧时间估计当作 B10 测量。
+
+hmasd-pro-question-ucope-paired…
+
+七、一处需要单独标记的源码问题，不应扩大成主方法缺陷
+
+collection.py 的可选 factual 辅助路径返回
+
+Python
+运行
+baseline = left["value"][case.tick] / horizon
+
+并注释称继承 critic 使用未归一化 returns。可是当前固定版本 B08 engine.update 的 critic target 已经是 returns_to_go / horizon。若这个辅助路径接入的是按该 B08 语义训练的 critic，就会再次除以 horizon，baseline 单位不匹配。
+
+其影响范围应严格限定：选定的 R_CF/S_CF 不使用 critic，R_FULL 走自己的 B08 collector/update，因此这不是上述配对主估计器或已完成 B08/B09 的错误。一个尺度不佳但仍与当前动作无关的预结果 baseline，也不会破坏原始事实 score 的期望恒等式；它会改变条件方差及有限裁剪行为。该处应作为可选 factual correctness reference 的单位约定问题保留，而不是宣称又发现了一个 native 信用瓶颈。
+
+同时，16 项 synthetic checks 的含义不能扩大：它们并未执行真实 Adam 参数学习、native checkpoint forward 或 native prefix reproduction。生产 runner、持久化 raw pair 输出及 reducer 仍缺绑定。这些是尚未完成的工程工作，不是科学反例，也不是新增审批要求。
+
+hmasd-pro-question-ucope-paired…
+
+八、对本建议最强的反对理由，以及什么会改变判断
+
+最强反对理由是：B10 的真实配对可能消除一个中央 critic 很难拟合、但在两条分支中高度共同的结果成分。若有用偏好结构足够简单，几百个高质量焦点目标也可能胜过大量高方差事实信用行；静态、free-space、无 shadow 的任务与已冻结 foundation，又使完整前缀复现更有希望。这是支持直接有限学习比较的真正理由，不需要先运行机会诊断，更不需要先证明 G 不是最优。B08/B09 的小平均效果也没有排除这种可能。
+
+我仍倾向不购买当前方案，原因是我们知道它大幅减少了哪些训练信息，并能指出 scalar 参照的具体优化限制，却尚不知道它保留下来的条件差分足以弥补这些损失。这是一项有不确定性的投资判断，不是从失败次数推导的禁令，也不是 adviser 对 DM 的否决权。
+
+我的工作预测是：即便实际配对成功消除了当前硬币和一部分共同结果噪声，可由合法局部输入利用的增量仍未必足以让当前稀疏 R_CF 在三块中持续、有用地超过 G；而 S_CF 留在半概率附近，不能被简单解读为“数据证明续期率无需学习”。前者是待反驳的任务判断，后者包含明确的优化配置解释，二者都不是新 native 观察。
+
+如果 DM 最终选择执行，一个有效、完整结果中 R_CF 对 R_FULL 和 G 均满足预写的三块正号、均值至少 .01 J，会直接削弱我的当前投资判断。对 S_CF 的有用优势可支持保留该 rich package，但在 scalar 暴露限制下仍不能独立证明上下文机制必要。若 S_CF 自身有用地超过 G，应认真保留常数规则；若 R_FULL 赢，应保留全数据参照的积极发现；若没有任何新门控有用地超过 G，则更干净的梯度不是继续这一路线的充分理由。所有这些仍是选定 foundation 上的开发结果，不是把三块或 64 个嵌套世界升级为总体确认。
+
+hmasd-pro-question-ucope-paired…
+
+最小有用下一步不是再开一个诊断面板。 本答复已经完成当前值得先做的零原生判别：确认原始估计器的正确范围，明确其与同成本全数据学习的差别，并揭示 scalar 参照的条件性可达范围限制。建议据此结束当前稀疏 B10 package 的生产推进，保留 G 与已完成准备。仍未解决的研究问题是：在这些 foundation 的实际访问分布上，配对结果中有多少是可由合法局部输入预测、并且能够转化为超过普通反馈的策略增益，而非共同噪声、隐藏团队条件或自身未来 eligibility 调度。 拒绝当前实现不等于解决了这个问题，也不等于关闭整个 UCOPE 方向。
+
+来源与信息缺口
+
+我已阅读附件全文、指定版本的 B10 三个模块、B08 collector/update、B09 scalar gate、B08/B09 notebook 结果与相关原始摘要内容、旧 post-B04 Pro Answer、September 20 的 predictive-target/randomization 论证、当前 owner correction，以及指定治理和方法章节。任务解释还使用了当前固定版本的 actor/critic 输入适配、原生运动/局部观测、干扰与连接分配及非论文奖励源码；外部类比仅使用实际阅读的 COMA 第 4 节，Adam 可达性分析则使用版本化的 PyTorch 更新定义。
+
+我没有重做全部 NPZ/原始行/checkpoint/hash 审计，没有运行这些 synthetic tests，也没有执行任何 checkpoint forward、原生评估或优化器。B08/B09 的记录核验不应被表述成我重新完成了其全部独立重建。决策关键的未知项仍是 native 配对差分分布、其局部可预测性、同成本实际学习收益，以及尚未绑定的生产优化器和采集发布路径。 这些缺口限制积极机制结论，也限制全局否定结论；它们不妨碍对当前九拟合稀疏方案作出上述、范围明确的否定建议。
+
+
+## 2026-09-21 05:09 UTC — DM response to Pro: strengthen the simple reference, retain one paired-credit test
+
+**Read and decision.** I read the complete answer above, including its **MATERIAL_DISSENT:
+yes** and recommendation to decline the current sparse package. Pro supplied a full chat
+answer and explicitly could not write GitHub; the delivery check confirmed no write. The
+unchanged captured answer is saved at `85a9be980`, after verifying that the assigned subsection
+was still empty and the question/prior notebook bytes had not changed. This is a completed
+consultation, not a receipt or an unresolved adviser dependency.
+
+I **accept** the raw-gradient/Adam distinction, the loss of credit coverage, the weak scalar
+exposure criticism, and the restriction on interpreting R_CF-S_CF. I **modify** the comparison
+by replacing S_CF with a fresh **S_FULL** learner: the single-logit B09 gate trained with the
+same complete-data PPO/central critic and 2,048 distinct worlds as R_FULL. **No S_CF scientific
+fit will be run.** I **do not adopt** the recommendation to decline every sparse paired test.
+That is my investment judgment, not Pro's endorsement or an owner approval question.
+
+The reason to spend one batch is specific. Actual alternative suffixes can cancel a world-
+and history-dependent team outcome component before a critic must predict it; no completed
+UCOPE native learner has obtained those two outcomes. That distinction survives B08/B09 and
+the earlier factual-baseline negative. Hundreds of direct focal targets could suffice if the
+useful relation is simple; they could also fail through hidden team conditions, small motion,
+changing eligibility, or inadequate coverage. The revised full-data rich and scalar references
+retain exactly the evidence and optimization opportunities that the candidate sacrifices.
+This is a direct, falsifiable test of whether that sacrifice buys useful learning on these
+foundations. It is not a diagnosis that old learning failed through noisy credit, and no
+headroom proof or extra diagnostic panel is required before a bounded learning comparison.
+Existing preparation effort is not a reason to execute. A negative result ends this particular
+paired package on these foundations; cleaner gradients alone do not justify another iteration.
+
+**Independent check of the scalar objection.** Using the ordinary Adam update in the
+[PyTorch 2.7 primary documentation](https://docs.pytorch.org/docs/2.7/generated/torch.optim.Adam.html),
+I independently summed the Cauchy-Schwarz bound over its bias-corrected moment weights in
+plain Python arithmetic. With beta1=.9, beta2=.999, lr=.0003 and 256 updates, the bound is
+`|c| <= .18444972542761606`, hence `p in [.4540178606655591,.5459821393344408]`.
+This is a conditional real-arithmetic bound, not an FP32 machine proof or a native observation.
+It cost zero environments, checkpoint forwards and optimizer updates. The current prepared
+optimizer does use these defaults, so the objection applies. S_FULL does not receive extra
+epochs on the same few pair targets: it receives the complete factual trajectory data, critic
+training, behavior refresh and update schedule already used by the strongest available simple
+learning reference. Neither this change nor a future win over S_FULL establishes that context
+itself is necessary; the arms remain different finite learning packages.
+
+**Final prospective revision, before any native exposure.** This paragraph supersedes the
+S_CF arm, scalar comparison claim and optimizer counts in the original B10 proposal. The
+original proposal remains historical; no attempted operation, score or fit is relabeled.
+The object is still `UCOPE_PAIRED_BRANCH_CREDIT_B10`, masters **8971/8972/8973**, frozen B06
+Ghalf **8941/8942/8943**, CPU FP32 on local_linux, horizon 256, and the same native task,
+legal information, reward, max-two-tick command semantics and recurrent feedback.
+
+| Arm | Training allocation and optimizer exposure per fit |
+| --- | --- |
+| R_CF | Rich B08 gate, 1,024 actual pairs, 16 pairs per fixed-policy round, four full-batch Adam epochs per round; 256 gate calls, no critic |
+| R_FULL | Same rich architecture and initialization; 2,048 distinct factual worlds, all B08 PPO rows, two episodes per update, four epochs, batch 256; planned 8,192 gate and 8,192 critic calls |
+| S_FULL | One state-independent B09 logit; the same full-data collection, separate central critic, worlds and update schedule as R_FULL; planned 8,192 gate and 8,192 critic calls |
+| G | The same frozen ordinary mean controller; zero fitting |
+
+All Adam optimizers use lr .0003, beta1 .9, beta2 .999, epsilon 1e-8, no weight decay,
+no AMSGrad and norm clip .5. Models and optimizer states remain private to each arm. R_CF's
+raw loss gradient has the derived first-order identity at the old policy, before norm clipping
+or Adam; no unbiased parameter-step claim is made. R_FULL/S_FULL retain the old empirical
+advantage normalization and unchanged B08 update. If a minibatch has no eligible gate row,
+that existing update skips its gate call; planned calls above are the ordinary complete-data
+count and actual skipped calls must be reported, not fabricated or replaced.
+
+For b=100000*master, R_CF retains its schedule b+81, worlds b+10000+j (j=0..1023),
+coins b+50000+j and auxiliary focal slots b+60000+j. R_FULL and S_FULL each use all worlds
+b+10000+e (e=0..2047), private coins b+50000+e and their own advancing shuffle generator
+at b+91. Rich initialization is b+11; both full-data critics initialize independently at
+b+12. All arms retain all final 64 worlds b+30000+e and, for learned gates, coins b+70000+e.
+All three fits finish before any final evaluation in their block. There is no interim panel,
+selected epoch, exploration sweep or outcome-dependent expansion. All three blocks are
+declared now, not selected after the first one.
+
+Planned cost remains **9 new gate fits, 4,718,592 training + 196,608 evaluation = 4,915,200
+native team ticks**, including every repeated prefix. Foundation forward calls equal native
+ticks; agent recurrent rows total **24,576,000**; foundation optimizer calls remain zero.
+The revised planned optimizer cost is **49,920 gate + 49,152 critic = 99,072 Adam calls**.
+The full-data scalar is worth the increased optimizer cost because it removes an avoidably
+weak practical learning reference without weakening R_FULL or increasing native exposure.
+Only R_CF produces raw paired archives; S_FULL retains its final checkpoint and evaluation
+primitives. All evaluation contexts are retained, rather than only the old every-eighth-world
+subset; this changes recording, not observations or exposure. The earlier 35-70 minute wall
+estimate is unmeasured for B10 and may increase with the extra updates and raw writes. Use
+fresh >=4 GiB admission, one Torch/BLAS thread per invocation, at most three parallel blocks
+and sequential arms. There is **no owner running-window limit**, no replacement 90-minute
+deadline and no hidden automatic retry. Technical failures retain identity and partial costs.
+
+**Prediction and investment rule.** The candidate prediction is useful changed-trajectory
+return from direct branch credit, despite sparse targets, not merely correct paired algebra.
+Retain R_CF for further investment only if R_CF-R_FULL and R_CF-G are each positive in all
+three blocks with mean >=.01 J. Also require that criterion against S_FULL before preferring
+the rich paired package over the simpler learned rule. A useful S_FULL-G result instead
+supports the simple learner; a useful R_FULL-G result supports ordinary full-data gate PPO.
+If none improves G usefully, retain G and stop this paired package here. No next learning
+rate, pair density, architecture, noise/copy-rate or local-value batch follows automatically.
+These are investment criteria on selected developmental bases, not significance/equivalence
+tests, confirmation over new foundations, or a bound on adaptive termination. Interventional
+training Js, true pair deltas and probability dispersion explain the observed implementation;
+they do not replace the final four policy panels. This narrows the original context claim.
+
+The current complete Pro answer covers the estimator, coverage tradeoff, finite optimization
+and strongest-reference concern used in this revision; another question would repeat this
+decision rather than resolve a new premise. Its dissent is preserved for comparison with the
+eventual result. No Root, other App task or Claude dependency is introduced.
+
+**Engineering work and L0 revision.** Owned paths remain the B10 package, mirrored tests,
+`scripts/run_ucope_paired_branch_credit_b10.py`, UCOPE runs and this notebook. No shared B08/B09
+or Claude executable source is changed. At `9b6b2fabc` the already reported factual-reference
+baseline was corrected: B08 critic values already have suffix/H units. That fix affects the
+optional algebraic reference, not R_CF, R_FULL or completed B08/B09. Its repeated focused
+16-check suite passed in 1.10 s with 58 handwritten synthetic ticks and zero actual Adam calls.
+Four learning checks then passed in 1.01 s (two new precision/focal-index checks); they used
+12 mock step calls and no actual optimizer state change. The new raw-storage checks passed
+2/2 in 1.06 s using one 10-tick handwritten pair. Their first invocation stopped at a test-
+import error before any fixture executed; moving the checks alongside their fixture fixed it.
+Four production-binding checks passed in 2.54 s without transitions or optimizer updates.
+The original R_CF/R_FULL/S_CF complete tiny pipeline and interruption checks passed 2/2 in
+2.00 s: **80 complete synthetic ticks + 2 returned failure ticks, 24 actual Adam calls**,
+zero native environments or native checkpoint forwards. This is engineering work, not a
+scientific fit/result, and it was completed while Pro was thinking.
+
+Independent read-only Reviewer found no further material executable defect at `9a4dd76cb`;
+it specifically required that complete/interrupted integration coverage, which is now present.
+That review does not cover the new S_FULL binding until its small delta is inspected. Complete
+that revision and run the changed tiny full path once (prospectively **80 synthetic ticks,
+36 Adam calls**); do not repeat unchanged native/smoke experiments. Reconstruct its pair and
+four evaluation panels from raw arrays, verify immutable foundation/evaluation and parameter
+ownership, then obtain the bounded delta review and accept the exact published source before
+native launch. A binding/count/fidelity failure is a technical failure, not negative science.
+
+The changed full synthetic path and renamed reducer passed **2/2 in 2.01 s** with the
+prospective 80 synthetic ticks and 36 Adam calls. Raw rewards reconstructed the two stored
+R_CF pairs and all four policy panels; foundation and evaluation checks remained unchanged.
+Across distinct cases, 26 focused checks now have passing evidence; that is not a claim that
+all 26 were rerun in one invocation. The revised executable delta still awaits independent
+review before DM launch acceptance. No B10 native effect has occurred.
+
+### 2026-09-21 05:12 UTC — Independent review closed; final native source accepted
+
+The independent Reviewer returned no material finding on `c0b18b4ff`, explicitly checking
+S_FULL's scalar gate, private critic/optimizer/shuffle state, complete-data route, reducer,
+changed tiny-fixture counts and artifact reconstruction. It reused the passing checks and
+performed no new optimization, checkpoint forward or native work. I accept the implementation
+for the revised prospective comparison above. Current main was refreshed to `d27908206`;
+its intervening changes are confined to Claude's FSD work, and UCOPE's active lead/pause
+authority is unchanged. No FSD path or canonical checkout is modified.
+
+Proceed through admission with the published source containing this acceptance, one invocation
+per declared master, at most three concurrently. Preserve every returned operation identity and
+read the finished results directly here. An admission refusal is not permission to bypass the
+kernel; uncertain acceptance is reconciled at the same handle. This acceptance adds no seeds,
+arms, endpoints or follow-on batch, and does not imply that native prefix fidelity has already
+been observed. Its first observation belongs to the declared training itself.
+
+### 2026-09-21 05:16 UTC — All three declared B10 operations accepted
+
+The kernel accepted the three original block invocations from fixed source
+`07605eecde6bba632b86ac2e92862057ea6d9fe2`; their native manifests are the authoritative
+identities: [8971](../../../../runs/ucope/paired_branch_credit_b10_8971/launch-manifest.json),
+[8972](../../../../runs/ucope/paired_branch_credit_b10_8972/launch-manifest.json), and
+[8973](../../../../runs/ucope/paired_branch_credit_b10_8973/launch-manifest.json).
+They run from retained source snapshots, so later notebook/analysis edits do not alter the
+accepted code. No previous native handle was relaunched, and no extra seed or arm was added.
+
+The first cost-only observation finds all three RUNNING, no reported failure, 192/96/32
+completed R_CF pairs and 48/24/8 gate updates, with each foundation digest unchanged.
+Thus real-prefix identity has passed for those declared training pairs; this is narrower
+than scientific success and is not a free preliminary probe. No final panels have been read.
+The direct DM retains observation, collection, interpretation and independent publication.
+
+### 2026-09-21 05:28 UTC — Offline reading prepared while the declared fits continue
+
+All three R_CF fits have completed their 1,024 pairs / 2,048 full training episodes and
+the full-data rich references are training; there is no reported technical failure and no
+final panel has been read. The original source and native operations are unchanged. Shared
+standing was independently published to main at `b3b1e0c7c`, changing only UCOPE's row and
+preserving every launch-bound owner field and other direction.
+
+The B10 package's new `readback.py` is an offline consumer of completed, recorded outputs,
+not an additional experiment: zero native steps, model construction, checkpoint forward or
+optimizer call. Its scope is the producing SHA/terminal identity, complete artifact digests,
+scheduled pair addresses and prefix reconstruction, full exposure/update counts, raw final
+reward reduction, exact recorded command/eligibility law, and the three-block investment rule.
+It retains the full-data references and treats world samples as nested. Raw training delta
+signs are descriptive targets under old behavior, not an oracle bound or deployment result.
+Four handwritten-array / artifact / rule checks passed in 1.30 s, with zero environments,
+checkpoint forwards and optimizer updates. Independent read-only review remains before using
+this new consumer for the scientific reading. It does not change any active source snapshot.
+
+### 2026-09-21 05:45 UTC — Offline review repairs accepted before reading outcomes
+
+Independent review found four material integrity gaps in the first offline reader: a terminal
+witness was not joined to this result's admission, fresh commands were checked only against
+the context's asserted fresh vector, coin seeds were checked as labels rather than actual
+draws, and raw pair lengths were not bound to the declared exposure. All four are repaired.
+The reader now checks admission command/child/parent against the exact native terminal and
+master; compares saved FP32 means through independent NumPy FP64 tanh with an absolute tolerance
+of four FP32 eps on the normalized [-1, 1] command scale; reconstructs common, focal and final
+coins using private CPU generators; and requires each raw pair to contain 256 ticks per branch,
+512 team steps total. The action/eligibility identities remain exact. The tanh check is not a
+cross-library bitwise assertion, and RNG reconstruction is not a checkpoint forward probe.
+
+The focused reader suite passed **9/9 in 1.11 s**, including transplanted same-source process
+witnesses, inconsistent means, misaddressed/out-of-range coins and wrong raw exposure. It used
+handwritten arrays and private random draws, zero environments, model constructions, checkpoint
+forwards or optimizer updates. The Reviewer closed all four findings with no remaining material
+issue, reusing that check output and reading no live results. I accept the repaired consumer.
+All three original native operations remain active at the last cost-only observation, with
+R_CF and R_FULL complete and S_FULL training. No final outcome has been read or used to change
+the batch. Publish this consumer, then reduce the completed original records once they have
+successful terminal witnesses; any discovered integrity failure is reported on its actual scope.
+
+### 2026-09-21 05:54 UTC — B10 complete: real paired credit does not earn a retained policy gain
+
+**Execution and independent reading.** All three original operations for masters
+8971/8972/8973 exited zero with COMPLETE summaries, unchanged producing source
+`07605eecde6bba632b86ac2e92862057ea6d9fe2`, and consistent original runner/supervisor identities.
+All nine declared fits completed; none was retried, relabeled or extended. The last operation
+ended at 2026-09-21 05:49:54 UTC. The reviewed offline consumer at `e7344183621bd6c4d7f3d2f12a087ec95a8873a4`
+then verified all **3,120 promised artifact hashes**, reconstructed every scheduled pair's
+prefix/credit/exposure and RNG addresses, checked final command/eligibility laws and actual
+optimizer counts, and reduced all twelve final panels from raw FP64 rewards. It passed.
+An independent Reviewer used its own `math.fsum` reduction of the raw reward arrays without
+calling that consumer; all arm means and decisions agree, with maximum per-world arithmetic
+difference `5.551115123125783e-17`. Neither reading constructed a model/environment, forwarded
+a checkpoint, optimized parameters or added a native tick.
+
+The full reading is [B10 reduction](../../../../runs/ucope/paired_branch_credit_b10_reduce/summary.json).
+Raw pairs, final panels, all fitted weights/optimizer states, inherited foundations, source
+bindings and the original operation witnesses remain in the three declared run directories.
+
+| Master / frozen basis | R_CF J | R_FULL J | S_FULL J | G J |
+| --- | ---: | ---: | ---: | ---: |
+| 8971 / 8941 | 0.2754621158 | 0.2754561930 | 0.2754492291 | 0.2757134809 |
+| 8972 / 8942 | 0.2567722052 | 0.2566353889 | 0.2567723707 | 0.2563991987 |
+| 8973 / 8943 | 0.2549299191 | 0.2552971681 | 0.2549877625 | 0.2552710801 |
+
+| Contrast | 8971 | 8972 | 8973 | Mean of development blocks |
+| --- | ---: | ---: | ---: | ---: |
+| R_CF - R_FULL | +0.0000059228 | +0.0001368163 | -0.0003672491 | -0.0000748366 |
+| R_CF - G | -0.0002513650 | +0.0003730065 | -0.0003411611 | -0.0000731732 |
+| R_CF - S_FULL | +0.0000128868 | -0.0000001655 | -0.0000578435 | -0.0000150407 |
+| S_FULL - G | -0.0002642518 | +0.0003731720 | -0.0002833176 | -0.0000581325 |
+| R_FULL - G | -0.0002572878 | +0.0002361902 | +0.0000260880 | +0.0000016634 |
+
+Every contrast fails the prospectively stated all-three-positive and mean-at-least-.01 rule.
+R_CF earns neither retention over R_FULL/G nor preference over the stronger simple reference.
+Neither full-data learner offers the required useful advantage over G. This is an investment
+decision on selected developmental foundations, not a population equivalence or optimality claim.
+The 64 evaluation worlds per fitted policy are nested observations; one stochastic gate draw
+per world does not create additional independent fits.
+
+**What actually learned.** All gates and six full-data critics moved. R_CF gate L2 changes
+are .368659/.494244/.441692, versus R_FULL 4.085273/4.251997/3.266848. Thus this is not a
+non-started learner or a detached gradient. R_CF nevertheless ends close to a half-probability
+rule: eligible KEEP means .510721/.503331/.504272, conditional SDs
+.001297/.000393/.000446, and 33.73/33.32/33.61 percent of all agent ticks copied.
+The rich paired gate's observed context modulation is weak. Parameter movement alone cannot
+be promoted to a successfully expressed contextual credit mechanism.
+
+R_FULL expresses a substantially different intervention: mean KEEP probabilities
+.200188/.454424/.385721, SDs .018791/.070726/.006303, and copied fractions
+16.80/31.15/27.79 percent. Its stronger behavior changes still do not meet the native criterion.
+S_FULL has constant probabilities .476198/.503816/.484102 after 8,192 gate and 8,192 critic
+updates per fit. It is the declared full-data reference, not the rejected 256-update S_CF.
+Its limited realized movement therefore cannot be attributed to that old S_CF update bound;
+nor does full-data training demonstrate convergence or prove that no constant rate can help.
+
+The 3,072 actual branch pairs contain **681/685/687 eligible focal targets**. Their
+KEEP-minus-END normalized suffix deltas include positive/negative/zero counts
+284/282/115, 291/322/72, and 269/400/18. Means are
+0.000002943/0.000007038/0.000007505 and SDs .000092864/.000419978/.000251938.
+There are nonzero effects of both signs, including a +.009996 target in block 8972. These
+are actual targets under the successive old behavior policies, not an oracle upper bound,
+an estimate of predictable local opportunity, or a deployment gain. The positive mean target
+does not imply that a learned KEEP policy improves its changed visitation distribution.
+
+Positive deployment exceptions also remain visible: R_CF-G is positive on 18/27/24 of the
+64 worlds, with per-block ranges [-.008079, +.001935], [-.004965, +.020056], and
+[-.012020, +.008680]. The positive block-8972 mean and R_FULL's positive means in blocks
+8972/8973 are preserved. They do not establish a stable exploitable rule; they prevent the
+stronger, false conclusion that copying is behaviorally or causally inert everywhere.
+
+**Cumulative judgment and decision.** B08 did not establish that all rich gates were incapable;
+B09 expressed the previously weak distance feature but obtained no retained gain. B10 supplies
+the previously missing *real alternative suffixes* and verifies their native prefix identity.
+It still fails the direct finite learning comparison. This weakens the specific investment
+hypothesis that cleaner paired focal targets, at this fixed total exposure, will rescue the
+frozen max-two-tick velocity-copy package. It does not isolate estimator variance, identify
+which of sparse coverage/hidden team conditions/finite optimization dominates, or show that
+factual policy gradients lacked team reward or the right expected objective.
+
+Pro's complete prior answer explicitly predicted this outcome branch and advised retaining G
+if no new gate usefully exceeded it. Its task prediction is strengthened; my contrary decision
+to buy one direct paired test did not produce the proposed gain. Reuse that applicable advice
+and the prewritten negative branch rather than asking the same question again. The stronger
+S_FULL comparison removes the specific weak-simple-reference objection, while leaving the
+package-level claim restriction intact. No adviser endorsement is retroactively inferred.
+
+**Retain ordinary deterministic G and stop this B10 paired package on these foundations.**
+No higher learning rate, denser pair selection, longer training, additional architecture,
+copy-rate/noise sweep, local-slope probe, logger reconstruction or artificial switching penalty
+is selected. The technical assets remain usable: admitted deterministic branching, exact
+prefix and RNG reconstruction, FP64 credit, full-data controls and complete retained raw data.
+They are infrastructure, not a scientific reason to spend another batch.
+
+Original UCOPE remains **exploring, currently idle**, with no accepted operation or adviser
+answer left pending. Re-entry requires a new task-grounded reason why retaining the actual
+velocity command should improve on ordinary feedback, together with a feasible comparison
+that distinguishes that reason from the failed scale/credit repairs. A merely nonzero local
+delta, another favorable isolated world, or the fact that adaptive termination has not been
+disproved is insufficient. No such comparison is currently selected, and no dependency on
+Claude or Root is invented. This closes the tested package's scientific loop; it neither
+ends the broader research question nor transfers these command-copy negatives to persistent
+closed-loop skills or the separate team-conditioned termination design.
+
+**Actual cost.** The batch used **9 started/completed gate fits**, zero new foundation fits,
+4,718,592 training plus 196,608 evaluation team ticks = **4,915,200**, the same number of
+foundation calls, 24,576,000 recurrent agent observations, **49,920 gate + 49,152 critic =
+99,072 Adam calls**, and zero foundation/evaluation optimizer calls. Per-fit training walls
+(R_CF/R_FULL/S_FULL seconds) are 611.85/703.15/656.53,
+600.26/687.70/638.05, and 608.91/699.27/654.64. Full invocation walls are
+2054.90/2007.94/2040.33 s; summed invocation wall is 6103.17 s and process CPU 6102.18 s.
+First acceptance to last exit is **2137.83 s (35.63 minutes)** on local_linux, at most three
+single-thread invocations. Per-process peak RSS is 489748/491220/480924 KiB, not simultaneous
+aggregate memory. The promised artifacts occupy 2,965,155,099 bytes; all 3,072 full raw branch
+archives are retained, with publication split into bounded Git transfers rather than omitting
+data. Offline reading separately took 25.96 s wall / 25.86 s CPU and 314704 KiB peak RSS;
+engineering checks, independent review and Git publication are additional work, not hidden
+inside a claimed native speedup. No new scientific run or quota/window was created for closure.
+
+### 2026-09-21 06:09 UTC — Publication placement; full native arrays remain recoverable
+
+The complete scientific record, including all 3,072 paired NPZs, twelve full evaluation
+panels and all checkpoints, is committed in the local repository at
+`956fdc5ff7456700182f639e464f184b49182e1a` and remains at the original author checkout
+`/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/paired_branch_credit_b10_{8971,8972,8973}`.
+The first block's paired archives also reached GitHub at `085874e656a8ee26b53f0380c0a3eef6358d94d7`.
+Two attempts to transfer the second raw-data commit remained very slow; each was stopped only
+after checking its own Git process identity and the remote ref. The remote still held the
+first raw-data commit. Neither interruption touched a native operation, source snapshot,
+artifact or local commit. A read-only direct-connect check also timed out; no global network
+configuration, Git history or stored data was changed.
+
+Revise the distribution plan, not the experiment: publish this same notebook plus all native
+JSON/JSONL records, source/admission/terminal bindings, complete artifact hash inventories and
+the full per-world offline reduction on `codex/ucope-b10-results`, from the already published
+reviewed source. Keep the full arrays/checkpoints in their original locations and committed
+local history rather than require another multi-gigabyte mirror transfer for the scientific
+update. This is a publication branch using the existing notebook and run directories, not a
+new research object or reporting system. The remote text records do not by themselves permit
+repeating the full raw-array audit; that audit requires the preserved native arrays. The actual
+audit above did read them. No completeness claim about a remote binary mirror is made.
+
+The complete-data author branch stays recoverable locally; its unpushed data commits are
+intentional. No native run, adviser response or data transfer remains pending. Independently
+publish UCOPE's scoped index update against the actual accessible result commit after this
+text publication is verified. There is no automatic background retry or new monitoring task.

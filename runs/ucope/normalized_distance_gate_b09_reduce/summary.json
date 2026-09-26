@@ -1,0 +1,708 @@
+{
+  "blocks": [
+    {
+      "master": 8961,
+      "summary_sha256": "5d995c3ba3b7a449ab87b29f4cbd9a9341424a2046c88ba82fb3fbe571365485",
+      "behavior": {
+        "normalized": {
+          "J": 0.29807108393364584,
+          "keep_probability": {
+            "mean": 0.4905840346086833,
+            "min": 0.16762125492095947,
+            "max": 0.4922342002391815,
+            "q10_median_q90": [
+              0.4906448036432266,
+              0.4922246038913727,
+              0.4922335743904114
+            ],
+            "std": 0.01170240575198263
+          },
+          "keep_rate": 0.49109359030515404,
+          "copy_fraction_all_ticks": 0.328466796875,
+          "affine": {
+            "intercept": -0.03109629452228546,
+            "slope_scaled": -0.005165174603462219,
+            "intercept_raw": -0.031065734424129753,
+            "slope_raw": -307.3738143946237
+          },
+          "movement": {
+            "gate": {
+              "parameters": 2,
+              "initial_norm": 0.0,
+              "final_norm": 0.031522348523139954,
+              "displacement": 0.031522348523139954
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.286364555358887,
+              "final_norm": 9.429535865783691,
+              "displacement": 3.8390910625457764
+            }
+          },
+          "training_quarters": [
+            {
+              "J": 0.2749241008530829,
+              "mean_eligible_pkeep": 0.4965989720658399
+            },
+            {
+              "J": 0.2837427610896544,
+              "mean_eligible_pkeep": 0.5116928613279015
+            },
+            {
+              "J": 0.2802702739072411,
+              "mean_eligible_pkeep": 0.5047920466167852
+            },
+            {
+              "J": 0.2857479888713917,
+              "mean_eligible_pkeep": 0.4895652299746871
+            }
+          ],
+          "first_last_update_statistics": {
+            "first": {
+              "epoch": 0,
+              "rows": 256,
+              "eligible_decisions": 852,
+              "gate_step": true,
+              "gate_loss": 0.013590702787041664,
+              "critic_loss": 0.03033740259706974,
+              "gate_grad_norm": 0.04827544838190079,
+              "critic_grad_norm": 0.7381777763366699
+            },
+            "last": {
+              "epoch": 3,
+              "rows": 256,
+              "eligible_decisions": 839,
+              "gate_step": true,
+              "gate_loss": -0.19273751974105835,
+              "critic_loss": 0.0014622589806094766,
+              "gate_grad_norm": 0.23336172103881836,
+              "critic_grad_norm": 0.07488700747489929
+            }
+          }
+        },
+        "scalar": {
+          "J": 0.2980397859061621,
+          "keep_probability": {
+            "mean": 0.4926173686981201,
+            "min": 0.4926173686981201,
+            "max": 0.4926173686981201,
+            "q10_median_q90": [
+              0.4926173686981201,
+              0.4926173686981201,
+              0.4926173686981201
+            ],
+            "std": 0.0
+          },
+          "keep_rate": 0.4927282028794855,
+          "copy_fraction_all_ticks": 0.32919921875,
+          "affine": {
+            "intercept": -0.029532572254538536,
+            "slope_scaled": 0.0,
+            "intercept_raw": -0.029532572254538536,
+            "slope_raw": 0.0
+          },
+          "movement": {
+            "gate": {
+              "parameters": 1,
+              "initial_norm": 0.0,
+              "final_norm": 0.029532572254538536,
+              "displacement": 0.029532572254538536
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.286364555358887,
+              "final_norm": 9.428204536437988,
+              "displacement": 3.833146810531616
+            }
+          },
+          "training_quarters": [
+            {
+              "J": 0.2750487793826979,
+              "mean_eligible_pkeep": 0.49757666274672374
+            },
+            {
+              "J": 0.2841233959993997,
+              "mean_eligible_pkeep": 0.5073683054652065
+            },
+            {
+              "J": 0.28019931654226216,
+              "mean_eligible_pkeep": 0.503303047735244
+            },
+            {
+              "J": 0.28565760509529564,
+              "mean_eligible_pkeep": 0.49432850262383
+            }
+          ],
+          "first_last_update_statistics": {
+            "first": {
+              "epoch": 0,
+              "rows": 256,
+              "eligible_decisions": 855,
+              "gate_step": true,
+              "gate_loss": 0.44779032468795776,
+              "critic_loss": 0.027175113558769226,
+              "gate_grad_norm": 0.04746096581220627,
+              "critic_grad_norm": 0.6940060257911682
+            },
+            "last": {
+              "epoch": 3,
+              "rows": 256,
+              "eligible_decisions": 850,
+              "gate_step": true,
+              "gate_loss": -0.007157912477850914,
+              "critic_loss": 0.0013956263428553939,
+              "gate_grad_norm": 0.02912266179919243,
+              "critic_grad_norm": 0.07227206975221634
+            }
+          }
+        },
+        "ordinary": {
+          "J": 0.29766635544821896,
+          "keep_probability": null,
+          "keep_rate": null,
+          "copy_fraction_all_ticks": 0.0
+        }
+      },
+      "contrasts": {
+        "normalized_minus_scalar": {
+          "mean": 3.1298027483699043e-05,
+          "conditional_world_se": 2.607701205099489e-05,
+          "positive": 36,
+          "negative": 18,
+          "range": [
+            -0.0005321187637047364,
+            0.001066425867869314
+          ]
+        },
+        "normalized_minus_ordinary": {
+          "mean": 0.0004047284854268899,
+          "conditional_world_se": 0.0006065170910596417,
+          "positive": 22,
+          "negative": 42,
+          "range": [
+            -0.009936718316381932,
+            0.03663818192798235
+          ]
+        },
+        "scalar_minus_ordinary": {
+          "mean": 0.00037343045794319086,
+          "conditional_world_se": 0.0006068454009115513,
+          "positive": 23,
+          "negative": 41,
+          "range": [
+            -0.009930607474882391,
+            0.03663818192798235
+          ]
+        }
+      },
+      "cost": {
+        "counts": {
+          "reset_calls": 4288,
+          "foundation_forward_calls": 1097728,
+          "recurrent_agent_observations": 5488640,
+          "gate_decisions": 3596003,
+          "keep_decisions": 1796556,
+          "end_decisions": 1799447,
+          "forced_fresh_decisions": 1892637,
+          "final_gate_credit_decisions": 14043,
+          "team_steps": 1097728,
+          "train_team_steps": 1048576,
+          "train_episodes": 4096,
+          "gate_uniform_values": 5406720,
+          "update_calls": 2048,
+          "gate_optimizer_steps": 16384,
+          "critic_optimizer_steps": 16384,
+          "optimizer_steps": 32768,
+          "visited_rows": 4194304,
+          "max_minibatch": 256,
+          "eval_team_steps": 49152,
+          "eval_episodes": 192
+        },
+        "fit_accounting": {
+          "planned_new_gate_fits": 2,
+          "planned_batch_fits": 6,
+          "started_new_gate_fits": 2,
+          "completed_new_gate_fits": 2,
+          "new_foundation_fits": 0
+        },
+        "wall_seconds": 1383.9101317739987,
+        "process_cpu_seconds": 1382.4740411999999,
+        "process_peak_rss_kib": 364592
+      }
+    },
+    {
+      "master": 8962,
+      "summary_sha256": "3b34fe474e16a44a4dca40e0dcdd1858f5946d5c9a798739ef6e313d413b779f",
+      "behavior": {
+        "normalized": {
+          "J": 0.24419500377409262,
+          "keep_probability": {
+            "mean": 0.48235550507645203,
+            "min": 0.17764955759048462,
+            "max": 0.48516446352005005,
+            "q10_median_q90": [
+              0.482212507724762,
+              0.48514628410339355,
+              0.48515889048576355
+            ],
+            "std": 0.01615301297166496
+          },
+          "keep_rate": 0.4869060401463175,
+          "copy_fraction_all_ticks": 0.32659912109375,
+          "affine": {
+            "intercept": -0.05944075807929039,
+            "slope_scaled": -0.012197904288768768,
+            "intercept_raw": -0.05935949234868058,
+            "slope_raw": -841.2169232422208
+          },
+          "movement": {
+            "gate": {
+              "parameters": 2,
+              "initial_norm": 0.0,
+              "final_norm": 0.06067942455410957,
+              "displacement": 0.06067942455410957
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.29490852355957,
+              "final_norm": 9.917439460754395,
+              "displacement": 5.125062942504883
+            }
+          },
+          "training_quarters": [
+            {
+              "J": 0.24536371214863986,
+              "mean_eligible_pkeep": 0.49728121544467285
+            },
+            {
+              "J": 0.25125344822113216,
+              "mean_eligible_pkeep": 0.4933345864410512
+            },
+            {
+              "J": 0.2527995328699926,
+              "mean_eligible_pkeep": 0.48589479795191437
+            },
+            {
+              "J": 0.24503254412574746,
+              "mean_eligible_pkeep": 0.48742069356376305
+            }
+          ],
+          "first_last_update_statistics": {
+            "first": {
+              "epoch": 0,
+              "rows": 256,
+              "eligible_decisions": 854,
+              "gate_step": true,
+              "gate_loss": -0.01970779150724411,
+              "critic_loss": 0.00425702054053545,
+              "gate_grad_norm": 0.014417396858334541,
+              "critic_grad_norm": 0.09852335602045059
+            },
+            "last": {
+              "epoch": 3,
+              "rows": 256,
+              "eligible_decisions": 863,
+              "gate_step": true,
+              "gate_loss": -0.21266978979110718,
+              "critic_loss": 0.000728004495613277,
+              "gate_grad_norm": 0.007955404929816723,
+              "critic_grad_norm": 0.027504505589604378
+            }
+          }
+        },
+        "scalar": {
+          "J": 0.24427226262406876,
+          "keep_probability": {
+            "mean": 0.486731618642807,
+            "min": 0.486731618642807,
+            "max": 0.486731618642807,
+            "q10_median_q90": [
+              0.486731618642807,
+              0.486731618642807,
+              0.486731618642807
+            ],
+            "std": 0.0
+          },
+          "keep_rate": 0.4906407356053419,
+          "copy_fraction_all_ticks": 0.32828369140625,
+          "affine": {
+            "intercept": -0.05308602377772331,
+            "slope_scaled": 0.0,
+            "intercept_raw": -0.05308602377772331,
+            "slope_raw": 0.0
+          },
+          "movement": {
+            "gate": {
+              "parameters": 1,
+              "initial_norm": 0.0,
+              "final_norm": 0.05308602377772331,
+              "displacement": 0.05308602377772331
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.29490852355957,
+              "final_norm": 9.920026779174805,
+              "displacement": 5.133703708648682
+            }
+          },
+          "training_quarters": [
+            {
+              "J": 0.2451728892282058,
+              "mean_eligible_pkeep": 0.49919999175472185
+            },
+            {
+              "J": 0.25122572082694294,
+              "mean_eligible_pkeep": 0.49667588889133185
+            },
+            {
+              "J": 0.2527400631046734,
+              "mean_eligible_pkeep": 0.4882632725639269
+            },
+            {
+              "J": 0.24528625198470516,
+              "mean_eligible_pkeep": 0.4897003382211551
+            }
+          ],
+          "first_last_update_statistics": {
+            "first": {
+              "epoch": 0,
+              "rows": 256,
+              "eligible_decisions": 832,
+              "gate_step": true,
+              "gate_loss": -0.14371024072170258,
+              "critic_loss": 0.004146635998040438,
+              "gate_grad_norm": 0.006413215771317482,
+              "critic_grad_norm": 0.0875404104590416
+            },
+            "last": {
+              "epoch": 3,
+              "rows": 256,
+              "eligible_decisions": 871,
+              "gate_step": true,
+              "gate_loss": 0.16612499952316284,
+              "critic_loss": 0.0006504601915366948,
+              "gate_grad_norm": 0.040348634123802185,
+              "critic_grad_norm": 0.026356490328907967
+            }
+          }
+        },
+        "ordinary": {
+          "J": 0.24530868189167315,
+          "keep_probability": null,
+          "keep_rate": null,
+          "copy_fraction_all_ticks": 0.0
+        }
+      },
+      "contrasts": {
+        "normalized_minus_scalar": {
+          "mean": -7.725884997616473e-05,
+          "conditional_world_se": 7.92646025877658e-05,
+          "positive": 37,
+          "negative": 24,
+          "range": [
+            -0.004549096024778321,
+            0.0008182657122645098
+          ]
+        },
+        "normalized_minus_ordinary": {
+          "mean": -0.0011136781175805526,
+          "conditional_world_se": 0.0006936748489612754,
+          "positive": 21,
+          "negative": 43,
+          "range": [
+            -0.0398744071185754,
+            0.006817136103789284
+          ]
+        },
+        "scalar_minus_ordinary": {
+          "mean": -0.0010364192676043879,
+          "conditional_world_se": 0.000672258940796096,
+          "positive": 21,
+          "negative": 43,
+          "range": [
+            -0.03987375366738263,
+            0.006080962889067648
+          ]
+        }
+      },
+      "cost": {
+        "counts": {
+          "reset_calls": 4288,
+          "foundation_forward_calls": 1097728,
+          "recurrent_agent_observations": 5488640,
+          "gate_decisions": 3613274,
+          "keep_decisions": 1779181,
+          "end_decisions": 1834093,
+          "forced_fresh_decisions": 1875366,
+          "final_gate_credit_decisions": 14000,
+          "team_steps": 1097728,
+          "train_team_steps": 1048576,
+          "train_episodes": 4096,
+          "gate_uniform_values": 5406720,
+          "update_calls": 2048,
+          "gate_optimizer_steps": 16384,
+          "critic_optimizer_steps": 16384,
+          "optimizer_steps": 32768,
+          "visited_rows": 4194304,
+          "max_minibatch": 256,
+          "eval_team_steps": 49152,
+          "eval_episodes": 192
+        },
+        "fit_accounting": {
+          "planned_new_gate_fits": 2,
+          "planned_batch_fits": 6,
+          "started_new_gate_fits": 2,
+          "completed_new_gate_fits": 2,
+          "new_foundation_fits": 0
+        },
+        "wall_seconds": 1413.342039228999,
+        "process_cpu_seconds": 1412.220926855,
+        "process_peak_rss_kib": 364052
+      }
+    },
+    {
+      "master": 8963,
+      "summary_sha256": "222493e1bf793c1005e22f882b8140b01201fb1ad42f8791f401022456b8279a",
+      "behavior": {
+        "normalized": {
+          "J": 0.24818457631346458,
+          "keep_probability": {
+            "mean": 0.519408070329923,
+            "min": 0.5120574235916138,
+            "max": 0.9988378882408142,
+            "q10_median_q90": [
+              0.5120614171028137,
+              0.5120977759361267,
+              0.5213622748851776
+            ],
+            "std": 0.039386973005359184
+          },
+          "keep_rate": 0.5197187290721036,
+          "copy_fraction_all_ticks": 0.3410400390625,
+          "affine": {
+            "intercept": 0.04841539263725281,
+            "slope_scaled": 0.042734429240226746,
+            "intercept_raw": 0.04823898384051565,
+            "slope_raw": 2330.851985274465
+          },
+          "movement": {
+            "gate": {
+              "parameters": 2,
+              "initial_norm": 0.0,
+              "final_norm": 0.06457772105932236,
+              "displacement": 0.06457772105932236
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.298358917236328,
+              "final_norm": 10.259908676147461,
+              "displacement": 5.671464920043945
+            }
+          },
+          "training_quarters": [
+            {
+              "J": 0.2519692155650526,
+              "mean_eligible_pkeep": 0.49816973315319046
+            },
+            {
+              "J": 0.25164722663784805,
+              "mean_eligible_pkeep": 0.5079979648580775
+            },
+            {
+              "J": 0.2465617441324155,
+              "mean_eligible_pkeep": 0.5035416773171164
+            },
+            {
+              "J": 0.2513975945816909,
+              "mean_eligible_pkeep": 0.5125463828444481
+            }
+          ],
+          "first_last_update_statistics": {
+            "first": {
+              "epoch": 0,
+              "rows": 256,
+              "eligible_decisions": 851,
+              "gate_step": true,
+              "gate_loss": -0.10754340887069702,
+              "critic_loss": 0.02223418653011322,
+              "gate_grad_norm": 0.34964719414711,
+              "critic_grad_norm": 0.6089781522750854
+            },
+            "last": {
+              "epoch": 3,
+              "rows": 256,
+              "eligible_decisions": 842,
+              "gate_step": true,
+              "gate_loss": -0.05102949216961861,
+              "critic_loss": 0.000185878379852511,
+              "gate_grad_norm": 0.16107170283794403,
+              "critic_grad_norm": 0.01015225239098072
+            }
+          }
+        },
+        "scalar": {
+          "J": 0.2477292430566967,
+          "keep_probability": {
+            "mean": 0.5108635425567627,
+            "min": 0.5108635425567627,
+            "max": 0.5108635425567627,
+            "q10_median_q90": [
+              0.5108635425567627,
+              0.5108635425567627,
+              0.5108635425567627
+            ],
+            "std": 0.0
+          },
+          "keep_rate": 0.5106981044845122,
+          "copy_fraction_all_ticks": 0.337109375,
+          "affine": {
+            "intercept": 0.04346088320016861,
+            "slope_scaled": 0.0,
+            "intercept_raw": 0.04346088320016861,
+            "slope_raw": 0.0
+          },
+          "movement": {
+            "gate": {
+              "parameters": 1,
+              "initial_norm": 0.0,
+              "final_norm": 0.04346088320016861,
+              "displacement": 0.04346088320016861
+            },
+            "critic": {
+              "parameters": 34177,
+              "initial_norm": 9.298358917236328,
+              "final_norm": 10.259117126464844,
+              "displacement": 5.667263507843018
+            }
+          },
+          "training_quarters": [
+            {
+              "J": 0.25200924833763005,
+              "mean_eligible_pkeep": 0.4996179762529209
+            },
+            {
+              "J": 0.251753957016715,
+              "mean_eligible_pkeep": 0.49974769057007506
+            },
+            {
+              "J": 0.24672903584628852,
+              "mean_eligible_pkeep": 0.49862770800245926
+            },
+            {
+              "J": 0.251371134240256,
+              "mean_eligible_pkeep": 0.5035842165234499
+            }
+          ],
+          "first_last_update_statistics": {
+            "first": {
+              "epoch": 0,
+              "rows": 256,
+              "eligible_decisions": 827,
+              "gate_step": true,
+              "gate_loss": 0.22632740437984467,
+              "critic_loss": 0.020605940371751785,
+              "gate_grad_norm": 0.0436599999666214,
+              "critic_grad_norm": 0.5758289098739624
+            },
+            "last": {
+              "epoch": 3,
+              "rows": 256,
+              "eligible_decisions": 823,
+              "gate_step": true,
+              "gate_loss": -0.09746508300304413,
+              "critic_loss": 0.0001805189676815644,
+              "gate_grad_norm": 0.028468627482652664,
+              "critic_grad_norm": 0.010959823615849018
+            }
+          }
+        },
+        "ordinary": {
+          "J": 0.24734070765636246,
+          "keep_probability": null,
+          "keep_rate": null,
+          "copy_fraction_all_ticks": 0.0
+        }
+      },
+      "contrasts": {
+        "normalized_minus_scalar": {
+          "mean": 0.00045533325676788434,
+          "conditional_world_se": 0.0004685290370238819,
+          "positive": 27,
+          "negative": 37,
+          "range": [
+            -0.009063374688737968,
+            0.019554705194046396
+          ]
+        },
+        "normalized_minus_ordinary": {
+          "mean": 0.0008438686571021242,
+          "conditional_world_se": 0.0006789687683405357,
+          "positive": 27,
+          "negative": 37,
+          "range": [
+            -0.007514243746279153,
+            0.02586619073673735
+          ]
+        },
+        "scalar_minus_ordinary": {
+          "mean": 0.0003885354003342399,
+          "conditional_world_se": 0.00042296282524337123,
+          "positive": 27,
+          "negative": 37,
+          "range": [
+            -0.005822388185025562,
+            0.022328008484882894
+          ]
+        }
+      },
+      "cost": {
+        "counts": {
+          "reset_calls": 4288,
+          "foundation_forward_calls": 1097728,
+          "recurrent_agent_observations": 5488640,
+          "gate_decisions": 3586855,
+          "keep_decisions": 1805568,
+          "end_decisions": 1781287,
+          "forced_fresh_decisions": 1901785,
+          "final_gate_credit_decisions": 13893,
+          "team_steps": 1097728,
+          "train_team_steps": 1048576,
+          "train_episodes": 4096,
+          "gate_uniform_values": 5406720,
+          "update_calls": 2048,
+          "gate_optimizer_steps": 16384,
+          "critic_optimizer_steps": 16384,
+          "optimizer_steps": 32768,
+          "visited_rows": 4194304,
+          "max_minibatch": 256,
+          "eval_team_steps": 49152,
+          "eval_episodes": 192
+        },
+        "fit_accounting": {
+          "planned_new_gate_fits": 2,
+          "planned_batch_fits": 6,
+          "started_new_gate_fits": 2,
+          "completed_new_gate_fits": 2,
+          "new_foundation_fits": 0
+        },
+        "wall_seconds": 1356.9153027819993,
+        "process_cpu_seconds": 1353.09537172,
+        "process_peak_rss_kib": 361664
+      }
+    }
+  ],
+  "all_checks_passed": true,
+  "native_steps_added": 0,
+  "optimizer_steps_added": 0,
+  "contrasts_mean_of_blocks": {
+    "normalized_minus_scalar": 0.00013645747809180623,
+    "normalized_minus_ordinary": 4.497300831615385e-05,
+    "scalar_minus_ordinary": -9.148446977565237e-05
+  },
+  "continuation_rule_passes": false,
+  "object": "UCOPE_NORMALIZED_DISTANCE_GATE_B09_REDUCTION",
+  "source_sha": "a20583ee128bb04e2e638804a0b5493322a3edf6",
+  "foundation_forwards_added": 0,
+  "critic_forwards_added": 0,
+  "saved_context_gate_probability_reconstructions": 61440
+}

@@ -1,0 +1,59 @@
+{
+  "arms": [
+    {
+      "calibration_k": 4,
+      "mode": "POSTERIOR_MEAN",
+      "name": "P_k4_M32",
+      "particles": 32
+    },
+    {
+      "calibration_k": 4,
+      "mode": "JOINT",
+      "name": "U_k4_M32",
+      "particles": 32
+    },
+    {
+      "calibration_k": 4,
+      "mode": "POSTERIOR_MEAN",
+      "name": "P_k4_M256",
+      "particles": 256
+    },
+    {
+      "calibration_k": 4,
+      "mode": "JOINT",
+      "name": "U_k4_M256",
+      "particles": 256
+    },
+    {
+      "calibration_k": null,
+      "mode": null,
+      "name": "AF",
+      "particles": 0
+    }
+  ],
+  "batch": 16,
+  "calibration_phase": 50,
+  "calibration_steps": 4,
+  "contexts": 256,
+  "evaluation_phase": 51,
+  "horizon": 96,
+  "launch_sha": "5b5d73100ae8554b8005758055b181d03fb6603e",
+  "model_phase": 52,
+  "model_seed": 926073,
+  "nominal_receiver_probability": 0.75,
+  "parameter_support": [
+    0.35,
+    0.55,
+    0.75,
+    0.95
+  ],
+  "particles_high": 256,
+  "particles_low": 32,
+  "retained_b01_source": "b40ea0965788f0d04b023870c34f47e86a00ceff",
+  "seed": 925831,
+  "threads": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  }
+}

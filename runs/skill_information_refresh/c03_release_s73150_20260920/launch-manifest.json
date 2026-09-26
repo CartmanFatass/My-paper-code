@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-20T14:21:56.736609Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/e2383067e0b44c4993e2d4b8842a615f/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/e2383067e0b44c4993e2d4b8842a615f/scripts/run_sir_c03.py",
+    "--output",
+    "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c03_release_s73150_20260920",
+    "--",
+    "--out",
+    "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c03_release_s73150_20260920",
+    "--launch-sha",
+    "f9bde372f4ddcacbaa72e1bd753705b0afd3f63c",
+    "--seed",
+    "73150"
+  ],
+  "claim_key": "664d299524d3a02de91f78e575747e604fd89c3c9fe6b16d8d91ba29e7fd1b09",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/664d299524d3a02de91f78e575747e604fd89c3c9fe6b16d8d91ba29e7fd1b09.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/e2383067e0b44c4993e2d4b8842a615f/scripts/run_sir_c03.py",
+    "--out",
+    "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c03_release_s73150_20260920",
+    "--launch-sha",
+    "f9bde372f4ddcacbaa72e1bd753705b0afd3f63c",
+    "--seed",
+    "73150"
+  ],
+  "command_sha256": "25142703d5647ccce427581f3da9d740fe7a046b53aa20d25132c8f225d4cb68",
+  "control_observation": {
+    "observed_at": "2026-09-20T14:21:56.546756Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "6ee15d7dda2a82688f60e25ae225c030ab8a6043"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-20T14:21:56.565590Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/e2383067e0b44c4993e2d4b8842a615f",
+  "direction": "skill_information_refresh",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_sir_c03.py",
+    "--launch-sha",
+    "f9bde372f4ddcacbaa72e1bd753705b0afd3f63c",
+    "--seed",
+    "73150"
+  ],
+  "lead": "Codex DM",
+  "manifest_ref": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c03_release_s73150_20260920/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/664d299524d3a02de91f78e575747e604fd89c3c9fe6b16d8d91ba29e7fd1b09.json",
+  "output_root": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c03_release_s73150_20260920",
+  "preflight": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c03_release_s73150_20260920/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2314700,
+      "session_id": 2314700,
+      "start_ticks": 17654691
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 2314700,
+    "process_group_id": 2314700
+  },
+  "process_exit": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c03_release_s73150_20260920/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2314717,
+      "session_id": 2314700,
+      "start_ticks": 17654695
+    },
+    "pid": 2314717,
+    "process_group_id": 2314700,
+    "supervisor_pid": 2314700
+  },
+  "schema_version": 1,
+  "sha": "f9bde372f4ddcacbaa72e1bd753705b0afd3f63c",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/e2383067e0b44c4993e2d4b8842a615f",
+  "stderr": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c03_release_s73150_20260920/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/fsd-c/hmasd-wsl/runs/skill_information_refresh/c03_release_s73150_20260920/stdout.log"
+}

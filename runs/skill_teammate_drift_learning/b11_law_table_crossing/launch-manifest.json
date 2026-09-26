@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-21T15:41:43.100755Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d9ddd89ce9a6426d8281c01cee6a19ad/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d9ddd89ce9a6426d8281c01cee6a19ad/scripts/run_skill_drift_law_table_b11.py",
+    "--output",
+    "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b11_law_table_crossing",
+    "--",
+    "--seeds",
+    "95401",
+    "95402",
+    "95403",
+    "--launch-sha",
+    "6adcfcd4bd9912f68b29d3664ea6ded935eecc60",
+    "--out",
+    "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b11_law_table_crossing"
+  ],
+  "claim_key": "71d4f87c994b269b155bed8b136cdead7dca00590fd61471d030468fd3815f1a",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/71d4f87c994b269b155bed8b136cdead7dca00590fd61471d030468fd3815f1a.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d9ddd89ce9a6426d8281c01cee6a19ad/scripts/run_skill_drift_law_table_b11.py",
+    "--seeds",
+    "95401",
+    "95402",
+    "95403",
+    "--launch-sha",
+    "6adcfcd4bd9912f68b29d3664ea6ded935eecc60",
+    "--out",
+    "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b11_law_table_crossing"
+  ],
+  "command_sha256": "1d57cad867b9ca91a3fc10e4ca2b97a50eaa32a99453eaa258f02ced521ecb26",
+  "control_observation": {
+    "observed_at": "2026-09-21T15:41:42.890430Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "1646be449306980900767e1ee8ec6b900f125b1a"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-21T15:41:42.911547Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d9ddd89ce9a6426d8281c01cee6a19ad",
+  "direction": "skill_teammate_drift_learning",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_skill_drift_law_table_b11.py",
+    "--seeds",
+    "95401",
+    "95402",
+    "95403",
+    "--launch-sha",
+    "6adcfcd4bd9912f68b29d3664ea6ded935eecc60"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b11_law_table_crossing/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/71d4f87c994b269b155bed8b136cdead7dca00590fd61471d030468fd3815f1a.json",
+  "output_root": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b11_law_table_crossing",
+  "preflight": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b11_law_table_crossing/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 4041465,
+      "session_id": 4041465,
+      "start_ticks": 26773326
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 4041465,
+    "process_group_id": 4041465
+  },
+  "process_exit": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b11_law_table_crossing/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 4041466,
+      "session_id": 4041465,
+      "start_ticks": 26773330
+    },
+    "pid": 4041466,
+    "process_group_id": 4041465,
+    "supervisor_pid": 4041465
+  },
+  "schema_version": 1,
+  "sha": "6adcfcd4bd9912f68b29d3664ea6ded935eecc60",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d9ddd89ce9a6426d8281c01cee6a19ad",
+  "stderr": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b11_law_table_crossing/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b11_law_table_crossing/stdout.log"
+}

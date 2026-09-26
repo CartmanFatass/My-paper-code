@@ -1,0 +1,589 @@
+{
+  "blas_threads": 1,
+  "comparisons_by_seed": [],
+  "completed_blocks": [
+    {
+      "config": {
+        "contexts": 4,
+        "skill_ticks": 3,
+        "source_macros": 2048,
+        "target_macros": 256
+      },
+      "counts": {
+        "collection_action_counts": [
+          1170,
+          1134
+        ],
+        "decision_fits": 20,
+        "evaluation_learner_updates": 0,
+        "evaluation_panels": 46080,
+        "evaluation_reward_draws": 0,
+        "known_response_diagnostic_panels": 2304,
+        "law_fits": 1,
+        "law_posterior_updates": 1134,
+        "primitive_ticks": 6912,
+        "sampled_reward_labels": 2304,
+        "source_collection_action_counts": [
+          1044,
+          1004
+        ],
+        "source_macros": 2048,
+        "target_collection_action_counts": [
+          126,
+          130
+        ],
+        "target_macros": 256,
+        "total_macros": 2304
+      },
+      "known_response_diagnostic": {
+        "target_by_endpoint": {
+          "first64": {
+            "cumulative_regret": 2.0649999999999995,
+            "mean_expected_return": 0.6302343749999999,
+            "mean_regret": 0.03226562499999999,
+            "panel_count": 64,
+            "sign_mistakes": 15
+          },
+          "full": {
+            "cumulative_regret": 2.119999999999999,
+            "mean_expected_return": 0.6542187499999998,
+            "mean_regret": 0.008281249999999997,
+            "panel_count": 256,
+            "sign_mistakes": 16
+          },
+          "late64": {
+            "cumulative_regret": 0.0,
+            "mean_expected_return": 0.6624999999999999,
+            "mean_regret": 0.0,
+            "panel_count": 64,
+            "sign_mistakes": 0
+          }
+        }
+      },
+      "launch_sha": "afe4f8ec74d48b2485db3d935de7871c86cc0e6c",
+      "law_diagnostic": {
+        "all_mean_l1_error": 0.13007507422884015,
+        "compute_wall_scope": "shared-law activate, predict, count, and observe only",
+        "compute_wall_seconds": 0.030125215533189476,
+        "initial_to_final_l2_movement": 1.380612850430549,
+        "initial_to_source_l2_movement": 0.9760152163122895,
+        "source_to_final_l2_movement": 0.9764661490808785,
+        "target_by_endpoint": {
+          "first64": {
+            "mean_l1_error": 0.2916219352012931,
+            "panel_count": 64
+          },
+          "full": {
+            "mean_l1_error": 0.216088137315332,
+            "panel_count": 256
+          },
+          "late64": {
+            "mean_l1_error": 0.19508094365815157,
+            "panel_count": 64
+          }
+        }
+      },
+      "object": "unknown_joint_law_b05",
+      "scientific_block_wall_scope": "common collection, all learners and exact evaluator; excludes serialization and import",
+      "scientific_block_wall_seconds": 1.3447195899789222,
+      "seed": 95001,
+      "spec_ids": [
+        "response_all__response__prior2",
+        "response_all__response__prior16",
+        "fingerprint_full__law__prior2",
+        "fingerprint_full__law__prior16",
+        "fingerprint_full__cell__prior2",
+        "fingerprint_full__cell__prior16",
+        "fingerprint_full__hybrid__prior2",
+        "fingerprint_full__hybrid__prior16",
+        "fingerprint_recent__law__prior2__window64",
+        "fingerprint_recent__law__prior2__window256",
+        "fingerprint_recent__law__prior16__window64",
+        "fingerprint_recent__law__prior16__window256",
+        "fingerprint_recent__cell__prior2__window64",
+        "fingerprint_recent__cell__prior2__window256",
+        "fingerprint_recent__cell__prior16__window64",
+        "fingerprint_recent__cell__prior16__window256",
+        "fingerprint_recent__hybrid__prior2__window64",
+        "fingerprint_recent__hybrid__prior2__window256",
+        "fingerprint_recent__hybrid__prior16__window64",
+        "fingerprint_recent__hybrid__prior16__window256"
+      ],
+      "stage": "development",
+      "status": "COMPLETE"
+    },
+    {
+      "config": {
+        "contexts": 4,
+        "skill_ticks": 3,
+        "source_macros": 2048,
+        "target_macros": 256
+      },
+      "counts": {
+        "collection_action_counts": [
+          1163,
+          1141
+        ],
+        "decision_fits": 20,
+        "evaluation_learner_updates": 0,
+        "evaluation_panels": 46080,
+        "evaluation_reward_draws": 0,
+        "known_response_diagnostic_panels": 2304,
+        "law_fits": 1,
+        "law_posterior_updates": 1141,
+        "primitive_ticks": 6912,
+        "sampled_reward_labels": 2304,
+        "source_collection_action_counts": [
+          1044,
+          1004
+        ],
+        "source_macros": 2048,
+        "target_collection_action_counts": [
+          119,
+          137
+        ],
+        "target_macros": 256,
+        "total_macros": 2304
+      },
+      "known_response_diagnostic": {
+        "target_by_endpoint": {
+          "first64": {
+            "cumulative_regret": 0.7,
+            "mean_expected_return": 0.6515625,
+            "mean_regret": 0.0109375,
+            "panel_count": 64,
+            "sign_mistakes": 4
+          },
+          "full": {
+            "cumulative_regret": 1.5750000000000006,
+            "mean_expected_return": 0.6563476562499999,
+            "mean_regret": 0.006152343750000002,
+            "panel_count": 256,
+            "sign_mistakes": 29
+          },
+          "late64": {
+            "cumulative_regret": 0.14000000000000012,
+            "mean_expected_return": 0.6603124999999999,
+            "mean_regret": 0.002187500000000002,
+            "panel_count": 64,
+            "sign_mistakes": 4
+          }
+        }
+      },
+      "launch_sha": "afe4f8ec74d48b2485db3d935de7871c86cc0e6c",
+      "law_diagnostic": {
+        "all_mean_l1_error": 0.15421167076408246,
+        "compute_wall_scope": "shared-law activate, predict, count, and observe only",
+        "compute_wall_seconds": 0.026852527720620856,
+        "initial_to_final_l2_movement": 1.4664944210616297,
+        "initial_to_source_l2_movement": 0.99031740812112,
+        "source_to_final_l2_movement": 1.0816086714598547,
+        "target_by_endpoint": {
+          "first64": {
+            "mean_l1_error": 0.3991882220040165,
+            "panel_count": 64
+          },
+          "full": {
+            "mean_l1_error": 0.2827379181943299,
+            "panel_count": 256
+          },
+          "late64": {
+            "mean_l1_error": 0.21162442294274209,
+            "panel_count": 64
+          }
+        }
+      },
+      "object": "unknown_joint_law_b05",
+      "scientific_block_wall_scope": "common collection, all learners and exact evaluator; excludes serialization and import",
+      "scientific_block_wall_seconds": 1.173978767998051,
+      "seed": 95002,
+      "spec_ids": [
+        "response_all__response__prior2",
+        "response_all__response__prior16",
+        "fingerprint_full__law__prior2",
+        "fingerprint_full__law__prior16",
+        "fingerprint_full__cell__prior2",
+        "fingerprint_full__cell__prior16",
+        "fingerprint_full__hybrid__prior2",
+        "fingerprint_full__hybrid__prior16",
+        "fingerprint_recent__law__prior2__window64",
+        "fingerprint_recent__law__prior2__window256",
+        "fingerprint_recent__law__prior16__window64",
+        "fingerprint_recent__law__prior16__window256",
+        "fingerprint_recent__cell__prior2__window64",
+        "fingerprint_recent__cell__prior2__window256",
+        "fingerprint_recent__cell__prior16__window64",
+        "fingerprint_recent__cell__prior16__window256",
+        "fingerprint_recent__hybrid__prior2__window64",
+        "fingerprint_recent__hybrid__prior2__window256",
+        "fingerprint_recent__hybrid__prior16__window64",
+        "fingerprint_recent__hybrid__prior16__window256"
+      ],
+      "stage": "development",
+      "status": "COMPLETE"
+    },
+    {
+      "config": {
+        "contexts": 4,
+        "skill_ticks": 3,
+        "source_macros": 2048,
+        "target_macros": 256
+      },
+      "counts": {
+        "collection_action_counts": [
+          1139,
+          1165
+        ],
+        "decision_fits": 20,
+        "evaluation_learner_updates": 0,
+        "evaluation_panels": 46080,
+        "evaluation_reward_draws": 0,
+        "known_response_diagnostic_panels": 2304,
+        "law_fits": 1,
+        "law_posterior_updates": 1165,
+        "primitive_ticks": 6912,
+        "sampled_reward_labels": 2304,
+        "source_collection_action_counts": [
+          1013,
+          1035
+        ],
+        "source_macros": 2048,
+        "target_collection_action_counts": [
+          126,
+          130
+        ],
+        "target_macros": 256,
+        "total_macros": 2304
+      },
+      "known_response_diagnostic": {
+        "target_by_endpoint": {
+          "first64": {
+            "cumulative_regret": 1.919999999999999,
+            "mean_expected_return": 0.6324999999999998,
+            "mean_regret": 0.029999999999999985,
+            "panel_count": 64,
+            "sign_mistakes": 20
+          },
+          "full": {
+            "cumulative_regret": 3.9549999999999965,
+            "mean_expected_return": 0.6470507812499998,
+            "mean_regret": 0.015449218749999986,
+            "panel_count": 256,
+            "sign_mistakes": 57
+          },
+          "late64": {
+            "cumulative_regret": 0.8249999999999991,
+            "mean_expected_return": 0.6496093749999999,
+            "mean_regret": 0.012890624999999985,
+            "panel_count": 64,
+            "sign_mistakes": 15
+          }
+        }
+      },
+      "launch_sha": "afe4f8ec74d48b2485db3d935de7871c86cc0e6c",
+      "law_diagnostic": {
+        "all_mean_l1_error": 0.14577158617644445,
+        "compute_wall_scope": "shared-law activate, predict, count, and observe only",
+        "compute_wall_seconds": 0.026227409252896905,
+        "initial_to_final_l2_movement": 1.4378071484455666,
+        "initial_to_source_l2_movement": 0.9552838212314707,
+        "source_to_final_l2_movement": 1.0745800188978811,
+        "target_by_endpoint": {
+          "first64": {
+            "mean_l1_error": 0.335595731112442,
+            "panel_count": 64
+          },
+          "full": {
+            "mean_l1_error": 0.22579592354192812,
+            "panel_count": 256
+          },
+          "late64": {
+            "mean_l1_error": 0.1831853186742829,
+            "panel_count": 64
+          }
+        }
+      },
+      "object": "unknown_joint_law_b05",
+      "scientific_block_wall_scope": "common collection, all learners and exact evaluator; excludes serialization and import",
+      "scientific_block_wall_seconds": 1.1596208160044625,
+      "seed": 95003,
+      "spec_ids": [
+        "response_all__response__prior2",
+        "response_all__response__prior16",
+        "fingerprint_full__law__prior2",
+        "fingerprint_full__law__prior16",
+        "fingerprint_full__cell__prior2",
+        "fingerprint_full__cell__prior16",
+        "fingerprint_full__hybrid__prior2",
+        "fingerprint_full__hybrid__prior16",
+        "fingerprint_recent__law__prior2__window64",
+        "fingerprint_recent__law__prior2__window256",
+        "fingerprint_recent__law__prior16__window64",
+        "fingerprint_recent__law__prior16__window256",
+        "fingerprint_recent__cell__prior2__window64",
+        "fingerprint_recent__cell__prior2__window256",
+        "fingerprint_recent__cell__prior16__window64",
+        "fingerprint_recent__cell__prior16__window256",
+        "fingerprint_recent__hybrid__prior2__window64",
+        "fingerprint_recent__hybrid__prior2__window256",
+        "fingerprint_recent__hybrid__prior16__window64",
+        "fingerprint_recent__hybrid__prior16__window256"
+      ],
+      "stage": "development",
+      "status": "COMPLETE"
+    }
+  ],
+  "completed_decision_fits": 60,
+  "completed_shared_law_fits": 3,
+  "config": {
+    "contexts": 4,
+    "skill_ticks": 3,
+    "source_macros": 2048,
+    "target_macros": 256
+  },
+  "cpu_scope": "single sequential scientific process, user plus system",
+  "decision_reading_macros": 138240,
+  "decision_reading_tick_exposure": 414720,
+  "dtype": "float64",
+  "evaluation_environment_ticks": 0,
+  "evaluation_reward_draws": 0,
+  "exact_greedy_evaluation_panels": 138240,
+  "gradient_optimizer_calls": 0,
+  "independent_unit": "fresh block, all decision settings share the collected stream",
+  "launch_sha": "afe4f8ec74d48b2485db3d935de7871c86cc0e6c",
+  "numpy_version": "1.26.3",
+  "object": "unknown_joint_law_b05",
+  "peak_rss_kib": 48516,
+  "planned_decision_fits": 60,
+  "planned_shared_law_fits": 3,
+  "rss_scope": "single process high-water mark on local_linux",
+  "runner_cpu_seconds": 4.1131877150000005,
+  "runner_wall_seconds": 4.203791973995976,
+  "scope": "exogenous correlated three-tick terminal host; exact expected greedy value under passive collection",
+  "seeds": [
+    95001,
+    95002,
+    95003
+  ],
+  "selected": {
+    "fingerprint_full": {
+      "setting_id": "fingerprint_full__hybrid__prior2",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "hybrid"
+      }
+    },
+    "fingerprint_recent": {
+      "setting_id": "fingerprint_recent__hybrid__prior16__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 256,
+        "representation": "hybrid"
+      }
+    },
+    "response_all": {
+      "setting_id": "response_all__response__prior2",
+      "spec": {
+        "family": "response_all",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "response"
+      }
+    }
+  },
+  "selection_output_sha256": "ca32b21255d9bc60efb2c17fb1a7757d506d7fcaa49594db9a5ed9e3d3bd16e5",
+  "selection_sha256": null,
+  "selection_uses": "pre-outcome predictions and observed collector feedback only",
+  "settings": [
+    {
+      "setting_id": "response_all__response__prior2",
+      "spec": {
+        "family": "response_all",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "response"
+      }
+    },
+    {
+      "setting_id": "response_all__response__prior16",
+      "spec": {
+        "family": "response_all",
+        "prior_strength": 16.0,
+        "recent_window": null,
+        "representation": "response"
+      }
+    },
+    {
+      "setting_id": "fingerprint_full__law__prior2",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "law"
+      }
+    },
+    {
+      "setting_id": "fingerprint_full__law__prior16",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 16.0,
+        "recent_window": null,
+        "representation": "law"
+      }
+    },
+    {
+      "setting_id": "fingerprint_full__cell__prior2",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "cell"
+      }
+    },
+    {
+      "setting_id": "fingerprint_full__cell__prior16",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 16.0,
+        "recent_window": null,
+        "representation": "cell"
+      }
+    },
+    {
+      "setting_id": "fingerprint_full__hybrid__prior2",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "hybrid"
+      }
+    },
+    {
+      "setting_id": "fingerprint_full__hybrid__prior16",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 16.0,
+        "recent_window": null,
+        "representation": "hybrid"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__law__prior2__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 64,
+        "representation": "law"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__law__prior2__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 256,
+        "representation": "law"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__law__prior16__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 64,
+        "representation": "law"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__law__prior16__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 256,
+        "representation": "law"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__cell__prior2__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 64,
+        "representation": "cell"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__cell__prior2__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 256,
+        "representation": "cell"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__cell__prior16__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 64,
+        "representation": "cell"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__cell__prior16__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 256,
+        "representation": "cell"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__hybrid__prior2__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 64,
+        "representation": "hybrid"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__hybrid__prior2__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 256,
+        "representation": "hybrid"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__hybrid__prior16__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 64,
+        "representation": "hybrid"
+      }
+    },
+    {
+      "setting_id": "fingerprint_recent__hybrid__prior16__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 256,
+        "representation": "hybrid"
+      }
+    }
+  ],
+  "shared_known_response_diagnostic_panels": 6912,
+  "stage": "development",
+  "started_decision_fits": 60,
+  "started_shared_law_fits": 3,
+  "status": "COMPLETE",
+  "unique_collection_macros": 6912,
+  "unique_primitive_ticks": 20736
+}

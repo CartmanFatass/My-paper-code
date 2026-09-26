@@ -1,0 +1,138 @@
+{
+  "kind": "fixed C01 post-run aggregation of already accepted native evidence; no new environment or policy execution",
+  "created_at": "2026-09-25T14:38:38.919891+00:00",
+  "input_sha": "9e44adde3d54fcd0363a2ebdbc1468494141c27b",
+  "aggregator_source_sha256": "c9855ae98052ff4ffd5300399512ffffec82098375eaa34f08825ef6ce257899",
+  "summary_sha256": "904cf37507b7cc8c83d74d0c95797dd975db5c70740e04ee3dcffa0e612d453a",
+  "all_24_metric_intervals_independently_crosschecked": true,
+  "native_counts": {
+    "fits": 10,
+    "evaluation_uav_steps": 4320000,
+    "evaluation_storage_calls": 0,
+    "panels": 45,
+    "evaluation_policy_step_calls": 22500,
+    "training_team_steps": 3600000,
+    "stored_team_steps": 3600000,
+    "evaluation_resets": 1440,
+    "updates": 450,
+    "evaluation_episodes": 1440,
+    "evaluation_optimizer_calls": 0,
+    "training_uav_steps": 21600000,
+    "training_episodes": 7200,
+    "evaluation_team_steps": 720000,
+    "training_policy_step_calls": 225000
+  },
+  "optimizer_calls_each": 1012500,
+  "per_block": [
+    {
+      "block": 0,
+      "seed": 263000101,
+      "scientific_wall_seconds": 4674.513674921938,
+      "arm_wall_seconds": {
+        "U": 2232.7441821909742,
+        "M": 2441.522984589101
+      },
+      "admission_to_exit_seconds": 4836.9436547756195,
+      "accepted_at_epoch": 1790319910.5259666,
+      "finished_at_epoch": 1790324747.4696214,
+      "cpu_user_seconds": 18527.012349,
+      "cpu_system_seconds": 44.240376,
+      "peak_rss_kib": 1839288,
+      "files": 136,
+      "bytes": 1088016261,
+      "inventory_sha256": "43dfd66fe93afd660f41055accff234b3df1a16923df8d97293ef8faa378fe5e",
+      "summary_sha256": "9d350bde1d8dd69ec6223f2247bb7c08c25d644626829c4304bc51c11cffb3f8"
+    },
+    {
+      "block": 1,
+      "seed": 263000102,
+      "scientific_wall_seconds": 4529.081527478993,
+      "arm_wall_seconds": {
+        "U": 2367.842392656021,
+        "M": 2161.006548417965
+      },
+      "admission_to_exit_seconds": 4708.024017095566,
+      "accepted_at_epoch": 1790325484.1649506,
+      "finished_at_epoch": 1790330192.1889677,
+      "cpu_user_seconds": 18065.071202,
+      "cpu_system_seconds": 37.974791,
+      "peak_rss_kib": 1841496,
+      "files": 136,
+      "bytes": 1088009210,
+      "inventory_sha256": "1e351474cd3668c84fbae8ff30f27ce2d1361799e6423038c9650651c186a70e",
+      "summary_sha256": "fe1d96f2cfc08fad235711221bec2b4db5870f5ac110d6e756eefa6e49d09dd3"
+    },
+    {
+      "block": 2,
+      "seed": 263000103,
+      "scientific_wall_seconds": 4821.488308797008,
+      "arm_wall_seconds": {
+        "U": 2425.643045520992,
+        "M": 2395.5959832409862
+      },
+      "admission_to_exit_seconds": 5039.958981752396,
+      "accepted_at_epoch": 1790331319.0584276,
+      "finished_at_epoch": 1790336359.0174093,
+      "cpu_user_seconds": 19323.6037,
+      "cpu_system_seconds": 40.055437,
+      "peak_rss_kib": 1838916,
+      "files": 136,
+      "bytes": 1088014981,
+      "inventory_sha256": "9b44cd9520a1bc091a91913dd763d8635d93b391795a48bfa2b8ed0ae8652ff3",
+      "summary_sha256": "57d9963761bb3114506c566b603a68c2d8ee41e2220354fa7a0cd220103ea962"
+    },
+    {
+      "block": 3,
+      "seed": 263000104,
+      "scientific_wall_seconds": 4358.313915345934,
+      "arm_wall_seconds": {
+        "U": 2200.9501392280217,
+        "M": 2157.1306111071026
+      },
+      "admission_to_exit_seconds": 4538.11630988121,
+      "accepted_at_epoch": 1790336932.6890485,
+      "finished_at_epoch": 1790341470.8053584,
+      "cpu_user_seconds": 17410.738582,
+      "cpu_system_seconds": 37.659281,
+      "peak_rss_kib": 1843748,
+      "files": 136,
+      "bytes": 1088014394,
+      "inventory_sha256": "7228d3946aa1ab4eb46cab7dfdc4f199e5c8b2cd045c5be73a20d66ed777fbed",
+      "summary_sha256": "2c7c4fd319c43a752845f6add6f10908df3abaa518c77d2329bad8be26a4c2d8"
+    },
+    {
+      "block": 4,
+      "seed": 263000105,
+      "scientific_wall_seconds": 4302.47150366602,
+      "arm_wall_seconds": {
+        "U": 2184.3068048419664,
+        "M": 2117.931726904004
+      },
+      "admission_to_exit_seconds": 4527.37583231926,
+      "accepted_at_epoch": 1790342155.8804154,
+      "finished_at_epoch": 1790346683.2562478,
+      "cpu_user_seconds": 17375.032377,
+      "cpu_system_seconds": 36.360711,
+      "peak_rss_kib": 1840372,
+      "files": 136,
+      "bytes": 1088016909,
+      "inventory_sha256": "28c08574b1580f0c9bea2dadc19e9e839c17ce9470065ba5e911a06822ed3ca7",
+      "summary_sha256": "64993678657301c8cba111197087979e4b004a94adfbd99027178294efbd909e"
+    }
+  ],
+  "scientific_wall_seconds_sum": 22685.868930209894,
+  "fit_arm_wall_seconds_sum": 22684.674418697134,
+  "admission_to_exit_seconds_sum": 23650.41879582405,
+  "elapsed_first_admission_to_last_exit_seconds": 26772.73028111458,
+  "cpu_user_seconds_sum": 90701.45821,
+  "cpu_system_seconds_sum": 196.29059600000002,
+  "maximum_process_peak_rss_kib": 1843748,
+  "native_files_total": 680,
+  "native_bytes_total": 5440071755,
+  "unmeasured_costs": [
+    "engineering/review/consultation/publication/readback wall as a complete total",
+    "other process CPU/RSS",
+    "peak scratch occupancy"
+  ],
+  "paired_study_scope": "fixed shared evaluation worlds; no A2 pooling; all five blocks retained"
+}

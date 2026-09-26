@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-20T14:15:55.431549Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/fd169e397983428d9557b97197ee3ea1/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/fd169e397983428d9557b97197ee3ea1/scripts/run_termination_reuse_a02.py",
+    "--output",
+    "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a02_matched_termination_91032_20260920",
+    "--",
+    "--arm",
+    "matched_termination",
+    "--seed",
+    "91032",
+    "--out",
+    "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a02_matched_termination_91032_20260920",
+    "--launch-sha",
+    "739344301e965134d44ba754e7a7363258731e81"
+  ],
+  "claim_key": "b526c691bd2b10c026c72e9c3d794047c7b1ea655e8ae01a20dc2421cede2529",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/b526c691bd2b10c026c72e9c3d794047c7b1ea655e8ae01a20dc2421cede2529.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/fd169e397983428d9557b97197ee3ea1/scripts/run_termination_reuse_a02.py",
+    "--arm",
+    "matched_termination",
+    "--seed",
+    "91032",
+    "--out",
+    "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a02_matched_termination_91032_20260920",
+    "--launch-sha",
+    "739344301e965134d44ba754e7a7363258731e81"
+  ],
+  "command_sha256": "dfbcdcc451f02b7c84dd840c587482127f28592774b61e937ce6b3d88609daf0",
+  "control_observation": {
+    "observed_at": "2026-09-20T14:15:55.251826Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "6ee15d7dda2a82688f60e25ae225c030ab8a6043"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-20T14:15:55.273118Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/fd169e397983428d9557b97197ee3ea1",
+  "direction": "termination_rule_experience_reuse",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_termination_reuse_a02.py",
+    "--arm",
+    "matched_termination",
+    "--seed",
+    "91032",
+    "--launch-sha",
+    "739344301e965134d44ba754e7a7363258731e81"
+  ],
+  "lead": "Codex DM",
+  "manifest_ref": "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a02_matched_termination_91032_20260920/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/b526c691bd2b10c026c72e9c3d794047c7b1ea655e8ae01a20dc2421cede2529.json",
+  "output_root": "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a02_matched_termination_91032_20260920",
+  "preflight": "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a02_matched_termination_91032_20260920/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2306909,
+      "session_id": 2306909,
+      "start_ticks": 17618562
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 2306909,
+    "process_group_id": 2306909
+  },
+  "process_exit": "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a02_matched_termination_91032_20260920/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2306910,
+      "session_id": 2306909,
+      "start_ticks": 17618565
+    },
+    "pid": 2306910,
+    "process_group_id": 2306909,
+    "supervisor_pid": 2306909
+  },
+  "schema_version": 1,
+  "sha": "739344301e965134d44ba754e7a7363258731e81",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/fd169e397983428d9557b97197ee3ea1",
+  "stderr": "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a02_matched_termination_91032_20260920/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a02_matched_termination_91032_20260920/stdout.log"
+}

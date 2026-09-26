@@ -1,0 +1,863 @@
+{
+  "compute_wall_scope": "one learner, native training, cloned one-step planning, actual evaluation, and reductions",
+  "compute_wall_seconds": 11.272495434997836,
+  "config": {
+    "area_size": 1000.0,
+    "evaluation_episodes": 4,
+    "evaluation_steps": 64,
+    "height_range": [
+      50.0,
+      150.0
+    ],
+    "max_connections": 10,
+    "max_speed": 30.0,
+    "min_sinr": 0.0,
+    "n_uavs": 3,
+    "n_users": 1,
+    "snapshot_steps": [
+      16,
+      64
+    ],
+    "source_steps": 64,
+    "target_steps": 64,
+    "time_step": 1.0
+  },
+  "counts": {
+    "actor_value_network_forwards": 0,
+    "count_updates": 128,
+    "custom_geometry_channel_refreshes": 18,
+    "deep_copies": 8192,
+    "evaluation_count_updates": 0,
+    "evaluation_episodes": 16,
+    "evaluation_frozen_projection_constructions": 2,
+    "evaluation_joint_choices": 1024,
+    "evaluation_joint_q_vectors": 1024,
+    "evaluation_projected_choices": 1024,
+    "evaluation_projected_q_vectors": 1024,
+    "evaluation_response_tables": 1024,
+    "evaluation_team_steps": 1024,
+    "evaluation_true_chosen_values_after_choice": 1024,
+    "evaluation_true_q_vectors_after_choice": 1024,
+    "evaluation_true_regrets_after_choice": 1024,
+    "external_innovation_draws": 1152,
+    "final_probability_export_queries": 2,
+    "focal_uniform_collection_draws": 128,
+    "gradient_calls": 0,
+    "implicit_constructor_resets": 18,
+    "initial_probability_export_queries": 2,
+    "joint_log_loss_terms": 128,
+    "logical_episode_initializations": 18,
+    "native_constructors": 18,
+    "native_step_calls": 9344,
+    "observed_joint_labels": 128,
+    "planner_native_step_calls": 8192,
+    "preupdate_probability_queries": 128,
+    "projected_log_loss_terms": 128,
+    "real_team_ticks": 1152,
+    "snapshot_probability_export_queries": 4,
+    "state_export_probability_queries": 8,
+    "summary_projection_diagnostics": 3,
+    "total_learner_probability_queries": 136,
+    "training_marginal_projection_constructions": 128,
+    "training_team_steps": 128
+  },
+  "episode_returns": [
+    {
+      "cumulative_adapter_reward": 9.78463805550723,
+      "cumulative_team_reward": 29.353914166521697,
+      "episode": 0,
+      "snapshot_step": 16,
+      "view": "J_emp"
+    },
+    {
+      "cumulative_adapter_reward": 14.884930257117523,
+      "cumulative_team_reward": 44.65479077135255,
+      "episode": 1,
+      "snapshot_step": 16,
+      "view": "J_emp"
+    },
+    {
+      "cumulative_adapter_reward": 11.331199079381586,
+      "cumulative_team_reward": 33.99359723814476,
+      "episode": 2,
+      "snapshot_step": 16,
+      "view": "J_emp"
+    },
+    {
+      "cumulative_adapter_reward": 11.175099484557448,
+      "cumulative_team_reward": 33.525298453672356,
+      "episode": 3,
+      "snapshot_step": 16,
+      "view": "J_emp"
+    },
+    {
+      "cumulative_adapter_reward": 10.264365591372231,
+      "cumulative_team_reward": 30.793096774116695,
+      "episode": 0,
+      "snapshot_step": 16,
+      "view": "M_proj"
+    },
+    {
+      "cumulative_adapter_reward": 15.145183038955587,
+      "cumulative_team_reward": 45.43554911686674,
+      "episode": 1,
+      "snapshot_step": 16,
+      "view": "M_proj"
+    },
+    {
+      "cumulative_adapter_reward": 12.96644049443576,
+      "cumulative_team_reward": 38.89932148330728,
+      "episode": 2,
+      "snapshot_step": 16,
+      "view": "M_proj"
+    },
+    {
+      "cumulative_adapter_reward": 11.850737438553345,
+      "cumulative_team_reward": 35.55221231566004,
+      "episode": 3,
+      "snapshot_step": 16,
+      "view": "M_proj"
+    },
+    {
+      "cumulative_adapter_reward": 9.78463805550723,
+      "cumulative_team_reward": 29.353914166521697,
+      "episode": 0,
+      "snapshot_step": 64,
+      "view": "J_emp"
+    },
+    {
+      "cumulative_adapter_reward": 14.14009074689595,
+      "cumulative_team_reward": 42.42027224068785,
+      "episode": 1,
+      "snapshot_step": 64,
+      "view": "J_emp"
+    },
+    {
+      "cumulative_adapter_reward": 11.331199079381586,
+      "cumulative_team_reward": 33.99359723814476,
+      "episode": 2,
+      "snapshot_step": 64,
+      "view": "J_emp"
+    },
+    {
+      "cumulative_adapter_reward": 11.175099484557448,
+      "cumulative_team_reward": 33.525298453672356,
+      "episode": 3,
+      "snapshot_step": 64,
+      "view": "J_emp"
+    },
+    {
+      "cumulative_adapter_reward": 10.264365591372231,
+      "cumulative_team_reward": 30.793096774116695,
+      "episode": 0,
+      "snapshot_step": 64,
+      "view": "M_proj"
+    },
+    {
+      "cumulative_adapter_reward": 15.145183038955587,
+      "cumulative_team_reward": 45.43554911686674,
+      "episode": 1,
+      "snapshot_step": 64,
+      "view": "M_proj"
+    },
+    {
+      "cumulative_adapter_reward": 12.96644049443576,
+      "cumulative_team_reward": 38.89932148330728,
+      "episode": 2,
+      "snapshot_step": 64,
+      "view": "M_proj"
+    },
+    {
+      "cumulative_adapter_reward": 11.850737438553345,
+      "cumulative_team_reward": 35.55221231566004,
+      "episode": 3,
+      "snapshot_step": 64,
+      "view": "M_proj"
+    }
+  ],
+  "evaluation_episode_initializations": [
+    {
+      "environment_seed": 253281492,
+      "episode": 0,
+      "geometry_slots": [
+        0.07593554084610143,
+        0.793354741358106,
+        0.26941729761602984,
+        0.47546996530893726,
+        0.7087444808273368,
+        0.04913647561884782,
+        0.15297011211677058
+      ],
+      "initial_positions": [
+        [
+          572.2356216910874,
+          540.7429533232779,
+          50.0
+        ],
+        [
+          438.0911877668499,
+          546.9434072296641,
+          50.0
+        ],
+        [
+          491.4785692098822,
+          420.7018453301483,
+          50.0
+        ]
+      ],
+      "snapshot_step": 16,
+      "view": "J_emp"
+    },
+    {
+      "environment_seed": 352226320,
+      "episode": 1,
+      "geometry_slots": [
+        0.23815808416662265,
+        0.005198806182887039,
+        0.9445676565062486,
+        0.5625574152065214,
+        0.46349664966290005,
+        0.41524544250574436,
+        0.9470257998695131
+      ],
+      "initial_positions": [
+        [
+          506.0558080278995,
+          574.8072730498989,
+          50.0
+        ],
+        [
+          423.3974561834799,
+          464.45956427716084,
+          50.0
+        ],
+        [
+          569.9691003851383,
+          459.93994260307886,
+          50.0
+        ]
+      ],
+      "snapshot_step": 16,
+      "view": "J_emp"
+    },
+    {
+      "environment_seed": 1681112588,
+      "episode": 2,
+      "geometry_slots": [
+        0.45770535249202227,
+        0.04268538599157612,
+        0.6026260965360897,
+        0.14242014593094032,
+        0.37337706641071,
+        0.8610241868375247,
+        0.5386245189351597
+      ],
+      "initial_positions": [
+        [
+          427.6763665828839,
+          521.4126675720634,
+          50.0
+        ],
+        [
+          525.554616699353,
+          423.10906079793335,
+          50.0
+        ],
+        [
+          553.8887894792281,
+          554.1909303957456,
+          50.0
+        ]
+      ],
+      "snapshot_step": 16,
+      "view": "J_emp"
+    },
+    {
+      "environment_seed": 585003870,
+      "episode": 3,
+      "geometry_slots": [
+        0.06665486669161547,
+        0.6251962363567868,
+        0.18878986697682965,
+        0.2874474928569397,
+        0.9300416527664789,
+        0.8981263340126306,
+        0.361401995499531
+      ],
+      "initial_positions": [
+        [
+          571.5430885652686,
+          538.5158132002011,
+          50.0
+        ],
+        [
+          434.8117140885737,
+          540.7705327630471,
+          50.0
+        ],
+        [
+          489.98328178902483,
+          422.7724194236133,
+          50.0
+        ]
+      ],
+      "snapshot_step": 16,
+      "view": "J_emp"
+    },
+    {
+      "environment_seed": 253281492,
+      "episode": 0,
+      "geometry_slots": [
+        0.07593554084610143,
+        0.793354741358106,
+        0.26941729761602984,
+        0.47546996530893726,
+        0.7087444808273368,
+        0.04913647561884782,
+        0.15297011211677058
+      ],
+      "initial_positions": [
+        [
+          572.2356216910874,
+          540.7429533232779,
+          50.0
+        ],
+        [
+          438.0911877668499,
+          546.9434072296641,
+          50.0
+        ],
+        [
+          491.4785692098822,
+          420.7018453301483,
+          50.0
+        ]
+      ],
+      "snapshot_step": 16,
+      "view": "M_proj"
+    },
+    {
+      "environment_seed": 352226320,
+      "episode": 1,
+      "geometry_slots": [
+        0.23815808416662265,
+        0.005198806182887039,
+        0.9445676565062486,
+        0.5625574152065214,
+        0.46349664966290005,
+        0.41524544250574436,
+        0.9470257998695131
+      ],
+      "initial_positions": [
+        [
+          506.0558080278995,
+          574.8072730498989,
+          50.0
+        ],
+        [
+          423.3974561834799,
+          464.45956427716084,
+          50.0
+        ],
+        [
+          569.9691003851383,
+          459.93994260307886,
+          50.0
+        ]
+      ],
+      "snapshot_step": 16,
+      "view": "M_proj"
+    },
+    {
+      "environment_seed": 1681112588,
+      "episode": 2,
+      "geometry_slots": [
+        0.45770535249202227,
+        0.04268538599157612,
+        0.6026260965360897,
+        0.14242014593094032,
+        0.37337706641071,
+        0.8610241868375247,
+        0.5386245189351597
+      ],
+      "initial_positions": [
+        [
+          427.6763665828839,
+          521.4126675720634,
+          50.0
+        ],
+        [
+          525.554616699353,
+          423.10906079793335,
+          50.0
+        ],
+        [
+          553.8887894792281,
+          554.1909303957456,
+          50.0
+        ]
+      ],
+      "snapshot_step": 16,
+      "view": "M_proj"
+    },
+    {
+      "environment_seed": 585003870,
+      "episode": 3,
+      "geometry_slots": [
+        0.06665486669161547,
+        0.6251962363567868,
+        0.18878986697682965,
+        0.2874474928569397,
+        0.9300416527664789,
+        0.8981263340126306,
+        0.361401995499531
+      ],
+      "initial_positions": [
+        [
+          571.5430885652686,
+          538.5158132002011,
+          50.0
+        ],
+        [
+          434.8117140885737,
+          540.7705327630471,
+          50.0
+        ],
+        [
+          489.98328178902483,
+          422.7724194236133,
+          50.0
+        ]
+      ],
+      "snapshot_step": 16,
+      "view": "M_proj"
+    },
+    {
+      "environment_seed": 253281492,
+      "episode": 0,
+      "geometry_slots": [
+        0.07593554084610143,
+        0.793354741358106,
+        0.26941729761602984,
+        0.47546996530893726,
+        0.7087444808273368,
+        0.04913647561884782,
+        0.15297011211677058
+      ],
+      "initial_positions": [
+        [
+          572.2356216910874,
+          540.7429533232779,
+          50.0
+        ],
+        [
+          438.0911877668499,
+          546.9434072296641,
+          50.0
+        ],
+        [
+          491.4785692098822,
+          420.7018453301483,
+          50.0
+        ]
+      ],
+      "snapshot_step": 64,
+      "view": "J_emp"
+    },
+    {
+      "environment_seed": 352226320,
+      "episode": 1,
+      "geometry_slots": [
+        0.23815808416662265,
+        0.005198806182887039,
+        0.9445676565062486,
+        0.5625574152065214,
+        0.46349664966290005,
+        0.41524544250574436,
+        0.9470257998695131
+      ],
+      "initial_positions": [
+        [
+          506.0558080278995,
+          574.8072730498989,
+          50.0
+        ],
+        [
+          423.3974561834799,
+          464.45956427716084,
+          50.0
+        ],
+        [
+          569.9691003851383,
+          459.93994260307886,
+          50.0
+        ]
+      ],
+      "snapshot_step": 64,
+      "view": "J_emp"
+    },
+    {
+      "environment_seed": 1681112588,
+      "episode": 2,
+      "geometry_slots": [
+        0.45770535249202227,
+        0.04268538599157612,
+        0.6026260965360897,
+        0.14242014593094032,
+        0.37337706641071,
+        0.8610241868375247,
+        0.5386245189351597
+      ],
+      "initial_positions": [
+        [
+          427.6763665828839,
+          521.4126675720634,
+          50.0
+        ],
+        [
+          525.554616699353,
+          423.10906079793335,
+          50.0
+        ],
+        [
+          553.8887894792281,
+          554.1909303957456,
+          50.0
+        ]
+      ],
+      "snapshot_step": 64,
+      "view": "J_emp"
+    },
+    {
+      "environment_seed": 585003870,
+      "episode": 3,
+      "geometry_slots": [
+        0.06665486669161547,
+        0.6251962363567868,
+        0.18878986697682965,
+        0.2874474928569397,
+        0.9300416527664789,
+        0.8981263340126306,
+        0.361401995499531
+      ],
+      "initial_positions": [
+        [
+          571.5430885652686,
+          538.5158132002011,
+          50.0
+        ],
+        [
+          434.8117140885737,
+          540.7705327630471,
+          50.0
+        ],
+        [
+          489.98328178902483,
+          422.7724194236133,
+          50.0
+        ]
+      ],
+      "snapshot_step": 64,
+      "view": "J_emp"
+    },
+    {
+      "environment_seed": 253281492,
+      "episode": 0,
+      "geometry_slots": [
+        0.07593554084610143,
+        0.793354741358106,
+        0.26941729761602984,
+        0.47546996530893726,
+        0.7087444808273368,
+        0.04913647561884782,
+        0.15297011211677058
+      ],
+      "initial_positions": [
+        [
+          572.2356216910874,
+          540.7429533232779,
+          50.0
+        ],
+        [
+          438.0911877668499,
+          546.9434072296641,
+          50.0
+        ],
+        [
+          491.4785692098822,
+          420.7018453301483,
+          50.0
+        ]
+      ],
+      "snapshot_step": 64,
+      "view": "M_proj"
+    },
+    {
+      "environment_seed": 352226320,
+      "episode": 1,
+      "geometry_slots": [
+        0.23815808416662265,
+        0.005198806182887039,
+        0.9445676565062486,
+        0.5625574152065214,
+        0.46349664966290005,
+        0.41524544250574436,
+        0.9470257998695131
+      ],
+      "initial_positions": [
+        [
+          506.0558080278995,
+          574.8072730498989,
+          50.0
+        ],
+        [
+          423.3974561834799,
+          464.45956427716084,
+          50.0
+        ],
+        [
+          569.9691003851383,
+          459.93994260307886,
+          50.0
+        ]
+      ],
+      "snapshot_step": 64,
+      "view": "M_proj"
+    },
+    {
+      "environment_seed": 1681112588,
+      "episode": 2,
+      "geometry_slots": [
+        0.45770535249202227,
+        0.04268538599157612,
+        0.6026260965360897,
+        0.14242014593094032,
+        0.37337706641071,
+        0.8610241868375247,
+        0.5386245189351597
+      ],
+      "initial_positions": [
+        [
+          427.6763665828839,
+          521.4126675720634,
+          50.0
+        ],
+        [
+          525.554616699353,
+          423.10906079793335,
+          50.0
+        ],
+        [
+          553.8887894792281,
+          554.1909303957456,
+          50.0
+        ]
+      ],
+      "snapshot_step": 64,
+      "view": "M_proj"
+    },
+    {
+      "environment_seed": 585003870,
+      "episode": 3,
+      "geometry_slots": [
+        0.06665486669161547,
+        0.6251962363567868,
+        0.18878986697682965,
+        0.2874474928569397,
+        0.9300416527664789,
+        0.8981263340126306,
+        0.361401995499531
+      ],
+      "initial_positions": [
+        [
+          571.5430885652686,
+          538.5158132002011,
+          50.0
+        ],
+        [
+          434.8117140885737,
+          540.7705327630471,
+          50.0
+        ],
+        [
+          489.98328178902483,
+          422.7724194236133,
+          50.0
+        ]
+      ],
+      "snapshot_step": 64,
+      "view": "M_proj"
+    }
+  ],
+  "external_world_joint_laws": {
+    "role": "external generation and after-choice diagnostics only",
+    "source_version0": [
+      0.1,
+      0.4,
+      0.4,
+      0.1
+    ],
+    "target_version1": [
+      0.4,
+      0.1,
+      0.1,
+      0.4
+    ]
+  },
+  "fits": 1,
+  "information_contract": "external B-owned mixture probabilities are not exposed to the focal learner",
+  "launch_sha": "efe9ce4f39cdb9147d28bbb5c00e7be91dbfca55",
+  "learner": "two version-specific four-cell Dirichlet tables, mass 0.5 per cell",
+  "no_standard_hmasd_claim": true,
+  "object": "skill_drift_native_joint_b09",
+  "plan_source": "ee2d70c69abc0c5a45881da6e74937a7ac166689",
+  "reductions": {
+    "by_snapshot": {
+      "16": {
+        "J_emp_cumulative_adapter_rewards": [
+          9.78463805550723,
+          14.884930257117523,
+          11.331199079381586,
+          11.175099484557448
+        ],
+        "M_proj_cumulative_adapter_rewards": [
+          10.264365591372231,
+          15.145183038955587,
+          12.96644049443576,
+          11.850737438553345
+        ],
+        "mean_J_minus_M_adapter_return": -0.7627149216882843,
+        "mean_J_minus_M_team_return": -2.2881447650648488,
+        "paired_J_minus_M_adapter_returns": [
+          -0.47972753586500083,
+          -0.260252781838064,
+          -1.6352414150541748,
+          -0.6756379539958974
+        ],
+        "paired_J_minus_M_team_returns": [
+          -1.4391826075949972,
+          -0.7807583455141867,
+          -4.905724245162524,
+          -2.026913861987687
+        ],
+        "role": "descriptive"
+      },
+      "64": {
+        "J_emp_cumulative_adapter_rewards": [
+          9.78463805550723,
+          14.14009074689595,
+          11.331199079381586,
+          11.175099484557448
+        ],
+        "M_proj_cumulative_adapter_rewards": [
+          10.264365591372231,
+          15.145183038955587,
+          12.96644049443576,
+          11.850737438553345
+        ],
+        "mean_J_minus_M_adapter_return": -0.9489247992436773,
+        "mean_J_minus_M_team_return": -2.846774397731024,
+        "paired_J_minus_M_adapter_returns": [
+          -0.47972753586500083,
+          -1.0050922920596363,
+          -1.6352414150541748,
+          -0.6756379539958974
+        ],
+        "paired_J_minus_M_team_returns": [
+          -1.4391826075949972,
+          -3.0152768761788877,
+          -4.905724245162524,
+          -2.026913861987687
+        ],
+        "role": "primary"
+      }
+    },
+    "independent_units": "three training histories; episodes, snapshots, and views are nested",
+    "no_threshold_or_selection": true,
+    "primary_snapshot_target_observations": 64
+  },
+  "seed": 95402,
+  "snapshot_contrasts": {
+    "16": {
+      "joint": 0.1388888888888889,
+      "marginal_product": -0.2777777777777778
+    },
+    "64": {
+      "joint": 0.1742424242424242,
+      "marginal_product": -0.23484848484848486
+    }
+  },
+  "stage": "prospective_diagnostic",
+  "status": "COMPLETE",
+  "training_episode_initializations": [
+    {
+      "environment_seed": 1979658539,
+      "geometry_slots": [
+        0.9282703183861281,
+        0.12747987016933793,
+        0.9985634643739628,
+        0.2893765547400873,
+        0.48049044773264016,
+        0.2863815863043774,
+        0.8200674969394621
+      ],
+      "initial_positions": [
+        [
+          568.5449550749494,
+          466.5420554911539,
+          50.0
+        ],
+        [
+          496.9730740717602,
+          584.9317126591955,
+          50.0
+        ],
+        [
+          438.1018837300797,
+          452.7129836700508,
+          50.0
+        ]
+      ],
+      "version": 0
+    },
+    {
+      "environment_seed": 125879420,
+      "geometry_slots": [
+        0.9099026150287695,
+        0.4756944162367138,
+        0.04231926950153453,
+        0.196837542292447,
+        0.1510121061340094,
+        0.9233787429750676,
+        0.9828983249116272
+      ],
+      "initial_positions": [
+        [
+          564.5860846896435,
+          453.2046176788654,
+          50.0
+        ],
+        [
+          497.6325727735772,
+          575.3860284445136,
+          50.0
+        ],
+        [
+          435.0090785622475,
+          458.765173143129,
+          50.0
+        ]
+      ],
+      "version": 1
+    }
+  ],
+  "truth_contrasts": {
+    "source_joint": -0.7000000000000001,
+    "target_joint": 0.20000000000000004,
+    "target_marginal_product": -0.25
+  },
+  "views": [
+    "J_emp",
+    "M_proj"
+  ]
+}

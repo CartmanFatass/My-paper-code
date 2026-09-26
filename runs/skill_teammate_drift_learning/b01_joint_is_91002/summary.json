@@ -1,0 +1,135 @@
+{
+  "object": "STDL_JOINT_REPLAY_B01",
+  "direction": "skill_teammate_drift_learning",
+  "arm": "joint_is",
+  "seed": 91002,
+  "launch_sha": "d97b26c70b88d1b899148f3ee9acce14bf1822d6",
+  "status": "complete",
+  "started_fits": 1,
+  "scientific_scope": "exploratory scripted joint drift; independent two-agent line host",
+  "learning": {
+    "object": "STDL_JOINT_REPLAY_B01",
+    "status": "COMPLETE",
+    "arm": "joint_is",
+    "seed": 91002,
+    "config": {
+      "version_names": [
+        "A",
+        "B"
+      ],
+      "ego_move_probabilities": [
+        0.8,
+        0.6
+      ],
+      "teammate_right_probabilities": [
+        0.8,
+        0.2
+      ],
+      "teammate_move_probability": 0.8,
+      "version_schedule": [
+        "A",
+        "B",
+        "A",
+        "B",
+        "A"
+      ],
+      "episodes_per_block": 60,
+      "macros_per_episode": 10,
+      "macro_duration": 3,
+      "gamma": 0.95,
+      "epsilon": 0.2,
+      "alpha": 0.025,
+      "batch_size": 32,
+      "recent_capacity": 300,
+      "evaluation_interval": 10,
+      "primary_evaluation_episodes": [
+        70,
+        80,
+        90,
+        130,
+        140,
+        150,
+        190,
+        200,
+        210,
+        250,
+        260,
+        270
+      ]
+    },
+    "counts": {
+      "episodes": 300,
+      "macro_transitions": 3000,
+      "primitive_transitions": 9000,
+      "minibatch_updates": 3000,
+      "replay_sample_uses": 96000,
+      "evaluation_panels": 31,
+      "evaluation_episodes_simulated": 0,
+      "evaluation_parameter_updates": 0
+    },
+    "movement": {
+      "initial_q_l2": 0.0,
+      "final_q_l1_movement": 1367.8276822061325,
+      "final_q_l2_movement": 96.03691687610294,
+      "final_q_linf_movement": 11.710001899493223,
+      "final_q_nonzero_entries": 297,
+      "q_entries": 550,
+      "terminal_q_linf": 0.0
+    },
+    "primary_adaptation_endpoint": {
+      "episodes": [
+        70,
+        80,
+        90,
+        130,
+        140,
+        150,
+        190,
+        200,
+        210,
+        250,
+        260,
+        270
+      ],
+      "complete": true,
+      "normalized_service_returns": [
+        0.4743819267457236,
+        0.4743819267457236,
+        0.4743819267457236,
+        0.72962280368201,
+        0.7296228037472847,
+        0.7296228037472847,
+        0.474381932228472,
+        0.47438192631161324,
+        0.47438192631161324,
+        0.7296228035014984,
+        0.7296228035014984,
+        0.7384362729053233
+      ],
+      "mean_normalized_service_return": 0.602736821347814
+    },
+    "optimal_informational_reference": {
+      "A": {
+        "discounted_service_return": 12.022275771631746,
+        "normalized_service_return": 0.7653978334855224
+      },
+      "B": {
+        "discounted_service_return": 11.72644451409533,
+        "normalized_service_return": 0.7465637451733943
+      }
+    },
+    "final_normalized_service_return": 0.7384362729529316
+  },
+  "artifacts": [
+    "config.json",
+    "curves.json",
+    "transitions.npz",
+    "q_values.npy"
+  ],
+  "runner_wall_seconds": 0.9459267430065665,
+  "runner_cpu_seconds": 0.843403781,
+  "resource_scope": "single scientific child process; CPU user plus system",
+  "peak_rss_kib": 44324,
+  "user_cpu_seconds": 0.81543,
+  "system_cpu_seconds": 0.039972
+}

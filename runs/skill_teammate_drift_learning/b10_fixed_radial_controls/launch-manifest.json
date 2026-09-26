@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-21T14:41:02.439745Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/27c1d90e8c8e4171a4dda6b7965de6fd/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/27c1d90e8c8e4171a4dda6b7965de6fd/scripts/run_skill_drift_fixed_radial_b10.py",
+    "--output",
+    "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b10_fixed_radial_controls",
+    "--",
+    "--seeds",
+    "95401",
+    "95402",
+    "95403",
+    "--launch-sha",
+    "3072f05072ec7628f2463bc7ae3b621343d7ca58",
+    "--out",
+    "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b10_fixed_radial_controls"
+  ],
+  "claim_key": "e633bd872ad7da1ac37efd6dcf555b5981faa68bf0117c975b1abd67a318add2",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/e633bd872ad7da1ac37efd6dcf555b5981faa68bf0117c975b1abd67a318add2.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/27c1d90e8c8e4171a4dda6b7965de6fd/scripts/run_skill_drift_fixed_radial_b10.py",
+    "--seeds",
+    "95401",
+    "95402",
+    "95403",
+    "--launch-sha",
+    "3072f05072ec7628f2463bc7ae3b621343d7ca58",
+    "--out",
+    "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b10_fixed_radial_controls"
+  ],
+  "command_sha256": "832a492e1e6d5b2f93662384268a7616812772ee6b89ad4f203234b83fa67f1a",
+  "control_observation": {
+    "observed_at": "2026-09-21T14:41:02.245819Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "5653f8fa151f030be079596396e864843a91f2ac"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-21T14:41:02.260372Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/27c1d90e8c8e4171a4dda6b7965de6fd",
+  "direction": "skill_teammate_drift_learning",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_skill_drift_fixed_radial_b10.py",
+    "--seeds",
+    "95401",
+    "95402",
+    "95403",
+    "--launch-sha",
+    "3072f05072ec7628f2463bc7ae3b621343d7ca58"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b10_fixed_radial_controls/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/e633bd872ad7da1ac37efd6dcf555b5981faa68bf0117c975b1abd67a318add2.json",
+  "output_root": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b10_fixed_radial_controls",
+  "preflight": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b10_fixed_radial_controls/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3931973,
+      "session_id": 3931973,
+      "start_ticks": 26409261
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3931973,
+    "process_group_id": 3931973
+  },
+  "process_exit": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b10_fixed_radial_controls/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3931974,
+      "session_id": 3931973,
+      "start_ticks": 26409265
+    },
+    "pid": 3931974,
+    "process_group_id": 3931973,
+    "supervisor_pid": 3931973
+  },
+  "schema_version": 1,
+  "sha": "3072f05072ec7628f2463bc7ae3b621343d7ca58",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/27c1d90e8c8e4171a4dda6b7965de6fd",
+  "stderr": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b10_fixed_radial_controls/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b10_fixed_radial_controls/stdout.log"
+}

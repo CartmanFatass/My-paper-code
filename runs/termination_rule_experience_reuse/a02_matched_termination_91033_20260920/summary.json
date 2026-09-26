@@ -1,0 +1,127 @@
+{
+  "arm": "matched_termination",
+  "artifacts": [
+    {
+      "bytes": 946,
+      "path": "config.json",
+      "sha256": "c6f88453f0a29086eee5e4a64f12fc5ac938e1c840fbeb5d39961e7074698eaf"
+    },
+    {
+      "bytes": 72235,
+      "path": "behavior.npz",
+      "sha256": "662aeb64664ed43d46bd7f200ad27fc106ddb6bc78f4d47640888a52731936d8"
+    },
+    {
+      "bytes": 19035,
+      "path": "final.npz",
+      "sha256": "9118092d5c6efe4101fdb31c8100bb5ff05601efd72144973455f8df3c1f5bc3"
+    },
+    {
+      "bytes": 3097855,
+      "path": "updates.jsonl",
+      "sha256": "3bb50729d027f472cf1a7a6e7a70ec8ecbbb4bf984b644de75a87d9862c122c5"
+    },
+    {
+      "bytes": 44424,
+      "path": "evaluation.jsonl",
+      "sha256": "ed9898bfc61d8841f16eef598624ecc8f38fe95ce8dda68268c62c10bf97fa2f"
+    },
+    {
+      "bytes": 676,
+      "path": "curve.json",
+      "sha256": "5c2a1517d17f31f676d4aa03df1e33f07ede696d66a73f93387564f992ffa589"
+    }
+  ],
+  "counts": {
+    "evaluation_episodes": 256,
+    "evaluation_new_updates": 0,
+    "evaluation_team_steps": 24576,
+    "gradient_optimizer_steps": 0,
+    "started_fits": 1,
+    "table_entries_written": 47813,
+    "tabular_update_calls": 6144,
+    "target_rows": 49152,
+    "train_episodes": 512,
+    "train_team_steps": 49152
+  },
+  "curve": [
+    {
+      "mean_J": 0.5672200520833335,
+      "nonzero_q_entries": 0,
+      "q_l2_from_initial": 0.0,
+      "train_episodes": 0,
+      "train_team_steps": 0
+    },
+    {
+      "mean_J": 0.6894694010416669,
+      "nonzero_q_entries": 367,
+      "q_l2_from_initial": 45.57689863588676,
+      "train_episodes": 32,
+      "train_team_steps": 3072
+    },
+    {
+      "mean_J": 0.7323242187500002,
+      "nonzero_q_entries": 493,
+      "q_l2_from_initial": 146.12305228501964,
+      "train_episodes": 128,
+      "train_team_steps": 12288
+    },
+    {
+      "mean_J": 0.7408691406250002,
+      "nonzero_q_entries": 665,
+      "q_l2_from_initial": 256.1038339528764,
+      "train_episodes": 512,
+      "train_team_steps": 49152
+    }
+  ],
+  "diagnostics": {
+    "coefficient_sum": 32439.66666666697,
+    "coefficient_zero_count": 7454,
+    "discounted_trace_mass_sum": 122555.27330667581,
+    "mean_discounted_trace_mass": 2.4933934185114706,
+    "mean_squared_return_increment": 4.042342509356665,
+    "positive_residual_terms": 146076,
+    "ratio_above_one_count": 25953,
+    "ratio_count": 43008,
+    "raw_ratio_max": 2.0,
+    "raw_ratio_square_sum": 57633.555555555795,
+    "raw_ratio_sum": 43215.99999999996,
+    "renewal_edges": 21404,
+    "renewal_edges_retained": 13950,
+    "return_increment_square_sum": 198689.2190198988,
+    "table_entries_written": 47813,
+    "target_rows": 49152,
+    "td_square_sum": 93004.2586135881
+  },
+  "error": null,
+  "final_mean_J": 0.7408691406250002,
+  "launch_sha": "739344301e965134d44ba754e7a7363258731e81",
+  "learner": "retrace",
+  "learner_movement": {
+    "absolute_l2": 256.1038339528764,
+    "final_l2": 256.1038339528764,
+    "initial_l2": 0.0,
+    "nonzero_entries": 665,
+    "relative_l2": null
+  },
+  "limits": [
+    "exploratory independent host; no UAV or novelty claim",
+    "fixed teammate law and fixed target beta; behavior termination differs by arm",
+    "same addressed exogenous draws and row exposure; observed behavior trajectories differ",
+    "same ordinary Retrace learner; collection-law package comparison, not causal mediation",
+    "constant step size and finite exposure; no convergence claim"
+  ],
+  "object": "termination_reuse_behavior_clock_a02",
+  "primary_mean_J": 0.7208875868055556,
+  "resources": {
+    "peak_rss_kib_linux_process": 41020,
+    "resources_unmeasured": false,
+    "scope": "one Linux scientific process, no children",
+    "scratch_bytes_at_summary": 3235171,
+    "system_cpu_seconds_process": 0.016021,
+    "user_cpu_seconds_process": 1.069426,
+    "wall_seconds_from_entry": 1.1481127890001517
+  },
+  "seed": 91033,
+  "status": "COMPLETE"
+}

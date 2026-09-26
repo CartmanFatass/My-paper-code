@@ -1,0 +1,25 @@
+{
+  "b09_evidence_commit": "69a55e71d9f1bca4e8cdd204adce256cd05a7676",
+  "b09_launch_sha": "efe9ce4f39cdb9147d28bbb5c00e7be91dbfca55",
+  "b09_plan_source": "ee2d70c69abc0c5a45881da6e74937a7ac166689",
+  "input_root": "runs/skill_teammate_drift_learning/b09_native_joint",
+  "plan_source": "75ef4a931de474ab27e6903c6f16929eab932d85",
+  "root_artifacts_sha256": "236734838b59a4609f71bf305c806cc205eecec97cc379c28b5483701eadbc45",
+  "verified_seeds": {
+    "95401": {
+      "artifacts.json": "c40f10915a5d7698218fdd3a4e3d54b2c904a429684f3e94db0292174d7b811e",
+      "state.npz": "82a6d36c567e429bd0ca8217fc98cccc93a9a11d560ddc73796b8f3bdca8b873",
+      "summary.json": "ddd37561d82348d9f2139eec221e6523a9800d276ac1261051e77d9b59689898"
+    },
+    "95402": {
+      "artifacts.json": "6a633f4b5604d839ad2541e13f9e09bbd222c4b06ffe18093afa2afe47cb343a",
+      "state.npz": "a90128d783251f1425b2a93204a1a50ebe3c586f44f8a8e94d80be14ed1ef641",
+      "summary.json": "b40bf4f3dd71fb97369f98e74a7ef505b67e570467f8a70ce87710a76294b198"
+    },
+    "95403": {
+      "artifacts.json": "40dbd735b87e05cd8f1476ffee5b5eb59c792d8a76f1b43b5e7229b0313972cf",
+      "state.npz": "ae685fc63bfb9f726fcab665494c86350d766d2279490fb564de339f82800feb",
+      "summary.json": "3604f4b70ac02008879e03ea1f9235dc618d10f75dc4e264ffdceba4d1953819"
+    }
+  }
+}

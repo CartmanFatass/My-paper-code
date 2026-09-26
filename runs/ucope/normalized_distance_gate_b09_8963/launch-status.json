@@ -1,0 +1,11 @@
+{
+  "claim_key": "391b876183d5651ca591b5e61a795f5bb9882ee6be84a7aba6bf9533f93a2d02",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/391b876183d5651ca591b5e61a795f5bb9882ee6be84a7aba6bf9533f93a2d02.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/normalized_distance_gate_b09_8963/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/391b876183d5651ca591b5e61a795f5bb9882ee6be84a7aba6bf9533f93a2d02.json",
+  "pid": 2983132,
+  "runner_pid": 2983138,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-21T03:22:31.107120Z"
+}

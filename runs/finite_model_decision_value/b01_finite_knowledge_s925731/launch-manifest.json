@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-25T16:31:05.180499Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4064ea76cacf452cac7acc4f2399af1a/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4064ea76cacf452cac7acc4f2399af1a/scripts/run_fmdv_b01.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731",
+    "--",
+    "--out",
+    "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731",
+    "--launch-sha",
+    "b40ea0965788f0d04b023870c34f47e86a00ceff",
+    "--seed",
+    "925731",
+    "--model-seed",
+    "925973"
+  ],
+  "claim_key": "26554e747b4ca70a190c69b3dfdb73fcc4f60210dfa405a61967f85115a6573c",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/26554e747b4ca70a190c69b3dfdb73fcc4f60210dfa405a61967f85115a6573c.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4064ea76cacf452cac7acc4f2399af1a/scripts/run_fmdv_b01.py",
+    "--out",
+    "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731",
+    "--launch-sha",
+    "b40ea0965788f0d04b023870c34f47e86a00ceff",
+    "--seed",
+    "925731",
+    "--model-seed",
+    "925973"
+  ],
+  "command_sha256": "d10af42ab3b8bb4ac3c41e1991a57e52e29abc78c7236f0dfc3c1c8eb9f28bd5",
+  "control_observation": {
+    "observed_at": "2026-09-25T16:31:05.062377Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "adf68344620a2439276bdf3061b2e0e0fc94f48d"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-25T16:31:05.092570Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4064ea76cacf452cac7acc4f2399af1a",
+  "direction": "finite_model_decision_value",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_fmdv_b01.py",
+    "--launch-sha",
+    "b40ea0965788f0d04b023870c34f47e86a00ceff",
+    "--seed",
+    "925731",
+    "--model-seed",
+    "925973"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/26554e747b4ca70a190c69b3dfdb73fcc4f60210dfa405a61967f85115a6573c.json",
+  "output_root": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731",
+  "preflight": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 677102,
+      "session_id": 677102,
+      "start_ticks": 70914795
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 677102,
+    "process_group_id": 677102
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 677103,
+      "session_id": 677102,
+      "start_ticks": 70914798
+    },
+    "pid": 677103,
+    "process_group_id": 677102,
+    "supervisor_pid": 677102
+  },
+  "schema_version": 1,
+  "sha": "b40ea0965788f0d04b023870c34f47e86a00ceff",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4064ea76cacf452cac7acc4f2399af1a",
+  "stderr": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/stdout.log"
+}

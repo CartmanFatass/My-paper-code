@@ -1,0 +1,67 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/26554e747b4ca70a190c69b3dfdb73fcc4f60210dfa405a61967f85115a6573c.json",
+  "direction": "finite_model_decision_value",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790353988.6681201,
+      "path": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 677103,
+        "session_id": 677102,
+        "start_ticks": 70914798
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 677102,
+        "session_id": 677102,
+        "start_ticks": 70914795
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-25T16:41:23.281578Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/26554e747b4ca70a190c69b3dfdb73fcc4f60210dfa405a61967f85115a6573c.json",
+  "output_root": "/home/wu/hmasd-worktrees/fmdv-b01-sept25/runs/finite_model_decision_value/b01_finite_knowledge_s925731",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "b40ea0965788f0d04b023870c34f47e86a00ceff",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4064ea76cacf452cac7acc4f2399af1a"
+}
