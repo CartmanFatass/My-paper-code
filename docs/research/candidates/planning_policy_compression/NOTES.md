@@ -179,3 +179,82 @@ independent parts. All fixtures own and clean scratch through pytest under temp/
 Pre-implementation arithmetic correction: the formula for optimizer time-row exposure
 above evaluates to **23,592,960**, not 11,796,480. It counts both private agent histories;
 the fixed dataset sizes, epochs, updates and team-transition prices are unchanged.
+
+## 2026-09-25 — Independent prospective critique and current routing
+
+The bounded ResearchCritic read the complete contract, inherited evidence and adopted
+consultation; MATERIAL_DISSENT: no. I accept its useful clarification: WBC-BC identifies
+weighting under the joint shared-collection procedure, not two independently collected
+imitation algorithms. Weighted disagreement on these purchased labels is an in-sample
+intermediate; final native deployment is its distinct usefulness test. A conditional
+amortization calculation must keep the common collection/query cost and both students'
+contribution to augmentation visible; it may not divide away inconvenient research cost.
+No added arm, fit, rollout, evaluation panel or changed comparator follows this review.
+The full prior Pro consultation remains the scientific advice used, not replaced by Critic.
+
+Fresh main `b815b2b6bbf5a5f5176c2062384306b0b6bd5fa6` only updates assignment/routing
+for this question: this session is `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / local.
+Question, controls and plan are unchanged. A read-only wsl_4070 observation found about
+15.6GB MemAvailable and no result runner at that instant; this is preparation evidence,
+not admission or a reservation. Actual execution will repeat native memory/source/policy
+and duplicate checks. Implementation and independent engineering review are still pending.
+
+## 2026-09-25 — Pre-execution instrumentation clarification
+
+DM draft review identified an output-directory check that would reject the native kernel's
+own manifest/logs before science; it is being corrected before any result launch. The fixed
+block seed, optional-root action masks and completed/partial counters are checked against
+the contract rather than inferred from a successful process exit.
+
+To measure the stated imitation prediction with one fixed endpoint model, read each stage's
+already purchased common data once with that stage's final parameters, no gradients or
+queries: eligible disagreement, zero/AF-fallback disagreement, nonzero disagreement and
+mean |estimated delta| times disagreement. This adds 589,824 forward-only agent time rows
+across the eight stage/model reads, separately timed and counted; it changes no training
+epoch, optimizer update, fit, environment sample or evaluation panel. Epoch losses remain
+mixed-parameter training diagnostics and do not substitute for this endpoint diagnostic.
+The comparison is still in-sample and uses approximate labels, not observed optimal regret.
+
+Preserve existing query MC SE in training raw data and executed evaluation actions, rewards
+and cumulative native metrics under raw/ so the final summaries have reconstructible
+evidence. Teacher/AF evaluation must not execute unused student feature work; student
+evaluation must not create or update a shadow filter. Record each fit's initialization
+and each optimization stage's wall/CPU separately; elapsed time crossing the other arm
+and common augmentation is not summed as exclusive fit occupancy. These are implementation
+and measurement corrections before results, not a comparator or investment change.
+
+## 2026-09-25 — B01 implementation accepted for exact-source publication
+
+DM read the complete new model/study/entry and focused tests, and accepts the Implementer
+diff. The only executable additions are the owned planning-compression B01 modules,
+`scripts/run_ppc_b01.py` and mirrored tests. No inherited host, belief, planner or shared
+control source changed. Reuse of B02's existing exact four-move collector avoids duplication;
+its positions/latent-law draw agree with the B01 first-four-move prefix. The student has
+27,329 parameters. Block seeds initialize it; canonical tensor-state hashes verify both
+arms' initialization, separately from checkpoint-file hashes.
+
+The independent Reviewer found three actual output/cost defects, all repaired before any
+result launch: purchased supervision now persists per batch even if later training/query
+fails; returned and stored batch wall/CPU share a trace-inclusive boundary; global episode
+index serialization is outside per-method deployment timers. Each method writes equivalent
+per-batch outputs inside its timer. Trace/cost/JSON overhead is retained in the full process
+measurement, not called zero. Failed observed/feature/executed prefixes remain distinct.
+The reviewer found no remaining material issue in lawful features, teacher fidelity,
+actual-history filtering, recurrence, RNG/data/order matching, optimizer continuity,
+update arithmetic or admission-before-science, and accepted the focused repairs.
+
+Validation: the complete six-test suite passed after repairs (6.34s); independent focused
+recheck passed the three affected tests (6.25s, three deselected), following an earlier
+independent six-test pass. Tests include a distinct tiny two-block/two-stage fixture,
+teacher action/delta/MC-SE agreement at every eligible fixture root, recurrent sequence
+versus online replay, weights and real parameter updates, paired initialization, failure
+prefix recovery, artifact/timing consistency, and unadmitted entry refusal. Scratch is
+pytest-owned. No full-size fixture, selected endpoint, result launch or replacement seed
+has occurred. Fixtures are engineering checks, not evidence for the scientific predictions.
+
+Publish these exact inputs before execution. Use a dedicated source/output checkout on
+configured wsl_4070 and the native launcher snapshot; the desktop worktree tool addresses
+only the local host, so the remote checkout follows the configured remote Git preparation.
+The source snapshot is disposable after terminal collection; the remote run directory and
+verified local copy are durable evidence. Admission and accepted-handle observation are
+the next actions; no second scientific permission or new Pro consultation is required.
