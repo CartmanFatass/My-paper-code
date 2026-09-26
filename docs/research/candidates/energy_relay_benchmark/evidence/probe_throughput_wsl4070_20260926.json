@@ -1,0 +1,362 @@
+{
+ "torch": "2.7.0+cu118",
+ "cuda": true,
+ "nproc": 20,
+ "config": {
+  "n_agents": 8,
+  "obs_dim": 365,
+  "state_dim": 306,
+  "action_dim": 4,
+  "k": 10,
+  "batch_size": 48000,
+  "ppo_epochs": 15,
+  "num_mini_batch": 4,
+  "hidden_size": 256,
+  "gru_hidden_size": 256,
+  "num_envs": 8,
+  "rollout_length": 3000
+ },
+ "single_env_ms_per_step": 12.37719892989844,
+ "vec_construct_s": 0.007433634018525481,
+ "vec_shapes": {
+  "obs": [
+   8,
+   8,
+   365
+  ],
+  "states": [
+   8,
+   306
+  ]
+ },
+ "vec_ms_per_batch_step": 23.4033740668868,
+ "vec_ms_per_transition": 2.92542175836085,
+ "vec_info_keys": [
+  "coverage_ratio",
+  "discovery_progress",
+  "reward_info",
+  "served_users",
+  "total_users"
+ ],
+ "collect": {
+  "steps": 3000,
+  "transitions": 24000,
+  "wall_s": 106.93877025903203,
+  "agent_step_s": 22.75834542326629,
+  "env_step_s": 67.67637461365666,
+  "store_s": 16.479789223172702
+ },
+ "update_s": 172.73619033396244,
+ "update_keys": [
+  "action_entropy",
+  "agent_skill_entropy",
+  "avg_discoverer_val",
+  "avg_env_comp",
+  "avg_ind_disc_comp",
+  "avg_intrinsic_reward",
+  "avg_team_disc_comp",
+  "cd_loss",
+  "coordinator_loss",
+  "coordinator_lr",
+  "coordinator_policy_loss",
+  "coordinator_value_loss"
+ ],
+ "cuda_max_alloc_mib": 2377.32177734375,
+ "peak_rss_mib": 7113.00390625,
+ "_probe": {
+  "date": "2026-09-26",
+  "node": "wsl_4070",
+  "source_tree": "/home/wu/hmasd-worktrees/usa-b09-48388289d at e5e53534c2c (B09 launch SHA)",
+  "script": "temp scratch s7_throughput_probe.py (this session); random-action env timing, one 8-lane collection rollout of 3000 steps with the HMASD arm on CUDA, one PPO update; no retained model, no scientific result",
+  "static_layout_witness_t0": [
+   {
+    "seed": 952001,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 59.999999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952002,
+    "feasible": true,
+    "qos_satisfaction_ratio": 0.9941176470588232,
+    "qos_met_fraction": 0.8,
+    "throughput_mbps": 47.32352941176471,
+    "service_uavs": 5.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952003,
+    "feasible": true,
+    "qos_satisfaction_ratio": 0.981318681318681,
+    "qos_met_fraction": 0.8,
+    "throughput_mbps": 45.43956043956043,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952004,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 52.999999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952005,
+    "feasible": true,
+    "qos_satisfaction_ratio": 0.998,
+    "qos_met_fraction": 0.8,
+    "throughput_mbps": 41.44,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952006,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 45.0,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952007,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 43.0,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952008,
+    "feasible": true,
+    "qos_satisfaction_ratio": 0.9833333333333333,
+    "qos_met_fraction": 0.8,
+    "throughput_mbps": 45.499999999999986,
+    "service_uavs": 5.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952009,
+    "feasible": true,
+    "qos_satisfaction_ratio": 0.9833333333333333,
+    "qos_met_fraction": 0.8,
+    "throughput_mbps": 45.75,
+    "service_uavs": 5.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952010,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 52.999999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952011,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 52.999999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952012,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 49.92307692307691,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952013,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 54.999999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952014,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 62.999999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952015,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 56.22641509433961,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952016,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 45.0,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952017,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 47.093317972350235,
+    "service_uavs": 5.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952018,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 52.999999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952019,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 52.999999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952020,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 45.0,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952021,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 49.082949308755744,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952022,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 47.586206896551715,
+    "service_uavs": 5.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952023,
+    "feasible": true,
+    "qos_satisfaction_ratio": 0.9708333333333332,
+    "qos_met_fraction": 0.8333333333333334,
+    "throughput_mbps": 44.125,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952024,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 50.29411764705881,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952025,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 54.999999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952026,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 52.499999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952027,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 59.999999999999986,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952028,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 43.0,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952029,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 45.0,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952030,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 45.0,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952031,
+    "feasible": true,
+    "qos_satisfaction_ratio": 0.9833333333333336,
+    "qos_met_fraction": 0.8,
+    "throughput_mbps": 60.61635220125784,
+    "service_uavs": 5.0,
+    "height_m": 50.0
+   },
+   {
+    "seed": 952032,
+    "feasible": true,
+    "qos_satisfaction_ratio": 1.0,
+    "qos_met_fraction": 1.0,
+    "throughput_mbps": 40.0,
+    "service_uavs": 6.0,
+    "height_m": 50.0
+   }
+  ]
+ }
+}
