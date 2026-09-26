@@ -1,0 +1,221 @@
+{
+ "b01_position_diagnostics_recomputed_from_traces": {
+  "N_e0.00_x0.05": true,
+  "H1_e0.00_x0.05": true,
+  "Hlocal_e0.00_x0.05": true
+ },
+ "b01_reference_panels": {
+  "N_deterministic": {
+   "qos_satisfaction_ratio_per_step": 0.3283260560122044,
+   "raw_native_J": 954.9762030365185,
+   "return_constraint_cost_sum": 1.1967336242384334,
+   "cutoff_event_count_sum": 0.0,
+   "depletion_event_count_sum": 0.0,
+   "min_decoded_battery": 0.10816565388813615,
+   "mode_uav_step_fraction": 0.18420052083333333,
+   "first_entry_step": 1372.5,
+   "first_input_step": 2195.59375,
+   "qos_per_step_pre_entry": 0.23050083870227026,
+   "charger_input_wh": 146.61458333333331,
+   "wait_ticks_total": 1405.6875,
+   "guard_blocked_actions": 1948.875,
+   "boundary_share_normal_mode": 0.5006096233757992,
+   "altitude_floor_share_normal_mode": 0.7002845213237714,
+   "anchor_uav_steps_within_300m": 2510.71875,
+   "centre_uav_steps_within_300m": 1187.34375,
+   "first_service_step": 247.31034482758622,
+   "zero_service": 0.09375,
+   "n": 32,
+   "zero_service_worlds": 3
+  },
+  "H_central": {
+   "qos_satisfaction_ratio_per_step": 0.7740241282985059,
+   "raw_native_J": 2281.8873736922483,
+   "return_constraint_cost_sum": 4.821971939110522,
+   "cutoff_event_count_sum": 0.0,
+   "depletion_event_count_sum": 0.0,
+   "min_decoded_battery": 0.09958558506332338,
+   "mode_uav_step_fraction": 0.32455078125,
+   "first_entry_step": 1299.84375,
+   "first_input_step": 1616.96875,
+   "qos_per_step_pre_entry": 0.8099960107159845,
+   "charger_input_wh": 381.1284722222222,
+   "wait_ticks_total": 4569.875,
+   "guard_blocked_actions": 1129.09375,
+   "boundary_share_normal_mode": 0.0,
+   "altitude_floor_share_normal_mode": 0.029001328700256776,
+   "anchor_uav_steps_within_300m": 1733.03125,
+   "centre_uav_steps_within_300m": 6993.8125,
+   "first_service_step": 20.1875,
+   "zero_service": 0.0,
+   "n": 32,
+   "zero_service_worlds": 0
+  },
+  "H_local": {
+   "qos_satisfaction_ratio_per_step": 0.5969387490040506,
+   "raw_native_J": 1628.4463152952383,
+   "return_constraint_cost_sum": 65.92359684285955,
+   "cutoff_event_count_sum": 0.0,
+   "depletion_event_count_sum": 0.0,
+   "min_decoded_battery": 0.08723469206597656,
+   "mode_uav_step_fraction": 0.3614895833333333,
+   "first_entry_step": 1303.84375,
+   "first_input_step": 1619.90625,
+   "qos_per_step_pre_entry": 0.6306602959263379,
+   "charger_input_wh": 373.02083333333326,
+   "wait_ticks_total": 5685.4375,
+   "guard_blocked_actions": 2741.6875,
+   "boundary_share_normal_mode": 0.0,
+   "altitude_floor_share_normal_mode": 0.02822764291850545,
+   "anchor_uav_steps_within_300m": 1151.125,
+   "centre_uav_steps_within_300m": 8061.71875,
+   "first_service_step": 39.774193548387096,
+   "zero_service": 0.03125,
+   "n": 32,
+   "zero_service_worlds": 1
+  }
+ },
+ "S0_1_sampled_N": {
+  "per_draw": {
+   "N_e0.00_x0.05_s0": {
+    "summary": {
+     "qos_satisfaction_ratio_per_step": 0.30765281610527545,
+     "raw_native_J": 887.2973179560327,
+     "return_constraint_cost_sum": 4.306420640498936,
+     "cutoff_event_count_sum": 0.0,
+     "depletion_event_count_sum": 0.0,
+     "min_decoded_battery": 0.10169405792839825,
+     "mode_uav_step_fraction": 0.225640625,
+     "first_entry_step": 1368.125,
+     "first_input_step": 2056.15625,
+     "qos_per_step_pre_entry": 0.20777050630386373,
+     "charger_input_wh": 195.78993055555551,
+     "wait_ticks_total": 2659.9375,
+     "guard_blocked_actions": 408.09375,
+     "boundary_share_normal_mode": 0.2205625016555758,
+     "altitude_floor_share_normal_mode": 0.4567012442059382,
+     "anchor_uav_steps_within_300m": 3791.90625,
+     "centre_uav_steps_within_300m": 1317.375,
+     "first_service_step": 274.0344827586207,
+     "zero_service": 0.09375,
+     "n": 32,
+     "zero_service_worlds": 3
+    },
+    "paired_vs_deterministic": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.020673239906928934,
+      "paired_se": 0.009797154917807619,
+      "min": -0.14637792050028087,
+      "max": 0.09104428114411228
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -67.67888508048584,
+      "paired_se": 28.656065907645818,
+      "min": -419.9361202091727,
+      "max": 273.6678272498775
+     },
+     "boundary_share_normal_mode": {
+      "n": 32,
+      "mean": -0.2800471217202234,
+      "paired_se": 0.01744562131378942,
+      "min": -0.4822430425935865,
+      "max": -0.08287750556002726
+     },
+     "altitude_floor_share_normal_mode": {
+      "n": 32,
+      "mean": -0.2435832771178332,
+      "paired_se": 0.018924548560807636,
+      "min": -0.39297900761829996,
+      "max": 0.05395030029811587
+     },
+     "first_service_step": {
+      "n": 29,
+      "mean": 26.724137931034484,
+      "paired_se": 66.70152427988737,
+      "min": -1195.0,
+      "max": 1441.0
+     }
+    },
+    "own_verdict": "between: both reported; evaluation mode becomes a declared axis of Stage 1"
+   },
+   "N_e0.00_x0.05_s1": {
+    "summary": {
+     "qos_satisfaction_ratio_per_step": 0.31792167898094487,
+     "raw_native_J": 922.100256034324,
+     "return_constraint_cost_sum": 2.2877968930711132,
+     "cutoff_event_count_sum": 0.0,
+     "depletion_event_count_sum": 0.0,
+     "min_decoded_battery": 0.10389668052084744,
+     "mode_uav_step_fraction": 0.22005208333333334,
+     "first_entry_step": 1359.78125,
+     "first_input_step": 2059.0625,
+     "qos_per_step_pre_entry": 0.20347725808759048,
+     "charger_input_wh": 195.82465277777774,
+     "wait_ticks_total": 2569.625,
+     "guard_blocked_actions": 564.9375,
+     "boundary_share_normal_mode": 0.21891493539030682,
+     "altitude_floor_share_normal_mode": 0.4649128650645695,
+     "anchor_uav_steps_within_300m": 3696.53125,
+     "centre_uav_steps_within_300m": 1365.125,
+     "first_service_step": 313.43333333333334,
+     "zero_service": 0.0625,
+     "n": 32,
+     "zero_service_worlds": 2
+    },
+    "paired_vs_deterministic": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.010404377031259512,
+      "paired_se": 0.013490538433172439,
+      "min": -0.12586920270013935,
+      "max": 0.31825150207267544
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -32.875947002194415,
+      "paired_se": 40.405869857884014,
+      "min": -377.2418380007216,
+      "max": 950.7818175438168
+     },
+     "boundary_share_normal_mode": {
+      "n": 32,
+      "mean": -0.2816946879854924,
+      "paired_se": 0.017369288801082797,
+      "min": -0.4748437787523768,
+      "max": -0.08562367528374534
+     },
+     "altitude_floor_share_normal_mode": {
+      "n": 32,
+      "mean": -0.2353716562592019,
+      "paired_se": 0.0193452981525802,
+      "min": -0.40063338105325746,
+      "max": 0.04196133400501523
+     },
+     "first_service_step": {
+      "n": 29,
+      "mean": 19.862068965517242,
+      "paired_se": 64.2326192039361,
+      "min": -1147.0,
+      "max": 1408.0
+     }
+    },
+    "own_verdict": "between: both reported; evaluation mode becomes a declared axis of Stage 1"
+   }
+  },
+  "pooled_qos": 0.31278724754311016,
+  "pooled_J": 904.6987869951784,
+  "pooled_boundary_share": 0.2197387185229413,
+  "delta_qos_vs_deterministic": -0.015538808469094223,
+  "delta_J_vs_deterministic": -50.27741604134019,
+  "draw_to_draw_qos": {
+   "n": 32,
+   "mean": 0.010268862875669423,
+   "paired_se": 0.011798250630435719,
+   "min": -0.09186575838278288,
+   "max": 0.31825150207267544
+  },
+  "verdict": "between: both reported; evaluation mode becomes a declared axis of Stage 1"
+ }
+}

@@ -1,0 +1,11 @@
+{
+  "claim_key": "07ebcf709aa67d6e3307dada56e6fca0001072226e33c8a0ee94e8fc93133d94",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/07ebcf709aa67d6e3307dada56e6fca0001072226e33c8a0ee94e8fc93133d94.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/energy_relay_benchmark/b02_s0_stoch_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/07ebcf709aa67d6e3307dada56e6fca0001072226e33c8a0ee94e8fc93133d94.json",
+  "pid": 721802,
+  "runner_pid": 721803,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-26T17:03:47.918010Z"
+}

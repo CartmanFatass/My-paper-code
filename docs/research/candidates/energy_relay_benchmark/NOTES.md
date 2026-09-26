@@ -2374,3 +2374,80 @@ and fast-forwarded on the node. Admission launch from the node
   reader `experiments/candidates/energy_relay_benchmark/b01/read_stage0.py` (written before the
   result is read). Observation: the detached poller every 5 minutes and a background waiter
   with a native return; only health fields are observed before the terminal state.
+
+## 2026-09-26 — Stage 0 item 1 result: N with sampled actions (`b02_s0_stoch_a01`, operation 07ebcf70), read by S0-1
+
+**Operation.** `run_end status COMPLETE`, exit code 0, 64 episodes / 192,000 steps / 0 fits, wall
+753.6 s (8 workers × 2 threads, CPU), no failed world; inputs sha `8d88f72d0`; checkpoint identity
+identical to B01's N (sha256 `2ba395b9…eeff5a`, fingerprint `aa197872…d39dc0`); `action_mode
+stochastic`, sample seeds per `hash((925031, world, draw)) & 0xFFFFFFFF` recorded per row. Reader
+`experiments/candidates/energy_relay_benchmark/b01/read_stage0.py` committed at `0376dc5b5` before
+any result panel was read (verified end to end on a synthetic tree copied from the B01 panels);
+no reader edit after sight. Outputs copied to `runs/energy_relay_benchmark/b02_s0_stoch_a01/`
+(JSON committed; the two trace `.npz` files are ignored, local copy plus the node's durable copy);
+combined readings `docs/research/candidates/energy_relay_benchmark/b02_stage0_readings.json`.
+Definition parity: the five row diagnostics were recomputed from the traces with
+`read_stage0.b01_trace_diagnostics` (area 8000 m, floor 50 m); draw 0 equal in all 32 worlds,
+draw 1 equal except worlds 955008 and 955029, each by exactly one normal-mode UAV-step (of 18,908
+and 19,678) sitting within 1e-3 m of the 1 m wall tolerance — float32 trace storage versus the
+in-process value, not a definition difference. The B01 deterministic panel's diagnostics were
+recomputed the same way (per-world mean boundary share .5006; the pooled UAV-step share reported
+earlier was .4978). Disclosure: the poller's progress tail printed the `panel_end` mean J of draw 0
+while draw 1 was running and of draw 1 at the terminal state, before the reader ran; J is not an
+input of S0-1.
+
+**Result (production shield (0, .05), 955001–955032; deterministic B01 panel `N_e0.00_x0.05` vs the
+two sampled draws):**
+
+| per-world mean | deterministic (B01) | sampled draw 0 | sampled draw 1 |
+|---|---|---|---|
+| QoS/step | .3283 | .3077 | .3179 |
+| raw native J | 955.0 | 887.3 | 922.1 |
+| return-constraint cost (sum) | 1.20 | 4.31 | 2.29 |
+| cutoff / depletion events | 0 / 0 | 0 / 0 | 0 / 0 |
+| min decoded battery | .108 | .102 | .104 |
+| F-mode UAV-step share | .184 | .226 | .220 |
+| first entry / first input step | 1372 / 2196 | 1368 / 2056 | 1360 / 2059 |
+| QoS/step before first entry | .231 | .208 | .204 |
+| charger input (Wh) / wait ticks | 146.6 / 1406 | 195.8 / 2660 | 195.8 / 2570 |
+| guard-blocked actions | 1949 | 408 | 565 |
+| boundary share, normal mode | .501 | .221 | .219 |
+| altitude-floor share, normal mode | .700 | .457 | .465 |
+| UAV-steps within 300 m of anchor / centre | 2511 / 1187 | 3792 / 1317 | 3697 / 1365 |
+| first service step (served worlds) | 247 | 274 | 313 |
+| zero-service worlds | 3 (955005/012/021) | 3 (same three) | 2 (955012/021) |
+
+Paired per world (sampled − deterministic): QoS −.021 (SE .010) for draw 0 and −.010 (SE .014) for
+draw 1, per-world range −.146…+.318 (per-world SD ≈ .055/.076, so per-world readings stay
+unavailable, as under τ_w); boundary share −.280 / −.282 (SE .017), negative in all 32 worlds
+(−.48…−.08); altitude-floor share −.244 / −.235 (SE .019); J −68 / −33 (SE 29 / 40).
+Draw-to-draw (draw 1 − draw 0): QoS +.010 (SE .012), range −.09…+.32; the +.32 is world 955005,
+zero service under deterministic actions and under draw 0, served under draw 1 (its J +951).
+
+**S0-1 applied as declared.** Pooled sampled mean .3128, delta −.016 against .3283: within .03, so
+the service clause reads "the deficit belongs to the learned policy" (each draw alone is also
+within .03). Boundary share .220: below .30 and above .15, so the parking clause is satisfied by
+neither branch. The conjunction therefore lands in the declared middle: **both are reported and
+the evaluation mode becomes a declared axis of Stage 1** (one sampled-action evaluation per
+checkpoint beside the deterministic one, draw 0 seeding rule). No relabel of B09–B11 or B01 is
+triggered: sampled actions do not raise the level (if anything −.016) and do not empty the walls.
+
+**What the numbers add (reported, not tested).** Sampling halves the wall share (.50 → .22) and
+lowers the altitude-floor share (.70 → .46) without improving service: the UAVs leave the walls
+more often, are blocked by the backhaul guard four times less often (1949 → 408/565), enter the
+shield slightly earlier with a higher F-mode share (.18 → .22), draw more charger energy
+(147 → 196 Wh), wait more at stations (1406 → 2600 ticks), pay more return-constraint cost
+(1.2 → 2.3–4.3) and spend more UAV-steps near the anchor (2511 → 3700–3800), and the team QoS
+before the first shield entry is lower (.231 → .205). The deficit is thus not a deterministic-mode
+artefact and not tied to the wall pose: it persists when the policy's actions are sampled. The
+zero-service worlds are mostly a policy property (the same three under draw 0; one escapes under
+draw 1). B01's corrected reading keeps its numbers, now labelled "deterministic evaluation"; the
+description of the deployment deficit becomes "wall parking and altitude floor under deterministic
+actions (.50 / .70), still one fifth and one half of normal-mode UAV-steps under sampled actions
+(.22 / .46), with the same service level". The mechanism of the enter-level effect stays open.
+
+**Next.** Stage 0 item 2 (H_spawn / H_park2 / H_central@10, `stage0-references`, 96 episodes)
+launches when its code passes the b01 and b06 suites; readings S0-2 and S0-3 as declared. Stage 1's
+declaration gains the evaluation-mode axis (deterministic and one sampled draw per checkpoint);
+its engineering (training runner, SET loader, review) is scoped in parallel and no fit is launched
+by this entry.
