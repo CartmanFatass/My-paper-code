@@ -16,6 +16,7 @@ process or in which order it runs.
 from __future__ import annotations
 
 import copy
+import json
 import multiprocessing
 import resource
 import tempfile
@@ -45,6 +46,7 @@ from experiments.candidates.uav_service_auxiliary.b06.native import (
     _same_snapshot,
 )
 from hmasd.agent import HMASDAgent
+from hmasd.baselines import apply_algorithm_config
 
 from .feedback import N_UAVS, STATION_COUNT, FeedbackParams, apply_feedback_params
 from .heuristic import (
@@ -65,6 +67,11 @@ BATTERY_MIN = TRACE_FIELDS.index("battery_min_ratio")
 # state into the skill decision, so N is not a legal-observation-only controller.
 N_CONTROLLER_INFORMATION = ("central-state skill conditioning (HMASD coordinator) "
                             "+ local low-level actors")
+# Controller ``L`` (B02 learner checkpoint): the SET actor reads its legal observation plus a
+# central snapshot (state + all eight observations + ego one-hot) held for k = 10 steps.
+L_CONTROLLER_INFORMATION = ("flat recurrent actor on the legal observation + held central "
+                            "snapshot (state, all observations, ego one-hot) refreshed every "
+                            "k = 10 steps (SET, use_central_snapshot_in_flat_actor)")
 # Timing of the mechanism trace fields (config.json ``trace_timing``).
 TRACE_TIMING = (
     "Row t of own_xyz, return_margin, nearest_station, nearest_station_distance_m, "
@@ -491,8 +498,9 @@ class WorldTask:
     expected_policy_fingerprint: str | None = None
     heuristic: HeuristicParams | None = None
     log_dir: str | None = None
-    action_mode: str = "deterministic"   # "stochastic": N only, sampled at both levels
+    action_mode: str = "deterministic"   # "stochastic": N or L, sampled at both levels
     draw: int | None = None              # stochastic draw index (seeds the episode)
+    checkpoint_record: str | None = None  # controller L: the checkpoint's record.json
 
 
 def load_policy(task: WorldTask, config, device: torch.device, log_dir: str):
@@ -511,14 +519,82 @@ def load_policy(task: WorldTask, config, device: torch.device, log_dir: str):
     return agent, {"checkpoint_sha256": checkpoint_sha, "policy_fingerprint": fingerprint}
 
 
+# Recorded config fields that legitimately differ between a training run and a one-lane
+# evaluator (run sizes and seed); every other recorded field must equal the evaluator config.
+LEARNER_RUN_KEYS = frozenset({
+    "num_envs", "rollout_length", "episode_length", "max_steps", "total_timesteps", "seed",
+    "batch_size", "high_level_batch_size", "high_level_buffer_size", "discriminator_batch_size",
+    "sequence_batch_size", "coordinator_batch_size", "count_arm"})
+
+
+def _recorded_value(value):
+    if isinstance(value, (list, tuple)):
+        return [_recorded_value(item) for item in value]
+    if isinstance(value, float) and not np.isfinite(value):
+        return repr(value)
+    if value is None or isinstance(value, (bool, int, float, str)):
+        return value
+    return repr(value)
+
+
+def read_learner_record(task: WorldTask) -> dict[str, Any]:
+    if task.checkpoint is None or task.checkpoint_record is None:
+        raise ValueError("controller L requires a checkpoint and its record.json")
+    with open(task.checkpoint_record, encoding="utf-8") as handle:
+        return json.load(handle)
+
+
+def learner_eval_config(config, record: dict[str, Any]):
+    """Apply the recorded learner switches to the one-lane S7-S2 evaluator config and verify
+    every recorded non-run-size field (``LEARNER_RUN_KEYS``) against the result."""
+    recorded = record["config"]
+    if recorded.get("algorithm") != "mappo" or not recorded.get("use_central_snapshot_in_flat_actor"):
+        raise ValueError("controller L expects a recorded SET (mappo + central snapshot) config")
+    config = apply_algorithm_config(config, recorded["algorithm"])
+    config.k = int(recorded["k"])
+    config.use_central_snapshot_in_flat_actor = bool(recorded["use_central_snapshot_in_flat_actor"])
+    config.ordinary_completed_segments = bool(recorded["ordinary_completed_segments"])
+    config.calculate_and_set_buffer_sizes()
+    config.validate_config()
+    mismatches = {key: (value, _recorded_value(getattr(config, key, None)))
+                  for key, value in recorded.items()
+                  if key not in LEARNER_RUN_KEYS and _recorded_value(getattr(config, key, None)) != value}
+    if mismatches:
+        raise ValueError(f"recorded learner config disagrees with the evaluator: {mismatches}")
+    return config
+
+
+def load_learner_policy(task: WorldTask, record: dict[str, Any], config, device: torch.device,
+                        log_dir: str):
+    """Controller L: verify agent.pt against its record, restore it into the recorded config."""
+    checkpoint_sha = sha256_file(Path(task.checkpoint))
+    if checkpoint_sha != record["agent_pt_sha256"]:
+        raise ValueError(f"checkpoint sha256 {checkpoint_sha} != record {record['agent_pt_sha256']}")
+    if task.expected_checkpoint_sha256 is not None and checkpoint_sha != task.expected_checkpoint_sha256:
+        raise ValueError(f"checkpoint sha256 {checkpoint_sha} != expected")
+    seed_everything(int(task.policy_seed), device)
+    agent = HMASDAgent(config, log_dir=log_dir, device=device)
+    agent.load_model(task.checkpoint)
+    agent.train(False)
+    fingerprint = initialization_fingerprint(agent)
+    if fingerprint != record["policy_fingerprint"]:
+        raise ValueError(f"restored policy fingerprint {fingerprint} != record")
+    if task.expected_policy_fingerprint is not None and fingerprint != task.expected_policy_fingerprint:
+        raise ValueError(f"restored policy fingerprint {fingerprint} != expected")
+    return agent, {"checkpoint_sha256": checkpoint_sha, "policy_fingerprint": fingerprint,
+                   "checkpoint": record.get("checkpoint"), "rollout": record.get("rollout"),
+                   "transitions": record.get("transitions")}
+
+
 def evaluate_task(task: WorldTask) -> dict[str, Any]:
     """Module-level worker: one world, fully rebuilt from the task (picklable)."""
     started = time.perf_counter()
     if task.action_mode not in ACTION_MODES:
         raise ValueError(f"action_mode must be one of {ACTION_MODES}")
     stochastic = task.action_mode == "stochastic"
-    if stochastic and (task.controller != "N" or task.draw is None):
-        raise ValueError("stochastic action mode needs controller N and a draw index")
+    if stochastic and (task.controller not in ("N", "L") or task.draw is None):
+        raise ValueError("stochastic action mode needs controller N and a draw index "
+                         "(or controller L)")
     episode_seed = (sample_seed(task.policy_seed, task.seed, task.draw)
                     if stochastic else None)
     torch.set_num_threads(int(task.threads))
@@ -529,12 +605,18 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
         torch.backends.cuda.matmul.allow_tf32 = False
         torch.backends.cudnn.allow_tf32 = False
     config = make_eval_config(task.horizon, task.policy_seed)
+    if task.controller == "L":
+        record = read_learner_record(task)
+        config = learner_eval_config(config, record)
     identity: dict[str, Any] = {}
     with tempfile.TemporaryDirectory(prefix="b01-agent-logs-", dir=task.log_dir) as log_dir:
         env = make_env(config, task.seed)
         try:
-            if task.controller == "N":
-                agent, identity = load_policy(task, config, device, log_dir)
+            if task.controller in ("N", "L"):
+                if task.controller == "N":
+                    agent, identity = load_policy(task, config, device, log_dir)
+                else:
+                    agent, identity = load_learner_policy(task, record, config, device, log_dir)
                 before = (initialization_fingerprint(agent), optimizer_steps(agent),
                           _normalizer_snapshot(agent))
                 with preserved_rng():
@@ -563,7 +645,9 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
                     or not _same_snapshot(_normalizer_snapshot(agent), before[2])
                 ):
                     raise RuntimeError("evaluation mutated the restored policy")
-                row["controller_information"] = N_CONTROLLER_INFORMATION
+                row["controller_information"] = (N_CONTROLLER_INFORMATION
+                                                 if task.controller == "N"
+                                                 else L_CONTROLLER_INFORMATION)
                 row["failed"] = False
             elif task.controller.startswith("H"):
                 if task.heuristic is None:
