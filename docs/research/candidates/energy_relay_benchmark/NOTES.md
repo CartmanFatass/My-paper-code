@@ -1657,3 +1657,137 @@ decision-critical pass goes to Pro. The DM drafts the B02 design next (arms matc
 interface: a central-state learner against H_central, a pooled-observation learner against
 H_local, with the parked-at-stations reference as the zero-training discriminator first) and the
 Pro question with it. No fit is bought by this entry.
+
+## 2026-09-26 — B02 design proposal after B01 (decision pending independent review; nothing bought)
+
+Branch (b) of B01 names the learning question as the next study. This entry proposes the design
+for review under constitution §5 (point 1: key comparator). It buys nothing; Stage 0 and Stage 1
+below are launched only after the review is read and the DM's response is recorded here, and any
+fit also needs the owner's go on cost.
+
+**Question.** On the frozen S7-S2/H3000 host with the production shield (0, .05) and unchanged
+charging allocation: can a learned controller that has a layout reference's information approach
+that reference's service at this direction's exposure scale, and how much of the learned deficit
+is the recipe (seed, hierarchy) rather than information? B01 fixes the targets: H_central .774,
+H_local .597, N .328 QoS/step on 955001–955032; the deficit precedes energy pressure.
+
+**Stage 0 — zero-training discriminators (≈ 15 min of node time, 0 fits; 955001–955032 at
+(0, .05); the B01 evaluator, shield and traces unchanged).**
+- H_spawn: all eight UAVs hold their reset positions at the service altitude (100 m); no
+  deployment at all. A floor for "service without deployment".
+- H_park2: one UAV hovers at 100 m over each station's xy (relay anchor, service centre); the
+  other six hold their reset positions. The direct test of the deployment-prior reading of B01's
+  level effect (a UAV at the anchor is a backhaul hop by construction; the centroid station covers
+  the densest users).
+- H_central@10: H_central replanned every 10 steps instead of 30, matching N's coordinator clock.
+  Tests whether the reference's advantage depends on its control opportunity (Pro's point).
+Predictions: S0-1, H_park2 − H_spawn ≥ +.10 QoS/step and H_park2 ≥ .40 (N's post-input regime is
+.45–.48): the station positions alone reproduce most of that regime and the deployment-prior
+reading stands; if H_park2 < .35 the reading is withdrawn and the level effect stays a package
+effect. S0-2, |H_central@10 − H_central| < .03: the control period is not the reference's
+advantage. Readings co-primary as in B01. No candidate is adopted from these worlds.
+
+**Stage 1 — learning (6 fits).** Recipes from the first entry's arm table (config switches of
+one agent; S7 preset hyperparameters; no per-arm tuning; shield on at production margins during
+training as in B09; 1.2 M transitions per fit, ≈ 5 h serial, up to three concurrent on
+`wsl_4070` under the owner's concurrency ceiling). Evaluation with the B01 evaluator at each
+checkpoint on 955001–955032 (development; curves read as a whole) and once at the end on
+957001–957032, reserved now as this direction's unexposed confirmation panel (no prior use found).
+- SET × 3 seeds: flat actor on local observation plus the central state snapshot (the S7 state
+  carries normalised UAV, user and BS positions, coverage and connectivity flags, link quality and
+  the step clock; verified in `envs/pettingzoo/relay/belief_map.py::_get_state`), acting every
+  step, no hand prior, no explicit memory. Package comparator: H_central (central truth, 30-step
+  replanning, k-means layout prior). Differences labelled: control period (Stage 0 measures its
+  weight), prior, memory.
+- HMASD-k10 × 3 seeds: B09's recipe (coordinator conditioned on the central state every 10
+  steps, local low-level actors). Supplies the seed spread around the one-seed N and the
+  hierarchy-versus-flat package difference with SET as the same-information control.
+- LOCAL1 is not bought now: no executable reference matches a strict single-UAV local actor
+  (H_local is a pooled planner), and the lower-information arm is informative only after SET's
+  result. It is named for a later, separately justified stage.
+Predictions: B02-P1 (information suffices for learning), SET's final mean QoS/step on 955xxx
+≥ .60 in at least two of three seeds, with J, return cost, cutoff and depletion co-primary and
+the pre-entry (before first shield entry) QoS/step as the deployment diagnostic; B02-P2
+(typicality), the HMASD-k10 three-seed mean within .05 of N's .328 with seed SD < .05; B02-P3
+(hierarchy), no predicted sign for HMASD-k10 − SET (the benchmark question). The seed SD is
+measured before any confirmation rule is written (first entry's rule).
+Branches: (i) P1 holds: the S7 deficit is a recipe or structure matter, not an information
+limit; the next question is the hierarchical learner's structure against SET (the paradigm
+question), on 957xxx first. (ii) P1 fails with SET's pre-entry QoS/step < .40: central
+information is not learned into deployment at this exposure; the learning question becomes
+exploration and credit (service reward exists only once a backhaul chain exists; N's three
+zero-service worlds), and the next study is a declared curriculum or shaping question, not a
+rule. (iii) P2 fails (SD ≥ .05 or mean farther than .05 from .328): the B09 endpoint is not
+typical and B01's N readings are relabelled as one seed's. (iv) Mixed or uncovered states are
+reported as such. Results never promote H_central to the ordinary reference (Pro's rule).
+
+**Cost.** Stage 0 ≈ 15 min, 0 fits. Stage 1: 6 fits ≈ 12–15 h of node wall at three concurrent
+(≈ 30 h serial). Engineering: one runner `run_energy_relay_benchmark_b02.py` (arms, seeds,
+checkpoints, panels) reusing B01's host, evaluator, shield and traces, plus the three Stage 0
+controllers in `heuristic.py`; tests as for B01.
+
+**Not proposed.** Training with enter level .20 (the constant-earlier-return premise the S7
+closure declined; it would be a different question and re-litigation before the deployment
+question is answered); host, allocator, ring or horizon changes; LOCAL1 now; any per-arm tuning.
+
+## Pro question 2026-09-26 b02-design-after-b01
+
+Standing: B01 is complete and read (entry "B01 result, read by the pre-registered branches" above;
+readings JSON `docs/research/candidates/energy_relay_benchmark/b01_ref_a02_readings.json`; run
+outputs under `runs/energy_relay_benchmark/b01_ref_a02/`; reading code
+`experiments/candidates/energy_relay_benchmark/b01/read_b01.py` and `trace_checks.py`). Branch
+(b) applied. The proposed B02 design is the entry directly above. Constitution §5 point 1 (key
+comparator) applies; this is the decision-critical independent pass before anything is bought.
+Distinguish source facts, derivations and conjectures; cite what you used; say what you could
+not read.
+
+1. **The B01 reading.** State any material disagreement with the reading as recorded: branch
+   (b); the τ_w rule's application (per-world readings withheld while paired within-run
+   differences are deterministic); P3 read as "count fails, common-window paired deficit ≥ +.30
+   in all 32 worlds"; the tether confirmed as an increment (+391/+411 m at width .05, ≈ 1.7 km
+   at .25) with the absolute radius conditional on exiting at the station; herding present as a
+   process without a service consequence.
+2. **The enter-level effect.** Is "a bound (level .20 closes about a fifth of the N–H_central
+   gap) plus correlational process evidence that the stations act as a deployment prior for N"
+   the right label, or is it a package effect without adequate process support? Is the
+   station-proximity table (team QoS .28 with no UAV within 300 m of a station vs .43–.46 with
+   one or more; relay anchor occupied .46 vs none .31; the opposite sign for H_central) adequate,
+   and what confound would you rule out first? Confirm or reject the framing that this is the
+   constant-earlier-return control the S7 closure declined, measured only because P1′ registered
+   it, and not adopted.
+3. **Stage 0.** Are H_spawn and H_park2 the right zero-training discriminators for the
+   deployment-prior conjecture, with the stated predictions and thresholds? Should H_park2 hover
+   at 100 m over the station xy or dock (the shield's own docking makes UAVs land; a landed UAV's
+   coverage differs)? Is H_central@10 worth its minutes, and does it isolate control opportunity
+   as you intended?
+4. **Stage 1 matching.** Is SET against H_central an adequate package pair given per-step control
+   versus 30-step replanning, no hand prior and the snapshot's content; what must be labelled or
+   controlled (Stage 0's H_central@10, a replanning-period-matched SET, a memory)? Is HMASD-k10
+   × 3 the right instrument for the seed spread and the hierarchy contrast? Is dropping LOCAL1
+   now right, given that H_local is a pooled planner and the direction's question names the
+   legal-observation gap?
+5. **Exposure and reading.** Is 1.2 M transitions per fit (≈ 5 h) enough for the result to be
+   informative either way, or should exposure be set from an early checkpoint curve? Critique
+   the .60 threshold for B02-P1, the .05 seed-SD rule, checkpoint reading on development worlds
+   with one confirmation on 957001–957032, and the co-primary rule.
+6. **Value against alternatives.** Does this B02 answer the direction's third question ("can a
+   learned controller close either gap") and bear on the programme's paradigm concern (the
+   owner's view that HMASD is fundamentally a MARL algorithm; the joint-skills recommendation),
+   or is there a cheaper decisive experiment (for example, a single SET fit first, or a
+   behaviour-cloning ceiling from H_central's targets as a learnability probe)? Name the
+   strongest alternative and what would change the judgement.
+7. **Failure explanations to pre-register.** For SET failing P1: what it would and would not
+   mean (exploration, credit, horizon, guard freeze, the S7 preset tuned for HMASD); what would
+   make the result uninterpretable; what to record from the traces to tell these apart.
+8. Return `MATERIAL_DISSENT: yes/no` separately for buying Stage 0 and for buying Stage 1 as
+   proposed, with the revision that would remove any dissent.
+
+Sources at the pinned revision: this notebook (the B01 result entry, the design entry above, the
+B01 revised entry, your previous answer and the DM response to it); the readings JSON; the B01
+code; `docs/research/candidates/uav_service_auxiliary/NOTES.md` (the 2026-09-25 closure and the
+B09–B11 evidence); `docs/research/RESEARCH.md` (programme and structural background);
+`docs/project/OPERATING_CONSTITUTION.md` §§2–5; `hmasd/baselines.py` and the first entry's arm
+table for SET, LOCAL1 and HMASD-k10.
+
+### Answer
+
