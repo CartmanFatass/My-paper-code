@@ -1791,3 +1791,18 @@ table for SET, LOCAL1 and HMASD-k10.
 
 ### Answer
 
+
+### Transport record: B02 design question sent (2026-09-26)
+
+Question key `hmasd:2da8468598bc55b1a940dd92c950671e1db61834f5f20571fb2de657c5d8c07a` (repository
+CartmanFatass/My-paper-code, branch main, source SHA `debaa12d42a996b36edda55a73955ce66db5dbb8`,
+target this file, heading "## Pro question 2026-09-26 b02-design-after-b01"). Sent through the Jev
+route as a follow-up in the conversation of the B01 question (key `901b4c31…3a01c`; the address
+stays in the local operation file), headless, effort pill "6 Pro", short message plus the composed
+document (sha256 `7d1546e9…f42bea`), `send_effect: sent`, attachment seen, 16:24 UTC. A first
+`send` call failed before any browser action (wrong short-message path; nothing submitted) and
+was rerun under the same key. Observation: the deterministic `wait` observer runs detached with a
+native return; delivery is read with `deliver` after completion, and a chat answer is inserted
+"saved from chat" if the connector does not write. An internal ResearchCritic pass over the same
+two entries runs in parallel as a comparison (separate context, read-only); both are recorded here
+when they return, with the DM's response, before anything is bought.
