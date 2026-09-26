@@ -1443,3 +1443,47 @@ above excepted). Reason and replacement: previous subsection. The relaunch uses 
 `b01_ref_a02`, the corrected published SHA and the same node, worlds, settings and rules.
 Observed throughput of the superseded run: 60 episodes in ≈ 13 min at 8 workers × 2 threads,
 so the complete 540-episode operation projects to roughly 2 h, not 4.5–5.5 h.
+
+### Launch record: B01 relaunched on wsl_4070 as `b01_ref_a02` (2026-09-26)
+
+Inputs commit `e1fdbe72f53a1597c34c1d32c89ac6700251dca0` (the second revision: corrected code and
+tests, this notebook through the stop record, the response document's cost line and the index
+row) pushed to origin/main; the node control checkout `/home/wu/projects/HMASD` fast-forwarded to
+it. Admission launch from the node itself (`temp/directions/energy_relay_benchmark/scratch/relaunch_a02.sh`,
+the first operation's argv with the tag and SHA replaced):
+
+- `scripts/hmasd_launch.py launch --node wsl_4070 --source-root /home/wu/projects/HMASD --snapshot
+  --direction energy_relay_benchmark --lead "Claude DM (WSL session)" --sha
+  e1fdbe72f53a1597c34c1d32c89ac6700251dca0 --output runs/energy_relay_benchmark/b01_ref_a02 --
+  scripts/run_energy_relay_benchmark_b01.py --out runs/energy_relay_benchmark/b01_ref_a02
+  --launch-sha e1fdbe72f53a1597c34c1d32c89ac6700251dca0 --checkpoint
+  /home/wu/hmasd-worktrees/usa-b09-48388289d/runs/uav_service_auxiliary/b09_an_925031_a01/N/endpoint/agent.pt
+  --phase all --workers 8 --threads 2 --device cpu`
+- `acceptance: accepted`, `accepted_at 2026-09-26T14:00:45Z`; control observation
+  `origin/refs/heads/main` = `e1fdbe72f53a1597c34c1d32c89ac6700251dca0` (observed 14:00:45Z);
+  host `LAPTOP-U9TDKC8A`.
+- Operation ref `/home/wu/projects/HMASD/.git/hmasd-admission/02f762d25c98f83c5f42f473fd1af854bfd4b7e347b9e8391e3393e01d00ac43.json`
+  (claim key `02f762d2…00ac43`); manifest and outputs under
+  `/home/wu/projects/HMASD/runs/energy_relay_benchmark/b01_ref_a02/` (same layout as the first
+  operation).
+- Snapshot source `/home/wu/projects/HMASD/.git/hmasd-launch-sources/8a164fa1d18e48d6abad2d045101d89e`
+  (linked worktree of the published SHA); command sha256
+  `2a95eacb58ad080347f7d1f48419f7415923f2fbba4bd0e2d9cd5442d09400cd`; detached supervisor pid
+  712622 (posix session), runner pid 712623.
+- Health at ≈ 14:06 UTC: supervisor and runner alive, no `process-exit.json`; equivalence phase
+  complete (4 episodes), null phase at 14 of 32 episodes, no failed world; node memory 5.8 GB
+  free of 15.8 GB, load ≈ 10.8 with 8 workers × 2 threads. `stderr.log` holds only the
+  checkpoint loader's notice that the checkpoint carries no discriminator buffer and an empty one
+  is created; that buffer is a training-time object and this run makes no fit or optimizer
+  update, so the equivalence rows against B09 remain the record of a correct load. Completion
+  projects to ≈ 2 h after acceptance by the first operation's throughput.
+- Observation: the same detached local poller (`poll_status.sh`, every 10 minutes, PID file
+  `poll_b01_ref_a02.pid`, log `poll_b01_ref_a02.log` under the scratch directory) plus a
+  background waiter that returns to the session when the poller exits on a terminal state or
+  when a poll shows the runner absent. Before the terminal state only health fields are observed
+  (event, phase, panel, seed, failed flag, episodes completed, memory, process presence).
+- Disclosure: while confirming the panel layout after the equivalence phase the DM saw world
+  952001's equivalence row (N, (0, .05)): `raw_native_J` 877.165. The equivalence phase is
+  record-only by the revised design (no gate), so nothing follows from it now; the comparison
+  with B09's recorded per-world J is made at the reading together with the other three worlds.
+  No other result field was read.
