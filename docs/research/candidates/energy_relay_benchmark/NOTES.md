@@ -2695,3 +2695,28 @@ supervisor pid 727107, runner pid 727108; outputs under
 `/home/wu/projects/HMASD/runs/energy_relay_benchmark/b02_s1_eval_c00_a01/checkpoint-eval/`
 (panels `L_c00_deterministic_e0.00_x0.05`, `L_c00_stochastic_e0.00_x0.05`, traces). c00 gives the
 "improvement over the model's own initialisation" baseline; it is read with the curve, not alone.
+
+### Stage 1, c00 (initialisation) evaluated: the learner's own baseline (`b02_s1_eval_c00_a01`, operation 53663d6b)
+
+`status COMPLETE`, exit 0, 64 episodes (32 worlds × 2 modes), 0 failed, wall 787.7 s beside the
+running fit; launch sha `759927b5e`; the five row diagnostics equal the trace recomputation in all
+64 rows. Reader `read_stage1.py` (`d3f6bda93`, unchanged); readings
+`docs/research/candidates/energy_relay_benchmark/b02_stage1_readings.json` (regenerated at each
+checkpoint; the training block reads the fit's `progress.jsonl`, copied locally, ignored by Git).
+
+| c00, 955001–955032 | deterministic | stochastic (draw 0) |
+|---|---|---|
+| QoS/step | .209 | .243 |
+| paired vs H_central .774 | −.565 (SE .017) | −.531 (SE .016) |
+| paired vs H_local .597 | −.388 (SE .022) | −.354 (SE .023) |
+| paired vs H_park2 .379 | −.170 (SE .022) | −.136 (SE .022) |
+| paired vs H_spawn .232 | −.023 (SE .008) | +.011 (SE .005) |
+| paired vs N .328 (deterministic) | −.120 (SE .026) | −.085 (SE .024) |
+| worlds ≥ .60 | 0/32 | 0/32 |
+
+Reading (a baseline, to be read with the curve, not alone): the untrained SET actor under the
+production shield sits at H_spawn's level in both modes — the service an idle or random team gets
+from the shield's station visits — and N's whole-episode margin over a random initialisation is
++.12 (deterministic) / +.085 (sampled). "Improvement over the model's own initialisation" is
+measured from these two panels. Fit progress at the read: 7 rollouts, ≈ 195 s per rollout while the
+evaluation shared the CPUs (≈ 150 s alone), 0 live lanes at any boundary.

@@ -1,0 +1,1114 @@
+{
+ "comparators": {
+  "H_central": {
+   "qos_satisfaction_ratio_per_step": 0.7740241282985059,
+   "raw_native_J": 2281.8873736922483,
+   "return_constraint_cost_sum": 4.821971939110522,
+   "cutoff_event_count_sum": 0.0,
+   "depletion_event_count_sum": 0.0,
+   "min_decoded_battery": 0.09958558506332338,
+   "mode_uav_step_fraction": 0.32455078125,
+   "first_entry_step": 1299.84375,
+   "first_input_step": 1616.96875,
+   "qos_per_step_pre_entry": 0.8099960107159845,
+   "qos_per_step_entry_to_input": 0.8395461151625925,
+   "qos_per_step_post_input": 0.7252324599096243,
+   "charger_input_wh": 381.1284722222222,
+   "wait_ticks_total": 4569.875,
+   "guard_blocked_actions": 1129.09375,
+   "guard_checked_actions": 14620.3125,
+   "feedback_entry_count": 47.84375,
+   "boundary_share_normal_mode": null,
+   "altitude_floor_share_normal_mode": null,
+   "anchor_uav_steps_within_300m": null,
+   "centre_uav_steps_within_300m": null,
+   "first_service_step": null,
+   "zero_service": 0.0,
+   "n": 32,
+   "zero_service_worlds": 0,
+   "failed_worlds": 0,
+   "min_battery_p10": 0.09410205483436584,
+   "guard_blocked_share": 0.07722774393502191
+  },
+  "H_local": {
+   "qos_satisfaction_ratio_per_step": 0.5969387490040506,
+   "raw_native_J": 1628.4463152952383,
+   "return_constraint_cost_sum": 65.92359684285955,
+   "cutoff_event_count_sum": 0.0,
+   "depletion_event_count_sum": 0.0,
+   "min_decoded_battery": 0.08723469206597656,
+   "mode_uav_step_fraction": 0.3614895833333333,
+   "first_entry_step": 1303.84375,
+   "first_input_step": 1619.90625,
+   "qos_per_step_pre_entry": 0.6306602959263379,
+   "qos_per_step_entry_to_input": 0.7018422242631862,
+   "qos_per_step_post_input": 0.5435848626222965,
+   "charger_input_wh": 373.02083333333326,
+   "wait_ticks_total": 5685.4375,
+   "guard_blocked_actions": 2741.6875,
+   "guard_checked_actions": 13564.03125,
+   "feedback_entry_count": 44.125,
+   "boundary_share_normal_mode": null,
+   "altitude_floor_share_normal_mode": null,
+   "anchor_uav_steps_within_300m": null,
+   "centre_uav_steps_within_300m": null,
+   "first_service_step": null,
+   "zero_service": 0.03125,
+   "n": 32,
+   "zero_service_worlds": 1,
+   "failed_worlds": 0,
+   "min_battery_p10": 0.0631355494260788,
+   "guard_blocked_share": 0.20212925268806056
+  },
+  "N_deterministic": {
+   "qos_satisfaction_ratio_per_step": 0.3283260560122044,
+   "raw_native_J": 954.9762030365185,
+   "return_constraint_cost_sum": 1.1967336242384334,
+   "cutoff_event_count_sum": 0.0,
+   "depletion_event_count_sum": 0.0,
+   "min_decoded_battery": 0.10816565388813615,
+   "mode_uav_step_fraction": 0.18420052083333333,
+   "first_entry_step": 1372.5,
+   "first_input_step": 2195.59375,
+   "qos_per_step_pre_entry": 0.23050083870227026,
+   "qos_per_step_entry_to_input": 0.3525821200973826,
+   "qos_per_step_post_input": 0.44943116346015566,
+   "charger_input_wh": 146.61458333333331,
+   "wait_ticks_total": 1405.6875,
+   "guard_blocked_actions": 1948.875,
+   "guard_checked_actions": 11030.59375,
+   "feedback_entry_count": 80.25,
+   "boundary_share_normal_mode": null,
+   "altitude_floor_share_normal_mode": null,
+   "anchor_uav_steps_within_300m": null,
+   "centre_uav_steps_within_300m": null,
+   "first_service_step": null,
+   "zero_service": 0.09375,
+   "n": 32,
+   "zero_service_worlds": 3,
+   "failed_worlds": 0,
+   "min_battery_p10": 0.10023366659879684,
+   "guard_blocked_share": 0.17667906589343843
+  },
+  "H_spawn": {
+   "qos_satisfaction_ratio_per_step": 0.23198622084058432,
+   "raw_native_J": 492.2930219273,
+   "return_constraint_cost_sum": 88.65660851415953,
+   "cutoff_event_count_sum": 0.0,
+   "depletion_event_count_sum": 0.0,
+   "min_decoded_battery": 0.0838656701380387,
+   "mode_uav_step_fraction": 0.45809375,
+   "first_entry_step": 1048.6875,
+   "first_input_step": 1603.53125,
+   "qos_per_step_pre_entry": 0.08342362643056665,
+   "qos_per_step_entry_to_input": 0.2039367596619464,
+   "qos_per_step_post_input": 0.3495353317206926,
+   "charger_input_wh": 341.5972222222222,
+   "wait_ticks_total": 6367.4375,
+   "guard_blocked_actions": 230.46875,
+   "guard_checked_actions": 2691.34375,
+   "feedback_entry_count": 113.125,
+   "boundary_share_normal_mode": 0.0,
+   "altitude_floor_share_normal_mode": 0.0022082771588385333,
+   "anchor_uav_steps_within_300m": 7142.5,
+   "centre_uav_steps_within_300m": 1520.09375,
+   "first_service_step": 294.5357142857143,
+   "zero_service": 0.125,
+   "n": 32,
+   "zero_service_worlds": 4,
+   "failed_worlds": 0,
+   "min_battery_p10": 0.053279098123311996,
+   "guard_blocked_share": 0.08563333836489671
+  },
+  "H_park2": {
+   "qos_satisfaction_ratio_per_step": 0.3785768455528036,
+   "raw_native_J": 1066.215497998143,
+   "return_constraint_cost_sum": 19.49980669886553,
+   "cutoff_event_count_sum": 0.0,
+   "depletion_event_count_sum": 0.0,
+   "min_decoded_battery": 0.09369881777092814,
+   "mode_uav_step_fraction": 0.3641171875,
+   "first_entry_step": 1073.40625,
+   "first_input_step": 1625.21875,
+   "qos_per_step_pre_entry": 0.35281306484088715,
+   "qos_per_step_entry_to_input": 0.3788341299468042,
+   "qos_per_step_post_input": 0.3897299891200029,
+   "charger_input_wh": 343.77604166666663,
+   "wait_ticks_total": 4662.53125,
+   "guard_blocked_actions": 739.25,
+   "guard_checked_actions": 6648.25,
+   "feedback_entry_count": 94.15625,
+   "boundary_share_normal_mode": 0.0,
+   "altitude_floor_share_normal_mode": 0.01238520464451814,
+   "anchor_uav_steps_within_300m": 8141.96875,
+   "centre_uav_steps_within_300m": 3911.34375,
+   "first_service_step": 19.78125,
+   "zero_service": 0.0,
+   "n": 32,
+   "zero_service_worlds": 0,
+   "failed_worlds": 0,
+   "min_battery_p10": 0.0892677828669548,
+   "guard_blocked_share": 0.11119467529048997
+  }
+ },
+ "milestone": {
+  "level": 0.6,
+  "label": "H_local's level on 955001-955032 (.597), not a pass mark"
+ },
+ "training": {
+  "available": true,
+  "rollouts": [
+   {
+    "rollout": 1,
+    "transitions": 6000,
+    "lane_native_J": [
+     764.7927691043399,
+     683.9751476762519
+    ],
+    "lane_qos_per_step": [
+     0.26509159307137903,
+     0.23949461256585286
+    ],
+    "shield_mapping_share": 0.24254166666666666,
+    "f_mode_uav_step_share": 0.24254166666666666,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 107.87069092108868,
+    "update_seconds": 42.1083601199789,
+    "action_entropy": null,
+    "discoverer_policy_loss": null,
+    "discoverer_value_loss": null,
+    "qos_per_step": 0.25229310281861594,
+    "native_J": 724.3839583902959
+   },
+   {
+    "rollout": 2,
+    "transitions": 12000,
+    "lane_native_J": [
+     1012.6082931786767,
+     -41.332636386826955
+    ],
+    "lane_qos_per_step": [
+     0.34760366560579375,
+     0.0
+    ],
+    "shield_mapping_share": 0.22497916666666667,
+    "f_mode_uav_step_share": 0.22497916666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 101.72271893499419,
+    "update_seconds": 41.251291233929805,
+    "action_entropy": null,
+    "discoverer_policy_loss": null,
+    "discoverer_value_loss": null,
+    "qos_per_step": 0.17380183280289688,
+    "native_J": 485.6378283959249
+   },
+   {
+    "rollout": 3,
+    "transitions": 18000,
+    "lane_native_J": [
+     432.84833060667614,
+     385.60473250040053
+    ],
+    "lane_qos_per_step": [
+     0.17437758663401237,
+     0.1367362081128732
+    ],
+    "shield_mapping_share": 0.18110416666666668,
+    "f_mode_uav_step_share": 0.18110416666666668,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 100.46352359408047,
+    "update_seconds": 37.21241910092067,
+    "action_entropy": null,
+    "discoverer_policy_loss": null,
+    "discoverer_value_loss": null,
+    "qos_per_step": 0.1555568973734428,
+    "native_J": 409.22653155353834
+   },
+   {
+    "rollout": 4,
+    "transitions": 24000,
+    "lane_native_J": [
+     795.681384710715,
+     644.0420656779298
+    ],
+    "lane_qos_per_step": [
+     0.27587099949875993,
+     0.22289929712565143
+    ],
+    "shield_mapping_share": 0.15060416666666668,
+    "f_mode_uav_step_share": 0.15060416666666668,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 151.6097126880195,
+    "update_seconds": 84.25671250501182,
+    "action_entropy": null,
+    "discoverer_policy_loss": null,
+    "discoverer_value_loss": null,
+    "qos_per_step": 0.24938514831220568,
+    "native_J": 719.8617251943224
+   },
+   {
+    "rollout": 5,
+    "transitions": 30000,
+    "lane_native_J": [
+     911.330679665534,
+     497.3630538913966
+    ],
+    "lane_qos_per_step": [
+     0.34151953262901197,
+     0.17573110606331552
+    ],
+    "shield_mapping_share": 0.1954375,
+    "f_mode_uav_step_share": 0.1954375,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 187.9285291080596,
+    "update_seconds": 80.26114711095579,
+    "action_entropy": null,
+    "discoverer_policy_loss": null,
+    "discoverer_value_loss": null,
+    "qos_per_step": 0.25862531934616373,
+    "native_J": 704.3468667784653
+   },
+   {
+    "rollout": 6,
+    "transitions": 36000,
+    "lane_native_J": [
+     -80.6540706197141,
+     535.4733547724696
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.18924514713400825
+    ],
+    "shield_mapping_share": 0.24925,
+    "f_mode_uav_step_share": 0.24925,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 175.28642954898532,
+    "update_seconds": 84.44441962102428,
+    "action_entropy": null,
+    "discoverer_policy_loss": null,
+    "discoverer_value_loss": null,
+    "qos_per_step": 0.09462257356700413,
+    "native_J": 227.40964207637776
+   },
+   {
+    "rollout": 7,
+    "transitions": 42000,
+    "lane_native_J": [
+     435.156588234892,
+     -33.52060291814184
+    ],
+    "lane_qos_per_step": [
+     0.19332470159860976,
+     0.0
+    ],
+    "shield_mapping_share": 0.24491666666666667,
+    "f_mode_uav_step_share": 0.24491666666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 132.51766680798028,
+    "update_seconds": 38.08342287200503,
+    "action_entropy": null,
+    "discoverer_policy_loss": null,
+    "discoverer_value_loss": null,
+    "qos_per_step": 0.09666235079930488,
+    "native_J": 200.8179926583751
+   }
+  ],
+  "checkpoints": [
+   {
+    "checkpoint": "c00",
+    "rollout": 0,
+    "transitions": 0,
+    "wall_seconds": 1.2188560740323737
+   }
+  ],
+  "n_rollouts": 7,
+  "seconds_per_rollout_mean": 195.00243488100492,
+  "seconds_per_rollout_first_two": [
+   149.97905104106758,
+   142.974010168924
+  ],
+  "projected_total_hours_at_mean_rate": 10.833468604500274,
+  "live_lane_boundaries": 0,
+  "mapping_share_mean": 0.21269047619047618,
+  "qos_per_step_first_five": [
+   0.25229310281861594,
+   0.17380183280289688,
+   0.1555568973734428,
+   0.24938514831220568,
+   0.25862531934616373
+  ],
+  "qos_per_step_last_five": [
+   0.1555568973734428,
+   0.24938514831220568,
+   0.25862531934616373,
+   0.09462257356700413,
+   0.09666235079930488
+  ]
+ },
+ "checkpoints": {
+  "c00_deterministic": {
+   "summary": {
+    "qos_satisfaction_ratio_per_step": 0.20880643341287225,
+    "raw_native_J": 587.0513363313798,
+    "return_constraint_cost_sum": 6.637244668291698,
+    "cutoff_event_count_sum": 0.0,
+    "depletion_event_count_sum": 0.0,
+    "min_decoded_battery": 0.09717425890266895,
+    "mode_uav_step_fraction": 0.20776302083333334,
+    "first_entry_step": 1056.59375,
+    "first_input_step": 2061.375,
+    "qos_per_step_pre_entry": 0.08489210662294852,
+    "qos_per_step_entry_to_input": 0.20131481270512122,
+    "qos_per_step_post_input": 0.3465559224322789,
+    "charger_input_wh": 190.1128472222222,
+    "wait_ticks_total": 2893.875,
+    "guard_blocked_actions": 639.1875,
+    "guard_checked_actions": 5549.21875,
+    "feedback_entry_count": 52.625,
+    "boundary_share_normal_mode": 0.058266677291459186,
+    "altitude_floor_share_normal_mode": 0.02297058070148529,
+    "anchor_uav_steps_within_300m": 4457.59375,
+    "centre_uav_steps_within_300m": 915.40625,
+    "first_service_step": 363.57142857142856,
+    "zero_service": 0.125,
+    "n": 32,
+    "zero_service_worlds": 4,
+    "failed_worlds": 0,
+    "min_battery_p10": 0.08577296882867813,
+    "guard_blocked_share": 0.11518513304237646
+   },
+   "record": {
+    "checkpoint": "c00",
+    "transitions": 0,
+    "policy_seed": 925031,
+    "draw": null,
+    "policy_identity": [
+     {
+      "checkpoint": "c00",
+      "checkpoint_sha256": "9d5806c1ff9d0f94ef4487543104b78ea718c05dc51f10babe808a34087f73f9",
+      "policy_fingerprint": "58a6a8a13217c8126a4eca73d02cbfa610433005a21e8e68756559318c9bf333",
+      "rollout": 0,
+      "transitions": 0
+     }
+    ],
+    "controller_information": "flat recurrent actor on the legal observation + held central snapshot (state, all observations, ego one-hot) refreshed every k = 10 steps (SET, use_central_snapshot_in_flat_actor)"
+   },
+   "milestone_reached": false,
+   "worlds_at_or_above_milestone": 0,
+   "gaps": {
+    "H_central": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.5652176948856337,
+      "paired_se": 0.017097154187089066,
+      "positive": 0,
+      "min": -0.8232462706096929,
+      "max": -0.3901760583882471
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -1694.8360373608684,
+      "paired_se": 50.53877869478534,
+      "positive": 0,
+      "min": -2465.8737405835445,
+      "max": -1163.1837362280262
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": 1.815272729181176,
+      "paired_se": 1.8339967114735045,
+      "positive": 12,
+      "min": -24.307917976092117,
+      "max": 35.979345862573545
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": -0.0024113261606544256,
+      "paired_se": 0.0010072895805974173,
+      "positive": 9,
+      "min": -0.016090549528598785,
+      "max": 0.009737230837345123
+     },
+     "conflict": null
+    },
+    "H_local": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.3881323155911784,
+      "paired_se": 0.0222769782526463,
+      "positive": 0,
+      "min": -0.5432977894916367,
+      "max": 0.0
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -1041.3949789638584,
+      "paired_se": 81.91200391052283,
+      "positive": 1,
+      "min": -1529.3001883604934,
+      "max": 388.8802426687714
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -59.28635217456785,
+      "paired_se": 15.227395617578132,
+      "positive": 6,
+      "min": -289.8677535610124,
+      "max": 26.175022806646044
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.009939566836692393,
+      "paired_se": 0.0028558454630814157,
+      "positive": 22,
+      "min": -0.012360937893390656,
+      "max": 0.04543409124016762
+     },
+     "conflict": null
+    },
+    "N_deterministic": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.11951962259933216,
+      "paired_se": 0.026406692852690747,
+      "positive": 6,
+      "min": -0.37194336996627747,
+      "max": 0.23964584306958947
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -367.9248667051386,
+      "paired_se": 78.69480109451105,
+      "positive": 6,
+      "min": -1134.4055853317207,
+      "max": 703.3786396891036
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": 5.440511044053265,
+      "paired_se": 2.0819273191979524,
+      "positive": 20,
+      "min": -11.623056373367218,
+      "max": 40.61636466758067
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": -0.010991394985467196,
+      "paired_se": 0.0015732880685077482,
+      "positive": 3,
+      "min": -0.030041426420211792,
+      "max": 0.012162499129772186
+     },
+     "conflict": null
+    },
+    "H_spawn": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.023179787427712064,
+      "paired_se": 0.008197728023958874,
+      "positive": 10,
+      "min": -0.22432348316307166,
+      "max": 0.022201740623042643
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": 94.75831440407985,
+      "paired_se": 49.34879165758596,
+      "positive": 17,
+      "min": -681.575693736621,
+      "max": 769.4959322798006
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -82.01936384586783,
+      "paired_se": 19.444906020459584,
+      "positive": 1,
+      "min": -352.29977709227364,
+      "max": 4.27144296182783
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.013308588764630258,
+      "paired_se": 0.0030873562646164102,
+      "positive": 25,
+      "min": -0.026827946305274963,
+      "max": 0.05074988305568695
+     },
+     "conflict": null
+    },
+    "H_park2": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.16977041213993133,
+      "paired_se": 0.021903921355293,
+      "positive": 0,
+      "min": -0.5469824760023945,
+      "max": -0.05321545575986068
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -479.16416166676316,
+      "paired_se": 60.289303803374985,
+      "positive": 0,
+      "min": -1539.3124121904877,
+      "max": -129.46420409546243
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -12.862562030573834,
+      "paired_se": 5.675860503085347,
+      "positive": 6,
+      "min": -164.57120366066164,
+      "max": 28.689688368661642
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.0034754411317408085,
+      "paired_se": 0.0012351442167567647,
+      "positive": 24,
+      "min": -0.01114102452993393,
+      "max": 0.025994323194026947
+     },
+     "conflict": null
+    }
+   }
+  },
+  "c00_stochastic": {
+   "summary": {
+    "qos_satisfaction_ratio_per_step": 0.24286226405317002,
+    "raw_native_J": 692.9415743763342,
+    "return_constraint_cost_sum": 4.618655068342911,
+    "cutoff_event_count_sum": 0.0,
+    "depletion_event_count_sum": 0.0,
+    "min_decoded_battery": 0.09899069927632809,
+    "mode_uav_step_fraction": 0.20642578125,
+    "first_entry_step": 1052.71875,
+    "first_input_step": 2062.625,
+    "qos_per_step_pre_entry": 0.111136096105684,
+    "qos_per_step_entry_to_input": 0.23506893112264618,
+    "qos_per_step_post_input": 0.37580189699661026,
+    "charger_input_wh": 190.51215277777774,
+    "wait_ticks_total": 2677.4375,
+    "guard_blocked_actions": 49.1875,
+    "guard_checked_actions": 7348.90625,
+    "feedback_entry_count": 52.0625,
+    "boundary_share_normal_mode": 0.011208130538639217,
+    "altitude_floor_share_normal_mode": 0.0184952222378844,
+    "anchor_uav_steps_within_300m": 4415.71875,
+    "centre_uav_steps_within_300m": 845.71875,
+    "first_service_step": 346.8965517241379,
+    "zero_service": 0.09375,
+    "n": 32,
+    "zero_service_worlds": 3,
+    "failed_worlds": 0,
+    "min_battery_p10": 0.09382881969213486,
+    "guard_blocked_share": 0.0066931728786171416
+   },
+   "record": {
+    "checkpoint": "c00",
+    "transitions": 0,
+    "policy_seed": 925031,
+    "draw": 0,
+    "policy_identity": [
+     {
+      "checkpoint": "c00",
+      "checkpoint_sha256": "9d5806c1ff9d0f94ef4487543104b78ea718c05dc51f10babe808a34087f73f9",
+      "policy_fingerprint": "58a6a8a13217c8126a4eca73d02cbfa610433005a21e8e68756559318c9bf333",
+      "rollout": 0,
+      "transitions": 0
+     }
+    ],
+    "controller_information": "flat recurrent actor on the legal observation + held central snapshot (state, all observations, ego one-hot) refreshed every k = 10 steps (SET, use_central_snapshot_in_flat_actor)"
+   },
+   "milestone_reached": false,
+   "worlds_at_or_above_milestone": 0,
+   "gaps": {
+    "H_central": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.5311618642453358,
+      "paired_se": 0.016282932813826537,
+      "positive": 0,
+      "min": -0.8296369908974902,
+      "max": -0.3932814136906514
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -1588.9457993159142,
+      "paired_se": 48.2394472362711,
+      "positive": 0,
+      "min": -2504.5050566358855,
+      "max": -1180.1631056338056
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -0.20331687076761107,
+      "paired_se": 1.0588304821403978,
+      "positive": 18,
+      "min": -23.14940162684624,
+      "max": 10.916327667589949
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": -0.0005948857869952917,
+      "paired_se": 0.0007324741894794386,
+      "positive": 10,
+      "min": -0.008089125156402588,
+      "max": 0.009515337646007538
+     },
+     "conflict": null
+    },
+    "H_local": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.35407648495088057,
+      "paired_se": 0.02321894364490711,
+      "positive": 0,
+      "min": -0.5576982846653885,
+      "max": 0.0
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -935.5047409189042,
+      "paired_se": 83.08491575791841,
+      "positive": 1,
+      "min": -1577.2424560807353,
+      "max": 386.06555866530005
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -61.30494177451664,
+      "paired_se": 14.973281745239653,
+      "positive": 5,
+      "min": -290.48642155754226,
+      "max": 8.049703030441314
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.011756007210351527,
+      "paired_se": 0.0027374029253130106,
+      "positive": 25,
+      "min": -0.013117417693138123,
+      "max": 0.05049474909901619
+     },
+     "conflict": null
+    },
+    "N_deterministic": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.08546379195903436,
+      "paired_se": 0.024059560579170716,
+      "positive": 9,
+      "min": -0.31666636347301713,
+      "max": 0.24726180807949644
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -262.03462866018435,
+      "paired_se": 71.73064935348354,
+      "positive": 8,
+      "min": -952.4129381462569,
+      "max": 743.8338961022948
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": 3.421921444104478,
+      "paired_se": 1.0414599658698644,
+      "positive": 31,
+      "min": -7.40662419881152,
+      "max": 29.00313760225935
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": -0.009174954611808062,
+      "paired_se": 0.0014425154632130746,
+      "positive": 2,
+      "min": -0.024281933903694153,
+      "max": 0.010042130947113037
+     },
+     "conflict": null
+    },
+    "H_spawn": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": 0.010876043212585727,
+      "paired_se": 0.004969150319684487,
+      "positive": 22,
+      "min": -0.09036612953668438,
+      "max": 0.056345313607508385
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": 200.64855244903413,
+      "paired_se": 42.56019227840569,
+      "positive": 29,
+      "min": -209.14215144814784,
+      "max": 755.7031943734675
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -84.03795344581663,
+      "paired_se": 20.08381958116899,
+      "positive": 3,
+      "min": -355.6887184846788,
+      "max": 2.4508810861801407
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.015125029138289392,
+      "paired_se": 0.0031928640420185394,
+      "positive": 26,
+      "min": -0.020503714680671692,
+      "max": 0.04711805284023285
+     },
+     "conflict": null
+    },
+    "H_park2": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.13571458149963356,
+      "paired_se": 0.022422147152110158,
+      "positive": 0,
+      "min": -0.5533731962901918,
+      "max": -0.03973036889108161
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -373.27392362180893,
+      "paired_se": 61.24171417064568,
+      "positive": 0,
+      "min": -1541.5920637827953,
+      "max": -93.29495601933002
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -14.881151630522622,
+      "paired_se": 5.2483837300705645,
+      "positive": 2,
+      "min": -163.41268731141577,
+      "max": 17.106840076293096
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.005291881505399942,
+      "paired_se": 0.0009077356973425074,
+      "positive": 29,
+      "min": -0.007876746356487274,
+      "max": 0.02577243000268936
+     },
+     "conflict": null
+    }
+   }
+  }
+ },
+ "final_holdout": {},
+ "curves": {
+  "deterministic": {
+   "checkpoints": [
+    "c00"
+   ],
+   "qos_satisfaction_ratio_per_step": [
+    0.20880643341287225
+   ],
+   "raw_native_J": [
+    587.0513363313798
+   ],
+   "return_cost": [
+    6.637244668291698
+   ],
+   "min_battery": [
+    0.09717425890266895
+   ],
+   "boundary_share": [
+    0.058266677291459186
+   ],
+   "first_service_step": [
+    363.57142857142856
+   ],
+   "zero_service_worlds": [
+    4
+   ],
+   "last_step_delta": null,
+   "still_improving_at_end": false,
+   "best_checkpoint": 0
+  },
+  "stochastic": {
+   "checkpoints": [
+    "c00"
+   ],
+   "qos_satisfaction_ratio_per_step": [
+    0.24286226405317002
+   ],
+   "raw_native_J": [
+    692.9415743763342
+   ],
+   "return_cost": [
+    4.618655068342911
+   ],
+   "min_battery": [
+    0.09899069927632809
+   ],
+   "boundary_share": [
+    0.011208130538639217
+   ],
+   "first_service_step": [
+    346.8965517241379
+   ],
+   "zero_service_worlds": [
+    3
+   ],
+   "last_step_delta": null,
+   "still_improving_at_end": false,
+   "best_checkpoint": 0
+  }
+ },
+ "failure_explanations_pro_table": {
+  "non_exclusive": true,
+  "rows": [
+   {
+    "observation": "users seen late / access late / little useful service exposure in training",
+    "proxies": {
+     "first_service_step_last": 363.57142857142856,
+     "qos_pre_entry_last": 0.08489210662294852,
+     "training_qos_first_five": [
+      0.25229310281861594,
+      0.17380183280289688,
+      0.1555568973734428,
+      0.24938514831220568,
+      0.25862531934616373
+     ],
+     "mapping_share_mean": 0.21269047619047618
+    },
+    "would_strengthen": "insufficient opportunity to reach useful states",
+    "would_not_follow": "an identified exploration defect; that a curriculum works"
+   },
+   {
+    "observation": "users and paths present, delivery not held or improved",
+    "proxies": {
+     "first_service_step_last": 363.57142857142856,
+     "qos_last": 0.20880643341287225,
+     "curve": {
+      "deterministic": [
+       0.20880643341287225
+      ],
+      "stochastic": [
+       0.24286226405317002
+      ]
+     }
+    },
+    "would_strengthen": "signal use, optimisation, return trade-off or credit assignment as candidates",
+    "would_not_follow": "credit assignment proven the bottleneck"
+   },
+   {
+    "observation": "early service good, gap widens after F / recharging",
+    "proxies": {
+     "learner_pre_entry": 0.08489210662294852,
+     "learner_post_input": 0.3465559224322789,
+     "H_central_pre_entry": 0.8099960107159845,
+     "H_central_post_input": 0.7252324599096243
+    },
+    "would_strengthen": "deployment and recovery under feedback worth attention",
+    "would_not_follow": "retune the exit threshold or change the scheduler"
+   },
+   {
+    "observation": "targets not reached, non-zero proposals often guard-blocked",
+    "proxies": {
+     "guard_blocked_share_last": 0.11518513304237646,
+     "H_central_guard_blocked_share": 0.07722774393502191,
+     "boundary_share_last": 0.058266677291459186
+    },
+    "would_strengthen": "action filtering under specific geometry may limit execution",
+    "would_not_follow": "H's global blocked share diagnoses SET"
+   },
+   {
+    "observation": "still improving at the end with a large gap",
+    "proxies": {
+     "still_improving_at_end": {
+      "deterministic": false,
+      "stochastic": false
+     },
+     "gap_to_H_central_last": {
+      "deterministic": -0.5652176948856337,
+      "stochastic": -0.5311618642453358
+     }
+    },
+    "would_strengthen": "the exposure may not describe the plateau",
+    "would_not_follow": "extend this fit after the scores (a longer recipe is a new declared study)"
+   },
+   {
+    "observation": "low plateau, technical execution normal",
+    "proxies": {
+     "live_lane_boundaries": 0,
+     "failed_worlds_last": 0,
+     "identity_per_panel_present": true,
+     "curve_flat": {
+      "deterministic": true,
+      "stochastic": true
+     }
+    },
+    "would_strengthen": "this fixed programme performs limitedly at this exposure",
+    "would_not_follow": "central information insufficient, MARL useless, or joint skills required"
+   }
+  ]
+ }
+}
