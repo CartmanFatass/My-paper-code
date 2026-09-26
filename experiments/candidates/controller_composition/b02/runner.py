@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 from dataclasses import replace
+import hashlib
+import json
 from pathlib import Path
 import resource
 import time
@@ -64,8 +66,9 @@ def _compact_update_audit(audit: dict, path: Path, out: Path) -> dict:
     }
 
 
-def _save_snapshot(agent: Any, path: Path, arm: str, rollout: int, launch_sha: str, out: Path) -> dict:
-    payload = {"schema": 1, "object": OBJECT, "arm": arm, "launch_sha": launch_sha,
+def _save_snapshot(agent: Any, path: Path, arm: str, rollout: int, launch_sha: str, out: Path,
+                   *, object_name: str = OBJECT) -> dict:
+    payload = {"schema": 1, "object": object_name, "arm": arm, "launch_sha": launch_sha,
                "rollout": rollout, "config": b16._config_record(agent.config),
                "modules": {name: module.state_dict() for name, module in model_modules(agent).items()},
                "normalizers": b11._normalizer_manifest(agent),
@@ -298,7 +301,7 @@ def _train_rollout(agent: Any, buffer: Any, arm: str, rollout: int, payloads: di
 
 def _eval_cell(learner_name: str, partner: int, snapshots: dict[str, dict],
                payloads: dict, out: Path, spec: Any = SPEC,
-               world_base: int = EVAL_WORLD_BASE) -> dict:
+               world_base: int = EVAL_WORLD_BASE, *, learner_seed: int = SEED) -> dict:
     """Build private full-roster runtimes and run one fixed native evaluation cell."""
     envs: list[Any] = []
     active_step = -1
@@ -316,7 +319,7 @@ def _eval_cell(learner_name: str, partner: int, snapshots: dict[str, dict],
                 first = _source_runtime(3, envs, payloads, out / "raw/logs" / key / "first", spec)
             else:
                 snapshot = snapshots[learner_name]
-                first = b01.restore_runtime(_make_config(envs, SEED, spec), snapshot["payload"],
+                first = b01.restore_runtime(_make_config(envs, learner_seed, spec), snapshot["payload"],
                                             snapshot["digest"], out / "raw/logs" / key / "first")
             second = _source_runtime(partner, envs, payloads, out / "raw/logs" / key / "second", spec)
             if first is second:
@@ -451,15 +454,16 @@ def _eval_cell(learner_name: str, partner: int, snapshots: dict[str, dict],
 
 def _fit(arm: str, payloads: dict, assignment_rng: np.random.Generator,
          out: Path, launch_sha: str, progress: dict, spec: Any = SPEC,
-         world_base: int = TRAIN_WORLD_BASE) -> tuple[dict, dict]:
+         world_base: int = TRAIN_WORLD_BASE, *, learner_seed: int = SEED,
+         object_name: str = OBJECT) -> tuple[dict, dict]:
     fit_start = time.perf_counter()
     fit_cpu_start = resource.getrusage(resource.RUSAGE_SELF)
-    seed_rng(SEED)
+    seed_rng(learner_seed)
     # First native reset also supplies the shape/config contract; it has no learner-RNG effect.
     with preserve_rng():
         probe_envs = make_envs(spec.train_lanes, world_base + 100, N, spec.horizon)
     try:
-        config = _make_config(probe_envs, SEED, spec)
+        config = _make_config(probe_envs, learner_seed, spec)
     finally:
         for env in probe_envs:
             env.close()
@@ -470,8 +474,11 @@ def _fit(arm: str, payloads: dict, assignment_rng: np.random.Generator,
     initial_parameters = capture_parameters(agent)
     initial_normalizers = b11._normalizer_manifest(agent)
     initial_path = out / "raw" / f"init_{arm}.pt"
-    initial_snapshot = _save_snapshot(agent, initial_path, arm, 0, launch_sha, out)
+    initial_snapshot = _save_snapshot(agent, initial_path, arm, 0, launch_sha, out,
+                                      object_name=object_name)
     buffer = learner_buffer(agent, horizon=spec.horizon, lanes=spec.train_lanes)
+    sampler_identity = hashlib.sha256(json.dumps(
+        buffer.get_sampler_rng_state(), sort_keys=True).encode()).hexdigest()
     counts, handles = optimizer_counts(agent)
     rows = []
     try:
@@ -518,7 +525,8 @@ def _fit(arm: str, payloads: dict, assignment_rng: np.random.Generator,
             write_json(out / "progress.json", progress)
             buffer.reset()  # Keeps its private sampler RNG advancing across rollouts.
         final_path = out / "raw" / f"final_{arm}.pt"
-        final_snapshot = _save_snapshot(agent, final_path, arm, spec.rollouts, launch_sha, out)
+        final_snapshot = _save_snapshot(agent, final_path, arm, spec.rollouts, launch_sha, out,
+                                        object_name=object_name)
         fit = {"arm": arm, "status": "complete", "config": b16._config_record(config),
                "initial_digest": initial_digest, "initial_optimizer_state_digest": initial_optimizers,
                "initial_normalizers": initial_normalizers, "initial_checkpoint": initial_snapshot,
@@ -535,6 +543,10 @@ def _fit(arm: str, payloads: dict, assignment_rng: np.random.Generator,
                           "executed_partner_rows": sum(row["counts"]["executed_partner_rows"] for row in rows),
                           "learner_inferred_rows": sum(row["counts"]["learner_inferred_rows"] for row in rows),
                           "partner_inferred_rows": sum(row["counts"]["partner_inferred_rows"] for row in rows)}}
+        if object_name != OBJECT:
+            fit.update(learner_seed=learner_seed,
+                       rollout_sampler_seed=int(agent.rollout_sampler_seed),
+                       initial_sampler_rng_sha256=sampler_identity)
         write_json(out / f"fit_{arm}.json", fit)
         return fit, {"payload": torch.load(final_path, map_location="cpu", weights_only=True),
                      "digest": fit["final_digest"]}

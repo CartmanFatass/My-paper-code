@@ -22,9 +22,10 @@ def _source_paths():
     return {i: Path(CHECKPOINT_ROOT) / row["tag"] / "F/raw/checkpoint_45.pt" for i, row in SOURCE.items()}
 
 
-def test_native_bounded_fit_and_evaluation_cell(tmp_path):
+def test_native_bounded_fit_and_evaluation_cell(tmp_path, current_main_source_validation):
     torch.set_num_threads(4)
-    sources, _ = validate_sources(_source_paths())
+    with current_main_source_validation():
+        sources, _ = validate_sources(_source_paths())
     (tmp_path / "raw").mkdir()
     spec = replace(runner.SPEC, horizon=10, train_lanes=2, eval_lanes=2, rollouts=1)
     progress = {"completed_rollouts": []}
@@ -95,8 +96,9 @@ def test_reducer_joint_world_blocks_and_specialization():
     assert result["J"]["pointwise_95_percentiles"]["M_minus_F2_partner3"][1] > 1
 
 
-def test_evaluation_later_lane_failure_preserves_returned_raw(tmp_path, monkeypatch):
-    sources, _ = validate_sources(_source_paths())
+def test_evaluation_later_lane_failure_preserves_returned_raw(tmp_path, monkeypatch, current_main_source_validation):
+    with current_main_source_validation():
+        sources, _ = validate_sources(_source_paths())
     (tmp_path / "raw").mkdir()
     spec = replace(runner.SPEC, horizon=2, eval_lanes=2)
     original = runner.native_components
@@ -120,8 +122,9 @@ def test_evaluation_later_lane_failure_preserves_returned_raw(tmp_path, monkeypa
     assert np.isfinite(trace["scalar_reward"][0]).all()
 
 
-def test_training_later_lane_failure_preserves_returned_raw(tmp_path, monkeypatch):
-    sources, _ = validate_sources(_source_paths())
+def test_training_later_lane_failure_preserves_returned_raw(tmp_path, monkeypatch, current_main_source_validation):
+    with current_main_source_validation():
+        sources, _ = validate_sources(_source_paths())
     (tmp_path / "raw").mkdir()
     spec = replace(runner.SPEC, horizon=10, train_lanes=2, eval_lanes=2, rollouts=1)
     original = runner.native_components
@@ -148,8 +151,9 @@ def test_training_later_lane_failure_preserves_returned_raw(tmp_path, monkeypatc
 
 @pytest.mark.parametrize("failure_mode", ["accounting", "finite"])
 def test_post_update_validation_failure_retains_actual_counts_and_collection(
-        tmp_path, monkeypatch, failure_mode):
-    sources, _ = validate_sources(_source_paths())
+        tmp_path, monkeypatch, failure_mode, current_main_source_validation):
+    with current_main_source_validation():
+        sources, _ = validate_sources(_source_paths())
     (tmp_path / "raw").mkdir()
     spec = replace(runner.SPEC, horizon=10, train_lanes=2, eval_lanes=2, rollouts=1)
     original = runner.update_learner

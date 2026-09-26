@@ -40,8 +40,9 @@ def _reference_returns(rewards, values, dones, gamma=.99, gae=.95):
     return advantage + values
 
 
-def test_native_partner_collector_compact_gae_sampler_and_real_optimizer(tmp_path):
-    sources, _ = validate_sources(_source_paths())
+def test_native_partner_collector_compact_gae_sampler_and_real_optimizer(tmp_path, current_main_source_validation):
+    with current_main_source_validation():
+        sources, _ = validate_sources(_source_paths())
     torch.set_num_threads(4)
     seed_rng(92_526_001)
     envs = make_envs(2, 81, 6, 20)

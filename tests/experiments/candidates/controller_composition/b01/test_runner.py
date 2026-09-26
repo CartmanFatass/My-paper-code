@@ -31,9 +31,10 @@ def _source_paths():
 
 
 @pytest.fixture(scope="module")
-def sources():
+def sources(current_main_source_validation):
     paths = _source_paths()
-    payloads, dependencies = validate_sources(paths)
+    with current_main_source_validation():
+        payloads, dependencies = validate_sources(paths)
     assert len(dependencies) >= 20
     return payloads
 
@@ -128,12 +129,14 @@ def test_route_rejects_shortcut_and_keeps_native_roles():
         route_actions(a[:, :3], b[:, :3])
 
 
-def test_checkpoint_and_config_mismatch_are_rejected_before_runtime(sources, monkeypatch, tmp_path):
+def test_checkpoint_and_config_mismatch_are_rejected_before_runtime(
+    sources, monkeypatch, tmp_path, current_main_source_validation,
+):
     from experiments.candidates.controller_composition.b01 import runner
     paths = _source_paths()
     paths[1] = tmp_path / "wrong.pt"
     paths[1].write_bytes(b"invalid checkpoint")
-    with pytest.raises(ValueError, match="checkpoint hash mismatch"):
+    with current_main_source_validation(), pytest.raises(ValueError, match="checkpoint hash mismatch"):
         runner.validate_sources(paths)
     paths[1] = _source_paths()[1]
     load = runner.torch.load
@@ -142,7 +145,7 @@ def test_checkpoint_and_config_mismatch_are_rejected_before_runtime(sources, mon
         payload["config"] = {**payload["config"], "n_agents": 3}
         return payload
     monkeypatch.setattr(runner.torch, "load", changed_config)
-    with pytest.raises(ValueError, match="checkpoint/config mismatch"):
+    with current_main_source_validation(), pytest.raises(ValueError, match="checkpoint/config mismatch"):
         runner.validate_sources(paths)
 
 
