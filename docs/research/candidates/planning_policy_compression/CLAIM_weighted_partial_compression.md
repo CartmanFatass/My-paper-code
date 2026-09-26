@@ -1,8 +1,9 @@
 # Prospective claim: recurrence of the fixed WBC completion increment
 
-2026-09-25. **Proposed for Pro criticism; not yet selected for execution.** The DM will
-record the decision and any pre-execution revision before freezing this claim. This is a
-new batch; exploratory B01 is excluded from the confirmation sample and decision rule.
+2026-09-25. **Selected and scientifically frozen after the complete Pro criticism** at
+`af90be1e9e2bd06816e63ec64ce38e6ad740031f`, with the decision recorded in NOTES.md.
+Engineering implementation/review and native admission precede execution. This is a new
+batch; exploratory B01 is excluded from the confirmation sample and decision rule.
 
 ## Claim, unit and scope
 
@@ -12,6 +13,11 @@ completed jobs over matched ordinary BC in an independently generated training/e
 block. A block contains one independently trained BC/WBC pair and one fresh shared panel
 of 256 H96 deployment contexts. The probability is over the declared training and deployment
 sampling procedure, not over an arbitrary host, teacher, trained checkpoint or UAV task.
+
+Write this probability as `q_256 = Pr_(T,E){D_256(T,E)>0}`, where T is the full paired
+training realization and E is its independent panel of 256 deployment contexts. It is not
+`Pr_T{E_X[C_W(T)(X)-C_B(T)(X)]>0}`: finite deployment-panel sampling and ties are part of
+q_256. Changing panel size would change the estimand.
 
 The formal primary claim concerns the probability of a strictly positive block effect,
 not a lower bound on expected effect magnitude, uniform-world improvement or teacher
@@ -34,7 +40,7 @@ same merged data. WBC−BC identifies the weighting intervention inside this pro
 it does not compare two independently collected imitation algorithms. All approximate
 teacher/filter limitations recorded in B01 remain in force.
 
-## Fixed batch proposed
+## Fixed batch
 
 Five new independent blocks; five fits per arm, ten started fits total. Each fit is the
 same 40+40 epochs / 960 optimizer updates / 5,898,240 processed agent time rows as B01.
@@ -57,6 +63,8 @@ labels exactly as in B01. Student evaluation has no shadow filter or teacher que
 ## Endpoint, uncertainty and fixed decision
 
 For each block b, d_b = mean_context(completed_jobs_WBC − completed_jobs_BC).
+Determine its sign from the integer completed-job total difference, without a floating
+tolerance or rounding-based tie rule.
 Let S be the number of strictly positive d_b among all five blocks; ties count as failures
 for this test, so there is no data-dependent sample-size reduction. Test the one-sided
 null Pr(d_b > 0) <= 1/2 with the exact binomial upper-tail probability at n=5, p=1/2.
@@ -69,6 +77,15 @@ on Pr(d_b>0) (Clopper–Pearson; zero when S=0). This is intentionally a narrow 
 claim. The five-block mean is descriptive and does not acquire a distribution-free
 mean-effect interval from the sign test. Within-panel context summaries are conditional
 descriptions, never substituted for between-block training uncertainty.
+
+Even five positive blocks yield only the one-sided lower bound .05^(1/5)=.54928027.
+Four positives give p=.1875 and do not confirm. The test's power is q_256^5: at hypothetical
+q_256=.7/.8/.9 it is .16807/.32768/.59049; these are operating characteristics, not estimated
+success probabilities for this batch. Non-confirmation does not establish q_256<=.5, zero
+mean effect, irreproducibility or equivalence. A high positive-block probability can coexist
+with a negative expected gain when rare losses are large. Report the fixed sign verdict and
+the complete-use/cost judgment separately. The [R stats exact-binomial documentation](https://www.stat.ethz.ch/R-manual/R-devel/library/stats/html/binom.test.html)
+supports the exact test/Clopper–Pearson procedure; the numbers above follow its fixed formulas.
 
 For every block also report BC−AF, WBC−AF, both students−teacher, teacher−AF and all native
 service/wait/conflict/packet components and adverse contexts. These contextual comparisons
@@ -101,4 +118,5 @@ native admission and exact output tag are frozen with accepted implementation be
 
 ## Result
 
-Not run. Awaiting the focused scientific decision and fixed-plan criticism in NOTES.md.
+Not run. Scientific plan selected; B02 tag `b02_confirm_s925951_20260925`.
+Append the eventual result without rewriting this fixed plan.
