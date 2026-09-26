@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-25T04:17:16.295481Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2fc6a6f7e27347e983ce2e7589756d8c/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2fc6a6f7e27347e983ce2e7589756d8c/scripts/run_spatial_demand_generalization_a2.py",
+    "--output",
+    "/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101",
+    "--",
+    "--seed",
+    "260925101",
+    "--launch-sha",
+    "d22b608e8d063ceac5c944426bd35a2289c5ebf6",
+    "--out",
+    "/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101"
+  ],
+  "claim_key": "2f5e96dfbf13660f91219817c5a01198a6725b919d74e9e85425d86c37272446",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/2f5e96dfbf13660f91219817c5a01198a6725b919d74e9e85425d86c37272446.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2fc6a6f7e27347e983ce2e7589756d8c/scripts/run_spatial_demand_generalization_a2.py",
+    "--seed",
+    "260925101",
+    "--launch-sha",
+    "d22b608e8d063ceac5c944426bd35a2289c5ebf6",
+    "--out",
+    "/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101"
+  ],
+  "command_sha256": "d74112d2de216ebb2c1ad3b49728e9c013b18d1c5beaa489b6cc2e7e3b7cf293",
+  "control_observation": {
+    "observed_at": "2026-09-25T04:17:16.160662Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "ee734907ecc936b27a99d83597d613efaf8bb9bf"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-25T04:17:16.173502Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2fc6a6f7e27347e983ce2e7589756d8c",
+  "direction": "spatial_demand_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_spatial_demand_generalization_a2.py",
+    "--seed",
+    "260925101",
+    "--launch-sha",
+    "d22b608e8d063ceac5c944426bd35a2289c5ebf6"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/2f5e96dfbf13660f91219817c5a01198a6725b919d74e9e85425d86c37272446.json",
+  "output_root": "/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101",
+  "preflight": "/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 609757,
+      "session_id": 609757,
+      "start_ticks": 66686656
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 609757,
+    "process_group_id": 609757
+  },
+  "process_exit": "/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 609758,
+      "session_id": 609757,
+      "start_ticks": 66686659
+    },
+    "pid": 609758,
+    "process_group_id": 609757,
+    "supervisor_pid": 609757
+  },
+  "schema_version": 1,
+  "sha": "d22b608e8d063ceac5c944426bd35a2289c5ebf6",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2fc6a6f7e27347e983ce2e7589756d8c",
+  "stderr": "/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101/stderr.log",
+  "stdout": "/home/wu/hmasd-worktrees/spatial-a2-01a0d6ab/runs/spatial_demand_generalization/s1_spatial_coverage_a2_s260925101/stdout.log"
+}

@@ -1,0 +1,126 @@
+{
+  "config": {
+    "contexts": 4,
+    "matched_epsilon": 0.2,
+    "source_state_after_macros": 2048,
+    "target_records_per_fit": 256
+  },
+  "continuations": [
+    "R_on_F_E_history",
+    "F_on_R_E_history"
+  ],
+  "decision_fits": 2,
+  "environment_ticks": 0,
+  "evidence_commit": "6ab8db786a2dc2397d883e8476ccb0303b059f0e",
+  "gradient_optimizer_calls": 0,
+  "input_manifest_sha256": "ce1ff62b8d5c0ee2113faf3861cb19f3c2d5c7920aba8746fc4cbd4409e6e620",
+  "launch_sha": "52cc7b71a0fd9433a1f7c093e8c77076f8732abc",
+  "law_fits": 0,
+  "new_preupdate_q_predictions": 512,
+  "object": "skill_drift_history_replay_b08",
+  "reduction": {
+    "all_values_role": "off-collector matched-epsilon recommendation readout; diagonals are reused B07 panels",
+    "by_endpoint": {
+      "first64": {
+        "matched_epsilon_2x2": {
+          "F_history": {
+            "F": 0.5946875,
+            "R": 0.6032500000000001
+          },
+          "R_history": {
+            "F": 0.6124375,
+            "R": 0.610125
+          }
+        },
+        "per_history_response_minus_full": {
+          "F_history": 0.008562500000000028,
+          "R_history": -0.0023124999999999396
+        },
+        "per_method_R_history_minus_F_history": {
+          "F": 0.017749999999999932,
+          "R": 0.0068749999999999645
+        }
+      },
+      "full": {
+        "matched_epsilon_2x2": {
+          "F_history": {
+            "F": 0.635140625,
+            "R": 0.6261406249999999
+          },
+          "R_history": {
+            "F": 0.637375,
+            "R": 0.6351562499999999
+          }
+        },
+        "per_history_response_minus_full": {
+          "F_history": -0.009000000000000119,
+          "R_history": -0.002218750000000158
+        },
+        "per_method_R_history_minus_F_history": {
+          "F": 0.0022343750000000107,
+          "R": 0.009015624999999972
+        }
+      },
+      "late64": {
+        "matched_epsilon_2x2": {
+          "F_history": {
+            "F": 0.649,
+            "R": 0.649
+          },
+          "R_history": {
+            "F": 0.649,
+            "R": 0.649
+          }
+        },
+        "per_history_response_minus_full": {
+          "F_history": 0.0,
+          "R_history": 0.0
+        },
+        "per_method_R_history_minus_F_history": {
+          "F": 0.0,
+          "R": 0.0
+        }
+      }
+    },
+    "context_contribution_definition": "sum of row-level matched-epsilon value contrast in context divided by all target rows",
+    "context_contributions": {
+      "0": {
+        "R_history_minus_F_history_for_F": 0.0033593749999999965,
+        "R_history_minus_F_history_for_R": 0.0,
+        "R_minus_F_on_F_history": 0.004031249999999996,
+        "R_minus_F_on_R_history": 0.0006718749999999993
+      },
+      "1": {
+        "R_history_minus_F_history_for_F": 0.0003437500000000003,
+        "R_history_minus_F_history_for_R": 0.002406250000000002,
+        "R_minus_F_on_F_history": -0.0027500000000000024,
+        "R_minus_F_on_R_history": -0.0006875000000000006
+      },
+      "2": {
+        "R_history_minus_F_history_for_F": -0.00146875,
+        "R_history_minus_F_history_for_R": 0.006609375000000001,
+        "R_minus_F_on_F_history": -0.01028125,
+        "R_minus_F_on_R_history": -0.0022031250000000002
+      },
+      "3": {
+        "R_history_minus_F_history_for_F": 0.0,
+        "R_history_minus_F_history_for_R": 0.0,
+        "R_minus_F_on_F_history": 0.0,
+        "R_minus_F_on_R_history": 0.0
+      }
+    },
+    "no_actual_collector_or_sampled_reward_claim": true
+  },
+  "sampled_rewards": 0,
+  "scalar_policy_reductions": 1024,
+  "scientific_source": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+  "seed": 95301,
+  "settings": {
+    "full": "fingerprint_full__hybrid__prior2",
+    "response": "response_all__response__prior2"
+  },
+  "source_fits": 0,
+  "stage": "prospective_diagnostic",
+  "status": "COMPLETE",
+  "target_records_read": 512
+}

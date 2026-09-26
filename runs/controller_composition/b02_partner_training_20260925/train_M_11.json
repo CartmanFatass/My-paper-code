@@ -1,0 +1,208 @@
+{
+  "rollout": 11,
+  "status": "complete",
+  "world": {
+    "rollout": 11,
+    "lane_world_seeds": [
+      92531100,
+      92531101,
+      92531102,
+      92531103,
+      92531104,
+      92531105,
+      92531106,
+      92531107,
+      92531108,
+      92531109,
+      92531110,
+      92531111,
+      92531112,
+      92531113,
+      92531114,
+      92531115
+    ],
+    "states": {
+      "shape": [
+        16,
+        133
+      ],
+      "dtype": "float32",
+      "sha256": "7e7604d5719837d03054a059167e60d2cacd9e053ff540ecb9b4bd3026e22003"
+    },
+    "observations": {
+      "shape": [
+        16,
+        6,
+        104
+      ],
+      "dtype": "float32",
+      "sha256": "9efb2402c3f407d865ce88a8a46e4ba68d01add6889437ebfd588154a91cc97a"
+    },
+    "uav_positions": {
+      "shape": [
+        16,
+        6,
+        3
+      ],
+      "dtype": "float64",
+      "sha256": "e8b2db866886b2cea97d88db23af26b27acf7c7395264bf5af0f69404ecca23c"
+    },
+    "user_positions": {
+      "shape": [
+        16,
+        50,
+        2
+      ],
+      "dtype": "float64",
+      "sha256": "400377586a89e9bb4bd65a856bf49f77c2194edc8c714f7108d30d5e32b8bab9"
+    },
+    "reset_convention": "constructor then explicit reset(seed=base+lane)",
+    "raw_artifact": {
+      "path": "raw/reset_M_11.npz",
+      "sha256": "77d62d656f81173a9f47e517432718014b2e86dee860b87cc5a11d26337db089",
+      "bytes": 27663
+    }
+  },
+  "assignment": [
+    1,
+    2,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    2,
+    1,
+    1,
+    2,
+    2,
+    1
+  ],
+  "source_digest_before": {
+    "1": "f07e59a13b21df2d095af81d0831e34c2a9a4d9b335d7d7599bce7c06fb3ce8e",
+    "2": "5df0955de03809678ae80e6488974ab2afb0f24118fde4c2c8112da28a689ded"
+  },
+  "source_digest_after": {
+    "1": "f07e59a13b21df2d095af81d0831e34c2a9a4d9b335d7d7599bce7c06fb3ce8e",
+    "2": "5df0955de03809678ae80e6488974ab2afb0f24118fde4c2c8112da28a689ded"
+  },
+  "per_lane_scalar_return": [
+    33.59516815746923,
+    26.357336438011277,
+    36.92607911827053,
+    37.71421831317756,
+    34.298704895024144,
+    31.59539071820568,
+    39.37750643897712,
+    33.096170747442166,
+    26.753251439096122,
+    40.172642751258756,
+    28.548081587336526,
+    33.9621583913356,
+    33.66243233719228,
+    38.9543501360372,
+    33.23254384371215,
+    34.45192329217958
+  ],
+  "per_lane_J": [
+    0.4031420178896308,
+    0.31628803725613536,
+    0.4431129494192463,
+    0.45257061975813073,
+    0.4115844587402897,
+    0.3791446886184682,
+    0.4725300772677255,
+    0.39715404896930595,
+    0.32103901726915346,
+    0.4820717130151051,
+    0.3425769790480383,
+    0.40754590069602725,
+    0.40394918804630736,
+    0.4674522016324464,
+    0.3987905261245458,
+    0.413423079506155
+  ],
+  "per_lane_served_per_step": [
+    27.43,
+    21.826,
+    30.192,
+    31.0,
+    27.544,
+    25.894,
+    32.262,
+    26.586,
+    21.736,
+    32.964,
+    22.644,
+    27.932,
+    27.916,
+    31.846,
+    26.968,
+    28.346
+  ],
+  "counts": {
+    "team_steps": 8000,
+    "environment_step_attempts": 8000,
+    "learner_inference_calls": 500,
+    "learner_inferred_rows": 48000,
+    "partner_inference_calls": 1000,
+    "partner_inferred_rows": 96000,
+    "executed_learner_rows": 24000,
+    "executed_partner_rows": 24000
+  },
+  "raw_artifact": {
+    "path": "raw/train_M_11.npz",
+    "sha256": "9c811feb65c3612c413b5bd150165f003c75d42fe57a037ebbe12323c60cd71c",
+    "bytes": 1236879
+  },
+  "update_audit": {
+    "time_steps": 500,
+    "expected_sequences_per_epoch": 2400,
+    "minibatches": 1125,
+    "sampled_sequences": 36000,
+    "learner_roles": [
+      0,
+      1,
+      2
+    ],
+    "physical_n": 6,
+    "update_n": 3,
+    "batch_size_min": 32,
+    "batch_size_max": 32,
+    "batch_size_histogram": {
+      "32": 1125
+    },
+    "chunk_length_min": 10,
+    "chunk_length_max": 10,
+    "chunk_length_histogram": {
+      "10": 1125
+    },
+    "raw_artifact": {
+      "path": "raw/sampler_M_11.npz",
+      "sha256": "dda2556f2d85223bc1d4617d26c14df0f800af1e322b4cbf5fe041acf61a166a",
+      "bytes": 488
+    }
+  },
+  "losses": [
+    -0.262494832277298,
+    -0.008340439759194851,
+    0.008511179126799107,
+    5.253316760063171,
+    0.06783724576234818,
+    0.06783724576234818,
+    0.0,
+    0.0,
+    5.2904486656188965
+  ],
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 1125,
+    "discoverer_critic": 1125,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "parameter_normalizer_digest_after": "5a18b5c588d77897022461eaec8568cfe31b1a868c43ba02816bdae25e8ed84c"
+}

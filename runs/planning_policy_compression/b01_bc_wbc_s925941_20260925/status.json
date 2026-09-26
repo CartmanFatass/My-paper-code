@@ -1,0 +1,15 @@
+{
+  "calibration_contexts": 1280,
+  "calibration_fits": 1280,
+  "calibration_moves": 5120,
+  "collection_team_ticks": 98304,
+  "completed_batches": 160,
+  "evaluation_team_ticks": 147456,
+  "executed_collection_team_ticks": 98304,
+  "executed_evaluation_team_ticks": 147456,
+  "optimizer_updates": 3840,
+  "policy_fits_completed": 4,
+  "policy_fits_started": 4,
+  "processed_agent_time_rows": 23592960,
+  "state": "COMPLETE"
+}

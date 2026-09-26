@@ -1,0 +1,209 @@
+# Draft claim for Pro critique: ordered ordinary roster training
+
+Prepared 2026-09-24 by the current agent_count_generalization DM after B19.
+**Draft for the actual confirmation decision; no confirmation operation is admitted.**
+The DM will append its response to criticism and finalize the selected plan before execution.
+This draft does not extend B19 or change the frozen B15 contract.
+
+## Claim and scope
+
+For the native S1 uniform/free-space host with 50 users, capacity 10, fixed within-episode
+rosters and the specified LOCAL1 learner, the exact ordered mixed training program
+M=[4,6,8]×15 has positive expected final45 native J and served-users-per-step differences
+relative to F=45×N6, at **each of N5 and N7**, conditional on the fixed new evaluation
+panel below and averaging over fresh independent training blocks.
+
+The claim concerns the complete ordered program at equal team/UAV training exposure, not a
+pure count-support mechanism. Native reward/N, per-N optimizer weighting, order, last-N8
+recency and finite optimization remain treatment components. N5/N7 are untrained exact
+counts for both arms and interpolation inside M's trained [4,8] range. No N4/N8 deployment,
+outside-range, skill-causality, arbitrary-world, universal-MARL or no-local-loss claim.
+No practical minimum improvement is claimed; this draft uses zero directional margins,
+not B15's unrelated service margin. N6 cost is fully reported but not added post hoc to
+rescue or overturn the four fixed primary tests; no N6 noninferiority claim is made.
+
+## Exposure and comparator
+
+B19 is one exposed development pair with positive mean M−F J/S at N5,N7,N6, and 2/2/1 paired
+adverse worlds. It and all B01–B18 exposure, the incomplete B18 attempt and B15 inconclusive
+confirmation remain in the notebook. None is included in the new confirmation estimates.
+
+F is the competent LOCAL1 fixed-N6 control, not SET or an untrained actor. Use the identical
+B19 native environment/learner path: local104 actor, central133 critic/MAX8, trainable single
+category FiLM, task-only native J/N, entropy .05, raw Gaussian PPO/logprobs with clipped
+execution, k10, hidden256/8 heads/2 layers, 15 epochs, seqbatch32, coordbatch1280,
+obs/state normalization off and unchanged scalar value normalization. No learning-rate,
+entropy, architecture, schedule, checkpoint or family search. Commit exact B20 implementation
+and prospective source identity before any new execution, preserving the B19 science.
+
+## Fixed new batch proposed for critique
+
+Three fresh independent paired blocks, six new fits total; within each block F then M, each
+from the same actual new initialization and matched initial optimizer/normalizer/runtime/RNG.
+Learning and sampler states persist throughout each arm. F has 45 N6 rollouts, M [4,6,8]×15;
+16 lanes × H500 ×45, 360,000 team/2,160,000 UAV training steps per arm and 45 updates.
+Expected actor and critic optimizer calls are 101,250 each per arm; measure them.
+
+| Block | Learner seed | Training-world base |
+| --- | --- | --- |
+| 1 | 1016101 | 3246100 |
+| 2 | 1017101 | 3346100 |
+| 3 | 1018101 | 3446100 |
+
+Training world = block base +100×rollout +lane, rollout1..45, lane0..15; reset/construction
+preserves learner RNG. Common N6 scenes between arms match; record completed reset scenes
+before collection. Seeded world construction preserves the ongoing learner RNG; private sampler state persists as in B19.
+
+A new fixed evaluation panel is shared across all three blocks and both arms: N5 seeds
+2446500..2446531, N7 2446700..2446731, N6 2446600..2446631; 32 worlds each, H500, this order.
+Runtime evaluation seed is that N's base +51. Evaluate one genuine common initialization
+per block after full identity checks, then F45 and M45, with no updates during evaluation.
+Nine actual panels/144,000 evaluation team steps per block; 27 panels/432,000 total. The
+common initial is actually evaluated, not generated algebraically or inherited from B19.
+
+Total: **six new fits**, 2,160,000 training +432,000 evaluation =2,592,000 team steps;
+15,552,000 UAV steps. Use the independent local_linux CPU path already exercised in B19,
+with the same configured interpreter and threads; its 131.964485min per pair gives about
+6.6h of runner time for three sequential pairs, an estimate rather than a stopping rule.
+Actual node admission still applies. Bulk retention is about 3.3GB before replication of
+outputs, plus artifact reading/storage and implementation/review cost. No extra sweep or
+interim evaluation/endpoint selection is included.
+
+## Estimand and fixed proposed reading
+
+For training block b and N in {5,7}, compute D_b,N,J and D_b,N,S as the arithmetic mean of
+32 paired final45 world differences M−F. The independent unit is the training block, n=3.
+For each of the four co-primary quantities report all three D_b values, their mean and
+Student t two-sided 95% interval with df2: mean ±t(.975,2)×s/√3. These are model-based
+intervals over training blocks conditional on this fixed panel, assuming approximately
+normal block effects; n3 cannot validate that approximation or establish precision.
+Worlds/time steps do not increase n; no world bootstrap stands in for training variability.
+
+The **single conjunctive claim** is supported only if all four lower limits are strictly
+above zero. This is an intersection-union reading of a joint all-positive claim; do not
+advertise the four individual intervals as simultaneous 95% coverage. Any failed lower
+limit yields inconclusive for this claim, preserving positive/negative means and intervals;
+no equivalence/ineffectiveness conclusion. A clear adverse estimate is reported as such.
+There is no pooled N statistic, post hoc threshold, rounding pass, or added fourth block.
+
+Also report all raw per-world initial/final J,C,Q,P,E,S,U,height, both own-learning changes,
+all adverse worlds, and N6 tradeoffs per block. Common initialization makes differences in
+own-learning changes equal endpoint differences algebraically, not independent evidence.
+Retain actual optimizer counts, source/config/identity, motion/clip diagnostics and costs;
+diagnostics are not additional efficacy gates or causal mechanisms.
+
+## Stopping and interpretation
+
+Execute the fixed three-pair batch once only if the DM adopts this plan after critique.
+No early score stop, interim checkpoint, seed replacement, horizon extension or automatic
+retry. An incomplete arm is a technical failure; preserve completed/partial outputs and
+started-fit cost, and mark the fixed confirmation incomplete. Any repair/new attempt is a
+separate decision rather than a hidden completion of this batch.
+
+A supported result is limited repeatable utility of this exact ordered ordinary program
+on the fixed new panel and host. It does not resolve order versus support or the omitted
+claims. An inconclusive result ends this batch without relabeling exposed instances as
+fresh evidence. The DM separately assesses whether an additional different question is
+worth its cost; success does not require an architecture or another confirmation.
+
+## 2026-09-24 — Adopted B20 plan after the actual Pro critique
+
+The DM adopts the complete numerical design above, following the complete same-question
+Pro answer in NOTES. The draft remains intact as selection history. The following
+clarifications govern interpretation; there is no change to seeds, worlds, programs,
+endpoints, six-fit cost, strict four-test rule or stopping. This is the prospective
+confirmation decision, not evidence of successful execution or node admission.
+
+Let xi be the complete fresh training-block realization (initialization, training scenes,
+learner and sampler randomness), and W_N the fixed 32-world evaluation panel. For Y in
+{J,S}, D_b,N,Y = mean over w in W_N of Y(M45(xi_b),w;N) - Y(F45(xi_b),w;N).
+The target is mu_N,Y(W_N) = E_xi[D_b,N,Y(W_N)], for N5 and N7. It is conditional on
+these worlds, not their arbitrary-world population and not just the finite average of
+three integer seeds. Treating the disjoint, prospectively fixed pseudorandom addresses
+as independent identically distributed block realizations is an explicit model
+assumption. Distinct seeds alone do not prove it. Blocks use fresh processes and fresh
+model, optimizer, normalizer, buffer and RNG state. Each arm retains its own learning
+state throughout the 45 rollouts, including across roster changes.
+
+Use the three unrounded block effects, sample SD with ddof=1, and
+t(.975,2)=4.302652729696142. The two-sided 95% interval is mean ± t*s/sqrt(3).
+The four lower bounds must each be strictly positive. Under valid iid-normal component
+tests, the all-positive intersection-union decision has false-support probability at
+most .025; it needs no independence between the four components. With only approximate
+normality this is nominal model-based control, not a distribution-free guarantee.
+The marginal intervals are not a simultaneous 95% confidence region. n=3 cannot check
+the distribution assumption or establish adequate power; the half-width is 2.484137712
+times sample SD. No future SD or pass probability is inferred from B19.
+
+If all four pass, report support for four positive conditional program means under the
+declared model, with all block values and intervals. Replace the draft's "repeatable
+utility" shorthand with this wording: no next-run success probability or stable
+per-instance ranking is established. Zero margins do not establish practical adoption.
+If any fails, the joint claim is not established: intervals crossing zero are unresolved,
+and intervals wholly negative are adverse evidence. Do not select passing components to
+rescue the conjunction. A legitimate weak F is retained without replacement.
+
+Own-learning changes, N6 tradeoffs and all adverse worlds are fully reported separately
+from statistical support and technical validity. They are not extra statistical gates;
+if both arms degrade from initialization, an M−F advantage does not establish useful
+learning. Legal low scores or nonmonotone training are not technical failures. A missing
+or invalid arm makes this fixed confirmation incomplete; preserve cost and evidence,
+stop remaining launches and decide any repair prospectively, without automatic retries.
+
+Execute blocks 1, 2 and 3 in that order as three separate sequential native-admitted
+pair processes, F then M within each. The whole batch is fixed before block 1. Per-cell
+collection checks validity, not whether the score warrants another cell. The artifact-only
+three-block reducer adds zero interactions or optimizer calls. Training totals are
+2.16M team /12.96M UAV steps; evaluation totals 432k team /2.592M UAV steps, 864 episodes
+and 13,500 batched policy calls. Actor and critic each total 607,500 optimizer calls;
+zero high-level updates does not mean zero coordinator inference. B19's 6.598h projected
+three-pair wall and about 3.3GB outputs (about 6.6GB with a second copy) are estimates;
+implementation, review, complete reading and temporary/old storage add cost. Its 4.025GiB
+peak is for one complete pair process, not evidence that three pairs can run in parallel.
+
+
+### Engineering input binding before execution
+
+All three sequential pair invocations use one identical full published Git input SHA via
+native --snapshot; later notebook commits do not change the accepted input. The reducer
+requires this shared SHA as well as the recorded file hashes and fixed learner/config
+contract. This closes the transitive-source identity gap identified in independent
+engineering review without changing any numerical condition or statistical rule.
+
+## 2026-09-25 — Fixed B20 result
+
+All three prospective pairs completed and passed full native-artifact, source,
+initialization/world/optimizer and raw-trajectory checks, plus independent review.
+All used input `424bbe4db1351db70d73560ece913150c2b20ed4`. No arm was replaced,
+no fourth block was added, and the original endpoint and decision rule were retained.
+
+| M−F quantity | Block 1 | Block 2 | Block 3 | Mean | Fixed 95% df2 t interval | Reading |
+| --- | --- | --- | --- | --- | --- | --- |
+| N5 J | -.034130940 | -.105074230 | -.047527670 | -.062244280 | [-.155875895, +.031387335] | unresolved |
+| N5 service | +.6670625 | -6.7913125 | -1.1688750 | -2.431041667 | [-12.084605990, +7.222522657] | unresolved |
+| N7 J | -.104765005 | -.067223337 | -.078481855 | -.083490066 | [-.131347985, -.035632146] | adverse |
+| N7 service | -5.3653125 | -4.3519375 | -3.4800000 | -4.399083333 | [-6.742966789, -2.055199877] | adverse |
+
+**The joint claim is not established:** none of the four unrounded lower bounds is
+strictly positive. Both N7 intervals are wholly negative under the specified conditional
+fixed-world, approximate iid-normal training-block model. N5 intervals cross zero;
+their signs remain unresolved. n=3 does not validate the model or show next-run
+reliability; the marginal intervals are not simultaneous coverage. No equivalence,
+arbitrary-world claim or pure count-support/order attribution follows.
+
+All six fits have positive mean own J/service learning at N5/N7/N6; all local losses
+remain recorded. M−F adverse J-or-service worlds at N5/N7/N6 are26/31/28,32/29/31,
+30/31/29 in the three blocks. N6 descriptive effects are negative in all three, with
+mean−.077489569 J/−3.673250 served users per step; N6 does not alter the primary rule.
+The complete raw components, own-learning arrays, training curves and adverse worlds
+are in the [full notebook reading](NOTES.md#2026-09-25--b20-complete-joint-claim-not-established-n7-adverse-and-n5-unresolved)
+and [fixed aggregate](../../../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_aggregate_20260925/summary.json).
+Aggregate SHA256: `14ca9eded85178d7b60272fc7019e816d2ee522cf4158a6b0e1d32c22f5658c2`.
+
+Actual production cost: six fits,2.16M training plus432k evaluation team steps
+(2.592M total;15.552M UAV steps),270 updates and27 panels/864 evaluation episodes.
+Actor and critic each used607,500 optimizer calls. Summed pair runner wall is
+21,550.990698s (5.986386h); highest complete-process RSS is4.266331GiB.
+Engineering, consultation, reading and retention costs are additional; full recovery
+locations and hashes are in NOTES. This batch is complete; any different follow-up
+requires its own scientific reason and prospective comparison, preserving this result.

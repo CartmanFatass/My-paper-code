@@ -1,0 +1,11 @@
+{
+  "F_on_R_E_history/state.npz": "6a4450d4dedc8ba1587ef1f990a62ac3140504b253f956617665cf5078b12f7e",
+  "F_on_R_E_history/summary.json": "b1354e04630e99178ef429b383c58e5cc212fcfdfcdd3bc78a73f7be42f3873f",
+  "F_on_R_E_history/trajectory.npz": "0687396e46ee6c90cc563436f1264e5d513cabf9e815f853d0aa86f6824391e2",
+  "R_on_F_E_history/state.npz": "c313b9df2f1f4a4bcbddb83a2cff0e7cd821614c4b0a5089513efd88c7249522",
+  "R_on_F_E_history/summary.json": "34e36a5d585c28755ffd818c16196e5b38c258a85ce0dc61a4124004dd718cb4",
+  "R_on_F_E_history/trajectory.npz": "98f165adb56aaa3d95b7dc858eb0ebd62bb541ddc9b8dd6146a5e1ac219237a5",
+  "reduction.json": "e2144482e351a5a9948db47bdba3d443f69ac7ca5235920a59741ff62a02856d",
+  "reused_diagonals.npz": "2edefc5782fb9010df440fd021cf0a2bf1263c078963b3d6ee68273180856e93",
+  "summary.json": "50c57bb61c41b3c43916c9be46d5eab1309a5df3c808ab0760deb4543a11689c"
+}

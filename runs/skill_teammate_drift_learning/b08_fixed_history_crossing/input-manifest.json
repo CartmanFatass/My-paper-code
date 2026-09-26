@@ -1,0 +1,48 @@
+{
+  "evidence_commit": "6ab8db786a2dc2397d883e8476ccb0303b059f0e",
+  "input_root": "runs/skill_teammate_drift_learning/b07_own_collection_exploration",
+  "plan_commit": "9d7f9a4d9624bec3a5ea69e88f04e1d9912ade78",
+  "root_summary_sha256": "b3f9cae1d6bcffde868b659db345a8eac4952768ffc6f2c785e021c014cf4fcb",
+  "scientific_source": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+  "seeds": {
+    "95301": {
+      "artifact_manifest_sha256": "ce1ff62b8d5c0ee2113faf3861cb19f3c2d5c7920aba8746fc4cbd4409e6e620",
+      "verified_required_artifacts": {
+        "F_E/state.npz": "550339bbd6f55393e7b0cd5abe15f6dc01d73f9232a04587c2f12f42b5d435c7",
+        "F_E/summary.json": "5f70b0aba5a85403068509ae95fde58a126d0b32f67b82550e55cce03e7764e6",
+        "F_E/trajectory.npz": "e9cc509e34295a740fe630cc15190c257813d1e084a5a92f48a03d21011a4ca9",
+        "R_E/state.npz": "53000c9cdf89766efe5e2bf04032fb952b1510600075c47895823a365ff1d67d",
+        "R_E/summary.json": "ce7864c3146522f6cd63ea679da991a7b668b87165818bfa9f500d27d11c9ba3",
+        "R_E/trajectory.npz": "b8599913ff83a2ef3e6eba77d572f3f8cdaab58e324f4fd94a5509d1a846ae7e",
+        "artifacts.json": "ce1ff62b8d5c0ee2113faf3861cb19f3c2d5c7920aba8746fc4cbd4409e6e620",
+        "summary.json": "9c7a203eb45610c4e1fd495dc72de3c7ab303130904d61b7ab03932d0cf19e44"
+      }
+    },
+    "95302": {
+      "artifact_manifest_sha256": "2ab5f14494eeaa231a57ad4b1e3fbd35837e9b2d7a8ef3d0033d0f767feddf37",
+      "verified_required_artifacts": {
+        "F_E/state.npz": "5ce26a1b44c1acbe858019660b57d3631f2770329051718707977706027849de",
+        "F_E/summary.json": "7422eb113d64c12f3264ad0e9b9aab06a30cfe54986be30b4f9e7fe897da0c92",
+        "F_E/trajectory.npz": "69cb414a704ef482abcbd0c45923ecabcb7698143a667c69ab4031fb6e2741c9",
+        "R_E/state.npz": "43fdcc4a15d256c8df37a5e4ca11c386e1171170864a04d946e8cdedc833caf7",
+        "R_E/summary.json": "06df3f841c8db90486a05926c9cbd82d1d32f22e3c421641f1256299ded87af5",
+        "R_E/trajectory.npz": "0d538ef3782d2af810337474377205d95a6642acd45b01209a8836d9de93f5f9",
+        "artifacts.json": "2ab5f14494eeaa231a57ad4b1e3fbd35837e9b2d7a8ef3d0033d0f767feddf37",
+        "summary.json": "bc3c9c74a43a9cbfa967fcc48ab57ad604e997bf75a2dc66a3a4ddeae239ef74"
+      }
+    },
+    "95303": {
+      "artifact_manifest_sha256": "c011ab2891fdc5030afa446bc7ad8da9b160fd4e691b611864dd83c51782a57d",
+      "verified_required_artifacts": {
+        "F_E/state.npz": "cbff9a836244771be0d41f2b945bf1651146de50f2a3f377462b326d27cf5f4e",
+        "F_E/summary.json": "8f7b081ba72d993989a7e19f1fd8b6ff961c19498cf30f1cd57c4747f7fd4c3b",
+        "F_E/trajectory.npz": "189c57dead940939d8ced3fd6bca62ee065bad0fe971913902a9f8a2fdac5ca4",
+        "R_E/state.npz": "1be4cf00ee496c64fd648d44c03bc845349a27adb68165eae09442c7130e6d0c",
+        "R_E/summary.json": "e2b9210fac3c7fc7bb3b18d2f8c7f07e809cae8fe471ebaca060a1849ecd82db",
+        "R_E/trajectory.npz": "1deb5a34b51efb03c2f48af27336aa03e444fa7aa8fb0b6dc7a406d461cb36cf",
+        "artifacts.json": "c011ab2891fdc5030afa446bc7ad8da9b160fd4e691b611864dd83c51782a57d",
+        "summary.json": "42563929ed81f13ccf014732bb5dac18bee56724964afff7b275b02fcc7476a7"
+      }
+    }
+  }
+}

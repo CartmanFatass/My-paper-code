@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-20T13:55:54.613640Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/cc63a5747dc442b28a98624c8bfd7cb0/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/cc63a5747dc442b28a98624c8bfd7cb0/scripts/run_stdl_joint_replay_b01.py",
+    "--output",
+    "/home/fires/.codex/worktrees/fsd-b/hmasd-wsl/runs/skill_teammate_drift_learning/b01_joint_is_91002",
+    "--",
+    "--arm",
+    "joint_is",
+    "--seed",
+    "91002",
+    "--launch-sha",
+    "d97b26c70b88d1b899148f3ee9acce14bf1822d6",
+    "--out",
+    "/home/fires/.codex/worktrees/fsd-b/hmasd-wsl/runs/skill_teammate_drift_learning/b01_joint_is_91002"
+  ],
+  "claim_key": "3b007ac6b9daa794766ed3486322391837c14b51afc9c7999c9e08abe1aaad67",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/3b007ac6b9daa794766ed3486322391837c14b51afc9c7999c9e08abe1aaad67.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/cc63a5747dc442b28a98624c8bfd7cb0/scripts/run_stdl_joint_replay_b01.py",
+    "--arm",
+    "joint_is",
+    "--seed",
+    "91002",
+    "--launch-sha",
+    "d97b26c70b88d1b899148f3ee9acce14bf1822d6",
+    "--out",
+    "/home/fires/.codex/worktrees/fsd-b/hmasd-wsl/runs/skill_teammate_drift_learning/b01_joint_is_91002"
+  ],
+  "command_sha256": "2e4726015feb7ac35ca246b28916590172b427673344316f8ec83aabe3fb19d2",
+  "control_observation": {
+    "observed_at": "2026-09-20T13:55:54.414790Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "b254ed1ea86cf8c39d925d87ded4fee368c5e0a1"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-20T13:55:54.435436Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/cc63a5747dc442b28a98624c8bfd7cb0",
+  "direction": "skill_teammate_drift_learning",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_stdl_joint_replay_b01.py",
+    "--arm",
+    "joint_is",
+    "--seed",
+    "91002",
+    "--launch-sha",
+    "d97b26c70b88d1b899148f3ee9acce14bf1822d6"
+  ],
+  "lead": "Codex DM",
+  "manifest_ref": "/home/fires/.codex/worktrees/fsd-b/hmasd-wsl/runs/skill_teammate_drift_learning/b01_joint_is_91002/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/3b007ac6b9daa794766ed3486322391837c14b51afc9c7999c9e08abe1aaad67.json",
+  "output_root": "/home/fires/.codex/worktrees/fsd-b/hmasd-wsl/runs/skill_teammate_drift_learning/b01_joint_is_91002",
+  "preflight": "/home/fires/.codex/worktrees/fsd-b/hmasd-wsl/runs/skill_teammate_drift_learning/b01_joint_is_91002/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2279046,
+      "session_id": 2279046,
+      "start_ticks": 17498478
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 2279046,
+    "process_group_id": 2279046
+  },
+  "process_exit": "/home/fires/.codex/worktrees/fsd-b/hmasd-wsl/runs/skill_teammate_drift_learning/b01_joint_is_91002/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2279069,
+      "session_id": 2279046,
+      "start_ticks": 17498482
+    },
+    "pid": 2279069,
+    "process_group_id": 2279046,
+    "supervisor_pid": 2279046
+  },
+  "schema_version": 1,
+  "sha": "d97b26c70b88d1b899148f3ee9acce14bf1822d6",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/cc63a5747dc442b28a98624c8bfd7cb0",
+  "stderr": "/home/fires/.codex/worktrees/fsd-b/hmasd-wsl/runs/skill_teammate_drift_learning/b01_joint_is_91002/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/fsd-b/hmasd-wsl/runs/skill_teammate_drift_learning/b01_joint_is_91002/stdout.log"
+}

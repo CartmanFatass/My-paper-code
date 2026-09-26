@@ -6,7 +6,8 @@ description: Coordinate user-requested Codex Root assignments and cross-directio
 # Codex sessions: Root or direct DM
 
 Authority: `docs/project/OPERATING_CONSTITUTION.md`. Current state and session routing:
-`docs/research/RESEARCH.md`. Root coordinates; a DM owns science and its three records.
+`docs/research/RESEARCH.md`. Root manages the scientific project under the owner's delegation;
+a DM owns a scientific question through revisable approaches and its three records.
 An independent DM session and a DM child have the same scientific responsibility.
 Claude remains a single-direction DM through its generated `hmasd-research-hub`.
 
@@ -27,11 +28,17 @@ Read the owner instruction, pause and current direction standing. Inspect anothe
 only for a concrete coordination need. Infer the mode from the assignment or ownership; do not ask the
 owner to repeat an already clear choice.
 
-- **Root:** coordinate a named set of directions, resolve shared dependencies, and maintain
-  assigned cross-direction controls. DMs publish their own result entries; Root is not a
-  routine result-publication gate. Count independent DMs and children
-  together with any assigning session that becomes a direct DM toward the current
-  owner-selected level of four concurrent direction DMs. Do not fill slots
+- **Root:** maintain the project's scientific explanation, compare the information value and
+  cost of next investments, address concrete stagnation, and select useful work within the
+  owner's delegated scope. Coordinate existing ownership and shared dependencies; maintain
+  the current scientific plan and assigned controls. DMs publish their own result entries; Root is not a
+  routine result-publication gate. The owner clarified on 2026-09-24 that three is a runtime
+  resource concurrency ceiling, not a limit on the full plan's questions or a permanent mapping
+  of three DMs to three directions. Maintain worthwhile ordered replacements in the current plan,
+  including their evidence, first useful comparison and cost; preparation is not launch.
+  Count independent DMs, children and an assigning session directly executing a direction
+  together. A Root doing only project management is coordination capacity, not a fourth
+  research track. Training and evaluation both need actual node resources. Do not fill slots
   without a worthwhile authorized task or duplicate a direct DM's scientific work.
 - **Direct DM:** the session itself owns one direction. Explicitly read the
   `developer_instructions` body in `.codex/agents/hmasd-direction-manager.toml`, then the
@@ -56,12 +63,17 @@ Use the existing RESEARCH index, with no separate session registry or handoff fi
 
 - Coordination prose identifies the acting Root, its scope and actual
   native address. Record its authoring checkout/branch when that matters to writers.
-- A direction's standing identifies its independent DM task id and host, or its parent task
-  and child agent address, plus its authoring checkout/branch. This gives a replacement
+- A direction's entry links to routing that identifies its independent DM task id and host,
+  or its parent task and child agent address, plus its authoring checkout/branch. This gives a replacement
   Root a recovery locator instead of just a runtime label, without a reporting obligation.
 - Keep the launch-bound **Lead runtime** cell stable. Put addresses and explanatory
   session text in standing/coordination prose, not in a value compared by a frozen runner.
   A real lead change must reconcile canonical and published control before dependent runs.
+
+Use one routing block for these addresses, linked from the scientific table. Keep detailed
+operation identity and progress in NOTES/run metadata; publishing source or accepting a cell
+does not require an index edit. Routine routing/status edits use Git history, not a new archive
+snapshot. Material scientific result/plan and owner-control changes still reach the index.
 
 Use only ids/addresses returned by native tools or established records, then verify them
 with the runtime before dispatch. A title, a process name, a previous message or an app's
@@ -97,12 +109,18 @@ Keep unknowns explicit; do not backfill addresses for dormant historical directi
    configured direction-manager child under existing research authority. Do not create a
    sidebar task merely because a subtask exists. Preserve current/default session model
    settings unless the owner explicitly chooses them; a role name does not set a main model.
-5. **Give one concrete assignment.** Supply direction, notebook, prior judgment and contrary
+5. **Assign a question and its current concrete work.** Supply the scientific question,
+   direction/notebook, prior judgment and contrary
    evidence, relevant shared-background topics and how they bear on the question, what changed,
    next deliverable, declared scope/cost, pause and any actual owner
    deadline and checkout/index ownership. A child returns to its parent; a standalone DM
    works in its own task and publishes its records without a routine Root reporting route.
-   The DM accepts the science.
+   The DM accepts the science. Explain the present approach's purpose and relevant alternatives;
+   do not define the DM's whole responsibility as completing or closing the named batch.
+   Keep one result-bearing study active, with useful continuations considered in existing NOTES.
+   Question families organize the full plan but do not give a DM ownership of every related
+   direction. Root may split independent estimands or combine truly equivalent work; one named
+   lead/writer still owns each direction and accepted work remains bound to its current inputs.
    Independent preparation continues while a real shared dependency is resolved; already
    valid admission does not need another Root ACK for each batch.
 6. **Integrate assigned shared changes.** DMs publish their own standing/results/evidence
@@ -119,18 +137,19 @@ Keep unknowns explicit; do not backfill addresses for dormant historical directi
    and keep it quiet. A queued prompt, active task, accepted launch, terminal handle
    and scientifically read result are different observations. Do not call them all done.
 
-Root may assign reasoning-only preparation to an already chosen reserve, then activate it
-under the constitution's existing reserve authority if a worthwhile idea is recorded.
-Preparation neither lifts a pause nor starts a result batch. Portfolio recommendations
-remain in the existing notebook/index for the owner-triggered review; this method does not
-send them to Pro automatically.
+Root and DMs may prepare and register worthwhile unowned successor/reserve work under
+constitution section 2, without a new approval cycle. Evaluate the new reason and actual
+comparison, not whether it appeared on an earlier list. A recipe's closure does not discharge
+research responsibility: reconsider relevant project evidence and choose useful continuation
+or a justified stop. Preparation neither lifts a pause nor starts a result batch. Use Portfolio
+for project-level decisions within an owner request/delegation, not as a gate for every pivot.
 
 ## Independent work and actual handover
 
-The owner's current four-direction assignment ends cross-DM communication after initialization.
-Create the three requested independent sessions with complete initial assignments; the assigning
-session then directly owns the fourth direction. Verify initial routing read-only and finish
-coordination. Do not add a progress watch, completion relay or later initialization ACK.
+The earlier four-direction initialization is not a permanent requirement that Root become
+the fourth DM. Apply the current owner assignment: the 2026-09-23 request retains this session
+as scientific project manager. Independent DMs remain responsible for their own work, including
+evidence-led revision or pivots. Do not add a routine progress watch, completion relay or ACK.
 Shared Git publication and background use continue through the normal methods; internal bounded
 helpers and Pro advice remain available within each DM's own task.
 
@@ -167,8 +186,20 @@ only the engineering method's update-time check of current main and the affected
 standing coordination. Use owned checkouts for concurrent writers and explicit pathspec commits,
 and push completed work and exact result inputs. Branches and worktrees are useful isolation,
 not a mandatory new checkout per direction. Keep accepted source identities and other writers.
-Remove an obsolete worktree only when its unique commits/evidence are preserved and no live
-process or delivery depends on it; verify absence on disk and in the worktree list.
+At an actual assignment/closure/checkout-replacement boundary, inspect existing worktrees
+and reuse a suitable free one. Before creating another, identify its creating session and
+native retirement route under the engineering method; a child DM does not automatically own
+its parent's App attachment. The creating session retains cleanup responsibility until actual
+ownership is transferred. The owning session performs retention and cleanup as part
+of completion under the engineering method's worktree lifecycle. Preserve unique commits
+and verify an external copy of needed ignored data before native archival; preserve any
+live process, accepted handle, observer or delivery dependency. Verify the actual outcome
+on disk and in the worktree list; an archived chat or successful data backup does not establish
+that outcome. When the native archive tool is scoped to another chat, check the supported
+global Worktrees settings route and explain any actual access failure, rather than repeating
+the same tool limit as the whole answer. It is not permission for raw deletion or a message
+to its old DM. Three research runtime slots
+do not imply three permanent worktrees or require one new checkout per replacement idea.
 
 Publishing methods does not reload running sessions. When the owner's requested research starts
 or resumes, read the current DM body and relevant methods at a safe boundary. At a material

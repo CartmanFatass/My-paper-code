@@ -1,0 +1,11 @@
+{
+  "claim_key": "4ff94c21946d2b4d98299d0ff8e98dea575fa0aa9cd379f462db5205b7dbf552",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/4ff94c21946d2b4d98299d0ff8e98dea575fa0aa9cd379f462db5205b7dbf552.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/4ff94c21946d2b4d98299d0ff8e98dea575fa0aa9cd379f462db5205b7dbf552.json",
+  "pid": 386536,
+  "runner_pid": 386537,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-23T16:57:26.015878Z"
+}

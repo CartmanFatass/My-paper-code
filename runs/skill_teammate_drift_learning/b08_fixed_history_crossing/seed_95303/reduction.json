@@ -1,0 +1,93 @@
+{
+  "all_values_role": "off-collector matched-epsilon recommendation readout; diagonals are reused B07 panels",
+  "by_endpoint": {
+    "first64": {
+      "matched_epsilon_2x2": {
+        "F_history": {
+          "F": 0.6359375,
+          "R": 0.6355625
+        },
+        "R_history": {
+          "F": 0.6348750000000001,
+          "R": 0.6315625
+        }
+      },
+      "per_history_response_minus_full": {
+        "F_history": -0.0003750000000000142,
+        "R_history": -0.0033125000000000515
+      },
+      "per_method_R_history_minus_F_history": {
+        "F": -0.0010624999999999662,
+        "R": -0.0040000000000000036
+      }
+    },
+    "full": {
+      "matched_epsilon_2x2": {
+        "F_history": {
+          "F": 0.639515625,
+          "R": 0.6332187499999999
+        },
+        "R_history": {
+          "F": 0.63721875,
+          "R": 0.63125
+        }
+      },
+      "per_history_response_minus_full": {
+        "F_history": -0.006296875000000091,
+        "R_history": -0.005968749999999967
+      },
+      "per_method_R_history_minus_F_history": {
+        "F": -0.002296875000000087,
+        "R": -0.0019687499999999636
+      }
+    },
+    "late64": {
+      "matched_epsilon_2x2": {
+        "F_history": {
+          "F": 0.6452500000000001,
+          "R": 0.631875
+        },
+        "R_history": {
+          "F": 0.638,
+          "R": 0.6314375
+        }
+      },
+      "per_history_response_minus_full": {
+        "F_history": -0.013375000000000137,
+        "R_history": -0.006562500000000027
+      },
+      "per_method_R_history_minus_F_history": {
+        "F": -0.00725000000000009,
+        "R": -0.00043749999999997957
+      }
+    }
+  },
+  "context_contribution_definition": "sum of row-level matched-epsilon value contrast in context divided by all target rows",
+  "context_contributions": {
+    "0": {
+      "R_history_minus_F_history_for_F": 0.004921874999999985,
+      "R_history_minus_F_history_for_R": -0.0007656249999999976,
+      "R_minus_F_on_F_history": -0.00010937499999999966,
+      "R_minus_F_on_R_history": -0.005796874999999983
+    },
+    "1": {
+      "R_history_minus_F_history_for_F": 0.0,
+      "R_history_minus_F_history_for_R": 0.0,
+      "R_minus_F_on_F_history": 0.0,
+      "R_minus_F_on_R_history": 0.0
+    },
+    "2": {
+      "R_history_minus_F_history_for_F": -0.007218750000000006,
+      "R_history_minus_F_history_for_R": -0.001203125000000001,
+      "R_minus_F_on_F_history": -0.0061875000000000055,
+      "R_minus_F_on_R_history": -0.00017187500000000015
+    },
+    "3": {
+      "R_history_minus_F_history_for_F": 0.0,
+      "R_history_minus_F_history_for_R": 0.0,
+      "R_minus_F_on_F_history": 0.0,
+      "R_minus_F_on_R_history": 0.0
+    }
+  },
+  "no_actual_collector_or_sampled_reward_claim": true
+}

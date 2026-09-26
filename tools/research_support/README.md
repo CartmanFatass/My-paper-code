@@ -8,12 +8,12 @@ locally generated bundles. It is a **reading** layer. It starts no research.
 python -m tools.research_support --help
 ```
 
-Interpreter, by host:
-
-| host | scientific (3.10 + torch) | control-plane (3.11+, `tomllib`) |
-|---|---|---|
-| Windows | `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` | `C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe` |
-| WSL2 / Linux | `/home/fires/.venvs/hmasd-linux-cpu/bin/python` | `/home/fires/.venvs/hmasd-linux-science-tools/bin/python` |
+The current host's scientific (3.10 + torch) and control-plane (3.11+) interpreters are
+configured in `.codex/hmasd-compute.toml`. From the checkout root, use
+`python3 -c 'from tools.research_support.interpreters import scientific_interpreter; print(scientific_interpreter())'`
+on POSIX, or `py -3.11 -c 'from tools.research_support.interpreters import scientific_interpreter; print(scientific_interpreter())'`
+in PowerShell; substitute `control_plane_interpreter` for the other role. See
+`tests/AGENTS.md` for ready-to-run test commands on both hosts.
 
 `interpreters.py` resolves these for the running host, so `recommend-tests` and
 `inspect-env --probe` emit a command that is runnable where it is read. Override with

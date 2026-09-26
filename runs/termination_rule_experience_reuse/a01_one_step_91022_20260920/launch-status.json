@@ -1,0 +1,11 @@
+{
+  "claim_key": "bc9ab13de2e90e752f64e93b9f9c8b32a1c5ea10e8c819a4212ba31d44b928c5",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/bc9ab13de2e90e752f64e93b9f9c8b32a1c5ea10e8c819a4212ba31d44b928c5.json",
+  "manifest_ref": "/home/fires/.codex/worktrees/fsd-a/hmasd-wsl/runs/termination_rule_experience_reuse/a01_one_step_91022_20260920/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/bc9ab13de2e90e752f64e93b9f9c8b32a1c5ea10e8c819a4212ba31d44b928c5.json",
+  "pid": 2268719,
+  "runner_pid": 2268720,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-20T13:51:42.375192Z"
+}

@@ -1,0 +1,8 @@
+{
+  "master": 8971,
+  "horizon": 256,
+  "train_episodes": 2048,
+  "eval_episodes": 64,
+  "pairs_per_round": 16,
+  "fixture": false
+}

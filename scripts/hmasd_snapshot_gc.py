@@ -3,6 +3,8 @@
 
 Preview is the default. Apply requires one or more exact snapshot IDs. Claims,
 manifests, and result directories are retained for operation recovery.
+Explicit --unclaimed-source also permits an unused, clean source-only copy;
+it never infers a process exit or a scientific result from a missing claim.
 """
 from __future__ import annotations
 
@@ -142,7 +144,23 @@ def _sudo_process_references(snapshot: Path) -> list[str]:
     return references
 
 
-def _check(repo: Path, common: Path, snapshot_id: str, *, sudo_process_scan: bool) -> dict[str, Any]:
+def _check_source(repo: Path, snapshot: Path, sha: str, *, sudo_process_scan: bool) -> str:
+    dirty = _git(snapshot, "status", "--porcelain=v1", "--untracked-files=all",
+                 "--ignored=matching", "--ignore-submodules=none").stdout
+    if dirty:
+        raise Refusal("snapshot has changed, untracked, or ignored files")
+    durable = _durable_ref(repo, sha)
+    if durable is None:
+        raise Refusal("source commit is not reachable from a branch, tag, or remote ref")
+    references = (_sudo_process_references(snapshot) if sudo_process_scan
+                  else _process_references(snapshot))
+    if references:
+        raise Refusal("snapshot is referenced by " + ", ".join(references[:8]))
+    return durable
+
+
+def _check(repo: Path, common: Path, snapshot_id: str, *, sudo_process_scan: bool,
+           unclaimed_source: bool = False) -> dict[str, Any]:
     parent = common / "hmasd-launch-sources"
     snapshot = parent / snapshot_id
     result: dict[str, Any] = {"snapshot": snapshot_id, "path": str(snapshot), "eligible": False}
@@ -164,6 +182,16 @@ def _check(repo: Path, common: Path, snapshot_id: str, *, sudo_process_scan: boo
             raise Refusal(f"claim has no source root: {path}")
         if Path(source).resolve(strict=False) == snapshot:
             claims.append((path, record))
+    if not claims and unclaimed_source:
+        # Only the redundant source checkout is reclaimed. No output, claim,
+        # witness or branch is edited, and no operation state is manufactured.
+        if _git(snapshot, "symbolic-ref", "-q", "HEAD", check=False).returncode == 0:
+            raise Refusal("unclaimed source must be a detached snapshot")
+        sha = _git(snapshot, "rev-parse", "HEAD").stdout.strip()
+        durable = _check_source(repo, snapshot, sha, sudo_process_scan=sudo_process_scan)
+        result.update(eligible=True, kind="unclaimed_source_only", sha=sha,
+                      durable_ref=durable)
+        return result
     if len(claims) != 1:
         raise Refusal(f"expected one associated claim, found {len(claims)}")
     claim_path, claim = claims[0]
@@ -208,31 +236,22 @@ def _check(repo: Path, common: Path, snapshot_id: str, *, sudo_process_scan: boo
     witness_path = Path(execution["exit_witness"]["path"]).resolve(strict=True)
     if witness_path != output / "process-exit.json":
         raise Refusal("exit witness path differs from result root")
-    dirty = _git(snapshot, "status", "--porcelain=v1", "--untracked-files=all",
-                 "--ignored=matching", "--ignore-submodules=none").stdout
-    if dirty:
-        raise Refusal("snapshot has changed, untracked, or ignored files")
-    durable = _durable_ref(repo, sha)
-    if durable is None:
-        raise Refusal("source commit is not reachable from a branch, tag, or remote ref")
-    references = (_sudo_process_references(snapshot) if sudo_process_scan
-                  else _process_references(snapshot))
-    if references:
-        raise Refusal("snapshot is referenced by " + ", ".join(references[:8]))
+    durable = _check_source(repo, snapshot, sha, sudo_process_scan=sudo_process_scan)
     result.update(eligible=True, claim=str(claim_path), output=str(output), sha=sha,
                   durable_ref=durable)
     return result
 
 
 def inspect(repo: Path, snapshot_id: str, *, apply: bool = False,
-            sudo_process_scan: bool = False) -> dict[str, Any]:
+            sudo_process_scan: bool = False, unclaimed_source: bool = False) -> dict[str, Any]:
     if SNAPSHOT_ID.fullmatch(snapshot_id) is None:
         return {"snapshot": snapshot_id, "eligible": False, "reason": "invalid snapshot ID"}
     repo = hmasd_launch._git_root(repo.resolve(strict=True))
     common = hmasd_launch._git_common_dir(repo)
     try:
         with hmasd_launch._claim_lock(common):
-            result = _check(repo, common, snapshot_id, sudo_process_scan=sudo_process_scan)
+            result = _check(repo, common, snapshot_id, sudo_process_scan=sudo_process_scan,
+                            unclaimed_source=unclaimed_source)
             if not apply or not result["eligible"]:
                 return result
             snapshot = Path(result["path"])
@@ -270,18 +289,23 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--repo", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--snapshot", action="append", default=[], metavar="ID")
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--unclaimed-source", action="store_true",
+                        help="allow an explicitly selected clean source-only snapshot with no claim")
     parser.add_argument("--sudo-process-scan", action="store_true",
                         help="run only the read-only Linux process scan with sudo -n")
     args = parser.parse_args(argv)
     if args.apply and not args.snapshot:
         parser.error("--apply requires at least one --snapshot ID")
+    if args.unclaimed_source and not args.snapshot:
+        parser.error("--unclaimed-source requires at least one --snapshot ID")
     try:
         repo = hmasd_launch._git_root(args.repo.resolve(strict=True))
         common = hmasd_launch._git_common_dir(repo)
         parent = common / "hmasd-launch-sources"
         ids = args.snapshot or sorted(path.name for path in parent.iterdir()) if parent.exists() else args.snapshot
         results = [inspect(repo, snapshot_id, apply=args.apply,
-                           sudo_process_scan=args.sudo_process_scan) for snapshot_id in ids]
+                           sudo_process_scan=args.sudo_process_scan,
+                           unclaimed_source=args.unclaimed_source) for snapshot_id in ids]
     except (OSError, hmasd_launch.LaunchRefusal) as exc:
         print(f"snapshot GC refused: {exc}", file=sys.stderr)
         return 2

@@ -1,0 +1,10 @@
+{
+  "seed": 73142,
+  "horizon": 96,
+  "train_episodes": 4096,
+  "initial_episodes": 64,
+  "selection_episodes": 256,
+  "final_episodes": 256,
+  "batch": 32,
+  "epochs": 4
+}

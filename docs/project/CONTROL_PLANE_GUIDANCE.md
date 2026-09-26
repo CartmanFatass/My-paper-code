@@ -29,7 +29,7 @@
 | --- | --- |
 | 单一治理来源、任务方法自包含、按需加载 | 与前次修整原则一致。AGENTS 导航，角色管责任，skills 提供方法；不能要求普通任务沿多层历史索引拼义务 |
 | 简化手续，保留科学判断 | 与 Pro 修订一致。探索可以粗糙、单种子；确认需要适合主张的推断。更多表格不自动增加可信度，减少文件也不证明方法完整 |
-| DM 端到端负责；Root 不逐步审批 | 与两轮修整方向一致。Pro 提建议、Reviewer 返回发现，不能替代 DM 的判断或 owner 的方向选择 |
+| DM 端到端负责；Root 不逐步审批 | 与两轮修整方向一致。Pro 提建议、Reviewer 返回发现，不能替代 DM 的判断及 owner 授权范围内的科学选题 |
 | Pro 最终裁决、周额度、旧记录系统 | 后来经 owner 采纳有意替换为 adviser、per-idea fits、NOTES/runs/CLAIM；这些不是本次要恢复的遗漏 |
 | runtime 分工、Implementer、工程数字配额 | owner 后续明确修订：Codex Root/DM、Claude session DM、可用 Implementer，以及取消工程行数/时长配额。不是与 Pro 原稿逐字一致，也不是擅自遗漏 |
 | 设施选择、阅读范围与非代码审阅 | owner 后续同意以需求、成本、科学语义和维护负担判断技术选择，允许合理复用及依赖阅读；普通非代码改动由作者自检，不自动增加 Reviewer 轮次 |
@@ -80,9 +80,17 @@ Pro 是外部会话，不继承本地 skills：问题作者在现有问题段内
 Owner 可直接说“本任务作为 Root 协调 A、B”或“本任务直接作为 UCOPE 的 DM”。
 会话按当前指示与已记录归属选择职责；已有明确归属时不要求重新确认模式。
 独立 DM 自己推进一个方向，可以使用 Implementer、Reviewer；无需先创建一个 DM child
-再把工作转交一次。当前 owner 选择四方向并行：分派 session 初始化三个独立 DM 后直接负责第四项，
-全部方向 DM 合计计数。初始化后禁止这些 DM 互相通信，各自完成与发布；共享 Git 证据仍可按需读取。
+再把工作转交一次。Owner 在 2026-09-24 明确：三个是研究运行的资源并发上限，完整计划可以包含更多
+问题、子方向和后继工作；不是三个永久方向或三个固定 DM 岗位。Root 若直接执行一个方向，也计入
+这三个名额；训练和固定策略评价都消耗实际资源。各 DM 独立完成与发布，共享 Git 证据可按需读取。
 Claude 仍是单方向 DM，其暂停与手动恢复安排保持不变。
+2026-09-23 owner 委托本任务作为科学项目管理者，并允许 DM 在失败后结合全项目证据自主修订或转向。
+Root 维护科学投入顺序与真实停滞的处理；DM 结束一个配方后继续选择有价值的研究工作，不逐次申请方向批准。
+DM 对科学问题的连续解释与候选取舍负责，同一时刻推进一个结果性研究。任务分派说明问题、已有证据、
+当前比较与可改变判断的观察，不能把“做完这个 batch”当作全部职责。相关候选在现有 NOTES 中比较；
+Root 可按独立科学问题拆分或按同一问题、对照、估计对象及下一步合并。问题族是研究地图，不是永久领地。
+允许有依据的结束；不要求无穷寻找后继、正结果或为名额制造工作。原有接受操作、暂停与联系规则保持有效。
+具体授权和停止边界以宪章 section 2 为准，源文件发布仍不证明活跃会话已经读取。
 
 当前地址放在 RESEARCH：协调段说明 acting Root、范围、原生地址和工作区，方向 standing
 给出独立 DM 的 task id/host 或 child 的 parent/agent 地址、作者 checkout/branch。不要为新地址改写
@@ -134,14 +142,14 @@ flowchart TD
 ```
 
 图表示职责与数据流，不要求每个 idea 顺序走遍每个节点。暂停时没有科研启动路径；
-确认才增加 CLAIM；Portfolio 仅在 owner 触发时使用 RESEARCH 内的 review section。
+确认才增加 CLAIM；Portfolio 在 owner 请求或明确的项目管理委托内使用 RESEARCH 的 review section。
 科学设计和结果解释属于 DM；Implementer 返回实现与 checks；Reviewer 返回可达问题。
 Monitor/Transport 子代理已经退役，不保留兼容角色或改名替代。当前会话执行启动与单次发送；
 `tools/hmasd_wait.py` 在模型回合之外观察已接受的 operation，不作科学判断，也不启动或重发。
 Codex queue 只唤醒分配该等待的当前 Codex session；Claude 使用确定性的外部等待，之后由原生 runtime
 或人工继续，不能假定 Codex queue 能跨 runtime 唤醒。
 
-新实验按任务选择本地或远端；配置的默认节点是便利值，不是 remote-first 硬绑定。
+新实验遵循 owner 当前的节点优先级，并按实际资源与任务适用性选择执行节点。
 本地节点（Windows 或 `local_linux`）按[本地执行说明](../../.agents/skills/hmasd-research-engineering/references/local-execution.md)
 用配置的解释器直接调用准入内核，不生成一次性 wrapper；远端在 agent-task 命令内调用同一内核；两者均先准入再启动并保留可核对的进程事实。
 在途实验不能借换节点绕过原语义或制造重复进程。
@@ -155,12 +163,36 @@ Git 的分支/worktree 服务于真实隔离需要，不再每方向强制建立
 拒绝终态不明、进程引用、独有文件或源码提交无持久引用的快照。普通 DM/发布 worktree
 需另行核对任务与产物依赖；完整流程见[执行说明](../../.agents/skills/hmasd-research-engineering/references/local-execution.md#source-and-publication-worktree-reclamation)。
 
-每个 DM 拥有本方向记录和 RESEARCH 中自己的结果摘要、证据链接、standing 与下一步；即使
-Root 正在工作，也可自行发布到 main，不等待 Root 代更、批准、交接或确认。Root 负责被分配的
-跨方向协调与共享控制面维护。各方向通常修改不同内容：动笔前刷新 main、查看相关差异，只更新
-本方向条目；推送前再检查一次，保留其他方向和 owner 控制字段，正常 push。偶发并发推进由本地
-合并处理，不为它建立跨会话协调。需要隔离未合入实验历史时使用自有发布 checkout，不覆盖旧整表
-或共用 index。详细步骤见 engineering 的 Publishing direction results。
+Owner 在 2026-09-25 要求把数据与 worktree 分开，并将回收纳入日常完成流程。
+源码由 Git 提交/分支保留，可复用的 worktree 只承担当前工作；完整原始数据、检查点、失败及
+中断输出存放在工作区之外。本机沿用 `/home/fires/hmasd-artifacts/`，遗留保全包放在
+`worktree-retention/<checkout>-<date>/`。`scripts/hmasd_worktree_data.py` 的 `preview / retain / verify`
+分别完成预览、只复制保全和独立哈希校验；包内保留原相对路径，`manifest.json` 记录内容哈希及
+源码身份。它不删除源、不代替 Git 历史，也不把进程消失当作科学完成。
+
+回收触发点是 DM 完成研究或确实更换工作区时：先发布有用结果、核对外部数据，再复用或通过
+原生 worktree 工具归档不用的目录。发布目录仍有后续用途就复用；不按每次实验/方向名字创建
+新目录，也不按年龄后台扫删。当前三个并发是科研运行资源限制，不是 worktree 个数规则。
+存在训练、观察者、Pro 或共享浏览器依赖时保留目录。归档工具若仅能处理本聊天附件，应明确
+报告尚待原生回收的目录，不用 shell 删除、自动唤醒旧 DM 或新建管理台账绕过。
+
+创建之前也要核对回收路径：先看当前聊天附件与 Git worktree 列表，优先复用；需要新隔离时
+使用原生创建工具并确认附件归属。创建者承接回收责任，借给子 agent 使用不会自动把附件转交
+给子 agent。手动放进 `.codex/worktrees` 的目录不能据此认定已进入 App 托管。
+数据保全、聊天归档、工作树回收是三个不同结果；只有原生操作成功且 Git 登记和目录均已消失，
+才报告该工作树已回收。
+
+本机 2026-09-25 安装的 App 提供“设置 → Worktrees → 对应目录 → 删除”入口；该操作也会
+归档关联聊天。聊天级 `archive_worktree` 的附件范围不等于这个全局界面的范围。使用前核对
+界面实际列出的目录及进程/产物依赖，不假定所有手动创建的遗留目录均被列出。如果桌面操作工具
+不可用，应给出已核实的入口、具体目标和实际未完成项，不能把外部备份成功报告成已删除目录。
+
+发布边界与写入责任见[宪章 §4](OPERATING_CONSTITUTION.md#4-three-record-types-and-one-repository-table)，
+具体操作见 engineering 的 Publishing direction results。科学结果/计划或控制发生实质变化时更新
+RESEARCH；同批次各 cell 的启动、观察、收取和验收留在 NOTES/runs，不逐次维护 main 或生成快照。
+方向分支发布运行输入与共享索引发布分开。索引用一个路由区保留 task/checkouts；运行 handle、
+generation、哈希和详细检查通过原记录恢复。新大产物按 engineering 的保留流程存放在 Git 之外，
+在现有记录中保留位置与哈希，清理任何源副本前验证可恢复性；已有冻结输出与版本化证据不搬迁。
 Pro 临时写指定 answer subsection，不能覆盖整个旧版本文件。
 启动/发送是否被接受不确定时核对原操作；修改控制面不是再次启动/发送的理由。
 
@@ -181,7 +213,7 @@ Pro 临时写指定 answer subsection，不能覆盖整个旧版本文件。
 | batching、数值复现、checker/diagnostics、watchdog | engineering Checks / Runtime notes | Implementer、Reviewer、DM；加速要保留科学含义，工程估计不能冒充科学终点 |
 | 文献、基础概念、现有分析工具 | scientific-tools Tools 及其 references/scripts | 只在相关问题需要时读取；摘要不能替代原始证据，工具不自动增加独立样本 |
 | 将方法传给 Pro | [pro author](../../.agents/skills/hmasd-pro-research-prompt-author/SKILL.md) Method context | 方向作者与 Portfolio；只复制方法文件而不传阅读目标，外部 adviser 不会自动得到它 |
-| 反证、完整代价、最小投资、可逆性 | [Portfolio](../../.agents/skills/hmasd-portfolio-task/SKILL.md) Steps | owner-triggered 方向选择；删 packet 不应删决策依据 |
+| 反证、完整代价、最小投资、可逆性 | [Portfolio](../../.agents/skills/hmasd-portfolio-task/SKILL.md) Steps | owner 请求或委托范围内的方向选择；删 packet 不应删决策依据 |
 | 方向结果发布与并发写入 | [engineering](../../.agents/skills/hmasd-research-engineering/SKILL.md) Publishing direction results | DM 自行更新自己的条目；普通冲突自行处理 |
 | 暂停、跨方向协调、运行中修订采纳 | [loop-dispatch](../../.agents/skills/hmasd-loop-dispatch/SKILL.md) | Root；App 内跨任务发送需用户明确要求；源码发布不等于活跃会话重载 |
 | Send、原操作核对、完整答案与 fallback | [Pro browser procedure](../../.agents/skills/hmasd-chatgpt-pro-transport/SKILL.md) | 当前作者 session；恢复观察与重复发送是不同动作，detached waiter 不作浏览器判断 |
@@ -217,21 +249,15 @@ Pro 临时写指定 answer subsection，不能覆盖整个旧版本文件。
 - publisher/可执行路由修改：运行现有 publication/alignment 测试；core 或高风险可执行行为改动按 engineering 方法独立审查。
 - 非代码说明、skills 正文、导航/手册修改：作者检查链接、事实、意图、来源与消费者一致性；不自动派发 Reviewer，不启动实验或发送 Pro 作为验收。可执行配置的行为变化按实际风险判断，不能仅凭扩展名归为文档。
 
-在仓库根目录，现有 3.11 工具环境可执行：
+在仓库根目录使用计算配置中当前主机的 `control_plane_python`；解析和调用示例见
+[测试入口](../../tests/AGENTS.md)及[解释器解析器](../../tools/research_support/interpreters.py)。
 
-```powershell
-& 'C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe' tools/publish_claude_control.py
-& 'C:/Users/fires/.conda/envs/hmasd-science-tools/python.exe' tools/publish_claude_control.py --check
+```text
+<configured-control-plane-python> tools/publish_claude_control.py
+<configured-control-plane-python> tools/publish_claude_control.py --check
 ```
 
-WSL 主机（`local_linux`）的等价命令：
-
-```bash
-~/.venvs/hmasd-linux-science-tools/bin/python tools/publish_claude_control.py
-~/.venvs/hmasd-linux-science-tools/bin/python tools/publish_claude_control.py --check
-```
-
-这是当前本机的开发命令，解释器事实见 CLAUDE/compute；不用于覆盖科学运行环境。
+这是当前本机的开发命令，解释器事实以 compute 为准；不用于覆盖科学运行环境。
 `drift: 0` 只说明生成副本一致，不证明科学方法完整、Claude effective effort/权限生效，
 也不证明任何运行中会话采纳。只随入口或职责变化更新 MAP 与本手册的相关段落，
 不要为每个实验产生控制面文书。

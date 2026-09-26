@@ -1,0 +1,93 @@
+{
+  "config": {
+    "contexts": 4,
+    "skill_ticks": 3,
+    "source_macros": 2048,
+    "target_macros": 256
+  },
+  "counts": {
+    "collection_action_counts": [
+      1178,
+      1126
+    ],
+    "decision_fits": 3,
+    "evaluation_learner_updates": 0,
+    "evaluation_panels": 6912,
+    "evaluation_reward_draws": 0,
+    "known_response_diagnostic_panels": 2304,
+    "law_fits": 1,
+    "law_posterior_updates": 1126,
+    "primitive_ticks": 6912,
+    "sampled_reward_labels": 2304,
+    "source_collection_action_counts": [
+      1033,
+      1015
+    ],
+    "source_macros": 2048,
+    "target_collection_action_counts": [
+      145,
+      111
+    ],
+    "target_macros": 256,
+    "total_macros": 2304
+  },
+  "known_response_diagnostic": {
+    "target_by_endpoint": {
+      "first64": {
+        "cumulative_regret": 0.8600000000000001,
+        "mean_expected_return": 0.6490624999999999,
+        "mean_regret": 0.013437500000000002,
+        "panel_count": 64,
+        "sign_mistakes": 8
+      },
+      "full": {
+        "cumulative_regret": 1.1400000000000001,
+        "mean_expected_return": 0.6580468749999999,
+        "mean_regret": 0.0044531250000000005,
+        "panel_count": 256,
+        "sign_mistakes": 16
+      },
+      "late64": {
+        "cumulative_regret": 0.0,
+        "mean_expected_return": 0.6624999999999999,
+        "mean_regret": 0.0,
+        "panel_count": 64,
+        "sign_mistakes": 0
+      }
+    }
+  },
+  "launch_sha": "1d311f8d5ef03b02886ebfedda881091d16b5526",
+  "law_diagnostic": {
+    "all_mean_l1_error": 0.13967176322292194,
+    "compute_wall_scope": "shared-law activate, predict, count, and observe only",
+    "compute_wall_seconds": 0.020012560387840495,
+    "initial_to_final_l2_movement": 1.3537309937921997,
+    "initial_to_source_l2_movement": 0.9782888913224281,
+    "source_to_final_l2_movement": 0.9357021153490841,
+    "target_by_endpoint": {
+      "first64": {
+        "mean_l1_error": 0.410490039079428,
+        "panel_count": 64
+      },
+      "full": {
+        "mean_l1_error": 0.25648264649354213,
+        "panel_count": 256
+      },
+      "late64": {
+        "mean_l1_error": 0.15908902416325066,
+        "panel_count": 64
+      }
+    }
+  },
+  "object": "unknown_joint_law_b05",
+  "scientific_block_wall_scope": "common collection, all learners and exact evaluator; excludes serialization and import",
+  "scientific_block_wall_seconds": 0.2775406010041479,
+  "seed": 95101,
+  "spec_ids": [
+    "response_all__response__prior2",
+    "fingerprint_full__hybrid__prior2",
+    "fingerprint_recent__hybrid__prior16__window256"
+  ],
+  "stage": "heldout",
+  "status": "COMPLETE"
+}

@@ -1,0 +1,372 @@
+{
+  "arm": "SET",
+  "test_n": 4,
+  "low_capacity": 10,
+  "high_capacity": 20,
+  "worlds": [
+    {
+      "world_id": 0,
+      "delta_J": 0.07396822293521504,
+      "component_deltas": {
+        "coverage_reward": 0.11548000000000003,
+        "quality_reward": -0.022892590215949554,
+        "energy_penalty": 0.0,
+        "total_reward": 0.07396822293521504
+      },
+      "delta_mean_served": 5.773999999999997,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 1,
+      "delta_J": 0.06492822091769884,
+      "component_deltas": {
+        "coverage_reward": 0.1014799999999999,
+        "quality_reward": -0.020359263607670847,
+        "energy_penalty": 0.0,
+        "total_reward": 0.06492822091769884
+      },
+      "delta_mean_served": 5.073999999999998,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 2,
+      "delta_J": 0.07756842272907999,
+      "component_deltas": {
+        "coverage_reward": 0.12035999999999991,
+        "quality_reward": -0.02227859090306672,
+        "energy_penalty": 0.0,
+        "total_reward": 0.07756842272907999
+      },
+      "delta_mean_served": 6.018000000000001,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 3,
+      "delta_J": 0.09868521656098939,
+      "component_deltas": {
+        "coverage_reward": 0.15455999999999992,
+        "quality_reward": -0.03168927813003547,
+        "energy_penalty": 0.0,
+        "total_reward": 0.09868521656098939
+      },
+      "delta_mean_served": 7.7280000000000015,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 4,
+      "delta_J": 0.06479939468378054,
+      "component_deltas": {
+        "coverage_reward": 0.10164000000000006,
+        "quality_reward": -0.021162017720731563,
+        "energy_penalty": 0.0,
+        "total_reward": 0.06479939468378054
+      },
+      "delta_mean_served": 5.082000000000001,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 5,
+      "delta_J": 0.05081252617731058,
+      "component_deltas": {
+        "coverage_reward": 0.08028000000000002,
+        "quality_reward": -0.017944912742298175,
+        "energy_penalty": 0.0,
+        "total_reward": 0.05081252617731058
+      },
+      "delta_mean_served": 4.014000000000003,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 6,
+      "delta_J": 0.057151062474850745,
+      "component_deltas": {
+        "coverage_reward": 0.08911999999999998,
+        "quality_reward": -0.017443125083830835,
+        "energy_penalty": 0.0,
+        "total_reward": 0.057151062474850745
+      },
+      "delta_mean_served": 4.456000000000003,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 7,
+      "delta_J": 0.05995583635998458,
+      "component_deltas": {
+        "coverage_reward": 0.09492000000000012,
+        "quality_reward": -0.021627212133384532,
+        "energy_penalty": 0.0,
+        "total_reward": 0.05995583635998458
+      },
+      "delta_mean_served": 4.745999999999999,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 8,
+      "delta_J": 0.08672179458944607,
+      "component_deltas": {
+        "coverage_reward": 0.13560000000000016,
+        "quality_reward": -0.02732735136851311,
+        "energy_penalty": 0.0,
+        "total_reward": 0.08672179458944607
+      },
+      "delta_mean_served": 6.780000000000001,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 9,
+      "delta_J": 0.05933282513958832,
+      "component_deltas": {
+        "coverage_reward": 0.09255999999999998,
+        "quality_reward": -0.018197249534705584,
+        "energy_penalty": 0.0,
+        "total_reward": 0.05933282513958832
+      },
+      "delta_mean_served": 4.628000000000004,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 10,
+      "delta_J": 0.12468459364006823,
+      "component_deltas": {
+        "coverage_reward": 0.19631999999999994,
+        "quality_reward": -0.04246468786643953,
+        "energy_penalty": 0.0,
+        "total_reward": 0.12468459364006823
+      },
+      "delta_mean_served": 9.816000000000003,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 11,
+      "delta_J": 0.044954207692440185,
+      "component_deltas": {
+        "coverage_reward": 0.07047999999999999,
+        "quality_reward": -0.014605974358532642,
+        "energy_penalty": 0.0,
+        "total_reward": 0.044954207692440185
+      },
+      "delta_mean_served": 3.524000000000001,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 12,
+      "delta_J": 0.08768671839073688,
+      "component_deltas": {
+        "coverage_reward": 0.1372000000000002,
+        "quality_reward": -0.027844272030876777,
+        "energy_penalty": 0.0,
+        "total_reward": 0.08768671839073688
+      },
+      "delta_mean_served": 6.859999999999999,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 13,
+      "delta_J": 0.07347131781136707,
+      "component_deltas": {
+        "coverage_reward": 0.11552000000000007,
+        "quality_reward": -0.024642273962109856,
+        "energy_penalty": 0.0,
+        "total_reward": 0.07347131781136707
+      },
+      "delta_mean_served": 5.776000000000003,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 14,
+      "delta_J": 0.05659536269376364,
+      "component_deltas": {
+        "coverage_reward": 0.08836,
+        "quality_reward": -0.01752212435412115,
+        "energy_penalty": 0.0,
+        "total_reward": 0.05659536269376364
+      },
+      "delta_mean_served": 4.417999999999999,
+      "all_runtime_and_trajectory_fields_exact": true
+    },
+    {
+      "world_id": 15,
+      "delta_J": 0.0760258156796032,
+      "component_deltas": {
+        "coverage_reward": 0.11772000000000027,
+        "quality_reward": -0.021260614401322875,
+        "energy_penalty": 0.0,
+        "total_reward": 0.0760258156796032
+      },
+      "delta_mean_served": 5.886000000000003,
+      "all_runtime_and_trajectory_fields_exact": true
+    }
+  ],
+  "delta_J": {
+    "values": [
+      0.07396822293521504,
+      0.06492822091769884,
+      0.07756842272907999,
+      0.09868521656098939,
+      0.06479939468378054,
+      0.05081252617731058,
+      0.057151062474850745,
+      0.05995583635998458,
+      0.08672179458944607,
+      0.05933282513958832,
+      0.12468459364006823,
+      0.044954207692440185,
+      0.08768671839073688,
+      0.07347131781136707,
+      0.05659536269376364,
+      0.0760258156796032
+    ],
+    "mean": 0.0723338461547452,
+    "sample_std": 0.020079171972608834,
+    "minimum": 0.044954207692440185,
+    "maximum": 0.12468459364006823,
+    "negative": 0,
+    "zero": 0,
+    "positive": 16,
+    "unit": "paired world; descriptive only"
+  },
+  "delta_mean_served": {
+    "values": [
+      5.773999999999997,
+      5.073999999999998,
+      6.018000000000001,
+      7.7280000000000015,
+      5.082000000000001,
+      4.014000000000003,
+      4.456000000000003,
+      4.745999999999999,
+      6.780000000000001,
+      4.628000000000004,
+      9.816000000000003,
+      3.524000000000001,
+      6.859999999999999,
+      5.776000000000003,
+      4.417999999999999,
+      5.886000000000003
+    ],
+    "mean": 5.661250000000001,
+    "sample_std": 1.576724854458338,
+    "minimum": 3.524000000000001,
+    "maximum": 9.816000000000003,
+    "negative": 0,
+    "zero": 0,
+    "positive": 16,
+    "unit": "paired world; descriptive only"
+  },
+  "component_deltas": {
+    "coverage_reward": {
+      "values": [
+        0.11548000000000003,
+        0.1014799999999999,
+        0.12035999999999991,
+        0.15455999999999992,
+        0.10164000000000006,
+        0.08028000000000002,
+        0.08911999999999998,
+        0.09492000000000012,
+        0.13560000000000016,
+        0.09255999999999998,
+        0.19631999999999994,
+        0.07047999999999999,
+        0.1372000000000002,
+        0.11552000000000007,
+        0.08836,
+        0.11772000000000027
+      ],
+      "mean": 0.11322500000000003,
+      "sample_std": 0.03153449708916676,
+      "minimum": 0.07047999999999999,
+      "maximum": 0.19631999999999994,
+      "negative": 0,
+      "zero": 0,
+      "positive": 16,
+      "unit": "paired world; descriptive only"
+    },
+    "quality_reward": {
+      "values": [
+        -0.022892590215949554,
+        -0.020359263607670847,
+        -0.02227859090306672,
+        -0.03168927813003547,
+        -0.021162017720731563,
+        -0.017944912742298175,
+        -0.017443125083830835,
+        -0.021627212133384532,
+        -0.02732735136851311,
+        -0.018197249534705584,
+        -0.04246468786643953,
+        -0.014605974358532642,
+        -0.027844272030876777,
+        -0.024642273962109856,
+        -0.01752212435412115,
+        -0.021260614401322875
+      ],
+      "mean": -0.023078846150849326,
+      "sample_std": 0.006806505595142428,
+      "minimum": -0.04246468786643953,
+      "maximum": -0.014605974358532642,
+      "negative": 16,
+      "zero": 0,
+      "positive": 0,
+      "unit": "paired world; descriptive only"
+    },
+    "energy_penalty": {
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean": 0.0,
+      "sample_std": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "negative": 0,
+      "zero": 16,
+      "positive": 0,
+      "unit": "paired world; descriptive only"
+    },
+    "total_reward": {
+      "values": [
+        0.07396822293521504,
+        0.06492822091769884,
+        0.07756842272907999,
+        0.09868521656098939,
+        0.06479939468378054,
+        0.05081252617731058,
+        0.057151062474850745,
+        0.05995583635998458,
+        0.08672179458944607,
+        0.05933282513958832,
+        0.12468459364006823,
+        0.044954207692440185,
+        0.08768671839073688,
+        0.07347131781136707,
+        0.05659536269376364,
+        0.0760258156796032
+      ],
+      "mean": 0.0723338461547452,
+      "sample_std": 0.020079171972608834,
+      "minimum": 0.044954207692440185,
+      "maximum": 0.12468459364006823,
+      "negative": 0,
+      "zero": 0,
+      "positive": 16,
+      "unit": "paired world; descriptive only"
+    }
+  },
+  "exact_same_policy_capacity_trajectories": true,
+  "height_cancels": true
+}

@@ -1,0 +1,41 @@
+{
+  "object_id": "complementary_skill_b05",
+  "launch_sha": "a5bb71ec32f56bd6e4e9479cc91ef1463d473a3b",
+  "input_root": "/home/wu/hmasd-worktrees/complementary-skill-b04-20260923/runs/complementary_skill_learning/b04_m_260923931_483819eba",
+  "input_contract": {
+    "final_bytes": 27128511,
+    "final_sha256": "df222836fca1b4a4aaf87408d4f024fbb796e7107c004a40f1f5ecc64201c39f",
+    "summary_bytes": 4952932,
+    "summary_sha256": "248d3e04c32b4684738676aa5491dc4da5848874c243e5f6e34bb11ba5bb1299",
+    "config_bytes": 650,
+    "config_sha256": "3135dcb1ac17f10208375b6705d0f3b9c5e4ac2f376f1f058cd598fc9887787f",
+    "native_digest": "d6b22033f9c84901db42015d01b7c58238002ea5ba301a0daf5d919035dc4058",
+    "frozen_digest": "7e9ee5542474cca2ba0281ebeb5000bc3947e254a6cf48b80e59d33010bd17f0",
+    "physical_sha256": "b36474bb458d4c72efb2feed5b6653583cf0cbaf02fa264e097111209827d6d1",
+    "r0_label_sha256": "a45d59f80fca20321df3803745068bb841f30e6c25b6b8c01dd7d0d250a67190"
+  },
+  "spec": {
+    "n_agents": 6,
+    "n_users": 50,
+    "k": 10,
+    "horizon": 500,
+    "eval_lanes": 32,
+    "training_lanes": 16,
+    "training_rollouts": 45,
+    "world_base": 1700200,
+    "threads": 4,
+    "small_model": false
+  },
+  "device": "cuda",
+  "panel_order": [
+    "O",
+    "R0",
+    "S0",
+    "R1",
+    "S1",
+    "R2",
+    "S2",
+    "R3",
+    "S3"
+  ]
+}

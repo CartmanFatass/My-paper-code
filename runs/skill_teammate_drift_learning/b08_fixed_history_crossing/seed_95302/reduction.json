@@ -1,0 +1,93 @@
+{
+  "all_values_role": "off-collector matched-epsilon recommendation readout; diagonals are reused B07 panels",
+  "by_endpoint": {
+    "first64": {
+      "matched_epsilon_2x2": {
+        "F_history": {
+          "F": 0.633,
+          "R": 0.631625
+        },
+        "R_history": {
+          "F": 0.633,
+          "R": 0.631625
+        }
+      },
+      "per_history_response_minus_full": {
+        "F_history": -0.001375000000000015,
+        "R_history": -0.001375000000000015
+      },
+      "per_method_R_history_minus_F_history": {
+        "F": 0.0,
+        "R": 0.0
+      }
+    },
+    "full": {
+      "matched_epsilon_2x2": {
+        "F_history": {
+          "F": 0.63975,
+          "R": 0.63940625
+        },
+        "R_history": {
+          "F": 0.63975,
+          "R": 0.639234375
+        }
+      },
+      "per_history_response_minus_full": {
+        "F_history": -0.00034375000000008704,
+        "R_history": -0.0005156250000000195
+      },
+      "per_method_R_history_minus_F_history": {
+        "F": 0.0,
+        "R": -0.0001718749999999325
+      }
+    },
+    "late64": {
+      "matched_epsilon_2x2": {
+        "F_history": {
+          "F": 0.642,
+          "R": 0.642
+        },
+        "R_history": {
+          "F": 0.642,
+          "R": 0.642
+        }
+      },
+      "per_history_response_minus_full": {
+        "F_history": 0.0,
+        "R_history": 0.0
+      },
+      "per_method_R_history_minus_F_history": {
+        "F": 0.0,
+        "R": 0.0
+      }
+    }
+  },
+  "context_contribution_definition": "sum of row-level matched-epsilon value contrast in context divided by all target rows",
+  "context_contributions": {
+    "0": {
+      "R_history_minus_F_history_for_F": 0.0,
+      "R_history_minus_F_history_for_R": 0.0,
+      "R_minus_F_on_F_history": 0.0,
+      "R_minus_F_on_R_history": 0.0
+    },
+    "1": {
+      "R_history_minus_F_history_for_F": 0.0,
+      "R_history_minus_F_history_for_R": -0.00017187500000000015,
+      "R_minus_F_on_F_history": -0.0003437500000000003,
+      "R_minus_F_on_R_history": -0.0005156250000000005
+    },
+    "2": {
+      "R_history_minus_F_history_for_F": 0.0,
+      "R_history_minus_F_history_for_R": 0.0,
+      "R_minus_F_on_F_history": 0.0,
+      "R_minus_F_on_R_history": 0.0
+    },
+    "3": {
+      "R_history_minus_F_history_for_F": 0.0,
+      "R_history_minus_F_history_for_R": 0.0,
+      "R_minus_F_on_F_history": 0.0,
+      "R_minus_F_on_R_history": 0.0
+    }
+  },
+  "no_actual_collector_or_sampled_reward_claim": true
+}

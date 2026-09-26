@@ -1,0 +1,126 @@
+{
+  "launch_sha": "c95e57201dd7177fc8158b22a3379b56a5be8800",
+  "cell": {
+    "key": "b2_local1",
+    "arm": "LOCAL1",
+    "tag": "s1_local_ordinary_b16_b2_local1_s994102",
+    "seed": 994102,
+    "block": 2,
+    "training_env_seed_base": 2994200,
+    "train_n": 6,
+    "law": "clip",
+    "lambda_l": 0.05
+  },
+  "spec": {
+    "train_n": 6,
+    "test_ns": [
+      8,
+      6
+    ],
+    "horizon": 500,
+    "train_lanes": 16,
+    "eval_lanes": 32,
+    "rollouts": 45,
+    "panels": [
+      0,
+      45
+    ],
+    "hidden_size": 256,
+    "n_heads": 8,
+    "n_layers": 2,
+    "ppo_epochs": 15,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "torch_threads": 4
+  },
+  "config": {
+    "count_arm": "LOCAL1",
+    "algorithm": "mappo",
+    "n_agents": 6,
+    "n_uavs": 6,
+    "n_users": 50,
+    "num_envs": 16,
+    "rollout_length": 500,
+    "episode_length": 500,
+    "k": 10,
+    "n_Z": 1,
+    "n_z": 1,
+    "state_dim": 133,
+    "obs_dim": 104,
+    "action_dim": 3,
+    "action_space_type": "continuous",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 800,
+    "batch_size": 12000,
+    "discriminator_batch_size": 12000,
+    "lambda_e": 1.0,
+    "lambda_D": 0.0,
+    "lambda_d": 0.0,
+    "lambda_h": 0.0,
+    "lambda_l": 0.05,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "total_timesteps": 360000,
+    "seed": 994102,
+    "policy_interruption_mode": "off",
+    "use_central_snapshot_in_flat_actor": false,
+    "disable_high_level_training": true,
+    "disable_discriminator_training": true,
+    "disable_discriminator_rewards": true,
+    "collects_high_level_samples": false,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false,
+    "num_team_codes": 1,
+    "lambda_l_initial": 0.05,
+    "lambda_l_final": 0.05,
+    "use_entropy_annealing": false,
+    "use_entropy_targets": false
+  },
+  "evaluation_order": [
+    {
+      "stage": 0,
+      "test_n": 8
+    },
+    {
+      "stage": 0,
+      "test_n": 6
+    },
+    {
+      "stage": 45,
+      "test_n": 8
+    },
+    {
+      "stage": 45,
+      "test_n": 6
+    }
+  ],
+  "world_seed_bases": {
+    "8": 1945800,
+    "6": 1945600
+  }
+}

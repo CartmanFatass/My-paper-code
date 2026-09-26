@@ -1,0 +1,11 @@
+{
+  "claim_key": "26053034831826e891d68286db45bf9becb1619122723afa69cfcbe4be2f8048",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/26053034831826e891d68286db45bf9becb1619122723afa69cfcbe4be2f8048.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/agent-count-fixed-count-20260923-b09/runs/agent_count_generalization/s1_fixed_count_b09/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/26053034831826e891d68286db45bf9becb1619122723afa69cfcbe4be2f8048.json",
+  "pid": 340437,
+  "runner_pid": 340438,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-23T10:20:05.076185Z"
+}

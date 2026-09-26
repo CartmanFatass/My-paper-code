@@ -1,0 +1,9 @@
+{
+  "calibration_fits_completed": 512,
+  "calibration_fits_started": 512,
+  "completed_arm_contexts": 1536,
+  "last_arm": "KNOW_P_NEAR",
+  "last_context_exclusive": 256,
+  "planned_arm_contexts": 1536,
+  "state": "COMPLETE"
+}

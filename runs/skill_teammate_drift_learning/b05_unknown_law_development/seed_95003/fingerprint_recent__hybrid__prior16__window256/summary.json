@@ -1,0 +1,66 @@
+{
+  "compute_wall_scope": "learner expiry, prediction, and observation only",
+  "compute_wall_seconds": 0.04215389821911231,
+  "cooperative_observations": 1165,
+  "cooperative_posterior_updates": 0,
+  "expiration_recomputations": 1034,
+  "full_target_cumulative_regret": 2.8899999999999997,
+  "initial_to_final_l2_movement": 0.2958714337272211,
+  "initial_to_source_l2_movement": 0.21931032795906136,
+  "launch_sha": "afe4f8ec74d48b2485db3d935de7871c86cc0e6c",
+  "learner_observations": 2304,
+  "object": "unknown_joint_law_b05",
+  "posterior_updates": 1139,
+  "regression_solves": 2199,
+  "regression_statistic_updates": 1165,
+  "safe_posterior_updates": 1139,
+  "seed": 95003,
+  "setting_id": "fingerprint_recent__hybrid__prior16__window256",
+  "source_to_final_l2_movement": 0.29222617969902964,
+  "spec": {
+    "family": "fingerprint_recent",
+    "prior_strength": 16.0,
+    "recent_window": 256,
+    "representation": "hybrid"
+  },
+  "spec_id": "fingerprint_recent__hybrid__prior16__window256",
+  "stage": "development",
+  "target_by_endpoint": {
+    "first64": {
+      "action_counts": [
+        37,
+        27
+      ],
+      "cumulative_regret": 2.0649999999999995,
+      "mean_expected_return": 0.6302343749999999,
+      "mean_regret": 0.03226562499999999,
+      "mean_value_mae": 0.06453355580530383,
+      "panel_count": 64,
+      "sign_mistakes": 27
+    },
+    "full": {
+      "action_counts": [
+        154,
+        102
+      ],
+      "cumulative_regret": 2.8899999999999997,
+      "mean_expected_return": 0.6512109374999998,
+      "mean_regret": 0.011289062499999999,
+      "mean_value_mae": 0.03988945797547168,
+      "panel_count": 256,
+      "sign_mistakes": 50
+    },
+    "late64": {
+      "action_counts": [
+        42,
+        22
+      ],
+      "cumulative_regret": 0.3500000000000003,
+      "mean_expected_return": 0.6570312499999998,
+      "mean_regret": 0.005468750000000005,
+      "mean_value_mae": 0.029998918151617586,
+      "panel_count": 64,
+      "sign_mistakes": 10
+    }
+  }
+}

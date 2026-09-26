@@ -1,0 +1,11 @@
+{
+  "claim_key": "a8de6f294afecb6ce1f8cb421c25be0eae6b131ae27d85083a8c8e0868e8deca",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a8de6f294afecb6ce1f8cb421c25be0eae6b131ae27d85083a8c8e0868e8deca.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_bounded_confirmation_b15_b2_h6_s994102/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a8de6f294afecb6ce1f8cb421c25be0eae6b131ae27d85083a8c8e0868e8deca.json",
+  "pid": 496134,
+  "runner_pid": 496135,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-24T05:35:01.399523Z"
+}

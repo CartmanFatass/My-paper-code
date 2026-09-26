@@ -195,8 +195,11 @@ def submit(folder):
                                 capture_output=True, text=True, timeout=20)
         delivery = {'status': 'queued' if result.returncode == 0 else 'delivery_unknown',
                     'exit_code': result.returncode, 'stdout': result.stdout, 'stderr': result.stderr}
-    except (subprocess.TimeoutExpired, OSError) as exc:
+    except subprocess.TimeoutExpired as exc:
         delivery = {'status': 'delivery_unknown', 'error_type': type(exc).__name__}
+    except OSError as exc:
+        delivery = {'status': 'delivery_unknown', 'error_type': type(exc).__name__,
+                    'executable': binary, 'errno': exc.errno, 'error': str(exc)}
     with transaction(folder) as state:
         # DM may already have consumed this wake while the subprocess returned.
         state['deliveries'].setdefault(wake_id, {}).update(delivery)
@@ -294,6 +297,14 @@ def spawn(folder):
     return child.pid
 
 
+def validate_codex(binary):
+    binary = str(Path(binary).resolve())
+    support = subprocess.run([binary, 'queue', '--help'], capture_output=True, text=True, timeout=10)
+    if support.returncode or '--thread' not in support.stdout or '--message' not in support.stdout:
+        raise ValueError('Codex queue is not available')
+    return binary
+
+
 def arm(folder, request, binary, window):
     thread = owner()
     if not isinstance(request.get('jobs'), list) or not request['jobs'] or len(request['jobs']) > 8:
@@ -302,10 +313,7 @@ def arm(folder, request, binary, window):
         raise ValueError('duplicate job IDs')
     for job in request['jobs']:
         validate_job(job)
-    binary = str(Path(binary).resolve())
-    support = subprocess.run([binary, 'queue', '--help'], capture_output=True, text=True, timeout=10)
-    if support.returncode or '--thread' not in support.stdout or '--message' not in support.stdout:
-        raise ValueError('Codex queue is not available')
+    binary = validate_codex(binary)
     folder.mkdir(parents=True, exist_ok=True, mode=0o700)
     with transaction(folder) as state:
         if state:
@@ -322,6 +330,7 @@ def arm(folder, request, binary, window):
         else:
             state.update(thread=thread, codex=binary, generation=0, deadline=0, jobs={},
                          events={}, deliveries={}, wake=None, stopped=False)
+        state['codex'] = binary
         if not any(job['status'] == 'running' for job in state['jobs'].values()):
             state['generation'] += 1
             state['deadline'] = time.time() + window - min(25, window / 5)
@@ -346,7 +355,7 @@ def drain(folder):
                 'stopped': state.get('stopped')}
 
 
-def rearm(folder, generation, wake_id, event_ids, window, resume_jobs=()):
+def rearm(folder, generation, wake_id, event_ids, window, resume_jobs=(), binary=None):
     with transaction(folder) as state:
         check_owner(state)
         if generation != state['generation']:
@@ -363,6 +372,9 @@ def rearm(folder, generation, wake_id, event_ids, window, resume_jobs=()):
         active_ids = {key for key, job in state['jobs'].items() if job['status'] == 'running'}
         if len(active_ids | set(resume_jobs)) > 8:
             raise ValueError('at most 8 active probes per session')
+        if binary is not None:
+            binary = validate_codex(binary)
+            state['codex'] = binary
         for event_id in event_ids:
             state['events'][event_id]['consumed'] = True
         if wake:
@@ -383,7 +395,7 @@ def main():
     parser.add_argument('action', choices=('arm', 'drain', 'rearm', 'stop', '_run'))
     parser.add_argument('--state-dir', type=Path)
     parser.add_argument('--request', type=Path)
-    parser.add_argument('--codex', default=shutil.which('codex'))
+    parser.add_argument('--codex')
     parser.add_argument('--window', type=float, default=WINDOW)
     parser.add_argument('--generation', type=int)
     parser.add_argument('--wake-id')
@@ -394,13 +406,15 @@ def main():
         parser.error('window must be in (0, 1500] seconds')
     folder = (args.state_dir or Path.home()/'.local/state/hmasd-wait'/owner()).resolve()
     if args.action == 'arm':
-        if not args.request or not args.codex:
+        binary = args.codex or shutil.which('codex')
+        if not args.request or not binary:
             parser.error('arm requires --request and an available Codex executable')
-        result = arm(folder, json.loads(args.request.read_text()), args.codex, args.window)
+        result = arm(folder, json.loads(args.request.read_text()), binary, args.window)
     elif args.action == 'drain':
         result = drain(folder)
     elif args.action == 'rearm':
-        result = rearm(folder, args.generation, args.wake_id, args.event_ids, args.window, args.resume_jobs)
+        result = rearm(folder, args.generation, args.wake_id, args.event_ids, args.window,
+                       args.resume_jobs, args.codex or shutil.which('codex'))
     elif args.action == 'stop':
         with transaction(folder) as state:
             check_owner(state)

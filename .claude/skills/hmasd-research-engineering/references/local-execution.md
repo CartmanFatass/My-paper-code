@@ -101,6 +101,48 @@ OS exit before writing the terminal witness; it does not certify scientific succ
 of the supervisor can prevent that write; preserve uncertainty rather than inventing an exit.
 Runner summaries, curves and complete scientific outputs remain required.
 
+## Source and publication worktree reclamation
+
+`--snapshot` creates a locked, complete linked worktree per operation. These copies are
+disposable source material, but Git does not automatically remove them when a runner exits.
+After collecting and verifying the outputs, run the collector from the maintained control
+checkout on the original executing Linux node:
+
+```bash
+<configured-python> scripts/hmasd_snapshot_gc.py
+<configured-python> scripts/hmasd_snapshot_gc.py --snapshot <snapshot-basename>
+<configured-python> scripts/hmasd_snapshot_gc.py --apply --snapshot <snapshot-basename>
+```
+
+Repeat `--snapshot` to select multiple previewed candidates. The default is read-only.
+If Linux denies inspection of a protected same-user process (for example `systemd --user`),
+the command refuses. On hosts with existing passwordless sudo, explicitly add
+`--sudo-process-scan` to run only the read-only `/proc` probe via `sudo -n`; all Git checks
+and removal still run as the original user. Missing sudo access remains a refusal.
+Apply rechecks each selected snapshot under the admission lock and removes only its Git
+worktree, without force. A terminal exit witness, absent native processes, consistent
+claim/source identity, externally retained outputs, durable branch/tag reachability and
+absence of dirty, untracked or ignored files are required. Local process references also
+block reclamation. Unknown/unclaimed operations and unsupported process inspection remain
+preserved; age, exit-zero alone or an apparently idle direction does not grant deletion.
+Keep claims, manifests, exit witnesses and run artifacts: they retain status and duplicate
+prevention after the source directory is gone. Cleanup grants no relaunch.
+
+On sparse remote checkouts, a missing manifest can be a checkout omission. Check the
+published commit for the exact operation's original records and match its claim, SHA,
+host, source, output and native process identities before recovering them. Materialize
+the relevant run directories with `git sparse-checkout add` (preserving existing paths
+and untracked outputs), then preview again. Do not synthesize terminal records or treat
+a copied record from another node as local evidence. Retain the run directories in the
+sparse selection so a later checkout does not discard the recovered status handles.
+
+Ordinary authoring/publication worktrees are outside this collector. At a completed
+publication boundary, remove an owned temporary publication checkout with ordinary
+`git worktree remove <path>` only after verifying its commits are durably reachable,
+including ignored/untracked evidence in the clean-tree check, and ensuring no active task,
+process or accepted operation depends on the path. Retain branches and run evidence.
+Never sweep all worktrees, delete by age or use `--force` to bypass these checks.
+
 Historical frozen runners and `hmasd_run.py` retain their old interfaces at their recorded
 SHAs. They are not silently claimed to have this new boundary. The first migrated existing
 entry is `run_folr_entity_augmentation_repeat_b01.py`; all new result entries must adopt the

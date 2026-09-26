@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-25T05:20:49.600007Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8d9392997b9c4d21b9ec410a249ef61f/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8d9392997b9c4d21b9ec410a249ef61f/scripts/run_agent_count_ordered_roster_confirmation_b20.py",
+    "--output",
+    "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101",
+    "--",
+    "--block",
+    "1",
+    "--seed",
+    "1016101",
+    "--launch-sha",
+    "424bbe4db1351db70d73560ece913150c2b20ed4",
+    "--out",
+    "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101"
+  ],
+  "claim_key": "4176b56e5a83e1281270dee8152a16ef3c5a107152ee4ee8b7a5e27faabc9a7c",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4176b56e5a83e1281270dee8152a16ef3c5a107152ee4ee8b7a5e27faabc9a7c.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8d9392997b9c4d21b9ec410a249ef61f/scripts/run_agent_count_ordered_roster_confirmation_b20.py",
+    "--block",
+    "1",
+    "--seed",
+    "1016101",
+    "--launch-sha",
+    "424bbe4db1351db70d73560ece913150c2b20ed4",
+    "--out",
+    "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101"
+  ],
+  "command_sha256": "0934147546a506b10b2658ad5abd7355c64f1990f43e5de13683627b5524a1bd",
+  "control_observation": {
+    "observed_at": "2026-09-25T05:20:49.416740Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "c543bc7efe5af9e497c67859f47e9ea0ba50202c"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-25T05:20:49.430829Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8d9392997b9c4d21b9ec410a249ef61f",
+  "direction": "agent_count_generalization",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_ordered_roster_confirmation_b20.py",
+    "--block",
+    "1",
+    "--seed",
+    "1016101",
+    "--launch-sha",
+    "424bbe4db1351db70d73560ece913150c2b20ed4"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4176b56e5a83e1281270dee8152a16ef3c5a107152ee4ee8b7a5e27faabc9a7c.json",
+  "output_root": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101",
+  "preflight": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "ef111e89-19ab-42f4-bc0a-c1773533e920",
+      "kind": "linux_pid_start_ticks",
+      "pid": 176413,
+      "session_id": 176413,
+      "start_ticks": 27229638
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 176413,
+    "process_group_id": 176413
+  },
+  "process_exit": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "ef111e89-19ab-42f4-bc0a-c1773533e920",
+      "kind": "linux_pid_start_ticks",
+      "pid": 176414,
+      "session_id": 176413,
+      "start_ticks": 27229642
+    },
+    "pid": 176414,
+    "process_group_id": 176413,
+    "supervisor_pid": 176413
+  },
+  "schema_version": 1,
+  "sha": "424bbe4db1351db70d73560ece913150c2b20ed4",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8d9392997b9c4d21b9ec410a249ef61f",
+  "stderr": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/a138/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_b1_s1016101/stdout.log"
+}

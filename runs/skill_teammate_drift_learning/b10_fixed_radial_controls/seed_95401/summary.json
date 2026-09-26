@@ -1,0 +1,977 @@
+{
+  "b09_evidence_commit": "69a55e71d9f1bca4e8cdd204adce256cd05a7676",
+  "compute_wall_scope": "four fixed deployment policies, J/M cloned one-step planning, actual native trajectories, and reductions",
+  "compute_wall_seconds": 5.837055894022342,
+  "config": {
+    "area_size": 1000.0,
+    "episodes": 4,
+    "height_range": [
+      50.0,
+      150.0
+    ],
+    "max_connections": 10,
+    "max_speed": 30.0,
+    "min_sinr": 0.0,
+    "n_uavs": 3,
+    "n_users": 1,
+    "phase": 2,
+    "steps": 64,
+    "stream": 2,
+    "time_step": 1.0
+  },
+  "counts": {
+    "J_emp_deployment_choices": 256,
+    "M_proj_deployment_choices": 256,
+    "actor_value_network_forwards": 0,
+    "actual_focal_policy_choices": 1024,
+    "actual_native_step_calls": 1024,
+    "count_updates": 0,
+    "custom_geometry_channel_refreshes": 16,
+    "deep_copies": 4096,
+    "evaluation_episodes": 16,
+    "evaluation_team_steps": 1024,
+    "external_innovation_draw_calls": 1024,
+    "fixed_IN_choice_assignments": 256,
+    "fixed_OUT_choice_assignments": 256,
+    "frozen_projection_constructions": 1,
+    "gradient_calls": 0,
+    "implicit_constructor_resets": 16,
+    "joint_choices": 512,
+    "joint_q_vectors": 512,
+    "learner_probability_queries": 0,
+    "loaded_fixed_states": 1,
+    "loaded_target_probability_views": 1,
+    "logical_episode_initializations": 16,
+    "native_constructors": 16,
+    "new_fits": 0,
+    "planning_native_step_calls": 4096,
+    "projected_choices": 512,
+    "projected_q_vectors": 512,
+    "projection_equivalence_calculations": 1,
+    "response_tables": 512,
+    "total_marginal_projection_calculations": 2,
+    "total_native_step_calls": 5120,
+    "training_observations": 0,
+    "true_chosen_values_after_choice": 512,
+    "true_q_vectors_after_choice": 512,
+    "true_regrets_after_choice": 512,
+    "unique_external_innovation_addresses": 256
+  },
+  "episode_initializations": [
+    {
+      "environment_seed": 1941000335,
+      "episode": 0,
+      "geometry_slots": [
+        0.8513089435795488,
+        0.12138384223472465,
+        0.4454096832059803,
+        0.7595136887708671,
+        0.10587991505252703,
+        0.034835313865561046,
+        0.9775106487364892
+      ],
+      "initial_positions": [
+        [
+          540.9833369821704,
+          435.743364102425,
+          50.0
+        ],
+        [
+          537.5221714050042,
+          570.0359918645536,
+          50.0
+        ],
+        [
+          418.99087247055996,
+          483.8916824460699,
+          50.0
+        ]
+      ],
+      "policy": "J_emp"
+    },
+    {
+      "environment_seed": 366016829,
+      "episode": 1,
+      "geometry_slots": [
+        0.9262410190540205,
+        0.10609822487021026,
+        0.18302644246716349,
+        0.37260354198297496,
+        0.7112289375700481,
+        0.7141183994774322,
+        0.8374953448960185
+      ],
+      "initial_positions": [
+        [
+          569.2450224259702,
+          468.52938052938487,
+          50.0
+        ],
+        [
+          492.51876025656276,
+          576.465159278368,
+          50.0
+        ],
+        [
+          436.97947571206885,
+          452.81735306917847,
+          50.0
+        ]
+      ],
+      "policy": "J_emp"
+    },
+    {
+      "environment_seed": 25823393,
+      "episode": 2,
+      "geometry_slots": [
+        0.3956442567950851,
+        0.8488170087586572,
+        0.4497974616693359,
+        0.7674825951230759,
+        0.7607935894561249,
+        0.3690256655715205,
+        0.43043431579016045
+      ],
+      "initial_positions": [
+        [
+          431.57719007062303,
+          547.839247756859,
+          50.0
+        ],
+        [
+          487.7312552841726,
+          421.4544344265427,
+          50.0
+        ],
+        [
+          576.7965042894776,
+          530.6173770101644,
+          50.0
+        ]
+      ],
+      "policy": "J_emp"
+    },
+    {
+      "environment_seed": 55201167,
+      "episode": 3,
+      "geometry_slots": [
+        0.604510603016607,
+        0.834273383412055,
+        0.41856741344284787,
+        0.7840276846389355,
+        0.6928158052361492,
+        0.11726752292543852,
+        0.4124572935714784
+      ],
+      "initial_positions": [
+        [
+          435.7388137940262,
+          446.92918664325725,
+          50.0
+        ],
+        [
+          571.0478684109489,
+          465.0347117503032,
+          50.0
+        ],
+        [
+          490.26548108756214,
+          582.2663394683988,
+          50.0
+        ]
+      ],
+      "policy": "J_emp"
+    },
+    {
+      "environment_seed": 1941000335,
+      "episode": 0,
+      "geometry_slots": [
+        0.8513089435795488,
+        0.12138384223472465,
+        0.4454096832059803,
+        0.7595136887708671,
+        0.10587991505252703,
+        0.034835313865561046,
+        0.9775106487364892
+      ],
+      "initial_positions": [
+        [
+          540.9833369821704,
+          435.743364102425,
+          50.0
+        ],
+        [
+          537.5221714050042,
+          570.0359918645536,
+          50.0
+        ],
+        [
+          418.99087247055996,
+          483.8916824460699,
+          50.0
+        ]
+      ],
+      "policy": "M_proj"
+    },
+    {
+      "environment_seed": 366016829,
+      "episode": 1,
+      "geometry_slots": [
+        0.9262410190540205,
+        0.10609822487021026,
+        0.18302644246716349,
+        0.37260354198297496,
+        0.7112289375700481,
+        0.7141183994774322,
+        0.8374953448960185
+      ],
+      "initial_positions": [
+        [
+          569.2450224259702,
+          468.52938052938487,
+          50.0
+        ],
+        [
+          492.51876025656276,
+          576.465159278368,
+          50.0
+        ],
+        [
+          436.97947571206885,
+          452.81735306917847,
+          50.0
+        ]
+      ],
+      "policy": "M_proj"
+    },
+    {
+      "environment_seed": 25823393,
+      "episode": 2,
+      "geometry_slots": [
+        0.3956442567950851,
+        0.8488170087586572,
+        0.4497974616693359,
+        0.7674825951230759,
+        0.7607935894561249,
+        0.3690256655715205,
+        0.43043431579016045
+      ],
+      "initial_positions": [
+        [
+          431.57719007062303,
+          547.839247756859,
+          50.0
+        ],
+        [
+          487.7312552841726,
+          421.4544344265427,
+          50.0
+        ],
+        [
+          576.7965042894776,
+          530.6173770101644,
+          50.0
+        ]
+      ],
+      "policy": "M_proj"
+    },
+    {
+      "environment_seed": 55201167,
+      "episode": 3,
+      "geometry_slots": [
+        0.604510603016607,
+        0.834273383412055,
+        0.41856741344284787,
+        0.7840276846389355,
+        0.6928158052361492,
+        0.11726752292543852,
+        0.4124572935714784
+      ],
+      "initial_positions": [
+        [
+          435.7388137940262,
+          446.92918664325725,
+          50.0
+        ],
+        [
+          571.0478684109489,
+          465.0347117503032,
+          50.0
+        ],
+        [
+          490.26548108756214,
+          582.2663394683988,
+          50.0
+        ]
+      ],
+      "policy": "M_proj"
+    },
+    {
+      "environment_seed": 1941000335,
+      "episode": 0,
+      "geometry_slots": [
+        0.8513089435795488,
+        0.12138384223472465,
+        0.4454096832059803,
+        0.7595136887708671,
+        0.10587991505252703,
+        0.034835313865561046,
+        0.9775106487364892
+      ],
+      "initial_positions": [
+        [
+          540.9833369821704,
+          435.743364102425,
+          50.0
+        ],
+        [
+          537.5221714050042,
+          570.0359918645536,
+          50.0
+        ],
+        [
+          418.99087247055996,
+          483.8916824460699,
+          50.0
+        ]
+      ],
+      "policy": "IN"
+    },
+    {
+      "environment_seed": 366016829,
+      "episode": 1,
+      "geometry_slots": [
+        0.9262410190540205,
+        0.10609822487021026,
+        0.18302644246716349,
+        0.37260354198297496,
+        0.7112289375700481,
+        0.7141183994774322,
+        0.8374953448960185
+      ],
+      "initial_positions": [
+        [
+          569.2450224259702,
+          468.52938052938487,
+          50.0
+        ],
+        [
+          492.51876025656276,
+          576.465159278368,
+          50.0
+        ],
+        [
+          436.97947571206885,
+          452.81735306917847,
+          50.0
+        ]
+      ],
+      "policy": "IN"
+    },
+    {
+      "environment_seed": 25823393,
+      "episode": 2,
+      "geometry_slots": [
+        0.3956442567950851,
+        0.8488170087586572,
+        0.4497974616693359,
+        0.7674825951230759,
+        0.7607935894561249,
+        0.3690256655715205,
+        0.43043431579016045
+      ],
+      "initial_positions": [
+        [
+          431.57719007062303,
+          547.839247756859,
+          50.0
+        ],
+        [
+          487.7312552841726,
+          421.4544344265427,
+          50.0
+        ],
+        [
+          576.7965042894776,
+          530.6173770101644,
+          50.0
+        ]
+      ],
+      "policy": "IN"
+    },
+    {
+      "environment_seed": 55201167,
+      "episode": 3,
+      "geometry_slots": [
+        0.604510603016607,
+        0.834273383412055,
+        0.41856741344284787,
+        0.7840276846389355,
+        0.6928158052361492,
+        0.11726752292543852,
+        0.4124572935714784
+      ],
+      "initial_positions": [
+        [
+          435.7388137940262,
+          446.92918664325725,
+          50.0
+        ],
+        [
+          571.0478684109489,
+          465.0347117503032,
+          50.0
+        ],
+        [
+          490.26548108756214,
+          582.2663394683988,
+          50.0
+        ]
+      ],
+      "policy": "IN"
+    },
+    {
+      "environment_seed": 1941000335,
+      "episode": 0,
+      "geometry_slots": [
+        0.8513089435795488,
+        0.12138384223472465,
+        0.4454096832059803,
+        0.7595136887708671,
+        0.10587991505252703,
+        0.034835313865561046,
+        0.9775106487364892
+      ],
+      "initial_positions": [
+        [
+          540.9833369821704,
+          435.743364102425,
+          50.0
+        ],
+        [
+          537.5221714050042,
+          570.0359918645536,
+          50.0
+        ],
+        [
+          418.99087247055996,
+          483.8916824460699,
+          50.0
+        ]
+      ],
+      "policy": "OUT"
+    },
+    {
+      "environment_seed": 366016829,
+      "episode": 1,
+      "geometry_slots": [
+        0.9262410190540205,
+        0.10609822487021026,
+        0.18302644246716349,
+        0.37260354198297496,
+        0.7112289375700481,
+        0.7141183994774322,
+        0.8374953448960185
+      ],
+      "initial_positions": [
+        [
+          569.2450224259702,
+          468.52938052938487,
+          50.0
+        ],
+        [
+          492.51876025656276,
+          576.465159278368,
+          50.0
+        ],
+        [
+          436.97947571206885,
+          452.81735306917847,
+          50.0
+        ]
+      ],
+      "policy": "OUT"
+    },
+    {
+      "environment_seed": 25823393,
+      "episode": 2,
+      "geometry_slots": [
+        0.3956442567950851,
+        0.8488170087586572,
+        0.4497974616693359,
+        0.7674825951230759,
+        0.7607935894561249,
+        0.3690256655715205,
+        0.43043431579016045
+      ],
+      "initial_positions": [
+        [
+          431.57719007062303,
+          547.839247756859,
+          50.0
+        ],
+        [
+          487.7312552841726,
+          421.4544344265427,
+          50.0
+        ],
+        [
+          576.7965042894776,
+          530.6173770101644,
+          50.0
+        ]
+      ],
+      "policy": "OUT"
+    },
+    {
+      "environment_seed": 55201167,
+      "episode": 3,
+      "geometry_slots": [
+        0.604510603016607,
+        0.834273383412055,
+        0.41856741344284787,
+        0.7840276846389355,
+        0.6928158052361492,
+        0.11726752292543852,
+        0.4124572935714784
+      ],
+      "initial_positions": [
+        [
+          435.7388137940262,
+          446.92918664325725,
+          50.0
+        ],
+        [
+          571.0478684109489,
+          465.0347117503032,
+          50.0
+        ],
+        [
+          490.26548108756214,
+          582.2663394683988,
+          50.0
+        ]
+      ],
+      "policy": "OUT"
+    }
+  ],
+  "frozen_base_seed": 95401,
+  "frozen_marginal_product": [
+    0.2497704315886134,
+    0.26538108356290174,
+    0.23507805325987147,
+    0.2497704315886134
+  ],
+  "frozen_state_digests": {
+    "artifacts.json": "c40f10915a5d7698218fdd3a4e3d54b2c904a429684f3e94db0292174d7b811e",
+    "state.npz": "82a6d36c567e429bd0ca8217fc98cccc93a9a11d560ddc73796b8f3bdca8b873",
+    "summary.json": "ddd37561d82348d9f2139eec221e6523a9800d276ac1261051e77d9b59689898"
+  },
+  "frozen_target_probabilities": [
+    0.4166666666666667,
+    0.09848484848484848,
+    0.06818181818181818,
+    0.4166666666666667
+  ],
+  "historical_input_cost": {
+    "fits": 1,
+    "recorded_counts": {
+      "actor_value_network_forwards": 0,
+      "count_updates": 128,
+      "custom_geometry_channel_refreshes": 18,
+      "deep_copies": 8192,
+      "evaluation_count_updates": 0,
+      "evaluation_episodes": 16,
+      "evaluation_frozen_projection_constructions": 2,
+      "evaluation_joint_choices": 1024,
+      "evaluation_joint_q_vectors": 1024,
+      "evaluation_projected_choices": 1024,
+      "evaluation_projected_q_vectors": 1024,
+      "evaluation_response_tables": 1024,
+      "evaluation_team_steps": 1024,
+      "evaluation_true_chosen_values_after_choice": 1024,
+      "evaluation_true_q_vectors_after_choice": 1024,
+      "evaluation_true_regrets_after_choice": 1024,
+      "external_innovation_draws": 1152,
+      "final_probability_export_queries": 2,
+      "focal_uniform_collection_draws": 128,
+      "gradient_calls": 0,
+      "implicit_constructor_resets": 18,
+      "initial_probability_export_queries": 2,
+      "joint_log_loss_terms": 128,
+      "logical_episode_initializations": 18,
+      "native_constructors": 18,
+      "native_step_calls": 9344,
+      "observed_joint_labels": 128,
+      "planner_native_step_calls": 8192,
+      "preupdate_probability_queries": 128,
+      "projected_log_loss_terms": 128,
+      "real_team_ticks": 1152,
+      "snapshot_probability_export_queries": 4,
+      "state_export_probability_queries": 8,
+      "summary_projection_diagnostics": 3,
+      "total_learner_probability_queries": 136,
+      "training_marginal_projection_constructions": 128,
+      "training_team_steps": 128
+    },
+    "role": "already incurred sealed input cost; excluded from B10 new exposure",
+    "source_object": "B09 final64",
+    "source_observations": 64,
+    "target_observations": 64
+  },
+  "information_contract": "read-only B09 final64 target probability view; true q is external generation and post-choice diagnosis only",
+  "launch_sha": "3072f05072ec7628f2463bc7ae3b621343d7ca58",
+  "object": "skill_drift_fixed_radial_b10",
+  "per_policy_cost": {
+    "IN": {
+      "actual_native_step_calls": 256,
+      "focal_policy_choices": 256,
+      "joint_q_vectors": 0,
+      "planner_native_step_calls": 0,
+      "projected_q_vectors": 0,
+      "response_tables": 0
+    },
+    "J_emp": {
+      "actual_native_step_calls": 256,
+      "focal_policy_choices": 256,
+      "joint_q_vectors": 256,
+      "planner_native_step_calls": 2048,
+      "projected_q_vectors": 256,
+      "response_tables": 256
+    },
+    "M_proj": {
+      "actual_native_step_calls": 256,
+      "focal_policy_choices": 256,
+      "joint_q_vectors": 256,
+      "planner_native_step_calls": 2048,
+      "projected_q_vectors": 256,
+      "response_tables": 256
+    },
+    "OUT": {
+      "actual_native_step_calls": 256,
+      "focal_policy_choices": 256,
+      "joint_q_vectors": 0,
+      "planner_native_step_calls": 0,
+      "projected_q_vectors": 0,
+      "response_tables": 0
+    }
+  },
+  "plan_source": "75ef4a931de474ab27e6903c6f16929eab932d85",
+  "policies": [
+    "J_emp",
+    "M_proj",
+    "IN",
+    "OUT"
+  ],
+  "policy_diagnostics": {
+    "IN": {
+      "actual_ticks": 256,
+      "coverage_component_sum": 199.0,
+      "energy_component_sum": 0.0,
+      "final_radius_by_episode_and_agent": [
+        [
+          16.21383823162964,
+          139.45409851925302,
+          37.40486125771679
+        ],
+        [
+          16.060980578519573,
+          256.8302653460981,
+          221.27395808927213
+        ],
+        [
+          23.48817030310405,
+          280.5020193941105,
+          421.683909954815
+        ],
+        [
+          23.34273393085428,
+          139.18567493072035,
+          37.15972185635592
+        ]
+      ],
+      "maximum_radius_by_agent": [
+        53.4881699602219,
+        496.83026657466667,
+        541.6839053163275
+      ],
+      "minimum_radius_by_agent": [
+        6.51182920158471,
+        10.502023775623782,
+        7.159722033583218
+      ],
+      "quality_component_sum": 38.67622262571649,
+      "served_ticks": 199,
+      "service_owner_tick_counts": [
+        198,
+        0,
+        1
+      ],
+      "unserved_ticks": 57
+    },
+    "J_emp": {
+      "actual_ticks": 256,
+      "coverage_component_sum": 238.0,
+      "energy_component_sum": 0.0,
+      "final_radius_by_episode_and_agent": [
+        [
+          707.1067811865476,
+          139.45409851925302,
+          37.40486125771679
+        ],
+        [
+          590.2998204090346,
+          256.8302653460981,
+          221.27395808927213
+        ],
+        [
+          23.48817030310405,
+          280.5020193941105,
+          421.683909954815
+        ],
+        [
+          707.1067811865476,
+          139.18567493072035,
+          37.15972185635592
+        ]
+      ],
+      "maximum_radius_by_agent": [
+        707.1067811865476,
+        496.83026657466667,
+        541.6839053163275
+      ],
+      "minimum_radius_by_agent": [
+        6.51182920158471,
+        10.502023775623782,
+        7.159722033583218
+      ],
+      "quality_component_sum": 47.38817897490944,
+      "served_ticks": 238,
+      "service_owner_tick_counts": [
+        138,
+        5,
+        95
+      ],
+      "unserved_ticks": 18
+    },
+    "M_proj": {
+      "actual_ticks": 256,
+      "coverage_component_sum": 221.0,
+      "energy_component_sum": 0.0,
+      "final_radius_by_episode_and_agent": [
+        [
+          707.1067811865476,
+          139.45409851925302,
+          37.40486125771679
+        ],
+        [
+          707.1067811865476,
+          256.8302653460981,
+          221.27395808927213
+        ],
+        [
+          707.1067811865476,
+          280.5020193941105,
+          421.683909954815
+        ],
+        [
+          707.1067811865476,
+          139.18567493072035,
+          37.15972185635592
+        ]
+      ],
+      "maximum_radius_by_agent": [
+        707.1067811865476,
+        496.83026657466667,
+        541.6839053163275
+      ],
+      "minimum_radius_by_agent": [
+        106.06098288649957,
+        10.502023775623782,
+        7.159722033583218
+      ],
+      "quality_component_sum": 38.21597803097029,
+      "served_ticks": 221,
+      "service_owner_tick_counts": [
+        0,
+        67,
+        154
+      ],
+      "unserved_ticks": 35
+    },
+    "OUT": {
+      "actual_ticks": 256,
+      "coverage_component_sum": 221.0,
+      "energy_component_sum": 0.0,
+      "final_radius_by_episode_and_agent": [
+        [
+          707.1067811865476,
+          139.45409851925302,
+          37.40486125771679
+        ],
+        [
+          707.1067811865476,
+          256.8302653460981,
+          221.27395808927213
+        ],
+        [
+          707.1067811865476,
+          280.5020193941105,
+          421.683909954815
+        ],
+        [
+          707.1067811865476,
+          139.18567493072035,
+          37.15972185635592
+        ]
+      ],
+      "maximum_radius_by_agent": [
+        707.1067811865476,
+        496.83026657466667,
+        541.6839053163275
+      ],
+      "minimum_radius_by_agent": [
+        106.06098288649957,
+        10.502023775623782,
+        7.159722033583218
+      ],
+      "quality_component_sum": 38.21597803097029,
+      "served_ticks": 221,
+      "service_owner_tick_counts": [
+        0,
+        67,
+        154
+      ],
+      "unserved_ticks": 35
+    }
+  },
+  "reduction": {
+    "base_mean_adapter_returns": {
+      "IN": 12.575238898976245,
+      "J_emp": 15.06803780770607,
+      "M_proj": 13.847066117440924,
+      "OUT": 13.847066117440924
+    },
+    "contrasts": {
+      "J_minus_IN": {
+        "base_mean_adapter_return": 2.492798908729824,
+        "base_mean_team_return": 7.478396726189471,
+        "paired_episode_adapter_returns": [
+          3.5538756353535117,
+          2.7492745372666185,
+          -0.021599999114947366,
+          3.6896454614141128
+        ],
+        "paired_episode_team_returns": [
+          10.661626906060535,
+          8.247823611799856,
+          -0.0647999973448421,
+          11.068936384242338
+        ]
+      },
+      "J_minus_M": {
+        "base_mean_adapter_return": 1.2209716902651455,
+        "base_mean_team_return": 3.6629150707954365,
+        "paired_episode_adapter_returns": [
+          0.7205857547125767,
+          -0.013225120402173829,
+          2.966952258958898,
+          1.2095738677912813
+        ],
+        "paired_episode_team_returns": [
+          2.16175726413773,
+          -0.03967536120652149,
+          8.900856776876694,
+          3.628721603373844
+        ]
+      },
+      "J_minus_OUT": {
+        "base_mean_adapter_return": 1.2209716902651455,
+        "base_mean_team_return": 3.6629150707954365,
+        "paired_episode_adapter_returns": [
+          0.7205857547125767,
+          -0.013225120402173829,
+          2.966952258958898,
+          1.2095738677912813
+        ],
+        "paired_episode_team_returns": [
+          2.16175726413773,
+          -0.03967536120652149,
+          8.900856776876694,
+          3.628721603373844
+        ]
+      },
+      "M_minus_OUT": {
+        "base_mean_adapter_return": 0.0,
+        "base_mean_team_return": 0.0,
+        "paired_episode_adapter_returns": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "paired_episode_team_returns": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "episode_adapter_returns": {
+      "IN": [
+        9.13220512838216,
+        12.626148894426443,
+        16.118109609052347,
+        12.42449196404403
+      ],
+      "J_emp": [
+        12.686080763735673,
+        15.375423431693061,
+        16.0965096099374,
+        16.114137425458143
+      ],
+      "M_proj": [
+        11.965495009023096,
+        15.388648552095235,
+        13.129557350978502,
+        14.904563557666862
+      ],
+      "OUT": [
+        11.965495009023096,
+        15.388648552095235,
+        13.129557350978502,
+        14.904563557666862
+      ]
+    },
+    "episode_team_returns": {
+      "IN": [
+        27.396615385146482,
+        37.878446683279336,
+        48.35432882715703,
+        37.27347589213209
+      ],
+      "J_emp": [
+        38.05824229120702,
+        46.12627029507918,
+        48.28952882981219,
+        48.34241227637442
+      ],
+      "M_proj": [
+        35.89648502706929,
+        46.1659456562857,
+        39.388672052935505,
+        44.713690673000585
+      ],
+      "OUT": [
+        35.89648502706929,
+        46.1659456562857,
+        39.388672052935505,
+        44.713690673000585
+      ]
+    }
+  },
+  "seed": 95401,
+  "stage": "prospective_diagnostic",
+  "status": "COMPLETE"
+}

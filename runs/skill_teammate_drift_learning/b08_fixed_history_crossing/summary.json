@@ -1,0 +1,562 @@
+{
+  "admission": {
+    "accepted_at_epoch": 1789993578.533992,
+    "child_pid": 3737451,
+    "command_sha256": "4324163feb9146ae930315262ce8ad1c67b0da3944c22599034f081cb1e94737",
+    "direction": "skill_teammate_drift_learning",
+    "parent_pid": 3737449,
+    "schema_version": 1,
+    "sha": "52cc7b71a0fd9433a1f7c093e8c77076f8732abc"
+  },
+  "blas_threads": 1,
+  "completed_blocks": [
+    {
+      "config": {
+        "contexts": 4,
+        "matched_epsilon": 0.2,
+        "source_state_after_macros": 2048,
+        "target_records_per_fit": 256
+      },
+      "continuations": [
+        "R_on_F_E_history",
+        "F_on_R_E_history"
+      ],
+      "decision_fits": 2,
+      "environment_ticks": 0,
+      "evidence_commit": "6ab8db786a2dc2397d883e8476ccb0303b059f0e",
+      "gradient_optimizer_calls": 0,
+      "input_manifest_sha256": "ce1ff62b8d5c0ee2113faf3861cb19f3c2d5c7920aba8746fc4cbd4409e6e620",
+      "launch_sha": "52cc7b71a0fd9433a1f7c093e8c77076f8732abc",
+      "law_fits": 0,
+      "new_preupdate_q_predictions": 512,
+      "object": "skill_drift_history_replay_b08",
+      "reduction": {
+        "all_values_role": "off-collector matched-epsilon recommendation readout; diagonals are reused B07 panels",
+        "by_endpoint": {
+          "first64": {
+            "matched_epsilon_2x2": {
+              "F_history": {
+                "F": 0.5946875,
+                "R": 0.6032500000000001
+              },
+              "R_history": {
+                "F": 0.6124375,
+                "R": 0.610125
+              }
+            },
+            "per_history_response_minus_full": {
+              "F_history": 0.008562500000000028,
+              "R_history": -0.0023124999999999396
+            },
+            "per_method_R_history_minus_F_history": {
+              "F": 0.017749999999999932,
+              "R": 0.0068749999999999645
+            }
+          },
+          "full": {
+            "matched_epsilon_2x2": {
+              "F_history": {
+                "F": 0.635140625,
+                "R": 0.6261406249999999
+              },
+              "R_history": {
+                "F": 0.637375,
+                "R": 0.6351562499999999
+              }
+            },
+            "per_history_response_minus_full": {
+              "F_history": -0.009000000000000119,
+              "R_history": -0.002218750000000158
+            },
+            "per_method_R_history_minus_F_history": {
+              "F": 0.0022343750000000107,
+              "R": 0.009015624999999972
+            }
+          },
+          "late64": {
+            "matched_epsilon_2x2": {
+              "F_history": {
+                "F": 0.649,
+                "R": 0.649
+              },
+              "R_history": {
+                "F": 0.649,
+                "R": 0.649
+              }
+            },
+            "per_history_response_minus_full": {
+              "F_history": 0.0,
+              "R_history": 0.0
+            },
+            "per_method_R_history_minus_F_history": {
+              "F": 0.0,
+              "R": 0.0
+            }
+          }
+        },
+        "context_contribution_definition": "sum of row-level matched-epsilon value contrast in context divided by all target rows",
+        "context_contributions": {
+          "0": {
+            "R_history_minus_F_history_for_F": 0.0033593749999999965,
+            "R_history_minus_F_history_for_R": 0.0,
+            "R_minus_F_on_F_history": 0.004031249999999996,
+            "R_minus_F_on_R_history": 0.0006718749999999993
+          },
+          "1": {
+            "R_history_minus_F_history_for_F": 0.0003437500000000003,
+            "R_history_minus_F_history_for_R": 0.002406250000000002,
+            "R_minus_F_on_F_history": -0.0027500000000000024,
+            "R_minus_F_on_R_history": -0.0006875000000000006
+          },
+          "2": {
+            "R_history_minus_F_history_for_F": -0.00146875,
+            "R_history_minus_F_history_for_R": 0.006609375000000001,
+            "R_minus_F_on_F_history": -0.01028125,
+            "R_minus_F_on_R_history": -0.0022031250000000002
+          },
+          "3": {
+            "R_history_minus_F_history_for_F": 0.0,
+            "R_history_minus_F_history_for_R": 0.0,
+            "R_minus_F_on_F_history": 0.0,
+            "R_minus_F_on_R_history": 0.0
+          }
+        },
+        "no_actual_collector_or_sampled_reward_claim": true
+      },
+      "sampled_rewards": 0,
+      "scalar_policy_reductions": 1024,
+      "scientific_source": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+      "seed": 95301,
+      "settings": {
+        "full": "fingerprint_full__hybrid__prior2",
+        "response": "response_all__response__prior2"
+      },
+      "source_fits": 0,
+      "stage": "prospective_diagnostic",
+      "status": "COMPLETE",
+      "target_records_read": 512
+    },
+    {
+      "config": {
+        "contexts": 4,
+        "matched_epsilon": 0.2,
+        "source_state_after_macros": 2048,
+        "target_records_per_fit": 256
+      },
+      "continuations": [
+        "R_on_F_E_history",
+        "F_on_R_E_history"
+      ],
+      "decision_fits": 2,
+      "environment_ticks": 0,
+      "evidence_commit": "6ab8db786a2dc2397d883e8476ccb0303b059f0e",
+      "gradient_optimizer_calls": 0,
+      "input_manifest_sha256": "2ab5f14494eeaa231a57ad4b1e3fbd35837e9b2d7a8ef3d0033d0f767feddf37",
+      "launch_sha": "52cc7b71a0fd9433a1f7c093e8c77076f8732abc",
+      "law_fits": 0,
+      "new_preupdate_q_predictions": 512,
+      "object": "skill_drift_history_replay_b08",
+      "reduction": {
+        "all_values_role": "off-collector matched-epsilon recommendation readout; diagonals are reused B07 panels",
+        "by_endpoint": {
+          "first64": {
+            "matched_epsilon_2x2": {
+              "F_history": {
+                "F": 0.633,
+                "R": 0.631625
+              },
+              "R_history": {
+                "F": 0.633,
+                "R": 0.631625
+              }
+            },
+            "per_history_response_minus_full": {
+              "F_history": -0.001375000000000015,
+              "R_history": -0.001375000000000015
+            },
+            "per_method_R_history_minus_F_history": {
+              "F": 0.0,
+              "R": 0.0
+            }
+          },
+          "full": {
+            "matched_epsilon_2x2": {
+              "F_history": {
+                "F": 0.63975,
+                "R": 0.63940625
+              },
+              "R_history": {
+                "F": 0.63975,
+                "R": 0.639234375
+              }
+            },
+            "per_history_response_minus_full": {
+              "F_history": -0.00034375000000008704,
+              "R_history": -0.0005156250000000195
+            },
+            "per_method_R_history_minus_F_history": {
+              "F": 0.0,
+              "R": -0.0001718749999999325
+            }
+          },
+          "late64": {
+            "matched_epsilon_2x2": {
+              "F_history": {
+                "F": 0.642,
+                "R": 0.642
+              },
+              "R_history": {
+                "F": 0.642,
+                "R": 0.642
+              }
+            },
+            "per_history_response_minus_full": {
+              "F_history": 0.0,
+              "R_history": 0.0
+            },
+            "per_method_R_history_minus_F_history": {
+              "F": 0.0,
+              "R": 0.0
+            }
+          }
+        },
+        "context_contribution_definition": "sum of row-level matched-epsilon value contrast in context divided by all target rows",
+        "context_contributions": {
+          "0": {
+            "R_history_minus_F_history_for_F": 0.0,
+            "R_history_minus_F_history_for_R": 0.0,
+            "R_minus_F_on_F_history": 0.0,
+            "R_minus_F_on_R_history": 0.0
+          },
+          "1": {
+            "R_history_minus_F_history_for_F": 0.0,
+            "R_history_minus_F_history_for_R": -0.00017187500000000015,
+            "R_minus_F_on_F_history": -0.0003437500000000003,
+            "R_minus_F_on_R_history": -0.0005156250000000005
+          },
+          "2": {
+            "R_history_minus_F_history_for_F": 0.0,
+            "R_history_minus_F_history_for_R": 0.0,
+            "R_minus_F_on_F_history": 0.0,
+            "R_minus_F_on_R_history": 0.0
+          },
+          "3": {
+            "R_history_minus_F_history_for_F": 0.0,
+            "R_history_minus_F_history_for_R": 0.0,
+            "R_minus_F_on_F_history": 0.0,
+            "R_minus_F_on_R_history": 0.0
+          }
+        },
+        "no_actual_collector_or_sampled_reward_claim": true
+      },
+      "sampled_rewards": 0,
+      "scalar_policy_reductions": 1024,
+      "scientific_source": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+      "seed": 95302,
+      "settings": {
+        "full": "fingerprint_full__hybrid__prior2",
+        "response": "response_all__response__prior2"
+      },
+      "source_fits": 0,
+      "stage": "prospective_diagnostic",
+      "status": "COMPLETE",
+      "target_records_read": 512
+    },
+    {
+      "config": {
+        "contexts": 4,
+        "matched_epsilon": 0.2,
+        "source_state_after_macros": 2048,
+        "target_records_per_fit": 256
+      },
+      "continuations": [
+        "R_on_F_E_history",
+        "F_on_R_E_history"
+      ],
+      "decision_fits": 2,
+      "environment_ticks": 0,
+      "evidence_commit": "6ab8db786a2dc2397d883e8476ccb0303b059f0e",
+      "gradient_optimizer_calls": 0,
+      "input_manifest_sha256": "c011ab2891fdc5030afa446bc7ad8da9b160fd4e691b611864dd83c51782a57d",
+      "launch_sha": "52cc7b71a0fd9433a1f7c093e8c77076f8732abc",
+      "law_fits": 0,
+      "new_preupdate_q_predictions": 512,
+      "object": "skill_drift_history_replay_b08",
+      "reduction": {
+        "all_values_role": "off-collector matched-epsilon recommendation readout; diagonals are reused B07 panels",
+        "by_endpoint": {
+          "first64": {
+            "matched_epsilon_2x2": {
+              "F_history": {
+                "F": 0.6359375,
+                "R": 0.6355625
+              },
+              "R_history": {
+                "F": 0.6348750000000001,
+                "R": 0.6315625
+              }
+            },
+            "per_history_response_minus_full": {
+              "F_history": -0.0003750000000000142,
+              "R_history": -0.0033125000000000515
+            },
+            "per_method_R_history_minus_F_history": {
+              "F": -0.0010624999999999662,
+              "R": -0.0040000000000000036
+            }
+          },
+          "full": {
+            "matched_epsilon_2x2": {
+              "F_history": {
+                "F": 0.639515625,
+                "R": 0.6332187499999999
+              },
+              "R_history": {
+                "F": 0.63721875,
+                "R": 0.63125
+              }
+            },
+            "per_history_response_minus_full": {
+              "F_history": -0.006296875000000091,
+              "R_history": -0.005968749999999967
+            },
+            "per_method_R_history_minus_F_history": {
+              "F": -0.002296875000000087,
+              "R": -0.0019687499999999636
+            }
+          },
+          "late64": {
+            "matched_epsilon_2x2": {
+              "F_history": {
+                "F": 0.6452500000000001,
+                "R": 0.631875
+              },
+              "R_history": {
+                "F": 0.638,
+                "R": 0.6314375
+              }
+            },
+            "per_history_response_minus_full": {
+              "F_history": -0.013375000000000137,
+              "R_history": -0.006562500000000027
+            },
+            "per_method_R_history_minus_F_history": {
+              "F": -0.00725000000000009,
+              "R": -0.00043749999999997957
+            }
+          }
+        },
+        "context_contribution_definition": "sum of row-level matched-epsilon value contrast in context divided by all target rows",
+        "context_contributions": {
+          "0": {
+            "R_history_minus_F_history_for_F": 0.004921874999999985,
+            "R_history_minus_F_history_for_R": -0.0007656249999999976,
+            "R_minus_F_on_F_history": -0.00010937499999999966,
+            "R_minus_F_on_R_history": -0.005796874999999983
+          },
+          "1": {
+            "R_history_minus_F_history_for_F": 0.0,
+            "R_history_minus_F_history_for_R": 0.0,
+            "R_minus_F_on_F_history": 0.0,
+            "R_minus_F_on_R_history": 0.0
+          },
+          "2": {
+            "R_history_minus_F_history_for_F": -0.007218750000000006,
+            "R_history_minus_F_history_for_R": -0.001203125000000001,
+            "R_minus_F_on_F_history": -0.0061875000000000055,
+            "R_minus_F_on_R_history": -0.00017187500000000015
+          },
+          "3": {
+            "R_history_minus_F_history_for_F": 0.0,
+            "R_history_minus_F_history_for_R": 0.0,
+            "R_minus_F_on_F_history": 0.0,
+            "R_minus_F_on_R_history": 0.0
+          }
+        },
+        "no_actual_collector_or_sampled_reward_claim": true
+      },
+      "sampled_rewards": 0,
+      "scalar_policy_reductions": 1024,
+      "scientific_source": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+      "seed": 95303,
+      "settings": {
+        "full": "fingerprint_full__hybrid__prior2",
+        "response": "response_all__response__prior2"
+      },
+      "source_fits": 0,
+      "stage": "prospective_diagnostic",
+      "status": "COMPLETE",
+      "target_records_read": 512
+    }
+  ],
+  "completed_decision_fits": 6,
+  "completed_fit_source_state_restorations": 6,
+  "completed_validation_source_state_roundtrips": 6,
+  "continuations": [
+    "R_on_F_E_history",
+    "F_on_R_E_history"
+  ],
+  "cpu_scope": "single sequential native process, user plus system",
+  "dtype": "float64",
+  "evidence_commit": "6ab8db786a2dc2397d883e8476ccb0303b059f0e",
+  "fit_attempts": [
+    {
+      "compute_wall_seconds": 0.002953051996883005,
+      "continuation": "R_on_F_E_history",
+      "counts": {
+        "cooperative_observations": 109,
+        "cooperative_posterior_updates": 109,
+        "decision_observations": 256,
+        "expiration_recomputations": 0,
+        "regression_solves": 0,
+        "regression_statistic_updates": 0,
+        "safe_posterior_updates": 147
+      },
+      "donor_branch": "F_E",
+      "recipient_branch": "R_E",
+      "recorded_feedback_updates": 256,
+      "records_read": 256,
+      "saved": true,
+      "seed": 95301,
+      "status": "COMPLETE"
+    },
+    {
+      "compute_wall_seconds": 0.004641606006771326,
+      "continuation": "F_on_R_E_history",
+      "counts": {
+        "cooperative_observations": 121,
+        "cooperative_posterior_updates": 0,
+        "decision_observations": 256,
+        "expiration_recomputations": 0,
+        "regression_solves": 121,
+        "regression_statistic_updates": 121,
+        "safe_posterior_updates": 135
+      },
+      "donor_branch": "R_E",
+      "recipient_branch": "F_E",
+      "recorded_feedback_updates": 256,
+      "records_read": 256,
+      "saved": true,
+      "seed": 95301,
+      "status": "COMPLETE"
+    },
+    {
+      "compute_wall_seconds": 0.003192695992765948,
+      "continuation": "R_on_F_E_history",
+      "counts": {
+        "cooperative_observations": 78,
+        "cooperative_posterior_updates": 78,
+        "decision_observations": 256,
+        "expiration_recomputations": 0,
+        "regression_solves": 0,
+        "regression_statistic_updates": 0,
+        "safe_posterior_updates": 178
+      },
+      "donor_branch": "F_E",
+      "recipient_branch": "R_E",
+      "recorded_feedback_updates": 256,
+      "records_read": 256,
+      "saved": true,
+      "seed": 95302,
+      "status": "COMPLETE"
+    },
+    {
+      "compute_wall_seconds": 0.0037958769826218486,
+      "continuation": "F_on_R_E_history",
+      "counts": {
+        "cooperative_observations": 80,
+        "cooperative_posterior_updates": 0,
+        "decision_observations": 256,
+        "expiration_recomputations": 0,
+        "regression_solves": 80,
+        "regression_statistic_updates": 80,
+        "safe_posterior_updates": 176
+      },
+      "donor_branch": "R_E",
+      "recipient_branch": "F_E",
+      "recorded_feedback_updates": 256,
+      "records_read": 256,
+      "saved": true,
+      "seed": 95302,
+      "status": "COMPLETE"
+    },
+    {
+      "compute_wall_seconds": 0.002775392000330612,
+      "continuation": "R_on_F_E_history",
+      "counts": {
+        "cooperative_observations": 91,
+        "cooperative_posterior_updates": 91,
+        "decision_observations": 256,
+        "expiration_recomputations": 0,
+        "regression_solves": 0,
+        "regression_statistic_updates": 0,
+        "safe_posterior_updates": 165
+      },
+      "donor_branch": "F_E",
+      "recipient_branch": "R_E",
+      "recorded_feedback_updates": 256,
+      "records_read": 256,
+      "saved": true,
+      "seed": 95303,
+      "status": "COMPLETE"
+    },
+    {
+      "compute_wall_seconds": 0.0046561020135413855,
+      "continuation": "F_on_R_E_history",
+      "counts": {
+        "cooperative_observations": 121,
+        "cooperative_posterior_updates": 0,
+        "decision_observations": 256,
+        "expiration_recomputations": 0,
+        "regression_solves": 121,
+        "regression_statistic_updates": 121,
+        "safe_posterior_updates": 135
+      },
+      "donor_branch": "R_E",
+      "recipient_branch": "F_E",
+      "recorded_feedback_updates": 256,
+      "records_read": 256,
+      "saved": true,
+      "seed": 95303,
+      "status": "COMPLETE"
+    }
+  ],
+  "input_manifest_output_sha256": "00f28f5593fbaea472bb02c756a693a0fe04c2368b781d191bf5ec411838f026",
+  "input_root": "runs/skill_teammate_drift_learning/b07_own_collection_exploration",
+  "launch_sha": "52cc7b71a0fd9433a1f7c093e8c77076f8732abc",
+  "no_actual_collector_or_sampled_reward_claim": true,
+  "numpy_version": "1.26.3",
+  "object": "skill_drift_history_replay_b08",
+  "output_root": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b08_fixed_history_crossing",
+  "peak_rss_kib": 39988,
+  "plan_commit": "9d7f9a4d9624bec3a5ea69e88f04e1d9912ade78",
+  "planned_decision_fits": 6,
+  "planned_fit_source_state_restorations": 6,
+  "planned_validation_source_state_roundtrips": 6,
+  "readout_role": "off-collector fixed-history matched-epsilon recommendation value",
+  "rss_scope": "single process high-water mark on local_linux",
+  "runner_cpu_seconds": 0.29328370200000003,
+  "runner_wall_seconds": 0.4764195109892171,
+  "scientific_source": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+  "seeds": [
+    95301,
+    95302,
+    95303
+  ],
+  "source_observations_per_restored_state": 2048,
+  "source_training_records_read": 0,
+  "stage": "prospective_diagnostic",
+  "started_decision_fits": 6,
+  "status": "COMPLETE",
+  "target_macros_per_fit": 256,
+  "total_environment_ticks": 0,
+  "total_gradient_optimizer_calls": 0,
+  "total_law_fits": 0,
+  "total_new_preupdate_q_predictions": 1536,
+  "total_recorded_feedback_updates": 1536,
+  "total_sampled_rewards": 0,
+  "total_scalar_policy_reductions": 3072,
+  "total_source_fits": 0,
+  "total_source_state_restore_events": 12,
+  "total_target_records_read": 1536
+}

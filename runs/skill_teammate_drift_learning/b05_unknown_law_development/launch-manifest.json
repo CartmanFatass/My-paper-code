@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-21T10:13:48.635405Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/41999f3c0f4746fc95ca85065d25c84e/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/41999f3c0f4746fc95ca85065d25c84e/scripts/run_skill_drift_unknown_law_b05.py",
+    "--output",
+    "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b05_unknown_law_development",
+    "--",
+    "--stage",
+    "development",
+    "--seeds",
+    "95001",
+    "95002",
+    "95003",
+    "--launch-sha",
+    "afe4f8ec74d48b2485db3d935de7871c86cc0e6c",
+    "--out",
+    "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b05_unknown_law_development"
+  ],
+  "claim_key": "35a1c067ac48715b0a80799e3bdf0203abd3d35721a2547a2a246b1040e2f54e",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/35a1c067ac48715b0a80799e3bdf0203abd3d35721a2547a2a246b1040e2f54e.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/41999f3c0f4746fc95ca85065d25c84e/scripts/run_skill_drift_unknown_law_b05.py",
+    "--stage",
+    "development",
+    "--seeds",
+    "95001",
+    "95002",
+    "95003",
+    "--launch-sha",
+    "afe4f8ec74d48b2485db3d935de7871c86cc0e6c",
+    "--out",
+    "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b05_unknown_law_development"
+  ],
+  "command_sha256": "4bd5199497fb48a387f758c396a5b77ec30f18a493a83cc0114576bb1409ae23",
+  "control_observation": {
+    "observed_at": "2026-09-21T10:13:48.459873Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "a8eaf47e67bf8c2fe140db6359dc5db9b309f6a5"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-21T10:13:48.476383Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/41999f3c0f4746fc95ca85065d25c84e",
+  "direction": "skill_teammate_drift_learning",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_skill_drift_unknown_law_b05.py",
+    "--stage",
+    "development",
+    "--seeds",
+    "95001",
+    "95002",
+    "95003",
+    "--launch-sha",
+    "afe4f8ec74d48b2485db3d935de7871c86cc0e6c"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b05_unknown_law_development/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/35a1c067ac48715b0a80799e3bdf0203abd3d35721a2547a2a246b1040e2f54e.json",
+  "output_root": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b05_unknown_law_development",
+  "preflight": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b05_unknown_law_development/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3434823,
+      "session_id": 3434823,
+      "start_ticks": 24805882
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3434823,
+    "process_group_id": 3434823
+  },
+  "process_exit": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b05_unknown_law_development/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3434824,
+      "session_id": 3434823,
+      "start_ticks": 24805885
+    },
+    "pid": 3434824,
+    "process_group_id": 3434823,
+    "supervisor_pid": 3434823
+  },
+  "schema_version": 1,
+  "sha": "afe4f8ec74d48b2485db3d935de7871c86cc0e6c",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/41999f3c0f4746fc95ca85065d25c84e",
+  "stderr": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b05_unknown_law_development/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/b-unknown-joint-law/hmasd-wsl/runs/skill_teammate_drift_learning/b05_unknown_law_development/stdout.log"
+}

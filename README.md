@@ -2,10 +2,10 @@
 
 > This root README documents the original HMASD/legacy entry. For the stable
 > code architecture and directory standards, see the
-> [project map / codemap](docs/project/PROJECT_MAP.md); for
-> the 33 research directions and their source directories, see the
-> [research map](docs/research/RESEARCH_MAP.md);
-> and for the standalone process-core route, see
+> [project map / codemap](docs/project/PROJECT_MAP.md). Current research questions,
+> evidence, next steps and owner pause are in [RESEARCH.md](docs/research/RESEARCH.md);
+> the [historical research map](docs/research/RESEARCH_MAP.md) locates older code and evidence.
+> For the standalone process-core route, see
 > [ha_ctse_process/README.md](ha_ctse_process/README.md). Codex may use the
 > checkout or native worktree attached to the current task; `temp/` contains
 > ignored runtime output.

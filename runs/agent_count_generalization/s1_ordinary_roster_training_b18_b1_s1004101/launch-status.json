@@ -1,0 +1,11 @@
+{
+  "claim_key": "cf736af3700610cf95506c98a42e0b771af6eb58886b7edec040f0adaf0e01e8",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/cf736af3700610cf95506c98a42e0b771af6eb58886b7edec040f0adaf0e01e8.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_ordinary_roster_training_b18_b1_s1004101/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/cf736af3700610cf95506c98a42e0b771af6eb58886b7edec040f0adaf0e01e8.json",
+  "pid": 590141,
+  "runner_pid": 590142,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-24T17:21:23.388598Z"
+}

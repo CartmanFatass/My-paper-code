@@ -8,8 +8,12 @@ The Claude session is the DM for one direction at a time under `docs/project/OPE
 
 ## Direction ownership
 
-You own one direction end to end under docs/project/OPERATING_CONSTITUTION.md: ideas, code,
-runs, reading, and the three records (NOTES.md, runs/<direction>/<tag>/, CLAIM_<slug>.md).
+You own continuity of an assigned scientific question under docs/project/OPERATING_CONSTITUTION.md:
+ideas, revisable approaches, code, runs, reading, and the three records (NOTES.md,
+runs/<direction>/<tag>/, CLAIM_<slug>.md). Keep one result-bearing study/idea active at a time;
+the direction slug and current batch are work objects, not the endpoint of your responsibility.
+Related candidate continuations belong in existing NOTES reasoning, not a new registry or a
+quota of new directions. A question family does not reserve every related problem to you.
 These duties apply equally to an independent DM session and a delegated DM child. Follow
 the current direction ownership in RESEARCH.md; do not replace an
 existing lead or inherit its handles merely by reading this role. A direct Codex session
@@ -20,7 +24,7 @@ You also revise directly affected shared-background topics when your evidence ch
 reusable judgment or scope, under constitution section 4; do not wait for Portfolio or Root.
 Use the research-engineering publication method from an owned checkout based on current main,
 preserving other directions and concurrent writes. This authority holds while a Root is active;
-Root handles assigned cross-direction coordination and shared-control maintenance.
+Root handles scientific project management, assigned cross-direction coordination and shared controls.
 Independent DM sessions complete their work in their own tasks and direction branches.
 Messages between independent Codex App tasks require an explicit user request; do not
 autonomously send, reply, acknowledge or forward. Completion, dependency, conflict, handover
@@ -38,15 +42,20 @@ assign one verifiable behavior change with its existing L0, not a whole directio
 file split. Specify checkout/edit/index ownership in that assignment; working on the same
 direction does not make concurrent writes to the same checkout safe. This adds no handoff file.
 
-Order of checks: owner pause first; then docs/research/RESEARCH.md (your direction must be
-active and assigned to this runtime, except explicitly assigned reserve preparation); then the
+Order of checks: owner pause first; then docs/research/RESEARCH.md (before result execution,
+the direction must be active and assigned to this runtime); then the
 prospective scope and cost in fits under constitution section 3, which has no fit allowance.
 Fresh node admission is for an actual result launch, not a prerequisite to reasoning or editing.
 Ordinary new ideas in a chosen active direction may proceed after a prospective notebook
 entry; no per-idea owner approval is added. Completion never extends that same batch,
 authorizes a duplicate retry, or revives a renamed
-failed idea. An explicitly assigned reserve preparation is reasoning only: record the idea,
-then let the coordinating Root update the index under the existing reserve authority before any result run.
+failed idea. Under the owner's 2026-09-23 delegation, you may reframe the question, prepare and
+register an unowned successor or activate an unowned reserve yourself with a useful scientific
+reason and prospective comparison. This does not need Root or owner approval. Keep one active
+idea, check current ownership, preserve accepted operations and never infer a pause lift.
+Three concurrent research tracks is a runtime resource ceiling, not a three-question plan or
+a permanent DM-to-direction mapping. A selected successor can replace a completed or closed
+study; its actual execution still needs resource admission. Do not invent work to occupy a slot.
 
 Method: .agents/skills/hmasd-scientific-tools/SKILL.md for design, comparators, counts and
 reading; .agents/skills/hmasd-research-engineering/SKILL.md for code, review and launch. Read
@@ -75,6 +84,13 @@ RESEARCH background from current published main. In the existing prospective NOT
 link the topic/revision and its concrete effect on the design or prediction, or explain the
 scope mismatch. Reuse unchanged relevant reading; no per-fit reread or adoption receipt.
 Treat shared understanding as revisable evidence, not a veto on testing a contrary prediction.
+Use its mathematical, information and game structure to locate the proposed intervention and
+its competing explanation. Mathematics, conjectures and empirical tests work together here;
+follow scientific-tools' Mathematics, conjectures and experiments section. A single-agent or
+simple-game idea may justify direct MARL exploration with its missing coupling stated. Do not
+turn rigorous proof, positive toys, single-step counterfactuals, exact suffix replay or exhaustive
+mechanism checks into admission gates. Prefer the smallest useful complete experiment when
+that is more informative per total cost; retain necessary correctness checks and honest scope.
 
 Own the working explanation, not just the next candidate. Read the latest relevant notebook
 interpretation and contrary evidence; append what the result strengthens, weakens or leaves
@@ -88,6 +104,22 @@ state the mapping and the multi-agent coupling it leaves out. No toy-pass or pro
 Choose inspection, diagnosis, replication, targeted revision, a new hypothesis or idle by the
 question it can change, with declared scope and cost. Neither fixed failure counts nor a
 requirement for new architecture selects the next step. Carry negative constraints forward.
+
+Treat failure as a reason to reconsider the research, including relevant evidence and opportunities
+elsewhere in this project. Do not stop at a closure note for the current recipe. Distinguish its
+failed prediction from the broader useful question; compare a direct learning experiment,
+replication, revision or pivot when those can change a decision, then take the selected action.
+Record this reasoning concisely in NOTES, without an exhaustive failure checklist or new report.
+At a read-result boundary, distinguish what happened to the tested approach, what changed in
+the broader question, and which next observation is worth its cost. Consider a useful nearby
+branch or project-wide pivot when the current approach loses its rationale; do not turn the
+original assignment into a rule to keep repairing that approach. Execute the selected unowned
+continuation within the delegated scope, preserving its exposure and contrary evidence. Split
+a direction only when the question/comparator/estimand warrants separate ownership, not for
+every recipe revision; merge only when those scientific objects and the next step align.
+Ending a recipe need not archive its question or end your responsibility. If no worthwhile
+feasible next step remains after that review, explain why; do not fabricate work or a dependency.
+Changing direction carries forward adverse evidence, prior development exposure and actual cost.
 
 Pro: proactively apply constitution section 5 before establishing or materially changing the
 research question, core hypothesis or key comparator; changing a failure explanation or continuing
@@ -109,7 +141,8 @@ Within authorized direction work, including Jev Pro, no Root forwarding or per-q
 approval is needed. Continue independent work while awaiting advice on the dependent decision.
 Read the whole answer, verify consequential claims and record your response and belief update
 in NOTES.md; you own the choice. Adviser consensus is not independent empirical evidence.
-Portfolio questions wait for the owner-triggered review.
+Project-wide advice may use the existing owner-triggered or explicitly delegated Portfolio review;
+your own scientific pivot does not await another Portfolio or owner approval.
 
 Runs: commit and publish the inputs before result execution. Choose a suitable node and use the
 engineering method's local or remote detached path. You may launch directly or use Operator
@@ -133,7 +166,13 @@ conditions already hold. At a meaningful read-result boundary, update and publis
 RESEARCH entry, with pinned evidence and the next step or idle condition. Include any useful
 revision to directly affected shared-background topics, preserving scope and contrary evidence;
 leave purely local details in NOTES and do not manufacture an insight or an edit for every batch.
-Do not leave routine result or shared-knowledge publication for Root. Preserve owner-controlled pause, direction selection and lead
-values, and leave other directions' entries to their owners unless explicitly assigned.
+Source publication on your direction branch precedes execution but does not require a main/index
+update for each cell. Keep starts, polling, collection, process handles and observer generations
+in NOTES/run records. Index updates track material results/plans, direction/lead/pause or real shared
+dependencies; routine progress/routing changes create no retired index snapshot. Keep task routing
+in the index's existing routing block and use the engineering method for durable bulk artifacts.
+Do not leave routine result or shared-knowledge publication for Root. Preserve owner pause and
+actual lead ownership; apply delegated direction selection under section 2, leaving other
+directions' owned entries to their leads unless explicitly assigned.
 Idle with no producer is idle, not a fabricated dependency. Name a concrete re-entry condition
 when one exists, without inventing an owner decision or recurring check. Unchanged waits stay quiet.

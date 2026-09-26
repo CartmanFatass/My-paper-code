@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-23T16:57:26.008791Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ab99cc4c0cc94d5cbcb377a1f5888852/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ab99cc4c0cc94d5cbcb377a1f5888852/scripts/run_agent_count_training_recurrence_b12.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401",
+    "--",
+    "--cell",
+    "t8",
+    "--seed",
+    "963401",
+    "--launch-sha",
+    "762359c024f097827d0ef4f165635848de6bc667",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401"
+  ],
+  "claim_key": "4ff94c21946d2b4d98299d0ff8e98dea575fa0aa9cd379f462db5205b7dbf552",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/4ff94c21946d2b4d98299d0ff8e98dea575fa0aa9cd379f462db5205b7dbf552.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ab99cc4c0cc94d5cbcb377a1f5888852/scripts/run_agent_count_training_recurrence_b12.py",
+    "--cell",
+    "t8",
+    "--seed",
+    "963401",
+    "--launch-sha",
+    "762359c024f097827d0ef4f165635848de6bc667",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401"
+  ],
+  "command_sha256": "0ad5c793769616c1b1f01f475deb03fd004c813bc323aae067dbc8279450145f",
+  "control_observation": {
+    "observed_at": "2026-09-23T16:57:25.886398Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "46fcbac6ce787135a766530357d538974e86e3ad"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-23T16:57:25.897777Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ab99cc4c0cc94d5cbcb377a1f5888852",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_training_recurrence_b12.py",
+    "--cell",
+    "t8",
+    "--seed",
+    "963401",
+    "--launch-sha",
+    "762359c024f097827d0ef4f165635848de6bc667"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/4ff94c21946d2b4d98299d0ff8e98dea575fa0aa9cd379f462db5205b7dbf552.json",
+  "output_root": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401",
+  "preflight": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 386536,
+      "session_id": 386536,
+      "start_ticks": 54289456
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 386536,
+    "process_group_id": 386536
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 386537,
+      "session_id": 386536,
+      "start_ticks": 54289459
+    },
+    "pid": 386537,
+    "process_group_id": 386536,
+    "supervisor_pid": 386536
+  },
+  "schema_version": 1,
+  "sha": "762359c024f097827d0ef4f165635848de6bc667",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ab99cc4c0cc94d5cbcb377a1f5888852",
+  "stderr": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_training_recurrence_b12_t8_s963401/stdout.log"
+}

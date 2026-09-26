@@ -1,0 +1,66 @@
+{
+  "compute_wall_scope": "learner expiry, prediction, and observation only",
+  "compute_wall_seconds": 0.03897865570615977,
+  "cooperative_observations": 1141,
+  "cooperative_posterior_updates": 0,
+  "expiration_recomputations": 1105,
+  "full_target_cumulative_regret": 11.199999999999998,
+  "initial_to_final_l2_movement": 0.16290478511145756,
+  "initial_to_source_l2_movement": 0.14435329195535554,
+  "launch_sha": "afe4f8ec74d48b2485db3d935de7871c86cc0e6c",
+  "learner_observations": 2304,
+  "object": "unknown_joint_law_b05",
+  "posterior_updates": 1163,
+  "regression_solves": 2246,
+  "regression_statistic_updates": 1141,
+  "safe_posterior_updates": 1163,
+  "seed": 95002,
+  "setting_id": "fingerprint_recent__law__prior16__window64",
+  "source_to_final_l2_movement": 0.07104493720161678,
+  "spec": {
+    "family": "fingerprint_recent",
+    "prior_strength": 16.0,
+    "recent_window": 64,
+    "representation": "law"
+  },
+  "spec_id": "fingerprint_recent__law__prior16__window64",
+  "stage": "development",
+  "target_by_endpoint": {
+    "first64": {
+      "action_counts": [
+        63,
+        1
+      ],
+      "cumulative_regret": 3.7849999999999993,
+      "mean_expected_return": 0.6033593749999999,
+      "mean_regret": 0.05914062499999999,
+      "mean_value_mae": 0.06587765037192184,
+      "panel_count": 64,
+      "sign_mistakes": 31
+    },
+    "full": {
+      "action_counts": [
+        232,
+        24
+      ],
+      "cumulative_regret": 11.199999999999998,
+      "mean_expected_return": 0.6187499999999999,
+      "mean_regret": 0.04374999999999999,
+      "mean_value_mae": 0.06277077124162304,
+      "panel_count": 256,
+      "sign_mistakes": 104
+    },
+    "late64": {
+      "action_counts": [
+        47,
+        17
+      ],
+      "cumulative_regret": 0.7050000000000004,
+      "mean_expected_return": 0.651484375,
+      "mean_regret": 0.011015625000000006,
+      "mean_value_mae": 0.05544282122805623,
+      "panel_count": 64,
+      "sign_mistakes": 15
+    }
+  }
+}

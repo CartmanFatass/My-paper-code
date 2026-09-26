@@ -1,0 +1,77 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/hmasd-worktrees/fmdv-b02-sept25/runs/finite_model_decision_value/b02_budget_interaction_s925831/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/hmasd-worktrees/fmdv-b02-sept25/runs/finite_model_decision_value/b02_budget_interaction_s925831/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/hmasd-worktrees/fmdv-b02-sept25/runs/finite_model_decision_value/b02_budget_interaction_s925831/summary.json",
+      "state": "absent"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/ecff8f319e44fc4ca73bb19d3c29315c5c005ffb0f5f0da4b176076c61e6c998.json",
+  "direction": "finite_model_decision_value",
+  "execution": {
+    "exit_witness": {
+      "path": "/home/wu/hmasd-worktrees/fmdv-b02-sept25/runs/finite_model_decision_value/b02_budget_interaction_s925831/process-exit.json",
+      "state": "absent"
+    },
+    "runner": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 679311,
+        "session_id": 679310,
+        "start_ticks": 71313301
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 679311,
+        "session_id": 679310,
+        "start_ticks": 71313301
+      },
+      "state": "running"
+    },
+    "state": "running",
+    "supervisor": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 679310,
+        "session_id": 679310,
+        "start_ticks": 71313298
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 679310,
+        "session_id": 679310,
+        "start_ticks": 71313298
+      },
+      "state": "running"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/hmasd-worktrees/fmdv-b02-sept25/runs/finite_model_decision_value/b02_budget_interaction_s925831/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-25T17:41:38.820752Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/ecff8f319e44fc4ca73bb19d3c29315c5c005ffb0f5f0da4b176076c61e6c998.json",
+  "output_root": "/home/wu/hmasd-worktrees/fmdv-b02-sept25/runs/finite_model_decision_value/b02_budget_interaction_s925831",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "5b5d73100ae8554b8005758055b181d03fb6603e",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/3a57f2b7358f44d7b8265c462443e3a6"
+}

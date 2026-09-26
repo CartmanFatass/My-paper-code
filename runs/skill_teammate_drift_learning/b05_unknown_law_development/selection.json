@@ -1,0 +1,750 @@
+{
+  "config": {
+    "contexts": 4,
+    "skill_ticks": 3,
+    "source_macros": 2048,
+    "target_macros": 256
+  },
+  "development_seeds": [
+    95001,
+    95002,
+    95003
+  ],
+  "object": "unknown_joint_law_b05",
+  "ranking": [
+    {
+      "mean_primary_dr_reward": 0.6034462472581567,
+      "mean_whole_target_reward_brier": 0.2301999887767511,
+      "setting_id": "response_all__response__prior2",
+      "spec": {
+        "family": "response_all",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "response"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5871325193418312,
+      "mean_whole_target_reward_brier": 0.23028689669436433,
+      "setting_id": "response_all__response__prior16",
+      "spec": {
+        "family": "response_all",
+        "prior_strength": 16.0,
+        "recent_window": null,
+        "representation": "response"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5787303571709456,
+      "mean_whole_target_reward_brier": 0.23284074142143174,
+      "setting_id": "fingerprint_full__law__prior2",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "law"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5659995635555114,
+      "mean_whole_target_reward_brier": 0.23413447156065748,
+      "setting_id": "fingerprint_full__law__prior16",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 16.0,
+        "recent_window": null,
+        "representation": "law"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5965314255448431,
+      "mean_whole_target_reward_brier": 0.23257811295744993,
+      "setting_id": "fingerprint_full__cell__prior2",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "cell"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5784371428192719,
+      "mean_whole_target_reward_brier": 0.23434490904413044,
+      "setting_id": "fingerprint_full__cell__prior16",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 16.0,
+        "recent_window": null,
+        "representation": "cell"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.6095588656921103,
+      "mean_whole_target_reward_brier": 0.23255276100380884,
+      "setting_id": "fingerprint_full__hybrid__prior2",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "hybrid"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5970883035300828,
+      "mean_whole_target_reward_brier": 0.23268323329344506,
+      "setting_id": "fingerprint_full__hybrid__prior16",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 16.0,
+        "recent_window": null,
+        "representation": "hybrid"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5698648889958607,
+      "mean_whole_target_reward_brier": 0.23875164424512008,
+      "setting_id": "fingerprint_recent__law__prior2__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 64,
+        "representation": "law"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5987080184197834,
+      "mean_whole_target_reward_brier": 0.2333477328511553,
+      "setting_id": "fingerprint_recent__law__prior2__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 256,
+        "representation": "law"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5683649768272786,
+      "mean_whole_target_reward_brier": 0.2430708272350944,
+      "setting_id": "fingerprint_recent__law__prior16__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 64,
+        "representation": "law"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5665369253646929,
+      "mean_whole_target_reward_brier": 0.23814175519309932,
+      "setting_id": "fingerprint_recent__law__prior16__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 256,
+        "representation": "law"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5965314255448431,
+      "mean_whole_target_reward_brier": 0.23669777332288366,
+      "setting_id": "fingerprint_recent__cell__prior2__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 64,
+        "representation": "cell"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5965314255448431,
+      "mean_whole_target_reward_brier": 0.23257811295744993,
+      "setting_id": "fingerprint_recent__cell__prior2__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 256,
+        "representation": "cell"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5784371428192719,
+      "mean_whole_target_reward_brier": 0.23882290972457668,
+      "setting_id": "fingerprint_recent__cell__prior16__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 64,
+        "representation": "cell"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5784371428192719,
+      "mean_whole_target_reward_brier": 0.23434490904413044,
+      "setting_id": "fingerprint_recent__cell__prior16__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 256,
+        "representation": "cell"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.593990796920155,
+      "mean_whole_target_reward_brier": 0.23767139277641092,
+      "setting_id": "fingerprint_recent__hybrid__prior2__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 64,
+        "representation": "hybrid"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5706039049212001,
+      "mean_whole_target_reward_brier": 0.23325066954288265,
+      "setting_id": "fingerprint_recent__hybrid__prior2__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 2.0,
+        "recent_window": 256,
+        "representation": "hybrid"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.5911906681598468,
+      "mean_whole_target_reward_brier": 0.23738839126199332,
+      "setting_id": "fingerprint_recent__hybrid__prior16__window64",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 64,
+        "representation": "hybrid"
+      }
+    },
+    {
+      "mean_primary_dr_reward": 0.6131872256630548,
+      "mean_whole_target_reward_brier": 0.23248941114253532,
+      "setting_id": "fingerprint_recent__hybrid__prior16__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 256,
+        "representation": "hybrid"
+      }
+    }
+  ],
+  "rule": "max mean first64 DR reward; 1e-12 tie then lower full-target reward Brier then lexical id",
+  "schema": "b05-legal-feedback-selection-v1",
+  "score_rows": [
+    {
+      "primary_dr_reward": 0.4958392825349005,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "response_all__response__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2336117291515883
+    },
+    {
+      "primary_dr_reward": 0.5147344270679367,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "response_all__response__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2340976747916459
+    },
+    {
+      "primary_dr_reward": 0.4760364835414567,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_full__law__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.235033902168039
+    },
+    {
+      "primary_dr_reward": 0.4791323513313964,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_full__law__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23751641578304572
+    },
+    {
+      "primary_dr_reward": 0.46723626300065557,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_full__cell__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23483020419440248
+    },
+    {
+      "primary_dr_reward": 0.48415690166321895,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_full__cell__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2366531434401299
+    },
+    {
+      "primary_dr_reward": 0.5173190213903907,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_full__hybrid__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2348651286237162
+    },
+    {
+      "primary_dr_reward": 0.5272150598941043,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_full__hybrid__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23578307729416353
+    },
+    {
+      "primary_dr_reward": 0.45595989285612776,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__law__prior2__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.24133971807606874
+    },
+    {
+      "primary_dr_reward": 0.4584516228975857,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__law__prior2__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23682730425605347
+    },
+    {
+      "primary_dr_reward": 0.48415690166321895,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__law__prior16__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.24730183326797334
+    },
+    {
+      "primary_dr_reward": 0.4644834556102265,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__law__prior16__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.24324632048815856
+    },
+    {
+      "primary_dr_reward": 0.46723626300065557,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__cell__prior2__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2395621897103829
+    },
+    {
+      "primary_dr_reward": 0.46723626300065557,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__cell__prior2__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23483020419440248
+    },
+    {
+      "primary_dr_reward": 0.48415690166321895,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__cell__prior16__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.24163548424918513
+    },
+    {
+      "primary_dr_reward": 0.48415690166321895,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__cell__prior16__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2366531434401299
+    },
+    {
+      "primary_dr_reward": 0.4940078140844547,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__hybrid__prior2__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.24070384990574628
+    },
+    {
+      "primary_dr_reward": 0.49336651912878926,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__hybrid__prior2__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23590713304172722
+    },
+    {
+      "primary_dr_reward": 0.4646634594064517,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__hybrid__prior16__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.24060240038664626
+    },
+    {
+      "primary_dr_reward": 0.5151438555013277,
+      "primary_rows": 64,
+      "seed": 95001,
+      "setting_id": "fingerprint_recent__hybrid__prior16__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23584248265977842
+    },
+    {
+      "primary_dr_reward": 0.5806859193746486,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "response_all__response__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2336543401385662
+    },
+    {
+      "primary_dr_reward": 0.5125351345278786,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "response_all__response__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23355481882787804
+    },
+    {
+      "primary_dr_reward": 0.5957612648250492,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_full__law__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2347491246881771
+    },
+    {
+      "primary_dr_reward": 0.5652044340005666,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_full__law__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2364758414316412
+    },
+    {
+      "primary_dr_reward": 0.5898192103271505,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_full__cell__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23784262315013782
+    },
+    {
+      "primary_dr_reward": 0.5626949416223282,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_full__cell__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23880527094982623
+    },
+    {
+      "primary_dr_reward": 0.5769144495144762,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_full__hybrid__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23798870036730557
+    },
+    {
+      "primary_dr_reward": 0.5342240923499186,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_full__hybrid__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2366324305613819
+    },
+    {
+      "primary_dr_reward": 0.5720109041339055,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__law__prior2__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23999055613513431
+    },
+    {
+      "primary_dr_reward": 0.6082705646365896,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__law__prior2__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23633858936649993
+    },
+    {
+      "primary_dr_reward": 0.5435554816220964,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__law__prior16__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.24556668312979335
+    },
+    {
+      "primary_dr_reward": 0.5978170487388053,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__law__prior16__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.24057103785150669
+    },
+    {
+      "primary_dr_reward": 0.5898192103271505,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__cell__prior2__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.24049011673247978
+    },
+    {
+      "primary_dr_reward": 0.5898192103271505,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__cell__prior2__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23784262315013782
+    },
+    {
+      "primary_dr_reward": 0.5626949416223282,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__cell__prior16__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.24226687880559844
+    },
+    {
+      "primary_dr_reward": 0.5626949416223282,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__cell__prior16__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23880527094982623
+    },
+    {
+      "primary_dr_reward": 0.5446885204708649,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__hybrid__prior2__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2411961682720546
+    },
+    {
+      "primary_dr_reward": 0.46352500998999263,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__hybrid__prior2__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2387432083928763
+    },
+    {
+      "primary_dr_reward": 0.592297997888266,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__hybrid__prior16__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2403459497915242
+    },
+    {
+      "primary_dr_reward": 0.5712906750806923,
+      "primary_rows": 64,
+      "seed": 95002,
+      "setting_id": "fingerprint_recent__hybrid__prior16__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.236511740293609
+    },
+    {
+      "primary_dr_reward": 0.7338135398649209,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "response_all__response__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22333389704009882
+    },
+    {
+      "primary_dr_reward": 0.7341279964296785,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "response_all__response__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2232081964635691
+    },
+    {
+      "primary_dr_reward": 0.6643933231463308,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_full__law__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22873919740807913
+    },
+    {
+      "primary_dr_reward": 0.6536619053345711,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_full__law__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22841115746728552
+    },
+    {
+      "primary_dr_reward": 0.7325388033067234,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_full__cell__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22506151152780945
+    },
+    {
+      "primary_dr_reward": 0.6884595851722685,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_full__cell__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22757631274243528
+    },
+    {
+      "primary_dr_reward": 0.734443126171464,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_full__hybrid__prior2",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22480445402040475
+    },
+    {
+      "primary_dr_reward": 0.7298257583462255,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_full__hybrid__prior16",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22563419202478974
+    },
+    {
+      "primary_dr_reward": 0.681623869997549,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__law__prior2__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23492465852415712
+    },
+    {
+      "primary_dr_reward": 0.729401867725175,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__law__prior2__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22687730493091246
+    },
+    {
+      "primary_dr_reward": 0.6773825471965206,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__law__prior16__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23634396530751645
+    },
+    {
+      "primary_dr_reward": 0.637310271745047,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__law__prior16__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23060790723963273
+    },
+    {
+      "primary_dr_reward": 0.7325388033067234,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__cell__prior2__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23004101352578826
+    },
+    {
+      "primary_dr_reward": 0.7325388033067234,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__cell__prior2__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22506151152780945
+    },
+    {
+      "primary_dr_reward": 0.6884595851722685,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__cell__prior16__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.2325663661189465
+    },
+    {
+      "primary_dr_reward": 0.6884595851722685,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__cell__prior16__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22757631274243528
+    },
+    {
+      "primary_dr_reward": 0.7432760562051453,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__hybrid__prior2__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23111416015143194
+    },
+    {
+      "primary_dr_reward": 0.7549201856448182,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__hybrid__prior2__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22510166719404445
+    },
+    {
+      "primary_dr_reward": 0.7166105471848228,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__hybrid__prior16__window64",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.23121682360780946
+    },
+    {
+      "primary_dr_reward": 0.7531271464071445,
+      "primary_rows": 64,
+      "seed": 95003,
+      "setting_id": "fingerprint_recent__hybrid__prior16__window256",
+      "target_rows": 256,
+      "whole_target_reward_brier": 0.22511401047421858
+    }
+  ],
+  "selected": {
+    "fingerprint_full": {
+      "setting_id": "fingerprint_full__hybrid__prior2",
+      "spec": {
+        "family": "fingerprint_full",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "hybrid"
+      }
+    },
+    "fingerprint_recent": {
+      "setting_id": "fingerprint_recent__hybrid__prior16__window256",
+      "spec": {
+        "family": "fingerprint_recent",
+        "prior_strength": 16.0,
+        "recent_window": 256,
+        "representation": "hybrid"
+      }
+    },
+    "response_all": {
+      "setting_id": "response_all__response__prior2",
+      "spec": {
+        "family": "response_all",
+        "prior_strength": 2.0,
+        "recent_window": null,
+        "representation": "response"
+      }
+    }
+  },
+  "source_sha": "afe4f8ec74d48b2485db3d935de7871c86cc0e6c"
+}

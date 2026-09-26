@@ -1,0 +1,3097 @@
+{
+  "actual_rows_checked": 12288,
+  "audit_script_sha256": "218534002e4c5f867788663011abd1ecf7f3529edbfcb073741585e0c41416cd",
+  "blocks": [
+    {
+      "actual_cell_diagnostics": {
+        "source_law_source_table": [
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 0,
+            "inward_commands": 0,
+            "quality_sum": 26.227997831645762,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              61,
+              1
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 1,
+            "inward_commands": 0,
+            "quality_sum": 14.67529932852105,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              24,
+              39
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 0,
+            "episode": 2,
+            "inward_commands": 0,
+            "quality_sum": 12.354736817066343,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              0,
+              47,
+              11
+            ]
+          },
+          {
+            "coverage_sum": 55.0,
+            "direction_switches": 0,
+            "episode": 3,
+            "inward_commands": 0,
+            "quality_sum": 10.969281490012483,
+            "served_ticks": 55,
+            "service_owner_counts": [
+              0,
+              13,
+              42
+            ]
+          },
+          {
+            "coverage_sum": 60.0,
+            "direction_switches": 0,
+            "episode": 4,
+            "inward_commands": 0,
+            "quality_sum": 17.38077540078735,
+            "served_ticks": 60,
+            "service_owner_counts": [
+              0,
+              8,
+              52
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 5,
+            "inward_commands": 0,
+            "quality_sum": 15.194347048185874,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              32,
+              30
+            ]
+          },
+          {
+            "coverage_sum": 59.0,
+            "direction_switches": 0,
+            "episode": 6,
+            "inward_commands": 0,
+            "quality_sum": 10.052920386291461,
+            "served_ticks": 59,
+            "service_owner_counts": [
+              0,
+              44,
+              15
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 7,
+            "inward_commands": 0,
+            "quality_sum": 13.806961741667182,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              57,
+              6
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 8,
+            "inward_commands": 0,
+            "quality_sum": 9.415032857511031,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              26,
+              36
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 9,
+            "inward_commands": 0,
+            "quality_sum": 11.694635232344387,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              22,
+              40
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 0,
+            "episode": 10,
+            "inward_commands": 0,
+            "quality_sum": 13.953367323954822,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              0,
+              5,
+              53
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 0,
+            "episode": 11,
+            "inward_commands": 0,
+            "quality_sum": 25.742089551273516,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              0,
+              0,
+              64
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 12,
+            "inward_commands": 0,
+            "quality_sum": 16.09622380042865,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              25,
+              37
+            ]
+          },
+          {
+            "coverage_sum": 54.0,
+            "direction_switches": 0,
+            "episode": 13,
+            "inward_commands": 0,
+            "quality_sum": 11.886089166560911,
+            "served_ticks": 54,
+            "service_owner_counts": [
+              0,
+              20,
+              34
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 14,
+            "inward_commands": 0,
+            "quality_sum": 11.451834923142949,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              43,
+              20
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 15,
+            "inward_commands": 0,
+            "quality_sum": 12.486425999427842,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              33,
+              29
+            ]
+          }
+        ],
+        "source_law_target_table": [
+          {
+            "coverage_sum": 52.0,
+            "direction_switches": 5,
+            "episode": 0,
+            "inward_commands": 11,
+            "quality_sum": 22.278760564764365,
+            "served_ticks": 52,
+            "service_owner_counts": [
+              1,
+              51,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 3,
+            "episode": 1,
+            "inward_commands": 2,
+            "quality_sum": 13.97999120159892,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              24,
+              37
+            ]
+          },
+          {
+            "coverage_sum": 56.0,
+            "direction_switches": 3,
+            "episode": 2,
+            "inward_commands": 4,
+            "quality_sum": 10.187446831016494,
+            "served_ticks": 56,
+            "service_owner_counts": [
+              1,
+              44,
+              11
+            ]
+          },
+          {
+            "coverage_sum": 53.0,
+            "direction_switches": 1,
+            "episode": 3,
+            "inward_commands": 1,
+            "quality_sum": 10.644051107040525,
+            "served_ticks": 53,
+            "service_owner_counts": [
+              0,
+              13,
+              40
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 3,
+            "episode": 4,
+            "inward_commands": 10,
+            "quality_sum": 15.780670537978015,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              10,
+              7,
+              46
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 1,
+            "episode": 5,
+            "inward_commands": 3,
+            "quality_sum": 13.92224575163392,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              0,
+              29,
+              29
+            ]
+          },
+          {
+            "coverage_sum": 48.0,
+            "direction_switches": 1,
+            "episode": 6,
+            "inward_commands": 9,
+            "quality_sum": 7.8956766854956655,
+            "served_ticks": 48,
+            "service_owner_counts": [
+              1,
+              36,
+              11
+            ]
+          },
+          {
+            "coverage_sum": 53.0,
+            "direction_switches": 5,
+            "episode": 7,
+            "inward_commands": 8,
+            "quality_sum": 10.832124346752838,
+            "served_ticks": 53,
+            "service_owner_counts": [
+              0,
+              50,
+              3
+            ]
+          },
+          {
+            "coverage_sum": 60.0,
+            "direction_switches": 1,
+            "episode": 8,
+            "inward_commands": 2,
+            "quality_sum": 9.13169954755514,
+            "served_ticks": 60,
+            "service_owner_counts": [
+              0,
+              24,
+              36
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 7,
+            "episode": 9,
+            "inward_commands": 9,
+            "quality_sum": 9.229782745225544,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              9,
+              22,
+              33
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 3,
+            "episode": 10,
+            "inward_commands": 4,
+            "quality_sum": 13.176949682716424,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              3,
+              4,
+              51
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 1,
+            "episode": 11,
+            "inward_commands": 1,
+            "quality_sum": 25.303303011608,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              0,
+              63
+            ]
+          },
+          {
+            "coverage_sum": 59.0,
+            "direction_switches": 23,
+            "episode": 12,
+            "inward_commands": 26,
+            "quality_sum": 11.043199658525948,
+            "served_ticks": 59,
+            "service_owner_counts": [
+              30,
+              4,
+              25
+            ]
+          },
+          {
+            "coverage_sum": 53.0,
+            "direction_switches": 1,
+            "episode": 13,
+            "inward_commands": 1,
+            "quality_sum": 11.373114706310826,
+            "served_ticks": 53,
+            "service_owner_counts": [
+              0,
+              20,
+              33
+            ]
+          },
+          {
+            "coverage_sum": 60.0,
+            "direction_switches": 7,
+            "episode": 14,
+            "inward_commands": 6,
+            "quality_sum": 9.125142547652306,
+            "served_ticks": 60,
+            "service_owner_counts": [
+              1,
+              40,
+              19
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 7,
+            "episode": 15,
+            "inward_commands": 14,
+            "quality_sum": 8.755004222621107,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              12,
+              24,
+              25
+            ]
+          }
+        ],
+        "target_law_source_table": [
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 0,
+            "episode": 0,
+            "inward_commands": 0,
+            "quality_sum": 7.231615638570808,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              54,
+              7
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 1,
+            "inward_commands": 0,
+            "quality_sum": 7.712896090864598,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              12,
+              51
+            ]
+          },
+          {
+            "coverage_sum": 60.0,
+            "direction_switches": 0,
+            "episode": 2,
+            "inward_commands": 0,
+            "quality_sum": 3.1878279526691258,
+            "served_ticks": 60,
+            "service_owner_counts": [
+              0,
+              29,
+              31
+            ]
+          },
+          {
+            "coverage_sum": 40.0,
+            "direction_switches": 0,
+            "episode": 3,
+            "inward_commands": 0,
+            "quality_sum": 5.358033058809518,
+            "served_ticks": 40,
+            "service_owner_counts": [
+              0,
+              0,
+              40
+            ]
+          },
+          {
+            "coverage_sum": 37.0,
+            "direction_switches": 0,
+            "episode": 4,
+            "inward_commands": 0,
+            "quality_sum": 2.5507265020143155,
+            "served_ticks": 37,
+            "service_owner_counts": [
+              0,
+              8,
+              29
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 0,
+            "episode": 5,
+            "inward_commands": 0,
+            "quality_sum": 7.236772756313468,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              0,
+              12,
+              46
+            ]
+          },
+          {
+            "coverage_sum": 55.0,
+            "direction_switches": 0,
+            "episode": 6,
+            "inward_commands": 0,
+            "quality_sum": 12.118615911871524,
+            "served_ticks": 55,
+            "service_owner_counts": [
+              0,
+              50,
+              5
+            ]
+          },
+          {
+            "coverage_sum": 56.0,
+            "direction_switches": 0,
+            "episode": 7,
+            "inward_commands": 0,
+            "quality_sum": 3.122253859360783,
+            "served_ticks": 56,
+            "service_owner_counts": [
+              0,
+              46,
+              10
+            ]
+          },
+          {
+            "coverage_sum": 56.0,
+            "direction_switches": 0,
+            "episode": 8,
+            "inward_commands": 0,
+            "quality_sum": 4.9692670567695245,
+            "served_ticks": 56,
+            "service_owner_counts": [
+              0,
+              22,
+              34
+            ]
+          },
+          {
+            "coverage_sum": 54.0,
+            "direction_switches": 0,
+            "episode": 9,
+            "inward_commands": 0,
+            "quality_sum": 4.391481997937694,
+            "served_ticks": 54,
+            "service_owner_counts": [
+              0,
+              26,
+              28
+            ]
+          },
+          {
+            "coverage_sum": 55.0,
+            "direction_switches": 0,
+            "episode": 10,
+            "inward_commands": 0,
+            "quality_sum": 4.553156986521667,
+            "served_ticks": 55,
+            "service_owner_counts": [
+              0,
+              26,
+              29
+            ]
+          },
+          {
+            "coverage_sum": 18.0,
+            "direction_switches": 0,
+            "episode": 11,
+            "inward_commands": 0,
+            "quality_sum": 0.8181519682662627,
+            "served_ticks": 18,
+            "service_owner_counts": [
+              0,
+              8,
+              10
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 0,
+            "episode": 12,
+            "inward_commands": 0,
+            "quality_sum": 5.047987536343706,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              0,
+              32,
+              26
+            ]
+          },
+          {
+            "coverage_sum": 48.0,
+            "direction_switches": 0,
+            "episode": 13,
+            "inward_commands": 0,
+            "quality_sum": 4.74857871391146,
+            "served_ticks": 48,
+            "service_owner_counts": [
+              0,
+              1,
+              47
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 14,
+            "inward_commands": 0,
+            "quality_sum": 9.420872671579314,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              50,
+              13
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 15,
+            "inward_commands": 0,
+            "quality_sum": 9.938853901686421,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              63,
+              0
+            ]
+          }
+        ],
+        "target_law_target_table": [
+          {
+            "coverage_sum": 57.0,
+            "direction_switches": 5,
+            "episode": 0,
+            "inward_commands": 7,
+            "quality_sum": 6.399920260709607,
+            "served_ticks": 57,
+            "service_owner_counts": [
+              3,
+              48,
+              6
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 1,
+            "episode": 1,
+            "inward_commands": 1,
+            "quality_sum": 7.3776579296504785,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              12,
+              49
+            ]
+          },
+          {
+            "coverage_sum": 52.0,
+            "direction_switches": 7,
+            "episode": 2,
+            "inward_commands": 6,
+            "quality_sum": 2.7326077753451496,
+            "served_ticks": 52,
+            "service_owner_counts": [
+              0,
+              23,
+              29
+            ]
+          },
+          {
+            "coverage_sum": 38.0,
+            "direction_switches": 1,
+            "episode": 3,
+            "inward_commands": 1,
+            "quality_sum": 5.0347851591355886,
+            "served_ticks": 38,
+            "service_owner_counts": [
+              0,
+              0,
+              38
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 2,
+            "episode": 4,
+            "inward_commands": 63,
+            "quality_sum": 16.51274743918134,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              63,
+              0,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 51.0,
+            "direction_switches": 3,
+            "episode": 5,
+            "inward_commands": 6,
+            "quality_sum": 6.000792624750083,
+            "served_ticks": 51,
+            "service_owner_counts": [
+              1,
+              8,
+              42
+            ]
+          },
+          {
+            "coverage_sum": 50.0,
+            "direction_switches": 1,
+            "episode": 6,
+            "inward_commands": 2,
+            "quality_sum": 12.069787473998373,
+            "served_ticks": 50,
+            "service_owner_counts": [
+              0,
+              49,
+              1
+            ]
+          },
+          {
+            "coverage_sum": 44.0,
+            "direction_switches": 21,
+            "episode": 7,
+            "inward_commands": 28,
+            "quality_sum": 2.6687775486173138,
+            "served_ticks": 44,
+            "service_owner_counts": [
+              22,
+              19,
+              3
+            ]
+          },
+          {
+            "coverage_sum": 54.0,
+            "direction_switches": 1,
+            "episode": 8,
+            "inward_commands": 2,
+            "quality_sum": 4.86501602852882,
+            "served_ticks": 54,
+            "service_owner_counts": [
+              0,
+              20,
+              34
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 3,
+            "episode": 9,
+            "inward_commands": 26,
+            "quality_sum": 8.135478025478072,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              24,
+              18,
+              16
+            ]
+          },
+          {
+            "coverage_sum": 52.0,
+            "direction_switches": 1,
+            "episode": 10,
+            "inward_commands": 3,
+            "quality_sum": 3.808656783140343,
+            "served_ticks": 52,
+            "service_owner_counts": [
+              1,
+              26,
+              25
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 0,
+            "episode": 11,
+            "inward_commands": 64,
+            "quality_sum": 27.843719949895416,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              64,
+              0,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 18,
+            "episode": 12,
+            "inward_commands": 53,
+            "quality_sum": 14.237744252708945,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              52,
+              6,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 43.0,
+            "direction_switches": 1,
+            "episode": 13,
+            "inward_commands": 1,
+            "quality_sum": 4.456221942815764,
+            "served_ticks": 43,
+            "service_owner_counts": [
+              0,
+              1,
+              42
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 5,
+            "episode": 14,
+            "inward_commands": 5,
+            "quality_sum": 7.564610526151995,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              3,
+              48,
+              12
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 7,
+            "episode": 15,
+            "inward_commands": 14,
+            "quality_sum": 6.406895884389337,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              12,
+              49,
+              0
+            ]
+          }
+        ]
+      },
+      "contrasts": {
+        "D_source": {
+          "mean": 0.8774720151062017,
+          "paired_worlds": [
+            2.7282570600214733,
+            0.5361974793588811,
+            0.6833956652716502,
+            0.4991897049638627,
+            -0.5399895137190676,
+            1.0605434629885284,
+            2.7823910367462474,
+            2.630817072824769,
+            0.494999997662255,
+            -0.22018141795478208,
+            0.07764176412383961,
+            0.2772119872998857,
+            1.2053024141902693,
+            0.28463077935834136,
+            0.9326692375490655,
+            0.6064755110140077
+          ],
+          "sample_sd": 1.0117599258287155
+        },
+        "D_target": {
+          "mean": 0.6231770437562905,
+          "paired_worlds": [
+            -1.0165028711194548,
+            -0.5001904827880779,
+            -1.912188684399064,
+            -0.49899145663405875,
+            7.462868760383369,
+            -1.7569313464896705,
+            -1.171549510453982,
+            -2.845347631074347,
+            -0.4770917694907375,
+            1.3077329360873708,
+            -0.774450020338131,
+            13.435890131496249,
+            0.9189756716365238,
+            -1.1959023437762362,
+            -0.1856262145427312,
+            -0.8198624683963747
+          ],
+          "sample_sd": 4.109072162866445
+        },
+        "interaction_sum": {
+          "mean": 1.5006490588624921,
+          "paired_worlds": [
+            1.7117541889020185,
+            0.036006996570803196,
+            -1.228793019127414,
+            0.0001982483298039739,
+            6.922879246664301,
+            -0.6963878835011421,
+            1.6108415262922655,
+            -0.214530558249578,
+            0.017908228171517493,
+            1.0875515181325888,
+            -0.6968082562142914,
+            13.713102118796135,
+            2.124278085826793,
+            -0.9112715644178948,
+            0.7470430230063343,
+            -0.21338695738236702
+          ],
+          "sample_sd": 3.7870533628254326
+        }
+      },
+      "returns": {
+        "source_law_source_table": [
+          17.089466449831242,
+          16.167529932852105,
+          14.768807015039966,
+          13.930261482334581,
+          15.738077540078734,
+          15.986101371485253,
+          14.771958705295813,
+          16.080696174166718,
+          15.408169952417769,
+          15.636130189901104,
+          14.928670065728815,
+          17.507542288460684,
+          16.07628904670953,
+          13.78860891665609,
+          15.845183492314295,
+          15.71530926660945
+        ],
+        "source_law_target_table": [
+          14.361209389809769,
+          15.631332453493224,
+          14.085411349768316,
+          13.431071777370718,
+          16.278067053797802,
+          14.925557908496724,
+          11.989567668549565,
+          13.44987910134195,
+          14.913169954755514,
+          15.856311607855886,
+          14.851028301604975,
+          17.230330301160798,
+          14.87098663251926,
+          13.503978137297748,
+          14.91251425476523,
+          15.108833755595443
+        ],
+        "target_law_source_table": [
+          14.956494897190414,
+          15.471289609086458,
+          14.318782795266912,
+          9.869136639214284,
+          8.888405983534764,
+          14.257010608964679,
+          14.045194924520485,
+          13.378892052602744,
+          13.563593372343618,
+          13.039148199793768,
+          13.288649031985498,
+          4.281815196826626,
+          14.038132086967703,
+          11.674857871391145,
+          15.64208726715793,
+          15.69388539016864
+        ],
+        "target_law_target_table": [
+          13.939992026070959,
+          14.97109912629838,
+          12.406594110867848,
+          9.370145182580226,
+          16.351274743918133,
+          12.500079262475008,
+          12.873645414066504,
+          10.533544421528397,
+          13.08650160285288,
+          14.346881135881139,
+          12.514199011647367,
+          17.717705328322875,
+          14.957107758604227,
+          10.47895552761491,
+          15.456461052615198,
+          14.874022921772266
+        ]
+      },
+      "same_state_occupancy_diagnostics": {
+        "source_law_source_table": {
+          "disagreements": 17,
+          "matched_better": 17,
+          "matched_worse": 0,
+          "mean_same_state_mismatched_minus_matched_regret": 0.0027736256304740914,
+          "states": 1024
+        },
+        "source_law_target_table": {
+          "disagreements": 66,
+          "matched_better": 56,
+          "matched_worse": 10,
+          "mean_same_state_mismatched_minus_matched_regret": 0.004563094342565836,
+          "states": 1024
+        },
+        "target_law_source_table": {
+          "disagreements": 22,
+          "matched_better": 22,
+          "matched_worse": 0,
+          "mean_same_state_mismatched_minus_matched_regret": 0.0010216264112713161,
+          "states": 1024
+        },
+        "target_law_target_table": {
+          "disagreements": 54,
+          "matched_better": 48,
+          "matched_worse": 6,
+          "mean_same_state_mismatched_minus_matched_regret": 0.0023053711252795433,
+          "states": 1024
+        }
+      },
+      "seed": 95401
+    },
+    {
+      "actual_cell_diagnostics": {
+        "source_law_source_table": [
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 0,
+            "inward_commands": 0,
+            "quality_sum": 10.04597129740669,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              20,
+              42
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 1,
+            "inward_commands": 0,
+            "quality_sum": 9.87767824018334,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              35,
+              27
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 2,
+            "inward_commands": 0,
+            "quality_sum": 12.867100175684293,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              10,
+              53
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 0,
+            "episode": 3,
+            "inward_commands": 0,
+            "quality_sum": 9.783169028341451,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              45,
+              16
+            ]
+          },
+          {
+            "coverage_sum": 56.0,
+            "direction_switches": 0,
+            "episode": 4,
+            "inward_commands": 0,
+            "quality_sum": 10.584492742823773,
+            "served_ticks": 56,
+            "service_owner_counts": [
+              0,
+              7,
+              49
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 0,
+            "episode": 5,
+            "inward_commands": 0,
+            "quality_sum": 17.980069091938006,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              0,
+              5,
+              59
+            ]
+          },
+          {
+            "coverage_sum": 50.0,
+            "direction_switches": 0,
+            "episode": 6,
+            "inward_commands": 0,
+            "quality_sum": 7.424699553720486,
+            "served_ticks": 50,
+            "service_owner_counts": [
+              0,
+              29,
+              21
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 7,
+            "inward_commands": 0,
+            "quality_sum": 21.407079260060616,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              58,
+              4
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 8,
+            "inward_commands": 0,
+            "quality_sum": 14.19609581982898,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              9,
+              54
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 9,
+            "inward_commands": 0,
+            "quality_sum": 14.064680307247196,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              3,
+              59
+            ]
+          },
+          {
+            "coverage_sum": 55.0,
+            "direction_switches": 0,
+            "episode": 10,
+            "inward_commands": 0,
+            "quality_sum": 14.02479185825703,
+            "served_ticks": 55,
+            "service_owner_counts": [
+              0,
+              50,
+              5
+            ]
+          },
+          {
+            "coverage_sum": 44.0,
+            "direction_switches": 0,
+            "episode": 11,
+            "inward_commands": 0,
+            "quality_sum": 5.646952969474099,
+            "served_ticks": 44,
+            "service_owner_counts": [
+              0,
+              33,
+              11
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 0,
+            "episode": 12,
+            "inward_commands": 0,
+            "quality_sum": 14.616162927825071,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              6,
+              55
+            ]
+          },
+          {
+            "coverage_sum": 53.0,
+            "direction_switches": 0,
+            "episode": 13,
+            "inward_commands": 0,
+            "quality_sum": 9.89707940650962,
+            "served_ticks": 53,
+            "service_owner_counts": [
+              0,
+              21,
+              32
+            ]
+          },
+          {
+            "coverage_sum": 56.0,
+            "direction_switches": 0,
+            "episode": 14,
+            "inward_commands": 0,
+            "quality_sum": 11.103343045564316,
+            "served_ticks": 56,
+            "service_owner_counts": [
+              0,
+              16,
+              40
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 15,
+            "inward_commands": 0,
+            "quality_sum": 12.688197174528835,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              45,
+              17
+            ]
+          }
+        ],
+        "source_law_target_table": [
+          {
+            "coverage_sum": 56.0,
+            "direction_switches": 3,
+            "episode": 0,
+            "inward_commands": 4,
+            "quality_sum": 9.433131022780914,
+            "served_ticks": 56,
+            "service_owner_counts": [
+              0,
+              16,
+              40
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 3,
+            "episode": 1,
+            "inward_commands": 4,
+            "quality_sum": 8.988834763521316,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              0,
+              33,
+              25
+            ]
+          },
+          {
+            "coverage_sum": 60.0,
+            "direction_switches": 7,
+            "episode": 2,
+            "inward_commands": 6,
+            "quality_sum": 11.148582810309149,
+            "served_ticks": 60,
+            "service_owner_counts": [
+              4,
+              10,
+              46
+            ]
+          },
+          {
+            "coverage_sum": 46.0,
+            "direction_switches": 11,
+            "episode": 3,
+            "inward_commands": 29,
+            "quality_sum": 5.2662854844098845,
+            "served_ticks": 46,
+            "service_owner_counts": [
+              16,
+              29,
+              1
+            ]
+          },
+          {
+            "coverage_sum": 55.0,
+            "direction_switches": 1,
+            "episode": 4,
+            "inward_commands": 3,
+            "quality_sum": 9.677713593566187,
+            "served_ticks": 55,
+            "service_owner_counts": [
+              2,
+              5,
+              48
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 1,
+            "episode": 5,
+            "inward_commands": 3,
+            "quality_sum": 16.049427191392613,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              5,
+              56
+            ]
+          },
+          {
+            "coverage_sum": 48.0,
+            "direction_switches": 1,
+            "episode": 6,
+            "inward_commands": 3,
+            "quality_sum": 6.371190280034604,
+            "served_ticks": 48,
+            "service_owner_counts": [
+              2,
+              26,
+              20
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 1,
+            "episode": 7,
+            "inward_commands": 3,
+            "quality_sum": 20.922731182658108,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              3,
+              58,
+              2
+            ]
+          },
+          {
+            "coverage_sum": 53.0,
+            "direction_switches": 7,
+            "episode": 8,
+            "inward_commands": 25,
+            "quality_sum": 10.378892578295662,
+            "served_ticks": 53,
+            "service_owner_counts": [
+              17,
+              0,
+              36
+            ]
+          },
+          {
+            "coverage_sum": 51.0,
+            "direction_switches": 9,
+            "episode": 9,
+            "inward_commands": 10,
+            "quality_sum": 11.217554084335763,
+            "served_ticks": 51,
+            "service_owner_counts": [
+              2,
+              2,
+              47
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 5,
+            "episode": 10,
+            "inward_commands": 31,
+            "quality_sum": 14.409269230450148,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              32,
+              31,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 44.0,
+            "direction_switches": 1,
+            "episode": 11,
+            "inward_commands": 3,
+            "quality_sum": 4.968030657493465,
+            "served_ticks": 44,
+            "service_owner_counts": [
+              2,
+              31,
+              11
+            ]
+          },
+          {
+            "coverage_sum": 56.0,
+            "direction_switches": 1,
+            "episode": 12,
+            "inward_commands": 3,
+            "quality_sum": 13.260289220869426,
+            "served_ticks": 56,
+            "service_owner_counts": [
+              1,
+              6,
+              49
+            ]
+          },
+          {
+            "coverage_sum": 59.0,
+            "direction_switches": 9,
+            "episode": 13,
+            "inward_commands": 7,
+            "quality_sum": 8.708581089044579,
+            "served_ticks": 59,
+            "service_owner_counts": [
+              11,
+              18,
+              30
+            ]
+          },
+          {
+            "coverage_sum": 41.0,
+            "direction_switches": 13,
+            "episode": 14,
+            "inward_commands": 26,
+            "quality_sum": 8.44318199017582,
+            "served_ticks": 41,
+            "service_owner_counts": [
+              11,
+              7,
+              23
+            ]
+          },
+          {
+            "coverage_sum": 51.0,
+            "direction_switches": 3,
+            "episode": 15,
+            "inward_commands": 11,
+            "quality_sum": 11.692989326016752,
+            "served_ticks": 51,
+            "service_owner_counts": [
+              2,
+              36,
+              13
+            ]
+          }
+        ],
+        "target_law_source_table": [
+          {
+            "coverage_sum": 56.0,
+            "direction_switches": 0,
+            "episode": 0,
+            "inward_commands": 0,
+            "quality_sum": 4.948677389140466,
+            "served_ticks": 56,
+            "service_owner_counts": [
+              0,
+              16,
+              40
+            ]
+          },
+          {
+            "coverage_sum": 54.0,
+            "direction_switches": 0,
+            "episode": 1,
+            "inward_commands": 0,
+            "quality_sum": 8.691257966278288,
+            "served_ticks": 54,
+            "service_owner_counts": [
+              0,
+              49,
+              5
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 0,
+            "episode": 2,
+            "inward_commands": 0,
+            "quality_sum": 8.276291427142924,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              1,
+              60
+            ]
+          },
+          {
+            "coverage_sum": 59.0,
+            "direction_switches": 0,
+            "episode": 3,
+            "inward_commands": 0,
+            "quality_sum": 6.3113124575244655,
+            "served_ticks": 59,
+            "service_owner_counts": [
+              0,
+              48,
+              11
+            ]
+          },
+          {
+            "coverage_sum": 39.0,
+            "direction_switches": 0,
+            "episode": 4,
+            "inward_commands": 0,
+            "quality_sum": 2.129228327386868,
+            "served_ticks": 39,
+            "service_owner_counts": [
+              0,
+              0,
+              39
+            ]
+          },
+          {
+            "coverage_sum": 49.0,
+            "direction_switches": 0,
+            "episode": 5,
+            "inward_commands": 0,
+            "quality_sum": 4.619871179244623,
+            "served_ticks": 49,
+            "service_owner_counts": [
+              0,
+              7,
+              42
+            ]
+          },
+          {
+            "coverage_sum": 45.0,
+            "direction_switches": 0,
+            "episode": 6,
+            "inward_commands": 0,
+            "quality_sum": 8.016482847631112,
+            "served_ticks": 45,
+            "service_owner_counts": [
+              0,
+              8,
+              37
+            ]
+          },
+          {
+            "coverage_sum": 60.0,
+            "direction_switches": 0,
+            "episode": 7,
+            "inward_commands": 0,
+            "quality_sum": 1.8688982802070266,
+            "served_ticks": 60,
+            "service_owner_counts": [
+              0,
+              16,
+              44
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 0,
+            "episode": 8,
+            "inward_commands": 0,
+            "quality_sum": 13.178682137210062,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              2,
+              59
+            ]
+          },
+          {
+            "coverage_sum": 52.0,
+            "direction_switches": 0,
+            "episode": 9,
+            "inward_commands": 0,
+            "quality_sum": 3.4007668692478865,
+            "served_ticks": 52,
+            "service_owner_counts": [
+              0,
+              43,
+              9
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 10,
+            "inward_commands": 0,
+            "quality_sum": 8.846513358005483,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              40,
+              22
+            ]
+          },
+          {
+            "coverage_sum": 53.0,
+            "direction_switches": 0,
+            "episode": 11,
+            "inward_commands": 0,
+            "quality_sum": 4.003902438671408,
+            "served_ticks": 53,
+            "service_owner_counts": [
+              0,
+              48,
+              5
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 0,
+            "episode": 12,
+            "inward_commands": 0,
+            "quality_sum": 8.338921309325247,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              0,
+              61
+            ]
+          },
+          {
+            "coverage_sum": 32.0,
+            "direction_switches": 0,
+            "episode": 13,
+            "inward_commands": 0,
+            "quality_sum": 5.263798106770576,
+            "served_ticks": 32,
+            "service_owner_counts": [
+              0,
+              11,
+              21
+            ]
+          },
+          {
+            "coverage_sum": 52.0,
+            "direction_switches": 0,
+            "episode": 14,
+            "inward_commands": 0,
+            "quality_sum": 5.940543090660269,
+            "served_ticks": 52,
+            "service_owner_counts": [
+              0,
+              18,
+              34
+            ]
+          },
+          {
+            "coverage_sum": 59.0,
+            "direction_switches": 0,
+            "episode": 15,
+            "inward_commands": 0,
+            "quality_sum": 3.652514574210024,
+            "served_ticks": 59,
+            "service_owner_counts": [
+              0,
+              30,
+              29
+            ]
+          }
+        ],
+        "target_law_target_table": [
+          {
+            "coverage_sum": 46.0,
+            "direction_switches": 3,
+            "episode": 0,
+            "inward_commands": 4,
+            "quality_sum": 4.900319413037052,
+            "served_ticks": 46,
+            "service_owner_counts": [
+              2,
+              5,
+              39
+            ]
+          },
+          {
+            "coverage_sum": 36.0,
+            "direction_switches": 7,
+            "episode": 1,
+            "inward_commands": 8,
+            "quality_sum": 7.901583877488546,
+            "served_ticks": 36,
+            "service_owner_counts": [
+              1,
+              34,
+              1
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 3,
+            "episode": 2,
+            "inward_commands": 6,
+            "quality_sum": 7.690027313452463,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              6,
+              1,
+              56
+            ]
+          },
+          {
+            "coverage_sum": 50.0,
+            "direction_switches": 19,
+            "episode": 3,
+            "inward_commands": 25,
+            "quality_sum": 3.3014528256396223,
+            "served_ticks": 50,
+            "service_owner_counts": [
+              21,
+              20,
+              9
+            ]
+          },
+          {
+            "coverage_sum": 41.0,
+            "direction_switches": 1,
+            "episode": 4,
+            "inward_commands": 4,
+            "quality_sum": 1.8309645273522186,
+            "served_ticks": 41,
+            "service_owner_counts": [
+              2,
+              0,
+              39
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 0,
+            "episode": 5,
+            "inward_commands": 64,
+            "quality_sum": 17.733764845160135,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              64,
+              0,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 38.0,
+            "direction_switches": 1,
+            "episode": 6,
+            "inward_commands": 3,
+            "quality_sum": 7.630552910701897,
+            "served_ticks": 38,
+            "service_owner_counts": [
+              2,
+              4,
+              32
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 1,
+            "episode": 7,
+            "inward_commands": 5,
+            "quality_sum": 1.8426374835837147,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              5,
+              12,
+              41
+            ]
+          },
+          {
+            "coverage_sum": 54.0,
+            "direction_switches": 11,
+            "episode": 8,
+            "inward_commands": 21,
+            "quality_sum": 10.798254426498413,
+            "served_ticks": 54,
+            "service_owner_counts": [
+              16,
+              0,
+              38
+            ]
+          },
+          {
+            "coverage_sum": 58.0,
+            "direction_switches": 2,
+            "episode": 9,
+            "inward_commands": 63,
+            "quality_sum": 15.84846641573093,
+            "served_ticks": 58,
+            "service_owner_counts": [
+              58,
+              0,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 60.0,
+            "direction_switches": 1,
+            "episode": 10,
+            "inward_commands": 3,
+            "quality_sum": 8.23304053991453,
+            "served_ticks": 60,
+            "service_owner_counts": [
+              2,
+              39,
+              19
+            ]
+          },
+          {
+            "coverage_sum": 51.0,
+            "direction_switches": 1,
+            "episode": 11,
+            "inward_commands": 3,
+            "quality_sum": 3.4960641060625344,
+            "served_ticks": 51,
+            "service_owner_counts": [
+              2,
+              44,
+              5
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 1,
+            "episode": 12,
+            "inward_commands": 13,
+            "quality_sum": 8.852836789378483,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              13,
+              0,
+              51
+            ]
+          },
+          {
+            "coverage_sum": 37.0,
+            "direction_switches": 7,
+            "episode": 13,
+            "inward_commands": 12,
+            "quality_sum": 3.7384356403681522,
+            "served_ticks": 37,
+            "service_owner_counts": [
+              10,
+              10,
+              17
+            ]
+          },
+          {
+            "coverage_sum": 55.0,
+            "direction_switches": 1,
+            "episode": 14,
+            "inward_commands": 11,
+            "quality_sum": 6.431629418469647,
+            "served_ticks": 55,
+            "service_owner_counts": [
+              10,
+              13,
+              32
+            ]
+          },
+          {
+            "coverage_sum": 51.0,
+            "direction_switches": 5,
+            "episode": 15,
+            "inward_commands": 9,
+            "quality_sum": 2.9856179512511423,
+            "served_ticks": 51,
+            "service_owner_counts": [
+              5,
+              24,
+              22
+            ]
+          }
+        ]
+      },
+      "contrasts": {
+        "D_source": {
+          "mean": 1.1933596566294127,
+          "paired_worlds": [
+            1.4612840274625771,
+            1.0222176809995354,
+            0.8718517365375149,
+            3.9516883543931556,
+            0.324011248259092,
+            0.8930641900545382,
+            0.5720175940352537,
+            -0.18489852559308417,
+            2.7150536574866635,
+            2.8513792889578102,
+            -1.90511440388598,
+            0.06789223119806387,
+            1.3022540373622302,
+            -1.281150168253495,
+            3.766016105538851,
+            2.6661874515178745
+          ],
+          "sample_sd": 1.6693124958062795
+        },
+        "D_target": {
+          "mean": -0.32461674963271203,
+          "paired_worlds": [
+            -2.3381691309436743,
+            -4.278967408878975,
+            0.408040255297621,
+            -2.400985963188484,
+            0.43684028666320174,
+            4.811389366591548,
+            -1.6719263270262559,
+            -0.469292746328998,
+            -1.8713761044044972,
+            2.6447699546483037,
+            -0.5280139484757616,
+            -0.5174504999275538,
+            0.7513915480053246,
+            1.014130420026424,
+            0.7491086327809384,
+            -1.9333563289625548
+          ],
+          "sample_sd": 2.1804154322895584
+        },
+        "interaction_sum": {
+          "mean": 0.8687429069967005,
+          "paired_worlds": [
+            -0.8768851034810972,
+            -3.2567497278794395,
+            1.279891991835136,
+            1.5507023912046716,
+            0.7608515349222937,
+            5.7044535566460866,
+            -1.0999087329910022,
+            -0.6541912719220822,
+            0.8436775530821663,
+            5.496149243606114,
+            -2.4331283523617415,
+            -0.4495582687294899,
+            2.053645585367555,
+            -0.26701974822707086,
+            4.515124738319789,
+            0.7328311225553197
+          ],
+          "sample_sd": 2.5865548242944736
+        }
+      },
+      "returns": {
+        "source_law_source_table": [
+          15.471263796407335,
+          15.454434490685,
+          15.986710017568429,
+          15.211650236167477,
+          14.125115940949042,
+          16.731340242527132,
+          12.409136622038714,
+          16.607374592672727,
+          16.119609581982896,
+          15.873134697391386,
+          14.235812519159035,
+          10.831361963614077,
+          15.69494962611584,
+          13.356374607317628,
+          14.177000971223098,
+          15.735486384119548
+        ],
+        "source_law_target_table": [
+          14.009979768944758,
+          14.432216809685464,
+          15.114858281030914,
+          11.259961881774322,
+          13.80110469268995,
+          15.838276052472594,
+          11.83711902800346,
+          16.79227311826581,
+          13.404555924496233,
+          13.021755408433576,
+          16.140926923045015,
+          10.763469732416013,
+          14.39269558875361,
+          14.637524775571123,
+          10.410984865684247,
+          13.069298932601674
+        ],
+        "target_law_source_table": [
+          13.561534405580712,
+          13.469125796627829,
+          15.060962476047624,
+          14.397797912419112,
+          9.312922832738685,
+          11.895320451257795,
+          11.301648284763111,
+          14.186889828020702,
+          15.551201547054339,
+          12.473410020258122,
+          15.351318002467213,
+          12.767056910533807,
+          15.067225464265857,
+          7.993046477343723,
+          12.727387642399359,
+          14.131918124087669
+        ],
+        "target_law_target_table": [
+          11.223365274637038,
+          9.190158387748854,
+          15.469002731345245,
+          11.996811949230628,
+          9.749763119401887,
+          16.706709817849344,
+          9.629721957736855,
+          13.717597081691704,
+          13.679825442649841,
+          15.118179974906425,
+          14.823304053991452,
+          12.249606410606253,
+          15.818617012271181,
+          9.007176897370147,
+          13.476496275180297,
+          12.198561795125114
+        ]
+      },
+      "same_state_occupancy_diagnostics": {
+        "source_law_source_table": {
+          "disagreements": 18,
+          "matched_better": 18,
+          "matched_worse": 0,
+          "mean_same_state_mismatched_minus_matched_regret": 0.0029391724315627997,
+          "states": 1024
+        },
+        "source_law_target_table": {
+          "disagreements": 82,
+          "matched_better": 74,
+          "matched_worse": 8,
+          "mean_same_state_mismatched_minus_matched_regret": 0.0064665075474390436,
+          "states": 1024
+        },
+        "target_law_source_table": {
+          "disagreements": 25,
+          "matched_better": 25,
+          "matched_worse": 0,
+          "mean_same_state_mismatched_minus_matched_regret": 0.001155259188745472,
+          "states": 1024
+        },
+        "target_law_target_table": {
+          "disagreements": 50,
+          "matched_better": 49,
+          "matched_worse": 1,
+          "mean_same_state_mismatched_minus_matched_regret": 0.002473157825620351,
+          "states": 1024
+        }
+      },
+      "seed": 95402
+    },
+    {
+      "actual_cell_diagnostics": {
+        "source_law_source_table": [
+          {
+            "coverage_sum": 55.0,
+            "direction_switches": 0,
+            "episode": 0,
+            "inward_commands": 0,
+            "quality_sum": 11.078406031400274,
+            "served_ticks": 55,
+            "service_owner_counts": [
+              0,
+              46,
+              9
+            ]
+          },
+          {
+            "coverage_sum": 54.0,
+            "direction_switches": 0,
+            "episode": 1,
+            "inward_commands": 0,
+            "quality_sum": 14.497166226649641,
+            "served_ticks": 54,
+            "service_owner_counts": [
+              0,
+              43,
+              11
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 2,
+            "inward_commands": 0,
+            "quality_sum": 9.151886053500014,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              23,
+              39
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 0,
+            "episode": 3,
+            "inward_commands": 0,
+            "quality_sum": 23.314980384096017,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              60,
+              1
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 4,
+            "inward_commands": 0,
+            "quality_sum": 23.242983216933258,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              62,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 0,
+            "episode": 5,
+            "inward_commands": 0,
+            "quality_sum": 24.251658180612548,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              0,
+              3,
+              59
+            ]
+          },
+          {
+            "coverage_sum": 48.0,
+            "direction_switches": 0,
+            "episode": 6,
+            "inward_commands": 0,
+            "quality_sum": 8.498191892096905,
+            "served_ticks": 48,
+            "service_owner_counts": [
+              0,
+              39,
+              9
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 7,
+            "inward_commands": 0,
+            "quality_sum": 12.984922733877866,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              35,
+              28
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 0,
+            "episode": 8,
+            "inward_commands": 0,
+            "quality_sum": 21.92273710096838,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              0,
+              50,
+              14
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 0,
+            "episode": 9,
+            "inward_commands": 0,
+            "quality_sum": 14.652446113431893,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              40,
+              21
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 10,
+            "inward_commands": 0,
+            "quality_sum": 16.534603167871488,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              6,
+              57
+            ]
+          },
+          {
+            "coverage_sum": 60.0,
+            "direction_switches": 0,
+            "episode": 11,
+            "inward_commands": 0,
+            "quality_sum": 15.585108124503567,
+            "served_ticks": 60,
+            "service_owner_counts": [
+              0,
+              43,
+              17
+            ]
+          },
+          {
+            "coverage_sum": 53.0,
+            "direction_switches": 0,
+            "episode": 12,
+            "inward_commands": 0,
+            "quality_sum": 12.200285700456774,
+            "served_ticks": 53,
+            "service_owner_counts": [
+              0,
+              14,
+              39
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 0,
+            "episode": 13,
+            "inward_commands": 0,
+            "quality_sum": 12.859404078141194,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              30,
+              31
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 0,
+            "episode": 14,
+            "inward_commands": 0,
+            "quality_sum": 10.766596654257697,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              0,
+              57,
+              7
+            ]
+          },
+          {
+            "coverage_sum": 59.0,
+            "direction_switches": 0,
+            "episode": 15,
+            "inward_commands": 0,
+            "quality_sum": 14.152345873011921,
+            "served_ticks": 59,
+            "service_owner_counts": [
+              0,
+              39,
+              20
+            ]
+          }
+        ],
+        "source_law_target_table": [
+          {
+            "coverage_sum": 53.0,
+            "direction_switches": 3,
+            "episode": 0,
+            "inward_commands": 4,
+            "quality_sum": 9.624823944242209,
+            "served_ticks": 53,
+            "service_owner_counts": [
+              2,
+              45,
+              6
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 3,
+            "episode": 1,
+            "inward_commands": 45,
+            "quality_sum": 13.985501244682654,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              43,
+              21,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 5,
+            "episode": 2,
+            "inward_commands": 7,
+            "quality_sum": 7.644764037407279,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              6,
+              21,
+              34
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 5,
+            "episode": 3,
+            "inward_commands": 5,
+            "quality_sum": 21.901828815601746,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              6,
+              55,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 1,
+            "episode": 4,
+            "inward_commands": 5,
+            "quality_sum": 21.661021271734448,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              5,
+              59,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 5,
+            "episode": 5,
+            "inward_commands": 7,
+            "quality_sum": 21.54412482923796,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              7,
+              0,
+              55
+            ]
+          },
+          {
+            "coverage_sum": 59.0,
+            "direction_switches": 9,
+            "episode": 6,
+            "inward_commands": 43,
+            "quality_sum": 8.17684636732647,
+            "served_ticks": 59,
+            "service_owner_counts": [
+              42,
+              16,
+              1
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 3,
+            "episode": 7,
+            "inward_commands": 4,
+            "quality_sum": 11.458430995059206,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              4,
+              30,
+              28
+            ]
+          },
+          {
+            "coverage_sum": 55.0,
+            "direction_switches": 7,
+            "episode": 8,
+            "inward_commands": 19,
+            "quality_sum": 17.11939114086198,
+            "served_ticks": 55,
+            "service_owner_counts": [
+              12,
+              42,
+              1
+            ]
+          },
+          {
+            "coverage_sum": 59.0,
+            "direction_switches": 1,
+            "episode": 9,
+            "inward_commands": 3,
+            "quality_sum": 13.838713074872974,
+            "served_ticks": 59,
+            "service_owner_counts": [
+              1,
+              37,
+              21
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 7,
+            "episode": 10,
+            "inward_commands": 6,
+            "quality_sum": 14.11421546711167,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              8,
+              5,
+              50
+            ]
+          },
+          {
+            "coverage_sum": 62.0,
+            "direction_switches": 9,
+            "episode": 11,
+            "inward_commands": 45,
+            "quality_sum": 12.400706241370226,
+            "served_ticks": 62,
+            "service_owner_counts": [
+              45,
+              4,
+              13
+            ]
+          },
+          {
+            "coverage_sum": 54.0,
+            "direction_switches": 3,
+            "episode": 12,
+            "inward_commands": 6,
+            "quality_sum": 11.259115740000219,
+            "served_ticks": 54,
+            "service_owner_counts": [
+              4,
+              12,
+              38
+            ]
+          },
+          {
+            "coverage_sum": 49.0,
+            "direction_switches": 1,
+            "episode": 13,
+            "inward_commands": 14,
+            "quality_sum": 9.940342783264427,
+            "served_ticks": 49,
+            "service_owner_counts": [
+              1,
+              25,
+              23
+            ]
+          },
+          {
+            "coverage_sum": 59.0,
+            "direction_switches": 7,
+            "episode": 14,
+            "inward_commands": 23,
+            "quality_sum": 7.61563881036181,
+            "served_ticks": 59,
+            "service_owner_counts": [
+              21,
+              34,
+              4
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 13,
+            "episode": 15,
+            "inward_commands": 42,
+            "quality_sum": 10.585110993862276,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              41,
+              21,
+              2
+            ]
+          }
+        ],
+        "target_law_source_table": [
+          {
+            "coverage_sum": 36.0,
+            "direction_switches": 0,
+            "episode": 0,
+            "inward_commands": 0,
+            "quality_sum": 3.449998693199749,
+            "served_ticks": 36,
+            "service_owner_counts": [
+              0,
+              16,
+              20
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 0,
+            "episode": 1,
+            "inward_commands": 0,
+            "quality_sum": 14.110760899867852,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              0,
+              61,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 2,
+            "inward_commands": 0,
+            "quality_sum": 4.273485141957539,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              23,
+              40
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 3,
+            "inward_commands": 0,
+            "quality_sum": 4.498747495710051,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              0,
+              42,
+              21
+            ]
+          },
+          {
+            "coverage_sum": 52.0,
+            "direction_switches": 0,
+            "episode": 4,
+            "inward_commands": 0,
+            "quality_sum": 5.346302183400393,
+            "served_ticks": 52,
+            "service_owner_counts": [
+              0,
+              39,
+              13
+            ]
+          },
+          {
+            "coverage_sum": 53.0,
+            "direction_switches": 0,
+            "episode": 5,
+            "inward_commands": 0,
+            "quality_sum": 6.5414374601694405,
+            "served_ticks": 53,
+            "service_owner_counts": [
+              0,
+              0,
+              53
+            ]
+          },
+          {
+            "coverage_sum": 51.0,
+            "direction_switches": 0,
+            "episode": 6,
+            "inward_commands": 0,
+            "quality_sum": 4.513634979398045,
+            "served_ticks": 51,
+            "service_owner_counts": [
+              0,
+              8,
+              43
+            ]
+          },
+          {
+            "coverage_sum": 47.0,
+            "direction_switches": 0,
+            "episode": 7,
+            "inward_commands": 0,
+            "quality_sum": 3.841986834225243,
+            "served_ticks": 47,
+            "service_owner_counts": [
+              0,
+              9,
+              38
+            ]
+          },
+          {
+            "coverage_sum": 60.0,
+            "direction_switches": 0,
+            "episode": 8,
+            "inward_commands": 0,
+            "quality_sum": 6.8128715573904515,
+            "served_ticks": 60,
+            "service_owner_counts": [
+              0,
+              22,
+              38
+            ]
+          },
+          {
+            "coverage_sum": 59.0,
+            "direction_switches": 0,
+            "episode": 9,
+            "inward_commands": 0,
+            "quality_sum": 4.6675758002589065,
+            "served_ticks": 59,
+            "service_owner_counts": [
+              0,
+              10,
+              49
+            ]
+          },
+          {
+            "coverage_sum": 52.0,
+            "direction_switches": 0,
+            "episode": 10,
+            "inward_commands": 0,
+            "quality_sum": 3.9111919278392966,
+            "served_ticks": 52,
+            "service_owner_counts": [
+              0,
+              48,
+              4
+            ]
+          },
+          {
+            "coverage_sum": 30.0,
+            "direction_switches": 0,
+            "episode": 11,
+            "inward_commands": 0,
+            "quality_sum": 1.4982708766230513,
+            "served_ticks": 30,
+            "service_owner_counts": [
+              0,
+              12,
+              18
+            ]
+          },
+          {
+            "coverage_sum": 56.0,
+            "direction_switches": 0,
+            "episode": 12,
+            "inward_commands": 0,
+            "quality_sum": 6.665349496292864,
+            "served_ticks": 56,
+            "service_owner_counts": [
+              0,
+              9,
+              47
+            ]
+          },
+          {
+            "coverage_sum": 51.0,
+            "direction_switches": 0,
+            "episode": 13,
+            "inward_commands": 0,
+            "quality_sum": 10.40640541360186,
+            "served_ticks": 51,
+            "service_owner_counts": [
+              0,
+              41,
+              10
+            ]
+          },
+          {
+            "coverage_sum": 42.0,
+            "direction_switches": 0,
+            "episode": 14,
+            "inward_commands": 0,
+            "quality_sum": 4.083227936801283,
+            "served_ticks": 42,
+            "service_owner_counts": [
+              0,
+              6,
+              36
+            ]
+          },
+          {
+            "coverage_sum": 55.0,
+            "direction_switches": 0,
+            "episode": 15,
+            "inward_commands": 0,
+            "quality_sum": 10.322354336119936,
+            "served_ticks": 55,
+            "service_owner_counts": [
+              0,
+              22,
+              33
+            ]
+          }
+        ],
+        "target_law_target_table": [
+          {
+            "coverage_sum": 39.0,
+            "direction_switches": 3,
+            "episode": 0,
+            "inward_commands": 12,
+            "quality_sum": 4.049006139914159,
+            "served_ticks": 39,
+            "service_owner_counts": [
+              9,
+              16,
+              14
+            ]
+          },
+          {
+            "coverage_sum": 64.0,
+            "direction_switches": 3,
+            "episode": 1,
+            "inward_commands": 45,
+            "quality_sum": 14.899259849654431,
+            "served_ticks": 64,
+            "service_owner_counts": [
+              43,
+              21,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 50.0,
+            "direction_switches": 11,
+            "episode": 2,
+            "inward_commands": 16,
+            "quality_sum": 2.793733211182041,
+            "served_ticks": 50,
+            "service_owner_counts": [
+              13,
+              12,
+              25
+            ]
+          },
+          {
+            "coverage_sum": 57.0,
+            "direction_switches": 5,
+            "episode": 3,
+            "inward_commands": 5,
+            "quality_sum": 3.8400048748906563,
+            "served_ticks": 57,
+            "service_owner_counts": [
+              6,
+              33,
+              18
+            ]
+          },
+          {
+            "coverage_sum": 51.0,
+            "direction_switches": 1,
+            "episode": 4,
+            "inward_commands": 5,
+            "quality_sum": 5.660999923212215,
+            "served_ticks": 51,
+            "service_owner_counts": [
+              4,
+              37,
+              10
+            ]
+          },
+          {
+            "coverage_sum": 51.0,
+            "direction_switches": 1,
+            "episode": 5,
+            "inward_commands": 2,
+            "quality_sum": 5.87858966977393,
+            "served_ticks": 51,
+            "service_owner_counts": [
+              0,
+              0,
+              51
+            ]
+          },
+          {
+            "coverage_sum": 49.0,
+            "direction_switches": 1,
+            "episode": 6,
+            "inward_commands": 2,
+            "quality_sum": 4.430512156101031,
+            "served_ticks": 49,
+            "service_owner_counts": [
+              0,
+              7,
+              42
+            ]
+          },
+          {
+            "coverage_sum": 42.0,
+            "direction_switches": 3,
+            "episode": 7,
+            "inward_commands": 4,
+            "quality_sum": 3.7186079880285083,
+            "served_ticks": 42,
+            "service_owner_counts": [
+              1,
+              6,
+              35
+            ]
+          },
+          {
+            "coverage_sum": 53.0,
+            "direction_switches": 9,
+            "episode": 8,
+            "inward_commands": 9,
+            "quality_sum": 5.585424323550406,
+            "served_ticks": 53,
+            "service_owner_counts": [
+              11,
+              17,
+              25
+            ]
+          },
+          {
+            "coverage_sum": 56.0,
+            "direction_switches": 3,
+            "episode": 9,
+            "inward_commands": 3,
+            "quality_sum": 4.494230110667635,
+            "served_ticks": 56,
+            "service_owner_counts": [
+              0,
+              9,
+              47
+            ]
+          },
+          {
+            "coverage_sum": 63.0,
+            "direction_switches": 0,
+            "episode": 10,
+            "inward_commands": 64,
+            "quality_sum": 23.648356201162585,
+            "served_ticks": 63,
+            "service_owner_counts": [
+              63,
+              0,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 54.0,
+            "direction_switches": 12,
+            "episode": 11,
+            "inward_commands": 57,
+            "quality_sum": 11.311302900382513,
+            "served_ticks": 54,
+            "service_owner_counts": [
+              54,
+              0,
+              0
+            ]
+          },
+          {
+            "coverage_sum": 54.0,
+            "direction_switches": 1,
+            "episode": 12,
+            "inward_commands": 5,
+            "quality_sum": 6.43618370776583,
+            "served_ticks": 54,
+            "service_owner_counts": [
+              3,
+              5,
+              46
+            ]
+          },
+          {
+            "coverage_sum": 46.0,
+            "direction_switches": 3,
+            "episode": 13,
+            "inward_commands": 3,
+            "quality_sum": 10.047854964632297,
+            "served_ticks": 46,
+            "service_owner_counts": [
+              0,
+              40,
+              6
+            ]
+          },
+          {
+            "coverage_sum": 37.0,
+            "direction_switches": 1,
+            "episode": 14,
+            "inward_commands": 4,
+            "quality_sum": 3.8843444428291094,
+            "served_ticks": 37,
+            "service_owner_counts": [
+              0,
+              4,
+              33
+            ]
+          },
+          {
+            "coverage_sum": 61.0,
+            "direction_switches": 1,
+            "episode": 15,
+            "inward_commands": 26,
+            "quality_sum": 10.087925626349385,
+            "served_ticks": 61,
+            "service_owner_counts": [
+              22,
+              22,
+              17
+            ]
+          }
+        ]
+      },
+      "contrasts": {
+        "D_source": {
+          "mean": 0.2197279944259074,
+          "paired_worlds": [
+            0.612024875382474,
+            -2.2821668351366355,
+            0.3840455349426062,
+            0.14131515684942642,
+            -0.30847047214678724,
+            0.27075333513746,
+            -2.5345321141896235,
+            0.3859825072151999,
+            2.5803345960106423,
+            0.5480399705225594,
+            0.24203877007597896,
+            -0.14822647835333314,
+            -0.13921633728767802,
+            3.0919061294876755,
+            1.4817624510562553,
+            -0.809943178751702
+          ],
+          "sample_sd": 1.44196746232061
+        },
+        "D_target": {
+          "mean": 0.10305876077442139,
+          "paired_worlds": [
+            0.759900744671441,
+            0.7788498949786575,
+            -3.1813085264108825,
+            -1.4658742620819396,
+            -0.2018635593521516,
+            -0.5329514457062174,
+            -0.47497894899636783,
+            -1.17900455128634,
+            -1.756078056717337,
+            -0.717334568959128,
+            4.540383093998994,
+            6.581303202375945,
+            -0.4895832455193698,
+            -1.202521711563623,
+            -1.186555016063883,
+            1.3765571290229452
+          ],
+          "sample_sd": 2.4185347464947857
+        },
+        "interaction_sum": {
+          "mean": 0.3227867552003288,
+          "paired_worlds": [
+            1.371925620053915,
+            -1.503316940157978,
+            -2.7972629914682763,
+            -1.3245591052325132,
+            -0.5103340314989389,
+            -0.2621981105687574,
+            -3.0095110631859914,
+            -0.7930220440711402,
+            0.8242565392933052,
+            -0.16929459843656858,
+            4.782421864074973,
+            6.433076724022611,
+            -0.6287995828070478,
+            1.8893844179240524,
+            0.29520743499237234,
+            0.5666139502712433
+          ],
+          "sample_sd": 2.4685610297057496
+        }
+      },
+      "returns": {
+        "source_law_source_table": [
+          13.94117393647336,
+          14.049716622664963,
+          15.381855272016667,
+          16.564831371742933,
+          16.790964988359992,
+          16.89183248472792,
+          12.049819189209689,
+          15.998492273387786,
+          17.125607043430172,
+          15.698577944676522,
+          16.353460316787146,
+          15.558510812450356,
+          13.586695236712343,
+          15.519273741147451,
+          16.009992998759103,
+          15.181901253967858
+        ],
+        "source_law_target_table": [
+          13.329149061090886,
+          16.3318834578016,
+          14.99780973707406,
+          16.423516214893507,
+          17.09943546050678,
+          16.62107914959046,
+          14.584351303399313,
+          15.612509766172586,
+          14.54527244741953,
+          15.150537974153963,
+          16.111421546711167,
+          15.706737290803689,
+          13.72591157400002,
+          12.427367611659776,
+          14.528230547702847,
+          15.99184443271956
+        ],
+        "target_law_source_table": [
+          8.744999869319974,
+          15.644409423320118,
+          15.127348514195752,
+          15.149874749571005,
+          12.667963551673372,
+          13.020810412683609,
+          12.351363497939804,
+          11.35086535008919,
+          14.681287155739044,
+          14.233424246692557,
+          12.524452526117262,
+          7.149827087662305,
+          13.733201616295952,
+          12.940640541360185,
+          10.208322793680127,
+          13.865568766945326
+        ],
+        "target_law_target_table": [
+          9.504900613991415,
+          16.423259318298776,
+          11.94603998778487,
+          13.684000487489065,
+          12.46609999232122,
+          12.487858966977392,
+          11.876384548943436,
+          10.17186079880285,
+          12.925209099021707,
+          13.51608967773343,
+          17.064835620116256,
+          13.73113029003825,
+          13.243618370776582,
+          11.738118829796562,
+          9.021767777616244,
+          15.242125895968272
+        ]
+      },
+      "same_state_occupancy_diagnostics": {
+        "source_law_source_table": {
+          "disagreements": 19,
+          "matched_better": 19,
+          "matched_worse": 0,
+          "mean_same_state_mismatched_minus_matched_regret": 0.003098109254643369,
+          "states": 1024
+        },
+        "source_law_target_table": {
+          "disagreements": 54,
+          "matched_better": 49,
+          "matched_worse": 5,
+          "mean_same_state_mismatched_minus_matched_regret": 0.0037210747182072814,
+          "states": 1024
+        },
+        "target_law_source_table": {
+          "disagreements": 20,
+          "matched_better": 20,
+          "matched_worse": 0,
+          "mean_same_state_mismatched_minus_matched_regret": 0.0009292381765269544,
+          "states": 1024
+        },
+        "target_law_target_table": {
+          "disagreements": 43,
+          "matched_better": 43,
+          "matched_worse": 0,
+          "mean_same_state_mismatched_minus_matched_regret": 0.001769589833022154,
+          "states": 1024
+        }
+      },
+      "seed": 95403
+    }
+  ],
+  "contrasts": {
+    "D_source": {
+      "bases": [
+        0.8774720151062017,
+        1.1933596566294127,
+        0.2197279944259074
+      ],
+      "conditional_fixed_base_mcse": 0.20223632556710414,
+      "mean": 0.7635198887205071
+    },
+    "D_target": {
+      "bases": [
+        0.6231770437562905,
+        -0.32461674963271203,
+        0.10305876077442139
+      ],
+      "conditional_fixed_base_mcse": 0.4369082968316898,
+      "mean": 0.13387301829933326
+    },
+    "interaction_sum": {
+      "bases": [
+        1.5006490588624921,
+        0.8687429069967005,
+        0.3227867552003288
+      ],
+      "conditional_fixed_base_mcse": 0.4340205495435027,
+      "mean": 0.8973929070198405
+    }
+  },
+  "limits": "Stored-trace arithmetic, conditioned on three old bases/six tables; no new environment, policy or training replication.",
+  "new_fits": 0,
+  "new_native_calls": 0,
+  "new_probability_or_network_queries": 0,
+  "planner_rows_checked": 12288,
+  "saved_branches_checked": 98304,
+  "science_digests_checked": 18,
+  "scientific_source": "6adcfcd4bd9912f68b29d3664ea6ded935eecc60",
+  "source_digests_checked": 7,
+  "status": "PASS",
+  "unique_input_digests_checked": 12
+}

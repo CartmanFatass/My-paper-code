@@ -1,0 +1,48 @@
+{
+  "batch": 16,
+  "block_model_seeds": [
+    926141,
+    926142
+  ],
+  "block_seeds": [
+    925941,
+    925942
+  ],
+  "collect_phases": [
+    70,
+    71,
+    72
+  ],
+  "device": "cpu",
+  "dtype": "float32",
+  "epochs": [
+    40,
+    40
+  ],
+  "evaluation_contexts": 256,
+  "evaluation_model_seed": 926143,
+  "evaluation_phases": [
+    80,
+    81,
+    82
+  ],
+  "evaluation_seed": 925943,
+  "horizon": 96,
+  "host": "LAPTOP-U9TDKC8A",
+  "initial_contexts": 256,
+  "launch_sha": "a576d6b6c830d712703ae069f91f74a57485e264",
+  "nominal_receiver_probability": 0.75,
+  "numpy": "1.26.3",
+  "parameter_count": 27329,
+  "particles": 32,
+  "rollout_contexts": 128,
+  "source_asset": "experiments/candidates/finite_model_decision_value/b01",
+  "source_base": "d5261580dcf6d7a23da9473a4ad4f175c312e6db",
+  "threads": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "torch": "2.7.0+cu118",
+  "train_batch": 64
+}

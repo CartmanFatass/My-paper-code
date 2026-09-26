@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-23T22:06:38.475472Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/312562bc751049cca2799158d8d2af2f/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/312562bc751049cca2799158d8d2af2f/scripts/run_agent_count_fresh_learning_b14.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201",
+    "--",
+    "--cell",
+    "h6",
+    "--seed",
+    "974201",
+    "--launch-sha",
+    "88b67e5e0110ae05c440588a2b19ab0b6c0f021c",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201"
+  ],
+  "claim_key": "40c1ccfc713b810aab63e220ac5211c4250ce38da9351006479a8e26d6cb3917",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/40c1ccfc713b810aab63e220ac5211c4250ce38da9351006479a8e26d6cb3917.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/312562bc751049cca2799158d8d2af2f/scripts/run_agent_count_fresh_learning_b14.py",
+    "--cell",
+    "h6",
+    "--seed",
+    "974201",
+    "--launch-sha",
+    "88b67e5e0110ae05c440588a2b19ab0b6c0f021c",
+    "--out",
+    "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201"
+  ],
+  "command_sha256": "bcd69e77313b5fed8e783fe5b8951bcf498c3ece29a1acc6cf3504651938d849",
+  "control_observation": {
+    "observed_at": "2026-09-23T22:06:38.378735Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "ca1666f4628e614c2588b29274b5d54b2fe0dcca"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-23T22:06:38.386642Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/312562bc751049cca2799158d8d2af2f",
+  "direction": "agent_count_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_agent_count_fresh_learning_b14.py",
+    "--cell",
+    "h6",
+    "--seed",
+    "974201",
+    "--launch-sha",
+    "88b67e5e0110ae05c440588a2b19ab0b6c0f021c"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/40c1ccfc713b810aab63e220ac5211c4250ce38da9351006479a8e26d6cb3917.json",
+  "output_root": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201",
+  "preflight": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 434013,
+      "session_id": 434013,
+      "start_ticks": 56100331
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 434013,
+    "process_group_id": 434013
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 434014,
+      "session_id": 434013,
+      "start_ticks": 56100333
+    },
+    "pid": 434014,
+    "process_group_id": 434013,
+    "supervisor_pid": 434013
+  },
+  "schema_version": 1,
+  "sha": "88b67e5e0110ae05c440588a2b19ab0b6c0f021c",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/312562bc751049cca2799158d8d2af2f",
+  "stderr": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/agent_count_generalization/s1_fresh_learning_b14_h6_s974201/stdout.log"
+}

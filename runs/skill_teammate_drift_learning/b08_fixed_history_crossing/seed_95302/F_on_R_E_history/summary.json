@@ -1,0 +1,50 @@
+{
+  "compute_wall_scope": "recipient decision expire, predict, exact readouts, and recorded-feedback update",
+  "compute_wall_seconds": 0.0037958769826218486,
+  "continuation": "F_on_R_E_history",
+  "counts": {
+    "cooperative_observations": 80,
+    "cooperative_posterior_updates": 0,
+    "decision_observations": 256,
+    "expiration_recomputations": 0,
+    "regression_solves": 80,
+    "regression_statistic_updates": 80,
+    "safe_posterior_updates": 176
+  },
+  "decision_source_to_final_l2_movement": 0.38423242610527886,
+  "donor_branch": "R_E",
+  "donor_manifest_sha256": "2ab5f14494eeaa231a57ad4b1e3fbd35837e9b2d7a8ef3d0033d0f767feddf37",
+  "donor_required_artifact_digests": {
+    "F_E/state.npz": "5ce26a1b44c1acbe858019660b57d3631f2770329051718707977706027849de",
+    "F_E/summary.json": "7422eb113d64c12f3264ad0e9b9aab06a30cfe54986be30b4f9e7fe897da0c92",
+    "F_E/trajectory.npz": "69cb414a704ef482abcbd0c45923ecabcb7698143a667c69ab4031fb6e2741c9",
+    "R_E/state.npz": "43fdcc4a15d256c8df37a5e4ca11c386e1171170864a04d946e8cdedc833caf7",
+    "R_E/summary.json": "06df3f841c8db90486a05926c9cbd82d1d32f22e3c421641f1256299ded87af5",
+    "R_E/trajectory.npz": "0d538ef3782d2af810337474377205d95a6642acd45b01209a8836d9de93f5f9",
+    "artifacts.json": "2ab5f14494eeaa231a57ad4b1e3fbd35837e9b2d7a8ef3d0033d0f767feddf37",
+    "summary.json": "bc3c9c74a43a9cbfa967fcc48ab57ad604e997bf75a2dc66a3a4ddeae239ef74"
+  },
+  "environment_ticks": 0,
+  "evidence_commit": "6ab8db786a2dc2397d883e8476ccb0303b059f0e",
+  "first_prediction_fidelity": true,
+  "gradient_optimizer_calls": 0,
+  "launch_sha": "52cc7b71a0fd9433a1f7c093e8c77076f8732abc",
+  "law_fits": 0,
+  "new_preupdate_q_predictions": 256,
+  "readout_role": "off-collector fixed-history matched-epsilon recommendation value",
+  "recipient_branch": "F_E",
+  "recorded_feedback_updates": 256,
+  "records_read": 256,
+  "sampled_rewards": 0,
+  "scalar_policy_reductions": 512,
+  "scientific_source": "03d3633bd55b4095d7b195ad5ecd3f44eb3c864a",
+  "seed": 95302,
+  "source_fits": 0,
+  "source_state_roundtrip": true,
+  "spec": {
+    "family": "fingerprint_full",
+    "prior_strength": 2.0,
+    "recent_window": null,
+    "representation": "hybrid"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-21T03:21:23.908237Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/scripts/run_ucope_normalized_distance_gate_b09.py",
+    "--output",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/normalized_distance_gate_b09_8961",
+    "--",
+    "--master",
+    "8961",
+    "--out",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/normalized_distance_gate_b09_8961",
+    "--launch-sha",
+    "a20583ee128bb04e2e638804a0b5493322a3edf6"
+  ],
+  "claim_key": "b23ff2acc5449784c0f82818ccce3ab3c82473145757ee53bb1307358b5da69b",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/b23ff2acc5449784c0f82818ccce3ab3c82473145757ee53bb1307358b5da69b.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba/scripts/run_ucope_normalized_distance_gate_b09.py",
+    "--master",
+    "8961",
+    "--out",
+    "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/normalized_distance_gate_b09_8961",
+    "--launch-sha",
+    "a20583ee128bb04e2e638804a0b5493322a3edf6"
+  ],
+  "command_sha256": "bb65373e4aa9b667a1c471debd6aeffd21088990b7e7b7bf83c83b874674e329",
+  "control_observation": {
+    "observed_at": "2026-09-21T03:21:23.736904Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "0716838f34d6b20f1fe92c9933eb9b00593c03d4"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-21T03:21:23.757239Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba",
+  "direction": "ucope",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_ucope_normalized_distance_gate_b09.py",
+    "--master",
+    "8961",
+    "--launch-sha",
+    "a20583ee128bb04e2e638804a0b5493322a3edf6"
+  ],
+  "lead": "Codex session (direct DM; resumed original UCOPE task)",
+  "manifest_ref": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/normalized_distance_gate_b09_8961/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/b23ff2acc5449784c0f82818ccce3ab3c82473145757ee53bb1307358b5da69b.json",
+  "output_root": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/normalized_distance_gate_b09_8961",
+  "preflight": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/normalized_distance_gate_b09_8961/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2981824,
+      "session_id": 2981824,
+      "start_ticks": 22331410
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 2981824,
+    "process_group_id": 2981824
+  },
+  "process_exit": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/normalized_distance_gate_b09_8961/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "0c48e432-2a4b-4bcc-9576-32954aa2c6b8",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2981825,
+      "session_id": 2981824,
+      "start_ticks": 22331414
+    },
+    "pid": 2981825,
+    "process_group_id": 2981824,
+    "supervisor_pid": 2981824
+  },
+  "schema_version": 1,
+  "sha": "a20583ee128bb04e2e638804a0b5493322a3edf6",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8933df58e9d14089bd92d992e8e6ecba",
+  "stderr": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/normalized_distance_gate_b09_8961/stderr.log",
+  "stdout": "/home/fires/.codex/worktrees/1275/hmasd-wsl/runs/ucope/normalized_distance_gate_b09_8961/stdout.log"
+}

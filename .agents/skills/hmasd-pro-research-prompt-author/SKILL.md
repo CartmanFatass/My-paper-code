@@ -23,7 +23,8 @@ execution and collection; no new question or reuse receipt is needed. For confir
 must cover the actual claim, comparison and fixed plan. If the question, premise or evidence has
 materially changed at a section 5 decision point, ask a focused follow-up and show what changed.
 A local Critic or engineering Reviewer does not replace this consultation. Keep any frozen
-review exception within its original object. Portfolio remains owner-triggered.
+review exception within its original object. Portfolio follows an owner request or explicit
+project-management delegation under constitution section 2.
 
 ## Steps
 

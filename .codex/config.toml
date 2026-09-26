@@ -19,14 +19,14 @@ default_wait_timeout_ms = 1500000
 max_wait_timeout_ms = 3600000
 
 [agents]
-# Root coordinates up to three direction DMs, independent sessions and children combined.
-# This is the constitutional soft ceiling, not a separate ceiling for each form.
+# Three is the research-runtime resource ceiling, independent DMs and children combined.
+# It does not limit the full plan's questions or create permanent DM-to-direction assignments.
 # This runtime fan-out also accommodates bounded implementers and independent reviewers.
 max_concurrent_threads_per_session = 40
 interrupt_message = true
 
 [agents.HMASDDirectionManager]
-description = "Direction owner under the constitution: cumulative understanding, ideas, code, runs and three records."
+description = "Scientific question owner under the constitution: continuity across approaches, ideas, code, runs and three records."
 config_file = "./agents/hmasd-direction-manager.toml"
 
 [agents.HMASDImplementer]

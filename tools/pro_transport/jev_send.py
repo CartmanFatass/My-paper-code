@@ -29,32 +29,132 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 SETTINGS = REPO / ".codex" / "hmasd-transport.toml"
 
+# A hydrated composer has one editable field inside its form. The pending-home-input textarea
+# is only a loading placeholder. Require one valid candidate so a changed/ambiguous UI fails closed.
+COMPOSER_LOOKUP = """() => {
+  const candidates = [...document.querySelectorAll('#prompt-textarea, [data-composer-markdown]')];
+  if (candidates.length !== 1) return null;
+  const e = candidates[0];
+  if (!e.closest('form')) return null;
+  const legacy = e.id === 'prompt-textarea';
+  const role = e.getAttribute('role');
+  if (e.tagName === 'TEXTAREA') return legacy && (!role || role === 'textbox') ? e : null;
+  if (e.getAttribute('contenteditable') !== 'true') return null;
+  return (e.hasAttribute('data-composer-markdown') ? role === 'textbox'
+    : legacy && (!role || role === 'textbox')) ? e : null;
+}"""
+
+SEND_LOOKUP = """() => {
+  const form = (__COMPOSER_LOOKUP__)()?.closest('form');
+  if (!form) return null;
+  const candidates = [...form.querySelectorAll('button[data-testid="send-button"], button[type="submit"]')]
+    .filter(e => !e.disabled && (e.getAttribute('data-testid') === 'send-button' ||
+      (e.type === 'submit' && /^(发送|Send)$/.test(e.getAttribute('aria-label') || ''))));
+  return candidates.length === 1 ? candidates[0] : null;
+}""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP)
+
+UPLOAD_LOOKUP = """() => {
+  const form = (__COMPOSER_LOOKUP__)()?.closest('form');
+  if (!form) return null;
+  const candidates = [...form.querySelectorAll('input[type="file"]')].filter(e =>
+    !(e.getAttribute('accept') || '').trim() &&
+    (e.id === 'upload-files' || /^(附加文件|Attach files|Attach file)$/.test(e.getAttribute('aria-label') || '')));
+  if (candidates.length !== 1) return null;
+  const input = candidates[0];
+  if (!/^[A-Za-z0-9_-]+$/.test(input.id)) return null;
+  return document.querySelectorAll('input[id="' + input.id + '"]').length === 1 ? input.id : null;
+}""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP)
+
+ATTACHMENT_CARDS = """() => {
+  const form = (__COMPOSER_LOOKUP__)()?.closest('form');
+  if (!form) return null;
+  const labels = [...form.querySelectorAll('button[aria-label]')]
+    .map(button => button.getAttribute('aria-label'));
+  const removals = labels.filter(label => /^(移除 |Remove )/.test(label));
+  const names = [];
+  for (const removal of removals) {
+    const name = removal.replace(/^(移除 |Remove )/, '');
+    if (!name || labels.filter(label => label === name).length !== 1 ||
+        labels.filter(label => label === removal).length !== 1) return null;
+    names.push(name);
+  }
+  return new Set(names).size === names.length ? names : null;
+}""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP)
+
+
 # Read-only page facts. Selectors are reads only; no click or text ever comes from them.
 PAGE_FACTS = """(() => {
   const text = e => (e?.innerText || '').trim();
-  const composer = document.querySelector('#prompt-textarea');
-  const users = [...document.querySelectorAll('[data-message-author-role="user"]')].map(text);
-  const assistants = [...document.querySelectorAll('[data-message-author-role="assistant"]')].map(text);
-  const turns = [...document.querySelectorAll('[data-message-author-role]')].map(message => {
+  const composer = (__COMPOSER_LOOKUP__)();
+  const send = (__SEND_LOOKUP__)();
+  const attachmentCards = (__ATTACHMENT_CARDS__)();
+  const legacyMessages = [...document.querySelectorAll('[data-message-author-role]')];
+  const modernUnits = [...document.querySelectorAll('[data-chatgpt-search-unit-key]')]
+    .filter(unit => /:(user|assistant)$/.test(unit.getAttribute('data-chatgpt-search-unit-key') || ''));
+  const legacyTurns = legacyMessages.map(message => {
     const container = message.closest('article,[data-testid^="conversation-turn"]') || message;
     const messageBody = message.getAttribute('data-message-author-role') === 'user'
       ? message.querySelector('.whitespace-pre-wrap') : null;
     return {role: message.getAttribute('data-message-author-role'), text: text(message),
       message_body: messageBody ? text(messageBody) : null, turn_text: text(container),
+      attachment_names: [],
       // Tool work can continue after an opening assistant message with no Stop
       // button. The completed response's feedback control belongs to this turn.
       final_controls: message.getAttribute('data-message-author-role') === 'assistant'
         && !!container.querySelector('[data-testid="feedback-turn-action-button"]')};
   });
+  const modernTurns = modernUnits.map(unit => {
+    const key = unit.getAttribute('data-chatgpt-search-unit-key') || '';
+    const match = key.match(/^(.*):([0-9]+):(user|assistant)$/);
+    const container = unit.closest('[data-content-search-turn-key]');
+    if (!match || !container || container.getAttribute('data-content-search-turn-key') !== match[1])
+      return null;
+    if (match[3] === 'user') {
+      const bubbles = [...unit.querySelectorAll('[data-user-message-bubble="true"]')];
+      const bodies = bubbles.length === 1 ? [...bubbles[0].querySelectorAll('.whitespace-pre-wrap')] : [];
+      if (bodies.length !== 1) return null;
+      const cards = [...unit.querySelectorAll('[class~="group/resource-card"]')].filter(card =>
+        card.closest('[data-chatgpt-search-unit-key]') === unit && !bubbles[0].contains(card));
+      const names = cards.map(card => {
+        const spans = [...card.querySelectorAll('span[title].truncate.text-default.text-sm.font-semibold')];
+        if (spans.length !== 1) return null;
+        const name = text(spans[0]);
+        return name && spans[0].getAttribute('title')?.trim() === name ? name : null;
+      });
+      if (names.some(name => !name)) return null;
+      return {role: 'user', text: text(unit), message_body: text(bodies[0]),
+        turn_text: text(unit), attachment_names: names, final_controls: false};
+    }
+    const bodies = [...unit.querySelectorAll('[data-markdown-text-style="assistant-message"]')];
+    const siblings = modernUnits.filter(other =>
+      other.closest('[data-content-search-turn-key]') === container &&
+      /:assistant$/.test(other.getAttribute('data-chatgpt-search-unit-key') || ''));
+    const footers = [...container.querySelectorAll('.turn-action-controls')].filter(footer =>
+      footer.closest('[data-content-search-turn-key]') === container &&
+      footer.querySelectorAll('button[aria-label="重新生成回复"], button[aria-label="Regenerate response"]').length === 1 &&
+      footer.querySelectorAll('button[aria-label="回复不佳"], button[aria-label="Bad response"]').length === 1);
+    const footer = footers.length === 1 ? footers[0] : null;
+    const finalControls = !!footer && siblings[siblings.length - 1] === unit && bodies.length === 1;
+    return {role: 'assistant', text: bodies.length === 1 ? text(bodies[0]) : '',
+      message_body: null, turn_text: text(unit), final_controls: finalControls};
+  });
+  const turns = legacyMessages.length && modernUnits.length ? [] :
+    legacyMessages.length ? legacyTurns : modernTurns.every(Boolean) ? modernTurns : [];
+  const users = turns.filter(turn => turn.role === 'user').map(turn => turn.text);
+  const assistants = turns.filter(turn => turn.role === 'assistant').map(turn => turn.text);
+  const userTurns = legacyMessages.length ?
+    [...document.querySelectorAll('article,[data-testid^="conversation-turn"]')]
+      .filter(e => e.querySelector('[data-message-author-role="user"]')).map(text) :
+    turns.filter(turn => turn.role === 'user').map(turn => turn.turn_text);
   const pageText = text(document.body).slice(0, 800);
   return {
     url: location.href,
     title: document.title,
-    composer: composer ? text(composer) : null,
-    send_button: !!document.querySelector('[data-testid="send-button"]:not(:disabled)'),
+    composer: composer ? (composer.tagName === 'TEXTAREA' ? composer.value.trim() : text(composer)) : null,
+    send_button: !!send,
     form_text: text(composer?.closest('form')),
-    user_turns: users.length ? [...document.querySelectorAll('article,[data-testid^="conversation-turn"]')]
-      .filter(e => e.querySelector('[data-message-author-role="user"]')).map(text) : [],
+    attachment_cards: attachmentCards,
+    user_turns: users.length ? userTurns : [],
     stop_button: !!document.querySelector('[data-testid="stop-button"]'),
     login: !!document.querySelector('[data-testid="login-button"]'),
     approval: [...document.querySelectorAll('main button')].map(text)
@@ -71,15 +171,66 @@ PAGE_FACTS = """(() => {
     page_error: location.protocol === 'chrome-error:' || /aw, snap|page unresponsive|页面崩溃/i.test(document.title),
     users, assistants, turns,
   };
-})()"""
+})()""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP).replace("__SEND_LOOKUP__", SEND_LOOKUP).replace("__ATTACHMENT_CARDS__", ATTACHMENT_CARDS)
 
 NODE_FACTS = """(node => {
   const e = window.__jevFast?.nodes.get(node);
+  const composer = (__COMPOSER_LOOKUP__)();
+  const send = (__SEND_LOOKUP__)();
   return e ? {testid: e.getAttribute('data-testid'), id: e.id, inside_composer_form:
-    !!e.closest('form')?.querySelector('#prompt-textarea'), role: e.getAttribute('role'),
+    !!composer && e.closest('form') === composer.closest('form'), role: e.getAttribute('role'),
     haspopup: e.getAttribute('aria-haspopup'),
+    model_trigger: e.getAttribute('data-codex-intelligence-trigger') === 'true' &&
+      e.getAttribute('data-composer-navigation-target') === 'reasoning',
+    is_composer: !!composer && (e === composer || composer.contains(e)),
+    is_send: !!send && (e === send || send.contains(e)),
     text: (e.innerText || '').trim()} : null;
-})"""
+})""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP).replace("__SEND_LOOKUP__", SEND_LOOKUP)
+
+FOCUS_COMPOSER = """(() => {
+  const composer = (__COMPOSER_LOOKUP__)();
+  if (!composer) throw new Error('composer unavailable');
+  composer.focus();
+})()""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP)
+
+MODEL_PROOF = """(() => {
+  const form = (__COMPOSER_LOOKUP__)()?.closest('form');
+  if (!form) return null;
+  const triggers = [...form.querySelectorAll('[aria-haspopup="menu"]')].filter(e =>
+    e.id && /^(选择 ChatGPT 模型|Choose ChatGPT model)$/.test(e.getAttribute('aria-label') || '') &&
+    e.getAttribute('data-codex-intelligence-trigger') === 'true' &&
+    e.getAttribute('data-composer-navigation-target') === 'reasoning');
+  if (triggers.length !== 1) return null;
+  const menus = [...document.querySelectorAll('[role="menu"][aria-labelledby]')].filter(e =>
+    e.getAttribute('aria-labelledby') === triggers[0].id);
+  if (menus.length !== 1) return null;
+  const menu = menus[0];
+  const toggle = [...menu.querySelectorAll('[data-model-picker-view-toggle="true"][role="menuitem"]')];
+  const maximum = [...menu.querySelectorAll('[data-maximum="true"]')];
+  const sliders = [...menu.querySelectorAll('[data-reasoning-slider="true"] [role="slider"], [data-reasoning-slider="true"][role="slider"]')];
+  const selected = [...menu.querySelectorAll('[role="menuitemradio"][aria-checked="true"][data-model-selected="true"]')];
+  if ([toggle, maximum, sliders, selected].some(items => items.length !== 1)) return null;
+  const text = e => (e.innerText || '').replace(/\\s+/g, ' ').trim();
+  const nowAttribute = sliders[0].getAttribute('aria-valuenow');
+  const maxAttribute = sliders[0].getAttribute('aria-valuemax');
+  if (nowAttribute === null || maxAttribute === null) return null;
+  const now = Number(nowAttribute);
+  const max = Number(maxAttribute);
+  if (!Number.isInteger(now) || !Number.isInteger(max) || max < 1 || now < 0 || now > max)
+    return null;
+  return {model: text(toggle[0]), effort: text(maximum[0]), selected: text(selected[0]),
+    now, max, trigger_id: triggers[0].id};
+})()""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP)
+
+MODEL_SLIDER_FOCUS = """(() => {
+  const proof = __MODEL_PROOF__;
+  if (!proof) return false;
+  const menu = [...document.querySelectorAll('[role="menu"][aria-labelledby]')].find(e =>
+    e.getAttribute('aria-labelledby') === proof.trigger_id);
+  const slider = menu?.querySelector('[data-reasoning-slider="true"] [role="slider"], [data-reasoning-slider="true"][role="slider"]');
+  slider?.focus();
+  return !!slider;
+})()""".replace("__MODEL_PROOF__", MODEL_PROOF)
 
 
 # A new conversation first shows a provisional /c/WEB:<id> address that cannot be reopened.
@@ -207,13 +358,19 @@ SLIDER = "document.querySelector('[data-radix-popper-content-wrapper] [role=slid
 
 
 def ensure_effort(browser, effort):
-    """The effort control is a slider, a widget Jev's action space does not cover; arrow keys set it.
+    """Prove the configured model/effort from a closed legacy pill or the linked modern menu.
 
-    The highest position is the Pro effort. The observed pill label, not the key count, is the fact.
+    Jev opens the menu. Arrow keys only move its slider, then the menu closes and a fresh
+    observation is returned for Jev's next decision.
     """
     page = browser.observe(screenshot=False)
-    if any(a["label"] == effort for a in page["actions"]):
-        return page
+    for action in page["actions"]:
+        if action["kind"] != "click" or action["label"] != effort:
+            continue
+        node = browser.evaluate(NODE_FACTS + f"({json.dumps(action['node'])})")
+        if node and node["inside_composer_form"] and node["haspopup"] == "menu" and \
+                squash(node["text"]) == effort:
+            return page, "legacy"
     for action in page["actions"]:
         if action["kind"] != "click" or "expanded" not in action:
             continue
@@ -224,30 +381,83 @@ def ensure_effort(browser, effort):
     else:
         raise PreSendFailure("no reasoning-effort control in the composer")
     time.sleep(1.2)
-    if not browser.evaluate(f"(() => {{ const s={SLIDER}; s?.focus(); return !!s; }})()"):
-        raise PreSendFailure("the effort menu has no slider")
-    steps = int(browser.evaluate(f"{SLIDER}.getAttribute('aria-valuemax')")) - \
-        int(browser.evaluate(f"{SLIDER}.getAttribute('aria-valuenow')"))
-    for key, code, virtual in [("ArrowRight", "ArrowRight", 39)] * steps + [("Escape", "Escape", 27)]:
+    modern = browser.evaluate(MODEL_PROOF)
+    if modern:
+        if effort != "6 Pro" or modern["model"] != effort or modern["effort"] != "Pro" or \
+                modern["selected"] not in {"最新", "Latest"}:
+            raise PreSendFailure(f"linked model menu does not prove configured effort {effort!r}")
+        steps = modern["max"] - modern["now"]
+        if steps and not browser.evaluate(MODEL_SLIDER_FOCUS):
+            raise PreSendFailure("linked model menu has no focusable slider")
+        proof = "modern"
+    else:
+        if node["model_trigger"]:
+            raise PreSendFailure("linked model menu is missing or ambiguous")
+        if not browser.evaluate(f"(() => {{ const s={SLIDER}; s?.focus(); return !!s; }})()"):
+            raise PreSendFailure("the effort menu has no slider")
+        steps = int(browser.evaluate(f"{SLIDER}.getAttribute('aria-valuemax')")) - \
+            int(browser.evaluate(f"{SLIDER}.getAttribute('aria-valuenow')"))
+        proof = "legacy"
+    for _ in range(steps):
         for kind in ("keyDown", "keyUp"):
-            browser.call("Input.dispatchKeyEvent", type=kind, key=key, code=code, windowsVirtualKeyCode=virtual)
+            browser.call("Input.dispatchKeyEvent", type=kind, key="ArrowRight", code="ArrowRight",
+                         windowsVirtualKeyCode=39)
         time.sleep(0.4)
+    if modern:
+        refreshed = browser.evaluate(MODEL_PROOF)
+        if not refreshed or refreshed["model"] != effort or refreshed["effort"] != "Pro" or \
+                refreshed["selected"] not in {"最新", "Latest"} or \
+                refreshed["now"] != refreshed["max"]:
+            raise PreSendFailure("linked model menu did not confirm Pro at its maximum effort")
+    for kind in ("keyDown", "keyUp"):
+        browser.call("Input.dispatchKeyEvent", type=kind, key="Escape", code="Escape",
+                     windowsVirtualKeyCode=27)
+    time.sleep(0.4)
     time.sleep(0.8)
     page = browser.observe(screenshot=False)
-    if not any(a["label"] == effort for a in page["actions"]):
+    if proof == "legacy" and not any(a["label"] == effort for a in page["actions"]):
         raise PreSendFailure(f"effort control does not show {effort!r} after the slider was set")
-    return page
+    return page, proof
 
 
-def attach(browser, path):
+def attachment_display_name(cards, original):
+    """Accept one observed file card under its literal or provider collision name."""
+    if cards is None or not isinstance(cards, list):
+        raise PreSendFailure("the composer attachment cards are ambiguous")
+    if not cards:
+        return None
+    if len(cards) != 1 or not isinstance(cards[0], str):
+        raise PreSendFailure("the composer does not contain exactly one attachment card")
+    displayed = cards[0]
+    stem, suffix = Path(original).stem, Path(original).suffix
+    collision = re.fullmatch(rf"{re.escape(stem)}\([1-9][0-9]*\){re.escape(suffix)}", displayed)
+    if displayed != original and not collision:
+        raise PreSendFailure(f"the composer attachment card is not {original}")
+    return displayed
+
+
+def attach(browser, path, expected_sha256):
     """Uploads are outside Jev's action space: the composer's own file input receives the file over CDP."""
+    if hashlib.sha256(path.read_bytes()).hexdigest() != expected_sha256:
+        raise PreSendFailure("attachment bytes changed after this key was bound")
+    upload_id = browser.evaluate(f"({UPLOAD_LOOKUP})()")
+    if not upload_id:
+        raise PreSendFailure("the composer has no unique document upload input")
     root = browser.call("DOM.getDocument", depth=0)["root"]["nodeId"]
-    node = browser.call("DOM.querySelector", nodeId=root, selector="form input#upload-files")["nodeId"]
+    node = browser.call("DOM.querySelector", nodeId=root, selector=f'input[id="{upload_id}"]')["nodeId"]
     if not node:
         raise PreSendFailure("the composer has no document upload input")
     browser.call("DOM.setFileInputFiles", nodeId=node, files=[str(path)])
-    wait_for(browser, lambda f: path.name in (f["form_text"] or ""), 60, f"the attachment chip {path.name}")
+    def card_ready(page):
+        cards = page.get("attachment_cards")
+        # The remove/name pair can be absent while the upload card hydrates.
+        # Once present, a wrong or duplicate card remains an immediate failure.
+        return cards is not None and attachment_display_name(cards, path.name) is not None
+
+    page = wait_for(browser, card_ready, 60, f"the attachment card {path.name}")
+    displayed = attachment_display_name(page["attachment_cards"], path.name)
     ready_to_send(browser, 120)
+    return displayed
 
 
 def ready_to_send(browser, seconds):
@@ -263,12 +473,19 @@ def ready_to_send(browser, seconds):
     raise PreSendFailure("the send button did not become available")
 
 
-GOAL = """You are on ChatGPT. Do these in order, each once.
-1. The reasoning-effort button beside the message box already shows '{effort}'. Leave it alone.
-2. Type the prepared message into the message box.{draft}{attachment}
-3. Click the send button exactly once.
-After the message is sent do nothing else: never click Stop, Regenerate, Edit, Retry, or send again.
-DONE as soon as the sent message is visible in the conversation."""
+FILL_GOAL = """You are on ChatGPT. The configured model and reasoning effort ('{effort}') were independently verified; leave those controls alone.
+Type the prepared message into the message box only, replacing any old draft.
+Do not click Send, do not submit, and do not add files. DONE when the prepared message fills the box."""
+
+SEND_GOAL = """You are on ChatGPT. The configured model and reasoning effort ('{effort}') were independently verified; leave those controls alone.
+The prepared message is already in the box and its exact text has been verified.{attachment}
+Click the Send button exactly once. Do not type, change the model, attach files, or click any other control.
+After Send do nothing else. DONE as soon as the sent message is visible in the conversation."""
+
+
+def phase_goal(ready, effort, attachment=""):
+    """Tell Jev only the next action allowed by the driver's verified composer state."""
+    return (SEND_GOAL if ready else FILL_GOAL).format(effort=effort, attachment=attachment)
 
 
 def command_send(args, cfg):
@@ -281,16 +498,22 @@ def command_send(args, cfg):
         return {**operation.data, "note": "send already attempted for this key; observe with `wait`, never resend"}
     if operation.data.get("prompt_sha256") and operation.data["prompt_sha256"] != digest:
         raise PreSendFailure("this key is bound to a different prompt")
+    document = Path(args.attach).resolve(strict=True) if args.attach else None
+    document_sha256 = hashlib.sha256(document.read_bytes()).hexdigest() if document else None
+    if operation.data.get("attachment_sha256") and (
+        not document or operation.data["attachment_sha256"] != document_sha256 or
+        operation.data.get("attachment") != document.name
+    ):
+        raise PreSendFailure("this key is bound to different attachment bytes or name")
     url = cfg["provider_root"] if args.conversation == "new" else args.conversation
     operation.save(key=args.key, prompt_sha256=digest, conversation=args.conversation,
                    squashed_sha256=hashlib.sha256(squash(prompt).encode()).hexdigest(),
                    mode=args.mode, effort=args.effort, send_attempted=False)
 
-    document = Path(args.attach).resolve(strict=True) if args.attach else None
     note = ""
     if document:
         operation.save(attachment=document.name,
-                       attachment_sha256=hashlib.sha256(document.read_bytes()).hexdigest())
+                       attachment_sha256=document_sha256)
 
     chrome_start(cfg, args.mode)
     load_jev(cfg)
@@ -299,7 +522,7 @@ def command_send(args, cfg):
 
     # The text is the committed prompt, verbatim; no model writes or paraphrases it.
     jev_agent.field_text = lambda context: (prompt, {"model": "committed-prompt", "latency_ms": 0, "usage": {}})
-    agent = jev_agent.Agent(url, GOAL.format(effort=args.effort, draft="", attachment=note))
+    agent = jev_agent.Agent(url, phase_goal(False, args.effort))
     browser, state = agent.browser, agent.state
     # With an attachment the user turn also carries the file chip; the committed text is contained in it.
     sent = lambda f: any(squash(prompt) in squash(u) for u in f["users"] + f["user_turns"])  # noqa: E731
@@ -312,13 +535,15 @@ def command_send(args, cfg):
             raise PreSendFailure("a generation is active in this conversation")
         if sent(page):
             raise PreSendFailure("the exact prompt is already submitted here; observe with `wait`")
+        if page.get("attachment_cards") != []:
+            raise PreSendFailure("the composer already contains an attachment or ambiguous file card")
         if page["composer"]:
             # The provider restores local drafts. Jev's fill replaces the whole box (select-all, insert),
             # and the send click is refused unless the box equals the committed prompt.
             operation.save(draft_replaced_sha256=hashlib.sha256(page["composer"].encode()).hexdigest())
             # A long restored draft makes the box taller than the viewport, and Jev rightly refuses a
             # target whose centre it cannot hit. Select-all and Backspace empty the box first.
-            browser.evaluate("document.querySelector('#prompt-textarea').focus()")
+            browser.evaluate(FOCUS_COMPOSER)
             for key, code, virtual, extra in (("a", "KeyA", 65, {"modifiers": 2, "commands": ["selectAll"]}),
                                               ("Backspace", "Backspace", 8, {})):
                 browser.call("Input.dispatchKeyEvent", type="keyDown", key=key, code=code,
@@ -327,10 +552,6 @@ def command_send(args, cfg):
                              windowsVirtualKeyCode=virtual, **{k: v for k, v in extra.items() if k == "modifiers"})
             wait_for(browser, lambda f: not f["composer"], 10, "the emptied message box")
         time.sleep(2)  # the composer's pills render after the box
-        state["page"] = ensure_effort(browser, args.effort)
-        if document and document.name in (facts(browser)["form_text"] or ""):
-            raise PreSendFailure(f"an attachment named {document.name} is already in the composer")
-
         # Jev runs the whole goal. The loop only keeps the books: it records the attempt before a
         # send click, refuses that one click if effort or text is wrong, and ends once the outcome shows.
         steps, attached = [], False
@@ -343,21 +564,20 @@ def command_send(args, cfg):
                 if document and not attached:
                     # Uploaded only once the text is in place: a typing failure before this point
                     # leaves no copy of the document in the account's file store.
-                    attach(browser, document)
+                    displayed = attach(browser, document, document_sha256)
+                    operation.save(attachment_display_name=displayed)
                     attached = True
-                    note = (f" The document {document.name} is already attached to the message; "
+                    note = (f" The document {displayed} is already attached to the message; "
                             "do not add, open or remove files.")
                 ready_to_send(browser, 60)
-                state["page"] = browser.observe(screenshot=False)
-                box = (" The box now holds the prepared message in full: steps 1 and 2 are complete. Do not type "
-                       "and do not click the message box. The only remaining action is step 3: click the send "
-                       "button now.")
-            elif current["composer"]:
-                box = (" The box currently holds an outdated draft, not the prepared message: typing replaces "
-                       "it, so step 2 is still required.")
+                ready = True
             else:
-                box = ""
-            state["goal"] = GOAL.format(effort=args.effort, attachment=note, draft=box)
+                ready = False
+            # Any typing, upload or previous browser action invalidates the earlier proof. Verify
+            # again, close the menu, and let Jev choose from the newly observed closed page.
+            state["page"], effort_proof = ensure_effort(browser, args.effort)
+            proof_fingerprint = state["page"]["fingerprint"]
+            state["goal"] = phase_goal(ready, args.effort, note)
             state["plan"] = [state["goal"]]
             try:
                 agent.command("predict")
@@ -371,12 +591,18 @@ def command_send(args, cfg):
                                      ensure_ascii=False), file=sys.stderr, flush=True)
                 node = browser.evaluate(NODE_FACTS + f"({json.dumps(action['node'])})") \
                     if action and action["kind"] == "click" else None
-                if node and node["testid"] == "send-button":
-                    labels = {a["label"] for a in state["page"]["actions"]}
-                    if args.effort not in labels:
-                        raise PreSendFailure(f"send chosen while no control shows effort {args.effort!r}")
-                    if document and document.name not in (facts(browser)["form_text"] or ""):
-                        raise PreSendFailure(f"send chosen while {document.name} is not attached")
+                if action and action["kind"] == "click" and node and node["is_send"]:
+                    if effort_proof not in {"legacy", "modern"} or \
+                            state["page"]["fingerprint"] != proof_fingerprint:
+                        raise PreSendFailure("send chosen without fresh model and effort proof")
+                    cards = facts(browser).get("attachment_cards")
+                    if document:
+                        displayed = attachment_display_name(cards, document.name)
+                        saved_display = operation.data.get("attachment_display_name")
+                        if not displayed or not saved_display or displayed != saved_display:
+                            raise PreSendFailure("the verified attachment card changed before Send")
+                    elif cards != []:
+                        raise PreSendFailure("an unrequested attachment card appeared before Send")
                     if squash(facts(browser)["composer"]) != squash(prompt):
                         operation.save(steps=steps)
                         raise PreSendFailure(f"composer text differs from the committed prompt: {steps}")
@@ -387,19 +613,31 @@ def command_send(args, cfg):
                                        "attachment verified; not clicked")
                         return operation.data
                     operation.save(send_attempted=True, send_effect="uncertain", steps=steps)
+                elif action and action["kind"] == "click":
+                    if not node or not node["is_composer"]:
+                        raise PreSendFailure(f"unrecognized click chosen before send: {steps}")
+                elif action and action["kind"] in {"fill", "type"}:
+                    target = browser.evaluate(NODE_FACTS + f"({json.dumps(action['node'])})")
+                    if not target or not target["is_composer"]:
+                        raise PreSendFailure(f"text action did not target the composer: {steps}")
+                elif not action or action["kind"] not in {"fill", "type", "wait"}:
+                    raise PreSendFailure(f"unrecognized action chosen before send: {steps}")
                 agent.command("act", {"fingerprint": state["page"]["fingerprint"]})
             except StalePage as stale:
                 steps.append(f"STALE {stale}")
+                effort_proof = None
                 state.update(decision=None, status="ready")
                 state["page"] = browser.observe(screenshot=False)
         operation.save(steps=steps)
         if not operation.data["send_attempted"]:
             raise PreSendFailure(f"Jev stopped before the send button ({state['status']}): {steps}")
         try:
-            page = wait_for(browser, sent, 45, "the submitted message")
+            accepted = (lambda f: sent(f) and _has_bound_attachment(f, operation.data, squash(prompt))) \
+                if document else sent
+            page = wait_for(browser, accepted, 45, "the submitted message and its attachment")
             operation.save(send_effect="sent", conversation_url=page["url"])
             if document:
-                operation.save(attachment_seen=any(document.name in turn for turn in page["user_turns"]))
+                operation.save(attachment_seen=True)
             page = wait_for(browser, lambda f: SETTLED_URL.search(f["url"]), 90, "the settled conversation URL")
             operation.save(conversation_url=page["url"])
         except PreSendFailure as error:
@@ -453,6 +691,10 @@ class WaitCallTimeout(BaseException):
 
 class WaitReadFailure(RuntimeError):
     """The read-only browser target, page or operation binding is unusable."""
+
+
+class MissingAttachmentEvidence(WaitReadFailure):
+    """The bound user turn is visible, but its file card has not been observed."""
 
 
 def bounded_wait_call(call, seconds, label):
@@ -530,6 +772,12 @@ def _observe_wait_page(agent, cfg, deadline):
     return page
 
 
+def _attachment_names_match(turn, operation):
+    expected = operation.get("attachment_display_name") or operation.get("attachment")
+    names = turn.get("attachment_names")
+    return bool(expected) and isinstance(names, list) and names == [expected]
+
+
 def _bind_operation_turn(page, operation, committed):
     """Relocate this operation's user turn in the current DOM observation."""
     expected_hash = operation.get("squashed_sha256")
@@ -550,10 +798,17 @@ def _bind_operation_turn(page, operation, committed):
             "conversation does not contain exactly one user turn for this operation"
         )
     index, turn = candidates[0]
-    attachment = operation.get("attachment")
-    if attachment and attachment not in (turn.get("turn_text") or ""):
-        raise WaitReadFailure("the operation's attachment is absent from its user turn")
+    if operation.get("attachment") and not _attachment_names_match(turn, operation):
+        raise MissingAttachmentEvidence("the operation's attachment is absent from its user turn")
     return index
+
+
+def _has_bound_attachment(page, operation, committed):
+    try:
+        _bind_operation_turn(page, operation, committed)
+    except (WaitReadFailure, KeyError, TypeError):
+        return False
+    return True
 
 
 def _answer_after_turn(page, user_index):
@@ -770,6 +1025,11 @@ def command_wait(args, cfg):
                 continue
             try:
                 bound_turn = _bind_operation_turn(page, data, committed)
+            except MissingAttachmentEvidence:
+                status("attachment")
+                previous, stable = None, 0
+                time.sleep(min(WAIT_SAMPLE_SECONDS, max(0.0, deadline - time.monotonic())))
+                continue
             except WaitReadFailure as error:
                 status("error")
                 return finish("ERROR", str(error), error_type=type(error).__name__)
@@ -780,7 +1040,7 @@ def command_wait(args, cfg):
                     send_effect="sent",
                     attachment_seen=bool(
                         not data.get("attachment")
-                        or data["attachment"] in (page["turns"][bound_turn].get("turn_text") or "")
+                        or _attachment_names_match(page["turns"][bound_turn], data)
                     ),
                 )
                 verified = True
@@ -830,6 +1090,8 @@ def command_wait(args, cfg):
                 "IN_PROGRESS",
                 "observation window ended while Pro was still thinking"
                 if told == "generating"
+                else "observation window ended before the sent attachment card was observed"
+                if told == "attachment"
                 else "observation window ended before a final reply was observed",
                 partial_answer_chars=len(answer),
             )

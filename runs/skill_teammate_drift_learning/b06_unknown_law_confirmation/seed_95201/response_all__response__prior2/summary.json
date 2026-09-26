@@ -1,0 +1,66 @@
+{
+  "compute_wall_scope": "learner expiry, prediction, and observation only",
+  "compute_wall_seconds": 0.01881059751030989,
+  "cooperative_observations": 1171,
+  "cooperative_posterior_updates": 1171,
+  "expiration_recomputations": 0,
+  "full_target_cumulative_regret": 3.504999999999999,
+  "initial_to_final_l2_movement": 0.8984265157408899,
+  "initial_to_source_l2_movement": 0.888918235812114,
+  "launch_sha": "542a244e4b67a8226e395377195e8edba0825b23",
+  "learner_observations": 2304,
+  "object": "unknown_joint_law_b06_confirmation",
+  "posterior_updates": 2304,
+  "regression_solves": 0,
+  "regression_statistic_updates": 0,
+  "safe_posterior_updates": 1133,
+  "seed": 95201,
+  "setting_id": "response_all__response__prior2",
+  "source_to_final_l2_movement": 0.011281916267364306,
+  "spec": {
+    "family": "response_all",
+    "prior_strength": 2.0,
+    "recent_window": null,
+    "representation": "response"
+  },
+  "spec_id": "response_all__response__prior2",
+  "stage": "confirmation",
+  "target_by_endpoint": {
+    "first64": {
+      "action_counts": [
+        41,
+        23
+      ],
+      "cumulative_regret": 1.845,
+      "mean_expected_return": 0.633671875,
+      "mean_regret": 0.028828125,
+      "mean_value_mae": 0.07097294173301097,
+      "panel_count": 64,
+      "sign_mistakes": 27
+    },
+    "full": {
+      "action_counts": [
+        133,
+        123
+      ],
+      "cumulative_regret": 3.504999999999999,
+      "mean_expected_return": 0.6488085937499998,
+      "mean_regret": 0.013691406249999996,
+      "mean_value_mae": 0.03734039069258018,
+      "panel_count": 256,
+      "sign_mistakes": 63
+    },
+    "late64": {
+      "action_counts": [
+        30,
+        34
+      ],
+      "cumulative_regret": 0.10999999999999988,
+      "mean_expected_return": 0.6607812499999999,
+      "mean_regret": 0.001718749999999998,
+      "mean_value_mae": 0.020982351639784267,
+      "panel_count": 64,
+      "sign_mistakes": 2
+    }
+  }
+}
