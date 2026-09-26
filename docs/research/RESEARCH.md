@@ -1,6 +1,6 @@
 # HMASD research index
 
-当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-25。治理依据为
+当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-26。治理依据为
 [constitution](../project/OPERATING_CONSTITUTION.md)；本页维护现状，历史过程见[日期归档](archive/)。
 
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan) · [任务路由](#session-routing)。
@@ -794,7 +794,9 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 [已完成下一轮项目审查：完整建议与采纳决定](archive/2026-09-25/RESEARCH-decision-learning-adopted.md#portfolio-review-2026-09-25-from-local-repairs-to-decision-learning)。
 
-## Portfolio review 2026-09-25 research-method-and-dm-reset
+<a id="portfolio-review-2026-09-25-research-method-and-dm-reset"></a>
+
+## Portfolio review 2026-09-26 research-method-and-dm-reset
 
 Conversation: new；本轮把科学计划、研究方法和DM工作方式一起审视，Jev账户地址只留本地操作文件。
 
@@ -803,6 +805,31 @@ Owner request：先要求“开始推进研究，将任务发给DM session，独
 `01a0dc51-5688-7ef1-894b-51c2964f2be0` / `local`负责这次复盘及后续获选工作的派发。
 刚提出的B/C递补尚未发给DM或启动；两个现有独立DM收到的只是一次只读自我复盘，均不发Pro、
 不运行实验、不写共享文件、不互发App消息。原已完成实验、Claude FSD手动暂停及G33冻结不变。
+
+**2026-09-26发送前更新：** owner现明确要求“发送然后我们推进研究”，授权完成本次咨询并依据
+完整建议推进所选研究，沿用此前将具体研究交给原独立DM的安排。原问稿在第一次Send之前失败，
+操作仍为`send_attempted=false`；本次更新尚未提交的问稿，旧操作和原始失败事实保留。下述早期
+Root假说是待挑战对象，必须结合本节`### Decision`中已完成的独立审查与后续设计准备一起阅读。
+
+- owner已采纳独立科学Reviewer职责：复用ResearchCritic、独立instructions与不继承Root/DM的
+  上下文，负责证据重建、诊断及方向纠偏建议；DM保持假说提出、问题连续性与实施；Root负责项目
+  取舍及重大科学分歧。它是当前宪法§2，不是本次仍待批准的提案，也不替代Pro咨询。
+- **已有独立异议必须保留：** A/R实际修改过解释；窄确认及显著性便利本身不能证明A投入错误，
+  R复制也是Root的选择。没有证据将这些案例的原因归为“DM不会纠偏”或LLM固有缺陷。
+  Root已接受这些修正。Reviewer仍建议优先评估条件性历史—权重对应，而非自动递补B/C或购买伙伴回放。
+- **具体候选现在可报价：** 阅读PPC NOTES末节
+  `2026-09-26 — Draft only: conditional history–weight correspondence on archived data`
+  （由DM发布于`3efc0e65492b5683040476092421bc185d4a40e0`，完整设计在本source_sha仍保留）。
+  两个新配对均用已暴露的B02 block0存档数据；O保留原权重，S仅在各训练阶段/教师动作标签内置乱
+  权重；保持输入、标签、mask、时序、初始化和训练批序匹配。它研究单一D下条件性重新训练，
+  不能解释完整自适应数据收集中的加权价值，或把MC优势当真实后果。原数据和代码已核对可用，
+  但新runner未实现。两配对四fit、3840更新、23592960优化agent-time行、98304评价团队tick，
+  另2048校准移动、512闭式后验计算、589824诊断前向行。约95秒只是假设沿用旧速率的拟合估计，
+  完整墙钟未知。BC第三臂额外两fit、1920更新、11796480优化行、49152评价tick、294912诊断行。
+  二配对只作探索，不作确认或等效结论；旧BC端点不是新配对的普通对照。
+- **当前尚未选择新结果批次。** 请具体判断这笔四fit或六fit投入是否值得，相比直接研究完整用途、
+  换问题或暂不投入有什么价值；给正、负、混合读数之后真正不同的研究行动。允许否决Reviewer
+  的优先项，或指出草案无法改变选择；不要求再堆一次同类审查、先证明机制或反复准备才能推进。
 
 **Decision to make：** 怎样把目前累积的局部证据转成值得研究的少数科学问题，并减少未改变判断的
 执行负担？请同时批评Root、DM实际取舍与治理/工具安排，不能只推荐下两个模块，也不能把“科研
@@ -903,7 +930,8 @@ Root倾向先收窄成一条有科学理由的主问题，另一独立DM只在�
 
 1. 本项目当前最大的两三个问题是什么？用指定事实区分选题、宿主/对照、有限训练与统计、DM判断和
    工具/流程，指出Root上述哪些诊断夸大或错误。哪些现有做法值得保留？
-2. 是否应改变论文级目标或研究问题的组织方式？给一个值得回答的问题及最强简单替代，说明正/负/未决
+2. 是否应改变论文级目标或研究问题的组织方式？结合上述PPC完整草案，明确四fit O/S、六fit O/S/BC
+   或其他投入的取舍理由。给一个值得回答的问题及最强简单替代，说明正/负/未决
    读数各可能改变什么。允许拒绝B/C或暂不选新实验，不要给一串候选名称；也不要要求部署客户、理论
    完成或先验确定阳性。严谨的条件性认识也可有科学价值。
 3. DM怎样从“执行下一批”转为持续科学责任而不无限救援？怎样保留主动性、真实失败与合理停止？
@@ -920,14 +948,15 @@ Root核查有实际成本，未计时的阅读/咨询成本保持未知。未来
 Context（除注明来源外，均以实际发送的完整source_sha为准）：
 
 - 治理：`docs/project/OPERATING_CONSTITUTION.md` §§1–5、7–9，以上owner当前请求。只有owner改宪法；
-  本次允许提出优化，不已采纳任何修改。`AGENTS.md`和`.codex/agents/hmasd-direction-manager.toml`
+  独立科学Reviewer修订已采纳，其他新建议仍只是建议。`AGENTS.md`、
+  `.codex/agents/hmasd-research-critic.toml`和`.codex/agents/hmasd-direction-manager.toml`
   的developer_instructions用于判断DM实际应负的责任；不要把historical分支正文当当前治理。
 - 方法：`.agents/skills/hmasd-scientific-tools/SKILL.md` 的Mathematics、Explore、Update、Comparators、
   Statistics、Cost、Pro；`.agents/skills/hmasd-research-engineering/SKILL.md` 的L0、Checks/review、
   Publishing、Main authoring、Execution；portfolio-task的Steps/Boundaries以及loop-dispatch的Root职责。
 - 共享科学：本页§3、4、6、8及当前方向表；所列现象是可修订解释，不是Pro必须同意的共识。
 - A：`docs/research/candidates/planning_policy_compression/NOTES.md` 中B01 complete、Explanation update、
-  recurrence-or-confirmation完整问答、B02 complete；同目录`CLAIM_weighted_partial_compression.md`；
+  recurrence-or-confirmation完整问答、B02 complete及2026-09-26完整条件性权重草案；同目录`CLAIM_weighted_partial_compression.md`；
   `runs/planning_policy_compression/b02_confirm_s925951_20260925/summary.json` 的formal_confirmation、
   descriptive_full_utility、counts/resources。旧目标与规则保持，不要求重读全部bulk。
 - R：`docs/research/candidates/controller_composition/NOTES.md` 的B01/B02完整结果及B03 complete、
@@ -1031,7 +1060,7 @@ DM实际读取新职责，保留独立审查重大异议；本地与原节点的
 
 ## Current research plan
 
-Owner现已要求重新审视下列计划及研究/DM工作方式，见[当前复盘](#portfolio-review-2026-09-25-research-method-and-dm-reset)。
+Owner现要求完成咨询并推进所选研究，见[当前复盘](#portfolio-review-2026-09-26-research-method-and-dm-reset)。
 下列A/R为已完成安排，B/C仍是待审后备，尚未派发新实验；这不是恢复任何历史操作或修改owner暂停。
 
 2026-09-25，前一轮Root完成全部旧方向收尾复核及当轮完整Pro咨询后，选择优先研究：
