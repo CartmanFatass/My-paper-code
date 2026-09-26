@@ -47,7 +47,13 @@ from experiments.candidates.uav_service_auxiliary.b06.native import (
 from hmasd.agent import HMASDAgent
 
 from .feedback import N_UAVS, STATION_COUNT, FeedbackParams, apply_feedback_params
-from .heuristic import CONTROLLER_INFORMATION, HeuristicParams, LayoutHeuristic, UnobservedRegime
+from .heuristic import (
+    CONTROLLER_INFORMATION,
+    FixedWaypointHeuristic,
+    HeuristicParams,
+    LayoutHeuristic,
+    UnobservedRegime,
+)
 from .observation import S7S2_LAYOUT, own_energy, own_positions, station_records
 
 DOCK_REQUEST_THRESHOLD = 0.5  # env ``dock_request_threshold``
@@ -171,6 +177,30 @@ class HeuristicController:
     def targets_xy(self) -> np.ndarray:
         """Per-UAV target xy used by the last ``act`` (NaN = no target); a copy."""
         return self.heuristic.targets_xy.copy()
+
+
+# Stage 0 references (``stage0-references`` phase): fixed-waypoint controllers by name, and the
+# row/panel labels of all three (H1r10 is H1 with a 10-step replanning period).
+FIXED_WAYPOINT_CONTROLLERS = {"Hspawn": "spawn", "Hpark2": "park2"}
+REFERENCE_INFORMATION = {
+    "Hspawn": "fixed reset waypoints under the production shield",
+    "Hpark2": "fixed reset waypoints + two station waypoints under the production shield",
+    "H1r10": "central-positions, 10-step replanning",
+}
+
+
+class FixedWaypointController(HeuristicController):
+    """``HeuristicController`` driving a ``FixedWaypointHeuristic`` (legal observation only)."""
+
+    def __init__(self, params: HeuristicParams, kind: str):
+        if params.information != "local":
+            raise ValueError("fixed-waypoint controllers use the legal observation only")
+        super().__init__(params, None)
+        self.heuristic = FixedWaypointHeuristic(params, kind)
+
+    @property
+    def park_assignment(self) -> list[list[int]]:
+        return [list(pair) for pair in self.heuristic.park_assignment]
 
 
 def raw_guard_env(env):
@@ -538,9 +568,12 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
             elif task.controller.startswith("H"):
                 if task.heuristic is None:
                     raise ValueError("heuristic controller requires HeuristicParams")
-                controller = HeuristicController(task.heuristic, env)
+                fixed = FIXED_WAYPOINT_CONTROLLERS.get(task.controller)
+                controller = (FixedWaypointController(task.heuristic, fixed) if fixed
+                              else HeuristicController(task.heuristic, env))
                 labels = dict(
-                    controller_information=CONTROLLER_INFORMATION[task.heuristic.information],
+                    controller_information=REFERENCE_INFORMATION.get(
+                        task.controller, CONTROLLER_INFORMATION[task.heuristic.information]),
                     plan_source=(PLAN_SOURCE if task.heuristic.information == "central"
                                  else "legal-observation"),
                 )
@@ -555,8 +588,11 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
                         failed=False, **labels,
                         plan_input_steps=len(controller.plan_input_steps),
                         search_replans=len(controller.search_replan_steps),
-                        replans=-(-row["actual_length"] // task.heuristic.replan_period),
+                        replans=(1 if fixed else
+                                 -(-row["actual_length"] // task.heuristic.replan_period)),
                     )
+                    if fixed == "park2":
+                        row["park_assignment"] = controller.park_assignment
             else:
                 raise ValueError(f"unknown controller {task.controller!r}")
         finally:

@@ -9,6 +9,8 @@ settings).  Nothing is gated on a recorded difference.
 
 ``stochastic-check`` (never part of ``all``): N at production margins on ``worlds`` with sampled
 actions at both levels, ``STOCHASTIC_DRAWS`` seeded episodes per world (panels ``..._s<draw>``).
+``stage0-references`` (never part of ``all``): the fixed references H_spawn (``Hspawn``), H_park2
+(``Hpark2``) and H_central@10 (``H1r10``) at production margins on ``worlds``.
 """
 
 from __future__ import annotations
@@ -33,7 +35,9 @@ from experiments.candidates.uav_service_auxiliary.b01.native import (
 from experiments.candidates.uav_service_auxiliary.b09.persistence import write_summary
 
 from .evaluation import (
+    FIXED_WAYPOINT_CONTROLLERS,
     N_CONTROLLER_INFORMATION,
+    REFERENCE_INFORMATION,
     PLAN_SOURCE,
     SAMPLE_SEED_RULE,
     TRACE_TIMING,
@@ -52,7 +56,11 @@ DIRECTION = "energy_relay_benchmark"
 RUN_PHASES = ("equivalence", "null", "heuristic-dev", "reference", "grid")
 STOCHASTIC_PHASE = "stochastic-check"   # run alone only; ``all`` stays RUN_PHASES
 STOCHASTIC_DRAWS = 2                    # sampled episodes per world
-PHASES = (*RUN_PHASES, STOCHASTIC_PHASE, "all")
+STAGE0_PHASE = "stage0-references"      # run alone only; ``all`` stays RUN_PHASES
+STAGE0_CONTROLLERS = ("Hspawn", "Hpark2", "H1r10")
+STAGE0_BASE_VARIANT = "H1"              # movement primitive (all three) and H1r10's plan
+STAGE0_REPLAN_PERIOD = 10               # H_central@10
+PHASES = (*RUN_PHASES, STOCHASTIC_PHASE, STAGE0_PHASE, "all")
 HEURISTICS = ("H1", "H2", "H3")
 LOCAL_CONTROLLER = "Hlocal"
 CONTROLLERS = ("N", *HEURISTICS)
@@ -181,7 +189,14 @@ def grid_controllers(spec: B01Spec) -> tuple[str, ...]:
 
 
 def heuristic_params(name: str, spec: B01Spec, selected: str | None = None) -> HeuristicParams:
-    """H1-H3: central variants.  Hlocal: the selected central variant with local information."""
+    """H1-H3: central variants.  Hlocal: the selected central variant with local information.
+    Hspawn/Hpark2: H1's movement parameters, legal observation only (plan once at reset).
+    H1r10: H1 with the 10-step replanning period."""
+    if name in FIXED_WAYPOINT_CONTROLLERS:
+        return replace(VARIANTS[STAGE0_BASE_VARIANT], replan_period=int(spec.replan_period),
+                       information="local")
+    if name == "H1r10":
+        return replace(VARIANTS[STAGE0_BASE_VARIANT], replan_period=STAGE0_REPLAN_PERIOD)
     if name == LOCAL_CONTROLLER:
         base = selected or spec.heuristic
         return replace(VARIANTS[base], replan_period=int(spec.replan_period), information="local")
@@ -191,6 +206,8 @@ def heuristic_params(name: str, spec: B01Spec, selected: str | None = None) -> H
 def controller_information(controller: str, spec: B01Spec, selected: str | None = None) -> str:
     if controller == "N":
         return N_CONTROLLER_INFORMATION
+    if controller in REFERENCE_INFORMATION:
+        return REFERENCE_INFORMATION[controller]
     return CONTROLLER_INFORMATION[heuristic_params(controller, spec, selected).information]
 
 
@@ -210,7 +227,9 @@ def phase_panels(phase: str, spec: B01Spec, controllers=None):
                 for controller in chosen for params in feedback_grid(spec)]
     if phase == STOCHASTIC_PHASE:   # one panel per draw
         return [("N", PRODUCTION_PARAMS, tuple(spec.worlds))] * STOCHASTIC_DRAWS
-    raise ValueError(f"phase must be one of {(*RUN_PHASES, STOCHASTIC_PHASE)}")
+    if phase == STAGE0_PHASE:
+        return [(name, PRODUCTION_PARAMS, tuple(spec.worlds)) for name in STAGE0_CONTROLLERS]
+    raise ValueError(f"phase must be one of {(*RUN_PHASES, STOCHASTIC_PHASE, STAGE0_PHASE)}")
 
 
 def named_panels(phase: str, spec: B01Spec, controllers=None):
@@ -353,6 +372,19 @@ def config_record(spec: B01Spec, phase: str, *, launch_sha: str, checkpoint, dev
             "draws_per_world": STOCHASTIC_DRAWS, "sample_seed_rule": SAMPLE_SEED_RULE,
             "action_sampling": ("HMASDAgent.step(deterministic=False): coordinator team/agent "
                                 "skills sampled, low-level actor actions sampled")}
+    if STAGE0_PHASE in phases:
+        record["stage0_references"] = {
+            "controllers": {name: {"controller_information": REFERENCE_INFORMATION[name],
+                                   "params": heuristic_params(name, spec).record()
+                                   | {"controller_information": REFERENCE_INFORMATION[name]}}
+                            for name in STAGE0_CONTROLLERS},
+            "fixed_waypoints": ("Hspawn: every UAV's target = own reset xy (legal observation); "
+                                "Hpark2: as Hspawn, except station 0 then station 1 each take "
+                                "the nearest remaining UAV at reset (horizontal distance, ties "
+                                "-> lower index) with target = the station xy (energy suffix); "
+                                "planned once at step 0, never replanned; H1 movement "
+                                "primitive (height_m, cruise_mps, vertical_cap_mps)"),
+            "feedback": asdict(PRODUCTION_PARAMS)}
     return record
 
 
@@ -385,7 +417,8 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
             raise ValueError("checkpoint sha256 does not match the recorded B09 N endpoint")
     out = Path(out)
     if any((out / name).exists() for name in
-           ("summary.json", "config.json", "progress.jsonl", *RUN_PHASES, STOCHASTIC_PHASE)):
+           ("summary.json", "config.json", "progress.jsonl", *RUN_PHASES, STOCHASTIC_PHASE,
+            STAGE0_PHASE)):
         raise FileExistsError(f"B01 output already exists: {out}")
     out.mkdir(parents=True, exist_ok=True)
     (out / "logs").mkdir(exist_ok=True)
@@ -463,6 +496,11 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
         if hparams is not None:
             panel["plan_source"] = PLAN_SOURCE if hparams.information == "central" else "legal-observation"
             panel["heuristic_params"] = hparams.record()
+            if controller in REFERENCE_INFORMATION:
+                panel["heuristic_params"]["controller_information"] = \
+                    REFERENCE_INFORMATION[controller]
+            if controller in FIXED_WAYPOINT_CONTROLLERS:
+                panel["fixed_waypoints"] = FIXED_WAYPOINT_CONTROLLERS[controller]
             if controller == LOCAL_CONTROLLER:
                 panel["params_from_variant"] = selected
         if phase_name == "equivalence":

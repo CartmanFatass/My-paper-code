@@ -61,7 +61,7 @@ def test_fixed_spec_worlds_grid_and_phases():
         "w0.05", "w0.25", "w0.45", None, "w0.05", "w0.25", "w0.45"]
     assert native.matched_pair_id(FeedbackParams(0.10, 0.15), spec) is None   # not in the grid
     assert native.PHASES == ("equivalence", "null", "heuristic-dev", "reference", "grid",
-                             "stochastic-check", "all")
+                             "stochastic-check", "stage0-references", "all")
     assert len(native.phase_panels("grid", spec)) == 14
     assert len(native.phase_panels("grid", spec, ("N", "H3"))) == 14
     dev = native.phase_panels("heuristic-dev", spec)
@@ -347,6 +347,77 @@ def test_tiny_stochastic_check_run_writes_draw_rows(tmp_path, fresh_checkpoint):
     with pytest.raises(ValueError, match="requires --checkpoint"):
         native.run_native(out=tmp_path / "no-ckpt", launch_sha="fixture", checkpoint=None,
                           phase="stochastic-check", spec=spec)
+
+
+STAGE0_LABELS = {
+    "Hspawn": "fixed reset waypoints under the production shield",
+    "Hpark2": "fixed reset waypoints + two station waypoints under the production shield",
+    "H1r10": "central-positions, 10-step replanning"}
+
+
+def test_stage0_references_plan_and_params():
+    spec = native.B01Spec()
+    assert native.planned_episodes(spec, "stage0-references") == 96
+    assert native.planned_episodes(spec, "all") == 540
+    assert "stage0-references" not in native.RUN_PHASES
+    assert [(name, c, p, w, d) for name, c, p, w, d in
+            native.named_panels("stage0-references", spec)] == [
+        ("Hspawn_e0.00_x0.05", "Hspawn", native.PRODUCTION_PARAMS, spec.worlds, None),
+        ("Hpark2_e0.00_x0.05", "Hpark2", native.PRODUCTION_PARAMS, spec.worlds, None),
+        ("H1r10_e0.00_x0.05", "H1r10", native.PRODUCTION_PARAMS, spec.worlds, None)]
+    h1 = native.heuristic_params("H1", spec)
+    assert h1.replan_period == 30 == native.VARIANTS["H1"].replan_period
+    assert native.heuristic_params("H1r10", spec) == replace(h1, replan_period=10)
+    for name in ("Hspawn", "Hpark2"):
+        assert native.heuristic_params(name, spec) == replace(h1, information="local")
+    for name, label in STAGE0_LABELS.items():
+        assert native.controller_information(name, spec) == label
+    for name in ("H1", "H2", "H3"):   # existing labels unchanged
+        assert native.controller_information(name, spec) == "central-positions"
+
+
+def test_tiny_stage0_references_run(tmp_path):
+    spec = tiny_spec(horizon=25)
+    out = tmp_path / "stage0"
+    summary = native.run_native(out=out, launch_sha="fixture", checkpoint=None,
+                                phase="stage0-references", spec=spec, argv=["fixture"])
+    assert summary["status"] == "COMPLETE" and summary["phases"] == ["stage0-references"]
+    assert summary["counts"]["episodes_completed"] == 3 == summary["planned_episodes"]
+    written = json.loads((out / "summary.json").read_text())
+    config = json.loads((out / "config.json").read_text())
+    names = ["Hspawn_e0.00_x0.05", "Hpark2_e0.00_x0.05", "H1r10_e0.00_x0.05"]
+    assert set(written["panels"]) == {f"stage0-references/{name}" for name in names}
+    assert [p["name"] for p in config["planned_panels"]["stage0-references"]] == names
+    assert set(config["stage0_references"]["controllers"]) == set(STAGE0_LABELS)
+    for name, label in STAGE0_LABELS.items():
+        entry = config["stage0_references"]["controllers"][name]
+        assert entry["controller_information"] == entry["params"]["controller_information"] == label
+    assert "stochastic_check" not in config
+    for name in names:
+        panel = json.loads((out / "stage0-references" / "panels" / f"{name}.json").read_text())
+        controller = panel["controller"]
+        row = panel["worlds"][0]
+        assert row["failed"] is False and row["actual_length"] == 25
+        assert row["controller_information"] == panel["controller_information"] == \
+            STAGE0_LABELS[controller]
+        assert panel["heuristic_params"]["controller_information"] == STAGE0_LABELS[controller]
+        assert row["action_mode"] == "deterministic"
+        assert all(key in row for key in (*PHASE_SPLIT, *MECHANISM_ROW, *DIAGNOSTICS))
+        with np.load(out / "stage0-references" / "traces" / f"{name}.npz") as trace:
+            _assert_mechanism_trace(trace, 25, heuristic=True)
+        if controller == "H1r10":
+            assert panel["plan_source"] == row["plan_source"] == "env-ground-truth"
+            assert row["plan_input_steps"] == 3 == row["replans"]   # steps 0, 10, 20
+            assert panel["heuristic_params"]["replan_period"] == 10
+        else:
+            assert panel["plan_source"] == row["plan_source"] == "legal-observation"
+            assert row["plan_input_steps"] == 0 and row["replans"] == 1
+            assert panel["fixed_waypoints"] == {"Hspawn": "spawn", "Hpark2": "park2"}[controller]
+        if controller == "Hpark2":
+            assert [station for _, station in row["park_assignment"]] == [0, 1]
+            assert len({uav for uav, _ in row["park_assignment"]}) == 2
+        else:
+            assert "park_assignment" not in row
 
 
 def test_reference_phase_alone_uses_heuristic_flag_without_checkpoint(tmp_path):

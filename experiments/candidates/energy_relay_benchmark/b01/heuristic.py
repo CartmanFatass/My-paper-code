@@ -26,6 +26,10 @@ Information modes:
   station 1 is not decodable (does not occur on S7-S2).
 Own position, modes and (in the evaluator) batteries, stations and the shield always come from
 the legal observation.
+
+``FixedWaypointHeuristic`` (Stage 0 references H_spawn / H_park2) plans once, at the first
+``act`` call of a world (the reset observation), and never again; it moves with the same
+per-step primitive as the layout heuristic (``LayoutHeuristic.act``).
 """
 
 from __future__ import annotations
@@ -326,3 +330,71 @@ class LayoutHeuristic:
                 0.0,
             )), -1.0, 1.0)
         return actions
+
+
+FIXED_WAYPOINT_KINDS = ("spawn", "park2")
+PARK_STATIONS = (0, 1)   # station 0 (relay anchor) first, then station 1 (service centre)
+
+
+def park_assignment(own_xy: np.ndarray, stations_xy) -> list[list[int]]:
+    """[[uav, station], ...]: for each station in order, the nearest not-yet-assigned UAV by
+    horizontal distance to the station xy (exact ties -> lower UAV index)."""
+    own_xy = np.asarray(own_xy, dtype=np.float64)
+    free = list(range(len(own_xy)))
+    result = []
+    for station, xy in zip(PARK_STATIONS, stations_xy):
+        distances = np.linalg.norm(own_xy[free] - np.asarray(xy, dtype=np.float64), axis=1)
+        uav = free[int(np.argmin(distances))]   # argmin: first occurrence = lower index
+        result.append([int(uav), int(station)])
+        free.remove(uav)
+    return result
+
+
+class FixedWaypointHeuristic(LayoutHeuristic):
+    """Fixed waypoints from the reset observation, held for the whole world.
+
+    ``spawn``: every UAV's target is its own reset xy (legal-observation decode).  ``park2``:
+    the same, except the UAVs chosen by ``park_assignment`` take the xy of stations 0 and 1
+    (station records of the energy suffix, first valid observer, as ``absolute_station_xy``).
+    Altitude, speed caps and the action mapping are ``params``' (``LayoutHeuristic.act``).
+    Every UAV has a target at all times, including while the shield holds it in F mode, so it
+    resumes the same waypoint after release.
+    """
+
+    def __init__(self, params: HeuristicParams, kind: str,
+                 layout: ObservationLayout = S7S2_LAYOUT):
+        if kind not in FIXED_WAYPOINT_KINDS:
+            raise ValueError(f"kind must be one of {FIXED_WAYPOINT_KINDS}")
+        self.kind = kind
+        super().__init__(params, layout)
+
+    def reset(self) -> None:
+        super().reset()
+        self.park_assignment: list[list[int]] = []
+
+    def replans_next(self) -> bool:
+        return self.calls == 0
+
+    def plan(self, observations: np.ndarray, modes: np.ndarray, plan_inputs=None) -> dict:
+        if plan_inputs is not None:
+            raise ValueError("fixed-waypoint heuristic takes no central plan_inputs")
+        own_xy = own_positions(observations, self.layout)[:, :2].astype(np.float64)
+        targets = own_xy.copy()
+        assignment: list[list[int]] = []
+        stations = []
+        if self.kind == "park2":
+            for index in PARK_STATIONS:
+                xy = observed_station_xy(observations, self.layout, index)
+                if xy is None:
+                    raise UnobservedRegime(f"station {index} not decodable at reset")
+                stations.append(np.asarray(xy, dtype=np.float64))
+            assignment = park_assignment(own_xy, stations)
+            for uav, station in assignment:
+                targets[uav] = stations[station]
+        self.targets_xy = targets
+        self.park_assignment = assignment
+        plan = {"call": self.calls, "information": f"fixed-{self.kind}", "own_xy": own_xy,
+                "stations_xy": stations, "park_assignment": assignment,
+                "targets": targets.copy(), "search": False}
+        self.last_plan = plan
+        return plan

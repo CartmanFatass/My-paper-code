@@ -14,9 +14,11 @@ from experiments.candidates.energy_relay_benchmark.b01.feedback import (
 )
 from experiments.candidates.energy_relay_benchmark.b01.heuristic import (
     VARIANTS,
+    FixedWaypointHeuristic,
     LayoutHeuristic,
     UnobservedRegime,
     estimator_kmeans,
+    park_assignment,
 )
 from experiments.candidates.energy_relay_benchmark.b01.observation import own_positions
 from experiments.candidates.uav_service_auxiliary.b01.native import (
@@ -469,3 +471,142 @@ def test_live_rows_carry_diagnostics_from_env_config(tmp_path, config_60):
                                        floor_m=config_60.height_range[0])
     assert {key: row[key] for key in expected} == expected
     assert 0.0 <= row["altitude_floor_share_normal_mode"] <= 1.0
+
+
+# --- stage0-references: fixed-waypoint controllers and H_central@10 ---------------------------
+
+FIXED_PARAMS = replace(VARIANTS["H1"], information="local")
+
+
+class RecordingFixed(ev.FixedWaypointController):
+    def __init__(self, params, kind):
+        super().__init__(params, kind)
+        self.actions = []
+
+    def propose(self, observations, state, step, previous_done, modes):
+        actions = super().propose(observations, state, step, previous_done, modes)
+        self.actions.append((own_positions(observations).copy(), actions.copy()))
+        return actions
+
+
+def _run_fixed(config, seed, kind):
+    env = make_env(config, seed)
+    try:
+        obs, _ = env.reset(seed=seed)
+        truth = {"uav_xyz": np.asarray(env.env.uav_positions, dtype=np.float64).copy(),
+                 "stations_xy": np.asarray(env.env.charging_station_positions,
+                                           dtype=np.float64)[:2, :2].copy(),
+                 "obs": np.asarray(obs, dtype=np.float32)}
+        controller = RecordingFixed(FIXED_PARAMS, kind)
+        row, arrays = ev.evaluate_world(controller, env, config, seed, PRODUCTION_PARAMS)
+    finally:
+        env.close()
+    return controller, row, arrays, truth
+
+
+def test_spawn_targets_are_reset_xy_at_100m_and_never_change(config_60):
+    controller, row, arrays, truth = _run_fixed(config_60, 955001, "spawn")
+    reset_xy = own_positions(truth["obs"])[:, :2]
+    np.testing.assert_allclose(reset_xy, truth["uav_xyz"][:, :2], rtol=0, atol=0.01)
+    targets = arrays["target_xy"]
+    assert targets.shape == (60, 8, 2)
+    assert np.array_equal(targets, np.broadcast_to(reset_xy, targets.shape))   # never change
+    assert controller.heuristic.calls == 60 and controller.plan_input_steps == []
+    assert controller.park_assignment == []
+    # Altitude target 100 m: the vertical action heads for 100 m at the 5 m/s cap (H1 primitive).
+    for own, actions in controller.actions:
+        expected = np.clip((100.0 - own[:, 2]) / 5.0, -1.0, 1.0)
+        np.testing.assert_allclose(actions[:, 2], expected.astype(np.float32), rtol=0, atol=1e-6)
+    final_z = arrays["own_xyz"][-1, :, 2]
+    assert np.all(np.abs(final_z - 100.0) < np.abs(arrays["own_xyz"][0, :, 2] - 100.0) + 1e-3)
+
+
+def test_fixed_targets_survive_mode_changes(live_frames):
+    heuristic = FixedWaypointHeuristic(FIXED_PARAMS, "spawn")
+    first = live_frames[0]
+    heuristic.act(first, np.zeros(8, dtype=bool))
+    planned = heuristic.targets_xy.copy()
+    modes = np.zeros(8, dtype=bool)
+    modes[[1, 4]] = True                      # shield holds two UAVs; later released
+    for frame in live_frames[1:10]:
+        actions = heuristic.act(frame, modes)
+        modes = ~modes
+        assert np.array_equal(heuristic.targets_xy, planned)
+        assert np.all(np.abs(actions[:, :2]) <= 1.0)
+    # A UAV released far from its waypoint heads straight back at the 30 m/s cap.
+    far = live_frames[1].copy()
+    own = own_positions(far)
+    heuristic.targets_xy[0] = own[0, :2] + np.asarray((3000.0, -4000.0))
+    actions = heuristic.act(far, np.zeros(8, dtype=bool))
+    np.testing.assert_allclose(actions[0, :2], (0.6, -0.8), rtol=0, atol=1e-6)
+    with pytest.raises(ValueError, match="kind"):
+        FixedWaypointHeuristic(FIXED_PARAMS, "ring")
+    with pytest.raises(ValueError, match="legal observation"):
+        ev.FixedWaypointController(VARIANTS["H1"], "spawn")
+
+
+def test_park_assignment_rule_on_synthetic_geometry():
+    own = np.asarray([[0.0, 0.0], [10.0, 0.0], [5.0, 50.0], [100.0, 100.0],
+                      [-10.0, 0.0], [50.0, 50.0], [0.0, 90.0], [100.0, 100.0]])
+    # Station 0 at (0, 0): UAV 0 is nearest.  Station 1 at (100, 100): UAVs 3 and 7 tie ->
+    # lower index 3.
+    assert park_assignment(own, [(0.0, 0.0), (100.0, 100.0)]) == [[0, 0], [3, 1]]
+    # Without UAV 0 near station 0, UAVs 1 and 4 tie at 10 m -> lower index 1.
+    tie = own.copy()
+    tie[0] = (500.0, 500.0)
+    assert park_assignment(tie, [(0.0, 0.0), (100.0, 100.0)]) == [[1, 0], [3, 1]]
+    # UAV 0 is nearest both stations: station 0 (first) takes it, station 1 takes the nearest
+    # remaining UAV (1 at 84.9 m, not 2 at 197.9 m).
+    both = np.asarray([[60.0, 60.0], [0.0, 0.0], [200.0, 200.0]])
+    assert park_assignment(both, [(50.0, 50.0), (60.0, 60.0)]) == [[0, 0], [1, 1]]
+
+
+def test_park2_targets_are_station_xy_and_reset_xy(config_60, tmp_path):
+    controller, row, arrays, truth = _run_fixed(config_60, 955001, "park2")
+    reset_xy = own_positions(truth["obs"])[:, :2].astype(np.float64)
+    stations = np.asarray(ev.absolute_station_xy(truth["obs"]), dtype=np.float64)
+    np.testing.assert_allclose(stations, truth["stations_xy"], rtol=0, atol=0.01)
+    assignment = controller.park_assignment
+    assert assignment == park_assignment(reset_xy, list(stations))
+    assert [station for _, station in assignment] == [0, 1]
+    expected = reset_xy.copy()
+    for uav, station in assignment:
+        expected[uav] = stations[station]
+    targets = arrays["target_xy"]
+    assert np.array_equal(targets, np.broadcast_to(expected, targets.shape))
+    parked = [uav for uav, _ in assignment]
+    assert all(not np.allclose(expected[uav], reset_xy[uav]) for uav in parked)
+    task = ev.WorldTask(controller="Hpark2", seed=955001, params=PRODUCTION_PARAMS, horizon=20,
+                        policy_seed=POLICY_SEED, threads=1, heuristic=FIXED_PARAMS,
+                        log_dir=str(tmp_path))
+    result = ev.evaluate_task(task)
+    assert result["row"]["park_assignment"] == assignment
+    assert result["row"]["controller_information"] == ev.REFERENCE_INFORMATION["Hpark2"]
+    assert result["row"]["replans"] == 1 and result["row"]["search_replans"] == 0
+
+
+def test_h1_period_30_is_the_grid_h1_and_period_10_replans_every_10(tmp_path):
+    from experiments.candidates.energy_relay_benchmark.b01 import native
+
+    spec = replace(native.B01Spec(), worlds=(955001,), controllers=("H1",),
+                   grid_settings=((0.0, 0.05),), horizon=40, workers=1, threads=1,
+                   checkpoint_sha256=None, policy_fingerprint=None)
+    grid = native.run_native(out=tmp_path / "grid", launch_sha="fixture", checkpoint=None,
+                             phase="grid", spec=spec, argv=["fixture"])
+    grid_row = grid["panels"]["grid/H1_e0.00_x0.05"]["worlds"][0]
+    explicit = ev.evaluate_task(ev.WorldTask(
+        controller="H1", seed=955001, params=PRODUCTION_PARAMS, horizon=40,
+        policy_seed=POLICY_SEED, threads=1,
+        heuristic=replace(VARIANTS["H1"], replan_period=30), log_dir=str(tmp_path)))
+    volatile = VOLATILE | {"width", "matched_pair_id"}
+    assert {k: v for k, v in explicit["row"].items() if k not in volatile} == \
+           {k: v for k, v in grid_row.items() if k not in volatile}
+    assert grid_row["replans"] == 2 and grid_row["plan_input_steps"] == 2
+    config_30 = ev.make_eval_config(30, POLICY_SEED)
+    env = make_env(config_30, 955001)
+    try:
+        ten = ev.HeuristicController(native.heuristic_params("H1r10", spec), env)
+        row, _ = ev.evaluate_world(ten, env, config_30, 955001, PRODUCTION_PARAMS)
+    finally:
+        env.close()
+    assert row["actual_length"] == 30 and ten.plan_input_steps == [0, 10, 20]
