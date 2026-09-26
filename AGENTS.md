@@ -49,6 +49,11 @@ strengthened/weakened/untouched judgments, contrary evidence and the next useful
 Scout may map a primary-source/simple-model bridge; Critic tests the update and its predictions.
 Innovation is a work mode, not a compulsory new-candidate stage. No additional role or renamed
 authority without owner amendment.
+Pi: the session acts as the DM for one direction under prompt cache protection. The DM
+maintains cumulative science and actively delegates bounded execution to its registered subagents
+via the native `subagent` tool: `scout` for log/tensor recon, `implementer` from a concise L0 scope
+note, `reviewer` for numerical/RNG safety, `critic` for hypothesis stress-testing, and `operator`
+for batch execution. This preserves the DM's clean context without creating unassigned roles.
 
 Records (section 4). Per direction: `NOTES.md` (append-only notebook; Pro questions and
 answers as sections), `runs/<direction>/<tag>/` (runner-written), `CLAIM_<slug>.md` (before a

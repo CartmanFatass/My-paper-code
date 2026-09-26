@@ -56,6 +56,21 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### reviews/
 
+- `FOUR_DIRECTION_STATE_AND_ADVICE_20260922.md` — owner-requested read-only advice on the
+  2026-09-21 four-direction round (JDSL, LOE, ACG, USA), read from published `main` `be38b4842`
+  and the agent-count branch on 2026-09-22; 0 fits, nothing launched, FSD stays rested. Supplies
+  the cross-direction view the non-communicating DMs cannot: single-seed contrasts (+.02 to +.06 J)
+  sit inside the measured fixed-clock spread (three fresh fixed instances .458/.497/.543; five
+  historical blocks SD .055; panel-to-panel .06–.09); the Scenario 7 learner is not yet competent
+  (training return flat, endpoint below initialization, energy events never fire, 8-world SE ≈ 170–200)
+  so the auxiliary-head comparison has no readable base and no reference floor/ceiling; the
+  agent-count SET arm is the programme's first competent matched-information flat learner on a UAV
+  host (but it runs at λ_l .05, the setting B03 found to cause CF's late decline; a known confound
+  to carry into the H6−SET reading); three non-poolable fixed-clock
+  baselines and three evaluation panels are the cheapest power to recover. Recommends a shared S1
+  fixed-clock reference recipe with SET as its flat arm, seed concentration on ACG after the round,
+  a competence/reference phase for S7, and lists five owner decisions. Chinese body, English abstract;
+  Appendix A specifies the zero-fit label-interaction diagnostic Root asked to see specified.
 - `FOUR_DIRECTION_PROGRESS_REVIEW_20260915.md` — progress check on the four live directions
   (FSD, ACVC, FOLR, TRDL) in the seven hours between the 2026-09-14 calibration and the owner's
   completed pause: what the owner adopted from the two-axis plan and what ran; per-direction

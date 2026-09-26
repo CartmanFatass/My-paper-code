@@ -1,0 +1,73 @@
+# Ultra-minimal, context-optimized project settings for HMASD in omp
+
+# 1. 精简子代理：仅保留只读探查 (scout)、数值安全审计 (reviewer) 与通用任务 (task)
+task:
+  enableLsp: true
+  enableEffort: true
+  maxRecursionDepth: 2
+  disabledAgents:
+    - security-reviewer   # 关闭通用 Web/企业安全扫描
+    - sonic               # 关闭弱推理搬运工，避免低质代码修改
+
+# 2. 彻底屏蔽非科研技能，杜绝提示词膨胀
+skills:
+  ignoredSkills:
+    - oh-my-opencode-slim
+    - reflect
+    - deepwork
+    - worktrees
+    - codemap
+    - clonedeps
+    - react-best-practices
+    - nextjs
+    - satori
+    - shadcn
+    - payments
+    - microfrontends
+
+# 3. 彻底关停后台与自动化冗余消耗
+advisor:
+  enabled: false          # 关闭双模型实时对抗评注，杜绝上下文碎碎念
+
+prewalk:
+  enabled: false          # 关闭启动时全仓库目录预扫描，保护初始上下文
+
+plan:
+  defaultOnStartup: false # 启动不强制进入大计划流程，即开即用
+
+autolearn:
+  enabled: false          # 彻底关闭自动提取 managed-skills，不浪费会话结束后的 Token
+
+memory:
+  backend: off            # 关闭黑盒向量库注入，仅保留白盒透明的知识图谱与 NOTES.md
+
+computer:
+  enabled: false          # 关闭宿主机 GUI 窗口抓取与控制，消除无效 Tool Schema
+
+personality: none         # 彻底移除语气人设废话，节省 System Prompt Token，保持零废话客观风格
+
+# 4. 读写安全防爆与结构化折叠
+read:
+  defaultLimit: 300       # 单次读取硬性限制 300 行，防止日志打爆上下文
+  summarize:
+    enabled: true         # 自动结构化折叠长代码实现，保持高密度上下文
+    prose: false
+
+# 5. 纯净极简科研状态栏 (实时监控 Prompt Cache 与 Token 速率)
+statusLine:
+  separator: none
+  preset: nerd
+  leftSegments:
+    - pi
+    - model
+    - git
+  rightSegments:
+    - cache_hit           # 实时观察 Prompt Cache 命中率
+    - token_rate          # 观察模型吐字速率
+    - context_pct         # 观察上下文消耗百分比，辅助决策何时开新方向
+
+# 6. 缓存保活增强与未命中告警
+providers:
+  cacheRetention: auto   # 自动向支持的服务商 (Anthropic/OpenAI/Bedrock/OpenRouter) 声明最大缓存驻留时间
+display:
+  cacheMissMarker: true  # 当某一次请求发生缓存穿透 (Cache Miss) 时，在终端打出明确分割线提醒

@@ -80,6 +80,7 @@ temp_collection_log/
 .claude/settings.local.json
 /.remember/
 /.codex/runtime/
+/.codegraph/
 
 # Owner's personal notes
 /docs/personal/
