@@ -812,3 +812,33 @@ Publication commit for the launch inputs: `414659f35f6dc4a41a07fd9d564223b234249
 ("energy_relay_benchmark: B01 revised after independent scientific review; constitution section 5
 amendment; launch inputs"). The node fast-forward and admission launch follow; the launch record
 is appended when the kernel accepts the operation.
+
+### Launch record: B01 accepted on wsl_4070 (2026-09-26)
+
+Owner authorisation of 2026-09-26 ("You have my permission on all things about this project
+including use the remote node"). Node control checkout `/home/wu/projects/HMASD` fast-forwarded
+to `e592c3a80` (origin/main; contains the launch inputs commit `414659f35`). Admission launch from
+the node itself:
+
+- `scripts/hmasd_launch.py launch --node wsl_4070 --source-root /home/wu/projects/HMASD --snapshot
+  --direction energy_relay_benchmark --lead "Claude DM (WSL session)" --sha
+  414659f35f6dc4a41a07fd9d564223b2342499d0 --output runs/energy_relay_benchmark/b01_ref_a01 --
+  scripts/run_energy_relay_benchmark_b01.py --out runs/energy_relay_benchmark/b01_ref_a01
+  --launch-sha 414659f35f6dc4a41a07fd9d564223b2342499d0 --checkpoint
+  /home/wu/hmasd-worktrees/usa-b09-48388289d/runs/uav_service_auxiliary/b09_an_925031_a01/N/endpoint/agent.pt
+  --phase all --workers 8 --threads 2 --device cpu`
+- `acceptance: accepted`, `accepted_at 2026-09-26T13:33:25Z`; control observation
+  `origin/refs/heads/main` = `e592c3a80375b0005eba2ab3c7ecdbbe43872896`; host `LAPTOP-U9TDKC8A`.
+- Operation ref `/home/wu/projects/HMASD/.git/hmasd-admission/73a990e5b4e0b5f8d884cf698b1adfdaf36bc653394898314592ccf161fb60ff.json`
+  (claim key `73a990e5…fb60ff`); manifest and outputs under
+  `/home/wu/projects/HMASD/runs/energy_relay_benchmark/b01_ref_a01/` (`launch-manifest.json`,
+  `admission-preflight.json`, `process-exit.json`, `stderr.log`, then `config.json`,
+  `progress.jsonl`, `<phase>/panels/*.json`, `<phase>/traces/*.npz`, `summary.json`).
+- Snapshot source `/home/wu/projects/HMASD/.git/hmasd-launch-sources/673435a800d54f38a6c082d24588f454`
+  (linked worktree of the published SHA); command sha256
+  `7c6426769b7f6222872fc1017221d710dfa9547f91afda0afba4dc107606a34d`; detached supervisor pid
+  706986 (posix session), runner pid 706987.
+- Observation: a detached local poller (`temp/directions/energy_relay_benchmark/scratch/poll_status.sh`)
+  reads `hmasd_launch.py status <operation ref>` and the progress journal every 10 minutes into
+  `poll_b01_ref_a01.log`; it exits on a terminal state and the session is woken by the native
+  background return. Expected wall ≈ 4.5–5.5 h for 316 episodes.
