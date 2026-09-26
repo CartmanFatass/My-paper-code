@@ -2591,3 +2591,80 @@ reported to the owner with the launch record.
    margins, station fields, guard counters); the only differences are fields that did not exist at
    B01 time (the five position diagnostics) or that `evaluate_task` adds after `evaluate_world`.
    S0-3 therefore compares like with like; the common-window −.000 says the same.
+
+## 2026-09-26 — Stage 1 engineering, engineering review and launch record: one SET development fit (`b02_s1_set_a01`, operation d682c906)
+
+**Code (commit `34824de1d`, note correction `759927b5e`).** Package
+`experiments/candidates/energy_relay_benchmark/b02/` (`configuration.py`, `training.py`,
+`checkpoint_eval.py`), entry `scripts/run_energy_relay_benchmark_b02.py` (`train`,
+`evaluate-checkpoint`), additive controller kind `L` in `b01/evaluation.py` (learner checkpoint
+built from its `record.json`; N's identity check and every existing B01 output unchanged), tests
+`tests/experiments/candidates/energy_relay_benchmark/b02/`. Recipe: B09's fixed S7 native recipe
+(2 lanes × 3000, k 10, λ_return 2.0, λ_e 1.0, normalizers off, preset architecture) with the SET
+switch in ACG's order (mappo algorithm config, k = 10 restored, `use_central_snapshot_in_flat_actor`,
+buffers recomputed), exposure exactly 1,200,000 transitions = 200 rollouts, shield on in training
+through the same B06 `apply_feedback` path and layout B09's arm A used (enter 0, exit .05, which the
+run record of `b09_an_925031_a01` confirms), training seed 925031 (B09's own; the scope note had
+named 915031, B08's — DM decision), plain `HMASDAgent` (not ACG's count-stable modules). Checkpoints
+`checkpoints/c00…c06/{agent.pt, record.json}`: c00 = initialisation, then the first rollout reaching
+each 200k mark (rollouts 34/67/100/134/167/200 = 204k/402k/600k/804k/1,002k/1.2M transitions; exact
+counts in each record). Per-rollout `progress.jsonl`: J and QoS/step per lane, F-mapped-command
+share, F-mode share, entries/exits, action entropy, actor/critic losses, optimizer steps, live lanes
+at the boundary (PPO KL and clip fraction are not exposed by the agent's update and are recorded
+null). Tests: b02 18 passed, b01 45 passed (B07 parity included), `uav_service_auxiliary/b06` 11
+passed 2 skipped. Tiny CPU round trip (2 lanes × 60 × 2 rollouts, checkpoints, evaluation on two
+stand-in worlds in both modes): deterministic re-evaluation identical, loaded parameters equal saved,
+actor input width 3599 = 365 + 306 + 8·365 + 8, saving leaves python/numpy/torch RNG and the learner
+bit-identical; the copied collector loop equals B09's `train_arm` bit for bit on B09's own ordinary
+config. Accepted deviations: `ordinary_completed_segments = False` (HMASDAgent refuses it with the
+mappo switch's `disable_high_level_training`); `train_arm` copied rather than reused (it requires the
+ordinary path); B09's bulk read-only artifacts dropped (≈ 4.5 GB at 200 rollouts); `new_agent`
+initialisation; `--device cpu` allowed for tests.
+
+**Engineering review (`hmasd-reviewer`, read-only, on `34824de1d`): launch-safe as committed.**
+Acceptance items verified: recipe fidelity (the only fields differing from B09 are the SET switch's
+own — algorithm, n_Z = n_z = 1, λ_D/λ_d/λ_h 0, the high-level/discriminator disables, the flag,
+`ordinary_completed_segments`, `total_timesteps`), collector fidelity (call order and semantics match
+`train_arm`; the batched step route; the snapshot held for k = 10 through `env_timers`), RNG safety
+on CPU (the CUDA save path has no RNG call), checkpoint compatibility (same writer as B09's endpoint;
+loader rejects a mismatched sha, config, flag or fingerprint; CUDA→CPU load as B01 already does for
+N), B01 invariants (diff additive, gated on `controller == "L"`), evaluation (worlds, modes, seeding,
+hold-out refusal, no output collision, admission before imports) and cadence; cost/memory not
+verifiable statically. Findings: (1) low — under the legacy `clear_buffers` path every lane missing
+from `env_timers` is re-initialised at the next step (timer, four numpy draws, zeroed GRU state);
+no behavioural change at production sizes (all 120 B09 episodes truncated at 3000, live lanes at a
+boundary 0), a live lane after an early termination would have its recurrent state zeroed
+mid-episode; the recipe note in `configuration.py` under-described this and was corrected in
+`759927b5e` (follow-up, not a launch condition: pin the behaviour with the reviewer's suggested
+assertion in the live-boundary test); (2) informational — the fingerprint check cannot detect a
+silent non-load at c00 (identical to a fresh initialisation; sha256 applies to every checkpoint);
+(3) informational — `record.json` carries the ACG field list plus extras, the full config is in the
+run-root `config.json`, architecture fields outside the list are protected by the frozen source at
+the recorded sha; (4) procedural — nothing enforces reading the hold-out once; the DM does.
+
+**Cost, declared before execution.** Upper bound ≈ 11 h of node wall at B09's HMASD cost on the
+same GPU (arm A: 6,093 s per 180k transitions → ≈ 40,600 s for 1.2 M); SET skips the coordinator and
+discriminator updates but has a wider actor, so the real rate is read from rollouts 1–2 in
+`progress.jsonl` and appended below. Checkpoint evaluations ≈ 7 × 2 modes × ≈ 6 min ≈ 1.4 h, each a
+separate admission launch (`evaluate-checkpoint`, own tag, checkpoint passed as a node path), run
+after the fit unless the node's measured memory admits one earlier. Node at launch: RAM 12.8 GB
+free of 15.8, RTX 4070 Laptop 6.9 GB free of 8.0, disk 826 GB free; the fit is the only research
+process on the node. Nothing is adopted from the development worlds; the fit is not extended after
+scores; a longer or changed recipe is a new declared study.
+
+**Launch (admission, from the node):** `launch_b02_train.sh 759927b5e8ca… b02_s1_set_a01 4` →
+`acceptance: accepted`, `accepted_at 2026-09-26T18:22:52Z`; operation ref
+`/home/wu/projects/HMASD/.git/hmasd-admission/d682c90610817da1c499749ad42052e14e622cd06598cbd9203486658a9f722b.json`
+(claim key `d682c906…9f722b`); command sha256
+`aa63b7511d61bc5c530fe2d6bade42dc3b16da0cd154ac5adfdfed74e62e8a73`; supervisor pid 726069, runner
+pid 726070; `train --seed 925031 --device cuda --threads 4`; outputs under
+`/home/wu/projects/HMASD/runs/energy_relay_benchmark/b02_s1_set_a01/` (`config.json`,
+`progress.jsonl`, `summary.json`, `checkpoints/`). A first attempt with a mistyped padded sha was
+refused by the ancestor check before any launch (no operation created). Observation: detached
+poller every 30 min (`scratch/poll_b02_s1_set_a01.{pid,log}`) and a background waiter with a
+native return; only health fields and the per-rollout progress are observed before the checkpoints
+are evaluated. Readings, as declared: the .60 milestone (H_local's level, labelled so), improvement
+over c00, gaps to H_central (.774) and H_local (.597), J / return cost / events / minimum-battery
+tail against the same comparators, with the package references H_spawn .232 and H_park2 .379 and
+N .328 / .313 beside them; both evaluation modes per checkpoint; 957001–957032 once, final model
+only, with `--final`.
