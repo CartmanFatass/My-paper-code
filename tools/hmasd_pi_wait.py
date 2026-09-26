@@ -19,6 +19,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from pathlib import Path
@@ -53,12 +54,20 @@ def wait_section(filepath: str, heading: str, timeout: int, interval: float = 5.
     while time.monotonic() - start_time < timeout:
         if path.is_file():
             content = path.read_text(encoding="utf-8", errors="replace")
-            idx = content.find(clean_heading)
-            if idx != -1:
-                after_heading = content[idx + len(clean_heading):].lstrip()
-                # Check if there is text before next heading or EOF
-                next_heading_idx = after_heading.find("\n#")
-                section_body = after_heading[:next_heading_idx].strip() if next_heading_idx != -1 else after_heading.strip()
+            lines = content.splitlines()
+            heading_index = next(
+                (i for i, line in enumerate(lines) if line.strip() == clean_heading),
+                None,
+            )
+            if heading_index is not None:
+                heading_level = len(clean_heading) - len(clean_heading.lstrip("#"))
+                body_lines = []
+                for line in lines[heading_index + 1:]:
+                    next_heading = re.match(r"^ {0,3}(#{1,6})\s+", line)
+                    if next_heading and len(next_heading.group(1)) <= heading_level:
+                        break
+                    body_lines.append(line)
+                section_body = "\n".join(body_lines).strip()
                 if len(section_body) > 0:
                     elapsed = time.monotonic() - start_time
                     print(f"[hmasd_pi_wait] Section '{clean_heading}' populated ({len(section_body)} chars) after {elapsed:.1f}s.")
