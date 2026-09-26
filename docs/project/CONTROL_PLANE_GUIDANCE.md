@@ -154,43 +154,27 @@ Codex queue 只唤醒分配该等待的当前 Codex session；Claude 使用确�
 用配置的解释器直接调用准入内核，不生成一次性 wrapper；远端在 agent-task 命令内调用同一内核；两者均先准入再启动并保留可核对的进程事实。
 在途实验不能借换节点绕过原语义或制造重复进程。
 
-Git 的分支/worktree 服务于真实隔离需要，不再每方向强制建立。按完整工作边界提交和推送，
-在外部交付及结果运行前确保输入可取得；不要求 scope 尾注、每次 commit 立即 push 或月度治理指标。
+Owner 2026-09-25 决定统一在 main 写作，各方向拥有自己的实现、测试、记录、运行与临时目录，
+具体路径见 AGENTS。共享代码不按方向复制；共享文件保持单写者，Git index/commit/merge 串行，
+只提交本方向明确路径。不为方向、批次或发表再建 worktree。已有冻结入口与运行源码身份保留。
 
-启动时的 `--snapshot` 会生成完整且锁定的源码 worktree；实验退出不会让 Git 自动释放它。
-收集并验证产物后，在原执行 Linux 节点用 `scripts/hmasd_snapshot_gc.py` 预览，
-再以 `--apply --snapshot <快照目录名>` 回收已核验的指定快照。脚本保留操作记录和外部产物，
-拒绝终态不明、进程引用、独有文件或源码提交无持久引用的快照。普通 DM/发布 worktree
-需另行核对任务与产物依赖；完整流程见[执行说明](../../.agents/skills/hmasd-research-engineering/references/local-execution.md#source-and-publication-worktree-reclamation)。
+方向完成后检查仍在运行的进程、待收操作和跨方向引用；集成有用代码，保留精简的正反结果、
+源提交与必要证据位置，再删除无用实现、测试、旧入口、临时产物和冗余数据副本。
+已提交的旧代码用 Git 历史恢复，不在 main 另造副本。必要证据只保留一份规范位置；已有可用
+副本就直接删冗余，禁止为回收再 tar/zip、整树复制、复制备份或新建 retention 包。
+`scripts/hmasd_worktree_data.py retain` 仅服务明确的保全请求，不是清理前置条件。
 
-Owner 在 2026-09-25 要求把数据与 worktree 分开，并将回收纳入日常完成流程。
-源码由 Git 提交/分支保留，可复用的 worktree 只承担当前工作；完整原始数据、检查点、失败及
-中断输出存放在工作区之外。本机沿用 `/home/fires/hmasd-artifacts/`，遗留保全包放在
-`worktree-retention/<checkout>-<date>/`。`scripts/hmasd_worktree_data.py` 的 `preview / retain / verify`
-分别完成预览、只复制保全和独立哈希校验；包内保留原相对路径，`manifest.json` 记录内容哈希及
-源码身份。它不删除源、不代替 Git 历史，也不把进程消失当作科学完成。
+启动源码快照仍由 `scripts/hmasd_snapshot_gc.py` 对核对完毕的精确目标回收；普通托管工作树
+使用可用原生入口。实际运行/工具限制需如实报告，不能通过新备份任务假装完成删除。
+跟踪文件按明确路径 `git rm`，可重建的 ignored 缓存/临时文件按精确目录删除；不扫删在用方向。
+回收前后量测目标实际分配字节，核验目录消失并报告净释放量，明确 Git 对象存储与工作区占用
+的区别。移动到同一磁盘的归档目录不算释放空间；本轮只改工作流不自动证明任何删除已完成。
 
-回收触发点是 DM 完成研究或确实更换工作区时：先发布有用结果、核对外部数据，再复用或通过
-原生 worktree 工具归档不用的目录。发布目录仍有后续用途就复用；不按每次实验/方向名字创建
-新目录，也不按年龄后台扫删。当前三个并发是科研运行资源限制，不是 worktree 个数规则。
-存在训练、观察者、Pro 或共享浏览器依赖时保留目录。归档工具若仅能处理本聊天附件，应明确
-报告尚待原生回收的目录，不用 shell 删除、自动唤醒旧 DM 或新建管理台账绕过。
-
-创建之前也要核对回收路径：先看当前聊天附件与 Git worktree 列表，优先复用；需要新隔离时
-使用原生创建工具并确认附件归属。创建者承接回收责任，借给子 agent 使用不会自动把附件转交
-给子 agent。手动放进 `.codex/worktrees` 的目录不能据此认定已进入 App 托管。
-数据保全、聊天归档、工作树回收是三个不同结果；只有原生操作成功且 Git 登记和目录均已消失，
-才报告该工作树已回收。
-
-本机 2026-09-25 安装的 App 提供“设置 → Worktrees → 对应目录 → 删除”入口；该操作也会
-归档关联聊天。聊天级 `archive_worktree` 的附件范围不等于这个全局界面的范围。使用前核对
-界面实际列出的目录及进程/产物依赖，不假定所有手动创建的遗留目录均被列出。如果桌面操作工具
-不可用，应给出已核实的入口、具体目标和实际未完成项，不能把外部备份成功报告成已删除目录。
 
 发布边界与写入责任见[宪章 §4](OPERATING_CONSTITUTION.md#4-three-record-types-and-one-repository-table)，
 具体操作见 engineering 的 Publishing direction results。科学结果/计划或控制发生实质变化时更新
 RESEARCH；同批次各 cell 的启动、观察、收取和验收留在 NOTES/runs，不逐次维护 main 或生成快照。
-方向分支发布运行输入与共享索引发布分开。索引用一个路由区保留 task/checkouts；运行 handle、
+main 上的精确运行输入提交与研究索引更新分开。索引用一个路由区保留 task/checkouts；运行 handle、
 generation、哈希和详细检查通过原记录恢复。新大产物按 engineering 的保留流程存放在 Git 之外，
 在现有记录中保留位置与哈希，清理任何源副本前验证可恢复性；已有冻结输出与版本化证据不搬迁。
 Pro 临时写指定 answer subsection，不能覆盖整个旧版本文件。

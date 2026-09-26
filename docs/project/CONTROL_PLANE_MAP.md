@@ -76,13 +76,15 @@ accepted handle → detached waiter 观察同一 handle → terminal facts／错
 失联／timeout 不等于终止。local handle 要稳定进程身份与可访问 terminal witness；替换观察者先核对同一
 handle，再完成新观察者 adoption。节点安全底线、declared artifacts、scope 和冻结科学合约未取消。
 本地路径（Windows 与 `local_linux`）见 [local execution](../../.agents/skills/hmasd-research-engineering/references/local-execution.md)；
-远端使用配置的 agent-task。新实验选机与已有进程恢复是两件事。分支/worktree 按隔离需要选择，
+远端使用配置的 agent-task。新实验选机与已有进程恢复是两件事。写作统一使用 main 与方向专属目录，
 在完成工作、外部交付或运行前 push，不要求逐提交 scope 尾注或月度治理计数。
 
-**存储与回收：** `scripts/hmasd_worktree_data.py` 为不再使用的工作区提供外部数据保全及哈希
-校验；`scripts/hmasd_snapshot_gc.py` 只回收满足条件的启动源码快照。普通工作区通过原生归档
-工具处理。DM 在完成/更换工作区时执行工程方法的生命周期步骤，原始数据位置写回原 NOTES
-或 run metadata；这些工具不决定研究结束、不重启实验，也不承担后台按年龄删除。
+**存储与回收：** main 中每方向拥有实现/测试/记录/运行/临时目录；不新建方向工作树。
+精简结论与源身份进 Git，必要大产物只留一份规范位置。方向退役时删除无用实现、临时文件、
+重复产物和旧备份，检查真实消费者并量测净释放量；不通过另造备份完成“清理”。
+`scripts/hmasd_worktree_data.py` 是仅用于明确保全请求的旧复制工具，不是删除门槛；
+`scripts/hmasd_snapshot_gc.py` 继续按精确目标回收已结束操作的启动快照。
+具体方法见 engineering；它不决定研究结束，也不重启实验。
 
 **Pro 路径：** 方向问题写 NOTES，owner-requested/delegated Portfolio 写 RESEARCH → 发布问题 → 当前作者 session
 携带 repository、branch、source_sha、target_path、question_heading、answer_heading、subject key、conversation →

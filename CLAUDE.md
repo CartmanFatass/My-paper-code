@@ -32,8 +32,8 @@ model/tools) is directly maintained; generated bodies are not. Republish after s
 `--check` reports differences and unexpected HMASD outputs, never deletes files automatically.
 
 The Claude DM publishes its direction records and its own RESEARCH standing/results/evidence
-entry to main, including while a Codex Root is acting. Use an owned checkout based on current
-published main and the research-engineering result-publication method; preserve other rows
+entry to main, including while a Codex Root is acting. Use shared main, direction-owned directories and the research-engineering publication method;
+serialize index/commit operations and preserve other rows
 and merge concurrent changes. No Root approval, handover, notification or messaging tool is
 needed for this update. Root retains assigned cross-direction coordination and shared-control
 maintenance. Messages between independent Codex App tasks require an explicit user request;

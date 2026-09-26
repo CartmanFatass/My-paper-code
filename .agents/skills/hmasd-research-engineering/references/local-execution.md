@@ -145,45 +145,25 @@ and untracked outputs), then preview again. Do not synthesize terminal records o
 a copied record from another node as local evidence. Retain the run directories in the
 sparse selection so a later checkout does not discard the recovered status handles.
 
-Ordinary authoring/publication worktrees are outside this collector. Reuse a suitable free
-checkout before creating another. At a completed work boundary, preserve the useful code,
-readings and raw data before retiring an unused checkout. Use the native worktree archive
-tool for managed checkouts after inspecting its artifacts and ownership; it preserves Git
-changes but does **not** save ignored data. A tool scoped to the current chat cannot retire
-another chat's attachment. Keep that directory and name the limitation instead of bypassing
-it with shell deletion or cross-task messaging. Retain branches and run evidence, and verify
-the actual registration/directory outcome. Never sweep worktrees, delete by age or use force.
+Ordinary authoring now uses main and per-direction folders, not additional worktrees.
+Follow [the main authoring and retirement method](../SKILL.md#main-authoring-and-direction-directories).
+The snapshot collector above remains specific to accepted launcher inputs; it is not a general
+main-directory deletion tool. Check live consumers before removing exact obsolete paths.
 
-On Linux, the copy-only retention helper for an inactive legacy worktree is:
+Cleanup is for net disk-space release. Delete caches/scratch and redundant output or old
+retention packages once their required contents are already available in the canonical store.
+Do not create a new full copy, archive, source snapshot or retention package to delete another.
+`scripts/hmasd_worktree_data.py retain` is a legacy copy-only recovery tool, used only for an
+explicit preservation request, never a routine cleanup prerequisite. Existing packages can be
+verified with `verify --dest <package>` if their contents are needed; do not duplicate them.
 
-```bash
-<control-plane-python> scripts/hmasd_worktree_data.py preview --root <worktree> --dest <external-package>
-<control-plane-python> scripts/hmasd_worktree_data.py retain --root <worktree> --dest <external-package>
-<control-plane-python> scripts/hmasd_worktree_data.py verify --dest <external-package>
-```
-
-Use the configured control-plane interpreter. `--sudo-process-scan` is the same read-only
-process-inspection option described above. On this Linux host the existing durable area is
-`/home/fires/hmasd-artifacts/`; legacy packages live under
-`worktree-retention/<checkout>-<date>/`. Keep remote originals at their recorded node paths.
-The helper preserves runs and useful scratch (including failed runs), changed tracked files,
-untracked and ignored non-cache files at `files/<original-relative-path>`, with HEAD, refs,
-deleted-path metadata, byte counts, modes and SHA-256 in `manifest.json`. Conventional
-interpreter/build caches are excluded; no source file is deleted. It refuses active or
-uncertain process references, redirected/special files, destination overlap and conflicting
-copies. Changed Git index states are refused, so unique staged versions cannot be silently
-lost; preserve or commit that work explicitly first. An interrupted copy can resume to the same destination. Independent verification
-reads the retained bytes and still works after the source directory is absent.
-
-This package is data preservation, not a substitute for Git history. Keep its recorded
-branch/commit reachable. For recovery, restore the native worktree or check out that commit,
-verify the package, then copy the needed relative files back; deleted tracked paths remain
-explicit in the manifest rather than being silently applied. Original frozen files are
-copied byte-for-byte, not edited.
-Before losing an old absolute result path, reconcile all accepted handles and retain the
-original claim/manifest/witness; native status recovery may require restoring the old path.
-Store the verified package locator in the existing NOTES or run metadata. A local external
-copy separates data from worktree cleanup but is not protection against failure of that disk.
+For a remaining managed worktree, use the supported native retirement route and confirm actual
+directory and Git registration removal; respect tool ownership and live dependencies. If it
+cannot be used, report the concrete remaining deletion, not a fictional completed cleanup.
+For tracked obsolete direction files use explicit `git rm` paths, with historical source links;
+for disposable ignored files remove exact validated targets. Keep the required unique evidence,
+not entire old workspaces. Measure allocated bytes before/after across deletion and any necessary
+single-file relocation; moving bytes elsewhere on the same disk is not freeing those bytes.
 
 For new work, keep compact summaries/source/native status in Git and collect bulk outputs
 into durable direction/tag storage at the completed-result boundary. The current launcher's

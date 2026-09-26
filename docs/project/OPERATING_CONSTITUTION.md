@@ -7,7 +7,7 @@ or historical record conflicts with it, this page prevails. Historical scientifi
 their meaning as evidence. Only the owner amends this page. Adoption did not lift the owner's
 research pause of 2026-09-15 22:23 PDT.
 
-The current sections incorporate the owner's amendments through 2026-09-24: independent
+The current sections incorporate the owner's amendments through 2026-09-25: independent
 DM responsibility and publication, cost without allowances, proportional engineering,
 scripted observation, proactive Pro advice, shared research understanding, and scientific
 project management, question-led DM continuity and a three-track runtime resource ceiling.
@@ -15,6 +15,10 @@ The owner's adopted workflow reduction
 is reflected in section 4. This consolidation changes no pause, ownership, accepted operation,
 scientific minimum or frozen contract. The [prior amendment chronology](https://github.com/CartmanFatass/My-paper-code/blob/382009f85e46039cc11c275165a03987307dd2b6/docs/project/OPERATING_CONSTITUTION.md)
 remains available in Git; the sections below state the current rules.
+
+Owner amendment 2026-09-25: author on main in direction-owned directories; retire unused
+files to release disk space. Full backups, duplicate retention packages and backup chains
+are not cleanup prerequisites. Sections 4 and 9 carry this decision.
 
 ## 1. What this project is
 
@@ -196,7 +200,12 @@ resource-safety checks are unchanged.
    recoverable artifact locations when outputs are stored outside Git. For new work, version
    the compact result/config/status and source identity; retain bulk trajectories, checkpoints,
    prediction streams and logs outside Git at durable recorded locations, with content hashes
-   in the existing run metadata or NOTES. Verify recovery before deleting any source copy.
+   in the existing run metadata or NOTES. Keep one canonical copy of the outputs needed to
+   support retained claims/contracts/tests; use an existing verified copy rather than creating
+   another. Duplicate copies, rebuildable caches and unneeded intermediate outputs may be
+   deleted at retirement. Preserve positive/adverse/failed conclusions without requiring every
+   intermediate byte forever. A sole required evidence copy remains required; deleting it needs
+   an explicit change to the retained evidence/claim scope, not a claim of harmless cleanup.
    This changes storage, not required measurements; frozen outputs and already tracked evidence
    retain their original contracts. No history rewrite or new artifact registry is implied.
 3. `docs/research/candidates/<direction>/CLAIM_<slug>.md`: short note written before confirmation:
@@ -353,11 +362,25 @@ results and Git history if a concrete overhead question needs investigation. The
 33 docs-touching-commits/run reference is historical, not a current target or reporting duty.
 Improve the research path by removing unnecessary steps, not by creating measurement machinery.
 
-Git is the ordinary version and recovery mechanism. Separate authoring branches/worktrees are
-useful for isolation and simultaneous writers, not mandatory for every direction. Commit coherent
-changes and push at completed work boundaries, before external handoff and before result execution;
-there is no per-commit scope footer or additional bookkeeping requirement. Preserve other writers
-and the committed input identity of accepted runs.
+Git is the ordinary version and recovery mechanism. Owner decision 2026-09-25: author on
+main in the direction-owned implementation/tests, NOTES/CLAIM, runs and scratch folders
+specified by AGENTS. No per-direction authoring/publication worktree unless the owner requests
+one. Helpers receive disjoint paths; shared learner/tools/index changes remain narrow shared
+changes under the existing review rule. Serialize Git index, commit and merge operations,
+use explicit owned pathspecs, and preserve concurrent edits. Commit coherent changes and push
+at completed work boundaries, before external handoff and result execution. Accepted runs keep
+their exact source identity and may use immutable launcher snapshots.
+
+A closed direction's unused implementation, tests and entrypoints may leave current main once
+consumers are checked and useful code is integrated; Git retains their historical versions.
+Keep the compact notebook, closure judgment and necessary evidence locators, including adverse
+results. Remove disposable scratch, duplicate bulk files and obsolete retention packages rather
+than indefinitely carrying them forward. Never create a full backup/tarball, another worktree
+or a backup-of-backup just to satisfy cleanup. Retain only specifically required unique evidence
+in one canonical location. Cleanup must verify target removal and report net allocated bytes
+freed; copying, moving, archiving chats or committing alone does not establish freed space.
+Follow available runtime/tool deletion limits; a real failure leaves a named remaining target,
+not a new preservation workflow. A workflow edit or cleanup does not restart research.
 
 ## 10. Transition — switch the entrypoints, do not rewrite the archive
 

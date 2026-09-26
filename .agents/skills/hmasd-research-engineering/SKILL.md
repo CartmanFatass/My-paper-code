@@ -121,14 +121,14 @@ Each DM publishes its own read results and RESEARCH entry without waiting for Ro
 normally touch separate content; use a small update-time check, not a coordination service.
 Publish RESEARCH at a material scientific result/plan boundary, a changed direction/lead/pause,
 or a real shared dependency. An unchanged batch's start, checkpoint, collection and individual-cell
-acceptance stay in its NOTES/run records. Publishing exact source inputs on the direction branch
+acceptance stay in its NOTES/run records. Publishing exact source inputs on main
 before execution does not require a main/index edit for each cell. Routine progress or routing
 edits use Git history; archive only completed project reviews and substantive superseded plans.
 At an applicable publication boundary:
 
 1. Publish the direction evidence. Before editing the shared entry, fetch `origin/main`, check
-   the owned checkout/index and inspect upstream changes to the affected content. Use a
-   main-based publication checkout if needed to keep experimental branch history out of main.
+   the shared main checkout/index and inspect upstream changes to the affected content.
+   Serialize Git mutations and use only explicit owned paths; do not create a publication checkout.
 2. Update the owned direction's standing, evidence links and next step, and any directly affected
    shared-background topic whose reusable judgment or scope changed in the scientific reading.
    Constitution section 4 grants the DM this shared-topic publication; no Root or Portfolio wait.
@@ -160,59 +160,62 @@ and publish the readable result and locator in NOTES rather than silently editin
 Small fixtures essential to executable checks may remain versioned with their test; do not
 force-add new bulk outputs simply to make every run file visible in Git.
 
-Before source/worktree cleanup, check that every required output is recoverable outside the
-deletion target and verify the retained copy's hashes. If it is the only recoverable copy,
-keep the checkout. Preserve failed/adverse outputs and all promised measurements. Existing
-tracked artifacts and accepted/frozen output contracts are unchanged; do not untrack, move,
-delete or convert old evidence as part of a routine result publication.
+## Main authoring and direction directories
 
-### Worktree creation, reuse and retirement
+Owner decision (2026-09-25): author in `/home/fires/hmasd-wsl` on `main`.
+Do not create authoring/publication worktrees or direction branches unless the owner requests
+one. An accepted run may still use its launcher-managed immutable input snapshot.
+Each direction owns `experiments/candidates/<direction>/` (implementation and new entrypoints),
+`tests/experiments/candidates/<direction>/`, `docs/research/candidates/<direction>/` (NOTES/CLAIM),
+`runs/<direction>/<tag>/` and `temp/directions/<direction>/` (disposable scratch).
+Keep large required outputs in one recorded durable location under that direction on the
+configured node; do not create a second copy by default. Existing frozen entrypoints in
+`scripts/` keep their contracts; do not move old files just to enforce new layout.
 
-The owner requested systematic worktree/data separation on 2026-09-25. The owning DM
-includes retention and checkout disposition in its normal completion work, without a Root
-acknowledgment or another task. Reuse a suitable free authoring checkout for a selected
-continuation; a new batch, direction name or publication alone does not require another one.
-A temporary publication checkout can be reused during ongoing work and retired when it
-has no next use. Three concurrent research tracks is not a three-worktree quota.
+Read other directions when needed, but edit only assigned paths. Changes to shared core,
+shared tools or RESEARCH are explicit shared changes: inspect current contents, keep the diff
+narrow and follow the existing review rule. Do not copy shared learners into each direction.
+One writer per direction/file; helpers receive disjoint file ownership. Serialize index,
+commit and merge operations on shared main. Inspect staged paths, stage/commit explicit owned
+paths, preserve unrelated edits, and never switch the shared branch under other sessions.
+If a shared-file edit is already underway, finish independent work and defer that edit; do
+not create another checkout or send unauthorized App messages to avoid the collision.
 
-Before creating a checkout, inspect the current chat's `list_artifacts` and the repository's
-`git worktree list`; prefer a suitable free checkout. For new isolation use native
-`create_worktree` when available and confirm its returned attachment identity. The creating
-session owns retirement of that checkout, including one lent to an internal helper; assigning
-a direction does not transfer an App attachment. Keep any needed owner/path detail in the
-existing RESEARCH routing, not a new registry. A manually created Git worktree is not proven
-App-managed merely because it lives under `.codex/worktrees`.
+### Retire unused direction files and release space
 
-At final closure or an actual checkout replacement: publish useful code and compact readings,
-preserve unique Git commits on durable refs, retain needed raw/partial/failed outputs outside
-all worktrees, verify recovery, then retire the unused checkout with the available native
-worktree tool. Keep the chat open. Check current task ownership, accepted operations,
-observers/Pro delivery, process references and pinned/shared status before retirement.
-Idle UI state, a completed individual cell and an archived direction label do not prove
-that those dependencies ended. Never kill a shared browser or worker to clear a checkout.
-For an attached managed checkout, use its exact `list_artifacts` identity with
-`archive_worktree`. Confirm both the native result and that the checkout is absent from the
-Git worktree list and disk. Archiving a chat, publishing results or copying data is not evidence
-that retirement succeeded. An intentionally reusable checkout remains active, not archived.
+At a completed direction boundary, distinguish ended investment from an active operation.
+Reconcile workers, observers, Pro delivery and cross-direction consumers before deletion.
+Preserve compact positive/adverse/failed conclusions and source identities in NOTES/RESEARCH;
+keep only the raw data/checkpoints required by a retained claim, frozen contract, executable
+check or an actual selected continuation. Closed is not by itself permission to discard the
+sole evidence for a claim. Do not keep all raw files forever solely because they once existed.
 
-For a legacy inactive checkout, `scripts/hmasd_worktree_data.py` provides preview, copy-only
-retention and independent verification; exact commands and restoration are in the
-[execution method](references/local-execution.md#source-and-publication-worktree-reclamation).
-The data package's machine manifest contains file hashes and source identity, not a new
-research ledger. Link its durable node/path in the existing NOTES or run metadata. Its
-success does not authorize deletion or prove scientific completion. If the current native
-tool cannot archive another chat's worktree, distinguish that tool scope from the App's
-global Worktrees settings. A verified native settings entry can provide the cleanup route;
-do not promise that an unlisted legacy checkout is managed there. Preserve the checkout and
-report the concrete remaining action when the route cannot be used. Do not substitute raw
-directory deletion, internal App API calls or an App message to the old DM. State data retention
-and directory retirement separately, so an interrupted cleanup stays visibly unfinished.
+Publish useful code to main; reusable shared code remains shared. Remove unneeded direction
+implementation/tests/entrypoints from the current tree with explicit `git rm` paths once
+imports, tests, entrypoints and notebook links have been checked. Git history preserves their
+committed versions; pin historical links to the last retained commit. Keep the compact notebook
+and closure standing; do not erase adverse results or pretend removed data remain reproducible.
+Delete rebuildable caches, obsolete scratch, redundant checkpoints, duplicate data copies and
+obsolete retention packages whose needed contents already exist elsewhere. Use exact targets;
+no repository-wide `git clean`, age-only sweep or deletion of another active direction.
 
-The completion boundary is the cleanup trigger. Do not add an age sweep, recurring model
-monitor or automatic deletion on process exit: result reading and accepted-operation
-reconciliation must finish first. Reclaim exact completed launcher snapshots with the
-existing snapshot collector. Interrupted cleanup can resume against the same retained
-files and verified source identity; it does not restart research.
+**Space reclamation means deletion and a measured net reduction.** Do not tar/zip, clone,
+copy entire worktrees, run copy-only `hmasd_worktree_data.py retain`, or create a new
+`backup`/`archive`/`retention` directory as a cleanup prerequisite. Existing verified evidence
+is enough; never back up a backup before deleting it. If a required unique file is inside a
+disposable directory, retain only that identified file in its one canonical location, then
+remove the obsolete container; do not preserve unrelated bulk. An explicit owner backup
+request is a separate task, not the default retirement workflow.
+
+For any remaining managed worktree, use the supported native retirement tool within its scope;
+for a blocked tool, name the exact remaining target and failure, without creating backup work
+or a cross-task messaging loop. Follow actual runtime/tool limits. No new worktree is needed
+for retirement. Launcher snapshots use the existing exact-target collector once its accepted
+operation is reconciled. Before/after cleanup measure allocated bytes for the targets and
+check actual absence; distinguish working-tree reduction from Git object storage or host disk
+capacity. Report deleted paths, net reclaimed bytes and concrete leftovers. A moved directory,
+archive file, chat archival or published commit alone is not space reclaimed.
+
 
 ## Execution and admission
 

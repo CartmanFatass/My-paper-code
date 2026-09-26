@@ -11,11 +11,19 @@ choices and publish useful evidence-supported revisions under constitution secti
 Routine cell progress stays in NOTES/runs; update the index at material result/plan or control
 changes. Only completed project reviews and substantive superseded plans produce dated archives.
 
-Owner working preference (2026-09-25): use `/home/fires/hmasd-wsl` on `main` for
-new authoring work. Direction code remains separated by its own paths; do not create
-a new worktree unless the owner explicitly requests one. Coordinate local index/commit
-operations sequentially and preserve unrelated edits. Existing worktree paths in historical
-records remain source/evidence locators, not instructions to resume authoring there.
+Owner working policy (2026-09-25): author on `main` at `/home/fires/hmasd-wsl`.
+Each direction owns `experiments/candidates/<direction>/`, matching `tests/experiments/candidates/<direction>/`,
+`docs/research/candidates/<direction>/`, `runs/<direction>/<tag>/`, and `temp/directions/<direction>/`.
+Put new experimental entrypoints with the direction; existing frozen `scripts/` entries keep
+their paths. Shared code/index changes are narrow explicit exceptions, not copied per direction.
+One writer per path; serialize shared Git index/commit/merge operations, commit explicit owned
+paths and preserve unrelated edits. Do not create authoring/publication worktrees or switch the
+shared branch unless the owner requests it. Accepted launcher snapshots keep their own lifecycle.
+At closure remove unused code/scratch and redundant bulk after checking live consumers and
+required evidence. Keep compact positive/adverse/failed records and one necessary evidence copy.
+No full-worktree backup, tarball, duplicate retention or backup-of-backup as a deletion condition.
+Cleanup succeeds only when targets are gone and net allocated disk usage decreases; report the
+measured result and actual leftovers. See constitution sections 4/9 and the engineering method.
 
 ## Roles and methods
 
@@ -64,7 +72,7 @@ sections 3, 4 and 8 define cost, records and scientific minimums. Historical fil
 unmaintained evidence; preserve their frozen inputs, outputs, verdicts and source identities.
 
 Node, interpreter and supervisor come from `.codex/hmasd-compute.toml`. Commit and publish
-exact inputs on the direction branch before execution; this is separate from an index/main
+exact inputs on main before execution; this is separate from a research-index
 update. New result entries use `scripts/hmasd_launch.py` and runner-side admission for current
 pause/lead, published source, fresh actual-node memory and duplicate claims. Frozen historical
 interfaces retain their contract. Use the engineering method for compact Git evidence and
@@ -77,7 +85,7 @@ observation with native/manual return. Uncertain acceptance requires same-reques
 Each DM publishes its own results, RESEARCH standing and directly affected shared understanding
 to main without Root approval, integration or notification. Root owns assigned cross-direction
 coordination and shared controls. Refresh main before editing/publishing, inspect relevant changes,
-preserve other writers and use an owned checkout/index. Keep launch-bound lead values stable;
+preserve other writers and serialize mutations of the shared main index. Keep launch-bound lead values stable;
 addresses belong in the index routing block. Resolve ordinary concurrent changes locally.
 
 Stage and commit explicit paths. No `git add -A`, stash, reset, force-push or history rewrite

@@ -127,7 +127,7 @@ Keep unknowns explicit; do not backfill addresses for dormant historical directi
    entries and useful revisions to directly affected shared-background topics through the
    research-engineering method, without Root approval or notification.
    Root integrates cross-direction controls or other explicitly assigned changes from its
-   own checkout, preserving other writers. Do not replace the index with an older whole-file
+   direction-owned paths on main, preserving other writers. Do not replace the index with an older whole-file
    copy. A result branch can retain code/runs with pinned evidence links. A terminal process
    is not a read result; retain collection/interpretation work explicitly. A duplicate boundary
    message does not require Root to take over the DM's entry or send another prompt.
@@ -166,8 +166,7 @@ record; do not create a packet or extra reporting record to repeat it.
 A Root being idle or temporarily unreachable does not suspend authorized independent work.
 Publish the direction evidence and your own RESEARCH result entry, and continue work whose
 actual dependencies are met. This needs no transfer of a Root's integration role. Use an owned
-checkout based on current published main and preserve concurrent writes; never write another
-checkout/index. For an actual lead replacement, do not infer vacancy from a missing task.
+shared main checkout with explicit owned paths and serialized Git writes. For an actual lead replacement, do not infer vacancy from a missing task.
 
 For a real DM or Root replacement, reconcile live processes, uncertain Sends, uncollected
 results and writes at a safe boundary. The recipient reads the latest notebook and adopts
@@ -183,23 +182,17 @@ launch a replacement process to obtain a new handle.
 Each DM owns its direction records and its own RESEARCH result entry; Root owns assigned
 cross-direction coordination and shared-control maintenance. Ordinary direction updates need
 only the engineering method's update-time check of current main and the affected entry, not
-standing coordination. Use owned checkouts for concurrent writers and explicit pathspec commits,
-and push completed work and exact result inputs. Branches and worktrees are useful isolation,
-not a mandatory new checkout per direction. Keep accepted source identities and other writers.
-At an actual assignment/closure/checkout-replacement boundary, inspect existing worktrees
-and reuse a suitable free one. Before creating another, identify its creating session and
-native retirement route under the engineering method; a child DM does not automatically own
-its parent's App attachment. The creating session retains cleanup responsibility until actual
-ownership is transferred. The owning session performs retention and cleanup as part
-of completion under the engineering method's worktree lifecycle. Preserve unique commits
-and verify an external copy of needed ignored data before native archival; preserve any
-live process, accepted handle, observer or delivery dependency. Verify the actual outcome
-on disk and in the worktree list; an archived chat or successful data backup does not establish
-that outcome. When the native archive tool is scoped to another chat, check the supported
-global Worktrees settings route and explain any actual access failure, rather than repeating
-the same tool limit as the whole answer. It is not permission for raw deletion or a message
-to its old DM. Three research runtime slots
-do not imply three permanent worktrees or require one new checkout per replacement idea.
+standing coordination. Use shared main and the direction-owned paths specified by the
+engineering method. Serialize Git index/commit/merge operations; preserve other writers.
+Do not create direction/publication worktrees unless the owner explicitly requests one.
+At closure, publish useful code and compact positive/adverse/failed readings, check actual
+consumers, then delete obsolete direction files, scratch and redundant data. Keep required
+unique evidence in one canonical location; no full-tree backup, tarball, duplicate retention
+package or backup-of-backup is a prerequisite. Use existing Git history for retired code.
+Measure actual net bytes reclaimed and report any still-present target honestly. Tool-scope
+failures are specific blockers, not reasons to invent another backup task or message an old DM.
+See the engineering method's Main authoring and direction directories section for exact paths,
+shared-file ownership, required evidence and native worktree/snapshot retirement limits.
 
 Publishing methods does not reload running sessions. When the owner's requested research starts
 or resumes, read the current DM body and relevant methods at a safe boundary. At a material

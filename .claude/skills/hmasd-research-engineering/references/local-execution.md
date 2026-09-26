@@ -123,10 +123,19 @@ Apply rechecks each selected snapshot under the admission lock and removes only 
 worktree, without force. A terminal exit witness, absent native processes, consistent
 claim/source identity, externally retained outputs, durable branch/tag reachability and
 absence of dirty, untracked or ignored files are required. Local process references also
-block reclamation. Unknown/unclaimed operations and unsupported process inspection remain
-preserved; age, exit-zero alone or an apparently idle direction does not grant deletion.
+block reclamation. Unknown operations and unsupported process inspection remain preserved;
+age, exit-zero alone or an apparently idle direction does not grant deletion.
 Keep claims, manifests, exit witnesses and run artifacts: they retain status and duplicate
 prevention after the source directory is gone. Cleanup grants no relaunch.
+
+An explicitly inspected **unclaimed source-only copy** may be reclaimed with
+`--unclaimed-source --snapshot <exact-id>` (add `--apply` after preview). This special mode
+requires zero associated claims, detached HEAD, no changed/untracked/ignored files, a durable
+source ref and no process references. A present claim always follows the original terminal
+witness checks. Missing claims never become invented exits or scientific acceptance.
+The maintained launcher holds the shared admission lock from snapshot preparation through
+claim registration, excluding source GC during this interval. Do not race this mode with
+an older frozen launcher that lacks that protection; choose a quiescent boundary instead.
 
 On sparse remote checkouts, a missing manifest can be a checkout omission. Check the
 published commit for the exact operation's original records and match its claim, SHA,
@@ -136,12 +145,32 @@ and untracked outputs), then preview again. Do not synthesize terminal records o
 a copied record from another node as local evidence. Retain the run directories in the
 sparse selection so a later checkout does not discard the recovered status handles.
 
-Ordinary authoring/publication worktrees are outside this collector. At a completed
-publication boundary, remove an owned temporary publication checkout with ordinary
-`git worktree remove <path>` only after verifying its commits are durably reachable,
-including ignored/untracked evidence in the clean-tree check, and ensuring no active task,
-process or accepted operation depends on the path. Retain branches and run evidence.
-Never sweep all worktrees, delete by age or use `--force` to bypass these checks.
+Ordinary authoring now uses main and per-direction folders, not additional worktrees.
+Follow [the main authoring and retirement method](../SKILL.md#main-authoring-and-direction-directories).
+The snapshot collector above remains specific to accepted launcher inputs; it is not a general
+main-directory deletion tool. Check live consumers before removing exact obsolete paths.
+
+Cleanup is for net disk-space release. Delete caches/scratch and redundant output or old
+retention packages once their required contents are already available in the canonical store.
+Do not create a new full copy, archive, source snapshot or retention package to delete another.
+`scripts/hmasd_worktree_data.py retain` is a legacy copy-only recovery tool, used only for an
+explicit preservation request, never a routine cleanup prerequisite. Existing packages can be
+verified with `verify --dest <package>` if their contents are needed; do not duplicate them.
+
+For a remaining managed worktree, use the supported native retirement route and confirm actual
+directory and Git registration removal; respect tool ownership and live dependencies. If it
+cannot be used, report the concrete remaining deletion, not a fictional completed cleanup.
+For tracked obsolete direction files use explicit `git rm` paths, with historical source links;
+for disposable ignored files remove exact validated targets. Keep the required unique evidence,
+not entire old workspaces. Measure allocated bytes before/after across deletion and any necessary
+single-file relocation; moving bytes elsewhere on the same disk is not freeing those bytes.
+
+For new work, keep compact summaries/source/native status in Git and collect bulk outputs
+into durable direction/tag storage at the completed-result boundary. The current launcher's
+author-relative `runs/<direction>/<tag>` output binding stays unchanged; do not redirect it
+with symlinks or migrate an in-flight attempt. Data collection and checkout retirement are
+separate operations. The owning session performs the boundary cleanup itself; a missing
+terminal witness, live observer or Pro delivery remains a concrete reason to keep a checkout.
 
 Historical frozen runners and `hmasd_run.py` retain their old interfaces at their recorded
 SHAs. They are not silently claimed to have this new boundary. The first migrated existing

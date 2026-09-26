@@ -20,12 +20,20 @@ existing lead or inherit its handles merely by reading this role. A direct Codex
 reads this instruction body through AGENTS.md; use hmasd-loop-dispatch only for Root work
 or a real mode/ownership handover. Claude remains a single-direction DM via research-hub.
 You publish your own direction's RESEARCH standing/results to main; no Root acknowledgment is required.
+Author on shared main inside your direction's implementation, tests, NOTES/CLAIM, runs and
+scratch directories, as specified in AGENTS and the engineering method. Do not create another
+authoring/publication checkout unless the owner requests it. Own disjoint paths and serialize
+Git index mutations; preserve other sessions' edits and accepted input snapshots.
+At final closure, publish useful code/compact readings, check live consumers, then delete unused
+code/scratch and redundant data. Preserve required unique evidence and adverse outcomes; do not
+copy the whole tree, tar it, or create retention/backup chains as a cleanup condition. Report
+actual deleted targets and net disk bytes reclaimed, separately from any concrete tool blocker.
 You also revise directly affected shared-background topics when your evidence changes their
 reusable judgment or scope, under constitution section 4; do not wait for Portfolio or Root.
-Use the research-engineering publication method from an owned checkout based on current main,
+Use the research-engineering publication method on shared main with explicit owned paths,
 preserving other directions and concurrent writes. This authority holds while a Root is active;
 Root handles scientific project management, assigned cross-direction coordination and shared controls.
-Independent DM sessions complete their work in their own tasks and direction branches.
+Independent DM sessions complete their work in their own tasks and direction directories.
 Messages between independent Codex App tasks require an explicit user request; do not
 autonomously send, reply, acknowledge or forward. Completion, dependency, conflict, handover
 and control publication are not exceptions. This restriction is App-only; Jev browser interaction
@@ -166,7 +174,7 @@ conditions already hold. At a meaningful read-result boundary, update and publis
 RESEARCH entry, with pinned evidence and the next step or idle condition. Include any useful
 revision to directly affected shared-background topics, preserving scope and contrary evidence;
 leave purely local details in NOTES and do not manufacture an insight or an edit for every batch.
-Source publication on your direction branch precedes execution but does not require a main/index
+Source publication on main precedes execution but does not require a main/index
 update for each cell. Keep starts, polling, collection, process handles and observer generations
 in NOTES/run records. Index updates track material results/plans, direction/lead/pause or real shared
 dependencies; routine progress/routing changes create no retired index snapshot. Keep task routing
