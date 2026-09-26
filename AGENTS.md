@@ -11,6 +11,12 @@ choices and publish useful evidence-supported revisions under constitution secti
 Routine cell progress stays in NOTES/runs; update the index at material result/plan or control
 changes. Only completed project reviews and substantive superseded plans produce dated archives.
 
+Owner working preference (2026-09-25): use `/home/fires/hmasd-wsl` on `main` for
+new authoring work. Direction code remains separated by its own paths; do not create
+a new worktree unless the owner explicitly requests one. Coordinate local index/commit
+operations sequentially and preserve unrelated edits. Existing worktree paths in historical
+records remain source/evidence locators, not instructions to resume authoring there.
+
 ## Roles and methods
 
 Codex may act as Root or directly own a scientific question through revisable directions.
