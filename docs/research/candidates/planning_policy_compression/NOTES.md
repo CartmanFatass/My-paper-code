@@ -258,3 +258,28 @@ only the local host, so the remote checkout follows the configured remote Git pr
 The source snapshot is disposable after terminal collection; the remote run directory and
 verified local copy are durable evidence. Admission and accepted-handle observation are
 the next actions; no second scientific permission or new Pro consultation is required.
+
+## 2026-09-25 — B01 accepted native operation and detached observation
+
+The fixed four-fit B01 is accepted. Its authoritative command, published source, fresh
+control observation, output location and native identities are in the
+[launch manifest](../../../../runs/planning_policy_compression/b01_bc_wbc_s925941_20260925/launch-manifest.json).
+The [admission preflight](../../../../runs/planning_policy_compression/b01_bc_wbc_s925941_20260925/admission-preflight.json)
+passed on the actual node with 15,287,214,080 available physical bytes against the
+4,294,967,296-byte floor. The launch checked current pause/lead, published inputs and
+duplicate claims. The [initial native status](../../../../runs/planning_policy_compression/b01_bc_wbc_s925941_20260925/native-status.initial.json)
+at 02:58:20 UTC on September 26 records accepted admission, consistent records and matching
+live runner/supervisor identities. The outer preparation supervisor's successful exit is
+not a scientific endpoint. The runner-written
+[configuration](../../../../runs/planning_policy_compression/b01_bc_wbc_s925941_20260925/config.json)
+agrees with the fixed two-block, two-stage, four-fit contract; no result has been read.
+
+Remote checkout preparation reported that historical commit
+`e0b4af9d04f8a4a53368e3ca0055007c82141449` exists in the commit-graph but not in the object
+database. Preparation nevertheless resolved and checked out the exact published source,
+and native admission passed. This is a retained repository warning, not a claim that all
+historical objects are intact; no history repair or object deletion was attempted.
+
+Observe this accepted operation through the native status handle using `hmasd_wait.py`.
+Completion, error or the bounded checkpoint returns control to this same session.
+Reconcile uncertain observations against this handle; do not repeat the accepted launch.
