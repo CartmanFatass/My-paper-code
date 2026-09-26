@@ -777,3 +777,29 @@ unchanged teacher/feature semantics; do not redo full mechanism validation. Scie
 fixtures are tests and never confirmation observations. Independent engineering Reviewer
 checks the new RNG/block/evaluation and inference accounting; DM accepts the full diff.
 Implementer owns only those code/test paths, no NOTES/claim/index/Git, Pro, children or launch.
+
+## 2026-09-25 — B02 engineering accepted for the frozen confirmation
+
+I read and accept the complete B02 orchestration, admitted entry and focused tests, including
+the final partial-cost repair. Independent Reviewer found one material recovery issue:
+a later evaluation-arm failure could omit the completed BC/WBC full deployment boundaries
+from the FAILED summary. The repaired live block timing preserves each completed method's
+setup, deployment and attached calibration cost; the failed arm records measured attempted
+cost and executed trace prefix without a completed-method claim or formal verdict.
+
+Implementer reports five focused tests passed in 12.51s and py_compile passed. Reviewer
+independently passed sign/admission checks (2) and the repaired later-arm failure regression
+(1), and found no remaining material issue. Its independent finite binomial/CP arithmetic
+agrees for all six positive-block counts. Checks cover five distinct training/evaluation
+blocks, within-block pairing, optimizer continuation, fixed work accounting, zero student
+queries and failure preservation. Fixtures are not research observations. B01 policy,
+teacher, features and shared launch/admission source remain byte-identical to the accepted
+B01 source; only the three scoped B02 code/test files and this notebook are added here.
+
+Fresh origin/main is `1e6bb2b6cb379301edbbafd3632381becd3a04e6`: owner pause remains lifted,
+this direction is confirming under the same independent Codex DM, and Claude FSD remains
+paused. This scientific batch and ten-fit cost remain exactly as the claim above. Publish
+this accepted implementation before requesting one native B02 launch; use the existing
+remote author/output checkout and a new exact-SHA source snapshot, preserving B01 outputs.
+Native admission and actual-node resource checks still precede result execution. No B02
+result-bearing attempt has started at this acceptance boundary.
