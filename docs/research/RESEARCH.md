@@ -719,7 +719,8 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | archived | Codex DM (independent session) | **B02完整，当前固定库伙伴混合追加结束。** 三臂各一fit均学到有用行为；M−F2@训练排除伙伴3为+.007696 J/+.605750服务，条件世界区间跨0；对已见伙伴2为−.013781/−.921063。M−旧3/3均值也正，仍有10/32损失世界。H不替代主比较，未建立稳定混合程序优势或等价。3fits、1.288M团队步、71.14min科学墙钟和全部原始产物已核验保全；原DM复用完整Pro并结束B02追加，旧操作无后继。Root现为新的训练不确定性问题选择[两组F2/M前瞻复制](#current-research-plan)，尚未登记新DM或运行；不修改旧结果/终态。保留全部响应资产与广义协调问题。[完整结果](candidates/controller_composition/NOTES.md#2026-09-25--b02-complete-learned-responses-conditional-transfer-gain-and-seen-partner-cost)；[停止范围与可行替代](candidates/controller_composition/NOTES.md#2026-09-25--end-current-fixed-bank-mixing-investment-retain-the-complete-response-assets)；[任务路由](#session-routing)。 |
+| `planning_policy_compression` | 在相同合法历史和有限数据下，能否学习低成本历史策略，保留普通规划的完整用途并减少过滤/模拟计算？ | exploring | Codex DM (independent session) | owner于2026-09-25要求推进已采纳A计划。首项两区组BC/WBC探索共4fits，98,304训练＋147,456评价团队步，另计过滤/校准/查询及优化；固定一次共同roll-in，正普通项与阶段均值1权重，部署同时读学生−AF、学生−教师、WBC−BC与完整成本。原有限模型B01/B02及其停止范围保留。复用空闲fsd-a工作区，新的独立DM会话创建后登记实际地址；没有已接受结果操作。[现行计划](#current-research-plan)、[完整建议与决定](archive/2026-09-25/RESEARCH-decision-learning-adopted.md#decision)。 |
+| `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | exploring | Codex DM (independent session) | **B02完整，当前固定库伙伴混合追加结束。** 三臂各一fit均学到有用行为；M−F2@训练排除伙伴3为+.007696 J/+.605750服务，条件世界区间跨0；对已见伙伴2为−.013781/−.921063。M−旧3/3均值也正，仍有10/32损失世界。H不替代主比较，未建立稳定混合程序优势或等价。3fits、1.288M团队步、71.14min科学墙钟和全部原始产物已核验保全；原DM复用完整Pro并结束B02追加，旧操作无后继。owner现要求执行Root已选择的[两组F2/M前瞻复制](#current-research-plan)：4fits、1.44M训练＋304k评价团队步，保留配方与三伙伴完整向量；复用空闲fsd-c工作区，新独立DM创建后登记地址。旧B02结果/终态不变，尚无新结果操作。保留全部响应资产与广义协调问题。[完整结果](candidates/controller_composition/NOTES.md#2026-09-25--b02-complete-learned-responses-conditional-transfer-gain-and-seen-partner-cost)；[停止范围与可行替代](candidates/controller_composition/NOTES.md#2026-09-25--end-current-fixed-bank-mixing-investment-retain-the-complete-response-assets)；[任务路由](#session-routing)。 |
 | `finite_model_decision_value` | 同一有限合法数据和计算下，环境参数与隐状态的不确定性何时改变有用的动作排序与完整团队后果？ | archived | Codex DM (independent session) | **B02完整，当前NEAR预算修补投入结束。** 主交互总差+4、均值+.015625[−.016865,+.048115]；U自身+4、P0，预期点符号弱相容但完成差稀疏且异质。初始根精度改善，未确立有用U修复；P/U更多预算均减少等待。保留低预算P对AF+32任务及全部损失世界。256闭式拟合、0策略fit、122,880团队步、215,389,184模型分支、149.27s科学墙钟完整保全。复用已读Pro的适用判读/关闭建议，比较复制、估值修订、直接学习与项目转向后未选进一步工作；无活动操作、开放Pro或后继，不否定广义有限知识问题。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--b02-complete-precision-changed-native-budget-response-remains-small-and-uncertain)；[决定与范围](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--end-current-near-budget-repair-investment-retain-the-finite-result)；[任务路由](#session-routing)。 |
 | `spatial_demand_generalization` | 有限空间任务训练覆盖如何影响普通多智能体控制在留出布局上的用途与专门化代价？ | archived | Codex DM (independent session) | **C01完整，当前空间混合路线新增投入结束；保留U。** hotspot M−U为J −.025632493、服务−1.191150人/步，t95为[−.067046834,+.015781848]/[−3.827524,+1.445224]；联合正均值未建立，不宣称等价或确定有害。十fit各自三个家族的J/服务均值均改善，uniform/cluster额外均值均不利，A2/C01第二配对正例与局部损失保留。10 fits/4.32M团队步完整保全。完整Pro答复已核验保存并逐项判断；旧/新面板回放有有限解释价值，但当前不值得全部成本，四中心与泛化调参也未选。无第六块、活动操作、开放Pro或已选后继；不外推为所有覆盖学习无用。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/b35996ba188d31cc01b3a422a47c24b1fde6bce3/docs/research/candidates/spatial_demand_generalization/NOTES.md#2026-09-25--c01-complete-joint-positive-mean-not-established)；[完整建议与DM决定](https://github.com/CartmanFatass/My-paper-code/blob/287d16776ca93d5ea0bfa56e15adfedb05501097/docs/research/candidates/spatial_demand_generalization/NOTES.md#2026-09-25--decline-panel-replay-and-end-current-spatial-mixing-investment)。[任务路由](#session-routing)。 |
 | `uav_service_auxiliary` | 在 S7 能源约束下，怎样把能量恢复与控制转成完整服务及返航风险的净收益？ | archived | Codex DM (independent session) | **当前S7修补投入结束，保留O+F。** 完整Pro已核验保存，DM不购买进站模型或常数提前比较；几何相关估算差异真实，但未测试闭环收益仍未知。B11的恢复增加、完整J−3.347054及等待/电池代价和全部有利世界保留；不否定普通反馈既有用途或更广服务—风险问题。0追加fit/评价，无活动操作、开放Pro或已选后继。[完整B11](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--b11-complete-guarded-continuity-changes-recovery-but-adds-no-mean-complete-utility)；[完整建议与DM决定](candidates/uav_service_auxiliary/NOTES.md#2026-09-25--complete-approach-advice-read-end-current-s7-repair-investment-and-retain-o-plus-f)。[任务路由](#session-routing)。 |
@@ -771,7 +772,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 2026-09-25，Root已完成全部旧方向收尾复核及本轮完整Pro咨询，选择下一波优先研究：
 **压缩已有规划用途，以及检验伙伴曝光的训练取舍是否可重复。**
 [完整问题、实质异议和Root决定](archive/2026-09-25/RESEARCH-decision-learning-adopted.md#decision)
-保留成本、替代方案和解释边界。此前各DM均结束原投入；目前无新结果操作或新DM执行登记。
+保留成本、替代方案和解释边界。此前各DM均结束原投入；owner现要求推进A/R，两项已登记为exploring，Root正创建新的独立DM会话；当前尚无新结果操作。
 
 | 优先项 | 科学问题与下一项完整比较 | 条件成本与读法 |
 | --- | --- | --- |
@@ -800,8 +801,8 @@ DM主持一个问题，可调整方法和转向，但应保存反证、给出下
 既有容量、人数/布局混合、S7阈值和消息时序配方的停止范围保留；TRDL的复制反号也保留，当前
 不原样重启。尾部、真实能力、回合内成员变化及独立伙伴学习仍可由新的具体科学用途被选择，
 没有机械补位顺序。[本地库入口与结构背景](#structural-research-background)继续用于实际设计。
-本轮只发表项目选择和清理成果，未启动新实验或创建/恢复其他App会话；实际承接时再登记新的
-DM地址与输入。优先配置中的wsl_4070，按真实节点资源准入；**Claude FSD继续owner手动暂停，
+owner现已授权推进，A/R由两个新的独立DM承接；复用两个空闲旧worktree并保留原分支，
+实际会话地址由原生工具返回后登记，不恢复任何旧操作。优先配置中的wsl_4070，按真实节点资源准入；**Claude FSD继续owner手动暂停，
 G33冻结**，旧接受句柄、终态和原始证据不改。
 
 ### Shared runtime diagnosis
