@@ -121,15 +121,46 @@ def test_batched_step_holds_central_snapshot_for_k_steps(tmp_path, episode_lengt
     agent, _ = tr.new_agent(config, device=torch.device("cpu"), log_dir=tmp_path / "logs",
                             seed=spec.seed)
     seen = []
+    # Legacy clear_buffers (ordinary_completed_segments = False) empties env_timers; the next
+    # step() re-initialises every lane missing from it (timer 0, np.random.randint skills,
+    # _reset_hidden_state_arrays_for_env) before the actor forward.  Record each such in-step
+    # reset: the interaction index, the lane and whether its GRU state was nonzero before.
+    in_step = [None]
+    step_resets = []
+    original_step = agent.step
+    original_reset = agent._reset_hidden_state_arrays_for_env
+
+    def step(*args, **kwargs):
+        in_step[0] = len(seen)
+        try:
+            return original_step(*args, **kwargs)
+        finally:
+            in_step[0] = None
+
+    def reset(env_id):
+        allocated = agent.actor_hidden_np is not None   # None before the first forward
+        if in_step[0] is not None and allocated:
+            before = (bool(np.any(agent.actor_hidden_np[env_id] != 0)),
+                      bool(np.any(agent.critic_hidden_np[env_id] != 0)))
+        original_reset(env_id)
+        if in_step[0] is not None:
+            if allocated:
+                assert not np.any(agent.actor_hidden_np[env_id])
+                assert not np.any(agent.critic_hidden_np[env_id])
+            step_resets.append((in_step[0], int(env_id), before if allocated else None))
+
+    agent.step = step
+    agent._reset_hidden_state_arrays_for_env = reset
 
     def observe(agent, step_data, step):
         seen.append((agent._central_snapshot_states[:spec.lanes].copy(),
-                     np.asarray([agent.env_timers.get(lane) for lane in range(spec.lanes)])))
+                     np.asarray([agent.env_timers.get(lane) for lane in range(spec.lanes)]),
+                     agent.actor_hidden_np[:spec.lanes].copy()))
 
     result = tr.collect_and_train(agent, agent.config, spec, feedback=True, observe_step=observe)
     previous = np.zeros_like(seen[0][0])
     decided_steps = []
-    for index, (snapshot, timers) in enumerate(seen):
+    for index, (snapshot, timers, _) in enumerate(seen):
         changed = np.any(snapshot != previous, axis=1)
         np.testing.assert_array_equal(changed, timers == 0, err_msg=f"interaction {index}")
         decided_steps.append(np.flatnonzero(timers == 0).tolist())
@@ -141,9 +172,22 @@ def test_batched_step_holds_central_snapshot_for_k_steps(tmp_path, episode_lengt
     expected = [[0, 1] if (index % episode_length) % 10 == 0 else [] for index in range(len(seen))]
     assert decided_steps == expected
     live = [r["live_lanes_at_boundary"] for r in result["rollouts"]]
+    # Both lanes are re-initialised inside step() at the first interaction and at the first
+    # interaction after the rollout boundary (index 25), in both cases.
+    assert sorted({(index, lane) for index, lane, _ in step_resets}) == \
+        [(0, 0), (0, 1), (25, 0), (25, 1)]
+    boundary = {lane: before for index, lane, before in step_resets if index == 25}
+    # The GRU state the actor carried out of interaction 24 was nonzero in both cases.
+    assert all(np.any(seen[24][2][lane]) for lane in range(spec.lanes))
     if episode_length == 25:
+        # Aligned: both lanes ended at step 24 and were reset as new episodes before the
+        # boundary, so the in-step re-init zeroes nothing mid-episode.
         assert live == [0, 0]
+        assert boundary == {0: (False, False), 1: (False, False)}
     else:
         assert live[0] == 2 and result["rollouts"][0]["live_lane_timers_reset_by_clear"] == 2
-        timers = [t.tolist() for _, t in seen]
+        timers = [t.tolist() for _, t, _ in seen]
         assert timers[24] == [4, 4] and timers[25] == [1, 1] and timers[30] == [0, 0]
+        # Live at the boundary: the step-25 agent.step zeroes a nonzero mid-episode actor and
+        # critic GRU state before the actor forward (episode step 25, not an episode start).
+        assert boundary == {0: (True, True), 1: (True, True)}
