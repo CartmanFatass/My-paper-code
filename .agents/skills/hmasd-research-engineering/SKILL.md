@@ -166,6 +166,38 @@ keep the checkout. Preserve failed/adverse outputs and all promised measurements
 tracked artifacts and accepted/frozen output contracts are unchanged; do not untrack, move,
 delete or convert old evidence as part of a routine result publication.
 
+### Worktree lifecycle at a completed work boundary
+
+The owner requested systematic worktree/data separation on 2026-09-25. The owning DM
+includes retention and checkout disposition in its normal completion work, without a Root
+acknowledgment or another task. Reuse a suitable free authoring checkout for a selected
+continuation; a new batch, direction name or publication alone does not require another one.
+A temporary publication checkout can be reused during ongoing work and retired when it
+has no next use. Three concurrent research tracks is not a three-worktree quota.
+
+At final closure or an actual checkout replacement: publish useful code and compact readings,
+preserve unique Git commits on durable refs, retain needed raw/partial/failed outputs outside
+all worktrees, verify recovery, then retire the unused checkout with the available native
+worktree tool. Keep the chat open. Check current task ownership, accepted operations,
+observers/Pro delivery, process references and pinned/shared status before retirement.
+Idle UI state, a completed individual cell and an archived direction label do not prove
+that those dependencies ended. Never kill a shared browser or worker to clear a checkout.
+
+For a legacy inactive checkout, `scripts/hmasd_worktree_data.py` provides preview, copy-only
+retention and independent verification; exact commands and restoration are in the
+[execution method](references/local-execution.md#source-and-publication-worktree-reclamation).
+The data package's machine manifest contains file hashes and source identity, not a new
+research ledger. Link its durable node/path in the existing NOTES or run metadata. Its
+success does not authorize deletion or prove scientific completion. If the current native
+tool cannot archive another chat's worktree, preserve it and report that specific remaining
+action; do not substitute raw directory deletion or an App message to the old DM.
+
+The completion boundary is the cleanup trigger. Do not add an age sweep, recurring model
+monitor or automatic deletion on process exit: result reading and accepted-operation
+reconciliation must finish first. Reclaim exact completed launcher snapshots with the
+existing snapshot collector. Interrupted cleanup can resume against the same retained
+files and verified source identity; it does not restart research.
+
 ## Execution and admission
 
 1. Commit and push the exact inputs.

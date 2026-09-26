@@ -163,6 +163,19 @@ Git 的分支/worktree 服务于真实隔离需要，不再每方向强制建立
 拒绝终态不明、进程引用、独有文件或源码提交无持久引用的快照。普通 DM/发布 worktree
 需另行核对任务与产物依赖；完整流程见[执行说明](../../.agents/skills/hmasd-research-engineering/references/local-execution.md#source-and-publication-worktree-reclamation)。
 
+Owner 在 2026-09-25 要求把数据与 worktree 分开，并将回收纳入日常完成流程。
+源码由 Git 提交/分支保留，可复用的 worktree 只承担当前工作；完整原始数据、检查点、失败及
+中断输出存放在工作区之外。本机沿用 `/home/fires/hmasd-artifacts/`，遗留保全包放在
+`worktree-retention/<checkout>-<date>/`。`scripts/hmasd_worktree_data.py` 的 `preview / retain / verify`
+分别完成预览、只复制保全和独立哈希校验；包内保留原相对路径，`manifest.json` 记录内容哈希及
+源码身份。它不删除源、不代替 Git 历史，也不把进程消失当作科学完成。
+
+回收触发点是 DM 完成研究或确实更换工作区时：先发布有用结果、核对外部数据，再复用或通过
+原生 worktree 工具归档不用的目录。发布目录仍有后续用途就复用；不按每次实验/方向名字创建
+新目录，也不按年龄后台扫删。当前三个并发是科研运行资源限制，不是 worktree 个数规则。
+存在训练、观察者、Pro 或共享浏览器依赖时保留目录。归档工具若仅能处理本聊天附件，应明确
+报告尚待原生回收的目录，不用 shell 删除、自动唤醒旧 DM 或新建管理台账绕过。
+
 发布边界与写入责任见[宪章 §4](OPERATING_CONSTITUTION.md#4-three-record-types-and-one-repository-table)，
 具体操作见 engineering 的 Publishing direction results。科学结果/计划或控制发生实质变化时更新
 RESEARCH；同批次各 cell 的启动、观察、收取和验收留在 NOTES/runs，不逐次维护 main 或生成快照。

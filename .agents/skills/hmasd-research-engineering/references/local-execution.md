@@ -123,10 +123,19 @@ Apply rechecks each selected snapshot under the admission lock and removes only 
 worktree, without force. A terminal exit witness, absent native processes, consistent
 claim/source identity, externally retained outputs, durable branch/tag reachability and
 absence of dirty, untracked or ignored files are required. Local process references also
-block reclamation. Unknown/unclaimed operations and unsupported process inspection remain
-preserved; age, exit-zero alone or an apparently idle direction does not grant deletion.
+block reclamation. Unknown operations and unsupported process inspection remain preserved;
+age, exit-zero alone or an apparently idle direction does not grant deletion.
 Keep claims, manifests, exit witnesses and run artifacts: they retain status and duplicate
 prevention after the source directory is gone. Cleanup grants no relaunch.
+
+An explicitly inspected **unclaimed source-only copy** may be reclaimed with
+`--unclaimed-source --snapshot <exact-id>` (add `--apply` after preview). This special mode
+requires zero associated claims, detached HEAD, no changed/untracked/ignored files, a durable
+source ref and no process references. A present claim always follows the original terminal
+witness checks. Missing claims never become invented exits or scientific acceptance.
+The maintained launcher holds the shared admission lock from snapshot preparation through
+claim registration, excluding source GC during this interval. Do not race this mode with
+an older frozen launcher that lacks that protection; choose a quiescent boundary instead.
 
 On sparse remote checkouts, a missing manifest can be a checkout omission. Check the
 published commit for the exact operation's original records and match its claim, SHA,
@@ -136,12 +145,52 @@ and untracked outputs), then preview again. Do not synthesize terminal records o
 a copied record from another node as local evidence. Retain the run directories in the
 sparse selection so a later checkout does not discard the recovered status handles.
 
-Ordinary authoring/publication worktrees are outside this collector. At a completed
-publication boundary, remove an owned temporary publication checkout with ordinary
-`git worktree remove <path>` only after verifying its commits are durably reachable,
-including ignored/untracked evidence in the clean-tree check, and ensuring no active task,
-process or accepted operation depends on the path. Retain branches and run evidence.
-Never sweep all worktrees, delete by age or use `--force` to bypass these checks.
+Ordinary authoring/publication worktrees are outside this collector. Reuse a suitable free
+checkout before creating another. At a completed work boundary, preserve the useful code,
+readings and raw data before retiring an unused checkout. Use the native worktree archive
+tool for managed checkouts after inspecting its artifacts and ownership; it preserves Git
+changes but does **not** save ignored data. A tool scoped to the current chat cannot retire
+another chat's attachment. Keep that directory and name the limitation instead of bypassing
+it with shell deletion or cross-task messaging. Retain branches and run evidence, and verify
+the actual registration/directory outcome. Never sweep worktrees, delete by age or use force.
+
+On Linux, the copy-only retention helper for an inactive legacy worktree is:
+
+```bash
+<control-plane-python> scripts/hmasd_worktree_data.py preview --root <worktree> --dest <external-package>
+<control-plane-python> scripts/hmasd_worktree_data.py retain --root <worktree> --dest <external-package>
+<control-plane-python> scripts/hmasd_worktree_data.py verify --dest <external-package>
+```
+
+Use the configured control-plane interpreter. `--sudo-process-scan` is the same read-only
+process-inspection option described above. On this Linux host the existing durable area is
+`/home/fires/hmasd-artifacts/`; legacy packages live under
+`worktree-retention/<checkout>-<date>/`. Keep remote originals at their recorded node paths.
+The helper preserves runs and useful scratch (including failed runs), changed tracked files,
+untracked and ignored non-cache files at `files/<original-relative-path>`, with HEAD, refs,
+deleted-path metadata, byte counts, modes and SHA-256 in `manifest.json`. Conventional
+interpreter/build caches are excluded; no source file is deleted. It refuses active or
+uncertain process references, redirected/special files, destination overlap and conflicting
+copies. Changed Git index states are refused, so unique staged versions cannot be silently
+lost; preserve or commit that work explicitly first. An interrupted copy can resume to the same destination. Independent verification
+reads the retained bytes and still works after the source directory is absent.
+
+This package is data preservation, not a substitute for Git history. Keep its recorded
+branch/commit reachable. For recovery, restore the native worktree or check out that commit,
+verify the package, then copy the needed relative files back; deleted tracked paths remain
+explicit in the manifest rather than being silently applied. Original frozen files are
+copied byte-for-byte, not edited.
+Before losing an old absolute result path, reconcile all accepted handles and retain the
+original claim/manifest/witness; native status recovery may require restoring the old path.
+Store the verified package locator in the existing NOTES or run metadata. A local external
+copy separates data from worktree cleanup but is not protection against failure of that disk.
+
+For new work, keep compact summaries/source/native status in Git and collect bulk outputs
+into durable direction/tag storage at the completed-result boundary. The current launcher's
+author-relative `runs/<direction>/<tag>` output binding stays unchanged; do not redirect it
+with symlinks or migrate an in-flight attempt. Data collection and checkout retirement are
+separate operations. The owning session performs the boundary cleanup itself; a missing
+terminal witness, live observer or Pro delivery remains a concrete reason to keep a checkout.
 
 Historical frozen runners and `hmasd_run.py` retain their old interfaces at their recorded
 SHAs. They are not silently claimed to have this new boundary. The first migrated existing

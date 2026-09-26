@@ -1584,27 +1584,29 @@ def launch(args: argparse.Namespace) -> Mapping[str, Any]:
             recovered["request_resolution"] = "existing_operation"
             return recovered
 
-    paths, node, node_entry, python, runner_arguments = _prepare_paths_and_config(args)
-    _require_policy(paths.control_root, args.direction, args.lead, args.remote)
-    _validate_source(paths.source_root, sha, args.remote)
+    # Hold the same lock as source GC from snapshot creation until the claim
+    # is durable. A clean, unclaimed snapshot may otherwise still be preparing.
+    with _claim_lock(probe.git_common_dir) as state_root:
+        paths, node, node_entry, python, runner_arguments = _prepare_paths_and_config(args)
+        _require_policy(paths.control_root, args.direction, args.lead, args.remote)
+        _validate_source(paths.source_root, sha, args.remote)
 
-    command = [str(python), str(paths.runner), *runner_arguments]
-    bootstrap_command = [
-        str(python),
-        str(paths.bootstrap),
-        "_run-admitted",
-        "--runner",
-        str(paths.runner),
-        "--output",
-        str(paths.output_root),
-        "--",
-        *runner_arguments,
-    ]
-    identity_command = [_normalized_path(python), *probe.identity_command_tail]
-    command_sha256 = hmasd_admission.command_digest(python, paths.runner, runner_arguments)
-    claim_key = _claim_key(args.direction, sha, identity_command)
+        command = [str(python), str(paths.runner), *runner_arguments]
+        bootstrap_command = [
+            str(python),
+            str(paths.bootstrap),
+            "_run-admitted",
+            "--runner",
+            str(paths.runner),
+            "--output",
+            str(paths.output_root),
+            "--",
+            *runner_arguments,
+        ]
+        identity_command = [_normalized_path(python), *probe.identity_command_tail]
+        command_sha256 = hmasd_admission.command_digest(python, paths.runner, runner_arguments)
+        claim_key = _claim_key(args.direction, sha, identity_command)
 
-    with _claim_lock(paths.git_common_dir) as state_root:
         claim_path = state_root / f"{claim_key}.json"
         existing = _read_claim(claim_path)
         if existing is not None:

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
+import contextlib
 import json
 import os
 from pathlib import Path
@@ -9,6 +10,7 @@ import shutil
 import socket
 import subprocess
 import sys
+import threading
 import time
 
 import pytest
@@ -31,6 +33,53 @@ SAFE_SNAPSHOT = {
         "cgroup_memory_current_bytes": None,
     },
 }
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux source GC and flock")
+def test_snapshot_preparation_is_serialized_against_unclaimed_gc(launch_repo, monkeypatch):
+    import fcntl
+    from scripts import hmasd_snapshot_gc as gc
+
+    source, _remote, sha = launch_repo
+    args = _arguments(source, sha, "gc-race")
+    args.snapshot = True
+    real_prepare = hmasd_launch.hmasd_source_snapshot.prepare
+    real_lock = hmasd_launch._claim_lock
+    attempted = threading.Event()
+    collected = []
+    monkeypatch.setattr(gc, "_process_references", lambda _path: [])
+    monkeypatch.setattr(hmasd_launch.hmasd_resource_preflight, "capture_snapshot",
+                        lambda: dict(SAFE_SNAPSHOT))
+
+    @contextlib.contextmanager
+    def observe_gc_lock(common):
+        if threading.current_thread().name.startswith("snapshot-gc"):
+            attempted.set()
+        with real_lock(common) as root:
+            yield root
+
+    monkeypatch.setattr(hmasd_launch, "_claim_lock", observe_gc_lock)
+    with ThreadPoolExecutor(max_workers=1, thread_name_prefix="snapshot-gc") as pool:
+        def prepare(author, common, commit, git):
+            snapshot = real_prepare(author, common, commit, git)
+            future = pool.submit(gc.inspect, author, snapshot.name,
+                                 apply=True, unclaimed_source=True)
+            collected.append(future)
+            assert attempted.wait(timeout=5)
+            # Directly prove the exclusion, rather than rely on the GC thread
+            # happening to be slow during a timeout assertion.
+            with (common / "hmasd-admission" / "launch.lock").open("rb") as lock:
+                with pytest.raises(BlockingIOError):
+                    fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            assert snapshot.is_dir() and not future.done()
+            return snapshot
+
+        monkeypatch.setattr(hmasd_launch.hmasd_source_snapshot, "prepare", prepare)
+        manifest = hmasd_launch.launch(args)
+        result = collected[0].result(timeout=10)
+        assert result.get("kind") != "unclaimed_source_only"
+        assert Path(manifest["claim_ref"]).is_file()
+    _wait_for(Path(manifest["output_root"]) / "process-exit.json")
 
 
 def _run(*command: str, cwd: Path, check: bool = True, env=None):

@@ -112,6 +112,56 @@ def test_commit_must_have_durable_ref(operation):
     assert snapshot.exists()
 
 
+def test_explicit_unclaimed_source_removes_only_recoverable_clean_copy(operation):
+    repo, snapshot_id, snapshot, output, claim = operation
+    claim.unlink()
+    evidence = {p: p.read_bytes() for p in output.iterdir()}
+    assert not gc.inspect(repo, snapshot_id)["eligible"]
+    preview = gc.inspect(repo, snapshot_id, unclaimed_source=True)
+    assert preview["eligible"] and preview["kind"] == "unclaimed_source_only"
+    assert snapshot.is_dir()
+    result = gc.inspect(repo, snapshot_id, apply=True, unclaimed_source=True)
+    assert result["removed"] and not snapshot.exists()
+    assert all(p.read_bytes() == content for p, content in evidence.items())
+    assert git(repo, "rev-parse", result["durable_ref"]) == result["sha"]
+    assert not claim.exists()
+
+
+@pytest.mark.parametrize("blocker", ["ignored", "untracked", "unreachable", "live", "attached"])
+def test_unclaimed_source_keeps_ordinary_source_safety_checks(operation, monkeypatch, blocker):
+    repo, snapshot_id, snapshot, output, claim = operation
+    claim.unlink()
+    if blocker == "ignored":
+        (snapshot / "ignored").mkdir()
+        (snapshot / "ignored" / "raw.bin").write_bytes(b"evidence")
+    elif blocker == "untracked":
+        (snapshot / "new.txt").write_text("evidence")
+    elif blocker == "unreachable":
+        git(repo, "checkout", "--detach")
+        git(repo, "branch", "-D", "main")
+    elif blocker == "live":
+        monkeypatch.setattr(gc, "_process_references", lambda _path: ["pid 123 cwd"])
+    else:
+        git(snapshot, "checkout", "-b", "attached")
+    result = gc.inspect(repo, snapshot_id, apply=True, unclaimed_source=True)
+    assert not result["eligible"] and snapshot.exists()
+
+
+def test_unclaimed_option_cannot_bypass_existing_claim_witness(operation):
+    repo, snapshot_id, snapshot, output, claim = operation
+    (output / "process-exit.json").unlink()
+    result = gc.inspect(repo, snapshot_id, apply=True, unclaimed_source=True)
+    assert not result["eligible"] and "witness" in result["reason"]
+    assert snapshot.is_dir() and claim.is_file()
+
+
+def test_unclaimed_option_requires_explicit_ids(operation):
+    repo, *_ = operation
+    with pytest.raises(SystemExit) as error:
+        gc.main(["--repo", str(repo), "--unclaimed-source"])
+    assert error.value.code == 2
+
+
 @pytest.mark.parametrize("record,key,value", [
     ("claim", "sha", "0" * 40),
     ("manifest", "sha", "0" * 40),

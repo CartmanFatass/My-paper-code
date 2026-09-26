@@ -186,8 +186,14 @@ only the engineering method's update-time check of current main and the affected
 standing coordination. Use owned checkouts for concurrent writers and explicit pathspec commits,
 and push completed work and exact result inputs. Branches and worktrees are useful isolation,
 not a mandatory new checkout per direction. Keep accepted source identities and other writers.
-Remove an obsolete worktree only when its unique commits/evidence are preserved and no live
-process or delivery depends on it; verify absence on disk and in the worktree list.
+At an actual assignment/closure/checkout-replacement boundary, inspect existing worktrees
+and reuse a suitable free one. The owning session performs retention and cleanup as part
+of completion under the engineering method's worktree lifecycle. Preserve unique commits
+and verify an external copy of needed ignored data before native archival; preserve any
+live process, accepted handle, observer or delivery dependency. Verify the actual outcome
+on disk and in the worktree list. Native archival scoped to another chat is a tool limit,
+not permission for raw deletion or a message to its old DM. Three research runtime slots
+do not imply three permanent worktrees or require one new checkout per replacement idea.
 
 Publishing methods does not reload running sessions. When the owner's requested research starts
 or resumes, read the current DM body and relevant methods at a safe boundary. At a material

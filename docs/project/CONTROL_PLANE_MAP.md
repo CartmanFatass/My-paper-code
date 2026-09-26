@@ -79,6 +79,11 @@ handle，再完成新观察者 adoption。节点安全底线、declared artifact
 远端使用配置的 agent-task。新实验选机与已有进程恢复是两件事。分支/worktree 按隔离需要选择，
 在完成工作、外部交付或运行前 push，不要求逐提交 scope 尾注或月度治理计数。
 
+**存储与回收：** `scripts/hmasd_worktree_data.py` 为不再使用的工作区提供外部数据保全及哈希
+校验；`scripts/hmasd_snapshot_gc.py` 只回收满足条件的启动源码快照。普通工作区通过原生归档
+工具处理。DM 在完成/更换工作区时执行工程方法的生命周期步骤，原始数据位置写回原 NOTES
+或 run metadata；这些工具不决定研究结束、不重启实验，也不承担后台按年龄删除。
+
 **Pro 路径：** 方向问题写 NOTES，owner-requested/delegated Portfolio 写 RESEARCH → 发布问题 → 当前作者 session
 携带 repository、branch、source_sha、target_path、question_heading、answer_heading、subject key、conversation →
 专用非保护 tab／provider preflight → 固定操作的 Send → 已验证的确定性外部观察（WSL POSIX Codex 使用
