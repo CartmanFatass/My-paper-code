@@ -1013,3 +1013,222 @@ and is to be natively archived then. The reused `fsd-a` checkout is not attached
 the current archive tool cannot retire it. Preserve that directory for retirement through
 its actual owning task/tool; do not bypass the limitation with shell deletion or an App message.
 Its required data is now independently recoverable outside the checkout.
+
+## 2026-09-26 — Draft only: conditional history–weight correspondence on archived data
+
+### Scope, independent review and unresolved project decision
+
+This is the bounded design preparation assigned by the acting Root in the owner's current
+research/workflow review: **0 new fits, 0 scientific evaluation steps, no implementation,
+no Pro Send and no new review/agent**. Current main and origin/main were both
+`723392de5fc6edbc62ce1ed025238429bad66e90` when refreshed. I read the updated constitution
+section 2, the complete DM responsibility body and the [portfolio Decision](../../RESEARCH.md#decision).
+The two old local authoring/publication checkouts are now absent; new authoring is on main.
+The preceding storage/checkout descriptions remain historical observations. B01/B02 and their
+frozen verdicts remain complete. This entry is a candidate draft, **not an accepted new batch**.
+
+Reuse the completed independent Scientific Reviewer's reconstruction and Root's disposition;
+do not substitute this DM's feasibility checks for independent direction review. The material
+dissent in that Decision is preserved verbatim:
+
+> **MATERIAL_DISSENT: yes。** 异议针对把DM缺陷当已证实成因、把权重对应上升为真实后果机制，以及
+> 没有不同科学决策价值的续项投资；不反对PPC冻结判据或伙伴的有限结论。Root已采纳上述限缩，
+> 保留所提候选排序供后续咨询和前瞻设计，
+> 但新的科学投入仍待所需咨询和前瞻设计，不能把本次角色修订当运行许可。
+
+In particular, convenient significance and a narrow claim do not by themselves show that
+B02 was a mistaken investment: its separate panels answered a real recurrence question.
+The project-level Pro consultation is still incomplete after the recorded pre-send HTTP403,
+with `send_attempted=false`; it is Root's existing operation, not a request for this DM to
+retry or substitute a consultation. I have no new material direction objection to preparing
+this limited comparison. The data choice and accounting below are explicit draft details,
+not a self-clearance of that unresolved scientific investment.
+
+### Question and fixed material actually available
+
+Conditional on one archived dataset D, does retaining the estimated-advantage weight's
+correspondence with its particular legal history improve complete native jobs over shuffling
+those weights while preserving each training-stage/teacher-action-label weight distribution?
+The alternative is that this fine correspondence contributes little beyond the remaining
+label-level weighting and changed finite optimization. Neither outcome identifies true
+decision consequences or repairs an identified cause of the teacher gap.
+
+The minimal draft fixes **B02 block0 for both new paired starts**; it does not give each start
+a newly collected dataset. Block0 is the first recorded block, not a selected old checkpoint.
+All B02 results were already development-exposed; this choice is not described as blinded or
+as a representative sample of datasets. Conclusions condition on this single D. Block1 is
+also readable and matches its original artifact hash, but is not another candidate to select
+after seeing new results.
+
+- Local retained input:
+  `/home/fires/hmasd-artifacts/planning_policy_compression/b02_confirm_s925951_20260925/raw/block0_training.npz`.
+- Existing configured-node input, independently read through SSH in this preparation:
+  `hmasd-wsl-node:/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925/raw/block0_training.npz`.
+- Both files are **1,041,468 bytes**, SHA256
+  `eba65c4c17b49a18c6376628913feabac79dd38ba497e8003808d79ebadb55a4`, matching the original
+  [summary.artifacts](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/summary.json).
+  The retained summary matches main byte-for-byte; its SHA256 is
+  `5cd70493b54809fcb9a7a7c361f59baa75d50f4f99aabb62915c83b7fa3d7ada`.
+- Producing source: `443d392ec47a3e53652114d28084d48ce1e5d9e2`, frozen B01 learning source
+  `a576d6b6c830d712703ae069f91f74a57485e264`; original block train/query seeds925951/926151.
+  Current main's PPC model/B01/B02 study and inherited finite-model B01/B02 code have no diff
+  from that producing source. This is source availability, not verification of a future runner.
+
+Read with `allow_pickle=False`: x is float32[1024,96,35]; y is float32[1024,96]; mask is
+bool[1024,96]; delta and mc_se are float64[1024,96]; context/agent are int64[1024]. All numeric
+arrays are finite and eligible y is binary. Context equals repeat(0..511,2), agent alternates
+0/1. Thus stage1 is the 512 sequences with context<256; stage2 is all1024 sequences. Each
+sequence is one private agent history, not another independent training realization.
+
+The archived collector concatenated 256 teacher contexts, 128 old BC roll-in contexts and
+128 old WBC roll-in contexts; labels were computed on those actual histories. The old BC and
+WBC jointly determined the later data distribution. Both new arms receive this identical D,
+including its old WBC-generated histories. There is **no new roll-in, teacher query, calibration
+for training or label acquisition**. This tests conditional retraining, not the value of
+weighting through a complete adaptive collection procedure. Old data acquisition remains sunk
+exposure/cost; its absence from the incremental price does not make the complete method free.
+See the [original assembly](../../../../experiments/candidates/planning_policy_compression/b02/study.py)
+at lines266–321 and the fixed B01 contract above.
+
+### Candidate intervention, matching and randomization
+
+Two arms: O uses original WBC weights; S uses the stratified permutation. Both are newly
+initialized and trained, not a new S compared with a selected old WBC checkpoint. Preserve
+Student's35 lawful inputs, GRU64/27,329 parameters, private episode-reset memory, full H96
+unroll, CPU float32, one Torch/BLAS thread, Adam(lr=.001, original defaults), gradient clip1,
+batch64 agent sequences, and40+40 epochs with the same optimizer continuing across stages.
+Final stage2 is the only deployment endpoint; no checkpoint, seed or permutation search.
+
+For each stage s, compute the original float32 weight array using the existing
+`stage_weights`: g=min(abs(delta)/.25,4) on eligible roots, then
+w=.5+.5*(.1+g)/(.1+mean_stage(g)); weights outside mask are zero. Do not reuse stage2's
+normalizer for stage1. For S, enumerate eligible positions in C-order separately for y=0
+and y=1 **within that stage**, then assign the same weight multiset in a uniformly permuted
+order. Here y is the saved teacher action target, not the action executed by the old roll-in.
+Leave x, y, mask, delta, mc_se, context, agent and sequence/time order unchanged. In particular,
+do not shuffle labels or stored deltas to obtain permuted weights.
+
+Permutations may cross contexts, agents, ticks and collection sources within a label stratum;
+there is no extra agent/source/zero-delta/time stratification. Consequently, the intervention
+also removes weight associations with those variables, and a gain cannot distinguish their
+optimization/difficulty effects from true consequence semantics. Preserve exactly each
+stage/label float32 weight multiset and count, hence its mathematical sum and stage mean.
+Check floating reductions with stated roundoff tolerance; permutation need not preserve a
+floating summation's last bit. Retain the original mean-one normalization. Match eligibility,
+ordinary positive term and loss denominator (eligible count, not weight sum). Matching weight
+distributions does not match gradients, clipping, minibatch weight sums or Adam history.
+
+Array inspection establishes that the permutation is not forced to be trivial:
+
+| Archived stage | Sequences | Eligible roots | y=0 roots / distinct weights | y=1 roots / distinct weights |
+| --- | ---: | ---: | ---: | ---: |
+| teacher-only stage1 | 512 | 8951 | 3581 / 15 | 5370 / 25 |
+| merged stage2 | 1024 | 17825 | 7141 / 20 | 10684 / 28 |
+
+Within each pair, copy one newly initialized state_dict to O/S and use identical epoch
+sequence permutations. Different pairs use distinct initializations, sequence-order streams,
+S-permutation streams and fresh evaluation panels. Draft seed choices, not executed:
+
+| Pair | Torch initialization | Training sequence-order seed | S weight-permutation seed | Evaluation world seed | Evaluation model-address seed |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 0 | 926001 | 926101 | 926201 | 926301 | 926401 |
+| 1 | 926002 | 926102 | 926202 | 926302 | 926402 |
+
+Retain training order addresses `[order_seed,90,pair,stage,epoch]`. For S use
+`SeedSequence([weight_seed,91,stage,label])` with the declared NumPy generator; sample each
+stage/label mapping once and reuse it through that stage's40 epochs. Stage2 gets its own
+mapping over the merged data. Save mapping indices and hashes in the eventual runner outputs;
+do not redraw a mapping to increase the fraction changed or obtain a better outcome. Identical
+weights can remain unchanged after a valid shuffle. No permutation has been generated here.
+These two starts vary initialization/order, S assignment and evaluation together; their
+differences do not isolate any one source of variability. D remains fixed for both.
+
+### Native endpoint, diagnostics and outcome implications
+
+Each pair deploys O/S, both agents jointly replaced, on its own new common256-context panel
+under unchanged CrossingHost H96, four-point persistent physical law and legal four-move
+calibration. Use evaluation phases80/81/82, ids0..255, batch16 and matched addressed exogenous
+streams. The model-address seed is retained for interface identity; student deployment must
+have zero teacher queries/filtering/model branches and zero optimizer updates. Calibration
+generation is shared within a panel, not counted twice as physical collection. No new AF,
+teacher or old-model deployment is included in this minimum candidate.
+
+Primary reading is O−S integer completed-job total and mean/context for each of the two pairs,
+with absolute arm outcomes, descriptive mean across pairs and full per-context differences.
+Retain service, waiting, conflicts, packets/forced sends and every adverse context. Two starts
+are exploratory, not a new sign confirmation or adequate evidence of equivalence. Contexts
+are nested observations; old B02 WBC/BC/teacher results are background, not newly paired controls.
+
+At both stage endpoints, use the same saved stage data and **original** weight definition
+for both arms' ordinary/weighted/nonzero/zero-fallback disagreement and mean abs(delta) times
+disagreement. Their own training losses use different assignments and are not interchangeable
+native outcomes. These diagnostics are in-sample approximate-label readings, not fresh labels
+or an independent mechanism validation. Read the following possible outcomes separately:
+
+1. **Native/diagnostic decoupling:** better original-weight disagreement without better jobs
+   weakens that proxy's use for selecting a method. Native improvement without the predicted
+   diagnostic improvement retains conditional usefulness while weakening the proposed mediator;
+   neither warrants repairing the diagnostic merely to make it agree.
+2. **O has a positive native advantage in both pairs:** retain a limited reason to preserve
+   history–weight correspondence in this D/learner. This may motivate a separately chosen
+   complete-use or transfer comparison, but proves neither true-regret semantics nor a novel
+   algorithm. Magnitudes, losses and other native costs still determine whether it matters.
+3. **S is similar or better in the observed native totals:** lower preference for investing in
+   fine correspondence here. Similar observed values are not statistical equivalence. The
+   result does not establish that generic weighting beats ordinary BC, or that weighting never
+   helps in another dataset/collection procedure; those would require different comparisons.
+4. **Mixed, small or imprecise readings:** retain the unresolved conditional observation and
+   the full vector; do not add seeds, change strata or select a checkpoint after seeing scores.
+   Any subsequent investment needs a different prospective reason tied to an actual decision,
+   not a rescue of this draft's expected sign. Technical incompleteness is not one of these
+   scientific outcomes; preserve all started fits/partial evidence with no automatic retry.
+
+These are exploratory implications, not four new acceptance thresholds. There is no mandatory
+mechanism proof or toy-positive gate before a separately worthwhile native UAV experiment.
+
+### Verified incremental price, optional BC and remaining material gaps
+
+The Reviewer's four core counts are correct for the specified shape:
+
+| Quantity | Two-arm, two-start candidate | Arithmetic |
+| --- | ---: | --- |
+| New policy fits | 4 | 2 arms × 2 starts, each40+40 epochs |
+| Optimizer updates | 3840 | 4 × 40 × (512/64 + 1024/64) |
+| Optimization agent-time rows | 23592960 | 4 × 40 × (512+1024) × 96 |
+| New evaluation team ticks | 98304 | 2 pairs × 2 arms × 256 × 96;1024 episodes |
+| New training-collection ticks / teacher queries / model branches | 0 | archived supervision only |
+| Evaluation calibration | 512 contexts / 2048 single-agent moves | 2 panels × 256 × 4 |
+| Endpoint-diagnostic forward rows | 589824 | 4 fits × (512+1024) × 96 |
+
+Reusing the existing calibration helper also computes512 closed-form calibration posteriors;
+these are not policy fits and the student does not consume the posterior. Count their work
+separately, or explicitly record an implementation choice to omit that unused computation;
+the draft reuse price includes it. Calibration moves are outside the98304 team-tick subtotal.
+No environment rollout, policy forward/update or new permutation occurred in this preparation.
+
+The old B02 fit subtotal236.9011s/10 ×4 gives **94.7604s**, consistent with the Reviewer's
+rough95s estimate. It is a historical-rate estimate for fitting, not a measured new batch or
+complete wall-time quotation. Loading/checking fixed inputs, constructing mappings, diagnostics,
+evaluation/calibration, initialization/output, native occupancy, implementation, review,
+publication and readback have real costs; the full future wall time remains **unknown**.
+Keep original acquisition exposure and these incremental costs distinct, not erased or doubled.
+
+Ordinary BC is **not in the current minimum**. A third arm would be useful if the actual
+decision became whether to discard fine correspondence *and* choose ordinary imitation versus
+label-marginal weighting: O−S alone cannot decide that, and old BC is not a fresh comparator.
+Adding a newly trained BC per start at the same horizon costs2 fits,1920 updates,11796480
+optimization rows,49152 evaluation team ticks and294912 diagnostic forward rows, with no extra
+panels/calibration when shared. Totals would be6 fits,5760 updates,35389440 rows,147456 evaluation
+ticks and884736 diagnostic rows. No such third-arm decision or execution is made here.
+
+Required training material and source are available locally and on the configured node; no
+missing-label reconstruction or data-copy operation is needed for this draft. A new runner is
+**not implemented**: the old entrypoints collect new data and hard-code B01/B02 organizations,
+and `train_stage` recomputes weights internally without an explicit external-weight input.
+A future bounded implementation would need archived stage loading, an explicit weight-array
+path, saved stratified mappings and the two-pair evaluator, while preserving original data and
+frozen runners. Its implementation/source checks, actual new input SHA and native admission
+have not happened. This note does not call the old runner, create a new CLAIM or launch handle,
+reactivate the direction table, or resolve the outstanding project consultation. Root retains
+the investment decision and any material scientific disagreement; this publication changes
+only the owned NOTES design preparation.
