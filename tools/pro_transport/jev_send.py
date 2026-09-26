@@ -65,12 +65,29 @@ UPLOAD_LOOKUP = """() => {
   return document.querySelectorAll('input[id="' + input.id + '"]').length === 1 ? input.id : null;
 }""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP)
 
+ATTACHMENT_CARDS = """() => {
+  const form = (__COMPOSER_LOOKUP__)()?.closest('form');
+  if (!form) return null;
+  const labels = [...form.querySelectorAll('button[aria-label]')]
+    .map(button => button.getAttribute('aria-label'));
+  const removals = labels.filter(label => /^(移除 |Remove )/.test(label));
+  const names = [];
+  for (const removal of removals) {
+    const name = removal.replace(/^(移除 |Remove )/, '');
+    if (!name || labels.filter(label => label === name).length !== 1 ||
+        labels.filter(label => label === removal).length !== 1) return null;
+    names.push(name);
+  }
+  return new Set(names).size === names.length ? names : null;
+}""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP)
+
 
 # Read-only page facts. Selectors are reads only; no click or text ever comes from them.
 PAGE_FACTS = """(() => {
   const text = e => (e?.innerText || '').trim();
   const composer = (__COMPOSER_LOOKUP__)();
   const send = (__SEND_LOOKUP__)();
+  const attachmentCards = (__ATTACHMENT_CARDS__)();
   const legacyMessages = [...document.querySelectorAll('[data-message-author-role]')];
   const modernUnits = [...document.querySelectorAll('[data-chatgpt-search-unit-key]')]
     .filter(unit => /:(user|assistant)$/.test(unit.getAttribute('data-chatgpt-search-unit-key') || ''));
@@ -80,6 +97,7 @@ PAGE_FACTS = """(() => {
       ? message.querySelector('.whitespace-pre-wrap') : null;
     return {role: message.getAttribute('data-message-author-role'), text: text(message),
       message_body: messageBody ? text(messageBody) : null, turn_text: text(container),
+      attachment_names: [],
       // Tool work can continue after an opening assistant message with no Stop
       // button. The completed response's feedback control belongs to this turn.
       final_controls: message.getAttribute('data-message-author-role') === 'assistant'
@@ -95,8 +113,17 @@ PAGE_FACTS = """(() => {
       const bubbles = [...unit.querySelectorAll('[data-user-message-bubble="true"]')];
       const bodies = bubbles.length === 1 ? [...bubbles[0].querySelectorAll('.whitespace-pre-wrap')] : [];
       if (bodies.length !== 1) return null;
+      const cards = [...unit.querySelectorAll('[class~="group/resource-card"]')].filter(card =>
+        card.closest('[data-chatgpt-search-unit-key]') === unit && !bubbles[0].contains(card));
+      const names = cards.map(card => {
+        const spans = [...card.querySelectorAll('span[title].truncate.text-default.text-sm.font-semibold')];
+        if (spans.length !== 1) return null;
+        const name = text(spans[0]);
+        return name && spans[0].getAttribute('title')?.trim() === name ? name : null;
+      });
+      if (names.some(name => !name)) return null;
       return {role: 'user', text: text(unit), message_body: text(bodies[0]),
-        turn_text: text(unit), final_controls: false};
+        turn_text: text(unit), attachment_names: names, final_controls: false};
     }
     const bodies = [...unit.querySelectorAll('[data-markdown-text-style="assistant-message"]')];
     const siblings = modernUnits.filter(other =>
@@ -126,6 +153,7 @@ PAGE_FACTS = """(() => {
     composer: composer ? (composer.tagName === 'TEXTAREA' ? composer.value.trim() : text(composer)) : null,
     send_button: !!send,
     form_text: text(composer?.closest('form')),
+    attachment_cards: attachmentCards,
     user_turns: users.length ? userTurns : [],
     stop_button: !!document.querySelector('[data-testid="stop-button"]'),
     login: !!document.querySelector('[data-testid="login-button"]'),
@@ -143,7 +171,7 @@ PAGE_FACTS = """(() => {
     page_error: location.protocol === 'chrome-error:' || /aw, snap|page unresponsive|页面崩溃/i.test(document.title),
     users, assistants, turns,
   };
-})()""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP).replace("__SEND_LOOKUP__", SEND_LOOKUP)
+})()""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP).replace("__SEND_LOOKUP__", SEND_LOOKUP).replace("__ATTACHMENT_CARDS__", ATTACHMENT_CARDS)
 
 NODE_FACTS = """(node => {
   const e = window.__jevFast?.nodes.get(node);
@@ -392,8 +420,26 @@ def ensure_effort(browser, effort):
     return page, proof
 
 
-def attach(browser, path):
+def attachment_display_name(cards, original):
+    """Accept one observed file card under its literal or provider collision name."""
+    if cards is None or not isinstance(cards, list):
+        raise PreSendFailure("the composer attachment cards are ambiguous")
+    if not cards:
+        return None
+    if len(cards) != 1 or not isinstance(cards[0], str):
+        raise PreSendFailure("the composer does not contain exactly one attachment card")
+    displayed = cards[0]
+    stem, suffix = Path(original).stem, Path(original).suffix
+    collision = re.fullmatch(rf"{re.escape(stem)}\([1-9][0-9]*\){re.escape(suffix)}", displayed)
+    if displayed != original and not collision:
+        raise PreSendFailure(f"the composer attachment card is not {original}")
+    return displayed
+
+
+def attach(browser, path, expected_sha256):
     """Uploads are outside Jev's action space: the composer's own file input receives the file over CDP."""
+    if hashlib.sha256(path.read_bytes()).hexdigest() != expected_sha256:
+        raise PreSendFailure("attachment bytes changed after this key was bound")
     upload_id = browser.evaluate(f"({UPLOAD_LOOKUP})()")
     if not upload_id:
         raise PreSendFailure("the composer has no unique document upload input")
@@ -402,8 +448,11 @@ def attach(browser, path):
     if not node:
         raise PreSendFailure("the composer has no document upload input")
     browser.call("DOM.setFileInputFiles", nodeId=node, files=[str(path)])
-    wait_for(browser, lambda f: path.name in (f["form_text"] or ""), 60, f"the attachment chip {path.name}")
+    page = wait_for(browser, lambda f: attachment_display_name(f.get("attachment_cards"), path.name) is not None,
+                    60, f"the attachment card {path.name}")
+    displayed = attachment_display_name(page["attachment_cards"], path.name)
     ready_to_send(browser, 120)
+    return displayed
 
 
 def ready_to_send(browser, seconds):
@@ -444,16 +493,22 @@ def command_send(args, cfg):
         return {**operation.data, "note": "send already attempted for this key; observe with `wait`, never resend"}
     if operation.data.get("prompt_sha256") and operation.data["prompt_sha256"] != digest:
         raise PreSendFailure("this key is bound to a different prompt")
+    document = Path(args.attach).resolve(strict=True) if args.attach else None
+    document_sha256 = hashlib.sha256(document.read_bytes()).hexdigest() if document else None
+    if operation.data.get("attachment_sha256") and (
+        not document or operation.data["attachment_sha256"] != document_sha256 or
+        operation.data.get("attachment") != document.name
+    ):
+        raise PreSendFailure("this key is bound to different attachment bytes or name")
     url = cfg["provider_root"] if args.conversation == "new" else args.conversation
     operation.save(key=args.key, prompt_sha256=digest, conversation=args.conversation,
                    squashed_sha256=hashlib.sha256(squash(prompt).encode()).hexdigest(),
                    mode=args.mode, effort=args.effort, send_attempted=False)
 
-    document = Path(args.attach).resolve(strict=True) if args.attach else None
     note = ""
     if document:
         operation.save(attachment=document.name,
-                       attachment_sha256=hashlib.sha256(document.read_bytes()).hexdigest())
+                       attachment_sha256=document_sha256)
 
     chrome_start(cfg, args.mode)
     load_jev(cfg)
@@ -475,6 +530,8 @@ def command_send(args, cfg):
             raise PreSendFailure("a generation is active in this conversation")
         if sent(page):
             raise PreSendFailure("the exact prompt is already submitted here; observe with `wait`")
+        if page.get("attachment_cards") != []:
+            raise PreSendFailure("the composer already contains an attachment or ambiguous file card")
         if page["composer"]:
             # The provider restores local drafts. Jev's fill replaces the whole box (select-all, insert),
             # and the send click is refused unless the box equals the committed prompt.
@@ -490,9 +547,6 @@ def command_send(args, cfg):
                              windowsVirtualKeyCode=virtual, **{k: v for k, v in extra.items() if k == "modifiers"})
             wait_for(browser, lambda f: not f["composer"], 10, "the emptied message box")
         time.sleep(2)  # the composer's pills render after the box
-        if document and document.name in (facts(browser)["form_text"] or ""):
-            raise PreSendFailure(f"an attachment named {document.name} is already in the composer")
-
         # Jev runs the whole goal. The loop only keeps the books: it records the attempt before a
         # send click, refuses that one click if effort or text is wrong, and ends once the outcome shows.
         steps, attached = [], False
@@ -505,9 +559,10 @@ def command_send(args, cfg):
                 if document and not attached:
                     # Uploaded only once the text is in place: a typing failure before this point
                     # leaves no copy of the document in the account's file store.
-                    attach(browser, document)
+                    displayed = attach(browser, document, document_sha256)
+                    operation.save(attachment_display_name=displayed)
                     attached = True
-                    note = (f" The document {document.name} is already attached to the message; "
+                    note = (f" The document {displayed} is already attached to the message; "
                             "do not add, open or remove files.")
                 ready_to_send(browser, 60)
                 ready = True
@@ -535,8 +590,14 @@ def command_send(args, cfg):
                     if effort_proof not in {"legacy", "modern"} or \
                             state["page"]["fingerprint"] != proof_fingerprint:
                         raise PreSendFailure("send chosen without fresh model and effort proof")
-                    if document and document.name not in (facts(browser)["form_text"] or ""):
-                        raise PreSendFailure(f"send chosen while {document.name} is not attached")
+                    cards = facts(browser).get("attachment_cards")
+                    if document:
+                        displayed = attachment_display_name(cards, document.name)
+                        saved_display = operation.data.get("attachment_display_name")
+                        if not displayed or not saved_display or displayed != saved_display:
+                            raise PreSendFailure("the verified attachment card changed before Send")
+                    elif cards != []:
+                        raise PreSendFailure("an unrequested attachment card appeared before Send")
                     if squash(facts(browser)["composer"]) != squash(prompt):
                         operation.save(steps=steps)
                         raise PreSendFailure(f"composer text differs from the committed prompt: {steps}")
@@ -566,10 +627,12 @@ def command_send(args, cfg):
         if not operation.data["send_attempted"]:
             raise PreSendFailure(f"Jev stopped before the send button ({state['status']}): {steps}")
         try:
-            page = wait_for(browser, sent, 45, "the submitted message")
+            accepted = (lambda f: sent(f) and _has_bound_attachment(f, operation.data, squash(prompt))) \
+                if document else sent
+            page = wait_for(browser, accepted, 45, "the submitted message and its attachment")
             operation.save(send_effect="sent", conversation_url=page["url"])
             if document:
-                operation.save(attachment_seen=any(document.name in turn for turn in page["user_turns"]))
+                operation.save(attachment_seen=True)
             page = wait_for(browser, lambda f: SETTLED_URL.search(f["url"]), 90, "the settled conversation URL")
             operation.save(conversation_url=page["url"])
         except PreSendFailure as error:
@@ -623,6 +686,10 @@ class WaitCallTimeout(BaseException):
 
 class WaitReadFailure(RuntimeError):
     """The read-only browser target, page or operation binding is unusable."""
+
+
+class MissingAttachmentEvidence(WaitReadFailure):
+    """The bound user turn is visible, but its file card has not been observed."""
 
 
 def bounded_wait_call(call, seconds, label):
@@ -700,6 +767,12 @@ def _observe_wait_page(agent, cfg, deadline):
     return page
 
 
+def _attachment_names_match(turn, operation):
+    expected = operation.get("attachment_display_name") or operation.get("attachment")
+    names = turn.get("attachment_names")
+    return bool(expected) and isinstance(names, list) and names == [expected]
+
+
 def _bind_operation_turn(page, operation, committed):
     """Relocate this operation's user turn in the current DOM observation."""
     expected_hash = operation.get("squashed_sha256")
@@ -720,10 +793,17 @@ def _bind_operation_turn(page, operation, committed):
             "conversation does not contain exactly one user turn for this operation"
         )
     index, turn = candidates[0]
-    attachment = operation.get("attachment")
-    if attachment and attachment not in (turn.get("turn_text") or ""):
-        raise WaitReadFailure("the operation's attachment is absent from its user turn")
+    if operation.get("attachment") and not _attachment_names_match(turn, operation):
+        raise MissingAttachmentEvidence("the operation's attachment is absent from its user turn")
     return index
+
+
+def _has_bound_attachment(page, operation, committed):
+    try:
+        _bind_operation_turn(page, operation, committed)
+    except (WaitReadFailure, KeyError, TypeError):
+        return False
+    return True
 
 
 def _answer_after_turn(page, user_index):
@@ -940,6 +1020,11 @@ def command_wait(args, cfg):
                 continue
             try:
                 bound_turn = _bind_operation_turn(page, data, committed)
+            except MissingAttachmentEvidence:
+                status("attachment")
+                previous, stable = None, 0
+                time.sleep(min(WAIT_SAMPLE_SECONDS, max(0.0, deadline - time.monotonic())))
+                continue
             except WaitReadFailure as error:
                 status("error")
                 return finish("ERROR", str(error), error_type=type(error).__name__)
@@ -950,7 +1035,7 @@ def command_wait(args, cfg):
                     send_effect="sent",
                     attachment_seen=bool(
                         not data.get("attachment")
-                        or data["attachment"] in (page["turns"][bound_turn].get("turn_text") or "")
+                        or _attachment_names_match(page["turns"][bound_turn], data)
                     ),
                 )
                 verified = True
@@ -1000,6 +1085,8 @@ def command_wait(args, cfg):
                 "IN_PROGRESS",
                 "observation window ended while Pro was still thinking"
                 if told == "generating"
+                else "observation window ended before the sent attachment card was observed"
+                if told == "attachment"
                 else "observation window ended before a final reply was observed",
                 partial_answer_chars=len(answer),
             )

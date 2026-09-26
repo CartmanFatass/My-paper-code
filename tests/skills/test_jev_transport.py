@@ -276,7 +276,7 @@ def test_modern_effort_proof_closes_menu_before_fresh_observation(monkeypatch):
 def test_attach_targets_validated_unique_document_input(monkeypatch, tmp_path):
     document = tmp_path / 'question.md'
     document.write_text('question', encoding='utf-8')
-    monkeypatch.setattr(driver, 'wait_for', lambda *_args: None)
+    monkeypatch.setattr(driver, 'wait_for', lambda *_args: {'attachment_cards': ['question(1).md']})
     monkeypatch.setattr(driver, 'ready_to_send', lambda *_args: None)
 
     class Browser:
@@ -297,39 +297,146 @@ def test_attach_targets_validated_unique_document_input(monkeypatch, tmp_path):
             return {}
 
     browser = Browser('random123')
-    driver.attach(browser, document)
+    displayed = driver.attach(browser, document, hashlib.sha256(document.read_bytes()).hexdigest())
+    assert displayed == 'question(1).md'
     assert browser.calls[1] == ('DOM.querySelector',
                                 {'nodeId': 1, 'selector': 'input[id="random123"]'})
     assert browser.calls[2] == ('DOM.setFileInputFiles',
                                 {'nodeId': 2, 'files': [str(document)]})
     missing = Browser(None)
     with pytest.raises(driver.PreSendFailure, match='unique document upload input'):
-        driver.attach(missing, document)
+        driver.attach(missing, document, hashlib.sha256(document.read_bytes()).hexdigest())
     assert missing.calls == []
 
 
-@pytest.mark.parametrize('chosen_click, change_fingerprint, failure, stale_send', [
-    ('send', False, None, False),
-    ('other', False, 'unrecognized click chosen before send', False),
-    ('send', True, 'without fresh model and effort proof', False),
-    ('send', False, None, True),
+@pytest.mark.parametrize('cards, expected', [
+    ([], None),
+    (['question.md'], 'question.md'),
+    (['question(1).md'], 'question(1).md'),
+    (['question(12).md'], 'question(12).md'),
+])
+def test_attachment_display_name_accepts_only_literal_or_positive_collision_alias(cards, expected):
+    assert driver.attachment_display_name(cards, 'question.md') == expected
+
+
+@pytest.mark.parametrize('cards', [
+    None, ['other.md'], ['question(0).md'], ['prefix-question.md'],
+    ['question.md', 'other.md'],
+])
+def test_attachment_display_name_rejects_wrong_or_ambiguous_card(cards):
+    with pytest.raises(driver.PreSendFailure):
+        driver.attachment_display_name(cards, 'question.md')
+
+
+@pytest.mark.parametrize('labels, expected', [
+    ([], []),
+    (['question.md', '移除 question.md'], ['question.md']),
+    (['question(1).md', 'Remove question(1).md'], ['question(1).md']),
+    (['question.md', '移除 question.md', 'other.md', '移除 other.md'], ['question.md', 'other.md']),
+    (['question.md', '移除 question.md', '移除 question.md'], None),
+    (['移除 question.md'], None),
+])
+def test_page_attachment_cards_require_same_form_filename_and_remove_pair(labels, expected):
+    script = '''
+const labels = SPECIFICATIONS;
+const form = {innerText: 'The prompt mentions question.md', querySelectorAll: selector =>
+  selector === 'button[aria-label]' ? labels.map(label => ({getAttribute: () => label})) : []};
+const editor = {
+  id: '', tagName: 'DIV', innerText: 'The prompt mentions question.md',
+  getAttribute: name => name === 'role' ? 'textbox' : name === 'contenteditable' ? 'true' : null,
+  hasAttribute: name => name === 'data-composer-markdown',
+  closest: selector => selector === 'form' ? form : null,
+};
+global.document = {
+  title: 'ChatGPT', body: {innerText: ''}, querySelector: () => null,
+  querySelectorAll: selector => selector === '#prompt-textarea, [data-composer-markdown]'
+    ? [editor] : [],
+};
+global.location = {href: 'https://chatgpt.com/', protocol: 'https:'};
+const page = eval(PAGE_FACTS);
+console.log(JSON.stringify({cards: page.attachment_cards, form_text: page.form_text}));
+'''
+    observed = run_browser_javascript(script, labels, ('PAGE_FACTS',))
+    assert observed['form_text'] == 'The prompt mentions question.md'
+    assert observed['cards'] == expected
+
+
+def test_prompt_filename_without_card_cannot_complete_attachment_wait(monkeypatch, tmp_path):
+    document = tmp_path / 'question.md'
+    document.write_text('question', encoding='utf-8')
+    browser = types.SimpleNamespace()
+    browser.evaluate = lambda _expression: 'upload-id'
+
+    def call(command, **_kwargs):
+        if command == 'DOM.getDocument':
+            return {'root': {'nodeId': 1}}
+        if command == 'DOM.querySelector':
+            return {'nodeId': 2}
+        return {}
+
+    browser.call = call
+
+    def no_card(_browser, predicate, _seconds, _description):
+        page = {'form_text': 'The prompt mentions question.md', 'attachment_cards': []}
+        assert predicate(page) is False
+        raise driver.PreSendFailure('no file card appeared')
+
+    monkeypatch.setattr(driver, 'wait_for', no_card)
+    with pytest.raises(driver.PreSendFailure, match='no file card appeared'):
+        driver.attach(browser, document, hashlib.sha256(document.read_bytes()).hexdigest())
+
+
+def test_same_key_attachment_bytes_cannot_change_before_browser(tmp_path, monkeypatch):
+    cfg = {'state_dir': str(tmp_path / 'state')}
+    prompt_file = tmp_path / 'prompt.txt'
+    prompt_file.write_text('prepared question', encoding='utf-8')
+    document = tmp_path / 'question.md'
+    document.write_text('original bytes', encoding='utf-8')
+    operation = driver.Operation(cfg, 'bound-question')
+    operation.save(attachment=document.name,
+                   attachment_sha256=hashlib.sha256(document.read_bytes()).hexdigest())
+    document.write_text('mutated bytes', encoding='utf-8')
+    monkeypatch.setattr(driver, 'chrome_start', lambda *_args: pytest.fail('opened browser'))
+    args = argparse.Namespace(key='bound-question', prompt_file=str(prompt_file), attach=str(document))
+    with pytest.raises(driver.PreSendFailure, match='different attachment bytes'):
+        driver.command_send(args, cfg)
+    assert driver.Operation(cfg, args.key).data['attachment_sha256'] == operation.data['attachment_sha256']
+
+
+@pytest.mark.parametrize('chosen_click, change_fingerprint, failure, stale_send, card_at_send', [
+    ('send', False, None, False, None),
+    ('other', False, 'unrecognized click chosen before send', False, None),
+    ('send', True, 'without fresh model and effort proof', False, None),
+    ('send', False, None, True, None),
+    ('send', False, None, False, 'question(1).md'),
+    ('send', False, 'not question.md', False, 'other.md'),
+    ('send', False, 'verified attachment card changed', False, ''),
 ])
 def test_send_choice_needs_fresh_proof_and_recognized_target(
-    tmp_path, monkeypatch, chosen_click, change_fingerprint, failure, stale_send
+    tmp_path, monkeypatch, chosen_click, change_fingerprint, failure, stale_send, card_at_send
 ):
     prompt_file = tmp_path / 'question.txt'
     prompt_file.write_text('exact question\n', encoding='utf-8')
+    document = tmp_path / 'question.md'
+    if card_at_send is not None:
+        document.write_text('document bytes', encoding='utf-8')
     proof_drafts = []
     monkeypatch.setattr(driver, 'chrome_start', lambda *_args: None)
     monkeypatch.setattr(driver, 'load_jev', lambda *_args: None)
     monkeypatch.setattr(driver.time, 'sleep', lambda _seconds: None)
     monkeypatch.setattr(driver, 'ready_to_send', lambda *_args: None)
+    if card_at_send is not None:
+        def fake_attach(browser, _path, _digest):
+            browser.cards = [] if card_at_send == '' else ['question(1).md']
+            return None if card_at_send == '' else 'question(1).md'
+        monkeypatch.setattr(driver, 'attach', fake_attach)
 
     class Browser:
         def __init__(self):
             self.draft = ''
             self.acts = []
             self.sent_visible = False
+            self.cards = []
 
         def observe(self, **_kwargs):
             action = ({'kind': 'fill', 'node': 1, 'id': 'fill', 'label': 'editor'}
@@ -354,6 +461,8 @@ def test_send_choice_needs_fresh_proof_and_recognized_target(
                 self.goals.append(self.state['goal'])
                 action = self.state['page']['actions'][0]
                 self.state['decision'] = {'choice': action['id'], 'operation': action['kind']}
+                if card_at_send not in (None, '') and action['id'] == 'click':
+                    self.browser.cards = [card_at_send]
                 if change_fingerprint and action['id'] == 'click':
                     self.state['page']['fingerprint'] = 'stale'
             elif command == 'act':
@@ -397,7 +506,7 @@ def test_send_choice_needs_fresh_proof_and_recognized_target(
         'composer': browser.draft, 'login': False, 'challenge': False, 'stop_button': False,
         'users': ['exact question'] if browser.sent_visible else [],
         'user_turns': ['exact question'] if browser.sent_visible else [],
-        'form_text': '', 'url': CONVERSATION,
+        'form_text': '', 'attachment_cards': browser.cards, 'url': CONVERSATION,
     })
 
     def prove(browser, _effort):
@@ -406,7 +515,9 @@ def test_send_choice_needs_fresh_proof_and_recognized_target(
 
     monkeypatch.setattr(driver, 'ensure_effort', prove)
     args = argparse.Namespace(prompt_file=str(prompt_file), key='fresh-proof', conversation='new',
-                              mode='headless', effort='6 Pro', attach=None, dry_run=not stale_send)
+                              mode='headless', effort='6 Pro',
+                              attach=str(document) if card_at_send is not None else None,
+                              dry_run=not stale_send)
     cfg = {'state_dir': str(tmp_path / 'state'), 'provider_root': 'https://chatgpt.com/'}
     if failure:
         with pytest.raises(driver.PreSendFailure, match=failure):
@@ -422,6 +533,9 @@ def test_send_choice_needs_fresh_proof_and_recognized_target(
     assert 'Click the Send button exactly once' in current_agent[0].goals[1]
     assert current_agent[0].browser.acts == (['fill', 'click'] if stale_send else ['fill'])
     assert driver.Operation(cfg, args.key).data['send_attempted'] is stale_send
+    if card_at_send is not None:
+        expected = None if card_at_send == '' else 'question(1).md'
+        assert driver.Operation(cfg, args.key).data['attachment_display_name'] == expected
 
 
 def modern_conversation_page(specs):
@@ -446,14 +560,25 @@ for (let i = 0; i < specs.length; i++) {
       ? [userFooter, ...Array(s.footers || 0).fill(footer)] : [],
   };
   const body = {innerText: s.user};
-  const bubble = {querySelectorAll: selector => selector === '.whitespace-pre-wrap'
-    ? Array(s.userBodies || 1).fill(body) : []};
-  units.push({
+  const bubble = {
+    querySelectorAll: selector => selector === '.whitespace-pre-wrap'
+      ? Array(s.userBodies || 1).fill(body) : [],
+    contains: node => Boolean(s.cardInBubble) && cards.includes(node),
+  };
+  const cards = s.attachment ? Array(s.cardCount || 1).fill(null).map(() => ({
+    closest: selector => selector === '[data-chatgpt-search-unit-key]' ? userUnit : null,
+    querySelectorAll: selector => selector === 'span[title].truncate.text-default.text-sm.font-semibold'
+      ? [{innerText: s.attachment,
+          getAttribute: name => name === 'title' ? (s.cardTitle || s.attachment) : null}] : [],
+  })) : [];
+  const userUnit = {
     innerText: s.user + (s.attachment ? '\\n' + s.attachment : ''),
     getAttribute: name => name === 'data-chatgpt-search-unit-key' ? key + ':0:user' : null,
     closest: selector => selector === '[data-content-search-turn-key]' ? container : null,
-    querySelectorAll: selector => selector === '[data-user-message-bubble="true"]' ? [bubble] : [],
-  });
+    querySelectorAll: selector => selector === '[data-user-message-bubble="true"]' ? [bubble]
+      : selector === '[class~="group/resource-card"]' ? cards : [],
+  };
+  units.push(userUnit);
   for (let j = 0; j < s.assistants.length; j++) {
     const answer = s.assistants[j];
     units.push({
@@ -488,6 +613,8 @@ def test_modern_conversation_binds_prompt_body_attachment_and_own_last_final():
     assert page['users'][0] == WAIT_PROMPT + '\nquestion.md'
     assert page['user_turns'][0] == WAIT_PROMPT + '\nquestion.md'
     assert page['turns'][0]['message_body'] == WAIT_PROMPT
+    assert page['turns'][0]['attachment_names'] == ['question.md']
+    assert page['turns'][3]['attachment_names'] == []
     assert page['turns'][1]['final_controls'] is False
     assert page['turns'][2]['final_controls'] is True
     assert page['turns'][4]['final_controls'] is False
@@ -518,6 +645,46 @@ def test_modern_conversation_never_borrows_feedback_or_early_assistant_completio
         {'user': WAIT_PROMPT, 'assistants': ['answer'], 'footers': 1, 'badKey': True},
     ])
     assert malformed['turns'] == []
+
+
+def test_modern_sent_card_evidence_is_independent_of_prompt_text():
+    prompt = WAIT_PROMPT + ' The expected file is question.md.'
+    page = modern_conversation_page([
+        {'user': prompt, 'assistants': ['answer'], 'footers': 1},
+    ])
+    operation = {'squashed_sha256': hashlib.sha256(driver.squash(prompt).encode()).hexdigest(),
+                 'attachment': 'question.md'}
+    assert page['turns'][0]['attachment_names'] == []
+    with pytest.raises(driver.MissingAttachmentEvidence):
+        driver._bind_operation_turn(page, operation, prompt)
+
+    alias = modern_conversation_page([
+        {'user': prompt, 'attachment': 'question(1).md',
+         'assistants': ['answer'], 'footers': 1},
+    ])
+    operation['attachment_display_name'] = 'question(1).md'
+    assert driver._bind_operation_turn(alias, operation, prompt) == 0
+    assert alias['turns'][0]['attachment_names'] == ['question(1).md']
+
+    embedded = modern_conversation_page([
+        {'user': prompt, 'attachment': 'question(1).md', 'cardInBubble': True,
+         'assistants': ['answer'], 'footers': 1},
+    ])
+    with pytest.raises(driver.MissingAttachmentEvidence):
+        driver._bind_operation_turn(embedded, operation, prompt)
+
+    ambiguous = modern_conversation_page([
+        {'user': prompt, 'attachment': 'question(1).md', 'cardCount': 2,
+         'assistants': ['answer'], 'footers': 1},
+    ])
+    with pytest.raises(driver.MissingAttachmentEvidence):
+        driver._bind_operation_turn(ambiguous, operation, prompt)
+
+    wrong_title = modern_conversation_page([
+        {'user': prompt, 'attachment': 'question(1).md', 'cardTitle': 'other.md',
+         'assistants': ['answer'], 'footers': 1},
+    ])
+    assert wrong_title['turns'] == []
 
 QUESTION = '## Pro question 2026-01-01 example'
 NOTES = f'# notebook\n\n## earlier entry\ntext\n\n{QUESTION}\nQuestion: one?\n### Answer\n'
@@ -590,7 +757,8 @@ def wait_page(turns=(), *, stop=False, login=False, challenge=False, approval=()
 
 def user_turn(text=WAIT_PROMPT, attachment=None, *, message_body=MISSING):
     suffix = f'\n{attachment}' if attachment else ''
-    turn = {'role': 'user', 'text': text + suffix, 'turn_text': text + suffix}
+    turn = {'role': 'user', 'text': text + suffix, 'turn_text': text + suffix,
+            'attachment_names': [attachment] if attachment else []}
     if message_body is MISSING:
         message_body = text
     if message_body is not None:
@@ -860,6 +1028,21 @@ def test_wait_binds_message_body_separately_from_attachment_card(tmp_path, monke
     assert driver.Operation(cfg, operation.data['key']).data['attachment_seen'] is True
 
 
+def test_wait_binds_server_collision_name_saved_at_upload(tmp_path, monkeypatch):
+    displayed = 'question(1).md'
+    agent = FakeWaitAgent(FakeWaitBrowser(stable_answer_pages(
+        'complete attached answer', attachment=displayed
+    )))
+    cfg, args, _state, operation = install_wait(
+        tmp_path, monkeypatch, [agent], attachment='question.md'
+    )
+    operation.save(attachment_display_name=displayed)
+    result = driver.command_wait(args, cfg)
+    assert result['state'] == 'COMPLETE'
+    assert Path(result['answer_file']).read_text() == 'complete attached answer\n'
+    assert driver.Operation(cfg, operation.data['key']).data['attachment_seen'] is True
+
+
 @pytest.mark.parametrize('body', ['another prompt', WAIT_PROMPT + ' trailing text'])
 def test_wait_rejects_wrong_or_superstring_message_body(tmp_path, monkeypatch, body):
     page = wait_page([user_turn(body)])
@@ -880,16 +1063,29 @@ def test_wait_rejects_duplicate_exact_message_bodies(tmp_path, monkeypatch):
     assert result['reason'] == 'conversation does not contain exactly one user turn for this operation'
 
 
-def test_wait_rejects_missing_attachment_after_exact_body_match(tmp_path, monkeypatch):
+def test_wait_keeps_missing_sent_card_pending_after_exact_body_match(tmp_path, monkeypatch):
     page = wait_page([user_turn()])
     agent = FakeWaitAgent(FakeWaitBrowser([page]))
     cfg, args, _state, operation = install_wait(
         tmp_path, monkeypatch, [agent], attachment='question.md'
     )
+    args.timeout = .03
+    monkeypatch.setattr(driver, 'WAIT_SAMPLE_SECONDS', .01)
     result = driver.command_wait(args, cfg)
-    assert result['state'] == 'ERROR'
-    assert result['reason'] == "the operation's attachment is absent from its user turn"
+    assert result['state'] == 'IN_PROGRESS'
+    assert result['reason'] == 'observation window ended before the sent attachment card was observed'
     assert operation.data['send_attempted'] is True
+    assert not Path(args.answer_file).exists()
+
+
+def test_prompt_filename_text_without_sent_card_cannot_bind_attachment():
+    prompt = 'read question.md and answer'
+    turn = user_turn(prompt)
+    assert 'question.md' in turn['text'] and turn['attachment_names'] == []
+    operation = {'attachment': 'question.md',
+                 'squashed_sha256': hashlib.sha256(prompt.encode()).hexdigest()}
+    with pytest.raises(driver.WaitReadFailure, match='attachment is absent'):
+        driver._bind_operation_turn(wait_page([turn]), operation, prompt)
 
 
 def test_wait_falls_back_to_exact_full_message_when_body_field_is_absent(tmp_path, monkeypatch):
