@@ -1711,3 +1711,16 @@ Implementer returns diff/checks/risks; no science, result launch, Pro, children,
 writes. It is not alone in the checkout and must preserve concurrent edits. DM accepts the
 diff and publishes the precise inputs before execution. No result-bearing B04 work has
 started at this prospective-writing boundary.
+
+### 2026-09-26 — owner stops new experiments; finish current engineering and hand off
+
+Owner instruction in this task: “当前正在执行的任务完成后就写handoff吧 不要开新实验了”.
+At that instruction B03 was complete and published at `940a06014278f2a4295d2086d6a97cc65ddf99fd`;
+B04 had only its already-assigned implementation/tiny-fixture checks in progress. No B04
+native launch, accepted handle, scientific data generation, fit or deployment exists.
+Therefore **do not launch B04 or select another experiment**. Finish that bounded engineering
+task and its review, preserve the unexecuted code/prospective design, write the handoff here,
+then stop. This is an owner-imposed hold, not scientific rejection or exhaustion of the question.
+No further Pro request, cross-task message, replacement worker or research continuation is
+authorized by this handoff. Global pause/other directions/FSD/G33 are not changed. PPC's own
+standing becomes paused; a future status question, handoff read or workflow edit cannot resume it.

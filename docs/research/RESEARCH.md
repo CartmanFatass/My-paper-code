@@ -447,6 +447,7 @@ AF .398–.435s，另付291.360s共享采集和236.901s十fit占用。计算节�
 总包数及交付数未变。六fit科学墙钟121.036s，无新教师采集；旧共同roll-in依赖仍未检验。
 独立科学审查后，DM选择B04两新区组、四fit的独立采集流程：共同教师前缀加各自roll-in，
 对照普通BC、教师和AF，检验加权在完整独立压缩中的用途；不是同D追加确认或UAV外推。
+随后owner要求当前任务收尾后交接、不开新实验；B04仅保留未执行前瞻和工程，方向暂停。
 [B03完整结果和B04前瞻](candidates/planning_policy_compression/NOTES.md#2026-09-26--b03-complete-original-correspondence-helps-on-this-fixed-archive)。
 [完整B02正反证据、成本和收尾](candidates/planning_policy_compression/NOTES.md#2026-09-25--b02-complete-narrow-recurrence-confirmed-with-a-persistent-teacher-gap)；
 [固定主张与结果](candidates/planning_policy_compression/CLAIM_weighted_partial_compression.md)；
@@ -753,7 +754,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `planning_policy_compression` | 有限合法历史与数据下，哪些近似教师区别值得保留，何时普通模仿足以提供完整联合用途？ | exploring | Codex DM (independent session) | **B03完整；B04独立采集比较已选。** 单一D上两配对O−S +12/+14、O−BC +14/+17、S−BC +2/+3任务；六fit/121.036s，完整核验、全部损失和负面分量保留。保留条件性加权用途，不识别真实后果语义。独立科学审查后，原DM选择两新数据/训练/面板区组、四fit：O/BC各自256 roll-in加共同256教师前缀，配对教师/AF，购买完整独立流程的方法取舍。精确前瞻、成本、停止规则见[NOTES](candidates/planning_policy_compression/NOTES.md#2026-09-26--b04-selected-standalone-own-roll-in-compression)。旧B01/B02、固定q_256规则及教师差距保持原义；非自动加种子或UAV主张。[完整B03](candidates/planning_policy_compression/NOTES.md#2026-09-26--b03-complete-original-correspondence-helps-on-this-fixed-archive)、[固定claim](candidates/planning_policy_compression/CLAIM_weighted_partial_compression.md)。 |
+| `planning_policy_compression` | 有限合法历史与数据下，哪些近似教师区别值得保留，何时普通模仿足以提供完整联合用途？ | paused | Codex DM (independent session) | **Owner要求收尾后交接、不开新实验。** B03完整：O−S +12/+14、O−BC +14/+17、S−BC +2/+3任务，六fit/121.036s，完整核验并保留全部损失/负面分量；只支持单D条件性用途。B04独立采集比较已前瞻选择，但指令到达时仅工程进行中，0fit/0采集/0评价、无原生操作；收齐当前实现/检查后交接，不启动。两新区组/四fit方案保留待owner明确恢复，非科学否定。[前瞻与停止指令](candidates/planning_policy_compression/NOTES.md#2026-09-26--b04-selected-standalone-own-roll-in-compression)、[完整B03](candidates/planning_policy_compression/NOTES.md#2026-09-26--b03-complete-original-correspondence-helps-on-this-fixed-archive)、[原固定claim](candidates/planning_policy_compression/CLAIM_weighted_partial_compression.md)。 |
 | `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | archived | Codex DM (independent session) | **B03完整，当前固定库50:50混合投入结束。** 两新区组M−F2@伙伴3为−.009834/−.049463 J、−.638688/−2.647500服务；对伙伴1/2也均为负，12项自身平均J/服务仍改善。原B02伙伴3正例保留，但正负取舍未在新训练/新面板条件重现；不作训练总体排名或一般协调否定。4fits、1.744M团队步、101.56min科学墙钟及781文件已完整核验保全。复用完整Pro已覆盖分支，比较复制、面板归因和独立候选后未选后继；无活动操作、未读结果或开放Pro。保留所有普通/混合响应资产。[完整结果与决定](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)；[任务路由](#session-routing)。 |
 | `finite_model_decision_value` | 同一有限合法数据和计算下，环境参数与隐状态的不确定性何时改变有用的动作排序与完整团队后果？ | archived | Codex DM (independent session) | **B02完整，当前NEAR预算修补投入结束。** 主交互总差+4、均值+.015625[−.016865,+.048115]；U自身+4、P0，预期点符号弱相容但完成差稀疏且异质。初始根精度改善，未确立有用U修复；P/U更多预算均减少等待。保留低预算P对AF+32任务及全部损失世界。256闭式拟合、0策略fit、122,880团队步、215,389,184模型分支、149.27s科学墙钟完整保全。复用已读Pro的适用判读/关闭建议，比较复制、估值修订、直接学习与项目转向后未选进一步工作；无活动操作、开放Pro或后继，不否定广义有限知识问题。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--b02-complete-precision-changed-native-budget-response-remains-small-and-uncertain)；[决定与范围](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--end-current-near-budget-repair-investment-retain-the-finite-result)；[任务路由](#session-routing)。 |
 | `spatial_demand_generalization` | 有限空间任务训练覆盖如何影响普通多智能体控制在留出布局上的用途与专门化代价？ | archived | Codex DM (independent session) | **C01完整，当前空间混合路线新增投入结束；保留U。** hotspot M−U为J −.025632493、服务−1.191150人/步，t95为[−.067046834,+.015781848]/[−3.827524,+1.445224]；联合正均值未建立，不宣称等价或确定有害。十fit各自三个家族的J/服务均值均改善，uniform/cluster额外均值均不利，A2/C01第二配对正例与局部损失保留。10 fits/4.32M团队步完整保全。完整Pro答复已核验保存并逐项判断；旧/新面板回放有有限解释价值，但当前不值得全部成本，四中心与泛化调参也未选。无第六块、活动操作、开放Pro或已选后继；不外推为所有覆盖学习无用。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/b35996ba188d31cc01b3a422a47c24b1fde6bce3/docs/research/candidates/spatial_demand_generalization/NOTES.md#2026-09-25--c01-complete-joint-positive-mean-not-established)；[完整建议与DM决定](https://github.com/CartmanFatass/My-paper-code/blob/287d16776ca93d5ea0bfa56e15adfedb05501097/docs/research/candidates/spatial_demand_generalization/NOTES.md#2026-09-25--decline-panel-replay-and-end-current-spatial-mixing-investment)。[任务路由](#session-routing)。 |
@@ -814,7 +815,8 @@ Reviewer意见，选择由原PPC独立DM执行**单一存档数据上的O/S/BC�
 配对、六fit**。[采纳、异议处理及停止范围](archive/2026-09-26/RESEARCH.md#root-adoption-20260926)。
 该B03现已完成、独立核验并由DM读取：O对S和新BC均有小的原生增量。独立科学审查建议检验
 完整独立采集流程，DM按既有问题授权及Pro的阳性分支选择B04；精确前瞻写入同一NOTES。
-旧实验结论保持原义，B03不追加；B04须完成独立工程检查和精确输入发布后另行实际节点准入。
+旧实验结论保持原义，B03不追加。随后owner在PPC任务要求当前任务完成后交接、不要开新实验；
+B04未启动，只完成已在进行的工程与检查后保留代码/前瞻，PPC暂停，须owner明确恢复才可考虑执行。
 
 **持续问题与当前选择。** 在有限合法历史、数据与学习器下，哪些近似教师区别值得保留，何时
 普通模仿已足够提供完整联合用途？B03把原对应相对S及相对新BC的选择分开：O−S +12/+14、
@@ -824,7 +826,7 @@ B04令每个学生只依赖自己的augmentation，检验完整程序的O−BC�
 
 | 当前安排 | 科学问题与完整比较 | 已知成本与边界 |
 | --- | --- | --- |
-| PPC：B03完成；B04已选、原DM接续 | 两个新配对，O/BC共同256教师前缀、各自256 roll-in，40+40 epochs；各自512-context训练集，共同新面板评价最终O/BC、教师、AF。主读取O−BC及O−AF，保留绝对用途、教师缺口和全部负例。 | 4 fits、3840更新、23592960优化行、147456采集团队tick、196608评价tick、589824诊断行；1536校准/6144移动；模型分支上界402653184。单方法须承担全部必要前缀采集。历史粗估拟合/采集/部署约95/175/64s，新完整墙钟未知。[前瞻和L0](candidates/planning_policy_compression/NOTES.md#2026-09-26--b04-selected-standalone-own-roll-in-compression)。 |
+| PPC：B03完成；owner暂停B04执行、收尾交接 | 未执行方案：两个新配对，O/BC共同256教师前缀、各自256 roll-in，40+40 epochs；各自512-context训练集，共同新面板评价最终O/BC、教师、AF。只完成当前工程/检查，不启动或自动恢复。 | 拟议4 fits、3840更新、23592960优化行、147456采集/196608评价tick、589824诊断行；1536校准/6144移动；模型分支上界402653184。实际B04科学成本为零。历史粗估拟合/采集/部署约95/175/64s；单方法须付完整前缀成本。[前瞻、L0及owner指令](candidates/planning_policy_compression/NOTES.md#2026-09-26--b04-selected-standalone-own-roll-in-compression)。 |
 | 伙伴组合R：保持当前配方关闭 | 保留B02正例、B03反号和训练/面板变化尚未分离的解释。不购买旧策略回放。 | 0追加fit/评价；有限解释价值存在，但当前没有足以改变下一投资的不同后果。原DM与资产保留，不派机械补位。 |
 | B：低阶critic参数化后备 | 普通实体critic与显式单体/两体候选的有限完整学习比较；普通参照已有StateSetEncoder。 | 4或6fit仍是条件设计，尚无已识别估值瓶颈；没有选定新批次。不以PPC阳性作为其前置条件。 |
 | C：等通信资源消息学习后备 | 实际字段/位数/缓存与Q来源仍需具体化；三个版本须真正等资源。 | 六fit只是原条件价格，未报价完整接口与执行工作，不占运行槽。 |
@@ -896,7 +898,7 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| DM 规划压缩学习 | `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / `local` | `/home/fires/hmasd-wsl` · `main`；旧持久数据 `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`，新raw见NOTES原生节点路径 | B01–B03合计20fit完成并核验；B03源snapshot回收793542656bytes，唯一raw保留。独立科学审查后DM选择B04两新独立采集配对/四fit，前瞻已写，工程落实后单独准入；同一持续问题，无App回报/接管。旧fsd-a authoring/publication目录已不存在；新工作在main方向目录。无旧运行待恢复。[最新NOTES](candidates/planning_policy_compression/NOTES.md)。 |
+| DM 规划压缩学习 | `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / `local` | `/home/fires/hmasd-wsl` · `main`；旧持久数据 `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`，新raw见NOTES原生节点路径 | B01–B03合计20fit完成并核验；B03源snapshot回收793542656bytes，唯一raw保留。Owner现要求当前任务收尾后交接、不开新实验；B04仅未执行前瞻/当前工程，0科学工作/无handle，PPC暂停。交接写入本方向NOTES，不另发App消息，不由状态提问/读交接恢复。旧fsd-a authoring/publication目录已不存在，无旧运行待恢复。[最新NOTES](candidates/planning_policy_compression/NOTES.md)。 |
 | DM 伙伴曝光独立复制 | `01a0db8f-1fab-7503-ae4b-feff2d4da8f5` / `local` | `/home/fires/.codex/worktrees/fsd-c/hmasd-wsl` · 当前`codex/partner-exposure-b03-publication`；源码/证据分支`codex/partner-exposure-replication-sept25`保留 | B03两新F2/M区组已完整执行、核验、判读并独立出版；结束当前50:50固定库投入，无活动操作、未读证据、开放Pro或已选后继。全量数据在`/home/fires/hmasd-retained-runs/controller_composition/b03_partner_replication_20260925`逐文件核验保全。fsd-c不在本任务原生附件中，节点源树也非launcher snapshot，两目录保留待可用原生归档路径，不使用shell删除。旧B01/B02及ab18来源/原分支保持终态；无App消息。[完整结果和生命周期边界](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)。 |
 | DM 有限模型知识与决策价值 | `01a0d937-e2f7-7d03-982a-d16bf16385cc` / `local` | `/home/fires/.codex/worktrees/3839/hmasd-wsl` · `codex/finite-model-decision-value-sept25` | B01/B02均已完整核验、保全并独立发表；两次Pro已收清，当前NEAR预算修补投入结束，无活动结果操作、未读证据或已选后继。保留原输入/原始产物与本任务地址；未接管其他方向、未发App消息。[完整结果与决定](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--end-current-near-budget-repair-investment-retain-the-finite-result)。 |
 | Root：本轮项目复盘与科学Reviewer落实 | `01a0dc51-5688-7ef1-894b-51c2964f2be0` / `local` | `/home/fires/hmasd-wsl` · `main` | owner要求发送后推进研究。独立科学审查与完整Pro咨询均已读完、交付核验并归档；Root采纳六fit O/S/BC，由原PPC DM接续。B/C与伙伴回放未选，FSD暂停/G33冻结保留。维护项目取舍和实质分歧，不成为结果发布审批层。[完整采纳](archive/2026-09-26/RESEARCH.md#root-adoption-20260926)。 |
