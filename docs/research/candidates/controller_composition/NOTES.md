@@ -1732,3 +1732,43 @@ actual failure counters; no retry/resume. Stop dependent work for an actual sour
 conflict; no expanded framework or extra performance-screen fit. Prefer configured wsl_4070 with
 fresh native admission after source commit/push. The canonical node's known historical bad-tree
 repack warning remains an unresolved fact, not a claimed repair or blanket scientific blocker.
+
+### B03 implementation accepted; fixture exposure corrected before result execution
+
+The Implementer returned only the scoped code/tests. B03 reuses B02's genuine half-team
+collector/update/evaluator, adding explicit learner-seed/object arguments with B02 defaults
+preserved, separate block output namespaces, the fixed19-cell orchestration and joint-world
+reduction. Both seed addresses reach config, actual initialization and private sampler; the
+sampler seed/initial RNG identity are saved. Snapshot metadata identifies B03. Raw files,
+including logs, are hashed rather than silently omitted from the retention inventory.
+
+DM and independent Reviewer found and corrected a test-scope error: five completed early
+tiny-test invocations used production training constructor/reset addresses92570100–101 and
+92580100–101. Each invocation ran F2/M in each block for2 lanes×H10:80 training team steps,
+**400 engineering training steps total at those production addresses**. They additionally
+ran200 evaluation fixture steps at711–712. The initial collection-error invocation ran no
+tests. The Implementer's earlier description of all those steps as nonproduction was wrong.
+These were tiny correctness updates under a different horizon/lane regime, not the four
+declared360k result fits; no native B03 evaluation world92590000–31 was executed or outcome
+used to select seeds, recipe or comparator. This engineering exposure is not erased. Keep
+the already-published scientific inputs, and do not describe the training worlds as wholly
+unexposed. The corrected fixture uses8200–8201 and9200–9201, disjoint from production.
+
+The final Implementer combined B03/B02 suite passed14 tests in18.72s; its B03 portion used
+80 corrected fixture training plus40 fixture evaluation steps, and the reused B02 suite
+adds164 fixture transitions per full invocation. Earlier development suite repeats are
+additional support cost; beyond the corrected-address count above their total is not fully
+metered. Compilation and diff whitespace checks passed. The Reviewer independently ran
+13 tests with the faulty real fixture deselected in12.14s, then all5 corrected B03 tests in
+10.24s; its284 fixture transitions were all nonproduction. Its independent coefficient and
+frequency-weight arithmetic matched all43 readings×2 metrics and joint bootstrap intervals
+on nonconstant synthetic panels. The strengthened checked-in test now covers this too.
+
+No material engineering finding remains. I read the diff and checks and accept this bounded
+implementation for actual-node compatibility checking and one admitted fixed batch. Full
+H500×45 execution and all19 native cells remain unobserved; abrupt death can still lose the
+active in-memory slab, while caught failures preserve completed prefixes and actual counters.
+All three retained local checkpoint/config/summary identities and34 frozen dependencies were
+verified, and node-staged checkpoint hashes match. Current published main routing at
+`b815b2b6bbf5a5f5176c2062384306b0b6bd5fa6` names this actual session
+`01a0db8f-1fab-7503-ae4b-feff2d4da8f5`; it does not change the adopted comparison or lead value.
