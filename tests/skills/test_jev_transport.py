@@ -347,9 +347,11 @@ def test_send_choice_needs_fresh_proof_and_recognized_target(
         def __init__(self, _url, _goal):
             self.browser = Browser()
             self.state = {'status': 'ready', 'decision': None, 'page': None}
+            self.goals = []
 
         def command(self, command, *_args):
             if command == 'predict':
+                self.goals.append(self.state['goal'])
                 action = self.state['page']['actions'][0]
                 self.state['decision'] = {'choice': action['id'], 'operation': action['kind']}
                 if change_fingerprint and action['id'] == 'click':
@@ -416,6 +418,8 @@ def test_send_choice_needs_fresh_proof_and_recognized_target(
         else:
             assert result['dry_run'].startswith('reached the send button')
     assert proof_drafts == ['', 'exact question']
+    assert 'Type the prepared message into the message box only' in current_agent[0].goals[0]
+    assert 'Click the Send button exactly once' in current_agent[0].goals[1]
     assert current_agent[0].browser.acts == (['fill', 'click'] if stale_send else ['fill'])
     assert driver.Operation(cfg, args.key).data['send_attempted'] is stale_send
 

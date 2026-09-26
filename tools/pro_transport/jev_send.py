@@ -419,12 +419,19 @@ def ready_to_send(browser, seconds):
     raise PreSendFailure("the send button did not become available")
 
 
-GOAL = """You are on ChatGPT. Do these in order, each once.
-1. The configured model and reasoning effort ('{effort}') were independently verified. Leave those controls alone.
-2. Type the prepared message into the message box.{draft}{attachment}
-3. Click the send button exactly once.
-After the message is sent do nothing else: never click Stop, Regenerate, Edit, Retry, or send again.
-DONE as soon as the sent message is visible in the conversation."""
+FILL_GOAL = """You are on ChatGPT. The configured model and reasoning effort ('{effort}') were independently verified; leave those controls alone.
+Type the prepared message into the message box only, replacing any old draft.
+Do not click Send, do not submit, and do not add files. DONE when the prepared message fills the box."""
+
+SEND_GOAL = """You are on ChatGPT. The configured model and reasoning effort ('{effort}') were independently verified; leave those controls alone.
+The prepared message is already in the box and its exact text has been verified.{attachment}
+Click the Send button exactly once. Do not type, change the model, attach files, or click any other control.
+After Send do nothing else. DONE as soon as the sent message is visible in the conversation."""
+
+
+def phase_goal(ready, effort, attachment=""):
+    """Tell Jev only the next action allowed by the driver's verified composer state."""
+    return (SEND_GOAL if ready else FILL_GOAL).format(effort=effort, attachment=attachment)
 
 
 def command_send(args, cfg):
@@ -455,7 +462,7 @@ def command_send(args, cfg):
 
     # The text is the committed prompt, verbatim; no model writes or paraphrases it.
     jev_agent.field_text = lambda context: (prompt, {"model": "committed-prompt", "latency_ms": 0, "usage": {}})
-    agent = jev_agent.Agent(url, GOAL.format(effort=args.effort, draft="", attachment=note))
+    agent = jev_agent.Agent(url, phase_goal(False, args.effort))
     browser, state = agent.browser, agent.state
     # With an attachment the user turn also carries the file chip; the committed text is contained in it.
     sent = lambda f: any(squash(prompt) in squash(u) for u in f["users"] + f["user_turns"])  # noqa: E731
@@ -503,19 +510,14 @@ def command_send(args, cfg):
                     note = (f" The document {document.name} is already attached to the message; "
                             "do not add, open or remove files.")
                 ready_to_send(browser, 60)
-                box = (" The box now holds the prepared message in full: steps 1 and 2 are complete. Do not type "
-                       "and do not click the message box. The only remaining action is step 3: click the send "
-                       "button now.")
-            elif current["composer"]:
-                box = (" The box currently holds an outdated draft, not the prepared message: typing replaces "
-                       "it, so step 2 is still required.")
+                ready = True
             else:
-                box = ""
+                ready = False
             # Any typing, upload or previous browser action invalidates the earlier proof. Verify
             # again, close the menu, and let Jev choose from the newly observed closed page.
             state["page"], effort_proof = ensure_effort(browser, args.effort)
             proof_fingerprint = state["page"]["fingerprint"]
-            state["goal"] = GOAL.format(effort=args.effort, attachment=note, draft=box)
+            state["goal"] = phase_goal(ready, args.effort, note)
             state["plan"] = [state["goal"]]
             try:
                 agent.command("predict")
