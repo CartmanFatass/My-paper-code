@@ -693,3 +693,87 @@ B01 实际科学进程墙钟约 205.99s、CPU 210.04s，采集 96.96s、四次 f
 [study]: https://github.com/CartmanFatass/My-paper-code/blob/a576d6b6c830d712703ae069f91f74a57485e264/experiments/candidates/planning_policy_compression/b01/study.py
 [entry]: https://github.com/CartmanFatass/My-paper-code/blob/a576d6b6c830d712703ae069f91f74a57485e264/scripts/run_ppc_b01.py
 [binom]: https://www.stat.ethz.ch/R-manual/R-devel/library/stats/html/binom.test.html
+
+## 2026-09-25 — Adopt the complete advice and freeze B02 independent confirmation
+
+Question key `hmasd:d905518fb3a154e759f9740a4da1004c9804203457897d8cf0578bf458e12582`
+was sent exactly once after a genuine pre-send missing-control check; the same-key read-only
+page check found the control and the unchanged request was accepted at verified 6 Pro.
+The observer collected a 263-character receipt, not the answer. Delivery verification found
+`af90be1e9e2bd06816e63ec64ce38e6ad740031f`: one commit, only this file, only the originally
+empty Answer, 164 added lines / 12,213 answer characters, question and all other bytes intact.
+An initial delivery selector omitted the literal `##` prefix; correcting that read selector
+verified the same operation/commit without another Send. I read the entire answer above.
+The observer closed its owned tab; the terminal event is consumed and no Pro request remains.
+
+MATERIAL_DISSENT: no. I adopt five completely new paired training/evaluation blocks, in one
+fixed B02, over another two-block shared-panel exploration or ending this recipe now. The
+reason is the already observed native/computation tradeoff, the absence of a remaining
+hyperparameter choice, and the value of independent deployment panels after B01's common
+panel. Ten new fits at the unchanged horizon are justified by this question, not by a fit
+allowance or an obligation to confirm. B01 is development exposure and never enters the test.
+
+Adopt the precise `q_256` interpretation and power caveat. Five positive integer job-total
+differences give exact one-sided p=.03125 and a .54928027 lower95 bound, not reliable-deployment
+certainty. Four positives do not pass; ties count nonpositive. I checked the published
+[R exact-binomial documentation](https://www.stat.ethz.ch/R-manual/R-devel/library/stats/html/binom.test.html)
+and the finite formulas. q_256 is neither probability of a positive true expected return for
+a trained policy nor a mean-effect claim. Report one fixed sign verdict and a separate
+complete-use judgment including magnitude, all other comparators, waiting, conflicts and
+losses. Negative/incomplete/non-confirming outcomes remain useful and cause no automatic
+replacement or extension. Advice is not new empirical evidence or execution acceptance.
+
+The [claim note](CLAIM_weighted_partial_compression.md) now freezes this selected scope,
+five seed tuples, 40+40 epochs, all comparisons, count/cost bounds and stopping rule.
+Its only post-advice clarification is q_256's explicit definition, integer sign handling,
+finite power/lower-bound examples and the separation of verdict from usefulness. No arm,
+world, fit or scientific threshold was added. The original proposed section and complete
+advice remain above, including the unselected two-block alternative.
+
+Current main `ab628a57b` contains the B01 standing and relevant section-4 update; pause/lead
+are unchanged. The shared background concretely keeps B02 on unchanged legal history and
+finite learning/computation: it supplies no sufficiency, causal or UAV guarantee. Sections2/8
+remain applicable without a new mechanism audit. I retain Pro's limitations on unseen raw
+data and unimplemented B02 independence, rather than treating its source reading as runtime
+verification. No further consultation is needed for implementation and this fixed execution.
+
+### B02 L0 — adapt orchestration, preserve B01 science
+
+Implement only `experiments/candidates/planning_policy_compression/b02/`,
+`scripts/run_ppc_b02.py`, and mirrored B02 tests. Read the frozen claim and B01 scientific
+functions first. Reuse B01 Student, features, episode/label semantics, calibration,
+train_stage, diagnostics and state/artifact helpers directly where suitable. Leave B01,
+finite-model assets and shared control code unchanged; no alternative architecture or
+configurable scientific sweep. The new entry admits before scientific imports and fixes
+seed925951 plus the exact launch SHA/output tag `b02_confirm_s925951_20260925`.
+
+Replace the two-block/common-panel organization with five fresh block tuples and each
+block's own evaluation panel. Preserve private recurrent resets, common within-block init,
+same stage data/permutations, one optimizer per fit continued across stages, actual-history
+shadow labels and zero shadow work in student evaluation. Store independent calibration
+and checkpoint evidence with block-qualified paths so no block overwrites another. No
+full-size result fixture before source publication/admission.
+
+Maintain all B01 measurement/recovery guarantees: raw supervision per collected batch,
+actual executed action/reward/cumulative trajectories, distinct partial observed/feature/
+executed counts, initial/stage1/final checkpoints, per-fit timing and movement, curves,
+endpoint diagnostics and equivalent full deployment boundaries. Collect 245,760 and evaluate
+491,520 team ticks; 10 started/completed fits, 9,600 updates, 58,982,400 optimizer rows,
+1,474,560 diagnostic forward rows, 3,840 calibrations / 15,360 moves. Upper model-branch
+bound754,974,720; count actual work. Preserve partial failure with no automatic retry.
+
+Summary exposes all five integer total differences, signed means, every comparator/native
+component and loss world by block. Read q_256 using exact binomial upper-tail at .5 and
+one-sided95 Clopper–Pearson lower bound; incomplete batches do not report a completed
+confirmation decision. Report descriptive mean/range separately. Do not pool contexts or
+quote a sign-test lower bound on mean native benefit. Report costs per block/method and
+whole study without allocating away shared collection or BC roll-in work.
+
+Focused tests: tiny distinct-data five-block fixture, real parameter updates and optimizer
+continuity, distinct block calibration/eval streams plus within-block matching, complete
+counts/output hashes, zero student queries, all sign/tie decision branches and exact known
+probabilities, partial failure preservation and admission refusal. Existing B01 checks cover
+unchanged teacher/feature semantics; do not redo full mechanism validation. Scientific
+fixtures are tests and never confirmation observations. Independent engineering Reviewer
+checks the new RNG/block/evaluation and inference accounting; DM accepts the full diff.
+Implementer owns only those code/test paths, no NOTES/claim/index/Git, Pro, children or launch.
