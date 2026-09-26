@@ -747,6 +747,16 @@ def test_answer_block_needs_unique_headings():
     assert driver.answer_block('# nothing here\n', QUESTION, '### Answer') is None
 
 
+def test_answer_block_excludes_author_decision_but_keeps_nested_answer_content():
+    body = ('answer\n\n#### Details\nnested\n```markdown\n## example question\n'
+            '### example heading\n```\n')
+    decision = '### Decision\nauthor judgment\n\n## later entry\nmore\n'
+    before, answer, after = driver.answer_block(NOTES + body + decision, QUESTION, '### Answer')
+    assert before.endswith('### Answer')
+    assert answer == body.rstrip('\n')
+    assert after == decision
+
+
 def test_compose_keeps_document_hash_but_gives_pro_a_natural_cover_note(tmp_path):
     message = tmp_path/'full.txt'
     message.write_text('line one\n\nline two\n', encoding='utf-8')
@@ -1222,6 +1232,21 @@ def test_deliver_accepts_an_answer_only_commit_and_ignores_unrelated_ones(delive
     assert result['state'] == 'DELIVERED' and [c['commit'] for c in result['commits']] == [answered]
     assert result['commits'][0]['parent_is_source']
     assert Path(args.answer_out).read_text(encoding='utf-8') == 'the answer\n'
+
+
+def test_deliver_ignores_decision_edits_and_accepts_later_answer(delivery):
+    args, write = delivery
+    decision = '\n### Decision\nindependent reviewer advice\n'
+    write(NOTES + decision, 'author records a decision')
+    assert driver.command_deliver(args, {})['state'] == 'NOT_DELIVERED'
+    decision += 'author updates the plan\n'
+    write(NOTES + decision, 'author revises the decision')
+    assert driver.command_deliver(args, {})['state'] == 'NOT_DELIVERED'
+    answered = write(NOTES + 'the Pro answer\n' + decision, 'Pro answers its assigned subsection')
+    result = driver.command_deliver(args, {})
+    assert result['state'] == 'DELIVERED'
+    assert [commit['commit'] for commit in result['commits']] == [answered]
+    assert Path(args.answer_out).read_text(encoding='utf-8') == 'the Pro answer\n'
 
 
 @pytest.mark.parametrize('text, extra', [

@@ -1123,14 +1123,34 @@ def git(*argv):
 def answer_block(text, question_heading, answer_heading):
     """(before, answer, after) around the answer subsection of one question; None if the headings are not unique."""
     lines = text.split("\n")
-    starts = [i for i, line in enumerate(lines) if line.strip() == question_heading.strip()]
+    # A sibling subsection (for example Decision) belongs to the author, not Pro's Answer.
+    # Ignore apparent headings inside fenced code in a delivered answer.
+    headings = []
+    fence = None
+    for i, line in enumerate(lines):
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if fence:
+            if marker and marker[1][0] == fence[0] and len(marker[1]) >= len(fence) and not marker[2].strip():
+                fence = None
+            continue
+        if marker:
+            fence = marker[1]
+            continue
+        heading = re.match(r"^ {0,3}(#{1,6})(?:[ \t]+|$)", line)
+        if heading:
+            headings.append((i, len(heading[1]), line.strip()))
+    starts = [(i, level) for i, level, heading in headings if heading == question_heading.strip()]
     if len(starts) != 1:
         return None
-    end = next((i for i in range(starts[0] + 1, len(lines)) if lines[i].startswith("## ")), len(lines))
-    heads = [i for i in range(starts[0], end) if lines[i].strip() == answer_heading.strip()]
-    if len(heads) != 1:
+    start, question_level = starts[0]
+    end = next((i for i, level, _ in headings if i > start and level <= question_level), len(lines))
+    heads = [(i, level) for i, level, heading in headings
+             if start < i < end and heading == answer_heading.strip()]
+    if len(heads) != 1 or heads[0][1] <= question_level:
         return None
-    return "\n".join(lines[:heads[0] + 1]), "\n".join(lines[heads[0] + 1:end]), "\n".join(lines[end:])
+    head, answer_level = heads[0]
+    end = next((i for i, level, _ in headings if head < i < end and level <= answer_level), end)
+    return "\n".join(lines[:head + 1]), "\n".join(lines[head + 1:end]), "\n".join(lines[end:])
 
 
 def command_deliver(args, cfg):
