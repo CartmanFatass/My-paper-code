@@ -2354,3 +2354,23 @@ altitude floor, with the evaluation mode an open question until S0-1; the "stati
 withdrawn; the exit width is closed as an investment for this policy on these worlds without a
 general null claim; B02's object is "can an ordinary central-input learning programme approach an
 executed rule reference at a fixed exposure", not typicality or structure attribution.
+
+### Launch record: Stage 0 item 1, N with sampled actions (`b02_s0_stoch_a01`, 2026-09-26)
+
+Inputs commit `8d88f72d02ea79ebaf7ac2173daf3db837b70636` (phase `stochastic-check`: N at (0, .05)
+on 955001–955032, 2 draws per world seeded by `hash((925031, world, draw)) & 0xFFFFFFFF`, sampling
+at both levels; five additive position diagnostics; `--phase all` unchanged) pushed to origin/main
+and fast-forwarded on the node. Admission launch from the node
+(`temp/directions/energy_relay_benchmark/scratch/launch_phase.sh 8d88f72d0 b02_s0_stoch_a01 stochastic-check 8 2`):
+- `acceptance: accepted`, `accepted_at 2026-09-26T17:03:47Z`; host `LAPTOP-U9TDKC8A`; operation
+  ref `/home/wu/projects/HMASD/.git/hmasd-admission/07ebcf709aa67d6e3307dada56e6fca0001072226e33c8a0ee94e8fc93133d94.json`
+  (claim key `07ebcf70…133d94`); outputs under `/home/wu/projects/HMASD/runs/energy_relay_benchmark/b02_s0_stoch_a01/`
+  (panels `stochastic-check/panels/N_e0.00_x0.05_s0.json`, `_s1.json`, traces, `summary.json`);
+  command sha256 `03d5e3005bd3408d1f418571a514479b158be2573eb4e7f5d74d6e72a2ca2709`; supervisor
+  pid 721802 (posix session), runner pid 721803; 8 workers × 2 threads, CPU; planned 64 episodes,
+  ≈ 15 min by B01's throughput.
+- Reading rule S0-1 as declared in the resolution above, against the B01 grid panel
+  `N_e0.00_x0.05` of `b01_ref_a02` (deterministic; mean QoS/step .328, boundary share .498):
+  reader `experiments/candidates/energy_relay_benchmark/b01/read_stage0.py` (written before the
+  result is read). Observation: the detached poller every 5 minutes and a background waiter
+  with a native return; only health fields are observed before the terminal state.
