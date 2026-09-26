@@ -187,12 +187,18 @@ standing coordination. Use owned checkouts for concurrent writers and explicit p
 and push completed work and exact result inputs. Branches and worktrees are useful isolation,
 not a mandatory new checkout per direction. Keep accepted source identities and other writers.
 At an actual assignment/closure/checkout-replacement boundary, inspect existing worktrees
-and reuse a suitable free one. The owning session performs retention and cleanup as part
+and reuse a suitable free one. Before creating another, identify its creating session and
+native retirement route under the engineering method; a child DM does not automatically own
+its parent's App attachment. The creating session retains cleanup responsibility until actual
+ownership is transferred. The owning session performs retention and cleanup as part
 of completion under the engineering method's worktree lifecycle. Preserve unique commits
 and verify an external copy of needed ignored data before native archival; preserve any
 live process, accepted handle, observer or delivery dependency. Verify the actual outcome
-on disk and in the worktree list. Native archival scoped to another chat is a tool limit,
-not permission for raw deletion or a message to its old DM. Three research runtime slots
+on disk and in the worktree list; an archived chat or successful data backup does not establish
+that outcome. When the native archive tool is scoped to another chat, check the supported
+global Worktrees settings route and explain any actual access failure, rather than repeating
+the same tool limit as the whole answer. It is not permission for raw deletion or a message
+to its old DM. Three research runtime slots
 do not imply three permanent worktrees or require one new checkout per replacement idea.
 
 Publishing methods does not reload running sessions. When the owner's requested research starts

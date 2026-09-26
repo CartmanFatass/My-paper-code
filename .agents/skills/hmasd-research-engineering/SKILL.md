@@ -166,7 +166,7 @@ keep the checkout. Preserve failed/adverse outputs and all promised measurements
 tracked artifacts and accepted/frozen output contracts are unchanged; do not untrack, move,
 delete or convert old evidence as part of a routine result publication.
 
-### Worktree lifecycle at a completed work boundary
+### Worktree creation, reuse and retirement
 
 The owner requested systematic worktree/data separation on 2026-09-25. The owning DM
 includes retention and checkout disposition in its normal completion work, without a Root
@@ -175,6 +175,14 @@ continuation; a new batch, direction name or publication alone does not require 
 A temporary publication checkout can be reused during ongoing work and retired when it
 has no next use. Three concurrent research tracks is not a three-worktree quota.
 
+Before creating a checkout, inspect the current chat's `list_artifacts` and the repository's
+`git worktree list`; prefer a suitable free checkout. For new isolation use native
+`create_worktree` when available and confirm its returned attachment identity. The creating
+session owns retirement of that checkout, including one lent to an internal helper; assigning
+a direction does not transfer an App attachment. Keep any needed owner/path detail in the
+existing RESEARCH routing, not a new registry. A manually created Git worktree is not proven
+App-managed merely because it lives under `.codex/worktrees`.
+
 At final closure or an actual checkout replacement: publish useful code and compact readings,
 preserve unique Git commits on durable refs, retain needed raw/partial/failed outputs outside
 all worktrees, verify recovery, then retire the unused checkout with the available native
@@ -182,6 +190,10 @@ worktree tool. Keep the chat open. Check current task ownership, accepted operat
 observers/Pro delivery, process references and pinned/shared status before retirement.
 Idle UI state, a completed individual cell and an archived direction label do not prove
 that those dependencies ended. Never kill a shared browser or worker to clear a checkout.
+For an attached managed checkout, use its exact `list_artifacts` identity with
+`archive_worktree`. Confirm both the native result and that the checkout is absent from the
+Git worktree list and disk. Archiving a chat, publishing results or copying data is not evidence
+that retirement succeeded. An intentionally reusable checkout remains active, not archived.
 
 For a legacy inactive checkout, `scripts/hmasd_worktree_data.py` provides preview, copy-only
 retention and independent verification; exact commands and restoration are in the
@@ -189,8 +201,12 @@ retention and independent verification; exact commands and restoration are in th
 The data package's machine manifest contains file hashes and source identity, not a new
 research ledger. Link its durable node/path in the existing NOTES or run metadata. Its
 success does not authorize deletion or prove scientific completion. If the current native
-tool cannot archive another chat's worktree, preserve it and report that specific remaining
-action; do not substitute raw directory deletion or an App message to the old DM.
+tool cannot archive another chat's worktree, distinguish that tool scope from the App's
+global Worktrees settings. A verified native settings entry can provide the cleanup route;
+do not promise that an unlisted legacy checkout is managed there. Preserve the checkout and
+report the concrete remaining action when the route cannot be used. Do not substitute raw
+directory deletion, internal App API calls or an App message to the old DM. State data retention
+and directory retirement separately, so an interrupted cleanup stays visibly unfinished.
 
 The completion boundary is the cleanup trigger. Do not add an age sweep, recurring model
 monitor or automatic deletion on process exit: result reading and accepted-operation
