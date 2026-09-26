@@ -1,0 +1,77 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925/summary.json",
+      "state": "absent"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/883ae55e5a22c81169f80e748994556a47f04a8f032552cced4183b00ed1a6a9.json",
+  "direction": "planning_policy_compression",
+  "execution": {
+    "exit_witness": {
+      "path": "/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925/process-exit.json",
+      "state": "absent"
+    },
+    "runner": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 695761,
+        "session_id": 695760,
+        "start_ticks": 74975176
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 695761,
+        "session_id": 695760,
+        "start_ticks": 74975176
+      },
+      "state": "running"
+    },
+    "state": "running",
+    "supervisor": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 695760,
+        "session_id": 695760,
+        "start_ticks": 74975173
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 695760,
+        "session_id": 695760,
+        "start_ticks": 74975173
+      },
+      "state": "running"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-26T04:00:46.644714Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/883ae55e5a22c81169f80e748994556a47f04a8f032552cced4183b00ed1a6a9.json",
+  "output_root": "/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "443d392ec47a3e53652114d28084d48ce1e5d9e2",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/bcfd81ab82b341919c4f569088ca4a97"
+}

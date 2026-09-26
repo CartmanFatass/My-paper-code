@@ -120,3 +120,44 @@ native admission and exact output tag are frozen with accepted implementation be
 
 Not run. Scientific plan selected; B02 tag `b02_confirm_s925951_20260925`.
 Append the eventual result without rewriting this fixed plan.
+
+### 2026-09-25 — Completed result, read by the frozen rule
+
+Execution source `443d392ec47a3e53652114d28084d48ce1e5d9e2`; all ten fits and five independent
+paired training/evaluation blocks completed. B01 remains excluded. Native exit0, raw deployed
+trajectories, checkpoints, complete counts and recorded hashes were reconciled before this reading.
+
+| Block / training seed | WBC−BC total jobs | d_b, jobs/context | BC−AF | WBC−AF | WBC−teacher | teacher−AF |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 / 925951 | +22 | +.08593750 | +5 | +27 | −16 | +43 |
+| 1 / 925952 | +11 | +.04296875 | +6 | +17 | −20 | +37 |
+| 2 / 925953 | +18 | +.07031250 | +9 | +27 | −3 | +30 |
+| 3 / 925954 | +16 | +.06250000 | −1 | +15 | −12 | +27 |
+| 4 / 925955 | +12 | +.04687500 | +2 | +14 | −5 | +19 |
+
+S=5, no ties: exact one-sided p=.03125, one-sided95 Clopper–Pearson lower bound
+.5492802716530589. **The prespecified narrow q_256>1/2 sign claim is confirmed.**
+The five-block mean is +15.8 jobs per 256-context panel, or +.06171875 jobs/context;
+total differences range +11..+22. These magnitudes are descriptive, not a mean-effect
+confidence bound, a success guarantee or a full-teacher-retention claim.
+
+Complete-use reading: WBC exceeds AF in all five panel totals but remains below the teacher
+in every block. WBC−BC has 17 adverse contexts across the five distinct panels, including
+one −2-job loss; WBC−teacher has 69, including a −3-job loss. Contexts are not extra training
+units. WBC−BC waiting totals are −56/−56/−95/−78/−30 ticks; conflicts −4/−2/−4/−5/0.
+The B01 waiting increase did not recur; packet totals stay 6,144 per arm/panel. All other
+native components and loss lists remain in the full result.
+
+Ten fits, 737,280 team ticks, 9,600 optimizer updates, 172,410,112 actual model branches.
+Scientific wall692.9198s, CPU709.7530s, native accepted-operation elapsed712.7586s;
+single-process peak RSS608.625MiB. Shared collection291.3600s and fit occupancy236.9011s
+remain counted. Full offline batch256 deployment boundaries are BC1.1373–1.2406s,
+WBC1.1363–1.1961s, teacher28.8416–29.4865s, AF.3981–.4347s. These measurements do not
+establish online latency or amortized economic advantage; student−teacher saving and
+WBC−BC learning gain are distinct comparisons.
+
+No sixth seed, retuning or new result-bearing batch is added. See
+[complete result and interpretation](NOTES.md#2026-09-25--b02-complete-narrow-recurrence-confirmed-with-a-persistent-teacher-gap),
+[summary](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/summary.json),
+[per-context outcomes](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/per_context.json),
+and [native final status](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/native-status-final.json).

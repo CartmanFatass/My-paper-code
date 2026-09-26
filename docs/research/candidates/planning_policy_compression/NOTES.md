@@ -777,3 +777,239 @@ unchanged teacher/feature semantics; do not redo full mechanism validation. Scie
 fixtures are tests and never confirmation observations. Independent engineering Reviewer
 checks the new RNG/block/evaluation and inference accounting; DM accepts the full diff.
 Implementer owns only those code/test paths, no NOTES/claim/index/Git, Pro, children or launch.
+
+## 2026-09-25 — B02 engineering accepted for the frozen confirmation
+
+I read and accept the complete B02 orchestration, admitted entry and focused tests, including
+the final partial-cost repair. Independent Reviewer found one material recovery issue:
+a later evaluation-arm failure could omit the completed BC/WBC full deployment boundaries
+from the FAILED summary. The repaired live block timing preserves each completed method's
+setup, deployment and attached calibration cost; the failed arm records measured attempted
+cost and executed trace prefix without a completed-method claim or formal verdict.
+
+Implementer reports five focused tests passed in 12.51s and py_compile passed. Reviewer
+independently passed sign/admission checks (2) and the repaired later-arm failure regression
+(1), and found no remaining material issue. Its independent finite binomial/CP arithmetic
+agrees for all six positive-block counts. Checks cover five distinct training/evaluation
+blocks, within-block pairing, optimizer continuation, fixed work accounting, zero student
+queries and failure preservation. Fixtures are not research observations. B01 policy,
+teacher, features and shared launch/admission source remain byte-identical to the accepted
+B01 source; only the three scoped B02 code/test files and this notebook are added here.
+
+Fresh origin/main is `1e6bb2b6cb379301edbbafd3632381becd3a04e6`: owner pause remains lifted,
+this direction is confirming under the same independent Codex DM, and Claude FSD remains
+paused. This scientific batch and ten-fit cost remain exactly as the claim above. Publish
+this accepted implementation before requesting one native B02 launch; use the existing
+remote author/output checkout and a new exact-SHA source snapshot, preserving B01 outputs.
+Native admission and actual-node resource checks still precede result execution. No B02
+result-bearing attempt has started at this acceptance boundary.
+
+## 2026-09-25 — B02 accepted; fixed confirmation in progress
+
+The [native manifest](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/launch-manifest.json)
+binds the single accepted B02 request to the published implementation and retained source
+snapshot. Its [initial native status](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/native-status-initial.json)
+agrees on admission and live supervisor/runner identities; the
+[actual-node preflight](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/admission-preflight.json)
+passed. The copied [configuration](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/config.json)
+matches all five frozen seed tuples, 40+40 epochs, CPU float32, batch16 and one-thread settings.
+Training has begun; the initial status is a historical progress sample, not an endpoint.
+The outer configured supervisor's exit zero acknowledges admission only. No scientific
+acceptance or primary verdict is recorded while the batch is running.
+
+Execution preparation synchronized only this direction's remote runtime state field from
+exploring to the published confirming value; all other remote control text and its index
+were preserved. The local canonical checkout/index was untouched. The first control-text
+read stalled on a missing partial-clone object without the configured network environment.
+Only its owned Git fetch was terminated; the helper then failed before writing or launching.
+The configured network shell fetched the same published text and completed the narrow sync.
+Existing remote auto-GC warnings about missing historical tree
+`9e40125ee3e24973b69754649226d18847b45862` remain unrepaired; this is not a repository-wide
+integrity claim. The requested source snapshot and published control were subsequently
+accepted by the native kernel. This support episode started zero scientific fits and did
+not repeat an accepted scientific request.
+
+Observe the accepted operation with the task-local repository controller, keeping the same
+handle through checkpoints or errors. Read every final native artifact, preserve and verify
+the raw outputs, then apply the prewritten sign rule and separately judge complete utility
+and cost. No early score-based change, replacement seed or automatic extension is permitted.
+
+## 2026-09-25 — B02 complete: narrow recurrence confirmed with a persistent teacher gap
+
+I accept the completed fixed batch after reading the config, summary, all comparison/component
+vectors, per-context losses, all 800 curve rows, checkpoint/timing evidence and native terminal
+records. The [prewritten claim](CLAIM_weighted_partial_compression.md) is unchanged above its
+appended result. Source `443d392ec47a3e53652114d28084d48ce1e5d9e2`, same accepted operation;
+no restart, replacement, early selection or extra seed. Native exit0 is supported by actual
+complete scientific outputs, not used as their substitute.
+
+**Recovery and engineering evidence.** All 1,342 remote files / 40,640,201 bytes were copied
+and independently matched by size/SHA256. Reviewer separately verified all 1,335 runner-listed
+artifacts and reconstructed all 5,120 deployment episodes from executed raw actions, rewards
+and cumulative completions/wait/conflicts/packets. All contrasts and loss worlds reconcile.
+Ten fit checkpoints show optimizer0→320→960, identical initial tensors within each pair,
+distinct initializations across five blocks and nonzero movement. Each fit processed5,898,240
+agent-time rows; all fixed seed tuples and calibration/step counts agree. All160 student
+deployment batches have zero filter/model-query work; evaluation optimizer updates are zero.
+Reviewer found no material inconsistency. This is stored-evidence verification, not new replay.
+Native final status has a valid exit witness and consistent source/process identities; both
+logs are empty. The terminal observation was consumed using its returned generation/wake/event.
+
+**Fixed primary reading.** Blocks use training seeds925951–925955 and their own independent
+fresh256-context evaluation panels925961–925965. Totals below are signed completed-job
+differences over each whole panel; P is the same approximate P_k4_M32 teacher.
+
+| Block | BC−AF | WBC−AF | WBC−BC | BC−P | WBC−P | P−AF | WBC−BC per context |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | +5 | +27 | +22 | −38 | −16 | +43 | +.08593750 |
+| 1 | +6 | +17 | +11 | −31 | −20 | +37 | +.04296875 |
+| 2 | +9 | +27 | +18 | −21 | −3 | +30 | +.07031250 |
+| 3 | −1 | +15 | +16 | −28 | −12 | +27 | +.06250000 |
+| 4 | +2 | +14 | +12 | −17 | −5 | +19 | +.04687500 |
+
+All five integer WBC−BC signs are strictly positive, no ties. The prescribed exact one-sided
+binomial test gives p=.03125 and one-sided95 CP lower bound .5492802716530589.
+**CONFIRMED_NARROW_SIGN_CLAIM:** q_256>1/2 for the declared joint training-and-finite-panel
+procedure. It is not the probability that a trained policy has a positive true expected return,
+a lower bound on population mean gain, or a95% deployment reliability guarantee. The descriptive
+mean is +15.8 jobs/panel (+.06171875/context), range +11..+22. B01 contributes no confirmation
+unit; the1,280 contexts are nested observations, not n=1,280 independent training runs.
+
+**Complete native use and contrary observations.** WBC−BC positive/zero/negative context
+counts are18/237/1,15/234/7,16/238/2,12/242/2,14/237/5. Thus most contexts tie, and17 lose.
+Loss contexts by block are0:{198};1:{91,128,149,150,153,191,205};2:{186,253};3:{48,139};
+4:{18,55,69,119,188}. Block1/context128 loses2 jobs; all other WBC−BC losses are1.
+WBC−AF loses3/7/2/3/6 contexts despite each positive panel total; its losses are
+0:{13,198,226};1:{91,128,149,150,153,191,205};2:{186,253};3:{48,139,206};
+4:{16,18,55,69,103,188}. The worst WBC−AF loss is2 jobs.
+WBC−P loses14/19/6/16/14 contexts; block1/context147 loses3 jobs. BC−P also remains negative
+in every block; BC−AF even totals−1 in block3. P−AF loses0/4/3/3/2 contexts. The full six
+comparison loss lists, not just these selected examples, are retained in summary/per_context.
+
+| Block | WBC−BC wait ticks | WBC−BC conflicts | WBC−P wait ticks | WBC−P conflicts | WBC−AF wait ticks |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 0 | −56 | −4 | −38 | +7 | −126 |
+| 1 | −56 | −2 | 0 | +7 | −89 |
+| 2 | −95 | −4 | −57 | +1 | −114 |
+| 3 | −78 | −5 | −26 | −2 | −92 |
+| 4 | −30 | 0 | +10 | +3 | −51 |
+
+All arms start3,584 jobs and send6,144 packets per panel. Service is the corresponding
+completed-job fraction, not a separate success sample. WBC−BC forced packets are+28/+48/
++37/+60/+22 and delivered packets0/−2/+1/0/−1. Packet quantity is not reduced; delivery and
+timing paths can differ under joint behavior. Full gate/disagreement/unknown/opportunity and
+all other native components remain in the saved outputs. This does not diagnose a mediator.
+
+**Intermediate learning prediction.** Every fit made960 actual updates and moved parameters;
+the complete80-epoch curves are finite. Stage2 WBC weighted disagreement is.090434/.087987/
+.080731/.084336/.097637, below paired BC .111067/.114744/.103529/.113449/.117487.
+Nonzero-root disagreement is also lower in all five. Ordinary disagreement is higher in all
+five by about.21–.70 percentage points, and AF-send-fallback disagreement rises from BC
+.30–.68% to WBC3.09–4.18%. Stage1 has the same signs. These are in-sample approximate labels:
+they support changed finite-learning error allocation, not independent validation of true
+decision-consequence mediation. Mean1 weights do not match gradient direction or Adam history.
+
+**Actual full cost.** Ten started/completed fits,245,760 collection+491,520 evaluation team
+ticks;3,840 calibrations/closed-form fits,15,360 calibration moves;9,600 optimizer updates,
+58,982,400 optimizer rows,1,474,560 endpoint-diagnostic forward rows. Actual model branches
+172,410,112 remain below754,974,720 fixed upper bound. No new labels or environment queries
+were purchased for endpoint diagnosis.
+
+Scientific wall692.9198s, CPU709.7530s, single-process peak RSS608.625MiB; accepted-operation
+elapsed712.7586s includes additional startup/terminal work. Entry import/startup is .9739s.
+Shared collection batch wall291.3600s includes170.5404s filtering and105.6585s model queries.
+Ten fit occupancy sums236.9011s, with236.2197s optimization; shared collection is excluded
+from that fit subtotal and remains explicitly charged. Per-block BC/WBC fit walls are
+24.5158/23.8803,23.7247/23.2480,23.6881/23.5189,23.6854/23.7238,23.3848/23.5312 seconds.
+
+| Block | BC full deployment s | WBC full deployment s | P full deployment s | AF full deployment s |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | 1.195847 | 1.196081 | 29.036604 | .425690 |
+| 1 | 1.222153 | 1.175882 | 28.846945 | .425352 |
+| 2 | 1.240615 | 1.136311 | 28.841571 | .431386 |
+| 3 | 1.178312 | 1.183091 | 29.428420 | .398086 |
+| 4 | 1.137267 | 1.154972 | 29.486527 | .434741 |
+
+These are the same full offline batched boundaries including checkpoint setup, deployment
+and method-required calibration, not online latency. Costs nested in these totals are not
+summed twice. Students remove filtering/querying; they remain more costly than AF. WBC and BC
+share the architecture; these timings do not support WBC being intrinsically faster than BC.
+Both students' joint data production remains part of obtaining WBC, including BC roll-in and
+teacher labeling. No full engineering/transport/readback effort total, amortization point,
+energy or deployment-safety price is inferred from this scientific process measurement.
+
+**Working explanation and next investment.** Relative to the B01 update and current published
+main `1e6bb2b6cb379301edbbafd3632381becd3a04e6` sections2/4/8, five genuinely separate
+training/panel realizations strengthen useful partial compression and the fixed weighting
+increment. They weaken the explanation that the B01 positive merely depended on its two
+training instances and one shared panel. The complete native gain remains small and sparse;
+the teacher gap is not removed, and ordinary BC's panel gain is not uniformly positive.
+This leaves finite-history sufficiency, residual capacity/data/optimization limitations,
+teacher bias, causal consequence semantics and UAV transfer unresolved.
+
+B01's WBC−BC waiting increase (+22/+5) **did not recur**: all five B02 wait totals decrease.
+Preserve both observations; an unavoidable completion–waiting tradeoff is unsupported.
+The surviving learning explanation is changed optimization/classification and closed-loop
+visitation under approximate labels. The study does not distinguish that from a genuine
+benefit of prioritizing true decision consequences. No permutation-weight or oracle audit
+is silently added to obtain a mechanism claim.
+
+ResearchCritic reports MATERIAL_DISSENT:no after checking all330 contrast means/sign counts
+against per-context outputs. I agree with its bounded update and stopping rationale. The
+complete Pro answer above already considered stopping versus this exact independent batch,
+its all-positive reading, remaining teacher gap and absence of automatic continuation. I reuse
+that reasoning for this prewritten outcome and bounded recipe completion; no premise, primary
+claim or comparator is broadened and no fresh consultation is needed just to bless the result.
+
+I end **current CrossingHost planning-compression investment**, preserving WBC, BC and the
+approximate teacher as reusable assets. B02 answers the unresolved recurrence question selected
+after B01. More unchanged blocks chiefly buy precision; the residual gap does not select
+capacity, extra roll-in, weight retuning or higher teacher budget over competing explanations.
+Such sweeps have no presently chosen discriminating prediction that warrants another batch.
+Mechanism identification or native UAV transfer would ask different questions with different
+comparators and costs, not automatically follow from this sign result. Shared evidence keeps
+those questions open; the independent partner-exposure study has its own lead, and unselected
+critic/message reserves do not oblige this DM to fill a runtime slot. This is a completed useful
+finite comparison, not a negative verdict on all planning compression, an assertion of scientific
+exhaustion, or a request for new approval. There is no active producer, open Pro question,
+unread result or selected successor after publication.
+
+Recovery: bulk raw traces, supervision, all30 checkpoints and logs remain at both
+`hmasd-wsl-node:/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925`
+and this authoring checkout's matching run path. Compact config/status/summary/curves/
+per-context and native records are versioned; the7.85MB episode file with detailed send-clock/
+peer counters remains alongside the bulk evidence outside Git, with its runner-listed hash.
+The remote complete-file inventory was verified
+locally; its private scratch SHA256 is
+`1d3fb38d8069b60871ccb70d2d1c2f0edbf2537ff1c06aebc38b2d4361e9fd37`.
+[Full summary](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/summary.json),
+[all per-context outcomes](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/per_context.json),
+[curves](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/curves.json),
+[native terminal evidence](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/native-status-final.json).
+
+After verified recovery, the native snapshot collector previewed and reclaimed only
+`bcfd81ab82b341919c4f569088ca4a97`, with its read-only sudo process scan. Both output copies,
+published source/ref, claim and terminal records remain. The durable author/output checkout
+was not removed, and cleanup does not authorize another execution.
+
+### Completion storage and checkout disposition
+
+The final publication refresh found main `913df36e8e59eb77e06a82224580509e252903ba`, including
+the owner's new worktree/data separation method. I applied it without changing the scientific
+result or restarting an operation. Complete B01/B02 output copies now also live outside all
+worktrees at `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`:
+B01 `b01_bc_wbc_s925941_20260925` has447 files/13,758,268 bytes;
+B02 `b02_confirm_s925951_20260925` has1,344 files/40,645,572 bytes. Every copied file matches
+its source size/SHA256. A separate verification using only each external summary and retained
+files matched all438 B01 and1,335 B02 runner-listed artifacts. Extra files relative to the
+remote counts are the locally collected native status records. Keep each whole tag directory
+with its config, summary and native records for recovery; original remote copies remain.
+
+All accepted operations are terminal, all Pro text has been delivered/read, and observer
+generation6 has no pending event or active job. Source and result commits remain on the
+published direction branch. This chat's native artifact list contains only the temporary
+`ppc-publication` checkout, which has no scientific dependency after the final main push
+and is to be natively archived then. The reused `fsd-a` checkout is not attached to this chat;
+the current archive tool cannot retire it. Preserve that directory for retirement through
+its actual owning task/tool; do not bypass the limitation with shell deletion or an App message.
+Its required data is now independently recoverable outside the checkout.
