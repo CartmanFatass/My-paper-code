@@ -1724,3 +1724,84 @@ then stop. This is an owner-imposed hold, not scientific rejection or exhaustion
 No further Pro request, cross-task message, replacement worker or research continuation is
 authorized by this handoff. Global pause/other directions/FSD/G33 are not changed. PPC's own
 standing becomes paused; a future status question, handoff read or workflow edit cannot resume it.
+
+## 2026-09-26 — Handoff: owner hold, B03 published and B04 unlaunched
+
+**接手时先读：本任务已按owner要求收尾停止，不开新实验。** B03结果完整；B04只完成了
+指令到达前已经在做的实现及工程检查，从未启动。交接不构成恢复、移交负责人或联系其他任务
+的授权。保留当前DM地址`01a0db8e-361c-7b13-a086-3fe1303fa4b7`/local与共享main工作区
+`/home/fires/hmasd-wsl`；未创建新任务、authoring worktree或新的Pro问题。
+
+### 已完成结果与可恢复证据
+
+B01/B02/B03累计20次科学fit已完成、读取并发布。B03执行输入为
+`04d746dcc0e6feff11204a10c7f0aed87f0d7926`，完整结果与下一方案前瞻发布于
+`940a06014278f2a4295d2086d6a97cc65ddf99fd`；owner停止及PPC暂停发布于
+`b1d8bcb73af5de85d39ad4e2d41c98521975a6fb`。当前交接提交另保存未执行B04代码与检查结论。
+
+B03两配对O−S为+12/+14、O−BC +14/+17、S−BC +2/+3完成任务；六fit科学墙钟121.035783s。
+它支持单一已曝光D上的有限权重对应增量，未识别真实后果语义、教师缺口原因或UAV用途。
+原生损失世界、普通/零delta分歧变差、更多强制发送/unknown-gate及全部成本已完整保留在上文。
+旧B02五新区组q_256确认及所有教师缺口保持原义，不能与B03合并成新的训练重复。
+
+- Git中的紧凑结果和原生操作记录：
+  `runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/`。
+- 唯一完整B03 raw位置：
+  `hmasd-wsl-node:/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/`。
+  319项清单及326个文件已核验；summary SHA256
+  `cb80a2c465b756aaeb2621ee1fb918a202e471e398a6bd5ee9431250a94bcd35`。
+  该目录不是源码快照，不删除、不重复拷贝。
+- 原生manifest保留准确operation reference；exit0已与完整科学输出分别核对。
+  不需要恢复、重启或重跑B03。其闲置source snapshot已按维护工具回收，净释放793542656
+  allocated bytes；输出与claim仍保留。
+- B03的外部固定D仍在既有B02归档，SHA256
+  `eba65c4c17b49a18c6376628913feabac79dd38ba497e8003808d79ebadb55a4`；B04本来需要新采集，
+  不使用该D替代自己的未执行采集。
+
+### 当前工程已完成，B04没有科学结果
+
+DM读取并接受Implementer的限定差异；独立Engineering Reviewer`/root/review_b01`检查新增
+数据流/RNG/成本/失败保全及CLI，报告**无实质工程问题**。冻结B01/B02/B03和共享helper未改。
+两臂实际stage2输入各自拥有roll-in；匹配世界/校准、共同初始化/批序、Adam连续性、四臂部署、
+学生零查询/过滤、来源哈希与部分失败保全已检查。单方法完整承担教师前缀；分项耗时明确不含
+数据拼接/整理、部分I/O/hash与支持工作，不伪称完整端到端单方法墙钟。
+
+已发布实现只包含以下三个新文件；以下SHA256绑定这次review的字节，不是原生执行凭证：
+
+| File | SHA256 |
+| --- | --- |
+| `experiments/candidates/planning_policy_compression/b04/study.py` | `3b9fdaa83eb13cd73a7212febb1ef78d79883a9f451c8521d9b952314e5ca58f` |
+| `experiments/candidates/planning_policy_compression/b04/run.py` | `5cd4c04d4fb5548a857c505831d9c099842685b5fc1d497206bd04020595c250` |
+| `tests/experiments/candidates/planning_policy_compression/b04/test_study.py` | `152733d1504e4cd8ab88bb3341f46e71b1d69aacd90eb8bbf83c96accb56b759` |
+
+工程检查命令：`/home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q
+tests/experiments/candidates/planning_policy_compression/b04`。Implementer为4 passed/10.62s，
+独立Reviewer为4 passed/8.00s；语法编译通过。测试使用单独小fixture及有意区分两臂的sentinel，
+验证实际stage2数据传递、匹配roll-in地址、完整前缀费用，以及单tick后失败的轨迹/成本。
+这些是工程检查，不是生产种子预演或新增科学fit；生产规模运行尚未验证，不能从绿测试宣称成功。
+
+B04实际科学计数保持**0 fit、0采集、0评价、无accepted handle/source snapshot/输出目录**。
+未执行方案仍是上文固定的两新区组/四fit独立采集比较；所有seed、40+40 epochs、前瞻判读和
+拟议成本在那里，不因暂停重写。没有B05、额外区组、自动确认、迁移或备用科学操作。
+
+### 停止状态与恢复边界
+
+PPC在已发布RESEARCH中的状态为`paused`。节点canonical控制只修改本方向state格为paused，
+其他方向、lead、全局owner pause及FSD/G33均保留。只读调用原生policy parser确认该状态
+拒绝active launch；节点B04输出目录确实不存在。没有用一次真实launch来“测试”拒绝。
+
+当前hmasd_wait state目录是
+`/home/fires/.local/state/hmasd-wait/01a0db8e-361c-7b13-a086-3fe1303fa4b7`：generation8，
+所有历史事件已消费，无pending wake/活动job；观察已显式stop，返回`work_unchanged:true`。
+四个旧job均为终态（B01/B02/B03 ready，旧Pro collected且此前完整交付/读取完成）。
+当前Implementer和Reviewer已交付停止，无未读Pro、等待工作或需要自动rearm的观察。
+
+节点技术限制保留供未来人工恢复时检查：本次fetch origin/main成功；随后读取published
+RESEARCH触发惰性对象获取，Git输出自动GC/repack警告
+`fatal: bad tree object 9e40125ee3e24973b69754649226d18847b45862`及`failed to run repack`。
+该次读取仍成功，published SHA与暂停格更新已验证。没有清理gc.log、修Git对象、改其他工作区
+或借此启动新任务。不要把成功读取当作整个节点对象库已经验证健康。
+
+只有owner明确恢复研究后，后续负责人才能重新确认当前lead/暂停/方案适用性及节点Git状态，
+发布精确执行输入并走实际节点准入。当前完整Pro建议和独立科学审查已覆盖该方案的动机及
+结果分支；读交接不要求重发。尚无责任转移或科学重启；当前任务至此停止。
