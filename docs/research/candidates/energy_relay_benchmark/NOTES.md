@@ -794,3 +794,21 @@ checks after the change: `tests/experiments/candidates/energy_relay_benchmark/b0
 --launch-sha <sha> --checkpoint /home/wu/hmasd-worktrees/usa-b09-48388289d/runs/uav_service_auxiliary/b09_an_925031_a01/N/endpoint/agent.pt
 --phase all --workers 8 --threads 2 --device cpu`. 316 episodes (4 + 32 + 24 + 32 + 224). The
 launch record follows in the next entry once the admission kernel accepts the operation.
+
+### Transport record: Pro question sent (2026-09-26)
+
+Question key `hmasd:901b4c3178634bca7cf79dbccff265988b095aef6d2f5dd314daa8b67033a01c`, bound to
+source SHA `414659f35f6dc4a41a07fd9d564223b2342499d0`, target this file, heading "## Pro question
+2026-09-26 b01-exit-margin-mechanism-and-reference". Sent by the Claude session through the Jev
+route (owner instruction of 2026-09-26: the session owns the repository and does not ask for
+permission; the owner also authorised the session to handle the send-and-receive workflow):
+headless, effort pill "6 Pro", short cover note plus the complete question document (sha256
+`6fb71a4c7a90ccfe39dbbe5fb20498fa642648bdb4885542f5c6f1d9e38d5671`), `send_effect: sent`,
+attachment seen, new conversation whose address stays in the local operation file. The
+deterministic observer (`jev_send.py wait`) is armed; delivery is read with `deliver` and the
+answer is recorded under `### Answer` when it lands. The B01 launch does not wait for it.
+
+Publication commit for the launch inputs: `414659f35f6dc4a41a07fd9d564223b2342499d0`
+("energy_relay_benchmark: B01 revised after independent scientific review; constitution section 5
+amendment; launch inputs"). The node fast-forward and admission launch follow; the launch record
+is appended when the kernel accepts the operation.
