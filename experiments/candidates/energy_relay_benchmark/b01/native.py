@@ -6,6 +6,9 @@ worlds, J and QoS/step recorded next to B10 O), ``heuristic-dev`` (central H1-H3
 development worlds; selection), ``reference`` (the selected variant with local information,
 ``Hlocal``) and ``grid`` (N and the selected central heuristic over the width-matched shield
 settings).  Nothing is gated on a recorded difference.
+
+``stochastic-check`` (never part of ``all``): N at production margins on ``worlds`` with sampled
+actions at both levels, ``STOCHASTIC_DRAWS`` seeded episodes per world (panels ``..._s<draw>``).
 """
 
 from __future__ import annotations
@@ -32,6 +35,7 @@ from experiments.candidates.uav_service_auxiliary.b09.persistence import write_s
 from .evaluation import (
     N_CONTROLLER_INFORMATION,
     PLAN_SOURCE,
+    SAMPLE_SEED_RULE,
     TRACE_TIMING,
     WorldTask,
     aggregate,
@@ -46,7 +50,9 @@ from .observation import S7S2_LAYOUT
 OBJECT_ID = "ENERGY-RELAY-BENCHMARK-B01"
 DIRECTION = "energy_relay_benchmark"
 RUN_PHASES = ("equivalence", "null", "heuristic-dev", "reference", "grid")
-PHASES = (*RUN_PHASES, "all")
+STOCHASTIC_PHASE = "stochastic-check"   # run alone only; ``all`` stays RUN_PHASES
+STOCHASTIC_DRAWS = 2                    # sampled episodes per world
+PHASES = (*RUN_PHASES, STOCHASTIC_PHASE, "all")
 HEURISTICS = ("H1", "H2", "H3")
 LOCAL_CONTROLLER = "Hlocal"
 CONTROLLERS = ("N", *HEURISTICS)
@@ -202,7 +208,19 @@ def phase_panels(phase: str, spec: B01Spec, controllers=None):
         chosen = grid_controllers(spec) if controllers is None else tuple(controllers)
         return [(controller, params, tuple(spec.worlds))
                 for controller in chosen for params in feedback_grid(spec)]
-    raise ValueError(f"phase must be one of {RUN_PHASES}")
+    if phase == STOCHASTIC_PHASE:   # one panel per draw
+        return [("N", PRODUCTION_PARAMS, tuple(spec.worlds))] * STOCHASTIC_DRAWS
+    raise ValueError(f"phase must be one of {(*RUN_PHASES, STOCHASTIC_PHASE)}")
+
+
+def named_panels(phase: str, spec: B01Spec, controllers=None):
+    """(name, controller, params, worlds, draw) per panel; draw is None for deterministic
+    phases and 0..STOCHASTIC_DRAWS-1 for ``stochastic-check`` (name suffix ``_s<draw>``)."""
+    panels = phase_panels(phase, spec, controllers)
+    if phase != STOCHASTIC_PHASE:
+        return [(panel_name(c, p), c, p, w, None) for c, p, w in panels]
+    return [(f"{panel_name(c, p)}_s{draw}", c, p, w, draw)
+            for draw, (c, p, w) in enumerate(panels)]
 
 
 def planned_episodes(spec: B01Spec, phase: str) -> int:
@@ -277,10 +295,14 @@ def config_record(spec: B01Spec, phase: str, *, launch_sha: str, checkpoint, dev
             planned[name] = {"controller": LOCAL_CONTROLLER,
                              "params_from": "<selected_heuristic> with information='local'",
                              "feedback": asdict(PRODUCTION_PARAMS), "worlds": list(spec.worlds)}
+        elif name == STOCHASTIC_PHASE:
+            planned[name] = [{"name": n, "controller": c, "params": asdict(p), "worlds": list(w),
+                              "action_mode": "stochastic", "draw": d}
+                             for n, c, p, w, d in named_panels(name, spec)]
         else:
             planned[name] = [{"name": panel_name(c, p), "controller": c, "params": asdict(p),
                               "worlds": list(w)} for c, p, w in phase_panels(name, spec)]
-    return {
+    record = {
         "object_id": OBJECT_ID,
         "launch_sha": launch_sha,
         "phase": phase,
@@ -325,6 +347,13 @@ def config_record(spec: B01Spec, phase: str, *, launch_sha: str, checkpoint, dev
             "station 1 is a jittered anchor: reset user centroid + uniform ±0.12·area_size per "
             "axis (configs/config_1.py line 529; energy_aware.py lines 393–398)"),
     }
+    if STOCHASTIC_PHASE in phases:
+        record["stochastic_check"] = {
+            "controller": "N", "feedback": asdict(PRODUCTION_PARAMS),
+            "draws_per_world": STOCHASTIC_DRAWS, "sample_seed_rule": SAMPLE_SEED_RULE,
+            "action_sampling": ("HMASDAgent.step(deterministic=False): coordinator team/agent "
+                                "skills sampled, low-level actor actions sampled")}
+    return record
 
 
 def _progress(out: Path, event: dict[str, Any]) -> None:
@@ -356,7 +385,7 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
             raise ValueError("checkpoint sha256 does not match the recorded B09 N endpoint")
     out = Path(out)
     if any((out / name).exists() for name in
-           ("summary.json", "config.json", "progress.jsonl", *RUN_PHASES)):
+           ("summary.json", "config.json", "progress.jsonl", *RUN_PHASES, STOCHASTIC_PHASE)):
         raise FileExistsError(f"B01 output already exists: {out}")
     out.mkdir(parents=True, exist_ok=True)
     (out / "logs").mkdir(exist_ok=True)
@@ -385,8 +414,9 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
                     "workers": spec.workers, "threads": spec.threads})
     selected = spec.heuristic
 
-    def run_panel(phase_name: str, controller: str, params: FeedbackParams, worlds):
-        name = panel_name(controller, params)
+    def run_panel(phase_name: str, name: str, controller: str, params: FeedbackParams, worlds,
+                  draw: int | None = None):
+        action_mode = "deterministic" if draw is None else "stochastic"
         root = out / phase_name
         (root / "panels").mkdir(parents=True, exist_ok=True)
         (root / "traces").mkdir(parents=True, exist_ok=True)
@@ -402,6 +432,7 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
             expected_checkpoint_sha256=spec.checkpoint_sha256 if controller == "N" else None,
             expected_policy_fingerprint=spec.policy_fingerprint if controller == "N" else None,
             heuristic=hparams, log_dir=str(out / "logs"),
+            action_mode=action_mode, draw=draw,
         ) for seed in worlds]
 
         def advance(result):
@@ -426,6 +457,9 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
                  "failed_worlds": [row["seed"] for row in rows if row.get("failed")],
                  "policy_identity": [json.loads(item) for item in sorted(identities)],
                  "wall_seconds": time.perf_counter() - panel_started}
+        if draw is not None:
+            panel.update(action_mode=action_mode, draw=draw,
+                         sample_seeds={str(row["seed"]): row.get("sample_seed") for row in rows})
         if hparams is not None:
             panel["plan_source"] = PLAN_SOURCE if hparams.information == "central" else "legal-observation"
             panel["heuristic_params"] = hparams.record()
@@ -476,12 +510,12 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
             elif phase_name in ("reference", "grid"):
                 summary["selected_heuristic"] = selected
                 summary["selected_heuristic_source"] = "--heuristic (no heuristic-dev in this run)"
-            planned = phase_panels(phase_name, spec, controllers)
+            planned = named_panels(phase_name, spec, controllers)
             _progress(out, {"event": "phase_start", "phase": phase_name, "panels": len(planned)})
             phase_started = time.perf_counter()
             names = []
-            for controller, params, worlds in planned:
-                panel = run_panel(phase_name, controller, params, worlds)
+            for name, controller, params, worlds, draw in planned:
+                panel = run_panel(phase_name, name, controller, params, worlds, draw)
                 names.append(panel["name"])
                 if phase_name == "heuristic-dev":
                     dev_panels[panel["name"]] = panel

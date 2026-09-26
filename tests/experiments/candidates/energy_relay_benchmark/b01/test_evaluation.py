@@ -306,3 +306,166 @@ def test_mechanism_readings_definitions(config_60):
         env.close()
     np.testing.assert_allclose(ev.absolute_station_xy(np.asarray(obs, dtype=np.float32)), truth,
                                rtol=0, atol=0.01)
+
+
+# --- stochastic-check phase and the additive position diagnostics ---------------------------
+
+STOCHASTIC_H = 20
+
+
+def _stochastic_task(checkpoint, tmp_path, draw, **changes):
+    values = dict(controller="N", seed=955001, params=PRODUCTION_PARAMS, horizon=STOCHASTIC_H,
+                  policy_seed=POLICY_SEED, threads=1, checkpoint=str(checkpoint),
+                  log_dir=str(tmp_path), action_mode="stochastic", draw=draw)
+    return ev.WorldTask(**(values | changes))
+
+
+def _same_result(left, right):
+    assert {k: v for k, v in left["row"].items() if k not in VOLATILE} == \
+           {k: v for k, v in right["row"].items() if k not in VOLATILE}
+    assert left["arrays"].keys() == right["arrays"].keys()
+    for key in left["arrays"]:
+        assert np.array_equal(left["arrays"][key], right["arrays"][key]), key
+
+
+def test_sample_seed_rule():
+    seed = ev.sample_seed(POLICY_SEED, 955001, 0)
+    assert seed == hash((POLICY_SEED, 955001, 0)) & 0xFFFFFFFF and 0 <= seed < 2 ** 32
+    assert seed == ev.sample_seed(np.int64(POLICY_SEED), np.int64(955001), 0)
+    assert len({ev.sample_seed(POLICY_SEED, world, draw)
+                for world in (955001, 955002) for draw in (0, 1)}) == 4
+
+
+def test_stochastic_draws_repeat_bit_for_bit_and_differ(tmp_path, fresh_checkpoint):
+    first = ev.evaluate_task(_stochastic_task(fresh_checkpoint, tmp_path, 0))
+    again = ev.evaluate_task(_stochastic_task(fresh_checkpoint, tmp_path, 0))
+    other = ev.evaluate_task(_stochastic_task(fresh_checkpoint, tmp_path, 1))
+    mean = ev.evaluate_task(_stochastic_task(fresh_checkpoint, tmp_path, None,
+                                             action_mode="deterministic"))
+    _same_result(first, again)
+    row = first["row"]
+    assert (row["action_mode"], row["draw"]) == ("stochastic", 0)
+    assert row["sample_seed"] == ev.sample_seed(POLICY_SEED, 955001, 0)
+    assert other["row"]["sample_seed"] == ev.sample_seed(POLICY_SEED, 955001, 1) != row["sample_seed"]
+    assert not np.array_equal(first["arrays"]["own_xyz"], other["arrays"]["own_xyz"])
+    assert not np.array_equal(first["arrays"]["own_xyz"], mean["arrays"]["own_xyz"])
+    assert mean["row"]["action_mode"] == "deterministic"
+    assert "draw" not in mean["row"] and "sample_seed" not in mean["row"]
+    assert row["actual_length"] == STOCHASTIC_H and row["failed"] is False
+    # Spawn workers reproduce the serial draws (the seed is set inside the worker).
+    tasks = [_stochastic_task(fresh_checkpoint, tmp_path, draw) for draw in (0, 1)]
+    for left, right in zip(ev.run_tasks(tasks, workers=1), ev.run_tasks(tasks, workers=2),
+                           strict=True):
+        _same_result(left, right)
+    agg = ev.aggregate([first["row"], other["row"]])
+    assert "mean_draw" not in agg and "mean_sample_seed" not in agg
+
+
+def test_stochastic_mode_is_refused_outside_n(tmp_path, fresh_checkpoint):
+    with pytest.raises(ValueError, match="controller N and a draw"):
+        ev.evaluate_task(_stochastic_task(fresh_checkpoint, tmp_path, None))
+    with pytest.raises(ValueError, match="controller N and a draw"):
+        ev.evaluate_task(replace(_stochastic_task(fresh_checkpoint, tmp_path, 0),
+                                 controller="Hlocal", checkpoint=None))
+    with pytest.raises(ValueError, match="action_mode"):
+        ev.evaluate_task(_stochastic_task(fresh_checkpoint, tmp_path, 0, action_mode="sampled"))
+    with pytest.raises(ValueError, match="sample_seed"):
+        ev.PolicyController(object(), deterministic=False)
+
+
+@pytest.mark.parametrize("deterministic", [True, False], ids=["mean", "sampled"])
+def test_sampling_flag_reaches_coordinator_and_actor(tmp_path, deterministic):
+    """The batched ``HMASDAgent.step`` route: the flag arrives at the coordinator's
+    ``assign_and_value_batch``, the ``SkillDiscoverer`` forward and the actor's action head."""
+    device = torch.device("cpu")
+    config = ev.make_eval_config(STOCHASTIC_H, POLICY_SEED)
+    seed_everything(POLICY_SEED, device)
+    evaluator = HMASDAgent(config, log_dir=str(tmp_path / "agent"), device=device)
+    evaluator.train(False)
+    assert not (evaluator.use_ha_ctse or evaluator.d2_enabled
+                or evaluator.r39_native_toy_fixed_primitives or evaluator.use_low_level_compact
+                or evaluator.use_central_snapshot)   # the plain batched route is the live one
+    seen = {"coordinator": [], "discoverer": [], "action_head": []}
+
+    def spy(name, function, position):
+        def wrapped(*args, **kwargs):
+            flag = kwargs["deterministic"] if "deterministic" in kwargs else args[position]
+            seen[name].append(bool(flag))
+            return function(*args, **kwargs)
+        return wrapped
+
+    coordinator = evaluator.skill_coordinator
+    coordinator.assign_and_value_batch = spy(
+        "coordinator", coordinator.assign_and_value_batch, 2)
+    discoverer = evaluator.skill_discoverer
+    discoverer.forward = spy("discoverer", discoverer.forward, 3)
+    head = discoverer.actor.act.action_out
+    head.forward = spy("action_head", head.forward, 2)
+    controller = ev.PolicyController(evaluator, deterministic=deterministic,
+                                     sample_seed=None if deterministic else 12345)
+    env = make_env(config, 955001)
+    try:
+        row, _ = ev.evaluate_world(controller, env, config, 955001, PRODUCTION_PARAMS)
+    finally:
+        env.close()
+    assert row["actual_length"] == STOCHASTIC_H
+    assert len(seen["coordinator"]) == STOCHASTIC_H // config.k   # reassignment at 0 and k
+    assert len(seen["discoverer"]) == len(seen["action_head"]) == STOCHASTIC_H
+    for name, flags in seen.items():
+        assert set(flags) == {deterministic}, name
+
+
+def test_position_diagnostics_definitions():
+    length, area, floor = 4, 8000.0, 50.0
+    xyz = np.zeros((length, 8, 3))
+    xyz[..., :2] = 4000.0
+    xyz[..., 2] = 120.0
+    xyz[0, 0, 0] = 0.5                 # x near 0: boundary
+    xyz[1, 1, 1] = area - 0.2          # y near area: boundary
+    xyz[2, 2, 0] = 1.0                 # exactly 1 m: not boundary (strict <)
+    xyz[0, 3, 2] = floor               # on the floor
+    xyz[1, 3, 2] = floor + 0.5         # floor + 0.5: counted (<=)
+    xyz[2, 3, 2] = floor + 0.6         # above tolerance
+    mode = np.zeros((length, 8), dtype=bool)
+    mode[:, 7] = True                  # UAV 7 in shield mode throughout: excluded
+    xyz[:, 7, 0] = 0.0                 # would be boundary...
+    xyz[:, 7, 2] = floor               # ...and floor, but it is not in normal mode
+    distance = np.full((length, 8), 1000.0, dtype=np.float32)
+    station = np.zeros((length, 8), dtype=np.int8)
+    distance[0, :3] = 100.0            # three anchor UAV-steps within 300 m
+    distance[1, 4], station[1, 4] = 299.9, 1   # one centre UAV-step
+    distance[2, 5], station[2, 5] = 300.0, 1   # exactly 300 m: not counted (strict <)
+    distance[3, 7], station[3, 7] = 10.0, 1    # shield-mode UAV still counted (no mode filter)
+    metrics = np.zeros((length, len(TRACE_FIELDS)))
+    metrics[:, ev.QOS] = (0.0, 0.0, 0.3, 0.0)
+    steps = {"own_xyz": xyz, "mode": mode, "nearest_station": station,
+             "nearest_station_distance_m": distance}
+    result = ev.position_diagnostics(metrics, steps, area_size_m=area, floor_m=floor)
+    normal = length * 7
+    assert result["boundary_share_normal_mode"] == 2 / normal
+    assert result["altitude_floor_share_normal_mode"] == 2 / normal
+    assert result["anchor_uav_steps_within_300m"] == 3
+    assert result["centre_uav_steps_within_300m"] == 2
+    assert result["first_service_step"] == 2
+    metrics[:, ev.QOS] = 0.0
+    quiet = ev.position_diagnostics(metrics, dict(steps, mode=np.ones_like(mode)),
+                                    area_size_m=area, floor_m=floor)
+    assert quiet["first_service_step"] is None
+    assert quiet["boundary_share_normal_mode"] is None
+    assert quiet["altitude_floor_share_normal_mode"] is None
+
+
+def test_live_rows_carry_diagnostics_from_env_config(tmp_path, config_60):
+    """Floor and area come from the config the env is built with (not hard-coded)."""
+    assert (config_60.area_size, config_60.height_range[0]) == (8000, 50)
+    env = make_env(config_60, 953001)
+    try:
+        row, arrays = ev.evaluate_world(ev.HeuristicController(VARIANTS["H1"], env), env,
+                                        config_60, 953001, PRODUCTION_PARAMS)
+    finally:
+        env.close()
+    expected = ev.position_diagnostics(arrays["metrics"], arrays,
+                                       area_size_m=config_60.area_size,
+                                       floor_m=config_60.height_range[0])
+    assert {key: row[key] for key in expected} == expected
+    assert 0.0 <= row["altitude_floor_share_normal_mode"] <= 1.0

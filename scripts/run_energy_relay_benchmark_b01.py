@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-PHASES = ("equivalence", "null", "heuristic-dev", "reference", "grid", "all")
+# "stochastic-check" (N, sampled actions, 2 seeded draws per world) runs alone, never in "all".
+PHASES = ("equivalence", "null", "heuristic-dev", "reference", "grid", "stochastic-check", "all")
 DEFAULT_THREADS = 2
 HEURISTICS = ("H1", "H2", "H3")
 CONTROLLERS = ("N", *HEURISTICS)

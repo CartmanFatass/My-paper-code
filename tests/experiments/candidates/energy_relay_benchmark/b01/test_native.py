@@ -9,6 +9,7 @@ import numpy as np
 import pytest
 
 from experiments.candidates.energy_relay_benchmark.b01 import native
+from experiments.candidates.energy_relay_benchmark.b01.evaluation import sample_seed
 from experiments.candidates.energy_relay_benchmark.b01.feedback import FeedbackParams
 from scripts import run_energy_relay_benchmark_b01 as entry
 
@@ -59,7 +60,8 @@ def test_fixed_spec_worlds_grid_and_phases():
     assert [r["matched_pair_id"] for r in record] == [
         "w0.05", "w0.25", "w0.45", None, "w0.05", "w0.25", "w0.45"]
     assert native.matched_pair_id(FeedbackParams(0.10, 0.15), spec) is None   # not in the grid
-    assert native.PHASES == ("equivalence", "null", "heuristic-dev", "reference", "grid", "all")
+    assert native.PHASES == ("equivalence", "null", "heuristic-dev", "reference", "grid",
+                             "stochastic-check", "all")
     assert len(native.phase_panels("grid", spec)) == 14
     assert len(native.phase_panels("grid", spec, ("N", "H3"))) == 14
     dev = native.phase_panels("heuristic-dev", spec)
@@ -175,6 +177,9 @@ def test_tiny_grid_run_writes_records(tmp_path, fresh_checkpoint):
         assert trace["world_0_battery"].shape == (20, 8)
         _assert_mechanism_trace(trace, 20, heuristic=False)
     assert all(key in row for key in MECHANISM_ROW)
+    assert all(key in row for key in DIAGNOSTICS)
+    assert row["action_mode"] == "deterministic" and "draw" not in row and "sample_seed" not in row
+    assert "action_mode" not in panel and "stochastic_check" not in config
     assert row["controller_information"] == panel["controller_information"] == N_LABEL
     assert config["planned_episodes"] == written["planned_episodes"] == 2
     assert config["controller_information"]["N"] == N_LABEL
@@ -236,6 +241,8 @@ def test_phase_all_end_to_end(tmp_path, fresh_checkpoint):
         assert row["failed"] is False
         assert all(f"observed_{key}" in panel["aggregate"] for key in PHASE_SPLIT[:3])
         assert all(key in row for key in MECHANISM_ROW), name
+        assert all(key in row for key in DIAGNOSTICS), name
+        assert row["action_mode"] == "deterministic" and "sample_seed" not in row, name
         assert row["post_exit_recapture_count"] == len(row["post_exit_recapture_distances_m"])
         assert len(row["station_xy"]) == 2
         phase_dir, panel_file = name.split("/")
@@ -281,6 +288,65 @@ def test_phase_all_end_to_end(tmp_path, fresh_checkpoint):
     assert kinds.count("world_end") == 12 and kinds.count("selected_heuristic") == 1
     starts = [i for i, e in enumerate(events) if e["event"] == "phase_start"]
     assert starts[2] < kinds.index("selected_heuristic") < starts[3]
+
+
+DIAGNOSTICS = ("boundary_share_normal_mode", "altitude_floor_share_normal_mode",
+               "anchor_uav_steps_within_300m", "centre_uav_steps_within_300m",
+               "first_service_step")
+
+
+def test_stochastic_check_plan_is_n_production_two_draws_and_not_in_all():
+    spec = native.B01Spec()
+    assert native.planned_episodes(spec, "stochastic-check") == 64
+    assert native.planned_episodes(spec, "all") == 540             # unchanged
+    assert "stochastic-check" not in native.RUN_PHASES
+    panels = native.named_panels("stochastic-check", spec)
+    assert [(name, c, p, w, d) for name, c, p, w, d in panels] == [
+        ("N_e0.00_x0.05_s0", "N", native.PRODUCTION_PARAMS, spec.worlds, 0),
+        ("N_e0.00_x0.05_s1", "N", native.PRODUCTION_PARAMS, spec.worlds, 1)]
+    assert spec.worlds == tuple(range(955001, 955033))
+    assert [(n, d) for n, _, _, _, d in native.named_panels("grid", spec)][:2] == [
+        ("N_e0.00_x0.05", None), ("N_e0.00_x0.25", None)]
+
+
+def test_tiny_stochastic_check_run_writes_draw_rows(tmp_path, fresh_checkpoint):
+    spec = tiny_spec(worlds=(955001, 955002))
+    out = tmp_path / "stochastic"
+    summary = native.run_native(out=out, launch_sha="fixture", checkpoint=fresh_checkpoint,
+                                phase="stochastic-check", spec=spec, argv=["fixture"])
+    assert summary["status"] == "COMPLETE" and summary["phases"] == ["stochastic-check"]
+    assert summary["counts"]["episodes_completed"] == 4 == summary["planned_episodes"]
+    assert "selected_heuristic" not in summary
+    written = json.loads((out / "summary.json").read_text())
+    config = json.loads((out / "config.json").read_text())
+    assert set(written["panels"]) == {"stochastic-check/N_e0.00_x0.05_s0",
+                                      "stochastic-check/N_e0.00_x0.05_s1"}
+    assert [p["name"] for p in config["planned_panels"]["stochastic-check"]] == [
+        "N_e0.00_x0.05_s0", "N_e0.00_x0.05_s1"]
+    assert config["stochastic_check"]["draws_per_world"] == 2
+    assert "hash((policy_seed, world_seed, draw))" in config["stochastic_check"]["sample_seed_rule"]
+    rows = {}
+    for draw in (0, 1):
+        name = f"N_e0.00_x0.05_s{draw}"
+        panel = json.loads((out / "stochastic-check" / "panels" / f"{name}.json").read_text())
+        assert (panel["controller"], panel["action_mode"], panel["draw"]) == ("N", "stochastic", draw)
+        assert panel["params"] == {"enter_margin": 0.0, "exit_margin": 0.05}
+        for row in panel["worlds"]:
+            assert (row["action_mode"], row["draw"]) == ("stochastic", draw)
+            assert row["sample_seed"] == sample_seed(spec.policy_seed, row["seed"], draw)
+            assert panel["sample_seeds"][str(row["seed"])] == row["sample_seed"]
+            assert all(key in row for key in (*PHASE_SPLIT, *MECHANISM_ROW, *DIAGNOSTICS))
+            rows[(draw, row["seed"])] = row
+        assert "mean_draw" not in panel["aggregate"]
+        with np.load(out / "stochastic-check" / "traces" / f"{name}.npz") as trace:
+            _assert_mechanism_trace(trace, 20, heuristic=False)
+    assert len({row["sample_seed"] for row in rows.values()}) == 4
+    with pytest.raises(FileExistsError):
+        native.run_native(out=out, launch_sha="fixture", checkpoint=fresh_checkpoint,
+                          phase="stochastic-check", spec=spec)
+    with pytest.raises(ValueError, match="requires --checkpoint"):
+        native.run_native(out=tmp_path / "no-ckpt", launch_sha="fixture", checkpoint=None,
+                          phase="stochastic-check", spec=spec)
 
 
 def test_reference_phase_alone_uses_heuristic_flag_without_checkpoint(tmp_path):

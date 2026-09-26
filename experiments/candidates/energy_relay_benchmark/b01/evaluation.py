@@ -85,19 +85,46 @@ def make_eval_config(horizon: int, policy_seed: int):
     return config
 
 
-class PolicyController:
-    """Deterministic HMASD evaluator, called exactly as B07 ``evaluate_world`` calls it."""
+ACTION_MODES = ("deterministic", "stochastic")
+SAMPLE_SEED_RULE = ("hash((policy_seed, world_seed, draw)) & 0xFFFFFFFF (CPython tuple-of-int "
+                    "hash); python/numpy/torch global RNGs seeded with it right before the "
+                    "episode's first propose")
 
-    def __init__(self, evaluator: HMASDAgent):
+
+def sample_seed(policy_seed: int, world_seed: int, draw: int) -> int:
+    """32-bit seed of one sampled episode (``SAMPLE_SEED_RULE``)."""
+    return hash((int(policy_seed), int(world_seed), int(draw))) & 0xFFFFFFFF
+
+
+class PolicyController:
+    """HMASD evaluator, called exactly as B07 ``evaluate_world`` calls it.
+
+    ``deterministic=True`` (default) is the B07 mean-action route.  ``deterministic=False``
+    passes the agent's own sampling flag to ``HMASDAgent.step`` (coordinator skill sampling
+    and low-level actor sampling) and seeds the python/numpy/torch global RNGs with
+    ``sample_seed`` right before the first ``propose`` after each ``reset``.
+    """
+
+    def __init__(self, evaluator: HMASDAgent, *, deterministic: bool = True,
+                 sample_seed: int | None = None):
+        if not deterministic and sample_seed is None:
+            raise ValueError("stochastic PolicyController needs a sample_seed")
         self.evaluator = evaluator
+        self.deterministic = bool(deterministic)
+        self.sample_seed = sample_seed
+        self._seeded = False
 
     def reset(self) -> None:
         self.evaluator.reset_env_state(0)
+        self._seeded = False
 
     def propose(self, observations, state, step, previous_done, modes):
+        if not self.deterministic and not self._seeded:
+            seed_everything(int(self.sample_seed), torch.device(self.evaluator.device))
+            self._seeded = True
         actions, _, _ = self.evaluator.step(
             state[None], observations[None], np.asarray([step]), previous_done,
-            deterministic=True, return_step_data=True, build_infos=False,
+            deterministic=self.deterministic, return_step_data=True, build_infos=False,
         )
         return np.asarray(actions[0], dtype=np.float32)
 
@@ -286,6 +313,43 @@ def recapture_distances(entered: np.ndarray, exited: np.ndarray,
     return result
 
 
+BOUNDARY_TOLERANCE_M = 1.0
+ALTITUDE_FLOOR_TOLERANCE_M = 0.5
+STATION_NEAR_M = 300.0
+
+
+def position_diagnostics(metrics: np.ndarray, steps: dict[str, np.ndarray], *,
+                         area_size_m: float, floor_m: float) -> dict[str, Any]:
+    """Additive per-world readings from the decision-time trace (existing fields unchanged).
+
+    Normal mode = shield mode False at step t (``steps["mode"]``).  Boundary: |x| or |y| or
+    |x - area| or |y - area| < 1 m; altitude floor: z <= floor + 0.5 m (``own_xyz``).  Shares
+    are None when there is no normal-mode UAV-step.  Station counts use every UAV-step (no
+    mode filter): nearest-station distance < 300 m and nearest station 0 (relay anchor) or
+    1 (service centre).  ``first_service_step``: first t with team QoS > 0, else None.
+    """
+    xyz = np.asarray(steps["own_xyz"], dtype=np.float64)
+    normal = ~np.asarray(steps["mode"], dtype=bool)
+    x, y, z = xyz[..., 0], xyz[..., 1], xyz[..., 2]
+    area = float(area_size_m)
+    boundary = ((np.abs(x) < BOUNDARY_TOLERANCE_M) | (np.abs(x - area) < BOUNDARY_TOLERANCE_M)
+                | (np.abs(y) < BOUNDARY_TOLERANCE_M) | (np.abs(y - area) < BOUNDARY_TOLERANCE_M))
+    floor = z <= float(floor_m) + ALTITUDE_FLOOR_TOLERANCE_M
+    normal_count = int(normal.sum())
+    near = np.asarray(steps["nearest_station_distance_m"], dtype=np.float64) < STATION_NEAR_M
+    station = np.asarray(steps["nearest_station"])
+    served = np.flatnonzero(np.asarray(metrics)[:, QOS] > 0.0)
+    return {
+        "boundary_share_normal_mode": (float((boundary & normal).sum() / normal_count)
+                                       if normal_count else None),
+        "altitude_floor_share_normal_mode": (float((floor & normal).sum() / normal_count)
+                                             if normal_count else None),
+        "anchor_uav_steps_within_300m": int((near & (station == 0)).sum()),
+        "centre_uav_steps_within_300m": int((near & (station == 1)).sum()),
+        "first_service_step": int(served[0]) if served.size else None,
+    }
+
+
 def mechanism_row(steps: dict[str, np.ndarray], station_xy) -> dict[str, Any]:
     """Row readings from the decision-time trace fields (existing readings unchanged)."""
     recaptures = recapture_distances(steps["entered"], steps["exited"],
@@ -374,6 +438,9 @@ def evaluate_world(controller, env, config, seed: int, params: FeedbackParams, *
     row = world_row(seed, reward_array, metric_array, end_array, step_arrays,
                     time_step_s=float(config.time_step))
     row.update(mechanism_row(step_arrays, station_xy))
+    row.update(position_diagnostics(metric_array, step_arrays,
+                                    area_size_m=float(config.area_size),
+                                    floor_m=float(config.height_range[0])))
     step_arrays.update(reward=reward_array, metrics=metric_array, ends=end_array)
     return row, step_arrays
 
@@ -394,6 +461,8 @@ class WorldTask:
     expected_policy_fingerprint: str | None = None
     heuristic: HeuristicParams | None = None
     log_dir: str | None = None
+    action_mode: str = "deterministic"   # "stochastic": N only, sampled at both levels
+    draw: int | None = None              # stochastic draw index (seeds the episode)
 
 
 def load_policy(task: WorldTask, config, device: torch.device, log_dir: str):
@@ -415,6 +484,13 @@ def load_policy(task: WorldTask, config, device: torch.device, log_dir: str):
 def evaluate_task(task: WorldTask) -> dict[str, Any]:
     """Module-level worker: one world, fully rebuilt from the task (picklable)."""
     started = time.perf_counter()
+    if task.action_mode not in ACTION_MODES:
+        raise ValueError(f"action_mode must be one of {ACTION_MODES}")
+    stochastic = task.action_mode == "stochastic"
+    if stochastic and (task.controller != "N" or task.draw is None):
+        raise ValueError("stochastic action mode needs controller N and a draw index")
+    episode_seed = (sample_seed(task.policy_seed, task.seed, task.draw)
+                    if stochastic else None)
     torch.set_num_threads(int(task.threads))
     if torch.get_default_dtype() != torch.float32:
         raise RuntimeError("B01 requires Torch FP32 default dtype")
@@ -441,7 +517,9 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
                                         _normalizer_snapshot(evaluator))
                     if evaluator_before[0] != before[0]:
                         raise RuntimeError("evaluator policy differs from restored checkpoint")
-                    row, arrays = evaluate_world(PolicyController(evaluator), env, config,
+                    controller = PolicyController(evaluator, deterministic=not stochastic,
+                                                  sample_seed=episode_seed)
+                    row, arrays = evaluate_world(controller, env, config,
                                                  task.seed, task.params)
                     if (
                         initialization_fingerprint(evaluator) != evaluator_before[0]
@@ -486,7 +564,10 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
     row.update(controller=task.controller, enter_margin=task.params.enter_margin,
                exit_margin=task.params.exit_margin,
                wall_seconds=time.perf_counter() - started,
-               worker_peak_rss_kib=int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss))
+               worker_peak_rss_kib=int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss),
+               action_mode=task.action_mode)
+    if stochastic:
+        row.update(draw=int(task.draw), sample_seed=episode_seed)
     return {"row": row, "arrays": arrays, "identity": identity}
 
 
@@ -549,7 +630,7 @@ def aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
     counted; phase-split QoS always carries its ``observed_`` count).  Failed worlds are
     listed and excluded from every mean."""
     skip = {"seed", "enter_margin", "exit_margin", "worker_peak_rss_kib", "plan_input_steps",
-            "replans", "width", "matched_pair_id"}
+            "replans", "width", "matched_pair_id", "draw", "sample_seed"}
     failed = [row for row in rows if row.get("failed")]
     completed = [row for row in rows if not row.get("failed")]
     result: dict[str, Any] = {"worlds": len(rows), "completed_worlds": len(completed),
