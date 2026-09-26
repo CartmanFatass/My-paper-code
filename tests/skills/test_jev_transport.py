@@ -309,6 +309,47 @@ def test_attach_targets_validated_unique_document_input(monkeypatch, tmp_path):
     assert missing.calls == []
 
 
+@pytest.mark.parametrize('observed, expected, failure', [
+    ([None, [], ['question(1).md']], 'question(1).md', None),
+    ([None, ['other.md']], None, 'attachment card is not question.md'),
+    ([None, ['question.md', 'other.md']], None, 'exactly one attachment card'),
+])
+def test_attach_waits_through_unready_card_but_rejects_wrong_or_multiple(
+    monkeypatch, tmp_path, observed, expected, failure
+):
+    document = tmp_path / 'question.md'
+    document.write_text('question', encoding='utf-8')
+    seen = []
+    pages = iter({'attachment_cards': cards} for cards in observed)
+    monkeypatch.setattr(driver, 'facts', lambda _browser: next(pages))
+    monkeypatch.setattr(driver.time, 'sleep', lambda _seconds: None)
+    monkeypatch.setattr(driver, 'ready_to_send', lambda *_args: seen.append('ready'))
+
+    class Browser:
+        def evaluate(self, expression):
+            assert expression == f'({driver.UPLOAD_LOOKUP})()'
+            return 'upload-id'
+
+        def call(self, command, **_kwargs):
+            if command == 'DOM.getDocument':
+                return {'root': {'nodeId': 1}}
+            if command == 'DOM.querySelector':
+                return {'nodeId': 2}
+            if command == 'DOM.setFileInputFiles':
+                seen.append('upload')
+                return {}
+            raise AssertionError(command)
+
+    send = lambda: driver.attach(Browser(), document, hashlib.sha256(document.read_bytes()).hexdigest())
+    if failure:
+        with pytest.raises(driver.PreSendFailure, match=failure):
+            send()
+        assert seen == ['upload']
+    else:
+        assert send() == expected
+        assert seen == ['upload', 'ready']
+
+
 @pytest.mark.parametrize('cards, expected', [
     ([], None),
     (['question.md'], 'question.md'),

@@ -448,8 +448,13 @@ def attach(browser, path, expected_sha256):
     if not node:
         raise PreSendFailure("the composer has no document upload input")
     browser.call("DOM.setFileInputFiles", nodeId=node, files=[str(path)])
-    page = wait_for(browser, lambda f: attachment_display_name(f.get("attachment_cards"), path.name) is not None,
-                    60, f"the attachment card {path.name}")
+    def card_ready(page):
+        cards = page.get("attachment_cards")
+        # The remove/name pair can be absent while the upload card hydrates.
+        # Once present, a wrong or duplicate card remains an immediate failure.
+        return cards is not None and attachment_display_name(cards, path.name) is not None
+
+    page = wait_for(browser, card_ready, 60, f"the attachment card {path.name}")
     displayed = attachment_display_name(page["attachment_cards"], path.name)
     ready_to_send(browser, 120)
     return displayed
