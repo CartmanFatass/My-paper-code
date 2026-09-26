@@ -2720,3 +2720,29 @@ from the shield's station visits — and N's whole-episode margin over a random 
 +.12 (deterministic) / +.085 (sampled). "Improvement over the model's own initialisation" is
 measured from these two panels. Fit progress at the read: 7 rollouts, ≈ 195 s per rollout while the
 evaluation shared the CPUs (≈ 150 s alone), 0 live lanes at any boundary.
+
+### Stage 1, c01 (204k transitions, rollout 34) evaluated (`b02_s1_eval_c01_a01`, operation a9d1c17a)
+
+Checkpoint written 19:59 UTC (`optimizer_steps` low_actor = low_critic = 76,500), copied to the node's
+artifacts directory (agent.pt sha256 `be3ad2f1…` equals its record), evaluation accepted 20:00:13Z
+beside the fit (command sha256 `a0bb9b39…`, supervisor pid 729766, runner 729767), `COMPLETE` in
+828.7 s, 64 episodes, 0 failed, diagnostics parity equal in all rows. Reader `read_stage1.py`
+unchanged; readings JSON regenerated (c00 + c01).
+
+| 955001–955032 | c00 det | c01 det | c00 stoch | c01 stoch |
+|---|---|---|---|---|
+| QoS/step | .209 | .241 | .243 | .250 |
+| paired vs c00 | — | +.032 (SE .022, 19/32) | — | +.007 (SE .024, 13/32) |
+| vs H_central .774 | −.565 | −.533 (SE .025) | −.531 | −.524 (SE .026) |
+| vs H_local .597 | −.388 | −.356 (SE .030) | −.354 | −.347 (SE .030) |
+| vs H_park2 .379 | −.170 | −.138 (SE .028) | −.136 | −.129 (SE .030) |
+| vs H_spawn .232 | −.023 | +.009 (SE .022) | +.011 | +.018 (SE .024) |
+| vs N .328 | −.120 | −.087 (SE .032) | −.085 | −.078 (SE .033) |
+| worlds ≥ .60 | 0 | 0 | 0 | 0 |
+
+After 204k transitions the frozen learner is within the practical threshold of its own
+initialisation in the sampled mode and one threshold above it in the deterministic mode, at
+H_spawn's level; reported, not read further. Training-time QoS/step (sampled actions, shield on),
+by 10-rollout blocks: r1–10 0.191, r11–20 0.161, r21–30 0.210, r31–39 0.181; F-mapped-command share 0.227 → 0.257; F-mode share 0.227 → 0.257; action entropy not in the rollout events; rollouts with a zero-service lane: [2, 6, 7, 8, 9, 11, 12, 13, 14, 16, 20, 23, 24, 25, 27, 28, 34, 35, 36, 38, 39].
+Fit at the read: 39 rollouts, ≈ 168 s per rollout with the two evaluations sharing the CPUs
+(projection ≈ 9.3 h), 0 live lanes at any boundary.
