@@ -2003,6 +2003,890 @@
     "clip_fraction": null,
     "qos_per_step": 0.11557105083668942,
     "native_J": 304.1957065265073
+   },
+   {
+    "rollout": 72,
+    "transitions": 432000,
+    "lane_native_J": [
+     512.6558858437123,
+     -38.353440067824664
+    ],
+    "lane_qos_per_step": [
+     0.18280164418151185,
+     0.0
+    ],
+    "shield_mapping_share": 0.33879166666666666,
+    "f_mode_uav_step_share": 0.33879166666666666,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 103.3826730940491,
+    "update_seconds": 39.253318735049106,
+    "shield_entries": 199,
+    "shield_exits": 183,
+    "action_entropy": 1.1506663635373116,
+    "discoverer_policy_loss": -0.011794496327638626,
+    "discoverer_value_loss": 0.0036001643165946007,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.09140082209075592,
+    "native_J": 237.15122288794385
+   },
+   {
+    "rollout": 73,
+    "transitions": 438000,
+    "lane_native_J": [
+     1327.7727466075407,
+     -32.29049497261147
+    ],
+    "lane_qos_per_step": [
+     0.4853277656668958,
+     0.0
+    ],
+    "shield_mapping_share": 0.3020625,
+    "f_mode_uav_step_share": 0.3020625,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 115.98541462398134,
+    "update_seconds": 39.566238626954146,
+    "shield_entries": 167,
+    "shield_exits": 151,
+    "action_entropy": 1.1602832935750484,
+    "discoverer_policy_loss": -0.014583075419068336,
+    "discoverer_value_loss": 0.002642628736793995,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.2426638828334479,
+    "native_J": 647.7411258174646
+   },
+   {
+    "rollout": 74,
+    "transitions": 444000,
+    "lane_native_J": [
+     -34.90653881614383,
+     -31.025277399210772
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.3280416666666667,
+    "f_mode_uav_step_share": 0.3280416666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 96.76523368898779,
+    "update_seconds": 51.537870728061534,
+    "shield_entries": 170,
+    "shield_exits": 154,
+    "action_entropy": 1.1478528380393982,
+    "discoverer_policy_loss": -0.013490025885403156,
+    "discoverer_value_loss": 0.0002345689426874742,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -32.9659081076773
+   },
+   {
+    "rollout": 75,
+    "transitions": 450000,
+    "lane_native_J": [
+     688.4128138602092,
+     -32.0165030404983
+    ],
+    "lane_qos_per_step": [
+     0.24125019483784885,
+     0.0
+    ],
+    "shield_mapping_share": 0.2595,
+    "f_mode_uav_step_share": 0.2595,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 107.39215369999874,
+    "update_seconds": 39.795832923962735,
+    "shield_entries": 116,
+    "shield_exits": 100,
+    "action_entropy": 1.2203208170831203,
+    "discoverer_policy_loss": -0.013102971948683262,
+    "discoverer_value_loss": 0.0016881924821063876,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.12062509741892442,
+    "native_J": 328.1981554098555
+   },
+   {
+    "rollout": 76,
+    "transitions": 456000,
+    "lane_native_J": [
+     979.9710884054083,
+     -36.17929051178706
+    ],
+    "lane_qos_per_step": [
+     0.33740737856364433,
+     0.0
+    ],
+    "shield_mapping_share": 0.25304166666666666,
+    "f_mode_uav_step_share": 0.25304166666666666,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 109.99760133295786,
+    "update_seconds": 39.141530376975425,
+    "shield_entries": 145,
+    "shield_exits": 129,
+    "action_entropy": 1.2302715331315994,
+    "discoverer_policy_loss": -0.013876838609576225,
+    "discoverer_value_loss": 0.0015178745379671454,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.16870368928182217,
+    "native_J": 471.89589894681063
+   },
+   {
+    "rollout": 77,
+    "transitions": 462000,
+    "lane_native_J": [
+     933.1525229746782,
+     301.9211295247268
+    ],
+    "lane_qos_per_step": [
+     0.367367026382557,
+     0.11328070886269882
+    ],
+    "shield_mapping_share": 0.40095833333333336,
+    "f_mode_uav_step_share": 0.40095833333333336,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 112.75570276496,
+    "update_seconds": 51.56793028197717,
+    "shield_entries": 199,
+    "shield_exits": 183,
+    "action_entropy": 1.1848135851323605,
+    "discoverer_policy_loss": -0.012890982441604137,
+    "discoverer_value_loss": 0.0054048472084105015,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.24032386762262792,
+    "native_J": 617.5368262497025
+   },
+   {
+    "rollout": 78,
+    "transitions": 468000,
+    "lane_native_J": [
+     985.6266539917708,
+     482.32246833540376
+    ],
+    "lane_qos_per_step": [
+     0.35310809838375834,
+     0.1975463426164481
+    ],
+    "shield_mapping_share": 0.3310416666666667,
+    "f_mode_uav_step_share": 0.3310416666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 113.50211501400918,
+    "update_seconds": 39.40966999705415,
+    "shield_entries": 139,
+    "shield_exits": 123,
+    "action_entropy": 1.2694671750068665,
+    "discoverer_policy_loss": -0.008301854133605957,
+    "discoverer_value_loss": 0.0015705781988799572,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.2753272205001032,
+    "native_J": 733.9745611635873
+   },
+   {
+    "rollout": 79,
+    "transitions": 474000,
+    "lane_native_J": [
+     1079.306827697829,
+     -31.326092015332378
+    ],
+    "lane_qos_per_step": [
+     0.37127346135177597,
+     0.0
+    ],
+    "shield_mapping_share": 0.24910416666666665,
+    "f_mode_uav_step_share": 0.24910416666666665,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 108.89473040692974,
+    "update_seconds": 46.52067989204079,
+    "shield_entries": 176,
+    "shield_exits": 164,
+    "action_entropy": 1.1597931385040283,
+    "discoverer_policy_loss": -0.015666980296373367,
+    "discoverer_value_loss": 0.0031204712577164173,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.18563673067588798,
+    "native_J": 523.9903678412484
+   },
+   {
+    "rollout": 80,
+    "transitions": 480000,
+    "lane_native_J": [
+     -133.59577540478335,
+     -44.639723463766
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.36125,
+    "f_mode_uav_step_share": 0.36125,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 97.24101424100809,
+    "update_seconds": 39.37551549798809,
+    "shield_entries": 207,
+    "shield_exits": 191,
+    "action_entropy": 1.174918282777071,
+    "discoverer_policy_loss": -0.01014944538474083,
+    "discoverer_value_loss": 0.0007757171988487244,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -89.11774943427469
+   },
+   {
+    "rollout": 81,
+    "transitions": 486000,
+    "lane_native_J": [
+     -379.46781615989556,
+     -231.55670633087104
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.46210416666666665,
+    "f_mode_uav_step_share": 0.46210416666666665,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 100.95211424701847,
+    "update_seconds": 39.6556836880045,
+    "shield_entries": 249,
+    "shield_exits": 233,
+    "action_entropy": 1.1355097405612469,
+    "discoverer_policy_loss": -0.006446226499974728,
+    "discoverer_value_loss": 0.005128303077071905,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -305.5122612453833
+   },
+   {
+    "rollout": 82,
+    "transitions": 492000,
+    "lane_native_J": [
+     -170.01027376571454,
+     -68.63851455172588
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.39235416666666667,
+    "f_mode_uav_step_share": 0.39235416666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 99.3664284980623,
+    "update_seconds": 40.03125889506191,
+    "shield_entries": 172,
+    "shield_exits": 156,
+    "action_entropy": 1.1506428010761738,
+    "discoverer_policy_loss": -0.009080628864467144,
+    "discoverer_value_loss": 0.001123860594816506,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -119.32439415872021
+   },
+   {
+    "rollout": 83,
+    "transitions": 498000,
+    "lane_native_J": [
+     860.9434941353711,
+     -44.74219572572319
+    ],
+    "lane_qos_per_step": [
+     0.2975438699505031,
+     0.0
+    ],
+    "shield_mapping_share": 0.3155625,
+    "f_mode_uav_step_share": 0.3155625,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 105.75382635602728,
+    "update_seconds": 39.4700449409429,
+    "shield_entries": 188,
+    "shield_exits": 176,
+    "action_entropy": 1.1993867345154285,
+    "discoverer_policy_loss": -0.01709676720201969,
+    "discoverer_value_loss": 0.0024514882825315,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.14877193497525154,
+    "native_J": 408.100649204824
+   },
+   {
+    "rollout": 84,
+    "transitions": 504000,
+    "lane_native_J": [
+     -45.788231622682275,
+     -65.74489816422192
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.3640625,
+    "f_mode_uav_step_share": 0.3640625,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 96.44650574098341,
+    "update_seconds": 48.541366315912455,
+    "shield_entries": 161,
+    "shield_exits": 145,
+    "action_entropy": 1.1906560510396957,
+    "discoverer_policy_loss": -0.012360192835330963,
+    "discoverer_value_loss": 0.0006905458867549896,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -55.7665648934521
+   },
+   {
+    "rollout": 85,
+    "transitions": 510000,
+    "lane_native_J": [
+     -61.78264393724899,
+     -33.13769481122799
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.35739583333333336,
+    "f_mode_uav_step_share": 0.35739583333333336,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 99.0053093059687,
+    "update_seconds": 39.32472825201694,
+    "shield_entries": 188,
+    "shield_exits": 172,
+    "action_entropy": 1.1697120033204556,
+    "discoverer_policy_loss": -0.013168809935450554,
+    "discoverer_value_loss": 0.0006383803556673229,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -47.46016937423849
+   },
+   {
+    "rollout": 86,
+    "transitions": 516000,
+    "lane_native_J": [
+     386.45698724978575,
+     848.0685518471021
+    ],
+    "lane_qos_per_step": [
+     0.1416182387469525,
+     0.2930705997126767
+    ],
+    "shield_mapping_share": 0.2859375,
+    "f_mode_uav_step_share": 0.2859375,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 117.33331742300652,
+    "update_seconds": 39.331873018993065,
+    "shield_entries": 154,
+    "shield_exits": 138,
+    "action_entropy": 1.2356508523225784,
+    "discoverer_policy_loss": -0.01876518875360489,
+    "discoverer_value_loss": 0.002214563312008977,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.2173444192298146,
+    "native_J": 617.2627695484439
+   },
+   {
+    "rollout": 87,
+    "transitions": 522000,
+    "lane_native_J": [
+     900.8233975963194,
+     1560.3346867787484
+    ],
+    "lane_qos_per_step": [
+     0.3105600744336946,
+     0.5416217725364649
+    ],
+    "shield_mapping_share": 0.3017708333333333,
+    "f_mode_uav_step_share": 0.3017708333333333,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 129.64459272299428,
+    "update_seconds": 41.62176139804069,
+    "shield_entries": 169,
+    "shield_exits": 157,
+    "action_entropy": 1.1460233479738235,
+    "discoverer_policy_loss": -0.014943464659154415,
+    "discoverer_value_loss": 0.0035178731195628643,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.42609092348507976,
+    "native_J": 1230.579042187534
+   },
+   {
+    "rollout": 88,
+    "transitions": 528000,
+    "lane_native_J": [
+     1391.4191547278888,
+     -32.686745244680054
+    ],
+    "lane_qos_per_step": [
+     0.4744812171158114,
+     0.0
+    ],
+    "shield_mapping_share": 0.2576875,
+    "f_mode_uav_step_share": 0.2576875,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 114.76926694100257,
+    "update_seconds": 40.27359997096937,
+    "shield_entries": 134,
+    "shield_exits": 124,
+    "action_entropy": 1.2099082581698895,
+    "discoverer_policy_loss": -0.019780434668064117,
+    "discoverer_value_loss": 0.0023032748140394688,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.2372406085579057,
+    "native_J": 679.3662047416044
+   },
+   {
+    "rollout": 89,
+    "transitions": 534000,
+    "lane_native_J": [
+     1212.5098443461961,
+     1564.472578646317
+    ],
+    "lane_qos_per_step": [
+     0.4144240226692472,
+     0.5325679327242702
+    ],
+    "shield_mapping_share": 0.241875,
+    "f_mode_uav_step_share": 0.241875,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 127.12563507410232,
+    "update_seconds": 40.26588132593315,
+    "shield_entries": 145,
+    "shield_exits": 130,
+    "action_entropy": 1.1458915658295155,
+    "discoverer_policy_loss": -0.013577328063547611,
+    "discoverer_value_loss": 0.011609901674091816,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.47349597769675866,
+    "native_J": 1388.4912114962567
+   },
+   {
+    "rollout": 90,
+    "transitions": 540000,
+    "lane_native_J": [
+     1470.6065463106208,
+     1179.8610141498525
+    ],
+    "lane_qos_per_step": [
+     0.5008600349775688,
+     0.4041061812429493
+    ],
+    "shield_mapping_share": 0.2523958333333333,
+    "f_mode_uav_step_share": 0.2523958333333333,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 127.53858701896388,
+    "update_seconds": 40.556178782950155,
+    "shield_entries": 124,
+    "shield_exits": 114,
+    "action_entropy": 1.1523072607815266,
+    "discoverer_policy_loss": -0.01220664568245411,
+    "discoverer_value_loss": 0.006582067813724279,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.45248310811025905,
+    "native_J": 1325.2337802302368
+   },
+   {
+    "rollout": 91,
+    "transitions": 546000,
+    "lane_native_J": [
+     716.8825169741806,
+     -32.39777850606168
+    ],
+    "lane_qos_per_step": [
+     0.2483319921074166,
+     0.0
+    ],
+    "shield_mapping_share": 0.31695833333333334,
+    "f_mode_uav_step_share": 0.31695833333333334,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 105.91312821500469,
+    "update_seconds": 40.31825301400386,
+    "shield_entries": 123,
+    "shield_exits": 107,
+    "action_entropy": 1.183978095650673,
+    "discoverer_policy_loss": -0.016954602673649788,
+    "discoverer_value_loss": 0.0021215949673205614,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.1241659960537083,
+    "native_J": 342.2423692340595
+   },
+   {
+    "rollout": 92,
+    "transitions": 552000,
+    "lane_native_J": [
+     737.4403024397575,
+     1219.0070571576628
+    ],
+    "lane_qos_per_step": [
+     0.28009467008587874,
+     0.4184609713218511
+    ],
+    "shield_mapping_share": 0.3496875,
+    "f_mode_uav_step_share": 0.3496875,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 118.18130962294526,
+    "update_seconds": 42.2444723440567,
+    "shield_entries": 190,
+    "shield_exits": 177,
+    "action_entropy": 1.104728039354086,
+    "discoverer_policy_loss": -0.019524099305272102,
+    "discoverer_value_loss": 0.0071675642393529415,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.3492778207038649,
+    "native_J": 978.2236797987101
+   },
+   {
+    "rollout": 93,
+    "transitions": 558000,
+    "lane_native_J": [
+     622.6627792162467,
+     752.8048193788215
+    ],
+    "lane_qos_per_step": [
+     0.21834310899682657,
+     0.2611413335345939
+    ],
+    "shield_mapping_share": 0.2921666666666667,
+    "f_mode_uav_step_share": 0.2921666666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 113.41192758898251,
+    "update_seconds": 45.31421275797766,
+    "shield_entries": 161,
+    "shield_exits": 146,
+    "action_entropy": 1.0996478609740734,
+    "discoverer_policy_loss": -0.011440190486609936,
+    "discoverer_value_loss": 0.005213872529566288,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.23974222126571024,
+    "native_J": 687.7337992975341
+   },
+   {
+    "rollout": 94,
+    "transitions": 564000,
+    "lane_native_J": [
+     340.37014586971213,
+     1100.5780712014807
+    ],
+    "lane_qos_per_step": [
+     0.15614875224287236,
+     0.3771446612782471
+    ],
+    "shield_mapping_share": 0.2722291666666667,
+    "f_mode_uav_step_share": 0.2722291666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 109.40671141899657,
+    "update_seconds": 40.35661464591976,
+    "shield_entries": 134,
+    "shield_exits": 119,
+    "action_entropy": 1.1105493642389774,
+    "discoverer_policy_loss": -0.021506041288375854,
+    "discoverer_value_loss": 0.011548974551260471,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.26664670676055974,
+    "native_J": 720.4741085355964
+   },
+   {
+    "rollout": 95,
+    "transitions": 570000,
+    "lane_native_J": [
+     573.0489967349798,
+     1026.0027134792037
+    ],
+    "lane_qos_per_step": [
+     0.30226815305683236,
+     0.3523974007159361
+    ],
+    "shield_mapping_share": 0.4024375,
+    "f_mode_uav_step_share": 0.4024375,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 113.24744396400638,
+    "update_seconds": 40.22729112394154,
+    "shield_entries": 217,
+    "shield_exits": 202,
+    "action_entropy": 0.999700091779232,
+    "discoverer_policy_loss": -0.015721222385764122,
+    "discoverer_value_loss": 0.006894468795508146,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.32733277688638424,
+    "native_J": 799.5258551070917
+   },
+   {
+    "rollout": 96,
+    "transitions": 576000,
+    "lane_native_J": [
+     529.6354646547924,
+     745.6895283255818
+    ],
+    "lane_qos_per_step": [
+     0.21387092248819503,
+     0.2599410937176519
+    ],
+    "shield_mapping_share": 0.3016666666666667,
+    "f_mode_uav_step_share": 0.3016666666666667,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 116.73282245302107,
+    "update_seconds": 45.52714279398788,
+    "shield_entries": 222,
+    "shield_exits": 206,
+    "action_entropy": 1.0303555056452751,
+    "discoverer_policy_loss": -0.01538779679685831,
+    "discoverer_value_loss": 0.0036058512050658464,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.23690600810292345,
+    "native_J": 637.6624964901871
+   },
+   {
+    "rollout": 97,
+    "transitions": 582000,
+    "lane_native_J": [
+     -47.52410129915707,
+     -53.54484943060172
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.30314583333333334,
+    "f_mode_uav_step_share": 0.30314583333333334,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 98.03142657596618,
+    "update_seconds": 39.38086233707145,
+    "shield_entries": 153,
+    "shield_exits": 137,
+    "action_entropy": 1.0529032908380032,
+    "discoverer_policy_loss": -0.025899525731801987,
+    "discoverer_value_loss": 0.0007603210979141295,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -50.5344753648794
+   },
+   {
+    "rollout": 98,
+    "transitions": 588000,
+    "lane_native_J": [
+     -225.78542993952627,
+     -38.25304263179976
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.0
+    ],
+    "shield_mapping_share": 0.39447916666666666,
+    "f_mode_uav_step_share": 0.39447916666666666,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 97.91721326799598,
+    "update_seconds": 39.877366575063206,
+    "shield_entries": 178,
+    "shield_exits": 162,
+    "action_entropy": 0.9766911156475544,
+    "discoverer_policy_loss": -0.01861274428665638,
+    "discoverer_value_loss": 0.0026076638605445623,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.0,
+    "native_J": -132.019236285663
+   },
+   {
+    "rollout": 99,
+    "transitions": 594000,
+    "lane_native_J": [
+     789.406891644298,
+     -40.11163164291682
+    ],
+    "lane_qos_per_step": [
+     0.32286391731527914,
+     0.0
+    ],
+    "shield_mapping_share": 0.42752083333333335,
+    "f_mode_uav_step_share": 0.42752083333333335,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 104.33741365501191,
+    "update_seconds": 39.543729989090934,
+    "shield_entries": 209,
+    "shield_exits": 193,
+    "action_entropy": 1.0757910087704659,
+    "discoverer_policy_loss": -0.018122367560863495,
+    "discoverer_value_loss": 0.001680612564086914,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.16143195865763957,
+    "native_J": 374.6476300006906
+   },
+   {
+    "rollout": 100,
+    "transitions": 600000,
+    "lane_native_J": [
+     1393.2503153780683,
+     -112.43645086140515
+    ],
+    "lane_qos_per_step": [
+     0.4756050193622776,
+     0.0014044570414813364
+    ],
+    "shield_mapping_share": 0.298375,
+    "f_mode_uav_step_share": 0.298375,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 114.41026874003,
+    "update_seconds": 39.97589742101263,
+    "shield_entries": 161,
+    "shield_exits": 150,
+    "action_entropy": 1.051123719662428,
+    "discoverer_policy_loss": -0.0189414843916893,
+    "discoverer_value_loss": 0.002300310181453824,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.23850473820187948,
+    "native_J": 640.4069322583316
+   },
+   {
+    "rollout": 101,
+    "transitions": 606000,
+    "lane_native_J": [
+     1449.9263048158784,
+     690.8091662527247
+    ],
+    "lane_qos_per_step": [
+     0.49428706986892196,
+     0.24644397911044866
+    ],
+    "shield_mapping_share": 0.30470833333333336,
+    "f_mode_uav_step_share": 0.30470833333333336,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 115.97763502399903,
+    "update_seconds": 44.79540858697146,
+    "shield_entries": 204,
+    "shield_exits": 189,
+    "action_entropy": 1.0323978029191494,
+    "discoverer_policy_loss": -0.0199885256588459,
+    "discoverer_value_loss": 0.002767222234979272,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.3703655244896853,
+    "native_J": 1070.3677355343016
+   },
+   {
+    "rollout": 102,
+    "transitions": 612000,
+    "lane_native_J": [
+     -31.161546469121188,
+     1288.4238295243322
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.4887768388532717
+    ],
+    "shield_mapping_share": 0.26397916666666665,
+    "f_mode_uav_step_share": 0.26397916666666665,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 167.70114163099788,
+    "update_seconds": 88.93010012502782,
+    "shield_entries": 166,
+    "shield_exits": 151,
+    "action_entropy": 1.0082351043820381,
+    "discoverer_policy_loss": -0.02773761749267578,
+    "discoverer_value_loss": 0.008059853687882423,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.24438841942663586,
+    "native_J": 628.6311415276055
+   },
+   {
+    "rollout": 103,
+    "transitions": 618000,
+    "lane_native_J": [
+     -134.6632225492855,
+     687.658694446541
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.239866580868049
+    ],
+    "shield_mapping_share": 0.34202083333333333,
+    "f_mode_uav_step_share": 0.34202083333333333,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 186.4871205079835,
+    "update_seconds": 78.52879683906212,
+    "shield_entries": 166,
+    "shield_exits": 152,
+    "action_entropy": 1.0660233907401562,
+    "discoverer_policy_loss": -0.01490525808185339,
+    "discoverer_value_loss": 0.004209545906633139,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.1199332904340245,
+    "native_J": 276.49773594862774
+   },
+   {
+    "rollout": 104,
+    "transitions": 624000,
+    "lane_native_J": [
+     -32.035973111695796,
+     575.6428221539458
+    ],
+    "lane_qos_per_step": [
+     0.0,
+     0.2053909808789317
+    ],
+    "shield_mapping_share": 0.30522916666666666,
+    "f_mode_uav_step_share": 0.30522916666666666,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 181.08402751095127,
+    "update_seconds": 88.33800539607182,
+    "shield_entries": 163,
+    "shield_exits": 147,
+    "action_entropy": 0.9965716861188412,
+    "discoverer_policy_loss": -0.018307121470570564,
+    "discoverer_value_loss": 0.005527303088456392,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.10269549043946585,
+    "native_J": 271.80342452112495
+   },
+   {
+    "rollout": 105,
+    "transitions": 630000,
+    "lane_native_J": [
+     930.0466451472735,
+     -32.31478151999144
+    ],
+    "lane_qos_per_step": [
+     0.3201137911435141,
+     0.0
+    ],
+    "shield_mapping_share": 0.23577083333333335,
+    "f_mode_uav_step_share": 0.23577083333333335,
+    "live_lanes_at_boundary": 0,
+    "collection_seconds": 154.36222544603515,
+    "update_seconds": 47.31104615400545,
+    "shield_entries": 136,
+    "shield_exits": 120,
+    "action_entropy": 1.0426671244204044,
+    "discoverer_policy_loss": -0.023882638663053513,
+    "discoverer_value_loss": 0.0026753724087029696,
+    "approx_kl": null,
+    "clip_fraction": null,
+    "qos_per_step": 0.16005689557175706,
+    "native_J": 448.865931813641
    }
   ],
   "checkpoints": [
@@ -2023,22 +2907,28 @@
     "rollout": 67,
     "transitions": 402000,
     "wall_seconds": 10767.081387739046
+   },
+   {
+    "checkpoint": "c03",
+    "rollout": 100,
+    "transitions": 600000,
+    "wall_seconds": 16161.049553632038
    }
   ],
-  "n_rollouts": 71,
-  "seconds_per_rollout_mean": 165.83737338938369,
+  "n_rollouts": 105,
+  "seconds_per_rollout_mean": 164.87064487824128,
   "seconds_per_rollout_first_two": [
    149.97905104106758,
    142.974010168924
   ],
-  "projected_total_hours_at_mean_rate": 9.213187410521316,
+  "projected_total_hours_at_mean_rate": 9.159480271013406,
   "live_lane_boundaries": 0,
-  "mapping_share_mean": 0.26028433098591547,
+  "mapping_share_mean": 0.2794809523809524,
   "action_entropy_first_last": [
    1.1555347591638565,
-   1.1495237238705158
+   1.0426671244204044
   ],
-  "zero_service_lane_rollouts": 40,
+  "zero_service_lane_rollouts": 61,
   "qos_per_step_by_10_rollouts": [
    0.19145718685523264,
    0.16134429726122346,
@@ -2047,7 +2937,10 @@
    0.1637832201447375,
    0.12741534100079166,
    0.20982959177628305,
-   0.11557105083668942
+   0.14402523612602589,
+   0.19554269720550693,
+   0.194400822663267,
+   0.19948792407231372
   ],
   "qos_per_step_first_five": [
    0.25229310281861594,
@@ -2057,11 +2950,11 @@
    0.25862531934616373
   ],
   "qos_per_step_last_five": [
-   0.15380995583504337,
-   0.11725324624306645,
-   0.3366914222269397,
-   0.1940231160953762,
-   0.11557105083668942
+   0.3703655244896853,
+   0.24438841942663586,
+   0.1199332904340245,
+   0.10269549043946585,
+   0.16005689557175706
   ]
  },
  "checkpoints": {
@@ -4110,6 +5003,722 @@
      "conflict": null
     }
    }
+  },
+  "c03_deterministic": {
+   "summary": {
+    "qos_satisfaction_ratio_per_step": 0.32489616940821386,
+    "raw_native_J": 943.9514706934405,
+    "return_constraint_cost_sum": 1.6253454238029108,
+    "cutoff_event_count_sum": 0.0,
+    "depletion_event_count_sum": 0.0,
+    "min_decoded_battery": 0.11431099893525243,
+    "mode_uav_step_fraction": 0.20329166666666668,
+    "first_entry_step": 1255.65625,
+    "first_input_step": 2152.5,
+    "qos_per_step_pre_entry": 0.21819042928031485,
+    "qos_per_step_entry_to_input": 0.35175306711788434,
+    "qos_per_step_post_input": 0.43421757446187953,
+    "charger_input_wh": 164.2534722222222,
+    "wait_ticks_total": 1819.875,
+    "guard_blocked_actions": 950.25,
+    "guard_checked_actions": 10251.96875,
+    "feedback_entry_count": 73.65625,
+    "boundary_share_normal_mode": 0.3646840322824948,
+    "altitude_floor_share_normal_mode": 0.3344217411205651,
+    "anchor_uav_steps_within_300m": 2749.28125,
+    "centre_uav_steps_within_300m": 1133.09375,
+    "first_service_step": 205.93333333333334,
+    "zero_service": 0.0625,
+    "n": 32,
+    "zero_service_worlds": 2,
+    "failed_worlds": 0,
+    "min_battery_p10": 0.0972348004579544,
+    "guard_blocked_share": 0.09268951390434155
+   },
+   "record": {
+    "checkpoint": "c03",
+    "transitions": 600000,
+    "policy_seed": 925031,
+    "draw": null,
+    "policy_identity": [
+     {
+      "checkpoint": "c03",
+      "checkpoint_sha256": "80b2bdadddb76a4c03fe9fea8ae9fb1317a136363d28dec0d8fae350745dcce4",
+      "policy_fingerprint": "4667fdc9df9486167a9820ffc3433a5c6d4b8fe568b21e6fbc3c1326aca4ff3b",
+      "rollout": 100,
+      "transitions": 600000
+     }
+    ],
+    "controller_information": "flat recurrent actor on the legal observation + held central snapshot (state, all observations, ego one-hot) refreshed every k = 10 steps (SET, use_central_snapshot_in_flat_actor)"
+   },
+   "milestone_reached": false,
+   "worlds_at_or_above_milestone": 0,
+   "vs_c00": {
+    "qos_satisfaction_ratio_per_step": {
+     "n": 32,
+     "mean": 0.11608973599534164,
+     "paired_se": 0.02045623339192691,
+     "positive": 28,
+     "min": -0.23964584306958947,
+     "max": 0.37026076851827944
+    },
+    "raw_native_J": {
+     "n": 32,
+     "mean": 356.90013436206056,
+     "paired_se": 61.13905118663961,
+     "positive": 28,
+     "min": -702.0428932869835,
+     "max": 1124.2677165122122
+    },
+    "return_constraint_cost_sum": {
+     "n": 32,
+     "mean": -5.011899244488787,
+     "paired_se": 2.1765794448448847,
+     "positive": 11,
+     "min": -41.331457211900684,
+     "max": 18.980547595615786
+    },
+    "cutoff_event_count_sum": {
+     "n": 32,
+     "mean": 0.0,
+     "paired_se": 0.0,
+     "positive": 0,
+     "min": 0.0,
+     "max": 0.0
+    },
+    "depletion_event_count_sum": {
+     "n": 32,
+     "mean": 0.0,
+     "paired_se": 0.0,
+     "positive": 0,
+     "min": 0.0,
+     "max": 0.0
+    },
+    "min_decoded_battery": {
+     "n": 32,
+     "mean": 0.017136740032583475,
+     "paired_se": 0.002060572077391108,
+     "positive": 28,
+     "min": -0.018623672425746918,
+     "max": 0.034275926649570465
+    },
+    "conflict": null
+   },
+   "gaps": {
+    "H_central": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.449127958890292,
+      "paired_se": 0.018918388656134516,
+      "positive": 0,
+      "min": -0.7423316005269962,
+      "max": -0.27888790016616544
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -1337.935902998808,
+      "paired_se": 56.85084498573203,
+      "positive": 0,
+      "min": -2178.9551534425595,
+      "max": -836.1058169172778
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -3.1966265153076114,
+      "paired_se": 1.536152598191095,
+      "positive": 5,
+      "min": -37.854621380324694,
+      "max": 18.42332362499836
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.01472541387192905,
+      "paired_se": 0.0017227914122795234,
+      "positive": 28,
+      "min": -0.018712908029556274,
+      "max": 0.028226904571056366
+     },
+     "conflict": null
+    },
+    "H_local": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.2720425795958367,
+      "paired_se": 0.03108051485490747,
+      "positive": 2,
+      "min": -0.6817997596995911,
+      "max": 0.16450119506193744
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -684.4948446017979,
+      "paired_se": 109.45507515184515,
+      "positive": 5,
+      "min": -2036.7699299522287,
+      "max": 885.8139281821279
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -64.29825141905664,
+      "paired_se": 14.983910668999489,
+      "positive": 0,
+      "min": -290.3589086350092,
+      "max": -0.07653124272548273
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.027076306869275868,
+      "paired_se": 0.0027279261231171626,
+      "positive": 31,
+      "min": -0.005344994366168976,
+      "max": 0.06624418124556541
+     },
+     "conflict": null
+    },
+    "N_deterministic": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.003429886603990524,
+      "paired_se": 0.022017908647468953,
+      "positive": 16,
+      "min": -0.27031392568684,
+      "max": 0.3292643868984129
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -11.024732343078027,
+      "paired_se": 65.61594056016278,
+      "positive": 17,
+      "min": -805.2430565872223,
+      "max": 986.6482642864112
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": 0.42861179956447737,
+      "paired_se": 0.7091275345992814,
+      "positive": 20,
+      "min": -11.933967830235199,
+      "max": 18.7413929725896
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.00614534504711628,
+      "paired_se": 0.0023477341538402853,
+      "positive": 25,
+      "min": -0.03638296574354172,
+      "max": 0.03696732968091965
+     },
+     "conflict": null
+    },
+    "H_spawn": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": 0.09290994856762957,
+      "paired_se": 0.019597823609983078,
+      "positive": 25,
+      "min": -0.2791426653803018,
+      "max": 0.3104941218836267
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": 451.65844876614045,
+      "paired_se": 59.043315528354746,
+      "positive": 30,
+      "min": -303.36978067451116,
+      "max": 1181.473160134053
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -87.03126309035662,
+      "paired_se": 20.235440690572798,
+      "positive": 0,
+      "min": -370.85261158915483,
+      "max": -0.5794652700206342
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.030445328797213733,
+      "paired_se": 0.003422111337496206,
+      "positive": 31,
+      "min": -0.00504448264837265,
+      "max": 0.06511547043919563
+     },
+     "conflict": null
+    },
+    "H_park2": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.0536806761445897,
+      "paired_se": 0.02570258215212902,
+      "positive": 12,
+      "min": -0.475681834001742,
+      "max": 0.1741306205223908
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -122.26402730470261,
+      "paired_se": 71.56195249436969,
+      "positive": 12,
+      "min": -1098.4968221728311,
+      "max": 549.0801925367341
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -17.87446127506262,
+      "paired_se": 4.971201329289668,
+      "positive": 0,
+      "min": -163.6441950451256,
+      "max": -6.139161028095503
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.020612181164324284,
+      "paired_se": 0.001648047471904331,
+      "positive": 31,
+      "min": -0.0024188831448554993,
+      "max": 0.035189516842365265
+     },
+     "conflict": null
+    }
+   }
+  },
+  "c03_stochastic": {
+   "summary": {
+    "qos_satisfaction_ratio_per_step": 0.34478908290599103,
+    "raw_native_J": 995.8652844874198,
+    "return_constraint_cost_sum": 4.966318995681688,
+    "cutoff_event_count_sum": 0.0,
+    "depletion_event_count_sum": 0.0,
+    "min_decoded_battery": 0.1054373427759856,
+    "mode_uav_step_fraction": 0.2844127604166667,
+    "first_entry_step": 1175.25,
+    "first_input_step": 1904.59375,
+    "qos_per_step_pre_entry": 0.21515613797784688,
+    "qos_per_step_entry_to_input": 0.3915013324101314,
+    "qos_per_step_post_input": 0.4355750772046896,
+    "charger_input_wh": 269.6267361111111,
+    "wait_ticks_total": 3337.5625,
+    "guard_blocked_actions": 316.21875,
+    "guard_checked_actions": 9196.96875,
+    "feedback_entry_count": 71.625,
+    "boundary_share_normal_mode": 0.09367883478448685,
+    "altitude_floor_share_normal_mode": 0.09835762610573277,
+    "anchor_uav_steps_within_300m": 4492.8125,
+    "centre_uav_steps_within_300m": 1702.0,
+    "first_service_step": 254.46666666666667,
+    "zero_service": 0.0625,
+    "n": 32,
+    "zero_service_worlds": 2,
+    "failed_worlds": 0,
+    "min_battery_p10": 0.08653072267770767,
+    "guard_blocked_share": 0.034382931876331534
+   },
+   "record": {
+    "checkpoint": "c03",
+    "transitions": 600000,
+    "policy_seed": 925031,
+    "draw": 0,
+    "policy_identity": [
+     {
+      "checkpoint": "c03",
+      "checkpoint_sha256": "80b2bdadddb76a4c03fe9fea8ae9fb1317a136363d28dec0d8fae350745dcce4",
+      "policy_fingerprint": "4667fdc9df9486167a9820ffc3433a5c6d4b8fe568b21e6fbc3c1326aca4ff3b",
+      "rollout": 100,
+      "transitions": 600000
+     }
+    ],
+    "controller_information": "flat recurrent actor on the legal observation + held central snapshot (state, all observations, ego one-hot) refreshed every k = 10 steps (SET, use_central_snapshot_in_flat_actor)"
+   },
+   "milestone_reached": false,
+   "worlds_at_or_above_milestone": 0,
+   "vs_c00": {
+    "qos_satisfaction_ratio_per_step": {
+     "n": 32,
+     "mean": 0.10192681885282098,
+     "paired_se": 0.0155952267240079,
+     "positive": 25,
+     "min": -0.036114074195405355,
+     "max": 0.3167132510856477
+    },
+    "raw_native_J": {
+     "n": 32,
+     "mean": 302.9237101110857,
+     "paired_se": 46.84485821111446,
+     "positive": 25,
+     "min": -103.44882666380761,
+     "max": 953.1389523559333
+    },
+    "return_constraint_cost_sum": {
+     "n": 32,
+     "mean": 0.3476639273387775,
+     "paired_se": 1.403560855763138,
+     "positive": 11,
+     "min": -14.133972829637674,
+     "max": 30.251448937401076
+    },
+    "cutoff_event_count_sum": {
+     "n": 32,
+     "mean": 0.0,
+     "paired_se": 0.0,
+     "positive": 0,
+     "min": 0.0,
+     "max": 0.0
+    },
+    "depletion_event_count_sum": {
+     "n": 32,
+     "mean": 0.0,
+     "paired_se": 0.0,
+     "positive": 0,
+     "min": 0.0,
+     "max": 0.0
+    },
+    "min_decoded_battery": {
+     "n": 32,
+     "mean": 0.006446643499657512,
+     "paired_se": 0.0018864219830210661,
+     "positive": 24,
+     "min": -0.019742727279663086,
+     "max": 0.020967818796634674
+    },
+    "conflict": "service higher but risk worse: return_constraint_cost_sum"
+   },
+   "gaps": {
+    "H_central": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.42923504539251484,
+      "paired_se": 0.01683851710016064,
+      "positive": 0,
+      "min": -0.7423316005269962,
+      "max": -0.2379390269700919
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -1286.0220892048285,
+      "paired_se": 50.76563820318168,
+      "positive": 0,
+      "min": -2200.9020430274218,
+      "max": -712.1995051947019
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": 0.1443470565711665,
+      "paired_se": 1.4840914786360961,
+      "positive": 11,
+      "min": -13.07577443788677,
+      "max": 31.47940043630444
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.00585175771266222,
+      "paired_se": 0.00184177315639007,
+      "positive": 24,
+      "min": -0.020766794681549072,
+      "max": 0.021106518805027008
+     },
+     "conflict": null
+    },
+    "H_local": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.2521496660980596,
+      "paired_se": 0.0261696172407486,
+      "positive": 0,
+      "min": -0.4637232508604203,
+      "max": 0.0
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -632.5810308078185,
+      "paired_se": 89.37253645091258,
+      "positive": 5,
+      "min": -1393.051957513254,
+      "max": 324.4034454595607
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -60.95727784717786,
+      "paired_se": 14.782396318890742,
+      "positive": 3,
+      "min": -289.43871104798376,
+      "max": 20.218831783013542
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.01820265071000904,
+      "paired_se": 0.0027680250793080522,
+      "positive": 27,
+      "min": -0.015679121017456055,
+      "max": 0.056590452790260315
+     },
+     "conflict": null
+    },
+    "N_deterministic": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": 0.016463026893786613,
+      "paired_se": 0.018995040162830032,
+      "positive": 16,
+      "min": -0.19769453842670554,
+      "max": 0.28349774508250014
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": 40.889081450901344,
+      "paired_se": 57.04783614643576,
+      "positive": 16,
+      "min": -570.481168352203,
+      "max": 848.5986129451813
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": 3.7695853714432555,
+      "paired_se": 1.5464126652511863,
+      "positive": 28,
+      "min": -11.089757497256805,
+      "max": 31.62517940602111
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": -0.00272831111215055,
+      "paired_se": 0.0025072227058673714,
+      "positive": 14,
+      "min": -0.03260301798582077,
+      "max": 0.027975216507911682
+     },
+     "conflict": "service higher but risk worse: return_constraint_cost_sum, min_decoded_battery"
+    },
+    "H_spawn": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": 0.11280286206540671,
+      "paired_se": 0.016899796656103153,
+      "positive": 26,
+      "min": -0.05994180573385993,
+      "max": 0.371990257578908
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": 503.57226256011984,
+      "paired_se": 56.25384682675263,
+      "positive": 31,
+      "min": -117.26225041320515,
+      "max": 1550.0609914743616
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -83.69028951847784,
+      "paired_se": 20.247943838332088,
+      "positive": 2,
+      "min": -369.82269131431644,
+      "max": 1.258106461288826
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.021571672637946904,
+      "paired_se": 0.003969804081292227,
+      "positive": 26,
+      "min": -0.017250575125217438,
+      "max": 0.06381936371326447
+     },
+     "conflict": null
+    },
+    "H_park2": {
+     "qos_satisfaction_ratio_per_step": {
+      "n": 32,
+      "mean": -0.03378776264681256,
+      "paired_se": 0.022859430426387353,
+      "positive": 16,
+      "min": -0.475681834001742,
+      "max": 0.1644694670139636
+     },
+     "raw_native_J": {
+      "n": 32,
+      "mean": -70.35021351072325,
+      "paired_se": 63.191162200848176,
+      "positive": 17,
+      "min": -1120.443711757693,
+      "max": 505.04430277069116
+     },
+     "return_constraint_cost_sum": {
+      "n": 32,
+      "mean": -14.533487703183843,
+      "paired_se": 4.896773793338103,
+      "positive": 2,
+      "min": -152.86130239264673,
+      "max": 21.54307111858761
+     },
+     "cutoff_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "depletion_event_count_sum": {
+      "n": 32,
+      "mean": 0.0,
+      "paired_se": 0.0,
+      "positive": 0,
+      "min": 0.0,
+      "max": 0.0
+     },
+     "min_decoded_battery": {
+      "n": 32,
+      "mean": 0.011738525005057454,
+      "paired_se": 0.0017316477371726695,
+      "positive": 28,
+      "min": -0.009235918521881104,
+      "max": 0.025721028447151184
+     },
+     "conflict": null
+    }
+   }
   }
  },
  "final_holdout": {},
@@ -4118,91 +5727,107 @@
    "checkpoints": [
     "c00",
     "c01",
-    "c02"
+    "c02",
+    "c03"
    ],
    "qos_satisfaction_ratio_per_step": [
     0.20880643341287225,
     0.24086622017172904,
-    0.31809791231397544
+    0.31809791231397544,
+    0.32489616940821386
    ],
    "raw_native_J": [
     587.0513363313798,
     692.4209539988926,
-    920.4801364095325
+    920.4801364095325,
+    943.9514706934405
    ],
    "return_cost": [
     6.637244668291698,
     1.6202065745992456,
-    3.280849387745018
+    3.280849387745018,
+    1.6253454238029108
    ],
    "min_battery": [
     0.09717425890266895,
     0.10762251145206392,
-    0.10593396076001227
+    0.10593396076001227,
+    0.11431099893525243
    ],
    "boundary_share": [
     0.058266677291459186,
     0.42587218776462826,
-    0.4284142636374371
+    0.4284142636374371,
+    0.3646840322824948
    ],
    "first_service_step": [
     363.57142857142856,
     281.25925925925924,
-    322.741935483871
+    322.741935483871,
+    205.93333333333334
    ],
    "zero_service_worlds": [
     4,
     5,
-    1
+    1,
+    2
    ],
-   "last_step_delta": 0.0772316921422464,
-   "still_improving_at_end": true,
-   "best_checkpoint": 2
+   "last_step_delta": 0.006798257094238425,
+   "still_improving_at_end": false,
+   "best_checkpoint": 3
   },
   "stochastic": {
    "checkpoints": [
     "c00",
     "c01",
-    "c02"
+    "c02",
+    "c03"
    ],
    "qos_satisfaction_ratio_per_step": [
     0.24286226405317002,
     0.24984948656705125,
-    0.3025875782317159
+    0.3025875782317159,
+    0.34478908290599103
    ],
    "raw_native_J": [
     692.9415743763342,
     708.7280912974393,
-    863.9090182618489
+    863.9090182618489,
+    995.8652844874198
    ],
    "return_cost": [
     4.618655068342911,
     6.871148542661084,
-    8.146845032927109
+    8.146845032927109,
+    4.966318995681688
    ],
    "min_battery": [
     0.09899069927632809,
     0.10469983564689755,
-    0.10060202027671039
+    0.10060202027671039,
+    0.1054373427759856
    ],
    "boundary_share": [
     0.011208130538639217,
     0.17076085424040413,
-    0.1362179092373232
+    0.1362179092373232,
+    0.09367883478448685
    ],
    "first_service_step": [
     346.8965517241379,
     233.44444444444446,
-    290.2258064516129
+    290.2258064516129,
+    254.46666666666667
    ],
    "zero_service_worlds": [
     3,
     5,
-    1
+    1,
+    2
    ],
-   "last_step_delta": 0.052738091664664644,
+   "last_step_delta": 0.042201504674275137,
    "still_improving_at_end": true,
-   "best_checkpoint": 2
+   "best_checkpoint": 3
   }
  },
  "failure_explanations_pro_table": {
@@ -4211,8 +5836,8 @@
    {
     "observation": "users seen late / access late / little useful service exposure in training",
     "proxies": {
-     "first_service_step_last": 322.741935483871,
-     "qos_pre_entry_last": 0.17157151264628653,
+     "first_service_step_last": 205.93333333333334,
+     "qos_pre_entry_last": 0.21819042928031485,
      "training_qos_first_five": [
       0.25229310281861594,
       0.17380183280289688,
@@ -4220,7 +5845,7 @@
       0.24938514831220568,
       0.25862531934616373
      ],
-     "mapping_share_mean": 0.26028433098591547
+     "mapping_share_mean": 0.2794809523809524
     },
     "would_strengthen": "insufficient opportunity to reach useful states",
     "would_not_follow": "an identified exploration defect; that a curriculum works"
@@ -4228,18 +5853,20 @@
    {
     "observation": "users and paths present, delivery not held or improved",
     "proxies": {
-     "first_service_step_last": 322.741935483871,
-     "qos_last": 0.31809791231397544,
+     "first_service_step_last": 205.93333333333334,
+     "qos_last": 0.32489616940821386,
      "curve": {
       "deterministic": [
        0.20880643341287225,
        0.24086622017172904,
-       0.31809791231397544
+       0.31809791231397544,
+       0.32489616940821386
       ],
       "stochastic": [
        0.24286226405317002,
        0.24984948656705125,
-       0.3025875782317159
+       0.3025875782317159,
+       0.34478908290599103
       ]
      }
     },
@@ -4249,8 +5876,8 @@
    {
     "observation": "early service good, gap widens after F / recharging",
     "proxies": {
-     "learner_pre_entry": 0.17157151264628653,
-     "learner_post_input": 0.4748139769155263,
+     "learner_pre_entry": 0.21819042928031485,
+     "learner_post_input": 0.43421757446187953,
      "H_central_pre_entry": 0.8099960107159845,
      "H_central_post_input": 0.7252324599096243
     },
@@ -4260,9 +5887,9 @@
    {
     "observation": "targets not reached, non-zero proposals often guard-blocked",
     "proxies": {
-     "guard_blocked_share_last": 0.07617238587531917,
+     "guard_blocked_share_last": 0.09268951390434155,
      "H_central_guard_blocked_share": 0.07722774393502191,
-     "boundary_share_last": 0.4284142636374371
+     "boundary_share_last": 0.3646840322824948
     },
     "would_strengthen": "action filtering under specific geometry may limit execution",
     "would_not_follow": "H's global blocked share diagnoses SET"
@@ -4271,12 +5898,12 @@
     "observation": "still improving at the end with a large gap",
     "proxies": {
      "still_improving_at_end": {
-      "deterministic": true,
+      "deterministic": false,
       "stochastic": true
      },
      "gap_to_H_central_last": {
-      "deterministic": -0.4559262159845304,
-      "stochastic": -0.47143655006678997
+      "deterministic": -0.449127958890292,
+      "stochastic": -0.42923504539251484
      }
     },
     "would_strengthen": "the exposure may not describe the plateau",

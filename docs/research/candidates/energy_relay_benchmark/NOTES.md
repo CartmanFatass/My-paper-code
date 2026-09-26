@@ -2779,3 +2779,50 @@ entropy 1.156 → 1.150, F-mode share rising: the curve separates training-time 
 from frozen evaluation, as Pro asked it to. Reported, not read further; the next checkpoints
 decide whether this is a rising curve or a plateau at N's level. Fit at the read: 71 rollouts,
 ≈ 166 s per rollout (projection ≈ 9.2 h → end ≈ 03:35 UTC), 0 live lanes.
+
+### Stage 1, c03 (600k transitions, rollout 100) evaluated (`b02_s1_eval_c03_a01`, operation e2e0f998)
+
+Checkpoint written 22:55 UTC, copied to the artifacts directory (agent.pt sha256 `80b2bdad…` equals
+its record), evaluation accepted 22:57:57Z beside the fit (command sha256 `0f059fe0…`, supervisor
+pid 735402, runner 735403), `COMPLETE` in 882.0 s, 64 episodes, 0 failed. Diagnostics parity: row
+values equal the trace recomputation except the normal-mode boundary share in 5 of 64 rows, which
+differs by at most 2.5e-4 (float32 accumulation in the runner, as in the Stage 0 parity note); the
+other four diagnostics are exact. Reader unchanged since `a1767f1de`; readings JSON regenerated
+(c00–c03).
+
+| 955001–955032 | c00 | c01 | c02 | c03 det | c03 stoch |
+|---|---|---|---|---|---|
+| QoS/step (det / stoch) | .209 / .243 | .241 / .250 | .318 / .303 | .325 | .345 |
+| paired vs c00 | — | +.032 / +.007 | +.109 / +.060 | +.116 (SE .020, 28/32) | +.102 (SE .016, 25/32) |
+| vs H_central .774 | | | | −.449 (SE .019) | −.429 (SE .017) |
+| vs H_local .597 | | | | −.272 (SE .031, 2/32 above) | −.252 (SE .026, 0/32 above) |
+| vs H_park2 .379 | | | | −.054 (SE .026) | −.034 (SE .023) |
+| vs H_spawn .232 | | | | +.093 (SE .020) | +.113 (SE .017) |
+| vs N .328 (det) | | | | −.003 (SE .022, 16/32) | +.016 (SE .019, 16/32; conflict flag: return cost and min battery worse than N's) |
+| J (mean) | 587 / 693 | 692 / 709 | 920 / 864 | 944 | 996 |
+| boundary share / altitude-floor share (normal mode) | | | .428 / .321 ; .136 / .056 | .365 / .334 | .094 / .098 |
+| QoS before first entry / after first input | | | .172 / .475 ; .169 / .410 | .218 / .434 | .215 / .436 |
+| first service step (mean) | | | 323 ; 290 | 206 | 254 |
+| F-mode share; return cost; min battery | | | .199; 3.28; .106 ; .265; 8.15; .101 | .203; 1.63; .114 | .284; 4.97; .105 |
+| zero-service worlds; worlds ≥ .60 | 4 / 3 | 5 / 5 | 1 / 1 | 2 (955005, 955021); 0 | 2 (955016, 955021); 0 |
+
+At half the exposure the two modes separate: deterministic evaluation is flat between c02 and
+c03 (+.007; the reader's `still_improving_at_end` is false) and sits exactly at N's level
+(−.003, 16 worlds each way); sampled-action evaluation gained +.042 over c02 and is now +.016
+above N with the reader's conflict flag (higher service, but return-constraint cost 4.97 against
+N's and a lower minimum battery), still −.034 below H_park2 and a quarter below H_local; no
+milestone (0/32 worlds at .60 in either mode). Both modes are more than a threshold above the
+initialisation (+.116 / +.102). Wall parking under deterministic evaluation is receding rather
+than growing (.43 → .36 of normal-mode UAV-steps; .14 → .09 under sampled actions) while service
+before the first shield entry has risen (.17 → .22 in both modes) and the first service arrives
+earlier (206 / 254 steps against 323 / 290): what improved between c02 and c03 is the pre-entry
+phase, not the shield-driven one. Training-time QoS/step by 10-rollout blocks is still flat
+(.19, .16, .21, .18, .16, .13, .21, .14, .20, .19, .20), a zero-service lane in 61 of 105
+rollouts (21 of the last 34), action entropy 1.156 → 1.043 through a non-monotone path (1.23 near
+rollout 76), F-mode share rising (.23 → .29–.34 per block) with shield entries per rollout up
+from ≈ 114 to ≈ 170: the collection-time policy keeps oscillating through the shield while the
+frozen evaluations improve, which is the gap Pro's table lists under "training signal is not the
+evaluation signal" (observable proxy: flat training QoS with rising frozen-evaluation QoS).
+Reported, not read further. Fit at the read: 105 rollouts, ≈ 165 s per rollout (projection
+≈ 9.2 h → end ≈ 03:35 UTC), 0 live lanes, runner RSS unchanged. c04 (rollout 134, ≈ 00:40 UTC),
+c05 (167) and c06 (200) follow the same procedure; the curve is read as a whole after c06.
