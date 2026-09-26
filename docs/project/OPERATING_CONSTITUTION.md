@@ -7,10 +7,12 @@ or historical record conflicts with it, this page prevails. Historical scientifi
 their meaning as evidence. Only the owner amends this page. Adoption did not lift the owner's
 research pause of 2026-09-15 22:23 PDT.
 
-The current sections incorporate the owner's amendments through 2026-09-25: independent
+The current sections incorporate the owner's amendments through 2026-09-26: independent
 DM responsibility and publication, cost without allowances, proportional engineering,
 scripted observation, proactive Pro advice, shared research understanding, and scientific
-project management, question-led DM continuity and a three-track runtime resource ceiling.
+project management, question-led DM continuity and a three-track runtime resource ceiling,
+and (2026-09-26, instruction "Both" on the reset response) one adequate independent scientific
+review at consequential decisions with Pro added where it offers distinct value (section 5).
 The owner's adopted workflow reduction
 is reflected in section 4. This consolidation changes no pause, ownership, accepted operation,
 scientific minimum or frozen contract. The [prior amendment chronology](https://github.com/CartmanFatass/My-paper-code/blob/382009f85e46039cc11c275165a03987307dd2b6/docs/project/OPERATING_CONSTITUTION.md)
@@ -306,8 +308,10 @@ scientific decisions; a background edit adds no consultation or approval round.
 
 ## 5. Pro is an adviser
 
-The DM proactively brings Pro into consequential scientific decisions, without waiting for
-an owner reminder. Initiate a focused consultation before:
+The DM brings one adequate independent scientific review into consequential scientific
+decisions, without waiting for an owner reminder, and adds Pro when it offers a distinct
+expertise, framing or unresolved-disagreement benefit (owner amendment 2026-09-26). Obtain that
+review before:
 
 1. Establishing or materially changing the research question, core hypothesis or key comparator.
 2. Changing the failure explanation or continuing investment when intermediate predictions
@@ -329,7 +333,12 @@ no fixed idea count. Pro is an adviser, not an approval stage or veto. The DM re
 answer, verifies consequential claims and records its response to material criticism and the
 resulting belief changes in NOTES.md. Scientific direction-review responsibility and resolution
 of material disagreements follow section 2; other in-scope choices remain with the DM.
-Scientific Reviewer and engineering Reviewer do not by themselves satisfy a Pro consultation.
+One adequate independent scientific review (the Scientific Reviewer role in a separate context)
+covers an ordinary consequential research decision; Pro is added when it offers a distinct
+expertise, framing or unresolved-disagreement benefit. Confirmation still receives scrutiny of
+its actual claim and design. No automatic second pass is owed because a different role name
+exists (owner amendment 2026-09-26; before it, this sentence read "Scientific Reviewer and
+engineering Reviewer do not by themselves satisfy a Pro consultation").
 Scientific reflection and independent review use the existing notebook or assigned RESEARCH
 review, not a new registry, score, checklist service or record type.
 

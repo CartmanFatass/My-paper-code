@@ -754,6 +754,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
+| `energy_relay_benchmark` | 冻结S7-S2/H3000宿主、充电分配不变（policy study）：合法普通控制可达的完整服务是多少，剩余损失中返航/离站时机与移动用户下的布局各占多少，学习控制器能否缩小任一差距？ | exploring | Claude DM (WSL session) | **B01 零训练参照研究经独立科学评审修订后发布，owner 2026-09-26 放行，在 wsl_4070 准入启动。** 评审纠正并已采纳：953001–953032 为 B10 已用世界（改用未曝光的 955001–955032，启发式开发用 956001–956008）；单步充电片段属分配器逐拍按最低电量重排而非离站余量；停靠/等待 UAV 仍在服务，在场率分解无效；B10 轨迹显示学习策略的服务缺口先于任何能量压力（首次进入 F 前团队 QoS/步 .22）。源码事实保留：3 m/s 返航计价使离站后被拴在≈宽度/1.12e-4 m 内（生产 (0,.05) ≈450 m）且返航途中≈24 s 即被释放。B01 现含：B10 世界上的 CPU–CUDA 设备零假设、中心信息与合法观测（站 1 环搜索先验）两个可执行布局参照（在独立开发世界选型）、宽度匹配的 7 组余量网格（N 与中心参照）、按首次进入/首次充电分段的团队 QoS 与护栏拦截计数；预测 P0–P3、分支 (a)–(g) 已预登记，开发世界上不采纳任何阈值。0 fit、≈1.62M 评价步、≈4.5–5.5 h。B02 仅按分支购买，且按信息边界配对参照。[评审条目](candidates/energy_relay_benchmark/NOTES.md#2026-09-26--independent-scientific-review-at-the-b01-boundary-b01-revised-before-any-launch)、[评审回应](../Claude_docs/reviews/RESET_RESPONSE_AND_FIRST_STUDY_20260926.md)。 |
 | `planning_policy_compression` | 有限合法历史与数据下，哪些近似教师区别值得保留，何时普通模仿足以提供完整联合用途？ | paused | Codex DM (independent session) | **已按owner要求收尾交接、停止新实验。** B03完整：O−S +12/+14、O−BC +14/+17、S−BC +2/+3任务，六fit/121.036s，完整核验并保留全部损失/负面分量；只支持单D条件性用途。B04当前实现/独立工程检查完成，4 tests通过且无实质工程问题；0科学fit/采集/评价、无原生操作，不启动。前瞻/代码保留待owner明确恢复；观察已停，无未读结果/Pro。[交接与恢复边界](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)、[完整B03](candidates/planning_policy_compression/NOTES.md#2026-09-26--b03-complete-original-correspondence-helps-on-this-fixed-archive)、[原固定claim](candidates/planning_policy_compression/CLAIM_weighted_partial_compression.md)。 |
 | `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | archived | Codex DM (independent session) | **B03完整，当前固定库50:50混合投入结束。** 两新区组M−F2@伙伴3为−.009834/−.049463 J、−.638688/−2.647500服务；对伙伴1/2也均为负，12项自身平均J/服务仍改善。原B02伙伴3正例保留，但正负取舍未在新训练/新面板条件重现；不作训练总体排名或一般协调否定。4fits、1.744M团队步、101.56min科学墙钟及781文件已完整核验保全。复用完整Pro已覆盖分支，比较复制、面板归因和独立候选后未选后继；无活动操作、未读结果或开放Pro。保留所有普通/混合响应资产。[完整结果与决定](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)；[任务路由](#session-routing)。 |
 | `finite_model_decision_value` | 同一有限合法数据和计算下，环境参数与隐状态的不确定性何时改变有用的动作排序与完整团队后果？ | archived | Codex DM (independent session) | **B02完整，当前NEAR预算修补投入结束。** 主交互总差+4、均值+.015625[−.016865,+.048115]；U自身+4、P0，预期点符号弱相容但完成差稀疏且异质。初始根精度改善，未确立有用U修复；P/U更多预算均减少等待。保留低预算P对AF+32任务及全部损失世界。256闭式拟合、0策略fit、122,880团队步、215,389,184模型分支、149.27s科学墙钟完整保全。复用已读Pro的适用判读/关闭建议，比较复制、估值修订、直接学习与项目转向后未选进一步工作；无活动操作、开放Pro或后继，不否定广义有限知识问题。[完整结果](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--b02-complete-precision-changed-native-budget-response-remains-small-and-uncertain)；[决定与范围](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--end-current-near-budget-repair-investment-retain-the-finite-result)；[任务路由](#session-routing)。 |
@@ -809,6 +810,15 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 [已完成研究方法与DM复盘：完整问题、Pro答复、独立异议和Root采纳](archive/2026-09-26/RESEARCH.md#portfolio-review-2026-09-26-research-method-and-dm-reset)。
 
 ## Current research plan
+
+**2026-09-26（owner "Both"：放行 B01，采纳宪章 §5 修订）。** 当前唯一活动的结果性方向为
+`energy_relay_benchmark`（Claude DM）：任务是冻结 S7-S2/H3000 上、充电分配不变的能耗受限中继服务；
+第一项研究 B01 为零训练参照研究，测量合法普通控制可达的服务，以及剩余损失在返航/离站时机与布局
+之间的分解；学习比较（B02）只在其预登记分支下购买。PPC 保持暂停（owner 明确恢复才可执行）、FSD
+保留、G33 冻结；其他方向保留证据，不为占用运行槽而重开。评审与回应：
+[reset review](../Claude_docs/inbox/RESEARCH_PROGRAM_RESET_RESPONSE_FOR_CLAUDE_20260926.md)、
+[Claude 回应](../Claude_docs/reviews/RESET_RESPONSE_AND_FIRST_STUDY_20260926.md)。以下 PPC 段落是
+暂停前计划的原文，作为暂停状态的记录保留。
 
 2026-09-26，owner要求发送咨询后推进研究。Root已读完并核验完整Pro答复，结合已有独立科学
 Reviewer意见，选择由原PPC独立DM执行**单一存档数据上的O/S/BC三臂条件性重新训练，两个新
@@ -898,6 +908,7 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
+| Claude DM S7 能源中继参照研究 | this session / `local` | `/home/fires/hmasd-wsl` · `main` | 结果节点 wsl_4070，经 `scripts/hmasd_launch.py` 准入；Claude 无 Codex 唤醒，用分离轮询观察，运行句柄与读数在 NOTES。[NOTES](candidates/energy_relay_benchmark/NOTES.md)。 |
 | DM 规划压缩学习 | `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / `local` | `/home/fires/hmasd-wsl` · `main`；旧持久数据 `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`，新raw见NOTES原生节点路径 | 已按owner要求完成当前任务并停止，交接在NOTES。B01–B03合计20fit核验发布；B03源snapshot净回收793542656bytes，唯一raw保留。B04代码/独立工程检查完成，0科学工作/无handle；PPC本地及节点控制均paused，观察已停。无App消息、责任转移或由读交接自动恢复。节点Git GC警告及未来恢复前检查点已写入交接。[交接](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)。 |
 | DM 伙伴曝光独立复制 | `01a0db8f-1fab-7503-ae4b-feff2d4da8f5` / `local` | `/home/fires/.codex/worktrees/fsd-c/hmasd-wsl` · 当前`codex/partner-exposure-b03-publication`；源码/证据分支`codex/partner-exposure-replication-sept25`保留 | B03两新F2/M区组已完整执行、核验、判读并独立出版；结束当前50:50固定库投入，无活动操作、未读证据、开放Pro或已选后继。全量数据在`/home/fires/hmasd-retained-runs/controller_composition/b03_partner_replication_20260925`逐文件核验保全。fsd-c不在本任务原生附件中，节点源树也非launcher snapshot，两目录保留待可用原生归档路径，不使用shell删除。旧B01/B02及ab18来源/原分支保持终态；无App消息。[完整结果和生命周期边界](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)。 |
 | DM 有限模型知识与决策价值 | `01a0d937-e2f7-7d03-982a-d16bf16385cc` / `local` | `/home/fires/.codex/worktrees/3839/hmasd-wsl` · `codex/finite-model-decision-value-sept25` | B01/B02均已完整核验、保全并独立发表；两次Pro已收清，当前NEAR预算修补投入结束，无活动结果操作、未读证据或已选后继。保留原输入/原始产物与本任务地址；未接管其他方向、未发App消息。[完整结果与决定](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--end-current-near-budget-repair-investment-retain-the-finite-result)。 |

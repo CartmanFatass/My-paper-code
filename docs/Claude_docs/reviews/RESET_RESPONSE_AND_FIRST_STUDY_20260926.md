@@ -78,12 +78,19 @@ users at 3 m/s, one ground BS, area 8 km, 160 Wh batteries starting at .75–1.0
 stations of capacity one, 1 kW charging, native reward = QoS − 2·return-cost − cutoff − depletion
 + PBRS). **Policy study** (review §3.2): the environment's slot allocation (lowest battery, then
 waiting age, then index) stays unchanged; controllers decide motion and the dock request.
-**Information boundary**: every controller acts from the legal per-UAV observation (365 dims). The
-review's open item "the actual actor adapter still needs to be traced" is closed: the observation
-already contains all 30 users, every teammate's battery, charging flag, dock request, target
-station, waiting age and return margin, and both stations' occupancy and queue
-(`energy_aware.py::_energy_observation`; `configs/config_1.py` `max_observed_users = 30`). The
-central state (306) feeds critics only. Team size fixed; no S4 failures; no roster claim.
+**Information boundary**: every learned controller acts from the legal per-UAV observation (365
+dims). The review's open item "the actual actor adapter still needs to be traced" is now closed by
+a live-environment decode (implementer, same day): the 120-field energy suffix is always complete
+(every teammate's battery, charging flag, dock request, target station, waiting age and return
+margin; both stations' occupancy and queue), but user, peer-UAV and base-station records are gated
+to a 1,500 m radius (`routed_core.py`, `observation_radius`), sorted by distance and zero-padded;
+at reset no UAV sees any user in six of six probed worlds. An earlier draft of this document said
+the observation "contains all 30 users"; that read a slot count (`max_observed_users = 30`) as
+visibility and was wrong. Consequence: an executed layout rule cannot plan from local observations
+at reset, so the executed reference plans from ground-truth user and base-station positions and
+is labelled a **central-information reference**; the learned arms stay local, and a local rule
+with search is a separate design question put to the reviewers. The central state (306) feeds
+critics only. Team size fixed; no S4 failures; no roster claim.
 
 **Strongest alternative problem**: learned positioning and relay formation under mobility. B01
 measures the positioning gap (executed heuristic versus learned policy under the same shield) and
@@ -111,7 +118,25 @@ Consequences that the record already shows without naming the cause: charging sp
 (B09 N: 12,024 of 12,536), up to eight UAVs in return mode with a queue of seven (B07), worlds that
 serve until the first return and never again (B07 938030, 938028). The B11 notebook noticed the
 3 m/s pricing on the entry side ("a different time/energy model"); its exit-side consequence was
-not drawn, and no margin other than (0, .05) was ever evaluated.
+not drawn, and no margin other than (0, .05) was ever evaluated. The same .05 width also releases
+a returning UAV before it arrives: during a 30 m/s approach the margin climbs about 2.1e-3 per
+second and crosses .05 roughly 24 s after entry, some 700 m in, so the shield engages and
+releases in a sawtooth that reaches a charger only from a few hundred metres out. B09 N recorded
+2,710 shield activations against 624 charger-input intervals. Raising the exit margin acts on both
+sides; B01's first-return and presence readings separate them.
+
+**Correction after the independent scientific review (same day, before any run).** The
+attribution in the preceding paragraph was too strong. One-tick charging spells come from the
+allocator, which re-ranks eligible UAVs every tick by lowest battery (B10's spell endings: 11,594
+same-station replacements against 408 ineligibility endings); the low slot utilisation is late
+onset (first shield entry at median step ≈ 1,173, first charger input ≈ 2,124); B07 938030 loses
+service at step 1,607 and first charges at 1,946; and charging or waiting UAVs still serve and
+relay (`_communication_unavailable_mask` is failed OR battery ≤ .02), so B10's team service was
+highest after the first recharge (QoS/step .22 before any entry, .38 between entry and input, .44
+after). What stands is source-derived: the 3 m/s pricing, the tether after exit, release before
+arrival, and that the post-exit radius scales with the hysteresis width (x − e)/1.12e-4 m, so
+(0, .05) and (.20, .25) are the same tether. The presence decomposition is withdrawn. Full record:
+the direction notebook entry "Independent scientific review at the B01 boundary".
 
 **Prediction** (stated before any run): raising the exit margin restores the service radius after
 the first recharge and raises complete service; the entry margin matters less. **Competing
@@ -144,26 +169,41 @@ Full design, predictions and branches are in the direction notebook
 (`docs/research/candidates/energy_relay_benchmark/NOTES.md`, entry "Reconciliation with the
 Astral review"). Summary:
 
-- **Worlds**: 32 fresh worlds 953001–953032; the old B09 panel is used only for a four-world
-  evaluator-equivalence check.
-- **Controllers**: N (B09 learned policy) and H (executed layout heuristic: k-means service
-  centroids plus relay chain, re-planned every 30 s from legal observations, shield for energy).
-- **Shield grid**: entry margin {0, .10, .20} × exit margin {.05, .25, .45, .65, .85} with exit >
-  entry: 13 settings per controller; (0, .05) is the production package.
-- **Readings**: J, QoS/step, delivered Mb, risk events, zero-service worlds, minimum battery, and
-  the decomposition the review's Stage C table needs: presence fraction and QoS per present
-  UAV-step; plus first-return step, charger input, one-tick spell share, wait ticks.
-- **Predictions**: P1 exit margin lifts N's QoS/step by ≥ .03 (threshold anchored to B09's
-  A−N = −.027 read as no gain, and N's .125 learning gain); P1′ entry margin < .03; P2 the
-  heuristic reaches QoS/step ≥ .60 under the production shield.
-- **Branches** (a)–(e): mis-specified package → corrected reference and a learned comparison on
-  positioning (B02); heuristic incompetent → feasibility boundary before any learning; timing
-  matters only for a competent controller → positioning is the problem; nothing moves → drop timing
-  as a candidate; per-world optimum varies → simplest queue-aware rule versus best constant before
-  any learned timing.
-- **Cost**: 0 fits; ≈ 2.8 M evaluation transitions; ≈ 2 h on `wsl_4070`; one implementer task;
-  one risk-scoped engineering review (shield semantics and observation decode are scientific
-  inputs).
+*Revised the same day after the independent scientific review (§11); the bullets below are the
+design that launches. The earlier bullets (32 "fresh" worlds 953001–953032, 13 settings, presence
+decomposition) are retracted.*
+
+- **Worlds**: grid and reference panels on unexposed worlds 955001–955032; heuristic development
+  on 956001–956008 (the only selection domain); a device null on B10's 953001–953032 (CPU
+  production cell against B10's recorded CUDA per-world values; nothing selected there); the B09
+  four-world evaluator check on 952001–952004 (record only).
+- **Controllers**: N (B09 learned policy); H_central (best of three k-means layout variants on the
+  development worlds, planning from ground-truth positions; labelled central-information);
+  H_local (the same layout planned from the union of the eight legal observations, with a lawful
+  search seed on a 1,000 m ring around station 1, which every UAV always sees). Shield, batteries
+  and modes from the legal energy suffix for all.
+- **Shield grid** (width is the axis): (0, .05), (0, .25), (0, .45), (0, .85) and the matched
+  level-.20 settings (.20, .25), (.20, .45), (.20, .65); 7 settings for N and H_central; (0, .05)
+  is the production package.
+- **Readings**: J, QoS/step, return cost, cutoff/depletion, zero-service, minimum battery, charger
+  input, F-mode fraction, first entry and first input steps, team QoS/step split before first
+  entry / entry to input / after input, one-tick spell share and wait ticks (descriptive), guard
+  checked/blocked actions. No presence reading.
+- **Predictions**: P0 device null (median per-world |ΔQoS/step| < .01; its 95th percentile is the
+  per-world threshold); P1 width lifts N's QoS/step at (0, .45) by ≥ .03 with J not worse; P1c the
+  competing herding prediction at (0, .85); P1′ level moves < .03 at matched width; P2 H_central ≥
+  .60 QoS/step; P2′ learning gap (H_local − N) exceeds information gap (H_central − H_local); P3
+  N's pre-entry QoS/step < .30 in ≥ 24 of 32 worlds.
+- **Branches** (a)–(g): width consequential → candidates named for confirmation on further
+  unexposed worlds, nothing adopted; learner deficit → timing investment ends, B02 is the learning
+  question; reference incompetent → diagnose guard/energy/mobility and redesign before any learned
+  comparison; nothing moves → not consequential in the H3000 transient; per-world regime above the
+  null threshold → rule study, no adoption; large negative response → scheduler question opened
+  separately; QoS up but J down → not a gain.
+- **Cost**: 0 fits; 1.62 M evaluation transitions; ≈ 4.5–5.5 h on `wsl_4070` at 8 workers × 2
+  threads (above the ≈ 2 h first given; the null, development and local-reference phases were
+  added); one implementer task; one engineering review (done, accepted) plus the DM's own read of
+  the heuristic and runner before commit.
 
 **B02** (conditional on branch (a) or (c)): LOCAL1 / SET / HMASD-k10 against the corrected
 reference, ≥ 3 seeds, exposure decided from B01's reference level and development curves, paired
@@ -196,7 +236,7 @@ after the 09-25 closure, the reference design and the thresholds.
 
 ## 10. Decisions actually required from the owner
 
-- **[D1] Go for B01 on `wsl_4070`.** The project pause is lifted (RESEARCH.md line 8) and the
+- **[D1] Go for B01 on `wsl_4070`.** *(Given as "Both"; the design was then revised under §11 before launch, inside the same envelope.)* The project pause is lifted (RESEARCH.md line 8) and the
   direction is mine under the "Claude is one direct DM" rule, so no formal permission is missing;
   I ask because you held execution twice today pending this review. On your go I publish the
   Active row and routing row prepared in the notebook, commit code and tests, run the node
@@ -222,6 +262,35 @@ after the 09-25 closure, the reference design and the thresholds.
 > how the remaining loss splits between return/exit timing and positioning; learned comparisons
 > (B02) are bought only under its pre-registered branches. PPC paused (owner-only resume); FSD
 > rested; G33 frozen; other directions retain their evidence and are not reopened to fill a slot.
+
+## 11. Same-day revision after the independent scientific review
+
+The constitution §5 amendment (D2) was applied and its first use was an independent scientific
+review (ResearchCritic role, separate context) at the B01 boundary, before any launch. It returned
+material dissent on four points, all verified on the checkout and all accepted:
+
+1. The "32 fresh worlds 953001–953032" were B10's evaluation worlds (S7 NOTES line 10885, with
+   per-world N results published). My check had covered B09's range only. B01 now runs on
+   955001–955032, with 956001–956008 for heuristic development; a range grep over the research
+   record, experiments, scripts, tests and configs finds no prior use of either.
+2. The mechanism entry over-claimed sufficiency (§5 correction above). Tether and
+   release-before-arrival stand; spells, utilisation and the B07 worlds have other causes; the
+   learned policy's deficit precedes energy pressure.
+3. The presence decomposition was invalid because docked and waiting UAVs still serve; it is
+   replaced by a phase split of team service around the first shield entry and first charger
+   input.
+4. Branch (a) adopted margins from the study's own worlds and promoted the central-information
+   heuristic to the ordinary reference; now nothing is adopted on development worlds, a
+   legal-observation reference is executed alongside the central one, and B02 pairs each
+   reference with the learned arm of matching information.
+
+The review recommended revising rather than stopping, because the deployment deficit is real
+(B10 traces: team QoS/step .22 over the first 39 % of the episode against a static witness near
+1.0) and one cheap executable reference changes the B02 decision. The revised study stays within
+D1's envelope (zero-training reference study, `wsl_4070`, 0 fits) at ≈ 4.5–5.5 h of CPU
+evaluation instead of ≈ 2 h. The owner's "Both" was given on the earlier design; this document
+and the notebook record the change so it is not read as the design that was approved. The Pro
+question was corrected before being sent (mechanism item 1 no longer asserts sufficiency).
 
 ## Appendix. Sources read for this response
 
