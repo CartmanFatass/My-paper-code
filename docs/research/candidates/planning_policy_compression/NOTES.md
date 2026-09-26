@@ -991,3 +991,25 @@ After verified recovery, the native snapshot collector previewed and reclaimed o
 `bcfd81ab82b341919c4f569088ca4a97`, with its read-only sudo process scan. Both output copies,
 published source/ref, claim and terminal records remain. The durable author/output checkout
 was not removed, and cleanup does not authorize another execution.
+
+### Completion storage and checkout disposition
+
+The final publication refresh found main `913df36e8e59eb77e06a82224580509e252903ba`, including
+the owner's new worktree/data separation method. I applied it without changing the scientific
+result or restarting an operation. Complete B01/B02 output copies now also live outside all
+worktrees at `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`:
+B01 `b01_bc_wbc_s925941_20260925` has447 files/13,758,268 bytes;
+B02 `b02_confirm_s925951_20260925` has1,344 files/40,645,572 bytes. Every copied file matches
+its source size/SHA256. A separate verification using only each external summary and retained
+files matched all438 B01 and1,335 B02 runner-listed artifacts. Extra files relative to the
+remote counts are the locally collected native status records. Keep each whole tag directory
+with its config, summary and native records for recovery; original remote copies remain.
+
+All accepted operations are terminal, all Pro text has been delivered/read, and observer
+generation6 has no pending event or active job. Source and result commits remain on the
+published direction branch. This chat's native artifact list contains only the temporary
+`ppc-publication` checkout, which has no scientific dependency after the final main push
+and is to be natively archived then. The reused `fsd-a` checkout is not attached to this chat;
+the current archive tool cannot retire it. Preserve that directory for retirement through
+its actual owning task/tool; do not bypass the limitation with shell deletion or an App message.
+Its required data is now independently recoverable outside the checkout.
