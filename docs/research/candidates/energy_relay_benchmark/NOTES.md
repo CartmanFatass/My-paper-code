@@ -1487,3 +1487,173 @@ the first operation's argv with the tag and SHA replaced):
   record-only by the revised design (no gate), so nothing follows from it now; the comparison
   with B09's recorded per-world J is made at the reading together with the other three worlds.
   No other result field was read.
+
+## 2026-09-26 — B01 result, read by the pre-registered branches (operation 02f762d2, tag `b01_ref_a02`)
+
+Operation `02f762d2…00ac43` at published SHA `e1fdbe72f` completed on `wsl_4070` at 15:56 UTC:
+`run_end` status `COMPLETE`, 540 episodes, 1,620,000 steps, 20 panels, 0 failed worlds, 0 fits,
+0 optimizer updates, wall 6,197 s (1 h 43 min), exit code 0 with a valid exit witness
+(`process-exit.json`; launcher records consistent). Outputs: `runs/energy_relay_benchmark/b01_ref_a02/`
+(the JSON outputs are committed with this entry; the 20 trace archives, 153 MB, stay on the node
+as the durable copy and are gitignored locally). Reading code:
+`experiments/candidates/energy_relay_benchmark/b01/read_b01.py` (panels; standard library) and
+`trace_checks.py` (per-step traces; numpy); their combined output is
+`docs/research/candidates/energy_relay_benchmark/b01_ref_a02_readings.json`. The reading follows
+the rules registered in "B01 revised" and the reading rules adopted in the DM response to Pro:
+registered readings first, then post-hoc descriptive readings, each labelled. Node cost of the
+whole B01 including the superseded operation: ≈ 2 h, 0 fits.
+
+### Registered readings
+
+**P0 (device null, 953001–953032, CPU production cell vs B10's CUDA record).** Median
+|ΔQoS/step| = .0020 (< .01: holds). 9 of 32 worlds reproduce the record exactly, 23 are within
+.01, 4 differ by more than .03 (largest −.079 on 953012, ΔJ −237). τ_w (95th percentile) = .036
+> .03, so by the registered rule the per-world reading is unavailable at this size and only means
+are read: branch (e) is not read, and every per-world count below is descriptive. Panel means
+agree with the record (QoS/step .342 vs .344; J 994.2 vs 998.5; mean ΔJ −4.2). τ_w describes
+cross-device sensitivity; within B01 every comparison is same-device and deterministic: the four
+level-0 settings share the trajectory up to the first shield entry (identical pre-entry values
+.231 / .810 and first-entry steps 1372 / 1300 across them), and the superseded operation's
+disclosed H2 development value (2196.87) equals this operation's to the digit.
+
+**Equivalence (952001–952004 vs B09's recorded CUDA J; record only, no gate).** CPU − CUDA per
+world: +14.5, +31.0, −82.2, −0.3 (means 986.1 vs 995.3). Not bit-equal; the same character as
+the null. N in this study is a CPU realization of the B09 checkpoint whose per-world trajectories
+diverge from the CUDA record in most worlds while panel means agree.
+
+**Heuristic selection (956001–956008 only).** Mean J: H1 2248.1, H2 2196.9, H3 2167.0 →
+H_central = H1 (6 service + 2 relay, 100 m, 30 m/s) by the fixed rule; nothing else was chosen on
+those worlds.
+
+**P2 (reference competence) holds.** H_central at (0, .05) on 955001–955032: QoS/step **.774**
+≥ .60 (J 2281.9; return-cost sum 4.8; cutoff and depletion 0; guard consulted 14,620 and blocked
+1,129 actions per world, ≈ 7.7 %; zero-service worlds 0). H_local: **.597** (J 1628.4; return
+cost 65.9; blocked 2,742 of 13,564, ≈ 20 %; one zero-service world). N: **.328** (J 955.0;
+return cost 1.2; three zero-service worlds).
+
+**P2′ (descriptive only, per the adopted rule).** gap_info = H_central − H_local = +.177;
+gap_learn = H_local − N = +.269: the predicted size relation gap_learn > gap_info holds in
+QoS/step and the two are nearly equal in J (+653 vs +674). No bottleneck attribution is read.
+
+**P1 (width, N) fails.** (0, .45) − (0, .05): ΔQoS/step +.023 (< .03), ΔJ +71.8, cutoff and
+depletion unchanged at 0. N's four-point width curve is .328, .343, .352, .336 (J 955, 1000,
+1027, 980): an inverted U peaking at .45, entirely inside the practical threshold. H_central:
+.774, .775, .782, .757 (J 2282, 2293, 2314, 2240): same shape, same verdict (P1[H_central]
++.0075). Nothing is read as a gain under the co-primary rule.
+
+**P1c (herding) fails on sign for both controllers** ((0, .85) − (0, .05): N +.008, H_central
+−.017) while the herding process is present and monotone in width: N's mean station queue
+.47 → 1.13 → 1.70 → 2.12 UAVs across the four widths, P(queue ≥ 3) .08 → .38, waiting steps per
+UAV-step .25 → 8.6, F-mode share .18 → .39, mean battery .48 → .57 (H_central at .85: queue
+2.18, waiting 12.5); the entry-to-input QoS falls for N (−.021) but not for H_central (+.014).
+Read as herding without a service consequence in this host, not as (f): waiting and docked UAVs
+keep serving (the review's finding) and the stations sit at serviceable positions (below).
+
+**P1′ (level at matched width) fails for N at all three widths and for H_central at width .05.**
+N, level .20 minus level 0: +.048 (width .05), +.079 (.25), +.061 (.45); J +146, +236, +183.
+H_central: −.050, −.020, −.021; J −140, −60, −61. This is the study's unregistered finding; it
+has its own subsection below.
+
+**P3 (deployment deficit) fails on the registered count.** N's pre-entry QoS/step is < .30 in
+19 of 32 worlds (24 required; 5 worlds lie within τ_w of .30); the means are N .231 and
+H_central .810 (the H part holds). Eight worlds have exactly zero pre-entry service for N. The
+post-hoc common-window reading allowed by the DM response (both controllers over [0, min of the
+two first entries), median window 1,236 steps): N .215 (< .30 in 22 of 32; zero in 7), H_central
+.801 (≥ .60 in 31 of 32); paired H_central − N ≥ +.30 in every world (mean +.585, minimum
++.304, about 8 τ_w). The registered prediction fails as written; the mean-level deficit before
+any energy pressure is large and present in all 32 worlds.
+
+### Branch reading
+
+- **(b) applies**: P1 fails, P2 holds, and the descriptive gap relation is gap_learn > gap_info.
+  By the registered text the loss is the learner's deployment, not the shield; the timing
+  investment ends; the next study is the learning question against H_local and H_central (a B02
+  design), not a rule. By the adopted rule this does not trigger the prepared B02 grid: B02 arms
+  are matched by actual deployment interfaces, and the design is a separate decision under
+  constitution §5.
+- **(d), width clause**: no width effect ≥ .03 for either controller at level 0; the exit width
+  is not consequential in the H3000 transient (this study covers the first charging cycle only).
+  (d) as a whole does not apply because the gaps are large.
+- **(a), (c), (e), (f), (g)**: not applicable ((e) unavailable by τ_w; (g) no QoS-up/J-down or
+  reverse conflict at any setting: for N every level-.20 setting raises both, for H_central every
+  level-.20 setting lowers both).
+- **Uncovered states, reported as such**: (i) one controller responding positively and the other
+  negatively to the enter level at matched width; (ii) P3's count failure beside a large mean
+  effect; (iii) a sub-threshold inverted-U width response common to both controllers; (iv) N's
+  three total-failure worlds (zero service over 3,000 steps: 955005, 955012, 955021) against none
+  for H_central.
+
+### The enter-level effect (unregistered; labelled)
+
+**What it is.** Raising the enter margin from 0 to .20 at matched width is the constant-earlier-
+return control that the S7 closure of 2026-09-25 declined to buy as a repair of the fixed policy
+("do not buy the proposed approach-aware fixed-policy comparison or a constant-earlier-return
+comparison"). B01 measured it because P1′ registered the three level-.20 settings as matched
+controls for the width axis, not as candidates. B01 does not buy it: nothing is adopted from these
+development worlds, and N at its best setting (.20, .45) reaches .422 QoS/step and J 1236, still
+below H_local (.597) and far below H_central (.774). Read as a bound: level .20 closes about a
+fifth of the N–H_central gap on 955001–955032 ((.422 − .328) / (.774 − .328) = .21), consistently
+across the three widths, with J up 15–29 %, return cost 0, cutoff and depletion 0, minimum
+battery .28–.38 instead of .11; descriptively 19–20 of 32 worlds move up by more than .03 and
+4–6 move down.
+
+**Where the gain comes from (phase split, same panels).** N's QoS/step is .23 before the first
+entry, .35–.38 between the first entry and the first charger input, and .45–.48 after the first
+input; at level .20 the first entry moves from step 1372 to 570 and the first input from 2196 to
+734–1467, so N spends roughly two thirds of the episode in its best regime instead of a quarter.
+For H_central the ordering is reversed (.81 → .84–.85 → .69–.76), so earlier entry costs it
+service.
+
+**Process support (post-hoc, correlational; traces).** Within N's production panel, team
+QoS/step is .28 in steps with no UAV within 300 m of a station and .43–.46 whenever one or more
+are (late steps only: .37 vs .43–.46); by occupied station it is .31 (none), .46 (relay anchor
+only), .39 (service-centre station only), .51 (both). The same tables for H_central fall when
+four or more UAVs sit at the stations (.81 → .70) and when either station is occupied (.82 →
+.71 / .73 / .62); H_local behaves like H_central. So, for this learned policy, the shield's
+stations act as a crude deployment prior that beats its own placement and that the layout
+references do not need: a docked UAV at the relay anchor is a backhaul hop by construction, and
+the service-centre station sits at the user centroid. This is a conjecture with correlational
+support, not a causal reading: time in episode and battery level co-move with proximity (the
+late-only column reduces but does not remove the first), and N's three zero-service worlds stay
+at zero after UAVs dock at both stations from step ≈ 2,000 on (2,500–3,100 UAV-steps within
+100 m, 490–580 charging UAV-steps), so docking is not sufficient for service in N's
+configuration. The named zero-training test is a parked-at-stations reference (UAVs held at the
+two stations, shield on): if it reaches N's post-input level (.45–.48) the station positions
+explain that regime. It is not run here and is folded into the next design question.
+
+### The tether, read from the traces (post-hoc; confirms the derivation as an increment)
+
+Per shield exit, the nearest-station distance at the same UAV's next entry minus the distance at
+the exit: at width .05, median **+391 m** for N (IQR 318–433; 2,313 re-entries of 2,354 exits)
+and **+411 m** for H_central (359–423; 1,275 of 1,318), against the derived ≈ 447 m; at width
+.25, +1,770 m (N) and +1,664 m (H_central) against ≈ 2.2 km; at level .20 and width .05, +363 m
+and +411 m. The increment depends on the width, not the level, for both controllers. The
+absolute recapture distance differs by controller for the reason the source derivation gave:
+H_central's UAVs exit at the station (median exit distance 20 m; entering from ≈ 1 km they
+arrive inside the ≈ 24 s release window) and are recaptured ≈ 470 m out, whereas N's UAVs,
+entering from ≈ 2.1 km, are released mid-return at ≈ 1.4 km and recaptured at ≈ 1.7 km, cycling
+70–80 times per episode without reaching a charger until step ≈ 2,200. The earlier phrase
+"≈ 447 m of a station" was conditional on exiting at the station; the increment statement is the
+one the data support. Recapture counts per world fall from 72 (N) and 40 (H_central) at width
+.05 to 9 and 3 at .25, ≈ 1 at .45 and 0 at .85.
+
+### What B01 settles and what it leaves open
+
+Settled on these worlds (development worlds of this direction; any candidate named on them needs
+unexposed confirmation): the exit width is not the S7 loss; the executable layout references are
+competent under the S7 backhaul guard; the learned policy's deficit precedes energy pressure in
+every world; the tether and herding mechanisms behave as derived and cost little service in
+H3000. Open: what the learned deficit consists of (the parked-at-stations reference and the
+H_local–H_central pair are the cheapest next discriminators); whether a learner given a layout
+reference's information can approach it (the B02 question); N's total-failure worlds (3 of 32)
+as a distinct failure mode. Nothing here changes the host under the freeze, and no rule is
+adopted.
+
+### Next step (decision pending under constitution §5)
+
+Branch (b) names a B02 design as the next study. The design is a consequential decision that
+takes one adequate independent scientific review; per this direction's practice the
+decision-critical pass goes to Pro. The DM drafts the B02 design next (arms matched by deployment
+interface: a central-state learner against H_central, a pooled-observation learner against
+H_local, with the parked-at-stations reference as the zero-training discriminator first) and the
+Pro question with it. No fit is bought by this entry.
