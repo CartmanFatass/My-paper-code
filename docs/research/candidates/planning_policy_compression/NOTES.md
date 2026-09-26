@@ -1232,3 +1232,123 @@ have not happened. This note does not call the old runner, create a new CLAIM or
 reactivate the direction table, or resolve the outstanding project consultation. Root retains
 the investment decision and any material scientific disagreement; this publication changes
 only the owned NOTES design preparation.
+
+## 2026-09-26 — B03 selected: O/S/BC retraining on the fixed archive
+
+### Scientific choice and fixed prospective reading
+
+The owner's instruction to proceed through the independent DM is now embodied in Root's
+[adoption](../../archive/2026-09-26/RESEARCH.md#root-adoption-20260926), published at
+`3767786829e869f7ff09baa10deeca5a8d13499a`. I read the complete Pro Answer saved at
+`725a485baf1337e0b538b6224ae1e3f9979c1817`, the independent Scientific Reviewer's substantive
+opinion/dissent and Root's resolution. The earlier draft's pending-consultation status is
+historical: that same project consultation is complete, with no new question or Send here.
+Reuse this completed advice/review for implementation and the stated outcome branches.
+Pro disclosed incomplete large-summary/node access; its advice is not a new raw-data audit.
+
+**Select six fresh fits**, two paired starts with O, S and ordinary BC at each. The complete
+draft above supplies the unchanged D, stages, model, RNG addresses, training and evaluation
+contracts. This selected B03 adds its priced BC option prospectively; the draft remains intact.
+BC uses unit weight at eligible roots and zero elsewhere, with the same data, initial tensors,
+sequence batches, 40+40 epochs and continuous Adam state as O/S. Old BC/O checkpoints are not
+comparators. This is exploration conditional on a single exposed D, not more B02 confirmation.
+
+The shared background at this main revision, especially RESEARCH sections3/4 and the current
+plan, changes the actual comparison: a fine-correspondence gain over S does not establish a
+reason to choose weighting over competent ordinary BC. For each pair and native metric read
+O−S, O−BC and S−BC with the arithmetic identity O−BC=(O−S)+(S−BC); they are not independent
+replications. Retain absolute outcomes and every adverse world. Complete native jobs, service,
+waiting, conflicts and packet/forced-send consequences remain distinct from label diagnostics.
+
+Working conjecture: preserving the original history–weight alignment lowers original-weight
+endpoint disagreement and improves native completions over S, while offering enough benefit
+over fresh BC to retain the weighting complexity. Strong alternatives are S damage without
+O−BC benefit, ordinary BC absorbing the useful behavior, or a generic reweighting advantage
+without a clear fine-correspondence increment. These are predictions to test, not required signs.
+
+Read both pairs' integer completed-job differences and magnitudes, descriptive mean/range,
+native component vectors and loss lists. No formal sign confirmation or equivalence claim:
+the two new pairs share the archived D, and contexts do not create more training replicates.
+Use original stage weights for the **same** endpoint diagnostics in all three arms. Retain:
+
+- O has useful native advantages over both S and BC: keep the conditional correspondence
+  rationale; a next worthwhile comparison would concern complete compression use or a named
+  new condition, not another same-D positive-sign confirmation.
+- O/S are useful over BC while O−S is unclear or favors S: lower fine-correspondence priority;
+  a simpler reweighting question may be useful, but an untested label-constant scheme is not
+  thereby accepted.
+- BC is at least as good in the actual observations: use ordinary BC as the next working
+  reference and end current fine-correspondence additions; O>S alone is not adoption evidence.
+- Native/diagnostic disagreement lowers the proxy or mediator explanation as applicable.
+  Mixed, tiny or imprecise readings remain unresolved; no extra seed, changed D/strata,
+  re-drawn mapping or selected checkpoint is added after seeing results. A new investment
+  needs a concrete different scientific reason. Technical incompleteness is reported separately.
+
+These are qualitative investment implications, not post-hoc thresholds. B01/B02 and their
+contrary evidence stand. No new teacher/AF deployment is bought here, so there is no new paired
+teacher-retention, net deployment-speed, full adaptive-collection or UAV claim. The earlier
+material scientific dissent and Root's disposition remain preserved, not self-cleared by DM.
+
+### Inputs, cost and execution boundary
+
+Use only the draft's B02 block0 NPZ with SHA256
+`eba65c4c17b49a18c6376628913feabac79dd38ba497e8003808d79ebadb55a4` and 1,041,468 bytes.
+Its local/node availability has already been verified; the new runner still verifies the
+actual bytes it loads and stages before any fit. O/S/BC all receive the same fixed teacher
+prefix512 sequences and merged1024 sequences. S maps stay within training stage and saved
+teacher-action label, sampled once per stage/pair and reused over epochs; no input, label,
+mask, delta, identity or time order is reassigned. Diagnostic weights remain the original ones.
+
+Keep the draft seed table unchanged: initialization926001/926002, sequence-order926101/926102,
+S mapping926201/926202, evaluation926301/926302 and evaluation model address926401/926402.
+PCG64 via NumPy default_rng/SeedSequence supplies the declared permutations. Horizon96,
+35 features/GRU64, batch64 learning and batch16 deployment, CPU float32 and one Torch/BLAS
+thread remain fixed. Evaluate all three final stage2 models on the two new256-context panels.
+
+Price: **6 fits, 5760 optimizer updates, 35389440 optimization agent-time rows, 147456
+evaluation team ticks, 884736 diagnostic forward rows**, plus2048 calibration moves and512
+closed-form posterior computations from the reused helper. New training collection, teacher
+queries and model branches are all zero. Fits continue across both40-epoch stages; no optimizer
+restart or hidden fit. Count every started fit and preserve partial outputs/costs on failure.
+The old rate estimate142.14066s covers fitting only; full new scientific/native/support wall
+time is unknown and will not be substituted by that estimate. Measure actual input/mapping,
+fit/diagnostic/calibration/deployment/I/O work, process wall/CPU and single-process peak RSS.
+
+Configured node is wsl_4070, interpreter/supervisor from `.codex/hmasd-compute.toml`; prospective
+output tag `b03_osbc_archived_s926001_20260926`. Publish exact accepted code/inputs before one
+native launch with fresh resource/pause/lead admission. Source comes from main through the
+native immutable snapshot; no new authoring/publication worktree. Observe the same accepted
+handle with hmasd_wait. No scientific run is accepted at this prospective-writing boundary.
+
+### B03 L0 — bounded archived-data runner
+
+Deliver one archived-data study and admitted CLI under
+`experiments/candidates/planning_policy_compression/b03/` (entry `run.py`) and focused tests
+under `tests/experiments/candidates/planning_policy_compression/b03/`. These are the only
+Implementer write paths. Root AGENTS/constitution's newer direction-entry rule prevails over
+the older experiments/AGENTS scripts convention. Keep B01/B02, finite-model host and archive
+bytes unchanged. Reuse Student/features, stage_weights, endpoint_diagnostic, calibration and
+episode_batch where applicable; add a small explicit-weight training path without changing
+the frozen train_stage. Do not build a sweep or modify shared admission/control code.
+
+CLI validates the fixed seed, launch SHA and external data digest, calls require_admission
+before scientific imports/input loading/model/output effects, and binds SHA to that admission.
+Validate/parse the same input bytes, strict shapes/IDs/stage masks, then train O/S/BC afresh
+with common initial tensors and sequence orders. Preserve explicit weight arrays/mapping
+indices and their hashes, per-stage/label multiset checks, original versus shuffled identity,
+all checkpoints/curves/updates/movement, common diagnostics, per-context native results and raw
+executed traces. Summaries are compact readings plus hashes, not duplicated bulk arrays.
+Failure output retains every started fit, partial stage/trace count and completed deployment
+boundary; no missing endpoint is filled in or called a completed comparison.
+
+Focused checks cover archive SHA/shape/stage rejection, O/BC agreement with the frozen small
+training path, explicit S-weight gradient/loss behavior, stage/label mapping/reuse and input
+immutability, paired initialization/order and optimizer continuity, diagnostic comparability,
+new panel matching/zero student queries, three-contrast arithmetic and adverse-world retention,
+partial failure recovery and unadmitted entry refusal. Use small distinct engineering fixtures
+with pytest-owned scratch; never train on the production D or evaluate production seeds as a
+test. Existing unchanged teacher/feature evidence is reused. Independent engineering Review
+targets these new data/numerical/execution paths; no duplicate scientific consultation.
+Implementer returns diff/checks/risks, no Git/index/NOTES writes, result launch, Pro or children.
+DM accepts and publishes; a real material scientific disagreement stops only its dependent new
+effect and stays in this notebook for Root's decision. Other authors' edits must be preserved.
