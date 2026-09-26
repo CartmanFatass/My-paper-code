@@ -1806,3 +1806,68 @@ native return; delivery is read with `deliver` after completion, and a chat answ
 "saved from chat" if the connector does not write. An internal ResearchCritic pass over the same
 two entries runs in parallel as a comparison (separate context, read-only); both are recorded here
 when they return, with the DM's response, before anything is bought.
+
+### Correction after the internal ResearchCritic pass (2026-09-26, before the Pro answer)
+
+The internal Scientific Reviewer (separate context, read-only, run as a comparison to the Pro pass
+in flight) returned MATERIAL_DISSENT: yes on three parts of the B01 reading and on both B02 stages
+as proposed. The DM recomputed every disputed number from the traces (`trace_checks.py`, section
+`boundary_and_time` added; readings JSON regenerated) and accepts the following, which supersede
+the corresponding sentences of the result entry above.
+
+1. **N parks its UAVs on the area boundary; the result entry did not report it.** In N's
+   production panel 49.8 % of normal-mode UAV-steps have x or y on an area edge (east wall
+   x = 8,000 m: 162,420 UAV-steps; south wall y = 0: 197,020), 67.7 % before step 1,000, above
+   50 % in 27 of 32 worlds; 92.0 % of normal-mode UAV-steps before step 600 sit at the 50 m
+   altitude floor. H_central and H_local: 0.0 % on the walls, 0.2 % at the floor. This is the most
+   direct description of the deployment deficit and the simplest account of the level effect: the
+   shield's entry pulls UAVs off the walls.
+2. **The station-proximity table was a time confound; the "deployment prior" reading is
+   withdrawn.** N's team QoS/step rises with time before any shield activity (.125, .202, .264,
+   .298, .311 in the first five 300-step bins while the F-mode share is ≤ .05); the raw slope of
+   QoS on "any UAV within 300 m of a station" (+.172) falls to +.047 within 300-step time bins
+   and to +.012 / +.005 within world × 300-step / 100-step bins. The phase-split account ("two
+   thirds of the episode in the best regime") is confounded the same way. The distance-only
+   station cells are none .279, anchor only .452, centre only .326, both .593 (the entry's
+   .31 / .46 / .39 / .51 used charging occupancy, not position). What survives is interventional:
+   at matched time (steps 900–1,200) N scores .298 at (0, .05), .327 at (0, .45), .372 at
+   (.20, .25) and .452 at (.20, .45). The level effect is therefore recorded as a real
+   intervention (package) effect with an unresolved mechanism, not as process evidence for a
+   station prior.
+3. **The zero-service worlds were misdescribed.** In 955005, 955012 and 955021 the UAVs sit on
+   the east wall (mean x = 8,000 m at step 500), the backhaul guard is consulted 0 times (no
+   routing path ever forms), and after step 2,000 there are 0 UAV-steps within 300 m of the relay
+   anchor against 3,474–3,938 near the service-centre station: the UAVs docked at one station,
+   the centre, and occupying it alone gives no service. Two of the three recover at (.20, .45)
+   (.458, .530) with anchor visits; excluding the three worlds the matched-width level effect is
+   +.043 / +.054 / +.037 instead of +.048 / +.079 / +.061. Earlier entry changes which station is
+   occupied first (anchor share of first entries .663 → .742 / .727).
+4. **Wording narrowed.** "The timing investment ends" reads "the exit-width investment ends";
+   the enter level is consequential for this policy (P1′ deltas +.048, +.079, +.061 with paired
+   SE .015, .024, .024). The width curve's "inverted U" is not resolvable (per-point SE ≈ .010;
+   P1's interval ≈ [.002, .045] straddles .03); the only width effect distinguishable from zero is
+   H_central's −.017 at .85 (SE .0065), so "herding without service consequence" is slightly
+   overstated for H_central. "Re-litigation" is withdrawn as the reason for not training at level
+   .20; the reason is that it compensates a deployment failure and hurts the competent reference.
+   The index row's "+.05–.09" is corrected to the matched range +.048–.079 (+.093 is the
+   unmatched (.20, .45) − (0, .05) difference).
+5. **Kept as recorded (verified by the reviewer):** every registered reading (P0–P3, P1c, P1′,
+   P2′), the τ_w rule and its application, branch (b)'s conditions, the common-window P3 reading,
+   the tether increments, the artifact hashes.
+
+**Design dissents (both stages), to be resolved together with the Pro answer.** Stage 0:
+H_spawn is a trivial floor (the spawn corner lies ≈ 3,950 m from the anchor and ≈ 5,900 m from
+the centre) and H_park2 may not close a relay chain; the reviewer's replacement is a zero-fit
+check of N with sampled instead of mean actions, because the boundary parking may be the
+deterministic mean action saturating at the action bounds, which would make part of the "learned
+deficit" an evaluation artefact. Source facts bearing on this: B01's evaluator acts with
+`deterministic=True` (`evaluation.py` line 100) and B09's evaluations did the same; B09's N was
+trained on 180,000 transitions (2 lanes × 30 episodes), and its stochastic training episodes
+record J only (strongly negative under exploration, −1.5 k to −5.4 k in the last six), not QoS,
+so the check needs the run. Stage 1: register per-checkpoint trace diagnostics (boundary share,
+altitude-floor share, anchor and centre occupancy by distance, first step with service) so that a
+SET failure is interpretable; read HMASD-k10's typicality at the checkpoint nearest N's exposure
+and report N's rank among seeds instead of an SD threshold from three samples; label .60 as
+H_local's level, not "approaching H_central"; memory ≈ 10 GB per fit makes the fits serial
+(≈ 30 h for six) unless the flat arms' peak is measured lower. The DM's response to these and to
+Pro's answer, and the revised design, follow in one entry; nothing is bought before that.

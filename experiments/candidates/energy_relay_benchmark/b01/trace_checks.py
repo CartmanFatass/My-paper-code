@@ -138,6 +138,83 @@ def common_window(run_dir, readings):
             "paired_H1_minus_N_min": float((qh - qn).min()), "worlds": rows}
 
 
+def within_slope(q, x, groups):
+    """Fixed-effects slope of q on x within groups (demeaned per group)."""
+    num = den = 0.0
+    for g in np.unique(groups):
+        m = groups == g
+        xm = x[m] - x[m].mean()
+        num += float((xm * (q[m] - q[m].mean())).sum()); den += float((xm * xm).sum())
+    return num / den if den > 0 else None
+
+
+def boundary_and_time(run_dir, readings, area_m=8000.0):
+    """Post-hoc checks added after the internal review: boundary parking, altitude floor, the
+    time confound of the proximity association, matched-time intervention, zero-service worlds
+    by station, and the level effect without the zero-service worlds."""
+    out = {}
+    for ph, nm in (("grid", "N_e0.00_x0.05"), ("grid", "N_e0.20_x0.45"), ("grid", "H1_e0.00_x0.05"),
+                   ("reference", "Hlocal_e0.00_x0.05")):
+        W = load(run_dir, ph, nm); tot = bnd = etot = ebnd = atot = afl = xs = ys = 0; per = []
+        for w in W:
+            xyz = w["own_xyz"]; normal = w["mode"] < 0.5
+            onb = ((np.abs(xyz[:, :, 0]) < 1) | (np.abs(xyz[:, :, 0] - area_m) < 1)
+                   | (np.abs(xyz[:, :, 1]) < 1) | (np.abs(xyz[:, :, 1] - area_m) < 1))
+            early = np.zeros_like(normal); early[:1000] = True
+            e600 = np.zeros_like(normal); e600[:600] = True
+            tot += normal.sum(); bnd += (onb & normal).sum()
+            etot += (normal & early).sum(); ebnd += (onb & normal & early).sum()
+            per.append(float((onb & normal & early).sum() / max((normal & early).sum(), 1)))
+            xs += int(((np.abs(xyz[:, :, 0] - area_m) < 1) & normal).sum())
+            ys += int(((np.abs(xyz[:, :, 1]) < 1) & normal).sum())
+            atot += (normal & e600).sum(); afl += ((xyz[:, :, 2] <= 50.5) & normal & e600).sum()
+        out[f"{ph}/{nm}"] = {"boundary_share_normal_mode": float(bnd / tot),
+                             "boundary_share_before_1000": float(ebnd / etot),
+                             "worlds_above_50pct_before_1000": int(sum(p > .5 for p in per)),
+                             "x_east_wall_uav_steps": xs, "y_south_wall_uav_steps": ys,
+                             "altitude_floor_share_before_600": float(afl / atot)}
+    W = load(run_dir, "grid", "N_e0.00_x0.05")
+    q = np.stack([w["qos"] for w in W]); fm = np.stack([w["mode"] > 0.5 for w in W])
+    out["N_e0.00_x0.05_time_bins_300"] = [{"start": b, "qos": float(q[:, b:b + 300].mean()),
+                                            "F_mode_share": float(fm[:, b:b + 300].mean())}
+                                           for b in range(0, 3000, 300)]
+    out["matched_time_900_1200"] = {nm: float(np.stack([w["qos"] for w in load(run_dir, "grid", nm)])[:, 900:1200].mean())
+                                    for nm in ("N_e0.00_x0.05", "N_e0.00_x0.45", "N_e0.20_x0.25", "N_e0.20_x0.45")}
+    qq = np.concatenate([w["qos"] for w in W])
+    near = np.concatenate([(w["nearest_station_distance_m"] < 300).any(1) for w in W]).astype(float)
+    t = np.concatenate([np.arange(3000)] * len(W)); wid = np.concatenate([[i] * 3000 for i in range(len(W))])
+    out["proximity_slope_N_e0.00_x0.05"] = {
+        "raw": float(np.polyfit(near, qq, 1)[0]), "within_world": within_slope(qq, near, wid),
+        "within_300_step_bin": within_slope(qq, near, t // 300),
+        "within_world_x_300_step_bin": within_slope(qq, near, wid * 100 + t // 300),
+        "within_world_x_100_step_bin": within_slope(qq, near, wid * 100 + t // 100)}
+    a0 = np.concatenate([((w["nearest_station_distance_m"] < 300) & (w["nearest_station"] == 0)).any(1) for w in W])
+    a1 = np.concatenate([((w["nearest_station_distance_m"] < 300) & (w["nearest_station"] == 1)).any(1) for w in W])
+    out["distance_only_station_cells_N_e0.00_x0.05"] = {
+        "none": float(qq[~a0 & ~a1].mean()), "anchor_only": float(qq[a0 & ~a1].mean()),
+        "centre_only": float(qq[~a0 & a1].mean()), "both": float(qq[a0 & a1].mean())}
+    zs = []
+    for w in W:
+        if w["qos"].sum() < 1e-9:
+            d = w["nearest_station_distance_m"][2000:]; s = w["nearest_station"][2000:]
+            zs.append({"seed": int(w["seed"]), "anchor_uav_steps_after_2000": int(((d < 300) & (s == 0)).sum()),
+                       "centre_uav_steps_after_2000": int(((d < 300) & (s == 1)).sum()),
+                       "mean_x_at_500": float(w["own_xyz"][500, :, 0].mean()),
+                       "guard_checked_total": int(w["guard_checked"].sum())})
+    out["zero_service_worlds_by_station"] = zs
+    pw = readings["per_world"]; z = {r["seed"] for r in zs}; lev = []
+    for lo, hi in (("grid/N_e0.00_x0.05", "grid/N_e0.20_x0.25"), ("grid/N_e0.00_x0.25", "grid/N_e0.20_x0.45"),
+                   ("grid/N_e0.00_x0.45", "grid/N_e0.20_x0.65")):
+        a, b = pw[lo], pw[hi]
+        dd = [qb - qa for s, qa, qb in zip(a["seeds"], a["qos"], b["qos"])]
+        dx = [qb - qa for s, qa, qb in zip(a["seeds"], a["qos"], b["qos"]) if s not in z]
+        lev.append({"pair": f"{hi} - {lo}", "mean": float(np.mean(dd)),
+                    "paired_se": float(np.std(dd, ddof=1) / np.sqrt(len(dd))),
+                    "mean_excluding_zero_service_worlds": float(np.mean(dx))})
+    out["level_effect_matched_width"] = lev
+    return out
+
+
 def main(run_dir, readings_json):
     readings = json.load(open(readings_json))
     T = {}
@@ -155,6 +232,7 @@ def main(run_dir, readings_json):
         ("grid", "N_e0.00_x0.05"), ("grid", "N_e0.00_x0.25"), ("grid", "N_e0.00_x0.45"),
         ("grid", "N_e0.00_x0.85"), ("grid", "N_e0.20_x0.45"), ("grid", "H1_e0.00_x0.05"),
         ("grid", "H1_e0.00_x0.85"))}
+    T["boundary_and_time"] = boundary_and_time(run_dir, readings)
     readings["traces"] = T
     json.dump(readings, open(readings_json, "w"), indent=1)
     for k, v in T["tether_increment"].items():
@@ -169,6 +247,7 @@ def main(run_dir, readings_json):
     print("zero-service", T["N_zero_service_worlds"])
     for k, v in T["queues"].items():
         print("queues", k, {kk: round(vv, 3) for kk, vv in v.items()})
+    print("boundary_and_time", json.dumps(T["boundary_and_time"], indent=None)[:1200])
     print("written", readings_json)
 
 

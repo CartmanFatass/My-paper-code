@@ -5331,6 +5331,154 @@
     "waiting_steps_mean": 12.519070625305176,
     "battery_mean": 0.462464302778244
    }
+  },
+  "boundary_and_time": {
+   "grid/N_e0.00_x0.05": {
+    "boundary_share_normal_mode": 0.49782134728522315,
+    "boundary_share_before_1000": 0.6768752130589982,
+    "worlds_above_50pct_before_1000": 27,
+    "x_east_wall_uav_steps": 162420,
+    "y_south_wall_uav_steps": 197020,
+    "altitude_floor_share_before_600": 0.9204172526957337
+   },
+   "grid/N_e0.20_x0.45": {
+    "boundary_share_normal_mode": 0.40822501577673104,
+    "boundary_share_before_1000": 0.5524164629005943,
+    "worlds_above_50pct_before_1000": 21,
+    "x_east_wall_uav_steps": 62204,
+    "y_south_wall_uav_steps": 120369,
+    "altitude_floor_share_before_600": 0.8915178083688409
+   },
+   "grid/H1_e0.00_x0.05": {
+    "boundary_share_normal_mode": 0.0,
+    "boundary_share_before_1000": 0.0,
+    "worlds_above_50pct_before_1000": 0,
+    "x_east_wall_uav_steps": 0,
+    "y_south_wall_uav_steps": 0,
+    "altitude_floor_share_before_600": 0.0016666666666666668
+   },
+   "reference/Hlocal_e0.00_x0.05": {
+    "boundary_share_normal_mode": 0.0,
+    "boundary_share_before_1000": 0.0,
+    "worlds_above_50pct_before_1000": 0,
+    "x_east_wall_uav_steps": 0,
+    "y_south_wall_uav_steps": 0,
+    "altitude_floor_share_before_600": 0.0016666666666666668
+   },
+   "N_e0.00_x0.05_time_bins_300": [
+    {
+     "start": 0,
+     "qos": 0.12455472350120544,
+     "F_mode_share": 0.0
+    },
+    {
+     "start": 300,
+     "qos": 0.20183148980140686,
+     "F_mode_share": 0.0003125
+    },
+    {
+     "start": 600,
+     "qos": 0.2635096609592438,
+     "F_mode_share": 0.006223958333333333
+    },
+    {
+     "start": 900,
+     "qos": 0.29847902059555054,
+     "F_mode_share": 0.016380208333333333
+    },
+    {
+     "start": 1200,
+     "qos": 0.311123251914978,
+     "F_mode_share": 0.04875
+    },
+    {
+     "start": 1500,
+     "qos": 0.34296727180480957,
+     "F_mode_share": 0.10927083333333333
+    },
+    {
+     "start": 1800,
+     "qos": 0.3927653133869171,
+     "F_mode_share": 0.1951171875
+    },
+    {
+     "start": 2100,
+     "qos": 0.4375968277454376,
+     "F_mode_share": 0.30052083333333335
+    },
+    {
+     "start": 2400,
+     "qos": 0.4687735438346863,
+     "F_mode_share": 0.466875
+    },
+    {
+     "start": 2700,
+     "qos": 0.4416593313217163,
+     "F_mode_share": 0.6985546875
+    }
+   ],
+   "matched_time_900_1200": {
+    "N_e0.00_x0.05": 0.29847902059555054,
+    "N_e0.00_x0.45": 0.32738712430000305,
+    "N_e0.20_x0.25": 0.3724828362464905,
+    "N_e0.20_x0.45": 0.45151907205581665
+   },
+   "proximity_slope_N_e0.00_x0.05": {
+    "raw": 0.17204910388864725,
+    "within_world": 0.17121274052393032,
+    "within_300_step_bin": 0.046789037927307715,
+    "within_world_x_300_step_bin": 0.011531193108572868,
+    "within_world_x_100_step_bin": 0.005034666084179485
+   },
+   "distance_only_station_cells_N_e0.00_x0.05": {
+    "none": 0.27854472398757935,
+    "anchor_only": 0.45233893394470215,
+    "centre_only": 0.32635608315467834,
+    "both": 0.5925501585006714
+   },
+   "zero_service_worlds_by_station": [
+    {
+     "seed": 955005,
+     "anchor_uav_steps_after_2000": 0,
+     "centre_uav_steps_after_2000": 3783,
+     "mean_x_at_500": 8000.0,
+     "guard_checked_total": 0
+    },
+    {
+     "seed": 955012,
+     "anchor_uav_steps_after_2000": 0,
+     "centre_uav_steps_after_2000": 3938,
+     "mean_x_at_500": 7999.5869140625,
+     "guard_checked_total": 0
+    },
+    {
+     "seed": 955021,
+     "anchor_uav_steps_after_2000": 0,
+     "centre_uav_steps_after_2000": 3474,
+     "mean_x_at_500": 8000.0,
+     "guard_checked_total": 0
+    }
+   ],
+   "level_effect_matched_width": [
+    {
+     "pair": "grid/N_e0.20_x0.25 - grid/N_e0.00_x0.05",
+     "mean": 0.0479984032680234,
+     "paired_se": 0.015063183794162653,
+     "mean_excluding_zero_service_worlds": 0.042922463237005555
+    },
+    {
+     "pair": "grid/N_e0.20_x0.45 - grid/N_e0.00_x0.25",
+     "mean": 0.07880686125436787,
+     "paired_se": 0.02382614040789416,
+     "mean_excluding_zero_service_worlds": 0.05440847869602495
+    },
+    {
+     "pair": "grid/N_e0.20_x0.65 - grid/N_e0.00_x0.45",
+     "mean": 0.06110895819358694,
+     "paired_se": 0.023673600305470194,
+     "mean_excluding_zero_service_worlds": 0.037011884402836336
+    }
+   ]
   }
  }
 }
