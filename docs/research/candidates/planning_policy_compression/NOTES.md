@@ -283,3 +283,249 @@ historical objects are intact; no history repair or object deletion was attempte
 Observe this accepted operation through the native status handle using `hmasd_wait.py`.
 Completion, error or the bounded checkpoint returns control to this same session.
 Reconcile uncertain observations against this handle; do not repeat the accepted launch.
+
+## 2026-09-25 — B01 complete: partial compression and a bounded weighting increment
+
+### Observation and evidence integrity
+
+The [native terminal status](../../../../runs/planning_policy_compression/b01_bc_wbc_s925941_20260925/native-status.final.json)
+has a valid exit-0 witness and consistent accepted identities. The scientific
+[summary](../../../../runs/planning_policy_compression/b01_bc_wbc_s925941_20260925/summary.json)
+is COMPLETE. DM collected all 445 remote files (13,752,909 bytes) and checked every size and
+SHA256 against the remote copy; the independent Reviewer separately checked all 438
+runner-listed artifacts. All 1,536 evaluation episodes reconcile with raw actions, rewards,
+packet quotas and cumulative native endpoints. These are artifact checks, not new rollouts.
+The independent ResearchCritic reconstructed all 66 contrast means/sign counts from
+[per-context results](../../../../runs/planning_policy_compression/b01_bc_wbc_s925941_20260925/per_context.json)
+and found no material dissent from the bounded interpretation below.
+
+Every comparison uses the same 256 evaluation contexts. Job/other-count totals below are
+sums over those contexts; service is the mean completion fraction. Positive wait/conflict
+differences are adverse. All policies send 6,144 packets in total under the fixed quota.
+
+| Method | Completed jobs | Service | Wait ticks | Conflicts | Forced sends | Conditional deployment seconds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| AF | 2930 | .817522 | 1657 | 35 | 817 | .356000 |
+| P_k4_M32 | 2964 | .827009 | 1617 | 29 | 854 | 24.410637 |
+| BC0 | 2935 | .818917 | 1619 | 35 | 821 | 1.029312 |
+| WBC0 | 2952 | .823661 | 1641 | 30 | 823 | 1.025045 |
+| BC1 | 2939 | .820033 | 1615 | 35 | 820 | 1.010725 |
+| WBC1 | 2949 | .822824 | 1620 | 32 | 832 | 1.017006 |
+
+| Contrast | Job total difference | Mean per context | Descriptive paired-context normal 95% | Positive / tied / negative contexts |
+| --- | ---: | ---: | --- | --- |
+| P_k4_M32 − AF | +34 | +.1328125 | [.076710, .188915] | 29 / 224 / 3 |
+| BC0 − AF | +5 | +.0195313 | [.002546, .036516] | 5 / 251 / 0 |
+| BC1 − AF | +9 | +.0351563 | [.007836, .062477] | 9 / 246 / 1 |
+| WBC0 − AF | +22 | +.0859375 | [.039840, .132035] | 18 / 236 / 2 |
+| WBC1 − AF | +19 | +.0742188 | [.031103, .117335] | 18 / 235 / 3 |
+| WBC0 − BC0 | +17 | +.0664063 | [.023099, .109714] | 13 / 241 / 2 |
+| WBC1 − BC1 | +10 | +.0390625 | [.005092, .073033] | 9 / 245 / 2 |
+| BC0 − P_k4_M32 | −29 | −.1132813 | [−.165149, −.061414] | 3 / 228 / 25 |
+| BC1 − P_k4_M32 | −25 | −.0976563 | [−.145291, −.050021] | 2 / 233 / 21 |
+| WBC0 − P_k4_M32 | −12 | −.0468750 | [−.089887, −.003863] | 3 / 239 / 14 |
+| WBC1 − P_k4_M32 | −15 | −.0585938 | [−.102071, −.015117] | 5 / 235 / 16 |
+
+The teacher opportunity recurs on this fresh panel, but neither student fully preserves it.
+WBC retains descriptively 22/34 and 19/34 of the observed teacher-minus-AF total gain;
+these ratios are panel-dependent descriptions, not population retention guarantees.
+BC retains a smaller positive amount. No model is selected as a winner for confirmation.
+The two training blocks share a single evaluation panel; the 256 contexts do not multiply
+training n. Five common contexts contribute +8 jobs to each WBC−BC total, so the two positive
+totals are not independent replication over deployment panels.
+
+Adverse completed-job contexts are retained in full in per_context.json. In particular,
+WBC0−AF and WBC0−BC0 lose at 82/146; WBC1−AF loses at 82/146/178 and WBC1−BC1 at 82/178.
+The teacher loses to AF at 146/158/168. WBC0/WBC1 lose to the teacher in 14/16 contexts;
+BC0/BC1 in 25/21. WBC−BC reduces total conflicts by 5/3 but increases wait by 22/5 ticks.
+WBC−teacher adds 1/3 conflicts and 24/3 wait ticks; this is not general dominance or a
+tail-safety conclusion. Service differences track completed jobs with 14 jobs per context.
+
+### Learning and measured computation
+
+All four fits started and finished. Each checkpoint optimizer advances 0 → 320 → 960 steps;
+total 3,840 updates and 23,592,960 optimization agent time rows. Initial tensors match within
+blocks, differ across blocks, and all final models move (L2 BC0/WBC0/BC1/WBC1 =
+16.345/18.102/16.286/17.462). Evaluation performs zero optimizer updates.
+
+The final model diagnostics on the already purchased merged training data are:
+
+| Model | Ordinary disagreement | Weighted disagreement | Nonzero-root disagreement | AF-send-fallback disagreement | Mean absolute estimated delta × disagreement |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| BC0 | .062969 | .107478 | .312005 | .002466 | .004837 |
+| WBC0 | .068216 | .086397 | .240106 | .033072 | .002696 |
+| BC1 | .065521 | .102431 | .311701 | .002246 | .004224 |
+| WBC1 | .070763 | .089651 | .237627 | .027628 | .002797 |
+
+Stage1 has the same directional weighted/nonzero improvement; complete diagnostics and
+curves remain in the summary and curves.json. Final eligible roots are 17,342/17,170,
+of which 14,310/14,119 have exact-zero estimated delta. Final-stage weights have mean1,
+minimum .797021/.797110 and maximum 12.677849/11.938744. The ordinary positive term prevents
+zero-label removal, but does not keep ordinary/AF agreement unchanged. Ordinary disagreement
+rises about .52 percentage points; AF-send-fallback disagreement rises from about .25% to
+3.31% and .22% to 2.76%. This diagnostic tradeoff must remain visible. These labels define
+training, so their better weighted fit is an in-sample intermediate, not independent
+evidence that true consequential errors caused the native gain.
+
+Realized counts equal the fixed contract: 98,304 collection and 147,456 evaluation team
+ticks; 1,280 calibrations / closed-form fits and 5,120 calibration moves; 589,824 diagnostic
+forward-only agent rows. There were 43,641 queried roots, 35,881 exact-zero estimates and
+7,760 nonzero estimates across collection and teacher evaluation. Actual model work was
+56,848,192 branch transitions, below the 251,658,240 conditional bound. The 1,396,512 root
+particles initialized 2,793,024 branch worlds and generated 268,130,304 advance and the same
+number of job draws; initialization/draw counts are not extra executed environment ticks.
+
+Shared collection cost 96.9624s wall / 99.0808s CPU, including 56.6543s filtering and
+35.3913s querying. It is retained in full, not divided away between arms. All fit occupancy
+(initialization, optimization and checkpoints; excluding shared collection) sums to 78.9467s;
+optimization alone is 78.1100s. Per-fit wall times BC0/WBC0/BC1/WBC1 are
+20.7842/19.4673/19.0832/19.6120s. The first initialization includes the optimizer's one-time
+startup cost and is not a clean algorithm-speed comparison.
+
+Scientific-process wall/CPU are 205.9909/210.0445s through artifact hashing, excluding final
+summary writing; peak single-process RSS is 570,728,448 bytes (544.29 MiB).
+Native acceptance to exit is 211.8647s. Calibration generation/posterior cost is
+.029070/.001030s, endpoint diagnostics are separately timed, and entry import/startup is
+.896508s. Engineering, remote preparation/transfer and DM/Pro reading are additional support
+work; no complete support-effort total is inferred.
+
+The deployment table includes setup/checkpoint loading, necessary shared calibration,
+lawful features, environment, policy work and equivalent per-method output. Teacher filtering
+and query time are 14.2958s/9.5792s. All 64 student evaluation batches have empty filter/model
+counters and zero filter/query time. Students take about 24 times less measured batched
+deployment time than this teacher, but about three times AF's cost. This is an offline
+shared-node measurement, not online deadline latency or an intrinsic speed guarantee.
+No claimed compute saving erases the observed loss of teacher completions.
+
+Bulk data and checkpoints remain at
+`hmasd-wsl-node:/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b01_bc_wbc_s925941_20260925`
+and in this authoring checkout at the corresponding runs path. Exact paths, bytes and hashes
+are in the existing summary.artifacts; compact results are published with this notebook.
+After verified collection, source-snapshot GC initially refused a protected process scan;
+the explicit read-only sudo process scan then passed. Preview and apply reclaimed only
+the terminal operation's disposable snapshot. The durable authoring/output checkout,
+published branch, accepted claim, manifests, exit witness and all outputs remain.
+
+### Explanation update and next decision
+
+Strengthened: partial amortization is feasible in this small host, and the fixed WBC
+procedure allocates imitation errors differently while yielding more completions than BC
+in both observed training blocks. Weakened: ordinary BC is sufficient to retain the same
+use at this exact budget; full teacher preservation by either current student. Untouched:
+teacher optimality, sufficient recovery of belief by the GRU, the cause of the residual gap,
+generalization to a different host or UAV, and a causal consequential-error mechanism.
+Optimization/decision-boundary changes under this shared data distribution remain a strong
+alternative to genuine prioritization of true decision consequences.
+
+I accept the Critic's recommendation to retain the assets and prefer an unchanged prospective
+independent repetition over a larger network, extra roll-ins or an expensive label audit.
+Its proposed two-block fresh-panel exploration can test recurrence; five new independent
+blocks would additionally allow a narrowly specified confirmation with an exact sign rule.
+The choice between those investments and their actual claim requires focused Pro advice;
+the prior first-batch consultation does not cover a new confirmation plan. B01 stays complete
+with no extra fit, selected checkpoint, reused test result or resumed worker. The current
+main background at `b815b2b6bbf5a5f5176c2062384306b0b6bd5fa6`, especially sections 2/4/8,
+supports keeping information rights fixed and distinguishing finite learning/computation
+tradeoffs from representation guarantees. A bounded section-4 background update follows
+with this result; the original finite-model route remains archived.
+
+## Pro question 2026-09-25 recurrence-or-confirmation
+
+Conversation: new (private Jev account; shared records retain only the question key).
+
+Question: B01 now gives partial compression and a consistent exploratory WBC increment.
+Should we buy the proposed five-block unchanged confirmation, use only two new blocks and
+a fresh common panel for exploratory recurrence, or end this small-host recipe's investment?
+Criticize the actual narrow claim/test below, and choose the smallest worthwhile next
+observation. This is a focused direction decision, not a new programme/Portfolio review.
+
+Standing: the complete B01 result/update immediately above is the new evidence. In its
+common 256-context panel, teacher−AF is +34 jobs; BC−AF +5/+9; WBC−AF +22/+19; WBC−BC
++17/+10; WBC−teacher −12/−15. WBC improves weighted/nonzero training-label agreement but
+worsens ordinary and AF fallback agreement. Both blocks share deployment contexts, with
+five common contexts contributing +8 jobs to each increment. Full student deployment is
+about 1.01–1.03s versus teacher24.41s and AF.356s; shared collection96.96s, four fits78.95s,
+scientific process205.99s. The retained losses and complete component vectors matter.
+The independent ResearchCritic had no material dissent and favored unchanged recurrence
+over repairing capacity/coverage; it did not evaluate the exact new claim note below.
+
+DM leaning: this promising unchanged procedure deserves one bounded independent reading,
+not more hyperparameter or teacher-budget search. Five new paired blocks permit a simple
+exact sign rule at .05 without using context count as training n; a two-block recurrence
+costs less but remains exploratory. The proposed sign claim deliberately concerns the
+probability of a strictly positive training/evaluation-block effect, not expected gain,
+teacher noninferiority or the causal mechanism. Is that estimand useful and honestly framed,
+or should the finite claim and next investment be changed? A negative/inconclusive final
+reading is acceptable. A larger network, more roll-ins, permutation-weight control or
+UAV migration is not owed; recommend one only if it answers the live question better.
+
+Actual proposed plan: [CLAIM_weighted_partial_compression.md](CLAIM_weighted_partial_compression.md),
+currently a draft for this criticism and not selected/started. It specifies five new
+independent training pairs and five fresh block-specific 256-context panels, matched B01
+procedure, all comparisons and costs. Primary rule: all five WBC−BC completed-job means
+strictly positive, exact one-sided binomial p=1/32; ties count nonpositive, no B01 pooling,
+no automatic extra seeds. Report an exact lower bound for positive-block probability and
+all magnitudes/other native readings. The distinction between a narrow recurrence claim,
+expected native benefit, and compute/completion tradeoff is the central concern for advice.
+
+Alternative two-block plan would reuse the same fixed B01 recipe with fresh training seeds
+925951/925952, query seeds926151/926152 and one common fresh eval seed925961/model926161;
+four fits and the same exposure as B01. It is an alternative proposal, not an accepted second
+batch or a post-score option. Neither proposal has new training, environment steps or queries.
+
+Context (paths marked source_sha resolve at the published question revision supplied in the
+send; other revisions remain as stated):
+
+- Current governance at source_sha: `docs/project/OPERATING_CONSTITUTION.md` sections1–5
+  and7–8. Owner has authorized this independent direction's research; no pause applies here,
+  while Claude FSD remains paused and G33 frozen. Three concurrent tracks is a ceiling;
+  only one result-bearing study per DM. Pro advises, DM decides without renewed owner approval.
+- Current methods at source_sha: `.agents/skills/hmasd-scientific-tools/SKILL.md`, sections
+  Update the working explanation, Confirm a claim, Comparators and MARL information,
+  Statistics, Cost and exposure. Constitution sets 3–5 fresh seeds/arm for confirmation,
+  with an actual frozen claim, independent criticism, adequate uncertainty and all outcomes.
+- Shared background: `docs/research/RESEARCH.md` sections2/4/8 at main
+  `b815b2b6bbf5a5f5176c2062384306b0b6bd5fa6`. Finite history learning is distinct from
+  information rights or representational guarantees; joint closed-loop effects and complete
+  cost matter. This is scientific background, not a required belief. The B01 update above
+  supplies newer evidence than that index snapshot.
+- Evidence at source_sha: this notebook's complete B01 contract/result/interpretation,
+  `runs/planning_policy_compression/b01_bc_wbc_s925941_20260925/{config,summary,per_context,curves}.json`
+  and the actual proposed claim file. The summary reports measurements and artifact hashes;
+  it is not the raw tensors. Bulk trajectories/checkpoints are at the recorded node/local
+  locations and have been checked by DM and Reviewer; do not claim you personally read them.
+- Frozen executable meaning: original B01 code/entry at
+  `a576d6b6c830d712703ae069f91f74a57485e264` under
+  `experiments/candidates/planning_policy_compression/b01/` and `scripts/run_ppc_b01.py`.
+  Inspect only if comparison/cost semantics require it. No source or result changes follow
+  merely from this consultation.
+- Applicable prior advice: `docs/research/archive/2026-09-25/RESEARCH-decision-learning-adopted.md`
+  at source_sha, complete Answer's A discussion and Decision. It covered the first four-fit
+  batch, positive ordinary term, normalized weights, shared roll-in, three comparisons and
+  full costs; it did not cover this actual confirmation claim. Original finite-model B01/B02
+  remain archived with their bounded +36/+32 ordinary-teacher asset and contrary evidence.
+  No new literature or novel-method claim is needed to decide this focused investment.
+
+Prospective cost: five-block option =10 fits, 245,760 collection+491,520 evaluation team
+ticks, 15,360 calibration moves/3,840 closed-form fits, 9,600 updates and58,982,400 optimizer
+rows; branch upper754,974,720. B01 component rates imply about ten scientific minutes,
+plus implementation/review and readback. The alternative is4fits/245,760 total team ticks
+and approximately the B01 scientific price, plus support. Actual-node admission remains
+mandatory; neither estimate authorizes a launch or claims a reserved resource.
+
+Constraints: no experiment, no approval gate and no edits outside the empty Answer below.
+Write only that subsection on branch `codex/planning-policy-compression-sept25` in
+`docs/research/candidates/planning_policy_compression/NOTES.md`. Read the immutable question
+but fetch the latest target blob before writing and use its actual blob SHA. Preserve every
+other byte, including the question and result, and stop on overlapping edits. On successful
+write return the actual commit. If writing is unavailable, return the complete answer in
+chat, not just a receipt/SHA/link. Do not disclose the private account/conversation address.
+
+Return: evidence-grounded strengthened/weakened/untouched judgments, strongest alternative
+to the proposed mechanism/claim, whether the next investment changes a useful judgment,
+and one recommended decision with actual prospective scope/price. For the proposed exact
+claim, reconstruct population, estimand, independence, selection/stopping and uncertainty;
+state MATERIAL_DISSENT yes/no and the smallest necessary revision. Cite sources actually
+read; state decision-critical gaps without inventing verification or a compulsory new test.
+
+### Answer
