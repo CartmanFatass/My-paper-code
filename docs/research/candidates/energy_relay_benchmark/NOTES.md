@@ -2487,3 +2487,81 @@ target and holds after release). This oscillation is the declared package (fixed
 shield), the same shield N faces (N: ≈ 80 entries per world in B01); it is reported with the result,
 not removed before it. Observation: detached poller every 5 minutes plus a background waiter with a
 native return; only health fields are observed before the terminal state.
+
+## 2026-09-26 — Stage 0 item 2 result: three fixed references (`b02_s0_refs_a01`, operation e94bf1fe), read by S0-2 and S0-3
+
+**Operation.** `run_end status COMPLETE`, exit code 0, 96 episodes / 288,000 steps / 0 fits, wall
+905.9 s, no failed world; inputs sha `e5857e0c2`; production shield (0, .05); worlds 955001–955032.
+Reader `read_stage0.py` unchanged since `0376dc5b5`; outputs copied to
+`runs/energy_relay_benchmark/b02_s0_refs_a01/` (JSON committed, traces ignored, local plus node
+copies); combined readings regenerated in `b02_stage0_readings.json`. Definition parity: the five
+row diagnostics equal the trace recomputation in all 96 rows. Disclosure: the poller's progress
+tail printed each panel's `panel_end` mean J before the reader ran; J is not an input of S0-2 or
+S0-3. Stage 0 is complete: 160 episodes, 0 fits, ≈ 28 min of node wall in total.
+
+**Result (per-world means over 955001–955032; H_central = B01's H1 panel, N = B01's deterministic
+panel, both on the same worlds):**
+
+| | H_spawn | H_park2 | H_central@10 | H_central (B01) | N (B01) |
+|---|---|---|---|---|---|
+| QoS/step | .232 | .379 | .769 | .774 | .328 |
+| raw native J | 492 | 1066 | 2270 | 2282 | 955 |
+| QoS/step before first entry / entry→input / after input | .083 / .204 / .350 | .353 / .379 / .390 | .811 / .822 / .715 | .810 / .840 / .725 | .231 / .353 / .449 |
+| first entry / first input step | 1049 / 1604 | 1073 / 1625 | 1317 / 1610 | 1300 / 1617 | 1372 / 2196 |
+| shield entries / exits per world | 113 / 105 | 94 / 87 | 49 / 42 | 48 / 41 | 80 / 74 |
+| F-mode UAV-step share | .458 | .364 | .336 | .325 | .184 |
+| return-constraint cost (sum) | 88.7 | 19.5 | 3.4 | 4.8 | 1.2 |
+| cutoff / depletion events | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
+| min decoded battery | .084 | .094 | .101 | .100 | .108 |
+| charging UAV-steps / wait ticks / charger Wh | 1230 / 6367 / 342 | 1238 / 4663 / 344 | 1421 / 4737 / 395 | 1372 / 4570 / 381 | 528 / 1406 / 147 |
+| guard blocked / checked | 230 / 2691 | 739 / 6648 | 1037 / 14345 | 1129 / 14620 | 1949 / 11031 |
+| mean normal-mode altitude (m) | 98.9 | 98.6 | 97.9 | 97.7 | 67.9 |
+| UAV-steps within 300 m of anchor / centre | 7142 / 1520 | 8142 / 3911 | 1810 / 6972 | 1733 / 6994 | 2511 / 1187 |
+| first service step (served worlds) | 295 | 20 | 20 | 20 | 247 |
+| zero-service worlds | 4 (955004/016/021/027) | 0 | 0 | 0 | 3 |
+
+Arrival: every fixed waypoint is reached (within 50 m) — the spawn waypoints at step 0 by
+construction, the two station waypoints of H_park2 at a median 176 steps from a median 5.2 km
+(64/64 arrive); H_central's planned targets at a median 183 steps.
+
+**S0-2 applied as declared.** H_park2 − H_spawn = **+.147 QoS/step (paired SE .023)**, positive in
+32/32 worlds, ≥ +.10 in 17/32 (median +.101, range +.04…+.55), J +574. The expected level of ≥ +.10
+is met on the mean; it was declared a level, not a pass mark, and no claim about N's mediator
+follows. The common early window (steps before either arm's first shield entry, median 1,070 steps,
+minimum 381): H_spawn .083, H_park2 .352, paired +.269 (SE .016), 32/32 — the package effect of two
+station waypoints is present before any feedback consequence and narrows after the first input
+(.350 vs .390). The two parked UAVs enter the shield about once each; the other six oscillate
+exactly as the implementer's probe predicted (release ≈ 2 km short, return to the waypoint,
+re-entry), which is what the entry counts (113 / 94 per world) and the return cost (88.7 / 19.5)
+measure; no cutoff or depletion event occurs and the minimum battery stays ≥ .084.
+
+**S0-3 applied as declared.** H_central@10 − H_central = **−.005 QoS/step (SE .005)**, |Δ| < .03 in
+26/32 worlds (range −.09…+.07), common early window identical (.809 vs .809, paired −.000, SE
+.002), J −12: this H's period sensitivity is below the practical threshold. Nothing about SET
+follows, as declared.
+
+**Reported beside (not tested): N among the references on the same 32 worlds.** N (.328) lies
+between H_spawn (.232; N − H_spawn +.096, SE .026, 23/32 positive) and H_park2 (.379; H_park2 − N
++.050, SE .029, 21/32 positive). In the common early window N serves .203 against H_spawn's .084
+(+.120, SE .019) and H_park2's .352 (−.148, SE .028, N ahead in 6/32). An idle team held at its
+spawn points under the production shield still reaches .232 over the episode, .35 after the first
+input: a large part of any S7 controller's whole-episode service on these worlds is produced by
+the shield's station visits (the stations sit at the relay anchor and the service centre), which
+is why the pre-entry window and the common early window are the readings that separate
+deployment from feedback consequences. Two fixed station waypoints on that idle background
+already match or exceed N's whole-episode level.
+
+**Belief changes recorded.** (1) Package references for Stage 1 on 955001–955032: H_spawn .232,
+H_park2 .379, H_local .597, H_central .774 (H_central@10 .769); N .328 deterministic / .313
+sampled. (2) The shield's own contribution on an idle team is ≈ .23 QoS/step here; readings of a
+learner's service must therefore keep the phase split and the common early window. (3) H's
+replanning period is not a consequential design parameter at this level. (4) The fixed-waypoint
+oscillation is a property of the production shield with any controller that keeps its target after
+release (N included: 80 entries per world); it is part of the package, not corrected here.
+
+**Next.** Stage 0 complete; nothing is adopted from these worlds. Stage 1 (one fixed-exposure SET
+development fit with the evaluation-mode axis) proceeds through its engineering (training runner,
+learner-checkpoint loader, per-checkpoint evaluation; implementer in flight from
+`temp/directions/energy_relay_benchmark/L0_b02_stage1_training.md`) and an engineering review
+before any launch; its cost (≈ 5 h serial node wall plus ≈ 1.4 h of checkpoint evaluations) is
+reported to the owner with the launch record.
