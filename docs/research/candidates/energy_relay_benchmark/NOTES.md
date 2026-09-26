@@ -2212,3 +2212,145 @@ and report N's rank among seeds instead of an SD threshold from three samples; l
 H_local's level, not "approaching H_central"; memory ≈ 10 GB per fit makes the fits serial
 (≈ 30 h for six) unless the flat arms' peak is measured lower. The DM's response to these and to
 Pro's answer, and the revised design, follow in one entry; nothing is bought before that.
+
+## 2026-09-26 — DM response to both reviews of the B01 reading and the B02 proposal; revised B02 (Stage 0 declared)
+
+Two independent passes were read in full: the internal ResearchCritic (recorded in the correction
+subsection above) and Pro (`### Answer` above; saved from chat; a `deliver` call made after the
+DM's own insertion reports that insertion as the filling commit and is not a Pro write). Both
+return MATERIAL_DISSENT: yes on Stage 0 and on Stage 1 as proposed; Pro also dissents on parts of
+the B01 reading. Consequential source claims were checked before acceptance.
+
+### B01 reading: further corrections accepted from Pro (in addition to the critic's)
+
+- **P1c was misreported.** The entry says "fails on sign for both controllers". Correct: N fails
+  the whole-episode sign condition (+.008 > 0) and satisfies the entry-to-input condition (−.021);
+  H_central satisfies the sign condition (−.017) and fails the entry-to-input condition (+.014).
+  Both fail the registered conjunction on different sub-conditions. The reading becomes "the
+  queue and waiting process changes with width; the registered joint harmful response does not
+  occur", not "no service consequence".
+- **Scope of branch (b).** It decides the next investment; it does not attribute the whole gap.
+  "The exit width is not the S7 loss" is replaced by "for this policy instance, these worlds and
+  H3000, the level-0 width changes recovered no service comparable to the reference gap; the exit
+  width is not the explanation worth further investment". The N width contrast still carries
+  +71.8 J and a positive service change; below threshold is not zero. P2′ stays descriptive and
+  gives no information-versus-learning share.
+- **Paired tables stay reportable.** Same-device paired differences are results of these fixed
+  programmes; the τ_w rule withholds their use for selecting regimes, thresholds or individual
+  cross-platform claims, nothing more. "Panel means agree" is replaced by "the observed mean
+  differences are small (.002 QoS/step, 4 J)"; no equivalence bound was pre-set, so no platform
+  equivalence is established, and N's null does not supply an error bound for H_central or for
+  any new learner.
+- **P3.** "Before the first shield entry" replaces "before energy pressure"; what is excluded is
+  that a not-yet-occurred exit-width intervention caused the early gap, not the other candidate
+  causes. "About 8 τ_w" is a magnitude description, not a test statistic.
+- **Tether.** Conditional process support, with three qualifiers: only exits followed by a
+  re-entry count; repeated exits in one world are not independent samples; the script uses the
+  nearest-station distance without enforcing unchanged station identity or radial flight. "The
+  increment depends on the width, not the level" is weakened to "the observed increments are
+  compatible with the width-bound derivation at both levels". The sentence "entering from ≈ 1 km
+  they arrive inside the ≈ 24 s release window" is withdrawn (1 km at 30 m/s already takes 33 s);
+  the observation stands that H_central's exits occur at the station (median 20 m) and N's
+  mid-return (median 1,414 m), and its explanation needs paired trajectories, not medians.
+- **Level effect.** "≈ 1/5 of the gap" is the descriptive proportion of one selected setting on
+  the development panel, not a bound on constant rules or adaptive control. The accurate record
+  is: P1′ was refuted; a post-hoc package effect favourable to N and unfavourable to H_central was
+  found; the comparison itself was pre-arranged, the unregistered step would have been treating
+  the direction as a candidate gain; nothing was adopted. "A UAV at the anchor is a backhaul hop by
+  construction" is withdrawn (the source constructs an anchor position with jitter, clipping and
+  separation; it proves nothing about SINR, two-way capacity or the team layout). With the
+  critic's time-confound finding, the station-prior reading is withdrawn entirely (previous
+  subsection).
+- **Source citation.** The design entry cited `belief_map.py::_get_state` for the S7 state. The
+  S7 environment is `UAVEnergyAwareRelayEnv(UAVRoutedRelayEnv)`; its state comes from
+  `routed_core.py::_get_state` (normalised UAV, user and BS positions, coverage and connectivity
+  flags, link quality, step clock) with the energy suffix appended in `energy_aware.py`. Verified.
+
+### B02 design: what both reviews establish
+
+- **Stage 0 as proposed over-claimed** (both): H_spawn is a reset-target controller under the
+  production shield, not a "no deployment" floor (the spawn corner lies ≈ 3,950 m from the anchor
+  and ≈ 5,900 m from the centre; the shield moves the UAVs anyway); H_park2 with two station
+  waypoints measures the package effect of adding two waypoints on that background and says
+  nothing about N's mediator; H_central@10 isolates only H's own period sensitivity. The critic's
+  replacement, a zero-fit check of N with sampled instead of mean actions, targets a possible
+  evaluation artefact behind the boundary parking (B01 and B09 evaluated with `deterministic=True`)
+  and was not available to Pro, whose question predates the boundary finding.
+- **Stage 1 as proposed was misframed** (both): the "typicality" test is invalid because B09's N
+  was trained without the shield on 180,000 transitions while the proposal trains with the shield
+  at 1.2 M transitions under a new collector (Pro; verified against the B09 entry "both arms learn
+  service, feedback training adds no mean endpoint gain": N ordinary, A with feedback); SD from
+  three seeds is not a test (critic); a SET failure is uninterpretable without registered
+  diagnostics (critic; Pro's failure table); the actual SET recipe keeps the recurrent low-level
+  actor and holds a central snapshot made of the central state, all agents' observations and an
+  ego one-hot, refreshed at the k = 10 decision boundary, not every step (Pro; the snapshot
+  composition and the held-snapshot arrays verified in `hmasd/networks.py` ≈ 1586–1592 and
+  `hmasd/agent.py` ≈ 909–914; the RNN retention is recorded from the runner's active config at
+  launch); memory ≈ 10 GB per fit makes fits serial (both); .60 is H_local's level, not
+  "approaching H_central" (both); B01's evaluator loads a fixed N and needs a SET loader that does
+  not relax N's identity check (Pro).
+- **Value** (Pro): the corrected B02 is a task-calibration stage for the paradigm question, a
+  learning baseline against an executed strong rule reference; it neither validates nor refutes
+  the joint-skills recommendation, and a HMASD − SET difference would be a difference between two
+  learning packages, not a joint-skill contribution.
+
+### Resolution (DM, constitution §2; both reviews adopted where they agree, both replacements kept where they differ)
+
+**Stage 0, declared now (0 fits; production shield (0, .05); 955001–955032; B01 evaluator,
+traces and the four new diagnostics per world; ≈ 160 episodes ≈ 40 min of node time):**
+1. **N with sampled actions**, 2 draws per world (64 episodes), seeded per (policy seed, world,
+   draw); both levels sample. Registered reading S0-1: if the sampled-action panel mean lies within
+   .03 QoS/step of the deterministic N (.328) and its boundary share stays above .30, the boundary
+   parking and the deficit belong to the learned policy and the deterministic evaluation stands; if
+   the sampled mean exceeds the deterministic one by ≥ .05 or the boundary share falls below .15,
+   the deterministic evaluation misrepresents the learned behaviour and every deterministic S7
+   comparison of this checkpoint (B09–B11, B01) is relabelled accordingly; between, both are
+   reported and the evaluation mode becomes a declared axis of Stage 1. J, return cost, events and
+   minimum battery are reported beside QoS; draw-to-draw spread is reported, not tested.
+2. **Three fixed references, redefined as Pro asks** (32 worlds each): H_spawn = every UAV flies
+   with ordinary actions to a 100 m waypoint over its own reset xy and holds it, under the
+   production shield and guard; H_park2 = the same, except that the UAV nearest each station at
+   reset (station 0 first, ties by index) takes a 100 m waypoint over that station's xy; H_central@10
+   = H_central with a 10-step replanning period. Readings S0-2: H_park2 − H_spawn is the package
+   effect of two station waypoints on a reset-target background (expected ≥ +.10; a level, not a
+   pass mark; no claim about N's mediator either way); S0-3: |H_central@10 − H_central| < .03 reads
+   "this H's period sensitivity is below the practical threshold", nothing about SET. All three
+   report the common early window, arrival times, altitude, F-mode share and charging state so
+   that early spatial deployment is separable from later feedback consequences.
+Nothing is adopted from these worlds; no Stage 0 result triggers Stage 1 automatically.
+
+**Stage 1, revised to Pro's preferred form (one fit; not launched by this entry):** one
+fixed-exposure SET development fit at 1.2 M transitions with the production shield active during
+training, labelled a new programme (not a B09 replication); the actual recipe recorded from the
+active config at launch (recurrent low-level actor, held snapshot = central state + all
+observations + ego one-hot at the k = 10 boundary, S7 preset hyperparameters as a declared
+asymmetry, k restored and buffers recomputed as in the first entry); frozen deterministic
+evaluation at fixed checkpoints on 955001–955032 with the B01 evaluator, traces and diagnostics
+(boundary share, altitude-floor share, anchor and centre occupancy by distance, first service
+step, guard-blocked motion, plus per-rollout training Q/J, shield-mapping share, optimizer steps
+and PPO KL / clip fraction / entropy); a single sampled-action evaluation per checkpoint if S0-1
+makes the mode an axis; 957001–957032 reserved for the frozen final model and the frozen H
+references, read once, never used for selection. Readings, separately: the .60 milestone
+(H_local's level, labelled so); improvement over the model's own initialisation; the gap to
+H_central and to H_local; J, return cost, events and the minimum-battery tail against the same
+comparators, with service-versus-risk conflicts reported as conflicts. The typicality prediction
+and its relabel branch are deleted. Failure explanations are pre-registered as Pro's table
+(non-exclusive candidates; no rescue pre-selected; no extension of the fit after scores; a longer
+or changed recipe is a new declared study). Cost: ≈ 5 h serial node wall by the first entry's
+HMASD measurement, SET's own memory and throughput measured at launch; checkpoint evaluations
+≈ 6 min each. Further seeds or a HMASD-k10 package comparison are a later decision that the
+SET curve must justify. Engineering: a training runner reusing the first entry's plan
+(`b08.training`, the sharded collector, B01's host and evaluator), a SET checkpoint loader for the
+evaluator that leaves N's identity check intact, tests, and an engineering review of the training
+and RNG paths before launch.
+
+**Not adopted.** Pro's "keep six fits as a seed-level comparison of two new packages" (a
+defensible alternative, deferred behind the single SET curve); a behaviour-cloning ceiling (Pro:
+not a bound, not decisive); a memory-ablated or per-step-refresh SET (no matched controls are
+bought before the first curve); training at enter level .20.
+
+Belief changes recorded: the deployment deficit is now described by boundary parking and the
+altitude floor, with the evaluation mode an open question until S0-1; the "station prior" is
+withdrawn; the exit width is closed as an investment for this policy on these worlds without a
+general null claim; B02's object is "can an ordinary central-input learning programme approach an
+executed rule reference at a fixed exposure", not typicality or structure attribution.
