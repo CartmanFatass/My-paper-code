@@ -1,0 +1,11 @@
+{
+  "claim_key": "1d338b3fa598b4fad79a8dd2ae3ac9fdc7aa6cd1a037e856bee9eecaf369b50a",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/1d338b3fa598b4fad79a8dd2ae3ac9fdc7aa6cd1a037e856bee9eecaf369b50a.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/1d338b3fa598b4fad79a8dd2ae3ac9fdc7aa6cd1a037e856bee9eecaf369b50a.json",
+  "pid": 702073,
+  "runner_pid": 702074,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-26T09:04:30.324214Z"
+}

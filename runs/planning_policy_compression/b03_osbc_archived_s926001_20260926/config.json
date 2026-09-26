@@ -1,0 +1,63 @@
+{
+  "archive_producer_sha": "443d392ec47a3e53652114d28084d48ce1e5d9e2",
+  "archived_input": {
+    "bytes": 1041468,
+    "hash_seconds": 0.0006987209198996425,
+    "parse_validate_seconds": 0.027420194004662335,
+    "path": "/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925/raw/block0_training.npz",
+    "read_seconds": 0.0005128319608047605,
+    "sha256": "eba65c4c17b49a18c6376628913feabac79dd38ba497e8003808d79ebadb55a4",
+    "stage1_eligible": 8951,
+    "stage1_sequences": 512,
+    "stage2_eligible": 17825,
+    "stage2_sequences": 1024
+  },
+  "batch": 16,
+  "device": "cpu",
+  "dtype": "float32",
+  "epochs": [
+    40,
+    40
+  ],
+  "evaluation_contexts": 256,
+  "evaluation_model_seeds": [
+    926401,
+    926402
+  ],
+  "evaluation_phases": [
+    80,
+    81,
+    82
+  ],
+  "evaluation_seeds": [
+    926301,
+    926302
+  ],
+  "horizon": 96,
+  "host": "LAPTOP-U9TDKC8A",
+  "initial_contexts": 256,
+  "initial_seeds": [
+    926001,
+    926002
+  ],
+  "launch_sha": "04d746dcc0e6feff11204a10c7f0aed87f0d7926",
+  "numpy": "1.26.3",
+  "order_seeds": [
+    926101,
+    926102
+  ],
+  "parameter_count": 27329,
+  "particles": 32,
+  "rollout_contexts": 128,
+  "threads": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "torch": "2.7.0+cu118",
+  "train_batch": 64,
+  "weight_seeds": [
+    926201,
+    926202
+  ]
+}

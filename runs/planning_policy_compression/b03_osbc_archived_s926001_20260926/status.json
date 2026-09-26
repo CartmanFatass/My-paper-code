@@ -1,0 +1,18 @@
+{
+  "calibration_contexts": 512,
+  "calibration_fits": 512,
+  "calibration_moves": 2048,
+  "completed_batches": 96,
+  "current_pair": null,
+  "evaluation_team_ticks": 147456,
+  "executed_evaluation_team_ticks": 147456,
+  "model_branch_transitions": 0,
+  "optimizer_updates": 5760,
+  "pairs_completed": 2,
+  "policy_fits_completed": 6,
+  "policy_fits_started": 6,
+  "processed_agent_time_rows": 35389440,
+  "state": "COMPLETE",
+  "teacher_queries": 0,
+  "training_collection_team_ticks": 0
+}

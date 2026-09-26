@@ -1397,3 +1397,317 @@ that same native operation, with no duplicate launch, new Pro question or cross-
 On its terminal wake, read all results and adverse outcomes, verify the changed numerical
 path against saved outputs, apply the fixed prospective reading, publish the owned results,
 and reclaim only the exact inactive native source snapshot after evidence verification.
+
+## 2026-09-26 — B03 complete: original correspondence helps on this fixed archive
+
+### Complete evidence and native reading
+
+The selected batch completed all six fresh fits and both final256-context panels at input
+SHA `04d746dcc0e6feff11204a10c7f0aed87f0d7926`. Native exit0 and identities agree with the
+accepted manifest. I read the complete compact result, all contrasts/loss lists, diagnostics,
+fit movement and costs. Independent engineering verification found no material inconsistency:
+all319 runner-listed artifacts match size/SHA256; the seven collected compact files match
+their node originals; all1536 deployment episodes,96 batches, contrasts and loss lists
+reconcile. The reviewer independently reconstructed the four weight maps and label-wise
+multisets, and checked initial tensors, optimizer steps0→320→960 and positive movement.
+Twelve endpoint diagnostics match an independent reduction over saved checkpoints/D;
+maximum weighted-reduction difference3.43e-9 is reduction roundoff. No retraining or
+environment replay was used for verification.
+
+The [complete summary](../../../../runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/summary.json)
+is219292 bytes, SHA256`cb80a2c465b756aaeb2621ee1fb918a202e471e398a6bd5ee9431250a94bcd35`.
+The [config](../../../../runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/config.json)
+binds the unchanged external archive, seeds, CPU float32, one-thread settings and model.
+Full raw checkpoints, maps, calibration, curves and trajectories remain at the single durable
+node output linked above:326 files,11307400 payload bytes at collection, with319 artifact
+entries/11081666 bytes covered by the runner inventory. No bulk copy or replacement dataset
+was made. All six final models moved from their paired starts (L2: pair0 O/S/BC
+19.3052/16.8143/17.2369; pair1 17.7060/16.6949/16.3374).
+
+| Pair | O jobs total / mean | S jobs total / mean | BC jobs total / mean |
+| --- | --- | --- | --- |
+| 0 | 2855 / 11.15234375 | 2843 / 11.10546875 | 2841 / 11.09765625 |
+| 1 | 3014 / 11.77343750 | 3000 / 11.71875000 | 2997 / 11.70703125 |
+
+The following component differences are totals across each256-context panel except service,
+which is the mean ratio difference. Signs retain metric meaning; more forced packets or
+unknown-gate ticks is not called an improvement.
+
+| Pair / contrast | Jobs total (mean) | Positive / negative / tied worlds | Service mean | Wait ticks | Conflicts | Forced packets | Unknown gate |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 O−S | +12 (+.046875) | 13 / 4 / 239 | +.003348214 | −60 | 0 | +13 | +61 |
+| 0 O−BC | +14 (+.0546875) | 15 / 4 / 237 | +.003906250 | −55 | 0 | +15 | +61 |
+| 0 S−BC | +2 (+.0078125) | 2 / 0 / 254 | +.000558036 | +5 | 0 | +2 | 0 |
+| 1 O−S | +14 (+.0546875) | 12 / 4 / 240 | +.003906250 | −40 | −5 | +41 | +67 |
+| 1 O−BC | +17 (+.06640625) | 11 / 2 / 243 | +.004743304 | −17 | −8 | +42 | +73 |
+| 1 S−BC | +3 (+.01171875) | 4 / 3 / 249 | +.000837054 | +23 | −3 | +1 | +6 |
+
+All arms start14 jobs and send24 packets/context. Delivered packets are identical within
+each pair (23.34375 and23.3046875/context); there is no packet-count saving. Gate disagreement
+totals for O−S/O−BC/S−BC are−46/−41/+5 in pair0 and−42/−26/+16 in pair1; corresponding gate
+opportunity differences are−48/−41/+7 and−36/−16/+20. The summary retains all absolute native
+components and per-contrast extrema/conditional panel intervals. Those intervals do not turn
+contexts into independent training units or establish a population training effect.
+
+All completed-job loss worlds (context: difference) are retained:
+
+- Pair0 O−S and O−BC:13:−1,138:−2,169:−1,200:−1; S−BC has none.
+- Pair1 O−S:147:−2,157:−1,166:−1,220:−1; O−BC:166:−1,220:−1.
+- Pair1 S−BC:79:−1,125:−1,208:−1.
+
+Descriptive means across the two pair totals are O−S13, O−BC15.5 and S−BC2.5; ranges12–14,
+14–17 and2–3. The arithmetic identity holds per world and panel. These are three related
+contrasts, not three independent empirical replications. The two starts share one exposed D;
+do not pool them with B02's five independent data/learning/panel units as a new sign test.
+
+### Common diagnostics, cost and explanation update
+
+All rates below use the same **original** stage weights/labels for each arm, irrespective of
+its training objective. These are in-sample stage-endpoint readings, not an independent test
+of the teacher's true consequences. `AF0` is disagreement on zero-delta AF-send fallback roots.
+
+| Pair / stage / arm | Ordinary disagreement | Original-weight disagreement | Nonzero disagreement | AF0 disagreement | Mean abs(delta) × disagreement |
+| --- | --- | --- | --- | --- | --- |
+| 0 / 1 / O | .085354 | .112687 | .303323 | .043823 | .00388225 |
+| 0 / 1 / S | .074740 | .121112 | .389728 | .003744 | .00532762 |
+| 0 / 1 / BC | .074070 | .119770 | .389124 | .003083 | .00525779 |
+| 0 / 2 / O | .070912 | .087393 | .228383 | .035938 | .00267882 |
+| 0 / 2 / S | .069285 | .119097 | .363095 | .001539 | .00550666 |
+| 0 / 2 / BC | .067209 | .114877 | .345865 | .002857 | .00528576 |
+| 1 / 1 / O | .078762 | .101379 | .267069 | .033913 | .00335856 |
+| 1 / 1 / S | .072394 | .115113 | .358912 | .002863 | .00497151 |
+| 1 / 1 / BC | .072171 | .115871 | .369184 | .003083 | .00505181 |
+| 1 / 2 / O | .076129 | .087903 | .208333 | .047368 | .00236851 |
+| 1 / 2 / S | .067546 | .111482 | .315789 | .008902 | .00497195 |
+| 1 / 2 / BC | .065245 | .108270 | .314536 | .006155 | .00485273 |
+
+Stage1/2 have8951/17825 eligible roots,1655/3192 nonzero roots and4541/9099 AF0 roots.
+The saved permutations changed2875/5610 assignments in pair0 and2923/5588 in pair1;
+unchanged repeated weights are legitimate. Stage/label multisets and means are preserved
+within float32 reduction tolerance. Neither map was redrawn based on these counts or scores.
+
+Actual scientific cost is **6 started/completed fits,5760 updates,35389440 optimization
+agent-time rows,147456 evaluation team ticks,884736 diagnostic rows**, plus512 shared
+calibrations/2048 single-agent moves and512 closed-form posterior computations. New training
+collection, teacher queries, model branches and evaluation updates are all zero. Each fit
+has960 updates/5898240 optimization rows. Native admission-to-exit occupied127.154178s;
+the scientific body through artifact hashing used121.035783s wall/125.082884s process CPU,
+excluding final summary write. Entry imports/startup were1.371833s separately. Single-process
+peak RSS was591347712 bytes; this is not a host-wide or simultaneous multi-process peak.
+
+Fit-scope wall sums to113.953019s (initialization, both stages and checkpoint I/O), of which
+optimization was113.084352s; the old142.14066s estimate is superseded by this measurement.
+Shared input read/hash/parse-validation cost.000513/.000699/.027420s; mapping.010178s,
+diagnostics.819819s, calibration generation/posterior.012286/.000678s, output writing.319533s
+and artifact hashing.013552s have their recorded scopes/overlaps. Complete conditional
+batched deployment including reload and attached shared calibration is O/S/BC
+1.049367/1.000977/.965876s for pair0 and.980450/.984513/.963083s for pair1. Shared calibration
+is attached to each standalone method reading but incurred once per panel in the physical
+batch total. This is not an online latency or new teacher speed comparison.
+
+Independent numerical verification added884736 forward-only rows, about1.03s for those
+forwards/reductions, with0 fits/updates/environment transitions/queries. Engineering final
+test passes were5.28s and5.61s on tiny fixtures; earlier implementation/review/publication
+support wall time was not comprehensively metered. Keep those support costs outside the
+scientific batch and do not call them zero. Old acquisition cost remains historical and is
+neither erased from complete-method accounting nor charged again as new B03 collection.
+
+**Strengthened:** in this D/learner/training schedule, preserving the original weight
+correspondence has a useful, modest native increment over this label-stratified shuffle and
+over fresh ordinary BC. Both predicted original-weight/nonzero diagnostic improvements
+accompany native gains. S itself is slightly above BC in both panel totals, so these observations
+are not explained solely by S falling below ordinary BC. The six-fit comparator changed the
+method choice that an O−S-only result could not make: retain original weighting as a live
+candidate for a complete-method comparison.
+
+**Weakened/untouched:** ordinary training-label accuracy is not a sufficient method selector
+here; O's ordinary and AF0 disagreements are worse despite its native gains. This does not
+identify true consequence semantics or causal mediation: shuffle changes correspondence with
+difficulty, source, time and finite optimization, and mean-one weights do not match gradients,
+clipping or Adam exposure. Modest gains, many ties, all loss worlds and higher forced/unknown
+counts matter. There is no new teacher/AF pairing, independent adaptive acquisition, new-D
+replication or UAV measurement. B01/B02 and the fixed q_256 claim keep their original meaning.
+
+Apply the already-read Pro/Root positive branch: no same-D sign confirmation, added seed,
+redrawn mapping, changed D or chosen checkpoint. The next investment must answer a distinct
+complete-use or named-condition question with its own prospective comparison. A focused
+independent scientific reading of that choice is underway; it does not authorize another run
+or repeat the completed B03 design consultation.
+
+### Independent scientific reading, disposition and B03 lifecycle
+
+Scientific Reviewer `/root/b03_scientific_reading` received its dedicated role and a fresh
+context, without the DM/Root conversation. It reconstructed the fixed protocol, exact source,
+compact results and stored node episodes/context evidence before the proponents' explanation
+and Pro advice. The protocol itself contains prior reasoning; this was evidence-first reading,
+not a claim of being unframed. Its substantive recommendation is to **retain O conditionally
+and compare complete standalone acquisition–training–deployment next**, rather than extend
+the same-D positive signs. It found no material dissent with the bounded interpretation.
+
+The reviewer emphasizes O−BC's mean+.060546875 jobs/context (about.53% of BC completions),
+mostly tied worlds and all losses. Original-weight/nonzero training disagreement falls while
+ordinary/zero-delta disagreement rises. A strong simpler account is finite optimization
+allocating errors toward useful approximate-teacher distinctions under the fixed receiver
+rules. The S intervention also changes time/source/difficulty correspondence; neither it nor
+the observed native gain validates Monte Carlo delta as true joint-deployment regret. The
+finite-MC, posterior-mean, AF-continuation teacher remains an approximation. Parameters,
+inputs and update counts do not equalize gradients or Adam trajectories. Higher forced/unknown
+counts are consequences to retain, not independently established harms; identical packet and
+delivery counts provide no communication saving. S-damage-only with BC absorbing all benefit
+is weakened, while representation insufficiency and a repair for the teacher gap remain
+unidentified. B02's five blocks and their teacher shortfalls keep their original scope.
+
+The review identifies a concrete remaining dependency: B02's shared augmentation requires
+both student policies to generate its D, and B03 inherits that D. It recommends two fresh
+paired blocks, four fits, a common256-context teacher prefix and **256 own labeled roll-ins
+per student**, then the same second40 epochs on prefix plus own data. Evaluate final O/BC,
+teacher and AF together. This tests complete standalone procedures; it does not identify the
+causal effect of sharing data relative to old batches. The discriminating prediction is O>BC
+and O>AF in both blocks. BC≥O lowers weighting preference; both students≤AF lowers investment
+in this specific use; mixed results remain unresolved without automatic extra blocks.
+
+Its price is4 fits/3840 updates/23592960 optimization rows,147456 collection and196608
+evaluation team ticks,589824 diagnostic rows,1536 distinct calibrations/6144 moves and a
+conservative402653184 model-branch upper bound. Historical fitting/collection/deployment
+estimates are about95/175/64s, not measured new wall time. Each standalone method must carry
+its full necessary prefix acquisition, even where the experiment physically shares it.
+Engineering, realized query costs, full wall time and any UAV comparison remain unresolved.
+The reviewer has no material objection to this next comparison or the qualitative outcome
+branches; it would object to semantic-mechanism claims or automatic expansion. Earlier
+scientific dissent and Root's bounded disposition remain intact.
+
+DM disposition: adopt this uncontested recommendation under the standing question delegation
+and the completed Pro positive branch. Constitution§2 authorizes ordinary prospective
+successors; this event itself supplies no new authority. No Root acknowledgment or new Pro
+Send is needed. B03 is complete before selecting the distinct B04 below. The decision buys a
+change in deployable-method choice, not more signs on the exposed archive or a capacity rescue.
+
+After complete evidence verification, the maintained native snapshot GC reclaimed only B03
+source `4769d18a1e88433d8c830d359513fc51`. Its ordinary process scan first refused a protected
+`/proc/660/cwd`; the supported read-only sudo scan established no live consumer. Preview and
+apply succeeded with a durable Git reference, and both the exact directory and worktree
+registration are absent. Net allocated source-tree bytes reclaimed:793542656; Git object
+storage change was not measured. The326 output files remain at the same durable node path,
+with unchanged summary SHA and12079104 allocated bytes. No backup, raw-data copy or other
+checkout deletion was made. The consumed terminal observation has no remaining active job.
+
+## 2026-09-26 — B04 selected: standalone own-roll-in compression
+
+### Question, prediction and fixed prospective reading
+
+Select **two fresh paired data/learning/evaluation blocks, O versus ordinary BC, four fits**.
+Can O's useful weighting increment survive when each deployable student acquires its own
+augmentation histories, while retaining useful native performance relative to AF? The current
+RESEARCH learning/representation background and B01–B03 evidence motivate this complete-use
+question. Single-D B03 supports retaining O but cannot answer it; B02's joint acquisition is
+not a standalone O or BC procedure. No claim of representation insufficiency, teacher repair,
+true consequence semantics or UAV transfer is assumed.
+
+Keep the CrossingHost, lawful private35-feature history, Linear64/tanh/GRU64/scalar student
+(27329 parameters), teacher posterior-mean law with32 paired particles and AF continuation,
+and frozen O weights/BC unit weights from B01. Within each block generate a fresh256-context
+teacher prefix shared by both arms. Start identical parameter tensors, train40 epochs, collect
+256 own labeled roll-in contexts per arm on matched exogenous worlds, and train another40
+epochs on **the shared256 prefix plus that arm's own256**. Neither arm receives the other
+student's histories or needs its fitted model as an acquisition dependency. There are no S,
+extra teacher interventions or additional fits. Matched episode/model budgets do not promise
+equal realized eligible-root/query counts; record each method's actual costs.
+
+Deploy only final stage2 O/BC plus the unchanged teacher P_k4_M32 and AF on a fresh common
+256-context panel per block. Read integer completed-job differences, signed means/magnitudes,
+absolute native service/wait/conflict/packet/forced/unknown components and every loss world.
+Primary decision contrasts are O−BC and O−AF, with BC−AF, O−P, BC−P and P−AF preserving full
+use and teacher gaps. These are related comparisons, not six independent replications.
+Two blocks remain exploration; no new formal claim, sign test, equivalence, expected-policy
+dominance, break-even demand, online latency or UAV assertion. Do not pool these blocks with
+B02 or use their difference from B02/B03 to identify a causal acquisition-sharing effect.
+
+Prediction and consequence, fixed before data generation:
+
+- O−BC>0 and O−AF>0 in both blocks supports retaining weighting for standalone partial
+  compression, subject to the actual magnitude, adverse outcomes and acquisition cost.
+- BC≥O weakens a reason to prefer weighting; retain BC as a useful simpler reference only
+  where its own AF/full-cost comparison warrants it. Do not call mixed signs equivalence.
+- Both students≤AF lowers investment in this particular compression procedure even if
+  O>BC. Persistent teacher gaps remain losses, not a mandate for capacity or MC rescue.
+- Mixed, small or imprecise outcomes remain bounded; no automatic third block, changed
+  collection mixture, horizon, weight scale, seed or checkpoint after results. Any next
+  investment must address a concretely different use/condition or end this recipe's additions.
+
+Endpoint diagnostics use original weights at each stage on that arm's actual data. Stage1
+uses common prefix data; **stage2 data differ across arms**, so stage2 rates are descriptive
+own-training readings, not a matched common-D mechanism comparison. No added diagnostic set
+or production rehearsal is purchased. Preserve ordinary, original-weight, nonzero, zero-AF,
+all-zero and abs(delta)-weighted disagreement and all eligibility counts.
+
+### Exact inputs, resource price and execution
+
+| RNG purpose | Block0 | Block1 |
+| --- | --- | --- |
+| Initial tensors | 926501 | 926502 |
+| Epoch sequence order | 926601 | 926602 |
+| Collection exogenous worlds/calibration | 926701 | 926702 |
+| Collection teacher model address | 926801 | 926802 |
+| Evaluation exogenous worlds/calibration | 926901 | 926902 |
+| Evaluation teacher model address | 927001 | 927002 |
+
+Prefix context IDs0..255 use phases100/101/102 for calibration/world/MC respectively. Both
+own roll-ins use IDs256..511 with phases110/111/112 and the same within-block exogenous
+addresses/calibration. Histories/labels follow each actor's policy. Evaluation IDs0..255 use
+phases120/121/122. Training permutations use NumPy default_rng/PCG64 SeedSequence
+`[order_seed,90,block,stage,epoch]`, identical sequence-position order across arms; no hidden
+shared-data substitution. Save separate prefix, O-roll-in, BC-roll-in and each merged dataset,
+with provenance/context IDs and hashes, and initial/stage1/final model+Adam checkpoints.
+
+H96, float32 CPU, one Torch/BLAS thread, batch16 collection/evaluation and batch64 full-sequence
+learning, Adam lr.001 with default remaining parameters, gradient clip1,40+40 epochs and
+continuous optimizer remain fixed. Each fit has320+640 updates and5898240 optimization rows.
+Four fits total3840 updates/23592960 rows. Collection uses2×(256+256+256)×96=147456 team
+ticks; evaluation uses2×4×256×96=196608. Eight stage-endpoint diagnostics use589824 rows.
+Distinct calibration contexts are2×(256prefix+256shared-roll-in+256eval)=1536,6144 lawful
+single-agent moves and1536 closed-form posterior fits. The conservative model-branch bound
+is402653184; measure actual roots/particles/transitions rather than substitute this bound.
+
+Track physical batch cost separately from per-method acquisition/training/deployment cost.
+Each student is charged the **full** required shared teacher prefix acquisition and calibration,
+its own labeled roll-in acquisition/calibration, its single fit and its evaluation/reload.
+Sharing inside this paired experiment does not halve a standalone method's required prefix.
+Teacher/AF have no student fit; retain their actual deployment and appropriate calibration
+cost. No online break-even or wall dominance follows from offline batching. Save batch/root
+counts, wall/CPU, I/O, peak single-process RSS and failure-time costs; support work is separate
+and may be only partially metered. Prior~95s fits/~175s acquisition/~64s deployment are rough
+historical estimates; new complete wall time is unknown.
+
+Use configured wsl_4070 and native supervisor/admission with output tag
+`b04_standalone_rollin_s926501_20260926`. Commit/push exact accepted inputs first, then one
+admitted immutable-snapshot launch. Continue the main authoring checkout; no new authoring
+branch/worktree. Retain accepted handles and use hmasd_wait; no automatic retry/resume after
+failure and no launch/Send from a wake alone. Count all started fits, including partial ones.
+
+### B04 L0 — bounded standalone-acquisition runner
+
+Implement only `experiments/candidates/planning_policy_compression/b04/study.py`, `b04/run.py`
+and focused tests under `tests/experiments/candidates/planning_policy_compression/b04/`.
+Use unchanged B01 helper behavior and B02/B03 patterns where suitable; do not modify frozen
+B01/B02/B03, shared host/teacher/learner helpers, other directions, records or Git/index.
+This is one direction-local disposable orchestration, not a generic runner refactor.
+
+The runner must enforce two blocks/two students, exact production addresses/counts, fresh
+output, four deployment arms and no formal claim. Admission must bind direction/source/tag
+and reject unadmitted execution. Keep dataset ownership explicit: common teacher prefix,
+matched but separate own-policy roll-ins, separate merged training sets. Save shared
+calibration once physically and attach required full cost to each standalone reading. Preserve
+paired initialization/order and continuous Adam0→320→960, training movement and partial
+optimizer state/trace costs after failure. Complete per-world native readings and all losses
+must reconcile with raw episodes. All students have zero deployment teacher queries/filter
+updates; P/AF retain their frozen behaviors. Existing teacher/feature evidence is reused.
+
+Use small distinct pytest-owned fixtures to test data separation/provenance, matched world
+addresses and shared calibration, frozen training/optimizer invariants, full rather than
+halved standalone acquisition charges, exact accounting/contrasts, failure retention and
+admission refusal. No production-seed/data training or evaluation as a test. Independent
+engineering review targets the new data/RNG/cost orchestration and saved-evidence path.
+Implementer returns diff/checks/risks; no science, result launch, Pro, children, record or Git
+writes. It is not alone in the checkout and must preserve concurrent edits. DM accepts the
+diff and publishes the precise inputs before execution. No result-bearing B04 work has
+started at this prospective-writing boundary.
