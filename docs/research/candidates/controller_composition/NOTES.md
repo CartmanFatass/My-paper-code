@@ -1772,3 +1772,37 @@ All three retained local checkpoint/config/summary identities and34 frozen depen
 verified, and node-staged checkpoint hashes match. Current published main routing at
 `b815b2b6bbf5a5f5176c2062384306b0b6bd5fa6` names this actual session
 `01a0db8f-1fab-7503-ae4b-feff2d4da8f5`; it does not change the adopted comparison or lead value.
+
+### B03 native admission and detached observation — 2026-09-26 03:06 UTC
+
+Reviewed executable source `69a3ded80e8a091db1d0537b1db99eca43f48ebb` passed the combined
+14-test B03/B02 suite on configured wsl_4070 in9.38s (14 upstream deprecation warnings),
+with284 nonproduction fixture team transitions. Its own source checkout was clean at the
+recorded SHA. Source preparation needed the configured interactive network shell; stalled
+preparation-only Git descendants were reconciled and stopped before scientific submission.
+The node's partial clone repeatedly reported the known historical bad-tree/repack warning.
+Selected source paths were therefore streamed from the exact published Git tree into this
+new owned checkout, a partially materialized old file restored to its exact tree bytes, and
+sparse/index consistency checked. No canonical file/index or old DM workspace was changed,
+no Git object cleanup occurred, and this is not a repair claim about the old repository.
+
+The single submitted scientific request reached **native accepted/running**. See the
+[launch manifest](../../../../runs/controller_composition/b03_partner_replication_20260925/launch-manifest.json),
+[fresh actual-node memory admission](../../../../runs/controller_composition/b03_partner_replication_20260925/admission-preflight.json),
+[configuration](../../../../runs/controller_composition/b03_partner_replication_20260925/config.json)
+and [initial launch status](../../../../runs/controller_composition/b03_partner_replication_20260925/launch-status.json).
+All four copies were verified byte-for-byte against node SHA256. The outer supervisor's
+exit0 was handle delivery; the native runner and supervisor remained alive with matching
+identities and consistent records. The first scientific progress reading had B1/F2 rollout1
+complete and rollout2 collecting, no completed fit/cell, no exit witness or final summary.
+Actual config retains both declared block seeds/worlds, F2/M, all19 cells and the fixed recipe.
+
+`tools/hmasd_wait.py` now observes that same operation in this session, generation1. Its first
+request was rejected before registration because SSH was not an absolute executable path;
+the corrected `/usr/bin/ssh` request registered, and drain verified an accepted/running job
+with zero observation errors. Private request is under this checkout's
+`temp/directions/controller_composition/b03_wait_request.json`; default session state is
+`/home/fires/.local/state/hmasd-wait/01a0db8f-1fab-7503-ae4b-feff2d4da8f5`.
+At a bounded checkpoint rearm this handle only; completion requires collection, integrity
+checking and the full prospective scientific reading. No worker restart, Send, extra fit,
+intermediate selection or main/index progress edit accompanies this running observation.

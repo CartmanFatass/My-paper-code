@@ -1,0 +1,11 @@
+{
+  "claim_key": "413a6b8d22e7376b712ca31e92cc0b9449d448c5e60642e4f69ff9b41751c82e",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/413a6b8d22e7376b712ca31e92cc0b9449d448c5e60642e4f69ff9b41751c82e.json",
+  "manifest_ref": "/home/wu/hmasd-worktrees/controller-composition-b03-20260925/runs/controller_composition/b03_partner_replication_20260925/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/413a6b8d22e7376b712ca31e92cc0b9449d448c5e60642e4f69ff9b41751c82e.json",
+  "pid": 690720,
+  "runner_pid": 690721,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-26T03:05:38.833403Z"
+}
