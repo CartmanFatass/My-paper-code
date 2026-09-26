@@ -102,7 +102,11 @@ def training_curve(train_dir):
             keep = {k: ev.get(k) for k in ("rollout", "transitions", "lane_native_J", "lane_qos_per_step",
                                             "shield_mapping_share", "f_mode_uav_step_share",
                                             "live_lanes_at_boundary", "collection_seconds", "update_seconds",
-                                            "action_entropy", "discoverer_policy_loss", "discoverer_value_loss")}
+                                            "shield_entries", "shield_exits")}
+            # PPO statistics are nested under "ppo" in the rollout record (training.py PPO_UPDATE_KEYS)
+            ppo = ev.get("ppo") if isinstance(ev.get("ppo"), dict) else {}
+            for k in ("action_entropy", "discoverer_policy_loss", "discoverer_value_loss", "approx_kl", "clip_fraction"):
+                keep[k] = ppo.get(k, ev.get(k))
             if isinstance(keep.get("lane_qos_per_step"), list) and keep["lane_qos_per_step"]:
                 keep["qos_per_step"] = st.mean(keep["lane_qos_per_step"])
             if isinstance(keep.get("lane_native_J"), list) and keep["lane_native_J"]:
@@ -118,6 +122,10 @@ def training_curve(train_dir):
         out["projected_total_hours_at_mean_rate"] = st.mean(walls) * 200 / 3600
         out["live_lane_boundaries"] = sum(1 for r in rows if (r.get("live_lanes_at_boundary") or 0) > 0)
         out["mapping_share_mean"] = mean(rows, "shield_mapping_share")
+        ent = [r["action_entropy"] for r in rows if r.get("action_entropy") is not None]
+        out["action_entropy_first_last"] = [ent[0], ent[-1]] if ent else None
+        out["zero_service_lane_rollouts"] = sum(1 for r in rows if isinstance(r.get("lane_qos_per_step"), list) and r["lane_qos_per_step"] and min(r["lane_qos_per_step"]) == 0.0)
+        out["qos_per_step_by_10_rollouts"] = [st.mean(x for r in rows[i:i + 10] for x in r["lane_qos_per_step"]) for i in range(0, len(rows), 10)]
         out["qos_per_step_first_five"] = [r.get("qos_per_step") for r in rows[:5]]
         out["qos_per_step_last_five"] = [r.get("qos_per_step") for r in rows[-5:]]
     return out
