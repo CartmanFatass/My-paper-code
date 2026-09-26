@@ -334,5 +334,648 @@
    "min": -37.074445657831475,
    "max": 11.825437109082731
   }
+ },
+ "traces": {
+  "definition": {
+   "common_early_window": "steps before the earlier first shield entry of the two compared arms in that world; team QoS/step averaged over it",
+   "arrival": "first step with horizontal distance to the UAV's target < 50 m",
+   "altitude": "mean z over normal-mode UAV-steps",
+   "entries": "rising edges of the F-mode flag"
+  },
+  "common_early_window": {
+   "Hspawn_vs_Hpark2": {
+    "median_length": 1069.5,
+    "min_length": 381,
+    "Hspawn": 0.08342362610346754,
+    "Hpark2": 0.35233537619933486,
+    "paired_b_minus_a": {
+     "n": 32,
+     "mean": 0.2689117500958673,
+     "paired_se": 0.015963552460005036,
+     "positive": 32,
+     "min": 0.12415313720703125,
+     "max": 0.4256214499473572
+    }
+   },
+   "H1_vs_H1r10": {
+    "median_length": 1331.0,
+    "min_length": 660,
+    "H1": 0.8089955542236567,
+    "H1r10": 0.8087636958807707,
+    "paired_b_minus_a": {
+     "n": 32,
+     "mean": -0.00023185834288597107,
+     "paired_se": 0.0015211819303525941,
+     "positive": 16,
+     "min": -0.02534174919128418,
+     "max": 0.01965230703353882
+    }
+   },
+   "Hspawn_vs_N": {
+    "median_length": 1029.5,
+    "min_length": 381,
+    "Hspawn": 0.08371022409482975,
+    "N": 0.20326927499445446,
+    "paired_b_minus_a": {
+     "n": 32,
+     "mean": 0.11955905089962471,
+     "paired_se": 0.019309661254676362,
+     "positive": 24,
+     "min": -0.0005789153510704637,
+     "max": 0.31370437145233154
+    }
+   },
+   "Hpark2_vs_N": {
+    "median_length": 1040.5,
+    "min_length": 381,
+    "Hpark2": 0.3524643909186125,
+    "N": 0.2049234012101806,
+    "paired_b_minus_a": {
+     "n": 32,
+     "mean": -0.14754098970843188,
+     "paired_se": 0.027769916970739855,
+     "positive": 6,
+     "min": -0.42306381464004517,
+     "max": 0.1331242322921753
+    }
+   }
+  },
+  "per_controller": {
+   "Hspawn": {
+    "mean_normal_mode_altitude_m": 98.93270301818848,
+    "shield_entries_per_world_from_traces": 113.125,
+    "F_mode_share_rows": 0.45809375,
+    "charging_uav_steps_rows": 1229.75,
+    "wait_ticks_rows": 6367.4375,
+    "arrival_step_median": 0.0,
+    "never_arrived": 0,
+    "uav_targets": 256
+   },
+   "Hpark2": {
+    "mean_normal_mode_altitude_m": 98.56307172775269,
+    "shield_entries_per_world_from_traces": 94.15625,
+    "F_mode_share_rows": 0.3641171875,
+    "charging_uav_steps_rows": 1237.59375,
+    "wait_ticks_rows": 4662.53125,
+    "arrival_step_median": 0.0,
+    "never_arrived": 0,
+    "uav_targets": 256,
+    "parked_uavs": {
+     "count": 64,
+     "arrival_step_median": 176.0,
+     "initial_distance_m_median": 5193.349853515625,
+     "never_arrived": 0,
+     "shield_entries_mean": 2.15625,
+     "shield_entries_max": 5,
+     "detail": [
+      {
+       "seed": 955001,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 3171.016357421875,
+       "arrival_step": 105,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955001,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 5383.61669921875,
+       "arrival_step": 178,
+       "shield_entries": 3
+      },
+      {
+       "seed": 955002,
+       "uav": 6,
+       "station": 0,
+       "initial_distance_m": 3299.769287109375,
+       "arrival_step": 109,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955002,
+       "uav": 3,
+       "station": 1,
+       "initial_distance_m": 7173.67431640625,
+       "arrival_step": 238,
+       "shield_entries": 3
+      },
+      {
+       "seed": 955003,
+       "uav": 2,
+       "station": 0,
+       "initial_distance_m": 2562.487548828125,
+       "arrival_step": 84,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955003,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 5436.9462890625,
+       "arrival_step": 180,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955004,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 5748.78955078125,
+       "arrival_step": 650,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955004,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 5090.8916015625,
+       "arrival_step": 169,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955005,
+       "uav": 0,
+       "station": 0,
+       "initial_distance_m": 4759.1015625,
+       "arrival_step": 157,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955005,
+       "uav": 3,
+       "station": 1,
+       "initial_distance_m": 5953.94580078125,
+       "arrival_step": 197,
+       "shield_entries": 3
+      },
+      {
+       "seed": 955006,
+       "uav": 6,
+       "station": 0,
+       "initial_distance_m": 3557.113525390625,
+       "arrival_step": 117,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955006,
+       "uav": 3,
+       "station": 1,
+       "initial_distance_m": 4622.37060546875,
+       "arrival_step": 153,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955007,
+       "uav": 0,
+       "station": 0,
+       "initial_distance_m": 3736.991455078125,
+       "arrival_step": 123,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955007,
+       "uav": 1,
+       "station": 1,
+       "initial_distance_m": 6445.63671875,
+       "arrival_step": 214,
+       "shield_entries": 4
+      },
+      {
+       "seed": 955008,
+       "uav": 2,
+       "station": 0,
+       "initial_distance_m": 2873.990966796875,
+       "arrival_step": 95,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955008,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 7552.43359375,
+       "arrival_step": 251,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955009,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 4684.6748046875,
+       "arrival_step": 155,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955009,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 6463.75146484375,
+       "arrival_step": 214,
+       "shield_entries": 4
+      },
+      {
+       "seed": 955010,
+       "uav": 0,
+       "station": 0,
+       "initial_distance_m": 1872.22900390625,
+       "arrival_step": 61,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955010,
+       "uav": 3,
+       "station": 1,
+       "initial_distance_m": 6326.6044921875,
+       "arrival_step": 210,
+       "shield_entries": 5
+      },
+      {
+       "seed": 955011,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 5632.27099609375,
+       "arrival_step": 594,
+       "shield_entries": 3
+      },
+      {
+       "seed": 955011,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 5673.994140625,
+       "arrival_step": 188,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955012,
+       "uav": 0,
+       "station": 0,
+       "initial_distance_m": 5582.4697265625,
+       "arrival_step": 481,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955012,
+       "uav": 3,
+       "station": 1,
+       "initial_distance_m": 5919.29931640625,
+       "arrival_step": 196,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955013,
+       "uav": 6,
+       "station": 0,
+       "initial_distance_m": 5035.00390625,
+       "arrival_step": 884,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955013,
+       "uav": 7,
+       "station": 1,
+       "initial_distance_m": 5130.62646484375,
+       "arrival_step": 170,
+       "shield_entries": 4
+      },
+      {
+       "seed": 955014,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 3302.52587890625,
+       "arrival_step": 109,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955014,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 5871.34326171875,
+       "arrival_step": 195,
+       "shield_entries": 5
+      },
+      {
+       "seed": 955015,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 2405.630859375,
+       "arrival_step": 79,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955015,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 3928.52490234375,
+       "arrival_step": 130,
+       "shield_entries": 4
+      },
+      {
+       "seed": 955016,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 6232.4658203125,
+       "arrival_step": 923,
+       "shield_entries": 5
+      },
+      {
+       "seed": 955016,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 4847.123046875,
+       "arrival_step": 160,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955017,
+       "uav": 6,
+       "station": 0,
+       "initial_distance_m": 3044.8955078125,
+       "arrival_step": 100,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955017,
+       "uav": 7,
+       "station": 1,
+       "initial_distance_m": 6470.99462890625,
+       "arrival_step": 215,
+       "shield_entries": 3
+      },
+      {
+       "seed": 955018,
+       "uav": 2,
+       "station": 0,
+       "initial_distance_m": 4160.89501953125,
+       "arrival_step": 138,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955018,
+       "uav": 1,
+       "station": 1,
+       "initial_distance_m": 5487.66064453125,
+       "arrival_step": 182,
+       "shield_entries": 4
+      },
+      {
+       "seed": 955019,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 3559.378662109375,
+       "arrival_step": 117,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955019,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 6530.728515625,
+       "arrival_step": 217,
+       "shield_entries": 5
+      },
+      {
+       "seed": 955020,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 3787.099365234375,
+       "arrival_step": 125,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955020,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 6495.7265625,
+       "arrival_step": 215,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955021,
+       "uav": 0,
+       "station": 0,
+       "initial_distance_m": 5792.75,
+       "arrival_step": 869,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955021,
+       "uav": 3,
+       "station": 1,
+       "initial_distance_m": 5598.43505859375,
+       "arrival_step": 185,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955022,
+       "uav": 6,
+       "station": 0,
+       "initial_distance_m": 2913.476318359375,
+       "arrival_step": 96,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955022,
+       "uav": 3,
+       "station": 1,
+       "initial_distance_m": 5540.4814453125,
+       "arrival_step": 184,
+       "shield_entries": 5
+      },
+      {
+       "seed": 955023,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 4449.5380859375,
+       "arrival_step": 147,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955023,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 6142.701171875,
+       "arrival_step": 204,
+       "shield_entries": 3
+      },
+      {
+       "seed": 955024,
+       "uav": 2,
+       "station": 0,
+       "initial_distance_m": 1887.7164306640625,
+       "arrival_step": 62,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955024,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 4573.498046875,
+       "arrival_step": 151,
+       "shield_entries": 3
+      },
+      {
+       "seed": 955025,
+       "uav": 2,
+       "station": 0,
+       "initial_distance_m": 4491.814453125,
+       "arrival_step": 149,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955025,
+       "uav": 1,
+       "station": 1,
+       "initial_distance_m": 5256.0732421875,
+       "arrival_step": 174,
+       "shield_entries": 4
+      },
+      {
+       "seed": 955026,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 2995.986572265625,
+       "arrival_step": 99,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955026,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 5565.576171875,
+       "arrival_step": 184,
+       "shield_entries": 5
+      },
+      {
+       "seed": 955027,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 5516.14013671875,
+       "arrival_step": 839,
+       "shield_entries": 4
+      },
+      {
+       "seed": 955027,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 5022.9013671875,
+       "arrival_step": 166,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955028,
+       "uav": 0,
+       "station": 0,
+       "initial_distance_m": 2778.357666015625,
+       "arrival_step": 91,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955028,
+       "uav": 3,
+       "station": 1,
+       "initial_distance_m": 5463.33984375,
+       "arrival_step": 181,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955029,
+       "uav": 0,
+       "station": 0,
+       "initial_distance_m": 3887.0107421875,
+       "arrival_step": 128,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955029,
+       "uav": 3,
+       "station": 1,
+       "initial_distance_m": 5889.8955078125,
+       "arrival_step": 195,
+       "shield_entries": 4
+      },
+      {
+       "seed": 955030,
+       "uav": 7,
+       "station": 0,
+       "initial_distance_m": 3308.173583984375,
+       "arrival_step": 109,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955030,
+       "uav": 5,
+       "station": 1,
+       "initial_distance_m": 5903.654296875,
+       "arrival_step": 196,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955031,
+       "uav": 2,
+       "station": 0,
+       "initial_distance_m": 5545.79931640625,
+       "arrival_step": 612,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955031,
+       "uav": 1,
+       "station": 1,
+       "initial_distance_m": 5967.35498046875,
+       "arrival_step": 198,
+       "shield_entries": 2
+      },
+      {
+       "seed": 955032,
+       "uav": 0,
+       "station": 0,
+       "initial_distance_m": 4566.11865234375,
+       "arrival_step": 151,
+       "shield_entries": 1
+      },
+      {
+       "seed": 955032,
+       "uav": 3,
+       "station": 1,
+       "initial_distance_m": 7792.0380859375,
+       "arrival_step": 259,
+       "shield_entries": 2
+      }
+     ]
+    }
+   },
+   "H1r10": {
+    "mean_normal_mode_altitude_m": 97.87066221237183,
+    "shield_entries_per_world_from_traces": 48.8125,
+    "F_mode_share_rows": 0.3363424479166667,
+    "charging_uav_steps_rows": 1421.40625,
+    "wait_ticks_rows": 4736.75,
+    "arrival_step_median": 183.0,
+    "never_arrived": 0,
+    "uav_targets": 256
+   },
+   "H1": {
+    "mean_normal_mode_altitude_m": 97.69655179977417,
+    "shield_entries_per_world_from_traces": 47.84375,
+    "F_mode_share_rows": 0.32455078125,
+    "charging_uav_steps_rows": 1372.0625,
+    "wait_ticks_rows": 4569.875,
+    "arrival_step_median": 183.0,
+    "never_arrived": 0,
+    "uav_targets": 256
+   },
+   "N": {
+    "mean_normal_mode_altitude_m": 67.94838833808899,
+    "shield_entries_per_world_from_traces": 80.25,
+    "F_mode_share_rows": 0.18420052083333333,
+    "charging_uav_steps_rows": 527.8125,
+    "wait_ticks_rows": 1405.6875
+   }
+  },
+  "Hspawn_zero_service_seeds": [
+   955004,
+   955016,
+   955021,
+   955027
+  ]
  }
 }

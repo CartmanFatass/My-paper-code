@@ -2565,3 +2565,29 @@ learner-checkpoint loader, per-checkpoint evaluation; implementer in flight from
 `temp/directions/energy_relay_benchmark/L0_b02_stage1_training.md`) and an engineering review
 before any launch; its cost (≈ 5 h serial node wall plus ≈ 1.4 h of checkpoint evaluations) is
 reported to the owner with the launch record.
+
+### Addendum to the Stage 0 item 2 entry (same day, after a reviewer pass on the wording and the record)
+
+1. **Narrowing.** "A large part of any S7 controller's whole-episode service on these worlds is
+   produced by the shield's station visits" over-reaches: H_central's own table row goes .811 before
+   the first entry to .715 after the first input, so the shield lowers its service. The statement
+   holds for the idle reference (H_spawn: .083 → .350) and for N (.231 → .449), not for "any"
+   controller. Read it as: on an idle or poorly deployed team the shield's station visits produce
+   most of the service; on a deployed team they cost service.
+2. **Parked UAVs, measured on the 955xxx traces (not the 990001 probe):** the 64 parked UAVs of
+   H_park2 enter the shield 2.16 times each on average (maximum 5), arrive at their station
+   waypoint at a median 176 steps from a median 5,193 m, none fails to arrive. "About once each"
+   in the entry above came from the probe and is replaced by these numbers.
+3. **Declared trace readings now reproducible:** `experiments/candidates/energy_relay_benchmark/b01/stage0_trace_checks.py`
+   (committed with this addendum) writes the common early windows (H_park2 − H_spawn +.269, SE .016,
+   32/32; H_central@10 − H_central −.000, SE .002; N − H_spawn +.120; N − H_park2 −.148), arrivals,
+   normal-mode altitude, F-mode share, charging state and the parked-UAV entries into
+   `b02_stage0_readings.json` under `traces` (regenerated).
+4. **S0-3 is a cross-run comparison** (H_central from the B01 run at `e1fdbe72f`, H_central@10 from
+   `e5857e0c2`). Direct check: H1 (period 30, central information) re-evaluated locally on world
+   955001 at the current tree for the full 3,000 steps equals B01's stored H1 output for that world
+   in all 61 value fields of the row (QoS/step .842532, J 2480.8156, costs, events, counters) and in
+   all 15 stored per-step arrays (positions, targets with NaN positions equal, modes, batteries,
+   margins, station fields, guard counters); the only differences are fields that did not exist at
+   B01 time (the five position diagnostics) or that `evaluate_task` adds after `evaluate_world`.
+   S0-3 therefore compares like with like; the common-window −.000 says the same.
