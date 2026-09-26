@@ -2451,3 +2451,39 @@ launches when its code passes the b01 and b06 suites; readings S0-2 and S0-3 as 
 declaration gains the evaluation-mode axis (deterministic and one sampled draw per checkpoint);
 its engineering (training runner, SET loader, review) is scoped in parallel and no fit is launched
 by this entry.
+
+### Launch record: Stage 0 item 2, three fixed references (`b02_s0_refs_a01`, 2026-09-26)
+
+Inputs commit `e5857e0c2a21e6b69229b7b014fb154cef289e90` (phase `stage0-references`, never part of
+`--phase all`): `Hspawn` (every UAV holds a 100 m waypoint over its own reset xy, decoded from the
+reset legal observation), `Hpark2` (as Hspawn, except station 0 then station 1 each take the nearest
+remaining UAV at reset by horizontal distance, ties to the lower index, target = the station xy from
+the energy suffix; `park_assignment` recorded per row), `H1r10` (H1 with `replan_period` 10, ground-
+truth plan inputs as in the grid); production shield (0, .05) and guard; worlds 955001–955032; 96
+episodes; H1's movement primitive (100 m, 30 m/s, 5 m/s vertical cap); the fixed controllers plan
+once at step 0 and never replan, so a UAV released by the shield resumes its waypoint. Tests on the
+committed tree: b01 45 passed (rerun by the DM), `uav_service_auxiliary/b06` 11 passed 2 skipped
+(CUDA); H1/H2/H3/Hlocal rows, per-step arrays and params records verified identical to `8d88f72d0`
+on world 955001 (H = 70, three replans). Implementer deviations accepted: `replan_period` already
+existed on `HeuristicParams`; "nearest" is horizontal distance (all UAVs reset at one altitude);
+fixed rows report `replans = 1`; no arrival-time field (derivable from `target_xy` and `own_xyz` in
+the traces); the implementer additionally ran five full-horizon episodes locally on seed 990001
+(outside every registered range) for mechanics only, reading no J or QoS — recorded here as a
+deviation from the scope note, not as evidence. Admission launch from the node
+(`launch_phase.sh e5857e0c2 b02_s0_refs_a01 stage0-references 8 2`): `acceptance: accepted`,
+`accepted_at 2026-09-26T17:34:27Z`; operation ref
+`/home/wu/projects/HMASD/.git/hmasd-admission/e94bf1fe5c6b52992a1e014ac012df4c48d1073bd5f8155eaf9279b337b73354.json`
+(claim key `e94bf1fe…b73354`); outputs under
+`/home/wu/projects/HMASD/runs/energy_relay_benchmark/b02_s0_refs_a01/` (panels
+`stage0-references/panels/{Hspawn,Hpark2,H1r10}_e0.00_x0.05.json`, traces, `summary.json`); command
+sha256 `36e8fd8c1be50f0cb7ddfac790d0dc26d2a72ad2316d317bb05257996f77eb63`; supervisor pid 723493,
+runner pid 723494; 8 workers × 2 threads, CPU; ≈ 20 min by the sampled-action run's throughput.
+Readings S0-2 and S0-3 as declared, with the reader already committed at `0376dc5b5` (no change).
+Known mechanics to report beside S0-2, from the implementer's local probe (mechanics only): under the
+production shield a fixed-waypoint UAV released at return margin .05 about 2 km short of its
+station turns back to its waypoint, re-enters within ≈ 16 steps and gains ≈ 300 m per cycle until it
+docks (dozens of entries per world; H1 cycles less because a UAV in F mode at a replan receives no
+target and holds after release). This oscillation is the declared package (fixed target + production
+shield), the same shield N faces (N: ≈ 80 entries per world in B01); it is reported with the result,
+not removed before it. Observation: detached poller every 5 minutes plus a background waiter with a
+native return; only health fields are observed before the terminal state.
