@@ -803,3 +803,33 @@ this accepted implementation before requesting one native B02 launch; use the ex
 remote author/output checkout and a new exact-SHA source snapshot, preserving B01 outputs.
 Native admission and actual-node resource checks still precede result execution. No B02
 result-bearing attempt has started at this acceptance boundary.
+
+## 2026-09-25 — B02 accepted; fixed confirmation in progress
+
+The [native manifest](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/launch-manifest.json)
+binds the single accepted B02 request to the published implementation and retained source
+snapshot. Its [initial native status](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/native-status-initial.json)
+agrees on admission and live supervisor/runner identities; the
+[actual-node preflight](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/admission-preflight.json)
+passed. The copied [configuration](../../../../runs/planning_policy_compression/b02_confirm_s925951_20260925/config.json)
+matches all five frozen seed tuples, 40+40 epochs, CPU float32, batch16 and one-thread settings.
+Training has begun; the initial status is a historical progress sample, not an endpoint.
+The outer configured supervisor's exit zero acknowledges admission only. No scientific
+acceptance or primary verdict is recorded while the batch is running.
+
+Execution preparation synchronized only this direction's remote runtime state field from
+exploring to the published confirming value; all other remote control text and its index
+were preserved. The local canonical checkout/index was untouched. The first control-text
+read stalled on a missing partial-clone object without the configured network environment.
+Only its owned Git fetch was terminated; the helper then failed before writing or launching.
+The configured network shell fetched the same published text and completed the narrow sync.
+Existing remote auto-GC warnings about missing historical tree
+`9e40125ee3e24973b69754649226d18847b45862` remain unrepaired; this is not a repository-wide
+integrity claim. The requested source snapshot and published control were subsequently
+accepted by the native kernel. This support episode started zero scientific fits and did
+not repeat an accepted scientific request.
+
+Observe the accepted operation with the task-local repository controller, keeping the same
+handle through checkpoints or errors. Read every final native artifact, preserve and verify
+the raw outputs, then apply the prewritten sign rule and separately judge complete utility
+and cost. No early score-based change, replacement seed or automatic extension is permitted.

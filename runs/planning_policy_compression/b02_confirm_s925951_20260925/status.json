@@ -1,0 +1,17 @@
+{
+  "blocks_completed": 0,
+  "calibration_contexts": 512,
+  "calibration_fits": 512,
+  "calibration_moves": 2048,
+  "collection_team_ticks": 38400,
+  "completed_batches": 25,
+  "current_block": 0,
+  "evaluation_team_ticks": 0,
+  "executed_collection_team_ticks": 38400,
+  "executed_evaluation_team_ticks": 0,
+  "optimizer_updates": 640,
+  "policy_fits_completed": 0,
+  "policy_fits_started": 2,
+  "processed_agent_time_rows": 3932160,
+  "state": "RUNNING"
+}

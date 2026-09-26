@@ -1,0 +1,66 @@
+{
+  "batch": 16,
+  "block_model_seeds": [
+    926151,
+    926152,
+    926153,
+    926154,
+    926155
+  ],
+  "block_seeds": [
+    925951,
+    925952,
+    925953,
+    925954,
+    925955
+  ],
+  "collect_phases": [
+    70,
+    71,
+    72
+  ],
+  "device": "cpu",
+  "dtype": "float32",
+  "epochs": [
+    40,
+    40
+  ],
+  "evaluation_contexts": 256,
+  "evaluation_model_seeds": [
+    926161,
+    926162,
+    926163,
+    926164,
+    926165
+  ],
+  "evaluation_phases": [
+    80,
+    81,
+    82
+  ],
+  "evaluation_seeds": [
+    925961,
+    925962,
+    925963,
+    925964,
+    925965
+  ],
+  "frozen_b01_source_sha": "a576d6b6c830d712703ae069f91f74a57485e264",
+  "horizon": 96,
+  "host": "LAPTOP-U9TDKC8A",
+  "initial_contexts": 256,
+  "launch_sha": "443d392ec47a3e53652114d28084d48ce1e5d9e2",
+  "nominal_receiver_probability": 0.75,
+  "numpy": "1.26.3",
+  "parameter_count": 27329,
+  "particles": 32,
+  "rollout_contexts": 128,
+  "source_asset": "planning_policy_compression/b01",
+  "threads": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "torch": "2.7.0+cu118",
+  "train_batch": 64
+}
