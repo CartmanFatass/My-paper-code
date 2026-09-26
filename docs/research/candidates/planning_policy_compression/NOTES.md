@@ -1379,3 +1379,21 @@ other rows/edits were preserved. No authoring worktree, data copy, new Pro reque
 message was created. The maintained launcher includes the published snapshot/admission lock
 repair. After committing/pushing these accepted inputs, invoke the configured supervisor and
 native immutable-snapshot launch once, then retain and observe that same operation reference.
+
+### 2026-09-26 — B03 native operation accepted; result reading pending
+
+Published input SHA `04d746dcc0e6feff11204a10c7f0aed87f0d7926` was admitted on wsl_4070 at
+2026-09-26T09:04:30Z. The [native manifest](../../../../runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/launch-manifest.json)
+retains the exact command, immutable source, operation reference and process identities;
+the [actual-node memory admission](../../../../runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/admission-preflight.json)
+passed its configured floor. `agent-task` completed the launcher with exit0; the native
+scientific child was independently observed **running**, with consistent records, at09:05:34Z.
+This is technical launch acceptance, not scientific completion or acceptance.
+
+The single durable bulk output remains
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/`.
+Only the compact manifest/preflight were collected here. Task-local hmasd_wait now observes
+that same native operation, with no duplicate launch, new Pro question or cross-task message.
+On its terminal wake, read all results and adverse outcomes, verify the changed numerical
+path against saved outputs, apply the fixed prospective reading, publish the owned results,
+and reclaim only the exact inactive native source snapshot after evidence verification.

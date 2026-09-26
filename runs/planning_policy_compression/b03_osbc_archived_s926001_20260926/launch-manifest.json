@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-26T09:04:30.318064Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4769d18a1e88433d8c830d359513fc51/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4769d18a1e88433d8c830d359513fc51/experiments/candidates/planning_policy_compression/b03/run.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926",
+    "--data",
+    "/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925/raw/block0_training.npz",
+    "--launch-sha",
+    "04d746dcc0e6feff11204a10c7f0aed87f0d7926",
+    "--seed",
+    "926001"
+  ],
+  "claim_key": "1d338b3fa598b4fad79a8dd2ae3ac9fdc7aa6cd1a037e856bee9eecaf369b50a",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/1d338b3fa598b4fad79a8dd2ae3ac9fdc7aa6cd1a037e856bee9eecaf369b50a.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4769d18a1e88433d8c830d359513fc51/experiments/candidates/planning_policy_compression/b03/run.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926",
+    "--data",
+    "/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925/raw/block0_training.npz",
+    "--launch-sha",
+    "04d746dcc0e6feff11204a10c7f0aed87f0d7926",
+    "--seed",
+    "926001"
+  ],
+  "command_sha256": "3b9096c74aa503929ca27fe9cfa91d0ca525abbc44dcfe324054ce3690099a60",
+  "control_observation": {
+    "observed_at": "2026-09-26T09:04:30.202387Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "04d746dcc0e6feff11204a10c7f0aed87f0d7926"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-26T09:04:30.212417Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4769d18a1e88433d8c830d359513fc51",
+  "direction": "planning_policy_compression",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/planning_policy_compression/b03/run.py",
+    "--data",
+    "/home/wu/hmasd-worktrees/ppc-b01-sept25/runs/planning_policy_compression/b02_confirm_s925951_20260925/raw/block0_training.npz",
+    "--launch-sha",
+    "04d746dcc0e6feff11204a10c7f0aed87f0d7926",
+    "--seed",
+    "926001"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/1d338b3fa598b4fad79a8dd2ae3ac9fdc7aa6cd1a037e856bee9eecaf369b50a.json",
+  "output_root": "/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926",
+  "preflight": "/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 702073,
+      "session_id": 702073,
+      "start_ticks": 76746852
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 702073,
+    "process_group_id": 702073
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 702074,
+      "session_id": 702073,
+      "start_ticks": 76746855
+    },
+    "pid": 702074,
+    "process_group_id": 702073,
+    "supervisor_pid": 702073
+  },
+  "schema_version": 1,
+  "sha": "04d746dcc0e6feff11204a10c7f0aed87f0d7926",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4769d18a1e88433d8c830d359513fc51",
+  "stderr": "/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/planning_policy_compression/b03_osbc_archived_s926001_20260926/stdout.log"
+}
