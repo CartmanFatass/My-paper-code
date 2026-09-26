@@ -21157,3 +21157,13 @@ Check the historical asset, legal channel/receiver path, prior complete Pro reas
 current ownership before fixing a prospective comparison. The old plan's 0-fit/24,576-step
 scale is a proposal, not a claim of present admission or verified runtime feasibility.
 No C2 result-bearing operation or new fit is authorized by the observation wake itself.
+
+
+## 2026-09-25 — Owner-requested worktree data retention
+
+Engineering preservation only; no new fit, scientific reading or direction-state change. The owner requested external data retention before legacy worktree reclamation. Original files and frozen run records remain unchanged.
+
+- Source checkout `7fef` at `eba71809c400d425dcc0db2339242b8080d5c8fc`: 18,100 retained file/link entries, 17,880,211,896 regular-file bytes. External package on `Jacob`: `/home/fires/hmasd-artifacts/worktree-retention/7fef-20260925`. Manifest SHA-256: `6c4ee101021ed87b32d51b386d677c91e4c563115d69d6eb50df0cd5e73c6abb`.
+  This legacy package uses `worktree.tar` (17,912,698,880 bytes, SHA-256 `5155b2f5ddf7d7d17bd2a17910339eed84f90482aad2e6afdf9287f1fb39814b`); every archived member was checked against the original file hash/mode or link target. It preserves the old internal pytest alias without dereferencing it. Verify the archive digest before recovery and restore only to an intended isolated checkout; original absolute link targets may require restoring the original path.
+
+Git refs containing the recorded source commit remain in the shared repository; the data package is not a Git history backup. Native claim/manifest/witness bytes and partial/adverse outputs are retained. Before retiring the checkout, reconcile any accepted handles and use native worktree archival; native status recovery can require restoration of the old absolute path. This local disk copy separates data from checkout lifetime, but is not an off-host backup.

@@ -6784,3 +6784,15 @@ physics, change a reward, present a new architecture or wait for Claude. This is
 scientific proposal, not an external producer dependency or a standing approval request.
 The owner has already authorized independent research; ownership and the evidence remain here.
 This session neither assigns a replacement direction nor messages Root or any other App task.
+
+
+## 2026-09-25 — Owner-requested worktree data retention
+
+Engineering preservation only; no new fit, scientific reading or direction-state change. The owner requested external data retention before legacy worktree reclamation. Original files and frozen run records remain unchanged.
+
+- Source checkout `fsd-b` at `efd26695a9a223f953f614afdaafe87db9c8f92a`: 1,158 retained file/link entries, 223,255,909 regular-file bytes. External package on `Jacob`: `/home/fires/hmasd-artifacts/worktree-retention/fsd-b-20260925`. Manifest SHA-256: `eaffe6f9282e420521f6add898a345effae7df62710c5dd24544880bc45c3862`.
+  Every retained file was independently checked for SHA-256, byte count and mode; run `scripts/hmasd_worktree_data.py verify --dest <package>` with the configured control-plane interpreter. Files remain at `files/<original-relative-path>`.
+- Source checkout `b-unknown-joint-law` at `74fe267aa166299d93a03566e5f0ab149ff2b12d`: 1,188 retained file/link entries, 214,575,743 regular-file bytes. External package on `Jacob`: `/home/fires/hmasd-artifacts/worktree-retention/b-unknown-joint-law-20260925`. Manifest SHA-256: `6e72a3fb3f5d28f57594c5763cd41ea5c8a658f19556ecd6fd733419b6292bdb`.
+  Every retained file was independently checked for SHA-256, byte count and mode; run `scripts/hmasd_worktree_data.py verify --dest <package>` with the configured control-plane interpreter. Files remain at `files/<original-relative-path>`.
+
+Git refs containing the recorded source commit remain in the shared repository; the data package is not a Git history backup. Native claim/manifest/witness bytes and partial/adverse outputs are retained. Before retiring the checkout, reconcile any accepted handles and use native worktree archival; native status recovery can require restoration of the old absolute path. This local disk copy separates data from checkout lifetime, but is not an off-host backup.

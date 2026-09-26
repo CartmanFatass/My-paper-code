@@ -2349,3 +2349,13 @@ from our fixed-N training-layout contrast. The present closure and frozen C01 re
 no new question, experiment or takeover is selected here. Main publication preserves the
 new project plan and its historical archive, updating only this direction's actual result,
 standing, routing and directly affected spatial interpretation.
+
+
+## 2026-09-25 — Owner-requested worktree data retention
+
+Engineering preservation only; no new fit, scientific reading or direction-state change. The owner requested external data retention before legacy worktree reclamation. Original files and frozen run records remain unchanged.
+
+- Source checkout `c2a5` at `649030b9bb5c5c677c7deae393cb4a723c802c9c`: 2,591 retained file/link entries, 7,126,108,268 regular-file bytes. External package on `Jacob`: `/home/fires/hmasd-artifacts/worktree-retention/c2a5-20260925`. Manifest SHA-256: `c8f7adc2aa7f67111809f0f370db98538a7842abec067a6c03a961b38ae8a868`.
+  Every retained file was independently checked for SHA-256, byte count and mode; run `scripts/hmasd_worktree_data.py verify --dest <package>` with the configured control-plane interpreter. Files remain at `files/<original-relative-path>`.
+
+Git refs containing the recorded source commit remain in the shared repository; the data package is not a Git history backup. Native claim/manifest/witness bytes and partial/adverse outputs are retained. Before retiring the checkout, reconcile any accepted handles and use native worktree archival; native status recovery can require restoration of the old absolute path. This local disk copy separates data from checkout lifetime, but is not an off-host backup.

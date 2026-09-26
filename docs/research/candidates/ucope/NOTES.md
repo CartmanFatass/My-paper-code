@@ -6820,3 +6820,13 @@ The complete-data author branch stays recoverable locally; its unpushed data com
 intentional. No native run, adviser response or data transfer remains pending. Independently
 publish UCOPE's scoped index update against the actual accessible result commit after this
 text publication is verified. There is no automatic background retry or new monitoring task.
+
+
+## 2026-09-25 — Owner-requested worktree data retention
+
+Engineering preservation only; no new fit, scientific reading or direction-state change. The owner requested external data retention before legacy worktree reclamation. Original files and frozen run records remain unchanged.
+
+- Source checkout `1275` at `473895f07a97ffc97cab4b5aed0dfed301c94576`: 3,918 retained file/link entries, 3,309,616,718 regular-file bytes. External package on `Jacob`: `/home/fires/hmasd-artifacts/worktree-retention/1275-20260925`. Manifest SHA-256: `18e7c7ca891980d64b86ce2ac2df574325ed503bde50052335210a0aaeb0787b`.
+  Every retained file was independently checked for SHA-256, byte count and mode; run `scripts/hmasd_worktree_data.py verify --dest <package>` with the configured control-plane interpreter. Files remain at `files/<original-relative-path>`.
+
+Git refs containing the recorded source commit remain in the shared repository; the data package is not a Git history backup. Native claim/manifest/witness bytes and partial/adverse outputs are retained. Before retiring the checkout, reconcile any accepted handles and use native worktree archival; native status recovery can require restoration of the old absolute path. This local disk copy separates data from checkout lifetime, but is not an off-host backup.
