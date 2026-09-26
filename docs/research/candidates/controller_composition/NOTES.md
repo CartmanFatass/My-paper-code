@@ -1602,3 +1602,133 @@ coordination question open. F1/F2/M checkpoints, old sources and every positive/
 are retained. There is no active operation, pending Pro answer, selected successor or external
 dependency being used to defer a decision. Publish the completed result, affected shared
 understanding and this bounded stopping scope under this direction's own standing.
+
+## 2026-09-25 — B03 independent partner-exposure replication: prospective comparison and L0
+
+The new independent DM adopts the owner-selected replication in the complete
+[programme question, Answer and Root Decision](../../archive/2026-09-25/RESEARCH-decision-learning-adopted.md).
+I read that complete consultation, B01's matrix and B02's full partner-training advice,
+prospective implementation and complete result/closure. The old operations are terminal;
+this is a new study, not recovery or extension of B02. Authoring is confined to
+`/home/fires/.codex/worktrees/fsd-c/hmasd-wsl`, branch
+`codex/partner-exposure-replication-sept25`. No App messages or old-operation restarts.
+
+Current published main `d5261580dcf6d7a23da9473a4ad4f175c312e6db`, RESEARCH sections 4, 6,
+8 and Current research plan, distinguishes finite learning from policy-class/information
+limits, conditional world uncertainty from training variation, and partner exposure from
+pure coordination mechanisms. These distinctions select unchanged independent training
+replication rather than another old-weight panel or a simultaneous recipe modification.
+B02's M−F2 vector was negative on partners1/2 but positive on partner3; ordinary own learning
+was useful throughout. B01 did not establish interchangeable controllers or a uniform
+same-source penalty. The simplest competing explanation for B02 is a particular training
+realization's response quality, not a reproducible partner-conditioned tradeoff.
+
+I reuse the programme Answer's actual two-block F2/M comparison and outcome branches under
+constitution section 5: its decision, evidence and premises remain applicable. No fresh Pro
+Send is needed for this implementation. The former DM's decision to stop then remains valid
+historical evidence; the new scientific use is recurrence of the positive/negative vector.
+
+### Fixed exposure and reading, before any B03 result
+
+Object `controller_composition_b03`, tag `b03_partner_replication_20260925`. Two new independent
+training blocks, each F2 then M, run sequentially as one admitted batch. Within each block
+the actual initial parameters, normalizers, optimizer state, learner sampling streams and
+outcome-independent physical reset worlds match. Each fit has private mutable state; the
+learner sampler persists across its 45 rollouts. Between blocks all learner initialization,
+action/sampler and world random realizations are new. Fixed addresses are:
+
+| Block | Learner seed | M assignment seed | Training world base |
+| --- | ---: | ---: | ---: |
+| B1 | 92561001 | 92561002 | 92570000 |
+| B2 | 92562001 | 92562002 | 92580000 |
+
+For rollout r=1..45 and lane l=0..15, constructor/reset seed is base+100*r+l;
+construction then explicit `reset(seed=...)` is unchanged from B02. These seed ranges are
+disjoint from B01/B02 and the new evaluation panel. M's separate NumPy generator shuffles
+exactly eight source1 and eight source2 lanes per rollout; source stays fixed for the episode.
+F2 always uses source2. The original source runtime construction seed 92526051 remains:
+all source state is strictly restored and deterministic, and construction/inference preserve
+the learner RNG. This constant is not an independent training replicate.
+
+Keep original S1 N6/c10, learner original roles0–2, frozen responsive partners roles3–5,
+LOCAL1 actor104/full-N6 critic133, hidden/GRU256, CPU float32/four torch threads, raw Gaussian
+training actions with native clipping and deterministic clipped evaluation. Preserve gamma.99,
+GAE.95, entropy.05, learning rates1e-4, PPO clip.2, grad norm.5, ValueNorm on and observation/
+state normalization off. No extra actor information, source labels or high-level/discriminator
+learning. Only executed learner rows enter GAE, advantage/ValueNorm statistics, sequence
+sampling, entropy and both optimizer losses. Physical reward scaling stays N6.
+
+Each fit retains 45×16×H500=360,000 training team steps, 15 PPO epochs and nominal four
+minibatches. Actual batch formation remains chunk10 and 32 valid learner sequences:
+2,400 sequences/epoch, 75 minibatches/epoch, 50,625 calls per actor/critic optimizer per fit.
+No changed learning horizon, checkpoint selection, ratio tuning or seed replacement.
+
+The new common evaluation panel is constructor worlds **92590000–92590031**, H500, constructor
+then unseeded reset as in B02. Each block's common initialization and F2/M final endpoints
+are evaluated on all three original partners. Evaluate old source3/source3 once on the same
+panel as a shared reuse reference: 18+1 cells, 608 episodes, **304,000 evaluation team steps**.
+All fits run regardless of scores; no initial/intermediate evaluation screens their admission.
+Strict restored runtime copies have no update/storage or normalizer mutation. Retain the
+three exact checkpoint/config/summary digests in B02 config and B01 source bindings; source3
+is training-excluded but previously observed, not a new partner draw or blind holdout.
+
+Primary readings are each block's complete three-partner vectors of M−F2 in J and served
+users/step, all absolute cell values and native components, each endpoint minus its own
+block's common initial cell, and each endpoint at partner3 minus the common old3/3 reference.
+Keep every world, J/service disagreement and adverse tail. H=Delta3−(Delta1+Delta2)/2 may be
+reported as descriptive arithmetic only; no new F1, specialization T or pooled score replaces
+the actual vector. Use 10,000 paired-world bootstrap draws from seed **92569999**, resampling
+each world's entire 19-cell/two-metric block together. Intervals are pointwise conditional on
+these weights/library/roles/law and exchangeable worlds, excluding training uncertainty.
+Two new training pairs are exploratory; neither episodes nor the old discovery block turn
+them into prospective three-seed confirmation. No equivalence or significance cutoff is added.
+
+If partner3 gains and partner2 costs recur together, strengthen the finite tradeoff explanation;
+do not promote M to a universal replacement. Reversal with useful own learning weakens preference
+for this exact exposure recipe. Broader gains supply a possible later confirmation question.
+Mixed or imprecise findings retain their unresolved scope, with no automatic seed/partner/panel
+extension. The new panel prevents reuse of the old evaluation as a new holdout, but changes of
+panel and training both differ from B02; only the two new blocks share this fixed panel. Their
+contrast cannot separate initialization, action sampling, optimizer order and training worlds.
+
+Cost declaration: **4 started fits**, 1,440,000 training plus 304,000 evaluation = **1,744,000
+team steps**; 180 rollout/update phases, 4.32M executed learner and 4.32M executed partner
+training rows, 202,500 actor and 202,500 critic optimizer calls. In the reused runtime path,
+expect 8.64M learner and 12.96M partner inferred training rows, 1.824M executed and 3.648M
+inferred evaluation rows. Record actuals. Original F2/M rates imply about91.75 minutes for
+training bodies only if reproduced, not a full quote; evaluation, import/init, save, inference,
+engineering, checks, review, collection and reading are additional. Old source and B02 fits
+remain historical cost. Single-process peak RSS is not additive per-fit resource demand.
+
+### L0 — reuse the accepted half-team path with explicit independent block identity
+
+Deliver a B03 runner/reducer/bindings under `experiments/candidates/controller_composition/b03/`,
+entry `scripts/run_controller_composition_b03.py`, and focused mirrored tests. A minimal
+backward-compatible extension of B02 helper arguments for learner seed/checkpoint object identity
+and evaluation learner configuration is allowed; B02's default path and frozen historical inputs
+remain unchanged. Prefer those explicit arguments to global monkeypatches or copying the full
+collector/update/evaluator. No shared learner, environment, frozen source bindings or launcher edits.
+The DM owns this NOTES and publication; the Implementer owns only this bounded code/test diff.
+
+Reuse genuine B02 collector, learner-only buffer/update and deterministic evaluator. Give blocks
+separate output/raw namespaces, optimizer/buffer/RNG instances and explicit metadata, preserving
+whole-run artifact locators. Check actual initial equality and physical reset identities within
+block, difference of initialization/world addresses across blocks, exact M8/8 assignment, source
+state, actual optimizer/inference counts and all19 cell identities. Every seed must reach model
+construction and sampler rather than merely labels/config JSON. Evaluation must preserve training
+RNG and restore the correct block/arm weights/normalizers. Snapshot metadata must identify B03.
+
+Required checks: tiny nonproduction real collector→GAE→sampler→optimizer for both arms and new
+seeds; B02 default-path regression without production worlds; complete synthetic19-cell reducer
+against independent arithmetic; admission-before-scientific-effects and partial failure retention.
+Reuse accepted checks of unchanged half-team/recurrent semantics. Reviewer independently examines
+the changed RNG, runner/evaluator, counts, artifacts and executable CLI; DM accepts after reading
+diff/checks. Tests own scratch under `temp/` and use worlds outside all production panels.
+
+Save compact config, per-fit/per-world readings, curves, counts, status and artifact hashes; retain
+raw trajectories/reset identities, sampler audits and initial/final checkpoints in durable node
+output with verified collection outside disposable checkouts. Preserve incomplete prefixes and
+actual failure counters; no retry/resume. Stop dependent work for an actual source/identity/resource
+conflict; no expanded framework or extra performance-screen fit. Prefer configured wsl_4070 with
+fresh native admission after source commit/push. The canonical node's known historical bad-tree
+repack warning remains an unresolved fact, not a claimed repair or blanket scientific blocker.
