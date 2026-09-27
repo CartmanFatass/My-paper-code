@@ -290,3 +290,409 @@ to buy now. This is an investment judgment, not proof that cooperative learning 
 No material disagreement remains over this disposition, and a second review or Pro round offers
 no distinct decision value here. B01+B02 imitation work has two completed fits and about
 111.61 minutes total runner wall; this unexecuted candidate adds no scientific execution cost.
+
+## 2026-09-27 — concrete successor comparison: learned values for a common transit library
+
+**Scientific-review proposal; no implementation or result execution selected by this entry.**
+New Root's published `d235d4e42` [four-DM plan](../../RESEARCH.md#current-research-plan) asks for
+one concrete learning/ordinary-planning comparison and an investment decision. The prior B01
+withdrawal remains in force. The applicable B02 and withdrawal reviews are reused; neither
+the original raw-data audit nor the old two-window experiment is repeated. The new comparison
+below changes the executable decision and learning relation, so it receives one focused section-5
+challenge before its disposition.
+
+### Question, ordinary references and actual decision
+
+Can a standard offline action-value learner improve complete native service over ordinary
+service-scored rolling movement/holding, when both receive the same central information and
+the same joint-motion options? A success would supply a useful data-trained ranking of this
+specific motion library and a reusable controller/evidence asset. It would not establish a new
+general MARL algorithm, a learned trajectory generator, a hierarchy/credit advantage or a causal
+long-horizon mechanism. This is a centralized joint-control learning question; there are no
+independently adapting low-level agents. It does not change Claude's fixed-label allocation or
+credit estimator.
+
+Use the repaired ordinary B04 implementation at
+`025350669bc5e8ab99fc71954f749ae47a6853e9`, in
+`energy_relay_availability/b04/transit_hold.py`. At every ten-second decision it generates the
+usual H1 six-service/two-relay targets and distance/hysteresis matching. Its candidate library is
+all-move plus one horizontal hold at the current position for each eligible assigned UAV, at
+most nine joint proposals. The other UAVs keep their assigned motion; the vertical controller
+continues normally. Hold proposals do not alter H1's target-continuation memory. The commitment
+lasts ten steps, with ordinary one-step go-to updates and the unchanged production return shield
+and native backhaul guard. Any active/entering shield falls back to all-move in every arm.
+The available action here is a joint ten-second movement/hold commitment, not a 300-second
+switch between two complete controller programs. It supplies no role replacement during shield
+takeover and must not be described as having tested that capability.
+
+The primary ordinary reference **P** is B04's feedback selector: compute the native static
+service score at current, nominal step-5 and nominal step-10 joint positions with current users
+held fixed and fresh association; choose the maximum `(q0 + 2*q5 + q10)/4`, strict ties all-move
+then lowest UAV index. It is already state-dependent, non-additive in joint service geometry,
+and refreshed at the same ten-step clock as the learner. It is not an oracle or an established
+best possible MPC method. More accurate dynamics, different lookahead and explicit search remain
+ordinary alternatives, but are not prerequisites for this narrow complete comparison.
+
+Because B04's own full utility result is still unread here, **H** = H_central@10/all-move is a
+second ordinary reference. Its established native competence must not be lost by only beating
+a potentially weak new selector. This extra reference costs 32 episodes and no fit; it is not
+an extra flat learned arm or a horizon ablation. No favorable B04 result is required to consider
+this design. The learned candidate must be useful against both specified ordinary choices.
+
+### Matched information and computation
+
+All three arms deliberately adopt the **H_central@10 contract**, replacing the withdrawn
+H_local proposal. They receive current global user/BS xy at ten-step boundaries, legal own-UAV
+positions/energy/availability and production shield modes, current H1 targets/history and time.
+They share the same target generator, eligible action library, refresh and execution rules.
+No raw SET `state`, true user velocities, future waypoints/RNG, live hidden association history
+or additional simulator fields enter the learner. The known static S2 radio/routing/demand model
+is used identically by P and the learner to produce all candidate scores. H can skip those scores
+because it always chooses all-move; its smaller computation is reported, not filled with dummy work.
+
+For a concrete reusable learner interface, the proposed per-candidate input has 250 fields:
+time fraction (1); normalized own xyz (24); each UAV's battery, availability, charging, returning,
+dock bit and return margin (48); legal station xy (4); central user xy (60) and BS xy (4);
+base H1 targets (16) and validity bits (8); shield modes (8); candidate hold one-hot, all-zero
+for all-move (8); candidate targets (16); nominal step-5/10 UAV xyz (48); q0/q5/q10/integrated
+score (4); and a missing-score bit (1). Invalid targets use the current position with a zero
+validity bit. Fallback contexts have one legal all-move option and zero/missing score fields.
+Positions use the fixed map/height units; other continuous coordinates and then all feature
+dimensions are standardized from collection contexts only, with constant-scale dimensions set
+to scale one. No test-panel statistics or post-action fields are used.
+
+These features are a lossy observed-state representation, not a demonstrated Markov state.
+The future user motion and association/charging history not encoded here limit Bellman
+interpretations. P sees the same permitted primitive inputs and computes the same model scores;
+the learner does not gain a new measurement channel. It adds offline experience and a learned
+continuation estimate, at an explicitly additional data/fit/inference cost.
+
+### One batch learner, fixed exposure and labels
+
+The concrete candidate **L** is a small shared candidate-value MLP (250→128→64→1, ReLU), trained
+from scratch on observed native ten-step transitions. Hidden weights use one declared random
+initialization; the last linear layer starts at zero. No BC, old policy checkpoint, actor or
+critic is warm-started. The normal tie rule uses P's score and then its deterministic ordering.
+There is no separate actor or learned low-level motion generator.
+
+Collect 64 fresh H3000 worlds, 300 consecutive ten-step macro-transitions each: **19,200
+transitions / 192,000 native environment steps**. At every nontrivial decision, an independent
+behavior RNG chooses P's action with probability .5 and a uniform legal candidate with probability
+.5. Record the actual mixture probability, candidate mask/features, chosen proposal, actual
+ten-step native reward sum and next context. Fallback has probability one for all-move.
+The policy RNG is separate from environment streams. No branching, teacher action label,
+synthetic reward, counterfactual return or evaluation-world fitting is used. Scorer copies must
+leave live state and all RNG streams unchanged.
+
+One persistent MLP/Adam training procedure runs **5,000 optimizer updates**, batch 256 sampled
+uniformly with replacement from the fixed collection, learning rate 1e-3, gradient norm cap 1,
+no weight decay/dropout/early stopping. A frozen target copy is refreshed every 100 updates.
+The target is
+
+`y = actual_native_J_over_10_steps / 10 + .97 * (1 - terminal) * max_valid_a Q_target(x_next, a)`.
+
+The reward division changes prediction units only; it does not alter native reward or evaluation.
+The discount is per ten-step commitment (effective scale about 333 seconds), not a 300-second
+observed-return label. Terminal H3000 transitions have zero continuation. Padding is excluded
+from the maximum; a terminal context needs no scorer call. This is one started learner fit,
+one initialization, 5,000 updates / 1,280,000 sampled transition exposures and 50 target-copy
+refreshes, with no independent refit hidden in the count. Save only the fixed final endpoint.
+Report actual parameter movement, finite checks, failures and the counts of multi-option versus
+forced transitions. They diagnose execution rather than gate a result into a positive reading.
+
+The nearest original bridge is batch fitted action-value learning from transition tuples,
+as set out in [Ernst, Geurts and Wehenkel, section 3](https://jmlr.org/papers/volume6/ernst05a/ernst05a.pdf).
+Here a persistent neural target-network procedure approximates that Bellman regression idea;
+it is not the paper's independently refitted tree algorithm or its convergence guarantee.
+The multi-UAV coupling enters the common native reward/next observation and joint candidate
+geometry. Finite coverage, bootstrap extrapolation and partial observation can defeat this
+construction; .5 exploration does not guarantee coverage of learned-policy visits. Its primary
+purpose is a complete utility test, not to identify which one of those limitations dominates.
+
+### Fixed evaluation and decisions it could change
+
+Evaluate final L, P and H on the same 32 fresh H3000 worlds, once per arm: **96 episodes /
+288,000 steps**. Provisional unused seed blocks are collection 29092701–29092764 and evaluation
+29102701–29102732, with fit seed 29092791; production binding and an exact integer exposure scan
+would be part of a selected contract. Use per-world collection RNG derived from the collection
+seed plus an independent fixed stream tag. Do not borrow B04's exposed worlds or any sealed
+historical holdout. No development evaluations, model selection or second initialization.
+
+The complete proposed batch is therefore **160 episodes / 480,000 native steps and one fit**.
+The 64 collection worlds, 19,200 dependent macro-transitions and 32 paired evaluation worlds
+are different sampling units; none is an independent training-seed replication.
+
+The primary reading is paired complete QoS/step and raw J for L−P, with L−H as the competence
+check. Report paired t31 descriptive intervals conditional on this one fit; all world rows,
+zero-service cases, return cost, minimum-battery/lowest-eight tail, fixed reserve exposure,
+cutoff/depletion, charging, guard/shield activity, actual holds and runtime remain visible.
+
+- If L exceeds both references by at least .03 mean QoS/step and has positive mean J differences,
+  with no additional cutoff/depletion or zero-service worlds, retain a conditional useful learned
+  ranking candidate. Any lower-battery or return-cost conflict still needs a stated use judgment;
+  the gate does not establish reliability, safety or confirmation. A further fit is a new choice.
+- If L only beats P but not H, reject it as an improvement over the competent ordinary portfolio.
+  It may expose P's tradeoff; that does not rescue the learned package automatically.
+- If L fails to improve native utility, end this fixed data/learner package. Finite optimization,
+  observed-state sufficiency and collection coverage remain limitations, without converting them
+  into an automatic diagnostic, extra seed, different discount or larger-network sequence.
+- A mean service/J gain with adverse failures or tails remains a conflict, not adoption by mean.
+  Technical failure or an incomplete panel is missing evidence, never a scientific negative.
+
+All three arms' actual choices occur every ten steps. Thus this avoids the old confounding of
+different target windows with the same 300-step program commitment. A win still combines learned
+score calibration, discounted continuation, native-reward weighting and offline data. It cannot
+be attributed uniquely to horizon length, nor promoted to a hierarchy/MARL mechanism claim.
+
+### Full marginal cost and feasible implementation boundary
+
+The old 70–97 minute quote does not price this scoring/three-arm design. A cost-only read of B04's
+completed **32 H_central reference worlds** on configured `local_linux` gives mean worker wall
+**168.173803 s** (range 144.658675–212.126331), mean worker CPU **160.660910 s**, peak worker RSS
+at most **388,504 KiB**, and raw output **55,887,377 bytes** in total. Source is the accepted
+`025350669...` B04 run's perworld file; this reading makes no paired B04 scientific claim.
+The candidate arm was incomplete in the inspected copy. These costs are host-specific and are
+not silently transferred to wsl_4070.
+
+| Cost component | Prospective amount / estimate |
+| --- | --- |
+| Native collection | 64 episodes / 192k steps; included in the total below, not counted twice. |
+| Native final evaluation | 3 × 32 episodes / 288k steps. |
+| Native base work | 160 × 168.174 worker seconds ≈ 7.47 aggregate worker-hours; about 3.74 h with two workers before added scoring/learning/recording. An estimate under comparable contention, not a guarantee. |
+| Static service scoring | 128 scored episodes (collection, P and L), at most 38,400 windows × 19 = 729,600 snapshots, 345,600 candidate plans. Earlier 8.1–13.4 ms technical snapshot timings imply 1.64–2.72 additional CPU-hours, about .82–1.36 h at two workers. H does not pay for unused scores. Actual fallback and shorter candidate sets reduce this bound. |
+| Fitting | One CPU fit / 5,000 updates; at most 1.28M chosen-feature rows and 11.52M next-candidate rows for target forward passes. No measured fit time yet; provisionally allow 5–20 minutes. No checkpoint is selected by wall time. |
+| Recording and preparation | Additional scoring-context storage/serialization, imports and admission: provisionally 15–30 minutes. A 250-field float32 matrix for every possible candidate at 19,200 collection states is at most 172.8 MB before metadata; store next-state references rather than duplicate it. Native raw traces scale to roughly 0.28 GB from the complete reference panel. One canonical evidence copy, with a planning allowance below 1 GB, subject to actual output accounting. |
+| Total scientific runner estimate | Approximately **5–6 hours on local_linux with two native workers**, including the above scoring, fit and recording allowances. Different node/load requires an explicit revised price before admission. This is not a runtime stop or automatic retry allowance. |
+| Engineering and reading | One bounded adapter/data/learner implementation, independent numerical/RNG/information review and repairs, exact-source publication/admission, then full native readback. Provisionally **2–4 h implementation/review plus .5–1 h scientific reading**; these human/agent wall estimates are unmeasured, separate from runner time, and are reported honestly if exceeded. |
+
+Use of `local_linux` would be a specific CPU-only choice to keep the price grounded in the
+recent measured execution path; a fresh node-memory/resource check remains mandatory. This
+is no reservation and creates no operation. Reusing the repaired B04 class by a direction-owned
+adapter can first compute its base plan/scores, then select/record L's candidate before execution;
+H1 continuation memory remains the superclass's base memory. No mutable monkeypatch, copied
+shared learner, changes to DM2's files, or new information channel is needed. The adapter must
+distinguish P's suggested action from the actually executed candidate in records. Frozen source
+semantics and live-state/RNG independence remain engineering checks, not scientific results.
+
+**Proponent's provisional judgment:** this is a concrete, modest learning-utility question worth
+considering because it asks whether data-derived value adds to an already capable joint-motion
+decision interface, with a competence anchor. It costs substantially more than the withdrawn
+binary fit estimate and claims less than a new planning algorithm. The focused independent
+review may recommend select, revise or decline; no result batch is purchased by this draft.
+
+**Pre-review source-binding correction:** the actual S2 config has one ground BS and two
+charging stations (`b04_transit_hold_a01/config.json`, `n_ground_bs=1`). Thus the BS xy block
+above is **2**, not 4 fields; the correct proposed feature/MLP input width is **248**, not 250.
+The full collection candidate matrix is at most **171,417,600 bytes** before metadata.
+The integer-boundary seed scan finds the proposed seed blocks only in this new note; no existing
+run/config/source match was found. These are corrected prospective dimensions, not measured data.
+
+### Native termination clarification
+
+Source inspection of `envs/pettingzoo/relay/energy_aware.py` shows that exhaustion of all
+UAV batteries while none is charging terminates an episode naturally. Thus **480,000 native
+steps and 19,200 collection transitions are planned maxima**, not required achieved counts.
+Keep naturally terminated worlds as scientific outcomes; do not replace, pad, discard or
+classify them as technical failures. A final segment shorter than ten steps retains its
+actual reward sum divided by ten and has zero continuation. Report actual segment lengths,
+episode lengths and terminal kinds. Report native QoS per actual step and also QoS sum/3000;
+the latter exposes lost remaining service without changing any environment reward. Equal
+seed pairing requires equal initial conditions and equal exogenous user/RNG histories over
+the common observed prefix, not equal full-trace hashes when native termination differs.
+
+### Focused independent scientific review — complete substantive response
+
+Reviewer: internal `transit_value_comparison_review`, registered ResearchCritic, separate
+context without inherited conversation. It reconstructed accepted B04 source before reading
+the proposal and portfolio disposition. Its framing exposure and limitations are retained below.
+No duplicate B01/B02 trajectory audit, new environment execution or Pro request was made.
+
+> **Recommend select this one bounded study.** The concrete comparison can answer whether a
+> learned ranking adds useful native performance to the specified ordinary controllers at its
+> full additional cost. No material design defect currently defeats that observation.
+>
+> This was a separate context without inherited Root/DM conversation. It was not blind: the
+> assignment disclosed the recipe and Root's decision framing, and supplied background
+> summaries. I reconstructed the accepted source before reading the proposal and portfolio
+> disposition. I made no edits or runs and drew no B04 performance conclusion.
+>
+> At accepted source `025350669bc5e8ab99fc71954f749ae47a6853e9`, the actual choice is all-move
+> versus one eligible UAV holding horizontally for ten steps. H1 already adapts six service
+> and two relay targets to current users, performs assignment with hysteresis, and preserves
+> target history separately from temporary holds. P adds joint service scoring at nominal
+> steps 0/5/10. Users and batteries remain fixed in that forecast; charging transitions and
+> future guard interventions are omitted. Real execution retains the shield and guard. These
+> facts create a plausible opportunity for learned ranking without establishing that the
+> opportunity is large or learnable.
+>
+> **The strongest simpler explanation is ordinary competence plus reward calibration.** P
+> or H may already exploit the useful choices. If L wins, it may simply learn when P's service
+> proxy misprices energy, return costs or actual guarded execution. That would still be a
+> useful controller result. It would not identify long-horizon reasoning, new coordination
+> structure or hierarchy as its cause. The proposal expressly accepts this limitation.
+>
+> P is a credible primary comparator for this narrow question: it is adaptive, uses joint
+> geometry, and shares L's candidate library and decision clock. H is worth its additional
+> 32 episodes because it prevents beating a poor service selector from being mistaken for
+> improvement over the available ordinary portfolio. Neither reference establishes superiority
+> over all capable planning methods. Requiring an additional architecture or exhaustive MPC
+> search would purchase a different question.
+>
+> The **online information and execution conditions match sufficiently** for the proposed
+> package comparison. L's offline experience and fitting remain additional resources. P and L
+> both compute the static model scores, so this proposal does not amortize away planning
+> computation: L pays for those scores plus inference. The corrected **248-feature** input is
+> consistent with one ground BS and two charging stations. Fixed collection-only normalization
+> and exclusion of future motion, raw central state and live hidden association history are
+> appropriate.
+>
+> The Bellman target is coherent as an approximate **discounted macro-return** prediction.
+> Dividing rewards by ten rescales values; `.97` per commitment defines a training objective
+> distinct from undiscounted H3000 J. Including time and zeroing terminal continuation makes
+> the finite episode boundary explicit. The observation representation remains partially
+> observed, so neither Bellman consistency nor convergence follows. Ernst et al. §3 supports
+> the transition-to-regression construction; its convergence conditions do not establish
+> convergence of this persistent neural procedure.
+>
+> The principal technical scientific risk is **unsupported value maximization**. The behavior
+> mixture gives each eligible action probability at least `1/18` at a visited nontrivial
+> context, but does not cover every context subsequently visited by greedy L. Maximizing
+> noisy, bootstrapped values can favor poorly supported candidates; partial observation and
+> correlated trajectories compound this. Gradient clipping and finite checks do not resolve
+> it. Nevertheless, the final native comparison remains informative about whether this fixed
+> package works. Those uncertainties are legitimate exploratory risks, rather than reasons
+> to insert another diagnostic sequence.
+>
+> The smallest worthwhile complete observation is the proposed collection, one fixed fit and
+> the three-arm final panel. Actual reward must cover the executed, shielded ten-step segment,
+> while records distinguish P's suggestion from the executed proposal. Next contexts must
+> retain the actual H1 memory and legal action mask. The current controller/evaluator interfaces
+> appear reusable through a direction-owned adapter; engineering acceptance still has to
+> establish those bindings. No learner or collector implementation presently exists.
+>
+> The fixed readout should change decisions as follows:
+>
+> - **L clears the declared service/J criteria against both references without the specified
+>   adverse events:** retain this particular conditional controller candidate. Better score
+>   calibration, immediate reward alignment and learned continuation remain competing
+>   explanations. Replication would require a separate investment judgment.
+> - **L beats P but fails against H:** reject the package as an improvement over the available
+>   ordinary portfolio.
+> - **L fails the utility criterion:** end this fixed data/learner package. This weakens its
+>   usefulness at this exposure; it does not identify representation, optimization or coverage
+>   as the cause.
+> - **Means improve but tails or return costs worsen:** preserve the conflict and make the
+>   stated use judgment. Zero observed failures does not establish safety.
+> - **Execution or the panel is incomplete:** record missing evidence and actual expenditure;
+>   neither a negative scientific conclusion nor an automatic retry follows.
+>
+> The `.03` service threshold is an investment preference, not a statistical discovery
+> boundary. Paired world intervals describe evaluation variation conditional on one fitted
+> policy. The 64 collection worlds, 19,200 transitions, repeated minibatch exposures and 32
+> evaluation worlds do not provide independent training replication.
+>
+> The cost accounting is substantially complete:
+>
+> - **Native work:** 64 collection plus 96 evaluation episodes; up to 480,000 steps.
+> - **Fit:** one initialization, 5,000 updates, 1.28 million sampled transition exposures and
+>   up to 11.52 million target candidate evaluations.
+> - **Planning:** at most 345,600 candidate plans and 729,600 static service snapshots.
+> - **Measured anchor:** the 32 H reference episodes average 168.174 worker seconds and
+>   160.661 CPU seconds. Scaling gives approximately 7.47 aggregate worker-hours, or 3.74
+>   hours with two workers before added work.
+> - **Unmeasured additions:** scoring, fitting, serialization, contention and support explain
+>   the provisional 5–6 hour local runner estimate. Engineering/review adds 2–4 hours and
+>   scientific reading .5–1 hour. These remain estimates.
+> - **Storage:** the maximum collection feature matrix is 171,417,600 bytes; reference-scaled
+>   native traces add roughly .28 GB. The below-1-GB allowance is plausible, not verified.
+>
+> This buys a complete conditional utility answer at a credible bounded price. Root's earlier
+> request for a concrete choice is now satisfied; neither a requirement to fill a runtime slot
+> nor a requirement for B04 positivity should determine this investment. No additional
+> scientific review or preliminary experiment is warranted by the present uncertainty.
+>
+> **MATERIAL_DISSENT: no — I support the specified one-fit investment and its narrow utility
+> interpretation, based on the accepted decision semantics, comparator matching and complete
+> cost accounting.**
+
+The review's primary source is [Ernst, Geurts and Wehenkel §3](https://jmlr.org/papers/volume6/ernst05a/ernst05a.pdf);
+its local evidence is the accepted B04 controller, this prospective entry and B04's complete
+reference-world timing metadata. Review agreement is not empirical evidence of learner benefit.
+
+### DM disposition — select B02 transit-value utility comparison
+
+I adopt the review and **select this one bounded study**, named
+`uav_cooperative_planning/b02_transit_value_a01`. The old unexecuted B01 remains withdrawn.
+The scientific reason is that ordinary scoring leaves a concrete mismatch between nominal
+joint service and the actual shielded/guarded trajectory, which a fixed learned value ranking
+could usefully absorb. Its utility can be read against P and H without first establishing
+the mismatch's size or assigning it uniquely to temporal credit. The approximately 5–6-hour
+runner plus 2–4-hour engineering and .5–1-hour reading price is warranted for that complete
+conditional answer. This decision buys one fit and the stated panel, not a rescue sequence.
+
+Use the corrected 248 fields, natural-termination rule, exact seed blocks, reward target,
+5,000 updates, three arms and outcome rules above. No new scientific review or Pro round is
+needed for unchanged implementation. Ordinary fixed-rule execution and independent engineering
+review follow; a consequential design change would be recorded prospectively. There is no
+accepted operation at this decision and no fit has started. The implementation can proceed
+within existing direction responsibility without another Root acknowledgment.
+
+### L0 — bounded implementation of selected B02
+
+Deliver the common-library controller adapter, collection/one-fit/three-arm runner and compact
+readout under `experiments/candidates/uav_cooperative_planning/b02/`, with package markers in
+its parent. The direction-owned entry is `run.py` (explicit argparse, including launch SHA,
+out, workers and numeric threads); it calls runner-side `require_admission` before any scientific
+effect. Bulk belongs only to canonical `runs/uav_cooperative_planning/b02_transit_value_a01/raw/`.
+No edits to another direction, shared learner, environment, launcher or frozen source. Reuse
+the accepted B04 scorer/library and existing production evaluator instead of copying them.
+
+The Implementer owns only that new code tree and returns its diff, static checks and risks;
+DM owns NOTES/RESEARCH, Git operations, scientific decisions and launch. The shared checkout
+is main, `/home/fires/hmasd-wsl`; other writers' changes must be preserved. No child agents,
+Pro requests, result launch, tests added or tests run in this bounded code task. Syntax/static
+inspection and independent numerical/RNG/information review supply the current engineering
+checks; executable assertions must expose a violated contract rather than silently repair data.
+
+Implementation bindings and acceptance points:
+
+- Exact collection seeds 29092701–29092764; paired evaluation seeds 29102701–29102732;
+  fit seed 29092791. `local_linux`, CPU float32 learner, two serial-world workers with one
+  numeric thread each, no GPU. A dedicated per-world `numpy.random.Generator` from
+  `SeedSequence([world_seed, 290927])` drives the .5 P/.5 uniform mixture independently of
+  environment and fit streams. Frozen final policy evaluations perform zero optimizer updates.
+- Collection uses actual replan contexts and records candidate arrays/masks, P's recommendation,
+  chosen candidate/hold and its marginal mixture probability. Obtain rewards from the existing
+  evaluator's actual per-step native `reward` array; aggregate each segment once. Consecutive
+  contexts are linked by indices; terminal segments have no successor. Do not score an extra
+  terminal state, branch the simulator or repeat a controller replan to obtain a target.
+- Preserve separate H1 base memory and actual execution targets. The learned selection happens
+  after the inherited scorer constructs the library and before that commitment executes.
+  Record both P's recommendation and actual choice; inherited P decision logs alone are
+  insufficient. H uses the original all-move controller and incurs no dummy scoring.
+- Features follow the corrected 248-field order above. Read only the declared legal observations,
+  central position snapshot, fixed model parameters and controller memory. Raw environment is
+  used only by the shared declared scorer and by evidence instrumentation inaccessible to L.
+  Use population feature mean/standard deviation across all valid collection candidate rows;
+  standardize every field after fixed coordinate scaling, constant dimensions use scale one.
+  Finite shape checks precede use. Do not use test statistics or fit-time labels as features.
+- Fit one 248→128→64→1 ReLU MLP from scratch with the stated zero final layer, Adam, target-copy
+  interval, 5,000 updates and .97 target. Sample transition rows with replacement using a fit-only
+  seeded stream. Use squared Bellman regression loss; clip gradient norm at one. Store the fixed
+  final checkpoint with normalization, configuration and initialization/final movement identity.
+  Target evaluation masks padded candidates and terminal continuation exactly. No early stop,
+  tuning endpoint, secondary fit or saved checkpoint selection. Fail on nonfinite values.
+- Reuse native evaluation trace/reward semantics. Keep natural early termination, final partial
+  macro rewards and actual lengths. For paired arms preserve initial-state identity plus user and
+  RNG trace equality over their common prefix; unequal native lengths alone are not technical
+  failure. Include both native QoS/actual-step and QoS-sum/3000, complete J, tails, all adverse
+  worlds, return costs, guard/shield activity, hold counts and stated conditional decision rules.
+- One admitted runner performs collection, then exactly one fit, then the 96 fixed evaluations;
+  any technical failure leaves incomplete status and prevents dependent stages, no automatic
+  retry or replacement. Save compact config, perworld/progress, learner counts/finite/movement
+  readings, summary and artifact identities incrementally; raw/checkpoint outputs remain one
+  canonical copy. Preserve actual wall/CPU/RSS/storage, transition/fit/update/inference/scorer
+  counts and partial work if a stage fails. Do not treat estimates as achieved measurements.
+
+Stop after this implementation and its static checks; DM reviews/accepts and obtains the
+independent engineering review before publishing the exact inputs and considering admission.
