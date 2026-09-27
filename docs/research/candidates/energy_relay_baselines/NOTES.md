@@ -676,3 +676,39 @@ dirty records, then submit the exact new-seed request once. Reconcile the stoppe
 against seed1's terminal status through drain/rearm without `--resume-jobs` or a worker launch;
 register the new accepted operation only from its verified manifest. Use the verified App CLI
 for 1500-second checkpoints and 30-second read-only probes. No App-task ACK or reply is sent.
+
+### Second original seed natively accepted and observed
+
+Seed **26092731** was accepted on **2026-09-27 at 12:45:51 UTC** from the declared source
+`4a3e309f5e8e229eb6c0bc6e5de7008cc338dead`, after one submission. Its native
+[manifest](../../../../runs/energy_relay_baselines/b01_set_a01/seed-26092731/launch-manifest.json)
+binds the operation reference, immutable source snapshot, original-node output and process
+identities. The collected [status](../../../../runs/energy_relay_baselines/b01_set_a01/seed-26092731/launch-status.json)
+verified the runner and supervisor identities as running with consistent records and no exit
+witness. Native [admission](../../../../runs/energy_relay_baselines/b01_set_a01/seed-26092731/admission-preflight.json)
+passed with 14,852,599,808 available bytes against a 4 GiB floor. The actual
+[configuration](../../../../runs/energy_relay_baselines/b01_set_a01/seed-26092731/config.json)
+confirms seed 26092731, CUDA FP32, four Torch threads, actor input width 3599 and the unchanged
+two-lane / 200-rollout / 3000-step recipe (1.2M transitions). Manifest, preflight and config
+bytes were collected from the admitted output and verified against their node-side SHA256.
+Raw outputs remain at the single canonical node location recorded by the manifest.
+
+The initial training summary had c00 and no completed rollout; this is startup evidence, not
+a scored endpoint. This study now has two started fits: the first is a preserved technical
+failure with a missing endpoint; the second is active. If training completes, verify produced
+checkpoint bytes/source and execute the already-declared own-c00/c06 evaluation. There is no
+replacement fit, checkpoint recovery or automatic retry in this acceptance.
+
+Before registering the new handle, the old observer's generation-8 checkpoint was drained and
+reconciled by read-only native status. The resulting generation-9 terminal event confirmed the
+first operation's valid exit 1 and absent processes; it was acknowledged without `--resume-jobs`.
+The first job remains failed. The new accepted operation is observed by the canonical per-session
+controller at generation 11, using the verified App executable, 30-second probes and a
+1500-second checkpoint window. A real native probe confirmed the new operation running; the
+latest checked probe at 12:54:31 UTC still matched both process identities. This controller
+continues observation across checkpoints without worker restart. Queue delivery and checkpoints
+do not establish a service-side prompt-cache hit.
+
+Node preparation fetched published Git objects only. Its existing dirty records and sparse
+selection were preserved; no checkout or broad sparse-selection update was performed. This
+routine acceptance record adds no scientific result or change to the published comparison.
