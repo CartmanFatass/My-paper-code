@@ -524,3 +524,168 @@ archives remain, the snapshot is absent, and the retired entry is absent from th
 source checkout. Both then-current unrelated dirty paths were preserved. No witness was
 synthesized or edited and no scientific worker was relaunched. Existing unrelated Git auto-GC
 warnings and foreign untracked output directories were left untouched.
+
+## 2026-09-27 — B02 prospective: direct PPO surrogate on fully shielded actions
+
+### Question and adopted scope
+
+Question: from the same published c03 learner state and with the same further PPO budget, does
+zeroing only the direct actor-surrogate term for actions fully replaced by the production return
+shield change complete closed-loop service or risk? This continues the unresolved training-to-use
+question retained after B01; it does not reopen B01's path/saturation recipe. B01's useful
+negative evidence remains: its restricted single-lane CPU collector/evaluator path agreed, the
+declared horizontal mean-action saturation was absent, and sampled service changed little on
+average while return cost and low-battery outcomes worsened. Those observations neither diagnose
+the reward/credit path nor make the new intervention a correctness fix.
+
+The selection reuses the complete independent ResearchCritic review and Root decision in
+[`RESEARCH-two-successors.md`](../../archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review),
+published with main `2905e4f9e3ae74d25dbc01533d46230d0eb89fe9`. No material premise or comparator
+changed, so no second scientific-review or Pro round is needed. This PPO question is distinct from
+DM3's B02 supervised-label mask: that asks where behavior-cloning capacity is spent; this asks
+how a finite reward-driven PPO continuation responds to its actor score terms. Neither result
+substitutes for the other. Shared background used: RESEARCH §§1/2 require native team reward and
+the full information/history path; §4 separates finite optimizer behavior from representability;
+§6 keeps paired episode worlds distinct from training instances and requires controls for component
+attribution; §7 says an ended recipe is not proof that the broader question is exhausted. No
+claim of a representation ceiling, a general PPO defect, or a multi-seed result is planned.
+
+### Verified c03 learner input
+
+The new arms branch from Claude's published development c03 checkpoint, not from B01 outputs or
+the old DM2 run directory. On configured node `wsl_4070`, the canonical input is
+`/home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01/checkpoints/c03/`.
+Its `agent.pt` is 38,832,967 bytes with SHA256
+`80b2bdadddb76a4c03fe9fea8ae9fb1317a136363d28dec0d8fae350745dcce4`; this exactly matches
+`record.json`. The record names c03, rollout 100, 600,000 transitions, seed 925031, source launch
+`759927b5e8caa0ba5bd8ba505ab5388985f6a2fa`, and policy fingerprint
+`4667fdc9df9486167a9820ffc3433a5c6d4b8fe568b21e6fbc3c1326aca4ff3b`.
+
+Before declaring the input, I loaded the checkpoint on that node through the production B02
+configuration and `HMASDAgent.load_model`; the full learner fingerprint, coordinator and
+discoverer state dicts, actor/critic optimizer state dicts, optimizer counts, ValueNorm mean/var/
+count, and rollout-sampler RNG state/seed all matched the checkpoint. Actor and critic Adam steps
+are each 225,000; the discoverer ValueNorm count is 4,800,000.0001 (including its 1e-4
+RunningMeanStd pseudocount). This is the complete saved learner
+state. As in Claude's documented c03 recovery, environment streams and Torch action RNG are
+re-seeded at 925131; no environment trajectory state is claimed to be stored in the checkpoint.
+The source boundary had both lanes truncated at H=3000, and the learner's inert schedule flags are
+off. Each arm independently loads the same c03 input and starts its own reseeded continuation.
+
+### Fixed comparison and estimand
+
+Both arms retain the B02 S7-S2/H3000 recipe, 8 agents, two lanes, 3,000-step rollout/episode,
+`k=10`, production shield (enter margin 0, exit margin .05), reward and return-cost coefficients,
+network, action law, normalizers, learning rates, minibatch construction and 15 PPO epochs. Each
+arm continues exactly 300,000 transitions: 50 rollouts × 6,000 transitions, ending at cumulative
+900,000 transitions from the c00 initialization. The ordinary arm uses the existing PPO loss on
+all valid actor samples. The intervention arm sets the direct PPO surrogate contribution to zero
+only for an agent-step whose production shield mode fully replaces that agent's four submitted
+action coordinates. Both are one started fit from the same c03 initialization: **2 fits, 600,000
+new training transitions**, one shared-initialization block, not two independent seed replications.
+The source c03 update count implies 2,250 optimizer steps per actor and critic per 6,000-transition
+rollout; each arm therefore plans another 112,500 steps per optimizer, with actual counts checked
+from the native agent.
+
+The shield decision is computed from the current legal margin and previous shield mode. In an
+active mode it replaces all four proposal coordinates before `env.step`; equality by chance between
+a proposal and its replacement is not used to infer exposure. The intervention mask will be
+recorded from the returned production mode and checked against the submitted-action contract.
+All observations, sampled proposals, submissions, rewards, GAE rows, critic targets/updates,
+ValueNorm updates, entropy, recurrence and recurrent reset behavior remain present. Advantages
+are normalized over the original valid PPO rows before the intervention; the masked surrogate is
+divided by that same original valid-row count, so filtering does not increase the effective step
+size. All minibatches and optimizer steps remain scheduled.
+
+This checks the internal path before execution. Shielding changes the environment action and thus
+subsequent observations, rewards, GAE and critic targets in both arms. A fully covered row still
+enters actor/critic recurrence and actor entropy; its inputs can affect hidden-state computation and
+later unshielded decisions. The mask changes only the current direct policy-surrogate contribution
+and then the learner's later parameters/behavior; it does not erase the transition or prevent
+downstream state effects. A finite-sample or stale-batch score signal may be unhelpful, but the
+surrogate is not pre-labelled erroneous. The strongest simpler explanation for an arm difference
+is a different finite update path (including changed gradient scale/clipping) from a single shared
+training instance, not a demonstrated general credit mechanism.
+
+After both fixed endpoints, evaluate each endpoint on the same already-declared development
+worlds 955001–955032, under deterministic mean action and stochastic draw 0 of the existing fixed
+sample-seed rule, at H=3000: 4 cells × 32 episodes = **128 episodes / 384,000 evaluation steps**.
+No c03 or intermediate checkpoint is rescored for selection. Read every native per-world J,
+QoS/step, return cost, minimum battery, cutoff/depletion/failure and service tail, alongside all
+PPO/value/entropy losses, action-surrogate exposure, gradient diagnostics and learner movement
+from c03. Report both means and adverse worlds; world episodes/checkpoints do not raise the
+training-instance n. These are development worlds, not a holdout or confirmation panel. No
+957001–957032 outputs or sealed raw are opened or used for selection.
+
+### Predicted readings and decision rule
+
+The immediate implementation prediction is exact and mechanical: only fully replaced actor rows
+lose their direct surrogate summands; critic, entropy, recurrent replay, advantage normalization,
+ValueNorm, valid-row denominator and update counts match. Record the number of shield-mode action
+rows and their PPO sample presentations, the initial matched minibatch's unmasked versus masked
+surrogate gradient norms, per-rollout pre-clip combined actor-gradient RMS/maximum and clip rate,
+and actor/critic parameter displacement from c03. These are exposure and scale diagnostics, not
+the native outcome. Under either arm, an all-mode row may still affect recurrence, critic learning,
+entropy and future policy behavior.
+
+There is no promised positive sign for complete J/QoS. If the masked arm improves the native
+service/risk package across the fixed panel without a material low-battery/failure-tail tradeoff,
+that supports prospectively pricing an independent training replication. A loss or gradient change
+alone, a one-mode mean gain, or a panel mean that hides important adverse tails does not support
+"effective control learning improved." If native outcomes do not improve or show an unacceptable
+service/risk trade, stop this exact mask scheme; do not add rollout length, change reward/shield,
+select a checkpoint, or automatically extend/replicate after seeing scores. This finite comparison
+can choose whether a new independent replication is worth its cost; it cannot confirm population
+advantage.
+
+### Cost, L0 implementation scope, and stops
+
+Prospective cost: 2 started fits and 600,000 new training transitions, with 50 rollouts/arm and
+112,500 expected actor plus 112,500 critic optimizer steps/arm; 128 H3000 evaluations / 384,000
+steps. Adopt the independent review estimate of 4.7–5.7 hours total fit time plus 40–60 minutes
+evaluation on the configured GPU. Engineering, review, node contention, checkpoint I/O, collection,
+readback and publication are additional and must be measured or left unknown, not folded into that
+fit estimate. Execute arms sequentially if admission/resource evidence calls for it.
+
+L0 deliverable: a direction-owned B02 continuation/evaluation entry under
+`experiments/candidates/energy_relay_diagnostics/b02/`, matching focused tests under
+`tests/experiments/candidates/energy_relay_diagnostics/b02/`, and compact output under
+`runs/energy_relay_diagnostics/b02_shield_surrogate_a01/` (ordinary, masked, and evaluation
+subdirectories). A narrow optional shared learner/buffer
+hook may transport the per-agent shield mask into PPO minibatches and zero only the selected
+surrogate rows; default training remains off and unchanged. No edit to the accepted benchmark
+training/evaluator/collector, prior run snapshots, other directions' owned source, shield, reward,
+model, RNG streams or run horizon. Checks must cover sampler-mask ordering, default-off numerical
+and RNG identity, exact surrogate denominator/gradient on known tensors, complete override
+classification, c03 load verification, unchanged unmasked collector/learner behavior, actual update
+counts, and B02 endpoint evaluation identity. A read-only independent `hmasd-reviewer` review is
+required for shared learner/buffer numerical, RNG and checkpoint-path changes; acceptance remains
+the DM's. Stop before launch if the mask reaches any path beyond the declared actor loss, changes
+the default learner path, or the production checkpoint no longer passes its full-state identity
+checks; resolve that finding and any needed science-premise change before execution.
+
+### L0 implementation and independent engineering acceptance
+
+The shared buffer sidecar is allocated only when the direction-owned collector enables it. The
+collector records the production shield's returned mode and attaches the aligned per-agent row
+after normal transition storage; it does not infer replacement from action equality. The learner
+uses the original policy loss unchanged when the option is absent. When enabled, the direct
+surrogate alone is masked and remains divided by the original count of valid rows; critic, entropy,
+GAE, recurrence, ValueNorm, clipping, and optimizer schedule remain in the source path. The
+collector and fixed endpoint evaluator are wrapped or called from the direction-owned entrypoint;
+the benchmark collector, evaluator, checkpoint and frozen scripts were not edited.
+
+The independent full-path engineering review found no mask, ordering, recurrence, loss-denominator,
+default-off RNG/numerics, checkpoint-compatibility, or admission-order blocker. Its two integration
+findings were repaired before review acceptance: endpoint ValueNorm validation now compares the
+increment from the loaded c03 count (the expected increment is 2,400,000 rows, retaining the
+1e-4 pseudocount), and paired summary paths use the evaluator's
+`endpoint_deterministic-stochastic/summary.json` layout. Regressions require the expected count
+transition 4,800,000.0001 → 7,200,000.0001 to pass, a wrong increment to fail, and both recorded
+evaluation summaries to exist.
+
+Post-repair focused checks: 31 passed in 38.93 seconds across the direction tests, discoverer-entry
+mask tests, and B02 resume/evaluator tests (18 existing warnings). The tiny real-learner regression
+also found bitwise-identical default and instrumented-unmasked update metrics, actor/critic weights,
+and Torch/NumPy/Python/sampler RNG states; the masked update changed the actor while leaving critic
+parameters and ValueNorm unchanged. `git diff --check` passed. No result-bearing run has started.

@@ -75,6 +75,17 @@ from hmasd.process_exploration import (
 import random
 
 
+def _masked_policy_surrogate_loss(surrogate_terms, include_mask, valid_count):
+    """Zero selected PPO score terms without changing the original valid-row denominator."""
+    if surrogate_terms.ndim != 1:
+        raise ValueError("PPO surrogate terms must be a flat vector")
+    if include_mask.dtype != torch.bool or include_mask.shape != surrogate_terms.shape:
+        raise ValueError("PPO surrogate include mask must be a bool vector matching its terms")
+    if int(valid_count) != int(surrogate_terms.numel()):
+        raise ValueError("PPO surrogate denominator must count every valid action row")
+    return -(surrogate_terms * include_mask.to(dtype=surrogate_terms.dtype)).sum() / int(valid_count)
+
+
 def _split_legacy_discriminator_adam_state_dict(
     legacy_state_dict,
     team_parameters,
@@ -6501,6 +6512,25 @@ class HMASDAgent:
         if self.r39_native_toy_fixed_primitives:
             return 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
         main_logger.info("开始使用重构后的RolloutBuffer更新Discoverer...")
+
+        shield_surrogate_experiment = getattr(self, "_shield_surrogate_experiment", None)
+        if shield_surrogate_experiment is not None:
+            if not isinstance(shield_surrogate_experiment, dict):
+                raise TypeError("_shield_surrogate_experiment must be a dictionary")
+            if "mask_direct_policy_surrogate" not in shield_surrogate_experiment:
+                raise ValueError("shield surrogate experiment lacks its arm definition")
+            self.shield_surrogate_update_metrics = None
+            self.shield_surrogate_gradient_probe = getattr(
+                self, "shield_surrogate_gradient_probe", None
+            )
+            valid_policy_presentations = 0
+            masked_policy_presentations = torch.zeros((), device=self.device, dtype=torch.float64)
+            actor_grad_norm_squares = torch.zeros((), device=self.device, dtype=torch.float64)
+            actor_grad_norm_max = torch.zeros((), device=self.device, dtype=torch.float32)
+            actor_grad_clip_count = torch.zeros((), device=self.device, dtype=torch.float64)
+            gradient_probe_done = bool(
+                getattr(self, "_shield_surrogate_gradient_probe_done", False)
+            )
         
         # 1. 计算GAE
         # 【关键修复】Buffer中已是真实值，不再需要value_normalizer进行反归一化
@@ -6603,6 +6633,20 @@ class HMASDAgent:
             returns_seq = batch['returns'].to(self.device)
             value_preds_seq = batch['value_preds'].to(self.device)
             masks_seq = batch['masks'].to(self.device)
+            policy_surrogate_include_mask_seq = None
+            if shield_surrogate_experiment is not None:
+                if 'policy_surrogate_include_mask' not in batch:
+                    raise RuntimeError(
+                        "shield surrogate experiment requires a stored policy-surrogate mask"
+                    )
+                policy_surrogate_include_mask_seq = batch[
+                    'policy_surrogate_include_mask'
+                ].to(self.device, dtype=torch.bool)
+                if policy_surrogate_include_mask_seq.shape != masks_seq.shape:
+                    raise RuntimeError(
+                        "policy-surrogate mask shape differs from rollout valid-row mask: "
+                        f"{tuple(policy_surrogate_include_mask_seq.shape)} != {tuple(masks_seq.shape)}"
+                    )
 
             # 重新评估序列。保持 evaluate_sequence 的外部行为不变，但在热路径拆开
             # actor/critic 计时，方便确认 update 内部真实瓶颈。
@@ -6696,6 +6740,11 @@ class HMASDAgent:
             new_log_probs_flat = new_log_probs.reshape(-1)
             new_values_flat = new_values.reshape(-1)
             masks_flat = masks_seq.reshape(-1)
+            policy_surrogate_include_mask_flat = (
+                policy_surrogate_include_mask_seq.reshape(-1)
+                if policy_surrogate_include_mask_seq is not None
+                else None
+            )
 
             # 在计算损失前，使用掩码过滤无效数据
             valid_indices = masks_flat.nonzero(as_tuple=False).squeeze()
@@ -6714,6 +6763,8 @@ class HMASDAgent:
             old_log_probs_flat = old_log_probs_flat[valid_indices]
             new_log_probs_flat = new_log_probs_flat[valid_indices]
             new_values_flat = new_values_flat[valid_indices]
+            if policy_surrogate_include_mask_flat is not None:
+                policy_surrogate_include_mask_flat = policy_surrogate_include_mask_flat[valid_indices]
 
             # 优势归一化
             advantages_flat = (advantages_flat - advantages_flat.mean()) / (advantages_flat.std() + 1e-8)
@@ -6722,7 +6773,66 @@ class HMASDAgent:
             ratios = torch.exp(new_log_probs_flat - old_log_probs_flat.detach())
             surr1 = ratios * advantages_flat
             surr2 = torch.clamp(ratios, 1.0 - self.config.clip_epsilon, 1.0 + self.config.clip_epsilon) * advantages_flat
-            policy_loss = -torch.min(surr1, surr2).mean()
+            if shield_surrogate_experiment is None:
+                # Preserve the historical default operation and graph exactly.
+                policy_loss = -torch.min(surr1, surr2).mean()
+            else:
+                surrogate_terms = torch.min(surr1, surr2)
+                policy_loss = -surrogate_terms.mean()
+                valid_count = int(valid_indices.numel())
+                if policy_surrogate_include_mask_flat is None:
+                    raise RuntimeError("policy-surrogate mask was lost while selecting valid rows")
+                if policy_surrogate_include_mask_flat.numel() != valid_count:
+                    raise RuntimeError("policy-surrogate mask does not match valid PPO rows")
+                masked_policy_loss = _masked_policy_surrogate_loss(
+                    surrogate_terms, policy_surrogate_include_mask_flat, valid_count
+                )
+                masked_policy_presentations = masked_policy_presentations + (
+                    ~policy_surrogate_include_mask_flat
+                ).sum().to(dtype=torch.float64)
+                valid_policy_presentations += valid_count
+                if bool(shield_surrogate_experiment["mask_direct_policy_surrogate"]):
+                    policy_loss = masked_policy_loss
+
+                if not gradient_probe_done and bool(
+                    shield_surrogate_experiment.get("capture_gradient_probe", True)
+                ):
+                    probe_actor_params = list(self.skill_discoverer.actor_update_parameters())
+                    if self.low_level_compact_extractor is not None:
+                        probe_actor_params.extend(list(self.low_level_compact_extractor.parameters()))
+                    if not probe_actor_params:
+                        raise RuntimeError("cannot measure PPO actor-gradient scale without parameters")
+
+                    def _gradient_l2(loss):
+                        gradients = torch.autograd.grad(
+                            loss, probe_actor_params, retain_graph=True, allow_unused=True
+                        )
+                        squared = torch.zeros((), device=self.device, dtype=torch.float64)
+                        for gradient in gradients:
+                            if gradient is not None:
+                                squared = squared + gradient.detach().to(torch.float64).square().sum()
+                        return squared.sqrt().detach()
+
+                    unmasked_gradient_norm = _gradient_l2(-surrogate_terms.mean())
+                    masked_gradient_norm = _gradient_l2(masked_policy_loss)
+                    unmasked_policy_loss_value = float((-surrogate_terms.mean()).detach().cpu())
+                    masked_policy_loss_value = float(masked_policy_loss.detach().cpu())
+                    unmasked_gradient_norm_value = float(unmasked_gradient_norm.cpu())
+                    masked_gradient_norm_value = float(masked_gradient_norm.cpu())
+                    self.shield_surrogate_gradient_probe = {
+                        "valid_rows_and_denominator": valid_count,
+                        "shielded_rows": int((~policy_surrogate_include_mask_flat).sum().item()),
+                        "unmasked_direct_policy_loss": unmasked_policy_loss_value,
+                        "masked_direct_policy_loss_same_denominator": masked_policy_loss_value,
+                        "unmasked_direct_policy_gradient_l2_preclip": unmasked_gradient_norm_value,
+                        "masked_direct_policy_gradient_l2_preclip": masked_gradient_norm_value,
+                        "masked_to_unmasked_gradient_l2_ratio": (
+                            masked_gradient_norm_value / unmasked_gradient_norm_value
+                            if unmasked_gradient_norm_value > 0.0 else None
+                        ),
+                    }
+                    gradient_probe_done = True
+                    self._shield_surrogate_gradient_probe_done = True
 
             # 【内部 ValueNorm】价值损失计算（MAPPO 风格）
             # 假设网络输出 new_values_flat 为归一化后的 value，
@@ -6775,7 +6885,20 @@ class HMASDAgent:
             actor_clip_params = self.skill_discoverer.actor_update_parameters()
             if self.low_level_compact_extractor is not None:
                 actor_clip_params = actor_clip_params + list(self.low_level_compact_extractor.parameters())
-            torch.nn.utils.clip_grad_norm_(actor_clip_params, self.config.max_grad_norm)
+            if shield_surrogate_experiment is None:
+                torch.nn.utils.clip_grad_norm_(actor_clip_params, self.config.max_grad_norm)
+            else:
+                actor_grad_norm = torch.nn.utils.clip_grad_norm_(
+                    actor_clip_params, self.config.max_grad_norm
+                )
+                actor_grad_norm = actor_grad_norm.detach().to(dtype=torch.float32)
+                actor_grad_norm_squares = actor_grad_norm_squares + actor_grad_norm.to(
+                    dtype=torch.float64
+                ).square()
+                actor_grad_norm_max = torch.maximum(actor_grad_norm_max, actor_grad_norm)
+                actor_grad_clip_count = actor_grad_clip_count + (
+                    actor_grad_norm > float(self.config.max_grad_norm)
+                ).to(dtype=torch.float64)
             torch.nn.utils.clip_grad_norm_(self.skill_discoverer.critic_update_parameters(), self.config.max_grad_norm)
             if self.enable_runtime_profiling:
                 self._sync_cuda_for_profile()
@@ -6812,6 +6935,33 @@ class HMASDAgent:
         avg_policy_loss = (total_policy_loss / update_count).item() if update_count > 0 else 0
         avg_value_loss = (total_value_loss / update_count).item() if update_count > 0 else 0
         avg_entropy_loss = (total_entropy_loss / update_count).item() if update_count > 0 else 0
+        if shield_surrogate_experiment is not None:
+            masked_presentations = int(masked_policy_presentations.item())
+            self.shield_surrogate_update_metrics = {
+                "valid_action_sample_presentations": int(valid_policy_presentations),
+                "shielded_action_sample_presentations": masked_presentations,
+                "unshielded_action_sample_presentations": (
+                    int(valid_policy_presentations) - masked_presentations
+                ),
+                "shielded_action_sample_fraction": (
+                    masked_presentations / valid_policy_presentations
+                    if valid_policy_presentations else 0.0
+                ),
+                "direct_surrogate_mask_enabled": bool(
+                    shield_surrogate_experiment["mask_direct_policy_surrogate"]
+                ),
+                "policy_loss_denominator": "all valid PPO action rows before shield mask",
+                "optimizer_updates": int(update_count),
+                "combined_actor_gradient_l2_rms_preclip": (
+                    float(torch.sqrt(actor_grad_norm_squares / update_count).cpu())
+                    if update_count else 0.0
+                ),
+                "combined_actor_gradient_l2_max_preclip": float(actor_grad_norm_max.cpu()),
+                "actor_gradient_clip_fraction": (
+                    float((actor_grad_clip_count / update_count).cpu())
+                    if update_count else 0.0
+                ),
+            }
         
         profile_start = time.perf_counter() if self.enable_runtime_profiling else 0.0
         # 其他统计信息

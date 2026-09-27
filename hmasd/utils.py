@@ -247,6 +247,9 @@ class RolloutBuffer:
         这是解决数据污染问题的核心机制。
         """
         self.masks = np.zeros((self.num_steps, self.num_envs), dtype=np.bool_)
+        # Optional per-agent actor-surrogate inclusion mask. ``None`` keeps the
+        # historical allocation and sampler path; experiments explicitly opt in.
+        self.policy_surrogate_include_mask = None
         self.env_lengths = np.zeros(self.num_envs, dtype=np.int32)
         self.last_t_per_env = np.full(self.num_envs, -1, dtype=np.int32)
 
@@ -336,6 +339,34 @@ class RolloutBuffer:
         }
 
         main_logger.debug("RolloutBuffer已重置，预分配数组已清空。")
+
+    def enable_policy_surrogate_mask(self):
+        """Allocate an opt-in (time, environment, agent) PPO surrogate include mask."""
+        if self.policy_surrogate_include_mask is not None:
+            raise RuntimeError("policy surrogate mask is already enabled for this rollout")
+        self.policy_surrogate_include_mask = np.ones(
+            (self.num_steps, self.num_envs, self.n_agents), dtype=np.bool_
+        )
+        self._cached_rollout_data = None
+
+    def set_policy_surrogate_mask(self, t, include_mask):
+        """Store which complete per-agent action rows keep the direct PPO surrogate."""
+        if self.policy_surrogate_include_mask is None:
+            raise RuntimeError("policy surrogate mask was not enabled for this rollout")
+        t = int(t)
+        if t < 0 or t >= self.num_steps:
+            raise ValueError(f"policy surrogate mask time index {t} outside [0, {self.num_steps})")
+        mask = np.asarray(include_mask)
+        expected = (self.num_envs, self.n_agents)
+        if mask.shape != expected or mask.dtype != np.bool_:
+            raise ValueError(
+                f"policy surrogate include mask must be bool with shape {expected}, "
+                f"got {mask.dtype} {mask.shape}"
+            )
+        if not np.all(self.masks[t]):
+            raise RuntimeError(f"policy surrogate mask row {t} must follow transition storage")
+        self.policy_surrogate_include_mask[t] = mask
+        self._cached_rollout_data = None
 
     def add(self, t, state, obs, action, reward, done, value, log_prob, gru_hidden_state, critic_gru_hidden_state, env_idx, team_skill=None, agent_skills=None, reward_env=None, reward_team_disc=None, reward_ind_disc=None, reward_process=None):
         """
@@ -1163,6 +1194,8 @@ class RolloutBuffer:
             "reward_ind_disc": self.reward_ind_disc[sl],
             "reward_process": self.reward_process[sl],
         }
+        if self.policy_surrogate_include_mask is not None:
+            data["policy_surrogate_include_mask"] = self.policy_surrogate_include_mask[sl]
         if self.central_snapshot:
             data["central_snapshot_states"] = self.central_snapshot_states[sl]
             data["central_snapshot_obs"] = self.central_snapshot_obs[sl]
@@ -1681,6 +1714,11 @@ class RolloutBuffer:
         joint_observations_flat = flatten_and_chunk_joint_observations(data["obs"])
         team_skills_flat = flatten_and_chunk_sequences(data["team_skills"], with_agent_dim=False)
         agent_skills_flat = flatten_and_chunk_sequences(data["agent_skills"])
+        policy_surrogate_include_mask_flat = None
+        if "policy_surrogate_include_mask" in data:
+            policy_surrogate_include_mask_flat = flatten_and_chunk_sequences(
+                data["policy_surrogate_include_mask"]
+            )
         central_states_flat = central_obs_flat = None
         if self.central_snapshot:
             if not np.all(data["central_snapshot_mask"][:effective_steps]):
@@ -1730,6 +1768,9 @@ class RolloutBuffer:
                 'dones': torch.as_tensor(dones_flat, dtype=torch.float32, device=device),
                 'masks': torch.as_tensor(masks_flat, dtype=torch.bool, device=device),
             }
+            if policy_surrogate_include_mask_flat is not None:
+                tensor_cache['policy_surrogate_include_mask'] = torch.as_tensor(
+                    policy_surrogate_include_mask_flat, dtype=torch.bool, device=device)
             if self.central_snapshot:
                 tensor_cache['central_snapshot_states'] = torch.as_tensor(
                     central_states_flat, dtype=torch.float32, device=device)
@@ -1771,6 +1812,9 @@ class RolloutBuffer:
                         'dones': tensor_cache['dones'][:, batch_tensor],
                         'masks': tensor_cache['masks'][:, batch_tensor],
                     }
+                    if policy_surrogate_include_mask_flat is not None:
+                        batch['policy_surrogate_include_mask'] = (
+                            tensor_cache['policy_surrogate_include_mask'][:, batch_tensor])
                     if self.central_snapshot:
                         env_tensor = torch.as_tensor(
                             env_sequence_indices, dtype=torch.long, device=device)
@@ -1795,6 +1839,9 @@ class RolloutBuffer:
                         'dones': torch.from_numpy(dones_flat[:, batch_indices]).float(),
                         'masks': torch.from_numpy(masks_flat[:, batch_indices]).bool()
                     }
+                    if policy_surrogate_include_mask_flat is not None:
+                        batch['policy_surrogate_include_mask'] = torch.from_numpy(
+                            policy_surrogate_include_mask_flat[:, batch_indices]).bool()
                     if self.central_snapshot:
                         batch['central_snapshot_states'] = torch.from_numpy(
                             central_states_flat[:, env_sequence_indices]).float()
