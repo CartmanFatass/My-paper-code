@@ -696,3 +696,83 @@ Implementation bindings and acceptance points:
 
 Stop after this implementation and its static checks; DM reviews/accepts and obtains the
 independent engineering review before publishing the exact inputs and considering admission.
+
+**Prospective readout clarification during implementation:** “no additional” adverse worlds
+is read pairwise against each reference. A new L zero-service world where that reference
+provided service, or a larger native cutoff/depletion event count in any paired world, is
+an adverse conflict even if another world improves enough to offset the aggregate count.
+Show both counts and paired flags. Passing the numerical service/J/adverse-event rule means
+conditional candidate eligibility; battery-tail and return-cost conflicts still require the
+DM's stated use judgment and cannot be converted into automatic adoption by the runner.
+
+**Relevant main refresh during implementation (`5272918c1`).** DM2 has now published the
+complete B04 reading: P−H QoS/step +.01058, descriptive interval [+.00018,+.02098], and J
++34.74 [+2.56,+66.92], with 21 winning and 11 losing worlds. This supplies a conditional
+competence observation for P, after the selection/review above; it is not the reason the
+study was admitted for consideration, does not establish learning headroom and does not
+remove H. DM2's newly selected B05 ordinary one-step scorer is its independent comparison.
+Our declared P remains the accepted 0/5/10 scorer; no extra arm, wait-for-positivity rule or
+changed collection/evaluation seed follows from that published update. Its future evidence,
+if available at our reading, can constrain use claims without changing this fixed panel.
+
+**Implementation storage price refinement, before execution.** Retaining candidate inputs
+for the scored evaluation arms as well as collection permits direct final-policy choice
+reconstruction. It raises the maximum uncompressed feature matrix bytes across all retained
+worlds to **342,835,200**, plus the earlier roughly .28-GB native trace estimate, metadata and
+one small final checkpoint. This still fits the prospective below-1-GB storage planning
+allowance; compressed and allocated sizes remain actual measurements to report. The
+171,417,600-byte figure above remains the collection-only maximum, not the full run size.
+
+### B02 implementation and independent engineering acceptance
+
+The bounded Implementer delivered seven new Python files in the owned package: two package
+markers, `controller.py`, `learner.py`, `runner.py`, `readout.py` and admission entry `run.py`.
+The DM read the code and accepted the implementation after the independent engineering review
+below. No shared or other-direction executable was edited. Accepted B04 `transit_hold.py`
+bytes still match `025350669bc5e8ab99fc71954f749ae47a6853e9`.
+
+Static inspection repaired the tied-Q subset's secondary service ordering, made collection
+row order independent of worker completion order, checked each L/reference pair through that
+pair's own common native prefix, and excluded mutable launcher files from the scientific
+artifact digest inventory. The DM also added a persisted fit-attempt start before collection
+data are loaded for fitting, fit wall/CPU accounting and explicit incomplete-resource fields.
+These changes preserve the selected arms, seeds, learner objective and exposure.
+
+Internal `dm3_b02_transit_value_engineering` used the registered read-only Engineering Reviewer
+in a separate context and returned this final disposition:
+
+> **No material finding remains in the final B02 source.** Acceptance remains with the
+> assigning DM/Root.
+>
+> The failure-accounting finding is repaired in runner.py: missing worker telemetry produces
+> null totals, measured subtotals and explicit gaps; incomplete scorer/inference counts are
+> labelled lower bounds. The parent's fit-start repair also persists the attempt before
+> fitting and records elapsed resources.
+>
+> Static tracing covered:
+>
+> - Legal 248-field inputs, candidate ordering/masks, behavior probabilities, learned ties
+>   and separate H1 continuation memory.
+> - Actual shielded native rewards, consecutive context links, partial terminal segments
+>   and zero terminal continuation.
+> - Collection-only normalization, one 5,000-update fit, masked target maximization and
+>   frozen evaluation.
+> - Admission before scientific effects, independent RNG streams, paired common-prefix
+>   checks, both native contrasts, adverse-world flags and artifact identity.
+>
+> All seven final files parse successfully and have no trailing whitespace. B04
+> transit_hold.py remains unchanged from accepted `025350669bc5e8ab99fc71954f749ae47a6853e9`.
+> Final runner SHA256: `20b6b4e8e15e5e934c9cf8a875bb1efd543432a608c6b751f89dc31512bafdb8`.
+>
+> **Residual limits:** no tests, scientific imports, numerical execution, checkpoint
+> loading, multiprocessing, admission handshake or episode execution were performed under
+> the assigned restriction. Runtime correctness, convergence, realized pairing and
+> resource/storage estimates remain unverified. I made no edits or Git mutations.
+
+The DM accepts that bounded static engineering evidence and its limits. No tests or extra
+episodes were added/run; the implementation and review have consumed **zero scientific fits
+and zero environment steps**. Engineering labor/model time was not separately instrumented;
+the earlier 2–4-hour estimate is not reported as actual measured time. Exact-source publication
+and fresh actual-node admission precede the one selected result execution. A later technical
+failure remains a failed/incomplete attempt with its actual and lower-bound costs, not an
+automatic replacement or a negative utility conclusion.
