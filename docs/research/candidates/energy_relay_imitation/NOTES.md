@@ -560,3 +560,11 @@ masked steps, empty masks, immutable-input rejection, counts/checkpoints and B01
 using synthetic/short unrelated fixtures only. No actual scientific panel in tests. The helper
 does no Git mutations, NOTES edits or science launch; it returns code, checks and limitations.
 The DM accepts only after the independent Engineering Reviewer closes material issues.
+
+Implementation binding clarification, before B02 execution: the launcher deliberately maps
+absolute CLI inputs beneath the author checkout into the immutable source snapshot. Therefore
+the fixed external B01 artifact root and digests above live in committed B02 candidate code,
+and its production entry exposes no root override. It resolves/validates that declared root
+after admission and records the locator/digests in config. Isolated tests may pass a fixture
+root to the internal batch helper. No launcher exception, generic-summary alias, symlink,
+extra bulk copy or changed scientific input is introduced.
