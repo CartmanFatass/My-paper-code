@@ -1,0 +1,77 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b04_transit_hold_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b04_transit_hold_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b04_transit_hold_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/ca7daa9855480669e458a5de85228e26e892d055cf919f31210fbadf3c23f3fa.json",
+  "direction": "energy_relay_availability",
+  "execution": {
+    "exit_witness": {
+      "path": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b04_transit_hold_a01/process-exit.json",
+      "state": "absent"
+    },
+    "runner": {
+      "observed_identity": {
+        "boot_id": "2face51e-9703-4e41-ad8b-4c3c02f07d78",
+        "kind": "linux_pid_start_ticks",
+        "pid": 45736,
+        "session_id": 45735,
+        "start_ticks": 205301
+      },
+      "recorded_identity": {
+        "boot_id": "2face51e-9703-4e41-ad8b-4c3c02f07d78",
+        "kind": "linux_pid_start_ticks",
+        "pid": 45736,
+        "session_id": 45735,
+        "start_ticks": 205301
+      },
+      "state": "running"
+    },
+    "state": "running",
+    "supervisor": {
+      "observed_identity": {
+        "boot_id": "2face51e-9703-4e41-ad8b-4c3c02f07d78",
+        "kind": "linux_pid_start_ticks",
+        "pid": 45735,
+        "session_id": 45735,
+        "start_ticks": 205294
+      },
+      "recorded_identity": {
+        "boot_id": "2face51e-9703-4e41-ad8b-4c3c02f07d78",
+        "kind": "linux_pid_start_ticks",
+        "pid": 45735,
+        "session_id": 45735,
+        "start_ticks": 205294
+      },
+      "state": "running"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b04_transit_hold_a01/launch-manifest.json",
+  "node": "local_linux",
+  "observed_at": "2026-09-27T16:20:58.207443Z",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/ca7daa9855480669e458a5de85228e26e892d055cf919f31210fbadf3c23f3fa.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b04_transit_hold_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "025350669bc5e8ab99fc71954f749ae47a6853e9",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/e9e05e2ac0e248e0a82486d6443843e9"
+}

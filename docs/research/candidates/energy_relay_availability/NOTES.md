@@ -1677,3 +1677,28 @@ the corrections restore that contract rather than create a new scientific
 hypothesis. No duplicate scientific review or Pro round is added. Publish this
 disposition, the source and affected current index entries before native admission.
 No additional B03 batch, coefficient sweep, MARL fit or B04 rescue is selected.
+
+### 2026-09-27 — B04 native admission and observation
+
+The source, prospective contract, re-examination disposition and affected current
+RESEARCH entries were published at `025350669bc5e8ab99fc71954f749ae47a6853e9`
+before execution. The original B03 observation has no pending event and remains
+terminal; it was not restarted. B04 was accepted at 2026-09-27T16:20:28.724060Z
+on `local_linux`, with four workers and one numeric thread per worker, from the
+retained launcher snapshot. Its [native manifest](../../../../runs/energy_relay_availability/b04_transit_hold_a01/launch-manifest.json)
+binds the operation, exact command, source, supervisor and scientific runner.
+The [preflight](../../../../runs/energy_relay_availability/b04_transit_hold_a01/admission-preflight.json),
+[frozen configuration](../../../../runs/energy_relay_availability/b04_transit_hold_a01/config.json)
+and [initial running status](../../../../runs/energy_relay_availability/b04_transit_hold_a01/status-running.json)
+preserve admission and startup evidence. The observed runner and supervisor
+identities match; neither a terminal witness nor a complete scientific result is
+present at this recording.
+
+The fixed work remains the two-arm 32-pair S2/H3000 comparison above, using
+28092701-28092732, 64 episodes, 192k transitions and zero fits. Detached observation
+uses the manifest's operation reference with `hmasd_launch.py status`; its local
+request is `temp/directions/energy_relay_availability/b04_wait_request.json` and
+job identity is `launch-b04-transit-hold-a01`. On its return, reconcile this same
+operation, collect the complete evidence and read native outcomes under the
+declared rule. Process exit alone will not establish scientific acceptance, and
+technical failure will not silently purchase another attempt.

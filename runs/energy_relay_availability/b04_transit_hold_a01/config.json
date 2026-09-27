@@ -1,0 +1,623 @@
+{
+  "arms": {
+    "H_central": {
+      "controller_information": "central-positions",
+      "cruise_mps": 30.0,
+      "dedup_tolerance_m": 0.5,
+      "height_m": 100.0,
+      "horizontal_speed_mps": 30.0,
+      "information": "central",
+      "kmeans_iterations": 30,
+      "n_relay": 2,
+      "n_service": 6,
+      "n_uavs": 8,
+      "replan_period": 10,
+      "search_radius_m": 1000.0,
+      "switch_margin_m": 300.0,
+      "time_step_s": 1.0,
+      "unobserved": "station-ring",
+      "vertical_cap_mps": 5.0,
+      "vertical_speed_mps": 5.0
+    },
+    "transit_hold": {
+      "alternatives": "all-move plus one hold per assigned currently available UAV",
+      "assignment_memory": "H1 target history is retained separately from temporary hold targets",
+      "base": {
+        "controller_information": "central-positions",
+        "cruise_mps": 30.0,
+        "dedup_tolerance_m": 0.5,
+        "height_m": 100.0,
+        "horizontal_speed_mps": 30.0,
+        "information": "central",
+        "kmeans_iterations": 30,
+        "n_relay": 2,
+        "n_service": 6,
+        "n_uavs": 8,
+        "replan_period": 10,
+        "search_radius_m": 1000.0,
+        "switch_margin_m": 300.0,
+        "time_step_s": 1.0,
+        "unobserved": "station-ring",
+        "vertical_cap_mps": 5.0,
+        "vertical_speed_mps": 5.0
+      },
+      "hold_duration_steps": 10,
+      "prediction_steps": [
+        5,
+        10
+      ],
+      "tie_rule": "strictly greater score required; baseline-first order wins ties"
+    }
+  },
+  "batch": "B04",
+  "config": {
+    "energy_stage": "S2",
+    "episode_length": 3000,
+    "experiment_preset": "S7-S2",
+    "k": 10,
+    "lambda_return": 2.0,
+    "max_steps": 3000,
+    "num_envs": 1,
+    "use_obsnorm": false,
+    "use_statenorm": false
+  },
+  "declared_upper_bound": {
+    "candidate_plans_per_window": 9,
+    "candidate_windows": 9600,
+    "common_current_snapshots": 9600,
+    "future_service_snapshots": 172800,
+    "native_episodes": 64,
+    "native_transitions": 192000,
+    "prediction_points_per_plan": 2,
+    "total_candidate_snapshots": 182400
+  },
+  "design": "H1 all-move versus bounded single-UAV service-scored hold",
+  "direction": "energy_relay_availability",
+  "effective_raw": {
+    "adapter_shape": [
+      8,
+      365
+    ],
+    "area_size_m": 8000.0,
+    "battery_capacity_wh": 160.0,
+    "enable_soft_handover": true,
+    "energy_stage": "S2",
+    "failure_enabled": false,
+    "max_speed": 30,
+    "max_steps": 3000,
+    "n_charging_stations": 2,
+    "n_ground_bs": 1,
+    "n_uavs": 8,
+    "n_users": 30,
+    "return_reserve_ratio": 0.1,
+    "routing_protocol": "widest_path",
+    "service_cutoff_threshold": 0.02,
+    "serving_set_size": 3,
+    "time_step": 1.0
+  },
+  "fits": 0,
+  "horizon": 3000,
+  "jobs": [
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092701",
+      "seed": 28092701
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092702",
+      "seed": 28092702
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092703",
+      "seed": 28092703
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092704",
+      "seed": 28092704
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092705",
+      "seed": 28092705
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092706",
+      "seed": 28092706
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092707",
+      "seed": 28092707
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092708",
+      "seed": 28092708
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092709",
+      "seed": 28092709
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092710",
+      "seed": 28092710
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092711",
+      "seed": 28092711
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092712",
+      "seed": 28092712
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092713",
+      "seed": 28092713
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092714",
+      "seed": 28092714
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092715",
+      "seed": 28092715
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092716",
+      "seed": 28092716
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092717",
+      "seed": 28092717
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092718",
+      "seed": 28092718
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092719",
+      "seed": 28092719
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092720",
+      "seed": 28092720
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092721",
+      "seed": 28092721
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092722",
+      "seed": 28092722
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092723",
+      "seed": 28092723
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092724",
+      "seed": 28092724
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092725",
+      "seed": 28092725
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092726",
+      "seed": 28092726
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092727",
+      "seed": 28092727
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092728",
+      "seed": 28092728
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092729",
+      "seed": 28092729
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092730",
+      "seed": 28092730
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092731",
+      "seed": 28092731
+    },
+    {
+      "arm": "H_central",
+      "job_key": "H_central/28092732",
+      "seed": 28092732
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092701",
+      "seed": 28092701
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092702",
+      "seed": 28092702
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092703",
+      "seed": 28092703
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092704",
+      "seed": 28092704
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092705",
+      "seed": 28092705
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092706",
+      "seed": 28092706
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092707",
+      "seed": 28092707
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092708",
+      "seed": 28092708
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092709",
+      "seed": 28092709
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092710",
+      "seed": 28092710
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092711",
+      "seed": 28092711
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092712",
+      "seed": 28092712
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092713",
+      "seed": 28092713
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092714",
+      "seed": 28092714
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092715",
+      "seed": 28092715
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092716",
+      "seed": 28092716
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092717",
+      "seed": 28092717
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092718",
+      "seed": 28092718
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092719",
+      "seed": 28092719
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092720",
+      "seed": 28092720
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092721",
+      "seed": 28092721
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092722",
+      "seed": 28092722
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092723",
+      "seed": 28092723
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092724",
+      "seed": 28092724
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092725",
+      "seed": 28092725
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092726",
+      "seed": 28092726
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092727",
+      "seed": 28092727
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092728",
+      "seed": 28092728
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092729",
+      "seed": 28092729
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092730",
+      "seed": 28092730
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092731",
+      "seed": 28092731
+    },
+    {
+      "arm": "transit_hold",
+      "job_key": "transit_hold/28092732",
+      "seed": 28092732
+    }
+  ],
+  "launch_sha": "025350669bc5e8ab99fc71954f749ae47a6853e9",
+  "legal_information": "central current user/BS xy at each 10-step replan plus legal own UAV positions, battery/availability and return-mode records",
+  "model_information": "candidate additionally uses the known static S2 native radio, association, routing and scalar demand model; computation and model use are not matched. No future user waypoints, future RNG or live association history is used.",
+  "observation_layout": {
+    "fields": {
+      "bs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hmax",
+        "visibility_flag"
+      ],
+      "energy_stations": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "dist3d/map_diag3d",
+        "capacity_ratio",
+        "available_ratio",
+        "queue_len/n_uavs",
+        "valid"
+      ],
+      "energy_uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "battery_ratio",
+        "charging",
+        "available",
+        "returning(limp_home or dock_request)",
+        "load=connections/n_users",
+        "dock_request",
+        "target_station/(n_stations-1) or -1",
+        "charging_wait_steps/max_steps",
+        "return_threshold_ratio",
+        "return_energy_margin"
+      ],
+      "nearest_uav": [
+        "dist/area",
+        "rel_x/area",
+        "rel_y/area"
+      ],
+      "overloaded": [
+        "rel_x/area",
+        "rel_y/area",
+        "load/max_connections"
+      ],
+      "own": [
+        "x/area",
+        "y/area",
+        "(z-hmin)/hspan"
+      ],
+      "self_state": [
+        "connected_users/max_connections",
+        "has_backhaul",
+        "hops/max_hops",
+        "nearest_bs_rel_x/area",
+        "nearest_bs_rel_y/area"
+      ],
+      "step": [
+        "current_step/max_steps"
+      ],
+      "uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "(rel_z-hmin)/hspan",
+        "clip((sinr_db+10)/50,0,1)"
+      ],
+      "users": [
+        "rel_x/area",
+        "rel_y/area",
+        "clip((sinr_db+10)/50,0,1)",
+        "connected_to_self",
+        "serviced_by_any",
+        "serving_set_len/serving_set_size"
+      ]
+    },
+    "offsets": {
+      "bs": [
+        223,
+        235
+      ],
+      "dim": [
+        0,
+        365
+      ],
+      "energy_stations": [
+        349,
+        365
+      ],
+      "energy_uavs": [
+        245,
+        349
+      ],
+      "nearest_uav": [
+        3,
+        6
+      ],
+      "overloaded": [
+        235,
+        244
+      ],
+      "own": [
+        0,
+        3
+      ],
+      "self_state": [
+        6,
+        11
+      ],
+      "step": [
+        244,
+        245
+      ],
+      "uavs": [
+        191,
+        223
+      ],
+      "users": [
+        11,
+        191
+      ]
+    },
+    "parameters": {
+      "area_size_m": 8000.0,
+      "bs_fields": 4,
+      "bs_slots": 3,
+      "energy_station_fields": 8,
+      "energy_station_records": 2,
+      "energy_uav_fields": 13,
+      "energy_uav_records": 8,
+      "height_max_m": 200.0,
+      "height_min_m": 50.0,
+      "max_connections": 25,
+      "max_hops": 5,
+      "max_steps": 3000,
+      "n_uavs": 8,
+      "n_users": 30,
+      "observation_radius_m": 1500.0,
+      "overloaded_fields": 3,
+      "overloaded_slots": 3,
+      "self_state_fields": 5,
+      "serving_set_size": 3,
+      "uav_fields": 4,
+      "uav_slots": 8,
+      "user_fields": 6,
+      "user_slots": 30
+    }
+  },
+  "optimizer_updates": 0,
+  "pairing": "same world seed; initial state, user-position path and environment RNG stream hashed",
+  "service_proxy": {
+    "association": "fresh native association at each snapshot; live hidden serving history reset",
+    "backhaul_guard": "unchanged native guard on every real action; future guard interventions are not shadow-simulated",
+    "future_user_positions": "fixed at current legal central snapshot",
+    "limits": "snapshot proxy; no future user/failure, charging or battery transition",
+    "return_shield": "skip hold selection while a mode is active or a current entry is due; production shield remains on every real action",
+    "rng": "projection runs on an isolated environment copy and does not advance episode RNG",
+    "routing_and_delivery": "existing native widest_path/radio/end-to-end methods",
+    "score": "(QoS_0 + 2*QoS_5 + QoS_10)/4",
+    "unavailable_uav": "position held in forecast; current legal battery availability used"
+  },
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "threads_per_worker": 1,
+  "workers": 4,
+  "world_seeds": [
+    28092701,
+    28092702,
+    28092703,
+    28092704,
+    28092705,
+    28092706,
+    28092707,
+    28092708,
+    28092709,
+    28092710,
+    28092711,
+    28092712,
+    28092713,
+    28092714,
+    28092715,
+    28092716,
+    28092717,
+    28092718,
+    28092719,
+    28092720,
+    28092721,
+    28092722,
+    28092723,
+    28092724,
+    28092725,
+    28092726,
+    28092727,
+    28092728,
+    28092729,
+    28092730,
+    28092731,
+    28092732
+  ]
+}
