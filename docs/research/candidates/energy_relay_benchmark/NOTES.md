@@ -2874,3 +2874,85 @@ under a new tag from the sha-verified c03 copy in the artifacts directory; the S
 training block gains a two-run rule (first process rollouts 1–100, resumed process 101–200; the
 discarded 101–117 reported, not plotted) committed before any c04 panel exists. Declaration and
 launch record follow in the next entry.
+
+## 2026-09-27 — Stage 1 resumed from c03: declaration, engineering, review and launch record (`b02_s1_set_a01r`, operation faf881bc)
+
+**Declaration (before launch).** The study is the one declared on 2026-09-26: the SET recipe,
+the 1.2 M exposure, the checkpoint rule (c04 after rollout 134, c05 after 167, c06 after 200) and
+the readings (the .60 milestone = H_local's level, improvement over c00, gaps to H_central .774 /
+H_local .597 with H_spawn .232 / H_park2 .379 / N .328/.313 beside them, conflicts, Pro's
+failure-explanation table; 957001–957032 once, final model only, `--final`) are unchanged. The
+process that finishes it is a second one, started from c03 (rollout 100, 600,000 transitions;
+`agent.pt` sha256 `80b2bdadddb76a4c03fe9fea8ae9fb1317a136363d28dec0d8fae350745dcce4`, policy
+fingerprint `4667fdc9df9486167a9820ffc3433a5c6d4b8fe568b21e6fbc3c1326aca4ff3b`, both from the
+committed `summary.json` of the first process). Restored exactly from c03 through
+`HMASDAgent.load_model`: network weights (state dicts equal, no missing or unexpected keys),
+discoverer actor and critic Adam states (step 225,000 = 100 × 2,250; `exp_avg`/`exp_avg_sq` equal
+for all 15 parameters), coordinator optimizer, rollout-sampler RNG state and seed, value-normaliser
+statistics (discoverer count 4.8 × 10^6 = 600k transitions × 8 UAVs), the (empty) safety dual state
+and training progress. Re-seeded at the boundary with `resume_seed = 925031 + 100 = 925131`:
+`seed_everything` before the agent is built, the two lane environments (`make_env(925131 + lane)`,
+first reset with the same seed, later resets `seed=None` as before), torch action sampling and the
+numpy global RNG (skill draws with n_Z = n_z = 1, always 0). Not saved by `save_model` and restarting
+at 0: `global_step`, inert for this recipe (`use_lr_decay` False, `use_entropy_annealing` False,
+`use_reward_annealing` unset, high level and process exploration disabled; its `% 200` block only
+sets high-level collection flags after the last update). The per-lane agent state (env timers, GRU
+state, central snapshot) starts fresh, which equals the boundary state of the first process:
+rollout 100's row has 0 live lanes and all 234 completed episodes were truncated at 3000. Rollouts
+101–117 of the first process are discarded (no checkpoint among them; nothing selected on them).
+The new run's records: `training_seed` 925031 (so the evaluator's `policy_seed` rule is unchanged
+for c04–c06), `launch_sha` of the new code, `wall_seconds`, `native_episodes` and lane `episode`
+indices counting this process only, `summary["checkpoints"]` holding c04–c06 with the count
+starting at 4. Reader: `read_stage1.py --train b02_s1_set_a01 b02_s1_set_a01r` (two-run rule,
+committed `cfefb86a8` before any c04 panel existed).
+
+**Engineering.** Implementer (L0 `temp/directions/energy_relay_benchmark/L0_b02_resume.md`)
+committed `c9895139b` + `c369a6b91`: `collect_and_train(start_rollout, start_transitions,
+env_seed)` (defaults byte-identical to before), `read_resume_checkpoint` (refuses before any torch
+effect or output on object/programme/training-seed/config-dict/agent_pt name/rollout-schedule/
+transitions/checkpoint-name/source-sha/sha256 mismatches), `resumed_agent` (refuses after the load
+on fingerprint, optimizer steps or sampler state/seed differences), the `resume` block in
+`config.json`/`summary.json`, runner `train --resume-from --resume-source-sha`; shared core,
+`configuration.py`, `checkpoint_eval.py` and the launch kernel untouched. Tests: b02 27 passed
+(18 unchanged + 9 new in `test_b02_resume.py`), b01 45, `tests/test_hmasd_launch.py` 53 + 1 skipped;
+re-run here: b02 27 passed. Local pre-launch checks on the sha-verified c03 copy with the production
+spec: `read_resume_checkpoint` passes with the full source sha and refuses the short one; CPU load via
+`resumed_agent`: fingerprint equal, optimizer steps 225,000 (Adam step tensor 225,000, lr 1e-4),
+value-norm count 4.8 × 10^6, sampler seed restored.
+
+**Engineering review (hmasd-reviewer, read-only): launch-safe as committed.** Findings, none
+blocking: (1) `global_step` not saved — inert here, declared above; for reuse, refuse in
+`read_resume_checkpoint` when any schedule flag is on (follow-up); (2) a missing `valuenorm_state`
+would be a silent partial load that the post-load checks would not catch — not live for c03 (count
+confirmed), optional comparison in `resumed_agent` (follow-up); (3) nothing checks that both lanes
+were done at the source boundary — evidence cited above; (4) the record is self-consistent only —
+expected identity declared above and checked against the new run's `resume` block below; (5) test
+gaps: the sampler post-load refusal, the reader's two-run rule and the kernel's handling of
+`--resume-from` are read, not tested. Default path verified unchanged; seeds verified with no leak
+in either direction; the kernel treats `--resume-from` like `--checkpoint` (absolute path outside
+the author root passes unchanged, as in the accepted evaluations).
+
+**Launch (admission, from the node):** `launch_b02_resume.sh c369a6b91651ece4bdfbbedce1be26cd0599baff
+b02_s1_set_a01r /home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01/checkpoints/c03
+759927b5e8caa0ba5bd8ba505ab5388985f6a2fa 4` → `acceptance: accepted`, `accepted_at
+2026-09-27T00:38:32Z`; operation ref
+`/home/wu/projects/HMASD/.git/hmasd-admission/faf881bcf0e5327cd69a984c4195b4334a78fbaf61134c66548b2f182cdd8066.json`
+(claim key `faf881bc…8066`); command sha256
+`1d9c218eaf0913b557af15fec968e49e99a2ab2ed7c3286c901f16ece5c455f0`; supervisor pid 738116, runner
+pid 738117; memory preflight 15.3 GB available against the 4 GB floor, passed; command `train --seed
+925031 --launch-sha c369a6b9… --out runs/energy_relay_benchmark/b02_s1_set_a01r --device cuda
+--threads 4 --resume-from …/checkpoints/c03 --resume-source-sha 759927b5e…`. Verified after
+acceptance: the run's `config.json` `resume` block carries the declared c03 sha256 and fingerprint,
+`resume_seed` 925131, `source_launch_sha` 759927b5e…; `summary.json` counts transitions 600,000 /
+rollouts 100 / checkpoints 4 / native_episodes 0, post-load fingerprint equal to c03's, no failure;
+stderr holds only the harmless "no discriminator buffer in the checkpoint" line. Expected: 100
+rollouts at ≈ 165 s → c04 ≈ 02:15 UTC, c05 ≈ 03:45, c06 ≈ 05:15; each evaluation ≈ 15 min beside the
+fit; the once-only hold-out read of c06 after that. Observation as before: a 30-min detached poller,
+a background waiter and a watcher on `checkpoints/c04/record.json`, all against the new tag.
+
+**Housekeeping note.** At ≈ 00:32 UTC a helper's clean-up emptied the direction's scratch
+directory (the brief said "remove scratch before returning" without naming a subdirectory): the
+launch and poll scripts and the first process's poller logs (health polls only) were lost and the
+scripts recreated with identical command lines before this launch; evidence is unaffected
+(`progress.jsonl`/`summary.json` on the node, JSON committed). Helper briefs now name a unique
+subdirectory.
