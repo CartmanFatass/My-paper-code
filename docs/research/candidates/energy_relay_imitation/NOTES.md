@@ -253,3 +253,29 @@ It also confirmed two environment workers change only concurrency, not the four-
 group, seeds, exposure, policy mode or sorted reading. The DM read and accepts this version.
 All checks were CPU/native-short-fixture or mocked-failure checks, not full CUDA/H3000 science.
 Actual scientific work still 0 fits and 0 panel episodes before the accepted launch below.
+
+### 2026-09-27 — B01 accepted; same-operation observation
+
+The native kernel accepted the fixed B01 batch at 04:45:34 UTC. The
+[manifest](../../../../runs/energy_relay_imitation/b01_bc_a01/launch-manifest.json)
+is the authoritative command/source/process/claim record; the
+[observed status](../../../../runs/energy_relay_imitation/b01_bc_a01/status-observed.json)
+confirmed the recorded runner and supervisor alive and consistent, without an exit witness.
+The [actual-node receipt](../../../../runs/energy_relay_imitation/b01_bc_a01/admission-preflight.json)
+measured 10,244,784,128 available bytes against the 4 GiB floor. Three other admitted
+result operations were alive immediately before submission; this batch makes four under the
+owner ceiling of five. The fixed two-worker resource amendment above remains in force.
+
+Remote main fetch succeeded, but whole-checkout fast-forward was refused because another
+live direction was writing its tracked summary. That output was preserved. The canonical
+pause/state/lead already agreed with fresh published main, and compute config, launcher and
+snapshot implementation bytes matched it. The kernel therefore used the published immutable
+source through its ordinary snapshot path; no control file, source input or other live run was
+rewritten to bypass admission. Non-login Git reads had stalled on missing-object network
+fetches; using the configured login network shell resolved that transport issue. Only this
+session's verified stalled Git helper was terminated, never a scientific process.
+
+Manifest and preflight were copied and SHA256-verified against the node. Scientific bulk
+remains at the manifest output root; acceptance is not a result. Observe this same operation
+with the native waiter, then collect, verify and read its terminal artifacts. No resend,
+restart, automatic fit extension or new seed is authorized by a checkpoint or wait failure.
