@@ -7,6 +7,21 @@ nothing here opens a direction, assigns a lead or asks for a reply. Every number
 from committed records under `docs/research/candidates/energy_relay_benchmark/` and
 `runs/energy_relay_benchmark/`; the notebook entries are named where a claim needs its context.
 
+**Corrections (2026-09-27, after the owner's check; the text below is already corrected):**
+(1) The B01 traces do NOT hold action proposals, submitted actions or full observations
+(`experiments/candidates/energy_relay_benchmark/b01/evaluation.py::evaluate_world` stores per-step
+positions, modes, shield entries/exits, charging, waiting, battery, dock bit, guard counts, return
+margins, station choices/distances/occupancy/queues, heuristic targets, rewards and metrics). D2's
+pre-clip action diagnosis and D4's imitation warm start therefore need new collection with an
+extended trace, not the stored files. (2) D3 names a phenomenon, not an explanation: before any
+reward/credit hypothesis the two signals must be made comparable (worlds, policy snapshot, action
+mode, aggregation), and a squashed decode of the same weights is a different policy, not an
+evaluation correction. (3) The first version cited the 30-day freeze and "answer DECIDE-1/2/4
+first"; both were withdrawn in the direction's own follow-up
+(`docs/Claude_docs/reviews/RESET_RESPONSE_AND_FIRST_STUDY_20260926.md`, section 10: freeze and
+Root-dissolution wording withdrawn, venue class deferred as non-blocking). Nothing below waits on
+them.
+
 摘要（中文）：在冻结的 S7-S2/H3000 宿主上，本方向已用零训练参照把"学习器亏在哪里"定量化——
 中心式固定航点启发式 .774 QoS/步、局部信息启发式 .597、B09 学习器 N .328；亏损在部署（布局）而非
 护盾的离站时机；仅靠生产护盾的站点访问，一支闲置机队就有 .23，两站航点包再加 .147。第 1 阶段一个
@@ -84,9 +99,13 @@ contention is not measured (contended wall projections have overstated by 2.5× 
 
 Marking rule: TRIED = executed with results in this repository; RECORDED = written down as a plan
 or recommendation, not executed; NEW = neither. Each item names the first bounded study, its cost,
-and what can be reused. None of these should start before the owner has answered DECIDE-1/2/4 of
-the 2026-09-26 diagnosis (`docs/Claude_docs/reviews/RESEARCH_PROGRAM_DIAGNOSIS_AND_RESET_20260926.md`,
-section 8); the T1 track there is what this direction has effectively been building.
+and what can be reused. The T1 track of the 2026-09-26 diagnosis
+(`docs/Claude_docs/reviews/RESEARCH_PROGRAM_DIAGNOSIS_AND_RESET_20260926.md`) is what this
+direction has effectively been building; the direction's follow-up response
+(`RESET_RESPONSE_AND_FIRST_STUDY_20260926.md`, section 10) withdrew the 30-day freeze and the
+Root-dissolution wording and deferred the venue class as non-blocking, so nothing here waits on an
+owner decision beyond the ordinary rules (declare before running, one writer per path, Root's
+cross-direction coordination, the node concurrency ceiling).
 
 ### D1. T1 baseline suite on the frozen benchmark task (RECORDED → execute)
 
@@ -108,27 +127,35 @@ development panel, hold-out read once.
 
 Question: is deterministic-mode wall parking a decoding artefact of the continuous action head at
 the arena boundary (mean action saturating and being clipped), and should the benchmark evaluate
-learners deterministically, with fixed sampled draws, or both? First study: 0 fits — on the
-existing N and SET panels and traces (`runs/energy_relay_benchmark/b01_ref_a02`,
-`b02_s0_stoch_a01`, `b02_s1_eval_c0*_a01`), relate boundary contact to the pre-clip action
-statistics per step (the traces hold proposals and submitted actions), and test whether a
-bounded-action parameterisation would change the deterministic behaviour without retraining
-(evaluate the same weights under a squashed decode). Outcome: a benchmark decision on the
-evaluation mode and, if the artefact is real, a host-level fix recorded as a benchmark change, not
-a learner improvement. Cost: CPU hours, 0 fits. Owner rule to respect: the frozen host's
-interfaces stay; a decode change is a new declared host version.
+learners deterministically, with fixed sampled draws, or both? The stored traces cannot answer it:
+they hold positions, modes, shield decisions, batteries, guard counts and heuristic targets, not
+the proposed or submitted actions and not the observations. First study: 0 fits — extend the B01
+trace with the proposed action, the submitted action and (for learners) the actor head's pre-squash
+mean and log-std per step, re-evaluate N and the SET checkpoints on 955001–955032 in both modes
+(≈ 15 min per 64-episode panel pair), and relate boundary contact to saturation of the mean. A
+squashed decode applied to the same weights is a different policy: it can serve as a probe of
+whether contact comes from saturation, never as an evaluation correction, and any decode change is
+a new declared host or learner version. Outcome: a benchmark decision on the evaluation mode and,
+if the artefact is real, a recorded host change. Cost: a small evaluator change plus CPU hours,
+0 fits.
 
 ### D3. Why the training signal is flat while evaluation rises (NEW, 0 fits first)
 
-Question: under the training shield, what does the learner's per-step reward reward? Candidate
-decomposition on existing training records (`progress.jsonl` / `summary.json` of
-`b02_s1_set_a01` and its resumed process): the return-cost term (`lambda_return` 2.0) against
-service per rollout; the share of commands overridden by the shield (.24–.34 of UAV-steps) as an
-effective action-noise / credit-assignment problem; zero-service lanes as a function of first
-entry time. Then one declared fit per hypothesis, each a new recipe (e.g. logging the override as
-an observation feature, or evaluating with the collection policy's own mode), never an extension
-of the Stage 1 fit. Status: NEW; the phenomenon is RECORDED (Pro's table row). Cost: 0 fits for
-the decomposition; 1 fit ≈ 9.3 h per hypothesis afterwards.
+Question: why is training-time service flat while frozen-evaluation service rises? The phenomenon
+is recorded; no explanation is. The two signals are not yet comparable, and that is the first
+study (0 fits): training-time QoS is measured on worlds drawn from the lanes' own seed streams,
+with a policy snapshot that changes every rollout, with sampled actions, and as per-lane means over
+one 3000-step episode; evaluation QoS is measured on the fixed worlds 955001–955032, with frozen
+checkpoints, deterministically and with one fixed draw, as 32-world panel means. Step 0 evaluates
+the frozen checkpoints c00–c06 on a fixed sample of the training-world stream with sampled actions
+(the B02 evaluator takes any world list), and recomputes training-time QoS per episode on the same
+basis; if the gap disappears, it was a measurement difference. Only if it survives: the
+decomposition of the per-step reward on the training records (`progress.jsonl` / `summary.json` of
+`b02_s1_set_a01` and its resumed process) — the return-cost term (`lambda_return` 2.0) against
+service, the share of commands overridden by the shield (.24–.34 of UAV-steps), zero-service lanes
+against first entry time — and then one declared fit per hypothesis, each a new recipe, never an
+extension of the Stage 1 fit. Status: phenomenon RECORDED (Pro's table row); comparability check
+and explanation NEW. Cost: 0 fits for steps 0–1; ≈ 9.3 h per hypothesis fit afterwards.
 
 ### D4. Deployment as the learning problem: imitation of H_local as a baseline arm (NEW)
 
@@ -137,18 +164,21 @@ learner pre-trained to imitate H_local's waypoints, then fine-tuned with the pro
 close the gap to H_local, and does it keep or lose the shield-driven service? This is a baseline
 arm for the suite, not a method claim: it bounds how much of the gap is exploration/credit versus
 representation. Status: NEW on this host (the owner rejected re-skinned triggers and probes; this
-is a reference arm answering "is the target reachable by this network at all"). First study: one
-fit with the SET actor, behaviour-cloning warm start from H_local trajectories on the development
-worlds (0 extra environment steps beyond the H_local traces already stored), then the standard
-1.2 M fit and the standard reading. Cost: ≈ 9.3 h + a BC pass. Owner rule: H_local's trajectories
-on 957001–957032 must never be used.
+is a reference arm answering "is the target reachable by this network at all"). The stored
+H_local traces hold no observations or actions, so the warm start needs new collection: run H_local
+on the development worlds with an extended trace that stores each step's observations, central
+state and submitted actions (32 episodes ≈ 96k environment steps, ≈ 10 min CPU; a small evaluator
+change). First study: one fit with the SET actor, behaviour-cloning warm start from that
+collection, then the standard 1.2 M fit and the standard reading. Cost: the collection, a BC pass
+and ≈ 9.3 h. Owner rule: H_local's trajectories on 957001–957032 must never be collected or used.
 
 ### D5. T2 / T3 of the diagnosis (RECORDED; do not open before D1 has a table)
 
 T2 (coverage under user mobility with fleet churn on S7-S4, the untie-N question in its natural
 form) and T3 (outage restoration on the Milan traces, built, zero fits, data unvalidated) stand as
 recorded. Everything in section 4 transfers to them (evaluator, hold-out isolation, resumable
-training, admission scripts). The 30-day freeze recommendation of the diagnosis applies.
+training, admission scripts). The diagnosis's freeze recommendation was withdrawn in the follow-up
+response; putting them after D1 is a cost judgment (one table first), not a rule.
 
 ### D6. Shared-control items for Root (engineering, no science)
 
@@ -175,7 +205,10 @@ training, admission scripts). The 30-day freeze recommendation of the diagnosis 
 
 ## 4. What Codex can reuse today (paths on main)
 
-- Evaluator and references: `experiments/candidates/energy_relay_benchmark/b01/` (`evaluation.py`,
+- Evaluator and references: `experiments/candidates/energy_relay_benchmark/b01/` (`evaluation.py`;
+  its per-world traces store positions, modes, shield entries/exits, charging, waiting, battery,
+  dock bit, guard counts, return margins, station choices/distances/occupancy/queues, heuristic
+  targets, rewards and metrics — not actions or observations;
   `heuristic.py` with H1–H3 / H_local / H_spawn / H_park2, `native.py` phases incl.
   `stage0-references` and `holdout-references`), runner `scripts/run_energy_relay_benchmark_b01.py`.
 - SET training, checkpoint evaluation, resume: `experiments/candidates/energy_relay_benchmark/b02/`
