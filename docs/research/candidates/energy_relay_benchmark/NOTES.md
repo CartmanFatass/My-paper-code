@@ -4000,3 +4000,127 @@ from SET (3–6 ms per batch of 16, noisy). Scratch removed (66 MB, own subdirec
 *DM notes on the verbatim text:* the ACG λ_l point is resolved above (both arms λ_l = .05, ACG NOTES line 1362); the
 "NOTES:NNNN" line references are to this notebook at `96e6a8422`; the review's item (1) numbers were checked
 against the Stage 1 entries and match.
+
+## Pro question 2026-09-27 b03-v2-stake-sizing-and-equal-grounding-control
+
+Conversation: new (Jev account; the conversation address stays in the local operation file; shared
+records use the question key)
+
+Question: Before any Stage 2 fit is bought — is B03 v2 (the entry directly above: a zero-fit
+**Stage 2-0** that sizes the stake of the assignment itself, then **T′ × 2 against SET+A × 2** as the
+primary comparison, with fixed-rule label interventions) an adequate design for an algorithmic MARL
+claim on this host — "learned grounded assignment on HMASD's coordinator adds service over a flat
+learner at equal grounding and over fixed assignment rules" — and which single change would most raise
+its evidential value per node-hour? The answer can change: the Stage 2-0 rule (modes, the statistic
+S, the .03 bar); which control comes first (SET+A v M); the coordinator's learning signal (shared
+k-step team return v a per-agent credit); and whether the 52-node-hour batch is launched at all.
+
+Standing:
+- Host and instrument facts. Frozen S7-S2/H3000 (8 UAVs, 30 users in 5 clusters + 1 remote, 1 BS,
+  two charging stations, production shield enter .00 / exit .05, native J prices return cost at
+  λ = 2). Stage 1 ("Stage 1 result" entry, line ≈ 3206, with the review corrections in the entries
+  after it): one SET fit (B02 recipe, 1.2 M transitions, resumed from c03) reaches c06 .437 / .438
+  QoS/step on the development worlds (.462 / .440 hold-out), above N by .10–.12, below H_local by
+  .15–.17 QoS and 336–404 J, below H_central by .32–.34; the pre-entry window (before the first shield
+  entry, ≈ step 1044) carries ≈ 70% of the H_local gap and ≈ half of the H_central gap; boundary share
+  .30–.39 and altitude-floor share ≈ .47 of normal-mode UAV-steps (planners 0 on both). H_central
+  (six k-means centroids + two relay points, Hungarian with a 300 m hysteresis, go-to at 100 m, replan
+  every 30 steps, ground-truth positions) reaches .774 / .781; H_local (same planner on pooled legal
+  observations) .58–.61.
+- Owner constraint (2026-09-27, quoted in the Stage 2 declaration entry, line ≈ 3541): the next
+  study must be an algorithmic MARL/network contribution, not an engineering improvement of a
+  controller.
+- The Stage 2 declaration (`96e6a8422`) proposed T = GAS-HMASD: HMASD's SkillCoordinator/SkillDecoder
+  emits one of nine grounded labels per agent every k = 10 steps (labels 0–1 relay points, 2–7
+  centroids by user count, 8 FREE) trained by the existing high-level PPO on the k-step team return;
+  the SET low level unchanged except a six-number block for the assigned anchor; no intrinsic
+  reward; recipe otherwise SET's. The independent scientific review (verbatim in the entry above,
+  line ≈ 3747) dissented materially: T − SET confounds (i) the injected H_central planner feature,
+  (ii) the HMASD package and (iii) learned coordination; the coordinator cannot see the anchors;
+  λ_h = .01 is effectively 8× per agent; and the S1 record includes ACG B01's H6 > SET (3 fits v 3,
+  every H6 fit above every SET fit, lowest − highest +.012/.013/.010 at N4/N6/N8, both arms λ_l .05),
+  so semantics-free HMASD is not a null package on S1, while FSD B12/B13 show the *choice among*
+  semantics-free labels worth about panel noise. Every item was adopted (disposition table in that
+  entry): B03 v2 = Stage 2-0 (H_central under HUNGARIAN / IDENTITY / INDEPENDENT-NEAREST on
+  955001–955032, S = HUNGARIAN − max(free rules); S < .03 → T′ is not launched as a coordination
+  study), then T′ (coordinator state token carries the anchor block; λ_h .00125; relatives from the
+  current own observation) × 2 and SET+A (flat SET with all eight anchors' blocks, no labels) × 2 on
+  seeds 26092711 / 26092731, primary reading T′ − SET+A, interventions PERMUTE-per-episode / ALL-FREE /
+  HUNGARIAN-LABELS / IDENTITY-LABELS on T′'s c06 low level, fit-level and world-paired readings, CPU
+  FP32 evaluation as DM1's, a three-seed 2b rule, M (HMASD with its own MI skills) × 3 only in 2b.
+- Contrary and adjacent evidence. Low-level representation changes did not help on S1
+  (`local_observation_encoding` DENSE J45 .202 v .458 at 1.95× wall; `goal_conditioned_entity_aggregation`
+  P−O −.349 J, 32/32 adverse); learned counterfactual agent credit parked adverse (Q−V −.018);
+  chain-attributed rewards remain on the reserve list untested; DM3's behaviour cloning of the H
+  controller gave +.05 QoS with 15 service-loss worlds (go-to-anchor is not free to learn); DM4
+  studies fixed distance/hysteresis allocation rules. HMASD instability on S1: 26 of 35 runs.
+- Unresolved after the review: whether the shared k-step team return with per-agent value heads is
+  a strong enough signal for eight 9-way label choices at 600 decisions per rollout × 200 rollouts;
+  how often centroid-count ties swap slots between decisions; whether .03 is the right stake bar
+  (Stage 1 world-paired SEs ≈ .015–.03 on 32 worlds; seed variance unknown beyond one SET fit and
+  DM1's two in progress).
+
+Context:
+  Governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5, 7–8 (source_sha): exploratory purpose,
+    one adequate independent review with Pro added for distinct value (§5), scientific minimums (§8);
+    the owner instruction above; no owner pause on this direction; RESEARCH row `energy_relay_benchmark`
+    in `docs/research/RESEARCH.md` (source_sha) for the standing cell.
+  Method: `.agents/skills/hmasd-scientific-tools/SKILL.md` (source_sha) — "Update the working
+    explanation", "Comparators", "Statistics", "Cost and exposure", "Pro": the judgments this question
+    asks about (comparator adequacy, paired v fit-level reading, cost per evidence).
+  Evidence (source_sha unless stated): this notebook — "Stage 1 result …" (≈ 3206) and the review
+    corrections that follow it; "Stage 2 declaration (B03)" (≈ 3541); "Stage 2 (B03): independent
+    scientific review received … B03 v2" (≈ 3747, verbatim review, disposition table, Stage 2-0, first
+    batch, L0-A record). Run outputs: `runs/energy_relay_benchmark/b02_s1_eval_c06_a01/checkpoint-eval/c06_deterministic-stochastic/summary.json`
+    (Stage 1 c06 development panels), `runs/energy_relay_benchmark/b01_ref_a02/summary.json` and
+    `runs/energy_relay_benchmark/b01_ref_a02/heuristic-dev/panels/H1_e0.00_x0.05.json` (H_central
+    development panel, the HUNGARIAN reference for Stage 2-0's consistency check).
+    `docs/research/candidates/agent_count_generalization/NOTES.md` (B01 H6 v SET table, ≈ 1180–1202).
+    `docs/research/RESEARCH.md` rows `flexible_skill_duration` (B12/B13), `local_observation_encoding`,
+    `learned_counterfactual_agent_credit`, `goal_conditioned_entity_aggregation`, `agent_count_generalization`.
+    `docs/Claude_docs/research_notes/TEMPORAL_ABSTRACTION_PARADIGMS_AND_HMASD_DIRECTIONS_20260921.md`
+    §3.3 (coupling instrument) and S4 (scripted ceiling), the note the declaration cites.
+    Code: `experiments/candidates/energy_relay_benchmark/b03/` (`anchors.py`, `agent.py`,
+    `configuration.py`: actor input 3605, central input 3253, snapshot row 332),
+    `experiments/candidates/energy_relay_benchmark/b01/heuristic.py` (`plan`, `_assign_targets`,
+    hysteresis), `hmasd/networks.py` (`SkillCoordinator`, `SkillDecoder`), `hmasd/agent.py`
+    (coordinator update: entropy summed over agents, per-agent advantages from the shared k-step
+    return, `_batched_assign_skills`).
+  Frozen contract: the B02 SET recipe `experiments/candidates/energy_relay_benchmark/b02/configuration.py`
+    (`make_b02_config`, `RECIPE_NOTES`) and the world roles (955001–955032 development; 957001–957032
+    spent and never read again) keep their meaning; T′ and SET+A change only what the entry lists.
+
+Prospective cost: Stage 2-0 — 0 fit, ≤ 1 h CPU on this host. First batch — 4 fits × 13 h = 52
+node-hours GPU on `wsl_4070` plus ≤ 6 h evaluation, serial after DM1's second SET fit releases the
+node (≈ 02:30 UTC 2026-09-28). Stage 2b — up to 6 further fits under the pre-declared rule.
+
+Constraints: seeds and matched baseline per constitution section 8; no training, no edits outside the
+empty "### Answer" subsection; write only there on branch main. Read the question at the pinned
+source, but fetch the latest target file before editing and use its actual blob SHA. Preserve all
+other bytes; stop on overlapping edits. On successful write, report the actual commit. On write
+failure return the complete answer in chat, not just a SHA, status message or link.
+
+Return:
+1. **Stage 2-0.** Are HUNGARIAN / IDENTITY / INDEPENDENT-NEAREST the right coordination-free
+   comparators for "how much is the assignment itself worth", is S = HUNGARIAN − max(free rules) with
+   the .03 bar the right rule, and what else should be read from the three panels (per-world S
+   against pre-entry mass, slot-swap frequency, J as well as QoS) before the tree is applied?
+2. **Claim and controls.** Does T′ − SET+A support an algorithmic claim as worded, or only a
+   "package v feature" statement; what exact wording does this design support; must M be in the
+   first batch rather than 2b, given ACG's H6 > SET; is SET+A's block (eight anchors' absolute and
+   relative positions, distance and type) the right equal-grounding input, or does it hand the flat
+   learner a different and easier problem than T′'s?
+3. **Learning signal.** With per-agent labels trained from the shared k-step team return (per-agent
+   value heads, entropy summed over agents, λ_h .00125), is learnability of eight 9-way assignments
+   at this exposure plausible? If not, name the cheapest per-agent credit (a label-level
+   counterfactual/difference reward, the chain-attributed reward on record, or a decoder warm-started
+   by imitation of HUNGARIAN then fine-tuned) and, for each simple-model argument you use, the MARL
+   coupling it omits.
+4. **Strongest alternative** at no more than the same cost and the single observation that
+   discriminates it from B03 v2.
+5. **MATERIAL_DISSENT** yes/no on launching the first batch if Stage 2-0 gives S ≥ .03, with the
+   disputed statements and their evidence.
+Cite the sources you used; state any decision-critical source you could not read. Distinguish source
+facts, derivations and conjectures; do not require a new idea where the design is adequate.
+
+### Answer
