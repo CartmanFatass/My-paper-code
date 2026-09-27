@@ -3487,3 +3487,53 @@ H_central gap; the milestone .60 not reached. Not supported: statements about th
 seeds, a mechanism, a plateau, or "lower risk" as compensation for the service gap. Open questions
 for Root stand as written, with (b) qualified by the 955016 caveat and (c) by the per-checkpoint
 mode gaps.
+
+### Closure record (2026-09-27 ≈ 08:30 UTC): node copies of the earlier runs were removed by a shared-checkout sparse update; evidence retained locally and on main; cleanup outcome
+
+**What happened on the node.** At the closure survey the node checkout `/home/wu/projects/HMASD/runs/energy_relay_benchmark/`
+held only `b01_ref_a01`, `b02_s1_eval_c05_a01`, `b02_s1_eval_c06_a01`, `b02_s1_eval_c06_final_a01` and
+`b02_s1_set_a01r`. Gone: `b01_ref_a02`, `b02_s0_stoch_a01`, `b02_s0_refs_a01`, `b02_s1_set_a01`
+(with the original c00–c03 checkpoints), `b02_s1_eval_c00_a01`…`c04_a01` and `b02_holdout_refs_a01`,
+all present at 03:58 UTC (the c04 read). No admitted operation names those paths and nothing under
+`/home/wu` holds a moved copy. The node checkout is a cone-mode sparse checkout (Git 2.43); its
+pattern file changed at 04:28:14 UTC (between "merge origin/main" reflog entries at 04:08, 04:20 and
+04:26 UTC made by another party's tooling), and the cone now lists other directions' run
+directories (`runs/energy_relay_baselines/b01_set_a01/seed-26092711`,
+`runs/energy_relay_diagnostics/b01_alignment_a01`, `runs/flexible_skill_duration/…`) but not
+`runs/energy_relay_benchmark`. The removal pattern matches Git's sparse-directory cleanup on a
+sparse-checkout update: every directory of this direction whose files were all either tracked on
+main (skip-worktree on the node) or ignored (`*.npz`, `*.log`, `*.jsonl`, `checkpoints/`) was
+deleted, while directories holding untracked non-ignored files (`b01_ref_a01`, never committed;
+the c05/c06 evaluations, whose JSON was not yet on main at 04:28 UTC) or a modified tracked file
+(`b02_s1_set_a01r/summary.json`) were left. The engineering method tells DMs to add their run
+directories with `git sparse-checkout add` (preserving existing paths); that step, run by any DM,
+deletes every other direction's completed and committed run directory on the node, bulk included.
+Actor not identified and not needed: this is a shared-control hazard, reported to the owner and to
+Root through this entry and the RESEARCH row, not a message.
+
+**Evidence status.** Nothing is lost: every run's JSON (configs, summaries, launch records, panels)
+is tracked on main and present locally, and the local checkout holds the traces of all 608 Stage 1
+episodes and of B01/Stage 0 (rsynced after each run). Checkpoints: the node's `hmasd-artifacts`
+copies of c00–c03 (`/home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01/checkpoints/`)
+are now the only node copies of the first process's checkpoints **and the live input of DM2's
+admitted operation** (`--checkpoint-root` of `energy_relay_diagnostics/b01_alignment_a01`,
+accepted 03:05:17Z) — not to be deleted by anyone; c04–c06 exist on the node in
+`b02_s1_set_a01r/checkpoints/` (at risk on the next sparse update once the node pulls this
+direction's commits) and under `hmasd-artifacts/…/b02_s1_set_a01r/checkpoints/`. Retention action:
+all seven checkpoints (c00–c06) were copied to the local checkout under the two run directories
+(`checkpoints/`, gitignored; 246 MB) and each `agent.pt` sha256 verified against its record
+(9d5806c1…, be3ad2f1…, dd9dcec8…, 80b2bdad…, 31d21637…, 7ebf3586…, 41aa4ff0…); the frozen final
+model c06 therefore has three copies (node run dir, node artifacts, local).
+
+**Cleanup outcome (constitution §4/§9 closure).** Targets considered and their disposition: the
+node `hmasd-artifacts` checkpoint copies (246 MB) — kept, live consumer DM2 and sole node copies of
+c00–c03; local run directories with traces (≈ 500 MB, gitignored bulk) — kept, the retained
+evidence copy and readable by the Codex DMs from the shared checkout; local `checkpoints/`
+copies — kept as above; `temp/directions/energy_relay_benchmark/` (156 KB: launch and poll
+scripts, poller log, L0 notes) — kept, tiny and reusable if Root asks for a launch; kernel launch
+snapshots — their own lifecycle, untouched; session scratchpad dry-run files — removed (outside
+the repository). No repository or node bulk was deleted, so net allocated usage did not decrease
+(local +246 MB for the checkpoint retention; node unchanged, 825 GB free of 1 TB). Leftovers
+recorded: `b01_ref_a01` on the node (6 MB, superseded B01 attempt, never committed), the three
+reader/resume follow-ups (schedule-flag refusal in `read_resume_checkpoint`, value-normaliser
+comparison in `resumed_agent`, a hold-out reader test beyond the dry run) — not done, no consumer.
