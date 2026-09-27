@@ -1,0 +1,176 @@
+{
+  "verified_at": "2026-09-27T06:23:52Z",
+  "root": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01",
+  "artifact_count": 130,
+  "artifact_bytes": 614544233,
+  "artifact_allocated_bytes": 614830080,
+  "mismatches": [],
+  "per_world_matches_summary": true,
+  "checkpoint_records_match_summary": true,
+  "panels_exact_worlds_and_full_length": true,
+  "teacher_raw_schema": {
+    "mode": {
+      "shape": [
+        3000,
+        8
+      ],
+      "dtype": "bool"
+    },
+    "entered": {
+      "shape": [
+        3000,
+        8
+      ],
+      "dtype": "bool"
+    },
+    "exited": {
+      "shape": [
+        3000,
+        8
+      ],
+      "dtype": "bool"
+    },
+    "charging": {
+      "shape": [
+        3000,
+        8
+      ],
+      "dtype": "bool"
+    },
+    "waiting_steps": {
+      "shape": [
+        3000,
+        8
+      ],
+      "dtype": "int64"
+    },
+    "battery": {
+      "shape": [
+        3000,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "dock_bit": {
+      "shape": [
+        3000,
+        8
+      ],
+      "dtype": "bool"
+    },
+    "guard_checked": {
+      "shape": [
+        3000
+      ],
+      "dtype": "int64"
+    },
+    "guard_blocked": {
+      "shape": [
+        3000
+      ],
+      "dtype": "int64"
+    },
+    "own_xyz": {
+      "shape": [
+        3000,
+        8,
+        3
+      ],
+      "dtype": "float64"
+    },
+    "return_margin": {
+      "shape": [
+        3000,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "nearest_station": {
+      "shape": [
+        3000,
+        8
+      ],
+      "dtype": "int64"
+    },
+    "nearest_station_distance_m": {
+      "shape": [
+        3000,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "station_occupancy": {
+      "shape": [
+        3000,
+        2
+      ],
+      "dtype": "int8"
+    },
+    "station_queue": {
+      "shape": [
+        3000,
+        2
+      ],
+      "dtype": "int8"
+    },
+    "target_xy": {
+      "shape": [
+        3000,
+        8,
+        2
+      ],
+      "dtype": "float64"
+    },
+    "reward": {
+      "shape": [
+        3000
+      ],
+      "dtype": "float64"
+    },
+    "metrics": {
+      "shape": [
+        3000,
+        14
+      ],
+      "dtype": "float64"
+    },
+    "ends": {
+      "shape": [
+        3000,
+        2
+      ],
+      "dtype": "bool"
+    },
+    "observations_t": {
+      "shape": [
+        3000,
+        8,
+        365
+      ],
+      "dtype": "float32"
+    },
+    "state_t": {
+      "shape": [
+        3000,
+        306
+      ],
+      "dtype": "float32"
+    },
+    "proposal_t": {
+      "shape": [
+        3000,
+        8,
+        4
+      ],
+      "dtype": "float32"
+    },
+    "submitted_t": {
+      "shape": [
+        3000,
+        8,
+        4
+      ],
+      "dtype": "float32"
+    }
+  }
+}

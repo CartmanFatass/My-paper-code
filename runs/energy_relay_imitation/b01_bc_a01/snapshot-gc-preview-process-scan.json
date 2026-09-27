@@ -1,0 +1,14 @@
+{
+  "mode": "preview",
+  "snapshots": [
+    {
+      "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/faf998971b8bee51ab5b5ff1e6c3c400884dc1eb972cadb152a927981407835a.json",
+      "durable_ref": "refs/remotes/origin/HEAD",
+      "eligible": true,
+      "output": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01",
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8381b80584594dc3a71f1722220af627",
+      "sha": "b8cf9d3aace3ac4b386d03190b5a6310ee90acae",
+      "snapshot": "8381b80584594dc3a71f1722220af627"
+    }
+  ]
+}

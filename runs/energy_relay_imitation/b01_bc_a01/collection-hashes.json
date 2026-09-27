@@ -1,0 +1,42 @@
+{
+  "node": "wsl_4070",
+  "source_root": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01",
+  "verified_compact_files": {
+    "summary.json": {
+      "sha256": "ab6c8a3bcaa138434843b70915e7e0bb755551cefd8e673f1a18b2cfb760421e",
+      "bytes": 826223
+    },
+    "config.json": {
+      "sha256": "cd22c68c3310aebbb0ffca2f475899f5d0864540751b871866fe90cc2f4562ce",
+      "bytes": 1785
+    },
+    "process-exit.json": {
+      "sha256": "26568e1d461a3f4bef44c4a75d87d031669197c4ce1810627f86da8ef360ca49",
+      "bytes": 550
+    },
+    "launch-status.json": {
+      "sha256": "625a1cc6882d48183ccd099394d07ed6fadeade00755b0679fb983ebe6198401",
+      "bytes": 596
+    },
+    "stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr.log": {
+      "sha256": "be9983ff562fc0d66d96adcd1c131a9fb83fb61b7081861aa32b53bb6115ebf4",
+      "bytes": 8316
+    },
+    "progress.jsonl": {
+      "sha256": "b8da66c7d27d5620f301b8100c35d816ab458e6f35ed4a415179eb3fb65ce0fb",
+      "bytes": 9755
+    },
+    "checkpoints/initial/record.json": {
+      "sha256": "94198452e102fef435f3e4a9a4ec644337915ae85128f0c013ba2a59bc91d5a3",
+      "bytes": 2667
+    },
+    "checkpoints/final/record.json": {
+      "sha256": "e471df9fe31567651c0f076dd3f3046c3081c11f6cc577ba7b45f6b9b2d1fbb3",
+      "bytes": 2677
+    }
+  }
+}

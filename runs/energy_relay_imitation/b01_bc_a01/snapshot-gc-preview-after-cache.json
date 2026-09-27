@@ -1,0 +1,11 @@
+{
+  "mode": "preview",
+  "snapshots": [
+    {
+      "eligible": false,
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8381b80584594dc3a71f1722220af627",
+      "reason": "cannot inspect own process 660: [Errno 13] Permission denied: '/proc/660/cwd'; retry with --sudo-process-scan",
+      "snapshot": "8381b80584594dc3a71f1722220af627"
+    }
+  ]
+}

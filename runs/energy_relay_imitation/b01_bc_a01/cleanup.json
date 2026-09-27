@@ -1,0 +1,34 @@
+{
+  "snapshot": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8381b80584594dc3a71f1722220af627",
+  "before_allocated_bytes": 796762112,
+  "removed_verified_verification_bytecode": [
+    {
+      "path": "configs/__pycache__/__init__.cpython-310.pyc",
+      "bytes": 195,
+      "allocated_bytes": 4096,
+      "mtime": 1790490462.802178
+    },
+    {
+      "path": "configs/__pycache__/config_1.cpython-310.pyc",
+      "bytes": 21806,
+      "allocated_bytes": 24576,
+      "mtime": 1790490462.802178
+    }
+  ],
+  "after_bytecode_cleanup_allocated_bytes": 796729344,
+  "bytecode_allocated_bytes_freed": 32768,
+  "bytecode_directory_absent": true,
+  "verified_at": "2026-09-27T06:41:04Z",
+  "snapshot_absent": true,
+  "git_registration_absent": true,
+  "snapshot_after_allocated_bytes": 0,
+  "retained_bulk_file_count": 130,
+  "retained_bulk_allocated_bytes": 614830080,
+  "retained_output_tree_allocated_bytes": 616431616,
+  "retained_manifest_claim_and_exit": true,
+  "node_net_allocated_bytes_freed": 796762112,
+  "local_scratch_removed": "/home/fires/hmasd-wsl/temp/directions/energy_relay_imitation",
+  "local_scratch_final_empty_directories_allocated_bytes_freed": 8192,
+  "local_scratch_absent": true,
+  "local_prior_request_files_removed": "four files and b01_bc_a01 directory removed; that partial-deletion byte total was not retained and is not added"
+}

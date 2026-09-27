@@ -279,3 +279,284 @@ Manifest and preflight were copied and SHA256-verified against the node. Scienti
 remains at the manifest output root; acceptance is not a result. Observe this same operation
 with the native waiter, then collect, verify and read its terminal artifacts. No resend,
 restart, automatic fit extension or new seed is authorized by a checkpoint or wait failure.
+
+## 2026-09-27 — B01 complete: partial mean gain, adverse worlds and nonuniform imitation
+
+### Terminal evidence, integrity and actual cost
+
+The accepted operation exited normally with code 0 at 06:17:40 UTC. The
+[terminal status](../../../../runs/energy_relay_imitation/b01_bc_a01/status-terminal.json)
+and [exit witness](../../../../runs/energy_relay_imitation/b01_bc_a01/process-exit.json)
+agree with its original identity. The [complete summary](../../../../runs/energy_relay_imitation/b01_bc_a01/summary.json)
+contains every native world and paired difference; [config](../../../../runs/energy_relay_imitation/b01_bc_a01/config.json),
+[progress](../../../../runs/energy_relay_imitation/b01_bc_a01/progress.jsonl) and the two checkpoint
+records preserve the fixed execution. No failed world, early termination, dropped world or retry:
+all 128 episodes ended at H3000 by native truncation, exactly **384,000 environment transitions**.
+One fit completed ten epochs, **1,920 updates / 7,680,000 agent-transition loss exposures**;
+the four fixed offline readings used **3,072,000 further agent-transition forwards**, no updates.
+
+The DM independently verified all **128 NPZ files and two full checkpoints** against their
+recorded SHA256 and byte counts, checked per-world JSON equality with the summary, and rescored
+every native reward/metric sum and ending from raw arrays. Teacher input shapes/finite values,
+offline stratum counts and weighted MSE aggregation agree. Every shield-inactive teacher
+proposal equals the submitted action; all 573,945 shield-active agent-steps across both teacher
+panels changed the proposal on submission. These remain distinct recorded actions.
+Only 14 actor state tensors changed between actual checkpoints; logstd and all critic tensors,
+coordinator, value normalisers and their non-actor optimizers stayed unchanged. Actor optimizer
+steps are 1,920 throughout its populated state. Runtime finite-gradient checks passed and actor
+parameter L2 movement was 9.95421. See [artifact verification](../../../../runs/energy_relay_imitation/b01_bc_a01/artifact-verification.json)
+and [raw/checkpoint verification](../../../../runs/energy_relay_imitation/b01_bc_a01/native-verification.json).
+This verification used no additional fit, environment episode or actor forward.
+
+Study wall was **5,374.94 s / 89.58 min**, including **328.26 s / 5.47 min** fitting. Collection,
+teacher, initial and final evaluation panels respectively took 1,499.71 / 1,064.05 / 1,017.78 /
+1,262.91 s; preparation/import, transport and this reading are not silently included as measured
+study time. Admission-to-exit was approximately 92.11 min. Reported parent/maximum-child/world-worker
+peak RSS was 1,441,020 KiB; this is not simultaneous aggregate memory across processes or the node.
+All bulk files total 614,544,233 logical bytes / 614,830,080 allocated bytes. The canonical
+retained bulk location is `wsl_4070:/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/`;
+relative paths, sizes and hashes are in the summary. Only compact outputs were collected locally.
+The [stderr](../../../../runs/energy_relay_imitation/b01_bc_a01/stderr.log) contains the existing
+singleton skill-logit standard-deviation diagnostics and notices that inactive discriminator
+buffers were not saved; it contains no scientific exception. The native metric and parameter
+checks above, rather than a clean-looking log, support technical completion.
+
+### Native reading, including all adverse outcomes
+
+The fixed development-world comparison is conditional on **one training instance**. The DM
+recomputed the aggregates and paired SEs independently in [reading.json](../../../../runs/energy_relay_imitation/b01_bc_a01/reading.json).
+No new threshold, selected checkpoint or selected world was introduced.
+
+| Full H3000 world mean | H_local teacher | Actual initialisation | Final BC |
+| --- | ---: | ---: | ---: |
+| QoS per step | .580086 | .217423 | .266972 |
+| Raw native J | 1532.730 | 617.416 | 756.935 |
+| Raw return-constraint cost sum | 88.5065 | 4.5715 | 8.4036 |
+| Episode minimum battery ratio | .083022 | .098560 | .099197 |
+| Charger input Wh | 367.526 | 174.479 | 214.557 |
+| Shield-active UAV-step fraction | .378426 | .184805 | .306353 |
+| Shield entry count | 42.1875 | 48.7813 | 108.6563 |
+| Guard blocked actions | 2732.06 | 736.81 | 3855.34 |
+| Boundary fraction in normal mode | 0 | .160116 | .589672 |
+| Altitude-floor fraction in normal mode | .019421 | .988460 | .022514 |
+| Zero-service worlds | 0/32 | 1/32 | 5/32 |
+
+BC minus its own initialisation is **+.0495489 QoS/step** (world SE .0309238; descriptive
+mean ± 1.96 SE = [−.0110616, +.1101595]) and **+139.5188 J** (SE 93.1461;
+[−43.0476, +322.0852]). These intervals describe world variation conditional on the one fit,
+not training-population uncertainty or equivalence. QoS signs are **16 positive / 1 zero / 15
+negative**; J signs are **15 positive / 17 negative**. The same mean gain therefore does not
+make this a reliably improved deployment policy. The worst paired world, **968024**, loses
+**.247244 QoS/step and 735.070 J** and becomes zero-service. The largest gain, 968027, adds
+.399625 QoS/step and 1192.861 J. All 15 service-loss and 17 J-loss world IDs/differences are
+retained in reading.json, with every original world in summary.json.
+
+Final zero-service worlds are **968005, 968006, 968016, 968021 and 968024**; initialisation was
+zero only in 968006, so four new zero-service cases coexist with the positive mean. Return cost
+increases by **3.83207** on average (SE 2.72436), with increases in **23/32** worlds; 968026
+has the largest increase, +51.0335, alongside a .0186788 decline in minimum battery. Mean
+minimum battery rises only .0006373 while **17/32** minima fall. The final lower tail begins
+.079835 (968020), .082480 (968026), .085798 (968007), versus initial panel minimum .085256.
+All three evaluation panels have zero cutoff/depletion events and penalties; this does not
+erase the measured return-risk conflict or establish safety.
+
+Teacher-minus-BC QoS is .313114 on average; BC beats teacher QoS in only 968031 and J in
+968001/968031. The teacher also carries much larger average return cost and a lower battery
+tail, so it is an opportunity comparator with costs, not a risk-free optimum or a matched
+information capacity bound. No ranking against Claude's separately trained policy is inferred.
+
+Policy-dependent phase means are retained descriptively: initial→BC pre-entry QoS .080361→
+.161933, entry-to-input .224142→.265221, post-input .375771→.362486. These are different
+policy-induced windows, not matched causal phases. First-service means among served worlds
+are 533.45 steps (31 worlds) and 146.74 (27 worlds); excluding the five BC never-served worlds
+would falsely turn that conditional mean into universal service acceleration. The increased
+normal-mode boundary occupancy and shield entry/block counts are adverse process observations,
+not by themselves a causal diagnosis.
+
+### Fixed offline reading: the overall decrease masks a worsened control stratum
+
+| Proposal MSE, initial → BC | Demonstration trajectories | Separate teacher-evaluation trajectories |
+| --- | ---: | ---: |
+| Overall | .178120 → .091954 | .176313 → .101468 |
+| Shield inactive | .126592 → .132997 | .122161 → .148999 |
+| Shield active | .266271 → .021739 | .265258 → .023397 |
+
+The held-out teacher-trajectory action-dimension MSEs (horizontal x/y, vertical, docking) are
+**[.147891, .155600, .401746, .0000136] → [.166568, .175979, .062177, .001148]**.
+The vertical coordinate improves sharply while the other three worsen. On shield-inactive
+held-out agent-steps every dimension worsens, including vertical .044374→.092608. The same
+inactive-stratum total error also worsens on demonstrations, so the native weakness is not
+adequately described as a well-fitted control rule that only fails on unseen visited states.
+
+Shield-active steps are 36.8898% of demonstration and 37.8426% of teacher-evaluation agent-steps.
+In the latter panel, their weighted MSE change is −.0915263 while shield-inactive change
+contributes **+.0166815**, yielding the overall −.0748448. The analogous demonstration
+contributions are −.0902074 and +.0040417. Thus the aggregate improvement does not establish
+successful imitation of the student-controlled phase. It motivates distinguishing loss
+allocation/finite optimisation and information/history mismatch from visitation effects;
+none is uniquely identified by this completed comparison. Scientific review and the DM's
+investment disposition follow below.
+
+### Independent scientific review and DM disposition
+
+Scientific Reviewer `bc_scientific_review` used the registered ResearchCritic role in a fresh
+context without inherited DM/Root turns. It reconstructed the prospective protocol and full
+native outputs before reading the shared interpretation, independently checked collected-file
+hashes and aggregates, and explicitly distinguished its reading of the DM's remote verification
+receipts from personally reopening the bulk files. The excluded holdout was not inspected.
+Its substantive review is preserved here; the repeated numerical tables are given above.
+
+The review supports a heterogeneous positive mean BC change for this saved initialisation,
+not reliable deployment benefit, successful teacher-policy compression, or a visitation-shift
+diagnosis. It additionally checked the paired medians: QoS +.002447, J −9.055. Its strongest
+simpler explanation is partial acquisition of a height-control habit with poor allocation of
+finite fitting effort across consequential parts of the teacher policy. Teacher altitude control
+toward 100 m, the vertical-error decrease and the normal-mode altitude-floor reduction support
+that candidate explanation, while horizontal errors and boundary occupancy worsen. This is a
+supported diagnostic hypothesis, not an identified altitude-mediated causal effect.
+
+The frozen shield replaces all four proposal coordinates while active. Supervising those
+teacher proposals was exactly the B01 contract, not an implementation violation. Much of the
+measured fitting success therefore concerns proposals that do not directly determine the
+executed action at that step. Competition from these supervised examples is a modifiable
+candidate contributor, but they may still help near release or through recurrent representations;
+removing them could help or hurt. The fact that inactive-stratum error worsens even on training
+demonstrations gives finite fitting/objective alignment priority over a pure unseen-visitation
+story. Information/history mismatch and new-teacher-world generalisation remain alternatives.
+Neither the pooled teacher gap nor central input availability is a matched capacity bound.
+
+The reviewer recommends **one prospectively fixed loss-mask comparison**, starting from the
+saved B01 initialisation and retained demonstrations. Keep the order, ten epochs, optimizer,
+recurrent processing, input cadence and action interface; retain every step for recurrence,
+but remove direct action-regression loss where the production shield replaces the proposal.
+Freeze loss normalisation and empty-mask handling. Reuse existing teacher/initial/B01 endpoint
+readings on the same 32 development worlds and evaluate only the new endpoint. This is exposed-data
+exploration, not replication. Do not add an altitude-only control, extra seeds, rollout aggregation,
+RL, DAgger or confirmation as an automatic bundle.
+
+The discriminating prediction is joint: better inactive-stratum imitation on both teacher
+panels **and** better complete native deployment than all-transition BC. If both improve,
+retain a useful conditional objective intervention without claiming it explains the whole gap.
+If inactive imitation improves but native deployment does not, reduce the usefulness assigned
+to teacher-distribution MSE and reconsider visitation/feedback without automatically selecting
+DAgger. If even training-stratum error does not improve, weaken loss competition rather than
+buy more epochs or architecture to rescue it. Service improvement accompanied by worse risk
+or additional zero-service failures remains a conflict.
+
+The review's incremental budget is one fit, unchanged full recurrent forward exposure,
+4,846,860 unmasked training agent-step exposures, 32 native episodes / at most 96,000 environment
+transitions, and 1,536,000 offline replay agent-step exposures. B01 provides 5.47 min fitting and
+21.05 min final-evaluation references, with revised-fit/replay/engineering/contending-node costs
+not guaranteed by those timings. End-to-end policy latency and aggregate CPU/GPU occupancy
+were not fully measured; no computational advantage over H_local is demonstrated.
+
+**MATERIAL_DISSENT: no** — the review's supported object is publication of completed exploratory
+B01 within its fixed BC-only scope. No competing post-result investment was supplied; the
+review recommends the single new loss-mask comparison and does not itself authorise execution.
+
+**DM decision.** Accept the reconstructed reading and this narrow continuation under the existing
+delegated imitation question. B01 is complete and immutable; do not promote its endpoint to a
+reliable deployment baseline or purchase an unchanged extra seed. Select B02 below as a distinct
+prospective intervention that separates an observed supervision mismatch from a pure visitation
+account. This is a scientific choice from new evidence and review, not a waiter-triggered extension
+of B01. No unresolved material dissent or distinct Pro benefit remains; no extra Pro round is owed.
+The direction retains its question and records the adverse evidence. No result of B02 automatically
+authorises another fit, RL, DAgger, hyperparameter sweep or confirmation.
+
+### B01 source and scratch retirement
+
+Compact outputs were collected with matching hashes. The native collector initially refused
+because the DM's checkpoint-inspection import had created two `configs/__pycache__` files in the
+snapshot; those exact timestamp-verified disposable files were removed. A second refusal concerned
+protected process `/proc/660/cwd`; the documented passwordless read-only process scan resolved it.
+The collector then previewed and removed only this terminal operation's source snapshot, with
+claim/manifest/exit and all 130 bulk artifacts preserved outside it. Refusals and collector receipts
+are retained. [Measured cleanup](../../../../runs/energy_relay_imitation/b01_bc_a01/cleanup.json)
+confirms source directory and Git registration gone, allocated bytes **796,762,112 → 0** on the
+node, approximately 759.85 MiB freed. No backup or duplicate bulk copy was created. Local request
+scratch was also removed; the separately measured final empty-directory cleanup freed 8,192 bytes,
+without inventing a total for the earlier request-file deletion. The needed B01 implementation
+and tests remain for the selected B02 reuse. Native observation was consumed and stopped after
+terminal collection; it has no remaining B01 work to wake or restart.
+
+## 2026-09-27 — B02 prospective loss-mask comparison and L0
+
+**Question and intervention.** Does omitting direct proposal loss during production-shield
+takeover improve both actionable teacher imitation and complete native deployment, conditional
+on the same B01 demonstrations and actual initialisation? B01's aggregate fit gain together with
+worse inactive-stratum training/evaluation MSE motivates this question. The independent review
+above supplies the section-5 scientific scrutiny. The current learning/service-risk background
+requires native J/QoS/risk and adverse worlds alongside the stratum diagnostic, not an MSE gate.
+
+**Fixed inputs and information.** Read only the retained B01 root
+`/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01` on wsl_4070. Pin B01 source
+`b8cf9d3aace3ac4b386d03190b5a6310ee90acae` and completed summary SHA256
+`ab6c8a3bcaa138434843b70915e7e0bb755551cefd8e673f1a18b2cfb760421e`.
+The actual initial checkpoint SHA256 is
+`360ab5575f69fe08a5025d61421d0cf51bf1d8702a7b17802b9f94dbe8334b88`, fingerprint
+`cb5c15e6d6fbf4e35affb0e33dd9f59915856e5167b8b6a474825324b85cb701`.
+Validate the summary, corresponding record and every used raw-input hash before fitting/replay;
+refuse missing or mismatched inputs rather than regenerate or silently substitute them. Record
+absolute source locators and digests in B02 output, without copying initial checkpoint or raw data.
+Use the same 32 demonstration worlds 967001–032 and existing 32 teacher-evaluation trajectories
+968001–032. Preserve the granted SET central snapshot, k=10 cadence, actual deterministic tanh
+head and recurrent contract. Forbidden worlds 957001–032 remain excluded. The 968001–032 panel
+is now exposed development data, never renamed a new test or training replicate.
+
+**Exactly one new fit.** Load the saved initial checkpoint, including its zero-step actor optimizer,
+into the same B01 model/config; verify the fingerprint. Retain seed 929031, order RNG 929032,
+ten epochs, four-episode groups, TBPTT128, learning rate 1e-4, clipping .5, weight decay 0,
+no scheduler, TF32 off and single-thread library caps. Keep actor-only optimisation and unchanged
+logstd/critic/coordinator/normalisers. Every real step still participates in chronological actor
+forward and recurrent state propagation. Define direct loss weight as valid padding mask times
+`not recorded_shield_active`, then divide summed squared error by the selected agent-step count
+times four action dimensions. This selected-coordinate mean is part of the intervention.
+Keep teacher proposals as targets, never submitted actions. Active steps can still influence
+future inactive outputs through the recurrent graph within a chunk; the claim is removal of
+their direct loss, not removal of all gradients or history associated with those steps.
+
+If a chunk has no selected elements, advance/carry and detach hidden state normally, clear
+gradients and skip its optimizer step; do not replace the chunk, accumulate extra updates or
+change sequence order. At most 1,920 updates, exactly 7,680,000 full recurrent training agent-step
+forwards and 4,846,860 selected loss exposures for these complete fixed data. Report actual
+updates, skipped chunks, both exposure counts, finite checks and module invariance.
+
+**One endpoint and complete reading.** Save only the new final checkpoint. Run it deterministically
+on the same 32 development worlds, H3000/S7-S2/eight UAVs/production shield, with two environment
+workers and one thread each. No new teacher collection and no rerun of B01 initial/final policies.
+The primary new comparison is revised-minus-B01-BC, with teacher and actual initialisation retained
+from their immutable records. Report every world and signed QoS/J/risk difference, zero-service,
+minimum-battery tail, cutoff/depletion, charging, shield/guard and phase diagnostics with the same
+censoring/conditional-window caveats. Do not silently drop failed worlds or infer a complete
+panel after failure. Replay the new endpoint, with frozen weights and complete recurrent state,
+on both existing teacher panels; report overall/per-dimension/active/inactive MSE. Exactly
+1,536,000 additional offline agent-step forwards, no checkpoint selection or fit on evaluation data.
+
+The joint prediction and all four outcome branches are those in the review above. Relative
+native improvements with risk/failure conflicts remain conflicts; offline improvement alone
+does not establish utility or a unique mechanism. This conditional paired intervention is not
+confirmation, not an independent training seed and not a policy-class capacity test.
+
+**Cost and execution.** One sequential admitted batch: validated retained inputs → one fit →
+32 final-policy episodes (maximum 96,000 environment transitions) → two offline replays → reading.
+Reference fit/evaluation wall is 5.47 + 21.05 min; allow approximately **30–45 minutes** compute
+including replay/imports under comparable contention, with engineering, review, transport and
+interpretation additional and actual times recorded. Wall is an estimate, not a stopping rule.
+Measured B01 process peaks suggest roughly 1.4 GiB per heavy process, not a concurrent node total;
+fresh node memory/concurrency admission still applies. New bulk is one final checkpoint plus
+32 trajectory files; retain one canonical run copy and compact Git records. No additional node
+or resource reservation follows from this plan. B02 scientific work is **0 fits / 0 episodes**
+until exact-source publication, independent engineering acceptance and native admission.
+
+**Bounded implementation L0.** The Implementer owns only new
+`experiments/candidates/energy_relay_imitation/b02/`, `run_b02.py` in that direction and mirrored
+tests, plus a narrow backwards-compatible B01 helper parameterisation if necessary to reuse
+fit/replay/failure handling. Preserve B01 defaults and its frozen meanings; no shared evaluator,
+learner or other direction edits. Prefer reuse over a second copy of the complete B01 framework.
+The admitted entry must check admission/source identity before scientific effects and pin external
+inputs. Preserve the repaired metadata coexistence, thread caps, failed-work accounting and
+pool-submission handling. Tests exercise masked-loss behaviour, recurrent continuation through
+masked steps, empty masks, immutable-input rejection, counts/checkpoints and B01 compatibility
+using synthetic/short unrelated fixtures only. No actual scientific panel in tests. The helper
+does no Git mutations, NOTES edits or science launch; it returns code, checks and limitations.
+The DM accepts only after the independent Engineering Reviewer closes material issues.

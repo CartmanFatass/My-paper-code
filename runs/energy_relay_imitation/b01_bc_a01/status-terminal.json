@@ -1,0 +1,67 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/faf998971b8bee51ab5b5ff1e6c3c400884dc1eb972cadb152a927981407835a.json",
+  "direction": "energy_relay_imitation",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790489860.8866835,
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 758563,
+        "session_id": 758562,
+        "start_ticks": 83623131
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 758562,
+        "session_id": 758562,
+        "start_ticks": 83623128
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-27T06:21:15.583473Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/faf998971b8bee51ab5b5ff1e6c3c400884dc1eb972cadb152a927981407835a.json",
+  "output_root": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "b8cf9d3aace3ac4b386d03190b5a6310ee90acae",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8381b80584594dc3a71f1722220af627"
+}

@@ -1,0 +1,39 @@
+{
+  "verified_at": "2026-09-27T06:27:42Z",
+  "raw_worlds_rescored": 128,
+  "native_reward_and_metric_sums_match": true,
+  "all_ends_H3000_truncated": true,
+  "all_teacher_inputs_shapes_finite": true,
+  "offline_stratum_count_and_weighted_MSE_match": true,
+  "teacher_agent_steps": {
+    "teacher_eval": {
+      "shield_active": 290631,
+      "shield_inactive": 477369
+    },
+    "teacher_train": {
+      "shield_active": 283314,
+      "shield_inactive": 484686
+    }
+  },
+  "teacher_proposal_submission_changes": {
+    "shield_inactive": 0,
+    "shield_active": 573945
+  },
+  "checkpoint_unchanged": [
+    "skill_coordinator",
+    "coordinator_optimizer",
+    "discoverer_critic_optimizer",
+    "team_discriminator",
+    "individual_discriminator",
+    "valuenorm_state"
+  ],
+  "only_actor_non_logstd_tensors_changed": true,
+  "changed_actor_tensor_count": 14,
+  "actor_optimizer_steps_min_max": [
+    1920,
+    1920
+  ],
+  "additional_fits": 0,
+  "additional_environment_episodes": 0,
+  "additional_actor_forwards": 0
+}
