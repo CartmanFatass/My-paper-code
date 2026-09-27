@@ -1913,3 +1913,53 @@ change or new backup was performed. The source snapshot remains present at
 1,600,032,768 allocated bytes; cleanup is incomplete. The exact path/refusal and
 single canonical raw location are in
 [cleanup.json](../../../../runs/energy_relay_availability/b04_transit_hold_a01/cleanup.json).
+
+### 2026-09-27 — B05 implementation, independent engineering review and admission preparation
+
+Implemented the declared comparison in the five owned B05 source files. The
+`five_ten` arm imports the unchanged B04 controller; `one_step` replaces its plan
+scoring with the same native snapshot at nominal step one, retaining H1 target
+memory, candidate order, fallback and inherited ten-step execution. Both store
+float64 candidate/point scores, selected gains and near-tie counts. Unused slots,
+fallback windows and prediction times absent from an arm are represented by NaN
+in the raw arrays, not by invented service scores. The signed paired reading is
+five_ten minus one_step. Native metrics, full user trajectories and initial/RNG
+hashes, bounded failure handling and compact/raw output separation are retained.
+
+Clarification of the preceding L0 shorthand: one_step makes one snapshot **per
+candidate**, at most nine per active window; five_ten makes one common snapshot
+plus two per candidate, at most nineteen. The 86,400/182,400 and 268,800 combined
+bounds were already correct. Corrected a stale descriptive configuration label
+before publication; this did not change the implemented arms.
+
+A fresh independent `hmasd-reviewer` inspected the fixed contract, diff and actual
+controller/evaluator/snapshot/readout/admission consumers without DM conversation
+inheritance. It found no material engineering issue and requested no repair.
+It verified direct LayoutHeuristic dispatch, separate H1 memory, nine versus
+nineteen calls, finite strict float64 ranking, logging/NaN semantics, seed/reset
+propagation, real shield/guard and native reward handling, signed paired
+aggregation and admission before scientific effects. B04 and the inspected
+dependencies were unchanged relative to the published contract. The DM accepts
+this engineering review. It is not a scientific result or permission grant.
+
+All five source texts compiled without importing the candidate or advancing an
+environment. Author inspection and whitespace checks found no further issue.
+The current session instruction does not authorize new tests, so neither author
+nor reviewer ran tests, a native preflight episode or production seeds. The
+unchanged B04 execution evidence is retained; new-arm runtime behavior and
+realized pairing still require the accepted run's complete traces and checks.
+
+The preferred remote node was considered first. It is reachable and has about
+14.16 GB available memory, but its canonical checkout is at `8f638f44b1d`, forty-five
+commits behind its recorded origin/main, with uncommitted shared RESEARCH changes
+and live/partly untracked result records. Select `local_linux` for this bounded
+CPU comparison: it has synchronized published controls and the configured
+interpreter used for B04, while remote preparation would require reconciliation
+of that shared dirty control checkout. No remote file or accepted process was
+changed. The observed Python versions are local 3.10.20 and remote 3.10.21, both
+with NumPy 1.26.3; cross-host numerical equivalence is not assumed, especially
+under the retained strict comparison rule. Four local workers with one numeric
+thread each retain the stated 50-60 minute estimate. Local available memory was
+11.44 GB during preparation; actual admission must recheck it. The current
+project plan, with DM4 in reserve, leaves this study within the five-track
+resource ceiling. No B05 result operation has been invoked at this recording.
