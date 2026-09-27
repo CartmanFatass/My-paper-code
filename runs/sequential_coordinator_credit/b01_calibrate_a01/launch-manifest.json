@@ -1,0 +1,87 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-27T15:25:51.224710Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/0b945347d316499ab24a446a8e616967/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/0b945347d316499ab24a446a8e616967/scripts/run_sequential_coordinator_credit_b01.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/sequential_coordinator_credit/b01_calibrate_a01",
+    "--",
+    "calibrate",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/sequential_coordinator_credit/b01_calibrate_a01",
+    "--launch-sha",
+    "6741de83f9ad8547085f5d7facd91526307674f1"
+  ],
+  "claim_key": "992f8adb85b0b126d713b3a68be5d5daa0f6c79f6a45e493c57a940dec7d23e1",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/992f8adb85b0b126d713b3a68be5d5daa0f6c79f6a45e493c57a940dec7d23e1.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/0b945347d316499ab24a446a8e616967/scripts/run_sequential_coordinator_credit_b01.py",
+    "calibrate",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/sequential_coordinator_credit/b01_calibrate_a01",
+    "--launch-sha",
+    "6741de83f9ad8547085f5d7facd91526307674f1"
+  ],
+  "command_sha256": "5e4206e2e904d6f3f8986ab37f48ef7fb16176d0ef58b8473f949b36d4980072",
+  "control_observation": {
+    "observed_at": "2026-09-27T15:25:50.940584Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "6741de83f9ad8547085f5d7facd91526307674f1"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-27T15:25:50.959846Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/0b945347d316499ab24a446a8e616967",
+  "direction": "sequential_coordinator_credit",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "scripts/run_sequential_coordinator_credit_b01.py",
+    "calibrate",
+    "--launch-sha",
+    "6741de83f9ad8547085f5d7facd91526307674f1"
+  ],
+  "lead": "Claude DM (WSL session)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/sequential_coordinator_credit/b01_calibrate_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/992f8adb85b0b126d713b3a68be5d5daa0f6c79f6a45e493c57a940dec7d23e1.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/sequential_coordinator_credit/b01_calibrate_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/sequential_coordinator_credit/b01_calibrate_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "ae78c2b3-4661-4e9e-af97-ab02322b309f",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2822051,
+      "session_id": 2822051,
+      "start_ticks": 19237745
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 2822051,
+    "process_group_id": 2822051
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/sequential_coordinator_credit/b01_calibrate_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "ae78c2b3-4661-4e9e-af97-ab02322b309f",
+      "kind": "linux_pid_start_ticks",
+      "pid": 2822052,
+      "session_id": 2822051,
+      "start_ticks": 19237751
+    },
+    "pid": 2822052,
+    "process_group_id": 2822051,
+    "supervisor_pid": 2822051
+  },
+  "schema_version": 1,
+  "sha": "6741de83f9ad8547085f5d7facd91526307674f1",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/0b945347d316499ab24a446a8e616967",
+  "stderr": "/home/fires/hmasd-wsl/runs/sequential_coordinator_credit/b01_calibrate_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/sequential_coordinator_credit/b01_calibrate_a01/stdout.log"
+}
