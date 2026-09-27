@@ -23,7 +23,7 @@ import json
 import resource
 import sys
 import time
-from dataclasses import asdict
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any, Callable
 
@@ -73,13 +73,17 @@ def collect_and_train(agent, config, spec: B02Spec, *, feedback: bool = True,
                       after_rollout: Callable[[int, dict[str, Any]], None] | None = None,
                       observe_step: Callable[[Any, dict[str, Any], int], None] | None = None,
                       start_rollout: int = 0, start_transitions: int = 0,
-                      env_seed: int | None = None) -> dict[str, Any]:
+                      env_seed: int | None = None,
+                      record_hook: Callable[[int], dict[str, Any]] | None = None
+                      ) -> dict[str, Any]:
     """Collect rollouts ``start_rollout + 1 .. spec.rollouts`` of ``spec.lanes x spec.rollout_length``
     and update after each.
 
     ``after_rollout(rollout, record)`` runs after ``update`` and ``clear_buffers`` of each
     rollout (checkpoint point).  ``observe_step(agent, step_data, step)`` runs right after each
-    ``agent.step`` (tests).  Neither may draw random numbers.
+    ``agent.step`` (tests).  ``record_hook(rollout)`` (default None: B02) runs after
+    ``clear_buffers`` and returns extra fields merged into that rollout's record before
+    ``after_rollout``.  None of them may draw random numbers.
 
     Resume offsets (defaults = a fresh fit): rollout numbers continue from ``start_rollout``,
     the transition counter starts at ``start_transitions`` (the end-of-run contract check still
@@ -234,6 +238,11 @@ def collect_and_train(agent, config, spec: B02Spec, *, feedback: bool = True,
                     timers_before[lane] != timers_after[lane] for lane in timers_before)),
                 "collection_seconds": collection_s, "update_seconds": update_s,
             }
+            if record_hook is not None:
+                extra = record_hook(rollout)
+                if set(extra) & set(record):
+                    raise RuntimeError(f"record_hook overwrites {sorted(set(extra) & set(record))}")
+                record.update(extra)
             result["rollouts"].append(record)
             result["counts"]["rollouts"] = rollout
             if after_rollout is not None:
@@ -246,9 +255,12 @@ def collect_and_train(agent, config, spec: B02Spec, *, feedback: bool = True,
             env.close()
 
 
-def _seeded_agent(config, *, device: torch.device, log_dir: Path, seed: int):
+def _seeded_agent(config, *, device: torch.device, log_dir: Path, seed: int,
+                  construct: Callable[[Any, Path, torch.device], Any] | None = None):
     seed_everything(int(seed), device)
-    return HMASDAgent(config, log_dir=str(log_dir), device=device)
+    if construct is None:
+        return HMASDAgent(config, log_dir=str(log_dir), device=device)
+    return construct(config, log_dir, device)
 
 
 def _identity(agent) -> dict[str, Any]:
@@ -256,14 +268,18 @@ def _identity(agent) -> dict[str, Any]:
             "rollout_sampler_state": agent.rollout_buffer.get_sampler_rng_state()}
 
 
-def new_agent(config, *, device: torch.device, log_dir: Path, seed: int):
+def new_agent(config, *, device: torch.device, log_dir: Path, seed: int,
+              construct: Callable[[Any, Path, torch.device], Any] | None = None):
     """``seed_everything(seed)`` then ``HMASDAgent(config)``, as b08 ``new_initialized_agent``.
+
+    ``construct(config, log_dir, device)`` (default None = ``HMASDAgent``) builds another agent
+    class after the same seeding (``Recipe.construct_agent``).
 
     b08's ``initialization_identity`` hashes all four modules and fails on the discriminators
     the mappo switch leaves as None; the identity here is B01's parameter fingerprint (None
     modules skipped) plus the rollout sampler state.
     """
-    agent = _seeded_agent(config, device=device, log_dir=log_dir, seed=seed)
+    agent = _seeded_agent(config, device=device, log_dir=log_dir, seed=seed, construct=construct)
     return agent, _identity(agent)
 
 
@@ -275,26 +291,30 @@ RESUME_RE_SEEDED = ("environment world streams", "action sampling (torch)",
 
 
 def read_resume_checkpoint(resume_from: Path, spec: B02Spec, config, *,
-                           resume_source_sha: str | None = None) -> dict[str, Any]:
+                           resume_source_sha: str | None = None,
+                           recipe: "Recipe | None" = None) -> dict[str, Any]:
     """Validate ``checkpoints/cNN`` (record.json + agent.pt) for resuming ``spec``; no torch effect.
 
     Returns the record.  Refuses (ValueError) a record of another object/programme/seed/config,
     an ``agent.pt`` whose SHA-256 differs from the record, a rollout that is not a scheduled
     non-endpoint checkpoint of ``spec`` (or whose name/transitions disagree with it), and, when
-    ``resume_source_sha`` is given, a record written by another launch.
+    ``resume_source_sha`` is given, a record written by another launch.  ``recipe`` (default
+    None = ``b02_recipe()``) names the object, programme and config record expected.
     """
+    recipe = b02_recipe() if recipe is None else recipe
     root = Path(resume_from)
     record_path, agent_pt = root / "record.json", root / "agent.pt"
     if not record_path.is_file() or not agent_pt.is_file():
         raise ValueError(f"resume checkpoint lacks record.json or agent.pt: {root}")
     record = json.loads(record_path.read_text(encoding="utf-8"))
-    if record.get("object_id") != OBJECT_ID or record.get("programme") != PROGRAMME:
-        raise ValueError(f"resume checkpoint is not {OBJECT_ID} / {PROGRAMME}: "
+    if (record.get("object_id") != recipe.object_id
+            or record.get("programme") != recipe.programme):
+        raise ValueError(f"resume checkpoint is not {recipe.object_id} / {recipe.programme}: "
                          f"{record.get('object_id')!r} / {record.get('programme')!r}")
     if record.get("training_seed") != spec.seed:
         raise ValueError(f"resume checkpoint training_seed {record.get('training_seed')!r} "
                          f"!= spec seed {spec.seed}")
-    expected = config_dict(config)
+    expected = recipe.config_dict(config)
     if record.get("config") != expected:
         saved = record.get("config") or {}
         differing = sorted(key for key in set(saved) | set(expected)
@@ -324,13 +344,14 @@ def read_resume_checkpoint(resume_from: Path, spec: B02Spec, config, *,
 
 
 def resumed_agent(config, record: dict[str, Any], agent_pt: Path, *, device: torch.device,
-                  log_dir: Path, seed: int):
+                  log_dir: Path, seed: int,
+                  construct: Callable[[Any, Path, torch.device], Any] | None = None):
     """``seed_everything(seed)``, ``HMASDAgent(config)``, ``load_model(agent_pt)``, then checks.
 
     Refuses (RuntimeError) a load whose parameter fingerprint or optimizer step counts differ
     from the record, or whose rollout sampler seed/state differ from those saved in agent.pt.
     """
-    agent = _seeded_agent(config, device=device, log_dir=log_dir, seed=seed)
+    agent = _seeded_agent(config, device=device, log_dir=log_dir, seed=seed, construct=construct)
     agent.load_model(str(agent_pt))
     fingerprint = initialization_fingerprint(agent)
     if fingerprint != record["policy_fingerprint"]:
@@ -349,12 +370,14 @@ def resumed_agent(config, record: dict[str, Any], agent_pt: Path, *, device: tor
 
 
 def save_checkpoint(agent, config, spec: B02Spec, out: Path, index: int, *, rollout: int,
-                    transitions: int, started: float, launch_sha: str) -> dict[str, Any]:
+                    transitions: int, started: float, launch_sha: str,
+                    recipe: "Recipe | None" = None) -> dict[str, Any]:
     """``checkpoints/c{ii}/agent.pt`` (``HMASDAgent.save_model``, as B09 wrote N/endpoint) + record.json.
 
     No random draw: ``save_model`` serialises state dicts (and reads the sampler RNG state);
-    the digests below read tensors and bytes only.
+    the digests below read tensors and bytes only.  ``recipe`` default None = ``b02_recipe()``.
     """
+    recipe = b02_recipe() if recipe is None else recipe
     root = Path(out) / "checkpoints" / f"c{index:02d}"
     if root.exists():
         raise FileExistsError(f"checkpoint already exists: {root}")
@@ -362,22 +385,54 @@ def save_checkpoint(agent, config, spec: B02Spec, out: Path, index: int, *, roll
     path = root / "agent.pt"
     agent.save_model(path)
     record = {
-        "object_id": OBJECT_ID, "programme": PROGRAMME, "launch_sha": launch_sha,
+        "object_id": recipe.object_id, "programme": recipe.programme, "launch_sha": launch_sha,
         "checkpoint": f"c{index:02d}", "rollout": int(rollout), "transitions": int(transitions),
         "optimizer_steps": optimizer_steps(agent),
         "wall_seconds": time.perf_counter() - started,
         "agent_pt": "agent.pt", "agent_pt_sha256": sha256_file(path),
         "agent_pt_bytes": path.stat().st_size,
         "policy_fingerprint": initialization_fingerprint(agent),
-        "training_seed": int(spec.seed), "config": config_dict(config),
+        "training_seed": int(spec.seed), "config": recipe.config_dict(config),
     }
+    record.update(recipe.record_fields)
     write_summary(root / "record.json", record)
     return record
 
 
+@dataclass(frozen=True)
+class Recipe:
+    """What ``run_training`` varies for another arm on this loop; ``b02_recipe()`` is B02 (SET).
+
+    ``construct_agent(config, log_dir, device)`` builds the agent after the seeding (None =
+    ``HMASDAgent``); ``record_fields`` are added to config.json, summary.json and every
+    record.json; ``rollout_hook(out, agent)`` returns ``collect_and_train``'s ``record_hook``;
+    ``required_steps`` names optimizers that must have stepped by the end of a complete fit.
+    """
+    object_id: str
+    programme: str
+    make_config: Callable[[B02Spec], Any]
+    config_dict: Callable[[Any], dict[str, Any]]
+    actor_input_width: Callable[[Any], int]
+    recipe_notes: dict[str, Any]
+    label: str = "B02"
+    construct_agent: Callable[[Any, Path, torch.device], Any] | None = None
+    record_fields: dict[str, Any] = field(default_factory=dict)
+    rollout_hook: Callable[[Path, Any], Callable[[int], dict[str, Any]]] | None = None
+    required_steps: tuple[str, ...] = ("low_actor", "low_critic")
+    resume_re_seeded: tuple[str, ...] = RESUME_RE_SEEDED
+
+
+def b02_recipe() -> Recipe:
+    """The B02 SET fit, read from this module's names at call time."""
+    return Recipe(object_id=OBJECT_ID, programme=PROGRAMME, make_config=make_b02_config,
+                  config_dict=config_dict, actor_input_width=actor_input_width,
+                  recipe_notes=RECIPE_NOTES)
+
+
 def run_training(*, out: Path, launch_sha: str, spec: B02Spec, device_name: str = "cuda",
                  threads: int = 4, argv=None, resume_from: Path | None = None,
-                 resume_source_sha: str | None = None) -> dict[str, Any]:
+                 resume_source_sha: str | None = None,
+                 recipe: "Recipe | None" = None) -> dict[str, Any]:
     """One SET fit: config.json, c00, 200 rollouts with checkpoints, summary.json, progress.jsonl.
 
     ``resume_from`` (a ``checkpoints/cNN`` directory of the same recipe) finishes the fit from
@@ -385,18 +440,21 @@ def run_training(*, out: Path, launch_sha: str, spec: B02Spec, device_name: str 
     (``HMASDAgent.load_model``); ``resume_seed = spec.seed + record rollout`` seeds the
     process RNGs before the agent is built and the lane environments (``resume_seed + lane``).
     No c00 is written; checkpoints continue with the schedule index after the source.
+    ``recipe`` (default None = ``b02_recipe()``, the SET fit) varies the object, config, agent
+    construction, records and per-rollout hook for another arm on the same loop.
     """
+    recipe = b02_recipe() if recipe is None else recipe
     out = Path(out)
     if any((out / name).exists() for name in ("summary.json", "config.json", "progress.jsonl",
                                               "checkpoints")):
-        raise FileExistsError(f"B02 training output already exists: {out}")
+        raise FileExistsError(f"{recipe.label} training output already exists: {out}")
     if resume_source_sha is not None and resume_from is None:
         raise ValueError("resume_source_sha is only meaningful with resume_from")
-    config = make_b02_config(spec)
+    config = recipe.make_config(spec)
     resume = record = None
     if resume_from is not None:
         record = read_resume_checkpoint(resume_from, spec, config,
-                                        resume_source_sha=resume_source_sha)
+                                        resume_source_sha=resume_source_sha, recipe=recipe)
         resume = {
             "source_checkpoint_dir": str(resume_from), "checkpoint": record["checkpoint"],
             "rollout": record["rollout"], "transitions": record["transitions"],
@@ -405,7 +463,7 @@ def run_training(*, out: Path, launch_sha: str, spec: B02Spec, device_name: str 
             "source_launch_sha": record["launch_sha"],
             "resume_seed": int(spec.seed) + int(record["rollout"]),
             "env_seed_rule": "resume_seed + lane", "episode_ids": "count from 0 in this run",
-            "restored": list(RESUME_RESTORED), "re_seeded": list(RESUME_RE_SEEDED),
+            "restored": list(RESUME_RESTORED), "re_seeded": list(recipe.resume_re_seeded),
             "counters": {
                 "transitions / rollouts": "cumulative, continuing from the source checkpoint",
                 "native_episodes": "episodes completed by this run only",
@@ -415,33 +473,35 @@ def run_training(*, out: Path, launch_sha: str, spec: B02Spec, device_name: str 
     device = torch.device(device_name)
     if device.type == "cuda":
         if not torch.cuda.is_available():
-            raise RuntimeError("B02 CUDA was requested but is unavailable")
+            raise RuntimeError(f"{recipe.label} CUDA was requested but is unavailable")
         torch.backends.cuda.matmul.allow_tf32 = False
         torch.backends.cudnn.allow_tf32 = False
     torch.set_num_threads(int(threads))
     if torch.get_default_dtype() != torch.float32:
-        raise RuntimeError("B02 requires Torch FP32 default dtype")
+        raise RuntimeError(f"{recipe.label} requires Torch FP32 default dtype")
     out.mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()
     cpu_start = resource.getrusage(resource.RUSAGE_SELF)
     schedule = checkpoint_rollouts(spec)
     run_config = {
-        "object_id": OBJECT_ID, "programme": PROGRAMME, "launch_sha": launch_sha,
+        "object_id": recipe.object_id, "programme": recipe.programme, "launch_sha": launch_sha,
         "argv": list(sys.argv if argv is None else argv), "device": str(device),
         "torch_threads": int(threads), "seed": int(spec.seed), "spec": spec_record(spec),
-        "config": config_dict(config), "active": json.loads(json.dumps(active_config(config)), parse_constant=str),
-        "recipe_notes": RECIPE_NOTES, "checkpoint_rule": CHECKPOINT_RULE,
+        "config": recipe.config_dict(config), "active": json.loads(json.dumps(active_config(config)), parse_constant=str),
+        "recipe_notes": recipe.recipe_notes, "checkpoint_rule": CHECKPOINT_RULE,
         "training_feedback": {"layout": asdict(PRODUCTION_LAYOUT),
                               "params": asdict(PRODUCTION_PARAMS)},
-        "actor_input_width": actor_input_width(config),
+        "actor_input_width": recipe.actor_input_width(config),
         "ppo_update_keys": list(PPO_UPDATE_KEYS), "ppo_not_exposed": list(PPO_NOT_EXPOSED),
     }
+    run_config.update(recipe.record_fields)
     if resume is not None:
         run_config["resume"] = resume
     write_summary(out / "config.json", run_config)
     start_transitions = 0 if record is None else int(record["transitions"])
     summary: dict[str, Any] = {
-        "object_id": OBJECT_ID, "programme": PROGRAMME, "status": "INCOMPLETE", "failure": None,
+        "object_id": recipe.object_id, "programme": recipe.programme, "status": "INCOMPLETE",
+        "failure": None,
         "launch_sha": launch_sha, "seed": int(spec.seed), "device": str(device),
         "torch_threads": int(threads),
         "counts": {"transitions": start_transitions,
@@ -452,13 +512,15 @@ def run_training(*, out: Path, launch_sha: str, spec: B02Spec, device_name: str 
         "checkpoint_rollouts": list(schedule), "rollouts": [], "checkpoints": {},
         "artifacts": {"config.json": sha256_file(out / "config.json")},
     }
+    summary.update(recipe.record_fields)
     if resume is not None:
         summary["resume"] = resume
     write_summary(out / "summary.json", summary)
 
     def checkpoint(agent, index, rollout, transitions):
         record = save_checkpoint(agent, config, spec, out, index, rollout=rollout,
-                                 transitions=transitions, started=started, launch_sha=launch_sha)
+                                 transitions=transitions, started=started, launch_sha=launch_sha,
+                                 recipe=recipe)
         summary["checkpoints"][record["checkpoint"]] = {
             key: record[key] for key in ("rollout", "transitions", "optimizer_steps",
                                          "wall_seconds", "agent_pt_sha256", "policy_fingerprint")}
@@ -469,15 +531,17 @@ def run_training(*, out: Path, launch_sha: str, spec: B02Spec, device_name: str 
     try:
         if resume is None:
             agent, identity = new_agent(config, device=device, log_dir=out / "logs",
-                                        seed=spec.seed)
+                                        seed=spec.seed, construct=recipe.construct_agent)
         else:
             agent, identity = resumed_agent(config, record, Path(resume_from) / "agent.pt",
                                             device=device, log_dir=out / "logs",
-                                            seed=resume["resume_seed"])
+                                            seed=resume["resume_seed"],
+                                            construct=recipe.construct_agent)
         summary["initialization"] = identity
         width = int(agent.skill_discoverer.central_input_dim) + int(config.obs_dim)
-        if width != actor_input_width(config):
-            raise RuntimeError(f"flag-on actor input width {width} != {actor_input_width(config)}")
+        expected_width = recipe.actor_input_width(config)
+        if width != expected_width:
+            raise RuntimeError(f"flag-on actor input width {width} != {expected_width}")
         summary["actor_input_width"] = width
         if resume is None:
             checkpoint(agent, 0, 0, 0)
@@ -492,23 +556,28 @@ def run_training(*, out: Path, launch_sha: str, spec: B02Spec, device_name: str 
             if rollout in schedule:
                 checkpoint(agent, schedule.index(rollout) + 1, rollout, record["transitions"])
             write_summary(out / "summary.json", summary)
-            print(f"B02 rollout {rollout}/{spec.rollouts} transitions={record['transitions']}",
-                  flush=True)
+            print(f"{recipe.label} rollout {rollout}/{spec.rollouts} "
+                  f"transitions={record['transitions']}", flush=True)
 
+        hook = {} if recipe.rollout_hook is None else {
+            "record_hook": recipe.rollout_hook(out, agent)}
         if resume is None:
             result = collect_and_train(agent, config, spec, feedback=True,
-                                       after_rollout=after_rollout)
+                                       after_rollout=after_rollout, **hook)
         else:
             result = collect_and_train(agent, config, spec, feedback=True,
                                        after_rollout=after_rollout,
                                        start_rollout=int(record["rollout"]),
                                        start_transitions=start_transitions,
-                                       env_seed=resume["resume_seed"])
+                                       env_seed=resume["resume_seed"], **hook)
         if summary["counts"]["checkpoints"] != len(schedule) + 1:
             raise RuntimeError("checkpoint count differs from the schedule")
         steps = optimizer_steps(agent)
         if steps["low_actor"] <= 0 or steps["low_critic"] <= 0:
             raise RuntimeError("the low-level learner did not update")
+        stalled = [name for name in recipe.required_steps if steps[name] <= 0]
+        if stalled:
+            raise RuntimeError(f"learners without an optimizer step: {stalled}")
         summary.update(status="COMPLETE", optimizer_steps=steps, collector_wall=result["wall"])
         return summary
     except Exception as exc:
