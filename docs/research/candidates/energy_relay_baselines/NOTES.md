@@ -403,3 +403,32 @@ generation 1 / wake `bc408f7c-b75d-48ca-8414-f5c788021673` was drained and ackno
 publication observer was then stopped after the native run observer was registered, because
 the withdrawn publication gate no longer warrants a separate wait. The standalone generic
 tool remains published; no stable waiter, skill, role or control file was changed here.
+
+### 2026-09-27 04:28 UTC — restore observation of the same accepted fit
+
+The first native observer wake was BLOCKED after three unknown status reads, with reason
+`manifest has no native-observation host binding` and `manifest_ref: null`. This was an
+observation failure, not an exit witness. The node's claim still identified the accepted fit;
+direct host/boot/PID/start-tick checks matched the original manifest for both supervisor and
+runner. The live summary recorded 18,000 transitions, 3 completed rollouts, 6 episodes, one
+checkpoint and no reported failure. No result interpretation or new launch followed this wake.
+
+The node had advanced to `27b796888f4c5464bd7ed888fdc6fdce2cdaa747`. Its sparse selection omitted
+this run directory: published `launch-manifest.json`, `admission-preflight.json` and `config.json`
+were absent from the working tree although their Git objects and retained local copies existed.
+The running summary/progress and original admission claim remained present. The status/launcher
+source had not changed relative to the accepted source. These facts identify missing observation
+records rather than a new host, a changed binding or evidence of a stopped worker.
+
+Under the node's shared Git lock, added only
+`runs/energy_relay_baselines/b01_set_a01/seed-26092711` to its sparse selection, retaining every
+previous selection. All three restored records matched the originally published bytes by
+SHA-256; the manifest hash is `7f2f38e9d393611c945fda1fe889479157c1502fec3d408f078b40191248561c`.
+The original claim bytes and native process identities were unchanged. The same status command
+then returned accepted/running, consistent records and no exit witness at 04:28:14 UTC.
+
+Consumed generation 1 / wake `63f98163-44bc-49d5-8e3d-b3a0a6812f50` and resumed only the resolved
+observer job with `--resume-jobs`, producing generation 2 and another 1500-second window.
+Its operation reference and probe argv are unchanged; no worker, fit, checkpoint or submission
+was restarted. Future runs in this fixed batch will retain their own output directory in the
+node sparse selection before publishing compact records. No stable control code was edited.
