@@ -84,11 +84,12 @@ def gap_block(learner, comparator):
     return block
 
 
-def training_curve(train_dir):
+def _rollout_rows(train_dir):
+    """Rollout and checkpoint events of one run's progress.jsonl (PPO statistics nested under "ppo")."""
     path = os.path.join(train_dir, "progress.jsonl")
     rows, checkpoints = [], []
     if not os.path.exists(path):
-        return {"available": False}
+        return None, None
     for line in open(path):
         line = line.strip()
         if not line:
@@ -114,7 +115,74 @@ def training_curve(train_dir):
             rows.append(keep)
         elif isinstance(ev, dict) and ev.get("event") == "checkpoint":
             checkpoints.append({k: ev.get(k) for k in ("checkpoint", "rollout", "transitions", "wall_seconds")})
-    out = {"available": True, "rollouts": rows, "checkpoints": checkpoints, "n_rollouts": len(rows)}
+    return rows, checkpoints
+
+
+def _run_facts(train_dir):
+    facts = {"dir": train_dir, "status": None, "resume": None}
+    for name in ("summary.json", "config.json"):
+        path = os.path.join(train_dir, name)
+        if os.path.exists(path):
+            try:
+                d = json.load(open(path))
+            except ValueError:
+                continue
+            if name == "summary.json":
+                facts["status"] = d.get("status")
+                facts["failure"] = d.get("failure")
+            if isinstance(d.get("resume"), dict) and facts["resume"] is None:
+                r = d["resume"]
+                facts["resume"] = {k: r.get(k) for k in ("checkpoint", "rollout", "transitions", "resume_seed",
+                                                          "source_checkpoint_dir", "source_launch_sha")}
+    return facts
+
+
+def training_curve(train_dirs):
+    """One training curve from one or more processes of the same fit, in process order.
+
+    Two-run rule (declared before any c04 panel existed, after the first process died at rollout
+    117): a later directory whose config/summary carries a ``resume`` block with ``rollout`` R
+    continues the curve from R; the earlier process's rows with rollout > R are DISCARDED from
+    the curve and reported under ``discarded_rollouts`` (they trained no checkpoint).  A single
+    directory reads as before.  Rollout numbers must be strictly increasing along the curve.
+    """
+    if isinstance(train_dirs, str):
+        train_dirs = [train_dirs]
+    rows, checkpoints, runs, discarded = [], [], [], []
+    for train_dir in train_dirs:
+        run_rows, run_checkpoints = _rollout_rows(train_dir)
+        facts = _run_facts(train_dir)
+        if run_rows is None:
+            facts["available"] = False
+            runs.append(facts)
+            continue
+        facts["available"] = True
+        facts["n_rows"] = len(run_rows)
+        facts["first_rollout"] = run_rows[0]["rollout"] if run_rows else None
+        facts["last_rollout"] = run_rows[-1]["rollout"] if run_rows else None
+        boundary = facts["resume"]["rollout"] if facts["resume"] and isinstance(facts["resume"].get("rollout"), int) else None
+        if boundary is not None and rows:
+            dropped = [r for r in rows if r["rollout"] > boundary]
+            if dropped:
+                discarded.append({"dir": runs[-1]["dir"], "rollouts": [r["rollout"] for r in dropped],
+                                  "n": len(dropped),
+                                  "qos_per_step_mean": st.mean(r["qos_per_step"] for r in dropped if r.get("qos_per_step") is not None),
+                                  "zero_service_lane_rollouts": sum(1 for r in dropped if isinstance(r.get("lane_qos_per_step"), list) and r["lane_qos_per_step"] and min(r["lane_qos_per_step"]) == 0.0)})
+            rows = [r for r in rows if r["rollout"] <= boundary]
+            checkpoints = [c for c in checkpoints if (c.get("rollout") or 0) <= boundary]
+            run_rows = [r for r in run_rows if r["rollout"] > boundary]
+            run_checkpoints = [c for c in run_checkpoints if (c.get("rollout") or 0) > boundary]
+        facts["resume_boundary"] = boundary
+        rows.extend(run_rows)
+        checkpoints.extend(run_checkpoints)
+        runs.append(facts)
+    if not any(r.get("available") for r in runs):
+        return {"available": False, "runs": runs}
+    numbers = [r["rollout"] for r in rows]
+    if numbers != sorted(set(numbers)):
+        raise SystemExit(f"training rows are not strictly increasing in rollout number: {numbers[:5]}... check --train order")
+    out = {"available": True, "runs": runs, "discarded_rollouts": discarded or None,
+           "rollouts": rows, "checkpoints": checkpoints, "n_rollouts": len(rows)}
     if rows:
         walls = [(r.get("collection_seconds") or 0) + (r.get("update_seconds") or 0) for r in rows]
         out["seconds_per_rollout_mean"] = st.mean(walls)
@@ -135,7 +203,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--b01", required=True)
     ap.add_argument("--refs", required=True)
-    ap.add_argument("--train", required=True)
+    ap.add_argument("--train", nargs="+", required=True,
+                    help="training run directories in process order (a resumed process after its source)")
     ap.add_argument("--evals", nargs="+", required=True)
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
