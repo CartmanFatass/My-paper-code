@@ -3028,3 +3028,82 @@ direction's own tools used from here on (`read_stage1.py`, `read_stage0.b01_trac
 do not import it. (5) The §5 wording in the generated Claude skill copies was updated by the
 publisher (`d81fc8622`); the constitution, models and permissions are unchanged. No reply, ACK
 or forwarding is owed or sent.
+
+### Stage 1, c04 (804k transitions, rollout 134) evaluated (`b02_s1_eval_c04_a01`, operation f77befe2) — first checkpoint of the resumed process
+
+Checkpoint written ≈ 02:23 UTC by the resumed fit `b02_s1_set_a01r` (record: rollout 134, 804,000
+transitions, optimizer steps 301,500 = 134 × 2,250, so the count is continuous across the resume;
+`launch_sha` c369a6b91, `training_seed` 925031 unchanged, `wall_seconds` 5,991.7 = this process
+only), copied to the artifacts directory (agent.pt sha256 `31d21637…` equals its record, fingerprint
+`450be1dd…`), evaluation accepted 02:24:36Z beside the fit (command sha256 `ef0f56f4…`, supervisor
+pid 742528, runner 742529, memory preflight 13.2 GB available), exit 0 at 02:40:11Z, `COMPLETE` in
+916.1 s, 64 episodes, 0 failed. Same evaluator, worlds 955001–955032, `policy_seed` 925031, so the
+panel is directly comparable with c00–c03. Diagnostics parity: row values equal the trace
+recomputation except 1 (det) / 4 (stoch) of 64 rows differing by at most 6.2e-5 (float32
+accumulation, as in the Stage 0 parity note). Reader unchanged since `ae998950e`; readings JSON
+regenerated with both training directories under the two-run rule (c00–c04): process 1 rows
+101–117 are listed under `discarded_rollouts` (17 rows, mean training QoS/step .230, 8 zero-service
+lane rollouts) and the curve continues from the resumed process at rollout 101.
+
+| 955001–955032 | c03 det / stoch | c04 det | c04 stoch |
+|---|---|---|---|
+| QoS/step | .325 / .345 | **.406** | **.404** |
+| paired vs c00 | +.116 / +.102 | +.197 (SE .022, 31/32) | +.161 (SE .024, 26/32) |
+| paired vs c03 (curve step) | | +.081 | +.059 |
+| vs H_central .774 | −.449 / −.429 | −.368 (SE .017, 0/32 above) | −.370 (SE .021, 0/32) |
+| vs H_local .597 | −.272 / −.252 | −.191 (SE .032, 4/32 above) | −.193 (SE .032, 4/32) |
+| vs H_park2 .379 | −.054 / −.034 | +.027 (SE .020, 20/32) | +.025 (SE .023, 19/32) |
+| vs H_spawn .232 | +.093 / +.113 | +.174 (SE .022, 32/32) | +.172 (SE .025, 28/32) |
+| vs N .328 (det) | −.003 / +.016 | +.077 (SE .027, 21/32) | +.075 (SE .028, 22/32; conflict flag: return cost 1.65 and min battery .107 worse than N's) |
+| J (mean) | 944 / 996 | 1187 | 1180 |
+| boundary share / altitude-floor share (normal mode) | .365 / .334 ; .094 / .098 | .406 / **.710** | .221 / **.485** |
+| QoS before first entry / after first input | .218 / .434 ; .215 / .436 | .274 / .520 | .271 / .506 |
+| first service step (mean) | 206 ; 254 | 177 | 249 |
+| F-mode share; return cost; min battery | .203; 1.63; .114 ; .284; 4.97; .105 | .157; 0.91; .110 | .245; 1.65; .107 |
+| zero-service worlds; worlds ≥ .60 | 2; 0 ; 2; 0 | 0; 2 (955009 .609, 955014 .612) | 0; 2 (955009 .639, 955022 .643) |
+
+Largest single step of the curve so far, in both modes (+.081 / +.059; `still_improving_at_end`
+true in both), and the c03 separation between the modes has closed (.406 / .404). The learner is
+now about two and a half thresholds above N (+.077 / +.075, 21–22 of 32 worlds), less than the
+.03 threshold above H_park2 (+.027, SE .020; +.025, SE .023), a threshold above H_spawn on every
+world under deterministic evaluation (32/32; 28/32 sampled), and still a fifth below H_local
+(−.191 / −.193; 4 worlds above it) and .37 below H_central. No milestone: the mean is .19
+short of .60, though the first two worlds per mode reach it (955009 in both modes). No world is
+served zero (c03 had two per mode). Behaviour change between c03 and c04, deterministic mode:
+the altitude-floor share of normal-mode UAV-steps doubled (.334 → .710; .098 → .485 under sampled
+actions) while the boundary share moved little (.365 → .406; .094 → .221), the F-mode share fell
+(.203 → .157; .284 → .245) with the return-constraint cost (1.63 → 0.91; 4.97 → 1.65), service
+after the first input rose (.434 → .520) and before the first entry (.218 → .274), first service
+earlier (206 → 177 steps). Phenomenon, not explanation: the gain coincides with descending to the
+altitude floor and fewer shield episodes, not with more wall parking; whether the low flight is
+the cause of the higher served ratio is not read from these panels.
+
+Training signals of the resumed process, reported with the comparability caveat first: from
+rollout 101 the environment world streams are re-seeded (resume seed 925131 + lane), so the
+collection-time blocks before and after the boundary are not on the same world sequence, while
+the frozen panel above is on the same 32 worlds as c00–c03. Within the resumed process the
+training QoS/step per 10-rollout block rises monotonically (.261, .288, .301, .313 for rollouts
+101–140) against .19 flat over process 1's ten blocks and .230 for its discarded rollouts 101–117;
+zero-service lane rollouts 3, 2, 1, 1 per block (64 of 140 rollouts over the whole curve);
+shield entries per rollout ≈ 132–167 (process 1 last block ≈ 175); F-mode share .26–.30 (process
+1 last block .34). Action entropy: process 1 read 1.069 over rollouts 91–100 (per-rollout
+.98–1.18) and 1.013 over its discarded 101–117 (per-rollout .90–1.14); the resumed process read
+1.127 over 101–110 (per-rollout 1.08–1.19, within process 1's last-ten span; weights, optimizers
+and sampler state were verified equal at load, and the streams differ from rollout 101), then fell
+steadily to .684 over 131–140 (per-rollout .54–.78, the lowest of the whole fit; 1.156 → .624
+first to last). Over this segment collection-time service and the frozen-panel reading rise
+together (still different worlds, modes and aggregations); the c03-time contrast, flat training
+QoS against a rising panel, is not present in the resumed process. The entropy fall is recorded
+as the proxy for Pro's "policy sharpening / premature convergence" row and is read at c05–c06,
+not acted on.
+Fit at the read (02:43 UTC): 140 rollouts, ≈ 185 s per rollout in this process (164 in process 1;
+the comparator run and the checkpoint evaluations shared the CPU), 0 live lanes, runner alive.
+Projection: c05 (rollout 167) ≈ 04:05 UTC, c06 (rollout 200) ≈ 05:45 UTC; same procedure, then
+the development evaluation of c06, the once-only hold-out evaluation of c06 on 957001–957032
+(`--final`), and the whole-curve read with `--holdout-refs`.
+
+Comparator run on the hold-out worlds `b02_holdout_refs_a01`: `COMPLETE` (96 episodes, 0
+failed; launch sha 7ad3ba6d3), copied locally. Its panels stay unread; the run's JSON (config,
+summary, launch records, panels) is committed with this entry so the comparator values are sealed
+by content hash before the final model exists — a change from the earlier plan to commit them at
+the final read, made for that reason only. Nothing in the panels was displayed by the commit.
