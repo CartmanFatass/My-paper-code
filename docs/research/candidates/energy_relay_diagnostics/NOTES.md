@@ -503,3 +503,24 @@ The four observer checks and optional evaluator hook remain supported; historica
 are recoverable at the accepted source SHA. There is no remaining scientific worker, pending
 Pro request, unused source snapshot or uncollected result for B01. Consume the terminal native
 observer event before returning; there are no remaining running observations to resume.
+
+### Publication and post-sync native-record reconciliation
+
+Scientific result, shared standing and code retirement were published on main at
+`27b796888f4c5464bd7ed888fdc6fdce2cdaa747`; the remote branch was verified at that SHA.
+The final canonical-node fast-forward was initially deferred for another direction's live
+tracked summary. A path-only comparison then established that incoming changes did not touch
+those live edits, so the fast-forward completed without clearing them. No excluded result
+content was opened, and no other operation was stopped or restarted.
+
+That sparse checkout omitted the three previously tracked B01 control files (manifest, config,
+preflight) outside its selected cone. The same native status therefore temporarily reported
+unknown/invalid binding, rather than a new scientific exit. Following the documented recovery,
+`git sparse-checkout add runs/energy_relay_diagnostics/b01_alignment_a01` restored the exact
+published originals and retains this path for future updates. All twelve compact JSON files
+were byte-hash matched to the published result commit; the terminal native read again reports
+exit 0, valid exit witness, absent recorded processes and consistent records. All 136 raw
+archives remain, the snapshot is absent, and the retired entry is absent from the canonical
+source checkout. Both then-current unrelated dirty paths were preserved. No witness was
+synthesized or edited and no scientific worker was relaunched. Existing unrelated Git auto-GC
+warnings and foreign untracked output directories were left untouched.
