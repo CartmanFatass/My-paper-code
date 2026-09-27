@@ -105,9 +105,11 @@ not each completed cell or unchanged batch. Reuse applicable independent analysi
 overlapping claim/direction criticism in the same pass. Return through the actual parent;
 preserve the substantive recommendation, material dissent and disposition in existing NOTES
 or the assigned RESEARCH review. Uncontested in-scope recommendations need no Root ACK;
-Root resolves material direction disagreements, or the owner in a direct DM's own task when
-no Root is assigned. No automatic App relay. Do not silently treat an objection as resolved
-because DM/Root prefers its earlier explanation. Preserve accepted-operation collection and
+Root resolves material direction disagreements within its assigned coordination; between the
+Claude DM and Root (peers, owner 2026-09-27) the owner or an independent scientific review
+resolves them; the owner does so in a direct DM's own task when no Root is assigned. No
+automatic App relay. Do not silently treat an objection as resolved because DM/Root prefers
+its earlier explanation. Preserve accepted-operation collection and
 unrelated authorized work while the disputed new effect is unresolved. One adequate independent
 scientific review covers an ordinary consequential decision under section 5; add Pro for distinct
 expertise, framing or unresolved disagreement. Model agreement does not establish empirical truth.

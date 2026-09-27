@@ -56,7 +56,11 @@ Methods under `.agents/skills/` are execution detail, not a second rulebook:
 Scientific Reviewer uses the existing ResearchCritic role and its dedicated instruction body,
 with separate context and evidence-first reconstruction; it owns independent diagnosis and
 direction-correction recommendations under constitution section 2. Engineering Reviewer remains
-separate. Root resolves material direction disagreements; DM executes the resolved choice.
+separate. Root resolves material direction disagreements within its assigned coordination; DM
+executes the resolved choice. The Claude session and the Codex Root are peers (owner,
+2026-09-27): their material disagreements go to the owner or an independent scientific review,
+and they exchange coordination messages only through the owner-authorised channels
+(constitution section 2; shared collaboration method `.agents/skills/hmasd-peer-collaboration/`).
 The named roles have the responsibilities in section 2 and their registered bodies. Read the nearest
 directory AGENTS.md before code edits. There are no Monitor/Transport subagents; detached
 scripts observe accepted operations. No additional role or renamed authority is implied.
