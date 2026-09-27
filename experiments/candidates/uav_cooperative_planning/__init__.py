@@ -1,1 +1,0 @@
-"""UAV cooperative planning candidates."""

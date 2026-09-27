@@ -1,0 +1,1072 @@
+{
+  "kind": "postrun_existing_artifact_readback",
+  "source_sha": "9f72afd2223baccd9ed554b0ef86bcbe5277afb5",
+  "canonical_root": "/home/fires/hmasd-wsl/runs/uav_cooperative_planning/b02_transit_value_a01",
+  "manifest_artifacts_verified": 165,
+  "raw_worlds_verified": 160,
+  "native_metric_fields_per_world": 14,
+  "native_metric_max_absolute_error": 0.0,
+  "checks": 18301,
+  "errors": [],
+  "counts": {
+    "H": 32,
+    "L": 32,
+    "P": 32,
+    "collect": 64
+  },
+  "all_worlds_H3000": true,
+  "full_paired_prefixes_checked": 64,
+  "normalization_valid_collection_rows": 94152,
+  "normalization_exact": true,
+  "checkpoint_active_decisions_replayed": 4582,
+  "checkpoint_Q_tie_decisions": 0,
+  "checkpoint_parameter_digest": "f9219e2972a61a0cc33b46736511d2b4d247a6ae905ac5081bd05800d0e51c67",
+  "artifact_hashes": {
+    "config.json": {
+      "sha256": "2025e38bbe2b4e23475d896862c846176e153b435a96c7ea78dcc87d3eaa1112",
+      "bytes": 3373
+    },
+    "summary.json": {
+      "sha256": "62e62636ebd180e7603079aaf0c790372fcdd11babc05b29c7294a41a223a741",
+      "bytes": 102239
+    },
+    "perworld.json": {
+      "sha256": "8ec68cac74e7293d9ad125b564621c01d471131d8eb0d086bb49556d1bc9b62e",
+      "bytes": 850873
+    },
+    "manifest.json": {
+      "sha256": "482c45c28eceeab464c28df91feb79c0bcfa405fb771f82c2248b992e97bd449",
+      "bytes": 23944
+    },
+    "process-exit.json": {
+      "sha256": "16d126832904042515231a3806c7d3867e0248482a9b0d180ca0a28c61cd76ca",
+      "bytes": 546
+    },
+    "raw/final_value.pt": {
+      "sha256": "e47082385d5ca029629d917ea8387219c307a20bce4390f322c252c4eca93d41",
+      "bytes": 166981
+    }
+  },
+  "contrasts_recomputed": {
+    "P": {
+      "actual_length": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0,
+        "t95": [
+          0.0,
+          0.0
+        ],
+        "wins": 0,
+        "losses": 0,
+        "ties": 32
+      },
+      "below_fixed_reserve_uav_step_fraction": {
+        "mean": 0.0015442708333333324,
+        "sd": 0.033446884779041695,
+        "se": 0.005912629759206376,
+        "t95": [
+          -0.010514617064131624,
+          0.01360315873079829
+        ],
+        "wins": 8,
+        "losses": 7,
+        "ties": 17
+      },
+      "charging_uav_steps": {
+        "mean": 6.25,
+        "sd": 100.33556600952433,
+        "se": 17.736989779881277,
+        "t95": [
+          -29.924829154663527,
+          42.42482915466353
+        ],
+        "wins": 17,
+        "losses": 15,
+        "ties": 0
+      },
+      "cutoff_event_count_sum": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0,
+        "t95": [
+          0.0,
+          0.0
+        ],
+        "wins": 0,
+        "losses": 0,
+        "ties": 32
+      },
+      "depletion_event_count_sum": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0,
+        "t95": [
+          0.0,
+          0.0
+        ],
+        "wins": 0,
+        "losses": 0,
+        "ties": 32
+      },
+      "episode_minimum_battery_ratio": {
+        "mean": -0.00017294857575990766,
+        "sd": 0.005971125635665229,
+        "se": 0.0010555558570739293,
+        "t95": [
+          -0.0023257689396846714,
+          0.001979871788164856
+        ],
+        "wins": 15,
+        "losses": 17,
+        "ties": 0
+      },
+      "feedback_entry_count": {
+        "mean": 2.21875,
+        "sd": 7.542286702962001,
+        "se": 1.3333005183293896,
+        "t95": [
+          -0.5005343352200899,
+          4.93803433522009
+        ],
+        "wins": 17,
+        "losses": 13,
+        "ties": 2
+      },
+      "feedback_exit_count": {
+        "mean": 2.09375,
+        "sd": 7.655313882863412,
+        "se": 1.3532810896710594,
+        "t95": [
+          -0.6662849791381085,
+          4.8537849791381085
+        ],
+        "wins": 17,
+        "losses": 14,
+        "ties": 1
+      },
+      "guard_blocked_actions": {
+        "mean": 6.21875,
+        "sd": 356.640393056756,
+        "se": 63.045710093866965,
+        "t95": [
+          -122.3638234740514,
+          134.8013234740514
+        ],
+        "wins": 16,
+        "losses": 16,
+        "ties": 0
+      },
+      "guard_checked_actions": {
+        "mean": -997.3125,
+        "sd": 719.8652847761215,
+        "se": 127.25540610149515,
+        "t95": [
+          -1256.8516118706348,
+          -737.7733881293652
+        ],
+        "wins": 4,
+        "losses": 28,
+        "ties": 0
+      },
+      "qos_per_step": {
+        "mean": -0.016488228515068818,
+        "sd": 0.02835132328241345,
+        "se": 0.005011853237151649,
+        "t95": [
+          -0.02670997058360497,
+          -0.006266486446532665
+        ],
+        "wins": 7,
+        "losses": 25,
+        "ties": 0
+      },
+      "qos_sum_over_3000": {
+        "mean": -0.016488228515068818,
+        "sd": 0.02835132328241345,
+        "se": 0.005011853237151649,
+        "t95": [
+          -0.02670997058360497,
+          -0.006266486446532665
+        ],
+        "wins": 7,
+        "losses": 25,
+        "ties": 0
+      },
+      "raw_native_J": {
+        "mean": -55.38898719190272,
+        "sd": 102.79153933834463,
+        "se": 18.17114862868681,
+        "t95": [
+          -92.44928915657712,
+          -18.328685227228327
+        ],
+        "wins": 8,
+        "losses": 24,
+        "ties": 0
+      },
+      "return_constraint_cost_per_step": {
+        "mean": 0.0009866339553453482,
+        "sd": 0.008967151503616166,
+        "se": 0.001585183409033534,
+        "t95": [
+          -0.0022463689223830414,
+          0.004219636833073737
+        ],
+        "wins": 14,
+        "losses": 18,
+        "ties": 0
+      },
+      "return_constraint_cost_sum": {
+        "mean": 2.959901866036045,
+        "sd": 26.901454510848502,
+        "se": 4.755550227100603,
+        "t95": [
+          -6.739106767149124,
+          12.658910499221214
+        ],
+        "wins": 14,
+        "losses": 18,
+        "ties": 0
+      },
+      "selected_hold_windows": {
+        "mean": 92.96875,
+        "sd": 24.97286834197879,
+        "se": 4.414621137573014,
+        "t95": [
+          83.96507082917404,
+          101.97242917082596
+        ],
+        "wins": 32,
+        "losses": 0,
+        "ties": 0
+      },
+      "service_cutoff_uav_step_fraction": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0,
+        "t95": [
+          0.0,
+          0.0
+        ],
+        "wins": 0,
+        "losses": 0,
+        "ties": 32
+      }
+    },
+    "H": {
+      "actual_length": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0,
+        "t95": [
+          0.0,
+          0.0
+        ],
+        "wins": 0,
+        "losses": 0,
+        "ties": 32
+      },
+      "below_fixed_reserve_uav_step_fraction": {
+        "mean": -0.00826953125,
+        "sd": 0.04322960080022325,
+        "se": 0.007641985968456315,
+        "t95": [
+          -0.023855464389839327,
+          0.007316401889839327
+        ],
+        "wins": 6,
+        "losses": 10,
+        "ties": 16
+      },
+      "charging_uav_steps": {
+        "mean": -2.96875,
+        "sd": 105.10869470035723,
+        "se": 18.580767696072282,
+        "t95": [
+          -40.86447556050742,
+          34.92697556050742
+        ],
+        "wins": 12,
+        "losses": 20,
+        "ties": 0
+      },
+      "cutoff_event_count_sum": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0,
+        "t95": [
+          0.0,
+          0.0
+        ],
+        "wins": 0,
+        "losses": 0,
+        "ties": 32
+      },
+      "depletion_event_count_sum": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0,
+        "t95": [
+          0.0,
+          0.0
+        ],
+        "wins": 0,
+        "losses": 0,
+        "ties": 32
+      },
+      "episode_minimum_battery_ratio": {
+        "mean": 0.0012253715302064272,
+        "sd": 0.007681962692175064,
+        "se": 0.0013579919781147637,
+        "t95": [
+          -0.0015442713692570896,
+          0.003995014429669944
+        ],
+        "wins": 18,
+        "losses": 13,
+        "ties": 1
+      },
+      "feedback_entry_count": {
+        "mean": 2.21875,
+        "sd": 8.2334266569958,
+        "se": 1.455477955390954,
+        "t95": [
+          -0.7497168609534017,
+          5.187216860953402
+        ],
+        "wins": 20,
+        "losses": 9,
+        "ties": 3
+      },
+      "feedback_exit_count": {
+        "mean": 2.0625,
+        "sd": 8.423996063473638,
+        "se": 1.4891661852927478,
+        "t95": [
+          -0.9746744588234035,
+          5.0996744588234035
+        ],
+        "wins": 19,
+        "losses": 12,
+        "ties": 1
+      },
+      "guard_blocked_actions": {
+        "mean": -3.28125,
+        "sd": 407.8806936865951,
+        "se": 72.1038011052161,
+        "t95": [
+          -150.33792189038041,
+          143.77542189038041
+        ],
+        "wins": 15,
+        "losses": 17,
+        "ties": 0
+      },
+      "guard_checked_actions": {
+        "mean": -520.6875,
+        "sd": 702.7391310367757,
+        "se": 124.22790124031147,
+        "t95": [
+          -774.0519749972202,
+          -267.3230250027798
+        ],
+        "wins": 6,
+        "losses": 26,
+        "ties": 0
+      },
+      "qos_per_step": {
+        "mean": -0.009203793351355658,
+        "sd": 0.033878054083295535,
+        "se": 0.0059888504439257195,
+        "t95": [
+          -0.021418134360199258,
+          0.003010547657487943
+        ],
+        "wins": 11,
+        "losses": 21,
+        "ties": 0
+      },
+      "qos_sum_over_3000": {
+        "mean": -0.009203793351355658,
+        "sd": 0.033878054083295535,
+        "se": 0.0059888504439257195,
+        "t95": [
+          -0.021418134360199258,
+          0.003010547657487943
+        ],
+        "wins": 11,
+        "losses": 21,
+        "ties": 0
+      },
+      "raw_native_J": {
+        "mean": -15.895281714417571,
+        "sd": 129.46253772135222,
+        "se": 22.885959583096838,
+        "t95": [
+          -62.571504017828296,
+          30.780940588993154
+        ],
+        "wins": 11,
+        "losses": 21,
+        "ties": 0
+      },
+      "return_constraint_cost_per_step": {
+        "mean": -0.001952504747413908,
+        "sd": 0.01545798878959563,
+        "se": 0.0027326121741571754,
+        "t95": [
+          -0.00752570402039399,
+          0.0036206945255661733
+        ],
+        "wins": 14,
+        "losses": 18,
+        "ties": 0
+      },
+      "return_constraint_cost_sum": {
+        "mean": -5.857514242241724,
+        "sd": 46.37396636878688,
+        "se": 8.197836522471524,
+        "t95": [
+          -22.577112061181964,
+          10.862083576698517
+        ],
+        "wins": 14,
+        "losses": 18,
+        "ties": 0
+      },
+      "selected_hold_windows": {
+        "mean": 142.96875,
+        "sd": 13.277398635129135,
+        "se": 2.3471346528542054,
+        "t95": [
+          138.18173731500087,
+          147.75576268499913
+        ],
+        "wins": 32,
+        "losses": 0,
+        "ties": 0
+      },
+      "service_cutoff_uav_step_fraction": {
+        "mean": 0.0,
+        "sd": 0.0,
+        "se": 0.0,
+        "t95": [
+          0.0,
+          0.0
+        ],
+        "wins": 0,
+        "losses": 0,
+        "ties": 32
+      }
+    }
+  },
+  "perworld_primary_and_tail_differences": [
+    {
+      "seed": 29102701,
+      "L_minus_P_qos_per_step": -0.007239632716992017,
+      "L_minus_P_raw_native_J": -21.487381965110217,
+      "L_minus_P_return_constraint_cost_sum": -0.12405399429378505,
+      "L_minus_P_episode_minimum_battery_ratio": 0.0004780966283533389,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 55,
+      "L_minus_H_qos_per_step": -0.013553579818144756,
+      "L_minus_H_raw_native_J": -40.40343032529063,
+      "L_minus_H_return_constraint_cost_sum": -0.1286576382065947,
+      "L_minus_H_episode_minimum_battery_ratio": 0.0001242499396441471,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 124
+    },
+    {
+      "seed": 29102702,
+      "L_minus_P_qos_per_step": -0.031540716114906386,
+      "L_minus_P_raw_native_J": -94.15958696188272,
+      "L_minus_P_return_constraint_cost_sum": -0.23690187181791833,
+      "L_minus_P_episode_minimum_battery_ratio": -8.864218269280522e-05,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 106,
+      "L_minus_H_qos_per_step": -0.01381016381419975,
+      "L_minus_H_raw_native_J": -42.04007636224787,
+      "L_minus_H_return_constraint_cost_sum": 0.30479113597865193,
+      "L_minus_H_episode_minimum_battery_ratio": 0.0003355319882368535,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 132
+    },
+    {
+      "seed": 29102703,
+      "L_minus_P_qos_per_step": -0.052038128176242426,
+      "L_minus_P_raw_native_J": -161.88486711596124,
+      "L_minus_P_return_constraint_cost_sum": 2.879257091545771,
+      "L_minus_P_episode_minimum_battery_ratio": -0.0028348751397474364,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0002916666666666667,
+      "L_minus_P_selected_hold_windows": 94,
+      "L_minus_H_qos_per_step": -0.09662923927250577,
+      "L_minus_H_raw_native_J": -261.58315446638767,
+      "L_minus_H_return_constraint_cost_sum": -14.152286429284,
+      "L_minus_H_episode_minimum_battery_ratio": 0.0055766450259865236,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": -0.039875,
+      "L_minus_H_selected_hold_windows": 149
+    },
+    {
+      "seed": 29102704,
+      "L_minus_P_qos_per_step": 0.0391690508104906,
+      "L_minus_P_raw_native_J": 113.87445865060181,
+      "L_minus_P_return_constraint_cost_sum": 1.8168009100719589,
+      "L_minus_P_episode_minimum_battery_ratio": -0.0047546533508789485,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.00016666666666666666,
+      "L_minus_P_selected_hold_windows": 111,
+      "L_minus_H_qos_per_step": 0.053569384569137624,
+      "L_minus_H_raw_native_J": 158.35044289805228,
+      "L_minus_H_return_constraint_cost_sum": 1.1793362315106752,
+      "L_minus_H_episode_minimum_battery_ratio": -0.0021634344566179714,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.00016666666666666666,
+      "L_minus_H_selected_hold_windows": 149
+    },
+    {
+      "seed": 29102705,
+      "L_minus_P_qos_per_step": -0.028578317788101604,
+      "L_minus_P_raw_native_J": -86.06761910165778,
+      "L_minus_P_return_constraint_cost_sum": 0.16632295455388224,
+      "L_minus_P_episode_minimum_battery_ratio": 0.0001722820355124638,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 77,
+      "L_minus_H_qos_per_step": 0.013641615295776566,
+      "L_minus_H_raw_native_J": 42.825821488405836,
+      "L_minus_H_return_constraint_cost_sum": -0.9504901288623917,
+      "L_minus_H_episode_minimum_battery_ratio": 0.001100614396646979,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": -4.1666666666666665e-05,
+      "L_minus_H_selected_hold_windows": 127
+    },
+    {
+      "seed": 29102706,
+      "L_minus_P_qos_per_step": -0.005261430173407189,
+      "L_minus_P_raw_native_J": -16.39868608126517,
+      "L_minus_P_return_constraint_cost_sum": 0.3055828555021616,
+      "L_minus_P_episode_minimum_battery_ratio": -0.0012628254384996485,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 95,
+      "L_minus_H_qos_per_step": 0.007663318545587772,
+      "L_minus_H_raw_native_J": 34.22992604075762,
+      "L_minus_H_return_constraint_cost_sum": -5.619901843181376,
+      "L_minus_H_episode_minimum_battery_ratio": 0.003533212846416972,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": -0.017625,
+      "L_minus_H_selected_hold_windows": 123
+    },
+    {
+      "seed": 29102707,
+      "L_minus_P_qos_per_step": 0.004166156172937252,
+      "L_minus_P_raw_native_J": 12.482164417336662,
+      "L_minus_P_return_constraint_cost_sum": 0.004890919756038503,
+      "L_minus_P_episode_minimum_battery_ratio": 0.0036923018296385474,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 126,
+      "L_minus_H_qos_per_step": -0.012390638268178211,
+      "L_minus_H_raw_native_J": -36.7814129087119,
+      "L_minus_H_return_constraint_cost_sum": -0.19525357320420156,
+      "L_minus_H_episode_minimum_battery_ratio": 0.005549876237843726,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": -0.000125,
+      "L_minus_H_selected_hold_windows": 149
+    },
+    {
+      "seed": 29102708,
+      "L_minus_P_qos_per_step": -0.010952989102930522,
+      "L_minus_P_raw_native_J": -33.45948533902265,
+      "L_minus_P_return_constraint_cost_sum": 0.30025025232756564,
+      "L_minus_P_episode_minimum_battery_ratio": -6.631424903416616e-05,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 121,
+      "L_minus_H_qos_per_step": -0.014723931588105477,
+      "L_minus_H_raw_native_J": -44.00952447025611,
+      "L_minus_H_return_constraint_cost_sum": -0.08113856275993103,
+      "L_minus_H_episode_minimum_battery_ratio": -4.1625736191264195e-10,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 146
+    },
+    {
+      "seed": 29102709,
+      "L_minus_P_qos_per_step": 0.030830747211662235,
+      "L_minus_P_raw_native_J": 60.59047048173352,
+      "L_minus_P_return_constraint_cost_sum": 15.950884308320491,
+      "L_minus_P_episode_minimum_battery_ratio": -0.0038303047547406377,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.027208333333333334,
+      "L_minus_P_selected_hold_windows": 108,
+      "L_minus_H_qos_per_step": 0.011238541600896657,
+      "L_minus_H_raw_native_J": -17.073243478620043,
+      "L_minus_H_return_constraint_cost_sum": 25.394432872349018,
+      "L_minus_H_episode_minimum_battery_ratio": -0.010562438974358657,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.05391666666666667,
+      "L_minus_H_selected_hold_windows": 162
+    },
+    {
+      "seed": 29102710,
+      "L_minus_P_qos_per_step": -0.014975028445463723,
+      "L_minus_P_raw_native_J": -9.841456254136574,
+      "L_minus_P_return_constraint_cost_sum": -17.539933154738435,
+      "L_minus_P_episode_minimum_battery_ratio": 0.0071094105173092614,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": -0.044000000000000004,
+      "L_minus_P_selected_hold_windows": 78,
+      "L_minus_H_qos_per_step": -0.024615675354076272,
+      "L_minus_H_raw_native_J": -12.259916743714712,
+      "L_minus_H_return_constraint_cost_sum": -30.79081615397297,
+      "L_minus_H_episode_minimum_battery_ratio": 0.00976239533905296,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": -0.06237500000000001,
+      "L_minus_H_selected_hold_windows": 131
+    },
+    {
+      "seed": 29102711,
+      "L_minus_P_qos_per_step": -0.06091231616152315,
+      "L_minus_P_raw_native_J": -183.6776546681699,
+      "L_minus_P_return_constraint_cost_sum": 0.47443512425106515,
+      "L_minus_P_episode_minimum_battery_ratio": -0.0027775396693723586,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 119,
+      "L_minus_H_qos_per_step": -0.051911009306828126,
+      "L_minus_H_raw_native_J": -156.20994634105182,
+      "L_minus_H_return_constraint_cost_sum": 0.24374563982155717,
+      "L_minus_H_episode_minimum_battery_ratio": 0.0017160491933614769,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 154
+    },
+    {
+      "seed": 29102712,
+      "L_minus_P_qos_per_step": -0.059889817674903645,
+      "L_minus_P_raw_native_J": -182.6864042293996,
+      "L_minus_P_return_constraint_cost_sum": 1.5034230111955198,
+      "L_minus_P_episode_minimum_battery_ratio": -0.0006456401980007576,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 92,
+      "L_minus_H_qos_per_step": -0.05606127297490948,
+      "L_minus_H_raw_native_J": -171.41031456530663,
+      "L_minus_H_return_constraint_cost_sum": 1.6132452204729197,
+      "L_minus_H_episode_minimum_battery_ratio": -0.0006555774624672772,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 144
+    },
+    {
+      "seed": 29102713,
+      "L_minus_P_qos_per_step": -0.04177567884641609,
+      "L_minus_P_raw_native_J": -124.43620164941717,
+      "L_minus_P_return_constraint_cost_sum": -0.444622985778411,
+      "L_minus_P_episode_minimum_battery_ratio": 0.0011031798701915674,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 105,
+      "L_minus_H_qos_per_step": -0.04400158844992319,
+      "L_minus_H_raw_native_J": -131.0695026436017,
+      "L_minus_H_return_constraint_cost_sum": -0.46683689394699046,
+      "L_minus_H_episode_minimum_battery_ratio": 0.0011030357573024452,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 153
+    },
+    {
+      "seed": 29102714,
+      "L_minus_P_qos_per_step": -0.03192860480793669,
+      "L_minus_P_raw_native_J": -135.24027483126702,
+      "L_minus_P_return_constraint_cost_sum": 19.720414333669954,
+      "L_minus_P_episode_minimum_battery_ratio": -0.009038171676133494,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.04525,
+      "L_minus_P_selected_hold_windows": 61,
+      "L_minus_H_qos_per_step": 0.004771666111107353,
+      "L_minus_H_raw_native_J": 45.98943557081611,
+      "L_minus_H_return_constraint_cost_sum": -15.837221998239986,
+      "L_minus_H_episode_minimum_battery_ratio": 0.0032203236093792387,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": -0.02108333333333333,
+      "L_minus_H_selected_hold_windows": 130
+    },
+    {
+      "seed": 29102715,
+      "L_minus_P_qos_per_step": 0.0002398393687960132,
+      "L_minus_P_raw_native_J": 1.3232276929625186,
+      "L_minus_P_return_constraint_cost_sum": -0.306322306806875,
+      "L_minus_P_episode_minimum_battery_ratio": -0.00020745571381641792,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 83,
+      "L_minus_H_qos_per_step": -0.036564518803609336,
+      "L_minus_H_raw_native_J": -110.69697362788565,
+      "L_minus_H_return_constraint_cost_sum": 0.5017049257426298,
+      "L_minus_H_episode_minimum_battery_ratio": 0.00940142873134689,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 148
+    },
+    {
+      "seed": 29102716,
+      "L_minus_P_qos_per_step": -0.0011620983519239347,
+      "L_minus_P_raw_native_J": -2.8417415738567797,
+      "L_minus_P_return_constraint_cost_sum": -0.32163936112532376,
+      "L_minus_P_episode_minimum_battery_ratio": -0.00018545101850825363,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 102,
+      "L_minus_H_qos_per_step": -0.011561297221914901,
+      "L_minus_H_raw_native_J": -27.69794154138708,
+      "L_minus_H_return_constraint_cost_sum": -3.492339168561813,
+      "L_minus_H_episode_minimum_battery_ratio": 0.0035674644917896015,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": -0.008708333333333334,
+      "L_minus_H_selected_hold_windows": 153
+    },
+    {
+      "seed": 29102717,
+      "L_minus_P_qos_per_step": -0.003343671918607294,
+      "L_minus_P_raw_native_J": -6.981456488300864,
+      "L_minus_P_return_constraint_cost_sum": -1.5261711860103484,
+      "L_minus_P_episode_minimum_battery_ratio": 0.002916950230779272,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": -0.0004583333333333333,
+      "L_minus_P_selected_hold_windows": 48,
+      "L_minus_H_qos_per_step": -0.002563075972416229,
+      "L_minus_H_raw_native_J": -8.220349798348252,
+      "L_minus_H_return_constraint_cost_sum": 0.2655586537637802,
+      "L_minus_H_episode_minimum_battery_ratio": 0.00015700809651887637,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 137
+    },
+    {
+      "seed": 29102718,
+      "L_minus_P_qos_per_step": -0.027249318045493687,
+      "L_minus_P_raw_native_J": -80.25342020804874,
+      "L_minus_P_return_constraint_cost_sum": -0.7539932847719839,
+      "L_minus_P_episode_minimum_battery_ratio": 0.0003558378175309296,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 85,
+      "L_minus_H_qos_per_step": 0.017867475065017735,
+      "L_minus_H_raw_native_J": 54.59791228538006,
+      "L_minus_H_return_constraint_cost_sum": -0.49774628041908864,
+      "L_minus_H_episode_minimum_battery_ratio": -0.0016485087900571238,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 127
+    },
+    {
+      "seed": 29102719,
+      "L_minus_P_qos_per_step": -0.009109702259516905,
+      "L_minus_P_raw_native_J": -26.73933011449526,
+      "L_minus_P_return_constraint_cost_sum": -0.29645802371015306,
+      "L_minus_P_episode_minimum_battery_ratio": -4.138824811555919e-05,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 87,
+      "L_minus_H_qos_per_step": 0.026259350582791496,
+      "L_minus_H_raw_native_J": 78.5112135104223,
+      "L_minus_H_return_constraint_cost_sum": 0.1334665027515789,
+      "L_minus_H_episode_minimum_battery_ratio": -0.000268700808911837,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 155
+    },
+    {
+      "seed": 29102720,
+      "L_minus_P_qos_per_step": 0.033819022805221755,
+      "L_minus_P_raw_native_J": 124.50429157796998,
+      "L_minus_P_return_constraint_cost_sum": -11.526982538480645,
+      "L_minus_P_episode_minimum_battery_ratio": 0.006353840003262737,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": -0.030291666666666668,
+      "L_minus_P_selected_hold_windows": 85,
+      "L_minus_H_qos_per_step": 0.04424259123416041,
+      "L_minus_H_raw_native_J": 201.74736015113876,
+      "L_minus_H_return_constraint_cost_sum": -34.50937033441547,
+      "L_minus_H_episode_minimum_battery_ratio": 0.011783674297154281,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": -0.06479166666666666,
+      "L_minus_H_selected_hold_windows": 128
+    },
+    {
+      "seed": 29102721,
+      "L_minus_P_qos_per_step": -0.015424533429955645,
+      "L_minus_P_raw_native_J": -46.38571640777059,
+      "L_minus_P_return_constraint_cost_sum": 0.047673261445391635,
+      "L_minus_P_episode_minimum_battery_ratio": 0.000138717634985297,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 70,
+      "L_minus_H_qos_per_step": -0.00032275063500264434,
+      "L_minus_H_raw_native_J": -0.843859526996539,
+      "L_minus_H_return_constraint_cost_sum": -0.06220035841338767,
+      "L_minus_H_episode_minimum_battery_ratio": 0.000138717634985297,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 128
+    },
+    {
+      "seed": 29102722,
+      "L_minus_P_qos_per_step": -0.04049810002369458,
+      "L_minus_P_raw_native_J": -116.8471345847413,
+      "L_minus_P_return_constraint_cost_sum": -2.323613676851368,
+      "L_minus_P_episode_minimum_battery_ratio": 0.0032114276360570987,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": -0.00016666666666666666,
+      "L_minus_P_selected_hold_windows": 49,
+      "L_minus_H_qos_per_step": -0.019120658702087345,
+      "L_minus_H_raw_native_J": -58.011378679148265,
+      "L_minus_H_return_constraint_cost_sum": 0.3246977974770142,
+      "L_minus_H_episode_minimum_battery_ratio": 0.0,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 131
+    },
+    {
+      "seed": 29102723,
+      "L_minus_P_qos_per_step": -0.05071275249778151,
+      "L_minus_P_raw_native_J": -151.27032193375817,
+      "L_minus_P_return_constraint_cost_sum": -0.43228656685553757,
+      "L_minus_P_episode_minimum_battery_ratio": 7.102948746651183e-05,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 111,
+      "L_minus_H_qos_per_step": -0.038931512048103856,
+      "L_minus_H_raw_native_J": -117.10294743021132,
+      "L_minus_H_return_constraint_cost_sum": 0.156111558612829,
+      "L_minus_H_episode_minimum_battery_ratio": -0.0012284105861862932,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 148
+    },
+    {
+      "seed": 29102724,
+      "L_minus_P_qos_per_step": -0.003914304014080661,
+      "L_minus_P_raw_native_J": -11.420544978627277,
+      "L_minus_P_return_constraint_cost_sum": -0.16139430172528613,
+      "L_minus_P_episode_minimum_battery_ratio": -6.669994685493119e-05,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 129,
+      "L_minus_H_qos_per_step": 0.01524651712328573,
+      "L_minus_H_raw_native_J": 46.0082015391572,
+      "L_minus_H_return_constraint_cost_sum": -0.13277569732101346,
+      "L_minus_H_episode_minimum_battery_ratio": -4.179017271754848e-05,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 142
+    },
+    {
+      "seed": 29102725,
+      "L_minus_P_qos_per_step": -0.040965186123659625,
+      "L_minus_P_raw_native_J": -120.74366711613857,
+      "L_minus_P_return_constraint_cost_sum": -1.0785653286674441,
+      "L_minus_P_episode_minimum_battery_ratio": 0.0022913314306050037,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": -0.0002916666666666667,
+      "L_minus_P_selected_hold_windows": 142,
+      "L_minus_H_qos_per_step": -0.04157122812689651,
+      "L_minus_H_raw_native_J": -123.77980771434295,
+      "L_minus_H_return_constraint_cost_sum": -0.4669395147110058,
+      "L_minus_H_episode_minimum_battery_ratio": 0.00014774450155033425,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 169
+    },
+    {
+      "seed": 29102726,
+      "L_minus_P_qos_per_step": -0.012363719237888815,
+      "L_minus_P_raw_native_J": -34.10130069093748,
+      "L_minus_P_return_constraint_cost_sum": -1.49422883292565,
+      "L_minus_P_episode_minimum_battery_ratio": -0.00021438508526407107,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 8.333333333333332e-05,
+      "L_minus_P_selected_hold_windows": 97,
+      "L_minus_H_qos_per_step": -0.013907578227922657,
+      "L_minus_H_raw_native_J": -44.27248967797959,
+      "L_minus_H_return_constraint_cost_sum": 1.2748329119821893,
+      "L_minus_H_episode_minimum_battery_ratio": -0.002537617542497747,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0004583333333333333,
+      "L_minus_H_selected_hold_windows": 127
+    },
+    {
+      "seed": 29102727,
+      "L_minus_P_qos_per_step": -0.012978290991540464,
+      "L_minus_P_raw_native_J": 46.053253266314414,
+      "L_minus_P_return_constraint_cost_sum": -42.497850700705584,
+      "L_minus_P_episode_minimum_battery_ratio": 0.013544102254499646,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": -0.07508333333333334,
+      "L_minus_P_selected_hold_windows": 92,
+      "L_minus_H_qos_per_step": -0.03768916680644685,
+      "L_minus_H_raw_native_J": 335.3166118354859,
+      "L_minus_H_return_constraint_cost_sum": -224.19206010415778,
+      "L_minus_H_episode_minimum_battery_ratio": 0.031022248597778745,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": -0.19116666666666668,
+      "L_minus_H_selected_hold_windows": 153
+    },
+    {
+      "seed": 29102728,
+      "L_minus_P_qos_per_step": -0.051870532466241404,
+      "L_minus_P_raw_native_J": -126.63786237422414,
+      "L_minus_P_return_constraint_cost_sum": -14.492635361183801,
+      "L_minus_P_episode_minimum_battery_ratio": 0.0059252337844838965,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": -0.03825,
+      "L_minus_P_selected_hold_windows": 36,
+      "L_minus_H_qos_per_step": -0.00226070991015781,
+      "L_minus_H_raw_native_J": -8.996197811167576,
+      "L_minus_H_return_constraint_cost_sum": 1.1070308743186892,
+      "L_minus_H_episode_minimum_battery_ratio": -0.002393681001748693,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.000125,
+      "L_minus_H_selected_hold_windows": 151
+    },
+    {
+      "seed": 29102729,
+      "L_minus_P_qos_per_step": -0.04808834015757335,
+      "L_minus_P_raw_native_J": -143.62231641010385,
+      "L_minus_P_return_constraint_cost_sum": -0.32360750207321476,
+      "L_minus_P_episode_minimum_battery_ratio": 0.0007046046198017075,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_P_selected_hold_windows": 119,
+      "L_minus_H_qos_per_step": -0.03996201926920051,
+      "L_minus_H_raw_native_J": -119.33877624312936,
+      "L_minus_H_return_constraint_cost_sum": -0.27355262439466244,
+      "L_minus_H_episode_minimum_battery_ratio": -0.009358558100718617,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0,
+      "L_minus_H_selected_hold_windows": 143
+    },
+    {
+      "seed": 29102730,
+      "L_minus_P_qos_per_step": 0.04116304869148635,
+      "L_minus_P_raw_native_J": 121.63262820137925,
+      "L_minus_P_return_constraint_cost_sum": 0.9252134269874439,
+      "L_minus_P_episode_minimum_battery_ratio": -0.0003115803770088882,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.00012499999999999995,
+      "L_minus_P_selected_hold_windows": 97,
+      "L_minus_H_qos_per_step": 0.05837057373630972,
+      "L_minus_H_raw_native_J": 172.60883201413776,
+      "L_minus_H_return_constraint_cost_sum": 1.2514403719586205,
+      "L_minus_H_episode_minimum_battery_ratio": -0.005390821769788931,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.0005416666666666666,
+      "L_minus_H_selected_hold_windows": 162
+    },
+    {
+      "seed": 29102731,
+      "L_minus_P_qos_per_step": 0.013670966397328232,
+      "L_minus_P_raw_native_J": 27.592452393443637,
+      "L_minus_P_return_constraint_cost_sum": 6.710267494176401,
+      "L_minus_P_episode_minimum_battery_ratio": -0.0025035664055075846,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.0175,
+      "L_minus_P_selected_hold_windows": 105,
+      "L_minus_H_qos_per_step": 0.03835942999745934,
+      "L_minus_H_raw_native_J": 131.63091752549963,
+      "L_minus_H_return_constraint_cost_sum": -8.273127179571112,
+      "L_minus_H_episode_minimum_battery_ratio": 0.0024995609504624983,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": -0.013874999999999998,
+      "L_minus_H_selected_hold_windows": 167
+    },
+    {
+      "seed": 29102732,
+      "L_minus_P_qos_per_step": -0.0279089344133433,
+      "L_minus_P_raw_native_J": -363.3161057443358,
+      "L_minus_P_return_constraint_cost_sum": 139.79270474787157,
+      "L_minus_P_episode_minimum_battery_ratio": -0.024773206750618365,
+      "L_minus_P_below_fixed_reserve_uav_step_fraction": 0.14733333333333334,
+      "L_minus_P_selected_hold_windows": 90,
+      "L_minus_H_qos_per_step": -0.013600236534281773,
+      "L_minus_H_raw_native_J": -278.66444536483004,
+      "L_minus_H_return_constraint_cost_sum": 118.93186403514851,
+      "L_minus_H_episode_minimum_battery_ratio": -0.015278352586524116,
+      "L_minus_H_below_fixed_reserve_uav_step_fraction": 0.09983333333333334,
+      "L_minus_H_selected_hold_windows": 133
+    }
+  ],
+  "no_new_environment_steps_or_optimizer_updates": true,
+  "initial_readback_correction": {
+    "initial_mismatches": [
+      "H/29102701 battery minimum",
+      "H/29102702 battery minimum",
+      "H/29102703 battery minimum",
+      "H/29102706 battery minimum",
+      "H/29102707 battery minimum",
+      "H/29102708 battery minimum",
+      "H/29102710 battery minimum",
+      "H/29102711 battery minimum",
+      "H/29102712 battery minimum",
+      "H/29102713 battery minimum",
+      "H/29102715 battery minimum",
+      "H/29102716 battery minimum",
+      "H/29102717 battery minimum",
+      "H/29102719 battery minimum",
+      "H/29102722 battery minimum",
+      "H/29102723 battery minimum",
+      "H/29102726 battery minimum",
+      "H/29102729 battery minimum",
+      "H/29102730 battery minimum",
+      "H/29102731 battery minimum",
+      "H/29102732 battery minimum",
+      "L/29102701 battery minimum",
+      "L/29102702 battery minimum",
+      "L/29102703 battery minimum",
+      "L/29102704 battery minimum",
+      "L/29102705 battery minimum",
+      "L/29102706 battery minimum",
+      "L/29102708 battery minimum",
+      "L/29102709 battery minimum",
+      "L/29102710 battery minimum",
+      "L/29102712 battery minimum",
+      "L/29102713 battery minimum",
+      "L/29102714 battery minimum",
+      "L/29102715 battery minimum",
+      "L/29102716 battery minimum",
+      "L/29102717 battery minimum",
+      "L/29102718 battery minimum",
+      "L/29102720 battery minimum",
+      "L/29102721 battery minimum",
+      "L/29102722 battery minimum",
+      "L/29102725 battery minimum",
+      "L/29102726 battery minimum",
+      "L/29102727 battery minimum",
+      "L/29102728 battery minimum",
+      "L/29102729 battery minimum",
+      "L/29102730 battery minimum",
+      "L/29102731 battery minimum",
+      "L/29102732 battery minimum",
+      "P/29102701 battery minimum",
+      "P/29102702 battery minimum",
+      "P/29102704 battery minimum",
+      "P/29102705 battery minimum",
+      "P/29102707 battery minimum",
+      "P/29102708 battery minimum",
+      "P/29102709 battery minimum",
+      "P/29102710 battery minimum",
+      "P/29102714 battery minimum",
+      "P/29102716 battery minimum",
+      "P/29102722 battery minimum",
+      "P/29102723 battery minimum",
+      "P/29102724 battery minimum",
+      "P/29102725 battery minimum",
+      "P/29102726 battery minimum",
+      "P/29102729 battery minimum",
+      "P/29102730 battery minimum",
+      "P/29102731 battery minimum",
+      "P/29102732 battery minimum",
+      "collect/29092705 battery minimum",
+      "collect/29092706 battery minimum",
+      "collect/29092708 battery minimum",
+      "collect/29092709 battery minimum",
+      "collect/29092710 battery minimum",
+      "collect/29092711 battery minimum",
+      "collect/29092712 battery minimum",
+      "collect/29092714 battery minimum",
+      "collect/29092715 battery minimum",
+      "collect/29092716 battery minimum",
+      "collect/29092717 battery minimum",
+      "collect/29092719 battery minimum",
+      "collect/29092720 battery minimum",
+      "collect/29092721 battery minimum",
+      "collect/29092724 battery minimum",
+      "collect/29092725 battery minimum",
+      "collect/29092726 battery minimum",
+      "collect/29092727 battery minimum",
+      "collect/29092728 battery minimum",
+      "collect/29092729 battery minimum",
+      "collect/29092730 battery minimum",
+      "collect/29092731 battery minimum",
+      "collect/29092732 battery minimum",
+      "collect/29092733 battery minimum",
+      "collect/29092734 battery minimum",
+      "collect/29092735 battery minimum",
+      "collect/29092736 battery minimum",
+      "collect/29092738 battery minimum",
+      "collect/29092739 battery minimum",
+      "collect/29092742 battery minimum",
+      "collect/29092745 battery minimum",
+      "collect/29092747 battery minimum",
+      "collect/29092748 battery minimum",
+      "collect/29092749 battery minimum",
+      "collect/29092750 battery minimum",
+      "collect/29092751 battery minimum",
+      "collect/29092752 battery minimum",
+      "collect/29092753 battery minimum",
+      "collect/29092754 battery minimum",
+      "collect/29092756 battery minimum",
+      "collect/29092757 battery minimum",
+      "collect/29092758 battery minimum",
+      "collect/29092759 battery minimum",
+      "collect/29092760 battery minimum",
+      "collect/29092761 battery minimum",
+      "collect/29092762 battery minimum",
+      "collect/29092764 battery minimum"
+    ],
+    "cause": "Reader incorrectly compared decoded float32 battery minimum against native metric episode minimum. Frozen evaluator computes episode_minimum_battery_ratio from metrics[:,battery_min_ratio], and min_decoded_battery separately from the observation battery array. The corrected source mapping is exact in every world.",
+    "max_native_minus_decoded_absolute_difference": 3.6783597556766523e-09,
+    "native_minimum_exact_worlds": 160,
+    "decoded_minimum_exact_worlds": 160,
+    "reserve_cutoff_comparison": "decoded float32 values converted to float64, <= fixed thresholds as frozen source"
+  },
+  "paired_t31_interval_max_absolute_error": 0.0,
+  "native_and_decoded_battery_sources_separately_verified": true
+}

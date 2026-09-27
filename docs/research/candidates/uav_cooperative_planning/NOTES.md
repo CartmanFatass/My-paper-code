@@ -801,3 +801,389 @@ job `launch-b02-transit-value-a01`. The first drain observed the existing operat
 At a checkpoint rearm this same generation/handle through the standard drain/rearm protocol;
 do not launch another worker or change the source/output tag to retry. Completion/error must
 be reconciled against the native exit witness and complete/partial artifacts before reading.
+
+**Checkpoint 1, 2026-09-27 18:49 UTC:** drained the sole CHECKPOINT event. The same native
+runner/supervisor identities remain running and consistent, with no exit witness or observer
+error. The read summary records **14/64 collection worlds, 42,000 native steps and 4,200
+macro-transitions; zero fits/updates and zero evaluation worlds**. All returned worlds are
+complete H3000 episodes; failed jobs are empty and stdout/stderr are empty. Recorded parent
+wall is 1,547.619 s; 39,178 service snapshots are a completed-world lower bound. Pending-worker
+resource gaps are explicitly unmeasured, not zero or a failure. Refreshed published main
+retains the active lead/state and no newer pause. Rearmed the existing operation at generation
+**2**, 1500-second window; no worker was restarted. This routine progress is not a utility reading.
+
+**Checkpoint 2, 2026-09-27 19:17 UTC:** the sole new event is CHECKPOINT; the original
+runner/supervisor remain running with consistent identities, no exit witness and zero observer
+errors. The current summary records **30/64 collection worlds, 90,000 native steps and 9,000
+macro-transitions**, all returned episodes H3000; fitting and evaluation have not started.
+No failed jobs or runner/pool errors are recorded; stdout/stderr remain empty. Parent wall
+is 3,262.837 s and recorded service snapshots are at least 83,049; pending-worker telemetry
+remains explicitly incomplete. Refreshed published main preserves the active lead and pause
+state. Consumed this event and rearmed the same operation at generation **3**, 1500 seconds;
+the fixed source, contract and worker are unchanged. No scientific conclusion follows yet.
+
+**Checkpoint 3, 2026-09-27 19:45 UTC:** same accepted operation running, identities consistent,
+no exit witness or observer error. **48/64 collection worlds, 144,000 native steps, 14,400
+macro-transitions; zero fits/updates/evaluation worlds**, all returned episodes H3000 and no
+failed jobs. Logs remain empty. Recorded parent wall 4,898.529 s; service-snapshot lower bound
+133,760. Refreshed main retains the active lead and pause state. Consumed the sole CHECKPOINT
+and rearmed the same handle at generation **4**, 1500 seconds. No utility reading or new execution.
+
+**Checkpoint 4, 2026-09-27 20:13 UTC:** collection is **64/64 H3000 worlds, 192,000 steps
+and 19,200 macro-transitions**. The one declared fit completed **5,000 updates**, 1,280,000
+sampled transitions and 50 target copies, in **39.356 s wall / 39.029 s CPU**. Recorded final
+loss is .282797 and parameter L2 movement 13.068514; these are execution diagnostics, not
+utility evidence. Collection contains 9,369 multi-option and 9,831 forced transitions;
+target forward rows 11,482,047 include 6,242,439 valid candidate rows. The fixed checkpoint
+`raw/final_value.pt` exists at **166,981 bytes**, SHA256
+`e47082385d5ca029629d917ea8387219c307a20bce4390f322c252c4eca93d41`.
+Evaluation has returned **2/96** complete worlds, total recorded native steps 198,000;
+no paired learner comparison exists yet. Original runner/supervisor identities remain running,
+no exit witness, no failed jobs or observer errors, and empty stdout/stderr. Refreshed main
+preserves lead/state and pause. Consumed the CHECKPOINT and rearmed the same operation at
+generation **5**, 1500 seconds; no new fit, worker or scientific decision was added.
+
+**Checkpoint 5, 2026-09-27 20:42 UTC:** the original operation remains running with consistent
+identities, no exit witness or observer error. Evaluation is **22/96 completed worlds (P 22,
+H 0, L 0)**; collection remains 64/64 and the single fit remains at 5,000 updates. All 86
+returned episodes are H3000, totaling **258,000 native steps**. No failed jobs or runner/pool
+errors; stdout/stderr remain empty. Recorded parent wall 8,307.323 s and service-snapshot lower
+bound 236,265. Refreshed published main preserves lead/state and pause. Consumed CHECKPOINT
+and rearmed the same operation at generation **6**, 1500 seconds. The learner comparison is
+still missing; ordinary-reference progress establishes no learning benefit.
+
+**Checkpoint 6, 2026-09-27 21:10 UTC:** the original operation remains running with consistent
+runner/supervisor identities, no exit witness and zero observer errors. Evaluation is **44/96
+completed worlds (P 32, H 12, L 0)**; collection remains 64/64 and the one fit remains at 5,000
+updates. All 108 returned episodes are H3000, totaling **324,000 native steps**. No failed jobs
+or runner/pool errors; stdout/stderr remain empty. Recorded parent wall is 9,980.686 s and
+service-snapshot lower bound 264,613. Pending-worker resource telemetry remains explicitly
+unmeasured. Refreshed published main preserves the active lead/state and lifted pause.
+Consumed the sole CHECKPOINT and rearmed the same operation at generation **7**, 1500 seconds.
+The learned arm has not returned an evaluation world; no learning-utility conclusion follows.
+
+**Checkpoint 7, 2026-09-27 21:44 UTC:** drained the sole CHECKPOINT event. The original
+runner/supervisor identities remain running and consistent, with no exit witness or observer
+errors. Evaluation has returned **74/96 complete worlds (P 32, H 32, L 10)**; collection is
+64/64 and the one fit remains at 5,000 updates, with zero evaluation optimizer updates.
+All 138 returned episodes are H3000, totaling **414,000 native steps**; no failed jobs or
+runner/pool errors and stdout/stderr remain empty. Recorded parent wall is 12,105.530 s and
+service-snapshot lower bound 291,175; pending-worker telemetry is explicitly incomplete.
+Refreshed main preserves the active lead/state and lifted pause. Consumed the event and
+rearmed the same operation at generation **8**, 1500 seconds. The 32-world paired panel is
+incomplete; no utility decision or change to the frozen study follows from interim means.
+
+**Checkpoint 8, 2026-09-27 22:12 UTC:** the original operation remains running with consistent
+runner/supervisor identities, no exit witness and zero observer errors. Evaluation is **94/96
+completed worlds (P 32, H 32, L 30)**, with only L/29102731 and L/29102732 outstanding.
+Collection remains 64/64; the single fit remains at 5,000 updates and evaluation updates are
+zero. All 158 returned episodes are H3000, totaling **474,000 native steps**. No failed jobs
+or recorded errors; stdout/stderr remain empty. Recorded parent wall is 13,723.326 s and
+service-snapshot lower bound 345,971; pending-worker resource telemetry remains incomplete.
+Refreshed main preserves the active lead/state and lifted pause. Consumed the sole CHECKPOINT
+and rearmed the same operation at generation **9**, 1500 seconds. The full paired panel and
+terminal evidence are still pending; no utility decision or execution change was made.
+
+## 2026-09-27 — complete native B02 reading
+
+The accepted source is `9f72afd2223baccd9ed554b0ef86bcbe5277afb5`; its exact
+[implementation](https://github.com/CartmanFatass/My-paper-code/tree/9f72afd2223baccd9ed554b0ef86bcbe5277afb5/experiments/candidates/uav_cooperative_planning/b02)
+and frozen 248-field contract remain the source for this result. The operation accepted at
+18:22:51 UTC ended at **22:14:35 UTC**, with a valid process-exit witness, exit **0**, absent
+original runner/supervisor, consistent operation identity and empty stdout/stderr. All
+**64 collection + 96 evaluation worlds completed H3000, 480,000 native steps**; one started and
+completed fit made **5,000 updates**, with **zero evaluation updates**, no missing/failed jobs
+or unmeasured worker-resource fields. The summary is complete; the progress file retains the
+last evaluation callback (160 completed jobs), not a contradictory claim of a live runner.
+The sole READY event was consumed with its exact IDs; observer generation **10** has no pending
+events/wake and no running observation. No worker/fit was repeated.
+
+### Artifact and native-result readback
+
+Canonical evidence is on `local_linux` / host `Jacob`, at
+`/home/fires/hmasd-wsl/runs/uav_cooperative_planning/b02_transit_value_a01/`.
+[summary](../../../../runs/uav_cooperative_planning/b02_transit_value_a01/summary.json),
+[all collection/evaluation world rows](../../../../runs/uav_cooperative_planning/b02_transit_value_a01/perworld.json),
+[manifest](../../../../runs/uav_cooperative_planning/b02_transit_value_a01/manifest.json) and
+[existing-artifact readback](../../../../runs/uav_cooperative_planning/b02_transit_value_a01/reading.json)
+are compact records; the 160 trajectory archives and one final checkpoint stay in the single
+canonical `raw/` directory. There is no orphan raw file. All **165 manifest artifacts** pass
+size and SHA256 readback. The **14 native metric sums/means per world reproduce exactly**;
+all panel means and paired mean/SD/SE/t31 intervals reproduce exactly. Both L-reference
+comparisons retain all 3,000 observed native steps: **64 paired user/RNG trace comparisons**
+match, and the three recorded initial-state digests agree in each of 32 worlds.
+
+The reader's first battery-minimum comparison used the wrong source: decoded float32 battery
+versus native `battery_min_ratio`. It flagged 114 tiny differences (maximum 3.67836e-9).
+The frozen evaluator deliberately records `min_decoded_battery` and the native
+`episode_minimum_battery_ratio` separately. Correcting that reader mapping reproduces both
+fields exactly in all 160 worlds; reserve/cutoff fractions use decoded ratios and the original
+`<=` thresholds. The initial discrepancies and their resolution remain in `reading.json`.
+No runner output, threshold or experimental source was changed to resolve them.
+
+The final checkpoint hash matches the manifest and its parameter digest matches the fit
+record. Its normalization matches exactly the **94,152 valid collection candidate rows**, in
+fixed seed order. Replaying the saved checkpoint on the recorded L decision contexts reproduces
+all **4,582 active choices**, with **zero learned-value ties**. This is artifact readback only,
+with no new environment interaction or optimizer update. It establishes that the reported
+negative belongs to the active fixed learned policy; it does not establish Bellman accuracy,
+coverage, convergence or why its ranking loses utility.
+
+### Fixed utility rule and all paired outcomes
+
+The prewritten retention rule required **at least +.03 mean QoS/step and positive mean J against
+both P and H**, with the declared adverse-world/tail reading. The final package fails it.
+These intervals describe **32 worlds conditional on this one fit**; they are not independent
+training replications or a population learning claim.
+
+| Contrast | QoS/step difference [descriptive t31 95% interval] | Native J difference [interval] | QoS wins/losses | J wins/losses |
+| --- | --- | --- | --- | --- |
+| L−P | -0.016488229 [-0.026709971, -0.006266486] | -55.388987 [-92.449289, -18.328685] | 7/25 | 8/24 |
+| L−H | -0.009203793 [-0.021418134, +0.003010548] | -15.895282 [-62.571504, +30.780941] | 11/21 | 11/21 |
+
+The P comparison is adverse for this fit; the H intervals cross zero. Neither gives the required
+positive practical increment. The following table retains every world; full costs, battery,
+reserve and controller fields are in the linked perworld/readback files.
+
+| World seed | L−P QoS | L−P J | L−H QoS | L−H J |
+| --- | --- | --- | --- | --- |
+| 29102701 | -0.007240 | -21.487 | -0.013554 | -40.403 |
+| 29102702 | -0.031541 | -94.160 | -0.013810 | -42.040 |
+| 29102703 | -0.052038 | -161.885 | -0.096629 | -261.583 |
+| 29102704 | +0.039169 | +113.874 | +0.053569 | +158.350 |
+| 29102705 | -0.028578 | -86.068 | +0.013642 | +42.826 |
+| 29102706 | -0.005261 | -16.399 | +0.007663 | +34.230 |
+| 29102707 | +0.004166 | +12.482 | -0.012391 | -36.781 |
+| 29102708 | -0.010953 | -33.459 | -0.014724 | -44.010 |
+| 29102709 | +0.030831 | +60.590 | +0.011239 | -17.073 |
+| 29102710 | -0.014975 | -9.841 | -0.024616 | -12.260 |
+| 29102711 | -0.060912 | -183.678 | -0.051911 | -156.210 |
+| 29102712 | -0.059890 | -182.686 | -0.056061 | -171.410 |
+| 29102713 | -0.041776 | -124.436 | -0.044002 | -131.070 |
+| 29102714 | -0.031929 | -135.240 | +0.004772 | +45.989 |
+| 29102715 | +0.000240 | +1.323 | -0.036565 | -110.697 |
+| 29102716 | -0.001162 | -2.842 | -0.011561 | -27.698 |
+| 29102717 | -0.003344 | -6.981 | -0.002563 | -8.220 |
+| 29102718 | -0.027249 | -80.253 | +0.017867 | +54.598 |
+| 29102719 | -0.009110 | -26.739 | +0.026259 | +78.511 |
+| 29102720 | +0.033819 | +124.504 | +0.044243 | +201.747 |
+| 29102721 | -0.015425 | -46.386 | -0.000323 | -0.844 |
+| 29102722 | -0.040498 | -116.847 | -0.019121 | -58.011 |
+| 29102723 | -0.050713 | -151.270 | -0.038932 | -117.103 |
+| 29102724 | -0.003914 | -11.421 | +0.015247 | +46.008 |
+| 29102725 | -0.040965 | -120.744 | -0.041571 | -123.780 |
+| 29102726 | -0.012364 | -34.101 | -0.013908 | -44.272 |
+| 29102727 | -0.012978 | +46.053 | -0.037689 | +335.317 |
+| 29102728 | -0.051871 | -126.638 | -0.002261 | -8.996 |
+| 29102729 | -0.048088 | -143.622 | -0.039962 | -119.339 |
+| 29102730 | +0.041163 | +121.633 | +0.058371 | +172.609 |
+| 29102731 | +0.013671 | +27.592 | +0.038359 | +131.631 |
+| 29102732 | -0.027909 | -363.316 | -0.013600 | -278.664 |
+
+### Risk, process observations and contrary worlds
+
+All three evaluation arms have **zero zero-service worlds, zero cutoff and zero depletion**;
+all episodes reached H3000. This finite observation does not establish safety or risk equality.
+Mean return cost is **P 5.081636, H 13.899052, L 8.041537**. L−P is **+2.959902
+[−6.739107,+12.658910]** and L−H **−5.857514 [−22.577112,+10.862084]**. Average native
+minimum battery is **P .100023315, H .098624995, L .099850366**; the lowest-eight-world
+mean is **P .094525328, H .088916862, L .093643117**. Mean fraction of UAV-steps at/below
+10% reserve is **P .007196615, H .017010417, L .008740885**. Signs differ across references;
+these averages do not support a general risk-saving explanation.
+
+- **29102732:** versus P, L has QoS −.027909 and J **−363.316106**, return cost
+  **+139.792705**. Native minimum battery falls **.101449112→.076675905** and reserve
+  exposure **0→.147333333**. This adverse world remains in all means and intervals.
+- **29102727:** L loses service versus both references (−.012978 versus P, −.037689 versus H)
+  but improves J (+46.053253/+335.316612), alongside lower return cost. It is a real
+  service/risk tradeoff, not evidence that every J change measures service improvement.
+- Worst L−P QoS is **−.060912316** in 29102711; worst L−H QoS is **−.096629239** in
+  29102703. Positive worlds are retained as well; they do not rescue the fixed rule.
+
+L selects **4,575 holds / 4,582 active multi-option windows** (142.96875 holds/world);
+P selects **1,600 / 4,558** (50/world), H zero. Shield/fallback times and later visited states
+can differ because choices differ. This nearly all-hold deployment is observed behavior,
+not a demonstrated causal failure mechanism or proof of unsupported-value maximization.
+The fixed feature/model/reward/discount/data package changes several things together; the
+result does not isolate long-horizon continuation, credit assignment, partial observability,
+finite coverage or optimization. Native guard/shield, charging and all per-world fields remain
+available in the complete records.
+
+### Actual cost and retention
+
+Runner wall was **13,899.235 s = 3.86090 h** on `local_linux`, versus the prospective 5–6 h
+estimate, with two workers and one numeric thread each. Summed worker CPU was
+**27,623.045 s = 7.67307 h**, summed worker wall **27,639.599 s**; parent CPU **42.919 s**.
+The single fit itself took **39.356 s wall / 39.029 s CPU**. Parent/recorded worker cumulative
+peak RSS was **1,217,092 KiB**; this is not simultaneous node memory or an isolated fit peak.
+Engineering/review and scientific-reading time were quoted prospectively and were not separately
+instrumented; they are not reported as measured stopwatch totals.
+
+| Stage | Worlds | Summed worker wall (s) | Summed worker CPU (s) | Service snapshots |
+| --- | --- | --- | --- | --- |
+| collect | 64 | 12585.839 | 12572.747 | 178011 |
+| P | 32 | 5621.966 | 5619.685 | 86602 |
+| H | 32 | 4240.702 | 4240.059 | 0 |
+| L | 32 | 5191.092 | 5190.554 | 87058 |
+
+Actual model cost: **166,581 candidate plans, 351,671 service snapshots, 41,238 L candidate
+inferences**. Fit used 1,280,000 sampled transitions, 11,482,047 target forward rows including
+padding (6,242,439 valid targets) and 50 target copies. All raw files total **306,466,449 logical
+bytes**, including the checkpoint; allocated raw size is **306,827,264 bytes**. Manifest-listed
+artifacts total **307,423,045 bytes** before the later readback record. No duplicate bulk package
+was created. The canonical directory remains durable in shared main's checkout; it is not a
+worktree scheduled for removal. Compact-file digests:
+
+- `summary.json`: 102239 bytes; SHA256 `62e62636ebd180e7603079aaf0c790372fcdd11babc05b29c7294a41a223a741`.
+- `perworld.json`: 850873 bytes; SHA256 `8ec68cac74e7293d9ad125b564621c01d471131d8eb0d086bb49556d1bc9b62e`.
+- `manifest.json`: 23944 bytes; SHA256 `482c45c28eceeab464c28df91feb79c0bcfa405fb771f82c2248b992e97bd449`.
+- `reading.json`: 40552 bytes; SHA256 `78f8c5f6dcc16de012db74ddb692b53b1b2208d191ca00a0ce55a7e48ae6629f`.
+- `raw/final_value.pt`: 166981 bytes; SHA256 `e47082385d5ca029629d917ea8387219c307a20bce4390f322c252c4eca93d41`.
+
+The independent result/direction review is in progress in a separate context. Current published
+background at `9475b0b5507762bca6152d049e534f492e9b83b3`, especially
+[ordinary planning evidence](../../RESEARCH.md#6-实证研究是在具体条件下缩小解释空间), preserves
+B04/B05's scoped gains, risk counterexamples and finite-precision limitations. They make P a
+substantive ordinary comparison; they do not change this study's frozen arms, add a new arm or
+turn the negative into a statement that all cooperative planning is impossible. The final
+investment disposition will incorporate the review below.
+
+### Independent scientific review — completed B02 and direction investment
+
+Reviewer: registered `hmasd-research-critic`, child `/root/dm3_b02_result_review`, dedicated
+instructions and `fork_turns="none"`. It received source identities, the actual question,
+frozen contract and supporting/adverse outputs before proponents' explanations. The complete
+substantive response follows; code links are pinned to the executed source for later retirement.
+
+**Recommend stop this B02 package and make no further result-bearing investment now.** Retain P and H as ordinary comparison assets and DM3’s ownership of the broader planning question, with the direction in reserve. This is an investment decision, not evidence that learned cooperative planning is impossible.
+
+No DM/Root conversation history was supplied. The assignment disclosed the comparison and decision framing; a general workspace memory overview was also present. I reconstructed frozen code, native summaries, all per-world endpoints and selected raw trajectories before reading the B02 proposal and prior scientific review. This was separate-context review, not blinded review or protection against model bias. No post-result DM explanation or successor proposal was present in NOTES when inspected.
+
+The execution source is `9f72afd2223baccd9ed554b0ef86bcbe5277afb5`; its imported B04 controller has the identical Git blob to the declared `025350669…` dependency. The [controller](https://github.com/CartmanFatass/My-paper-code/blob/9f72afd2223baccd9ed554b0ef86bcbe5277afb5/experiments/candidates/uav_cooperative_planning/b02/controller.py), [learner](https://github.com/CartmanFatass/My-paper-code/blob/9f72afd2223baccd9ed554b0ef86bcbe5277afb5/experiments/candidates/uav_cooperative_planning/b02/learner.py) and [frozen decision declaration](#fixed-evaluation-and-decisions-it-could-change) support a sufficiently matched **centralized controller-package comparison**: common information rights, target generator, move/hold library, ten-step clock, guard and shield. L additionally receives offline experience and fitting, while still computing P’s scores. There are no independently adapting teammates or new coordination architecture.
+
+All 64 collection and 96 evaluation worlds completed H3000: 480,000 native steps, one fit, 5,000 updates and zero evaluation updates. The collection contains 19,200 transitions, of which 9,369 offer multiple actions. Parameter movement and changed final identity establish execution of learning, not useful value estimation. The DM’s subsequently supplied [full readback](../../../../runs/uav_cooperative_planning/b02_transit_value_a01/reading.json) records complete artifact verification, matching exogenous prefixes and exact reconstruction of 4,582 active L choices. I inspected that evidence without duplicating its complete audit. There is no technical-failure or censoring explanation for this completed result.
+
+The [native summary](../../../../runs/uav_cooperative_planning/b02_transit_value_a01/summary.json) gives:
+
+| Endpoint | P | H | L |
+|---|---:|---:|---:|
+| Mean QoS/step | .760207 | .752923 | .743719 |
+| Mean native J | 2239.932 | 2200.439 | 2184.543 |
+| Mean return-cost sum | 5.082 | 13.899 | 8.042 |
+
+| Paired difference | Mean | Descriptive 95% interval |
+|---|---:|---:|
+| L−P QoS/step | −.016488 | [−.026710, −.006266] |
+| L−P J | −55.389 | [−92.449, −18.329] |
+| L−H QoS/step | −.009204 | [−.021418, +.003011] |
+| L−H J | −15.895 | [−62.572, +30.781] |
+
+The prewritten rule required at least **+.03 mean QoS and positive mean J against both references**, with additional adverse-event and tail scrutiny. L fails even the mean-improvement condition. This is not a borderline decision created by the .03 threshold. The intervals describe world variation conditional on one fitted policy; neither 32 evaluation worlds nor 64 collection worlds supplies independent training replication.
+
+The [per-world evidence](../../../../runs/uav_cooperative_planning/b02_transit_value_a01/perworld.json) preserves consequential positives and negatives:
+
+- L improves QoS over P in 7/32 worlds and J in 8/32; against H, each improves in 11/32.
+- Seed **29102704** improves over P by +.039169 QoS and +113.874 J. Seed **29102720** improves by +.033819 and +124.504, with lower return cost.
+- Seed **29102711** loses −.060912 QoS and −183.678 J against P.
+- Seed **29102732** introduces a substantial risk loss: return cost **140.989 versus P’s 1.196**, minimum battery **.076676 versus .101449**, and reserve exposure **14.733% versus zero**. Its J loss is −363.316.
+- Conversely, seed **29102727** avoids H’s return-cost tail, **2.021 versus 226.213**. That single improvement exceeds the entire panel’s net return-cost reduction against H.
+
+Thus “learned conservatism trades service for reliable risk reduction” is not supported. All arms have zero cutoff/depletion and no wholly zero-service world, but these zeros coexist with serious reserve deficits.
+
+The strongest supported diagnosis is **ordinary competence plus an unsuccessful learned ranking at this exposure**. Raw choice arrays sharpen that diagnosis: L selects a hold in **4,575/4,582 active windows**, compared with P’s **1,600/4,558**. In 18/32 L worlds, one particular UAV accounts for at least 90% of active selections; median dominant-choice share is 93.35%. L agrees with P’s recommendation on its own visited contexts only 448/4,582 times. The selected hold proposals change target coordinates rather than being duplicate all-move proposals; guard/shield intervention still controls actual execution.
+
+This persistent holding is an observed policy behavior, **not an identified cause**. Holding itself can be useful. The [B04 outputs](../../../../runs/energy_relay_availability/b04_transit_hold_a01/summary.json) support a conditional P−H gain of +.010578 QoS and +34.736 J. The matched [B05 outputs](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/summary.json) support five_ten−one_step gains of +.016071 and +35.808, with substantial adverse tails. These make P a credible ordinary reference; they do not establish calibrated anticipation, numerical robustness, or headroom available to learning. B02’s fresh panel also places P above H on both means.
+
+The hypothesis update should therefore remain precise:
+
+- **Opportunity:** useful choices exist within this library, as ordinary-controller comparisons show. Incremental learnable opportunity beyond P remains unmeasured.
+- **Representation and learning:** unsupported maximization, incomplete behavioral coverage, partial observation and finite fitting remain plausible explanations. The result does not select among them. The discounted training objective also differs from undiscounted H3000 utility, as declared prospectively.
+- **Complete usefulness:** this particular fitted package fails. It adds collection, fitting and inference without demonstrated native benefit or amortizing away ordinary scoring.
+- **MARL interpretation:** neither the failure nor isolated favorable worlds identifies a long-horizon coordination or credit-assignment bottleneck.
+
+The actual cost matters. Acceptance-to-exit was **13,903.83 seconds, or 3.862 hours**, on `local_linux` with two workers. Worker CPU totaled **7.673 hours**; the fit itself took only **39.36 seconds**. There were 351,671 service snapshots, 166,581 candidate-plan evaluations and 41,238 learned inference candidate evaluations. Original manifest-listed scientific artifacts total about **307.4 MB**. Engineering, publication and complete review/readback effort are not fully metered. Per-process RSS peaks do not establish simultaneous total memory.
+
+I considered three continuations:
+
+| Possible next observation | What it could change | Recommendation |
+|---|---|---|
+| More worlds for this fixed L | Precision of its conditional utility estimate | Decline: it already fails the fixed use decision. A comparable three-arm panel costs roughly 2.1 hours at observed two-worker throughput. |
+| Another initialization or collection | Recurrence across fitted instances | Decline now: no useful candidate currently needs replication. A reused-data refit is cheap, but its L evaluation alone is roughly .72 hours and does not replicate data collection. |
+| Changed target, discount, representation or coverage | Utility of a revised learner package | Decline now: these are legitimate possible explorations, but current evidence does not make one a sufficiently valuable discriminating investment. They should not become an automatic rescue sequence. |
+
+This judgment does **not** require exhaustive diagnosis, exact headroom or a positive preliminary experiment before future exploration. It reflects the present result, competent alternatives, unresolved attribution and complete marginal cost. The smallest worthwhile complete observation for this selected question has already been obtained. Publish it, preserve the behavioral finding and adverse worlds, and release the active runtime commitment. Broader question ownership continues without inventing a waiting dependency or claiming scientific impossibility.
+
+The original bounded investment was defensible and returned useful negative information. Its failure does not retrospectively invalidate that choice, nor oblige Root to keep four DM execution slots occupied. No distinct unresolved expertise question presently warrants Pro; another advisory pass would not supply empirical replication or identify the failure mechanism.
+
+**MATERIAL_DISSENT: no — I support the frozen failure branch and recommend ending new investment in this package, based on negative native means against both competent references and the retained adverse worlds. No competing post-result investment proposal was present to dispute.**
+
+### DM disposition — end B02 investment and reserve the broader question
+
+Adopt the review's recommendation and frozen failure branch. **End this exact offline-data/value-
+ranking package; select no further result-bearing study now and set `uav_cooperative_planning`
+to reserve.** P and H remain ordinary assets under their existing owner. This closes the
+current investment, not the scientific possibility of useful learned cooperation. The broader
+question remains with this DM; reserve records an affirmative opportunity-cost choice, with no
+pending approval, missing result, external waiting dependency or promised automatic restart.
+The exploratory negative is conditional on one fitted instance; it is not a replicated claim
+against an algorithm family or a proof that the representation cannot work.
+
+The result changes the expectation that the specified experience/continuation package adds
+useful native ranking beyond P. It does not support the alternative story of reliable risk
+savings: 29102732 is strongly adverse and 29102727 dominates the net savings against H.
+Ordinary B04/B05 gains show some choices matter, while this active learned policy spends almost
+every discretionary window holding. The source/checkpoint verification excludes an inactive
+learner or missing endpoint as the explanation. It does not identify bootstrap extrapolation,
+coverage, objective mismatch or capacity as the cause; none earns a repair by being plausible.
+
+The wider reconsideration includes the earlier imitation result and withdrawn two-window
+selector, current DM2 ordinary-planning evidence, and the current division of work at
+`9475b0b5507762bca6152d049e534f492e9b83b3`. A fresh fixed-L panel would cost about **2.09 h**
+of two-worker execution to narrow world uncertainty without changing this fixed use decision.
+A new reused-data fit would be cheap but require roughly **.72 h** for L-only evaluation,
+plus an explicit exposure/comparator design; the negative candidate has no current use requiring
+such replication. Changing discount/target/coverage could produce a different package, but
+there is no resolved prediction here that makes one a sufficiently discriminating investment.
+A broader shield-handoff/role-rematching library would require a new concrete ordinary comparator
+and alters the actual decision problem; it was never tested by B02 and overlaps ordinary
+planning and the Claude coordinator/credit questions already assigned elsewhere. I do not
+rename the current failure or take over those questions as a substitute for a useful next choice.
+No generic architecture change, exhaustive diagnostic, positive preliminary gate or waiting
+condition is introduced. These alternatives are declined now on use and full marginal cost.
+
+One adequate independent scientific review covers this result/route decision. I find no distinct
+unresolved expertise or disagreement that Pro could change now; no Pro question is added.
+The standing/shared-background update will preserve both ordinary competence and this failed
+learned increment, including scope and risk counterexamples. Publish the complete positive,
+adverse and uncertainty record independently; no App message or Root acknowledgment is needed.
+Acceptance-to-exit (**13,903.828 s**) and runner wall (**13,899.235 s**) use different start
+points and are both retained. L's lower observed evaluation worker time than P is not scorer
+amortization: both still execute the same scorer, and their visited trajectories and arm order
+differ. Withdraw unused B02 implementation from current main after consumer checks; its exact
+source remains in Git. Preserve the one canonical raw evidence copy for the fixed contract.
+
+### Retirement of unused B02 files — measured result
+
+After the completed independent review and reserve decision, direct Python/config/entrypoint
+consumer search found only the owned B02 self-imports and entry. No external consumer or owned
+test file exists. The seven source files still matched accepted `9f72afd...`; original runner
+and supervisor were absent, terminal artifacts were read, and the exact observer was stopped
+after consuming READY (generation 10, no pending events). No live study depends on these files.
+
+Removed all seven explicitly named files under `experiments/candidates/uav_cooperative_planning/`
+and its empty directories with explicit Git paths. Exact-source links above recover the executed
+implementation; B04 and all other directions' code were preserved. Removed the sole obsolete
+`temp/directions/uav_cooperative_planning/b02_transit_value_a01/wait-request.json` and empty scratch
+directories. The private observer state remains at its original task state directory for recovery.
+
+Allocated bytes before→after: implementation **77824→0**, scratch
+**12288→0**; both target trees are absent. The cleanup interval reclaimed
+**90112 allocated bytes** net. The sole necessary raw evidence remained unchanged at
+**306827264→306827264 allocated bytes**, with manifest/trajectory/checkpoint digests already verified.
+
+The exact launcher snapshot `.git/hmasd-launch-sources/ca8f0c6028be4180a7f96bae3ab4b7d3`
+remains **1,601,449,984 allocated bytes**. The supported snapshot GC refused its ordinary preview
+because `/proc/374/cwd` was not inspectable; the provided elevated read-only scan then refused
+with `process 2026 changed during reference inspection`, including one bounded repeat. No apply
+or manual deletion bypass was attempted. This is an actual remaining cleanup target/tool blocker,
+not released space. No backup, tarball, duplicate retention copy or shared-process repair was created.
