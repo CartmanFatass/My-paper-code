@@ -712,3 +712,182 @@ do not establish a service-side prompt-cache hit.
 Node preparation fetched published Git objects only. Its existing dirty records and sparse
 selection were preserved; no checkout or broad sparse-selection update was performed. This
 routine acceptance record adds no scientific result or change to the published comparison.
+
+## 2026-09-27 — second original seed failed; both fresh endpoints remain missing
+
+The unchanged second fit, seed **26092731**, terminated with **SIGSEGV / exit -11**. The native
+exit witness records **18:52:48.485 UTC**; the runner and supervisor identities are both absent
+and the operation records are consistent. The verified
+[terminal observation](../../../../runs/energy_relay_baselines/b01_set_a01/seed-26092731/terminal-observation.json)
+contains the full faulthandler stderr, native exit/status, last completed rollout, per-file
+hashes and original-node locations. It was collected as a compact record and its bytes checked
+against the collection-side digest; the already-published config/manifest/preflight still match
+their node bytes. Bulk remains in the original output directory, outside the disposable source.
+
+The last fully recorded state is **858,000 transitions / 143 rollouts / 286 native episodes**,
+with 321,750 low-actor and 321,750 low-critic optimizer steps. Partial rollout 144 exposure is
+unmeasured. All five existing c00–c04 checkpoint hashes match their summary bindings; c04 is
+804,000 steps. There is no c05 or c06 endpoint. The summary remains `INCOMPLETE` with
+`failure: null`, and no `failure-context.json` or final CPU/RSS/training-wall fields were written.
+These are preserved consequences of signal termination bypassing Python exception/finalization
+code, not evidence of success or zero resource use. The failure-only exception recorder cannot
+recover locals after this hard crash; faulthandler did retain the Python stack.
+
+The top Python frame is frozen `routed_core.py:1229`,
+`np.any(self.connections[:, user_idx])`, reached through native environment stepping in the
+collector. Scout `/root/b01_crash_recon` mapped this boolean-array reduction and the earlier
+radio/backend path. The relevant environment and native C++ source is byte-identical between
+the first and second source revisions, but the first fit's `np.clip`/CPython sequence-conversion
+SystemError and this reduction-time SIGSEGV are different immediate failures. Source inspection
+found no specific invalid view or demonstrated memory-lifetime/bounds defect. It does not
+establish healthy process memory, a NumPy defect, earlier C++ corruption or a common cause.
+The SIGSEGV site is a fault boundary, not a root-cause diagnosis.
+
+The second fit's **native acceptance-to-exit interval is 22,016.758 seconds (6.1158 hours)**,
+including initialization and terminal handling; exact final training-only wall/CPU/RSS remain
+unmeasured. The comparable first native interval is 14,529.286 seconds (4.0359 hours), while
+its separately finalized training wall was 3.9146 hours. Thus the two native intervals sum to
+**10.1517 hours**, not a homogeneous sum of measured training-only time. Total cost is two
+started fits, **1,290,000 fully recorded training transitions**, plus unmeasured partial
+rollouts and support work. This study has **zero complete fresh 1.2M endpoints and zero new
+scored evaluation episodes**. Its two-seed recurrence question remains unanswered. Intermediate
+training rewards/checkpoints do not replace the predeclared own-c00/c06 development comparison;
+the failures are not zero scores or evidence that ordinary learning has no value.
+
+The terminal notification was read with the artifacts and acknowledged against its exact
+generation/wake/event. Generation 23 has no pending events and no active jobs; both original
+fits remain failed. No worker was restarted, no partial checkpoint evaluated, no replacement
+fit submitted, and no App-task message sent. The detached observer successfully retained and
+delivered this terminal event. The current published background used for the next decision is
+`834d400967a72bf8b07c23bf2307956bfe7c216b`: ordinary SET's prior recovered endpoint remains a useful
+conditional baseline; finite-learning versus representation claims and incomplete runtime
+comparisons retain their limits. The current planner/learning/credit questions have other
+owners, and DM4's runtime/cache work is reserve rather than an active dependency. A focused
+independent scientific review and bounded original-dump search address the next investment.
+
+### Independent reading and DM disposition: end B01 replenishment
+
+ResearchCritic `/root/b01_failure_route_review` continued its prior separate-context review,
+reading both terminal records and frozen configurations before the current explanations; it
+opened no sealed raw outputs. Its consequential update is zero complete fresh endpoints from
+two started attempts, with real learning updates and failure costs preserved. The completed
+recovered SET result still demonstrates conditional learning; ordinary planners still show
+useful service within their information/control contracts. This batch resolves neither
+fresh-fit recurrence nor a representation, gradient or optimization mechanism. The different
+failure sites increase practical concern about obtaining uninterrupted endpoints on this runtime,
+without identifying NumPy, CUDA, hardware or SET as the cause.
+
+The review considered three concrete continuations. Another unchanged remote fit would buy
+the same unresolved endpoint for roughly 8.5–10.9 hours before evaluation, with unknown
+completion probability and no technical intervention. Checkpoint recovery would alter the
+trajectory and reproduce the already-known limitation of the recovered ordinary reference.
+Neither is selected. A complete `local_linux` CPU attempt is technically available and is the
+strongest alternative: one new 1.2M fit plus 128 evaluation episodes / at most 384k steps. Its
+full-size CPU training cost is unmeasured. The reviewer checked Python 3.10.20/Clang 22.1.3,
+NumPy 1.26.3 and Torch 2.7.0+cpu there; changing machine, Python patch and device while retaining
+shared source/runtime ancestry would be an operational alternative, not a clean causal test of
+the original fault. Success would supply one complete CPU-trained instance, not a cause or
+population reliability; failure would still not establish low policy value. It is declined for
+its current marginal use relative to its whole cost, not until a runtime-health proof is supplied.
+
+Current ownership makes that choice concrete: DM2's ordinary availability controls and DM3's
+P/H versus learned-value comparison do not depend on these missing SET endpoints. Claude's
+withdrawn assignment/credit fits no longer create that immediate dependency; DM4's cache work
+is closed, not a producer to await. Reuse complete ordinary SET/planner references where their
+actual contracts match. Do not enter another lead's study or invent a replacement question to
+fill a runtime slot. Retain only the already-commissioned bounded original-core collection;
+no stress fit, getter repeat, package swap or standing runtime investigation is selected.
+
+**MATERIAL_DISSENT: no; recommendation adopted.** End the current B01 replication/replenishment
+investment as an incomplete batch. Keep the broader ordinary-learning question in **reserve**,
+with no selected next result operation, queued retry, unresolved Pro or external dependency.
+This is not a scientific rejection of SET, an inference of random censoring, or a requirement
+that all runtime faults be solved before other credible research. The earlier continuation
+advice covered the original second seed and does not extend to a third. Any later investment
+needs a new concrete use/comparison and prospective cost; no automatic re-entry is scheduled.
+
+
+### Original core: bounded inspection completed, no causal repair selected
+
+Scout `/root/b01_crash_recon` found the original dump on `hmasd-wsl-node`, outside both
+source snapshots, at
+`/mnt/c/Users/wu/AppData/Local/Temp/wsl-crashes/wsl-crash-1790535138-823176-_home_wu_.local_share_uv_python_cpython-3.10.21-linux-x86_64-gnu_bin_python3.10-11.dmp`.
+It is a readable ELF64 x86-64 core, **2,625,273,856 bytes**, mtime
+`2026-09-28 02:52:48.406528400 +0800`; its in-place SHA-256 is
+`e797368713e44b40e257363e59479afcd0c8a31c03836621f41d45c04271680c`.
+The original is retained as the single copy; nothing was copied, patched or installed.
+Its location is the node's Windows Temp crash store, not a newly established durable archive.
+
+The bounded GDB invocation used the existing `/usr/bin/gdb`, `-nx -batch`, auto-load and
+debuginfod disabled, pagination off, and `libthread-db-search-path /nonexistent`; it opened
+`/home/wu/.venvs/hmasd/bin/python` and the exact core, then read `bt 12` and registers only
+(no live attach or execution). Initial metadata inspection also read file/thread/process/shared
+library information. GDB reports SIGSEGV and current LWP **823176**, matching the native runner.
+The reported stack is `pthread_kill -> raise -> faulthandler_fatal_error -> <signal handler>`;
+its interrupted frames are `PyErr_Format -> type_getattro -> PyObject_GetAttr ->
+get_array_function -> get_implementing_args_and_methods -> dispatcher_vectorcall ->
+_PyEval_EvalFrameDefault -> _PyFunction_Vectorcall`. This is consistent with a fault during
+NumPy array-function dispatch's Python attribute access, followed by faulthandler re-raising
+SIGSEGV; it does not show why the earlier operation failed.
+
+**Binary-identity limits remain material.** GDB explicitly warns that the core may not match
+the specified executable and that current `libcuda.so.1` has a different build ID from the core;
+it also reports a missing deleted `/dev/zero` mapping. The current Python has build ID
+`afb5e1790bd84db7ed2c50d21b86fd33a96784bf`, but this pass did not bind it to core-resident GNU
+notes. The available `readelf` could not decode the 64-bit NT_FILE note. Consequently the native
+symbol names are best-effort readings against current files, not proven identities of the
+core's Python, NumPy and libc. B08's separately established Python identity cannot fill this gap.
+
+The original node's `/var/log/syslog` at `2026-09-28T02:52:18.909732+08:00` records fatal signal
+11, followed at `.913425` by WSL CaptureCrash for PID **823176**. The CPU line instead names
+PID **831518**; preserve that discrepancy. The signal-frame RIP is `0x7ac4b5e9ec0c`, with
+RDI/RSI/RBX 823176 and RDX 11; syslog ORIG_RAX is `0xea`. These fit a signal re-raise and are
+not proof that this is the original faulting instruction. Neither the source inspection nor
+this bounded core reading establishes a common cause with the first seed, B08 or B18, a
+NumPy/CUDA/hardware defect, or a verified repair. The helper is finished and no longer uses
+source snapshots. This completes the selected diagnostic work; the no-replenishment decision
+above stands, without opening a continuing debugger or runtime-health project.
+
+
+### B01 retirement and measured reclamation
+
+No live operation or helper consumes B01 source now. A source/config consumer search found
+only this candidate's own imports and tests; its comparison reader is also fixed to the two
+failed seeds and missing c06 endpoints. Under constitution sections 4/9, the unused six
+candidate Python files and three tests leave current main. Their complete frozen form remains
+recoverable at source
+[`4a3e309f5e8e229eb6c0bc6e5de7008cc338dead`](https://github.com/CartmanFatass/My-paper-code/tree/4a3e309f5e8e229eb6c0bc6e5de7008cc338dead/experiments/candidates/energy_relay_baselines).
+No shared observer, native environment, optimizer or launcher code was changed in this retirement.
+
+On the original node, the supported snapshot collector first refused the first snapshot's six
+ignored `.pyc` files; a read-only process scan found no consumers and a tracked-file check
+confirmed those exact cache files were disposable. After removing only those caches, both
+explicit snapshot previews were eligible. The collector's `--apply --sudo-process-scan`
+rechecked terminal witnesses, absent processes, matching claims, external output retention,
+durable source reachability and clean contents under the admission lock. It removed
+`991be7f5fde844678030c9fab5f89291` and `8bcd2e133ae248c39d7e0ef5258ce01c` without force.
+The final check confirms both paths absent and no longer registered as worktrees. Their
+pre-cleanup allocated sizes were **795,213,824 + 797,949,952 = 1,593,163,776 bytes**;
+remaining allocated bytes for these two targets are **0**. No archive or replacement copy
+was made. Claims, manifests, exit witnesses, all three/five original checkpoints and raw
+run files remain at their original node paths. Fresh native status still returns valid exit
+1/-11, absent runner/supervisor and consistent records after source reclamation. Raw summary
+hashes still match the compact observations; the original core is still present with unchanged
+size and mtime.
+
+Local candidate code/tests and direction scratch measured **180,224 + 192,512 + 40,960 =
+413,696 allocated bytes** before retirement and **12,288** afterwards: **401,408 bytes freed**.
+All nine source/test files, fifteen owned `.pyc` files and five obsolete launch/wait request
+files are absent. The only retained file in direction scratch is
+`temp/directions/energy_relay_baselines/wait/queue-diagnostic-20260927.json`, preserving the
+owner-authorized transport receipt. The canonical observer state/history is retained outside
+that scratch root and has no active job or pending event. The two original run directories
+and original core are deliberately retained evidence, not failed deletion targets.
+
+Across these explicitly measured cleanup targets, allocated usage fell by **1,593,565,184
+bytes (about 1.484 GiB)**. This is a target-allocation delta, not whole-host free-space or
+Git-object accounting; the new compact 22,699-byte terminal record and appended notebook
+are separately retained evidence. No whole-tree backup, copied bulk or tarball was created.
+Verification for this retirement is the frozen-source/consumer check, actual path and worktree
+removal, original artifact/status checks, JSON integrity and publication diff check. No new
+scientific fit, environment step or behavior-changing test was needed.

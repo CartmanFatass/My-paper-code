@@ -1,0 +1,501 @@
+{
+  "observed_at": "2026-09-27T18:59:20.471271+00:00",
+  "native_status": {
+    "admission": {
+      "claim_state": "accepted",
+      "state": "accepted"
+    },
+    "artifacts": {
+      "stderr": {
+        "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/stderr.log",
+        "state": "present"
+      },
+      "stdout": {
+        "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/stdout.log",
+        "state": "present"
+      },
+      "summary": {
+        "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/summary.json",
+        "state": "present"
+      }
+    },
+    "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/bc6648420a646e1ea0a173b455bf1bf0602d0492656e93893ffa98c397300841.json",
+    "direction": "energy_relay_baselines",
+    "execution": {
+      "exit_code": -11,
+      "exit_witness": {
+        "exit_code": -11,
+        "finished_at_epoch": 1790535168.4855545,
+        "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/process-exit.json",
+        "state": "valid",
+        "termination": "signal"
+      },
+      "runner": {
+        "recorded_identity": {
+          "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+          "kind": "linux_pid_start_ticks",
+          "pid": 823176,
+          "session_id": 823175,
+          "start_ticks": 86403188
+        },
+        "state": "absent"
+      },
+      "state": "exited",
+      "supervisor": {
+        "recorded_identity": {
+          "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+          "kind": "linux_pid_start_ticks",
+          "pid": 823175,
+          "session_id": 823175,
+          "start_ticks": 86403186
+        },
+        "state": "absent"
+      }
+    },
+    "explicit_retry_available": false,
+    "kind": "hmasd_operation_status",
+    "manifest_ref": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/launch-manifest.json",
+    "node": "wsl_4070",
+    "observed_at": "2026-09-27T18:59:20.367462Z",
+    "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/bc6648420a646e1ea0a173b455bf1bf0602d0492656e93893ffa98c397300841.json",
+    "output_root": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731",
+    "record_consistency": {
+      "mismatches": [],
+      "state": "consistent"
+    },
+    "schema_version": 1,
+    "sha": "4a3e309f5e8e229eb6c0bc6e5de7008cc338dead",
+    "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8bcd2e133ae248c39d7e0ef5258ce01c"
+  },
+  "summary": {
+    "status": "INCOMPLETE",
+    "failure": null,
+    "counts": {
+      "transitions": 858000,
+      "rollouts": 143,
+      "native_episodes": 286,
+      "checkpoints": 5
+    },
+    "wall_seconds": null,
+    "cpu_user_seconds": null,
+    "cpu_system_seconds": null,
+    "peak_rss_kib": null
+  },
+  "checkpoint_verification": [
+    {
+      "checkpoint": "c00",
+      "rollout": 0,
+      "transitions": 0,
+      "optimizer_steps": {
+        "high": 0,
+        "low_actor": 0,
+        "low_critic": 0,
+        "team_discriminator": 0,
+        "individual_discriminator": 0
+      },
+      "wall_seconds": 1.6253470020601526,
+      "agent_pt_sha256": "1e35935a25ea2663d3fc13fed8f607ceb329d000043e98f27d3ac1e245165cb0",
+      "policy_fingerprint": "83f4c068fa8ce4034601f7505f05b8deb409f20853f62cc839ecb62dffc34f47",
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/checkpoints/c00/agent.pt",
+      "bytes": 23407139,
+      "actual_sha256": "1e35935a25ea2663d3fc13fed8f607ceb329d000043e98f27d3ac1e245165cb0",
+      "matches": true
+    },
+    {
+      "checkpoint": "c01",
+      "rollout": 34,
+      "transitions": 204000,
+      "optimizer_steps": {
+        "high": 0,
+        "low_actor": 76500,
+        "low_critic": 76500,
+        "team_discriminator": 0,
+        "individual_discriminator": 0
+      },
+      "wall_seconds": 5039.09533548099,
+      "agent_pt_sha256": "fcd8c56dc0547708537548102cd4039243495cde2b3fbdf1d112be583bc23614",
+      "policy_fingerprint": "5b8f3f1f15d2e41d469e4323f5fd548420f541214648f1a01f593045f36007f0",
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/checkpoints/c01/agent.pt",
+      "bytes": 38832967,
+      "actual_sha256": "fcd8c56dc0547708537548102cd4039243495cde2b3fbdf1d112be583bc23614",
+      "matches": true
+    },
+    {
+      "checkpoint": "c02",
+      "rollout": 67,
+      "transitions": 402000,
+      "optimizer_steps": {
+        "high": 0,
+        "low_actor": 150750,
+        "low_critic": 150750,
+        "team_discriminator": 0,
+        "individual_discriminator": 0
+      },
+      "wall_seconds": 9827.114755916991,
+      "agent_pt_sha256": "dae537b43eb55969eeddb064d59d50a01f933fe2f4359ca799ebd7e0f8c86c49",
+      "policy_fingerprint": "2a017d4c3049e7de90ff16aea21b21b6b660895771200e9c488dfccf4887839a",
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/checkpoints/c02/agent.pt",
+      "bytes": 38832967,
+      "actual_sha256": "dae537b43eb55969eeddb064d59d50a01f933fe2f4359ca799ebd7e0f8c86c49",
+      "matches": true
+    },
+    {
+      "checkpoint": "c03",
+      "rollout": 100,
+      "transitions": 600000,
+      "optimizer_steps": {
+        "high": 0,
+        "low_actor": 225000,
+        "low_critic": 225000,
+        "team_discriminator": 0,
+        "individual_discriminator": 0
+      },
+      "wall_seconds": 14601.236447302043,
+      "agent_pt_sha256": "4480ebb6f51960856b18db7383b62fc739238ef0455da2209e8e73506bc96017",
+      "policy_fingerprint": "0ca5acc5a29f579a9e59c622c96b298853109e58abfce320be8a8f4c3cd65d18",
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/checkpoints/c03/agent.pt",
+      "bytes": 38832967,
+      "actual_sha256": "4480ebb6f51960856b18db7383b62fc739238ef0455da2209e8e73506bc96017",
+      "matches": true
+    },
+    {
+      "checkpoint": "c04",
+      "rollout": 134,
+      "transitions": 804000,
+      "optimizer_steps": {
+        "high": 0,
+        "low_actor": 301500,
+        "low_critic": 301500,
+        "team_discriminator": 0,
+        "individual_discriminator": 0
+      },
+      "wall_seconds": 19610.114241378033,
+      "agent_pt_sha256": "c3ef23dacb034578023f2120713da34877bfbb9ddb2cfb3e1147fec8199f98fa",
+      "policy_fingerprint": "37909b01f3e8c18d95e3dbfcc8dbbe38e7187ccf7fa39d0df9bbf60ee3d88e56",
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/checkpoints/c04/agent.pt",
+      "bytes": 38832967,
+      "actual_sha256": "c3ef23dacb034578023f2120713da34877bfbb9ddb2cfb3e1147fec8199f98fa",
+      "matches": true
+    }
+  ],
+  "progress_records": 148,
+  "last_progress": {
+    "event": {
+      "event": "rollout",
+      "rollout": 143,
+      "transitions": 858000,
+      "rollout_transitions": 6000,
+      "lane_native_J": [
+        1779.8874548432452,
+        197.48326080644824
+      ],
+      "lane_qos_per_step": [
+        0.6088928968788972,
+        0.11301764827776647
+      ],
+      "episodes_completed": [
+        {
+          "lane": 0,
+          "episode": 142,
+          "end_kind": "truncated",
+          "length": 3000,
+          "native_J": 1779.8874548432452,
+          "qos_per_step": 0.6088928968788972,
+          "J_per_step": 0.5932958182810817,
+          "f_mode_uav_step_share": 0.3092083333333333,
+          "shield_mapping_share": 0.3092083333333333
+        },
+        {
+          "lane": 1,
+          "episode": 142,
+          "end_kind": "truncated",
+          "length": 3000,
+          "native_J": 197.48326080644824,
+          "qos_per_step": 0.11301764827776647,
+          "J_per_step": 0.06582775360214942,
+          "f_mode_uav_step_share": 0.391625,
+          "shield_mapping_share": 0.391625
+        }
+      ],
+      "submitted_commands": 48000,
+      "f_mapped_commands": 16820,
+      "shield_mapping_share": 0.35041666666666665,
+      "f_mode_uav_steps": 16820,
+      "f_mode_uav_step_share": 0.35041666666666665,
+      "shield_entries": 221,
+      "shield_exits": 205,
+      "optimizer_steps": {
+        "high": 0,
+        "low_actor": 321750,
+        "low_critic": 321750,
+        "team_discriminator": 0,
+        "individual_discriminator": 0
+      },
+      "ppo": {
+        "action_entropy": 0.13085382524877787,
+        "discoverer_policy_loss": -0.02957361936569214,
+        "discoverer_value_loss": 0.00455485749989748,
+        "discoverer_loss": -0.0256730318069458,
+        "avg_discoverer_val": 28.135974884033203,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "approx_kl": null,
+        "clip_fraction": null
+      },
+      "native_update": {
+        "discriminator_loss": 0.0,
+        "discriminator_team_loss": 0.0,
+        "discriminator_individual_loss": 0.0,
+        "discriminator_team_accuracy": 0.0,
+        "discriminator_individual_accuracy": 0.0,
+        "coordinator_loss": 0.0,
+        "coordinator_policy_loss": 0.0,
+        "coordinator_value_loss": 0.0,
+        "discoverer_loss": -0.0256730318069458,
+        "discoverer_policy_loss": -0.02957361936569214,
+        "discoverer_value_loss": 0.00455485749989748,
+        "team_skill_entropy": 0.0,
+        "agent_skill_entropy": 0.0,
+        "action_entropy": 0.13085382524877787,
+        "avg_intrinsic_reward": 0.3295617699623108,
+        "avg_env_comp": 0.3295617699623108,
+        "avg_team_disc_comp": 0.0,
+        "avg_ind_disc_comp": 0.0,
+        "mean_coord_state_val": 0.0,
+        "mean_coord_agent_val": 0.0,
+        "avg_discoverer_val": 28.135974884033203,
+        "mean_high_level_reward": 0.0,
+        "cd_loss": 0.0,
+        "coordinator_lr": 0.0001,
+        "discoverer_actor_lr": 0.0001,
+        "discoverer_critic_lr": 0.0001,
+        "discriminator_lr": 0.0,
+        "team_discriminator_lr": 0.0,
+        "individual_discriminator_lr": 0.0,
+        "process_encoder_lr": 0.0,
+        "process_encoder_loss": 0.0,
+        "process_outcome_loss": 0.0,
+        "process_contrastive_loss": 0.0,
+        "process_contrastive_accuracy": 0.0,
+        "process_duration_only_accuracy": 0.0,
+        "process_reward_mean": 0.0,
+        "process_reward_abs_mean": 0.0,
+        "process_reward_applied_steps": 0.0,
+        "process_segments_trained": 0.0
+      },
+      "live_lanes_at_boundary": 0,
+      "live_lane_timers_reset_by_clear": 0,
+      "collection_seconds": 111.1186202079989,
+      "update_seconds": 37.92066249100026
+    },
+    "counts": {
+      "transitions": 858000,
+      "rollouts": 143,
+      "native_episodes": 286,
+      "checkpoints": 5
+    }
+  },
+  "last_completed_rollout": {
+    "rollout": 143,
+    "transitions": 858000,
+    "rollout_transitions": 6000,
+    "lane_native_J": [
+      1779.8874548432452,
+      197.48326080644824
+    ],
+    "lane_qos_per_step": [
+      0.6088928968788972,
+      0.11301764827776647
+    ],
+    "episodes_completed": [
+      {
+        "lane": 0,
+        "episode": 142,
+        "end_kind": "truncated",
+        "length": 3000,
+        "native_J": 1779.8874548432452,
+        "qos_per_step": 0.6088928968788972,
+        "J_per_step": 0.5932958182810817,
+        "f_mode_uav_step_share": 0.3092083333333333,
+        "shield_mapping_share": 0.3092083333333333
+      },
+      {
+        "lane": 1,
+        "episode": 142,
+        "end_kind": "truncated",
+        "length": 3000,
+        "native_J": 197.48326080644824,
+        "qos_per_step": 0.11301764827776647,
+        "J_per_step": 0.06582775360214942,
+        "f_mode_uav_step_share": 0.391625,
+        "shield_mapping_share": 0.391625
+      }
+    ],
+    "submitted_commands": 48000,
+    "f_mapped_commands": 16820,
+    "shield_mapping_share": 0.35041666666666665,
+    "f_mode_uav_steps": 16820,
+    "f_mode_uav_step_share": 0.35041666666666665,
+    "shield_entries": 221,
+    "shield_exits": 205,
+    "optimizer_steps": {
+      "high": 0,
+      "low_actor": 321750,
+      "low_critic": 321750,
+      "team_discriminator": 0,
+      "individual_discriminator": 0
+    },
+    "ppo": {
+      "action_entropy": 0.13085382524877787,
+      "discoverer_policy_loss": -0.02957361936569214,
+      "discoverer_value_loss": 0.00455485749989748,
+      "discoverer_loss": -0.0256730318069458,
+      "avg_discoverer_val": 28.135974884033203,
+      "discoverer_actor_lr": 0.0001,
+      "discoverer_critic_lr": 0.0001,
+      "approx_kl": null,
+      "clip_fraction": null
+    },
+    "native_update": {
+      "discriminator_loss": 0.0,
+      "discriminator_team_loss": 0.0,
+      "discriminator_individual_loss": 0.0,
+      "discriminator_team_accuracy": 0.0,
+      "discriminator_individual_accuracy": 0.0,
+      "coordinator_loss": 0.0,
+      "coordinator_policy_loss": 0.0,
+      "coordinator_value_loss": 0.0,
+      "discoverer_loss": -0.0256730318069458,
+      "discoverer_policy_loss": -0.02957361936569214,
+      "discoverer_value_loss": 0.00455485749989748,
+      "team_skill_entropy": 0.0,
+      "agent_skill_entropy": 0.0,
+      "action_entropy": 0.13085382524877787,
+      "avg_intrinsic_reward": 0.3295617699623108,
+      "avg_env_comp": 0.3295617699623108,
+      "avg_team_disc_comp": 0.0,
+      "avg_ind_disc_comp": 0.0,
+      "mean_coord_state_val": 0.0,
+      "mean_coord_agent_val": 0.0,
+      "avg_discoverer_val": 28.135974884033203,
+      "mean_high_level_reward": 0.0,
+      "cd_loss": 0.0,
+      "coordinator_lr": 0.0001,
+      "discoverer_actor_lr": 0.0001,
+      "discoverer_critic_lr": 0.0001,
+      "discriminator_lr": 0.0,
+      "team_discriminator_lr": 0.0,
+      "individual_discriminator_lr": 0.0,
+      "process_encoder_lr": 0.0,
+      "process_encoder_loss": 0.0,
+      "process_outcome_loss": 0.0,
+      "process_contrastive_loss": 0.0,
+      "process_contrastive_accuracy": 0.0,
+      "process_duration_only_accuracy": 0.0,
+      "process_reward_mean": 0.0,
+      "process_reward_abs_mean": 0.0,
+      "process_reward_applied_steps": 0.0,
+      "process_segments_trained": 0.0
+    },
+    "live_lanes_at_boundary": 0,
+    "live_lane_timers_reset_by_clear": 0,
+    "collection_seconds": 111.1186202079989,
+    "update_seconds": 37.92066249100026
+  },
+  "compact_artifacts": {
+    "stdout.log": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/stdout.log",
+      "sha256": "b8a07ccd9ed98bc99d195a21e7f833d64bdb0f14c88e50e7112c59b9f081513f",
+      "bytes": 7454,
+      "mtime_utc": "2026-09-27T18:51:58.395287+00:00"
+    },
+    "admission-preflight.json": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/admission-preflight.json",
+      "sha256": "cefa96c92af22c283806d721155846ef98ccb4fde57136ceddf405d2d6f4c471",
+      "bytes": 766,
+      "mtime_utc": "2026-09-27T12:45:51.707302+00:00"
+    },
+    "progress.jsonl": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/progress.jsonl",
+      "sha256": "11f4882bf0160b005fb1c9bfa774db4c4a9cfc7655acc4471b42a2a83423d89c",
+      "bytes": 396807,
+      "mtime_utc": "2026-09-27T18:51:58.387770+00:00"
+    },
+    "summary.json": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/summary.json",
+      "sha256": "4184174cf37c2a6e245d1b1045e15de262c48027c3727f4e0b0ef06918a166b7",
+      "bytes": 381107,
+      "mtime_utc": "2026-09-27T18:51:58.391529+00:00"
+    },
+    "launch-manifest.json": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/launch-manifest.json",
+      "sha256": "8ef2f60b7b52417c57937a1a3c8095028bba77f95a0bcda36e0948901d2133a3",
+      "bytes": 4116,
+      "mtime_utc": "2026-09-27T12:45:51.726450+00:00"
+    },
+    "launch-status.json": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/launch-status.json",
+      "sha256": "6067ee63aee812322a4504c2ed34e697ae9ef020f2e2b2691f6c213eca0a922b",
+      "bytes": 611,
+      "mtime_utc": "2026-09-27T12:45:51.730280+00:00"
+    },
+    "config.json": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/config.json",
+      "sha256": "4677e9ee9bf1280616b1135bda89d3064a8db5a9c7af415f8e95dc62aad472e1",
+      "bytes": 14787,
+      "mtime_utc": "2026-09-27T12:45:54.411042+00:00"
+    },
+    "process-exit.json": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/process-exit.json",
+      "sha256": "83a203a7a263dd53c0bde1b45f760657da83b33a43b745310b78fe7092db387d",
+      "bytes": 546,
+      "mtime_utc": "2026-09-27T18:52:48.479771+00:00"
+    },
+    "stderr.log": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092731/stderr.log",
+      "sha256": "b4d9bcf96eba1493192dc324873d67c83d862ab9925705a2113a4d692c1f3ef7",
+      "bytes": 4398,
+      "mtime_utc": "2026-09-27T18:52:18.905287+00:00"
+    }
+  },
+  "process_exit": {
+    "exit_code": -11,
+    "finished_at_epoch": 1790535168.4855545,
+    "pid": 823176,
+    "process_identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 823176,
+      "session_id": 823175,
+      "start_ticks": 86403188
+    },
+    "schema_version": 1,
+    "status": "exited",
+    "supervisor_identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 823175,
+      "session_id": 823175,
+      "start_ticks": 86403186
+    },
+    "termination": "signal"
+  },
+  "stderr": "Fatal Python error: Segmentation fault\n\nThread 0x00007ac31d9446c0 (most recent call first):\n  <no Python frame>\n\nCurrent thread 0x00007ac4b60fe740 (most recent call first):\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/8bcd2e133ae248c39d7e0ef5258ce01c/envs/pettingzoo/relay/routed_core.py\", line 1229 in _calculate_coverage_metrics\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/8bcd2e133ae248c39d7e0ef5258ce01c/envs/pettingzoo/relay/routed_core.py\", line 3464 in step\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/8bcd2e133ae248c39d7e0ef5258ce01c/envs/pettingzoo/relay/energy_aware.py\", line 581 in step\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/8bcd2e133ae248c39d7e0ef5258ce01c/envs/pettingzoo/env_adapter.py\", line 224 in step\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/8bcd2e133ae248c39d7e0ef5258ce01c/experiments/candidates/energy_relay_benchmark/b02/training.py\", line 149 in collect_and_train\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/8bcd2e133ae248c39d7e0ef5258ce01c/experiments/candidates/energy_relay_baselines/b01/training.py\", line 138 in run_training\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/8bcd2e133ae248c39d7e0ef5258ce01c/experiments/candidates/energy_relay_baselines/b01/run.py\", line 77 in main\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/8bcd2e133ae248c39d7e0ef5258ce01c/experiments/candidates/energy_relay_baselines/b01/run.py\", line 99 in <module>\n\nExtension modules: numpy.core._multiarray_umath, numpy.core._multiarray_tests, numpy.linalg._umath_linalg, numpy.fft._pocketfft_internal, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._mt19937, numpy.random.mtrand, numpy.random._philox, numpy.random._pcg64, numpy.random._sfc64, numpy.random._generator, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special, PIL._imaging, kiwisolver._cext, scipy._lib._ccallback_c, scipy.sparse._sparsetools, _csparsetools, scipy.sparse._csparsetools, scipy.linalg._fblas, scipy.linalg._flapack, scipy.linalg.cython_lapack, scipy.linalg._cythonized_array_utils, scipy.linalg._solve_toeplitz, scipy.linalg._decomp_lu_cython, scipy.linalg._matfuncs_sqrtm_triu, scipy.linalg._matfuncs_expm, scipy.linalg._linalg_pythran, scipy.linalg.cython_blas, scipy.linalg._decomp_update, scipy.sparse.linalg._dsolve._superlu, scipy.sparse.linalg._eigen.arpack._arpack, scipy.sparse.linalg._propack._spropack, scipy.sparse.linalg._propack._dpropack, scipy.sparse.linalg._propack._cpropack, scipy.sparse.linalg._propack._zpropack, scipy.sparse.csgraph._tools, scipy.sparse.csgraph._shortest_path, scipy.sparse.csgraph._traversal, scipy.sparse.csgraph._min_spanning_tree, scipy.sparse.csgraph._flow, scipy.sparse.csgraph._matching, scipy.sparse.csgraph._reordering, scipy.spatial._ckdtree, scipy._lib.messagestream, scipy.spatial._qhull, scipy.spatial._voronoi, scipy.spatial._distance_wrap, scipy.spatial._hausdorff, scipy.special._ufuncs_cxx, scipy.special._ufuncs, scipy.special._specfun, scipy.special._comb, scipy.special._ellip_harm_2, scipy.spatial.transform._rotation, google._upb._message, pandas._libs.tslibs.ccalendar, pandas._libs.tslibs.np_datetime, pandas._libs.tslibs.dtypes, pandas._libs.tslibs.base, pandas._libs.tslibs.nattype, pandas._libs.tslibs.timezones, pandas._libs.tslibs.fields, pandas._libs.tslibs.timedeltas, pandas._libs.tslibs.tzconversion, pandas._libs.tslibs.timestamps, pandas._libs.properties, pandas._libs.tslibs.offsets, pandas._libs.tslibs.strptime, pandas._libs.tslibs.parsing, pandas._libs.tslibs.conversion, pandas._libs.tslibs.period, pandas._libs.tslibs.vectorized, pandas._libs.ops_dispatch, pandas._libs.missing, pandas._libs.hashtable, pandas._libs.algos, pandas._libs.interval, pandas._libs.lib, pandas._libs.ops, pandas._libs.hashing, pandas._libs.arrays, pandas._libs.tslib, pandas._libs.sparse, pandas._libs.internals, pandas._libs.indexing, pandas._libs.index, pandas._libs.writers, pandas._libs.join, pandas._libs.window.aggregations, pandas._libs.window.indexers, pandas._libs.reshape, pandas._libs.groupby, pandas._libs.json, pandas._libs.parsers, pandas._libs.testing, psutil._psutil_linux, psutil._psutil_posix (total: 109)\n",
+  "stdout_tail": [
+    "B01 seed=26092731 rollout 139/200 transitions=834000",
+    "B01 seed=26092731 rollout 140/200 transitions=840000",
+    "B01 seed=26092731 rollout 141/200 transitions=846000",
+    "B01 seed=26092731 rollout 142/200 transitions=852000",
+    "B01 seed=26092731 rollout 143/200 transitions=858000"
+  ],
+  "native_acceptance_to_exit_seconds": 22016.758343458176,
+  "resources_unmeasured": [
+    "final_training_wall_seconds",
+    "final_cpu_user_seconds",
+    "final_cpu_system_seconds",
+    "final_peak_rss_kib"
+  ],
+  "failure_context_exists": false,
+  "c06_exists": false,
+  "disposition": "Incomplete technical failure; no 1.2M endpoint or scientific acceptance. No restart, replacement fit, partial-checkpoint evaluation or App message."
+}
