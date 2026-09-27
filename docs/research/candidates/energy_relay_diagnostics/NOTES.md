@@ -720,3 +720,54 @@ receives JSON-safe strings. Focused validation after the repair: the config regr
 its own, then the B02 diagnostics, resume, and endpoint-evaluator suites passed **30 tests** with
 18 existing warnings in 67.98 seconds. `git diff --check` passed. No training launch has used the
 corrected source yet.
+
+### B02 corrected ordinary attempt A02: partial training then technical failure (2026-09-27)
+
+The corrected ordinary operation at source SHA `594fa3b0eaddb66786f5151772c969892b3ad67d` was
+accepted on `wsl_4070` at 2026-09-27T10:44:24Z, after a fresh memory-floor pass (14,855,634,944
+available bytes vs 4 GiB) and an idle GPU. Native manifest, operation ref, and retained output:
+
+- Manifest: `/home/wu/projects/HMASD/runs/energy_relay_diagnostics/b02_shield_surrogate_a02/ordinary/launch-manifest.json`
+- Operation ref: `/home/wu/projects/HMASD/.git/hmasd-admission/d4812de10031ef215d3a9ff116fab90be5c984163260dc8754f26186d470b59c.json`
+- Output root: `/home/wu/projects/HMASD/runs/energy_relay_diagnostics/b02_shield_surrogate_a02/ordinary/`
+
+It exited 1 with a valid `process_exit` witness at 2026-09-27T11:43:06Z; terminal status confirmed
+consistent native records and absent supervisor/runner. The run summary is `INCOMPLETE` after 21
+new 6,000-transition rollouts: 126,000 new transitions (726,000 cumulative), 42 completed H3000 training episodes,
+and 47,250 new low-actor plus 47,250 new low-critic optimizer steps (272,250 cumulative each).
+Wall time was 3,371.235 seconds. No endpoint checkpoint was written, so these partial rollout
+readings do not supply the declared ordinary endpoint or a comparison result.
+
+The traceback ended in shared `routed_core.py::_current_step_communication_cache` while
+updating UAV connections: `TypeError: 'bool' object is not subscriptable` at the configuration
+signature lookup. The accepted ordinary operation's mask remained disabled in all 21 recorded
+rollouts. This is a technical failure during collection, not evidence for or against the
+surrogate intervention. A01 and A02 are the two started ordinary-arm attempts so far; A01 failed
+before collection, while A02 reached 126,000 new transitions. The masked arm and paired evaluation
+remain unstarted. No automatic repeat is made; diagnose the cache failure and record the lead's
+next costed decision before another result-bearing operation.
+
+Key artifact SHA256s on the configured node: `summary.json`
+`a362ee5968c779347fad2f7ffa188df0ddee8868b0324f34d09b2f9700458f5f`, `progress.jsonl`
+`388f4f959fdd0305dfb1b98b0cb79c0ce513bd3383019471a8dbb78a8fdf2088`, `stderr.log`
+`1da80a613783af635ed43a624d8ae3fbb96782f1f7fcc552c2a7f29324b8a539`, `process-exit.json`
+`4fbc198cf98dd66bfb71a416ee56988c03eac31e12523c594a833f370f57eaa9`, and `launch-manifest.json`
+`9ada417f49a3cdd7b3e0780ac4e28a72711a282c56a61c5b53ab9cefb7c83e98`.
+
+### B02 A02 cache-failure engineering diagnosis (2026-09-27)
+
+The independent engineering reviewer inspected the published source at `594fa3b0eaddb66786f5151772c969892b3ad67d`
+and the traceback. It found no tracked boolean writer for `_step_communication_cache`: the reviewed
+cache lifecycle resets it to `None`, leaves it `None` when caching is disabled, and stores a
+dictionary after a successful refresh. The failing configuration lookup is a second cache read in
+the UAV-to-UAV SINR path; the reviewed intervening operations do not replace the cache. The runtime
+origin of the observed boolean therefore remains unresolved. Injecting `None`, `False`, and `True`
+reproduced only the exception behavior, not how the production object acquired that value.
+
+The reviewer also found that silently treating an invalid cache as `None` could select scalar
+path-loss/SINR calculations instead of cached radio tensors and could alter threshold crossings,
+topology, and later transitions. No fallback or core-cache code change is made. The current evidence
+does not justify restarting either fit; the comparison remains incomplete with no masked arm or
+paired endpoint. Before another result-bearing operation, require a targeted diagnostic/reproduction
+proposal and record its incremental cost and lead decision. This is an execution decision, not a
+scientific-negative result.
