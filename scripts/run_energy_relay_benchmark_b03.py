@@ -11,6 +11,11 @@ evaluation is a separate task (not here).
 the three assignment modes hungarian / identity / independent_nearest (96 deterministic CPU
 episodes); worlds, modes, heuristic and shield are constants of ``b03/stake_sizing.py``.
 Outputs under ``<out>/stake-sizing/``.
+
+``credit-diagnostics``: zero fit.  H_central (hungarian mode only) on 955001-955032 with a
+per-step observer: every 10th step the relay-hop traffic share and the per-UAV removal
+difference of the QoS term on deep copies of the raw environment; two record-only bit-identity
+layers.  Constants of ``b03/credit_diagnostics.py``; outputs under ``<out>/credit-diagnostics/``.
 """
 
 from __future__ import annotations
@@ -44,6 +49,11 @@ def parse_args(argv=None):
     stake.add_argument("--launch-sha", required=True)
     stake.add_argument("--workers", type=int, default=8)
     stake.add_argument("--threads", type=int, default=2)
+    credit = commands.add_parser("credit-diagnostics")
+    credit.add_argument("--out", type=Path, required=True)
+    credit.add_argument("--launch-sha", required=True)
+    credit.add_argument("--workers", type=int, default=8)
+    credit.add_argument("--threads", type=int, default=2)
     args = parser.parse_args(argv)
     if args.command != "train":
         return args
@@ -68,6 +78,14 @@ def main(argv=None):
 
         return run_stake_sizing(out=args.out, launch_sha=args.launch_sha, workers=args.workers,
                                 threads=args.threads, argv=argv_record)
+    if args.command == "credit-diagnostics":
+        from experiments.candidates.energy_relay_benchmark.b03.credit_diagnostics import (
+            run_credit_diagnostics,
+        )
+
+        return run_credit_diagnostics(out=args.out, launch_sha=args.launch_sha,
+                                      workers=args.workers, threads=args.threads,
+                                      argv=argv_record)
     from experiments.candidates.energy_relay_benchmark.b03.configuration import (
         TRAINING_SEEDS as DECLARED, production_spec,
     )
