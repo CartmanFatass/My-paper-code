@@ -21,6 +21,7 @@ import multiprocessing
 import resource
 import tempfile
 import time
+from contextlib import nullcontext
 from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Callable, Iterable
@@ -402,11 +403,13 @@ def mechanism_row(steps: dict[str, np.ndarray], station_xy) -> dict[str, Any]:
 
 
 def evaluate_world(controller, env, config, seed: int, params: FeedbackParams, *,
-                   progress: Callable[[int], None] | None = None):
+                   progress: Callable[[int], None] | None = None, observer=None):
     """Run one deterministic episode; returns (row, per-step arrays).
 
     The mechanism fields are read-only decodes of the step-t legal observation and the
     shield decision (see ``TRACE_TIMING``); they never feed back into an action.
+    An optional observer supplies ``attach(controller)`` and ``on_step(...)``; its context
+    spans the episode so direction-owned actor hooks are removed on success or failure.
     """
     controller.reset()
     observations, info = env.reset(seed=int(seed))
@@ -422,46 +425,54 @@ def evaluate_world(controller, env, config, seed: int, params: FeedbackParams, *
     targets: list[np.ndarray] = []
     layout = replace(S7S2_LAYOUT, max_steps=int(config.max_steps))  # waiting = steps/max_steps
     station_xy = absolute_station_xy(observations)
-    for step in range(int(config.episode_length)):
-        proposed = controller.propose(observations, state, step, previous_done, modes.copy())
-        target_xy = getattr(controller, "targets_xy", None)
-        if target_xy is not None:
-            targets.append(target_xy)
-        decision = apply_feedback_params(observations, proposed, modes, params)
-        held = own_energy(observations, layout)
-        steps["own_xyz"].append(own_positions(observations, layout))
-        steps["return_margin"].append(decision.margins)
-        steps["nearest_station"].append(decision.selected_stations)
-        steps["nearest_station_distance_m"].append(decision.station_distances_m)
-        steps["station_occupancy"].append(station_counts(decision.selected_stations,
-                                                         held["charging"]))
-        steps["station_queue"].append(station_counts(decision.selected_stations,
-                                                     held["waiting_steps"] > 0))
-        modes = decision.modes
-        submitted = decision.submitted_actions
-        next_obs, reward, terminated, truncated, next_info = env.step(submitted)
-        checked, blocked = guard_counters(env)
-        metrics.append(metric_row(reward, next_info["reward_info"]))
-        rewards.append(float(reward))
-        ends.append((bool(terminated), bool(truncated)))
-        next_obs = np.asarray(next_obs, dtype=np.float32)
-        own = own_energy(next_obs, layout)
-        steps["mode"].append(modes.copy())
-        steps["entered"].append(decision.entered)
-        steps["exited"].append(decision.exited)
-        steps["charging"].append(own["charging"])
-        steps["waiting_steps"].append(own["waiting_steps"])
-        steps["battery"].append(own["battery"])
-        steps["dock_bit"].append(submitted[:, 3] > DOCK_REQUEST_THRESHOLD)
-        steps["guard_checked"].append(checked)
-        steps["guard_blocked"].append(blocked)
-        if progress is not None:
-            progress(1)
-        observations = next_obs
-        state = np.asarray(next_info["next_state"], dtype=np.float32)
-        previous_done[:] = terminated or truncated
-        if previous_done[0]:
-            break
+    # The observer owns any actor hooks and removes them even when proposal or env.step fails.
+    with (observer.attach(controller) if observer is not None else nullcontext()):
+        for step in range(int(config.episode_length)):
+            proposed = controller.propose(observations, state, step, previous_done, modes.copy())
+            target_xy = getattr(controller, "targets_xy", None)
+            if target_xy is not None:
+                targets.append(target_xy)
+            decision = apply_feedback_params(observations, proposed, modes, params)
+            held = own_energy(observations, layout)
+            steps["own_xyz"].append(own_positions(observations, layout))
+            steps["return_margin"].append(decision.margins)
+            steps["nearest_station"].append(decision.selected_stations)
+            steps["nearest_station_distance_m"].append(decision.station_distances_m)
+            steps["station_occupancy"].append(station_counts(decision.selected_stations,
+                                                             held["charging"]))
+            steps["station_queue"].append(station_counts(decision.selected_stations,
+                                                         held["waiting_steps"] > 0))
+            modes = decision.modes
+            submitted = decision.submitted_actions
+            next_obs, reward, terminated, truncated, next_info = env.step(submitted)
+            checked, blocked = guard_counters(env)
+            metrics.append(metric_row(reward, next_info["reward_info"]))
+            rewards.append(float(reward))
+            ends.append((bool(terminated), bool(truncated)))
+            next_obs = np.asarray(next_obs, dtype=np.float32)
+            own = own_energy(next_obs, layout)
+            steps["mode"].append(modes.copy())
+            steps["entered"].append(decision.entered)
+            steps["exited"].append(decision.exited)
+            steps["charging"].append(own["charging"])
+            steps["waiting_steps"].append(own["waiting_steps"])
+            steps["battery"].append(own["battery"])
+            steps["dock_bit"].append(submitted[:, 3] > DOCK_REQUEST_THRESHOLD)
+            steps["guard_checked"].append(checked)
+            steps["guard_blocked"].append(blocked)
+            if observer is not None:
+                observer.on_step(t=step, observations_t=observations, state_t=state,
+                                 proposal_t=proposed, submitted_t=submitted,
+                                 observations_t1=next_obs,
+                                 state_t1=np.asarray(next_info["next_state"], dtype=np.float32),
+                                 controller=controller)
+            if progress is not None:
+                progress(1)
+            observations = next_obs
+            state = np.asarray(next_info["next_state"], dtype=np.float32)
+            previous_done[:] = terminated or truncated
+            if previous_done[0]:
+                break
     if not previous_done[0]:
         raise RuntimeError("B01 evaluation did not reach native termination/truncation")
     reward_array = np.asarray(rewards, dtype=np.float64)
@@ -586,8 +597,12 @@ def load_learner_policy(task: WorldTask, record: dict[str, Any], config, device:
                    "transitions": record.get("transitions")}
 
 
-def evaluate_task(task: WorldTask) -> dict[str, Any]:
-    """Module-level worker: one world, fully rebuilt from the task (picklable)."""
+def evaluate_task(task: WorldTask, *, observer_factory=None) -> dict[str, Any]:
+    """Module-level worker: one world, fully rebuilt from the task (picklable).
+
+    If supplied, ``observer_factory(task)`` creates a per-world observer whose
+    ``as_arrays()`` output is returned under ``observation``.
+    """
     started = time.perf_counter()
     if task.action_mode not in ACTION_MODES:
         raise ValueError(f"action_mode must be one of {ACTION_MODES}")
@@ -609,6 +624,7 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
         record = read_learner_record(task)
         config = learner_eval_config(config, record)
     identity: dict[str, Any] = {}
+    observer = observer_factory(task) if observer_factory is not None else None
     with tempfile.TemporaryDirectory(prefix="b01-agent-logs-", dir=task.log_dir) as log_dir:
         env = make_env(config, task.seed)
         try:
@@ -632,7 +648,7 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
                     controller = PolicyController(evaluator, deterministic=not stochastic,
                                                   sample_seed=episode_seed)
                     row, arrays = evaluate_world(controller, env, config,
-                                                 task.seed, task.params)
+                                                 task.seed, task.params, observer=observer)
                     if (
                         initialization_fingerprint(evaluator) != evaluator_before[0]
                         or optimizer_steps(evaluator) != evaluator_before[1]
@@ -662,7 +678,8 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
                                  else "legal-observation"),
                 )
                 try:
-                    row, arrays = evaluate_world(controller, env, config, task.seed, task.params)
+                    row, arrays = evaluate_world(controller, env, config, task.seed, task.params,
+                                                 observer=observer)
                 except UnobservedRegime as exc:
                     # Recorded, never silently skipped: the world is marked failed.
                     row, arrays = {"seed": int(task.seed), "failed": True,
@@ -688,7 +705,10 @@ def evaluate_task(task: WorldTask) -> dict[str, Any]:
                action_mode=task.action_mode)
     if stochastic:
         row.update(draw=int(task.draw), sample_seed=episode_seed)
-    return {"row": row, "arrays": arrays, "identity": identity}
+    result = {"row": row, "arrays": arrays, "identity": identity}
+    if observer is not None:
+        result["observation"] = observer.as_arrays()
+    return result
 
 
 def run_tasks(tasks: Iterable[WorldTask], workers: int, *,
