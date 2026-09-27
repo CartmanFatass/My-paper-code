@@ -2,7 +2,9 @@
 """Admission-guarded B02 Stage 1 runner (energy_relay_benchmark).
 
 ``train``: one SET fit, programme "SET-shield-on-1.2M" (200 rollouts of 2 x 3000, production
-shield during training, checkpoints c00..c06).  ``evaluate-checkpoint``: one checkpoint with the
+shield during training, checkpoints c00..c06); ``--resume-from checkpoints/cNN`` finishes the same
+fit from a saved checkpoint into a fresh ``--out`` (optionally pinned to the source launch with
+``--resume-source-sha``).  ``evaluate-checkpoint``: one checkpoint with the
 B01 evaluator on ``--worlds`` in ``--modes``; the hold-out 957001-957032 needs ``--final``.
 """
 
@@ -37,6 +39,10 @@ def parse_args(argv=None):
     train.add_argument("--threads", type=int, default=4)
     train.add_argument("--launch-sha", required=True)
     train.add_argument("--out", type=Path, required=True)
+    train.add_argument("--resume-from", type=Path, default=None,
+                       help="checkpoints/c{ii} directory (agent.pt + record.json) of this recipe")
+    train.add_argument("--resume-source-sha", default=None,
+                       help="launch SHA the resumed checkpoint's record.json must carry")
     evaluate = commands.add_parser("evaluate-checkpoint")
     evaluate.add_argument("--checkpoint", type=Path, required=True,
                           help="checkpoints/c{ii} directory holding agent.pt and record.json")
@@ -50,7 +56,11 @@ def parse_args(argv=None):
     evaluate.add_argument("--workers", type=int, default=max(1, min(8, (os.cpu_count() or 1) // 2)))
     evaluate.add_argument("--threads", type=int, default=2)
     evaluate.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
-    return parser.parse_args(argv)
+    args = parser.parse_args(argv)
+    if (args.command == "train" and args.resume_source_sha is not None
+            and args.resume_from is None):
+        parser.error("--resume-source-sha requires --resume-from")
+    return args
 
 
 def main(argv=None):
@@ -68,7 +78,9 @@ def main(argv=None):
 
         return run_training(out=args.out, launch_sha=args.launch_sha,
                             spec=production_spec(args.seed), device_name=args.device,
-                            threads=args.threads, argv=argv_record)
+                            threads=args.threads, argv=argv_record,
+                            resume_from=args.resume_from,
+                            resume_source_sha=args.resume_source_sha)
     from experiments.candidates.energy_relay_benchmark.b02.checkpoint_eval import (
         evaluate_checkpoint, parse_worlds,
     )
