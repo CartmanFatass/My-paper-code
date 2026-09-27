@@ -1,6 +1,6 @@
 ---
 name: hmasd-portfolio-task
-description: Prepare an owner-requested or delegated HMASD project review in RESEARCH.md, obtain Pro advice and apply the responsible scientific decision; consolidate the current index and retire completed review material by date.
+description: Prepare an owner-requested or delegated HMASD project review in RESEARCH.md with independent scientific review, add Pro when it offers distinct value and apply the responsible scientific decision; consolidate the current index and retire completed review material by date.
 ---
 
 # Portfolio review (owner-requested or delegated)
@@ -27,14 +27,16 @@ require this review; DM reflection and pivots may use their existing NOTES and s
    direction-correction recommendation, in a separate context rather than a DM/Root history
    fork. Preserve material disagreement with Root as well as with DMs. Reuse that same review
    across overlapping project/claim questions; do not add a second critic ceremony. Root owns
-   the reasoned project decision, and the reviewer does not replace section 5 Pro consultation.
+   the reasoned project decision. One adequate independent scientific review covers an ordinary
+   consequential decision under section 5; add Pro for distinct expertise, framing or unresolved
+   disagreement, without an automatic second pass.
 2. **Write the working section.** Add the current review to `RESEARCH.md`. It stays here
    while its question, answer or decision is unresolved; completed reviews are retired in step 5,
    not retained as an accumulating project log. Use:
 
    ```
    ## Portfolio review <YYYY-MM-DD> <unique-slug>
-   Conversation: <current Portfolio conversation URL; reuse normally, replace when stale>
+   Conversation: <Portfolio Pro conversation URL if used; otherwise independent review only>
    Standing: <one line per active and reserve direction with sha-pinned links>
    Context: <concrete governance/method/evidence sections and revisions selected from the
      Portfolio profile in hmasd-pro-research-prompt-author/references/pro-reading-context.md>
@@ -54,16 +56,18 @@ require this review; DM reflection and pivots may use their existing NOTES and s
    a question alive, or exhaustive falsification to decline its current cost. Investment
    stopping and scientific weakening are different judgments; neither creates a new gate.
    Include the applicable method context as described in `hmasd-pro-research-prompt-author`,
-   within this same section; Pro does not inherit local skills. No separate packet or review trigger.
+   within this same section; an external adviser does not inherit local skills. No separate packet or review trigger.
    Use its [Portfolio reading profile](../hmasd-pro-research-prompt-author/references/pro-reading-context.md):
    current Constitution, relevant scientific methods, affected directions' evidence and real options.
    Historical specs are included only for named frozen obligations or explanatory comparisons.
 
 3. **Publish the scoped review.** The session assigned this owner-triggered project review
    refreshes main, preserves concurrent direction entries, commits by pathspec and pushes from
-   its owned checkout. Direction DMs retain their own publication authority. Supply the browser procedure
+   its owned checkout. Direction DMs retain their own publication authority. Preserve the independent
+   review in `### Answer`. If Pro adds distinct value, allocate a separate answer subsection in this
+   same review (preserving the independent answer) and supply the browser procedure with the
    repository, branch, source_sha, target_path=`docs/research/RESEARCH.md`, question_heading,
-   answer_heading=`### Answer`, subject key=`portfolio`, message and conversation URL.
+   actual empty answer heading, subject key=`portfolio`, message and conversation URL.
    Instruct Pro to read the pinned question, fetch the current target version and write only
    the empty answer subsection, preserving the question, tables and `### Decision`. Return
    the actual commit on success or the complete answer in chat on write failure.
@@ -72,7 +76,8 @@ require this review; DM reflection and pivots may use their existing NOTES and s
    The review author hands off only this subsection while Pro writes and does not edit
    it concurrently. A short receipt is not an answer. Use the same complete-answer, scope and
    uncertain-write reconciliation checks as a direction question; do not look in NOTES.md.
-4. **Read the whole answer.** Pro advises. The assigned Root/DM decides within the owner's
+   When no Pro consultation is selected, proceed with the complete independent review to step 4.
+4. **Read the complete review and any Pro answer.** Pro advises. The assigned Root/DM decides within the owner's
    explicit delegation; otherwise the owner decides. Do not turn delegated scientific choices
    into another permission request. Check consequential recommendations against the supplied methods and evidence;
    state dependent source gaps without inventing a further review trigger. Write the decision and

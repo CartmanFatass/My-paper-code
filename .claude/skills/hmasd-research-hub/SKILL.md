@@ -142,18 +142,20 @@ Ending a recipe need not archive its question or end your responsibility. If no 
 feasible next step remains after that review, explain why; do not fabricate work or a dependency.
 Changing direction carries forward adverse evidence, prior development exposure and actual cost.
 
-Pro: proactively apply constitution section 5 before establishing or materially changing the
+Scientific review and Pro: proactively apply constitution section 5 before establishing or materially changing the
 research question, core hypothesis or key comparator; changing a failure explanation or continuing
 investment after intermediate predictions keep failing; closing/reopening a research route or
-broadening a claim; and confirmation. Do not wait for an owner reminder. Use
-hmasd-pro-research-prompt-author to ask the focused scientific question that can change that
-decision. Reuse complete prior Pro advice when it still covers the decision and its evidence
+broadening a claim; and confirmation. Do not wait for an owner reminder. One adequate independent
+scientific review in a separate context covers an ordinary consequential decision. Add Pro when
+it offers distinct expertise, framing or unresolved-disagreement value; use
+hmasd-pro-research-prompt-author for that focused question. Reuse complete prior advice when it still covers the decision and its evidence
 and premises remain applicable; confirmation advice must cover the actual claim and fixed plan.
 Routine implementation, planned verification, execution and collection need no repeat round;
-materially changed questions, premises or evidence at these decision points need a follow-up.
-Keep frozen review exceptions bound to their original objects. A local Critic or Reviewer is
-not a substitute for this Pro consultation. No fixed call frequency, idea count or Pro approval.
-Use the applicable Pro browser procedure directly. Once Send is accepted, a POSIX Codex session
+materially changed questions, premises or evidence at these decision points need focused scientific
+review. Confirmation receives scrutiny of its actual claim and fixed design. Engineering review
+has a separate purpose and does not discharge scientific review. Keep frozen review exceptions
+bound to their original objects; no automatic second consultation, fixed frequency, idea count
+or Pro approval. When Pro is useful, use the applicable browser procedure directly. Once Send is accepted, a POSIX Codex session
 arms `tools/hmasd_wait.py` for detached deterministic observation and ends the turn; never create
 a Transport child or use a model to poll unchanged state. The wait controller queues only this
 assigning Codex session. On Claude or another runtime, use a verified deterministic external

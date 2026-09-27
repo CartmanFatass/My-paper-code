@@ -1,12 +1,14 @@
 ---
 name: hmasd-pro-research-prompt-author
-description: Write a focused Pro question in NOTES.md at constitution section 5 decision points - research premises or key comparator, failed predictions and renewed investment, route closure/reopening or claim expansion, and confirmation. Support synthesis, diagnosis, source bridges and hypotheses; reuse applicable advice without per-batch rounds or resends.
+description: Write a focused Pro question in NOTES.md when Pro adds distinct expertise, framing or unresolved-disagreement value at constitution section 5 decision points. Support synthesis, diagnosis, source bridges and hypotheses; reuse applicable advice without per-batch rounds or resends.
 ---
 
 # Pro question
 
-Authority: `docs/project/OPERATING_CONSTITUTION.md` section 5. The DM proactively consults Pro
-at its four scientific decision points; no owner reminder or Root forwarding is needed within
+Authority: `docs/project/OPERATING_CONSTITUTION.md` section 5. The DM obtains one adequate independent
+scientific review at its four decision points and adds Pro when it offers distinct expertise,
+framing or unresolved-disagreement value. This skill authors that Pro question; it does not add
+a second consultation requirement. No owner reminder or Root forwarding is needed within
 authorized direction work. Pro advises; scientific direction correction and material dissent
 follow constitution section 2, and other in-scope choices remain with DM. Consultation is not approval.
 Select the reasoning needed: evidence synthesis, competing failure explanations,
@@ -22,9 +24,9 @@ whether a complete prior Pro answer already covers that decision and its evidenc
 remain materially applicable. Reuse that reasoning for routine implementation, planned verification,
 execution and collection; no new question or reuse receipt is needed. For confirmation the advice
 must cover the actual claim, comparison and fixed plan. If the question, premise or evidence has
-materially changed at a section 5 decision point, ask a focused follow-up and show what changed.
-Independent Scientific Reviewer (ResearchCritic) and engineering Reviewer do not replace this
-consultation. Preserve consequential independent-review disagreement in the existing question
+materially changed at a section 5 decision point, obtain focused scientific review and add a Pro
+follow-up only when it offers distinct value; show what changed. Engineering review is separate
+from scientific review. Preserve consequential independent-review disagreement in the existing question
 when it bears on the decision; do not present only DM's preferred interpretation. Keep any frozen
 review exception within its original object. Portfolio follows an owner request or explicit
 project-management delegation under constitution section 2.
@@ -56,7 +58,8 @@ project-management delegation under constitution section 2.
    ### Answer
    ```
 
-2. **Commit and push** that file by pathspec on the direction branch. Record the full sha.
+2. **Commit and push** that file by pathspec on shared `main`, unless the owner requested another
+   authoring branch. Record the full sha.
 3. **Compose the message** with repository, branch, source_sha, target_path,
    question_heading and answer_heading (`### Answer`), the source-pinned URL and the exact
    answer-only write instruction. The source is immutable; the write target is the latest
