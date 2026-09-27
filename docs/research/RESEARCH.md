@@ -18,7 +18,7 @@ Owner 于 2026-09-23 进一步要求本任务作为科学项目管理者，给�
 
 **计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
 远端不可用、实际资源不足或不适合所选计算时，DM 记录具体原因后使用本地；所有结果计算仍遵循实际节点准入，
-不迁移已接受进程、不因观察丢失重复启动。三个 DM 的并行研究不绕过节点资源检查。
+不迁移已接受进程、不因观察丢失重复启动。五条研究运行上限不绕过节点资源检查。
 
 ## 研究背景与共享认识
 
@@ -795,9 +795,10 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
+| `energy_relay_diagnostics` | 护盾接管下的提案—执行关系如何影响有限学习，哪些同预算更新方案改善完整部署？ | exploring | Codex DM (independent session) | **B01路径／饱和诊断已结束；本轮选择B02条件性PPO比较。** 同一公开c03完整状态分叉，普通PPO对仅屏蔽完全接管步直接surrogate，各固定续训300k；2新fit、600k训练步，128回合／384k终点评价。原DM完成精确前瞻、工程与原生准入；保留全程递归、GAE／critic／entropy／原标准化和分母，不是已证梯度错误或独立种子复制。B01的有限CPU一致、采样J +1.22而返航成本+7.75及全部反例保留；轨迹接口仍由本DM维护。[独立审查与采纳](archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)、[NOTES](candidates/energy_relay_diagnostics/NOTES.md)、[路由](#session-routing)。 |
 | `energy_relay_baselines` | 在共同 S7 服务／风险、合法信息及声明曝光下，普通学习的缺口是否跨独立训练实例重现，哪些普通强化学习配方值得继续比较？ | exploring | Codex DM (independent session) | 2026-09-27 读取 c04 的继续改善后，采纳独立科学审查纠正：完整曲线不是新训练实例比较的前提。已选 B01 两个新 SET 种子各固定1.2M；只评价各自初始化／终点、两模式和32个已曝光开发世界，保留服务／J／风险及损失世界。工程准备已通过；逐项原生准入执行，恢复 fit 不作为第三个复制。未执行 D4 后继归 DM3；[选择、异议与前瞻](candidates/energy_relay_baselines/NOTES.md#independent-scientific-correction-adopted--select-the-fixed-two-fit-comparison-now)、[现行计划](#current-research-plan)、[路由](#session-routing)。 |
 | `energy_relay_imitation` | 合法且声明的信息条件下，普通示范学习能否形成有用闭环部署，何时值得处理学生访问状态覆盖？ | exploring | Codex DM (independent session) | B01完整：1fit／128回合／384k步／89.58min，BC−初始化QoS +.04955、J +139.52，但15个服务损失／17个J损失、零服务1→5、返航代价+3.832；总体MSE下降掩盖护盾未激活层误差上升。全部原始证据核验并独立科学复核；不采纳为可靠部署基线。已选B02单一损失掩码比较，复用同数据／初始化，1新fit＋32评价回合；不接RL或增加种子。[完整读数与前瞻](candidates/energy_relay_imitation/NOTES.md)、[现行计划](#current-research-plan)、[路由](#session-routing)。 |
-| `energy_relay_availability` | 固定 S4 移动条件下，普通合法信息规划怎样应对短时 UAV 不可用，及时重规划是否改善完整服务？ | archived | Codex DM (independent session) | **B02完整，结束当前故障时钟投入，保留clock30。** 64回合／192k步／0fit；事件规则响应等待14.38→0，QoS −.01317 [−.04895,+.02261]、J −29.69 [−203.91,+144.54]，完整增量未建立，不作等价或确定伤害结论。全部14个服务有利世界、18个不利世界和风险尾部保留。独立科学审查后未选复制／时钟扫参／更强故障或学习；母问题与普通控制解释仍由本DM负责，无活动操作或外部等待。[完整读数](candidates/energy_relay_availability/NOTES.md#b02-complete-reading)、[审查与决定](candidates/energy_relay_availability/NOTES.md#b02-independent-review-and-decision)、[路由](#session-routing)。 |
+| `energy_relay_availability` | 固定S4及合法信息下，普通任务分配怎样影响移动需求与短时不可用条件中的服务／能源后果？ | exploring | Codex DM (independent session) | **B01/B02故障时钟投入已结束；本轮选择B03能量分配比较。** 保留clock30、目标生成、原生故障、生产护盾及充电机制，比较原距离／滞回分配与一个前瞻固定的目标相关能量代价；64完整回合／192k步／0fit。当前margin不是目标处服务后返航保证，需明确能耗模型与服务假设。旧B02响应等待14.38→0、QoS −.01317 [−.04895,+.02261]、J −29.69及14正18负世界保留；不再改故障时钟或提高强度。[独立审查与采纳](archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)、[既有完整读数](candidates/energy_relay_availability/NOTES.md#b02-complete-reading)、[NOTES](candidates/energy_relay_availability/NOTES.md)、[路由](#session-routing)。 |
 | `energy_relay_benchmark` | 冻结S7-S2/H3000宿主、充电分配不变（policy study）：合法普通控制可达的完整服务是多少，剩余损失中返航/离站时机与移动用户下的布局各占多少，学习控制器能否缩小任一差距？ | exploring | Claude DM (WSL session) | **B01 已完成并按预登记分支读取（2026-09-26，操作 02f762d2，tag b01_ref_a02，SHA e1fdbe72f，540 episode，0 fit，节点约 2 h）。** 生产设置 (0,.05) 下 32 个未曝光世界（955001–955032）：H_central .774 QoS/步（J 2282）、H_local .597（J 1628）、N .328（J 955）。P2 成立；P1 不成立（N 宽度 .45 − .05 = +.023，J +72，倒 U 形且全在 .03 阈内，H_central 同形 +.0075）；P1c 符号不成立而排队/等待过程随宽度单调上升（拥挤存在但不损服务）；P3 按登记计数不成立（19/32 < 24），但公共窗口内 H_central − N 在全部 32 个世界 ≥ +.30（均值 +.585）；P0 中位数成立、τ_w = .036 > .03 故不读逐世界效应；等价性 CPU/CUDA 逐世界不一致而面板均值一致（仅记录）。分支 (b) 成立：损失在学习器的部署而非护盾时机；离站宽度不是 S7 损失。未登记发现：匹配宽度下进入余量 .20 使 N 上升 +.048–.079 QoS/步（匹配宽度；J +15–29 %），使 H_central 下降；这正是 S7 收口拒绝购买的"恒定提前返航"控制，B01 不采纳、仅作上界（约闭合 N–H_central 差距的 1/5）。内部评审同日纠正：N 部署缺口最直接的描述是 UAV 停在区域边界（正常模式 UAV-步的 49.8 % 位于 x=8000 或 y=0，前 1000 步 67.7 %，H 参照为 0）并贴 50 m 高度下限；"站点作为部署先验"的过程证据是时间混杂，已撤回；护盾进入把 UAV 拉离边界是最简单的解释，机制待零 fit 的随机动作检验（评估使用确定性均值动作）。拴系机制按增量证实（宽度 .05 时 +391/+411 m 对推导 ≈447 m；宽度 .25 时 ≈1.7 km 对 2.2 km；与进入余量无关）。两份评审（内部 critic、Pro）均对原 B02 两阶段提出实质异议，已合并回应并修订：第 0 阶段（0 fit）：**第 1 项已完成并按 S0-1 读取（2026-09-26，操作 07ebcf70，tag b02_s0_stoch_a01，SHA 8d88f72d0，64 episode，节点 12.6 min）：N 采样动作两次抽样的 QoS/步 .308/.318（合并 .313，对确定性 .328 差 −.016，每次抽样均在 .03 内），边界停靠占正常模式 UAV-步 .22（确定性 .50）、高度下限占比 .46（.70）；按声明规则落在中间分支——服务缺口属于策略本身而非确定性评估伪影（不触发对 B09–B11/B01 的重标），但边界停靠描述依赖评估模式，评估模式成为第 1 阶段的声明轴（每检查点确定性 + 一次采样评估）。采样使护栏阻断次数 1949→408/565、F 模式占比 .18→.22、充电输入 147→196 Wh、返航约束代价 1.2→2.3–4.3 而服务不升；零服务世界基本同为 955005/012/021（955005 在第二次抽样得到服务）。** **第 2 项也已完成并按 S0-2/S0-3 读取（操作 e94bf1fe，tag b02_s0_refs_a01，SHA e5857e0c2，96 episode，15 min）：H_spawn .232、H_park2 .379、H_central@10 .769（H_central .774）；S0-2 = +.147（SE .023，32/32 为正，公共早期窗口 +.269），两个固定站点航点的包效应达到预期 ≥ +.10 的水平；S0-3 = −.005（SE .005），H 的重规划周期敏感度低于阈值。附带：N 落在 H_spawn 与 H_park2 之间（+.096 / −.050）；空闲团队仅靠生产护盾的站点访问就达 .23 QoS/步，读取学习器必须保留阶段拆分与公共早期窗口；固定航点控制器在护盾释放后来回振荡（每世界 113/94 次进入），属包本身。第 0 阶段结束：160 episode，0 fit，节点约 28 min。** **第 1 阶段已启动（2026-09-26 18:22:52Z，操作 d682c906，tag b02_s1_set_a01，SHA 759927b5e，节点 wsl_4070 CUDA）**：一个固定曝光 1.2M 的 SET 开发 fit（B09 的 S7 配方 + SET 开关 + 训练态生产护盾，种子 925031，检查点 c00 初始化及 204k/402k/600k/804k/1,002k/1.2M；逐检查点确定性 + 一次采样评估，957001–957032 只作一次留出），删除"典型性"预测；工程评审（hmasd-reviewer）结论"可按提交启动"，四项低/信息级发现已记录并修正配方注释。成本：按 B09 实测速率上界约 11 h 节点墙钟（取代此前约 5 h 的估计；实际速率见 NOTES 追加）+ 检查点评估约 1.4 h；可随时 TERM 停止。**第 1 阶段已完成并按声明读取，独立科学审查已完成（2026-09-27 06:59Z 读取；fit 操作 d682c906 + 续跑 faf881bc，最终模型 c06，留出集 957001–957032 已一次读取）：**开发集 c06 QoS/步 .437 确定性 / .438 采样（曲线 .209/.243 → .437/.438，J 587 → 1276），留出集 .462 / .440，同集比较器 H_central .781、H_local .611、N .344（留出集为第二个未经选择的 32 世界样本：比较器偏移 +.007/+.014/+.015，学习器 +.025/+.002，说明开发集估计不是世界抽样伪影，不涉及种子方差）。相对 N +.10–.12 QoS、+285–353 J（配对，23–26/32 世界为正；返航约束代价符号上更高，仅留出集分辨、J 上可忽略）；高于两站点包 H_park2 +.06；低于 H_local .15–.17 QoS 且 J 低 336–404（J 已按 λ_return = 2 计入返航代价，学习器的软返航代价远低于 H_local 但差额仅值约 110–130 J），低于 H_central .32–.34 QoS、约 950–1010 J（返航代价差未分辨）；608 个回合无 cutoff/depletion；.60 里程碑未达（每面板 1–3 个世界，差 .14–.16）。按学习器首次护盾进入（约第 1044 步）做时钟对齐分解：进入前的每步缺口最大，该窗口占对 H_local 差距的约 70%、对 H_central 差距的约一半；进入后同窗口学习器约 .51/步，H_central 约 .75、H_local 约 .58。训练侧：采集时 QoS 最后三块 .33/.37/.38，熵持续下降（普通锐化，两模式在 c06 收敛）；开发面板 c04→c06 采样 +.034（SE .019）、确定性 +.031（SE .020），单步 SE 约 .02，末步依赖世界 955016（H_local 在该世界亦为零服务）；`still_improving` 规则下为否，平台亦未确立。Pro 六行失败表按读取器代理填写（第 1 行前半程成立、末端部分成立；第 3 行不成立；第 4 行未测量；第 2 行为终态候选族；第 5、6 行开放）；c04/c05 条目误归 Pro 表的"过早收敛"行已更正。成本：fit 11.0 h（= 修订上界，含作废 0.84 h），评估 2.75 h（声明约 1.4 h，超出已记录），跨度 12 h 36 min。独立审查（ResearchCritic，独立上下文）MATERIAL_DISSENT: yes——原条目"更低风险下的服务差距、非同类亏损"与"缺口集中在进入前阶段、输入后达 H_local 水平"两项解读超出证据，已全部接受并按审查更正（NOTES 追加条目），无残余分歧。§8 下为探索性结果（单种子、续跑进程），不构成配方主张；本方向已接受范围至此完成，续接经 Root 协调（开放问题：进入前阶段与边界/贴地占比作为 DM2/DM3 的读数；同配方更长曝光是否值得购买属 DM1/Root，且末步依赖 955016；评估模式轴按检查点差 −.043 至 +.034）。[Stage 1 结果条目](candidates/energy_relay_benchmark/NOTES.md#2026-09-27--stage-1-result-one-set-development-fit-at-fixed-exposure-read-by-the-pre-registered-readings-b02_s1_set_a01--b02_s1_set_a01r-final-model-c06-957001957032-read-once)、[审查结论与更正](candidates/energy_relay_benchmark/NOTES.md#independent-scientific-review-of-the-stage-1-result-5-2026-09-27--0725-utc-material_dissent-yes-on-two-readings-accepted-corrections-to-the-entry-above)、[第 1 阶段读数 JSON](candidates/energy_relay_benchmark/b02_stage1_readings.json)。证据位置（2026-09-27 08:30Z）：本方向全部运行 JSON 在 main、traces 与 c00–c06 检查点在本地 checkout；节点共享 checkout 于 04:28Z 的 sparse-checkout 变更把本方向已提交的节点运行目录（含 c00–c03 检查点原件）整目录清除（Git cone 模式对"全为已跟踪或忽略文件"的目录的稀疏清理），`/home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01/checkpoints/` 是 c00–c03 在节点上的唯一副本且为 DM2 已准入操作的输入，勿删；任何 DM 的 `git sparse-checkout add` 都会同样清除其他方向已完成、已提交的节点运行目录，属共享控制风险（详见 NOTES 收尾记录）。[B01 结果条目](candidates/energy_relay_benchmark/NOTES.md#2026-09-26--b01-result-read-by-the-pre-registered-branches-operation-02f762d2-tag-b01_ref_a02)、[B01 读数 JSON](candidates/energy_relay_benchmark/b01_ref_a02_readings.json)、[第 0 阶段读数 JSON](candidates/energy_relay_benchmark/b02_stage0_readings.json)。 |
 | `planning_policy_compression` | 有限合法历史与数据下，哪些近似教师区别值得保留，何时普通模仿足以提供完整联合用途？ | paused | Codex DM (independent session) | **已按owner要求收尾交接、停止新实验。** B03完整：O−S +12/+14、O−BC +14/+17、S−BC +2/+3任务，六fit/121.036s，完整核验并保留全部损失/负面分量；只支持单D条件性用途。B04当前实现/独立工程检查完成，4 tests通过且无实质工程问题；0科学fit/采集/评价、无原生操作，不启动。前瞻/代码保留待owner明确恢复；观察已停，无未读结果/Pro。[交接与恢复边界](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)、[完整B03](candidates/planning_policy_compression/NOTES.md#2026-09-26--b03-complete-original-correspondence-helps-on-this-fixed-archive)、[原固定claim](candidates/planning_policy_compression/CLAIM_weighted_partial_compression.md)。 |
 | `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | archived | Codex DM (independent session) | **B03完整，当前固定库50:50混合投入结束。** 两新区组M−F2@伙伴3为−.009834/−.049463 J、−.638688/−2.647500服务；对伙伴1/2也均为负，12项自身平均J/服务仍改善。原B02伙伴3正例保留，但正负取舍未在新训练/新面板条件重现；不作训练总体排名或一般协调否定。4fits、1.744M团队步、101.56min科学墙钟及781文件已完整核验保全。复用完整Pro已覆盖分支，比较复制、面板归因和独立候选后未选后继；无活动操作、未读结果或开放Pro。保留所有普通/混合响应资产。[完整结果与决定](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)；[任务路由](#session-routing)。 |
@@ -823,7 +824,6 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `energy_relay_diagnostics` | 冻结 S7 上，训练与评估差异有多少来自世界、快照、动作、汇总或提案至执行路径，剩余证据支持什么学习干预？ | archived | Codex DM (independent session) | 2026-09-27 B01 完整：136回合／408k步、0fit、原生约41.8min。8对单通道CPU collector/evaluator记录完全一致；确定性均值动作无水平饱和。c03两采样等权均值相对确定性QoS +.00589、J +1.22，但返航成本 +7.75（30/32世界更高），较少墙边停留不足以支持部署修复。独立科学审查后结束当前路径／饱和诊断追加；历史训练差距仍未解释，母问题与可复用轨迹接口仍由本DM负责，无新批次。全部反例保留、原始数据核验、源快照与闲置实现已清理。[NOTES](candidates/energy_relay_diagnostics/NOTES.md)。 |
 | `delayed_broadcast_timing` | 对固定且真实训练过的 RR 接收/运动策略，跳过慢信道发送能否提高净服务，保留的通信是否超出尝试费节省而有用？ | archived | Codex DM (independent session) | **保留RR，结束RR9302时序改造投入。** B01三规则/32新世界完整，0新fit/24,576团队步；FAST_ONLY−RR平均净J−.009034734、物理J−.009529851、服务−.615356人/步，净值7正25负。虽省49.51%尝试，实际缓存更旧、缺消息更多；RR−NONE净J+.079412983、服务+5.158203，31正1负，world0及全部反例保留。完整Pro已核验读取并采纳；年龄保护、率匹配、载荷替换没有选出当前值得购买的后继，不追加规则/阈值/世界/训练。不证明RR最优、内容因果或整个通信问题无价值。[完整结果](candidates/delayed_broadcast_timing/NOTES.md#2026-09-25--b01-complete-fast-only-loses-service-despite-shorter-transit-retain-rr)；[完整建议与决定](candidates/delayed_broadcast_timing/NOTES.md#2026-09-25--adopt-the-complete-advice-and-end-rr9302-timing-modifications)；[任务路由](#session-routing)。 |
 | `agent_count_generalization` | 固定 k、回合内固定 roster 时，HMASD 对未见团队数量 N 的服务能力和泛化代价是什么？ | archived | Codex DM (independent session) | **结束当前混合人数配方追加，未购买八面板回放。** B20 六 fit 完整，固定联合主张未建立：N7 两项不利、N5 两项未确定；保留 B19 正例、六次自身学习、N6 代价和全部损失，B15/B18 原判读不变。训练实例/面板反转原因仍未分离，但当前回放分支未选出不同且值得投入的后续行动；0 追加 fit/评价，不加第四块、不改旧端点。DM随后完成独立C2，已结束该固定资产的时序追加。[完整建议与决定](candidates/agent_count_generalization/NOTES.md#2026-09-25--decline-panel-replay-and-end-the-ordered-mixing-investment)；[完整 B20](candidates/agent_count_generalization/NOTES.md#2026-09-25--b20-complete-joint-claim-not-established-n7-adverse-and-n5-unresolved)；[冻结 CLAIM 及结果](candidates/agent_count_generalization/CLAIM_ordered_roster_interpolation_20260924.md)。[任务路由](#session-routing)。 |
 | `complementary_skill_learning` | 固定 N/k、完整高低层共同学习时，能否形成提高原生 UAV 服务的技能组合，并区别于普通曝光、通用辅助优化与共同适应？ | archived | Codex DM (independent session) | **本轮协作学习投入结束，0fit cross-play准备完整交付。** 普通私有actor/critic可复用，但混编收集、私有数据/RNG和评价路径尚需实现；现行同构S1可统一部署普通策略，尚无必须保留独立控制器的用途，不购买population训练。成本化设计需4个population fits/8套学习器、2.88M训练+.768M含正常搭配的评价团队步；实际新增0fits/0环境步。保留B07/B08 E/U条件收益、E−M反转及B09八流服务损失/R规则，不把停止投资写成兼容性或技能类别的否定。[完整设计、源码/资产与决定](https://github.com/CartmanFatass/My-paper-code/blob/e38a8ec47/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--cross-play-preparation-complete-decline-current-population-training-investment)；[完整B09](https://github.com/CartmanFatass/My-paper-code/blob/6f7e1eaccdea00cafe8813e621d4bb5b14a363f4/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--b09-complete-persistent-u-contexts-lose-service-and-do-not-give-a-shared-deployment-improvement)。[任务路由](#session-routing)。 |
@@ -856,52 +856,50 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 ## Current research plan
 
-**2026-09-27（owner 第二次追加两名独立 Codex DM，Codex 从两名增至四名；与 Claude 合计五名）。**
-owner 明确选择“新增两个独立 DM，并将结果性运行上限提高到五条”；宪章及活跃职责／方法已以
-`eda9fae04` 同步。五条是上限，实际训练和评价仍受节点资源准入；管理型 Root 不另执行结果性研究。
+**2026-09-27：owner 要求“两个方向已释放 我们继续根据情况来补上”。** 已核对原 DM2 与 DM4
+的旧研究完成、完整读取及收尾；复用原独立会话和方向，选择两个新研究。
+[完整独立审查与 Root 采纳](archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)
+MATERIAL_DISSENT:no，解释限制全部采用。各 DM 形成精确前瞻，完成必要工程检查、发布与原生准入，
+独立执行并发表；无逐批 Root ACK。旧路径／饱和与故障时钟停止结论保留，不重复购买。
 
-| 负责人 | 独立科学问题与当前工作 | 初始观察、成本与依赖 |
+四名 Codex DM 与 Claude 的归属保持；结果性运行上限仍为五条（owner 修订 `eda9fae04`）。
+训练与评价都计资源，实际节点准入可少于五条。Root 只协调，不另占结果性研究线。
+
+| 负责人 | 独立科学问题与当前工作 | 当前完整比较、成本与依赖 |
 | --- | --- | --- |
-| Claude：`energy_relay_benchmark` | 当前已接受 SET 开发过程及完整结果解释。 | 保留恢复、剩余检查点、最终模型一次留出读取及全部成本；已公开 c04 为 .406/.404 QoS，仍在改善，不能把 c03 当平台。既有操作不重复、不转交。 |
+| Claude：`energy_relay_benchmark` | 原Stage 1完成，完整读数及独立更正已发布；保留本问题及后继选择。 | 一次固定1.2M SET开发fit（含恢复）在开发集为.437/.438 QoS，原生J已计风险价格后仍低于H_local约353/348；时钟对齐后后段仍有缺口。实际约11h fit＋2.75h评价。原操作不重启，本次未替Claude选Stage 2；证据见其standing／NOTES。 |
 | DM1：`energy_relay_baselines` | 普通 SET 的固定1.2M学习增益与缺口是否跨独立训练实例重现？ | 已选两个新种子26092711／26092731，顺序执行2 fits、2.4M训练步；仅各自c00/c06、两模式、32开发世界，共256回合／最多768k评估步。预计18.6–20.6节点小时训练＋约1小时评估，争用／准备／读取另计；实际节点准入。c04已足以支持复制价值，不再以Claude完整发布为科学前提；仍留意相关实现缺陷，不读取封存留出，不把恢复fit拼成确认。 |
-| DM2：`energy_relay_diagnostics` | B01完成，当前路径／饱和诊断投入结束；更大的训练—评估差距仍未归因，本DM保留问题与可复用轨迹接口责任。 | 136回合、408k步、0fit／0更新；原生约41.8分钟。8对CPU路径一致，采样减少墙边停留，J均值仅+1.22而成本更差；不追加解码／奖励修改。接口及8回合完整输入已发布，DM1／DM3可按各自前瞻复用；无活动实验。 |
+| DM2：`energy_relay_diagnostics` | 相同继续训练预算下，去掉完全接管动作的直接PPO surrogate，能否改善完整闭环收益？ | 选择B02：同公开c03完整状态分叉，普通PPO对接管mask，各固定300k；2 started fits／600k训练步；同32个声明开发世界、两模式、128回合／384k评价步。训练合计估4.7–5.7h＋评价40–60min，工程／争用／核验另计。保留全程递归输入、GAE、critic、entropy、ValueNorm、原优势标准化／有效样本分母及更新次数；记录实际mask曝光与尺度。一个共享初始化区组，不是独立种子复制；先核实提案其他内部作用，不能预称梯度错误。 |
 | DM3：`energy_relay_imitation` | B01完整发布；检验移除护盾接管时的直接动作回归损失，能否改善可执行阶段模仿及完整原生部署。 | 独立审查后选B02：复用B01已核验示范、实际初始化及已曝光32开发世界，保留全程循环输入，仅掩蔽直接loss；1新fit／十epochs／最多1920更新，7.68M训练forward／4.84686M有效loss曝光，32回合／最多96k环境步＋1.536M离线forward。2workers，参照计算约30–45min，工程／争用／核验另计；发布精确输入并工程审查后原生准入。B01零服务增加、风险及全部损失保留，不作独立复制／确认。[NOTES](candidates/energy_relay_imitation/NOTES.md)。 |
-| DM4：`energy_relay_availability` | B01/B02完成；当前故障敏感度与响应时钟投入结束，保留普通clock30；移动需求／合法信息部署问题仍未解决。 | B01为128回合／384k步，B02为64回合／192k步，合计0fit／576k步、原生约70.17min，准备／读取另计。B01故障差区间宽；B02虽消除响应等待，却未建立完整QoS/J增益且有明显正反世界。独立审查后0追加fit／回合，无活动实验、已选后继或等待其他DM的依赖。[完整结果与决定](candidates/energy_relay_availability/NOTES.md#b02-independent-review-and-decision)。 |
+| DM4：`energy_relay_availability` | 同合法信息、目标集合与clock30下，目标相关能量分配是否改善普通规划服务／J及风险？ | 选择B03：原距离／滞回分配对一个前瞻冻结的能量规则，保留S4故障制度、护盾及充电机制；每臂32配对开发世界、H3000，共64回合／192k步／0fit。原生估30–60min，工程／核验另计。明确当前位置→目标→合法已知站点的能耗模型和服务负载；当前返航margin不是目标处未来可行保证，不删困难目标、不扫阈值。 |
 
-两名新 DM 均已通过原生读取确认启动，[实际路由](#session-routing)已登记。
-[完整独立扩展审查与采纳](archive/2026-09-27/RESEARCH-four-dm-expansion.md#four-dm-expansion-review)
-支持上述两个独立问题（MATERIAL_DISSENT: no）。这是 owner 提高并行投入偏好后的新配置，
-此前[两 DM 配置审查](archive/2026-09-27/RESEARCH.md#two-dm-allocation-review)对九 fit 菜单、全检查点
-机械重评及 D4 表示能力界限解释的反对仍有效。预算是前瞻候选估计，各 DM 在精确协议及实际准入前报价。
+**不同用途与判读。**DM2检验奖励驱动的有限PPO更新；DM3已经接受的B02检验示范目标在
+被覆盖动作上的直接回归损失，结果不能互相替代，可独立准备、按资源安排。
+DM1继续从头SET种子研究；恢复fit和共享c03分叉都不能拼成其第三个独立训练实例。
+DM4不再改故障时钟，其S4结果不直接解释S2学习机制；H_local仍汇总八机合法观测，
+H_central额外信息包的差距不是合法可恢复余量。
 
-**归属已经拆清。**DM1 保留 D1；原来分给 DM1 的未执行 D4 后继转归 DM3，其旧 NOTES 中的候选文字保留为历史。
-DM3 不重复种子复制，复用 DM2 已发布轨迹接口；DM2 当前批次不变。DM4 在自有目录适配原生 S4，
-保持 Claude 冻结 S2 入口及默认合同。DM 可在连续问题下修订方案、独立发表，不需要逐批 Root ACK。
+完整J、QoS、return cost、低电量／失败尾部和全部损失一起读取。仅loss、预测余量、
+单一动作模式或均值改善而重要尾部变差，不足以建立可靠用途。无完整增益结束具体规则，
+不自动追加轮数、改奖励、提高故障强度或挑极端世界追修。母问题继续由原DM负责，
+有新的证据时可依宪章修订选择。
 
-**新增观察的解释边界。**BC 闭环收益只支持普通监督部署起点；离线拟合好而闭环差才提高访问状态覆盖问题的价值，
-两者都差也不能证明表示能力上限。H_local 汇总八机合法观测，须保留其风险与信息差异；教师提案与护盾提交动作分开，
-SET 快照及循环时序按实际合同记录。S4 是固定八个实体槽位的20–60步临时故障，不是成员加入／离开。
-固定 S4 移动参数再比较故障制度；故障和移动共用 RNG，相同整数种子不保证相同用户轨迹，真实配对范围必须声明。
-可用性适配是各参照共同的正确性基础，不包装成方法贡献。不因无明显损失自动加故障强度或新增训练。
+**实现与输入边界。**共享main、方向自有目录、Git短临界区串行；DM各自发表。
+DM2继续唯一维护轨迹observer，新PPO实验优先放自有目录；必要共享训练钩子须范围明确、
+默认关闭并经独立工程检查，不改变接受过的snapshot。
+DM4恢复自有冻结S4 adapter并适配自有runner，保留Claude冻结默认合同。
+`0f5d78903`已修正稀疏检出恢复指导及生成副本：只恢复已核验缺失记录，
+不例行用`sparse-checkout add`冒险删除其他方向bulk。
+c03从已保全artifact核验hash及完整载入能力，不能假定旧节点run目录仍在；
+旧DM2 B01已结束，新研究使用新输入声明及操作身份。
 
-共同使用 S7 的原生 QoS/J/风险语义并声明宿主条件、合法信息、曝光、样本与统计单位。
-957001–957032 和封存参照仍仅由 Claude 按原计划读取；新方向和 helpers 不查看或用于选择。
-Milan T3 暂留待数据可用性明确，D6 是有具体需要的工程；PPC/FSD pause、G33 frozen 均不因扩展改变。
-当前职责及接口边界已更新到[给 Claude 的对齐通知](../Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md)，
-不要求 App 回复、确认或自动转发。一次充分独立科学审查、按价值加 Pro、按风险做工程审查的 §5 工作流继续适用。
+957001–957032已由Claude按原计划读过一次并公开总结，不能重新视作未曝光测试。
+本次选择使用开发证据；DM及helpers不打开原封存raw、不用它选参数。
+Milan真实配置cache仍缺失，留作后备；PPC/FSD pause和G33 frozen保持。
+[给Claude的书面对齐通知](../Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md)已随分工更新，
+发布不等于Claude已读。本次owner补位要求落实为向原DM2/DM4各一次具体派发，不建立自动App回复／ACK循环。
 
-**Claude 既有研究与未完成操作继续保留。**
-`energy_relay_benchmark`（Claude DM）：任务是冻结 S7-S2/H3000 上、充电分配不变的能耗受限中继服务；
-第一项研究 B01（零训练参照研究）已于 2026-09-26 完成：生产设置下 H_central .774 / H_local .597 /
-N .328 QoS/步，分支 (b) 成立，损失在学习器的部署而非护盾的离站时机；B02 设计经两份独立评审（内部
-critic、Pro）修订为两阶段：第 0 阶段零 fit——第 1 项（N 采样动作检验）已完成，缺口在两种评估模式下
-同为策略本身（采样 .313 对确定性 .328），边界停靠描述依赖评估模式；第 2 项（三个固定参照）已完成：H_spawn .232 / H_park2 .379 / H_central@10 .769，
-两个站点航点的包效应 +.147，H 的重规划周期不敏感，N 落在两个固定参照之间；第 0 阶段结束（0 fit）。
-第 1 阶段 = 一个固定曝光 1.2M 的 SET 开发 fit，工程评审通过后已于 2026-09-26 18:22Z 启动（操作 d682c906）；c00–c03 已按声明读取（QoS/步 .209/.243 → .325 确定性 / .345 采样，确定性模式在 c02–c03 持平于 N 的水平，采样模式仍在上升，0/32 世界达 .60）；该进程于 23:45Z 在第 117 个 rollout 因原生内存故障退出（无法复现），2026-09-27 00:38Z 从 c03 续跑（操作 faf881bc，学习器状态经 `load_model` 完整恢复并核对，环境/动作随机流以声明种子 925131 重播，第 101–117 个 rollout 作废；约 4.6 h + 逐检查点评估），c06 后对最终模型在 957001–032 上读一次。PPC 保持暂停（owner 明确恢复才可执行）、FSD
-保留、G33 冻结；其他方向保留证据，不为占用运行槽而重开。评审与回应：
-[reset review](../Claude_docs/inbox/RESEARCH_PROGRAM_RESET_RESPONSE_FOR_CLAUDE_20260926.md)、
-[Claude 回应](../Claude_docs/reviews/RESET_RESPONSE_AND_FIRST_STUDY_20260926.md)。以下 PPC 段落是
-暂停前计划的原文，作为暂停状态的记录保留。
+以下PPC段落保留暂停前已采纳方案及暂停状态，不因本轮补位恢复执行。
 
 2026-09-26，owner要求发送咨询后推进研究。Root已读完并核验完整Pro答复，结合已有独立科学
 Reviewer意见，选择由原PPC独立DM执行**单一存档数据上的O/S/BC三臂条件性重新训练，两个新
@@ -991,11 +989,11 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| 查看 Claude 收件箱报告（当前 Root：S7 分工、共享依赖与控制对齐） | `01a0e091-9f32-7872-b582-b37a14f8d981` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner 本轮授权的协调任务；已采用[独立扩展审查](archive/2026-09-27/RESEARCH-four-dm-expansion.md#four-dm-expansion-review)，按 owner 后续要求扩展至四个直接 DM 并[书面通知 Claude](../Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md)。五条运行上限已按 owner 指令更新；管理职责不另占研究线，不作 DM 结果发布审批层。 |
+| 查看 Claude 收件箱报告（当前 Root：S7 分工、共享依赖与控制对齐） | `01a0e091-9f32-7872-b582-b37a14f8d981` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner本轮要求释放后补位；已采用[两个后继的独立审查](archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)，复用原DM2/DM4并更新[给Claude的书面通知](../Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md)。四名Codex DM与Claude的归属、五条运行上限保持；Root管理不另占研究线，不作DM结果发布审批层。 |
 | DM3：S7 示范学习与闭环部署 | `01a0e0f8-4e3f-70f1-802f-4bf4c2348221` / `local` | `/home/fires/hmasd-wsl` · `main` | 直接 DM，`energy_relay_imitation`；B01完整读取、核验、独立发布并回收临时源码；当前准备B02损失掩码比较。方向记录归 `docs/research/candidates/energy_relay_imitation/NOTES.md`，复用DM2接口，无App消息循环。 |
-| DM4：S7 移动需求与可用性 | `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190` / `local` | `/home/fires/hmasd-wsl` · `main` | 直接 DM，`energy_relay_availability`；B01/B02完整核验并读完独立科学审查，当前时钟投入结束、保留clock30，0后继fit／评价，无活动操作／Pro。更广问题责任保留，未设外部等待；固定八槽位，不接管历史 churn 或 Claude S2 操作，无App消息。[结果与决定](candidates/energy_relay_availability/NOTES.md#b02-independent-review-and-decision)。 |
+| DM4：S7 移动需求与可用性 | `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190` / `local` | `/home/fires/hmasd-wsl` · `main` | 原直接DM，`energy_relay_availability`；B01/B02故障时钟研究完整关闭，当前按owner补位要求接续B03合法能量分配。保留clock30、S4固定槽位及原生故障制度；新精确规则、工程及运行由本DM负责。[选择与边界](#current-research-plan)、[既有结果与决定](candidates/energy_relay_availability/NOTES.md#b02-independent-review-and-decision)。 |
 | DM1：S7 普通学习基线 | `01a0e0ad-0710-71f3-8d9d-8012fe7b65b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 直接 DM，`energy_relay_baselines`；保留 D1，未执行 D4 后继现归 DM3；共同接口由 DM2 负责。原生读取已核对启动及当前职责／方法读取；独立完成和发布，无自动 App 回复。[NOTES](candidates/energy_relay_baselines/NOTES.md)。 |
-| DM2：S7 训练与执行诊断 | `01a0e0af-35fd-78e1-87a5-0ac2c37df085` / `local` | `/home/fires/hmasd-wsl` · `main` | 直接 DM，`energy_relay_diagnostics`；B01完整发布并结束当前诊断追加，无活动实验。仍负责母问题与复用轨迹接口；保留 recorder／可选 evaluator hook，8回合完整输入为学习策略轨迹，非教师示范。[NOTES](candidates/energy_relay_diagnostics/NOTES.md)。 |
+| DM2：S7 训练与执行诊断 | `01a0e0af-35fd-78e1-87a5-0ac2c37df085` / `local` | `/home/fires/hmasd-wsl` · `main` | 原直接DM，`energy_relay_diagnostics`；B01完整关闭，当前按owner补位要求接续B02护盾接管PPO更新比较。母问题、NOTES与轨迹接口所有权保持；新前瞻、工程及操作归本DM，不重启旧B01。[选择与边界](#current-research-plan)、[NOTES](candidates/energy_relay_diagnostics/NOTES.md)。 |
 | Claude DM S7 能源中继参照研究 | this session / `local` | `/home/fires/hmasd-wsl` · `main` | 结果节点 wsl_4070，经 `scripts/hmasd_launch.py` 准入；Claude 无 Codex 唤醒，用分离轮询观察，运行句柄与读数在 NOTES。[NOTES](candidates/energy_relay_benchmark/NOTES.md)。 |
 | DM 规划压缩学习 | `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / `local` | `/home/fires/hmasd-wsl` · `main`；旧持久数据 `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`，新raw见NOTES原生节点路径 | 已按owner要求完成当前任务并停止，交接在NOTES。B01–B03合计20fit核验发布；B03源snapshot净回收793542656bytes，唯一raw保留。B04代码/独立工程检查完成，0科学工作/无handle；PPC本地及节点控制均paused，观察已停。无App消息、责任转移或由读交接自动恢复。节点Git GC警告及未来恢复前检查点已写入交接。[交接](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)。 |
 | DM 伙伴曝光独立复制 | `01a0db8f-1fab-7503-ae4b-feff2d4da8f5` / `local` | `/home/fires/.codex/worktrees/fsd-c/hmasd-wsl` · 当前`codex/partner-exposure-b03-publication`；源码/证据分支`codex/partner-exposure-replication-sept25`保留 | B03两新F2/M区组已完整执行、核验、判读并独立出版；结束当前50:50固定库投入，无活动操作、未读证据、开放Pro或已选后继。全量数据在`/home/fires/hmasd-retained-runs/controller_composition/b03_partner_replication_20260925`逐文件核验保全。fsd-c不在本任务原生附件中，节点源树也非launcher snapshot，两目录保留待可用原生归档路径，不使用shell删除。旧B01/B02及ab18来源/原分支保持终态；无App消息。[完整结果和生命周期边界](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)。 |
