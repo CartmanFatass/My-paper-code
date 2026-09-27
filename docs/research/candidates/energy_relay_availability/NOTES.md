@@ -982,3 +982,173 @@ claims/manifests remain for status and duplicate prevention. No unused owned
 source, scratch, snapshot, active observer, cleanup blocker or selected follow-up
 remains. Shared research standing is archived for this ended investment while
 preserving the question, lead and bounded unresolved explanations.
+
+## 2026-09-27 — B03 prospective target-energy allocation (L0)
+
+### Question, evidence and decision value
+
+Under the same legal pooled observations, target-generation rule and clock30,
+does one target-related energy allocation rule improve H_local's complete S4
+service, native J and energy-risk outcomes relative to the original distance /
+300 m hysteresis assignment? This is a fixed-policy, zero-fit comparison. It
+tests one ordinary planning choice; it does not test a learned policy or explain
+the separate S2 learning gap.
+
+The current published [shared understanding](../../RESEARCH.md#研究背景与共享认识),
+refreshed at main `96e6a8422`, separates legal-control package differences from
+an attainable upper bound, and requires full native outcomes beside planning
+proxies. The [current plan](../../RESEARCH.md#current-research-plan) and the
+[independent review and Root adoption](../../archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)
+select this exact B03 question and exposure. B01 retained a wide fault-regime
+interval and a substantial H_central−H_local package gap; B02 removed observed
+replanning lag (14.38→0) but did not establish QoS/J improvement and had 14
+positive versus 18 negative QoS worlds. Those studies retain their scope and
+adverse worlds. The new observation changes only the allocation cost: whether
+legal battery plus an explicit target→service→station energy estimate adds
+useful information to the ordinary planner. Current return margin alone cannot
+answer that question because it describes return from the current position.
+
+The earlier independent ResearchCritic review already recommended this exact
+comparison, its limits and its cost. Root accepted it at `2905e4f9e`; the current
+plan still matches that decision. Its evidence and premises have not changed in a
+way that calls for another scientific-review or Pro round. Engineering review
+remains separately required for the new assignment implementation.
+
+### Fixed arms, energy rule and conditions
+
+- `distance_hysteresis`: frozen B02 `clock30` H_local assignment, using the same
+  legal pooled user/BS/station observations, H1 target-generation code, 30-step
+  clock and original Euclidean-distance / 300 m continuation hysteresis.
+- `energy_fraction`: the same planner, target generator, legal information,
+  available-UAV mask, movement actions, production shield and 30-step clock. The
+  only decision change is the cost matrix used by the existing target assignment
+  (including its existing station-1 search-ring fallback). At any identical
+  decision observation, the ordered relay/service/search targets are unchanged.
+  Subsequent target sets may naturally differ when the closed-loop states differ.
+- For each available UAV `i` and generated target `j`, decode legal current xyz,
+  battery fraction and valid station xyz. Target xyz uses H1's unchanged 100 m
+  command altitude. Use the S4 propulsion function
+  `P(vxy,vz) = P0*(1+3*vxy^2/Utip^2) + Pi*sqrt(max(0,sqrt(1+vxy^4/(4*v0^4))-vxy^2/(2*v0^2))) + k3*vxy^3 + 15*abs(vz)`
+  with the native constants `P0=79.86 W`, `Pi=88.63 W`, `Utip=120 m/s`,
+  `v0=4.03 m/s`, `k3=0.5*0.6*1.225*0.05*0.503`, and one-second steps.
+  Predict nominal outbound energy using H1's command law in one-second steps:
+  each step uses `vxy=min(remaining_xy,30)` and
+  `vz=sign(dz)*min(remaining_z,5)`, subtracts those distances, and sums
+  `P(vxy,vz)/3600 Wh` until both components reach zero. A dimension that has
+  already reached its target contributes zero speed while the other continues.
+  Add one full
+  clock-period service load, `Eservice=30*P(0,0)/3600 Wh`, assuming 30 seconds
+  of level hover at the target after arrival. Estimate target→station energy for
+  each legally valid known station `s` by the native return-margin convention:
+  `Ereturn_s=(distance_3d(target,s)/3)*P(3,0)/3600 Wh`; use the least such
+  estimate. This reflects a 3 m/s limp-home estimate, not a guaranteed path.
+- Let `Mij=Eout+Eservice+min_s(Ereturn_s)`. Let `Bi=max(0,160*battery_fraction_i
+  - 0.10*160) Wh`, using the fixed S4 capacity and reserve. Minimize
+  `Mij/max(Bi,1e-6)` over the same one-to-one assignment. Preserve the former
+  hysteresis scale by subtracting the continuation bonus
+  `E300/max(Bi,1e-6)`, where `E300=10*P(30,0)/3600 Wh`, from the cost of
+  the nearest generated target matching that UAV's previous target. Keep the
+  existing solver and tie behavior. Record each assigned mission estimate,
+  budget, predicted reserve slack, chosen station and cost; do not apply a hard
+  feasibility filter.
+- This is one frozen heuristic, not a future-energy guarantee: it assumes one
+  full 30-second hover after reaching the target, fixed H1 travel speeds, the
+  native simplified return estimate, and a reachable station without queueing.
+  It ignores changing demand, intervening replans, shield/guard changes to the
+  path and station competition. The production shield and charging contracts
+  remain untouched. No future or hidden user positions enter the controller.
+
+Both arms use native S4 with eight fixed slots, 30 users, native fault
+probability/duration/minimum-active contract, identical target generation,
+clock30, production shield and charger rules. Do not drop or replace any target,
+change the fault policy, return threshold, information rights, assignment solver,
+replan period or mobility. Fresh predeclared development worlds are seeds
+`970001–970032`, shared across both arms: 32 pairs, 64 full H3000 episodes,
+192,000 planned team transitions, 0 fits and 0 optimizer updates. These are not
+confirmation worlds. Pairing is by the same initialized world seed; before
+claiming matched stochastic paths, compare initial-state hashes, per-step legal
+user-xy traces, native failure-timer traces and the environment RNG-state stream.
+Report exact match counts and digests. UAV paths may differ as a treatment result;
+do not call them common trajectories. If exogenous traces diverge, preserve the
+initial-world pairing but state that the later random streams were not identical.
+
+### Readings and outcome branches
+
+For every world retain native J, QoS, throughput, all native reward/risk
+components, raw/capped return cost, minimum battery, return-margin distribution,
+low-battery/cutoff/depletion counts, charging, waiting, guard and shield exposure,
+episode length/terminal type, complete raw traces and per-plan assignment
+diagnostics. Summarize both arm distributions and all 32 seed-paired differences
+with means, SDs, SEs and approximate t31 95% intervals for complete J, QoS and
+the recorded risk measures. Keep every positive and adverse world. Predicted
+energy fraction/slack and assignment changes are mechanism diagnostics; their
+improvement alone is not a native-use result. No equivalence or safety claim is
+planned.
+
+If QoS and native J improve together without a material deterioration in
+return-cost, low-battery, cutoff/depletion or adverse-world outcomes, the rule
+may be retained as a conditional H_local/S4 ordinary-planning improvement. If
+risk improves while service/J worsens, report a cost trade. If predicted reserve
+slack improves without complete native improvement, the target-energy model did
+not establish use for this rule. If effects are small, mixed or imprecise, say
+that without claiming equivalence. In every branch, stop this exact rule after
+the declared comparison; do not auto-sweep coefficients, remove hard worlds or
+raise fault intensity. The result cannot directly explain S2 learning behavior.
+
+### Cost and engineering scope (L0)
+
+Preferred node `wsl_4070`, four spawned CPU workers × one numeric thread each,
+subject to fresh actual-node admission. Plan for 30–60 minutes of native
+execution; B01/B02 rates inform this estimate but do not guarantee it. Record
+actual acceptance-to-exit, runner wall/CPU, per-worker wall/CPU/RSS and output
+bytes; implementation, tests, review, publication, contention and readback are
+additional actual costs.
+
+Deliverables, all direction-owned: recover the pinned B02 baseline adapter and
+its focused regression inputs as needed; add a B03 energy-cost/controller
+adapter, immutable 64-job runner, paired readout, admission-guarded entrypoint,
+and focused tests under the matching candidate/test paths. The runner records
+source identity, effective S4 configuration, both native arms, all planned and
+completed jobs, full paired diagnostics and one compressed raw trace per world.
+Do not change shared environment, H1, shield, evaluator or other direction code.
+
+Focused checks cover the exact propulsion arithmetic against the S4 native
+function, target→station selection and battery normalization, energy hysteresis,
+unchanged H1 target generation and 30-step clock, no RNG use by the controller,
+paired reset/user/fault/RNG fingerprints, immutable seeds and output paths,
+missing-admission refusal before output creation, and complete adverse-inclusive
+paired summaries. Use pytest-owned scratch and nonpanel engineering seeds; no
+test evaluates a declared development world. Independent Engineering Reviewer
+will inspect cost units, legal-information boundaries, assignment semantics,
+RNG/path pairing and failure/partial-output handling before DM acceptance and
+publication.
+
+### Engineering implementation and prelaunch review (2026-09-27)
+
+Restored the B02 clock30 distance baseline adapter and its focused regression inputs from
+the pinned B02 source. Added the B03 legal energy-cost adapter, immutable 64-cell runner,
+per-world paired readout, and runner-side admission entrypoint under this direction's
+candidate directory. Each assigned target record retains the modeled outbound, 30-second
+hover and return Wh, usable battery above reserve, predicted slack, chosen legal station,
+raw cost fraction and post-hysteresis assignment cost. Compressed raw output holds one
+trace per completed world; failed worlds retain the partial observer and decision records
+when available.
+
+The configured Linux scientific Python ran
+`tests/experiments/candidates/energy_relay_availability/test_b03.py` together with the
+restored `test_b02.py`: **12 passed** in 8.23 s on the final focused run. The engineering environments used only
+nonpanel seeds 42 and 43; the B03 runner path exercised two five-step smoke episodes at
+seed 43. Checks cover native propulsion equality, legal station selection, budget
+normalization, unchanged target generation and clock30, no environment-RNG consumption by
+the assignment call, identical reset/user/failure/RNG fingerprints for the short paired
+world, admission refusal before output creation, and complete adverse-inclusive synthetic
+paired summaries. No declared B03 development seed or H3000 study episode was run during
+engineering checks.
+
+The independent Engineering Reviewer found one P2 in the first readout: arm-level panels
+omitted SEs and t95 intervals. Added per-arm SE, df and Student-t 95% intervals, including
+nullable uncertainty when fewer than two values are available; the Reviewer confirmed that
+this resolved the finding and reported no remaining material issue in the assigned
+engineering surfaces. Added a direct check that the launcher binds `--out` to the exact
+tag path. Full H3000 behavior and the admitted four-worker execution remain unobserved. No
+B03 launcher operation has been submitted.
