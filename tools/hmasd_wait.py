@@ -268,16 +268,21 @@ def daemon(folder):
                             event(state, key, kind, {'job_id': job_id, 'status': status, 'facts': body})
                     active = [key for key, value in state['jobs'].items() if value['status'] == 'running']
                     remaining = state['deadline'] - now
-                    if not stopped and active and remaining <= 0 and not futures:
+                    if not stopped and active and remaining <= 0:
                         # If another meaningful event is already pending, it also covers this checkpoint.
                         if not pending(state):
                             event(state, f'checkpoint:{generation}', 'CHECKPOINT', {'generation': generation, 'jobs': active})
-                    if not stopped and remaining > 1:
+                    if not stopped:
                         for job_id in active:
                             job = state['jobs'][job_id]
                             if job_id not in futures and job['due'] <= now:
-                                futures[job_id] = pool.submit(probe, job['spec'], remaining, cancellation)
-                    finish = not futures and (stopped or not active or remaining <= 0)
+                                # A checkpoint bounds notification, not observation. After it,
+                                # each probe still gets its own bounded timeout budget.
+                                budget = remaining if remaining > 1 else (
+                                    WINDOW if job['spec']['protocol'] == 'pro'
+                                    else job['spec'].get('timeout', 20))
+                                futures[job_id] = pool.submit(probe, job['spec'], budget, cancellation)
+                    finish = not futures and (stopped or not active)
                 submit(folder)
                 if finish:
                     # Hold state lock through the decision; rearm starts a replacement after lock release.
@@ -363,6 +368,8 @@ def rearm(folder, generation, wake_id, event_ids, window, resume_jobs=(), binary
         wake = state.get('wake')
         if wake_id != (wake or {}).get('id'):
             raise ValueError('wake identity does not match')
+        if wake and 'exposed_ids' not in wake:
+            raise ValueError('events must be returned by drain before rearm')
         if set(event_ids) - set((wake or {}).get('exposed_ids', [])):
             raise ValueError('consume only events returned by drain for this wake')
         if wake and not set((wake or {}).get('exposed_ids', [])) <= set(event_ids):

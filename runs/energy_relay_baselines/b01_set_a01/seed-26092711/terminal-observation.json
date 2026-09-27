@@ -1,0 +1,185 @@
+{
+  "observed_at": "2026-09-27T10:05:26.674603+00:00",
+  "native_status": {
+    "admission": {
+      "claim_state": "accepted",
+      "state": "accepted"
+    },
+    "artifacts": {
+      "stderr": {
+        "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/stderr.log",
+        "state": "present"
+      },
+      "stdout": {
+        "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/stdout.log",
+        "state": "present"
+      },
+      "summary": {
+        "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/summary.json",
+        "state": "present"
+      }
+    },
+    "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/983cf54937c5d5f9eaa4fcdd8c159ec2367fba8da58fa039db12c5d5786107f9.json",
+    "direction": "energy_relay_baselines",
+    "execution": {
+      "exit_code": 1,
+      "exit_witness": {
+        "exit_code": 1,
+        "finished_at_epoch": 1790496730.4541693,
+        "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/process-exit.json",
+        "state": "valid",
+        "termination": "process_exit"
+      },
+      "runner": {
+        "recorded_identity": {
+          "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+          "kind": "linux_pid_start_ticks",
+          "pid": 750461,
+          "session_id": 750460,
+          "start_ticks": 83415267
+        },
+        "state": "absent"
+      },
+      "state": "exited",
+      "supervisor": {
+        "recorded_identity": {
+          "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+          "kind": "linux_pid_start_ticks",
+          "pid": 750460,
+          "session_id": 750460,
+          "start_ticks": 83415264
+        },
+        "state": "absent"
+      }
+    },
+    "explicit_retry_available": false,
+    "kind": "hmasd_operation_status",
+    "manifest_ref": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/launch-manifest.json",
+    "node": "wsl_4070",
+    "observed_at": "2026-09-27T10:05:26.668554Z",
+    "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/983cf54937c5d5f9eaa4fcdd8c159ec2367fba8da58fa039db12c5d5786107f9.json",
+    "output_root": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711",
+    "record_consistency": {
+      "mismatches": [],
+      "state": "consistent"
+    },
+    "schema_version": 1,
+    "sha": "8137cb9111746c425ee4161645f12d1e3facb533",
+    "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291"
+  },
+  "summary": {
+    "status": "INCOMPLETE",
+    "failure": {
+      "type": "SystemError",
+      "message": "Objects/listobject.c:2529: bad argument to internal function"
+    },
+    "counts": {
+      "transitions": 432000,
+      "rollouts": 72,
+      "native_episodes": 144,
+      "checkpoints": 3
+    },
+    "wall_seconds": 14092.577434608014,
+    "cpu_user_seconds": 13779.447573000001,
+    "cpu_system_seconds": 739.1292259999999,
+    "peak_rss_kib": 2869748
+  },
+  "checkpoint_verification": [
+    {
+      "checkpoint": "c00",
+      "transitions": 0,
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/checkpoints/c00/agent.pt",
+      "bytes": 23407139,
+      "expected_sha256": "4f9ef23d21e7b9f1b69ed93f3ae1015825cad06ffa2f89fdbf4150de1a0997fe",
+      "actual_sha256": "4f9ef23d21e7b9f1b69ed93f3ae1015825cad06ffa2f89fdbf4150de1a0997fe",
+      "matches": true
+    },
+    {
+      "checkpoint": "c01",
+      "transitions": 204000,
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/checkpoints/c01/agent.pt",
+      "bytes": 38832967,
+      "expected_sha256": "a88ff00544183dc61c6438e495c4971c73085aa3e462a1ddc2448e684a65ed09",
+      "actual_sha256": "a88ff00544183dc61c6438e495c4971c73085aa3e462a1ddc2448e684a65ed09",
+      "matches": true
+    },
+    {
+      "checkpoint": "c02",
+      "transitions": 402000,
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/checkpoints/c02/agent.pt",
+      "bytes": 38832967,
+      "expected_sha256": "c26e3049b89bd80df6bd5e6c9c19cdd437cf38b9f3cd46ecee84f186505e751d",
+      "actual_sha256": "c26e3049b89bd80df6bd5e6c9c19cdd437cf38b9f3cd46ecee84f186505e751d",
+      "matches": true
+    }
+  ],
+  "progress_records": 76,
+  "last_progress": {
+    "event": {
+      "event": "training_exit",
+      "status": "INCOMPLETE"
+    },
+    "counts": {
+      "transitions": 432000,
+      "rollouts": 72,
+      "native_episodes": 144,
+      "checkpoints": 3
+    }
+  },
+  "compact_artifacts": {
+    "summary.json": {
+      "sha256": "861e9fc8c7f944ff8976b6d3a41daf9662f1236450e330dcf4bf28ecdf0c8e07",
+      "bytes": 191456
+    },
+    "progress.jsonl": {
+      "sha256": "278d3f26e9555fa74670a0e787b747acce9358151ab0abb953bbda7bb7e80975",
+      "bytes": 198729
+    },
+    "process-exit.json": {
+      "sha256": "d89c734055340d70744f48a239a0916440508f0b3f50c4618bde37c44d8eb5c8",
+      "bytes": 550
+    },
+    "stderr.log": {
+      "sha256": "1ee34785d698035c689e8f1f0921bf9ecb219b18928703d08f7c159d86685abf",
+      "bytes": 2749
+    }
+  },
+  "process_exit": {
+    "exit_code": 1,
+    "finished_at_epoch": 1790496730.4541693,
+    "pid": 750461,
+    "process_identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 750461,
+      "session_id": 750460,
+      "start_ticks": 83415267
+    },
+    "schema_version": 1,
+    "status": "exited",
+    "supervisor_identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 750460,
+      "session_id": 750460,
+      "start_ticks": 83415264
+    },
+    "termination": "process_exit"
+  },
+  "stderr": "Traceback (most recent call last):\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291/experiments/candidates/energy_relay_baselines/b01/run.py\", line 91, in <module>\n    raise SystemExit(main())\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291/experiments/candidates/energy_relay_baselines/b01/run.py\", line 69, in main\n    run_training(out=out, launch_sha=args.launch_sha, spec=spec,\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291/experiments/candidates/energy_relay_baselines/b01/training.py\", line 137, in run_training\n    result = collect_and_train(agent, config, spec, feedback=True,\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291/experiments/candidates/energy_relay_benchmark/b02/training.py\", line 145, in collect_and_train\n    obs, reward, terminated, truncated, info = env.step(submitted)\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291/envs/pettingzoo/env_adapter.py\", line 224, in step\n    observations_dict, rewards_dict, terminations_dict, truncations_dict, infos_dict = self.env.step(actions_dict)\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291/envs/pettingzoo/relay/energy_aware.py\", line 640, in step\n    observations = {agent: self._get_observation(agent) for agent in self.agents}\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291/envs/pettingzoo/relay/energy_aware.py\", line 640, in <dictcomp>\n    observations = {agent: self._get_observation(agent) for agent in self.agents}\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291/envs/pettingzoo/relay/energy_aware.py\", line 2216, in _get_observation\n    observation = super()._get_observation(agent)\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291/envs/pettingzoo/relay/routed_core.py\", line 3945, in _get_observation\n    return self._get_observation_cached_body(agent)\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291/envs/pettingzoo/relay/routed_core.py\", line 4055, in _get_observation_cached_body\n    normalized_sinr = np.clip((sinr_db + 10) / 50, 0, 1)\n  File \"/home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/core/fromnumeric.py\", line 2169, in clip\n    return _wrapfunc(a, 'clip', a_min, a_max, out=out, **kwargs)\n  File \"/home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/core/fromnumeric.py\", line 56, in _wrapfunc\n    return _wrapit(obj, method, *args, **kwds)\nSystemError: Objects/listobject.c:2529: bad argument to internal function\n",
+  "observer_at_manual_collection": {
+    "generation": 8,
+    "wake": {
+      "id": "ff6cda08-01b7-4dad-b947-eaf53479826e",
+      "status": "delivery_unknown",
+      "created": 1790494620.078712,
+      "error_type": "TimeoutExpired",
+      "exposed_ids": [
+        "c1970404404e0aea8733a816"
+      ]
+    },
+    "stopped": true,
+    "daemon_seen": 1790494640.3896906
+  },
+  "disposition": "Incomplete technical failure; no endpoint and no scientific acceptance. No worker restart, new fit, evaluation or cross-task message from this status check."
+}

@@ -222,18 +222,225 @@ def test_unknown_handle_retries_are_bounded_then_report_blocker(setup, monkeypat
     assert seen['jobs']['one']['status'] == 'blocked'
 
 
-def test_expired_checkpoint_does_not_execute_probe_and_rearm_preserves_job(setup, monkeypatch):
-    folder, _binary, _calls, job = setup
+@pytest.mark.parametrize('delivery', ['queued', 'delivery_unknown', 'attempting'])
+@pytest.mark.parametrize('code,terminal', [(0, 'ready'), (7, 'failed')])
+def test_late_native_exit_survives_pending_checkpoint_wake(setup, monkeypatch, delivery, code, terminal):
+    folder, _binary, calls, job = setup
     with wait.transaction(folder) as state:
         state['deadline'] = 0
-    monkeypatch.setattr(wait, 'probe', lambda *_: pytest.fail('expired window ran probe'))
+        checkpoint = wait.event(state, f'checkpoint:{state["generation"]}', 'CHECKPOINT', {})
+    wait.submit(folder)
+    with wait.transaction(folder) as state:
+        state['wake']['status'] = delivery
+    budgets = []
+    def late_probe(spec, remaining, cancel):
+        budgets.append(remaining)
+        return terminal, launch_body(code)
+    monkeypatch.setattr(wait, 'probe', late_probe)
     wait.daemon(folder)
     seen = wait.drain(folder)
-    assert [e['kind'] for e in seen['events']] == ['CHECKPOINT']
+    assert [e['kind'] for e in seen['events']] == ['CHECKPOINT', 'READY' if code == 0 else 'BLOCKED']
+    assert seen['events'][0]['id'] == checkpoint
+    assert seen['jobs']['one']['status'] == terminal
+    assert seen['events'][1]['evidence']['facts']['execution']['exit_code'] == code
+    assert budgets == [job.get('timeout', 20)]
+    assert seen['delivery']['status'] == delivery
+    assert calls.read_text().splitlines() == ['queued']
     wait.rearm(folder, seen['generation'], seen['wake_id'], [e['id'] for e in seen['events']], 1500)
+    assert wait.drain(folder)['events'] == []
     with wait.transaction(folder) as state:
-        assert 1470 < state['deadline']-time.time() <= 1475
+        assert state['jobs']['one']['status'] == terminal
         assert state['jobs']['one']['spec'] == job
+
+
+def test_late_native_exit_after_checkpoint_ack_gets_new_wake(setup, monkeypatch):
+    import threading
+    folder, _binary, calls, _job = setup
+    started, release = threading.Event(), threading.Event()
+    with wait.transaction(folder) as state:
+        state['deadline'] = 0
+    def late_probe(spec, remaining, cancel):
+        started.set()
+        assert release.wait(5)
+        return 'failed', launch_body(7)
+    monkeypatch.setattr(wait, 'probe', late_probe)
+    thread = threading.Thread(target=wait.daemon, args=(folder,))
+    thread.start()
+    try:
+        assert started.wait(3)
+        deadline = time.monotonic() + 3
+        while time.monotonic() < deadline:
+            with wait.transaction(folder) as state:
+                if (state.get('wake') or {}).get('status') == 'queued':
+                    break
+            time.sleep(.01)
+        else:
+            pytest.fail('checkpoint wake was not queued')
+        seen = wait.drain(folder)
+        assert [e['kind'] for e in seen['events']] == ['CHECKPOINT']
+        wait.rearm(folder, seen['generation'], seen['wake_id'], [e['id'] for e in seen['events']], 1500)
+        release.set()
+        thread.join(timeout=5)
+        assert not thread.is_alive()
+        late = wait.drain(folder)
+        assert [e['kind'] for e in late['events']] == ['BLOCKED']
+        assert late['events'][0]['evidence']['facts']['execution']['exit_code'] == 7
+        assert late['wake_id'] != seen['wake_id']
+        assert calls.read_text().splitlines() == ['queued', 'queued']
+    finally:
+        release.set()
+        with wait.transaction(folder) as state:
+            state['stopped'] = True
+        thread.join(timeout=5)
+
+
+def test_native_checkpoint_wakes_while_probe_is_outstanding_and_retains_late_exit(setup, monkeypatch):
+    import threading
+    folder, _binary, calls, _job = setup
+    started, release = threading.Event(), threading.Event()
+    with wait.transaction(folder) as state:
+        state['deadline'] = time.time() + 10
+    def slow_probe(spec, remaining, cancel):
+        started.set()
+        assert release.wait(5)
+        return 'failed', launch_body(7)
+    monkeypatch.setattr(wait, 'probe', slow_probe)
+    thread = threading.Thread(target=wait.daemon, args=(folder,))
+    thread.start()
+    try:
+        assert started.wait(3)
+        with wait.transaction(folder) as state:
+            state['deadline'] = time.time() + .2
+        deadline = time.monotonic() + 3
+        while time.monotonic() < deadline:
+            with wait.transaction(folder) as state:
+                checkpoint = [event for event in wait.pending(state)
+                              if event['kind'] == 'CHECKPOINT']
+                wake = state.get('wake')
+                if checkpoint and (wake or {}).get('status') == 'queued':
+                    assert state['jobs']['one']['status'] == 'running'
+                    checkpoint_id, wake_id = checkpoint[0]['id'], wake['id']
+                    break
+            time.sleep(.01)
+        else:
+            pytest.fail('checkpoint was not queued while the probe remained outstanding')
+        release.set()
+        thread.join(timeout=5)
+        assert not thread.is_alive()
+        seen = wait.drain(folder)
+        assert [event['kind'] for event in seen['events']] == ['CHECKPOINT', 'BLOCKED']
+        assert seen['events'][0]['id'] == checkpoint_id
+        assert seen['wake_id'] == wake_id
+        assert seen['events'][1]['evidence']['facts']['execution']['exit_code'] == 7
+        assert calls.read_text().splitlines() == ['queued']
+        wait.rearm(folder, seen['generation'], wake_id,
+                   [event['id'] for event in seen['events']], 1500)
+        assert wait.drain(folder)['jobs']['one']['status'] == 'failed'
+    finally:
+        release.set()
+        with wait.transaction(folder) as state:
+            state['stopped'] = True
+        thread.join(timeout=5)
+
+
+def test_expired_pro_probe_budget_covers_virtual_startup_and_four_samples(setup, tmp_path):
+    folder, _binary, calls, _job = setup
+    answer = tmp_path / 'answer.txt'
+    answer.write_text('test answer')
+    script = tmp_path / 'fake_jev_wait.py'
+    script.write_text('''import argparse, json
+parser = argparse.ArgumentParser()
+parser.add_argument('--timeout', type=float, required=True)
+parser.add_argument('--answer-file', required=True)
+args = parser.parse_args()
+startup = 23.0
+samples = [startup + 3.0 * index for index in range(1, 5)]
+state = 'COMPLETE' if args.timeout >= samples[-1] else 'ERROR'
+print(json.dumps({'state': state, 'answer_file': args.answer_file,
+                  'virtual_startup_seconds': startup, 'virtual_sample_seconds': samples,
+                  'received_timeout': args.timeout}))
+''')
+    with wait.transaction(folder) as state:
+        state['deadline'] = 0
+        state['jobs']['one']['spec'] = {
+            'id': 'one', 'protocol': 'pro',
+            'argv': [sys.executable, str(script), '--timeout', '{window_seconds}',
+                     '--answer-file', str(answer)],
+            'cwd': str(tmp_path), 'interval': 1,
+        }
+    wait.daemon(folder)
+    seen = wait.drain(folder)
+    assert [event['kind'] for event in seen['events']] == ['CHECKPOINT', 'READY']
+    assert seen['jobs']['one']['status'] == 'collected'
+    facts = seen['events'][1]['evidence']['facts']
+    assert facts['virtual_startup_seconds'] > 20
+    assert facts['virtual_sample_seconds'] == [26.0, 29.0, 32.0, 35.0]
+    assert facts['received_timeout'] >= facts['virtual_sample_seconds'][-1]
+    assert calls.read_text().splitlines() == ['queued']
+
+
+def test_expired_native_checkpoint_keeps_polling_until_terminal(setup, monkeypatch):
+    folder, _binary, calls, _job = setup
+    with wait.transaction(folder) as state:
+        state['deadline'] = 0
+    observations = []
+    def fake_probe(spec, remaining, cancel):
+        observations.append(remaining)
+        if len(observations) == 1:
+            return 'running', {'execution': {'state': 'running'}}
+        return 'failed', launch_body(7)
+    monkeypatch.setattr(wait, 'probe', fake_probe)
+    wait.daemon(folder)
+    seen = wait.drain(folder)
+    assert len(observations) == 2 and all(value > 0 for value in observations)
+    assert [e['kind'] for e in seen['events']] == ['CHECKPOINT', 'BLOCKED']
+    assert seen['jobs']['one']['status'] == 'failed'
+    assert calls.read_text().splitlines() == ['queued']
+
+
+def test_stop_cancels_native_probe_after_checkpoint_without_terminal_event(setup, monkeypatch):
+    import threading
+    folder, _binary, _calls, _job = setup
+    started = threading.Event()
+    with wait.transaction(folder) as state:
+        state['deadline'] = 0
+    def fake_probe(spec, remaining, cancel):
+        started.set()
+        assert cancel.wait(5)
+        return 'unknown', {'reason': 'observation cancelled; work unchanged'}
+    monkeypatch.setattr(wait, 'probe', fake_probe)
+    thread = threading.Thread(target=wait.daemon, args=(folder,))
+    thread.start()
+    try:
+        assert started.wait(3)
+        with wait.transaction(folder) as state:
+            state['stopped'] = True
+        thread.join(timeout=5)
+        assert not thread.is_alive()
+        seen = wait.drain(folder)
+        assert seen['jobs']['one']['status'] == 'running'
+        assert all(e['kind'] == 'CHECKPOINT' for e in seen['events'])
+    finally:
+        with wait.transaction(folder) as state:
+            state['stopped'] = True
+        thread.join(timeout=5)
+
+
+@pytest.mark.parametrize('delivery', ['queued', 'delivery_unknown', 'attempting'])
+def test_native_empty_ack_without_drain_preserves_wake(setup, delivery):
+    folder, _binary, calls, _job = setup
+    with wait.transaction(folder) as state:
+        wait.event(state, 'unread', 'READY', {})
+    wait.submit(folder)
+    with wait.transaction(folder) as state:
+        state['wake']['status'] = delivery
+        generation, wake_id = state['generation'], state['wake']['id']
+    with pytest.raises(ValueError, match='returned by drain'):
+        wait.rearm(folder, generation, wake_id, [], 1500)
+    wait.submit(folder)
+    assert calls.read_text().splitlines() == ['queued']
+    seen = wait.drain(folder)
+    wait.rearm(folder, generation, wake_id, [e['id'] for e in seen['events']], 1500)
 
 
 def test_stopped_watch_has_no_notifications_and_foreign_session_refused(setup, monkeypatch):

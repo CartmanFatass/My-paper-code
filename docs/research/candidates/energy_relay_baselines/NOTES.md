@@ -432,3 +432,199 @@ observer job with `--resume-jobs`, producing generation 2 and another 1500-secon
 Its operation reference and probe argv are unchanged; no worker, fit, checkpoint or submission
 was restarted. Future runs in this fixed batch will retain their own output directory in the
 node sparse selection before publishing compact records. No stable control code was edited.
+
+## 2026-09-27 — diagnose the first fit's technical failure and prepare continuation
+
+Owner requested diagnosis and preparation for later continuation. The same accepted operation
+has a valid exit witness (exit 1, 2026-09-27 08:12:10 UTC). Its final summary and progress agree
+on 72 completed rollouts, 432,000 transitions and 144 native episodes; additional partial-rollout
+work is unmeasured. Runner wall was 14,092.577 s. The failure is `SystemError:
+Objects/listobject.c:2529: bad argument to internal function`, reached while constructing an
+environment observation through NumPy `clip`. This traceback identifies the failure site, not
+its root cause. c00/c01/c02 checkpoint bytes match their recorded hashes; c02 is at 402,000
+transitions. The compact [terminal observation](../../../../runs/energy_relay_baselines/b01_set_a01/seed-26092711/terminal-observation.json)
+retains native identities, exit, traceback and verification. Bulk outputs stay on the original
+node. No endpoint exists, so this is incomplete technical evidence, not a SET result.
+
+The observer's 07:37 UTC checkpoint notification timed out in `codex queue`; its persisted
+delivery is unknown. The old controller then stopped probing at its window boundary. Manual
+reconciliation found the later native exit and stopped the observer. The failed worker and its
+submission will not be restarted by observation recovery.
+
+Preparation scope: reconstruct the failing input path and runtime/checkpoint limitations;
+perform bounded technical checks without new fits or scored evaluation; independently review
+any executable repair; and write an explicit next-attempt decision with the original failure's
+cost preserved. Do not treat a checkpoint restart without full environment/RNG state as a fresh
+replicate or exact continuation. The second declared seed and all evaluations remain unlaunched.
+This preparation request does not itself start a replacement learning run.
+
+The bounded observer repair covers `tools/hmasd_wait.py`, `tools/codex_wait.py`, their existing
+skill tests, and the standalone usage note: keep read-only probes alive after a checkpoint while
+its notification awaits acknowledgment, including an uncertain delivery; retain later terminal
+facts without blindly resending queue or reviving terminal jobs. Preserve one wake, generation,
+drain/ack ownership and explicit stop/cancellation. Validate with fake queue/probe regressions
+and independent engineering review. No learner, environment, frozen source or other direction's
+outputs are changed merely to hide this exception. A real current-session queue check, if used,
+will be submitted once and reconciled under its own diagnostic identity.
+
+### L0: preserve the next exception's local evidence without changing learning
+
+The bounded source reconstruction found a scalar SINR path and no demonstrated bounds/lifetime
+defect in the inspected native radio routine. Actual node metadata is Python 3.10.21 (custom
+Clang build) and NumPy 1.26.3; one ordinary scalar clip control passed. The failed scalar value
+and frame locals were not retained, and an upstream release's C line number does not by itself
+identify the custom build's failing function. The shared runtime diagnosis in RESEARCH also
+contains earlier failures with different immediate paths and no identified common cause.
+
+Add failure-only forensic capture under `experiments/candidates/energy_relay_baselines/b01/`
+and matching tests: preserve traceback locations and an explicit small allowlist of scalar
+SINR/clip and collector position fields, plus interpreter/library identity, in a compact
+`failure-context.json` bound from the existing summary. Enable Python faulthandler in the
+admitted training entry. Do not dump arbitrary locals, tensors, full environment state or secrets;
+do not call custom repr methods, draw RNG, retry exceptions or alter NumPy/environment/learner
+semantics. Diagnostic-write failure must not replace the original training exception. Tests
+inject a failure through the existing runner and check original re-raise, counts, context,
+RNG preservation and bounded serialization. This increases the next failure's diagnostic value;
+it is not a demonstrated repair of the original SystemError and adds no scientific fit.
+
+### Diagnostic findings and independent continuation decision
+
+Scout `/root/b01_crash_recon` reconstructed the frozen input path and the configured node
+without a fit or scored evaluation. The source produces scalar SINR (including the declared
+`-inf` unavailable-link value); inspected radio-array shape/lifetime checks reveal no demonstrated
+out-of-bounds defect. No failed scalar value/type was saved. The interpreter executable resolves
+to `/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10`, build-ID
+`afb5e1790bd84db7ed2c50d21b86fd33a96784bf`. It has no usable line table. Targeted disassembly finds
+the reported file/line and invalid-argument guard at `PyList_AsTuple` (entry `0x1680b0`, error call
+`0x1680f7`) and another matching site in `PySequence_Tuple` (`0x155dbd`). This narrows the failure
+to a CPython sequence-conversion boundary, without uniquely selecting the native caller or
+establishing why it received an invalid argument. Mapping the custom binary by an upstream
+release's line 2529 alone would be incorrect.
+
+The expected radio extension cache is
+`/tmp/hmasd_uav_cpp_extensions/build_6219ac65a6c895a1/source_1ff1eecb1c4a69ec/`;
+its staged C++ source SHA256 is
+`1ff1eecb1c4a69ec402f4f2a506dca830e140844f8ed9c56f52e2c99c94791dd`, matching the frozen input.
+This is an on-disk correspondence, not proof that the failed process loaded that exact binary.
+A bounded kernel-log check for the matching boot, 07:50–08:20 UTC, found WSL network and dxg
+query messages but no OOM/kill/segfault/Xid match. It neither establishes the root cause nor
+certifies the runtime/hardware as healthy. No interpreter, library, environment or driver was
+replaced. The earlier B08/B18 evidence remains relevant context with an unknown common cause.
+
+Independent ResearchCritic `/root/b01_failure_route_review`, with a separate context, read the
+original-node terminal records, progress and checkpoints before this diagnosis. It confirmed
+432,000 completed transitions and 162,000 recorded steps for each low-level optimizer; partial
+rollout exposure remains unmeasured. Frozen `save_model` retains learner, optimizer, normalization
+and rollout-sampler state, but not collector environments or the global environment/action RNG
+streams. Resuming c02 would discard at least 30,000 completed post-checkpoint transitions and
+add 798,000 transitions from reset streams. It cannot restore the original fresh-run contract.
+
+The reviewer independently aggregated development worlds 955001–955032: the earlier recovered
+SET's c00→c06 QoS rises from .209/.243 to .437/.438 and J from 587/693 to 1276/1281
+(deterministic/sampled). H_local gives .597 QoS and J 1628 despite higher return cost. Sources are
+the [c00 development panels](../../../../runs/energy_relay_benchmark/b02_s1_eval_c00_a01/checkpoint-eval/panels/)
+(recorded source `759927b5e8caa0ba5bd8ba505ab5388985f6a2fa`),
+[c06 development panels](../../../../runs/energy_relay_benchmark/b02_s1_eval_c06_a01/checkpoint-eval/panels/)
+(`c369a6b91651ece4bdfbbedce1be26cd0599baff`) and
+[H_local reference](../../../../runs/energy_relay_benchmark/b01_ref_a02/summary.json)
+(`e1fdbe72f53a1597c34c1d32c89ac6700251dca0`, `reference/Hlocal_e0.00_x0.05`).
+These support a useful ordinary learner plus a remaining native-J gap; they do not identify
+representation, credit assignment or insufficient exposure as the cause. H_local's pooled
+planning information and the recovered fit's lineage remain comparator limitations. The reviewer
+encountered published holdout aggregates in the shared index but opened no sealed raw outputs;
+those aggregates do not inform this decision.
+
+**MATERIAL_DISSENT: no; recommendation adopted.** Retain the question and prepare the untouched
+second seed **26092731** at the unchanged 1.2M recipe. The first endpoint remains missing: do not
+impute zero, assume random missingness, substitute c02, pool nested worlds into extra fits, or
+automatically purchase a replacement/recovery. No training or scored evaluation is launched by
+this preparation. The next complete observation, when execution continues, is that seed's own
+c00/c06 in both modes on the same 32 exposed worlds, CPU FP32 for evaluation. A useful endpoint
+supports retaining that fresh instance; a recurring shortfall adds bounded evidence without
+establishing its mechanism or convergence; a strongly different endpoint makes trajectory
+sensitivity consequential. Another technical failure calls for a specific action based on the
+new forensic evidence, not automatic seed substitution. Extra short stress runs are not selected:
+an uneventful scalar check or short rollout would not resolve this delayed failure.
+
+Cost already incurred is one started fit, 3.915 runner hours, 432,000 recorded transitions and
+unmeasured partial-rollout/support work. The next original fit remains one fit and 1.2M transitions;
+linear projection from this attempt is about 10.9 training hours, with substantial uncertainty.
+Its complete c00/c06 evaluation is 128 episodes, at most 384,000 environment steps and zero
+updates. Historical c00/c06 evaluation summaries record 787.659546 + 1718.187218 seconds =
+0.6961 hours at CPU/8 workers/2 Torch threads; contention and preparation are separate. There is
+no claim that the original two-fresh-endpoint comparison can now be completed without a new
+prospective decision about its missing first cell.
+
+### Observer repair and actual current-session delivery
+
+Both waiters now continue bounded read-only probes while a checkpoint wake awaits handling;
+late terminal evidence is retained under the existing wake, including unknown delivery. An
+expired Pro observation retains a full bounded long-poll budget; outstanding probes cannot
+suppress the checkpoint. Native rearm also requires prior drain. There is no automatic queue
+resend, worker restart or revival of terminal jobs. Implementer checks passed 85 waiter/adapter
+tests; independent Engineering Reviewer `/root/wait_repair_engineering_review` accepted both
+corrected findings (Pro budget and outstanding-probe checkpoint) with no material finding left.
+Tests use fake queue/probes, including virtual Pro startup and four spaced stable samples;
+they are not a live browser test. Synchronous queue submission can still delay stop handling
+by its bounded 20-second timeout.
+
+A single owner-authorized current-session delivery diagnostic used the running App's executable,
+`/mnt/c/Users/fires/.codex/bin/wsl/7d1db4ccd85248a5/codex` (0.158.0-alpha.2.1), with inherited
+`CODEX_HOME=/mnt/c/Users/fires/.codex`. It returned queued, and diagnostic
+`60d4c3cd-d5db-45a7-bdfc-051a9483c03e` was actually received in this session. Receipt is recorded in
+`temp/directions/energy_relay_baselines/wait/queue-diagnostic-20260927.json`; no reply queue was sent.
+PATH's standalone CLI is 0.157.1; this current routing difference does not prove the historical
+timeout's cause. Future observation must select the verified current App executable explicitly
+and refresh that path if the App changes. Neither queued status nor a 25-minute checkpoint
+guarantees a service-side prompt-cache hit. The failed operation's observer remains stopped;
+no rearm of it was performed during preparation.
+
+### Engineering acceptance and prepared source boundary
+
+The failure-only B01 capture is implemented in `b01/diagnostics.py` and bound by SHA256 from
+the summary. It records bounded traceback/allowlisted scalar fields, stored versus partial
+collector counts, runtime versions and already-loaded native-module paths, including Torch
+extensions held only in the loader caches. It does not import/compile another extension or
+change the successful numerical path. The admitted CLI enables faulthandler before candidate
+imports. It cannot recover Python locals after a hard crash, and a storage failure can still
+leave evidence incomplete. The original training exception now remains governing if diagnostic,
+final-summary or progress writes fail; finalization errors still propagate on an otherwise
+successful run.
+
+Engineering Reviewer `/root/wait_repair_engineering_review` identified and rechecked both
+material fixes: loader-cache identity capture, and persistent storage failure masking the
+original exception. No material finding remains. The B01 suite passed 27 checks before the last
+test expansion; the final 10 focused diagnostic cases passed, covering partial collector
+counts, hash binding, bounded capture without custom repr, RNG preservation, cache-only
+module discovery, broad ENOSPC, successful-path write failures and faulthandler order. These
+are engineering fixtures, not additional research fits or scored development evaluations.
+
+Before choosing a new published source, compared the reachable imports against first-fit source
+`8137cb9111746c425ee4161645f12d1e3facb533`. At published main
+`5050c3a8b4b71ff693827f75a7a11a6ee776436e`, the only relevant inherited changes are the B02
+optional Recipe/construct/record hook and the shared learner/buffer's opt-in surrogate mask.
+Independent review confirmed that B01 calls `construct=None` and `record_hook=None`, sets no
+`_shield_surrogate_experiment`, leaves the buffer mask `None`, and uses its own checkpoint writer.
+The default loss, clipping, storage, sampler and checkpoint semantics remain the original path.
+Four focused checks (both samplers, default/unmasked update and RNG, production recipe/seed
+isolation) passed in 6.18 seconds, alongside the published DM2 checkpoint-compatibility evidence.
+CPU checks and code inspection do not establish a historical-SHA or production-CUDA bitwise
+trajectory guarantee. The preparation introduces no environment/reward/horizon/seed change.
+
+The committed source introducing this entry is the source to pin in the saved, unsubmitted
+second-seed request under `temp/directions/energy_relay_baselines/launch/`. A future launch still
+refreshes current direction control, actual node memory/resources and duplicate-claim checks
+through `hmasd_launch`; its accepted manifest supplies the operation reference for observation.
+No acceptance, worker or second-seed scientific output is claimed here. Keep the old observer
+stopped until its stale observation state is reconciled through the supported workflow when
+future work actually requires that state. Do not blindly reapply sparse checkout: the shared
+index records that doing so can remove other completed directions' ignored bulk. Preparation
+does not change the node's sparse selection or another direction's retained artifacts.
+
+The exact old launcher snapshot's reclamation preview was refused because generated
+`envs/native/__pycache__/` and `envs/pettingzoo/__pycache__/` remain. A read-only process-reference
+check also cannot inspect `/proc/660/cwd` under the current account. No deletion or privileged
+retry was performed: snapshot `991be7f5fde844678030c9fab5f89291` remains at its original node path,
+with measured allocated size 795,213,824 bytes; reclaimed space is zero. Required outputs,
+claims and the compact terminal record remain outside that snapshot. This leftover does not
+mean a worker is running or that cleanup succeeded.

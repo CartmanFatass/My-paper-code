@@ -105,18 +105,170 @@ def test_unknown_handle_retries_are_bounded_then_report_blocker(setup, monkeypat
     assert seen['jobs']['one']['status'] == 'blocked'
 
 
-def test_expired_checkpoint_does_not_execute_probe_and_rearm_preserves_job(setup, monkeypatch):
-    folder, _binary, _calls, job = setup
+@pytest.mark.parametrize('delivery', ['queued', 'delivery_unknown', 'attempting'])
+@pytest.mark.parametrize('code,terminal', [(0, 'complete'), (7, 'failed')])
+def test_late_completion_survives_pending_checkpoint_wake(setup, monkeypatch, delivery, code, terminal):
+    folder, _binary, calls, job = setup
     with wait.transaction(folder) as state:
         state['deadline'] = 0
-    monkeypatch.setattr(wait, 'probe', lambda *_: pytest.fail('expired window ran probe'))
+        checkpoint = wait.event(state, f'checkpoint:{state["generation"]}', 'CHECKPOINT', {})
+    wait.submit(folder)
+    with wait.transaction(folder) as state:
+        state['wake']['status'] = delivery
+    budgets = []
+    def late_probe(spec, remaining, cancel):
+        budgets.append(remaining)
+        return terminal, launch_body(code)
+    monkeypatch.setattr(wait, 'probe', late_probe)
     wait.daemon(folder)
     seen = wait.drain(folder)
-    assert [e['kind'] for e in seen['events']] == ['CHECKPOINT']
+    assert [e['kind'] for e in seen['events']] == ['CHECKPOINT', 'COMPLETE' if code == 0 else 'FAILED']
+    assert seen['events'][0]['id'] == checkpoint
+    assert seen['jobs']['one']['status'] == terminal
+    assert seen['events'][1]['evidence']['facts']['exit_code'] == code
+    assert budgets == [job.get('probe_timeout_seconds', 20)]
+    assert seen['delivery']['status'] == delivery
+    assert calls.read_text().splitlines() == ['queued']
     wait.rearm(folder, seen['generation'], seen['wake_id'], [e['id'] for e in seen['events']], 1500)
+    assert wait.drain(folder)['events'] == []
     with wait.transaction(folder) as state:
-        assert 1470 < state['deadline']-time.time() <= 1475
+        assert state['jobs']['one']['status'] == terminal
         assert state['jobs']['one']['spec'] == job
+
+
+def test_late_completion_after_checkpoint_ack_gets_new_wake(setup, monkeypatch):
+    import threading
+    folder, _binary, calls, _job = setup
+    started, release = threading.Event(), threading.Event()
+    with wait.transaction(folder) as state:
+        state['deadline'] = 0
+    def late_probe(spec, remaining, cancel):
+        started.set()
+        assert release.wait(5)
+        return 'complete', launch_body()
+    monkeypatch.setattr(wait, 'probe', late_probe)
+    thread = threading.Thread(target=wait.daemon, args=(folder,))
+    thread.start()
+    try:
+        assert started.wait(3)
+        deadline = time.monotonic() + 3
+        while time.monotonic() < deadline:
+            with wait.transaction(folder) as state:
+                if (state.get('wake') or {}).get('status') == 'queued':
+                    break
+            time.sleep(.01)
+        else:
+            pytest.fail('checkpoint wake was not queued')
+        seen = wait.drain(folder)
+        assert [e['kind'] for e in seen['events']] == ['CHECKPOINT']
+        wait.rearm(folder, seen['generation'], seen['wake_id'], [e['id'] for e in seen['events']], 1500)
+        release.set()
+        thread.join(timeout=5)
+        assert not thread.is_alive()
+        late = wait.drain(folder)
+        assert [e['kind'] for e in late['events']] == ['COMPLETE']
+        assert late['wake_id'] != seen['wake_id']
+        assert calls.read_text().splitlines() == ['queued', 'queued']
+    finally:
+        release.set()
+        with wait.transaction(folder) as state:
+            state['stopped'] = True
+        thread.join(timeout=5)
+
+
+def test_checkpoint_wakes_while_probe_is_outstanding_and_retains_late_completion(setup, monkeypatch):
+    import threading
+    folder, _binary, calls, _job = setup
+    started, release = threading.Event(), threading.Event()
+    with wait.transaction(folder) as state:
+        state['deadline'] = time.time() + 10
+    def slow_probe(spec, remaining, cancel):
+        started.set()
+        assert release.wait(5)
+        return 'complete', launch_body()
+    monkeypatch.setattr(wait, 'probe', slow_probe)
+    thread = threading.Thread(target=wait.daemon, args=(folder,))
+    thread.start()
+    try:
+        assert started.wait(3)
+        with wait.transaction(folder) as state:
+            state['deadline'] = time.time() + .2
+        deadline = time.monotonic() + 3
+        while time.monotonic() < deadline:
+            with wait.transaction(folder) as state:
+                checkpoint = [event for event in wait.pending(state)
+                              if event['kind'] == 'CHECKPOINT']
+                wake = state.get('wake')
+                if checkpoint and (wake or {}).get('status') == 'queued':
+                    assert state['jobs']['one']['status'] == 'running'
+                    checkpoint_id, wake_id = checkpoint[0]['id'], wake['id']
+                    break
+            time.sleep(.01)
+        else:
+            pytest.fail('checkpoint was not queued while the probe remained outstanding')
+        release.set()
+        thread.join(timeout=5)
+        assert not thread.is_alive()
+        seen = wait.drain(folder)
+        assert [event['kind'] for event in seen['events']] == ['CHECKPOINT', 'COMPLETE']
+        assert seen['events'][0]['id'] == checkpoint_id
+        assert seen['wake_id'] == wake_id
+        assert calls.read_text().splitlines() == ['queued']
+        wait.rearm(folder, seen['generation'], wake_id,
+                   [event['id'] for event in seen['events']], 1500)
+        assert wait.drain(folder)['jobs']['one']['status'] == 'complete'
+    finally:
+        release.set()
+        with wait.transaction(folder) as state:
+            state['stopped'] = True
+        thread.join(timeout=5)
+
+
+def test_expired_checkpoint_keeps_polling_until_terminal(setup, monkeypatch):
+    folder, _binary, calls, _job = setup
+    with wait.transaction(folder) as state:
+        state['deadline'] = 0
+    observations = []
+    def fake_probe(spec, remaining, cancel):
+        observations.append(remaining)
+        if len(observations) == 1:
+            return 'running', {'state': 'running'}
+        return 'failed', launch_body(7)
+    monkeypatch.setattr(wait, 'probe', fake_probe)
+    wait.daemon(folder)
+    seen = wait.drain(folder)
+    assert len(observations) == 2 and all(value > 0 for value in observations)
+    assert [e['kind'] for e in seen['events']] == ['CHECKPOINT', 'FAILED']
+    assert seen['jobs']['one']['status'] == 'failed'
+    assert calls.read_text().splitlines() == ['queued']
+
+
+def test_stop_cancels_probe_after_checkpoint_without_terminal_event(setup, monkeypatch):
+    import threading
+    folder, _binary, _calls, _job = setup
+    started = threading.Event()
+    with wait.transaction(folder) as state:
+        state['deadline'] = 0
+    def fake_probe(spec, remaining, cancel):
+        started.set()
+        assert cancel.wait(5)
+        return 'unknown', {'reason': 'observation cancelled; work unchanged'}
+    monkeypatch.setattr(wait, 'probe', fake_probe)
+    thread = threading.Thread(target=wait.daemon, args=(folder,))
+    thread.start()
+    try:
+        assert started.wait(3)
+        with wait.transaction(folder) as state:
+            state['stopped'] = True
+        thread.join(timeout=5)
+        assert not thread.is_alive()
+        seen = wait.drain(folder)
+        assert seen['jobs']['one']['status'] == 'running'
+        assert all(e['kind'] == 'CHECKPOINT' for e in seen['events'])
+    finally:
+        with wait.transaction(folder) as state:
+            state['stopped'] = True
+        thread.join(timeout=5)
 
 
 def test_stopped_watch_has_no_notifications_and_foreign_session_refused(setup, monkeypatch):

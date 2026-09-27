@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import faulthandler
 import sys
 from pathlib import Path
 
@@ -61,6 +62,13 @@ def main(argv=None) -> int:
     admission = require_admission(__file__, direction="energy_relay_baselines")
     if args.launch_sha != admission["sha"]:
         parser.error("--launch-sha must equal the admitted source SHA")
+
+    if args.operation == "train":
+        try:
+            faulthandler.enable(file=sys.stderr, all_threads=True)
+        except (OSError, RuntimeError, ValueError):
+            # Some test hosts provide stderr without a usable file descriptor.
+            pass
 
     from experiments.candidates.energy_relay_baselines.b01.configuration import production_spec
     spec = production_spec(args.seed)

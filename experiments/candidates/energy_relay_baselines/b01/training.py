@@ -109,6 +109,7 @@ def run_training(*, out: Path, launch_sha: str, spec: B02Spec,
         append_progress(out, {"event": "checkpoint", "checkpoint": label,
                               **summary["checkpoints"][label]}, dict(summary["counts"]))
 
+    training_error = None
     try:
         agent, identity = new_agent(config, device=device, log_dir=out / "logs", seed=spec.seed)
         summary["initialization"] = identity
@@ -148,7 +149,16 @@ def run_training(*, out: Path, launch_sha: str, spec: B02Spec,
                        collector_wall=result["wall"])
         return summary
     except Exception as exc:
+        training_error = exc
         summary["failure"] = {"type": type(exc).__name__, "message": str(exc)}
+        try:
+            from .diagnostics import failure_context
+            context_path = out / "failure-context.json"
+            write_summary(context_path, failure_context(exc, summary["counts"]))
+            summary["artifacts"]["failure-context.json"] = sha256_file(context_path)
+        except Exception:
+            # Diagnostic capture is best effort; the original training failure owns the exit.
+            pass
         raise
     finally:
         usage = resource.getrusage(resource.RUSAGE_SELF)
@@ -159,6 +169,10 @@ def run_training(*, out: Path, launch_sha: str, spec: B02Spec,
             cpu_system_seconds=usage.ru_stime - cpu_start.ru_stime,
             peak_rss_kib=int(usage.ru_maxrss), rss_scope="runner process high-water mark",
             seconds_per_transition=(wall / transitions if transitions else None))
-        write_summary(out / "summary.json", summary)
-        append_progress(out, {"event": "training_exit", "status": summary["status"]},
-                        dict(summary["counts"]))
+        try:
+            write_summary(out / "summary.json", summary)
+            append_progress(out, {"event": "training_exit", "status": summary["status"]},
+                            dict(summary["counts"]))
+        except Exception:
+            if training_error is None:
+                raise
