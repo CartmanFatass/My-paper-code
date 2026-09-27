@@ -776,3 +776,28 @@ the earlier 2–4-hour estimate is not reported as actual measured time. Exact-s
 and fresh actual-node admission precede the one selected result execution. A later technical
 failure remains a failed/incomplete attempt with its actual and lower-bound costs, not an
 automatic replacement or a negative utility conclusion.
+
+### B02 native admission and deterministic observation
+
+The exact implementation was published on main at
+`9f72afd2223baccd9ed554b0ef86bcbe5277afb5` before the single native launch request.
+Admission returned **accepted** at 2026-09-27 18:22:51 UTC. The
+[native launch manifest](../../../../runs/uav_cooperative_planning/b02_transit_value_a01/launch-manifest.json)
+is the authoritative operation/source/process/output binding; the
+[actual-node preflight](../../../../runs/uav_cooperative_planning/b02_transit_value_a01/admission-preflight.json)
+and [effective scientific configuration](../../../../runs/uav_cooperative_planning/b02_transit_value_a01/config.json)
+are retained with it. The configured local CPU node passed the fresh physical/effective
+memory-floor checks. The frozen launcher source snapshot remains in use while this operation
+is live; the authoring checkout stays on main.
+
+Same-operation status observed running supervisor and runner identities with consistent
+records, no exit witness, and collection initialized. This is technical acceptance and
+progress only, not successful fitting, complete evaluation or evidence of utility.
+
+`tools/hmasd_wait.py` was armed in this DM's current thread, generation **1**, window **1500 s**,
+job `launch-b02-transit-value-a01`. The first drain observed the existing operation running at
+18:24:39 UTC with zero observation errors; no wake was yet due. Its private request is
+`temp/directions/uav_cooperative_planning/b02_transit_value_a01/wait-request.json`.
+At a checkpoint rearm this same generation/handle through the standard drain/rearm protocol;
+do not launch another worker or change the source/output tag to retry. Completion/error must
+be reconciled against the native exit witness and complete/partial artifacts before reading.
