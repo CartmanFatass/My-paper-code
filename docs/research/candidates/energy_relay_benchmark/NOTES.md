@@ -3138,3 +3138,67 @@ direction's fit running (load average 1.07, 12 GB available), the resumed proces
 (63 of its 100) at ≈ 187 s per rollout since its start; c05 (167) expected ≈ 04:10 UTC, c06 (200)
 ≈ 05:55 UTC. No reply is owed; the inbox report's allocation note is extended with the new
 attribution in the same commit.
+
+### Stage 1, c05 (1,002k transitions, rollout 167) evaluated (`b02_s1_eval_c05_a01`, operation de6e04d7)
+
+Checkpoint written ≈ 04:09 UTC by the resumed fit (record: rollout 167, 1,002,000 transitions,
+optimizer steps 375,750 = 167 × 2,250, continuous; `wall_seconds` 12,313.8 of this process),
+copied to the artifacts directory (agent.pt sha256 `7ebf3586…` equals its record, fingerprint
+`2147d8a5…`), evaluation accepted 04:10:57Z beside the fit (command sha256 `3653bd3c…`, supervisor
+pid 751096, runner 751097, memory preflight 11.5 GiB available), exit 0 at 04:28:01Z, `COMPLETE`
+in 996.3 s, 64 episodes, 0 failed. Diagnostics parity: row values equal the trace recomputation
+except the normal-mode boundary share in 1 (det) / 2 (stoch) of 64 rows, by at most 5.4e-5.
+Reader unchanged since `ae998950e`; readings JSON regenerated (c00–c05, two-run rule).
+
+| 955001–955032 | c04 det / stoch | c05 det | c05 stoch |
+|---|---|---|---|
+| QoS/step | .406 / .404 | **.424** | **.382** |
+| paired vs c00 | +.197 / +.161 | +.215 (SE .022, 30/32) | +.139 (SE .018, 29/32) |
+| curve step vs c04 | +.081 / +.059 | +.019 | −.022 |
+| vs H_central .774 | −.368 / −.370 | −.350 (SE .020, 0/32 above) | −.392 (SE .022, 0/32) |
+| vs H_local .597 | −.191 / −.193 | −.173 (SE .031, 3/32 above) | −.215 (SE .028, 3/32) |
+| vs H_park2 .379 | +.027 / +.025 | +.046 (SE .023, 19/32) | +.003 (SE .028, 18/32) |
+| vs H_spawn .232 | +.174 / +.172 | +.192 (SE .024, 30/32) | +.150 (SE .019, 29/32) |
+| vs N .328 (det) | +.077 / +.075 | +.096 (SE .023, 25/32; conflict flag) | +.053 (SE .026, 21/32; conflict flag) |
+| J (mean) | 1187 / 1180 | 1242 | 1114 |
+| boundary share / altitude-floor share (normal mode) | .406 / .710 ; .221 / .485 | .353 / .434 | .268 / .426 |
+| QoS before first entry / after first input | .274 / .520 ; .271 / .506 | .295 / .512 | .242 / .486 |
+| first service step (mean) | 177 ; 249 | 176 | 194 |
+| F-mode share; return cost; min battery | .157; 0.91; .110 ; .245; 1.65; .107 | .180; 1.23; .108 | .238; 1.38; .107 |
+| zero-service worlds; worlds ≥ .60 | 0; 2 ; 0; 2 | 0; 3 (955006 .639, 955022 .689, 955026 .668) | 2 (955004, 955016); 2 (955001 .610, 955026 .692) |
+
+The modes separate again, now the other way: deterministic evaluation adds +.019 (the reader's
+`still_improving_at_end` stays true, on a step smaller than the .03 threshold), sampled-action
+evaluation loses .022 (best stays c04; `still_improving_at_end` false) and two worlds return to
+zero service under sampled actions. Against the references the deterministic policy is now
+three thresholds above N (+.096, 25/32, with the conflict flag in both modes: return-constraint
+cost and minimum battery worse than N's), one and a half above H_park2 (+.046, SE .023), and
+−.173 below H_local (3 worlds above it); no milestone (mean .18 short of .60; three worlds at or
+above it). Behaviour: the c04 altitude-floor excursion did not persist (.710 → .434 of normal-mode
+UAV-steps under deterministic evaluation; .485 → .426 sampled) while deterministic service still
+rose, so the c04 coincidence between low flight and the gain is not a stable association and is
+not read as the mechanism; the boundary share moved down (.406 → .353) deterministic and up
+(.221 → .268) sampled; F-mode share and return cost rose slightly under deterministic evaluation
+(.157 → .180; 0.91 → 1.23) and fell under sampled actions (.245 → .238; 1.65 → 1.38).
+
+Training signals of the resumed process, same comparability caveat as at c04 (re-seeded world
+streams from rollout 101): training QoS/step by 10-rollout block .313, .299, .293, .323 for
+rollouts 131–170 (flat at ≈ .30 after the rise over 101–140); zero-service lane rollouts 1, 1, 2,
+2 per block (69 of 171 over the whole curve); shield entries ≈ 145–161 per rollout; F-mode share
+.26–.29. Action entropy fell from .684 (131–140) to .476, .284 and .082 per block, and the last
+five rollouts (167–171) read .081, .025, −.013, −.018, −.060 — a differential entropy of the
+squashed Gaussian, which may be negative; first-to-last 1.156 → −.060. Recorded as the proxy for
+Pro's "policy sharpening / premature convergence" row: the entropy fall over rollouts 131–170
+coincides with a flat training QoS and with the sampled-mode evaluation turning down while the
+deterministic-mode evaluation still edges up. Phenomenon; whether the sharpening costs service
+under sampled actions or the two modes are simply reading different policies at low entropy is
+read at c06, not decided here. The once-only hold-out read stays on c06 as declared (fixed
+exposure, frozen final model); c04's higher sampled-mode development score does not move it — no
+selection on development scores.
+
+Fit at the read (04:26 UTC): 171 rollouts, ≈ 173 s per rollout over the curve (170–207 s per
+block in the resumed process, the checkpoint evaluations sharing the CPU), 0 live lanes, runner
+alive. Projection: c06 (rollout 200) ≈ 06:00 UTC; then the development evaluation of c06, the
+once-only hold-out evaluation of c06 (`--worlds 957001-957032 --final`, launch script variant
+prepared and checked against the evaluator's guard: hold-out worlds require `--final`, `--final`
+accepts only 957001–957032, output under `checkpoint-eval/final/`), and the whole-curve read.
