@@ -135,14 +135,14 @@ whose corrections are incorporated. No experiment was run and no scientific obje
 
 ### research_notes/
 
-- `REASONING_FIRST_RESEARCH_METHOD_20260927.md` — owner-requested (2026-09-27) proposal for the
-  research method going forward: innovation first, reasoning before experiments; the seven items an
-  idea must carry in its NOTES declaration before its first fit (contribution sentence, TRIED /
-  RECORDED / NEW label, mechanism chain, simple-model bridge, numeric prediction against the measured
-  seed SD, discriminating observation and retirement rule, cost), the one-falsification retirement
-  discipline, where innovation should come from in this problem, the self-application to
-  `energy_relay_benchmark` (Stage 2-0 tree revised in NOTES b986c279e), peer suggestions for Root's
-  four directions, and a one-sentence constitution amendment for the owner.
+- `REASONING_FIRST_RESEARCH_METHOD_20260927.md` — owner-requested (2026-09-27) research method
+  going forward, v2 synthesised with the Codex Root draft (RESEARCH.md anchor
+  `innovation-method-root-20260927`) after one independent scientific review: innovation claim,
+  closest prior work and strongest simple alternative, discriminating prediction and cost written
+  in the NOTES declaration at question-setting; one applicable independent challenge; then a direct
+  bounded experiment, a targeted revision or no investment. Withdraws v1's universal first-fit
+  gates (2 x seed SD, paper counts, calendar ratio, one-variant cap, code-location category ban),
+  corrects four factual usages, and revises the Stage 2-0 tree (NOTES 5401fb8ad).
 - `UNTIED_K_N_TRADEOFF_LEDGER_20260901.md` — the trade-off ledger for untying the skill duration
   k (K-1 to K-7) and the agent count N (N-1 to N-7) in HMASD-style hierarchical MARL, with the
   repository's tie points, toy numbers, literature labelled DIRECT / PARAPHRASE / CURATOR /
