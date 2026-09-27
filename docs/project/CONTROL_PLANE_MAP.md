@@ -39,7 +39,7 @@ HMASD 生成文件；不自动删除孤儿文件，不检查真实会话是否�
 
 | 工作 | Codex | Claude | 方法／记录归属 |
 | --- | --- | --- | --- |
-| 方向推进 | owner 2026-09-24 明确三个是运行资源并发上限；Root 规划完整问题与后继，DM 对问题连续性负责、每次推进一个结果性研究，并自主修订或转向 | session 本身是 DM，同样持续负责问题、一次推进一个研究 | Root 用 loop-dispatch；独立 Codex DM 由 AGENTS 直接读取共享 DM 正文；Claude 用 research-hub；direction lead 拥有 NOTES，问题族不等于永久归属 |
+| 方向推进 | owner 2026-09-27 UTC 将研究运行资源并发上限提高至五条；问题数量与永久 DM 分工不由上限决定。Root 规划完整问题与后继，DM 对问题连续性负责、每次推进一个结果性研究，并自主修订或转向 | session 本身是 DM，同样持续负责问题、一次推进一个研究 | Root 用 loop-dispatch；独立 Codex DM 由 AGENTS 直接读取共享 DM 正文；Claude 用 research-hub；direction lead 拥有 NOTES，问题族不等于永久归属 |
 | 实现 | DM 直接实现，或按需 Sol/high Implementer | session 直接实现，或按需 Opus/high Implementer | research-engineering；原生 Claude effort 未实测，不能从描述证明 |
 | 科学纠偏 | ResearchCritic，作为独立科学 Reviewer | 对应具名角色，独立上下文 | scientific-tools；独立诊断、方向纠偏建议，重大分歧按宪法 §2 裁决 |
 | 工程审查／事实 | 工程 Reviewer、Scout／Verifier | 对应原生 leaves | engineering；代码正确性与事实核查，不代替科学纠偏 |

@@ -10,7 +10,7 @@ research pause of 2026-09-15 22:23 PDT.
 The current sections incorporate the owner's amendments through 2026-09-26: independent
 DM responsibility and publication, cost without allowances, proportional engineering,
 scripted observation, proactive Pro advice, shared research understanding, and scientific
-project management, question-led DM continuity and a three-track runtime resource ceiling,
+project management, question-led DM continuity and the runtime resource ceiling below,
 and (2026-09-26, instruction "Both" on the reset response) one adequate independent scientific
 review at consequential decisions with Pro added where it offers distinct value (section 5).
 The owner's adopted workflow reduction
@@ -25,6 +25,12 @@ are not cleanup prerequisites. Sections 4 and 9 carry this decision.
 Owner amendment 2026-09-25: independent scientific review owns diagnosis and direction
 correction, with its own instructions and context, rather than relying on DM self-correction.
 Section 2 assigns this function to ResearchCritic; engineering Reviewer remains separate.
+
+Owner amendment 2026-09-27 UTC (2026-09-26 PDT): add two independent Codex DMs and
+increase the concurrent result-bearing research-track ceiling from three to five. Section 2
+carries this decision. Actual node admission still accounts for training, evaluation and
+available resources; existing pauses, direction ownership and accepted operations retain
+their current scope.
 
 ## 1. What this project is
 
@@ -82,9 +88,10 @@ operation. A method, tool, conversation or historical workflow is not a permanen
 - **Codex side (owner amendment 2026-09-20):** a session may act as **Root**, coordinating
   a named set of directions, or as the **direct DM** for one direction. A DM may be an
   independent session or a Root child; its scientific responsibility is the same. Reuse the
-  current lead rather than creating a second DM. The owner clarified on 2026-09-24 that three
-  is the runtime resource concurrency ceiling for research tracks, not the number of scientific
-  questions, candidate directions or permanent DM assignments in the full plan. Count independent
+  current lead rather than creating a second DM. The owner clarified on 2026-09-24 that the
+  runtime resource concurrency ceiling does not fix the number of scientific questions,
+  candidate directions or permanent DM assignments in the full plan. The owner raised that
+  research-track ceiling from three to **five** on 2026-09-27 UTC (2026-09-26 PDT). Count independent
   DMs and children together, including a coordinating session while it directly executes a
   direction. Training and fixed-policy evaluation both consume real resources; node admission
   may permit fewer concurrent operations. The complete plan may contain more questions and

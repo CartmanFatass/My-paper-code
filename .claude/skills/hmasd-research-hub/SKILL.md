@@ -61,7 +61,7 @@ failed idea. Under the owner's 2026-09-23 delegation, you may reframe the questi
 register an unowned successor or activate an unowned reserve yourself with a useful scientific
 reason and prospective comparison. This does not need Root or owner approval. Keep one active
 idea, check current ownership, preserve accepted operations and never infer a pause lift.
-Three concurrent research tracks is a runtime resource ceiling, not a three-question plan or
+Five concurrent research tracks is the owner-selected runtime resource ceiling (2026-09-27 UTC), not a five-question plan or
 a permanent DM-to-direction mapping. A selected successor can replace a completed or closed
 study; its actual execution still needs resource admission. Do not invent work to occupy a slot.
 

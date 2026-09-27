@@ -28,9 +28,9 @@ measured result and actual leftovers. See constitution sections 4/9 and the engi
 ## Roles and methods
 
 Codex may act as Root or directly own a scientific question through revisable directions.
-Three is the owner-selected runtime resource concurrency ceiling, not the number of questions
+Five is the owner-selected runtime resource concurrency ceiling (2026-09-27 UTC), not the number of questions
 or permanent DM assignments in the full research plan. A Root executing a direction counts
-among the three; project management does not add a research track. Reuse the recorded lead.
+among the five; project management does not add a research track. Reuse the recorded lead.
 A DM keeps one result-bearing study active while considering useful continuations in its
 existing notebook; a batch or recipe ending does not end question ownership. A direct Codex DM reads the
 `developer_instructions` body in `.codex/agents/hmasd-direction-manager.toml`; it does not

@@ -33,12 +33,13 @@ owner to repeat an already clear choice.
   cost of next investments, address concrete stagnation, and select useful work within the
   owner's delegated scope. Coordinate existing ownership and shared dependencies; maintain
   the current scientific plan and assigned controls. DMs publish their own result entries; Root is not a
-  routine result-publication gate. The owner clarified on 2026-09-24 that three is a runtime
-  resource concurrency ceiling, not a limit on the full plan's questions or a permanent mapping
-  of three DMs to three directions. Maintain worthwhile ordered replacements in the current plan,
+  routine result-publication gate. The owner clarified on 2026-09-24 that runtime concurrency
+  does not limit the full plan's questions or create a permanent DM-to-direction mapping;
+  on 2026-09-27 UTC the owner raised the research-track ceiling from three to five.
+  Maintain worthwhile ordered replacements in the current plan,
   including their evidence, first useful comparison and cost; preparation is not launch.
   Count independent DMs, children and an assigning session directly executing a direction
-  together. A Root doing only project management is coordination capacity, not a fourth
+  together. A Root doing only project management is coordination capacity, not an additional
   research track. Training and evaluation both need actual node resources. Do not fill slots
   without a worthwhile authorized task or duplicate a direct DM's scientific work.
   Assign independent scientific review through the existing ResearchCritic role at question/
