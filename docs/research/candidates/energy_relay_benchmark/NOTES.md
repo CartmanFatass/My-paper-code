@@ -4125,6 +4125,911 @@ facts, derivations and conjectures; do not require a new idea where the design i
 
 ### Answer
 
+> Saved from chat by the DM (2026-09-27 ≈ 11:13Z): the deterministic observer collected Pro's complete reply from the conversation (kind `chat answer`, 12,114 characters; the driver reported answer_sha256 `6243509a…`, the saved file's own sha256 is `07fd241dc17eb5bd6e6407506fcfeedb0f365b9419151f42d13b900370024380`); Pro reported that the GitHub connector had no file-write operation, and `deliver` found no answer commit on `main` (NOT_DELIVERED). The text below is the page's text extraction, unchanged; formulas appear as the page rendered them to text. The question key is the shared identifier; the conversation address stays in the local operation file.
+
+**GitHub 读取成功，但当前连接器没有可用的文件写入／更新操作，因此未修改仓库，也没有可报告的提交 SHA。以下是对应指定 ### Answer 的完整答复。**判断以固定提交 b6d93682c997ff13c307c8ed4c6d208ce78ec597 的问题、记录和代码为依据，没有用移动中的 main 替代推理输入。
+hmasd-pro-question-b03-v2-stake…
+
+Answer
+总判断
+
+**B03 v2 值得保留为有边界的算法探索，但尚不足以支持题述的完整归因性主张。**它已经补上最重要的第一层对照：不再只问 T′ 是否胜过没有锚点特征的 SET，而是问一个 grounded hierarchical assignment 整体方案是否胜过同样获得锚点计算结果的平坦学习器。可是，T′−SET+A 仍不单独识别“学习分配”的贡献；在 T′ 的冻结低层上替换标签，也不等于战胜了获得同等训练机会的固定分配方案。现有宪章明确允许探索性包级比较，但也明确说包级比较不能建立组件因果归因。
+
+**我的单项最高性价比修改，是把 T′ 协调器已经得到的六个归一化簇人数，也提供给 SET+A。**固定版本的具体声明并非两臂具有完全相同的派生特征：T′ 的协调器输入增加了 18 个锚点坐标数值＋6 个簇人数／30，而 SET+A 的 48 维块只有各锚点的位置、相对位置、距离与类型，没有簇人数。建议在同一决策时刻计算、保存并向 SET+A 提供相同的六个数值，其声明中的 actor 输入因而从 3,647 改为 3,653。这是建议修改，不是已实现事实；它不增加拟合次数或评估回合，实际耗时仍应记录。它不能消除所有架构差异，但能避免把一项额外的需求规模特征误读为学习分配的收益。
+
+首批优先级仍是 T′×2 对 SET+A×2，而不是先加入 M；共享团队回报也不应仅因联合标签空间很大就被替换。与此同时，我对原文“只要 Stage 2-0 得到 
+𝑆
+≥
+.03
+S≥.03，就按现有解释启动 52 节点小时批次”的规则给出 MATERIAL_DISSENT: YES — revise, not stop。原因是下面几个可具体修正的比较定义与推断问题，而不是要求先证明算法必然成功。
+
+1. Stage 2-0：测量的是固定执行器下的分配规则差值，不是学习收益的上界
+1.1 三个模式适合作为第一组比较，但“coordination-free”需要限定
+
+HUNGARIAN、IDENTITY、INDEPENDENT-NEAREST 是合理的零拟合起点。不过，后两者应称为不学习联合分配的固定规则，不能称为完全没有协调信息、没有共同约定的控制器：三者共享中央锚点、目标优先顺序，以及至少部分可用性处理。IDENTITY 本身也是预先约定的角色分工。实际 H_central 代码还先按可用 UAV 数量截取目标优先列表，再执行匹配。
+
+因此应分别阅读：
+
+比较	可以回答	不能直接回答
+HUNGARIAN−IDENTITY	在相同目标集合下，状态依赖的距离／滞后匹配是否胜过固定编号约定	学习联合分配是否胜过训练过的固定规则
+HUNGARIAN−INDEPENDENT-NEAREST	联合分配相对于允许重复占位的逐行选择有多少闭环收益	收益是否全部来自“学习协调”，而非覆盖约束、目标优先级或避免重复
+三者绝对 QoS、J	固定锚点与 go-to 执行器下各规则的实际服务和代价	学习器能恢复多少收益，或 SET+A 最终只能达到哪一个规则
+
+这里还有一个需要在 L0-C 中消歧的定义。原文 IDENTITY 写成“可用 UAV i 取优先槽 i，不可用 UAV 的槽留空”；而已有 H_central 使用：
+
+纯文本
+available = 正常模式 UAV 的有序集合
+used = priority[:len(available)]
+
+若 IDENTITY 按全局 UAV 编号保留空槽，而 HUNGARIAN 总是填充优先前缀，那么 UAV 0 或 1 不可用时，前者可能丢掉中继角色，后者却保住它。此时差值混入了目标集合与优先级维护，不再只是“谁去哪个相同目标”的匹配收益。
+
+**我的建议是明确使用同目标集合的 ranked-IDENTITY：**把第 
+𝑟
+r 个可用 UAV 分给 used[r]。这仍是零学习、零距离优化的强固定规则。保留全局编号空槽的版本可以作为另一种运营约定，但不能与前者混名，也不能把它损失中继角色的收益全部记为匹配价值。若预定实现本来就是 ranked-IDENTITY，则只需消除声明歧义，无须再改算法。
+
+1.2 指定的一致性参考路径确有错配
+
+附件指定的：
+
+纯文本
+.../b01_ref_a02/heuristic-dev/panels/H1_e0.00_x0.05.json
+
+实际内容从 956001 世界开始，并不是 Stage 2-0 要使用的 955 开发世界面板。已在同一固定提交找到对应的：
+
+纯文本
+.../b01_ref_a02/grid/panels/H1_e0.00_x0.05.json
+
+其内容从 955001 开始。这不是可以靠数组位置忽略的差别；HUNGARIAN 的逐世界复现检查必须核对世界种子、控制器信息来源、生产 shield 参数和数值执行路径。这里应显式纠正参考路径，而不是声称已经与附件误指的文件完成了同世界验证。
+
+1.3 保留 
+𝑆
+S 的形式，但改变它的解释
+
+设 
+𝑞
+𝑤
+𝑚
+q
+wm
+	​
+
+ 为世界 
+𝑤
+w、模式 
+𝑚
+m 的 QoS/step，则原统计量应明确为：
+
+𝑆
+^
+=
+𝑞
+ˉ
+𝐻
+−
+max
+⁡
+(
+𝑞
+ˉ
+𝐼
+,
+𝑞
+ˉ
+𝑁
+)
+=
+min
+⁡
+{
+𝑞
+𝐻
+−
+𝑞
+𝐼
+‾
+,
+𝑞
+𝐻
+−
+𝑞
+𝑁
+‾
+}
+.
+S
+=
+q
+ˉ
+	​
+
+H
+	​
+
+−max(
+q
+ˉ
+	​
+
+I
+	​
+
+,
+q
+ˉ
+	​
+
+N
+	​
+
+)=min{
+q
+H
+	​
+
+−q
+I
+	​
+
+	​
+
+,
+q
+H
+	​
+
+−q
+N
+	​
+
+	​
+
+}.
+
+这是相对于整个面板上较好的固定规则的收益。它不同于：
+
+1
+32
+∑
+𝑤
+[
+𝑞
+𝑤
+𝐻
+−
+max
+⁡
+(
+𝑞
+𝑤
+𝐼
+,
+𝑞
+𝑤
+𝑁
+)
+]
+,
+32
+1
+	​
+
+w
+∑
+	​
+
+[q
+wH
+	​
+
+−max(q
+wI
+	​
+
+,q
+wN
+	​
+
+)],
+
+后者允许每个世界事后选择不同规则，是一个“逐世界先知选择器”的比较，不能悄悄替换主统计量。
+
+因此，不宜只给一列含义不明的“逐世界 
+𝑆
+S”。应保留两列：
+
+𝑑
+𝑤
+𝐼
+=
+𝑞
+𝑤
+𝐻
+−
+𝑞
+𝑤
+𝐼
+,
+𝑑
+𝑤
+𝑁
+=
+𝑞
+𝑤
+𝐻
+−
+𝑞
+𝑤
+𝑁
+,
+d
+w
+I
+	​
+
+=q
+wH
+	​
+
+−q
+wI
+	​
+
+,d
+w
+N
+	​
+
+=q
+wH
+	​
+
+−q
+wN
+	​
+
+,
+
+再注明全局哪个规则胜出。正世界数也应说明是相对全局胜出规则，还是相对逐世界较好规则。
+
+关键推导：这个 
+𝑆
+S 既不是 
+𝑇
+′
+−
+S
+E
+T
++
+A
+T′−SET+A 的上界，也不是下界。
+
+原因不只是统计噪声。Stage 2-0 固定了 go-to 执行器、100 m 高度、30 步重规划和距离／滞后目标；T′ 与 SET+A 则要学习连续动作，使用 10 步决策接口，并优化原生团队目标。SET+A 也不是被限制在 IDENTITY 与 NEAREST 两个规则的策略类里。即使 
+𝑆
+S 很大，SET+A 仍可能学会相同或更好的分配；即使 
+𝑆
+S 很小，学习器也可能利用固定距离规则未优化的状态依赖服务差异。
+
+所以原文两项解释都应撤回：
+
+“
+𝑆
+<
+.03
+S<.03，所以 T′ 对 SET+A 的预期增益就在噪声内。”
+
+“
+𝑆
+≥
+.03
+S≥.03，所以 
+𝑆
+S 是学习分配器可恢复收益的 ceiling。”
+
+可以保留的是更窄的决策理由：在当前固定执行器下，连强固定分配规则之间都没有足够大的差值时，暂不为这条分配假设投入四个拟合，是合理的机会成本判断；但这不是不可能性结论。
+
+另一个值得注意的内部尺度关系是：首批真正声明的通过标准为 T′−SET+A ≥ .05，且至少 20/32 世界为正，不是 .03。若把 Stage 2-0 的 .03–.05 真当成 ceiling，就会出现“允许启动，却按自己的上界无法达到通过标准”的矛盾。正确处理方式是区分两个估计对象，而不是机械把其中一个阈值调到另一个。
+
+1.4 .03 可以保留为探索性的实用门槛，不能当作显著性线
+
+指定评审给出的 Stage 1 世界配对标准误约为 .015–.03；但那不是这两个新规则差值的实测标准误，更不是训练种子方差。不能据此称所有低于 .03 的收益都是“噪声”，或称 .0301 已经建立可靠的可恢复收益。
+
+我建议保留 .03 作为是否值得继续探索的量级参考，同时报告两组实际配对差值及其不确定性。一个直接做法是对两组均值差构造同时区间，再据此给出最小值 
+𝑆
+S 的区间；若做重采样，应按世界联合重采样三个模式，而不是分别打乱各臂。边界附近、少数世界驱动、或 J 与 QoS 相反的结果，应读成边界证据，而非自动打开 52 小时批次的充分条件。这也不意味着要求“95% 下界必须超过 .03”才能做任何探索。
+
+1.5 在应用树之前，还要读什么
+
+**首先是原生 J。**同时报告相对两个固定规则的 J 差值，不要只报告 QoS 胜者。QoS 最强的固定规则未必也是 J 最强的规则。原生 J 已经按 
+𝜆
+=
+2
+λ=2 计入返航代价；不能再用一个电量或风险代理，为 J 的实际下降追加未经声明的补偿。
+
+**其次是同一时钟下的差值质量。**把两列 
+𝑑
+𝑤
+𝐼
+,
+𝑑
+𝑤
+𝑁
+d
+w
+I
+	​
+
+,d
+w
+N
+	​
+
+ 与 Stage 1 同世界的 pre-entry 差距质量并列。所有模式使用同一个预先确定的截点，例如主分析对应的 SET c06 首次 shield entry 时刻；不要分别截到各臂自己的 entry，否则比较窗口受处理影响。最好给出可相加的 pre/post 累计贡献，而不是仅比较不同长度窗口内的均值。已修正记录中的“约 70% H_local 差距、约一半 H_central 差距在 pre-entry”是定位问题的描述，不是 shield 无因果作用的证明。
+
+**再次是锚点身份变化，而不只是标签编号变化。**代码使用按用户索引初始化的 k-means，并按人数稳定排序；人数相等本身不必导致交换，人数交叉、簇几何变化或聚类归属变化才可能改变某个槽代表的实体。应区分“同一实体移动”和“同一槽换了实体”，报告实际交换频率、持有标签对应锚点的位移，以及交换时的服务损失。T′ 每 10 步刷新，而 Stage 2-0 每 30 步规划，因此后者的低交换频率不能直接证明前者接口稳定。
+
+最后，原文“八个独立均匀选择覆盖约 66% 锚点”可以作为玩具计算：
+
+1
+−
+(
+7
+/
+8
+)
+8
+≈
+.656.
+1−(7/8)
+8
+≈.656.
+
+但“距离相关性会使它比均匀选择更好”没有保证：聚集的 UAV 可能一致选择同一个近锚点，反而更差。这个模型省略了空间相关性、可用性、滞后、目标需求不均，以及两个中继角色对端到端服务的非线性影响，不能用来预测 −.10 QoS。
+
+2. Claim 与 controls：保留 SET+A 的优先级，但明确整体方案与学习分配的区别
+2.1 这个设计实际能够支持什么措辞
+
+若首批结果正向，最准确的探索性表述是：
+
+在固定 S7-S2/H3000、指定开发世界、共同原始信息与匹配派生锚点特征、B02 训练暴露下，T′ 的 grounded hierarchical assignment 整体方案，相对于平坦 SET+A，在两个独立训练实例上显示了服务增益。对 T′ 冻结低层的标签替换，进一步显示该已训练系统的服务依赖其所使用的分配策略。
+
+需要单独保留限定的是：
+
+这些结果尚不能把增益唯一归因于学习分配，也不能证明该方法优于从头获得同等训练机会的固定分配方案。
+
+这是一个可以有算法研究价值的整体方法比较，不必贬成“只是工程”；但还不是“学习协调这个组件已被识别”的结论。现有宪章恰好要求这种区分。
+
+2.2 冻结低层干预有价值，但它回答的是条件化问题
+
+原文的 HUNGARIAN-LABELS、IDENTITY-LABELS、PERMUTE-EP、ALL-FREE 都应保留。尤其 HUNGARIAN-LABELS 比单独 ALL-FREE 或随机置换更有辨别力。它们回答的是：
+
+𝐽
+(
+T′低层
+,
+学到的分配
+)
+−
+𝐽
+(
+同一T′低层
+,
+替代分配
+)
+.
+J(T′低层,学到的分配)−J(同一T′低层,替代分配).
+
+但训练期间的标签分布、到达状态和低层响应已经共同适应。这个差值不等于：
+
+𝐽
+(
+学到的分配与其低层
+)
+−
+𝐽
+(
+固定分配与为其训练的低层
+)
+.
+J(学到的分配与其低层)−J(固定分配与为其训练的低层).
+
+因此，原文“learned−HUNGARIAN-LABELS ≥ .02 且至少 20/32 世界为正”可作为在该低层上替换高层的服务证据，不能直接改名为战胜了训练匹配的固定规则。ALL-FREE 的零／弱响应也不能单独证明一般意义上的低层能力，因为它可能偏离训练时的输入分布。
+
+PERMUTE-EP 比逐决策重置排列更好，但仍应明确是否置换 FREE、是否跨 relay/service 类型。跨类型或包含 FREE 的置换可以作为系统破坏实验，却不能专称“只破坏联合协调、其余不变”。
+
+2.3 M 不必进入第一批
+
+ACG B01 的原始结果确实有分量：三个 H6 最终策略在每个 N 上都高于三个 SET，最低 H6−最高 SET 分别为约 .0124/.0130/.0102。它否定的是“语义无关 HMASD 包在 S1 是零效应”这个概括，不是直接证明 B03 的分配机制。
+
+这使 M 成为重要的后续替代解释对照，却不能让它替代 SET+A：不含相同锚点计算的 M，不能回答最先必须解决的“是不是注入 planner 特征就足够”。所以 SET+A 先于 M 是正确排序。代价是首批不能声称胜过语义无关 HMASD，也不能用 FSD 的标签选择弱效应，把 ACG 的包级正效应消掉。
+
+2.4 SET+A 的全部锚点输入不是不公平的“容易题”，但当前特征还没完全匹配
+
+首先要纠正信息来源的潜在混淆：B03 的锚点来自原始中央状态中的全部用户位置，不是 H_local 的 pooled legal observations。两臂共同采用这个中央状态／锚点合同才是本题的 equal grounding；不能为了看起来更“局部”而单独把一个控制器改用 H_local 的锚点。代码和既有评审已经明确这一区别。
+
+其次，SET+A 得到全部锚点，而 T′ 低层得到选中的一个锚点，这种结构差异正是比较对象的一部分。SET+A 没有显式分配瓶颈，但要自己学会选择和连续控制；T′ 则得到高层选中的目标以及标签接口。不能事先断言哪一个更容易。
+
+真正应补齐的是前述六个簇人数。原始状态里可以重建人数，不等于双方已经得到相同的派生计算；这与原评审指出“原始信息权利相同，不等于注入的 planner 特征相同”是同一个问题。建议把这些人数与锚点一起按决策时刻保存，acting 与 replay 一致使用；相对位置仍按已有合同由当前 own observation 重算。不要在看到结果后，再决定是否补这六个特征。
+
+2.5 种子与 2b：目前的自动 CLAIM 路径不成立
+
+首批两对种子适合探索，不适合把 32 个世界或 64 个种子—世界组合当成独立训练重复。应报告每个拟合的均值、每个预声明种子标签的差值，以及最低 T′−最高 SET+A 的描述性检查。最低减最高不是置信区间；同名种子也不保证初始化与策略随机数真正耦合，L0-A 已记录不同模块构造会移动 torch 随机数流。
+
+2b 还有一个具体缺口：**“两对都通过”分支只增加第三个 T′ 和 M×3，没有第三个 SET+A，却随后要对 SET+A 提出学习主张。**这不满足每臂至少三个独立训练种子的最低要求。更进一步，宪章 §3 对确认要求的是另行固定的一批 3–5 个 fresh independent seeds／臂；不能把经探索结果选择后补上的一个种子，自动包装成确认批次。这不是要求现在追加确认预算，而是要求首批和 2b 的结论保持其真实证据等级。
+
+3. Learning signal：可学性足以支持探索，尚不足以预测成功；不应先加复杂信用机制
+3.1 八个九选一并不等于必须探索 
+9
+8
+9
+8
+ 个独立格子
+
+实际解码器是自回归的：
+
+𝜋
+𝜃
+(
+𝑧
+∣
+𝑥
+)
+=
+∏
+𝑖
+=
+1
+8
+𝜋
+𝜃
+(
+𝑧
+𝑖
+∣
+𝑥
+,
+𝑧
+<
+𝑖
+)
+.
+π
+θ
+	​
+
+(z∣x)=
+i=1
+∏
+8
+	​
+
+π
+θ
+	​
+
+(z
+i
+	​
+
+∣x,z
+<i
+	​
+
+).
+
+它逐个读取此前已选择的标签；训练重放也使用已执行标签做 teacher forcing。因此，
+9
+8
+=
+43,046,721
+9
+8
+=43,046,721 是联合动作个数，不是样本复杂度结论。网络的条件化、参数共享和输入结构可能允许大量泛化。
+
+按问题声明的暴露计算，600 次联合决策／rollout × 200 rollouts 是约 120,000 次联合分配，对应约 960,000 个 agent-label token。后一个数不能当作 960,000 个独立团队试验：同一次分配共享回报，连续决策具有时间相关性，低层策略还在变化。
+
+在理想、未裁剪的策略梯度中，共享团队回报并不阻止联合策略获得正确方向的梯度：
+
+∇
+𝜃
+log
+⁡
+𝜋
+𝜃
+(
+𝑧
+∣
+𝑥
+)
+=
+∑
+𝑖
+∇
+𝜃
+log
+⁡
+𝜋
+𝜃
+(
+𝑧
+𝑖
+∣
+𝑥
+,
+𝑧
+<
+𝑖
+)
+.
+∇
+θ
+	​
+
+logπ
+θ
+	​
+
+(z∣x)=
+i
+∑
+	​
+
+∇
+θ
+	​
+
+logπ
+θ
+	​
+
+(z
+i
+	​
+
+∣x,z
+<i
+	​
+
+).
+
+问题主要是方差、延迟、条件覆盖和共同适应，而不是“每个 agent 必须先有自己的奖励才可能学习”。外部 MAPPO 论文也只足以支持这种一般可行性；它在其他合作任务上的成绩不能替代本宿主的可学性证据。
+arXiv
+
+3.2 .00125 修正正确，但只修正了一个尺度问题
+
+记录明确显示，个体策略损失按 batch×agents 平均，而个体熵按 agents 求和。因此 .01→.00125 修正了八个 agent 带来的相对权重放大。均匀分布时：
+
+.00125
+×
+8
+log
+⁡
+9
+≈
+.02197.
+.00125×8log9≈.02197.
+
+这是优化目标里的熵项尺度，不能与 .03 QoS 或某个 J 差值直接比较，也不保证标签分布一定离开均匀。每 agent 一个 value head 能改善条件基线，却不会自动变成反事实信用；它们仍由共同的团队回报驱动。
+
+3.3 简单模型能提示困难，但不能替代 MARL 耦合
+
+一个加性玩具模型是：
+
+𝐺
+=
+∑
+𝑖
+=
+1
+8
+𝑔
+𝑖
+(
+𝑧
+𝑖
+)
++
+𝜖
+.
+G=
+i=1
+∑
+8
+	​
+
+g
+i
+	​
+
+(z
+i
+	​
+
+)+ϵ.
+
+若各项独立同方差，单个 agent 对总回报方差的份额约为 
+1
+/
+8
+1/8。它提示共享回报可能有较差的个体信噪比，不证明八 agent PPO 不可学。它省略了本题最关键的东西：中继链的互补性、重复服务与容量竞争、能量退出造成的角色变化、动作持续时间，以及自回归选择之间的依赖。
+
+另一个模型是“两名关键角色必须同时正确才有收益”的 AND 奖励。它说明联合信用可能比加性信用困难，却省略了多个可替代 UAV、空间连续性、部分服务回报，以及低层学习逐渐改变“正确标签”的含义。不能拿一个任意 AND 模型的低成功率，当成本题的成功概率。
+
+指定的 §3.3 耦合仪器有助于区分加性标签效应与交互效应，但原笔记也限定了测量依赖于具体宿主和已学技能。Stage 2-0 的三个闭环规则差值并不等于该交互项；反过来，也没有必要在购买任何探索性拟合前，强制完成一个庞大的标签阶乘实验。
+
+**我的判断是“可学性合理但未证实”，不是“已经充分有力”。**优先使用已经声明的低成本读数：训练中的标签熵、assigned-versus-random anchor 距离、重复占位、关键角色覆盖、c03→c06 变化，以及 learned 对固定标签替换的差值。近均匀标签也必须与 sampled/deterministic 差异一起读，不能把任意 argmax 的劣化当成训练分布下的能力。
+
+3.4 若后来确有信用瓶颈，最便宜的候选是什么
+
+**在所列“每 agent 信用”方案里，我优先考虑小型、前缀条件化的 label-level counterfactual baseline，而不是链奖励或全环境反事实分支。**这是候选方法，不是本项目已经验证有效的修复。
+
+可令：
+
+𝑄
+^
+𝑖
+(
+𝑥
+,
+𝑧
+<
+𝑖
+,
+𝑎
+)
+≈
+𝐸
+[
+𝐺
+∣
+𝑥
+,
+𝑧
+<
+𝑖
+,
+𝑧
+𝑖
+=
+𝑎
+]
+,
+Q
+^
+	​
+
+i
+	​
+
+(x,z
+<i
+	​
+
+,a)≈E[G∣x,z
+<i
+	​
+
+,z
+i
+	​
+
+=a],
+𝑏
+𝑖
+(
+𝑥
+,
+𝑧
+<
+𝑖
+)
+=
+∑
+𝑎
+=
+0
+8
+𝜋
+𝑖
+(
+𝑎
+∣
+𝑥
+,
+𝑧
+<
+𝑖
+)
+𝑄
+^
+𝑖
+(
+𝑥
+,
+𝑧
+<
+𝑖
+,
+𝑎
+)
+,
+b
+i
+	​
+
+(x,z
+<i
+	​
+
+)=
+a=0
+∑
+8
+	​
+
+π
+i
+	​
+
+(a∣x,z
+<i
+	​
+
+)
+Q
+^
+	​
+
+i
+	​
+
+(x,z
+<i
+	​
+
+,a),
+
+并用观测到的团队回报目标减去这个 detached baseline。九个标签允许每个前缀一次输出九个值，避免为每个替代标签再运行一条环境分支。COMA 原始方法提供了“用集中评论家高效边缘化单个动作”的参考，但这里的自回归 actor 需要额外注意。
+AAAI出版物
+
+**关键的 MARL 限制是：不能不加说明地照搬“固定其他所有 agent 标签”的 COMA 基线。**本实现里，后续标签分布依赖 
+𝑧
+𝑖
+z
+i
+	​
+
+。若固定已经实现的后续标签，一个声称“不依赖当前动作”的基线，实际上可能通过这些后续标签依赖它。使用只依赖 
+𝑥
+,
+𝑧
+<
+𝑖
+x,z
+<i
+	​
+
+ 的基线，并让 
+𝑄
+^
+𝑖
+Q
+^
+	​
+
+i
+	​
+
+ 的目标包含下游策略的平均后果，是一条较清楚的推导路线；它仍可能受评论家误差、稀疏条件覆盖和共同适应影响。这是方法建议，不是对现有 PPO 实现正确性的否定。
+
+其余两种候选的定位应分开：
+
+链归因奖励可能更贴近网络结构，但链上的“被计入服务”不等于移除某个 agent 后的因果边际贡献。备用链、流量重路由、共享容量和电池状态都会使局部归因失真。它在记录中仍未验证，且可能改变优化目标；不宜把它当成保留原生 J 合同的免费修复。现有 learned-counterfactual-credit 的负向记录也提醒我们，增加信用模块并不自动提升服务。
+hmasd-pro-question-b03-v2-stake…
+
+Hungarian 模仿暖启动 decoder可能是最便宜的探索起点改善，却不是每 agent 信用。它把策略推向一个有用区域，但会引入教师先验、模仿暴露及其费用；若教师的滞后决策依赖学习器输入中没有的历史，模仿目标还可能不可完全重建。它也没有自动解决“学会标签”和“学会执行标签”的共同适应。DM3 的 BC 正收益伴随 15 个 service-loss 世界，正说明 go-to 能力不是免费获得的。
+
+所以，不建议在第一批同时换信用机制、加模仿、再改锚点。那会让一次正负结果难以更新当前解释。先保留共享回报，是有依据的简化，不是忽视信用问题。
+
+4. 不超过同等成本的最强替代：T′×2 对“从头训练的固定分配”R×2
+
+最强替代不是先放入 M，也不是再扩大语义发现模块，而是下面这个更直接的归因设计：
+
+R：与 T′ 使用相同原始信息、锚点生成、标签接口、低层网络、原生奖励及 1.2 M 暴露，但训练全程由固定 Hungarian 分配规则产生标签，低层从头学习。
+
+R 的规则须在同样的 
+𝑘
+=
+10
+k=10 接口调用，保持相同可用性和目标集合合同；不能直接拿 H_central 的 30 步、100 m go-to 控制器当成这个训练匹配臂，也不能改用 H_local 的另一套锚点。原代码和声明的差异使这些区分实质重要。
+
+以 T′×2 对 R×2 替代现有四拟合首批，拟合数和声明暴露相同，可按相同的四拟合成本上界规划；R 的实际耗时尚未测量，不能提前声称更快。
+
+唯一最有判别力的观察是：
+
+Δ
+l
+e
+a
+r
+n
+e
+d
+ 
+a
+l
+l
+o
+c
+a
+t
+i
+o
+n
+=
+𝐽
+(
+𝑇
+′
+从头训练
+)
+−
+𝐽
+(
+𝑅
+从头训练
+)
+,
+Δ
+learned allocation
+	​
+
+=J(T′
+从头训练
+	​
+
+)−J(R
+从头训练
+	​
+
+),
+
+连同 QoS，在两个独立种子及同世界评估上是否方向一致、量级有实际意义。
+
+若 T′ 胜过冻结低层上的 HUNGARIAN-LABELS，却不胜过 R，那么较合理的解释是：原干预主要暴露了共同适应和输入分布变化，而不是学习分配优于固定规则的训练后收益。若 T′ 稳定胜过 R，才更接近题目中“学到的分配本身增加服务”的主张。
+
+这个替代也有明确损失：**它没有 SET+A，因而不能回答是否胜过等 grounding 的强平坦学习器。**我仍倾向于把修正后的 T′×2／SET+A×2 作为第一批，因为注入派生特征是当前最先应排除的解释；但若后续要从“整体方案有效”升级到“学习分配有效”，R 比继续堆叠冻结低层破坏实验更有价值。M 回答另一条重要问题，不能替代 R。
+
+5. MATERIAL_DISSENT：YES，针对原文的自动启动规则与过强解释；不是停止这一方向
+被争议的陈述／做法	我的判断与依据
+
+𝑆
+≥
+.03
+S≥.03 就建立了学习分配可恢复的 stake，且 
+𝑆
+S 是 ceiling	不成立。固定 go-to／30 步规则差值与 T′−SET+A 是不同估计对象；
+𝑆
+S 只能支持有边界的机会成本判断。
+三模式只改变同一匹配问题	尚未定义清楚。IDENTITY 的“不可用槽留空”可能改变目标集合，而 H_central 先截取可用数量的优先前缀。
+SET+A 已完全匹配 T′ 的派生 grounding 特征	尚未完全匹配。T′ 协调器有六个簇人数，SET+A 的 48 维块没有。
+冻结低层上的 learned−HUNGARIAN-LABELS 正向，就说明学习分配优于固定规则	只能支持该低层上的替换效应，不能替代训练匹配的 R。
+两对通过后补第三个 T′ 与 M×3 即可进入所写 CLAIM	SET+A 仍只有两次训练；而确认还受 §3 的 fresh、固定批次要求约束。
+
+这些争议分别来自固定版 v2 声明、实际 planner 代码、实际输入定义及现行宪章，而不是新增的审批标准。
+
+**具体建议是：**修正参考面板、消歧并统一固定规则的目标集合、把同样的六个簇人数提供给 SET+A，然后把 Stage 2-0 读成带不确定性的固定执行器 stake 测量。若结果仍有实际量级，J 没有显示被 QoS 掩盖的明确代价，而且收益不是目标集合差异制造的，我支持保留 T′×2／SET+A×2 的探索性首批；不要求先换信用、不要求 M 提前，也不把两种子结果升级为确认性学习主张。现有工程修正路径可以承载这些变化，不建议为此增加一轮形式性独立复审。
+
+来源边界与尚未获得的信息
+
+本答复已依据附件全文、固定版问题与相关治理／方法章节、指定研究记录、相关代码及运行摘要作出判断。较大的运行摘要与 ACG 笔记在普通文件读取返回空内容后，通过其实际 blob 读取补回；没有把接口空内容误判为文件为空。指定 HUNGARIAN 参考路径的错配已在上文说明，并明确区分了原指定文件与找到的对应开发面板。
+
+**仍然没有的，是固定版本中尚未产生的决策数据：**Stage 2-0 的三个实测面板及其 
+𝑆
+S、配对标准误和 J 差值；T′／SET+A 的训练种子方差；实际 slot-swap 频率；以及 L0-A2 对 T′ 与 SET+A 的实现验收结果。固定版仍记录为 L0-A 已交付、L0-C／L0-A2／L0-B 待完成，因此本答复没有把 v2 的声明当作已验证实现，也没有给出虚构的通过概率或预期收益。
+
+最终研究判断：保留 grounded assignment 这条算法种子，先做真正匹配的派生特征对照；把固定执行器的规则收益、整体学习方案收益，以及学习分配本身的收益，作为三个不同问题阅读。
+
 ## 2026-09-27 — Stage 2-0 (B03 v2): L0-C hand-back accepted (d4f9ecd0a + 5e8da3d94), IDENTITY revised to the declared rule, comparison-panel path corrected, one revision of the pre-written tree before the run, launch
 
 **Engineering facts (implementer hand-back; verified by me where stated).**
@@ -4160,3 +5065,142 @@ Operation facts, the consistency check, S and the tree reading follow in the res
 - The hungarian consistency check, the panel records and the traces keep their engineering meaning regardless of the tree.
 
 **Chain-attributed credit candidate (draft argument kept locally, to be published with the Stage 2-0 results entry).** Root's caution is adopted in the statement of the counterfactual: the proposed per-agent signal is the per-step difference reward D_{i,t} = R(s_t, a_t) − R(s_t, a_t | UAV i's links removed), evaluated on the realised state with the other agents' realised actions held fixed (the Wolpert–Tumer "absent agent" default), summed over the agent's skill segment; it is a shaped credit signal for the coordinator's per-agent advantage, not a trajectory-level counterfactual (the others' future actions are not re-simulated), and its usefulness for learning is the hypothesis to test, not a derived fact. No exhaustive counterfactual verification is bought for it.
+
+## 2026-09-27 — Stage 2-0 (B03 v2) result read by the second revision of the tree (operation b03_stake_a01, launch sha 5e8da3d94): S = +.007 QoS/step with paired SE .007 (hungarian − identity, 18/32 worlds), the whole Hungarian advantage lies in the deployment window, independent-nearest stacks the team on one anchor; Pro answer b03-v2 saved from chat and answered; T-prime and skill-level removal-difference credit contribution arguments written for one independent challenge
+
+**Run facts.** Admission accepted 2026-09-27 10:16:50Z, process exit 11:01:29Z (exit code 0); runner wall 2,670.7 s = 44.5 min against the declared 1 h bound, on 8 workers × 2 threads while the host carried an unrelated load (load average 165–200 from a foreign headless Chrome and the Codex app server; see the launch entry). 96 episodes, 288,000 steps, 0 failed worlds, 0 fits; peak RSS runner 557 MiB, largest worker 488 MiB. **Consistency check passed exactly**: the hungarian panel equals the recorded H_central grid panel (`runs/energy_relay_benchmark/b01_ref_a02/grid/panels/H1_e0.00_x0.05.json`, sha256 `b5a44f49…`, read from the launch-source copy) with max |Δ| = 0.0 in `qos_per_step` and `raw_native_J` over all 32 worlds. Trace–panel check: the per-step QoS traces reproduce every panel mean (96 of 96, tolerance 1e-6). Artifacts on main: `runs/energy_relay_benchmark/b03_stake_a01/` (`launch-manifest.json`, `admission-preflight.json`, `launch-status.json`, `process-exit.json`, `stake-sizing/{config.json, summary.json, panels/*.json, clock_aligned_readings.json}`); the traces (`stake-sizing/traces/*.npz`, 25 MB) stay in the local checkout. The clock-aligned readings come from the new direction reader `experiments/candidates/energy_relay_benchmark/b03/read_stake_traces.py` (3 tests, `tests/experiments/candidates/energy_relay_benchmark/b03/test_read_stake_traces.py`; the whole b03 module: 48 passed); the summary's own-clock phase means are the launcher's.
+
+**Readings exactly as declared (paired per world, deterministic, 955001–955032).** `native J` below is the native return (`scenario7_reward_sum`), which already prices the return-constraint cost at λ_return = 2; higher is better.
+
+| mode | QoS/step | native J | first shield entry (mean step) | first charger input (mean step) |
+|---|---|---|---|---|
+| HUNGARIAN (= recorded H_central) | .7740 | 2281.9 | 1300 | 1617 |
+| IDENTITY (declared global-index rule, 5e8da3d94) | .7672 | 2224.1 | 997 | 1311 |
+| INDEPENDENT-NEAREST | .4499 | 1286.5 | 1747 | 1921 |
+
+- Better coordination-free rule: **IDENTITY** (global winner by panel mean; S is the minimum over the two panel-mean differences, not a per-world oracle choice — Pro 1.3 below).
+- **S = HUNGARIAN − IDENTITY = +.0068 QoS/step, paired SE .0073, hungarian leads in 18 of 32 worlds** (per-world range −.077 … +.135); native J +57.8, SE 24.6, 21/32.
+- HUNGARIAN − INDEPENDENT-NEAREST = +.324 QoS/step, SE .033, 32/32; native J +995, SE 101, 32/32.
+- Own-clock phase means (each mode on its own entry clock, as the launcher writes them): hungarian pre-entry .810 / entry-to-input .840 / post-input .725; identity .769 / .846 / .749; nearest .458 / .480 / .421. These windows differ in length between modes and are not the declared clock-aligned reading.
+- **Clock-aligned split, declared convention (one common step for all modes and worlds; boundary = 1300 = rounded mean hungarian first entry; `clock_aligned_readings.json` block B).** Pre-window per-step means hungarian .8127, identity .7897, nearest .4490; post-window .7445, .7500, .4505. Paired differences: hungarian − identity **+.023 (SE .006, 22/32) before the boundary and −.0055 (SE .012, 12/32) after it**; hungarian − nearest +.364 (SE .035) before and +.294 (SE .034) after, 32/32 in both windows. Additive difference mass (sum over worlds and steps of q_H − q_I): pre +956, post −301, total +655 — the whole net advantage of the Hungarian step over the index convention lies before the reference controller's first shield entry, and the post-entry sign is reversed and unresolved. Supplementary exact version (block A, boundary = hungarian's own first entry in each world): +.0213 (SE .0062, 22/32) before, −.003 (SE .0125, 14/32) after; masses +817 / −162 / +655. For nearest the pre-window carries .49 of the difference mass under either boundary.
+- **Trace diagnostics (positions only; the trace holds `target_xy` per UAV-step, no slot ids).** Target position changes per UAV per 1,000 steps 20.7 / 18.2 / 24.0 (hungarian / identity / nearest): with a 30-step replan (≈ 33 replans per 1,000 steps) and finite-target shares .68 / .60 / .75, the planned target moves at nearly every replan, i.e. this counts the k-means centroid drift of moving users, not reassignment. Jumps over 500 m between consecutive finite targets per UAV per 1,000 steps: **1.12 / 3.18 / 0.42** — a proxy for reassignment across anchors (swaps between anchors closer than 500 m are not counted; the closest anchor pair in 955001 at t = 0 is 95 m apart; a large centroid move would be counted). Distinct finite targets per sampled step 5.44 / 4.82 / **1.02**; share of UAVs sharing a target 0 / 0 / **.86**. Independent-nearest collapse worlds (QoS/step < .1): 955013 (.073, first service step 1778), 955016 (0, zero service), 955021 (.051, 1898), 955025 (.0001, 2057), 955027 (.054, 1959).
+
+**Prediction versus outcome (my predictions of lines 3838–3845, written before the run).**
+- IDENTITY: predicted −.03 … −.10 with the loss concentrated after count re-orderings. Observed −.007 (SE .007). Wrong: the index convention costs ≈ .02 per step during deployment only and nothing afterwards; the identity rule does jump across anchors about three times as often as the Hungarian rule (3.18 vs 1.12 per UAV per 1,000 steps), yet its post-entry service is not lower.
+- INDEPENDENT-NEAREST: predicted ≈ −.10 by partial coverage (uniform independent choice covers 1 − (7/8)^8 ≈ 66 % of the anchors; I wrote that distance correlation would make it better than uniform). Observed −.32: direction right, magnitude three times larger, **mechanism wrong**. Derived from the rule and the traces: the UAVs start within ≈ .5 km of each other (max pairwise distance 444–494 m at t = 0 in the three worlds checked), so their cost rows share the same argmin and every UAV takes the same nearest priority point; the 300 m hysteresis margin (`switch_margin_m`) then holds each of them there because another point must be closer by more than 300 m; distinct targets 1.02 and duplicate share .86 in the traces. The team stacks on one anchor and the rest of the map is unserved; in five worlds that anchor serves nothing until charging cycles disperse the team. Pro's answer (written without the results) named exactly this failure: "聚集的 UAV 可能一致选择同一个近锚点，反而更差".
+- S: predicted .03–.10; observed .007.
+- Observed without an explanation test: identity enters the shield ≈ 300 steps earlier (997 vs 1300) and reaches charger input earlier (1311 vs 1617); longer flights to index-assigned anchors are the plausible cause, untested (the traces hold battery per UAV-step, so it is testable at zero cost if a decision comes to need it).
+
+**Tree application (second revision, 5401fb8ad, written before any free-rule score was read).** S < .03. Recorded as a conditional fact about these fixed controllers on this host: on H_central's anchors with the go-to executor, the state-dependent Hungarian matching is worth +.007 (SE .007) QoS/step over a fixed index convention overall, +.023 (SE .006) during deployment and nothing after; against independent choice the value is large (+.32), but it is the value of not stacking — of any de-duplication — not of optimal matching. This lowers my investment preference for an assignment-learning study. It is not an upper bound on learned − SET+A (independent review via Root, Pro 1.3; accepted). Nothing is launched or cancelled by this entry; the next step is the two written contribution arguments below and one independent challenge.
+
+**Pro answer b03-v2 (key `hmasd:e51f86d4…`): received and disposed.** The deterministic observer found the reply complete at ≈ 11:12Z (≈ 91 min after the send at 09:41:52Z); the GitHub connector had no file-write operation, so the answer was collected from the chat (12,114 characters, sha256 `6243509a…`), `deliver` reports NOT_DELIVERED with no answer commit, and the complete text is inserted above under the question's "### Answer" marked "saved from chat" (formula rendering is the page's text extraction). Pro records **MATERIAL_DISSENT: yes — revise, not stop**, against the v2 declaration's automatic launch rule "S ≥ .03 → the 52-node-hour batch" and its two inferences (S as a ceiling; S < .03 as noise); both were withdrawn in the second revision (5401fb8ad) before S was read, so on the Stage 2-0 reading no material disagreement remains under section 2. Disposition of the rest:
+- *Adopted, already in this entry*: S as a fixed-executor rule difference; both per-rule differences with their SE and world counts; native J beside QoS; .03 as an exploratory magnitude reference, not a significance line; one common clock cut with additive pre/post masses (Pro 1.5).
+- *Ranked-IDENTITY (Pro 1.1)*: the implemented IDENTITY is the declared global-index rule with empty slots (5e8da3d94, verified against the `plan` source), not the ranked-prefix rule Pro recommends. When UAV 0 or 1 is charging, identity leaves its relay slot empty while hungarian refills the prefix, so S contains a target-set effect whose sign is not derivable (the ranked rule refills relay slots but shifts every UAV one slot). A ranked-IDENTITY panel costs ≈ 16 min CPU and is available as a zero-fit check if a decision comes to depend on S; under the second revision none does, so it is not bought now.
+- *Comparison-panel path (Pro 1.2)*: corrected before launch (b986c279e); the run's consistency check used the grid panel and found 0.0 difference.
+- *Slot-swap frequency (Pro 1.5)*: reported as > 500 m jumps with the stated ambiguity; a true swap count needs slot ids in the trace (a future runner change, not bought now). Pro's alternative cut at the SET c06 first entry (≈ 1044) belongs to a learner comparison; this run has no learner, and the same traces allow that cut later.
+- *Claim wording (2.1), frozen-low-level interventions as conditional (2.2), M not in the first batch (2.3), the six cluster counts for SET+A (2.4), the 2b seed gap and confirmation tier (2.5), learnability "reasonable but unproven" (3.1–3.3), the R arm (§4)*: carried into the T-prime argument below as its wording, its strongest alternatives and its cost; no fit is bought.
+- *Credit (3.4)*: Pro prefers a small prefix-conditioned label-level counterfactual baseline over "chain rewards" and full-environment counterfactual branches. Two points separate my candidate from the chain attribution Pro criticises: it is the **removal difference reward** D_i = R − R(−i), i.e. exactly the "移除某个 agent 后的因果边际贡献" Pro asks for, not a traffic-share attribution; and it changes the *expectation* of each agent's signal, which no baseline can do. Pro's remaining objections stand and are carried into the argument: it changes the optimisation objective (per-agent D against team G; alignment holds with the others fixed, the learning dynamics differ; β-mixing keeps the team objective), the recomputation cost, the adverse record of learned counterfactual credit on S1 (Q − V −.018), and "do not stack a credit change with feature or anchor changes in one batch". Pro's baseline is the strongest simple alternative in the argument, and the zero-fit diagnostic below is designed to discriminate between an attribution problem (a reward change can help) and a variance-only problem (a baseline suffices).
+- DM1's first new SET seed (26092711) failed technically at 432k steps (RESEARCH, fd02c6e05); the three-instance SET block that both arguments use as their uncertainty prerequisite is delayed, not lost.
+
+**T-prime contribution argument (written for the challenge; nothing decided here).**
+1. *Contribution sentence if fully successful*: "On S7-S2/H3000 with H_central's anchor generator as the shared grounding, a learned assignment (HMASD's coordinator over grounded labels, n_z = 9 = 6 service centroids + 2 relay points + FREE) delivers more service than a flat learner given the same anchor features (SET+A with the six cluster counts) and than the same architecture trained with fixed Hungarian labels at the same k = 10 interface (R)."
+2. *What a learned assigner handles that a fixed rule cannot at the same information and features*: leaving anchors unserved and doubling on binding ones (FREE and duplicate labels), anticipating charging exits at the 10-step interface, and trading service anchors for relay anchors when the backhaul binds. None of these freedoms was exercised by a Stage 2-0 rule: all three rules place 8 UAVs on 8 anchors (or stack them). What Stage 2-0 did measure: the permutation content is worth +.007 (SE .007) overall and +.023 during deployment; the de-duplication content ≈ +.32.
+3. *Closest prior work*: ALMA (Iqbal, Costales & Sha, NeurIPS 2022, arXiv 2205.14205, read first-hand): an allocation controller over agent→subtask assignments trained by amortised Q-learning, with subtask-specific rewards and an independent-sub-environments assumption. The decisive difference here would be the coupled host (relay/backhaul coupling across "subtasks", shared capacity) and PPO on the team return through HMASD's autoregressive decoder. Programme label: allocation-over-anchors NEW in the record (Stage 2 declaration); ALMA-style allocation TRIED in the literature.
+4. *Strongest simple alternatives*: SET+A with the six cluster counts (is injected planner grounding sufficient — Pro 2.4), and R = the T-prime architecture with fixed Hungarian labels produced at the k = 10 interface, low level trained from scratch (is learning the assignment worth anything over a fixed rule with the same training — Pro §4). The frozen-low-level label swaps (HUNGARIAN-LABELS, PERMUTE-EP, ALL-FREE) answer only the conditional question on T-prime's own low level (Pro 2.2).
+5. *Discriminating prediction*: T-prime − R > 0 in two independent instances only if the non-permutation freedoms matter; the fixed-rule evidence puts the permutation part at ≈ .01–.02, so a T-prime − R gain of the declared ≥ .05 would have to come from FREE, duplicates or anticipation. T-prime − SET+A > 0 with T-prime − R ≈ 0 would mean the package and label interface, not learned allocation.
+6. *Cost*: two full training instances per arm at ≤ 13 h each — T-prime × 2 + R × 2 = 52 node-hours (the reviewer's smaller option, one instance each, ≈ 26 h) plus ≈ 3 h evaluation per fit; SET+A would be a further two instances. The node is DM1's until its SET block completes.
+7. *My investment preference, stated for the challenge*: low. The achievable sentence rests on a hand-coded anchor generator (the reviewer's "package v feature", Pro 2.1's "整体方案 ≠ 学习分配"), the measured permutation content is small, and the innovation the owner asked for is algorithmic. The candidate below addresses the coupling this host actually has.
+
+**Skill-level removal-difference credit (D-credit) — argument published (from the local draft, corrected; not yet reviewed).** Informal name so far: chain-attributed credit. It is *not* the reserve-list "chain-attributed reward" (a traffic-share attribution) that Pro 3.4 criticises.
+1. *Contribution sentence*: HMASD's coordinator learns per-agent skill labels from the shared team k-step return minus a per-agent value baseline (`compute_high_level_advantages`: one scalar `high_level_rewards[t, env]`, `agent_values` heads). The change: each agent's high-level return becomes its accumulated per-step removal difference reward over its skill segment, D_i = Σ_t [R(s_t, a_t) − R(s_t, a_t | UAV i's links removed)], computed from the environment's own routing physics (the removal counterfactual that `_static_qos_with_unavailable_uavs` already implements for feasibility estimates), optionally mixed with the team return (β). Relay UAVs then receive credit for the traffic that flows through them; duplicated or idle UAVs receive ≈ 0. Algorithm change, not a feature: per-agent accumulated rewards and per-agent GAE in the high-level buffer; the team advantage is unchanged; information rights and policy class unchanged.
+2. *Novelty label*: difference rewards TRIED at the primitive-action level (Wolpert & Tumer collectives; Agogino & Tumer rover/UAV domains; Castellini, Devlin, Oliehoek & Savani, *Difference Rewards Policy Gradients*, arXiv 2012.11258, read first-hand pp. 1–3: differencing a known reward function with a default action, or a learned reward network; COMA learns the counterfactual Q instead). Programme record: RECORDED only as a reading pointer (FSD NOTES line 3512), never implemented; RESEARCH background line 524 warns that COMA-style counterfactual *baselines* must respect the autoregressive coordinator's sampling structure — Pro 3.4 repeats that warning for baselines; it does not apply to an environment-side difference reward, which is independent of the sampling structure. Skill-level (k-step segment) difference credit inside a hierarchical coordinator with an exact physics counterfactual: no precedent found (arXiv abstract queries "difference rewards" ∧ hierarchical/option/macro-action; counterfactual ∧ multi-agent ∧ macro-action ∧ credit; UAV ∧ relay ∧ MARL ∧ credit assignment: empty or unrelated); nearest: Liang, Wu, Wang & Cai, *Asynchronous Credit Assignment for MARL*, IJCAI-25, arXiv 2408.03692 (read pp. 1–3): asynchronous macro-action credit by a virtual-synchrony proxy plus a learned multiplicative value decomposition — learned, not an exact counterfactual. Label: mechanism RECORDED, composition (exact removal difference reward × skill-level credit × energy/relay host) NEW pending one search outside arXiv abstracts.
+3. *Mechanism chain (code-verified)*: (i) the S7 team reward per step = mean over 30 users of delivered/demand − λ_return · return cost − event penalties + graph PBRS (`_calculate_constrained_safety_reward`); delivered traffic of UAV u = its access capacities × min(1, backhaul_u / access_sum_u); backhaul_u = the widest path to the BS through other UAVs (`_widest_backhaul_capacities`, bottleneck = min over hops). A relay UAV r serves no user directly and contributes only through backhaul_u of every UAV whose widest path passes r. (ii) Under the shared return, r's high-level advantage is G_team − V_r(s): G_team is identical for all eight agents, so the sign of r's label gradient is driven by the other seven agents' contributions and exploration noise (Wolpert–Tumer "learnability"). (iii) With D_r, r's return contains only what r's presence changed: for a binding relay, the served traffic that would otherwise be lost; for a duplicated server, ≈ 0; for the only UAV covering a remote cluster, that cluster's traffic. With the others fixed, argmax over r's action of D_r equals that of R (alignment), and the agent's own gradient has lower variance. (iv) Native consequence, the hypothesis: relay-type labels become learnable ("be the relay for cluster c"), which is the coordination content Stage 1's flat SET lacked; the gain concentrates in worlds where the relay chain binds. What changes is the learning signal; the counterfactual is the per-step D_{i,t} on the realised state with the others' realised actions held fixed (the "absent agent" default), summed over the skill segment — not a trajectory-level counterfactual (the others' future actions are not re-simulated).
+4. *Simple-model bridge*: a two-agent chain bandit (server S picks a cluster; relay R picks a relay position or serves; reward = Σ_clusters min(access, backhaul)). Under the team reward R's REINFORCE gradient variance is dominated by S's exploration; under D_R the expected gradient direction at the joint optimum is the same and the variance shrinks by the share of return not attributable to R. Omitted couplings: k-step temporal extension, low-level execution noise, energy/return terms, the graph PBRS term (potential-based on the team; per-agent differencing of a potential difference stays potential-based per agent — to be checked in the review), and the aristocrat (expected-contribution) variant, unavailable without a model.
+5. *Strongest simple alternatives*: (a) Pro 3.4's prefix-conditioned label-level counterfactual baseline b_i(x, z_<i) = Σ_a π_i(a | x, z_<i) Q̂_i(x, z_<i, a) — variance reduction only, no environment recomputation, respects the autoregressive structure; (b) the shared return with the per-agent value heads as they are (Pro 3.1: "learnability reasonable but unproven" — the flat SET already learned something on S7). The discriminator between (a) and D-credit is whether the relay agents' signal is *biased toward the others' contributions* (an expectation problem, which only a reward change addresses) or merely noisy (a baseline suffices).
+6. *Numerical prediction versus noise*: S7 has one training instance in this direction (SET seed 925031; .437/.438 are its c06 deterministic and sampled evaluations); DM1's block (26092731 pending, 26092711 failed technically) plus 925031 will give the first paired-block uncertainty (s_D/√n over independent instances) at no new cost. No universal 2 × SD gate (method v2 §3). Prediction, a discriminating expectation and not a gate: if the relay-hop traffic share on 955001–955032 under H_central is ≥ 25 % and the relay agents' difference signal carries materially less of the others' variance than the team return, D-credit recovers part of the learner's deficit to H_local (.15–.17 QoS/step): +.03 … +.08 QoS/step over SET at equal budget; if the share is < 10 %, the mechanism cannot produce > .02 and no fit is bought.
+7. *Discriminating observation and retirement*: within the first 300k steps of a D-credit fit the learner's relay-hop traffic share rises above SET's and the coordinator's relay-type labels stabilise on the remote cluster; if D-credit is on and the relay-hop share does not rise above SET's, credit was not the bottleneck (the low level cannot execute relay skills, or the chain never binds) — retire, no variant. If the zero-fit decomposition shows the difference signal is not materially cleaner than the team return for relay agents, the mechanism argument fails before any fit.
+8. *Cost*: zero-fit diagnostics ≈ 1–2 h CPU (below); fits 2 (D-credit v SET, one instance each at equal budget, ≈ 2 × 11 h on wsl_4070) only after the challenge, the diagnostics and a fit declaration with its own Pro follow-up and engineering review; engineering: an env hook for per-agent removal QoS, per-agent rewards + GAE in `hmasd/utils.py` (shared core → engineering reviewer), the coordinator update path; low level unchanged.
+- *Open before review*: D_i on the QoS term only or on the full reward (energy/return terms are already per-agent in nature); β to keep the team objective; interaction with the graph PBRS term; whether removal of "UAV i's links" should also remove i's access links (full removal) or backhaul links only (relay-only counterfactual).
+
+**Declared next step (zero fit, no launch yet).** (i) One independent challenge of both arguments (hmasd-research-critic, separate context, evidence-first; the Pro answer already covers the T-prime side in part, so the challenge is asked to concentrate on the D-credit argument and on my "no investment in T-prime now" preference); a Pro follow-up in the same conversation comes with the fit declaration, not before. (ii) After the challenge, the D-credit zero-fit diagnostics on 955001–955032 under H_central (hungarian), declared now with the choice they change: (a) the share of delivered traffic whose widest path uses at least one relay hop, mean over 32 worlds × 3,000 steps; (b) per UAV-step the removal difference D_{i,t} on the QoS term, its distribution across UAVs, and for relay-serving UAVs Var(D_r) and Corr(D_r, G) against Var(G) (the team return's variance share attributable to the others); (c) the wall cost of the eight removal recomputations per step (`_static_qos_with_unavailable_uavs`), measured once before the batch. Rule: (a) < 10 % → no fit is bought and the candidate is retired for this host; (a) ≥ 25 % and the relay agents' difference signal materially cleaner than the team return → a bounded fit declaration (2 fits) goes to a Pro follow-up and engineering review before any launch; in between → a targeted revision (β-mixed credit or relay-only counterfactual) argued in writing first. Cost bound 2 h CPU on this host, 0 fits. Not bought: the ranked-IDENTITY panel, the identity-battery explanation test, slot ids in the trace.
+
+## 2026-09-27 — Independent challenge of the Stage 2-0 entry and the two arguments (hmasd-research-critic, separate context, read-only, on the working tree): MATERIAL_DISSENT yes on eleven statements; my first-hand verification, disposition, D-credit argument withdrawn to revision, next step redefined
+
+**Verification before acceptance (mine, from the traces and the code).** Every recomputed number reproduces: native J hungarian − identity +30.2 (SE 7.5, 22/32) before step 1300 and +27.6 (SE 26.5, 17/32) after it; the non-QoS reward term (Σ qos − Σ reward) after 1300 is 64.5 J under identity against 27.5 J under hungarian (difference 37.0, SE 21.5); xy path 186 km under identity against 136 km under hungarian (105.5 against 62.7 km by step 900); mean battery at step 900 .476 against .535; F-mode share .404 against .325, charging share .070 against .057; under identity UAV 0 or UAV 1 (the relay slots) is out of normal mode in .487 of the post-1300 steps; hungarian's post-1300 QoS by number of normal-mode UAVs .58 (0), .69 (1), .74 (2), .76 (3), .80 (4–5), .82–.84 (6–8); the strict cut before either mode's first entry gives +.028 (SE .006, 23/32); the cut at 1044 gives +.028 / −.004. Code: the return-constraint cost is a team maximum over UAVs (`energy_aware.py` 797–807); QoS backhaul comes from `routing_paths` in `_calculate_end_to_end_user_rates` (path record, access bandwidth split, user rate = max over UAVs), not from `_widest_backhaul_capacities`; `_static_qos_with_unavailable_uavs` zeroes the batteries, re-runs channel update, association and routing, then restores and re-runs (1371–1390), and its only callers are the feasibility estimators; `enable_soft_handover = True` (`configs/config_1.py:104`) with hysteresis memory in `routed_core._update_serving_sets`; the ordinary high-level path already carries a per-record `reward_sum` with per-agent values (`hmasd/utils.py` 783–1069, `compute_high_level_advantages` returns at once under `ordinary_completed_segments`); the agent value heads condition on the encoded observations (`hmasd/networks.py` 786–789). All confirmed.
+
+**Disposition: all eleven dissents accepted.**
+1. "The whole Hungarian advantage lies in the deployment window, nothing afterwards" holds for QoS only. In the native objective the index convention costs +57.8 J (SE 24.6, 21/32) overall, +30 J before and +27.6 J (SE 26.5) after the cut, and identity pays +37 J (SE 21.5) more non-service cost after it. Conditional derivation (now tested at zero cost, not bought as a fit): longer index-assigned transits (186 against 136 km) cost service during deployment and energy afterwards (earlier shield entry, F-mode share .40 against .32). Pro §5's condition "J 没有显示被 QoS 掩盖的明确代价" is therefore not met by the index convention; the statement "no material disagreement remains" is corrected to that extent (Pro's dissent object itself stays withdrawn).
+2. "+.32 de-duplication content" is withdrawn from every stake argument: it measures escape from a degenerate absorbing stack under co-located spawn (co-located rows share the argmin, the state is absorbing, the 300 m hysteresis blocks en-route switches; only a return from charging breaks the tie).
+3. "Energy/return terms are already per-agent in nature" is false: the return cost is a team maximum.
+4. The mechanism paragraph named the wrong function for QoS backhaul, and "duplicated server → D ≈ 0" is underived (bandwidth split, max over UAVs).
+5. "G_team identical → relay labels unlearnable" and "D changes the expectation, which no baseline can do" are withdrawn: the shared return gives an unbiased, noisy team gradient; the subtracted term R(−i) is either a control variate (variance only) or, where it depends on i's own action through the state, the others' observations, the station queues and the labels z_{>i} sampled conditional on z_i, an objective change with the known redundancy failure (backup relays and doubled servers earn no credit). The bias-versus-variance discriminator and the Var/Corr diagnostic are withdrawn.
+6. RESEARCH.md line 524's caution applies to D because z_{>i} are sampled conditional on z_i (COSAC, arXiv 2604.17693, treats exactly this fixed-order case — to be read first-hand).
+7. `_static_qos_with_unavailable_uavs` is not a usable per-step probe as it stands: it mutates soft-handover state through association; per-step training use needs snapshot/restore and a bit-identity test of the realised trajectory, both uncosted.
+8. Per-agent GAE already exists on the ordinary path; the engineering change is vectorising `reward_sum`.
+9. "2 fits D-credit v SET" isolates nothing (SET has no coordinator); the isolating comparison is D against the shared return on the same architecture and a named label substrate.
+10. "Composition NEW" is pending until COSAC, *Learning Individual Difference Rewards in MARL* (AAMAS 2023) and the programme's `expressibility_gated_renewal_credit_relay` (EGRCR, PARKED: expressibility passed, utility zero) have been read first-hand; "mechanism RECORDED" stands.
+11. Coherence: D-credit's mechanism ("relay-type labels become learnable") presupposes labels with relay semantics, i.e. T-prime's grounded substrate; MI-skill labels carry none. Rating T-prime "low" while proposing D-credit on relay labels was inconsistent. T-prime is therefore a prerequisite substrate question rather than a rejected study; the coherent candidate comparison is T-prime with the shared return against T-prime with D, one instance each, inheriting T-prime's confounds (the reviewer's and Pro's "do not stack changes" caution applies and is recorded).
+
+**Consequences.** The D-credit argument of the previous entry is withdrawn to revision; the declared zero-fit diagnostics are redefined before anything runs: relay-hop traffic share as declared; the magnitude and sparsity of D_i under redundancy with a pre-written retirement rule (median |D_i| ≈ 0 over most UAV-steps → retire); a probe bit-identity test; the measured per-step wall with a declared maximum slowdown. The Stage 2-0 reading keeps its QoS statements with the J correction above. Not bought: the ranked-IDENTITY panel (the natural experiment — relay slot vacant in .49 of post-1300 steps at equal post-1300 QoS, and hungarian's QoS nearly flat in the number of available UAVs — says the QoS confound is small), slot ids, any D-credit v SET fit, any T-prime/SET+A batch before the substrate question is settled. Next session's first items, in order: the rewritten D-credit argument (substrate, isolating comparator, reward scope, routing facts, variance/objective framing, first-hand COSAC/AAMAS-2023/EGRCR positioning), then the redefined diagnostics as a bounded L0, then a fit declaration only if D survives, with its Pro follow-up and engineering review. The owner's usage limit was reached while this entry was written; nothing is running.
+
+## 2026-09-27 — D-credit argument, second version after the challenge: substrate named, comparator isolated, reward scope and routing facts corrected, variance-versus-objective framing, COSAC / LIDR / EGRCR read first-hand; amendments to the T-prime argument; the credit question also goes to a controllable second direction
+
+**1. Contribution sentence (v2).** "On HMASD's sequential skill coordinator with grounded labels — the T-prime substrate on S7-S2/H3000 — replacing the shared k-step team return in each agent's high-level advantage by that agent's exact removal difference on the service term, D_i = Σ_t [QoS_t − QoS_t(−i)], with the non-service terms kept shared, improves service over the same architecture trained with the shared return at equal budget, and the gain concentrates where the relay chain binds." The isolating comparator is **T-prime(shared return) against T-prime(D)**, one instance each on the same seed; T-prime(shared) doubles as the substrate check (does the grounded coordinator learn a non-trivial assignment: label occupancy, duplicates, stability, the frozen-low-level label swaps of the v2 declaration). SET+A and R (Pro §4) come after, and only if a T-prime instance shows service above SET; the substrate question is settled first (challenge item 11).
+
+**2. What D is, stated honestly.** D is an objective change: Σ_i D_i ≠ G. With the other agents held at their realised actions, D_i is factored with respect to G (Wolpert–Tumer), so improving D_i at fixed others improves G; its two known costs are that substitutable agents (a backup relay, a doubled server) receive ≈ 0 credit, and that in a fixed-order decoder the downstream labels z_{>i} are sampled conditional on z_i, so R(−i) evaluated on the realised state carries an indirect dependence on i's own label (COSAC's "indirect effect"; the caution of RESEARCH.md line 524 applies). The shared return is an unbiased, noisy estimate of the team gradient; D does not remove a bias. The claim is therefore a learnability claim about one role structure: a relay UAV's contribution enters the team reward only through other UAVs' backhaul, so under the shared return its label signal is dominated by the other seven agents' service, while D_r concentrates the signal on what r's presence changed, when the chain binds. The β-mixture R_i = β·G + (1 − β)·D_i (LIDR's team-plus-difference form) is the standard hedge against the redundancy cost; β is a declared design constant, never tuned on scores.
+
+**3. Reward scope (corrected).** D acts on the QoS term only. The return-constraint cost is a team maximum over UAVs (`energy_aware.py` 797–807), the cutoff/depletion penalties are team counts, and the graph PBRS term is potential-based on the team; all of them stay shared in every agent's return. Per-agent segment return = Σ_t [QoS_t − QoS_t(−i)] + Σ_t [R_t − QoS_t], or the β form of item 2.
+
+**4. Mechanism facts (corrected from the code).** QoS_t = mean over users of min(1, delivered/demand). `delivered_by_uav[u] = min(1, backhaul_u / access_sum_u) × access capacities of u`; `backhaul_u` is the bottleneck capacity stored in `routing_paths[u] = (path, capacity)` by `_find_widest_path_to_ground_bs` under the S7 default `widest_path` protocol with at most `max_hops = 4` hops (`routed_core.py` 4544–4577, 5020–5050); a user's rate is the maximum over UAVs; a UAV's access bandwidth is bandwidth/n_uavs (FDMA) split equally over its connected users. Hence a relay UAV r contributes only through the paths that pass r, and removing r re-associates and re-routes the team: D_r counts what the rerouted team loses, not r's traffic share. A doubled server changes the per-user split and the max over UAVs; its D is not ≈ 0 by construction — that was an error. The probe `_static_qos_with_unavailable_uavs` (1371–1390) zeroes the removed UAVs' batteries, recomputes channel, association and routing, and restores by recomputing again; with `enable_soft_handover = True` (`configs/config_1.py:104`) the association step updates the hysteresis memory `user_serving_sets`, so the probe is not side-effect-free. For the diagnostics it runs on a deep copy of the environment; for training it needs snapshot/restore and a bit-identity test, both in the engineering cost.
+
+**5. Closest prior work (read first-hand today; PDFs in the session scratchpad).** *COSAC* — Deshmukh, Subramanian, Addanki & Vlassis, arXiv 2604.17693v2 (May 2026): fixed-order sequential teams sharing one team reward; the Sequential Aristocrat Utility is the unique prefix-conditional baseline maximising learnability; a critic-free estimator (ridge-fitted additive decomposition of the team reward plus fictitious policy continuations for the indirect effect through downstream agents); closed-form bias and variance, bias growing with the reward's departure from additivity; contextual-bandit abstraction, "extension to full sequential MDPs left to follow-up". This is the method-level neighbour of HMASD's autoregressive coordinator and the **strongest simple alternative** to D: a variance-only fix with no environment recomputation, whose known limit is non-additive rewards — and a relay chain's min-type reward is non-additive. *LIDR* — Yang, Yang & Zhang, AAMAS 2023 (extended abstract): a learned reward-decomposition network gives D_i = R̂(s, o_i, a_i) − max_a R̂(s, o_i, a) and each agent is trained on R_i = G + L_i; model-free, SMAC — the precedent for the team-plus-difference mixture with a learned decomposition. *Dr.Reinforce* (Castellini, Devlin, Oliehoek & Savani): exact or learned difference rewards in policy gradients, simultaneous primitive actions. Programme record: `learned_counterfactual_agent_credit` adverse on S1 (Q − V −.018); `expressibility_gated_renewal_credit_relay` (a two-agent renewal microhost credit study with a waiter/joiner counterfactual effect, technically complete at B1, not advanced); the chain-attributed reward on the reserve list, untested. **Novelty label (v2):** difference credit TRIED (simultaneous, primitive actions, exact and learned); sequential prefix-conditional credit TRIED (COSAC, bandit); microhost credit studies RECORDED (EGRCR); the composition "exact physics removal difference on the service term, accumulated over k-step skill segments, inside a fixed-order label decoder with a learned low level, on a chain-binding host" NOT FOUND after these reads — recorded as provisional, not as "new". The honest scientific question is *D against SeqAU on non-additive chain rewards*, and that question is cheaper to answer on a controllable host first (item 10).
+
+**6. Discriminating prediction (v2).** (a) On the controllable host: SeqAU is at least as good as the shared return everywhere; D beats SeqAU only in the strongly non-additive chain-binding regime and loses in the redundancy regime; the regime boundary is measured there. (b) On this host the zero-fit diagnostics place H_central's operating point on that map (relay-hop share of delivered traffic; D sparsity). (c) If the two fits are bought: T-prime(D) − T-prime(shared) ≥ +.03 QoS/step at c06 with the learner's relay-hop share rising above T-prime(shared)'s within the first 300k steps; if T-prime(shared) already reaches the .60 milestone, or its labels collapse (occupancy trivial), D is not bought.
+
+**7. Zero-fit diagnostics (redefined; the choice they change).** Re-simulate H_central (hungarian) on 955001–955032 with a per-step observer that, every 10th step, (i) reads `routing_paths` and `delivered_by_uav` to record the relay-hop traffic share (delivered mass on paths with ≥ 2 hops over all delivered mass) and the set of UAVs lying on another UAV's path; (ii) computes D_i^QoS for i = 0…7 on a deep copy of the environment (side-effect-free by construction); (iii) records QoS_t, Σ_i D_i / QoS_t, the per-UAV distribution of D_i, the share of UAV-steps with |D_i| < .01, and mean |D_r| for UAVs on a relay path against the others; (iv) one probe bit-identity test — one world run twice, with the raw probe called every step and without, comparing realised QoS and positions bitwise; (v) the wall of one raw probe call and of one deep-copy probe. **Pre-written rules:** relay-hop share < 10 % → D-credit retired for this host; share ≥ 25 % and D non-sparse where the chain binds (mean |D_r| on relay UAVs ≥ 2 × the others; fewer than 80 % of UAV-steps with |D_i| < .01) → the two-fit declaration with β and the probe cost fixed, to a Pro follow-up and an engineering review; anything in between → a targeted revision argued in writing first. Cost bound 2 h CPU on this host, 0 fits. Declared maximum training slowdown for a per-step probe: 1.5 × the collection wall; above it the credit is computed at decision boundaries (every k = 10 steps) or on a subsample, declared before any fit.
+
+**8. Cost.** Diagnostics ≤ 2 h CPU (an L0 to the implementer: an admitted `credit-diagnostics` phase of the b03 runner, no shared-code change). Fits, only after item 7 succeeds: 2 × ≤ 13 h on wsl_4070 after DM1's block, plus ≈ 3 h evaluation each. Engineering for a fit: vectorised `reward_sum` on the ordinary high-level path (per-agent GAE already exists there), an environment hook returning per-agent removal QoS with snapshot/restore, the bit-identity test, an engineering-reviewer pass (shared core).
+
+**9. Amendments to the T-prime argument of the results entry.** The "+.32 de-duplication content" sentence is withdrawn (degenerate absorbing stack). The permutation content is +.007 QoS/step but +.019 J/step (2.3 SE) in the native objective, with energy in it (186 against 136 km). T-prime is the prerequisite substrate for the credit question; its first instance (shared return) is bought together with the D instance if item 7 succeeds. My "low" preference applied to T-prime as a coordination claim on its own and stands for that claim only.
+
+**10. Second direction (owner authorisation 2026-09-27: two directions at a time, related, sharing insight).** The credit question of items 2, 5 and 6(a) is declared today as its own direction, `sequential_coordinator_credit`: a controllable chain-relay microhost with fixed-order label decisions, ground-truth per-agent advantages by enumeration, the estimators shared return / prefix-conditional baseline / SeqAU / exact D / β-mixture compared on advantage error and learning regret over a regime map (redundancy × chain binding), then the k-step-segment and learned-low-level extensions that COSAC leaves open. This direction's zero-fit diagnostics read that map; the SeqAU implementation for HMASD's coordinator returns here as the alternative arm on the T-prime substrate. Its declaration is in `docs/research/candidates/sequential_coordinator_credit/NOTES.md`.
+
+## 2026-09-27 — Zero-fit credit diagnostics: bindings declared before the run (amendment to item 7 of the D-credit v2 entry, after the second independent challenge)
+
+Declared before any launch, on top of item 7: (i) the pre-written 2× rule reads **R1** — a UAV is a relay at a probe step when it appears as a non-first node in another UAV's `routing_paths` entry (it carries traffic); the plan-slot definition **R2** (the UAV's current target is a `kinds == "relay"` row of the last plan) is recorded beside it, not used by the rule; (ii) probe steps are `t % 10 == 0` of the evaluator's step index, on the post-step state that produced reward t, with the removal implemented as the existing probe does (battery ratio 0 → communication-unavailable) on deep copies of the raw environment; (iii) the common coordinate with `sequential_coordinator_credit` is the first-order additive residual `rho_t = (Σ_i D_i − QoS_t) / QoS_t` over probe steps with QoS_t > 0 (R_∅ = 0 exactly: an unavailable UAV serves nothing), reported as median, IQR and the share with |rho| > .25; (iv) bit identity in two layers — the phase's hungarian panel against Stage 1's committed H_central panel on all 32 worlds (the deep-copy probe must move nothing), and world 955001 run plain against the raw in-place probe `_static_qos_with_unavailable_uavs([i])` at every step (one world, the input to the training-engineering cost, not a proof); (v) the cost readings are the mean probe wall against the mean collection wall per step, giving the implied slowdown of a per-step and of an every-10th-step probe against the declared 1.5×. Measured on this host before the L0 (world 955001, 40 random steps): deep copy ≈ 5 ms, one recompute ≈ 8 ms reproducing the live QoS bitwise, eight removals ≈ 94 ms, `env.step` ≈ 39 ms; expected phase wall ≈ 20–25 min on 8 workers, bound 2 h. The scope note is `temp/directions/energy_relay_benchmark/L0_b03_credit_diagnostics.md` (one implementer task, no shared-code change, the runner gains a `credit-diagnostics` subcommand). The order of work follows the second challenge: this phase first, then the microhost's first cell.
+
+## 2026-09-27 — Peer message from Root (commit afed567db, `docs/Claude_docs/inbox/20260927_uav_cooperative_planning_ROOT.md`): the owner's main-line clarification relayed — UAV path planning and swarm cooperative planning, MARL-enhanced; "the energy-relay optimisation looks off track"; my position, the direction's object restated in planning terms, one pre-written pivot condition
+
+**Message (data).** Root quotes the owner (2026-09-27): innovation is due; exchange freely with the peer; put the effort into MARL or algorithmic-engineering innovation for the UAV base-station system; "Claude's so-called energy-relay optimisation seems a little off track; the main thing is UAV path planning and UAV swarm cooperative planning, enhanced with MARL." Root's reading: the object is joint path / coverage layout / cooperative task planning with its real service payoff; energy, return and charging stay constraints; DM4's energy_fraction rule closed negative (f80983538, native J −208); DM1/DM2 interruptions were technical; the uncommitted `sequential_coordinator_credit` draft is read as pending and must say how a credit difference changes real joint paths / role commitments / replanning against a capable same-information planner and flat/same-architecture baselines, a small model serving that judgment but not an independent line. Root asks for one thing: agreement or revision of the main line and division, and my candidate converged to one contribution claim with nearest method, strongest simple alternative, discriminating planning consequence and first full cost — or the pivot with its reason.
+
+**Position (sent through the owner-authorised channel today; no ACK loop).** (1) Agreement with the object. (2) This direction never optimised an energy objective: energy enters through the production return shield and J. Its findings are planning findings on S7: Stage 1 — SET c06 .437/.438 against H_local .597 and H_central .774 QoS/step; Stage 2-0 — at fixed layout and paths the assignment coordination (who takes which anchor) is worth S = +.007 ± .007, the planner's payoff sits in the layout and the deployment-window entry, and independent nearest decisions collapse the team on one anchor (−.32). What MARL must close is layout/role grounding and execution, not the assignment permutation. (3) One contribution claim: grounded hierarchical assignment/timing — T′ (coordinator reads the planner's anchors and commits each UAV to one anchor per k = 10 decision; the low level executes) against the equal-grounding flat learner SET+A, toward H_local; nearest methods H_central/H_local and SET+A; strongest simple alternative R (fixed Hungarian labels, low level from scratch; Pro's proposal); discriminating consequences: T′ − SET+A ≥ +.05 QoS/step at c06 with ≥ 20/32 worlds, deployment-window QoS and relay-hop share above SET+A's, stable role commitments, and the HUNGARIAN/IDENTITY/PERMUTE label interventions on T′'s own low level; first full cost: the zero-fit diagnostics (≤ 2 h CPU, L0 dispatched today) then 4 fits (T′ × 2, SET+A × 2, ≤ 13 h each on wsl_4070 after DM1's block, ≈ 3 h CPU evaluation each). (4) Pre-written pivot: if the diagnostics show a relay-hop traffic share < 10 % under H_central's layout, the chain-credit claim is retired on this host, `sequential_coordinator_credit` stays bounded to the T′ second-arm choice (agreeing with Root: no independent line beyond the first cell), and the MARL-increment question moves to where the planner is weak — anchors adapted to realised service, and return/charging rotation planned jointly with coverage (the planner refills vacated slots only reactively at replans) — argued in writing before anything is declared. (5) Division: I keep the coordinator/assignment estimand (T′ against SET+A, same architecture family); Stage 1/2-0 panels and H_central/H_local are shared comparators; I do not claim the general "MARL against strong planning baselines" estimand (Root's new DM3). (6) The owner's words reached me relayed; the owner is present in my session and my report asks for direct confirmation of the emphasis; nothing was launched or cancelled on the relayed text.
+
+## 2026-09-27 — Credit-diagnostics phase delivered (commit db4e2a3a6, on origin); launch attempt denied by the session's command classifier; command handed to the owner; two engineering facts from the implementer's scratch checks
+
+**Delivery.** `experiments/candidates/energy_relay_benchmark/b03/credit_diagnostics.py` (904 lines), the `credit-diagnostics` subcommand of `scripts/run_energy_relay_benchmark_b03.py` (+18), `tests/…/b03/test_b03_credit_diagnostics.py` (13 tests); b03 61 passed, b01 48 passed; no edit outside these three files. Deviations accepted: `run_credit_tasks` and `_run_hungarian_world` copy the stake worker's body with `observer=` passed through (a test pins bitwise equality of rows and arrays with `evaluate_stake_task` at horizon 40); the npz carries extra integer arrays (`relay_hop_traffic_bps`, `relay_hop_users`, `delivered_users`, `failed`, `probe_count`, `probe_every`), −1/False padding for failed worlds in integer/bool arrays, float32 storage (readings computed from float64 in memory, so a re-read reproduces them only to float32); relay UAV-steps are defined as flag ∧ available, others as ¬flag ∧ available, flagged-but-unavailable counted separately; R2 comes from the last plan (up to 29 steps old). Probe core read by me (`delivered_by_uav`, `user_servers`, `path_structure`, `relay_slot_mask`, `relay_hop_shares`, `recomputed_qos`, `removal_qos`, `probe_raw`, both observers): as specified.
+
+**Two facts from the implementer's scratch checks (world 952011, a fixture seed, not a panel world; cost and neutrality only, no D readings kept).** (i) The raw in-place probe `_static_qos_with_unavailable_uavs([i])` called every step **changes the realised reward** from step 101 on (largest difference .099) while positions stay identical — the soft-handover side effect predicted from the code (critic #1, item 7) is real; layer (b) will most likely record `raw_probe_trajectory_neutral: false`, and per-step training use of D needs the copy/restore path, not the raw probe. (ii) Cost at horizon 3000: 300 probes, mean .127 s (max .185 s) against a collection step of .059 s under load (.039 s uncontended in my smoke test) — a per-step probe would cost ≈ 3.2–4.3× the collection step, above the declared 1.5×; every 10th step ≈ 1.2–1.3×, within it. R1 held at every probe step from step 0 on that world with paths up to the hop limit, so the "direct paths at spawn" premise of the L0 was world-specific. Zero unavailable UAV-steps in 300 probes under the production shield (the "available" and "all" blocks will likely coincide). Risk noted by the implementer and accepted as a recorded quantity: `energy_aware.step` builds routing and connections before the battery update while the reward uses availability after it, so at a cutoff-crossing step `qos_copy_baseline` may differ from `qos_live`; D relative to the copy baseline is recomputable from the stored arrays.
+
+**Launch.** Origin already holds db4e2a3a6 (origin/main moved to d56e62bdc by another writer: DM1's second SET seed accepted on wsl_4070). My launch through the admission kernel — `scripts/hmasd_launch.py launch --direction energy_relay_benchmark --lead "Claude DM (WSL session)" --sha db4e2a3a6967a3d2735efd9ebd25989c77dc4372 --output /home/fires/hmasd-wsl/runs/energy_relay_benchmark/b03_credit_a01 --snapshot --node local_linux scripts/run_energy_relay_benchmark_b03.py credit-diagnostics --out /home/fires/hmasd-wsl/runs/energy_relay_benchmark/b03_credit_a01 --launch-sha db4e2a3a6967a3d2735efd9ebd25989c77dc4372 --workers 8 --threads 2` — was denied by the session's command classifier ("Out-of-Place Publication"); not retried or split; the identical command is handed to the owner. Host state at the attempt: 16 CPUs, load average ≈ 439, of which the transport's headless Chrome GPU process (pid 894510, ≈ 7.6 cores for 26 h) and the Codex app-server (≈ 2.9 cores) — the wall readings of the run will be contended; the D and share readings are load-independent; the uncontended cost reference stays the smoke test above. Expected wall ≈ 30–35 min uncontended, bound 2 h.
+
+**Owner confirmation (2026-09-27, in session): "agree the default".** The relayed main-line emphasis is handled as declared: the credit diagnostics run first and their pre-written condition (relay-hop share < 10 %) decides whether the chain-credit claim is retired and the MARL-increment question moves to the planner's weak points; no launch or cancellation on the relayed words alone.
+
+## 2026-09-27 — Peer review round 2 (Root, commit f3d7cd49b; the same independent review reused): rho_t relabelled, the credit-to-training bridge made non-automatic, the first full comparison revised — T′ × 2 / SET+A × 2 withdrawn as the first batch; staged isolating fits T′(shared) then T′(credit) under pre-written zero-fit and substrate conditions
+
+**Message (data).** Root's second message (`docs/Claude_docs/inbox/20260927_uav_cooperative_planning_ROOT.md`, second section) reports the Codex side's reorganisation (DM4: non-additive ordinary joint move/hold/relieve planning with cumulative service and full cost defined first; new DM3: closes B02, then longer-horizon cooperative decision learning, not my fixed-anchor label/credit object) and an independent Scientific Reviewer's reconstruction now in RESEARCH.md (anchor `uav-planning-review-20260927`; MATERIAL_DISSENT: yes against buying the 4-fit T′/SET+A batch on the present argument, against DM4's undefined target-only score, and against using the credit diagnostics as an automatic bridge to native training). Two of my arguments are to be revised: (a) (Σ_i D_i − R)/R on one controller's visited states is not COSAC's additive residual ε over joint label choices; (b) "AND coupling makes D's expected update vanish" is false (independent Bernoulli, R = a1·a2, removal to zero: D1 = R, logit gradient p1(1−p1)p2 > 0). Root's investment preference: one targeted full training pair (e.g. T′/R) plus a same-information executing-planner evaluation; not a cap, not a cancellation. One request: the revised contribution / first-comparison choice or reasons to keep, and the disposition of the credit-bridge argument, reusing the same review.
+
+**1. rho_t relabelled.** rho_t = (Σ_i D_i − QoS_t)/QoS_t on the executed planner's visited states is the **first-order removal non-additivity of the service function at those states**: how far the sum of single-UAV removal effects departs from the whole under the physics (association, FDMA split, widest-path routing) along one fixed controller's trajectory distribution. It is not COSAC's ε, which is the error of the best additive approximation of the *coordinator's* joint-label reward over the label space under the learner's own sampling; the two would coincide only if removal-to-idle were the label perturbation and the planner's states were the learner's. rho_t stays in the phase as declared, with a reduced role: it sets the binding/substitutability coordinates at which the microhost's configurations are read against this host, and it carries no weight in any fit decision by itself. Accepted with it: neither rho_t nor the relay-hop share determines which estimator improves HMASD's clipped, jointly normalised updates; that question belongs to the microhost's calibration items and to the isolating pair below.
+
+**2. The AND / "no gradient" claim** is withdrawn in `sequential_coordinator_credit`'s notebook (entry of today, counterexample verified numerically: .1260 = .1260). Consequence here: D's case on this host rests on relay-mass separation and de-duplication under the shared return's dilution, not on any vanishing update of a competitor.
+
+**3. Bridge made non-automatic (amends item 7 of the D-credit v2 entry and point (3)–(4) of the peer position above).** The pre-written rule "share ≥ 25 % and D non-sparse → the two-fit declaration" is replaced. The credit diagnostics decide only the *retirement* branch — relay-hop share of delivered traffic < 10 % under H_central's layout → chain credit retired on this host, pivot argued in writing — and supply coordinates. A credit fit is declared only when all of the following hold, each read from zero-fit or already-bought evidence and each written before the next thing is bought: **C1** the microhost first cell shows a configuration in which the chosen credit arm (SeqAU or D, by the cell's own rule) beats the shared return in gradient bias/variance and in ≥ 100-seed regret at matched normalisation; **C2** the diagnostics place H_central's operating point in that configuration's coordinates (share ≥ 25 %, mean |D_r| on relay UAV-steps ≥ 2 × the others, fewer than 80 % of UAV-steps with |D_i| < .01) and the every-10th-step probe stays within the declared 1.5× collection wall (scratch check: ≈ 1.2–1.3×; a per-step probe at ≈ 3.2–4.3× is excluded); **C3** rule S below, read on Fit A. A declaration then still goes to the §5 review (this review reused, not stacked) and to an engineering review of the per-agent return path. Share between 10 % and 25 % → a targeted revision in writing, no fit.
+
+**4. First full comparison revised.** (i) T′ as a coordination-only claim is retired by Stage 2-0: S = hungarian − identity = +.007 ± .007 QoS/step lies inside the .03 bar that the first independent review of B03 (its item H) set for "do not launch T as a coordination study"; the permutation content of the assignment at the planner's anchors is not worth a fit. R (same architecture, fixed Hungarian labels, low level from scratch) is needed only to identify that claim, so R is not bought either. (ii) T′ × 2 / SET+A × 2 (4 fits, 52 + 12 h) is withdrawn as the first batch: T′ − SET+A identifies the whole package, and my own D-credit v2 item 1 had already placed the isolating pair T′(shared) vs T′(credit) first with SET+A and R after; the peer position sent earlier today contradicted item 1 and is corrected here. (iii) Contribution sentence (learnability at equal budget): "In HMASD's fixed-order skill coordinator with grounded role labels, replacing the shared k-step team return in each agent's high-level advantage by a credit signal that separates non-additive joint roles (relay + server co-presence; de-duplication) — SeqAU or the removal difference, whichever the microhost selects — yields, at equal training budget with identical low level, labels and seed, better joint role commitments: fewer duplicated anchors, earlier refill of vacated slots, more stable commitments, and higher deployment-window and c06 service than the shared return." Nearest methods: COSAC (SeqAU, bandit), LIDR / Dr.Reinforce (difference credit, simultaneous primitive actions), HAPPO / MAT (joint advantage with a sequential update or decoder, not a per-agent credit); ALMA and MAT are the nearest joint-assignment learners for the package question, which is deferred to attribution. (iv) **Staging, declared now.** Fit A = T′(shared return), one instance, seed 26092731 (pairs with DM1's second SET seed for the secondary T′ − SET reading), ≤ 13 h on wsl_4070 after DM1's block, ≈ 3 h CPU evaluation: c06 deterministic on 955001–032 plus the PERMUTE-EP / ALL-FREE / HUNGARIAN-LABELS / IDENTITY-LABELS interventions on its own low level — used as a diagnostic of which layer is the bottleneck, not as a substitute for R. **Rule S (read on Fit A before Fit B, all at c06 deterministic on 955001–032):** occupancy := number of the 8 anchors carrying ≥ 5 % of the coordinator's label mass; collapse := ≥ 3 UAVs share one anchor in ≥ 25 % of decisions; reach := share of UAV-steps within 300 m of the labelled anchor, referenced to the same statistic of H_central's hungarian mode (from the Stage 2-0 traces, or a zero-fit re-simulation with the same observer if those traces lack the target coordinates); Δ_H := QoS(HUNGARIAN-LABELS on T′'s own low level) − QoS(T′'s own labels). S0: T′(shared) ≥ .60 QoS/step → no Fit B (no room; attribution next). S1: reach < 50 % of H_central's → the low level is the bottleneck → no Fit B; the next question is execution/grounding, argued in writing. S2: reach passes, occupancy ≥ 6 and not collapsed, Δ_H < +.03 → the shared-return coordinator already sits at the fixed rule's level on this executor → no Fit B. S3: reach passes and (Δ_H ≥ +.03 or collapsed) → Fit B bought, given C1–C2. Fit B = T′(credit): same seed, labels, low-level architecture and budget; primary reading T′(credit) − T′(shared) paired per world at c06 deterministic, bar +.03 QoS/step with ≥ 20/32 worlds; pre-declared secondary readings duplicates, occupancy, commitment stability, deployment-window QoS and relay-hop share. Worst case 2 fits ≈ 26 h GPU + ≈ 6 h CPU + the engineering of item 8 of the v2 entry; it is the only batch whose result the present evidence cannot predict. (v) Attribution after the pair, only if B − A meets the bar: SET+A (feature control) and DM1's SET seeds as the flat references; R only if the claim is re-widened to assignment. (vi) Order: credit diagnostics (launch pending with the owner) → microhost first cell (≤ 2 h CPU; L0 after the diagnostics are read) → Fit A → rule S → Fit B. Nothing is launched on this entry.
+
+**5. Division.** Unchanged: I own the coordinator's learning-signal estimand on the T′ substrate; the Stage 1 / 2-0 panels, H_central / H_local and H_central@10 are shared comparators; the general "MARL against a strong planner" estimand is DM3's. My pre-written pivot loci (service-adaptive anchors; coverage-joint rotation) overlap DM4's joint move/hold/relieve object: before opening either I read DM4's declared intervention and comparator, and any pivot is argued in writing against DM4's transit planner as the ordinary comparator.
+
+**Sent (2026-09-27, 13:3x UTC).** The position of items 1–5 went to Root through the owner-authorised queue channel as one message (queue id 01a0e315-2d0c-7f11-b9e9-a83a37e5774e, thread 01a0e091-9f32-7872-b582-b37a14f8d981); no reply requested. Two facts recorded for the launch: `hmasd_launch.py` applies the node's configured `path_prefix` to the child environment itself (`_child_environment`), so the launch line needs no shell `PATH=` prefix; the delivered commit's full sha is db4e2a3a6967a3d2735efd9ebd25989c77dc4372 (on origin/main).
+
+**Amendment (same day, before any publication): Fit A is conditional too.** With T′ retired as a coordination-only claim, Fit A's only purpose is to be the substrate for Fit B, so it is bought only after the credit diagnostics have been read outside the retirement branch (share ≥ 10 %; between 10 % and 25 % only through the written targeted revision) and C1 and C2 both hold; otherwise no T′ fit at all. The order of item 4 (vi) is therefore diagnostics → first cell → (C1 ∧ C2) → Fit A → rule S → Fit B, with a written reading at each arrow. Engineering requirement noted for the Fit A L0, not opened now: the evaluator trace must carry per-decision labels and the anchor coordinates so that rule S's reach statistic can be read.
+
+**Launched (2026-09-27 13:43:44Z).** After the owner wrote the option-B settings in this session (allow rules for the launcher and for git in `~/.claude/settings.json`), the identical command as one bare invocation without the `PATH=` prefix was accepted by the admission kernel: claim key 69303d12f6a854666f9dada6f6b206435c633ee9c614e1a761b264efd2485525, control observation origin/main f3d7cd49b at 13:43:43Z, source snapshot `.git/hmasd-launch-sources/fb7689ef8bea4892bd27de106ac9b413` at db4e2a3a6967a3d2735efd9ebd25989c77dc4372, supervisor pid 2654712, runner pid 2654713 (posix session), output root `runs/energy_relay_benchmark/b03_credit_a01` (launch-manifest, admission-preflight, stdout/stderr logs, `process-exit.json` on exit). Observation is a deterministic background waiter of this session on the output files; no model waits. Host at launch: load still contended by the orphan headless-Chrome GPU process, so the wall readings are read against the uncontended smoke-test reference; the D and share readings are load-independent. The phase's readings are bound by the "bindings declared before the run" entry and by item 3 of the peer-round-2 entry (retirement branch only; C1–C3 before any fit).

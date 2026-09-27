@@ -1,0 +1,1153 @@
+{
+ "worlds": [
+  955001,
+  955002,
+  955003,
+  955004,
+  955005,
+  955006,
+  955007,
+  955008,
+  955009,
+  955010,
+  955011,
+  955012,
+  955013,
+  955014,
+  955015,
+  955016,
+  955017,
+  955018,
+  955019,
+  955020,
+  955021,
+  955022,
+  955023,
+  955024,
+  955025,
+  955026,
+  955027,
+  955028,
+  955029,
+  955030,
+  955031,
+  955032
+ ],
+ "steps": 3000,
+ "trace_panel_consistency": {
+  "tolerance": 1e-06,
+  "problems": []
+ },
+ "first_entry_step_mean": {
+  "hungarian": 1299.84375,
+  "identity": 996.59375,
+  "independent_nearest": 1746.84375
+ },
+ "first_input_step_mean": {
+  "hungarian": 1616.96875,
+  "identity": 1311.34375,
+  "independent_nearest": 1920.53125
+ },
+ "A_hungarian_world_clock": {
+  "definition": "boundary_w = hungarian first_entry_step of world w",
+  "boundaries": [
+   1339,
+   1488,
+   1370,
+   1305,
+   1447,
+   1446,
+   1461,
+   1354,
+   955,
+   1283,
+   1243,
+   1380,
+   1286,
+   1040,
+   660,
+   1537,
+   1458,
+   1049,
+   1416,
+   1546,
+   1279,
+   1500,
+   1203,
+   1131,
+   1410,
+   1541,
+   1140,
+   1293,
+   1323,
+   797,
+   1556,
+   1359
+  ],
+  "per_mode_per_step_mean": {
+   "hungarian": {
+    "pre": 0.8099960111191631,
+    "post": 0.7461812978664348
+   },
+   "identity": {
+    "pre": 0.7887106403555003,
+    "post": 0.7491529727231796
+   },
+   "independent_nearest": {
+    "pre": 0.4455082615214024,
+    "post": 0.44827024057875897
+   }
+  },
+  "differences": {
+   "hungarian_minus_identity_pre": {
+    "paired_mean": 0.021285370763662728,
+    "paired_se": 0.006220123847205232,
+    "n_worlds": 32,
+    "worlds_hungarian_leads": 22
+   },
+   "hungarian_minus_identity_post": {
+    "paired_mean": -0.0029716748567447417,
+    "paired_se": 0.012530479973505254,
+    "n_worlds": 32,
+    "worlds_hungarian_leads": 14
+   },
+   "pre_window_mass_share_identity": {
+    "pre_mass": 816.8248254321516,
+    "total_mass": 655.399479534477,
+    "share": 1.2463006928420712
+   },
+   "hungarian_minus_independent_nearest_pre": {
+    "paired_mean": 0.36448774959776076,
+    "paired_se": 0.03441762654838594,
+    "n_worlds": 32,
+    "worlds_hungarian_leads": 32
+   },
+   "hungarian_minus_independent_nearest_post": {
+    "paired_mean": 0.29791105728767575,
+    "paired_se": 0.03450796265575002,
+    "n_worlds": 32,
+    "worlds_hungarian_leads": 32
+   },
+   "pre_window_mass_share_independent_nearest": {
+    "pre_mass": 15070.688343696296,
+    "total_mass": 31118.52123270929,
+    "share": 0.48429963078885635
+   }
+  }
+ },
+ "B_common_step": {
+  "definition": "boundary = 1300 for all worlds (rounded mean hungarian first entry)",
+  "boundaries": [
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300,
+   1300
+  ],
+  "per_mode_per_step_mean": {
+   "hungarian": {
+    "pre": 0.812657351600848,
+    "post": 0.7444810753933373
+   },
+   "identity": {
+    "pre": 0.7896774989355785,
+    "post": 0.7500061193518066
+   },
+   "independent_nearest": {
+    "pre": 0.44900077338303584,
+    "post": 0.4505397596056847
+   }
+  },
+  "differences": {
+   "hungarian_minus_identity_pre": {
+    "paired_mean": 0.022979852665269463,
+    "paired_se": 0.00579435024612319,
+    "n_worlds": 32,
+    "worlds_hungarian_leads": 22
+   },
+   "hungarian_minus_identity_post": {
+    "paired_mean": -0.005525043958469346,
+    "paired_se": 0.01195622942918423,
+    "n_worlds": 32,
+    "worlds_hungarian_leads": 12
+   },
+   "pre_window_mass_share_identity": {
+    "pre_mass": 955.9618708752096,
+    "total_mass": 655.399479534477,
+    "share": 1.4585941867915713
+   },
+   "hungarian_minus_independent_nearest_pre": {
+    "paired_mean": 0.36365657821781217,
+    "paired_se": 0.034683202238367274,
+    "n_worlds": 32,
+    "worlds_hungarian_leads": 32
+   },
+   "hungarian_minus_independent_nearest_post": {
+    "paired_mean": 0.2939413157876526,
+    "paired_se": 0.03437484196423357,
+    "n_worlds": 32,
+    "worlds_hungarian_leads": 32
+   },
+   "pre_window_mass_share_independent_nearest": {
+    "pre_mass": 15128.113653860986,
+    "total_mass": 31118.52123270929,
+    "share": 0.48614500479410727
+   }
+  }
+ },
+ "trace_diagnostics": {
+  "hungarian": {
+   "per_world": [
+    {
+     "target_position_changes_per_uav_per_1000_steps": 21.833333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.9166666666666666,
+     "mean_distinct_targets_sampled": 5.7,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.7125,
+     "seed": 955001,
+     "qos_per_step": 0.8425319235722224
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 21.375,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.7916666666666667,
+     "mean_distinct_targets_sampled": 5.64,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.705,
+     "seed": 955002,
+     "qos_per_step": 0.7888837249775728
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.583333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.6666666666666666,
+     "mean_distinct_targets_sampled": 5.6,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.7,
+     "seed": 955003,
+     "qos_per_step": 0.7795614308367173
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.0,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.9583333333333334,
+     "mean_distinct_targets_sampled": 5.15,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.64375,
+     "seed": 955004,
+     "qos_per_step": 0.8296369929959376
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.125,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.7083333333333334,
+     "mean_distinct_targets_sampled": 5.28,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.66,
+     "seed": 955005,
+     "qos_per_step": 0.6969531722764174
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 22.0,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.25,
+     "mean_distinct_targets_sampled": 5.61,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.70125,
+     "seed": 955006,
+     "qos_per_step": 0.8549272727966308
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.083333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.9583333333333333,
+     "mean_distinct_targets_sampled": 5.31,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.66375,
+     "seed": 955007,
+     "qos_per_step": 0.7451936601102352
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 22.25,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.75,
+     "mean_distinct_targets_sampled": 5.73,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.71625,
+     "seed": 955008,
+     "qos_per_step": 0.6116586509694656
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.625,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.4166666666666667,
+     "mean_distinct_targets_sampled": 5.19,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.64875,
+     "seed": 955009,
+     "qos_per_step": 0.8187591677630941
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 21.25,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.25,
+     "mean_distinct_targets_sampled": 5.5,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.6875,
+     "seed": 955010,
+     "qos_per_step": 0.7710691012342771
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.208333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.9583333333333334,
+     "mean_distinct_targets_sampled": 5.33,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.66625,
+     "seed": 955011,
+     "qos_per_step": 0.6997699418614308
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.625,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.125,
+     "mean_distinct_targets_sampled": 5.16,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.645,
+     "seed": 955012,
+     "qos_per_step": 0.6081522866090139
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.875,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.375,
+     "mean_distinct_targets_sampled": 5.12,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.64,
+     "seed": 955013,
+     "qos_per_step": 0.7922949198136727
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 21.416666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.25,
+     "mean_distinct_targets_sampled": 5.68,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.71,
+     "seed": 955014,
+     "qos_per_step": 0.8649369760304689
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 16.416666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.25,
+     "mean_distinct_targets_sampled": 4.49,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.56125,
+     "seed": 955015,
+     "qos_per_step": 0.8039209939042727
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.5,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.4583333333333333,
+     "mean_distinct_targets_sampled": 5.19,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.64875,
+     "seed": 955016,
+     "qos_per_step": 0.6167132308582465
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 23.375,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.9583333333333334,
+     "mean_distinct_targets_sampled": 6.05,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.75625,
+     "seed": 955017,
+     "qos_per_step": 0.7151698507666587
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.208333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.0,
+     "mean_distinct_targets_sampled": 5.3,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.6625,
+     "seed": 955018,
+     "qos_per_step": 0.7813816399263839
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.958333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.2916666666666667,
+     "mean_distinct_targets_sampled": 5.5,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.6875,
+     "seed": 955019,
+     "qos_per_step": 0.7206034388442835
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 23.25,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.0416666666666667,
+     "mean_distinct_targets_sampled": 6.02,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.7525,
+     "seed": 955020,
+     "qos_per_step": 0.7896955348650614
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 21.416666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.9583333333333334,
+     "mean_distinct_targets_sampled": 5.59,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.69875,
+     "seed": 955021,
+     "qos_per_step": 0.7423316008249918
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 21.625,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.25,
+     "mean_distinct_targets_sampled": 5.73,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.71625,
+     "seed": 955022,
+     "qos_per_step": 0.8391390415082375
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.0,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.4166666666666667,
+     "mean_distinct_targets_sampled": 4.89,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.61125,
+     "seed": 955023,
+     "qos_per_step": 0.7655308305621147
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.416666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.4583333333333333,
+     "mean_distinct_targets_sampled": 5.09,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.63625,
+     "seed": 955024,
+     "qos_per_step": 0.8643115750004848
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.041666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.125,
+     "mean_distinct_targets_sampled": 5.28,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.66,
+     "seed": 955025,
+     "qos_per_step": 0.8212457128763199
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 22.166666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.9583333333333334,
+     "mean_distinct_targets_sampled": 5.81,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.72625,
+     "seed": 955026,
+     "qos_per_step": 0.9031960771977902
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 21.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.0833333333333333,
+     "mean_distinct_targets_sampled": 5.58,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.6975,
+     "seed": 955027,
+     "qos_per_step": 0.7700255801379681
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.375,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.9583333333333334,
+     "mean_distinct_targets_sampled": 5.3,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.6625,
+     "seed": 955028,
+     "qos_per_step": 0.7196339000165463
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 22.375,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.5833333333333333,
+     "mean_distinct_targets_sampled": 5.85,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.73125,
+     "seed": 955029,
+     "qos_per_step": 0.8036031584441662
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.625,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.9583333333333334,
+     "mean_distinct_targets_sampled": 5.54,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.6925,
+     "seed": 955030,
+     "qos_per_step": 0.8268583933959405
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.75,
+     "mean_distinct_targets_sampled": 5.39,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.67375,
+     "seed": 955031,
+     "qos_per_step": 0.8382831606715918
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.916666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.875,
+     "mean_distinct_targets_sampled": 5.62,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.7025,
+     "seed": 955032,
+     "qos_per_step": 0.7427991676827271
+    }
+   ],
+   "mean_target_position_changes_per_uav_per_1000_steps": 20.729166666666664,
+   "mean_target_jumps_over_500m_per_uav_per_1000_steps": 1.1171875,
+   "mean_distinct_targets_sampled": 5.444375000000001,
+   "mean_duplicate_uav_share_sampled": 0.0,
+   "mean_finite_target_share": 0.6805468750000001
+  },
+  "identity": {
+   "per_world": [
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.791666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.7916666666666665,
+     "mean_distinct_targets_sampled": 5.04,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.63,
+     "seed": 955001,
+     "qos_per_step": 0.7078189211338759
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.041666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 4.125,
+     "mean_distinct_targets_sampled": 5.32,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.665,
+     "seed": 955002,
+     "qos_per_step": 0.7152854730238517
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.833333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.0833333333333335,
+     "mean_distinct_targets_sampled": 5.2,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.65,
+     "seed": 955003,
+     "qos_per_step": 0.7858813558767239
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 17.958333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.2083333333333335,
+     "mean_distinct_targets_sampled": 4.72,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.59,
+     "seed": 955004,
+     "qos_per_step": 0.7958093488862117
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.125,
+     "mean_distinct_targets_sampled": 5.35,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.66875,
+     "seed": 955005,
+     "qos_per_step": 0.7333461057742436
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.125,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.8333333333333335,
+     "mean_distinct_targets_sampled": 4.71,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.58875,
+     "seed": 955006,
+     "qos_per_step": 0.8302718612949054
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.166666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.4166666666666665,
+     "mean_distinct_targets_sampled": 4.88,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.61,
+     "seed": 955007,
+     "qos_per_step": 0.7577518883546194
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.25,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.7916666666666665,
+     "mean_distinct_targets_sampled": 4.78,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.5975,
+     "seed": 955008,
+     "qos_per_step": 0.6151300945480664
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 16.333333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.8333333333333335,
+     "mean_distinct_targets_sampled": 4.48,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.56,
+     "seed": 955009,
+     "qos_per_step": 0.8218464725365241
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.375,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.6666666666666665,
+     "mean_distinct_targets_sampled": 4.88,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.61,
+     "seed": 955010,
+     "qos_per_step": 0.7389514370784164
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 17.5,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.5833333333333335,
+     "mean_distinct_targets_sampled": 4.5,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.5625,
+     "seed": 955011,
+     "qos_per_step": 0.6854679677287737
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 17.375,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 4.333333333333333,
+     "mean_distinct_targets_sampled": 4.39,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.54875,
+     "seed": 955012,
+     "qos_per_step": 0.6783735982427994
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.041666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.5416666666666665,
+     "mean_distinct_targets_sampled": 4.71,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.58875,
+     "seed": 955013,
+     "qos_per_step": 0.7885151060471932
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.6666666666666665,
+     "mean_distinct_targets_sampled": 4.95,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.61875,
+     "seed": 955014,
+     "qos_per_step": 0.8448526131113371
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 15.708333333333334,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.0833333333333335,
+     "mean_distinct_targets_sampled": 4.2,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.525,
+     "seed": 955015,
+     "qos_per_step": 0.796621760914723
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.333333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.9166666666666665,
+     "mean_distinct_targets_sampled": 4.85,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.60625,
+     "seed": 955016,
+     "qos_per_step": 0.5914501500427722
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.5,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.75,
+     "mean_distinct_targets_sampled": 4.78,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.5975,
+     "seed": 955017,
+     "qos_per_step": 0.7920193654497465
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.25,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.625,
+     "mean_distinct_targets_sampled": 4.82,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.6025,
+     "seed": 955018,
+     "qos_per_step": 0.7882080130601923
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 17.583333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.125,
+     "mean_distinct_targets_sampled": 4.68,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.585,
+     "seed": 955019,
+     "qos_per_step": 0.7387270144348344
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 17.75,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.625,
+     "mean_distinct_targets_sampled": 4.6,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.575,
+     "seed": 955020,
+     "qos_per_step": 0.8430634774068991
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.375,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.875,
+     "mean_distinct_targets_sampled": 5.0,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.625,
+     "seed": 955021,
+     "qos_per_step": 0.737006772706906
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 17.625,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.375,
+     "mean_distinct_targets_sampled": 4.84,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.605,
+     "seed": 955022,
+     "qos_per_step": 0.8464042213509481
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 17.291666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.625,
+     "mean_distinct_targets_sampled": 4.61,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.57625,
+     "seed": 955023,
+     "qos_per_step": 0.790634592851003
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 17.166666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.9166666666666665,
+     "mean_distinct_targets_sampled": 4.47,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.55875,
+     "seed": 955024,
+     "qos_per_step": 0.8235281822731098
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.375,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.875,
+     "mean_distinct_targets_sampled": 4.85,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.60625,
+     "seed": 955025,
+     "qos_per_step": 0.7557174442609151
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.083333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.0416666666666665,
+     "mean_distinct_targets_sampled": 5.1,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.6375,
+     "seed": 955026,
+     "qos_per_step": 0.9011075700918834
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.0,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.2916666666666665,
+     "mean_distinct_targets_sampled": 5.01,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.62625,
+     "seed": 955027,
+     "qos_per_step": 0.7258673250873884
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.416666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.4583333333333335,
+     "mean_distinct_targets_sampled": 4.76,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.595,
+     "seed": 955028,
+     "qos_per_step": 0.6992487513571978
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.666666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 4.458333333333333,
+     "mean_distinct_targets_sampled": 5.29,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.66125,
+     "seed": 955029,
+     "qos_per_step": 0.7918513923734426
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 16.75,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 2.3333333333333335,
+     "mean_distinct_targets_sampled": 4.46,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.5575,
+     "seed": 955030,
+     "qos_per_step": 0.8486309155573447
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.125,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 3.2083333333333335,
+     "mean_distinct_targets_sampled": 4.91,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.61375,
+     "seed": 955031,
+     "qos_per_step": 0.8154098326861858
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 18.458333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 4.041666666666667,
+     "mean_distinct_targets_sampled": 5.21,
+     "duplicate_uav_share_sampled": 0.0,
+     "finite_target_share": 0.65125,
+     "seed": 955032,
+     "qos_per_step": 0.7655065906097491
+    }
+   ],
+   "mean_target_position_changes_per_uav_per_1000_steps": 18.239583333333332,
+   "mean_target_jumps_over_500m_per_uav_per_1000_steps": 3.17578125,
+   "mean_distinct_targets_sampled": 4.8234375,
+   "mean_duplicate_uav_share_sampled": 0.0,
+   "mean_finite_target_share": 0.6029296875
+  },
+  "independent_nearest": {
+   "per_world": [
+    {
+     "target_position_changes_per_uav_per_1000_steps": 25.833333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.85,
+     "duplicate_uav_share_sampled": 0.9397058823529412,
+     "finite_target_share": 0.79875,
+     "seed": 955001,
+     "qos_per_step": 0.5698005168984334
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 26.208333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.91,
+     "duplicate_uav_share_sampled": 0.8846153846153846,
+     "finite_target_share": 0.805,
+     "seed": 955002,
+     "qos_per_step": 0.4361083150257667
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 23.458333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.7083333333333334,
+     "mean_distinct_targets_sampled": 1.42,
+     "duplicate_uav_share_sampled": 0.8984375,
+     "finite_target_share": 0.73625,
+     "seed": 955003,
+     "qos_per_step": 0.5993243005275727
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 22.208333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.625,
+     "mean_distinct_targets_sampled": 1.19,
+     "duplicate_uav_share_sampled": 0.8277439024390244,
+     "finite_target_share": 0.7025,
+     "seed": 955004,
+     "qos_per_step": 0.41566745628913243
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 22.083333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.625,
+     "mean_distinct_targets_sampled": 0.83,
+     "duplicate_uav_share_sampled": 0.8910256410256411,
+     "finite_target_share": 0.69875,
+     "seed": 955005,
+     "qos_per_step": 0.33602693472305933
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 25.625,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.6666666666666666,
+     "mean_distinct_targets_sampled": 0.86,
+     "duplicate_uav_share_sampled": 0.9258720930232558,
+     "finite_target_share": 0.79625,
+     "seed": 955006,
+     "qos_per_step": 0.5264606944223245
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 24.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.81,
+     "duplicate_uav_share_sampled": 0.946875,
+     "finite_target_share": 0.75875,
+     "seed": 955007,
+     "qos_per_step": 0.455867247864604
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 27.25,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.92,
+     "duplicate_uav_share_sampled": 0.907608695652174,
+     "finite_target_share": 0.835,
+     "seed": 955008,
+     "qos_per_step": 0.35312216145048536
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 24.25,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.88,
+     "duplicate_uav_share_sampled": 0.8338068181818182,
+     "finite_target_share": 0.7425,
+     "seed": 955009,
+     "qos_per_step": 0.6364885059930384
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 27.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.94,
+     "duplicate_uav_share_sampled": 0.9042553191489362,
+     "finite_target_share": 0.85125,
+     "seed": 955010,
+     "qos_per_step": 0.4923416831592719
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 22.791666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.08333333333333333,
+     "mean_distinct_targets_sampled": 0.9,
+     "duplicate_uav_share_sampled": 0.84375,
+     "finite_target_share": 0.7175,
+     "seed": 955011,
+     "qos_per_step": 0.38379898643493654
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 21.916666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.9166666666666666,
+     "mean_distinct_targets_sampled": 1.64,
+     "duplicate_uav_share_sampled": 0.6404639175257731,
+     "finite_target_share": 0.72125,
+     "seed": 955012,
+     "qos_per_step": 0.5003388956983884
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.75,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.0833333333333333,
+     "mean_distinct_targets_sampled": 0.94,
+     "duplicate_uav_share_sampled": 0.8117088607594937,
+     "finite_target_share": 0.66125,
+     "seed": 955013,
+     "qos_per_step": 0.07309912096957366
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 25.833333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.041666666666666664,
+     "mean_distinct_targets_sampled": 1.01,
+     "duplicate_uav_share_sampled": 0.8862359550561798,
+     "finite_target_share": 0.8025,
+     "seed": 955014,
+     "qos_per_step": 0.5867290047903856
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 22.166666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.375,
+     "mean_distinct_targets_sampled": 0.79,
+     "duplicate_uav_share_sampled": 0.8701298701298701,
+     "finite_target_share": 0.68125,
+     "seed": 955015,
+     "qos_per_step": 0.5830527184108893
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 19.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.16666666666666666,
+     "mean_distinct_targets_sampled": 1.49,
+     "duplicate_uav_share_sampled": 0.7938311688311688,
+     "finite_target_share": 0.63125,
+     "seed": 955016,
+     "qos_per_step": 0.0
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 26.333333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.87,
+     "duplicate_uav_share_sampled": 0.9310344827586207,
+     "finite_target_share": 0.81125,
+     "seed": 955017,
+     "qos_per_step": 0.5164233152220646
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 24.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.87,
+     "duplicate_uav_share_sampled": 0.8692528735632183,
+     "finite_target_share": 0.75875,
+     "seed": 955018,
+     "qos_per_step": 0.47465400794769325
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 24.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.89,
+     "duplicate_uav_share_sampled": 0.8539325842696629,
+     "finite_target_share": 0.765,
+     "seed": 955019,
+     "qos_per_step": 0.5080430461354554
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 24.5,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.125,
+     "mean_distinct_targets_sampled": 0.9,
+     "duplicate_uav_share_sampled": 0.9054878048780488,
+     "finite_target_share": 0.75625,
+     "seed": 955020,
+     "qos_per_step": 0.5602189771483342
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.541666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.7083333333333334,
+     "mean_distinct_targets_sampled": 1.08,
+     "duplicate_uav_share_sampled": 0.86,
+     "finite_target_share": 0.67,
+     "seed": 955021,
+     "qos_per_step": 0.05067489965756734
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 24.0,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.8333333333333333,
+     "mean_distinct_targets_sampled": 0.92,
+     "duplicate_uav_share_sampled": 0.8720238095238095,
+     "finite_target_share": 0.74,
+     "seed": 955022,
+     "qos_per_step": 0.5950800007085005
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 25.583333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.87,
+     "duplicate_uav_share_sampled": 0.889367816091954,
+     "finite_target_share": 0.77875,
+     "seed": 955023,
+     "qos_per_step": 0.6018087034920852
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 25.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.92,
+     "duplicate_uav_share_sampled": 0.84375,
+     "finite_target_share": 0.785,
+     "seed": 955024,
+     "qos_per_step": 0.5796763157049815
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 20.5,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.0,
+     "mean_distinct_targets_sampled": 0.78,
+     "duplicate_uav_share_sampled": 0.9107142857142857,
+     "finite_target_share": 0.64625,
+     "seed": 955025,
+     "qos_per_step": 8.876198530197144e-05
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 23.875,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.8333333333333334,
+     "mean_distinct_targets_sampled": 1.1,
+     "duplicate_uav_share_sampled": 0.7949438202247191,
+     "finite_target_share": 0.74,
+     "seed": 955026,
+     "qos_per_step": 0.7050750091771285
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 21.875,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 1.4583333333333333,
+     "mean_distinct_targets_sampled": 1.02,
+     "duplicate_uav_share_sampled": 0.8639240506329114,
+     "finite_target_share": 0.69375,
+     "seed": 955027,
+     "qos_per_step": 0.05441354080537955
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 26.041666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.87,
+     "duplicate_uav_share_sampled": 0.9166666666666666,
+     "finite_target_share": 0.79875,
+     "seed": 955028,
+     "qos_per_step": 0.4672116680989663
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 25.583333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.041666666666666664,
+     "mean_distinct_targets_sampled": 1.71,
+     "duplicate_uav_share_sampled": 0.8997093023255814,
+     "finite_target_share": 0.7925,
+     "seed": 955029,
+     "qos_per_step": 0.4849153433392445
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 22.708333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.3333333333333333,
+     "mean_distinct_targets_sampled": 1.32,
+     "duplicate_uav_share_sampled": 0.6986842105263158,
+     "finite_target_share": 0.7225,
+     "seed": 955030,
+     "qos_per_step": 0.6725399835308393
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 23.166666666666668,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.7916666666666666,
+     "mean_distinct_targets_sampled": 1.31,
+     "duplicate_uav_share_sampled": 0.7005208333333334,
+     "finite_target_share": 0.7375,
+     "seed": 955031,
+     "qos_per_step": 0.6825229156116644
+    },
+    {
+     "target_position_changes_per_uav_per_1000_steps": 24.958333333333332,
+     "target_jumps_over_500m_per_uav_per_1000_steps": 0.0,
+     "mean_distinct_targets_sampled": 0.86,
+     "duplicate_uav_share_sampled": 0.8997093023255814,
+     "finite_target_share": 0.77375,
+     "seed": 955032,
+     "qos_per_step": 0.4943586672047774
+    }
+   ],
+   "mean_target_position_changes_per_uav_per_1000_steps": 23.977864583333332,
+   "mean_target_jumps_over_500m_per_uav_per_1000_steps": 0.4192708333333333,
+   "mean_distinct_targets_sampled": 1.0209375,
+   "mean_duplicate_uav_share_sampled": 0.8598683703617616,
+   "mean_finite_target_share": 0.7471875000000001
+  }
+ },
+ "collapse_worlds": {
+  "identity": [],
+  "independent_nearest": [
+   {
+    "seed": 955013,
+    "qos_per_step": 0.0730991210549554,
+    "zero_service": false,
+    "first_service_step": 1778
+   },
+   {
+    "seed": 955016,
+    "qos_per_step": 0.0,
+    "zero_service": true,
+    "first_service_step": null
+   },
+   {
+    "seed": 955021,
+    "qos_per_step": 0.05067489949717778,
+    "zero_service": false,
+    "first_service_step": 1898
+   },
+   {
+    "seed": 955025,
+    "qos_per_step": 8.876198533558938e-05,
+    "zero_service": false,
+    "first_service_step": 2057
+   },
+   {
+    "seed": 955027,
+    "qos_per_step": 0.05441354098823433,
+    "zero_service": false,
+    "first_service_step": 1959
+   }
+  ]
+ }
+}
