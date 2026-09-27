@@ -206,6 +206,8 @@ def main():
     ap.add_argument("--train", nargs="+", required=True,
                     help="training run directories in process order (a resumed process after its source)")
     ap.add_argument("--evals", nargs="+", required=True)
+    ap.add_argument("--holdout-refs", default=None,
+                    help="B01-runner run holding holdout-references/panels/{H1,Hlocal,N}_e0.00_x0.05.json on 957001-957032")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
     comps = {"H_central": load_panel(os.path.join(args.b01, "grid", "panels", "H1_e0.00_x0.05.json"))[1],
@@ -242,9 +244,46 @@ def main():
             entry["vs_c00"] = gap_block(rows, c00[1])
         entry["gaps"] = {name: gap_block(rows, comp) for name, comp in comps.items()}
         out["checkpoints"][f"{cid}_{mode}"] = entry
+    # Hold-out (957001-957032), declared 2026-09-26 and pinned here on 2026-09-27 before any hold-out
+    # panel existed: the frozen final model against the frozen comparators evaluated on the SAME
+    # worlds by the B01 runner's holdout-references phase (H1 = H_central, Hlocal = H_local, N
+    # deterministic beside them), paired by world with the same gap_block; the development panel of
+    # the same checkpoint/mode is reported beside it as two means and their difference (different
+    # worlds, so no paired SE).  The milestone level stays H_local's DEVELOPMENT level (.60, labelled);
+    # H_local's own hold-out mean is reported under holdout_comparators.  Read once; no selection.
+    hold_comps = {}
+    if args.holdout_refs:
+        for name, fname in (("H_central", "H1_e0.00_x0.05.json"), ("H_local", "Hlocal_e0.00_x0.05.json"),
+                            ("N_deterministic", "N_e0.00_x0.05.json")):
+            path = os.path.join(args.holdout_refs, "holdout-references", "panels", fname)
+            if os.path.exists(path):
+                hold_comps[name] = load_panel(path)[1]
+        out["holdout_comparators"] = {
+            name: {"summary": summarise(list(rows.values())),
+                   "shift_from_development": ((summarise(list(rows.values()))[Q] or 0.0) - (out["comparators"][name][Q] or 0.0))
+                   if name in out["comparators"] else None}
+            for name, rows in hold_comps.items()}
+        out["holdout_comparators"]["note"] = ("957001-957032 via the B01 runner holdout-references phase; "
+                                             "shift = hold-out mean minus the 955001-955032 mean of the same comparator")
     for (cid, mode), (d, rows) in sorted(final_panels.items()):
-        out["final_holdout"][f"{cid}_{mode}"] = {"summary": summarise(list(rows.values())),
-                                                 "note": "957001-957032, read once, frozen final model only"}
+        rl = list(rows.values())
+        s = summarise(rl)
+        entry = {"summary": s,
+                 "record": {k: d.get(k) for k in ("checkpoint", "transitions", "policy_seed", "draw",
+                                                 "policy_identity", "controller_information", "final", "worlds")},
+                 "note": "957001-957032, read once, frozen final model only",
+                 "milestone_reached": s[Q] is not None and s[Q] >= MILESTONE,
+                 "worlds_at_or_above_milestone": sum(1 for r in rl if r.get(Q) is not None and r[Q] >= MILESTONE),
+                 "gaps": {name: gap_block(rows, comp) for name, comp in hold_comps.items()}}
+        dev = panels.get((cid, mode))
+        if dev:
+            ds = summarise(list(dev[1].values()))
+            entry["development_same_checkpoint"] = {
+                "development_" + Q: ds[Q], "holdout_" + Q: s[Q],
+                "holdout_minus_development": (s[Q] - ds[Q]) if (s[Q] is not None and ds[Q] is not None) else None,
+                "development_" + J: ds[J], "holdout_" + J: s[J],
+                "note": "different world sets; two means and their difference, no paired SE"}
+        out["final_holdout"][f"{cid}_{mode}"] = entry
     # curves in reading order
     curves = {}
     for mode in ("deterministic", "stochastic"):
