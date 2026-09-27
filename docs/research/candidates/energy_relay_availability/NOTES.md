@@ -1286,3 +1286,26 @@ ordinary joint-allocation question remains with this DM, with no current success
 selected. Any continuation must offer a distinct pre-result prediction and reason
 to spend the next evaluation; this result does not authorize a rescue sweep or an
 additional run.
+
+#### Output retention and cleanup
+
+After terminal collection, a checksum-based dry-run comparison found no differences
+between the node's 74-file output and the canonical local `runs/` copy (excluding
+the later-added final native-status observation). All 64 raw NPZ files remain at
+the local run path; their per-world hashes and byte counts match the manifest. The
+completed staging worktree
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/b03_energy_assignment_a01_input_8d9d64996`
+had no open file users and was removed with `git worktree remove --force` under the
+remote shared-writer lock. Its removal eliminated that exact path and reduced the
+node's `hmasd-launch-sources` allocated usage from 37,093,834,752 to 36,158,013,440
+bytes, a measured reduction of 935,821,312 bytes. The local stopped-waiter scratch
+directory was also removed; local allocated usage for its parent fell by 8,192 bytes.
+
+The separate accepted source snapshot
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/8f1bd1081d6f44ccb6e1c3204410f45b`
+remains, allocated size 797,687,808 bytes. `hmasd_snapshot_gc.py` preview refused
+it with `snapshot has changed, untracked, or ignored files`; inspection identified
+`scripts/__pycache__/` as the ignored path. The refusal was preserved and the
+snapshot was not altered. The canonical local run directory remains 138,125,312
+allocated bytes and contains the sole full raw-output copy; compact metadata and
+paired results are committed in `runs/`.
