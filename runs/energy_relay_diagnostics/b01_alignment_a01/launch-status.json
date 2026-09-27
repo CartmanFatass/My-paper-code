@@ -1,0 +1,11 @@
+{
+  "claim_key": "4cb8c42b9e311d10759a059066a2808e4a3f599d59d4f39451a26b887921772f",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/4cb8c42b9e311d10759a059066a2808e4a3f599d59d4f39451a26b887921772f.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/energy_relay_diagnostics/b01_alignment_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/4cb8c42b9e311d10759a059066a2808e4a3f599d59d4f39451a26b887921772f.json",
+  "pid": 745191,
+  "runner_pid": 745192,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-27T03:05:17.430726Z"
+}
