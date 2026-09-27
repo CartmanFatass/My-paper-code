@@ -1963,3 +1963,31 @@ thread each retain the stated 50-60 minute estimate. Local available memory was
 11.44 GB during preparation; actual admission must recheck it. The current
 project plan, with DM4 in reserve, leaves this study within the five-track
 resource ceiling. No B05 result operation has been invoked at this recording.
+
+### 2026-09-27 — B05 native admission and observation
+
+The reviewed inputs and prospective contract were published at
+`754d5d34d905a81b58b78e69ae85b8a07cb19aad` before execution. B05 was accepted
+at 2026-09-27T18:21:17.996701Z on local_linux, with four workers and one numeric
+thread per worker. The [native manifest](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/launch-manifest.json)
+binds its exact operation, source snapshot, command, output and process identities.
+The [actual-node preflight](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/admission-preflight.json)
+measured 11,391,021,056 physical/effective available bytes against the 4 GiB floor.
+The [frozen configuration](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/config.json)
+matches the two scores, ten-step clock/commitment, S2/H3000, fixed 32 seeds per
+arm, 64 episodes, 192k planned transitions and zero fits/optimizer updates.
+The [initial native status](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/status-running.json)
+has matching live runner/supervisor identities, consistent records and no exit
+witness. Source/control publication by another direction during preparation did
+not change the reviewed owned inputs.
+
+The completed B03/B04 observer records remain terminal and consumed. Their private
+observer state was drained at generation 6 with no wake or pending event, then
+rearmed without resuming either job. The new observation
+`launch-b05-one-step-comparator-a01` is registered against the manifest's original
+status handle, with a 1,500-second checkpoint window. Its first drained evidence
+at generation 8 verifies the same accepted running operation at 18:23:31Z; there
+is no pending wake/event. The wait request remains in direction-owned private
+scratch. Continue collection on this handle; a complete scientific reading is
+still pending. No result, equivalence or forecast-value judgment is made from
+admission or startup.

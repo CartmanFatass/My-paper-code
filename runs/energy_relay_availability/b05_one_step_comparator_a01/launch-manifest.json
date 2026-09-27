@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-27T18:21:17.996701Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3af585411ada4bde863c758a9e7ac570/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3af585411ada4bde863c758a9e7ac570/experiments/candidates/energy_relay_availability/run_b05.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01",
+    "--launch-sha",
+    "754d5d34d905a81b58b78e69ae85b8a07cb19aad",
+    "--workers",
+    "4",
+    "--threads",
+    "1"
+  ],
+  "claim_key": "94275562791d91f0179f38f0b7328bc7df4c4770ecb456ea0302a06f052c9e5b",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/94275562791d91f0179f38f0b7328bc7df4c4770ecb456ea0302a06f052c9e5b.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3af585411ada4bde863c758a9e7ac570/experiments/candidates/energy_relay_availability/run_b05.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01",
+    "--launch-sha",
+    "754d5d34d905a81b58b78e69ae85b8a07cb19aad",
+    "--workers",
+    "4",
+    "--threads",
+    "1"
+  ],
+  "command_sha256": "a8de0803fc93a0d38eead97b40fdba336045d36f202f58a2e1fde4fd25177572",
+  "control_observation": {
+    "observed_at": "2026-09-27T18:21:17.289605Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "9f72afd2223baccd9ed554b0ef86bcbe5277afb5"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-27T18:21:17.341047Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3af585411ada4bde863c758a9e7ac570",
+  "direction": "energy_relay_availability",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/energy_relay_availability/run_b05.py",
+    "--launch-sha",
+    "754d5d34d905a81b58b78e69ae85b8a07cb19aad",
+    "--workers",
+    "4",
+    "--threads",
+    "1"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/94275562791d91f0179f38f0b7328bc7df4c4770ecb456ea0302a06f052c9e5b.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "2face51e-9703-4e41-ad8b-4c3c02f07d78",
+      "kind": "linux_pid_start_ticks",
+      "pid": 181528,
+      "session_id": 181528,
+      "start_ticks": 930197
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 181528,
+    "process_group_id": 181528
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "2face51e-9703-4e41-ad8b-4c3c02f07d78",
+      "kind": "linux_pid_start_ticks",
+      "pid": 181529,
+      "session_id": 181528,
+      "start_ticks": 930206
+    },
+    "pid": 181529,
+    "process_group_id": 181528,
+    "supervisor_pid": 181528
+  },
+  "schema_version": 1,
+  "sha": "754d5d34d905a81b58b78e69ae85b8a07cb19aad",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3af585411ada4bde863c758a9e7ac570",
+  "stderr": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/stdout.log"
+}

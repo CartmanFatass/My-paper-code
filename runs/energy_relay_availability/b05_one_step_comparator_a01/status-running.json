@@ -1,0 +1,77 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/94275562791d91f0179f38f0b7328bc7df4c4770ecb456ea0302a06f052c9e5b.json",
+  "direction": "energy_relay_availability",
+  "execution": {
+    "exit_witness": {
+      "path": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/process-exit.json",
+      "state": "absent"
+    },
+    "runner": {
+      "observed_identity": {
+        "boot_id": "2face51e-9703-4e41-ad8b-4c3c02f07d78",
+        "kind": "linux_pid_start_ticks",
+        "pid": 181529,
+        "session_id": 181528,
+        "start_ticks": 930206
+      },
+      "recorded_identity": {
+        "boot_id": "2face51e-9703-4e41-ad8b-4c3c02f07d78",
+        "kind": "linux_pid_start_ticks",
+        "pid": 181529,
+        "session_id": 181528,
+        "start_ticks": 930206
+      },
+      "state": "running"
+    },
+    "state": "running",
+    "supervisor": {
+      "observed_identity": {
+        "boot_id": "2face51e-9703-4e41-ad8b-4c3c02f07d78",
+        "kind": "linux_pid_start_ticks",
+        "pid": 181528,
+        "session_id": 181528,
+        "start_ticks": 930197
+      },
+      "recorded_identity": {
+        "boot_id": "2face51e-9703-4e41-ad8b-4c3c02f07d78",
+        "kind": "linux_pid_start_ticks",
+        "pid": 181528,
+        "session_id": 181528,
+        "start_ticks": 930197
+      },
+      "state": "running"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/launch-manifest.json",
+  "node": "local_linux",
+  "observed_at": "2026-09-27T18:22:11.836655Z",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/94275562791d91f0179f38f0b7328bc7df4c4770ecb456ea0302a06f052c9e5b.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "754d5d34d905a81b58b78e69ae85b8a07cb19aad",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3af585411ada4bde863c758a9e7ac570"
+}
