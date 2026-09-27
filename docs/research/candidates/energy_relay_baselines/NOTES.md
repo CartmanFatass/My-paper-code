@@ -370,3 +370,36 @@ imitation evidence; more unchanged seeds have lower marginal value. Strongly dif
 make training variability central to the next comparison. Service gains with worse risk remain
 a trade-off. These are exploratory action implications, not population-reliability, equivalence,
 convergence or mechanism verdicts. Two matching signs or a small spread do not establish them.
+
+## 2026-09-27 04:10 UTC — B01 first fresh fit accepted on wsl_4070
+
+The selected inputs and prospective decision were published at
+`8137cb9111746c425ee4161645f12d1e3facb533` before a single supervisor submission. Native admission
+accepted seed 26092711, operation `983cf54937c5d5f9eaa4fcdd8c159ec2367fba8da58fa039db12c5d5786107f9`.
+The supervisor's successful return means the detached runner was handed off, not that training
+finished. Native status at 04:11:33 UTC showed matching running supervisor/runner identities,
+consistent records and no exit witness. Initialization c00 was saved; that observation had
+0 completed rollouts, 1 checkpoint and no reported failure, so it is not a learning result.
+
+[Manifest](../../../../runs/energy_relay_baselines/b01_set_a01/seed-26092711/launch-manifest.json),
+[fresh resource check](../../../../runs/energy_relay_baselines/b01_set_a01/seed-26092711/admission-preflight.json),
+[actual config](../../../../runs/energy_relay_baselines/b01_set_a01/seed-26092711/config.json) and
+[initial native status](../../../../runs/energy_relay_baselines/b01_set_a01/seed-26092711/launch-status.json)
+retain the exact command/source/node/output/operation identities. The actual config confirms
+CUDA FP32, 4 Torch threads, the declared seed and 1.2M exposure, and actor input width 3599.
+Admission measured 13,102,297,088 available bytes against the 4 GiB floor. Checkpoints and full
+training streams remain once at the manifest's durable node output; only compact control/config
+records were copied and byte-hash verified locally. Actual started fits are now **1 of 2**;
+the second fresh seed and all declared development evaluations have not started.
+
+The node synchronized without overwriting Claude's modified live summary. Its pre-existing
+Git auto-GC warning about historical tree `9e40125ee3e24973b69754649226d18847b45862` remained;
+no GC repair/deletion was attempted. Current source preparation and native admission succeeded.
+
+`tools/hmasd_wait.py` is armed with this same native operation reference, 30-second probes and
+a 1500-second checkpoint window. Checkpoint events rearm observation without restarting the fit.
+The generic publication watcher first delivered its real 25-minute checkpoint through queue;
+generation 1 / wake `bc408f7c-b75d-48ca-8414-f5c788021673` was drained and acknowledged. That
+publication observer was then stopped after the native run observer was registered, because
+the withdrawn publication gate no longer warrants a separate wait. The standalone generic
+tool remains published; no stable waiter, skill, role or control file was changed here.

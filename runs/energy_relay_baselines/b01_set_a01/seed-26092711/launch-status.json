@@ -1,0 +1,77 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/983cf54937c5d5f9eaa4fcdd8c159ec2367fba8da58fa039db12c5d5786107f9.json",
+  "direction": "energy_relay_baselines",
+  "execution": {
+    "exit_witness": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/process-exit.json",
+      "state": "absent"
+    },
+    "runner": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 750461,
+        "session_id": 750460,
+        "start_ticks": 83415267
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 750461,
+        "session_id": 750460,
+        "start_ticks": 83415267
+      },
+      "state": "running"
+    },
+    "state": "running",
+    "supervisor": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 750460,
+        "session_id": 750460,
+        "start_ticks": 83415264
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 750460,
+        "session_id": 750460,
+        "start_ticks": 83415264
+      },
+      "state": "running"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-27T04:11:33.510274Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/983cf54937c5d5f9eaa4fcdd8c159ec2367fba8da58fa039db12c5d5786107f9.json",
+  "output_root": "/home/wu/projects/HMASD/runs/energy_relay_baselines/b01_set_a01/seed-26092711",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "8137cb9111746c425ee4161645f12d1e3facb533",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/991be7f5fde844678030c9fab5f89291"
+}
