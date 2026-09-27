@@ -22,6 +22,21 @@ TypeSafe key is preferred; the Vercel gateway key rate-limits).
 recorded from the other account does not exist here: send with `--conversation new`, or with a
 URL this account returned. Never paste an Agentify-account URL into this route.
 
+**Model and fallback (owner, 2026-09-27).** Independent scientific review at constitution
+section 5 decision points goes to ChatGPT 6 Pro on this account; 5.6 Pro on the same account is the
+fallback when the 6 Pro quota is short. Both reach the repository through the same GitHub
+connector, so the committed question is identical for either model and is never rewritten for the
+fallback. The driver proves the configured `effort_label` (`6 Pro`) before the one click. Fall back
+only on a concrete signal — a usage-limit banner, a disabled or missing 6 Pro entry, or a
+`PreSendFailure` naming the model menu with the page otherwise healthy — by rerunning the *same key*
+with `--effort "5.6 Pro"` (`fallback_effort_label` in `[jev]`); `send_attempted` still guards against
+a second submission. The first fallback use is a `--dry-run`: the modern-menu proof was written
+against the 6 Pro picker, and if it refuses the fallback label the proof is extended from the
+observed menu (radio labels, toggle text, slider) with a test in `tests/skills/test_jev_transport.py`,
+never from a guessed layout. Record which model answered in the NOTES answer header (model label
+only; account facts stay local). A critic specification, when the question is a review, travels
+inside the attached document like any other section.
+
 **Private facts stay local (owner, 2026-09-18).** This account's conversation URLs, its name
 and anything else identifying it live only in the driver's state directory
 (`~/.local/state/hmasd-pro-transport/operations/<key>.json`), never in NOTES.md, RESEARCH.md,

@@ -69,6 +69,12 @@ project-management delegation under constitution section 2.
    message; do not send only a bare question URL or assume existing chat memory is current.
 4. **Send directly.** Use the host's browser procedure in the authoring session. On WSL use
    `hmasd-jev-pro-transport`; use `hmasd-chatgpt-pro-transport` for the Agentify Desktop route.
+   On the Jev route the reviewer is ChatGPT 6 Pro, with 5.6 Pro as the fallback when the 6 Pro
+   quota is short (owner, 2026-09-27): both are on the same account and read the repository through
+   the same GitHub connector, so one committed question serves either model and is not rewritten
+   for the fallback; the transport records which model answered. When the question is an
+   independent scientific review, include the review specification itself (reading order, the
+   numbered questions, the return format with MATERIAL_DISSENT yes/no) in the question text.
    These names identify procedural skills, not subagent roles. After Send is accepted, a POSIX
    Codex session hands passive observation to `tools/hmasd_wait.py` using its verified task UUID.
    Other runtimes use a verified deterministic observer with native/manual continuation;
