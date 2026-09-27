@@ -689,3 +689,34 @@ mask tests, and B02 resume/evaluator tests (18 existing warnings). The tiny real
 also found bitwise-identical default and instrumented-unmasked update metrics, actor/critic weights,
 and Torch/NumPy/Python/sampler RNG states; the masked update changed the actor while leaving critic
 parameters and ValueNorm unchanged. `git diff --check` passed. No result-bearing run has started.
+
+### B02 first accepted launch: technical failure before training (2026-09-27)
+
+The first ordinary-arm operation was admitted on `wsl_4070` at source SHA
+`d33cbc538509d6897a56c83f6621d40ab2978ae6`, with fresh effective-memory evidence of
+13,233,786,880 bytes against the 4 GiB floor. Native admission ref:
+`/home/wu/projects/HMASD/.git/hmasd-admission/e835202e976ee8bcde02856905bf3c924c31c65b2d63239221a234a7b130b00a.json`.
+The output is retained at
+`/home/wu/projects/HMASD/runs/energy_relay_diagnostics/b02_shield_surrogate_a01/ordinary/`.
+The accepted process exited 1 before collection or an optimizer update; the native witness
+records a valid process-exit termination and the expected summary is absent. Its traceback is
+`TypeError: JSONEncoder.__init__() got an unexpected keyword argument 'parse_constant'` while
+serializing the production active configuration. The option belongs to `json.loads`; moving it
+to that call converts Python's encoded `Infinity` constants into JSON strings, allowing the
+strict summary writer (`allow_nan=False`) to serialize the intended active-config record.
+A focused regression checks both infinite interruption-cost fields and the production summary
+writer. This is a runner defect, not evidence about either arm: 0 training transitions, 0
+optimizer updates, and no scientific observation. The accepted operation is not replayed; the
+corrected source will use a new published SHA and a fresh output root.
+
+The two successful fits and paired panel therefore move to the fresh root
+`runs/energy_relay_diagnostics/b02_shield_surrogate_a02/` (ordinary, masked, evaluation). The
+preserved `a01/ordinary` failure remains technical execution evidence and is not counted as a
+started result-bearing fit.
+
+The correction was accepted by the independent engineering reviewer: `parse_constant` now
+parses the encoded nonfinite config constants at the load boundary, and the strict writer still
+receives JSON-safe strings. Focused validation after the repair: the config regression passed on
+its own, then the B02 diagnostics, resume, and endpoint-evaluator suites passed **30 tests** with
+18 existing warnings in 67.98 seconds. `git diff --check` passed. No training launch has used the
+corrected source yet.

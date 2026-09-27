@@ -19,6 +19,7 @@ from experiments.candidates.energy_relay_benchmark.b02 import training as b02_tr
 from experiments.candidates.energy_relay_diagnostics.b02 import runner
 from experiments.candidates.energy_relay_diagnostics.b02 import training as mask_training
 from experiments.candidates.uav_service_auxiliary.b01.native import seed_everything
+from experiments.candidates.uav_service_auxiliary.b09.persistence import write_summary
 from hmasd.agent import HMASDAgent, _masked_policy_surrogate_loss
 from hmasd.utils import RolloutBuffer
 
@@ -205,6 +206,17 @@ def _assert_module_state_equal(left, right):
     assert left_state.keys() == right_state.keys()
     for key in left_state:
         torch.testing.assert_close(left_state[key], right_state[key], rtol=0.0, atol=0.0)
+
+
+def test_active_config_json_roundtrip_preserves_infinite_costs_as_json_strings(tmp_path):
+    config = b02_cfg.make_b02_config(b02_cfg.production_spec(runner.SEED))
+    record = runner._json_compatible_active_config(config)
+    assert record["interruption_cost_c"] == "Infinity"
+    assert record["interruption_cost_c_Z"] == "Infinity"
+
+    path = tmp_path / "config.json"
+    write_summary(path, {"active_config": record})
+    assert json.loads(path.read_text()) == {"active_config": record}
 
 
 def test_real_update_default_matches_unmasked_instrumentation_and_mask_changes_only_actor(

@@ -40,6 +40,12 @@ def _validate_value_norm_increment(start_count, end_count, expected_increment):
     return observed_increment
 
 
+def _json_compatible_active_config(config):
+    from experiments.candidates.uav_service_auxiliary.b01.native import active_config
+
+    return json.loads(json.dumps(active_config(config)), parse_constant=str)
+
+
 def parse_args(argv=None):
     parser = argparse.ArgumentParser()
     commands = parser.add_subparsers(dest="command", required=True)
@@ -115,7 +121,6 @@ def train_continuation(*, arm, seed, launch_sha, out, device_name="cuda", thread
         snapshot_low_level_parameters,
     )
     from experiments.candidates.uav_service_auxiliary.b01.native import (
-        active_config,
         initialization_fingerprint,
         optimizer_steps,
         sha256_file,
@@ -188,9 +193,7 @@ def train_continuation(*, arm, seed, launch_sha, out, device_name="cuda", thread
         "continuation_end": {"rollout": END_ROLLOUT, "transitions": END_TRANSITIONS},
         "source_spec": source_cfg.spec_record(source_spec),
         "continuation_spec": source_cfg.spec_record(run_spec),
-        "active_config": json.loads(
-            json.dumps(active_config(config), parse_constant=str)
-        ),
+        "active_config": _json_compatible_active_config(config),
         "config": source_cfg.config_dict(config),
         "mask": {
             "direct_policy_surrogate_only": arm == "masked",
