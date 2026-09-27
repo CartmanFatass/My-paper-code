@@ -633,3 +633,24 @@ checks by native admission; no stale-policy bypass is introduced. The known Git
 auto-GC warning and zsh prompt diagnostics remain outside this direction's repair
 scope. Use configured `agent-task` to invoke the native launcher; its outer command
 completion is distinct from the scientific operation's native acceptance/exit.
+
+### Correction before any B02 launch
+
+The immediately preceding paragraph prematurely said that direct remote parsing
+had confirmed operative-control equality. That read-only SSH call instead timed
+out after 25 seconds before returning its comparison. The source-code reading
+establishes which fields admission checks, but it does **not** establish the
+current node observation. Treat that comparison as unverified until a completed
+read below. No B02 scientific launch or supervisor run has been submitted. The
+published implementation `c2258557ef2b7f076820850659f8e837e7e31e06` and its tests
+remain valid; this correction changes no exposure or protocol.
+
+The subsequent completed read through the configured `zsh -lic` network shell
+returned exit0: both canonical and fetched published controls are `Owner pause:
+lifted`, direction `energy_relay_availability`, state `exploring`, lead
+`Codex DM (independent session)`; compute bytes also match. Plain SSH probes had
+timed out without usable control evidence (25 s and 35 s). The successful network
+shell read and the existing fetch auto-GC warnings are recorded separately; no
+scientific worker was started by these probes. Use that configured shell for
+published Git reads and the single upcoming native launch invocation. Native
+admission still rechecks the live published head and actual-node resources.
