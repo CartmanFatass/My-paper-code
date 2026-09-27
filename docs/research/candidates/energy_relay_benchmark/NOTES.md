@@ -3202,3 +3202,174 @@ alive. Projection: c06 (rollout 200) ≈ 06:00 UTC; then the development evaluat
 once-only hold-out evaluation of c06 (`--worlds 957001-957032 --final`, launch script variant
 prepared and checked against the evaluator's guard: hold-out worlds require `--final`, `--final`
 accepts only 957001–957032, output under `checkpoint-eval/final/`), and the whole-curve read.
+
+## 2026-09-27 — Stage 1 result: one SET development fit at fixed exposure, read by the pre-registered readings (`b02_s1_set_a01` + `b02_s1_set_a01r`, final model c06; 957001–957032 read once)
+
+**Operations that complete the study.** The resumed fit ended `COMPLETE` (200 rollouts, 1,200,000
+transitions, 7 checkpoints, exit 0 at 06:26:14Z; process-2 wall 20,407.9 s; optimizer steps
+450,000 = 200 × 2,250). c06 (rollout 200; agent.pt sha256 `41aa4ff0…`, fingerprint `a7c54b47…`)
+was copied to the artifacts directory, sha verified, and evaluated twice in parallel on the idle
+node: development `b02_s1_eval_c06_a01` (operation a82466db, accepted 06:29:23Z, command sha256
+`fdc4b660…`, supervisor 779318 / runner 779319, preflight 12.4 GiB; `COMPLETE` 1,718.2 s, exit 0 at
+06:58:59Z) and the once-only hold-out `b02_s1_eval_c06_final_a01` (operation db5bd391, 06:29:42Z,
+command sha256 `0984b0c8…`, supervisor 780226 / runner 780227, preflight 8.8 GiB; `--worlds
+957001-957032 --final`, output under `checkpoint-eval/final/`; `COMPLETE` 1,703.0 s, exit 0 at
+06:59:03Z). Both: 64 episodes, 0 failed worlds, `policy_seed` 925031, launch sha c369a6b91.
+Diagnostics parity: development panels differ from the trace recomputation only in the normal-mode
+boundary share (1 / 2 of 64 rows, ≤ 5.6e-5); hold-out panels equal exactly. The sealed comparator
+run `b02_holdout_refs_a01` (commit 9c1e238de) was opened by this read and by nothing before it.
+Reader unchanged since `ae998950e`; readings JSON regenerated with c00–c06, the hold-out run and
+`--holdout-refs` (`b02_stage1_readings.json`).
+
+**Development curve, 955001–955032 (det / stoch).**
+
+| | c00 | c01 | c02 | c03 | c04 | c05 | c06 |
+|---|---|---|---|---|---|---|---|
+| transitions | 0 | 204k | 402k | 600k | 804k | 1,002k | 1,200k |
+| QoS/step | .209 / .243 | .241 / .250 | .318 / .303 | .325 / .345 | .406 / .404 | .424 / .382 | **.437 / .438** |
+| step | | +.032 / +.007 | +.077 / +.053 | +.007 / +.042 | +.081 / +.059 | +.018 / −.022 | +.012 / +.056 |
+| J | 587 / 693 | 692 / 709 | 920 / 864 | 944 / 996 | 1187 / 1180 | 1242 / 1114 | 1276 / 1281 |
+| return cost | 6.6 / 4.6 | 1.6 / 6.9 | 3.3 / 8.1 | 1.6 / 5.0 | 0.9 / 1.6 | 1.2 / 1.4 | 2.4 / 1.5 |
+| min battery | .097 / .099 | .108 / .105 | .106 / .101 | .114 / .105 | .110 / .107 | .108 / .107 | .106 / .106 |
+| boundary share | .06 / .01 | .43 / .17 | .43 / .14 | .37 / .09 | .41 / .22 | .35 / .27 | .37 / .30 |
+| first service step | 364 / 347 | 281 / 233 | 323 / 290 | 206 / 254 | 177 / 249 | 176 / 194 | 165 / 146 |
+| zero-service worlds | 4 / 3 | 5 / 5 | 1 / 1 | 2 / 2 | 0 / 0 | 0 / 2 | 1 / 0 |
+
+Best checkpoint c06 in both modes. The reader's `still_improving_at_end` (last step > .015 and the
+previous step > 0) is false in both: deterministic steps +.018 then +.012, sampled −.022 then
++.056. Rollouts 101–117 of the first process (mean training QoS .230) are discarded from the curve
+as declared; the resumed process's world streams differ from rollout 101 (resume seed 925131).
+
+**Final model c06 against the comparators, both world sets** (paired per world; SE = paired SE;
+"above" = worlds where the learner is higher).
+
+| c06 | dev det | dev stoch | hold-out det | hold-out stoch |
+|---|---|---|---|---|
+| QoS/step (J) | .437 (1276) | .438 (1281) | .462 (1354) | .440 (1287) |
+| vs c00 | +.228 (SE .021, 31/32) | +.195 (SE .018, 32/32) | — | — |
+| vs H_central (.774 dev / .781 hold-out) | −.337 (SE .015, 0 above) | −.336 (SE .015, 0) | −.319 (SE .019, 0) | −.341 (SE .018, 0) |
+| vs H_local (.597 / .611) | −.160 (SE .025, 6 above) | −.159 (SE .032, 6) | −.149 (SE .023, 4) | −.171 (SE .025, 3) |
+| vs N (.328 / .344) | +.108 (SE .025, 24 above) | +.109 (SE .024, 24) | +.118 (SE .028, 26) | +.096 (SE .029, 23) |
+| vs H_park2 .379 (dev only) | +.058 (SE .017, 26) | +.059 (SE .019, 23) | — | — |
+| vs H_spawn .232 (dev only) | +.205 (SE .020, 31) | +.206 (SE .019, 32) | — | — |
+| worlds ≥ .60 | 1 (955014 .626) | 3 (955014, 955026, 955030) | 2 (957010 .615, 957018 .632) | 2 (957008 .626, 957011 .611) |
+| zero-service worlds; minimum | 1 (955016); 0 | 0; .265 | 0; .270 | 0; .194 |
+| return cost; min battery | 2.35; .106 | 1.48; .106 | 1.18; .107 | 1.37; .106 |
+| F-mode share; guard-blocked share | .182; .084 | .216; .090 | .184; .091 | .226; .066 |
+| boundary / altitude-floor share | .365 / .474 | .295 / .478 | .388 / .483 | .312 / .470 |
+
+Comparators on the hold-out worlds (read once with the model): H_central .781 (J 2300; return cost
+5.7, min battery .101), H_local .611 (J 1691; 56.0, .089; ≥ .60 in 19/32 worlds), N .344 (J 1002;
+0.93, .109; one zero-service world). Their hold-out-minus-development shifts are +.007, +.014,
++.015; the learner's are +.025 (det) and +.002 (stoch), i.e., inside the comparators' own shift
+plus panel noise. This is agreement, not generalisation evidence: the recipe was fixed and no
+decision was taken on the development panel, so agreement is what the design predicts. The two
+evaluation modes, .02–.04 apart at c03–c05, read .437 / .438 on the development panel and
+.462 / .440 on the hold-out panel at c06 (still .022 apart there).
+
+**Readings against the declaration.** (1) Milestone .60 (H_local's level, labelled so): not
+reached — the c06 mean is .16–.18 short in every panel, with 1–3 worlds at or above it against
+H_local's 19 of 32 on the hold-out set. (2) Improvement over the model's own initialisation:
++.228 / +.195 on the development panel, 31–32 of 32 worlds positive, J roughly doubled
+(587 → 1276). (3) Gaps: −.32 to −.34 to H_central and −.15 to −.17 to H_local on both world sets,
+no world above H_central, 3–6 above H_local. (4) Risk, both directions: against N the service
+gain of +.10–.12 comes with a higher return-constraint cost (hold-out +.253, SE .122 det;
++.449, SE .137 stoch; per-episode sums 1.18 / 1.37 against N's 0.93) and a minimum battery equal
+within noise (−.001 / −.003, SE .002) — the reader's conflict flag is on the return cost, not on
+the battery tail; against H_local and H_central the learner has a lower return cost (1.2–2.4
+against 56–66 and 4.8–5.7) and a higher minimum battery (.106 against .087–.089 and .100–.101),
+so the −.15/−.17 gap to H_local is a service gap at materially lower risk, not a like-for-like
+deficit, consistent with Root's note that H_local's value is not a capability bound under the
+same risk constraint. No cutoff or depletion event in any of the 608 Stage 1 episodes, learner or
+comparator. (5) Package references: the learner is +.21 above the spawn-parking package on
+31–32 worlds and +.06 above the two-station package H_park2 (SE .017–.019; 23–26 of 32), where N
+sits −.05 below H_park2 — the fit learned beyond parking at the two stations, which N had not.
+
+**Phase structure (the reader's split, as in Stage 0; window lengths stated).** The learner's
+first shield entry falls at step ≈ 1000–1047 and its first charger input at ≈ 2030–2140
+(H_central 1300–1323 / 1617–1640, H_local 1300–1304 / 1598–1620, N 1185–1373 / 2152–2196), so the
+pre-entry means below are ≈ 1000-step windows for the learner against ≈ 1300-step windows for
+the planners. Development, deterministic: learner .277 pre-entry / .488 entry-to-input / .543
+post-input; H_central .810 / .840 / .725; H_local .631 / .702 / .544; N .231 / .353 / .449.
+Hold-out, deterministic: learner .299 / .518 / .583; H_central .835 / .880 / .703; H_local
+.655 / .714 / .543; N .243 / .361 / .441. The deficit to H_central is −.53 before any shield entry,
+−.35 / −.36 between entry and first input and −.12 / −.18 after the first input; to H_local −.35,
+−.21, then .00 (dev) / +.04 (hold-out). Observation, not mechanism: the learner's shortfall is
+concentrated in the deployment phase before the shield has moved any UAV, and after the first
+charger input it serves at H_local's level; whether the low pre-entry service is a deployment
+choice, slow arrival (first service at 76–165 steps against 14–33 for the planners) or a
+reward-side effect is not read from these panels.
+
+**Training-time signals over the whole curve** (collection-time, 2 lanes; comparability caveat:
+world streams differ across the resume boundary; the frozen panels are the like-for-like signal).
+Training QoS/step by 10-rollout blocks: .19 .16 .21 .18 .16 .13 .21 .14 .20 .19 (process 1,
+rollouts 1–100) | .26 .29 .30 .31 .30 .29 .32 .33 .37 .38 (resumed process, 101–200). Zero-service
+lane rollouts 70 of 200 (61 in the first 105, 9 in the last 95). Shield-mapping share .274 mean.
+Action entropy 1.156 → −.596 first to last (block means ≈ 1.07 at rollouts 91–100, then 1.13, .99,
+.83, .68, .48, .28, .08, −.13, −.31, −.52; differential entropy of the squashed Gaussian). The
+collection-time service kept rising through the last three blocks while the development panel's
+deterministic steps shrank (+.018, +.012) and the sampled panel moved −.022 then +.056.
+**Correction (2026-09-27):** the c04 and c05 entries above attribute a "policy sharpening /
+premature convergence" row to Pro's failure table; the table has six rows (opportunity to reach
+useful states; users and paths present but delivery not held; early service good and gap
+widening after F/recharging; targets not reached under guard blocking; still improving at the
+end with a large gap; low plateau with normal execution) and no such row. The entropy
+observation stands as this notebook's own, non-pre-registered addition; nothing was selected or
+acted on because of it.
+
+**Pro's failure table, filled with the reader's proxies (non-exclusive; no rescue selected).**
+Row 1 (users seen late, little useful exposure): first service 165 steps at c06 (364 at c00),
+pre-entry service .277, training QoS of the first five rollouts .25/.17/.16/.25/.26 — held over
+the first half of the fit (flat .19 training QoS, zero-service lane in 61 of the first 105
+rollouts), not at the end (training QoS .38, first service 76–165 steps). Row 2 (users and paths
+present, delivery not held or improved): the end state — service present in every phase and world
+(one zero-service world under deterministic evaluation) at roughly half the planners' rate;
+the row's candidate family (signal use, optimisation, return trade-off, credit) is the live one and
+nothing in it is proven. Row 3 (early good, gap widens after F/recharging): absent — learner
+.277 → .543 against H_central .810 → .725; the gap narrows after the shield acts. Row 4 (guard
+blocking): absent as a global pattern — blocked share .084 against H_central's .077 (H_local .20,
+N .18); the boundary share (.30–.39 of normal-mode UAV-steps, planners 0, N .46) is the geometric
+residue that remains. Row 5 (still improving at the end with a large gap): flags false in both
+modes under the stated rule, gap to H_central −.337 / −.336, training QoS still rising — the
+exposure question is open in both directions; this fit is not extended (declared). Row 6 (low
+plateau, execution normal): execution normal (0 live-lane boundaries, 0 failed worlds, identity
+per panel present); a plateau is not established (`curve_flat` false; deterministic steps
+shrinking, sampled non-monotone).
+
+**Cost against the declaration.** Declared ≈ 5 h serial node wall (first entry), revised at
+launch to ≈ 11 h upper bound plus ≈ 1.4 h of evaluations. Actual, operation walls: fit process 1
+19,204 s (117 rollouts, of which 17 = 102k transitions discarded, ≈ 0.8 h), process 2 20,408 s
+(100 rollouts): 39,612 s = 11.0 h of fit (CUDA, 4 threads, runner peak RSS 2.86 GB; 164 and
+204 s per rollout, the second process sharing the CPU with evaluations); checkpoint evaluations
+c00–c05 5,282 s beside the fit, c06 development 1,718 s and hold-out 1,703 s concurrently on the
+idle node; hold-out comparators 1,233 s beside the fit. Episodes: 7 × 64 development, 64
+hold-out, 96 comparator = 608; fits: 1 (one resume). Wall-clock span 18:22:52Z → 06:59:03Z =
+12 h 36 min including the 53-min gap between the crash (23:45:31Z) and the resume (00:38:32Z).
+Engineering on the way: training runner and SET loader (34824de1d), resume path (c9895139b,
+c369a6b91), hold-out phase of the B01 runner (7ad3ba6d3), readers (d3f6bda93, cfefb86a8,
+ae998950e), each reviewed or tested as recorded above.
+
+**Status under constitution §8 and what the study supports.** Exploratory: one training seed,
+the endpoint reached by a process resumed from c03 with the learner state restored exactly and
+the world streams re-seeded — declared before the resume and not spliced into a confirmation.
+Supported on this evidence: with the production shield active in training and the SET switch on
+the B09 S7 recipe, 1.2 M transitions of one seed reach .44 QoS/step on the development worlds and
+.46 / .44 on the hold-out worlds — above N by .10–.12 (paired, 23–26 of 32 worlds, at a higher
+return-constraint cost and an equal battery tail), above the two-station package by .06, and
+below H_local by .15–.17 and H_central by .32–.34 at lower return cost and higher minimum
+battery than either planner; the shortfall sits in the pre-entry deployment phase. Not
+supported: any statement about the recipe across seeds (DM1's question), a mechanism for the
+pre-entry deficit, or a plateau. The reserved worlds are spent: 957001–957032 have now been seen
+by this model and its comparators and are not an unexposed test set for any later model.
+
+**Standing and open questions for Root (no Stage 2 declared here; continuation goes through
+coordination).** (a) The pre-entry phase — the first ≈ 1000 steps, where this learner serves
+.28–.30 against .63–.84 for the planners and .23 for N — is the concrete place where the
+remaining gap lives; DM2's comparability diagnosis and DM3's teacher/student comparison already
+own adjacent questions and may want this reading. (b) Whether a longer exposure of the same recipe
+is worth buying (row 5) is open: development steps have shrunk while the collection-time service
+still rises and the entropy sits below zero; a longer or changed recipe is a new declared study
+and, under §8, a multi-seed one — DM1's and Root's call. (c) The evaluation-mode axis mattered
+at c03–c05 (.02–.04 apart) and little at c06 (≤ .02 dev, .022 hold-out); a single mode would have
+told the same story at the endpoint. One independent scientific review of this entry follows
+(§5); its outcome is appended below.
