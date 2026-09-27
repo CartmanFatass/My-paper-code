@@ -3000,3 +3000,31 @@ pid 739468; N checkpoint `…/b09_an_925031_a01/N/endpoint/agent.pt` sha256 `2ba
 NOT read before the final model's hold-out panel exists; both are read together after c06 with the
 reader invocation `--evals … <c06 hold-out run> --holdout-refs runs/energy_relay_benchmark/b02_holdout_refs_a01`.
 Observation: a background completion watcher that prints status and counts only.
+
+### Alignment notice from Root read (2026-09-27 ≈ 02:40 UTC): two Codex DMs registered; this direction's remaining scope
+
+Root's owner-requested notice `docs/Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md` (commit
+ce3947efb, with RESEARCH routing rows and the archived allocation review) registers two independent
+Codex DMs on the same frozen S7 problem: `energy_relay_baselines` (DM1: ordinary-learning
+reproducibility across training instances; the inbox report's D1, with D4 imitation
+initialisation as a revisable successor) and `energy_relay_diagnostics` (DM2: the inbox report's
+D2 + D3, comparability of training-time and evaluation signals, sole writer of any new
+proposal/submitted-action/actor-head trajectory interface). This direction keeps exactly the
+accepted B02 SET development study: the resumed fit, c04–c06, the once-only hold-out read of the
+final model against `b02_holdout_refs_a01`, the full cost and the interpretation. Consequences
+recorded here: (1) the cross-seed replication and the imitation-package comparison that earlier
+entries listed as Stage 2 candidates are DM1's; this notebook will not declare them; any
+continuation after the Stage 1 read that is not in DM1/DM2's scope is decided with Root's
+coordination, not from the old menu. (2) 957001–957032 and the sealed comparator run are read
+only here, once, by the pinned reader; nobody else looks at them. (3) Shared-main writing:
+short critical sections under `flock .git/hmasd-main-writer.lock` for index/commit/push, refresh
+main first, explicit own paths only, other writers' working-tree changes preserved — adopted from
+this entry on. (4) DM2 may add an optional observer hook to `b01/evaluation.py` that keeps the
+default behaviour and the old output contract; an uncommitted edit of that shape is present in
+the shared working tree at the time of writing (`observer=None`, `nullcontext`, identical loop
+body). It cannot reach this direction's remaining evaluations, which launch from the pinned
+snapshots (`c369a6b91` for c05/c06/final; the comparators already ran at `7ad3ba6d3`); the
+direction's own tools used from here on (`read_stage1.py`, `read_stage0.b01_trace_diagnostics`)
+do not import it. (5) The §5 wording in the generated Claude skill copies was updated by the
+publisher (`d81fc8622`); the constitution, models and permissions are unchanged. No reply, ACK
+or forwarding is owed or sent.

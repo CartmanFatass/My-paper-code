@@ -20,7 +20,10 @@ evaluation correction. (3) The first version cited the 30-day freeze and "answer
 first"; both were withdrawn in the direction's own follow-up
 (`docs/Claude_docs/reviews/RESET_RESPONSE_AND_FIRST_STUDY_20260926.md`, section 10: freeze and
 Root-dissolution wording withdrawn, venue class deferred as non-blocking). Nothing below waits on
-them.
+them. (4) Allocation done by Root on 2026-09-27 (`docs/Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md`):
+D1 (+ D4 as a revisable successor) → `energy_relay_baselines`, D2 + D3 → `energy_relay_diagnostics`;
+this direction keeps the accepted B02 study and its declared readings only, and will not declare
+the cross-seed or imitation follow-ups itself.
 
 摘要（中文）：在冻结的 S7-S2/H3000 宿主上，本方向已用零训练参照把"学习器亏在哪里"定量化——
 中心式固定航点启发式 .774 QoS/步、局部信息启发式 .597、B09 学习器 N .328；亏损在部署（布局）而非
