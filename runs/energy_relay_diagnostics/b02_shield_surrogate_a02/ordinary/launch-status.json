@@ -1,0 +1,11 @@
+{
+  "claim_key": "d4812de10031ef215d3a9ff116fab90be5c984163260dc8754f26186d470b59c",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d4812de10031ef215d3a9ff116fab90be5c984163260dc8754f26186d470b59c.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/energy_relay_diagnostics/b02_shield_surrogate_a02/ordinary/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d4812de10031ef215d3a9ff116fab90be5c984163260dc8754f26186d470b59c.json",
+  "pid": 812977,
+  "runner_pid": 812978,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-27T10:44:24.357333Z"
+}

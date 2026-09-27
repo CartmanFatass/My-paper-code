@@ -834,3 +834,251 @@ admission, review and other setup remain unmeasured. Any operation requires a fr
 output root. This diagnostic has not been launched or admitted; its getter probe alone still cannot
 name the writer, so add and review writer tracing first if that is the required decision-changing
 evidence.
+
+## 2026-09-27 — Owner-requested B02 re-audit: original evidence and corrections
+
+This re-audit covers this replacement session's B02 implementation, A01/A02 interpretation,
+cache probe at `7416b8e4e439454ed3c89679fd8664d5dcb4910d`, and proposed further investment.
+It reads original outputs and the executed path rather than treating the preceding summaries as
+proof. The owner's model correction motivates scrutiny; a model label neither invalidates data
+nor validates this new reading. No new result-bearing operation is selected by this audit.
+Current main was refreshed at `e8ddd930779bccf11101a0c981da73c0f545bb24`. Relevant background:
+RESEARCH §§3/4/6 and the current UAV cooperative-planning plan require a useful same-information
+comparison, distinguish finite optimization from a new planning mechanism, and retain training
+instances as the inference units. The original two-arm protocol remains historical evidence.
+
+### Original records independently reread
+
+The configured node's A01/A02 manifest, exit witness, stderr, config, summary and all 21 recorded
+A02 rollouts/progress rows were read directly. A02's summary/progress/stderr/exit/manifest hashes
+still match the five hashes above. The source c03 `agent.pt` was rehashed directly: 38,832,967
+bytes and `80b2bdadddb76a4c03fe9fea8ae9fb1317a136363d28dec0d8fae350745dcce4`; its original
+record still identifies seed 925031, rollout 100, 600k transitions and 225,000 actor/critic
+optimizer steps each. The collector, shield, learner, buffer and shared cache files inspected
+on current main have no diff from their accepted A02 versions at `594fa3b0e`.
+
+- A01 is a pre-training runner failure at `json.dumps(..., parse_constant=str)`. Moving
+  `parse_constant` to `json.loads` is a real configuration-serialization repair. It supplies
+  zero training fits/updates; count it as a separately retained launch failure.
+- A02 is one failed started fit: at least 126,000 completed-rollout transitions, 42 completed
+  H3000 training episodes and 47,250 new updates per actor/critic optimizer. A subsequent
+  partial rollout is not accounted by those saved counts. Runner wall is 3,371.234690 s;
+  acceptance-to-exit wall is 3,521.871189 s. `checkpoints` is empty and the output directory
+  has no checkpoint directory. No masked fit or paired endpoint evaluation exists.
+- All 21 records have `direct_surrogate_mask_enabled=false`. Fully overridden rows total
+  277,992/1,008,000 = 27.5786%. Every recorded actor update clips at the configured norm .5.
+  The direct-gradient ratio .7452307 is **one initial 320-row minibatch probe**, including
+  74 overridden rows, copied into later rollout records; it is not 21 independent probes,
+  a gradient-variance measurement, or a native-benefit result.
+- Reaggregating B01's original development-panel JSON gives sampled-draw-0 c03-minus-c00
+  QoS +.0978517013 and native J +290.7285980, with 6 QoS-loss and 8 J-loss worlds out of 32.
+  Thus the ordinary learner demonstrably changed usefully in this one historical instance.
+  B01's two-draw-averaged sampled-minus-deterministic J +1.218844 and return cost +7.745681
+  remain intact. Neither observation identifies a shield-credit bottleneck, and neither is
+  a substitute for the missing continuation pair. No sealed holdout was used in this audit.
+
+### What the implementation actually estimates
+
+The source path is `b02/training.py::collect_and_train` ->
+`uav_service_auxiliary/b06/feedback.py::apply_feedback` -> `store_transition_batch` ->
+`RolloutBuffer` recurrent sampler -> `HMASDAgent.update_discoverer_from_rollout`.
+The actor samples a tanh-Gaussian proposal; the production shield reads current legal margin,
+previous mode and station geometry. Its mode decision is independent of the current proposal,
+and an active mode replaces all four proposal coordinates. The environment receives that
+submitted command. Replay retains the sampled proposal and its original log probability,
+alongside the actual resulting team reward. The actor uses current legal observations plus
+the held central snapshot refreshed at k=10; the critic uses the existing state path. The mask
+adds no actor input, future label, privileged planning query, reward or transition modification.
+The inspected recurrent input does not feed this sampled proposal back as a previous-action input.
+
+Writing M=1 for full override, the direct actor objective is
+`-sum((1-M) * min(r*A_normalized, clip(r, .8, 1.2)*A_normalized)) / D`, where D counts all
+original valid action rows. Modes, rows and proposal likelihoods remain aligned through the
+same recurrent chunks. GAE, the critic, ValueNorm, entropy and recurrent processing are retained.
+Those *procedures* match; after policies diverge, their future data, critic targets and parameters
+need not remain numerically equal.
+
+Condition on pre-action history (including the shield state) and the other proposals. With
+complete, action-independent replacement and no separate proposal-dependent reward/memory,
+the physical consequence is constant in this UAV's proposal u. Under the usual score-function
+regularity, `E[Q * grad log pi(u|history)] = Q * grad integral pi(u|history) du = 0`.
+This explains a possible variance-reduction opportunity. Ordinary proposal-based policy gradient
+is still a legitimate estimator for the composed policy-plus-shield system. Multi-epoch clipped
+PPO with sampled normalized advantages and a retained proposal-entropy term is a different finite
+optimization object; the identity is not a proof of lower training variance, larger native return,
+or correction of a generally erroneous gradient in this implementation.
+
+The closest verified primary method is Eisenach et al.,
+[Marginal Policy Gradients, §4.2, Lemma 4.5/Theorem 4.6](https://arxiv.org/html/1806.05134v3):
+it marginalizes proposal distinctions erased by the execution map. The fully overridden
+coordinate is a constant-map special case of that idea. Fujita and Maeda's
+[CAPG, §3](https://proceedings.mlr.press/v80/fujita18a/fujita18a.pdf) is the neighboring bounded
+clipping case; its tail probability correction is not this whole-action mask. The
+[PPO clipped surrogate](https://arxiv.org/pdf/1707.06347) explains why an ideal policy-gradient
+identity does not assert equality of the finite clipped objectives. These sources bound the
+novelty claim; they provide no new UAV result.
+
+### Targeted checks and explicit corrections
+
+Configured local scientific Python, existing owned B02 tests plus the two disputed shared
+cache tests, `--basetemp temp/directions/energy_relay_diagnostics/test/reaudit-20260927`:
+**13 passed, 2 failed, 14 warnings in 21.68 s**. The passing scope includes stored-mask axis
+order/RNG, the actual small learner update, default versus instrumented-unmasked identity,
+actor-only masking on the matched batch, production-mode capture even when actions coincide,
+config serialization, endpoint contract, and cache guard/restoration. This is local focused
+verification, not production learning or universal numerical equivalence.
+
+1. **Correct the denominator claim.** The earlier sentence “so filtering does not increase
+   the effective step size” is too strong. D is unchanged, so there is no automatic retained-row
+   renormalization. Removing cancelling terms can nevertheless increase the gradient, and Adam,
+   clipping and the relative entropy contribution further change the update. Exact FP64 arithmetic
+   with two row derivatives `(1, -.9)` and D=2 gives .05 unmasked versus .5 retaining only the first.
+   Another four-row enumeration uses an own Bernoulli proposal independent of reward sign ±1,
+   all proposals fully overridden, old p=.5 and PPO epsilon=.2. At new p=.5 the mean clipped
+   objective and derivative are both zero; at p=.7 they are -.1 and -1, whereas the masked direct
+   contribution is zero. These deterministic calculations explain the estimand boundary; they
+   are not a performance experiment or a new empirical variance claim.
+2. **Correct “reset observations differ.”** The first existing cache test compares the entire
+   reset tuple and stops at its first assertion. A read-only pytest failure hook compared its
+   actual captured locals: `OBS_ARRAY_EQUAL True`; the only differing leaves were all eight
+   `reset/1/infos_dict/uav_i/reward_info/graph_potential` values, `.6712486810265368` versus
+   `.6712486810265367`. Cache types were `dict` and `NoneType`. The follow-up ran the same
+   existing test once in `reaudit-reset-20260927`, 4.86 s, preserving its expected failure.
+   Its later five-step routing/RNG assertions were not reached. The earlier claim of unequal
+   observation arrays is withdrawn; equality of the full returned structure still fails.
+3. The second shared test again differs in 31/240 SINR cells, maximum absolute
+   `5.68434189e-14`, maximum relative `3.77374346e-14`. Both tests are local **S7-S1** checks,
+   not the failed S7-S2/CUDA continuation. No threshold/route consequence or bool-production
+   mechanism follows from these tiny floating-point differences. A01's serializer bug, A02's
+   malformed object and these cache numerics are three distinct findings.
+4. The `7416b8e4e` guard raises before the original getter's active-cache shortcut on a
+   non-None/non-dict value and restores its wrapper on exception. It records a bounded history
+   of eight reads, lane/seed/step, type/value/id, class and getter module/file. It does **not**
+   capture the assignment, prove live bytecode/native-library identity from a file path, or
+   repair the runtime. The three recorded cache lifecycle assignments at A02's source produce
+   None or a dictionary. The bool's origin remains unknown. Reproduction by injecting a bool
+   establishes guard behavior only. No silent fallback is justified by this audit.
+
+### Cost and the next-investment comparison
+
+A successful mask package could supply a reusable training recommendation for controllers whose
+commands are fully replaced by a fixed supervisor. It adds no joint path representation,
+lookahead consequence model, allocation/hand-off decision, communication rule or new information.
+Its current mathematical idea is already covered by action marginalization; a UAV planning
+contribution has not been demonstrated. The internal same-information ordinary baseline is the
+same c03 SET PPO plus the same shield, information cadence and training exposure. B01 supplies
+conditional evidence of its learnability, not proof of optimal tuning. Ordinary gradient-scale,
+entropy and clipping choices are stronger competing explanations for a finite package gain;
+the frozen two-arm design does not separate them. A planning-level claim would additionally
+need a competent planner at the same information/refresh contract; an unmatched historical
+central teacher cannot supply that comparison. Other current leads already own concrete
+cooperative-planning and from-scratch baseline questions.
+
+The contemplated 22-rollout/132k getter-only repeat would be **one additional started fit**,
+even if called diagnostic. Linear extrapolation of the uninstrumented failed prefix is about
+58.9 runner minutes. The probe's per-read overhead is unmeasured, so the previous 65–75 minute
+reserve is not a verified upper bound. The committed runner actually fixes 50 continuation
+rollouts; a 22-rollout contract would require new implementation/checks/admission. It would
+buy recurrence and read locality, with no endpoint comparison and no writer provenance.
+
+A complete replacement pair would instead cost 2 new fits, 600k transitions, 225,000 actor and
+225,000 critic updates in total, and 128 H3000 evaluation episodes/384k steps. The prior
+4.7–5.7 training hours plus 40–60 evaluation minutes remain an estimate; repair/instrumentation,
+startup, contention, storage, collection and reading are additional unknown costs. With A02,
+cumulative started training would be 3 fits and at least 726k recorded new training transitions.
+One shared c03 initialization and exposed development worlds would remain the scientific limit.
+The investment disposition and the one fresh independent scientific review are recorded below.
+
+### Independent scientific review and disposition
+
+The fresh ResearchCritic `b02_direction_reaudit` used a separate context with no inherited
+conversation. It reconstructed the raw B01/A01/A02 records, collector/shield/replay/learner
+path and relevant primary methods before reading the current proponents' summaries. The
+earlier partial-failure critique had a narrower scope and disclosed prior-context exposure;
+it is retained as historical advice, not counted as this independent reconstruction. The
+reset-local inspection above is a DM-observed follow-up supplied to the reviewer; the reviewer
+did not claim an independent repeat of that runtime inspection. No additional Pro question
+was needed for this decision, and none was sent.
+
+The complete substantive recommendation was **REVISE**, with these reasons and boundaries:
+
+- Preserve the narrow finite-PPO optimization question and the competent ordinary PPO + same
+  shield comparator. The action-independent full-replacement premise is supported on the
+  inspected path. The ideal score identity does not make ordinary proposal gradients wrong,
+  prove the clipped update harmful, or establish a new cooperative planner. A02 supplies no
+  scientific sign for or against masking. B01's ordinary learning and all adverse worlds stay.
+- Reject the getter-only 22-rollout repeat as the next purchase. Recurrence would locate an
+  invalid read; nonrecurrence would show only a successful prefix. Neither establishes the
+  mutation source, a repair, or masking value. If engineering is later worth buying, a bounded
+  observation should offer actionable mutation provenance, a narrow causal interval or a
+  concrete repair. Exhaustive root-cause explanation is not a permanent scientific prerequisite;
+  the actionability and cost of the presently available route are simply unestablished.
+- A complete paired continuation could still be worthwhile modest exploration once there is
+  an economical executable route and a concrete optimization use. One shared c03 and exposed
+  development worlds bound the result. Gradient scale, entropy and clipping remain alternatives
+  to a mechanism claim, but a third scalar-control arm is **not** a prerequisite for the modest
+  original two-arm package comparison.
+- If a future newly selected pair improves complete J/service in both declared modes with
+  acceptable tails, first price fresh independent training replication. Loss, incomplete
+  benefit or adverse tails ends the exact scheme according to its fixed rule; a technical
+  failure still supplies no scientific sign. There is no automatic retry or follow-on fit.
+- Under the current UAV cooperative-planning priority, this is supporting optimization.
+  It does not earn an automatic debugging allocation or become the main planning contribution.
+
+**MATERIAL_DISSENT: yes** — against purchasing the getter-only 22-rollout repeat and against
+the claim that an unchanged denominator prevents a larger effective update. **DM disposition:
+adopt both objections and the narrower interpretation.** No material disagreement remains.
+
+**Current choice: materially revise; move `energy_relay_diagnostics` to `reserve` and end
+the current B02/cache investment.** The question remains scientifically untested. Withdraw
+the 22-rollout proposal and the effective-step-size guarantee; correct the reset-observation
+claim as above. Do not select a replacement pair, repair project, new fit or diagnostic run.
+The useful present result is the corrected estimator/implementation boundary, verified failure
+account and investment judgment. Existing evidence does not identify a valuable, economical
+next purchase for this question now. This is a present decision, not a pending approval or an
+instruction to wait for a repair. A future prospective revision may use new executable evidence
+and a concrete downstream need; no continuation is queued or automatically triggered.
+
+The original lead and observer-interface ownership remain unchanged. The generic learner hook,
+the owned B02 reference implementation and their focused checks remain available to interpret
+the accepted source and the still-unanswered optimization question. The two failed operations
+are reconciled; no live result operation or unread Pro answer remains. The audit added no
+scientific fit or result-bearing rollout. Its focused checks and exact algebra are reported
+above; the engineering/review time was not instrumented and is not claimed as zero cost.
+
+### Compact publication and actual retirement
+
+Copied and byte/hash-verified the exact original A01 manifest, acceptance status, process exit
+and stderr, and A02 config, summary, manifest, acceptance status, process exit and stderr into
+the matching local `runs/energy_relay_diagnostics/b02_shield_surrogate_a0{1,2}/ordinary/`
+paths. These ten files contain 114,307 bytes and occupy 159,744 allocated bytes including their
+directories. **`launch-status.json` is the original acceptance snapshot**, not a new terminal
+query: its `accepted` field does not override the exit witnesses, A02 summary, or absent native
+processes. The remote original progress/stdout and compact records remain at their declared
+output roots; no checkpoint, full worktree or bulk retention package was copied.
+
+Both exact launcher source snapshots initially refused retirement only because of four ignored
+`scripts/__pycache__/*.pyc` files each. After checking the exact dirty list and absence of live
+process references, removed those eight rebuildable files. Used the maintained node collector
+`scripts/hmasd_snapshot_gc.py`, preview then exact-ID apply, with `--sudo-process-scan` for its
+read-only inspection of protected same-user processes. Both previews and applies passed all
+terminal identity, claim/source consistency, external-output and durable-source-ref checks.
+No authoring worktree, claim, manifest, exit witness or run output was removed.
+
+| Exact source snapshot | Allocated bytes before cache/source deletion | After | Directory / Git registration |
+| --- | ---: | ---: | --- |
+| `513b60e6c9fe41788e7990d1df24a66b` (A01, source `d33cbc5385`) | 797,786,112 | 0 | absent / absent |
+| `4aa584ec81254e89a73defccfac2d923` (A02, source `594fa3b0ea`) | 797,855,744 | 0 | absent / absent |
+
+The source targets therefore released **1,595,641,856 allocated bytes**. Subtracting the
+159,744-byte local compact publication copy gives **1,595,482,112 bytes of net reduction across
+these measured paths**; this is not a measurement of whole-host free capacity or Git object
+storage. Concrete retained node outputs occupy 28,672 bytes (A01) and 229,376 bytes (A02).
+After deletion, all ten compact source files and A02 `progress.jsonl` were rehashed unchanged;
+the accepted c03 checkpoint remains in its original artifact store. There is no leftover
+source snapshot from these two operations.
+
+The final wait drain has generation 4, `events=[]`, `wake_id=null`, `delivery=null`, and only
+the reconciled A02 job in terminal `failed` state with valid exit 1 and absent runner/supervisor.
+No observations remain to rearm. This collection and retirement did not restart a worker,
+resend a Pro question, or message another App task.

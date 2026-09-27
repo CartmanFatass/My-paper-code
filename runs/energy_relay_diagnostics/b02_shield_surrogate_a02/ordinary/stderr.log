@@ -1,0 +1,31 @@
+在checkpoint中未找到Discriminator缓冲区，将使用新的空缓冲区
+Traceback (most recent call last):
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/experiments/candidates/energy_relay_diagnostics/b02/runner.py", line 504, in <module>
+    main()
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/experiments/candidates/energy_relay_diagnostics/b02/runner.py", line 92, in main
+    return train_continuation(
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/experiments/candidates/energy_relay_diagnostics/b02/runner.py", line 285, in train_continuation
+    collector = collect_with_policy_surrogate_mask(
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/experiments/candidates/energy_relay_diagnostics/b02/training.py", line 161, in collect_with_policy_surrogate_mask
+    return b02_training.collect_and_train(
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/experiments/candidates/energy_relay_benchmark/b02/training.py", line 149, in collect_and_train
+    obs, reward, terminated, truncated, info = env.step(submitted)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/envs/pettingzoo/env_adapter.py", line 224, in step
+    observations_dict, rewards_dict, terminations_dict, truncations_dict, infos_dict = self.env.step(actions_dict)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/envs/pettingzoo/relay/energy_aware.py", line 581, in step
+    observations, rewards, terminations, truncations, infos = super().step(adjusted_actions)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/envs/pettingzoo/relay/routed_core.py", line 3433, in step
+    self._update_uav_connections()
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/envs/pettingzoo/relay/energy_aware.py", line 2208, in _update_uav_connections
+    super()._update_uav_connections()
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/envs/pettingzoo/relay/routed_core.py", line 3269, in _update_uav_connections
+    sinr_ji = self._compute_uav_to_uav_sinr(j, i)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/envs/pettingzoo/relay/energy_aware.py", line 2198, in _compute_uav_to_uav_sinr
+    return super()._compute_uav_to_uav_sinr(sender_idx, receiver_idx)
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/envs/pettingzoo/relay/routed_core.py", line 3254, in _compute_uav_to_uav_sinr
+    sinr_db = self._cached_link_sinr(
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/envs/pettingzoo/relay/routed_core.py", line 2902, in _cached_link_sinr
+    cache = self._current_step_communication_cache()
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4aa584ec81254e89a73defccfac2d923/envs/pettingzoo/relay/routed_core.py", line 2821, in _current_step_communication_cache
+    if cache["config"] != self._communication_config_signature():
+TypeError: 'bool' object is not subscriptable

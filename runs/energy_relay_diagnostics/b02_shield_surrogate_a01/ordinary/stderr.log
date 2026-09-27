@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/513b60e6c9fe41788e7990d1df24a66b/experiments/candidates/energy_relay_diagnostics/b02/runner.py", line 501, in <module>
+    main()
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/513b60e6c9fe41788e7990d1df24a66b/experiments/candidates/energy_relay_diagnostics/b02/runner.py", line 86, in main
+    return train_continuation(
+  File "/home/wu/projects/HMASD/.git/hmasd-launch-sources/513b60e6c9fe41788e7990d1df24a66b/experiments/candidates/energy_relay_diagnostics/b02/runner.py", line 192, in train_continuation
+    json.dumps(active_config(config), parse_constant=str)
+  File "/home/wu/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/lib/python3.10/json/__init__.py", line 234, in dumps
+    return cls(
+TypeError: JSONEncoder.__init__() got an unexpected keyword argument 'parse_constant'
