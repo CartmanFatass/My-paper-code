@@ -1,0 +1,467 @@
+{
+  "arms": {
+    "distance_hysteresis": {
+      "controller_information": "legal-observation pooled central planner (station-1 ring search prior)",
+      "cruise_mps": 30.0,
+      "dedup_tolerance_m": 0.5,
+      "height_m": 100.0,
+      "horizontal_speed_mps": 30.0,
+      "information": "local",
+      "kmeans_iterations": 30,
+      "n_relay": 2,
+      "n_service": 6,
+      "n_uavs": 8,
+      "replan_period": 30,
+      "search_radius_m": 1000.0,
+      "switch_margin_m": 300.0,
+      "time_step_s": 1.0,
+      "unobserved": "station-ring",
+      "vertical_cap_mps": 5.0,
+      "vertical_speed_mps": 5.0
+    },
+    "energy_fraction": {
+      "assignment_cost": "(outbound_wh + 30s hover_wh + min legal-station return_wh) / max(battery_wh - 16Wh, 1e-6)",
+      "base": {
+        "controller_information": "legal-observation pooled central planner (station-1 ring search prior)",
+        "cruise_mps": 30.0,
+        "dedup_tolerance_m": 0.5,
+        "height_m": 100.0,
+        "horizontal_speed_mps": 30.0,
+        "information": "local",
+        "kmeans_iterations": 30,
+        "n_relay": 2,
+        "n_service": 6,
+        "n_uavs": 8,
+        "replan_period": 30,
+        "search_radius_m": 1000.0,
+        "switch_margin_m": 300.0,
+        "time_step_s": 1.0,
+        "unobserved": "station-ring",
+        "vertical_cap_mps": 5.0,
+        "vertical_speed_mps": 5.0
+      },
+      "hysteresis": {
+        "applied_to": "nearest generated target matching previous target",
+        "cost_fraction": "energy_wh / max(usable_wh, 1e-6)",
+        "energy_wh": 0.9896906969993102,
+        "equivalent_distance_m": 300.0
+      },
+      "target_height_m": 100.0
+    }
+  },
+  "batch": "B03",
+  "config": {
+    "energy_stage": "S4",
+    "episode_length": 3000,
+    "experiment_preset": "S7-S4",
+    "k": 10,
+    "lambda_return": 2.0,
+    "max_steps": 3000,
+    "num_envs": 1,
+    "use_obsnorm": false,
+    "use_statenorm": false
+  },
+  "direction": "energy_relay_availability",
+  "effective_raw": {
+    "P0": 79.86,
+    "P_z_coeff": 15.0,
+    "Pi": 88.63,
+    "U_tip": 120,
+    "adapter_shape": [
+      8,
+      365
+    ],
+    "battery_capacity_wh": 160.0,
+    "charging_station_capacity": [
+      1.0,
+      1.0
+    ],
+    "cluster_migration_speed": 10.0,
+    "cluster_pause_time_range": [
+      0,
+      3
+    ],
+    "energy_stage": "S4",
+    "failure_enabled": true,
+    "k3": 0.009242624999999999,
+    "limp_home_speed_mps": 3.0,
+    "max_speed": 30,
+    "max_steps": 3000,
+    "max_vertical_speed_mps": 5.0,
+    "n_charging_stations": 2,
+    "n_ground_bs": 1,
+    "n_uavs": 8,
+    "n_users": 30,
+    "return_reserve_ratio": 0.1,
+    "uav_failure_duration_range": [
+      20,
+      60
+    ],
+    "uav_failure_min_active": 6,
+    "uav_failure_probability": 0.001,
+    "user_max_speed": 8.0,
+    "user_movement_model": "rpgm",
+    "user_pause_time_range": [
+      0,
+      2
+    ],
+    "v0": 4.03
+  },
+  "energy_model": {
+    "battery_capacity_wh": 160.0,
+    "d0": 0.6,
+    "horizontal_speed_mps": 30.0,
+    "k3": 0.009242624999999999,
+    "limp_home_speed_mps": 3.0,
+    "p0_w": 79.86,
+    "pi_w": 88.63,
+    "reserve_ratio": 0.1,
+    "rho_kg_m3": 1.225,
+    "rotor_area_m2": 0.503,
+    "rotor_solidity": 0.05,
+    "service_seconds": 30.0,
+    "u_tip_mps": 120.0,
+    "v0_mps": 4.03,
+    "vertical_speed_mps": 5.0,
+    "vertical_w_per_mps": 15.0
+  },
+  "fits": 0,
+  "horizon": 3000,
+  "jobs": [
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970001",
+      "seed": 970001
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970002",
+      "seed": 970002
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970003",
+      "seed": 970003
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970004",
+      "seed": 970004
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970005",
+      "seed": 970005
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970006",
+      "seed": 970006
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970007",
+      "seed": 970007
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970008",
+      "seed": 970008
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970009",
+      "seed": 970009
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970010",
+      "seed": 970010
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970011",
+      "seed": 970011
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970012",
+      "seed": 970012
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970013",
+      "seed": 970013
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970014",
+      "seed": 970014
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970015",
+      "seed": 970015
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970016",
+      "seed": 970016
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970017",
+      "seed": 970017
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970018",
+      "seed": 970018
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970019",
+      "seed": 970019
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970020",
+      "seed": 970020
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970021",
+      "seed": 970021
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970022",
+      "seed": 970022
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970023",
+      "seed": 970023
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970024",
+      "seed": 970024
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970025",
+      "seed": 970025
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970026",
+      "seed": 970026
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970027",
+      "seed": 970027
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970028",
+      "seed": 970028
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970029",
+      "seed": 970029
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970030",
+      "seed": 970030
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970031",
+      "seed": 970031
+    },
+    {
+      "arm": "distance_hysteresis",
+      "job_key": "distance_hysteresis/970032",
+      "seed": 970032
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970001",
+      "seed": 970001
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970002",
+      "seed": 970002
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970003",
+      "seed": 970003
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970004",
+      "seed": 970004
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970005",
+      "seed": 970005
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970006",
+      "seed": 970006
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970007",
+      "seed": 970007
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970008",
+      "seed": 970008
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970009",
+      "seed": 970009
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970010",
+      "seed": 970010
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970011",
+      "seed": 970011
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970012",
+      "seed": 970012
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970013",
+      "seed": 970013
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970014",
+      "seed": 970014
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970015",
+      "seed": 970015
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970016",
+      "seed": 970016
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970017",
+      "seed": 970017
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970018",
+      "seed": 970018
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970019",
+      "seed": 970019
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970020",
+      "seed": 970020
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970021",
+      "seed": 970021
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970022",
+      "seed": 970022
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970023",
+      "seed": 970023
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970024",
+      "seed": 970024
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970025",
+      "seed": 970025
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970026",
+      "seed": 970026
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970027",
+      "seed": 970027
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970028",
+      "seed": 970028
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970029",
+      "seed": 970029
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970030",
+      "seed": 970030
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970031",
+      "seed": 970031
+    },
+    {
+      "arm": "energy_fraction",
+      "job_key": "energy_fraction/970032",
+      "seed": 970032
+    }
+  ],
+  "launch_sha": "8d9d64996c5a618b85e6ab521a939f98f48e659e",
+  "legal_information": "pooled H_local observations; no raw environment inputs to controller",
+  "observation_layout": {
+    "dim": 365,
+    "n_uavs": 8,
+    "stations": 2
+  },
+  "optimizer_updates": 0,
+  "pairing": "same seed per arm; initial, user, failure and RNG-state traces hashed and compared",
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "threads": 1,
+  "workers": 4
+}

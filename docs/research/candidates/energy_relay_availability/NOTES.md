@@ -1150,5 +1150,139 @@ omitted SEs and t95 intervals. Added per-arm SE, df and Student-t 95% intervals,
 nullable uncertainty when fewer than two values are available; the Reviewer confirmed that
 this resolved the finding and reported no remaining material issue in the assigned
 engineering surfaces. Added a direct check that the launcher binds `--out` to the exact
-tag path. Full H3000 behavior and the admitted four-worker execution remain unobserved. No
-B03 launcher operation has been submitted.
+tag path. Full H3000 behavior and the admitted four-worker execution were unobserved at
+implementation/review sign-off.
+
+### Native B03 launch accepted (2026-09-27)
+
+The declared 64-world, zero-fit B03 comparison was accepted once under operation
+`5932941d6d03e635fc7b78cb956891cf20fe370a4f20149a45e8a4e2591ec4f7`. The
+[native manifest](../../../../runs/energy_relay_availability/b03_energy_assignment_a01/launch-manifest.json),
+[admission preflight](../../../../runs/energy_relay_availability/b03_energy_assignment_a01/admission-preflight.json)
+and [initial launch status](../../../../runs/energy_relay_availability/b03_energy_assignment_a01/launch-status.json)
+retain the exact source, command, node, output, supervisor and runner identities. The
+fresh actual-node preflight measured 15,414,423,552 available physical/effective bytes
+against the 4,294,967,296-byte floor and passed.
+
+At 10:02:55 UTC, native status found consistent accepted records, matching live runner
+and supervisor identities, and no process-exit witness. The outer supervisor handle
+`era-b03-energy-assignment-a01` had exited zero after submitting the launcher; that is
+not the experiment's exit. No scientific outcome has been read or interpreted. Compact
+acceptance metadata has been copied into the canonical `runs/` tag directory; the live
+runner's evolving outputs remain on `wsl_4070` until terminal collection.
+
+### 2026-09-27 — complete native B03 reading
+
+#### Terminal reconciliation, integrity and cost
+
+Drained generation 1 / wake `92e68f18-f260-4da4-924f-4da5c21a8cce`, event
+`15f405d37df42f6cd9b8d598`. The `READY` event recorded accepted, internally
+consistent records; a valid process-exit witness with code 0; and absent runner and
+supervisor. The same-key operation was never restarted; status says
+`explicit_retry_available: false`. A fresh native status at 10:23:39 UTC agreed.
+After rearming generation 2, the drain had no pending events; the observer was
+stopped with `work_unchanged: true`.
+
+The runner summary is `complete`: **64/64 H3000 episodes**, 32 per arm, 192,000
+actual transitions, 0 fits, 0 optimizer updates, and no failed, cancelled, missing,
+unstarted, unreconciled, partial or orphan jobs. All episodes truncated at 3,000
+steps; neither arm had zero-service worlds, service cutoffs or depletion events.
+These zero counts are observations, not a safety or equivalence claim.
+
+Copied the complete 74-file remote run directory into the canonical local tag
+directory and matched every copied file hash to the remote source. All 64 raw NPZ
+files also match their per-world manifest byte counts and SHA256 values. The raw
+files total 137,304,566 bytes; the run manifest reports 137,926,213 total storage
+bytes. The local [summary](../../../../runs/energy_relay_availability/b03_energy_assignment_a01/summary.json),
+[per-world table](../../../../runs/energy_relay_availability/b03_energy_assignment_a01/perworld.json),
+[manifest](../../../../runs/energy_relay_availability/b03_energy_assignment_a01/manifest.json),
+[config](../../../../runs/energy_relay_availability/b03_energy_assignment_a01/config.json),
+[final observed native status](../../../../runs/energy_relay_availability/b03_energy_assignment_a01/operation-status-observed.json)
+and all raw traces retain the evidence. The independent ResearchCritic also
+recomputed the native metrics and paired summaries from all raw files; no material
+integrity contradiction was found.
+
+Accepted 09:59:19.983 UTC; process exit was 10:16:49.509 UTC, **17.49 minutes
+acceptance-to-exit** on `wsl_4070`. Runner parent wall was 1,005.568 s; parent CPU
+1.152 s / peak RSS 477,024 KiB. Worker totals were 4,068.411 CPU-seconds and
+3,908.388 wall-seconds, with maximum reported single-worker peak RSS 530,852 KiB.
+Worker timers stop before NPZ compression and hashing, so they undercount full
+worker process cost; batch elapsed includes that work. Engineering, review,
+transfer and scientific readback are additional and not combined into one end-to-end
+measure. The four workers each used one configured numeric thread.
+
+#### Frozen native outcomes
+
+All intervals below are approximate paired Student-t intervals with 31 degrees of
+freedom. The unit is one same-initialized-world seed pair, not an independent
+training seed. There is no multiplicity adjustment and this development batch is
+not confirmation.
+
+| Outcome | Distance / hysteresis mean | Energy-fraction mean | Energy − distance, mean [t31 95% interval] |
+| --- | ---: | ---: | ---: |
+| QoS per step | 0.58029 | 0.55367 | −0.02662 [−0.05886, +0.00562] |
+| Native J sum | 1,431.49 | 1,223.37 | −208.12 [−403.86, −12.37] |
+| Raw return-cost sum | 139.77 | 207.92 | +68.15 [+5.11, +131.19] |
+| Capped return-cost sum | 139.41 | 203.54 | +64.13 [+4.49, +123.77] |
+| Episode minimum battery ratio | 0.07570 | 0.06769 | −0.00801 [−0.01480, −0.00122] |
+| UAV steps below fixed 10% reserve | 9.73% | 12.88% | +3.15 pp [−0.20, +6.50] |
+| UAV steps with negative return margin | 10.72% | 13.88% | +3.16 pp [−0.21, +6.54] |
+| UAV steps below dynamic return threshold | 50.79% | 50.55% | −0.24 pp [−0.61, +0.13] |
+
+QoS is lower on 20/32 worlds and higher on 12/32; native J is lower on 22/32 and
+higher on 10/32. Both improve in 9 worlds, both decline in 19, and four split.
+Capped return cost rises in 22/32 pairs; minimum battery ratio falls in 24/32.
+Seed 970005 preserves a large joint service/J loss: QoS/step 0.68980→0.36046 and
+J sum 2,030.73→275.17. Seed 970020 preserves a severe low-energy tail: raw
+return-cost sum 47.69→722.11, minimum battery ratio 0.08508→0.03023, and steps
+below fixed reserve 0.42%→30.76%. The favorable seed 970012 also remains: QoS/step
+0.33272→0.49335, J sum 193.85→1,393.92 and raw return-cost sum
+388.03→27.99. All 32 pairs remain in the per-world output.
+
+The mean native-J loss is consistent with lower QoS plus higher capped return cost
+(approximately −79.86 J from service and −128.26 J from return penalties per
+world, with about +0.001 from shaping). This is not a demonstrated risk-for-service
+trade: the energy arm does not improve service or J on average, and its return-cost
+and minimum-battery outcomes worsen.
+
+#### Pairing and prediction diagnostics
+
+Initial-state, user-position, failure-trace and environment RNG-stream hashes agree
+in **32/32 pairs**. The independent reviewer also compared all retained user-position
+snapshots and failure timer arrays directly. UAV paths differ as an effect of the
+assignment and are not claimed as common trajectories. Pairing supports this fixed
+controller/world comparison, not a learning or training-seed claim.
+
+The energy arm logged 3,755 assignment records and 14,100 assigned missions; 2,120
+selected missions (15.04%) had negative model-predicted reserve slack. It executed
+100 scheduled clock30 replans per world, as did the baseline. The distance arm does
+not compute these energy records: its zero mission/slack fields are structural
+placeholders, so no comparative slack improvement or model calibration is shown.
+The energy arm also averages 487 more waiting UAV-steps and 24.44 Wh less charger
+input per world. Those are downstream observations, not a causal diagnosis of why
+the complete outcomes changed. The modeled continuous outbound/service/return
+cost omits actual replanning, shield interventions and station queueing; its
+misalignment with closed-loop outcomes is plausible but not identified here.
+
+#### Independent review and DM disposition
+
+The separate-context Scientific Reviewer independently read the frozen question,
+source and raw outputs before receiving the DM's interpretation. It recommends
+stopping this exact `energy_fraction` rule, retaining `distance_hysteresis` as the
+ordinary S4 comparator, and selecting no confirmation, coefficient sweep or
+additional batch. The predeclared retention branch required joint QoS/J improvement
+without material energy-risk deterioration; the cost-trade branch required risk
+improvement alongside service/J loss. Neither describes these results. The DM adopts
+that conclusion. `MATERIAL_DISSENT: no` on the result and stopping this rule.
+
+The strongest plausible explanation is that distance plus continuation already
+provides useful spatial allocation and the proposed normalized mission estimate is
+not sufficiently aligned with the full closed-loop task. The lower charging input
+and higher waiting are compatible with that interpretation, but do not identify a
+queueing or energy-model cause. B03 does not establish that battery information or
+energy-aware allocation generally lacks value, does not establish safety, and does
+not explain S2 learning. The frozen rule is **NOT_VIABLE_CLOSE**; the broader
+ordinary joint-allocation question remains with this DM, with no current successor
+selected. Any continuation must offer a distinct pre-result prediction and reason
+to spend the next evaluation; this result does not authorize a rescue sweep or an
+additional run.

@@ -1,0 +1,67 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b03_energy_assignment_a01_input_8d9d64996/runs/energy_relay_availability/b03_energy_assignment_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b03_energy_assignment_a01_input_8d9d64996/runs/energy_relay_availability/b03_energy_assignment_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b03_energy_assignment_a01_input_8d9d64996/runs/energy_relay_availability/b03_energy_assignment_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5932941d6d03e635fc7b78cb956891cf20fe370a4f20149a45e8a4e2591ec4f7.json",
+  "direction": "energy_relay_availability",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790504209.5087285,
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b03_energy_assignment_a01_input_8d9d64996/runs/energy_relay_availability/b03_energy_assignment_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 808572,
+        "session_id": 808571,
+        "start_ticks": 85444969
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 808571,
+        "session_id": 808571,
+        "start_ticks": 85444964
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b03_energy_assignment_a01_input_8d9d64996/runs/energy_relay_availability/b03_energy_assignment_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-27T10:41:22.596336Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5932941d6d03e635fc7b78cb956891cf20fe370a4f20149a45e8a4e2591ec4f7.json",
+  "output_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b03_energy_assignment_a01_input_8d9d64996/runs/energy_relay_availability/b03_energy_assignment_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "8d9d64996c5a618b85e6ab521a939f98f48e659e",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8f1bd1081d6f44ccb6e1c3204410f45b"
+}

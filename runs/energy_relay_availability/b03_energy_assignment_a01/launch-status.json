@@ -1,0 +1,11 @@
+{
+  "claim_key": "5932941d6d03e635fc7b78cb956891cf20fe370a4f20149a45e8a4e2591ec4f7",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5932941d6d03e635fc7b78cb956891cf20fe370a4f20149a45e8a4e2591ec4f7.json",
+  "manifest_ref": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b03_energy_assignment_a01_input_8d9d64996/runs/energy_relay_availability/b03_energy_assignment_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/5932941d6d03e635fc7b78cb956891cf20fe370a4f20149a45e8a4e2591ec4f7.json",
+  "pid": 808571,
+  "runner_pid": 808572,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-27T09:59:20.010851Z"
+}
