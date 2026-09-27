@@ -251,3 +251,122 @@ The shared evaluator currently has diagnostics-owned work in progress; this prep
 its existing default contract. Before any future result launch, inspect the published selected
 source and relevant shared changes again. No foreign edit or sealed output belongs in this
 direction's source publication.
+
+## 2026-09-27 — Resume DM work and read the published c04 development result
+
+The owner explicitly asked this DM to proceed with research and use observation when needed.
+The prepared entry remains available; no result-bearing fit or evaluation of this direction
+has yet started. Current public science was checked at `e5a74b3f6d6e86b336fc00e853c7ba1884670f7d`
+and again at published main `eda9fae045607dc6e59133fb1bab8f1569744e08`; the intervening changes
+do not alter the benchmark readings or this direction's prepared code. Only published development
+readings and notebooks were opened. Sealed holdout outputs remain unread.
+
+### Evidence update and the decision it can change
+
+The public [Stage 1 readings](../energy_relay_benchmark/b02_stage1_readings.json) now include
+c04 at 804k transitions. Deterministic/sampled QoS is .405685/.403767, up .080788/.058978 from
+c03; native J is 1186.77/1179.53, up from 943.95/995.87. Return cost falls from 1.625/4.966 to
+.912/1.648. Minimum battery is .110335/.106972: deterministic is lower than c03's .114311,
+whereas sampled is higher than .105437. No development world has zero service at c04.
+These are conditional observations of the existing recovered training instance, not a new fit
+or evidence that all service/risk dimensions improve together.
+
+This materially weakens an early-plateau reading of c02/c03. Ordinary continued training is a
+stronger simple alternative to an immediate representation, reward or credit repair. The gain
+coincides with changed altitude use and the recovery's reseeded environment/action streams;
+the curve does not identify either as its cause. The remaining c04 mean service gap to H_local
+is about .19 in both modes, while H_local has much greater return cost. Its .597 service is
+therefore still an executed reference, not a same-risk optimum or a required learner target.
+The shared [finite-learning distinction](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面)
+and [experimental-unit reading](../../RESEARCH.md#6-实证研究是在具体条件下缩小解释空间)
+apply directly: neither 32 worlds nor successive checkpoints adds independent training units.
+
+The unresolved investment choice is whether two fresh fixed-1.2M SET runs will change what
+ordinary package we retain or try next. A recurrent useful endpoint, recurrent substantial
+shortfall, and strongly different endpoints would imply different follow-ups, without assigning
+the cause of a shortfall. A still-rising final curve would instead leave the adequacy of this
+fixed exposure unresolved. Complete published c06 evidence could therefore change the comparison
+or its priority; waiting is a scientific choice to justify, not an approval requirement.
+An independent ResearchCritic, `/root/baseline_investment_review`, is reconstructing the public
+evidence in a separate context before reviewing this choice and the earlier allocation advice.
+It is asked to recommend immediate useful work or a specific necessary external wait, not to
+ratify the prepared candidate. No extra Pro round or repeat engineering tests are commissioned.
+
+### Observation correction
+
+The earlier hourly `s7` heartbeat entry above is historical: that automation is now paused.
+The owner-requested standalone generic waiter was published at `e5a74b3f6`; the original stable
+waiter and control files were not changed by that publication. This thread has one real
+`git-publication` observation of the benchmark notebook, with 30-second probes and a 1500-second
+checkpoint window. A file change only triggers reading; it does not certify a complete study.
+The scientific decision and any resulting launch remain this DM's responsibility. There is no
+owned experiment handle to restart, and no accepted Claude operation is touched.
+
+### Independent scientific correction adopted — select the fixed two-fit comparison now
+
+ResearchCritic `/root/baseline_investment_review` reconstructed public JSON and native development
+panels before reading this notebook and the allocation review, with `fork_turns=none`. It found
+substantial learning in one recovered instance, unresolved recurrence, and a service/risk trade-off.
+Its native-panel aggregation also preserves c04 losses relative to c03 on 7/32 deterministic and
+12/32 sampled service worlds, and lower deterministic minimum battery on 21/32 worlds. The
+reviewer's provenance inspection exposed a public c04 commit subject; no future c05/c06, sealed
+holdout or unfinished diagnostics outcomes were read.
+
+**MATERIAL_DISSENT: yes — against requiring Claude's complete publication before selecting this
+fixed-budget replication; supports the prepared two-fit investment now.** The decisive reason:
+a strong c06 would make recurrence of ordinary competence useful; a weak c06 would leave
+recurrence of the fixed-budget shortfall useful; a rising c06 would leave convergence unknown,
+but would not answer what independent 1.2M instances deliver. Pending diagnostics add no fresh
+training instances. A demonstrated shared-contract defect would warrant correction, while
+ordinary path agreement, action-stream variability or wall descriptions do not choose a
+replacement training package. Independent-context agreement is not empirical evidence.
+
+**DM adopts the correction in full.** The earlier whole-publication gate was too broad and is
+withdrawn. Retain the allocation's narrow one-recipe scope, reject nine fits/all-checkpoint
+evaluation, and select B01 now. Claude's curve and the diagnostics remain relevant new evidence,
+not prerequisites or approval sources. No unresolved direction disagreement remains. One adequate
+scientific review covers this selection; no extra Pro round is useful. The existing 18 native
+entry and 15 reader checks and completed independent engineering review still cover unchanged
+source. No additional scientific evaluation is disguised as a test.
+
+The concurrent published allocation at `4220ecd4fd2bf867a00777f16960c1c575195c27` transfers the
+unexecuted D4/BC successor to `energy_relay_imitation`. Adopt that ownership correction: this DM
+retains ordinary RL recurrence and recipe comparisons, does not launch BC or collect its teacher
+data, and can use that direction's later published evidence. Earlier D4 candidate entries remain
+historical. This transfer does not change the selected SET comparison.
+
+### B01 fixed prospective inputs, costs and reading before launch
+
+- **Training:** seeds 26092711 and 26092731, each one fresh CUDA FP32 fit, 4 Torch threads,
+  200 rollouts × 2 lanes × 3000 = 1.2M transitions; 2 fits and 2.4M transitions in this fixed
+  batch. Same S7-S2/SET/native reward/production shield and held-input contract declared above;
+  retain ValueNorm enabled, with observation/state normalization disabled. The recorded config,
+  rather than a broad statement that all normalizers are off, defines the unchanged contract.
+- **Execution:** configured `wsl_4070`, one owned result operation at a time initially. Start
+  seed 26092711 first, then complete the declared second seed regardless of the first seed's
+  scores, subject to owner pause, actual resource admission and technical integrity. No automatic
+  retry/recovery of a failed fit and no score-driven extension or horizon change. Accepted work
+  on the node keeps its identity. Source and this prospective decision are published before launch.
+- **Evaluation:** retain all seven checkpoints as recovery evidence but score only c00/c06,
+  both declared modes, all 32 exposed worlds 955001–955032. Four two-mode evaluations, CPU FP32,
+  8 workers × 2 Torch threads when separately admitted; 256 episodes, at most 768k environment
+  transitions, zero evaluation updates. No checkpoint selection, extra draws or holdout reads.
+  Evaluation is scheduled separately from this direction's training to limit contention.
+- **Cost:** the prior 168 s/rollout projects 18.67 summed training hours; the resumed process's
+  approximately 185 s/rollout projects 20.56 h. Use roughly 18.6–20.6 h as a planning range, not
+  a timeout or guarantee. Evaluation adds about 1 h at the declared worker shape. Report actual
+  contention, preparation/readback and node occupancy; unknown costs are not zero.
+- **Reading:** report each fresh seed's own c00→c06 changes and final service/J/risk vector,
+  native endings, phase denominators and all adverse worlds. Historical N has different training
+  exposure; H_local has different pooled-information control and high return cost. Neither is
+  relabelled as a matched learning arm. The recovered Claude fit is contextual evidence, never
+  a third fresh replicate; worlds/checkpoints do not increase training n.
+
+If both fresh instances show useful native gains with the observed risk trade-off acceptable
+for the stated use, retain ordinary SET as the working learned comparator and reduce the urgency
+of a rescue package. If both retain substantial service/J shortfalls, strengthen only recurrence
+of this fixed-budget shortfall and compare a costed exposure/recipe change using the available
+imitation evidence; more unchanged seeds have lower marginal value. Strongly different endpoints
+make training variability central to the next comparison. Service gains with worse risk remain
+a trade-off. These are exploratory action implications, not population-reliability, equivalence,
+convergence or mechanism verdicts. Two matching signs or a small spread do not establish them.

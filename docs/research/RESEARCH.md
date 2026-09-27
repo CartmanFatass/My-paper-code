@@ -755,7 +755,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `energy_relay_baselines` | 在共同 S7 服务／风险、合法信息及声明曝光下，普通学习的缺口是否跨独立训练实例重现，哪些普通强化学习配方值得继续比较？ | exploring | Codex DM (independent session) | 2026-09-27 已重建曝光／信息口径并准备独立种子入口和比较读取器；18 项原生入口、15 项读取测试通过，独立工程审查两项读数问题已关闭。新增结果 fit／评估均为 0；Claude 完整公开结果后自主选择首项比较。两新 SET 种子仅为候选，不自动执行九 fit；未执行的 D4 后继已转归 DM3；[现行计划](#current-research-plan)、[NOTES](candidates/energy_relay_baselines/NOTES.md)、[路由](#session-routing)。 |
+| `energy_relay_baselines` | 在共同 S7 服务／风险、合法信息及声明曝光下，普通学习的缺口是否跨独立训练实例重现，哪些普通强化学习配方值得继续比较？ | exploring | Codex DM (independent session) | 2026-09-27 读取 c04 的继续改善后，采纳独立科学审查纠正：完整曲线不是新训练实例比较的前提。已选 B01 两个新 SET 种子各固定1.2M；只评价各自初始化／终点、两模式和32个已曝光开发世界，保留服务／J／风险及损失世界。工程准备已通过；逐项原生准入执行，恢复 fit 不作为第三个复制。未执行 D4 后继归 DM3；[选择、异议与前瞻](candidates/energy_relay_baselines/NOTES.md#independent-scientific-correction-adopted--select-the-fixed-two-fit-comparison-now)、[现行计划](#current-research-plan)、[路由](#session-routing)。 |
 | `energy_relay_imitation` | 合法且声明的信息条件下，普通示范学习能否形成有用闭环部署，何时值得处理学生访问状态覆盖？ | exploring | Codex DM (independent session) | 2026-09-27 owner 扩展新增 DM3，接手原 DM1 未执行的 D4 后继；先准备固定预算 BC-only、教师／初始化／学生闭环比較，候选1个BC fit，不自动接长程RL。[初始范围与审查](#current-research-plan)、[路由](#session-routing)。 |
 | `energy_relay_availability` | 固定 S4 移动条件下，普通合法信息规划的服务对短暂 UAV 不可用有多敏感？ | exploring | Codex DM (independent session) | 2026-09-27 owner 扩展新增 DM4；先准备故障开／关下可用性感知普通参照，候选128完整回合、0fit。固定八个槽位，明确RNG与配对条件，不宣称成员加入退出。[初始范围与审查](#current-research-plan)、[路由](#session-routing)。 |
 | `energy_relay_diagnostics` | 冻结 S7 上，训练与评估差异有多少来自世界、快照、动作、汇总或提案至执行路径，剩余证据支持什么学习干预？ | exploring | Codex DM (independent session) | 2026-09-27 B01 已固定并经独立科学／工程审查：c00/c03、136 个完整原生回合、0 fit／0 更新；先查 8 对 collector/evaluator 路径及 c03 第二动作流。已证实 tanh Gaussian 与旧 lane/episode QoS 汇总一致，尚不能解释历史差距。03:05Z 操作 4cb8c42b 已在 wsl_4070 准入运行，源 ef5c35b77；等待完整原生终态与读数；无 holdout、无自动后续 fit。[NOTES](candidates/energy_relay_diagnostics/NOTES.md)、[路由](#session-routing)。 |
@@ -823,7 +823,7 @@ owner 明确选择“新增两个独立 DM，并将结果性运行上限提高�
 | 负责人 | 独立科学问题与当前工作 | 初始观察、成本与依赖 |
 | --- | --- | --- |
 | Claude：`energy_relay_benchmark` | 当前已接受 SET 开发过程及完整结果解释。 | 保留恢复、剩余检查点、最终模型一次留出读取及全部成本；已公开 c04 为 .406/.404 QoS，仍在改善，不能把 c03 当平台。既有操作不重复、不转交。 |
-| DM1：`energy_relay_baselines` | 普通强化学习缺口是否跨独立训练实例重现，是否值得继续普通配方比较？ | 保留已准备的 D1 独立种子入口与读取器；Claude 完整开发结果后自主选择最小有用比较。两个新 SET 种子仍是候选（约18.6节点小时训练，初始化＋终点评估约1小时，其他成本另计），不是已准入批次或九 fit 套餐。 |
+| DM1：`energy_relay_baselines` | 普通 SET 的固定1.2M学习增益与缺口是否跨独立训练实例重现？ | 已选两个新种子26092711／26092731，顺序执行2 fits、2.4M训练步；仅各自c00/c06、两模式、32开发世界，共256回合／最多768k评估步。预计18.6–20.6节点小时训练＋约1小时评估，争用／准备／读取另计；实际节点准入。c04已足以支持复制价值，不再以Claude完整发布为科学前提；仍留意相关实现缺陷，不读取封存留出，不把恢复fit拼成确认。 |
 | DM2：`energy_relay_diagnostics` | 合并 D2/D3：训练、动作与评估的可比性及执行路径。 | 继续已接受的136完整回合、0fit操作与原协议，独占共享轨迹接口；不另拆诊断、不自动转为奖励改造。 |
 | DM3：`energy_relay_imitation` | 普通示范学习能否产生有用的闭环部署，学生访问状态覆盖何时值得处理？ | 从 DM1 只划出尚未执行的 D4 后继。首项候选为 BC-only：32示范回合、教师／同一初始化／BC模型各32评价回合，1个BC fit、最多384k环境步。评价用未参与BC采集的预定开发世界。旧吞吐外推约半小时量级，BC更新、输入存储、工程及争用未计实；不等 c06、不自动接1.2M RL。 |
 | DM4：`energy_relay_availability` | 固定 S4 移动条件下，普通合法信息规划对短时 UAV 不可用有多敏感？ | 首项候选为故障开／关 × 可用性感知 H_local／额外信息参照 H_central ×32世界：128完整回合、0fit、最多384k环境步。旧吞吐外推20–40分钟，S4与工程／记录／争用尚未实测；不依赖 D1 表格或 c06。 |
