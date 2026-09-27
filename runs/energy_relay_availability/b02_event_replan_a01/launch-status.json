@@ -1,0 +1,11 @@
+{
+  "claim_key": "ad8ede012a85ce9367c91122e721c760f147b903d4c4c561d5214a6df1fdef44",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/ad8ede012a85ce9367c91122e721c760f147b903d4c4c561d5214a6df1fdef44.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/energy_relay_availability/b02_event_replan_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/ad8ede012a85ce9367c91122e721c760f147b903d4c4c561d5214a6df1fdef44.json",
+  "pid": 772770,
+  "runner_pid": 772771,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-27T05:57:38.011119Z"
+}

@@ -654,3 +654,32 @@ shell read and the existing fetch auto-GC warnings are recorded separately; no
 scientific worker was started by these probes. Use that configured shell for
 published Git reads and the single upcoming native launch invocation. Native
 admission still rechecks the live published head and actual-node resources.
+
+## 2026-09-27 — B02 accepted on wsl_4070; same-handle observation
+
+Exact source `b4c7b153775222414375da4fda27b25e3c5363a8` was published and fetched
+before the single configured-supervisor invocation. Native launch accepted at
+**05:57:37.997119 UTC**, tag `b02_event_replan_a01`. The outer `agent-task`
+invocation `era-b02-event-a01` finished with exit0 after submitting the launcher;
+that outer completion is not the experiment's completion. The separate native
+runner and supervisor were both observed running with matching identities and
+consistent records. No exit witness exists yet, and no scientific result has
+been read or accepted.
+
+The [launch manifest](../../../../runs/energy_relay_availability/b02_event_replan_a01/launch-manifest.json),
+[native launch status](../../../../runs/energy_relay_availability/b02_event_replan_a01/launch-status.json),
+[observed running status](../../../../runs/energy_relay_availability/b02_event_replan_a01/status-observed.json)
+and [actual-node preflight](../../../../runs/energy_relay_availability/b02_event_replan_a01/admission-preflight.json)
+retain the exact source, argv, output, operation reference, source snapshot and
+native identities. Fresh admission measured 9,930,584,064 available bytes against
+the 4,294,967,296-byte floor, passed with no failure reasons, and verified the
+published control head at the source SHA. The unrelated dirty canonical result
+was preserved; no fast-forward, stash/reset or policy substitution was needed.
+
+Deterministic observation request:
+`temp/directions/energy_relay_availability/b02-wait/request.json`, job
+`launch-b02-event-replan-a01`, protocol `launch`, interval30 s, timeout20 s,
+intended window1500 s. It reads only the accepted native operation's status via
+absolute `/usr/bin/ssh`; checkpoints rearm that same handle. The 64-world endpoint,
+192k maximum transitions and zero-fit protocol remain fixed. Terminal failure
+will retain incomplete evidence without an automatic replacement or retry.
