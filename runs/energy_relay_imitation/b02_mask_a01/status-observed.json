@@ -1,0 +1,77 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/88126358a8cf1ee2224bf87643703f7c5610a5be277af171318873a4cbdbfbad.json",
+  "direction": "energy_relay_imitation",
+  "execution": {
+    "exit_witness": {
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01/process-exit.json",
+      "state": "absent"
+    },
+    "runner": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 787026,
+        "session_id": 787025,
+        "start_ticks": 84469035
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 787026,
+        "session_id": 787025,
+        "start_ticks": 84469035
+      },
+      "state": "running"
+    },
+    "state": "running",
+    "supervisor": {
+      "observed_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 787025,
+        "session_id": 787025,
+        "start_ticks": 84469032
+      },
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 787025,
+        "session_id": 787025,
+        "start_ticks": 84469032
+      },
+      "state": "running"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-27T07:12:30.110075Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/88126358a8cf1ee2224bf87643703f7c5610a5be277af171318873a4cbdbfbad.json",
+  "output_root": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "d423595c0f50f2fca33d6fc197f30085ac61dbd3",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e3c3355e9df84ff5b1025a5451e89b86"
+}

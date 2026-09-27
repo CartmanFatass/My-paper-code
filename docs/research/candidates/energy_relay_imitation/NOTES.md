@@ -606,3 +606,47 @@ one fit and the unchanged declared endpoint/replay work. A preliminary resource 
 from about 4.14 GiB available RAM with three operations to about 8.99 GiB with two operations;
 this is not the launch receipt, and fresh actual-node resource/control checks still precede release.
 No source, data, budget or scientific-choice change follows from waiting for resources.
+
+
+## 2026-09-27 — B02 natively accepted and observed on the fixed handle
+
+Published source `d423595c0f50f2fca33d6fc197f30085ac61dbd3` was admitted on `wsl_4070` at
+`2026-09-27T07:10:44.156724Z`. The sole external-supervisor submission
+`energy-relay-imitation-b02-a01` returned normally after the admission kernel detached the
+scientific runner; its exit-zero is not the scientific process exit or a result. Native runner
+PID 787026 and supervisor PID 787025 were observed running with matching
+boot/start identities and consistent records. No retry or second scientific submission occurred.
+
+- Operation: `/home/wu/projects/HMASD/.git/hmasd-admission/88126358a8cf1ee2224bf87643703f7c5610a5be277af171318873a4cbdbfbad.json`.
+- Snapshot: `/home/wu/projects/HMASD/.git/hmasd-launch-sources/e3c3355e9df84ff5b1025a5451e89b86`.
+- Canonical output: `/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01`.
+- [Manifest](../../../../runs/energy_relay_imitation/b02_mask_a01/launch-manifest.json),
+  [fresh node preflight](../../../../runs/energy_relay_imitation/b02_mask_a01/admission-preflight.json),
+  [validated source/config](../../../../runs/energy_relay_imitation/b02_mask_a01/config.json), and
+  [native running observation](../../../../runs/energy_relay_imitation/b02_mask_a01/status-observed.json)
+  were collected without changing their remote bytes.
+
+The release-time preflight measured 13,495,017,472 available bytes
+(about 12.57 GiB), passing the actual-node 4 GiB floor.
+The immediately preceding process inspection found one other result-bearing operation, within
+the five-track ceiling with this fit. Current owner pause/own state/lead matched fresh published
+controls; the canonical node's older unrelated prose was not used to substitute a different plan.
+The launcher independently recorded its fresh control observation in the manifest.
+
+The admitted runner completed verification of the pinned B01 summary, initial record/checkpoint
+and all 64 required teacher trajectories before use (initial validation 0.311702 s on these
+already retained bytes). The restored fingerprint and zero-step optimizer checks passed before
+`fits_started=1` was recorded. The collected stage snapshot is `INCOMPLETE`, in fitting; it is
+not a final optimizer/exposure reading. One new endpoint and the fixed evaluation/replay scope
+remain as declared above. Required B01 bulk remains at its original canonical location and is
+an active B02 input, so it is retained.
+
+The previous B01 terminal observation had no pending events and stayed terminal. Observation
+state was rearmed from drained generation 5 with no wake/events, then registered only the new
+job `launch-b02-mask-a01`; current generation is 7 at
+`/home/fires/.local/state/hmasd-wait/01a0e0f8-4e3f-70f1-802f-4bf4c2348221`.
+Its first observed facts at 07:14:06 UTC confirmed this exact native handle running, with zero
+probe errors, consistent identities and no exit witness. The detached observer polls this
+read-only handle and wakes this task at a terminal fact, observation problem or bounded checkpoint.
+Future collection reads complete outputs and native exit evidence; it grants no automatic retry,
+extra fit or repeated question. No App cross-task message or Pro request was made.

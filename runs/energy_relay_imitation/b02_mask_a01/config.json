@@ -1,0 +1,443 @@
+{
+  "attempt": "b02",
+  "direction": "energy_relay_imitation",
+  "empty_mask": "forward/carry/detach, clear gradients, skip optimizer step",
+  "environment_transition_count_semantics": "environment_transitions counts known completed native episode steps; unknown failed-world work is bounded above by HORIZON per attempted world",
+  "episodes_per_group": 4,
+  "epochs": 10,
+  "evaluation_device": "cpu",
+  "exposed_eval_worlds": [
+    968001,
+    968002,
+    968003,
+    968004,
+    968005,
+    968006,
+    968007,
+    968008,
+    968009,
+    968010,
+    968011,
+    968012,
+    968013,
+    968014,
+    968015,
+    968016,
+    968017,
+    968018,
+    968019,
+    968020,
+    968021,
+    968022,
+    968023,
+    968024,
+    968025,
+    968026,
+    968027,
+    968028,
+    968029,
+    968030,
+    968031,
+    968032
+  ],
+  "fitting_device": "cuda",
+  "horizon": 3000,
+  "launch_sha": "d423595c0f50f2fca33d6fc197f30085ac61dbd3",
+  "loss_denominator": "selected agent-steps * 4",
+  "loss_mask": "valid * not recorded shield-active",
+  "model_seed": 929031,
+  "order_seed": 929032,
+  "production_shield": {
+    "enter": 0.0,
+    "exit": 0.05
+  },
+  "source": {
+    "initial_checkpoint": {
+      "bytes": 23407075,
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/checkpoints/initial/agent.pt",
+      "sha256": "360ab5575f69fe08a5025d61421d0cf51bf1d8702a7b17802b9f94dbe8334b88"
+    },
+    "initial_policy_fingerprint": "cb5c15e6d6fbf4e35affb0e33dd9f59915856e5167b8b6a474825324b85cb701",
+    "initial_record": {
+      "bytes": 2667,
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/checkpoints/initial/record.json",
+      "sha256": "94198452e102fef435f3e4a9a4ec644337915ae85128f0c013ba2a59bc91d5a3"
+    },
+    "raw_inputs": {
+      "teacher_eval": {
+        "968001": {
+          "bytes": 8282448,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968001.npz",
+          "sha256": "1b33fd44042e43ea99c3f35a2d56a18e2cf7c079a913456a8afaf86a7cf09bcb"
+        },
+        "968002": {
+          "bytes": 9095155,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968002.npz",
+          "sha256": "6cd95bdb7cce847661888108fd1634c9509892688bc3bc593f97039d7f4963d2"
+        },
+        "968003": {
+          "bytes": 7592209,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968003.npz",
+          "sha256": "606c55de5190b78e2a2556994fec28343c63f908a7d92d784f9a3478dbd6c41d"
+        },
+        "968004": {
+          "bytes": 7880129,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968004.npz",
+          "sha256": "75c8060159bd6b2301628b0e03a96eb120873c54a620cc433f1c11257c432b51"
+        },
+        "968005": {
+          "bytes": 7489051,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968005.npz",
+          "sha256": "d64d8d6eccbc810545c4193f219f447981d996c8fbbb5fae1c48ca32ad35cd5e"
+        },
+        "968006": {
+          "bytes": 9683322,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968006.npz",
+          "sha256": "5d6116ba5a4cb20c0d58b520ad8566999aa11085d3075a31dab0a3d943acd071"
+        },
+        "968007": {
+          "bytes": 9557060,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968007.npz",
+          "sha256": "a58bada4200464901def56ad162a90fa95f223e40c5ff73d6d6bf038aabc26ba"
+        },
+        "968008": {
+          "bytes": 9738302,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968008.npz",
+          "sha256": "82b403e0ed784344c9821f5d620f0b7d8983b6c121abd949742d780f74f693bf"
+        },
+        "968009": {
+          "bytes": 8931415,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968009.npz",
+          "sha256": "94d6e181cd4e2eb836337666df693cdc565a79cfc6fcfd6a948dc65644057872"
+        },
+        "968010": {
+          "bytes": 8558080,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968010.npz",
+          "sha256": "e46c939231a743ce3b5b045b56dbb82a183ffa7ae0b8203f272295d8b16b20f2"
+        },
+        "968011": {
+          "bytes": 7394747,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968011.npz",
+          "sha256": "a0270863dbf806100587b763d39fbcb0fafbaeeea77db7146c187fda64e40513"
+        },
+        "968012": {
+          "bytes": 8799579,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968012.npz",
+          "sha256": "d743e456a83e85979b1f5e9aeeae1fd91fb12b21cfc6bb4ebb9d72fcf00edf16"
+        },
+        "968013": {
+          "bytes": 6961993,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968013.npz",
+          "sha256": "475dd7fb56e78d0512d77d9e3c0a3b4e13a2c73035e00528c1de49cbd4d1a818"
+        },
+        "968014": {
+          "bytes": 8183203,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968014.npz",
+          "sha256": "77ee4f3dc4e508179a37692a7a9041742181ba8e8e5bfe741b75b7cd3f700cd6"
+        },
+        "968015": {
+          "bytes": 8452471,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968015.npz",
+          "sha256": "59eac293051d36e443cb9ff40b5be40bb4e6a4a7d46f2eea7471d4dd769e5239"
+        },
+        "968016": {
+          "bytes": 8234787,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968016.npz",
+          "sha256": "7b72629b04d24e64b3ff63a11ae99e1e2f394392fe983960fb95a22ef740b255"
+        },
+        "968017": {
+          "bytes": 8081068,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968017.npz",
+          "sha256": "26fd7822b3846d2cf0f7efd92846986ae7a705fe0d93933a31398f523c3370d5"
+        },
+        "968018": {
+          "bytes": 8226765,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968018.npz",
+          "sha256": "14f7b67679b2dc13021192b5399a98a78980a8384ed451b4b66f30f596d6b003"
+        },
+        "968019": {
+          "bytes": 8298163,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968019.npz",
+          "sha256": "2c7c80855e04f8ebfc3c89a4e88eee395f73006412bc6fb922f407ca5de0b590"
+        },
+        "968020": {
+          "bytes": 8962098,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968020.npz",
+          "sha256": "4dcb4cfc86e24cd5d4fe714ebc9d3197351db11599cc0a0d95af95552f397115"
+        },
+        "968021": {
+          "bytes": 7408817,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968021.npz",
+          "sha256": "6c1652f3f9541c2bb8946a76cb616d13b51638b0748979ef4295a12d25402e48"
+        },
+        "968022": {
+          "bytes": 6520538,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968022.npz",
+          "sha256": "a47a3dfa75e9c1b20d1b784d85f72e7721560316475db4f5da7e951259b8a41b"
+        },
+        "968023": {
+          "bytes": 8639461,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968023.npz",
+          "sha256": "9961613dca15ef665f719addc11c4d28b9146d4a43c63c441a56cc162428f6c7"
+        },
+        "968024": {
+          "bytes": 7729310,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968024.npz",
+          "sha256": "97b8a0d930d27dec57825be64b91547fb46f4287b6174feaf166313b7f96f566"
+        },
+        "968025": {
+          "bytes": 7780967,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968025.npz",
+          "sha256": "d0e0b904cd398a775548cfae894520ab99b1d278dfd60b2ad05e3bc52415a2ef"
+        },
+        "968026": {
+          "bytes": 7611512,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968026.npz",
+          "sha256": "b3ad98398bd69a34e890e0b8af3c43e87b10fde6db4a9fa8bf74ab4a6e9b6393"
+        },
+        "968027": {
+          "bytes": 9436259,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968027.npz",
+          "sha256": "a59e7bbcea176e22e365f11621ee57bfbf4215f529358e6a1107f6e6dff25a54"
+        },
+        "968028": {
+          "bytes": 8263812,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968028.npz",
+          "sha256": "4cec5c1345ceed8c8507225805aae1ff6adfb41908ec72bf4e86a4b7ee3b3770"
+        },
+        "968029": {
+          "bytes": 6899791,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968029.npz",
+          "sha256": "7ad54c970c333ebab5cce10f79a4b5c4162f0cb87249c4585f8b0a4074615c94"
+        },
+        "968030": {
+          "bytes": 8198529,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968030.npz",
+          "sha256": "0f4dbb886acd476b17759d5c785df86e5216441c2b94a73757f3f5dcb3751985"
+        },
+        "968031": {
+          "bytes": 8909643,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968031.npz",
+          "sha256": "fc60bb8f66439137a40652b812c1e2b66da88574b50a3db20af25eacc313e3fd"
+        },
+        "968032": {
+          "bytes": 7731939,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_eval/968032.npz",
+          "sha256": "f2d8ce6440789efc30120988621ca4e8997bc575edec126b313ebc38edba753d"
+        }
+      },
+      "teacher_train": {
+        "967001": {
+          "bytes": 8165305,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967001.npz",
+          "sha256": "177f0fa502cdbeea11f84759c8c33bc6486852eeec787bfcfc5b0ddf5e02729b"
+        },
+        "967002": {
+          "bytes": 7849485,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967002.npz",
+          "sha256": "312c127163a4f1adee8158f86532c82c6bf8ab2249addfb70bb3e61acaf02627"
+        },
+        "967003": {
+          "bytes": 7781853,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967003.npz",
+          "sha256": "0eaaf4019dfecc7313b2c1cb0575af931042256c8f1a80433b3f0be597a0dd6c"
+        },
+        "967004": {
+          "bytes": 9234531,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967004.npz",
+          "sha256": "c5019aa12815a825d7311ed60b077b6e8244e481543771bf8ebd0894f140360c"
+        },
+        "967005": {
+          "bytes": 8333727,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967005.npz",
+          "sha256": "16e6edc5529f242b568de0009c19f9fa6dc918706df097a63f467466b8e80d52"
+        },
+        "967006": {
+          "bytes": 8906270,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967006.npz",
+          "sha256": "8715b2fc3335b9ba8db3c9644e7330be5aa02d41da0aa89b2236662bda87fcd2"
+        },
+        "967007": {
+          "bytes": 9715759,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967007.npz",
+          "sha256": "c3e27b1e35135ef111d5c8693221590cfa5cee8d78289c8bd21310bb12148c30"
+        },
+        "967008": {
+          "bytes": 8327292,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967008.npz",
+          "sha256": "aa93b53b8c2200e7059161284af663fab4e905ea02610bc5de938219a13cf7df"
+        },
+        "967009": {
+          "bytes": 7544067,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967009.npz",
+          "sha256": "c7a9cee467e8bf60367db7d6615ae22c95b691129bd92c8d93685234ee810fae"
+        },
+        "967010": {
+          "bytes": 8336689,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967010.npz",
+          "sha256": "e7a5f2dc37992f566bcd50b09a0596c854253d0d7942255f96e63ab800d4aea2"
+        },
+        "967011": {
+          "bytes": 8516734,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967011.npz",
+          "sha256": "0085dd3a61653f97250b13afab78b9f2464450839df83b0024c9098e250e379a"
+        },
+        "967012": {
+          "bytes": 7110944,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967012.npz",
+          "sha256": "259aaf80150f27d4ef00ce01a004d171e925119983c123022adc5b756e412d33"
+        },
+        "967013": {
+          "bytes": 8004686,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967013.npz",
+          "sha256": "ddeb3143600b9ce536c5947759b1a4d489dd4d38241dfc6bfd30483b10a1839c"
+        },
+        "967014": {
+          "bytes": 8807270,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967014.npz",
+          "sha256": "9ced82bcc00618545be2aa68b88fcb19987c7a7914695fcbdb3b55d6eaba3874"
+        },
+        "967015": {
+          "bytes": 8199401,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967015.npz",
+          "sha256": "a1d013f71f61ee031c0a22583c08e92fdd414fca3f552c3c01467cb577b2f3ea"
+        },
+        "967016": {
+          "bytes": 10235479,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967016.npz",
+          "sha256": "cbdd83217ee90055df114f330040b6cf1e9366589ed9c735593b0df4d0f07074"
+        },
+        "967017": {
+          "bytes": 8192960,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967017.npz",
+          "sha256": "c3a17689d7e84efd32ab5755ff6a0efb438f2362f4d926b2c942201e5a96ad9a"
+        },
+        "967018": {
+          "bytes": 7887157,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967018.npz",
+          "sha256": "5076db9b1de7bd3510b93d1db58da87b9a8322c6ba27369ba4852abb0beae70f"
+        },
+        "967019": {
+          "bytes": 8554064,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967019.npz",
+          "sha256": "ad139e07d0dafe68ce6c541ef677858e54d95ec931e4a58b6744c0010f991d07"
+        },
+        "967020": {
+          "bytes": 7633281,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967020.npz",
+          "sha256": "802b9884db1dc27f0ce6d79a60c575f714e2bc9d89efe86f20e390eb14959ef5"
+        },
+        "967021": {
+          "bytes": 8350203,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967021.npz",
+          "sha256": "ffcd01e7b37a0e9e6c0237d264bdb7df87ebf423a9dfcb68e34b42fd1b458011"
+        },
+        "967022": {
+          "bytes": 8388207,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967022.npz",
+          "sha256": "f73dc2fcc0293dc521897f5ec5a80770768b47967baec41eb71c18eb3329beda"
+        },
+        "967023": {
+          "bytes": 8261749,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967023.npz",
+          "sha256": "e01c5aae4bce8b1fd4cb25e8c714aab5a74c7891de17cdc6618d9b3f340c81fe"
+        },
+        "967024": {
+          "bytes": 7179064,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967024.npz",
+          "sha256": "ed559b01a1962a12fba5bed8d024df4c27c6f80896518bed3599b46c017f6517"
+        },
+        "967025": {
+          "bytes": 8053730,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967025.npz",
+          "sha256": "55c7da373b666e61ff9b028b7a380f2879a84e467d94491625edda9fb5a5b7eb"
+        },
+        "967026": {
+          "bytes": 8555103,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967026.npz",
+          "sha256": "3541f8349b0ddaa4c4808b01110e7d07d97ee8d28e79962c9c41a2d7d6031a73"
+        },
+        "967027": {
+          "bytes": 7413909,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967027.npz",
+          "sha256": "51dc032c91eb013119f82c3a45901db1e1a5fc2c4dc6c7bb94dc9d618d4a5230"
+        },
+        "967028": {
+          "bytes": 8909862,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967028.npz",
+          "sha256": "f4247a71ac3984af6ab2c229dcab7ee385ce07ed7eb1ecdfac4fda93a27919b1"
+        },
+        "967029": {
+          "bytes": 8285853,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967029.npz",
+          "sha256": "f0a774b7a0101d9df585c3e888f405a91ba6d84c5e8dbdeeb17d76ef77f7880b"
+        },
+        "967030": {
+          "bytes": 6277026,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967030.npz",
+          "sha256": "1e20b26c225046eef34e0f3e6a6ae25b0584f1577be0e7c2dafc81ccb20a7449"
+        },
+        "967031": {
+          "bytes": 7505953,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967031.npz",
+          "sha256": "89d480a815ec372fc2f9c1b42de1cfc2b73b7c9e4d0ae0c73d190d38a664c557"
+        },
+        "967032": {
+          "bytes": 8339032,
+          "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/raw/teacher_train/967032.npz",
+          "sha256": "cb2aff84fb9fc4f2be5f96ad873249a538e0bb402afb8bca8a015dcb0c4a5fca"
+        }
+      }
+    },
+    "root": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01",
+    "source_launch_sha": "b8cf9d3aace3ac4b386d03190b5a6310ee90acae",
+    "summary": {
+      "bytes": 826223,
+      "path": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01/summary.json",
+      "sha256": "ab6c8a3bcaa138434843b70915e7e0bb755551cefd8e673f1a18b2cfb760421e"
+    }
+  },
+  "tbptt": 128,
+  "thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+  },
+  "threads_per_worker": 1,
+  "train_worlds": [
+    967001,
+    967002,
+    967003,
+    967004,
+    967005,
+    967006,
+    967007,
+    967008,
+    967009,
+    967010,
+    967011,
+    967012,
+    967013,
+    967014,
+    967015,
+    967016,
+    967017,
+    967018,
+    967019,
+    967020,
+    967021,
+    967022,
+    967023,
+    967024,
+    967025,
+    967026,
+    967027,
+    967028,
+    967029,
+    967030,
+    967031,
+    967032
+  ],
+  "workers": 2
+}

@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-27T07:10:44.156724Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e3c3355e9df84ff5b1025a5451e89b86/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e3c3355e9df84ff5b1025a5451e89b86/experiments/candidates/energy_relay_imitation/run_b02.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01",
+    "--launch-sha",
+    "d423595c0f50f2fca33d6fc197f30085ac61dbd3",
+    "--seed",
+    "929031"
+  ],
+  "claim_key": "88126358a8cf1ee2224bf87643703f7c5610a5be277af171318873a4cbdbfbad",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/88126358a8cf1ee2224bf87643703f7c5610a5be277af171318873a4cbdbfbad.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e3c3355e9df84ff5b1025a5451e89b86/experiments/candidates/energy_relay_imitation/run_b02.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01",
+    "--launch-sha",
+    "d423595c0f50f2fca33d6fc197f30085ac61dbd3",
+    "--seed",
+    "929031"
+  ],
+  "command_sha256": "53bf389adde560ba779aab2a836dc2b7b158928bf7921d3269d65cf8c89ecb1e",
+  "control_observation": {
+    "observed_at": "2026-09-27T07:10:44.046647Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "8e83435227d86eb868e67041771a5166c8d71e22"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-27T07:10:44.058772Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e3c3355e9df84ff5b1025a5451e89b86",
+  "direction": "energy_relay_imitation",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/energy_relay_imitation/run_b02.py",
+    "--launch-sha",
+    "d423595c0f50f2fca33d6fc197f30085ac61dbd3",
+    "--seed",
+    "929031"
+  ],
+  "lead": "Codex DM (independent session)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/88126358a8cf1ee2224bf87643703f7c5610a5be277af171318873a4cbdbfbad.json",
+  "output_root": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 787025,
+      "session_id": 787025,
+      "start_ticks": 84469032
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 787025,
+    "process_group_id": 787025
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 787026,
+      "session_id": 787025,
+      "start_ticks": 84469035
+    },
+    "pid": 787026,
+    "process_group_id": 787025,
+    "supervisor_pid": 787025
+  },
+  "schema_version": 1,
+  "sha": "d423595c0f50f2fca33d6fc197f30085ac61dbd3",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e3c3355e9df84ff5b1025a5451e89b86",
+  "stderr": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01/stdout.log"
+}
