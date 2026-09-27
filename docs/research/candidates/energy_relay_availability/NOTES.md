@@ -683,3 +683,302 @@ intended window1500 s. It reads only the accepted native operation's status via
 absolute `/usr/bin/ssh`; checkpoints rearm that same handle. The 64-world endpoint,
 192k maximum transitions and zero-fit protocol remain fixed. Terminal failure
 will retain incomplete evidence without an automatic replacement or retry.
+
+<a id="b02-complete-reading"></a>
+## 2026-09-27 — B02 complete native reading
+
+### Terminal evidence, fixed exposure and actual cost
+
+The accepted operation ended at **06:20:29.397770 UTC**, with a valid native
+exit0 witness, absent recorded runner/supervisor identities and no consistency
+mismatch. The terminal observation was read at generation5 and acknowledged with
+its returned wake/event identities into generation6; both recorded jobs are
+terminal, and no worker was restarted. No Pro operation is pending. The earlier
+attempt to register B02 observation was refused because the completed B01 observer
+was stopped; the supported empty-state rearm and new-job registration resolved
+only that observer state. The accepted B02 scientific operation was unchanged.
+
+Read the [effective configuration](../../../../runs/energy_relay_availability/b02_event_replan_a01/config.json),
+[all 64 world rows](../../../../runs/energy_relay_availability/b02_event_replan_a01/perworld.json),
+[summary and all 32 paired differences](../../../../runs/energy_relay_availability/b02_event_replan_a01/summary.json),
+[manifest](../../../../runs/energy_relay_availability/b02_event_replan_a01/manifest.json),
+[terminal native status](../../../../runs/energy_relay_availability/b02_event_replan_a01/status-terminal.json)
+and [exit witness](../../../../runs/energy_relay_availability/b02_event_replan_a01/process-exit.json).
+They report all 64 declared episodes completed at H3000, all horizon-truncated,
+**192,000 transitions, 0 fits and 0 optimizer updates**. There are no failed,
+missing, cancelled, unstarted, unreconciled, partial or orphan jobs. The actual
+S4/8-UAV/30-user/fault/shield/controller settings match the prospective record.
+Technical exit and compact completeness are distinct from the raw verification
+and scientific reading recorded below.
+
+Exact source is `b4c7b153775222414375da4fda27b25e3c5363a8`. Runner wall was
+**1,326.454021 s (22.11 min)**; native acceptance-to-exit was **1,371.400651 s
+(22.86 min)**. Four workers used one numeric thread each. Worker wall summed to
+5,209.240705 s and worker CPU to 5,377.172848 s (1.494 CPU h); parent CPU was
+0.772327 s. Parent peak RSS was 479,076 KiB; maximum single-worker peak was 518,940
+KiB. These peaks are not a simultaneous node total. Engineering, publication and
+readback wall were not comprehensively instrumented and are additional, not zero.
+
+### Complete service, objective and risk
+
+World seed is the paired unit (32 fresh pairs). Values below are mean ± sample SD;
+the event-minus-clock intervals are the declared approximate t31 95% intervals.
+No training population, multiplicity-adjusted confirmation, equivalence or general
+method-superiority claim follows from this fixed-policy development comparison.
+
+| Native reading | clock30 | availability_event | Paired event−clock mean [t95] |
+| --- | ---: | ---: | ---: |
+| QoS/step | .598010520 ± .136700250 | .584838284 ± .139887399 | −.013172237 [−.048950941,+.022606468] |
+| Native J sum | 1551.667587 ± 611.248976 | 1521.982069 ± 625.067712 | −29.685518 [−203.914273,+144.543236] |
+| Native J/step | .517222529 ± .203749659 | .507327356 ± .208355904 | −.009895173 [−.067971424,+.048181079] |
+| Raw return cost/step | .035387605 ± .044560369 | .033756090 ± .044996646 | −.001631515 [−.018296289,+.015033259] |
+| Capped return cost/step | .035298304 ± .044362191 | .033659524 ± .044764063 | −.001638780 [−.018292991,+.015015431] |
+| Episode minimum battery ratio | .081385552 ± .019008495 | .081943829 ± .019634056 | +.000558277 [−.005678671,+.006795225] |
+| End-to-end throughput Mbps/step | 17.940315611 ± 4.101007513 | 17.545148514 ± 4.196621971 | −.395167097 [−1.468528232,+.678194038] |
+| Charger input Wh | 454.887153 ± 65.464895 | 466.232639 ± 72.740282 | +11.345486 [−3.704709,+26.395682] |
+
+All64 worlds have nonzero service and zero cutoff/depletion events. This is not
+an absence-of-risk or indefinite-operation guarantee. Event improves QoS in 14/32
+pairs and J in 17/32; raw return cost increases in 16/32, and minimum battery is
+lower in 15/32. Every world remains in the result, without outlier removal.
+
+- **969013**, strongest QoS/J benefit: QoS .362669200→.728957135
+  (difference +.366287935), J 378.684696→2063.692172 (+1685.007477).
+- **969028**, strongest QoS/J harm: QoS .603779415→.365800734
+  (−.237978681), J 1763.145128→332.428508 (−1430.716620), raw return
+  cost/step increases .119484807 and minimum battery falls .043690823.
+- **969003** also loses .235113280 QoS/step and 779.966125 J.
+  **969008** loses 737.764525 J with raw return cost/step +.111765171.
+- **969025** has lower QoS (−.083527940) but higher J (+514.084535),
+  because raw return cost/step falls .127444724; battery minimum rises .050710277.
+  Thus native service and penalized objective cannot be interchanged.
+- Lowest event QoS is 969001 at .298927583; lowest event J is 969029 at 233.213135.
+  Both arms' lowest battery occurs at 969029: .038681366→.035483446. The largest
+  event raw return cost is 969008 at .141146055/step. All other tails are retained
+  in the original per-world output.
+
+The mean J difference decomposes as cumulative QoS −39.516710, capped return-cost
+penalty improvement +9.832678 and graph-potential difference −.001487. Therefore
+the adverse mean J is not evidence of an increased *mean* return penalty. Its
+uncertainty and heterogeneous service/risk tradeoffs remain explicit. Boundary
+share in normal mode is zero for both; shield-mode share is .422544271→.432377604,
+guard-blocked actions 1877.59→2054.06, waiting ticks 6317.03→6423.66, and first
+service step 43.75 in both. Charging input/counts rise slightly, with uncertain
+paired changes; one-tick charging spell share is .977724→.977202. These diagnostic
+means do not identify a causal explanation of the complete service difference.
+
+### Activation, response censoring and fault windows
+
+Both arms execute 100 regular plans/world. Event adds a mean 43.46875 plans
+(range 26–60), producing 143.46875 total versus 100. There are 1,435 observed legal
+availability-change decisions per arm; event has 1,391 extra plans and 44 changes
+coincident with regular replans. Extra calls preserve the original regular clock.
+Mean planning CPU is .283341871→.372360946 s/world (difference +.089019075,
+t95 [.071781608,.106256542]); planning wall is .274653486→.360564714 s/world.
+The measured extra planning cost is small relative to full episode execution;
+it is not evidence of an online service deadline or the cause of the score loss.
+
+World-first mean lag from **observed change** to the next executed plan falls
+**14.384705877→0** decisions. Clock has 1,418 completed responses and 17
+right-censored responses across 13 worlds; event completes all 1,435. No world
+lacks response events, and neither arm has a change solely in the final returned
+observation. Clock lag is conditional on a subsequent plan and is not a value
+assigned to its censored changes. Zero lag refers to the first available decision
+after the native transition, not anticipation of a fault inside that transition.
+
+Each arm has 730 native onsets,719 expiries/recoveries and0 immediate refaults;
+11 failures remain at the horizon. All32 pairs have equal recorded fault-trace
+hashes. This is an observed diagnostic, not an assumption of identical closed-loop
+physical trajectories. Complete pre20/post20 windows number 717 onset and 715
+recovery;13 onset windows across 12 worlds and 4 recovery windows across 4 worlds
+are censored. Recovery post60 has 707 complete and 12 censored windows. Overlap
+counts are 565 onset and 566 recovery events. All32 worlds contribute complete
+events; event counts are not independent scientific samples.
+
+World-first onset QoS post−pre is −.041527047 for clock and−.037626995 for event
+(descriptive difference +.003900052). Recovery post−pre is +.050376731 versus
++.045976417 (−.004400314), and full recovery-post60 QoS is .620681439 versus
+.595379432 (−.025302007). The windows overlap and contain topology recovery and
+different deployment histories. They neither identify isolated fault/recovery
+effects nor replace the complete native endpoints.
+
+### Independent raw verification and retained evidence
+
+The bounded Verifier `b01_raw_verification` checked B02 on `hmasd-wsl-node` with
+the configured Python 3.10.21. DM read its full report, audit script and JSON.
+The exact source snapshot HEAD matches the launch SHA. Every one of 64 compressed
+raw files matches manifest SHA256 and bytes, with exact inventory and no extra,
+missing, incomplete, partial or orphan file. Locally collected config/perworld/
+summary also match the declared remote manifest. Raw scientific metric/reward
+arrays are finite, the native reward equation reconciles, and reconstructed
+native metrics, timer events/windows, decisions/counters and every response
+lag/censor flag agree. All comparable paired statistics agree with an independent
+SciPy t31 calculation (zero mismatches). The complete original paired output
+and all positive/adverse worlds remain preserved.
+
+Array-by-array paired timer comparison confirms 32/32 equal fault traces. Per arm,
+**28,345/768,000 failed UAV-steps (3.690755%)** and **25,336/96,000 team steps
+with a failure (26.391667%)**, maximum two simultaneous failed UAVs. Nonfinite
+values occur only in undefined target coordinates and undefined/censored event
+window diagnostics, including onset post60 which is undefined by construction.
+These were retained, not converted to zero or removed from scientific sample size.
+
+The one canonical raw copy remains at
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/energy_relay_availability/b02_event_replan_a01/raw/`:
+**26,901,933 apparent bytes /27,025,408 allocated bytes**. The complete native
+output root is 27,372,075 apparent/27,516,928 allocated bytes. The manifest's
+27,353,550-byte total covers raw plus its three declared compact files; it does
+not include the manifest itself or additional native metadata. Manifest SHA256:
+`4a5ab7e0416e8f051df73e44712a3b1756b1d6a023c5a17d45a7ee36715e4880`.
+Config SHA256 `d79bb8146b5e8a69fbf4bc51be215ef6bcebef2444cad70b28a176d6404079cb`,
+perworld `5123bb6c778fd68f93209b8c9bb577ad4f00d8a5acca8292bdd127950fa462ef`,
+summary `2b3002322e35a32821bed6604766ce3b59207d35b18e95294eb72a90a5edb987`.
+Hashes establish consistency of retained bytes with their colocated manifest and
+the collected compact evidence, not independently signed provenance or universal
+replay identity. No raw file was copied locally, and no sealed holdout was read.
+
+<a id="b02-independent-review-and-decision"></a>
+## 2026-09-27 — Independent scientific review; retain clock30 and end current timing investment
+
+Scientific Reviewer `b02_scientific_reading` used the dedicated ResearchCritic role
+with `fork_turns="none"`, without DM/Root conversation or a proposed B02
+interpretation. It reconstructed the frozen comparison, source and original
+outputs before reading earlier explanations/advice and current project ownership.
+It additionally read eight canonical raw trajectories in four selected positive/
+adverse pairs. The independent full raw audit subsequently supplied integrity and
+arithmetic verification. DM read the entire returned answer. **MATERIAL_DISSENT:
+no**; the reviewer recommends retaining clock30 and ending this event-rule
+investment, with no further result-bearing S4 study at this boundary.
+
+The substantive review and DM disposition are:
+
+1. **Adopt the distinction between activation and native usefulness.** The
+   intermediate prediction passed: fixed regular calls plus extra event calls
+   removed the observed planning lag. The native-improvement prediction was not
+   supported: both primary mean differences have the opposite sign, with
+   uncertainty allowing benefit and harm. Median J difference is +8.275 while
+   median QoS difference is −.016692. Neither wins, medians nor mean sign alone
+   establishes a stable population ranking. No equivalence or proof of harm is
+   claimed. Local windows do not show a consistent hidden recovery success.
+2. **Adopt ordinary deployment sensitivity as a working explanation, not an
+   identified component defect.** Clock30 already combines periodic planning,
+   continuously executed motion/shield feedback and automatic fault recovery.
+   Replanning changes information refresh and trajectories as well as assignment
+   timing, under limited but real fault exposure. Spatial visibility, assignment,
+   geometry and energy feedback can yield large outcomes in either direction.
+   This fits the mixed complete outcomes better than a demonstrated dominant
+   response-delay bottleneck. It does not prove churn, optimal timing or a repair.
+3. **Preserve the selected-tail reading and its selection limits.** The reviewer
+   found zero service during the final 1,000 steps of clock30 on 969013 while event
+   continued serving; 969028 showed the reverse. These segments coincided with
+   all UAVs in shield mode and no finite H1 targets. That is association in chosen
+   tails, not evidence that shield mode alone caused the loss. On969008 event had
+   more service in each of the first three 500-step blocks before later costs and
+   service losses reversed the early advantage. On969019 event travelled less
+   overall but lost service, so a universal extra-travel explanation is inadequate.
+   These post-result observations create no new independent sample or selected
+   tail-repair experiment.
+4. **Adopt the cost reading.** Added planning wall is only about .086 s/world;
+   this simulator does not turn that measured CPU time into an observed service
+   deadline. The negative mean J arises from the service/risk decomposition above,
+   not a compute charge or new cutoff penalty. Shorter aggregate event-worker
+   wall does not establish an end-to-end speedup. All scientific and supporting
+   costs remain recorded separately.
+5. **Adopt no new experiment at this boundary.** The completed 32-pair batch was
+   the smallest selected complete observation for the adoption decision. Shorter
+   lag with higher complete service/J and acceptable risk could have justified
+   retaining the rule; the observed shorter-lag/absent-established-gain branch
+   supports declining it. Another unchanged panel mainly purchases precision
+   without a presently specified use decision requiring it. A clock sweep,
+   onset-only/recovery-only variant, stronger faults or tail-specific changes
+   would be new exploratory investments, not completion of B02; none is selected.
+6. **Retain the broader question without manufacturing a dependency or successor.**
+   Legal spatial history/search and energy-aware assignment remain possible
+   questions, but B01/B02 do not currently select their intervention. B01's
+   roughly .175/.178 central-reference gaps survive as package differences with
+   different information rights, not attainable legal headroom or a learning
+   bottleneck. Current [shared understanding](../../RESEARCH.md#研究背景与共享认识)
+   and [research allocation](../../RESEARCH.md#current-research-plan), refreshed
+   from published `f8263e426`, separate native complete utility from local repair
+   diagnostics. DM1 already owns ordinary-learning replication and DM3 owns
+   demonstration/closed-loop learning. Duplicating those studies in S4 is not
+   justified by this result. Their completion is not a prerequisite for this
+   decision, and an available runtime slot is not a reason to invent work.
+
+The working judgment is therefore **weakened** for shortening the existing
+availability-response delay as the next default service improvement, **strengthened**
+for assessing immediate replanning by complete outcomes, and **retained** for
+substantial ordinary legal-control service with consequential trajectory/risk
+variation. Better legal information use, different objectives and learning remain
+unresolved. B02 says nothing about representation capacity, finite learnability,
+decentralized coordination, genuine membership change or general UAV safety.
+
+DM adopts the recommendation in full: **retain clock30 as the ordinary comparator;
+end current S4 fault-clock investment; select 0 further fits, 0 new episodes and
+0 experimental implementation.** B01/B02 together used 192 complete episodes,
+576,000 transitions and 0 fits/updates. This closes the tested approach and releases
+its current runtime investment, not the scientific parent question. The direct
+DM retains responsibility for that explanation; there is no queued B03, external
+producer to await, automatic re-entry or owner permission request. A materially
+new feasible comparison would need its own reason, discriminating prediction,
+cost and scientific review rather than being implied by these uncertain scores.
+
+One adequate independent scientific review covers this ordinary consequential
+decision. The reviewer identifies no distinct expertise/framing/disagreement that
+an additional Pro pass would resolve now; DM agrees. No Pro question was sent,
+and neither model agreement nor this publication supplies empirical replication.
+
+The useful implementation and checks were already published before execution.
+[Frozen B02 source](https://github.com/CartmanFatass/My-paper-code/tree/b4c7b153775222414375da4fda27b25e3c5363a8/experiments/candidates/energy_relay_availability)
+and [its focused tests](https://github.com/CartmanFatass/My-paper-code/tree/b4c7b153775222414375da4fda27b25e3c5363a8/tests/experiments/candidates/energy_relay_availability)
+remain recoverable beside the separately pinned B01 source. Preserve the compact
+readings and the unique raw evidence supporting the retained findings; retire
+unused current-tree implementation and disposable scratch after checking consumers.
+
+
+### Completed publication-boundary cleanup
+
+Both bounded helpers finished reading, no scientific process remains, and native
+observation generation6 had no pending events or running jobs before its stop.
+No Pro delivery or other direction imports/entrypoints consume this direction's
+implementation. Source/test consumers were checked across experiments, tests,
+scripts, configs and runtime configuration; notebook source links are pinned to
+published B01/B02 commits. Shared H1/environment/evaluator assets are untouched.
+
+The maintained remote snapshot collector preview passed. Its first wrapped apply
+refused with `snapshot is referenced by pid 782789 cmdline`; allocation remained
+796,823,552 bytes and nothing was deleted. That invocation's measurement wrapper
+itself included the full snapshot path in its command text. The recorded PID was
+subsequently absent (read-only ps returned no process). A fresh direct preview and
+apply under the node's shared Git writer lock rechecked all references, terminal
+identities, clean source, canonical output and durable source reachability, then
+removed exactly `f45c7e38c26b4a5ba135deadde2bea51`. The documented
+`--sudo-process-scan` supplied only the read-only process scan. No check was
+bypassed, source edited or worker restarted; the existing zsh prompt warnings
+remained separate from the collector's successful exit.
+
+Remote source allocation: **796,823,552 → 0 bytes**, directory absence verified.
+All64 canonical raw files and the unchanged manifest hash were checked afterward.
+Local exact owned targets were then removed, including12 unused tracked source/
+test files, their bytecode caches and the completed launch/wait/audit scratch:
+
+| Removed local target | Allocated bytes before | After |
+| --- | ---: | ---: |
+| `experiments/candidates/energy_relay_availability` | 180,224 | 0 |
+| `tests/experiments/candidates/energy_relay_availability` | 106,496 | 0 |
+| `temp/directions/energy_relay_availability` | 69,632 | 0 |
+
+All three paths are absent. Local release is **356,352 bytes**; combined
+identified-target net release across both hosts is **797,179,904 bytes
+(760.250 MiB)**. This measures the deleted targets, separately from
+shared Git object storage and unrelated concurrent host writes. No tarball,
+backup, duplicate raw copy or retention package was created.
+
+Actual retained material is the compact positive/adverse results and native
+operation records in main, published source/test history, one canonical B01 raw
+copy and one canonical B02 raw copy at their recorded node locations. Those raw
+copies support the retained event, complete-outcome and tail readings. Native
+claims/manifests remain for status and duplicate prevention. No unused owned
+source, scratch, snapshot, active observer, cleanup blocker or selected follow-up
+remains. Shared research standing is archived for this ended investment while
+preserving the question, lead and bounded unresolved explanations.
