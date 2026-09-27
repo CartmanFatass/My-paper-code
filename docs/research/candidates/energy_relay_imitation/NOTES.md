@@ -568,3 +568,41 @@ and its production entry exposes no root override. It resolves/validates that de
 after admission and records the locator/digests in config. Isolated tests may pass a fixture
 root to the internal batch helper. No launcher exception, generic-summary alias, symlink,
 extra bulk copy or changed scientific input is introduced.
+
+
+## 2026-09-27 — B02 engineering accepted; exact-source publication before admission
+
+The bounded Implementer returned the B02 runner and tests with B01 helper reuse. The DM read
+the diff and accepted the fixed external B01 root/digests, actual initial checkpoint plus zero-step
+optimizer restoration, shield-inactive selected-coordinate loss, full recurrent carry including
+empty chunks, final-only evaluation and replay, and full adverse per-world reading. No shared
+learner/environment/evaluator change is included. The relevant shared learner, environment,
+configuration, native helpers and benchmark evaluator sources remain unchanged from B01
+`b8cf9d3aace3ac4b386d03190b5a6310ee90acae`. B01 helper defaults retain their frozen arithmetic,
+update/exposure and failure-accounting meanings; optional external-input hashes are checked at use.
+
+Independent Engineering Reviewer `bc_engineering_review` found **no material engineering issue**
+in this version. It independently ran the focused B01/B02 suites: **25 passed in 10.10 s**,
+with `git diff --check` clean. Its review covered masks/normalisation, recurrent carry through
+masked and empty chunks, skipped updates, source identity, checkpoint restoration and evaluator
+compatibility, admission ordering, and partial/failure accounting. The Implementer separately
+reported the same 25 tests passing. Coverage is CPU fixtures and static tracing; there has been
+no B02 CUDA fit or scientific panel. The B02 initial-restoration helper was inspected, rather than
+directly exercised by a dedicated fixture. Remote source validation remains part of the admitted
+runner before scientific use; these limits are not presented as full production execution.
+
+Reviewed SHA256: `b01/study.py` =
+`e436256d6de782458eebf9d9a972a6616bf0afd872e552c488ac353a2c3b8b55`;
+`b02/study.py` = `462b20769dfdaca6f6e216c342a55e1b9475d4680e420c0b394a8ab4ee5cc8e7`;
+`b02/__init__.py` = `c0ae9dbdacb0b6f742ddb6040124f5c90f0cc8ffcb340855972d1e3786cf4d23`;
+`run_b02.py` = `376663f074ec83c566f0f584dc2d41693a6a6e9835ca8e50b7d76f00e26634ce`;
+`tests/.../b02/test_loss_mask.py` =
+`58e181c2b031d53621992addea87586e5bb3f0570cc6131efc68c436bcb037d6`.
+
+DM accepts this implementation for the already selected prospective B02 comparison. The published
+commit containing this entry and these exact files is the launch source. Use one native snapshot
+operation on `wsl_4070`, output `runs/energy_relay_imitation/b02_mask_a01`, fixed seed 929031,
+one fit and the unchanged declared endpoint/replay work. A preliminary resource reading improved
+from about 4.14 GiB available RAM with three operations to about 8.99 GiB with two operations;
+this is not the launch receipt, and fresh actual-node resource/control checks still precede release.
+No source, data, budget or scientific-choice change follows from waiting for resources.

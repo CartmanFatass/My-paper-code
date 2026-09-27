@@ -269,7 +269,9 @@ def _run_panel(out: Path, jobs: list[Job], summary: dict) -> bool:
     return not failed and not any(row.get("failed") for row in rows)
 
 
-def _load_episode(path: Path) -> dict[str, np.ndarray]:
+def _load_episode(path: Path, *, expected_sha256: str | None = None) -> dict[str, np.ndarray]:
+    if expected_sha256 is not None and sha256_file(path) != expected_sha256:
+        raise ValueError(f"pinned teacher input changed before use: {path}")
     with np.load(path, allow_pickle=False) as data:
         keys = ("observations_t", "state_t", "proposal_t", "submitted_t", "mode")
         result = {key: data[key] for key in keys}
@@ -366,7 +368,15 @@ def _save_checkpoint(agent, config, out: Path, name: str, launch_sha: str,
     return {"record": record, "artifact": _artifact(path, out)}
 
 
-def _fit(agent, config, out: Path, summary: dict) -> dict:
+def _fit(agent, config, out: Path, summary: dict, *, input_root: Path | None = None,
+         loss_mask: str = "all", input_hashes: dict | None = None) -> dict:
+    """Fixed B01 fit; B02 may reuse it with external inputs and an inactive-only loss.
+
+    The default branch retains B01's exact loss, update and output semantics.
+    """
+    if loss_mask not in ("all", "shield_inactive"):
+        raise ValueError(f"unsupported BC loss mask: {loss_mask}")
+    source = out if input_root is None else Path(input_root)
     started = time.perf_counter()
     actor = agent.skill_discoverer.actor
     optimizer = agent.discoverer_actor_optimizer
@@ -384,26 +394,48 @@ def _fit(agent, config, out: Path, summary: dict) -> dict:
     normalizers = _normalizer_state(agent)
     initial_logstd = head_logstd.detach().clone()
     rng = np.random.default_rng(ORDER_SEED)
-    updates = exposures = 0
+    updates = exposures = selected_exposures = skipped_chunks = 0
     loss_sum = 0.0
     device = torch.device(agent.device)
     actor.train(True)
     for epoch in range(EPOCHS):
         order = rng.permutation(TRAIN_WORLDS)
         for group_seeds in order.reshape(-1, GROUP):
-            group = [_load_episode(out / "raw" / "teacher_train" / f"{seed}.npz")
+            group = [_load_episode(source / "raw" / "teacher_train" / f"{seed}.npz",
+                                   expected_sha256=(input_hashes[str(seed)]["sha256"]
+                                                    if input_hashes is not None else None))
                      for seed in group_seeds]
             hidden = _initial_hidden(config, GROUP, device)
             for start in range(0, max(len(ep["state_t"]) for ep in group), CHUNK):
                 stop = min(start + CHUNK, max(len(ep["state_t"]) for ep in group))
-                obs, target, valid, _active = _chunk(group, start, stop, device)
+                obs, target, valid, active = _chunk(group, start, stop, device)
                 actions, hidden = _actor_forward(actor, obs, hidden, reset=(start == 0))
                 if not bool(torch.isfinite(actions).all()):
                     raise RuntimeError("nonfinite bounded action")
-                denominator = valid.sum() * ACTION_DIM
-                if denominator <= 0:
-                    raise RuntimeError("empty BC chunk")
-                loss = (((actions - target) ** 2) * valid.unsqueeze(-1)).sum() / denominator
+                count = int(valid.sum().item())
+                if loss_mask == "all":
+                    # Keep the frozen B01 arithmetic order on its default route.
+                    selected = valid
+                    selected_count = count
+                    denominator = valid.sum() * ACTION_DIM
+                    if denominator <= 0:
+                        raise RuntimeError("empty BC chunk")
+                    loss = (((actions - target) ** 2) * valid.unsqueeze(-1)).sum() / denominator
+                else:
+                    exposures += count
+                    summary["counts"]["agent_transition_exposures"] = exposures
+                    selected = valid * (1.0 - active)
+                    selected_count = int(selected.sum().item())
+                    selected_exposures += selected_count
+                    summary["counts"]["selected_loss_agent_exposures"] = selected_exposures
+                    if selected_count == 0:
+                        optimizer.zero_grad(set_to_none=True)
+                        hidden = hidden.detach()
+                        skipped_chunks += 1
+                        summary["counts"]["skipped_optimizer_chunks"] = skipped_chunks
+                        continue
+                    denominator = selected.sum() * ACTION_DIM
+                    loss = (((actions - target) ** 2) * selected.unsqueeze(-1)).sum() / denominator
                 if not bool(torch.isfinite(loss)):
                     raise RuntimeError("nonfinite BC loss")
                 optimizer.zero_grad(set_to_none=True)
@@ -421,11 +453,11 @@ def _fit(agent, config, out: Path, summary: dict) -> dict:
                     raise RuntimeError("BC changed logstd")
                 hidden = hidden.detach()
                 updates += 1
-                count = int(valid.sum().item())
-                exposures += count
-                loss_sum += float(loss.item()) * count
+                if loss_mask == "all":
+                    exposures += count
+                    summary["counts"]["agent_transition_exposures"] = exposures
+                loss_sum += float(loss.item()) * selected_count
                 summary["counts"]["optimizer_updates"] = updates
-                summary["counts"]["agent_transition_exposures"] = exposures
         _progress(out, {"event": "epoch_complete", "epoch": epoch + 1,
                         "updates": updates, "agent_transition_exposures": exposures})
     _unchanged(initial_critic, agent.skill_discoverer.critic, "critic")
@@ -442,14 +474,22 @@ def _fit(agent, config, out: Path, summary: dict) -> dict:
     if steps["low_actor"] != updates or any(value for name, value in steps.items()
                                              if name != "low_actor"):
         raise RuntimeError(f"BC optimizer steps differ from actor-only exposure: {steps}")
-    return {"epochs": EPOCHS, "updates": updates, "agent_transition_exposures": exposures,
+    result = {"epochs": EPOCHS, "updates": updates, "agent_transition_exposures": exposures,
             "wall_seconds": time.perf_counter() - started,
-            "mean_chunk_loss_weighted_by_valid_agent_steps": loss_sum / exposures,
             "actor_parameter_l2_movement": movement, "finite_gradients": True,
             "logstd_unchanged": True, "critic_coordinator_normalizers_unchanged": True}
+    if loss_mask == "all":
+        result["mean_chunk_loss_weighted_by_valid_agent_steps"] = loss_sum / exposures
+    else:
+        result.update(loss_mask=loss_mask, selected_loss_agent_exposures=selected_exposures,
+                      skipped_optimizer_chunks=skipped_chunks,
+                      mean_chunk_loss_weighted_by_selected_agent_steps=(
+                          loss_sum / selected_exposures if selected_exposures else None))
+    return result
 
 
-def _replay_checkpoint(out: Path, checkpoint: dict, panel: str, summary: dict) -> dict:
+def _replay_checkpoint(out: Path, checkpoint: dict, panel: str, summary: dict,
+                       *, input_root: Path | None = None, input_hashes: dict | None = None) -> dict:
     record = checkpoint["record"]
     task = ev.WorldTask(controller="L", seed=EVAL_WORLDS[0], params=PRODUCTION_PARAMS,
                         horizon=HORIZON, policy_seed=MODEL_SEED, threads=1, device="cpu",
@@ -460,6 +500,7 @@ def _replay_checkpoint(out: Path, checkpoint: dict, panel: str, summary: dict) -
     cpu_config = ev.learner_eval_config(ev.make_eval_config(HORIZON, MODEL_SEED), record)
     from tempfile import TemporaryDirectory
     from hmasd.agent import HMASDAgent
+    source = out if input_root is None else Path(input_root)
     with TemporaryDirectory(dir=out / "logs") as logdir:
         agent, _identity = ev.load_learner_policy(task, record, cpu_config, torch.device("cpu"), logdir)
         actor = agent.skill_discoverer.actor
@@ -467,7 +508,9 @@ def _replay_checkpoint(out: Path, checkpoint: dict, panel: str, summary: dict) -
         sums = np.zeros((3, ACTION_DIM), dtype=np.float64)
         counts = np.zeros(3, dtype=np.int64)
         for seed in (TRAIN_WORLDS if panel == "teacher_train" else EVAL_WORLDS):
-            ep = _load_episode(out / "raw" / panel / f"{seed}.npz")
+            ep = _load_episode(source / "raw" / panel / f"{seed}.npz",
+                               expected_sha256=(input_hashes[str(seed)]["sha256"]
+                                                if input_hashes is not None else None))
             hidden = _initial_hidden(cpu_config, 1, torch.device("cpu"))
             with torch.no_grad():
                 for start in range(0, len(ep["state_t"]), CHUNK):
