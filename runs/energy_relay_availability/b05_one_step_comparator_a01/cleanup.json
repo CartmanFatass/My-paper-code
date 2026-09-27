@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-27T19:49:44.922006+00:00",
+  "direction": "energy_relay_availability",
+  "boundary": "B05 complete; exact scoring comparison ended; broader question reserve",
+  "source_retained_at": "2b116b0fc03e8c9714b37ace0c1a441f9d27847f",
+  "consumer_check": "Repository-wide executable imports and entrypoints reference retired B02/B03 only within the jointly retired files/tests; original B02/B03 terminal records are complete; no local matching entry process. Retain B04/B05 and direction helpers, including current DM3 imports.",
+  "removed": [
+    {
+      "path": "experiments/candidates/energy_relay_availability/b02_controller.py",
+      "allocated_bytes": 8192,
+      "kind": "tracked_source_or_test"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/b02_runner.py",
+      "allocated_bytes": 16384,
+      "kind": "tracked_source_or_test"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/b02_readout.py",
+      "allocated_bytes": 8192,
+      "kind": "tracked_source_or_test"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/run_b02.py",
+      "allocated_bytes": 4096,
+      "kind": "tracked_source_or_test"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/b03_energy_cost.py",
+      "allocated_bytes": 16384,
+      "kind": "tracked_source_or_test"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/b03_runner.py",
+      "allocated_bytes": 28672,
+      "kind": "tracked_source_or_test"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/b03_readout.py",
+      "allocated_bytes": 8192,
+      "kind": "tracked_source_or_test"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/run_b03.py",
+      "allocated_bytes": 4096,
+      "kind": "tracked_source_or_test"
+    },
+    {
+      "path": "tests/experiments/candidates/energy_relay_availability/test_b02.py",
+      "allocated_bytes": 12288,
+      "kind": "tracked_source_or_test"
+    },
+    {
+      "path": "tests/experiments/candidates/energy_relay_availability/test_b03.py",
+      "allocated_bytes": 12288,
+      "kind": "tracked_source_or_test"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/b02_controller.cpython-310.pyc",
+      "allocated_bytes": 8192,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/b02_readout.cpython-310.pyc",
+      "allocated_bytes": 8192,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/b02_runner.cpython-310.pyc",
+      "allocated_bytes": 16384,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/b03_energy_cost.cpython-310.pyc",
+      "allocated_bytes": 12288,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/b03_energy_cost.cpython-312.pyc",
+      "allocated_bytes": 20480,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/b03_readout.cpython-310.pyc",
+      "allocated_bytes": 8192,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/b03_readout.cpython-312.pyc",
+      "allocated_bytes": 12288,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/b03_runner.cpython-310.pyc",
+      "allocated_bytes": 24576,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/b03_runner.cpython-312.pyc",
+      "allocated_bytes": 40960,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/run_b03.cpython-310.pyc",
+      "allocated_bytes": 4096,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "experiments/candidates/energy_relay_availability/__pycache__/run_b03.cpython-312.pyc",
+      "allocated_bytes": 4096,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "tests/experiments/candidates/energy_relay_availability/__pycache__/test_b02.cpython-310-pytest-9.1.1.pyc",
+      "allocated_bytes": 20480,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "tests/experiments/candidates/energy_relay_availability/__pycache__/test_b03.cpython-310-pytest-9.1.1.pyc",
+      "allocated_bytes": 20480,
+      "kind": "derived_bytecode"
+    },
+    {
+      "path": "temp/directions/energy_relay_availability",
+      "allocated_bytes": 4096,
+      "kind": "empty_private_scratch_directory"
+    }
+  ],
+  "removed_wait_request": {
+    "path": "temp/directions/energy_relay_availability/b05_wait_request.json",
+    "allocated_bytes": 4096,
+    "absent_verified": true,
+    "timing": "Removed earlier in this same terminal reading after native reconciliation"
+  },
+  "target_absence_verified": true,
+  "native_observation": {
+    "generation": 10,
+    "stopped": true,
+    "pending_events": 0,
+    "wake_id": null,
+    "jobs": "B03, B04 and B05 terminal/ready; original CHECKPOINT and READY consumed"
+  },
+  "source_snapshots_remaining": [
+    {
+      "batch": "B04",
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/e9e05e2ac0e248e0a82486d6443843e9",
+      "present": true,
+      "allocated_bytes": 1600032768,
+      "reclaimed_bytes": 0
+    },
+    {
+      "batch": "B05",
+      "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3af585411ada4bde863c758a9e7ac570",
+      "present": true,
+      "allocated_bytes": 1601368064,
+      "reclaimed_bytes": 0
+    }
+  ],
+  "source_snapshot_allocated_bytes_remaining": 3201400832,
+  "collector_mode": "B05 exact-target preview with elevated read-only process scan; no apply after failed precheck. B04 same refusal already recorded in its cleanup.json.",
+  "collector_refusal": "elevated read-only process scan refused: process scan refused: process 2026 changed during reference inspection",
+  "process_scan_diagnostic": "PID 2026 remains zombie zsh, PPID 1964; no unrelated process changed and no collector bypass attempted.",
+  "canonical_raw": {
+    "path": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/raw",
+    "files": 64,
+    "file_bytes": 113430049,
+    "all_hashes_verified_in_reading": true,
+    "duplicate_copy_created": false
+  },
+  "source_snapshot_cleanup_complete": false,
+  "measurement_scope": "Exact removed working-tree source/test/cache/scratch targets, including earlier wait request, minus this newly written cleanup record. Scientific publication artifacts and retained Git objects are not a cleanup-space claim.",
+  "gross_removed_allocated_bytes": 327680,
+  "cleanup_record_allocated_bytes": 8192,
+  "net_allocated_bytes_reclaimed_including_record": 319488
+}

@@ -1,0 +1,1439 @@
+{
+  "actual_transitions": 192000,
+  "adverse_qos_pairs_ascending": [
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.004613748719778793,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.015896430942108797,
+      "qos_per_step_delta": -0.015595793653165213,
+      "raw_native_J_delta": -47.68929282632644,
+      "return_constraint_cost_per_step_delta": 0.000150897293715612,
+      "seed": 28092809,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.0005616522740157365,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.01485392581692846,
+      "qos_per_step_delta": -0.015157006102593296,
+      "raw_native_J_delta": -44.561777450785485,
+      "return_constraint_cost_per_step_delta": -0.0001518177126840518,
+      "seed": 28092826,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.0004166666666666667,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.002945973939461402,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.007493638647467438,
+      "qos_per_step_delta": -0.009297343327665852,
+      "raw_native_J_delta": -22.480915942402135,
+      "return_constraint_cost_per_step_delta": -0.0009019662756858341,
+      "seed": 28092828,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.002,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.002392298936368248,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.0080195931355036,
+      "qos_per_step_delta": -0.009170692929196589,
+      "raw_native_J_delta": -24.058779406510894,
+      "return_constraint_cost_per_step_delta": -0.000575689054950776,
+      "seed": 28092824,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.008373537163363559,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.007323397522427055,
+      "qos_per_step_delta": -0.007565769552238311,
+      "raw_native_J_delta": -21.970192567281174,
+      "return_constraint_cost_per_step_delta": -0.00012245883531017496,
+      "seed": 28092812,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.000125,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.018122816348712517,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.007078765132912168,
+      "qos_per_step_delta": -0.006850897105801224,
+      "raw_native_J_delta": -21.23629539873673,
+      "return_constraint_cost_per_step_delta": 0.00011388614990446894,
+      "seed": 28092803,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.00013350502965731037,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.0054772055936546105,
+      "qos_per_step_delta": -0.0055398735896523554,
+      "raw_native_J_delta": -16.43161678096385,
+      "return_constraint_cost_per_step_delta": -2.99891153361933e-05,
+      "seed": 28092814,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.012916666666666667,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.004259109973074271,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.0002525714820856839,
+      "qos_per_step_delta": -0.0031263297601749063,
+      "raw_native_J_delta": -0.7577144462570686,
+      "return_constraint_cost_per_step_delta": -0.0014391605525537953,
+      "seed": 28092807,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 7.84797636085438e-05,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.0027011490357709,
+      "qos_per_step_delta": -0.0027446740908653178,
+      "raw_native_J_delta": -8.103447107312604,
+      "return_constraint_cost_per_step_delta": -2.2870638727194917e-05,
+      "seed": 28092811,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.006150809954829958,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.00045861197263719067,
+      "qos_per_step_delta": 0.00030689783407900073,
+      "raw_native_J_delta": 1.375835917911445,
+      "return_constraint_cost_per_step_delta": -7.458358646868327e-05,
+      "seed": 28092830,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0009166666666666666,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.002242507056805468,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.0009086341659806374,
+      "qos_per_step_delta": 0.0013881924377098231,
+      "raw_native_J_delta": 2.7259024979421156,
+      "return_constraint_cost_per_step_delta": 0.0002395059887263285,
+      "seed": 28092825,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0001171210737034023,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.003951688163849942,
+      "qos_per_step_delta": 0.004099747659423114,
+      "raw_native_J_delta": 11.85506449154991,
+      "return_constraint_cost_per_step_delta": 7.489781837881218e-05,
+      "seed": 28092818,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.00075,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.006969906904228537,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.00346011513481026,
+      "qos_per_step_delta": 0.004442519775458065,
+      "raw_native_J_delta": 10.380345404430955,
+      "return_constraint_cost_per_step_delta": 0.0004916760520142783,
+      "seed": 28092827,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.024,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.00578546498027066,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.0022425268410807275,
+      "qos_per_step_delta": 0.007708596072317442,
+      "raw_native_J_delta": 6.727580523242068,
+      "return_constraint_cost_per_step_delta": 0.0027336386175680813,
+      "seed": 28092806,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 1.4833989925300273e-08,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.008874034028229505,
+      "qos_per_step_delta": 0.008981784679887084,
+      "raw_native_J_delta": 26.622102084688322,
+      "return_constraint_cost_per_step_delta": 5.418113067858941e-05,
+      "seed": 28092819,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.0023333333333333335,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0024450439515114886,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.012642942380693079,
+      "qos_per_step_delta": 0.011500382869463421,
+      "raw_native_J_delta": 37.92882714207917,
+      "return_constraint_cost_per_step_delta": -0.0005712797556423973,
+      "seed": 28092816,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.00016666666666666666,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.0018470235437975102,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.01199352391091335,
+      "qos_per_step_delta": 0.013280242320113933,
+      "raw_native_J_delta": 35.98057173274037,
+      "return_constraint_cost_per_step_delta": 0.0006433931076367027,
+      "seed": 28092822,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.04020833333333333,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.0060610606523641974,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.0037010232792943354,
+      "qos_per_step_delta": 0.015082410734289287,
+      "raw_native_J_delta": -11.10306983788314,
+      "return_constraint_cost_per_step_delta": 0.00939183503699698,
+      "seed": 28092831,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0033514886554551204,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.017129193977420742,
+      "qos_per_step_delta": 0.01746748984669877,
+      "raw_native_J_delta": 51.38758193226204,
+      "return_constraint_cost_per_step_delta": 0.00016914792957934929,
+      "seed": 28092815,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.00037748772645468387,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.018201860907693712,
+      "qos_per_step_delta": 0.018239002176232866,
+      "raw_native_J_delta": 54.60558272308117,
+      "return_constraint_cost_per_step_delta": 1.9519312827645638e-05,
+      "seed": 28092801,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0001108284289022543,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.019658476417702353,
+      "qos_per_step_delta": 0.02010486283616353,
+      "raw_native_J_delta": 58.975429253106995,
+      "return_constraint_cost_per_step_delta": 0.0002228456106919955,
+      "seed": 28092810,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.0003514284488265462,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.020327015150715222,
+      "qos_per_step_delta": 0.020317732323881788,
+      "raw_native_J_delta": 60.981045452145736,
+      "return_constraint_cost_per_step_delta": -4.168369008353745e-06,
+      "seed": 28092832,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.16279166666666667,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.027100511191101767,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.08698174326780861,
+      "qos_per_step_delta": 0.024957553581669734,
+      "raw_native_J_delta": -260.9452298034257,
+      "return_constraint_cost_per_step_delta": 0.05596964841728757,
+      "seed": 28092823,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.0006863261636664286,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.02873706581914992,
+      "qos_per_step_delta": 0.029141151788139363,
+      "raw_native_J_delta": 86.21119745744954,
+      "return_constraint_cost_per_step_delta": 0.0002020429753009239,
+      "seed": 28092820,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0013175479347155156,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.03333802221541626,
+      "qos_per_step_delta": 0.03334621735023058,
+      "raw_native_J_delta": 100.01406664624847,
+      "return_constraint_cost_per_step_delta": 4.368213461307315e-06,
+      "seed": 28092804,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.011666666666666667,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0038732811671827183,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.039476842849235694,
+      "qos_per_step_delta": 0.036729898844900744,
+      "raw_native_J_delta": 118.43052854770713,
+      "return_constraint_cost_per_step_delta": -0.0013745557353959052,
+      "seed": 28092817,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 8.333333333333333e-05,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.007798314249677266,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.03916763182394589,
+      "qos_per_step_delta": 0.04002642119737332,
+      "raw_native_J_delta": 117.50289547183775,
+      "return_constraint_cost_per_step_delta": 0.00042965271551305905,
+      "seed": 28092813,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.01675,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.005013351881966277,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.039009171392971886,
+      "qos_per_step_delta": 0.043019353903739344,
+      "raw_native_J_delta": 117.02751417891568,
+      "return_constraint_cost_per_step_delta": 0.002005489728794583,
+      "seed": 28092821,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.009041666666666663,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.001267033375694393,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.05472984478721321,
+      "qos_per_step_delta": 0.050766632940300815,
+      "raw_native_J_delta": 164.18953436163974,
+      "return_constraint_cost_per_step_delta": -0.0019812511609497586,
+      "seed": 28092829,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 8.333333333333332e-05,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.00013290939679200253,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.05922199551932361,
+      "qos_per_step_delta": 0.0603821279744895,
+      "raw_native_J_delta": 177.66598655797088,
+      "return_constraint_cost_per_step_delta": 0.0005800510039278292,
+      "seed": 28092805,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.00030359600136317666,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.06331226601732032,
+      "qos_per_step_delta": 0.06322756532383,
+      "raw_native_J_delta": 189.93679805196098,
+      "return_constraint_cost_per_step_delta": -4.295528843263673e-05,
+      "seed": 28092802,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 2.9520781559475018e-05,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.06489111779794621,
+      "qos_per_step_delta": 0.0647958972040672,
+      "raw_native_J_delta": 194.67335339383862,
+      "return_constraint_cost_per_step_delta": -4.7392492151497123e-05,
+      "seed": 28092808,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    }
+  ],
+  "cancelled_jobs": [],
+  "completed_jobs": 64,
+  "completed_transitions": 192000,
+  "contrasts_five_ten_minus_one_step": {
+    "actual_length": {
+      "df": 31,
+      "mean": 0.0,
+      "n": 32,
+      "sd": 0.0,
+      "se": 0.0,
+      "status": "paired",
+      "t95": [
+        0.0,
+        0.0
+      ]
+    },
+    "below_fixed_reserve_uav_step_fraction": {
+      "df": 31,
+      "mean": 0.006484375,
+      "n": 32,
+      "sd": 0.030066953643308948,
+      "se": 0.005315136702701332,
+      "status": "paired",
+      "t95": [
+        -0.004355917774594432,
+        0.017324667774594432
+      ]
+    },
+    "cutoff_event_count_sum": {
+      "df": 31,
+      "mean": 0.0,
+      "n": 32,
+      "sd": 0.0,
+      "se": 0.0,
+      "status": "paired",
+      "t95": [
+        0.0,
+        0.0
+      ]
+    },
+    "depletion_event_count_sum": {
+      "df": 31,
+      "mean": 0.0,
+      "n": 32,
+      "sd": 0.0,
+      "se": 0.0,
+      "status": "paired",
+      "t95": [
+        0.0,
+        0.0
+      ]
+    },
+    "episode_minimum_battery_ratio": {
+      "df": 31,
+      "mean": -0.0016700517998105295,
+      "n": 32,
+      "sd": 0.006684946731153261,
+      "se": 0.0011817427913673286,
+      "status": "paired",
+      "t95": [
+        -0.004080232112986221,
+        0.0007401285133651621
+      ]
+    },
+    "native_J_per_step": {
+      "df": 31,
+      "mean": 0.011936035544321502,
+      "n": 32,
+      "sd": 0.029440620355154663,
+      "se": 0.005204415573867141,
+      "status": "paired",
+      "t95": [
+        0.0013215600007845923,
+        0.02255051108785841
+      ]
+    },
+    "qos_per_step": {
+      "df": 31,
+      "mean": 0.01607075942384705,
+      "n": 32,
+      "sd": 0.023074927590189396,
+      "se": 0.00407910944360287,
+      "status": "paired",
+      "t95": [
+        0.00775136086429643,
+        0.02439015798339767
+      ]
+    },
+    "raw_native_J": {
+      "df": 31,
+      "mean": 35.808106632964495,
+      "n": 32,
+      "sd": 88.32186106546399,
+      "se": 15.613246721601424,
+      "status": "paired",
+      "t95": [
+        3.9646800023537594,
+        67.65153326357523
+      ]
+    },
+    "return_constraint_cost_per_step": {
+      "df": 31,
+      "mean": 0.0020673918290533395,
+      "n": 32,
+      "sd": 0.010010213648310744,
+      "se": 0.0017695724879616642,
+      "status": "paired",
+      "t95": [
+        -0.0015416750545176202,
+        0.005676458712624299
+      ]
+    },
+    "service_cutoff_uav_step_fraction": {
+      "df": 31,
+      "mean": 0.0,
+      "n": 32,
+      "sd": 0.0,
+      "se": 0.0,
+      "status": "paired",
+      "t95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "exogenous_pairing_valid": true,
+  "failed_jobs": [],
+  "fits": 0,
+  "inference_unit": "same initialized world seed; approximate paired t31 interval",
+  "interpretation": "native service, J, risk and adverse pairs govern; planner scores are proxy diagnostics",
+  "known_transition_lower_bound": 192000,
+  "launch_sha": "754d5d34d905a81b58b78e69ae85b8a07cb19aad",
+  "missing_jobs": [],
+  "optimizer_updates": 0,
+  "orphan_raw": [],
+  "pair_hash_agreement": {
+    "initial_state_sha256": {
+      "different_pairs": 0,
+      "equal_pairs": 32
+    },
+    "rng_state_stream_sha256": {
+      "different_pairs": 0,
+      "equal_pairs": 32
+    },
+    "user_xy_trace_sha256": {
+      "different_pairs": 0,
+      "equal_pairs": 32
+    }
+  },
+  "paired_worlds": [
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.00037748772645468387,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.018201860907693712,
+      "qos_per_step_delta": 0.018239002176232866,
+      "raw_native_J_delta": 54.60558272308117,
+      "return_constraint_cost_per_step_delta": 1.9519312827645638e-05,
+      "seed": 28092801,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.00030359600136317666,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.06331226601732032,
+      "qos_per_step_delta": 0.06322756532383,
+      "raw_native_J_delta": 189.93679805196098,
+      "return_constraint_cost_per_step_delta": -4.295528843263673e-05,
+      "seed": 28092802,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.000125,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.018122816348712517,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.007078765132912168,
+      "qos_per_step_delta": -0.006850897105801224,
+      "raw_native_J_delta": -21.23629539873673,
+      "return_constraint_cost_per_step_delta": 0.00011388614990446894,
+      "seed": 28092803,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0013175479347155156,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.03333802221541626,
+      "qos_per_step_delta": 0.03334621735023058,
+      "raw_native_J_delta": 100.01406664624847,
+      "return_constraint_cost_per_step_delta": 4.368213461307315e-06,
+      "seed": 28092804,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 8.333333333333332e-05,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.00013290939679200253,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.05922199551932361,
+      "qos_per_step_delta": 0.0603821279744895,
+      "raw_native_J_delta": 177.66598655797088,
+      "return_constraint_cost_per_step_delta": 0.0005800510039278292,
+      "seed": 28092805,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.024,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.00578546498027066,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.0022425268410807275,
+      "qos_per_step_delta": 0.007708596072317442,
+      "raw_native_J_delta": 6.727580523242068,
+      "return_constraint_cost_per_step_delta": 0.0027336386175680813,
+      "seed": 28092806,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.012916666666666667,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.004259109973074271,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.0002525714820856839,
+      "qos_per_step_delta": -0.0031263297601749063,
+      "raw_native_J_delta": -0.7577144462570686,
+      "return_constraint_cost_per_step_delta": -0.0014391605525537953,
+      "seed": 28092807,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 2.9520781559475018e-05,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.06489111779794621,
+      "qos_per_step_delta": 0.0647958972040672,
+      "raw_native_J_delta": 194.67335339383862,
+      "return_constraint_cost_per_step_delta": -4.7392492151497123e-05,
+      "seed": 28092808,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.004613748719778793,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.015896430942108797,
+      "qos_per_step_delta": -0.015595793653165213,
+      "raw_native_J_delta": -47.68929282632644,
+      "return_constraint_cost_per_step_delta": 0.000150897293715612,
+      "seed": 28092809,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0001108284289022543,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.019658476417702353,
+      "qos_per_step_delta": 0.02010486283616353,
+      "raw_native_J_delta": 58.975429253106995,
+      "return_constraint_cost_per_step_delta": 0.0002228456106919955,
+      "seed": 28092810,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 7.84797636085438e-05,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.0027011490357709,
+      "qos_per_step_delta": -0.0027446740908653178,
+      "raw_native_J_delta": -8.103447107312604,
+      "return_constraint_cost_per_step_delta": -2.2870638727194917e-05,
+      "seed": 28092811,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.008373537163363559,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.007323397522427055,
+      "qos_per_step_delta": -0.007565769552238311,
+      "raw_native_J_delta": -21.970192567281174,
+      "return_constraint_cost_per_step_delta": -0.00012245883531017496,
+      "seed": 28092812,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 8.333333333333333e-05,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.007798314249677266,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.03916763182394589,
+      "qos_per_step_delta": 0.04002642119737332,
+      "raw_native_J_delta": 117.50289547183775,
+      "return_constraint_cost_per_step_delta": 0.00042965271551305905,
+      "seed": 28092813,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.00013350502965731037,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.0054772055936546105,
+      "qos_per_step_delta": -0.0055398735896523554,
+      "raw_native_J_delta": -16.43161678096385,
+      "return_constraint_cost_per_step_delta": -2.99891153361933e-05,
+      "seed": 28092814,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0033514886554551204,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.017129193977420742,
+      "qos_per_step_delta": 0.01746748984669877,
+      "raw_native_J_delta": 51.38758193226204,
+      "return_constraint_cost_per_step_delta": 0.00016914792957934929,
+      "seed": 28092815,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.0023333333333333335,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0024450439515114886,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.012642942380693079,
+      "qos_per_step_delta": 0.011500382869463421,
+      "raw_native_J_delta": 37.92882714207917,
+      "return_constraint_cost_per_step_delta": -0.0005712797556423973,
+      "seed": 28092816,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.011666666666666667,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0038732811671827183,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.039476842849235694,
+      "qos_per_step_delta": 0.036729898844900744,
+      "raw_native_J_delta": 118.43052854770713,
+      "return_constraint_cost_per_step_delta": -0.0013745557353959052,
+      "seed": 28092817,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.0001171210737034023,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.003951688163849942,
+      "qos_per_step_delta": 0.004099747659423114,
+      "raw_native_J_delta": 11.85506449154991,
+      "return_constraint_cost_per_step_delta": 7.489781837881218e-05,
+      "seed": 28092818,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 1.4833989925300273e-08,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.008874034028229505,
+      "qos_per_step_delta": 0.008981784679887084,
+      "raw_native_J_delta": 26.622102084688322,
+      "return_constraint_cost_per_step_delta": 5.418113067858941e-05,
+      "seed": 28092819,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.0006863261636664286,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.02873706581914992,
+      "qos_per_step_delta": 0.029141151788139363,
+      "raw_native_J_delta": 86.21119745744954,
+      "return_constraint_cost_per_step_delta": 0.0002020429753009239,
+      "seed": 28092820,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.01675,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.005013351881966277,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.039009171392971886,
+      "qos_per_step_delta": 0.043019353903739344,
+      "raw_native_J_delta": 117.02751417891568,
+      "return_constraint_cost_per_step_delta": 0.002005489728794583,
+      "seed": 28092821,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.00016666666666666666,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.0018470235437975102,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.01199352391091335,
+      "qos_per_step_delta": 0.013280242320113933,
+      "raw_native_J_delta": 35.98057173274037,
+      "return_constraint_cost_per_step_delta": 0.0006433931076367027,
+      "seed": 28092822,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.16279166666666667,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.027100511191101767,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.08698174326780861,
+      "qos_per_step_delta": 0.024957553581669734,
+      "raw_native_J_delta": -260.9452298034257,
+      "return_constraint_cost_per_step_delta": 0.05596964841728757,
+      "seed": 28092823,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.002,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.002392298936368248,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.0080195931355036,
+      "qos_per_step_delta": -0.009170692929196589,
+      "raw_native_J_delta": -24.058779406510894,
+      "return_constraint_cost_per_step_delta": -0.000575689054950776,
+      "seed": 28092824,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0009166666666666666,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.002242507056805468,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.0009086341659806374,
+      "qos_per_step_delta": 0.0013881924377098231,
+      "raw_native_J_delta": 2.7259024979421156,
+      "return_constraint_cost_per_step_delta": 0.0002395059887263285,
+      "seed": 28092825,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.0005616522740157365,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.01485392581692846,
+      "qos_per_step_delta": -0.015157006102593296,
+      "raw_native_J_delta": -44.561777450785485,
+      "return_constraint_cost_per_step_delta": -0.0001518177126840518,
+      "seed": 28092826,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.00075,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.006969906904228537,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.00346011513481026,
+      "qos_per_step_delta": 0.004442519775458065,
+      "raw_native_J_delta": 10.380345404430955,
+      "return_constraint_cost_per_step_delta": 0.0004916760520142783,
+      "seed": 28092827,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.0004166666666666667,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.002945973939461402,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.007493638647467438,
+      "qos_per_step_delta": -0.009297343327665852,
+      "raw_native_J_delta": -22.480915942402135,
+      "return_constraint_cost_per_step_delta": -0.0009019662756858341,
+      "seed": 28092828,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": -0.009041666666666663,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": 0.001267033375694393,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.05472984478721321,
+      "qos_per_step_delta": 0.050766632940300815,
+      "raw_native_J_delta": 164.18953436163974,
+      "return_constraint_cost_per_step_delta": -0.0019812511609497586,
+      "seed": 28092829,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.006150809954829958,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.00045861197263719067,
+      "qos_per_step_delta": 0.00030689783407900073,
+      "raw_native_J_delta": 1.375835917911445,
+      "return_constraint_cost_per_step_delta": -7.458358646868327e-05,
+      "seed": 28092830,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.04020833333333333,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.0060610606523641974,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": -0.0037010232792943354,
+      "qos_per_step_delta": 0.015082410734289287,
+      "raw_native_J_delta": -11.10306983788314,
+      "return_constraint_cost_per_step_delta": 0.00939183503699698,
+      "seed": 28092831,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    },
+    {
+      "actual_length_delta": 0.0,
+      "below_fixed_reserve_uav_step_fraction_delta": 0.0,
+      "cutoff_event_count_sum_delta": 0.0,
+      "depletion_event_count_sum_delta": 0.0,
+      "episode_minimum_battery_ratio_delta": -0.0003514284488265462,
+      "hashes_equal": {
+        "initial_state_sha256": true,
+        "rng_state_stream_sha256": true,
+        "user_xy_trace_sha256": true
+      },
+      "native_J_per_step_delta": 0.020327015150715222,
+      "qos_per_step_delta": 0.020317732323881788,
+      "raw_native_J_delta": 60.981045452145736,
+      "return_constraint_cost_per_step_delta": -4.168369008353745e-06,
+      "seed": 28092832,
+      "service_cutoff_uav_step_fraction_delta": 0.0
+    }
+  ],
+  "panels": {
+    "five_ten": {
+      "candidate_plan_evaluations": 42507,
+      "completed_worlds": 32,
+      "means": {
+        "actual_length": 3000.0,
+        "below_fixed_reserve_uav_step_fraction": 0.010016927083333333,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "episode_minimum_battery_ratio": 0.10040768727573425,
+        "native_J_per_step": 0.7628910374511002,
+        "qos_per_step": 0.7792173980796427,
+        "raw_native_J": 2288.673112353301,
+        "return_constraint_cost_per_step": 0.003068675441831601,
+        "service_cutoff_uav_step_fraction": 0.0
+      },
+      "planned_worlds": 32,
+      "planner_hold_windows": 1756,
+      "scorer_snapshot_calls": 89737,
+      "selected_hold_near_tie_windows": 7,
+      "terminal_types": {
+        "horizon": 0,
+        "terminated": 0,
+        "truncated": 32
+      },
+      "zero_service_worlds": 0
+    },
+    "one_step": {
+      "candidate_plan_evaluations": 42075,
+      "completed_worlds": 32,
+      "means": {
+        "actual_length": 3000.0,
+        "below_fixed_reserve_uav_step_fraction": 0.0035325520833333333,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "episode_minimum_battery_ratio": 0.10207773907554477,
+        "native_J_per_step": 0.7509550019067788,
+        "qos_per_step": 0.7631466386557959,
+        "raw_native_J": 2252.865005720336,
+        "return_constraint_cost_per_step": 0.0010012836127782619,
+        "service_cutoff_uav_step_fraction": 0.0
+      },
+      "planned_worlds": 32,
+      "planner_hold_windows": 561,
+      "scorer_snapshot_calls": 42075,
+      "selected_hold_near_tie_windows": 30,
+      "terminal_types": {
+        "horizon": 0,
+        "terminated": 0,
+        "truncated": 32
+      },
+      "zero_service_worlds": 0
+    }
+  },
+  "parent_cpu_seconds": 0.6132960000000001,
+  "parent_peak_rss_kib": 353712,
+  "parent_wall_seconds": 3283.4977838800005,
+  "partial_observed_transitions": 0,
+  "planned_jobs": 64,
+  "status": "complete",
+  "submitted_jobs": [
+    "five_ten/28092801",
+    "five_ten/28092802",
+    "five_ten/28092803",
+    "five_ten/28092804",
+    "five_ten/28092805",
+    "five_ten/28092806",
+    "five_ten/28092807",
+    "five_ten/28092808",
+    "five_ten/28092809",
+    "five_ten/28092810",
+    "five_ten/28092811",
+    "five_ten/28092812",
+    "five_ten/28092813",
+    "five_ten/28092814",
+    "five_ten/28092815",
+    "five_ten/28092816",
+    "five_ten/28092817",
+    "five_ten/28092818",
+    "five_ten/28092819",
+    "five_ten/28092820",
+    "five_ten/28092821",
+    "five_ten/28092822",
+    "five_ten/28092823",
+    "five_ten/28092824",
+    "five_ten/28092825",
+    "five_ten/28092826",
+    "five_ten/28092827",
+    "five_ten/28092828",
+    "five_ten/28092829",
+    "five_ten/28092830",
+    "five_ten/28092831",
+    "five_ten/28092832",
+    "one_step/28092801",
+    "one_step/28092802",
+    "one_step/28092803",
+    "one_step/28092804",
+    "one_step/28092805",
+    "one_step/28092806",
+    "one_step/28092807",
+    "one_step/28092808",
+    "one_step/28092809",
+    "one_step/28092810",
+    "one_step/28092811",
+    "one_step/28092812",
+    "one_step/28092813",
+    "one_step/28092814",
+    "one_step/28092815",
+    "one_step/28092816",
+    "one_step/28092817",
+    "one_step/28092818",
+    "one_step/28092819",
+    "one_step/28092820",
+    "one_step/28092821",
+    "one_step/28092822",
+    "one_step/28092823",
+    "one_step/28092824",
+    "one_step/28092825",
+    "one_step/28092826",
+    "one_step/28092827",
+    "one_step/28092828",
+    "one_step/28092829",
+    "one_step/28092830",
+    "one_step/28092831",
+    "one_step/28092832"
+  ],
+  "unreconciled_jobs": [],
+  "unstarted_jobs": [],
+  "worker_cpu_seconds_sum": 12990.390334000005,
+  "worker_peak_rss_kib_max": 444544,
+  "worker_wall_seconds_sum": 13013.903527457003
+}

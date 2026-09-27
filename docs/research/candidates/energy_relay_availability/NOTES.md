@@ -1991,3 +1991,261 @@ is no pending wake/event. The wait request remains in direction-owned private
 scratch. Continue collection on this handle; a complete scientific reading is
 still pending. No result, equivalence or forecast-value judgment is made from
 admission or startup.
+
+### 2026-09-27 — Complete native B05 reading
+
+**Question and fixed comparison.** Does the evaluated B04 five_ten score add
+complete native service/J worth its computation relative to the same neighborhood
+scored at nominal step one? The published contract at
+`754d5d34d905a81b58b78e69ae85b8a07cb19aad` fixes S7-S2/H3000, H_central information
+at ten-step replans, identical H1 targets/matching and ten-step execution, the
+same static native model, all-move plus at most eight single-UAV horizontal holds,
+and the real guard/shield. The only selected comparison is the implemented
+five_ten `(q0 + 2*q5 + q10)/4` rule versus one_step `q1`, including their intrinsic
+computation and finite-precision selection. No model, controller, tolerance,
+reward, seed or evaluation rule changed after admission.
+
+**Technical completion and evidence.** The original accepted operation exited
+normally at 2026-09-27T19:16:06.116655Z. The
+[terminal native status](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/status-completed.json)
+has consistent source/operation records, absent original runner and supervisor,
+and a valid exit-zero witness. All 64 jobs completed: 32 paired worlds
+28092801–28092832, exactly 3,000 steps each, 192,000 native transitions, zero fits
+and optimizer updates. There are no failed, missing, cancelled, unstarted,
+unreconciled, partial or orphan jobs. All episodes truncate at H3000.
+Process exit alone was not the scientific reading.
+
+The DM read every original NPZ, independently of the candidate evaluator/readout,
+and verified all 64 raw hashes/byte counts plus the three compact artifact hashes.
+All 14 native metric aggregates reproduce exactly. Native QoS/J, battery minima,
+reserve/cutoff exposure, guard and mode counts reproduce from the retained arrays.
+All 64 planner clocks are 0,10,...,2990; candidate bounds/order, strict selections,
+float64 score formulas and snapshot-call counts match the frozen implementation.
+The 32 complete 3001-by-30-by-2 user-position traces are pairwise identical and
+their digests were independently reconstructed. Recorded initial-state and RNG
+stream digests also agree in every pair; full initial states/RNG streams were not
+retained and cannot be independently reconstructed from these outputs.
+
+A first DM arithmetic assertion incorrectly required bit equality between the
+adapter scalar reward and the info reward. Inspection found a maximum difference
+of 2.220446049250313e-16 in every world; both paths agree with the native formula
+at float64 roundoff. The readback assertion was corrected to report that bound.
+Source and original outputs were unchanged. This was a readback assertion error,
+not a failed episode. Native battery metrics are retained at float64 precision;
+batteries/return margins decoded from observations are float32, and their
+retrospective descriptions retain that limitation.
+
+Canonical records: [summary](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/summary.json),
+[all per-world results](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/perworld.json),
+[content manifest](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/manifest.json),
+and [independent full-panel arithmetic](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/reading.json).
+The sole canonical bulk copy is
+`/home/fires/hmasd-wsl/runs/energy_relay_availability/b05_one_step_comparator_a01/raw/`:
+64 NPZ files, 113,430,049 file bytes, with paths/hashes in the manifest. No duplicate
+retention package was made.
+
+**Native results.** Every difference below is **five_ten minus one_step**. Intervals
+are approximate paired t31 95% intervals over the fixed 32 initialized worlds;
+steps and replans are not independent replicates. B04 development worlds are not
+pooled into B05.
+
+| Endpoint | one_step mean | five_ten mean | Paired difference [95% interval] |
+| --- | ---: | ---: | ---: |
+| Delivered QoS per step | .76314664 | .77921740 | +.01607076 [+.00775136, +.02439016] |
+| Raw native J | 2252.86501 | 2288.67311 | +35.80811 [+3.96468, +67.65153] |
+| Native J per step | .75095500 | .76289104 | +.01193604 [+.00132156, +.02255051] |
+| Capped return-cost sum | 3.00385 | 9.20603 | +6.20218 [−4.62503, +17.02938] |
+| Episode minimum battery ratio | .10207774 | .10040769 | −.00167005 [−.00408023, +.00074013] |
+| UAV-step fraction at/below 10% reserve | .00353255 | .01001693 | +.00648438 [−.00435592, +.01732467] |
+| Negative return-margin UAV-step fraction | .00856901 | .01565625 | +.00708724 [−.00493563, +.01911011] |
+| Guard-blocked actions | 973.71875 | 1064.21875 | +90.50 [−72.59, +253.59] |
+| Guard-checked actions | 14171.78125 | 14560.28125 | +388.50 [+212.45, +564.55] |
+| Shield-mode UAV-step fraction | .34481510 | .34024609 | −.00456901 [−.01105326, +.00191524] |
+| Charging UAV-steps | 1414.09375 | 1395.06250 | −19.03125 [−40.86604, +2.80354] |
+| Charger input Wh | 392.80382 | 387.51736 | −5.28646 [−11.35168, +.77876] |
+
+QoS improves in 23 worlds and declines in nine; J improves in 21 and declines in
+11. Twenty-one improve both, nine lose both, and two gain service while losing J.
+Return cost rises in 18 worlds, minimum battery falls in 15, and reserve exposure
+increases in ten. Raw and capped return costs coincide on this panel. Mean J
+decomposes into service +48.21228, return penalty −12.40435, shaping +.00017934,
+and zero cutoff/depletion difference. Both arms have zero cutoff/depletion events,
+zero service-cutoff exposure and no wholly zero-service world. Each has 642
+zero-QoS steps; their per-world counts are identical. Those zeros do not establish
+safety or risk equivalence.
+
+**Adverse and favorable worlds retained.** World 28092823 has QoS +.02495755 but
+J −260.94523. Its return-cost sum rises from .70127 to 168.61022 (+167.90895),
+minimum battery falls from .10140753 to .07430702, and reserve exposure rises
+from zero to .16279167 (3,907 of 24,000 UAV-steps). The independent review finds
+seven UAVs with prolonged reserve deficits through H3000; both arms end with six
+UAVs queued at the same station, with much lower batteries under five_ten. This
+describes the realized tail; it does not identify a cause of that tail.
+World 28092831 also gains QoS (+.01508241) but loses J (−11.10307), with return
+cost +28.17551, minimum battery .08839826 versus .09445932 and reserve exposure
+.07116667 versus .03095833. The lowest episode battery anywhere is .07430702 for
+five_ten versus .09128524 for one_step.
+
+The nine QoS-loss worlds are 28092803/07/09/11/12/14/24/26/28. The largest service
+losses are 28092809 (QoS −.01559579, J −47.68929) and 28092826 (−.01515701,
+−44.56178). The largest gains include 28092808 (+.06479590, +194.67335),
+28092802 (+.06322757, +189.93680), and 28092805 (+.06038213, +177.66599).
+All 32 paired deltas, including these tails, remain in the linked reading.
+
+**Activity and limits on explanation.** Both arms make 9,600 planning-window
+decisions. one_step has 4,675 active windows, 42,075 candidate/snapshot evaluations
+and 561 selected holds; five_ten has 4,723 active windows, 42,507 candidate plans,
+89,737 snapshots and 1,756 selected holds. Their hold fractions of active windows
+are 12.0% and 37.18%. Maximum consecutive holds of the same UAV are 13 and 19
+windows. Shield-active/entry fallback windows are 4,917/8 and 4,866/11. One
+five_ten selected-hold window subsequently encounters the held UAV's shield,
+versus zero under one_step; a selected hold does not guarantee ten realized
+unshielded horizontal holds. Retrospective common-time QoS thirds differ by
++.02161, +.00851 and +.01810, with the last interval crossing zero. These are
+closed-loop descriptions, not same-state or phase-causal comparisons.
+
+The farther projection chooses many more holds and resolves more service
+plateaus. That is a simpler working explanation for its implemented-rule value
+than calibrated anticipation. The static proxy omits future user movement,
+shield transitions, battery evolution, charging and queues. Their possible roles
+in the adverse tail remain conjectures. Proxy gains from the two different
+objectives are not interchangeable calibration measurements.
+
+**Numerical scope and correction.** There are 30 one_step and seven five_ten
+selected holds whose positive advantage over all-move is at most 1e-12; all 37
+are retained in reading.json. Their actual gaps are roughly 1e-17–4.44e-16,
+one to six float64 spacing units. The seven five_ten cases are
+28092801@50, 28092811@190, 28092816@930, 28092817@40, 28092820@70 and @1270,
+and 28092823@70. Strict `>` selects on these values without a practical tie
+tolerance. The independent review finds 3,102 five_ten and 4,174 one_step active
+windows with exact top-candidate ties. In worlds 28092812/20/23/26 the first
+choice divergence arises from about 1e-17–1e-16 while recorded positions and H1
+targets otherwise agree, followed by about 30 m next-step position separation.
+A small number of such choices does not imply a negligible final effect.
+
+The prospective sentence that the common q0 term “cannot change ranking” was too
+strong for finite arithmetic; it is correct only in exact arithmetic. On retained
+five_ten candidate values, the reviewer recomputed `2*q5 + q10` and found changed
+selected indices at 28092801@50, 28092814@730, 28092817@710 and 28092825@180.
+At 28092814@730 this is a competition between holds with a substantial advantage
+over all-move, so the recorded near-baseline-tie count does not cover all ranking
+sensitivity. This is arithmetic over retained scores, not an alternate-policy
+simulation or evidence that q0 caused the final gain/loss. The executed formula,
+all worlds and strict ordering remain unchanged. The paired intervals quantify
+world variation conditional on this finite implementation, not robustness to
+tolerance, precision, host or algebraically equivalent scoring changes.
+
+**Realized cost.** Acceptance to exit was 3,288.11995 s (54.802 min), within the
+50–60 minute planning estimate. Recorded worker CPU was 12,990.39033 s (3.60844 h),
+versus the approximate 3.4 h estimate; worker walls summed to 13,013.90353 s.
+Parent wall/CPU were 3,283.49778/.61330 s. The maximum recorded worker peak was
+444,544 KiB and parent peak 353,712 KiB; these are per-process maxima, not a
+simultaneous aggregate. There were 131,812 service snapshots against the 268,800
+bound, 84,582 candidate plans, 192k native transitions and zero fits/updates.
+Mean worker CPU was 190.656 s per one_step world and 215.294 s per five_ten world:
+24.638 s or about 12.9% more. Snapshot counts are about 2.132 times greater;
+different trajectories/activation and contention mean the CPU ratio is not a pure
+scorer benchmark. No deployment deadline or compute utility price was measured.
+The successful independent raw-arithmetic pass took 1.8062 s; the earlier
+assertion/inspection, preparation, source review, publication, scientific review
+and other readback have incompletely metered cost. They are not zero-cost work.
+Manifest storage for its compact artifacts and raw is 113,842,959 bytes.
+
+### 2026-09-27 — Independent B05 reading and DM disposition
+
+A registered ResearchCritic (`b05_scientific_reading`) received a separate context
+without DM/Root conversation inheritance. The supplied general workspace memory
+overview was present; initial RESEARCH navigation exposed B04 standing and the
+planned B05 comparison, so the reading order was not fully blinded. The critic
+reconstructed B05's original source, all 64 raw trajectories and all 67 manifest
+hashes before reading the detailed prior review and DM supplemental arithmetic.
+It independently confirmed the primary paired results and inspected the adverse
+worlds, numerical ties, queue/battery histories and compute costs.
+
+**Recommendation and diagnosis.** Retain five_ten as a conditional ordinary
+controller option and end further batches for this exact scoring comparison.
+The mean service/J increment versus a competent one-step scorer is real for the
+fixed implemented package and panel, with about 13% extra worker CPU. The serious
+reserve losses in 28092823 and 28092831 take the prospectively declared risk branch
+and prevent promotion to a default controller. More frequent/differently placed
+holding after farther projection is an adequate simpler explanation; forecast
+calibration, a clean lookahead mechanism and numerical robustness are not
+identified. The static-model omissions are plausible contributors, not diagnosed
+causes. B04's different comparator/development exposure is not a B05 replication.
+No learning, MARL, optimality or general safety conclusion follows.
+
+The critic judges another unchanged roughly 55-minute panel low value for the
+current use decision: it could sharpen world-level precision, but would not
+separate scoring numerics, holding patterns and omitted dynamics, and no actual
+deployment decision currently justifies that cost. A revised tie rule, hold
+restriction, scoring formula, forecast or guard-aware candidate would define a
+new prospective question rather than repair this result. MATERIAL_DISSENT: no
+against the fixed decision branch. The q0 wording requires the factual correction
+recorded above; the DM accepts it in full.
+
+**DM decision.** Adopt this recommendation. B05 strengthens the conditional value
+of this exact farther-score implementation over one_step; the substantial risk
+tail weakens the case for default use and blocks a general safe-benefit claim.
+Keep five_ten and one_step as ordinary comparison assets, preserve every adverse
+world and retain the B03 closure. End investment in this exact B05 comparison,
+with no extra panel, numerical rescue, sweep, third arm, new horizon or fit
+selected. No additional Pro round is needed: the independent review supplies the
+required diagnosis and choice, with no distinct unresolved expertise or material
+disagreement that would change it.
+
+The broader ordinary cooperative-planning question remains owned by this DM;
+its current state becomes **reserve**, with no active result-bearing study or
+invented waiting dependency. The untested question of which concrete planning
+decision warrants a new design remains open, rather than being declared solved
+by this comparison. Repeating the panel for narrower uncertainty and changing a
+tie/scoring rule were considered and declined on present use value and cost.
+DM3's already accepted learning comparison is a separate question; this result
+neither changes its contract nor creates a prerequisite or notification loop.
+
+**Bounded retirement scope.** Before cleanup, repository-wide executable import
+and entrypoint searches found B02/B03 consumers only inside their closed source
+and tests; B03 imports B02, so they retire together. Their summaries and original
+exit witnesses are complete, and no local B02/B03 entry process is present.
+Retire the eight B02/B03 implementation/entry files and their two tests from
+current main, plus their thirteen derived bytecode caches. They are unchanged
+from the published source retained at
+[`2b116b0fc03e8c9714b37ace0c1a441f9d27847f`](https://github.com/CartmanFatass/My-paper-code/tree/2b116b0fc03e8c9714b37ace0c1a441f9d27847f/experiments/candidates/energy_relay_availability)
+([historical tests](https://github.com/CartmanFatass/My-paper-code/tree/2b116b0fc03e8c9714b37ace0c1a441f9d27847f/tests/experiments/candidates/energy_relay_availability)).
+The B02/B03 native launch revisions remain respectively
+`b4c7b153775222414375da4fda27b25e3c5363a8` and
+`8d9d64996c5a618b85e6ab521a939f98f48e659e`; their notebooks, configs, outputs and
+evidence locators are retained. Existing notebook mentions are historical names,
+not unpinned links to deleted source. B04/B05 and the shared direction helpers
+remain useful ordinary assets; DM3 currently imports B04/root helpers. No tests,
+new environments or fits are added/run for this retirement.
+
+
+**Terminal reconciliation and measured cleanup.** CHECKPOINT
+`9b2962f1d11c25b5ccb0d4fe` and READY `94c7b45a3cf48b16075846e9` were consumed
+against generation 9 / wake `9e1467d7-04e9-4966-844d-57812df0923a` on the original
+handle. The observer advanced to generation 10 and was stopped. A fresh drain
+has no wake or pending event; B03/B04/B05 are terminal/ready. The private B05 wait
+request and now-empty private direction scratch directory are absent. No worker
+was restarted, no Pro question was sent, and no App task was messaged.
+
+The ten retired source/test files, thirteen bytecode caches and private scratch
+were removed with explicit targets; every target's absence was verified. The
+[cleanup receipt](../../../../runs/energy_relay_availability/b05_one_step_comparator_a01/cleanup.json)
+records 327,680 allocated bytes removed, minus
+8,192 allocated bytes for that receipt:
+**319,488 net allocated bytes reclaimed** in this specified cleanup footprint.
+Git retains committed source; this is not a claim that all publication or host
+storage shrank by that amount. Required scientific outputs were not deleted.
+
+Snapshot retirement remains incomplete. The B05 exact-target collector preview
+with elevated read-only process inspection refused: `process 2026 changed during
+reference inspection`. PID 2026 remains a zombie zsh (PPID 1964); no unrelated
+process or collector check was altered. No apply followed that refusal. The B05
+snapshot `3af585411ada4bde863c758a9e7ac570` remains at
+1,601,368,064 allocated bytes, and the previously blocked B04 snapshot
+`e9e05e2ac0e248e0a82486d6443843e9` remains at 1,600,032,768 bytes:
+**3,201,400,832 bytes remain** under
+`/home/fires/hmasd-wsl/.git/hmasd-launch-sources/`. Both are named leftovers, not
+successful source cleanup. The unique B05 raw and earlier necessary evidence
+remain at their canonical recorded locations; no backup, duplicate package or
+new cleanup-monitoring task was created.
