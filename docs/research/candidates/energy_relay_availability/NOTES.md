@@ -172,3 +172,46 @@ the original shield-mode exclusion is preserved; no additional charging mask is
 introduced. In the event discussion above, ongoing charging can constrain motion
 or deployment but is not itself a false legal-available bit. A recovered fault may
 still coincide with a battery cutoff, another fault, or unfavorable deployment.
+
+## 2026-09-27 — B01 engineering accepted; exact inputs prepared for native launch
+
+The bounded Implementer returned six direction-owned modules and one focused test
+file; DM read the implementation and accepted the final behavior. Shared environment,
+heuristic, shield, evaluator and other directions are unchanged. The independent
+Engineering Reviewer (`b01_engineering_review`, separate context) reports **no
+material finding remains** on the final executable content. Its substantive findings
+and disposition are preserved here:
+
+- Native launcher metadata already occupies the output directory: allow that directory
+  while refusing any pre-existing scientific artifacts.
+- Nullable phase/event diagnostics must not abort a valid world: retain defined/missing
+  counts and label incomplete diagnostic contrasts `not_comparable`.
+- Stop new submissions at the first failed/unreconciled world, cancel only unstarted
+  work and drain accepted work. Use spawned `ProcessPoolExecutor`, without worker
+  replacement or retry. Retain orphan files as hashed, explicitly unreconciled data.
+- In incomplete execution, separate completed transitions from observed partial
+  transitions, report a known lower bound and leave the actual total unknown.
+
+All were repaired. Event rows, window lengths, missing/censoring indicators and
+60-step post-recovery readings are stored in the same per-world NPZ as native
+traces. The common reference mask is only shield mode plus legal unavailability;
+the charging distinction is checked explicitly. Final runner SHA256:
+`1864761c26a6ae5d1485360920ca020735247a94751b20f0e0a272b5c54082b1`.
+
+Final DM check on the configured local scientific Python: **9 passed in 5.67 s**,
+using pytest-managed scratch. Besides synthetic protocol/statistical/failure tests,
+short seed 42/43 fixtures exercised effective S4 construction, native event timing,
+the full worker's event-array serialization and reward/hash readback, and missing
+admission. No development/holdout panel was evaluated. Earlier implementer/reviewer
+checks were 8 passed (6.03/4.97 s); compileall also passed. Only dependency
+deprecation warnings appeared. An actual OS process crash was not induced; that
+failure path is checked by synthetic scheduling and source review. Setup failures
+before scheduling retain the initial incomplete summary and native stderr rather
+than a structured setup-error field; this does not create a scientific result.
+
+Actual engineering/testing effort is nonzero; reading and implementation wall time
+was not instrumented end-to-end. The prospective publication was `dee7ae639` and
+the following source publication/launch times bound the subsequent preparation
+interval. The initial read-only destination probe showed 20 CPUs, load about 1 and
+13.1 GiB available; it is not launch admission. Keep the declared 4×1 CPU topology
+and 40–80 minute provisional range, with contention and cold setup uncertainty.
