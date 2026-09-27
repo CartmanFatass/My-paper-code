@@ -160,7 +160,8 @@ def _worker(payload: tuple[dict, str, int]) -> dict:
 
 
 def execute_bounded(executor, jobs: list[dict], workers: int, payload,
-                    on_result, submitted: list[str] | None = None) -> tuple[list[str], list[dict]]:
+                    on_result, submitted: list[str] | None = None,
+                    worker_fn=None) -> tuple[list[str], list[dict]]:
     """Never queue more than worker capacity; stop after the first technical failure."""
     remaining = iter(jobs)
     pending = {}
@@ -168,6 +169,8 @@ def execute_bounded(executor, jobs: list[dict], workers: int, payload,
         submitted = []
     errors = []
     stopped = False
+    if worker_fn is None:
+        worker_fn = _worker
 
     def submit_one():
         nonlocal stopped
@@ -177,7 +180,7 @@ def execute_bounded(executor, jobs: list[dict], workers: int, payload,
             return False
         submitted.append(job["job_key"])
         try:
-            future = executor.submit(_worker, payload(job))
+            future = executor.submit(worker_fn, payload(job))
         except BaseException as error:
             on_result({**job, "status": "unreconciled",
                        "error_type": type(error).__name__, "error": str(error)})

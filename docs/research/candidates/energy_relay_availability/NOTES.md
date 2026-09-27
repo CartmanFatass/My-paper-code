@@ -587,3 +587,49 @@ Actual retained material: compact run evidence/NOTES in main, one ~51.62 MB raw
 copy at the node locator above, and source/tests needed by the selected B02
 continuation. No cleanup blocker or B01 worker/observer remains. This cleanup
 finishes B01's accepted operation; it does not stop or restart B02 preparation.
+
+## 2026-09-27 — B02 implementation and independent engineering acceptance
+
+The Implementer returned the direction-owned `b02_controller.py`, `b02_runner.py`,
+`b02_readout.py`, `run_b02.py` and `test_b02.py`. The sole existing executable
+change is an optional top-level worker callback in the B01 bounded scheduler;
+its default resolves to the original worker at call time. DM read all new code,
+the scheduler diff and the checks. No shared environment, heuristic, shield or
+evaluator was edited. The B01 frozen source and completed evidence remain intact.
+
+Independent Engineering Reviewer `b01_engineering_review` reports **no material
+finding remains; acceptable for DM acceptance**. It verified legal-only triggers,
+one-decision response timing, fixed regular clock, simultaneous/coincident/reset
+semantics, charging/shield distinctions, terminal censoring, native trace and
+fault-hash retention, no new RNG consumption, paired readout, admission ordering
+and stop/drain/partial/orphan accounting. Implementer checks were **16 passed in
+8.13 s**; reviewer independently obtained **16 passed in 8.12 s**, with short
+nonpanel 42/43 native identity/worker serialization fixtures and normal scratch
+cleanup. Compile and whitespace checks passed. No scientific worlds were run.
+No extra unchanged test round was required for acceptance.
+
+Accepted SHA256 values: B02 controller
+`f86681175f86866f06f915bfe375e1c4a751fd57bebb81f2ea7d30b4bfc42752`,
+B02 runner `2275830fa6a6e90ff111ea4821b6ba89e5394c23396556badee3a2ebbaa0a7c2`,
+readout `ddb9511e0a1f20fb6b2b4ebb3c5f41ac8775b99ea625cdd15ab0f84b77238189`,
+entrypoint `4903b36cd033dd187fd21ee8f7dfbbee720f1d787ee2fda973423caf8c1a44fe`,
+shared direction scheduler module
+`a6fffd611d86750d7b66f98318064764762bd2dcfadb0baa8dcfc839cb252431`.
+Actual H3000 execution and an OS worker crash were not engineering-tested;
+setup failures before scheduling retain the initial incomplete summary and native
+stderr rather than a structured setup-error field. These are reported limits,
+not scientific acceptance or a retry authorization.
+
+A read-only preparation check found the remote canonical main still at B01's
+source. Fetch succeeded, but fast-forward refused because another direction's
+live `runs/energy_relay_benchmark/b02_s1_set_a01r/summary.json` would be overwritten.
+That file and the canonical branch/index were preserved, with no stash/reset or
+foreign-output staging. The maintained launch method permits unrelated prose to
+differ while the operative pause/direction/state/lead agree. Direct parsing
+confirmed the canonical and fetched published operative controls match and the
+compute configuration is unchanged. New execution will use the exact newly
+published source snapshot, with fresh published-control and actual-node resource
+checks by native admission; no stale-policy bypass is introduced. The known Git
+auto-GC warning and zsh prompt diagnostics remain outside this direction's repair
+scope. Use configured `agent-task` to invoke the native launcher; its outer command
+completion is distinct from the scientific operation's native acceptance/exit.
