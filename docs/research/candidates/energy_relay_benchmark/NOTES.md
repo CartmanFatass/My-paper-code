@@ -3373,3 +3373,117 @@ and, under §8, a multi-seed one — DM1's and Root's call. (c) The evaluation-m
 at c03–c05 (.02–.04 apart) and little at c06 (≤ .02 dev, .022 hold-out); a single mode would have
 told the same story at the endpoint. One independent scientific review of this entry follows
 (§5); its outcome is appended below.
+
+### Independent scientific review of the Stage 1 result (§5), 2026-09-27 ≈ 07:25 UTC: MATERIAL_DISSENT yes on two readings; accepted; corrections to the entry above
+
+**Review facts.** `hmasd-research-critic` (ResearchCritic body, separate context, read-only, no
+scratch files, no other DM's directory read) reconstructed the curve, the c06 gaps, the hold-out
+comparators and shifts, the phase means, the entropy blocks and the walls from the panels, progress
+rows and run records before reading the entry; all table values matched. Verdict: execution and
+bookkeeping hold (exposure kept, hold-out read once with the comparators opened only by that
+read, resume declared before c04, 17 rollouts discarded, 608 episodes with 0 failures and 0
+events, exploratory status and "957001–957032 spent" correct, six-row Pro table and the c04/c05
+misattribution correction confirmed); `MATERIAL_DISSENT: yes` on two interpretive claims that had
+reached the RESEARCH row — the risk framing and the phase locus — plus factual slips, two
+under-reads and three omissions. Before accepting, the DM re-verified every number behind the
+dissent from the raw files (this entry's figures are those recomputations; one of the review's own
+recounts differs and is noted). Resolution under §2: the dissent is accepted in full, so no
+disagreement remains for Root to resolve; the corrected wording replaces the standing in RESEARCH
+in the same commit series, and Root sees both the dissent and the resolution there. Nothing here
+authorises a run.
+
+**Corrections to the result entry (each replaces the corresponding sentence above).**
+
+1. **Risk framing — withdrawn: "a service gap at materially lower risk, not a like-for-like
+deficit" (and the RESEARCH sentence that the learner beats both planners on return cost and
+minimum battery).** The native J prices the return-constraint cost: per world
+`raw_native_J = qos_satisfaction_ratio_sum − 2 × return_constraint_cost_sum + graph_potential_delta_sum`
+exactly (the evaluator requires `lambda_return = 2.0`), and J is a declared reading. After that
+pricing H_local still leads by 353 J (SE 90; learner above in 8 of 32 worlds) det / 348 (SE 112)
+stoch on development and 336 (SE 81; 7/32) / 404 (SE 89) on hold-out. The learner's soft
+return-constraint cost is clearly below H_local's (1.2–2.4 against 56–66 per episode, worth ≈
+110–130 J of a ≈ 350 J gap) and **unresolved against H_central's** (−2.5 det / −3.3 stoch, SE
+1.6 / 1.4, learner higher in 6 / 9 of 32 worlds on development; −4.5 / −4.3, SE 3.4, 7 / 13 of 32
+on hold-out). Minimum battery is higher than H_local's by .017–.018 and than H_central's by
+.005–.007 (SE .001–.002), and no controller reached the event regime (minimum battery .087–.109,
+0 cutoff / depletion in 608 episodes). Corrected reading: the gap to H_local is a service **and J**
+deficit; the risk proxies differ in the learner's favour by amounts J already prices, and against
+H_central the return-cost difference is not resolved.
+
+2. **Phase locus — withdrawn: "the shortfall sits in the pre-entry deployment phase" and "after the
+first charger input it serves at H_local's level".** Clock-aligned decomposition at the learner's
+mean first entry (1044 steps development, 1047 hold-out; service assumed uniform within each of
+the reader's phases): development det, before that step the learner delivers .109 of its .437
+against H_central .283 and H_local .220 (deficits .174 / .111); after it .328 against .491 / .377
+(deficits .163 / .049). Hold-out: deficits .179 / .140 to H_central and .116 / .034 to H_local.
+Corrected reading: the **per-step** deficit is largest before the first shield entry; that window
+carries ≈ 70 % of the gap to H_local but only ≈ half of the gap to H_central, and in the same
+clock window after the learner's first entry it still serves ≈ .51 per step against H_central
+≈ .75 and H_local ≈ .58. The "post-input at H_local's level" sentence compared different windows
+(learner ≈ 2124–3000 against H_local 1620–3000, H_local's own service falling .70 → .54 across its
+phases) and is withdrawn. The entry's development-order figures "−.12 / −.18" for the post-input
+deficit to H_central were reversed: −.18 development, −.12 hold-out.
+
+3. **Conflict flag vs N.** The reader lists both `return_constraint_cost_sum` and
+`min_decoded_battery` in every c06 panel because it adds the battery whenever the mean difference
+is negative regardless of its SE (`read_stage1.py`, conflict block); the entry's "on the return
+cost, not on the battery tail" described the evidence, not the flag. The battery difference is
+−.001 / −.003 (SE .002), unresolved; the return-cost difference is consistent in sign (learner
+higher in 26–30 of 32 worlds), resolved on hold-out (+.253, SE .122; +.449, SE .137) and within
+noise on development (+1.16, SE .81; +.28, SE .43), worth 0.5–2.4 J against a J gain of
++285 to +353.
+
+4. **Factual slips.** Milestone shortfall .14–.16 (development .163 / .162, hold-out .138 / .160),
+not ".16–.18". Mode gap (sampled − deterministic) by checkpoint +.034, +.009, −.016, +.020,
+−.002, −.043, +.001 — not ".02–.04 apart at c03–c05" (c04 was .002); open question (c) reads
+accordingly. Zero-service-lane rollouts recounted from the raw rows: 57 of the first 100 rollouts
+(process 1) and 13 of the 100 resumed rollouts, 70 of 200 — the entry's "61 in the first 105 /
+9 in the last 95" mixed in discarded rows (61 is the count at rollout 105 of process 1, including
+rollouts 101–105 that the curve discards); the review's own recount (58 / 12) also differs from
+the raw rows.
+
+5. **Training signal.** The contrast "collection-time service rising while the development steps
+shrink" set sampled-mode collection on training worlds against deterministic development steps.
+Like for like, the sampled development panel moved +.034 (SE .019) from c04 to c06 and the
+deterministic +.031 (SE .020): no divergence is warranted. The deterministic last step (+.012,
+SE .022) rests on world 955016 (.433 at c05 → .000 at c06; +.027 without it, which would flip the
+reader's `still_improving_at_end` to true); at a paired SE ≈ .02 no single step of the curve is
+resolved, which qualifies open question (b). "Entropy below zero" is not a landmark (differential
+entropy); the fall (block means .68 → −.52) is ordinary sharpening, consistent with the two modes
+converging (.437 / .438 at c06) and the sampled boundary share rising .09 → .30.
+
+6. **Pro's table.** Row 1 also holds in part at the end: first service at 76–165 steps is 5–10×
+the planners' 14–33. Row 4 is "not measured; no sign of widespread blocking", not "absent": the
+learner's own blocked share .084 argues against widespread blocking, but comparing it with H's
+global share is what Pro's row lists as non-diagnostic, and "targets persistently not reached"
+was not measured. Rows 2, 3, 5 (with the 955016 caveat) and 6 stand.
+
+7. **Cost overrun named.** Evaluations took 1.94 h for c00–c06 (13.1, 13.8, 14.5, 14.7, 15.3,
+16.6 and 28.6 min, the last concurrent with the hold-out run) + 0.47 h hold-out + 0.34 h
+comparators = 2.75 h, against ≈ 1.4 h declared at launch (≈ 6 min per checkpoint in the first
+entry); the fit's 11.0 h equals the revised upper bound and includes 0.84 h of discarded rollouts.
+
+8. **Omissions added.** (i) World 955016 is a knife-edge world: zero-service for H_local on the
+development set too, and the learner flips between 0 and .43–.48 across checkpoints and modes;
+with 955004 it produces the c05 sampled dip. (ii) Resume boundary: process 1's discarded
+rollouts 101–117 had already risen to .230 (last seven ≈ .33) from .194 over rollouts 91–100, so
+the post-600k rise began in the original process — evidence against a resume artefact, beside the
+verified restoration of optimizers, value normaliser, dual state and sampler RNG. (iii) The
+boundary (.30–.39) and altitude-floor (≈ .47) shares of normal-mode UAV-steps (planners 0; N
+.46 / .68 on hold-out) belong beside the pre-entry deficit as an unread candidate, not as a
+residue. (iv) Hold-out wording: the hold-out is a second, unselected 32-world sample confirming
+that the development estimates are not a world-sampling artefact; agreement is expected without
+selection, and it says nothing about seed variance or distribution shift.
+
+**Supported-claims list, as corrected (replaces the one above).** With the production shield
+active in training and the SET switch on the B09 S7 recipe, one seed at 1.2 M transitions reaches
+.44 QoS/step on the development worlds and .46 / .44 on the hold-out worlds: above N by +.10–.12
+QoS and +285–353 J (23–26 of 32 worlds; return cost higher in sign, resolved only on hold-out and
+negligible in J), above the two-station package by +.06, below H_local by .15–.17 QoS and 336–404 J
+and below H_central by .32–.34 QoS and ≈ 950–1010 J; soft return-constraint cost far below H_local's
+and unresolved against H_central's; no events for any controller; the per-step deficit largest
+before the first shield entry, that window carrying ≈ 70 % of the H_local gap and ≈ half of the
+H_central gap; the milestone .60 not reached. Not supported: statements about the recipe across
+seeds, a mechanism, a plateau, or "lower risk" as compensation for the service gap. Open questions
+for Root stand as written, with (b) qualified by the 955016 caveat and (c) by the per-checkpoint
+mode gaps.
