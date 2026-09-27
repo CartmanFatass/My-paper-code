@@ -2826,3 +2826,51 @@ evaluation signal" (observable proxy: flat training QoS with rising frozen-evalu
 Reported, not read further. Fit at the read: 105 rollouts, ≈ 165 s per rollout (projection
 ≈ 9.2 h → end ≈ 03:35 UTC), 0 live lanes, runner RSS unchanged. c04 (rollout 134, ≈ 00:40 UTC),
 c05 (167) and c06 (200) follow the same procedure; the curve is read as a whole after c06.
+
+## 2026-09-26 — Stage 1 fit `b02_s1_set_a01` died at rollout 117 (702k transitions): CPython internal error inside the environment's numpy path; c03 (600k) is the last checkpoint
+
+**Facts.** The runner (pid 726070, operation d682c906) exited with code 1 at 23:45:31Z after
+rollout 117 (702,000 transitions, 234 native episodes, checkpoints c00–c03); `summary.json`
+status `INCOMPLETE`, failure `SystemError: Objects/listobject.c:2529: bad argument to internal
+function`. Traceback (stderr.log, an untracked `.log`): `run_training` → `collect_and_train`
+(training.py:130, `env.step(submitted)`) → `envs/pettingzoo/env_adapter.py:224` →
+`envs/pettingzoo/relay/energy_aware.py:606 step` → `:1191 _graph_service_potential` →
+`:1059 _access_capacity_bps` → `:1067 _spectral_efficiency`, `float(np.clip(sinr_db, -40.0,
+60.0))` → `numpy/core/fromnumeric.py:2169 clip` → `:56 _wrapit` → `SystemError`. In CPython
+3.10.21 `Objects/listobject.c:2529` is the `PyErr_BadInternalCall()` inside `PyList_AsTuple`: a C
+caller handed a non-list to a list API. That is a memory-safety fault inside the process, not a
+Python-level error; `sinr_db` is an ordinary Python float on this path (single traceback, no
+chained `TypeError`), and the same line had run some 10^8 times in this process. Node interpreter:
+Python 3.10.21, numpy 1.26.3, torch 2.7.0+cu118; the process also held CUDA and the pybind11
+geometry backend. One event in ≈ 2.6 M environment steps run by this direction (B01, Stage 0,
+four checkpoint evaluations, this fit); the evaluations ran in separate processes and none was
+running at the crash (c03's ended 23:12Z). Root cause: undetermined; classified as a rare native
+heap/refcount fault; not reproducible on demand and not pursued further. Node after the exit:
+idle, RAM 12.4 GB free, CUDA available with 7.4 GB free, disk 821 GB free; the kernel log holds
+only WSL `dxg` adapter-query ioctl failures at ≈ 23:01–23:08Z (the CPU evaluation's torch import)
+and no OOM record. Rollouts 101–117 produced no checkpoint; their rows stay in the committed
+`summary.json` (training-time sampled QoS/step over them: mean 0.230, a zero-service lane in
+8 of 17, action entropy 0.897 at rollout 117). The fit poller and its waiter exited on the
+terminal state; the c04 watcher was stopped.
+
+**Decision (DM): resume from c03, not a fresh fit.** `c03/agent.pt` (`HMASDAgent.save_model`)
+holds the whole learner state — network weights, both discoverer optimizers and the coordinator
+optimizer, the rollout-sampler RNG state and seed, the value-normaliser statistics, the safety
+dual state and the training progress — and `HMASDAgent.load_model` restores all of it (weights
+with `strict=False`; the resume path therefore checks the parameter fingerprint, the optimizer
+step counts and the sampler state after loading and refuses on any difference).
+`value_norm_update_counter` is initialised and never incremented, so no phase is lost. What a
+resumed run cannot restore are the environment world streams and the action-sampling streams
+(torch; numpy global draws with n_Z = n_z = 1): they are re-seeded with a declared seed at the
+600k boundary. A run whose learner state is restored exactly and whose random streams change at
+a rollout boundary is the same declared study in distribution; it costs ≈ 4.6 h instead of
+≈ 9.2 h and makes every later checkpoint a recovery point. A fresh 1.2 M fit was considered and
+rejected: same validity, twice the cost, no recovery point, and a curve that could not be
+compared with c00–c03 without a second reading rule. Rollouts 101–117 of the first process are
+discarded (no checkpoint among them, nothing selected on them: the resume point is the last
+checkpoint, whatever its scores). Engineering: a resume path in candidate files only
+(`training.py`, the runner, tests; the shared core untouched), engineering review, then a launch
+under a new tag from the sha-verified c03 copy in the artifacts directory; the Stage 1 reader's
+training block gains a two-run rule (first process rollouts 1–100, resumed process 101–200; the
+discarded 101–117 reported, not plotted) committed before any c04 panel exists. Declaration and
+launch record follow in the next entry.
