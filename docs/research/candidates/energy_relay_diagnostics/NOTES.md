@@ -771,3 +771,66 @@ does not justify restarting either fit; the comparison remains incomplete with n
 paired endpoint. Before another result-bearing operation, require a targeted diagnostic/reproduction
 proposal and record its incremental cost and lead decision. This is an execution decision, not a
 scientific-negative result.
+
+### L0: B02-local malformed-cache diagnostic probe
+
+The accepted snapshot imports the exact `routed_core.py` bytes recorded above, and the launch
+environment removes `PYTHONPATH`/user-site overrides; the manifest's control SHA is a descendant
+of the accepted B02 SHA. Tracked cache assignments in that source produce only `None` or a dict.
+The failure is on a second cache read in UAV-to-UAV SINR after the first read and path-loss lookup;
+the runtime boolean writer remains unknown. Do not infer a shared root cause or edit the shared
+environment file while another direction owns concurrent diagnosis.
+
+Deliverable is a direction-owned, per-environment diagnostic wrapper in
+`experiments/candidates/energy_relay_diagnostics/b02/training.py`. Before delegating to the original
+cache getter, it records bounded recent reads and requires the value to be `None` or a dict. For any
+other type, including `False` or `True`, it raises a specific invariant error before the original
+getter can return an invalid value through the channel-update active branch or subscript it. The
+error includes lane, lane seed, environment step, getter ordinal, cache type/value/identity, active
+flag, environment class/source path, and recent read history. The wrapper is installed only on the
+training environments created by this direction's B02 collector and restored with the factory in
+`finally`. Valid `None` and dict paths delegate unchanged. No fallback, cache clear/rebuild, shared
+environment edit, reward, observation, radio formula, RNG draw, or learner path change.
+
+Checks: `False`/`True` injections with the channel-update active flag both off and on,
+asserting the controlled error and its preceding-read evidence; valid `None`/dict delegation; the
+existing communication-cache checks; and independent engineering review. Budget for this L0 is zero
+result fits and zero result-node hours; use the configured local scientific runtime and report
+measured test time. This is diagnostic-only, does not restart A02, and does not authorize another
+training operation or the frozen pair. If the probe does not make the failure materially easier to
+localize, stop and preserve the concrete unknowns; price any separate diagnostic run before
+admission. A02 has no resumable endpoint.
+
+### B02-local malformed-cache probe: diagnostic result and execution boundary (2026-09-27)
+
+The new focused probe regression passed twice, most recently **2 passed in 10.34 seconds** on the
+configured local scientific interpreter. It injects both booleans with the active-cache flag on and
+off, verifies the preceding dictionary read and runtime identity fields, exercises valid `None` and
+dictionary delegation, and checks factory, feedback, getter and agent-method restoration after a
+collector exception. The initial combined run exposed a `NameError` in the new error builder; the
+builder was corrected before the final passing run. The independent engineering reviewer found no
+material issue and confirmed that the valid path delegates unchanged without RNG or transition-state
+mutation.
+
+The unchanged shared `tests/scenario7_channel_cache_test.py` had **six passes and two failures** in
+the combined run; rerunning the two failures in isolation reproduced both. Cached-versus-uncached
+reset observations fail exact equality, and the channel-cache test differs in 31 of 240 SINR cells
+with maximum absolute difference `5.68434189e-14` (maximum relative difference
+`3.77374346e-14`). No changed route or threshold crossing was measured. The shared environment file
+was not edited. This evidence does not prove a deployment consequence, but it rejects claiming
+bitwise cached/scalar equivalence and gives no basis for silently switching radio paths on a bool.
+
+The probe diagnoses the first malformed getter read, not the assignment that wrote the bool. The
+writer and why it appears after the first UAV-to-UAV cache read remain unknown; no safe recovery is
+established. Do not run either frozen arm under a fallback or treat this as a negative result.
+
+A possible next observation is one fresh, separately declared ordinary-only diagnostic from the
+published c03 checkpoint with seed `925031`, using the probe and stopping after 22 rollouts / 132k
+transitions. It would have no endpoint, masked arm or paired evaluation and would claim only whether
+the invalid read recurs with lane/step/read-history evidence. A02 required 3,371.235 seconds for 21
+completed rollouts / 126k recorded transitions; linear scaling gives about **58.8 minutes of runner
+time** for 22 rollouts. Reserve 65–75 minutes of node wall for the operation; source preparation,
+admission, review and other setup remain unmeasured. Any operation requires a fresh source SHA and
+output root. This diagnostic has not been launched or admitted; its getter probe alone still cannot
+name the writer, so add and review writer tracing first if that is the required decision-changing
+evidence.

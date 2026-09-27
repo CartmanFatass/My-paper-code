@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import json
+import sys
+from collections import deque
 from typing import Any, Callable
 
 import numpy as np
@@ -9,6 +12,122 @@ import torch
 
 from experiments.candidates.energy_relay_benchmark.b02 import training as b02_training
 from experiments.candidates.uav_service_auxiliary.b01.native import optimizer_steps
+
+
+class StepCommunicationCacheInvariantError(RuntimeError):
+    """A B02 training environment exposed a cache value outside its recorded invariant."""
+
+    def __init__(self, details: dict[str, Any]):
+        self.details = details
+        super().__init__(
+            "B02 step communication cache invariant violated: "
+            + json.dumps(details, sort_keys=True, separators=(",", ":"))
+        )
+
+
+def install_step_communication_cache_diagnostic(env, *, lane: int, seed: int):
+    """Guard one training environment's getter without changing valid cache behavior."""
+    core_env = getattr(env, "env", env)
+    getter_name = "_current_step_communication_cache"
+    original_getter = getattr(core_env, getter_name, None)
+    if not callable(original_getter):
+        raise TypeError(
+            f"lane {lane} environment lacks callable {getter_name}: {type(core_env).__name__}"
+        )
+
+    instance_dict = getattr(core_env, "__dict__", {})
+    had_instance_getter = getter_name in instance_dict
+    previous_instance_getter = instance_dict.get(getter_name)
+    getter_function = getattr(original_getter, "__func__", original_getter)
+    getter_module_name = getattr(getter_function, "__module__", None)
+    getter_module = sys.modules.get(getter_module_name)
+    getter_module_file = getattr(getter_module, "__file__", None)
+    environment_class = f"{type(core_env).__module__}.{type(core_env).__qualname__}"
+    recent_reads: deque[dict[str, Any]] = deque(maxlen=8)
+    getter_ordinal = 0
+
+    def type_name(value) -> str:
+        return f"{type(value).__module__}.{type(value).__qualname__}"
+
+    def record_read(cache, ordinal: int) -> dict[str, Any]:
+        environment_step = getattr(core_env, "current_step", None)
+        if isinstance(environment_step, (int, np.integer)):
+            environment_step = int(environment_step)
+        elif environment_step is not None:
+            environment_step = repr(environment_step)
+        active = getattr(core_env, "_channel_update_cache_active", False)
+        record = {
+            "getter_ordinal": int(ordinal),
+            "environment_step": environment_step,
+            "cache_type": None if cache is None else type_name(cache),
+            "cache_identity": None if cache is None else int(id(cache)),
+            "channel_update_cache_active": repr(active),
+        }
+        if cache is not None and not isinstance(cache, dict):
+            try:
+                rendered = repr(cache)
+            except Exception as exc:  # diagnostic must survive a hostile repr implementation
+                rendered = f"<repr raised {type(exc).__name__}: {exc}>"
+            record["cache_value"] = rendered[:160]
+        recent_reads.append(record)
+        return record
+
+    def make_error(record: dict[str, Any], *, stage: str, cause=None):
+        details: dict[str, Any] = {
+            "stage": stage,
+            "lane": int(lane),
+            "lane_seed": int(seed),
+            "environment_step": record["environment_step"],
+            "getter_ordinal": record["getter_ordinal"],
+            "cache_type": record["cache_type"],
+            "cache_value": record.get("cache_value"),
+            "cache_identity": record["cache_identity"],
+            "channel_update_cache_active": record["channel_update_cache_active"],
+            "environment_class": environment_class,
+            "getter_module": getter_module_name,
+            "getter_module_file": getter_module_file,
+            "recent_getter_reads": list(recent_reads),
+        }
+        if cause is not None:
+            details["original_exception"] = f"{type(cause).__name__}: {cause}"
+        return StepCommunicationCacheInvariantError(details)
+
+    def diagnostic_getter():
+        nonlocal getter_ordinal
+        getter_ordinal += 1
+        cache = getattr(core_env, "_step_communication_cache", None)
+        record = record_read(cache, getter_ordinal)
+        if cache is not None and not isinstance(cache, dict):
+            raise make_error(record, stage="before_original_getter")
+        try:
+            result = original_getter()
+        except Exception as exc:
+            current_cache = getattr(core_env, "_step_communication_cache", None)
+            if current_cache is not None and not isinstance(current_cache, dict):
+                current_record = record_read(current_cache, getter_ordinal)
+                raise make_error(
+                    current_record,
+                    stage="after_original_getter_exception",
+                    cause=exc,
+                ) from exc
+            raise
+        if result is not None and not isinstance(result, dict):
+            result_record = record_read(result, getter_ordinal)
+            raise make_error(
+                result_record,
+                stage="original_getter_result",
+            )
+        return result
+
+    setattr(core_env, getter_name, diagnostic_getter)
+
+    def restore():
+        if had_instance_getter:
+            setattr(core_env, getter_name, previous_instance_getter)
+        else:
+            delattr(core_env, getter_name)
+
+    return restore
 
 
 def collect_with_policy_surrogate_mask(
@@ -53,10 +172,25 @@ def collect_with_policy_surrogate_mask(
         "mode_rows": np.zeros((rollout_length, lanes, n_agents), dtype=np.bool_),
         "previous_optimizer_steps": optimizer_steps(agent),
     }
+    source_make_env = b02_training.make_env
     source_apply_feedback = b02_training.apply_feedback
     source_store_transition_batch = agent.store_transition_batch
+    cache_probe_restores = []
     had_instance_store = "store_transition_batch" in getattr(agent, "__dict__", {})
     instance_store_transition_batch = getattr(agent, "__dict__", {}).get("store_transition_batch")
+
+    def make_diagnostic_env(env_config, seed):
+        lane = len(cache_probe_restores)
+        env = source_make_env(env_config, seed)
+        try:
+            restore = install_step_communication_cache_diagnostic(
+                env, lane=lane, seed=int(seed)
+            )
+        except Exception:
+            env.close()
+            raise
+        cache_probe_restores.append(restore)
+        return env
 
     def record_feedback(*args, **kwargs):
         decision = source_apply_feedback(*args, **kwargs)
@@ -155,6 +289,7 @@ def collect_with_policy_surrogate_mask(
         capture["stored_steps"] = 0
         capture["mode_rows"] = np.zeros((rollout_length, lanes, n_agents), dtype=np.bool_)
 
+    b02_training.make_env = make_diagnostic_env
     b02_training.apply_feedback = record_feedback
     agent.store_transition_batch = store_transition_batch
     try:
@@ -169,7 +304,10 @@ def collect_with_policy_surrogate_mask(
             env_seed=int(env_seed),
         )
     finally:
+        b02_training.make_env = source_make_env
         b02_training.apply_feedback = source_apply_feedback
+        for restore in reversed(cache_probe_restores):
+            restore()
         if had_instance_store:
             agent.store_transition_batch = instance_store_transition_batch
         else:
