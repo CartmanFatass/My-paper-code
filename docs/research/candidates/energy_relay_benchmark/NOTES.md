@@ -3743,3 +3743,260 @@ the panels, reader extension for the mechanism table. Both return diffs, check o
 the DM accepts. Review plan: independent scientific review (critic, separate context) and one Pro
 question on this declaration; engineering review of L0-A; launch through `scripts/hmasd_launch.py`
 with admission only after both.
+
+## 2026-09-27 — Stage 2 (B03): independent scientific review received (MATERIAL_DISSENT: yes, "revise, not stop"); disposition and revised declaration B03 v2 — Stage 2-0 zero-fit stake sizing first, then T′ × 2 + SET+A × 2 (declared before any run; nothing launched)
+
+**Review facts.** Role `hmasd-research-critic` (Opus, high effort, read-only, separate context), on main
+`96e6a8422`, brief = the Stage 2 declaration above with the open questions of §5; the complete hand-back is
+reproduced verbatim at the end of this entry. Verdict: **MATERIAL_DISSENT: yes** against launching the
+declared 26 h two-fit batch as evidence for a MARL-algorithm claim; recommended correction **revise, not
+stop** ("the idea — grounded labels on HMASD's decoder — is a legitimate algorithmic seed and is plausibly
+novel; the design needs the stake measurement and the feature control before 26 node-hours are spent").
+Disputed statements, each checked by me against the cited code/records before disposition:
+
+- (a) "The contribution claimed … is a MARL-algorithm statement … with the intervention readings as the
+  evidence" (declaration, *What is learned and what is fixed*): T − SET mixes (i) the H_central planner's
+  output injected as an actor feature, (ii) the HMASD package, (iii) learned coordination; per-decision
+  PERMUTE and off-distribution ALL-FREE do not separate them. **Accepted.**
+- (b) "between the learned assigner and the Hungarian distance rule (H_local / H_central) at equal anchors"
+  (arm T, item 1): H_local's anchors come from pooled legal observations (`b01/heuristic.py` `plan`,
+  local branch); only H_central shares the generator. **Accepted; corrected below.**
+- (c) The λ_h rationale (arm T, item 2): `hmasd/agent.py` sums the team entropy and the eight agent
+  entropies (`entropy = (team_entropy + agent_entropies.sum(dim=1)).mean()`) while the agent policy loss is
+  a mean over batch × agents, so λ_h = .01 weighs each agent's label entropy about 8 × .01 against its
+  unit-scale surrogate. **Accepted; λ_h = .00125 (effective ≈ .01 per agent), logged.**
+- (d) "semantics-free skills did not matter (S1 record)" / "coordinators that did not matter on S1"
+  (readings; *What is learned*): `agent_count_generalization` NOTES (B01, S1, 3 fits v 3): every H6 (full
+  MI-skill HMASD) final policy exceeded every SET final policy at N4/N6/N8, lowest H6 − highest SET
+  +.012/.013/.010, unseen-count mean +.033, both arms at λ_l = .05 (no entropy confound between arms).
+  **Accepted; withdrawn.** The narrower statements stand: B12 (additivity) and B13 (constant-label
+  external bandit) show the *choice among semantics-free labels* worth about panel noise; the package
+  itself beat SET on S1.
+
+**Disposition, item by item** (finding → decision → change in v2):
+
+| # | Finding | Decision | Change |
+|---|---|---|---|
+| A | T − SET confounds anchor feature, HMASD package, learned coordination | accept | feature control **SET+A** added; primary reading T′ − SET+A; T′ − SET secondary; first-batch claim reworded (below) |
+| B | No timing leak (coordinator decides on the same refreshed state SET snapshots); relatives must be recomputed from the current own observation at acting and replay | accept (already so) | L0-A builds `rel = anchor − obs[0:2]` from the current own observation on both paths (verified in `b03/agent.py::_apply_central_input`); stated in v2 |
+| C | Nesting holds as representation; entropy bonus, co-adaptation under non-FREE inputs and argmax evaluation are caveats | accept | caveats recorded; no design change |
+| D1 | λ_h effectively 8× nominal | accept | λ_h = .00125; `avg_agent_entropy` and team entropy per rollout in the decision summary |
+| D2 | Coordinator cannot see the anchors (state + 8 obs tokens only); centroid slot order is a discontinuous function of 30 user positions | accept, minimal form | the coordinator's state token is widened by the anchor block (9 × xy = 18, plus the six centroid member counts / 30 = 6 → state token 330); the widened state is stored in the ordinary high-level replay; anchor tokens (8 entities) rejected as the larger change to attention structure |
+| D3 | Low level has no incentive to follow labels (native reward only) | accept as a named outcome | reading "low level ignores labels": end-of-commitment distance to the assigned anchor not below the distance to a uniformly random anchor, and ALL-FREE ≈ T′ |
+| D4 | Label churn from count re-ordering / k-means re-seeding | accept | mechanism statistic: anchor displacement per held label between consecutive decisions |
+| D5 | Anchor block is xy only; H flies at 100 m; altitude-floor share .47 | accept | prediction: if T′ gains service without moving the altitude-floor share, the mechanism is xy assignment only; read the share at c06 |
+| D6 | n_z = 9, n_Z = 1, k = 10, `ordinary_completed_segments = True` justified; index seeding fine | — | none |
+| E1 | Primary comparison does not test the bridge; ego one-hot gives a coordination-free identity convention | accept | SET+A (all eight anchors, no labels) is the matched control; IDENTITY labels added as a zero-fit rule (below) |
+| E2 | Per-decision PERMUTE thrashes; ALL-FREE off-distribution | accept | PERMUTE-EP (one permutation per episode); **HUNGARIAN-LABELS** and **IDENTITY-LABELS** on T′'s own c06 low level; ALL-FREE kept as a secondary reading |
+| E3 | Same-seed pair is not a coupling; fit is the unit; DM1 evaluates CPU FP32; second seed not started; c03 has no SET pair | accept | fit-level reading (lowest T′ − highest comparator) added; T′/SET+A evaluated CPU FP32 with B02's `checkpoint_eval` as DM1 does; fallback comparators declared; c03 read against 925031's c03 |
+| E4 | No rule for three seeds; CLAIM lacks the feature control | accept | three-seed rule written; CLAIM wording bound to SET+A |
+| E5 | ACG H6 > SET contradicts the S1 statement; M arm matters more | accept in part | statement withdrawn; candidate A relabelled; M stays in 2b (SET+A is the more decisive first control); first-batch claim reads "T′ vs SET+A / SET", not "grounding alone" |
+| F | Contended wall unstated; "512 per seed" wrong; rates 164/204 | accept | node-hours bound and a contended factor declared; counts corrected |
+| G | Candidate C misses `goal_conditioned_entity_aggregation` B01; candidate A misses ACG; 09-21 note's S4 ceiling and §3.3 coupling instrument unadopted; DM3/DM4 adjacency | accept / reject in part | C gains `goal_conditioned_entity_aggregation` B01 (P−O −.349, E−O −.326 J, 32/32 adverse; TRIED adverse); A → TRIED with a positive package result on S1; S4 scripted ceiling **adopted as Stage 2-0**; §3.3 coupling regression **not adopted** — it measures additivity under FSD's skill set, whereas Stage 2-0's assignment-mode contrast measures the stake of *this* label set directly; DM3 B01 (BC of H: +.05 QoS with 15 service-loss worlds) and DM4 B03 (fixed distance/hysteresis allocation) noted as adjacent, no overlap of paths or runs |
+| H | Zero-fit stake sizing before any fit; pivot if IDENTITY ≈ HUNGARIAN | accept | Stage 2-0 below, with the tree written before the run |
+
+### Stage 2-0 — zero-fit stake sizing (declared now; the only computation before the tree is read)
+
+**Question.** How much service does the *assignment* of UAVs to the 6 + 2 anchors carry on this host, beyond
+what a coordination-free rule reaches with the same anchors and the same go-to executor? This is the S4
+"scripted ceiling on label stakes" of the 2026-09-21 note, applied to the anchors T′ would use.
+
+**Design.** H_central's controller (`H1` params, `PRODUCTION_PARAMS` enter 0.00 / exit 0.05, replan 30,
+100 m, central information) run by the B01 evaluator, deterministic, on the 32 development worlds
+955001–955032, in three assignment modes applied inside the planner's target step on the same cost matrix
+(distance plus the hysteresis margin, exactly as `_assign_targets` builds it):
+
+- **HUNGARIAN** — as recorded (`_assign`, Hungarian); must reproduce Stage 1's H_central panel on these
+  worlds to the bit (same code path; any difference is an engineering fault to resolve before reading);
+- **IDENTITY** — available UAV *i* (ascending index) takes priority slot *i*; an unavailable UAV's slot
+  stays empty; no cost used;
+- **INDEPENDENT-NEAREST** — each available UAV takes its own row-wise cheapest anchor; duplicates allowed,
+  unclaimed anchors unserved.
+
+Everything else byte-identical to H_central: anchors, executor, shield, worlds, traces, diagnostics.
+Implementation is a subclass in the direction's `b03/` package plus a runner phase that reuses
+`b01/evaluation.py` unchanged; `b01/` is not edited. 96 episodes, CPU, this host (`local_linux`, 16 CPUs,
+8 workers) so that DM1's node operation is not slowed; admission through `scripts/hmasd_launch.py`.
+Cost bound **1 h wall, 0 fit**.
+
+**Readings and the pre-written tree** (paired per world, deterministic, QoS/step and native J):
+
+- S = HUNGARIAN − max(IDENTITY, INDEPENDENT-NEAREST) in paired mean QoS/step, with paired SE and the count
+  of worlds where HUNGARIAN leads the better coordination-free rule.
+- **S < .03** → the assignment choice is worth less than the panel noise at these anchors on this host: T′
+  is **not launched** as a coordination study (its expected gain over SET+A would be within noise, and any
+  T′ − SET gain would be the anchor feature). This notebook then declares a new study; the candidates on
+  record are chain-attributed credit (coordination content in the reward) and a pointer-over-users anchor
+  set; no fit is bought by this declaration.
+- **S ≥ .03** → the stake exists; the first batch below is launched, with S recorded as the ceiling the
+  learned assigner can recover over the better coordination-free rule.
+- Also recorded: which coordination-free rule is stronger (that is the behaviour SET+A can reach without
+  coordination), IDENTITY − HUNGARIAN and NEAREST − HUNGARIAN separately, and their pre-entry / post-entry
+  split by the clock-aligned decomposition.
+
+**Predictions (mine, before the run).** INDEPENDENT-NEAREST loses most: with 8 UAVs choosing among 8
+anchors independently, several anchors go unserved at every replan (uniform choice would cover ≈ 66% of
+anchors; distance correlation makes it better than uniform but far from complete), so I expect
+NEAREST − HUNGARIAN ≈ −.10 or worse. IDENTITY is geometrically arbitrary but stable, so I expect
+IDENTITY − HUNGARIAN between −.03 and −.10, with the loss concentrated after count re-orderings (slot swaps
+across the map). Hence S ≈ .03–.10 with the better free rule = IDENTITY. If instead S < .03, the honest
+reading is that on this host the Hungarian step buys little over a fixed convention and the coordination
+study is not worth 52 node-hours.
+
+### First batch (conditional on S ≥ .03) — arms, readings, rules
+
+**Arm T′ (GAS-HMASD, v2).** The declared arm T with four changes: (1) coordinator input = state ‖ anchor
+block (18 xy + 6 counts / 30 = 24; state token 330), the widened state stored for the ordinary high-level
+replay so acting and update read the same numbers; (2) λ_h = .00125 (effective ≈ .01 per agent under the
+summed formulation); (3) actor block as delivered by L0-A (assigned anchor abs x/y, rel x/y from the
+current own observation, dist, is_free; input 3,605; labels stored with the snapshot, see the L0-A record
+below); (4) decision summary gains team/agent entropy, anchor displacement per held label and the
+random-anchor distance baseline. Seeds 26092711, 26092731. Everything else as declared (B02 recipe,
+`ordinary_completed_segments = True`, n_Z = 1, n_z = 9, k = 10, no intrinsic reward, production shield,
+1.2 M, c00–c06).
+
+**Arm SET+A (feature control).** B02 SET exactly (`make_b02_config`, n_z = 1, no coordinator training,
+`ordinary_completed_segments = False`) with the actor's central input extended by the same per-slot block
+for **all eight grounded slots** in slot order (8 × [abs x, abs y, rel x, rel y, dist, is_relay] = 48 →
+input 3,647), computed from the same stored anchors and the current own observation; no label, no FiLM
+change. Seeds 26092711, 26092731. Information: SET's plus the anchors — equal grounding to T′, no
+assignment. Nesting: SET+A ⊇ SET (zero weights on the block).
+
+**Comparators.** SET: DM1's 26092711 / 26092731 c00 / c06 in both modes (their evaluations) and my 925031
+(c00 / c03 / c06). H_central, H_local, N on the same worlds (Stage 1 panels). Stage 2-0's three modes.
+Evaluation of T′ and SET+A: CPU FP32, B02 `checkpoint_eval`, the same evaluator DM1 uses, so per-world
+pairing is device-consistent; if DM1's second seed is not complete when T′'s c06 panels exist, the SET
+comparators are 925031 and DM1's 26092711 and the rule below is read at the fit level over those.
+
+**Panels per seed.** T′: c00 / c03 / c06 deterministic and sampled (6 × 32) plus, at c06 with deterministic
+low level, PERMUTE-EP, ALL-FREE, HUNGARIAN-LABELS, IDENTITY-LABELS (4 × 32) = 320 episodes. SET+A: 6 × 32 =
+192. Batch total 1,024 episodes ≈ 4.6 h at the measured 16 s per episode; bound **6 h**.
+
+**Readings and rules (fixed before any score).**
+
+- Primary: paired per-world c06 deterministic QoS/step, **T′ − SET+A** (same seed label), with paired SE
+  and positive-world count; sampled panel and native J alongside. Pass per seed label = ≥ +.05 QoS/step
+  with ≥ 20/32 worlds positive.
+- Secondary: T′ − SET (DM1 seeds, 925031), SET+A − SET (the value of the anchor feature alone), and the
+  same against H_central / H_local / N. Fit-level reading in every case: lowest T′ − highest comparator fit
+  (ACG's rule), in addition to the world-paired differences; the "same-seed" label is descriptive only.
+- Intervention (T′ c06): "learning the assignment adds value" if learned − HUNGARIAN-LABELS ≥ +.02 with ≥
+  20/32 worlds positive; "assignments matter" if learned − PERMUTE-EP ≥ +.05 with ≥ 20/32; learned −
+  IDENTITY-LABELS reported; ALL-FREE = the low level's SET-like competence (off-distribution, secondary).
+  "Low level ignores labels" (D3) is read as its own outcome.
+- Mechanism: occupancy by type, duplicate rate, stability, anchor displacement per held label, distance to
+  the assigned anchor v the random-anchor baseline, entropies over rollouts; phase decomposition and the
+  boundary / altitude-floor shares with the D5 prediction.
+- Competing prediction from the record: near-uniform labels with arbitrary argmax at evaluation (the D1
+  failure), T′ ≈ SET+A; or a package effect only, T′ − SET+A ≈ T′ − SET − (SET+A − SET) ≈ 0.
+
+**Stage 2b (pre-declared).** Both seed labels pass → third T′ seed 925031 and arm **M** (HMASD with its own
+MI skills, B09 recipe, n_Z = n_z = 6, λ_D .05, λ_d .02, B09's λ_h, k = 10, shield on, 1.2 M) × 3 seeds,
+then a `CLAIM_` under §8 with the claim "learned grounded assignment beats a flat learner at equal grounding
+(SET+A) and HMASD's semantics-free skills (M) on S7". Exactly one passes → one more T′ seed and one more
+SET+A seed (925031); then 2 of 3 pass with mean paired difference ≥ +.05 → the both-pass branch, otherwise
+the neither branch. Neither passes → recorded as not demonstrated at this exposure; new declaration
+(chain-attributed credit or pointer-over-users). No extension of a batch after its scores.
+
+**Cost (upper bounds).** Stage 2-0: 1 h CPU, 0 fit. First batch: 4 fits × 13 h = **52 node-hours** GPU on
+`wsl_4070`; serial wall ≈ 52 h after DM1's second SET fit releases the node (≈ 02:30 UTC 2026-09-28) → done
+≈ 2026-09-30 07:00 UTC; two concurrent fits only when the memory preflight passes and no other DM fit
+runs, with a contended factor 1.3 (Stage 1's process sharing CPU with evaluations ran 24% slower: 204 v
+164 s/rollout) → ≈ 34 h wall. Evaluation 6 h. Corrections to the 09-27 text: measured rates 164 / 204
+s/rollout (not 170–204); "512 episodes per seed" was the two-seed total (256 per seed).
+
+**Engineering scope.** L0-A delivered (record below). **L0-C** (next, first): Stage 2-0 assignment-mode
+subclass + runner phase + tests, no `b01/` edit. **L0-A2**: T′ deltas (coordinator anchor block and its
+replay storage, λ_h, decision summary fields) and the SET+A arm (`--arm set_a`), tests, config JSON diff.
+**L0-B**: arm-aware `checkpoint_eval`, the four label interventions, decision statistics, reader
+extension. Engineering review (`hmasd-reviewer`) of the learner path before any fit. One Pro question on
+this revised design (distinct value: the stake-sizing tree and SET+A as the "coordination at equal
+grounding" control) is sent after this entry; it does not gate Stage 2-0, which is zero-fit.
+
+### L0-A hand-back (learner core) — accepted with deviations
+
+Commit `0e329dbe8` (local main, explicit pathspec, 11 files, +1,655/−39; base `8f749c901`). Files:
+`b03/anchors.py` (H1's generator on the raw state, (9, 2) area-normalised, agreement with the H1 central
+plan within 5e-3 m on 26 live frames), `b03/configuration.py` (`OBJECT_ID`, `PROGRAMME = "GAS-shield-on-
+1.2M"`, seeds (26092711, 26092731, 925031), `make_b03_config`, `config_dict` with a `gas` record, widths),
+`b03/agent.py` (`GASSkillDiscoverer`, `GASRolloutBuffer`, `GASHMASDAgent`, `build_agent`), `b03/training.py`
+(decision log `decisions.jsonl` + per-rollout `gas_decisions` summary), `scripts/run_energy_relay_benchmark_b03.py`
+(`train`, admission before candidate imports), `b02/training.py` injection points with byte-identical
+defaults (B02 `config_dict` pinned by sha256), five test files. Tests: b01 48 + b02 27 unchanged; b03 23
+new; `energy_relay_baselines` 33 and `energy_relay_imitation` 25 (consumers of `b02/training.py`) pass;
+156 in all on the working tree, 50 (b02 + b03) against HEAD's core overlaid in scratch because the tree
+carries another writer's uncommitted `hmasd/agent.py` / `hmasd/utils.py` (opt-in shield-surrogate path,
+off by default). Config diff T v SET: `algorithm/baseline_algorithm mappo→hmasd`, `disable_high_level_training
+True→False`, `lambda_h 0→.01`, `n_z 1→9`, `ordinary_completed_segments False→True`, plus the `gas` record;
+nothing else. Deviations accepted: (1) labels stored with the snapshot (row = state 306 | anchors 18 |
+labels 8 = 332) because `update_discoverer_from_rollout` calls `_apply_central_input` with two arguments;
+the stored label equals the FiLM label at every step (refresh iff re-decided) and a mismatch raises;
+(2) `GASRolloutBuffer` for the wider row, sampler state asserted equal; (3) module swap in the constructor;
+(4) `collects_high_level_samples` unset on the config (agent attribute asserted True); (5) no `--arm`
+flag yet (L0-A2 adds `gas` / `set_a`). RNG: coordinator identical to a plain agent at the same seed;
+numpy/python states identical; the torch stream shifts after the 256 × 3,605 discoverer init (declared
+"byte-identical recipe" therefore means the config, not the draw stream — recorded). Risks carried into
+L0-A2/L0-B: CUDA path untested (autocast off, non-cache sampler); `n_Z = 1` team log-prob 0 (finite losses
+in the tiny fit); `decisions.jsonl` ≈ 90–100 MB per fit (gitignored, copy with the run); a T checkpoint
+loads only into `GASHMASDAgent` (`record.json` carries `arm`). Actor forward time on CPU indistinguishable
+from SET (3–6 ms per batch of 16, noisy). Scratch removed (66 MB, own subdirectory only).
+
+### Review text (verbatim hand-back, 2026-09-27, `hmasd-research-critic`)
+
+> **Scientific review of the B03 declaration (energy_relay_benchmark, NOTES.md:3541–3745, main 96e6a8422)**
+>
+> **Context disclosure.** I worked in a separate context, read-only. No files were written, including under /tmp, and nothing was launched. I did not see the DM or Root conversation. The runtime did preload the user auto-memory index (MEMORY.md), and it contains one-line summaries of this direction's Stage 1 result and review. I rebuilt every number used below from NOTES, JSON and code rather than from those summaries. One exchange with the advisor model sharpened items D4, E1 and E3; it does not count as independent evidence.
+>
+> ### (1) Stage 1 evidence relevant to this choice (my reconstruction)
+>
+> - One SET fit (925031; the process was resumed from c03) reaches c06 at .437 / .438 QoS/step on the development worlds and .462 / .440 on hold-out (NOTES:3246–3252). Above N by .10–.12. Below H_local by .15–.17 and 336–404 J. Below H_central by .32–.34. World-paired SEs are about .015–.03.
+> - As corrected by the review (NOTES:3413–3425), the per-step deficit is largest before the first shield entry (about step 1044). That window carries about 70% of the H_local gap but only about half of the H_central gap. After it, the learner serves about .51 against .75 (H_central) and .58 (H_local).
+> - Unread candidates, not residues: boundary share .30–.39 and altitude-floor share about .47 of normal-mode UAV-steps; the planners have 0 on both (NOTES:3472–3473).
+> - H_central, a scripted anchor-plus-Hungarian controller, reaches .774 / .781. So the 6+2 anchor generator with a perfect "go to anchor at 100 m" executor is worth about .34 QoS over the learner.
+> - Measured cost: 164 s/rollout in process 1 and 204 s in process 2, i.e. 11.0 h of fit. Evaluation ran about 16 s/episode (608 episodes in 2.75 h).
+> - One training instance only. No mechanism and no plateau are established.
+>
+> ### (2) Findings
+>
+> **A. MARL-algorithm comparison or controller engineering?** What is learned in arm T: the coordinator's label per agent (HMASD's SkillCoordinator, PPO on the k-step team return) and the low-level actor (PPO on the native reward only). What is fixed: the anchor generator — k-means over the ground-truth positions of all 30 users taken from the state (routed_core.py:4861–4898) plus two relay points on the line from the BS, i.e. H_central's planner computation (heuristic.py:223–256) — and the k = 10 clock. The actor receives that planner's output directly: 6 numbers giving its assigned anchor's absolute and relative position (NOTES:3622–3627). "No new information" (NOTES:3649) is true in the information-rights sense. But the block is a hand-coded, highly nonlinear feature that encodes the reference controller's domain knowledge. As declared, T − SET therefore mixes three things: (i) the engineered anchor feature in the actor input (controller engineering); (ii) the HMASD package itself (coordinator, FiLM labels, high-level training); (iii) learned coordination over grounded labels, which is the claimed MARL contribution. Root's caution ("改进一个 UAV 控制器本身，尚未证明改进了 MARL 学习") applies squarely. Fixing the generator does not answer it, because the fixed generator is exactly the controller knowledge being injected. T vs SET is interpretable only as "SET plus the H_central planner feature plus a learned assigner, against plain SET". T vs H is interpretable only against H_central. H_local uses anchors from pooled legal observations (heuristic.py:234–236), so "equal anchors … H_local" (NOTES:3610–3611) is false. H_central also has hysteresis, flies at a fixed 100 m and replans every 30 steps rather than 10. S0-3 showed the replan period matters little (−.005).
+>
+> **B. Information contract.** There is no timing leak. `_batched_assign_skills` decides on `states_batch[indices]` at `env_steps % k == 0 | dones | invalid` (agent.py:2197, 2212–2225). `step()` refreshes the held snapshot in the same call, after the assignment, from the same `states_batch` / `observations_batch`, for lanes with `env_timers == 0` (agent.py:3339–3352, 1326–1338). So at every decision step the coordinator's input equals SET's newly refreshed snapshot. Between decisions both the labels and the snapshot are held. The coordinator never acts on a state fresher than SET's snapshot. The CF input carries state, 8 observations and an ego one-hot (agent.py:1340–1364; configuration.py:189–192). One engineering point for L0-A. The anchor block's relative x/y and distance use the UAV's current position every step. The spec must say that stored k-means anchors are combined with relative terms recomputed from the current own observation, both when acting and in replay. Otherwise "replay reads stored values" and "relative to own position" conflict. The real contract issue is not information but injected computation (see A).
+>
+> **C. Nesting.** The claim holds as a representation statement. With label FREE, the actor input is SET's 3,599 numbers plus zeros and `is_free = 1`. FiLM of one fixed one-hot (networks.py:1449–1452) is one learned affine, as in SET with n_z = 1. The critic is identical (n_Z = 1). Caveats beyond the one the DM gives: the coordinator's entropy bonus penalises the "always FREE" member, so the regularised optimum differs from SET's; the low level trains mostly under non-FREE inputs while the coordinator is near-uniform; deterministic evaluation (argmax labels) is off the training distribution when the coordinator is near-uniform. "A deficit is a learning cost, not a representation limit" is correct. It says nothing about which learning cost, whether co-adaptation or credit.
+>
+> **D. Design choices that carry meaning.**
+> 1. **λ_h = .01 is effectively about .08 per agent — consequential.** In the ordinary coordinator update, `entropy = (team_entropy + agent_entropies.sum(dim=1)).mean()` (agent.py:6020–6021) and `entropy_loss = -lambda_h * entropy` (6105). But `agent_policy_loss = -min(...).mean()` averages over batch × agents (6057), and advantages are normalised globally (6038–6042). So each agent's label entropy carries 8× the nominal weight against its unit-scale surrogate. The "paper range .001–.1" uses the same summed formulation, so it does not support the rationale that .01 "does not dominate". Added to a weak per-agent credit signal (all agents share the team k-step return), the likely failure is near-uniform labels, with arbitrary argmax at evaluation, not a collapse to FREE. Fix: λ_h ≈ .00125 (effective .01), or state the effective value explicitly. Log `avg_agent_entropy` per rollout as a mechanism curve.
+> 2. **The coordinator cannot see the anchors — consequential.** `_build_entity_sequence` takes state plus 8 observations only (networks.py:749–754). Labels 2–7 are centroids ordered by k-means member count. That is a discontinuous function of 30 user positions, which the coordinator must recover implicitly to match UAVs to slots geometrically. A negative result would then be uninterpretable: grounding may have failed, or the pointer may simply be blind. Minimal fix: append the 8 anchors (xy, type, count) to the state token, or add them as 8 tokens. The ordinary replay path uses stored `ordinary['states']` / `['observations']` (agent.py:5688ff), so the anchors must also be stored there.
+> 3. **The low level has no incentive to follow labels.** With `disable_discriminator_rewards` the reward is `lambda_e * reward` (agent.py:4859–4861). Labels matter only through co-adaptation, which is July's `A_NO_MATERIAL_Z_DEPENDENCE` failure. This is measured by the declared distance-to-anchor statistic, so it is non-blocking. Name "the low level ignores labels" as its own outcome with its reading (distance not below that for a random anchor; ALL-FREE ≈ T).
+> 4. **Label churn.** Index-seeded k-means and count ordering are recomputed every 10 steps. Centroid slots can swap when counts tie, which is plausible with 6 centroids over 5 clusters. "Keeps the previous label" is then not target stability. Add anchor displacement per held label. Non-blocking.
+> 5. **Altitude.** The anchor block carries xy only; H flies at 100 m (heuristic.py:324). Predict and read whether T changes the .47 altitude-floor share. If T gains service without changing it, that bounds the mechanism.
+> 6. **Other choices.** n_z = 9 with 6+2 is justified: H_central reaches .78 with this generator. n_Z = 1 is fine; the team surrogate is identically zero. Engineering should check the one-class Categorical. k = 10 is the matched clock. `ordinary_completed_segments = True` is required: agent.py:513–531 refuses it without high-level training. Low-level semantics differ from SET only as B02 RECIPE_NOTES state. Index seeding is deterministic given the environment's user order; it is not a problem here.
+>
+> **E. Readings and rules.**
+> 1. **The primary comparison does not test the declared bridge.** The simple model compares independent learners with a sequential assigner at the same anchors (NOTES:3580–3585). T − SET is not that comparison. The bridge also omits agent identity. SET's input includes an ego one-hot, so a flat learner given the anchors could use the convention "UAV i → slot i" with no coordination learning at all. Relative overgeneralisation assumes symmetric agents without identity. The matched control for the claim is **SET+A**: a flat SET actor given all 8 anchors (relative xy and type), with no labels.
+> 2. **Interventions do not separate (i) from (iii).** ALL-FREE is off-distribution for a low level trained with anchors. PERMUTE is redrawn at every decision, so it causes target thrash every 10 steps. Any coordinator that learned any one-to-one matching, including a trivial one, will "beat" it, so ≥ .05 with ≥ 20/32 is a low bar. Changes: PERMUTE: one permutation per episode. Add zero-fit **HUNGARIAN** labels (H1 rule on the same anchors) and **IDENTITY** labels (agent i → slot i), both fed to T's own c06 low level. "Learned labels ≥ HUNGARIAN" would be the first evidence that learning the assignment adds anything over the fixed rule.
+> 3. **Pairing.** DM1's config differs from Stage 1's only in seed (I diffed the run config.json files). Same recipe, same 32 worlds, c00/c06 in both modes. But a same-seed pair is not a coupling. T builds different modules, so initial draws differ, and at most the training world stream is shared. The inferential unit is the fit: 2 T against 3 SET (925031 plus DM1's two). Read the lowest T − the highest SET, as ACG did, in addition to the world-paired differences. World-paired SE excludes seed variance, which is the dominant term. DM1 evaluates on CPU FP32, and Stage 1 recorded per-world CPU/CUDA disagreement. T's evaluation must use DM1's device and evaluator for per-world pairing. DM1's second seed has not started (DM1 NOTES:392–393). Declare the fallback if it does not complete. DM1 scores c00/c06 only, so T's c03 panel has no SET pair.
+> 4. **2b rule.** "Exactly one seed passes → one more T seed before deciding" has no decision rule for three seeds, which leaves a post-score choice. Write it now (e.g. 2 of 3 pass and mean ≥ .05 → the both-pass branch; otherwise the neither branch). Also, the both-pass branch's `CLAIM_` ("grounding, not hierarchy alone", read against M) still lacks a feature control (SET+A), so the claim would not be supported by that design.
+> 5. **The M arm.** ACG B01 on S1 (agent_count_generalization NOTES:1185–1201) found that full MI-skill HMASD (H6) beat the same SET recipe at 3 fits vs 3. Every H6 fit exceeded every SET fit, by +.022 / +.044 / +.045 J. So "semantics-free skills did not matter (S1 record)" (NOTES:3665, 3710–3711) is wrong at the package level. B12 (additivity) and B13 (constant-label selection) support only the narrower statement. This raises the prior that a T > SET gain is partly the HMASD package. Deferring M to 2b is acceptable under §8 only if the first batch's supported statement is worded "T vs flat SET", not "grounding". For a first batch, the feature control (SET+A) is more decisive than M. My auto-memory mentions a λ_l .05 confound in ACG; I did not verify it.
+>
+> **F. Cost and feasibility.** 13 h per fit is plausible when idle. Collection is environment-bound, one coordinator forward per 10 steps, 600 high-level samples per rollout; 200 × 204 s = 11.3 h, plus overhead. The declaration allows admission alongside DM1's second fit, which stretches both walls. That includes DM1's accepted operation, which is a Root-visible coordination effect. The Stage 1 process that shared CPU with evaluations ran 24% slower (204 vs 164 s). State a contended bound or a node-hours bound rather than "stretched, not re-estimated". Evaluation: 256 episodes per seed (the text's "per seed = 512" is the two-seed total), about 2.3 h at the measured 16 s/episode; 3 h is fine. Adding HUNGARIAN and IDENTITY is 64 more episodes per seed. Engineering risks in the storage/replay design: storing anchors and recomputed relatives through both the low-level replay (agent.py:6631ff) and the ordinary high-level replay; agent-minor ordering of the per-agent block; persistence across rollout boundaries on the ordinary path; checkpoint/resume of the held anchors (Stage 1 needed a resume). Small slip: "measured 170–204 s"; the record says 164 / 204.
+>
+> **G. Record labels.** Candidate C is missing `goal_conditioned_entity_aggregation` B01 (RESEARCH.md:808): skill-conditioned entity aggregation, P−O −.349 and E−O −.326 J, 32/32 adverse. It is directly TRIED. Candidate A is missing ACG B01's H6 > SET result (above). It should read as TRIED with a positive package result on S1, not only "RECORDED". The 09-21 note, which the DM cites, contains two unadopted instructions that bear directly on this design: §3.3 (lines 294–322): measure coupling (the B12 regression) before building the mechanism; S4 (lines 529–541): the first observation should be scripted assignment plus go-to as "a ceiling on label stakes". The declaration adopts neither. FSD B13 (the constant-label external bandit, "selection … worth about the panel noise") is the closest record for "does the choice of label matter". Adjacent current work worth a sentence: DM3 `energy_relay_imitation` B01: BC of the H controller gave +.05 QoS but 15 service-loss worlds, so learning go-to-anchor behaviour is not free. DM4 `energy_relay_availability`: fixed distance/hysteresis target allocation. R51 AMDT, gnn_hmasd, LCAC and chain-attributed rewards are labelled correctly as far as I checked.
+>
+> **H. What would change my recommendation.** Do not launch T as a coordination study if the zero-fit stake sizing below shows IDENTITY ≈ HUNGARIAN on H_central (say within .03). The sequential assigner would then have little to add on this host with these anchors, and any T − SET gain would be the anchor feature, i.e. controller engineering. Pivot at that point, for example to chain-attributed credit, where the coordination content is in the reward. If HUNGARIAN ≫ IDENTITY and INDEPENDENT-NEAREST, change the first batch to T (coordinator sees anchors, corrected λ_h) × 2 plus SET+A × 1–2, with the extended interventions. That is about 4 fits and about 52 h serial.
+>
+> ### (3) MATERIAL_DISSENT: yes
+>
+> This is dissent against launching the declared 26 h, two-fit batch as evidence for the owner's MARL-algorithm claim. Disputed statements and their evidence: (a) "The contribution claimed … is a MARL-algorithm statement … with the intervention readings as the evidence that the joint assignment, not the low level alone, carries it" (NOTES:3708–3712) — T − SET confounds the injected H_central planner feature, the HMASD package and learned coordination; ALL-FREE is off-distribution and per-decision PERMUTE induces thrash, so neither separates them; ACG's H6 > SET on S1 is a record of a package effect without grounding; the ego one-hot in SET gives a coordination-free identity convention that the bridge ignores. (b) "comparison … between the learned assigner and the Hungarian distance rule (H_local / H_central) at equal anchors" (NOTES:3610–3611): H_local's anchors come from pooled legal observations (heuristic.py:234–236); only H_central's match. (c) The λ_h rationale (NOTES:3616–3618): the effective per-agent coefficient is 8 × .01 (agent.py:6020–6021, 6057, 6105). (d) "semantics-free skills did not matter (S1 record)" / "coordinators that did not matter on S1" (NOTES:3665, 3710–3711): contradicted at package level by ACG NOTES:1185–1201. Recommended correction: **revise, not stop.** The idea (grounded labels on HMASD's decoder) is a legitimate algorithmic seed and is plausibly novel. The design needs the stake measurement and the feature control before 26 node-hours are spent.
+>
+> ### (4) Recommended text-level changes (minimal)
+>
+> 1. Add a zero-fit Stage 2-0 before any fit: CPU, no conflict with DM1's GPU, B01 evaluator; H_central on 955001–955032, deterministic, in three assignment modes on the same 6+2 anchors — HUNGARIAN (as is), IDENTITY (UAV i → slot i; unavailable UAVs leave their slot empty), INDEPENDENT-NEAREST (duplicates allowed); 96 episodes, about 30–45 min. Pre-write the tree: IDENTITY within .03 of HUNGARIAN → do not launch T as a coordination study; otherwise → include SET+A in the first batch. 2. Arm T changes: coordinator input gains the 8 anchors (to the state token or as tokens), stored for high-level replay; λ_h = .00125, or a statement of the per-agent effective value; anchor relatives recomputed from the current own observation at acting and in replay. 3. Add SET+A (flat SET with all 8 anchors per actor, no labels) × 1–2 seeds; primary reading T − SET+A (coordination at equal grounding); T − SET stays secondary. 4. Interventions: PERMUTE one permutation per episode; add HUNGARIAN and IDENTITY labels on T's c06 low level; "learned ≥ HUNGARIAN" is the reading for "learning the assignment adds value". 5. Reading rules: fit-level reading against all SET fits (lowest T − highest SET); evaluation device and evaluator equal to DM1's; fallback if DM1's second seed is absent; a decision rule for the three-seed case in 2b; "same-seed pair" relabelled as a matched seed label, not a coupled unit. 6. Wording: delete "H_local" from "equal anchors"; qualify the S1 record with ACG B01's H6 > SET; add goal_conditioned_entity_aggregation B01 to candidate C; cite the 09-21 note's S4 scripted-ceiling instruction and §3.3 coupling instrument as adopted (Stage 2-0) or rejected with a reason; "512 per seed" → 256; add the altitude-floor prediction; if M stays in 2b, the first batch's supported claim reads "T vs flat SET / SET+A", not "grounding".
+>
+> ### (5) Unresolved facts I could not verify
+>
+> Whether the per-agent advantage signal (shared team k-step return minus agent value heads) is strong enough for 8 label choices — plausible but untested; the likeliest learnability wall besides λ_h. The ACG λ_l confound (from memory only), and whether it weakens H6 > SET. The S7 generator's "five clusters, one remote", and how often centroid-count ties cause slot swaps. Node CPU count, and actual contended walls with two concurrent fits. Whether the environment's training world stream is identical across same-seed T and SET fits. The layout of state entries 216–305 (only offsets 0–215, which the anchor generator needs, were checked against `_get_state`, routed_core.py:4836–4913; the declaration's offsets match). The literature claims (MAPT, Ahilan & Dayan) were not re-read.
+
+*DM notes on the verbatim text:* the ACG λ_l point is resolved above (both arms λ_l = .05, ACG NOTES line 1362); the
+"NOTES:NNNN" line references are to this notebook at `96e6a8422`; the review's item (1) numbers were checked
+against the Stage 1 entries and match.
