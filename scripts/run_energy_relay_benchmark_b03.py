@@ -6,6 +6,11 @@ shield during training, checkpoints c00..c06 by B02's rule, decisions.jsonl per 
 ``--resume-from checkpoints/cNN`` finishes the same fit from a saved checkpoint into a fresh
 ``--out`` (optionally pinned to the source launch with ``--resume-source-sha``).  Checkpoint
 evaluation is a separate task (not here).
+
+``stake-sizing``: Stage 2-0, zero fit.  H_central (H1, production shield) on 955001-955032 under
+the three assignment modes hungarian / identity / independent_nearest (96 deterministic CPU
+episodes); worlds, modes, heuristic and shield are constants of ``b03/stake_sizing.py``.
+Outputs under ``<out>/stake-sizing/``.
 """
 
 from __future__ import annotations
@@ -34,7 +39,14 @@ def parse_args(argv=None):
                        help="checkpoints/c{ii} directory (agent.pt + record.json) of this recipe")
     train.add_argument("--resume-source-sha", default=None,
                        help="launch SHA the resumed checkpoint's record.json must carry")
+    stake = commands.add_parser("stake-sizing")
+    stake.add_argument("--out", type=Path, required=True)
+    stake.add_argument("--launch-sha", required=True)
+    stake.add_argument("--workers", type=int, default=8)
+    stake.add_argument("--threads", type=int, default=2)
     args = parser.parse_args(argv)
+    if args.command != "train":
+        return args
     if args.resume_source_sha is not None and args.resume_from is None:
         parser.error("--resume-source-sha requires --resume-from")
     return args
@@ -49,6 +61,13 @@ def main(argv=None):
     if args.launch_sha != admission["sha"]:
         raise RuntimeError("launch SHA does not match admission")
     argv_record = sys.argv if argv is None else argv
+    if args.command == "stake-sizing":
+        from experiments.candidates.energy_relay_benchmark.b03.stake_sizing import (
+            run_stake_sizing,
+        )
+
+        return run_stake_sizing(out=args.out, launch_sha=args.launch_sha, workers=args.workers,
+                                threads=args.threads, argv=argv_record)
     from experiments.candidates.energy_relay_benchmark.b03.configuration import (
         TRAINING_SEEDS as DECLARED, production_spec,
     )
