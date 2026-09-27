@@ -3537,3 +3537,209 @@ the repository). No repository or node bulk was deleted, so net allocated usage 
 recorded: `b01_ref_a01` on the node (6 MB, superseded B01 attempt, never committed), the three
 reader/resume follow-ups (schedule-flag refusal in `read_resume_checkpoint`, value-normaliser
 comparison in `resumed_agent`, a hold-out reader test beyond the dry run) — not done, no consumer.
+
+## 2026-09-27 — Stage 2 declaration (B03): grounded assignment skills on HMASD's coordinator against the flat SET learner, at matched information and exposure (declared before any run; no launch until the §5 review and the engineering review)
+
+**Owner constraint (2026-09-27).** "应该有一定的创新在算法上 这不是一个工程项目": the next study must be an
+algorithmic contribution (MARL algorithm or network), not more benchmarking or controller engineering.
+This entry declares the study, its lineage labels, the information contract, the readings and their
+rules, the pre-declared continuation, the cost and the engineering scope. Nothing here has run.
+
+### Candidates weighed, with their record labels
+
+| Candidate | Record | Decision |
+|---|---|---|
+| A. HMASD-k10 × 3 seeds against SET (the first entry's P3 suite) | RECORDED (this notebook); a package benchmark, no new algorithm | not the headline; kept as the mechanism control (arm M, Stage 2b) |
+| C. Entity / permutation-invariant actor encoders | TRIED on S1 twice with adverse or unestablished polarity: `local_observation_encoding` DENSE J45 .202 against ORIGINAL .458 at 1.95× wall; ACG set encoders, joint claim not established (RESEARCH rows); July R54 supervised full-set reference failed its access gate. No S7 record | declined as the headline; a later step if the coordinator matters and the low level is the limit |
+| E. Learned counterfactual credit | TRIED: LCAC B01–B03 on a five-UAV categorical toy, PARK with adverse B03 (Q − V −.018) | declined |
+| Chain-attributed rewards (difference-reward family; the environment knows each user's serving UAV and its backhaul path) | NEW to the record as a scheme; low literature novelty (difference rewards) | reserve |
+| **Grounded assignment skills on HMASD's coordinator** (09-21 note, seed S4) | RECORDED 2026-09-21 as a seed; entity-pointer actions TRIED only in July's R51 AMDT toy, which never reached reward ("the lesson is about reward access, not about pointers"); `gnn_hmasd/` holds a dormant GCN role assigner (SERVER/RELAY, never run on S7); HMASD's sequential decoding is the paper's own duplicate-avoidance rationale. No S7 record | **selected** |
+
+### Question
+
+On the frozen S7-S2/H3000 host with unchanged slot allocation and the production shield, at exposure
+1.2 M and the same central-snapshot information every k = 10 steps: when HMASD's coordinator assigns
+**deployment anchors** instead of semantics-free skills, does the hierarchy learn joint deployment that
+the flat SET learner does not — higher complete service (QoS/step and native J) on the 32 development
+worlds, located mainly in the pre-entry phase — and do the learned assignments matter by intervention?
+
+### MARL structure and the simple-model bridge
+
+Relay service is conjunctive: a cluster's users are served only if a server UAV sits over them *and*
+a chain of relays connects it to the base station. Under a shared team reward with independent
+per-agent exploration, a jointly correct configuration of m agents is visited with probability of
+order p^m, and greedy updates settle into miscoordinated equilibria — the climbing/penalty-game
+family (Claus & Boutilier 1998; Matignon et al. 2012, "relative overgeneralization"; scout-retrieved,
+secondary citation). HMASD's decoder chooses agent i's label conditioned on the labels already chosen
+for agents 1..i−1, so with grounded labels the coordinator's problem is a matching over a small anchor
+set whose consequences are immediate and dense (QoS and the graph potential respond within a few
+decisions), and the k-step commitment makes teammates predictable (functions ii and iii of the 09-21
+note §3.2). The flat learner must find the same conjunction in the 8 × 4-dimensional continuous joint
+action space from a 3,599-dimensional input.
+
+Simple model (derivation only, no run): two agents, two anchors {relay, server}, payoff 1 iff one
+agent holds each anchor. Two independent learners with the shared payoff have two coordinated optima
+and two miscoordinated joint actions of equal individual appeal; under uniform exploration a correct
+joint draw has probability 1/2 and, with more agents and anchors, the correct-configuration
+probability falls geometrically while every agent's own marginal remains flat. A sequential assigner
+faces a four-arm bandit with two optimal arms. What the toy omits: motion dynamics, energy and
+charging, moving clusters, partial observability, and endogenous learning of the low level; the UAV
+study measures exactly those.
+
+Stage 1 evidence used: the SET learner's shortfall against H_local (.15–.17 QoS/step) has ≈ 70 % of
+its mass in the pre-entry window (≈ first 1,000 steps), the normal-mode boundary share is .30–.39
+and the altitude-floor share ≈ .47 (planners 0), and the deficit is the policy's own, not an
+evaluation artefact (Stage 0). Root's caution stands: "改进一个 UAV 控制器本身，尚未证明改进了 MARL 学习" —
+so the anchor generator is fixed and shared with the H references, and the learned objects are named
+below.
+
+### Arm T — GAS-HMASD ("grounded assignment skills"), the treatment
+
+1. **Anchor set A(s)**, computed from the central snapshot state at every team decision (env step
+   % 10 == 0 or lane reset — the cadence at which SET already receives the snapshot): six service
+   centroids by the B01 heuristic's own k-means (`b01/heuristic.py::estimator_kmeans`, seeds
+   `np.linspace`, 30 iterations) over the 30 user xy read from the state (raw values; normalizers are
+   off on this host), and two relay points at 1/3 and 2/3 of the segment from the BS xy (state) to
+   the centroid mean. Deterministic slot order: relay points by distance from the BS ascending
+   (labels 0–1), centroids by descending user count, ties by centroid index (labels 2–7); label 8 =
+   FREE (no anchor, ordinary local control). Hence `n_z = 9`, `n_Z = 1` (team skill degenerate).
+   The anchors are stored with the snapshot so acting and replay read the same numbers; replay never
+   recomputes k-means. Rationale for 6 + 2: H1, the selected reference, uses `n_service = 6`,
+   `n_relay = 2` on this host (`HeuristicParams`; the S7 generator draws five user clusters, one
+   remote); the learner and the references therefore share one anchor generator, and the comparison
+   is between learners at equal grounding, and between the learned assigner and the Hungarian
+   distance rule (H_local / H_central) at equal anchors.
+2. **Coordinator**: HMASD's `SkillCoordinator` / `SkillDecoder` unchanged (state token + eight
+   observation tokens → Z, then z¹..z⁸ sequentially), trained by the existing high-level PPO on the
+   k-step team return: `disable_high_level_training = False` (SET: True), high-level buffer 600
+   decisions per rollout as the config already computes, `lr_coordinator` 1e-4 as configured, skill
+   entropy `lambda_h = .01` (paper range .001–.1; nine labels summed over eight agents; chosen so the
+   entropy bonus does not dominate small per-decision return differences — B12's signal-to-noise
+   lesson — and recorded as a design choice). No discriminators and no intrinsic reward:
+   `disable_discriminator_training = disable_discriminator_rewards = True` exactly as SET, so the
+   low-level reward is the native reward (`hmasd/agent.py`: with the flag, `env_component =
+   lambda_e * reward`).
+3. **Low level**: the SET actor unchanged in architecture (MLP 256 → FiLM on the label one-hot,
+   now 9 wide → GRU 256 → tanh-Gaussian, 4 actions: velocity xyz and dock request) with the CF
+   central input (own obs 365 + state 306 + 8 × 365 + ego one-hot 8 = 3,599) plus an **anchor
+   block** of six numbers appended at the single application point: assigned anchor absolute
+   x/area, y/area, relative x/area, y/area (from the UAV's own position), distance/area, `is_free`;
+   FREE gives zeros with `is_free = 1`. Actor input width 3,605. **Nesting**: with every label FREE the
+   actor's input equals SET's up to the constant flag and the FiLM of one label, so SET's policy
+   class is a member of T's; at initialisation T is not SET (the coordinator is near-uniform over
+   nine labels), so a deficit of T against SET is a learning cost, not a representation limit.
+4. **Recipe otherwise byte-identical to B02**: 2 lanes × rollout 3000, 200 rollouts = 1.2 M
+   transitions, PPO 15 epochs × 4 minibatches, lr 1e-4, production shield (enter 0.00, exit 0.05)
+   in training, checkpoints c00–c06 by B02's rule, `ordinary_completed_segments = True` (B09's native
+   value; SET had to use False because of the mappo switch — at production sizes both lanes end at
+   every rollout boundary, so the two paths differ only in four numpy draws, see B02 `RECIPE_NOTES`).
+5. **Seeds**: 26092711 and 26092731 — the two seeds of DM1's clean SET fits (`energy_relay_baselines`
+   B01, same `make_b02_config`, c00/c06 evaluated in both modes on the same 32 development worlds),
+   so each T seed has a same-seed flat pair without asking DM1 for anything. My 925031 SET fit is a
+   resumed process and stays a third, unpaired reference.
+
+### Information contract per arm
+
+| Arm | Actor information | Coordinator | Critic | Reward | Shield |
+|---|---|---|---|---|---|
+| T (GAS-HMASD) | own obs 365 + central snapshot (state 306, 8 obs, ego) every 10 steps + anchor block (6) | state + 8 obs at each decision, executed centrally once per k steps as HMASD does; anchors are a function of the same state | central state 306 (n_Z = 1) | native, λ_e = 1 | production, training and evaluation |
+| SET (DM1 seeds, my seed) | own obs + the same central snapshot every 10 steps | none (labels constant) | central state 306 | native | production |
+| H_local / H_central | legal observations pooled every 30 steps / ground truth | Hungarian distance rule on the same 6 + 2 anchors | — | — | production |
+
+No new information enters T: the anchor block is a deterministic function of numbers SET already
+receives. The coordinator's centralised step is HMASD's own execution structure (paper §: one
+centralised step in k).
+
+### Evaluation and readings (fixed rule, written before any score)
+
+Fixed-policy evaluation, zero updates, 955001–955032 only (957001–957032 is spent): checkpoints c00,
+c03, c06, deterministic (argmax labels, mean actions) and one sampled panel (both levels sampled
+under the evaluator's `sample_seed` rule) → 6 panels × 32 episodes per seed. At c06 two zero-fit
+interventions with deterministic low level: **PERMUTE** (the decoded labels permuted uniformly among
+the eight agents at each decision) and **ALL-FREE** (every label forced to FREE) → 2 × 32 episodes per
+seed.
+
+- **Primary**: paired per-world c06 QoS/step and native J, T − SET(same seed), deterministic and
+  sampled, with paired SE and the count of positive worlds; the same against H_local, H_central and N
+  on these worlds. Prediction: T − SET ≥ +.05 QoS/step on both seeds. Competing prediction (from the
+  record: coordinators that did not matter on S1; HMASD instability, 26 of 35 runs): the coordinator
+  collapses to FREE or to a constant assignment, T ≈ SET or below.
+- **Phase**: the clock-aligned pre-entry decomposition exactly as corrected by the Stage 1 review, and
+  the boundary / altitude-floor shares. Prediction: most of any gain lies in the pre-entry window.
+- **Mechanism** (from a per-decision training log and the evaluation traces): label occupancy per
+  type (relay / service / FREE), duplicate rate (agents sharing a non-FREE anchor), assignment
+  stability (share of decisions that keep the previous label, per agent), mean distance to the
+  assigned anchor at the end of a commitment; their curves over rollouts. Prediction at c06: relay
+  occupancy ≈ 2/8 of non-FREE labels and a duplicate rate near zero.
+- **Intervention**: "assignments matter" if the policy's own labels beat PERMUTE by ≥ .05 QoS/step
+  with ≥ 20/32 worlds positive (paired); ALL-FREE measures the low level's SET-like competence and
+  whether the gain needs the coordinator at execution time.
+- Exploratory under §8 (two training instances per arm); no recipe claim from this batch.
+
+### Stage 2b — pre-declared continuation, bought only by the rule below
+
+If both seeds show a paired deterministic c06 difference T − SET ≥ +.05 QoS/step with ≥ 20/32 worlds
+positive: a third T seed (925031) and arm **M** (HMASD with its own MI skills: B09 recipe, n_Z = n_z
+= 6, λ_D .05, λ_d .02, B09's λ_h, k = 10, shield on, 1.2 M) × 3 seeds, then a `CLAIM_` note under §8
+with the claim "grounding, not hierarchy alone" read against M. If exactly one seed passes: one more
+T seed (925031) before deciding, no M. If neither passes: the mechanism is recorded as not
+demonstrated at this exposure and this notebook chooses between chain-attributed credit and a
+pointer-over-users anchor set as a new declaration. No extension of this batch after its scores.
+
+### Cost
+
+- Fits: 2 (T × 2 seeds at 1.2 M). Measured SET rate 170–204 s per rollout; the coordinator adds a
+  bounded fraction (collection is environment-dominated: probe 67.7 of 107 s; one coordinator forward
+  per 10 steps; high-level PPO on 600 samples per rollout). Declared upper bound **13 h per fit,
+  26 h for the batch**, serial. Node: `wsl_4070` CUDA; DM1's second SET seed occupies it until ≈
+  02:30 UTC 2026-09-28; the first T fit is admitted when the memory preflight passes, concurrent with
+  at most one other fit (walls then stretch and are recorded, not re-estimated).
+- Evaluation: 6 panels × 32 + 2 × 32 intervention episodes per seed = 512 episodes ≈ 2.3 h at the
+  Stage 1 panel rate; declared upper bound **3 h** (Stage 1 overran its evaluation estimate; the
+  review named it).
+- Engineering: two bounded implementer tasks (learner; evaluation and readers), one engineering
+  review of the learner path (numerics, RNG, replay identity, checkpoint semantics).
+
+### What is learned and what is fixed (for the owner's engineering concern)
+
+Learned: which UAV takes which anchor and when to hold or switch (the coordinator, by PPO on the
+k-step team return, sequentially over agents); motion and dock control under energy pressure given
+the assignment (the low level, by PPO on the native reward). Fixed: the anchor generator (also the H
+references' generator) and the k = 10 clock. The contribution claimed, if the readings support it, is
+a MARL-algorithm statement — skills grounded in state-derived entities make HMASD's sequential
+coordination learnable and useful on a dense, conjunctive task where semantics-free skills did not
+matter (S1 record) and a flat information-matched learner falls short — with the intervention
+readings as the evidence that the joint assignment, not the low level alone, carries it.
+
+### Literature (bounded scout, 2026-09-27, ≈ 10 queries; labels against that search only)
+
+Closest relatives found: MAPT (arXiv 2511.17435), an autoregressive pointer transformer over
+entities for vehicle dispatch that emits the joint action directly (no k-step hierarchy, no
+separately trained low level); Feudal Multi-Agent Hierarchies (Ahilan & Dayan 2019, abstract only:
+manager sends subgoals to simultaneously acting workers; grounding and decoding order unverified);
+ROMA / RODE (latent or action-cluster roles, independent selection); HAVEN (intrinsic-reward manager,
+not assignment). No UAV relay / backhaul work with k-means or Hungarian anchors inside a hierarchical
+RL learner was found. Within this bounded search "HMASD's sequential coordinator over state-grounded
+anchor labels with a team-reward-only low level on a UAV relay host" has no direct match; that is a
+bounded-search absence, not a publication claim. Coordination-failure citations: Claus & Boutilier
+1998 (climbing / penalty games), Matignon et al. 2012 (relative overgeneralization), both via
+secondary citation; primary passages to be verified before any paper text.
+
+### Engineering scope (L0 summaries; full notes under `temp/directions/energy_relay_benchmark/`)
+
+L0-A (learner, `experiments/candidates/energy_relay_benchmark/b03/`): anchor generator from the raw
+state (reusing `b01/heuristic.py::estimator_kmeans` and the state offsets: UAV xyz 24, loads 8, users
+30 × 6 from offset 32, BS 3 at 212); an `HMASDAgent` subclass that computes and stores anchors with
+each central snapshot, appends the per-agent anchor block to the CF central input in acting and
+replay from stored values, and logs decisions per rollout; a `SkillDiscoverer` subclass for the
+widened input; `build_agent` in the direction directory (as ACG did), no edit to `hmasd/`, `envs/` or
+the launch kernel; a `--arm gas` runner reusing B02's training loop, checkpoint rule and records;
+tests: SET path byte-identical when the arm is off, all-FREE input equals SET input plus the flag,
+anchor order deterministic (same state → same anchors; the references' index-seeded k-means is not
+permutation-invariant and T inherits that), replay input equals acting input, `n_Z = 1` with high-level training on trains the coordinator (nonzero coordinator optimizer
+steps), tiny end-to-end fit with checkpoint and resume. L0-B (evaluation and readers): checkpoint
+evaluation aware of the arm from `record.json`, PERMUTE and ALL-FREE modes, decision statistics in
+the panels, reader extension for the mechanism table. Both return diffs, check output and deviations;
+the DM accepts. Review plan: independent scientific review (critic, separate context) and one Pro
+question on this declaration; engineering review of L0-A; launch through `scripts/hmasd_launch.py`
+with admission only after both.
