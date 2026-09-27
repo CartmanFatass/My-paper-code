@@ -1,0 +1,663 @@
+{
+  "artifacts": {
+    "config.json": {
+      "bytes": 24630,
+      "sha256": "8840ccdab1b81f77c741874ead5050aa9f89adba84f1676cc055695ea8e30c65"
+    },
+    "perworld.json": {
+      "bytes": 683031,
+      "sha256": "785a72d75120493f32e7451746cf81b6ad2fad4c87d8769b446409b7a8b3fc28"
+    },
+    "summary.json": {
+      "bytes": 140798,
+      "sha256": "f3516d4997ee976755b0c2bff3a6c632f6a348a4aaac63f0696c78bd678ba25e"
+    }
+  },
+  "incomplete_raw": {},
+  "launch_sha": "8f638f44b1d0565ef62027d5f467a113be6a730f",
+  "orphan_raw": [],
+  "partial": {},
+  "raw": {
+    "fault_off/H_central/965001": {
+      "bytes": 414481,
+      "path": "raw/fault_off_H_central_965001.npz",
+      "sha256": "d319fbeaa94e8f4ffeea3358a816970882c273968fe991a41df036630a3d37c6"
+    },
+    "fault_off/H_central/965002": {
+      "bytes": 385768,
+      "path": "raw/fault_off_H_central_965002.npz",
+      "sha256": "941b8c1ba9a658ff1f68724a3261f2da86b6d068f529cedb8c41706ee9b6736e"
+    },
+    "fault_off/H_central/965003": {
+      "bytes": 410965,
+      "path": "raw/fault_off_H_central_965003.npz",
+      "sha256": "654fa12482ad0423730da5e513e2f60bda0dfb0a8ce52d0978677e1a8e72bcdb"
+    },
+    "fault_off/H_central/965004": {
+      "bytes": 412700,
+      "path": "raw/fault_off_H_central_965004.npz",
+      "sha256": "2cb77934c65ca5264003fe13db2c3810bdd8363ad25c2ba9101c940f43702b2d"
+    },
+    "fault_off/H_central/965005": {
+      "bytes": 412969,
+      "path": "raw/fault_off_H_central_965005.npz",
+      "sha256": "893e9e8c9de1c4d154c50e598604660070ac5d396f3e8a97f397673b1549f4a3"
+    },
+    "fault_off/H_central/965006": {
+      "bytes": 395493,
+      "path": "raw/fault_off_H_central_965006.npz",
+      "sha256": "e8993d7dc9461612e9bfb4fe27e788502cde567ff1d64525321581981e8912ba"
+    },
+    "fault_off/H_central/965007": {
+      "bytes": 395416,
+      "path": "raw/fault_off_H_central_965007.npz",
+      "sha256": "5384d8089b143a044a87924f3317997b7c960d362f9077da012d911bec922930"
+    },
+    "fault_off/H_central/965008": {
+      "bytes": 398834,
+      "path": "raw/fault_off_H_central_965008.npz",
+      "sha256": "d32f9825c2fe5142bef14052d744a064308177a0d848c32ec4ee5ec888579093"
+    },
+    "fault_off/H_central/965009": {
+      "bytes": 387917,
+      "path": "raw/fault_off_H_central_965009.npz",
+      "sha256": "a29b0d5dd8c763834bb2207f0a2307bea7298860e4fcecebd34f62f399a2e2ff"
+    },
+    "fault_off/H_central/965010": {
+      "bytes": 378321,
+      "path": "raw/fault_off_H_central_965010.npz",
+      "sha256": "c873b9724acb19f638ec45c7a00cca99c8b041fca7385671bfc250c78c9b2fec"
+    },
+    "fault_off/H_central/965011": {
+      "bytes": 390655,
+      "path": "raw/fault_off_H_central_965011.npz",
+      "sha256": "1c4d77ed585d9424fe0d535a8840fc209a3f637daec930800b39de153b29cd7c"
+    },
+    "fault_off/H_central/965012": {
+      "bytes": 397132,
+      "path": "raw/fault_off_H_central_965012.npz",
+      "sha256": "4d0fba64abc888442936791099394708ee6156c5984be2b19cdb4503ca25ac55"
+    },
+    "fault_off/H_central/965013": {
+      "bytes": 410367,
+      "path": "raw/fault_off_H_central_965013.npz",
+      "sha256": "a67008fea9206f39fb0a447be83ec55098a5cbacbd9bb19874b10b1f020aefd1"
+    },
+    "fault_off/H_central/965014": {
+      "bytes": 412406,
+      "path": "raw/fault_off_H_central_965014.npz",
+      "sha256": "1cec5aff5382d7617fee6845581bd14bc59267963424351801d6c34f2d356bc9"
+    },
+    "fault_off/H_central/965015": {
+      "bytes": 411293,
+      "path": "raw/fault_off_H_central_965015.npz",
+      "sha256": "b3f642ed16a444d59fc3b97ef3aa3de7f3df161d397ac670f2ec3b48c84f7692"
+    },
+    "fault_off/H_central/965016": {
+      "bytes": 407430,
+      "path": "raw/fault_off_H_central_965016.npz",
+      "sha256": "001e62b3675ae1d3c5a11791233799f3606039160b9822dfdaf62de43e090394"
+    },
+    "fault_off/H_central/965017": {
+      "bytes": 417869,
+      "path": "raw/fault_off_H_central_965017.npz",
+      "sha256": "59ce033c4fcea200e4e58b8cb03d229f3ae90b9b1f821841ffa23e4a338bc7a1"
+    },
+    "fault_off/H_central/965018": {
+      "bytes": 412291,
+      "path": "raw/fault_off_H_central_965018.npz",
+      "sha256": "3dc7ae9c1055041e137e9155e0de0ac691cdef30016b713a10946f5ae3bfeb2d"
+    },
+    "fault_off/H_central/965019": {
+      "bytes": 405325,
+      "path": "raw/fault_off_H_central_965019.npz",
+      "sha256": "f5d0a0a193c78ea05bccd7d3d63ed33d2171369e03240fea523b89169f048fb8"
+    },
+    "fault_off/H_central/965020": {
+      "bytes": 396687,
+      "path": "raw/fault_off_H_central_965020.npz",
+      "sha256": "b060e9cc9db2fe8cc335ed34ed9dd25cc2697f05ddc9f171389de2e7397cdfa2"
+    },
+    "fault_off/H_central/965021": {
+      "bytes": 405628,
+      "path": "raw/fault_off_H_central_965021.npz",
+      "sha256": "44409e93afec8b3f6008653ed1d98c69b1cbed17ee1c1b5501c6b321b0a35a9b"
+    },
+    "fault_off/H_central/965022": {
+      "bytes": 407389,
+      "path": "raw/fault_off_H_central_965022.npz",
+      "sha256": "5a9addd2f67fc1c839593b18be52a4af25bcf3a69ccdad7998ababeb3a60a679"
+    },
+    "fault_off/H_central/965023": {
+      "bytes": 401450,
+      "path": "raw/fault_off_H_central_965023.npz",
+      "sha256": "9958d97883dd2bad26e8867518b5196f1f2b80f9e76dd6a21a98bdf63af84b15"
+    },
+    "fault_off/H_central/965024": {
+      "bytes": 392855,
+      "path": "raw/fault_off_H_central_965024.npz",
+      "sha256": "db458bf4d97366228ad99b8855730642bcd1e888489e3fec62227d5ce4ec1e87"
+    },
+    "fault_off/H_central/965025": {
+      "bytes": 390143,
+      "path": "raw/fault_off_H_central_965025.npz",
+      "sha256": "158ddaa2ca97a6da9e170ee3f63e3ee0d69376adcad0fe76d93a45320d53e266"
+    },
+    "fault_off/H_central/965026": {
+      "bytes": 388652,
+      "path": "raw/fault_off_H_central_965026.npz",
+      "sha256": "85c6ba428693af2bc4e8de505ade1346435689afa8d85660759527b05efbcba5"
+    },
+    "fault_off/H_central/965027": {
+      "bytes": 411303,
+      "path": "raw/fault_off_H_central_965027.npz",
+      "sha256": "9d79a42fe29c3b4edb1f1b1b9ac15ca5fe1a420f08f5bd8ef28dc105024e056d"
+    },
+    "fault_off/H_central/965028": {
+      "bytes": 429970,
+      "path": "raw/fault_off_H_central_965028.npz",
+      "sha256": "8aa71761910c7167f9a81184f6f82549fa26e0a1881ff3c0f95c80395628cef1"
+    },
+    "fault_off/H_central/965029": {
+      "bytes": 371301,
+      "path": "raw/fault_off_H_central_965029.npz",
+      "sha256": "4edbceab15213913fab1ac1951aaf54172d68556cd479b02c2518708e909e1f0"
+    },
+    "fault_off/H_central/965030": {
+      "bytes": 415222,
+      "path": "raw/fault_off_H_central_965030.npz",
+      "sha256": "bc0a29ef4ce4212e46ee2d669311efd19ec6f6fbf795050b643a03596cc84cc4"
+    },
+    "fault_off/H_central/965031": {
+      "bytes": 423620,
+      "path": "raw/fault_off_H_central_965031.npz",
+      "sha256": "b9bcabcf61e11b5cae78588ca60f2af816c45172f8a23e70245dcff38dac8500"
+    },
+    "fault_off/H_central/965032": {
+      "bytes": 389623,
+      "path": "raw/fault_off_H_central_965032.npz",
+      "sha256": "c301135cc2d8ef62a2c0ca35bd55ea54295fedc6d1443064b1e229a7191d29b0"
+    },
+    "fault_off/H_local/965001": {
+      "bytes": 379213,
+      "path": "raw/fault_off_H_local_965001.npz",
+      "sha256": "22f35fccd4ebb1024269eb69774f97198b2883457a4f2ac6aaf527e3a4966cd8"
+    },
+    "fault_off/H_local/965002": {
+      "bytes": 386460,
+      "path": "raw/fault_off_H_local_965002.npz",
+      "sha256": "504797a219b15693752ef3c1c6a702e8149feb5d6a1c6fcd05c340912cded1ac"
+    },
+    "fault_off/H_local/965003": {
+      "bytes": 392397,
+      "path": "raw/fault_off_H_local_965003.npz",
+      "sha256": "135ac32db28239f27fcca33b410940585a06afb198e1702a26ccb0fc7fae42ac"
+    },
+    "fault_off/H_local/965004": {
+      "bytes": 393241,
+      "path": "raw/fault_off_H_local_965004.npz",
+      "sha256": "a033f4359ea477a8a8ea8a579d8364348187a503ea31965eb687eddb44e418f9"
+    },
+    "fault_off/H_local/965005": {
+      "bytes": 415999,
+      "path": "raw/fault_off_H_local_965005.npz",
+      "sha256": "c75c6ba97ce5fa33b55c7454e7a3297f002da2192749c9055c90e377ed3bd655"
+    },
+    "fault_off/H_local/965006": {
+      "bytes": 421237,
+      "path": "raw/fault_off_H_local_965006.npz",
+      "sha256": "791673177358478be72ba8be5e78034f24f6cebaa259c4240fb581f172af96f4"
+    },
+    "fault_off/H_local/965007": {
+      "bytes": 417067,
+      "path": "raw/fault_off_H_local_965007.npz",
+      "sha256": "fe471b3c5a6b12f92af9ef775250c52932d44c7c4f65bdb4f1aeba24024de6c7"
+    },
+    "fault_off/H_local/965008": {
+      "bytes": 404161,
+      "path": "raw/fault_off_H_local_965008.npz",
+      "sha256": "e5bf1e7fcb2d30dd9dc97e7fe7719996fcf723c739f866089b6fa740ad730d72"
+    },
+    "fault_off/H_local/965009": {
+      "bytes": 343297,
+      "path": "raw/fault_off_H_local_965009.npz",
+      "sha256": "c72422835597a5beb27b416759916833d92e20fec1da5f0639f1700902f7d7f6"
+    },
+    "fault_off/H_local/965010": {
+      "bytes": 394491,
+      "path": "raw/fault_off_H_local_965010.npz",
+      "sha256": "8998fcc8f5089449972992cea49dddb2a2c353c6a73f416d345c8fee0c98e3c5"
+    },
+    "fault_off/H_local/965011": {
+      "bytes": 409606,
+      "path": "raw/fault_off_H_local_965011.npz",
+      "sha256": "bd80ab44432de6eee7f41922c61eeb96ae63d2f9455755e5a41dc4499d7b86ce"
+    },
+    "fault_off/H_local/965012": {
+      "bytes": 377313,
+      "path": "raw/fault_off_H_local_965012.npz",
+      "sha256": "0a295177a91d1b30e2005cfaf31b18e112e6f0d5688e3dd1e926b6f7e3f78b6b"
+    },
+    "fault_off/H_local/965013": {
+      "bytes": 433240,
+      "path": "raw/fault_off_H_local_965013.npz",
+      "sha256": "50e6751dd6c474575bf828d1af368d47913758a21c8cb4609ac1ea083a4305d5"
+    },
+    "fault_off/H_local/965014": {
+      "bytes": 405336,
+      "path": "raw/fault_off_H_local_965014.npz",
+      "sha256": "9d86831664e6ab0e449576d0724094a3ad16f2253200b9a41ea0a2e7c1c21aa8"
+    },
+    "fault_off/H_local/965015": {
+      "bytes": 413335,
+      "path": "raw/fault_off_H_local_965015.npz",
+      "sha256": "7f9929b0c79f64acb7693d3e287b36b8a30be338c3a04bdcb231276a36805248"
+    },
+    "fault_off/H_local/965016": {
+      "bytes": 413864,
+      "path": "raw/fault_off_H_local_965016.npz",
+      "sha256": "c34bfecf6b6dbc716bf52ecbaca042bb291f20b67c6caa089c19434e670dee0c"
+    },
+    "fault_off/H_local/965017": {
+      "bytes": 362375,
+      "path": "raw/fault_off_H_local_965017.npz",
+      "sha256": "a115bcf7f3a859439e8761d92e8a1b20b3d67d5d0a63b6fcad56abe16c47ab98"
+    },
+    "fault_off/H_local/965018": {
+      "bytes": 400536,
+      "path": "raw/fault_off_H_local_965018.npz",
+      "sha256": "6a2a1396106341a8efd0431bf854f69186f5a17f32bd5d46164199d19d7b0229"
+    },
+    "fault_off/H_local/965019": {
+      "bytes": 422473,
+      "path": "raw/fault_off_H_local_965019.npz",
+      "sha256": "f9c7f592b086441c28e85747939547dec98ef791f16cdcfdbf9010822d42fc21"
+    },
+    "fault_off/H_local/965020": {
+      "bytes": 411647,
+      "path": "raw/fault_off_H_local_965020.npz",
+      "sha256": "0998e03c9e57e3f5c98305b5baa70d626776674b13efc384b4075d1f9a08137b"
+    },
+    "fault_off/H_local/965021": {
+      "bytes": 337546,
+      "path": "raw/fault_off_H_local_965021.npz",
+      "sha256": "8094d443f09851d700c3a751ad7b0652e56ae953d30d95308fd1a9d2ac6a3ff5"
+    },
+    "fault_off/H_local/965022": {
+      "bytes": 441402,
+      "path": "raw/fault_off_H_local_965022.npz",
+      "sha256": "ced50affcd48b9cbf42d8c4a47309cbf6fd462be4ba7efb995b1d395b3413864"
+    },
+    "fault_off/H_local/965023": {
+      "bytes": 404374,
+      "path": "raw/fault_off_H_local_965023.npz",
+      "sha256": "c75fb7dfedcef592b50844d575f68c87a07da90143c9c52d6ecdb698441992dc"
+    },
+    "fault_off/H_local/965024": {
+      "bytes": 414551,
+      "path": "raw/fault_off_H_local_965024.npz",
+      "sha256": "b4514b6bea2e71b7c378f6e33dafd0dc748e035c4b92ab04a661861233826d62"
+    },
+    "fault_off/H_local/965025": {
+      "bytes": 366950,
+      "path": "raw/fault_off_H_local_965025.npz",
+      "sha256": "b3a83ca094a37c9b993b28d8f51cb93c0bf3c2cd2c596d062283b89c222da011"
+    },
+    "fault_off/H_local/965026": {
+      "bytes": 386402,
+      "path": "raw/fault_off_H_local_965026.npz",
+      "sha256": "49368506225ad4c4fd53c253f058a70b83a9a4e41a1981445518386890916ae9"
+    },
+    "fault_off/H_local/965027": {
+      "bytes": 410450,
+      "path": "raw/fault_off_H_local_965027.npz",
+      "sha256": "741df5961e688b3363e3d3c3565dc1d3ca45154ee269c5303691e53aba386d65"
+    },
+    "fault_off/H_local/965028": {
+      "bytes": 432573,
+      "path": "raw/fault_off_H_local_965028.npz",
+      "sha256": "4f92923b7f444b7a9ffc6cfda2a05fdb5bf923d050174847d364192994808217"
+    },
+    "fault_off/H_local/965029": {
+      "bytes": 399344,
+      "path": "raw/fault_off_H_local_965029.npz",
+      "sha256": "aa52b429c81cc1cd67db5ed784d78af6c923acbfb45cef59bd6bd80b601dff7d"
+    },
+    "fault_off/H_local/965030": {
+      "bytes": 405960,
+      "path": "raw/fault_off_H_local_965030.npz",
+      "sha256": "b94db7852a25e7fb726e826e78afdd362a5deb2a08465bb5cc1b59c8495b5215"
+    },
+    "fault_off/H_local/965031": {
+      "bytes": 391988,
+      "path": "raw/fault_off_H_local_965031.npz",
+      "sha256": "c05d2646b63fb87032b9028f33839fbec47a48d6d3c3752ae61327bf452d86ef"
+    },
+    "fault_off/H_local/965032": {
+      "bytes": 383955,
+      "path": "raw/fault_off_H_local_965032.npz",
+      "sha256": "45eeefe4c8582939dbd6719cbf7cd82c088e634e1f16904e46905861a4e966e6"
+    },
+    "fault_on/H_central/966001": {
+      "bytes": 401951,
+      "path": "raw/fault_on_H_central_966001.npz",
+      "sha256": "77f96de3c600ba5a8b70ec418aa82134b60861d180c05c974a47d6cc1132d9a8"
+    },
+    "fault_on/H_central/966002": {
+      "bytes": 407868,
+      "path": "raw/fault_on_H_central_966002.npz",
+      "sha256": "15513d6b3b5ed40d81edb9f9116346b185a6cc1f1400483b196927c7dd3f7cd5"
+    },
+    "fault_on/H_central/966003": {
+      "bytes": 431795,
+      "path": "raw/fault_on_H_central_966003.npz",
+      "sha256": "98ff52ab786e108bb785d926eecb26700643353364204a88d98f5b7a7f86e10e"
+    },
+    "fault_on/H_central/966004": {
+      "bytes": 412393,
+      "path": "raw/fault_on_H_central_966004.npz",
+      "sha256": "d321d34822f6120ff6ea948715541c1551b70c8932afa84f10c7972c09d330c8"
+    },
+    "fault_on/H_central/966005": {
+      "bytes": 408386,
+      "path": "raw/fault_on_H_central_966005.npz",
+      "sha256": "6ed17d19392a0e5d836287d853d6f502902192b64ce24340f35ebff005fe73a8"
+    },
+    "fault_on/H_central/966006": {
+      "bytes": 400540,
+      "path": "raw/fault_on_H_central_966006.npz",
+      "sha256": "2c039293004cf8dd9d25e1e1a0119cdfdbb5adf9cff8f43cf8b5d0f2d0ca9e2e"
+    },
+    "fault_on/H_central/966007": {
+      "bytes": 386792,
+      "path": "raw/fault_on_H_central_966007.npz",
+      "sha256": "68c48f26d4fbef9437b7e243444c85d50f5cf816b045583bdbb8d647a745ffc8"
+    },
+    "fault_on/H_central/966008": {
+      "bytes": 406012,
+      "path": "raw/fault_on_H_central_966008.npz",
+      "sha256": "1cb2038b506b0407f72d94bd5f07111985995ad212c4c2edc8ba30e466122bfa"
+    },
+    "fault_on/H_central/966009": {
+      "bytes": 409710,
+      "path": "raw/fault_on_H_central_966009.npz",
+      "sha256": "c91693cf969b800b7d2f1a07778dcc0ed2fa299404217ea5e3bc92f73817f0e4"
+    },
+    "fault_on/H_central/966010": {
+      "bytes": 398924,
+      "path": "raw/fault_on_H_central_966010.npz",
+      "sha256": "a67d68b75cb2b08790487916bf93f3a636310b88549fde680fb1945889c3d64b"
+    },
+    "fault_on/H_central/966011": {
+      "bytes": 387627,
+      "path": "raw/fault_on_H_central_966011.npz",
+      "sha256": "f4a7a25fb8ed2719b7d0410a02bffdbfbb24c324e62d5193895ae5b3c126fe74"
+    },
+    "fault_on/H_central/966012": {
+      "bytes": 412676,
+      "path": "raw/fault_on_H_central_966012.npz",
+      "sha256": "b5735e4203e91985a0ec978ada948f4bed3670b3248b5c3c98063eb107dcd6ad"
+    },
+    "fault_on/H_central/966013": {
+      "bytes": 423633,
+      "path": "raw/fault_on_H_central_966013.npz",
+      "sha256": "b48087b74fddfe9e54c13fc5ae15bfb39e08e9ee63336d38600b095ec97a0e1f"
+    },
+    "fault_on/H_central/966014": {
+      "bytes": 428489,
+      "path": "raw/fault_on_H_central_966014.npz",
+      "sha256": "7f1cc3cb96f19bb66d6bcd427e604b887eb4e1c2d35a178369ad2d0ea15167c1"
+    },
+    "fault_on/H_central/966015": {
+      "bytes": 419527,
+      "path": "raw/fault_on_H_central_966015.npz",
+      "sha256": "ca9d16ceb41d03e1a10f57c019ce7594ecc0cfcdf9c4baa6b6d2051f48c800ba"
+    },
+    "fault_on/H_central/966016": {
+      "bytes": 416741,
+      "path": "raw/fault_on_H_central_966016.npz",
+      "sha256": "f5b1d4a356d73e400a419c8f1ff8c619b0bdc6658b0d5c3daf8543ba622d8a36"
+    },
+    "fault_on/H_central/966017": {
+      "bytes": 395685,
+      "path": "raw/fault_on_H_central_966017.npz",
+      "sha256": "f879de85f59b08e07c6e89e315c9ccac0b322b5182add1e4a6dc540cc841dac3"
+    },
+    "fault_on/H_central/966018": {
+      "bytes": 425829,
+      "path": "raw/fault_on_H_central_966018.npz",
+      "sha256": "75919bf8ec2e937fdc966bcaff6d6f81861dee1160d6b2e8004109ecdcb35789"
+    },
+    "fault_on/H_central/966019": {
+      "bytes": 388358,
+      "path": "raw/fault_on_H_central_966019.npz",
+      "sha256": "ed458785177d46f91b0bebfd21dd64c67106285d0c129b4bb57d28d3d8adb1c3"
+    },
+    "fault_on/H_central/966020": {
+      "bytes": 390971,
+      "path": "raw/fault_on_H_central_966020.npz",
+      "sha256": "2fae5d5aa39086ad1eb089b1a7c7d411a3f495b16cb429b03c6f2598445eed29"
+    },
+    "fault_on/H_central/966021": {
+      "bytes": 434959,
+      "path": "raw/fault_on_H_central_966021.npz",
+      "sha256": "dcf49d0d97502853651c88853153bb8c3674483fb80f1134de9eb283090f5fb8"
+    },
+    "fault_on/H_central/966022": {
+      "bytes": 405865,
+      "path": "raw/fault_on_H_central_966022.npz",
+      "sha256": "f3570e9b0dcadd01b6cdefb8886bbda2ceed46bb0db5e61e0a4b6df81cfebb7b"
+    },
+    "fault_on/H_central/966023": {
+      "bytes": 412484,
+      "path": "raw/fault_on_H_central_966023.npz",
+      "sha256": "db8423f70f560addea697e0babd8141d48e0a732cc76681a1963c1dde98a57b1"
+    },
+    "fault_on/H_central/966024": {
+      "bytes": 405179,
+      "path": "raw/fault_on_H_central_966024.npz",
+      "sha256": "e4ca3c8dc35c82b6817415345fbf781ff3ce3e488d0c06ce0586a717dd0db6cd"
+    },
+    "fault_on/H_central/966025": {
+      "bytes": 423973,
+      "path": "raw/fault_on_H_central_966025.npz",
+      "sha256": "200bd4620a8405338a98a45d2b7d5ceb6a5dafbdbd3e91e26fc82255b51bb141"
+    },
+    "fault_on/H_central/966026": {
+      "bytes": 389755,
+      "path": "raw/fault_on_H_central_966026.npz",
+      "sha256": "1ad3bde0831199fe144076c84f96becc6b9e9fb69564f95aaa728e79778705a0"
+    },
+    "fault_on/H_central/966027": {
+      "bytes": 403712,
+      "path": "raw/fault_on_H_central_966027.npz",
+      "sha256": "62b84017d85fc19902dc80f0a92779b5ed5df277615bc11444ab155afae91aa5"
+    },
+    "fault_on/H_central/966028": {
+      "bytes": 425178,
+      "path": "raw/fault_on_H_central_966028.npz",
+      "sha256": "93c756779f8bdf06e3af32759eb797084cf0396fe03ec9b11b727aacf264d8b1"
+    },
+    "fault_on/H_central/966029": {
+      "bytes": 386140,
+      "path": "raw/fault_on_H_central_966029.npz",
+      "sha256": "f396a7619b8447feaf6cf99db134915cc2f5d0bd327006d2726c232d8867826f"
+    },
+    "fault_on/H_central/966030": {
+      "bytes": 424422,
+      "path": "raw/fault_on_H_central_966030.npz",
+      "sha256": "04c7f003b62c01989f45b6c6d3c0651159eca71b70e8ccfffa9c85a75669a280"
+    },
+    "fault_on/H_central/966031": {
+      "bytes": 394325,
+      "path": "raw/fault_on_H_central_966031.npz",
+      "sha256": "c8d78769f5e9ed3cbbc531b4a92cbcf8343fb364c28783a59df01e0bce117ab2"
+    },
+    "fault_on/H_central/966032": {
+      "bytes": 414551,
+      "path": "raw/fault_on_H_central_966032.npz",
+      "sha256": "17ac5d809e1c796510eca812c25f3626e222fc45fd016518953584cd6568f6c2"
+    },
+    "fault_on/H_local/966001": {
+      "bytes": 418728,
+      "path": "raw/fault_on_H_local_966001.npz",
+      "sha256": "ad4b2a9e64ca3da9b374b4c3088f6488b3564dfc1dc0d9a494431924fe18820c"
+    },
+    "fault_on/H_local/966002": {
+      "bytes": 402474,
+      "path": "raw/fault_on_H_local_966002.npz",
+      "sha256": "5f4e15afa09def22dcbeaa6ae721c33a2fe63add8a92c99234bef94a7ab8fc7b"
+    },
+    "fault_on/H_local/966003": {
+      "bytes": 437757,
+      "path": "raw/fault_on_H_local_966003.npz",
+      "sha256": "fbeb373cdd6ca2be494d79e7b359d2f7f9422d661d0dce9f60ec463bd7551924"
+    },
+    "fault_on/H_local/966004": {
+      "bytes": 397780,
+      "path": "raw/fault_on_H_local_966004.npz",
+      "sha256": "230ccbe56c98edf2bcc6c584449b852afe6d9d60fdf99c21ba090d4cf290962c"
+    },
+    "fault_on/H_local/966005": {
+      "bytes": 395086,
+      "path": "raw/fault_on_H_local_966005.npz",
+      "sha256": "5ec341ea5a6d3628922a5e1a584bc3fb45a7a3737d3d842e20106eff37308bc5"
+    },
+    "fault_on/H_local/966006": {
+      "bytes": 395852,
+      "path": "raw/fault_on_H_local_966006.npz",
+      "sha256": "8f9fbc3b2be41d3a10ea475a0fc6c5a6cff634a756f5db5a76346d0588cfb547"
+    },
+    "fault_on/H_local/966007": {
+      "bytes": 401732,
+      "path": "raw/fault_on_H_local_966007.npz",
+      "sha256": "3013e91e135680e7fac32727c803e52ed9f72048521abbf7828366ea344b7a06"
+    },
+    "fault_on/H_local/966008": {
+      "bytes": 418970,
+      "path": "raw/fault_on_H_local_966008.npz",
+      "sha256": "48d7d8d92f919536d2c2ddad294dfc6d554284b7787ea18ae0e79ae12acd9deb"
+    },
+    "fault_on/H_local/966009": {
+      "bytes": 406955,
+      "path": "raw/fault_on_H_local_966009.npz",
+      "sha256": "fce47e2957c1b8c91a6c0f6fb1b8f811c12595054d724d4fd162a75d0cf32c60"
+    },
+    "fault_on/H_local/966010": {
+      "bytes": 408416,
+      "path": "raw/fault_on_H_local_966010.npz",
+      "sha256": "969df4c4638ad32c8ba7d27d24bda657b851dd51fa0f7e51c8897254791c7a33"
+    },
+    "fault_on/H_local/966011": {
+      "bytes": 388563,
+      "path": "raw/fault_on_H_local_966011.npz",
+      "sha256": "c201a16bbfddd0804c0f49431b970528916ee57adb2296ebc7aa9f8691ec099c"
+    },
+    "fault_on/H_local/966012": {
+      "bytes": 393739,
+      "path": "raw/fault_on_H_local_966012.npz",
+      "sha256": "f57cc26b2a574a7e06e51bf88f7d8086c25eac52e231749101cdc3c33bc3c7cd"
+    },
+    "fault_on/H_local/966013": {
+      "bytes": 418274,
+      "path": "raw/fault_on_H_local_966013.npz",
+      "sha256": "4f7f9a674e52f52ed1160e3d0941791b6e88671a40ad4f75b06ef62618741210"
+    },
+    "fault_on/H_local/966014": {
+      "bytes": 404373,
+      "path": "raw/fault_on_H_local_966014.npz",
+      "sha256": "76ae02246d976c4c9e3b6ca8f4b609aebde98c7c0fd66e4faaddd90add1683e5"
+    },
+    "fault_on/H_local/966015": {
+      "bytes": 418990,
+      "path": "raw/fault_on_H_local_966015.npz",
+      "sha256": "b68fa7ce0220624a90687865d9cf3ca835369c9ee45fc711b4cb532d060b3e39"
+    },
+    "fault_on/H_local/966016": {
+      "bytes": 384906,
+      "path": "raw/fault_on_H_local_966016.npz",
+      "sha256": "f6188a463d1850f52fc1c44b8cef4d447ac443db79a4b63805132ca0289faafe"
+    },
+    "fault_on/H_local/966017": {
+      "bytes": 413725,
+      "path": "raw/fault_on_H_local_966017.npz",
+      "sha256": "393255bf6ead78b4dc9bab369a3eea51ddf6e66acb60c8a03e24d6e0784477c7"
+    },
+    "fault_on/H_local/966018": {
+      "bytes": 385910,
+      "path": "raw/fault_on_H_local_966018.npz",
+      "sha256": "28e8f03688394bb6b59c74d0c12f1ec07e5b72b1774cf4a87a769e498e5c7d5e"
+    },
+    "fault_on/H_local/966019": {
+      "bytes": 394157,
+      "path": "raw/fault_on_H_local_966019.npz",
+      "sha256": "bf456a7af116cf6f25facfd4643284a7e80fb7f1f14769f9dd103c6c177dede9"
+    },
+    "fault_on/H_local/966020": {
+      "bytes": 408732,
+      "path": "raw/fault_on_H_local_966020.npz",
+      "sha256": "4409b175b215108aa362f637a777840005ec807893dd03c75d6f3c0036a3ffb3"
+    },
+    "fault_on/H_local/966021": {
+      "bytes": 431268,
+      "path": "raw/fault_on_H_local_966021.npz",
+      "sha256": "9ab9254e032516b18cc82b3555173f0ceb9aa7487af13ae81baa354eb52d5c80"
+    },
+    "fault_on/H_local/966022": {
+      "bytes": 384720,
+      "path": "raw/fault_on_H_local_966022.npz",
+      "sha256": "a1e1ce043e4466dc51813aea8f9200b7ccf26813e8a3615f4306649b8a695aff"
+    },
+    "fault_on/H_local/966023": {
+      "bytes": 412572,
+      "path": "raw/fault_on_H_local_966023.npz",
+      "sha256": "6eba24d7d25b48bf4b9ec71cb7c0c36286871dbcc49562d4bb6874c5499f1fae"
+    },
+    "fault_on/H_local/966024": {
+      "bytes": 402466,
+      "path": "raw/fault_on_H_local_966024.npz",
+      "sha256": "98181af988feed48ff85e34156779e27c848a4aba9a2b5ecf0d9574595d7671f"
+    },
+    "fault_on/H_local/966025": {
+      "bytes": 393397,
+      "path": "raw/fault_on_H_local_966025.npz",
+      "sha256": "32e2cb319d291fe480bf1903ce331da13e7d3a4635224419125cef731d5c01f9"
+    },
+    "fault_on/H_local/966026": {
+      "bytes": 368947,
+      "path": "raw/fault_on_H_local_966026.npz",
+      "sha256": "f4680ae76146b3cc2463781d88553e4ac8fd6a2aa362616ca1958e1e4698ee34"
+    },
+    "fault_on/H_local/966027": {
+      "bytes": 406599,
+      "path": "raw/fault_on_H_local_966027.npz",
+      "sha256": "a8ce471e82be423ee8a6004607edbf33f4780923e5ac391dd0516c7b6f443a47"
+    },
+    "fault_on/H_local/966028": {
+      "bytes": 414599,
+      "path": "raw/fault_on_H_local_966028.npz",
+      "sha256": "0a23076ddf154fd8e7be9e77156d5b08efa85b53446331225d4842305929d350"
+    },
+    "fault_on/H_local/966029": {
+      "bytes": 398878,
+      "path": "raw/fault_on_H_local_966029.npz",
+      "sha256": "ecbfbc7d02b4c2f420c4f62f2a52ca016a16ac4da11642257a155ec84642467b"
+    },
+    "fault_on/H_local/966030": {
+      "bytes": 419058,
+      "path": "raw/fault_on_H_local_966030.npz",
+      "sha256": "c361be65f78c9f7bda0c4c98f014e70cadf0e734f193d84e2ac380234342bfbd"
+    },
+    "fault_on/H_local/966031": {
+      "bytes": 356485,
+      "path": "raw/fault_on_H_local_966031.npz",
+      "sha256": "e6b059442927268d30de2ddf8419a667ffac990fe54b95c0b7e8d570fde6f41c"
+    },
+    "fault_on/H_local/966032": {
+      "bytes": 409179,
+      "path": "raw/fault_on_H_local_966032.npz",
+      "sha256": "6b97aee9b5b84e1065c220611a4c7aa412cb009a3f56cfac77241b1a918252d4"
+    }
+  },
+  "storage_bytes": 52470454
+}

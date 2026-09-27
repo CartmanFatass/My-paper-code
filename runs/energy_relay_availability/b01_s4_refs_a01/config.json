@@ -1,0 +1,1058 @@
+{
+  "batch": "B01",
+  "config": {
+    "energy_stage": "S4",
+    "episode_length": 3000,
+    "experiment_preset": "S7-S4",
+    "k": 10,
+    "lambda_return": 2.0,
+    "max_steps": 3000,
+    "num_envs": 1,
+    "use_obsnorm": false,
+    "use_statenorm": false
+  },
+  "controllers": {
+    "H_central": {
+      "controller_information": "central-positions",
+      "cruise_mps": 30.0,
+      "dedup_tolerance_m": 0.5,
+      "height_m": 100.0,
+      "horizontal_speed_mps": 30.0,
+      "information": "central",
+      "kmeans_iterations": 30,
+      "n_relay": 2,
+      "n_service": 6,
+      "n_uavs": 8,
+      "replan_period": 30,
+      "search_radius_m": 1000.0,
+      "switch_margin_m": 300.0,
+      "time_step_s": 1.0,
+      "unobserved": "station-ring",
+      "vertical_cap_mps": 5.0,
+      "vertical_speed_mps": 5.0
+    },
+    "H_local": {
+      "controller_information": "legal-observation pooled central planner (station-1 ring search prior)",
+      "cruise_mps": 30.0,
+      "dedup_tolerance_m": 0.5,
+      "height_m": 100.0,
+      "horizontal_speed_mps": 30.0,
+      "information": "local",
+      "kmeans_iterations": 30,
+      "n_relay": 2,
+      "n_service": 6,
+      "n_uavs": 8,
+      "replan_period": 30,
+      "search_radius_m": 1000.0,
+      "switch_margin_m": 300.0,
+      "time_step_s": 1.0,
+      "unobserved": "station-ring",
+      "vertical_cap_mps": 5.0,
+      "vertical_speed_mps": 5.0
+    }
+  },
+  "direction": "energy_relay_availability",
+  "effective_raw": {
+    "fault_off": {
+      "adapter_shape": [
+        8,
+        365
+      ],
+      "battery_capacity_wh": 160.0,
+      "charging_station_capacity": [
+        1.0,
+        1.0
+      ],
+      "cluster_migration_speed": 10.0,
+      "cluster_pause_time_range": [
+        0,
+        3
+      ],
+      "energy_stage": "S4",
+      "failure_enabled": false,
+      "max_steps": 3000,
+      "n_charging_stations": 2,
+      "n_ground_bs": 1,
+      "n_uavs": 8,
+      "n_users": 30,
+      "uav_failure_duration_range": [
+        20,
+        60
+      ],
+      "uav_failure_min_active": 6,
+      "uav_failure_probability": 0.0,
+      "user_max_speed": 8.0,
+      "user_movement_model": "rpgm",
+      "user_pause_time_range": [
+        0,
+        2
+      ]
+    },
+    "fault_on": {
+      "adapter_shape": [
+        8,
+        365
+      ],
+      "battery_capacity_wh": 160.0,
+      "charging_station_capacity": [
+        1.0,
+        1.0
+      ],
+      "cluster_migration_speed": 10.0,
+      "cluster_pause_time_range": [
+        0,
+        3
+      ],
+      "energy_stage": "S4",
+      "failure_enabled": true,
+      "max_steps": 3000,
+      "n_charging_stations": 2,
+      "n_ground_bs": 1,
+      "n_uavs": 8,
+      "n_users": 30,
+      "uav_failure_duration_range": [
+        20,
+        60
+      ],
+      "uav_failure_min_active": 6,
+      "uav_failure_probability": 0.001,
+      "user_max_speed": 8.0,
+      "user_movement_model": "rpgm",
+      "user_pause_time_range": [
+        0,
+        2
+      ]
+    }
+  },
+  "event_windows": {
+    "post": 20,
+    "post_recovery": 60,
+    "pre": 20
+  },
+  "fits": 0,
+  "horizon": 3000,
+  "jobs": [
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965001",
+      "seed": 965001
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965002",
+      "seed": 965002
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965003",
+      "seed": 965003
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965004",
+      "seed": 965004
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965005",
+      "seed": 965005
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965006",
+      "seed": 965006
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965007",
+      "seed": 965007
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965008",
+      "seed": 965008
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965009",
+      "seed": 965009
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965010",
+      "seed": 965010
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965011",
+      "seed": 965011
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965012",
+      "seed": 965012
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965013",
+      "seed": 965013
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965014",
+      "seed": 965014
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965015",
+      "seed": 965015
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965016",
+      "seed": 965016
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965017",
+      "seed": 965017
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965018",
+      "seed": 965018
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965019",
+      "seed": 965019
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965020",
+      "seed": 965020
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965021",
+      "seed": 965021
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965022",
+      "seed": 965022
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965023",
+      "seed": 965023
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965024",
+      "seed": 965024
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965025",
+      "seed": 965025
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965026",
+      "seed": 965026
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965027",
+      "seed": 965027
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965028",
+      "seed": 965028
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965029",
+      "seed": 965029
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965030",
+      "seed": 965030
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965031",
+      "seed": 965031
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_local",
+      "job_key": "fault_off/H_local/965032",
+      "seed": 965032
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965001",
+      "seed": 965001
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965002",
+      "seed": 965002
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965003",
+      "seed": 965003
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965004",
+      "seed": 965004
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965005",
+      "seed": 965005
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965006",
+      "seed": 965006
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965007",
+      "seed": 965007
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965008",
+      "seed": 965008
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965009",
+      "seed": 965009
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965010",
+      "seed": 965010
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965011",
+      "seed": 965011
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965012",
+      "seed": 965012
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965013",
+      "seed": 965013
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965014",
+      "seed": 965014
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965015",
+      "seed": 965015
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965016",
+      "seed": 965016
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965017",
+      "seed": 965017
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965018",
+      "seed": 965018
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965019",
+      "seed": 965019
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965020",
+      "seed": 965020
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965021",
+      "seed": 965021
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965022",
+      "seed": 965022
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965023",
+      "seed": 965023
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965024",
+      "seed": 965024
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965025",
+      "seed": 965025
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965026",
+      "seed": 965026
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965027",
+      "seed": 965027
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965028",
+      "seed": 965028
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965029",
+      "seed": 965029
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965030",
+      "seed": 965030
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965031",
+      "seed": 965031
+    },
+    {
+      "condition": "fault_off",
+      "controller": "H_central",
+      "job_key": "fault_off/H_central/965032",
+      "seed": 965032
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966001",
+      "seed": 966001
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966002",
+      "seed": 966002
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966003",
+      "seed": 966003
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966004",
+      "seed": 966004
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966005",
+      "seed": 966005
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966006",
+      "seed": 966006
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966007",
+      "seed": 966007
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966008",
+      "seed": 966008
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966009",
+      "seed": 966009
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966010",
+      "seed": 966010
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966011",
+      "seed": 966011
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966012",
+      "seed": 966012
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966013",
+      "seed": 966013
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966014",
+      "seed": 966014
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966015",
+      "seed": 966015
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966016",
+      "seed": 966016
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966017",
+      "seed": 966017
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966018",
+      "seed": 966018
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966019",
+      "seed": 966019
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966020",
+      "seed": 966020
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966021",
+      "seed": 966021
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966022",
+      "seed": 966022
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966023",
+      "seed": 966023
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966024",
+      "seed": 966024
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966025",
+      "seed": 966025
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966026",
+      "seed": 966026
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966027",
+      "seed": 966027
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966028",
+      "seed": 966028
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966029",
+      "seed": 966029
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966030",
+      "seed": 966030
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966031",
+      "seed": 966031
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_local",
+      "job_key": "fault_on/H_local/966032",
+      "seed": 966032
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966001",
+      "seed": 966001
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966002",
+      "seed": 966002
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966003",
+      "seed": 966003
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966004",
+      "seed": 966004
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966005",
+      "seed": 966005
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966006",
+      "seed": 966006
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966007",
+      "seed": 966007
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966008",
+      "seed": 966008
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966009",
+      "seed": 966009
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966010",
+      "seed": 966010
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966011",
+      "seed": 966011
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966012",
+      "seed": 966012
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966013",
+      "seed": 966013
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966014",
+      "seed": 966014
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966015",
+      "seed": 966015
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966016",
+      "seed": 966016
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966017",
+      "seed": 966017
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966018",
+      "seed": 966018
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966019",
+      "seed": 966019
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966020",
+      "seed": 966020
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966021",
+      "seed": 966021
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966022",
+      "seed": 966022
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966023",
+      "seed": 966023
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966024",
+      "seed": 966024
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966025",
+      "seed": 966025
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966026",
+      "seed": 966026
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966027",
+      "seed": 966027
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966028",
+      "seed": 966028
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966029",
+      "seed": 966029
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966030",
+      "seed": 966030
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966031",
+      "seed": 966031
+    },
+    {
+      "condition": "fault_on",
+      "controller": "H_central",
+      "job_key": "fault_on/H_central/966032",
+      "seed": 966032
+    }
+  ],
+  "launch_sha": "8f638f44b1d0565ef62027d5f467a113be6a730f",
+  "legal_availability": "not native failed and battery above service cutoff; charging separate",
+  "observation_layout": {
+    "fields": {
+      "bs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hmax",
+        "visibility_flag"
+      ],
+      "energy_stations": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "dist3d/map_diag3d",
+        "capacity_ratio",
+        "available_ratio",
+        "queue_len/n_uavs",
+        "valid"
+      ],
+      "energy_uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "battery_ratio",
+        "charging",
+        "available",
+        "returning(limp_home or dock_request)",
+        "load=connections/n_users",
+        "dock_request",
+        "target_station/(n_stations-1) or -1",
+        "charging_wait_steps/max_steps",
+        "return_threshold_ratio",
+        "return_energy_margin"
+      ],
+      "nearest_uav": [
+        "dist/area",
+        "rel_x/area",
+        "rel_y/area"
+      ],
+      "overloaded": [
+        "rel_x/area",
+        "rel_y/area",
+        "load/max_connections"
+      ],
+      "own": [
+        "x/area",
+        "y/area",
+        "(z-hmin)/hspan"
+      ],
+      "self_state": [
+        "connected_users/max_connections",
+        "has_backhaul",
+        "hops/max_hops",
+        "nearest_bs_rel_x/area",
+        "nearest_bs_rel_y/area"
+      ],
+      "step": [
+        "current_step/max_steps"
+      ],
+      "uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "(rel_z-hmin)/hspan",
+        "clip((sinr_db+10)/50,0,1)"
+      ],
+      "users": [
+        "rel_x/area",
+        "rel_y/area",
+        "clip((sinr_db+10)/50,0,1)",
+        "connected_to_self",
+        "serviced_by_any",
+        "serving_set_len/serving_set_size"
+      ]
+    },
+    "offsets": {
+      "bs": [
+        223,
+        235
+      ],
+      "dim": [
+        0,
+        365
+      ],
+      "energy_stations": [
+        349,
+        365
+      ],
+      "energy_uavs": [
+        245,
+        349
+      ],
+      "nearest_uav": [
+        3,
+        6
+      ],
+      "overloaded": [
+        235,
+        244
+      ],
+      "own": [
+        0,
+        3
+      ],
+      "self_state": [
+        6,
+        11
+      ],
+      "step": [
+        244,
+        245
+      ],
+      "uavs": [
+        191,
+        223
+      ],
+      "users": [
+        11,
+        191
+      ]
+    },
+    "parameters": {
+      "area_size_m": 8000.0,
+      "bs_fields": 4,
+      "bs_slots": 3,
+      "energy_station_fields": 8,
+      "energy_station_records": 2,
+      "energy_uav_fields": 13,
+      "energy_uav_records": 8,
+      "height_max_m": 200.0,
+      "height_min_m": 50.0,
+      "max_connections": 25,
+      "max_hops": 5,
+      "max_steps": 3000,
+      "n_uavs": 8,
+      "n_users": 30,
+      "observation_radius_m": 1500.0,
+      "overloaded_fields": 3,
+      "overloaded_slots": 3,
+      "self_state_fields": 5,
+      "serving_set_size": 3,
+      "uav_fields": 4,
+      "uav_slots": 8,
+      "user_fields": 6,
+      "user_slots": 30
+    }
+  },
+  "optimizer_updates": 0,
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "threads": 1,
+  "workers": 4
+}
