@@ -1309,3 +1309,371 @@ it with `snapshot has changed, untracked, or ignored files`; inspection identifi
 snapshot was not altered. The canonical local run directory remains 138,125,312
 allocated bytes and contains the sole full raw-output copy; compact metadata and
 paired results are committed in `runs/`.
+
+### 2026-09-27 — reasoning-first screen of the remaining joint-allocation question
+
+This screen follows the proposed short method at
+[innovation-method-root-20260927](../../RESEARCH.md#innovation-method-root-20260927)
+and Claude's synthesized [v2](../../../Claude_docs/research_notes/REASONING_FIRST_RESEARCH_METHOD_20260927.md).
+The material choice is whether the same-information ordinary joint-allocation
+question has a distinct, useful next comparison after the exact B03 score failed.
+Learning, hierarchy and a causal interaction with availability are not premises
+for this choice. The B03 row is closed; this candidate is only the contribution
+argument sent for one independent challenge, not an accepted study or launch.
+
+**Candidate contribution if fully successful.** Keep H1's legal pooled snapshot,
+target generator, one-to-one assignment and shield. Replace its geometric
+UAV-to-target assignment cost with an edge score estimating the native user
+throughput available at each service target from the same observed user geometry
+and link state. A positive complete result would support a reusable observation
+to service-value to global-assignment controller for mobile multi-cluster
+coverage, improving QoS and native J over distance matching without a return-risk
+regression.
+
+**Closest prior and strongest ordinary alternative.** H1 already globally
+assigns UAVs to its generated targets by Euclidean distance with a continuation
+hysteresis; B03 preserved H1 and changed only that assignment matrix to modeled
+outbound, service-hover and return energy divided by usable battery. B03 completed
+32 paired worlds per arm and did not support its predeclared service/J or risk
+retention branch. The strongest simple alternative to the proposed service-value
+edge score is ordinary Hungarian matching with a target weight from current
+cluster population (optionally divided by travel time), requiring no link-value
+model. A throughput estimate may therefore be a standard scoring refinement,
+not a new reusable relation.
+
+**Changed relation and discriminator.** No new information, representation,
+learning signal, target set or availability rule is proposed. Only the mapping
+from the already legal snapshot to the existing global assignment would change.
+The candidate would need to predict distinct assignment changes beyond simple
+cluster-population matching and then improve complete native QoS and J, while
+retaining all return-cost, minimum-battery and adverse-world outcomes. A clean
+test would compare the score with both the ordinary population-weighted match
+and frozen distance/H1 on fresh paired S4 worlds; score-only gains or a predicted
+throughput proxy would not qualify. The proposed pairwise edge score may fail to
+represent shared routing or relay complementarity; adding team-level non-additive
+role value would change the proposal and approach the separate Claude-owned
+`sequential_coordinator_credit` problem, which is excluded here.
+
+**Prospective cost if selected.** One fresh 32-world paired H3000 panel for the
+candidate and a fixed ordinary comparator is 64 episodes, 192,000 transitions
+and 0 fits. B03 used 17.49 minutes acceptance-to-exit and retained 137.3 MB of
+raw traces / 137.9 MB manifest storage; allow roughly 20–30 node minutes and
+about 140 MB for a similarly instrumented run. A new score implementation,
+focused checks, engineering review and full scientific readback are additional;
+their total person-time is not instrumented by B03. Nothing in this screen
+authorizes execution.
+
+#### 2026-09-27 — owner scope correction and candidate revision
+
+The owner clarified that the primary contribution line is UAV path planning and
+cooperative cluster planning, including reusable algorithm engineering. Energy,
+return and charging remain constraints; another energy cost is not the main
+contribution. DM3 has priority for the MARL increment against strong planning or
+flat learning. This DM will consider the ordinary joint-planning part and its
+remaining failure conditions, without taking over DM3 or Claude's
+`sequential_coordinator_credit` work. The pairwise throughput-score candidate
+above is superseded: it changed one assignment score but did not state a distinct
+joint-motion or coverage-layout capability.
+
+**Revised candidate for the same one independent challenge.** An online planner
+could choose, from the current legal pooled user/BS/UAV snapshot, between the
+existing H1 six-service/two-relay layout and H2 five-service/three-relay layout
+at each scheduled 30-step replan. If a precise legal snapshot score can be
+defined, the reusable contribution would be adaptive allocation of spatial
+service and relay roles as moving demand and current connectivity change, with
+global distance matching and the native shield retained. This is a possible
+ordinary joint-layout method, not an accepted design.
+
+The nearest method is H1's present K-means service targets, straight-line relay
+placement toward the unweighted mean of service centroids, and Hungarian
+distance/hysteresis assignment. H2 is the closest fixed role-count alternative.
+The strongest ordinary comparator is the better of frozen H1 and H2; a simple
+snapshot rule that selects one of those two complete layouts is also a potential
+stronger alternative to a new learned or model-heavy controller. The relevant
+background is bounded: B01's roughly 0.175–0.178 `H_central-H_local` QoS gap is
+a package difference in information rights, not identified planning headroom;
+B02 removed observed replan lag without establishing complete native gain; B03
+changed only the assignment energy score and underperformed. None identifies a
+defect in the H1 relay geometry or establishes that dynamic role-count choice
+would help.
+
+The proposed change uses the existing legal snapshot and current availability
+mask, but changes how that information selects the number and positions of
+service/relay roles. It does not require a learning update, a hierarchy or a
+fault-interaction claim. To justify a study, the selector must be fully specified
+before results, select different role layouts for a prospective structural
+reason, and improve complete native QoS and J over the better fixed H1/H2
+reference without material return-cost, minimum-battery or adverse-world harm.
+If the only feasible score is a trivial demand threshold or a target-cost tweak
+whose benefit is absorbed by choosing the better fixed layout, no reusable
+planning contribution follows.
+
+If pursued as a three-arm study (dynamic selector, fixed H1 and fixed H2), the
+minimum proposed panel is 32 fresh paired S4 worlds: 96 H3000 episodes, 288,000
+team transitions, 0 fits. Linear scaling from B03 suggests about 26–30 node
+minutes and about 207 MB retained run output; this excludes a potentially
+material per-replan layout-scoring overhead. Implementing a defensible selector,
+focused checks, engineering review and complete scientific reading are
+additional, currently unmeasured costs. If the score needs broad search or a
+native-model port, this estimate no longer applies. No code or run has been
+started for this candidate.
+
+#### 2026-09-27 — independent challenge and bounded ordinary-transit revision
+
+The prior target-only score and H1/H2 role-count selector above are both superseded.
+Root's published review at [uav-planning-review-20260927](../../RESEARCH.md#uav-planning-review-20260927)
+identified the assignment-value cancellation in the first proposal and selected a
+bounded ordinary joint-transit planner as its preferred first investment. The
+independent ResearchCritic also recommends keeping this ordinary-planning question,
+but narrows the first action to holding one UAV during H1 repositioning. Its review
+found a specific residual question: the native guard blocks immediate moves that
+break an existing route, but does not guarantee delivered service while a route
+remains above its threshold.
+
+**Decision: revise and implement one bounded transit-hold comparison.** This is a
+conditional engineering study, not a claim that the guard leaves valuable service
+loss or that the service proxy is a complete future model. Retain `NOT_VIABLE_CLOSE`
+for B03's `energy_fraction` rule. The independent challenge agrees with this next
+investment after the root review; it does not authorize broader search or another
+training fit.
+
+**Contribution and discriminator.** Keep the existing H1 six-service/two-relay
+target generator, global distance/hysteresis assignment, H_central@10 information
+contract, production return shield, and native action guard. At a scheduled
+10-step replan, consider the ordinary all-move target plan plus one alternative for
+each currently assigned and currently service-available UAV: hold that UAV at its
+current horizontal position for this 10-step commitment while all other targets
+remain unchanged. Select the plan with the highest predicted integrated delivered
+QoS over the next interval; strict ties keep all-move. The structural prediction is
+that a short hold can preserve service during repositioning where the guard allows
+movement because the dependent links stay above its capacity threshold.
+
+**Finite service score.** Use the same current central `users_xy`/`bs_xy` snapshot
+and legal per-UAV positions, energy/availability and return-mode observations at
+each H_central@10 replan. For each candidate, project nominal capped-speed H1
+positions at steps 5 and 10, keeping current user coordinates fixed and keeping
+currently unavailable UAVs fixed/unavailable. At each point, use the existing
+native radio, fresh association, routing and end-to-end delivery calculations on
+an isolated environment copy. Reset projected association memory before each
+snapshot so the scorer does not read the live hidden serving-set history. Score
+`(QoS_0 + 2*QoS_5 + QoS_10)/4`, with one common current-state score. This is a
+snapshot service proxy: it does not advance future user/failure/RNG state or
+simulate future guard blocks, return-shield entries, charging or battery changes.
+Any already active return-shield mode or a current return-shield entry falls back
+to all-move; all selected real actions still pass through the unchanged production
+shield and native guard. The complete native episodes, including their actual
+shield and guard effects, decide the result. This limits interpretation: a proxy
+gain alone is not an outcome, and success would not prove the proxy is calibrated.
+
+**Cost and feasibility check.** The independent reviewer estimated at most 9 joint
+plans per window (all-move plus 8 single-UAV holds), 2 future scoring points, 300
+windows per H3000 episode: 86,400 candidate plans, 172,800 future service snapshots,
+plus 9,600 common-current snapshots for the 32 candidate episodes. A local S7-S2
+technical probe copied the native environment and recomputed one radio/association/
+routing/delivery snapshot in 13.4 ms mean across 5 calls; a second one-world probe
+measured 8.1–12.9 ms for the recomputation portion across 18 hypothetical points.
+Thus a rough single-core scoring cost is 0.46–0.68 CPU-hours for 182,400 snapshots.
+This is an early CPU measurement, not a full-batch wall-time guarantee; it excludes
+the 64 native episodes, runtime contention, implementation/review, admission, and
+readback. The prior S2 96-episode evaluation wall time is not used as a predictor
+price. A one-world diagnostic at replan 10 produced a nominal proxy score of .192
+for all-move and .367 for holding UAV 0; the native guard's exact first-step check
+would permit that move. These single-state observations establish plausibility and
+implementability only, not service headroom or benefit.
+
+**Prospective study.** S7-S2/H3000, 32 fresh paired worlds, 2 arms (`H_central@10`
+and the transit-hold selector): 64 episodes, 192,000 native transitions, zero fits.
+Use per-world paired inference and read full native QoS, J, return cost, battery
+minimum/reserve tails, cutoff/depletion, guard/shield interventions, zero-service
+worlds and adverse pairs. A predicted-score gain without complete native QoS/J
+improvement does not continue this exact package. An incomplete technical run is
+recorded separately and never interpreted as a negative scientific result. No
+automatic extra pair, horizon, threshold sweep, rescue run or MARL fit.
+
+**L0 implementation scope.** Deliver a direction-owned S7-S2 transit-hold
+controller, paired no-fit runner/readout, and focused checks under
+`experiments/candidates/energy_relay_availability/b04/`,
+`tests/experiments/candidates/energy_relay_availability/b04/`, and
+`runs/energy_relay_availability/b04_transit_hold_a01/`; this NOTES entry owns the
+contract. Preserve the frozen B01/B03 inputs and the shared core. Do not change
+user-motion or RNG paths, H1 target generation, actual guard/shield code, native
+reward, H3000 horizon, S2 condition, or evaluation metrics. Check candidate
+enumeration/tie rules, fixed-position projection, exact native snapshot scoring,
+and that the isolated scorer leaves the real environment and RNG unchanged.
+Budget: 32 paired worlds, 64 episodes, 192k transitions, 0 fits; scorer upper bound
+182,400 snapshots. Stop after this complete comparison unless the predeclared
+reading identifies a distinct result-bearing continuation.
+
+#### 2026-09-27 — B04 implementation and independent engineering repair
+
+The first independent executable review found that both H1 arms inherited the
+30-step default despite the H_central@10 contract; the original divisibility
+assertion would have admitted that mismatch. Both arms and the recorded arm
+configuration now share explicit `replan_period=10` parameters, and the transit
+episode rejects anything other than the full `0, 10, ..., <actual_length>` plan
+schedule. The review also found that the primary readout required fixed-reserve
+and service-cutoff UAV-step fractions that no completed row supplied. B04 now
+computes both from the recorded post-step battery trace using the native S2
+`return_reserve_ratio` and `service_cutoff_threshold`. The aggregate count is
+named hold windows because a selected window does not guarantee ten executed
+hold steps after guard or shield intervention.
+
+Focused regressions cover the H1@10 clock, inclusive native threshold fractions,
+and a complete paired-panel summary. All seven B04 tests pass; Python compilation
+and `git diff --check` pass. The independent engineering reread found no
+remaining material finding. No scientific batch has been admitted or launched.
+
+### 2026-09-27 — direction re-examination before B04 admission
+
+This re-examination returns to the frozen B03 outputs and the actual B04 code.
+No B04 scientific episode, fit or native operation has been admitted. A runtime
+model label is not evidence for or against the recorded results. The decisions
+below use the source, measurements and applicable independent scientific reviews.
+
+**B03 outcome and closure survive the reconstruction.** Source
+8d9d64996c5a618b85e6ab521a939f98f48e659e and its
+[manifest](../../../../runs/energy_relay_availability/b03_energy_assignment_a01/manifest.json)
+remain the result identity. A direct NumPy/SciPy reread, without calling the
+original summary helper, checked all 64 raw hashes and the three compact artifact
+hashes, reproduced every recorded native metric sum/mean and the relevant
+battery-tail aggregates, and checked the reward identity. All 64 episodes contain
+3000 transitions and exactly 100 replans at 0,30,...,2970. All 32 pairs have
+identical retained user-position and pre/post failure-timer arrays. Their recorded
+initial-state and RNG-stream digests also agree; full RNG states were not retained,
+so digest agreement is not an independent replay of that stream.
+
+| Recomputed energy minus distance | Paired mean | Approximate t31 95% interval |
+| --- | ---: | --- |
+| QoS per step | -0.02661916 | [-0.05886288, +0.00562456] |
+| Native J | -208.115094 | [-403.858848, -12.371340] |
+| Capped return-cost sum | +64.129304 | [+4.486818, +123.771790] |
+| Raw return-cost sum | +68.149322 | [+5.105534, +131.193109] |
+| Episode minimum battery ratio | -0.00800830 | [-0.01479944, -0.00121716] |
+| UAV-step fraction below 10% reserve | +0.03149870 | [-0.00195890, +0.06495630] |
+
+The 32 fixed-world pairs are the inference units. QoS declines in 20 worlds and
+J in 22; both improve in nine and both decline in nineteen. The mean J change
+decomposes into -79.857491 service, -128.258608 return penalty and +0.001006 shaping.
+Favorable world 970012 (+0.160626 QoS, +1200.07 J), adverse world 970005
+(-0.329336 QoS, -1755.56 J), and the return-cost/minimum-battery loss in 970020
+remain in the [per-world evidence](../../../../runs/energy_relay_availability/b03_energy_assignment_a01/perworld.json).
+Zero cutoff/depletion events do not establish safety. The QoS and reserve-tail
+intervals cross zero; the closure is the failure of the prewritten joint-benefit
+and risk-trade branches, not proof that every world or all energy-aware methods
+are harmed. The frozen energy controller/runner are unchanged from the launch SHA:
+they receive pooled legal observations, preserve clock30/target generation and
+replace the assignment objective. Later coverage and target sets can diverge.
+Queueing, poor mission prediction and altered assignments remain competing
+explanations; none was isolated. Baseline predicted-energy counts are structural
+zeros rather than evidence of zero infeasible missions. Retain NOT_VIABLE_CLOSE
+for this exact rule and the original distance/hysteresis reference.
+
+**B04 requires real corrections before it is a valid implementation.** The earlier
+engineering findings remain consequential: an inherited 30-step period violated
+the ten-step contract, missing battery-tail fields would break full aggregation,
+and a diagnostic labeled windows as steps. Those were repaired before any run.
+The present source audit found an additional effect: writing a held current
+position into H1's targets also changed the previous-target memory used by its
+next Hungarian/hysteresis assignment. That exceeded a temporary execution hold.
+B04 now retains H1 target history separately, restores it before each base replan,
+and records the base targets beside the execution targets. Matching still uses
+the actual observed positions resulting from prior actions. A two-UAV regression
+demonstrates the former failure: with targets x=0/1000, later positions x=400/600,
+and a 300 m continuation bonus, replacing the previous x=1000 target by a hold at
+x=400 changes the assignment even at identical next observations.
+
+The repaired nine-test suite passes (7.58 s). It now includes the above behavioral
+regression and a 20-step native pair through worker execution, trace serialization
+and complete paired aggregation, under pytest-owned scratch. This adds 40 technical
+transitions, zero fits and no scientific outcome panel. The independent engineering
+reread found no remaining material issue in the corrections. That review is
+engineering evidence and does not establish algorithmic value.
+
+**What this planner actually contributes, if the complete package succeeds.**
+The closest executed method is the existing H1/H_central@10 chain: K-means service
+targets, straight relay targets, global distance/hysteresis matching, production
+return shield and the native backhaul guard. That guard already implements waiting
+when a single proposed move would push a dependent link below its capacity
+threshold. The proposed increment is a finite service-aware waiting decision over
+a joint movement interval: keep the assigned H1 endpoints/history and compare
+all-move with at most eight one-UAV horizontal holds. It changes the set of
+occupied positions during movement, without exchanging targets or learning a policy.
+
+Let S(P,U) be mean demand-capped native delivered QoS for joint UAV positions P
+and current user positions U. The candidate ranks a hold h by
+[S(P(0),U) + 2 S(P_h(5),U) + S(P_h(10),U)]/4.
+The common current-state term cancels in ranking. The other terms change with the
+joint intermediate positions; native S includes shared access bandwidth,
+backhaul-limited scaling, per-user maxima and demand caps. The target-only
+additive invariant identified in Root's review does not apply: holding changes the
+instantaneous occupied-position set rather than permuting an unchanged fully
+assigned target set. This establishes that the decision is nontrivial; it does
+not establish that the resulting actions improve realized cumulative service.
+
+A complete gain would provide a conditional ordinary service-aware waiting
+controller and a reusable executed baseline for this host. It would not establish
+a novel general planning principle, long-horizon anticipation, target handover,
+MARL benefit, or a causal advantage of the 5/10-step forecast. A concrete stronger
+simple alternative is the same hold neighborhood selected by one-step delivered
+QoS. The selected two-arm screen does not compare it. H_central@10 with its native
+guard/shield remains the competent existing reference for the narrower practical
+question of whether this complete package is worth retaining. Accordingly,
+superiority over service-aware short-horizon planners and attribution to lookahead
+are withdrawn from the possible claim; a positive package result alone cannot
+settle them. No extra comparator or follow-up is automatically purchased.
+
+**Information and mechanism limits.** Both arms receive current global user/BS xy
+only at ten-step replans, plus the usual own observations and shield modes. This
+is H_central's privileged central-position contract, not H_local or decentralized
+information. The candidate additionally uses the known static S2 radio,
+association, routing and scalar-demand model, at extra computation; the comparison
+does not match model use or computational effort. The audited S2 path has failures
+off, scalar demand 1 Mbps/user, fresh association, recomputed geometry/radio and
+widest-path delivery. The score uses fixed current users, legal own xyz/batteries
+and static model parameters; it does not read future waypoints/RNG or preserve
+hidden serving-set history. Future guard interventions, shield entries, battery
+changes and charging remain unmodeled. Any active or currently entering return
+shield selects all-move. Repeated holds may defer deployment indefinitely or fit
+a misleading surrogate. The step-10 proxy difference and allowed first move from
+the old technical probe show only that the selector can differ from the guard;
+they establish no native service headroom.
+
+The complete native QoS/J, risk and adverse-world branches remain the outcome.
+Common-time ten-step QoS sums can be reconstructed from the stored native metrics
+and replan times; they compare the two closed-loop policies at the same exogenous
+time, not a same-state causal counterfactual for an individual hold. The current
+DM3 working L0 considers H_local return-margin anticipation/rematching over a
+60-second lead window and learned 300-step schedule selection. B04's central
+current-snapshot ten-step waiting decision is distinct. Those information and
+decision-window differences prevent pooling their effects or claiming one is a
+matched comparator for the other.
+
+**Exposure and full cost.** The old 973001-973032 production seed list was not fully
+unseen: seed 973001 was used in the step-10 probe and technical tests. No H3000
+result was collected from it, but the earlier freshness description was too broad.
+Before any scientific run, replace that unlaunched list by 28092701-28092732,
+with no match found in the repository's run JSON, candidate source or notebooks.
+The exposed seed remains confined to technical checks. The final declared study
+is still two arms, 32 paired H3000 worlds, 64 episodes, 192,000 team transitions,
+zero fits and zero optimizer updates. At most 9,600 candidate-arm windows produce
+86,400 candidate-plan evaluations and 182,400 native service snapshots, with
+actual counts recorded. Prior snapshot measurements suggest 0.46-0.68 single-core
+CPU-hours for scoring alone. Native episodes, initialization, copying/compression,
+contention, engineering and readback add work; complete batch wall time remains
+unmeasured. B03's 17.49-minute remote wall time is not a bound for this local
+planner. Keep the single raw-output copy and compact records; no duplicate
+retention package is part of this study.
+
+**Disposition: substantially revise B04's implementation and claims, then retain
+the bounded exploratory package comparison.** The reason to spend on it is the
+unresolved value of service-aware waiting beyond the already executed threshold
+guard, at the explicit finite cost above; existing code or spare capacity supplies
+no scientific reason. Reuse the completed independent B03 scientific review and
+allocation_contribution_critic review: they reconstructed original evidence,
+preserved adverse worlds, supported B03 closure and specifically recommended this
+one-interval hold comparison against H_central@10 while denying established
+headroom or broader planner superiority. Their premises still cover this choice;
+the corrections restore that contract rather than create a new scientific
+hypothesis. No duplicate scientific review or Pro round is added. Publish this
+disposition, the source and affected current index entries before native admission.
+No additional B03 batch, coefficient sweep, MARL fit or B04 rescue is selected.
