@@ -55,21 +55,83 @@ def test_hungarian_is_the_base_method_with_hysteresis(draw):
     np.testing.assert_array_equal(observed, expected)
 
 
-def test_identity_maps_uav_j_to_slot_j_regardless_of_positions():
+def test_identity_pairs_by_uav_index_regardless_of_positions():
     rng = np.random.default_rng(11)
     heuristic = AssignmentModeHeuristic(H1, "identity")
-    points = rng.uniform(0, 8000, size=(6, 2))
-    uavs = np.asarray([0, 2, 3, 5, 6, 7])
+    points = rng.uniform(0, 8000, size=(8, 2))
+    uavs = np.asarray([0, 2, 3, 5, 6, 7])      # UAVs 1 and 4 unavailable
     for own_xy in (rng.uniform(0, 8000, size=(8, 2)), np.zeros((8, 2))):
         _hysteresis_state(heuristic, rng, uavs, points)
         targets = np.full((8, 2), np.nan)
         assert heuristic._assign_targets(own_xy, uavs, points, targets) == set(uavs.tolist())
-        np.testing.assert_array_equal(targets[uavs], points)
-        assert np.isnan(targets[[1, 4]]).all()
-    # fewer points than UAVs: only the first len(points) UAVs get a target
+        np.testing.assert_array_equal(targets[uavs], points[uavs])
+        assert np.isnan(targets[[1, 4]]).all()   # slots 1 and 4 served by nobody
+    # fewer points than UAV indices: UAV i gets a target only if slot i exists
     targets = np.full((8, 2), np.nan)
-    assert heuristic._assign_targets(np.zeros((8, 2)), uavs, points[:4], targets) == {0, 2, 3, 5}
-    assert np.isnan(targets[[6, 7]]).all()
+    assert heuristic._assign_targets(np.zeros((8, 2)), uavs, points[:6], targets) == {0, 2, 3, 5}
+    np.testing.assert_array_equal(targets[[0, 2, 3, 5]], points[[0, 2, 3, 5]])
+    assert np.isnan(targets[[1, 4, 6, 7]]).all()
+
+
+def _frame_inputs(frame):
+    return {"users_xy": frame["user_positions"][:, :2], "bs_xy": frame["bs_positions"][:, :2]}
+
+
+def _assert_same_record(first, second, skip=("targets",)):
+    assert set(first) == set(second)
+    for key in first:
+        if key in skip:
+            continue
+        a, b = first[key], second[key]
+        if isinstance(a, np.ndarray) or isinstance(b, np.ndarray):
+            np.testing.assert_array_equal(a, b, err_msg=key)
+        else:
+            assert a == b, key
+
+
+def test_identity_all_available_is_uav_i_to_base_priority_i(live_frames):
+    modes = np.zeros(8, dtype=bool)
+    for frame in live_frames[::5]:
+        base, identity = LayoutHeuristic(H1), AssignmentModeHeuristic(H1, "identity")
+        base_plan = base.plan(frame["obs"], modes, _frame_inputs(frame))
+        plan = identity.plan(frame["obs"], modes, _frame_inputs(frame))
+        assert len(base_plan["priority"]) == 8 and base_plan["kinds"][:2] == ["relay", "relay"]
+        np.testing.assert_array_equal(identity.targets_xy, base_plan["priority"])
+        np.testing.assert_array_equal(plan["targets"], base_plan["priority"])
+        _assert_same_record(plan, base_plan)
+
+
+def test_identity_unavailable_uav_leaves_its_slot_empty(live_frames):
+    for frame in live_frames[1::4]:
+        for unavailable in (2, 0, 7):
+            modes = np.zeros(8, dtype=bool)
+            modes[unavailable] = True
+            base, identity = LayoutHeuristic(H1), AssignmentModeHeuristic(H1, "identity")
+            base_plan = base.plan(frame["obs"], modes, _frame_inputs(frame))
+            plan = identity.plan(frame["obs"], modes, _frame_inputs(frame))
+            priority = plan["priority"]
+            others = [uav for uav in range(8) if uav != unavailable]
+            np.testing.assert_array_equal(identity.targets_xy[others], priority[others])
+            assert np.isnan(identity.targets_xy[unavailable]).all()
+            empty_slot = priority[unavailable]
+            assert not any(np.array_equal(identity.targets_xy[uav], empty_slot) for uav in others)
+            assert not plan["search"] and plan["search_uavs"] == []
+            # every record field that does not depend on the assignment equals the base plan's
+            _assert_same_record(plan, base_plan)
+            # the base (hungarian) plan covers only priority[:7]: slot 7 is dropped instead
+            assert not any(np.array_equal(base.targets_xy[uav], priority[7]) for uav in others)
+
+
+def test_hungarian_and_nearest_run_the_base_plan(live_frames, monkeypatch):
+    calls = []
+    original = LayoutHeuristic.plan
+    monkeypatch.setattr(LayoutHeuristic, "plan",
+                        lambda self, *a, **k: calls.append(self.mode) or original(self, *a, **k))
+    frame = live_frames[0]
+    for mode in ASSIGNMENT_MODES:
+        AssignmentModeHeuristic(H1, mode).plan(frame["obs"], np.zeros(8, dtype=bool),
+                                               _frame_inputs(frame))
+    assert calls == ["hungarian", "independent_nearest"]
 
 
 def test_independent_nearest_is_the_row_argmin_with_hysteresis_and_duplicates():
@@ -123,7 +185,7 @@ def test_every_available_uav_is_targeted_on_live_frames(live_frames):
             if mode == "identity":
                 available = np.flatnonzero(~modes)
                 np.testing.assert_array_equal(heuristic.targets_xy[available],
-                                              plan["priority"][:len(available)])
+                                              plan["priority"][available])
 
 
 def test_controller_uses_the_mode_heuristic(tiny_config):

@@ -79,8 +79,9 @@ CONSISTENCY_TOLERANCE = 1e-9
 MODE_RULES = {
     "hungarian": ("base LayoutHeuristic._assign_targets: distance cost minus the 300 m "
                   "previous-target hysteresis, Hungarian (scipy linear_sum_assignment)"),
-    "identity": ("j-th available UAV (ascending index) takes priority slot j "
-                 "(relays first, then centroids by descending user count); no cost"),
+    "identity": ("available UAV i takes slot i of the full priority list (relays first, then "
+                 "centroids by descending user count); an unavailable UAV's slot stays empty "
+                 "and that UAV has no target; no cost"),
     "independent_nearest": ("base cost matrix (distance minus hysteresis), row-wise argmin per "
                             "available UAV; duplicates allowed, unclaimed anchors unserved"),
 }
