@@ -21,8 +21,6 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-DIRECTION = "sequential_coordinator_credit"
-
 
 def _configuration(text: str) -> tuple[float, int, float]:
     parts = [part.strip() for part in text.split(",")]
@@ -56,7 +54,7 @@ def main(argv=None):
     # Admission precedes candidate imports and any output.
     from scripts.hmasd_admission import require_admission
 
-    admission = require_admission(__file__, direction=DIRECTION)
+    admission = require_admission(__file__, direction="sequential_coordinator_credit")
     if args.launch_sha != admission["sha"]:
         raise RuntimeError("launch SHA does not match admission")
     argv_record = sys.argv if argv is None else argv
