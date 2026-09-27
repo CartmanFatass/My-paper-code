@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-09-27T18:01:00.581239+00:00",
+  "native_observation": "all terminal events consumed; observer stopped at generation6",
+  "source_snapshot": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/e9e05e2ac0e248e0a82486d6443843e9",
+  "source_snapshot_present": true,
+  "source_snapshot_allocated_bytes": 1600032768,
+  "source_snapshot_reclaimed_bytes": 0,
+  "collector_mode": "preview; no apply permitted by the failed precheck",
+  "collector_refusal": "elevated read-only process scan refused: process scan refused: process 2026 changed during reference inspection",
+  "diagnostic": "Process2026 observed as zombie zsh; collector sees missing /proc/2026/cwd while the PID entry remains. No unrelated shell/process was altered.",
+  "removed_scratch": "temp/directions/energy_relay_availability/b04_wait_request.json",
+  "removed_scratch_allocated_bytes": 4096,
+  "scratch_absence_verified": true,
+  "canonical_raw_retention": "/home/fires/hmasd-wsl/runs/energy_relay_availability/b04_transit_hold_a01/raw",
+  "source_cleanup_complete": false,
+  "cleanup_record_allocated_bytes": 4096,
+  "net_allocated_bytes_reclaimed_including_record": 0
+}

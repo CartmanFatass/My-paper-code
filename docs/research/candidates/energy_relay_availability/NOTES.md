@@ -1702,3 +1702,214 @@ job identity is `launch-b04-transit-hold-a01`. On its return, reconcile this sam
 operation, collect the complete evidence and read native outcomes under the
 declared rule. Process exit alone will not establish scientific acceptance, and
 technical failure will not silently purchase another attempt.
+
+### 2026-09-27 — complete native B04 reading
+
+The original operation exited zero at 2026-09-27T17:10:11.902239Z. Its
+[terminal status](../../../../runs/energy_relay_availability/b04_transit_hold_a01/status-completed.json)
+and [exit witness](../../../../runs/energy_relay_availability/b04_transit_hold_a01/process-exit.json)
+agree with the admitted supervisor/runner identities and published source
+`025350669bc5e8ab99fc71954f749ae47a6853e9`. Both native processes are absent.
+The terminal observation was consumed; no unfinished observation or automatic
+retry remains. The complete result is 32 paired worlds per arm, 64 H3000 episodes,
+192,000 team transitions, zero fits and zero optimizer updates, with no missing,
+failed, cancelled, unreconciled or orphan world. Every episode ends at the declared
+time limit rather than an early termination.
+
+**Reconstruction.** A separate NumPy/SciPy calculation imports neither the runner's
+evaluator nor its readout. It verifies all 64 raw-file hashes/byte counts and all
+three compact hashes in the frozen
+[manifest](../../../../runs/energy_relay_availability/b04_transit_hold_a01/manifest.json),
+recomputes every native metric sum/mean and the primary paired effects, and checks
+the reward decomposition (maximum step error 2.22e-16). All 32 pairs have identical
+complete user-position arrays; recorded initial-state and RNG-stream digests also
+agree. Full RNG state streams were not retained for independent reconstruction.
+Every candidate world has the exact 300 replans at 0,10,...,2990; the recorded
+argmax/tie choices, candidate counts and snapshot totals match the implementation.
+The [raw-derived reading](../../../../runs/energy_relay_availability/b04_transit_hold_a01/reading.json)
+contains these checks, all paired values, risk and timing readings. The native
+[per-world rows](../../../../runs/energy_relay_availability/b04_transit_hold_a01/perworld.json)
+and [summary](../../../../runs/energy_relay_availability/b04_transit_hold_a01/summary.json)
+remain unchanged.
+
+**Complete native outcomes.** The unit is one paired initialized world, n=32;
+intervals below are approximate paired t31 95% intervals across those worlds, not
+across 192k steps or learned instances. Deltas are transit_hold minus H_central@10.
+
+| Outcome | H_central@10 mean | Transit hold mean | Paired delta [95% interval] |
+| --- | ---: | ---: | --- |
+| QoS per step | .76347737 | .77405581 | +.01057845 [+.00017703, +.02097987] |
+| Raw native J | 2251.09706 | 2285.83291 | +34.73585 [+2.55556, +66.91613] |
+| Capped return-cost sum | 4.38932 | 2.89150 | -1.49783 [-5.18107, +2.18542] |
+| Raw return-cost sum | 4.38932 | 2.89150 | -1.49783 [-5.18107, +2.18542] |
+| Episode minimum battery ratio | .10108564 | .10153192 | +.00044628 [-.00126603, +.00215859] |
+| UAV-step fraction at/below 10% reserve | .00430208 | .00255469 | -.00174740 [-.00793170, +.00443691] |
+| UAV-step fraction with negative return margin | .00980990 | .00857422 | -.00123568 [-.00875412, +.00628276] |
+
+Native J's mean change decomposes into +31.73534 from QoS, +2.99565 from the
+return penalty, and +.00486 from potential shaping. Both QoS and J improve in
+21 worlds and decline in the other 11. The QoS interval's lower endpoint is close
+to zero; this is an exploratory package result with a small average advantage.
+The protocol's feared proxy-only outcome did not occur on this panel: the measured
+complete native service/J means improve as well. Neither that fact nor the two
+positive intervals establishes robust deployment, safety, general planner
+superiority, or the causal value of the particular forecast points.
+
+All losses remain. World 28092716 loses .04439662 QoS/step and 127.00530 J;
+28092724 loses .03740986 and 115.28850. World 28092721 loses .02840680 and
+110.37814 while adding 12.58212 return cost and .032875 reserve-exposure fraction;
+its minimum battery declines .00733977. In the favorable tail, 28092703 gains
+.08204944 QoS and 246.23719 J. World 28092732 gains only .00720836 QoS but
+avoids 54.88610 return cost and .086625 reserve exposure; it contributes more than
+the entire panel's net reduction in those two risk totals. Aggregate risk
+improvement is therefore not a general per-world result. The lowest observed
+episode battery ratio is .08602312 for H_central and .09420828 for transit_hold;
+zero cutoff/depletion and zero wholly unserved episodes in both arms do not
+establish safety. Each arm averages 20.21875 zero-service steps, with identical
+per-world counts.
+
+**Activation and limitations.** Of 9,600 candidate-arm replan windows, 4,498
+actually score alternatives; 5,096 fall back because a return-shield mode is active
+and six because a current entry is due. There are 40,482 scored candidate plans
+and 85,462 native service snapshots, below the declared 86,400/182,400 upper
+bounds. Holds are selected in 1,581 windows (16.47% of all windows; 35.15% of
+active windows). The selected nominal score advantage has mean .05846, median
+.03333; four choices have an advantage at most 1e-12 under the frozen strict `>`
+rule. No post-result tolerance change or replay is made. One UAV is held for as
+many as 25 consecutive windows. Five selected holds encounter that UAV's return
+shield during the interval; the actual shield/guard always remains authoritative.
+Thus selected windows are not a count of guaranteed executed ten-step holds.
+
+The mean guard-block count is 1006.25 versus 948.03 (delta -58.22,
+[-214.78,+98.34]); shield-mode fraction is .343490 versus .346230 (delta +.002741,
+[-.003841,+.009323]). These do not identify reduced guard intervention as the
+source of benefit. A retrospective common-time split gives QoS deltas +.02208,
++.01416 and -.00450 in the first, middle and last 1,000 steps. This describes
+the two evolving policies; it is not a same-state counterfactual for a hold, a
+calibration test of the surrogate, or additional independent sample size. Both
+arms share the declared central observations and actual guard/shield; the
+candidate additionally uses static native model knowledge and computation.
+The untested one-step service scorer remains a simpler competing explanation for
+the useful decisions. This study does not isolate value from the 5/10-step
+forecast, compare to H_local learning, or demonstrate handover/long-horizon MARL.
+
+**Actual cost and retained evidence.** Acceptance-to-exit elapsed time is
+2,983.178 s (49.720 min); the instrumented runner wall is 2,977.844 s. Four
+workers each use one numeric thread. Recorded worker CPU totals 11,577.094 s
+(3.216 CPU-hours), worker wall sums to 11,821.380 s, and parent CPU is .612 s.
+Mean per-world worker CPU is 160.661 s for H_central and 201.123 s for transit_hold;
+corresponding wall means are 168.174 and 201.244 s. Different trajectories and
+changing contention prevent reading that difference as pure scorer time. No
+per-snapshot timer was retained, so the realized scoring-only CPU cost is unknown.
+Maximum recorded worker ru_maxrss is 440,116 KiB and parent ru_maxrss is
+353,188 KiB; these are per-process historical peaks, not a simultaneous total.
+Timers omit some process startup/import work and do not measure all engineering,
+review or readback effort. The additional raw arithmetic pass took 1.23 s;
+unmetered work is not zero. The single canonical raw copy occupies 112,621,645
+file bytes under this run's `raw/`, with per-file hashes in the manifest. No
+duplicate bulk retention package is created.
+
+### 2026-09-27 — independent B04 reading, adoption and next discriminating comparison
+
+A dedicated ResearchCritic reviewed this result in a separate context without
+DM/Root conversation inheritance; the supplied general memory overview was
+present. It reconstructed the frozen code/native tables, checked six paired raw
+trajectories including major gains, losses and the influential risk case, and only
+then read the prospective interpretation and cross-checked the full raw audit.
+Its recommendation is to retain B04 as an exploratory ordinary-controller option,
+not a robust default or an identified anticipation mechanism. It emphasizes all
+11 losing worlds, 14 return-cost increases, 14 minimum-battery declines and the
+concentration of aggregate risk improvement in world 28092732. It recommends a
+single comparison against the same neighborhood scored at nominal step one to
+decide whether the extra temporal scoring is worth retaining. MATERIAL_DISSENT: no.
+
+A focused addendum assessed the four selected advantages around 1e-16. They are
+one, one, two and one float64 spacing units above all-move; float32 diagnostic
+logging did not drive selection. The strict tie rule means exact floating-point
+equality, not practically resolved equality. Existing paired intervals describe
+world variation conditional on this exact implementation, not sensitivity to
+numerical tie handling. Four choices may have downstream effects; their small
+count or occurrence in positive worlds establishes neither negligible influence
+nor causation. Retain every world and the frozen comparison/order; log near ties
+in both next-study arms. The reviewer retains its recommendation with that scope
+qualification and no material dissent. No tolerance patch or rerun is selected.
+
+**DM adoption.** Retain B04's observed modest complete-package benefit and useful
+ordinary centralized waiting implementation. The prediction of some complete
+service benefit beyond the original geometry/threshold guard is supported on
+this panel; risk reduction, the value of 5/10 rather than one-step scoring,
+numerical robustness, calibration and learning benefit remain unresolved. B03's
+energy_fraction rule remains closed. The new result warrants one concrete
+simpler-comparator investment: it can change the ordinary controller and avoid
+unearned repeated forecast computation. This is a new exploratory estimand, not
+an automatic confirmation of B04 versus H_central or a purchased MARL fit. No
+additional Pro round is needed: the independent review covers this choice and
+there is no distinct unresolved expertise or disagreement requiring one.
+
+**B05 prospective contract.** S7-S2/H3000, 32 new paired worlds per arm,
+seeds 28092801-28092832, 64 episodes, 192,000 native transitions, zero fits and
+zero optimizer updates. An integer-token search found no previous occurrence of
+these seeds in run JSON, candidate source or notebooks before declaration;
+incidental matching digits inside floating-point values were not seed exposure.
+Both arms use H_central inputs at the same ten-step replans, identical H1 targets,
+distance/hysteresis matching with separate target memory, the same all-move plus
+single-UAV horizontal-hold neighborhood and ten-step execution commitment, and
+unchanged real shield/guard. Both use the same static native radio/association/
+routing/demand model, nominal capped-speed projection, fixed current users and
+batteries, fallback conditions, float64 score selection, candidate ordering and
+strict `>` comparison. No future environment/RNG state is advanced by scoring.
+
+The first arm is the evaluated B04 `five_ten` rule, including its common q0 call
+and `(q0 + 2*q5 + q10)/4` score. The simpler `one_step` arm ranks the identical
+candidates by native delivered QoS at nominal step one. It makes one service
+snapshot call per candidate; it needs no common q0 call because that term cannot
+change ranking. This changes the implemented scoring rule and its intrinsic
+computation, with the same model and external information rights. It does not
+claim equal compute, isolate a perfect physical forecast, or establish robustness
+to a new numerical tolerance. Store float64 candidate scores and point values,
+chosen holds, near-tie counts, actual candidate/snapshot counts and the usual
+complete native/pairing traces. Development checks use the already exposed
+technical seed 973001 if a native check is needed, never a production seed.
+
+The hypothesis is that B04's farther nominal positions yield additional complete
+native service/J worth their added computation compared with ordinary one-step
+service selection. Read paired five_ten minus one_step QoS/J and all return cost,
+minimum-battery/reserve tails, cutoff/depletion, guard/shield, zero-service and
+adverse-world outcomes. Joint positive QoS/J intervals with acceptable observed
+risk/cost support only a conditional increment of the implemented scoring rule;
+clear one-step improvement favors the simpler controller. Mixed or uncertain
+differences establish neither equivalence nor a need to keep spending on the
+farther forecast; stop this comparison without an automatic extra panel. A
+material risk loss remains an explicit tradeoff and prevents default-controller
+promotion based on service alone. No reward changes, tuning, new horizon,
+additional third arm or follow-up fit is part of B05.
+
+Worst-case work is 86,400 candidate plans per arm, 182,400 five_ten snapshots plus
+86,400 one_step snapshots (268,800 total), plus the 192k actual transitions.
+Using B04's measured arm costs gives a rough 3.4 recorded worker CPU-hours and
+50-60 minutes at four workers with one numeric thread each. This is a planning
+estimate, not a runtime bound; activation, trajectories, contention and startup
+may differ. Implementation, independent engineering review, publication and
+readback add incompletely measured work. Existing B04 outcomes are development
+exposure and are not included in B05's paired inference.
+
+**L0.** Add only the bounded B05 controller, paired runner/readout and admission
+entry under `experiments/candidates/energy_relay_availability/b05/` and
+`run_b05.py`; output `runs/energy_relay_availability/b05_one_step_comparator_a01/`.
+Reuse the frozen B04 controller for five_ten and existing native helpers where
+their contracts match. Preserve B04 source/evidence, shared core, native reward,
+RNG/user motion, information cadence, shield/guard and horizon. The implementation
+and its independent engineering inspection must establish one versus the original
+19 maximum snapshot calls per active window, correct labels/selection and exact
+clock/storage/pairing contracts. Publish the exact inputs before native admission.
+
+**B04 cleanup limitation.** The terminal observer's unused request was removed
+(4,096 allocated bytes), offset by the compact cleanup record; measured net
+allocated release including that record is zero. Native snapshot GC preview
+refused because it cannot finish its process-reference scan: process 2026 is an
+observed zombie whose `/proc/2026/cwd` is absent while the process directory remains.
+The supported elevated read-only scan also refuses. No apply, unrelated process
+change or new backup was performed. The source snapshot remains present at
+1,600,032,768 allocated bytes; cleanup is incomplete. The exact path/refusal and
+single canonical raw location are in
+[cleanup.json](../../../../runs/energy_relay_availability/b04_transit_hold_a01/cleanup.json).
