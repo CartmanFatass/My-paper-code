@@ -275,3 +275,21 @@ def test_runner_passes_resume_arguments_after_admission(tmp_path, monkeypatch):
     (call,) = calls
     assert call["resume_from"] == tmp_path / "c03" and call["resume_source_sha"] == "abc"
     assert call["spec"] == cfg.production_spec(925031)
+
+
+@pytest.mark.parametrize("change", [dict(policy_fingerprint="0" * 64),
+                                    dict(optimizer_steps={"high": 0, "low_actor": 1})],
+                         ids=["fingerprint", "optimizer_steps"])
+def test_post_load_refusal_is_recorded_as_a_failure(runs, tmp_path, change):
+    """agent.pt untouched (the SHA passes), the record disagrees with the loaded learner."""
+    source = _copy(runs, tmp_path, **change)
+    out = tmp_path / "failed"
+    with pytest.raises(RuntimeError, match=next(iter(change)).replace("_", " ").split()[-1]):
+        tr.run_training(out=out, launch_sha="sha-c", spec=runs["spec"], device_name="cpu",
+                        threads=1, argv=["test"], resume_from=source)
+    summary = json.loads((out / "summary.json").read_text())
+    assert summary["status"] == "INCOMPLETE" and summary["failure"]["type"] == "RuntimeError"
+    assert summary["resume"]["checkpoint"] == "c01" and "initialization" not in summary
+    assert not (out / "checkpoints").exists()
+    rows = [json.loads(line) for line in (out / "progress.jsonl").read_text().splitlines()]
+    assert [row["event"] for row in rows] == [{"event": "training_exit", "status": "INCOMPLETE"}]
