@@ -2956,3 +2956,47 @@ launch and poll scripts and the first process's poller logs (health polls only) 
 scripts recreated with identical command lines before this launch; evidence is unaffected
 (`progress.jsonl`/`summary.json` on the node, JSON committed). Helper briefs now name a unique
 subdirectory.
+
+### Hold-out reading pinned and the frozen comparators launched on 957001–957032 (`b02_holdout_refs_a01`, operation d6f4bdeb, 2026-09-27)
+
+**Why now.** The declaration reserves 957001–957032 for "the frozen final model and the frozen H
+references, read once". The Stage 1 reader's hold-out block was summary-only; the reading rule
+for the hold-out has to exist before any hold-out panel does, so both were fixed at 00:50–01:01
+UTC, while the resumed fit is at rollout ≈ 105 and no hold-out panel exists anywhere (checked:
+no committed panel holds a 957xxx world).
+
+**Reader (`ae998950e`, DM edit, verdict logic untouched).** `read_stage1.py --holdout-refs <run>`
+reads `holdout-references/panels/{H1,Hlocal,N}_e0.00_x0.05.json` (H_central, H_local, N
+deterministic on the hold-out worlds) and, for each final panel (c06 deterministic / stochastic on
+957001–957032): the summary; `gaps` to those three comparators with the same paired `gap_block`
+(QoS/step, J, return cost, cutoff/depletion events, minimum battery, conflict flag); the count of
+worlds at or above .60 (H_local's DEVELOPMENT level, labelled so; H_local's own hold-out mean is
+reported beside it); and `development_same_checkpoint` = the c06 development mean, the hold-out
+mean and their difference (different worlds: two means, no paired SE). `holdout_comparators`
+carries each comparator's hold-out summary and its shift from the development mean (whether the
+world set is harder for everyone). Checked on the current data (checkpoint blocks byte-identical;
+no final block) and on a synthetic hold-out built from renamed development panels (gaps and shifts
+reproduce the development values exactly). Nothing here selects anything: the final model is c06
+by declaration.
+
+**B01 runner phase (`7ad3ba6d3`, implementer from L0 `L0_b01_holdout_references.md`; DM read the
+diff; b01 tests 48 = 45 + 3, b02 27).** `holdout-references`: N (B09 endpoint, `--checkpoint`,
+sha-checked), the selected central heuristic (`--heuristic`, H1 = H_central) and `Hlocal` at the
+production margins on `HOLDOUT_WORLDS` 957001–957032, 96 episodes; never part of `all`; the runner
+requires `--final` for it and refuses `--final` elsewhere; `phase_panels` refuses any other phase
+that plans a world ≥ 957001 (default world sets 953xxx/955xxx/956xxx are unaffected; `all` stays
+540 episodes); config/summary carry a `holdout_references` block (`read_once: true`). No existing
+phase, controller, parameter, trace or diagnostic changed. Not separately reviewed (a phase
+addition on the Stage 0 pattern; the DM read the diff).
+
+**Launch (admission, from the node):** `launch_b01_holdout.sh 7ad3ba6d35cee7bb38efe97b9ae60d130a4b46db
+b02_holdout_refs_a01 8 2` → `acceptance: accepted`, `accepted_at 2026-09-27T01:01:18Z`; operation ref
+`/home/wu/projects/HMASD/.git/hmasd-admission/d6f4bdebffedebd9e4a08bfeb739bce223854417299c371ea643e6584ad3de3e.json`
+(claim key `d6f4bdeb…de3e`); command sha256
+`7c6b214b62ce40746a6da3b32138a76194af50c1f89077b3fc708e19f3c6f721`; supervisor pid 739467, runner
+pid 739468; N checkpoint `…/b09_an_925031_a01/N/endpoint/agent.pt` sha256 `2ba395b9…` (B01's);
+`--phase holdout-references --final --workers 8 --threads 2 --device cpu`, beside the resumed fit
+(rollout 108 at launch, 168 s per rollout, RSS 1.7 GB, RAM 6.9 GB free). The comparator panels are
+NOT read before the final model's hold-out panel exists; both are read together after c06 with the
+reader invocation `--evals … <c06 hold-out run> --holdout-refs runs/energy_relay_benchmark/b02_holdout_refs_a01`.
+Observation: a background completion watcher that prints status and counts only.
