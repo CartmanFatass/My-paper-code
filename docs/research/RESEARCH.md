@@ -857,7 +857,9 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 ## Current research plan
 
 **2026-09-27：owner 要求“两个方向已释放 我们继续根据情况来补上”。** 已核对原 DM2 与 DM4
-的旧研究完成、完整读取及收尾；复用原独立会话和方向，选择两个新研究。
+的旧研究完成、完整读取及收尾；随后owner明确“创建新的即可”，改由两个新独立会话接手原方向和已审查的新研究。
+实际会话记录已核对：新DM2在追踪PPO数据路径，新DM4在重建冻结S4 adapter；科学运行尚未因此宣称已启动。
+旧DM2/DM4保持历史归属，当前实际负责人地址见[任务路由](#session-routing)。
 [完整独立审查与 Root 采纳](archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)
 MATERIAL_DISSENT:no，解释限制全部采用。各 DM 形成精确前瞻，完成必要工程检查、发布与原生准入，
 独立执行并发表；无逐批 Root ACK。旧路径／饱和与故障时钟停止结论保留，不重复购买。
@@ -867,10 +869,10 @@ MATERIAL_DISSENT:no，解释限制全部采用。各 DM 形成精确前瞻，完
 
 | 负责人 | 独立科学问题与当前工作 | 当前完整比较、成本与依赖 |
 | --- | --- | --- |
-| Claude：`energy_relay_benchmark` | 原Stage 1完成，完整读数及独立更正已发布；保留本问题及后继选择。 | 一次固定1.2M SET开发fit（含恢复）在开发集为.437/.438 QoS，原生J已计风险价格后仍低于H_local约353/348；时钟对齐后后段仍有缺口。实际约11h fit＋2.75h评价。原操作不重启，本次未替Claude选Stage 2；证据见其standing／NOTES。 |
+| Claude：`energy_relay_benchmark` | Stage1及独立更正已发表；Claude自行声明Stage2/B03 grounded assignment skills与flat SET的同信息／曝光比较。 | `96e6a8422`声明两个T fits与DM1的两个SET种子配对，待其§5科学审查及工程审查；本次不改变该设计或替其准入。Stage1开发QoS .437/.438，原生J已计风险价格后仍低H_local约353/348；完整后段亦有缺口。具体输入、成本和阶段规则见其standing／NOTES。 |
 | DM1：`energy_relay_baselines` | 普通 SET 的固定1.2M学习增益与缺口是否跨独立训练实例重现？ | 已选两个新种子26092711／26092731，顺序执行2 fits、2.4M训练步；仅各自c00/c06、两模式、32开发世界，共256回合／最多768k评估步。预计18.6–20.6节点小时训练＋约1小时评估，争用／准备／读取另计；实际节点准入。c04已足以支持复制价值，不再以Claude完整发布为科学前提；仍留意相关实现缺陷，不读取封存留出，不把恢复fit拼成确认。 |
 | DM2：`energy_relay_diagnostics` | 相同继续训练预算下，去掉完全接管动作的直接PPO surrogate，能否改善完整闭环收益？ | 选择B02：同公开c03完整状态分叉，普通PPO对接管mask，各固定300k；2 started fits／600k训练步；同32个声明开发世界、两模式、128回合／384k评价步。训练合计估4.7–5.7h＋评价40–60min，工程／争用／核验另计。保留全程递归输入、GAE、critic、entropy、ValueNorm、原优势标准化／有效样本分母及更新次数；记录实际mask曝光与尺度。一个共享初始化区组，不是独立种子复制；先核实提案其他内部作用，不能预称梯度错误。 |
-| DM3：`energy_relay_imitation` | B01完整发布；检验移除护盾接管时的直接动作回归损失，能否改善可执行阶段模仿及完整原生部署。 | 独立审查后选B02：复用B01已核验示范、实际初始化及已曝光32开发世界，保留全程循环输入，仅掩蔽直接loss；1新fit／十epochs／最多1920更新，7.68M训练forward／4.84686M有效loss曝光，32回合／最多96k环境步＋1.536M离线forward。2workers，参照计算约30–45min，工程／争用／核验另计；发布精确输入并工程审查后原生准入。B01零服务增加、风险及全部损失保留，不作独立复制／确认。[NOTES](candidates/energy_relay_imitation/NOTES.md)。 |
+| DM3：`energy_relay_imitation` | B02计算已正常退出，当前待原DM完整收集、核验、判读及发表；尚无B02科学闭项记录。 | Owner指出会话称停止后，Root于2026-09-27 08:36Z只读核对同一原生操作：07:33:36Z exit0、有效退出证据、runner／supervisor均不在，summary存在、身份一致。观察状态generation7的READY事件仍未消费，wake为delivery_unknown；NOTES仍停于准入，不能把资源释放当方向已科学关闭。保持原1fit、32评价回合及既定离线回放范围，不重跑、不重复投递未明的同一唤醒。原生操作与恢复入口见[NOTES](candidates/energy_relay_imitation/NOTES.md#2026-09-27--b02-natively-accepted-and-observed-on-the-fixed-handle)和[路由](#session-routing)。 |
 | DM4：`energy_relay_availability` | 同合法信息、目标集合与clock30下，目标相关能量分配是否改善普通规划服务／J及风险？ | 选择B03：原距离／滞回分配对一个前瞻冻结的能量规则，保留S4故障制度、护盾及充电机制；每臂32配对开发世界、H3000，共64回合／192k步／0fit。原生估30–60min，工程／核验另计。明确当前位置→目标→合法已知站点的能耗模型和服务负载；当前返航margin不是目标处未来可行保证，不删困难目标、不扫阈值。 |
 
 **不同用途与判读。**DM2检验奖励驱动的有限PPO更新；DM3已经接受的B02检验示范目标在
@@ -897,7 +899,8 @@ c03从已保全artifact核验hash及完整载入能力，不能假定旧节点ru
 本次选择使用开发证据；DM及helpers不打开原封存raw、不用它选参数。
 Milan真实配置cache仍缺失，留作后备；PPC/FSD pause和G33 frozen保持。
 [给Claude的书面对齐通知](../Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md)已随分工更新，
-发布不等于Claude已读。本次owner补位要求落实为向原DM2/DM4各一次具体派发，不建立自动App回复／ACK循环。
+发布不等于Claude已读。Owner最新要求落实为两个新独立会话的创建及接续；未向旧会话成功投递新研究，
+不建立自动App回复／ACK循环。DM3本次为状态核查，没有恢复或新增研究授权，也没有额外消息投递。
 
 以下PPC段落保留暂停前已采纳方案及暂停状态，不因本轮补位恢复执行。
 
@@ -989,12 +992,12 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| 查看 Claude 收件箱报告（当前 Root：S7 分工、共享依赖与控制对齐） | `01a0e091-9f32-7872-b582-b37a14f8d981` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner本轮要求释放后补位；已采用[两个后继的独立审查](archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)，复用原DM2/DM4并更新[给Claude的书面通知](../Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md)。四名Codex DM与Claude的归属、五条运行上限保持；Root管理不另占研究线，不作DM结果发布审批层。 |
-| DM3：S7 示范学习与闭环部署 | `01a0e0f8-4e3f-70f1-802f-4bf4c2348221` / `local` | `/home/fires/hmasd-wsl` · `main` | 直接 DM，`energy_relay_imitation`；B01完整读取、核验、独立发布并回收临时源码；当前准备B02损失掩码比较。方向记录归 `docs/research/candidates/energy_relay_imitation/NOTES.md`，复用DM2接口，无App消息循环。 |
-| DM4：S7 移动需求与可用性 | `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190` / `local` | `/home/fires/hmasd-wsl` · `main` | 原直接DM，`energy_relay_availability`；B01/B02故障时钟研究完整关闭，当前按owner补位要求接续B03合法能量分配。保留clock30、S4固定槽位及原生故障制度；新精确规则、工程及运行由本DM负责。[选择与边界](#current-research-plan)、[既有结果与决定](candidates/energy_relay_availability/NOTES.md#b02-independent-review-and-decision)。 |
+| 查看 Claude 收件箱报告（当前 Root：S7 分工、共享依赖与控制对齐） | `01a0e091-9f32-7872-b582-b37a14f8d981` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner要求释放后补位，并明确改为“创建新的即可”。[科学审查](archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)与比较不变；已创建并从实际会话记录核对新DM2/DM4接手，原生App状态API暂不可用时未重复创建。DM3当前为B02计算结束、待完整收尾；[当前计划](#current-research-plan)保留该真实依赖。[Claude书面通知](../Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md)同步。五条运行上限保持，Root不另占研究线。 |
+| DM3：S7 示范学习与闭环部署 | `01a0e0f8-4e3f-70f1-802f-4bf4c2348221` / `local` | `/home/fires/hmasd-wsl` · `main` | 原直接DM，`energy_relay_imitation`；B01完成，B02已有效exit0，当前待原DM收集／核验／判读／发表，未新增研究。已接受句柄在NOTES；观察入口为`/home/fires/.local/state/hmasd-wait/01a0e0f8-4e3f-70f1-802f-4bf4c2348221`，generation7、READY未消费、wake投递未明，恢复须核对同一请求，不能重跑或盲目重发。Root仅只读核查，无额外App消息。[当前状态](#current-research-plan)、[NOTES](candidates/energy_relay_imitation/NOTES.md)。 |
+| DM4：S7 能量感知任务分配（新接续会话） | `01a0e1e9-0fda-74c1-80c9-8b660eca0991` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner明确要求的新直接DM，接手`energy_relay_availability`及B03；实际会话已确认接手、读取记录并重建冻结S4 adapter。旧DM4 `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190`的B01/B02完整关闭，地址只保留历史恢复用途。保持clock30、固定S4及其停止结论，未复制旧操作。[科学选择](#current-research-plan)、[既有记录](candidates/energy_relay_availability/NOTES.md)。 |
 | DM1：S7 普通学习基线 | `01a0e0ad-0710-71f3-8d9d-8012fe7b65b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 直接 DM，`energy_relay_baselines`；保留 D1，未执行 D4 后继现归 DM3；共同接口由 DM2 负责。原生读取已核对启动及当前职责／方法读取；独立完成和发布，无自动 App 回复。[NOTES](candidates/energy_relay_baselines/NOTES.md)。 |
-| DM2：S7 训练与执行诊断 | `01a0e0af-35fd-78e1-87a5-0ac2c37df085` / `local` | `/home/fires/hmasd-wsl` · `main` | 原直接DM，`energy_relay_diagnostics`；B01完整关闭，当前按owner补位要求接续B02护盾接管PPO更新比较。母问题、NOTES与轨迹接口所有权保持；新前瞻、工程及操作归本DM，不重启旧B01。[选择与边界](#current-research-plan)、[NOTES](candidates/energy_relay_diagnostics/NOTES.md)。 |
-| Claude DM S7 能源中继参照研究 | this session / `local` | `/home/fires/hmasd-wsl` · `main` | 结果节点 wsl_4070，经 `scripts/hmasd_launch.py` 准入；Claude 无 Codex 唤醒，用分离轮询观察，运行句柄与读数在 NOTES。[NOTES](candidates/energy_relay_benchmark/NOTES.md)。 |
+| DM2：S7 护盾接管与 PPO 更新（新接续会话） | `01a0e1e7-922d-73c1-a2ad-f9a60033105e` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner明确要求的新直接DM，接手`energy_relay_diagnostics`、B02和observer接口责任；实际会话已确认读取充分独立审查，并在核对真实PPO数据路径。旧DM2 `01a0e0af-35fd-78e1-87a5-0ac2c37df085`的B01已完整关闭，地址仅作历史恢复；首次旧会话投递被归档状态拒绝，未恢复旧B01。[科学选择](#current-research-plan)、[NOTES](candidates/energy_relay_diagnostics/NOTES.md)。 |
+| Claude DM S7 能源中继参照研究 | this session / `local` | `/home/fires/hmasd-wsl` · `main` | 结果节点 wsl_4070，经 `scripts/hmasd_launch.py` 准入；Claude 无 Codex 唤醒，用分离轮询观察，运行句柄与读数在 NOTES。与 Root 为平级（owner 2026-09-27）：Root→Claude 写 `docs/Claude_docs/inbox/YYYYMMDD_<主题>_ROOT.md` 并按显式路径提交（本会话监视该目录）；Claude→Root 用 `codex queue --thread 01a0e091-9f32-7872-b582-b37a14f8d981 --message`，每条只办一件具体事、不回 ACK。[NOTES](candidates/energy_relay_benchmark/NOTES.md)。 |
 | DM 规划压缩学习 | `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / `local` | `/home/fires/hmasd-wsl` · `main`；旧持久数据 `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`，新raw见NOTES原生节点路径 | 已按owner要求完成当前任务并停止，交接在NOTES。B01–B03合计20fit核验发布；B03源snapshot净回收793542656bytes，唯一raw保留。B04代码/独立工程检查完成，0科学工作/无handle；PPC本地及节点控制均paused，观察已停。无App消息、责任转移或由读交接自动恢复。节点Git GC警告及未来恢复前检查点已写入交接。[交接](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)。 |
 | DM 伙伴曝光独立复制 | `01a0db8f-1fab-7503-ae4b-feff2d4da8f5` / `local` | `/home/fires/.codex/worktrees/fsd-c/hmasd-wsl` · 当前`codex/partner-exposure-b03-publication`；源码/证据分支`codex/partner-exposure-replication-sept25`保留 | B03两新F2/M区组已完整执行、核验、判读并独立出版；结束当前50:50固定库投入，无活动操作、未读证据、开放Pro或已选后继。全量数据在`/home/fires/hmasd-retained-runs/controller_composition/b03_partner_replication_20260925`逐文件核验保全。fsd-c不在本任务原生附件中，节点源树也非launcher snapshot，两目录保留待可用原生归档路径，不使用shell删除。旧B01/B02及ab18来源/原分支保持终态；无App消息。[完整结果和生命周期边界](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)。 |
 | DM 有限模型知识与决策价值 | `01a0d937-e2f7-7d03-982a-d16bf16385cc` / `local` | `/home/fires/.codex/worktrees/3839/hmasd-wsl` · `codex/finite-model-decision-value-sept25` | B01/B02均已完整核验、保全并独立发表；两次Pro已收清，当前NEAR预算修补投入结束，无活动结果操作、未读证据或已选后继。保留原输入/原始产物与本任务地址；未接管其他方向、未发App消息。[完整结果与决定](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--end-current-near-budget-repair-investment-retain-the-finite-result)。 |

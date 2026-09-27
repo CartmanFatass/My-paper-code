@@ -1,22 +1,23 @@
 # 给 Claude：四名独立 Codex DM 的当前分工与补位
 
 更新：2026-09-27 UTC。owner 本轮要求“两个方向已释放 我们继续根据情况来补上”。
-原 DM2、DM4 的旧研究已完成并收尾；此次复用两名原 DM 接续新问题，不新建会话。
+原 DM2、DM4 的旧研究已完成并收尾；owner随后明确“创建新的即可”，现由两个新独立会话接手同方向和已审查的问题。
+已从实际会话记录确认新DM2在核对PPO数据路径、新DM4在重建冻结S4 adapter；新地址集中登记于RESEARCH路由。
 此前 owner 采纳的五条结果性运行上限（`eda9fae04`）保持，实际训练／评价均按节点资源准入。
 
 ## 当前责任与已选比较
 
 | 负责人 | 当前责任与工作 | 成本与边界 |
 | --- | --- | --- |
-| Claude，`energy_relay_benchmark` | 原 Stage 1、完整结果及独立更正已发布，保留此科学问题和后继选择。 | 采纳开发集 .437/.438 QoS、J 已计风险价格后仍低于 H_local、时钟对齐后段仍有缺口等更正。本次未替 Claude 选择 Stage 2，不重启原操作。 |
+| Claude，`energy_relay_benchmark` | Stage1完整结果及独立更正已发布；Claude已自行声明Stage2/B03。 | `96e6a8422`声明grounded assignment skills与flat SET同信息／曝光比较，两个T fits配对DM1两个SET种子，待其科学与工程审查。本次不改变该设计；保留Stage1的风险价格和时钟对齐更正。 |
 | DM1：S7 普通学习基线，`energy_relay_baselines` | 从头 SET 的跨训练实例重复性。 | 已选两新种子各固定 1.2M，2 fits、2.4M 训练步；初始化／终点、两模式、32 开发世界，256 回合。维持其现有研究。 |
-| DM2：S7 训练与执行诊断，`energy_relay_diagnostics` | B01 路径／饱和诊断停止；新 B02 检验完全被护盾接管动作的直接 PPO surrogate 是否影响有限学习用途。 | 同一公开 c03 完整状态分叉，普通 PPO 对仅屏蔽这些 surrogate，各继续 300k；2 新 fits、600k 训练步，128 回合／384k 评价步。训练合计估 4.7–5.7h＋评价40–60min，工程／争用另计。 |
-| DM3：S7 示范学习与闭环部署，`energy_relay_imitation` | B01 已读；维持已接受的 B02 监督损失掩码研究。 | 相同示范／实际初始化与完整循环输入，只掩蔽护盾接管时直接回归损失；1新fit、32回合／最多96k评价步。B01的服务损失、风险和零服务增加继续保留。 |
-| DM4：S7 移动需求与可用性，`energy_relay_availability` | B01/B02 故障时钟投入停止；新 B03 比较普通距离／滞回分配与一个目标相关能量分配规则。 | 原生 S4、clock30、目标生成、合法信息、生产护盾与充电保持；64完整回合／192k步／0fit，原生估30–60min，工程／核验另计。 |
+| 新DM2：护盾接管与PPO更新，`energy_relay_diagnostics` | B01 路径／饱和诊断停止；新 B02 检验完全被护盾接管动作的直接 PPO surrogate 是否影响有限学习用途。 | 同一公开 c03 完整状态分叉，普通 PPO 对仅屏蔽这些 surrogate，各继续 300k；2 新 fits、600k 训练步，128 回合／384k 评价步。训练合计估 4.7–5.7h＋评价40–60min，工程／争用另计。 |
+| DM3：S7 示范学习与闭环部署，`energy_relay_imitation` | B02计算已结束，待原DM完整收集、判读和发表；尚无科学闭项记录。 | Root于08:36Z只读核实同一操作07:33:36Z有效exit0、进程均不在、summary存在。观察READY仍未消费，唤醒delivery_unknown；NOTES仍停准入。资源已释放，不等于结果已接受或方向已关闭；不重跑／盲目重投递。 |
+| 新DM4：能量感知任务分配，`energy_relay_availability` | B01/B02 故障时钟投入停止；新 B03 比较普通距离／滞回分配与一个目标相关能量分配规则。 | 原生 S4、clock30、目标生成、合法信息、生产护盾与充电保持；64完整回合／192k步／0fit，原生估30–60min，工程／核验另计。 |
 | 当前 Root | 跨方向选择、实质分歧和共享控制。 | 完成独立审查与本次补位，不另执行结果性研究，不作 DM 结果发表审批层。 |
 
 [完整独立审查与采纳](../../research/archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)
-MATERIAL_DISSENT:no。新比较由原DM在自己的NOTES精确声明、实施、完成必要工程检查、发布并经原生准入；
+MATERIAL_DISSENT:no。新比较由接续DM在原方向NOTES精确声明、实施、完成必要工程检查、发布并经原生准入；
 选择不等于已经启动科学运行。实际 task、host、工作区只在 [RESEARCH 路由](../../research/RESEARCH.md#session-routing)维护。
 
 ## 旧结论与新比较的边界
@@ -48,4 +49,5 @@ c03节点artifact及本地已核验副本保留，新研究重新声明并核验
 现行§8确认最低训练种子数及充分精度要求仍适用，当前小批次保持探索身份。
 
 这是owner请求的书面对齐通知的就地更新。文件发布不等于Claude已读。
-本次向原DM2/DM4各一次派发以落实owner补位；不要求回复、ACK、自动转发或App消息循环。
+本次已按owner追加要求创建两个新接续会话；原创建返回不明时核对实际记录，没有重复创建。
+DM3本次只核查状态，未向其额外投递或新增研究。不要求回复、ACK、自动转发或App消息循环。
