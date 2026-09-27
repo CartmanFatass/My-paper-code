@@ -1064,13 +1064,11 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 ## Current research plan
 
-**2026-09-27：owner 要求“两个方向已释放 我们继续根据情况来补上”。** 已核对原 DM2 与 DM4
-的旧研究完成、完整读取及收尾；随后owner明确“创建新的即可”，改由两个新独立会话接手原方向和已审查的新研究。
-实际会话记录已核对：新DM2在追踪PPO数据路径，新DM4在重建冻结S4 adapter；科学运行尚未因此宣称已启动。
-旧DM2/DM4保持历史归属，当前实际负责人地址见[任务路由](#session-routing)。
-[完整独立审查与 Root 采纳](archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)
-MATERIAL_DISSENT:no，解释限制全部采用。各 DM 形成精确前瞻，完成必要工程检查、发布与原生准入，
-独立执行并发表；无逐批 Root ACK。旧路径／饱和与故障时钟停止结论保留，不重复购买。
+**当前协调重点：已付费证据的收尾、技术失败的处理，以及后继的贡献价值。** Owner 提醒多个 DM 已停止后，Root 于 2026-09-27 12:13 UTC 核对原生会话、已发表 NOTES 和同一节点操作：DM1 首个种子技术失败、原第二种子只准备；DM2 A02普通臂技术失败、会话仍在收尾；DM3 B02有效exit0但完成事件未消费、完整收集判读尚未发表；DM4 B03已完整读取并结束该规则。界面空闲、计算退出、证据读完和创新假说被削弱是不同状态，不能将这四条都计作科学失败。
+
+当前顺序是先读完DM3已经产出的固定B02证据；DM1/DM2按各自已有诊断处理技术边界，两个异常尚无共同根因证据；DM4保留普通参照与负面结果，不自动扫系数或加故障。后继仍按[合成方法建议](#innovation-method-root-20260927)检查贡献、最强简单替代、判别预测和成本，不因空槽重建DM或购买救援批次。本次没有新fit、评价、跨App任务消息或接管他人方向；DM3仍需原会话处理同一完成事件，不能从投递未知推定已读，也不能盲目重复唤醒。
+
+[原DM2/DM4科学选择与完整独立审查](archive/2026-09-27/RESEARCH-two-successors.md#two-successors-review)及当前负责人保留。DM1已有的独立继续意见、DM4已有的独立停止意见在各自NOTES中；本次核查不叠加同题审查。原DM负责执行、完整读取及发表；当前没有选定新的替补实验。
 
 四名 Codex DM 与 Claude 的归属保持；结果性运行上限仍为五条（owner 修订 `eda9fae04`）。
 训练与评价都计资源，实际节点准入可少于五条。Root 只协调，不另占结果性研究线。
@@ -1079,8 +1077,8 @@ MATERIAL_DISSENT:no，解释限制全部采用。各 DM 形成精确前瞻，完
 | --- | --- | --- |
 | Claude：`energy_relay_benchmark` | Stage1及独立更正已发表；Claude自行声明Stage2/B03 grounded assignment skills与flat SET的同信息／曝光比较。 | `96e6a8422`声明两个T fits与DM1的两个SET种子配对，待其§5科学审查及工程审查；本次不改变该设计或替其准入。Stage1开发QoS .437/.438，原生J已计风险价格后仍低H_local约353/348；完整后段亦有缺口。具体输入、成本和阶段规则见其standing／NOTES。 |
 | DM1：`energy_relay_baselines` | 普通 SET 的固定1.2M学习增益与缺口是否跨独立训练实例重现？ | 原定两种子中的26092711已技术失败：1 started fit、432k已记录步／72完成rollouts、3.915h，未测部分rollout另计，端点缺失。独立审查采纳准备原定26092731，未启动；仍为1.2M训练步、自身c00/c06×两模式×32开发世界，共128回合／最多384k评估步／0评价更新。粗估训练10.9h、历史相同评价约0.696h，准备／争用另计；实际节点准入。无自动替补、旧检查点恢复或第二次失败后的自动加种子；不读取封存留出，不将恢复fit拼成新实例。代码修复只改善观察与错误证据，未证明原运行库故障已消除。[诊断及继续决定](candidates/energy_relay_baselines/NOTES.md#diagnostic-findings-and-independent-continuation-decision)。 |
-| DM2：`energy_relay_diagnostics` | 相同继续训练预算下，去掉完全接管动作的直接PPO surrogate，能否改善完整闭环收益？ | 选择B02：同公开c03完整状态分叉，普通PPO对接管mask，各固定300k；2 started fits／600k训练步；同32个声明开发世界、两模式、128回合／384k评价步。训练合计估4.7–5.7h＋评价40–60min，工程／争用／核验另计。保留全程递归输入、GAE、critic、entropy、ValueNorm、原优势标准化／有效样本分母及更新次数；记录实际mask曝光与尺度。一个共享初始化区组，不是独立种子复制；先核实提案其他内部作用，不能预称梯度错误。 |
-| DM3：`energy_relay_imitation` | B02计算已正常退出，当前待原DM完整收集、核验、判读及发表；尚无B02科学闭项记录。 | Owner指出会话称停止后，Root于2026-09-27 08:36Z只读核对同一原生操作：07:33:36Z exit0、有效退出证据、runner／supervisor均不在，summary存在、身份一致。观察状态generation7的READY事件仍未消费，wake为delivery_unknown；NOTES仍停于准入，不能把资源释放当方向已科学关闭。保持原1fit、32评价回合及既定离线回放范围，不重跑、不重复投递未明的同一唤醒。原生操作与恢复入口见[NOTES](candidates/energy_relay_imitation/NOTES.md#2026-09-27--b02-natively-accepted-and-observed-on-the-fixed-handle)和[路由](#session-routing)。 |
+| DM2：`energy_relay_diagnostics` | 相同继续训练预算下，去掉完全接管动作的直接PPO surrogate，能否改善完整闭环收益？当前比较因普通臂技术失败而不完整。 | A02普通臂于11:43:06Z有效exit1：新增126k步／21 rollouts／42训练回合，3371.235s；mask一直关闭，无端点、mask臂或配对评价。Root于12:13Z核对原生身份、退出及摘要hash，和[DM已发表诊断](candidates/energy_relay_diagnostics/NOTES.md#b02-a02-cache-failure-engineering-diagnosis-2026-09-27)一致。配置cache出现bool的来源未定；不以静默fallback改无线电语义，不自动重启。原比较仍为同c03分叉、每臂300k、同32开发世界与两模式；一个共享初始化区组，不能叫独立种子复制或已证梯度错误。再投入前由原DM记录有针对性的技术方案、成本及选择。 |
+| DM3：`energy_relay_imitation` | B02计算完整，当前待原DM完整收集、核验、判读及发表；尚无B02科学闭项记录。 | Root于2026-09-27 12:13Z只读复核同一原生操作：07:33:36Z有效exit0，runner／supervisor均不在，记录一致；摘要COMPLETE、1fit／1899更新／32评价回合／96k环境步，hash为6fe5836d9d9ff552dd634f0f007c0071c4f83daf96ac932e7f605bb8e5c4379e。原生会话最近一轮仍停在B02准入，generation7的READY未消费、wake投递未知。这里核对的是执行完成，不代替原DM的全部证据读取和科学结论；保持既定离线回放范围，不重跑或重复投递同一未明唤醒。[NOTES与原句柄](candidates/energy_relay_imitation/NOTES.md#2026-09-27--b02-natively-accepted-and-observed-on-the-fixed-handle)、[路由](#session-routing)。 |
 | DM4：`energy_relay_availability` | 同合法信息、目标集合与clock30下，目标相关能量分配是否改善普通规划服务／J及风险？ | B03已完成并按预登记读数：固定S4、clock30、合法信息；32配对世界／臂、64个H3000回合、192k步、0fit。`energy_fraction`相对`distance_hysteresis`的QoS差−.02662 [−.05886,+.00562]、native J差−208.12 [−403.86,−12.37]、封顶返航成本差+64.13 [+4.49,+123.77]；平均最低电量更低，固定reserve暴露点估计更高。预登记的联合收益与风险改善分支均不成立。精确规则`NOT_VIABLE_CLOSE`，保留原距离／滞回参照；不确认、不扫阈值、不救援重跑。较宽问题仍由DM4负责，目前无已选后继。[完整读数及审查](candidates/energy_relay_availability/NOTES.md#2026-09-27--complete-native-b03-reading)。 |
 
 **不同用途与判读。**DM2检验奖励驱动的有限PPO更新；DM3已经接受的B02检验示范目标在
