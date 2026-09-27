@@ -61,7 +61,8 @@ def test_fixed_spec_worlds_grid_and_phases():
         "w0.05", "w0.25", "w0.45", None, "w0.05", "w0.25", "w0.45"]
     assert native.matched_pair_id(FeedbackParams(0.10, 0.15), spec) is None   # not in the grid
     assert native.PHASES == ("equivalence", "null", "heuristic-dev", "reference", "grid",
-                             "stochastic-check", "stage0-references", "all")
+                             "stochastic-check", "stage0-references", "holdout-references",
+                             "all")
     assert len(native.phase_panels("grid", spec)) == 14
     assert len(native.phase_panels("grid", spec, ("N", "H3"))) == 14
     dev = native.phase_panels("heuristic-dev", spec)
@@ -454,7 +455,9 @@ def test_entry_refuses_without_admission_and_parses(tmp_path, monkeypatch):
     assert default.controllers is None and default.heuristic == "H1"
     assert entry.PHASES == native.PHASES
     for phase in native.PHASES:
-        assert entry.parse_args(["--out", "o", "--launch-sha", "s", "--phase", phase]).phase == phase
+        final = ["--final"] if phase == native.HOLDOUT_PHASE else []
+        assert entry.parse_args(["--out", "o", "--launch-sha", "s", "--phase", phase,
+                                 *final]).phase == phase
     with pytest.raises(SystemExit):
         entry.parse_args(["--out", "o", "--launch-sha", "s", "--phase", "reference",
                           "--heuristic", "Hlocal"])
@@ -481,3 +484,142 @@ def test_entry_refuses_without_admission_and_parses(tmp_path, monkeypatch):
     with pytest.raises(RuntimeError, match="launch SHA"):
         monkeypatch.setattr(hmasd_admission, "require_admission", lambda *a, **k: {"sha": "zzz"})
         entry.main(["--out", str(target), "--launch-sha", "abc", "--phase", "grid"])
+
+
+def test_holdout_references_plan_guard_and_records_config(tmp_path):
+    spec = native.B01Spec()
+    holdout = tuple(range(957001, 957033))
+    assert native.HOLDOUT_PHASE == "holdout-references" and native.HOLDOUT_WORLDS == holdout
+    assert native.HOLDOUT_CONTROLLERS == ("N", "H1", "Hlocal")
+    assert native.planned_episodes(spec, "holdout-references") == 96
+    assert native.planned_episodes(spec, "all") == 540             # unchanged
+    assert "holdout-references" not in native.RUN_PHASES
+    assert native.RUN_PHASES == ("equivalence", "null", "heuristic-dev", "reference", "grid")
+    production = native.PRODUCTION_PARAMS
+    assert (production.enter_margin, production.exit_margin) == (0.0, 0.05)
+    assert native.phase_panels("holdout-references", spec) == [
+        ("N", production, holdout), ("H1", production, holdout), ("Hlocal", production, holdout)]
+    assert [(name, c, d) for name, c, _, _, d in native.named_panels("holdout-references", spec)] == [
+        ("N_e0.00_x0.05", "N", None), ("H1_e0.00_x0.05", "H1", None),
+        ("Hlocal_e0.00_x0.05", "Hlocal", None)]
+    # The central slot is the selected heuristic; Hlocal is built exactly as in ``reference``.
+    h3 = replace(spec, heuristic="H3")
+    assert [c for c, _, _ in native.phase_panels("holdout-references", h3)] == ["N", "H3", "Hlocal"]
+    assert native.heuristic_params("Hlocal", spec, spec.heuristic) == replace(
+        native.heuristic_params("H1", spec), information="local")
+    assert [native.controller_information(c, spec) for c in ("N", "H1", "Hlocal")] == [
+        N_LABEL, "central-positions", LOCAL_LABEL]
+    # Isolation: no other phase plans a hold-out world, and none may.
+    others = (*native.RUN_PHASES, native.STOCHASTIC_PHASE, native.STAGE0_PHASE)
+    for phase in others:
+        worlds = {w for _, _, ws in native.phase_panels(phase, spec) for w in ws}
+        assert not worlds & set(holdout) and max(worlds) < 957001, phase
+    for bad in (dict(worlds=(955001, 957001)), dict(worlds=(958001,)), dict(dev_worlds=(957032,)),
+                dict(null_worlds=(957005,)), dict(equivalence_worlds=(957010,))):
+        bad_spec = replace(spec, **bad)
+        with pytest.raises(ValueError, match="hold-out worlds"):
+            native.planned_episodes(bad_spec, "all")
+        for phase in others:
+            if set(bad) == {"worlds"} and phase in ("reference", "grid", "stochastic-check",
+                                                    "stage0-references"):
+                with pytest.raises(ValueError, match="hold-out worlds"):
+                    native.phase_panels(phase, bad_spec)
+        out = tmp_path / f"refused_{next(iter(bad))}"
+        with pytest.raises(ValueError, match="hold-out worlds"):
+            native.run_native(out=out, launch_sha="fixture", checkpoint=None, phase="all",
+                              spec=replace(bad_spec, workers=1, threads=1))
+        assert not out.exists()
+    # Without the checkpoint the phase refuses exactly as grid/stochastic-check do.
+    out = tmp_path / "no-ckpt"
+    with pytest.raises(ValueError, match="controller N requires --checkpoint"):
+        native.run_native(out=out, launch_sha="fixture", checkpoint=None,
+                          phase="holdout-references", spec=replace(spec, workers=1, threads=1))
+    assert not out.exists()
+    config = native.config_record(spec, "holdout-references", launch_sha="fixture",
+                                  checkpoint=None, device="cpu", argv=["fixture"])
+    block = config["holdout_references"]
+    assert (config["phase"], block["phase"], block["worlds"], block["read_once"]) == (
+        "holdout-references", "holdout-references", "957001-957032", True)
+    assert block["world_seeds"] == list(holdout) and block["controllers"] == ["N", "H1", "Hlocal"]
+    assert [p["name"] for p in config["planned_panels"]["holdout-references"]] == [
+        "N_e0.00_x0.05", "H1_e0.00_x0.05", "Hlocal_e0.00_x0.05"]
+    assert config["planned_episodes"] == 96
+    for phase in others:
+        assert "holdout_references" not in native.config_record(
+            spec, phase, launch_sha="fixture", checkpoint=None, device="cpu", argv=["fixture"])
+
+
+def test_tiny_holdout_references_run(tmp_path, fresh_checkpoint, monkeypatch):
+    # The worlds are monkeypatched to a non-hold-out seed: no test evaluates on 957001-957032.
+    monkeypatch.setattr(native, "HOLDOUT_WORLDS", (955001,))
+    spec = tiny_spec(horizon=20)
+    out = tmp_path / "holdout"
+    summary = native.run_native(out=out, launch_sha="fixture", checkpoint=fresh_checkpoint,
+                                phase="holdout-references", spec=spec, argv=["fixture"])
+    assert summary["status"] == "COMPLETE" and summary["phases"] == ["holdout-references"]
+    assert summary["counts"]["episodes_completed"] == 3 == summary["planned_episodes"]
+    assert summary["selected_heuristic"] == "H1"
+    written = json.loads((out / "summary.json").read_text())
+    config = json.loads((out / "config.json").read_text())
+    names = ["N_e0.00_x0.05", "H1_e0.00_x0.05", "Hlocal_e0.00_x0.05"]
+    assert set(written["panels"]) == {f"holdout-references/{name}" for name in names}
+    assert sorted(p.name for p in (out / "holdout-references" / "panels").iterdir()) == sorted(
+        f"{name}.json" for name in names)
+    for record in (written, config):
+        block = record["holdout_references"]
+        assert record["phase"] == block["phase"] == "holdout-references"
+        assert (block["worlds"], block["read_once"], block["world_seeds"]) == (
+            "955001-955001", True, [955001])
+    labels = {"N": N_LABEL, "H1": "central-positions", "Hlocal": LOCAL_LABEL}
+    for name in names:
+        panel = json.loads((out / "holdout-references" / "panels" / f"{name}.json").read_text())
+        row = panel["worlds"][0]
+        assert panel["params"] == {"enter_margin": 0.0, "exit_margin": 0.05}
+        assert row["seed"] == 955001 and row["failed"] is False and row["actual_length"] == 20
+        assert row["controller_information"] == panel["controller_information"] == \
+            labels[panel["controller"]]
+        assert row["action_mode"] == "deterministic" and "draw" not in panel
+        assert all(key in row for key in (*PHASE_SPLIT, *MECHANISM_ROW, *DIAGNOSTICS))
+        with np.load(out / "holdout-references" / "traces" / f"{name}.npz") as trace:
+            _assert_mechanism_trace(trace, 20, heuristic=panel["controller"] != "N")
+        if panel["controller"] == "Hlocal":
+            assert panel["params_from_variant"] == "H1"
+            assert panel["heuristic_params"]["information"] == "local"
+    with pytest.raises(FileExistsError):
+        native.run_native(out=out, launch_sha="fixture", checkpoint=fresh_checkpoint,
+                          phase="holdout-references", spec=spec)
+
+
+def test_entry_holdout_phase_requires_final(tmp_path, monkeypatch):
+    base = ["--out", "o", "--launch-sha", "s"]
+    with pytest.raises(SystemExit):
+        entry.parse_args([*base, "--phase", "holdout-references", "--checkpoint", "c.pt"])
+    for phase in ("grid", "reference", "stage0-references", "stochastic-check", "all"):
+        with pytest.raises(SystemExit):
+            entry.parse_args([*base, "--phase", phase, "--final"])
+        assert entry.parse_args([*base, "--phase", phase]).final is False
+    args = entry.parse_args(["--phase", "holdout-references", "--final", "--checkpoint", "p/agent.pt",
+                             "--out", "o", "--launch-sha", "s"])
+    assert (args.phase, args.final, args.checkpoint, args.heuristic) == (
+        "holdout-references", True, Path("p/agent.pt"), "H1")
+
+    from scripts import hmasd_admission
+
+    def refuse(*args, **kwargs):
+        raise RuntimeError("no admission")
+
+    monkeypatch.setattr(hmasd_admission, "require_admission", refuse)
+    target = tmp_path / "never-created"
+    with pytest.raises(RuntimeError, match="no admission"):
+        entry.main(["--out", str(target), "--launch-sha", "abc", "--phase", "holdout-references",
+                    "--final", "--checkpoint", "p/agent.pt"])
+    assert not target.exists()
+    calls = {}
+    monkeypatch.setattr(hmasd_admission, "require_admission", lambda *a, **k: {"sha": "abc"})
+    from experiments.candidates.energy_relay_benchmark.b01 import native as native_module
+    monkeypatch.setattr(native_module, "run_native", lambda **kwargs: calls.setdefault("run", kwargs))
+    entry.main(["--out", str(target), "--launch-sha", "abc", "--phase", "holdout-references",
+                "--final", "--checkpoint", "p/agent.pt"])
+    run = calls["run"]
+    assert (run["phase"], run["checkpoint"], run["spec"].heuristic) == (
+        "holdout-references", Path("p/agent.pt"), "H1")

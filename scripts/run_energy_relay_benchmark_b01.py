@@ -12,10 +12,12 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-# "stochastic-check" (N, sampled actions, 2 seeded draws per world) and "stage0-references"
-# (Hspawn, Hpark2, H1r10) run alone, never in "all".
+# "stochastic-check" (N, sampled actions, 2 seeded draws per world), "stage0-references"
+# (Hspawn, Hpark2, H1r10) and "holdout-references" (N, --heuristic, Hlocal on the hold-out
+# worlds 957001-957032; requires --final) run alone, never in "all".
+HOLDOUT_PHASE = "holdout-references"
 PHASES = ("equivalence", "null", "heuristic-dev", "reference", "grid", "stochastic-check",
-          "stage0-references", "all")
+          "stage0-references", HOLDOUT_PHASE, "all")
 DEFAULT_THREADS = 2
 HEURISTICS = ("H1", "H2", "H3")
 CONTROLLERS = ("N", *HEURISTICS)
@@ -40,7 +42,8 @@ def parse_args(argv=None):
     parser.add_argument("--checkpoint", type=Path, default=None)
     parser.add_argument("--phase", choices=PHASES, required=True)
     parser.add_argument("--heuristic", choices=HEURISTICS, default="H1",
-                        help="variant for --phase reference (Hlocal params) and --phase grid; "
+                        help="variant for --phase reference (Hlocal params), --phase grid and "
+                             "--phase holdout-references (its central panel and Hlocal); "
                              "--phase all uses the heuristic-dev selection")
     parser.add_argument("--controllers", type=_controllers, default=None,
                         help="grid controllers for --phase grid (default N,<--heuristic>); "
@@ -48,7 +51,15 @@ def parse_args(argv=None):
     parser.add_argument("--workers", type=int, default=default_workers())
     parser.add_argument("--threads", type=int, default=DEFAULT_THREADS)
     parser.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
-    return parser.parse_args(argv)
+    parser.add_argument("--final", action="store_true",
+                        help=f"required by, and only allowed with, --phase {HOLDOUT_PHASE} "
+                             "(the hold-out worlds are read once)")
+    args = parser.parse_args(argv)
+    if args.phase == HOLDOUT_PHASE and not args.final:
+        parser.error(f"--phase {HOLDOUT_PHASE} requires --final")
+    if args.final and args.phase != HOLDOUT_PHASE:
+        parser.error(f"--final is only allowed with --phase {HOLDOUT_PHASE}")
+    return args
 
 
 def main(argv=None):

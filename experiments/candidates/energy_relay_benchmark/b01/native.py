@@ -11,6 +11,10 @@ settings).  Nothing is gated on a recorded difference.
 actions at both levels, ``STOCHASTIC_DRAWS`` seeded episodes per world (panels ``..._s<draw>``).
 ``stage0-references`` (never part of ``all``): the fixed references H_spawn (``Hspawn``), H_park2
 (``Hpark2``) and H_central@10 (``H1r10``) at production margins on ``worlds``.
+``holdout-references`` (never part of ``all``; runner requires ``--final``): the frozen
+comparators N, the selected central heuristic (``--heuristic``, H1) and ``Hlocal`` at production
+margins on the hold-out worlds ``HOLDOUT_WORLDS`` (957001-957032), read once.  No other phase may
+evaluate on a world >= ``HOLDOUT_WORLD_FLOOR``; ``phase_panels`` refuses it.
 """
 
 from __future__ import annotations
@@ -60,7 +64,12 @@ STAGE0_PHASE = "stage0-references"      # run alone only; ``all`` stays RUN_PHAS
 STAGE0_CONTROLLERS = ("Hspawn", "Hpark2", "H1r10")
 STAGE0_BASE_VARIANT = "H1"              # movement primitive (all three) and H1r10's plan
 STAGE0_REPLAN_PERIOD = 10               # H_central@10
-PHASES = (*RUN_PHASES, STOCHASTIC_PHASE, STAGE0_PHASE, "all")
+HOLDOUT_PHASE = "holdout-references"    # run alone only (runner: --final); ``all`` stays RUN_PHASES
+HOLDOUT_WORLD_FLOOR = 957001            # fixed guard: worlds >= this only in HOLDOUT_PHASE
+HOLDOUT_WORLDS = tuple(range(HOLDOUT_WORLD_FLOOR, HOLDOUT_WORLD_FLOOR + 32))   # 957001-957032
+# Nominal labels: the middle panel is the selected central heuristic ``spec.heuristic`` (H1).
+HOLDOUT_CONTROLLERS = ("N", "H1", "Hlocal")
+PHASES = (*RUN_PHASES, STOCHASTIC_PHASE, STAGE0_PHASE, HOLDOUT_PHASE, "all")
 HEURISTICS = ("H1", "H2", "H3")
 LOCAL_CONTROLLER = "Hlocal"
 CONTROLLERS = ("N", *HEURISTICS)
@@ -211,8 +220,28 @@ def controller_information(controller: str, spec: B01Spec, selected: str | None 
     return CONTROLLER_INFORMATION[heuristic_params(controller, spec, selected).information]
 
 
+def holdout_world_range() -> str:
+    return f"{HOLDOUT_WORLDS[0]}-{HOLDOUT_WORLDS[-1]}"
+
+
 def phase_panels(phase: str, spec: B01Spec, controllers=None):
-    """(controller, params, worlds) per panel; ``controllers`` overrides the grid's."""
+    """(controller, params, worlds) per panel; ``controllers`` overrides the grid's.
+    Hold-out isolation: only ``HOLDOUT_PHASE`` may plan a world >= ``HOLDOUT_WORLD_FLOOR`` or in
+    ``HOLDOUT_WORLDS``; any other phase whose plan touches one raises before anything runs."""
+    if phase == HOLDOUT_PHASE:
+        worlds = tuple(HOLDOUT_WORLDS)
+        return [("N", PRODUCTION_PARAMS, worlds), (spec.heuristic, PRODUCTION_PARAMS, worlds),
+                (LOCAL_CONTROLLER, PRODUCTION_PARAMS, worlds)]
+    panels = _non_holdout_panels(phase, spec, controllers)
+    held = sorted({int(seed) for _, _, worlds in panels for seed in worlds
+                   if int(seed) >= HOLDOUT_WORLD_FLOOR or int(seed) in HOLDOUT_WORLDS})
+    if held:
+        raise ValueError(f"phase {phase!r} plans hold-out worlds {held}; worlds >= "
+                         f"{HOLDOUT_WORLD_FLOOR} are evaluated only by {HOLDOUT_PHASE!r}")
+    return panels
+
+
+def _non_holdout_panels(phase: str, spec: B01Spec, controllers=None):
     if phase == "equivalence":
         return [("N", PRODUCTION_PARAMS, tuple(spec.equivalence_worlds))]
     if phase == "null":
@@ -229,7 +258,8 @@ def phase_panels(phase: str, spec: B01Spec, controllers=None):
         return [("N", PRODUCTION_PARAMS, tuple(spec.worlds))] * STOCHASTIC_DRAWS
     if phase == STAGE0_PHASE:
         return [(name, PRODUCTION_PARAMS, tuple(spec.worlds)) for name in STAGE0_CONTROLLERS]
-    raise ValueError(f"phase must be one of {(*RUN_PHASES, STOCHASTIC_PHASE, STAGE0_PHASE)}")
+    raise ValueError(f"phase must be one of "
+                     f"{(*RUN_PHASES, STOCHASTIC_PHASE, STAGE0_PHASE, HOLDOUT_PHASE)}")
 
 
 def named_panels(phase: str, spec: B01Spec, controllers=None):
@@ -385,7 +415,21 @@ def config_record(spec: B01Spec, phase: str, *, launch_sha: str, checkpoint, dev
                                 "planned once at step 0, never replanned; H1 movement "
                                 "primitive (height_m, cruise_mps, vertical_cap_mps)"),
             "feedback": asdict(PRODUCTION_PARAMS)}
+    if HOLDOUT_PHASE in phases:
+        record["holdout_references"] = holdout_record(spec)
     return record
+
+
+def holdout_record(spec: B01Spec) -> dict[str, Any]:
+    """The hold-out block of config.json and summary.json (``HOLDOUT_PHASE`` only)."""
+    panels = phase_panels(HOLDOUT_PHASE, spec)
+    return {
+        "phase": HOLDOUT_PHASE, "worlds": holdout_world_range(), "read_once": True,
+        "world_seeds": list(HOLDOUT_WORLDS), "nominal_controllers": list(HOLDOUT_CONTROLLERS),
+        "controllers": [c for c, _, _ in panels], "selected_heuristic": spec.heuristic,
+        "local_params_from_variant": spec.heuristic,
+        "feedback": asdict(PRODUCTION_PARAMS),
+        "panels": [panel_name(c, p) for c, p, _ in panels]}
 
 
 def _progress(out: Path, event: dict[str, Any]) -> None:
@@ -408,6 +452,7 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
     if unknown:
         raise ValueError(f"unknown controllers {sorted(unknown)}")
     phases = RUN_PHASES if phase == "all" else (phase,)
+    planned_episodes(spec, phase)   # plans every phase: hold-out isolation refuses before output
     needs_n = phase == "all" or any(
         c == "N" for name in phases for c, _, _ in phase_panels(name, spec))
     if needs_n and checkpoint is None:
@@ -418,7 +463,7 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
     out = Path(out)
     if any((out / name).exists() for name in
            ("summary.json", "config.json", "progress.jsonl", *RUN_PHASES, STOCHASTIC_PHASE,
-            STAGE0_PHASE)):
+            STAGE0_PHASE, HOLDOUT_PHASE)):
         raise FileExistsError(f"B01 output already exists: {out}")
     out.mkdir(parents=True, exist_ok=True)
     (out / "logs").mkdir(exist_ok=True)
@@ -438,6 +483,8 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
                    "failed_worlds": 0, "new_fits": 0, "optimizer_updates": 0},
         "panels": {}, "phase_results": {}, "artifacts": {},
     }
+    if phase == HOLDOUT_PHASE:
+        summary["holdout_references"] = holdout_record(spec)
     write_summary(out / "config.json", config_record(
         spec, phase, launch_sha=launch_sha, checkpoint=checkpoint, device=device_name,
         argv=sys.argv if argv is None else argv))
@@ -545,7 +592,7 @@ def run_native(*, out: Path, launch_sha: str, checkpoint: Path | None, phase: st
                                     "selected": selected, "mean_raw_native_J": scores})
                 if phase_name == "grid":
                     controllers = ("N", selected)
-            elif phase_name in ("reference", "grid"):
+            elif phase_name in ("reference", "grid", HOLDOUT_PHASE):
                 summary["selected_heuristic"] = selected
                 summary["selected_heuristic_source"] = "--heuristic (no heuristic-dev in this run)"
             planned = named_panels(phase_name, spec, controllers)
