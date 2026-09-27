@@ -139,11 +139,20 @@ an older frozen launcher that lacks that protection; choose a quiescent boundary
 
 On sparse remote checkouts, a missing manifest can be a checkout omission. Check the
 published commit for the exact operation's original records and match its claim, SHA,
-host, source, output and native process identities before recovering them. Materialize
-the relevant run directories with `git sparse-checkout add` (preserving existing paths
-and untracked outputs), then preview again. Do not synthesize terminal records or treat
-a copied record from another node as local evidence. Retain the run directories in the
-sparse selection so a later checkout does not discard the recovered status handles.
+host, source, output and native process identities before recovering them. Recover only
+the missing tracked record files from that verified commit, without overwriting existing
+files or changing the sparse selection, then preview again. Do not synthesize terminal
+records or treat a copied record from another node as local evidence.
+
+`git sparse-checkout add` can remove other excluded run directories whose remaining
+contents are tracked or ignored, including traces and checkpoints; preserving the old
+selection is not proof that outputs survive. It is not a routine record-recovery step.
+An actual sparse-selection change is a serialized shared-checkout operation: first account
+for all affected run outputs and live consumers, and retain required unique evidence
+outside the affected paths. Do not touch accepted inputs or use whole-tree backups as a
+condition. Afterward verify the affected evidence and handles; an absent directory does
+not establish that its operation ended. Prefer direction-owned output paths outside a
+shared sparse working tree for new bulk, with the declared canonical location and hashes.
 
 Ordinary authoring now uses main and per-direction folders, not additional worktrees.
 Follow [the main authoring and retirement method](../SKILL.md#main-authoring-and-direction-directories).
