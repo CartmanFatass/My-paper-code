@@ -628,3 +628,51 @@ retry was performed: snapshot `991be7f5fde844678030c9fab5f89291` remains at its 
 with measured allocated size 795,213,824 bytes; reclaimed space is zero. Required outputs,
 claims and the compact terminal record remain outside that snapshot. This leftover does not
 mean a worker is running or that cleanup succeeded.
+
+## 2026-09-27 — execute the untouched original second seed after preparation
+
+Continue within the owner's earlier instruction to proceed with this research and the declared
+two-seed scope. Root's coordination message requests actual continuation and reports DM2's new
+failure; it supplies evidence and coordination, not permission to add a fit, restart seed1 or
+lift a pause. Current RESEARCH at `c9842cbbe` retains the lifted owner pause and this direction's
+active state/unchanged lead. The earlier preparation-only entry describes that completed turn;
+the selected next action is now the untouched original seed **26092731**, not a replacement.
+
+The new [DM2 A02 diagnosis](../energy_relay_diagnostics/NOTES.md#b02-a02-cache-failure-engineering-diagnosis-2026-09-27),
+published at `4fdb5e77c`, records ordinary PPO failing with the mask off after 126,000 new
+transitions / 3,371.235 s. Its immediate path is a bool at the communication-cache signature
+lookup; reviewed writers only store None/dict, and the origin is unresolved. This is not the
+same immediate failure as B01's sequence-conversion SystemError. No common cause or shared
+semantic defect is established. DM2 owns that cache investigation; this DM changes no shared
+environment code and introduces no silent fallback, exception retry or arbitrary library swap.
+
+ResearchCritic `/root/b01_failure_route_review` reviewed this evidence delta using its completed
+independent reconstruction. **MATERIAL_DISSENT: no; recommendation to execute the untouched
+original second seed retained and adopted.** The additional failure lowers feasibility
+confidence and increases uncertain expected completion cost, but does not identify a specific
+discriminating prerequisite for this observation. Injecting invalid cache values explains the
+exception, not its origin; a short passing run cannot establish long-run integrity. DM2's own
+decision to diagnose before repeating its failed comparison is not a project-wide prerequisite.
+A demonstrated shared semantic defect would change this decision; another B01 failure will be
+read from the new evidence before any different technical investment, with no automatic seed
+substitution. Completing this seed would yield one fresh complete endpoint and one missing
+endpoint, not repair the original two-endpoint study.
+
+Use already published source **`4a3e309f5e8e229eb6c0bc6e5de7008cc338dead`**, whose forensics,
+observer changes and default semantics have independent engineering acceptance. The reachable
+scientific/launcher imports have not changed between that source and the current preparation.
+No unchanged test suite or extra scientific smoke is purchased. The fixed contract remains
+1.2M training transitions, CUDA FP32 / 4 Torch threads, c00 and c06 only for development
+evaluation, both modes, worlds 955001–955032, CPU FP32 / 8 workers / 2 threads: 128 evaluation
+episodes, at most 384,000 steps and zero evaluation updates. Rough cost remains 10.9 training
+hours plus 0.70 evaluation hours; failure probability, contention and support costs are unknown.
+Seed1's 3.915 hours and missing endpoint remain charged; DM2's 0.936 hours is separate evidence,
+not cost silently assigned to this study. Native admission supplies the fresh resource check.
+
+The configured node has the same boot, an idle GPU, about 14.56 GiB available memory at the
+preparation read and no second-seed output yet. These observations are not admission. Fetch
+published objects without a checkout/sparse-selection change, preserve the node's existing
+dirty records, then submit the exact new-seed request once. Reconcile the stopped stale observer
+against seed1's terminal status through drain/rearm without `--resume-jobs` or a worker launch;
+register the new accepted operation only from its verified manifest. Use the verified App CLI
+for 1500-second checkpoints and 30-second read-only probes. No App-task ACK or reply is sent.
