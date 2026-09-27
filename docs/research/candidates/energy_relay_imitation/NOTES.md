@@ -650,3 +650,221 @@ probe errors, consistent identities and no exit witness. The detached observer p
 read-only handle and wakes this task at a terminal fact, observation problem or bounded checkpoint.
 Future collection reads complete outputs and native exit evidence; it grants no automatic retry,
 extra fit or repeated question. No App cross-task message or Pro request was made.
+
+
+## 2026-09-27 — DM3 handover: complete B02 terminal and native-result reading
+
+The old task remains archived. I read the old observer state and reconciled the exact native
+admission operation read-only; I did not consume or rearm its generation-7 READY event, resend a
+wake, resume a worker, or restore the archived task. The READY event was not consumed and the
+prior wake delivery remained unknown. The native operation record at
+`/home/wu/projects/HMASD/.git/hmasd-admission/88126358a8cf1ee2224bf87643703f7c5610a5be277af171318873a4cbdbfbad.json`
+and same-key `scripts/hmasd_launch.py status` both resolve the existing operation: process exit
+code 0, valid exit witness, runner/supervisor absent, consistent record, source SHA
+`d423595c0f50f2fca33d6fc197f30085ac61dbd3`. No retry was available or submitted.
+
+The canonical output remains on `wsl_4070` at
+`/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01`; no raw files or checkpoint
+were copied into this checkout. Its complete summary is `COMPLETE`, SHA-256
+`6fe5836d9d9ff552dd634f0f007c0071c4f83daf96ac932e7f605bb8e5c4379e`, with one fit, 1,899 actor
+updates, 7,680,000 recurrent agent-transition training exposures, 4,846,860 selected loss
+exposures, 21 all-empty masked optimizer chunks skipped, and 32/32 completed H3000 final episodes
+(96,000 environment transitions). Offline replay covered 1,536,000 agent-transitions. The final
+checkpoint record and file agree; checkpoint SHA-256 is
+`2a1dc810c95cb786b49e846072c1e1542ccc6b7456c53b890166a82f707ce6dd`, 34,494,779 bytes.
+Runner wall was 1,321.7377 seconds (22.03 minutes): fitting 242.128 seconds, final evaluation
+1,001.645 seconds, and offline replay 76.283 seconds; B02 source validation plus revalidation took
+about 0.638 seconds. The output allocated 50,581,504 bytes and peak RSS was 1,442,080 KiB.
+
+I re-read the complete per-world results and independently recomputed the native aggregate
+quantities from all 32 retained trajectory files. Every recorded NPZ hash/byte count matched;
+the 14 metric sums, native J, minimum-battery values, zero-service, charging, shield-entry/exit
+and backhaul-guard totals matched the summary, with maximum absolute metric-sum discrepancy 0.
+The pinned B01 initial checkpoint and each of the 64 teacher train/evaluation inputs also matched
+the B02 source record. These validations refer to the one canonical remote output and are not a
+second raw-output copy.
+
+### Complete result and limits
+
+The inactive-shield teacher-trajectory MSE improved, while the active-shield stratum and overall
+MSE worsened:
+
+| Panel | Inactive | Active | Overall |
+| --- | ---: | ---: | ---: |
+| Train | .132996559 → .094674645 (−.038321913) | .021739026 → .137971883 (+.116232857) | .091953829 → .110646929 (+.018693100) |
+| Evaluation | .148998847 → .111176525 (−.037822323) | .023397375 → .125017096 (+.101619721) | .101468012 → .116414154 (+.014946142) |
+
+Each train/evaluation split contains 768,000 agent-steps; active and inactive counts reconcile to
+those totals. Each of the four action dimensions improved on inactive steps, but this replay
+diagnostic is conditional on stored teacher trajectories and is not a native-planning measure.
+
+Against B01 BC on the same 32 exposed worlds and single initialization, B02 mean QoS/step rose
+`.0420148` from `.2669` to `.3089` (world SE `.026602`), with 17 positive, 4 zero and 11 negative
+world differences (range `−.225742` to `+.414772`). Mean raw native J rose `127.8509` from about
+`757` to `885` (SE `.0785947`), with 21
+positive and 11 negative worlds (range `−671.4605` to `+1229.9585`). Return-cost sum changed
+`−1.83028` (SE `3.4782`; 24 lower, 8 higher); mean minimum-battery ratio changed `+.002599`
+(SE `.002413`; 21 improved, 11 worsened). These are descriptive paired summaries, not independent
+training-seed estimates.
+
+The native adverse outcomes remain material. B02 lost QoS/J in worlds
+`968001, 968003, 968004, 968012, 968013, 968015, 968022, 968023, 968026, 968027, 968029`.
+Zero-service worlds were `968005, 968006, 968012, 968016, 968024`; B01 BC was zero in
+`968005, 968006, 968016, 968021, 968024`. Thus 968012 is a new zero-service failure and 968021
+recovered. Return-cost increases occurred in
+`968002, 968007, 968009, 968012, 968021, 968023, 968028, 968030`. The eight lowest B02
+minimum-battery ratios were `.0769495 (968009), .0794731 (968002), .0807524 (968007), .0836589
+(968030), .0864534 (968012), .0911367 (968021), .0928880 (968032), .0932809 (968026)`. Neither
+panel had cutoff or depletion events. Their absence is not a safety guarantee.
+
+The mask removed direct regression loss only on shield-active decisions. Those actions were still
+processed in chronological order and recurrent state propagated through them (including masked
+steps within truncated chunks); the result therefore does not test a causal removal of active
+history. This one-fit/one-exposed-panel result supports only a conditional BC repair: lower
+inactive-action error and a moderate mean service/J gain co-occur with 11 service/J losses, a new
+zero-service world and a worse low-battery tail. It does not show competent planner compression,
+reliable generalization, a MARL planning increment, or that DAgger, another mask or PPO warm-start
+would help. None is selected as the successor.
+
+### Handover decision
+
+The B02 question is scientifically complete and stays frozen. I am retaining the native result,
+adverse worlds, exact operation identity and cost rather than inheriting the old task's unresolved
+observer as a live experiment. The subsequent DM3 question is long-horizon cooperative UAV
+movement, waiting and service-role replacement against a capable ordinary planner with the same
+lawful information. Its candidate mechanism and executable comparison are recorded in the new
+`uav_cooperative_planning` direction; this handover does not alter any other direction's files or
+make B02's tail the reason for a BC/PPO continuation.
+
+## 2026-09-27 — owner-requested source re-review and B02 corrections
+
+The owner requested a re-review of the new DM's evidence reading and direction choice. The
+handover above is preserved as written. The corrections below supersede its numerical and
+interpretive errors; the model used to author a record is not evidence that the experiment
+itself is valid or invalid. This review starts from the accepted source and retained outputs.
+
+### Original evidence and corrected native reading
+
+The new compact [source re-reading](../../../../runs/energy_relay_imitation/b02_mask_a01/reading.json)
+records both original summary hashes, three checkpoint hashes, every one of the 32 paired worlds,
+and source locators. I independently recomputed both B01-final and B02-final outcomes from all
+**64 raw NPZ trajectories**, checked their recorded hashes and byte counts, rehashed the **64
+teacher inputs**, and checked B01 initial/final and B02 final checkpoint hashes. All 14 metric
+sums, J, battery minima, charging, feedback/guard counts and episode lengths matched the summaries
+exactly; all evaluation episodes had H3000 and their recorded terminal flags. Maximum discrepancy
+in the native reward identity was `2.220446049250313e-16`; the audit error list is empty.
+The inspected B01/B02 study and benchmark-evaluator code is unchanged between accepted source
+`d423595c0f50f2fca33d6fc197f30085ac61dbd3` and current main at this reading. This did not rerun
+an environment, optimizer or model replay. Saved replay MSE arithmetic was checked against its
+stratum counts and dimensions; those saved forward passes were not repeated.
+
+**Numerical correction:** the handover's raw-J standard error `.0785947` is a transcription
+error, smaller by a factor of 1,000. The original runner and the independent raw recomputation
+both give **`78.59465471239113`**. It must not be read as a normalized-J estimate. The complete
+paired reading, B02 minus B01, is:
+
+| Native quantity | B01 mean | B02 mean | Paired difference | World SE | Frozen descriptive normal 95% interval |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| QoS per step | .266971986 | .308986749 | +.042014763 | .026601968 | [−.010125095, +.094154621] |
+| Raw native J | 756.935070 | 884.785925 | +127.850856 | 78.594655 | [−26.194667, +281.896379] |
+| Return-cost sum | 8.403580 | 6.573305 | −1.830276 | 3.478216 | [−8.647578, +4.987027] |
+| Episode minimum battery ratio | .099197205 | .101796359 | +.002599155 | .002412617 | [−.002129574, +.007327884] |
+
+These retain the original `1.96 * world_SE` convention rather than silently replacing its
+interval. Both service and J intervals span zero. The 32 already exposed worlds condition on
+one paired initialization; neither the intervals nor 32 world outcomes estimate training
+variation or establish fresh-world generalization. The observed mean increase is real for this
+panel; a resolved population improvement, reliable deployment or a stable ranking is not shown.
+
+Raw native J is the sum of the actual reward, including QoS, twice the **capped** return cost,
+cutoff/depletion penalties and graph-potential increments. In these two panels capped and raw
+return costs happen to agree, and both event counts are zero. The mean J difference decomposes
+as `3000 * .04201476339003969 + 3.660551316855007 - 1.8539856446835696 = 127.8508558422905`.
+Thus the mean increase largely reflects service in this panel, without identifying its cause.
+
+The prior adverse-world lists remain correct. There are 11 service/J losers, five B02 zero-service
+worlds including new failure 968012, and eight worlds with increased return cost. The phrase
+"worse low-battery tail" is made precise: the panel minimum falls **.079834577 → .076949491**,
+and the mean of each arm's eight lowest episode minima falls **.089557819 → .085574095**, even
+though the overall mean minimum rises. Worst raw J also falls **−46.058808 → −75.350194**.
+Zero cutoff/depletion events in these fixed panels is not a safety claim.
+
+### What the intervention changed, and what it did not identify
+
+The loss mask comes from **the teacher trajectory's recorded shield mode** in `_chunk`, not
+the learner's own shield decisions during deployment. `_fit` uses `valid * (1 - active)`,
+normalizes by the selected agent-steps times four coordinates, and skips 21 all-empty optimizer
+chunks. Relative to B01 it therefore changes direct-loss allocation/normalization and the number
+of optimizer updates (1,899 versus 1,920). Those are parts of one declared intervention.
+
+The handover sentence "Those actions were still processed in chronological order" is imprecise:
+the **observations** at masked steps pass through the GRU; teacher proposals are regression
+targets, not recurrent action inputs. Within a TBPTT chunk, masked-step observations may still
+affect future unmasked losses through recurrent state. There is no removal of all active history
+or its indirect gradients.
+
+Inactive-stratum MSE on teacher train/evaluation trajectories does decrease, while active-stratum
+and aggregate MSE increase. That supports the narrow prediction that this supervision allocation
+can improve the targeted recorded stratum with the same data and initial state. The mean native
+increase co-occurs with this change and with substantial conflicts. It does **not** identify
+gradient competition as the cause of the deployment gap, distinguish it from changed optimization
+or subsequent visitation, or establish that a different action-loss rule would repair PPO.
+The earlier phrase "conditional BC repair" is retained only for the targeted MSE change and the
+observed panel means; any reading of it as established closed-loop improvement is withdrawn.
+
+Information rights also limit the teacher comparison. `held_input` supplies the BC actor its
+declared raw central state plus all eight legal observations at k=10 and an ego identifier;
+the teacher H_local pools legal observations without that raw state. Both B01 and B02 keep this
+same declared SET contract, so the mask comparison remains matched. The teacher gap is not a
+same-information compression or capacity comparison, and the state's inclusion is not a newly
+introduced leakage defect. It cannot motivate an information-matched planning claim by relabeling.
+
+B02 therefore preserves useful positive and adverse evidence about one BC objective intervention.
+It supplies no direct observation that long-horizon cooperative planning is the remaining
+bottleneck. The unexecuted successor requires its own contribution and comparator argument;
+its disposition is recorded in [the successor notebook](../uav_cooperative_planning/NOTES.md#2026-09-27--owner-requested-re-review-end-the-binary-selector-investment).
+
+### Actual cost and terminal source retirement
+
+The B02 fit/evaluation/replay counts and costs in the handover remain correct: **one fit,
+1,899 updates, 7,680,000 recurrent training agent-steps, 4,846,860 selected loss exposures,
+32 completed episodes / 96,000 environment transitions, and 1,536,000 replay agent-steps**.
+Runner wall is 1,321.737706 seconds, of which fitting is 242.128007 seconds. The compact audit's
+cached raw reading/hash/arithmetic phase took 0.505315 seconds; the additional source inspection,
+SSH, review and authoring time is unmetered and is not included in that figure. This review
+started zero new fits or episodes.
+
+The same operation remains terminal with a valid exit-zero witness; see
+[terminal status](../../../../runs/energy_relay_imitation/b02_mask_a01/status-completed.json)
+and [exit fields](../../../../runs/energy_relay_imitation/b02_mask_a01/process-exit.json).
+After raw verification, the exact-target collector preview and apply both passed, including
+native process absence, external output retention, clean source and durable Git reachability.
+Its read-only protected-process scan used the existing `--sudo-process-scan` route.
+
+[Measured cleanup](../../../../runs/energy_relay_imitation/b02_mask_a01/cleanup.json) records
+source snapshot `e3c3355e9df84ff5b1025a5451e89b86` **796,807,168 → 0 allocated bytes**; its
+directory and Git worktree registration are gone. Canonical B02 output remains **50,749,440
+allocated bytes before and after cleanup**, with unchanged original summary digest. Claims,
+manifests, exit evidence, final checkpoint and raw trajectories remain at the same node paths;
+no bulk duplicate or full backup was created. The earlier 50,581,504-byte figure is the runner's
+recorded measurement, not this later directory measurement.
+
+Local consumed B02 request files were removed. Parent removal initially found one empty test
+directory; the subsequent measured removal of that directory and its parent reclaimed **8,192
+bytes**, leaving `temp/directions/energy_relay_imitation/` absent. The first deletion's byte
+count was not saved after that interruption, so no measured total is claimed for those files.
+The old observer PID is absent and its daemon lock was unheld; its historical READY/wake state
+was neither consumed nor rearmed. Unique B01/B02 evidence and frozen reproducibility code remain;
+there is no accepted continuation that consumes a live source snapshot.
+
+### Independent reconstruction and DM disposition
+
+The focused independent ResearchCritic independently matched both remote summary hashes and
+all 64 final-trajectory hashes/J sums to the accepted source records. It agrees with retaining
+the finite BC objective result with corrected uncertainty, and with the mask/history/information
+limits above. Its substantive challenge, context-exposure limitation and response are preserved
+in [the successor disposition](../uav_cooperative_planning/NOTES.md#2026-09-27--owner-requested-re-review-end-the-binary-selector-investment).
+I accept its material objection to the proposed successor comparison and end that unexecuted
+investment. B02 is fully read and published as a conditional exploratory result. No further
+imitation fit, diagnostic sequence or learning warm-start is selected. The larger cooperative
+planning question remains with DM3, with no current result-bearing study selected.

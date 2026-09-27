@@ -1,0 +1,1501 @@
+{
+  "kind": "B02 source evidence re-reading",
+  "audit_date_utc": "2026-09-27",
+  "source_node": "wsl_4070",
+  "source_roots": {
+    "b01": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b01_bc_a01",
+    "b02": "/home/wu/projects/HMASD/runs/energy_relay_imitation/b02_mask_a01"
+  },
+  "source_summaries": {
+    "b01": {
+      "sha256": "ab6c8a3bcaa138434843b70915e7e0bb755551cefd8e673f1a18b2cfb760421e",
+      "bytes": 826223,
+      "status": "COMPLETE",
+      "launch_sha": "b8cf9d3aace3ac4b386d03190b5a6310ee90acae"
+    },
+    "b02": {
+      "sha256": "6fe5836d9d9ff552dd634f0f007c0071c4f83daf96ac932e7f605bb8e5c4379e",
+      "bytes": 348940,
+      "status": "COMPLETE",
+      "launch_sha": "d423595c0f50f2fca33d6fc197f30085ac61dbd3"
+    }
+  },
+  "process_exit": {
+    "exit_code": 0,
+    "finished_at_epoch": 1790494416.3484595,
+    "pid": 787026,
+    "process_identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 787026,
+      "session_id": 787025,
+      "start_ticks": 84469035
+    },
+    "schema_version": 1,
+    "status": "exited",
+    "supervisor_identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 787025,
+      "session_id": 787025,
+      "start_ticks": 84469032
+    },
+    "termination": "process_exit"
+  },
+  "native_final_trajectories_checked": 64,
+  "teacher_input_files_hashed": 64,
+  "checkpoint_checks": {
+    "b01_initial": {
+      "sha256": "360ab5575f69fe08a5025d61421d0cf51bf1d8702a7b17802b9f94dbe8334b88",
+      "bytes": 23407075,
+      "valid": true
+    },
+    "b01_final": {
+      "sha256": "cab8fe481a37c0303321e82665755cf9ce63446976c41da230eb0b88e6a79102",
+      "bytes": 34494779,
+      "valid": true
+    },
+    "b02_final": {
+      "sha256": "2a1dc810c95cb786b49e846072c1e1542ccc6b7456c53b890166a82f707ce6dd",
+      "bytes": 34494779,
+      "valid": true
+    }
+  },
+  "max_absolute_summary_metric_discrepancy": 0.0,
+  "max_absolute_native_reward_identity_discrepancy": 2.220446049250313e-16,
+  "errors": [],
+  "counts": {
+    "agent_transition_exposures": 7680000,
+    "environment_transitions": 96000,
+    "environment_transitions_exact": true,
+    "environment_transitions_upper_bound": 96000,
+    "episodes_completed": 32,
+    "episodes_failed": 0,
+    "episodes_planned": 32,
+    "failed_worlds_unknown_environment_work": 0,
+    "fits_started": 1,
+    "native_episodes_completed": 32,
+    "optimizer_updates": 1899,
+    "replay_agent_transitions": 1536000,
+    "selected_loss_agent_exposures": 4846860,
+    "skipped_optimizer_chunks": 21
+  },
+  "costs": {
+    "max_child_peak_rss_kib": 1442080,
+    "max_observed_world_worker_peak_rss_kib": 1442080,
+    "output_allocated_bytes": 50581504,
+    "parent_peak_rss_kib": 1442080,
+    "resources_unmeasured": false,
+    "wall_seconds": 1321.73770607193
+  },
+  "fit": {
+    "actor_parameter_l2_movement": 10.415244973605176,
+    "agent_transition_exposures": 7680000,
+    "critic_coordinator_normalizers_unchanged": true,
+    "epochs": 10,
+    "finite_gradients": true,
+    "logstd_unchanged": true,
+    "loss_mask": "shield_inactive",
+    "mean_chunk_loss_weighted_by_selected_agent_steps": 0.1198965413513553,
+    "selected_loss_agent_exposures": 4846860,
+    "skipped_optimizer_chunks": 21,
+    "updates": 1899,
+    "wall_seconds": 242.12800675292965
+  },
+  "paired_stats_from_raw": {
+    "qos_per_step": {
+      "b01_mean": 0.26697198608601297,
+      "b02_mean": 0.30898674947605265,
+      "mean_paired_difference": 0.04201476339003969,
+      "world_se": 0.026601968406630008,
+      "declared_descriptive_normal95": [
+        -0.010125094686955119,
+        0.0941546214670345
+      ],
+      "positive": 17,
+      "zero": 4,
+      "negative": 11,
+      "b01_min": 0.0,
+      "b02_min": 0.0,
+      "b01_lowest8_mean": 0.03994253143172414,
+      "b02_lowest8_mean": 0.07420437953859457
+    },
+    "raw_native_J": {
+      "b01_mean": 756.9350695705946,
+      "b02_mean": 884.7859254128851,
+      "mean_paired_difference": 127.85085584229053,
+      "world_se": 78.59465471239113,
+      "declared_descriptive_normal95": [
+        -26.194667393996085,
+        281.8963790785771
+      ],
+      "positive": 21,
+      "zero": 0,
+      "negative": 11,
+      "b01_min": -46.0588080128293,
+      "b02_min": -75.35019355519269,
+      "b01_lowest8_mean": 84.97908389913309,
+      "b02_lowest8_mean": 179.69398060757132
+    },
+    "return_constraint_cost_raw_sum": {
+      "b01_mean": 8.403580208750348,
+      "b02_mean": 6.573304550322844,
+      "mean_paired_difference": -1.8302756584275035,
+      "world_se": 3.478215507963673,
+      "declared_descriptive_normal95": [
+        -8.647578054036302,
+        4.987026737181296
+      ],
+      "positive": 8,
+      "zero": 0,
+      "negative": 24,
+      "b01_min": 0.320420090159442,
+      "b02_min": 0.10305193526884221,
+      "b01_lowest8_mean": 0.859231068880691,
+      "b02_lowest8_mean": 0.21855581971580626
+    },
+    "return_constraint_cost_sum": {
+      "b01_mean": 8.403580208750348,
+      "b02_mean": 6.573304550322844,
+      "mean_paired_difference": -1.8302756584275035,
+      "world_se": 3.478215507963673,
+      "declared_descriptive_normal95": [
+        -8.647578054036302,
+        4.987026737181296
+      ],
+      "positive": 8,
+      "zero": 0,
+      "negative": 24,
+      "b01_min": 0.320420090159442,
+      "b02_min": 0.10305193526884221,
+      "b01_lowest8_mean": 0.859231068880691,
+      "b02_lowest8_mean": 0.21855581971580626
+    },
+    "episode_minimum_battery_ratio": {
+      "b01_mean": 0.09919720452449135,
+      "b02_mean": 0.10179635931351769,
+      "mean_paired_difference": 0.0025991547890263345,
+      "world_se": 0.0024126167673998258,
+      "declared_descriptive_normal95": [
+        -0.0021295740750773237,
+        0.007327883653129993
+      ],
+      "positive": 21,
+      "zero": 0,
+      "negative": 11,
+      "b01_min": 0.07983457724096421,
+      "b02_min": 0.07694949071868133,
+      "b01_lowest8_mean": 0.08955781876322061,
+      "b02_lowest8_mean": 0.0855740946975794
+    },
+    "graph_potential_delta_sum": {
+      "b01_mean": -27.173728269943606,
+      "b02_mean": -29.027713914627178,
+      "mean_paired_difference": -1.8539856446835696,
+      "world_se": 0.6351438245946304,
+      "declared_descriptive_normal95": [
+        -3.098867540889045,
+        -0.6091037484780941
+      ],
+      "positive": 13,
+      "zero": 0,
+      "negative": 19,
+      "b01_min": -30.665159820756205,
+      "b02_min": -30.62537911005816,
+      "b01_lowest8_mean": -29.997376275882125,
+      "b02_lowest8_mean": -30.3527467705537
+    },
+    "cutoff_event_count_sum": {
+      "b01_mean": 0.0,
+      "b02_mean": 0.0,
+      "mean_paired_difference": 0.0,
+      "world_se": 0.0,
+      "declared_descriptive_normal95": [
+        0.0,
+        0.0
+      ],
+      "positive": 0,
+      "zero": 32,
+      "negative": 0,
+      "b01_min": 0.0,
+      "b02_min": 0.0,
+      "b01_lowest8_mean": 0.0,
+      "b02_lowest8_mean": 0.0
+    },
+    "depletion_event_count_sum": {
+      "b01_mean": 0.0,
+      "b02_mean": 0.0,
+      "mean_paired_difference": 0.0,
+      "world_se": 0.0,
+      "declared_descriptive_normal95": [
+        0.0,
+        0.0
+      ],
+      "positive": 0,
+      "zero": 32,
+      "negative": 0,
+      "b01_min": 0.0,
+      "b02_min": 0.0,
+      "b01_lowest8_mean": 0.0,
+      "b02_lowest8_mean": 0.0
+    }
+  },
+  "offline_mse_recorded_and_arithmetic_checked": {
+    "teacher_train": {
+      "b01": {
+        "overall": {
+          "agent_steps": 768000,
+          "mse": 0.09195382860768674,
+          "per_action_dim_mse": [
+            0.13871234580932312,
+            0.16177478083581812,
+            0.06627527867346511,
+            0.0010529091121405365
+          ]
+        },
+        "shield_active": {
+          "agent_steps": 283314,
+          "mse": 0.021739025966714915,
+          "per_action_dim_mse": [
+            0.03722765699367772,
+            0.03788761686668964,
+            0.01158086111816299,
+            0.0002599688883293124
+          ]
+        },
+        "shield_inactive": {
+          "agent_steps": 484686,
+          "mse": 0.1329965585306148,
+          "per_action_dim_mse": [
+            0.19803329406678416,
+            0.2341906706546901,
+            0.09824586213422708,
+            0.0015164072667578623
+          ]
+        }
+      },
+      "b02": {
+        "overall": {
+          "agent_steps": 768000,
+          "mse": 0.11064692879273423,
+          "per_action_dim_mse": [
+            0.17225231343177758,
+            0.14476944660811447,
+            0.12553952115224828,
+            2.6433978796577778e-05
+          ]
+        },
+        "shield_active": {
+          "agent_steps": 283314,
+          "mse": 0.13797188335935304,
+          "per_action_dim_mse": [
+            0.19254320832196586,
+            0.09166553199839521,
+            0.26766231282692715,
+            1.6480290123862527e-05
+          ]
+        },
+        "shield_inactive": {
+          "agent_steps": 484686,
+          "mse": 0.0946746453389373,
+          "per_action_dim_mse": [
+            0.16039165602694475,
+            0.17581033176621283,
+            0.042464341344042665,
+            3.2252218548956956e-05
+          ]
+        }
+      }
+    },
+    "teacher_eval": {
+      "b01": {
+        "overall": {
+          "agent_steps": 768000,
+          "mse": 0.10146801189655864,
+          "per_action_dim_mse": [
+            0.16656814510681722,
+            0.17597908059825715,
+            0.06217686019044951,
+            0.001147961690710724
+          ]
+        },
+        "shield_active": {
+          "agent_steps": 290631,
+          "mse": 0.02339737460643943,
+          "per_action_dim_mse": [
+            0.04129899820998876,
+            0.03982547839456761,
+            0.012192570956004692,
+            0.0002724508651966422
+          ]
+        },
+        "shield_inactive": {
+          "agent_steps": 477369,
+          "mse": 0.14899884734306781,
+          "per_action_dim_mse": [
+            0.24283429861023315,
+            0.2588718900644362,
+            0.0926082119633881,
+            0.001680988734213723
+          ]
+        }
+      },
+      "b02": {
+        "overall": {
+          "agent_steps": 768000,
+          "mse": 0.11641415373559354,
+          "per_action_dim_mse": [
+            0.18216319974398182,
+            0.15450324648217267,
+            0.12896769227629845,
+            2.2476439921165048e-05
+          ]
+        },
+        "shield_active": {
+          "agent_steps": 290631,
+          "mse": 0.12501709607551864,
+          "per_action_dim_mse": [
+            0.1481306168003886,
+            0.07899860042327513,
+            0.27292676118598164,
+            1.2405892429131701e-05
+          ]
+        },
+        "shield_inactive": {
+          "agent_steps": 477369,
+          "mse": 0.11117652469978533,
+          "per_action_dim_mse": [
+            0.20288286024451616,
+            0.20047185941837825,
+            0.041322771562364004,
+            2.8607573882853252e-05
+          ]
+        }
+      }
+    }
+  },
+  "offline_mse_limit": "No model forward replay repeated in this audit; saved replay values pinned by summary hashes and arithmetic checked, source replay code inspected.",
+  "worlds": [
+    {
+      "seed": 968001,
+      "b01": {
+        "qos_per_step": 0.520447842885284,
+        "raw_native_J": 1527.4658127412467,
+        "return_constraint_cost_raw_sum": 1.9672837347749297,
+        "return_constraint_cost_sum": 1.9672837347749297,
+        "episode_minimum_battery_ratio": 0.09867901049972676,
+        "graph_potential_delta_sum": -29.9431484450552,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.33519977372973236,
+        "raw_native_J": 975.9438570311627,
+        "return_constraint_cost_raw_sum": 0.6491068265335531,
+        "return_constraint_cost_sum": 0.6491068265335531,
+        "episode_minimum_battery_ratio": 0.10900834512563184,
+        "graph_potential_delta_sum": -28.357250504967325,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": -0.18524806915555164,
+        "raw_native_J": -551.5219557100841,
+        "return_constraint_cost_raw_sum": -1.3181769082413766,
+        "return_constraint_cost_sum": -1.3181769082413766,
+        "episode_minimum_battery_ratio": 0.010329334625905087,
+        "graph_potential_delta_sum": 1.5858979400878752,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968002,
+      "b01": {
+        "qos_per_step": 0.1888330831567145,
+        "raw_native_J": 534.7370754740543,
+        "return_constraint_cost_raw_sum": 2.9271052515248637,
+        "return_constraint_cost_sum": 2.9271052515248637,
+        "episode_minimum_battery_ratio": 0.09798048537159207,
+        "graph_potential_delta_sum": -25.907963493039418,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.304204678713931,
+        "raw_native_J": 789.5498929379837,
+        "return_constraint_cost_raw_sum": 46.82553833997809,
+        "return_constraint_cost_sum": 46.82553833997809,
+        "episode_minimum_battery_ratio": 0.0794730868725375,
+        "graph_potential_delta_sum": -29.413066523853082,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.11537159555721649,
+        "raw_native_J": 254.81281746392938,
+        "return_constraint_cost_raw_sum": 43.898433088453224,
+        "return_constraint_cost_sum": 43.898433088453224,
+        "episode_minimum_battery_ratio": -0.01850739849905457,
+        "graph_potential_delta_sum": -3.5051030308136646,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968003,
+      "b01": {
+        "qos_per_step": 0.4980860538284848,
+        "raw_native_J": 1462.9363106203327,
+        "return_constraint_cost_raw_sum": 1.1953652398008034,
+        "return_constraint_cost_sum": 1.1953652398008034,
+        "episode_minimum_battery_ratio": 0.10134775578051011,
+        "graph_potential_delta_sum": -28.931120385519726,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.34571184971271685,
+        "raw_native_J": 1010.0487314206493,
+        "return_constraint_cost_raw_sum": 0.5675170991806405,
+        "return_constraint_cost_sum": 0.5675170991806405,
+        "episode_minimum_battery_ratio": 0.10029820531207123,
+        "graph_potential_delta_sum": -25.951783519139752,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": -0.15237420411576796,
+        "raw_native_J": -452.8875791996834,
+        "return_constraint_cost_raw_sum": -0.6278481406201629,
+        "return_constraint_cost_sum": -0.6278481406201629,
+        "episode_minimum_battery_ratio": -0.0010495504684388812,
+        "graph_potential_delta_sum": 2.979336866379974,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968004,
+      "b01": {
+        "qos_per_step": 0.25861982235030373,
+        "raw_native_J": 743.9647871447969,
+        "return_constraint_cost_raw_sum": 3.6540584654204773,
+        "return_constraint_cost_sum": 3.6540584654204773,
+        "episode_minimum_battery_ratio": 0.09712613763278366,
+        "graph_potential_delta_sum": -24.58656297527322,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.2507076860537494,
+        "raw_native_J": 722.1017806388411,
+        "return_constraint_cost_raw_sum": 0.2881280185234955,
+        "return_constraint_cost_sum": 0.2881280185234955,
+        "episode_minimum_battery_ratio": 0.10256786330681542,
+        "graph_potential_delta_sum": -29.445021485359792,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": -0.00791213629655435,
+        "raw_native_J": -21.86300650595581,
+        "return_constraint_cost_raw_sum": -3.3659304468969817,
+        "return_constraint_cost_sum": -3.3659304468969817,
+        "episode_minimum_battery_ratio": 0.0054417256740317554,
+        "graph_potential_delta_sum": -4.858458510086571,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968005,
+      "b01": {
+        "qos_per_step": 0.0,
+        "raw_native_J": -33.12695702360775,
+        "return_constraint_cost_raw_sum": 1.6409432756262552,
+        "return_constraint_cost_sum": 1.6409432756262552,
+        "episode_minimum_battery_ratio": 0.10471560149544096,
+        "graph_potential_delta_sum": -29.845070472355246,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": true
+      },
+      "b02": {
+        "qos_per_step": 0.0,
+        "raw_native_J": -30.13695946237232,
+        "return_constraint_cost_raw_sum": 0.5815469876621482,
+        "return_constraint_cost_sum": 0.5815469876621482,
+        "episode_minimum_battery_ratio": 0.11424649613145911,
+        "graph_potential_delta_sum": -28.973865487048023,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": true
+      },
+      "difference": {
+        "qos_per_step": 0.0,
+        "raw_native_J": 2.9899975612354304,
+        "return_constraint_cost_raw_sum": -1.059396287964107,
+        "return_constraint_cost_sum": -1.059396287964107,
+        "episode_minimum_battery_ratio": 0.009530894636018153,
+        "graph_potential_delta_sum": 0.871204985307223,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968006,
+      "b01": {
+        "qos_per_step": 0.0,
+        "raw_native_J": -34.13836511512649,
+        "return_constraint_cost_raw_sum": 1.7366026471851432,
+        "return_constraint_cost_sum": 1.7366026471851432,
+        "episode_minimum_battery_ratio": 0.10536938546209645,
+        "graph_potential_delta_sum": -30.665159820756205,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": true
+      },
+      "b02": {
+        "qos_per_step": 0.0,
+        "raw_native_J": -31.900988791448597,
+        "return_constraint_cost_raw_sum": 0.63780484069522,
+        "return_constraint_cost_sum": 0.63780484069522,
+        "episode_minimum_battery_ratio": 0.11316327986201727,
+        "graph_potential_delta_sum": -30.62537911005816,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": true
+      },
+      "difference": {
+        "qos_per_step": 0.0,
+        "raw_native_J": 2.2373763236778927,
+        "return_constraint_cost_raw_sum": -1.098797806489923,
+        "return_constraint_cost_sum": -1.098797806489923,
+        "episode_minimum_battery_ratio": 0.007793894399920814,
+        "graph_potential_delta_sum": 0.03978071069804656,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968007,
+      "b01": {
+        "qos_per_step": 0.30540985011225164,
+        "raw_native_J": 817.315573487082,
+        "return_constraint_cost_raw_sum": 35.116782163043865,
+        "return_constraint_cost_sum": 35.116782163043865,
+        "episode_minimum_battery_ratio": 0.08579832972314735,
+        "graph_potential_delta_sum": -28.680412523585012,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.40571455583735927,
+        "raw_native_J": 1113.9330982044596,
+        "return_constraint_cost_raw_sum": 36.50665753397263,
+        "return_constraint_cost_sum": 36.50665753397263,
+        "episode_minimum_battery_ratio": 0.08075237689802127,
+        "graph_potential_delta_sum": -30.19725423967283,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.10030470572510763,
+        "raw_native_J": 296.6175247173776,
+        "return_constraint_cost_raw_sum": 1.3898753709287632,
+        "return_constraint_cost_sum": 1.3898753709287632,
+        "episode_minimum_battery_ratio": -0.005045952825126085,
+        "graph_potential_delta_sum": -1.5168417160878178,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968008,
+      "b01": {
+        "qos_per_step": 0.21997442585762642,
+        "raw_native_J": 628.3085256821464,
+        "return_constraint_cost_raw_sum": 3.1794445281683066,
+        "return_constraint_cost_sum": 3.1794445281683066,
+        "episode_minimum_battery_ratio": 0.09726489040929656,
+        "graph_potential_delta_sum": -25.25586283439629,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.3240678223778131,
+        "raw_native_J": 941.9935061240121,
+        "return_constraint_cost_raw_sum": 0.16410159929655166,
+        "return_constraint_cost_sum": 0.16410159929655166,
+        "episode_minimum_battery_ratio": 0.10132530593101224,
+        "graph_potential_delta_sum": -29.881757810833992,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.1040933965201867,
+        "raw_native_J": 313.6849804418657,
+        "return_constraint_cost_raw_sum": -3.015342928871755,
+        "return_constraint_cost_sum": -3.015342928871755,
+        "episode_minimum_battery_ratio": 0.004060415521715682,
+        "graph_potential_delta_sum": -4.625894976437703,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968009,
+      "b01": {
+        "qos_per_step": 0.12681000343792012,
+        "raw_native_J": 353.83954833157657,
+        "return_constraint_cost_raw_sum": 1.899430179366039,
+        "return_constraint_cost_sum": 1.899430179366039,
+        "episode_minimum_battery_ratio": 0.09820902716269955,
+        "graph_potential_delta_sum": -22.79160162345159,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.3228686286961173,
+        "raw_native_J": 874.4951591733175,
+        "return_constraint_cost_raw_sum": 32.23353020956386,
+        "return_constraint_cost_sum": 32.23353020956386,
+        "episode_minimum_battery_ratio": 0.07694949071868133,
+        "graph_potential_delta_sum": -29.643666495906686,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.1960586252581972,
+        "raw_native_J": 520.6556108417409,
+        "return_constraint_cost_raw_sum": 30.33410003019782,
+        "return_constraint_cost_sum": 30.33410003019782,
+        "episode_minimum_battery_ratio": -0.02125953644401822,
+        "graph_potential_delta_sum": -6.852064872455095,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968010,
+      "b01": {
+        "qos_per_step": 0.15558729441577404,
+        "raw_native_J": 439.95445605663167,
+        "return_constraint_cost_raw_sum": 1.091089712776749,
+        "return_constraint_cost_sum": 1.091089712776749,
+        "episode_minimum_battery_ratio": 0.10135967881515365,
+        "graph_potential_delta_sum": -24.625247765136894,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.3732917610823968,
+        "raw_native_J": 1088.9734099133916,
+        "return_constraint_cost_raw_sum": 0.3108845475690747,
+        "return_constraint_cost_sum": 0.3108845475690747,
+        "episode_minimum_battery_ratio": 0.11141434163405782,
+        "graph_potential_delta_sum": -30.280104238660545,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.21770446666662277,
+        "raw_native_J": 649.0189538567599,
+        "return_constraint_cost_raw_sum": -0.7802051652076742,
+        "return_constraint_cost_sum": -0.7802051652076742,
+        "episode_minimum_battery_ratio": 0.010054662818904173,
+        "graph_potential_delta_sum": -5.654856473523651,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968011,
+      "b01": {
+        "qos_per_step": 0.30291675999990025,
+        "raw_native_J": 875.3420574478399,
+        "return_constraint_cost_raw_sum": 2.347076532987731,
+        "return_constraint_cost_sum": 2.347076532987731,
+        "episode_minimum_battery_ratio": 0.10057915634064006,
+        "graph_potential_delta_sum": -28.714069485885318,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.47615796399640475,
+        "raw_native_J": 1397.4030641893723,
+        "return_constraint_cost_raw_sum": 0.41895689448804285,
+        "return_constraint_cost_sum": 0.41895689448804285,
+        "episode_minimum_battery_ratio": 0.12117601555546084,
+        "graph_potential_delta_sum": -30.232914010866068,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.1732412039965045,
+        "raw_native_J": 522.0610067415324,
+        "return_constraint_cost_raw_sum": -1.928119638499688,
+        "return_constraint_cost_sum": -1.928119638499688,
+        "episode_minimum_battery_ratio": 0.02059685921482078,
+        "graph_potential_delta_sum": -1.51884452498075,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968012,
+      "b01": {
+        "qos_per_step": 0.1827481556354198,
+        "raw_native_J": 523.5565568803964,
+        "return_constraint_cost_raw_sum": 0.4146849026969793,
+        "return_constraint_cost_sum": 0.4146849026969793,
+        "episode_minimum_battery_ratio": 0.11726946345362575,
+        "graph_potential_delta_sum": -23.858540220469017,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.0,
+        "raw_native_J": -75.35019355519269,
+        "return_constraint_cost_raw_sum": 22.486547957037903,
+        "return_constraint_cost_sum": 22.486547957037903,
+        "episode_minimum_battery_ratio": 0.08645335561404781,
+        "graph_potential_delta_sum": -30.37709764111689,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": true
+      },
+      "difference": {
+        "qos_per_step": -0.1827481556354198,
+        "raw_native_J": -598.9067504355892,
+        "return_constraint_cost_raw_sum": 22.071863054340923,
+        "return_constraint_cost_sum": 22.071863054340923,
+        "episode_minimum_battery_ratio": -0.030816107839577944,
+        "graph_potential_delta_sum": -6.518557420647873,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968013,
+      "b01": {
+        "qos_per_step": 0.3208246362120648,
+        "raw_native_J": 931.6340589368417,
+        "return_constraint_cost_raw_sum": 1.5178312915729002,
+        "return_constraint_cost_sum": 1.5178312915729002,
+        "episode_minimum_battery_ratio": 0.11608385303325744,
+        "graph_potential_delta_sum": -27.80418711620677,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.18209659591951258,
+        "raw_native_J": 521.5355988699583,
+        "return_constraint_cost_raw_sum": 0.3179215623770279,
+        "return_constraint_cost_sum": 0.3179215623770279,
+        "episode_minimum_battery_ratio": 0.11803645320386649,
+        "graph_potential_delta_sum": -24.11834576382536,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": -0.13872804029255223,
+        "raw_native_J": -410.0984600668834,
+        "return_constraint_cost_raw_sum": -1.1999097291958722,
+        "return_constraint_cost_sum": -1.1999097291958722,
+        "episode_minimum_battery_ratio": 0.0019526001706090534,
+        "graph_potential_delta_sum": 3.6858413523814093,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968014,
+      "b01": {
+        "qos_per_step": 0.37394074074576156,
+        "raw_native_J": 1092.1643661307432,
+        "return_constraint_cost_raw_sum": 0.8767677704208607,
+        "return_constraint_cost_sum": 0.8767677704208607,
+        "episode_minimum_battery_ratio": 0.10129093851021298,
+        "graph_potential_delta_sum": -27.904320565699514,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.4984106841078813,
+        "raw_native_J": 1464.7590807071733,
+        "return_constraint_cost_raw_sum": 0.10305193526884221,
+        "return_constraint_cost_sum": 0.10305193526884221,
+        "episode_minimum_battery_ratio": 0.12243165488794887,
+        "graph_potential_delta_sum": -30.266867745933197,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.12446994336211975,
+        "raw_native_J": 372.5947145764301,
+        "return_constraint_cost_raw_sum": -0.7737158351520186,
+        "return_constraint_cost_sum": -0.7737158351520186,
+        "episode_minimum_battery_ratio": 0.021140716377735888,
+        "graph_potential_delta_sum": -2.3625471802336833,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968015,
+      "b01": {
+        "qos_per_step": 0.49989133902090405,
+        "raw_native_J": 1467.9766971777758,
+        "return_constraint_cost_raw_sum": 0.9908852998638675,
+        "return_constraint_cost_sum": 0.9908852998638675,
+        "episode_minimum_battery_ratio": 0.1012977166048088,
+        "graph_potential_delta_sum": -29.715549285208528,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.45689970953510667,
+        "raw_native_J": 1340.562596711931,
+        "return_constraint_cost_raw_sum": 0.4069029047727796,
+        "return_constraint_cost_sum": 0.4069029047727796,
+        "episode_minimum_battery_ratio": 0.10133416361839895,
+        "graph_potential_delta_sum": -29.322726083843474,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": -0.04299162948579738,
+        "raw_native_J": -127.41410046584474,
+        "return_constraint_cost_raw_sum": -0.583982395091088,
+        "return_constraint_cost_sum": -0.583982395091088,
+        "episode_minimum_battery_ratio": 3.644701359015179e-05,
+        "graph_potential_delta_sum": 0.39282320136505433,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968016,
+      "b01": {
+        "qos_per_step": 0.0,
+        "raw_native_J": -33.46743719592157,
+        "return_constraint_cost_raw_sum": 2.326586146797996,
+        "return_constraint_cost_sum": 2.326586146797996,
+        "episode_minimum_battery_ratio": 0.09895028649622001,
+        "graph_potential_delta_sum": -28.81426490232558,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": true
+      },
+      "b02": {
+        "qos_per_step": 0.0,
+        "raw_native_J": -29.9120125120553,
+        "return_constraint_cost_raw_sum": 0.315451702595598,
+        "return_constraint_cost_sum": 0.315451702595598,
+        "episode_minimum_battery_ratio": 0.10096858297694919,
+        "graph_potential_delta_sum": -29.281109106864104,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": true
+      },
+      "difference": {
+        "qos_per_step": 0.0,
+        "raw_native_J": 3.5554246838662706,
+        "return_constraint_cost_raw_sum": -2.0111344442023977,
+        "return_constraint_cost_sum": -2.0111344442023977,
+        "episode_minimum_battery_ratio": 0.0020182964807291814,
+        "graph_potential_delta_sum": -0.4668442045385248,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968017,
+      "b01": {
+        "qos_per_step": 0.3851445905582305,
+        "raw_native_J": 1111.970877516122,
+        "return_constraint_cost_raw_sum": 8.048202301581533,
+        "return_constraint_cost_sum": 8.048202301581533,
+        "episode_minimum_battery_ratio": 0.09610730229139869,
+        "graph_potential_delta_sum": -27.366489555406424,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.5152722737359984,
+        "raw_native_J": 1514.9529954848656,
+        "return_constraint_cost_raw_sum": 0.2642618889530121,
+        "return_constraint_cost_sum": 0.2642618889530121,
+        "episode_minimum_battery_ratio": 0.1197254956393499,
+        "graph_potential_delta_sum": -30.335301945223385,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.13012768317776785,
+        "raw_native_J": 402.9821179687435,
+        "return_constraint_cost_raw_sum": -7.783940412628521,
+        "return_constraint_cost_sum": -7.783940412628521,
+        "episode_minimum_battery_ratio": 0.023618193347951205,
+        "graph_potential_delta_sum": -2.9688123898169607,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968018,
+      "b01": {
+        "qos_per_step": 0.360153580578182,
+        "raw_native_J": 1049.2791334099516,
+        "return_constraint_cost_raw_sum": 1.674854958709339,
+        "return_constraint_cost_sum": 1.674854958709339,
+        "episode_minimum_battery_ratio": 0.10116284899136652,
+        "graph_potential_delta_sum": -27.831898407175892,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.50710753317445,
+        "raw_native_J": 1490.778545247647,
+        "return_constraint_cost_raw_sum": 0.10853480576945324,
+        "return_constraint_cost_sum": 0.10853480576945324,
+        "episode_minimum_battery_ratio": 0.11754423053337996,
+        "graph_potential_delta_sum": -30.32698466416454,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.14695395259626803,
+        "raw_native_J": 441.49941183769533,
+        "return_constraint_cost_raw_sum": -1.5663201529398858,
+        "return_constraint_cost_sum": -1.5663201529398858,
+        "episode_minimum_battery_ratio": 0.01638138154201345,
+        "graph_potential_delta_sum": -2.4950862569886496,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968019,
+      "b01": {
+        "qos_per_step": 0.11111873789790457,
+        "raw_native_J": 308.8968350505473,
+        "return_constraint_cost_raw_sum": 0.8334875182116186,
+        "return_constraint_cost_sum": 0.8334875182116186,
+        "episode_minimum_battery_ratio": 0.11276500331107231,
+        "graph_potential_delta_sum": -22.7924036067432,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.35550144027578845,
+        "raw_native_J": 1035.5131982894397,
+        "return_constraint_cost_raw_sum": 0.32183089839554757,
+        "return_constraint_cost_sum": 0.32183089839554757,
+        "episode_minimum_battery_ratio": 0.11198268908258964,
+        "graph_potential_delta_sum": -30.347460741134462,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.2443827023778839,
+        "raw_native_J": 726.6163632388925,
+        "return_constraint_cost_raw_sum": -0.511656619816071,
+        "return_constraint_cost_sum": -0.511656619816071,
+        "episode_minimum_battery_ratio": -0.0007823142284826695,
+        "graph_potential_delta_sum": -7.555057134391262,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968020,
+      "b01": {
+        "qos_per_step": 0.2192638091193888,
+        "raw_native_J": 484.839425495416,
+        "return_constraint_cost_raw_sum": 73.37663684492807,
+        "return_constraint_cost_sum": 73.37663684492807,
+        "episode_minimum_battery_ratio": 0.07983457724096421,
+        "graph_potential_delta_sum": -26.19872817289431,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.33319226346711334,
+        "raw_native_J": 969.4918313688534,
+        "return_constraint_cost_raw_sum": 0.2718534031598885,
+        "return_constraint_cost_sum": 0.2718534031598885,
+        "episode_minimum_battery_ratio": 0.10450993093148653,
+        "graph_potential_delta_sum": -29.54125222616691,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.11392845434772453,
+        "raw_native_J": 484.6524058734374,
+        "return_constraint_cost_raw_sum": -73.10478344176818,
+        "return_constraint_cost_sum": -73.10478344176818,
+        "episode_minimum_battery_ratio": 0.024675353690522317,
+        "graph_potential_delta_sum": -3.3425240532726015,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968021,
+      "b01": {
+        "qos_per_step": 0.0,
+        "raw_native_J": -33.111719027792006,
+        "return_constraint_cost_raw_sum": 2.6217937888855123,
+        "return_constraint_cost_sum": 2.6217937888855123,
+        "episode_minimum_battery_ratio": 0.09818374317818368,
+        "graph_potential_delta_sum": -27.868131450020986,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": true
+      },
+      "b02": {
+        "qos_per_step": 0.41477217653112364,
+        "raw_native_J": 1196.8467964416532,
+        "return_constraint_cost_raw_sum": 8.691587558894472,
+        "return_constraint_cost_sum": 8.691587558894472,
+        "episode_minimum_battery_ratio": 0.0911366826744752,
+        "graph_potential_delta_sum": -30.086558033928952,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.41477217653112364,
+        "raw_native_J": 1229.9585154694453,
+        "return_constraint_cost_raw_sum": 6.06979377000896,
+        "return_constraint_cost_sum": 6.06979377000896,
+        "episode_minimum_battery_ratio": -0.0070470605037084855,
+        "graph_potential_delta_sum": -2.2184265839079664,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968022,
+      "b01": {
+        "qos_per_step": 0.5108684065318152,
+        "raw_native_J": 1473.6747559160524,
+        "return_constraint_cost_raw_sum": 15.222805060018063,
+        "return_constraint_cost_sum": 15.222805060018063,
+        "episode_minimum_battery_ratio": 0.093738680016938,
+        "graph_potential_delta_sum": -28.484853559357294,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.31044349851122105,
+        "raw_native_J": 905.0743455722086,
+        "return_constraint_cost_raw_sum": 0.3475370349727133,
+        "return_constraint_cost_sum": 0.3475370349727133,
+        "episode_minimum_battery_ratio": 0.10305679580245394,
+        "graph_potential_delta_sum": -25.561075891509063,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": -0.20042490802059415,
+        "raw_native_J": -568.6004103438438,
+        "return_constraint_cost_raw_sum": -14.875268025045349,
+        "return_constraint_cost_sum": -14.875268025045349,
+        "episode_minimum_battery_ratio": 0.009318115785515946,
+        "graph_potential_delta_sum": 2.9237776678482312,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968023,
+      "b01": {
+        "qos_per_step": 0.42819292247366914,
+        "raw_native_J": 1252.666424151367,
+        "return_constraint_cost_raw_sum": 1.151148017115208,
+        "return_constraint_cost_sum": 1.151148017115208,
+        "episode_minimum_battery_ratio": 0.10112213870961131,
+        "graph_potential_delta_sum": -29.61004723540982,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.39738324949352927,
+        "raw_native_J": 1160.733555605494,
+        "return_constraint_cost_raw_sum": 1.7025897628116673,
+        "return_constraint_cost_sum": 1.7025897628116673,
+        "episode_minimum_battery_ratio": 0.09780263375577396,
+        "graph_potential_delta_sum": -28.011013349470502,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": -0.03080967298013987,
+        "raw_native_J": -91.9328685458729,
+        "return_constraint_cost_raw_sum": 0.5514417456964593,
+        "return_constraint_cost_sum": 0.5514417456964593,
+        "episode_minimum_battery_ratio": -0.0033195049538373572,
+        "graph_potential_delta_sum": 1.599033885939317,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968024,
+      "b01": {
+        "qos_per_step": 0.0,
+        "raw_native_J": -46.0588080128293,
+        "return_constraint_cost_raw_sum": 8.901516585180246,
+        "return_constraint_cost_sum": 8.901516585180246,
+        "episode_minimum_battery_ratio": 0.0941196775900019,
+        "graph_potential_delta_sum": -28.25577484246881,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": true
+      },
+      "b02": {
+        "qos_per_step": 0.0,
+        "raw_native_J": -33.05884582170958,
+        "return_constraint_cost_raw_sum": 2.5060866091981358,
+        "return_constraint_cost_sum": 2.5060866091981358,
+        "episode_minimum_battery_ratio": 0.09775691272759507,
+        "graph_potential_delta_sum": -28.046672603313304,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": true
+      },
+      "difference": {
+        "qos_per_step": 0.0,
+        "raw_native_J": 12.999962191119721,
+        "return_constraint_cost_raw_sum": -6.395429975982111,
+        "return_constraint_cost_sum": -6.395429975982111,
+        "episode_minimum_battery_ratio": 0.0036372351375931755,
+        "graph_potential_delta_sum": 0.20910223915550574,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968025,
+      "b01": {
+        "qos_per_step": 0.10326849919370752,
+        "raw_native_J": 257.5692814674796,
+        "return_constraint_cost_raw_sum": 15.974856481495554,
+        "return_constraint_cost_sum": 15.974856481495554,
+        "episode_minimum_battery_ratio": 0.09087199681862602,
+        "graph_potential_delta_sum": -20.28650315065191,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.17725000853646686,
+        "raw_native_J": 502.20754640433586,
+        "return_constraint_cost_raw_sum": 0.237630359186132,
+        "return_constraint_cost_sum": 0.237630359186132,
+        "episode_minimum_battery_ratio": 0.10658020211439455,
+        "graph_potential_delta_sum": -29.06721848669242,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.07398150934275934,
+        "raw_native_J": 244.63826493685627,
+        "return_constraint_cost_raw_sum": -15.737226122309421,
+        "return_constraint_cost_sum": -15.737226122309421,
+        "episode_minimum_battery_ratio": 0.015708205295768524,
+        "graph_potential_delta_sum": -8.780715336040508,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968026,
+      "b01": {
+        "qos_per_step": 0.3997923834945365,
+        "raw_native_J": 1067.1678680179698,
+        "return_constraint_cost_raw_sum": 51.634925672766435,
+        "return_constraint_cost_sum": 51.634925672766435,
+        "episode_minimum_battery_ratio": 0.08248040832762127,
+        "graph_potential_delta_sum": -28.939431120106757,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.24891034077880086,
+        "raw_native_J": 703.2380756773662,
+        "return_constraint_cost_raw_sum": 9.514874830167868,
+        "return_constraint_cost_sum": 9.514874830167868,
+        "episode_minimum_battery_ratio": 0.09328094206999948,
+        "graph_potential_delta_sum": -24.463196998700525,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": -0.15088204271573563,
+        "raw_native_J": -363.9297923406036,
+        "return_constraint_cost_raw_sum": -42.120050842598566,
+        "return_constraint_cost_sum": -42.120050842598566,
+        "episode_minimum_battery_ratio": 0.010800533742378216,
+        "graph_potential_delta_sum": 4.4762341214062324,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968027,
+      "b01": {
+        "qos_per_step": 0.6315915914382549,
+        "raw_native_J": 1858.0717350076243,
+        "return_constraint_cost_raw_sum": 3.4177231679494473,
+        "return_constraint_cost_sum": 3.4177231679494473,
+        "episode_minimum_battery_ratio": 0.098914878369709,
+        "graph_potential_delta_sum": -29.867592971241542,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.40584957584629067,
+        "raw_native_J": 1186.6112771537441,
+        "return_constraint_cost_raw_sum": 1.3328114571072582,
+        "return_constraint_cost_sum": 1.3328114571072582,
+        "episode_minimum_battery_ratio": 0.09998443709517907,
+        "graph_potential_delta_sum": -28.27182747091354,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": -0.22574201559196427,
+        "raw_native_J": -671.4604578538801,
+        "return_constraint_cost_raw_sum": -2.084911710842189,
+        "return_constraint_cost_sum": -2.084911710842189,
+        "episode_minimum_battery_ratio": 0.0010695587254700711,
+        "graph_potential_delta_sum": 1.5957655003280031,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968028,
+      "b01": {
+        "qos_per_step": 0.23472468305949765,
+        "raw_native_J": 672.0224422847857,
+        "return_constraint_cost_raw_sum": 1.707184850607513,
+        "return_constraint_cost_sum": 1.707184850607513,
+        "episode_minimum_battery_ratio": 0.09961495710822557,
+        "graph_potential_delta_sum": -28.73723719249228,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.41442414291800084,
+        "raw_native_J": 1198.4953438884033,
+        "return_constraint_cost_raw_sum": 7.257153393730265,
+        "return_constraint_cost_sum": 7.257153393730265,
+        "episode_minimum_battery_ratio": 0.0934734378415882,
+        "graph_potential_delta_sum": -30.262778078138446,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.1796994598585032,
+        "raw_native_J": 526.4729016036176,
+        "return_constraint_cost_raw_sum": 5.549968543122752,
+        "return_constraint_cost_sum": 5.549968543122752,
+        "episode_minimum_battery_ratio": -0.006141519266637377,
+        "graph_potential_delta_sum": -1.5255408856461656,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968029,
+      "b01": {
+        "qos_per_step": 0.47600727984749014,
+        "raw_native_J": 1375.447017945909,
+        "return_constraint_cost_raw_sum": 11.188151451860444,
+        "return_constraint_cost_sum": 11.188151451860444,
+        "episode_minimum_battery_ratio": 0.09519388053303392,
+        "graph_potential_delta_sum": -30.198518692840743,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.4413070461612793,
+        "raw_native_J": 1292.3798866698944,
+        "return_constraint_cost_raw_sum": 0.8175264281708289,
+        "return_constraint_cost_sum": 0.8175264281708289,
+        "episode_minimum_battery_ratio": 0.1031798121510837,
+        "graph_potential_delta_sum": -29.906198957601802,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": -0.034700233686210835,
+        "raw_native_J": -83.0671312760146,
+        "return_constraint_cost_raw_sum": -10.370625023689614,
+        "return_constraint_cost_sum": -10.370625023689614,
+        "episode_minimum_battery_ratio": 0.00798593161804978,
+        "graph_potential_delta_sum": 0.29231973523894084,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968030,
+      "b01": {
+        "qos_per_step": 0.10515301436218102,
+        "raw_native_J": 293.2698410503151,
+        "return_constraint_cost_raw_sum": 0.320420090159442,
+        "return_constraint_cost_sum": 0.320420090159442,
+        "episode_minimum_battery_ratio": 0.1130948163487441,
+        "graph_potential_delta_sum": -21.548361855909107,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.23428843185277712,
+        "raw_native_J": 614.1676997290547,
+        "return_constraint_cost_raw_sum": 29.40770364693934,
+        "return_constraint_cost_sum": 29.40770364693934,
+        "episode_minimum_battery_ratio": 0.08365886553083518,
+        "graph_potential_delta_sum": -29.882188535398072,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.1291354174905961,
+        "raw_native_J": 320.89785867873957,
+        "return_constraint_cost_raw_sum": 29.087283556779898,
+        "return_constraint_cost_sum": 29.087283556779898,
+        "episode_minimum_battery_ratio": -0.029435950817908924,
+        "graph_potential_delta_sum": -8.333826679488965,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968031,
+      "b01": {
+        "qos_per_step": 0.38547212082698223,
+        "raw_native_J": 1123.6455516119108,
+        "return_constraint_cost_raw_sum": 1.3184437924231338,
+        "return_constraint_cost_sum": 1.3184437924231338,
+        "episode_minimum_battery_ratio": 0.09935891930158228,
+        "graph_potential_delta_sum": -30.133923284189706,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.5019557866906011,
+        "raw_native_J": 1475.0637434561063,
+        "return_constraint_cost_raw_sum": 0.3578278017645162,
+        "return_constraint_cost_sum": 0.3578278017645162,
+        "episode_minimum_battery_ratio": 0.10132345523136682,
+        "graph_potential_delta_sum": -30.087961012168087,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.11648366586361891,
+        "raw_native_J": 351.41819184419546,
+        "return_constraint_cost_raw_sum": -0.9606159906586176,
+        "return_constraint_cost_sum": -0.9606159906586176,
+        "episode_minimum_battery_ratio": 0.0019645359297845444,
+        "graph_potential_delta_sum": 0.045962272021618844,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    },
+    {
+      "seed": 968032,
+      "b01": {
+        "qos_per_step": 0.2382619277121657,
+        "raw_native_J": 674.1084975973906,
+        "return_constraint_cost_raw_sum": 8.640478956091789,
+        "return_constraint_cost_sum": 8.640478956091789,
+        "episode_minimum_battery_ratio": 0.09442499985543215,
+        "graph_potential_delta_sum": -23.396327626923075,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "b02": {
+        "qos_per_step": 0.35458650549752335,
+        "raw_native_J": 1026.653996443785,
+        "return_constraint_cost_raw_sum": 4.392286771594447,
+        "return_constraint_cost_sum": 4.392286771594447,
+        "episode_minimum_battery_ratio": 0.09288795720203742,
+        "graph_potential_delta_sum": -28.320946505596318,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "zero_service": false
+      },
+      "difference": {
+        "qos_per_step": 0.11632457778535765,
+        "raw_native_J": 352.54549884639437,
+        "return_constraint_cost_raw_sum": -4.248192184497341,
+        "return_constraint_cost_sum": -4.248192184497341,
+        "episode_minimum_battery_ratio": -0.0015370426533947296,
+        "graph_potential_delta_sum": -4.924618878673243,
+        "cutoff_event_count_sum": 0.0,
+        "depletion_event_count_sum": 0.0
+      }
+    }
+  ],
+  "audit_wall_seconds": 0.50531500892248
+}
