@@ -215,3 +215,28 @@ the following source publication/launch times bound the subsequent preparation
 interval. The initial read-only destination probe showed 20 CPUs, load about 1 and
 13.1 GiB available; it is not launch admission. Keep the declared 4×1 CPU topology
 and 40–80 minute provisional range, with contention and cold setup uncertainty.
+
+## 2026-09-27 — B01 accepted on wsl_4070; deterministic observation
+
+Exact source `8f638f44b1d0565ef62027d5f467a113be6a730f` was committed/published
+before execution. Native launch accepted at **04:27:22 UTC**, tag
+`b01_s4_refs_a01`; [launch manifest](../../../../runs/energy_relay_availability/b01_s4_refs_a01/launch-manifest.json),
+[accepted status](../../../../runs/energy_relay_availability/b01_s4_refs_a01/launch-status.json)
+and [actual-node admission](../../../../runs/energy_relay_availability/b01_s4_refs_a01/admission-preflight.json)
+retain the command, source snapshot, node and native identities. Read-only status
+at 04:28:15 UTC found both recorded processes running, no exit witness and no
+identity mismatch. No result reading yet; the fixed batch is not extended.
+
+Node refresh preserved other directions' live/dirty run files. Existing Git
+auto-GC warnings (`bad tree object 9e40125...`) and noninteractive zsh prompt
+warnings did not prevent the fast-forward, source publication check or admission;
+no shared repository repair was attempted. Immediately before launch the node had
+about 7.3 GiB available and load 13 on 20 CPUs. Actual throughput remains unknown.
+
+Same-operation observation request:
+`temp/directions/energy_relay_availability/b01-wait/request.json`, protocol `launch`,
+30-second interval, 20-second probe timeout, intended 1,500-second observation
+window. It invokes only the node's read-only native status on the accepted manifest's
+operation reference. A checkpoint rearms this same request; it does not restart or
+repeat launch. Raw scientific outputs stay in the manifest's durable node output
+directory; only compact acceptance metadata is collected at this boundary.
