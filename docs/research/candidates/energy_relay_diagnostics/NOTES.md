@@ -247,3 +247,32 @@ or used. The 136-episode protocol, predictions, code and independent reviews wer
 fixed before this exposure and are unchanged. Subsequent synchronization reads commit identities
 and owned paths only. This session cannot claim complete blindness to c04; the source-subject
 exposure is preserved rather than silently omitted. No sealed holdout result was opened.
+
+## 2026-09-27 03:05 UTC — B01 accepted on wsl_4070
+
+Exact inputs were committed and published on main at `ef5c35b77929fbf029d8e2eec9487c1371215bce`
+before launch. The configured `agent-task` submitted the native snapshot launcher once; its
+receipt is distinct from scientific admission. The native manifest records accepted operation
+`4cb8c42b9e311d10759a059066a2808e4a3f599d59d4f39451a26b887921772f`, created
+`2026-09-27T03:05:17.319992Z`, supervisor PID 745191 and runner PID 745192 with boot/start identities.
+A subsequent native status read found both identities running, a consistent record, and no exit witness.
+
+[Manifest](../../../../runs/energy_relay_diagnostics/b01_alignment_a01/launch-manifest.json),
+[resource preflight](../../../../runs/energy_relay_diagnostics/b01_alignment_a01/admission-preflight.json),
+and [fixed config](../../../../runs/energy_relay_diagnostics/b01_alignment_a01/config.json)
+are copied as compact control evidence. The actual output remains
+`/home/wu/projects/HMASD/runs/energy_relay_diagnostics/b01_alignment_a01`; retained source is
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/d1edd10948b649f084a7d0f248791c99`.
+The fresh admission measured 12,657,426,432 available bytes against a 4 GiB floor. Runtime config
+confirms exactly 136 planned episodes, CPU, 4 workers × 1 Torch thread, 0 fits and 0 updates.
+Bulk arrays are not duplicated locally. Final scientific completeness, measured cost and adverse
+readings remain pending; admission and a running PID are not a result.
+
+The deterministic local observer request uses the manifest's same `operation_ref` with read-only
+remote native `status`, 30 s probes and a 1500 s observation window. It will be armed before
+returning the turn. Checkpoint wakes drain and rearm that handle without relaunching anything.
+The earlier unsuited noninteractive Git transport stalled before any scientific request; only
+that session's Git transport helper was terminated, and synchronization then succeeded through
+the configured `zsh -lic` network shell. Existing remote auto-GC warnings reported missing
+historical tree `9e40125ee3e24973b69754649226d18847b45862`; no GC repair/deletion was attempted.
+The current published tree synchronized and native source-snapshot admission succeeded.

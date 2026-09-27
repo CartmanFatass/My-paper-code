@@ -1,0 +1,1436 @@
+{
+  "checkpoint_pins": {
+    "c00": {
+      "agent_pt_sha256": "9d5806c1ff9d0f94ef4487543104b78ea718c05dc51f10babe808a34087f73f9",
+      "config_sha256": "1b05078fb6e8b898b61bc2829899be615b47a094385169e8acf391ab84de62db",
+      "record": {
+        "agent_pt": "agent.pt",
+        "agent_pt_bytes": 23407139,
+        "agent_pt_sha256": "9d5806c1ff9d0f94ef4487543104b78ea718c05dc51f10babe808a34087f73f9",
+        "checkpoint": "c00",
+        "config": {
+          "action_dim": 4,
+          "action_space_type": "continuous",
+          "algorithm": "mappo",
+          "baseline_algorithm": "mappo",
+          "batch_size": 12000,
+          "central_snapshot_state_affine": null,
+          "clip_epsilon": 0.2,
+          "collects_high_level_samples": false,
+          "continuous_action_distribution": "tanh_gaussian",
+          "coordinator_batch_size": null,
+          "count_arm": null,
+          "disable_discriminator_rewards": true,
+          "disable_discriminator_training": true,
+          "disable_high_level_training": true,
+          "discriminator_batch_size": null,
+          "embedding_dim": 256,
+          "energy_stage": "S2",
+          "episode_length": 3000,
+          "gae_lambda": 0.95,
+          "gamma": 0.99,
+          "gru_hidden_size": 256,
+          "hidden_size": 256,
+          "high_level_batch_size": 128,
+          "high_level_buffer_size": 600,
+          "k": 10,
+          "lambda_D": 0.0,
+          "lambda_cd": 0.0,
+          "lambda_d": 0.0,
+          "lambda_e": 1.0,
+          "lambda_h": 0.0,
+          "lambda_l": 0.005,
+          "lambda_mi": 0.0,
+          "lambda_return": 2.0,
+          "lr_coordinator": 0.0001,
+          "lr_discoverer_actor": 0.0001,
+          "lr_discoverer_critic": 0.0001,
+          "lr_discriminator": 0.0001,
+          "max_grad_norm": 0.5,
+          "max_steps": 3000,
+          "n_Z": 1,
+          "n_agents": 8,
+          "n_decoder_layers": 2,
+          "n_encoder_layers": 2,
+          "n_heads": 8,
+          "n_uavs": null,
+          "n_users": 30,
+          "n_z": 1,
+          "num_envs": 2,
+          "num_mini_batch": 4,
+          "obs_dim": 365,
+          "ordinary_completed_segments": false,
+          "policy_interruption_mode": "off",
+          "ppo_epochs": 15,
+          "rollout_length": 3000,
+          "scenario": 7,
+          "seed": 925031,
+          "sequence_batch_size": null,
+          "state_dim": 306,
+          "total_timesteps": 1200000,
+          "use_central_snapshot_in_flat_actor": true,
+          "use_entropy_annealing": false,
+          "use_horizon_window": false,
+          "use_lr_decay": false,
+          "use_obsnorm": false,
+          "use_opt_compact": false,
+          "use_process_exploration": false,
+          "use_reward_annealing": null,
+          "use_statenorm": false,
+          "use_valuenorm": true,
+          "value_loss_coef": 1.0,
+          "weight_decay": 0.0
+        },
+        "launch_sha": "759927b5e8caa0ba5bd8ba505ab5388985f6a2fa",
+        "object_id": "ENERGY-RELAY-BENCHMARK-B02",
+        "optimizer_steps": {
+          "high": 0,
+          "individual_discriminator": 0,
+          "low_actor": 0,
+          "low_critic": 0,
+          "team_discriminator": 0
+        },
+        "policy_fingerprint": "58a6a8a13217c8126a4eca73d02cbfa610433005a21e8e68756559318c9bf333",
+        "programme": "SET-shield-on-1.2M",
+        "rollout": 0,
+        "training_seed": 925031,
+        "transitions": 0,
+        "wall_seconds": 1.2188560740323737
+      }
+    },
+    "c03": {
+      "agent_pt_sha256": "80b2bdadddb76a4c03fe9fea8ae9fb1317a136363d28dec0d8fae350745dcce4",
+      "config_sha256": "1b05078fb6e8b898b61bc2829899be615b47a094385169e8acf391ab84de62db",
+      "record": {
+        "agent_pt": "agent.pt",
+        "agent_pt_bytes": 38832967,
+        "agent_pt_sha256": "80b2bdadddb76a4c03fe9fea8ae9fb1317a136363d28dec0d8fae350745dcce4",
+        "checkpoint": "c03",
+        "config": {
+          "action_dim": 4,
+          "action_space_type": "continuous",
+          "algorithm": "mappo",
+          "baseline_algorithm": "mappo",
+          "batch_size": 12000,
+          "central_snapshot_state_affine": null,
+          "clip_epsilon": 0.2,
+          "collects_high_level_samples": false,
+          "continuous_action_distribution": "tanh_gaussian",
+          "coordinator_batch_size": null,
+          "count_arm": null,
+          "disable_discriminator_rewards": true,
+          "disable_discriminator_training": true,
+          "disable_high_level_training": true,
+          "discriminator_batch_size": null,
+          "embedding_dim": 256,
+          "energy_stage": "S2",
+          "episode_length": 3000,
+          "gae_lambda": 0.95,
+          "gamma": 0.99,
+          "gru_hidden_size": 256,
+          "hidden_size": 256,
+          "high_level_batch_size": 128,
+          "high_level_buffer_size": 600,
+          "k": 10,
+          "lambda_D": 0.0,
+          "lambda_cd": 0.0,
+          "lambda_d": 0.0,
+          "lambda_e": 1.0,
+          "lambda_h": 0.0,
+          "lambda_l": 0.005,
+          "lambda_mi": 0.0,
+          "lambda_return": 2.0,
+          "lr_coordinator": 0.0001,
+          "lr_discoverer_actor": 0.0001,
+          "lr_discoverer_critic": 0.0001,
+          "lr_discriminator": 0.0001,
+          "max_grad_norm": 0.5,
+          "max_steps": 3000,
+          "n_Z": 1,
+          "n_agents": 8,
+          "n_decoder_layers": 2,
+          "n_encoder_layers": 2,
+          "n_heads": 8,
+          "n_uavs": null,
+          "n_users": 30,
+          "n_z": 1,
+          "num_envs": 2,
+          "num_mini_batch": 4,
+          "obs_dim": 365,
+          "ordinary_completed_segments": false,
+          "policy_interruption_mode": "off",
+          "ppo_epochs": 15,
+          "rollout_length": 3000,
+          "scenario": 7,
+          "seed": 925031,
+          "sequence_batch_size": null,
+          "state_dim": 306,
+          "total_timesteps": 1200000,
+          "use_central_snapshot_in_flat_actor": true,
+          "use_entropy_annealing": false,
+          "use_horizon_window": false,
+          "use_lr_decay": false,
+          "use_obsnorm": false,
+          "use_opt_compact": false,
+          "use_process_exploration": false,
+          "use_reward_annealing": null,
+          "use_statenorm": false,
+          "use_valuenorm": true,
+          "value_loss_coef": 1.0,
+          "weight_decay": 0.0
+        },
+        "launch_sha": "759927b5e8caa0ba5bd8ba505ab5388985f6a2fa",
+        "object_id": "ENERGY-RELAY-BENCHMARK-B02",
+        "optimizer_steps": {
+          "high": 0,
+          "individual_discriminator": 0,
+          "low_actor": 225000,
+          "low_critic": 225000,
+          "team_discriminator": 0
+        },
+        "policy_fingerprint": "4667fdc9df9486167a9820ffc3433a5c6d4b8fe568b21e6fbc3c1326aca4ff3b",
+        "programme": "SET-shield-on-1.2M",
+        "rollout": 100,
+        "training_seed": 925031,
+        "transitions": 600000,
+        "wall_seconds": 16161.049553632038
+      }
+    }
+  },
+  "checkpoint_root": "/home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01/checkpoints",
+  "device": "cpu",
+  "direction": "energy_relay_diagnostics",
+  "fits": 0,
+  "horizon": 3000,
+  "launch_sha": "ef5c35b77929fbf029d8e2eec9487c1371215bce",
+  "new_optimizer_updates": 0,
+  "plan": [
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955001
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955002
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955003
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955004
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955005
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955006
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955007
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955008
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955009
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955010
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955011
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955012
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955013
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955014
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955015
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955016
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955017
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955018
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955019
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955020
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955021
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955022
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955023
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955024
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955025
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955026
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955027
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955028
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955029
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955030
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955031
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": false,
+      "draw": 0,
+      "panel": "c00_eval_stochastic_d0",
+      "seed": 955032
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": true,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955001
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955002
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955003
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955004
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": true,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955005
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955006
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955007
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955008
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955009
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955010
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955011
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955012
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955013
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955014
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955015
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": true,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955016
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955017
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955018
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955019
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955020
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": true,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955021
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955022
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955023
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955024
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955025
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955026
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955027
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955028
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955029
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955030
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955031
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 0,
+      "panel": "c03_eval_stochastic_d0",
+      "seed": 955032
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": true,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955001
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955002
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955003
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955004
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": true,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955005
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955006
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955007
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955008
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955009
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955010
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955011
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955012
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955013
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955014
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955015
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": true,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955016
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955017
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955018
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955019
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955020
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": true,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955021
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955022
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955023
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955024
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955025
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955026
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955027
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955028
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955029
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955030
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955031
+    },
+    {
+      "action_mode": "deterministic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": null,
+      "panel": "c03_eval_deterministic",
+      "seed": 955032
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955001
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955002
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955003
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955004
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955005
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955006
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955007
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955008
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955009
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955010
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955011
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955012
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955013
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955014
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955015
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955016
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955017
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955018
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955019
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955020
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955021
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955022
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955023
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955024
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955025
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955026
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955027
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955028
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955029
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955030
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955031
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": false,
+      "draw": 1,
+      "panel": "c03_eval_stochastic_d1",
+      "seed": 955032
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": true,
+      "draw": 0,
+      "panel": "c00_collector_stochastic_d0",
+      "seed": 955001
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": true,
+      "draw": 0,
+      "panel": "c00_collector_stochastic_d0",
+      "seed": 955005
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": true,
+      "draw": 0,
+      "panel": "c00_collector_stochastic_d0",
+      "seed": 955016
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c00",
+      "collector": true,
+      "draw": 0,
+      "panel": "c00_collector_stochastic_d0",
+      "seed": 955021
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": true,
+      "draw": 0,
+      "panel": "c03_collector_stochastic_d0",
+      "seed": 955001
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": true,
+      "draw": 0,
+      "panel": "c03_collector_stochastic_d0",
+      "seed": 955005
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": true,
+      "draw": 0,
+      "panel": "c03_collector_stochastic_d0",
+      "seed": 955016
+    },
+    {
+      "action_mode": "stochastic",
+      "capture_inputs": false,
+      "checkpoint": "c03",
+      "collector": true,
+      "draw": 0,
+      "panel": "c03_collector_stochastic_d0",
+      "seed": 955021
+    }
+  ],
+  "policy_seed": 925031,
+  "threads": 1,
+  "workers": 4
+}
