@@ -23,7 +23,11 @@ Root-dissolution wording withdrawn, venue class deferred as non-blocking). Nothi
 them. (4) Allocation done by Root on 2026-09-27 (`docs/Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md`):
 D1 (+ D4 as a revisable successor) → `energy_relay_baselines`, D2 + D3 → `energy_relay_diagnostics`;
 this direction keeps the accepted B02 study and its declared readings only, and will not declare
-the cross-seed or imitation follow-ups itself.
+the cross-seed or imitation follow-ups itself. Updated 2026-09-27 (Root commit 4220ecd4f, owner
+ceiling raised to five tracks by eda9fae04): four Codex DMs — D4 moved to `energy_relay_imitation`
+(DM3, BC-only closed loop first), D5's native S4 part to `energy_relay_availability` (DM4, 0-fit
+references first), Milan deferred, D6 engineering on need; DM1 keeps D1 and chooses its comparison
+after this direction's complete development curve is published; DM2 unchanged.
 
 摘要（中文）：在冻结的 S7-S2/H3000 宿主上，本方向已用零训练参照把"学习器亏在哪里"定量化——
 中心式固定航点启发式 .774 QoS/步、局部信息启发式 .597、B09 学习器 N .328；亏损在部署（布局）而非

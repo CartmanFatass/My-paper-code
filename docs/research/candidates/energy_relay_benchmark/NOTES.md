@@ -3107,3 +3107,34 @@ failed; launch sha 7ad3ba6d3), copied locally. Its panels stay unread; the run's
 summary, launch records, panels) is committed with this entry so the comparator values are sealed
 by content hash before the final model exists — a change from the earlier plan to commit them at
 the final read, made for that reason only. Nothing in the panels was displayed by the commit.
+
+### Updated alignment notice read (2026-09-27 ≈ 04:00 UTC): four Codex DMs under a five-track ceiling; this direction's scope unchanged
+
+Root updated `docs/Claude_docs/inbox/CODEX_TWO_DM_ALIGNMENT_20260927.md` in place (commit
+4220ecd4f, with the RESEARCH plan/routing rows and the archived expansion review
+`docs/research/archive/2026-09-27/RESEARCH-four-dm-expansion.md`); the owner's amendment
+eda9fae04 raises the concurrent result-bearing research-track ceiling from three to five
+(constitution §2; node admission unchanged). Four Codex DMs now share the S7 problem: DM1
+`energy_relay_baselines` keeps D1 (cross-seed) and chooses its single comparison after this
+direction's complete development curve is published; DM2 `energy_relay_diagnostics` keeps D2+D3
+and is the sole writer of the new trajectory interface (its 136-episode, 0-fit operation is
+admitted; run directory `energy_relay_diagnostics/b01_alignment_a01` on the node, not read here);
+DM3 `energy_relay_imitation` takes the unexecuted D4 as a fixed-budget BC-only closed-loop study;
+DM4 `energy_relay_availability` takes D5's native S4 part (service sensitivity to short UAV
+unavailability, 0-fit references first). Root executes no research line; Milan stays deferred; D6
+is engineering on concrete need. The notice cites the published c04 (.406 / .404, still improving;
+c03 is not a plateau).
+
+For this direction nothing changes in what is executed: the resume operation, c05–c06, the
+once-only hold-out read, the full cost and the interpretation stay here; no takeover, restart or
+duplicate purchase; 957001–957032 and the sealed `b02_holdout_refs_a01` remain read only by this
+DM under the original plan, and the new DMs and helpers do not view or use them. Two consequences
+for the remaining records: (1) the Stage 1 result entry stays exploratory under constitution §8
+(one training seed; the notice states that a resumed fit cannot be mechanically spliced into a
+confirmation) — it will declare the resumed nature and claim nothing at confirmation level;
+(2) DM1's next purchase waits on the complete curve, so the c05/c06 reads and the final read are
+published promptly in the same form as c00–c04. Node at the read (03:58 UTC): only this
+direction's fit running (load average 1.07, 12 GB available), the resumed process at rollout 163
+(63 of its 100) at ≈ 187 s per rollout since its start; c05 (167) expected ≈ 04:10 UTC, c06 (200)
+≈ 05:55 UTC. No reply is owed; the inbox report's allocation note is extended with the new
+attribution in the same commit.
