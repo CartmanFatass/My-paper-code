@@ -5,7 +5,7 @@ import pytest
 
 from experiments.candidates.energy_relay_benchmark.b01.evaluation import evaluate_world, make_eval_config
 from experiments.candidates.energy_relay_benchmark.b01.feedback import PRODUCTION_PARAMS
-from experiments.candidates.uav_information_value.b03.batch import make_controller
+from experiments.candidates.uav_information_value.b03.controller import make_controller
 from experiments.candidates.uav_information_value.b03.observer import AnchorObserver
 from experiments.candidates.uav_service_auxiliary.b01.native import make_env
 

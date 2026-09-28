@@ -1582,3 +1582,69 @@ Check retained constructed tests with zero additional native transitions. After
 the critic releases all raw/source consumers, hash-check and move the one raw copy
 to durable direction/tag storage, reclaim only this terminal launcher snapshot,
 and delete own disposable caches/scratch with measured net allocated reduction.
+
+### 2026-09-28 - B03 durable evidence and completed cleanup
+
+The read result and directly affected RESEARCH understanding/standing are published
+at `4204bc869`. After the independent critic completed and released its consumers,
+moved the single raw directory to
+`wsl_4070:/home/wu/hmasd-artifacts/uav_information_value/b03_anchor_content_a01/raw/`.
+It contains **192 files / 100,227,133 file bytes / 100,810,752 allocated bytes**.
+All hashes and the complete native/plan audit passed again at that durable path.
+The original checkout raw directory is absent. No copy, archive or backup chain
+was made. Moving raw file data frees zero bytes; its new parent tag directory adds
+4,096 allocated bytes, included in the net cleanup below.
+
+For the unchanged manifest's `raw/...` entries use the durable raw root above;
+compact artifacts and native operation records remain at the published run path.
+The manifest SHA-256 remains
+`eae7cc2c002c14dc0672bc03ee66ab0acd817092bb8f1244d84d61f1b6763524`.
+The relocated full audit produced the same compact audit SHA-256,
+`49f0814e40f7879fbfde8fd1961bf51fcb34d0d099b1307c3ec322dcc5a16505`.
+The retained read-only [audit utility](../../../../experiments/candidates/uav_information_value/b03/audit.py)
+accepts `--raw-root` for this layout and executes no environment transitions.
+
+Retained S0 controller, observer, reader and useful tests. Moved the unchanged
+three-arm factory from the completed batch to `b03/controller.py`, then removed
+`b03/batch.py`, `run_b03.py` and their obsolete plan/admission/worker-wiring test
+parts. No executable imports of the retired paths remain. B01/B02 controller
+sources are unchanged, including the sensing consumer's P_BS interface. The full
+accepted executable and original tests remain recoverable at
+[the input SHA](https://github.com/CartmanFatass/My-paper-code/tree/153a87e697a201b4c95a9ff62443e2e302b78b78/experiments/candidates/uav_information_value).
+Retained B03 constructed controller/observer and reader tests plus B02 tests:
+**28 passed in 4.20s**, the same 14 dependency deprecation warnings, **zero new
+native transitions**. The original observer-off/on native regression is retained
+with its factory import updated; it was not rerun for cleanup.
+
+The native snapshot collector's first preview refused `/proc/660/cwd` access.
+Its supported read-only `--sudo-process-scan` then found the exact snapshot
+eligible; exact-target apply removed
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/97f7e9cbe500418ebfd5031d0729e785`
+and its Git worktree registration, preserving claim, outputs, manifest and durable
+source ref. No snapshot bytecode caches were created during readback (`python -B`).
+A local force-style cleanup command was rejected before execution; constrained
+deletion of inspected `.pyc` files, the exact observer request and empty
+directories completed the same scope without that syntax. Neither refusal was a
+scientific failure, and neither leaves a cleanup blocker.
+
+Measured allocated bytes across the actual cleanup targets:
+
+| Target | Before | After |
+| --- | ---: | ---: |
+| Exact terminal remote source snapshot | 800284672 | 0 |
+| Remote direction scratch audit and directory | 16384 | 0 |
+| Local direction root, B02, B03 cache directories | 102400 | 0 |
+| Local B02/B03 test cache directories | 77824 | 0 |
+| Local direction scratch, including the moved audit source | 32768 | 0 |
+| Retired batch/entrypoint and changed retained code/tests, including retained audit | 40960 | 32768 |
+| Unique raw evidence plus its new parent tag directory | 100810752 | 100814848 |
+
+All deletion targets and the old raw location were checked absent. Net allocated
+reduction is **800,518,144 bytes**: **800,296,960 remote** (including new durable
+directory overhead), **221,184 local** (including retained audit source). This is
+allocation over the listed targets, not Git-object-store reclamation or a claim
+about whole-host free space. Required unique raw evidence, compact positive/adverse
+readings, source identities and native claims remain. No B03 worker, active
+observer, pending reviewer, redundant bulk copy, cleanup blocker or scientific
+dependency remains. Return the completed question and scoped comparator decision
+to Root; the direction is reserve without an automatic continuation.

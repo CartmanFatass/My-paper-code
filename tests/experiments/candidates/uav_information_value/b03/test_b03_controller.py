@@ -6,8 +6,7 @@ import numpy as np
 import pytest
 
 from experiments.candidates.energy_relay_benchmark.b01.observation import S7S2_LAYOUT, station_records
-from experiments.candidates.uav_information_value.b03.batch import make_controller
-from experiments.candidates.uav_information_value.b03.controller import station_zero_xy
+from experiments.candidates.uav_information_value.b03.controller import make_controller, station_zero_xy
 from experiments.candidates.uav_information_value.b03.observer import AnchorObserver
 
 
