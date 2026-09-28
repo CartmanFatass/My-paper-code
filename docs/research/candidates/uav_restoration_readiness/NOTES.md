@@ -154,3 +154,35 @@ Provenance note: the RESEARCH Active row for this direction was written in this 
 main inside Root's commit 31d62f6b5 (Root staged the whole index file while committing its own retirement
 entry); the row text is the DM's. Seeds files `b01/seeds_dev.json` (101–108) and `b01/seeds_price.json` (101)
 are committed with this note so the snapshot launcher can resolve them from the source tree.
+
+### 2026-09-28 — Owner authorisation relayed by Root, budget alignment, data plan reduced to the smallest usable set
+**Root inbox `20260928_joint_next_round_plan_ROOT.md`, sections at 6a4386526 and e59e1e60d (data for this record).**
+(1) The owner, asked by Root whether Claude should advance the restoration direction and acquire/preprocess the
+public Milan activity data within stated boundaries (verify source, licence, download/disk cost; take only free,
+minimal data needing no account authorisation; payment, extra terms or a large download need another decision;
+≤ 24 complete trajectories, 0 fits, engineering and CPU each ≤ 8 h), answered "按上述边界推进（推荐）". This is
+the same choice the owner gave this session directly ("确认A 准许"). (2) Root's alignment need, accepted: pricing
+counts inside the 24. Layout fixed prospectively: price operation = seed 101 × 3 controllers (3 trajectories),
+then seeds 102–108 × 3 controllers exactly once (21) under the same final source/config/data contract = 24;
+`seeds_dev.json` now holds 102–108; seed 101 is never rerun outside the count and no changed pilot is spliced in.
+The CPU bound is process CPU (user+sys, runner and children), not the runner's `--max-wall-s` cutoff: the price
+operation's measured CPU per trajectory projects the total; if 24 trajectories project above 8 h CPU the main
+operation is declared with fewer seeds (a smaller complete purchase), never extended; partial outcomes are kept
+if the aggregate bound ends the study. Engineering stays separately capped at 8 h (spent so far: two implementer
+tasks ≈ 42 min agent wall plus DM review, well inside). (3) Root's reading of the guestbook gate matches this
+DM's: submitting personal contact information (the Dataverse guestbook's required e-mail) or accepting extra
+terms is not covered by the free-data permission and needs the owner's separate decision, which this DM already
+asked for directly (A: submit with the owner's e-mail; B: owner downloads in the browser). No synthetic
+substitution for Milan. (4) Root's evidence note (O_H/P at H12000 not adopted for long missions; C/H/L content
+learning adverse, C kept; 3 arm fits, 634,368 team steps, 1,744 episodes) is recorded as data; it leaves this
+readiness read independent, "not a compulsory beneficiary of an S7 failure". No reply owed.
+
+**Smallest usable data set (declared).** The preprocessing contract requires non-empty `train_dates` (the demand
+normalisation quantile is fitted on training only) and the `test` split for `milan_site_outage`. Instead of the
+reference configuration's 15 dates (≈ 5.4 GB), b01 uses a direction-owned copy of `preprocess_milan_reference.json`
+with `train_dates` 2013-11-14, 2013-11-15 (weekdays), `validation_dates` 2013-11-19, `test_dates` 2013-11-20/21/22
+— six daily files (≈ 2.1 GB) plus `milano-grid.geojson` (3.2 MB); causal order train < validation < test is
+preserved and the split is disjoint by construction. Everything else in the reference configuration is unchanged.
+The copy will live at `experiments/candidates/uav_restoration_readiness/b01/preprocess_milan_b01.json` and is
+committed before preparation; the cache metadata records the dataset version (Dataverse v1.3, 2020-02-09), the
+ODbL 1.0 licence and the required attribution ("from BigDataChallenge contest").
