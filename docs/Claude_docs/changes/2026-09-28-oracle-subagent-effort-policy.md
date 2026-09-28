@@ -28,3 +28,18 @@ it is not observable from inside a session (CLAUDE.md rule), so report it as con
 
 Owner authority: 2026-09-15 lifting of the control-plane restriction (any file, traceable in Git,
 documented here). No science, run, record type or message channel changed.
+
+## Addendum 2026-09-28 (later): Oracle body names the owner-adopted comparison/decision-exposure method
+
+Root published the owner-requested method revision at 2a9073410 (`hmasd-scientific-tools`
+"Design the comparison and decision exposure"; loop-dispatch; DM/critic bodies; generated `.claude`
+consumers, publisher drift 0) and sent `docs/Claude_docs/inbox/20260928_method_workflow_lessons_ROOT.md`
+with the owner's authorisation for Claude to adjust its own workflow. Change (commit a4dd9c9a0):
+`.claude/agents/hmasd-oracle.md` gains one sentence directing the Oracle to state whether a question
+buys package reuse or component attribution, to pick the comparator for that decision, to trace only
+consequential premises to the actual host and policy interface, to plan requested/executed readings
+that separate nonactivation, sparse exposure and an active adverse intervention, and to say what each
+outcome would change. Frontmatter (model fable, effort max, tools) unchanged. Directly maintained
+Claude-only role; `tools/publish_claude_control.py --check` re-run from this checkout: `drift: 0`.
+No science, run, record type, role or message channel changed; the running `b05_canonical_frame_a01`
+operation is untouched.
