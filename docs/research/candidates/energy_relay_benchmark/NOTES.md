@@ -6630,3 +6630,30 @@ Reading (zero-fit, descriptive): the frozen c06 under the SW frame gains on E-ha
 **Rule adopted for the primary reading (operation setting, declared before any B panel is read):** every b05 panel — B at c02…c06 dev, B hold-out at c06, C_SW, C_SW_FULL — runs through the same b05 evaluator at **8 workers × 1 thread** on `wsl_4070`, so L = Q(B) − Q(C_SW) is a same-setting paired comparison. The recorded raw c06 panels (2 threads) are used only for the descriptive free-frame reading above; the b04 readers on B use the wrapped controller (F1) at 1 thread.
 
 **C_SW_FULL development (`b05_cswfull_dev_a01`) — accepted 07:56 UTC.** `launch_b05.sh panel 5886a7504… b05_cswfull_dev_a01 C_SW_FULL <c06 durable copy> deterministic 8 1`; claim `525c0ea33cc7efa3ae884f1f6caec3f9af308f50a168c3ac848de8ee4c0fda05`; supervisor pid 897192, runner pid 897193. Fit status at 07:42 UTC: rollout 4 / 200, ≈ 220 s per rollout under panel load (collection 181 s + update 39 s), runner RSS 1.9 GB, CUDA; the recipe's per-lane frames at the first boundary were ROT180/ROT180 (canonical wrapper active in training).
+
+### 2026-09-28 — C_SW_FULL complete (0 fit): full-speed magnitude is not the lever; zero-fit readers on the three C_SW panels (P1/P2/P4 for the comparator)
+
+**C_SW_FULL development (`b05_cswfull_dev_a01`, claim 525c0ea3…, COMPLETE, exit 0, 32 det episodes, 412 s, 8 × 1 thread; mirrored locally).** Frozen c06 under the SW wrapper with the horizontal proposal normalised to the cap before the shield (direction, z, dock and shield/guard unchanged; Pro's alternative, taken as a secondary zero-fit arm). Versus C_SW dev det (same evaluator, same threads, paired per world):
+
+| | C_SW_FULL | C_SW | paired FULL − C_SW |
+|---|---|---|---|
+| QoS/step | .4262 | .4574 | −.031 (SE .022), 13 W / 19 L; by frame IDENTITY −.006 n13, MIRROR_Y +.003 n5, MIRROR_X +.007 n6, **ROT180 −.123 n8** |
+| J | 1025.8 | 1339.8 | −314 (−23 %) |
+| return-constraint cost (sum) | 110.95 | 1.50 | J prices this at λ = 2 |
+| cutoff events / episode | .25 | 0 | |
+| min episode battery ratio | .015 | .092 | |
+| charger input Wh | 581 | 180 | 3.2 × |
+| guard-blocked actions | 1074 | 920 | |
+| first service (served worlds) | 104 steps | 206 steps | earlier under full speed; 1 never-served world in both |
+| free-space actual step (median) | 30.0 m (saturated share .959) | 9.6 m (.011) | at walls 13.1 m (.13) vs 3.9 m (.001) |
+
+Reading: forcing the cap in free space is executed (post-shield |a_xy| = 1 at every step; the shield does not rescale, walls and guard blocks do), reaches users earlier, and loses service, J, battery margin and return compliance; the largest loss is on ROT180 (E,N) worlds. The sub-saturated speed of c06 (P4) is therefore not a free inefficiency that a magnitude fix removes; if B gains over C_SW, the gain is not "B moves faster". This closes the Pro-proposed magnitude arm negatively (descriptive; one frozen policy, 32 worlds, no fit).
+
+**Zero-fit readers (`run_b05.py read`, no admission, no episode; `runs/energy_relay_benchmark/b05_read_zero_fit_a01/{readers,manifest}.json`, local host) on C_SW dev det/stoch, C_SW hold-out det/stoch, C_SW_FULL dev det, with references (raw c06 dev det panel, b04 Block 2) and pairs FULL − C_SW, C_SW − raw.** These are the comparator's values of the declared readings, to be paired with B's at c06:
+- *P1 (100-step stratified net heading, ≥ 30 m, spawn-relative with the spawn corner mapped to lower-left):* C_SW dev det R_spawnrel .588, mean −109.5° (n 256), by corner R .53–.65 with means −99° … −114° — pointing **into the corner** on every corner, as predicted for C_SW; R_map .109 (the wrapper removes the map-frame lock: raw c06 R_map was .222 legacy). Hold-out det R_spawnrel .568, −101°; dev stoch R .41, −90°. C_SW_FULL R_spawnrel .451, −102°.
+- *P2 (net inward displacement over 100 steps, projection onto spawn→centre):* C_SW dev det pooled median **−266 m** (mean −151; outward), by corner W,S −238, W,N −269, E,S −252, E,N −321 (raw c06 by corner ranged −222 … +810: the wrapper makes every corner behave like the W,S corner). Hold-out det −212 m; dev stoch −128 m; C_SW_FULL −193 m (mean +33).
+- *P4 (speed decomposition, 1,000-step window, normal mode, free space):* C_SW raw proposal |a_xy| median .326 (q25 .207, q75 .474), post-shield the same, actual step 9.5 m median; saturated share .001 (free) / 0 (wall). C_SW_FULL: raw .367, post-shield 1.0, actual 30.0 m, saturated .954 (free), .126 (wall).
+- *First service (all-worlds denominator, censoring at the horizon):* C_SW dev det served 31/32, mean served 206 steps, censored mean 293; hold-out 32/32, 190; C_SW_FULL 31/32, 104 / 195.
+- The by-corner E-half gains of C_SW − raw (previous entry) stand as the reader's pair `CSW_minus_raw` (cross-thread-setting, descriptive).
+
+**State.** All declared zero-fit panels are complete and published; nothing but the fit is running. Next result-bearing operations: B dev panels at c02 … c06 (each launched when its checkpoint lands, after copying it unchanged to `/home/wu/hmasd-artifacts/energy_relay_benchmark/b05_canonical_frame_a01/checkpoints/cNN`, 8 × 1 thread), B hold-out once at c06, then the reader with pairs B:C_SW on both panels.

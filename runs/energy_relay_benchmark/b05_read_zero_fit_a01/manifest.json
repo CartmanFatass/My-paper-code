@@ -1,0 +1,76 @@
+{
+ "access": null,
+ "argv": [
+  "experiments/candidates/energy_relay_benchmark/b05/run_b05.py",
+  "read",
+  "--out",
+  "runs/energy_relay_benchmark/b05_read_zero_fit_a01",
+  "--panel",
+  "CSW_dev_det=runs/energy_relay_benchmark/b05_csw_dev_a01/panels/C_SW_c06_deterministic_e0.00_x0.05.json",
+  "--panel",
+  "CSW_dev_stoch=runs/energy_relay_benchmark/b05_csw_dev_a01/panels/C_SW_c06_stochastic_e0.00_x0.05.json",
+  "--panel",
+  "CSW_hold_det=runs/energy_relay_benchmark/b05_csw_holdout_a01/panels/C_SW_c06_deterministic_e0.00_x0.05.json",
+  "--panel",
+  "CSW_hold_stoch=runs/energy_relay_benchmark/b05_csw_holdout_a01/panels/C_SW_c06_stochastic_e0.00_x0.05.json",
+  "--panel",
+  "CSWFULL_dev_det=runs/energy_relay_benchmark/b05_cswfull_dev_a01/panels/C_SW_FULL_c06_deterministic_e0.00_x0.05.json",
+  "--reference",
+  "c06_raw_dev_det=runs/energy_relay_benchmark/b02_s1_eval_c06_a01/checkpoint-eval/panels/L_c06_deterministic_e0.00_x0.05.json",
+  "--reference",
+  "b04_block2=runs/energy_relay_benchmark/b04_geometry_probe_a03/block2/paired_rotation.json",
+  "--pair",
+  "FULL_minus_CSW=CSWFULL_dev_det:CSW_dev_det",
+  "--pair",
+  "CSW_minus_raw=CSW_dev_det:c06_raw_dev_det"
+ ],
+ "created_utc": "2026-09-28T08:07:03Z",
+ "fits": 0,
+ "git_head": "71c55c2894c71dd58d42b0d530f13a02a8b83f3a",
+ "kind": "derived_reading_of_b05_panels",
+ "new_episodes": 0,
+ "reader": "experiments/candidates/energy_relay_benchmark/b05/readers.py",
+ "readers_json_sha256": "167aa77ad6388272954d3f72be0fd6e0f3fbd649d92092519759e898c8b423b0",
+ "sources": {
+  "CSWFULL_dev_det": {
+   "panel": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b05_cswfull_dev_a01/panels/C_SW_FULL_c06_deterministic_e0.00_x0.05.json",
+   "panel_sha256": "0c4da22fc5ff9a60534caaa18de275e12bb12bef1a91261730b596f6b3d30cd0",
+   "trace": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b05_cswfull_dev_a01/traces/C_SW_FULL_c06_deterministic_e0.00_x0.05.npz",
+   "trace_sha256": "8dff3fd291d4360d71dbaf7bf9abb48cd19f7c09854c80d88d0fb950e3ce7bd8"
+  },
+  "CSW_dev_det": {
+   "panel": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b05_csw_dev_a01/panels/C_SW_c06_deterministic_e0.00_x0.05.json",
+   "panel_sha256": "1f0ba3ea7ab05b3ee026d7dca1f126bb5d7b24c15918dcc0a72290998ee32d58",
+   "trace": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b05_csw_dev_a01/traces/C_SW_c06_deterministic_e0.00_x0.05.npz",
+   "trace_sha256": "00642c1531612c5c5f0789eb1c568fedf4666558ac0757369e75cd55f48dc38c"
+  },
+  "CSW_dev_stoch": {
+   "panel": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b05_csw_dev_a01/panels/C_SW_c06_stochastic_e0.00_x0.05.json",
+   "panel_sha256": "f07fb956e7bd2f1fd2173443174a0cdd5d82648051b622e28fe37fc31d68c528",
+   "trace": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b05_csw_dev_a01/traces/C_SW_c06_stochastic_e0.00_x0.05.npz",
+   "trace_sha256": "1a0d586fd810197443367764dbb72031248ed3ba17e55ad4af9927940bccc6ef"
+  },
+  "CSW_hold_det": {
+   "panel": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b05_csw_holdout_a01/panels/C_SW_c06_deterministic_e0.00_x0.05.json",
+   "panel_sha256": "8828401f6d4059d174622015fef5025a301f673ba92e266f44e54ecb321a3f67",
+   "trace": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b05_csw_holdout_a01/traces/C_SW_c06_deterministic_e0.00_x0.05.npz",
+   "trace_sha256": "a09a391185e2b38574dba482bd67b5b0e32024a02b219b3694b749d0010d87c3"
+  },
+  "CSW_hold_stoch": {
+   "panel": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b05_csw_holdout_a01/panels/C_SW_c06_stochastic_e0.00_x0.05.json",
+   "panel_sha256": "e38f3b8ce25620f85377ae3372c87dd583e8ba9060ef3eabb183f570e39173fb",
+   "trace": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b05_csw_holdout_a01/traces/C_SW_c06_stochastic_e0.00_x0.05.npz",
+   "trace_sha256": "ebc444f646a73e837de2f10033d5bbbbde631e6c585d100a999101c4ce68b0b4"
+  },
+  "b04_block2": {
+   "reference": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b04_geometry_probe_a03/block2/paired_rotation.json",
+   "sha256": "d83c7e651d79d5d97c34fdce3d4c99fee5968f06a3e66234fb4bdd9d0a86a82d",
+   "traced": false
+  },
+  "c06_raw_dev_det": {
+   "reference": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b02_s1_eval_c06_a01/checkpoint-eval/panels/L_c06_deterministic_e0.00_x0.05.json",
+   "sha256": "76a6e6f079149d96525b4e1c637aa8babe63fedc1349b62337b1fd6cc03b76f9",
+   "traced": false
+  }
+ }
+}
