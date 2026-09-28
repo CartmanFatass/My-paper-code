@@ -17,7 +17,7 @@ DM持续负责科学问题与解释，每次推进一个结果性研究，自主
 当前责任与工作区见[任务路由](#session-routing)，上一轮分工及采纳依据见[四DM审查](archive/2026-09-27/RESEARCH-four-codex-root-handover.md#four-dm-root-decision)。
 Owner已归档完成且文档齐全的DM；后继研究创建新DM并继承已发表证据，不恢复或复用这些旧会话。
 六个原生DM及A/B后继比较均已完整收口：7批、640完整回合、1.92M原生步、1fit；来源、独立判读和终态清理均保全。
-Owner于2026-09-28启动的新一轮两项比较已完整运行并独立判读：主动感知学习包未建立超出普通策略的增量，合法锚点比较建立构造的条件性增量并改变性能参照。本轮1fit／960k原生步，原配方不自动追加；保留全部风险和未决解释，具体结果／成本及继续沿用现有分工的建议见[现行计划](#current-research-plan)。
+Owner于2026-09-28启动的第二轮两项比较已完整运行并独立判读：主动感知学习包未建立超出普通策略的增量，合法锚点比较建立构造的条件性增量并改变性能参照；1fit／960k原生步，原配方不自动追加。Owner已采纳轻量方法调整并授权下一轮：有限补能承诺比较由新DM执行，独立的机队布局间过渡规划由另一新DM设计；不以DM数量下降宣称问题空间耗尽。具体结果、成本与选择见[现行计划](#current-research-plan)。
 本页在科学判断、计划或控制发生实质变化时更新；逐 cell 进度和操作恢复信息见相应 NOTES/runs。
 
 **计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
@@ -1270,11 +1270,116 @@ O有用而L无额外用途则保留条件性普通资产；两者都未建立用
 本次是中央信息、有限H3000下的经验用途问题，不宣称持续服务保证、PPO/MARL算法新颖性或已识别能量瓶颈。
 用户运动预测暂不另开方向：当前并无足够明确的条件性收益预测；这不是已经测出预测无用。
 
+**并行选择第二个独立问题用于具体设计：同一无线目标生成规则下，怎样协调机队在目标布局之间移动？**
+新的`/root/dm_joint_transition`负责`uav_joint_transition`设计，不选择返航时机、充电停留或目标生成。
+其决策对象是同时/分阶段运动及中间航点；R与精确P是需要保留的完整普通参照，
+同信息、轨迹权限、时钟与执行的普通轨迹搜索O是学习增量的主要替代。
+R/G/H已建立有限空间包用途，旧L/P只试过固定H1目标周围的move/单成员hold；
+这些事实支持设计比较，不证明过渡阻塞是主因或学习必需。
+当前仅选定设计，未冻结新批次；384k步及约11-12 worker-CPU小时只是审查中的示例尺度，非接受范围或时长保证。
+具体可执行轨迹、模型权限和全成本交同一次独立审查后作投入取舍，不先建昂贵预测器或加阳性pilot。
+完整问题空间诊断见[当前选择审查](#portfolio-review-2026-09-28-independent-joint-transition)。
+Claude在`350294379`记录的下一规划问题选择保持peer自主范围；具体潜在重合走既定范围通道，
+不把整个路径规划题族当作任何一方独占方向。
+
 第二轮的主动感知B02不变配方与锚点内容归因已完成停止决定，不自动延续。
 Claude的既有B05及已声明恢复保持原身份和peer自主范围，当前结果见其NOTES，不迁移或复制。
 PPC/FSD暂停、G33冻结及其他方向归属保持。DM负责选定研究的实现、发表、保全和清理，
 保持turn并长等待同一handle；Root用native `wait_agent`等待实质返回，不把执行变成日常审批。
 方法依据见[已采纳方法](archive/2026-09-28/RESEARCH-method-workflow-review.md)，地址见[任务路由](#session-routing)。
+
+<a id="portfolio-review-2026-09-28-independent-joint-transition"></a>
+## Portfolio review 2026-09-28 independent-joint-transition
+
+Conversation: independent native scientific review only, no Pro consultation.
+Reviewer: `/root/question_space_review`, separate context; new design DM:
+`/root/dm_joint_transition`, parent Root `01a0e560-4333-7b03-8ff3-759a4add1d9a`.
+Context: constitution sections 2/4/5, owner-approved attention refinement at
+`858e8cff5`, current shared topics and original evidence cited in the answer.
+Current source boundary: `350294379` for the review; `981e935ee` includes the
+already selected persistent-service inputs. That study is not reopened here.
+
+Decisions asked: does reduced DM activity show exhausted valuable questions,
+or narrower recipes and incomplete question coverage? Which independent
+UAV joint-planning question deserves design effort while current work proceeds?
+Options: retain only the current study; develop an independent transition
+planning comparison; or prefer another concrete question if its expected
+decision value and complete cost warrant it. No topic quota or extra diagnostics
+are required. Source/literature recommendations are not automatic experiment
+admission, and a question's broad possibility is not a purchase justification.
+
+### Answer
+
+Complete final independent question-space answer, with repository link targets
+made portable. This answers the question-framing choice; the executable
+comparison and investment cost remain pending below.
+
+**Retain Root's non-exhaustion diagnosis, but change the unit of convergence from active DMs to tested decisions.** The evidence has improved our ordinary comparators and rejected several specific recipes. It has not established that the remaining active directions are the uniquely valuable ones.
+
+This was a separate-context review without inherited Root/DM conversation. The assignment disclosed Root's provisional interpretation, so it was not blinded. I reconstructed source interfaces and native summaries before reading the relevant interpretations. Current coordination was checked through `350294379`; no files, experiments, or accepted operations were changed.
+
+The strongest evidence is:
+
+| Evidence | Supported reading | Boundary |
+|---|---|---|
+| Radio placement, source `8ec998eca`: R−G QoS **+.028758**, J **+69.938**; 8 worlds, 0 fits, 72k steps, 41.79 minutes | Ordinary spatial search can improve complete service beyond stronger geometric clustering. | R also changes target support and persistence; minimum battery .088559 and three adverse reserve tails prevent uncomplicated adoption. There was no learned spatial-search arm. [Native results](../../runs/uav_radio_placement/b01_spatial_a01/summary.json) |
+| Cooperative planning B02, source `9f72afd22`: L−P QoS **−.016488**, J **−55.389**; 1 fit, 480k steps, 3.862 hours | The fitted ranking package actively changed choices and failed against a competent ordinary planner. | Its choices were all-move or one member's ten-step hold around H1 targets. It did not learn general joint paths or spatial goals. [Protocol](https://github.com/CartmanFatass/My-paper-code/blob/350294379/docs/research/candidates/uav_cooperative_planning/NOTES.md#L304), [results](../../runs/uav_cooperative_planning/b02_transit_value_a01/summary.json) |
+| S1 LOCAL1 B17: fresh-panel N8 differences against H6 were positive in all three blocks; N4 J differences were negative in all three | Ordinary local recurrent learning has useful competence, with consequential deployment boundaries. | These are fixed-roster Scenario 1 results, not S7 results or membership-memory evidence. [Results](../../runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/summary.json) |
+| S1 B20: six fits, three independent training blocks; mixed-count N7 effects **−.08349 J**, **−4.399 served users/step** | The exact ordered mixing recipe did not deliver its proposed improvement. | The positive development instance remains; neither this result nor more evaluation episodes exhausts count generalization. [Results](../../runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_aggregate_20260925/summary.json) |
+
+Non-results must remain separate. Transit handoff was declined before execution, with substantial proposed model-rollout cost. Roster-memory reconstruction found ordinary public event/assignment state, not the hypothesized private persistent information. Diagnostics A02 ended incomplete with no checkpoint and 126k new recorded transitions; it is not a failed test of the masking intervention's benefit. [Handoff cost](https://github.com/CartmanFatass/My-paper-code/blob/350294379/docs/research/candidates/uav_transit_handoff/NOTES.md#L327), [roster sources](https://github.com/CartmanFatass/My-paper-code/blob/350294379/docs/research/candidates/uav_roster_memory/NOTES.md#L89), [A02 output](../../runs/energy_relay_diagnostics/b02_shield_surrogate_a02/ordinary/summary.json).
+
+Thus ordinary competence, failed finite learning, and restrictive question framing all contribute to the present picture. None alone explains it. Existing free-action SET learning also prevents claiming that spatial control has never been attempted. What is missing is a convincing comparison between **learned joint trajectory construction and competent ordinary spatial/temporal planning**.
+
+My strongest recommended independent question is:
+
+**Given a common radio-aware destination generator, can experience improve coordinated movement between destinations beyond an ordinary trajectory planner, under the unchanged native service objective and execution rules?**
+
+The decision object is the team's intervening motion: which members move together, which stage their movement, and which use intermediate waypoints while others continue serving. The native guard checks individual proposals against existing dependent paths before applying the resulting joint positions. Consequently, a high-scoring destination layout does not certify a useful transition. This is an implemented coupling, **not evidence that guard obstruction is the dominant current loss**. [Guard and transition source](https://github.com/CartmanFatass/My-paper-code/blob/350294379/envs/pettingzoo/relay/routed_core.py#L3294).
+
+This question differs materially from:
+
+- B02's single-member hold library: it permits coordinated, nontrivial intermediate motion.
+- The declined handoff design: it is not triggered by a returning member or limited to visiting its vacated position.
+- Persistent-service round3: it does not choose return, station dwell, or redeployment commitments.
+- Claude's recorded relational-goal proposal: it holds the destination-generation rule common and tests **how to get there**, rather than how a learned coordinator constructs destinations. Numerical future targets can diverge after trajectories diverge; “common generator” must not be misrepresented as identical future target traces.
+
+I recommend selecting this question for concrete DM design effort. I do **not** recommend declaring neural neighborhood selection itself the contribution. With eight UAVs there are only 28 pairs; ordinary pair enumeration, geometry-aware ordering, or adaptive search may be sufficient. A recent primary MAPF reevaluation found strong ordinary selection methods and no clear advantage from the evaluated learned methods under unified comparisons. That strengthens the comparator requirement here; its grid collision constraints and delay objective do not transfer to wireless service. [Tan et al., methods and findings](https://arxiv.org/html/2407.09451v2).
+
+The primary comparison should give learned **L** and ordinary **O** the same information, destination generator, trajectory support, clock, executor, and model access. O should use a competent ordinary trajectory search, including direct motion and staged alternatives. Retain **R** and exact central **TransitHold P** as complete-program references on the same new worlds: existing separate panels cannot rank R and P. P's different clock remains explicit. Lawful `P_BS`, which uses current legal users plus BS observation/memory/station inference, is a different information condition and cannot silently substitute for central P.
+
+A concrete costing envelope is one exploratory fit over 64 H3000 episodes, then L/O/R/P on 16 common fresh worlds: **1 fit, 128 episodes, 384k native steps**. This is a design scale, not an accepted protocol or proof of adequate learning exposure. For illustration, R destination search plus eight trajectory candidates scored at three positions per 30-step boundary would imply approximately **1.44 million maximum static snapshot calls**, including the references. Historical R timings suggest roughly **11–12 worker-CPU hours for native evolution and scoring**, before new learning, initialization, verification, and readback. This is a sensitivity estimate, not a wall-time quotation or upper bound.
+
+The consequential feasibility gaps are the actual trajectory library, optimizer exposure, and lawful scoring model. Fresh-association snapshots do not expose hidden live routing history or guarantee native execution. Full model rollouts could make the proposed cost substantially larger. These details should be resolved in the concrete design, without a mandatory positive pilot. Candidate aliases, shield overrides, and actual displacement should be recorded inside the complete study.
+
+The contrasting outcomes would change real choices:
+
+- **L improves complete QoS and J over O and both retained references, with acceptable reported tails and cost:** retain a conditional learned trajectory-planning candidate; independent training replication becomes a possible next investment.
+- **O improves over R/P but L adds nothing:** ordinary transition planning answers the practical question; stop the learning addition.
+- **Both lose despite materially different executed trajectories:** stop this trajectory package. Do not automatically prescribe a different network, horizon, or sensing model.
+- **Choices rarely execute or collapse to identical trajectories:** the comparison had limited decision exposure; it has not tested the intended trajectory capability. A repair still requires its own value/cost reason.
+- **Only proxy scores, blocked-action counts, or early service improve:** no complete-use success. Risk conflicts and technical failures remain visible.
+
+This preserves a worthwhile learning question without promising that learning is necessary. It also avoids turning every negative result into another battery, sensing, or optimizer repair. User-motion prediction remains plausible, but B01 supplied current user sources and BS memory, not user-track memory; it has not yet supplied a stronger investment argument than the trajectory question above.
+
+**MATERIAL_DISSENT: no.** Root's stated non-exhaustion diagnosis is supported. The recommended correction is substantive allocation toward a distinct joint-transition comparison, while preserving round3 and Claude's accepted work. Neither reduced DM count nor the cited failures supports claiming convergence to the uniquely valuable research directions.
+
+### Decision
+
+Root, 2026-09-28: adopt the diagnosis and select `uav_joint_transition` for a
+concrete comparison design. A fresh registered DM `/root/dm_joint_transition`
+has the source evidence, adverse results and specific question; it may challenge,
+simplify or decline the proposed approach. The existing critic retains this
+independent context for the resulting specification, not another parallel pass.
+The sample arms/exposure/query count are not frozen inputs and no result run is
+selected by them alone. The ordinary comparator, executable intermediate motion,
+model rights and full cost must support the actual investment choice.
+
+This is independent of the already selected persistent-service study and the
+peer's B05. Root will communicate the concrete scope through the established
+peer channel while preserving each lead's decisions. This working review remains
+current until the concrete design/cost and investment disposition are resolved;
+do not archive it as an accepted experiment or require owner approval again.
 
 ### Shared runtime diagnosis
 
