@@ -130,14 +130,22 @@ def test_readings_matching_shield_drop_and_sign_agreement():
     assert out["sign_agreement"]["H_local"]["BS_A"] == {"pairs": worlds, "share": 1.0}
 
 
-def test_paired_rotation_arithmetic():
-    rows = [{"seed": s, "qos_per_step": q, "raw_native_J": j, "in_support": True}
-            for s, q, j in ((1, 0.5, 10.0), (2, 0.4, 8.0), (3, 0.6, 9.0))]
-    panel = {"worlds": [{"seed": s, "qos_per_step": 0.5, "raw_native_J": 9.0} for s in (1, 2, 3)]}
-    out = gp.paired_rotation(rows, panel)
-    assert np.isclose(out["summary"]["qos_per_step"]["mean_paired_difference"], 0.0)
-    assert np.isclose(out["summary"]["qos_per_step"]["paired_se"], 0.1 / np.sqrt(3))
-    assert np.isclose(out["summary"]["raw_native_J"]["mean_paired_difference"], 0.0)
+def test_paired_rotation_triples_primary_on_one_host():
+    rot = [{"seed": s, "qos_per_step": q, "raw_native_J": j, "in_support": True}
+           for s, q, j in ((1, 0.5, 10.0), (2, 0.4, 8.0), (3, 0.6, 9.0))]
+    local = [{"seed": s, "qos_per_step": q, "raw_native_J": 9.0} for s, q in ((1, 0.4), (2, 0.4), (3, 0.4))]
+    panel = {"worlds": [{"seed": s, "qos_per_step": 0.5, "raw_native_J": 9.0} for s in (3, 1, 2)]}
+    out = gp.paired_rotation(rot, local, panel)
+    first = out["triples"][0]
+    assert (first["qos_per_step_local_id"], first["qos_per_step_local_rot"], first["qos_per_step_node_panel"]) == (0.4, 0.5, 0.5)
+    primary = out["summary"]["primary_rot_minus_local_id"]
+    assert np.isclose(primary["qos_per_step"]["mean_paired_difference"], 0.1)
+    assert np.isclose(primary["qos_per_step"]["paired_se"], 0.1 / np.sqrt(3))
+    assert np.isclose(primary["raw_native_J"]["mean_paired_difference"], 0.0)
+    diagnostic = out["summary"]["diagnostic_local_id_minus_node"]["qos_per_step"]
+    assert np.isclose(diagnostic["mean_paired_difference"], -0.1) and np.isclose(diagnostic["paired_se"], 0.0)
+    secondary = out["summary"]["secondary_rot_minus_node"]["qos_per_step"]
+    assert np.isclose(secondary["mean_paired_difference"], 0.0)
 
 
 def test_capacity_curve_reports_relaxed_and_actual(config):

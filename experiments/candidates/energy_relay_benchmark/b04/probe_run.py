@@ -34,6 +34,9 @@ RECORDED_PANEL = ("runs/energy_relay_benchmark/b02_s1_eval_c06_a01/checkpoint-ev
 WORLDS = tuple(range(955001, 955033))
 TRACE_MATCH_M = 1.0
 CAPACITY_WORLD = 955001
+MOBILITY_NOTE = ("Block 2 ROT reflects every entity at t = 0 only; user-mobility (RPGM) random draws "
+                 "after t = 0 are not reflected, so the rotated world is a reflection in distribution, "
+                 "not path-wise.")
 
 
 def _clean(value):
@@ -169,20 +172,26 @@ def run_block2(out: Path, *, worlds, checkpoint: Path, workers: int, threads: in
              for seed in worlds]
 
     def advance(result):
-        progress(out, {"block": 2, "seed": result["row"]["seed"], "condition": "ROT", "t": "H"})
+        progress(out, {"block": 2, "seed": result["row"]["seed"], "condition": result["condition"], "t": "H"})
 
-    results = sorted(run_pool(gp.rotated_episode, tasks, workers, advance), key=lambda r: r["row"]["seed"])
+    jobs = [(condition, task) for task in tasks for condition in ("ID", "ROT")]
+    results = run_pool(gp.block2_episode, jobs, workers, advance)
     logs.rmdir()
-    rows = [{**r["row"], "in_support": r["construction"]["in_support"]} for r in results]
+    by = {c: sorted((r for r in results if r["condition"] == c), key=lambda r: r["row"]["seed"])
+          for c in ("ID", "ROT")}
+    rows = {c: [{**r["row"], "in_support": r["construction"]["in_support"]} for r in by[c]] for c in by}
     panel = json.loads(Path(recorded_panel).read_text(encoding="utf-8"))
-    payload = paired = gp.paired_rotation(rows, panel)
+    payload = paired = gp.paired_rotation(rows["ROT"], rows["ID"], panel)
     payload.update(condition="ROT", horizon=int(horizon), recorded_panel=str(recorded_panel),
                    recorded_panel_sha256=_sha256(Path(recorded_panel)),
-                   rotated_rows=rows, constructions={str(r["row"]["seed"]): r["construction"] for r in results},
+                   primary="summary.primary_rot_minus_local_id (local ROT - local ID, same host, same path)",
+                   local_id_rows=rows["ID"], rotated_rows=rows["ROT"],
+                   constructions={str(r["row"]["seed"]): r["construction"] for r in by["ROT"]},
                    identity=[r["identity"] for r in results][:1],
-                   note="original = recorded node panel (c06 deterministic); rotated = this host")
+                   mobility_note=MOBILITY_NOTE)
     write_json(directory / "paired_rotation.json", payload)
-    return {"worlds": [r["row"]["seed"] for r in results], "episodes": len(results),
+    return {"worlds": [r["row"]["seed"] for r in by["ROT"]], "episodes": len(results),
+            "local_id_episodes": len(by["ID"]), "rot_episodes": len(by["ROT"]),
             "steps": int(sum(r["row"]["actual_length"] for r in results)),
             "summary": paired["summary"],
             "mean_episode_wall_s": float(np.mean([r["row"]["wall_seconds"] for r in results]))}
@@ -228,8 +237,11 @@ def write_manifest(out: Path, *, command: str, launch_sha: str, argv, threads: i
                          "block1_prefix_steps": blocks.get("block1", {}).get("id_prefix_steps", 0),
                          "block1_constructed_worlds": blocks.get("block1", {}).get("constructed_worlds", 0),
                          "block2_full_episodes": blocks.get("block2", {}).get("episodes", 0),
+                         "block2_local_id_episodes": blocks.get("block2", {}).get("local_id_episodes", 0),
+                         "block2_rot_episodes": blocks.get("block2", {}).get("rot_episodes", 0),
                          "block2_steps": blocks.get("block2", {}).get("steps", 0)},
-        "fits": 0, "checkpoint": str(checkpoint), "checkpoint_sha256": record["agent_pt_sha256"],
+        "fits": 0, "block2_rotation": MOBILITY_NOTE,
+        "checkpoint": str(checkpoint), "checkpoint_sha256": record["agent_pt_sha256"],
         "policy_fingerprint": record["policy_fingerprint"], "training_seed": record["training_seed"],
         "interpreter": sys.executable, "torch_version": torch.__version__, "threads": int(threads),
         "workers": int(workers), "os_cpu_count": os.cpu_count(), "blocks": blocks,

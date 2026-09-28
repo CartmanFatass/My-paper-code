@@ -2,8 +2,8 @@
 """Admission-guarded runner of ``b04_geometry_probe_a01`` (energy_relay_benchmark; zero fits).
 
 Subcommands ``block0`` (trace re-readings + capacity curve), ``block1`` (saved-c06 forward
-queries on constructed worlds, identity gate), ``block2`` (32 ROT worlds, full H3000, paired with
-the recorded c06 deterministic panel) and ``all`` (block1, then block0 joined to it, then block2).
+queries on constructed worlds, identity gate), ``block2`` (the worlds unrotated and ROT, full H3000,
+paired on this host; the recorded c06 node panel as a cross-host diagnostic) and ``all`` (block1, then block0 joined to it, then block2).
 Seeds: the worlds (``--worlds``, default 955001-955032) and the checkpoint's recorded training
 seed; no other randomness is drawn except the fixed ST stream RandomState([world, 1]).
 """

@@ -673,23 +673,49 @@ def rotated_episode(task: WorldTask, condition: str = "ROT") -> dict[str, Any]:
     return result
 
 
-def paired_rotation(rotated_rows, recorded_panel: dict) -> dict[str, Any]:
-    """Per-world (constructed - recorded) qos_per_step and raw_native_J with paired SE."""
+def block2_episode(job) -> dict[str, Any]:
+    """Worker: ``(condition, task)``; "ID" = B01 ``evaluate_task`` unchanged, else constructed."""
+    condition, task = job
+    if condition == "ID":
+        result = b01_evaluation.evaluate_task(task)
+        result.pop("arrays", None)
+        result["construction"] = {"condition": "ID", "in_support": True}
+    else:
+        result = rotated_episode(task, condition)
+    result["condition"] = condition
+    return result
+
+
+def _paired(differences) -> dict[str, Any]:
+    diff = np.asarray(differences, dtype=np.float64)
+    return {"n": int(diff.size), "mean_paired_difference": float(diff.mean()) if diff.size else None,
+            "paired_se": float(diff.std(ddof=1) / np.sqrt(diff.size)) if diff.size > 1 else None}
+
+
+BLOCK2_METRICS = ("qos_per_step", "raw_native_J")
+
+
+def paired_rotation(rotated_rows, local_id_rows, recorded_panel: dict) -> dict[str, Any]:
+    """Per-world triples (local ID, local ROT, recorded node panel).  Primary: local ROT - local ID
+    (one host).  Diagnostic: local ID - node panel (cross-host).  Secondary: local ROT - node panel."""
     recorded = {int(row["seed"]): row for row in recorded_panel["worlds"]}
-    pairs = []
+    local = {int(row["seed"]): row for row in local_id_rows}
+    triples = []
     for row in rotated_rows:
-        base = recorded[int(row["seed"])]
-        pairs.append({"seed": int(row["seed"]), "in_support": row.get("in_support"),
-                      **{f"{key}_{side}": float(src[key]) for key in ("qos_per_step", "raw_native_J")
-                         for side, src in (("original", base), ("rotated", row))}})
-    summary = {}
-    for key in ("qos_per_step", "raw_native_J"):
-        diff = np.array([p[f"{key}_rotated"] - p[f"{key}_original"] for p in pairs])
-        for p, d in zip(pairs, diff):
-            p[f"{key}_difference"] = float(d)
-        summary[key] = {"n": int(diff.size), "mean_paired_difference": float(diff.mean()),
-                        "paired_se": float(diff.std(ddof=1) / np.sqrt(diff.size)) if diff.size > 1 else None}
-    return {"pairs": pairs, "summary": summary}
+        seed = int(row["seed"])
+        triple = {"seed": seed, "in_support": row.get("in_support")}
+        for key in BLOCK2_METRICS:
+            rot, ident, node = float(row[key]), float(local[seed][key]), float(recorded[seed][key])
+            triple.update({f"{key}_local_id": ident, f"{key}_local_rot": rot, f"{key}_node_panel": node,
+                           f"{key}_rot_minus_local_id": rot - ident,
+                           f"{key}_local_id_minus_node": ident - node,
+                           f"{key}_rot_minus_node": rot - node})
+        triples.append(triple)
+    summary = {name: {key: _paired([t[f"{key}_{field}"] for t in triples]) for key in BLOCK2_METRICS}
+               for name, field in (("primary_rot_minus_local_id", "rot_minus_local_id"),
+                                   ("diagnostic_local_id_minus_node", "local_id_minus_node"),
+                                   ("secondary_rot_minus_node", "rot_minus_node"))}
+    return {"triples": triples, "summary": summary}
 
 
 # --------------------------------------------------------------------------- capacity curve
