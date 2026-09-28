@@ -604,3 +604,44 @@ published operative row under the remote writer lock, preserving its dirty
 RESEARCH, outputs and sparse selection; no shared-tree merge/reset is needed.
 The actual run uses the exact published source in the native launcher's immutable
 snapshot. Publication and admission/acceptance are still separate facts.
+
+### B01 accepted - same-operation collection pending
+
+Published source **`e663b53c7ea3f52983365ed9c3ce044bc4ccf699`** was fetched on
+`wsl_4070`. The remote operative row was inserted under its writer lock; the
+existing information-value row and other dirty records were untouched. A patch
+without trailing context required git's explicit no-trailing-context mode; its
+rejected checks/applications changed nothing. The known remote zsh startup
+diagnostics and Git auto-GC bad-tree warning were observed separately from the
+successful fetch and admission. No shared-tree merge/reset or sparse change.
+
+One configured-supervisor request `uec-b01-analytical-a01` invoked the native
+launcher. Outer exit0 means submission completion only. Native admission accepted
+**2026-09-28 03:37:23 UTC**, exact source above, seed31092801, workers2, threads1,
+output `runs/uav_energy_coordination/b01_analytical_coordination_a01`. Fresh
+`/proc/meminfo` measured **13,292,367,872 available bytes** against the
+**4,294,967,296-byte floor**, with no failure reasons. Collected compact records:
+[manifest](../../../../runs/uav_energy_coordination/b01_analytical_coordination_a01/launch-manifest.json),
+[launch status](../../../../runs/uav_energy_coordination/b01_analytical_coordination_a01/launch-status.json),
+[preflight](../../../../runs/uav_energy_coordination/b01_analytical_coordination_a01/admission-preflight.json).
+Same-node operation reference:
+`/home/wu/projects/HMASD/.git/hmasd-admission/70d1d7a565a02f1601e443ecac730b2fe43a04e72a7bf0fcb7cdf5bd82f267a9.json`.
+Source snapshot: `.git/hmasd-launch-sources/7ea7d7d869b94ac5aba9f7ff532c6590`.
+At **03:38:36 UTC** runner859694 and supervisor859693 were running with matching
+Linux identities and consistent records; no exit witness existed. No scientific
+endpoint has been read or accepted.
+
+The next action is `tools/hmasd_wait.py` on that exact operation via
+`temp/directions/uav_energy_coordination/b01-wait-request.json`. The actual owning
+native-child Codex UUID is `01a0e5d9-7595-7010-b974-4dc802d1b7d8`; Root parent and
+lead stay unchanged. Collection, interpretation and publication remain this DM's
+task. A checkpoint rearms observation, never the worker; acceptance authorizes
+no retry, replacement world, extension or additional study.
+
+Local helpers/tests had finished before removing only the direction's experiment
+`__pycache__`, `b01/__pycache__` and matching test `__pycache__`. The tool first
+rejected `rm -rf`; targeted `.pyc` deletion and empty-directory removal succeeded.
+Allocated usage across the two owned code/test trees fell from **393,216** to
+**139,264 bytes**, net **253,952 bytes reclaimed**; all three targets are gone.
+Required source/tests remain, as do the live native snapshot and unique output.
+This preparation cleanup does not retire the active result operation.

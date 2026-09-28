@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-28T03:37:23.073228Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ea7d7d869b94ac5aba9f7ff532c6590/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ea7d7d869b94ac5aba9f7ff532c6590/experiments/candidates/uav_energy_coordination/run_b01.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01",
+    "--seed",
+    "31092801",
+    "--launch-sha",
+    "e663b53c7ea3f52983365ed9c3ce044bc4ccf699",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "claim_key": "70d1d7a565a02f1601e443ecac730b2fe43a04e72a7bf0fcb7cdf5bd82f267a9",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/70d1d7a565a02f1601e443ecac730b2fe43a04e72a7bf0fcb7cdf5bd82f267a9.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ea7d7d869b94ac5aba9f7ff532c6590/experiments/candidates/uav_energy_coordination/run_b01.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01",
+    "--seed",
+    "31092801",
+    "--launch-sha",
+    "e663b53c7ea3f52983365ed9c3ce044bc4ccf699",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "command_sha256": "61a9d7c68d8b50bd86828bc858f2cf00c0bfc49c5b2367367022f5b927eb9f3d",
+  "control_observation": {
+    "observed_at": "2026-09-28T03:37:22.931406Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "0651e7982bf3aa9129c1102bd46365db90c6bcf8"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-28T03:37:22.954778Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ea7d7d869b94ac5aba9f7ff532c6590",
+  "direction": "uav_energy_coordination",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_energy_coordination/run_b01.py",
+    "--seed",
+    "31092801",
+    "--launch-sha",
+    "e663b53c7ea3f52983365ed9c3ce044bc4ccf699",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/70d1d7a565a02f1601e443ecac730b2fe43a04e72a7bf0fcb7cdf5bd82f267a9.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 859693,
+      "session_id": 859693,
+      "start_ticks": 91619609
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 859693,
+    "process_group_id": 859693
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 859694,
+      "session_id": 859693,
+      "start_ticks": 91619612
+    },
+    "pid": 859694,
+    "process_group_id": 859693,
+    "supervisor_pid": 859693
+  },
+  "schema_version": 1,
+  "sha": "e663b53c7ea3f52983365ed9c3ce044bc4ccf699",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ea7d7d869b94ac5aba9f7ff532c6590",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/stdout.log"
+}

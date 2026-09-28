@@ -1,0 +1,11 @@
+{
+  "claim_key": "70d1d7a565a02f1601e443ecac730b2fe43a04e72a7bf0fcb7cdf5bd82f267a9",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/70d1d7a565a02f1601e443ecac730b2fe43a04e72a7bf0fcb7cdf5bd82f267a9.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/70d1d7a565a02f1601e443ecac730b2fe43a04e72a7bf0fcb7cdf5bd82f267a9.json",
+  "pid": 859693,
+  "runner_pid": 859694,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-28T03:37:23.079334Z"
+}
