@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-28T04:12:44.496707Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5d429c7d3527454993ff7eca765b0226/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5d429c7d3527454993ff7eca765b0226/experiments/candidates/uav_radio_placement/run_b01.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_radio_placement/b01_spatial_a01",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_radio_placement/b01_spatial_a01",
+    "--seed",
+    "36092801",
+    "--launch-sha",
+    "8ec998ecac68f93697ab31c65d5732ab337f4203",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "claim_key": "658077535eececf3833726c0a34f21a1febd1fee76bc7c8109e02cb547dd8ed0",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/658077535eececf3833726c0a34f21a1febd1fee76bc7c8109e02cb547dd8ed0.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5d429c7d3527454993ff7eca765b0226/experiments/candidates/uav_radio_placement/run_b01.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_radio_placement/b01_spatial_a01",
+    "--seed",
+    "36092801",
+    "--launch-sha",
+    "8ec998ecac68f93697ab31c65d5732ab337f4203",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "command_sha256": "224e2fbd8227d61ef16be3d17a77260fc41af97d6b055a7c447858165ae47d40",
+  "control_observation": {
+    "observed_at": "2026-09-28T04:12:43.828387Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "8ec998ecac68f93697ab31c65d5732ab337f4203"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-28T04:12:43.957367Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5d429c7d3527454993ff7eca765b0226",
+  "direction": "uav_radio_placement",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_radio_placement/run_b01.py",
+    "--seed",
+    "36092801",
+    "--launch-sha",
+    "8ec998ecac68f93697ab31c65d5732ab337f4203",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_radio_placement/b01_spatial_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/658077535eececf3833726c0a34f21a1febd1fee76bc7c8109e02cb547dd8ed0.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_radio_placement/b01_spatial_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_radio_placement/b01_spatial_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 192740,
+      "session_id": 192740,
+      "start_ticks": 730863
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 192740,
+    "process_group_id": 192740
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_radio_placement/b01_spatial_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 192741,
+      "session_id": 192740,
+      "start_ticks": 730872
+    },
+    "pid": 192741,
+    "process_group_id": 192740,
+    "supervisor_pid": 192740
+  },
+  "schema_version": 1,
+  "sha": "8ec998ecac68f93697ab31c65d5732ab337f4203",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5d429c7d3527454993ff7eca765b0226",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_radio_placement/b01_spatial_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_radio_placement/b01_spatial_a01/stdout.log"
+}

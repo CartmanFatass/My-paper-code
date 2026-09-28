@@ -384,3 +384,19 @@ All three arms remain on this one node with two workers/one numeric thread;
 no arm, seed, search, native semantics or cost ceiling changes. Current published
 policy and actual memory are still checked freshly by the native launcher.
 This is an operational placement choice, not a retry of accepted scientific work.
+
+### B01 accepted operation and observation
+
+The fixed input snapshot was natively accepted. The original
+[launch manifest](../../../../runs/uav_radio_placement/b01_spatial_a01/launch-manifest.json)
+is the authority for source, node, command, native process identities and
+same-operation reference. Its [resource preflight](../../../../runs/uav_radio_placement/b01_spatial_a01/admission-preflight.json)
+passed with 11,171,889,152 effective available bytes against the 4 GiB floor.
+No remote scientific attempt preceded it.
+
+`tools/hmasd_wait.py` was armed on that original status handle for this native
+child. The first generation-1 drain confirmed accepted, consistent records and
+both runner/supervisor running; no terminal witness yet. The observer owner
+remains this child, with long deterministic waits and checkpoint drain/rearm.
+This is technical acceptance only. Full artifact collection, arithmetic and
+choice reconstruction, adverse-inclusive interpretation and publication remain.
