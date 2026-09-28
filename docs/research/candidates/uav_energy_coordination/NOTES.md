@@ -1043,3 +1043,46 @@ execution/readout contract; the scientific reviewer is not repeated for this
 unchanged selected question. Publish exact inputs before admission, retain the
 same native handle, and remain in this native turn for deterministic long waits
 because the detached queue cannot be assumed to resume an unloaded native child.
+
+### B02 engineering acceptance and launch choice
+
+The selected adapter/runner is implemented without changing the frozen I/P
+controllers, itinerary or shared native code. The only existing reader edit adds
+explicit arms/comparisons/interpretation arguments while retaining B01 defaults.
+Recomputing the original B01 summary from its24 recorded rows matched all15
+stored core fields. P retains its complete10-step behavior and q0-inclusive
+snapshot count; I retains its60-step decisions and600-second analytical horizon.
+Known partial work is preserved on failure, with unfinished-clock cost explicitly
+unknown. The entry and runner enforce exactly two workers and one numeric thread.
+
+Registered Implementer `study_runner` returned its bounded runner/readout diff and
+checks; I reviewed and accept it. Independent registered `engineering_review`
+checked the final adapter, admission ordering, exact source hashes, counters,
+failure preservation, pairing/adverse reads and unchanged B01 defaults. Its final
+return is **no material engineering finding remains**, with **19 tests passed in
+13.07 s**. This is an engineering reading, not scientific validation of either
+model or permission to alter the study. During DM review the runner recovered
+the B01 observer/evaluator consistency assertion and tightened worker count to2.
+
+Final owned suite: **40 passed in19.44 s**. The preceding full suite passed39 in
+19.34 s; the implementer's14 runner tests and source/compile checks also passed.
+The short wrapped/unwrapped I/P identity fixtures compare native actions,
+metrics, reward, batteries, trajectories and RNG digests on seed70292, not a
+study seed. They retain H3000 environment/controller configuration but stop the
+evaluation fixture at12 steps, asserting its expected missing-terminal exception.
+Two earlier fixture versions failed because termination or controller forecast
+length was inadvertently shortened; these test-configuration errors were repaired
+without policy changes or study exposure. The final fixture uses a separate
+evaluation-config copy. The14 warnings are imported Matplotlib/Pyparsing
+deprecations. Correctness tests include native steps and model snapshots, not
+free preparation; repeated checks/source review/publication time beyond measured
+test invocations remains unmetered, not zero. No B02 result world has run.
+
+Use configured `wsl_4070`, fixed2 workers/1 numeric thread, and native launcher
+snapshot from the exact published input commit. Its canonical pause/own lead and
+exploring state agree with current main; older unrelated prose and other dirty
+records are preserved, with no whole-index checkout, sparse change or merge.
+Fresh actual-node memory admission will decide execution. The16-episode plan,
+48k transition ceiling,222k snapshot bound and zero-fit scope are unchanged.
+Keep the native turn active through deterministic observation and complete
+reading/publication; registration alone does not establish child wake delivery.

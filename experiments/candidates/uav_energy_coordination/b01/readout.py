@@ -131,7 +131,11 @@ def _contrast(deltas, *, interval):
     return result
 
 
-def summarize(rows: list[dict], seeds: tuple[int, ...], expected_keys: list[str]) -> dict:
+def summarize(rows: list[dict], seeds: tuple[int, ...], expected_keys: list[str], *,
+              arms: tuple[str, ...] = ARMS,
+              comparisons: tuple[tuple[str, str], ...] = CONTRASTS,
+              interpretation: str = (
+                  "native closed-loop endpoints; H is a competence reference, not a clock-matched causal control")) -> dict:
     by_key = {row["job_key"]: row for row in rows}
     if len(by_key) != len(rows) or any(key not in expected_keys for key in by_key):
         raise ValueError("duplicate or unexpected B01 result key")
@@ -140,9 +144,9 @@ def summarize(rows: list[dict], seeds: tuple[int, ...], expected_keys: list[str]
     missing = [key for key in expected_keys if key not in by_key]
     completed = {arm: {row["seed"]: row for row in rows
                        if row.get("status") == "completed" and row.get("arm") == arm}
-                 for arm in ARMS}
+                 for arm in arms}
     panels = {}
-    for arm in ARMS:
+    for arm in arms:
         group = list(completed[arm].values())
         panels[arm] = {
             "planned_worlds": len(seeds), "completed_worlds": len(group),
@@ -158,7 +162,7 @@ def summarize(rows: list[dict], seeds: tuple[int, ...], expected_keys: list[str]
     hash_counts = {field: {"equal": 0, "different": 0, "unavailable": 0}
                    for field in PAIR_HASHES}
     for seed in seeds:
-        available = {arm: completed[arm][seed] for arm in ARMS if seed in completed[arm]}
+        available = {arm: completed[arm][seed] for arm in arms if seed in completed[arm]}
         if len(available) < 2:
             continue
         hashes = {}
@@ -172,7 +176,7 @@ def summarize(rows: list[dict], seeds: tuple[int, ...], expected_keys: list[str]
                 "episode_lengths": {arm: row["actual_length"] for arm, row in available.items()},
                 "terminal_types": {arm: row["terminal_type"] for arm, row in available.items()},
                 "contrasts": {}}
-        for a, b in CONTRASTS:
+        for a, b in comparisons:
             if a not in available or b not in available:
                 continue
             pair["contrasts"][f"{a}-{b}"] = {
@@ -180,18 +184,18 @@ def summarize(rows: list[dict], seeds: tuple[int, ...], expected_keys: list[str]
                 for field in ENDPOINTS
                 if _numeric(available[a].get(field)) and _numeric(available[b].get(field))}
         pair_rows.append(pair)
-    full_panel = (len(status_keys["completed"]) == len(expected_keys) == 24
-                  and not missing and all(len(completed[arm]) == len(seeds) for arm in ARMS))
+    full_panel = (len(status_keys["completed"]) == len(expected_keys) == len(seeds) * len(arms)
+                  and not missing and all(len(completed[arm]) == len(seeds) for arm in arms))
     missing_endpoints = {row["job_key"]: [field for field in ENDPOINTS
                                           if not _numeric(row.get(field))]
                          for row in rows if row.get("status") == "completed"}
     missing_endpoints = {key: fields for key, fields in missing_endpoints.items() if fields}
     pair_valid = full_panel and not missing_endpoints and all(
-        len({completed[arm][seed].get(field) for arm in ARMS}) == 1
-        and bool(completed["H"][seed].get(field))
+        len({completed[arm][seed].get(field) for arm in arms}) == 1
+        and bool(completed[arms[0]][seed].get(field))
         for seed in seeds for field in PAIR_HASHES)
     contrasts = {}
-    for a, b in CONTRASTS:
+    for a, b in comparisons:
         label = f"{a}-{b}"
         observations = [pair for pair in pair_rows if label in pair["contrasts"]]
         contrasts[label] = {
@@ -222,5 +226,5 @@ def summarize(rows: list[dict], seeds: tuple[int, ...], expected_keys: list[str]
         "panels": panels, "paired_worlds": pair_rows, "contrasts": contrasts,
         "pair_hash_agreement": hash_counts, "exogenous_pairing_valid": bool(pair_valid),
         "inference_unit": "same initialized world seed; t7 interval descriptive only for eight verified pairs",
-        "interpretation": "native closed-loop endpoints; H is a competence reference, not a clock-matched causal control",
+        "interpretation": interpretation,
     }
