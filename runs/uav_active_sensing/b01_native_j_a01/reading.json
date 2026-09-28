@@ -1,0 +1,1881 @@
+{
+  "arms": {
+    "A": {
+      "eligible_plans": 68,
+      "eligible_service_requests": 0,
+      "exact_path_equal_H": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ],
+      "executed_scout_plans": 68,
+      "known_bs_but_no_eligible_plan": [],
+      "no_eligible_plan": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ],
+      "no_known_bs_at_any_plan": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ]
+    },
+    "H": {
+      "eligible_plans": 125,
+      "eligible_service_requests": 125,
+      "exact_path_equal_H": [
+        28133001,
+        28133002,
+        28133003,
+        28133004,
+        28133005,
+        28133006,
+        28133007,
+        28133008,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133013,
+        28133014,
+        28133015,
+        28133016
+      ],
+      "executed_scout_plans": 0,
+      "known_bs_but_no_eligible_plan": [],
+      "no_eligible_plan": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ],
+      "no_known_bs_at_any_plan": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ]
+    },
+    "L0": {
+      "eligible_plans": 118,
+      "eligible_service_requests": 0,
+      "exact_path_equal_H": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ],
+      "executed_scout_plans": 118,
+      "known_bs_but_no_eligible_plan": [],
+      "no_eligible_plan": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ],
+      "no_known_bs_at_any_plan": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ]
+    },
+    "L1": {
+      "eligible_plans": 93,
+      "eligible_service_requests": 0,
+      "exact_path_equal_H": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ],
+      "executed_scout_plans": 93,
+      "known_bs_but_no_eligible_plan": [],
+      "no_eligible_plan": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ],
+      "no_known_bs_at_any_plan": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ]
+    },
+    "P": {
+      "eligible_plans": 68,
+      "eligible_service_requests": 0,
+      "exact_path_equal_H": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ],
+      "executed_scout_plans": 68,
+      "known_bs_but_no_eligible_plan": [],
+      "no_eligible_plan": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ],
+      "no_known_bs_at_any_plan": [
+        28133001,
+        28133002,
+        28133004,
+        28133007,
+        28133009,
+        28133010,
+        28133011,
+        28133012,
+        28133014,
+        28133016
+      ]
+    }
+  },
+  "artifacts_hashed": 340,
+  "first_update": {
+    "losses": {
+      "train/approx_kl": 0.00007746830669930205,
+      "train/clip_fraction": 0,
+      "train/clip_range": 0.2,
+      "train/entropy_loss": -5.549060130119324,
+      "train/explained_variance": -0.0004992485046386719,
+      "train/learning_rate": 0.0003,
+      "train/loss": 58577.48828125,
+      "train/n_updates": 10,
+      "train/policy_gradient_loss": -0.004742867125483818,
+      "train/value_loss": 128464.846875
+    },
+    "macro_decisions": 400,
+    "optimizer_steps": 40,
+    "update": 1
+  },
+  "last_update": {
+    "losses": {
+      "train/approx_kl": 0.00011463388364063576,
+      "train/clip_fraction": 0,
+      "train/clip_range": 0.2,
+      "train/entropy_loss": -5.545068395137787,
+      "train/explained_variance": 0.21217572689056396,
+      "train/learning_rate": 0.0003,
+      "train/loss": 58169.734375,
+      "train/n_updates": 400,
+      "train/policy_gradient_loss": -0.004703386809526133,
+      "train/value_loss": 108888.5072265625
+    },
+    "macro_decisions": 16000,
+    "optimizer_steps": 1600,
+    "update": 40
+  },
+  "manifest_sha256": "1b23004235f12f44313201f25d13ddf1dbe00a9c89bba11dadd5531f2fa2d414",
+  "native_steps_checked": 720000,
+  "native_traces_checked": 240,
+  "perworld_activation": [
+    {
+      "all_users_first_discovered_step": 599,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133001
+    },
+    {
+      "all_users_first_discovered_step": 599,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133001
+    },
+    {
+      "all_users_first_discovered_step": 599,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133001
+    },
+    {
+      "all_users_first_discovered_step": 599,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133001
+    },
+    {
+      "all_users_first_discovered_step": 599,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133001
+    },
+    {
+      "all_users_first_discovered_step": 895,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133002
+    },
+    {
+      "all_users_first_discovered_step": 895,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133002
+    },
+    {
+      "all_users_first_discovered_step": 895,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133002
+    },
+    {
+      "all_users_first_discovered_step": 895,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133002
+    },
+    {
+      "all_users_first_discovered_step": 895,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133002
+    },
+    {
+      "all_users_first_discovered_step": 960,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 70,
+        "17": 1,
+        "36": 4,
+        "64": 5,
+        "76": 7,
+        "99": 5,
+        "137": 1,
+        "151": 1,
+        "240": 6
+      },
+      "eligible_plans": 30,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 30,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133003
+    },
+    {
+      "all_users_first_discovered_step": 470,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 86,
+        "223": 14
+      },
+      "eligible_plans": 14,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 14,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133003
+    },
+    {
+      "all_users_first_discovered_step": 833,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 30,
+      "eligible_service_requests": 30,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133003
+    },
+    {
+      "all_users_first_discovered_step": 437,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 87,
+        "74": 2,
+        "76": 1,
+        "120": 1,
+        "124": 1,
+        "140": 2,
+        "149": 1,
+        "222": 3,
+        "223": 2
+      },
+      "eligible_plans": 13,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 13,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133003
+    },
+    {
+      "all_users_first_discovered_step": 308,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 92,
+        "104": 2,
+        "106": 1,
+        "154": 2,
+        "222": 3
+      },
+      "eligible_plans": 8,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 8,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133003
+    },
+    {
+      "all_users_first_discovered_step": 871,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133004
+    },
+    {
+      "all_users_first_discovered_step": 871,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133004
+    },
+    {
+      "all_users_first_discovered_step": 871,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133004
+    },
+    {
+      "all_users_first_discovered_step": 871,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133004
+    },
+    {
+      "all_users_first_discovered_step": 871,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133004
+    },
+    {
+      "all_users_first_discovered_step": 662,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 80,
+        "36": 3,
+        "37": 3,
+        "44": 4,
+        "79": 2,
+        "157": 2,
+        "171": 3,
+        "240": 3
+      },
+      "eligible_plans": 20,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 20,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133005
+    },
+    {
+      "all_users_first_discovered_step": 581,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 82,
+        "138": 1,
+        "223": 17
+      },
+      "eligible_plans": 18,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 18,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133005
+    },
+    {
+      "all_users_first_discovered_step": 581,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 22,
+      "eligible_service_requests": 22,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133005
+    },
+    {
+      "all_users_first_discovered_step": 581,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 83,
+        "69": 1,
+        "72": 1,
+        "75": 1,
+        "76": 11,
+        "104": 1,
+        "120": 2
+      },
+      "eligible_plans": 17,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 17,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133005
+    },
+    {
+      "all_users_first_discovered_step": 341,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 91,
+        "35": 3,
+        "103": 2,
+        "106": 2,
+        "151": 1,
+        "153": 1
+      },
+      "eligible_plans": 9,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 9,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133005
+    },
+    {
+      "all_users_first_discovered_step": 898,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 73,
+        "37": 2,
+        "79": 1,
+        "137": 3,
+        "171": 2,
+        "195": 2,
+        "196": 3,
+        "240": 14
+      },
+      "eligible_plans": 27,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 27,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133006
+    },
+    {
+      "all_users_first_discovered_step": 899,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 73,
+        "138": 1,
+        "223": 26
+      },
+      "eligible_plans": 27,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 27,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133006
+    },
+    {
+      "all_users_first_discovered_step": 858,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 26,
+      "eligible_service_requests": 26,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133006
+    },
+    {
+      "all_users_first_discovered_step": 354,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 91,
+        "70": 1,
+        "117": 1,
+        "120": 2,
+        "140": 1,
+        "149": 1,
+        "181": 1,
+        "211": 2
+      },
+      "eligible_plans": 9,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 9,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133006
+    },
+    {
+      "all_users_first_discovered_step": 423,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 86,
+        "102": 3,
+        "105": 3,
+        "120": 1,
+        "135": 1,
+        "151": 1,
+        "210": 4,
+        "211": 1
+      },
+      "eligible_plans": 14,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 14,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133006
+    },
+    {
+      "all_users_first_discovered_step": 526,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133007
+    },
+    {
+      "all_users_first_discovered_step": 526,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133007
+    },
+    {
+      "all_users_first_discovered_step": 526,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133007
+    },
+    {
+      "all_users_first_discovered_step": 526,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133007
+    },
+    {
+      "all_users_first_discovered_step": 526,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133007
+    },
+    {
+      "all_users_first_discovered_step": 840,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 97,
+        "79": 1,
+        "195": 1,
+        "240": 1
+      },
+      "eligible_plans": 3,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 3,
+      "first_eligible_plan_step": 1530,
+      "first_known_bs_plan_step": 1530,
+      "known_bs_plans": 49,
+      "seed": 28133008
+    },
+    {
+      "all_users_first_discovered_step": 840,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 99,
+        "223": 1
+      },
+      "eligible_plans": 1,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 1,
+      "first_eligible_plan_step": 1530,
+      "first_known_bs_plan_step": 1530,
+      "known_bs_plans": 49,
+      "seed": 28133008
+    },
+    {
+      "all_users_first_discovered_step": 840,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 4,
+      "eligible_service_requests": 4,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": 1530,
+      "first_known_bs_plan_step": 1530,
+      "known_bs_plans": 49,
+      "seed": 28133008
+    },
+    {
+      "all_users_first_discovered_step": 840,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 98,
+        "75": 2
+      },
+      "eligible_plans": 2,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 2,
+      "first_eligible_plan_step": 1530,
+      "first_known_bs_plan_step": 1530,
+      "known_bs_plans": 49,
+      "seed": 28133008
+    },
+    {
+      "all_users_first_discovered_step": 840,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 98,
+        "122": 2
+      },
+      "eligible_plans": 2,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 2,
+      "first_eligible_plan_step": 1530,
+      "first_known_bs_plan_step": 1530,
+      "known_bs_plans": 49,
+      "seed": 28133008
+    },
+    {
+      "all_users_first_discovered_step": 665,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133009
+    },
+    {
+      "all_users_first_discovered_step": 665,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133009
+    },
+    {
+      "all_users_first_discovered_step": 665,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133009
+    },
+    {
+      "all_users_first_discovered_step": 665,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133009
+    },
+    {
+      "all_users_first_discovered_step": 665,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133009
+    },
+    {
+      "all_users_first_discovered_step": 699,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133010
+    },
+    {
+      "all_users_first_discovered_step": 699,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133010
+    },
+    {
+      "all_users_first_discovered_step": 699,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133010
+    },
+    {
+      "all_users_first_discovered_step": 699,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133010
+    },
+    {
+      "all_users_first_discovered_step": 699,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133010
+    },
+    {
+      "all_users_first_discovered_step": 357,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133011
+    },
+    {
+      "all_users_first_discovered_step": 357,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133011
+    },
+    {
+      "all_users_first_discovered_step": 357,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133011
+    },
+    {
+      "all_users_first_discovered_step": 357,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133011
+    },
+    {
+      "all_users_first_discovered_step": 357,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133011
+    },
+    {
+      "all_users_first_discovered_step": 732,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133012
+    },
+    {
+      "all_users_first_discovered_step": 732,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133012
+    },
+    {
+      "all_users_first_discovered_step": 732,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133012
+    },
+    {
+      "all_users_first_discovered_step": 732,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133012
+    },
+    {
+      "all_users_first_discovered_step": 732,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133012
+    },
+    {
+      "all_users_first_discovered_step": 680,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 77,
+        "79": 3,
+        "99": 7,
+        "171": 3,
+        "210": 2,
+        "239": 1,
+        "252": 7
+      },
+      "eligible_plans": 23,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 23,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 30,
+      "known_bs_plans": 99,
+      "seed": 28133013
+    },
+    {
+      "all_users_first_discovered_step": 498,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 82,
+        "223": 18
+      },
+      "eligible_plans": 18,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 18,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 30,
+      "known_bs_plans": 99,
+      "seed": 28133013
+    },
+    {
+      "all_users_first_discovered_step": 693,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 23,
+      "eligible_service_requests": 23,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 30,
+      "known_bs_plans": 99,
+      "seed": 28133013
+    },
+    {
+      "all_users_first_discovered_step": 498,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 83,
+        "75": 2,
+        "76": 1,
+        "120": 1,
+        "135": 1,
+        "140": 1,
+        "149": 1,
+        "172": 1,
+        "222": 9
+      },
+      "eligible_plans": 17,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 17,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 30,
+      "known_bs_plans": 99,
+      "seed": 28133013
+    },
+    {
+      "all_users_first_discovered_step": 693,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 75,
+        "90": 3,
+        "105": 2,
+        "119": 1,
+        "122": 1,
+        "151": 3,
+        "154": 2,
+        "222": 8,
+        "223": 5
+      },
+      "eligible_plans": 25,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 25,
+      "first_eligible_plan_step": 90,
+      "first_known_bs_plan_step": 30,
+      "known_bs_plans": 99,
+      "seed": 28133013
+    },
+    {
+      "all_users_first_discovered_step": 750,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133014
+    },
+    {
+      "all_users_first_discovered_step": 750,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133014
+    },
+    {
+      "all_users_first_discovered_step": 750,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133014
+    },
+    {
+      "all_users_first_discovered_step": 750,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133014
+    },
+    {
+      "all_users_first_discovered_step": 750,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133014
+    },
+    {
+      "all_users_first_discovered_step": 551,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 85,
+        "37": 1,
+        "76": 3,
+        "79": 2,
+        "137": 1,
+        "182": 1,
+        "196": 1,
+        "202": 3,
+        "239": 1,
+        "240": 1,
+        "252": 1
+      },
+      "eligible_plans": 15,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 15,
+      "first_eligible_plan_step": 150,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133015
+    },
+    {
+      "all_users_first_discovered_step": 551,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 85,
+        "138": 7,
+        "223": 8
+      },
+      "eligible_plans": 15,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 15,
+      "first_eligible_plan_step": 150,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133015
+    },
+    {
+      "all_users_first_discovered_step": 551,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 20,
+      "eligible_service_requests": 20,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": 150,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133015
+    },
+    {
+      "all_users_first_discovered_step": 395,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 90,
+        "14": 1,
+        "30": 1,
+        "46": 4,
+        "69": 1,
+        "72": 1,
+        "75": 1,
+        "104": 1
+      },
+      "eligible_plans": 10,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 10,
+      "first_eligible_plan_step": 150,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133015
+    },
+    {
+      "all_users_first_discovered_step": 337,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 90,
+        "46": 3,
+        "47": 1,
+        "103": 2,
+        "106": 3,
+        "120": 1
+      },
+      "eligible_plans": 10,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": false,
+      "executed_scout_plans": 10,
+      "first_eligible_plan_step": 150,
+      "first_known_bs_plan_step": 0,
+      "known_bs_plans": 100,
+      "seed": 28133015
+    },
+    {
+      "all_users_first_discovered_step": 336,
+      "arm": "L0",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133016
+    },
+    {
+      "all_users_first_discovered_step": 336,
+      "arm": "L1",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133016
+    },
+    {
+      "all_users_first_discovered_step": 336,
+      "arm": "H",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133016
+    },
+    {
+      "all_users_first_discovered_step": 336,
+      "arm": "P",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133016
+    },
+    {
+      "all_users_first_discovered_step": 336,
+      "arm": "A",
+      "effective_action_histogram": {
+        "0": 100
+      },
+      "eligible_plans": 0,
+      "eligible_service_requests": 0,
+      "exact_native_path_equal_H": true,
+      "executed_scout_plans": 0,
+      "first_eligible_plan_step": null,
+      "first_known_bs_plan_step": null,
+      "known_bs_plans": 0,
+      "seed": 28133016
+    }
+  ],
+  "reading_wall_seconds": 1.0421139949467033,
+  "source_sha": "38b7f132af8e26b851826f2e3db90a5fb5fb1a06",
+  "status": "verified",
+  "storage_bytes": 123412058,
+  "survey_scope": "BS known at macro decisions through t2970; this is not a first-BS-discovery experiment",
+  "training_activity": {
+    "eligible_action_histogram": {
+      "0": 7,
+      "1": 7,
+      "2": 3,
+      "3": 1,
+      "4": 5,
+      "5": 1,
+      "6": 1,
+      "7": 4,
+      "8": 4,
+      "9": 3,
+      "10": 5,
+      "11": 2,
+      "12": 12,
+      "13": 9,
+      "14": 4,
+      "15": 5,
+      "16": 6,
+      "17": 4,
+      "18": 6,
+      "19": 4,
+      "20": 4,
+      "21": 6,
+      "22": 4,
+      "23": 6,
+      "24": 7,
+      "25": 5,
+      "26": 6,
+      "27": 4,
+      "28": 2,
+      "29": 5,
+      "30": 5,
+      "31": 5,
+      "32": 4,
+      "33": 4,
+      "34": 2,
+      "35": 8,
+      "36": 5,
+      "37": 10,
+      "38": 2,
+      "39": 4,
+      "40": 2,
+      "41": 2,
+      "42": 3,
+      "43": 3,
+      "44": 4,
+      "45": 2,
+      "46": 5,
+      "47": 3,
+      "48": 3,
+      "49": 7,
+      "50": 4,
+      "51": 5,
+      "52": 4,
+      "53": 5,
+      "54": 3,
+      "55": 3,
+      "56": 4,
+      "57": 4,
+      "58": 3,
+      "59": 3,
+      "60": 4,
+      "61": 10,
+      "62": 2,
+      "63": 4,
+      "64": 2,
+      "65": 4,
+      "66": 4,
+      "67": 5,
+      "68": 3,
+      "69": 7,
+      "70": 3,
+      "71": 5,
+      "72": 4,
+      "73": 4,
+      "74": 4,
+      "75": 3,
+      "76": 2,
+      "77": 6,
+      "78": 4,
+      "79": 5,
+      "80": 6,
+      "81": 5,
+      "82": 2,
+      "83": 1,
+      "84": 3,
+      "85": 6,
+      "86": 3,
+      "87": 7,
+      "88": 4,
+      "89": 6,
+      "90": 3,
+      "91": 4,
+      "92": 6,
+      "93": 3,
+      "94": 7,
+      "95": 2,
+      "96": 6,
+      "97": 4,
+      "98": 9,
+      "99": 5,
+      "100": 5,
+      "101": 3,
+      "102": 3,
+      "103": 6,
+      "104": 4,
+      "105": 2,
+      "106": 1,
+      "107": 5,
+      "108": 2,
+      "109": 4,
+      "110": 4,
+      "111": 6,
+      "112": 2,
+      "113": 7,
+      "114": 5,
+      "115": 4,
+      "116": 3,
+      "117": 4,
+      "118": 6,
+      "119": 8,
+      "120": 7,
+      "121": 4,
+      "122": 10,
+      "123": 1,
+      "124": 5,
+      "125": 9,
+      "126": 6,
+      "127": 7,
+      "128": 2,
+      "129": 5,
+      "130": 3,
+      "131": 6,
+      "132": 1,
+      "133": 2,
+      "134": 6,
+      "135": 4,
+      "136": 2,
+      "137": 6,
+      "138": 5,
+      "139": 9,
+      "140": 3,
+      "141": 4,
+      "142": 6,
+      "143": 13,
+      "144": 2,
+      "145": 1,
+      "146": 5,
+      "147": 5,
+      "148": 3,
+      "149": 3,
+      "150": 6,
+      "151": 3,
+      "152": 2,
+      "153": 5,
+      "154": 5,
+      "155": 4,
+      "156": 3,
+      "157": 4,
+      "158": 1,
+      "159": 6,
+      "160": 1,
+      "161": 4,
+      "162": 6,
+      "163": 1,
+      "164": 6,
+      "165": 7,
+      "166": 1,
+      "167": 3,
+      "168": 1,
+      "169": 6,
+      "170": 5,
+      "171": 8,
+      "172": 5,
+      "173": 7,
+      "174": 3,
+      "175": 4,
+      "176": 5,
+      "177": 6,
+      "178": 2,
+      "179": 2,
+      "180": 3,
+      "181": 6,
+      "182": 7,
+      "183": 4,
+      "184": 5,
+      "185": 6,
+      "186": 4,
+      "187": 7,
+      "188": 4,
+      "189": 7,
+      "190": 4,
+      "191": 3,
+      "192": 5,
+      "193": 1,
+      "194": 7,
+      "195": 5,
+      "196": 5,
+      "197": 3,
+      "198": 5,
+      "199": 5,
+      "200": 6,
+      "201": 1,
+      "202": 4,
+      "203": 4,
+      "204": 4,
+      "205": 4,
+      "207": 3,
+      "208": 3,
+      "209": 4,
+      "210": 3,
+      "211": 5,
+      "212": 2,
+      "213": 1,
+      "214": 2,
+      "215": 3,
+      "216": 7,
+      "217": 10,
+      "218": 3,
+      "219": 1,
+      "220": 5,
+      "221": 5,
+      "222": 7,
+      "223": 7,
+      "224": 7,
+      "225": 7,
+      "226": 8,
+      "227": 3,
+      "228": 4,
+      "229": 8,
+      "230": 3,
+      "231": 2,
+      "232": 3,
+      "233": 4,
+      "234": 2,
+      "235": 3,
+      "236": 3,
+      "237": 3,
+      "238": 5,
+      "239": 3,
+      "240": 2,
+      "241": 5,
+      "242": 4,
+      "243": 4,
+      "244": 1,
+      "245": 5,
+      "246": 5,
+      "247": 6,
+      "248": 6,
+      "249": 5,
+      "250": 5,
+      "251": 3,
+      "252": 10,
+      "253": 3,
+      "254": 5,
+      "255": 5,
+      "256": 6
+    },
+    "eligible_macros": 1129,
+    "eligible_scout_requests": 1122,
+    "eligible_service_requests": 7,
+    "macros": 16000,
+    "worlds_with_eligible_macro": 54
+  },
+  "training_curve": [
+    {
+      "mean_native_J": 1803.670981727196,
+      "mean_qos": 0.6452202170042132,
+      "rollouts": [
+        1,
+        10
+      ]
+    },
+    {
+      "mean_native_J": 1703.1497465863827,
+      "mean_qos": 0.623360338912549,
+      "rollouts": [
+        11,
+        20
+      ]
+    },
+    {
+      "mean_native_J": 1864.4527255254295,
+      "mean_qos": 0.6664881275004555,
+      "rollouts": [
+        21,
+        30
+      ]
+    },
+    {
+      "mean_native_J": 1652.9753427159471,
+      "mean_qos": 0.6019560123433487,
+      "rollouts": [
+        31,
+        40
+      ]
+    }
+  ]
+}

@@ -542,3 +542,330 @@ quoting then fetched and synchronized the one row. The node still reports its
 pre-existing Git GC bad-tree warning `9e40125ee3e24973b69754649226d18847b45862`;
 no unrelated repair was attempted. Published-source snapshot creation and native
 admission succeeded. No scientific retry or alternate operation was launched.
+
+At the first observer checkpoint, the original native operation was still
+running with consistent identities and zero probe errors (latest observation
+05:05:27 UTC). App wake delivery failed with the known native-child error
+`unloaded spawned sub-agents (code -32600)`; no delivery to Root is inferred.
+The still-active DM read and consumed checkpoint event
+`ebe3f0c9d7397378618fb27c`, then rearmed the same manifest as generation 2 for
+1500 seconds. No worker, episode, policy fit or scientific budget was restarted.
+
+During accepted collection Root supplied the independently owned six-program B
+readback: 192/192 complete, with large true-BS consequences and some worlds that
+never legally reveal BS. This is cross-question context, not this panel's
+denominator or a reason to change its accepted inputs. The present gate requires
+already-known legal BS and therefore **does not test initial BS discovery**.
+The complete reading will report this fixed panel's own known-BS-at-decision,
+eligible and executed-scout counts, separating lack of activation from active
+programs with no service/J gain. Any trajectory-dependent exposure breakdown is
+descriptive, not a causally identified pre-treatment subgroup. No gate, seed,
+training horizon or evaluation panel changes; initial BS inference/acquisition is
+a separate Root-owned question-selection decision.
+
+The second checkpoint retained running/consistent identities and zero probe
+errors (05:34:56 UTC). The DM consumed event `71732bee4ad65d0a6c81e531` and
+rearmed the same manifest as generation 3, again without restarting work. The
+known App queue rejection recurred; long deterministic waits and native return
+remain the observation path, not an inferred delivery.
+
+## 2026-09-28 - B01 complete: limited activation and no established learned increment
+
+The original operation exited 0 at 05:41:06 UTC. Generation 3 observed READY at
+05:42:01 with consistent identities, absent runner/supervisor and a valid native
+exit witness. The DM consumed event `0fe49ad60a20bed9f2457a79`, advanced to
+generation 4 with no live job, and stopped observation. The native child remained
+active through collection; the known rejected App wake was not treated as a
+delivery or an invitation to relaunch. No worker or scientific request restarted.
+
+All declared work is complete: **one fit, 160 H3000 training worlds / 480000
+native steps / 16000 macro decisions / 40 rollouts / 1600 optimizer steps**,
+plus **80 H3000 evaluation worlds / 240000 native steps**, total **720000**.
+There are no missing, failed, unstarted or partial scientific jobs. Each native
+episode ends only at step 3000 with the original truncation flag. All stored
+macro rewards match the true native sums, requested actions are preserved in
+PPO storage, and all learning ends are finite terminals without TimeLimit
+bootstrap. The last auto-reset exposed no extra world.
+
+The post-run, read-only [integrity reader](../../../../experiments/candidates/uav_active_sensing/inspect_result.py)
+verified all **340 manifest-listed files** by size and SHA256, all 240 native
+traces and their native J/metric/battery/reserve aggregates, exact seed schedules,
+macro clocks and fallback counts, and all rollout/update audits. This adds no
+simulator transition, policy call or learner update. The separate engineering
+Reviewer independently checked the canonical traces, macro reward slices,
+rollout episode identities/aggregates and eligibility/fallback mappings; it
+returned **no material finding** for reader digest `761768f5...f61112`.
+"Exact H path" below means equality of the six recorded arrays own_xyz,
+target_xy, mode, reward, metrics and ends, not equality of every hidden state.
+
+Primary compact evidence is the [summary](../../../../runs/uav_active_sensing/b01_native_j_a01/summary.json),
+[all worlds](../../../../runs/uav_active_sensing/b01_native_j_a01/perworld.json),
+[frozen config](../../../../runs/uav_active_sensing/b01_native_j_a01/config.json),
+[training](../../../../runs/uav_active_sensing/b01_native_j_a01/training.json),
+[reading](../../../../runs/uav_active_sensing/b01_native_j_a01/reading.json),
+[manifest](../../../../runs/uav_active_sensing/b01_native_j_a01/manifest.json),
+[native exit](../../../../runs/uav_active_sensing/b01_native_j_a01/process-exit.json) and
+[terminal status](../../../../runs/uav_active_sensing/b01_native_j_a01/terminal-status.json).
+Frozen input SHA remains `38b7f132af8e26b851826f2e3db90a5fb5fb1a06`.
+Manifest SHA256 is
+`1b23004235f12f44313201f25d13ddf1dbe00a9c89bba11dadd5531f2fa2d414`;
+listed artifacts total **123412058 bytes**. Every evaluation world is now exposed
+development evidence; no holdout or independent learning replication is implied.
+
+### Complete native outcomes and adverse worlds
+
+All figures below are equally weighted over the same 16 initial evaluation
+worlds. Return cost is native cost per step (raw and capped coincide in this
+panel); battery is the mean of per-world episode minima, not a safety guarantee.
+All 80 episodes have zero cutoff/depletion events and nonzero complete service.
+
+| Arm | Mean J | QoS/step | Return cost/step | Mean minimum battery | Below-10% UAV-step share | Team travel m |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| H | 1587.410677 | .574956395 | .017824169 | .088266455 | .053645833 | 147176.096 |
+| L0 | 1597.307093 | .575528737 | .016459640 | .088953641 | .049419271 | 150284.784 |
+| L1 | 1587.520643 | .576140511 | .018396481 | .087503609 | .057776042 | 148985.398 |
+| P | 1584.600858 | .581478318 | .021550769 | .086525535 | .063565104 | 148219.765 |
+| A | 1616.785128 | .583861650 | .017378196 | .087873697 | .054278646 | 146891.286 |
+
+Intervals are the predeclared nominal paired t95 over 16 world differences,
+conditional on this single trained policy instance, without multiplicity
+adjustment. They are not training-seed intervals, equivalence tests or a
+confirmation rule. Ten exact-zero worlds remain in each comparison.
+
+| Contrast | Delta J [t95] | J + / - / = | Delta QoS [t95] | QoS + / - / = |
+| --- | --- | --- | --- | --- |
+| L1-L0 | -9.786449 [-34.249434, 14.676535] | 2 / 4 / 10 | .000611774 [-.010125957, .011349504] | 3 / 3 / 10 |
+| L1-A | -29.264485 [-63.432953, 4.903984] | 1 / 5 / 10 | -.007721139 [-.017412734, .001970456] | 1 / 5 / 10 |
+| L1-H | .109966 [-26.258341, 26.478274] | 3 / 3 / 10 | .001184116 [-.011523010, .013891242] | 3 / 3 / 10 |
+| L1-P | 2.919785 [-37.459051, 43.298622] | 3 / 3 / 10 | -.005337807 [-.017374637, .006699024] | 2 / 4 / 10 |
+| A-H | 29.374451 [-.786291, 59.535193] | 5 / 1 / 10 | .008905255 [-.001837613, .019648123] | 4 / 2 / 10 |
+| P-H | -2.809819 [-65.264048, 59.644410] | 3 / 3 / 10 | .006521923 [-.010653069, .023696914] | 4 / 2 / 10 |
+| A-P | 32.184270 [-30.623412, 94.991952] | 3 / 3 / 10 | .002383332 [-.009916511, .014683175] | 3 / 3 / 10 |
+
+Every nonzero-world contrast is retained, rather than displaying only favorable
+worlds. The other ten world IDs are listed in the activation section and all
+seven differences below are exactly zero there.
+
+Native J differences:
+
+| World | L1-L0 | L1-A | L1-H | L1-P | A-H | P-H | A-P |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 28133003 | 64.461 | -52.697 | 12.767 | 24.272 | 65.464 | -11.504 | 76.969 |
+| 28133005 | -73.606 | -118.024 | -78.697 | 112.643 | 39.328 | -191.340 | 230.668 |
+| 28133006 | 8.484 | -35.535 | 147.753 | -149.946 | 183.289 | 297.699 | -114.411 |
+| 28133008 | -2.529 | -119.069 | -32.620 | -125.456 | 86.449 | 92.836 | -6.387 |
+| 28133013 | -0.112 | 57.038 | 32.642 | -1.256 | -24.396 | 33.898 | -58.294 |
+| 28133015 | -153.281 | -199.944 | -80.086 | 186.459 | 119.858 | -266.545 | 386.403 |
+
+QoS/step differences:
+
+| World | L1-L0 | L1-A | L1-H | L1-P | A-H | P-H | A-P |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 28133003 | 0.066515 | -0.001988 | 0.049302 | 0.018710 | 0.051290 | 0.030592 | 0.020698 |
+| 28133005 | -0.024599 | -0.039656 | -0.027340 | 0.035756 | 0.012316 | -0.063097 | 0.075412 |
+| 28133006 | 0.002303 | -0.011856 | 0.049548 | -0.051920 | 0.061404 | 0.101468 | -0.040064 |
+| 28133008 | -0.002037 | -0.039046 | -0.011562 | -0.041176 | 0.027483 | 0.029613 | -0.002130 |
+| 28133013 | 0.000134 | 0.017624 | 0.010686 | -0.001069 | -0.006938 | 0.011755 | -0.018693 |
+| 28133015 | -0.032528 | -0.048616 | -0.051687 | -0.045706 | -0.003071 | -0.005981 | 0.002910 |
+
+The average L1-L0 QoS change is near zero while return cost increases .001936841
+and reserve exposure increases .008356771. L1-H increases return cost .000572312
+and travel 1809.302 m on average; L1-A travels 2094.112 m farther and has higher
+cost .001018285. These are complete realized differences, not additive causal
+cost estimates for a single sensing decision.
+
+Risk remains concrete even where J improves. In world 28133003, L1-H improves
+QoS .049302 but raises cost .022523, lowers minimum battery .101187 -> .084140
+and introduces .097958 below-reserve exposure. A-H in that world improves
+QoS/J while also raising cost .014734 and lowering battery to .087727.
+World 28133015 has L1-L0 J -153.281, QoS -.032528 and cost +.009283.
+Its P-H J is -266.545 and P cost .069139, battery .071310 and reserve share
+.182958, the panel's maximum. A-H there raises J 119.858 but lowers QoS .003071;
+reduced return penalty contributes to J and does not restore the service loss.
+A's world 28133013 loses both J and QoS while raising cost.
+
+The common minimum-battery world is **28133011**, .063304986 for every arm:
+cost .065457465, reserve share .1585, QoS .360759438 and J 659.154793. It never
+activates scouting, so this is an inherited ordinary-control tail, not an active
+sensing treatment effect. Zero cutoff/depletion does not establish safety,
+sustainable cycling or absence of these low-reserve consequences.
+
+### Opportunity, exposure and actual learned behavior
+
+In this panel **10/16 worlds have no known legal BS at any macro decision through
+t2970**: 28133001, 002, 004, 007, 009, 010, 011, 012, 014 and 016 (each suffix
+completes the same 28133 prefix). They have zero eligible/scout plans in every
+arm and each intervening arm's six recorded native arrays equal H exactly.
+This is a decision-time statement, not a primitive-by-primitive proof of no BS
+sighting in the final 29 steps. There is no known-BS-but-never-eligible world.
+The six active worlds are 28133003/005/006/008/013/015. The common first known-BS
+plan is t0 in 003/005/006/015, t30 in 013 and t1530 in 008; first eligibility is
+t90 except t150 in 015 and t1530 in 008. They are descriptive trajectory groups,
+not a new randomized estimand, and were not selected for extra evaluation.
+
+Total eligible plans are H 125, L0 118, L1 93, P 68 and A 68 out of 1600 per
+arm. H always selects service. L0 and L1 request scouting at **all 1600 decisions**;
+ineligible requests fall back to H, so their executed scout totals are 118/93.
+Neither saved deterministic learned arm requests ordinary service at any eligible
+decision. P/A execute 68 scouts each and explicitly request H when ineligible.
+Changing later eligibility counts is a consequence of changed paths, not an
+independent reduction in exploration cost.
+
+All arms in all 16 worlds eventually discover all 30 users, so final unique-user
+count is saturated. H/A mean current visibility is 20.920208/21.283708 users;
+A-H is +.363500 [.039758, .687242] and is positive in every active world.
+P-H is +.267542 [.018040, .517044], also six positive active worlds. L1-H is
+-.000041667 [-.271756, .271672]. A reaches all users earlier than H in
+003/005/006/015, ties in 008/013; this is still not a mediation estimate.
+Earlier or more sustained visibility can coexist with loss, e.g. A's active
+013 loses service/J, and 015 gains J while losing service.
+
+Training has **1129 eligible macros / 16000 (7.05625%)**, in 54/160 worlds.
+Of those eligible choices, only **7 requested service** and 1122 requested a
+scout target. This is observed exposure under the flat 257-action categorical
+parameterization, not a claim that 480k native steps were missing. It is not
+a balanced empirical comparison of serving versus probing. Ineligible choices
+still legitimately contribute to the declared PPO objective through the common
+fallback environment; they were not retrospectively masked.
+
+The actor changed (L2 .344535, max absolute .011171); the critic changed
+(L2 13.622107). All 1600 optimizer steps occurred and initial/endpoint checkpoint
+hashes differ. Approximate KL at first/last update is .00007747/.00011463,
+clip fraction zero at both, and entropy magnitude 5.549060 -> 5.545068, close
+to log(257)=5.549076. Thus the training distribution remained close to high
+entropy at those audits; a deterministic argmax concentration is not evidence
+of a sharply concentrated stochastic policy. L1's 93 executed actions use
+only action223 (84 times) and action138 (9 times), public xy (6750,7250) and
+(4250,4750). There is no established learned "when to sense" behavior in this
+fixed deployment mode; the changed target selection did not establish the
+primary complete-value increment.
+
+Mean training J over successive ten-rollout blocks is 1803.671, 1703.150,
+1864.453 and 1652.975 (QoS .645220, .623360, .666488, .601956). These use
+different worlds, not a matched learning-gain curve. Critic explained variance
+-.000499 -> .212176 and value loss 128464.85 -> 108888.51 do not substitute for
+the unfavorable/uncertain fixed endpoint comparisons.
+
+### Total cost and interpretation context
+
+Scientific runner wall time was **4370.938878 s = 72.848981 minutes =
+1.214150 node-hours**. Training parent wall was 3071.582454 s; four training
+workers used 11479.745580 summed CPU seconds and 12274.176649 summed wall seconds.
+Evaluation workers used 5302.002193 summed CPU seconds and 5137.962307 summed
+wall seconds. Parent CPU across the batch was 28.294755 s, including its training
+portion, so measured parent-plus-workers CPU totals 16810.042528 s (4.669456 h).
+These are scopes of measurements, not simultaneous utilization or method-speed
+claims. Parent peak RSS was 673064 KiB; maximum individual training-worker peak
+was 516748 KiB. Native J does not price learner or planner computation.
+Implementation, the previously recorded 1710 nonpanel native verification steps
+and three one-update wiring checks, independent reviews, collection and
+publication cost additional time not fully metered; they are not zero cost.
+
+Before choosing the result disposition, the DM refreshed published RESEARCH
+topics 2 and 8 and read the adjacent B01 information-value complete result and
+independent diagnosis. The same canonical ordinary control makes BS knowledge
+an actionable input, but its 17/32 never-seen count is not ours. Our deliberate
+known-BS gate excludes initial BS acquisition, so the present lack of activation
+does not refute that remaining opportunity. The original central-local gap
+remains a package difference, not a recovered information percentage. Earlier
+finite-model and spatial-generalization negatives still constrain only their
+particular programs; no old route is reopened by this result.
+
+### Independent scientific reading and DM disposition
+
+The registered ResearchCritic `interpret_result` received no inherited DM/Root
+conversation. The assignment, index navigation and frozen notebook disclosed
+the selected approach, so this was independent-context rather than blinded
+review. It reconstructed results before reading the prior review body,
+independently checked all 80 evaluation NPZ hashes, lengths, native J sums,
+reserve exposures and plan records, and read all 16000 training macros, 40
+rollout/update records and 160 training episode summaries. It did not repeat
+the complete engineering audit. Its J table used J/step; all J differences in
+the preceding DM tables are totals over exactly 3000 steps.
+
+The review returned **MATERIAL_DISSENT: no** and recommended stopping the
+unchanged 257-action PPO recipe, keeping H as the ordinary anchor and A as a
+conditional exploratory asset, without automatic replication or confirmation.
+It stressed that 548/1600 known-BS decisions per arm and only six affected
+worlds combine real intervention with substantial nonactivation. Sparse
+service exposure and near-maximal entropy make ordinary finite exploration
+and optimization difficulty the strongest simple explanation. Large value
+losses under global gradient clipping are another plausible contributor;
+there are no gradient measurements identifying that as the cause. Neither
+the decreased eligible count nor concentrated deterministic argmax choices
+demonstrate learned restraint or a concentrated sampling policy.
+
+The critic also identified training outcomes that must not be hidden behind
+the evaluation panel's lack of zero-service worlds. DM verification of all
+160 training episode summaries confirms zero service in **28132037** (J
+-285.869855, minimum battery .070677614, reserve share .125791667) and
+**28132124** (J -638.162655, minimum battery .053775653, reserve .200333333).
+Training world **28132042** has the lowest battery .039612527 and largest
+reserve exposure .263625, QoS .384949270, J 136.930116 and mean return cost
+.171133477. All training episodes also have zero cutoff/depletion events.
+These are adverse training exposures, not extra endpoint evaluation units.
+
+The review distinguishes four judgments. There is some ordinary sensing
+opportunity on these trajectories, but ordinary H already discovers all 30
+users by t895 in every world. The legal action library includes service and
+scouting; it does not establish feature sufficiency. The adverse finite
+learning recipe does not identify a general inability to learn information
+value. The complete L1 package has earned no deployment preference; A's
+positive mean remains heterogeneous, risk-bearing and uncertain. Changes in
+deployment, backhaul and energy prevent interpreting the differences as a
+pure information mediator. The prior choice to test direct native learning
+without a positive rule screen was reasonable and remains part of the record.
+
+Its strongest unselected repair is a balanced service/scout parameterization:
+predict much more eligible service experience, then improved complete native
+utility if that scarcity mattered. That would be a new learning-package
+experiment, not proof of this failure's cause. The review does not prefer
+another fit-plus-panel cost to the already identified initial-BS question.
+It declines an unchanged extra seed, a larger evaluation panel bought only to
+narrow these intervals, and automatic A confirmation. It instead recommends
+Root's existing ordinary legal station-prior BS estimate versus H_BS proposal:
+32 fresh common worlds / 64 H3000 episodes / 192k native transitions / 0 fits,
+approximately 20-25 node minutes by the other direction's measured rate plus
+engineering/readback. Jitter, clipping and separation prevent exact BS
+reconstruction. This proposal is outside the present known-BS sensing study;
+no arm, seed, estimator implementation or launch has been added here.
+
+**DM disposition: adopt the diagnosis and stop unchanged-selector investment.**
+The primary predicted complete learning increment is not established: L1-L0
+and L1-A J means are negative, while QoS/J uncertainty and losses remain.
+Ordinary A demonstrates extra visibility and some useful realized trajectories,
+not an established population advantage, dominance over P or pure information
+mechanism. Keep its controller as a conditional asset and retain every loss.
+The parent question remains open, but the next purchase should not be an
+unreasoned seed, longer fit or expanding gate on this exposed batch. Direction
+state becomes **reserve**, with no active operation or selected successor.
+Return initial-BS inference/acquisition as the concrete next-question
+recommendation to Root, which owns cross-question allocation; no owner/Root
+approval is pending for publication or collection.
+
+### Durable evidence and retirement boundary
+
+After both independent helpers completed their reads, a fresh same-handle
+status check at 06:19:19 UTC again confirmed exit 0, absent runner/supervisor
+and consistent identities. The unique bulk evidence was moved, not copied,
+from the sparse canonical checkout to:
+
+`hmasd-wsl-node:/home/wu/hmasd-artifacts/uav_active_sensing/b01_native_j_a01/`
+
+That is now the canonical location for all 240 NPZ traces, all training macro
+records and the actual initial/endpoint checkpoints. The original manifest
+and compact metadata accompany them; original native claim/status/summary
+files remain at the launch output path for recovery and duplicate prevention.
+The unchanged read-only reader reverified all 340 listed sizes/hashes and
+reconstructed the identical scientific reading at the durable location.
+Allocated durable directory size is 124407808 bytes; listed content size is
+123412058 bytes. Relocation itself is not claimed as disk reclamation.
+
+Small source, regression tests, integrity reader and compact original
+per-world/rollout/update records are retained as the reproducible legal-sensing
+and finite-native-J reference. No peer imports, active worker or scientific
+helper consumes the disposable launch source. The maintained exact-target
+collector initially refused protected `/proc/660/cwd`; its supported
+`--sudo-process-scan` read-only preview then found the snapshot eligible.
+Publish these results before applying exact source/scratch reclamation; do not
+delete the durable raw evidence, checkpoints, native claim or status records.

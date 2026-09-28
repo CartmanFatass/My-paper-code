@@ -1,0 +1,144 @@
+{
+  "L0": {
+    "bytes": 6001086,
+    "checkpoint": "initial.zip",
+    "sha256": "91ef0d39d1b8728bd9f1a54e4d99f6ed6267271ea19439144d6ae81a47ef25a5"
+  },
+  "L1": {
+    "bytes": 17942798,
+    "checkpoint": "endpoint.zip",
+    "sha256": "c1df70eedb9c29c10265d9df58cf83b4487288a8358858cad0ffc4ac8421ad60"
+  },
+  "actual_native_steps": 480000,
+  "endpoint_fingerprint": "81d425857ff7f7bb11d474c9e09b67848958cc8cee26b63c35fbc2a87945b7d5",
+  "fits_started": 1,
+  "initial_fingerprint": "980dcd387924d0de0a88a58b3f85629a52fbc3d3945a8f4971746506df8bd120",
+  "lane_counts": [
+    {
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "exhausted": true,
+      "lane": 0,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "worker_cpu_seconds": 2855.108383,
+      "worker_peak_rss_kib": 516748,
+      "worker_wall_seconds": 3069.021588688949
+    },
+    {
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "exhausted": true,
+      "lane": 1,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "worker_cpu_seconds": 2903.9008140000005,
+      "worker_peak_rss_kib": 516416,
+      "worker_wall_seconds": 3068.958380758064
+    },
+    {
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "exhausted": true,
+      "lane": 2,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "worker_cpu_seconds": 2898.437919,
+      "worker_peak_rss_kib": 516124,
+      "worker_wall_seconds": 3069.00115092902
+    },
+    {
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "exhausted": true,
+      "lane": 3,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "worker_cpu_seconds": 2822.299824,
+      "worker_peak_rss_kib": 515828,
+      "worker_wall_seconds": 3069.0354913230985
+    }
+  ],
+  "lane_progress": [
+    {
+      "current_episode_steps": 3000,
+      "current_seed": 28132157,
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "lane": 0,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "status": "exhausted",
+      "worker_cpu_seconds": 2855.108032,
+      "worker_peak_rss_kib": 516748,
+      "worker_wall_seconds": 3068.6059005010175
+    },
+    {
+      "current_episode_steps": 3000,
+      "current_seed": 28132158,
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "lane": 1,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "status": "exhausted",
+      "worker_cpu_seconds": 2903.900531,
+      "worker_peak_rss_kib": 516416,
+      "worker_wall_seconds": 3068.5438504210906
+    },
+    {
+      "current_episode_steps": 3000,
+      "current_seed": 28132159,
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "lane": 2,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "status": "exhausted",
+      "worker_cpu_seconds": 2898.437473,
+      "worker_peak_rss_kib": 516124,
+      "worker_wall_seconds": 3068.5725509549957
+    },
+    {
+      "current_episode_steps": 3000,
+      "current_seed": 28132160,
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "lane": 3,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "status": "exhausted",
+      "worker_cpu_seconds": 2822.299544,
+      "worker_peak_rss_kib": 515828,
+      "worker_wall_seconds": 3068.454347560066
+    }
+  ],
+  "macro_decisions": 16000,
+  "optimizer_steps": 1600,
+  "parameter_movement": {
+    "actor": {
+      "l2": 0.34453486467251737,
+      "max_absolute": 0.011170975863933563
+    },
+    "all": {
+      "l2": 13.626463620609293,
+      "max_absolute": 0.49895392172038555
+    },
+    "critic": {
+      "l2": 13.622107272034443,
+      "max_absolute": 0.49895392172038555
+    }
+  },
+  "parent_cpu_seconds": 26.921919000000003,
+  "parent_peak_rss_kib": 672264,
+  "parent_wall_seconds": 3071.5824542200426,
+  "policy_seed": 28130001,
+  "ppo_epochs": 400,
+  "recorded_native_step_lower_bound": 480000,
+  "rollouts": 40,
+  "sb3_version": "2.6.0",
+  "status": "complete",
+  "worker_cpu_seconds_sum": 11479.745579999999,
+  "worker_peak_rss_kib_max": 516748,
+  "worker_wall_seconds_sum": 12274.17664943717
+}

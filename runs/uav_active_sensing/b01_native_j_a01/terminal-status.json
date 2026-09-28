@@ -1,0 +1,67 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/682861dba26663810c58dfa0f534a37c57509ff94303bf08a15c0d644991d7da.json",
+  "direction": "uav_active_sensing",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790574066.486683,
+      "path": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 872468,
+        "session_id": 872467,
+        "start_ticks": 91905560
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 872467,
+        "session_id": 872467,
+        "start_ticks": 91905558
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-28T05:42:01.731267Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/682861dba26663810c58dfa0f534a37c57509ff94303bf08a15c0d644991d7da.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "38b7f132af8e26b851826f2e3db90a5fb5fb1a06",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4d37977a05ce465389ad5b322bcdbedd"
+}
