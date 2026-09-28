@@ -10,17 +10,19 @@ import torch
 from stable_baselines3 import PPO
 
 from experiments.candidates.energy_relay_availability.runner import _sha256, _write_json
+from experiments.candidates.uav_active_sensing.training import fingerprint, optimizer_steps
 from experiments.candidates.uav_service_auxiliary.b04.evaluation import TRACE_FIELDS
 from .constants import TRAIN_SEEDS, EVAL_SEEDS, HORIZON, OPTIMIZER_STEPS, evaluation_plan
-from .training import fingerprint, optimizer_steps
 
 
-def read(out):
+def read(out, bulk_root=None):
     out = Path(out)
+    bulk = Path(bulk_root) if bulk_root is not None else out
     manifest = json.loads((out/"manifest.json").read_text())
     verified = 0
     for name, binding in manifest["artifacts"].items():
-        path = out/name
+        is_bulk = name in ("initial.zip", "endpoint.zip") or name.startswith(("raw/", "training/"))
+        path = (bulk if is_bulk else out)/name
         if path.stat().st_size != binding["bytes"] or _sha256(path) != binding["sha256"]:
             raise ValueError(f"artifact binding failed: {name}")
         verified += 1
@@ -39,13 +41,13 @@ def read(out):
             or summary["known_native_step_lower_bound"] != 288000
             or training["optimizer_steps"] != OPTIMIZER_STEPS):
         raise ValueError("fixed count/identity mismatch")
-    model = PPO.load(out/"endpoint.zip", device="cpu")
+    model = PPO.load(bulk/"endpoint.zip", device="cpu")
     if fingerprint(model.policy) != training["endpoint_fingerprint"] or optimizer_steps(model.policy) != OPTIMIZER_STEPS:
         raise ValueError("endpoint identity mismatch")
     maximum_error, clocks, worlds, eval_choices = 0.0, 0, 0, 0
     train_queries = eval_queries = prediction_ticks = 0
     for row in train_rows+rows:
-        path = out/row["raw_path"]
+        path = bulk/row["raw_path"]
         if _sha256(path) != row["raw_sha256"]:
             raise ValueError("world raw binding mismatch")
         arm = "L" if row["arm"] == "L_train" else row["arm"]
@@ -111,8 +113,8 @@ def read(out):
     if (maximum_error > 1e-7 or train_queries+eval_queries != summary["service_snapshot_calls"]
             or prediction_ticks != summary["prediction_team_ticks"]):
         raise ValueError("batch arithmetic/work count mismatch")
-    exposures = [json.loads(line) for line in (out/"training/exposure.jsonl").read_text().splitlines()]
-    updates = [json.loads(line) for line in (out/"training/updates.jsonl").read_text().splitlines()]
+    exposures = [json.loads(line) for line in (bulk/"training/exposure.jsonl").read_text().splitlines()]
+    updates = [json.loads(line) for line in (bulk/"training/updates.jsonl").read_text().splitlines()]
     if len(exposures) != 6400 or len(updates) != 32 or updates[-1]["optimizer_steps"] != 256:
         raise ValueError("training audit exposure mismatch")
     result.update(complete_reading=True, verified_worlds=worlds, verified_clocks=clocks,
@@ -127,8 +129,9 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--bulk-root", type=Path)
     args = parser.parse_args()
-    result = read(args.out)
+    result = read(args.out, args.bulk_root)
     _write_json(args.out/"reading.json", result)
     print(json.dumps(result, indent=2, sort_keys=True))
 

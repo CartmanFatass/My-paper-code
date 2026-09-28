@@ -112,15 +112,16 @@ def execution_reading(raw, records):
     return result
 
 
-def read(out):
+def read(out, bulk_root=None):
     out = Path(out)
+    bulk = Path(bulk_root) if bulk_root is not None else out
     rows = json.loads((out / "perworld.json").read_text())
     training_rows = json.loads((out / "training_perworld.json").read_text())
     paired = {(row["arm"], row["seed"]): row for row in rows}
     identity = []
     for seed in sorted({row["seed"] for row in rows}):
-        with np.load(out / paired["L", seed]["raw_path"], allow_pickle=False) as left:
-            with np.load(out / paired["R", seed]["raw_path"], allow_pickle=False) as right:
+        with np.load(bulk / paired["L", seed]["raw_path"], allow_pickle=False) as left:
+            with np.load(bulk / paired["R", seed]["raw_path"], allow_pickle=False) as right:
                 fields = sorted(set(left.files) - {"planner_records_json"})
                 if set(left.files) != set(right.files):
                     raise ValueError("L/R saved array fields differ")
@@ -133,14 +134,14 @@ def read(out):
     for row in training_rows + rows:
         if row["arm"] not in ("L_train", "L", "O"):
             continue
-        with np.load(out / row["raw_path"], allow_pickle=False) as raw:
+        with np.load(bulk / row["raw_path"], allow_pickle=False) as raw:
             records = json.loads(str(raw["planner_records_json"]))
             perworld.append({"arm": row["arm"], "seed": row["seed"],
                              **execution_reading(raw, records)})
             if row["arm"] == "L":
                 eval_records.extend(records)
-    exposure = [json.loads(line) for line in (out / "training/exposure.jsonl").read_text().splitlines()]
-    updates = [json.loads(line) for line in (out / "training/updates.jsonl").read_text().splitlines()]
+    exposure = [json.loads(line) for line in (bulk / "training/exposure.jsonl").read_text().splitlines()]
+    updates = [json.loads(line) for line in (bulk / "training/updates.jsonl").read_text().splitlines()]
     integer_fields = [key for key, value in perworld[0].items()
                       if isinstance(value, int) and key != "seed"]
     totals = {arm: {key: sum(row[key] for row in perworld if row["arm"] == arm)
@@ -163,8 +164,9 @@ def read(out):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--bulk-root", type=Path)
     args = parser.parse_args()
-    result = read(args.out)
+    result = read(args.out, args.bulk_root)
     (args.out / "diagnostics.json").write_text(json.dumps(result, indent=2, sort_keys=True, allow_nan=False) + "\n")
     print(json.dumps({"worlds": len(result["perworld"]),
                       "bitwise_L_R_worlds": sum(row["all_array_bytes_equal"] for row in result["L_R_array_identity"]),

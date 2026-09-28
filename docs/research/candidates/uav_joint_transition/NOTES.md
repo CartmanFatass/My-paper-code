@@ -865,3 +865,96 @@ and improve full native outcomes beyond competent ordinary references at a
 worthwhile total cost. A cross-question pivot belongs to Root's next allocation,
 not an automatic extension of this batch. Publication and precise retention/
 cleanup follow; this scientific stop does not discard the unique adverse evidence.
+
+### Publication, retention and measured cleanup
+
+The complete results, full independent answer, diagnostic script and pure-array
+tests were published and verified at `origin/main` in
+`8e3a526de9e81fe3822ada2032558260ee48428e`. The executed inputs remain
+`18c9a6ba5094a19479eedc43977202877eb199d3`; the new diagnostic did not become
+part of the accepted training/evaluation source. No additional scientific run
+was selected during reading or cleanup. The critic's remark about extra
+evaluation is an investment judgment for the unchanged endpoint and present
+decision, not a proof that every unsampled state must have the same argmax.
+The exact trajectory-identity conclusion remains bound to these eight worlds.
+
+One canonical bulk copy now resides on `wsl_4070` at
+`/home/wu/hmasd-artifacts/uav_joint_transition/b01_joint_paths_a01/`.
+Only `raw/`, `training/`, `initial.zip` and `endpoint.zip` were **moved**, not
+copied, from the completed native output. The 105 bulk files, **248,072,004
+bytes**, were verified before and after against the original manifest,
+SHA256 `59fb6c747a3c3306d47a5f0109f560c8f815c21df01418f44cf078b04d4fee7a`.
+The other eight manifest entries are compact records retained in Git and the
+original native output. All 113 original bindings therefore remain available.
+The endpoints are 2,220,232 and 759,894 bytes; their original hashes remain in
+the manifest. The native arrays, planner records, training choices/probabilities
+and updates are the unique evidence for the exposure, no-increment, ordinary
+tradeoff and tail readings, not an unselected continuation or duplicate backup.
+
+Native claim, launch manifest, status, terminal witness and compact outputs
+remain at the original output for recovery and duplicate prevention. No accepted
+binding was rewritten or replaced with a symlink. Current offline readers take
+`--out` for that compact root and optional `--bulk-root` for the canonical bulk
+root. Their only changes are path resolution and importing the already-used
+checkpoint helpers directly from their existing module, so the ended trainer
+can be removed. Both readers were rerun without environment steps or optimizer
+updates after the move. The full reader again verified 113 artifacts/96 worlds/
+11,200 clocks/800 endpoint choices; **both resulting JSON files are byte-identical
+to the published readings**. Their reader/diagnostic hashes remain
+`8b82ca4a9dab4830eb65e9b4a73a0258b7963d2002c1b55106ee77776237cf8e` and
+`d9892e05823ab42620f301dd7c20e231c214ad11fd0cb7e816c7df38bf95655c`.
+
+Before deletion, I confirmed native terminal identities, the stopped observer
+with no unconsumed event, all four helpers completed, no external direction
+imports, and no live process references to this run or its source snapshot
+using the maintained collector's read-only process probe. The retained common
+controller/forecast, checkpoint policy class, constants, offline readout/readers
+and their focused tests remain useful audit assets. They do not grant another
+run or promote O to a useful controller. The ended `run_b01.py`, `runner.py`,
+`training.py`, `macro_env.py`, `records.py` and `test_pipeline.py` were removed
+from the current tree. Their exact versions and original tests remain at
+[the executed source](https://github.com/CartmanFatass/My-paper-code/tree/18c9a6ba5094a19479eedc43977202877eb199d3/experiments/candidates/uav_joint_transition).
+There are no current executable imports of those retired modules. Eleven
+retained tests collect in 1.77 s, with the same fourteen external deprecation
+warnings, without native transitions or optimizer updates. This collection is
+not a new result fit or a replacement for the original sixteen-test run.
+
+Actual local deletions were the six retired source/test files, the two owned
+code/test `__pycache__/` directories, `temp/directions/uav_joint_transition/`
+(only the obsolete control-row patch and observer request), and two empty
+duplicate stdout/stderr files. The terminal native node logs remain. A first
+local `rm -rf` request was rejected by the tool's no-force rule before execution;
+the verified exact scratch/cache paths were removed with non-force `rm -r`.
+There is no outstanding deletion failure from that refusal.
+
+The remote deleted targets were `/tmp/uav-joint-transition-control-row.patch`
+and the launcher snapshot
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/8864a6faa3604f989586c6928ae0f2a6`.
+The snapshot's 19 generated `__pycache__` directories were first individually
+removed after live-reference checking. These had been created by the offline
+reader and were the collector's initial `changed, untracked, or ignored files`
+refusal. The next ordinary preview refused protected `/proc/660/cwd` inspection.
+Its documented existing-passwordless `--sudo-process-scan` gave an eligible
+preview; apply rechecked terminal identities, unchanged source, clean files,
+durable Git reachability and process references, then removed only this exact
+snapshot. Both refusals are preserved rather than bypassed by shell-removing a
+worktree or changing another process. Later reads disabled bytecode generation.
+
+Allocated-byte scope includes the new canonical bulk destination, so the move
+is not counted as released space. The absent remote direction scratch path
+contributed zero on both sides.
+
+| Host and exact owned scope | Before | After | Net freed |
+|---|---:|---:|---:|
+| Local code/tests/run/scratch directories | 1548288 | 1273856 | 274432 |
+| Remote snapshot/original output/control patch plus canonical bulk direction | 1051791360 | 249483264 | 802308096 |
+| Total | 1053339648 | 250757120 | **802582528** |
+
+All eleven local deleted targets and the two remote deletion targets were
+checked absent; the four moved bulk paths are also absent at the original
+output. The one canonical bulk directory intentionally remains, 248,311,808
+allocated bytes including its direction directory; compact original native
+output is 1,171,456 allocated bytes. This is measured filesystem reclamation,
+not a claim about Git pack size or total host free space. No cleanup blocker,
+live producer, unread result, pending advice or selected successor remains.
+Other writers' files, native claims and accepted operations were preserved.
