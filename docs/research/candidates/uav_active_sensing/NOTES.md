@@ -869,3 +869,27 @@ collector initially refused protected `/proc/660/cwd`; its supported
 `--sudo-process-scan` read-only preview then found the snapshot eligible.
 Publish these results before applying exact source/scratch reclamation; do not
 delete the durable raw evidence, checkpoints, native claim or status records.
+
+Publication **27b21ea90b57c91bafdd907b3ec89e5349e0fb4f** contains the full
+result, compact original readings, independent dispositions and own RESEARCH
+standing/shared information topic. The subsequent supported exact-target GC
+rechecked the accepted operation under its lock and removed
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/4d37977a05ce465389ad5b322bcdbedd`.
+It was **799772672 allocated bytes** before removal and is now absent from
+both the filesystem and Git worktree registration. The native claim remains.
+The durable evidence directory remains unchanged at 124407808 allocated bytes.
+
+Also deleted the completed observer request directory
+`temp/directions/uav_active_sensing/` (8192 allocated bytes),
+`experiments/candidates/uav_active_sensing/__pycache__/` (73728), and
+`tests/experiments/candidates/uav_active_sensing/__pycache__/` (77824), after
+confirming the observer and both reviewers were done. All three exact targets
+are absent. Total **measured cleanup-target allocation decreased 799932416
+bytes** across the source snapshot and these local targets. This is not a
+claim about concurrent whole-filesystem free space; output relocation itself
+was not counted as reclaimed space. The initial `rm -rf` command was rejected
+before effects by the shell tool's force-removal restriction; ordinary exact
+`rm -r` succeeded, without force or bypass. No deletion blocker remains.
+Retained bulk is the one necessary evidence copy; compact status/summary
+copies at the original output path preserve native recovery. No full-tree
+backup, tarball, extra source copy, peer edit or new result operation was made.
