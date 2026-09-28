@@ -1301,8 +1301,8 @@ Retaining useful assets without additional runs is a real alternative, not an ow
 
 ### Answer
 
-Independent `/root/question_space_review`, 2026-09-28. Full programme answer follows;
-the same reviewer is reading the concrete H12000 and C/H/L designs before the run selection.
+Independent `/root/question_space_review`, 2026-09-28. Full programme answer follows,
+with that same reviewer's concrete H12000 and C/H/L readings before the run selection.
 
 **Recommendation**
 Develop **persistent-service depth plus decentralized message-content learning** in parallel. Do not restart either round-3 learner. Defer a G0 learning purchase until it has a consequential reassignment comparison, rather than treating its source scaffold as a promising result.
@@ -1405,16 +1405,80 @@ The strongest objection is opportunity cost: another fixed-policy panel cannot e
 
 **MATERIAL_DISSENT: no.** Select the proposed package, with the terminal-window definitions made explicit during implementation. No extra arm, positive pilot, additional fit or further scientific-review cycle is needed for this unchanged comparison.
 
+#### Same review: concrete message-content design at `838b93b25`
+
+**SELECT the C/H/L comparison at `838b93b25`.** The proposed delayed-content learner has a coherent credit path, adequate ordinary comparators and a bounded complete cost. I find no material scientific correction required before engineering.
+
+This is selection of the declared package, not verification of an implemented learner. The new implementation does not yet exist.
+
+**Credit And Replay**
+The source-grounded sequence is appropriate: deliver due packets, construct legal actor inputs, update private recurrence, sample motion and the scheduled sender's content, enqueue the packet, execute motion, and obtain native reward.
+
+For L, the scheduled sender's action likelihood includes its three-dimensional motion draw and seven-dimensional content draw. Its stored send-time return includes later rewards after delivery, including consequences of teammates' responses. That supplies a legitimate likelihood-ratio learning signal without differentiating through the channel or simulator.
+
+Keeping **actual behavior packets detached during recurrent replay is correct for this method**. Replacing them with newly encoded packets would change the history against which stored actions and likelihoods are evaluated. The sender learns through its stored content-action score; receiver gradients learn responses to the packets actually received.
+
+The terminal mask is also justified. With known send-time delay, `t + delay >= 256` means the packet cannot enter any subsequent action in this episode. Excluding its content density and entropy while preserving transmission, censoring and fees integrates out a causally ineffective choice. A packet arriving at tick **255 remains credited**; one arriving at **256 does not**. Motion likelihood remains active throughout.
+
+The training-only critic is evaluated before the current message draw, so its omission of in-flight packet content does not invalidate it as a baseline. It may increase variance. Per-agent compound PPO clipping, four updates on collected data and detached chunk-start recurrent states remain finite-learning approximations, not exact trajectory importance sampling. The proposal acknowledges that limitation. [Declared learner](/home/fires/hmasd-wsl/docs/research/candidates/uav_message_content/NOTES.md:196).
+
+**Decision Exposure**
+This comparison avoids the earlier deterministic endpoint problem: evaluation samples both motion and L's content, as declared before training. Almost every RR packet can reach a later action; only the final one to five sends per episode are terminal-censored. There is no sparse send-opportunity premise requiring a pilot.
+
+Delivered variation is nevertheless not automatically useful information. The initial learned packets are deliberately uninformative; the receiver can learn to ignore them. Parameter movement, code variance or packet delivery alone cannot establish cooperation or semantic use. Record those observations without adding a compulsory attribution experiment.
+
+Engineering should preserve the exact masked compound likelihood and the existing **Gaussian entropy convention**, distinguishing it from entropy or information content of the transmitted bounded code. This is implementation precision, not an additional study.
+
+**Comparators And Interpretation**
+C and H together provide an adequate ordinary comparison. C preserves the demonstrated current encoding; H uses the previously constant scalar and inexpensive local history. H's pooled moments correctly represent repeated sightings rather than distinct users. Its unproven usefulness is handled by retaining C.
+
+Separate receiver/motion training in every arm is important. The comparison therefore concerns learned content **and its co-adapted response**, not substitution into the frozen RR9302 receiver. Additional parameters, entropy terms and differing initial packet distributions are declared parts of L. A positive result would support that package, not isolate a uniquely semantic or private-history mechanism.
+
+The strongest objection is finite learnability: seven initially noisy content dimensions must acquire a convention jointly with changing receivers through delayed team-return credit. The proposal does not establish that this budget will suffice. Nevertheless, fixed reliable transport, an existing motion-learning implementation and inexpensive complete evaluation make one direct exploratory comparison worth purchasing. Neither a positive pilot nor a new architecture would resolve that uncertainty in advance.
+
+**Cost And Decisions**
+The stated totals are consistent: **three fits, 442,368 native team steps, 3,072 Adam calls and 7,864,320 replayed actor rows**, with no counterfactual model search. The 10–40-minute planning range is an estimate, not demonstrated runtime; integration, tests, retention and reading remain additional costs. Three arm fits constitute one exploratory comparison, not independent replication of L.
+
+The outcome branches are useful:
+
+- L improves J and service over both C and H: retain a conditional package result and separately decide whether replication is worthwhile.
+- H improves C without useful L increment: retain the ordinary encoding result.
+- L only beats an inferior H: no demonstrated replacement for C.
+- Mixed outcomes or ineffective learned content: constrain this finite package without declaring an information bound or automatically buying a repair.
+- Technical missingness: preserve its actual frontier without manufacturing a complete negative comparison.
+
+No fourth arm, frozen-receiver intervention, altered delay regime or extra consultation is needed. Proceed to the bounded implementation and its engineering review under the published design.
+
+**MATERIAL_DISSENT: no.** The proposed comparison is scientifically coherent and merits the finite purchase.
+
 ### Decision
 
-Root has selected the above bounded design work, not result-bearing studies. Keep completed
-results and accepted peer consultation unchanged. Prepare independent work while the peer
-exchange proceeds; resolve material choices here, then delegate selected execution to its DM.
+Root adopts the same reviewer's programme and both concrete comparison recommendations.
+Select `e2ff83480` O_H/P H12000 (0 fits, <=192000 steps) and `838b93b25` C/H/L
+(3 arm fits, 442368 teamsteps) for their native DMs to implement, check, admit, run and
+read end to end. The result-bearing total is <=634368 teamsteps, plus declared correctness
+checks; the hosts, horizons, endpoints and inferential units remain separate.
+
+For O_H, freeze the review's early-terminal and fixed late-window definitions in L0;
+retain the known arrival semantics and all adverse evidence. Its scope is longer finite
+service versus P, not general sustainability or a MARL contribution. For content, preserve
+masked compound likelihood, detached behavior packets, independent random streams and the
+Gaussian entropy convention. No positive pilot, extra fit or repeated selection review is
+required. Engineering review and actual-node admission still apply to the real implementation.
+
+This selects the nonoverlapping Codex work under the owner's delegated scope, not a claim
+that Claude has accepted the whole programme. The substantive peer reply and its question
+allocation remain pending; the already-sent Pro key stays with Claude. No competing W/offset
+or restoration study is assigned. Root will finish the joint plan on the actual exchange,
+preserving any disagreement rather than treating message delivery as agreement.
 
 ## Current research plan
 
-**Owner现要求与Claude共同设计和分配下一轮，已启动实质交流与独立问题准备。**
+**Owner现要求与Claude共同设计和分配下一轮，实质交流正在进行。**
 候选、实际负责人和待决比较见[当前选题](#portfolio-review-2026-09-28-joint-next-round-programme)；
+同一独立审查已覆盖并采纳两个具体Codex比较：原补能DM推进O_H/P八对连续H12000世界
+（0fit，最多192k步），新通信DM推进固定RR下C/H/L共同学习（3臂fit，442368步）。
+已委派完整实施和判读，不把设计采纳当作启动或结果；Claude具体方向分工待实质回复。
 下面保留刚完成轮次的有效判断，不表示问题责任因配方结束而消失。
 
 **Owner已采纳轻量调整并授权推进下一轮（2026-09-28）。** 保持Root设计问题、原生DM承担科学与执行的分工，

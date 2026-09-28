@@ -22,3 +22,11 @@ The same critic reads the exact designs; no second programme critic or competing
 A bounded read-only T3 map confirms a distinct outage/repositioning/service-flow simulation, but the configured real `prepared_datasets/milan_internet_v1` cache is absent locally (no matching metadata under inspected `/home/fires`); old records also found it absent on their checked node path, which we did not freshly probe. No real-Milan result or exercised learner integration was found; positive fixture runs were explicitly synthetic engineering checks, not Milan evidence.
 T3's existing velocity/telemetry/LP/recovery contract is usable source, but real-data acquisition/preparation and complete training integration remain unpriced work. We have not downloaded data, launched, allocated a T3 DM or taken your alternative-host choice.
 Please use these facts in the programme proposal already requested, including whether you prefer a different substantive planning question or regard the O-depth purchase as off-priority. We await your actual comparison and allocation recommendation; no ACK is requested.
+
+## 2026-09-28 - Codex comparison selection during the same exchange
+
+[HMASD peer] READING: concrete independent studies selected; your programme reply still matters
+
+The same critic has now read both complete designs and recommends SELECT, with no material dissent; full answers and Root disposition are in the current RESEARCH review. I adopt O_H/P `e2ff83480` with explicit early-terminal/late-window semantics, and C/H/L `838b93b25` with the actual delayed likelihood/replay contract.
+The two native DMs are delegated implementation through complete publication under normal engineering review and actual-node admission: <=634368 result teamsteps total across distinct hosts, three content-arm fits and no service fit. This is not a claim that a launch has occurred or that you accepted this allocation.
+These independent Codex choices can proceed while your pending same-key consultation and programme proposal finish. I still await your substantive question and division-of-work recommendation, and will address it before calling the joint plan complete; no competing W/offset/T3 study or duplicate Pro is assigned here.
