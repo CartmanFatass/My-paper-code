@@ -71,6 +71,32 @@ def _durable_ref(repo: Path, sha: str) -> str | None:
     return refs[0] if refs else None
 
 
+def _process_state(entry: Path) -> tuple[str, int]:
+    stat = (entry / "stat").read_bytes()
+    close = stat.rfind(b")")
+    prefix = f"{entry.name} (".encode("ascii")
+    if not stat.startswith(prefix) or close < 0 or stat[close:close + 2] != b") ":
+        raise Refusal(f"process {entry.name} has invalid stat identity")
+    fields = stat[close + 2:].split()
+    if len(fields) < 20 or len(fields[0]) != 1:
+        raise Refusal(f"process {entry.name} has invalid stat identity")
+    try:
+        state = fields[0].decode("ascii")
+        start_ticks = int(fields[19])  # Field 22, after pid and parenthesized comm.
+    except (UnicodeDecodeError, ValueError) as exc:
+        raise Refusal(f"process {entry.name} has invalid stat identity") from exc
+    return state, start_ticks
+
+
+def _confirm_process(entry: Path, start_ticks: int, *, zombie: bool = False) -> None:
+    try:
+        state, current_start = _process_state(entry)
+    except FileNotFoundError as exc:
+        raise Refusal(f"process {entry.name} identity disappeared during inspection") from exc
+    if current_start != start_ticks or (zombie and state != "Z"):
+        raise Refusal(f"process {entry.name} changed during reference inspection")
+
+
 def _process_references(snapshot: Path, *, uid: int | None = None,
                         pids: list[int] | None = None) -> list[str]:
     """Inspect all observable processes owned by this uid; uncertainty refuses GC."""
@@ -85,6 +111,7 @@ def _process_references(snapshot: Path, *, uid: int | None = None,
         if not entry.name.isdigit():
             continue
         try:
+            state, start_ticks = _process_state(entry)
             # /proc/<pid> ownership changes to root for a non-dumpable process.
             # Its status Uid remains the real process owner.
             status = (entry / "status").read_text(encoding="utf-8")
@@ -93,6 +120,14 @@ def _process_references(snapshot: Path, *, uid: int | None = None,
                 raise Refusal(f"process {entry.name} has no Uid status")
             process_uids = [int(part) for part in uid_line.split()[1:]]
             if target_uid not in process_uids:
+                _confirm_process(entry, start_ticks)
+                continue
+            if state == "Z":
+                # A zombie leader may still have live threads holding references.
+                tasks = {task.name for task in (entry / "task").iterdir()}
+                if tasks != {entry.name}:
+                    raise Refusal(f"process {entry.name} has surviving or unobservable tasks")
+                _confirm_process(entry, start_ticks, zombie=True)
                 continue
             # A process may disappear during the scan. Other inspection errors
             # for a live own-user process are uncertainty, not clearance.
@@ -114,6 +149,7 @@ def _process_references(snapshot: Path, *, uid: int | None = None,
                     references.append(f"pid {entry.name} fd/{fd.name}")
             if prefix in (entry / "maps").read_bytes():
                 references.append(f"pid {entry.name} maps")
+            _confirm_process(entry, start_ticks)
         except FileNotFoundError:
             if entry.exists():
                 raise Refusal(f"process {entry.name} changed during reference inspection")

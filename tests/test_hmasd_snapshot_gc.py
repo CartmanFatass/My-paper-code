@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 import platform
 import subprocess
 import sys
+import time
 
 import pytest
 
@@ -208,6 +210,107 @@ def test_redirected_snapshot_refused(operation):
     assert "redirected" in result["reason"]
     assert snapshot.is_symlink() and moved.exists()
     assert claim_path.is_file() and (output / "launch-manifest.json").is_file()
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux /proc inspection")
+def test_stat_identity_parses_parentheses_in_comm(tmp_path):
+    entry = tmp_path / "123"
+    entry.mkdir()
+    fields = ["Z", *(["0"] * 18), "456"]
+    (entry / "stat").write_bytes(b"123 (name \xff ) with (parentheses) " +
+                                 " ".join(fields).encode("ascii"))
+    assert gc._process_state(entry) == ("Z", 456)
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux /proc inspection")
+def test_zombie_with_missing_cwd_and_exe_does_not_block_gc(operation, monkeypatch):
+    repo, snapshot_id, snapshot, _output, _claim = operation
+    child = subprocess.Popen([sys.executable, "-c", "pass"], cwd=snapshot,
+                             start_new_session=True)
+    try:
+        os.waitid(os.P_PID, child.pid, os.WEXITED | os.WNOWAIT)
+        assert gc._process_state(Path("/proc") / str(child.pid))[0] == "Z"
+        for name in ("cwd", "exe"):
+            with pytest.raises(FileNotFoundError):
+                os.readlink(Path("/proc") / str(child.pid) / name)
+        monkeypatch.undo()
+        scan = gc._process_references
+        monkeypatch.setattr(gc, "_process_references",
+                            lambda path: scan(path, pids=[child.pid]))
+        assert gc.inspect(repo, snapshot_id)["eligible"]
+        assert snapshot.exists()
+    finally:
+        child.wait(timeout=5)
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux /proc inspection")
+def test_zombie_leader_with_live_worker_blocks_gc(operation, monkeypatch):
+    repo, snapshot_id, snapshot, _output, _claim = operation
+    script = (
+        "import ctypes,threading,time\n"
+        "worker=threading.Thread(target=lambda: (print('ready',flush=True),time.sleep(6)))\n"
+        "worker.start()\n"
+        "ctypes.CDLL(None).pthread_exit(None)\n"
+    )
+    child = subprocess.Popen([sys.executable, "-c", script], cwd=snapshot,
+                             stdout=subprocess.PIPE, text=True, start_new_session=True)
+    try:
+        assert child.stdout is not None and child.stdout.readline().strip() == "ready"
+        proc = Path("/proc") / str(child.pid)
+        deadline = time.monotonic() + 3
+        while gc._process_state(proc)[0] != "Z" and time.monotonic() < deadline:
+            time.sleep(0.01)
+        assert gc._process_state(proc)[0] == "Z"
+        with pytest.raises(FileNotFoundError):
+            os.readlink(proc / "cwd")
+        monkeypatch.undo()
+        scan = gc._process_references
+        monkeypatch.setattr(gc, "_process_references",
+                            lambda path: scan(path, pids=[child.pid]))
+        result = gc.inspect(repo, snapshot_id)
+        assert not result["eligible"] and "tasks" in result["reason"]
+        assert snapshot.exists()
+    finally:
+        child.wait(timeout=10)
+        if child.stdout is not None:
+            child.stdout.close()
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux /proc inspection")
+def test_live_process_losing_cwd_during_scan_refuses(tmp_path, monkeypatch):
+    child = subprocess.Popen(["sleep", "30"], cwd=tmp_path, start_new_session=True)
+    real_readlink = os.readlink
+
+    def losing_cwd(path):
+        if Path(path) == Path("/proc") / str(child.pid) / "cwd":
+            raise FileNotFoundError(path)
+        return real_readlink(path)
+
+    try:
+        monkeypatch.setattr(gc.os, "readlink", losing_cwd)
+        with pytest.raises(gc.Refusal, match="changed during reference inspection"):
+            gc._process_references(tmp_path, pids=[child.pid])
+    finally:
+        child.terminate()
+        child.wait(timeout=5)
+
+
+@pytest.mark.skipif(sys.platform != "linux", reason="Linux /proc inspection")
+@pytest.mark.parametrize("zombie", [False, True])
+def test_pid_starttime_replacement_during_scan_refuses(tmp_path, monkeypatch, zombie):
+    real_state = gc._process_state
+    calls = 0
+
+    def replaced(entry):
+        nonlocal calls
+        state, start_ticks = real_state(entry)
+        calls += 1
+        return ("Z" if zombie else state), start_ticks + (calls > 1)
+
+    monkeypatch.setattr(gc, "_process_state", replaced)
+    with pytest.raises(gc.Refusal, match="changed during reference inspection"):
+        gc._process_references(tmp_path, pids=[os.getpid()])
+    assert calls == 2
 
 
 @pytest.mark.skipif(sys.platform != "linux", reason="Linux /proc inspection")
