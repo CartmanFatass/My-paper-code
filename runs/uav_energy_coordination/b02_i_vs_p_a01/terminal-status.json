@@ -1,0 +1,67 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a79433f817c0f17b5d382a4e4c28aabb5778859b59aa8266f891010a28366e2f.json",
+  "direction": "uav_energy_coordination",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790577329.4469035,
+      "path": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 884333,
+        "session_id": 884332,
+        "start_ticks": 92569186
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 884332,
+        "session_id": 884332,
+        "start_ticks": 92569184
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-28T06:35:41.974647Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a79433f817c0f17b5d382a4e4c28aabb5778859b59aa8266f891010a28366e2f.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "2b66dc5125323326bc80709cb02a59111c1fc678",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/101d9dc03932405d8c154bd90f9ef183"
+}

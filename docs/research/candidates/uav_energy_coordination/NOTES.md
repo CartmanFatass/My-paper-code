@@ -1111,3 +1111,242 @@ The observer owner remains child UUID`01a0e5d9-7595-7010-b974-4dc802d1b7d8`.
 Keep this native turn active; the known queue limitation is not repaired by
 registration. Complete collection, J/service/risk/cost reading and publication
 remain outstanding. No retry, extension or second panel is authorized.
+
+## 2026-09-28 - B02 complete: I does not earn reuse beyond P
+
+### Terminal evidence and complete reading
+
+The original B02 operation ended **2026-09-28 06:35:29.446903 UTC**, exit0,
+with a valid native witness, absent runner/supervisor and consistent records.
+There was no restart, replacement, extension or new result rollout. All **16/16
+episodes reached H3000 truncation**, exactly **48,000 native team transitions**,
+**0 fits / 0 optimizer updates**. There are no failed, missing, cancelled,
+unreconciled, unstarted or orphan jobs, and no missing endpoint or cost-bound
+error. Input source is **`2b66dc5125323326bc80709cb02a59111c1fc678`**; acceptance
+was published in `c9a14f412`.
+
+Compact originals: [config](../../../../runs/uav_energy_coordination/b02_i_vs_p_a01/config.json),
+[summary](../../../../runs/uav_energy_coordination/b02_i_vs_p_a01/summary.json),
+[all16 worlds](../../../../runs/uav_energy_coordination/b02_i_vs_p_a01/perworld.json),
+[manifest](../../../../runs/uav_energy_coordination/b02_i_vs_p_a01/manifest.json),
+[exit witness](../../../../runs/uav_energy_coordination/b02_i_vs_p_a01/process-exit.json),
+[terminal status](../../../../runs/uav_energy_coordination/b02_i_vs_p_a01/terminal-status.json).
+The necessary unique raw copy remains on configured `wsl_4070` at
+`/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/raw/`.
+
+I verified every one of the **35 manifest-listed files** against byte count and
+SHA256 on that node. All three collected scientific JSON files also match locally.
+The32 raw files (16 NPZ and16 final progress records) occupy **38,735,299 bytes**;
+manifest-listed raw plus compact scientific evidence totals **38,945,905 bytes**.
+Manifest SHA256 is `55fcb78cf65f36f68a639d63329a5f8746a113ee7ea39a30a13d991b77bce824`.
+No raw data were copied into Git or duplicated locally.
+
+All16 original NPZ files were read. **560 native J/QoS/metric/energy/risk scalars
+recomputed exactly**, along with fixed-bin readings, native terminal flags,
+I/P decision clocks, q0-inclusive P counters, I model/event/phase counts and
+decision-time accounting. Full raw user trajectories are equal in all8 pairs;
+recorded initial-state and native RNG-stream digests likewise agree8/8. Native
+metrics and observer metrics are exactly equal. Maximum observer/evaluator reward
+and battery differences are **4.44e-16** and **2.98023e-8**, within the already
+frozen1e-12 and3e-8 checks, with no tolerance change. This audit took0.233 s wall,
+0.241 s CPU and62,796 KiB peak RSS after interpreter startup; transport/imports
+and the rest of reading remain additional work.
+
+The same observer reported READY at06:35:42 UTC. Its wake to the unchanged child
+UUID again failed exit1 with `direct app-server input is not allowed for unloaded
+spawned sub-agents (code -32600)`. I kept this native turn active, drained the
+original generation4 event after the long deterministic wait, consumed it into
+generation5 and stopped observation. Final drain has no pending event, no wake
+and `stopped: true`. Queue failure did not cause a worker restart or a different
+target. Technical completion is now accompanied by complete collection and reading.
+
+### Utility, risk and all paired worlds
+
+The estimand remains complete I minus complete P on eight initialized worlds,
+not training replications or a recharge-mechanism contrast. Descriptive paired
+t7 intervals are not confirmation or universal ranking.
+
+| Mean endpoint | I | P |
+| --- | ---: | ---: |
+| QoS/step | .735780424 | .775487312 |
+| Native J | 2150.595374 | 2287.291811 |
+| Delivered megabits | 66220.238184 | 69793.858074 |
+| Return-cost total | 13.095438 | 4.309744 |
+| Episode minimum battery ratio | .105987910 | .101408140 |
+| Below10% reserve member-step fraction | 1.337500% | .594792% |
+| Charging input Wh | 475.654200 | 397.777778 |
+| Energy consumed Wh | 1390.094643 | 1374.460907 |
+| Charging member-steps | 1749.875 | 1432.000 |
+| Feedback-mode member-steps | 4369.125 | 8139.000 |
+| Guard-blocked actions | 1884.500 | 1043.250 |
+| Longest zero-QoS spell | 106.875 | 16.125 |
+| Longest below-half-QoS spell | 279.500 | 190.500 |
+
+**I-P QoS = -.039706888 [-.126551661,+.047137886]; native J = -136.696437
+[-430.812369,+157.419495].** Six worlds lose both endpoints and two improve.
+Mean delivered service falls3573.620 Mbit. The mean J difference decomposes
+into -119.120663 cumulative QoS, -17.571388 return-risk penalty and -0.004386
+graph shaping. All14 native reward fields were retained and read: capped and raw
+return costs agree, the return coefficient is2, and both cutoff/depletion counts
+and their penalties are zero in both programs. Zero cutoff exposure is not safety.
+
+| Seed suffix (410928xx) | I-P QoS/step | I-P native J | I/P minimum battery | I/P reserve exposure | I/P longest zero-QoS spell |
+| --- | ---: | ---: | --- | --- | --- |
+| 01 | -.017996846 | -54.133518 | .100894/.107793 | 0/0% | 0/0 |
+| 02 | -.059618305 | -178.248754 | .109334/.100750 | 0/0% | 0/0 |
+| 03 | +.119237713 | +364.713046 | .139206/.098514 | 0/.029167% | 69/69 |
+| 04 | -.057205054 | -171.265107 | .101525/.107901 | 0/0% | 0/0 |
+| 05 | -.032658187 | -99.359006 | .119584/.101556 | 0/0% | 0/0 |
+| 06 | -.111089752 | -335.295026 | .100739/.101535 | 0/0% | 47/49 |
+| 07 | +.063735317 | +192.162455 | .101588/.101295 | 0/0% | 11/11 |
+| 08 | -.222059987 | -812.145587 | .075033/.091922 | 10.700000/4.729167% | 728/0 |
+
+The two positive worlds03/07 are real counterevidence to universal inferiority,
+but do not provide a prospectively observable selector. The loss is not solely
+08: the longest below-half-service gap worsens in02/04/05/06/08. World02 has
+I/P gaps838/222 steps and06 has280/91;03 and07 instead improve105/319 and79/656.
+I's episode minimum is lower in01/04/06/08, return cost is higher in01/05/06/08,
+and guard blocking is higher in seven worlds (all except02). Blocking alone is
+not a physical-safety metric. The higher mean minimum battery conceals the worse
+I08 tail rather than establishing risk dominance.
+
+In08, I's native QoS is zero during steps2272-2999, an intact **728-step terminal
+outage**, while P has no zero-QoS spell. The independent reviewer read all eight
+I members in feedback mode throughout that outage; charging still supplied
+202.22 Wh against272.86 Wh consumed, and the ending fleet was concentrated at one
+station. P retained a spatially separate member and nonzero service. These are
+realized geometry/charging/energy observations, not an intervention identifying
+which I decision caused failure or demonstrating a queue/feedback repair.
+P itself has reserve exposure in03 and08, so it is not a safe universal substitute.
+
+Fixed-bin mean QoS for I/P is **.837565/.849242** at0-1000,
+**.821900/.857854** at1000-2000 and **.547877/.619366** at2000-3000.
+Corresponding mean native J is827.999785/839.680566,
+810.828697/845.984827 and511.766892/601.626418. The larger late deficit is
+descriptive, not a recharge-causality estimate. I gains77.876 Wh charging input
+and consumes15.634 Wh more on average; both programs have negative net energy in
+every world. More charging or fewer feedback steps did not deliver the proposed
+net advantage; neither program demonstrates indefinite sustainability.
+
+P used1171 active and1229 fallback windows across2400 clocks, selected452 holds,
+and had2 selected positive near-ties at or below1e-12. Its exact ordering was
+unchanged. I used400 clocks. Held-itinerary versus realized replanning
+discrepancies are retained in every I row; they are not a same-suffix forecast
+accuracy test and do not identify the failed component. No post-result ranking,
+tie tolerance, cadence, horizon or model was changed.
+
+### Full cost
+
+Native acceptance to exit took **931.777 s**; the outer supervisor submission
+reported24 s including launch preparation. Runner invocation wall was
+**899.782 s (14.996 min)**. Summed worker wall was **1793.486 s (29.891 min)**
+and summed worker CPU **1851.499 s (30.858 min)**, with two workers and one
+numeric thread each. Parent measured CPU was0.091 s within the runner timer;
+imports/preparation outside that timer are not zero. Worker peak RSS was
+**601,236 KiB** (I),600,872 KiB(P); parent peak475,712 KiB. These are process
+peaks, not a sum or measurement of simultaneous system memory.
+
+| Work across eight worlds | I | P |
+| --- | ---: | ---: |
+| Native transitions | 24000 | 24000 |
+| Worker wall seconds | 1163.654995 | 629.830764 |
+| Worker CPU seconds | 1200.966126 | 650.533090 |
+| Full controller wall seconds | 678.912829 | 137.835026 |
+| Decision-tick wall seconds | 675.641138 | 135.289072 |
+| Score requests | 57750 | 10539 |
+| Actual plan/model evaluations | 54388 | 10539 |
+| Service/routing snapshots | 163164 | 22249 |
+| Analytical events | 1050371 | 0 |
+| Analytical phases | 1260071 | 0 |
+| P closed-form projected positions | 0 | 21078 |
+| P shared-q0 snapshots (included above) | 0 | 1171 |
+| Central input calls / decision clocks | 400 | 2400 |
+| Primitive forecast environment steps | 0 | 0 |
+
+Combined service snapshots are **185,413**, within222,000. I costs about1.85x
+worker wall and4.93x controller wall despite six times fewer central refreshes.
+I's whole-itinerary plan and P's move/hold score are not interchangeable compute
+units. The routing, projection/deep-copy, event and native execution work are all
+real. I analytic planner wall675.484 s is included in controller/worker totals,
+not additive. Declared direct frozen dependency files total124,677 bytes; that is
+not the whole source/environment dependency size. Input snapshot allocation was
+800,055,296 bytes. The earlier27.6/28.8 worker-minute references were explicitly
+historical, not promises; measured I/P here are19.394/10.497 worker-minutes.
+
+Correctness fixtures, repeated tests, implementation, scientific/engineering
+review, transport, publication and reading are additional partly unmetered work.
+The raw audit's timing above excludes its imports and SSH transport. No full
+end-to-end speed claim or compute-priced native J is made. B01+B02 together have
+**40 complete episodes /120,000 native steps /0 fits**, without treating these
+evaluation worlds as training replications or pooling their different contrasts.
+
+### Independent diagnosis and DM disposition
+
+Registered ResearchCritic `result_critic` reused its independent B01 context,
+without DM/Root conversation inheritance. It reconstructed B02 original outputs
+before the prospective NOTES, independently checked all16 NPZ hashes/bytes and
+reproduced560 consequential scalars exactly, including all8 full user-path pairs.
+This was separate-context evidence-first review, not blinded review. Its final
+recommendation is **stop investment in the current I/C analytical recipes**;
+I has not earned supported-reference reuse beyond P. It found no concrete current
+reuse need for I's maintained implementation. **MATERIAL_DISSENT: no.**
+
+I adopt that substantive correction. B01's I-H gains remain valid for their
+comparator and worlds. What changes is the practical explanation and investment:
+that result did not survive a complete comparison with the stronger existing
+ordinary package. Ordinary comparator competence is now a consequential
+alternative to a special whole-fleet analytical-planning advantage. The broad
+intervals do not establish population inferiority or equivalence, but neither
+uncertainty nor two positive worlds earns extra seeds or continued model cost.
+
+This does not identify recharge coordination, forecast accuracy, cadence or
+learning. I and P differ jointly in information refresh, execution, model and
+action choices; B01 C-I was not coordination versus none. World08 reveals a
+realized coupling among fleet concentration, station capacity, energy deficit
+and service geometry, without identifying a successful intervention. Finite
+forecasts, proposal constraints and feedback interaction are possible accounts,
+not mandatory rescue projects. More charging, no hard depletion, or an open
+parent question is not an affirmative usefulness argument.
+
+**End the current analytical I/C investment; retain P as the ordinary comparator,
+not a claim of universal superiority or safety.** No larger model, learner,
+queue guard, extra horizon, parameter sweep, confirmation or panel extension is
+selected. The direction returns to **reserve with no active producer or unread
+result**, not a fabricated dependency on owner approval. The broader whole-fleet
+question is not refuted. A concrete re-entry would require a substantive new
+candidate with a discriminating comparative prediction against P; the observed
+tails or unused capacity alone are insufficient. Cross-question allocation
+returns to Root through the native child, with no App messaging or automatic
+successor. The independent reviewer supports stopping now, not funding another
+diagnostic ladder.
+
+### Retirement and actual space reclaimed
+
+Source import/entry/test searches found no code consumer outside this direction;
+all implementers/reviewers finished writing, the critic reads Git/canonical raw,
+and no native worker or observer remains active. Preserve both studies' compact
+records and necessary unique raw data, including every adverse world. Historical
+implementation and tests remain pinned at
+[B02 source](https://github.com/CartmanFatass/My-paper-code/tree/2b66dc5125323326bc80709cb02a59111c1fc678/experiments/candidates/uav_energy_coordination)
+and B01's original`e663b53c7ea3f52983365ed9c3ce044bc4ccf699`.
+
+The native snapshot collector found exactly
+`.git/hmasd-launch-sources/101d9dc03932405d8c154bd90f9ef183` eligible; its existing
+passwordless read-only process scan, terminal identities, source reachability and
+external output checks passed. Apply under the remote writer lock removed it,
+**800,055,296 to0 allocated bytes**, with actual absence checked. Its claim,
+manifests and unique outputs were not deleted. The remote readback scratch file
+and empty owned directory were removed, **12,288 to0 bytes**. The local observer
+request/readback source and empty owned temp directory were removed,
+**16,384 to0 bytes**. Empty local log copies used zero allocated bytes; originals
+remain at the node.
+
+The17 unused tracked implementation/entry/test files and generated bytecode in
+`experiments/candidates/uav_energy_coordination/` and
+`tests/experiments/candidates/uav_energy_coordination/` were retired from current
+main after the consumer check: **499,712 to0 allocated bytes**. Their published
+versions remain recoverable; no standing maintenance or compatibility promise
+is implied. Total reduction across these cleanup targets is **800,583,680
+allocated bytes**. This is target working-tree allocation, not Git-object
+reclamation or a whole-host capacity claim. No redundant snapshot/scratch or
+concrete cleanup blocker remains, and no backup chain was created.

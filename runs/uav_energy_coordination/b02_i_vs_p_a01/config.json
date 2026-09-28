@@ -1,0 +1,307 @@
+{
+  "I_max_score_requests": 58800,
+  "I_max_service_snapshots": 176400,
+  "P_max_candidate_scores": 21600,
+  "P_max_service_snapshots": 45600,
+  "P_max_shared_q0_snapshots": 2400,
+  "arms": [
+    "I",
+    "P"
+  ],
+  "batch": "b02_i_vs_p_a01",
+  "combined_max_service_snapshots": 222000,
+  "comparison": "complete I minus complete P, native J/service/risk and separate compute",
+  "cost_meanings": {
+    "controller_wall_seconds": "full proposal wall including P projections/deep copies",
+    "decision_tick_wall_seconds": "wall time in controller decisions; includes fallback clocks",
+    "p_shared_baseline_snapshots": "one native q0 per active P decision clock",
+    "score_requests": "I requested whole plans or P candidate plan scores",
+    "service_snapshots": "actual native scorer/routing calls including P shared q0",
+    "worker_wall_seconds": "whole native world, summed separately from invocation elapsed"
+  },
+  "declared_source_input_bytes": 124677,
+  "direction": "uav_energy_coordination",
+  "effective_raw": {
+    "battery_capacity_wh": 160.0,
+    "charging_station_capacity": [
+      1.0,
+      1.0
+    ],
+    "energy_stage": "S2",
+    "failure_enabled": false,
+    "max_steps": 3000,
+    "n_charging_stations": 2,
+    "n_ground_bs": 1,
+    "n_uavs": 8,
+    "n_users": 30,
+    "return_reserve_ratio": 0.1,
+    "routing_protocol": "widest_path",
+    "service_cutoff_threshold": 0.02
+  },
+  "fits": 0,
+  "horizon": 3000,
+  "jobs": [
+    {
+      "arm": "I",
+      "job_key": "I/41092801",
+      "seed": 41092801
+    },
+    {
+      "arm": "P",
+      "job_key": "P/41092801",
+      "seed": 41092801
+    },
+    {
+      "arm": "I",
+      "job_key": "I/41092802",
+      "seed": 41092802
+    },
+    {
+      "arm": "P",
+      "job_key": "P/41092802",
+      "seed": 41092802
+    },
+    {
+      "arm": "I",
+      "job_key": "I/41092803",
+      "seed": 41092803
+    },
+    {
+      "arm": "P",
+      "job_key": "P/41092803",
+      "seed": 41092803
+    },
+    {
+      "arm": "I",
+      "job_key": "I/41092804",
+      "seed": 41092804
+    },
+    {
+      "arm": "P",
+      "job_key": "P/41092804",
+      "seed": 41092804
+    },
+    {
+      "arm": "I",
+      "job_key": "I/41092805",
+      "seed": 41092805
+    },
+    {
+      "arm": "P",
+      "job_key": "P/41092805",
+      "seed": 41092805
+    },
+    {
+      "arm": "I",
+      "job_key": "I/41092806",
+      "seed": 41092806
+    },
+    {
+      "arm": "P",
+      "job_key": "P/41092806",
+      "seed": 41092806
+    },
+    {
+      "arm": "I",
+      "job_key": "I/41092807",
+      "seed": 41092807
+    },
+    {
+      "arm": "P",
+      "job_key": "P/41092807",
+      "seed": 41092807
+    },
+    {
+      "arm": "I",
+      "job_key": "I/41092808",
+      "seed": 41092808
+    },
+    {
+      "arm": "P",
+      "job_key": "P/41092808",
+      "seed": 41092808
+    }
+  ],
+  "launch_sha": "2b66dc5125323326bc80709cb02a59111c1fc678",
+  "max_episodes": 16,
+  "max_transitions": 48000,
+  "observation_layout": {
+    "fields": {
+      "bs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hmax",
+        "visibility_flag"
+      ],
+      "energy_stations": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "dist3d/map_diag3d",
+        "capacity_ratio",
+        "available_ratio",
+        "queue_len/n_uavs",
+        "valid"
+      ],
+      "energy_uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "battery_ratio",
+        "charging",
+        "available",
+        "returning(limp_home or dock_request)",
+        "load=connections/n_users",
+        "dock_request",
+        "target_station/(n_stations-1) or -1",
+        "charging_wait_steps/max_steps",
+        "return_threshold_ratio",
+        "return_energy_margin"
+      ],
+      "nearest_uav": [
+        "dist/area",
+        "rel_x/area",
+        "rel_y/area"
+      ],
+      "overloaded": [
+        "rel_x/area",
+        "rel_y/area",
+        "load/max_connections"
+      ],
+      "own": [
+        "x/area",
+        "y/area",
+        "(z-hmin)/hspan"
+      ],
+      "self_state": [
+        "connected_users/max_connections",
+        "has_backhaul",
+        "hops/max_hops",
+        "nearest_bs_rel_x/area",
+        "nearest_bs_rel_y/area"
+      ],
+      "step": [
+        "current_step/max_steps"
+      ],
+      "uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "(rel_z-hmin)/hspan",
+        "clip((sinr_db+10)/50,0,1)"
+      ],
+      "users": [
+        "rel_x/area",
+        "rel_y/area",
+        "clip((sinr_db+10)/50,0,1)",
+        "connected_to_self",
+        "serviced_by_any",
+        "serving_set_len/serving_set_size"
+      ]
+    },
+    "offsets": {
+      "bs": [
+        223,
+        235
+      ],
+      "dim": [
+        0,
+        365
+      ],
+      "energy_stations": [
+        349,
+        365
+      ],
+      "energy_uavs": [
+        245,
+        349
+      ],
+      "nearest_uav": [
+        3,
+        6
+      ],
+      "overloaded": [
+        235,
+        244
+      ],
+      "own": [
+        0,
+        3
+      ],
+      "self_state": [
+        6,
+        11
+      ],
+      "step": [
+        244,
+        245
+      ],
+      "uavs": [
+        191,
+        223
+      ],
+      "users": [
+        11,
+        191
+      ]
+    },
+    "parameters": {
+      "area_size_m": 8000.0,
+      "bs_fields": 4,
+      "bs_slots": 3,
+      "energy_station_fields": 8,
+      "energy_station_records": 2,
+      "energy_uav_fields": 13,
+      "energy_uav_records": 8,
+      "height_max_m": 200.0,
+      "height_min_m": 50.0,
+      "max_connections": 25,
+      "max_hops": 5,
+      "max_steps": 3000,
+      "n_uavs": 8,
+      "n_users": 30,
+      "observation_radius_m": 1500.0,
+      "overloaded_fields": 3,
+      "overloaded_slots": 3,
+      "self_state_fields": 5,
+      "serving_set_size": 3,
+      "uav_fields": 4,
+      "uav_slots": 8,
+      "user_fields": 6,
+      "user_slots": 30
+    }
+  },
+  "optimizer_updates": 0,
+  "pairing": "same seed; initial state, full user path and native RNG stream hashed",
+  "primitive_forecast_steps": 0,
+  "seeds": [
+    41092801,
+    41092802,
+    41092803,
+    41092804,
+    41092805,
+    41092806,
+    41092807,
+    41092808
+  ],
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "source_records": {
+    "I_source": "e663b53c7ea3f52983365ed9c3ce044bc4ccf699",
+    "P_B05_reuse_source": "754d5d34d905a81b58b78e69ae85b8a07cb19aad",
+    "P_source": "025350669bc5e8ab99fc71954f749ae47a6853e9",
+    "sha256": {
+      "experiments/candidates/energy_relay_availability/b04/transit_hold.py": "1e56e68759f7992d2da39e5f27cc1d71a516f580f0616cc2c0240e15ce776791",
+      "experiments/candidates/energy_relay_benchmark/b01/evaluation.py": "15391e2eafff0876dd0bfa94a0d8f9f96558c76254e8d73cb8e55426735eccd7",
+      "experiments/candidates/energy_relay_benchmark/b01/feedback.py": "0cb8cc14d7d63ea6dd6bbc84c830e01c06837507acd70b8fd29ae6411a6c13d2",
+      "experiments/candidates/energy_relay_benchmark/b01/heuristic.py": "f82bbcc1d6586ae41acbb720b225b294c3dff812246e88f15f699b2d9146351e",
+      "experiments/candidates/energy_relay_benchmark/b01/observation.py": "baa416c9067504fdeb2656b376768ed06c3febe440c358c92c7281922791536f",
+      "experiments/candidates/uav_energy_coordination/b01/controller.py": "49a7cb8c21115eabfd8bbdc62cf2eb141f72b9ceb7a5fafb34b9cd5761b8a70c",
+      "experiments/candidates/uav_energy_coordination/b01/itinerary.py": "0afd87c74ceeff2b4558b6a96e79636090a7b27e0f71898aedd044e2523f774b"
+    }
+  },
+  "threads_per_worker": 1,
+  "trace_timing": "Row t of own_xyz, return_margin, nearest_station, nearest_station_distance_m, station_occupancy, station_queue and target_xy is decoded from the legal observation the controller and shield act on at step t (decision time, same as mode/entered/exited). charging, waiting_steps and battery row t are decoded from the post-step observation (t+1), so station_occupancy[t].sum() pairs with charging[t-1].sum(). guard_checked/guard_blocked row t count the guard actions of step t.",
+  "workers": 2
+}
