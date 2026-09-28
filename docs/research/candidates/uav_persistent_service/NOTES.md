@@ -783,3 +783,78 @@ reward or optimizer revision is not this direction's next task by default.
 Cross-question proposals return to Root; publication and cleanup below are my
 remaining in-scope work. No additional selection critic or Pro round is needed
 for this uncontested, independently read disposition.
+
+### Publication, retention and measured cleanup
+
+The complete result, full independent answer and own RESEARCH/background standing
+were published and verified at `origin/main` in
+`ad55c6e43fdbd38bf78abc42f9e48e762535b357`. Root subsequently read the full answer
+and compact records and adopted conditional-O/stop-L, with no additional run.
+This acknowledgement was not a prerequisite for my publication or cleanup.
+
+The one canonical bulk copy is now on `wsl_4070` at
+`/home/wu/hmasd-artifacts/uav_persistent_service/b01_commitment_a01/`.
+Only `raw/`, `training/`, `initial.zip` and `endpoint.zip` were moved there from
+the completed native output, without a symlink or changed in-flight binding.
+All290 bulk files,324956354 bytes, were reverified against the original runner
+manifest. Its SHA256 is
+`b351ed14cadb62bf20a7a71c659bc6841c6f9f7ee636f26d05f007a86c9ff7f7`;
+bulk relative paths resolve under this canonical root, while the four compact
+manifest entries remain in Git and the original native output. Together these
+preserve all294 files originally verified. The endpoint is2896988 bytes,
+SHA256 `12375027e5a806c3ab205626aaf8401d3f04cfd0f5fc9e1254784a7dc8552493`;
+the initial checkpoint is986822 bytes,
+SHA256 `c03e59d046e308a20b787abc5a8e403e8d3cae821b8b6638760b025b0154d2a6`.
+These two endpoints, training/decision/gradient evidence and all original native
+arrays support the specific exposure, unchanged-deployment, ordinary-package
+and arrival-mismatch readings. They are not an unselected continuation or a
+chain of backups. Compact native claims, manifests, stdout/stderr, exit/status
+and scientific summaries remain at the original output path for recovery and
+duplicate prevention; claim/manifest/source identities were not rewritten.
+
+Before deletion I checked completed worker/observer status, read-only helper
+completion, imports, tests and current entrypoint consumers. No other direction
+imports this direction, and no live result or review consumer remained. Useful
+ordinary `controllers.py`, native evaluator, passive mechanism/readout code,
+constants, checkpoint policy class and controller tests remain on main. The
+retained policy class permits reading the exact stored learned checkpoint; it
+does not authorize retraining. The ended `batch.py`, `training.py`, `run_b01.py`
+and `test_pipeline.py` were removed from the current tree. Their exact executed
+versions and all14 input tests remain at
+[source981e935ee](https://github.com/CartmanFatass/My-paper-code/tree/981e935ee336cbdde3f3b69f229019384376ba5f/experiments/candidates/uav_persistent_service)
+and its matching tests. No detector repair was made. A final import/collection
+check collects the five retained controller tests in1.89s; it executes zero
+native steps/optimizer updates and does not replace the original14-test run.
+There are no references to the retired modules from current executable callers.
+
+Actual deleted targets are the local duplicate `runs/uav_persistent_service/
+b01_commitment_a01/{raw,training,initial.zip,endpoint.zip}`, local
+`temp/directions/uav_persistent_service/`, the two direction code/test
+`__pycache__/` directories, the four retired source/test files above, remote
+`/home/wu/projects/HMASD/temp/directions/uav_persistent_service/`, and the
+launcher source snapshot
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/014187470de74ecf8da122a04d9baf31`.
+The supported exact-snapshot collector first refused because `/proc/660/cwd`
+was protected. Retrying its documented read-only process probe with existing
+passwordless `--sudo-process-scan` gave an eligible preview; apply rechecked
+terminal/source/durable-ref/clean-file conditions and removed only this snapshot.
+The refusal is preserved here; it did not require changing any peer process,
+claim, output or Git history. The original auto-GC warning was not repaired.
+
+Allocated-byte measurements include the canonical bulk destination, so moving
+data is not counted as reclaiming it:
+
+| Host and exact owned scope | Before | After | Net freed |
+|---|---:|---:|---:|
+| Local code/tests/run/scratch directories | 326852608 | 983040 | 325869568 |
+| Remote snapshot/original output/scratch plus new canonical direction directory | 1127063552 | 326430720 | 800632832 |
+| Total | 1453916160 | 327413760 | **1126502400** |
+
+All eleven local deleted targets and both remote deletion targets were checked
+absent. The canonical bulk store remains intentionally,325681152 allocated
+bytes including the new direction directory; compact native output remains
+749568 bytes. No blocked cleanup target, open observation, active producer,
+unread result, pending advice or selected new experiment remains. Unrelated
+writers' source, untracked files and accepted operations were preserved. This
+is a measured working/output-filesystem reduction, not a claim about Git object
+pack size or total host free space.
