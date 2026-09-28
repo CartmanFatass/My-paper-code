@@ -735,3 +735,110 @@ Net allocated space reclaimed across the exact remote/local deleted targets is
 allocation reduction, not a claim about Git object-store or filesystem capacity.
 No required evidence was discarded, no backup package was made, and no cleanup
 tool blocker or accepted operation remains for B01.
+
+### 2026-09-28 - B02 selected: lawful station-prior BS fallback
+
+Root selected the preceding independent review's concrete next question after
+B01's complete publication (`65d6c5165`): can an ordinary estimate from already
+legal station coordinates recover useful complete native service/J beyond H_BS
+before a genuine BS sighting? B01 remains closed and immutable. Reuse the
+context-isolated result review above, whose fixed ordinary comparison and
+32-fresh-pair recommendation directly cover this selection; no duplicate
+scientific gate or prerequisite coordinate-accuracy study is added.
+
+Current published background at `c669878d1`, [RESEARCH section 2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练),
+changes the comparator to ordinary H_BS, not forgetting L: BS-source usefulness
+was large under H1 while memory had four adverse active worlds and 17 never-seen
+worlds. Sections 6/8 keep this a fixed-program, initial-world comparison, not an
+optimal information decomposition, new learning evidence or a pure mediator
+effect. The strongest simpler explanation for an advantage is that H1's
+missing-BS branch omits relays despite available station-layout information.
+The contrary prediction is that noisy inferred anchors misplace relays, displace
+service/search or add return risk enough to cancel any service gain. Native
+shield, moving users, shared stations and team assignment remain coupled.
+
+Two frozen programs only: `H_BS`, exactly the published ordinary legal-user and
+once-legally-seen BS controller; and `P_BS`, that same controller with a station
+prior while no BS has ever legally been seen. On the first decision after reset,
+decode station IDs 0 and 1 from their existing globally legal energy records,
+using the first valid observer for each. Form
+`b_hat = clip((station0_xy - .3 * station1_xy) / .7, 0, 8000)` coordinate-wise.
+Freeze this one estimate for the episode; no fitting, tuning, subsequent station
+re-estimation, confidence calibration or hidden-state correction. If either
+station has no valid finite reset record, no estimate is created and ordinary
+H_BS applies. Missing station records in synthetic tests do not change the actual
+two-station S2 contract.
+
+Inferred coordinates and observed memory remain distinct. A genuine legal BS
+sighting at any primitive step updates observed memory and takes permanent
+priority over the estimate, including when the BS later becomes absent. Replan
+remains every 30 calls, with exactly the common sort-then-merge users, H1 target
+generation, six service/two relay slots, Hungarian assignment, hysteresis,
+speed/altitude and ordinary search fallback. The controller accepts no raw env,
+never reads state/true BS/true initial user mean/RNG, and never fabricates a legal
+sighting or rewrites an observation. The source relation remains noisy due to
+960 m jitter, clipping and rejection; this is neither exact recovery nor a
+calibrated belief.
+
+Fixed fresh panel: **seeds 28100201-28100232**, every seed run once with H_BS and
+once with P_BS, **64 full S2/H3000 episodes, at most 192,000 native transitions,
+zero fits/updates**. None is selected from B01's 17-world subgroup. Output tag
+`b02_station_prior_a01`. No old panel, auxiliary truth arm, early stopping on
+scores, panel extension or automatic retry. A native early termination is retained
+at its actual length; an exception or incomplete cell prevents a complete paired
+claim and creates no substitute episode. Source SHA will be pinned by the native
+manifest after focused tests and engineering review, before exposure.
+
+Primary reading is paired total native J; QoS/step is its service consequence,
+not independent corroboration. Retain all native metric sums/means, sign counts,
+paired nominal t95 intervals and every adverse world; intervals are exploratory,
+not multiplicity-adjusted or confirmation. Positive mean J and QoS with a J
+interval wholly above zero supports this fixed fallback's conditional usefulness;
+an interval crossing zero leaves the mean benefit unresolved, not equivalent.
+More sightings or changed planning without complete J/service improvement does
+not support utility. A loss rejects this package, not all lawful inference or
+active acquisition. No result automatically buys a wider panel or learner.
+
+**Prospective practical risk reading.** Use the unchanged native reserve ratio
+.10, not a tuned new threshold. Preserve native cutoff/depletion counts, capped
+and raw return-cost tails, exact native per-UAV battery traces, time at/below
+reserve and final reserve counts. Do not recommend default replacement if P_BS
+adds cutoff/depletion events or leaves more UAVs at/below reserve at H3000 in any
+paired world. Higher mean return cost or a worse panel battery minimum is also
+an explicit risk tradeoff, never erased by positive mean J. Conditional service
+value may survive such a tradeoff, but it is not risk dominance or a deployed
+safety guarantee. All individual J/service losses are reported whether or not
+those risk conditions trigger. Zero events cannot establish safety or sustainable
+cycling beyond this horizon.
+
+The candidate predicts that inferred BS coordinates are used at pre-sighting
+replans and thereby enable the ordinary relay branch where legal users suffice;
+the empirical prediction is a positive complete J/service difference. Prior-used
+plan counts and true legal first-sighting times diagnose activation; later
+sightings, user visibility and policy trajectories are endogenous consequences,
+not a separately randomized information mechanism. No coordinate-error result
+is required or used to select the recipe. The other active-sensing contract
+requires a known legal BS and does not cover this initial-inference intervention.
+
+Compute: configured `wsl_4070`, scientific Python
+`/home/wu/.venvs/hmasd/bin/python`, four worker processes with one numerical
+thread each, subject to fresh actual-node native admission. B01 rate scaling
+suggests 20-25 node minutes and about 1.4 summed worker CPU hours before contention;
+engineering, review, readback and storage add real cost. Retain compact originals
+in Git and one hashed native trace copy outside the shared sparse checkout at
+completion. No new dependency installation or device/precision switch is selected.
+
+L0: add only `experiments/candidates/uav_information_value/b02/`, the direction's
+`run_b02.py`, and matching `tests/.../uav_information_value/b02/`; do not change
+B01 source/outputs or active-sensing consumers. Reuse published native evaluator,
+H_BS/PointSetHeuristic, effective S2 checks and bounded execution utilities.
+The bounded Implementer owns the B02 prior-controller module and its tests only;
+DM owns runner/readout/entrypoint, notebook and publication. Checks cover lawful
+station ID decoding, projection, reset freezing, observed-sighting priority and
+retention, no observation/state/environment leakage, H_BS off-path parity, common
+planner inputs, risk accounting, fixed-panel/failure serialization and a short
+nonpanel native observer-off/on fixture. No correctness test may expose these 32
+result seeds. Independent engineering review is required for the final executable
+contract. Publish exact inputs, launch once, keep this child active through
+same-handle deterministic waiting, collect/read the complete record, obtain the
+required independent result diagnosis and publish the disposition before return.
