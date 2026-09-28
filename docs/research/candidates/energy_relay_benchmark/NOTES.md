@@ -6833,6 +6833,304 @@ Constraints: seeds and matched baseline per constitution section 8; no training,
 Return: an independent scientific review of the successor choice (constitution section 5), answering in order: (1) Facts to verify against the files — (a) the b05 primary table and the by-corner cells in `readers.json` `pairs` (`B_minus_CSW_*`, `metrics.qos_per_step`), including `worlds_a_below_b_qos` counts; (b) the executor reading in `b01/heuristic.py` (velocity = Δ/dt scaled only above cruise; hover on arrival) on which the critic's finding 1 rests; (c) the memo's outcome table §4 and the critic's withdrawal of its two belief rows; (d) whether O's "c00 ≈ H_central@10" holds by construction or needs a zero-initialised output mean (critic: SET c00's deterministic mean is near zero but drifts). (2) Decision exposure: for each of W′, O, N, which owner-level belief, ordinary reference or investment each plausible outcome (clear positive / flat within ≈ .03 / clear negative / technical failure) changes, given that H_central@10 .769 is the standing planning answer and one instance is a conditional observation inside a ≈ .05–.12 instance spread; state what the modal outcome concedes before it is bought. (3) Novelty and framing: mark W′, O and any alternative you propose TRIED / RECORDED / NEW against the July record (R29–R54, the n_k literature deep-dive), the new-libs index and the memo's §7; say plainly whether each is a genuinely new cooperative-planning question in the owner's sense or a re-skinned action space / residual policy over a baseline, and, if neither W′ nor O qualifies, what would (one concrete candidate at most, with its comparator, discriminating prediction and cost — no idea is required). (4) The strongest simpler alternative for each option and the reading (zero-fit if possible) that would show it before or inside the fit. (5) Omitted MARL coupling: for W′ and O, what a single-agent or bandit prototype would omit (simultaneous offsets, relay-chain externalities, shared team reward, shield in the physical frame) and whether the design exposes that coupling at all. (6) Overlap: which Root estimand (persistent_service commitments; joint_transition's common destinations; radio_placement's target generation) each option must not duplicate and whether it is complementary. (7) Your ranked recommendation among W′ / O / N (or your candidate), the one declaration change that would make the first-ranked option worth its fit, and what should be put to the owner as the direction-level choice. (8) MATERIAL_DISSENT yes/no with the one change that would resolve it. Mark each statement SOURCE FACT / DERIVATION / CONJECTURE.
 ### Answer
 
+_Recorded verbatim by the DM from the Jev transport's answer file (saved from chat; key `hmasd:7d5897c3…`, answer sha256 `cecbfbde…`, 13,148 chars, ChatGPT 6 Pro; `deliver` → NOT_DELIVERED: Pro could read the pinned source through the connector but did not write — its first paragraph explains why). Pro's own delivery note is the first paragraph._
+
+【SOURCE FACT｜读取与写入状态】 GitHub 读取可用。本评审以固定提交 fc8e78b7efc5241dbfca2dd2c37db85d34be66ba 为来源；目标为 CartmanFatass/My-paper-code 的 docs/research/candidates/energy_relay_benchmark/NOTES.md。最后刷新时，指定 ### Answer 仍为空，文件实际 blob SHA 为 be4191555632cb80bf3aa01f63430e647672b7d0。这是文件 blob，不是本次答复的提交。
+
+【SOURCE FACT｜写入限制】 本次未完成安全写入、未修改仓库、没有产生 commit。可用写接口要求提交整份文件的替换文本；我未取得可在运行环境中按字节保留并安全回写的完整文件副本，不能用已读取的局部内容替换约 733 KB 的 NOTES。因此没有发送覆盖请求；这不是一次已收到的权限拒绝。以下给出完整答复。
+
+1. 文件事实核验
+1.1 b05 主表、分角结果与证据边界
+
+【SOURCE FACT】 readers.json 的四个 B_minus_CSW_* 配对均包含 32 个匹配世界。以下差值是 metrics.qos_per_step 的 B − C_SW；SE 是该实例下的配对世界均值标准误，不是训练种子标准差。主表与 NOTES 的结果记录一致。
+
+【SOURCE FACT】面板	B QoS/step	C_SW QoS/step	B − C_SW	配对 SE	worlds_a_below_b_qos 数量
+dev，deterministic	.3773	.4574	−.080166	.017903	24/32
+dev，stochastic	.3797	.4635	−.083841	.022580	22/32
+hold-out，deterministic	.3742	.4631	−.088876	.019531	26/32
+hold-out，stochastic	.4486	.4774	−.028801	.021265	19/32
+
+【SOURCE FACT】 分角单元格如下。每格写作“平均 B − C_SW；B 低于 C_SW 的世界数 / 该角世界数”。dev 的角样本量为 13、5、6、8；hold-out 为 9、5、10、8，不能把四角均值直接等权平均成全体均值。
+
+【SOURCE FACT】spawn corner	dev det	dev stoch	hold-out det	hold-out stoch
+W,S	−.105489；12/13	−.123903；11/13	−.118247；9/9	−.093155；8/9
+W,N	−.028543；2/5	−.018730；2/5	−.116836；4/5	+.063636；0/5
+E,S	−.037063；4/6	−.065007；4/6	−.052642；7/10	+.011609；6/10
+E,N	−.103608；6/8	−.073559；5/8	−.083649；6/8	−.064689；5/8
+
+【DERIVATION】 b05 的主读数确实 adverse，但必须保留三项限定。第一，hold-out stochastic 的 −.0288 落在题目所说约 ±.03 的描述性平带内，不能把四格都称作同等强度的明显负效应。第二，hold-out stochastic 的 W,N 五个世界全部改善，E,S 则是均值微正而 6/10 世界变差，显示明显异质性。第三，两个最差角与早期边界占比上升的共同出现，不足以识别“边界行为导致退化”。
+
+【SOURCE FACT】 已读取四份 C_SW 原始面板。其 QoS 均值分别为 .4574372616、.4635105971、.4630742450、.4773722751，均为 32 个完成世界，与读数表吻合。
+
+【SOURCE FACT｜关键缺口】 固定提交上的 B dev 原始面板文件及 B hold-out 的 panels 路径读取返回 404；B dev 目录可见配置、状态、summary 等记录，而非所要求的原始面板。readers.json 中保留了配对读数及外部原始文件定位信息，但我没有访问到那些运行节点上的 B 原始字节。故本次完成的是核对已发布主表、reader 配对与分角结果，并检查 C_SW 原始面板，不是从双方原始世界记录独立重算全部差值或验证所有原始文件哈希。该缺口不等于原始数据已经丢失。
+
+【SOURCE FACT】 b05 确实消除了原先那种 map-fixed heading：应使用同口径的 legacy R_map，B 约 .148 对原始 c06 约 .60，而不是拿 .015 的另一种分层统计与 .60 比。P1、P2 未通过，饱和占比近零；相对于未包装 c06 的两线程原始面板，差值是 dev −.059/−.058、hold-out −.088 det / +.009 stoch，但这些是描述性参照，不是取代 B−C_SW 的主比较。
+
+【DERIVATION】 能成立的结论是：“这次 canonical-frame 训练改变了策略的空间参照，却没有改善所声明的主要服务比较。”不能升级为“表示修复无效”“合作规划没有机会”，也不能把 hold-out stochastic 相对另一个较弱参照的 +.009 重新包装为成功。
+
+1.2 执行器：critic 的核心纠正成立
+
+【SOURCE FACT】 b01/heuristic.py 的 go-to 执行器先计算朝目标的速度 Δ/dt，仅在其模长超过 cruise speed 时缩放；到达目标后水平速度为零。高度另由朝目标高度的控制器处理。该函数不是搜索路径、避障或优化联合轨迹的规划器。
+
+【DERIVATION】 在所述 dt=1 s、cruise 30 m/s 下，距离超过 30 m 的目标首先以巡航速度直飞，近目标才在最后一步降低速度，到达后悬停。300 m 与十步保持的组合，主要提供的是“方向、飞行距离和到达后停止”的参数化，不是一个替 learner 完成合作路径优化的低层规划器。critic 对此的纠正成立。
+
+【DERIVATION】 但“W′ 只是完全相同策略类的数学重命名”也过强。宏动作保持、到达后悬停、固定高度以及更新语义确实改变可实现行为和学习问题。准确表述应是：它是若干工程选择共同改变的 learner package，当前没有单独识别合作规划创新。
+
+1.3 memo §4 的结果表：撤回的不是数字，而是两条因果解释
+
+【SOURCE FACT】 原 memo 以 learner 参照定义的 
+𝐿
+𝑊
+L
+W
+	​
+
+ 设置了：约 ≥+.10 的明显提升、+.05～+.10 的较弱提升、|L_W|<.05 的平结果、W≥.70 的普通规划竞争分支、≤−.05 的负结果，以及技术失败分支。它把较大 learner 提升解释为接口/节拍问题获得支持，把平结果解释为接口不是主要杠杆、问题更接近 placement/credit。critic 要求撤回这两条归因，因为至少同时改变了动作接口、节拍、PPO 时间语义、有效更新样本、速度轨迹和高度控制。
+
+【DERIVATION】 我同意撤回这两条信念更新。W′ 正结果只能先支持“这个 package 比所配对的比较对象更有价值”；平或负结果只能削弱“这个 package 在此次资源合同下有价值”。均不能单凭该 fit 区分接口、节拍、位置学习、信用分配或一般有限训练能力。
+
+【DERIVATION】 对 critic 的 .70 说法还需要再收紧：.70 仍比 H_central@10 的 .769 低 .069。它可以改变继续投资的意愿，不能直接改变“哪种规划目前最好”的答案。同理，从 SET 约 .437 提高 .10 到约 .54，仍低于 H_local .597，更没有击败 H_central@10。普通参照数字见固定问题及轮界记录。
+
+1.4 O 的 c00：需要构造并检查恒等性
+
+【SOURCE FACT】 B02 配置保存训练前 c00，但配置本身没有给出“所有输入下输出残差严格为零”的保证。critic 报告的是 SET c00 deterministic mean 接近零、仍会漂移，而不是一条已经证明的 H 恒等性。我没有独立检查 c00 权重张量。
+
+【DERIVATION】 O 应声明为
+
+𝑔
+𝑖
+𝑂
+(
+𝑡
+)
+=
+𝑔
+𝑖
+𝐻
+@
+10
+(
+𝑡
+)
++
+𝛿
+𝑖
+(
+𝑡
+)
+,
+g
+i
+O
+	​
+
+(t)=g
+i
+H@10
+	​
+
+(t)+δ
+i
+	​
+
+(t),
+
+并把以下要求当作同一个“零残差恒等合同”：初始化输出均值头的权重和偏置为零，或显式关闭残差支路；保持 H 的目标分配、滞回、平局规则、时钟、目标记忆、高度、护盾和资格判定不变；边界处理满足 
+𝛿
+=
+0
+δ=0 时不改写 H。尤其不能把 W′ 的“以当前位置为中心的 300 m 目标盘”不加区别地套到 O 的完整 H 目标上。
+
+【DERIVATION】 只有在上述条件成立时，deterministic zero-residual c00 才应逐动作、逐轨迹等于 H，浮点差异按事先约定容差检查。零均值不等于随机样本为零；带非零探索方差的 stochastic c00 没有这个保证。不能同时以确定性零残差证明“不损伤 H”，又把带噪探索的实际学习过程说成受到同样保护。
+
+2. 决策暴露：每种结果究竟改变什么
+
+【SOURCE FACT】 冻结宿主上，普通规划仍领先；S7 的训练种子 SD 未测量，约 .05～.12 是实例/检查点间的既有变化幅度。宪章区分单实例探索观察与一般 learner 主张，要求合格匹配基线及独立训练种子；第一项声明不自带确认批次。
+
+【DERIVATION】 应以新实验中的匹配差值
+
+𝐷
+𝐻
+(
+𝑋
+)
+=
+𝑄
+(
+𝑋
+)
+−
+𝑄
+(
+𝐻
+central
+@
+10
+)
+D
+H
+	​
+
+(X)=Q(X)−Q(H
+central@10
+	​
+
+)
+
+为主要决策量，O 再看匹配的 
+𝐷
+𝑅
+(
+𝑂
+)
+D
+R
+	​
+
+(O)。.769 是 standing reference，不是可以跨面板、跨时钟直接相减的不可变常数。约 ±.03 是本次投资判断的描述性平带，不是等效检验；超过 .03 或 .10 也不会自动消除训练实例不确定性。32 个评估世界不能替代 32 个训练种子。
+
+下表各项为 【DERIVATION】，描述允许的决策更新，不是结果预测。
+
+选项	明显正结果	约 ±.03 的平结果	明显负结果	技术失败
+W′	只胜 SET/C_SW：支持 learner 工程改进，普通 H 仍是答案。只有相对匹配 H 有实质收益，或事前声明且实际测得的计算成本优势，才改变 owner 层面的规划投资判断；仍不支持六项改动中的单项归因。	必须说明“相对谁平”。相对 learner 平，意味着仍保留大幅普通规划差距；相对 H 平，只是此次达到普通水平，不等于增强合作。	削弱该 package 在当前预算下的价值。比 H 差但比 SET 好，不应同时被称作主线成功和主比较失败。	不更新“学习无价值”的科学判断；只处理实现/恢复合同，不由故障自动批准更多 fit。
+O	胜 H 但不胜同合同 R：普通 radio-aware target 工程已可吸收收益。胜 H 和 R，且收益不能由简单独立偏移解释，才支持条件性的 learned joint-target value。	零残差本来就应保存 H；训练后仍相近，不证明增强，也不证明学习到了合作。通常不值得以更多复杂性替换 H。	表明残差探索或优化损坏了合格基线；不能由此推出邻域内不存在合作机会。	c00 恒等检查失败首先是比较合同失败，不是 MARL 负结果；训练故障也不能当负效应。
+N	数据、宿主合同及完整联合轨迹显示存在可形成问题的机会：允许形成下一项声明，不自动批准 fit。	普通方法已解释主要收益，或机会小于该宿主的测量不确定性：保持“没有就绪的新 learner 问题”。不能把 S7 的 ±.03 QoS 生搬到 T3 的原生指标。	宿主物理限制使所需改善不可达，或问题与 owner 主线不符：放弃 T3 作为下一宿主，而不是否定 MARL。	缓存、数据划分或执行合同无法验证：结论是未就绪/未知，不是“机会为零”。
+
+【CONJECTURE｜购入前应承认的常见结果】 W′ 更可能恢复一部分 learner 差距，而非超越合格普通规划。宏动作可能减轻控制负担，也可能因有效决策样本减少而更难学；目前没有直接证据告诉我们哪种效应占优。不能仅凭“b05 失败，所以换目标接口应成功”购买第三次本方向 fit。
+
+【CONJECTURE｜购入前应承认的常见结果】 O 更可能得到接近 H 的结果、小幅收益或探索损伤，而不是一个新的合作机制。这个判断不是从几次不同设计的 null 中估计出的失败概率。O 的优势是更清楚地围绕一个合格普通策略问增量价值，而不是已有证据证明它更容易成功。
+
+【DERIVATION｜N 的预先让步】 选择 N 必须直说：现在没有决定下一项 MARL 学习问题。 它决定的是停止这项 S7-S2 学习投入，以及是否值得花一笔有限的零-fit 成本检查 T3；不能把这项资源决定包装成“已经迁移到有实测机会的新主线”。
+
+3. 新颖性与表述：TRIED / RECORDED / NEW
+3.1 历史记录实际提供的约束
+
+【SOURCE FACT】 R29–R34 的复盘已经区分了动作/信息效应、组合效果和真正的服务收益；R35–R40 进一步记录了“表示或机制能够表达所需行为”并不等于“学习到了有用行为”。这些历史结果不构成禁止新 RL 实验的规则，但足以否定“接口变了，所以合作问题也新了”的推理。
+
+【SOURCE FACT】 R41B 后提出了零输出的 incumbent-roster/logit residual，R42 实际尝试了这一机制；R43 记录了继续优化损坏固定正基线，R44 则记录了参数更新并未带来所需行为改变。因此，“残差这一技术家族在本地从未尝试”不准确；但它们也不是 H 的 UAV 目标偏移实验。
+
+【SOURCE FACT】 R45–R48 区分了自然过程相关性、信用识别和实际行为支持；特别是 R46 的 learner 失败并不等于 oracle 枚举中没有异质机会。其后的 variable-team/ORSE、R51–R54 记录，也没有把置换、生命周期或接口测试通过自动升级为有效合作学习；R52 的目标修正与 R53/R54 的参照门槛都说明比较对象和判别预测不可省略。
+
+【SOURCE FACT】 n_k deep-dive 已记录宏时间尺度的折扣奖励与 PPO 决策事件语义；new-libs 索引也已经包含多种 MARL 基线与 UAV 协作轨迹规划资料。memo §7 的“本地新实验”不能据此扩大成新的方法家族。本次查新依据是这些可访问的综述、问题包、处置记录和库索引，不是逐个历史 run 的独立重算，也没有完成索引内全部论文的全球全文查新。
+
+3.2 对三个选项的标记
+选项	【SOURCE FACT】历史状态	【DERIVATION】本次应使用的标记与表述
+W′	SET/B02 与 canonical-frame 训练已经 TRIED；宏时间尺度与相关语义已有记录；W 方案已写入 memo，尚未执行这套 package。	RECORDED，未 fit 的修订 package。 不是 NEW 合作规划机制。当前主要是动作空间、保持时间与控制器的再包装。
+O	H 目标加偏移已由 critic 提出；transit_handoff 也记录过围绕普通控制的残差方案，但没有执行结果。七月 R42 在不同决策层级实际尝试过残差。	具体 O 是 RECORDED，不是 TRIED。 泛化残差家族在别处 TRIED，并不能把 O 标成已试；反过来也不能把 O 标成全新残差方法。
+N / T3	停止 S7 学习及 T3 备选均已有记录；T3 有环境代码与配置，数据可用性曾被明确搁置。	RECORDED 的资源/宿主选择。 新的 readiness 读数可以是新证据，但不是 NEW MARL 算法或已成立的合作规划问题。
+
+具体方案状态分别可由 memo/critic、transit proposal 与 T3 档案核对。
+
+【DERIVATION】 按 owner 所要求的意义，当前声明下 W′ 和 O 都不够格被称为一个真正新的合作规划问题。W′ 没有把动作再参数化与新的合作决策对象区分开；O 没有把 learned residual 与普通 radio-aware 目标修正、独立重定位收益区分开。问题不只是“技术旧”，而是尚未声明哪一种合作能力会被这项实验辨认出来。
+
+【DERIVATION】 熟悉的方法仍然可能形成有价值、可复用的规划算法工程，但需要实际解决一个明确的联合规划障碍，或以可测的成本优势提供合格能力；不能只靠换接口命名。方法文件同样不要求创新配额，也不要求所有 modest fit 之前先完成穷尽式普通基线或机会证明。
+
+【DERIVATION】 我不额外提出一个贴上 NEW 标签的算法候选。现有材料不足以证明另一个具体候选既有独立合作决策对象、又不重复 Root、又已有可执行宿主。第 7 节给出的是 T3 readiness 合同，不是用新名字绕开这一缺口。
+
+4. 每项选择最强的简单解释，以及如何辨认
+W′：有限学习能力与普通控制工程，而非新的合作能力
+
+【CONJECTURE】 最强简单解释是：SET 在这套训练预算下没有学会合格控制；W′ 即便改善，也可能主要来自固定高度、巡航速度保持和到达后悬停，而不是学到了此前缺失的联合规划。b05 已经表明，一项真实的行为表征变化可以与服务退化同时存在，但它并未识别有限学习能力的具体原因。
+
+【DERIVATION】 题目规定的两个零-fit 控制有明确用途：随机目标必须使用相同宏动作、执行器、高度和护盾，检验 package 自带多少服务；冻结 c06 的高度替换应只改垂直命令，保留其余水平行为与接口，检验便宜的高度控制能解释多少改善。若控制已经吸收主要收益，就不能把 W′ 的效果归给学习。反之，W′ 胜过它们仍只是 package 中学习部分有增量价值，不是六项因素的因果分解。
+
+【DERIVATION】 宏动作还必须正确实现奖励和折扣：长度为 
+𝑚
+m 的动作应对应其折扣累计奖励及 
+𝛾
+𝑚
+γ
+m
+ bootstrap，PPO likelihood 按实际决策事件记账，而不是把一个保持动作伪装成十次独立选择。1.2 M 原生转移不等于 1.2 M 宏决策。这是实现有效性，不是新方法。
+
+O：普通目标修正足够，或者探索损坏 H
+
+【SOURCE FACT】 radio_placement 的 R 是已有普通资产：固定记录中 R−H 的 QoS 增量约 .027374，但 native J 的区间跨零；它是有条件资产，不是已确认普遍优于 H 的新默认。
+
+【CONJECTURE】 O 最强的两个简单解释是：收益来自普通 radio-aware 目标修正，而非 MARL；或潜在收益尚未学到之前，随机偏移先破坏 H 的部署结构。
+
+【DERIVATION】 最早可见的检查应是零残差逐动作/轨迹恒等性，以及 O 合同下重新匹配的 H、R。不得把 R 原有面板的约 +.027 直接当作新 O 面板中的固定收益。若还检查探索噪声，应明确这是不更新参数的完整团队运行，读取的是探索代价，不是学习效果；不需要把它扩成另一个研究方向。
+
+N：真正缺的是可用宿主，不是新模型
+
+【SOURCE FACT】 T3 文档描述的是服务恢复环境，不含电池、充电轮换或碰撞规避；Milan 输入是活动量代理，不是实测 Mbps。所给配置为 4 架 UAV、1800 秒、一次在 300–600 秒间发生的停站事件，默认数据 split 为 test。档案明确说过 Milan T3 暂留待数据可用性明确。
+
+【DERIVATION】 “环境已建”可以核实；“当前运行节点 cache 缺失”“当前恰为 0 fits”只能保留为 memo/档案报告，不能冒充本次对节点和完整训练账本的检查结果。也没有已读结果证明该宿主具备普通规划尚未吸收的合作机会。
+
+【CONJECTURE】 最强简单解释是：T3 的当前阻塞来自数据/集成可用性，或普通联合规划已经足够，甚至目标被固定容量与出口约束限制；这几种情况都不是增加一个 MARL 模型能解决的。
+
+【DERIVATION】 零-fit readiness 应检查真实数据与划分、因果信息、原生服务指标和同信息完整轨迹。默认 test 不能直接用于训练；合成 fixture 的 smoke test 不能伪装成 Milan 实证；瞬时 LP 有可行改善也不等于一条可学习的移动合作轨迹。
+
+5. MARL 耦合：存在于环境，不等于被实验识别
+
+【SOURCE FACT】 S7 控制器使用团队信息，动作由多架 UAV 同时进入共享物理环境；canonical wrapper 的动作先逆变换回物理坐标，再进入护盾与环境。b02 的 SET 配置不是一个仅靠单机观测运行、已证明具有新分布式合作能力的模型。
+
+【DERIVATION】 对 W′ 和 O，单机或逐代理 bandit 原型会漏掉四类关键内容：同时移动导致的目标重复与角色互补；中继链上某架 UAV 移动给其他成员带来的连通性外部性；共享团队回报下的信用与探索问题；物理坐标中的护盾干预及其随联合轨迹变化的后果。只对一个代理的偏移评分，不能回答八架 UAV 一起改变行为时是否更好。
+
+【DERIVATION】 也不能一概说“bandit 必然丢失全部耦合”。若 bandit 的一次动作本身是完整联合动作，并以完整团队 rollout 计分，它可以保留部分物理耦合；但它仍不检验持续状态反馈、跨时间信用分配和多代理策略学习的能力。原型能显示的内容应按其实际动作对象与回报时域限定。
+
+【DERIVATION】 现有 W′/O 都让这些耦合影响最终 QoS，因此并非脱离多机问题；然而当前比较主要识别整个团队控制 package 的收益，没有单独识别 learned cooperation。随机目标和垂直控制不能证明合作；O 胜 H 也不能排除独立重定位或普通 R 的解释。只有把这些解释与所声称的联合规划能力真正区分，才有理由把正结果命名为合作规划增强。本次不另行购买一条耦合诊断队列。
+
+6. 与 Root 的重叠：按决策对象划分，而不是按目录或算法名划分
+
+【SOURCE FACT】 Root 的 joint_transition scope 固定共同目的地，研究到达它们的联合移动方式，而不是重新学习目的地或充电调度；radio_placement 的对象是普通 radio-aware 目标生成与几何目标的比较；persistent_service 的对象是服务/返航等持续承诺。固定索引中 persistent_service 已是 reserve，普通承诺 O 有收益，学习端点 L 与 P 相同，不能沿用 memo 的“仍 active”状态。
+
+选项	【DERIVATION】重叠风险	【DERIVATION】可以互补的边界
+W′	每十步选下一个位置，本身就是对运动轨迹的控制；称它“目标接口”并不会自动避开 joint_transition。若再声称在生成更好的无线目标，又进入 radio_placement。	只有明确把所估计的效应限定为不同的目标生成对象，且固定执行过程、不重复共同目的地的运动比较，才可能互补。当前 W′ 的区分尚不充分。
+O	学习修正目标与普通 R 的目标生成存在直接邻接；若加入分阶段移动、绕行和 waypoint，又会侵入 joint_transition。	固定 go-to 执行器，只问 H/R 目标附近的 learned joint-target 增量，并把 R 当合格参照，而不是把 R 的功能重新发明成 learner 创新。
+N / T3 readiness	换宿主不自动产生新 estimand；后来若仍只问通用共同目的地移动，也可能重复。	目前仅核查特定停站恢复宿主的数据、物理合同和完整轨迹机会，不接管 S7 的承诺、共同目的地运动或无线目标生成研究。
+
+【DERIVATION】 W′、O 都不应以回返、充电或驻留承诺解释出一个新的研究范围；owner 已经拒绝继续 energy-relay 诊断。Root 某个方向转为 reserve 也不等于它的决策对象自动变成无主领域。
+
+【SOURCE FACT｜固定来源之外的后续记录】 最新 main 在空 Answer 后增加了 Root 来信转述，其中报告 joint_transition 的 learner 未激活新的动作选择、结果保留了普通控制，并明确说不同面板和决策对象不能直接替代 b05 的判断。我只在刷新写入目标时读到了这段后续记录，未在本次审计其原始面板；因此不把它混入固定来源的 b05 表，也不据此把不同 null 合并成一个失败概率。
+
+7. 排序、唯一声明修改与 owner 应决定的方向问题
+7.1 排序：N > O > W′
+
+【DERIVATION】 第一名 N：停止这条 S7-S2 learner 线的新增 fit。 理由不是“已经失败三次所以禁止再试”，而是当前 W′/O 没有把新增投入与 owner 所要的合作规划能力充分连接；普通规划仍是合格答案，W′ 最容易出现的 learner 改善不足以改变它，O 的普通残差增量又有直接的 R 竞争解释。
+
+【DERIVATION】 第二名 O：保留为普通方法的条件性增量问题，而非已选的新主线。 它比 W′ 清楚，因为零残差时可以构造 H 基线，主要比较直接触及普通规划。但严格 c00 恒等只是有效实验的必要条件，不足以使其成为新的合作规划问题，也不足以单独使这次 fit 值得购买。
+
+【DERIVATION】 第三名 W′：不购买。 它不是字面上重复 b05，但仍是该 learner 家族在相同宿主、相近预算下的第三次本方向训练投入。它有工程合理性，却没有来源支持“这一次应能跨越到普通规划水平”的判断；六项共同变化还降低了所得结果的解释清晰度。
+
+【SOURCE FACT】 W′ 或 O 的既定成本是 1 个 1.2 M fit，测得吞吐对应约 9.1–11.3 CUDA 小时，另有约 2–3 CPU 小时面板/控制以及 wrapper、测试和工程评审。两次 CUDA fit 都曾遭遇同类 CPython heap fault，根因仍开放；恢复成功不应被改记为独立确认种子。
+hmasd-pro-question-successor-se…
+
+7.2 第一名 N 的具体合同：没有就绪 learner，只有有上限的 T3 readiness
+
+【DERIVATION】 我建议的唯一声明修改是：
+
+将“选择下一项 S7-S2 learner fit”改为“关闭 S7-S2 learner 新投入；T3 仅作为未就绪宿主，购买一次有上限的零-fit readiness，不附带任何训练许可”。
+
+【DERIVATION】 第一名 N 本来就不包含 fit，因此不存在靠修改措辞让它“值得这一 fit”的办法。它值得的是一项有限的宿主可用性判断。只有新的来源证明宿主可用、并能写出独立的合作规划问题之后，才另行讨论训练声明；这不是预先批准的后续批次。
+
+【DERIVATION】 readiness 的唯一问题应是：
+
+在当前 Milan 单停站、四 UAV 的服务恢复宿主中，是否能以真实可用数据、合法因果信息及完整联合轨迹，辨认出足以形成下一项学习问题的联合重部署机会，而不是仅有静态容量缺口或弱基线缺口？
+
+【DERIVATION】 其比较对象可以限定为：静止/既有部署、同信息的独立贪心重部署、同信息的合格联合滚动规划，共用环境原生的回传/服务计算。读取完整恢复过程的原生未满足需求、恢复时间与轨迹可行性，不用 S7 的 QoS 数字给 T3 设门槛，也不把知道未来停站的 oracle 当作可部署基线。
+
+【CONJECTURE｜建议成本合同，非已测吞吐或完工时间】 最多使用 8 个 dev 场景 × 3 个普通控制器，即 24 条 1800 秒完整轨迹；0 个 fit。工程投入与 CPU 消耗各设 8 工时/机时上限，先测一条完整轨迹的成本；真实缓存、划分或执行合同无法验证时立即停止，超出上限则报告未就绪而不自动扩批。这个预算可能不足以完成全部 24 条；它的意义是限制探索成本，而不是保证结果。
+
+【DERIVATION】 判别预测是：若联合重部署具有时间耦合价值，合格联合普通规划应在完整恢复轨迹上呈现独立动作不能解释的效果；若改进仅来自静态目标搜索、固定容量变化或弱基线，便不能据此宣称一个新的 MARL 合作问题已经就绪。即使观察到前者，也只为形成学习声明提供依据，不证明 RL 必要，更不证明某个 learner 能学会。
+
+7.3 提交给 owner 的方向级选择
+
+【DERIVATION】 应提交的是以下方向判断，而不是在 W′ 和 O 之间强行挑选一个新名称：
+
+S7-S2 上普通规划仍是当前答案；b05 关闭了本次 canonical-frame 学习假说，没有关闭 UAV 合作规划。Claude 不再继续这条 energy-relay learner/归因线。当前没有经核实就绪的新 MARL 宿主；T3 仅可承担一次有上限的零-fit readiness。若 owner 决定继续 S7-S2，则 O 比 W′ 更适合被诚实地声明为普通残差方法的增量试验，但这是一项新的资源选择，不是本评审推荐的“新合作规划主线”。
+
+【DERIVATION】 这项建议也不是把“先证明机会”变成未来所有 MARL 实验的通用门槛。这里之所以选择 readiness，是因为所指定替代宿主的现实可用性尚未核实，而当前两种 S7 fit 的主要结果没有充分暴露 owner 的方向选择。
+
+8. MATERIAL_DISSENT
+
+【DERIVATION】 YES。 我对“现在将 W′ 或 O 宣布为 owner 主线上的新合作规划问题并购买一个 S7-S2 fit”持实质异议。对 W′，主要问题是结果更容易支持 learner package 改进而非合作规划增强；对 O，主要问题是普通残差和 R 的解释尚未被区分，c00 的基线保存也尚未成为经过检查的构造合同。
+
+【DERIVATION】 解决异议的一项改变，就是第 7 节的资源/声明替换：不购买新的 S7-S2 fit，明确关闭该 learner 线；T3 只登记为未就绪宿主并进行一次有上限的零-fit readiness，不宣称已有新的 MARL 问题。
+
+【DERIVATION】 最终结论是：选择 N，排序 N > O > W′；保留普通规划作为 S7-S2 的答案。不要把第三次 learner package 训练当成新的合作规划问题，也不要把“换到 T3”当成已经获得新问题的证据。
+
+
 ### Send record (2026-09-28): Pro question `successor-selection-mainline` sent
 Question key `hmasd:7d5897c39f949b5b410fe7b67d48b95aa3a232a5fc88d1c6aaacb6fb447d39b1` (source sha fc8e78b7e, question heading above); attachment `hmasd-pro-question-successor-selection-mainline.md` sha256 `4caf70e5…`; Jev transport, ChatGPT 6 Pro (effort pill verified), new conversation (address stays in the local operation file); a first dry run timed out waiting for the composer (transient page load, nothing submitted), the second dry run reached the send button with effort, text and attachment verified, then sent at 2026-09-28 19:28:54Z (`send_effect: sent`, attachment seen). Passive observation by the transport's `wait`; the answer is recorded verbatim under `### Answer` when it arrives (by Pro's connector write or by the DM's deliver step). Nothing running on the node; 0 fits.
 
