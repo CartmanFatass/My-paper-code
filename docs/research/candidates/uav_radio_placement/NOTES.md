@@ -363,3 +363,24 @@ published `f2c53785f` correction: arm the detached same-handle observer, keep
 this native turn active through long deterministic waits and drain/rearm. A
 queue registration is not proof of automatic child resumption. No changed
 operation, duplicate launch, alternate App target or per-run Root ACK is used.
+
+### Pre-launch node selection correction
+
+Exact inputs were published at `28c036f2b0e2785fee77bf3b6f22e48964d5f1bf`.
+The preferred remote node accepted SSH, but its GitHub TLS path was unavailable:
+the first `git fetch` made no progress for approximately two minutes and only
+that synchronization's exact processes were terminated; a second bounded fetch
+exited 124 at 45 seconds, and an independent HTTPS request timed out at its
+10-second connection limit. No launcher was called on that node, no scientific
+claim exists there for this batch, and no result world was exposed. Its dirty
+canonical index/outputs were not edited; a transferred but unapplied policy-row
+patch is disposable scratch, not a policy override.
+
+Select configured **local_linux** for this CPU-only batch under the previously
+declared unavailable-node alternative. A preparatory read found approximately
+10 GiB available memory, 16 logical CPUs and no local scientific worker. The
+configured local interpreter/toolchain passed the engineering checks above.
+All three arms remain on this one node with two workers/one numeric thread;
+no arm, seed, search, native semantics or cost ceiling changes. Current published
+policy and actual memory are still checked freshly by the native launcher.
+This is an operational placement choice, not a retry of accepted scientific work.
