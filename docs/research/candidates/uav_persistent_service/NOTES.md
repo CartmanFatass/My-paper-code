@@ -1564,3 +1564,69 @@ would have to specify those decisions and retain P/O_H as honest references;
 it is a new substantive design, not a detector patch or post-depletion repair.
 Root owns any cross-question investment choice. My present recommendation is
 retain this question in the notebook without authorizing a successor run.
+
+### B02 publication, retention and measured cleanup
+
+Result publication `b5d87dec9a772811563c48d15a47a3f6e218b1f2` was pushed and
+verified at `origin/main` before cleanup. It contains the unmodified compact
+runner results, derived reading, native terminal/observer records, this complete
+scientific reading and original independent answer. The direction row is
+reserve and shared background topic6 now distinguishes the finite gain,
+failed risk rule and station-local capacity conclusion. Root's cross-question
+plan was not edited by this DM.
+
+The one canonical bulk copy remains in the original durable native output:
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_persistent_service/b02_long_mission_a01/raw/`.
+No new archive or retention copy was created. After complete independent
+reading, I reverified all51 original manifest files on that node,144030432
+bytes, including48 raw trajectory/decision/per-job-terminal files totaling
+143675492 bytes. The original manifest SHA256 is
+`5741dc165d5213345020f17378bc1088cf2efb6f7571731b071639eee5cd85d2`.
+Its relative paths still resolve in the original output. These unique traces
+are retained to audit the native gains, adverse risk, five control-affecting
+arrival misses and station-local capacity reconstruction; they are not a
+second copy of the checkout. Compact scientific results and source identities
+are also published in Git. An initial remote verifier command had a quoting
+SyntaxError before reading files; the corrected read-only verification passed
+without scientific execution.
+
+Fresh native status before retirement confirmed exit0, both exact process
+identities absent and no manifest inconsistency. The scientific reviewer
+explicitly finished all reads; observer generation6 is stopped with no event
+or wake. Repository import/entrypoint searches found no consumer of B02 except
+its own runner/tests. There is no selected continuation consuming that code.
+The five B02 source files (`__init__.py`, `episode.py`, `readout.py`, `batch.py`,
+`run_b02.py`) and its `test_b02.py` were therefore removed from the current
+tree, together with their generated caches. Their checked, exact executed
+versions remain pinned at [source e905d8842](https://github.com/CartmanFatass/My-paper-code/tree/e905d8842a6ad6006b2b6d82237e98f4a5dbb2d2/experiments/candidates/uav_persistent_service/b02)
+and [tests e905d8842](https://github.com/CartmanFatass/My-paper-code/tree/e905d8842a6ad6006b2b6d82237e98f4a5dbb2d2/tests/experiments/candidates/uav_persistent_service/b02).
+The ordinary O/controller, common macro/readout helpers and their existing
+tests remain for the conditional B01 asset; this is not deletion of that asset.
+
+Deleted local targets are the duplicate B02 `runs/.../raw/`, the entire owned
+`temp/directions/uav_persistent_service/` (passive reader and consumed wait
+request), and the ended B02 code/test directories just listed. The native
+exact-target snapshot collector initially refused an unreadable `/proc/660/cwd`
+process scan. Its supported `--sudo-process-scan` preview then found the
+snapshot eligible, and the corresponding apply removed only
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/0453bae78cd34331960fb48022fd3dbe`.
+No claim, manifest, output, foreign process, canonical checkout or B01 bulk was
+removed. Actual absence was checked; the tool blocker is resolved.
+
+Allocated-byte measurement used the same owned targets before/after, including
+the retained output so a move would not be counted as reclamation. Local B02
+code/test/temp/run roots decreased from144482304 to499712 bytes, reclaiming
+143982592. The remote output plus snapshot decreased from945475584 to144199680
+bytes, reclaiming801275904; the remote output itself is unchanged. Total net
+reclaimed in those matched cleanup roots is **945258496 bytes**. This is
+allocated working/output storage, not a claim about Git-object GC or whole-host
+free space. All nominated deletion targets are absent. Necessary unique raw,
+compact native output, admission claim and published evidence remain; there
+is no concrete cleanup blocker or deferred read. No test or result was rerun
+for this deletion-only retirement.
+
+B02 is now scientifically read, independently reviewed, published and cleaned.
+No result worker, live observer, pending advice, uncollected result or selected
+successor remains. The next-action recommendation is reserve with conditional
+H3000 O retained, not automatic continuation; Root may compare a newly specified
+legal capacity/access question against other questions using this evidence.
