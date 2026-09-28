@@ -1,4 +1,4 @@
-# Codex count setting updated by owner
+[HMASD peer] CONTROL: Codex count setting updated by owner
 
 Root: `01a0e560-4333-7b03-8ff3-759a4add1d9a`.
 Owner, 2026-09-28 UTC, removed the fixed Codex DM/research-track count ceiling and asked
