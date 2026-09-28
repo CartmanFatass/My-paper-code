@@ -478,3 +478,32 @@ B05 GPU operation among result workers; formal fresh launcher admission remains
 required. The finite dispatcher uses four single-thread CPU lanes and no GPU.
 I will publish exact inputs, synchronize only this direction's canonical control
 row if needed, then request the original first launch. This is not a retry.
+
+### Accepted first operation and observation
+
+Inputs `981e935ee336cbdde3f3b69f229019384376ba5f` were committed, pushed and
+verified at `origin/main` before execution. Canonical remote policy synchronization
+inserted only this direction's exploring row, preserving the existing other-DM
+edits. The first control-only fetch without the configured login network shell
+stalled; its local SSH process was stopped before using configured `zsh -lic`.
+That fetch succeeded. It also emitted an existing auto-GC missing-tree warning
+(`9e40125ee3e24973b69754649226d18847b45862`); no peer Git object/GC repair was
+attempted. The exact published source snapshot subsequently prepared successfully.
+
+The configured supervisor accepted the one launcher request, then the native
+kernel separately admitted the scientific child at2026-09-28T15:54:25Z. The
+[manifest](../../../../runs/uav_persistent_service/b01_commitment_a01/launch-manifest.json)
+is the authoritative operation/source/process reference, and the
+[fresh admission](../../../../runs/uav_persistent_service/b01_commitment_a01/admission-preflight.json)
+reported13251149824 available bytes against the4294967296-byte floor. Training
+reports one started fit and SB3 2.6.0; this is not a completed result.
+
+The first observer request was refused locally because its SSH executable was
+not absolute, before observer registration. Correcting it to `/usr/bin/ssh`
+registered the same manifest in `hmasd_wait` generation1, job
+`b01_commitment_a01`, 60-second probes and1500-second checkpoint window. Drain
+then observed matching live runner/supervisor identities, accepted admission,
+consistent records and absent exit witness. State belongs to native child runtime
+`01a0e858-d69a-7dc2-b858-08d9438ed121`; registration is not a claim of queue wake.
+I remain active, use long deterministic waits and drain/rearm this same handle.
+No worker restart, duplicate launch or scientific retry occurred.
