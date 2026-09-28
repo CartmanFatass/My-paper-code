@@ -453,3 +453,33 @@ writer lock, and let native admission check live resources. Root explicitly
 accepted that narrow local control synchronization. The new global removal of
 the fixed Codex track-count ceiling changes neither this study nor actual-node
 resource admission. No result launch or retry has been made at this entry.
+
+### 2026-09-28 - B01 accepted; same-handle observation armed
+
+Exact published inputs: `ee9c6c8aca0ee13e3d7a02416ff4acf85766f274`.
+The fixed B01 operation was accepted at 03:22:24 UTC through the configured
+`wsl_4070` supervisor and native launch kernel. Its authoritative identity is the
+[launch manifest](../../../../runs/uav_information_value/b01_sources_a01/launch-manifest.json),
+with [fresh actual-node admission](../../../../runs/uav_information_value/b01_sources_a01/admission-preflight.json):
+14,879,690,752 available physical/effective bytes against the 4,294,967,296 floor.
+The initial native status and first detached observation agree: accepted, native
+supervisor and runner running, no exit witness, no identity mismatch. This is
+**active collection, not a read scientific result**; no extra arm or retry exists.
+
+`tools/hmasd_wait.py` owns same-handle observation for this child runtime at
+`/home/fires/.local/state/hmasd-wait/01a0e5da-116b-72f3-b158-476344637e06`,
+generation 1, job `b01_sources_a01`, 1,500-second checkpoint window. Its first
+drain adopted the accepted handle with zero probe errors; no wake was pending.
+On a checkpoint rearm that same job without restarting the worker. On terminal
+return, collect the declared complete or incomplete record, verify hashes/counts,
+then interpret and publish. All raw scientific evidence remains on the configured
+node during collection; only compact admission records have been copied here.
+
+Node preparation left unrelated dirty source/evidence and sparse selection intact.
+An initial non-login Git fetch was terminated after stalling; the configured
+`zsh -lic` network path fetched successfully before launch. Its automatic-GC
+warning about old bad tree `9e40125ee3e24973b69754649226d18847b45862` remains
+unrepaired; current input and native snapshot preparation succeeded. A first
+two-context-line control patch was refused with no change, then applied using
+explicit zero-context allowance; only this published direction row was added.
+These were prelaunch preparation events, not failed scientific episodes.
