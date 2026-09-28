@@ -297,3 +297,184 @@ reopens the stopped I/C recipe nor establishes sustainability or a diagnosed
 energy bottleneck. No peer operation, old DM session or App message is involved.
 Root owns the pending question-selection resolution and cross-question plan;
 ordinary in-scope execution after selection requires no per-fit acknowledgment.
+
+## 2026-09-28 - Selection correction and accepted implementation scope
+
+Root read the full independent selection review and selected the bounded L/O/P
+study **after correcting O**. The material objection to `17ce44bfd` is upheld:
+native return margin already deducts reserve and estimated return energy, so
+`D=margin*capacity/p` estimates time to F entry, a departure deadline under held
+geometry. Ranking by `D-tau` deducted travel twice. The full independent answer
+and Root disposition will be linked from Root's published
+[current research plan](../../RESEARCH.md#current-research-plan); no duplicate
+selection critic, Pro consultation or prerequisite activation study is selected.
+The following prospective rules supersede the conflicting O arithmetic above.
+
+### Corrected O, with distinct time meanings
+
+At macro step t let `R=3000-t`. Calculate each free member's departure deadline
+`D_i=max(0,margin_i)*160*3600/p_i`, retaining the declared recent-positive-draw
+estimate and hover fallback. `tau_in,i` is the nominal time to the nearest
+station's capture sphere; use capped straight-vector travel at 30/5 m/s outside
+160 m, then 3/1 m/s down to 20 m. Sum those two segment times, rounding the
+result upward to whole primitive steps. At/inside 20 m it is zero.
+
+For each free same-station competitor k, its nominal arrival if it waits until
+F entry is `A_k=D_k+tau_in,k`. Set `A_next=min A_k`, or infinity when none exists.
+This is an approximate station-arrival forecast, not a reservation or a claim
+that F will follow that exact future route.
+
+Let `tau_out,i` be upward-rounded travel at ordinary 30/5 m/s from the nominal
+capture point on the current stationward line to i's current base H1 target at
+100 m height. If already inside capture, use the current point; if no finite
+base H1 target is available, O does not initiate for that member at this clock.
+This estimates restoration to the current service target; actual post-release
+H1 rematching and the topology guard can change it. Add ten seconds for the next
+ordinary planning clock. Keep this restoration estimate distinct from occupancy.
+
+For candidate i select the longest `d in {120,300,600}` satisfying both:
+
+`tau_in,i+d <= A_next` (nominal station occupancy ends before the next arrival),
+
+`tau_in,i+d+10+tau_out,i <= R` (nominal restoration within the finite episode).
+
+If none fits, continue service for that candidate. A feasible candidate is
+dispatchable only when `D_i < R` and `D_i <= tau_in,i+d+30`. Among dispatchable
+members rank **D_i**, then lower observed connection load and index. No `D-tau`
+ranking remains. A beyond-horizon departure deadline alone cannot motivate
+recharge. The common L/O action rights are unchanged: these tests choose O's
+action, not a mask constraining L's permissible choices.
+
+Actual dwell means **elapsed time after first geometric arrival**, including
+time waiting for allocation and later time outside capture. Release/full-battery/
+900-second timeout and native F precedence stay as declared. A commitment still
+alive at the native endpoint is right-censored; the horizon never fabricates
+allocated charging, restoration or option completion. The endpoint constraint
+is an approximate O rule, not a guarantee, and does not alter native termination.
+
+Correctness cases to retain: another member with `D=600,tau_in=100` has arrival
+700; a candidate with `tau_in=100` may choose d600 when the separate restoration
+test permits it. Rank D100/tau90 before D110/tau1. With `D>=R`, O stays in service.
+Reject a duration that fits occupancy but cannot restore by R; preserve equality
+at the restoration boundary. Missing service target yields no ordinary dispatch.
+No feasible duration yields service, without silently forcing120. These are
+deterministic arithmetic checks, not result-bearing pilot worlds.
+
+### L0 - commitment decisions through the native complete comparison
+
+Deliverable: the exact selected controller/state machine, masked hierarchical
+SB3 distribution, finite native macro environment, one fixed training schedule,
+three-arm evaluator, compact readout and failure-preserving raw evidence. Own
+only this direction's implementation/tests/notebook/runs/scratch plus its narrow
+RESEARCH/routing entry after Root's shared plan publication. No shared native
+environment, P source, reward, feedback, node control or peer code changes.
+
+The bounded Implementer task owns `controllers.py` and matching controller tests:
+one verifiable behavior, dispatch and execute finite commitments without changing
+real F or exact no-commit P. It has no index/commit/launch/notebook permission.
+The DM owns policy, training, macro/evaluation/reading integration and accepts the
+Implementer's diff/checks. Other sessions' current benchmark changes are preserved.
+
+Integration contract: discrete action0 is service; action `1+3*i+j` admits member
+i for duration index j. `prepare(observations,modes,step)` occurs at a30-step
+boundary, advances observation-only option state, computes/cache the ordinary
+P action once for that same primitive step and returns finite float32 features.
+The first eight features are the exact eligible-member mask (0/1). Actor and
+critic features include only the declared current inputs and maintained history.
+`apply_choice(action)` returns a serializable requested/executed decision record;
+`propose(observations,state,step,previous_done,modes)` uses that cached step action
+or advances ordinary P once, then applies voluntary commands. External production
+F is always applied last by the recorder. A newly admitted member leaves H1
+matching at the next existing10-step replan, not through an extra hidden call.
+Release likewise restores eligibility at the next ordinary replan. Features and
+ordinary restoration estimates use the current base H1 target from preparation,
+not a temporary horizontal-hold target. All counters distinguish source calls,
+macro choices, native steps and actual option events.
+
+Within the common P adapter, true F determines the inherited fleet-wide fallback;
+assignment/hold eligibility separately excludes commitments. Committed members
+remain in the scorer's radio geometry at current observed position/battery.
+No-commit behavior must match the original P action, target memory, snapshot
+counts and native trajectory on non-study correctness seeds. Initial staged
+deterministic L must likewise match P through the actual evaluator path.
+
+Checks cover the corrected O examples above, option elapsed-time/timeout/full/
+terminal semantics, station changes and the global two-commit limit, physical
+F priority, meaningful/aliased duration choices, P fallback separation, native
+mask/probability/likelihood and sampled-versus-staged decisions, no-eligible
+states, final-only checkpoint, exact reward/action storage, finite-horizon zero
+continuation, declared seeds/update counts, and complete/adverse/partial output.
+Use non-study seeds for bounded correctness fixtures; count their native steps
+and optimization wiring work separately from the selected fit. No activation
+threshold or positive heuristic result is a gate. Required independent engineering
+review follows the executable diff; independent result diagnosis follows complete
+raw reading. Keep the one selected fit and64/48 episodes unchanged.
+
+Root published the full independent answer, retained MATERIAL_DISSENT and resolved
+selection in [round-three selection](../../archive/2026-09-28/RESEARCH-native-round3-selection.md#decision),
+commit `0e9e32168ef7e37cab04e9f46753bb98f636fff8`. I read the complete answer and
+adopt the correction above. Ordinary implementation now proceeds under that one
+selection; no extra scientific approval or screening condition has been added.
+The controller event `assignment_restored` means a finite H1 target is reassigned
+while the observed effective F mode is off. Actual travel, connected load and
+team service are separate native readings, never inferred from that event name.
+
+## 2026-09-28 - B01 input acceptance and engineering evidence
+
+The bounded Implementer returned `controllers.py` and five controller tests; I
+read and accepted the implementation, then integrated the fixed direct PPO,
+native macro collector, complete L/O/P batch and readout. Final feature width is
+773, including the declared legal energy/station fields and explicit H1-target
+validity; actor and critic still share identical current/history inputs. The
+source P file remains byte-identical to `025350669`. No native physics, rewards,
+guard, allocator, F thresholds or other direction's controller were edited.
+
+The separate registered engineering Reviewer `/root/dm_persistent_service_round3/engineering_review`
+read the actual executable path, not only this description. Three P2 findings
+were preserved and corrected before launch:
+
+- Pairing digests were initially recorded without suppressing paired conclusions
+  on mismatch. Failed/missing pairing now makes the comparison incomplete and
+  removes contrasts/practical conclusions while retaining each world's reading.
+- Promised gradient health initially had no recorder. A nonmutating optimizer
+  pre-step hook now logs finite post-clipping gradient norms/tensor counts;
+  successful training must contain 640 such records and 640 actual updates.
+- A new passive option reader initially grouped by timestamp, misattributing a
+  release followed by same-step readmission. It now groups by chronological event
+  indices, preserving release/assignment events before the next start.
+
+The same Reviewer reread all corrections and returned **no material finding
+remaining**. Its first independent run passed 11 tests in14.44s, including335
+native transitions and one four-step synthetic optimizer update. No repeat
+selection critic or new scientific pilot was used. I accept that engineering
+disposition, without treating it as evidence of policy usefulness.
+
+The final DM suite is **14 passed in13.92s**, using335 non-study native transitions
+and one synthetic four-step update. It covers corrected O arithmetic; exact
+no-commit and initial deterministic-L/P execution identity; commitment/F fallback
+separation; elapsed/full/timeout/censor semantics; masks/joint likelihood/staged
+mode; checkpoint round-trip; native four-process exhaustion; finite zero
+continuation; partial output preservation; pairing/risk rejection; gradient
+auditing; same-step option attribution; and the actual TrainingAudit callback on
+a synthetic100x4 complete rollout with mismatched-storage rejection. The synthetic
+callback has zero native transitions/optimizer updates and is not training data.
+
+Across the recorded author/Implementer/Reviewer invocations, at least1525 native
+correctness transitions and six four-step synthetic optimizer updates were used.
+One interrupted tool handle for the bounded spawn/partial tests lost its terminal
+return; it could add up to150 native transitions, but no live test remained after
+owner resume. The later exact tests were rerun and passed. An early synthetic
+test assertion used a pre-flattening SB3 action-array shape after optimization;
+that test-only indexing was fixed (8 other tests had passed). No result-bearing
+fit/world was consumed by either issue. Known returned test wall times total
+about99seconds, excluding initial helper checks, the interrupted handle and
+unmetered reading/implementation/review time. This is not the full engineering cost.
+
+Owner resumed the interrupted task explicitly. Reconciliation found no persistent
+service run directory, accepted handle or live worker. The selected scientific
+budget remains one fit/112H3000 episodes/336000 native transitions/640 updates.
+The primary node currently has ample available memory and only the unchanged peer
+B05 GPU operation among result workers; formal fresh launcher admission remains
+required. The finite dispatcher uses four single-thread CPU lanes and no GPU.
+I will publish exact inputs, synchronize only this direction's canonical control
+row if needed, then request the original first launch. This is not a retry.
