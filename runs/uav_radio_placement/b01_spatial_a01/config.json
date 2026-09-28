@@ -1,0 +1,192 @@
+{
+  "arms": {
+    "G": "eight deterministic kmeans starts, minimum SSE, otherwise H1",
+    "H": "original H1 central kmeans6+relay2 and Hungarian hysteresis",
+    "R": "native static QoS, four layouts plus two 6-direction per-member sweeps"
+  },
+  "batch": "B01",
+  "clock_steps": 30,
+  "direction": "uav_radio_placement",
+  "effective_native": {
+    "adapter_shape": [
+      8,
+      365
+    ],
+    "area_size_m": 8000.0,
+    "battery_capacity_wh": 160.0,
+    "enable_soft_handover": true,
+    "energy_stage": "S2",
+    "failure_enabled": false,
+    "max_speed": 30,
+    "max_steps": 3000,
+    "n_charging_stations": 2,
+    "n_ground_bs": 1,
+    "n_uavs": 8,
+    "n_users": 30,
+    "return_reserve_ratio": 0.1,
+    "routing_protocol": "widest_path",
+    "service_cutoff_threshold": 0.02,
+    "serving_set_size": 3,
+    "time_step": 1.0
+  },
+  "fits": 0,
+  "horizon": 3000,
+  "information": "current central user/BS xy at clock30, current legal UAV geometry/energy",
+  "jobs": [
+    {
+      "arm": "H",
+      "job_key": "H/36092801",
+      "seed": 36092801
+    },
+    {
+      "arm": "H",
+      "job_key": "H/36092802",
+      "seed": 36092802
+    },
+    {
+      "arm": "H",
+      "job_key": "H/36092803",
+      "seed": 36092803
+    },
+    {
+      "arm": "H",
+      "job_key": "H/36092804",
+      "seed": 36092804
+    },
+    {
+      "arm": "H",
+      "job_key": "H/36092805",
+      "seed": 36092805
+    },
+    {
+      "arm": "H",
+      "job_key": "H/36092806",
+      "seed": 36092806
+    },
+    {
+      "arm": "H",
+      "job_key": "H/36092807",
+      "seed": 36092807
+    },
+    {
+      "arm": "H",
+      "job_key": "H/36092808",
+      "seed": 36092808
+    },
+    {
+      "arm": "G",
+      "job_key": "G/36092801",
+      "seed": 36092801
+    },
+    {
+      "arm": "G",
+      "job_key": "G/36092802",
+      "seed": 36092802
+    },
+    {
+      "arm": "G",
+      "job_key": "G/36092803",
+      "seed": 36092803
+    },
+    {
+      "arm": "G",
+      "job_key": "G/36092804",
+      "seed": 36092804
+    },
+    {
+      "arm": "G",
+      "job_key": "G/36092805",
+      "seed": 36092805
+    },
+    {
+      "arm": "G",
+      "job_key": "G/36092806",
+      "seed": 36092806
+    },
+    {
+      "arm": "G",
+      "job_key": "G/36092807",
+      "seed": 36092807
+    },
+    {
+      "arm": "G",
+      "job_key": "G/36092808",
+      "seed": 36092808
+    },
+    {
+      "arm": "R",
+      "job_key": "R/36092801",
+      "seed": 36092801
+    },
+    {
+      "arm": "R",
+      "job_key": "R/36092802",
+      "seed": 36092802
+    },
+    {
+      "arm": "R",
+      "job_key": "R/36092803",
+      "seed": 36092803
+    },
+    {
+      "arm": "R",
+      "job_key": "R/36092804",
+      "seed": 36092804
+    },
+    {
+      "arm": "R",
+      "job_key": "R/36092805",
+      "seed": 36092805
+    },
+    {
+      "arm": "R",
+      "job_key": "R/36092806",
+      "seed": 36092806
+    },
+    {
+      "arm": "R",
+      "job_key": "R/36092807",
+      "seed": 36092807
+    },
+    {
+      "arm": "R",
+      "job_key": "R/36092808",
+      "seed": 36092808
+    }
+  ],
+  "launch_sha": "8ec998ecac68f93697ab31c65d5732ab337f4203",
+  "limitations": "static targets omit transit, future users, association history and energy dynamics",
+  "model": "separate fixed-config seed0 native model; current-user/current-battery fresh association",
+  "optimizer_updates": 0,
+  "pairing": "initial state, complete user trajectory and native RNG stream digests",
+  "search": {
+    "max_queries_R_per_clock": 100,
+    "max_radio_queries_batch": 81600,
+    "qos_tolerance": 1e-10,
+    "travel_tolerance_m": 1e-06,
+    "xy_steps_m": [
+      500,
+      125
+    ],
+    "z_steps_m": [
+      50,
+      25
+    ]
+  },
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "threads_per_worker": 1,
+  "workers": 2,
+  "world_seeds": [
+    36092801,
+    36092802,
+    36092803,
+    36092804,
+    36092805,
+    36092806,
+    36092807,
+    36092808
+  ]
+}

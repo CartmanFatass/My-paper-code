@@ -400,3 +400,221 @@ both runner/supervisor running; no terminal witness yet. The observer owner
 remains this child, with long deterministic waits and checkpoint drain/rearm.
 This is technical acceptance only. Full artifact collection, arithmetic and
 choice reconstruction, adverse-inclusive interpretation and publication remain.
+
+## 2026-09-28 UTC - B01 complete native reading
+
+The original operation exited zero with a valid
+[native witness](../../../../runs/uav_radio_placement/b01_spatial_a01/process-exit.json).
+The same observer retained both its generation-1 checkpoint and READY event;
+the child drained both, consumed them by generation-2 rearm, then stopped
+observation because no job remained running. Its attempted App queue delivery
+reported `-32600` for an unloaded spawned child; that did not lose the native
+operation, change the handle or trigger a retry. Technical acceptance and
+terminal evidence are distinct from the complete reading below.
+
+All **24/24 episodes reached H3000**, giving **72,000 native team steps**, zero
+partial/missing/duplicate worlds, zero fits/optimizer updates and **59,988
+completed native-radio model invocations**. All eight initial-state/user-path/
+RNG-stream digests matched across H/G/R. The independent
+[artifact reader output](../../../../runs/uav_radio_placement/b01_spatial_a01/reading.json)
+verified 27 artifacts, all 24 raw files, every native metric sum and mean, every
+saved search choice/tie/F-fixed candidate and all full exogenous user paths.
+The largest native reward arithmetic error was 2.220446049250313e-16. Full RNG
+states were not retained, so those digests are runner evidence, not a second
+offline reconstruction of the RNG stream. The error log is empty.
+
+### Complete outcomes and adverse worlds
+
+Panel means, with minimum battery being the minimum over the whole panel:
+
+| Program | QoS/step | Native J | Return cost sum | Min battery | <=10% UAV-step share | Team xy km/episode | Consumed Wh/episode |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| H | .781669 | 2311.756747 | 1.337836 | .100411 | 0% | 129.121 | 1344.437 |
+| G | .780285 | 2303.463838 | 3.409083 | .095769 | .520313% | 135.780 | 1356.990 |
+| R | .809043 | 2373.402321 | 11.576521 | .088559 | 2.060938% | 99.006 | 1296.313 |
+
+Primary R-G: QoS **+.028758** [+.009323,+.048194], 8/8 positive; native J
+**+69.938482** [+3.052642,+136.824323], 7/8 positive. Secondary R-H: QoS
+**+.027374** [+.002805,+.051944], 7/8 positive; J **+61.645574**
+[-10.641620,+133.932767], 7/8 positive. G-H: QoS **-.001384**
+[-.026418,+.023650], 5 wins/3 losses; J **-8.292909** [-83.594425,+67.008608],
+4 wins/4 losses. Brackets are descriptive paired t7 intervals over the eight
+worlds; there is no training replication, equivalence or tail guarantee.
+
+Every signed primary and anchor outcome is retained here and in
+[per-world outputs](../../../../runs/uav_radio_placement/b01_spatial_a01/perworld.json):
+
+| Seed | R-G QoS | R-G J | R-H QoS | R-H J | R minimum battery | R <=10% share |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 36092801 | +.012941 | -2.074787 | +.020783 | +6.204292 | .090474 | 5.708333% |
+| 36092802 | +.061206 | +183.852253 | +.058599 | +176.068249 | .101381 | 0% |
+| 36092803 | +.020417 | +33.858757 | +.072891 | +187.495776 | .093190 | 3.908333% |
+| 36092804 | +.000505 | +2.693504 | +.000784 | +2.496381 | .101083 | 0% |
+| 36092805 | +.034327 | +28.384245 | +.034782 | +29.680830 | .088559 | 6.870833% |
+| 36092806 | +.038787 | +114.618775 | -.015450 | -50.537545 | .100400 | 0% |
+| 36092807 | +.003820 | +11.345689 | +.010524 | +31.802489 | .100246 | 0% |
+| 36092808 | +.058063 | +186.829423 | +.036083 | +109.954118 | .100559 | 0% |
+
+R-G return-cost difference is +8.167438 [-4.088248,+20.423124]; R-H is
++10.238685 [-2.366556,+22.843926]. Mean episode minimum battery is lower
+under R than H by .005130 [-.009303,-.000957]. Reserve exposure is materially
+present even though its paired mean interval crosses zero. In 36092801 the
+extra service is outweighed by +20.449964 return cost versus G, producing the
+J loss. In 36092805 R's cost is 38.421501 versus H 1.088626/G 1.123670, and
+the panel's worst battery/reserve outcome occurs. R also worsens the low tail
+in 36092803. Conversely, R removes G's 1.770833% reserve exposure in 36092808;
+this favorable world is not discarded. All 24 episodes have zero native
+cutoff/depletion events and zero decoded cutoff share; none of this establishes
+safety. G's large losses in 36092806 (J -165.156320 versus H) and 36092808
+(-76.875306) remain part of its near-zero mean, not ignorable optimizer noise.
+
+The additional energy cost already enters native J at coefficient two; query
+CPU is **not** priced by that reward. Native J has not been reconstructed from
+the planner score. Delivered mean traffic is H/G/R 23.450069/23.408555/24.271303
+Mbps. Graph-potential sums are approximately -30.575 in all arms. R's total
+consumption is lower than both references despite its worse low-battery tail:
+less aggregate energy/path is not a risk-sufficiency argument.
+
+### Intermediate readings, scope and actual cost
+
+Within R's own decision states, selected static QoS exceeds its H/G initial
+candidate score by .065397/.062072 on average; strict >1e-10 gains occur in
+55.75/48.75 of 100 clocks per world. Selected-score means on each program's
+own states are H .882722, G .857919, R .944857. These are endogenous static
+snapshots with fresh association, not paired executed counterfactuals or a
+causal mediation decomposition.
+
+Fixed first/middle/last-third QoS is H [.801129,.845517,.698360], G
+[.827261,.842274,.671321], R [.828202,.905178,.693751]. R's largest mean
+service increment is in the middle third; the last-third R-H mean is negative.
+Mean F-mode UAV-step fractions are H .337745/G .341620/R .288406, and charging
+UAV-steps are 1288.375/1356.625/1113.5 per episode. Mean guard blocks are
+885.125/919.625/1024.25; negative-margin shares are .317708%/1.211979%/2.833854%.
+Mean zero-service steps and longest zero-service gaps are 9.875/9.875/10.000.
+No post-hoc threshold, return-window alignment or difficult-world deletion is
+used to select a preferred comparison.
+
+Retained endpoint changes provide a descriptive motion-accounting check, not
+a mechanism claim: between the 99 adjacent clocks, count a member changed if
+both xyz endpoints are finite and differ by >1e-6 m, or finite/absent status
+changes. H/G/R average 568.375/570.000/299.000 changed member endpoints and
+97.625/96.625/59.750 changed clocks per episode. R's F endpoints are current
+positions whereas H/G use absent targets, so this count is not a matched
+target-switching estimand. The actual path is the common physical measure:
+R-G xy distance -36.774 km/episode [-47.085,-26.462], R-H -30.115 km
+[-44.905,-15.324]; full xyz means are 130.125/136.866/99.207 km.
+
+The accepted-to-exit duration was **41.79 min**, including startup; runner
+wall was 2503.359 s (41.72 min). Summed worker CPU was 4955.342 s (**1.3765 h**),
+summed worker wall 4985.377 s, and maximum worker peak RSS 483,884 KiB. Mean
+per-episode worker CPU H/G/R was 155.907/172.496/291.014 s; R costs 68.7%
+more than G and 86.7% more than H on this node. Mean planning CPU alone was
+1.463/2.226/108.752 s, including H/G diagnostic queries. Total queries are
+H 800, G 800, R 58,388, below the 81,600 limit because F members are not
+searched. Exactly 14,400 k-means solves occurred; full actual Lloyd iteration
+counts remain unmeasured as declared. The 815 short native engineering steps,
+failed local tool-path invocation, failed remote source synchronization and
+unmetered design/review/reading/publication effort are additional, not zero-cost
+because the study has no fit.
+
+One necessary raw copy remains at
+`/home/fires/hmasd-wsl/runs/uav_radio_placement/b01_spatial_a01/raw/` on configured
+`local_linux`: 24 NPZ files, **50,482,280 content bytes** (50,524,160 allocated).
+Their byte counts/digests are in the compact
+[manifest](../../../../runs/uav_radio_placement/b01_spatial_a01/manifest.json).
+Git receives compact config, all per-world/aggregate readings, native identities
+and the verification, not these bulk arrays. Nothing has been spliced from old
+comparators or rerun. This complete mixed result now receives focused independent
+scientific review before the final direction/claim disposition.
+
+### Independent scientific reading and DM disposition
+
+Registered ResearchCritic `/root/dm_radio_placement/placement_result_critic`
+worked in a separate context without DM/Root conversation inheritance. Its
+task/navigation context included summaries, so it explicitly does not claim
+blinding. It first reconstructed the new original results, independently read
+all 24 NPZ files and exactly reproduced all 48 QoS/J scalars, then compared
+the prospective branches, original contrary evidence and the newly published
+`uav_energy_coordination` B01. It ran no environment or new experiment.
+
+Its recommendation is **revise: retain R as a conditional ordinary-control
+asset, keep H as the current default reference, stop automatic expansion of
+this recipe**. `MATERIAL_DISSENT: no`. The static-and-complete mean direction
+prediction is realized, but the acceptable-risk use condition is not supported.
+There was no predeclared numerical safety threshold; neither Reviewer nor DM
+invents one after seeing the result. Service, throughput and J are related
+readings, not three independent successes. The R-H J interval crossing zero
+and all signed adverse worlds remain visible.
+
+The Reviewer sharpened the tail interpretation with retained raw observations.
+R worlds 36092801/03/05 spend 1370/938/1649 UAV-steps at/below .10, beginning
+at transitions 2784/2849/2742, and each has seven members still below .10 in
+the final transition. DM reproduced those counts exactly. All three R final
+observations have queue [0,6] and occupancy [0,1]. The corresponding H queues
+also have six members, yet no reserve crossing; queue presence alone is not
+an explanation. The fixed final-thousand R-H service mean is -.004610,
+negative in five worlds. No extended episode is needed to preserve this
+already observed un-recovered endpoint risk; the experiment makes no claim
+about the unobserved continuation.
+
+Total consumption/path savings also do not imply better remaining stored
+energy. Mean charger input is H 357.881944 versus R 309.305556 Wh, so input
+minus consumption is -986.554882 versus -987.007264 Wh. Native input is actual
+charge delivered, clipped at available capacity (`energy_aware.py:1805-1816`);
+the subtraction is an energy-balance reading, not identification of why the
+individual deficits arise. Native return cost takes the worst member, so
+lower team consumption and a deeper local risk tail are compatible.
+
+The Reviewer counted R's 800 selected layouts: pattern 371, carried_R 340,
+current 59, H 30 (G zero). This supports actual finite search and leaves
+ordinary target stability/holding as a simple contributor alongside radio
+alignment and expanded spatial support. It does not identify a pure objective,
+predictive-model or cooperation mechanism. Original H geometry is not the
+endpoint of achieved mean service in this panel; G's near-zero mean does not
+establish equivalence, exhaust clustering improvements or localize all remaining
+loss away from geometry. Existing B04/B05 conditional gains and adverse tails,
+B03 assignment caveats and the one-fit B02 negative remain intact.
+
+DM adopts these recommendations in full. Keep the bounded exploratory
+[claim card](CLAIM_finite_radio_placement.md), exact executable comparison,
+complete positive/adverse raw evidence and H as the default anchor. **End B01
+investment and set this direction to reserve at the assigned return boundary.**
+There is no active worker, unread output, selected fit, automatic replication,
+forecaster, charging repair, local-sensing conversion or search-budget expansion.
+The broader allocation of future questions belongs to Root, not to an invented
+approval dependency or recurring check in this direction.
+
+One distinct unselected opportunity goes back to Root: if the project needs
+to choose its next ordinary comparator, compare frozen I and R on the same
+new worlds. The Reviewer's minimal proposal is eight new worlds, I/R keeping
+their own 60/30-step clocks, 16 H3000 episodes/48k steps/0 fits; roughly 1.11
+worker-hours and 222k radio calls are historical extrapolations, not a new
+admitted budget. It is a full-program comparison, not pure time-model causality,
+and should be merged/selected against the already proposed I/P question by
+Root. Different existing world panels cannot rank I above R. No such study is
+selected or run here; retaining these results with no further run is also a
+valid current outcome.
+
+### Retention and measured cleanup
+
+All native processes are absent and observation is stopped. The 24 required
+raw files remain in the one location above; reusable tested implementation and
+checks remain, with compact readings and adverse evidence published. No copy,
+archive or backup chain was made for cleanup.
+
+Deleted exact disposable targets: this direction's `temp/directions/` subtree
+(the unapplied published-row patch and stopped-observer request), its two
+implementation `__pycache__` directories and test `__pycache__`, plus remote
+`/tmp/uav_radio_placement-admission-28c036f2b.patch`. Local allocated usage went
+from 126,976 bytes to zero; the remote patch from 4,096 bytes to absent, with
+absence verified. **Net reclaimed: 131,072 allocated bytes.**
+
+Source-snapshot reclamation is separately blocked, not completed. The exact
+launcher snapshot `5d429c7d3527454993ff7eca765b0226` retains **1,604,083,712
+allocated bytes**. The supported GC preview first refused inspection of
+`/proc/383/cwd`; its documented elevated read-only scan then refused because
+process 2019 changed during reference inspection. A read-only `ps` shows that
+process is a defunct zsh. The DM did not modify the shared collector, kill an
+unowned process or force-remove the snapshot. This is a concrete tool blocker
+for Root's shared-control ownership, not an incomplete scientific result or
+permission to retry the experiment.
