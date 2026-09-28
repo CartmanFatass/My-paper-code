@@ -51,6 +51,16 @@ def test_unexpected_output_detected_without_deletion(tmp_path, monkeypatch, path
     assert ghost.read_bytes() == b'preserve original bytes\n'
 
 
+def test_direct_agent_is_not_reported_but_strays_still_are(tmp_path, monkeypatch):
+    for name in ['hmasd-oracle', 'hmasd-retired']:
+        dst = tmp_path/'.claude/agents'/f'{name}.md'
+        dst.parent.mkdir(parents=True, exist_ok=True); dst.write_bytes(b'---\nmodel: fable\n---\nbody\n')
+    monkeypatch.setattr(publisher, 'generated', lambda root: {})
+    assert publisher.DIRECT_AGENTS == {'hmasd-oracle'}
+    assert publisher.publish(tmp_path, check=True) == ['.claude/agents/hmasd-retired.md']
+    assert (tmp_path/'.claude/agents/hmasd-oracle.md').read_bytes() == b'---\nmodel: fable\n---\nbody\n'
+
+
 def test_non_hmasd_output_and_bytecode_are_not_owned(tmp_path, monkeypatch):
     for path in ['.claude/skills/another-plugin/SKILL.md',
                  '.claude/skills/hmasd-example/__pycache__/module.cpython-311.pyc',
