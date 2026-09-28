@@ -505,3 +505,172 @@ records and no exit witness. Registration alone was not treated as adoption. The
 controller's initial window is 1,500 seconds, with native long waits in this same
 child; checkpoint rearming must retain this handle and never restart the worker.
 At this entry the operation is accepted/running, not a completed fit or read result.
+
+<a id="b01-complete-reading"></a>
+
+## 2026-09-28 - B01 complete: own learning, no incremental content-package use
+
+The same accepted operation exited normally at 20:43:14 UTC. Native supervisor and
+runner identities are absent, the exit witness is valid, and all three arms and the
+fixed reducer report COMPLETE. Full evidence is in the
+[native summary](../../../../runs/uav_message_content/b01_s19431/summary.json),
+[independent reconstruction](../../../../runs/uav_message_content/b01_s19431/reading.json),
+[exit witness](../../../../runs/uav_message_content/b01_s19431/process-exit.json) and
+[terminal status](../../../../runs/uav_message_content/b01_s19431/launch-status.json).
+Summary SHA256 is `4990300afc69a1710bd5477864942223c7483cdcd69c62e4c52cfd439aa077c4`.
+Source remains `b2a422088a20235e760e3aaebbc74f35236a4e82`; no accepted input was changed.
+
+### Complete endpoints and counterexamples
+
+| Arm | Initial net J | Final net J | Initial users/tick | Final users/tick | Final Q |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| C | .092026527 | .193790299 | 5.310303 | 11.785156 | .099327040 |
+| H | .091122761 | .184218540 | 5.251953 | 11.082031 | .100233676 |
+| L | .083217925 | .173145014 | 4.815308 | 10.426270 | .093924137 |
+
+| Final contrast | Mean net/physical J difference | Users/tick difference | Q difference | J positive/adverse | Worst J difference |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| L-H | -.011073526 | -.655762 | -.006309539 | 13 / 19 | -.096925590 |
+| L-C | -.020645285 | -1.358887 | -.005402903 | 11 / 21 | -.140907359 |
+| H-C | -.009571759 | -.703125 | +.000906636 | 10 / 22 | -.058831061 |
+
+All arms pay .001 per tick, so physical and net J contrasts are identical. L-H service
+also has 13 positive/19 adverse worlds, L-C has 11/21, and H-C has 8/24. Quality and
+service are not interchangeable: H's mean Q is slightly higher while its service and J
+are lower. The reconstruction retains every signed vector and the original per-world
+rows, not only these means.
+
+World labels here are zero-based evaluation indices, with physical seed 1943102000+e.
+L-C's worst joint loss is world 27: -.140907359 J and -9.464844 users/tick. Its largest
+joint gain is world 31: +.095640496 J and +6.316406 users/tick. H-C's world 5 improves
+by +.135601212 J and +8.988281 users/tick, even though L-H there loses -.094421967 J
+and -6.816406 users/tick. H's largest service loss is world 26 (-4.468750 users/tick);
+its worst J is world 30. L-H worlds 13 and 29 have opposite J/service signs. These
+favorable cases and tradeoffs rule out a uniform-dominance description.
+
+Each complete trained policy improves its own J and service in **all 32 worlds**.
+Mean own-J gains C/H/L are +.101763773/+.093095780/+.089927089; corresponding service
+gains are +6.474854/+5.830078/+5.610962 users/tick. Q improves in 31/32, 32/32 and
+31/32 worlds respectively. L already began below C/H by -.008808602/-.007904836 net J
+and did not close either mean deficit. This is descriptive own-learning evidence;
+subtracting initialization is not a causal adjustment that isolates content.
+
+### Exposure, verification and full cost
+
+All 1,728 complete H256 episodes and 3,072 declared Adam calls are present: 3 fits,
+1,536 training episodes / 393,216 team steps, 192 initial/final evaluation episodes /
+49,152 steps, **442,368 total native calls and returned team steps**, 2,211,840 motion
+samples and 7,864,320 replayed actor rows. Evaluation made zero optimizer calls.
+There were zero extra planner/model-counterfactual queries. Ordinary native radio
+physics still executes at every step. The earlier one-step technical test is separate.
+
+Every arm made 147,456 accepted broadcasts with zero collisions, 145,685 deliveries
+and 1,771 terminal-censored packets. L's training comprised 131,072 sampled messages,
+**129,511 active send-time content-credit rows**, and 1,561 censored rows. Each of its
+initial/final panels had 8,192 sampled messages, 8,087 active arrivals and 105 censored
+packets. Thus the intervention was not generally prevented from arriving or entering
+the learner. Arrival is an opportunity for receiver action, not proof of useful use.
+
+All three motion/receiver and critic parameter groups had nonzero recorded gradients
+on 1,024 updates; L's combined content group did too. Its final mean-weight, mean-bias
+and log-standard-deviation norms were .237799481, .015407229 and .056688447, from zero;
+final content log std ranged .013375644 to .032558952. These are not gradient-isolated
+mechanism measurements: the combined norm includes entropy gradients, and nonzero
+mean weights or variable packets do not establish task semantics. Pre-tanh Gaussian
+entropy is still not transmitted-code entropy or information value.
+
+The pure NumPy [reader](../../../../experiments/candidates/uav_message_content/read_b01.py)
+reconstructed **all 192 saved evaluation trajectories**, including C/H contents from
+lawful observations, L tanh samples, RR sender/arrival clocks, pre-action receiver
+records and pending flags, post-send pending, terminal masks, physical/net reward,
+service/Q and per-world reductions. Checkpoints and all stable retained artifacts were
+hashed. Common reset projections and channel sequences matched across arms and across
+each arm's initial/final panel; common initial motion/receiver and critic tensors match.
+No policy, model or environment was called during this readback. The independent
+scientific reader separately read all 192 remote traces with NumPy and reproduced the
+endpoints and delivery counts. Neither audit generated new experimental episodes.
+
+The first inventory also hashed `launch-status.json`; a later native status observation
+legitimately changed its observation timestamp. Stable source/result hashes matched.
+The retained reader explicitly excludes that refreshable status file from its stable
+inventory, and the derived readback was regenerated without changing any native data.
+Reset hashes certify float32 observation/global-state projections, not underlying
+float64 byte identity. The documented deterministic reset and seed bindings support
+pairing; no full SINR/connection matrix or semantic-information estimator was added.
+
+Measured batch wall was **658.466101 s** (10.9744 min), self CPU delta 657.742051 s,
+and Linux process-lifetime high-water RSS **536,976 KiB** (524.390625 MiB), including
+the sequential arms, evaluation and writing. Arm walls C/H/L were 217.117890,
+212.911188 and 228.334944 s. No engineering/review/audit-hours measurement was made.
+All unique compressed raw traces, initial/final checkpoints and update streams stay
+at the manifest's `wsl_4070` output path, with hashes/byte counts in the reconstruction;
+no duplicate bulk copy, retention chain or tarball was created. Compact summary,
+readback, source/status and outcome records are published on main.
+The stable inventory has 213 artifacts / 47,850,516 logical bytes, excluding the
+refreshable status and derived reader output. Collected stable files match their node
+hashes; remote/local reconstruction SHA256 is
+`6e1dc44b2300e9d8c7ab85f3135806530b6034a8e65f310f3fad28cb2fd4b869`.
+
+Observer generation 1 saw the exit at 20:43:17 UTC. Its delivery was recorded as
+`delivery_unknown`: App queue rejected direct input for an unloaded spawned child
+with code -32600, despite the DM retaining a long active native wait. After the
+900-second deterministic wait this same child drained the terminal evidence, collected
+the outputs and stopped its observer; PID 1391486 is absent. No launch, Send, source
+binding or observer owner was replaced. This is a delivery limitation, not lost work.
+
+### Independent scientific reading and DM disposition
+
+The registered ResearchCritic `/root/dm_message_content/read_content_b01` received no
+DM/Root conversation inheritance. It reconstructed protocol and results before reading
+the prior selection advice, then read the whole native evaluation evidence. Its full
+recommendation is **retain C and stop unchanged L-recipe expansion**, with
+**MATERIAL_DISSENT: no** and no technical missingness preventing the fixed endpoint
+reading. I adopt that recommendation. This is an investment decision at the selected
+boundary, not a claim of general learned-content inferiority.
+
+The explanation changes at four distinct levels. The useful RR opportunity in old C2
+is unchanged and was not a prediction that every replacement packet improves service.
+The proposed H persistence/spread representation did not add mean complete use in this
+block; C already includes trained recurrent receivers, and H adds weighted anonymous
+sightings, not persistent user identities or served-demand truth. L had real delayed
+credit exposure and mean-parameter updates, but semantic learnability was not measured.
+At complete-package level neither replacement earned reuse over C at the frozen budget.
+
+The strongest ordinary explanation is that the current interpretable aggregate plus
+trained recurrent motion extracts more usable value at this budget. Equal rights and
+seven floats do not make the finite C/H/L learners nested or equivalent: L replaces
+interpretable fields with a noisy, jointly learned convention. Finite optimization and
+receiver co-adaptation remain plausible alternatives to limited incremental information
+opportunity; B01 separates neither. The critic's descriptive height/boundary differences
+are consequences of different motion policies, not identified causes or energy evidence.
+It rejects both "content cannot help" and "optimization failed, so train longer/reduce
+noise" as unsupported conclusions. Packet dependence, semantic information and recurrence
+over independent training instances remain open, not reasons to erase the adverse result.
+
+No further observation is necessary for the present no-switch choice. The reviewer
+notes that packet scrambling would measure this receiver's dependence/distribution
+shift and would not by itself reverse the measured C preference. No targeted repair
+has a supported intermediate-plus-native prediction here. No seed, epoch, mean-message
+evaluation, arm or delay change is selected. This result also does not independently
+replicate CADC scheduling or C2 fixed-receiver request deletion.
+
+For a future consequential recurrence question, the critic would consider one newly
+specified complete C/H/L training block, retaining this evaluation panel and all three
+endpoints: another 3 fits / 442,368 steps / 3,072 updates. Repeated L losses would
+strengthen the finite-recipe constraint; L beating both baselines would expose
+training-instance sensitivity; mixed ordering would leave stable preference unresolved.
+It explicitly does **not** recommend buying that block now. Root's later peer disposition
+at `6a4386526` likewise preserves Claude's optional three-training-instances-per-arm
+precision suggestion only for a future material replication/claim decision, not this
+completed batch. Additional evaluation worlds would not create independent training
+replication. Any such continuation needs a fresh prospective
+question, seed binding, cost and actual-node admission; there is no current dependency
+on an owner acknowledgment and no queued successor.
+
+Current decision: retain the original C aggregate as the incumbent comparator; end
+this stochastic L and five-tick H package's additional investment, and place the broader
+content question in reserve. Keep all favorable/adverse evidence, the ordinary learning
+result and the primary-source novelty limits. There is no active producer, unread
+result, open Pro request or automatically selected repair. Publish this bounded reading
+and directly affected shared background, then retire unused entrypoints/tests/scratch
+and the disposable source snapshot while retaining the unique evidence and pure reader.
