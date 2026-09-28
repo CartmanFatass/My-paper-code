@@ -17,7 +17,7 @@ DM持续负责科学问题与解释，每次推进一个结果性研究，自主
 当前责任与工作区见[任务路由](#session-routing)，上一轮分工及采纳依据见[四DM审查](archive/2026-09-27/RESEARCH-four-codex-root-handover.md#four-dm-root-decision)。
 Owner已归档完成且文档齐全的DM；后继研究创建新DM并继承已发表证据，不恢复或复用这些旧会话。
 六个原生DM及A/B后继比较均已完整收口：7批、640完整回合、1.92M原生步、1fit；来源、独立判读和终态清理均保全。
-Owner于2026-09-28启动的第二轮两项比较已完整运行并独立判读：主动感知学习包未建立超出普通策略的增量，合法锚点比较建立构造的条件性增量并改变性能参照；1fit／960k原生步，原配方不自动追加。Owner已采纳轻量方法调整并授权下一轮：有限补能承诺比较由新DM执行，独立的机队布局间过渡规划由另一新DM设计；不以DM数量下降宣称问题空间耗尽。具体结果、成本与选择见[现行计划](#current-research-plan)。
+Owner于2026-09-28启动的第二轮两项比较已完整运行并独立判读：主动感知学习包未建立超出普通策略的增量，合法锚点比较建立构造的条件性增量并改变性能参照；1fit／960k原生步，原配方不自动追加。轻量方法调整后的有限补能承诺比较也已完整判读：保留有条件的普通调度器O，学习端点未改变原基线部署，并保留训练驻留控制的语义失配。另一新DM的独立联合路径过渡比较已接受运行，仍待完整结果；不以DM数量下降宣称问题空间耗尽。具体结果、成本与选择见[现行计划](#current-research-plan)。
 本页在科学判断、计划或控制发生实质变化时更新；逐 cell 进度和操作恢复信息见相应 NOTES/runs。
 
 **计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
@@ -977,7 +977,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
 | `uav_joint_transition` | Under a common radio-aware destination-generation rule, can learned joint staging and intermediate paths improve complete native service beyond ordinary trajectory planning? | exploring | Codex DM (native child) | **Selected after the ordinary-F forecast correction; implementation and independent engineering review complete, preparing first admission.** Full-team four-mode support, bounded ordinary coordinate/pair search and direct PPO, with unchanged complete R/central TransitHold P references. One64-world fit plus L/O/R/P on8new H3000 worlds:288k native steps/256updates, <=1.312M radio queries and9.864M joint prediction ticks. Preserve reserve tails, old ranking failure, native guard/shield and one-fit/eight-world uncertainty; no charge scheduling, goal decoder or automatic repair. [Corrected scope and checks](candidates/uav_joint_transition/NOTES.md#2026-09-28-utc---adopted-forecast-correction-and-selected-b01-l0), [full selection](archive/2026-09-28/RESEARCH-joint-transition-selection.md#final-root-decision), [routing](#session-routing). |
-| `uav_persistent_service` | 同中央当前快照与动作权利下，有限返航／驻留补能／重新部署承诺能否改善完整联合服务，学习是否超出有能力普通调度？ | reserve | Codex DM (native child) | **B01完整并独立判读：保留条件性普通O，结束当前PPO包，0已选追加。** 输入981e935ee；16新共同H3000世界O-P QoS +.062866 [.049191,.076541]／J +196.349，15同升、12双降。O无reserve暴露但九世界半服务最长区间变长，所有世界净储能下降；不是持续性或默认安全。训练1155次承诺／2484eligible、640更新，端点L在1344eligible全选service，L/P原生数组逐位相同。17次训练到达阈值失配影响驻留控制，含120标签900步承诺／580步充电；原意时长学习未完整实现，不诊断L=P原因。1fit／112回合／336k步、48.33min、3.151 worker-CPU小时。无活动操作、未读结果或审批依赖；不自动修复重跑、加fit或改部署。[完整结果及成本](candidates/uav_persistent_service/NOTES.md#2026-09-28---b01-complete-useful-ordinary-package-unchanged-learned-deployment)、[完整独立答复与处置](candidates/uav_persistent_service/NOTES.md#independent-scientific-reading-and-dm-disposition)、[原生路由](#session-routing)。 |
+| `uav_persistent_service` | 同中央当前快照与动作权利下，有限返航／驻留补能／重新部署承诺能否改善完整联合服务，学习是否超出有能力普通调度？ | reserve | Codex DM (native child) | **B01完整并独立判读：保留条件性普通O，结束当前PPO包，0已选追加。** 输入981e935ee；16新共同H3000世界O-P QoS +.062866 [.049191,.076541]／J +196.349，15世界同升、world52192812双降（1世界）。O无reserve暴露但九世界半服务最长区间变长，所有世界净储能下降；不是持续性或默认安全。训练1155次承诺／2484eligible、640更新，端点L在1344eligible全选service，L/P原生数组逐位相同。17次训练到达阈值失配影响驻留控制，含120标签900步承诺／580步充电；原意时长学习未完整实现，不诊断L=P原因。1fit／112回合／336k步、48.33min、3.151 worker-CPU小时。无活动操作、未读结果或审批依赖；不自动修复重跑、加fit或改部署。[完整结果及成本](candidates/uav_persistent_service/NOTES.md#2026-09-28---b01-complete-useful-ordinary-package-unchanged-learned-deployment)、[完整独立答复与处置](candidates/uav_persistent_service/NOTES.md#independent-scientific-reading-and-dm-disposition)、[保全与净清理1126502400bytes](candidates/uav_persistent_service/NOTES.md#publication-retention-and-measured-cleanup)、[原生路由](#session-routing)。 |
 | `uav_active_sensing` | 同合法信息下，具有实际训练曝光的服务／探测联合选择能否学到超出初始化及有能力普通程序的完整J、服务与风险价值？ | reserve | Codex DM (native child) | **B02完整判读并结束原样投入，0已选后继。** 输入087c8823a；1fit／480k训练＋64 H3000评价／192k步，1600真实更新，89.56min runner。160/160训练世界实际eligible，1618服务／1793探测；L1在13/16评价世界执行139探测却全选目标115。L1-H／A／R50的J +7.217／-17.474／+3.379，区间均跨零，未建立增量；28173010新增7个持续低储备成员，继承P_BS风险限制。独立科学判读无材料异议：保留普通资产、父问题开放，不把充分曝光或参数变化当作用途，不归因B01／类别平衡／clipping。无未收操作、开放Pro或外部依赖；再入需有成本且能区分有用解释的具体学习比较，不自动加seed／epoch／gate／确认。[完整正反结果与独立决定](candidates/uav_active_sensing/NOTES.md#2026-09-28---b02-complete-semantic-exposure-without-established-package-value)、[固定前瞻](candidates/uav_active_sensing/NOTES.md#2026-09-28---b02-proposal-learn-a-consequential-service-acquisition-choice)、[路由](#session-routing)。 |
 | `uav_radio_placement` | 同信息、时钟、执行和护盾下，普通空间目标与原生接入／回传目标的对齐能否带来完整服务和 J 增益？ | reserve | Codex DM (native child) | **B01完整核验并独立科学审查，保留R条件性资产、H默认锚，结束当前配方投入。** 8新世界中R-G QoS +.028758 [.009323,.048194]、J +69.938 [3.053,136.824]；R-H QoS +.027374、J +61.646但J区间跨零；G-H均值未增。R-G是目标／搜索／可动支持包差。R的01/03/05到终点均有7成员低于10%储备，最低.088559；01对G服务升而J降、06对H双降，不默认替换或称安全。0fit、24回合／72k步／59,988无线查询，41.79min、1.3765 worker-CPU小时。无活动操作、未读结果或已选追加；同世界I/R全程序比较仅交Root取舍的建议，不自动修补／确认／学习。[固定证据](https://github.com/CartmanFatass/My-paper-code/blob/c45c27a01/runs/uav_radio_placement/b01_spatial_a01/summary.json)、[完整处置](candidates/uav_radio_placement/NOTES.md#independent-scientific-reading-and-dm-disposition)、[原生路由](#session-routing)。 |
 | `uav_geometric_generalization` | 已训练 SET 的坐标系依赖是否构成可干预的部署限制，固定合法坐标规范化能否改善完整原生服务与 J？ | reserve | Codex DM (native child) | **B01完整并经独立科学审查：结束固定NE部署包，保留更广几何学习问题。** 16新共同世界的C-P确定性QoS -.042121 [-.104386,+.020143]／J -125.767，采样 -.069072 [-.115083,-.023060]／J -205.924；3/1胜、7/9负、每模式6个identity。事后原轨迹补读确认首10步向心纠正真实激活，但未转为预定持续服务；不称从未触及干预或几何学习无效。带ID出生支持不D4对称，peer物理旋转是不同estimand。H的高服务/J与低电尾部、c06原学习改善均保留。80个H3000／240k步／0fit，54.58min runner wall；163文件核验，持久raw和compact保全，源码快照清理。无活动producer／待收结果／已选后继／审批等待，不调帧、补面板或恢复G/V；新跨题投入交Root选择。[完整结果](candidates/uav_geometric_generalization/NOTES.md#2026-09-28---b01-complete-reading)、[独立审查与处置](candidates/uav_geometric_generalization/NOTES.md#independent-scientific-reading-and-dm-disposition)、[原生路由](#session-routing)。 |
@@ -1259,33 +1259,24 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 相关22项测试通过，生成的Claude副本无漂移；这些工程检查不是科研效率改善的证据。
 已完成第二轮的完整综合及本次选择审查见[退役记录](archive/2026-09-28/RESEARCH-native-round3-selection.md)。
 
-**本轮选定问题：有限的返航准入、补能停留和重新部署承诺，能否改善完整协作路径与服务？**
-由新的`uav_persistent_service` DM负责；不恢复已完成归档的DM，不把空闲槽位当选题理由。
-旧I已经主动选择充电站且保持目标，本次不同在于跨普通重规划执行的有限停留承诺；
-重复低储备和旧I/L的失败不诊断充电机制，也不证明可用增益。
-中央当前快照是明确的初始边界，原TransitHold P保持精确普通参照；合法观测P_BS是另一程序，不能混称。
-
-一次完整探索比较直接PPO调度器L、同权利普通调度器O和不变P：
-**1fit、64个H3000训练世界、3臂各16个新配对评价世界，共112回合/336k原生步/640次优化更新。**
-只有最终checkpoint，无中间挑选、额外arm或自动补跑；零预测环境推进，但最多638400次radio snapshots，
-真实执行、学习、工程、审查、保全及读取仍有成本。历史P线性缩放约2.45 worker-hours不是本次时长预测或上界；
-真实节点准入和实测为准。完整规则、种子及风险取舍见[方向NOTES](candidates/uav_persistent_service/NOTES.md)。
-
-同一次独立选择审查提出的实质异议已被Root采纳，并由DM修正规则：margin已经扣除返航能量，
-因此D是到F进入的近似出发deadline，不能再用D-tau排序或算占位；O以D排序、以其他成员D+tau估算到站，
-另行计入有限端点前的返程服务恢复。无可行停留则继续服务，D超出剩余H不触发补能。
-停留明确为首次几何到达后的经过时间，包含排队和离开范围的时间，不是获配充电时长。
-完整原异议及处置保留在[选择记录](archive/2026-09-28/RESEARCH-native-round3-selection.md#decision)；
-不因修正规则新增fit、预筛查或第二套选题审查。
-
-不同结果改变投入：L在完整J/服务和观察到的风险代价上超出O与P，才值得给独立fit复制定价；
-O有用而L无额外用途则保留条件性普通资产；两者都未建立用途则结束此包。
-未激活、到达失败、充电中断、标签执行重合、风险冲突和技术不完整分别读取，不自动授权修补。
-本次是中央信息、有限H3000下的经验用途问题，不宣称持续服务保证、PPO/MARL算法新颖性或已识别能量瓶颈。
-用户运动预测暂不另开方向：当前并无足够明确的条件性收益预测；这不是已经测出预测无用。
+**有限补能承诺已得到完整答案：保留条件性普通O，结束当前PPO包，0已选追加。**
+同中央当前信息的16个新H3000世界，O相对精确TransitHold P的QoS/步 +.062866、J +196.349，
+15世界同升、world52192812双降。145次O承诺均完成到达、充电、释放和重新分配；这是有限完整方案用途，
+不是补能某组件的因果贡献。O没有观察到reserve暴露，但九世界最长低于半数服务区间更长，
+早段平均服务更低，所有世界净储能下降458-774Wh；不宣称持续性、安全或默认替换。
+训练实际执行1155次承诺且有640次更新，端点L却在1344个eligible时钟全选service，
+16世界与P的共同原生数组逐位相同。17次训练承诺已充电却未触发几何到达，改变驻留控制时长；
+所以保留L的实际部署结论，同时限制原意时长学习的解释，不把该失配诊断为L=P原因。
+Root已读完整独立答复并采纳DM处置：不补丁重跑、不更换部署规则救援、不自动加fit或确认。
+实付1fit／112回合／336k原生步、334599次无线快照、48.33min runner及3.151 worker-CPU小时；
+独立审查核验全部112轨迹，Root复核compact计数，不冒充重复原始审计。
+[完整结果与独立处置](candidates/uav_persistent_service/NOTES.md#independent-scientific-reading-and-dm-disposition)；
+[原项目前瞻及Root取舍](archive/2026-09-28/RESEARCH-persistent-service-plan.md)。
+更广的学习调度问题仍未被否定，但当前没有值得购买的具体后继。
 
 **并行选定独立的联合过渡研究：同一无线目标生成规则下，怎样协调机队在目标布局之间移动？**
 新的`/root/dm_joint_transition`负责`uav_joint_transition`，不选择返航时机、充电停留或目标生成。
+固定输入`18c9a6ba5`已通过工程审查和真实节点准入，运行中；接受运行不等于完整结果。
 L/O在同一R目标规则和执行权限下选择全队直行、15步等待或左右中间航点；
 O有两遍坐标搜索与全部成员对的D/W搜索，R与精确P保留为同新世界的完整普通参照。
 共同目标生成规则不等于各臂后续数值目标相同。旧move/单成员hold负结果和R的条件性资产均继承，
@@ -1299,6 +1290,8 @@ O有两遍坐标搜索与全部成员对的D/W搜索，R与精确P保留为同�
 原10-14 worker-CPU小时整批估计已撤回，需实测新预测成本，不把它记零或称廉价整体部署。
 完整问题空间诊断、原始异议及处置见[选择记录](archive/2026-09-28/RESEARCH-joint-transition-selection.md)。
 该批不因并行而增加arm、pilot、fit、世界或自动修补；技术不完整与无用途分别记录。
+补能O的结果晚于本批接受，不把它追加入固定L/O/R/P面板，也不跨世界面板推断O与路径规划器的排序。
+用户运动预测暂不另开方向：当前尚无较明确的条件性收益预测；这不是已经测出预测无用。
 Claude在`350294379`记录的下一规划问题选择保持peer自主范围；具体潜在重合走既定范围通道，
 不把整个路径规划题族当作任何一方独占方向。
 
@@ -1384,7 +1377,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
 | DM: joint transitions between radio-aware destinations | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_joint_transition` | `/home/fires/hmasd-wsl` · `main` | Registered `hmasd-direction-manager`; owns `uav_joint_transition` and matching paths. Corrected L/O/R/P study selected; implementation and independent engineering review complete, no result operation yet. Owns admission through same-handle deterministic observation, complete independent reading, publication and cleanup. Root owns cross-question allocation; no App queue wake, duplicate launch or per-run ACK. [NOTES](candidates/uav_joint_transition/NOTES.md). |
-| DM：有限持续服务承诺 | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_persistent_service_round3` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_persistent_service`。固定L/O/P运行、同句柄收集及完整独立判读已完成；条件性O保留，当前学习配方结束，无活动producer或已选后继。结果发表及终态清理中；语义限制、成本和保全见方向NOTES。跨题分配由Root承担，无App队列唤醒或逐运行审批。 |
+| DM：有限持续服务承诺 | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_persistent_service_round3` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_persistent_service`。固定L/O/P运行、同句柄收集、完整独立判读、发表及实测清理均完成；条件性O保留，当前学习配方结束，无活动producer、未读结果、清理阻塞或已选后继。语义限制、成本和唯一证据保全见方向NOTES。跨题分配由Root承担，无App队列唤醒或逐运行审批。 |
 | 规划 HMASD 周期总结（当前Root） | `01a0e560-4333-7b03-8ff3-759a4add1d9a` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner于2026-09-28 UTC启动原生DM试行并进一步取消固定数量限制、要求积极推进。Root负责问题设计、委派、跨问题取舍与综合判断，长wait_agent等待实质返回，不执行额外方向或逐fit审批。四旧DM及交接设计继承完整文档，归档会话不复用。[当前计划](#current-research-plan)。 |
 | DM1：完整服务—补能协调（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_energy_coordination` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_energy_coordination`。B01 I/C/H与B02冻结I/P均完整读取、独立审查、自有发表及终态清理；当前解析配方结束投入，较宽问题reserve，无活动操作。实际历史句柄和固定源码见NOTES；无旧App会话复用或逐运行审批。 |
 | DM：合法信息的决策价值（本轮native child已完成） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_information_round2` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；B03完整96回合已收集／审查／发表，唯一原始证据持久化，终态清理净释放800,518,144字节。停止本项归因投入并保留正反证据：P是条件性普通性能参照，H默认限制不变，S0为归因控制；无新运行、待观察操作或科学依赖。继承前驱B01/B02全部负证据且未重启其操作；既有合法控制器源码不变供感知研究复用。已到向Root返回的完整结果边界。 |
