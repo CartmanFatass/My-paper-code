@@ -1,0 +1,134 @@
+{
+  "formula": "I_k = mean_i sum_(t<k) dot(displacement_xy[t,i], [4000,4000]-own_xy[t,i]) / norm([4000,4000]-own_xy[t,i]); t0 share counts strictly positive projection; speed uses mean norm(displacement_xy).",
+  "launch_sha": "52986d5b005202b3ec77f8f556ad2a790541d0d7",
+  "new_fits": 0,
+  "new_native_steps": 0,
+  "paired_first10": [
+    {
+      "C-P_first10_deterministic": 23.988795472016832,
+      "C-P_first10_stochastic": 41.96846009884917,
+      "frame": "MIRROR_X",
+      "seed": 280928401
+    },
+    {
+      "C-P_first10_deterministic": 0,
+      "C-P_first10_stochastic": 0,
+      "frame": "IDENTITY",
+      "seed": 280928402
+    },
+    {
+      "C-P_first10_deterministic": 0,
+      "C-P_first10_stochastic": 0,
+      "frame": "IDENTITY",
+      "seed": 280928403
+    },
+    {
+      "C-P_first10_deterministic": 167.87619928295956,
+      "C-P_first10_stochastic": 180.023076267821,
+      "frame": "MIRROR_Y",
+      "seed": 280928404
+    },
+    {
+      "C-P_first10_deterministic": 200.3198793051343,
+      "C-P_first10_stochastic": 192.83627504296328,
+      "frame": "ROT180",
+      "seed": 280928405
+    },
+    {
+      "C-P_first10_deterministic": 64.48771020623391,
+      "C-P_first10_stochastic": 58.85744737182098,
+      "frame": "MIRROR_X",
+      "seed": 280928406
+    },
+    {
+      "C-P_first10_deterministic": 0,
+      "C-P_first10_stochastic": 0,
+      "frame": "IDENTITY",
+      "seed": 280928407
+    },
+    {
+      "C-P_first10_deterministic": 0,
+      "C-P_first10_stochastic": 0,
+      "frame": "IDENTITY",
+      "seed": 280928408
+    },
+    {
+      "C-P_first10_deterministic": 0,
+      "C-P_first10_stochastic": 0,
+      "frame": "IDENTITY",
+      "seed": 280928409
+    },
+    {
+      "C-P_first10_deterministic": 241.06417739799414,
+      "C-P_first10_stochastic": 214.85033033784256,
+      "frame": "MIRROR_X",
+      "seed": 280928410
+    },
+    {
+      "C-P_first10_deterministic": 391.21630743171056,
+      "C-P_first10_stochastic": 359.2556880118489,
+      "frame": "ROT180",
+      "seed": 280928411
+    },
+    {
+      "C-P_first10_deterministic": 0,
+      "C-P_first10_stochastic": 0,
+      "frame": "IDENTITY",
+      "seed": 280928412
+    },
+    {
+      "C-P_first10_deterministic": 153.81018966369498,
+      "C-P_first10_stochastic": 160.79714585781494,
+      "frame": "MIRROR_Y",
+      "seed": 280928413
+    },
+    {
+      "C-P_first10_deterministic": 180.15123387005954,
+      "C-P_first10_stochastic": 169.7287949159,
+      "frame": "MIRROR_Y",
+      "seed": 280928414
+    },
+    {
+      "C-P_first10_deterministic": 232.9612024279192,
+      "C-P_first10_stochastic": 239.4587698164349,
+      "frame": "MIRROR_Y",
+      "seed": 280928415
+    },
+    {
+      "C-P_first10_deterministic": 217.33073908014822,
+      "C-P_first10_stochastic": 218.8761387500945,
+      "frame": "ROT180",
+      "seed": 280928416
+    }
+  ],
+  "program_means": {
+    "C_deterministic": {
+      "inward_first10_m_per_uav": 140.9301022335078,
+      "inward_t0_uav_fraction": 1,
+      "speed_first100_mps": 10.209876068929137
+    },
+    "C_stochastic": {
+      "inward_first10_m_per_uav": 134.4648095744356,
+      "inward_t0_uav_fraction": 0.984375,
+      "speed_first100_mps": 12.92809716563448
+    },
+    "H_central10": {
+      "inward_first10_m_per_uav": 279.21328951039186,
+      "inward_t0_uav_fraction": 1,
+      "speed_first100_mps": 29.9452106003437
+    },
+    "P_deterministic": {
+      "inward_first10_m_per_uav": 23.85470009989084,
+      "inward_t0_uav_fraction": 0.6328125,
+      "speed_first100_mps": 9.467373383136813
+    },
+    "P_stochastic": {
+      "inward_first10_m_per_uav": 19.6740516699737,
+      "inward_t0_uav_fraction": 0.609375,
+      "speed_first100_mps": 12.433405985453675
+    }
+  },
+  "raw_root": "/home/wu/hmasd-artifacts/uav_geometric_generalization/b01_pc_ne_a01/raw",
+  "scope": "Post hoc scientific-review activation check, not a selected endpoint, new evaluation, or mechanism identification.",
+  "status": "complete_existing_raw_reading"
+}

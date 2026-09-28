@@ -1,0 +1,528 @@
+{
+  "batch": "B01-PC-NE",
+  "canonical_rule": "reflect initial mean spawn xy to NE, fixed per episode; no identity permutation",
+  "checkpoint_dir": "/home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01r/checkpoints/c06",
+  "controller_information": {
+    "C_deterministic": "flat recurrent actor on the legal observation + held central snapshot (state, all observations, ego one-hot) refreshed every k = 10 steps (SET, use_central_snapshot_in_flat_actor)",
+    "C_stochastic": "flat recurrent actor on the legal observation + held central snapshot (state, all observations, ego one-hot) refreshed every k = 10 steps (SET, use_central_snapshot_in_flat_actor)",
+    "H_central10": "central-positions, 10-step replanning",
+    "P_deterministic": "flat recurrent actor on the legal observation + held central snapshot (state, all observations, ego one-hot) refreshed every k = 10 steps (SET, use_central_snapshot_in_flat_actor)",
+    "P_stochastic": "flat recurrent actor on the legal observation + held central snapshot (state, all observations, ego one-hot) refreshed every k = 10 steps (SET, use_central_snapshot_in_flat_actor)"
+  },
+  "device": "cpu",
+  "direction": "uav_geometric_generalization",
+  "dtype": "float32",
+  "fits": 0,
+  "horizon": 3000,
+  "interval": "paired world t interval, descriptive conditional on one retained c06",
+  "jobs": [
+    {
+      "job_key": "P_deterministic/280928401",
+      "program": "P_deterministic",
+      "seed": 280928401
+    },
+    {
+      "job_key": "P_stochastic/280928401",
+      "program": "P_stochastic",
+      "seed": 280928401
+    },
+    {
+      "job_key": "C_deterministic/280928401",
+      "program": "C_deterministic",
+      "seed": 280928401
+    },
+    {
+      "job_key": "C_stochastic/280928401",
+      "program": "C_stochastic",
+      "seed": 280928401
+    },
+    {
+      "job_key": "H_central10/280928401",
+      "program": "H_central10",
+      "seed": 280928401
+    },
+    {
+      "job_key": "P_deterministic/280928402",
+      "program": "P_deterministic",
+      "seed": 280928402
+    },
+    {
+      "job_key": "P_stochastic/280928402",
+      "program": "P_stochastic",
+      "seed": 280928402
+    },
+    {
+      "job_key": "C_deterministic/280928402",
+      "program": "C_deterministic",
+      "seed": 280928402
+    },
+    {
+      "job_key": "C_stochastic/280928402",
+      "program": "C_stochastic",
+      "seed": 280928402
+    },
+    {
+      "job_key": "H_central10/280928402",
+      "program": "H_central10",
+      "seed": 280928402
+    },
+    {
+      "job_key": "P_deterministic/280928403",
+      "program": "P_deterministic",
+      "seed": 280928403
+    },
+    {
+      "job_key": "P_stochastic/280928403",
+      "program": "P_stochastic",
+      "seed": 280928403
+    },
+    {
+      "job_key": "C_deterministic/280928403",
+      "program": "C_deterministic",
+      "seed": 280928403
+    },
+    {
+      "job_key": "C_stochastic/280928403",
+      "program": "C_stochastic",
+      "seed": 280928403
+    },
+    {
+      "job_key": "H_central10/280928403",
+      "program": "H_central10",
+      "seed": 280928403
+    },
+    {
+      "job_key": "P_deterministic/280928404",
+      "program": "P_deterministic",
+      "seed": 280928404
+    },
+    {
+      "job_key": "P_stochastic/280928404",
+      "program": "P_stochastic",
+      "seed": 280928404
+    },
+    {
+      "job_key": "C_deterministic/280928404",
+      "program": "C_deterministic",
+      "seed": 280928404
+    },
+    {
+      "job_key": "C_stochastic/280928404",
+      "program": "C_stochastic",
+      "seed": 280928404
+    },
+    {
+      "job_key": "H_central10/280928404",
+      "program": "H_central10",
+      "seed": 280928404
+    },
+    {
+      "job_key": "P_deterministic/280928405",
+      "program": "P_deterministic",
+      "seed": 280928405
+    },
+    {
+      "job_key": "P_stochastic/280928405",
+      "program": "P_stochastic",
+      "seed": 280928405
+    },
+    {
+      "job_key": "C_deterministic/280928405",
+      "program": "C_deterministic",
+      "seed": 280928405
+    },
+    {
+      "job_key": "C_stochastic/280928405",
+      "program": "C_stochastic",
+      "seed": 280928405
+    },
+    {
+      "job_key": "H_central10/280928405",
+      "program": "H_central10",
+      "seed": 280928405
+    },
+    {
+      "job_key": "P_deterministic/280928406",
+      "program": "P_deterministic",
+      "seed": 280928406
+    },
+    {
+      "job_key": "P_stochastic/280928406",
+      "program": "P_stochastic",
+      "seed": 280928406
+    },
+    {
+      "job_key": "C_deterministic/280928406",
+      "program": "C_deterministic",
+      "seed": 280928406
+    },
+    {
+      "job_key": "C_stochastic/280928406",
+      "program": "C_stochastic",
+      "seed": 280928406
+    },
+    {
+      "job_key": "H_central10/280928406",
+      "program": "H_central10",
+      "seed": 280928406
+    },
+    {
+      "job_key": "P_deterministic/280928407",
+      "program": "P_deterministic",
+      "seed": 280928407
+    },
+    {
+      "job_key": "P_stochastic/280928407",
+      "program": "P_stochastic",
+      "seed": 280928407
+    },
+    {
+      "job_key": "C_deterministic/280928407",
+      "program": "C_deterministic",
+      "seed": 280928407
+    },
+    {
+      "job_key": "C_stochastic/280928407",
+      "program": "C_stochastic",
+      "seed": 280928407
+    },
+    {
+      "job_key": "H_central10/280928407",
+      "program": "H_central10",
+      "seed": 280928407
+    },
+    {
+      "job_key": "P_deterministic/280928408",
+      "program": "P_deterministic",
+      "seed": 280928408
+    },
+    {
+      "job_key": "P_stochastic/280928408",
+      "program": "P_stochastic",
+      "seed": 280928408
+    },
+    {
+      "job_key": "C_deterministic/280928408",
+      "program": "C_deterministic",
+      "seed": 280928408
+    },
+    {
+      "job_key": "C_stochastic/280928408",
+      "program": "C_stochastic",
+      "seed": 280928408
+    },
+    {
+      "job_key": "H_central10/280928408",
+      "program": "H_central10",
+      "seed": 280928408
+    },
+    {
+      "job_key": "P_deterministic/280928409",
+      "program": "P_deterministic",
+      "seed": 280928409
+    },
+    {
+      "job_key": "P_stochastic/280928409",
+      "program": "P_stochastic",
+      "seed": 280928409
+    },
+    {
+      "job_key": "C_deterministic/280928409",
+      "program": "C_deterministic",
+      "seed": 280928409
+    },
+    {
+      "job_key": "C_stochastic/280928409",
+      "program": "C_stochastic",
+      "seed": 280928409
+    },
+    {
+      "job_key": "H_central10/280928409",
+      "program": "H_central10",
+      "seed": 280928409
+    },
+    {
+      "job_key": "P_deterministic/280928410",
+      "program": "P_deterministic",
+      "seed": 280928410
+    },
+    {
+      "job_key": "P_stochastic/280928410",
+      "program": "P_stochastic",
+      "seed": 280928410
+    },
+    {
+      "job_key": "C_deterministic/280928410",
+      "program": "C_deterministic",
+      "seed": 280928410
+    },
+    {
+      "job_key": "C_stochastic/280928410",
+      "program": "C_stochastic",
+      "seed": 280928410
+    },
+    {
+      "job_key": "H_central10/280928410",
+      "program": "H_central10",
+      "seed": 280928410
+    },
+    {
+      "job_key": "P_deterministic/280928411",
+      "program": "P_deterministic",
+      "seed": 280928411
+    },
+    {
+      "job_key": "P_stochastic/280928411",
+      "program": "P_stochastic",
+      "seed": 280928411
+    },
+    {
+      "job_key": "C_deterministic/280928411",
+      "program": "C_deterministic",
+      "seed": 280928411
+    },
+    {
+      "job_key": "C_stochastic/280928411",
+      "program": "C_stochastic",
+      "seed": 280928411
+    },
+    {
+      "job_key": "H_central10/280928411",
+      "program": "H_central10",
+      "seed": 280928411
+    },
+    {
+      "job_key": "P_deterministic/280928412",
+      "program": "P_deterministic",
+      "seed": 280928412
+    },
+    {
+      "job_key": "P_stochastic/280928412",
+      "program": "P_stochastic",
+      "seed": 280928412
+    },
+    {
+      "job_key": "C_deterministic/280928412",
+      "program": "C_deterministic",
+      "seed": 280928412
+    },
+    {
+      "job_key": "C_stochastic/280928412",
+      "program": "C_stochastic",
+      "seed": 280928412
+    },
+    {
+      "job_key": "H_central10/280928412",
+      "program": "H_central10",
+      "seed": 280928412
+    },
+    {
+      "job_key": "P_deterministic/280928413",
+      "program": "P_deterministic",
+      "seed": 280928413
+    },
+    {
+      "job_key": "P_stochastic/280928413",
+      "program": "P_stochastic",
+      "seed": 280928413
+    },
+    {
+      "job_key": "C_deterministic/280928413",
+      "program": "C_deterministic",
+      "seed": 280928413
+    },
+    {
+      "job_key": "C_stochastic/280928413",
+      "program": "C_stochastic",
+      "seed": 280928413
+    },
+    {
+      "job_key": "H_central10/280928413",
+      "program": "H_central10",
+      "seed": 280928413
+    },
+    {
+      "job_key": "P_deterministic/280928414",
+      "program": "P_deterministic",
+      "seed": 280928414
+    },
+    {
+      "job_key": "P_stochastic/280928414",
+      "program": "P_stochastic",
+      "seed": 280928414
+    },
+    {
+      "job_key": "C_deterministic/280928414",
+      "program": "C_deterministic",
+      "seed": 280928414
+    },
+    {
+      "job_key": "C_stochastic/280928414",
+      "program": "C_stochastic",
+      "seed": 280928414
+    },
+    {
+      "job_key": "H_central10/280928414",
+      "program": "H_central10",
+      "seed": 280928414
+    },
+    {
+      "job_key": "P_deterministic/280928415",
+      "program": "P_deterministic",
+      "seed": 280928415
+    },
+    {
+      "job_key": "P_stochastic/280928415",
+      "program": "P_stochastic",
+      "seed": 280928415
+    },
+    {
+      "job_key": "C_deterministic/280928415",
+      "program": "C_deterministic",
+      "seed": 280928415
+    },
+    {
+      "job_key": "C_stochastic/280928415",
+      "program": "C_stochastic",
+      "seed": 280928415
+    },
+    {
+      "job_key": "H_central10/280928415",
+      "program": "H_central10",
+      "seed": 280928415
+    },
+    {
+      "job_key": "P_deterministic/280928416",
+      "program": "P_deterministic",
+      "seed": 280928416
+    },
+    {
+      "job_key": "P_stochastic/280928416",
+      "program": "P_stochastic",
+      "seed": 280928416
+    },
+    {
+      "job_key": "C_deterministic/280928416",
+      "program": "C_deterministic",
+      "seed": 280928416
+    },
+    {
+      "job_key": "C_stochastic/280928416",
+      "program": "C_stochastic",
+      "seed": 280928416
+    },
+    {
+      "job_key": "H_central10/280928416",
+      "program": "H_central10",
+      "seed": 280928416
+    }
+  ],
+  "launch_sha": "52986d5b005202b3ec77f8f556ad2a790541d0d7",
+  "max_transitions": 240000,
+  "optimizer_updates": 0,
+  "record": {
+    "agent_pt": "agent.pt",
+    "agent_pt_bytes": 38833351,
+    "agent_pt_sha256": "41aa4ff0be5d55f924d8388af055fb087d76c1f517497e69c26d7962ce041bb3",
+    "checkpoint": "c06",
+    "config": {
+      "action_dim": 4,
+      "action_space_type": "continuous",
+      "algorithm": "mappo",
+      "baseline_algorithm": "mappo",
+      "batch_size": 12000,
+      "central_snapshot_state_affine": null,
+      "clip_epsilon": 0.2,
+      "collects_high_level_samples": false,
+      "continuous_action_distribution": "tanh_gaussian",
+      "coordinator_batch_size": null,
+      "count_arm": null,
+      "disable_discriminator_rewards": true,
+      "disable_discriminator_training": true,
+      "disable_high_level_training": true,
+      "discriminator_batch_size": null,
+      "embedding_dim": 256,
+      "energy_stage": "S2",
+      "episode_length": 3000,
+      "gae_lambda": 0.95,
+      "gamma": 0.99,
+      "gru_hidden_size": 256,
+      "hidden_size": 256,
+      "high_level_batch_size": 128,
+      "high_level_buffer_size": 600,
+      "k": 10,
+      "lambda_D": 0.0,
+      "lambda_cd": 0.0,
+      "lambda_d": 0.0,
+      "lambda_e": 1.0,
+      "lambda_h": 0.0,
+      "lambda_l": 0.005,
+      "lambda_mi": 0.0,
+      "lambda_return": 2.0,
+      "lr_coordinator": 0.0001,
+      "lr_discoverer_actor": 0.0001,
+      "lr_discoverer_critic": 0.0001,
+      "lr_discriminator": 0.0001,
+      "max_grad_norm": 0.5,
+      "max_steps": 3000,
+      "n_Z": 1,
+      "n_agents": 8,
+      "n_decoder_layers": 2,
+      "n_encoder_layers": 2,
+      "n_heads": 8,
+      "n_uavs": null,
+      "n_users": 30,
+      "n_z": 1,
+      "num_envs": 2,
+      "num_mini_batch": 4,
+      "obs_dim": 365,
+      "ordinary_completed_segments": false,
+      "policy_interruption_mode": "off",
+      "ppo_epochs": 15,
+      "rollout_length": 3000,
+      "scenario": 7,
+      "seed": 925031,
+      "sequence_batch_size": null,
+      "state_dim": 306,
+      "total_timesteps": 1200000,
+      "use_central_snapshot_in_flat_actor": true,
+      "use_entropy_annealing": false,
+      "use_horizon_window": false,
+      "use_lr_decay": false,
+      "use_obsnorm": false,
+      "use_opt_compact": false,
+      "use_process_exploration": false,
+      "use_reward_annealing": null,
+      "use_statenorm": false,
+      "use_valuenorm": true,
+      "value_loss_coef": 1.0,
+      "weight_decay": 0.0
+    },
+    "launch_sha": "c369a6b91651ece4bdfbbedce1be26cd0599baff",
+    "object_id": "ENERGY-RELAY-BENCHMARK-B02",
+    "optimizer_steps": {
+      "high": 0,
+      "individual_discriminator": 0,
+      "low_actor": 450000,
+      "low_critic": 450000,
+      "team_discriminator": 0
+    },
+    "policy_fingerprint": "a7c54b470441b8e742459e47a533a41c58534c36288ece0e9eb026a3b544c39c",
+    "programme": "SET-shield-on-1.2M",
+    "rollout": 200,
+    "training_seed": 925031,
+    "transitions": 1200000,
+    "wall_seconds": 20407.81692791998
+  },
+  "record_sha256": "b0da19b224df9582fc142f6d71513c6ae2ebb491a97af70c9928bb9b86041499",
+  "sample_seed_rule": "hash((policy_seed, world_seed, draw)) & 0xFFFFFFFF (CPython tuple-of-int hash); python/numpy/torch global RNGs seeded with it right before the episode's first propose",
+  "scope": "conditional deployment package; labeled reset law is not D4 invariant",
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "stochastic_draw": 0,
+  "threads": 1,
+  "trace_timing": "Row t of own_xyz, return_margin, nearest_station, nearest_station_distance_m, station_occupancy, station_queue and target_xy is decoded from the legal observation the controller and shield act on at step t (decision time, same as mode/entered/exited). charging, waiting_steps and battery row t are decoded from the post-step observation (t+1), so station_occupancy[t].sum() pairs with charging[t-1].sum(). guard_checked/guard_blocked row t count the guard actions of step t.",
+  "workers": 2
+}

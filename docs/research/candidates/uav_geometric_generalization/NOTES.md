@@ -322,3 +322,256 @@ spawned child; therefore this native turn stays open and uses long deterministic
 with same-handle drain/rearm. It does not change the target session, use App messaging,
 repeat submission or infer collection from observer registration. Checkpoints rearm
 only observation. Collection, complete reading and publication remain this DM's work.
+
+## 2026-09-28 - B01 complete reading
+
+The original operation exited zero at **04:53:47.321390 UTC**, with a valid native
+exit witness, absent runner/supervisor and consistent records. All **80/80 H3000
+episodes / 240000 native steps / 0 fits / 0 optimizer updates** completed; no missing
+or extra world, early terminal, orphan output or worker error occurred. Observer
+generation 1 produced a CHECKPOINT; generation 2 produced CHECKPOINT and READY.
+Both queue attempts received app-server error -32600 for the native child, as Root
+had warned. The DM read both generations in this still-open turn, consumed all events,
+and stopped generation 3 after the terminal fact. No worker was restarted or extended.
+
+### Complete artifact and readback checks
+
+The compact [config](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/config.json),
+[summary](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/summary.json),
+[all 80 per-world rows](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/perworld.json),
+[original manifest](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/manifest.json),
+[exit witness](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/process-exit.json)
+and [independent readback](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/readback.json)
+are retained. A small post-collection reader, `b01/readback.py`, imports no simulator
+or policy; it validates all declared hashes/counts and independently recomputes the
+already planned metrics and paired contrasts. This is artifact analysis, not an extra
+evaluation or new selected endpoint. Its first broad finite-array assertion rejected
+H's documented paired-NaN `target_xy` no-target sentinel (`b01/heuristic.py:213`).
+The reader was corrected to admit exactly that native H-only sentinel; no scientific
+output was edited. The final audit finds 130460 no-target UAV-steps, no other nonfinite
+numeric trace, and maximum absolute metric-reconstruction difference **0**.
+
+All **163 manifest files** match hash and bytes, including 80 NPZ trajectories and 80
+progress records. Raw native J, each of 14 native metric sums/means, fixed first/after
+1000 QoS, first-service/censoring, battery, reserve exposure and actual horizontal
+speed reconstruct exactly. Every saved paired difference/mean/interval recomputes.
+The six identity-frame worlds are 280928402/403/407/408/409/412: their **12 P/C pairs
+are exactly equal for every saved array**, including proposals and displacements.
+Other C frames per mode are mirror-X 3, mirror-Y 4 and rotation-180 3, all consistent
+with the initial mean legal position. Policy identities and declared P/C stochastic
+sample seeds match. The retained stderr contains checkpoint discriminator-buffer
+notices and one-option skill-logit standard-deviation warnings; the audit does not
+find nonfinite scientific actions, rewards or metrics.
+
+### Native outcomes
+
+Means are over all 16 fresh worlds. Reserve exposure is the fraction of all UAV-steps
+with battery below .10; minimum battery is the worst episode in that program, not an
+average. There were no cutoff/depletion events and no zero-service world in any arm.
+
+| Program | QoS/step | Native J | Return cost | Worst battery | Reserve exposure |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| P deterministic | .423175 | 1237.461713 | 1.132731 | .099169 | .00000781 |
+| C deterministic | .381054 | 1111.694496 | 1.117934 | .098366 | .00001823 |
+| P stochastic | .434325 | 1268.461560 | 2.564980 | .089348 | .00265104 |
+| C stochastic | .365254 | 1062.537385 | 2.379882 | .089348 | .00265104 |
+| H_central@10 | .789014 | 2294.949143 | 20.731745 | .069668 | .02111979 |
+
+The primary C-P paired contrasts, with descriptive 95% world-t intervals conditional
+on this one retained c06, are:
+
+| Mode | QoS/step difference [interval] | Native J difference [interval] | Positive / negative / unchanged |
+| --- | --- | --- | --- |
+| deterministic | -.042121 [-.104386, +.020143] | -125.767217 [-311.740533, +60.206099] | 3 / 7 / 6 |
+| stochastic | -.069072 [-.115083, -.023060] | -205.924176 [-343.439138, -68.409213] | 1 / 9 / 6 |
+
+The complete world vectors are in the summary, with a compact joint reading below.
+The unchanged worlds are part of the prospectively sampled deployment distribution,
+not deleted to increase effect size. Each row below is C-P, rounded only for display.
+
+| World suffix (280928xxx) | C frame | Det QoS | Det J | Stoch QoS | Stoch J |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 401 | mirror-X | -.034385 | -100.241 | -.048012 | -141.338 |
+| 402 | identity | 0 | 0 | 0 | 0 |
+| 403 | identity | 0 | 0 | 0 | 0 |
+| 404 | mirror-Y | +.122973 | +367.122 | +.045460 | +138.762 |
+| 405 | rotation-180 | -.081709 | -250.212 | -.214576 | -640.795 |
+| 406 | mirror-X | -.193949 | -578.086 | -.167456 | -499.130 |
+| 407 | identity | 0 | 0 | 0 | 0 |
+| 408 | identity | 0 | 0 | 0 | 0 |
+| 409 | identity | 0 | 0 | 0 | 0 |
+| 410 | mirror-X | -.081159 | -243.258 | -.166928 | -498.412 |
+| 411 | rotation-180 | +.072874 | +219.471 | -.083068 | -249.074 |
+| 412 | identity | 0 | 0 | 0 | 0 |
+| 413 | mirror-Y | -.239716 | -716.129 | -.124598 | -374.145 |
+| 414 | mirror-Y | -.047470 | -141.270 | -.009522 | -28.231 |
+| 415 | mirror-Y | +.107606 | +321.859 | -.131218 | -389.800 |
+| 416 | rotation-180 | -.299002 | -891.532 | -.205229 | -612.624 |
+
+The positive 404 in both modes and mode-reversing 411/415 remain important counterexamples
+to a universal-harm claim. C does not close the ordinary-control gap: C-H QoS is
+-.407961 [-.468244,-.347677] deterministic and -.423761 [-.471232,-.376289]
+stochastic; native J differences are -1183.255 and -1232.412, negative in every world.
+H is not uniformly safer: world 415 reaches battery .069668, return cost 229.376444
+and .193 reserve exposure; H worlds 408/410/416 also visit reserve. Native J already
+charges the defined constraint consequences, not inference cost. It is incorrect to
+erase either the much larger service/J or these adverse tails.
+
+C deterministic world 405 worsens battery from .116025 to .098366, return cost from
+1.012268 to 3.940669, and reserve exposure from zero to .00029167. Its world 406 improves
+these risk readings while losing .193949 QoS and 578.086 J. The stochastic worst battery
+and .0424167 per-world reserve fraction occur in identity world 403 in both P and C.
+Mean C-P return cost is -.014797 [-.496487,+.466893] deterministic and -.185098
+[-.364610,-.005586] stochastic. The service/J losses cannot be credited to higher mean
+constraint cost; small mean risk improvements do not make the package useful or safe.
+
+### Intermediate prediction and costs
+
+The predicted inward/early-service improvement did not appear consistently. C-P
+first-100-step cumulative inward projection per UAV is +31.31 m [-243.00,+305.63]
+deterministic and -73.55 m [-299.29,+152.20] stochastic. This projection is a trajectory
+description, not net radial progress or an identified causal mediator. Actual mean
+horizontal speed falls 8.4507 to 7.5254 m/s (det) and 10.2880 to 9.4103 (stoch).
+There was no action averaging or imposed action-norm reduction; any slowing is part
+of the changed closed-loop policy and visitation, not proof of a speed mechanism.
+
+First-1000 QoS differences are -.052136 [-.120292,+.016020] and -.098235
+[-.159639,-.036831]; after-1000 differences are -.037114 [-.101353,+.027126]
+and -.054490 [-.104881,-.004099]. Both clocks preserve complete native windows,
+unlike comparisons of different policy-dependent charging phases. Mean censored
+first-service waiting is P/C 211.0625/217.5 steps deterministic and 148.1875/213.8125
+stochastic. Served by step 60 / 120: P-det 8/16 and 9/16; C-det 8/16 and 9/16;
+P-stoch 8/16 and 9/16; C-stoch 7/16 and 7/16; H 14/16 and 16/16. None is censored
+at the endpoint here. Normal-mode boundary fractions rise .3762 to .4506 (det)
+and .3215 to .3993 (stoch), but are not the mechanism test or selection endpoint.
+
+Runner wall is **3274.693 s (54.58 min)**; native acceptance-to-exit is about **55.92 min**,
+including imports/startup outside the runner timer. Observed worker CPU is **6670.837 s
+(111.18 CPU min)** and summed worker wall **6518.118 s**; parent CPU .803 s. Per-process
+peak RSS is 487500 KiB parent and at most 805648 KiB worker, not a simultaneous peak.
+No worker resource record is missing; total simultaneous RSS and total engineering/
+scientific-reading wall were not measured, not zero. Device was CPU; zero GPU training.
+Mean inference CPU per complete episode P/C is 12.7167/12.9132 s deterministic and
+12.8375/13.1188 s stochastic, versus .6550 s for H; all have 3000 proposal calls.
+The measured C additions .1965/.2813 s do not explain the losses through the native J
+formula. The 29 engineering checks and independent review costs remain recorded above.
+
+At this point the DM's reading is that the selected NE deployment package has no
+support as an improvement; the stochastic loss and deterministic uncertainty are
+different statements. It shows practical sensitivity to this coordinate intervention,
+not that geometry is ignored, that c06 learned nothing, or that representation learning
+cannot help. Independent result review is now reading the original sources, this
+complete panel and the newly published peer geometry probe before the investment
+disposition below. No additional fit, frame, world, panel or speed repair is selected.
+
+### Retention and completed-operation cleanup
+
+The unique 80 raw trajectories and 80 progress records now live on wsl_4070 at
+`/home/wu/hmasd-artifacts/uav_geometric_generalization/b01_pc_ne_a01/raw/`.
+For every original manifest/perworld `raw/<file>`, resolve `<file>` in this canonical
+directory. The allocation is 78217216 bytes (logical raw/progress bytes 77720627).
+There is no local raw copy, tarball, full-tree backup or retention chain. A read-only
+same-UID process scan found no consumer of the completed raw directory before moving
+it; the full 163-file audit passed both before and after the move. Native claim,
+launch/exit records and compact output stay at the original run location and in Git.
+[Retention mapping and measured cleanup](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/retention.json).
+
+The native source collector first refused because `/proc/660/cwd` was unreadable.
+Its documented passwordless-sudo **read-only process scan** then established no live
+reference, clean snapshot, terminal witness, retained external outputs and source
+reachability. `hmasd_snapshot_gc.py --snapshot ecdf1ff8296545498cffbc6b85e16d05
+--apply --sudo-process-scan` removed only that accepted source snapshot; a later
+preview confirms `absent`. Its allocated size fell **799428608 -> 0 bytes**.
+The terminal claim remains and still prevents replay. The original c06 input belongs
+to the peer and was neither moved nor deleted.
+
+Deleted local targets are the two experiment `__pycache__` directories, the matching
+test `b01/__pycache__`, and `temp/directions/uav_geometric_generalization/` containing
+the consumed wait request and applied control-row patch. Owned code/test allocation
+fell 167936 -> 81920 bytes; scratch 12288 -> 0, totaling **98304 bytes reclaimed**.
+The two no-longer-used remote input staging files `uav-geometric-control-row.patch`
+and `uav-geometric-readback-b01.py` were also removed (**12288 bytes**); all listed
+targets are confirmed absent. The durable raw move itself reclaims no payload space
+and added 8192 bytes for its two new parent directories. Across these measured cleanup
+targets and the relocation overhead, net allocated bytes reclaimed are **799531008**.
+No cleanup blocker remains. The checked adapter, fixed runner, focused tests and small
+readback reader are useful retained reproducibility assets; no unselected G/V executable
+was created. Live consumers outside this direction were not found or changed.
+
+### Independent scientific reading and DM disposition
+
+A dedicated `hmasd-research-critic` reviewed this result in a separate context without
+DM/Root conversation inheritance. It disclosed prior exposure through the task summary,
+project memory and routing search, so this was not a blind review. It reconstructed
+the frozen source/config and all 80 rows before reading the notebook, Root selection
+and complete Pro answer, then read the canonical raw directly. It changed no file,
+queried no model and ran no environment. **MATERIAL_DISSENT: no. Recommendation:
+stop the current fixed NE deployment package, retain the broader geometric learning
+question, and buy zero additional runs.** The DM adopts this disposition.
+
+The substantive explanation refinement is important: **short-time inward correction
+did activate; it did not produce sustained task value.** The pre-fixed 100-step
+intermediate and complete endpoints above remain unchanged. To distinguish no
+activation from transitory activation, the Reviewer added one explicitly **post hoc**
+read of step 0 and the first ten existing steps, not a window search or new experiment.
+The DM independently recomputed exactly those readings from all raw files and saved
+[the post hoc activation record](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/posthoc_activation.json).
+For decision-time horizontal position x, actual horizontal displacement d and map
+center c=(4000,4000), it uses `I_k = mean_i sum_(t<k) dot(d[t,i], c-x[t,i]) / ||c-x[t,i]||`;
+the t0 share counts strictly positive inward projection. P -> C first-ten-step
+I is **23.854700 -> 140.930102 m/UAV** deterministic and **19.674052 -> 134.464810**
+stochastic. Both modes have positive I_10 differences in **all ten nonidentity worlds**;
+the other six are exactly zero. Step-0 inward UAV fractions rise **.6328125 -> 1.0**
+and **.609375 -> .984375**. These describe initial activation, do not pass the frozen
+100-step/complete prediction, and do not identify a causal mediator.
+
+Likewise, full-episode slowing cannot explain the initial effect by itself. First-100
+speed is P -> C **9.467373 -> 10.209876 m/s** deterministic and **12.433406 -> 12.928097**
+stochastic, while H is **29.945211 m/s**. Initial inward motion and early speed do not
+establish a useful service target, sustained placement or recovery control. The most
+useful revised explanation is that correcting an initial map-direction preference is
+insufficient to obtain sustained service; the frozen policy's geometric, labeled-slot
+and recurrent/history dependencies may also be changed by this deployment transform.
+The non-D4 reset-support mismatch is real but its contribution has not been isolated.
+The data do not choose a unique remedy among these alternatives.
+
+The review retained the strong ordinary H alternative together with H415's risk, all
+positive C cases, and evaluation-mode reversals. Six identity cases are part of the
+deployment population, not six independent replications of an active intervention.
+The deterministic interval crossing zero is not equivalence; a single stochastic
+draw per world and one shared trained checkpoint do not estimate training variance.
+The original c00 -> c06 development learning remains **.208806 -> .436649** and
+**.242862 -> .437560 QoS**, with c06 holdout **.461963/.439626**. The two fresh SET
+endpoints missing at 432k/858k remain technical failures, not learning negatives.
+Pro's withdrawals concerning R_map, zero gradient and chain feasibility remain.
+
+While this operation ran, the peer published `b04_geometry_probe_a03` at **a532a53bf**.
+The DM read its complete newest results entry and the Reviewer independently
+recomputed the saved physical-world paired table. Its ROT-ID QoS is **-.024534 with
+SE .021608**, 16 positive and 16 negative worlds; the peer's explicitly post hoc
+WS/WN/ES/EN split is **-.095265/-.102256/+.102711/+.043544**. That different estimand
+preserves orientation dependence as a live question and weakens the simple
+"initially pointing toward the near wall causes the service gap" story; it neither
+rescues C nor supplies an independent replication of this P/C program. Physical-world
+reconstruction, identity handling and later mobility randomness differ. The large
+open-loop symmetry error is also not a license to convert zero eligible reference
+response pairs into an identified absence of BS/cluster response. The Reviewer's
+scope caution is adopted here without altering the peer's records or deciding its
+prospective B fit. [Peer's complete notebook](../energy_relay_benchmark/NOTES.md)
+and [its distinct paired table](../../../../runs/energy_relay_benchmark/b04_geometry_probe_a03/block2/paired_rotation.json).
+
+**Keep/stop and boundary.** Do not deploy the tested C as an improvement over P; stop
+this fixed NE package and leave the direction in **reserve**. The complete result,
+including adverse worlds and initial activation, is useful empirical understanding,
+not a new learning method or geometry-impossibility theorem. Do not tune a preferred
+frame/mode, add worlds, restore G/V, or add a speed fix to rescue this result. More
+worlds of the same frozen package would mainly refine its conditional estimate and
+would not change the current deployment choice. Joint training/deployment
+canonicalization could be a different learning question, but it needs its own
+comparison, scientific reason, ownership and full cost; this batch does not authorize
+it or require a prior proof/toy pass. Root owns any new cross-question allocation and
+the peer owns its current geometry/representation proposal. There is **no active
+producer, uncollected result, chosen successor, owner-approval dependency or recurring
+wait** in this direction. Re-entry would require a concrete new intervention whose
+prediction goes beyond temporary inward motion and is distinct from already owned
+work. No new investment is owed merely because the broader question remains open.

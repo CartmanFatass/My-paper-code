@@ -1,0 +1,34 @@
+{
+  "all_summary_contrasts_recomputed": true,
+  "canonical_frames_per_mode": {
+    "IDENTITY": 6,
+    "MIRROR_X": 3,
+    "MIRROR_Y": 4,
+    "ROT180": 3
+  },
+  "episodes": 80,
+  "identity_frame_pairs_array_exact": [
+    "C_deterministic/280928402",
+    "C_stochastic/280928402",
+    "C_deterministic/280928403",
+    "C_stochastic/280928403",
+    "C_deterministic/280928407",
+    "C_stochastic/280928407",
+    "C_deterministic/280928408",
+    "C_stochastic/280928408",
+    "C_deterministic/280928409",
+    "C_stochastic/280928409",
+    "C_deterministic/280928412",
+    "C_stochastic/280928412"
+  ],
+  "launch_sha": "52986d5b005202b3ec77f8f556ad2a790541d0d7",
+  "manifest_files_verified": 163,
+  "maximum_recomputed_metric_absolute_difference": 0.0,
+  "native_no_target_uav_steps": 130460,
+  "native_steps": 240000,
+  "raw_and_progress_bytes": 77720627,
+  "raw_files": 80,
+  "raw_numeric_and_bool_arrays_finite_except_native_no_target_sentinel": true,
+  "raw_root": "/home/wu/hmasd-artifacts/uav_geometric_generalization/b01_pc_ne_a01/raw",
+  "status": "passed"
+}
