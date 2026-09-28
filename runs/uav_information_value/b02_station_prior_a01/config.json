@@ -1,0 +1,521 @@
+{
+  "arms": {
+    "H_BS": "unchanged legal users/once-legally-seen static BS memory",
+    "P_BS": "H_BS plus reset-frozen station prior before any legal BS sighting"
+  },
+  "batch": "B02",
+  "common_h1": {
+    "controller_information": "legal-observation pooled central planner (station-1 ring search prior)",
+    "cruise_mps": 30.0,
+    "dedup_tolerance_m": 0.5,
+    "height_m": 100.0,
+    "horizontal_speed_mps": 30.0,
+    "information": "local",
+    "kmeans_iterations": 30,
+    "n_relay": 2,
+    "n_service": 6,
+    "n_uavs": 8,
+    "replan_period": 30,
+    "search_radius_m": 1000.0,
+    "switch_margin_m": 300.0,
+    "time_step_s": 1.0,
+    "unobserved": "station-ring",
+    "vertical_cap_mps": 5.0,
+    "vertical_speed_mps": 5.0
+  },
+  "direction": "uav_information_value",
+  "fits": 0,
+  "h_bs_source_commit": "ee9c6c8aca0ee13e3d7a02416ff4acf85766f274",
+  "horizon": 3000,
+  "jobs": [
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100201",
+      "seed": 28100201
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100201",
+      "seed": 28100201
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100202",
+      "seed": 28100202
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100202",
+      "seed": 28100202
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100203",
+      "seed": 28100203
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100203",
+      "seed": 28100203
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100204",
+      "seed": 28100204
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100204",
+      "seed": 28100204
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100205",
+      "seed": 28100205
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100205",
+      "seed": 28100205
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100206",
+      "seed": 28100206
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100206",
+      "seed": 28100206
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100207",
+      "seed": 28100207
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100207",
+      "seed": 28100207
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100208",
+      "seed": 28100208
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100208",
+      "seed": 28100208
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100209",
+      "seed": 28100209
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100209",
+      "seed": 28100209
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100210",
+      "seed": 28100210
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100210",
+      "seed": 28100210
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100211",
+      "seed": 28100211
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100211",
+      "seed": 28100211
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100212",
+      "seed": 28100212
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100212",
+      "seed": 28100212
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100213",
+      "seed": 28100213
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100213",
+      "seed": 28100213
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100214",
+      "seed": 28100214
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100214",
+      "seed": 28100214
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100215",
+      "seed": 28100215
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100215",
+      "seed": 28100215
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100216",
+      "seed": 28100216
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100216",
+      "seed": 28100216
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100217",
+      "seed": 28100217
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100217",
+      "seed": 28100217
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100218",
+      "seed": 28100218
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100218",
+      "seed": 28100218
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100219",
+      "seed": 28100219
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100219",
+      "seed": 28100219
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100220",
+      "seed": 28100220
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100220",
+      "seed": 28100220
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100221",
+      "seed": 28100221
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100221",
+      "seed": 28100221
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100222",
+      "seed": 28100222
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100222",
+      "seed": 28100222
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100223",
+      "seed": 28100223
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100223",
+      "seed": 28100223
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100224",
+      "seed": 28100224
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100224",
+      "seed": 28100224
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100225",
+      "seed": 28100225
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100225",
+      "seed": 28100225
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100226",
+      "seed": 28100226
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100226",
+      "seed": 28100226
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100227",
+      "seed": 28100227
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100227",
+      "seed": 28100227
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100228",
+      "seed": 28100228
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100228",
+      "seed": 28100228
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100229",
+      "seed": 28100229
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100229",
+      "seed": 28100229
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100230",
+      "seed": 28100230
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100230",
+      "seed": 28100230
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100231",
+      "seed": 28100231
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100231",
+      "seed": 28100231
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100232",
+      "seed": 28100232
+    },
+    {
+      "arm": "P_BS",
+      "job_key": "P_BS/28100232",
+      "seed": 28100232
+    }
+  ],
+  "launch_sha": "d6151ff5155d8bf3f3289bba727ee5148f6b76a6",
+  "max_transitions": 192000,
+  "native_battery_timing": "exact raw uav_battery_ratios after each native transition; observer only",
+  "observation_layout": {
+    "fields": {
+      "bs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hmax",
+        "visibility_flag"
+      ],
+      "energy_stations": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "dist3d/map_diag3d",
+        "capacity_ratio",
+        "available_ratio",
+        "queue_len/n_uavs",
+        "valid"
+      ],
+      "energy_uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "battery_ratio",
+        "charging",
+        "available",
+        "returning(limp_home or dock_request)",
+        "load=connections/n_users",
+        "dock_request",
+        "target_station/(n_stations-1) or -1",
+        "charging_wait_steps/max_steps",
+        "return_threshold_ratio",
+        "return_energy_margin"
+      ],
+      "nearest_uav": [
+        "dist/area",
+        "rel_x/area",
+        "rel_y/area"
+      ],
+      "overloaded": [
+        "rel_x/area",
+        "rel_y/area",
+        "load/max_connections"
+      ],
+      "own": [
+        "x/area",
+        "y/area",
+        "(z-hmin)/hspan"
+      ],
+      "self_state": [
+        "connected_users/max_connections",
+        "has_backhaul",
+        "hops/max_hops",
+        "nearest_bs_rel_x/area",
+        "nearest_bs_rel_y/area"
+      ],
+      "step": [
+        "current_step/max_steps"
+      ],
+      "uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "(rel_z-hmin)/hspan",
+        "clip((sinr_db+10)/50,0,1)"
+      ],
+      "users": [
+        "rel_x/area",
+        "rel_y/area",
+        "clip((sinr_db+10)/50,0,1)",
+        "connected_to_self",
+        "serviced_by_any",
+        "serving_set_len/serving_set_size"
+      ]
+    },
+    "offsets": {
+      "bs": [
+        223,
+        235
+      ],
+      "dim": [
+        0,
+        365
+      ],
+      "energy_stations": [
+        349,
+        365
+      ],
+      "energy_uavs": [
+        245,
+        349
+      ],
+      "nearest_uav": [
+        3,
+        6
+      ],
+      "overloaded": [
+        235,
+        244
+      ],
+      "own": [
+        0,
+        3
+      ],
+      "self_state": [
+        6,
+        11
+      ],
+      "step": [
+        244,
+        245
+      ],
+      "uavs": [
+        191,
+        223
+      ],
+      "users": [
+        11,
+        191
+      ]
+    },
+    "parameters": {
+      "area_size_m": 8000.0,
+      "bs_fields": 4,
+      "bs_slots": 3,
+      "energy_station_fields": 8,
+      "energy_station_records": 2,
+      "energy_uav_fields": 13,
+      "energy_uav_records": 8,
+      "height_max_m": 200.0,
+      "height_min_m": 50.0,
+      "max_connections": 25,
+      "max_hops": 5,
+      "max_steps": 3000,
+      "n_uavs": 8,
+      "n_users": 30,
+      "observation_radius_m": 1500.0,
+      "overloaded_fields": 3,
+      "overloaded_slots": 3,
+      "self_state_fields": 5,
+      "serving_set_size": 3,
+      "uav_fields": 4,
+      "uav_slots": 8,
+      "user_fields": 6,
+      "user_slots": 30
+    }
+  },
+  "optimizer_updates": 0,
+  "pairing": "common initial seeds, not identical closed-loop trajectories",
+  "prior": {
+    "formula": "clip((station0_xy - 0.3 * station1_xy) / 0.7, 0, 8000)",
+    "missing": "no inferred BS if either finite valid station record is absent",
+    "priority": "genuine current/remembered legal BS supersedes prior permanently",
+    "source": "first valid observer for each legal station ID at reset decision"
+  },
+  "risk_reading": {
+    "default_replacement_blockers": "additional paired cutoff/depletion or final reserve UAV count",
+    "other_tradeoffs": "higher mean return cost or worse panel battery minimum",
+    "reserve_ratio": 0.1
+  },
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "threads": 1,
+  "trace_timing": "Row t of own_xyz, return_margin, nearest_station, nearest_station_distance_m, station_occupancy, station_queue and target_xy is decoded from the legal observation the controller and shield act on at step t (decision time, same as mode/entered/exited). charging, waiting_steps and battery row t are decoded from the post-step observation (t+1), so station_occupancy[t].sum() pairs with charging[t-1].sum(). guard_checked/guard_blocked row t count the guard actions of step t.",
+  "user_preprocessing": "canonical legal raw xy hits; sort then greedy merge within 0.5m",
+  "workers": 4
+}

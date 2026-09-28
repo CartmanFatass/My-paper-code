@@ -907,3 +907,234 @@ deterministic waits, drains the existing observer at terminal/checkpoint, rearms
 only that observation when needed, and will collect/read all declared outcomes.
 The earlier native-child automatic wake rejection is not assumed fixed or routed
 to Root. No replacement operation, panel extension or extra arm is authorized.
+
+### 2026-09-28 - B02 complete: useful lawful prior with a reserve counterexample
+
+The original operation exited **0 at 06:56:04 UTC**. Same-handle observation
+reported READY at 06:56:24 UTC, matching the valid native exit witness and absent
+runner/supervisor identities, with no consistency mismatch or probe error.
+The detached queue attempted delivery to this child but returned code -32600:
+`direct app-server input is not allowed for unloaded spawned sub-agents`.
+The child remained active, completed its long deterministic wait and drained the
+same handle; no completion callback was presumed delivered. READY event
+`c4dde6f323ddc40125787a0a`, wake `31df8dd3-ac3a-4e30-a70e-1a9a4d97c073`, was
+consumed from generation 6 to 7; observation was stopped and a final drain showed
+no pending event/wake. No restart, replacement, retry or additional panel occurred.
+The first compact scp used unsupported brace expansion and found no file; explicit
+source paths then collected the originals. That collection error caused no result
+execution or missing scientific evidence.
+
+All **64 declared episodes / 32 paired fresh worlds** completed at native H3000
+truncation: **192,000 native transitions, zero fits, zero optimizer updates**.
+There are no failed, cancelled, unreconciled, missing, unstarted or orphan cells,
+and no partial transitions. [Configuration](../../../../runs/uav_information_value/b02_station_prior_a01/config.json),
+[all per-world readings](../../../../runs/uav_information_value/b02_station_prior_a01/perworld.json),
+[complete summary](../../../../runs/uav_information_value/b02_station_prior_a01/summary.json),
+[manifest](../../../../runs/uav_information_value/b02_station_prior_a01/manifest.json)
+and [terminal status](../../../../runs/uav_information_value/b02_station_prior_a01/terminal-status.json)
+retain exact source `d6151ff5155d8bf3f3289bba727ee5148f6b76a6`.
+
+Full readback verified every **131 manifest entries**, including 64 NPZ and 64
+progress records. All 64 NPZ loaded with `allow_pickle=False`; native reward,
+metrics, positions and exact batteries were finite, with no early terminal and
+only final truncation. Rebuilding `world_row`, mechanism/position readings and
+exact battery readings yielded **4,864 exact per-world field matches**. Declared
+seed/arm/order, 100 replans at 0:30:2970, prior formula from recorded legal
+station coordinates, no prior after legal BS knowledge, canonical user equality,
+activation counts and final progress were also checked. The complete summary
+rebuild matched every reader-produced field exactly. Compact local file hashes
+match the original manifest. No new environment transition was used for readback.
+
+| Endpoint | H_BS mean | P_BS mean | P_BS - H_BS, nominal paired t95 |
+| --- | ---: | ---: | ---: |
+| Total native J | 1662.263697 | 2060.435659 | +398.171962 [172.534665, 623.809258] |
+| QoS/step | .616873 | .703389 | +.086515 [.030571, .142459] |
+| Capped return cost/step | .026306 | .003204 | -.023102 [-.037168, -.009037] |
+| Raw return cost/step | .026434 | .003204 | -.023230 [-.037419, -.009041] |
+| UAV-step fraction at/below .10 reserve | .062617 | .012512 | -.050105 [-.078333, -.021878] |
+| Final UAV count at/below reserve | 3.531250 | 1.437500 | -2.093750 [-3.431397, -.756103] |
+| Mean episode minimum battery | .086956 | .098743 | +.011788 [.005609, .017966] |
+
+The predeclared conditional-usefulness prediction succeeds: mean J and QoS are
+positive and the J interval is wholly above zero. J and QoS each improve in
+**17 worlds, worsen in 3, and tie in 12**. Intervals are exploratory over initial
+worlds, not independent training replications, confirmation or multiplicity-
+adjusted inference. Service is part of native J; its improvement is not independent
+corroboration, and the native objective also benefits from lower return costs.
+All native metrics, tails and phase/charging readings remain in the originals.
+H_BS's two zero-service worlds, 28100203/28100226, attain .596549/.580654 QoS under
+P_BS without ever legally seeing BS. This is a concrete complete-use result, not
+a coordinate-accuracy result or a selected zero-service population.
+
+Every J/service loss is retained (J below is total, not per step):
+
+| Seed | Delta QoS/step | Delta total J | Delta return cost/step |
+| --- | ---: | ---: | ---: |
+| 28100217 | -.022772 | -70.479000 | +.000364 |
+| 28100223 | -.001219 | -1.790923 | -.000307 |
+| 28100231 | -.041743 | -125.688814 | +.000077 |
+
+**Do not recommend default replacement.** The prospective risk rule is triggered
+by **28100224**: P_BS gains .083353 QoS/step and 87.318994 total J but final
+reserve count rises **0 to 7**, reserve exposure **12 to 2,631 UAV-steps**,
+episode minimum battery falls **.096840 to .082321**, and return cost/step rises
+**.000809 to .027933**. The independent critic inspected the exact native arrays:
+seven UAVs stay below .10 throughout the last 300 transitions, with final ratios
+about .08232-.08399; H_BS has none below reserve in that window. This is sustained
+exposure, not a rounding artifact. Better mean risk does not cancel a prospectively
+declared adverse-world rule. Zero cutoff/depletion events in both arms establish
+neither safety nor sustainable cycling after H3000.
+
+The panel-wide minimum battery improves .044310 to .082321, and the maximum
+world-mean capped/raw return costs improve .143354/.145746 to .027933/.027933.
+Nevertheless reserve exposure and episode minima worsen in 28100217/224/230;
+final minimum battery worsens in 28100217/224/229/230; return cost worsens in
+28100217/224/230/231 (abbreviated suffixes retain the 28100 prefix). Thus the
+conditional performance gain is not paired risk dominance. All these tails,
+including a positive-J risk counterexample, constrain future use.
+
+The prior enters planner inputs in **25 worlds / 1,067 replans**. Only **20 worlds
+/ 1,001 replans** combine inferred input with relay targets; these are the 20
+worlds with different native outcomes. Seven worlds already see BS at reset.
+In five others (28100207/208/214/220/227), prior-used replans have no legal users
+and no relay targets, followed by legal BS acquisition before a consequential
+relay decision. All native arrays, including targets, are exactly equal in the
+12 tied worlds. Input supplied is therefore distinct from decision activation.
+P_BS has ten never-seen worlds versus H_BS's seventeen, but first-sighting times
+are deliberately not paired after dropping non-occurrences. These sets and later
+observations are policy consequences, not separately randomized mediators. Seed
+28100231 acquires BS at step 70 rather than 1804 and still loses J and service.
+
+The result strengthens the ordinary-information explanation: an untuned lawful
+function of already public station coordinates can improve complete service/J
+beyond remembering genuine sightings, without extra sensing, fitting or learned
+memory. It weakens a claim that those additions are required for this increment.
+It does **not** isolate algebraic coordinate content from supplying an anchor that
+enables H1's otherwise absent relay branch. The noisy generator relation is not
+exact reconstruction or a calibrated posterior; coordinate accuracy, optimal
+information value and learned recoverability remain unmeasured. Nor can B02's
+fresh panel be subtracted from B01's central references to claim a remaining gap
+or a percentage of the historical central/local gap recovered. Endogenous user
+visibility, shield/charging trajectories and later sightings are included in the
+fixed-program consequence, not controlled mechanisms.
+
+Actual cost is **1,076.713 runner seconds (17.945 min)**, **1,115.536 accepted-
+operation seconds (18.592 min)** and **4,304.283 summed worker CPU seconds
+(1.196 h)** with four single-thread workers. Maximum reported worker peak RSS is
+510,564 KiB (498.598 MiB); parent peak is 479,344 KiB. Individual peaks are not a
+simultaneous node peak. All worker resource records are present. The separately
+declared engineering exposure remains 248 transitions / zero fits; preparation,
+review and readback time is not fully measured and is not zero cost.
+
+### 2026-09-28 - B02 independent reading and disposition
+
+The registered ResearchCritic `/root/dm_information_value/read_b01` reconstructed
+the original 64 rows and fixed rule before receiving the DM disposition. This is
+the same context-isolated reviewer used for B01, retaining that review but no
+inherited DM/Root conversation. It independently checked compact artifact hashes,
+ten paired summaries and seven decision-relevant remote NPZs, including the
+reserve counterexample and input-used ties. It did not duplicate the DM's full
+64-trace reconstruction. No second selection review or Pro round was added.
+
+Its substantive recommendation is **retain P_BS as a useful conditional ordinary
+comparator, enforce the default-replacement block, and stop B02 without extension
+or post-hoc safety repair**. The mean-benefit prediction succeeded while practical
+adoption did not. The critic emphasizes the three adverse service/J worlds, the
+sustained seed-224 reserve exposure, and the distinction between input use and
+decision activation. Its descriptive check finds that the two zero-service
+rescues contribute about 43% of the aggregate service increment; the other thirty
+worlds still average positive differences. That post-hoc description changes
+neither the full-panel estimand nor the declared decision rule.
+
+The strongest surviving explanation is ordinary relay-branch competence. More
+legal BS sightings cannot establish the mediator, especially with seed-231's
+earlier-sighting loss. The result does not identify a cause of reserve failure
+that selects a targeted repair. A positive mean does not itself justify another
+panel, fit, confirmation, threshold or learner. **MATERIAL_DISSENT: no.** The DM
+accepts this reading and the stop at the assigned substantive boundary.
+
+A genuinely different contingent question is whether the station transformation
+adds useful decision content beyond a simpler lawful anchor with identical
+pre-sighting relay activation and genuine-observation precedence, for example
+station 0 itself. P_BS superiority would support incremental transformation value;
+the simpler rule's superiority would favor ordinary simplification; imprecision
+would leave attribution unresolved. This is worth selecting only if attribution
+or comparator choice would change a substantive next investment. It is not a
+prerequisite to the B02 result or an automatic repair. Two arms on 32 fresh worlds
+would cost roughly 18-25 node minutes plus engineering/readback; adding H_BS costs
+half again and is necessary if the decision is default replacement against H_BS,
+rather than the two anchors' conditional ranking. No such comparison, fit,
+anonymous tracker, active-sensing takeover or wider panel is selected here.
+
+Disposition: end this fixed B02 investment, retain its positive and adverse
+evidence and reusable ordinary controller, and return this belief update to Root
+for cross-question allocation. The broader actionable-information question is
+not exhausted; no active operation, uncollected result or external dependency is
+being called an idle wait. Re-entry requires a newly selected distinct comparison
+whose interpretation would change use or explanation, not an unchanged-score
+check. RESEARCH section 2 will reflect this stronger legal comparator and its
+reserve limitation rather than continuing to call initial inference untested.
+
+Cleanup scope: keep the unchanged reusable `b02/controller.py`, its lawfulness
+tests, and `b02/readout.py`. The finished 32-world launcher/worker are not reusable
+assets or current consumers: retire `run_b02.py` and `b02/batch.py`, and retain the
+three constructed reader tests from `test_batch.py` as `test_readout.py` while
+retiring its finished-run wiring tests. No controller/readout semantics change;
+the accepted executable remains pinned at the input SHA above. Check retained
+constructed tests without new native episodes, check imports/active consumers,
+retain the single hashed raw evidence copy outside the shared checkout, reclaim
+the exact completed launcher snapshot with its native collector, and measure
+deleted targets and net allocated bytes. Do not modify B01 records or source.
+
+### 2026-09-28 - B02 durable evidence and completed cleanup
+
+After the critic returned, moved only B02's required raw directory to its single
+durable location:
+`wsl_4070:/home/wu/hmasd-artifacts/uav_information_value/b02_station_prior_a01/raw/`.
+It contains **128 files / 35,545,197 file bytes / 35,946,496 allocated bytes**.
+Every byte count and SHA-256 was checked against the original manifest both
+before and after the move; the old shared-checkout raw directory is absent.
+Moving retained evidence reclaimed **0 bytes**. The original manifest is unchanged,
+SHA-256 `63d375d1de5ad16f5b4c1824efb67f2d509842885c936aa930fe702f49d8a47a`.
+For its `raw/...` entries use this durable raw root; compact configuration,
+per-world, summary and native operation records remain at their recorded run path
+and are published in Git. No full tree, archive package or backup copy was made.
+
+The reusable prior controller and paired/risk reader are unchanged. The completed
+launcher/worker and their obsolete wiring tests were retired after a consumer
+search found no remaining executable imports of them. Three existing constructed
+reader tests were retained separately, alongside ten controller tests: **13 passed
+in 3.17s**, with the same 14 dependency warnings and **zero new native transitions**.
+The full accepted 19-check executable and frozen run entry remain recoverable at
+[the input SHA](https://github.com/CartmanFatass/My-paper-code/tree/d6151ff5155d8bf3f3289bba727ee5148f6b76a6/experiments/candidates/uav_information_value).
+Existing B01 code and active-sensing imports were left unchanged.
+
+The exact native snapshot
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/f71f3891bc9d4406a604484c4c226c73`
+was reclaimed using `scripts/hmasd_snapshot_gc.py`. Its first preview refused
+generated ignored caches created by the DM's import-based readback; inspected
+status showed only 14 `__pycache__` directories containing `.pyc` files. Removing
+those generated files reclaimed 1,146,880 bytes. Ordinary process inspection then
+refused `/proc/660/cwd`; the collector's supported read-only `--sudo-process-scan`
+verified eligibility, and exact-target apply removed the remaining 800,120,832
+bytes. The snapshot is absent, with its accepted claim/output/manifest and durable
+main source ref preserved. These are cleanup-tool refusals subsequently resolved,
+not failed scientific execution or an outstanding blocker.
+
+Measured cleanup targets (allocated bytes before to after):
+
+| Target | Before | After |
+| --- | ---: | ---: |
+| Exact remote snapshot, including generated caches | 801267712 | 0 |
+| Local direction `__pycache__/` | 40960 | 0 |
+| Local direction `b02/__pycache__/` | 32768 | 0 |
+| Local tests `b02/__pycache__/` | 45056 | 0 |
+| `temp/directions/uav_information_value/` (observer request only) | 8192 | 0 |
+| Retired `b02/batch.py` + `run_b02.py` + `b02/test_batch.py`, net of retained `test_readout.py` | 32768 | 4096 |
+
+All deleted targets were checked absent. Net allocated reduction across these
+cleanup targets is **801,423,360 bytes** (801,267,712 remote; 155,648 local,
+including the replacement reader-test file). This is working-tree allocation,
+not Git-object-store reclamation or a whole-host free-space claim. The unique
+required raw evidence remains; no accepted worker, active observer, pending
+review, redundant raw copy or concrete cleanup blocker remains for B02.
