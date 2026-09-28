@@ -858,3 +858,243 @@ unread result, pending advice or selected new experiment remains. Unrelated
 writers' source, untracked files and accepted operations were preserved. This
 is a measured working/output-filesystem reduction, not a claim about Git object
 pack size or total host free space.
+
+## 2026-09-28 - Next-round question: does ordinary commitment value survive repeated replenishment?
+
+Owner now asks Root and Claude to jointly design and allocate the next round.
+Root's [peer request at df22ce36a](https://github.com/CartmanFatass/My-paper-code/blob/df22ce36a54c5ff100ddd3ced0848e26248ae37a/docs/Claude_docs/inbox/20260928_joint_next_round_plan_ROOT.md)
+reopens reasoning within this question, **not B01 execution**. B01 remains
+complete, its one fit and all limitations unchanged, and its original observer
+stopped. This entry is a proposed comparison for Root's existing selection
+critic and cross-question choice. There is no newly selected result run, code
+implementation, node admission or claimed future wake.
+
+I read current published main `df22ce36a`, especially
+[background6](../../RESEARCH.md#6-实证研究是在具体条件下缩小解释空间),
+[background7](../../RESEARCH.md#7-当前研究选择放在这套认识的什么位置),
+[background8](../../RESEARCH.md#structural-research-background) and the
+[complete round3 synthesis](../../archive/2026-09-28/RESEARCH-native-round3-synthesis.md).
+Their concrete effect here is to retain O as an achieved conditional ordinary
+asset, not an estimate of learnable headroom; preserve the three distinct
+learning judgments and17 control-affecting arrival failures; and avoid reviving
+old I, failed move/hold learning or the joint-motion package. This proposed
+contribution is empirical understanding of longer-lived complete service, not
+a new scheduling algorithm, a MARL claim or a requested sustainability result.
+Before publication I also read Root's `1b5bde758` joint-programme update; it
+selects this design work and the same cross-question critic, not a result run.
+It changes neither this scientific scope nor the completed B01 evidence.
+
+### Actual physical feasibility and missing coupling
+
+Source `981e935ee` and current main agree on the consequential native energy,
+routed-core and S2-config files. The retained B01 config overrides base S2's
+H1500: `make_eval_config` and auxiliary `make_config` set both episode length
+and native `max_steps` to3000, with one-second steps. The following facts come
+from executable source, not a native feasibility certificate:
+
+- [Power](../../../../envs/pettingzoo/relay/routed_core.py#L537) is the sum of
+  profile, induced, parasitic and `15*abs(vz)` power. Constants include
+  P0=79.86W and Pi=88.63W. Hover costs168.49W; 30m/s horizontal costs356.29W,
+  and 5m/s vertical adds75W. Numerical evaluation of this one source equation
+  has its horizontal minimum about126.01W near10.21m/s, so hover is not the
+  global minimum. This numerical minimum is not needed as a proved lower bound.
+- [S2 config](../../../../configs/config_1.py#L505) has eight160Wh batteries,
+  initial fractions.75..1,10% return reserve, two slots of capacity1 each and
+  1000W **per allocated UAV**. Energy update subtracts actual motion/hover draw
+  before adding bounded charge. At hover the allocated member gains831.51W
+  net; an unallocated parked member still loses168.49W. Battery clipping at
+  full can waste nominal charging capacity.
+- The correct ideal parked-fleet balance is
+  `mean allocated slots = 8*168.49/1000 = 1.34792 < 2`, not the on/off-time
+  ratio1.621. Thus total wattage alone does not exclude maintaining all eight
+  batteries. A bounded source helper initially confused these quantities and
+  quoted the base H1500; I corrected both and it verified the actual H3000
+  wiring and1.34792 duty calculation. Neither erroneous premise is used here.
+- This ideal energy statement does **not** establish useful service or feasible
+  high-utilization rotation. [Stations](../../../../envs/pettingzoo/relay/energy_aware.py#L333)
+  are randomized at minimum altitude near BS/service anchors, with jitter and
+  separation constraints. Native [allocation](../../../../envs/pettingzoo/relay/energy_aware.py#L1843)
+  requires a current dock request, post-step capture within20m, velocity<=1m/s,
+  and orders candidates by battery, wait and index. Local station imbalance,
+  travel, capture/turnaround and loss of useful relay geometry can consume the
+  apparent aggregate surplus.
+- The Box4 action still provides xyz plus a nearest-station dock request, not
+  station ID, capacity reservation, sleep, radio-off or zero-power parking.
+  Native docking takes over within160m; policy movement outside remains subject
+  to guard, with the inherited stationward-dock exception. Charged UAVs remain
+  radio-capable unless failure/cutoff applies. S2 has no stochastic failures;
+  cutoff at.02 and exhaustion are adverse outcomes, not power-saving controls.
+
+The actual B01 O mean input is961.986W and mean consumption1692.573W; mean
+allocated slots is.962771 of2. At that same mean draw, energy-neutral operation
+would require about1.69257 allocated slots, before clipping and changing
+geometry. This arithmetic is not a prescription to maximize charger occupancy:
+the extra parked/service-unassigned members and additional movement may lose
+more service than the saved battery is worth. World12 already shows more
+charge and better reserve alongside worse complete service.
+
+I also reread the retained **existing** O/P native arrays in four fixed time
+windows, with no new environment transition or model rollout. Mean team storage
+starts1111.568Wh, ending502.745Wh for O and146.432Wh for P. Across successive
+1000-step bins O's storage changes are -320.031/-119.927/-168.864Wh, whereas
+P's are -484.375/-411.191/-69.569Wh. In the final600 steps, O loses137.669Wh
+on average and every world loses60.820..222.880Wh; P averages -22.545Wh with
+range -41.186..+6.535Wh. O/P late QoS is .833248/.628978. The complete
+service gain therefore coexists with continuing storage withdrawal, not only
+startup discharge. But O's declared finite-horizon restoration rule suppresses
+new trips near H3000, so these slopes cannot be extrapolated linearly to a
+continuing mission. No new causal mechanism is inferred from this rereading.
+
+### Recommended complete comparison
+
+**Question:** does the measured ordinary commitment package retain useful
+complete service beyond initial battery stock, or is its advantage primarily
+a finite-mission storage tradeoff? I recommend a single **O_H/P, H12000**
+comparison on eight fresh paired S2 worlds, rather than another learner or an
+invented charger-utilization optimizer. This buys a materially different
+operating regime, not another H3000 precision panel.
+
+H12000 is200 continuous minutes with no resets, battery refill, user restart
+or station redraw at3000-step boundaries. Even the deliberately loose analytic
+bound `P(vxy,vz)>=P0=79.86W` gives eight live UAVs at least2129.6Wh demand over
+this horizon, greater than their maximum1280Wh initial store. Without any charge,
+that loose stock bound is7212.6 seconds. Thus the horizon crosses a genuine
+replenishment requirement without relying on the numerical power minimizer or
+assuming a particular mission policy. Surviving to12000 alone still does not
+prove stationarity, energy neutrality or indefinite service.
+
+The arms and information/action contract are:
+
+- **P:** the exact competent TransitHold program used in B01, central current
+  users/BS at its normal10-step refresh, all-move/one-member-hold scoring,
+  unchanged F enter<=0/exit>=.05 and native action/guard/allocator semantics.
+  Its normal feedback-driven recharge cycle is the strongest directly matched
+  existing alternative to this O. Lawful P_BS and spatial R have different
+  information/planning comparisons; no cross-panel ranking substitutes for P.
+- **O_H:** the same B01 ordinary admission/deadline/dwell/redeployment program,
+  with only its known finite horizon bound changed to12000. It retains30-step
+  macro admission, the120/300/600 labels, two active commitments at most,
+  original full/dwell/900-step release and nearest-station semantics, and the
+  assignment-eligibility versus true-F separation. Both arms receive the same
+  current information and primitive Box4 rights, never future users or a hidden
+  state rollout. O's known-H restoration check is allowed; P can observe the
+  same episode clock even though it does not use that scheduling rule.
+
+**No arrival-detector patch is bundled into this comparison.** It deliberately
+tests the retained as-executed ordinary package's longer mission value, not the
+ideal geometric-duration policy or a repaired learner. The17 training failures,
+including the120-label900-step/580-charge counterexample, stay in the record.
+All145 previous O evaluation options avoided that mismatch, which does not
+guarantee future avoidance. New mismatch counts and affected commitments must
+be read, not dropped; a result dominated by this defect narrows the program-use
+answer and does not automatically authorize a patch/retry. If the desired next
+question instead requires intended-duration learning, this exact comparison is
+not a substitute for fixing and prospectively declaring those new semantics.
+
+A consequential engineering fact is already identified: although the retained
+`NativeEpisode` adapts its own layout to a supplied horizon, the current
+`CommitmentAwareHeuristic` inherits an H3000 default layout. Simply passing a
+longer environment horizon would silently stop useful O admissions after3000.
+The proposed O_H therefore explicitly binds controller/decoder `max_steps` to
+the declared12000, without changing thresholds or arithmetic. Native waiting
+and clock normalization also use `max_steps`; all readers must bind it honestly.
+This is a known-horizon parameterization, not an unreported unchanged-O claim.
+The external F uses margins rather than the wait field, and remains unchanged.
+
+Prospective seed support is52292801..52292808, unused in current records; no
+training seed, fit or checkpoint is introduced. All eight worlds and both arms
+are retained. If native all-exhausted termination occurs early, keep the true
+terminal trace and cumulative native J, divide accrued service by the planned
+12000 for the mission-service reading, and report the early ending as an adverse
+outcome, not a missing cell or an opportunity to reset. No fabricated suffix
+steps or resumed episode are allowed.
+
+### What changes the next investment
+
+Primary package readings are complete native J and QoS/H12000 together with
+the predefined last6000-step service/J contrast. Report every3000-step block,
+native battery-stock changes, gross charging and consumed energy, actual station
+occupancy/wait, cutoff/depletion, zero-service spells, final reserve and
+last300-step persistent reserve. Observe policy choice, first decoded arrival,
+actual charging, missed arrival/dwell release, interruption and post-release
+service separately. Pairing and complete native/raw verification remain required;
+these descriptive readings are not preliminary activation gates.
+
+My conjecture is that O_H's earlier commitments preserve a positive late service
+and J difference over reactive P, but require much higher repeated slot use and
+do not necessarily maintain B01's high mean QoS. The strongest alternative is
+that P's ordinary late charge/return dynamics catch up, while O merely converts
+initial reserve into a temporarily better service path or adds avoidable travel.
+Energy feasibility alone does not choose between them.
+
+For the bounded investment decision, an O_H mean QoS advantage of at least.01
+and positive J in both the full mission and last6000, without additional native
+cutoff/depletion/terminal-zero-service or persistent-reserve failures or worse
+mean reserve exposure, supports retaining O_H as a longer-lived conditional
+ordinary reference. It does not establish safety or sustainability. Continued
+material storage decline in late blocks restricts that asset to this finite
+mission even if the relative service condition passes. A vanishing/reversing
+late advantage or new adverse tail ends this program's automatic long-mission
+extension; it does not prove all recurring service control impossible. Wide or
+mixed results keep the finite claim narrow rather than force a next repair.
+Paired t7 intervals and all-world signs describe this exploratory panel; eight
+worlds are not confirmation or independent learner replications.
+
+If service remains high while later storage fluctuates without a clear downward
+drift, that gives a concrete reason to consider a recurring-service study or a
+substantive learning comparison against O_H. It is still not a stationary-energy
+certificate. If an actual service/energy conflict is exposed, a later controller
+must make a different complete prediction about that conflict, not just improve
+a charging proxy. Neither branch automatically selects a further fit.
+
+### Alternatives, total cost and present boundary
+
+**Retain O with no new experiment** is the zero-cost valid alternative: its
+H3000 conditional gain and adverse tails are already established and need no
+fresh-world repetition to remain usable in that scope. I prefer the bounded
+long comparison only because the newly requested deeper programme puts
+longer-lived service on the table and this reading can decide whether that
+asset actually transfers there. If the portfolio values only finite H3000
+performance, retaining O without running is better than buying this panel.
+
+A distinct learned service-sensitive admission/value rule could in principle
+beat O's deadline/load ordering; world12 and early O service losses motivate
+that possibility. However, current observations do not give one particular
+learned representation or target a stronger concrete prediction than the
+ordinary recurrence question. Replacing PPO with offline ranking or imitation
+would also require a competent matched service-aware ordinary alternative,
+new data/fit/deployment choices and fresh full evaluation. Old move/hold
+ranking failure is not a universal objection, but renaming it is not an
+investment reason. I do not recommend that larger fit now, nor an entropy,
+stochastic-deployment or detector-only rescue. This is an opportunity-cost
+judgment, not a requirement that a positive long-horizon screen precede any
+future direct learning experiment.
+
+The proposed result cost is **0 fits,16 episodes, at most192000 native steps**,
+zero optimizer updates and no extra validation/pilot/follow-on arm. Existing P
+scoring has at most19 service-snapshot queries per10-step replan, hence at most
+364800 such queries for the whole comparison, with no new learned-model or
+primitive forecast rollouts. Scaling the actual B01 O/P worker costs gives
+6797.311 worker-CPU seconds, about1.888h, or28.3min ideal four-lane time;
+budget35..55min runner wall as an estimate, not an admission promise. Longer
+native paths, changed charging exposure and serialization can change that rate.
+Four single-thread CPU lanes, no GPU, and roughly.15..25GB unique bulk evidence
+plus the temporary launcher snapshot are expected; fresh actual-node admission
+would still be required after selection.
+
+Engineering is a new bounded evaluator and horizon-binding/early-terminal
+correctness tests using retained controller/readers, plus independent engineering
+review; there is no learner implementation. Anticipate at most240 bounded native
+correctness transitions and zero optimizer updates, with exact checks specified
+in L0 only if this comparison is selected. Source/algebra inspection, one
+read-only helper with the two corrected arithmetic/default-horizon statements,
+and existing-array reading consumed zero fits or new native transitions so far.
+Design, engineering, review, publication and readback effort is additional and
+not fully time-metered. Total learning cost is not disguised as zero merely
+because this proposed batch has no fit.
+
+The unresolved feasibility is **simultaneously useful geometry, access and
+energy balance under actual nearest-station control**, not an insufficient
+nameplate-power theorem. This remains one question for Root's existing
+selection critic and joint portfolio allocation. I make no RESEARCH activation,
+substantial implementation or result-bearing launch in this reasoning turn.
