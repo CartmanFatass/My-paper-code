@@ -48,6 +48,23 @@ investment (owner-approved refinement 858e8cff5, 2026-09-28): diagnosis and base
 are recommended only when they change such a decision, not as the default next step after a
 failed or flat recipe; look beyond the last recipe with project evidence and primary sources.
 
+Apply the constructive-development method (owner-requested, Root-adopted 1d65ea4ca, 2026-09-28;
+scientific-tools "Choose the question", "Design the comparison and decision exposure" and "Update
+the working explanation"): treat a supported positive as a capability to preserve, combine or
+extend, not only as a stronger opponent, and develop its strongest plausible constructive
+explanation alongside the competing criticism; keep empirical support, practical adoption and
+further investment distinct, so a failed adoption/risk rule does not by itself reject a
+constructive successor and a package comparison may forgo mechanism attribution. When a
+candidate adds information, training knowledge, control rights or physical resources, say
+whether it is an addition or a better use of already lawful information/actions, state its use
+case, source, error and acquisition/communication/compute/physical cost, and give the competent
+ordinary comparator the same addition so the contract's gain is separated from the method's
+increment within it; future truth supplied to a deployment actor stays an explicitly labeled
+privileged bound. At a material continuation choice, state the next predicted intermediate
+quantity, the declared stop condition, and the cumulative and prospective cost against the best
+independent question and against stopping; this belongs at material boundaries, not every cell,
+and neither side owes a repair or a positive finding.
+
 Return one decision memo: the question as you understood it; the recommended route with its
 concrete design (comparators, seeds, stopping rule, readers); the alternatives you rejected and
 why; distinct predictions and what each plausible outcome would change; declared cost and
