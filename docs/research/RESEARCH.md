@@ -159,6 +159,14 @@ B04/B06 M−U反号继续保留。已结束原样零高层熵追加，不升为�
 同世界own低于uniform的部署读数，也不能反推训练协调器没有贡献。
 [完整目标比较、数值核验与反例](candidates/complementary_skill_learning/NOTES.md#2026-09-23--b02-complete-removing-low-discriminator-rewards-loses-native-service)。
 
+已有N轴来源的成员和信息语义并不相同。VNFC N7原生比较只有一次永久成员损失，公开当前能力、路由、
+能量、任务状态与需求，B03技术失败仍无最终primary；它不包含join/rejoin。G0则在原生UAV服务模拟器上
+实现真实服务离开／回归：缺席时运动、通信和服务关闭，返回同一物理位置并换生命周期handle，物理槽位仍固定。
+其当前全队几何／服务与事件公开，普通控制器已保留目标归属、派出的reserve及返还进度。公开事件年龄和自身
+承诺可以是有用历史，但尚未识别超出有能力通用循环控制的私有实体历史增量；局部感知历史、隐藏伙伴状态及
+单纯容量变化另需明确接口。FOLR的Traffic Junction不利复制也不能否定全部UAV历史用途。
+[原始证据、源码范围与选题修正](candidates/uav_roster_memory/NOTES.md#2026-09-28--initial-source-reconstruction-reframe-before-implementation)。
+
 固定数量训练后的零更新数量迁移，与回合内成员变化、cross-play 和能力异质性是不同问题。
 普通策略的目标人数训练并未形成可重复的默认升级。B11中新N8训练相对N6训练在N8平均
 J提高.019681931、每步多服务3.0195人；新训练区组B12在相同实际初始世界上反转为
@@ -862,7 +870,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 | --- | --- | --- | --- | --- |
 | `uav_energy_coordination` | 全机队服务、返航／补能和重新部署的联合决策，能否产生超出有能力普通局部控制的完整净用途？ | exploring | Codex DM (native child) | 新DM已开始原始证据与完整比较设计，首轮检验实际空间／回传／能量耦合，不预定学习器或固定H1残差。0新fit／回合，尚无实验声明；成本和首项比较待实质返回与现行独立选题审查合并判断。[本轮范围](#current-research-plan)、[原生路由](#session-routing)。 |
 | `uav_information_value` | 集中真值与汇总合法观测的服务差，哪些源于有用信息，合法历史或信息获取能否恢复其用途？ | exploring | Codex DM (native child) | **首轮证据重建／设计完成，0新fit／回合／诊断。** 旧约.18差含信息与点集排序／聚类／搜索差；源码显示静态BS缓存可遗忘已见位置，匿名移动用户历史是另一问题。建议S2/H3000同一H1规则下用户／BS来源2x2，加原H_central桥接及仅保留曾合法见过BS的普通记忆臂；6程序×32新世界，拟576k步、0fit、约70–120分钟节点墙钟，尚未实施／启动。采纳独立科学审查的初步简化，去掉匿名用户跟踪；完整审查由Root汇总。只读条件控制器的总闭环后果，保留交互与风险，不作最优信息价值或可恢复比例结论。下一步为Root汇总本轮设计／审查后选择任务。[设计与采纳](candidates/uav_information_value/NOTES.md#2026-09-28---independent-scientific-challenge-adopted-static-memory-first)、[原生路由](#session-routing)。 |
-| `uav_roster_memory` | 真实leave/join/rejoin中，哪些实体历史对服务仍有价值，是否超出有能力的普通循环控制？ | exploring | Codex DM (native child) | 新DM核对原生成员、身份和观测语义，继承FOLR不利复制和N7技术缺失，提出或反驳有实质用途的完整比较。不是旧B03重启、槽位改名或固定N混合续投；首轮0新fit／回合。[本轮范围](#current-research-plan)、[原生路由](#session-routing)。 |
+| `uav_roster_memory` | 真实leave/join/rejoin中，哪些实体历史对服务仍有价值，是否超出有能力的普通循环控制？ | reserve | Codex DM (native child) | **源码重建完成；独立审查提出实质异议，Root采纳并修正初始选题。** N7只有永久loss且B03无最终primary；G0确有原生服务离开／回归及普通目标交接历史，但未识别值得实体记忆学习的私有持久信息。保留FOLR不利复制、G0真实后果及普通循环参照，不推论历史不可能或N轴耗尽。0新fit／回合／环境步，无实现、待收结果、已选后继或owner审批依赖；更广替代问题由Root选择。[完整证据与处置](candidates/uav_roster_memory/NOTES.md#root-disposition-at-this-boundary)、[原生路由](#session-routing)。 |
 | `energy_relay_diagnostics` | 护盾接管下的提案—执行关系如何影响有限学习，哪些同预算更新方案改善完整部署？ | reserve | Codex DM (independent session) | **Owner要求的原始证据重审及独立科学审查完成：实质修订，结束当前B02/cache投入。** A01训练前失败；A02为1个失败started fit、至少126k新增步／21 rollouts，mask始终关闭，无端点或配对结果。保留有限PPO问题为辅助优化后备；不建立新合作规划器或已证错误梯度。撤回约59min的getter-only 22-rollout重跑；固定分母不保证更新不增大，reset观测数组实际相等，差异在info的末位浮点数。无已选fit、修复项目或自动重试。B01有用普通学习及全部反例保留，原lead与observer责任不变。[完整重审与取舍](candidates/energy_relay_diagnostics/NOTES.md#2026-09-27--owner-requested-b02-re-audit-original-evidence-and-corrections)、[现行计划](#current-research-plan)、[路由](#session-routing)。 |
 | `energy_relay_baselines` | 在共同 S7 服务／风险、合法信息及声明曝光下，普通学习的缺口是否跨独立训练实例重现，哪些普通强化学习配方值得继续比较？ | reserve | Codex DM (independent session) | **B01两个新fit均技术失败，独立科学审查后结束本轮复制／替补投入。** 首个432k步SystemError，第二个858k步SIGSEGV；累计2fits／129万已记录步／约10.152h原生操作时间，两个1.2M端点均缺失，无新评分评价。已有恢复SET仍是条件性学习参照，跨实例重现未获答案。原始转储已保全并完成有界读取，二进制身份限制及共同根因未明；不选第三fit、CPU替补、恢复拼接或常驻诊断，无活动worker／等待依赖。闲置实现和两份源码快照已退役，原始证据保留。[完整失败及成本](candidates/energy_relay_baselines/NOTES.md#2026-09-27--second-original-seed-failed-both-fresh-endpoints-remain-missing)、[独立审查与取舍](candidates/energy_relay_baselines/NOTES.md#independent-reading-and-dm-disposition-end-b01-replenishment)、[路由](#session-routing)。 |
 | `energy_relay_imitation` | 合法且声明的信息条件下，普通示范学习能否形成有用闭环部署，何时值得处理学生访问状态覆盖？ | reserve | Codex DM (independent session) | **B01/B02完整读完，owner重审完成；本方向结束当前拟合投入并转reserve。** B02同数据／初始化的掩码干预降低教师未激活层MSE；相对B01的QoS +.042015、J +127.850856，但描述区间均跨零，11个服务/J损失世界、5个零服务及较差低电量尾部保留。手抄J标准误已由错误.0785947更正为78.594655，原始runner正确。全部64条配对评价轨迹核验，独立审查复核；1fit／1899更新／32回合／96k步／22.03min。它不识别长时域合作瓶颈；未执行的二选一规划后继已因比较与贡献不足撤回，较宽问题仍由DM3负责。[更正及原始证据](candidates/energy_relay_imitation/NOTES.md#2026-09-27--owner-requested-source-re-review-and-b02-corrections)、[后继处置](candidates/uav_cooperative_planning/NOTES.md#2026-09-27--owner-requested-re-review-end-the-binary-selector-investment)、后继学习效用问题已在下行独立登记，旧BC与二选一方案不恢复；[现行计划](#current-research-plan)。 |
