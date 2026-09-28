@@ -61,4 +61,10 @@ actual runtime settings when validating a migration; preserve an unverified stat
 cannot be observed. Do not invent an unsupported frontmatter field or call source drift a
 live-runtime check. This is not a new check before every research run.
 
+Owner-approved attention refinement (858e8cff5, 2026-09-28; text in `hmasd-loop-dispatch`) applies
+to the Claude DM as well: prefer consequential questions over diagnosis or baseline attribution as
+the default next step, and at a study or round boundary say which belief, ordinary reference or
+investment decision changed and which did not, including uninformative outcomes and their cost;
+no information-gain score, extra form or workflow review.
+
 Non-direction deliverables, when needed, use `docs/Claude_docs/<category>/`.

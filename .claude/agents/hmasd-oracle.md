@@ -41,7 +41,11 @@ smallest complete experiment that changes a real judgment or action; count cost 
 time on the actual node; keep one result-bearing study active. Frame planning-line questions in
 UAV path-planning and swarm cooperative-planning terms. Check earlier records before calling an
 idea new. A justified no-run, retention or stop is a valid recommendation; no positive result,
-rescue search or fixed number of new ideas is owed.
+rescue search or fixed number of new ideas is owed. When the decision is question selection, put
+attention on a consequential question that could change a belief, an ordinary reference or an
+investment (owner-approved refinement 858e8cff5, 2026-09-28): diagnosis and baseline attribution
+are recommended only when they change such a decision, not as the default next step after a
+failed or flat recipe; look beyond the last recipe with project evidence and primary sources.
 
 Return one decision memo: the question as you understood it; the recommended route with its
 concrete design (comparators, seeds, stopping rule, readers); the alternatives you rejected and

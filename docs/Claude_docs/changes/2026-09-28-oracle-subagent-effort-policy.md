@@ -43,3 +43,16 @@ outcome would change. Frontmatter (model fable, effort max, tools) unchanged. Di
 Claude-only role; `tools/publish_claude_control.py --check` re-run from this checkout: `drift: 0`.
 No science, run, record type, role or message channel changed; the running `b05_canonical_frame_a01`
 operation is untouched.
+
+## Addendum (2026-09-28, later): owner-approved attention refinement mirrored for the Claude DM
+
+Owner question: the Codex-side workflow tuning reduces meaningless experiments; should Claude do the
+same? Root's second refinement (858e8cff5) changed only `hmasd-loop-dispatch` and
+`hmasd-portfolio-task` (Root/portfolio skills), so its two points — attention on consequential
+questions rather than diagnosis/baseline attribution by default, and decision-based round reviews
+(which belief/reference/investment changed, uninformative outcomes and their cost) — were not in
+the bodies the Claude DM reads (`hmasd-research-hub`, `hmasd-scientific-tools`, the Oracle).
+Change: one paragraph in `CLAUDE.md` (Claude runtime section) applying the refinement to the Claude
+DM, and one sentence in `.claude/agents/hmasd-oracle.md` for question-selection decisions.
+Frontmatter unchanged; `tools/publish_claude_control.py --check` still `drift: 0` (generated bodies
+untouched). No new record type, score, form, role or channel; accepted operations untouched.
