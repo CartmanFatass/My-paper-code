@@ -22,6 +22,35 @@ scope and needs no second approval; only a user-requested ongoing exchange permi
 This rule is App-only: Jev browser interaction retains its applicable workflow, and internal children/bounded
 helpers still return to their assigning parent within this task.
 
+## Root-led DM trial
+
+Owner, 2026-09-28 UTC: for newly selected Codex research, use this Root and native
+`hmasd-direction-manager` children rather than new independent App sessions. This selects
+the existing child mode under constitution section 2; it does not create a role or change
+Claude's peer standing. Completed archived App DMs remain historical sources. Existing
+accepted operations keep their actual owner and handle; no migration by restart.
+
+Root owns question construction, task design, prioritization and cross-question synthesis.
+Delegate a consequential question, relevant evidence and competing explanations, the current
+bounded deliverable, scope/cost and what judgment the return should inform. Do not prescribe
+a favored conclusion or ask the child to keep repairing a recipe until it wins. Create a
+child only after selecting worthwhile concrete work, using the registered DM role and its
+owner-selected settings. Keep one writer per path and record the actual child route in RESEARCH.
+
+The child is a scientific DM, not an Operator: it can challenge the assigned question and
+select methods and ordinary in-scope continuations. At an assigned result/decision boundary,
+return evidence, the changed explanation, unresolved alternatives and a recommended next
+action through native child tools. A proposed move beyond the assigned question returns to
+Root for task design and allocation; it is not silently launched as another research track.
+Root reads and integrates the result, then chooses continuation, reframing, combination or
+stop. This is not an owner/Root ACK for each fit, publication, implementation step or progress
+checkpoint, and no fixed failure count or mandatory new idea is introduced.
+
+Use native child message/follow-up/wait for actual dependencies. App cross-task restrictions
+do not block these internal returns. Keep the independent Scientific Reviewer and existing
+publication responsibilities; Root's preferred framing remains open to criticism. A workflow
+switch alone neither selects a scientific study nor lifts a pause.
+
 ## Select the session's work
 
 Read the owner instruction, pause and current direction standing. Inspect another session
@@ -113,7 +142,8 @@ Keep unknowns explicit; do not backfill addresses for dormant historical directi
    message route to bypass the same rule.
    Children use the native agent list, follow-up/message and wait tools. Resolve an
    uncertain dispatch against the same task/turn before sending again.
-4. **Create only when needed and authorized.** An explicit owner request for a new standalone
+4. **Create only when needed and authorized.** The current Root-led trial uses a registered
+   DM child for selected work. An explicit owner request for a new standalone
    task uses `create_thread` with a verified project and supported environment; wait for the
    real thread id before recording or addressing it. Do not use a provisional client id as
    a thread id. Without such a request, a new bounded direction assignment may use the
@@ -160,6 +190,8 @@ comparison, not whether it appeared on an earlier list. A recipe's closure does 
 research responsibility: reconsider relevant project evidence and choose useful continuation
 or a justified stop. Preparation neither lifts a pause nor starts a result batch. Use Portfolio
 for project-level decisions within an owner request/delegation, not as a gate for every pivot.
+In the Root-led child trial, keep execution within the actual question delegated to that child;
+broader successor proposals return to Root for the next assignment, not renewed owner approval.
 
 ## Independent work and actual handover
 

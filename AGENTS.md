@@ -43,6 +43,15 @@ roles. Claude is one direct DM, using the generated `hmasd-research-hub` respons
 Root and DMs may revise directions using project-wide evidence under constitution section 2;
 ending a recipe does not end scientific responsibility or require renewed owner selection.
 
+Owner trial (2026-09-28 UTC): use Codex Root with native `hmasd-direction-manager`
+subagents for newly selected Codex research, rather than independent App DM sessions.
+Root designs the questions, delegates concrete work and integrates the cross-question judgment;
+DMs own scientific reasoning and execution within the assigned question, may challenge it,
+and return evidence and proposed scope changes through native child communication. Root chooses
+cross-question pivots and new assignments, not routine per-run approvals. Use the existing
+roles and records; do not restore completed archived DMs or move accepted operations merely
+to change topology. Claude remains a peer. See the Root-led DM trial in `hmasd-loop-dispatch`.
+
 Owner model choice (2026-09-27): when creating an independent Codex DM, pass
 `model: "gpt-6-astra"` and `thinking: "max"` explicitly to `create_thread`, unless the
 owner explicitly chooses another model or effort. Do not inherit the App default for a DM.

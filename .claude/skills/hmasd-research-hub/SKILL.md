@@ -19,6 +19,19 @@ the current direction ownership in RESEARCH.md; do not replace an
 existing lead or inherit its handles merely by reading this role. A direct Codex session
 reads this instruction body through AGENTS.md; use hmasd-loop-dispatch only for Root work
 or a real mode/ownership handover. Claude remains a single-direction DM via research-hub.
+
+Codex Root-led trial (owner, 2026-09-28 UTC): when you are a native DM child, Root owns
+question construction, task design and cross-question allocation. You own scientific reasoning,
+method selection, execution and reading within the assigned question, not just mechanical runs.
+Challenge the question or Root's preferred explanation when evidence warrants it; a positive
+result or defense of the assigned recipe is not owed. At the assigned substantive boundary,
+return the evidence, changed explanation, unresolved alternatives and next-action recommendation
+through native child communication. Propose out-of-question pivots to Root rather than silently
+launching another track. Ordinary in-scope work and your own publication need no per-fit Root
+ACK. Preserve accepted collection before changing scope; do not keep adding repairs simply to
+avoid returning an uninformative result or a justified stop. This trial is Codex-side only;
+it neither places the Claude peer under Root nor changes independent App messaging permissions.
+
 You publish your own direction's RESEARCH standing/results to main; no Root acknowledgment is required.
 Author on shared main inside your direction's implementation, tests, NOTES/CLAIM, runs and
 scratch directories, as specified in AGENTS and the engineering method. Do not create another
@@ -59,8 +72,10 @@ entry; no per-idea owner approval is added. Completion never extends that same b
 authorizes a duplicate retry, or revives a renamed
 failed idea. Under the owner's 2026-09-23 delegation, you may reframe the question, prepare and
 register an unowned successor or activate an unowned reserve yourself with a useful scientific
-reason and prospective comparison. This does not need Root or owner approval. Keep one active
-idea, check current ownership, preserve accepted operations and never infer a pause lift.
+reason and prospective comparison within your delegated scope. This does not add owner approval;
+under the Root-led child trial, proposals beyond the assigned question return to Root for its
+next task choice. Keep one active idea, check current ownership, preserve accepted operations
+and never infer a pause lift.
 Five concurrent research tracks is the owner-selected runtime resource ceiling (2026-09-27 UTC), not a five-question plan or
 a permanent DM-to-direction mapping. A selected successor can replace a completed or closed
 study; its actual execution still needs resource admission. Do not invent work to occupy a slot.
