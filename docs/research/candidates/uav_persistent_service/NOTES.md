@@ -1200,3 +1200,60 @@ intact. Stop the dependent action on a material semantics or resource conflict;
 otherwise continue through exact input publication, native admission, one
 accepted handle, deterministic observation, collection, full scientific reading,
 result publication and measured lifecycle cleanup. No routine Root approval.
+
+### B02 implementation acceptance and checks
+
+The existing bounded Implementer returned only the new `b02/` code and tests.
+I read all844 lines, the reused recorder/controller and affected native readout
+helpers. B02 uses a small `NativeEpisode` subclass with horizon binding before
+its first preparation, read-only per-step RNG digests and terminal-safe rows;
+the runner uses the existing bounded pool and single native admission. It
+retains actual raw steps, decision/event traces and artifact hashes. O/P code,
+native F and the energy/routed-core sources have no diff from executed B01
+`981e935ee`. The original strict arrival detector is not repaired.
+
+Implementer checks covered eleven synthetic cases and two native tests in their
+latest focused invocations, plus CLI help. Its cumulative correctness exposure
+was210 native transitions: two90-step three-path equivalence invocations and
+one30-step trace/read/save fixture. The latter marks only its test fixture's
+terminal witness, not a selected world or a result. No optimizer update, fit,
+selected-seed rollout or H12000 outcome inspection was performed. I reran the
+eleven synthetic checks, first2.03s and after the fixture correction2.11s,
+adding zero native transitions/updates. Only existing matplotlib/pyparsing
+deprecation warnings appeared.
+
+The same independent Engineering Reviewer read the complete new executable
+paths and contract in its own continuing reviewer context. Full answer:
+
+> **No material finding remains in the B02 source.**
+>
+> Verified horizon binding before first preparation, unchanged controllers/F,
+> early-terminal accounting, fixed late/final windows, common-prefix pairing,
+> artifact hashes, admission ordering and failure preservation.
+>
+> Independent checks: **11 synthetic tests passed in 2.01s**, adding **0 native
+> transitions and 0 updates**. The reported cumulative native correctness cost
+> remains210.
+>
+> Residual limits: no full H12000 execution or new native exhaustion reproduction.
+> One minor fixture gap: the partial-failure test currently raises in
+> `choose_action` before its intended `macro_step` failure; partial-save handling
+> is still exercised. Returned the small test correction to the DM.
+>
+> No edits or launches. Engineering acceptance remains with the DM.
+
+I corrected that fixture by declaring its P action path and asserting its
+intentional macro-step error; the rerun above passes. This changes no scientific
+behavior. I accept the implementation with the stated test/scale limits, not
+with a positive outcome expectation. Total new native correctness remains210,
+zero updates. Full native exhaustion has synthetic boundary coverage, not a
+new empirical reproduction. The fixed result plan is still unlaunched here.
+
+Read-only node reconciliation found the maintained remote canonical checkout
+at `c562b8fa9`, with an existing dirty RESEARCH synchronization and historical
+run artifacts. I preserved every foreign change. Launcher/admission/snapshot
+and compute-config bytes match current main; this direction's canonical
+pause/state/lead match the published exploring/native-child control. Fetching
+published inputs is sufficient without a remote branch switch, reset, merge,
+sparse-selection change or overwrite of those records. Fresh true-node memory
+and duplicate-claim admission remain to be performed by the native kernel.
