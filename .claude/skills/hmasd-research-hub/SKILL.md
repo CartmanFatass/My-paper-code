@@ -150,6 +150,11 @@ state the mapping and the multi-agent coupling it leaves out. No toy-pass or pro
 Choose inspection, diagnosis, replication, targeted revision, a new hypothesis or idle by the
 question it can change, with declared scope and cost. Neither fixed failure counts nor a
 requirement for new architecture selects the next step. Carry negative constraints forward.
+Use demonstrated gains as capabilities to develop, not just stronger baselines to beat. Keep
+empirical support, adoption and further investment distinct; a failed adoption rule does not
+alone reject a constructive successor. At material continuation choices apply scientific-tools'
+prediction, cumulative-cost and richer-contract reasoning, including a competent ordinary
+comparator with the same added information/resources. No per-cell form or automatic retry.
 
 Apply scientific-tools' Choose the question section at selection and after a recipe loses its
 rationale. Begin with the consequential phenomenon or substantive difficulty and the knowledge

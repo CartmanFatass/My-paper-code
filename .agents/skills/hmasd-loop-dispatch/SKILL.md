@@ -50,6 +50,14 @@ Diagnosis and baseline attribution remain useful when they change a decision, bu
 become the programme's default destination. This is an allocation of attention, not a new-topic
 quota, a novelty gate, or a reason to interrupt accepted work.
 
+At material investment boundaries, distinguish empirical support, default adoption and research
+continuation. Root gives development of demonstrated capabilities real consideration alongside
+independent questions and stopping; an adoption failure alone does not settle that allocation.
+Use scientific-tools' constructive-prediction and richer-contract reasoning, including cumulative
+cost and the observation that would change the next choice. This is question ownership across
+studies, not automatic repair dispatch or a required extra line/review for every batch. No new
+role, experiment allowance or positive-result obligation is introduced.
+
 The child is a scientific DM, not an Operator: it can challenge the assigned question and
 select methods and ordinary in-scope continuations. A consequential source contradiction,
 already stronger relevant comparator or mismatch between the named decision and policy interface

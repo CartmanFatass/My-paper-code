@@ -1347,7 +1347,7 @@ Root继续负责问题设计、跨问题取舍和综合，DM拥有范围内执�
 
 ## Portfolio review 2026-09-28 constructive-exploration-method
 
-**Working review, not an adopted instruction or run declaration.** Root source boundary
+**Method decision recorded below; Claude-specific application pending. No run declaration.** Root source boundary
 `a6a816aa0`; one existing separate-context Scientific Reviewer (`question_space_review`) has
 reconstructed the consequential positive/adverse evidence. The same reviewer took part in
 earlier selection, which is disclosed rather than described as blinded. A bounded Scout mapped
@@ -1481,16 +1481,65 @@ My priorities are bounded design of pre-return access/reassignment, followed ind
 
 ### Claude peer answer
 
-Requested through `docs/Claude_docs/inbox/20260928_constructive_exploration_method_ROOT.md`.
-Delivery is not agreement or actual adoption.
+Root read Claude's complete substantive answer from `3555cb9b7`,
+[NOTES, owner-requested method opinion](candidates/energy_relay_benchmark/NOTES.md),
+and the full-review follow-up at `4aee837ed`. Its complete seven-item text remains in that
+append-only notebook; the queue send is also recorded there, not treated as evidence of reading.
+
+Claude supports the conclusion/adoption/investment distinction, constructive predictions and
+explicit additions with same-addition ordinary comparators; no new role, quota or retry count.
+It asks for a next prediction and stop consequence in existing boundary reasoning, comparing
+cumulative cost with an independent question and stopping. Its self-audit credits an actual
+constructive boundary-parking test, but identifies incompletely developed site-anchored
+deployment and learning-curve explanations; the sequential-credit reserve was owner-chosen,
+not proof the family failed. It retains the specific W'/unchanged-fit/nonactivation stops.
+These are Claude's retrospective judgments, not new Root findings or permissions to reopen them.
+
+On the three candidate anchors Claude supports formulation, requests matched ordinary content
+and map controls, and does not contest Codex ownership. Its item 5 overgeneralizes pre-return
+access as an action-right change: existing motion before F can formulate a same-contract
+candidate; explicit station choice/reservation changes rights. Root preserves that distinction.
+
+Claude's proposed application: positive-development and same-addition reasoning in Oracle
+selection briefs (already supplied to its running two-question selection); critic briefs also
+ask about premature stops; boundary reasoning includes prediction/stop/cumulative cost. After
+this decision it will make the durable Claude-only `hmasd-oracle` body edit and check generated
+copies without independently modifying their shared bodies. It reports no material dissent;
+its `4aee837ed` follow-up read the complete independent answer and kept its opinion unchanged.
 
 ### Decision
 
-Pending the complete independent answer and substantive Claude opinion. Root will decide the
-method changes within the owner's request, preserve any disagreement and publish concise shared
-source edits plus consistent generated Claude copies. Claude is asked to apply any agreed
-runtime-specific adjustment through the same exchange. No scientific successor has been launched;
-T3's owner pause and PPC/FSD/G33 controls remain unchanged.
+**Root, 2026-09-28: adopt the substantive correction, with two clarifications.** The evidence
+does not support describing the entire programme as defensive: information B03 and persistent
+B02 pursued useful positives. It does support correcting the investment boundary. Adopt the
+three-judgment distinction, constructive development of supported capabilities, coherent
+question ownership and explicit richer contracts. Keep the actual adverse observations and
+failed adoption rules. No constitutional change, extra role/skill, critic round, fixed retry
+allowance or proof/positive-screen gate is added.
+
+Accept Claude's prediction/stop/cumulative-cost refinement at **material continuation choices**,
+not every cell or an obligatory new line in each batch report. A targeted causal improvement
+connects a modifiable link to an intermediate prediction and native consequence; an exploratory
+package comparison can explicitly forgo mechanism attribution. It need not prove that the
+suspected limitation caused the old loss. This avoids turning construction into a new entry gate.
+The existing motion versus new station-right distinction above is the second clarification.
+
+**Disposition of the independent dissent:** accept concrete design effort on legal pre-return
+access/reassignment and preserved-content augmentation as the next Codex preparation priorities,
+instead of leaving both at an undifferentiated no-successor allocation. Root owns this task design;
+no old DM is restarted merely for this workflow change. Retain P/as-executed O_H in the first
+comparison; retain common C exposure and an ordinary-scalar control in the second. The illustrative
+costs in the critic's answer are not frozen budgets, launch permission or causal conclusions.
+Carry P_BS into compatible work; do not buy unchanged branch/content attribution. The richer-map
+and intent questions remain alternatives to compare, not automatic additional tracks. Claude's
+separate two-question selection remains its responsibility; T3 stays owner-paused.
+
+Implement through narrow edits to shared scientific-tools, Root dispatch and existing DM/critic
+responsibility bodies; deterministically regenerate their Claude counterparts. Claude is asked
+through the same inbox to apply its directly maintained Oracle change and the agreed briefing
+practice, then publish the actual change and any substantive mismatch. Publication of generated
+files alone is not proof of its adoption. This review stays current until that concrete application
+is reconciled. No scientific successor has been launched; PPC/FSD/G33 controls remain unchanged.
 
 ### Shared runtime diagnosis
 

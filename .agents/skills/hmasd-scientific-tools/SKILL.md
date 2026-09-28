@@ -59,10 +59,13 @@ take over it. The smallest worthwhile complete experiment preserves the decision
 that makes the question matter; it is not necessarily the smallest code change. A larger
 bounded comparison can be preferable to a chain of cheap patches or diagnostics.
 
-At closure distinguish an adverse tested prediction, a technically missing comparison and a
-proposal declined for its value/cost. None alone exhausts the parent question. Conversely, an
-open question does not oblige another attempt. Use the existing notebook reasoning and one
-applicable independent review; this adds no form, candidate quota, proof gate or approval layer.
+Keep empirical support, practical adoption and further investment distinct. A package can fail
+its adoption/risk rule yet expose a useful capability or limitation worth developing; that
+investment does not reverse the failed rule. At closure distinguish an adverse tested prediction,
+a technically missing comparison and a proposal declined for its value/cost. None alone exhausts
+the parent question. Conversely, an open question does not oblige another attempt. Use the
+existing notebook reasoning and one applicable independent review; this adds no form, candidate
+quota, proof gate or approval layer.
 
 ## Design the comparison and decision exposure
 
@@ -79,6 +82,16 @@ retain the matched attribution control and its narrower interpretation. The comp
 the question, not necessarily the highest historical score; explain deliberate differences
 instead of ranking programs from different panels. Do not require an exhaustive baseline
 search, proved headroom or a rule-positive screen before direct learning.
+
+Richer information, training knowledge, control rights or physical resources can define a useful
+new research contract; inherited host restrictions are not permanent requirements for all future
+questions. Distinguish an addition from a better use of already lawful information/actions. State
+the use case, source, error and acquisition/communication/compute/physical cost as applicable.
+Give the competent ordinary comparator the same addition, separating the gain supplied by the
+richer contract from the method's increment within it. Buy cross-contract controls for the claim
+being made, not an automatic full factorial. Future truth supplied to a deployment actor stays
+an explicitly labeled privileged bound, not a deployable forecast; a changed contract never
+rewrites an accepted experiment.
 
 For learning about a named decision, inspect the mapping from policy outputs to meaningful
 choices: eligibility, information prerequisites, fallback, action aliases or category counts,
@@ -194,16 +207,25 @@ A working update may be qualitative and conditional. Missing population precisio
 forbid learning from the result, but does forbid fabricated confidence or a stable ranking.
 Keep positive and negative evidence, distinguish newly suggested explanations from pre-result
 predictions, and revise interpretations by appending rather than rewriting prior entries.
+Use a supported positive as a capability to preserve, combine or extend, not only as a stronger
+opponent. Develop its strongest plausible constructive explanation alongside the competing
+criticism; the independent review challenges premature stopping as well as overclaiming. Neither
+side owes a repair or a positive finding. An unexplained package benefit remains usable within
+its demonstrated scope without making a mechanism study a prerequisite to further exploration.
 No useful discrimination is a valid conclusion. Do not repeatedly list "optimization, capacity,
 seed" as equally surviving excuses without asking what could weaken each explanation.
 
-Prefer a targeted revision when evidence points to a modifiable link and the revision makes a
-different prediction. Lower expectations when tested repairs fail their intermediate predictions,
-the proposed bottleneck is not material in the target conditions, or remaining rescue stories
-make no different feasible prediction. These are research judgments, not automatic failure-count
-gates. Stopping because the next information is not worth its cost is distinct from falsification.
-An unchanged replication is useful when recurrence itself changes a decision; a new architecture
-is not a prerequisite. A cheap direct learner test may beat an elaborate diagnostic.
+Prefer a targeted revision when evidence or a reasoned conjecture suggests a modifiable link
+and the revision predicts a different intermediate effect and complete-task consequence. The
+conjecture need not already explain the previous loss; a package comparison may explicitly forgo
+mechanism attribution. At a material continuation choice, make the next prediction and what
+would weaken or stop that route explicit, and compare its cumulative and prospective cost with
+the best relevant independent question and stopping. Use the existing boundary reasoning, not a
+new entry for each cell or a fixed retry allowance. Lower expectations when tested revisions
+fail their predictions, the proposed limitation is immaterial, or remaining stories make no
+different feasible prediction. Investment stopping is distinct from falsification. An unchanged
+replication is useful when recurrence itself changes a decision; a new architecture is not a
+prerequisite. A cheap direct learner test may beat an elaborate diagnostic.
 
 ## Use and revise shared understanding
 
