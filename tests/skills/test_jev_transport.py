@@ -757,6 +757,21 @@ def test_answer_block_excludes_author_decision_but_keeps_nested_answer_content()
     assert after == decision
 
 
+def test_portfolio_pro_answer_preserves_independent_answer_and_decision():
+    heading = '## Portfolio review 2026-09-28 example'
+    independent = '### Answer\nIndependent evidence and material dissent.\n\n'
+    before = f'# Research\n\n{heading}\nQuestion: which next choice?\n{independent}### Pro Answer'
+    after = '### Decision\nRoot disposition.\n\n## Current research plan\nUnchanged.\n'
+    empty = before + '\n\n' + after
+    body = 'Additional expertise.\n\n#### Limits\nStill exploratory.'
+    filled = before + '\n' + body + '\n\n' + after
+
+    assert driver.answer_block(empty, heading, '### Pro Answer') == (before, '', after)
+    assert driver.answer_block(filled, heading, '### Pro Answer') == (before, body + '\n', after)
+    for text in (empty, filled):
+        assert driver.answer_block(text, heading, '### Answer')[1] == 'Independent evidence and material dissent.\n'
+
+
 def test_compose_keeps_document_hash_but_gives_pro_a_natural_cover_note(tmp_path):
     message = tmp_path/'full.txt'
     message.write_text('line one\n\nline two\n', encoding='utf-8')
@@ -1247,6 +1262,31 @@ def test_deliver_ignores_decision_edits_and_accepts_later_answer(delivery):
     assert result['state'] == 'DELIVERED'
     assert [commit['commit'] for commit in result['commits']] == [answered]
     assert Path(args.answer_out).read_text(encoding='utf-8') == 'the Pro answer\n'
+
+
+@pytest.mark.parametrize('change_independent', [False, True])
+def test_deliver_custom_pro_answer_protects_independent_review(delivery, change_independent):
+    args, write = delivery
+    args.question_heading = '## Portfolio review 2026-09-28 example'
+    args.answer_heading = '### Pro Answer'
+    question = f'# Research\n\n{args.question_heading}\nQuestion: which next choice?\n'
+    independent = '### Answer\nIndependent evidence and material dissent.\n\n'
+    decision = '\n### Decision\nRoot disposition.\n'
+    source = question + independent + args.answer_heading + '\n' + decision
+    args.source_sha = write(source, 'assign a separate Pro subsection')
+    assert driver.command_deliver(args, {})['state'] == 'NOT_DELIVERED'
+
+    if change_independent:
+        independent = independent.replace('material dissent', 'agreement')
+    answered = write(question + independent + args.answer_heading + '\nthe Pro answer\n' + decision,
+                     'deliver custom subsection')
+    result = driver.command_deliver(args, {})
+    if change_independent:
+        assert result['state'] == 'CONFLICT' and 'answer_out' not in result
+    else:
+        assert result['state'] == 'DELIVERED'
+        assert [commit['commit'] for commit in result['commits']] == [answered]
+        assert Path(args.answer_out).read_text(encoding='utf-8') == 'the Pro answer\n'
 
 
 @pytest.mark.parametrize('text, extra', [

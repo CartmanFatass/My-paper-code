@@ -65,10 +65,11 @@ require this review; DM reflection and pivots may use their existing NOTES and s
 3. **Publish the scoped review.** The session assigned this owner-triggered project review
    refreshes main, preserves concurrent direction entries, commits by pathspec and pushes from
    its owned checkout. Direction DMs retain their own publication authority. Preserve the independent
-   review in `### Answer`. If Pro adds distinct value, allocate a separate answer subsection in this
-   same review (preserving the independent answer) and supply the browser procedure with the
+   review in `### Answer`. If Pro adds distinct value, insert an empty `### Pro Answer` before
+   `### Decision` in this same review, preserving the independent answer. Supply the browser procedure with the
    repository, branch, source_sha, target_path=`docs/research/RESEARCH.md`, question_heading,
-   actual empty answer heading, subject key=`portfolio`, message and conversation URL.
+   answer_heading=`### Pro Answer`, subject key=`portfolio`, message and conversation URL.
+   Use that exact heading for delivery checks, not the transport's default `### Answer`.
    Instruct Pro to read the pinned question, fetch the current target version and write only
    the empty answer subsection, preserving the question, tables and `### Decision`. Return
    the actual commit on success or the complete answer in chat on write failure.

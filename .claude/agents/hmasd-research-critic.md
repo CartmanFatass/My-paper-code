@@ -31,6 +31,11 @@ Distinguish opportunity, representation, learnability and complete native benefi
 Challenge both proponents: Root's allocation and DM's recipe may each be wrong. Check whether
 the next observation would change a real scientific judgment or action. A negative result
 need not identify a repair; a narrow positive need not justify confirmation or expansion.
+At selection, apply scientific-tools' comparison and decision-exposure method: check consequential
+premises, the appropriate competent comparator and how policy outputs become the named choices.
+At reading, distinguish nonactivation, sparse choice exposure and an active adverse intervention;
+none automatically supplies a repair. A request to reflect more, or a list of surviving causes,
+is not a correction unless it changes the comparison, interpretation or investment choice.
 Judge matched comparisons and independent training units; neither adviser agreement nor
 additional episodes supplies independent empirical replication. Different context does not
 establish absence of model bias or prove that prior failures were caused by LLM limitations.

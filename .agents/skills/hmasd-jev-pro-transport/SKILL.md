@@ -81,7 +81,7 @@ never prints the conversation address unless `--show-url` is given.
 4. **Wait and collect from the existing conversation without a waiting subagent.** Once Send is
    accepted, Pro continues server-side; reopening Chrome does not restart the request. In Codex,
    save this JSON in task-local private scratch as `/absolute/path/to/request.json`, substituting
-   real absolute paths, then arm the repository controller and end the turn:
+   real absolute paths, then arm the repository controller:
 
    ```json
    {
@@ -100,6 +100,11 @@ never prints the conversation address unless `--show-url` is given.
    python tools/hmasd_wait.py arm --request /absolute/path/to/request.json --window 1500
    ```
 
+   Only an independent session with a supported queue-return path ends its turn. A native child
+   keeps its turn active with long deterministic waits, then drains/rearms the same handle until
+   complete advice reading; child registration does not establish automatic queue return.
+   If it already ended, Root uses native follow-up on the same child and handle, not a new Send.
+
    The controller is standard-library only. The passive browser observer uses CDP/WebSocket
    state and does not import Jev, use Jev credentials or ask a model to judge completion. The
    existing driver invokes Jev lazily only if an authorized connector-consent interaction is
@@ -108,7 +113,7 @@ never prints the conversation address unless `--show-url` is given.
    outside the model turn and return by the native runtime or a manual continuation; do not run
    the Codex-only controller or assume Codex queue can wake Claude.
 
-   On wake, `python tools/hmasd_wait.py drain` returns the generation, wake id, stable event ids
+   On wake or an active child's checkpoint, `python tools/hmasd_wait.py drain` returns the generation, wake id, stable event ids
    and jobs. `COMPLETE` means the answer was collected, not that repository delivery succeeded.
    Run step 5. If a bounded checkpoint reports the job still active, rearm the same generation
    and event ids with
@@ -130,8 +135,10 @@ never prints the conversation address unless `--show-url` is given.
    provisional `/c/WEB:` address that cannot be reopened), find the conversation and pass
    `--conversation-url`. Apart from that consent, nothing here clicks.
 5. **Read delivery, not the receipt.**
-   `$JEV $D deliver --key <key> --branch … --source-sha … --target-path … --question-heading … --answer-out <path>`
-   fetches the branch and finds the commit that filled this question's `### Answer`. `DELIVERED`
+   `$JEV $D deliver --key <key> --branch … --source-sha … --target-path … --question-heading … --answer-heading '<assigned heading>' --answer-out <path>`
+   fetches the branch and finds the commit that filled this question's assigned answer subsection.
+   Pass the actual `answer_heading`, for example `### Pro Answer` for a Portfolio review that
+   already preserves an independent `### Answer`; omission defaults to `### Answer`. `DELIVERED`
    means exactly one such commit, touching only the target file, with the question and every
    other byte unchanged and the subsection empty before; unrelated later commits do not count.
    `CONFLICT` lists what differs: preserve both versions and report, never choose silently.

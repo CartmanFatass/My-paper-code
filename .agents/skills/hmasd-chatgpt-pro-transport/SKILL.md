@@ -43,9 +43,11 @@ to the author. A context correction never authorizes resending an accepted or un
    - unknown: inspect the existing operation/page first; do not assume verifyExisting is
      send-free when sendAttempted is false or unknown, and do not create a replacement.
 4. **Observe without a waiting subagent.** After `sendAttempted=true`, use a deterministic
-   external observer only where that host route has been implemented and verified, then return
-   from the active model turn. The WSL Codex path is specified in `hmasd-jev-pro-transport` and
-   arms `tools/hmasd_wait.py`, which queues only the assigning session. For Agentify/Claude,
+   external observer only where that host route has been implemented and verified. Only an
+   independent session with a supported return path ends its turn; native children keep their
+   turn active with long deterministic waits and same-handle collection/rearm through advice
+   reading. The WSL Codex path is specified in `hmasd-jev-pro-transport` and arms
+   `tools/hmasd_wait.py`, which queues only the assigning session. For Agentify/Claude,
    use a verified native external observer when available; otherwise retain the same accepted
    operation, report the route limit and continue manually when the runtime returns. Never move
    an accepted Agentify conversation to Jev, whose account is different. A direct short diagnostic

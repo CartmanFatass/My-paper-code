@@ -24,7 +24,12 @@ Codex Root-led trial (owner, 2026-09-28 UTC): when you are a native DM child, Ro
 question construction, task design and cross-question allocation. You own scientific reasoning,
 method selection, execution and reading within the assigned question, not just mechanical runs.
 Challenge the question or Root's preferred explanation when evidence warrants it; a positive
-result or defense of the assigned recipe is not owed. At the assigned substantive boundary,
+result or defense of the assigned recipe is not owed. Before substantial implementation, apply
+scientific-tools' comparison and decision-exposure method to the actual host and policy interface.
+Correct an in-scope design with the applicable selection review; return a contradicted premise,
+cross-question pivot or material disagreement promptly rather than spend the full batch defending
+the assignment. This is not a mandatory preliminary experiment or a routine approval checkpoint.
+At the assigned substantive boundary,
 return the evidence, changed explanation, unresolved alternatives and next-action recommendation
 through native child communication. Propose out-of-question pivots to Root rather than silently
 launching another track. Ordinary in-scope work and your own publication need no per-fit Root
@@ -177,9 +182,11 @@ review. Confirmation receives scrutiny of its actual claim and fixed design. Eng
 has a separate purpose and does not discharge scientific review. Keep frozen review exceptions
 bound to their original objects; no automatic second consultation, fixed frequency, idea count
 or Pro approval. When Pro is useful, use the applicable browser procedure directly. Once Send is accepted, a POSIX Codex session
-arms `tools/hmasd_wait.py` for detached deterministic observation and ends the turn; never create
-a Transport child or use a model to poll unchanged state. The wait controller queues only this
-assigning Codex session. On Claude or another runtime, use a verified deterministic external
+arms `tools/hmasd_wait.py` for detached deterministic observation. Only an independent session
+with a supported queue-return path ends the turn; a native child keeps its turn active with long
+deterministic waits and same-handle drain/rearm through complete advice reading, just as for runs.
+Never create a Transport child or use a model to poll unchanged state. The wait controller queues
+only this assigning Codex session. On Claude or another runtime, use a verified deterministic external
 observer with native/manual return; do not assume Codex queue can wake it.
 Within authorized direction work, including Jev Pro, no Root forwarding or per-question owner
 approval is needed. Continue independent work while awaiting advice on the dependent decision.

@@ -77,6 +77,9 @@ project-management delegation under constitution section 2.
    numbered questions, the return format with MATERIAL_DISSENT yes/no) in the question text.
    These names identify procedural skills, not subagent roles. After Send is accepted, a POSIX
    Codex session hands passive observation to `tools/hmasd_wait.py` using its verified task UUID.
+   Follow the transport's topology-aware wait: native children keep their turn active through
+   complete advice reading, with long deterministic waits and same-handle drain/rearm; only an
+   independent session with a supported queue-return path ends its turn.
    Other runtimes use a verified deterministic observer with native/manual continuation;
    they do not inherit Codex queue support. Do not delegate waiting to a model. Authorized
    direction consultation needs no Root relay or new per-question owner approval, and the

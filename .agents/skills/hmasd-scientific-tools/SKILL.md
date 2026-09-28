@@ -64,6 +64,38 @@ proposal declined for its value/cost. None alone exhausts the parent question. C
 open question does not oblige another attempt. Use the existing notebook reasoning and one
 applicable independent review; this adds no form, candidate quota, proof gate or approval layer.
 
+## Design the comparison and decision exposure
+
+Use the existing prospective reasoning to connect the answer to a scientific or practical
+choice. Distinguish a package-use question from attribution to one component; a useful package
+result need not identify its mechanism. Trace only consequential premises to the actual host,
+information and decision interface. A roster event, score gap or geometric symptom does not
+by itself establish a private-history need, a missing capability or a learning bottleneck.
+An unresolved premise may motivate the experiment rather than another prerequisite study.
+
+When deciding package reuse or further investment, include the strongest applicable existing
+ordinary alternative, with compatible information, task and exposure. For a component question,
+retain the matched attribution control and its narrower interpretation. The comparator serves
+the question, not necessarily the highest historical score; explain deliberate differences
+instead of ranking programs from different panels. Do not require an exhaustive baseline
+search, proved headroom or a rule-positive screen before direct learning.
+
+For learning about a named decision, inspect the mapping from policy outputs to meaningful
+choices: eligibility, information prerequisites, fallback, action aliases or category counts,
+sampling and deployment mode, and commitment duration where relevant. Many target labels and
+one service label can allocate almost all initial sampling mass to probing without a learned
+preference. This is a design choice, not a requirement for uniform semantic choices or masking.
+Use source, algebra or existing data when they resolve the issue; unknown activation rates may
+be measured inside the planned complete study, with no mandatory pilot or exposure threshold.
+
+Separate information supplied, a branch enabled and a consequential action executed. An
+estimate that also enables an otherwise absent relay branch tests that complete fallback;
+it does not isolate the estimate's coordinate content. Buy an additional attribution control
+only when that distinction changes the claim or next investment, not to exhaust explanations.
+Record the relevant choices and unknowns concisely in NOTES; the same scientific selection
+review challenges them before substantial implementation, without a separate design-approval
+pass. Engineering checks implement the declared decision semantics, not choose the science.
+
 ## Explore an idea
 
 1. Start from the direction's current explanation and the observation or gap motivating this
@@ -80,8 +112,9 @@ applicable independent review; this adds no form, candidate quota, proof gate or
 3. Read curves and `summary.json` directly. Separate technical execution facts, observations
    and interpretation. Update what is strengthened, weakened, untouched or unresolved before
    choosing the next action, including the shared judgment used in the design. Publish a useful
-   shared change through the normal result-publication method. Exploratory conclusions stay exploratory: no effect claim from
-   one seed, no MEI verdict. Do not force a new insight from an uninformative result.
+   shared change through the normal result-publication method. A single training instance can
+   support a conditional exploratory observation, not confirmation or generalization across
+   independent training runs; no MEI verdict. Do not force a new insight from an uninformative result.
 4. Choose inspection, diagnosis, replication, targeted revision, a different hypothesis or pivot
    for the judgment/use it can change, not a quota of new candidates. After failure or recipe
    closure, consider relevant evidence and remaining opportunities across the project before
@@ -116,6 +149,13 @@ evaluator ran: read transition, optimizer-update and evaluation counts and learn
 from the run summary. Claimed training needs actual updates; recurrent-state evolution alone
 is not parameter learning. Fixed-policy evaluation reports zero new updates and its conditional
 scope, never new learning. Use an informative horizon, without a prerequisite learnability run.
+Where the hypothesis concerns a conditional choice, also read eligible opportunities and
+requested/executed choices, including fallback, in both training and evaluation. Total steps
+alone do not establish useful exposure to that choice. Keep sampled-policy entropy distinct
+from deterministic argmax behavior. Trajectory-dependent activation groups remain descriptive;
+do not drop inactive worlds or revise the accepted gate to rescue the complete comparison.
+Sparse exposure can limit an explanation without erasing the paid experiment or proving a
+general inability to learn. Any repair is a new prospective choice, not an automatic next fit.
 
 ## Update the working explanation
 

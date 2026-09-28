@@ -16,6 +16,10 @@ Before a direction code task the DM records a concise L0 scope in the current `N
 owned paths and entry points; semantics that must not change; checks; budget and stop. Add
 interface, state-flow or skeleton detail only where there is real risk. Read the nearest
 directory `AGENTS.md`.
+When scientific meaning depends on a conditional decision, include its declared eligibility,
+policy-to-action mapping, fallback and commitment semantics in that scope. Check those semantics
+and retain the requested/executed choice readings needed for training and evaluation; a correct
+implementation does not require a positive activation rate or a learning-exposure threshold.
 Owner-requested control-plane maintenance uses its existing task/design scope; do not create
 direction research records merely to perform that maintenance.
 
