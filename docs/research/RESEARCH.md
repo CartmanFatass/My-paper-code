@@ -1268,7 +1268,50 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 [已完成UAV合作规划审查：完整答复、原异议和peer修订处置](archive/2026-09-27/RESEARCH-four-codex-root-handover.md#uav-planning-review-20260927)。
 
+## Portfolio review 2026-09-28 joint-next-round-programme
+
+Conversation: owner-requested Root/Claude substantive planning exchange, initiated at `df22ce36a`
+through [the committed peer inbox](../Claude_docs/inbox/20260928_joint_next_round_plan_ROOT.md).
+Peer reply and allocation remain pending; delivery is not agreement. Claude's already-sent
+`successor-selection-mainline` Pro operation (`8c3efd3b4`) stays with Claude and is not resent.
+Independent Codex selection review: continuing `/root/question_space_review`, separate from Root's
+conversation. Reuse this review for the concrete designs below; no duplicate review or new role.
+
+Owner asks for depth where genuine progress exists and several independent question angles,
+with actual division of work between the peers. A falling number of active recipes is neither
+proof of scientific convergence nor a reason to restore every stopped recipe. The decision is
+what next comparison changes understanding or use enough to warrant its full cost.
+
+| Candidate and current evidence | Concrete question/design work | Boundary before selecting a run |
+|---|---|---|
+| Finite commitment O, `ad55c6e43`; complete gains with adverse tails and net battery withdrawal | Existing native DM `dm_persistent_service_round3` compares longer-lived service control with retaining the finite asset, using actual power/capacity and geometry constraints. | No B01 restart or PPO repair selected. Aggregate charging power does not itself certify high-service feasibility; exact continuation and full cost pending. |
+| Native CADC `22e009c9387f2507aab6ebab4555d92e27f5070e` and C2 `22ddf7b8fb9d2a02d01734939a9631866ff9a59e` | Fresh native DM `dm_message_content` designs same-seven-float content/receiver coordination under fixed competent RR transport, not learned send timing. | Old CADC separately trained both send/motion packages and was adverse; C2's frozen RR/NONE usefulness is not content attribution. Preserve matched motion learning, lawful local information, delay and actual credit. |
+| Fixed-roster LOCAL1 B16/B17 learning; non-energy G0 source scaffold and adverse G1 ordinary comparison | Root/critic assess whether event-contingent reassignment is a worthwhile independent question, rather than count mixing or alleged private history. | Exact G0 has no complete result or measured scientific cost. G1's adverse comparison is a different frozen study; its old .90 source screen is not a new prerequisite. No roster DM or run selected yet. |
+| Claude's B05/next-mainline choice, `c420043bd` and current NOTES | Peer considers W/anchored-offset/no-new-fit using its existing review and current result evidence. | Root does not duplicate the pending comparison or decide for Claude. A broad family is not exclusive ownership; exact allocation awaits substantive exchange. |
+
+The communication bridge is a known learning problem, not a novelty claim:
+[SchedNet](https://arxiv.org/abs/1902.01554) studies scarce-medium scheduling/content/action learning;
+[TarMAC](https://proceedings.mlr.press/v97/das19a.html) learns content and recipients with multiple
+communication rounds. Neither establishes native UAV benefit or permits free instantaneous
+rounds in the delayed RR host. The new design must earn its own comparison and cost.
+Potential fits, engineering and readback are not zero because preparation has not launched.
+Retaining useful assets without additional runs is a real alternative, not an owner approval wait.
+
+### Answer
+
+Pending the same independent review's source reconstruction and concrete-design reading.
+
+### Decision
+
+Root has selected the above bounded design work, not result-bearing studies. Keep completed
+results and accepted peer consultation unchanged. Prepare independent work while the peer
+exchange proceeds; resolve material choices here, then delegate selected execution to its DM.
+
 ## Current research plan
+
+**Owner现要求与Claude共同设计和分配下一轮，已启动实质交流与独立问题准备。**
+候选、实际负责人和待决比较见[当前选题](#portfolio-review-2026-09-28-joint-next-round-programme)；
+下面保留刚完成轮次的有效判断，不表示问题责任因配方结束而消失。
 
 **Owner已采纳轻量调整并授权推进下一轮（2026-09-28）。** 保持Root设计问题、原生DM承担科学与执行的分工，
 不新增角色、skill或日常审批。方法修改已发布于`858e8cff5`：Root把精力放在会改变投入的重要问题；
