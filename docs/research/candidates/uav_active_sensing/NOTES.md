@@ -312,3 +312,204 @@ whether native return can learn when and where sensing is worthwhile. The DM's
 recommendation to Root is conditional on that scientific objective, not on a
 prior toy, geometry probe or positive H/P/A result. Root's same independent review
 will select one first study; neither alternative is launched by this entry.
+
+## 2026-09-28 - B01 direct native-J learning selected; fixed design and L0
+
+Root selected the single integrated study after the [complete independent review](../../archive/2026-09-28/RESEARCH-expanded-native-dm-review.md).
+The dedicated Reviewer reconstructed original evidence in its separate context,
+recommended direct learning to test whether experience values the downstream
+service consequence of sensing, and returned `MATERIAL_DISSENT: no` on the final
+comparison. It specifically requires finite-H3000 returns and rejects a separate
+rule-positive prerequisite. The DM read the complete review and adopts it. The
+old H/P/A-only proposal remains above as selection history and will not run.
+
+Freeze tag `b01_native_j_a01`: one CPU FP32 SB3 PPO fit, policy seed **28130001**.
+Training initial worlds **28132001-28132160** occur exactly once, assigned in
+round-robin order to four vector environments, 40 episodes per lane. Evaluation
+worlds **28133001-28133016**, disjoint from training, are common to **L0, L1, H,
+P, A**. L0 is the saved initialization, L1 the fixed 480k-step endpoint; both
+evaluate deterministic categorical argmax. H/P/A are deterministic. There is no
+checkpoint selection, calibration panel, tuning, extension or automatic retry.
+This remains one fit / 160 complete training episodes / 16000 macro decisions,
+followed by 80 complete evaluation episodes / 240000 native transitions, total
+at most 720000 native transitions. Seed searches found no prior use of this exact
+seed family in the inspected candidate records/sources/configuration outputs.
+
+The native host is unchanged S7-S2/H3000. Each macro action lasts exactly 30
+native steps unless native termination occurs sooner. Its reward is the actual
+unscaled sum of the native team rewards in that interval. PPO gamma=1.0,
+GAE lambda=.95, learning rate=.0003, clip=.2, value coefficient=.5, entropy
+coefficient=.01, max gradient norm=.5, no target-KL early exit and no schedules.
+Use SB3 MlpPolicy with separate [128,128] tanh policy/value networks, its ordinary
+orthogonal initialization and advantage normalization, no reward/observation
+running normalization and CPU device. Four environments x 100 macro steps per
+rollout, batch size 100, 10 epochs, 40 rollouts yield **1600 optimizer steps**.
+Record actual counts, parameter movement, losses and the training curves. There
+is no recurrent hidden state; ordinary explicit map/BS memory is reset per world.
+
+The finite scientific endpoint is terminal for learning, even when the native
+environment calls it a truncation. Preserve that native flag in records but
+return `terminated=True, truncated=False` from the macro wrapper at H3000; SB3
+must never set `TimeLimit.truncated=True` or add a value beyond the endpoint.
+At the last episode's vector auto-reset, return a nonstepped final observation
+and refuse any later step, so the library cannot expose a 161st training world.
+Early native termination is preserved and must make the fixed complete-exposure
+contract incomplete; it does not silently fill the budget with new episodes.
+
+### Policy family and exact implementation choices
+
+All arms use canonical legal H1 planning, permanent once-legally-seen BS memory,
+the existing 6-service/2-relay target generation, Hungarian assignment and H1
+speed/altitude. Keep nominal H1 target history separate from a scout override.
+At each 30-step boundary, at most one available service-assigned UAV may scout;
+protect relay assignments, choose the largest legal return margin with lower
+index ties, and require margin > .20, a known legal BS and 6-29 canonical current
+user detections. Otherwise all requests execute H. The common native shield and
+guard retain final authority. A request outside the discrete action range is an
+error; a legal request in an ineligible state maps to H and is counted. PPO stores
+the requested action/log probability, not a substituted action. Many-to-one
+fallback is part of the environment response, not a post-hoc loss mask.
+
+The common action library is **0=ordinary service, 1-256=one scout to a public
+500 m cell center of the full 8000 m arena**, ordered x then y. This public full
+arena library includes later user migration and avoids hard-coding initial
+support as permanent knowledge. The search approximation places .8 of prior mass
+uniformly over central [2000,6000]^2 and .2 over the known opposite remote-corner
+square; mix 5% uniform whole-arena mass for later demand movement. This floor is
+a predeclared heuristic, not an inferred probability calibration.
+
+Use a 250 m survey grid (32 x 32). At each common plan, compute full-cell sensing
+containment using each legal UAV position, 1500 m 3-D range, 1.5 m user height and
+the cell half-diagonal. Store each cell's most conservative guaranteed visibility
+expiry from its clearance divided by the public 3 m/s user-speed bound. This is
+survey freshness, not proof that the cell was empty or an identified user map.
+A scores prior mass stale by predicted arrival inside each target footprint,
+divided by one plus travel seconds; 300 m continuation-distance hysteresis and
+lower action-index ties. Zero positive new mass selects H. P follows a fixed
+nearest-neighbour tour of the same public waypoint library, prioritizing the
+central/remote-support points before its uniform-floor points; skip reached or
+currently sensed waypoints, cycle after a completed tour. Both reselect only on
+the common 30-step clock. This fixes 30-step commitments within the previously
+proposed at-most-90 bound, without another decision frequency.
+
+L receives the current legal observation array and explicit common BS/survey,
+candidate-prior/geometry, eligibility and nominal-target features. No privileged
+state, latent world coordinate, real user ID, future RNG, training label or A-score
+residual enters the actor or critic. Features can expose the ordinary geometric
+quantities used by A/P; L directly selects an action from the entire common library.
+
+### L0 ownership, checks and reading
+
+One bounded Implementer owns only
+`experiments/candidates/uav_active_sensing/controllers.py` and
+`tests/experiments/candidates/uav_active_sensing/test_controllers.py`: the common
+legal-memory controller, finite action behavior, H/P/A selectors, features and
+evaluator adapter. It reads this L0 and nearest AGENTS, writes no shared file or
+notebook, mutates no Git index, runs no result panel and spawns no helper. It is
+not alone in the shared checkout and must preserve other authors' work.
+The DM owns all remaining direction files: macro Gym wrapper, SB3 training,
+evaluation/readout, admitted entrypoint, records and their tests. No shared
+learner/environment change or copied core is planned.
+
+Focused checks cover legal-source poisoning/isolation, original canonical H_BS
+action parity, survey boundary/age/reset, candidate bounds, relay protection,
+eligibility/fallback, exact macro reward/native counts, terminal bootstrap,
+complete and exhausted seed schedules, SB3 save/load and deterministic action
+identity, numerical/RNG preservation with observer off/on, update count and
+failed/incomplete publication. Use short nonpanel worlds only for wiring tests;
+record their exposure separately. Independent engineering review covers this
+actual executable diff before acceptance and launch. The DM accepts the helper
+diff and its checks rather than treating helper completion as review.
+
+Primary comparisons are L1-L0 and L1-A in native J and QoS, with L1-P and L1-H
+retained to ensure a weak hand rule is not the sole reference. A/P-H and A-P retain
+the original ordinary-search question inside this same fixed evaluation. Read
+all native risk components, minimum battery, 10% reserve exposure, throughput,
+zero-service worlds, discovery/current visibility and actual travel; uncertainty
+is descriptive paired-world t95 for this **one trained instance**, not learning
+replication. A gain only in discovery, proxy scores or training reward does not
+establish useful deployment. No sign or interval automatically purchases another
+fit; independent scientific interpretation at the result boundary will resolve
+keep/revise/stop with the complete adverse evidence and measured costs.
+
+### Implementation and nonpanel checks
+
+The bounded Implementer delivered only the two assigned controller/test files;
+the DM read and accepted that diff. Actor and critic use the same finite 5509
+features: 8 x 365 legal observation values, legal BS flag/xy, 1024 survey freshness
+values, 1024 public prior masses, 256 candidate xy pairs, eligibility, eight-way
+scout indicator, sixteen nominal target coordinates, and the public step/3000
+finite-horizon clock. The time feature makes the declared finite objective
+available to both networks; it carries no simulator-only source. Nominal H1
+history remains separate from the executed scout override.
+
+The DM implemented a direction-local Gym macro adapter, ordinary SB3 PPO fit,
+fixed post-fit evaluation, one-way truth observer and failure-preserving readout.
+The native stepping path reuses production shield and original native metric
+checks. It stores complete native reward/risk traces and macro requested/executed
+actions. Four spawned processes isolate training-world RNGs from the learner;
+world resets use the fixed world list rather than SB3's policy-seed reset list.
+Each completed rollout is checked for all four H3000 ends, exact float32 storage
+of unscaled native macro rewards, and unmodified requested categorical actions.
+Only initialization and fixed endpoint are saved. Worker CPU/RSS and parent
+wall/CPU are recorded separately; missing/early/failed work cannot yield complete
+contrasts or start replacement worlds.
+
+Local SB3 is 2.6.0. Two full focused runs passed **19 tests in 22.50 s and
+22.47 s**; each exposed 480 nonpanel native steps and one short engineering PPO
+optimizer update. The second uses the production TrainingAudit callback. They
+cover real-native H_BS action/reward/metric parity, observer-off/on trace and RNG
+identity, four subprocess seed schedules, terminal non-bootstrap with a nonzero
+critic, exhausted auto-reset, saved-policy identity, failure readout and admission
+before scientific effects. Test seeds are only 28139001/002 and 28139101-104;
+none are training/evaluation seeds. This is wiring verification, not a research
+fit or performance panel. Pytest cleaned its owned scratch.
+
+The independent engineering Reviewer found a real L0 deviation: survey expiry
+was updated at every primitive act, although the declared survey clock is 30.
+The DM split that path: legal BS/own-position refresh remains every primitive
+step, survey only updates in prepare at plan boundaries. A transient between-
+boundary footprint regression now checks this distinction; the controller-only
+suite passed **13 tests in 4.10 s**, no native steps. The correction changes no
+accepted run because no result operation has been launched. Full independent
+review is ongoing; no scientific result or engineering acceptance is claimed yet.
+
+### Engineering acceptance and publication
+
+The independent Reviewer found a second, higher-risk seed-contract deviation:
+native BS geometry is initialized in the environment constructor and is not
+resampled by reset(seed). Reusing one native object per training lane would have
+made later world labels share the first world's BS. The DM now closes and
+reconstructs the native environment for **every** non-exhausted scheduled world,
+matching the existing evaluator. The last automatic reset still constructs
+nothing. A two-world regression compares the second initial observation, BS,
+native rewards and metrics with an independently constructed H_BS world under
+the same nonpanel seed. It passed locally (1 test, 8.42 s, 90 native steps).
+
+The separate Reviewer independently reran both repaired regressions: **2 passed
+in 7.64 s, 90 nonpanel native steps, zero optimizer updates**. Its final finding
+is "No material finding remains in the current eight-file implementation."
+It traced legal actor/critic information, requested-action/log-probability storage,
+finite-terminal bootstrap exclusion, complete rollout and optimizer counts,
+checkpoint hash/fingerprint restoration, native shield/reward identity, one-way
+observer effects and suppression of incomplete contrasts. It did not execute a
+production panel or full fit; runtime success remains to be observed.
+
+The DM accepted these repairs and the independent review. The final full suite
+passed **21 tests in 32.71 s**, including 570 nonpanel native steps and one short
+PPO engineering optimizer update. Total recorded verification exposure is
+**1710 nonpanel native transitions and three one-update engineering PPO checks**,
+separate from the one planned result-bearing fit. No training/evaluation panel
+seed has been exposed. Pytest again removed its owned scratch. The target node
+also reports SB3 **2.6.0**, Torch **2.7.0+cu118**; the declared learner remains CPU
+FP32. No dependency was installed or shared learner changed.
+
+Publish the exact direction inputs and this own ACTIVE/exploring row, then use
+the configured wsl_4070 detached admission path with tag `b01_native_j_a01` and
+four single-thread evaluation workers. Actual memory admission, not the old
+estimate, determines when this may run. Preserve the accepted original handle;
+no retry, new fit, new seed or budget extension follows from this acceptance.
+Root has observed that App queue cannot wake an unloaded native child. This DM
+therefore remains in its native turn, using deterministic same-handle waiting
+and checkpoint rearming until collection and scientific reading, rather than
+ending after observer registration or changing the observation target.
