@@ -478,3 +478,30 @@ or whole-checkout reset/pull is required. This native child's observer identity 
 `01a0e98a-2ec9-7400-aa22-ce21611bc16d`; keep the same accepted launch and observer through
 complete collection and scientific reading. Exact operation metadata belongs in the
 native manifest and the following notebook entry, not an invented acceptance claim.
+
+## 2026-09-28 - B01 accepted; same-handle observation active
+
+Inputs were published at `b2a422088a20235e760e3aaebbc74f35236a4e82` before the
+result invocation. The native launcher accepted this batch at **20:32:13 UTC**;
+[launch manifest](../../../../runs/uav_message_content/b01_s19431/launch-manifest.json)
+is the authority for command, source snapshot, process identities and output location.
+[Fresh admission](../../../../runs/uav_message_content/b01_s19431/admission-preflight.json)
+reported 12,878,118,912 available/effective bytes against the 4 GiB floor while the
+independent persistent-service workload was already running. No extra resource or
+scientific gate was substituted for runner-side admission.
+
+The first direct non-login remote fetch stalled; only its owned control-fetch process
+group was terminated. The configured network login shell then fetched published main
+successfully. Its pre-existing auto-GC missing-tree warning remains untouched; it did
+not prevent this exact source snapshot or admission. Only the new direction control
+row was inserted into remote canonical RESEARCH under the established writer lock,
+preserving all other dirty hunks and run files. No result invocation was repeated.
+
+`tools/hmasd_wait.py` generation 1 registered and then **adopted** the manifest's
+operation using the request at
+`temp/directions/uav_message_content/observe-b01-s19431.json`. The first drained
+observation at 20:33:04 UTC found matching live runner/supervisor identities, consistent
+records and no exit witness. Registration alone was not treated as adoption. The
+controller's initial window is 1,500 seconds, with native long waits in this same
+child; checkpoint rearming must retain this handle and never restart the worker.
+At this entry the operation is accepted/running, not a completed fit or read result.
