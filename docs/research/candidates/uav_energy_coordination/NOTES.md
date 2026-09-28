@@ -437,3 +437,170 @@ review on the next substantive continuation; no second review is requested for
 the unchanged question. Root explicitly kept the current task at **publish this
 first return, then stop** and will assign implementation/execution through a
 native follow-up. No implementation or result operation began here.
+
+## 2026-09-28 - B01 implementation and fixed execution scope
+
+Root's native follow-up now assigns the selected comparison end to end. I read
+the complete independent review and disposition at `d8e53285b`,
+`docs/research/archive/2026-09-28/RESEARCH-native-dm-question-review.md`. It retains
+the I/C question, corrects the coordination-versus-independence interpretation,
+and favors event integration; it does not validate the formulas below. No new
+scientific review is needed for this unchanged selection. Current RESEARCH
+assigns this active direction to `Codex DM (native child)`; owner pause is lifted.
+The existing background and adverse evidence above remain the design constraints.
+
+### B01 L0: analytical forecast, controller and evaluator
+
+Implement only this direction's experiment/tests/records. Reuse the existing
+S7-S2 configuration, legal decoders, ordinary H1, production F and deterministic
+`energy_relay_benchmark.b01.evaluation.evaluate_world`. No shared simulator,
+reward, physics, guard, charging rule, learner or peer source modification.
+Independent engineering review must cover the event solver, information boundary,
+numerics, search contract and admission-before-effects path before result launch.
+
+Fixed batch `b01_analytical_coordination_a01`: worlds **31092801--31092808**, arms
+**H, I, C**, each native H3000. These are new initialized world seeds, not a new
+training lineage. The seed list is to be checked against published run contracts
+before launch. At most 24 episodes / 72,000 team transitions; zero fits/updates.
+No preliminary scientific rollout, exposed seed selection, extra horizon/sweep,
+post-result panel extension or implicit retry is included. Correctness fixtures
+use separate test seeds and short mocked/native contracts, not result endpoints.
+
+The model API takes immutable float64 legal UAV positions/batteries, decoded
+station positions, current effective production-F modes, chosen goal coordinates
+and station IDs, and public fixed S2 constants. All current user/BS xy enter a
+separate native snapshot scorer only at real 60-step planning clocks. Forecast
+construction receives neither the live environment nor hidden RNG, association,
+user motion/waypoints or pending event state. A fresh model environment built
+from fixed config supplies native radio/demand/power functions; each snapshot
+overwrites all geometric/battery inputs and resets association/cache state.
+
+Nominal motion is a straight segment with duration
+`max(horizontal_distance / horizontal_cap, abs(dz) / vertical_cap)`; its constant
+velocity supplies native power and its position is linearly interpolated. This
+differs from the executor's separate axis completion, an explicit approximation.
+Station travel has an outer segment ending on the 160 m approach sphere and a
+docking segment ending on the 20 m capture sphere, with caps (30,5) then (3,1)
+m/s. Starting inside either sphere omits that segment. The final capture point,
+not a teleport to station centre, is the charge and release position. Return
+margin uses nearest 3-D station distance and native `P(3,0) / (3600*3*160)` per
+metre, less reserve 0.1. A service-goal itinerary first flies to its goal, dwells
+`max(0, arrival_Wh - required_return_Wh - 16) / hover_Wh_per_s`, returns to the
+nearest station, charges to the production release margin .05 at the capture
+point, then flies back to the chosen goal and dwells. Effective F at the planning
+instant skips initial service travel/dwell and returns from the observed position.
+Triggering during nominal outbound flight is not simulated. Motion stops at an
+analytically predicted zero battery; a member depleted before arrival cannot
+receive remote charge. Only one station visit is granted. Redeployment may again
+accrue deficits but earns no second model recharge.
+
+A station goal flies to its selected station and remains eligible there through
+the forecast. If F is already active, its native nearest station takes precedence
+and the model stays there until the next real replan; this avoids inventing a
+second predicted visit. The real policy can change its station/deployment choice
+at every subsequent clock. A service goal for an F-active member still redeploys
+after release. Current hold is a normal service goal at observed xyz. The real
+executor requests docking only when its selected station is presently nearest;
+F and the native guard retain their actual authority every primitive step.
+
+The station solver uses only arrival, lowest-energy equalization, release,
+zero/full-energy and requested sample/end events. All eligible members consume
+hover energy, even while waiting. The single 1000 W stream is split among tied
+lowest stored-Wh members until the next event. Stored energy is clipped at zero
+and capacity; record power input, consumption and floor clipping separately so
+energy conservation is testable. Full permanent residents may absorb only their
+hover loss when all contenders are full; no excess input is banked. Charging
+members remain radio-available above cutoff. Fluid sharing is not the actual
+discrete battery/wait/index tie rule and is not represented as an exact queue.
+An event-iteration safety limit fails visibly rather than adding ticks or changing
+policy. Physical trajectories are piecewise analytical, never 600 hidden steps.
+
+Sample at three equal interval right endpoints over `min(600, remaining_steps)`.
+Plan score is interval width times the sum of snapshot
+`QoS - 2*min(1, max(0,-min_margin)/.05)`, minus predicted new cutoff/depletion
+counts times 5/10. Detect crossings over segments/events, not only the three
+samples. Once-only masks are reconstructed from the controller's own previously
+observed legal batteries (including reset), never read from hidden reward state.
+No PBRS or terminal-energy bonus enters this score; actual J/PBRS are unchanged.
+
+Incumbent is the strictly better of carried goals and fresh ordinary H1+F goals,
+with carried first on exact ties; reset carries H1 goals. The H1 reference keeps
+its own ordinary assignment memory. All members retain the at-most-18 goal
+options, including active F members' later deployment. I computes unilateral
+improvements against the fixed incumbent, then scores the assembled plan once
+and chooses best of incumbent, assembled and best single change. C uses one
+cyclic-order sequential sweep; strict float64 improvements, incumbent-first ties.
+No extra polish. Per-clock upper bounds remain I147 / C146 (including the two
+incumbent scores), at most 117,200 plans / 351,600 snapshots for the full batch.
+Cache identical whole-plan scores within a clock only; record both requested
+scoring calls and actual model evaluations. H is unmodified H1 central @30+F.
+
+Checks will cover closed-form travel/energy, capture geometry, fluid arrivals/
+equalization/release/saturation/floor behavior and power conservation, cutoff
+crossings, no extra model visit, strict ties/search conditioning and bounds,
+legal snapshot isolation, native charge radio availability, deterministic seeded
+pairing, step-clock/action tracing, and admission-before-result effects. The
+runner will hash initial state, exogenous users and environment RNG to check
+paired worlds, retain all failures without automatic retry, and write compact
+per-world/paired endpoints plus hashed bulk traces. Report J and every native
+reward component, QoS/service and fixed 1000-step bins, signed loss worlds,
+return-risk, battery/reserve/cutoff/depletion, long service gaps, energy input/
+consumption, guard/mode behavior, model discrepancy, and wall/CPU/RSS/query/event
+cost. H comparisons are competence checks, not clock-matched causal estimates.
+
+Full cost remains unknown before implementation: historical snapshot scaling
+does not include the station solver, native steps, checks/review/readback or
+storage. These are recorded actual work, not free because fit count is zero.
+Material formula/implementation failure will be returned to Root as such, not
+silently replaced with the declined primitive simulation or a new study.
+
+### B01 engineering acceptance and launch choice
+
+The bounded implementation is complete in `experiments/candidates/
+uav_energy_coordination/` with focused tests in its matching test directory.
+The two named Implementer helpers supplied only the pure itinerary solver and
+the fixed runner/readout; I read and accepted their code and checks. The DM
+implemented the controller, information-isolated native scorer and integration
+checks. No shared environment/controller/evaluator file was edited.
+
+The independent `hmasd-reviewer` `/root/dm_energy_coordination/engineering_review`
+(fresh context, read-only) traced the native consumers, event solver, information
+boundary, search and launch contract. It found two material evidence-accounting
+defects before result execution: failed worlds' retained completed-clock costs
+were omitted from batch totals, and later failures could lose already collected
+native reward/metric/battery evidence. Both are repaired. Totals include known
+failed-world work and label unknown in-progress work; a read-only observer keeps
+native readings across planner exceptions, and returned evaluator arrays survive
+downstream readout failures. Focused regressions cover both. The final reviewer
+return reports **no material finding remains**; it does not certify forecast
+accuracy or accept a scientific result.
+
+Final full owned suite: **29 passed in 12.78 s** using the configured Linux CPU
+interpreter with numeric threads 1. Independent checks included the earlier full
+26-test suite (12.37 s), the cost regression (2.83 s), and both final preservation
+regressions (3.59 s). The reviewer also checked 1,000 synthetic in-memory
+analytical fleets for conservation/event progress; those are numerical checks,
+not native episodes or study results. Our tests include 25 additional synthetic
+fleets, closed-form travel/charging cases, and six-step native H/I/C episodes on
+the separate correctness seed 70192. Those short integration checks were repeated
+during development/review, not used for performance selection. Test suites also
+construct/reset native fixtures and make snapshot calls, so these listed test
+durations are not a zero-cost preparation claim. All 14 remaining warnings are
+imported Matplotlib/Pyparsing deprecations. A temporary test-insertion NameError
+was fixed before the final pass. No scientific fit or result-world rollout has
+started; the 24-world batch and its bounds are unchanged.
+
+Choose the owner-prioritized configured `wsl_4070` node, **2 workers, one numeric
+thread each**, CPU native environment calculation. A read-only preparation check
+found the correct host and 15,646,273,536 available bytes with no scientific
+worker listed; native admission will take a fresh measurement, not reuse this
+reading. Actual full runtime, simultaneous memory peak and raw storage remain
+unknown; the runner records invocation/summed-worker wall, CPU, process RSS,
+actual native transitions, plans/snapshots/events/phases and trace bytes/hashes.
+Engineering/source-reading wall outside the listed checks is unmeasured, not
+zero. The remote canonical checkout contains other directions' modified records
+and an older main. Root explicitly directs insertion of only our already
+published operative row under the remote writer lock, preserving its dirty
+RESEARCH, outputs and sparse selection; no shared-tree merge/reset is needed.
+The actual run uses the exact published source in the native launcher's immutable
+snapshot. Publication and admission/acceptance are still separate facts.
