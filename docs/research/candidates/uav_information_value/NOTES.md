@@ -323,3 +323,133 @@ moving-demand history or active sensing stays open in the reasoning above, with
 no selected follow-on. The final recommendation is this six-arm static-memory
 version, subject to Root's synthesis of the completed initial review. The current
 assignment still ends at design publication, with no result execution or code.
+
+## 2026-09-28 - B01 selected for implementation and execution; L0
+
+Root's subsequent native assignment selects the final static-BS six-arm design and
+the completed independent scientific review, which is being preserved at
+`docs/research/archive/2026-09-28/RESEARCH-native-dm-question-review.md`. The review
+retains this question and the complete comparison. This is the next assignment,
+not a launch under the earlier reasoning-only scope. No additional scientific
+review is required for the unchanged selection. The current RESEARCH entry is
+`exploring`, exact lead `Codex DM (native child)`; the owner pause remains lifted.
+
+Freeze B01 as **L, U, B, F, R, H_BS**, all on fresh initial seeds
+**28100101-28100132**, S7-S2/H3000: 192 complete episodes, at most 576,000 team
+transitions, 0 fits/optimizer updates. These seeds were absent from the inspected
+candidate sources and the new direction notebooks; no outcome on them has been
+observed. All are exploratory development exposure once run. No tuning, extra
+panel, extension, changed physical process or automatic retry is included.
+Start with four CPU workers and one numeric thread each on `wsl_4070`, subject
+to actual-node admission. Expected operation wall remains 70-120 minutes; record
+actual cost. Native terminal failure stops new submissions, retains running-cell
+collection and partial/failed records, and does not authorize a replacement.
+
+L0 deliverable: an admitted `experiments/candidates/uav_information_value/run_b01.py`
+with a direction-local controller adapter, fixed runner and readout. Reuse the
+original `evaluate_world`, `make_eval_config`, production feedback and H1 motion/
+assignment implementations. No shared evaluator, environment, heuristic or peer
+direction edit. The current-user/full-user and legal-BS/true-BS replacements must
+all enter one anonymous canonical point-set planner, while R uses the unchanged
+original central controller. L must agree with the original local controller for
+the same legal observations and controller state. Preserve original replan timing,
+normal/mode handling, H1 parameters, reward, terminal rules and guard. H_BS retains
+only actually delivered legal BS coordinates, updates between replans, and clears
+at reset. L and H_BS never hold or read a raw-environment reference or central state.
+
+One bounded Implementer owns only `controllers.py` and its matching
+`test_controllers.py`: implement and verify these six controller information
+contracts. The DM owns NOTES, batch/CLI/readout/observer code and their tests, all
+Git mutations, launches and scientific reading. Both work on shared main and
+preserve other writers; no helper writes shared files, commits, launches or spawns.
+
+Checks: synthetic equal-input/canonical ordering, original-L/R parity, BS memory
+between replans/reset/no-sighting, legal-source isolation, assignment/fallback
+parity, effective native S2 configuration, fixed six-by-32 plan, true seed binding,
+missing admission, finite metric serialization, exact world pairing/interaction
+signs, and incomplete/failed/orphan handling. Small nonpanel native fixtures may
+verify controller/evaluator wiring and RNG parity; they are engineering checks,
+not selected research outcomes. Independent engineering review covers the actual
+diff, information flow, evaluator identity, RNG and failure/persistence contract
+before publication and launch.
+
+Persist each complete native world row and every J/service/risk tail, compact
+configuration/summary/source/status and hashes in Git; retain one raw trace copy
+at the configured node. Record BS exposure/retention, current versus supplied
+user counts and search/target behavior without feeding evaluator truth to legal
+arms. Contrasts are the four conditional source changes, factorial interaction,
+F-L, R-F, R-L and H_BS-L, computed by matched initial world seed; nominal paired
+t95 intervals are exploratory and not multiplicity-adjusted. Partial batches
+remain incomplete and never obtain a fabricated full-panel result.
+
+### 2026-09-28 - Engineering counterexample resolves the local-identity conflict
+
+Before any panel exposure or accepted launch, independent engineering Reviewer
+`/root/dm_information_value/review_b01` found that the two intended input
+invariants cannot both hold universally. Original `pooled_users` merges in
+observation order and then sorts; the proposed full-source adapter sorted before
+merging. For exactly the same unmerged decoded x coordinates
+`[1000.4000068, 1000, 1000.8000135]` at y=1000, original legal pooling keeps one
+point, while sort-then-merge keeps two and changes targets. The earlier equal-input
+test accidentally hid this by premerging truth. This is a genuine representation
+confound, not dismissed as a rare geometry.
+
+Root resolves the conflict in favor of the already selected common canonical
+preprocessing: **L/U/B/F/H_BS all sort the raw xy hits first, then greedily merge
+within 0.5m; R remains exactly the original central controller.** Legal-source
+arms begin with decoded present user slots, not original `pooled_users` output.
+This also selects a potentially different float reconstruction among duplicate
+observations. Universal exact identity of L with historical H_local is expressly
+withdrawn. Original planner parity remains required when the supplied canonical
+point sets coincide; native observer-off/on parity remains a correctness check.
+The unmerged near-neighbor-chain counterexample becomes a regression test across
+all five source adapters, with a legal-hit permutation check. No seed, arm, panel,
+native physical rule, reward, shield, planner action rule or fit is added.
+
+The four source contrasts and interaction still compare information sources under
+one fixed preprocessing/planning program. F-L is the full-source consequence under
+that program. **R-L is now explicitly original-central package versus canonical-
+legal package**, not an exact recreation or a pure-information decomposition of
+the old central/local gap. R-F remains the original-central/canonical-full bridge;
+the historical local package is contextual evidence, not an extra measured arm.
+H_BS-L tests legal static memory under the same canonical legal program. Root
+adopts this correction without another scientific selection round because it
+implements the selected common-preprocessing estimand; no launch has yet occurred.
+
+The initial engineering pass otherwise found no material issue in admission/SHA
+ordering, original evaluator/shield, seed binding, matched readout, failure stop,
+partial/orphan retention and hashes. It ran 26 focused tests, all passing in
+16.91s, but the counterexample still required correction. Its residual limits
+were short native seed-17/H31 coverage, stubbed single-worker failure, and no abrupt
+spawned-child death or destination-node execution check. These limits are retained.
+
+### 2026-09-28 - Implementation accepted; exact inputs ready to publish
+
+The DM read and accepts the bounded Implementer's controller/test work, with the
+common-preprocessing correction above made by the DM after ownership returned.
+The independent engineering Reviewer re-read that correction and independently
+reran seven controller checks in memory, including the unmerged chain, equal
+sources, permutation, leakage/reset and original-R checks: **no material finding
+remains under the revised contract**. The DM's full configured scientific-Python
+command covering this direction and original H1 tests passed **27 tests in
+19.97s**, with 14 pre-existing dependency deprecation warnings. The corrected
+native fixture verifies all six observer-off/on paths and the exact R anchor;
+original-L parity applies only where preprocessing yields the same points.
+
+Four test-suite invocations (including the Reviewer's first pass) executed twelve
+31-step native correctness episodes each on nonpanel seed 17: 1,488 engineering
+transitions, no fits or outcome-based method selection. Synthetic worker failures
+and the 192-row synthetic persistence check execute no native transitions. None
+of seeds 28100101-28100132 has been exposed. Abrupt spawned-worker death and the
+destination-node runtime remain coverage limits, not fictitious test successes.
+Failure accounting retains progress lower bounds and incomplete/orphan records;
+missing results never receive zero surrogates or complete-panel contrasts.
+
+Configured destination remains `wsl_4070`, four workers/one numerical thread.
+The node's canonical checkout has unrelated dirty evidence and older control
+prose; preserve all of it and its sparse selection. Fetch published source,
+synchronize only this direction's published admission row under the node's short
+writer lock, and let native admission check live resources. Root explicitly
+accepted that narrow local control synchronization. The new global removal of
+the fixed Codex track-count ceiling changes neither this study nor actual-node
+resource admission. No result launch or retry has been made at this entry.
