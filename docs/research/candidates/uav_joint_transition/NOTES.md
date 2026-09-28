@@ -330,3 +330,198 @@ The immediate boundary is this complete design returned to Root and the same
 selection critic, not launch acceptance or a scientific result. Cleanup now has
 no generated target: no code, raw data or scratch was created, and no disk
 reclamation is claimed.
+
+## 2026-09-28 UTC - adopted forecast correction and selected B01 L0
+
+Root returned the same independent critic's material objection and adopted
+REVISE-THEN-SELECT: freezing F members for a future thirty-step trajectory
+prediction discards lawful known motion. R's 28.84% F exposure was a fraction
+of UAV-steps, not decision windows. I accept the objection. This entry supersedes
+the frozen-F forecast and its independent-path reuse/cost claims above. The
+complete critic answer and Root disposition remain in the existing shared
+selection review; no additional selection critic or Pro pass is requested.
+Root selected the corrected finite L/O/R/P experiment. No result has run yet.
+
+### Exact bounded forecast correction
+
+The prediction starts from legal own positions, battery, charging, waiting
+steps, return margin and prior F modes, legal station geometry/capacity and
+public fixed S2 constants. `own_energy` exposes waiting steps; the native
+allocator sorts eligible members by battery, negative waiting steps, then ID.
+There is no need for hidden queue state or a live environment copy.
+
+For each joint candidate, propagate thirty nominal one-second ticks, using
+vectorized candidate/member arrays where useful. At every tick:
+
+1. Form the declared D/W/B proposal; update F from the current modeled margin
+   using entry 0 and exit .05, and cancel intermediate phases on entry. Preserve
+   the real ordering: R target generation at a clock receives **prior** F,
+   before current feedback. Initial L=R checks must cover this ordering.
+2. Apply the public mandated-control composition: F's nearest-station command
+   and dock request; native zero-battery immobility; native emergency limp-home
+   direction/speed; native docking-radius/capture behavior and docking caps.
+   Service cutoff alone does not make a member immobile. S2 has no failures.
+3. Clip nominal positions to native bounds, deduct native propulsion energy
+   from nominal displacement, and compute dock/capture/hover eligibility.
+4. Allocate the public station capacity jointly by the same battery/wait/ID
+   ordering, add capped charging input, update modeled waits and battery, then
+   compute next return margins. F can release at the next tick; cancelled
+   intermediate motion stays cancelled until the next real planning clock.
+
+This is a kinematic/control prediction, not a native counterfactual environment
+rollout. It has no intermediate channel, routing, guard, user-motion or reward
+calls. Native radio service is still queried only at 10/20/30 with fresh
+association. Charging/queue approximation is now precisely its conditioning
+on these unguarded nominal positions and decoded current waits, with deterministic
+public allocation and no forecast of additional unobserved state. F/dock release
+uses modeled margins and nominal energy; it is not an assertion of exact future
+charging, queue or native execution. Current observed margin is retained for the
+first feedback decision; later margins come from the public return formula.
+Both L and O receive these same prediction facilities and features.
+
+Build L/O's shared feature predictions from one all-D joint forecast and each
+single-member alternative with the other members D: at most 25 joint forecasts
+per clock. Extract each member's own predicted xyz/battery at 10/20/30 for its
+four modes, alongside the original current facts/targets/time. These features
+describe conditional predictions, not composable independent trajectories.
+O evaluates every proposed complete joint plan with a joint forecast, including
+coupled allocation. It does not assemble independent per-member battery paths.
+Keep all earlier information restrictions and three-snapshot score semantics.
+
+### Revised cost and selected interpretation
+
+Retain one fit, 64 training worlds, final L/O/R/P on eight new paired worlds,
+96 H3000 episodes/288k native steps, 256 planned updates and the same seeds.
+The **1,312,000 static-radio-query upper bound is unchanged**. Shared features
+cost at most `80*100*25*30 = 6,000,000` candidate-team prediction ticks;
+O's search adds at most `8*100*161*30 = 3,864,000`. The deliberately loose sum
+is **9,864,000 candidate-team ticks / 78,912,000 UAV-tick equivalents**, before
+reuse of identical forecasts or inactive-member reductions. Each includes
+bounded motion/energy/F and two-station allocation arithmetic, not a native
+radio/guard/environment step. This replaces the 7.68M independent-member bound.
+
+The prior 10-14 worker-CPU-hour sensitivity excludes the newly priced joint
+composition cost and is no longer a full-batch estimate. The R-based 7.11-hour
+baseline plus roughly 1.60 hours of extra radio work remains a historical scale;
+new predictor cost is unknown until implementation checks provide a relevant
+measurement. Report it separately and revise the execution estimate prospectively.
+This does not change exposure, buy a profile experiment, or create a wall-based
+scientific stop. Vectorized deterministic arithmetic is an implementation choice;
+if correction requires an enlarged simulator or different comparison, return that
+concrete issue to Root rather than silently expand the model.
+
+Keep the original outcome branches and every adverse result. Explicitly,
+**L>O but L not useful against R/P is not usable-controller success**. One fit,
+eight conditional worlds, O's bounded local search, common R cost and model
+approximation continue to limit the claims. There is no automatic repair or
+extra fit after observing any branch.
+
+### L0: executable behavior, ownership and checks
+
+Deliver one selected B01 program under the direction's implementation/tests
+paths, new entrypoint `experiments/candidates/uav_joint_transition/run_b01.py`.
+Keep R/P helpers, native physics, reward and guard unchanged. The DM owns all
+NOTES/RESEARCH/run records and Git mutations; no helper acquires those paths.
+The bounded Implementer owns `motion.py`, `controllers.py` and
+`tests/experiments/candidates/uav_joint_transition/test_motion.py` only, in
+shared main, without commits, other writes, launches or children. Its single
+behavior deliverable is the corrected common path executor/predictor and O.
+The DM owns policy, macro environment, training, fixed panel, summaries and
+admission entrypoint, and later accepts the helper's diff/checks.
+
+Required controller interface: a cached `prepare_clock(observations, prior_F,
+step)` builds R targets and shared features exactly once at the real clock;
+`set_modes(eight_modes)` supplies a learned choice; `propose(observations,
+state,step,previous_done,modes)` supports the existing native evaluator.
+Preparation caches R's first command so propose never advances it twice.
+Features start with the eight eligibility flags (prior-F/availability semantics),
+have one fixed declared dimension, and expose physical quantities on fixed
+scales. O chooses its modes internally; an L evaluation callback or the macro
+environment supplies L. Ordinary R and P remain their existing full controllers.
+Records retain proposals, choices, cancellations, predictions, aliases, model
+counts and timing without replacing the native observer's realized evidence.
+
+Checks cover source-order direct identity including entering/exiting F at a
+planning boundary; multi-member staged and intermediate motion; native zero
+battery versus radio cutoff; nearest-station, limp-home, docking, capacity/wait
+priority and F release/cancellation; no live/RNG/route access; query/candidate
+bounds; requested-action PPO storage and terminal bootstrap; zero evaluation
+updates; fixed seed/exposure and complete positive/adverse/failure output counts.
+Use pytest-managed scratch and configured interpreters. A bounded numerical
+forecast check can report timing but buys no scientific panel. Independent
+engineering review is required before published execution inputs and actual
+node admission. Review/implementation may correct executable defects while
+preserving this scientific contract; no routine Root ACK is needed.
+
+### Implementation acceptance and prospective execution
+
+Root's full adopted selection and preserved material dissent are now published
+at `9f367b288`, in
+[the existing review archive](../../archive/2026-09-28/RESEARCH-joint-transition-selection.md#final-root-decision).
+This is the selected corrected comparison, not the unchanged original proposal.
+
+The bounded Implementer delivered the common executor, joint predictor and O
+within its three owned files. I inspected and accepted them after correcting
+F's station-directed command to its native **common** xy/z duration (D/W/B keep
+R's separate caps). Eligibility intentionally uses legal availability and
+**prior** F, as stated in the L0. Current margin can cause immediate F entry
+and cancel a requested intermediate; this is recorded as overridden exposure,
+not silently removed by shifting the controller clock.
+
+The separate registered engineering Reviewer reconstructed the native control,
+motion/charging, R/P callers, training/storage/terminal path, checkpoints,
+failure records and admission boundary. It returned **no material finding;
+no repair requested**. A focused follow-up covered passive retained features/R
+records, nonfinite-score rejection and the offline artifact reader, again with
+no material finding. Full H3000 execution, abrupt-process-loss reproduction and
+a complete saved-batch reader invocation remain untested before this launch;
+these are not claims of forecast accuracy or useful service.
+
+The final direction suite is **16 passed in 27.30 s**, with only fourteen
+external matplotlib deprecation warnings. It includes real native all-D/R
+identity, prior-F entry/exit ordering, two-phase/cancellation behavior, zero
+battery versus cutoff/limp motion, joint capacity/wait behavior, finite masked
+policy gradients, save/load, actual subprocess requested-action/reward audit,
+finite-horizon zero continuation, fixed exposure, missing/unpaired/short-panel
+rejection, failed-fit suppression, admission refusal, and real short O/R/P
+output bindings. All three short reference trajectories share exogenous hashes.
+R's implementation is byte-unchanged from `8ec998ecac`; central P's implementation
+is byte-unchanged from `025350669b`. Native shared source was not edited.
+
+Recorded author/Reviewer full-suite invocations used **1,170 native correctness
+transitions** on non-study world seeds: the initial fixture-directory failure
+had 120 transitions in its other tests; three passing fifteen-test invocations
+had 240 each; the final sixteen-test invocation had 330. Those five invocations
+each ran a separate four-macro-decision PPO optimizer fixture (one update) and
+a one-update synthetic policy-gradient check: **five short correctness training
+attempts, ten optimizer updates**, separate from the one selected result fit.
+Their returned wall times sum to 94.56 s. The helper's seven pure/source motion
+checks and no-step native clock preparation add engineering cost; design,
+review and implementation time was not comprehensively metered. No study seed,
+result endpoint or outcome-selection pilot has run. The first failure was a
+missing parent directory in the test fixture, fixed before result execution.
+
+No-step native clock checks measured L at 0.757 s (100 R snapshots plus 25
+joint feature forecasts) and O at 4.586 s (100 R plus 483 transition snapshots,
+186 forecasts). A synthetic zero-propulsion-power check took about 0.100 s
+for 25x30 candidate-team ticks. Applying only that narrow arithmetic rate to
+the loose 9.864M bound gives about 1,315 s / **0.37 CPU hours**; it is not a
+measured native charging/guard/radio runtime or destination-node quote. As a
+revised planning sensitivity, allow roughly **11-16 worker-CPU hours** for the
+complete batch, including common R, P, O queries, joint composition and PPO.
+Different state occupancy, charging branches, host speed and serialization can
+move it outside this range. Counts remain binding; wall time is measured, not
+a scientific stop. Preserve the withdrawn old 10-14-hour estimate above rather
+than pretending it already priced this implementation.
+
+The first selected output tag is `b01_joint_paths_a01`, on configured
+`wsl_4070` with two CPU lanes/workers and one numerical thread. The node is
+reachable and its configured login-network fetch succeeds; fresh actual-node
+admission still follows exact source publication. Preserve its dirty canonical
+index/other direction edits and the live sibling/peer operations. Synchronize
+only this direction's canonical control row if absent. Bulk remains at the
+declared run output during execution; after complete collection/reading retain
+one verified durable direction/tag copy outside the shared sparse checkout,
+compact source/status/results in Git, and reclaim the exact finished snapshot.
+Native-child observation uses the same accepted handle with long deterministic
+waits and drain/rearm; no App queue return is assumed.
