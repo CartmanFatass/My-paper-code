@@ -1103,3 +1103,37 @@ lanes and at most four single-thread evaluation workers alongside the unchanged
 peer CUDA operation. Fresh launch-kernel memory admission is still required;
 this resource reading alone is not admission. Publish these exact inputs and
 the own exploring row before the one declared operation.
+
+### B02 accepted on the original native handle
+
+Exact inputs were published as **087c8823a370098fb77dd0dc85e0ce1b9bcb1906**.
+The configured wsl_4070 supervisor accepted one launch request and the native
+kernel admitted it. The [manifest](../../../../runs/uav_active_sensing/b02_semantic_choice_a01/launch-manifest.json)
+is the authoritative operation/source/process reference; the
+[fresh preflight](../../../../runs/uav_active_sensing/b02_semantic_choice_a01/admission-preflight.json)
+at 09:46:54 UTC measured **13382582272 available physical/effective bytes**
+against the 4294967296-byte floor. The 09:48:48 native status has accepted
+admission, running and consistent process identities, absent exit witness and
+zero observation errors. This is technical acceptance, not a read result.
+
+Prelaunch synchronization incurred a concrete network error: plain SSH did not
+load the configured proxy environment, so an own Git fetch and lazy-blob fetch
+waited. The DM canceled only those known preparation process trees. The canceled
+clean-file restore had already emptied canonical RESEARCH; after fetching the
+required blob outside the writer lock through configured `zsh -lic`, the DM
+restored that same file under the lock and verified exact equality to published
+blob `7d30dd3c153bcb8e78c256ee9b3017b39423bbd8` before launch. Root was informed
+of the actual shared-control hazard and completed repair. No accepted experiment,
+peer process, sparse-cone setting or other direction source was changed. The
+node's existing bad-tree GC warning remains unrelated and unrepaired. One
+read-only row check also had an incorrectly double-quoted backtick pattern;
+it produced a command-not-found and overbroad output, not a state change.
+
+The first observer arm rejected a nonabsolute `ssh` executable before registration.
+Using `/usr/bin/ssh` then registered and adopted **generation 1** at
+`/home/fires/.local/state/hmasd-wait/01a0e733-316a-7473-9cb1-14e9c5b0d751`,
+job `b02_semantic_choice_a01`, with 60-second status probes and a 1500-second
+checkpoint window. Its same-handle first drain supplied the accepted facts
+above. The native child stays active through deterministic waiting, collection
+and scientific reading; App queue delivery is not presumed. No duplicate fit,
+evaluation panel, operation, gate change or post-score extension is authorized.
