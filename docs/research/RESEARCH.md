@@ -10,10 +10,11 @@ Owner 于 2026-09-23 进一步要求本任务作为科学项目管理者，给�
 具体新比较仍在 NOTES 中前瞻声明；既有负证据、负责人及已接受实验保持可恢复。
 **Claude 的 FSD session 仍暂时停止，仅由 owner 手动开启；G33 保持冻结。**
 
-**当前科学项目管理：** Owner于2026-09-27指定本会话接任已归档Root，按四个现有Codex DM组织研究，
+**当前科学项目管理：** Owner于2026-09-27 PDT（2026-09-28 UTC）指定本会话接任Root，负责四个已收尾Codex DM的周期复盘与下一轮计划，
 维护问题计划、跨方向取舍与后继安排；Root只协调。五条是项目研究运行资源上限，不限定问题数量或永久主题。
 DM持续负责科学问题与解释，每次推进一个结果性研究，自主实施、判读和发表；训练与评价均按实际节点资源准入。
-当前责任与工作区见[任务路由](#session-routing)，本轮分工及采纳依据见[四DM审查](archive/2026-09-27/RESEARCH-four-codex-root-handover.md#four-dm-root-decision)。
+当前责任与工作区见[任务路由](#session-routing)，上一轮分工及采纳依据见[四DM审查](archive/2026-09-27/RESEARCH-four-codex-root-handover.md#four-dm-root-decision)。
+Owner已归档完成且文档齐全的DM；后继研究创建新DM并继承已发表证据，不恢复或复用这些旧会话。本次复盘和路由更新不启动实验。
 本页在科学判断、计划或控制发生实质变化时更新；逐 cell 进度和操作恢复信息见相应 NOTES/runs。
 
 **计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
@@ -1196,6 +1197,10 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 地址用于恢复与用户明确要求的联系；不产生 App 消息/回复循环。表中是责任路由，任务是否运行、
 操作是否终态及结果是否读完须从对应 NOTES/native 记录核对；发布方法不证明活跃会话已经重载。
 
+**本次接任与已完成DM（owner，2026-09-27 PDT / 2026-09-28 UTC）：** 当前Root为下表「规划 HMASD 周期总结」。
+四个Codex DM的最终报告均为已收尾、无活动结果操作或待读证据；owner已归档的旧DM地址只作历史来源。
+有完整文档的已完成研究由新建DM接续，继承原始正面、不利和失败证据；不恢复旧会话，也不把归档当作问题被否定。
+
 **Owner 模型选择与方向重审（2026-09-27）：** Owner 已手动将新 DM2、DM3、DM4 切回 Astra Max，
 并要求三者重审各自方向。Root 核对逐轮记录：三个替代会话从首轮即为 Luna Max，
 旧 DM2/3/4、DM1 与 Root 已核查的轮次为 Astra Max；原始数据不因模型标签自动失效。
@@ -1213,12 +1218,12 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| 重组Codex研究为4个DM（当前Root） | `01a0e3b9-53b6-7ab3-a128-f4dbfa1403e4` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner于2026-09-27指定本会话接任Root、更新Claude联络地址，并按四个现有Codex DM重新组织研究。旧Root `01a0e091-9f32-7872-b582-b37a14f8d981` 已由owner归档，保持归档；其未决方法建议、暂停和冻结对象继续保留。已原生读取四个DM的当前会话与DM2–4重审报告；按实际UUID保留方向负责人、已接受操作与observer。Root仅协调，不新增第五个Codex DM或成为逐批发表关口。[当前计划](#current-research-plan)。 |
+| 规划 HMASD 周期总结（当前Root） | `01a0e560-4333-7b03-8ff3-759a4add1d9a` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner于2026-09-27 PDT指定本会话接任Root并更新全部当前Claude通信目标；负责已完成四DM的周期复盘、跨方向科学判断和后续研究计划。已读取上一Root及四DM最终报告；无须恢复旧DM或重启已收尾操作。新选后继由新建DM从完整文档接续，采用owner指定的Astra Max。前任Root与旧DM地址仅供历史定位；未决方法建议、暂停和冻结对象保持。Root仅协调，不成为逐批发表关口。[当前计划](#current-research-plan)。 |
 | DM3：UAV协作路径规划与MARL | `01a0e2e4-0d39-7cf3-98c0-f87dfb6e00b0` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner要求的替代独立会话，手动Astra Max保持。已完成`energy_relay_imitation` B01/B02更正与后继`uav_cooperative_planning` B02完整结果／独立判读；当前两方向reserve，无活动worker／未读Pro／已选后继，较宽问题责任保留。旧`01a0e0f8-4e3f-70f1-802f-4bf4c2348221`仍归档，不重启旧操作或重复唤醒。未发App消息。创建接口曾返回outcome-unknown，已从实际独立会话消歧，无重复创建。[当前计划](#current-research-plan)、[完整B02与取舍](candidates/uav_cooperative_planning/NOTES.md#dm-disposition--end-b02-investment-and-reserve-the-broader-question)。 |
 | DM2 | `01a0e1e9-0fda-74c1-80c9-8b660eca0991` / `local` | `/home/fires/hmasd-wsl` · `main` | 当前App标题DM2（旧文档DM4），继续负责`energy_relay_availability`，当前reserve。B03关闭，B04/B05全部原始输出已核验并独立判读；B05保留条件性评分收益与全部风险反例，未选后续实验。终态事件已消费、观察停止，无活动操作／未读Pro。B04仍被DM3使用；旧B02/B03实现退役及清理实测见NOTES。两份B04/B05源码snapshot共约3.20GB因GC进程检查拒绝仍留存，唯一必要raw保全，未称全部清理成功。旧DM4 `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190`仅供历史恢复；本次未发App消息或重启操作。[完整B05](candidates/energy_relay_availability/NOTES.md#2026-09-27--complete-native-b05-reading)、[审查、取舍与清理](candidates/energy_relay_availability/NOTES.md#2026-09-27--independent-b05-reading-and-dm-disposition)。 |
 | DM1：S7 普通学习基线 | `01a0e0ad-0710-71f3-8d9d-8012fe7b65b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 直接 DM，`energy_relay_baselines`；保留 D1，未执行 D4 后继现归 DM3；共同observer接口仍由`energy_relay_diagnostics`负责人（App DM4）负责。原生读取已核对启动及当前职责／方法读取；独立完成和发布，无自动 App 回复。[NOTES](candidates/energy_relay_baselines/NOTES.md)。 |
 | DM4 | `01a0e1e7-922d-73c1-a2ad-f9a60033105e` / `local` | `/home/fires/hmasd-wsl` · `main` | App当前标题为DM4（旧文档DM2），Owner明确要求的新直接DM，接手`energy_relay_diagnostics`、B02和observer接口责任。已完成原始证据重审及新的独立科学审查，采纳实质异议：B02为reserve、结束当前cache投入，无活动操作／未读Pro／已选新fit；普通PPO、有限优化与规划贡献边界及两处更正已发表于NOTES。旧DM2 `01a0e0af-35fd-78e1-87a5-0ac2c37df085`的B01已完整关闭，地址仅作历史恢复；首次旧会话投递被归档状态拒绝，未恢复旧B01。[科学选择](#current-research-plan)、[NOTES](candidates/energy_relay_diagnostics/NOTES.md)。 |
-| Claude DM S7 能源中继参照研究 | this session / `local` | `/home/fires/hmasd-wsl` · `main` | 结果节点 wsl_4070，经 `scripts/hmasd_launch.py` 准入；Claude 无 Codex 唤醒，用分离轮询观察，运行句柄与读数在 NOTES。与 Root 为平级（owner 2026-09-27）：Root→Claude 写 `docs/Claude_docs/inbox/YYYYMMDD_<主题>_ROOT.md` 并按显式路径提交（本会话监视该目录）；Claude→Root 用 `codex queue --thread 01a0e3b9-53b6-7ab3-a128-f4dbfa1403e4 --message`，每条只办一件具体事、不回 ACK。[NOTES](candidates/energy_relay_benchmark/NOTES.md)。 2026-09-27 起本会话同时担任第二个方向 `sequential_coordinator_credit` 的 DM（owner 授权“同时两个相关方向”）：同一会话、同一 checkout、同一入口；其运行同样经 `hmasd_launch.py` 于 `local_linux` 准入，句柄与读数在其 NOTES。 |
+| Claude DM S7 能源中继参照研究 | this session / `local` | `/home/fires/hmasd-wsl` · `main` | 结果节点 wsl_4070，经 `scripts/hmasd_launch.py` 准入；Claude 无 Codex 唤醒，用分离轮询观察，运行句柄与读数在 NOTES。与 Root 为平级（owner 2026-09-27）：Root→Claude 写 `docs/Claude_docs/inbox/YYYYMMDD_<主题>_ROOT.md` 并按显式路径提交（本会话监视该目录）；Claude→Root 用 `codex queue --thread 01a0e560-4333-7b03-8ff3-759a4add1d9a --message`，每条只办一件具体事、不回 ACK。[NOTES](candidates/energy_relay_benchmark/NOTES.md)。 2026-09-27 起本会话同时担任第二个方向 `sequential_coordinator_credit` 的 DM（owner 授权“同时两个相关方向”）：同一会话、同一 checkout、同一入口；其运行同样经 `hmasd_launch.py` 于 `local_linux` 准入，句柄与读数在其 NOTES。 |
 | DM 规划压缩学习 | `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / `local` | `/home/fires/hmasd-wsl` · `main`；旧持久数据 `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`，新raw见NOTES原生节点路径 | 已按owner要求完成当前任务并停止，交接在NOTES。B01–B03合计20fit核验发布；B03源snapshot净回收793542656bytes，唯一raw保留。B04代码/独立工程检查完成，0科学工作/无handle；PPC本地及节点控制均paused，观察已停。无App消息、责任转移或由读交接自动恢复。节点Git GC警告及未来恢复前检查点已写入交接。[交接](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)。 |
 | DM 伙伴曝光独立复制 | `01a0db8f-1fab-7503-ae4b-feff2d4da8f5` / `local` | `/home/fires/.codex/worktrees/fsd-c/hmasd-wsl` · 当前`codex/partner-exposure-b03-publication`；源码/证据分支`codex/partner-exposure-replication-sept25`保留 | B03两新F2/M区组已完整执行、核验、判读并独立出版；结束当前50:50固定库投入，无活动操作、未读证据、开放Pro或已选后继。全量数据在`/home/fires/hmasd-retained-runs/controller_composition/b03_partner_replication_20260925`逐文件核验保全。fsd-c不在本任务原生附件中，节点源树也非launcher snapshot，两目录保留待可用原生归档路径，不使用shell删除。旧B01/B02及ab18来源/原分支保持终态；无App消息。[完整结果和生命周期边界](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)。 |
 | DM 有限模型知识与决策价值 | `01a0d937-e2f7-7d03-982a-d16bf16385cc` / `local` | `/home/fires/.codex/worktrees/3839/hmasd-wsl` · `codex/finite-model-decision-value-sept25` | B01/B02均已完整核验、保全并独立发表；两次Pro已收清，当前NEAR预算修补投入结束，无活动结果操作、未读证据或已选后继。保留原输入/原始产物与本任务地址；未接管其他方向、未发App消息。[完整结果与决定](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--end-current-near-budget-repair-investment-retain-the-finite-result)。 |

@@ -1,5 +1,8 @@
 # Claude DM 交接（机器重启前）— 2026-09-27 15:40Z
 
+通信地址更正（owner，2026-09-27 PDT / 2026-09-28 UTC）：当前 Root 为 `01a0e560-4333-7b03-8ff3-759a4add1d9a`。
+下文运行与科学状态为交接当时的历史事实；当前状态和通信地址以 `docs/research/RESEARCH.md#session-routing` 为准。
+
 面向：重启后的 Claude 会话与 owner。两个方向（`energy_relay_benchmark`、`sequential_coordinator_credit`）的全部工作已发表在 origin/main = `973d4e37fb18f20354e05b98c798951717c4b447`；本会话没有未提交的改动。唯一在跑的操作是 `b01_first_cell_a01`（supervisor pid 2823708，runner pid 2823709，`local_linux`），重启会杀掉它。
 
 ## 1. 重启前的选择
@@ -47,7 +50,7 @@
 
 - 解释器：科学 `/home/fires/.venvs/hmasd-linux-cpu/bin/python`（跑测试时把它的 `bin` 放到 PATH 前面）；控制面按 `.codex/hmasd-compute.toml`。永不安装、永不用 `/mnt/c` 的 python.exe。测试：`python -m pytest tests/experiments/candidates/sequential_coordinator_credit -q`（36 项，约 20 s）。
 - 权限：owner 已应用 option B 的 allow 规则；此后 `git add/commit/push` 与 launcher 的裸命令都通过。分类器拒绝 → 原文报告，不拆分、不重试、不绕过；不读不改自己的 settings 文件。
-- Peer 通道（Root 为平级）：出站 `CODEX_HOME=/mnt/c/Users/fires/.codex CODEX_SQLITE_HOME=/home/fires/.codex/sqlite codex queue --thread 01a0e091-9f32-7872-b582-b37a14f8d981 --message "<text>"`；入站 `docs/Claude_docs/inbox/` 的日期文件。一事一信，无 ACK 循环。
+- Peer 通道（Root 为平级）：出站 `CODEX_HOME=/mnt/c/Users/fires/.codex CODEX_SQLITE_HOME=/home/fires/.codex/sqlite codex queue --thread 01a0e560-4333-7b03-8ff3-759a4add1d9a --message "<text>"`；入站 `docs/Claude_docs/inbox/` 的日期文件。一事一信，无 ACK 循环。
 - Pro（Jev）传输状态在 `~/.local/state/hmasd-pro-transport/operations/`（会话 URL 只留本地）；headless Chrome 重启后由下一次 `send` 自动拉起。
 - 本会话 `/tmp` 草稿已复制到 `temp/directions/sequential_coordinator_credit/scratch/session-scratch-20260927/`（gitignored，PDF 除外）；实现者草稿在 `temp/directions/sequential_coordinator_credit/scratch/first-cell-l0/`，方向收尾时一起清。
 - 记忆目录 `~/.claude/projects/-home-fires-hmasd-wsl/memory/`：两个方向的状态文件已更新到本次交接。
