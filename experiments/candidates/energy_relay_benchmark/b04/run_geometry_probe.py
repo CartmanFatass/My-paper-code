@@ -20,6 +20,19 @@ if str(ROOT) not in sys.path:
 
 CHECKPOINT_REL = "runs/energy_relay_benchmark/b02_s1_set_a01r/checkpoints/c06"
 DEFAULT_CHECKPOINT = ROOT / CHECKPOINT_REL   # informational; the default resolves under --data-root
+SNAPSHOT_PARENT = "hmasd-launch-sources"     # scripts/hmasd_source_snapshot.prepare: <checkout>/.git/<this>/<id>
+
+
+def canonical_data_root(path: Path) -> Path:
+    """Map a ``--snapshot`` source worktree (``<checkout>/.git/hmasd-launch-sources/<id>``) to the
+    checkout that holds ``runs/``.  The launcher rebases every absolute argument under the author
+    root into the snapshot (scripts/hmasd_launch.py), so an explicit ``--data-root <checkout>``
+    arrives here as the snapshot path; any other path is returned unchanged."""
+    path = Path(path)
+    parents = path.parents
+    if len(parents) >= 3 and parents[0].name == SNAPSHOT_PARENT and parents[1].name == ".git":
+        return parents[2]
+    return path
 
 
 def parse_args(argv=None):
@@ -50,9 +63,13 @@ def main(argv=None):
     from experiments.candidates.energy_relay_benchmark.b02.checkpoint_eval import parse_worlds
     from experiments.candidates.energy_relay_benchmark.b04.probe_run import run
 
+    data_root = canonical_data_root(args.data_root.resolve())
+    if args.checkpoint is None and not (data_root / CHECKPOINT_REL / "record.json").is_file():
+        raise FileNotFoundError(f"saved c06 record absent: {data_root / CHECKPOINT_REL / 'record.json'} "
+                                f"(code root {ROOT}, requested data root {args.data_root})")
     manifest = run(args.command, out=args.out, launch_sha=args.launch_sha, workers=args.workers,
                    threads=args.threads, worlds=parse_worlds(args.worlds),
-                   checkpoint=args.checkpoint, data_root=args.data_root.resolve(),
+                   checkpoint=args.checkpoint, data_root=data_root,
                    argv=sys.argv if argv is None else argv)
     print(f"{args.command}: wrote {args.out} (git {manifest['git_head']})")
     return 0

@@ -222,8 +222,29 @@ def module_sources(root: Path = ROOT) -> dict[str, str]:
     return dict(sorted(result.items()))
 
 
+def input_identities(checkpoint: Path, node_trace: Path | None, recorded_panel: Path | None) -> dict:
+    """Digests of the gitignored inputs (outside the admitted snapshot's SHA and command digest).
+    The saved ``agent.pt`` must match the digest its own ``record.json`` carries."""
+    checkpoint = Path(checkpoint)
+    record = json.loads((checkpoint / "record.json").read_text(encoding="utf-8"))
+    agent = checkpoint / record["agent_pt"]
+    agent_sha = _sha256(agent)
+    if agent_sha != record["agent_pt_sha256"]:
+        raise RuntimeError(f"{agent}: sha256 {agent_sha} != record.json agent_pt_sha256 "
+                           f"{record['agent_pt_sha256']}")
+    identities = {"checkpoint_record": {"path": str(checkpoint / "record.json"),
+                                        "sha256": _sha256(checkpoint / "record.json"),
+                                        "launch_sha": record.get("launch_sha")},
+                  "agent_pt": {"path": str(agent), "sha256": agent_sha, "bytes": agent.stat().st_size}}
+    for name, path in (("node_trace", node_trace), ("recorded_panel", recorded_panel)):
+        identities[name] = ({"path": str(path), "sha256": _sha256(path)}
+                            if path is not None and Path(path).is_file() else None)
+    return identities
+
+
 def write_manifest(out: Path, *, command: str, launch_sha: str, argv, threads: int, workers: int,
-                   checkpoint: Path, blocks: dict, started: float, data_root: Path = ROOT) -> dict:
+                   checkpoint: Path, blocks: dict, started: float, data_root: Path = ROOT,
+                   inputs: dict | None = None) -> dict:
     record = json.loads((Path(checkpoint) / "record.json").read_text(encoding="utf-8"))
     try:
         head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True,
@@ -242,7 +263,7 @@ def write_manifest(out: Path, *, command: str, launch_sha: str, argv, threads: i
                          "block2_rot_episodes": blocks.get("block2", {}).get("rot_episodes", 0),
                          "block2_steps": blocks.get("block2", {}).get("steps", 0)},
         "fits": 0, "block2_rotation": MOBILITY_NOTE,
-        "checkpoint": str(checkpoint), "checkpoint_sha256": record["agent_pt_sha256"],
+        "checkpoint": str(checkpoint), "checkpoint_sha256": record["agent_pt_sha256"], "inputs": inputs,
         "policy_fingerprint": record["policy_fingerprint"], "training_seed": record["training_seed"],
         "interpreter": sys.executable, "torch_version": torch.__version__, "threads": int(threads),
         "workers": int(workers), "os_cpu_count": os.cpu_count(), "blocks": blocks,
@@ -267,7 +288,10 @@ def run(command: str, *, out: Path, launch_sha: str, workers: int = 1, threads: 
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     blocks: dict[str, Any] = {}
+    inputs = input_identities(checkpoint, node_trace if command in ("block1", "all") else None,
+                              recorded_panel if command in ("block2", "all") else None)
     summary = {"probe": Path(out).name, "command": command, "launch_sha": launch_sha, "data_root": str(data_root),
+               "code_root": str(ROOT), "inputs": inputs,
                "status": "INCOMPLETE", "failure": None, "worlds": [int(w) for w in worlds]}
     write_json(out / "summary.json", summary)
     try:
@@ -290,4 +314,4 @@ def run(command: str, *, out: Path, launch_sha: str, workers: int = 1, threads: 
         write_json(out / "summary.json", summary)
     return write_manifest(out, command=command, launch_sha=launch_sha, argv=argv or sys.argv,
                           threads=threads, workers=workers, checkpoint=checkpoint, blocks=blocks,
-                          started=started, data_root=data_root)
+                          started=started, data_root=data_root, inputs=inputs)

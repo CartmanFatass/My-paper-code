@@ -170,6 +170,36 @@ def test_runner_root_and_arguments():
     assert runner.DEFAULT_CHECKPOINT == runner.ROOT / runner.CHECKPOINT_REL
 
 
+def test_snapshot_data_root_maps_to_the_checkout_holding_runs():
+    from experiments.candidates.energy_relay_benchmark.b04 import run_geometry_probe as runner
+    # Literal data_root the launcher wrote into b04_geometry_probe_a02/launch-manifest.json.
+    snapshot = Path("/home/fires/hmasd-wsl/.git/hmasd-launch-sources/454262c925f447d7a9044f70e2ff78ac")
+    assert runner.canonical_data_root(snapshot) == Path("/home/fires/hmasd-wsl")
+    assert runner.canonical_data_root(Path("/home/fires/hmasd-wsl")) == Path("/home/fires/hmasd-wsl")
+    assert runner.canonical_data_root(Path("/x/hmasd-launch-sources/id")) == Path("/x/hmasd-launch-sources/id")
+    assert runner.canonical_data_root(Path("/")) == Path("/")
+
+
+def test_input_identities_verify_the_saved_agent_against_its_record(tmp_path):
+    import hashlib
+    checkpoint = tmp_path / "c06"
+    checkpoint.mkdir()
+    (checkpoint / "agent.pt").write_bytes(b"weights")
+    good = hashlib.sha256(b"weights").hexdigest()
+    (checkpoint / "record.json").write_text(json.dumps({"agent_pt": "agent.pt", "agent_pt_sha256": good,
+                                                        "launch_sha": "abc"}))
+    trace = tmp_path / "trace.npz"
+    trace.write_bytes(b"npz")
+    ids = pr.input_identities(checkpoint, trace, tmp_path / "missing.json")
+    assert ids["agent_pt"]["sha256"] == good and ids["agent_pt"]["bytes"] == 7
+    assert ids["checkpoint_record"]["launch_sha"] == "abc"
+    assert ids["node_trace"]["sha256"] == hashlib.sha256(b"npz").hexdigest()
+    assert ids["recorded_panel"] is None
+    (checkpoint / "agent.pt").write_bytes(b"tampered")
+    with pytest.raises(RuntimeError, match="sha256"):
+        pr.input_identities(checkpoint, None, None)
+
+
 def _global_rng():
     return (random.getstate(), np.random.get_state()[1].copy(), torch.random.get_rng_state().clone())
 
