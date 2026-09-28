@@ -1353,3 +1353,31 @@ and the live admission handshake were not tested; the reviewer suggested a futur
 optional failure regression, not a missing required repair. Exact published
 inputs precede the one admitted panel, with its native operation records to bind
 the final SHA and resource reading.
+
+### 2026-09-28 - B03 accepted operation and same-handle observation
+
+The exact inputs were published as `153a87e697a201b4c95a9ff62443e2e302b78b78`.
+The [native manifest](../../../../runs/uav_information_value/b03_anchor_content_a01/launch-manifest.json)
+binds the source, command, node, output and supervisor/runner identities. The
+[actual-node preflight](../../../../runs/uav_information_value/b03_anchor_content_a01/admission-preflight.json)
+at 09:49:50Z admitted 4 single-thread CPU workers with 11,692,466,176 available
+physical/effective bytes against the 4 GiB floor. Claude B05 and sensing B02
+remain separate accepted operations; their workers and frozen assets were not
+changed. This is acceptance, not a read result.
+
+Before launch an own read-only remote Git diff timed out while fetching a lazy
+blob outside the configured proxy shell; it terminated without scientific
+effects. An attempted fast-forward refused because the peer's canonical RESEARCH
+update was then in progress. No merge, reset, sparse-cone change or worker restart
+occurred. After that peer completed its published canonical-policy restoration,
+the configured `zsh -lic` network shell prepared this one snapshot/launch normally.
+The inherited unrelated bad-tree Git GC warning was not repaired by this study.
+
+`tools/hmasd_wait.py` generation 1 is armed under this native child's actual owner
+`01a0e733-f4f3-7c63-b5c2-6f38ef83fc8b`, job `launch-uiv-b03-anchor-a01`, against the
+manifest's unchanged operation reference, with 30-second deterministic probes
+and a 1500-second window. First drain at 09:51Z confirmed accepted admission,
+consistent source records and both exact native identities running; no exit
+witness was present. The child stays active through terminal collection and
+reading, then drains/rearms this same observer if a checkpoint requires it.
+Neither summary-file presence nor supervisor command exit is scientific completion.
