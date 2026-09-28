@@ -1288,6 +1288,7 @@ what next comparison changes understanding or use enough to warrant its full cos
 | Finite commitment O, `ad55c6e43`; complete gains with adverse tails and net battery withdrawal | Existing native DM `dm_persistent_service_round3` compares longer-lived service control with retaining the finite asset, using actual power/capacity and geometry constraints. | No B01 restart or PPO repair selected. Aggregate charging power does not itself certify high-service feasibility; exact continuation and full cost pending. |
 | Native CADC `22e009c9387f2507aab6ebab4555d92e27f5070e` and C2 `22ddf7b8fb9d2a02d01734939a9631866ff9a59e` | Fresh native DM `dm_message_content` designs same-seven-float content/receiver coordination under fixed competent RR transport, not learned send timing. | Old CADC separately trained both send/motion packages and was adverse; C2's frozen RR/NONE usefulness is not content attribution. Preserve matched motion learning, lawful local information, delay and actual credit. |
 | Fixed-roster LOCAL1 B16/B17 learning; non-energy G0 source scaffold and adverse G1 ordinary comparison | Root/critic assess whether event-contingent reassignment is a worthwhile independent question, rather than count mixing or alleged private history. | Exact G0 has no complete result or measured scientific cost. G1's adverse comparison is a different frozen study; its old .90 source screen is not a new prerequisite. No roster DM or run selected yet. |
+| Milan service-restoration T3 simulation and synthetic engineering fixtures | Read-only source mapping establishes a distinct outage/repositioning/service-flow question, not a live experiment or positive real-data result. | The configured `prepared_datasets/milan_internet_v1` cache is absent in the local checkout and no matching metadata was found under the inspected `/home/fires` tree; historical node absence was not freshly rechecked. No complete real-data learning integration or measured training cost is established. Keep data-dependent while discussing Claude's other-host option. |
 | Claude's B05/next-mainline choice, `c420043bd` and current NOTES | Peer considers W/anchored-offset/no-new-fit using its existing review and current result evidence. | Root does not duplicate the pending comparison or decide for Claude. A broad family is not exclusive ownership; exact allocation awaits substantive exchange. |
 
 The communication bridge is a known learning problem, not a novelty claim:
@@ -1300,7 +1301,109 @@ Retaining useful assets without additional runs is a real alternative, not an ow
 
 ### Answer
 
-Pending the same independent review's source reconstruction and concrete-design reading.
+Independent `/root/question_space_review`, 2026-09-28. Full programme answer follows;
+the same reviewer is reading the concrete H12000 and C/H/L designs before the run selection.
+
+**Recommendation**
+Develop **persistent-service depth plus decentralized message-content learning** in parallel. Do not restart either round-3 learner. Defer a G0 learning purchase until it has a consequential reassignment comparison, rather than treating its source scaffold as a promising result.
+
+The exact recipe stops were justified. Treating them as exhaustion of joint service planning would not be. The current allocation correction is more valuable than increasing DM count by itself.
+
+**Evidence**
+I continued in my separate reviewer context, without Root/DM conversation history. This was not blinded: the assignment supplied candidate families and source summaries. I directly read all 80 round-3 evaluation streams, both complete 6,400-choice training streams and update records, the consequential persistent-service duration counterexample, original CADC episode/update archives, and all 96 C2 traces. No new environment steps, fits, edits or consultations were performed.
+
+- **Persistent service:** Ordinary commitment controller O improved QoS by **.062866** and J by **196.349** versus central P, winning both in 15/16 worlds. Nevertheless, nine worlds had longer below-half-service spells, world 12 lost both endpoints, and every O world consumed **458–774 Wh of stored energy**. Its first/middle/last-third QoS was .813/.880/.836 versus P's .827/.855/.659. This is useful finite control, not established sustainable service. L executed 1,155 training commitments but deployed none; the 120-second label that remained committed for 900 steps also confirms incomplete realization of intended duration control. [Complete records](/home/fires/hmasd-wsl/runs/uav_persistent_service/b01_commitment_a01/perworld.json), [exposure and limitations](/home/fires/hmasd-wsl/runs/uav_persistent_service/b01_commitment_a01/reading.json).
+
+- **Joint transitions:** L exactly reproduced R on all 26 common arrays in eight evaluation worlds. Training nevertheless contained 7,086 non-D choices and consequential simultaneous motion. The deployed result is therefore nonactivation, not an adverse learned transition policy. Active ordinary transition planner O lost mean .014522 QoS and 22.041 J versus R, with positive worlds and mixed risk consequences preserved. O cost about **3.27 times R's worker CPU**. This weakens this particular predictor/search package, not all transition planning. [Original results](/home/fires/hmasd-wsl/runs/uav_joint_transition/b01_joint_paths_a01/summary.json), [execution evidence](/home/fires/hmasd-wsl/runs/uav_joint_transition/b01_joint_paths_a01/diagnostics.json).
+
+- **Communication:** C2's frozen RR-trained receiver obtained RR−NONE **+.079413 net J / +5.1582 served users per tick**, but that does not isolate content value or establish superiority to a separately trained silent policy. FAST_ONLY lost to RR; deletion-only timing is not a fresh promising question. Original CADC separately trained both motion packages: learned sending lost **.013355 net J**, with 16,744 collided attempts against RR's zero. Neither study varied message content. [C2](/home/fires/hmasd-wsl/runs/delayed_broadcast_timing/c2_rr_fast_none_b01_s9302/summary.json), [CADC evidence](/home/fires/hmasd-wsl/docs/research/candidates/contention_aware_decentralized_communication/evidence/cadc_b01_9302/ANALYSIS.json).
+
+- **Native learning already exists:** LOCAL1's fresh N8 panels retained positive J/service differences against H6 across three training instances. B20 subsequently rejected the ordered count-mixing increment, not ordinary learning itself. CADC uses base `MultiUAVEnv`; LOCAL1 uses `scenario1.UAVBaseStationEnv`; neither is G0's S7-S1 or the recent S7-S2 studies. Their scores, weights and inference units cannot be pooled. [B17](/home/fires/hmasd-wsl/runs/agent_count_generalization/s1_fresh_world_deployment_b17_final45/summary.json), [B20](/home/fires/hmasd-wsl/runs/agent_count_generalization/s1_ordered_roster_confirmation_b20_aggregate_20260925/summary.json).
+
+- **Roster:** G0 explicitly records proof-only status, no completed scientific comparison and no learning. Its controller already maintains reserve/target/handback history. The closest G1 formal result records constructive reassignment **worse than no reallocation by .105892 event-service score**, with zero learned results. I recovered its frozen design and result record, but not the original formal run directory; that numerical result is record-verified, not independently recomputed here. [G0 scope](/home/fires/hmasd-wsl/docs/research/designs/UAV_SOURCE_IDENTIFIABILITY_G0_CODE_SCIENCE_INDEX.md), [G1 result](/home/fires/hmasd-wsl/docs/research/cdc/EVIDENCE_NOTES/20260724_UAV_TEMPORARY_SERVICE_LOSS_G1_FORMAL_RESULT.md).
+
+**What Should Change**
+Round 3 cost **two fits, 624,000 native steps and approximately 7.31 recorded worker-CPU hours**, excluding incompletely metered support. It produced a useful ordinary commitment asset and an unfavorable ordinary transition package, but neither learned endpoint changed deployment.
+
+Both learners showed small policy changes and near-zero critic explained variance. Those observations make finite optimization/deployment a serious competing explanation; they do not identify reward scaling, clipping or architecture as the cause. Repeating the same small-head strategy on another narrowly permitted choice would be a weak default.
+
+Conversely, "ordinary control works" is not a reason to abandon learning. It supplies a stronger comparator and sometimes a useful learning foundation. The programme should retain question continuity without making every failed recipe entitled to repair.
+
+**1. Deepen Persistent Service**
+The strongest depth question is: **does the useful commitment policy support repeated service/charging cycles beyond the initially charged transient, and where does its complete service benefit fail?**
+
+The decision remains departure, dwell and return to service. Retain ordinary commitment O as the incumbent, with central P and radio-placement R as serious whole-program references. Do not confuse this O with the adverse joint-transition planner.
+
+A worthwhile complete observation could be one explicitly declared longer-horizon native regime, without changing charging capacity, reward, information rights or faults. For illustration, **eight fresh paired worlds × three controllers × H9000 = 216,000 steps, zero fits**. Recent per-world costs suggest roughly **2–3 worker-CPU hours** by linear extrapolation, not a calibrated quotation. Longer-run state occupancy, implementation and readback remain uncertain.
+
+The competing predictions matter: sustained service with late energy balance would extend the asset's practical scope; continued depletion, synchronization or service deterioration would constrain it. Finite stabilization would still not prove indefinite safety. Aggregate charging power alone cannot establish high-service feasibility.
+
+The next design must resolve the known arrival/dwell semantics prospectively and state precisely whether it evaluates the old executable asset or a corrected successor. This ordinary study is a legitimate endpoint, **not a compulsory positive gate before a separately justified learning study**.
+
+**2. Select Message-Content Design**
+Fixed RR transport with independently co-trained content/receiver/motion policies is the strongest independent exploration currently identified.
+
+The consequential object is the **seven-scalar packet that actually reaches teammates and changes decentralized motion**, not another send/no-send decision. The proposed C/H/L comparison is appropriate: original encoding C; competent ordinary history summary H; learned bounded content L. Keeping C prevents a weak new H from manufacturing an apparent learned gain.
+
+There is a concrete source-based reason to strengthen the ordinary encoding: the original seven fields include an identically zero centroid-z coordinate. Using that scalar meaningfully is available without learning. The proposed demand moments are a reasonable comparator, provided pooled observations are not mislabeled as distinct users or privileged identities.
+
+All arms need their own receiver/motion learning, unchanged RR/delay/cost, and lawful local inputs. The design must trace sender sampling, accepted packet, delayed delivery, receiver use and credited likelihood. Central critic information cannot become message information; untransmitted messages cannot acquire fictitious action credit.
+
+The proposed **three fits, 442,368 team steps and 3,072 Adam calls** are arithmetically consistent. Historical CADC's two complete arms took 375.34 seconds; linear scaling suggests an order of ten native minutes, but new content credit, tracing, software and support costs remain uncalibrated. These are three arm fits within one exploratory comparison, not three independent replications of L.
+
+L beating both C and H would support a useful co-adapted package, not uniquely identify message semantics. H winning would support an ordinary encoding asset. C remaining strongest would stop this content recipe. Unchanged or ineffectively delivered learned content would limit the intervention reading, not prove communication information useless.
+
+**3. Defer G0 Investment**
+A legitimate future question is **whether and how much to reassign after an observed temporary loss, including when to leave the surviving layout alone and when to hand responsibility back**.
+
+Its competent baseline must include no reallocation and a same-information, event-aware assignment policy with switching/travel consequences. G1 directly challenges an automatic-reassignment premise. Neither fixed-roster B20 nor the absence of a private-memory advantage answers this allocation question.
+
+However, G0 presently offers prescribed geometry, two reserves and one leave/rejoin event, not demonstrated learning infrastructure or a measured positive control. A new study must justify those particular consequential choices and expose actual joint reassignment. Do not buy another source-identifiability screen or silently modify the event law to create headroom.
+
+For scale, even one 512-episode H500 fit plus three 32-world evaluations would cost **304,000 native steps**, before implementation and readback. Actual G0 runtime cost and a useful action/learning interface remain unresolved. That is a weaker immediate purchase than the communication comparison, not evidence that the event family is exhausted.
+
+**Disposition**
+Continue the existing persistent-service DM's depth design and the new message-content DM's concrete comparison. Preserve Claude's already-sent W/anchored-offset consultation and allocate its eventual specific question through the peer exchange. No additional critic or consultation is needed for these overlapping design decisions.
+
+**MATERIAL_DISSENT: no** with the exact recipe stops and current O-depth/content-learning design allocation. I reject extending those stops into a claim that the underlying planning or learning opportunities have been exhausted.
+
+#### Same review: concrete persistent-service design at `e2ff83480`
+
+**SELECT O_H/P at H12000 as proposed.** This is a worthwhile finite-service extension of the useful ordinary asset, not a rescue of the failed learner. I support the narrower two-arm purchase over my earlier illustrative three-arm design.
+
+**Why It Is Worth Buying**
+B01 established useful H3000 performance while O continued withdrawing stored energy. Its horizon-dependent restoration rule also suppresses late departures, so neither its late discharge slope nor its service advantage can simply be extrapolated.
+
+The proposed continuous H12000 mission addresses that limitation directly. The source bound `P >= 79.86 W`, with no zero-power parking action, establishes that initial batteries alone cannot support this duration. It does **not** establish feasible service geometry, adequate station access or sustainability. The proposal makes these distinctions correctly. [Proposed comparison](/home/fires/hmasd-wsl/docs/research/candidates/uav_persistent_service/NOTES.md:949).
+
+The observation changes an actual use judgment: retain O_H as a longer-mission conditional reference, or keep O's established usefulness confined to its shorter mission. Either answer is useful without selecting another fit.
+
+**Comparator And Execution**
+Central P is an adequate primary comparator for the incremental value of this commitment program: it retains the same current-information access, service planner, feedback and native dynamics. Omitting R is acceptable because this is not a search for the best complete long-mission controller. The resulting claim must remain "O_H versus P," not superiority to available planning alternatives. P_BS remains a different information comparison.
+
+Binding the controller and decoder to H12000 is necessary. The inherited H3000 layout otherwise changes the proposed decision opportunities and decoded waiting times. This is an explicitly changed horizon parameterization, not an unchanged-controller replication.
+
+Retaining the arrival detector is scientifically acceptable **for this executable-package question**. It would be unacceptable for a claim about faithfully controlled intended dwell durations. Preserve every mismatch and its actual charging, duration and release consequences. A defect-associated loss constrains this package; a gain does not erase the defect or validate duration learning. No detector patch or automatic retry is owed.
+
+**Terminal And Risk Reading**
+The proposed early-terminal treatment is appropriate: preserve actual native termination and accrued J, normalize mission service by the planned horizon, and never reset or invent transitions.
+
+One implementation clarification should be frozen in the existing L0, without changing arms or cost:
+
+- Last-6000 service uses the fixed planned window `[6000,12000)` and denominator 6000, including when termination occurs before or within it.
+- Late native J is the reward actually accrued in that window, with no fabricated reward suffix.
+- Report the unserved remaining mission duration separately from observed zero-service spells. Final-300 reserve statistics must distinguish an observed terminal window from a mission that ended earlier; neither missing window should become a clean safety result.
+
+Requiring full-mission **and** late service/J improvement, alongside the declared adverse-tail comparison, makes the retention rule meaningfully stronger than an average-score win. Eight worlds provide a bounded conditional reading, not safety certification or confirmation.
+
+**Cost And Outcomes**
+The arithmetic is consistent: **0 fits, 16 episodes, at most 192,000 native steps and 364,800 snapshot queries**. Scaling the measured B01 O/P worker costs gives approximately **1.89 worker-CPU hours**. The wall-time estimate remains conditional on actual admission, later-state computational work and serialization; engineering and reading are additional costs.
+
+A persistent relative benefit with continuing storage decline supports only the specified finite mission. A disappearing late advantage, adverse tails or detector-dominated behavior argues against automatic extension of this program. Stable late service/storage would justify considering another question, not prove equilibrium or compel learning.
+
+The strongest objection is opportunity cost: another fixed-policy panel cannot explain the earlier PPO nonactivation or establish a MARL contribution. That objection is outweighed here by the owner's explicit request for depth and the concrete unresolved scope of an already useful native asset. The independent communication study supplies a separate learning investment.
+
+**MATERIAL_DISSENT: no.** Select the proposed package, with the terminal-window definitions made explicit during implementation. No extra arm, positive pilot, additional fit or further scientific-review cycle is needed for this unchanged comparison.
 
 ### Decision
 
