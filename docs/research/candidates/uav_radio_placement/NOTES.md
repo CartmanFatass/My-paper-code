@@ -618,3 +618,43 @@ process is a defunct zsh. The DM did not modify the shared collector, kill an
 unowned process or force-remove the snapshot. This is a concrete tool blocker
 for Root's shared-control ownership, not an incomplete scientific result or
 permission to retry the experiment.
+
+### Exact source-snapshot cleanup completed (2026-09-28 06:42 UTC)
+
+Root's bounded follow-up authorized only the remaining snapshot cleanup after
+published shared repair `311247eb629f5dbe05c2e6fd59df4cee867c1b02`. The DM read
+the repair and reused Root's independent engineering review: the scanner may
+clear a zombie only after confirming the same start identity, state Z and
+exactly the leader task; surviving or unreadable tasks still refuse cleanup.
+The reported shared-tool checks were 40 full-suite and nine independent focused
+passes. No new scientific comparison, environment episode or fit was selected
+or executed for this follow-up.
+
+Fresh supported preview, with `--snapshot 5d429c7d3527454993ff7eca765b0226
+--sudo-process-scan`, returned eligible. This rescanned the actual current
+processes rather than assuming the old PID 2019 state. It verified the exact
+claim `658077535eececf3833726c0a34f21a1febd1fee76bc7c8109e02cb547dd8ed0`,
+valid terminal records, source SHA `8ec998ecac68f93697ab31c65d5732ab337f4203`,
+clean snapshot and durable `refs/heads/main` reachability. The subsequent
+supported `--apply` for this same ID repeated those checks under its admission
+lock and returned `removed: true` (exit 0); the short main writer lock also
+serialized its Git worktree mutation. The elevated option was only the
+supported read-only process scan. No process was killed or refusal bypassed.
+
+Deleted exact path:
+`/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5d429c7d3527454993ff7eca765b0226`.
+Immediately before deletion, `du -s -B1` measured **1,604,083,712 allocated
+bytes**; afterward the path is absent and its Git worktree registration is gone.
+All 12 other launch-snapshot registrations present before this operation remain
+unchanged. **This follow-up reclaimed 1,604,083,712 allocated bytes; cumulative
+direction cleanup reclaimed 1,604,214,784 bytes**, including the previously
+recorded 131,072 bytes. The earlier refusal above is preserved as historical
+evidence and is now resolved for this exact target, not generalized to others.
+
+The one required raw location remains untouched at **50,524,160 allocated
+bytes**. Post-deletion SHA-256 verification against the published manifest
+passed for all 24 raw NPZ files and all three listed compact result artifacts
+(27/27). No raw evidence, operation record, other snapshot, reusable code or
+test was deleted, and no backup copy was created. Scientific readings, the
+conditional R claim and the reserve standing are unchanged. Cleanup has no
+remaining blocker or selected follow-on action in this direction.
