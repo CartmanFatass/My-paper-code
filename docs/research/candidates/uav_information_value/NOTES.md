@@ -1304,3 +1304,52 @@ notebook, RESEARCH, acceptance, launch and collection. Both work in the existing
 shared main checkout; the Implementer has no Git-index/commit, shared-file, B01/
 B02-edit or launch permission and spawns no children. The selection correction
 changes interpretation, not the prescribed executable panel.
+
+The complete [independent selection answer and Root disposition](../../archive/2026-09-28/RESEARCH-native-round2-selection.md#answer)
+are now read at `457cd15d49f512b1e30de04609cf69582ce56649`. The reviewer used a
+separate context without inherited conversation, reconstructed original compact
+records/source, and disclosed that it did not repeat bulk audits. It recommends
+retaining the amended three-arm experiment, matching controller rules rather than
+endogenous activation counts, retaining the risk block and ending attribution
+investment if the comparison remains decision-wide. **MATERIAL_DISSENT: no for
+the amended investments**; the original uncertainty objection is retained above.
+The DM accepts the complete recommendation. No second selection or Pro pass is
+needed. The chosen same-input algebra check is simple: before trajectories
+diverge, relay j moves by `(1-(j+1)/3)*(P_anchor-S0_anchor)` while service centroids
+and the relay count stay fixed. That checks the intended intervention, not its
+native utility or population effect. H1's joint assignment, shielding, motion and
+subsequent observations remain part of the measured complete consequence.
+
+### 2026-09-28 - B03 engineering acceptance before panel exposure
+
+The DM accepts the bounded Implementer's new B03 files after reviewing controller,
+observer, runner, reader, entrypoint and focused tests. S0_BS initializes only the
+reset anchor then delegates to the unchanged P_BS controller; H_BS/P_BS and B01/
+B02 source bytes remain unchanged for the sensing consumer. The observer records
+numeric arrays for genuine knowledge, held-plan source, generated/assigned relays,
+proposed/submitted commands, exact native positions/displacement and batteries.
+The DM added constructed coverage of no users and zero/one/eight available UAVs
+to check that these readings cannot collapse input supply into executed movement.
+
+Implementer B03+B02 checks: **25 passed in 10.93s**. DM's added constructed
+controller/observer suite: **13 passed in 2.98s**. Independent registered
+engineering Reviewer `/root/dm_information_round2/review_b03`, separate context,
+ran the current B03+B02 suite: **33 passed in 10.42s**, and returned **no material
+engineering finding; no repair required**. All reported the same 14 existing
+dependency deprecation warnings. It traced H1 assignment, shield, evaluator,
+observer/storage, bounded executor, admission and complete-panel readout. A
+constructed step-7 sighting check also verified immediate genuine memory while
+the inferred held plan persists honestly through step 29, then uses observed
+memory at step 30.
+
+Each full suite used six seed-17 H31 episodes for three-arm observer-off/on exact
+native equality. Total engineering exposure is **372 native transitions, zero
+fits/updates**; the DM's extra cases and review's between-replan check were
+constructed, not native episodes. No B03 result seed or H3000 outcome is exposed.
+NPZ arrays have no object dtype and load with `allow_pickle=False`. Failure rows
+suppress paired/risk claims; final runner/pool-error and orphan handling was
+inspected. Real spawned-worker death/mid-episode failure, full H3000 performance
+and the live admission handshake were not tested; the reviewer suggested a future
+optional failure regression, not a missing required repair. Exact published
+inputs precede the one admitted panel, with its native operation records to bind
+the final SHA and resource reading.
