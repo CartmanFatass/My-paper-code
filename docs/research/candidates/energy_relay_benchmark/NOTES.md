@@ -7224,3 +7224,6 @@ Return: an independent scientific review of the selection (constitution section 
 
 ### Answer
 
+
+### Send record (2026-09-28 22:36 UTC): Pro question `two-directions-selection` sent
+Question key `hmasd:2cf3d571d045310683e259e8e0bcee654f3e709f1a5e8b016d4d1dbd66b89f03` (source sha 97ea9cd9f, question heading above); attachment `hmasd-pro-question-two-directions-selection.md` sha256 `ba899dd2…`; Jev transport, ChatGPT 6 Pro (effort pill verified), new conversation (address stays in the local operation file). A first dry run failed pre-send because the effort argument was passed as `pro` instead of the required `6 Pro` (nothing submitted); the second dry run reached the send button with effort, text and attachment verified, then sent at 2026-09-28 22:36:33Z (`send_effect: sent`, attachment seen). Passive observation by the transport's `wait`; the answer is recorded verbatim under `### Answer` when it arrives (by Pro's connector write or by the DM's deliver step). Nothing running on the node; 0 fits. The `uav_restoration_readiness` row stays `paused` (owner shelving, data pending).
