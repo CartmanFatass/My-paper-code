@@ -383,8 +383,10 @@ def test_production_recipe_and_c00_initialisation(tmp_path):
                                                    device=device, log_dir=tmp_path / "b", seed=spec.seed)
     assert b05_identity == plain_identity
     _assert_same_modules(b05_agent, plain_agent)
-    if device.type == "cuda" and C00.exists():
-        assert b05_identity["policy_fingerprint"] == C00_FINGERPRINT
+    if device.type != "cuda":
+        pytest.skip("the recorded c00 fingerprint is a CUDA initialisation; compare on the node "
+                    f"(CPU gives {b05_identity['policy_fingerprint'][:8]}...)")
+    assert b05_identity["policy_fingerprint"] == C00_FINGERPRINT   # the recorded c06 lineage's c00
 
 
 def test_production_spec_guards():
