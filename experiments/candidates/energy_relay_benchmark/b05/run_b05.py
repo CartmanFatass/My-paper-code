@@ -121,6 +121,13 @@ def main(argv=None):
     if args.launch_sha != admission["sha"]:
         raise RuntimeError("launch SHA does not match admission")
     if args.command == "train":
+        if os.environ.get("HMASD_CRASH_AUDIT") == "1":
+            # Opt-in crash diagnostics (default off: this branch is the only effect).
+            from experiments.candidates.energy_relay_benchmark.diagnostics.crash_audit import (
+                install_from_environment,
+            )
+
+            install_from_environment(args.out)
         from experiments.candidates.energy_relay_benchmark.b05.training import (
             production_spec, run_training,
         )
