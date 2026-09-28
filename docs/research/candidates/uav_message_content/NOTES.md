@@ -383,3 +383,52 @@ change the ordinary encoding, credit/package design or investment decision; none
 self-cleared here. Retaining C2's RR asset without new training is a real alternative.
 Return the review and resolved choice in a later append-only entry. No scientific
 result, code retirement or reclaimed-disk claim is made at this design boundary.
+
+## 2026-09-28 - Independent selection adopted; exact B01 implementation released
+
+Root selected the complete C/H/L study after the same independent ResearchCritic read
+the committed design. The full answer and Root disposition are published at
+`613c8bcfc46f8c31a88f0649ddfdfcfd4f2ed41e` in
+[the current programme review](../../RESEARCH.md#portfolio-review-2026-09-28-joint-next-round-programme).
+The reviewer reports **MATERIAL_DISSENT: no** and selects this finite purchase.
+It independently reconstructs the native sequence and delayed likelihood-ratio credit,
+accepts detached *behavior* packets during replay, and stresses that arriving at tick
+255 retains a content-learning term while arriving at 256 does not. The pre-draw
+central critic is a legal baseline despite incomplete in-flight state. Compound PPO,
+four epochs and detached chunk-start states remain finite-learning approximations.
+
+The reviewer accepts C/H together because H's usefulness is unproven and C remains the
+competent current aggregate. Separate full receiver/motion training is essential.
+It identifies the strongest unresolved objection as learning a useful seven-dimensional
+code jointly with changing receivers from noisy delayed team return. Delivery, variation,
+parameters or entropy alone do not establish cooperation; no positive pilot resolves
+that uncertainty in advance. Its count check agrees with 3 fits, 442,368 native team
+steps, 3,072 Adam calls and 7,864,320 replayed actor rows. It accepts the declared
+positive, ordinary-only, mixed and technically missing outcome branches without adding
+arms, fits, delay regimes, consultations or a frozen-receiver intervention.
+
+DM disposition: adopt this reasoning and Root's selection unchanged. This resolves the
+source-only selection dependency, not the empirical uncertainty. In particular,
+reported policy entropy uses the inherited **pre-tanh Gaussian entropy convention**;
+it is not the bounded transmitted code's differential entropy, information content or
+semantic value. Engineering must name that quantity correctly and test its exact mask.
+
+The prospective L0 above is now released as one bounded behavior change: implement the
+C/H/L fixed-RR content-plus-motion comparison under the exact declared host, seeds,
+information, actions, replay, horizon, learning law and evaluation. Delegate only
+`experiments/candidates/uav_message_content/b01/` and mirrored tests in the shared main
+checkout to the registered Implementer, with no NOTES/RESEARCH/index/commit ownership,
+no result launch and no children. Reuse existing helpers rather than changing frozen
+CADC/C2 or shared learner semantics. DM reviews and accepts the diff and checks, and
+uses one independent engineering Reviewer for the high-risk likelihood/RNG/replay path.
+The required focused tests explicitly include Gaussian-versus-transmitted entropy,
+arrival255/256, conditional compound density, private stream/reset state, seven-float
+payloads and replay of stored behavior packets. Technical test episodes use disjoint
+seeds and are recorded separately from the selected scientific batch.
+
+After implementation acceptance, publish exact inputs and current selected standing,
+admit on the actual configured node, execute the one declared batch and keep this native
+child active through same-handle observation, complete reading and publication. No
+further Root acknowledgment or selection review is due for unchanged execution.
+Meaning-changing findings return through the native parent. Independent interpretation
+at the actual material result boundary remains distinct from this selection review.
