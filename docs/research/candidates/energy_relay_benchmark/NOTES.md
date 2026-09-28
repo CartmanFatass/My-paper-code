@@ -6665,3 +6665,19 @@ Root published the owner-requested method revision (scientific-tools "Design the
 - **Exposure reading added (zero cost, from `progress.jsonl`).** The frame is a fixed rule, not a learned choice, so the learned quantity is the continuous action policy; the exposure that matters is the frame census during training. Report, per checkpoint interval, the count of lane-episodes by canonical frame (`frames_chosen` events; the first boundary was ROT180/ROT180) and, for the dev panel, the by-corner split of L, so a gain or loss can be read against how often each physical corner was seen through the canonical frame. This is descriptive; it neither gates nor rescues the primary reading.
 - **Reading distinctions.** At c06 distinguish (i) no behavioural difference between B and C_SW (frame adaptation not activated), (ii) an active adverse difference (B worse on dev or hold-out), and (iii) a conditional gain (dev positive, hold-out direction-compatible), as the declared outcome table already does; a single instance supports a conditional exploratory observation only, never confirmation across independent training runs (the wording correction Root adopted replaces the older "no effect claim from one seed").
 - **Workflow.** The Claude session keeps deterministic external observation with native/manual return (Root's note: the Codex native-child wait pattern is not to be copied). The Oracle body now names the comparison/decision-exposure method at selection points (directly maintained Claude-only role; edit recorded in `docs/Claude_docs/changes/`). Pro questions from NOTES keep the default `### Answer` heading; a Portfolio-style question would pass `--answer-heading '### Pro Answer'`.
+
+### 2026-09-28 — B checkpoint panels while the fit runs: c02 read (development, descriptive; the primary reading is at c06)
+
+**Fit progress.** c01 at rollout 34 (204k transitions, agent.pt sha 47c63740…, fingerprint b92532b0…), c02 at rollout 67 (402k, sha cf278789…); ≈ 3.0 min per rollout (2.9 idle; the node carried other DMs' load, load average 5–7); c00–c02 copied unchanged to `/home/wu/hmasd-artifacts/energy_relay_benchmark/b05_canonical_frame_a01/checkpoints/` (sha256 verified against each `record.json`); record JSONs mirrored locally. c01 is not a declared panel and was not evaluated.
+
+**B dev panel at c02 (`b05_b_c02_dev_a01`, claim `d93ebdb28becfc0dd4478ab90521e6aea0a0e6ad32fd8308cae174a933641bb2`, supervisor 910563 / runner 910564, accepted ≈ 10:53 UTC, COMPLETE exit 0, 64 episodes, 1,004 s, 8 × 1 thread; mirrored to `runs/energy_relay_benchmark/b05_b_c02_dev_a01/`).** Frames identical to C_SW's (IDENTITY 13, MIRROR_Y 5, MIRROR_X 6, ROT180 8; the frame is a world property).
+
+| c02 | det | stoch |
+|---|---|---|
+| B QoS/step (J) | .2911 (817.1) | .3129 (883.4) |
+| C_SW = c06 wrapped (J) | .4574 (1339.8) | .4635 (1353.8) |
+| L(c02) = B − C_SW, paired | **−.166 (SE .022)**, 3 W / 29 L | **−.151 (SE .023)**, 2 W / 30 L |
+| by frame | IDENTITY −.207, MIRROR_Y −.080, MIRROR_X −.070, ROT180 −.226 | −.176 / −.131 / −.073 / −.179 |
+| Stage 1 SET at c02 (raw, physical frame, 2 threads; descriptive) | .3181 (920.5) | .3026 (863.9) |
+
+Reading: at one third of training B is where the SET recipe was at the same point (Stage 1 c00 .209/.243 → c02 .318/.303 → c04 .406/.404 → c06 .437/.438), slightly below it deterministic and slightly above stochastic under a different evaluator setting; the comparison against the *endpoint* C_SW is expected to be negative here and carries no reading. Zero zero-service worlds; return-constraint cost 14.5 / 13.8 (c06 raw: 2.4 / 1.5) and minimum battery .073 / .078 — an early-training profile, to be re-read at c04–c06. Next: c03 at rollout 100, c04 at 134, c05 at 167, c06 at 200 (≈ 17:30 UTC at the current pace), each followed by its dev panel; hold-out once at c06.
