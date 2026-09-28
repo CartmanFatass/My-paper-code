@@ -1257,3 +1257,31 @@ pause/state/lead match the published exploring/native-child control. Fetching
 published inputs is sufficient without a remote branch switch, reset, merge,
 sparse-selection change or overwrite of those records. Fresh true-node memory
 and duplicate-claim admission remain to be performed by the native kernel.
+
+### B02 accepted operation and deterministic observation
+
+Exact inputs `e905d8842a6ad6006b2b6d82237e98f4a5dbb2d2` were published and
+verified at `origin/main` before the single launch. Configured `zsh -lic` fetched
+them on `wsl_4070`; its shell emitted noninteractive prompt warnings and Git
+repeated the pre-existing missing-tree auto-GC warning. Fetch succeeded and no
+Git repair or foreign-control overwrite was attempted.
+
+The configured `agent-task` supervisor accepted `ups-b02-long-a01`, then the
+native kernel separately admitted the result child at2026-09-28T20:25:29.958957Z.
+The [native manifest](../../../../runs/uav_persistent_service/b02_long_mission_a01/launch-manifest.json)
+is the authoritative process/source/output and same-handle recovery reference.
+[Actual-node admission](../../../../runs/uav_persistent_service/b02_long_mission_a01/admission-preflight.json)
+measured14818951168 available bytes against the4294967296-byte floor. The
+prelaunch process reading had no other result worker. The detached launcher
+finishing is not the scientific worker finishing, and acceptance is not a result.
+
+First observer registration refused because this same child session's B01
+observation state was correctly stopped. Drain confirmed generation3, B01 READY,
+no pending event/wake. Rearming that consumed state advanced to4 without resuming
+B01, then registering this new B02 manifest advanced to5. B01 remains a ready
+historical job, not an active probe. B02 uses60-second read-only status probes
+and1500-second checkpoints under the same native child identity
+`01a0e858-d69a-7dc2-b858-08d9438ed121`. I stay active with long deterministic
+waits and same-handle drain/rearm; no App queue-return assumption, duplicate
+worker or replacement launch is made. The observation refusal consumed no
+scientific episode or update.
