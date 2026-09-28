@@ -1,6 +1,6 @@
 # HMASD research index
 
-当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-27。治理依据为
+当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-28 UTC（2026-09-27 PDT）。治理依据为
 [constitution](../project/OPERATING_CONSTITUTION.md)；本页维护现状，历史过程见[日期归档](archive/)。
 
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan) · [任务路由](#session-routing)。
@@ -750,6 +750,18 @@ B/UCOPE 的局部预测、一步优势或真实后缀信用没有自动转成稳
 耦合与实施成本向 UAV 迁移仍需实测。当前没有证据判定 MARL 已饱和、技能一定无用或某个新模块必然有效。
 [既有投入判断的范围](archive/2026-09-21/FOUNDATIONS.md#7-当前研究选择放在这套认识的什么位置)。
 
+完整普通规划器的用途与学习增量是不同判断。S7的有限move/hold比较已保留有用普通控制和风险反例；
+一个固定离线学习包不如它，不排除动作库之外的临时接替，也不诊断长时域合作不可学。
+后续若扩大可执行航段，普通参照应获得相同权限；仅胜旧控制器不能把扩权收益算成学习收益。
+评价世界可以刻画给定策略的条件性差异，不能补足缺失的独立训练实例。
+[本轮原始证据与设计取舍](archive/2026-09-28/RESEARCH.md#portfolio-review-completed-four-dm)。
+
+信用结论同样保持范围：SCC的“最近、未匹配”微宿主结果和一个固定分配比较支持具体T-prime停止，
+不构成全部UAV信用方法或一般协调价值的排除证明；理想score恒等式不认证有限、归一化、裁剪PPO更新无偏。
+尺度/熵混杂是相关候选的设计问题，不成为任何未来信用研究的普遍前置检查。
+这是本Root采纳独立审查后的共享判断；peer原方向记录的较宽表述与成本口径由原作者处置，未宣称已达成一致。
+[完整实质异议及处置](archive/2026-09-28/RESEARCH.md#credit-scope-correction)。
+
 这些认识用于选择下一笔值得付费的观察。现行优先次序与比较见 [Current research plan](#current-research-plan)，
 方向状态与 ownership 见下表；背景中的历史实例不产生方向激活或新的实验接受。
 
@@ -1109,42 +1121,54 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 ## Current research plan
 
-**本轮安排：四个现有Codex DM，由本Root协调，继续聚焦UAV合作移动、覆盖保持与规划的真实服务增量。**
-Owner于2026-09-27指定新Root接任并按四个Codex DM重新组织；会话地址和编号以[任务路由](#session-routing)为准。
-DM2与DM4采用当前App名称，旧审查中的编号保持历史原义。四人是问题负责人，不是四条必须填满的实验流水线；
-每位DM一次推进一个结果性研究，自主选题、实施、完整判读和发表。Root不承担第五条Codex研究线，也不是逐批审批层。
+**本轮决定：保留四个旧配方的结束判断，新建一个Codex DM完成“临时覆盖交接”的设计选择；本次不选运行批次。**
+周期复盘新增0个fit、0环境步。[完整证据、独立审查、取舍与被替代计划](archive/2026-09-28/RESEARCH.md#portfolio-review-completed-four-dm)保留本轮依据。
+Owner已归档、工作完整记录的旧DM不恢复、不复用；新DM继承原始正面、不利和失败证据。
+五条是训练与评价共同遵守的运行资源上限，不是必须填满的研究岗位。
 
-**本轮研究判断。** 普通SET已有条件性学习，两个新拟合均无完整端点；跨实例重现仍未回答，按当前用途与成本结束本轮复制投入；护盾PPO的失败端点不支持正负机制结论；
-BC的教师误差改善尚未确立可靠闭环部署，更没有识别长时域合作瓶颈；原S4能量打分规则的不利结果保留。
-下一步围绕清楚的实际决策和有能力的同信息普通参照展开，保留全部native J／QoS／返航成本和风险尾部。
-[四DM独立审查、完整处置与旧计划](archive/2026-09-27/RESEARCH-four-codex-root-handover.md#four-dm-root-decision)记录本轮依据。
+**本轮改变的认识。** 普通规划已是有竞争力且代价明确的参照：B05的QoS均值提高.01607、J提高35.81，
+同时有11个J损失世界及严重reserve尾部。B02固定离线价值包相对普通规划QoS低.01649、J低55.39；
+近乎持续hold是行为事实，未识别成数据覆盖不足、Bellman外推或长时域合作失败。
+两个新SET种子及护盾PPO的完整比较缺失，不提供算法优劣结论。已有SET完整恢复谱系的实际学习保留。
+本轮产出是更强对照、条件性用途与被削弱的解释，尚未建立新MARL算法增量，也未证明学习或宿主已饱和。
 
-| 负责人（当前App名称） | 问题与已确定下一步 | 比较、成本与停止边界 |
+| 次序与范围 | 科学问题与下一项工作 | 比较、成本及结束条件 |
 | --- | --- | --- |
-| DM1：S7 普通学习基线 | `energy_relay_baselines` B01以两个不完整fit收尾；采纳独立审查，较宽普通学习问题转reserve，当前不选新结果操作。已有完整SET／普通规划参照按其实际合同复用。 | 432k＋858k已记录步，2fits；两个1.2M端点与原定评价均缺失，不能拼接或用中间检查点补位。原生接受到退出累计10.1517h，第二fit最终训练墙钟／CPU／RSS未能写出。已比较继续远端、完整CPU拟合和有界诊断的用途与成本，当前均无新增运行；转储有界读取完成，根因未明，失败不是SET低效证据。[完整读数与决定](candidates/energy_relay_baselines/NOTES.md#independent-reading-and-dm-disposition-end-b01-replenishment)。 |
-| DM2 | B04/B05完整：普通服务感知等待及较远评分有条件性收益；采纳独立审查，结束当前评分比较，方向转reserve。更宽规划问题仍由本DM负责，无已选新操作或等待依赖。 | B05同信息／静态模型／动作库／10步执行，32新配对H3000世界，QoS差+.01607、J差+35.81；11个J损失世界与严重reserve尾部阻止默认推广。64回合／192k步／0fit，54.802min／3.60844 worker CPU小时，five_ten较one_step多12.9% CPU。收益限定于冻结的有限精度实现，未识别校准预测或MARL机制。额外约55min面板只能收窄世界差异，不能拆分数值／等待模式／遗漏动力学，当前没有足够用途；不选追加面板、改分数／容差、第三臂或fit。保留B04/B05普通资产及全部正反证据。[完整结果与独立决定](candidates/energy_relay_availability/NOTES.md#2026-09-27--independent-b05-reading-and-dm-disposition)。 |
-| DM3：UAV协作路径规划与MARL | `uav_cooperative_planning` B02完整，采纳独立审查，结束固定离线价值排序包并转reserve；较宽合作规划问题仍由本DM负责，当前不选新结果操作。 | 64采集＋P/H/L各32评价，1fit／5000更新／480k步；原生操作3.862h、worker CPU 7.673h，fit本身39.36s。L−P QoS −.016488、J −55.389；L−H均值亦为负，失败分支明确。保留全部正反世界、严重reserve反例及近乎持续hold的行为观察，未识别原因。新三臂世界面板约2.09h只缩窄条件估计；再fit的L评价约.72h也不复制采集。当前均无足够新增用途，未选重跑、修复或新架构；无Root ACK／Pro等待。[完整读数、审查与取舍](candidates/uav_cooperative_planning/NOTES.md#dm-disposition--end-b02-investment-and-reserve-the-broader-question)。 |
-| DM4 | 保留`energy_relay_diagnostics`的有限学习／执行映射问题及既有observer接口责任；当前B02/cache投入结束，方向为reserve。当前明确不选新结果操作；有实际共享observer故障时按原职责处理，不维持常驻诊断。 | 不购买getter-only约59分钟重跑，不自动修cache或补PPO配对。原mask问题未被实验检验；其潜在用途是普通固定护盾下的有限优化，不能改称新规划器。只有新证据、可执行的经济路径和具体使用价值才可前瞻选择新研究；今后有值得投入的新问题仍可按宪章自主注册与转向；本轮不因第四个负责人空闲而发明补位实验。原2fits／600k训练＋384k评价的报价只是未选成本。[完整重审、独立异议与处置](candidates/energy_relay_diagnostics/NOTES.md#2026-09-27--owner-requested-b02-re-audit-original-evidence-and-corrections)。 |
+| 首选：临时覆盖交接，设计阶段 | 保持H1最终目的地、最终分配和原生能源约束，研究一架UAV返航或转场时，另一架是否先经过临时支援航点以维持共同服务。新DM给出一个可执行决策、具体候选算法、最强普通替代、判别预测和完整首笔比较，并作选或弃的明确决定。 | 候选与普通滚动交接调度器共享合法信息、模型权限、10步时钟、交接机会及航段库、guard/shield和原生目标；B04 P作次要能力参照。当前仅文档/源码/必要原始资料阅读，0fit/0结果回合，不写实验实现、不启动诊断。无法给出有价值的具体候选则关闭本次设计投入，不转成无限修补任务。 |
+| 配套：普通参照与必要工程 | 有能力的参照和必要实现由同一科学问题负责，不再预设独立“基线DM”“故障DM”。若扩大临时航段库，普通参照同时获得该库；既有P被超越只说明包用途，不能单独给学习记功。 | 普通调度器和学习器必须在完整部署上比较。若进一步声称某种新学习结构/表示有贡献，再按该主张选择同接口普通学习对照，不把额外fit设为任何探索的普遍前置条件。 |
+| 不选：原配方追加 | 不补旧SET失败种子，不重开getter-only/cache/PPO-mask投入，不加B05面板或容差扫描，不自动接BC/DAgger、原B02重拟合或离线正则器。 | reserve是当前不投入的决定，非等待批准或常驻故障依赖。这些更宽问题并未被否定；新证据和实际用途可改变将来的选择，但当前没有排队后继。 |
+| Peer：Claude当前推理阶段 | 尊重其owner决定：T-prime/Fit A/B结束，credit首格结果保留并转reserve，benchmark承载空间部署/服务自适应布局的推理。Codex先固定最终锚点/分配，只研究移动中的临时接替。 | 两者以实际决策和主比较分界；若具体方案仍重合，协调为一个负责人，不能靠换名重复。Root不替peer选择实验、编辑其NOTES或宣称其接受本次科学修订。 |
 
-**分工界面。** DM2检验完整普通规划策略，DM3检验其合法信息条件下的学习增量；两者的观察、
-模型使用、时钟和动作集合必须实际匹配才可共享对照。H_local汇总合法观测，H_central的额外信息与模型
-不能未经声明移入H_local比较。DM4的PPO问题不能以DM3的BC掩码结果代替；同一c03分叉也不能充作DM1的独立从头训练复制。
-共同工程路径只有出现真实依赖才处理，按原所有权及独立工程检查执行，不另开无边界故障项目。
+**为什么选这个问题。** 旧B02只有all-move或单机hold，护盾活动时退回all-move，未测试其他成员的临时支援航段。
+所以“交接能否值得学习”是尚未执行的决策比较，不是把旧折扣、网络或Q目标改名重试。
+它与共享服务的联合后果有关，但当前没有已测的收益余量或必要性结论。新意仍待核对；
+[ALMA](https://arxiv.org/abs/2205.14205)已有高低层共同学习的任务分配，
+[MAT](https://arxiv.org/abs/2205.14953)已有顺序联合决策，仅加入分配或自回归不能承担新贡献。
+这些原始来源提供最近方法边界，不是完整新颖性检索或本宿主保证。
 
-**Peer和资源。** Claude继续独立负责`energy_relay_benchmark`与`sequential_coordinator_credit`，
-其当前声明、结果及待咨询决定以自身[benchmark NOTES](candidates/energy_relay_benchmark/NOTES.md)、
-[credit NOTES](candidates/sequential_coordinator_credit/NOTES.md)和方向行恢复。本轮不替其选择T′或信用批次，
-不迁移其Pro问题／answer目标。两个peer的角色分配、信用与本轮Codex学习规划以实际干预和主比较区分；
-现有材料不建立“普通规划阳性”或“小宿主阳性”自动准入UAV学习的规则。
-所有训练和固定策略评价共同遵守五条运行资源上限，实际节点准入可更少；准备／论证不是新结果操作。
-优先`wsl_4070`，有具体原因时使用配置内local节点。已接受worker与observer在原句柄上继续，Root交接不重启它们。
+**首个完整比较的候选规模。** 一个探索训练实例，随后学习交接器/普通交接调度器/既有P在32个共同新H3000世界完整评价。
+若选64个训练世界，则合计160回合、480k原生步，和B02同量级；它是待具体化模板，
+不是已声明的arm/seed/horizon，也不是统一的一fit上限。训练方法、合法交接机会与临时航点生成方式、
+护盾触发后的候选可行性、风险读法、源代码与完整成本尚需新DM收敛。
+旧B02约3.861h elapsed、7.673h worker CPU，其中fit只39.36s；新交接预测可能更贵，
+不能把fit秒数、0fit或旧节点速率当作新研究报价。设计可直接导向完整UAV探索，不要求先做阳性小模型或精确headroom测量。
 
-**记录、发布与暂停。** 四个DM在共享main的原方向目录工作，显式路径提交、短writer lock串行共享写操作，
-独立发表自身NOTES／runs／RESEARCH条目。沿用各方向刚完成且仍适用的独立科学审查；新核心比较发生实质变化
-时再按§5做针对性审查，不重复审计既有原始轨迹，也不因新Root增加ACK、汇报或批准环节。
-完整方法合成建议仍待owner采纳；本轮组织安排不代表采纳它。PPC与FSD owner pause、G33 frozen和封存信息边界保持。
-PPC B04为未启动的暂停方案，其4fit设计、成本与原交接保留在[NOTES](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)
-和本轮归档的旧计划；其他后备不因空槽启动。957001–957032已有曝光，不重新当未见面板；Milan实际配置cache缺失仍是原后备限制。
+**预期结果对应的决定。** 学习器对普通交接器和P均有完整J/服务增量且代价合用，才值得报价独立训练复制；
+普通交接器改善而学习器未增加用途，保留普通规划贡献并削弱该学习增量；两者都不改善，结束该包。
+均值与风险尾部冲突保留为权衡；技术失败仍是缺失证据。一个训练实例及32个世界不是学习总体确认。
+本次选择的主用途是完整服务/J；“相当服务但在线计算更少”可以另行前瞻选择，不能在结果后增添为第二成功标准。
+若未来确认经验学习主张，保持原有预写规则及每臂至少三个独立训练种子的最低要求，不由非显著推等效。
+
+**科学审查的实质修订。** 本Root采纳独立审查：SCC的“最近、未匹配”微宿主及固定分配差只支持具体T-prime投入结束，
+不支持“信用不是整个UAV宿主的算法机会”、一般协调价值上界或任何未来信用fit都必须先过同一尺度检查。
+理想score恒等式也不证明有限、归一化、裁剪后的PPO更新无偏。现有peer方向记录中较宽表述与约1.2h CPU口径
+由原作者处置，Root不代改；[完整异议与限定](archive/2026-09-28/RESEARCH.md#credit-scope-correction)保留。
+这项纠正不复活T-prime，不改失败C1，不阻止独立的交接设计。
+
+**实施和冻结边界。** 新DM使用owner指定的Astra Max，核对首轮实际模型与推理档位；地址写入[任务路由](#session-routing)。
+本轮派发只含设计工作，不含实验实现、训练、采集、评价或故障重跑。后续选定实验仍需其自身前瞻与源输入发布。
+PPC/FSD暂停、G33冻结、已曝光957001–957032、未决方法采纳、原始失败与必要唯一raw保持。
+运行库共同根因未知不成为全项目无限前置条件，也不被称作已修复。
 
 ### Shared runtime diagnosis
 
@@ -1213,16 +1237,16 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 **本轮编号对齐（2026-09-27）：** 原生会话当前标题为DM2的是 `energy_relay_availability`，DM4是
 `energy_relay_diagnostics`；旧记录使用相反编号。以下路由以实际UUID和当前标题为准，
-不改变方向lead、源输入或实验身份。Codex保留四个独立DM，本Root只协调；Claude既有两个问题
+不改变方向lead、源输入或实验身份。四个旧Codex DM已完成，归档会话仅作历史来源，后继新建；本Root只协调。Claude既有两个问题
 及其owner授权保持，所有结果性训练／评价共同计入五条运行上限，不承诺六条同时运行。
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
 | 规划 HMASD 周期总结（当前Root） | `01a0e560-4333-7b03-8ff3-759a4add1d9a` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner于2026-09-27 PDT指定本会话接任Root并更新全部当前Claude通信目标；负责已完成四DM的周期复盘、跨方向科学判断和后续研究计划。已读取上一Root及四DM最终报告；无须恢复旧DM或重启已收尾操作。新选后继由新建DM从完整文档接续，采用owner指定的Astra Max。前任Root与旧DM地址仅供历史定位；未决方法建议、暂停和冻结对象保持。Root仅协调，不成为逐批发表关口。[当前计划](#current-research-plan)。 |
-| DM3：UAV协作路径规划与MARL | `01a0e2e4-0d39-7cf3-98c0-f87dfb6e00b0` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner要求的替代独立会话，手动Astra Max保持。已完成`energy_relay_imitation` B01/B02更正与后继`uav_cooperative_planning` B02完整结果／独立判读；当前两方向reserve，无活动worker／未读Pro／已选后继，较宽问题责任保留。旧`01a0e0f8-4e3f-70f1-802f-4bf4c2348221`仍归档，不重启旧操作或重复唤醒。未发App消息。创建接口曾返回outcome-unknown，已从实际独立会话消歧，无重复创建。[当前计划](#current-research-plan)、[完整B02与取舍](candidates/uav_cooperative_planning/NOTES.md#dm-disposition--end-b02-investment-and-reserve-the-broader-question)。 |
-| DM2 | `01a0e1e9-0fda-74c1-80c9-8b660eca0991` / `local` | `/home/fires/hmasd-wsl` · `main` | 当前App标题DM2（旧文档DM4），继续负责`energy_relay_availability`，当前reserve。B03关闭，B04/B05全部原始输出已核验并独立判读；B05保留条件性评分收益与全部风险反例，未选后续实验。终态事件已消费、观察停止，无活动操作／未读Pro。B04仍被DM3使用；旧B02/B03实现退役及清理实测见NOTES。两份B04/B05源码snapshot共约3.20GB因GC进程检查拒绝仍留存，唯一必要raw保全，未称全部清理成功。旧DM4 `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190`仅供历史恢复；本次未发App消息或重启操作。[完整B05](candidates/energy_relay_availability/NOTES.md#2026-09-27--complete-native-b05-reading)、[审查、取舍与清理](candidates/energy_relay_availability/NOTES.md#2026-09-27--independent-b05-reading-and-dm-disposition)。 |
-| DM1：S7 普通学习基线 | `01a0e0ad-0710-71f3-8d9d-8012fe7b65b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 直接 DM，`energy_relay_baselines`；保留 D1，未执行 D4 后继现归 DM3；共同observer接口仍由`energy_relay_diagnostics`负责人（App DM4）负责。原生读取已核对启动及当前职责／方法读取；独立完成和发布，无自动 App 回复。[NOTES](candidates/energy_relay_baselines/NOTES.md)。 |
-| DM4 | `01a0e1e7-922d-73c1-a2ad-f9a60033105e` / `local` | `/home/fires/hmasd-wsl` · `main` | App当前标题为DM4（旧文档DM2），Owner明确要求的新直接DM，接手`energy_relay_diagnostics`、B02和observer接口责任。已完成原始证据重审及新的独立科学审查，采纳实质异议：B02为reserve、结束当前cache投入，无活动操作／未读Pro／已选新fit；普通PPO、有限优化与规划贡献边界及两处更正已发表于NOTES。旧DM2 `01a0e0af-35fd-78e1-87a5-0ac2c37df085`的B01已完整关闭，地址仅作历史恢复；首次旧会话投递被归档状态拒绝，未恢复旧B01。[科学选择](#current-research-plan)、[NOTES](candidates/energy_relay_diagnostics/NOTES.md)。 |
+| DM3：UAV协作路径规划与MARL | `01a0e2e4-0d39-7cf3-98c0-f87dfb6e00b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：Owner要求的替代独立会话，手动Astra Max保持。已完成`energy_relay_imitation` B01/B02更正与后继`uav_cooperative_planning` B02完整结果／独立判读；当前两方向reserve，无活动worker／未读Pro／已选后继，较宽问题责任保留。旧`01a0e0f8-4e3f-70f1-802f-4bf4c2348221`仍归档，不重启旧操作或重复唤醒。未发App消息。创建接口曾返回outcome-unknown，已从实际独立会话消歧，无重复创建。[当前计划](#current-research-plan)、[完整B02与取舍](candidates/uav_cooperative_planning/NOTES.md#dm-disposition--end-b02-investment-and-reserve-the-broader-question)。 |
+| DM2 | `01a0e1e9-0fda-74c1-80c9-8b660eca0991` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：当前App标题DM2（旧文档DM4），继续负责`energy_relay_availability`，当前reserve。B03关闭，B04/B05全部原始输出已核验并独立判读；B05保留条件性评分收益与全部风险反例，未选后续实验。终态事件已消费、观察停止，无活动操作／未读Pro。B04仍被DM3使用；旧B02/B03实现退役及清理实测见NOTES。两份B04/B05源码snapshot共约3.20GB因GC进程检查拒绝仍留存，唯一必要raw保全，未称全部清理成功。旧DM4 `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190`仅供历史恢复；本次未发App消息或重启操作。[完整B05](candidates/energy_relay_availability/NOTES.md#2026-09-27--complete-native-b05-reading)、[审查、取舍与清理](candidates/energy_relay_availability/NOTES.md#2026-09-27--independent-b05-reading-and-dm-disposition)。 |
+| DM1：S7 普通学习基线 | `01a0e0ad-0710-71f3-8d9d-8012fe7b65b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：直接 DM，`energy_relay_baselines`；保留 D1，未执行 D4 后继现归 DM3；共同observer接口仍由`energy_relay_diagnostics`负责人（App DM4）负责。原生读取已核对启动及当前职责／方法读取；独立完成和发布，无自动 App 回复。[NOTES](candidates/energy_relay_baselines/NOTES.md)。 |
+| DM4 | `01a0e1e7-922d-73c1-a2ad-f9a60033105e` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：App当前标题为DM4（旧文档DM2），Owner明确要求的新直接DM，接手`energy_relay_diagnostics`、B02和observer接口责任。已完成原始证据重审及新的独立科学审查，采纳实质异议：B02为reserve、结束当前cache投入，无活动操作／未读Pro／已选新fit；普通PPO、有限优化与规划贡献边界及两处更正已发表于NOTES。旧DM2 `01a0e0af-35fd-78e1-87a5-0ac2c37df085`的B01已完整关闭，地址仅作历史恢复；首次旧会话投递被归档状态拒绝，未恢复旧B01。[科学选择](#current-research-plan)、[NOTES](candidates/energy_relay_diagnostics/NOTES.md)。 |
 | Claude DM S7 能源中继参照研究 | this session / `local` | `/home/fires/hmasd-wsl` · `main` | 结果节点 wsl_4070，经 `scripts/hmasd_launch.py` 准入；Claude 无 Codex 唤醒，用分离轮询观察，运行句柄与读数在 NOTES。与 Root 为平级（owner 2026-09-27）：Root→Claude 写 `docs/Claude_docs/inbox/YYYYMMDD_<主题>_ROOT.md` 并按显式路径提交（本会话监视该目录）；Claude→Root 用 `codex queue --thread 01a0e560-4333-7b03-8ff3-759a4add1d9a --message`，每条只办一件具体事、不回 ACK。[NOTES](candidates/energy_relay_benchmark/NOTES.md)。 2026-09-27 起本会话同时担任第二个方向 `sequential_coordinator_credit` 的 DM（owner 授权“同时两个相关方向”）：同一会话、同一 checkout、同一入口；其运行同样经 `hmasd_launch.py` 于 `local_linux` 准入，句柄与读数在其 NOTES。 |
 | DM 规划压缩学习 | `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / `local` | `/home/fires/hmasd-wsl` · `main`；旧持久数据 `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`，新raw见NOTES原生节点路径 | 已按owner要求完成当前任务并停止，交接在NOTES。B01–B03合计20fit核验发布；B03源snapshot净回收793542656bytes，唯一raw保留。B04代码/独立工程检查完成，0科学工作/无handle；PPC本地及节点控制均paused，观察已停。无App消息、责任转移或由读交接自动恢复。节点Git GC警告及未来恢复前检查点已写入交接。[交接](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)。 |
 | DM 伙伴曝光独立复制 | `01a0db8f-1fab-7503-ae4b-feff2d4da8f5` / `local` | `/home/fires/.codex/worktrees/fsd-c/hmasd-wsl` · 当前`codex/partner-exposure-b03-publication`；源码/证据分支`codex/partner-exposure-replication-sept25`保留 | B03两新F2/M区组已完整执行、核验、判读并独立出版；结束当前50:50固定库投入，无活动操作、未读证据、开放Pro或已选后继。全量数据在`/home/fires/hmasd-retained-runs/controller_composition/b03_partner_replication_20260925`逐文件核验保全。fsd-c不在本任务原生附件中，节点源树也非launcher snapshot，两目录保留待可用原生归档路径，不使用shell删除。旧B01/B02及ab18来源/原分支保持终态；无App消息。[完整结果和生命周期边界](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)。 |
