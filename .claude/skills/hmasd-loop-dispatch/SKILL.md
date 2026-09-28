@@ -121,8 +121,13 @@ Keep unknowns explicit; do not backfill addresses for dormant historical directi
    configured direction-manager child under existing research authority. Do not create a
    sidebar task merely because a subtask exists. Preserve current/default session model
    settings unless the owner explicitly chooses them; a role name does not set a main model.
-5. **Assign a question and its current concrete work.** Supply the scientific question,
-   direction/notebook, prior judgment and contrary
+5. **Assign a question and its current concrete work.** Choose the scientific object before
+   partitioning work among sessions. Use scientific-tools' Choose the question method: a
+   consequential phenomenon or difficulty and the knowledge an answer would add, not merely
+   an executable repair. Respect existing ownership, but do not freeze away the important
+   decision just to manufacture non-overlapping DM assignments. Coordinate genuine overlap;
+   a smaller residual problem does not become valuable because a slot is free. Supply the
+   scientific question, direction/notebook, prior judgment and contrary
    evidence, relevant shared-background topics and how they bear on the question, what changed,
    next deliverable, declared scope/cost, pause and any actual owner
    deadline and checkout/index ownership. A child returns to its parent; a standalone DM

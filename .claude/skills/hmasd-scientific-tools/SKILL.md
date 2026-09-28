@@ -37,6 +37,34 @@ information-leakage checks remain. Exploratory evidence may support a conjecture
 proving its mechanism; retain that uncertainty instead of claiming proof or forbidding the next
 useful experiment. Confirmation still follows the fixed scientific minimums below.
 
+## Choose the question
+
+Start from a consequential unexplained phenomenon, a limitation of the current explanation,
+or a substantive learning/decision difficulty motivated by a primary-source bridge. A measured
+failure is not required, but an editable component or the last failed recipe does not by itself
+define a worthwhile question. Ask what a successful answer would teach beyond repairing that
+recipe. A useful replication, empirical boundary or ordinary-method result can be the answer;
+a new architecture and a positive score are not owed.
+
+Identify the intended contribution: a reusable learning method, useful task performance, or a
+new empirical understanding. These can support each other without every study having to deliver
+all three. Ordinary planning may answer a systems question; a learning-method question needs a
+reason why experience or its use could matter beyond that alternative. Keep competent matched
+comparators. Neither familiar components nor unresolved novelty alone cancel exploration, and
+neither a new module nor an unexplained score gap establishes a contribution.
+
+Choose the scientific object before fitting it to a DM slot or directory. Respect actual
+ownership and frozen contracts, but do not reduce a future question to a tiny residual merely
+to avoid an administrative overlap. Coordinate or combine genuinely overlapping work; do not
+take over it. The smallest worthwhile complete experiment preserves the decision or coupling
+that makes the question matter; it is not necessarily the smallest code change. A larger
+bounded comparison can be preferable to a chain of cheap patches or diagnostics.
+
+At closure distinguish an adverse tested prediction, a technically missing comparison and a
+proposal declined for its value/cost. None alone exhausts the parent question. Conversely, an
+open question does not oblige another attempt. Use the existing notebook reasoning and one
+applicable independent review; this adds no form, candidate quota, proof gate or approval layer.
+
 ## Explore an idea
 
 1. Start from the direction's current explanation and the observation or gap motivating this
