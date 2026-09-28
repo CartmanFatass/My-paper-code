@@ -16,8 +16,8 @@ Owner 于 2026-09-23 进一步要求本任务作为科学项目管理者，给�
 DM持续负责科学问题与解释，每次推进一个结果性研究，自主实施、判读和发表；训练与评价均按实际节点资源准入。
 当前责任与工作区见[任务路由](#session-routing)，上一轮分工及采纳依据见[四DM审查](archive/2026-09-27/RESEARCH-four-codex-root-handover.md#four-dm-root-decision)。
 Owner已归档完成且文档齐全的DM；后继研究创建新DM并继承已发表证据，不恢复或复用这些旧会话。
-首批三个原生DM已完成设计和独立审查：两项比较进入实施，一项初始提问被修正。按owner最新要求增选的三题也已完成合并科学审查，
-Root采纳固定几何部署、直接原生回报感知学习和无线布局三项完整比较；合计五题实施／执行，数量不是新上限，见[现行计划](#current-research-plan)。
+六个原生DM的首轮已带回实质证据：A/B/D/F完整读取并独立审查，C的初始提问经来源核对被修正；E的一次学习及完整评价已结束，结果独立判读中。
+Root据此选择A的冻结I/P全程序比较与B的合法站点先验推断，停止C/D当前方案及F的自动扩展；数量不是新上限，见[现行计划](#current-research-plan)。
 本页在科学判断、计划或控制发生实质变化时更新；逐 cell 进度和操作恢复信息见相应 NOTES/runs。
 
 **计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
@@ -1184,10 +1184,11 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 ## Current research plan
 
-**A/B保持完整比较；C修正前提后reserve；D选P/C部署、E直接学习、F选H/G/R（2026-09-28 UTC）。**
-这不是旧配方续跑或新的五DM配额。DM与独立Scientific Reviewer核对原始证据后，Root已选择A/B进入实现与有界执行；
-C的来源核对完成，不购买记忆学习或新宿主。D/E/F各由新建DM重建来源，独立Reviewer已完成合并选题质疑，Root采纳修订后方案。
-首次A/B/C返回均为0新增fit／回合／环境步；后续实际执行以各自NOTES为准，不能把新委派或设计当作已接受运行。
+**首轮结果收口，选择I/P与合法BS先验两项后继；E完整学习结果判读中（2026-09-28 UTC）。**
+A/B/D/F的完整原生证据及独立结果审查已返回；C完成来源核对，不购买记忆学习或新宿主。
+E已结束原定单fit及五程序评价并由DM完成产物核验，独立结果审查未完，暂不选择修补或第二fit。
+Root复用A/B的适用独立结果建议，选择各自一个新完整比较，不重开原批次或从旧面板均值跨题排序。
+现有结果支持继续区分信息用途、普通控制能力和实际学习增量，未支持“方向已经穷尽”；也没有自动要求更多架构或诊断。
 [首批完整独立审查与Root取舍](archive/2026-09-28/RESEARCH-native-dm-question-review.md)与
 [新增三题完整审查及最终选择](archive/2026-09-28/RESEARCH-expanded-native-dm-review.md)保留，
 实际子代理、当前工作与记录见[路由](#session-routing)及各方向NOTES。归档的旧DM未恢复或复用。
@@ -1200,21 +1201,22 @@ C的来源核对完成，不购买记忆学习或新宿主。D/E/F各由新建DM
 
 | 子代理与当前选择 | 所问问题和选定比较 | 完整成本、读法及返回边界 |
 | --- | --- | --- |
-| DM1：`uav_energy_coordination`，推进解析I/C/H | 全机队服务与补能决策是否有完整用途？I/C共享广泛目标库、解析服务—返航—补能—重新部署模型及60步决策时钟，C依次条件化更新，I并行提出后已有联合否决／回退；H为原H_central+F能力参照。C-I不是“协调对完全独立”的因果量。 | 8个新共同世界×3程序×H3000，最多24回合／72k原生步，0fit；最多117,200计划评分／351,600路由快照，站点事件计算等另计。快照约1.6累计worker小时只是历史缩放，非总报价。保留J／服务／风险尾部及H比较；不选70.3M物理模型步版本、自动细化或学习残差。[有效最终设计](candidates/uav_energy_coordination/NOTES.md#first-return-cost-correction---choose-analytical-itineraries)。 |
-| DM2：`uav_information_value`，推进六程序比较 | 旧H_central／H_local差距中，有用信息和规划器实现各起什么作用？统一普通规划和点集预处理，交叉当前用户／BS的合法观测与真值，再加原H_central和只保留曾合法见过静态BS的普通记忆；不做匿名用户追踪。 | 32个新共同世界×6程序×H3000，192回合／最多576k原生步，0fit；约70–120节点分钟为有条件历史缩放，工程／审查／读数另计。读取交互、完整J／服务／风险及所有损失，闭环状态分化是程序总效应的一部分；不是最优信息价值或旧差距百分比因果分解。[设计与静态记忆修订](candidates/uav_information_value/NOTES.md#2026-09-28---independent-scientific-challenge-adopted-static-memory-first)。 |
+| DM1：`uav_energy_coordination`，B01完成，选择B02 I/P | B01中I-H八世界服务/J均升，C-I均值不利且各世界更耗能；保留I、停止原C。下一问是I是否超过已展示用途的普通five_ten P，值得承担其模型和计算成本，而非确认补能协调机制。保留I@60、P@10的冻结真实程序。 | 新8共同S2/H3000世界、16回合／≤48k步／0fit，总路由服务查询≤222,000，模型事件等另计；不加C、不修模型、不补旧面板。均值、尾部风险与算力分读，混合／不确定不自动扩种子。I/R建议本轮不另开，避免为同一普通参照选择重复投入。[B01读数](candidates/uav_energy_coordination/NOTES.md#2026-09-28---b01-complete-useful-ordinary-package-no-sequential-increment)、[B02前瞻](candidates/uav_energy_coordination/NOTES.md#2026-09-28---b02-selected-frozen-i-versus-the-existing-p-package)。 |
+| DM2：`uav_information_value`，B01完成，选择合法BS先验比较 | B01支持BS信息对固定H1有用途；合法静态记忆有条件改善，却留下从未看见BS的世界。下一问：从已公开充电站坐标构造的固定噪声BS估计，相对H_BS能否改善完整服务/J？真实合法观察优先，推断与观测状态分开；不是精确重建或信息上界。 | 新32共同S2/H3000世界、64回合／192k步／0fit，历史缩放约20–25节点分钟加工程。冻结投影估计、原规划／动作／护盾，声明具体源、种子和风险读法后准入；不选旧17世界、不加准确率前置、匿名追踪或新因子组。E要求已知合法BS，故不覆盖此初次推断问题。[完整结果与独立建议](candidates/uav_information_value/NOTES.md#2026-09-28---independent-result-reading-and-bounded-next-question)。 |
 | DM3：`uav_roster_memory`，首轮完成／reserve | 来源不支持当前实体记忆学习投入。N7只有永久减员；G0有真实服务离开／返回，但公开当前几何／成员／服务，普通器已有身份关联的分配与交接历史。FOLR不利复制另行保留。 | Root采纳独立审查的MATERIAL_DISSENT，0新fit／回合，不造隐藏状态、不扩宿主、不自动重启旧B03或变体。没有确立“历史不可能有用”；本次只是修正Root的初始前提。无操作或owner批准等待，新问题由Root重新设计，不要求DM为填名额持续搜救。[完整来源与决定](candidates/uav_roster_memory/NOTES.md)。 |
 | DM4：`uav_geometric_generalization`，P/C完成／reserve | 固定NE规范化短时增加向心运动，完整服务/J却未改善；独立结果审查后结束该包。保留原P及普通H参照、全部改善和损失世界，不否定训练时表示规范化，不替代peer物理旋转题。 | 已完成16新共同世界×5程序×H3000，80回合／240k步／0fit，54.58min runner wall、111.18累计CPU分钟，工程／审查未完整计时。全部证据核验保全，清理净回收799531008 bytes；无追加运行、选中后继或审批等待。新问题回Root选择。[完整结果与处置](candidates/uav_geometric_generalization/NOTES.md#independent-scientific-reading-and-dm-disposition)。 |
-| DM5：`uav_active_sensing`，推进直接native-J学习 | 经验能否学会信息动作的后续服务价值，超过公共先验巡查和信息量／路程规则？同合法BS／survey、1scout、公共候选、30步时钟与运动保护，PPO直接选服务或巡查目标；不用A分数残差或信息奖励。 | 1fit／480k训练步／160完整回合／16k宏决策／1600更新；初始化、端点、H/P/A同16新世界共80评价回合／240k步，总≤720k。估2–4节点小时，工程另计；n_train=1。取消单独先跑H/P/A，非规则阳性后才学习；有限H3000不bootstrap至终点以后，不宣称纯信息中介。[NOTES](candidates/uav_active_sensing/NOTES.md)。 |
+| DM5：`uav_active_sensing`，单fit完整，独立结果判读中 | 经验能否学会信息动作的后续服务价值，超过公共先验巡查和信息量／路程规则？同合法BS／survey、1scout、公共候选、30步时钟与运动保护，PPO直接选服务或巡查；不用A分数残差或信息奖励。已知合法BS是共同启动条件，不能把此设计当成首次BS获取。 | 已完成1fit／480k训练步／160回合／1600更新及80评价回合／240k步，总720k；DM报告原生72.85节点分钟并核验340产物，独立读数和处置尚待完成，工程另计。n_train=1，保留自身面板的启动比例、所有损失及风险，不从B复制分母或改已接受gate；不自动改特征、重训或加seed。[NOTES](candidates/uav_active_sensing/NOTES.md)。 |
 | DM6：`uav_radio_placement`，首轮完成／reserve | 固定H/G/R完整比较保留R的条件性服务余量，强化几何G没有解释掉收益；R的储备尾部阻止默认替代H。R-G仍是目标／搜索／支持包差，不识别全部剩余损失或纯目标因果。 | 24完整回合／72k步／0fit／59,988无线查询已核验；原生41.79min、worker CPU1.3765h，工程另计。独立审查后停止自动扩展，无未读产物或新操作；I/R同新世界的48k步零fit方案只作为Root未选择建议，与I/P一并取舍，不据不同现有面板排序。[完整读数与处置](candidates/uav_radio_placement/NOTES.md#independent-scientific-reading-and-dm-disposition)。 |
 
-**下一步已委派。** A/B按已选范围完成L0、方向内实现、必要正确性与独立工程检查、精确源输入发布、
+**后继已原生委派。** A/B按上述新范围完成L0、方向内实现、必要正确性与独立工程检查、精确源输入发布、
 实际节点准入、原生执行／同handle观察、完整读取和自有记录发表，再通过原生子代理返回实质证据。
 科学审查覆盖问题／主比较选择，不冒充解析模型公式或信息隔离代码已通过工程验证。
 问题内普通实现、发表和声明内运行不逐项等待Root；新问题、扩大比较或重要反证则返回Root统筹。
 没有自动新增面板、复制、fit或失败后的救援分支；也不把合理实现检查变成单独的常驻故障DM。
-D/E/F的科学选择与处置已完成，均已原生委派贯穿实现、准入、完整读取和发表；不再等待本档案或逐运行ACK。
-五项前瞻合计1fit、最多1.68M原生团队步，其中E的480k训练步已计入；这不是新额度或已执行量，模型查询／工程与peer工作另计。
-这次增选扩展而不替代仍在实施的A/B，先前完整计划／审查与失败证据保持。
+D/F的独立结果处置已完成；E继续完成当前批次的结果判读、发表与清理，不再等待Root ACK。
+首轮五项原生运行合计1fit、1.68M团队步，其中E的480k训练步已计入；E的科学处置尚未完成，不能把运行结束当作已读结果。
+本次A/B后继另选240k步、0fit，是两项已选比较的规模而非可自由支用额度；模型查询、工程与peer工作另计。
+来源、实际成本和接受句柄各自保存在NOTES/runs；此前完整设计／审查与失败证据保持。
 
 **责任与返回。** Root负责提问、任务设计、跨问题选择和综合判断；DM负责问题内科学推理和执行，
 可以反驳Root。DM3已完成当前任务；其初始前提不成立不要求原样救援。新增三题由Root具体构造，
@@ -1222,7 +1224,7 @@ D/E/F的科学选择与处置已完成，均已原生委派贯穿实现、准入
 使用既有角色、三类记录和共享主分支短锁；不新增App DM、汇报表、常驻监督角色或审批层。
 [试行方法](../../.agents/skills/hmasd-loop-dispatch/SKILL.md#root-led-dm-trial)。
 
-**Peer边界。** Claude保留首次护盾进入前关系型目标解码及其自身评审／操作。完整周期策略可改变早期部署，
+**Peer边界。** Claude保留其benchmark几何探针及自行修订的表示／解码学习问题与评审／操作。完整周期策略可改变早期部署，
 不能仅用阶段名称制造永久禁区；以实际决策干预、信息、主比较和estimand判断重合。
 新DM不编辑Claude方向代码／NOTES、不接管其候选或操作；实质重合通过Root和授权peer渠道协调。
 [首批scope消息](../Claude_docs/inbox/20260928_three_child_question_scope_ROOT.md)与
@@ -1313,13 +1315,13 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
 | 规划 HMASD 周期总结（当前Root） | `01a0e560-4333-7b03-8ff3-759a4add1d9a` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner于2026-09-28 UTC启动原生DM试行并进一步取消固定数量限制、要求积极推进。Root负责问题设计、委派、跨问题取舍与综合判断，长wait_agent等待实质返回，不执行额外方向或逐fit审批。四旧DM及交接设计继承完整文档，归档会话不复用。[当前计划](#current-research-plan)。 |
-| DM1：完整服务—补能协调（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_energy_coordination` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_energy_coordination`。首轮设计发表于`737584c3e`；Root已原生follow-up委派解析I/C/H的实现、检查、准入执行、完整读取和自有发表。初轮0结果运行，后续实际句柄／状态见NOTES，不创建App DM或复用旧任务。 |
-| DM2：合法信息的决策价值（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_information_value` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_information_value`。六程序B01已同handle终态收集、完整读取、独立审查并发表，当前reserve，无活动操作或新增批次。初次BS普通推断比较是交Root的下一任务建议，不接管当前已知BS后的主动感知研究；结果、唯一原始证据位置与净清理见NOTES。 |
+| DM1：完整服务—补能协调（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_energy_coordination` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_energy_coordination`。首轮I/C/H完整读取、审查、发表及清理完成；Root已原生follow-up选B02冻结I/P，当前实现与检查，实际准入和句柄见NOTES。无旧App会话复用、C追加或逐运行审批。 |
+| DM2：合法信息的决策价值（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_information_value` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_information_value`。六程序B01完整读取、独立审查、发表及清理完成；Root已原生follow-up选择公开站点先验推断BS对H_BS的32新配对世界，不接管E已知BS后的主动感知研究。新声明／输入／实际接受状态及唯一证据见NOTES。 |
 | DM3：成员进出与历史用途（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_roster_memory` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；`uav_roster_memory`首轮来源重构已完成并发表于`46be5b5f4`，当前reserve。Root采纳独立异议，不选记忆fit／新宿主；0结果操作，无批准等待。新问题由Root构造，目前无已选后继。 |
 | DM4：几何变换与部署（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_geometric_generalization` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_geometric_generalization`。固定P/C/H完整读取、独立结果审查、发表与清理完成，方向reserve；原生操作及终态/持久证据见[NOTES](candidates/uav_geometric_generalization/NOTES.md#2026-09-28---b01-complete-reading)。无活动worker、观察或已选后继；后续跨问题选择由Root统筹，不接管Claude学习研究。 |
-| DM5：主动信息获取（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_active_sensing` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_active_sensing`。已新建，构造同合法观测／普通记忆下的完整探测策略比较；不接管DM2的BS记忆对照。 |
+| DM5：主动信息获取（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_active_sensing` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_active_sensing`。B01单fit及五程序完整原生评价已经结束、产物核验完成，独立结果判读／发表／清理进行中；不选新fit，不接管DM2初次BS推断，实际终态和读数见NOTES。 |
 | DM6：无线目标空间规划（native child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_placement` | `/home/fires/hmasd-wsl` · `main` | 注册角色`hmasd-direction-manager`；拥有`uav_radio_placement`。H/G/R首轮已完整读取、独立审查及发表，方向reserve；无活动worker／观察／已选下一运行。保留R条件性资产及风险尾部，跨题后继交Root取舍；未接管Claude解码或DM1时间规划。[NOTES](candidates/uav_radio_placement/NOTES.md#independent-scientific-reading-and-dm-disposition)。 |
-| 本轮独立科学选题审查（bounded child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/round_question_review` | `/home/fires/hmasd-wsl` · read-only | `hmasd-research-critic`，原始独立上下文`fork_turns=none`；A/B/C审查已完整返回并采纳。当前原生follow-up合并审查D/E/F及是否需要直接学习比较，不是结果方向，不编辑方向记录或启动实验。[首批答复与处置](archive/2026-09-28/RESEARCH-native-dm-question-review.md)。 |
+| 本轮独立科学选题审查（bounded child） | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/round_question_review` | `/home/fires/hmasd-wsl` · read-only | `hmasd-research-critic`，原始独立上下文`fork_turns=none`；A/B/C及D/E/F两次合并选题审查均完整返回并采纳，当前无任务；结果判读由各DM的独立critic完成，不是新增研究方向。[首批答复](archive/2026-09-28/RESEARCH-native-dm-question-review.md)、[扩展三题答复](archive/2026-09-28/RESEARCH-expanded-native-dm-review.md)。 |
 | DM：UAV临时覆盖交接规划 | `01a0e577-d190-70a1-9526-9d1765eab830` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成的历史设计会话；`uav_transit_handoff`为reserve，残差学习方案未投入，0fit／结果回合，无活动操作或已选后继，不是本轮原生子代理。创建时的不确定返回已消歧，未重复创建；首个实际turn `01a0e57b-0dcc-76e1-b72f-e5bd8841dd7a`已实核为`gpt-6-astra`／`max`。地址保留作证据定位，已完成归档会话不复用。[设计与最终取舍](candidates/uav_transit_handoff/NOTES.md#final-design-disposition)。 |
 | DM3：UAV协作路径规划与MARL | `01a0e2e4-0d39-7cf3-98c0-f87dfb6e00b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：Owner要求的替代独立会话，手动Astra Max保持。已完成`energy_relay_imitation` B01/B02更正与后继`uav_cooperative_planning` B02完整结果／独立判读；当前两方向reserve，无活动worker／未读Pro／已选后继，较宽问题责任保留。旧`01a0e0f8-4e3f-70f1-802f-4bf4c2348221`仍归档，不重启旧操作或重复唤醒。未发App消息。创建接口曾返回outcome-unknown，已从实际独立会话消歧，无重复创建。[当前计划](#current-research-plan)、[完整B02与取舍](candidates/uav_cooperative_planning/NOTES.md#dm-disposition--end-b02-investment-and-reserve-the-broader-question)。 |
 | DM2 | `01a0e1e9-0fda-74c1-80c9-8b660eca0991` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：当前App标题DM2（旧文档DM4），继续负责`energy_relay_availability`，当前reserve。B03关闭，B04/B05全部原始输出已核验并独立判读；B05保留条件性评分收益与全部风险反例，未选后续实验。终态事件已消费、观察停止，无活动操作／未读Pro。B04仍被DM3使用；旧B02/B03实现退役及清理实测见NOTES。两份B04/B05源码snapshot共约3.20GB因GC进程检查拒绝仍留存，唯一必要raw保全，未称全部清理成功。旧DM4 `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190`仅供历史恢复；本次未发App消息或重启操作。[完整B05](candidates/energy_relay_availability/NOTES.md#2026-09-27--complete-native-b05-reading)、[审查、取舍与清理](candidates/energy_relay_availability/NOTES.md#2026-09-27--independent-b05-reading-and-dm-disposition)。 |
