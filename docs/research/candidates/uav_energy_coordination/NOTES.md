@@ -645,3 +645,257 @@ Allocated usage across the two owned code/test trees fell from **393,216** to
 **139,264 bytes**, net **253,952 bytes reclaimed**; all three targets are gone.
 Required source/tests remain, as do the live native snapshot and unique output.
 This preparation cleanup does not retire the active result operation.
+
+## 2026-09-28 - B01 complete: useful ordinary package, no sequential increment
+
+### Original operation and evidence
+
+The original accepted operation ended **2026-09-28 04:11:46.357294 UTC**, exit0,
+with a valid native exit witness, absent runner/supervisor and consistent records.
+There was no restart, retry, replacement, extension or additional result rollout.
+All **24/24 episodes reached the declared H3000 truncation**, exactly **72,000
+native team transitions**, **0 fits / 0 optimizer updates**. No failed, missing,
+unreconciled, cancelled or orphan result exists. Source remains
+`e663b53c7ea3f52983365ed9c3ce044bc4ccf699`; acceptance was published in `762d288e5`.
+
+Compact evidence: [config](../../../../runs/uav_energy_coordination/b01_analytical_coordination_a01/config.json),
+[summary](../../../../runs/uav_energy_coordination/b01_analytical_coordination_a01/summary.json),
+[all worlds](../../../../runs/uav_energy_coordination/b01_analytical_coordination_a01/perworld.json),
+[content manifest](../../../../runs/uav_energy_coordination/b01_analytical_coordination_a01/manifest.json),
+[exit witness](../../../../runs/uav_energy_coordination/b01_analytical_coordination_a01/process-exit.json),
+[terminal status](../../../../runs/uav_energy_coordination/b01_analytical_coordination_a01/terminal-status.json).
+The one required bulk copy remains at `wsl_4070`:
+`/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/raw/`.
+All **51 manifest-listed files** passed byte-count and SHA256 verification there;
+the three collected compact scientific files match the same hashes locally.
+The 48 raw files (24 NPZ plus 24 final progress records) total **56,078,638 bytes**;
+manifest-listed raw plus compact scientific artifacts total **56,404,388 bytes**.
+Manifest SHA256: `cd6f9cecc862f6921bd4dd99828d350ac1306997b6b58b4c5ba5da6d14b301bf`.
+No bulk copy was added to Git or duplicated locally.
+
+I read all 24 original NPZ files: native metrics/J, per-UAV energy totals,
+terminal flags, planner costs/bounds and all 60-step decision clocks reconcile
+with the compact rows. Complete raw user trajectories are equal within each of
+the eight triples; recorded initial-state and RNG-stream hashes also agree 8/8.
+The first post-hoc checker wrongly required bitwise reward equality: its maximum
+observer/evaluator difference is **2.22e-16**, within the already frozen 1e-12
+check. Battery decode differs by at most **2.9802241e-8**, within its frozen 3e-8
+float32 bound. This was a readback-check error, not a failed native run, changed
+input, tolerance revision or reason to repeat any world. All 14 native reward
+metrics are exactly equal between the independent recorder and evaluator.
+
+The observer was genuinely directed to child UUID
+`01a0e5d9-7595-7010-b974-4dc802d1b7d8`, not Root. Its actual terminal wake
+`847b1e9c-5a54-494f-a633-f4ef90560b06` failed with exit1 / `-32600`:
+`direct app-server input is not allowed for unloaded spawned sub-agents`.
+Thus registration did not establish automatic native-child continuation. After
+Root's explicit continuation, this native turn waited and drained the same state;
+READY event `baca624e003bae02bd9ea501` was consumed at generation2 and observation
+was stopped. No target was rebound and no worker was relaunched. There is now no
+active result producer, unread terminal event or collection dependency.
+
+### Native outcomes and adverse worlds
+
+All numbers below concern the fixed programs on eight initialized worlds, not
+training replications, confirmation, or independent support from correlated
+service/reward endpoints. Intervals are the declared descriptive paired t7
+intervals. H remains the competence reference, not a timing-isolated control.
+
+| Mean endpoint | H | I | C |
+| --- | ---: | ---: | ---: |
+| QoS/step | .769472137 | .814832456 | .800917362 |
+| Native J | 2265.841194 | 2411.084022 | 2368.485910 |
+| Delivered megabits | 69252.492290 | 73334.921067 | 72082.562592 |
+| Return-cost sum | 6.045521 | 1.458323 | 1.885357 |
+| Episode minimum battery ratio | .100412196 | .103327944 | .105099009 |
+| UAV-step fraction at/below 10% reserve | .011041667 | .001000000 | .001536458 |
+| Input Wh | 378.680556 | 449.662663 | 487.428368 |
+| Consumed Wh | 1355.019309 | 1366.684520 | 1421.456553 |
+| F-mode UAV-steps | 8257.125 | 4537.125 | 5968.250 |
+| Guard-blocked actions | 858.875 | 1904.875 | 1203.250 |
+
+| Contrast | QoS/step difference [t7 interval] | Native J difference [t7 interval] | Joint service/J wins/losses |
+| --- | --- | --- | --- |
+| I-H | +.045360320 [.015276119, .075444521] | +145.242828 [49.830363, 240.655292] | 8/0 |
+| C-H | +.031445226 [.002383963, .060506488] | +102.644716 [7.834126, 197.455306] | 6/2 |
+| C-I | -.013915094 [-.044648208, .016818020] | -42.598112 [-135.020718, 49.824494] | 3/5 |
+
+I-H J decomposes into **+136.080959** cumulative QoS, **+9.174396** from the
+unchanged coefficient2 return penalty, and **-.012527** shaping difference.
+C-I decomposes into **-41.745283** QoS, **-.854068** return penalty and **+.001239**
+shaping. All cutoff/depletion counts, penalties and cutoff-step exposures are
+zero. These are primarily service changes, not a shaping-score improvement.
+
+Every C-I primary world is retained here; seed suffixes complete `310928xx`:
+
+| Suffix | QoS/step difference | J difference |
+| --- | ---: | ---: |
+| 01 | +.037404343 | +111.783269 |
+| 02 | +.017332897 | +50.725859 |
+| 03 | -.074271999 | -224.616478 |
+| 04 | -.049291034 | -148.649315 |
+| 05 | -.013167826 | -47.860198 |
+| 06 | -.013936030 | -36.332942 |
+| 07 | -.028638694 | -85.319155 |
+| 08 | +.013247591 | +39.484066 |
+
+C-H loses in **04/07**, respectively QoS **-.018989655 / -.026053564** and
+J **-58.571159 / -78.741937**. I-H's smallest J gain is **+6.577218** in07,
+largest **+333.793688** in03. This does not make C's increment useful merely
+because C's mean remains above H.
+
+Risk is not uniformly improved. Both I and C increase return-cost/step versus H
+in **03/04/06/07**. C increases it versus I in **01/02/03/04/05/08**; its mean
+increment is **+.000142345**, while I-H and C-H means are **-.001529066** and
+**-.001386721**. Their intervals all cross zero. I lowers minimum battery versus
+H in01/02/03/06/07 despite its favorable average, and creates reserve breaches in
+**06** (minimum **.098111190**, **.791667%** UAV-steps) and **07** (minimum
+**.099598816**, **.008333%**), where H had none. C versus I creates the adverse
+**05** tail: minimum **.097327669** versus **.114689842**, **1.229167%** reserve
+exposure versus zero, and a below-half-service gap of **187** versus **176**
+steps. C also acquires another >=60-step low-service spell in03. Worst observed
+minimum batteries are H **.091435980**, I **.098111190**, C **.097327669**.
+No zero event counts, mean improvement or eight-world panel establish safety,
+risk dominance or a reserve invariant.
+
+All zero-QoS gaps are the shared startup prefixes in03/05/06 (**13/68/78** steps);
+there is no later zero-QoS spell. Fixed-bin mean QoS preserves later service:
+
+| Native step bin | H | I | C |
+| --- | ---: | ---: | ---: |
+| 0-1000 | .791042055 | .818690938 | .814624041 |
+| 1000-2000 | .826998719 | .870725268 | .869096554 |
+| 2000-3000 | .690375635 | .755081163 | .719031491 |
+
+C-I J differences by those bins are **-4.066881, -2.428419, -36.102812**.
+I's package gain is not confined to initial deployment; neither these bins nor
+the initial/input-relative phase summaries isolate why it occurs.
+
+Charging and movement qualify the apparent recovery story. I and C charge
+before the first F entry in **7/8** and **5/8** worlds, H in none. Mean first
+input is H1572.625, I831.250, C997.500; mean waiting UAV-steps are
+H5264.250, I3053.375, C3848.750. Mean charging UAV-steps are H1363.250,
+I1680.375, C1781.875. Charging radio availability and native priority allocation
+were unchanged. C consumes **more than I in every world**, mean **+54.772033 Wh**, and the
+independent raw reading finds more travel and a lower time-averaged fleet-minimum
+battery in every world. More charging input has not supplied a C-I service gain.
+Mean input-minus-consumption stays negative: **H -976.338753, I -917.021857,
+C -934.028185 Wh**. H3000 completion is not indefinitely sustainable cycling.
+
+The model/choice trace is active, not an all-hold result: I/C record positive
+selected-versus-incumbent model gains in **284/400** and **269/400** clocks.
+Held-itinerary versus later replanning QoS discrepancies average **+.116990**
+and **+.134238**, with mean position discrepancies **732.7/872.5 m** and mean
+absolute battery discrepancies **.040865/.050453**. These deliberately compare
+different future action paths. They do not validate forecast accuracy, identify
+forecast error as C's causal failure, or justify the declined physical model.
+
+### Full cost
+
+The native accepted-to-exit interval was **2063.284066 s**; runner invocation
+elapsed **2016.511271 s (33.61 min)**. Summed worker wall was **3980.410978 s
+(66.34 min)**; summed worker CPU **4066.021775 s (67.77 min)**, parent CPU
+**.304824 s**. Two workers each used one numeric thread. Maximum measured worker
+RSS was **561,840 KiB**, parent peak **477,564 KiB**; neither is a simultaneous
+node memory peak. No worker resource row is missing.
+
+| Work | I | C | Total |
+| --- | ---: | ---: | ---: |
+| Score requests | 57,788 | 57,360 | 115,148 |
+| Actual model evaluations | 54,435 | 54,146 | 108,581 |
+| Native routing/service snapshots | 163,305 | 162,438 | 325,743 |
+| Station events | 1,072,661 | 1,046,972 | 2,119,633 |
+| Analytical phases | 1,295,643 | 1,256,947 | 2,552,590 |
+| Planner wall seconds | 947.868896 | 945.740576 | 1893.609472 |
+
+These remain inside the declared 117,200/351,600 plan/snapshot bounds; no
+primitive-step forecast was run. Planner wall is already included in worker wall,
+not extra additive runtime. Mean worker wall/world is **H85.519, I206.665,
+C205.367 s**. Native J does not price this computational increment. The 72k
+native evaluation steps, scorer snapshots, event work, artifact bytes and measured
+checks above are all real costs despite zero fits. Implementation, repeated
+development checks outside the listed durations, review, publication and readback
+add partly unmetered work; no end-to-end wall or simultaneous-memory claim is made.
+
+### Independent reading and DM disposition
+
+Registered `hmasd-research-critic` `/root/dm_energy_coordination/result_critic`
+reviewed in a separate context without DM/Root conversation inheritance. The
+assignment disclosed completion and interpretation boundaries; navigation exposed
+allocation summaries, so this was independent evidence-first review, not blinded
+review. It reconstructed the new result before reading prior explanations and
+Root's disposition, inspected all24 original NPZ files, and independently
+reproduced **120** J/QoS/energy/minimum-battery scalars exactly. It read the original
+supporting/adverse studies rather than treating adviser agreement as evidence.
+
+Its substantive recommendation is **revise**: retain I as a promising ordinary
+package, end investment in the unchanged sequential C recipe, and consider one
+fresh comparison against the already useful ordinary P (`five_ten` transit hold).
+It reports **no material dissent** relative to the frozen exploratory reading and
+absence of a selected follow-on. It explicitly opposes an expanded claim that
+sequential conditioning or recharge coordination has demonstrated useful benefit.
+
+I adopt that reading. The prediction that C's sequential conditioning improves
+complete native utility has weakened, not merely suffered a technical omission.
+The descriptive interval still permits a positive population increment; the
+observed losses and universally higher consumption nevertheless give no earned
+reason to invest in unchanged C, automatic parameter rescue, a larger physical
+model or a learning residual. The parent question is not refuted: both analytical
+packages have useful conditional H comparisons, and I's all-world gains provide
+a credible ordinary control opportunity on this panel.
+
+The identified structure is shared service/routing, worst-member return risk and
+station capacity. **Which coupling produced useful incremental coordination is
+still unresolved.** I already uses joint scoring and a joint veto. C-I measures a
+finite sequential versus simultaneous improvement procedure, not coordination
+versus no coordination. I-H also changes target choices, model/computation,
+execution and cadence (60 versus30). Ordinary flexible spatial deployment and
+guard-aware execution, with the host's own battery-priority allocator providing
+balancing, remains a strong simpler explanation; this is a hypothesis, not an
+established causal diagnosis. No representation requirement, learning advantage,
+learnability limit, accurate anticipation or real-world safety claim follows.
+
+This revises rather than erases the background. B07 showed recovery with major
+service-loss worlds; B09-B11 did not turn more charging continuity into complete
+usefulness. Availability B04/B05 retained ordinary finite-planning value and risk
+tails. Cooperative B02's learned package lost without diagnosing general planning
+failure; the declined transit-handoff design was never an empirical negative.
+B01 now adds a complete ordinary package opportunity but no demonstrated C-I
+increment. It does not reopen those old fits or require learning as a contribution.
+
+For Root's next allocation, the critic's strongest proposed comparison is frozen
+**I versus existing P**, eight fresh paired S2/H3000 worlds, **16 episodes / 48k
+steps / 0 fits**, retaining each complete program's actual cadence. It would ask
+whether I is worth reusing beyond another demonstrated ordinary option, not
+identify recharge causality. Positive service/J with acceptable observed risk
+and compute would retain I as the stronger conditional reference; P matching or
+winning would favor the simpler package; mixed/uncertain outcomes need not buy
+an extension. Historical workload references are I's **27.6 worker-minutes** here
+and about **28.8** for P on a different execution context, not a runtime promise.
+Integration, matched-node cost and prospective practical acceptance criteria would
+still need specification. **This is a recommendation, not a selected study or
+launch authority.** No new comparison, fit, horizon, panel expansion or model
+repair is active. B01 is fully read; retain the useful I/C/H reference code and
+negative comparator, with the wider question reserved for Root's next assignment.
+
+### Retirement and measured cleanup
+
+After local compact verification, full raw checks and checking the reviewer's
+consumers, the configured snapshot collector preview initially refused `/proc/660/cwd`
+inspection. The documented existing passwordless, read-only `--sudo-process-scan`
+resolved that concrete check. Preview then found the exact snapshot eligible;
+apply under the remote writer lock removed only
+`.git/hmasd-launch-sources/7ea7d7d869b94ac5aba9f7ff532c6590`, with terminal identities,
+durable source reachability and retained external output verified. Allocated
+snapshot bytes fell from **799,256,576 to0**; absence was checked.
+
+Removed all three local disposable files (`verify_collected_b01.py`,
+`remote-operative-row.patch`, `b01-wait-request.json`) and their empty owned temp
+directory, **20,480 to0 bytes**, plus the remote applied patch and its empty
+owned temp directory, **8,192 to0 bytes**. The local empty stdout/stderr collection
+copies were removed too (zero allocated file bytes); original empty logs remain
+with the run. This closure reclaimed **799,285,248 allocated bytes**; including
+the already recorded preparation bytecode cleanup, B01 reclaimed **799,539,200
+bytes**. No cleanup blocker or redundant snapshot remains for this operation.
+Required unique raw evidence, compact records, native claim and published source
+identity remain; no backup chain or whole-tree retention was created.

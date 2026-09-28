@@ -1,0 +1,345 @@
+{
+  "H": {
+    "controller_information": "central-positions",
+    "cruise_mps": 30.0,
+    "dedup_tolerance_m": 0.5,
+    "height_m": 100.0,
+    "horizontal_speed_mps": 30.0,
+    "information": "central",
+    "kmeans_iterations": 30,
+    "n_relay": 2,
+    "n_service": 6,
+    "n_uavs": 8,
+    "replan_period": 30,
+    "search_radius_m": 1000.0,
+    "switch_margin_m": 300.0,
+    "time_step_s": 1.0,
+    "unobserved": "station-ring",
+    "vertical_cap_mps": 5.0,
+    "vertical_speed_mps": 5.0
+  },
+  "analytical_cycle_rule": "one nominal return visit, fluid lowest-Wh station input, no second forecast recharge",
+  "analytical_forecast_seconds": 600,
+  "analytical_information": "current central user/BS xy at planning clocks plus legal energy/geometry and own observation history; no live model copy",
+  "analytical_replan_period": 60,
+  "analytical_sample_rule": "three equal-interval right endpoints, truncated to remaining horizon",
+  "analytical_score": "sum(interval_seconds * (native_snapshot_qos - 2*capped_return_cost)) - 5*new_cutoff - 10*new_depletion",
+  "arms": [
+    "H",
+    "I",
+    "C"
+  ],
+  "batch": "b01_analytical_coordination_a01",
+  "direction": "uav_energy_coordination",
+  "effective_raw": {
+    "battery_capacity_wh": 160.0,
+    "charging_station_capacity": [
+      1.0,
+      1.0
+    ],
+    "energy_stage": "S2",
+    "failure_enabled": false,
+    "max_steps": 3000,
+    "n_charging_stations": 2,
+    "n_ground_bs": 1,
+    "n_uavs": 8,
+    "n_users": 30,
+    "return_reserve_ratio": 0.1,
+    "routing_protocol": "widest_path",
+    "service_cutoff_threshold": 0.02
+  },
+  "fits": 0,
+  "forecast_reading": "held itinerary versus realized closed-loop replanning discrepancy",
+  "horizon": 3000,
+  "jobs": [
+    {
+      "arm": "H",
+      "job_key": "H/31092801",
+      "seed": 31092801
+    },
+    {
+      "arm": "I",
+      "job_key": "I/31092801",
+      "seed": 31092801
+    },
+    {
+      "arm": "C",
+      "job_key": "C/31092801",
+      "seed": 31092801
+    },
+    {
+      "arm": "H",
+      "job_key": "H/31092802",
+      "seed": 31092802
+    },
+    {
+      "arm": "I",
+      "job_key": "I/31092802",
+      "seed": 31092802
+    },
+    {
+      "arm": "C",
+      "job_key": "C/31092802",
+      "seed": 31092802
+    },
+    {
+      "arm": "H",
+      "job_key": "H/31092803",
+      "seed": 31092803
+    },
+    {
+      "arm": "I",
+      "job_key": "I/31092803",
+      "seed": 31092803
+    },
+    {
+      "arm": "C",
+      "job_key": "C/31092803",
+      "seed": 31092803
+    },
+    {
+      "arm": "H",
+      "job_key": "H/31092804",
+      "seed": 31092804
+    },
+    {
+      "arm": "I",
+      "job_key": "I/31092804",
+      "seed": 31092804
+    },
+    {
+      "arm": "C",
+      "job_key": "C/31092804",
+      "seed": 31092804
+    },
+    {
+      "arm": "H",
+      "job_key": "H/31092805",
+      "seed": 31092805
+    },
+    {
+      "arm": "I",
+      "job_key": "I/31092805",
+      "seed": 31092805
+    },
+    {
+      "arm": "C",
+      "job_key": "C/31092805",
+      "seed": 31092805
+    },
+    {
+      "arm": "H",
+      "job_key": "H/31092806",
+      "seed": 31092806
+    },
+    {
+      "arm": "I",
+      "job_key": "I/31092806",
+      "seed": 31092806
+    },
+    {
+      "arm": "C",
+      "job_key": "C/31092806",
+      "seed": 31092806
+    },
+    {
+      "arm": "H",
+      "job_key": "H/31092807",
+      "seed": 31092807
+    },
+    {
+      "arm": "I",
+      "job_key": "I/31092807",
+      "seed": 31092807
+    },
+    {
+      "arm": "C",
+      "job_key": "C/31092807",
+      "seed": 31092807
+    },
+    {
+      "arm": "H",
+      "job_key": "H/31092808",
+      "seed": 31092808
+    },
+    {
+      "arm": "I",
+      "job_key": "I/31092808",
+      "seed": 31092808
+    },
+    {
+      "arm": "C",
+      "job_key": "C/31092808",
+      "seed": 31092808
+    }
+  ],
+  "launch_sha": "e663b53c7ea3f52983365ed9c3ce044bc4ccf699",
+  "max_episodes": 24,
+  "max_plan_requests": 117200,
+  "max_service_snapshots": 351600,
+  "max_transitions": 72000,
+  "observation_layout": {
+    "fields": {
+      "bs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hmax",
+        "visibility_flag"
+      ],
+      "energy_stations": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "dist3d/map_diag3d",
+        "capacity_ratio",
+        "available_ratio",
+        "queue_len/n_uavs",
+        "valid"
+      ],
+      "energy_uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "battery_ratio",
+        "charging",
+        "available",
+        "returning(limp_home or dock_request)",
+        "load=connections/n_users",
+        "dock_request",
+        "target_station/(n_stations-1) or -1",
+        "charging_wait_steps/max_steps",
+        "return_threshold_ratio",
+        "return_energy_margin"
+      ],
+      "nearest_uav": [
+        "dist/area",
+        "rel_x/area",
+        "rel_y/area"
+      ],
+      "overloaded": [
+        "rel_x/area",
+        "rel_y/area",
+        "load/max_connections"
+      ],
+      "own": [
+        "x/area",
+        "y/area",
+        "(z-hmin)/hspan"
+      ],
+      "self_state": [
+        "connected_users/max_connections",
+        "has_backhaul",
+        "hops/max_hops",
+        "nearest_bs_rel_x/area",
+        "nearest_bs_rel_y/area"
+      ],
+      "step": [
+        "current_step/max_steps"
+      ],
+      "uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "(rel_z-hmin)/hspan",
+        "clip((sinr_db+10)/50,0,1)"
+      ],
+      "users": [
+        "rel_x/area",
+        "rel_y/area",
+        "clip((sinr_db+10)/50,0,1)",
+        "connected_to_self",
+        "serviced_by_any",
+        "serving_set_len/serving_set_size"
+      ]
+    },
+    "offsets": {
+      "bs": [
+        223,
+        235
+      ],
+      "dim": [
+        0,
+        365
+      ],
+      "energy_stations": [
+        349,
+        365
+      ],
+      "energy_uavs": [
+        245,
+        349
+      ],
+      "nearest_uav": [
+        3,
+        6
+      ],
+      "overloaded": [
+        235,
+        244
+      ],
+      "own": [
+        0,
+        3
+      ],
+      "self_state": [
+        6,
+        11
+      ],
+      "step": [
+        244,
+        245
+      ],
+      "uavs": [
+        191,
+        223
+      ],
+      "users": [
+        11,
+        191
+      ]
+    },
+    "parameters": {
+      "area_size_m": 8000.0,
+      "bs_fields": 4,
+      "bs_slots": 3,
+      "energy_station_fields": 8,
+      "energy_station_records": 2,
+      "energy_uav_fields": 13,
+      "energy_uav_records": 8,
+      "height_max_m": 200.0,
+      "height_min_m": 50.0,
+      "max_connections": 25,
+      "max_hops": 5,
+      "max_steps": 3000,
+      "n_uavs": 8,
+      "n_users": 30,
+      "observation_radius_m": 1500.0,
+      "overloaded_fields": 3,
+      "overloaded_slots": 3,
+      "self_state_fields": 5,
+      "serving_set_size": 3,
+      "uav_fields": 4,
+      "uav_slots": 8,
+      "user_fields": 6,
+      "user_slots": 30
+    }
+  },
+  "optimizer_updates": 0,
+  "pairing": "same seed; initial state, full user path and native RNG stream hashed",
+  "seeds": [
+    31092801,
+    31092802,
+    31092803,
+    31092804,
+    31092805,
+    31092806,
+    31092807,
+    31092808
+  ],
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "threads_per_worker": 1,
+  "trace_timing": "Row t of own_xyz, return_margin, nearest_station, nearest_station_distance_m, station_occupancy, station_queue and target_xy is decoded from the legal observation the controller and shield act on at step t (decision time, same as mode/entered/exited). charging, waiting_steps and battery row t are decoded from the post-step observation (t+1), so station_occupancy[t].sum() pairs with charging[t-1].sum(). guard_checked/guard_blocked row t count the guard actions of step t.",
+  "workers": 2
+}

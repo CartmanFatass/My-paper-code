@@ -1,0 +1,3996 @@
+{
+  "actual_transitions": 72000,
+  "cancelled_jobs": [],
+  "completed_jobs": 24,
+  "completed_transitions": 72000,
+  "contrasts": {
+    "C-H": {
+      "endpoints": {
+        "actual_length": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "battery_min_ratio_per_step": {
+          "max": 0.025082841526852973,
+          "mean": 0.0016619451323152123,
+          "min": -0.014657964967141557,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -0.009638700511613607,
+            0.012962590776244032
+          ],
+          "zero_worlds": 0
+        },
+        "battery_min_ratio_sum": {
+          "max": 75.24852458055886,
+          "mean": 4.9858353969456175,
+          "min": -43.97389490142473,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -28.91610153484084,
+            38.887772328732076
+          ],
+          "zero_worlds": 0
+        },
+        "below_fixed_reserve_uav_step_fraction": {
+          "max": 0.0,
+          "mean": -0.009505208333333334,
+          "min": -0.03891666666666667,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            -0.02422481008612554,
+            0.005214393419458872
+          ],
+          "zero_worlds": 6
+        },
+        "below_half_qos_spells_ge60": {
+          "max": 1.0,
+          "mean": 0.125,
+          "min": -1.0,
+          "n": 8,
+          "negative_worlds": 1,
+          "positive_worlds": 2,
+          "t95_descriptive": [
+            -0.41078068161361525,
+            0.6607806816136153
+          ],
+          "zero_worlds": 5
+        },
+        "charging_uav_count_per_step": {
+          "max": 0.25500000000000006,
+          "mean": 0.13954166666666667,
+          "min": 0.021333333333333315,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            0.07259385101915504,
+            0.2064894823141783
+          ],
+          "zero_worlds": 0
+        },
+        "charging_uav_count_sum": {
+          "max": 765.0,
+          "mean": 418.625,
+          "min": 64.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            217.78155305746515,
+            619.4684469425349
+          ],
+          "zero_worlds": 0
+        },
+        "cumulative_qos": {
+          "max": 207.41430757785338,
+          "mean": 94.33567672331512,
+          "min": -78.16069109374666,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            7.151888112532816,
+            181.51946533409742
+          ],
+          "zero_worlds": 0
+        },
+        "cutoff_event_count_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "cutoff_event_count_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "cutoff_event_penalty_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "cutoff_event_penalty_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "delivered_end_to_end_throughput_mbps_per_step": {
+          "max": 2.074143075778533,
+          "mean": 0.9433567672331495,
+          "min": -0.7816069109374659,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            0.0715188811253279,
+            1.815194653340971
+          ],
+          "zero_worlds": 0
+        },
+        "delivered_end_to_end_throughput_mbps_sum": {
+          "max": 6222.429227335604,
+          "mean": 2830.070301699451,
+          "min": -2344.820732812397,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            214.556643375985,
+            5445.583960022917
+          ],
+          "zero_worlds": 0
+        },
+        "delivered_megabits": {
+          "max": 6222.429227335604,
+          "mean": 2830.070301699451,
+          "min": -2344.820732812397,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            214.556643375985,
+            5445.583960022917
+          ],
+          "zero_worlds": 0
+        },
+        "depletion_event_count_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "depletion_event_count_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "depletion_event_penalty_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "depletion_event_penalty_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "energy_consumed_wh": {
+          "max": 121.34480646871339,
+          "mean": 66.43724405295683,
+          "min": -15.106383603377026,
+          "n": 8,
+          "negative_worlds": 1,
+          "positive_worlds": 7,
+          "t95_descriptive": [
+            31.736382985977556,
+            101.1381051199361
+          ],
+          "zero_worlds": 0
+        },
+        "energy_input_wh": {
+          "max": 212.4999999999999,
+          "mean": 108.74781258010375,
+          "min": 17.77777777777777,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            54.68769835361204,
+            162.80792680659547
+          ],
+          "zero_worlds": 0
+        },
+        "episode_minimum_battery_ratio": {
+          "max": 0.010031949277667374,
+          "mean": 0.0046868128643004735,
+          "min": -0.0008145122915085984,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            0.0013799928407832811,
+            0.007993632887817665
+          ],
+          "zero_worlds": 0
+        },
+        "feedback_entry_count": {
+          "max": 23.0,
+          "mean": -3.625,
+          "min": -22.0,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -15.277459999838474,
+            8.027459999838474
+          ],
+          "zero_worlds": 0
+        },
+        "feedback_exit_count": {
+          "max": 24.0,
+          "mean": -2.125,
+          "min": -21.0,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -14.600954207044877,
+            10.350954207044877
+          ],
+          "zero_worlds": 0
+        },
+        "feedback_mode_uav_steps": {
+          "max": -525.0,
+          "mean": -2288.875,
+          "min": -5011.0,
+          "n": 8,
+          "negative_worlds": 8,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            -3458.94145534592,
+            -1118.8085446540802
+          ],
+          "zero_worlds": 0
+        },
+        "graph_potential_delta_per_step": {
+          "max": 3.2132969988302174e-07,
+          "mean": -3.7628338863647266e-06,
+          "min": -3.0538355948819124e-05,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -1.2808160704126708e-05,
+            5.282492931397255e-06
+          ],
+          "zero_worlds": 0
+        },
+        "graph_potential_delta_sum": {
+          "max": 0.0009639890996488987,
+          "mean": -0.01128850165909423,
+          "min": -0.09161506784645823,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -0.03842448211238045,
+            0.015847478794191985
+          ],
+          "zero_worlds": 0
+        },
+        "guard_blocked_actions": {
+          "max": 1000.0,
+          "mean": 344.375,
+          "min": -142.0,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -23.146691702539783,
+            711.8966917025398
+          ],
+          "zero_worlds": 0
+        },
+        "guard_checked_actions": {
+          "max": 3069.0,
+          "mean": 1120.0,
+          "min": 253.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            351.4717833901069,
+            1888.5282166098932
+          ],
+          "zero_worlds": 0
+        },
+        "max_below_half_qos_gap": {
+          "max": 11.0,
+          "mean": 0.25,
+          "min": -8.0,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 2,
+          "t95_descriptive": [
+            -4.076819336797379,
+            4.576819336797379
+          ],
+          "zero_worlds": 3
+        },
+        "max_zero_qos_gap": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "min_decoded_battery": {
+          "max": 0.010031946003437042,
+          "mean": 0.004686813801527023,
+          "min": -0.0008145123720169067,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            0.0013799951959952077,
+            0.007993632407058839
+          ],
+          "zero_worlds": 0
+        },
+        "native_J_per_step": {
+          "max": 0.08184722896991203,
+          "mean": 0.03421490524637823,
+          "min": -0.026247312208101392,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            0.0026113751760663897,
+            0.06581843531669007
+          ],
+          "zero_worlds": 0
+        },
+        "qos_per_step": {
+          "max": 0.0691381025259512,
+          "mean": 0.03144522557443839,
+          "min": -0.02605356369791556,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            0.002383962704177619,
+            0.060506488444699164
+          ],
+          "zero_worlds": 0
+        },
+        "qos_satisfaction_ratio_per_step": {
+          "max": 0.0691381025259512,
+          "mean": 0.03144522557443839,
+          "min": -0.02605356369791556,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            0.002383962704177619,
+            0.060506488444699164
+          ],
+          "zero_worlds": 0
+        },
+        "qos_satisfaction_ratio_sum": {
+          "max": 207.41430757785338,
+          "mean": 94.33567672331512,
+          "min": -78.16069109374666,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            7.151888112532816,
+            181.51946533409742
+          ],
+          "zero_worlds": 0
+        },
+        "raw_native_J": {
+          "max": 245.5416869097362,
+          "mean": 102.64471573913471,
+          "min": -78.74193662430389,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            7.834125528199266,
+            197.45530595007017
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_per_step": {
+          "max": 0.0004527444351218825,
+          "mean": -0.0013867212529131074,
+          "min": -0.006354522345003588,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -0.003639939818256152,
+            0.0008664973124299375
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_raw_per_step": {
+          "max": 0.0004527444351218825,
+          "mean": -0.0013867212529131074,
+          "min": -0.006354522345003588,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -0.003639939818256152,
+            0.0008664973124299375
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_raw_sum": {
+          "max": 1.3582333053656475,
+          "mean": -4.160163758739322,
+          "min": -19.063567035010763,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -10.919819454768454,
+            2.5994919372898115
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_sum": {
+          "max": 1.3582333053656475,
+          "mean": -4.160163758739322,
+          "min": -19.063567035010763,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -10.919819454768454,
+            2.5994919372898115
+          ],
+          "zero_worlds": 0
+        },
+        "return_penalty_coefficient_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "return_penalty_coefficient_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "scenario7_reward_per_step": {
+          "max": 0.08184722896991203,
+          "mean": 0.0342149052463782,
+          "min": -0.026247312208101503,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            0.002611375176066348,
+            0.06581843531669004
+          ],
+          "zero_worlds": 0
+        },
+        "scenario7_reward_sum": {
+          "max": 245.5416869097362,
+          "mean": 102.6447157391346,
+          "min": -78.74193662430434,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            7.834125528199095,
+            197.4553059500701
+          ],
+          "zero_worlds": 0
+        },
+        "service_cutoff_uav_step_fraction": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "step_charger_input_wh_per_step": {
+          "max": 0.07083333333333328,
+          "mean": 0.0362492708600346,
+          "min": 0.005925925925925918,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            0.018229232784537367,
+            0.054269308935531835
+          ],
+          "zero_worlds": 0
+        },
+        "step_charger_input_wh_sum": {
+          "max": 212.49999999999983,
+          "mean": 108.74781258010381,
+          "min": 17.77777777777777,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            54.687698353612106,
+            162.8079268065955
+          ],
+          "zero_worlds": 0
+        },
+        "zero_qos_spells_ge60": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        }
+      },
+      "loss_worlds": {
+        "battery_min_ratio_per_step": [
+          31092803,
+          31092804,
+          31092805,
+          31092807
+        ],
+        "battery_min_ratio_sum": [
+          31092803,
+          31092804,
+          31092805,
+          31092807
+        ],
+        "below_fixed_reserve_uav_step_fraction": [],
+        "below_half_qos_spells_ge60": [
+          31092803,
+          31092804
+        ],
+        "cumulative_qos": [
+          31092804,
+          31092807
+        ],
+        "cutoff_event_count_per_step": [],
+        "cutoff_event_count_sum": [],
+        "cutoff_event_penalty_per_step": [],
+        "cutoff_event_penalty_sum": [],
+        "delivered_end_to_end_throughput_mbps_per_step": [
+          31092804,
+          31092807
+        ],
+        "delivered_end_to_end_throughput_mbps_sum": [
+          31092804,
+          31092807
+        ],
+        "delivered_megabits": [
+          31092804,
+          31092807
+        ],
+        "depletion_event_count_per_step": [],
+        "depletion_event_count_sum": [],
+        "depletion_event_penalty_per_step": [],
+        "depletion_event_penalty_sum": [],
+        "episode_minimum_battery_ratio": [
+          31092803,
+          31092806
+        ],
+        "guard_blocked_actions": [
+          31092802,
+          31092803,
+          31092806,
+          31092807,
+          31092808
+        ],
+        "max_below_half_qos_gap": [
+          31092804,
+          31092805
+        ],
+        "max_zero_qos_gap": [],
+        "min_decoded_battery": [
+          31092803,
+          31092806
+        ],
+        "native_J_per_step": [
+          31092804,
+          31092807
+        ],
+        "qos_per_step": [
+          31092804,
+          31092807
+        ],
+        "qos_satisfaction_ratio_per_step": [
+          31092804,
+          31092807
+        ],
+        "qos_satisfaction_ratio_sum": [
+          31092804,
+          31092807
+        ],
+        "raw_native_J": [
+          31092804,
+          31092807
+        ],
+        "return_constraint_cost_per_step": [
+          31092803,
+          31092804,
+          31092806,
+          31092807
+        ],
+        "return_constraint_cost_raw_per_step": [
+          31092803,
+          31092804,
+          31092806,
+          31092807
+        ],
+        "return_constraint_cost_raw_sum": [
+          31092803,
+          31092804,
+          31092806,
+          31092807
+        ],
+        "return_constraint_cost_sum": [
+          31092803,
+          31092804,
+          31092806,
+          31092807
+        ],
+        "scenario7_reward_per_step": [
+          31092804,
+          31092807
+        ],
+        "scenario7_reward_sum": [
+          31092804,
+          31092807
+        ],
+        "service_cutoff_uav_step_fraction": [],
+        "zero_qos_spells_ge60": []
+      },
+      "observed_worlds": 8,
+      "status": "paired_primary"
+    },
+    "C-I": {
+      "endpoints": {
+        "actual_length": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "battery_min_ratio_per_step": {
+          "max": -0.003069174967799404,
+          "mean": -0.01759905770034153,
+          "min": -0.04998794529787087,
+          "n": 8,
+          "negative_worlds": 8,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            -0.03140690387460702,
+            -0.0037912115260760413
+          ],
+          "zero_worlds": 0
+        },
+        "battery_min_ratio_sum": {
+          "max": -9.207524903398166,
+          "mean": -52.79717310102458,
+          "min": -149.96383589361255,
+          "n": 8,
+          "negative_worlds": 8,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            -94.22071162382103,
+            -11.373634578228135
+          ],
+          "zero_worlds": 0
+        },
+        "below_fixed_reserve_uav_step_fraction": {
+          "max": 0.012291666666666666,
+          "mean": 0.0005364583333333331,
+          "min": -0.007916666666666667,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 1,
+          "t95_descriptive": [
+            -0.00405854312835182,
+            0.0051314597950184865
+          ],
+          "zero_worlds": 5
+        },
+        "below_half_qos_spells_ge60": {
+          "max": 1.0,
+          "mean": 0.125,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 1,
+          "t95_descriptive": [
+            -0.17057803144909806,
+            0.42057803144909806
+          ],
+          "zero_worlds": 7
+        },
+        "charging_uav_count_per_step": {
+          "max": 0.1846666666666667,
+          "mean": 0.03383333333333334,
+          "min": -0.16866666666666663,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -0.0611013440486341,
+            0.12876801071530078
+          ],
+          "zero_worlds": 0
+        },
+        "charging_uav_count_sum": {
+          "max": 554.0,
+          "mean": 101.5,
+          "min": -506.0,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -183.30403214590234,
+            386.30403214590234
+          ],
+          "zero_worlds": 0
+        },
+        "cumulative_qos": {
+          "max": 112.21303000397256,
+          "mean": -41.74528250938178,
+          "min": -222.8159983864075,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -133.9446243249585,
+            50.454059306194935
+          ],
+          "zero_worlds": 0
+        },
+        "cutoff_event_count_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "cutoff_event_count_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "cutoff_event_penalty_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "cutoff_event_penalty_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "delivered_end_to_end_throughput_mbps_per_step": {
+          "max": 1.122130300039725,
+          "mean": -0.417452825093819,
+          "min": -2.2281599838640815,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -1.3394462432495877,
+            0.5045405930619498
+          ],
+          "zero_worlds": 0
+        },
+        "delivered_end_to_end_throughput_mbps_sum": {
+          "max": 3366.3909001191787,
+          "mean": -1252.3584752814568,
+          "min": -6684.47995159225,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -4018.3387297487625,
+            1513.621779185849
+          ],
+          "zero_worlds": 0
+        },
+        "delivered_megabits": {
+          "max": 3366.3909001191787,
+          "mean": -1252.3584752814568,
+          "min": -6684.47995159225,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -4018.3387297487625,
+            1513.621779185849
+          ],
+          "zero_worlds": 0
+        },
+        "depletion_event_count_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "depletion_event_count_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "depletion_event_penalty_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "depletion_event_penalty_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "energy_consumed_wh": {
+          "max": 101.71715579999955,
+          "mean": 54.772032508380136,
+          "min": 4.806945900946175,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            28.168245758209384,
+            81.37581925855089
+          ],
+          "zero_worlds": 0
+        },
+        "energy_input_wh": {
+          "max": 153.88888888888886,
+          "mean": 37.76570529028493,
+          "min": -91.7206106071028,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -30.86411360641202,
+            106.39552418698187
+          ],
+          "zero_worlds": 0
+        },
+        "episode_minimum_battery_ratio": {
+          "max": 0.014382359143633824,
+          "mean": 0.0017710643683446926,
+          "min": -0.017362172999767417,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            -0.0056815321415267135,
+            0.009223660878216099
+          ],
+          "zero_worlds": 0
+        },
+        "feedback_entry_count": {
+          "max": 44.0,
+          "mean": 10.625,
+          "min": -3.0,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -3.406620051834132,
+            24.656620051834132
+          ],
+          "zero_worlds": 0
+        },
+        "feedback_exit_count": {
+          "max": 38.0,
+          "mean": 9.75,
+          "min": -7.0,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -3.2304580103921374,
+            22.730458010392137
+          ],
+          "zero_worlds": 0
+        },
+        "feedback_mode_uav_steps": {
+          "max": 4716.0,
+          "mean": 1431.125,
+          "min": -3227.0,
+          "n": 8,
+          "negative_worlds": 1,
+          "positive_worlds": 7,
+          "t95_descriptive": [
+            -638.3282543941232,
+            3500.578254394123
+          ],
+          "zero_worlds": 0
+        },
+        "graph_potential_delta_per_step": {
+          "max": 3.2622969766554766e-06,
+          "mean": 4.129707074104847e-07,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -5.495729310087274e-07,
+            1.3755143458296968e-06
+          ],
+          "zero_worlds": 4
+        },
+        "graph_potential_delta_sum": {
+          "max": 0.009786890929962766,
+          "mean": 0.0012389121222313726,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -0.0016487187930250597,
+            0.004126543037487804
+          ],
+          "zero_worlds": 4
+        },
+        "guard_blocked_actions": {
+          "max": 130.0,
+          "mean": -701.625,
+          "min": -1821.0,
+          "n": 8,
+          "negative_worlds": 7,
+          "positive_worlds": 1,
+          "t95_descriptive": [
+            -1238.4361732563757,
+            -164.81382674362442
+          ],
+          "zero_worlds": 0
+        },
+        "guard_checked_actions": {
+          "max": -61.0,
+          "mean": -1299.5,
+          "min": -3137.0,
+          "n": 8,
+          "negative_worlds": 8,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            -2220.872542001337,
+            -378.127457998663
+          ],
+          "zero_worlds": 0
+        },
+        "max_below_half_qos_gap": {
+          "max": 11.0,
+          "mean": 1.25,
+          "min": -1.0,
+          "n": 8,
+          "negative_worlds": 1,
+          "positive_worlds": 1,
+          "t95_descriptive": [
+            -2.05655069442428,
+            4.5565506944242795
+          ],
+          "zero_worlds": 6
+        },
+        "max_zero_qos_gap": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "min_decoded_battery": {
+          "max": 0.01438235491514206,
+          "mean": 0.001771063543856144,
+          "min": -0.017362169921398163,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            -0.005681531079210928,
+            0.009223658166923216
+          ],
+          "zero_worlds": 0
+        },
+        "native_J_per_step": {
+          "max": 0.03726108951858309,
+          "mean": -0.014199370611365891,
+          "min": -0.07487215935915115,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -0.0450069060334565,
+            0.016608164810724718
+          ],
+          "zero_worlds": 0
+        },
+        "qos_per_step": {
+          "max": 0.037404343334657586,
+          "mean": -0.013915094169793904,
+          "min": -0.07427199946213581,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -0.04464820810831948,
+            0.016818019768731672
+          ],
+          "zero_worlds": 0
+        },
+        "qos_satisfaction_ratio_per_step": {
+          "max": 0.037404343334657586,
+          "mean": -0.013915094169793904,
+          "min": -0.07427199946213581,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -0.04464820810831948,
+            0.016818019768731672
+          ],
+          "zero_worlds": 0
+        },
+        "qos_satisfaction_ratio_sum": {
+          "max": 112.21303000397256,
+          "mean": -41.74528250938178,
+          "min": -222.8159983864075,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -133.9446243249585,
+            50.454059306194935
+          ],
+          "zero_worlds": 0
+        },
+        "raw_native_J": {
+          "max": 111.78326855574915,
+          "mean": -42.59811183409769,
+          "min": -224.6164780774534,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -135.0207181003695,
+            49.82449443217409
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_per_step": {
+          "max": 0.0013927867203575063,
+          "mean": 0.00014234470613967677,
+          "min": -0.0009125245272335863,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            -0.0003844941512607524,
+            0.0006691835635401059
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_raw_per_step": {
+          "max": 0.0013927867203575063,
+          "mean": 0.00014234470613967677,
+          "min": -0.0009125245272335863,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            -0.0003844941512607524,
+            0.0006691835635401059
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_raw_sum": {
+          "max": 4.1783601610725185,
+          "mean": 0.42703411841903016,
+          "min": -2.737573581700759,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            -1.1534824537822574,
+            2.0075506906203175
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_sum": {
+          "max": 4.1783601610725185,
+          "mean": 0.42703411841903016,
+          "min": -2.737573581700759,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            -1.1534824537822574,
+            2.0075506906203175
+          ],
+          "zero_worlds": 0
+        },
+        "return_penalty_coefficient_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "return_penalty_coefficient_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "scenario7_reward_per_step": {
+          "max": 0.03726108951858309,
+          "mean": -0.014199370611365891,
+          "min": -0.07487215935915115,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -0.0450069060334565,
+            0.016608164810724718
+          ],
+          "zero_worlds": 0
+        },
+        "scenario7_reward_sum": {
+          "max": 111.78326855574915,
+          "mean": -42.59811183409769,
+          "min": -224.6164780774534,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -135.0207181003695,
+            49.82449443217409
+          ],
+          "zero_worlds": 0
+        },
+        "service_cutoff_uav_step_fraction": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "step_charger_input_wh_per_step": {
+          "max": 0.051296296296296284,
+          "mean": 0.012588568430094973,
+          "min": -0.030573536869034246,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -0.010288037868804003,
+            0.03546517472899395
+          ],
+          "zero_worlds": 0
+        },
+        "step_charger_input_wh_sum": {
+          "max": 153.8888888888888,
+          "mean": 37.76570529028493,
+          "min": -91.72061060710269,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -30.86411360641199,
+            106.39552418698185
+          ],
+          "zero_worlds": 0
+        },
+        "zero_qos_spells_ge60": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        }
+      },
+      "loss_worlds": {
+        "battery_min_ratio_per_step": [
+          31092801,
+          31092802,
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807,
+          31092808
+        ],
+        "battery_min_ratio_sum": [
+          31092801,
+          31092802,
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807,
+          31092808
+        ],
+        "below_fixed_reserve_uav_step_fraction": [
+          31092805
+        ],
+        "below_half_qos_spells_ge60": [
+          31092803
+        ],
+        "cumulative_qos": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "cutoff_event_count_per_step": [],
+        "cutoff_event_count_sum": [],
+        "cutoff_event_penalty_per_step": [],
+        "cutoff_event_penalty_sum": [],
+        "delivered_end_to_end_throughput_mbps_per_step": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "delivered_end_to_end_throughput_mbps_sum": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "delivered_megabits": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "depletion_event_count_per_step": [],
+        "depletion_event_count_sum": [],
+        "depletion_event_penalty_per_step": [],
+        "depletion_event_penalty_sum": [],
+        "episode_minimum_battery_ratio": [
+          31092805,
+          31092808
+        ],
+        "guard_blocked_actions": [
+          31092803
+        ],
+        "max_below_half_qos_gap": [
+          31092805
+        ],
+        "max_zero_qos_gap": [],
+        "min_decoded_battery": [
+          31092805,
+          31092808
+        ],
+        "native_J_per_step": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "qos_per_step": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "qos_satisfaction_ratio_per_step": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "qos_satisfaction_ratio_sum": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "raw_native_J": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "return_constraint_cost_per_step": [
+          31092801,
+          31092802,
+          31092803,
+          31092804,
+          31092805,
+          31092808
+        ],
+        "return_constraint_cost_raw_per_step": [
+          31092801,
+          31092802,
+          31092803,
+          31092804,
+          31092805,
+          31092808
+        ],
+        "return_constraint_cost_raw_sum": [
+          31092801,
+          31092802,
+          31092803,
+          31092804,
+          31092805,
+          31092808
+        ],
+        "return_constraint_cost_sum": [
+          31092801,
+          31092802,
+          31092803,
+          31092804,
+          31092805,
+          31092808
+        ],
+        "scenario7_reward_per_step": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "scenario7_reward_sum": [
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807
+        ],
+        "service_cutoff_uav_step_fraction": [],
+        "zero_qos_spells_ge60": []
+      },
+      "observed_worlds": 8,
+      "status": "paired_primary"
+    },
+    "I-H": {
+      "endpoints": {
+        "actual_length": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "battery_min_ratio_per_step": {
+          "max": 0.035329980330729316,
+          "mean": 0.01926100283265674,
+          "min": -0.0007149334422500431,
+          "n": 8,
+          "negative_worlds": 1,
+          "positive_worlds": 7,
+          "t95_descriptive": [
+            0.007630487045695883,
+            0.0308915186196176
+          ],
+          "zero_worlds": 0
+        },
+        "battery_min_ratio_sum": {
+          "max": 105.98994099218783,
+          "mean": 57.7830084979702,
+          "min": -2.144800326750101,
+          "n": 8,
+          "negative_worlds": 1,
+          "positive_worlds": 7,
+          "t95_descriptive": [
+            22.891461137087624,
+            92.67455585885278
+          ],
+          "zero_worlds": 0
+        },
+        "below_fixed_reserve_uav_step_fraction": {
+          "max": 0.007916666666666667,
+          "mean": -0.010041666666666667,
+          "min": -0.051208333333333335,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 2,
+          "t95_descriptive": [
+            -0.028073820477014105,
+            0.00799048714368077
+          ],
+          "zero_worlds": 4
+        },
+        "below_half_qos_spells_ge60": {
+          "max": 1.0,
+          "mean": 0.0,
+          "min": -1.0,
+          "n": 8,
+          "negative_worlds": 1,
+          "positive_worlds": 1,
+          "t95_descriptive": [
+            -0.4468719795590525,
+            0.4468719795590525
+          ],
+          "zero_worlds": 6
+        },
+        "charging_uav_count_per_step": {
+          "max": 0.3613333333333333,
+          "mean": 0.10570833333333332,
+          "min": -0.02400000000000002,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            -0.010906079206890087,
+            0.22232274587355672
+          ],
+          "zero_worlds": 0
+        },
+        "charging_uav_count_sum": {
+          "max": 1084.0,
+          "mean": 317.125,
+          "min": -72.0,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 6,
+          "t95_descriptive": [
+            -32.718237620670266,
+            666.9682376206703
+          ],
+          "zero_worlds": 0
+        },
+        "cumulative_qos": {
+          "max": 334.70958029135727,
+          "mean": 136.0809592326969,
+          "min": 7.755391819499891,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            45.82835594707622,
+            226.3335625183176
+          ],
+          "zero_worlds": 0
+        },
+        "cutoff_event_count_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "cutoff_event_count_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "cutoff_event_penalty_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "cutoff_event_penalty_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "delivered_end_to_end_throughput_mbps_per_step": {
+          "max": 3.347095802913575,
+          "mean": 1.3608095923269685,
+          "min": 0.0775539181950009,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            0.4582835594707607,
+            2.2633356251831764
+          ],
+          "zero_worlds": 0
+        },
+        "delivered_end_to_end_throughput_mbps_sum": {
+          "max": 10041.287408740733,
+          "mean": 4082.428776980908,
+          "min": 232.6617545850022,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            1374.8506784122837,
+            6790.006875549532
+          ],
+          "zero_worlds": 0
+        },
+        "delivered_megabits": {
+          "max": 10041.287408740733,
+          "mean": 4082.428776980908,
+          "min": 232.6617545850022,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            1374.8506784122837,
+            6790.006875549532
+          ],
+          "zero_worlds": 0
+        },
+        "depletion_event_count_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "depletion_event_count_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "depletion_event_penalty_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "depletion_event_penalty_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "energy_consumed_wh": {
+          "max": 47.04557733649199,
+          "mean": 11.665211544576692,
+          "min": -51.89862158755341,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -17.28731857758794,
+            40.617741666741324
+          ],
+          "zero_worlds": 0
+        },
+        "energy_input_wh": {
+          "max": 249.26360014388865,
+          "mean": 70.98210728981883,
+          "min": -20.0,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -12.35099558255152,
+            154.31521016218917
+          ],
+          "zero_worlds": 0
+        },
+        "episode_minimum_battery_ratio": {
+          "max": 0.0232538623193147,
+          "mean": 0.002915748495955781,
+          "min": -0.004350409865966451,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -0.0047451938952187125,
+            0.010576690887130275
+          ],
+          "zero_worlds": 0
+        },
+        "feedback_entry_count": {
+          "max": 2.0,
+          "mean": -14.25,
+          "min": -50.0,
+          "n": 8,
+          "negative_worlds": 7,
+          "positive_worlds": 1,
+          "t95_descriptive": [
+            -27.743388034714453,
+            -0.756611965285547
+          ],
+          "zero_worlds": 0
+        },
+        "feedback_exit_count": {
+          "max": 3.0,
+          "mean": -11.875,
+          "min": -48.0,
+          "n": 8,
+          "negative_worlds": 6,
+          "positive_worlds": 2,
+          "t95_descriptive": [
+            -25.403029750634026,
+            1.6530297506340261
+          ],
+          "zero_worlds": 0
+        },
+        "feedback_mode_uav_steps": {
+          "max": -1426.0,
+          "mean": -3720.0,
+          "min": -7801.0,
+          "n": 8,
+          "negative_worlds": 8,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            -5410.356275477734,
+            -2029.6437245222662
+          ],
+          "zero_worlds": 0
+        },
+        "graph_potential_delta_per_step": {
+          "max": 3.2132969988302174e-07,
+          "mean": -4.175804593775211e-06,
+          "min": -3.38006529254746e-05,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -1.418361979827783e-05,
+            5.832010610727408e-06
+          ],
+          "zero_worlds": 0
+        },
+        "graph_potential_delta_sum": {
+          "max": 0.0009639890996488987,
+          "mean": -0.012527413781325603,
+          "min": -0.101401958776421,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -0.042550859394832524,
+            0.01749603183218132
+          ],
+          "zero_worlds": 0
+        },
+        "guard_blocked_actions": {
+          "max": 2210.0,
+          "mean": 1046.0,
+          "min": 133.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            459.1990650162519,
+            1632.800934983748
+          ],
+          "zero_worlds": 0
+        },
+        "guard_checked_actions": {
+          "max": 3478.0,
+          "mean": 2419.5,
+          "min": 615.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            1639.068824346897,
+            3199.9311756531033
+          ],
+          "zero_worlds": 0
+        },
+        "max_below_half_qos_gap": {
+          "max": 1.0,
+          "mean": -1.0,
+          "min": -8.0,
+          "n": 8,
+          "negative_worlds": 2,
+          "positive_worlds": 1,
+          "t95_descriptive": [
+            -3.4064792576159393,
+            1.4064792576159393
+          ],
+          "zero_worlds": 5
+        },
+        "max_zero_qos_gap": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "min_decoded_battery": {
+          "max": 0.02325386554002762,
+          "mean": 0.0029157502576708794,
+          "min": -0.004350408911705017,
+          "n": 8,
+          "negative_worlds": 5,
+          "positive_worlds": 3,
+          "t95_descriptive": [
+            -0.004745192444223439,
+            0.010576692959565197
+          ],
+          "zero_worlds": 0
+        },
+        "native_J_per_step": {
+          "max": 0.1112645627746115,
+          "mean": 0.04841427585774412,
+          "min": 0.0021924060412089608,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            0.016610120979140296,
+            0.08021843073634793
+          ],
+          "zero_worlds": 0
+        },
+        "qos_per_step": {
+          "max": 0.11156986009711911,
+          "mean": 0.0453603197442323,
+          "min": 0.002585130606499897,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            0.015276118649025387,
+            0.0754445208394392
+          ],
+          "zero_worlds": 0
+        },
+        "qos_satisfaction_ratio_per_step": {
+          "max": 0.11156986009711911,
+          "mean": 0.0453603197442323,
+          "min": 0.002585130606499897,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            0.015276118649025387,
+            0.0754445208394392
+          ],
+          "zero_worlds": 0
+        },
+        "qos_satisfaction_ratio_sum": {
+          "max": 334.70958029135727,
+          "mean": 136.0809592326969,
+          "min": 7.755391819499891,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            45.82835594707622,
+            226.3335625183176
+          ],
+          "zero_worlds": 0
+        },
+        "raw_native_J": {
+          "max": 333.79368832383443,
+          "mean": 145.2428275732324,
+          "min": 6.577218123627063,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            49.830362937421,
+            240.6552922090438
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_per_step": {
+          "max": 0.000942792403410968,
+          "mean": -0.0015290659590527843,
+          "min": -0.007747309065361094,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -0.0041452127893371995,
+            0.001087080871231631
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_raw_per_step": {
+          "max": 0.000942792403410968,
+          "mean": -0.0015290659590527843,
+          "min": -0.007747309065361094,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -0.0041452127893371995,
+            0.001087080871231631
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_raw_sum": {
+          "max": 2.8283772102329037,
+          "mean": -4.587197877158353,
+          "min": -23.24192719608328,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -12.435638368011599,
+            3.261242613694894
+          ],
+          "zero_worlds": 0
+        },
+        "return_constraint_cost_sum": {
+          "max": 2.8283772102329037,
+          "mean": -4.587197877158353,
+          "min": -23.24192719608328,
+          "n": 8,
+          "negative_worlds": 4,
+          "positive_worlds": 4,
+          "t95_descriptive": [
+            -12.435638368011599,
+            3.261242613694894
+          ],
+          "zero_worlds": 0
+        },
+        "return_penalty_coefficient_per_step": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "return_penalty_coefficient_sum": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "scenario7_reward_per_step": {
+          "max": 0.1112645627746115,
+          "mean": 0.04841427585774409,
+          "min": 0.0021924060412088497,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            0.016610120979140247,
+            0.08021843073634793
+          ],
+          "zero_worlds": 0
+        },
+        "scenario7_reward_sum": {
+          "max": 333.79368832383443,
+          "mean": 145.2428275732323,
+          "min": 6.577218123626608,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 8,
+          "t95_descriptive": [
+            49.8303629374208,
+            240.65529220904378
+          ],
+          "zero_worlds": 0
+        },
+        "service_cutoff_uav_step_fraction": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        },
+        "step_charger_input_wh_per_step": {
+          "max": 0.08308786671462956,
+          "mean": 0.023660702429939628,
+          "min": -0.006666666666666654,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -0.004116998527517152,
+            0.05143840338739641
+          ],
+          "zero_worlds": 0
+        },
+        "step_charger_input_wh_sum": {
+          "max": 249.26360014388865,
+          "mean": 70.98210728981888,
+          "min": -19.999999999999943,
+          "n": 8,
+          "negative_worlds": 3,
+          "positive_worlds": 5,
+          "t95_descriptive": [
+            -12.350995582551462,
+            154.31521016218923
+          ],
+          "zero_worlds": 0
+        },
+        "zero_qos_spells_ge60": {
+          "max": 0.0,
+          "mean": 0.0,
+          "min": 0.0,
+          "n": 8,
+          "negative_worlds": 0,
+          "positive_worlds": 0,
+          "t95_descriptive": [
+            0.0,
+            0.0
+          ],
+          "zero_worlds": 8
+        }
+      },
+      "loss_worlds": {
+        "battery_min_ratio_per_step": [
+          31092807
+        ],
+        "battery_min_ratio_sum": [
+          31092807
+        ],
+        "below_fixed_reserve_uav_step_fraction": [
+          31092806,
+          31092807
+        ],
+        "below_half_qos_spells_ge60": [
+          31092804
+        ],
+        "cumulative_qos": [],
+        "cutoff_event_count_per_step": [],
+        "cutoff_event_count_sum": [],
+        "cutoff_event_penalty_per_step": [],
+        "cutoff_event_penalty_sum": [],
+        "delivered_end_to_end_throughput_mbps_per_step": [],
+        "delivered_end_to_end_throughput_mbps_sum": [],
+        "delivered_megabits": [],
+        "depletion_event_count_per_step": [],
+        "depletion_event_count_sum": [],
+        "depletion_event_penalty_per_step": [],
+        "depletion_event_penalty_sum": [],
+        "episode_minimum_battery_ratio": [
+          31092801,
+          31092802,
+          31092803,
+          31092806,
+          31092807
+        ],
+        "guard_blocked_actions": [
+          31092801,
+          31092802,
+          31092803,
+          31092804,
+          31092805,
+          31092806,
+          31092807,
+          31092808
+        ],
+        "max_below_half_qos_gap": [
+          31092804
+        ],
+        "max_zero_qos_gap": [],
+        "min_decoded_battery": [
+          31092801,
+          31092802,
+          31092803,
+          31092806,
+          31092807
+        ],
+        "native_J_per_step": [],
+        "qos_per_step": [],
+        "qos_satisfaction_ratio_per_step": [],
+        "qos_satisfaction_ratio_sum": [],
+        "raw_native_J": [],
+        "return_constraint_cost_per_step": [
+          31092803,
+          31092804,
+          31092806,
+          31092807
+        ],
+        "return_constraint_cost_raw_per_step": [
+          31092803,
+          31092804,
+          31092806,
+          31092807
+        ],
+        "return_constraint_cost_raw_sum": [
+          31092803,
+          31092804,
+          31092806,
+          31092807
+        ],
+        "return_constraint_cost_sum": [
+          31092803,
+          31092804,
+          31092806,
+          31092807
+        ],
+        "scenario7_reward_per_step": [],
+        "scenario7_reward_sum": [],
+        "service_cutoff_uav_step_fraction": [],
+        "zero_qos_spells_ge60": []
+      },
+      "observed_worlds": 8,
+      "status": "paired_primary"
+    }
+  },
+  "elapsed_invocation_seconds": 2016.5112712390255,
+  "exogenous_pairing_valid": true,
+  "failed_jobs": [],
+  "fits": 0,
+  "inference_unit": "same initialized world seed; t7 interval descriptive only for eight verified pairs",
+  "interpretation": "native closed-loop endpoints; H is a competence reference, not a clock-matched causal control",
+  "known_transition_lower_bound": 72000,
+  "launch_sha": "e663b53c7ea3f52983365ed9c3ce044bc4ccf699",
+  "missing_endpoints": {},
+  "missing_jobs": [],
+  "optimizer_updates": 0,
+  "orphan_raw": [],
+  "pair_hash_agreement": {
+    "initial_state_sha256": {
+      "different": 0,
+      "equal": 8,
+      "unavailable": 0
+    },
+    "rng_state_stream_sha256": {
+      "different": 0,
+      "equal": 8,
+      "unavailable": 0
+    },
+    "user_xy_trace_sha256": {
+      "different": 0,
+      "equal": 8,
+      "unavailable": 0
+    }
+  },
+  "paired_worlds": [
+    {
+      "available_arms": [
+        "H",
+        "I",
+        "C"
+      ],
+      "contrasts": {
+        "C-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.011652559378331928,
+          "battery_min_ratio_sum": 34.95767813499583,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.21899999999999997,
+          "charging_uav_count_sum": 657.0,
+          "cumulative_qos": 158.3351490495047,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 1.583351490495044,
+          "delivered_end_to_end_throughput_mbps_sum": 4750.054471485142,
+          "delivered_megabits": 4750.054471485142,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 65.90605856700063,
+          "energy_input_wh": 157.12560261668693,
+          "episode_minimum_battery_ratio": 0.010031949277667374,
+          "feedback_entry_count": -5.0,
+          "feedback_exit_count": -4.0,
+          "feedback_mode_uav_steps": -1831.0,
+          "graph_potential_delta_per_step": 2.018496448111251e-09,
+          "graph_potential_delta_sum": 6.055489343737008e-06,
+          "guard_blocked_actions": -142.0,
+          "guard_checked_actions": 341.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.010031946003437042,
+          "native_J_per_step": 0.05296753754204475,
+          "qos_per_step": 0.05277838301650162,
+          "qos_satisfaction_ratio_per_step": 0.05277838301650162,
+          "qos_satisfaction_ratio_sum": 158.3351490495047,
+          "raw_native_J": 158.90261262613421,
+          "return_constraint_cost_per_step": -9.457625352328534e-05,
+          "return_constraint_cost_raw_per_step": -9.457625352328534e-05,
+          "return_constraint_cost_raw_sum": -0.28372876056985596,
+          "return_constraint_cost_sum": -0.28372876056985596,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.05296753754204475,
+          "scenario7_reward_sum": 158.90261262613421,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.052375200872228994,
+          "step_charger_input_wh_sum": 157.125602616687,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "C-I": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.006983457436810225,
+          "battery_min_ratio_sum": -20.950372310430566,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": -0.06333333333333335,
+          "charging_uav_count_sum": -190.0,
+          "cumulative_qos": 112.21303000397256,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 1.122130300039725,
+          "delivered_end_to_end_throughput_mbps_sum": 3366.3909001191787,
+          "delivered_megabits": 3366.3909001191787,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 18.86048123050864,
+          "energy_input_wh": -38.901135959506405,
+          "episode_minimum_battery_ratio": 0.014382359143633824,
+          "feedback_entry_count": -2.0,
+          "feedback_exit_count": -7.0,
+          "feedback_mode_uav_steps": 3115.0,
+          "graph_potential_delta_per_step": 1.770238816471703e-08,
+          "graph_potential_delta_sum": 5.3107164493582104e-05,
+          "guard_blocked_actions": -372.0,
+          "guard_checked_actions": -3137.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.01438235491514206,
+          "native_J_per_step": 0.03726108951858309,
+          "qos_per_step": 0.037404343334657586,
+          "qos_satisfaction_ratio_per_step": 0.037404343334657586,
+          "qos_satisfaction_ratio_sum": 112.21303000397256,
+          "raw_native_J": 111.78326855574915,
+          "return_constraint_cost_per_step": 7.163575923131528e-05,
+          "return_constraint_cost_raw_per_step": 7.163575923131528e-05,
+          "return_constraint_cost_raw_sum": 0.2149072776939459,
+          "return_constraint_cost_sum": 0.2149072776939459,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.03726108951858309,
+          "scenario7_reward_sum": 111.78326855574915,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": -0.012967045319835474,
+          "step_charger_input_wh_sum": -38.90113595950646,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "I-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.018636016815142153,
+          "battery_min_ratio_sum": 55.9080504454264,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.2823333333333333,
+          "charging_uav_count_sum": 847.0,
+          "cumulative_qos": 46.122119045532145,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 0.4612211904553192,
+          "delivered_end_to_end_throughput_mbps_sum": 1383.6635713659634,
+          "delivered_megabits": 1383.6635713659634,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 47.04557733649199,
+          "energy_input_wh": 196.02673857619334,
+          "episode_minimum_battery_ratio": -0.004350409865966451,
+          "feedback_entry_count": -3.0,
+          "feedback_exit_count": 3.0,
+          "feedback_mode_uav_steps": -4946.0,
+          "graph_potential_delta_per_step": -1.568389171660578e-08,
+          "graph_potential_delta_sum": -4.7051675149845096e-05,
+          "guard_blocked_actions": 230.0,
+          "guard_checked_actions": 3478.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": -0.004350408911705017,
+          "native_J_per_step": 0.01570644802346166,
+          "qos_per_step": 0.015374039681844032,
+          "qos_satisfaction_ratio_per_step": 0.015374039681844032,
+          "qos_satisfaction_ratio_sum": 46.122119045532145,
+          "raw_native_J": 47.11934407038507,
+          "return_constraint_cost_per_step": -0.00016621201275460063,
+          "return_constraint_cost_raw_per_step": -0.00016621201275460063,
+          "return_constraint_cost_raw_sum": -0.4986360382638019,
+          "return_constraint_cost_sum": -0.4986360382638019,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.01570644802346166,
+          "scenario7_reward_sum": 47.11934407038507,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.06534224619206447,
+          "step_charger_input_wh_sum": 196.02673857619345,
+          "zero_qos_spells_ge60": 0.0
+        }
+      },
+      "episode_lengths": {
+        "C": 3000,
+        "H": 3000,
+        "I": 3000
+      },
+      "hashes": {
+        "initial_state_sha256": "equal",
+        "rng_state_stream_sha256": "equal",
+        "user_xy_trace_sha256": "equal"
+      },
+      "seed": 31092801,
+      "terminal_types": {
+        "C": "truncated",
+        "H": "truncated",
+        "I": "truncated"
+      }
+    },
+    {
+      "available_arms": [
+        "H",
+        "I",
+        "C"
+      ],
+      "contrasts": {
+        "C-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.025082841526852973,
+          "battery_min_ratio_sum": 75.24852458055886,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.13,
+          "charging_uav_count_sum": 390.0,
+          "cumulative_qos": 157.51325545159443,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 1.575132554515939,
+          "delivered_end_to_end_throughput_mbps_sum": 4725.3976635478175,
+          "delivered_megabits": 4725.3976635478175,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 49.81853421244614,
+          "energy_input_wh": 76.42501959846868,
+          "episode_minimum_battery_ratio": 0.003001324631829186,
+          "feedback_entry_count": -22.0,
+          "feedback_exit_count": -21.0,
+          "feedback_mode_uav_steps": -2087.0,
+          "graph_potential_delta_per_step": -3.0538355948819124e-05,
+          "graph_potential_delta_sum": -0.09161506784645823,
+          "guard_blocked_actions": 470.0,
+          "guard_checked_actions": 706.0,
+          "max_below_half_qos_gap": -8.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.0030013248324394226,
+          "native_J_per_step": 0.05338784947273367,
+          "qos_per_step": 0.05250441848386489,
+          "qos_satisfaction_ratio_per_step": 0.05250441848386489,
+          "qos_satisfaction_ratio_sum": 157.51325545159443,
+          "raw_native_J": 160.16354841820112,
+          "return_constraint_cost_per_step": -0.00045698467240879733,
+          "return_constraint_cost_raw_per_step": -0.00045698467240879733,
+          "return_constraint_cost_raw_sum": -1.370954017226392,
+          "return_constraint_cost_sum": -1.370954017226392,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.05338784947273356,
+          "scenario7_reward_sum": 160.16354841820066,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.02547500653282292,
+          "step_charger_input_wh_sum": 76.42501959846874,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "C-I": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.0095639689037042,
+          "battery_min_ratio_sum": -28.691906711112665,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.08500000000000008,
+          "charging_uav_count_sum": 255.0,
+          "cumulative_qos": 51.99868985740977,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 0.5199868985740963,
+          "delivered_end_to_end_throughput_mbps_sum": 1559.960695722286,
+          "delivered_megabits": 1559.960695722286,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 101.71715579999955,
+          "energy_input_wh": 84.69183333333308,
+          "episode_minimum_battery_ratio": 0.0032345164431639706,
+          "feedback_entry_count": 28.0,
+          "feedback_exit_count": 27.0,
+          "feedback_mode_uav_steps": 673.0,
+          "graph_potential_delta_per_step": 3.2622969766554766e-06,
+          "graph_potential_delta_sum": 0.009786890929962766,
+          "guard_blocked_actions": -497.0,
+          "guard_checked_actions": -1185.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.0032345131039619446,
+          "native_J_per_step": 0.016908619552773896,
+          "qos_per_step": 0.017332896619136617,
+          "qos_satisfaction_ratio_per_step": 0.017332896619136617,
+          "qos_satisfaction_ratio_sum": 51.99868985740977,
+          "raw_native_J": 50.72585865832161,
+          "return_constraint_cost_per_step": 0.00021376968166960669,
+          "return_constraint_cost_raw_per_step": 0.00021376968166960669,
+          "return_constraint_cost_raw_sum": 0.64130904500882,
+          "return_constraint_cost_sum": 0.64130904500882,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.016908619552773896,
+          "scenario7_reward_sum": 50.72585865832161,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.028230611111111026,
+          "step_charger_input_wh_sum": 84.69183333333308,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "I-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.03464681043055717,
+          "battery_min_ratio_sum": 103.94043129167153,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.04499999999999993,
+          "charging_uav_count_sum": 135.0,
+          "cumulative_qos": 105.51456559418466,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 1.0551456559418426,
+          "delivered_end_to_end_throughput_mbps_sum": 3165.4369678255316,
+          "delivered_megabits": 3165.4369678255316,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": -51.89862158755341,
+          "energy_input_wh": -8.2668137348644,
+          "episode_minimum_battery_ratio": -0.00023319181133478473,
+          "feedback_entry_count": -50.0,
+          "feedback_exit_count": -48.0,
+          "feedback_mode_uav_steps": -2760.0,
+          "graph_potential_delta_per_step": -3.38006529254746e-05,
+          "graph_potential_delta_sum": -0.101401958776421,
+          "guard_blocked_actions": 967.0,
+          "guard_checked_actions": 1891.0,
+          "max_below_half_qos_gap": -8.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": -0.00023318827152252197,
+          "native_J_per_step": 0.03647922991995978,
+          "qos_per_step": 0.03517152186472827,
+          "qos_satisfaction_ratio_per_step": 0.03517152186472827,
+          "qos_satisfaction_ratio_sum": 105.51456559418466,
+          "raw_native_J": 109.4376897598795,
+          "return_constraint_cost_per_step": -0.000670754354078404,
+          "return_constraint_cost_raw_per_step": -0.000670754354078404,
+          "return_constraint_cost_raw_sum": -2.012263062235212,
+          "return_constraint_cost_sum": -2.012263062235212,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.036479229919959666,
+          "scenario7_reward_sum": 109.43768975987905,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": -0.0027556045782881067,
+          "step_charger_input_wh_sum": -8.266813734864343,
+          "zero_qos_spells_ge60": 0.0
+        }
+      },
+      "episode_lengths": {
+        "C": 3000,
+        "H": 3000,
+        "I": 3000
+      },
+      "hashes": {
+        "initial_state_sha256": "equal",
+        "rng_state_stream_sha256": "equal",
+        "user_xy_trace_sha256": "equal"
+      },
+      "seed": 31092802,
+      "terminal_types": {
+        "C": "truncated",
+        "H": "truncated",
+        "I": "truncated"
+      }
+    },
+    {
+      "available_arms": [
+        "H",
+        "I",
+        "C"
+      ],
+      "contrasts": {
+        "C-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.014657964967141557,
+          "battery_min_ratio_sum": -43.97389490142473,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 1.0,
+          "charging_uav_count_per_step": 0.19266666666666665,
+          "charging_uav_count_sum": 578.0,
+          "cumulative_qos": 111.89358190494977,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 1.1189358190494936,
+          "delivered_end_to_end_throughput_mbps_sum": 3356.807457148483,
+          "delivered_megabits": 3356.807457148483,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 99.72773228815095,
+          "energy_input_wh": 157.54298953678585,
+          "episode_minimum_battery_ratio": -0.00013365471900476933,
+          "feedback_entry_count": 23.0,
+          "feedback_exit_count": 24.0,
+          "feedback_mode_uav_steps": -3085.0,
+          "graph_potential_delta_per_step": 3.165072094170329e-08,
+          "graph_potential_delta_sum": 9.495216282573438e-05,
+          "guard_blocked_actions": 1000.0,
+          "guard_checked_actions": 1621.0,
+          "max_below_half_qos_gap": -1.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": -0.00013364851474761963,
+          "native_J_per_step": 0.03639240341546035,
+          "qos_per_step": 0.037297860634983304,
+          "qos_satisfaction_ratio_per_step": 0.037297860634983304,
+          "qos_satisfaction_ratio_sum": 111.89358190494977,
+          "raw_native_J": 109.17721024638104,
+          "return_constraint_cost_per_step": 0.0004527444351218825,
+          "return_constraint_cost_raw_per_step": 0.0004527444351218825,
+          "return_constraint_cost_raw_sum": 1.3582333053656475,
+          "return_constraint_cost_sum": 1.3582333053656475,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.03639240341546035,
+          "scenario7_reward_sum": 109.17721024638104,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.052514329845595314,
+          "step_charger_input_wh_sum": 157.54298953678597,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "C-I": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.04998794529787087,
+          "battery_min_ratio_sum": -149.96383589361255,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 1.0,
+          "charging_uav_count_per_step": -0.16866666666666663,
+          "charging_uav_count_sum": -506.0,
+          "cumulative_qos": -222.8159983864075,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": -2.2281599838640815,
+          "delivered_end_to_end_throughput_mbps_sum": -6684.47995159225,
+          "delivered_megabits": -6684.47995159225,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 54.277219251575616,
+          "energy_input_wh": -91.7206106071028,
+          "episode_minimum_battery_ratio": 0.0011504048561737923,
+          "feedback_entry_count": 44.0,
+          "feedback_exit_count": 38.0,
+          "feedback_mode_uav_steps": 4716.0,
+          "graph_potential_delta_per_step": 2.3160563271049095e-08,
+          "graph_potential_delta_sum": 6.948168981679714e-05,
+          "guard_blocked_actions": 130.0,
+          "guard_checked_actions": -1057.0,
+          "max_below_half_qos_gap": -1.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.0011504068970680237,
+          "native_J_per_step": -0.07487215935915115,
+          "qos_per_step": -0.07427199946213581,
+          "qos_satisfaction_ratio_per_step": -0.07427199946213581,
+          "qos_satisfaction_ratio_sum": -222.8159983864075,
+          "raw_native_J": -224.6164780774534,
+          "return_constraint_cost_per_step": 0.0003000915287892376,
+          "return_constraint_cost_raw_per_step": 0.0003000915287892376,
+          "return_constraint_cost_raw_sum": 0.9002745863677126,
+          "return_constraint_cost_sum": 0.9002745863677126,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": -0.07487215935915115,
+          "scenario7_reward_sum": -224.6164780774534,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": -0.030573536869034246,
+          "step_charger_input_wh_sum": -91.72061060710269,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "I-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.035329980330729316,
+          "battery_min_ratio_sum": 105.98994099218783,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.3613333333333333,
+          "charging_uav_count_sum": 1084.0,
+          "cumulative_qos": 334.70958029135727,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 3.347095802913575,
+          "delivered_end_to_end_throughput_mbps_sum": 10041.287408740733,
+          "delivered_megabits": 10041.287408740733,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 45.45051303657533,
+          "energy_input_wh": 249.26360014388865,
+          "episode_minimum_battery_ratio": -0.0012840595751785616,
+          "feedback_entry_count": -21.0,
+          "feedback_exit_count": -14.0,
+          "feedback_mode_uav_steps": -7801.0,
+          "graph_potential_delta_per_step": 8.490157670654197e-09,
+          "graph_potential_delta_sum": 2.5470473008937233e-05,
+          "guard_blocked_actions": 870.0,
+          "guard_checked_actions": 2678.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": -0.0012840554118156433,
+          "native_J_per_step": 0.1112645627746115,
+          "qos_per_step": 0.11156986009711911,
+          "qos_satisfaction_ratio_per_step": 0.11156986009711911,
+          "qos_satisfaction_ratio_sum": 334.70958029135727,
+          "raw_native_J": 333.79368832383443,
+          "return_constraint_cost_per_step": 0.00015265290633264492,
+          "return_constraint_cost_raw_per_step": 0.00015265290633264492,
+          "return_constraint_cost_raw_sum": 0.45795871899793483,
+          "return_constraint_cost_sum": 0.45795871899793483,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.1112645627746115,
+          "scenario7_reward_sum": 333.79368832383443,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.08308786671462956,
+          "step_charger_input_wh_sum": 249.26360014388865,
+          "zero_qos_spells_ge60": 0.0
+        }
+      },
+      "episode_lengths": {
+        "C": 3000,
+        "H": 3000,
+        "I": 3000
+      },
+      "hashes": {
+        "initial_state_sha256": "equal",
+        "rng_state_stream_sha256": "equal",
+        "user_xy_trace_sha256": "equal"
+      },
+      "seed": 31092803,
+      "terminal_types": {
+        "C": "truncated",
+        "H": "truncated",
+        "I": "truncated"
+      }
+    },
+    {
+      "available_arms": [
+        "H",
+        "I",
+        "C"
+      ],
+      "contrasts": {
+        "C-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.0019854655802867827,
+          "battery_min_ratio_sum": -5.9563967408603276,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 1.0,
+          "charging_uav_count_per_step": 0.25500000000000006,
+          "charging_uav_count_sum": 765.0,
+          "cumulative_qos": -56.96896536618806,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": -0.5696896536618787,
+          "delivered_end_to_end_throughput_mbps_sum": -1709.0689609856345,
+          "delivered_megabits": -1709.0689609856345,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 121.34480646871339,
+          "energy_input_wh": 212.4999999999999,
+          "episode_minimum_battery_ratio": 0.007612387316052488,
+          "feedback_entry_count": 7.0,
+          "feedback_exit_count": 13.0,
+          "feedback_mode_uav_steps": -5011.0,
+          "graph_potential_delta_per_step": -9.106524197916022e-10,
+          "graph_potential_delta_sum": -2.731957263080176e-06,
+          "guard_blocked_actions": -39.0,
+          "guard_checked_actions": 554.0,
+          "max_below_half_qos_gap": 1.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.007612384855747223,
+          "native_J_per_step": -0.019523719775917048,
+          "qos_per_step": -0.018989655122062632,
+          "qos_satisfaction_ratio_per_step": -0.018989655122062632,
+          "qos_satisfaction_ratio_sum": -56.96896536618806,
+          "raw_native_J": -58.57115932775105,
+          "return_constraint_cost_per_step": 0.00026703187160093106,
+          "return_constraint_cost_raw_per_step": 0.00026703187160093106,
+          "return_constraint_cost_raw_sum": 0.801095614802793,
+          "return_constraint_cost_sum": 0.801095614802793,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": -0.019523719775917048,
+          "scenario7_reward_sum": -58.57115932775105,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.07083333333333328,
+          "step_charger_input_wh_sum": 212.49999999999983,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "C-I": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.003069174967799404,
+          "battery_min_ratio_sum": -9.207524903398166,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.1846666666666667,
+          "charging_uav_count_sum": 554.0,
+          "cumulative_qos": -147.87310321987616,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": -1.4787310321987626,
+          "delivered_end_to_end_throughput_mbps_sum": -4436.193096596282,
+          "delivered_megabits": -4436.193096596282,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 85.01179097986005,
+          "energy_input_wh": 153.88888888888886,
+          "episode_minimum_battery_ratio": 0.004909212505527033,
+          "feedback_entry_count": 5.0,
+          "feedback_exit_count": 10.0,
+          "feedback_mode_uav_steps": -3227.0,
+          "graph_potential_delta_per_step": 0.0,
+          "graph_potential_delta_sum": 0.0,
+          "guard_blocked_actions": -1821.0,
+          "guard_checked_actions": -61.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.004909209907054901,
+          "native_J_per_step": -0.04954977183124809,
+          "qos_per_step": -0.04929103440662541,
+          "qos_satisfaction_ratio_per_step": -0.04929103440662541,
+          "qos_satisfaction_ratio_sum": -147.87310321987616,
+          "raw_native_J": -148.64931549374433,
+          "return_constraint_cost_per_step": 0.000129368712311347,
+          "return_constraint_cost_raw_per_step": 0.000129368712311347,
+          "return_constraint_cost_raw_sum": 0.38810613693404084,
+          "return_constraint_cost_sum": 0.38810613693404084,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": -0.04954977183124809,
+          "scenario7_reward_sum": -148.64931549374433,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.051296296296296284,
+          "step_charger_input_wh_sum": 153.8888888888888,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "I-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.0010837093875126214,
+          "battery_min_ratio_sum": 3.2511281625378388,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 1.0,
+          "charging_uav_count_per_step": 0.07033333333333336,
+          "charging_uav_count_sum": 211.0,
+          "cumulative_qos": 90.9041378536881,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 0.9090413785368838,
+          "delivered_end_to_end_throughput_mbps_sum": 2727.1241356106475,
+          "delivered_megabits": 2727.1241356106475,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 36.333015488853334,
+          "energy_input_wh": 58.61111111111103,
+          "episode_minimum_battery_ratio": 0.002703174810525455,
+          "feedback_entry_count": 2.0,
+          "feedback_exit_count": 3.0,
+          "feedback_mode_uav_steps": -1784.0,
+          "graph_potential_delta_per_step": -9.106524197916022e-10,
+          "graph_potential_delta_sum": -2.731957263080176e-06,
+          "guard_blocked_actions": 1782.0,
+          "guard_checked_actions": 615.0,
+          "max_below_half_qos_gap": 1.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.0027031749486923218,
+          "native_J_per_step": 0.030026052055331043,
+          "qos_per_step": 0.03030137928456278,
+          "qos_satisfaction_ratio_per_step": 0.03030137928456278,
+          "qos_satisfaction_ratio_sum": 90.9041378536881,
+          "raw_native_J": 90.07815616599328,
+          "return_constraint_cost_per_step": 0.00013766315928958407,
+          "return_constraint_cost_raw_per_step": 0.00013766315928958407,
+          "return_constraint_cost_raw_sum": 0.4129894778687522,
+          "return_constraint_cost_sum": 0.4129894778687522,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.030026052055331043,
+          "scenario7_reward_sum": 90.07815616599328,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.01953703703703699,
+          "step_charger_input_wh_sum": 58.61111111111103,
+          "zero_qos_spells_ge60": 0.0
+        }
+      },
+      "episode_lengths": {
+        "C": 3000,
+        "H": 3000,
+        "I": 3000
+      },
+      "hashes": {
+        "initial_state_sha256": "equal",
+        "rng_state_stream_sha256": "equal",
+        "user_xy_trace_sha256": "equal"
+      },
+      "seed": 31092804,
+      "terminal_types": {
+        "C": "truncated",
+        "H": "truncated",
+        "I": "truncated"
+      }
+    },
+    {
+      "available_arms": [
+        "H",
+        "I",
+        "C"
+      ],
+      "contrasts": {
+        "C-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.007793251445370297,
+          "battery_min_ratio_sum": -23.379754336110864,
+          "below_fixed_reserve_uav_step_fraction": -0.03891666666666667,
+          "below_half_qos_spells_ge60": -1.0,
+          "charging_uav_count_per_step": 0.061,
+          "charging_uav_count_sum": 183.0,
+          "cumulative_qos": 207.41430757785338,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 2.074143075778533,
+          "delivered_end_to_end_throughput_mbps_sum": 6222.429227335604,
+          "delivered_megabits": 6222.429227335604,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 44.59607630667688,
+          "energy_input_wh": 50.83333333333326,
+          "episode_minimum_battery_ratio": 0.005891689319547283,
+          "feedback_entry_count": -8.0,
+          "feedback_exit_count": -8.0,
+          "feedback_mode_uav_steps": -2808.0,
+          "graph_potential_delta_per_step": 8.175395377688077e-08,
+          "graph_potential_delta_sum": 0.00024526186133044803,
+          "guard_blocked_actions": -91.0,
+          "guard_checked_actions": 3069.0,
+          "max_below_half_qos_gap": 11.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.005891695618629456,
+          "native_J_per_step": 0.08184722896991203,
+          "qos_per_step": 0.0691381025259512,
+          "qos_satisfaction_ratio_per_step": 0.0691381025259512,
+          "qos_satisfaction_ratio_sum": 207.41430757785338,
+          "raw_native_J": 245.5416869097362,
+          "return_constraint_cost_per_step": -0.006354522345003588,
+          "return_constraint_cost_raw_per_step": -0.006354522345003588,
+          "return_constraint_cost_raw_sum": -19.063567035010763,
+          "return_constraint_cost_sum": -19.063567035010763,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.08184722896991203,
+          "scenario7_reward_sum": 245.5416869097362,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.01694444444444447,
+          "step_charger_input_wh_sum": 50.83333333333337,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "C-I": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.03655400398857084,
+          "battery_min_ratio_sum": -109.66201196571251,
+          "below_fixed_reserve_uav_step_fraction": 0.012291666666666666,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": -0.017000000000000015,
+          "charging_uav_count_sum": -51.0,
+          "cumulative_qos": -39.50347914717054,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": -0.3950347914717085,
+          "delivered_end_to_end_throughput_mbps_sum": -1185.1043744151248,
+          "delivered_megabits": -1185.1043744151248,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 47.648391014055505,
+          "energy_input_wh": -14.166666666666629,
+          "episode_minimum_battery_ratio": -0.017362172999767417,
+          "feedback_entry_count": 8.0,
+          "feedback_exit_count": 7.0,
+          "feedback_mode_uav_steps": 411.0,
+          "graph_potential_delta_per_step": 6.057311926349618e-10,
+          "graph_potential_delta_sum": 1.8171935778354964e-06,
+          "guard_blocked_actions": -224.0,
+          "guard_checked_actions": -164.0,
+          "max_below_half_qos_gap": 11.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": -0.017362169921398163,
+          "native_J_per_step": -0.015953399217374042,
+          "qos_per_step": -0.013167826382390113,
+          "qos_satisfaction_ratio_per_step": -0.013167826382390113,
+          "qos_satisfaction_ratio_sum": -39.50347914717054,
+          "raw_native_J": -47.860197652122,
+          "return_constraint_cost_per_step": 0.0013927867203575063,
+          "return_constraint_cost_raw_per_step": 0.0013927867203575063,
+          "return_constraint_cost_raw_sum": 4.1783601610725185,
+          "return_constraint_cost_sum": 4.1783601610725185,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": -0.015953399217374042,
+          "scenario7_reward_sum": -47.860197652122,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": -0.004722222222222183,
+          "step_charger_input_wh_sum": -14.166666666666572,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "I-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.02876075254320054,
+          "battery_min_ratio_sum": 86.28225762960165,
+          "below_fixed_reserve_uav_step_fraction": -0.051208333333333335,
+          "below_half_qos_spells_ge60": -1.0,
+          "charging_uav_count_per_step": 0.07800000000000001,
+          "charging_uav_count_sum": 234.0,
+          "cumulative_qos": 246.91778672502392,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 2.4691778672502416,
+          "delivered_end_to_end_throughput_mbps_sum": 7407.533601750729,
+          "delivered_megabits": 7407.533601750729,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": -3.0523147073786276,
+          "energy_input_wh": 64.99999999999989,
+          "episode_minimum_battery_ratio": 0.0232538623193147,
+          "feedback_entry_count": -16.0,
+          "feedback_exit_count": -15.0,
+          "feedback_mode_uav_steps": -3219.0,
+          "graph_potential_delta_per_step": 8.114822258424581e-08,
+          "graph_potential_delta_sum": 0.00024344466775261253,
+          "guard_blocked_actions": 133.0,
+          "guard_checked_actions": 3233.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.02325386554002762,
+          "native_J_per_step": 0.09780062818728608,
+          "qos_per_step": 0.08230592890834132,
+          "qos_satisfaction_ratio_per_step": 0.08230592890834132,
+          "qos_satisfaction_ratio_sum": 246.91778672502392,
+          "raw_native_J": 293.4018845618582,
+          "return_constraint_cost_per_step": -0.007747309065361094,
+          "return_constraint_cost_raw_per_step": -0.007747309065361094,
+          "return_constraint_cost_raw_sum": -23.24192719608328,
+          "return_constraint_cost_sum": -23.24192719608328,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.09780062818728608,
+          "scenario7_reward_sum": 293.4018845618582,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.021666666666666654,
+          "step_charger_input_wh_sum": 64.99999999999994,
+          "zero_qos_spells_ge60": 0.0
+        }
+      },
+      "episode_lengths": {
+        "C": 3000,
+        "H": 3000,
+        "I": 3000
+      },
+      "hashes": {
+        "initial_state_sha256": "equal",
+        "rng_state_stream_sha256": "equal",
+        "user_xy_trace_sha256": "equal"
+      },
+      "seed": 31092805,
+      "terminal_types": {
+        "C": "truncated",
+        "H": "truncated",
+        "I": "truncated"
+      }
+    },
+    {
+      "available_arms": [
+        "H",
+        "I",
+        "C"
+      ],
+      "contrasts": {
+        "C-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.0009804691800920362,
+          "battery_min_ratio_sum": 2.941407540276032,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.14433333333333337,
+          "charging_uav_count_sum": 433.0,
+          "cumulative_qos": 119.62450195110637,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 1.1962450195110605,
+          "delivered_end_to_end_throughput_mbps_sum": 3588.7350585331806,
+          "delivered_megabits": 3588.7350585331806,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 80.24701965429063,
+          "energy_input_wh": 120.27777777777766,
+          "episode_minimum_battery_ratio": -0.0008145122915085984,
+          "feedback_entry_count": -12.0,
+          "feedback_exit_count": -12.0,
+          "feedback_mode_uav_steps": -525.0,
+          "graph_potential_delta_per_step": 1.603946654313293e-09,
+          "graph_potential_delta_sum": 4.811839964702358e-06,
+          "guard_blocked_actions": 163.0,
+          "guard_checked_actions": 253.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": -0.0008145123720169067,
+          "native_J_per_step": 0.039814299835294054,
+          "qos_per_step": 0.03987483398370206,
+          "qos_satisfaction_ratio_per_step": 0.03987483398370206,
+          "qos_satisfaction_ratio_sum": 119.62450195110637,
+          "raw_native_J": 119.442899505882,
+          "return_constraint_cost_per_step": 3.026787617738168e-05,
+          "return_constraint_cost_raw_per_step": 3.026787617738168e-05,
+          "return_constraint_cost_raw_sum": 0.09080362853214496,
+          "return_constraint_cost_sum": 0.09080362853214496,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.039814299835294054,
+          "scenario7_reward_sum": 119.442899505882,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.04009259259259257,
+          "step_charger_input_wh_sum": 120.27777777777777,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "C-I": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.012869947436979001,
+          "battery_min_ratio_sum": -38.60984231093698,
+          "below_fixed_reserve_uav_step_fraction": -0.007916666666666667,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.10399999999999998,
+          "charging_uav_count_sum": 312.0,
+          "cumulative_qos": -41.80808926339387,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": -0.4180808926339381,
+          "delivered_end_to_end_throughput_mbps_sum": -1254.2426779018133,
+          "delivered_megabits": -1254.2426779018133,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 62.91376967156839,
+          "energy_input_wh": 86.66666666666669,
+          "episode_minimum_battery_ratio": 0.0024438698096238137,
+          "feedback_entry_count": -3.0,
+          "feedback_exit_count": -3.0,
+          "feedback_mode_uav_steps": 3705.0,
+          "graph_potential_delta_per_step": 0.0,
+          "graph_potential_delta_sum": 0.0,
+          "guard_blocked_actions": -1002.0,
+          "guard_checked_actions": -2580.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.002443872392177582,
+          "native_J_per_step": -0.012110980699997276,
+          "qos_per_step": -0.013936029754464618,
+          "qos_satisfaction_ratio_per_step": -0.013936029754464618,
+          "qos_satisfaction_ratio_sum": -41.80808926339387,
+          "raw_native_J": -36.332942099992124,
+          "return_constraint_cost_per_step": -0.0009125245272335863,
+          "return_constraint_cost_raw_per_step": -0.0009125245272335863,
+          "return_constraint_cost_raw_sum": -2.737573581700759,
+          "return_constraint_cost_sum": -2.737573581700759,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": -0.012110980699997276,
+          "scenario7_reward_sum": -36.332942099992124,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.028888888888888853,
+          "step_charger_input_wh_sum": 86.66666666666663,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "I-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.013850416617071037,
+          "battery_min_ratio_sum": 41.551249851213015,
+          "below_fixed_reserve_uav_step_fraction": 0.007916666666666667,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.04033333333333339,
+          "charging_uav_count_sum": 121.0,
+          "cumulative_qos": 161.43259121450023,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 1.6143259121449987,
+          "delivered_end_to_end_throughput_mbps_sum": 4842.977736434994,
+          "delivered_megabits": 4842.977736434994,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 17.333249982722236,
+          "energy_input_wh": 33.61111111111097,
+          "episode_minimum_battery_ratio": -0.003258382101132412,
+          "feedback_entry_count": -9.0,
+          "feedback_exit_count": -9.0,
+          "feedback_mode_uav_steps": -4230.0,
+          "graph_potential_delta_per_step": 1.603946654313293e-09,
+          "graph_potential_delta_sum": 4.811839964702358e-06,
+          "guard_blocked_actions": 1165.0,
+          "guard_checked_actions": 2833.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": -0.0032583847641944885,
+          "native_J_per_step": 0.05192528053529133,
+          "qos_per_step": 0.05381086373816668,
+          "qos_satisfaction_ratio_per_step": 0.05381086373816668,
+          "qos_satisfaction_ratio_sum": 161.43259121450023,
+          "raw_native_J": 155.77584160587412,
+          "return_constraint_cost_per_step": 0.000942792403410968,
+          "return_constraint_cost_raw_per_step": 0.000942792403410968,
+          "return_constraint_cost_raw_sum": 2.8283772102329037,
+          "return_constraint_cost_sum": 2.8283772102329037,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.05192528053529133,
+          "scenario7_reward_sum": 155.77584160587412,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.011203703703703716,
+          "step_charger_input_wh_sum": 33.61111111111114,
+          "zero_qos_spells_ge60": 0.0
+        }
+      },
+      "episode_lengths": {
+        "C": 3000,
+        "H": 3000,
+        "I": 3000
+      },
+      "hashes": {
+        "initial_state_sha256": "equal",
+        "rng_state_stream_sha256": "equal",
+        "user_xy_trace_sha256": "equal"
+      },
+      "seed": 31092806,
+      "terminal_types": {
+        "C": "truncated",
+        "H": "truncated",
+        "I": "truncated"
+      }
+    },
+    {
+      "available_arms": [
+        "H",
+        "I",
+        "C"
+      ],
+      "contrasts": {
+        "C-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.01129823535341623,
+          "battery_min_ratio_sum": -33.89470606024872,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.09299999999999997,
+          "charging_uav_count_sum": 279.0,
+          "cumulative_qos": -78.16069109374666,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": -0.7816069109374659,
+          "delivered_end_to_end_throughput_mbps_sum": -2344.820732812397,
+          "delivered_megabits": -2344.820732812397,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 84.96410852975305,
+          "energy_input_wh": 77.5,
+          "episode_minimum_battery_ratio": 0.0035662869815304005,
+          "feedback_entry_count": 1.0,
+          "feedback_exit_count": 4.0,
+          "feedback_mode_uav_steps": -2088.0,
+          "graph_potential_delta_per_step": -1.7613073829275683e-09,
+          "graph_potential_delta_sum": -5.283922146048781e-06,
+          "guard_blocked_actions": 535.0,
+          "guard_checked_actions": 1211.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.0035662874579429626,
+          "native_J_per_step": -0.026247312208101392,
+          "qos_per_step": -0.02605356369791556,
+          "qos_satisfaction_ratio_per_step": -0.02605356369791556,
+          "qos_satisfaction_ratio_sum": -78.16069109374666,
+          "raw_native_J": -78.74193662430389,
+          "return_constraint_cost_per_step": 9.687337443916737e-05,
+          "return_constraint_cost_raw_per_step": 9.687337443916737e-05,
+          "return_constraint_cost_raw_sum": 0.2906201233175021,
+          "return_constraint_cost_sum": 0.2906201233175021,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": -0.026247312208101503,
+          "scenario7_reward_sum": -78.74193662430434,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.025833333333333347,
+          "step_charger_input_wh_sum": 77.50000000000006,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "C-I": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.010583301911166187,
+          "battery_min_ratio_sum": -31.749905733498622,
+          "below_fixed_reserve_uav_step_fraction": -8.333333333333333e-05,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.11699999999999999,
+          "charging_uav_count_sum": 351.0,
+          "cumulative_qos": -85.91608291324656,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": -0.8591608291324668,
+          "delivered_end_to_end_throughput_mbps_sum": -2577.4824873973994,
+          "delivered_megabits": -2577.4824873973994,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 62.94050621852716,
+          "energy_input_wh": 97.5,
+          "episode_minimum_battery_ratio": 0.005582947739901381,
+          "feedback_entry_count": 7.0,
+          "feedback_exit_count": 8.0,
+          "feedback_mode_uav_steps": 1506.0,
+          "graph_potential_delta_per_step": 0.0,
+          "graph_potential_delta_sum": 0.0,
+          "guard_blocked_actions": -476.0,
+          "guard_checked_actions": -1614.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.005582943558692932,
+          "native_J_per_step": -0.028439718249310353,
+          "qos_per_step": -0.028638694304415457,
+          "qos_satisfaction_ratio_per_step": -0.028638694304415457,
+          "qos_satisfaction_ratio_sum": -85.91608291324656,
+          "raw_native_J": -85.31915474793095,
+          "return_constraint_cost_per_step": -9.948802755258988e-05,
+          "return_constraint_cost_raw_per_step": -9.948802755258988e-05,
+          "return_constraint_cost_raw_sum": -0.2984640826577696,
+          "return_constraint_cost_sum": -0.2984640826577696,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": -0.028439718249310353,
+          "scenario7_reward_sum": -85.31915474793095,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.0325,
+          "step_charger_input_wh_sum": 97.5,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "I-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.0007149334422500431,
+          "battery_min_ratio_sum": -2.144800326750101,
+          "below_fixed_reserve_uav_step_fraction": 8.333333333333333e-05,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": -0.02400000000000002,
+          "charging_uav_count_sum": -72.0,
+          "cumulative_qos": 7.755391819499891,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 0.0775539181950009,
+          "delivered_end_to_end_throughput_mbps_sum": 232.6617545850022,
+          "delivered_megabits": 232.6617545850022,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 22.023602311225886,
+          "energy_input_wh": -20.0,
+          "episode_minimum_battery_ratio": -0.0020166607583709806,
+          "feedback_entry_count": -6.0,
+          "feedback_exit_count": -4.0,
+          "feedback_mode_uav_steps": -3594.0,
+          "graph_potential_delta_per_step": -1.7613073829275683e-09,
+          "graph_potential_delta_sum": -5.283922146048781e-06,
+          "guard_blocked_actions": 1011.0,
+          "guard_checked_actions": 2825.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": -0.0020166561007499695,
+          "native_J_per_step": 0.0021924060412089608,
+          "qos_per_step": 0.002585130606499897,
+          "qos_satisfaction_ratio_per_step": 0.002585130606499897,
+          "qos_satisfaction_ratio_sum": 7.755391819499891,
+          "raw_native_J": 6.577218123627063,
+          "return_constraint_cost_per_step": 0.00019636140199175725,
+          "return_constraint_cost_raw_per_step": 0.00019636140199175725,
+          "return_constraint_cost_raw_sum": 0.5890842059752717,
+          "return_constraint_cost_sum": 0.5890842059752717,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.0021924060412088497,
+          "scenario7_reward_sum": 6.577218123626608,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": -0.006666666666666654,
+          "step_charger_input_wh_sum": -19.999999999999943,
+          "zero_qos_spells_ge60": 0.0
+        }
+      },
+      "episode_lengths": {
+        "C": 3000,
+        "H": 3000,
+        "I": 3000
+      },
+      "hashes": {
+        "initial_state_sha256": "equal",
+        "rng_state_stream_sha256": "equal",
+        "user_xy_trace_sha256": "equal"
+      },
+      "seed": 31092807,
+      "terminal_types": {
+        "C": "truncated",
+        "H": "truncated",
+        "I": "truncated"
+      }
+    },
+    {
+      "available_arms": [
+        "H",
+        "I",
+        "C"
+      ],
+      "contrasts": {
+        "C-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.01131460831945963,
+          "battery_min_ratio_sum": 33.943824958378855,
+          "below_fixed_reserve_uav_step_fraction": -0.037125,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.021333333333333315,
+          "charging_uav_count_sum": 64.0,
+          "cumulative_qos": 135.034274311447,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 1.3503427431144708,
+          "delivered_end_to_end_throughput_mbps_sum": 4051.028229343414,
+          "delivered_megabits": 4051.028229343414,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": -15.106383603377026,
+          "energy_input_wh": 17.77777777777777,
+          "episode_minimum_battery_ratio": 0.008339032398290425,
+          "feedback_entry_count": -13.0,
+          "feedback_exit_count": -13.0,
+          "feedback_mode_uav_steps": -876.0,
+          "graph_potential_delta_per_step": 3.2132969988302174e-07,
+          "graph_potential_delta_sum": 0.0009639890996488987,
+          "guard_blocked_actions": 859.0,
+          "guard_checked_actions": 1205.0,
+          "max_below_half_qos_gap": -1.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.008339032530784607,
+          "native_J_per_step": 0.055080954719599395,
+          "qos_per_step": 0.045011424770482256,
+          "qos_satisfaction_ratio_per_step": 0.045011424770482256,
+          "qos_satisfaction_ratio_sum": 135.034274311447,
+          "raw_native_J": 165.24286415879806,
+          "return_constraint_cost_per_step": -0.005034604309708552,
+          "return_constraint_cost_raw_per_step": -0.005034604309708552,
+          "return_constraint_cost_raw_sum": -15.103812929125658,
+          "return_constraint_cost_sum": -15.103812929125658,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.055080954719599395,
+          "scenario7_reward_sum": 165.24286415879806,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.005925925925925918,
+          "step_charger_input_wh_sum": 17.77777777777777,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "C-I": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": -0.011180661659831503,
+          "battery_min_ratio_sum": -33.5419849794946,
+          "below_fixed_reserve_uav_step_fraction": 0.0,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": 0.02899999999999997,
+          "charging_uav_count_sum": 87.0,
+          "cumulative_qos": 39.742772993658036,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 0.3974277299365845,
+          "delivered_end_to_end_throughput_mbps_sum": 1192.2831898097502,
+          "delivered_megabits": 1192.2831898097502,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": 4.806945900946175,
+          "energy_input_wh": 24.16666666666663,
+          "episode_minimum_battery_ratio": -0.00017262255149885775,
+          "feedback_entry_count": -2.0,
+          "feedback_exit_count": -2.0,
+          "feedback_mode_uav_steps": 550.0,
+          "graph_potential_delta_per_step": 0.0,
+          "graph_potential_delta_sum": 0.0,
+          "guard_blocked_actions": -1351.0,
+          "guard_checked_actions": -598.0,
+          "max_below_half_qos_gap": 0.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": -0.00017262250185012817,
+          "native_J_per_step": 0.013161355394796792,
+          "qos_per_step": 0.013247590997885972,
+          "qos_satisfaction_ratio_per_step": 0.013247590997885972,
+          "qos_satisfaction_ratio_sum": 39.742772993658036,
+          "raw_native_J": 39.484066184390485,
+          "return_constraint_cost_per_step": 4.311780154457731e-05,
+          "return_constraint_cost_raw_per_step": 4.311780154457731e-05,
+          "return_constraint_cost_raw_sum": 0.1293534046337319,
+          "return_constraint_cost_sum": 0.1293534046337319,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.013161355394796792,
+          "scenario7_reward_sum": 39.484066184390485,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": 0.008055555555555524,
+          "step_charger_input_wh_sum": 24.16666666666663,
+          "zero_qos_spells_ge60": 0.0
+        },
+        "I-H": {
+          "actual_length": 0.0,
+          "battery_min_ratio_per_step": 0.022495269979291133,
+          "battery_min_ratio_sum": 67.48580993787346,
+          "below_fixed_reserve_uav_step_fraction": -0.037125,
+          "below_half_qos_spells_ge60": 0.0,
+          "charging_uav_count_per_step": -0.007666666666666655,
+          "charging_uav_count_sum": -23.0,
+          "cumulative_qos": 95.29150131778897,
+          "cutoff_event_count_per_step": 0.0,
+          "cutoff_event_count_sum": 0.0,
+          "cutoff_event_penalty_per_step": 0.0,
+          "cutoff_event_penalty_sum": 0.0,
+          "delivered_end_to_end_throughput_mbps_per_step": 0.9529150131778863,
+          "delivered_end_to_end_throughput_mbps_sum": 2858.7450395336637,
+          "delivered_megabits": 2858.7450395336637,
+          "depletion_event_count_per_step": 0.0,
+          "depletion_event_count_sum": 0.0,
+          "depletion_event_penalty_per_step": 0.0,
+          "depletion_event_penalty_sum": 0.0,
+          "energy_consumed_wh": -19.9133295043232,
+          "energy_input_wh": -6.388888888888857,
+          "episode_minimum_battery_ratio": 0.008511654949789282,
+          "feedback_entry_count": -11.0,
+          "feedback_exit_count": -11.0,
+          "feedback_mode_uav_steps": -1426.0,
+          "graph_potential_delta_per_step": 3.2132969988302174e-07,
+          "graph_potential_delta_sum": 0.0009639890996488987,
+          "guard_blocked_actions": 2210.0,
+          "guard_checked_actions": 1803.0,
+          "max_below_half_qos_gap": -1.0,
+          "max_zero_qos_gap": 0.0,
+          "min_decoded_battery": 0.008511655032634735,
+          "native_J_per_step": 0.0419195993248026,
+          "qos_per_step": 0.031763833772596284,
+          "qos_satisfaction_ratio_per_step": 0.031763833772596284,
+          "qos_satisfaction_ratio_sum": 95.29150131778897,
+          "raw_native_J": 125.75879797440757,
+          "return_constraint_cost_per_step": -0.00507772211125313,
+          "return_constraint_cost_raw_per_step": -0.00507772211125313,
+          "return_constraint_cost_raw_sum": -15.233166333759389,
+          "return_constraint_cost_sum": -15.233166333759389,
+          "return_penalty_coefficient_per_step": 0.0,
+          "return_penalty_coefficient_sum": 0.0,
+          "scenario7_reward_per_step": 0.0419195993248026,
+          "scenario7_reward_sum": 125.75879797440757,
+          "service_cutoff_uav_step_fraction": 0.0,
+          "step_charger_input_wh_per_step": -0.0021296296296296063,
+          "step_charger_input_wh_sum": -6.388888888888857,
+          "zero_qos_spells_ge60": 0.0
+        }
+      },
+      "episode_lengths": {
+        "C": 3000,
+        "H": 3000,
+        "I": 3000
+      },
+      "hashes": {
+        "initial_state_sha256": "equal",
+        "rng_state_stream_sha256": "equal",
+        "user_xy_trace_sha256": "equal"
+      },
+      "seed": 31092808,
+      "terminal_types": {
+        "C": "truncated",
+        "H": "truncated",
+        "I": "truncated"
+      }
+    }
+  ],
+  "panels": {
+    "C": {
+      "completed_worlds": 8,
+      "means": {
+        "actual_length": 3000.0,
+        "battery_min_ratio_per_step": 0.2957481777898527,
+        "battery_min_ratio_sum": 887.244533369558,
+        "below_fixed_reserve_uav_step_fraction": 0.0015364583333333333,
+        "below_half_qos_spells_ge60": 0.875,
+        "charging_uav_count_per_step": 0.5939583333333334,
+        "charging_uav_count_sum": 1781.875,
+        "cumulative_qos": 2402.7520864000317,
+        "cutoff_event_count_per_step": 0.0,
+        "cutoff_event_count_sum": 0.0,
+        "cutoff_event_penalty_per_step": 0.0,
+        "cutoff_event_penalty_sum": 0.0,
+        "delivered_end_to_end_throughput_mbps_per_step": 24.02752086400032,
+        "delivered_end_to_end_throughput_mbps_sum": 72082.56259200095,
+        "delivered_megabits": 72082.56259200095,
+        "depletion_event_count_per_step": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "depletion_event_penalty_per_step": 0.0,
+        "depletion_event_penalty_sum": 0.0,
+        "energy_consumed_wh": 1421.4565528169842,
+        "energy_input_wh": 487.4283681356593,
+        "episode_minimum_battery_ratio": 0.10509900870845697,
+        "feedback_entry_count": 39.25,
+        "feedback_exit_count": 33.5,
+        "feedback_mode_uav_steps": 5968.25,
+        "graph_potential_delta_per_step": -0.010165154169220599,
+        "graph_potential_delta_sum": -30.4954625076618,
+        "guard_blocked_actions": 1203.25,
+        "guard_checked_actions": 15342.25,
+        "max_below_half_qos_gap": 101.0,
+        "max_zero_qos_gap": 19.875,
+        "min_decoded_battery": 0.10509900841861963,
+        "native_J_per_step": 0.7894953033662189,
+        "qos_per_step": 0.800917362133344,
+        "qos_satisfaction_ratio_per_step": 0.800917362133344,
+        "qos_satisfaction_ratio_sum": 2402.7520864000317,
+        "raw_native_J": 2368.4859100986564,
+        "return_constraint_cost_per_step": 0.0006284522989522465,
+        "return_constraint_cost_raw_per_step": 0.0006284522989522465,
+        "return_constraint_cost_raw_sum": 1.8853568968567394,
+        "return_constraint_cost_sum": 1.8853568968567394,
+        "return_penalty_coefficient_per_step": 2.0,
+        "return_penalty_coefficient_sum": 6000.0,
+        "scenario7_reward_per_step": 0.7894953033662189,
+        "scenario7_reward_sum": 2368.4859100986564,
+        "service_cutoff_uav_step_fraction": 0.0,
+        "step_charger_input_wh_per_step": 0.16247612271188644,
+        "step_charger_input_wh_sum": 487.42836813565924,
+        "zero_qos_spells_ge60": 0.25
+      },
+      "planned_worlds": 8,
+      "status": "observed_complete",
+      "terminal_types": {
+        "horizon": 0,
+        "terminated": 0,
+        "truncated": 8
+      },
+      "zero_service_worlds": 0
+    },
+    "H": {
+      "completed_worlds": 8,
+      "means": {
+        "actual_length": 3000.0,
+        "battery_min_ratio_per_step": 0.29408623265753747,
+        "battery_min_ratio_sum": 882.2586979726124,
+        "below_fixed_reserve_uav_step_fraction": 0.011041666666666667,
+        "below_half_qos_spells_ge60": 0.75,
+        "charging_uav_count_per_step": 0.4544166666666667,
+        "charging_uav_count_sum": 1363.25,
+        "cumulative_qos": 2308.4164096767167,
+        "cutoff_event_count_per_step": 0.0,
+        "cutoff_event_count_sum": 0.0,
+        "cutoff_event_penalty_per_step": 0.0,
+        "cutoff_event_penalty_sum": 0.0,
+        "delivered_end_to_end_throughput_mbps_per_step": 23.084164096767168,
+        "delivered_end_to_end_throughput_mbps_sum": 69252.4922903015,
+        "delivered_megabits": 69252.4922903015,
+        "depletion_event_count_per_step": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "depletion_event_penalty_per_step": 0.0,
+        "depletion_event_penalty_sum": 0.0,
+        "energy_consumed_wh": 1355.0193087640273,
+        "energy_input_wh": 378.68055555555554,
+        "episode_minimum_battery_ratio": 0.10041219584415648,
+        "feedback_entry_count": 42.875,
+        "feedback_exit_count": 35.625,
+        "feedback_mode_uav_steps": 8257.125,
+        "graph_potential_delta_per_step": -0.010161391335334235,
+        "graph_potential_delta_sum": -30.484174006002704,
+        "guard_blocked_actions": 858.875,
+        "guard_checked_actions": 14222.25,
+        "max_below_half_qos_gap": 100.75,
+        "max_zero_qos_gap": 19.875,
+        "min_decoded_battery": 0.10041219461709261,
+        "native_J_per_step": 0.7552803981198406,
+        "qos_per_step": 0.7694721365589056,
+        "qos_satisfaction_ratio_per_step": 0.7694721365589056,
+        "qos_satisfaction_ratio_sum": 2308.4164096767167,
+        "raw_native_J": 2265.841194359522,
+        "return_constraint_cost_per_step": 0.002015173551865354,
+        "return_constraint_cost_raw_per_step": 0.002015173551865354,
+        "return_constraint_cost_raw_sum": 6.045520655596062,
+        "return_constraint_cost_sum": 6.045520655596062,
+        "return_penalty_coefficient_per_step": 2.0,
+        "return_penalty_coefficient_sum": 6000.0,
+        "scenario7_reward_per_step": 0.7552803981198406,
+        "scenario7_reward_sum": 2265.841194359522,
+        "service_cutoff_uav_step_fraction": 0.0,
+        "step_charger_input_wh_per_step": 0.12622685185185184,
+        "step_charger_input_wh_sum": 378.6805555555555,
+        "zero_qos_spells_ge60": 0.25
+      },
+      "planned_worlds": 8,
+      "status": "observed_complete",
+      "terminal_types": {
+        "horizon": 0,
+        "terminated": 0,
+        "truncated": 8
+      },
+      "zero_service_worlds": 0
+    },
+    "I": {
+      "completed_worlds": 8,
+      "means": {
+        "actual_length": 3000.0,
+        "battery_min_ratio_per_step": 0.31334723549019416,
+        "battery_min_ratio_sum": 940.0417064705827,
+        "below_fixed_reserve_uav_step_fraction": 0.001,
+        "below_half_qos_spells_ge60": 0.75,
+        "charging_uav_count_per_step": 0.560125,
+        "charging_uav_count_sum": 1680.375,
+        "cumulative_qos": 2444.4973689094136,
+        "cutoff_event_count_per_step": 0.0,
+        "cutoff_event_count_sum": 0.0,
+        "cutoff_event_penalty_per_step": 0.0,
+        "cutoff_event_penalty_sum": 0.0,
+        "delivered_end_to_end_throughput_mbps_per_step": 24.444973689094134,
+        "delivered_end_to_end_throughput_mbps_sum": 73334.92106728241,
+        "delivered_megabits": 73334.92106728241,
+        "depletion_event_count_per_step": 0.0,
+        "depletion_event_count_sum": 0.0,
+        "depletion_event_penalty_per_step": 0.0,
+        "depletion_event_penalty_sum": 0.0,
+        "energy_consumed_wh": 1366.684520308604,
+        "energy_input_wh": 449.66266284537437,
+        "episode_minimum_battery_ratio": 0.10332794434011228,
+        "feedback_entry_count": 28.625,
+        "feedback_exit_count": 23.75,
+        "feedback_mode_uav_steps": 4537.125,
+        "graph_potential_delta_per_step": -0.010165567139928009,
+        "graph_potential_delta_sum": -30.496701419784028,
+        "guard_blocked_actions": 1904.875,
+        "guard_checked_actions": 16641.75,
+        "max_below_half_qos_gap": 99.75,
+        "max_zero_qos_gap": 19.875,
+        "min_decoded_battery": 0.10332794487476349,
+        "native_J_per_step": 0.8036946739775848,
+        "qos_per_step": 0.8148324563031379,
+        "qos_satisfaction_ratio_per_step": 0.8148324563031379,
+        "qos_satisfaction_ratio_sum": 2444.4973689094136,
+        "raw_native_J": 2411.0840219327542,
+        "return_constraint_cost_per_step": 0.0004861075928125697,
+        "return_constraint_cost_raw_per_step": 0.0004861075928125697,
+        "return_constraint_cost_raw_sum": 1.4583227784377093,
+        "return_constraint_cost_sum": 1.4583227784377093,
+        "return_penalty_coefficient_per_step": 2.0,
+        "return_penalty_coefficient_sum": 6000.0,
+        "scenario7_reward_per_step": 0.8036946739775848,
+        "scenario7_reward_sum": 2411.0840219327542,
+        "service_cutoff_uav_step_fraction": 0.0,
+        "step_charger_input_wh_per_step": 0.14988755428179146,
+        "step_charger_input_wh_sum": 449.66266284537437,
+        "zero_qos_spells_ge60": 0.25
+      },
+      "planned_worlds": 8,
+      "status": "observed_complete",
+      "terminal_types": {
+        "horizon": 0,
+        "terminated": 0,
+        "truncated": 8
+      },
+      "zero_service_worlds": 0
+    }
+  },
+  "parent_cpu_seconds": 0.30482399999999976,
+  "parent_peak_rss_kib": 477564,
+  "partial_observed_transitions": 0,
+  "planned_jobs": 24,
+  "planner_costs_status": "complete_for_submitted_jobs",
+  "pool_errors": [],
+  "runner_error": null,
+  "status": "complete",
+  "submitted_jobs": [
+    "H/31092801",
+    "I/31092801",
+    "C/31092801",
+    "H/31092802",
+    "I/31092802",
+    "C/31092802",
+    "H/31092803",
+    "I/31092803",
+    "C/31092803",
+    "H/31092804",
+    "I/31092804",
+    "C/31092804",
+    "H/31092805",
+    "I/31092805",
+    "C/31092805",
+    "H/31092806",
+    "I/31092806",
+    "C/31092806",
+    "H/31092807",
+    "I/31092807",
+    "C/31092807",
+    "H/31092808",
+    "I/31092808",
+    "C/31092808"
+  ],
+  "total_actual_costs": {
+    "event_count": 2119633,
+    "model_evaluations": 108581,
+    "phase_count": 2552590,
+    "planner_wall_seconds": 1893.6094718553359,
+    "score_requests": 115148,
+    "service_snapshots": 325743
+  },
+  "unknown_planner_cost_jobs": [],
+  "unreconciled_jobs": [],
+  "unstarted_jobs": [],
+  "worker_cpu_seconds_sum": 4066.021775,
+  "worker_peak_rss_kib_max": 561840,
+  "worker_resources_unmeasured": [],
+  "worker_wall_seconds_sum": 3980.4109784890898
+}

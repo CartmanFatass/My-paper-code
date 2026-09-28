@@ -1,0 +1,67 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/70d1d7a565a02f1601e443ecac730b2fe43a04e72a7bf0fcb7cdf5bd82f267a9.json",
+  "direction": "uav_energy_coordination",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790568706.357294,
+      "path": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 859694,
+        "session_id": 859693,
+        "start_ticks": 91619612
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 859693,
+        "session_id": 859693,
+        "start_ticks": 91619609
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-28T04:12:03.657123Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/70d1d7a565a02f1601e443ecac730b2fe43a04e72a7bf0fcb7cdf5bd82f267a9.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b01_analytical_coordination_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "e663b53c7ea3f52983365ed9c3ce044bc4ccf699",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/7ea7d7d869b94ac5aba9f7ff532c6590"
+}
