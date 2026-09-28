@@ -842,3 +842,33 @@ result seeds. Independent engineering review is required for the final executabl
 contract. Publish exact inputs, launch once, keep this child active through
 same-handle deterministic waiting, collect/read the complete record, obtain the
 required independent result diagnosis and publish the disposition before return.
+
+### 2026-09-28 - B02 engineering acceptance before exposure
+
+The bounded Implementer delivered only the prior-controller module and its
+constructed-observation checks. The DM read and accepts that work: it subclasses
+H_BS state, reuses the unchanged PointSetHeuristic, copies no privileged source
+and adds no alternate assignment/action rule. DM-owned runner, paired readout and
+admitted entrypoint keep all B01 source and artifacts untouched. The risk observer
+copies exact native batteries after each transition; those values never enter
+either controller. Returned native arrays remain preserved even if downstream
+reading fails, and incomplete panels suppress paired/practical-risk claims.
+
+The DM's focused suite passed **19 checks in 8.55s**. The independent registered
+engineering Reviewer read all six new files and the prospective contract, then
+independently passed the same **19 checks in 8.28s**: **no material finding**.
+Both runs reported the same 14 existing dependency deprecation warnings. Each
+executed four 31-step seed-17 native observer-off/on fixtures, so B02 engineering
+exposure is **248 native transitions, zero fits**. Implementer checks were
+constructed observations only; mocked persistence/failure tests created no native
+transitions. The declared 32 fresh result worlds remain unexposed. Review limits
+are no full-H3000 execution, destination-node runtime check or abrupt spawned-
+worker-death reproduction; failure serialization uses a single-worker thread
+substitute. These are coverage limits, not invented extra launch gates.
+
+Root supplied cross-question context from E's distinct 16-world panel: ten worlds
+had no legally known BS at any macro decision and all four intervention traces
+matched H there, with six activated. That is not B01's denominator, a separately
+randomized subgroup or permission to select worlds. It reinforces the scope
+distinction only. B02's already selected fresh full panel, estimator, cost and
+stopping contract are unchanged and require no E result gate.
