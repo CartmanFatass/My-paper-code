@@ -149,3 +149,8 @@ fallbacks, 47 planned steps). Fixture numbers characterise the code, not any alg
 `ideal_full_current_demand` is inert in `get_current_state()` and crashes the final observation on both demand
 sources; not fixed here. Scratch: `temp/directions/uav_restoration_readiness/scratch/implementer-b01/` (fixture
 output 1.7 MB, kept until closure).
+
+Provenance note: the RESEARCH Active row for this direction was written in this shared checkout and reached
+main inside Root's commit 31d62f6b5 (Root staged the whole index file while committing its own retirement
+entry); the row text is the DM's. Seeds files `b01/seeds_dev.json` (101–108) and `b01/seeds_price.json` (101)
+are committed with this note so the snapshot launcher can resolve them from the source tree.

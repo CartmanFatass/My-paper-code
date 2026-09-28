@@ -1,0 +1,1 @@
+{"episode_seeds": [101, 102, 103, 104, 105, 106, 107, 108], "note": "b01 dev scenarios, declared 2026-09-28 before any real-data run; the seed draws the 30 min test-split window and the failed site"}
