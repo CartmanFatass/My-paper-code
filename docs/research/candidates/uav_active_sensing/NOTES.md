@@ -513,3 +513,32 @@ Root has observed that App queue cannot wake an unloaded native child. This DM
 therefore remains in its native turn, using deterministic same-handle waiting
 and checkpoint rearming until collection and scientific reading, rather than
 ending after observer registration or changing the observation target.
+
+### 2026-09-28 - B01 native operation accepted
+
+Exact published source is **38b7f132af8e26b851826f2e3db90a5fb5fb1a06**.
+The configured wsl_4070 supervisor accepted the request and the native admission
+kernel accepted this single operation at **04:26:06 UTC**. The authoritative
+[manifest](../../../../runs/uav_active_sensing/b01_native_j_a01/launch-manifest.json)
+pins the operation, runner/supervisor identities and immutable source snapshot;
+the [actual-node preflight](../../../../runs/uav_active_sensing/b01_native_j_a01/admission-preflight.json)
+measured **13,499,113,472** available physical/effective bytes against the
+4,294,967,296-byte floor. Initial status and detached observation both report
+accepted/running, consistent identities, no exit witness and zero probe errors.
+This is an accepted training/collection operation, **not a read result**.
+
+The same-handle observer is generation 1 at
+`/home/fires/.local/state/hmasd-wait/01a0e600-4fa1-7060-91f0-ae8e132f0732`,
+job `b01_native_j_a01`, with a 1500-second checkpoint window and 60-second
+read-only status probes. Its first drain at 04:27:53 UTC adopted the accepted
+manifest. Preserve this reference and rearm checkpoints without a worker restart;
+the DM keeps its native turn active through deterministic waits.
+
+Only this direction's published ACTIVE row was added to the dirty remote
+canonical index under its writer lock. Other text, pause, sparse selection and
+outputs were preserved. One incorrectly quoted prelaunch SSH synchronization
+attempt failed before finding the lock/repository and made no change; corrected
+quoting then fetched and synchronized the one row. The node still reports its
+pre-existing Git GC bad-tree warning `9e40125ee3e24973b69754649226d18847b45862`;
+no unrelated repair was attempted. Published-source snapshot creation and native
+admission succeeded. No scientific retry or alternate operation was launched.

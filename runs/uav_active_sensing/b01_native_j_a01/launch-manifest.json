@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-28T04:26:06.221442Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4d37977a05ce465389ad5b322bcdbedd/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4d37977a05ce465389ad5b322bcdbedd/experiments/candidates/uav_active_sensing/run_b01.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01",
+    "--launch-sha",
+    "38b7f132af8e26b851826f2e3db90a5fb5fb1a06",
+    "--workers",
+    "4"
+  ],
+  "claim_key": "682861dba26663810c58dfa0f534a37c57509ff94303bf08a15c0d644991d7da",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/682861dba26663810c58dfa0f534a37c57509ff94303bf08a15c0d644991d7da.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4d37977a05ce465389ad5b322bcdbedd/experiments/candidates/uav_active_sensing/run_b01.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01",
+    "--launch-sha",
+    "38b7f132af8e26b851826f2e3db90a5fb5fb1a06",
+    "--workers",
+    "4"
+  ],
+  "command_sha256": "b1325bf36044e802ed53f089a59513a1e73ea703e46f1c558bd2995cda1baf79",
+  "control_observation": {
+    "observed_at": "2026-09-28T04:26:06.081864Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "38b7f132af8e26b851826f2e3db90a5fb5fb1a06"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-28T04:26:06.111698Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4d37977a05ce465389ad5b322bcdbedd",
+  "direction": "uav_active_sensing",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_active_sensing/run_b01.py",
+    "--launch-sha",
+    "38b7f132af8e26b851826f2e3db90a5fb5fb1a06",
+    "--workers",
+    "4"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/682861dba26663810c58dfa0f534a37c57509ff94303bf08a15c0d644991d7da.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 872467,
+      "session_id": 872467,
+      "start_ticks": 91905558
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 872467,
+    "process_group_id": 872467
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 872468,
+      "session_id": 872467,
+      "start_ticks": 91905560
+    },
+    "pid": 872468,
+    "process_group_id": 872467,
+    "supervisor_pid": 872467
+  },
+  "schema_version": 1,
+  "sha": "38b7f132af8e26b851826f2e3db90a5fb5fb1a06",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/4d37977a05ce465389ad5b322bcdbedd",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_active_sensing/b01_native_j_a01/stdout.log"
+}
