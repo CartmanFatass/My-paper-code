@@ -1098,3 +1098,105 @@ energy balance under actual nearest-station control**, not an insufficient
 nameplate-power theorem. This remains one question for Root's existing
 selection critic and joint portfolio allocation. I make no RESEARCH activation,
 substantial implementation or result-bearing launch in this reasoning turn.
+
+## 2026-09-28 - B02 selected H12000 O_H/P and implementation L0
+
+Root selects the complete `e2ff83480` comparison at published `613c8bcfc`.
+I read the full [same independent selection answer and disposition](../../RESEARCH.md#portfolio-review-2026-09-28-joint-next-round-programme),
+including its concrete persistent-service answer first published at `7add6fe54`.
+It has no material dissent: the incremental use question is O_H versus P, not
+best available planning, duration fidelity, learning or sustainability. I adopt
+its terminal-window clarification below and its opportunity-cost limitation.
+The selected programme values this longer-mission scope question alongside a
+separate learning investment; no new selection critic or Pro is needed. B01 and
+its failed intended-duration semantics, adverse worlds and stopped PPO recipe
+remain unchanged. No B01 worker or observer is active. The new sole active idea
+is B02 `b02_long_mission_a01`.
+
+### L0: exact finite evaluator and trustworthy terminal readings
+
+Deliver a direction-owned entry point
+`experiments/candidates/uav_persistent_service/b02/run_b02.py`, bounded evaluator
+and readout under that `b02/`, and matching `tests/.../uav_persistent_service/b02/`.
+Reuse retained `NativeEpisode`, controller, native F and measurement helpers;
+do not edit shared environment, P, controller arithmetic or B01 records. A B02
+episode adapter binds both controller/readout layouts to H12000 before the first
+decision. Internal ordinary arm remains the original `O`; external identity is
+`O_H` so the changed known-horizon parameterization is explicit. P remains the
+exact TransitHold program. Neither arm learns or chooses a checkpoint.
+
+Fixed result plan: seeds52292801..52292808, each with O_H and P, H12000 continuous
+one-second native steps, four single-thread CPU workers on configured
+`wsl_4070` subject to fresh actual-node admission. Zero fits/updates, sixteen
+episodes and at most192000 native transitions. No reset at3000 boundaries,
+extra arm, forecast rollout, validation run, detector repair, failed-cell retry
+or automatic extension. The unchanged cost forecast is at most364800 P snapshot
+queries, about1.89 worker-CPU hours and35..55min runner wall, plus engineering,
+review, publication and reading. Approximately.15..25GB unique evidence is
+expected; estimates are not resource guarantees or scientific stop clocks.
+
+The option interface and all native semantics stay as executed in B01:
+macro30; current users/BS at P10 clock; current legal energy/stations and local
+controller history; Box4 xyz/dock nearest station; no station ID/reservation;
+at most two voluntary commitments; durations120/300/600 after the first decoded
+geometric arrival, including waiting and subsequent time outside capture;
+full/dwell/900-step release and end censoring. Keep the known strict20m decoded
+arrival detector unchanged, including its possible control-affecting mismatch.
+Assignment exclusion remains separate from true F modes. O urgency remains D,
+competitor occupancy uses D+tau_in, and finite restoration uses the selected
+duration+10+tau_out. F enter<=0/exit>=.05, guard, charging allocation, reward,
+fault law and radio eligibility remain unchanged.
+
+Read complete actual trajectories, not padded arrays:
+
+- Complete mission service is accrued native QoS sum divided by12000. Late
+  service is accrued QoS at native indices `[6000,12000)` divided by6000,
+  including termination before/within that interval. Late J is only the native
+  reward actually accrued there. There is no synthetic reward or state suffix.
+- Fixed3000-step bins each report their planned and observed duration, accrued
+  J and planned-window-normalized service. Record terminal step and reason,
+  unserved remaining mission steps, and observed zero/below-half spells
+  separately. An unserved suffix is not an observed zero-service spell.
+- Final300 means the fixed mission window `[11700,12000)`. Its reserve reading
+  is available only when that full window was actually observed. Otherwise it
+  is explicitly missing, never zero or a clean safety result. Terminal sampled
+  battery, terminal-zero service, cutoff/depletion and actual reserve exposure
+  remain observed readings. The retention comparison cannot pass its safety
+  part by treating an early end or missing final300 as clean.
+- Report stock change, gross input, native consumption, positive net charge,
+  charging occupancy and wait, actual travel, all native risks, complete
+  requested/eligible/executed macro decisions, commitment arrival/missed arrival,
+  allocated charge/dwell/timeout/censor/full release, shield interference and
+  subsequent reassignment/movement/connected load. These are readings, not gates.
+
+Pairing must bind identical initial world/BS and exogenous user/RNG trajectories
+through the common observed prefix. Whole-stream hashes alone cannot compare
+different native termination lengths. Retain per-step RNG-state digests and
+existing users for that prefix check without sampling or advancing RNG. When
+both worlds are full length, also retain the original full-stream equality.
+Any real pairing or artifact integrity failure suppresses dependent contrasts,
+while all individual outcomes and technical failures remain visible.
+
+The primary bounded-use rule from the proposal is unchanged: mean O_H-P QoS
+>=.01 and J>0 both full and last6000, without additional cutoff/depletion,
+terminal-zero-service, persistent-reserve failures or worse mean reserve
+exposure. Missing mission windows block a clean-risk conclusion. Preserve all
+world signs and tails even if means pass; paired t7 intervals are descriptive.
+Continued late stock withdrawal limits any gain to H12000. A loss, ambiguity or
+technical missingness does not authorize a repair or another run.
+
+Focused checks cover horizon/clock/wait binding, no-commit P equivalence,
+unchanged strict arrival and ordinary arithmetic, early endings before6000,
+within late window and before final300, exact full-window denominator/J sums,
+prefix pairing with unequal lengths and intentional corruption, risk missingness,
+fixed jobs/costs, bounded runner failure preservation and no accidental learner
+imports/updates. Synthetic fixtures should cover expensive terminal cases.
+Anticipated native correctness cost remains at most240 transitions, zero
+optimizer updates; record actual tests, including independent review runs.
+Independent engineering review is required for evaluator/launch semantics.
+Implementer owns only the new b02 code/tests, no Git index, docs or launch;
+the DM reviews and accepts its diff. Existing source and test consumers stay
+intact. Stop the dependent action on a material semantics or resource conflict;
+otherwise continue through exact input publication, native admission, one
+accepted handle, deterministic observation, collection, full scientific reading,
+result publication and measured lifecycle cleanup. No routine Root approval.
