@@ -22,6 +22,7 @@ import json
 import math
 import os
 import platform
+import resource
 import subprocess
 import sys
 import time
@@ -77,6 +78,11 @@ def build_parser() -> argparse.ArgumentParser:
                         help="required with --information-mode ideal_full_current_demand")
     parser.add_argument("--max-wall-s", type=float, default=None,
                         help="do not start a new episode once this wall budget is spent")
+    parser.add_argument(
+        "--max-cpu-s", type=float, default=None,
+        help="process CPU budget (user+sys, runner and children) in seconds; no new episode "
+             "starts once it is reached; the summary records the stop",
+    )
     parser.add_argument("--planner-top-k", type=int, default=8)
     parser.add_argument("--planner-max-sweeps", type=int, default=2)
     parser.add_argument("--no-admission", action="store_true",
@@ -96,6 +102,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         parser.error("--planner-top-k must be >= 1")
     if args.planner_max_sweeps < 0:
         parser.error("--planner-max-sweeps must be >= 0")
+    if args.max_cpu_s is not None and not args.max_cpu_s > 0.0:
+        raise CliError("--max-cpu-s must be positive", 2)
     if args.max_wall_s is not None and not args.max_wall_s > 0.0:
         parser.error("--max-wall-s must be positive")
     if len(set(args.controllers)) != len(args.controllers):
@@ -119,6 +127,19 @@ def _git(*arguments: str) -> str | None:
     except (OSError, subprocess.CalledProcessError):
         return None
     return completed.stdout.strip()
+
+
+def _cpu_seconds() -> dict[str, float]:
+    """Process CPU (user+sys) of this runner and of its reaped children, in seconds."""
+    own = resource.getrusage(resource.RUSAGE_SELF)
+    kids = resource.getrusage(resource.RUSAGE_CHILDREN)
+    return {
+        "self_user_s": float(own.ru_utime),
+        "self_sys_s": float(own.ru_stime),
+        "children_user_s": float(kids.ru_utime),
+        "children_sys_s": float(kids.ru_stime),
+        "total_s": float(own.ru_utime + own.ru_stime + kids.ru_utime + kids.ru_stime),
+    }
 
 
 def _utc_now() -> str:
@@ -433,15 +454,21 @@ def main(argv: list[str] | None = None) -> int:
     for seed in seeds:
         for name in args.controllers:
             elapsed = time.perf_counter() - started
-            if args.max_wall_s is not None and elapsed >= float(args.max_wall_s):
+            cpu_now = _cpu_seconds()["total_s"]
+            if (args.max_wall_s is not None and elapsed >= float(args.max_wall_s)) or (
+                args.max_cpu_s is not None and cpu_now >= float(args.max_cpu_s)
+            ):
                 stopped_by_budget = True
-                not_started.append({"controller": name, "seed": int(seed)})
+                not_started.append({"controller": name, "seed": int(seed),
+                                    "wall_s_at_stop": elapsed, "cpu_s_at_stop": cpu_now})
                 continue
+            cpu_before = _cpu_seconds()["total_s"]
             env = make_parallel_env(config, dataset_root=args.dataset, seed=seed)
             recorder = _PositionRecorder(make_controller(name))
             episode_started = time.perf_counter()
             record = rollout_controller(env, recorder, seed=seed)
             wall = time.perf_counter() - episode_started
+            cpu_episode = _cpu_seconds()["total_s"] - cpu_before
             status = _data_status(record)
             if data_status is not None and status != data_status:
                 print("error: episodes mixed real and non-real data provenance",
@@ -454,6 +481,7 @@ def main(argv: list[str] | None = None) -> int:
                 "controller": name,
                 "episode_seed": int(seed),
                 "wall_s": wall,
+                "cpu_s": cpu_episode,
                 "record": record,
                 "series": _step_series(env, decision_dt),
                 "uav_positions_per_decision_start": recorder.positions,
@@ -478,7 +506,8 @@ def main(argv: list[str] | None = None) -> int:
                     "planner_wall_s_total": float(sum(item["wall_s"] for item in diagnostics)),
                 }
             write_json(out / "episodes" / name / f"{int(seed)}.json", episode)
-            summary_wall = {"controller": name, "episode_seed": int(seed), "wall_s": wall}
+            summary_wall = {"controller": name, "episode_seed": int(seed), "wall_s": wall,
+                            "cpu_s": cpu_episode}
             if "planner" in episode:
                 summary_wall["n_lp_solves_total"] = episode["planner"]["n_lp_solves_total"]
                 summary_wall["n_lp_solves_per_planned_step_mean"] = episode["planner"][
@@ -528,7 +557,9 @@ def main(argv: list[str] | None = None) -> int:
         "paired_differences": paired_differences(records, seeds),
         "per_episode_wall": episode_walls,
         "max_wall_s": args.max_wall_s,
+        "max_cpu_s": args.max_cpu_s,
         "stopped_by_wall_budget": stopped_by_budget,
+        "cpu_seconds": _cpu_seconds(),
         "episodes_not_started": not_started,
         "episode_order": "seed-major: every requested controller for a seed, then the next seed",
         "recovery_definition": {

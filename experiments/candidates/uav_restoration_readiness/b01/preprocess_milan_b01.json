@@ -1,0 +1,42 @@
+{
+  "utm_zone": 32,
+  "interval_duration_ms": 600000,
+  "activity_field": "internet",
+  "columns": {
+    "n_columns": 8,
+    "square_id": 0,
+    "time_interval_ms": 1,
+    "country_code": 2,
+    "internet_activity": 7,
+    "delimiter": "\t",
+    "has_header": false
+  },
+  "region": {
+    "rule": "latlon_bbox",
+    "min_lat_deg": 45.458,
+    "max_lat_deg": 45.48,
+    "min_lon_deg": 9.175,
+    "max_lon_deg": 9.205,
+    "max_cells": 400
+  },
+  "duplicate_key_rule": "reject",
+  "missing_value_policy": "unknown",
+  "reference_scale_quantile": 0.95,
+  "train_dates": [
+    "2013-11-14",
+    "2013-11-15"
+  ],
+  "validation_dates": [
+    "2013-11-19"
+  ],
+  "test_dates": [
+    "2013-11-20",
+    "2013-11-21",
+    "2013-11-22"
+  ],
+  "dataset_version": "Harvard Dataverse doi:10.7910/DVN/EGZHFV v1.3 (released 2020-02-09); grid doi:10.7910/DVN/QJWLFU v1.3",
+  "source_url": "https://doi.org/10.1038/sdata.2015.55",
+  "license_note": "ODbL 1.0 (publisher terms on Dataverse); attribution required: \"from BigDataChallenge contest\" (http://www.telecomitalia.com/tit/en/bigdatachallenge.html). This repository grants no data licence; code licence and data licence are separate. b01 smallest-usable copy of preprocess_milan_reference.json: only the split dates and provenance fields differ.",
+  "description": "Aggregated Internet activity per Milano Grid cell and 10-minute interval, summed over country codes. Activity is not measured Mbps, not a user count and not individual traffic. b01 direction-owned copy: train 2013-11-14/15, validation 2013-11-19, test 2013-11-20/21/22 (six files).",
+  "max_activity_value": 1000000000.0
+}
