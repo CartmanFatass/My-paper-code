@@ -163,7 +163,11 @@ def test_runner_root_and_arguments():
     assert (runner.ROOT / "scripts" / "hmasd_launch.py").is_file() and runner.ROOT == pr.ROOT
     args = runner.parse_args(["block1", "--out", "runs/energy_relay_benchmark/x", "--launch-sha", "abc"])
     assert args.threads == 2 and args.workers == 1 and args.worlds == "955001-955032"
-    assert args.checkpoint == runner.DEFAULT_CHECKPOINT
+    assert args.checkpoint is None          # resolved under --data-root by probe_run.run
+    assert args.data_root == runner.ROOT
+    other = runner.parse_args(["block1", "--out", "x", "--launch-sha", "abc", "--data-root", "/elsewhere"])
+    assert other.data_root == Path("/elsewhere")
+    assert runner.DEFAULT_CHECKPOINT == runner.ROOT / runner.CHECKPOINT_REL
 
 
 def _global_rng():

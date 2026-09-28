@@ -18,7 +18,8 @@ ROOT = Path(__file__).resolve().parents[4]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-DEFAULT_CHECKPOINT = ROOT / "runs/energy_relay_benchmark/b02_s1_set_a01r/checkpoints/c06"
+CHECKPOINT_REL = "runs/energy_relay_benchmark/b02_s1_set_a01r/checkpoints/c06"
+DEFAULT_CHECKPOINT = ROOT / CHECKPOINT_REL   # informational; the default resolves under --data-root
 
 
 def parse_args(argv=None):
@@ -30,7 +31,11 @@ def parse_args(argv=None):
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--threads", type=int, default=2)
     parser.add_argument("--worlds", default="955001-955032")
-    parser.add_argument("--checkpoint", type=Path, default=DEFAULT_CHECKPOINT)
+    parser.add_argument("--checkpoint", type=Path, default=None,
+                        help="saved c06 directory; default <data-root>/" + CHECKPOINT_REL)
+    parser.add_argument("--data-root", type=Path, default=ROOT,
+                        help="checkout holding runs/ (checkpoint, node traces, recorded panel); under a "
+                             "--snapshot launch the code root is a source worktree without them")
     return parser.parse_args(argv)
 
 
@@ -47,7 +52,8 @@ def main(argv=None):
 
     manifest = run(args.command, out=args.out, launch_sha=args.launch_sha, workers=args.workers,
                    threads=args.threads, worlds=parse_worlds(args.worlds),
-                   checkpoint=args.checkpoint, argv=sys.argv if argv is None else argv)
+                   checkpoint=args.checkpoint, data_root=args.data_root.resolve(),
+                   argv=sys.argv if argv is None else argv)
     print(f"{args.command}: wrote {args.out} (git {manifest['git_head']})")
     return 0
 

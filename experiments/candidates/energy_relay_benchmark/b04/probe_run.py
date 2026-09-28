@@ -223,7 +223,7 @@ def module_sources(root: Path = ROOT) -> dict[str, str]:
 
 
 def write_manifest(out: Path, *, command: str, launch_sha: str, argv, threads: int, workers: int,
-                   checkpoint: Path, blocks: dict, started: float) -> dict:
+                   checkpoint: Path, blocks: dict, started: float, data_root: Path = ROOT) -> dict:
     record = json.loads((Path(checkpoint) / "record.json").read_text(encoding="utf-8"))
     try:
         head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True,
@@ -231,7 +231,8 @@ def write_manifest(out: Path, *, command: str, launch_sha: str, argv, threads: i
     except Exception:   # pragma: no cover
         head = None
     manifest = {
-        "kind": "zero_fit_probe_of_saved_model", "probe": "b04_geometry_probe_a01", "command": command,
+        "kind": "zero_fit_probe_of_saved_model", "probe": Path(out).name, "command": command,
+        "data_root": str(data_root), "code_root": str(ROOT),
         "launch_sha": launch_sha, "git_head": head, "argv": list(argv),
         "new_episodes": {"block1_id_prefixes": len(blocks.get("block1", {}).get("worlds", [])),
                          "block1_prefix_steps": blocks.get("block1", {}).get("id_prefix_steps", 0),
@@ -252,15 +253,21 @@ def write_manifest(out: Path, *, command: str, launch_sha: str, argv, threads: i
 
 
 def run(command: str, *, out: Path, launch_sha: str, workers: int = 1, threads: int = 2,
-        worlds=WORLDS, checkpoint: Path = ROOT / CHECKPOINT, node_trace: Path | None = ROOT / NODE_TRACE,
-        recorded_panel: Path = ROOT / RECORDED_PANEL, argv=None) -> dict:
+        worlds=WORLDS, checkpoint: Path | None = None, node_trace: Path | None = None,
+        recorded_panel: Path | None = None, data_root: Path = ROOT, argv=None) -> dict:
+    """``data_root`` is the checkout that holds ``runs/`` (gitignored checkpoints, traces and
+    panels); under a ``--snapshot`` launch the code root is a source worktree without them."""
     if workers < 1 or threads < 1 or workers * threads > (os.cpu_count() or 1):
         raise ValueError("workers x threads must be positive and within os.cpu_count()")
+    data_root = Path(data_root)
+    checkpoint = Path(checkpoint) if checkpoint is not None else data_root / CHECKPOINT
+    node_trace = Path(node_trace) if node_trace is not None else data_root / NODE_TRACE
+    recorded_panel = Path(recorded_panel) if recorded_panel is not None else data_root / RECORDED_PANEL
     started = time.perf_counter()
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     blocks: dict[str, Any] = {}
-    summary = {"probe": "b04_geometry_probe_a01", "command": command, "launch_sha": launch_sha,
+    summary = {"probe": Path(out).name, "command": command, "launch_sha": launch_sha, "data_root": str(data_root),
                "status": "INCOMPLETE", "failure": None, "worlds": [int(w) for w in worlds]}
     write_json(out / "summary.json", summary)
     try:
@@ -268,7 +275,7 @@ def run(command: str, *, out: Path, launch_sha: str, workers: int = 1, threads: 
             blocks["block1"] = run_block1(out, worlds=worlds, checkpoint=checkpoint, workers=workers,
                                           threads=threads, node_trace=node_trace)
         if command in ("block0", "all"):
-            blocks["block0"] = run_block0(out, access=load_access(out), threads=threads)
+            blocks["block0"] = run_block0(out, access=load_access(out), root=data_root, threads=threads)
         if command in ("block2", "all"):
             blocks["block2"] = run_block2(out, worlds=worlds, checkpoint=checkpoint, workers=workers,
                                           threads=threads, recorded_panel=recorded_panel)
@@ -283,4 +290,4 @@ def run(command: str, *, out: Path, launch_sha: str, workers: int = 1, threads: 
         write_json(out / "summary.json", summary)
     return write_manifest(out, command=command, launch_sha=launch_sha, argv=argv or sys.argv,
                           threads=threads, workers=workers, checkpoint=checkpoint, blocks=blocks,
-                          started=started)
+                          started=started, data_root=data_root)
