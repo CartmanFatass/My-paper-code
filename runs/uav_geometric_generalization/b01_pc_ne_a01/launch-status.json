@@ -1,0 +1,11 @@
+{
+  "claim_key": "eff8b251972b81009cee314b6317a18465524521dff214627f4b6ededda22fa3",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/eff8b251972b81009cee314b6317a18465524521dff214627f4b6ededda22fa3.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_geometric_generalization/b01_pc_ne_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/eff8b251972b81009cee314b6317a18465524521dff214627f4b6ededda22fa3.json",
+  "pid": 866083,
+  "runner_pid": 866084,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-28T03:57:52.358753Z"
+}

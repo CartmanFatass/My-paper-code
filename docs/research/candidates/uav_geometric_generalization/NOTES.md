@@ -288,3 +288,37 @@ canonical checkout is behind current main with unrelated modified/output paths,
 so no pull, sparse change or output movement is performed. The result uses a
 launcher-managed source snapshot at published main and only this direction's
 current control-row projection is updated when needed.
+
+### B01 accepted on the fixed native handle
+
+Exact inputs were published as `52986d5b005202b3ec77f8f556ad2a790541d0d7`.
+Only the published direction row was inserted into the remote canonical index under
+its writer lock; the existing dirty records, accepted outputs and sparse selection
+were preserved. A fetch outside the configured network shell stalled and its own
+three read-only Git processes were terminated. The configured `zsh -lic` fetch
+succeeded, with existing shell-startup diagnostics and an unrelated auto-GC bad-tree
+warning retained as environment facts. Neither issue changed the accepted source.
+
+Configured-supervisor request `ugg-b01-pc-ne-a01` invoked the native launcher once.
+It accepted the fixed P/C/H batch at **2026-09-28 03:57:52.350409 UTC**, on wsl_4070
+CPU with two single-thread workers. Fresh admission measured **12,267,339,776 bytes**
+available against the **4,294,967,296-byte floor**, with no failure reasons.
+[Manifest](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/launch-manifest.json),
+[preflight](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/admission-preflight.json)
+and [launch status](../../../../runs/uav_geometric_generalization/b01_pc_ne_a01/launch-status.json)
+are retained. Output is `runs/uav_geometric_generalization/b01_pc_ne_a01` on the
+original canonical node. The original operation reference is
+`/home/wu/projects/HMASD/.git/hmasd-admission/eff8b251972b81009cee314b6317a18465524521dff214627f4b6ededda22fa3.json`;
+its immutable source is `.git/hmasd-launch-sources/ecdf1ff8296545498cffbc6b85e16d05`.
+At 03:58:33 UTC, runner 866084 and supervisor 866083 were both running with matching
+Linux identities and consistent records. No terminal witness or scientific result
+has been read. Outer supervisor exit zero only confirms launcher completion.
+
+`tools/hmasd_wait.py` generation 1 observes that exact operation, with request at
+`temp/directions/uav_geometric_generalization/b01-wait-request.json` and owning native
+child UUID `01a0e5fe-ac1d-7281-a9f9-bb810a00ca77`. Its first drain verified the running
+handle. Root reports an independently observed app-server refusal to queue an unloaded
+spawned child; therefore this native turn stays open and uses long deterministic waits
+with same-handle drain/rearm. It does not change the target session, use App messaging,
+repeat submission or infer collection from observer registration. Checkpoints rearm
+only observation. Collection, complete reading and publication remain this DM's work.

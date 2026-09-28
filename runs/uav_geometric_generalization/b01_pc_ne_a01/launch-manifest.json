@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-28T03:57:52.350409Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ecdf1ff8296545498cffbc6b85e16d05/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ecdf1ff8296545498cffbc6b85e16d05/experiments/candidates/uav_geometric_generalization/run_b01.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_geometric_generalization/b01_pc_ne_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_geometric_generalization/b01_pc_ne_a01",
+    "--launch-sha",
+    "52986d5b005202b3ec77f8f556ad2a790541d0d7",
+    "--checkpoint-dir",
+    "/home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01r/checkpoints/c06"
+  ],
+  "claim_key": "eff8b251972b81009cee314b6317a18465524521dff214627f4b6ededda22fa3",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/eff8b251972b81009cee314b6317a18465524521dff214627f4b6ededda22fa3.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ecdf1ff8296545498cffbc6b85e16d05/experiments/candidates/uav_geometric_generalization/run_b01.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_geometric_generalization/b01_pc_ne_a01",
+    "--launch-sha",
+    "52986d5b005202b3ec77f8f556ad2a790541d0d7",
+    "--checkpoint-dir",
+    "/home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01r/checkpoints/c06"
+  ],
+  "command_sha256": "6ed6009ec0292312f70c64ed5a1aee4f236615ad6ed39ee5f884994a95ef4c8d",
+  "control_observation": {
+    "observed_at": "2026-09-28T03:57:52.191095Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "f2c53785fe34e90c8a355ab9dd8852496d3c96d0"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-28T03:57:52.209150Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ecdf1ff8296545498cffbc6b85e16d05",
+  "direction": "uav_geometric_generalization",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_geometric_generalization/run_b01.py",
+    "--launch-sha",
+    "52986d5b005202b3ec77f8f556ad2a790541d0d7",
+    "--checkpoint-dir",
+    "/home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01r/checkpoints/c06"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_geometric_generalization/b01_pc_ne_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/eff8b251972b81009cee314b6317a18465524521dff214627f4b6ededda22fa3.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_geometric_generalization/b01_pc_ne_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_geometric_generalization/b01_pc_ne_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 866083,
+      "session_id": 866083,
+      "start_ticks": 91739597
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 866083,
+    "process_group_id": 866083
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_geometric_generalization/b01_pc_ne_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 866084,
+      "session_id": 866083,
+      "start_ticks": 91739601
+    },
+    "pid": 866084,
+    "process_group_id": 866083,
+    "supervisor_pid": 866083
+  },
+  "schema_version": 1,
+  "sha": "52986d5b005202b3ec77f8f556ad2a790541d0d7",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/ecdf1ff8296545498cffbc6b85e16d05",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_geometric_generalization/b01_pc_ne_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_geometric_generalization/b01_pc_ne_a01/stdout.log"
+}
