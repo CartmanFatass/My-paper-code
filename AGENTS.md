@@ -28,9 +28,10 @@ measured result and actual leftovers. See constitution sections 4/9 and the engi
 ## Roles and methods
 
 Codex may act as Root or directly own a scientific question through revisable directions.
-Five is the owner-selected runtime resource concurrency ceiling (2026-09-27 UTC), not the number of questions
-or permanent DM assignments in the full research plan. A Root executing a direction counts
-among the five; project management does not add a research track. Reuse the recorded lead for
+The owner removed the fixed Codex DM/research-track count ceiling on 2026-09-28 UTC
+(2026-09-27 PDT) and asked Root to select and advance worthwhile questions proactively.
+There is no replacement quota; training and evaluation still require actual node resource
+admission. Use long native agent waits during delegated research. Reuse the recorded lead for
 unfinished work. Owner clarification (2026-09-27 PDT): when a DM has completed and fully
 documented its work and the owner has archived the session, create a new DM for selected
 successor work instead of restoring or reusing the archived session; inherit the published

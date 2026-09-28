@@ -101,8 +101,9 @@ time. Distinguish the tested approach's outcome, the remaining parent question a
 next observation; these need not share a completion state. A scientific split needs a distinct
 question/comparator/estimand, while a merger needs these and the next step to align. Neither
 creates a new record type, requires an exhaustive candidate search or licenses taking another
-lead's work. Five runtime slots limit concurrent execution, not the research programme's scope
-(owner amendment 2026-09-27 UTC); actual node admission may permit fewer operations.
+lead's work. The owner removed the fixed Codex DM/research-track count ceiling on 2026-09-28
+UTC; select worthwhile questions proactively without a count quota. Actual node resource
+admission still constrains training and evaluation.
 
 For mechanism questions trace environment event -> entity ownership -> available information
 -> action/credit -> learning -> native consequence. For changing rosters distinguish entity

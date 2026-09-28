@@ -74,9 +74,10 @@ reason and prospective comparison within your delegated scope. This does not add
 under the Root-led child trial, proposals beyond the assigned question return to Root for its
 next task choice. Keep one active idea, check current ownership, preserve accepted operations
 and never infer a pause lift.
-Five concurrent research tracks is the owner-selected runtime resource ceiling (2026-09-27 UTC), not a five-question plan or
-a permanent DM-to-direction mapping. A selected successor can replace a completed or closed
-study; its actual execution still needs resource admission. Do not invent work to occupy a slot.
+The owner removed the fixed Codex DM/research-track count ceiling on 2026-09-28 UTC.
+Root proactively selects questions without a count quota or permanent DM-to-direction mapping;
+actual training and evaluation still need node resource admission. Do not invent work to fill
+capacity or duplicate accepted work.
 
 Method: .agents/skills/hmasd-scientific-tools/SKILL.md for design, comparators, counts and
 reading; .agents/skills/hmasd-research-engineering/SKILL.md for code, review and launch. Read

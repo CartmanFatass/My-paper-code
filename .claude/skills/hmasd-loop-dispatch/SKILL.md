@@ -51,6 +51,10 @@ Use native child message/follow-up/wait for actual dependencies. App cross-task 
 do not block these internal returns. Keep the independent Scientific Reviewer and existing
 publication responsibilities; Root's preferred framing remains open to criticism. A workflow
 switch alone neither selects a scientific study nor lifts a pause.
+Owner, 2026-09-28 UTC: there is no fixed Codex DM/research-track count ceiling. Proactively
+select useful questions without filling a quota; actual node resource admission remains.
+Use long native agent waits while the children carry out research, then integrate substantive
+returns and advance the next justified work rather than ending at dispatch or polling progress.
 
 ## Select the session's work
 
@@ -62,14 +66,12 @@ owner to repeat an already clear choice.
   cost of next investments, address concrete stagnation, and select useful work within the
   owner's delegated scope. Coordinate existing ownership and shared dependencies; maintain
   the current scientific plan and assigned controls. DMs publish their own result entries; Root is not a
-  routine result-publication gate. The owner clarified on 2026-09-24 that runtime concurrency
-  does not limit the full plan's questions or create a permanent DM-to-direction mapping;
-  on 2026-09-27 UTC the owner raised the research-track ceiling from three to five.
-  Maintain worthwhile ordered replacements in the current plan,
+  routine result-publication gate. The owner removed the fixed Codex DM/research-track count
+  ceiling on 2026-09-28 UTC; this does not create permanent DM-to-direction assignments.
+  Maintain worthwhile continuations and new questions in the current plan,
   including their evidence, first useful comparison and cost; preparation is not launch.
-  Count independent DMs, children and an assigning session directly executing a direction
-  together. A Root doing only project management is coordination capacity, not an additional
-  research track. Training and evaluation both need actual node resources. Do not fill slots
+  A Root doing only project management is coordination capacity, not an additional
+  research track. Training and evaluation both need actual node resources. Do not create DMs
   without a worthwhile authorized task or duplicate a direct DM's scientific work.
   Assign independent scientific review through the existing ResearchCritic role at question/
   approach selection or material interpretation/route correction. Use its dedicated body and

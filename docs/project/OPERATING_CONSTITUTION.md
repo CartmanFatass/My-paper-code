@@ -26,11 +26,12 @@ Owner amendment 2026-09-25: independent scientific review owns diagnosis and dir
 correction, with its own instructions and context, rather than relying on DM self-correction.
 Section 2 assigns this function to ResearchCritic; engineering Reviewer remains separate.
 
-Owner amendment 2026-09-27 UTC (2026-09-26 PDT): add two independent Codex DMs and
-increase the concurrent result-bearing research-track ceiling from three to five. Section 2
-carries this decision. Actual node admission still accounts for training, evaluation and
-available resources; existing pauses, direction ownership and accepted operations retain
-their current scope.
+Owner amendment 2026-09-28 UTC (2026-09-27 PDT): remove the fixed Codex DM/research-track
+count ceiling and ask Root to select and advance worthwhile questions more proactively.
+This supersedes the 2026-09-27 increase from three to five; it sets no replacement quota.
+Actual node admission still accounts for training, evaluation and available resources;
+existing pauses, Claude's own authorized scope, direction ownership and accepted operations
+retain their current scope. Root uses long native agent waits while delegated research runs.
 
 Owner amendment 2026-09-27 (peer status): the Claude session and the Codex Root are peer
 researchers, not superior and subordinate. The Claude side's one-direction setting is a
@@ -101,15 +102,13 @@ operation. A method, tool, conversation or historical workflow is not a permanen
 - **Codex side (owner amendment 2026-09-20):** a session may act as **Root**, coordinating
   a named set of directions, or as the **direct DM** for one direction. A DM may be an
   independent session or a Root child; its scientific responsibility is the same. Reuse the
-  current lead rather than creating a second DM. The owner clarified on 2026-09-24 that the
-  runtime resource concurrency ceiling does not fix the number of scientific questions,
-  candidate directions or permanent DM assignments in the full plan. The owner raised that
-  research-track ceiling from three to **five** on 2026-09-27 UTC (2026-09-26 PDT). Count independent
-  DMs and children together, including a coordinating session while it directly executes a
-  direction. Training and fixed-policy evaluation both consume real resources; node admission
-  may permit fewer concurrent operations. The complete plan may contain more questions and
-  ordered replacements than runtime slots; a completed or closed study can release a slot.
-  There is no obligation to replace a stopped direction without a worthwhile chosen question.
+  current lead rather than creating a second DM. Under the owner's 2026-09-28 UTC amendment
+  (2026-09-27 PDT), there is no fixed Codex DM or concurrent research-track count ceiling.
+  Root proactively selects worthwhile questions without a replacement quota. Training and
+  fixed-policy evaluation both consume real resources and remain subject to actual node
+  admission; removing the count ceiling does not authorize resource overcommitment or
+  duplication of accepted work. A Root doing only project management is not an additional
+  result-bearing study. There is no obligation to invent a replacement for a stopped question.
   As scientific project manager (owner, 2026-09-23), Root maintains the cumulative project
   explanation, prioritizes the next useful investments across directions, addresses actual
   stagnation and may select worthwhile work under the delegated scope. Root need not become
