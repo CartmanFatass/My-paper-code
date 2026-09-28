@@ -9,6 +9,10 @@ Research methods live in `.agents/skills/hmasd-scientific-tools` and
 directly. When useful it delegates a bounded code task to `hmasd-implementer` (Opus, high
 effort), a bounded execution batch to `hmasd-experiment-operator`, or high-risk executable
 review to `hmasd-reviewer`; it accepts the returned technical work.
+Research decisions and planning (question/approach selection, experiment design, material
+interpretation or route correction) may go to `hmasd-oracle` (Fable 5.1, max effort, read-only,
+directly maintained Claude-only body); daily delegation keeps the default high effort (owner,
+2026-09-28). The Oracle returns a decision memo the session owns; it is not the Scientific Reviewer.
 Scientific diagnosis and direction correction use `hmasd-research-critic` with
 its dedicated body and separate context; apply constitution section 2's responsibility and
 material-disagreement resolution, not DM self-clearance. Detached repository scripts observe
