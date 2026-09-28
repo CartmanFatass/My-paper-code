@@ -11,7 +11,10 @@ from experiments.candidates.uav_active_sensing.controllers import (
     SURVEY_XY,
     WAYPOINTS_XY,
 )
-from experiments.candidates.uav_information_value.controllers import make_controller
+from experiments.candidates.uav_information_value.b02.controller import (
+    StationPriorController,
+    station_prior_bs_xy,
+)
 
 
 OWN_XY = [(700.0 + 330.0 * i, 900.0 + 190.0 * i) for i in range(8)]
@@ -19,11 +22,13 @@ USERS_XY = [(1000.0 + 850.0 * i, 5000.0 - 240.0 * i) for i in range(8)]
 
 
 def observations(users=USERS_XY, bs=(700.0, 750.0), own=OWN_XY,
-                 margins=None, available=None):
+                 margins=None, available=None, station0=(3000.0, 3300.0),
+                 station1=(6100.0, 6200.0), returning=None):
     layout = S7S2_LAYOUT
     obs = np.zeros((8, layout.dim), dtype=np.float32)
     margins = np.full(8, .8) if margins is None else np.asarray(margins)
     available = np.ones(8, dtype=bool) if available is None else np.asarray(available)
+    returning = np.zeros(8, dtype=bool) if returning is None else np.asarray(returning)
     for uav in range(8):
         obs[uav, :2] = np.asarray(own[uav]) / 8000.0
         obs[uav, 2] = (100.0 - 50.0) / 150.0
@@ -35,18 +40,21 @@ def observations(users=USERS_XY, bs=(700.0, 750.0), own=OWN_XY,
         if bs is not None:
             obs[uav, layout.bs.start:layout.bs.start + 2] = (np.asarray(bs) - decoded) / 8000.0
             obs[uav, layout.bs.start + 3] = 1.0
-        station = layout.energy_stations.start + layout.energy_station_fields
-        obs[uav, station:station + 2] = (np.asarray((6100.0, 6200.0)) - decoded) / 8000.0
-        obs[uav, station + 7] = 1.0
+        for station_id, xy in enumerate((station0, station1)):
+            if xy is not None:
+                station = layout.energy_stations.start + station_id * layout.energy_station_fields
+                obs[uav, station:station + 2] = (np.asarray(xy) - decoded) / 8000.0
+                obs[uav, station + 7] = 1.0
         energy = layout.energy_uavs.start + (uav * layout.energy_uav_fields)
         obs[uav, energy + 5] = float(available[uav])
+        obs[uav, energy + 6] = float(returning[uav])
         obs[uav, energy + 12] = margins[uav]
     return obs
 
 
-def test_h_matches_h_bs_including_midstep_bs_memory_and_replans():
+def test_h_matches_station_prior_including_midstep_bs_memory_and_replans():
     actual = SensingController("H")
-    reference = make_controller("H_BS")
+    reference = StationPriorController()
     absent = observations(users=USERS_XY[:2], bs=None)
     present = observations(users=USERS_XY[:2])
     many = observations()
@@ -64,6 +72,9 @@ def test_h_matches_h_bs_including_midstep_bs_memory_and_replans():
     assert [row["step"] for row in actual.diagnostics] == [0, 30, 60]
     assert actual.diagnostics[0]["bs_known"] is False
     assert actual.diagnostics[1]["bs_known"] is True
+    assert [row["anchor_source"] for row in actual.diagnostics] == [
+        "inferred", "observed-memory", "observed-current"]
+    assert actual.diagnostics[0]["prior_used"] is True
     actual.reset()
     actual.prepare(absent, np.zeros(8, bool), 0)
     assert actual.diagnostics[0]["bs_known"] is False
@@ -79,6 +90,8 @@ def test_action_library_features_and_legal_fallback():
     assert features.shape == (controller.feature_dim,) == (FEATURE_DIM,)
     assert features.dtype == np.float32
     assert np.isfinite(features).all()
+    assert FEATURE_DIM == 5511
+    np.testing.assert_array_equal(features[8 * 365:8 * 365 + 3], [0, 0, 1])
     assert controller.heuristic.last_plan["bs_xy"] is not None
     with pytest.raises(ValueError):
         controller.prepare(obs, np.zeros(8, bool), 0)
@@ -140,7 +153,6 @@ def test_highest_margin_service_uav_and_lower_index_tie():
 
 @pytest.mark.parametrize("users,bs,modes,margins", [
     (USERS_XY[:5], (700, 750), None, None),
-    (USERS_XY, None, None, None),
     (USERS_XY, (700, 750), np.ones(8, bool), None),
     (USERS_XY, (700, 750), None, np.full(8, .20)),
 ])
@@ -163,12 +175,12 @@ def test_survey_full_cell_visibility_expiry_and_reset():
     far_index = int(np.where(np.all(SURVEY_XY == [7875.0, 7875.0], axis=1))[0][0])
     assert controller._survey_expiry[near_index] > 0
     assert controller._survey_expiry[far_index] == -np.inf
-    start_freshness = start_features[8 * 365 + 3 + near_index]
+    start_freshness = start_features[8 * 365 + 5 + near_index]
     controller.apply_choice(0)
     for _ in range(30):
         controller.act(distant)
     aged_features = controller.prepare(distant, np.zeros(8, bool), 30)
-    assert aged_features[8 * 365 + 3 + near_index] == pytest.approx(
+    assert aged_features[8 * 365 + 5 + near_index] == pytest.approx(
         max(0.0, start_freshness - 30.0 / 500.0), abs=1e-6)
     assert aged_features[-1] == pytest.approx(.01)
     controller.reset()
@@ -177,7 +189,7 @@ def test_survey_full_cell_visibility_expiry_and_reset():
 
 def test_prior_and_selectors_have_finite_actions_and_no_rng():
     obs = observations()
-    for mode in ("H", "P", "A"):
+    for mode in ("H", "A", "R50"):
         controller = SensingController(mode)
         features = controller.prepare(obs, np.zeros(8, bool), 0)
         assert np.isfinite(features).all()
@@ -215,3 +227,127 @@ def test_policy_adapter_requests_deterministic_choice_and_ignores_state():
     actions = controller.propose(obs, object(), 0, object(), np.zeros(8, bool))
     assert actions.shape == (8, 4)
     assert controller.diagnostics[-1]["requested"] == 1
+
+
+def test_reset_frozen_prior_and_source_features_with_genuine_precedence():
+    absent = observations(bs=None)
+    changed = observations(bs=None, station0=(5700.0, 4800.0))
+    sighting = observations(bs=(6500.0, 6700.0), station0=(5700.0, 4800.0))
+    controller = SensingController("A")
+    prior = station_prior_bs_xy(absent, S7S2_LAYOUT)
+    first = controller.prepare(absent, np.zeros(8, bool), 0)
+    row = controller.diagnostics[-1]
+    assert row["anchor_source"] == "inferred" and row["anchor_available"]
+    assert row["prior_used"] and not row["bs_known"] and not row["current_bs_present"]
+    np.testing.assert_allclose([row["prior_x"], row["prior_y"]], prior)
+    np.testing.assert_allclose([row["anchor_x"], row["anchor_y"]], prior)
+    np.testing.assert_allclose(controller.heuristic.last_plan["bs_xy"], prior)
+    np.testing.assert_array_equal(first[8 * 365:8 * 365 + 3], [0, 1, 0])
+    np.testing.assert_allclose(first[8 * 365 + 3:8 * 365 + 5], prior / 8000)
+    assert controller.diagnostics[-1]["eligible"]
+    controller.apply_choice(0)
+    for step in range(30):
+        controller.act(sighting if step == 7 else changed)
+    second = controller.prepare(changed, np.zeros(8, bool), 30)
+    row = controller.diagnostics[-1]
+    assert row["anchor_source"] == "observed-memory" and row["bs_known"]
+    assert not row["prior_used"] and not row["current_bs_present"]
+    np.testing.assert_allclose([row["prior_x"], row["prior_y"]], prior)
+    np.testing.assert_array_equal(second[8 * 365:8 * 365 + 3], [0, 0, 1])
+    np.testing.assert_allclose(controller.heuristic.last_plan["bs_xy"],
+                               sighting[0, S7S2_LAYOUT.bs.start:S7S2_LAYOUT.bs.start + 2]
+                               * 8000 + sighting[0, :2] * 8000)
+    controller.reset()
+    controller.prepare(changed, np.zeros(8, bool), 0)
+    assert controller.diagnostics[-1]["anchor_source"] == "inferred"
+    assert controller.diagnostics[-1]["bs_known"] is False
+    np.testing.assert_allclose([controller.diagnostics[-1]["prior_x"],
+                                controller.diagnostics[-1]["prior_y"]],
+                               station_prior_bs_xy(changed, S7S2_LAYOUT))
+
+
+def test_missing_prior_has_absent_features_and_no_eligibility():
+    obs = observations(bs=None, station0=None)
+    later = observations(bs=None)
+    controller = SensingController("L")
+    features = controller.prepare(obs, np.zeros(8, bool), 0)
+    np.testing.assert_array_equal(features[8 * 365:8 * 365 + 5], [1, 0, 0, 0, 0])
+    row = controller.apply_choice(11)
+    assert row["anchor_source"] == "absent"
+    assert not row["anchor_available"] and not row["prior_used"]
+    assert not row["eligible"]
+    assert (row["requested"], row["executed"], row["fallback"]) == (11, 0, True)
+    for _ in range(30):
+        controller.act(later)
+    controller.prepare(later, np.zeros(8, bool), 30)
+    assert controller.diagnostics[-1]["anchor_source"] == "absent"
+    assert controller._prior_bs_xy is None
+
+
+def test_presighting_four_corner_mass_and_seen_opposite_corner():
+    controller = SensingController("A")
+    controller.prepare(observations(bs=None), np.zeros(8, bool), 0)
+    xy = SURVEY_XY
+    central = np.all((xy >= 2000) & (xy < 6000), axis=1)
+    for high_x in (False, True):
+        for high_y in (False, True):
+            corner = ((xy[:, 0] >= 6400) if high_x else (xy[:, 0] < 1600)) & (
+                (xy[:, 1] >= 6400) if high_y else (xy[:, 1] < 1600))
+            expected = .95 * .2 / 4 + .05 * corner.sum() / len(xy)
+            assert controller._prior_mass[corner].sum() == pytest.approx(expected)
+    assert controller._prior_mass[central].sum() == pytest.approx(
+        .95 * .8 + .05 * central.sum() / len(xy))
+    controller.reset()
+    controller.prepare(observations(bs=(700, 750)), np.zeros(8, bool), 0)
+    high_corner = (xy[:, 0] >= 6400) & (xy[:, 1] >= 6400)
+    assert controller._prior_mass[high_corner].sum() == pytest.approx(
+        .95 * .2 + .05 * high_corner.sum() / len(xy))
+
+
+def test_r50_alternates_only_eligible_prepared_decisions():
+    controller = SensingController("R50")
+    modes = np.zeros(8, bool)
+    eligible = observations(bs=None)
+    ineligible = observations(users=USERS_XY[:5], bs=None)
+    for index, obs in enumerate((eligible, ineligible, eligible, eligible)):
+        controller.prepare(obs, modes, index * 30)
+        expected_turn = index == 2
+        assert controller.diagnostics[-1]["rate_probe_turn"] is expected_turn
+        first = controller.choose_default()
+        assert controller.choose_default() == first
+        if index in (0, 1, 3):
+            assert first == 0
+        controller.apply_choice(first)
+        for _ in range(30):
+            controller.act(obs)
+    assert controller._r50_eligible_count == 3
+    controller.reset()
+    controller.prepare(eligible, modes, 0)
+    assert controller.diagnostics[-1]["rate_probe_turn"] is False
+    assert controller.choose_default() == 0
+
+
+def test_r50_probe_turn_may_choose_service_when_a_score_is_zero():
+    controller = SensingController("R50")
+    obs = observations(bs=None)
+    modes = np.zeros(8, bool)
+    controller.prepare(obs, modes, 0)
+    controller.apply_choice(controller.choose_default())
+    for _ in range(30):
+        controller.act(obs)
+    controller.prepare(obs, modes, 30)
+    assert controller.diagnostics[-1]["rate_probe_turn"] is True
+    controller._prior_mass[:] = 0.0
+    assert controller.choose_default() == 0
+
+
+def test_returning_service_uav_is_never_selected():
+    obs = observations()
+    baseline = SensingController("A")
+    baseline.prepare(obs, np.zeros(8, bool), 0)
+    selected = baseline.diagnostics[-1]["scout"]
+    returning = np.zeros(8, bool)
+    returning[selected] = True
+    controller = SensingController("A")
+    controller.prepare(observations(returning=returning), np.zeros(8, bool), 0)
+    assert controller.diagnostics[-1]["scout"] != selected

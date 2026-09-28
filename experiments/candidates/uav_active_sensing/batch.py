@@ -1,4 +1,4 @@
-"""One fit followed by all five programs on the fixed fresh evaluation panel."""
+"""One semantic-choice fit and four fixed programs on a fresh complete panel."""
 
 from __future__ import annotations
 
@@ -24,6 +24,7 @@ from experiments.candidates.energy_relay_benchmark.b01.feedback import PRODUCTIO
 from experiments.candidates.energy_relay_benchmark.b01.heuristic import variant
 from experiments.candidates.energy_relay_benchmark.b01.observation import S7S2_LAYOUT
 from experiments.candidates.uav_information_value.batch import effective_config
+from experiments.candidates.uav_information_value.b02.readout import battery_reading
 from experiments.candidates.uav_service_auxiliary.b01.native import make_env, seed_everything
 
 from .controllers import FEATURE_DIM, N_ACTIONS, SensingController
@@ -102,6 +103,13 @@ class SensingObserver:
             "fallback_plans": sum(row["fallback"] for row in plans),
             "scout_share_of_eligible_plans": sum(row["executed"] > 0 for row in plans) / eligible if eligible else None,
             "mean_canonical_users_at_plan": float(np.mean([row["users"] for row in plans])),
+            "inferred_anchor_plans": sum(row["anchor_source"] == "inferred" for row in plans),
+            "observed_bs_plans": sum(row["bs_known"] for row in plans),
+            "eligible_inferred_anchor_plans": sum(row["eligible"] and row["anchor_source"] == "inferred" for row in plans),
+            "eligible_service_requests": sum(row["eligible"] and row["requested"] == 0 for row in plans),
+            **{f"mean_{key}": float(np.mean([row[key] for row in plans if row[key] is not None]))
+               if any(row[key] is not None for row in plans) else None
+               for key in ("service_probability", "gate_entropy", "target_entropy", "joint_entropy")},
         }
 
 
@@ -143,6 +151,9 @@ def worker(payload):
             identity = {"checkpoint_sha256": checkpoint["sha256"], "policy_fingerprint": fingerprint(policy.policy)}
             if identity["policy_fingerprint"] != checkpoint["fingerprint"]:
                 raise ValueError("SB3 restored policy differs from the recorded asset")
+            if job["arm"] == "L0" and (torch.count_nonzero(policy.policy.action_net.weight[0])
+                                        or torch.count_nonzero(policy.policy.action_net.bias[0])):
+                raise ValueError("initial gate no longer defines the ordinary-service alias")
             controller = SensingController("L", policy)
         else:
             controller = SensingController(job["arm"])
@@ -153,6 +164,11 @@ def worker(payload):
             raise RuntimeError("evaluation did not complete the fixed native world")
         if job["arm"] in ("L0", "L1") and fingerprint(policy.policy) != identity["policy_fingerprint"]:
             raise RuntimeError("evaluation changed a saved PPO policy")
+        if job["arm"] == "L0":
+            if any(plan["requested"] != 0 or plan["service_probability"] != .5
+                   for plan in controller.diagnostics):
+                raise RuntimeError("initial deterministic policy differs from ordinary P_BS service")
+            identity["ordinary_service_alias_checked"] = True
         if raw_path.exists():
             raise FileExistsError(raw_path)
         diagnostic_arrays = {
@@ -166,6 +182,7 @@ def worker(payload):
                    reserve10_uav_step_fraction=float(np.mean(steps["battery"] < .10)),
                    raw_path=str(raw_path.relative_to(out)), raw_sha256=_sha256(raw_path),
                    raw_bytes=raw_path.stat().st_size)
+        row.update(battery_reading(steps["battery"]))
     except BaseException as error:
         row = {**job, "status": "failed", "error_type": type(error).__name__, "error": str(error),
                "traceback": traceback.format_exc(), "partial_observed_steps": completed_steps}
@@ -194,17 +211,22 @@ def run(out, launch_sha, workers=4):
     out.mkdir(parents=True, exist_ok=True)
     (out / "raw").mkdir()
     _write_json(out / "config.json", {
-        "direction": DIRECTION, "batch": "b01_native_j_a01", "launch_sha": launch_sha,
+        "direction": DIRECTION, "batch": "b02_semantic_choice_a01", "launch_sha": launch_sha,
         "fits": 1, "policy_seed": POLICY_SEED, "training_seeds": TRAIN_SEEDS, "jobs": jobs,
-        "horizon": HORIZON, "macro_steps": 30, "max_native_transitions": 720000,
+        "horizon": HORIZON, "macro_steps": 30, "max_native_transitions": 672000,
         "ppo": PPO_PARAMS, "network": {"pi": [128, 128], "vf": [128, 128], "activation": "tanh"},
         "feature_dim": FEATURE_DIM, "actions": N_ACTIONS, "train_envs": N_ENVS,
         "evaluation_workers": workers, "numeric_threads": 1, "optimizer_steps": OPTIMIZER_STEPS,
         "finite_horizon": "native H3000 is terminated, never TimeLimit.truncated bootstrap",
         "shield": asdict(PRODUCTION_PARAMS), "h1": variant("H1", information="local").record(),
         "layout": S7S2_LAYOUT.record(), "trace_timing": TRACE_TIMING,
-        "evaluation_mode": "deterministic categorical argmax for L0/L1; fixed H/P/A",
-        "information": "actor and critic only legal pooled observations, ordinary BS/survey memory and public geometry/time",
+        "evaluation_mode": "gate>=0 selects service, otherwise conditional target argmax; fixed A/R50",
+        "initialization": "zero gate weights/bias imply service_probability .5 and deterministic ordinary P_BS service",
+        "action_law": "P(service)=sigmoid(g); P(target j)=sigmoid(-g)*softmax(z)[j]",
+        "ordinary_rate": "R50 alternates service then A target over eligible decisions, reset each episode",
+        "planning_anchor": "reset-frozen lawful station prior, permanently superseded by genuine BS sighting",
+        "acquisition_prior": "four remote corners before genuine sighting; opposite corner only after sighting",
+        "information": "actor and critic only legal pooled observations, distinct inferred/observed anchor, survey memory and public geometry/time",
         "observer": "ground-truth IDs/positions evaluated post-action only; never passed to controller",
     })
     rows, submitted, pool_errors = [], [], []
@@ -243,7 +265,7 @@ def run(out, launch_sha, workers=4):
         unstarted_jobs=[job["job_key"] for job in jobs if job["job_key"] not in submitted],
         training_native_step_lower_bound=fit["recorded_native_step_lower_bound"],
         evaluation_native_step_lower_bound=evaluation_lower_bound,
-        actual_native_steps=720000 if summary["status"] == "complete" else None,
+        actual_native_steps=672000 if summary["status"] == "complete" else None,
         known_native_step_lower_bound=fit["recorded_native_step_lower_bound"] + evaluation_lower_bound,
         runner_error=runner_error, pool_errors=pool_errors, orphan_raw=orphans,
         parent_wall_seconds=time.monotonic() - started, parent_cpu_seconds=_cpu_seconds() - cpu_started,

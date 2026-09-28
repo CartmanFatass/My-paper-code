@@ -22,6 +22,7 @@ from experiments.candidates.energy_relay_benchmark.b01.observation import (
     S7S2_LAYOUT, own_energy, own_positions,
 )
 from experiments.candidates.uav_information_value.batch import effective_config
+from experiments.candidates.uav_information_value.b02.readout import battery_reading
 from experiments.candidates.uav_service_auxiliary.b01.native import make_env
 from experiments.candidates.uav_service_auxiliary.b04.evaluation import metric_row
 
@@ -29,9 +30,9 @@ from .controllers import N_ACTIONS, REPLAN_STEPS, SensingController
 
 
 HORIZON = 3000
-POLICY_SEED = 28130001
-TRAIN_SEEDS = tuple(range(28132001, 28132161))
-EVAL_SEEDS = tuple(range(28133001, 28133017))
+POLICY_SEED = 28170001
+TRAIN_SEEDS = tuple(range(28172001, 28172161))
+EVAL_SEEDS = tuple(range(28173001, 28173017))
 N_ENVS = 4
 
 
@@ -119,6 +120,7 @@ class NativeMacroEnv(gym.Env):
             "mode", "entered", "exited", "charging", "waiting_steps", "battery", "dock_bit",
             "guard_checked", "guard_blocked", "own_xyz", "return_margin", "nearest_station",
             "nearest_station_distance_m", "station_occupancy", "station_queue", "target_xy",
+            "actual_travel_m", "assigned_scout_travel_m",
         )}
         self.station_xy = absolute_station_xy(self.observations)
         self.features = self.controller.prepare(self.observations, self.modes, 0)
@@ -137,10 +139,15 @@ class NativeMacroEnv(gym.Env):
         self.steps["station_occupancy"].append(station_counts(decision.selected_stations, held["charging"]))
         self.steps["station_queue"].append(station_counts(decision.selected_stations, held["waiting_steps"] > 0))
         self.modes = decision.modes
+        previous_xyz = self.native.env.uav_positions.copy()
         observations, reward, terminated, truncated, info = self.native.step(decision.submitted_actions)
         # Count the native transition before validation can raise, preserving cost on failure.
         self.native_steps += 1
         self.step_index += 1
+        travel = np.linalg.norm(self.native.env.uav_positions - previous_xyz, axis=1)
+        self.steps["actual_travel_m"].append(travel)
+        plan = self.controller.diagnostics[-1]
+        self.steps["assigned_scout_travel_m"].append(float(travel[plan["scout"]]) if plan["executed"] else 0.0)
         self.observations = np.asarray(observations, dtype=np.float32)
         self.rewards.append(float(reward))
         self.metrics.append(metric_row(reward, info["reward_info"]))
@@ -172,7 +179,10 @@ class NativeMacroEnv(gym.Env):
         row.update(lane=self.lane, episode=self.episode_index,
                    status="completed" if self.step_index == self.horizon else "incomplete",
                    reserve10_uav_step_fraction=float(np.mean(arrays["battery"] < .10)),
+                   actual_team_travel_m=float(arrays["actual_travel_m"].sum()),
+                   assigned_scout_travel_m=float(arrays["assigned_scout_travel_m"].sum()),
                    macro_count=len(self.controller.diagnostics))
+        row.update(battery_reading(arrays["battery"]))
         if self.out is not None:
             path = self.out / "training" / f"world_{self.world_seed}.npz"
             if path.exists():

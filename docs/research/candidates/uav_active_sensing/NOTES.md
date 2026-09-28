@@ -893,3 +893,213 @@ before effects by the shell tool's force-removal restriction; ordinary exact
 Retained bulk is the one necessary evidence copy; compact status/summary
 copies at the original output path preserve native recovery. No full-tree
 backup, tarball, extra source copy, peer edit or new result operation was made.
+
+## 2026-09-28 - B02 proposal: learn a consequential service-acquisition choice
+
+Root assigned the next round to the new native DM `/root/dm_sensing_round2`,
+in the same parent task and shared-main checkout. The completed predecessor has
+no accepted operation to inherit. This proposal precedes substantial code work;
+Root's already assigned context-isolated `round2_question_review` is the one
+selection review. No duplicate critic or preliminary result panel is requested.
+
+### Question and comparison
+
+Can experience learn a useful complete service-versus-acquisition policy when
+the policy gives both semantic choices genuine training exposure, beyond its
+initialization and competent ordinary policies with the same lawful information?
+The intended contribution is empirical understanding and possible conditional
+package usefulness. This is not attribution of B01's failure to label imbalance,
+nor a novel learning-algorithm claim. B01's complete negative/uncertain learning
+result, heterogeneous A outcomes, sparse service exposure, and risk tails above
+remain evidence. We do not resume or extend its fit or reuse its exposed worlds.
+
+Published RESEARCH at `2abfda5c048883483a27149c645701cbf79daf37`, especially
+[topics 2 and 8](../../RESEARCH.md#研究背景与共享认识), changes this design:
+the legal station prior is now an applicable ordinary asset; inferred input,
+relay activation, real sighting and native utility must remain distinct. The
+[information-value B02 positive and adverse result](../uav_information_value/NOTES.md#2026-09-28---b02-complete-useful-lawful-prior-with-a-reserve-counterexample)
+supports its conditional use as a comparator, not default adoption. In world
+28100224 its J/service gain accompanied seven UAVs below reserve throughout the
+last 300 transitions. That counterexample is inherited, not erased by a fresh
+panel. The separate station-transformation-versus-station-0 question belongs to
+another DM; no design or tuning here depends on its result.
+
+Share reset-frozen P_BS support across **every** B02 program: decode lawful station
+0/1 records and use `clip((s0-.3*s1)/.7,0,8000)` until a genuine legal BS sighting,
+then permanently prefer the real sighting. This supplies an actionable planning
+anchor before sighting; it does not count inference as observation. The common
+planner, input canonicalization, nominal 6-service/2-relay allocation, survey
+clock, shield, guard, native host/reward and legal pooled information are retained.
+The actor and critic have identical information. No hidden state, true unseen
+position, future RNG or reward bonus enters them.
+
+Four unique deployment programs share 16 fresh complete H3000 worlds:
+
+| Arm | Program | Comparison purpose |
+| --- | --- | --- |
+| L0 / H | Saved initialization with semantic tie-to-service, equal by construction to ordinary P_BS service | Initialization and competent ordinary lawful service anchor, evaluated once |
+| L1 | Fixed trained endpoint, learning service/probe and the full conditional target choice | Complete learned package value |
+| A | Existing freshness-directed ordinary acquisition with common P_BS support | Strong applicable adaptive acquisition alternative |
+| R50 | Alternate service then A's target on successive eligible decisions, reset per episode | Untuned ordinary half-rate acquisition; challenges a mere reduction in probe frequency |
+
+R50 replaces the lower-value geographic-tour comparator after the selection
+critic's early challenge: beating always-probe does not show useful learned
+scheduling if an ordinary fixed rate suffices. It uses no tuned duty cycle or
+extra randomness. On its probe turn A may still choose service if no positive
+freshness mass exists, which is recorded. The learner directly chooses among
+all 256 public waypoints when probing; it is not restricted to a tiny residual
+around A. A resulting gain does not separately identify timing or target learning.
+
+### Actual semantic action exposure and credit
+
+At each 30-step boundary eligibility requires an available planning anchor
+(inferred or genuinely seen), 6-29 canonical current legal user detections, and
+an available non-returning service-assigned UAV with return margin strictly above
+.20. Protect nominal relay assignments and select highest margin, then lowest
+index. This prospectively changes B01's genuine-BS prerequisite. Both anchor
+source and actual sighting remain separately visible in features and records.
+Before a genuine sighting, the acquisition prior spreads remote-support mass
+over all four corners; inference alone does not certify the correct remote
+corner. After sighting it uses the original opposite-corner prior. All programs
+share this same lawful survey support.
+
+One scalar gate and 256 conditional target scores give
+`P(service)=sigmoid(g)` and `P(target j)=(1-sigmoid(g))*softmax(z)[j]`.
+Initialize the gate weights and bias at exactly zero: each semantic choice has
+probability .5 initially, independent of 256 target labels. Measure actual target
+probabilities and entropy. Sampling and PPO log probabilities use this exact
+normalized law. Deterministic deployment selects service for `g>=0`; otherwise
+it chooses the largest conditional target score, with the lowest index on ties.
+This is semantic staged mode, not the joint 257-category MAP action. Therefore
+L0 chooses service at every finite feature vector and is exactly the H program;
+the evaluator will verify that action identity on every macro before reusing H's
+interpretation. There is no duplicated H evaluation or extra inference unit.
+
+A service request preserves the ordinary targets. A probe request overrides one
+service target for exactly 30 native steps, or fewer on a real native end. A
+request while ineligible executes ordinary service and is recorded as fallback.
+PPO stores requested actions and their true log probabilities, including these
+fallback states; no retrospective masking is applied. Shield and guard continue
+to govern actual primitive actions. Log eligibility, requested/executed choices,
+anchor source, gate probability, gate/conditional-target/joint entropy and actual
+travel in training and evaluation. Activation groups remain trajectory-dependent
+descriptions and never change the panel denominator.
+
+Use ordinary SB3 PPO with a small direction-local action-distribution adapter,
+CPU FP32, separate [128,128] tanh networks and unchanged native macro reward
+sums. Gamma 1 and finite H3000 terminal handling preserve native J; GAE lambda
+.95, learning rate .0003, clip .2, value coefficient .5, maximum gradient norm
+.5, advantage normalization, no observation/reward running normalization,
+no target-KL exit or schedules. Entropy coefficient is **0**: the ordinary joint
+categorical entropy bonus would favor the 256-target branch even with a balanced
+gate. Both semantic and joint entropies are measured, not confused with deployed
+argmax behavior. Unscaled critic gradients/global clipping remain a possible
+finite-optimization limitation, not a diagnosed cause or another selected repair.
+
+### Proposed fixed exposure, interpretation and implementation scope
+
+Proposed tag `b02_semantic_choice_a01`, one fit, policy seed **28170001**;
+training worlds **28172001-28172160**, each used once in four round-robin lanes;
+evaluation worlds **28173001-28173016**, common to the four programs. The exact
+eight-digit seed family has no match in inspected candidate NOTES/claim records.
+There is no checkpoint selection, calibration, threshold search, extra seed,
+epoch/horizon extension or automatic retry. Four lanes x 100 macros x 40
+rollouts = 16000 macro decisions / 480000 native steps. Ten epochs and four
+100-example minibatches give 1600 optimizer steps. Evaluation is 64 H3000
+episodes / 192000 steps: **672000 native steps total, one result-bearing fit**.
+Expected scientific node occupancy is roughly 70-95 minutes from B01's measured
+72.85 minutes for 720k steps, before current contention; it is an estimate, not
+a scientific stopping time. Engineering, review, collection and reading are
+additional costs. Use actual-node admission and conservative concurrency; the
+running peer energy-relay CUDA operation remains outside this task.
+
+Primary readings are L1-L0/H, L1-A and L1-R50 in complete native J, QoS and all
+risk components. Read losses, zero-service worlds, minimum/final batteries,
+reserve exposure, cutoff/depletion, return costs, throughput and travel. Report
+nominal paired-world t95 descriptively, conditional on one trained instance,
+not learning-seed replication or confirmation. A gain over H/L0 alone may be
+ordinary acquisition value; a gain over A but not R50 may be ordinary rate
+selection. A gain beyond all three can justify further conditional package
+investment, without attribution to semantic balance or pure information value.
+More balanced eligible requests without a native gain weakens this complete
+package at this cost; it does not show general unlearnability. Lack of actual
+eligibility limits the answer and buys no automatic fit. Mixed signs/risk or
+technical missingness remain explicit. The inherited P_BS risk prevents treating
+a new mean gain as default replacement or a safety claim.
+
+L0 scope after the pending review: revise only this direction's controller,
+macro wrapper, training, readout, evaluator, admitted entrypoint and focused tests;
+reuse the published lawful station-prior helper, native host, shield and SB3.
+No shared learner/environment or peer code edit. B01's runnable identity remains
+its published source SHA; current direction code need not reproduce an obsolete
+study by default. A bounded Implementer may own the common-anchor/controller
+behavior and its controller tests; DM owns policy distribution, pipeline and
+notebook, with no shared Git index authority delegated. Independent engineering
+review covers action probabilities/gradients/mode, source distinctions, native
+reward/seed/terminal invariants, checkpoint identity and complete-count reading.
+Use nonpanel wiring fixtures only; record their native steps/updates separately.
+Selection-review disposition and any changed design will be appended before
+substantial implementation or result execution.
+
+### B02 selection disposition and accepted L0
+
+Root relayed the completed context-isolated selection review and retained this
+amended four-program comparison. The review returns **MATERIAL_DISSENT: no**
+after adding R50 and the common prior/source distinctions. Adopt the fixed-rate
+objection and its resolution: joint when-and-where package value must exceed
+both A and R50, not merely H. Execute the declared one-fit/672k-step scope;
+neither increased exposure nor a negative native result automatically extends it.
+The full review is being published at
+[Root's selection record](../../archive/2026-09-28/RESEARCH-native-round2-selection.md).
+No separate Pro expertise or second selection review is needed for this choice.
+
+Implementer assignment: only `controllers.py` and `test_controllers.py` under
+this direction. Implement common reset-frozen lawful P_BS planning support,
+separate inferred/genuine features and diagnostics, the pre-sighting four-corner
+survey prior, and R50's service-first alternating eligible-decision counter.
+Keep requested/executed/fallback, relay protection, source isolation and native
+30-step semantics. DM owns all other edits and accepts the diff/checks; helper
+has no notebook/shared-file/index/commit/launch rights and spawns no children.
+
+The DM subsequently read the complete selection answer and Root disposition at
+`457cd15d4`, including the fixed-rate objection and all adverse/unresolved outcome
+branches. That advice covers the actual fixed design above. The bounded helper's
+controller diff is accepted after DM inspection; its 18 synthetic controller
+tests passed. Four policy tests independently calculate the normalized law,
+semantic mode, entropy and gradients, including extreme gates and checkpoint
+restoration. The complete direction suite passed **30 tests in 25.79 seconds**:
+**570 nonpanel native steps and one single-update PPO wiring check**, separately
+from the selected result fit. Native H rewards/metrics/modes match the existing
+lawful StationPriorController; reset construction, finite-terminal exclusion,
+observer RNG preservation and no-extra-world exhaustion remain checked.
+Independent engineering review is in progress; no result operation exists yet.
+
+### B02 engineering acceptance
+
+The independent registered Reviewer found two promised-measurement gaps before
+execution: training lacked the final primitive step's actual displacement, and
+deployment lacked its selected target probability. Both are repaired. Training
+now records post-action actual displacement for every transition and assigned
+scout travel in one-way bookkeeping; neither enters actor/critic features.
+Training and deployment record chosen joint/conditional target probabilities.
+The reader checks native risk/travel totals, R50 alternation, source separation,
+entropy decomposition and the requested-choice/probability correspondence.
+
+The Reviewer independently derived the distribution gradients across 129 logit
+configurations with gates -80 to 80: maximum absolute error 1.97e-7 (FP32) and
+2.22e-16 (FP64). Its extra statistics-forward check preserves Python, NumPy and
+Torch RNG states, and its 22 synthetic policy/controller tests pass. The DM's
+affected post-repair checks pass **6 tests in 17.70 seconds**, including the
+nonzero final-step displacement and actual subprocess PPO storage/checkpoint
+path. Recorded verification exposure is now **930 nonpanel native transitions
+and two one-update engineering PPO checks**; these are not scientific fits.
+Pytest removed its owned scratch. No production world was exposed.
+
+Final independent disposition: **no material finding remains in the revised B02
+diff**. The DM accepts the implementation and review. Actual full-fit/evaluation
+success remains unobserved. The configured remote node currently reports 20
+logical CPUs and about 14.1 GB available memory; use four single-thread training
+lanes and at most four single-thread evaluation workers alongside the unchanged
+peer CUDA operation. Fresh launch-kernel memory admission is still required;
+this resource reading alone is not admission. Publish these exact inputs and
+the own exploring row before the one declared operation.

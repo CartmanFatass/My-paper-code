@@ -1,4 +1,4 @@
-"""One fixed SB3 PPO fit. No custom learner or model-based transition is used."""
+"""One fixed SB3 PPO fit with a semantic service/acquisition distribution."""
 
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ from experiments.candidates.energy_relay_availability.runner import (
 )
 
 from .macro_env import HORIZON, N_ENVS, POLICY_SEED, make_lane
+from .policy import SemanticPolicy
 
 
 ROLLOUT_STEPS = 100
@@ -31,7 +32,7 @@ OPTIMIZER_STEPS = 1600
 PPO_PARAMS = {
     "learning_rate": .0003, "n_steps": ROLLOUT_STEPS, "batch_size": 100, "n_epochs": 10,
     "gamma": 1.0, "gae_lambda": .95, "clip_range": .2, "normalize_advantage": True,
-    "ent_coef": .01, "vf_coef": .5, "max_grad_norm": .5,
+    "ent_coef": 0.0, "vf_coef": .5, "max_grad_norm": .5,
     "target_kl": None, "seed": POLICY_SEED, "device": "cpu",
 }
 
@@ -72,6 +73,7 @@ class TrainingAudit(BaseCallback):
         self.rollouts = 0
         self.native_steps = 0
         self.loss_rows = 0
+        self.exposure_rows = 0
 
     def _record_update(self):
         steps = optimizer_steps(self.model.policy)
@@ -100,6 +102,24 @@ class TrainingAudit(BaseCallback):
             raise RuntimeError("incomplete native macro")
         if any(int(action) != info["choice"]["requested"] for action, info in zip(actions, infos)):
             raise RuntimeError("PPO did not execute its recorded requested action")
+        with torch.no_grad():
+            distribution = self.model.policy.get_distribution(self.locals["obs_tensor"])
+            statistics = {key: value.cpu().numpy() for key, value in distribution.statistics().items()}
+            target_probabilities = torch.softmax(distribution.target_logits, dim=1).cpu().numpy()
+        log_probabilities = self.locals["log_probs"].detach().cpu().numpy()
+        for lane, (action, info) in enumerate(zip(actions, infos)):
+            _append(self.out / "training" / "exposure.jsonl", {
+                "world_seed": info["world_seed"], "macro_start": info["macro_start"],
+                "requested": int(action), "executed": info["choice"]["executed"],
+                "eligible": info["choice"]["eligible"],
+                "anchor_source": info["choice"]["anchor_source"],
+                "sampled_log_probability": float(log_probabilities[lane]),
+                "sampled_joint_probability": float(np.exp(log_probabilities[lane])),
+                "sampled_conditional_target_probability": float(target_probabilities[lane, int(action)-1])
+                if action else None,
+                **{key: float(value[lane]) for key, value in statistics.items()},
+            })
+            self.exposure_rows += 1
         self.rewards.append([info["native_reward_sum"] for info in infos])
         self.actions.append(actions.copy())
         self.native_steps += sum(info["macro_native_steps"] for info in infos)
@@ -180,7 +200,7 @@ def train(out: Path):
         # Keep the object reference even if startup fails partway through __init__.
         vec = SubprocVecEnv.__new__(SubprocVecEnv)
         vec.__init__([partial(make_lane, lane, str(out)) for lane in range(N_ENVS)], start_method="spawn")
-        model = PPO("MlpPolicy", vec, **PPO_PARAMS,
+        model = PPO(SemanticPolicy, vec, **PPO_PARAMS,
                     policy_kwargs={"net_arch": {"pi": [128, 128], "vf": [128, 128]},
                                    "activation_fn": torch.nn.Tanh, "ortho_init": True})
         model.set_logger(configure(folder=str(out / "training"), format_strings=[]))
@@ -196,6 +216,7 @@ def train(out: Path):
         steps = optimizer_steps(model.policy)
         if (model.num_timesteps != TOTAL_MACRO_STEPS or callback.rollouts != ROLLOUTS
                 or steps != OPTIMIZER_STEPS or callback.loss_rows != ROLLOUTS
+                or callback.exposure_rows != TOTAL_MACRO_STEPS
                 or any(any(row[key] != value for key, value in {
                     "lane": i, "native_steps": 120000, "macro_steps": 4000,
                     "episodes_started": 40, "episodes_completed": 40, "exhausted": True,
@@ -208,6 +229,7 @@ def train(out: Path):
         result.update(status="complete", lane_counts=counts,
                       actual_native_steps=callback.native_steps,
                       macro_decisions=model.num_timesteps, rollouts=callback.rollouts,
+                      exposure_records=callback.exposure_rows,
                       optimizer_steps=steps, ppo_epochs=int(model._n_updates),
                       parameter_movement=movement, endpoint_fingerprint=fingerprint(model.policy))
         for arm, filename in (("L0", "initial.zip"), ("L1", "endpoint.zip")):

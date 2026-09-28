@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Admitted entrypoint for the fixed single-fit native-J active-sensing study."""
+"""Admitted entrypoint for the fixed semantic service-acquisition study."""
 
 from __future__ import annotations
 

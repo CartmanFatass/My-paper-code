@@ -10,6 +10,7 @@ from experiments.candidates.uav_information_value.controllers import (
     PointSetHeuristic,
     canonical_legal_users,
 )
+from experiments.candidates.uav_information_value.b02.controller import station_prior_bs_xy
 
 
 N_ACTIONS = 257
@@ -26,7 +27,7 @@ SURVEY_XY = np.asarray(
     [(x, y) for x in np.arange(125.0, ARENA_M, SURVEY_CELL_M)
      for y in np.arange(125.0, ARENA_M, SURVEY_CELL_M)], dtype=np.float64)
 SURVEY_HALF_DIAGONAL_M = SURVEY_CELL_M / np.sqrt(2.0)
-FEATURE_DIM = 8 * 365 + 3 + 1024 + 1024 + 512 + 1 + 8 + 16 + 1
+FEATURE_DIM = 8 * 365 + 5 + 1024 + 1024 + 512 + 1 + 8 + 16 + 1
 
 
 class _PreparedHeuristic(PointSetHeuristic):
@@ -46,35 +47,18 @@ class _PreparedHeuristic(PointSetHeuristic):
             self._prepared = False
 
 
-def _prior(bs_xy: np.ndarray) -> np.ndarray:
+def _prior(bs_xy: np.ndarray | None) -> np.ndarray:
     xy = SURVEY_XY
     central = np.all((xy >= 2000.0) & (xy < 6000.0), axis=1)
-    remote_x = (xy[:, 0] >= 6400.0) if bs_xy[0] < 4000.0 else (xy[:, 0] < 1600.0)
-    remote_y = (xy[:, 1] >= 6400.0) if bs_xy[1] < 4000.0 else (xy[:, 1] < 1600.0)
-    remote = remote_x & remote_y
+    if bs_xy is None:
+        remote = ((xy[:, 0] < 1600.0) | (xy[:, 0] >= 6400.0)) & (
+            (xy[:, 1] < 1600.0) | (xy[:, 1] >= 6400.0))
+    else:
+        remote_x = (xy[:, 0] >= 6400.0) if bs_xy[0] < 4000.0 else (xy[:, 0] < 1600.0)
+        remote_y = (xy[:, 1] >= 6400.0) if bs_xy[1] < 4000.0 else (xy[:, 1] < 1600.0)
+        remote = remote_x & remote_y
     return (.95 * (.8 * central / central.sum() + .2 * remote / remote.sum())
             + .05 / len(xy))
-
-
-def _tour(bs_xy: np.ndarray) -> np.ndarray:
-    # A waypoint belongs to the higher-priority support when its center lies there.
-    xy = WAYPOINTS_XY
-    central = np.all((xy >= 2000.0) & (xy < 6000.0), axis=1)
-    remote_x = (xy[:, 0] >= 6400.0) if bs_xy[0] < 4000.0 else (xy[:, 0] < 1600.0)
-    remote_y = (xy[:, 1] >= 6400.0) if bs_xy[1] < 4000.0 else (xy[:, 1] < 1600.0)
-    groups = (np.flatnonzero(central | (remote_x & remote_y)),
-              np.flatnonzero(~(central | (remote_x & remote_y))))
-    remaining = [set(map(int, group)) for group in groups]
-    order: list[int] = []
-    cursor = np.asarray((4000.0, 4000.0))
-    for group in remaining:
-        while group:
-            index = min(group, key=lambda i: (np.linalg.norm(xy[i] - cursor), i))
-            order.append(index)
-            cursor = xy[index]
-            group.remove(index)
-    assert len(order) == N_ACTIONS - 1
-    return np.asarray(order, dtype=np.int64)
 
 
 class SensingController:
@@ -83,7 +67,7 @@ class SensingController:
     feature_dim = FEATURE_DIM
 
     def __init__(self, mode: str, policy=None):
-        if mode not in ("H", "P", "A", "L"):
+        if mode not in ("H", "A", "R50", "L"):
             raise ValueError(f"unknown sensing mode {mode!r}")
         self.mode = mode
         self.policy = policy
@@ -95,10 +79,12 @@ class SensingController:
         self._step = 0
         self._prepared_step: int | None = None
         self._seen_bs_xy: np.ndarray | None = None
+        self._prior_initialized = False
+        self._prior_bs_xy: np.ndarray | None = None
         self._survey_expiry = np.full(len(SURVEY_XY), -np.inf, dtype=np.float64)
         self._prior_mass = np.full(len(SURVEY_XY), 1.0 / len(SURVEY_XY))
-        self._tour_order: np.ndarray | None = None
-        self._tour_visited: set[int] = set()
+        self._r50_eligible_count = 0
+        self._rate_probe_turn = False
         self._scout: int | None = None
         self._eligible = False
         self._choice = 0
@@ -111,16 +97,19 @@ class SensingController:
     def targets_xy(self) -> np.ndarray:
         return self._effective_targets.copy()
 
-    def _assimilate(self, observations, *, survey: bool = False) -> None:
+    def _assimilate(self, observations, *, survey: bool = False) -> np.ndarray | None:
         obs = np.asarray(observations)
         if obs.shape != (8, self.heuristic.layout.dim):
             raise ValueError(f"observations must have shape {(8, self.heuristic.layout.dim)}")
+        if not self._prior_initialized:
+            self._prior_bs_xy = station_prior_bs_xy(obs, self.heuristic.layout)
+            self._prior_initialized = True
         bs = observed_bs_xy(obs, self.heuristic.layout)
         if bs is not None:
             self._seen_bs_xy = bs.copy()
         self._own_xyz = own_positions(obs, self.heuristic.layout)
         if not survey:
-            return
+            return bs
         horizontal = np.linalg.norm(
             self._own_xyz[:, None, :2] - SURVEY_XY[None, :, :], axis=2)
         vertical = self._own_xyz[:, None, 2] - USER_HEIGHT_M
@@ -129,6 +118,7 @@ class SensingController:
         expiry = self._step + np.maximum(clearance, 0.0) / USER_SPEED_MPS
         self._survey_expiry = np.maximum(
             self._survey_expiry, np.max(np.where(clearance >= 0.0, expiry, -np.inf), axis=0))
+        return bs
 
     def prepare(self, observations, modes, step: int) -> np.ndarray:
         if step != self._step or step % REPLAN_STEPS or self._prepared_step is not None:
@@ -136,21 +126,28 @@ class SensingController:
         modes = np.asarray(modes, dtype=bool)
         if modes.shape != (8,):
             raise ValueError("modes must have shape (8,)")
-        self._assimilate(observations, survey=True)
+        current_bs = self._assimilate(observations, survey=True)
         users = canonical_legal_users(observations, self.heuristic.layout,
                                       self.heuristic.params.dedup_tolerance_m)
-        bs = None if self._seen_bs_xy is None else self._seen_bs_xy.copy()
-        plan = self.heuristic.plan(observations, modes, {"users_xy": users, "bs_xy": bs})
+        if current_bs is not None:
+            anchor, source = current_bs, "observed-current"
+        elif self._seen_bs_xy is not None:
+            anchor, source = self._seen_bs_xy.copy(), "observed-memory"
+        elif self._prior_bs_xy is not None:
+            anchor, source = self._prior_bs_xy.copy(), "inferred"
+        else:
+            anchor, source = None, "absent"
+        plan = self.heuristic.plan(observations, modes, {"users_xy": users, "bs_xy": anchor})
         self.heuristic._prepared = True
         self._effective_targets = self.heuristic.targets_xy.copy()
         self._scout = None
-        if bs is not None and 6 <= len(users) < 30:
+        if anchor is not None and 6 <= len(users) < 30:
             energy = own_energy(observations, self.heuristic.layout)
             relays = plan["relays"]
             services = plan["centroids"]
             candidates = []
             for uav, target in enumerate(plan["targets"]):
-                if (modes[uav] or not energy["available"][uav]
+                if (modes[uav] or not energy["available"][uav] or energy["returning"][uav]
                         or energy["return_margin"][uav] <= np.float32(.20)):
                     continue
                 if not np.all(np.isfinite(target)):
@@ -162,13 +159,28 @@ class SensingController:
             if candidates:
                 self._scout = min(candidates, key=lambda i: (-float(energy["return_margin"][i]), i))
         self._eligible = self._scout is not None
-        self._prior_mass = _prior(bs) if bs is not None else np.full(len(SURVEY_XY), 1.0 / len(SURVEY_XY))
-        if bs is not None and self._tour_order is None:
-            self._tour_order = _tour(bs)
+        self._prior_mass = _prior(self._seen_bs_xy)
+        self._rate_probe_turn = False
+        if self.mode == "R50" and self._eligible:
+            self._rate_probe_turn = bool(self._r50_eligible_count % 2)
+            self._r50_eligible_count += 1
         self._choice = 0
         self._prepared_step = step
         self.diagnostics.append({"step": int(step), "users": int(len(users)),
-                                 "bs_known": bs is not None, "scout": self._scout,
+                                 "bs_known": self._seen_bs_xy is not None,
+                                 "anchor_available": anchor is not None,
+                                 "anchor_source": source, "prior_used": source == "inferred",
+                                 "current_bs_present": current_bs is not None,
+                                 "anchor_x": None if anchor is None else float(anchor[0]),
+                                 "anchor_y": None if anchor is None else float(anchor[1]),
+                                 "prior_x": None if self._prior_bs_xy is None else float(self._prior_bs_xy[0]),
+                                 "prior_y": None if self._prior_bs_xy is None else float(self._prior_bs_xy[1]),
+                                 "rate_probe_turn": self._rate_probe_turn,
+                                 "service_probability": None, "gate_entropy": None,
+                                 "target_entropy": None, "joint_entropy": None,
+                                 "selected_joint_probability": None,
+                                 "selected_conditional_target_probability": None,
+                                 "scout": self._scout,
                                  "eligible": self._eligible, "requested": None,
                                  "executed": None, "fallback": False})
         seen = np.isfinite(self._survey_expiry)
@@ -180,7 +192,9 @@ class SensingController:
             scout_onehot[self._scout] = 1.0
         features = np.concatenate((
             np.asarray(observations, dtype=np.float32).ravel(),
-            np.asarray([float(bs is not None), *(bs / ARENA_M if bs is not None else (0.0, 0.0))]),
+            np.asarray([float(source == "absent"), float(source == "inferred"),
+                        float(source.startswith("observed")),
+                        *(anchor / ARENA_M if anchor is not None else (0.0, 0.0))]),
             freshness, self._prior_mass, (WAYPOINTS_XY / ARENA_M).ravel(),
             np.asarray([float(self._eligible)]), scout_onehot, targets.ravel(),
             np.asarray([step / self.heuristic.layout.max_steps]),
@@ -188,25 +202,12 @@ class SensingController:
         assert features.shape == (FEATURE_DIM,)
         return features
 
-    def _sensed_waypoints(self) -> np.ndarray:
-        horizontal = np.linalg.norm(self._own_xyz[:, None, :2] - WAYPOINTS_XY[None, :, :], axis=2)
-        vertical = self._own_xyz[:, None, 2] - USER_HEIGHT_M
-        return np.any(horizontal ** 2 + vertical ** 2 <= SENSOR_RANGE_M ** 2, axis=0)
-
     def choose_default(self) -> int:
         if self._prepared_step != self._step:
             raise RuntimeError("choose_default requires prepare")
         if self.mode in ("H", "L") or not self._eligible:
             return 0
-        if self.mode == "P":
-            sensed = self._sensed_waypoints()
-            self._tour_visited.update(map(int, np.flatnonzero(sensed)))
-            for _ in range(2):
-                for index in self._tour_order:
-                    if int(index) not in self._tour_visited:
-                        return int(index) + 1
-                self._tour_visited.clear()
-                self._tour_visited.update(map(int, np.flatnonzero(sensed)))
+        if self.mode == "R50" and not self._rate_probe_turn:
             return 0
         distance = np.linalg.norm(WAYPOINTS_XY - self._own_xyz[self._scout, :2], axis=1)
         adjusted = distance.copy()
@@ -269,6 +270,9 @@ class SensingController:
             if self.mode == "L":
                 if self.policy is None:
                     raise ValueError("L requires a policy")
+                if hasattr(self.policy, "policy"):
+                    from .policy import policy_statistics
+                    self.diagnostics[-1].update(policy_statistics(self.policy, features))
                 choice, _ = self.policy.predict(features, deterministic=True)
                 choice = int(np.asarray(choice).item())
             else:

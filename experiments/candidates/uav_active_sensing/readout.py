@@ -6,13 +6,16 @@ from experiments.candidates.energy_relay_availability.readout import paired
 from experiments.candidates.uav_information_value.readout import distribution, number
 
 
-ARMS = ("L0", "L1", "H", "P", "A")
-CONTRASTS = (("L1", "L0"), ("L1", "A"), ("L1", "P"), ("L1", "H"),
-             ("A", "H"), ("P", "H"), ("A", "P"))
+ARMS = ("L0", "L1", "A", "R50")
+CONTRASTS = (("L1", "L0"), ("L1", "A"), ("L1", "R50"),
+             ("A", "L0"), ("R50", "L0"), ("A", "R50"))
 EXCLUDED = {"seed", "raw_bytes", "worker_wall_seconds", "worker_cpu_seconds", "worker_peak_rss_kib"}
 TAIL_FIELDS = {"raw_native_J", "qos_per_step", "episode_minimum_battery_ratio",
                "return_constraint_cost_raw_per_step", "return_constraint_cost_per_step",
-               "reserve10_uav_step_fraction", "cutoff_event_count_sum", "depletion_event_count_sum"}
+               "reserve10_uav_step_fraction", "cutoff_event_count_sum", "depletion_event_count_sum",
+               "native_reserve_uav_steps", "native_reserve_uav_step_fraction",
+               "native_final_reserve_uav_count", "native_final_minimum_battery_ratio",
+               "native_minimum_battery_ratio"}
 
 
 def summarize(rows, jobs, *, horizon=3000):
@@ -54,6 +57,7 @@ def summarize(rows, jobs, *, horizon=3000):
                 differences = [by_arm[left][seed][field] - by_arm[right][seed][field] for seed in seeds]
                 result = paired(differences, [0.0] * len(differences))
                 result.update(positive=sum(v > 0 for v in differences), negative=sum(v < 0 for v in differences),
+                              ties=sum(v == 0 for v in differences),
                               minimum=min(differences), maximum=max(differences))
                 if field in TAIL_FIELDS:
                     result["by_seed"] = dict(zip(map(str, seeds), differences))
@@ -66,5 +70,7 @@ def summarize(rows, jobs, *, horizon=3000):
         "panels": panels, "contrasts": contrasts, "n_train": 1,
         "estimand": "total closed-loop deployment of fixed policies with common legal information",
         "inference_unit": "initial evaluation-world seed, conditional on one trained instance",
+        "ordinary_service_alias": "L0 is exactly P_BS service under the checked zero-gate staged mode",
+        "evaluation_optimizer_updates": 0,
         "intervals": "exploratory paired t95, no multiplicity adjustment, no learning replication",
     }
