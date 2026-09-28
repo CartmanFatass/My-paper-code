@@ -1137,3 +1137,244 @@ checkpoint window. Its same-handle first drain supplied the accepted facts
 above. The native child stays active through deterministic waiting, collection
 and scientific reading; App queue delivery is not presumed. No duplicate fit,
 evaluation panel, operation, gate change or post-score extension is authorized.
+
+At the first observation checkpoint (latest status 10:13:07 UTC), the original
+operation remains running with consistent identities and zero probe errors.
+Queue delivery returned the known native-child `-32600` rejection. The active
+DM consumed event `ebe3f0c9d7397378618fb27c` and rearmed the same handle as
+generation 2 for 1500 seconds. A bounded progress read records 60 complete
+training worlds plus four at step 420: 181680 native steps / 6056 macros so far,
+without reading these as an endpoint. No worker, fit or scientific budget restart.
+
+The second checkpoint (latest native status 10:38:25 UTC) remains running,
+identity-consistent and error-free. The same known queue rejection is recorded;
+event `71732bee4ad65d0a6c81e531` was consumed and the original operation rearmed
+as generation 3. A progress-only read shows 124 completed training worlds,
+372000 native steps / 12400 macros, with four next-world resets pending. No
+score-based action or change to the fixed plan.
+
+## 2026-09-28 - B02 complete: semantic exposure without established package value
+
+The original operation exited **0** at 11:20:17 UTC. The same-handle observer
+reported a valid native witness, absent runner/supervisor and consistent records
+at 11:21:01. Generation 3 contained checkpoint `2ac9e4e65b0f34e262b0977d`
+and READY `7aacc945f89df5cca0972866`; both were consumed, then generation 4 was
+stopped with no pending events. The known rejected native-child queue delivery
+did not restart any work. There are no accepted operations left to collect.
+
+The frozen reader at input **087c8823a370098fb77dd0dc85e0ce1b9bcb1906**
+verified all **309 manifest artifacts, 224 complete H3000 traces and 672000 native
+transitions**. Every training seed was constructed exactly once; all four lanes
+exhausted at 40 worlds/120000 steps without a bonus world. The one scientific fit
+completed 16000 macros, 40 rollouts, 400 PPO epochs and **1600 optimizer steps**;
+all 64 declared evaluations completed with zero optimizer updates. Native reward
+identity, finite terminal handling, requested-action storage, semantic probability
+law, R50 alternation, L0/H identity and inferred-versus-observed distinctions pass.
+No failed/missing jobs, pool errors, runner errors or orphan raw outputs remain.
+Stdout and stderr are empty, not missing. See the [complete summary](../../../../runs/uav_active_sensing/b02_semantic_choice_a01/summary.json),
+[native world rows](../../../../runs/uav_active_sensing/b02_semantic_choice_a01/perworld.json),
+[frozen integrity reading](../../../../runs/uav_active_sensing/b02_semantic_choice_a01/reading.json)
+and [terminal status](../../../../runs/uav_active_sensing/b02_semantic_choice_a01/terminal-status.json).
+
+### Complete native comparison
+
+All 16 declared evaluation worlds remain in every contrast. Intervals are nominal
+paired t95 across initial worlds, conditional on this single trained instance;
+they establish neither equivalence nor learning-seed population superiority.
+
+| Contrast | Total native J mean [t95] | J positive / negative / tied | QoS per-step mean [t95] |
+| --- | --- | --- | --- |
+| L1-L0/H | +7.217 [-45.833, +60.267] | 7 / 6 / 3 | +.007591 [-.005819, +.021000] |
+| L1-A | -17.474 [-91.307, +56.360] | 5 / 11 / 0 | -.007408 [-.028159, +.013344] |
+| L1-R50 | +3.379 [-61.555, +68.314] | 8 / 8 / 0 | -.004453 [-.014840, +.005933] |
+| A-L0/H | +24.691 [-58.223, +107.605] | 8 / 8 / 0 | +.014998 [-.010082, +.040078] |
+| R50-L0/H | +3.838 [-58.135, +65.811] | 9 / 7 / 0 | +.012044 [-.003612, +.027700] |
+| A-R50 | +20.853 [-63.555, +105.261] | 11 / 5 / 0 | +.002954 [-.020801, +.026709] |
+
+All-world signed J differences are retained here, not only the activated or
+favorable subset. Exact values and every native component remain in the summary.
+
+| Seed | L1-H | L1-A | L1-R50 |
+| --- | ---: | ---: | ---: |
+| 28173001 | 0.000 | +71.126 | +172.366 |
+| 28173002 | -15.252 | -8.111 | -58.278 |
+| 28173003 | +73.538 | +366.329 | -12.086 |
+| 28173004 | 0.000 | -124.476 | -110.042 |
+| 28173005 | -188.869 | +11.722 | -52.527 |
+| 28173006 | +63.021 | -58.071 | +70.326 |
+| 28173007 | -56.023 | +86.801 | -56.165 |
+| 28173008 | +98.850 | -84.837 | +290.015 |
+| 28173009 | +63.811 | -42.215 | +48.629 |
+| 28173010 | -136.559 | -291.920 | -276.989 |
+| 28173011 | +111.036 | -50.258 | +46.564 |
+| 28173012 | +24.841 | +99.646 | +5.557 |
+| 28173013 | -51.070 | -17.321 | +15.041 |
+| 28173014 | 0.000 | -107.331 | +4.376 |
+| 28173015 | -85.633 | -66.017 | -.041 |
+| 28173016 | +213.786 | -64.645 | -32.675 |
+
+### Exposure, learning and deployed choices
+
+The prospective semantic-exposure prediction was met. All **160/160 training
+worlds** had an eligible decision: **3411/16000 eligible macros**, comprising
+**1618 service and 1793 probe requests**. Of these, 1121 used an inferred anchor
+(542 service), 1463 a current genuine sighting (681 service), and 827 genuine
+memory (395 service). All-world sampling produced 7519 service and 8481 probe
+requests; 6688 probe requests were ineligible and therefore executed service.
+Requested probabilities, not retrospectively masked actions, entered PPO as
+declared. This supports genuine exposure to both choices but not abundant
+experience for every state-target combination.
+
+The eligible training service probability averaged .470610, range
+.407074-.530736; gate entropy averaged .689059 versus log(2)=.693147. Conditional
+target entropy averaged **5.544566** versus log(256)=5.545177. Each target except
+37 appeared among eligible sampled probes, usually only a few times. Actor
+parameter movement was L2 .212449 / max .015953; critic L2 7.584761. Thus this
+was genuine learning, not an unchanged checkpoint. The final update still had
+value loss 118632.32, explained variance approximately 0, approximate KL .000111
+and clip fraction 0. Large value loss and shared clipping are possible finite
+optimization limitations, not a measured clipping explanation.
+
+All 16 evaluation worlds are eligible under all arms. L1 requested **269** probes,
+executed **139**, and fell back on the other **130**; 260/399 eligible choices
+were service. It intervened in **13/16 worlds**. The remaining 28173001/004/014
+are exact native H paths because of its choices, not an unavailable known-BS
+gate. L1's eligible service probabilities span **.491474-.516654**, mean .501831.
+Every executed probe selects **waypoint 115, (3750,1250)**, whose conditional
+probability averages .004823 (uniform is .003906). Small fitted differences
+therefore produce concentrated deterministic behavior under the predeclared
+staged rule. This is weak policy differentiation, not a concentrated stochastic
+target distribution. A executes 268 probes; R50 155. Their eligible counts are
+268/314 versus L1's 399 and H's 422, each trajectory-dependent.
+
+H already discovers all 30 users by step 1061 in every world. L1 finishes this
+discovery earlier in none, at the same step in 13, and later in 28173005/009/011.
+Its mean current visible-user count is .27498 lower than H (3 positive / 10
+negative / 3 tied worlds). These readings weaken an acquisition-based explanation
+of its favorable scores, but final discovery and current visibility are not pure
+information mediation tests, freshness value or an optimal-headroom bound.
+All four programs have nonzero service in all worlds. Actual mean team travel is
+158.580 / 163.097 / 165.380 / 162.852 km for H/L1/A/R50; L1-H is +4.518 km
+[+1.384,+7.652]. Throughput differences L1-H/A/R50 are +.227716/-.222228/-.133603
+Mbps, with all descriptive intervals spanning zero. No post-score evaluation,
+stochastic deployment alternative or threshold adjustment was added.
+
+### Absolute risk and adverse worlds
+
+| Arm | Mean J | Mean QoS | Mean return cost/step | Mean reserve UAV-step fraction (<=.10) | Mean final reserve UAV count | Worst native battery |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| H/L0 | 2060.757 | .707876 | .005399 | .023214 | 2.8750 | .080598 |
+| L1 | 2067.974 | .715466 | .007992 | .030310 | 3.4375 | .074677 |
+| A | 2085.448 | .722874 | .008780 | .028396 | 2.8125 | .072179 |
+| R50 | 2064.595 | .719920 | .010779 | .036469 | 3.0000 | .072844 |
+
+There are zero cutoff/depletion events in these completed training and evaluation
+worlds; that does not clear persistent low reserve. Relative to H, L1 final
+reserve counts worsen by 2 UAVs in 28173002 and by 7 in **28173010**, with 14
+ties and no improvement. In 28173010 its J falls **136.559** despite QoS gaining
+.016170: reserve exposure rises from 0 to **2826 UAV-steps**, and seven UAVs
+stay at or below .10 throughout the last 300 transitions. In **28173005**, J
+falls **188.869** despite QoS +.012389; reserve exposure rises from 1980 to
+3855, with seven persistently low-reserve UAVs and a .074677 minimum battery.
+
+Preserve favorable and contrary risk evidence: L1-H in 28173016 gains J213.786
+and QoS .070982 without reserve exposure; 28173003/008 reduce reserve exposure;
+28173012 gains J24.841 while QoS falls .032042 and reserve risk improves. The
+mean alone conceals these different service/risk trades. Persistent seven-UAV
+last-300 reserve cases also occur for H in 28173012, A in 28173005/012, and R50
+in 28173005/008/012. R50 has one persistent member in 28173001. Training is not
+risk-free either: world **28172104** has minimum battery .064698 and reserve
+UAV-step fraction .226333. The inherited P_BS counterexample **28100224** remains
+binding. Neither shared use of P_BS nor absence of cutoff/depletion warrants a
+safe/default replacement claim.
+
+The extra [descriptive reading](../../../../runs/uav_active_sensing/b02_semantic_choice_a01/details.json)
+uses `read_b02_details.py`: hash-checked existing NPZ/exposure only, **0 new native
+steps**, no simulator, policy or optimizer calls. Its all-world final-300 counts,
+probabilities and histograms document the above tail reading; they do not change
+the prospective estimand or select another experiment.
+
+### B02 independent scientific reading and decision
+
+Fresh registered ResearchCritic `/root/dm_sensing_round2/b02_result_critic`
+received no DM/Root conversation inheritance. It reconstructed frozen inputs,
+source and compact native evidence before reading prior disposition prose. It
+checked compact hashes and readers, but did not independently reopen remote NPZ;
+the full-trace integrity result comes from the DM's frozen reader. Its incidental
+exposure to another direction's B03 index headline was explicitly excluded, as
+was that result from the DM's B02 design, execution and decision.
+
+The critic recommends **stop unchanged-B02 investment**, retain the ordinary
+assets conditionally, and keep the parent learning question open, with
+**MATERIAL_DISSENT: no**. Its reasoning separates opportunity (ordinary service
+already discovers all users), representation/exposure (both meaningful choices
+actually sampled), finite learning (changed actor but weak probabilities and
+single-waypoint deterministic probe), and complete value (no established gain
+beyond H, A and R50, with material reserve tails). It explicitly rejects treating
+large critic loss as a proven clipping cause, weak information proxies as a
+proof of no acquisition headroom, or this comparison as proof of B01's cause or
+the superiority of the revised research workflow.
+
+The critic compared further purchases. Another same-endpoint 16-world panel
+would cost roughly 27 runner minutes and narrow only conditional world precision.
+An unchanged fit plus panel would cost roughly 90 minutes and test recurrence,
+but there is no sufficiently useful endpoint or unresolved adoption choice to
+prioritize replication. A changed learner remains scientifically possible; the
+present evidence does not select a particular optimizer, representation or
+deployment repair simply because it is editable. A future substantive comparison
+can proceed without a positive toy or exact-headroom proof, but needs an outcome
+that changes investment and strong same-information references, not an automatic
+increase in epochs/seeds/gates.
+
+**DM disposition: adopt this scoped stop and no-run recommendation.** The active
+study is complete; direction standing becomes reserve with no selected successor,
+pending producer or external dependency. B02 is an active-but-unhelpful finite
+learning package, not the earlier globally gate-limited explanation. Its exposure
+prediction succeeded; its native benefit prediction was not established. The
+source/prior/world/deployment changes preclude attributing B01-to-B02 differences
+to semantic balance alone. Pure information mediation, optimal acquisition value,
+larger-data learnability and the cause of weak optimization remain unresolved.
+None is credited as a rescue explanation for this purchased package.
+
+Re-entry requires a specifically motivated learning comparison whose possible
+results distinguish useful alternatives at a declared cost. More differentiation
+alone is insufficient: benefit must confront H, A and R50 with full risk reading.
+Do not add confirmation, a second seed, an optimizer repair or a cross-question
+pivot from this result. Root receives the completed evidence and this investment
+recommendation at the assigned boundary; its cross-question choice is separate.
+No distinct unresolved expertise or disagreement justified an additional Pro pass.
+
+### Cost, retention and reclamation
+
+Scientific cost is **one fit / 672000 native steps**. Runner wall time is
+**5373.81 s (89.56 min)**, including 3774.59 s training and 1599.22 s remaining
+batch work; native acceptance-to-exit is **93.40 min**. Parent plus training and
+evaluation worker CPU totals **21107.89 s (5.86 h)**. Parent peak RSS is 670428 KiB;
+training lane peak is 520648 KiB. Engineering exposure remains 930 nonpanel native
+transitions and two single-update wiring checks. Preparation, engineering review,
+scientific review, collection and publication wall time were not fully metered.
+
+One unique bulk copy now lives at
+`hmasd-wsl-node:/home/wu/hmasd-artifacts/uav_active_sensing/b02_semantic_choice_a01/`.
+Raw evaluation/training traces and initial/endpoint checkpoints were **moved**,
+not archived or copied as a cleanup prerequisite. Small manifest/config/summary
+records accompany them so the frozen reader can run there. Its second complete
+verification checks the same 309 artifacts / **142038467 manifest payload bytes**
+and manifest SHA256 `53e8be4c3d993e24eca214cef724a6be933e63eaa82a1aa10061b32ee95ca821`;
+see [retention verification](../../../../runs/uav_active_sensing/b02_semantic_choice_a01/retention-verification.json).
+Compact readings and all per-world rows are collected in Git. Original launch
+claim, manifest, terminal witness/status and logs stay at the declared node output
+for same-handle status and duplicate prevention; no source or operation migrated.
+
+After both scientific workers and the observer ended and helpers returned, the
+maintained snapshot collector previewed then removed exact snapshot
+`361b566548cf4cd4bfbb220c6c277e99` with its supported read-only sudo process scan.
+The directory and Git registration are both verified absent. Across that source,
+original run directory and durable artifact directory, allocated bytes fall from
+943284224 to 143843328: **799440896 bytes reclaimed net**, including the small
+metadata copies rather than counting moved raw bytes as freed. Local disposed
+targets `temp/directions/uav_active_sensing/`, the direction implementation
+`__pycache__/` and matching test `__pycache__/` are absent, reclaiming another
+**212992 allocated bytes**. Required source remains reachable through published
+Git, and B01's unique evidence is untouched. No cleanup blocker or live consumer
+remains; the unrelated node bad-tree GC warning was not repaired.

@@ -1,0 +1,145 @@
+{
+  "L0": {
+    "bytes": 6000382,
+    "checkpoint": "initial.zip",
+    "sha256": "fa0b99153d87699a57d109b45aae27bfaa2a3c825a591ae200cf5ddff62143ad"
+  },
+  "L1": {
+    "bytes": 17946230,
+    "checkpoint": "endpoint.zip",
+    "sha256": "a17c712b769bae365d43f4281a0b47c6388a50414f7b2d6ca6f0d0ea85dbd1e8"
+  },
+  "actual_native_steps": 480000,
+  "endpoint_fingerprint": "3a226c433c1c157dab3f469b39bd183fc985559e196a0173d18f87ddb10f6790",
+  "exposure_records": 16000,
+  "fits_started": 1,
+  "initial_fingerprint": "1dcc58325c91418ae6a6bb442efbf3609a9bdd1f513e84d17d11433cc0074a7f",
+  "lane_counts": [
+    {
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "exhausted": true,
+      "lane": 0,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "worker_cpu_seconds": 3535.426394,
+      "worker_peak_rss_kib": 520568,
+      "worker_wall_seconds": 3772.3446309521096
+    },
+    {
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "exhausted": true,
+      "lane": 1,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "worker_cpu_seconds": 3591.792848,
+      "worker_peak_rss_kib": 520648,
+      "worker_wall_seconds": 3772.3340874540154
+    },
+    {
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "exhausted": true,
+      "lane": 2,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "worker_cpu_seconds": 3681.407903,
+      "worker_peak_rss_kib": 520324,
+      "worker_wall_seconds": 3772.354058781988
+    },
+    {
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "exhausted": true,
+      "lane": 3,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "worker_cpu_seconds": 3618.0763819999997,
+      "worker_peak_rss_kib": 519980,
+      "worker_wall_seconds": 3772.2986185409827
+    }
+  ],
+  "lane_progress": [
+    {
+      "current_episode_steps": 3000,
+      "current_seed": 28172157,
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "lane": 0,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "status": "exhausted",
+      "worker_cpu_seconds": 3535.426089,
+      "worker_peak_rss_kib": 520568,
+      "worker_wall_seconds": 3771.764774360112
+    },
+    {
+      "current_episode_steps": 3000,
+      "current_seed": 28172158,
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "lane": 1,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "status": "exhausted",
+      "worker_cpu_seconds": 3591.792448,
+      "worker_peak_rss_kib": 520648,
+      "worker_wall_seconds": 3771.8097111409297
+    },
+    {
+      "current_episode_steps": 3000,
+      "current_seed": 28172159,
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "lane": 2,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "status": "exhausted",
+      "worker_cpu_seconds": 3681.407643,
+      "worker_peak_rss_kib": 520324,
+      "worker_wall_seconds": 3771.7903354360024
+    },
+    {
+      "current_episode_steps": 3000,
+      "current_seed": 28172160,
+      "episodes_completed": 40,
+      "episodes_started": 40,
+      "lane": 3,
+      "macro_steps": 4000,
+      "native_steps": 120000,
+      "status": "exhausted",
+      "worker_cpu_seconds": 3618.075973,
+      "worker_peak_rss_kib": 519980,
+      "worker_wall_seconds": 3771.618914691033
+    }
+  ],
+  "macro_decisions": 16000,
+  "optimizer_steps": 1600,
+  "parameter_movement": {
+    "actor": {
+      "l2": 0.21244901359106572,
+      "max_absolute": 0.015952521935105324
+    },
+    "all": {
+      "l2": 7.5877361632708915,
+      "max_absolute": 0.4982126634567976
+    },
+    "critic": {
+      "l2": 7.584761400336404,
+      "max_absolute": 0.4982126634567976
+    }
+  },
+  "parent_cpu_seconds": 35.521066999999995,
+  "parent_peak_rss_kib": 667496,
+  "parent_wall_seconds": 3774.5906786199193,
+  "policy_seed": 28170001,
+  "ppo_epochs": 400,
+  "recorded_native_step_lower_bound": 480000,
+  "rollouts": 40,
+  "sb3_version": "2.6.0",
+  "status": "complete",
+  "worker_cpu_seconds_sum": 14426.702153000002,
+  "worker_peak_rss_kib_max": 520648,
+  "worker_wall_seconds_sum": 15086.983735628077
+}

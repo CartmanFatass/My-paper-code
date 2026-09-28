@@ -1,0 +1,10 @@
+{
+  "status": "verified",
+  "source_sha": "087c8823a370098fb77dd0dc85e0ce1b9bcb1906",
+  "native_steps_checked": 672000,
+  "native_traces_checked": 224,
+  "artifacts_hashed": 309,
+  "manifest_sha256": "53e8be4c3d993e24eca214cef724a6be933e63eaa82a1aa10061b32ee95ca821",
+  "storage_bytes": 142038467,
+  "reading_wall_seconds": 1.8142908919835463
+}

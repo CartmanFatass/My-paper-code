@@ -1,0 +1,16 @@
+{
+  "bulk_location": "hmasd-wsl-node:/home/wu/hmasd-artifacts/uav_active_sensing/b02_semantic_choice_a01/",
+  "moved_unique_bulk": ["raw/", "training/", "initial.zip", "endpoint.zip"],
+  "native_operation_root": "hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_active_sensing/b02_semantic_choice_a01/",
+  "source_sha": "087c8823a370098fb77dd0dc85e0ce1b9bcb1906",
+  "manifest_sha256": "53e8be4c3d993e24eca214cef724a6be933e63eaa82a1aa10061b32ee95ca821",
+  "artifacts_verified": 309,
+  "manifest_payload_bytes": 142038467,
+  "native_steps_verified": 672000,
+  "removed_snapshot": "361b566548cf4cd4bfbb220c6c277e99",
+  "node_allocated_bytes_before": 943284224,
+  "node_allocated_bytes_after": 143843328,
+  "node_net_reclaimed_bytes": 799440896,
+  "local_disposable_net_reclaimed_bytes": 212992,
+  "cleanup_blocker": null
+}
