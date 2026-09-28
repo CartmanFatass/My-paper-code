@@ -40,7 +40,8 @@ of the problem and name the MARL coupling a single-agent or bandit prototype omi
 smallest complete experiment that changes a real judgment or action; count cost in fits and wall
 time on the actual node; keep one result-bearing study active. Frame planning-line questions in
 UAV path-planning and swarm cooperative-planning terms. Check earlier records before calling an
-idea new. A justified no-run, retention or stop is a valid recommendation; no positive result,
+idea new, including the three local literature stores listed under "Reference libraries" in
+`AGENTS.md` (new-libs foundations, the Inst-sci MyLib, the My-lib corpus with its LLM hint index). A justified no-run, retention or stop is a valid recommendation; no positive result,
 rescue search or fixed number of new ideas is owed. When the decision is question selection, put
 attention on a consequential question that could change a belief, an ordinary reference or an
 investment (owner-approved refinement 858e8cff5, 2026-09-28): diagnosis and baseline attribution

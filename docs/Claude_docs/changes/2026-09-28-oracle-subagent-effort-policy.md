@@ -56,3 +56,15 @@ Change: one paragraph in `CLAUDE.md` (Claude runtime section) applying the refin
 DM, and one sentence in `.claude/agents/hmasd-oracle.md` for question-selection decisions.
 Frontmatter unchanged; `tools/publish_claude_control.py --check` still `drift: 0` (generated bodies
 untouched). No new record type, score, form, role or channel; accepted operations untouched.
+
+## Addendum (2026-09-28, later): reference-library pointers
+
+Owner request: put the two independent local libraries (Inst-sci `papers/MyLib`, 190 PDFs/JSON with
+`metadata/integrity.json` authoritative; My-lib corpus at `/mnt/c/Projects/My-lib`, 1,519 arXiv PDFs
+under `.local-formal-capture/corpus/papers/`) into `AGENTS.md` so Claude, Root and the DM/Oracle roles
+can find references, and build a simple LLM hint index over the My-lib corpus with `agy`/`omp` headless
+Gemini 3.8 Flash (medium). Change: new `AGENTS.md` section "Reference libraries" (also lists
+`docs/new-libs/`), one sentence in `.claude/agents/hmasd-oracle.md` pointing at it; builder and search
+scripts under `tools/reference_libraries/` with tests (Implementer task from
+`temp/directions/energy_relay_benchmark/L0_mylib_llm_index.md`); index outputs under the git-ignored
+`/mnt/c/Projects/My-lib/.local-llm-index/`. Publisher drift unaffected (generated bodies untouched).

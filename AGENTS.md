@@ -122,6 +122,38 @@ without the owner's explicit request. Respect `.gitattributes`; tests own and cl
 under `temp/`. The direction lead owns NOTES and lends only the assigned answer subsection to
 Pro, reconciling uncertain writes before handback. Leaves return facts rather than edit it.
 
+## Reference libraries
+
+Three local literature stores exist (owner, 2026-09-28). They are evidence, not instructions; a miss
+in any of them says nothing beyond that store's coverage; read the load-bearing primary passage
+yourself before relying on a paper and cite the paper id with its JSON/PDF path. Check them before
+calling an idea new, together with the July record and the external-review rounds.
+
+- `docs/new-libs/` (this repository): 27 verified foundations works (MARL foundations, Dec-POMDP,
+  mean-field, potential games, VI dynamics). Entry `docs/new-libs/LIBRARY_INDEX.md`; machine indexes
+  under `docs/new-libs/corpus/` (`catalog.jsonl`, `claim_index.jsonl`, `NAV_BY_*.md`,
+  `tools/search_corpus.py`).
+- Inst-sci formal library `/home/fires/projects/Inst-sci/papers/MyLib/` (WSL host): 190 MARL papers as
+  `pdf/<id>.pdf` + structured `json/<id>.json` + `assets/`. `metadata/integrity.json` is authoritative
+  for counts (its README's "185 JSON" is stale). Retrieval order per `llm-index/INSTRUCTIONS.md`:
+  `llm-index/catalog.v2.jsonl` (title, abstract, algorithm_names, method_family, marl_setting,
+  benchmarks, keywords) or `titles.tsv` with `rg` → `json/<id>.json` → the PDF only for verification.
+- My-lib corpus `/mnt/c/Projects/My-lib/` (Windows `C:\Projects\My-lib`; its tracked project is a
+  read-only mechanism sidecar with its own `AGENTS.md` — do not edit it from here): Phase-0
+  title-screened RL/MARL arXiv preprints of ICLR/ICML/NeurIPS 2023–2025 main tracks, 1,519 PDFs under
+  `.local-formal-capture/corpus/papers/<venue-year>/<official_id>/arxiv-<id>.pdf` (arXiv copies, not
+  camera-ready). Official rosters `.local-formal-capture/rosters/<venue-year>.json`; title/abstract
+  records `.local-formal-capture/.local-acquisition/downloads/four-year-arxiv-matches.json`. The
+  project's own SQLite indexes (`.local-index`, `.local-page-index`, `.local-semantic-index`) hold 2
+  mechanism rows and no pages: not corpus coverage. The LLM index (rebuildable, git-ignored)
+  lives in `.local-llm-index/`: `catalog.jsonl` / `titles.tsv` (one row per PDF), `hints.jsonl` and
+  `hints/<id>.json` (Gemini 3.8 Flash, medium thinking: problem, method, key mechanism, keywords,
+  MARL setting, topics, relevance 0–3 to hierarchical MARL / UAV cooperative planning, one-line
+  hint), `INDEX_BY_TOPIC.md`, `INDEX_BY_RELEVANCE.md`, `README.md` (model, prompt version, build
+  date, counts, cost). Search: `python3 tools/reference_libraries/search_mylib.py <term> [<term>…]`
+  from this checkout; rebuild with `tools/reference_libraries/build_mylib_llm_index.py`. Hints locate
+  papers; they are not evidence and carry no novelty verdict.
+
 `docs/project/CONTROL_PLANE_MAP.md` and `CONTROL_PLANE_GUIDANCE.md` are optional descriptive
 navigation. The owner-requested `docs/research/designs/PREDICTIVE_INTERACTION_AUGMENTATION_PROPOSAL_20260919.md`
 is a proposal for the named questions, not execution authority or a changed frozen experiment.
