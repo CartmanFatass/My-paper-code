@@ -1285,3 +1285,30 @@ def test_authorised_browser_interaction_is_the_only_jev_handoff(tmp_path, monkey
     assert result['state'] == 'COMPLETE'
     assert interactions == [CONVERSATION]
     assert first.browser.closed and last.browser.closed
+
+
+def test_chrome_start_passes_shell_proxy_explicitly(tmp_path, monkeypatch):
+    cfg = {'chrome': '/opt/chrome', 'profile': str(tmp_path / 'profile'), 'cdp_url': 'http://127.0.0.1:9222',
+           'user_agent': 'UA', 'state_dir': str(tmp_path / 'state')}
+    seen, versions = {}, iter([None, {'Browser': 'Chrome/150'}])
+    monkeypatch.setattr(driver, 'cdp_version', lambda _cfg: next(versions))
+    monkeypatch.setattr(driver.subprocess, 'Popen', lambda argv, **_kw: seen.setdefault('argv', argv))
+    for name in ('https_proxy', 'HTTPS_PROXY', 'http_proxy', 'HTTP_PROXY', 'no_proxy', 'NO_PROXY'):
+        monkeypatch.delenv(name, raising=False)
+    monkeypatch.setenv('https_proxy', 'http://127.0.0.1:7890')
+    monkeypatch.setenv('no_proxy', 'localhost, 127.*,*.local')
+    assert driver.chrome_start(cfg, 'headless') == {'chrome': 'started', 'mode': 'headless', 'proxy': True}
+    assert '--proxy-server=http://127.0.0.1:7890' in seen['argv']
+    assert '--proxy-bypass-list=localhost;127.*;*.local' in seen['argv']
+    assert '--headless=new' in seen['argv']
+    monkeypatch.delenv('https_proxy')
+    monkeypatch.delenv('no_proxy')
+    seen.clear()
+    versions = iter([None, {'Browser': 'Chrome/150'}])
+    assert driver.chrome_start(cfg, 'headed') == {'chrome': 'started', 'mode': 'headed', 'proxy': False}
+    assert not [flag for flag in seen['argv'] if flag.startswith('--proxy')]
+    seen.clear()
+    versions = iter([None, {'Browser': 'Chrome/150'}])
+    driver.chrome_start({**cfg, 'proxy_server': 'socks5://127.0.0.1:1080', 'proxy_bypass': 'localhost'}, 'headed')
+    assert '--proxy-server=socks5://127.0.0.1:1080' in seen['argv']
+    assert '--proxy-bypass-list=localhost' in seen['argv']

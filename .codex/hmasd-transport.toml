@@ -41,3 +41,8 @@ approval_policy = "always_allow"
 approval_connectors = ["GitHub"]
 user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36"
 state_dir = "~/.local/state/hmasd-pro-transport"
+# Optional page proxy for the driver's Chrome. When absent, the driver passes the shell's
+# https_proxy/http_proxy explicitly (no_proxy becomes the bypass list): Chrome on the WSL host does not
+# read those variables itself, and the mirrored-network TUN route black-holes direct traffic (2026-09-27).
+# proxy_server = "http://127.0.0.1:7890"
+# proxy_bypass = "localhost,127.*"

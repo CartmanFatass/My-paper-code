@@ -278,6 +278,21 @@ def chrome_mode(version):
     return "headless" if "Headless" in version.get("User-Agent", "") + version.get("Browser", "") else "headed"
 
 
+def chrome_proxy(cfg):
+    """Explicit page-proxy flags: `[jev] proxy_server`, else the shell's https_proxy/http_proxy with no_proxy as bypass."""
+    server = cfg.get("proxy_server") or next((os.environ[name] for name in
+                                              ("https_proxy", "HTTPS_PROXY", "http_proxy", "HTTP_PROXY")
+                                              if os.environ.get(name)), None)
+    if not server:
+        return []
+    flags = [f"--proxy-server={server}"]
+    bypass = cfg.get("proxy_bypass") or os.environ.get("no_proxy") or os.environ.get("NO_PROXY") or ""
+    hosts = [part.strip() for part in bypass.split(",") if part.strip()]
+    if hosts:
+        flags.append("--proxy-bypass-list=" + ";".join(hosts))
+    return flags
+
+
 def chrome_start(cfg, mode):
     """One Chrome on the logged-in profile. A running one in the other mode is reported, not killed."""
     version = cdp_version(cfg)
@@ -297,13 +312,17 @@ def chrome_start(cfg, mode):
         marker.write_text("1", encoding="utf-8")
     else:
         marker.unlink(missing_ok=True)
+    proxy = chrome_proxy(cfg)
+    # Chrome on the WSL host does not read the shell's proxy variables, and the mirrored-network TUN
+    # route black-holes direct traffic (2026-09-27): the page proxy is passed explicitly.
+    argv += proxy
     log = open(Path(cfg["state_dir"], "chrome.log"), "ab")
     subprocess.Popen(argv + ["about:blank"], stdin=subprocess.DEVNULL, stdout=log, stderr=log,
                      start_new_session=True)
     deadline = time.monotonic() + 30
     while time.monotonic() < deadline:
         if cdp_version(cfg):
-            return {"chrome": "started", "mode": mode}
+            return {"chrome": "started", "mode": mode, "proxy": bool(proxy)}
         time.sleep(0.5)
     raise PreSendFailure("Chrome did not open its debugging port")
 
