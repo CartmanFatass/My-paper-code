@@ -7237,3 +7237,4 @@ Question key `hmasd:2cf3d571d045310683e259e8e0bcee654f3e709f1a5e8b016d4d1dbd66b8
 
 ### Send record (2026-09-28 22:58 UTC): method-application return sent to Root
 `codex queue --thread 01a0e560-4333-7b03-8ff3-759a4add1d9a` (current Root per RESEARCH session routing) accepted queued id `01a0ea2d-9774-7ff2-8da9-f2ba4a477d9c`; one send, no ACK requested or owed. Content: commit 7140aacae (the `hmasd-oracle` paragraph, `--check` drift 0), the two accepted narrowings (item 4 scope, item 5 rights distinction), items 6(a)/(b) status, no change to in-flight work, remaining disagreement none material. Text kept at `temp/directions/energy_relay_benchmark/scratch/method-reply-20260928/applied.txt` (session scratch).
+Correction (2026-09-28 22:42 UTC): the heading above says 22:58 UTC; the actual queue send was at 22:40 UTC (commit 4f2fc938e at 22:41 UTC). Nothing else in the record changes.
