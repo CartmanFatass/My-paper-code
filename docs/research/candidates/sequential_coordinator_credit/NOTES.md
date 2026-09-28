@@ -388,3 +388,8 @@ Root's cycle review carried one MATERIAL_DISSENT against the generalisations att
 **Cost, corrected.** The successful attempt `b01_first_cell_a02` records `wall_seconds` 2 123.48 (35.39 min elapsed, 8 workers) in `first-cell/summary.json`; the progress record gives summed per-training worker wall 15 175.0 s and summed reading wall 1 784.8 s, i.e. ≈ 4.71 h of summed worker wall. CPU time was not measured; the killed attempt `a01` (42 of 100 seeds before the reboot) adds its own unrecorded share. The phrase "≈ 1.2 h CPU" in the owner-decision entry above and in the index row is withdrawn in favour of these fields.
 
 **Effect on the successor.** None on the decision: the reasoning phase in `energy_relay_benchmark` (entry of this hour) rests on the deployment-window readings, not on a host-wide credit exclusion.
+
+
+## 2026-09-27 — Scratch removed after the successor line's Pro question was committed (closure entry follow-through)
+
+Deleted `temp/directions/sequential_coordinator_credit/scratch/` (critic-first-cell, first-cell-l0, session-scratch-20260927; measured 1,470,460 bytes by `du -sb`; gitignored; no live consumer: the first-cell code, tests, run records and this notebook are on main at b4479693a). `df` used bytes on /home before → after: 185,158,479,872 → 185,156,583,424 (delta -1,896,448; other processes write concurrently, so the delta is the measured net, not the file size). Leftovers under `temp/directions/sequential_coordinator_credit/`: L0_first_cell.md.

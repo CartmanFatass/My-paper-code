@@ -39,3 +39,17 @@ other side: the profile's stored secrets were written with the basic store.
   removes the dependence on Chrome's environment detection. Sandbox-disabling diagnostics were
   not run (auto-mode classifier denial, reported to the owner).
 
+## Correction (2026-09-27, later the same day)
+
+The addendum's sentence "the profile's stored secrets were written with the basic store" is withdrawn as
+not established. Against it: the previous boot's user journal shows an `org.freedesktop.secrets`
+activation on 2026-09-25 05:07 and `~/.local/share/keyrings/Default_Keyring.keyring` was modified at
+05:17 that day, so a keyring was live while the pre-reboot Chrome ran. The only cookie database read
+first-hand was the legacy `Default/Cookies` (eight fresh v10 cookies from the logged-out page load);
+the live store under `Default/Network/` was not read (auto-mode classifier denial, "Credential
+Exploration", not pursued). Consequence: the `--password-store=basic` pin may itself make a
+keyring-encrypted session invisible; with the pin, the provider page loads logged out and a human
+login is required. The pin stays until the owner chooses between re-login under the basic store
+(headless-safe across reboots) and keyring recovery (pin made configurable first). The code and
+configuration comments were reworded to match.
+

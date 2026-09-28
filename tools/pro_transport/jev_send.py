@@ -304,9 +304,9 @@ def chrome_start(cfg, mode):
     port = cfg["cdp_url"].rsplit(":", 1)[1]
     argv = [cfg["chrome"], f"--remote-debugging-port={port}", f"--user-data-dir={cfg['profile']}",
             "--no-first-run", "--no-default-browser-check", "--window-size=1280,900",
-            # The profile's cookies were written with Chrome's basic key store. When a session bus and
-            # gnome-keyring exist (WSL after the 2026-09-27 reboot), an unpinned Chrome asks the keyring,
-            # waits headless on its unlock prompt, and every cookie-bearing request stalls before sending.
+            # Pin the basic key store: when a session bus and gnome-keyring exist (WSL after the 2026-09-27
+            # reboot), an unpinned headless Chrome waits on the keyring unlock prompt and every cookie-bearing
+            # request stalls before sending. The login session must exist under this store (owner login).
             "--password-store=basic"]
     marker = Path(cfg["state_dir"], "chrome-headless")
     marker.parent.mkdir(parents=True, exist_ok=True)
