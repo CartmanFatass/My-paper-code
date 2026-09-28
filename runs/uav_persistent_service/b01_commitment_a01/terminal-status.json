@@ -1,0 +1,67 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_persistent_service/b01_commitment_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_persistent_service/b01_commitment_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_persistent_service/b01_commitment_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/4c38a0b43f62927c60a0d7b44aa0e73d47394f5c1d7308d068e5355150fc9fc3.json",
+  "direction": "uav_persistent_service",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790613916.2717476,
+      "path": "/home/wu/projects/HMASD/runs/uav_persistent_service/b01_commitment_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 927136,
+        "session_id": 927135,
+        "start_ticks": 95875436
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 927135,
+        "session_id": 927135,
+        "start_ticks": 95875434
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_persistent_service/b01_commitment_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-28T16:45:30.735074Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/4c38a0b43f62927c60a0d7b44aa0e73d47394f5c1d7308d068e5355150fc9fc3.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_persistent_service/b01_commitment_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "981e935ee336cbdde3f3b69f229019384376ba5f",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/014187470de74ecf8da122a04d9baf31"
+}

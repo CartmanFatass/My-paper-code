@@ -1,0 +1,4556 @@
+{
+  "L_P_bitwise_identity": {
+    "52192801": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192802": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192803": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192804": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192805": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192806": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192807": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192808": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192809": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192810": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192811": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192812": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192813": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192814": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192815": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ],
+    "52192816": [
+      "battery",
+      "charging",
+      "dock_bit",
+      "ends",
+      "entered",
+      "exited",
+      "guard_blocked",
+      "guard_checked",
+      "initial_native_battery",
+      "metric_fields",
+      "metrics",
+      "mode",
+      "native_battery",
+      "native_charger_input_wh",
+      "native_charging_eligible",
+      "native_consumed_wh",
+      "native_load",
+      "native_positive_net_charge_wh",
+      "native_post_xyz",
+      "native_pre_xyz",
+      "native_station_occupancy",
+      "native_station_queue",
+      "nearest_station",
+      "nearest_station_distance_m",
+      "own_xyz",
+      "proposed",
+      "return_margin",
+      "reward",
+      "station_occupancy",
+      "station_queue",
+      "submitted",
+      "target_xy",
+      "user_xy_m",
+      "waiting_steps"
+    ]
+  },
+  "commitments": {
+    "L": {
+      "any_allocation": 0,
+      "assignment_restored": 0,
+      "by_seed": {},
+      "count": 0,
+      "durations": {},
+      "free_actual_move": 0,
+      "initial_stations": {},
+      "measurements": {
+        "actual_travel_m": null,
+        "allocated_charging_steps": null,
+        "battery_change_wh": null,
+        "charger_input_wh": null,
+        "charging_interruptions": null,
+        "command_overwritten_steps": null,
+        "commanded_steps": null,
+        "dwell_elapsed": null,
+        "native_eligible_wait_steps": null,
+        "positive_net_charging_wh": null,
+        "real_f_entries": null,
+        "real_f_steps": null,
+        "station_changes": null
+      },
+      "no_arrival": 0,
+      "post_release_load": 0,
+      "release_reasons": {}
+    },
+    "O": {
+      "any_allocation": 145,
+      "assignment_restored": 145,
+      "by_seed": {
+        "52192801": 6,
+        "52192802": 9,
+        "52192803": 10,
+        "52192804": 8,
+        "52192805": 10,
+        "52192806": 8,
+        "52192807": 8,
+        "52192808": 9,
+        "52192809": 7,
+        "52192810": 10,
+        "52192811": 11,
+        "52192812": 11,
+        "52192813": 8,
+        "52192814": 9,
+        "52192815": 10,
+        "52192816": 11
+      },
+      "count": 145,
+      "durations": {
+        "120": 26,
+        "300": 38,
+        "600": 81
+      },
+      "free_actual_move": 145,
+      "initial_stations": {
+        "0": 51,
+        "1": 94
+      },
+      "measurements": {
+        "actual_travel_m": {
+          "maximum": 5199.000114106656,
+          "mean": 1839.3193113888276,
+          "median": 1450.5767523941372,
+          "minimum": 6.3245555279279255,
+          "n": 145
+        },
+        "allocated_charging_steps": {
+          "maximum": 585.0,
+          "mean": 296.68275862068964,
+          "median": 300.0,
+          "minimum": 104.0,
+          "n": 145
+        },
+        "battery_change_wh": {
+          "maximum": 131.5003107170525,
+          "mean": 60.758930046317346,
+          "median": 62.000658198807905,
+          "minimum": 15.069389906621486,
+          "n": 145
+        },
+        "charger_input_wh": {
+          "maximum": 162.41095304123084,
+          "mean": 82.33972325881486,
+          "median": 83.33333333333331,
+          "minimum": 28.888888888888882,
+          "n": 145
+        },
+        "charging_interruptions": {
+          "maximum": 2.0,
+          "mean": 0.04827586206896552,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 145
+        },
+        "command_overwritten_steps": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 145
+        },
+        "commanded_steps": {
+          "maximum": 642.0,
+          "mean": 395.88275862068963,
+          "median": 390.0,
+          "minimum": 161.0,
+          "n": 145
+        },
+        "dwell_elapsed": {
+          "maximum": 585.0,
+          "mean": 297.1310344827586,
+          "median": 300.0,
+          "minimum": 120.0,
+          "n": 145
+        },
+        "native_eligible_wait_steps": {
+          "maximum": 23.0,
+          "mean": 0.45517241379310347,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 145
+        },
+        "positive_net_charging_wh": {
+          "maximum": 135.03132804123084,
+          "mean": 68.45411730096046,
+          "median": 69.29249999999999,
+          "minimum": 24.021399999999996,
+          "n": 145
+        },
+        "real_f_entries": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 145
+        },
+        "real_f_steps": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 145
+        },
+        "station_changes": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 145
+        }
+      },
+      "no_arrival": 0,
+      "post_release_load": 143,
+      "release_reasons": {
+        "dwell": 57,
+        "full": 88
+      }
+    },
+    "P": {
+      "any_allocation": 0,
+      "assignment_restored": 0,
+      "by_seed": {},
+      "count": 0,
+      "durations": {},
+      "free_actual_move": 0,
+      "initial_stations": {},
+      "measurements": {
+        "actual_travel_m": null,
+        "allocated_charging_steps": null,
+        "battery_change_wh": null,
+        "charger_input_wh": null,
+        "charging_interruptions": null,
+        "command_overwritten_steps": null,
+        "commanded_steps": null,
+        "dwell_elapsed": null,
+        "native_eligible_wait_steps": null,
+        "positive_net_charging_wh": null,
+        "real_f_entries": null,
+        "real_f_steps": null,
+        "station_changes": null
+      },
+      "no_arrival": 0,
+      "post_release_load": 0,
+      "release_reasons": {}
+    },
+    "train": {
+      "any_allocation": 1142,
+      "assignment_restored": 1084,
+      "by_seed": {
+        "52092801": 19,
+        "52092802": 18,
+        "52092803": 20,
+        "52092804": 17,
+        "52092805": 19,
+        "52092806": 23,
+        "52092807": 17,
+        "52092808": 23,
+        "52092809": 17,
+        "52092810": 21,
+        "52092811": 22,
+        "52092812": 16,
+        "52092813": 18,
+        "52092814": 20,
+        "52092815": 19,
+        "52092816": 18,
+        "52092817": 16,
+        "52092818": 19,
+        "52092819": 18,
+        "52092820": 15,
+        "52092821": 16,
+        "52092822": 16,
+        "52092823": 16,
+        "52092824": 15,
+        "52092825": 19,
+        "52092826": 21,
+        "52092827": 19,
+        "52092828": 19,
+        "52092829": 17,
+        "52092830": 25,
+        "52092831": 16,
+        "52092832": 21,
+        "52092833": 14,
+        "52092834": 20,
+        "52092835": 19,
+        "52092836": 20,
+        "52092837": 16,
+        "52092838": 18,
+        "52092839": 21,
+        "52092840": 21,
+        "52092841": 19,
+        "52092842": 17,
+        "52092843": 17,
+        "52092844": 14,
+        "52092845": 19,
+        "52092846": 16,
+        "52092847": 22,
+        "52092848": 16,
+        "52092849": 16,
+        "52092850": 14,
+        "52092851": 16,
+        "52092852": 21,
+        "52092853": 15,
+        "52092854": 22,
+        "52092855": 18,
+        "52092856": 17,
+        "52092857": 17,
+        "52092858": 18,
+        "52092859": 13,
+        "52092860": 17,
+        "52092861": 15,
+        "52092862": 18,
+        "52092863": 17,
+        "52092864": 17
+      },
+      "count": 1155,
+      "durations": {
+        "120": 369,
+        "300": 403,
+        "600": 383
+      },
+      "free_actual_move": 1085,
+      "initial_stations": {
+        "0": 718,
+        "1": 437
+      },
+      "measurements": {
+        "actual_travel_m": {
+          "maximum": 6059.999847302004,
+          "mean": 1160.7452290800206,
+          "median": 905.3704422310014,
+          "minimum": 0.0,
+          "n": 1155
+        },
+        "allocated_charging_steps": {
+          "maximum": 600.0,
+          "mean": 148.74718614718614,
+          "median": 120.0,
+          "minimum": 0.0,
+          "n": 1155
+        },
+        "battery_change_wh": {
+          "maximum": 136.0322352307748,
+          "mean": 28.524803501351183,
+          "median": 22.786766818969202,
+          "minimum": -14.309980450720863,
+          "n": 1155
+        },
+        "charger_input_wh": {
+          "maximum": 166.66666666666663,
+          "mean": 41.24641842078375,
+          "median": 33.33333333333333,
+          "minimum": 0.0,
+          "n": 1155
+        },
+        "charging_interruptions": {
+          "maximum": 30.0,
+          "mean": 0.3974025974025974,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 1155
+        },
+        "command_overwritten_steps": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 1155
+        },
+        "commanded_steps": {
+          "maximum": 900.0,
+          "mean": 231.61731601731603,
+          "median": 204.0,
+          "minimum": 1.0,
+          "n": 1155
+        },
+        "dwell_elapsed": {
+          "maximum": 600.0,
+          "mean": 159.2881205673759,
+          "median": 120.0,
+          "minimum": 1.0,
+          "n": 1128
+        },
+        "native_eligible_wait_steps": {
+          "maximum": 465.0,
+          "mean": 8.865800865800866,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 1155
+        },
+        "positive_net_charging_wh": {
+          "maximum": 138.58499999999998,
+          "mean": 34.284507052337375,
+          "median": 27.717,
+          "minimum": 0.0,
+          "n": 1155
+        },
+        "real_f_entries": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 1155
+        },
+        "real_f_steps": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 1155
+        },
+        "station_changes": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "n": 1155
+        }
+      },
+      "no_arrival": 27,
+      "post_release_load": 910,
+      "release_reasons": {
+        "None": 67,
+        "dwell": 352,
+        "full": 735,
+        "timeout_no_arrival": 1
+      }
+    }
+  },
+  "cost": {
+    "epochs": 160,
+    "eval_snapshot_calls": 147394,
+    "eval_worker_wall_seconds": 4808.515667595784,
+    "macro_training_choices": 6400,
+    "max_rss_kib": 729020,
+    "native_steps": 336000,
+    "optimizer_updates": 640,
+    "parent_cpu_seconds": 8.129551999999999,
+    "parent_wall_seconds": 2900.052477827994,
+    "total_snapshot_calls": 334599,
+    "total_worker_cpu_seconds": 11341.954140999998,
+    "train_snapshot_calls": 187205,
+    "training_wall_seconds": 1665.3760997490026
+  },
+  "evaluation_exposure": {
+    "L": {
+      "choices": 1600,
+      "dispatch": 0,
+      "eligible": 1344,
+      "eligible_duration_entropy": {
+        "maximum": 1.0985528230667114,
+        "mean": 1.0970112021480287,
+        "median": 1.0967175364494324,
+        "minimum": 1.0953330993652344,
+        "n": 1344
+      },
+      "eligible_gate_entropy": {
+        "maximum": 0.6924269795417786,
+        "mean": 0.67266458441459,
+        "median": 0.6712868809700012,
+        "minimum": 0.6691774129867554,
+        "n": 1344
+      },
+      "eligible_member_entropy": {
+        "maximum": 2.0791268348693848,
+        "mean": 1.2314535996300124,
+        "median": 2.071735978126526,
+        "minimum": -0.0,
+        "n": 1344
+      },
+      "eligible_service_probability": {
+        "maximum": 0.609035849571228,
+        "mean": 0.600289708846027,
+        "median": 0.6041646003723145,
+        "minimum": 0.5189741253852844,
+        "n": 1344
+      },
+      "service": 1344
+    },
+    "O": {
+      "choices": 1600,
+      "dispatch": 145,
+      "eligible": 934,
+      "eligible_duration_entropy": null,
+      "eligible_gate_entropy": null,
+      "eligible_member_entropy": null,
+      "eligible_service_probability": null,
+      "service": 789
+    },
+    "P": {
+      "choices": 1600,
+      "dispatch": 0,
+      "eligible": 0,
+      "eligible_duration_entropy": null,
+      "eligible_gate_entropy": null,
+      "eligible_member_entropy": null,
+      "eligible_service_probability": null,
+      "service": 0
+    }
+  },
+  "gradients_post_clip_norm": {
+    "maximum": 0.5000016261230187,
+    "mean": 0.500000004057523,
+    "median": 0.4999999997948613,
+    "minimum": 0.4999981034087423,
+    "n": 640
+  },
+  "observed_arrival_discrepancies": [
+    {
+      "actual_travel_m": 32.31466964506816,
+      "allocated_charging_steps": 281,
+      "assignment_restored": 1260,
+      "battery_change_wh": 63.80921722790097,
+      "charger_input_wh": 77.91634339840087,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 300,
+      "consumed_wh": 14.107126170501145,
+      "duration_label": 600,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 1260,
+      "first_free_service_command": 1260,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": 1260,
+      "group": "train",
+      "initial_station": 1,
+      "member": 4,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 64.76059617617867,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092809,
+      "start": 960,
+      "station_changes": 0,
+      "stop": 1260
+    },
+    {
+      "actual_travel_m": 39.11479046048375,
+      "allocated_charging_steps": 8,
+      "assignment_restored": 2200,
+      "battery_change_wh": 0.608725000000021,
+      "charger_input_wh": 2.1910714255569257,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 32,
+      "consumed_wh": 1.5823464255569304,
+      "duration_label": 300,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 2192,
+      "first_free_service_command": 2192,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": 2192,
+      "group": "train",
+      "initial_station": 0,
+      "member": 1,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 1.8124825366680366,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092809,
+      "start": 2160,
+      "station_changes": 0,
+      "stop": 2192
+    },
+    {
+      "actual_travel_m": 38.46609833465678,
+      "allocated_charging_steps": 8,
+      "assignment_restored": 1270,
+      "battery_change_wh": 0.608725000000021,
+      "charger_input_wh": 2.191904946281438,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 32,
+      "consumed_wh": 1.5831799462814828,
+      "duration_label": 300,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 1262,
+      "first_free_service_command": 1262,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": null,
+      "group": "train",
+      "initial_station": 0,
+      "member": 0,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 1.813316057392549,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092825,
+      "start": 1230,
+      "station_changes": 0,
+      "stop": 1262
+    },
+    {
+      "actual_travel_m": 32.97701312657022,
+      "allocated_charging_steps": 7,
+      "assignment_restored": 2610,
+      "battery_change_wh": 0.5410888888889076,
+      "charger_input_wh": 1.8230678223131371,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 26,
+      "consumed_wh": 1.2819789334242837,
+      "duration_label": 600,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 2606,
+      "first_free_service_command": 2606,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": null,
+      "group": "train",
+      "initial_station": 0,
+      "member": 1,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 1.4912817112020262,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092829,
+      "start": 2580,
+      "station_changes": 0,
+      "stop": 2606
+    },
+    {
+      "actual_travel_m": 29.165180791429577,
+      "allocated_charging_steps": 167,
+      "assignment_restored": 790,
+      "battery_change_wh": 37.730043326346845,
+      "charger_input_wh": 46.24426192425053,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 181,
+      "consumed_wh": 8.514218597904428,
+      "duration_label": 300,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 781,
+      "first_free_service_command": 781,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": 781,
+      "group": "train",
+      "initial_station": 1,
+      "member": 5,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 38.42403136869498,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092802,
+      "start": 600,
+      "station_changes": 0,
+      "stop": 781
+    },
+    {
+      "actual_travel_m": 23.16732814614179,
+      "allocated_charging_steps": 580,
+      "assignment_restored": 2490,
+      "battery_change_wh": 118.96532635236547,
+      "charger_input_wh": 161.1111111111111,
+      "charging_interruptions": 6,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 900,
+      "consumed_wh": 42.145784758745236,
+      "duration_label": 120,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 2490,
+      "first_free_service_command": 2490,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": 2490,
+      "group": "train",
+      "initial_station": 1,
+      "member": 4,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 311,
+      "positive_net_charging_wh": 133.9613333333333,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "timeout_no_arrival",
+      "seed": 52092818,
+      "start": 1590,
+      "station_changes": 0,
+      "stop": 2490
+    },
+    {
+      "actual_travel_m": 32.973455844016634,
+      "allocated_charging_steps": 7,
+      "assignment_restored": 2850,
+      "battery_change_wh": 0.5410888888889076,
+      "charger_input_wh": 1.8230707331462583,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 26,
+      "consumed_wh": 1.2819818442573894,
+      "duration_label": 120,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 2846,
+      "first_free_service_command": 2846,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": null,
+      "group": "train",
+      "initial_station": 0,
+      "member": 6,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 1.4912846220351474,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092826,
+      "start": 2820,
+      "station_changes": 0,
+      "stop": 2846
+    },
+    {
+      "actual_travel_m": 28.719536535519964,
+      "allocated_charging_steps": 6,
+      "assignment_restored": 1820,
+      "battery_change_wh": 0.47345277777779415,
+      "charger_input_wh": 1.4530376543089534,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 20,
+      "consumed_wh": 0.9795848765312015,
+      "duration_label": 300,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 1820,
+      "first_free_service_command": 1820,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": null,
+      "group": "train",
+      "initial_station": 0,
+      "member": 0,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 1.1680543209756202,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092830,
+      "start": 1800,
+      "station_changes": 0,
+      "stop": 1820
+    },
+    {
+      "actual_travel_m": 32.21385536201835,
+      "allocated_charging_steps": 7,
+      "assignment_restored": 2550,
+      "battery_change_wh": 0.5410888888889076,
+      "charger_input_wh": 1.8244189054362772,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 26,
+      "consumed_wh": 1.2833300165473944,
+      "duration_label": 600,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 2546,
+      "first_free_service_command": 2546,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": null,
+      "group": "train",
+      "initial_station": 0,
+      "member": 0,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 1.4926327943251663,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092830,
+      "start": 2520,
+      "station_changes": 0,
+      "stop": 2546
+    },
+    {
+      "actual_travel_m": 33.26866380736189,
+      "allocated_charging_steps": 7,
+      "assignment_restored": 1380,
+      "battery_change_wh": 0.5410888888889076,
+      "charger_input_wh": 1.8228196688897271,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 26,
+      "consumed_wh": 1.2817307800008408,
+      "duration_label": 600,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 1376,
+      "first_free_service_command": 1376,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": 1712,
+      "group": "train",
+      "initial_station": 0,
+      "member": 3,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 1.4910335577786162,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092854,
+      "start": 1350,
+      "station_changes": 0,
+      "stop": 1376
+    },
+    {
+      "actual_travel_m": 39.12353461374953,
+      "allocated_charging_steps": 8,
+      "assignment_restored": 2860,
+      "battery_change_wh": 0.608725000000021,
+      "charger_input_wh": 2.1910585009090315,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 32,
+      "consumed_wh": 1.5823335009090473,
+      "duration_label": 300,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 2852,
+      "first_free_service_command": 2852,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": 2941,
+      "group": "train",
+      "initial_station": 0,
+      "member": 2,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 1.8124696120201425,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092862,
+      "start": 2820,
+      "station_changes": 0,
+      "stop": 2852
+    },
+    {
+      "actual_travel_m": 38.942584840713465,
+      "allocated_charging_steps": 259,
+      "assignment_restored": null,
+      "battery_change_wh": 49.39420776288191,
+      "charger_input_wh": 71.94444444444443,
+      "charging_interruptions": 4,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 480,
+      "consumed_wh": 22.550236681561316,
+      "duration_label": 600,
+      "dwell_elapsed": null,
+      "end_kind": "censored",
+      "first_free_actual_move": null,
+      "first_free_service_command": null,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": null,
+      "group": "train",
+      "initial_station": 1,
+      "member": 0,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 197,
+      "positive_net_charging_wh": 59.81835833333333,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": null,
+      "seed": 52092843,
+      "start": 2520,
+      "station_changes": 0,
+      "stop": 3000
+    },
+    {
+      "actual_travel_m": 23.06696186974414,
+      "allocated_charging_steps": 4,
+      "assignment_restored": 1370,
+      "battery_change_wh": 0.4058166666666807,
+      "charger_input_wh": 1.0376225549972715,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 13,
+      "consumed_wh": 0.6318058883306145,
+      "duration_label": 300,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 1363,
+      "first_free_service_command": 1363,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": 1363,
+      "group": "train",
+      "initial_station": 1,
+      "member": 0,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 0.8462447772194936,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092847,
+      "start": 1350,
+      "station_changes": 0,
+      "stop": 1363
+    },
+    {
+      "actual_travel_m": 24.113686156814886,
+      "allocated_charging_steps": 67,
+      "assignment_restored": 1100,
+      "battery_change_wh": 14.927676489014843,
+      "charger_input_wh": 18.50684676578417,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 76,
+      "consumed_wh": 3.5791702767696023,
+      "duration_label": 120,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 1096,
+      "first_free_service_command": 1096,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": null,
+      "group": "train",
+      "initial_station": 0,
+      "member": 0,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 15.366893988006392,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092851,
+      "start": 1020,
+      "station_changes": 0,
+      "stop": 1096
+    },
+    {
+      "actual_travel_m": 23.276650656649366,
+      "allocated_charging_steps": 237,
+      "assignment_restored": null,
+      "battery_change_wh": 46.15298239224675,
+      "charger_input_wh": 65.83333333333331,
+      "charging_interruptions": 5,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 420,
+      "consumed_wh": 19.680350941085532,
+      "duration_label": 600,
+      "dwell_elapsed": null,
+      "end_kind": "censored",
+      "first_free_actual_move": null,
+      "first_free_service_command": null,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": null,
+      "group": "train",
+      "initial_station": 1,
+      "member": 4,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 174,
+      "positive_net_charging_wh": 54.73690833333333,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": null,
+      "seed": 52092863,
+      "start": 2580,
+      "station_changes": 0,
+      "stop": 3000
+    },
+    {
+      "actual_travel_m": 37.97605825284816,
+      "allocated_charging_steps": 8,
+      "assignment_restored": 700,
+      "battery_change_wh": 0.608725000000021,
+      "charger_input_wh": 2.1923546500379647,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 32,
+      "consumed_wh": 1.5836296500380307,
+      "duration_label": 300,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 692,
+      "first_free_service_command": 692,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": 692,
+      "group": "train",
+      "initial_station": 0,
+      "member": 4,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 1.8137657611490756,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092808,
+      "start": 660,
+      "station_changes": 0,
+      "stop": 692
+    },
+    {
+      "actual_travel_m": 22.26359313049843,
+      "allocated_charging_steps": 4,
+      "assignment_restored": 620,
+      "battery_change_wh": 0.4058166666666807,
+      "charger_input_wh": 1.0389631328040259,
+      "charging_interruptions": 0,
+      "command_overwritten_steps": 0,
+      "commanded_steps": 13,
+      "consumed_wh": 0.6331464661373929,
+      "duration_label": 600,
+      "dwell_elapsed": null,
+      "end_kind": "release",
+      "first_free_actual_move": 613,
+      "first_free_service_command": 613,
+      "first_geometric_arrival": null,
+      "first_post_release_connected_load": 613,
+      "group": "train",
+      "initial_station": 1,
+      "member": 2,
+      "minimum_decoded_distance": 20.000001907348633,
+      "native_eligible_wait_steps": 0,
+      "positive_net_charging_wh": 0.847585355026248,
+      "real_f_entries": 0,
+      "real_f_steps": 0,
+      "release_reason": "full",
+      "seed": 52092832,
+      "start": 600,
+      "station_changes": 0,
+      "stop": 613
+    }
+  ],
+  "scope": "descriptive reading of the one accepted finite study; no additional native step or optimizer update",
+  "training_exposure": {
+    "by_rollout": [
+      {
+        "dispatch": 74,
+        "eligible": 133,
+        "rollout": 1,
+        "service_probability": {
+          "maximum": 0.5,
+          "mean": 0.5,
+          "median": 0.5,
+          "minimum": 0.5,
+          "n": 133
+        }
+      },
+      {
+        "dispatch": 82,
+        "eligible": 172,
+        "rollout": 2,
+        "service_probability": {
+          "maximum": 0.5034709572792053,
+          "mean": 0.5029374861786532,
+          "median": 0.5030067563056946,
+          "minimum": 0.4997886121273041,
+          "n": 172
+        }
+      },
+      {
+        "dispatch": 76,
+        "eligible": 153,
+        "rollout": 3,
+        "service_probability": {
+          "maximum": 0.4953683912754059,
+          "mean": 0.4936482775834651,
+          "median": 0.4934857189655304,
+          "minimum": 0.4925938844680786,
+          "n": 153
+        }
+      },
+      {
+        "dispatch": 75,
+        "eligible": 158,
+        "rollout": 4,
+        "service_probability": {
+          "maximum": 0.5171184539794922,
+          "mean": 0.5142810801161996,
+          "median": 0.5147442817687988,
+          "minimum": 0.5000718235969543,
+          "n": 158
+        }
+      },
+      {
+        "dispatch": 68,
+        "eligible": 136,
+        "rollout": 5,
+        "service_probability": {
+          "maximum": 0.5177289843559265,
+          "mean": 0.5152400460313348,
+          "median": 0.5158868432044983,
+          "minimum": 0.500935435295105,
+          "n": 136
+        }
+      },
+      {
+        "dispatch": 63,
+        "eligible": 127,
+        "rollout": 6,
+        "service_probability": {
+          "maximum": 0.5198577642440796,
+          "mean": 0.5169844139279343,
+          "median": 0.5176467895507812,
+          "minimum": 0.4996944069862366,
+          "n": 127
+        }
+      },
+      {
+        "dispatch": 78,
+        "eligible": 159,
+        "rollout": 7,
+        "service_probability": {
+          "maximum": 0.5232805609703064,
+          "mean": 0.5202414265968515,
+          "median": 0.5210318565368652,
+          "minimum": 0.500334620475769,
+          "n": 159
+        }
+      },
+      {
+        "dispatch": 79,
+        "eligible": 145,
+        "rollout": 8,
+        "service_probability": {
+          "maximum": 0.527136504650116,
+          "mean": 0.524010049063584,
+          "median": 0.5246790051460266,
+          "minimum": 0.5022614002227783,
+          "n": 145
+        }
+      },
+      {
+        "dispatch": 73,
+        "eligible": 159,
+        "rollout": 9,
+        "service_probability": {
+          "maximum": 0.55417400598526,
+          "mean": 0.5474921839792024,
+          "median": 0.5485138893127441,
+          "minimum": 0.5053618550300598,
+          "n": 159
+        }
+      },
+      {
+        "dispatch": 76,
+        "eligible": 149,
+        "rollout": 10,
+        "service_probability": {
+          "maximum": 0.5549831390380859,
+          "mean": 0.5499129051330106,
+          "median": 0.5511490702629089,
+          "minimum": 0.505203902721405,
+          "n": 149
+        }
+      },
+      {
+        "dispatch": 67,
+        "eligible": 149,
+        "rollout": 11,
+        "service_probability": {
+          "maximum": 0.5867515802383423,
+          "mean": 0.5792670225937094,
+          "median": 0.5815725922584534,
+          "minimum": 0.514138400554657,
+          "n": 149
+        }
+      },
+      {
+        "dispatch": 73,
+        "eligible": 158,
+        "rollout": 12,
+        "service_probability": {
+          "maximum": 0.6068002581596375,
+          "mean": 0.5958705665190008,
+          "median": 0.5986787676811218,
+          "minimum": 0.5159712433815002,
+          "n": 158
+        }
+      },
+      {
+        "dispatch": 67,
+        "eligible": 176,
+        "rollout": 13,
+        "service_probability": {
+          "maximum": 0.6075617074966431,
+          "mean": 0.6012032773684372,
+          "median": 0.6038680672645569,
+          "minimum": 0.5172756910324097,
+          "n": 176
+        }
+      },
+      {
+        "dispatch": 72,
+        "eligible": 170,
+        "rollout": 14,
+        "service_probability": {
+          "maximum": 0.6021908521652222,
+          "mean": 0.5952452596496133,
+          "median": 0.5974082350730896,
+          "minimum": 0.5195885896682739,
+          "n": 170
+        }
+      },
+      {
+        "dispatch": 65,
+        "eligible": 180,
+        "rollout": 15,
+        "service_probability": {
+          "maximum": 0.6136272549629211,
+          "mean": 0.6056685818566216,
+          "median": 0.6085279881954193,
+          "minimum": 0.5213953256607056,
+          "n": 180
+        }
+      },
+      {
+        "dispatch": 67,
+        "eligible": 160,
+        "rollout": 16,
+        "service_probability": {
+          "maximum": 0.6242919564247131,
+          "mean": 0.6147057168185711,
+          "median": 0.6179351210594177,
+          "minimum": 0.5235742926597595,
+          "n": 160
+        }
+      }
+    ],
+    "choices": 6400,
+    "duration_counts": {
+      "120": 369,
+      "300": 403,
+      "600": 383
+    },
+    "eligible": 2484,
+    "eligible_dispatch": 1155,
+    "eligible_gate_entropy": {
+      "maximum": 0.6931471824645996,
+      "mean": 0.6842088262384064,
+      "median": 0.6889854371547699,
+      "minimum": 0.661923885345459,
+      "n": 2484
+    },
+    "eligible_joint_entropy": {
+      "maximum": 2.3048243522644043,
+      "mean": 1.7124600148431346,
+      "median": 1.7215009927749634,
+      "minimum": 1.0776293277740479,
+      "n": 2484
+    },
+    "eligible_service": 1329,
+    "eligible_service_probability": {
+      "maximum": 0.6242919564247131,
+      "mean": 0.5507418284621599,
+      "median": 0.545585036277771,
+      "minimum": 0.4925938844680786,
+      "n": 2484
+    },
+    "eligible_worlds": 64,
+    "executed_dispatch": 1155,
+    "member_counts": {
+      "0": 165,
+      "1": 149,
+      "2": 122,
+      "3": 138,
+      "4": 134,
+      "5": 135,
+      "6": 177,
+      "7": 135
+    }
+  },
+  "updates": [
+    {
+      "losses": {
+        "train/approx_kl": 0.00014007017307449132,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.6140077158808708,
+        "train/explained_variance": 0.0005983114242553711,
+        "train/learning_rate": 0.0003,
+        "train/loss": 94965.4921875,
+        "train/n_updates": 10.0,
+        "train/policy_gradient_loss": -0.0016445018644299036,
+        "train/value_loss": 189150.604296875
+      },
+      "macro_decisions": 400,
+      "optimizer_steps": 40,
+      "update": 1
+    },
+    {
+      "losses": {
+        "train/approx_kl": 0.0001385807991027832,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.7713508829474449,
+        "train/explained_variance": 0.00015366077423095703,
+        "train/learning_rate": 0.0003,
+        "train/loss": 79720.6953125,
+        "train/n_updates": 20.0,
+        "train/policy_gradient_loss": -0.0011864409934569053,
+        "train/value_loss": 166301.54453125
+      },
+      "macro_decisions": 800,
+      "optimizer_steps": 80,
+      "update": 2
+    },
+    {
+      "losses": {
+        "train/approx_kl": 0.0003694705665111542,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.7028697654604912,
+        "train/explained_variance": -2.7418136596679688e-06,
+        "train/learning_rate": 0.0003,
+        "train/loss": 86258.1484375,
+        "train/n_updates": 30.0,
+        "train/policy_gradient_loss": -0.0016777911690073922,
+        "train/value_loss": 176155.598046875
+      },
+      "macro_decisions": 1200,
+      "optimizer_steps": 120,
+      "update": 3
+    },
+    {
+      "losses": {
+        "train/approx_kl": 2.4942459276644513e-05,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.689003549516201,
+        "train/explained_variance": 8.344650268554688e-06,
+        "train/learning_rate": 0.0003,
+        "train/loss": 92065.953125,
+        "train/n_updates": 40.0,
+        "train/policy_gradient_loss": -0.0005170321807600686,
+        "train/value_loss": 179914.554296875
+      },
+      "macro_decisions": 1600,
+      "optimizer_steps": 160,
+      "update": 4
+    },
+    {
+      "losses": {
+        "train/approx_kl": 2.9588489269372076e-05,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.6341235131025315,
+        "train/explained_variance": 1.1920928955078125e-06,
+        "train/learning_rate": 0.0003,
+        "train/loss": 93256.65625,
+        "train/n_updates": 50.0,
+        "train/policy_gradient_loss": -0.00046234337148867157,
+        "train/value_loss": 193575.49765625
+      },
+      "macro_decisions": 2000,
+      "optimizer_steps": 200,
+      "update": 5
+    },
+    {
+      "losses": {
+        "train/approx_kl": 2.2477954189525917e-05,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.5932543136179447,
+        "train/explained_variance": -5.602836608886719e-06,
+        "train/learning_rate": 0.0003,
+        "train/loss": 89808.6015625,
+        "train/n_updates": 60.0,
+        "train/policy_gradient_loss": -0.0004587298729848754,
+        "train/value_loss": 187044.79296875
+      },
+      "macro_decisions": 2400,
+      "optimizer_steps": 240,
+      "update": 6
+    },
+    {
+      "losses": {
+        "train/approx_kl": 7.7706718002446e-05,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.7056791812181473,
+        "train/explained_variance": -4.172325134277344e-06,
+        "train/learning_rate": 0.0003,
+        "train/loss": 82471.875,
+        "train/n_updates": 70.0,
+        "train/policy_gradient_loss": -0.0011714499423433721,
+        "train/value_loss": 171230.20078125
+      },
+      "macro_decisions": 2800,
+      "optimizer_steps": 280,
+      "update": 7
+    },
+    {
+      "losses": {
+        "train/approx_kl": 0.00044098508078604937,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.6288637384772301,
+        "train/explained_variance": 9.5367431640625e-07,
+        "train/learning_rate": 0.0003,
+        "train/loss": 82079.609375,
+        "train/n_updates": 80.0,
+        "train/policy_gradient_loss": -0.0022431297423171513,
+        "train/value_loss": 166234.13125
+      },
+      "macro_decisions": 3200,
+      "optimizer_steps": 320,
+      "update": 8
+    },
+    {
+      "losses": {
+        "train/approx_kl": 3.850087887258269e-05,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.7008453473448754,
+        "train/explained_variance": -3.0994415283203125e-06,
+        "train/learning_rate": 0.0003,
+        "train/loss": 100739.8671875,
+        "train/n_updates": 90.0,
+        "train/policy_gradient_loss": -0.0006139611020171465,
+        "train/value_loss": 191456.328515625
+      },
+      "macro_decisions": 3600,
+      "optimizer_steps": 360,
+      "update": 9
+    },
+    {
+      "losses": {
+        "train/approx_kl": 0.0006287327269092202,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.6342668041586876,
+        "train/explained_variance": 2.562999725341797e-06,
+        "train/learning_rate": 0.0003,
+        "train/loss": 78892.3125,
+        "train/n_updates": 100.0,
+        "train/policy_gradient_loss": -0.002644901294386415,
+        "train/value_loss": 160654.2765625
+      },
+      "macro_decisions": 4000,
+      "optimizer_steps": 400,
+      "update": 10
+    },
+    {
+      "losses": {
+        "train/approx_kl": 0.0003511993563733995,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.6090680211782455,
+        "train/explained_variance": -1.1920928955078125e-07,
+        "train/learning_rate": 0.0003,
+        "train/loss": 88318.375,
+        "train/n_updates": 110.0,
+        "train/policy_gradient_loss": -0.0014713657194295848,
+        "train/value_loss": 175847.666015625
+      },
+      "macro_decisions": 4400,
+      "optimizer_steps": 440,
+      "update": 11
+    },
+    {
+      "losses": {
+        "train/approx_kl": 7.110856677172706e-05,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.6485539376735687,
+        "train/explained_variance": 7.152557373046875e-07,
+        "train/learning_rate": 0.0003,
+        "train/loss": 95002.8828125,
+        "train/n_updates": 120.0,
+        "train/policy_gradient_loss": -0.0007807083035601181,
+        "train/value_loss": 194206.70859375
+      },
+      "macro_decisions": 4800,
+      "optimizer_steps": 480,
+      "update": 12
+    },
+    {
+      "losses": {
+        "train/approx_kl": 6.388097972376272e-05,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.7102702721953392,
+        "train/explained_variance": 1.7881393432617188e-07,
+        "train/learning_rate": 0.0003,
+        "train/loss": 99905.3125,
+        "train/n_updates": 130.0,
+        "train/policy_gradient_loss": -0.0009460304289476085,
+        "train/value_loss": 192948.659765625
+      },
+      "macro_decisions": 5200,
+      "optimizer_steps": 520,
+      "update": 13
+    },
+    {
+      "losses": {
+        "train/approx_kl": 0.00013159774243831635,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.666793306171894,
+        "train/explained_variance": -3.5762786865234375e-07,
+        "train/learning_rate": 0.0003,
+        "train/loss": 83242.6484375,
+        "train/n_updates": 140.0,
+        "train/policy_gradient_loss": -0.0011837695811326653,
+        "train/value_loss": 166771.71796875
+      },
+      "macro_decisions": 5600,
+      "optimizer_steps": 560,
+      "update": 14
+    },
+    {
+      "losses": {
+        "train/approx_kl": 9.015970135806128e-05,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.6945400774478913,
+        "train/explained_variance": 2.980232238769531e-07,
+        "train/learning_rate": 0.0003,
+        "train/loss": 83165.3671875,
+        "train/n_updates": 150.0,
+        "train/policy_gradient_loss": -0.0006728990816590397,
+        "train/value_loss": 177609.921875
+      },
+      "macro_decisions": 6000,
+      "optimizer_steps": 600,
+      "update": 15
+    },
+    {
+      "losses": {
+        "train/approx_kl": 0.00016447111556772143,
+        "train/clip_fraction": 0.0,
+        "train/clip_range": 0.2,
+        "train/entropy_loss": -0.5810891412198543,
+        "train/explained_variance": 1.7881393432617188e-07,
+        "train/learning_rate": 0.0003,
+        "train/loss": 91875.59375,
+        "train/n_updates": 160.0,
+        "train/policy_gradient_loss": -0.0011385278236357265,
+        "train/value_loss": 179361.996484375
+      },
+      "macro_decisions": 6400,
+      "optimizer_steps": 640,
+      "update": 16
+    }
+  ],
+  "verified_bytes": 325632466,
+  "verified_files": 294,
+  "verified_raw_worlds": [
+    {
+      "group": "train",
+      "seed": 52092801,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092805,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092809,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092813,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092817,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092821,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092825,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092829,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092833,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092837,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092841,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092845,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092849,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092853,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092857,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092861,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092802,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092806,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092810,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092814,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092818,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092822,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092826,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092830,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092834,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092838,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092842,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092846,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092850,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092854,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092858,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092862,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092803,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092807,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092811,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092815,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092819,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092823,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092827,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092831,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092835,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092839,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092843,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092847,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092851,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092855,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092859,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092863,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092804,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092808,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092812,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092816,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092820,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092824,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092828,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092832,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092836,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092840,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092844,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092848,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092852,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092856,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092860,
+      "steps": 3000
+    },
+    {
+      "group": "train",
+      "seed": 52092864,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192801,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192801,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192801,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192802,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192802,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192802,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192803,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192803,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192803,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192804,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192804,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192804,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192805,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192805,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192805,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192806,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192806,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192806,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192807,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192807,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192807,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192808,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192808,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192808,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192809,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192809,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192809,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192810,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192810,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192810,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192811,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192811,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192811,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192812,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192812,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192812,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192813,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192813,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192813,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192814,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192814,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192814,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192815,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192815,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192815,
+      "steps": 3000
+    },
+    {
+      "group": "L",
+      "seed": 52192816,
+      "steps": 3000
+    },
+    {
+      "group": "O",
+      "seed": 52192816,
+      "steps": 3000
+    },
+    {
+      "group": "P",
+      "seed": 52192816,
+      "steps": 3000
+    }
+  ],
+  "worlds": [
+    {
+      "actual_team_travel_m": 148897.02560875198,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 729.4037420621122,
+          "qos": 0.7386852009250258,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 737.6039834587283,
+          "qos": 0.749609063110219,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 616.5531254487043,
+          "qos": 0.6451955846776911,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 368.33333333333326,
+      "charging_uav_steps": 1326,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.7111632829043121,
+      "longest_below_half_qos_spell": 57,
+      "longest_zero_qos_spell": 37,
+      "native_final_reserve_uav_count": 7,
+      "native_minimum_battery_ratio": 0.0951842956497822,
+      "native_reserve_uav_step_fraction": 0.024958333333333332,
+      "raw_native_J": 2083.560850969545,
+      "return_constraint_cost_raw_per_step": 0.0032762564800796253,
+      "seed": 52192801,
+      "service_snapshot_calls": 2717,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 182304.2042725698,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 704.8150989097782,
+          "qos": 0.7140976670449432,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 798.9537607715968,
+          "qos": 0.8096055998854599,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 818.3464221021259,
+          "qos": 0.8305616727832472,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 715.3829201387214,
+      "charging_uav_steps": 2577,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.78475497990455,
+      "longest_below_half_qos_spell": 57,
+      "longest_zero_qos_spell": 37,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.1129920786681272,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2322.115281783501,
+      "return_constraint_cost_raw_per_step": 0.00031284829916405845,
+      "seed": 52192801,
+      "service_snapshot_calls": 3131,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 148897.02560875198,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 729.4037420621122,
+          "qos": 0.7386852009250258,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 737.6039834587283,
+          "qos": 0.749609063110219,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 616.5531254487043,
+          "qos": 0.6451955846776911,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 368.33333333333326,
+      "charging_uav_steps": 1326,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.7111632829043121,
+      "longest_below_half_qos_spell": 57,
+      "longest_zero_qos_spell": 37,
+      "native_final_reserve_uav_count": 7,
+      "native_minimum_battery_ratio": 0.0951842956497822,
+      "native_reserve_uav_step_fraction": 0.024958333333333332,
+      "raw_native_J": 2083.560850969545,
+      "return_constraint_cost_raw_per_step": 0.0032762564800796253,
+      "seed": 52192801,
+      "service_snapshot_calls": 2717,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 144712.07299609,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 689.7040879060146,
+          "qos": 0.6990279571134541,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 708.7798477979627,
+          "qos": 0.7220522313857116,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 554.049889805184,
+          "qos": 0.5655955767346277,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 418.33333333333326,
+      "charging_uav_steps": 1506,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.6622252550779311,
+      "longest_below_half_qos_spell": 94,
+      "longest_zero_qos_spell": 36,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10114789808560967,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 1952.5338255091613,
+      "return_constraint_cost_raw_per_step": 0.0006380117528654246,
+      "seed": 52192802,
+      "service_snapshot_calls": 2508,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 186552.91048413442,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 698.0455741776789,
+          "qos": 0.7073689213783494,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 741.0890332492786,
+          "qos": 0.7514707392096639,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 742.059996239019,
+          "qos": 0.7542268887305682,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 793.124566395152,
+      "charging_uav_steps": 2857,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.7376888497728605,
+      "longest_below_half_qos_spell": 94,
+      "longest_zero_qos_spell": 36,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.11686875215414692,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2181.1946036659765,
+      "return_constraint_cost_raw_per_step": 0.00025976640865575933,
+      "seed": 52192802,
+      "service_snapshot_calls": 3827,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 144712.07299609,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 689.7040879060146,
+          "qos": 0.6990279571134541,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 708.7798477979627,
+          "qos": 0.7220522313857116,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 554.049889805184,
+          "qos": 0.5655955767346277,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 418.33333333333326,
+      "charging_uav_steps": 1506,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.6622252550779311,
+      "longest_below_half_qos_spell": 94,
+      "longest_zero_qos_spell": 36,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10114789808560967,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 1952.5338255091613,
+      "return_constraint_cost_raw_per_step": 0.0006380117528654246,
+      "seed": 52192802,
+      "service_snapshot_calls": 2508,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 137854.77009754733,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 743.2965413429924,
+          "qos": 0.7529554704743744,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 841.7750901689469,
+          "qos": 0.8533618810053496,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 318.1685066901948,
+          "qos": 0.3305838590534029,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 394.9999999999999,
+      "charging_uav_steps": 1422,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.6456337368443755,
+      "longest_below_half_qos_spell": 499,
+      "longest_zero_qos_spell": 101,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.101352908489276,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 1903.2401382021342,
+      "return_constraint_cost_raw_per_step": 0.0005020238666017769,
+      "seed": 52192803,
+      "service_snapshot_calls": 2850,
+      "terminal_zero_service": true
+    },
+    {
+      "actual_team_travel_m": 152345.06181653083,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 733.8878890886772,
+          "qos": 0.7435466753784672,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 722.4359340200992,
+          "qos": 0.7324359340200992,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 704.8183469852668,
+          "qos": 0.7158083469852666,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 900.3154225891285,
+      "charging_uav_steps": 3244,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.7305969854612776,
+      "longest_below_half_qos_spell": 87,
+      "longest_zero_qos_spell": 12,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.19294803739099645,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2161.1421700940427,
+      "return_constraint_cost_raw_per_step": 0.0,
+      "seed": 52192803,
+      "service_snapshot_calls": 4856,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 137854.77009754733,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 743.2965413429924,
+          "qos": 0.7529554704743744,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 841.7750901689469,
+          "qos": 0.8533618810053496,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 318.1685066901948,
+          "qos": 0.3305838590534029,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 394.9999999999999,
+      "charging_uav_steps": 1422,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.6456337368443755,
+      "longest_below_half_qos_spell": 499,
+      "longest_zero_qos_spell": 101,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.101352908489276,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 1903.2401382021342,
+      "return_constraint_cost_raw_per_step": 0.0005020238666017769,
+      "seed": 52192803,
+      "service_snapshot_calls": 2850,
+      "terminal_zero_service": true
+    },
+    {
+      "actual_team_travel_m": 144996.1069363062,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 892.6075164507345,
+          "qos": 0.90230322739252,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 843.8855253535867,
+          "qos": 0.8562561788138109,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 690.6997567287625,
+          "qos": 0.7021108878308531,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 356.94444444444434,
+      "charging_uav_steps": 1285,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8202234313457281,
+      "longest_below_half_qos_spell": 68,
+      "longest_zero_qos_spell": 5,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.1015772798326669,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2427.1927985330835,
+      "return_constraint_cost_raw_per_step": 0.00046834311283360305,
+      "seed": 52192804,
+      "service_snapshot_calls": 2280,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 168274.98571621798,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 850.3397239396809,
+          "qos": 0.8600282879098291,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 908.8823793526914,
+          "qos": 0.9188823793526912,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 873.881577060856,
+          "qos": 0.8861802547064691,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 668.7285822198844,
+      "charging_uav_steps": 2410,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8883636406563299,
+      "longest_below_half_qos_spell": 82,
+      "longest_zero_qos_spell": 5,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10569198748895517,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2633.103680353228,
+      "return_constraint_cost_raw_per_step": 0.0002181129409355284,
+      "seed": 52192804,
+      "service_snapshot_calls": 4008,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 144996.1069363062,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 892.6075164507345,
+          "qos": 0.90230322739252,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 843.8855253535867,
+          "qos": 0.8562561788138109,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 690.6997567287625,
+          "qos": 0.7021108878308531,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 356.94444444444434,
+      "charging_uav_steps": 1285,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8202234313457281,
+      "longest_below_half_qos_spell": 68,
+      "longest_zero_qos_spell": 5,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.1015772798326669,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2427.1927985330835,
+      "return_constraint_cost_raw_per_step": 0.00046834311283360305,
+      "seed": 52192804,
+      "service_snapshot_calls": 2280,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 161638.24807317395,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 848.0456054580085,
+          "qos": 0.8574412056917935,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 864.1367049774576,
+          "qos": 0.8756811417232738,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 681.2606823261062,
+          "qos": 0.6932562265827331,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 421.66666666666663,
+      "charging_uav_steps": 1518,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8087928579992667,
+      "longest_below_half_qos_spell": 78,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10241850287141446,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2393.442992761572,
+      "return_constraint_cost_raw_per_step": 0.0004249968337405185,
+      "seed": 52192805,
+      "service_snapshot_calls": 2565,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 169854.49478504655,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 806.1863281130579,
+          "qos": 0.8155749551578869,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 876.1667931824529,
+          "qos": 0.8863332215362452,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 885.6896629382402,
+          "qos": 0.8971361905366231,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 838.4796710108243,
+      "charging_uav_steps": 3021,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8663481224102518,
+      "longest_below_half_qos_spell": 81,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.12098892542318661,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2568.0427842337513,
+      "return_constraint_cost_raw_per_step": 0.00010382599202917565,
+      "seed": 52192805,
+      "service_snapshot_calls": 4366,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 161638.24807317395,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 848.0456054580085,
+          "qos": 0.8574412056917935,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 864.1367049774576,
+          "qos": 0.8756811417232738,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 681.2606823261062,
+          "qos": 0.6932562265827331,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 421.66666666666663,
+      "charging_uav_steps": 1518,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8087928579992667,
+      "longest_below_half_qos_spell": 78,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10241850287141446,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2393.442992761572,
+      "return_constraint_cost_raw_per_step": 0.0004249968337405185,
+      "seed": 52192805,
+      "service_snapshot_calls": 2565,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 133820.4436050903,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 874.1914810119424,
+          "qos": 0.8839159103510983,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 875.3187697456356,
+          "qos": 0.8874548379409211,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 633.3738439313373,
+          "qos": 0.6769629920447124,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 399.9999999999999,
+      "charging_uav_steps": 1440,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8161112467789106,
+      "longest_below_half_qos_spell": 81,
+      "longest_zero_qos_spell": 52,
+      "native_final_reserve_uav_count": 7,
+      "native_minimum_battery_ratio": 0.09305713568098092,
+      "native_reserve_uav_step_fraction": 0.039375,
+      "raw_native_J": 2382.8840946889154,
+      "return_constraint_cost_raw_per_step": 0.005790381447307727,
+      "seed": 52192806,
+      "service_snapshot_calls": 2584,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 182838.52902456562,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 880.0051835231176,
+          "qos": 0.8897296134391489,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 925.6980516783094,
+          "qos": 0.9357794631979381,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 844.6896691854076,
+          "qos": 0.8576872902619228,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 728.0817234266557,
+      "charging_uav_steps": 2623,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8943987889663366,
+      "longest_below_half_qos_spell": 82,
+      "longest_zero_qos_spell": 52,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.1151296210033612,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2650.3929043868343,
+      "return_constraint_cost_raw_per_step": 0.00034817209935733546,
+      "seed": 52192806,
+      "service_snapshot_calls": 3368,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 133820.4436050903,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 874.1914810119424,
+          "qos": 0.8839159103510983,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 875.3187697456356,
+          "qos": 0.8874548379409211,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 633.3738439313373,
+          "qos": 0.6769629920447124,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 399.9999999999999,
+      "charging_uav_steps": 1440,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8161112467789106,
+      "longest_below_half_qos_spell": 81,
+      "longest_zero_qos_spell": 52,
+      "native_final_reserve_uav_count": 7,
+      "native_minimum_battery_ratio": 0.09305713568098092,
+      "native_reserve_uav_step_fraction": 0.039375,
+      "raw_native_J": 2382.8840946889154,
+      "return_constraint_cost_raw_per_step": 0.005790381447307727,
+      "seed": 52192806,
+      "service_snapshot_calls": 2584,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 149699.1964304695,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 869.0971262567523,
+          "qos": 0.8787926536112423,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 864.8276597353331,
+          "qos": 0.876686002844722,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 717.0856640348691,
+          "qos": 0.7292758104614232,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 416.3888888888888,
+      "charging_uav_steps": 1499,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8282514889724626,
+      "longest_below_half_qos_spell": 93,
+      "longest_zero_qos_spell": 24,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10005974053693481,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2451.0104500269545,
+      "return_constraint_cost_raw_per_step": 0.0005100182870025598,
+      "seed": 52192807,
+      "service_snapshot_calls": 2660,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 211769.84775589776,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 828.2734317991719,
+          "qos": 0.8379638315343085,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 909.4395808196869,
+          "qos": 0.9194447739536956,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 842.3887581597473,
+          "qos": 0.8558116974267185,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 696.077908152552,
+      "charging_uav_steps": 2509,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8710734343049077,
+      "longest_below_half_qos_spell": 107,
+      "longest_zero_qos_spell": 24,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.11208781965856653,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2580.101770778606,
+      "return_constraint_cost_raw_per_step": 0.00040635540016336025,
+      "seed": 52192807,
+      "service_snapshot_calls": 3512,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 149699.1964304695,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 869.0971262567523,
+          "qos": 0.8787926536112423,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 864.8276597353331,
+          "qos": 0.876686002844722,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 717.0856640348691,
+          "qos": 0.7292758104614232,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 416.3888888888888,
+      "charging_uav_steps": 1499,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8282514889724626,
+      "longest_below_half_qos_spell": 93,
+      "longest_zero_qos_spell": 24,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10005974053693481,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2451.0104500269545,
+      "return_constraint_cost_raw_per_step": 0.0005100182870025598,
+      "seed": 52192807,
+      "service_snapshot_calls": 2660,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 140492.97017736093,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 815.4844658007044,
+          "qos": 0.8251317268888202,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 833.9945576529445,
+          "qos": 0.8456205042427497,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 536.7811029417164,
+          "qos": 0.5485560448150842,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 420.5555555555555,
+      "charging_uav_steps": 1514,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.7397694253155512,
+      "longest_below_half_qos_spell": 115,
+      "longest_zero_qos_spell": 82,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10921591511707687,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2186.260126395365,
+      "return_constraint_cost_raw_per_step": 0.0004018147438621386,
+      "seed": 52192808,
+      "service_snapshot_calls": 2565,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 192368.9839856918,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 759.7570513805713,
+          "qos": 0.7694042168950072,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 867.2960282847063,
+          "qos": 0.8772960282847064,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 858.0429522700331,
+          "qos": 0.8708014938774417,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 912.0405578506836,
+      "charging_uav_steps": 3286,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.839167246352385,
+      "longest_below_half_qos_spell": 113,
+      "longest_zero_qos_spell": 81,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.11281026340121199,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2485.0960319353103,
+      "return_constraint_cost_raw_per_step": 0.00029475693456810365,
+      "seed": 52192808,
+      "service_snapshot_calls": 3655,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 140492.97017736093,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 815.4844658007044,
+          "qos": 0.8251317268888202,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 833.9945576529445,
+          "qos": 0.8456205042427497,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 536.7811029417164,
+          "qos": 0.5485560448150842,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 420.5555555555555,
+      "charging_uav_steps": 1514,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.7397694253155512,
+      "longest_below_half_qos_spell": 115,
+      "longest_zero_qos_spell": 82,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10921591511707687,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2186.260126395365,
+      "return_constraint_cost_raw_per_step": 0.0004018147438621386,
+      "seed": 52192808,
+      "service_snapshot_calls": 2565,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 141518.7695328318,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 846.4370607614293,
+          "qos": 0.8561720473379001,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 864.6053369076142,
+          "qos": 0.876853178128041,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 733.2412117580103,
+          "qos": 0.7442453376024166,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 378.61111111111103,
+      "charging_uav_steps": 1363,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8257568543561192,
+      "longest_below_half_qos_spell": 50,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10164099304025681,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2444.2836094270533,
+      "return_constraint_cost_raw_per_step": 0.00040734002100024306,
+      "seed": 52192809,
+      "service_snapshot_calls": 2451,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 198868.53542877437,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 844.5052093014614,
+          "qos": 0.8540458722150949,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 916.53052431962,
+          "qos": 0.9266950714494193,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 811.3235479983687,
+          "qos": 0.824282741065685,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 753.0110640916608,
+      "charging_uav_steps": 2714,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8683412282433997,
+      "longest_below_half_qos_spell": 61,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.11944377271602456,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2572.35928161945,
+      "return_constraint_cost_raw_per_step": 0.0003556233661859333,
+      "seed": 52192809,
+      "service_snapshot_calls": 3368,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 141518.7695328318,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 846.4370607614293,
+          "qos": 0.8561720473379001,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 864.6053369076142,
+          "qos": 0.876853178128041,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 733.2412117580103,
+          "qos": 0.7442453376024166,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 378.61111111111103,
+      "charging_uav_steps": 1363,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8257568543561192,
+      "longest_below_half_qos_spell": 50,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10164099304025681,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2444.2836094270533,
+      "return_constraint_cost_raw_per_step": 0.00040734002100024306,
+      "seed": 52192809,
+      "service_snapshot_calls": 2451,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 138092.2831584848,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 846.3309242267405,
+          "qos": 0.856111022080782,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 918.6645411619013,
+          "qos": 0.9308989427003637,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 775.4511661518313,
+          "qos": 0.7870936644351357,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 359.4444444444444,
+      "charging_uav_steps": 1294,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8580345430720939,
+      "longest_below_half_qos_spell": 60,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10144661669175048,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2540.4466315404734,
+      "return_constraint_cost_raw_per_step": 0.0004812178296762886,
+      "seed": 52192810,
+      "service_snapshot_calls": 2850,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 144333.10527636093,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 902.8318450687191,
+          "qos": 0.9126062085915149,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 940.0909652894911,
+          "qos": 0.950090965289491,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 886.3702481750984,
+          "qos": 0.8977196780454566,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 853.2538066630918,
+      "charging_uav_steps": 3074,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.920138950642154,
+      "longest_below_half_qos_spell": 62,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.12088769067773766,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2729.2930585333083,
+      "return_constraint_cost_raw_per_step": 5.9904978393068204e-05,
+      "seed": 52192810,
+      "service_snapshot_calls": 4384,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 138092.2831584848,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 846.3309242267405,
+          "qos": 0.856111022080782,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 918.6645411619013,
+          "qos": 0.9308989427003637,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 775.4511661518313,
+          "qos": 0.7870936644351357,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 359.4444444444444,
+      "charging_uav_steps": 1294,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8580345430720939,
+      "longest_below_half_qos_spell": 60,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10144661669175048,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2540.4466315404734,
+      "return_constraint_cost_raw_per_step": 0.0004812178296762886,
+      "seed": 52192810,
+      "service_snapshot_calls": 2850,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 144733.64904355514,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 767.9280432599282,
+          "qos": 0.777603411176702,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 820.1466444096703,
+          "qos": 0.8327683936356483,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 698.6485912379303,
+          "qos": 0.7116238269344476,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 380.2777777777777,
+      "charging_uav_steps": 1369,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.7739985439155994,
+      "longest_below_half_qos_spell": 88,
+      "longest_zero_qos_spell": 53,
+      "native_final_reserve_uav_count": 1,
+      "native_minimum_battery_ratio": 0.09951542898980417,
+      "native_reserve_uav_step_fraction": 0.000375,
+      "raw_native_J": 2286.723278907529,
+      "return_constraint_cost_raw_per_step": 0.0007678308204158928,
+      "seed": 52192811,
+      "service_snapshot_calls": 2546,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 199404.35177004215,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 794.0983942237887,
+          "qos": 0.8037640868735325,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 918.7994299226586,
+          "qos": 0.928868476529335,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 778.9321112237775,
+          "qos": 0.7905538583806417,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 867.5957253497959,
+      "charging_uav_steps": 3126,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.841062140594503,
+      "longest_below_half_qos_spell": 108,
+      "longest_zero_qos_spell": 53,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.1373349691207575,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2491.829935370225,
+      "return_constraint_cost_raw_per_step": 0.00011679896059007127,
+      "seed": 52192811,
+      "service_snapshot_calls": 4414,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 144733.64904355514,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 767.9280432599282,
+          "qos": 0.777603411176702,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 820.1466444096703,
+          "qos": 0.8327683936356483,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 698.6485912379303,
+          "qos": 0.7116238269344476,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 380.2777777777777,
+      "charging_uav_steps": 1369,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.7739985439155994,
+      "longest_below_half_qos_spell": 88,
+      "longest_zero_qos_spell": 53,
+      "native_final_reserve_uav_count": 1,
+      "native_minimum_battery_ratio": 0.09951542898980417,
+      "native_reserve_uav_step_fraction": 0.000375,
+      "raw_native_J": 2286.723278907529,
+      "return_constraint_cost_raw_per_step": 0.0007678308204158928,
+      "seed": 52192811,
+      "service_snapshot_calls": 2546,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 136911.34115633438,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 808.5765983426451,
+          "qos": 0.8182048991214053,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 833.8721901891262,
+          "qos": 0.8448994355557771,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 622.29417002682,
+          "qos": 0.6338521633940981,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 435.2777777777777,
+      "charging_uav_steps": 1567,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.7656521660237601,
+      "longest_below_half_qos_spell": 81,
+      "longest_zero_qos_spell": 17,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10119887869964497,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2264.7429585585915,
+      "return_constraint_cost_raw_per_step": 0.00026587312232147876,
+      "seed": 52192812,
+      "service_snapshot_calls": 2774,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 171577.38765592617,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 732.7977986462136,
+          "qos": 0.7424227493657696,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 812.5424658874304,
+          "qos": 0.8225468798422908,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 677.404839730528,
+          "qos": 0.6893396856353688,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 935.1269937490374,
+      "charging_uav_steps": 3370,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.751436438281143,
+      "longest_below_half_qos_spell": 86,
+      "longest_zero_qos_spell": 17,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.12127637434262002,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2222.7451042641715,
+      "return_constraint_cost_raw_per_step": 0.00015820997661687274,
+      "seed": 52192812,
+      "service_snapshot_calls": 4229,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 136911.34115633438,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 808.5765983426451,
+          "qos": 0.8182048991214053,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 833.8721901891262,
+          "qos": 0.8448994355557771,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 622.29417002682,
+          "qos": 0.6338521633940981,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 435.2777777777777,
+      "charging_uav_steps": 1567,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.7656521660237601,
+      "longest_below_half_qos_spell": 81,
+      "longest_zero_qos_spell": 17,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10119887869964497,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2264.7429585585915,
+      "return_constraint_cost_raw_per_step": 0.00026587312232147876,
+      "seed": 52192812,
+      "service_snapshot_calls": 2774,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 149323.75125573028,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 871.9673185839699,
+          "qos": 0.8814273177352425,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 901.0790800769976,
+          "qos": 0.9130042276547592,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 678.0047539327011,
+          "qos": 0.7120034842737009,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 390.83333333333326,
+      "charging_uav_steps": 1407,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8354783432212342,
+      "longest_below_half_qos_spell": 60,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 7,
+      "native_minimum_battery_ratio": 0.0946936540079319,
+      "native_reserve_uav_step_fraction": 0.029916666666666668,
+      "raw_native_J": 2451.0511525936686,
+      "return_constraint_cost_raw_per_step": 0.004157543481086811,
+      "seed": 52192813,
+      "service_snapshot_calls": 2280,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 190833.36513153816,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 865.0616979932762,
+          "qos": 0.8745098327126334,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 916.3142511843042,
+          "qos": 0.9263186081355439,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 840.2961432460803,
+          "qos": 0.8528204786781078,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 712.1324994524045,
+      "charging_uav_steps": 2565,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8845496398420951,
+      "longest_below_half_qos_spell": 60,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.11000513262549233,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2621.6720924236606,
+      "return_constraint_cost_raw_per_step": 0.00025644873054452374,
+      "seed": 52192813,
+      "service_snapshot_calls": 3640,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 149323.75125573028,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 871.9673185839699,
+          "qos": 0.8814273177352425,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 901.0790800769976,
+          "qos": 0.9130042276547592,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 678.0047539327011,
+          "qos": 0.7120034842737009,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 390.83333333333326,
+      "charging_uav_steps": 1407,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8354783432212342,
+      "longest_below_half_qos_spell": 60,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 7,
+      "native_minimum_battery_ratio": 0.0946936540079319,
+      "native_reserve_uav_step_fraction": 0.029916666666666668,
+      "raw_native_J": 2451.0511525936686,
+      "return_constraint_cost_raw_per_step": 0.004157543481086811,
+      "seed": 52192813,
+      "service_snapshot_calls": 2280,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 131032.6258617676,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 828.4296057775875,
+          "qos": 0.8380256444427138,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 820.0056920849871,
+          "qos": 0.8321143083798791,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 652.3352628593371,
+          "qos": 0.6633592650464667,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 360.55555555555554,
+      "charging_uav_steps": 1298,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.77783307262302,
+      "longest_below_half_qos_spell": 59,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10154826312780724,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2300.7705607219114,
+      "return_constraint_cost_raw_per_step": 0.0003571132468879504,
+      "seed": 52192814,
+      "service_snapshot_calls": 2432,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 184891.44707475707,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 820.4150136106116,
+          "qos": 0.8300138473490873,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 834.7401793014894,
+          "qos": 0.8447877028509495,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 832.4769240925951,
+          "qos": 0.8456282727407546,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 784.8122502335702,
+      "charging_uav_steps": 2827,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8401432743135971,
+      "longest_below_half_qos_spell": 59,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.112701365239904,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2487.632117004696,
+      "return_constraint_cost_raw_per_step": 0.00036814536626991805,
+      "seed": 52192814,
+      "service_snapshot_calls": 3632,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 131032.6258617676,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 828.4296057775875,
+          "qos": 0.8380256444427138,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 820.0056920849871,
+          "qos": 0.8321143083798791,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 652.3352628593371,
+          "qos": 0.6633592650464667,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 360.55555555555554,
+      "charging_uav_steps": 1298,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.77783307262302,
+      "longest_below_half_qos_spell": 59,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10154826312780724,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2300.7705607219114,
+      "return_constraint_cost_raw_per_step": 0.0003571132468879504,
+      "seed": 52192814,
+      "service_snapshot_calls": 2432,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 137763.2941383834,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 861.9380280461914,
+          "qos": 0.8715869660125954,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 886.7164233675581,
+          "qos": 0.898260043912434,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 660.2071148039433,
+          "qos": 0.673801324149152,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 387.2222222222222,
+      "charging_uav_steps": 1394,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8145494446913937,
+      "longest_below_half_qos_spell": 77,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10103223662733225,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2408.8615662176926,
+      "return_constraint_cost_raw_per_step": 0.0006913049816807062,
+      "seed": 52192815,
+      "service_snapshot_calls": 3040,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 146623.31456711443,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 856.4309880951479,
+          "qos": 0.8660790725603813,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 904.249597264424,
+          "qos": 0.914249597264424,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 872.8800754199672,
+          "qos": 0.8841387285082413,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 845.0343733093508,
+      "charging_uav_steps": 3045,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8881557994443489,
+      "longest_below_half_qos_spell": 77,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.1980543861793142,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2633.560660779539,
+      "return_constraint_cost_raw_per_step": 4.477551471234668e-05,
+      "seed": 52192815,
+      "service_snapshot_calls": 4801,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 137763.2941383834,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 861.9380280461914,
+          "qos": 0.8715869660125954,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 886.7164233675581,
+          "qos": 0.898260043912434,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 660.2071148039433,
+          "qos": 0.673801324149152,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 387.2222222222222,
+      "charging_uav_steps": 1394,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8145494446913937,
+      "longest_below_half_qos_spell": 77,
+      "longest_zero_qos_spell": 0,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.10103223662733225,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2408.8615662176926,
+      "return_constraint_cost_raw_per_step": 0.0006913049816807062,
+      "seed": 52192815,
+      "service_snapshot_calls": 3040,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 137335.71395545793,
+      "arm": "L",
+      "bins": [
+        {
+          "native_J": 783.6864487955082,
+          "qos": 0.793100601338401,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 870.5327390178328,
+          "qos": 0.8824000678817903,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 686.2073192661869,
+          "qos": 0.725208027779391,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 326.1111111111111,
+      "charging_uav_steps": 1174,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8002362323331941,
+      "longest_below_half_qos_spell": 98,
+      "longest_zero_qos_spell": 31,
+      "native_final_reserve_uav_count": 7,
+      "native_minimum_battery_ratio": 0.09372591508463057,
+      "native_reserve_uav_step_fraction": 0.035291666666666666,
+      "raw_native_J": 2340.426507079528,
+      "return_constraint_cost_raw_per_step": 0.004986244693481939,
+      "seed": 52192816,
+      "service_snapshot_calls": 2831,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 179636.6666536557,
+      "arm": "O",
+      "bins": [
+        {
+          "native_J": 780.075129136672,
+          "qos": 0.7894789328436441,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 929.8258876101247,
+          "qos": 0.9398258876101248,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 908.8286915325888,
+          "qos": 0.9207184330500392,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 823.284030117864,
+      "charging_uav_steps": 2965,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8833410845012692,
+      "longest_below_half_qos_spell": 139,
+      "longest_zero_qos_spell": 31,
+      "native_final_reserve_uav_count": 0,
+      "native_minimum_battery_ratio": 0.15586456656698064,
+      "native_reserve_uav_step_fraction": 0.0,
+      "raw_native_J": 2618.7297082793857,
+      "return_constraint_cost_raw_per_step": 0.00014995691957504423,
+      "seed": 52192816,
+      "service_snapshot_calls": 4337,
+      "terminal_zero_service": false
+    },
+    {
+      "actual_team_travel_m": 137335.71395545793,
+      "arm": "P",
+      "bins": [
+        {
+          "native_J": 783.6864487955082,
+          "qos": 0.793100601338401,
+          "start": 0,
+          "stop": 1000
+        },
+        {
+          "native_J": 870.5327390178328,
+          "qos": 0.8824000678817903,
+          "start": 1000,
+          "stop": 2000
+        },
+        {
+          "native_J": 686.2073192661869,
+          "qos": 0.725208027779391,
+          "start": 2000,
+          "stop": 3000
+        }
+      ],
+      "charger_input_wh": 326.1111111111111,
+      "charging_uav_steps": 1174,
+      "cutoff_event_count_sum": 0.0,
+      "depletion_event_count_sum": 0.0,
+      "final300_persistent_reserve_members": 0,
+      "horizon_normalized_qos": 0.8002362323331941,
+      "longest_below_half_qos_spell": 98,
+      "longest_zero_qos_spell": 31,
+      "native_final_reserve_uav_count": 7,
+      "native_minimum_battery_ratio": 0.09372591508463057,
+      "native_reserve_uav_step_fraction": 0.035291666666666666,
+      "raw_native_J": 2340.426507079528,
+      "return_constraint_cost_raw_per_step": 0.004986244693481939,
+      "seed": 52192816,
+      "service_snapshot_calls": 2831,
+      "terminal_zero_service": false
+    }
+  ]
+}

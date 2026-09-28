@@ -1,0 +1,362 @@
+{
+  "action_law": "service sigmoid(g); dispatch sigmoid(-g) times masked member softmax times duration softmax",
+  "actions": 25,
+  "batch": "b01_commitment_a01",
+  "checkpoint": "final only; initialization retained but not a scored arm",
+  "direction": "uav_persistent_service",
+  "duration_meaning": "elapsed since first geometric arrival, including waiting and later outside capture",
+  "evaluation_mode": "gate>=0 service, else eligible member argmax then duration argmax; lower-index ties",
+  "evaluation_workers": 4,
+  "feature_dim": 773,
+  "finite_horizon": "native H3000 terminated; no continuation bootstrap",
+  "fits": 1,
+  "horizon": 3000,
+  "information": "central current users/BS at P10 clock; legal energy/stations each step; same actor and critic history",
+  "jobs": [
+    {
+      "arm": "L",
+      "job_key": "L/52192801",
+      "seed": 52192801
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192801",
+      "seed": 52192801
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192801",
+      "seed": 52192801
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192802",
+      "seed": 52192802
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192802",
+      "seed": 52192802
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192802",
+      "seed": 52192802
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192803",
+      "seed": 52192803
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192803",
+      "seed": 52192803
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192803",
+      "seed": 52192803
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192804",
+      "seed": 52192804
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192804",
+      "seed": 52192804
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192804",
+      "seed": 52192804
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192805",
+      "seed": 52192805
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192805",
+      "seed": 52192805
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192805",
+      "seed": 52192805
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192806",
+      "seed": 52192806
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192806",
+      "seed": 52192806
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192806",
+      "seed": 52192806
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192807",
+      "seed": 52192807
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192807",
+      "seed": 52192807
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192807",
+      "seed": 52192807
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192808",
+      "seed": 52192808
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192808",
+      "seed": 52192808
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192808",
+      "seed": 52192808
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192809",
+      "seed": 52192809
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192809",
+      "seed": 52192809
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192809",
+      "seed": 52192809
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192810",
+      "seed": 52192810
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192810",
+      "seed": 52192810
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192810",
+      "seed": 52192810
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192811",
+      "seed": 52192811
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192811",
+      "seed": 52192811
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192811",
+      "seed": 52192811
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192812",
+      "seed": 52192812
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192812",
+      "seed": 52192812
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192812",
+      "seed": 52192812
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192813",
+      "seed": 52192813
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192813",
+      "seed": 52192813
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192813",
+      "seed": 52192813
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192814",
+      "seed": 52192814
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192814",
+      "seed": 52192814
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192814",
+      "seed": 52192814
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192815",
+      "seed": 52192815
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192815",
+      "seed": 52192815
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192815",
+      "seed": 52192815
+    },
+    {
+      "arm": "L",
+      "job_key": "L/52192816",
+      "seed": 52192816
+    },
+    {
+      "arm": "O",
+      "job_key": "O/52192816",
+      "seed": 52192816
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52192816",
+      "seed": 52192816
+    }
+  ],
+  "launch_sha": "981e935ee336cbdde3f3b69f229019384376ba5f",
+  "macro_steps": 30,
+  "max_native_transitions": 336000,
+  "network": {
+    "activation": "tanh",
+    "pi": [
+      128,
+      128
+    ],
+    "vf": [
+      128,
+      128
+    ]
+  },
+  "numeric_threads": 1,
+  "optimizer_steps": 640,
+  "ordinary": "D urgency, competitor D+tau_in, occupancy and finite restoration bounds; see committed NOTES",
+  "policy_seed": 5292801,
+  "ppo": {
+    "batch_size": 100,
+    "clip_range": 0.2,
+    "device": "cpu",
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "gamma": 1.0,
+    "learning_rate": 0.0003,
+    "max_grad_norm": 0.5,
+    "n_epochs": 10,
+    "n_steps": 100,
+    "normalize_advantage": true,
+    "seed": 5292801,
+    "target_kl": null,
+    "vf_coef": 0.5
+  },
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "train_envs": 4,
+  "training_seeds": [
+    52092801,
+    52092802,
+    52092803,
+    52092804,
+    52092805,
+    52092806,
+    52092807,
+    52092808,
+    52092809,
+    52092810,
+    52092811,
+    52092812,
+    52092813,
+    52092814,
+    52092815,
+    52092816,
+    52092817,
+    52092818,
+    52092819,
+    52092820,
+    52092821,
+    52092822,
+    52092823,
+    52092824,
+    52092825,
+    52092826,
+    52092827,
+    52092828,
+    52092829,
+    52092830,
+    52092831,
+    52092832,
+    52092833,
+    52092834,
+    52092835,
+    52092836,
+    52092837,
+    52092838,
+    52092839,
+    52092840,
+    52092841,
+    52092842,
+    52092843,
+    52092844,
+    52092845,
+    52092846,
+    52092847,
+    52092848,
+    52092849,
+    52092850,
+    52092851,
+    52092852,
+    52092853,
+    52092854,
+    52092855,
+    52092856,
+    52092857,
+    52092858,
+    52092859,
+    52092860,
+    52092861,
+    52092862,
+    52092863,
+    52092864
+  ]
+}

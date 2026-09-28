@@ -507,3 +507,279 @@ consistent records and absent exit witness. State belongs to native child runtim
 `01a0e858-d69a-7dc2-b858-08d9438ed121`; registration is not a claim of queue wake.
 I remain active, use long deterministic waits and drain/rearm this same handle.
 No worker restart, duplicate launch or scientific retry occurred.
+
+## 2026-09-28 - B01 complete: useful ordinary package, unchanged learned deployment
+
+### Completion, collection and scope
+
+The accepted first operation completed with a valid exit-zero witness and absent
+runner/supervisor identities. The same deterministic observer produced one
+checkpoint and then READY; both App queue attempts returned `-32600` because this
+native child was not an independently loaded App thread. I stayed active through
+two long native waits, drained and rearmed the same manifest, collected the
+terminal facts, consumed READY and stopped observation. The final drain is
+generation3, stopped, no pending event or delivery. No replacement worker or
+changed scientific input was used. The committed
+[terminal status](../../../../runs/uav_persistent_service/b01_commitment_a01/terminal-status.json)
+and [observer reading](../../../../runs/uav_persistent_service/b01_commitment_a01/observer-terminal.json)
+retain observation separately from failed queue delivery.
+
+One fit completed all64 distinct training H3000 worlds,192000 native steps,
+6400 macro choices and640 optimizer updates. All48 planned L/O/P evaluation
+episodes completed H3000,144000 native steps. There is no failed, missing,
+unstarted or orphan-raw cell, runner error or pairing failure. Initial-state,
+user-trajectory, BS and RNG pairing checks pass on all16 evaluation worlds.
+The final checkpoint is the only scored learned endpoint; no extra arm, horizon,
+fit, rescue evaluation or early-checkpoint selection was added.
+
+I verified every one of294 runner-manifest files,325632466 bytes, against size
+and SHA256. Complete reading covered all112 raw trajectories, decision/event
+streams, training exposures and640 gradient/update records. Native metrics were
+recomputed from every trace, macro rewards compared to native reward sums,
+episode lengths and finite endings checked, energy bookkeeping reconstructed,
+and option summaries checked against chronological events and native allocation.
+The compact [reading](../../../../runs/uav_persistent_service/b01_commitment_a01/reading.json),
+[per-world results](../../../../runs/uav_persistent_service/b01_commitment_a01/perworld.json),
+[paired summary](../../../../runs/uav_persistent_service/b01_commitment_a01/summary.json)
+and [training result](../../../../runs/uav_persistent_service/b01_commitment_a01/training.json)
+preserve all worlds and tails, not just the following means.
+
+### Complete package comparison and adverse tails
+
+| Contrast | Native J difference | QoS/H3000 difference | Joint signs |
+|---|---:|---:|---|
+| O-P | +196.348728 [153.466253,239.231203] | +.062865667 [.049190769,.076540566] | 15 wins,1 loss |
+| L-P | 0 [0,0] | 0 [0,0] | 16 exact identities |
+| L-O | -196.348728 [-239.231203,-153.466253] | -.062865667 [-.076540566,-.049190769] | 1 win,15 losses |
+
+Intervals are the prospective descriptive paired t15 intervals over16 worlds,
+not independent training replications or confirmation. O mean J/QoS is
+2497.438199/.843097538; P and L are2301.089471/.780231870. The native arrays
+shared by L and P, including proposals, submissions, rewards, trajectories,
+guard/shield, battery, charging and service fields, are **bitwise identical in
+all16 worlds**. This is stronger than a zero mean or an imprecise difference.
+
+O exceeds the prospective one-percentage-point service and positive-J threshold
+against P. Its specified additional-risk block is not triggered on this panel:
+no cutoff/depletion in any arm; no O world has native battery at or below.10;
+O's lowest battery is.105691988, versus P/L's.093057136. P/L has reserve exposure
+in worlds01,06,11,13,16 and mean reserve UAV-step fraction.008119792, versus O0.
+Final low-reserve member counts are7 in01/06/13/16 and1 in11 for P/L,0 for O.
+**No arm has a member persistently below reserve for the full final300 steps on
+this panel.** The motivating historical seven-member persistent tails are not
+silently imported into these new worlds. P/L world03 ends in101 zero-service
+steps; O03's longest zero spell is12 and no O episode ends at zero service.
+O still has outages, including an81-step zero-service spell in world08; neither
+zero cutoff nor an untriggered finite risk block certifies safety.
+O lengthens the longest below-half-QoS spell in nine worlds (04/05/06/07/09/10/
+11/12/16), even though that metric's mean improves. Mean first1000-step QoS is
+.813165 for O versus.826905 for P; the largest mean gain occurs in the last1000.
+
+World52192812 is the single joint counterexample: O-P J -41.997854 and
+QoS -.014215728, with O2222.745104/.751436438 versus P2264.742959/.765652166.
+O/P QoS over successive1000-step bins is .742423/.818205,
+.822547/.844899 and .689340/.633852. Later recovery does not repay earlier
+loss. O's battery minimum.121276 is higher than P's.101199 and it receives
+935.127Wh instead of435.278Wh; more charge and better reserve are not monotone
+service improvements. Both have17-step longest zero spells; O/P longest
+below-half-service spells are86/81. These time bins are descriptive, not an
+isolated causal diagnosis of the loss.
+
+O-P raw return-constraint cost per native step averages -.001292038
+[-.002283360,-.000300717], lower in15 worlds but slightly higher in14
+(+.000011031). O receives413.182909Wh more charger input on average, has
+356.312873Wh better total stored-energy change, and travels36478.433m more;
+all16 worlds have each of those positive differences. Mean charger inputs are
+801.655131Wh and388.472222Wh. No energy-balance or sustainability claim follows
+from this finite, initially charged H3000 comparison.
+Every O world still withdraws net stored energy,458.280..773.951Wh, mean608.822Wh.
+
+### Choices, durations, execution and recovery
+
+O has934 eligible macro clocks, makes145 voluntary commitments and retains
+service at789 eligible clocks. There are6..11 commitments per world. All145
+have an observed arrival, native allocated charging, later assignment restoration
+and an actual F-free movement after release.143 later obtain positive connected
+load; neither target restoration nor movement alone is called service recovery,
+and absent load on two options does not diagnose a relay's lack of contribution.
+
+O selects120/300/600 labels26/38/81 times. Releases are57 elapsed-dwell and88
+full-battery, with no timeout or terminal censor. All81 nominal600 options end
+full before600;54 still last more than300 elapsed steps. Thus a600 label is not
+600 allocated charging steps, and many choices have a nonbinding duration.
+Across O options, mean commanded duration is395.883 steps, mean elapsed time
+after first observed geometric arrival297.131, mean allocated charging296.683
+(range104..585), and mean native eligible waiting.455 (maximum23). Seven
+allocation interruptions occur. Mean input82.340Wh, positive net charging
+68.454Wh and total option battery change60.759Wh are distinct quantities;
+all option battery changes are positive, minimum15.069Wh. There are no real-F
+steps/entries during O options, station changes or overwritten dock commands.
+
+Training has2484 genuinely eligible clocks across all64 worlds,1329 eligible
+service choices and1155 sampled dispatches, all executed. The three duration
+labels occur369/403/383 times, all eight members122..177 times. These observations
+establish actual action exposure, not learning success or intended-duration
+fidelity. Training option outcomes are735 full releases,352 dwell releases,
+67 right censors and one `timeout_no_arrival` label.1142 options receive native
+charging;1128 have a decoded observed-arrival event,1084 later restore assignment,
+1085 show F-free movement and910 positive connected load. Mean allocation is
+148.747 steps, waiting8.866 (maximum465), and there are459 allocation
+interruptions. Mean input41.246Wh, positive net charging34.285Wh and option
+battery change28.525Wh do not conceal the minimum -14.310Wh battery change.
+398 observed options end before the shortest120-step label. This indicates
+nonbinding duration in many observed outcomes, not counterfactual equivalence
+of all labels; duration remains an actor input affecting future decisions.
+No training commitment overlaps real F, changes station or has its command
+overwritten. Actual activation and semantic limitations both matter.
+
+The final L retains service at every one of1344 eligible evaluation clocks
+(all1600 total clocks include256 forced service choices). Eligible service
+probabilities are .518974..609036, mean.600290; the declared staged deterministic
+gate therefore produces zero voluntary commitment. Gate entropy mean.672665 and
+duration entropy1.097011 are not probability collapse. During training mean
+eligible service probability is.550742, from exactly.5 initially to.614706 in
+the final rollout;1155 sampled commitments are compatible with an endpoint mode
+that never dispatches. Actor/critic L2 movements.100182/4.756783 and640 finite
+post-clipping gradients show updates occurred, not why this deployment failed
+to improve. No stochastic evaluation or gate/entropy repair is selected.
+
+### Control-affecting arrival-boundary limitation
+
+The compact reader retains17 training options with native allocated charging but
+no observed arrival event. Each reaches a minimum decoded legal station distance
+of **20.000001907348633m**, just above the controller's exact `<=20` predicate,
+while native physical capture permits charging. These are14 full releases,
+two terminal censors and one timeout. This is a **control-affecting semantic
+limitation**, not just an unfortunate label: first arrival starts the dwell
+clock, so missing it can prevent the declared elapsed-dwell release.
+
+The concrete counterexample is training seed52092818, member4,120 label at1590:
+it remains committed until2490,900 steps, receives580 allocated charging steps,
+and is labelled `timeout_no_arrival`. That label is not evidence of physical
+arrival or recharge failure. There are27 total training options without an
+observed arrival;17 charged as above, while other cases include horizon limits.
+All145 O evaluation options have observed arrivals, and no such mismatch;
+L evaluation contains no option. I leave the accepted outputs and source
+unchanged, including the misleading label, and explicitly qualify its reading.
+
+Consequently O-P remains a complete comparison of the executed ordinary package;
+L-P/L-O remain valid outcomes of this **as-executed** finite training/deployment
+package. The intended geometric-arrival duration-learning experiment is
+incompletely realized. Real exposure, parameter changes and successful updates
+do not repair that missing semantic guarantee. The mismatch is not established
+as the cause of L=P; neither a small affected count nor the large timeout permits
+an unmeasured counterfactual conclusion. No epsilon patch, retry, replacement
+fit or relabelled success is included in this study.
+
+### Total scientific and engineering cost
+
+The scientific cost is1 fit,64 training plus48 evaluation H3000 episodes,
+336000 native transitions,6400 training macro transitions,160 PPO epochs and
+640 optimizer updates (64000 minibatch sample exposures). Final-only endpoint
+evaluation has zero optimizer updates. Actual service-snapshot calls are187205
+in training and147394 in evaluation,334599 total, with no primitive forecast
+rollouts. O/P evaluation calls are63528/41933; L equals P at41933. More frequent
+available-team ordinary scoring after O commitments contributes real computation,
+which native J does not charge. O/P summed worker CPU is1824.845/1573.811s,
+about15.95% more for O, even though query count is about51.5% higher.
+
+Runner wall is2900.052s (48.334min), of which training is1665.376s. Accepted
+launch to the exit witness spans50.852639min including startup. Summed worker
+CPU is11341.954s (3.15054h), plus8.130s parent CPU; the largest recorded individual
+peak RSS is729020KiB, not aggregate memory. These coexist with the earlier
+engineering cost of at least1525 native correctness transitions, up to150 more
+from the interrupted handle, six four-step synthetic optimizer updates and the
+recorded test/review work. Reading, implementation, failed control fetch,
+collection and independent scientific review time were not fully metered.
+There is no failed result-bearing fit to omit; the arrival/dwell limitation and
+earlier test/transport/queue failures remain explicit costs and limitations.
+
+### Independent scientific reading and DM disposition
+
+The separate-context registered ResearchCritic
+`/root/dm_persistent_service_round3/result_review` reconstructed raw evidence
+before receiving my proposed interpretation. I supplied the actual question,
+selection review, fixed source, original supporting/adverse sources and complete
+current artifacts; no DM or Root turn history was inherited. This is independent
+reasoning and reconstruction, not a blinded result reading. It performed no fit,
+native rollout, edit or shared-index operation. Its full answer follows; the
+absolute links identify the files at review time. Bulk paths are subsequently
+bound to the canonical retained location in the retention entry below.
+
+#### Full independent answer
+
+**Recommend retaining O as a conditional central-information S7-S2/H3000 reference, stopping this PPO recipe, and purchasing no additional run now.** The DM's proposed disposition is supported, with the duration-control limitation below preserved explicitly.
+
+No DM or Root conversation was inherited. The assignment supplied headline results, and index navigation exposed historical summaries, so this was separate-context review, not blinded review. I reconstructed the current raw evidence before receiving the DM's proposed diagnosis. I verified all 294 manifest files, read all 112 NPZ episodes, checked training choices and updates, and confirmed that P's source blob matches `025350669`. Historical counterevidence was checked through original world records and selected adverse raw pairs. No records, code or experiments were changed.
+
+The complete comparison at source `981e935ee336cbdde3f3b69f229019384376ba5f` supports:
+
+| Contrast | Mean native J difference | Mean QoS difference | Reading |
+|---|---:|---:|---|
+| O-P | +196.348728 | +.062865667 | Both improve in 15/16 worlds |
+| L-P | 0 | 0 | Every common native array is bitwise identical |
+| L-O | -196.348728 | -.062865667 | This deployed learned package supplies no increment |
+
+O-P's descriptive paired intervals are `[153.466253,239.231203]` for J and `[.049190769,.076540566]` for QoS. These describe the sampled worlds; they do not provide independent learning replication. [Complete world records](/home/fires/hmasd-wsl/runs/uav_persistent_service/b01_commitment_a01/perworld.json).
+
+O establishes a **measured achievable package increment** over competent P. Its 145 commitments all recorded arrival, charging, release, reassignment and subsequent movement; 143 subsequently recorded connected load. None timed out, remained censored or experienced real-F takeover during commitment. Thus useful discretionary commitment was physically realized. Connected load does not identify an individual member's delivered-service contribution, and zero takeover exposure does not demonstrate robustness to takeover. The comparison jointly changes admission, dwell, assignment availability and resulting service planning; it does not isolate any component.
+
+The favorable means retain consequential limits. World `52192812` loses **41.997854 J and .014215728 QoS**. O lengthens the longest below-half-QoS spell in **nine worlds**, despite improving that metric's mean. Its mean first-1000-step QoS is lower; the largest gain occurs in the last 1000 steps. O has no observed <=10% reserve exposure, cutoff, depletion or terminal-zero-service world, while P has reserve exposure and one terminal-zero-service world. Nevertheless, every O world withdraws net stored energy, between **458 and 774 Wh**. This supports finite usefulness, not sustainability or general safety.
+
+The learning result needs three separate judgments:
+
+- **Opportunity and action interface:** O's result supplies a constructive useful policy within the shared commitment interface. It does not prove that the particular neural representation can recover O, or quantify optimal or learnable headroom.
+- **Actual training:** all 64 worlds exposed eligible decisions. Training executed **1,155 commitments across 2,484 eligible clocks**, with 640 optimizer updates and parameter movement. Global nonactivation or an entirely inaccessible action branch cannot explain the paid training exposure.
+- **Declared deployment:** L selected service on all **1,344 eligible evaluation clocks**. Its service probability ranged from **.518974 to .609036**, averaging .600290. The declared staged argmax therefore reproduces P even though substantial dispatch probability remains. This explains deployment nonactivation mechanically; it does not establish why training produced those logits. Near-zero critic explained variance and small policy changes are observations, not an identified optimizer failure. [Deployment rule](/home/fires/hmasd-wsl/experiments/candidates/uav_persistent_service/policy.py:38), [training evidence](/home/fires/hmasd-wsl/runs/uav_persistent_service/b01_commitment_a01/training.json).
+
+**The strongest consequential qualification is that the arrival mismatch affects control, not merely event naming.** Of 27 training commitments without a recorded geometric-arrival event, 17 received native charging: 14 ended full, two were censored, and one timed out. Their minimum recorded decoded distance was `20.000001907348633 m`. In world `52092818`, member 4's **120-second choice remained commanded for 900 steps and received 580 allocated charging steps**. Arrival starts the actual dwell-release clock, so this mismatch changes the experienced duration. [Control condition](/home/fires/hmasd-wsl/experiments/candidates/uav_persistent_service/controllers.py:228), [original counterexample](/home/fires/hmasd-wsl/runs/uav_persistent_service/b01_commitment_a01/training/world_52092818.decisions.json).
+
+Accordingly, the complete O-P comparison remains valid; L's as-executed finite package produces unchanged deployment; and the intended geometric-duration learning interpretation remains incomplete. Updates and executed commitments do not repair that semantic gap. All 145 O evaluation commitments recorded arrival, so the observed O benefit does not depend on these missed-arrival cases. Neither their frequency nor the counterexample identifies them as the cause of L=P.
+
+Ordinary stopping rules also reduce duration differentiation: training had **735 full-battery releases**, including 364 with recorded dwell below 120 seconds. O's 81 choices labelled 600 all ended full; its 120 choices all ended by dwell. These are realized exposures, not counterfactual proof that alternative labels would always behave identically.
+
+The earlier evidence remains relevant without becoming a universal failure story. Energy I lost to P on its own panel, including the verified 728-step terminal outage; the old learned move/hold ranking actively changed choices and lost to P. Current L instead leaves deployment unchanged. Those different observations cannot establish one shared learning failure or show that O repaired I's causal defect.
+
+The investment correction is therefore concrete: **retain the ordinary asset and the empirical opportunity; end this learning recipe without stochastic-deployment rescue, detector-patch retry or automatic optimizer tuning.** A repaired detector would define changed execution semantics. The broader learned-scheduling question remains open, but no presently specified follow-up has demonstrated sufficient decision value.
+
+The smallest worthwhile complete observation for the selected question has already been obtained. If a later concrete decision requires recurring O usefulness, a frozen O/P comparison on fresh complete H3000 worlds would address it: repeated gains with acceptable tails would strengthen conditional reuse; adverse or mixed results would narrow that preference. Neither outcome would establish learning capability. This is a contingent comparison, not a recommended run now.
+
+Actual cost was **one fit, 336,000 native steps, 334,599 service snapshots**, 27.76 minutes fit wall and 48.33 minutes runner wall; acceptance-to-exit was 50.85 minutes. Summed worker CPU was **3.151 hours**. O evaluation used **15.95% more CPU** and 51.50% more snapshots than P. Sixteen future O/P pairs have a measured workload anchor of approximately **.944 worker-CPU hours**, before preparation and readback; future elapsed time remains unknown. Engineering, review, transport and publication costs are incompletely timed. Native J does not price those costs.
+
+**MATERIAL_DISSENT: no.** The proposed stop-L/conditional-O disposition matches the direct evidence, provided the control-affecting duration mismatch, adverse service tails and single-training-instance scope remain substantive parts of the retained result.
+
+#### DM disposition
+
+I accept that recommendation and its qualifications. It corrects the tempting
+reading of O as optimal/learnable "headroom" to a measured achievable complete
+package increment. Native guard/geometry did not exhaust all useful discretionary
+control under this exact central-information interface; nevertheless O-P does
+not isolate departure timing, occupancy, duration, reassignment or any diagnosed
+charge-cycle defect. Its early-service and nine-world below-half-service tails
+and universally negative stored-energy balance remain part of the judgment.
+
+The direct learner's actual training was not globally inactive, while its
+specified deployment is exactly inactive relative to P. These observations do
+not identify why its logits favored service. The control-affecting decoded
+arrival error prevents a clean negative conclusion about intended geometric
+duration learning; the negative is this one as-executed package. A future detector
+change would be new execution semantics, not completion of this already collected
+batch, and exposure/update counts cannot substitute for that distinction.
+
+The chosen next action is **stop this PPO recipe; retain O as a conditional
+S7-S2/H3000 central-information ordinary reference; put the broader question in
+reserve with no new producer**. There is no pending fit, result collection,
+external advice or owner-approval dependency. One fit and16 evaluation worlds do
+not support confirmation, learning impossibility, decentralized legality, default
+safety or sustainable repeated service. Previous I/C, move/hold-learning and
+lawful-controller adverse evidence remain binding in their original scopes;
+this result neither renames those recipes nor retrospectively diagnoses them.
+
+A concrete future reuse decision could make fresh frozen O/P replication worth
+its full cost, and a substantively different learning comparison might be worth
+proposing if it changes an unresolved decision. Neither is selected now. A
+numerical repair, stochastic evaluation, extra seed/epoch or automatic entropy,
+reward or optimizer revision is not this direction's next task by default.
+Cross-question proposals return to Root; publication and cleanup below are my
+remaining in-scope work. No additional selection critic or Pro round is needed
+for this uncontested, independently read disposition.
