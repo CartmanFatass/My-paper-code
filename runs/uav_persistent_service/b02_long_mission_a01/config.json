@@ -1,0 +1,125 @@
+{
+  "O_H": "retained O with controller/readout max_steps bound to H12000",
+  "P": "unchanged TransitHold with controller/readout H12000 clock",
+  "arms": [
+    "O_H",
+    "P"
+  ],
+  "arrival_detector": "retained decoded geometric threshold; no B02 repair",
+  "batch": "b02_long_mission_a01",
+  "direction": "uav_persistent_service",
+  "evaluation_workers": 4,
+  "final_reserve_window": [
+    11700,
+    12000
+  ],
+  "fits": 0,
+  "fixed_bins": 3000,
+  "horizon": 12000,
+  "jobs": [
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52292801",
+      "seed": 52292801
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52292801",
+      "seed": 52292801
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52292802",
+      "seed": 52292802
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52292802",
+      "seed": 52292802
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52292803",
+      "seed": 52292803
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52292803",
+      "seed": 52292803
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52292804",
+      "seed": 52292804
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52292804",
+      "seed": 52292804
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52292805",
+      "seed": 52292805
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52292805",
+      "seed": 52292805
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52292806",
+      "seed": 52292806
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52292806",
+      "seed": 52292806
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52292807",
+      "seed": 52292807
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52292807",
+      "seed": 52292807
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52292808",
+      "seed": 52292808
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52292808",
+      "seed": 52292808
+    }
+  ],
+  "late_window": [
+    6000,
+    12000
+  ],
+  "launch_sha": "e905d8842a6ad6006b2b6d82237e98f4a5dbb2d2",
+  "macro_steps": 30,
+  "max_native_transitions": 192000,
+  "mission_service_denominator": 12000,
+  "numeric_threads_per_worker": 1,
+  "optimizer_updates": 0,
+  "seeds": [
+    52292801,
+    52292802,
+    52292803,
+    52292804,
+    52292805,
+    52292806,
+    52292807,
+    52292808
+  ],
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  }
+}

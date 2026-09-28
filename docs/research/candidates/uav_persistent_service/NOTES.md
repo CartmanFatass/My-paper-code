@@ -1285,3 +1285,282 @@ and1500-second checkpoints under the same native child identity
 waits and same-handle drain/rearm; no App queue-return assumption, duplicate
 worker or replacement launch is made. The observation refusal consumed no
 scientific episode or update.
+
+## 2026-09-28 --- B02 complete: finite benefit, failed long-mission retention
+
+### Terminal collection and original-evidence reconstruction
+
+The single admitted operation at source
+`e905d8842a6ad6006b2b6d82237e98f4a5dbb2d2` exited zero at epoch
+`1790628335.8202386`. The same-handle observer recorded READY at
+2026-09-28T20:46:02.095182Z, with both recorded native runner/supervisor
+identities absent and no manifest inconsistency. Its App queue attempt failed
+with `-32600` (unloaded spawned subagent), preserving `delivery_unknown` rather
+than treating it as delivered. I had stayed in long native waits, collected the
+same terminal status and consumed that READY event by rearming generation5 to6,
+then stopped observation. Final drain has no event or wake pending. There was
+no duplicate launch, resumed worker or scientific retry.
+
+The complete output was collected once. Both the DM and the independent
+scientific reviewer verified all51 runner-manifest files,144030432 bytes,
+against their original sizes and SHA256 hashes. All16 episodes reach native
+H12000 truncation; no early termination, missing job, failed job, pool error,
+orphan raw, unstarted job or pairing failure occurred. All eight pairs have
+identical initial world/BS and complete users/RNG streams. The DM additionally
+compared the original user arrays, per-step RNG hashes and initial native
+batteries directly. All fixed late6000/final300 windows are observed; there is
+no padded suffix or unserved remainder in this realized panel.
+
+I read all16 raw traces and decision/event records, not only the aggregates.
+Passive reconstruction matched every recorded metric sum/mean, native reward,
+fixed-window service/J, reserve exposure, spells and block stock changes. The
+400 macros per episode sum to12000 steps and their rewards sum to native J.
+Every per-UAV battery transition agrees within1e-12 with
+`clip(previous - consumed_wh/160 + charger_input_wh/160, 0, 1)`.
+Commitment active/start ranges, charging counts, input, full/dwell/timeout
+releases and recovery records were checked against the original arrays. This
+reading added zero native transitions, fits, optimizer updates or service-model
+queries. The independently derived [compact reading](../../../../runs/uav_persistent_service/b02_long_mission_a01/reading.json)
+keeps all world/time-block readings and the five semantic exceptions, rather
+than duplicating every option trace. Original [summary](../../../../runs/uav_persistent_service/b02_long_mission_a01/summary.json),
+[perworld](../../../../runs/uav_persistent_service/b02_long_mission_a01/perworld.json),
+[config](../../../../runs/uav_persistent_service/b02_long_mission_a01/config.json)
+and [manifest](../../../../runs/uav_persistent_service/b02_long_mission_a01/manifest.json)
+remain unchanged.
+
+### Full and late outcomes, including every adverse world
+
+The realized same-central-information O_H-P contrasts are:
+
+| Endpoint | Paired mean | Descriptive paired t7 interval | Positive / negative worlds |
+|---|---:|---:|---:|
+| Full native J | +4843.371165 | [-2987.297081,+12674.039412] | 6 / 2 |
+| Full mission QoS | +.183776246 | [+.072981636,+.294570857] | 7 / 1 |
+| Late `[6000,12000)` native J | +1950.144716 | [-3925.639263,+7825.928694] | 6 / 2 |
+| Late service, denominator6000 | +.216544629 | [+.028290982,+.404798276] | 6 / 2 |
+
+O_H/P mean full J is4735.509089/-107.862076 and full QoS
+.730309209/.546532963. Mean late J is26.610972/-1923.533744 and late QoS
+.662702448/.446157819. These are eight new paired worlds, not confirmation,
+training replication or proof of a positive population J difference. Both J
+intervals cross zero. The known-horizon change is part of this package: O_H
+knows12000 from its first decision, so its first3000 is not a B01 replication.
+
+| World | Full delta J | Full delta QoS | Late delta J | Late delta QoS | O_H/P cutoff and depletion counts (each) | O_H/P final300 persistent reserve |
+|---|---:|---:|---:|---:|---:|---:|
+| 52292801 | -4877.768 | -.004004 | -5232.475 | -.066565 | 7 / 0 | 7 / 6 |
+| 52292802 | +22597.072 | +.396878 | +15754.450 | +.626839 | 0 / 7 | 0 / 7 |
+| 52292803 | -6609.072 | +.014996 | -7185.373 | -.064106 | 7 / 0 | 7 / 0 |
+| 52292804 | +3266.398 | +.269883 | +1722.703 | +.284590 | 0 / 0 | 0 / 0 |
+| 52292805 | +2247.627 | +.184372 | +1510.802 | +.248209 | 0 / 0 | 0 / 0 |
+| 52292806 | +7216.358 | +.144039 | +1090.377 | +.119563 | 7 / 7 | 7 / 7 |
+| 52292807 | +12186.075 | +.240163 | +6318.058 | +.317208 | 7 / 7 | 7 / 7 |
+| 52292808 | +2720.280 | +.223883 | +1622.615 | +.266618 | 0 / 0 | 0 / 0 |
+
+The predeclared mean-benefit part passes, but the joint retention rule fails:
+O_H introduces seven cutoff and seven depletion events in each of01/03, and
+their persistent-reserve tail is worse. O_H has28 cutoff/depletion events of
+each kind across four worlds versus P's21 across three. O_H avoids P's failures
+in02 and delays those shared in06/07, not eliminates them. Its lower mean
+reserve exposure (.158911458 versus.259093750, delta-.100182292) does not
+cancel newly failing worlds. Neither arm has terminal-zero service, but that
+does not make seven cutoff members safe. Native event counts are first
+crossings, not counts of continuously dead UAVs: depleted members can alternate
+between zero and a small charge under the allocator.
+
+The longest below-half-service spell also worsens in01 (1193 versus92),03
+(2058 versus120) and05 (474 versus456); all other signs and observed zero
+spells remain in the compact reading. World02 supplies the largest positive
+J contrast. World03's small positive full service does not erase its negative
+late service, strongly negative J and newly depleted group. No world was
+removed or reweighted after these observations.
+
+### Replenishment, realized capacity and interpretation limits
+
+This is not simply prolonged operation on untouched initial batteries. O_H
+receives substantial charging and executes continuing commitments. It also
+continues drawing down storage in every world, including all eight final3000
+blocks. Mean initial stock is1102.370353Wh; final stock is200.740375Wh for O_H
+and110.406497Wh for P. O_H's mean gross charging input is4040.393578Wh versus
+3816.736111Wh for P over the whole mission. Mean stock withdrawals are
+901.629978Wh and991.963856Wh respectively.
+
+| O_H fixed3000 block | Mean QoS | Mean native J | Mean stock change Wh | Mean allocated slots of2 | Reserve UAV-step fraction |
+|---|---:|---:|---:|---:|---:|
+| [0,3000) | .821500 | +2434.174 | -484.910 | 1.073458 | .000000 |
+| [3000,6000) | .774332 | +2274.724 | -255.642 | 1.232042 | .012026 |
+| [6000,9000) | .735138 | +1194.085 | -88.718 | 1.312667 | .186286 |
+| [9000,12000) | .590267 | -1167.474 | -72.360 | 1.232417 | .437333 |
+
+P's corresponding service is.773533/.520283/.454303/.438013 and J is
+2264.940/-449.269/-920.777/-1002.757. O_H's final-bin J deterioration is a
+supplementary reading, not a post hoc replacement of the frozen late6000
+endpoint. Near-flat P storage in late bins is not evidence of healthy energy
+balance: native modeled hover consumption continues at the zero floor, while
+battery is clipped to zero. The full transition reconstruction includes that
+floor correction; input minus modeled consumption alone is not stock change
+in depleted states. Positive-net-charge telemetry is also not signed fleet
+energy balance.
+
+A stronger, source-supported diagnosis is available for the failing realized
+configuration. In every depleted O_H world, seven UAVs are continuously
+charging-eligible at station1 throughout the final3000 steps. The first
+seven-member configuration occurs at steps8398/7604/5028/7170 in worlds
+01/03/06/07, before first cutoffs at10778/9916/7446/9531. Each of those seven
+stationary members consumes168.49W and receives only428/429 allocated steps
+per3000; station1 stays occupied. Thus that group demands1179.43W against its
+single1000W slot, a179.43W local deficit. Station0 occupancy in those final
+blocks is only.107/.152333/.138333/.150333. The reviewer independently
+reconstructed station assignment from original positions and station geometry,
+not just the saved queue counts. P's depleted02/06/07 similarly have seven
+station1 members throughout their final3000.
+
+This establishes that the observed seven-member stationary group cannot
+replenish its collective stock; it is stronger than an unexplained aggregate
+correlation. It does not identify why O_H creates the group or show that a
+service-preserving transfer is feasible. Two1000W stations can in principle
+fund eight hover demands of1347.92W when access is suitable, but aggregate
+capacity ignores native nearest-station docking, geometry, return margin,
+travel and ongoing service. There is no station-ID, reservation, radio-off or
+zero-power parking action. Changing allocator, real F, cutoff or dock rights
+would change the question. A local overload is not by itself evidence for a
+detector, threshold, optimizer or learned-scheduler repair.
+
+### Executed commitment semantics
+
+O_H has1872 eligible macro clocks:153 commitments and1719 service choices.
+Thirty-six commitments start at or after6000. All153 receive charge, restore
+assignment and show subsequent free movement;148 show later connected load.
+There are148 decoded arrivals,116 full releases,34 dwell releases and3
+900-step timeout-no-arrival releases; no censor. Real F entries/steps and
+command overwrites during these commitments are all zero. Thirty-six charging
+interruptions are observed, so the labels are not uninterrupted allocated
+charging durations. These counts establish real intervention and recovery,
+not optimal scheduling or causal duration value.
+
+Labels120/300/600 are selected18/22/113 times. Their full/dwell/timeout release
+counts are1/14/3,4/18/0 and111/2/0. In particular111 of113 label600 options
+end by full charge, so the label cannot be interpreted as an observed600-step
+charge treatment. Dwell means elapsed time after first decoded geometric
+arrival, including waiting and later time outside capture.
+
+Five options receive native charge while the strict detector never records
+arrival; every minimum decoded distance is20.000001907348633m. These are
+control-affecting semantic limitations, not physical nonarrival:
+
+| World/member/start | Label | Command steps | Allocated charge steps | Release |
+|---|---:|---:|---:|---|
+| 52292804 / 5 / 3990 | 120 | 867 | 637 | full |
+| 52292804 / 4 / 5850 | 120 | 900 | 469 | timeout_no_arrival |
+| 52292804 / 1 / 6930 | 120 | 900 | 372 | timeout_no_arrival |
+| 52292808 / 5 / 4770 | 300 | 619 | 595 | full |
+| 52292808 / 2 / 7260 | 120 | 900 | 310 | timeout_no_arrival |
+
+Those exceptions qualify intended-dwell interpretations of04/08's gains;
+they do not explain the added failures in01/03, where this mismatch is absent.
+The original B01 17 charged arrival misses, especially the120 label producing
+900 command/580 allocated charging steps in52092818/member4, remain binding.
+B02 intentionally did not repair the detector, train anything, rehabilitate
+the stopped PPO package or infer why its deterministic deployment equalled P.
+
+### Complete bounded cost
+
+Actual scientific cost is0 fits,16 complete episodes,192000 native steps,
+6400 macro decisions,0 optimizer updates and0 learned-model queries. Static
+radio service snapshots total69093 (O_H47015/P22078). Worker CPU totals
+4466.392124s, or1.240664h; O_H2525.359232s/P1941.032892s means30.10% more
+O_H worker CPU and112.95% more service snapshots. Runner wall is1203.006839s
+(20.0501min), accepted-to-exit1205.861282s (20.0977min), versus the prospective
+35..55min estimate. Parent CPU is1.195926s; largest individual worker peak
+RSS is699156KiB and parent peak489720KiB. These peaks are not a simultaneous
+node-memory total, and computation is not charged in native J.
+
+The recorded correctness work adds210 native transitions,0 updates. Repeated
+synthetic checks, engineering/scientific review, source reading, implementation,
+SSH/publication and collection have no fully metered cost; they are not
+claimed free. Passive result reconstruction added no environment exposure.
+No scientific technical failure or retry occurred. Non-scientific incidents
+remain visible: configured remote shell/old Git auto-GC warnings, initial
+stopped-observer registration refusal, queue delivery failure, and one local
+reading command naming a nonexistent Python path before using the configured
+interpreter. None changed or silently replaced scientific inputs or results.
+
+### B02 independent scientific reading and DM disposition
+
+The same independent ResearchCritic continued in its separate reviewer context,
+first reconstructing original B02 outputs/source before receiving my provisional
+disposition, then independently checking the station finding. It had not
+inherited the DM conversation, but this continuing reviewer was not blinded.
+Full original answer follows; links and substantive dissent are preserved.
+
+> **Recommendation**
+> Restrict O to its established conditional H3000 use; do not adopt O_H as the longer-mission reference. Stop this unchanged extension without another horizon, fit, detector patch or automatic retry. Preserve the genuine benefits and adverse outcomes together.
+>
+> I continued in separate reviewer context, not a blinded context. I reconstructed the original B02 evidence before receiving the DM's disposition, then independently checked the additional station-capacity finding.
+>
+> **Verified Result**
+> At source `e905d8842a6ad6006b2b6d82237e98f4a5dbb2d2`, all **51 manifest-listed files, 144,030,432 bytes**, verify. All 16 episodes reach native H12000 truncation; every late-6000 and final-300 window is observed. All eight pairs match initial conditions and complete user/RNG streams. Raw recomputation agrees with the published endpoints. [Original results](/home/fires/hmasd-wsl/runs/uav_persistent_service/b02_long_mission_a01/perworld.json)
+>
+> | O_H − P | Mean | Descriptive paired t7 interval |
+> |---|---:|---:|
+> | Full native J | +4843.371 | [−2987.297, +12674.039] |
+> | Full QoS | +.183776 | [+.072982, +.294571] |
+> | Late native J | +1950.145 | [−3925.639, +7825.929] |
+> | Late QoS | +.216545 | [+.028291, +.404798] |
+>
+> Full QoS improves in seven worlds; full J and both late endpoints improve in six. These are eight paired worlds, not independent training replications. No learning occurred.
+>
+> The mean-benefit portion passes, but the predeclared retention rule fails on additional risk. This is not merely insufficient statistical confidence. [Frozen rule](/home/fires/hmasd-wsl/docs/research/candidates/uav_persistent_service/NOTES.md:1180)
+>
+> **Adverse Evidence**
+> Worlds `52292801` and `52292803` each add **seven cutoff and seven depletion events** versus P's zero. Final-300 persistent-reserve counts are respectively **7 versus 6** and **7 versus 0**. Their late J differences are −5232.475 and −7185.373. World 03's small positive full-service difference does not negate its later failure.
+>
+> World 02 avoids P's seven depletion events; worlds 06/07 delay, but do not eliminate, the shared seven-member failures. Neither arm depletes in worlds 04/05/08. Across the panel, O_H has **28 cutoff and 28 depletion events versus P's 21 each**. Lower mean reserve exposure, .158911 versus .259094, does not cancel the newly failing worlds. Neither arm has terminal-zero service.
+>
+> All eight O_H worlds lose stored energy during the final 3000 steps. O_H's mean late J is only **26.611**; its final-3000 mean J is **−1167.474**, versus P's −1002.757. That final-bin deterioration is supplementary evidence, not a replacement for the positive frozen late-6000 contrast.
+>
+> **Supported Diagnosis**
+> This is a real finite package benefit with substantial replenishment, not simply a longer replay of untouched initial batteries. O_H obtains more charger input, delivers more service and often postpones deterioration. It does not establish sustained service or a generally preferable long-mission package.
+>
+> The strongest explanatory advance is **local charging-capacity overload**. In every depleted O_H world, seven stationary UAVs remain continuously eligible at station 1 throughout the final 3000 steps. This configuration begins before the first cutoff. Each consumes exactly 168.49 W: **1179.43 W demand against one 1000 W slot**. Meanwhile station 0 occupancy is only 10.7–15.2%. Thus the observed seven-member configuration cannot replenish its collective stock, regardless of aggregate two-station capacity. Native allocation and energy accounting support this statement directly. [Native dynamics](/home/fires/hmasd-wsl/envs/pettingzoo/relay/energy_aware.py:1763)
+>
+> This identifies an unsustainable realized configuration, not why O_H created it or whether a service-preserving alternative is feasible. Native lower-bound battery clipping also explains why depleted groups can show approximately flat stock while members repeatedly approach zero. That plateau is not healthy energy balance.
+>
+> **Execution Semantics**
+> O_H executes **153 commitments**, all receiving charge and subsequently restoring assignments and movement; 148 show later connected load. Thirty-six commitments begin after step 6000. This is meaningful continuing intervention, not nonactivation.
+>
+> Five commitments have no decoded arrival despite charging: two full releases and three 900-step timeouts, all in worlds 04/08. The timeout options labelled 120 receive **469, 372 and 310 charging steps**. Their minimum decoded distance is 20.000001907 m. These control-affecting mismatches qualify intended-dwell claims; they are not physical nonarrival. They do not explain the additional failures in worlds 01/03.
+>
+> The prior B01 17 charged arrival misses, including **900 commanded steps/580 charging steps**, remain substantive. B02 neither repairs that semantic limitation nor expands B01's single-fit negative into a learning impossibility result.
+>
+> **Investment Choice**
+> The completed comparison answers the selected use decision; another unchanged panel is not presently worth purchasing. Detector correction or PPO tuning lacks a supported causal connection to the newly failing worlds.
+>
+> The capacity/access finding does make a sharper future question worthwhile to retain: can ordinary control prevent locally overloaded return groups while preserving complete service and risk performance under unchanged native allocation and real F? Success would support a changed controller; eliminating overload by sacrificing service would expose a tradeoff; continued overload would weaken the proposed intervention. Spare aggregate capacity alone predicts none of these outcomes.
+>
+> No such successor is specified or selected now. It would require explicit legal pre-return decisions and a fresh complete comparison retaining both P and O_H; post-depletion rerouting or silently changing allocation would answer a different question. Implementation, feasible travel/service tradeoffs and successor runtime remain unknown.
+>
+> Actual B02 cost: **0 fits, 192,000 native steps, 4466.39 worker-CPU seconds (1.241 hours), about 20.1 minutes accepted-to-exit, and 69,093 service snapshots**. O_H uses approximately **30.1% more worker CPU** than P. Recorded correctness execution adds 210 native steps; implementation, review and collection costs are not fully metered.
+>
+> This review has finished reading the artifacts; no read process remains.
+>
+> **MATERIAL_DISSENT: no.** I support restricting the asset and ending this extension. The station-local deficit should be retained as a supported explanation of the failing configurations, without turning it into a proven repair or automatic successor investment.
+
+I accept the review. B01's conditional H3000 O remains an ordinary asset;
+the as-executed O_H extension does not earn long-mission-reference status
+under its declared rule. This is a substantive adverse answer despite positive
+service means, not an uninformative run or a request for another seed. I end
+this unchanged extension and retain its full positive, adverse and semantic
+evidence. There is no selected next producer, fit, detector correction,
+threshold repair, longer horizon or stochastic rescue. The direction returns
+to reserve after publication/cleanup; no owner approval wait is implied.
+
+The changed working explanation is that persistent finite benefit and late
+failure can coexist with large real replenishment, and a station-local energy
+deficit is established for the realized overloaded groups. Causal formation,
+service-preserving prevention, legal pre-return access and useful learning
+remain unresolved, not disproved. A future complete capacity/access comparison
+would have to specify those decisions and retain P/O_H as honest references;
+it is a new substantive design, not a detector patch or post-depletion repair.
+Root owns any cross-question investment choice. My present recommendation is
+retain this question in the notebook without authorizing a successor run.
