@@ -1348,8 +1348,8 @@ Root继续负责问题设计、跨问题取舍和综合，DM拥有范围内执�
 ## Portfolio review 2026-09-28 constructive-exploration-method
 
 **Working review, not an adopted instruction or run declaration.** Root source boundary
-`a6a816aa0`; one existing separate-context Scientific Reviewer (`question_space_review`) is
-reconstructing the consequential positive/adverse evidence. The same reviewer took part in
+`a6a816aa0`; one existing separate-context Scientific Reviewer (`question_space_review`) has
+reconstructed the consequential positive/adverse evidence. The same reviewer took part in
 earlier selection, which is disclosed rather than described as blinded. A bounded Scout mapped
 native information/control rights. No new fit, trajectory, data download or Pro is selected.
 
@@ -1424,7 +1424,60 @@ motivate testable analogies, not transplanted results, novelty or automatic fit 
 
 ### Independent answer
 
-Pending complete return. Preliminary findings are not substituted for the final review.
+Complete native return from `question_space_review`, 2026-09-28; substantive answer preserved
+below. The review's illustrative costs and proposed successors are not launch declarations.
+
+**Judgment**
+The owner's concern is **partly justified at the investment boundary, but not as a description of the whole workflow**. These examples contain real explanation and exploitation of positives. The weaker point is moving from "this package should not become the default" to "no constructive successor presently receives effort," despite a useful retained capability and a concrete, testable limitation.
+
+I previously supported persistent-service deepening and the content comparison. This is continuing separate critic context, not blinded review. I reused my earlier B01 reconstruction, directly recomputed the new primary endpoints from the retained B02/B03/content trajectories, and then read the current dispositions and methods. No experiments or files were changed.
+
+**Three Examples**
+1. **Persistent service: retain the adoption restriction; revise the current investment choice.**
+
+B01 established a useful ordinary intervention: O-P was **+196.35 native J and +.06287 QoS**, with both improving in 15/16 worlds. B02 genuinely pursued that positive beyond the initial-energy horizon. At H12000, O_H-P remained **+.18378 full-mission QoS and +.21654 late-6000 QoS**. This is substantial finite service benefit, not an empty positive rescued by qualifications. However, native-J intervals cross zero, worlds 01/03 each add seven cutoff/depletion events, and every O_H world still draws down storage in the final 3000 steps. Withholding long-mission default adoption is justified. [Original B02 records](../../runs/uav_persistent_service/b02_long_mission_a01/perworld.json)
+
+The constructive finding is unusually concrete. In all four depleted O_H worlds, seven stationary UAVs remain at station 1 throughout the final 3000 steps: **1179.43 W consumption against 1000 W charging capacity**, while station 0 occupancy is only **10.7-15.2%**. This configuration cannot maintain its collective charge. It does not establish why the configuration formed, or that moving members elsewhere can preserve service.
+
+That distinction should motivate a bounded **pre-return access and team reassignment** comparison, rather than leave the finding indefinitely as a caveat. The decision is which still-controllable members should move toward which existing station, early enough to avoid forced nearest-station return. Ordinary motion permits this before F/limp-home overrides; after depletion, the proposed freedom no longer exists. No new charger, privileged observation or modified F is needed merely to formulate it. [Actual action authority](../../envs/pettingzoo/relay/energy_aware.py#L1617)
+
+The strongest simple candidate is energy-deadline/load-aware ordinary reassignment, retaining **both P and as-executed O_H**. Prediction: it reduces persistent local overload and associated late failures **while retaining complete J/service benefit**. Legal transfers that reduce overload but sacrifice service would expose the tradeoff and defeat the useful-package prediction. Transfers prevented by guard/F would instead show that this implementation failed to provide the intended decision exposure. Neither outcome licenses automatic tuning.
+
+A complete illustrative comparison is three arms over eight H12000 worlds: **0 fits, 288,000 steps**, roughly **1.9 worker-CPU hours at the existing measured rates**, before additional planning costs. Engineering and service-preserving transfer feasibility remain unpriced. This is worth concrete design effort now; it is not yet a frozen run or a promised repair. The arrival-detector defect does not explain worlds 01/03 and should not be sold as this remedy.
+
+2. **Information value: this is evidence against the blanket complaint.**
+
+B02 followed a legal-information conjecture and found P_BS-H_BS **+398.17 J / +.08652 QoS**. B03 then bought a consequential distinction: S0_BS-H_BS was **+422.05 J / +.10724 QoS**, while P_BS-S0_BS was another **+132.79 J / +.03915 QoS**. Thus ordinary branch enablement helped, but did not explain the full construction's benefit. The published conclusion correctly promotes P_BS to the stronger **conditional performance comparator**. That is actual exploitation and explanatory progress. [B03 results](../../runs/uav_information_value/b03_anchor_content_a01/summary.json)
+
+P_BS is not supplied BS truth or central P. It computes `clip((station0 - .3*station1)/.7)` from already legal station records and the host's layout law. Jitter and clipping prevent exact recovery. The adverse reserve worlds remain real: B02 has an additional-reserve counterexample versus H, and B03 P-S0 adds seven terminal low-reserve members in four worlds. Keeping the frozen default restriction does not erase the performance result. [Construction](../../experiments/candidates/uav_information_value/b02/controller.py#L15)
+
+I support stopping further **unchanged anchor attribution**. Another panel would not presently change the already answered branch-versus-content judgment. The next constructive use is to carry P_BS into compatible planning/information comparisons, not repeatedly rediscover its advantage over H or demand a new explanation before using it. B03 already cost **288,000 steps and 2.67 worker-CPU hours**, excluding incompletely measured engineering/review work.
+
+3. **Message content: retain C, but a narrower constructive continuation merits formulation.**
+
+The new result is not "learning failed." C, H and L each improve their own J/service in all 32 evaluation worlds. C's learned decentralized motion/receiver gains **+.10176 mean per-tick J and +6.47 served users per tick**. Nevertheless, L-C is **-.02065 J / -1.36 users**, with 21/32 adverse J worlds; L also loses to H. L had substantial delayed-credit exposure and parameter updates. These are active adverse package results, not endpoint nonactivation. [Original readback](../../runs/uav_message_content/b01_s19431/reading.json)
+
+But replacing all seven interpretable fields with initially noisy latents asks the learner to recover an existing useful communication convention as well as improve it. B01 does not establish that this caused the loss. It does establish that the tested L package is materially different from **preserving C and learning an increment**.
+
+Root's suggested spare-coordinate comparison is therefore worth formulating: retain C's six informative scalars and compare a blank, a competent ordinary scalar such as visible-demand dispersion, and one learned private-history scalar under unchanged RR transport. The spare is **payload index 5, constant centroid-z; index 6 is count**. H's previous loss does not answer this comparison because H also changed other message contents. [Payload source](../../experiments/candidates/contention_aware_decentralized_communication/cadc_b01/channel.py#L9)
+
+Prediction: the learned increment improves complete J/service beyond both continued C and the ordinary scalar. An ordinary-scalar win would support useful additional content without a learned-encoding advantage; another active learned loss would weaken this specific constructive route. Exact preservation of existing packet fields is necessary, but does not guarantee the new scalar cannot disturb the receiver.
+
+Prefer a common retained C starting point with matched continuation exposure, explicitly reporting the inherited training. Three additional fits at the previous budget would be approximately **442,368 steps / 3072 updates**; the prior complete three-arm run took **658 seconds**, with implementation costs additional. This is a conditional continuation, not independent replication of C training. I do not recommend another unchanged full-replacement L block.
+
+**Richer Contracts**
+Explicitly richer assumptions or resources are legitimate research choices when they serve a stated UAV use case. They are not fixed-task algorithm gains.
+
+Known BS coordinates would remove an information restriction; an additional charging port would add capacity and, under this host, another **1000 W per allocated UAV**. These changes could reasonably improve performance. They must be declared prospectively, given to the competent comparison methods too, and evaluated with their resource consequences. A controller-by-contract comparison separates benefit supplied by the richer contract from the algorithm's increment within it. Enlarging batteries can extend finite endurance without establishing sustainable operation.
+
+Do not add information or hardware simply until a failed recipe wins. Conversely, do not preserve an artificial restriction merely because it belonged to earlier experiments. Claude's restoration work and existing pauses remain untouched.
+
+**Correction**
+The written method already permits conjecture-led targeted revision and explicitly rejects failure-count stopping. The needed change is its application, not another checklist or review layer: **use demonstrated capabilities as starting points for improvement, not only as stronger opponents**, and keep adoption, mechanism attribution and further-investment decisions separate. [Existing method](../../.agents/skills/hmasd-scientific-tools/SKILL.md#L118)
+
+My priorities are bounded design of pre-return access/reassignment, followed independently by preserved-geometry message augmentation. Neither needs a positive pilot or proof that the suspected limitation caused the previous loss. Both need an honest complete comparison and a real stopping consequence.
+
+**MATERIAL_DISSENT: yes**, with leaving these two constructive opportunities at an undifferentiated "no successor" allocation. I do **not** dispute the completed no-default/no-switch verdicts, support unchanged retries, or infer that either broader family will ultimately succeed.
 
 ### Claude peer answer
 
