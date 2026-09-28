@@ -1225,7 +1225,7 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 四个Codex DM的最终报告均为已收尾、无活动结果操作或待读证据；owner已归档的旧DM地址只作历史来源。
 有完整文档的已完成研究由新建DM接续，继承原始正面、不利和失败证据；不恢复旧会话，也不把归档当作问题被否定。
 
-**Owner 模型选择与方向重审（2026-09-27）：** Owner 已手动将新 DM2、DM3、DM4 切回 Astra Max，
+**历史模型选择与方向重审（2026-09-27，已收尾）：** Owner 已手动将新 DM2、DM3、DM4 切回 Astra Max，
 并要求三者重审各自方向。Root 核对逐轮记录：三个替代会话从首轮即为 Luna Max，
 旧 DM2/3/4、DM1 与 Root 已核查的轮次为 Astra Max；原始数据不因模型标签自动失效。
 本次重审针对新会话的实现、证据判读、创新贡献和后续投入，要求在原 NOTES 追加保留／更正／撤回及理由，
@@ -1233,7 +1233,7 @@ B18 已定位的即时路径是 NumPy `_clip` 的 TypeError 后异常清理与�
 Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`thinking="max"` 的重审请求；
 投递不等于重审完成，结论以各方向后续发表为准。未来创建独立 DM 必须显式传上述参数，
 并核对首轮实际模型／推理档位；线程数据库标签和角色文件不能替代实际运行记录。
-该选择已记入根 AGENTS；不新增会话、角色或逐批 Root 审批。
+该选择已记入根 AGENTS；当时的重审未新增会话、角色或逐批 Root 审批。上述三会话现已收尾，后继按本次owner决定新建。
 
 **本轮编号对齐（2026-09-27）：** 原生会话当前标题为DM2的是 `energy_relay_availability`，DM4是
 `energy_relay_diagnostics`；旧记录使用相反编号。以下路由以实际UUID和当前标题为准，
@@ -1243,6 +1243,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
 | 规划 HMASD 周期总结（当前Root） | `01a0e560-4333-7b03-8ff3-759a4add1d9a` / `local` | `/home/fires/hmasd-wsl` · `main` | Owner于2026-09-27 PDT指定本会话接任Root并更新全部当前Claude通信目标；负责已完成四DM的周期复盘、跨方向科学判断和后续研究计划。已读取上一Root及四DM最终报告；无须恢复旧DM或重启已收尾操作。新选后继由新建DM从完整文档接续，采用owner指定的Astra Max。前任Root与旧DM地址仅供历史定位；未决方法建议、暂停和冻结对象保持。Root仅协调，不成为逐批发表关口。[当前计划](#current-research-plan)。 |
+| DM：UAV临时覆盖交接规划 | `01a0e577-d190-70a1-9526-9d1765eab830` / `local` | `/home/fires/hmasd-wsl` · `main` | 新直接DM，负责`uav_transit_handoff`的具体算法与公平比较设计，继承B02/B04/B05完整证据；本轮只做设计并独立发表，不写实验实现、不启动训练／采集／评价或诊断重跑。创建请求`aa4726a0-4841-454e-834e-fde1ca973b09`曾返回outcome-unknown，已由实际会话及原生read/wait消歧，没有重复创建。首个实际turn `01a0e57b-0dcc-76e1-b72f-e5bd8841dd7a`的turn_context（2026-09-28 00:47:42 UTC）已核对为`gpt-6-astra`、`max`，不只是数据库标签；已实际读取宪章、DM职责和本轮计划。[科学范围与停止条件](#current-research-plan)。 |
 | DM3：UAV协作路径规划与MARL | `01a0e2e4-0d39-7cf3-98c0-f87dfb6e00b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：Owner要求的替代独立会话，手动Astra Max保持。已完成`energy_relay_imitation` B01/B02更正与后继`uav_cooperative_planning` B02完整结果／独立判读；当前两方向reserve，无活动worker／未读Pro／已选后继，较宽问题责任保留。旧`01a0e0f8-4e3f-70f1-802f-4bf4c2348221`仍归档，不重启旧操作或重复唤醒。未发App消息。创建接口曾返回outcome-unknown，已从实际独立会话消歧，无重复创建。[当前计划](#current-research-plan)、[完整B02与取舍](candidates/uav_cooperative_planning/NOTES.md#dm-disposition--end-b02-investment-and-reserve-the-broader-question)。 |
 | DM2 | `01a0e1e9-0fda-74c1-80c9-8b660eca0991` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：当前App标题DM2（旧文档DM4），继续负责`energy_relay_availability`，当前reserve。B03关闭，B04/B05全部原始输出已核验并独立判读；B05保留条件性评分收益与全部风险反例，未选后续实验。终态事件已消费、观察停止，无活动操作／未读Pro。B04仍被DM3使用；旧B02/B03实现退役及清理实测见NOTES。两份B04/B05源码snapshot共约3.20GB因GC进程检查拒绝仍留存，唯一必要raw保全，未称全部清理成功。旧DM4 `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190`仅供历史恢复；本次未发App消息或重启操作。[完整B05](candidates/energy_relay_availability/NOTES.md#2026-09-27--complete-native-b05-reading)、[审查、取舍与清理](candidates/energy_relay_availability/NOTES.md#2026-09-27--independent-b05-reading-and-dm-disposition)。 |
 | DM1：S7 普通学习基线 | `01a0e0ad-0710-71f3-8d9d-8012fe7b65b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：直接 DM，`energy_relay_baselines`；保留 D1，未执行 D4 后继现归 DM3；共同observer接口仍由`energy_relay_diagnostics`负责人（App DM4）负责。原生读取已核对启动及当前职责／方法读取；独立完成和发布，无自动 App 回复。[NOTES](candidates/energy_relay_baselines/NOTES.md)。 |
