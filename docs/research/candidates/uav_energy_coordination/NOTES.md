@@ -899,3 +899,147 @@ the already recorded preparation bytecode cleanup, B01 reclaimed **799,539,200
 bytes**. No cleanup blocker or redundant snapshot remains for this operation.
 Required unique raw evidence, compact records, native claim and published source
 identity remain; no backup chain or whole-tree retention was created.
+
+## 2026-09-28 - B02 selected: frozen I versus the existing P package
+
+Root has now selected the next observation recommended in the completed B01
+independent review: **I versus existing five_ten transit-hold P**, eight fresh
+common S2/H3000 worlds. The question is whether I earns reuse beyond another
+ordinary package with demonstrated usefulness, not whether recharge coordination
+or accurate anticipation causes an advantage. The prior applicable independent
+scientific review covers this choice; no duplicate review or new Pro gate is
+added. B01's positive I-H comparison, adverse C-I comparison, all reserve tails
+and full costs remain constraints. Current RESEARCH's ordinary-planning and B01
+background directly motivates the stronger comparator. The different-world
+radio-placement result mentioned by Root cannot rank these programs and supplies
+no reason to change this comparison or add an arm.
+
+### Exact programs and information
+
+I calls the unmodified `b01.controller.AnalyticalController("I", env, config)`
+from the B01 source `e663b53c7ea3f52983365ed9c3ce044bc4ccf699`. The controller and
+itinerary Git blobs remain `fa53cea6ae82bb65f101f1f78190b3c44ae45ada` and
+`2167405986ec9059703cd9516ca91f52842d8b0a`: 60-step actual replanning, incumbent
+comparison, simultaneous unilateral proposals, assembled-plan joint veto and
+fallback, unchanged 600-second analytical itinerary and all native feedback.
+No parameter, target library, energy formula, risk term or ordering is repaired.
+
+P calls `experiments.candidates.energy_relay_availability.b04.transit_hold.
+TransitHoldController(env)`, the original B04 five_ten controller published at
+`025350669bc5e8ab99fc71954f749ae47a6853e9`. B05 source
+`754d5d34d905a81b58b78e69ae85b8a07cb19aad` reuses it; its Git blob is still exactly
+`3750fff9b8109c213eab3e2fe8eec55d6160806d`. The common heuristic, observation,
+feedback and evaluator files also have no diff from that B04 version. The retired
+cooperative B02 source `9f72afd2223baccd9ed554b0ef86bcbe5277afb5` documented use of
+the same P, not a new optimizer to reconstruct. The read-only named Scout traced
+these identities and the nested cost; I checked the actual integration APIs.
+
+P preserves H1 central target assignment, continuation memory, vertical behavior
+and **10-step actual cadence**. Its candidate set is the all-move baseline plus
+one horizontal hold for each movable assigned member, at most nine plans. Any
+current F mode, legal return margin at/below the production entry threshold, or
+absence of a movable member triggers the original all-move fallback with no
+scorer calls. Active plans maximize `(q0 + 2*q5 + q10)/4`, with the original
+strict ordering and tie rules. Positions at5/10 are closed-form projections;
+there is no forecast `env.step`, energy propagation, charging schedule or return
+penalty in P's score. Production F still acts on every actual primitive step.
+
+Both receive current central user/BS xy only on their own replanning clocks and
+legal own observations each tick. P's scorer deep-copies the live environment,
+overwrites positions and batteries from those declared facts, resets association
+and geometry/communication caches, then uses native radio/routing/delivery.
+I's scorer installs declared facts into its separately reset fixed-config model.
+Thus cadence, model knowledge/construction, action choices and computational work
+are deliberately **not matched**. These are compatible complete native packages,
+not mechanism controls or an information-value decomposition. The source audit
+found neither identical controls nor a task incompatibility requiring a scope
+change; these concrete differences were returned to Root before integration.
+
+### Fixed comparison, cost and reading
+
+Batch `b02_i_vs_p_a01` has seeds **41092801..41092808**, ordered by seed and then
+I/P: **16 episodes, at most48,000 native team transitions, 0 fits/updates**. A
+repository search found no prior use of this block in source, notebooks or run
+JSON. These are new initialized worlds, not a refill or replay of B01. Native
+S2 physics/reward/guard/charging and H3000 termination remain unchanged. No C,
+extra panel, cadence matching, horizon search, policy repair or fit is selected.
+
+I has at most **58,800 score requests / 176,400 routing-service snapshots** for
+eight worlds. P has at most300 clocks/world. An active P clock uses one shared
+q0 plus two snapshots per candidate, at most **19**, including q0. Hence P's
+bound is **21,600 candidate-plan scores + 2,400 shared-q0 snapshots**, totaling
+**45,600 native service/routing snapshots** across eight worlds. Each snapshot
+calls native route construction once; combined snapshot bound is **222,000**.
+Fall-back clocks may use none. Both programs have **zero primitive forecast
+environment steps**; I has event/phase work, while P has closed-form projected
+positions and repeated environment deep copies. Those operations are not free
+because they are not fits or native transitions. Do not multiply P's5/10 labels
+into fictitious simulated steps or omit q0 from its cost.
+
+Record per-arm/controller wall, decision-tick wall, invocation/summed worker
+wall, worker/parent CPU and scoped peak RSS, native transitions, score requests,
+actual model evaluations, scorer/routing calls, P baseline/projection counts,
+I events/phases, input/trace bytes and all extra engineering/readback cost. I's
+27.6 and P's approximately28.8 worker-minutes for eight worlds are historical
+workload anchors from different contexts, not a runtime guarantee or cost match.
+Use the configured actual node with two workers and one numeric thread, subject
+to fresh runner-side admission. No synthetic runtime ceiling or extra fit
+allowance is inferred from the workload estimate.
+
+Primary signed comparison is **I-P** for full native J and QoS/step. Retain every
+world and all native reward components, delivered service, fixed1000-step bins,
+return costs, minimum battery, reserve/cutoff/depletion exposures and events,
+service gaps, input/consumed energy, feedback/guard behavior and computational
+cost. Pair initial-state, full exogenous-user trajectory and live RNG digests;
+only eight complete verified pairs receive descriptive t7 intervals. Missing or
+failed work is technical missingness, not a negative package result or permission
+to replace a seed. A failure stops new submissions while accepted pending work
+is collected; no automatic retry or continuation.
+
+Read gains and risk/compute separately; there is no new utility scalar pricing
+computation and no confirmation threshold. Positive average service/J with new
+cutoff/depletion, reserve exposure or worsened adverse tails does not establish
+default replacement or risk dominance. If I supplies useful native gains with
+an acceptable observed tradeoff, retain it as a conditional ordinary reference;
+P matching/winning can favor the simpler package. Mixed gains/risks or broad
+uncertainty can end the investment without expanding seeds or tuning. A mean
+from another panel is never subtracted to answer this comparison. No possible
+outcome identifies the contribution of recharge coordination by itself.
+
+### B02 L0: minimal adapters and two-arm collection
+
+Own only `experiments/candidates/uav_energy_coordination/b02/`, `run_b02.py`,
+matching `tests/experiments/candidates/uav_energy_coordination/b02/`, and existing
+direction records/scratch. A narrow exception within our owned B01 reader permits
+explicit arms/contrasts/interpretation arguments with unchanged B01 defaults;
+test that its original output is preserved. Do not edit either frozen controller,
+the itinerary, P's paths or any shared native code.
+
+A direction-local `FrozenController(arm, env, config)` forwards proposals/reset
+and exposes the base's targets/plan-input steps. It only reads existing counters
+and records wall time; no new score, environment step, RNG call, actor input or
+action modification. API: `decision_arrays()` for partial evidence,
+`validate_trace(length)` for complete decision arrays, `costs` for current known
+work, `close()` for the existing I scorer. P decision arrays reuse B05's existing
+serializer with `transit_` rather than `planner_` names, avoiding confusion with
+I's three-point itinerary arrays. Keep all P fallbacks/candidates/q0/q5/q10 and
+near-tie readings. I uses the existing decision validation. Actual source hashes
+and original identities go into config.
+
+The new entry requires native admission before runner effects, fixed seed block,
+source SHA, threads and job plan. Reuse the existing evaluator, production F,
+read-only native failure-preserving observer, bounded submission and manifest
+utilities. Retain native data and completed-clock/known cost after failures,
+mark unknown in-progress work, collect pending accepted jobs, and never retry.
+Raw evidence stays on the configured node; compact records are published.
+
+Focused checks: I/P adapters return the same native actions and seeded trajectories
+as their unwrapped originals on separate correctness fixtures, reset/clock/RNG
+and source identities, P q0-inclusive accounting/fallback bounds, two-arm complete
+pairing and adverse reads, default B01 reader regression, admission before effects,
+and partial-native/cost preservation. No study seed is used in checks or policy
+selection. Independent engineering review examines the adapter/counters and
+execution/readout contract; the scientific reviewer is not repeated for this
+unchanged selected question. Publish exact inputs before admission, retain the
+same native handle, and remain in this native turn for deterministic long waits
+because the detached queue cannot be assumed to resume an unloaded native child.
