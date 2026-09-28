@@ -1,0 +1,67 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_information_value/b01_sources_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_information_value/b01_sources_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_information_value/b01_sources_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3b04f97073db204000befdf183dd6ac54663624169342477f9d2da4249d059ca.json",
+  "direction": "uav_information_value",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790569540.254154,
+      "path": "/home/wu/projects/HMASD/runs/uav_information_value/b01_sources_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 857685,
+        "session_id": 857684,
+        "start_ticks": 91531707
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 857684,
+        "session_id": 857684,
+        "start_ticks": 91531704
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_information_value/b01_sources_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-28T04:25:51.522301Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3b04f97073db204000befdf183dd6ac54663624169342477f9d2da4249d059ca.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_information_value/b01_sources_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "ee9c6c8aca0ee13e3d7a02416ff4acf85766f274",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c2ee6692766a4a6fae25b99d93203cec"
+}

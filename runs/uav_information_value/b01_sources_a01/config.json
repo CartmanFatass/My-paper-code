@@ -1,0 +1,1153 @@
+{
+  "arms": {
+    "B": "pooled legal users/true BS",
+    "F": "true users/true BS; canonicalized",
+    "H_BS": "legal users/once-legally-seen static BS memory",
+    "L": "pooled legal users/legal BS",
+    "R": "original H_central",
+    "U": "true current users/legal BS"
+  },
+  "batch": "B01",
+  "common_h1": {
+    "controller_information": "legal-observation pooled central planner (station-1 ring search prior)",
+    "cruise_mps": 30.0,
+    "dedup_tolerance_m": 0.5,
+    "height_m": 100.0,
+    "horizontal_speed_mps": 30.0,
+    "information": "local",
+    "kmeans_iterations": 30,
+    "n_relay": 2,
+    "n_service": 6,
+    "n_uavs": 8,
+    "replan_period": 30,
+    "search_radius_m": 1000.0,
+    "switch_margin_m": 300.0,
+    "time_step_s": 1.0,
+    "unobserved": "station-ring",
+    "vertical_cap_mps": 5.0,
+    "vertical_speed_mps": 5.0
+  },
+  "direction": "uav_information_value",
+  "fits": 0,
+  "historical_local_identity": "not exact: original local merges in observer order before sorting",
+  "horizon": 3000,
+  "jobs": [
+    {
+      "arm": "L",
+      "job_key": "L/28100101",
+      "seed": 28100101
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100101",
+      "seed": 28100101
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100101",
+      "seed": 28100101
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100101",
+      "seed": 28100101
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100101",
+      "seed": 28100101
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100101",
+      "seed": 28100101
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100102",
+      "seed": 28100102
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100102",
+      "seed": 28100102
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100102",
+      "seed": 28100102
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100102",
+      "seed": 28100102
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100102",
+      "seed": 28100102
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100102",
+      "seed": 28100102
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100103",
+      "seed": 28100103
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100103",
+      "seed": 28100103
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100103",
+      "seed": 28100103
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100103",
+      "seed": 28100103
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100103",
+      "seed": 28100103
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100103",
+      "seed": 28100103
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100104",
+      "seed": 28100104
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100104",
+      "seed": 28100104
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100104",
+      "seed": 28100104
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100104",
+      "seed": 28100104
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100104",
+      "seed": 28100104
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100104",
+      "seed": 28100104
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100105",
+      "seed": 28100105
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100105",
+      "seed": 28100105
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100105",
+      "seed": 28100105
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100105",
+      "seed": 28100105
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100105",
+      "seed": 28100105
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100105",
+      "seed": 28100105
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100106",
+      "seed": 28100106
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100106",
+      "seed": 28100106
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100106",
+      "seed": 28100106
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100106",
+      "seed": 28100106
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100106",
+      "seed": 28100106
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100106",
+      "seed": 28100106
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100107",
+      "seed": 28100107
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100107",
+      "seed": 28100107
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100107",
+      "seed": 28100107
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100107",
+      "seed": 28100107
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100107",
+      "seed": 28100107
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100107",
+      "seed": 28100107
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100108",
+      "seed": 28100108
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100108",
+      "seed": 28100108
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100108",
+      "seed": 28100108
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100108",
+      "seed": 28100108
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100108",
+      "seed": 28100108
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100108",
+      "seed": 28100108
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100109",
+      "seed": 28100109
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100109",
+      "seed": 28100109
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100109",
+      "seed": 28100109
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100109",
+      "seed": 28100109
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100109",
+      "seed": 28100109
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100109",
+      "seed": 28100109
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100110",
+      "seed": 28100110
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100110",
+      "seed": 28100110
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100110",
+      "seed": 28100110
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100110",
+      "seed": 28100110
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100110",
+      "seed": 28100110
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100110",
+      "seed": 28100110
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100111",
+      "seed": 28100111
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100111",
+      "seed": 28100111
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100111",
+      "seed": 28100111
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100111",
+      "seed": 28100111
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100111",
+      "seed": 28100111
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100111",
+      "seed": 28100111
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100112",
+      "seed": 28100112
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100112",
+      "seed": 28100112
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100112",
+      "seed": 28100112
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100112",
+      "seed": 28100112
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100112",
+      "seed": 28100112
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100112",
+      "seed": 28100112
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100113",
+      "seed": 28100113
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100113",
+      "seed": 28100113
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100113",
+      "seed": 28100113
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100113",
+      "seed": 28100113
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100113",
+      "seed": 28100113
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100113",
+      "seed": 28100113
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100114",
+      "seed": 28100114
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100114",
+      "seed": 28100114
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100114",
+      "seed": 28100114
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100114",
+      "seed": 28100114
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100114",
+      "seed": 28100114
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100114",
+      "seed": 28100114
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100115",
+      "seed": 28100115
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100115",
+      "seed": 28100115
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100115",
+      "seed": 28100115
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100115",
+      "seed": 28100115
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100115",
+      "seed": 28100115
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100115",
+      "seed": 28100115
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100116",
+      "seed": 28100116
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100116",
+      "seed": 28100116
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100116",
+      "seed": 28100116
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100116",
+      "seed": 28100116
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100116",
+      "seed": 28100116
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100116",
+      "seed": 28100116
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100117",
+      "seed": 28100117
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100117",
+      "seed": 28100117
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100117",
+      "seed": 28100117
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100117",
+      "seed": 28100117
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100117",
+      "seed": 28100117
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100117",
+      "seed": 28100117
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100118",
+      "seed": 28100118
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100118",
+      "seed": 28100118
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100118",
+      "seed": 28100118
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100118",
+      "seed": 28100118
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100118",
+      "seed": 28100118
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100118",
+      "seed": 28100118
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100119",
+      "seed": 28100119
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100119",
+      "seed": 28100119
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100119",
+      "seed": 28100119
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100119",
+      "seed": 28100119
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100119",
+      "seed": 28100119
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100119",
+      "seed": 28100119
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100120",
+      "seed": 28100120
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100120",
+      "seed": 28100120
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100120",
+      "seed": 28100120
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100120",
+      "seed": 28100120
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100120",
+      "seed": 28100120
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100120",
+      "seed": 28100120
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100121",
+      "seed": 28100121
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100121",
+      "seed": 28100121
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100121",
+      "seed": 28100121
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100121",
+      "seed": 28100121
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100121",
+      "seed": 28100121
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100121",
+      "seed": 28100121
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100122",
+      "seed": 28100122
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100122",
+      "seed": 28100122
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100122",
+      "seed": 28100122
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100122",
+      "seed": 28100122
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100122",
+      "seed": 28100122
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100122",
+      "seed": 28100122
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100123",
+      "seed": 28100123
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100123",
+      "seed": 28100123
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100123",
+      "seed": 28100123
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100123",
+      "seed": 28100123
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100123",
+      "seed": 28100123
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100123",
+      "seed": 28100123
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100124",
+      "seed": 28100124
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100124",
+      "seed": 28100124
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100124",
+      "seed": 28100124
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100124",
+      "seed": 28100124
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100124",
+      "seed": 28100124
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100124",
+      "seed": 28100124
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100125",
+      "seed": 28100125
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100125",
+      "seed": 28100125
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100125",
+      "seed": 28100125
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100125",
+      "seed": 28100125
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100125",
+      "seed": 28100125
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100125",
+      "seed": 28100125
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100126",
+      "seed": 28100126
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100126",
+      "seed": 28100126
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100126",
+      "seed": 28100126
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100126",
+      "seed": 28100126
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100126",
+      "seed": 28100126
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100126",
+      "seed": 28100126
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100127",
+      "seed": 28100127
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100127",
+      "seed": 28100127
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100127",
+      "seed": 28100127
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100127",
+      "seed": 28100127
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100127",
+      "seed": 28100127
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100127",
+      "seed": 28100127
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100128",
+      "seed": 28100128
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100128",
+      "seed": 28100128
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100128",
+      "seed": 28100128
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100128",
+      "seed": 28100128
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100128",
+      "seed": 28100128
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100128",
+      "seed": 28100128
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100129",
+      "seed": 28100129
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100129",
+      "seed": 28100129
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100129",
+      "seed": 28100129
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100129",
+      "seed": 28100129
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100129",
+      "seed": 28100129
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100129",
+      "seed": 28100129
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100130",
+      "seed": 28100130
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100130",
+      "seed": 28100130
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100130",
+      "seed": 28100130
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100130",
+      "seed": 28100130
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100130",
+      "seed": 28100130
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100130",
+      "seed": 28100130
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100131",
+      "seed": 28100131
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100131",
+      "seed": 28100131
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100131",
+      "seed": 28100131
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100131",
+      "seed": 28100131
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100131",
+      "seed": 28100131
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100131",
+      "seed": 28100131
+    },
+    {
+      "arm": "L",
+      "job_key": "L/28100132",
+      "seed": 28100132
+    },
+    {
+      "arm": "U",
+      "job_key": "U/28100132",
+      "seed": 28100132
+    },
+    {
+      "arm": "B",
+      "job_key": "B/28100132",
+      "seed": 28100132
+    },
+    {
+      "arm": "F",
+      "job_key": "F/28100132",
+      "seed": 28100132
+    },
+    {
+      "arm": "R",
+      "job_key": "R/28100132",
+      "seed": 28100132
+    },
+    {
+      "arm": "H_BS",
+      "job_key": "H_BS/28100132",
+      "seed": 28100132
+    }
+  ],
+  "launch_sha": "ee9c6c8aca0ee13e3d7a02416ff4acf85766f274",
+  "max_transitions": 576000,
+  "observation_layout": {
+    "fields": {
+      "bs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hmax",
+        "visibility_flag"
+      ],
+      "energy_stations": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "dist3d/map_diag3d",
+        "capacity_ratio",
+        "available_ratio",
+        "queue_len/n_uavs",
+        "valid"
+      ],
+      "energy_uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "rel_z/hspan",
+        "battery_ratio",
+        "charging",
+        "available",
+        "returning(limp_home or dock_request)",
+        "load=connections/n_users",
+        "dock_request",
+        "target_station/(n_stations-1) or -1",
+        "charging_wait_steps/max_steps",
+        "return_threshold_ratio",
+        "return_energy_margin"
+      ],
+      "nearest_uav": [
+        "dist/area",
+        "rel_x/area",
+        "rel_y/area"
+      ],
+      "overloaded": [
+        "rel_x/area",
+        "rel_y/area",
+        "load/max_connections"
+      ],
+      "own": [
+        "x/area",
+        "y/area",
+        "(z-hmin)/hspan"
+      ],
+      "self_state": [
+        "connected_users/max_connections",
+        "has_backhaul",
+        "hops/max_hops",
+        "nearest_bs_rel_x/area",
+        "nearest_bs_rel_y/area"
+      ],
+      "step": [
+        "current_step/max_steps"
+      ],
+      "uavs": [
+        "rel_x/area",
+        "rel_y/area",
+        "(rel_z-hmin)/hspan",
+        "clip((sinr_db+10)/50,0,1)"
+      ],
+      "users": [
+        "rel_x/area",
+        "rel_y/area",
+        "clip((sinr_db+10)/50,0,1)",
+        "connected_to_self",
+        "serviced_by_any",
+        "serving_set_len/serving_set_size"
+      ]
+    },
+    "offsets": {
+      "bs": [
+        223,
+        235
+      ],
+      "dim": [
+        0,
+        365
+      ],
+      "energy_stations": [
+        349,
+        365
+      ],
+      "energy_uavs": [
+        245,
+        349
+      ],
+      "nearest_uav": [
+        3,
+        6
+      ],
+      "overloaded": [
+        235,
+        244
+      ],
+      "own": [
+        0,
+        3
+      ],
+      "self_state": [
+        6,
+        11
+      ],
+      "step": [
+        244,
+        245
+      ],
+      "uavs": [
+        191,
+        223
+      ],
+      "users": [
+        11,
+        191
+      ]
+    },
+    "parameters": {
+      "area_size_m": 8000.0,
+      "bs_fields": 4,
+      "bs_slots": 3,
+      "energy_station_fields": 8,
+      "energy_station_records": 2,
+      "energy_uav_fields": 13,
+      "energy_uav_records": 8,
+      "height_max_m": 200.0,
+      "height_min_m": 50.0,
+      "max_connections": 25,
+      "max_hops": 5,
+      "max_steps": 3000,
+      "n_uavs": 8,
+      "n_users": 30,
+      "observation_radius_m": 1500.0,
+      "overloaded_fields": 3,
+      "overloaded_slots": 3,
+      "self_state_fields": 5,
+      "serving_set_size": 3,
+      "uav_fields": 4,
+      "uav_slots": 8,
+      "user_fields": 6,
+      "user_slots": 30
+    }
+  },
+  "optimizer_updates": 0,
+  "pairing": "common initial seeds, not identical closed-loop trajectories",
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "threads": 1,
+  "trace_timing": "Row t of own_xyz, return_margin, nearest_station, nearest_station_distance_m, station_occupancy, station_queue and target_xy is decoded from the legal observation the controller and shield act on at step t (decision time, same as mode/entered/exited). charging, waiting_steps and battery row t are decoded from the post-step observation (t+1), so station_occupancy[t].sum() pairs with charging[t-1].sum(). guard_checked/guard_blocked row t count the guard actions of step t.",
+  "user_preprocessing": "all point-set arms sort raw xy hits, then greedy merge within 0.5m",
+  "workers": 4
+}

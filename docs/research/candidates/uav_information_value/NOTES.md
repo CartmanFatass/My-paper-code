@@ -483,3 +483,255 @@ unrepaired; current input and native snapshot preparation succeeded. A first
 two-context-line control patch was refused with no change, then applied using
 explicit zero-context allowance; only this published direction row was added.
 These were prelaunch preparation events, not failed scientific episodes.
+
+At the first checkpoint (03:49 UTC read), the same native operation remained
+running with consistent process identities and zero observer probe errors.
+The automatic Codex wake was **not delivered**: queue exited 1 with
+`direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)`.
+No delivery to Root is inferred. The checkpoint was consumed and the same job
+rearmed as generation 2; the worker was not restarted. Under Root's explicit
+continuation, this child stays active through long deterministic waits, then
+drains the existing observer. This is an observation-routing limitation, not a
+scientific failure or permission to substitute an operation/address.
+
+### 2026-09-28 - B01 complete: useful BS information, partial legal-memory recovery
+
+The same operation exited **0 at 04:25:40 UTC**; native runner/supervisor were
+absent with a valid exit witness and consistent identities. Generation 2's second
+checkpoint was consumed/rearmed to generation 3 without restarting the worker.
+Generation 3 observed READY at 04:25:51; its automatic queue had the same native-
+child delivery rejection, so this active child drained it after its long wait.
+READY was consumed, generation 4 had no live job, and observation was stopped.
+
+**Complete evidence, not a partial-panel inference.** All 192 declared worlds
+completed exactly H3000 by native truncation: 576,000 transitions, 0 fits and
+optimizer updates, no failed/cancelled/unreconciled/unstarted cells, partial
+transitions, orphan traces, pool errors or missing resource rows. On the node the
+DM verified every one of the 387 manifest-listed files by size/SHA256, loaded all
+192 raw traces, and exactly recomputed each native metric sum/mean and J, finite
+values, terminal flags, 3,000-step lengths, 100 replan indices and memory-use
+counts. Rebuilding the full summary from collected per-world rows was exactly
+equal to the stored readout. The 32 seeds are now exposed development worlds.
+Intentional null first-BS times mean no legal sighting, not lost instrumentation.
+
+Primary evidence: [summary](../../../../runs/uav_information_value/b01_sources_a01/summary.json),
+[all per-world readings](../../../../runs/uav_information_value/b01_sources_a01/perworld.json),
+[frozen configuration](../../../../runs/uav_information_value/b01_sources_a01/config.json),
+[manifest](../../../../runs/uav_information_value/b01_sources_a01/manifest.json),
+[native exit](../../../../runs/uav_information_value/b01_sources_a01/process-exit.json) and
+[terminal status](../../../../runs/uav_information_value/b01_sources_a01/terminal-status.json).
+The manifest SHA256 is
+`6903b1a2c692929f51b8a8e5c9ab6bfd0647a76bc60d3c12c97d791aa08a90bc`.
+Its 384 raw/progress entries total 70,839,779 bytes; listed scientific artifacts
+total 72,334,104 bytes. No raw trace copy was downloaded to the author checkout.
+
+Native acceptance-to-exit elapsed was 3,796.25s (63.27 minutes); measured batch
+wall after imports was 3,710.70s (61.84 minutes). Four single-numeric-thread workers
+used 15,106.73 CPU seconds in total and 14,777.87 summed worker-wall seconds;
+parent CPU was 5.82s. Largest individual worker peak RSS was 510,292 KiB, parent
+peak 481,820 KiB, not simultaneous aggregate peaks. The six programs made 19,200
+ordinary plans, 3,200 each. Engineering/tests, preparation, readback and scientific
+review are additional cost; no speed claim treats those costs as zero.
+
+All values below are over the same 32 initial worlds. The return cost is the
+native capped cost per step; raw cost and every tail remain in the original files.
+
+| Program | Mean QoS/step | Mean J | Mean return cost/step | Worst battery ratio | Zero-service worlds |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| L | .576575 | 1550.602 | .024768 | .049753 | 1 |
+| U | .597252 | 1596.862 | .027392 | .058970 | 1 |
+| B | .734801 | 2154.360 | .003257 | .085710 | 0 |
+| F | .771381 | 2220.701 | .010484 | .064841 | 0 |
+| R | .780957 | 2288.452 | .003980 | .075393 | 0 |
+| H_BS | .619966 | 1691.075 | .023051 | .049753 | 1 |
+
+The intervals are nominal paired t95 over world seeds, exploratory with no
+multiplicity adjustment. Signs include ties rather than dropping them.
+
+| Contrast | Mean delta QoS [t95] | QoS + / - / = | Mean delta J [t95] | J + / - / = |
+| --- | --- | --- | --- | --- |
+| U-L | +.020677 [-.019708, .061061] | 19 / 12 / 1 | +46.260 [-130.446, 222.965] | 18 / 14 / 0 |
+| F-B | +.036580 [.021379, .051781] | 25 / 7 / 0 | +66.341 [-10.573, 143.254] | 22 / 10 / 0 |
+| B-L | +.158226 [.097286, .219166] | 24 / 8 / 0 | +603.758 [385.308, 822.207] | 25 / 7 / 0 |
+| F-U | +.174130 [.113813, .234446] | 28 / 4 / 0 | +623.839 [439.993, 807.685] | 28 / 4 / 0 |
+| F-U-B+L | +.015903 [-.026943, .058750] | 19 / 13 / 0 | +20.081 [-165.237, 205.399] | 19 / 13 / 0 |
+| F-L | +.194806 [.136315, .253297] | 29 / 3 / 0 | +670.098 [467.174, 873.023] | 27 / 5 / 0 |
+| R-F | +.009576 [-.004573, .023724] | 19 / 13 / 0 | +67.752 [2.573, 132.930] | 20 / 12 / 0 |
+| R-L | +.204382 [.146314, .262450] | 32 / 0 / 0 | +737.850 [532.831, 942.869] | 32 / 0 / 0 |
+| H_BS-L | +.043391 [.004796, .081986] | 8 / 4 / 20 | +140.473 [14.795, 266.151] | 8 / 4 / 20 |
+
+**Information and package reading.** Under this one ordinary fixed program, true
+BS coordinates have a large mean service/J consequence at either user-source
+setting. User truth alone has a much smaller, uncertain mean consequence at
+current-legal BS; given true BS it adds service, but its J interval crosses zero.
+This shifts the working explanation away from a generic missing-current-user
+encoder and toward BS knowledge as an important actionable input for H1. It does
+not identify the old gap's causal percentage, an optimal-information bound, or
+the best use of either signal. The interaction is retained and unresolved; a
+crossing interval is not proof of additivity or no complementarity. R-F's small
+service mean is not equivalence, and its J mean/tails keep package behavior
+scientifically relevant. R-L is the explicitly revised package contrast, not a
+replication of historical H_central minus historical H_local.
+
+**Legal retention has native value but no universal improvement.** L and H_BS
+first legally see a BS in the same 15 worlds; 17 never see one. Three sighted
+worlds never require retention at a replan, leaving 12 active worlds and 761
+memory-used replans. H_BS has zero known-BS omission plans, versus L's mean
+27.09375, but it changes later visibility and deployment as well. All 20 inactive
+worlds tie exactly on QoS/J. Among the 12 active worlds eight improve both and
+four lose both. This is a legal-history recovery result, not a learned memory
+result; conditioning on activation does not create a new randomized estimand.
+No signal was invented for never-seen BSs. Mean legal user supply in L is 20.838
+of the 30 true users at replans, while full-source programs receive all 30;
+these cross-program coverage diagnostics are also trajectory-dependent.
+
+The four memory-loss worlds are all preserved: 28100106 (-.026879 QoS/-83.522 J),
+28100109 (-.010899/-30.958), 28100118 (-.009548/-23.529), and 28100119
+(-.079119/-239.574). Best memory gain is 28100122 (+.329043/+1318.098).
+Mean memory return-cost change is -.001717 [-.005351, .001917]: seven decreases,
+five increases, twenty ties. World 28100101 gains .287287 service yet raises
+return cost .010799 and lowers minimum battery .006660. Thus an overall positive
+mean is not uniformly safer service. L/H_BS's worst battery remains .049753 in
+28100107 and maximum mean return cost .118735. All six arms have zero cutoff and
+depletion events, which does not erase these return risks or prove physical safety.
+
+The never-seen world 28100126 remains zero-service for L, U and H_BS. B/F/R yield
+.665413/.662419/.678173 there; their respective J values are 1961.007/1487.436/
+2002.081, so even similar service masks a substantial risk/objective difference.
+For F-B, 28100120 gains .012628 service but loses 508.092 J while return cost
+rises .090995. For U-L, 28100113 loses .285854 service and 1185.661 J. Every
+other loss and every risk minimum remains available, unfiltered, in the linked
+per-world records and by-seed contrasts. None is selected for an automatic repair.
+
+Initial DM investment reading: retain H_BS as a stronger ordinary legal-memory
+comparator, not as a guaranteed deployed improvement. This complete empirical
+study does not require a neural module to count as useful understanding. Do not
+append anonymous-user tracking, another panel or a generic encoder to B01. Lawful
+BS acquisition or belief from public station priors is a consequential remaining
+question, but current RESEARCH assigns active sensing with ordinary memory/priors
+to another native DM; return that implication to Root rather than duplicate it.
+An independent context-isolated ResearchCritic is reading the complete original
+record before the final route disposition. Published controller/canonicalization,
+readout helpers and `batch.effective_config` have live active-sensing consumers
+and therefore remain maintained; no peer file or accepted source is changed.
+
+### 2026-09-28 - Independent result reading and bounded next question
+
+The context-isolated registered ResearchCritic `read_b01` reconstructed the
+published source, original benchmark/SET and availability evidence, configuration,
+native completion record and all per-world results before reading the prior
+selection advice or the DM's proposed disposition. It independently recomputed
+all 36 contrast means/SDs for QoS, J/step, return cost and minimum battery from the
+192 rows (maximum summary difference below 6e-17) and verified local artifact
+hashes. It did not repeat the DM's remote NPZ audit. Its reported J deltas were
+normalized per step; the preceding table uses total native J, exactly 3,000 times
+those deltas. Review conclusion: **MATERIAL_DISSENT: no** on conditional publication,
+retaining H_BS as an ordinary comparator and ending B01, with no new investment
+automatically authorized.
+
+The review strengthens the BS-anchor reading but keeps ordinary controller
+competence as the strongest unresolved alternative. H1 was selected centrally,
+not optimized as a legal-information policy, and its missing-BS branch removes
+relay targets. Supplying a BS coordinate changes a consequential program choice;
+the comparison establishes usefulness for this program, not the best possible
+use of legal information. F-L remaining large means package ordering alone does
+not explain this panel's mean R-L service difference, but absent historical
+H_local prevents estimating canonicalization's effect on that controller or a
+causal fraction of the old gap. The interaction cannot establish that users help
+only with true BS, and R-F remains relevant, particularly for J.
+
+One additional descriptive reading was independently checked by the DM: in the
+12 memory-active worlds, B and H_BS differ by at most 3.908e-6 in QoS/step and
+3.902e-6 in J/step. On the 17 never-seen H_BS trajectories, mean B-H_BS is
+.219475 QoS/step and .294013 J/step. These are post-policy groups, not separately
+randomized effects or attainable acquisition bounds. They do not authorize
+selecting those 17 worlds for another evaluation. All four memory-active losses
+remain losses. Eliminating omissions was an implementation implication; improved
+complete service received qualified empirical support, not universal confirmation.
+No moving-user memory, anonymous association or learned representation was tested.
+
+The older adverse evidence remains applicable. SET's .437/.438 development
+endpoint was one resumed lineage with privileged inputs, so its ordinary-control
+shortfall cannot diagnose missing information or inability to learn memory.
+Availability B02's zero-lag intervention had QoS delta -.01317
+[-.04895, .02261]; a generic faster-refresh repair has weak motivation. B01's
+32 worlds are fixed-program evaluation units, not independent learning runs.
+
+**Scope correction to the preceding preliminary next-action paragraph:** the
+other active-sensing study's [selected contract](../uav_active_sensing/NOTES.md#policy-family-and-exact-implementation-choices)
+requires a known legal BS and 6-29 current users before scouting, and explicitly
+excludes initial BS discovery. Thus it does not currently answer the 17
+never-seen cases. No peer experiment or ownership was changed by this finding.
+
+The critic's strongest feasible next comparison is a fixed ordinary BS estimate
+from already legal station coordinates against H_BS, rather than a generic user
+tracker or encoder. The source generator places station 0 around
+`.7 * BS + .3 * initial_user_mean` and station 1 around `initial_user_mean`.
+Therefore `(station0 - .3 * station1) / .7` is a concrete noisy estimate, not
+exact reconstruction: independent per-axis jitter up to 960 m, clipping and
+minimum-separation rejection matter. Even the unclipped coordinate-wise error
+bound is 1,782.86 m; projection is not posterior calibration. A prospective
+ordinary fallback could freeze a projected estimate at reset, keep inferred
+coordinates distinct from observed memory, and give genuine legal sightings
+priority, with no actor access to hidden truth or initial true user mean.
+
+The suggested complete comparison is **32 fresh paired S2/H3000 worlds, 64
+episodes, 192,000 transitions, zero fits**, unchanged planner/action rules, shield
+and native service/J/risk. The fixed B01 rate suggests roughly 20-25 node minutes
+before contention and overhead, with engineering/review/readback additional.
+There is no prerequisite accuracy study or repeated factorial panel. A complete
+J/service improvement with acceptable observed risk would strengthen ordinary
+legal inference as the next baseline; better estimates or sightings without
+native benefit would weaken this particular use. A loss rejects the tested
+fallback package, not all inference or acquisition. An imprecise result need not
+buy a larger panel. No numerical risk acceptance criterion, source, new seed set
+or run is declared here: this is a recommendation for Root's next task choice.
+
+DM disposition: accept this diagnosis and recommendation. **End B01 with its
+complete conditional empirical result, retain the ordinary H_BS comparator and
+do not append another arm, panel, fit or rescue.** The broad actionable-information
+question remains open, especially initial BS inference/acquisition and better
+ordinary use of legal inputs. Return that concrete next comparison to Root for
+cross-question allocation; there is no active producer, hidden approval gate or
+recurring check. The direction is idle/reserve until a concrete next assignment.
+
+### 2026-09-28 - Durable evidence and measured retirement
+
+After terminal reconciliation and full readback, moved the sole raw/progress
+directory from the shared sparse checkout to the durable configured-node path
+`wsl_4070:/home/wu/hmasd-artifacts/uav_information_value/b01_sources_a01/raw/`.
+The original manifest remains unchanged: resolve its `raw/...` entries relative
+to `/home/wu/hmasd-artifacts/uav_information_value/b01_sources_a01/`, rather than
+the old run root. All 384 entries were rechecked there against original bytes and
+SHA256, totaling 70,839,779 file bytes (72,024,064 allocated); the old raw path is
+absent and no second raw copy exists. This move preserves the unique scientific
+evidence outside sparse-checkout cleanup, and is **not** space reclamation.
+Compact original configuration, per-world/summary/manifest and native statuses
+are published under the original `runs/` path. The node's original zero-byte
+stdout/stderr and acceptance/exit/control records remain with the operation.
+
+The exact-target snapshot collector first refused its ordinary process scan
+because `/proc/660/cwd` was unreadable. Its supported `--sudo-process-scan`
+preview then verified terminal identities, no process references, clean snapshot
+and durable Git reachability through `refs/remotes/origin/HEAD`. Applying the
+collector to only `c2ee6692766a4a6fae25b99d93203cec` removed that accepted snapshot.
+Its allocated size fell from 799,076,352 bytes to zero; actual path absence was
+checked. The older remote Git GC bad-tree warning recorded at preparation was
+not repaired; it did not block this collector, and no snapshot target remains.
+
+Local consumer inspection found active-sensing imports of `controllers`,
+`readout` and `batch.effective_config`, including tests. These useful published
+source modules and their tests remain; no blanket implementation deletion was
+attempted. With the deterministic observer stopped and the critic returned,
+removed only these generated/rebuildable owned paths and verified absence:
+
+- `experiments/candidates/uav_information_value/__pycache__/`: 40,960 to 0 bytes.
+- `tests/experiments/candidates/uav_information_value/__pycache__/`: 45,056 to 0.
+- `temp/directions/uav_information_value/` (used node-control patch and observer
+  request): 12,288 to 0.
+
+Net allocated space reclaimed across the exact remote/local deleted targets is
+**799,174,656 bytes**: 799,076,352 remote and 98,304 local. This is working-tree
+allocation reduction, not a claim about Git object-store or filesystem capacity.
+No required evidence was discarded, no backup package was made, and no cleanup
+tool blocker or accepted operation remains for B01.
