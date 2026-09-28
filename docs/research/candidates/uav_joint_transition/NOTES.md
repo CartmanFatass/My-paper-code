@@ -525,3 +525,29 @@ one verified durable direction/tag copy outside the shared sparse checkout,
 compact source/status/results in Git, and reclaim the exact finished snapshot.
 Native-child observation uses the same accepted handle with long deterministic
 waits and drain/rearm; no App queue return is assumed.
+
+### First accepted operation
+
+Exact inputs `18c9a6ba5094a19479eedc43977202877eb199d3` were published and
+verified at `origin/main` before the first request. Remote canonical control
+synchronization inserted only this direction's row and preserved the existing
+other-direction edits. Two `git apply --check` attempts rejected an underspecified
+patch before any edit; adding the existing trailing row as context applied the
+same one-row insertion. No result request or exposure occurred in those checks.
+
+The configured supervisor accepted the launcher command and the native kernel
+separately admitted the child at 2026-09-28T16:47:50Z. The original
+[manifest](../../../../runs/uav_joint_transition/b01_joint_paths_a01/launch-manifest.json)
+is the authoritative source/command/native-process/operation reference. The
+[fresh admission](../../../../runs/uav_joint_transition/b01_joint_paths_a01/admission-preflight.json)
+passed with 13,312,278,528 effective available bytes against the 4 GiB floor.
+Training reports one started result fit, policy seed 62092871 and SB3 2.6.0;
+that is technical progress, not a scientifically read result.
+
+The detached observer registered generation 1 under this native child's actual
+runtime `01a0e8b8-c743-7be1-a3a1-59acbd413a32`, job `b01_joint_paths_a01`, with
+60-second status probes and a 1500-second checkpoint. First drain confirmed
+accepted consistent records, matching live runner/supervisor identities and
+no terminal witness. Observation remains on this one original handle; long
+deterministic waits and same-generation drain/rearm do not restart the worker.
+Collection, independent reading, scientific disposition and cleanup remain.

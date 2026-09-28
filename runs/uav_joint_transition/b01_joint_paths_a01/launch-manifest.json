@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-28T16:47:50.638865Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8864a6faa3604f989586c6928ae0f2a6/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8864a6faa3604f989586c6928ae0f2a6/experiments/candidates/uav_joint_transition/run_b01.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01",
+    "--seed",
+    "62092801",
+    "--launch-sha",
+    "18c9a6ba5094a19479eedc43977202877eb199d3",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "claim_key": "2228194b96f9bc2d25fad6624a65d85a2e5b62ddfa31228459b4bc2233827110",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/2228194b96f9bc2d25fad6624a65d85a2e5b62ddfa31228459b4bc2233827110.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8864a6faa3604f989586c6928ae0f2a6/experiments/candidates/uav_joint_transition/run_b01.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01",
+    "--seed",
+    "62092801",
+    "--launch-sha",
+    "18c9a6ba5094a19479eedc43977202877eb199d3",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "command_sha256": "bba5a14818c0ca23f167ac9303958eed9dccb620a6ed68f01e443c7398449e5a",
+  "control_observation": {
+    "observed_at": "2026-09-28T16:47:50.513114Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "18c9a6ba5094a19479eedc43977202877eb199d3"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-28T16:47:50.522631Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8864a6faa3604f989586c6928ae0f2a6",
+  "direction": "uav_joint_transition",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_joint_transition/run_b01.py",
+    "--seed",
+    "62092801",
+    "--launch-sha",
+    "18c9a6ba5094a19479eedc43977202877eb199d3",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/2228194b96f9bc2d25fad6624a65d85a2e5b62ddfa31228459b4bc2233827110.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 934414,
+      "session_id": 934414,
+      "start_ticks": 96180428
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 934414,
+    "process_group_id": 934414
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 934415,
+      "session_id": 934414,
+      "start_ticks": 96180430
+    },
+    "pid": 934415,
+    "process_group_id": 934414,
+    "supervisor_pid": 934414
+  },
+  "schema_version": 1,
+  "sha": "18c9a6ba5094a19479eedc43977202877eb199d3",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8864a6faa3604f989586c6928ae0f2a6",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01/stdout.log"
+}
