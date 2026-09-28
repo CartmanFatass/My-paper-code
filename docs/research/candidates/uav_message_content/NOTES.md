@@ -432,3 +432,49 @@ child active through same-handle observation, complete reading and publication. 
 further Root acknowledgment or selection review is due for unchanged execution.
 Meaning-changing findings return through the native parent. Independent interpretation
 at the actual material result boundary remains distinct from this selection review.
+
+## 2026-09-28 - B01 engineering accepted; exact inputs ready for admission
+
+The registered Implementer produced only the direction-owned B01 package and matching
+tests. DM read the full implementation against the selected contract. The independent
+engineering Reviewer `/root/dm_message_content/review_content_b01` then reconstructed
+the information, likelihood, replay, RNG, evaluation and admission paths and returned
+**no material correctness finding**. This is an engineering acceptance, not evidence
+that useful content is learnable or that a full native batch will complete.
+
+The reviewer independently checked tanh density against `torch.distributions.Normal`
+plus the direct Jacobian, the pre-tanh Gaussian entropy and terminal masks, zero
+inactive content gradients, and exactly seven content-stream normal draws per accepted
+L send. Its eight synthetic/control tests passed with the native test deselected.
+The Implementer's initial nine-test suite had passed, including one separately seeded
+technical native environment step (master 99123), not an H256 result episode or fit.
+No result-bearing training, evaluation or checkpoint selection has occurred.
+
+Three low-impact follow-ups are accepted after DM inspection: `pending_after_send`
+explicitly names the post-enqueue trace while `actor_input` retains pre-send pending;
+the batch records process CPU-time delta and Linux process-lifetime peak RSS; and a
+new synthetic regression changes the content head after collection, forbids replay
+samplers, checks every replay actor input against stored behavior observations and
+checks that the current content density is still recomputed. The follow-up suite
+passed **9 tests, 1 native test deselected**, adding zero native steps. Synthetic
+optimizer calls are correctness-test work, not the three scientific fits. Test scratch
+was removed by the existing pytest lifecycle; the reported follow-up path
+`temp/directions/uav_message_content/test/content-followup-20260928-a0e560` is absent.
+
+The reset-scene identity field hashes the actual float32 reset observation/global-state
+projection. The native reset reconstructs its RNG from the named physical seed; together
+these support the declared pairing. This check is not an assertion of native float64
+byte identity. Saved per-tick service, Q and physical/net rewards support reconstruction
+of the declared outcomes and reward identity; full connection/SINR matrices are not
+retained. The code does not re-encode old messages during PPO, and no receiver is frozen.
+
+Selected execution remains sequential C/H/L on the preferred configured `wsl_4070`
+CPU interpreter, 3 fits / 442,368 team steps / 3,072 updates, with no pilot, fourth arm
+or automatic retry. Its canonical checkout has existing unrelated dirty control/run
+files. Preserve every existing hunk: fetch the published source, add only this new
+direction's active control row under `.git/hmasd-main-writer.lock`, then use the normal
+immutable snapshot launcher and fresh actual-node admission. No sparse-selection change
+or whole-checkout reset/pull is required. This native child's observer identity is
+`01a0e98a-2ec9-7400-aa22-ce21611bc16d`; keep the same accepted launch and observer through
+complete collection and scientific reading. Exact operation metadata belongs in the
+native manifest and the following notebook entry, not an invented acceptance claim.
