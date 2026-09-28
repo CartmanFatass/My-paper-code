@@ -19,3 +19,23 @@ direct traffic is black-holed; Chrome does not apply the shell's proxy variables
 Owner authority: 2026-09-15 lifting of the control-plane restriction (any file, traceable in Git,
 documented here) and 2026-09-27 permission to modify the Jev-related tooling. No science, no send
 semantics, no send_attempted boundary changed; a running Chrome is never restarted by this change.
+
+## Addendum (same day): the stall was the keyring prompt, not the proxy
+
+Net log of a throwaway profile: the navigation request reached `COMPUTED_PRIVACY_MODE` and never
+sent (no request arrived at a logging loopback server), while cookie-less background fetches
+completed. The user journal shows `gcr-prompter` starting a keyring password prompt at the moment
+the driver's Chrome started; this boot runs a D-Bus session bus and `gnome-keyring-daemon
+--components=secrets`, which the previous boots did not expose to Chrome. Chrome auto-selected
+the keyring, waited headless for the unlock, and every cookie-bearing request stalled. Throwaway
+profiles with `--password-store=basic`, or with `DBUS_SESSION_BUS_ADDRESS` unset, loaded pages at
+once (`Example Domain`; the loopback GET arrived). The "Failed to decrypt token" line in
+`chrome.log` (17:16 today, first after the reboot) is the same key-store switch seen from the
+other side: the profile's stored secrets were written with the basic store.
+
+- `tools/pro_transport/jev_send.py`: `chrome_start` always passes `--password-store=basic`.
+- The proxy claim above ("Chrome does not apply the shell's proxy variables") was not established;
+  the explicit `--proxy-server` flag is kept because the direct route is black-holed and the flag
+  removes the dependence on Chrome's environment detection. Sandbox-disabling diagnostics were
+  not run (auto-mode classifier denial, reported to the owner).
+

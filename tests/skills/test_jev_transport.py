@@ -1301,6 +1301,7 @@ def test_chrome_start_passes_shell_proxy_explicitly(tmp_path, monkeypatch):
     assert '--proxy-server=http://127.0.0.1:7890' in seen['argv']
     assert '--proxy-bypass-list=localhost;127.*;*.local' in seen['argv']
     assert '--headless=new' in seen['argv']
+    assert '--password-store=basic' in seen['argv']
     monkeypatch.delenv('https_proxy')
     monkeypatch.delenv('no_proxy')
     seen.clear()

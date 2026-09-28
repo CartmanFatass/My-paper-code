@@ -46,3 +46,5 @@ state_dir = "~/.local/state/hmasd-pro-transport"
 # read those variables itself, and the mirrored-network TUN route black-holes direct traffic (2026-09-27).
 # proxy_server = "http://127.0.0.1:7890"
 # proxy_bypass = "localhost,127.*"
+# The driver always starts Chrome with --password-store=basic: the profile's cookies use the basic key
+# store, and with a session bus plus gnome-keyring present an unpinned Chrome blocks on the keyring prompt.
