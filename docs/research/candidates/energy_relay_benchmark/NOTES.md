@@ -5989,5 +5989,554 @@ Constraints: seeds and matched baseline per constitution section 8; no training,
 Return: an independent scientific review of the draft declaration (constitution section 5), answering in order: (1) Facts to verify against the files — (a) the by-corner Block 2 split in `paired_rotation.json` `triples` joined by seed to the spawn corner (the DM's corner labels per seed are implied by `constructions[seed]["corner"]`; state the mapping you used): ROT − ID −.095/−.102 (W,S/W,N) and +.103/+.044 (E,S/E,N), pooled −.025; (b) the Block 1 rule inputs (e_ROT 158°/146°; learner |Δθ| BS_A 11.6°, ST 4.6°, BS_B 1.4°, CL 1–2°; planners 0 under BS/CL; zero sign-agreement pairs) and whether reading the "meaningful response" clause in absolute terms is sound; (c) DM4's C − P by frame as quoted in entry 3 (if its per-world file is unavailable to you, say so and reason from the committed launch record and DM4's NOTES); (d) the speed facts (|a_xy| medians .74 → .39; saturation shares; `energy_aware.py` 1695 and 1775–1792); (e) the absolute-position entries named in entry 3. (2) Is C_SW the right identifying comparator, and are P1–P3 the right discriminating predictions, given that the frame effect is ≈ .10 and available at 0 fits? Name any prediction that holds by construction rather than by learning. (3) Is one fit the right exposure for an exploratory representation result here, or should the DM decline B and put the frame result to DM4 only? What would you buy instead, at what cost? (4) The strongest simpler explanation of the E-half loss or of the ⅓-cap cruise speed that would make B uninformative, and the reading (zero-fit if possible) that would show it before or inside B. (5) Any omitted MARL coupling (eight fixed-identity agents, non-D4-invariant spawn grid, shared reward, shield/guard in the physical frame) that changes the design. (6) MATERIAL_DISSENT yes/no with the one change that would resolve it. Mark each statement SOURCE FACT / DERIVATION / CONJECTURE.
 ### Answer
 
+_Recorded verbatim by the DM from the Jev transport's answer file (key `hmasd:a8ffd813…`, answer sha256 `d5fa4a76…`, 12,994 chars, ChatGPT 6 Pro, chat answer: the connector could read but not write). Pro's own delivery note is the first paragraph._
+
+SOURCE FACT（交付状态）：GitHub 读取可用，但当前连接器没有文件更新或提交动作，因此本次未写入 GitHub，也没有产生 commit SHA。交付前读取的 main 中，目标 ### Answer 仍为空，其后已有独立的 ### Send record；我未修改任何内容。以下给出完整答复。科学推理使用附件指定的固定提交 25142e7f7136cdd124bb446546f2e01654141371，不使用最新 main 替代固定输入。
+hmasd-pro-question-b05-canonica…
+
+Answer
+
+SOURCE FACT（证据范围）：下文区分已提交 JSON／代码中的事实、从这些材料进行的计算，以及 NOTES 对未提交产物的转述。DM4 的 summary.json、perworld.json 在固定提交上均返回 404；block1/proposals.npz 和节点 trace 未读到。因此，DM4 的逐世界结果以及 F2/F3 的部分细分数字，只能核对其转述的内部一致性，不能称为本次独立重算。附件明确允许在这一边界内完成审查。
+hmasd-pro-question-b05-canonica…
+
+1. 对文件事实的核验
+1(a). Block 2：角落映射、逐 seed 配对与合并结果
+
+SOURCE FACT：环境原生角落编号为 0=SW、1=SE、2=NE、3=NW。但 paired_rotation.json 的 constructions[seed]["corner"] 来自 ROT 构造后的角落，不能直接当作 ID 世界的出生角。probe_run.py 保存 ROT 构造信息的路径与此一致。因而，本次按 seed 连接 triples 时使用：
+
+construction.corner 2 → 原 W,S；1 → 原 W,N；3 → 原 E,S；0 → 原 E,N。
+
+DERIVATION（复算）：定义每个世界的差值 
+𝑑
+𝑠
+=
+𝑄
+R
+O
+T
+,
+𝑠
+−
+𝑄
+I
+D
+,
+𝑠
+d
+s
+	​
+
+=Q
+ROT,s
+	​
+
+−Q
+ID,s
+	​
+
+，组内配对标准误为 
+𝑠
+𝑑
+/
+𝑛
+s
+d
+	​
+
+/
+n
+	​
+
+。使用 triples 中的本地 ID 与 ROT，而非把节点旧 ID 面板混入主差值，得到：
+
+原出生角	世界数	ID QoS/step	ROT QoS/step	ROT − ID	配对 SE
+W,S	13	0.487964	0.392699	−0.095265	0.026029
+W,N	5	0.496792	0.394537	−0.102256	0.055165
+E,S	6	0.375848	0.478559	+0.102711	0.023290
+E,N	8	0.386316	0.429860	+0.043544	0.030141
+全部	32	0.442910	0.418375	−0.024534	0.021608
+
+这些数值确认了问题所列的四角差值与合并值。
+
+DERIVATION（连接键核对）：下列均为完整 seed 的后三位，前缀均为 955：
+
+原出生角	seed 后缀
+W,S	001、004、009、011、014、015、016、019、020、023、026、027、030
+W,N	002、006、013、017、022
+E,S	003、008、018、024、025、031
+E,N	005、007、010、012、021、028、029、032
+
+DERIVATION（解释边界）：原 W 半区均值为 .490417，原 E 半区为 .381830；旋转后分别为 .393210 和 .450731。因此，“半区排序随旋转反转”有支持，“两个半区精确互换”没有支持。而且 .10 是这一固定策略的条件性方向差，不是已经识别出的、可从总体规划器缺口中扣除的 .10 因果份额。
+
+DERIVATION（对免费收益预测的修正）：若仅作一个事后算术组合——18 个原 W 世界保留 ID，14 个原 E 世界采用已记录的 ROT——总体增量是 .030144，不是 .045。这也不是 C_SW 的估计：C_SW 对 NW/SE 使用镜像而非这里的选择性 ROT，且物理旋转探针重生了出生网格。这个计算的用途只是说明：草案的“每个 E 世界约 +.10，因此 pooled 约 +.045”是粗略猜想，不能冒充已测零训练收益。
+
+SOURCE FACT：本地 ID 面板均值 .442910 与节点记录的约 .437 也不是同一个数。摘要给出的本地 ID−节点值为 +.006261、SE .012440；这不是逐世界完全复现。故后续 B−C_SW 应在同一评价实现中计算，旧 raw c06 保留为历史能力参照，不把执行路径差异全部记作坐标收益。
+
+1(b). Block 1：数值成立，但“原规则已判定 A”需要收窄
+
+SOURCE FACT：identity_gate.json 报告门槛通过，摘要也记录该状态；这验证的是所声明的恒等输入路径，不等于所有历史节点轨迹逐位相等。readings.json 中学习器的关键角度如下，单位为度：
+
+读数	t=0	t=10…90
+ROT 等变误差 
+𝑒
+R
+O
+T
+e
+ROT
+	​
+
+	158.110	145.876
+BS_A 的 (	\Delta\theta	)
+ST 的 (	\Delta\theta	)
+BS_B 的 (	\Delta\theta	)
+CL1 的 (	\Delta\theta	)
+CL2 的 (	\Delta\theta	)
+
+SOURCE FACT（必要更正）：“规划器在 BS/CL 下均为 0”过于简化。BS_A/BS_B 的规划器中位数为 0；但 CL1/CL2 下，H_central 约为 .238°/.376°，H_local 为 2.135°/1.918°。更关键的是，在原规则要求的“规划器改变超过 20°”条件下，BS/CL 的可评估方向配对数为 0，方向一致率是 null，不是“观察到 0% 一致”。
+
+SOURCE FACT：entry 2 的“meaningful response”是一个联合条件：学习器响应幅度至少达到规划器的一半，并且在规划器改变超过 20°的配对中，方向一致率至少为三分之二。它没有预写一个可在该条件空置时自动替代的绝对角度门槛。
+
+DERIVATION：因此，绝对角度可以用于描述，不能用于追认原规则已经通过。可以说“ROT 误差很大，CL 响应较小，BS_A 响应大于 BS_B”；不能说“没有合格规划器配对，所以按原规则已经证明没有有意义的几何响应”。同样，确定性输出中的 1–2°变化不能在没有相应定义时直接叫作“噪声”。
+
+DERIVATION：这不要求重跑探针，也不迫使取消 B。正确处置是保留冻结规则及其不可评估部分，将绝对量读法标为事后描述性解释，再以实测的大 ROT 误差、闭环角落异质性和新的明确比较来论证 B，而不是让“row A”自动购买一个 fit。
+
+DERIVATION：还应保留 recurrent policy 的边界：t>0 的探针在冻结事实历史／内部状态下改变当前输入，测量的是该历史下的局部响应；它不是把整个观测历史、身份关系和随机流一起变换的完整等变性测试。t=0 的强方向偏置仍然重要，但 146° 不能单独分离当前坐标依赖与历史依赖。
+
+1(c). DM4：可核对启动身份与转述算术，不能独立确认原始结果
+
+SOURCE FACT：固定提交中的 DM4 NOTES、launch manifest 和 launch status 支持如下设计与启动身份：冻结 c06，固定整回合 NE 包装，P/C 各确定性及一次采样，加 H_central@10；16 个新世界、80 回合、0 fit，启动源为 52986d5b005202b3ec77f8f556ad2a790541d0d7。但提交的状态文件仍为 accepted，不能据此确认 COMPLETE；固定 NOTES 也没有已发表的完整终态结果。
+
+SOURCE FACT（仅为 entry 3 的转述）：entry 3 报告确定性／采样 pooled C−P 为 −.042/−.069，SE .029/.022；10 个非恒等世界为 −.067/−.111，SE .046/.027，另有 6 个恒等世界差为零。确定性逐帧数据为：
+
+NE 包装帧	entry 3 转述的逐世界 C−P
+MIRROR_X	−.034、−.194、−.081
+ROT180	−.082、+.073、−.299
+MIRROR_Y	+.123、−.240、−.047、+.108
+
+DERIVATION（仅核对转述的内部一致性）：以上舍入值给出 MIRROR_X 均值 −.103、ROT180 均值 −.102667，合并六个 W→E 世界为 −.102833；MIRROR_Y 均值为 −.014。10 个变换世界的均值／SE 为 −.0673/.04572，加入六个零差世界后为 −.0420625/.02923，与所报确定性汇总一致。采样均值也满足 −.111×10/16≈−.0694；没有采样逐世界数据，不能独立核验其 SE。
+
+DERIVATION：若转述准确，DM4 为同一个固定 c06 在另一批世界、另一种部署变换下的方向敏感性提供支持。“镜像式相容证据”比“独立复现了表示学习机制”准确：它不是独立训练复现，不测 B 的训练增量，也没有直接测得 C_SW 的收益。缺失原始结果不妨碍提出这个有条件判断，但阻止更强的结果认证。
+
+1(d). 速度事实与能耗语义
+
+SOURCE FACT（DM 转述，未独立重算原始 NPZ/trace）：entry 3 的逐查询时刻动作模长中位数为：
+
+.74、.61、.48、.47、.45、.44、.39、.39、.39、.39，对应 t=0、10、…、90。
+
+离墙超过 60m 时，四角平均水平位移分别为 10.4、10.8、11.7、7.6m/step，墙边为 3.8–6.6m/step。F3 同样是节点 trace 的转述：E,S 的 E 墙占比 .71，E,N 的 E/N 墙占比 .62/.36，以及四角后期中心距离的明显差异。这里不能把“DM 已核验”改写为“本次已读 trace 核验”。
+
+SOURCE FACT（已提交 JSON）：speed_stat.json 确认速度欠饱和，但不是严格零饱和。其口径为前 1,000 步、非 shield 模式、水平位移至少 29m 的 UAV-step：
+
+控制器	达阈值步数／分母	份额
+c06 deterministic	81／254,393	约 0.03%
+c06 stochastic	699／254,853	约 0.27%
+H_central	67,060／255,653	26.23%
+H_local	75,066／255,972	29.33%
+
+该分母包含墙边正常模式步，不是专门的 free-space 分母。
+
+SOURCE FACT（代码）：energy_aware.py 的水平速度映射确为
+
+𝑣
+𝑥
+𝑦
+=
+min
+⁡
+(
+∥
+𝑎
+𝑥
+𝑦
+∥
+,
+1
+)
+ 
+𝑣
+max
+⁡
+,
+v
+xy
+	​
+
+=min(∥a
+xy
+	​
+
+∥,1)v
+max
+	​
+
+,
+
+并以实际位置变化计算 actual velocity，再据此计算能耗。
+
+DERIVATION：按题设 30m/step 的上限，模长 .39 对应名义水平位移 11.7m/step，与后期低速的量级相容；它不要求先发生撞墙。不同时间、不同条件样本的中位数与均值不能再被当成逐项恒等关系。
+
+DERIVATION（重要更正）：entry 3 的“向被裁剪的墙推，costs nothing”只能收窄为：被裁掉的水平指令没有被当作实际水平运动收费。这不意味着总功率、悬停消耗、可能存在的垂直运动消耗或整回合返航成本为零。实际 w_energy_motion 未在本次材料核验中确定，更不能据此认定奖励鼓励撞墙，或者加速是免费的服务提升。
+
+1(e). 绝对位置输入与适配器覆盖
+
+SOURCE FACT：entry 3 列出的主要绝对位置入口确实存在：own observation 的 x/A,y/A；state 中 UAV、用户和 BS 的水平位置；S7 station state 的 x/A,y/A。用户 state 还包含水平速度向量，不能按绝对位置加平移项处理。
+
+SOURCE FACT：DM4 的 symmetry.py 对绝对 xy 使用绕地图中心的带符号置换，对相对位移／速度使用绕原点的带符号置换；保留实体顺序、agent identity、z 和标量字段，并对动作前两维做逆变换。它覆盖 observation 中的 overloaded-UAV 块。进一步核对 _get_local_overloaded_uavs，该块前两维确为相对水平位置，所以原笔记中的这一疑点可以收窄：源码上有该坐标，适配器也处理了它。本次没有运行适配器测试，不将源码覆盖冒充运行验收。
+
+SOURCE FACT：actor 中央拼接还包含 held state、按固定 ID 排列的 joint observations 和 ego one-hot。central_snapshot_state_affine 仅作用于 state 部分，是模型级配置，并拒绝负 scale；它不能完成这里逐回合、同时覆盖 own/joint observations、state 和 action 的镜像包装。
+
+DERIVATION：因此，“绝对位置入口使后期行为仍可能依赖原世界几何”有代码基础；“闭环完全无视几何”没有。B 所问的是一种有限训练表示／约定是否有用，不是给原来没有位置的策略补上位置信息。
+
+2. C_SW 是否正确？哪些预测真正区分学习？
+主对照：正确，但必须覆盖两个最终评价面板
+
+DERIVATION（审查判断）：C_SW 是不可缺少的主对照。 在评价实现匹配的前提下，可以分别定义：
+
+𝐹
+=
+𝑄
+(
+𝐶
+S
+W
+)
+−
+𝑄
+(
+𝐶
+r
+a
+w
+)
+,
+𝐿
+=
+𝑄
+(
+𝐵
+)
+−
+𝑄
+(
+𝐶
+S
+W
+)
+.
+F=Q(C
+SW
+	​
+
+)−Q(C
+raw
+	​
+
+),L=Q(B)−Q(C
+SW
+	​
+
+).
+
+𝐹
+F 描述该固定资产的部署包装差，
+𝐿
+L 描述 B 相对这个可复用包装资产的额外用途。只有 
+𝑄
+(
+𝐵
+)
+−
+𝑄
+(
+𝐶
+r
+a
+w
+)
+Q(B)−Q(C
+raw
+	​
+
+)，无法区分两者；这个代数分解也不是对训练机制的因果分解。
+
+DERIVATION（决定性修改）：草案在开发集以 B−C_SW 为主，却在 957001–032 上改为 B−raw c06。留出部分也必须使用同一 C_SW。 否则，例如假设 B=.51、C_SW=.50、raw=.44，B−raw 的 .07 会通过原留出阈值，但真正新增的用途只有 .01；此例只是反例算术，不是已测数据。草案确实存在这两个面板的主对照不一致。
+
+SOURCE FACT：957001–032 已在原 c06 的 Stage 1 结果中读过，确定性／采样均值 .462/.440 已发表。因此它可以是“B 端点只评价一次的既有留出面板”，不能再称为对本次研究选择完全未曝光的新确认样本。
+
+DERIVATION：新增 C_SW 的该面板评价不增加 fit 数。应冻结两臂相同的 evaluator、det/stoch 规则、动作抽样协议和读数实现；逐世界 SE 刻画的是这些固定资产的条件性世界差异，不能把 32 世界、8 个 agent 或两种评价模式计作独立训练样本。
+
+P1–P4 的建议读法
+预测	审查意见
+P1：c02/c06 每角 R≥.8，且朝内	DERIVATION：保留为较强的机制猜想，不作为所有有用结果的必要条件。 高集中且朝内并非包装自动产生；但单一朝内程序也不等于已学会服务导向部署。C_SW 在前 100 步 R≈1 是未测预测，不能由 t=0 的集中度直接推出。
+P2：100 步内向位移≥1,000m，60 步首服份额≥.75	DERIVATION：保留为部署读数，而非学习增量的替代。 须固定净内向位移的定义，不能以累计路程代替；首服份额保留全部世界分母与未服务删失，并同时报告 t=0 无接入用户的子组，避免开局已有服务主导结论。
+P3：QoS≥C_SW+.05	DERIVATION：这是最有判别力的主预测，应在两个端点面板使用同一对照。 原 .05 可保留为前瞻的实际效应目标；按角落 spread≤.03 改作异质性读数，不与主收益捆绑成一个不可分解的通过／失败条件。
+P4：速度提高或保持低速	DERIVATION：保留双向描述，但撤回唯一因果归属。 速度提高不能单独证明“谨慎巡航由 frame ambiguity 导致”；速度不变也不能证明速度与表示完全独立。两者都需连同完整服务、native J 和风险后果读取。
+
+P1/P2 的分层、短位移排除及首服删失口径，应沿已修正的 b04 readers 保持可追溯；heading_stat.json 中 c06 的 legacy R 与 stratified pooled R 本来就是不同统计量，不能混用。
+
+真正“由构造成立”的是什么？
+
+DERIVATION（条件推导）：本方案实际使用的是
+
+𝐺
+4
+=
+{
+𝐼
+,
+𝑀
+𝑥
+,
+𝑀
+𝑦
+,
+𝑅
+180
+}
+⊂
+𝐷
+4
+,
+G
+4
+	​
+
+={I,M
+x
+	​
+
+,M
+y
+	​
+
+,R
+180
+	​
+
+}⊂D
+4
+	​
+
+,
+
+不是对全部八个 D4 元素做规范化。设 reset 选择器为 
+𝑔
+(
+𝑥
+0
+)
+g(x
+0
+	​
+
+)，包装策略为
+
+𝜋
+S
+W
+(
+ℎ
+)
+=
+𝑔
+(
+𝑥
+0
+)
+−
+1
+𝑓
+ ⁣
+(
+𝑔
+(
+𝑥
+0
+)
+ℎ
+)
+.
+π
+SW
+(h)=g(x
+0
+	​
+
+)
+−1
+f(g(x
+0
+	​
+
+)h).
+
+对于 
+𝑟
+∈
+𝐺
+4
+r∈G
+4
+	​
+
+，若整个历史是保持 ID 的精确变换，并且
+
+𝑔
+(
+𝑟
+𝑥
+0
+)
+𝑟
+=
+𝑔
+(
+𝑥
+0
+)
+,
+g(rx
+0
+	​
+
+)r=g(x
+0
+	​
+
+),
+
+则确定性策略满足
+
+𝜋
+S
+W
+(
+𝑟
+ℎ
+)
+=
+𝑟
+ 
+𝜋
+S
+W
+(
+ℎ
+)
+,
+π
+SW
+(rh)=rπ
+SW
+(h),
+
+与 
+𝑓
+f 是否训练过无关；随机策略需要相应的规范坐标随机流耦合。这是包装的条件性代数性质。适配器的带符号置换、逆动作结构支持这个推导。
+
+DERIVATION：但以下不是由此得到的保证：
+
+任意 32 世界面板的 R_map<.35；
+每个角落都朝内、具有高 R、速度变快或 QoS 提高；
+当前 Block 2 重生网格、带匹配置换且未来 RPGM draws 未反射的物理世界中，ROT−ID 必须落在 ±.03。
+
+现有探针明确没有逐路径反射后续 RPGM draws，出生网格也不是精确的带 ID 对称对象；没有误差界能把这些残差自动限制在 .03。
+
+DERIVATION（设计修正）：保留 identity、round-trip、frame persistence、正确动作逆变换等工程测试；把当前 Block 2 的 ±.03 从“构造验收门槛”移为经验性稳健性读数。不能用一个未经保证的服务阈值，来判断适配器数学上是否实现正确。
+
+3. 应保留一个 fit，还是拒绝 B？
+
+DERIVATION（投入建议）：我的首选是 REVISE：保留一次完整、固定曝光的 B 探索，但不按原样声明。理由不是“row A 已经批准 B”，而是这个比较仍有 DM4 单独无法回答的价值：
+
+在相同的 SW 部署包装下，从训练开始使用该表示，是否能形成比事后包装的既有策略更有用的完整部署？
+
+即使规范化本身并不新，这仍可以产生一个有范围的有限学习结果。反过来，只把全部 frame 结果交给 DM4，会留下“训练是否能超过免费包装”这个不同问题未回答。
+
+SOURCE FACT：冻结 B02 的实际曝光是 2 lanes×3000 steps×200 rollouts=1.2M transitions，不是旧说明中的 H1500。原 c06 在 rollout 100 后续跑并重新播种部分环境／动作随机流；相同初始 seed 可以检查初始参数一致，但不使新 B 与旧 c06 的完整训练流成为严格匹配对。
+
+DERIVATION：因此，一次 fit 足够回答“这一次完整 B 包是否值得保留或继续研究”，不足以回答“该训练程序平均优于普通 SET”，更不足以识别纯表示机制。未知训练 seed variance 不应变成首个探索前必须另买一批方差测量的门槛；但正负结果均需保留这个不确定性。宪章 §8 的独立训练要求适用于相应强度的学习主张，不能被世界数量替代。
+
+SOURCE FACT（成本来源）：草案报价为约 11h fit、约 4h 评价／读数，总计约 15h idle-node wall；200–300 行加测试和既有工程审查另计。原 c06 的评价实际花费 2.75h，高于原声明约 1.4h，提示新的评价报价不能当已验证上界。
+
+DERIVATION（修订成本）：若 C_SW 在 957001–032 也做 det+stoch，共增加 64 个 H3000 回合、192k 评价步，仍为 0 新 fit。按草案每 64 回合约 .5h 的口径粗估，完整方案由约 15h 变为约 15.5h，再加未实测工程成本；这只是报价算术，不是节点准入或耗时保证。我不建议现在直接购买约六个 fit，也不建议按一次结果的边缘阈值自动补第二个 seed。
+
+DERIVATION（不购买 B 时的替代）：若 DM 不愿为上述训练问题支付约 11h 的训练主体成本，我会把固定 C_SW 部署比较交由 DM4 的问题范围承接，并优先考虑一个冻结策略、只改变水平动作幅值的完整闭环比较，而不是再积累静态速度统计。一个预先固定的规则可保留方向、z、dock 和生产 shield/guard，仅把非零水平提案归一到上限；与原 C_SW 在 32 个开发世界确定性配对。它新增 32 回合／96k 步／0 fit，按上述报价线性折算约 .25h 评价，工程与读取另计。它回答“低幅值是否是可直接改善的部署限制”，不回答表示学习是否有用，不能冒充 B 的替代答案。
+
+CONJECTURE：B 的合理成功机会是把多个角落下的有限训练问题改成更一致的出生相对部署约定，并在 C_SW 之外学得额外服务；其主要失败机会是更一致地复现同一个低速、低承诺程序。现有材料支持把这两种结果写成竞争性预测，不支持给其中任何一种报出可靠成功概率。
+
+4. 最强的简单解释，以及能区分它的读取
+
+CONJECTURE（最强替代）：E-half 损失和约三分之一上限的巡航，可能主要来自联合目标选择／持续承诺的有限学习失败：策略开局有固定偏好，但随后不能持续维持对团队服务有用的目的地与协同行动；绝对位置、队友位置、墙面反馈及 recurrent history 把它带入不同的低效吸引区域。SW 包装改变进入哪个区域，却不必改善共享奖励下的长程目标维持。由此可以出现 
+𝐵
+≈
+𝐶
+S
+W
+B≈C
+SW
+	​
+
+，但相近的水平不必恰好是 .49。
+
+DERIVATION：该解释比“只因初始航向撞到近墙”更能容纳现有反例：原 W-half 初始朝近墙却服务更高；而 F2 转述的离墙低速排除了“所有慢速都只是位置裁剪”的说法。但这些观察仍没有把 reward、credit、目标选择或某个更新环节确定为原因，也不能复活已经撤回的“没有任何逐机部署信号／首次非零奖励必须等待完整链路”的前提。
+
+DERIVATION（优先读取）：可在 C_SW/B 的既定读数内，把每步过程明确分成：
+
+raw proposal
+  
+⟶
+  
+shield/guard 后动作
+  
+⟶
+  
+实际位移
+.
+raw proposal⟶shield/guard 后动作⟶实际位移.
+
+同时读取动作模长、方向在连续窗口内的保持程度、净内向位移、墙边／离墙条件、首次 shield 进入和完整服务。这样可区分“本来就只提出小动作”“提案被接管”“动作被墙裁剪”，以及“速度存在但方向来回抵消”。这些读取可以是零新 fit；仅重读已有 trace 时也可以是零新回合。原始 trace 不在本次可读材料内，所以这里是建议的读取，不是已完成结果。
+
+DERIVATION：F2 已回答的是“低速是否存在于自由空间”，没有回答“增大幅值是否改善完整任务”。因此拒绝所有零 fit 动作幅值比较、理由仅为“F2 已回答”，不成立。第 3 节的闭环幅值比较会更直接地回答后一个问题：若服务及 native J 改善，说明存在可复用的执行侧余量；若服务／风险恶化，说明快飞不是免费修复。无论哪种结果，都不能单独证明目标承诺的训练机制。
+
+DERIVATION：也不应将这项替代诊断变成 B 的新前置门槛。若选择 B，直接在同一完整比较中观察：包装性质满足，而 B−C_SW 没有出现有用增量、低速和后期方向失配仍保留，这已经削弱了当前 B 投入的理由；无需先穷尽所有失败原因。
+
+5. 会改变设计与解释的 MARL 耦合
+
+SOURCE FACT：这里不是匿名、可任意置换的点群。环境使用八个固定身份，原生出生位置是 3×3 顺序网格的前八格，缺一格，并有 jitter。适配器保持身份与实体顺序；中央输入包含按 ID 排列的观测及 ego one-hot。
+
+DERIVATION（身份与网格）：因此，原朝向仍可能通过规范坐标下的 ID—位置排列被识别。B 不保证删除所有 frame 信息；它同时改变每个身份经历的角色—位置分布。B−C_SW 的正差可以是“从头适应该规范化输入支持”的有限训练收益，不必是纯粹消除了四套航向映射的学习难度。不能为修复这一解释问题而悄悄重排 ID、GRU hidden state 或队友标签，那会变成另一项干预。
+
+DERIVATION（联合回报）：一个公共 frame 只提供共同参照，不产生共同目的地、不自动分配互补角色，也不解决全部团队信用问题。高 R、整齐朝内或更大速度都可能损害布局、回程与能源后果。应保留团队完整 QoS、native J、返航代价、最低电量及不利世界；八个 agent 的轨迹不是八份独立训练证据。既有研究方法也明确区分共同信息、联合行为和学得协作。
+
+DERIVATION（物理 shield/guard）：所有 agent 必须共享同一个 episode frame，但 shield、guard、物理位置、站点与环境内部状态保持原物理坐标。逆变换必须发生在 apply_feedback 之前。即使两个 xy 变换保持模长和动作方框，也不能据此保证过滤后的联合动作、后续状态和服务逐路径相同。应保留各阶段动作的来源，避免把坐标混用造成的变化当学习收益。
+
+DERIVATION（训练历史与快照）：实现上的核心不是增加新的审核层，而是让已有工程审查覆盖同一坐标合同的所有消费者：每个 lane 的 reset/frame 生命周期；k=10 held snapshot；当前 own observation 与 held joint observation/state；rollout buffer、critic 输入及 bootstrap；以及存储的 canonical proposal／log-probability。仅在 agent.step 前改输入、却让更新阶段重新读取物理坐标，会使声明与实际学习目标分离。初始权重逐位相同也不等于包装前后初始物理动作相同。
+
+DERIVATION（对称范围）：保留 G4 而非全 D4 的范围、未消除的对角／BS-edge 关系、非对称网格以及未反射的未来随机过程，足以进行一个明确的有限包比较；它们不需要先被全部消除。但它们必须限制“由构造成立”“一般几何泛化”和“表示机制已被纠正”的用语，而不能一面列为 residual，一面又用未经证明的闭环 .03 界忽略它们。
+
+6. MATERIAL_DISSENT 与能解决它的一个改变
+
+DERIVATION（最终判断）：MATERIAL_DISSENT: yes。 异议针对原样的识别与判读合同，不是反对所有 B，也不是要求额外审批或先测 seed variance。
+
+DERIVATION（能解决异议的一个核心改变）：
+
+把声明对象统一改为“相同 SW 包装下的一次完整学习增量比较”：两个端点面板均以 B−C_SW 为主；P1/P2/P4 和物理旋转差是解释／异质性读数，不再充当包装保证或有用学习的必要条件；完成固定的一次 fit 后按完整结果收口。
+
+DERIVATION（该改变下的结果解释）：
+
+观察	应得结论与本批边界
+B−C_SW 达到预写的实用服务目标，两个面板方向相容	保留一次有用的条件性训练包实例，同时报告 native J、风险及损失世界。是否购买新的匹配训练确认，另作前瞻决定；本次不是训练总体确认。
+P1 成立，但 B−C_SW 未显示有用增量	几何代理改善未转成额外完整用途。不能自动写成 B=C_SW，也不能据此宣布“免费 frame 恰值 .10”；结束本批，不自动补 seed。
+P1 不成立，但 B−C_SW 有用	保留服务结果，修正所猜测的行为路径。不能因为没有达到特定“整齐朝内”模式而丢弃有用学习。
+P1 与增量均未成立，或两面板结论分歧	当前这一表示／配方／曝光未兑现预测，或用途范围不清；不推出“部署失败不是表示问题”或整个表示类别无效，也不以池化掩盖反号。
+B 明显低于 C_SW，或技术失败	前者是该实例的 adverse 结果；后者是缺失科学端点的技术结果。分别记录成本与证据，均不自动触发救援 fit。
+
+SOURCE FACT：草案同时写了“one fit、no extension after scores”和“P1 成立且 P3 接近阈值时再做第二个 seed”，两者不一致。
+
+DERIVATION：应删除后一个按已见分数自动追加的例外。后续六 fit 可以保留为独立、前瞻的候选确认设计，但不是本次 positive、borderline 或 technical failure 的自动后继。一次有用探索可以值得继续，也可以因机会成本停止；无需把这种取舍写成已证明无效。现行宪章 §3、§5 的曝光与独立审查规则支持这种区分。
+
+DERIVATION（结论）：建议修订后保留一个 B fit，不按原样声明，不立即扩大训练批次。 C_SW 必须成为所有主要最终面板的识别对照；约 .10 的方向差、低速、方向集中度及包装代数性质都不能替代这个比较。这样的 B 能回答一个 DM4 的冻结部署研究尚未回答的问题，同时允许最强的简单解释——“包装已吸收可得收益，剩下的是联合目标选择／承诺与有限学习缺口”——在同一次完整实验中真正获胜。
+
 ### Send record (2026-09-28): Pro question `b05-canonical-frame-declaration` sent
 Question key `hmasd:a8ffd8130564bedcd7ea08f285c400b91fb0c42735693c735b16655d780b51d4` (source sha 25142e7f7, question heading above); attachment `hmasd-pro-question-b05-canonical-frame-declaration.md` sha256 `33f88951…`; Jev transport, ChatGPT 6 Pro, new conversation (address stays in the local operation file), dry run verified then sent at 2026-09-28 05:42Z (`send_effect: sent`, attachment seen). Passive observation by the transport's `wait`; the answer is recorded verbatim under `### Answer` when it arrives (by Pro's connector write or by the DM's deliver step). Nothing running; 0 fits.
