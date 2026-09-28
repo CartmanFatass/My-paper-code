@@ -1,0 +1,200 @@
+{
+ "blocks": {
+  "block0": {
+   "access_join": true
+  },
+  "block1": {
+   "constructed_worlds": 3200,
+   "gate_passed": true,
+   "id_prefix_steps": 3200,
+   "identity": {
+    "checkpoint": "c06",
+    "checkpoint_sha256": "41aa4ff0be5d55f924d8388af055fb087d76c1f517497e69c26d7962ce041bb3",
+    "policy_fingerprint": "a7c54b470441b8e742459e47a533a41c58534c36288ece0e9eb026a3b544c39c",
+    "rollout": 200,
+    "transitions": 1200000
+   },
+   "mean_timings_s": {
+    "condition_query": 0.15494798084030917,
+    "construct_world_ID_t0": 0.03323975293756121,
+    "id_step": 0.051668629071887434,
+    "plan_conditions": 0.062211299875002624
+   },
+   "worlds": [
+    955001,
+    955002,
+    955003,
+    955004,
+    955005,
+    955006,
+    955007,
+    955008,
+    955009,
+    955010,
+    955011,
+    955012,
+    955013,
+    955014,
+    955015,
+    955016,
+    955017,
+    955018,
+    955019,
+    955020,
+    955021,
+    955022,
+    955023,
+    955024,
+    955025,
+    955026,
+    955027,
+    955028,
+    955029,
+    955030,
+    955031,
+    955032
+   ]
+  },
+  "block2": {
+   "episodes": 64,
+   "local_id_episodes": 32,
+   "mean_episode_wall_s": 172.13877360289058,
+   "rot_episodes": 32,
+   "steps": 192000,
+   "summary": {
+    "diagnostic_local_id_minus_node": {
+     "qos_per_step": {
+      "mean_paired_difference": 0.0062605388969233546,
+      "n": 32,
+      "paired_se": 0.012440255224795034
+     },
+     "raw_native_J": {
+      "mean_paired_difference": 20.950802082940125,
+      "n": 32,
+      "paired_se": 37.242654735887925
+     }
+    },
+    "primary_rot_minus_local_id": {
+     "qos_per_step": {
+      "mean_paired_difference": -0.02453443213939803,
+      "n": 32,
+      "paired_se": 0.021607994955149496
+     },
+     "raw_native_J": {
+      "mean_paired_difference": -74.10702388166874,
+      "n": 32,
+      "paired_se": 64.40075697382356
+     }
+    },
+    "secondary_rot_minus_node": {
+     "qos_per_step": {
+      "mean_paired_difference": -0.018273893242474668,
+      "n": 32,
+      "paired_se": 0.02492887355537945
+     },
+     "raw_native_J": {
+      "mean_paired_difference": -53.156221798728616,
+      "n": 32,
+      "paired_se": 74.24086097813584
+     }
+    }
+   },
+   "worlds": [
+    955001,
+    955002,
+    955003,
+    955004,
+    955005,
+    955006,
+    955007,
+    955008,
+    955009,
+    955010,
+    955011,
+    955012,
+    955013,
+    955014,
+    955015,
+    955016,
+    955017,
+    955018,
+    955019,
+    955020,
+    955021,
+    955022,
+    955023,
+    955024,
+    955025,
+    955026,
+    955027,
+    955028,
+    955029,
+    955030,
+    955031,
+    955032
+   ]
+  }
+ },
+ "code_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d2dddeffc44042589ac4fd4bf52ef468",
+ "command": "all",
+ "data_root": "/home/fires/hmasd-wsl",
+ "failure": null,
+ "inputs": {
+  "agent_pt": {
+   "bytes": 38833351,
+   "path": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b02_s1_set_a01r/checkpoints/c06/agent.pt",
+   "sha256": "41aa4ff0be5d55f924d8388af055fb087d76c1f517497e69c26d7962ce041bb3"
+  },
+  "checkpoint_record": {
+   "launch_sha": "c369a6b91651ece4bdfbbedce1be26cd0599baff",
+   "path": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b02_s1_set_a01r/checkpoints/c06/record.json",
+   "sha256": "b0da19b224df9582fc142f6d71513c6ae2ebb491a97af70c9928bb9b86041499"
+  },
+  "node_trace": {
+   "path": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b02_s1_eval_c06_a01/checkpoint-eval/traces/L_c06_deterministic_e0.00_x0.05.npz",
+   "sha256": "fdb935ee61374a023c470ae41721ebc49b7565915645078d5d700df9f324c761"
+  },
+  "recorded_panel": {
+   "path": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b02_s1_eval_c06_a01/checkpoint-eval/panels/L_c06_deterministic_e0.00_x0.05.json",
+   "sha256": "76a6e6f079149d96525b4e1c637aa8babe63fedc1349b62337b1fd6cc03b76f9"
+  }
+ },
+ "launch_sha": "5c3a655d7a8d130c4eb6fbd1b9c076eddf8121eb",
+ "probe": "b04_geometry_probe_a03",
+ "status": "COMPLETE",
+ "wall_seconds": 3006.6454117719995,
+ "worlds": [
+  955001,
+  955002,
+  955003,
+  955004,
+  955005,
+  955006,
+  955007,
+  955008,
+  955009,
+  955010,
+  955011,
+  955012,
+  955013,
+  955014,
+  955015,
+  955016,
+  955017,
+  955018,
+  955019,
+  955020,
+  955021,
+  955022,
+  955023,
+  955024,
+  955025,
+  955026,
+  955027,
+  955028,
+  955029,
+  955030,
+  955031,
+  955032
+ ]
+}

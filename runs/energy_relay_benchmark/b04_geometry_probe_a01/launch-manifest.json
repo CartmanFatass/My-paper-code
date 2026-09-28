@@ -1,0 +1,99 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-28T04:07:31.235547Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2f1c1de531254e7abbe0a503b2740cd6/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2f1c1de531254e7abbe0a503b2740cd6/experiments/candidates/energy_relay_benchmark/b04/run_geometry_probe.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b04_geometry_probe_a01",
+    "--",
+    "all",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b04_geometry_probe_a01",
+    "--launch-sha",
+    "11edcbeb962b3b20a5b41b4ba8f6d1c8b5912ddd",
+    "--workers",
+    "4",
+    "--threads",
+    "2"
+  ],
+  "claim_key": "3379676281191f0c7b6d3d84e6c8513c7425124e473c647e46155148dccd704a",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/3379676281191f0c7b6d3d84e6c8513c7425124e473c647e46155148dccd704a.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2f1c1de531254e7abbe0a503b2740cd6/experiments/candidates/energy_relay_benchmark/b04/run_geometry_probe.py",
+    "all",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b04_geometry_probe_a01",
+    "--launch-sha",
+    "11edcbeb962b3b20a5b41b4ba8f6d1c8b5912ddd",
+    "--workers",
+    "4",
+    "--threads",
+    "2"
+  ],
+  "command_sha256": "ba7842a755ffc0abe3770636380cd3759d341105f0a51c6c0166a7282122ed6c",
+  "control_observation": {
+    "observed_at": "2026-09-28T04:07:30.976841Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "5e231edfd4192e3629b6427b1b9a668f59d984e8"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-28T04:07:30.996340Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2f1c1de531254e7abbe0a503b2740cd6",
+  "direction": "energy_relay_benchmark",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/energy_relay_benchmark/b04/run_geometry_probe.py",
+    "all",
+    "--launch-sha",
+    "11edcbeb962b3b20a5b41b4ba8f6d1c8b5912ddd",
+    "--workers",
+    "4",
+    "--threads",
+    "2"
+  ],
+  "lead": "Claude DM (WSL session)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b04_geometry_probe_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/3379676281191f0c7b6d3d84e6c8513c7425124e473c647e46155148dccd704a.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b04_geometry_probe_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b04_geometry_probe_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 180776,
+      "session_id": 180776,
+      "start_ticks": 699567
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 180776,
+    "process_group_id": 180776
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b04_geometry_probe_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 180777,
+      "session_id": 180776,
+      "start_ticks": 699572
+    },
+    "pid": 180777,
+    "process_group_id": 180776,
+    "supervisor_pid": 180776
+  },
+  "schema_version": 1,
+  "sha": "11edcbeb962b3b20a5b41b4ba8f6d1c8b5912ddd",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/2f1c1de531254e7abbe0a503b2740cd6",
+  "stderr": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b04_geometry_probe_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/energy_relay_benchmark/b04_geometry_probe_a01/stdout.log"
+}

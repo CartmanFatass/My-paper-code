@@ -1,0 +1,65 @@
+{
+ "H_central": {
+  "normal_uav_steps": 255653,
+  "saturated_uav_steps": 67060,
+  "share": 0.2623,
+  "threshold_m": 29.0,
+  "window": 1000
+ },
+ "H_local": {
+  "normal_uav_steps": 255972,
+  "saturated_uav_steps": 75066,
+  "share": 0.2933,
+  "threshold_m": 29.0,
+  "window": 1000
+ },
+ "N_init_953": {
+  "normal_uav_steps": 254725,
+  "saturated_uav_steps": 0,
+  "share": 0.0,
+  "threshold_m": 29.0,
+  "window": 1000
+ },
+ "SET_c00_det": {
+  "normal_uav_steps": 254071,
+  "saturated_uav_steps": 0,
+  "share": 0.0,
+  "threshold_m": 29.0,
+  "window": 1000
+ },
+ "SET_c01_det": {
+  "normal_uav_steps": 254447,
+  "saturated_uav_steps": 0,
+  "share": 0.0,
+  "threshold_m": 29.0,
+  "window": 1000
+ },
+ "SET_c02_det": {
+  "normal_uav_steps": 255142,
+  "saturated_uav_steps": 0,
+  "share": 0.0,
+  "threshold_m": 29.0,
+  "window": 1000
+ },
+ "SET_c03_det": {
+  "normal_uav_steps": 255248,
+  "saturated_uav_steps": 0,
+  "share": 0.0,
+  "threshold_m": 29.0,
+  "window": 1000
+ },
+ "SET_c06_det": {
+  "normal_uav_steps": 254393,
+  "saturated_uav_steps": 81,
+  "share": 0.0003,
+  "threshold_m": 29.0,
+  "window": 1000
+ },
+ "SET_c06_stoch": {
+  "normal_uav_steps": 254853,
+  "saturated_uav_steps": 699,
+  "share": 0.0027,
+  "threshold_m": 29.0,
+  "window": 1000
+ }
+}

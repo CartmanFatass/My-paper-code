@@ -1,0 +1,1024 @@
+{
+ "config": {
+  "access_bandwidth_hz": 2500000.0,
+  "bandwidth_hz": 20000000.0,
+  "candidate_bandwidth_hz": 625000.0,
+  "carrier_frequency": 2000000000.0,
+  "environment_type": "urban",
+  "interference_radius_m": 5976.8176283686,
+  "mcs_max_efficiency": 6.6,
+  "min_sinr_db": 3.0,
+  "noise_power_dbm": -94.0,
+  "tx_power_dbm": 23.0,
+  "use_fdma": true
+ },
+ "other_uav_xyz": [
+  [
+   132.00914078630856,
+   316.22843590600166,
+   50.0
+  ],
+  [
+   139.4433337963735,
+   451.5877077048757,
+   50.0
+  ],
+  [
+   307.66171609145744,
+   132.02101495961278,
+   50.0
+  ],
+  [
+   283.9419288825518,
+   317.99103437991283,
+   50.0
+  ],
+  [
+   282.21178879221634,
+   447.580511478589,
+   50.0
+  ],
+  [
+   473.87404103032105,
+   117.90167204724229,
+   50.0
+  ],
+  [
+   472.70623713331923,
+   280.4552200291157,
+   50.0
+  ]
+ ],
+ "rows": {
+  "access": [
+   {
+    "actual_bps": 4125000.0,
+    "distance_m": 100.0,
+    "relaxed_bps": 4125000.0,
+    "sinr_db": 34.99100003690313
+   },
+   {
+    "actual_bps": 4125000.0,
+    "distance_m": 200.0,
+    "relaxed_bps": 4125000.0,
+    "sinr_db": 29.63364217340508
+   },
+   {
+    "actual_bps": 4125000.0,
+    "distance_m": 300.0,
+    "relaxed_bps": 4125000.0,
+    "sinr_db": 26.24572580341966
+   },
+   {
+    "actual_bps": 4125000.0,
+    "distance_m": 400.0,
+    "relaxed_bps": 4125000.0,
+    "sinr_db": 23.794489934860493
+   },
+   {
+    "actual_bps": 4125000.0,
+    "distance_m": 500.0,
+    "relaxed_bps": 4125000.0,
+    "sinr_db": 21.87831875808304
+   },
+   {
+    "actual_bps": 4125000.0,
+    "distance_m": 600.0,
+    "relaxed_bps": 4125000.0,
+    "sinr_db": 20.306623940266917
+   },
+   {
+    "actual_bps": 4125000.0,
+    "distance_m": 700.0,
+    "relaxed_bps": 3950913.126126801,
+    "sinr_db": 18.974847021083093
+   },
+   {
+    "actual_bps": 4125000.0,
+    "distance_m": 800.0,
+    "relaxed_bps": 3714495.209630703,
+    "sinr_db": 17.81962793710909
+   },
+   {
+    "actual_bps": 3125000.0,
+    "distance_m": 900.0,
+    "relaxed_bps": 3506613.354019949,
+    "sinr_db": 16.79972512325469
+   },
+   {
+    "actual_bps": 3125000.0,
+    "distance_m": 1000.0,
+    "relaxed_bps": 3321380.667505103,
+    "sinr_db": 15.8868120362242
+   },
+   {
+    "actual_bps": 3125000.0,
+    "distance_m": 1100.0,
+    "relaxed_bps": 3154578.928674704,
+    "sinr_db": 15.060602029491093
+   },
+   {
+    "actual_bps": 2812500.0,
+    "distance_m": 1200.0,
+    "relaxed_bps": 3003082.247562176,
+    "sinr_db": 14.306072285211442
+   },
+   {
+    "actual_bps": 2812500.0,
+    "distance_m": 1300.0,
+    "relaxed_bps": 2864509.469405467,
+    "sinr_db": 13.611789471271763
+   },
+   {
+    "actual_bps": 2812500.0,
+    "distance_m": 1400.0,
+    "relaxed_bps": 2737004.4972120435,
+    "sinr_db": 12.968851508637115
+   },
+   {
+    "actual_bps": 2500000.0,
+    "distance_m": 1500.0,
+    "relaxed_bps": 2619091.965072537,
+    "sinr_db": 12.370192257446973
+   },
+   {
+    "actual_bps": 2500000.0,
+    "distance_m": 1600.0,
+    "relaxed_bps": 2509579.2639925187,
+    "sinr_db": 11.81010945391489
+   },
+   {
+    "actual_bps": 2500000.0,
+    "distance_m": 1700.0,
+    "relaxed_bps": 2407488.149002772,
+    "sinr_db": 11.283935121135471
+   },
+   {
+    "actual_bps": 2500000.0,
+    "distance_m": 1800.0,
+    "relaxed_bps": 2312005.8293379853,
+    "sinr_db": 10.787799817386002
+   },
+   {
+    "actual_bps": 2500000.0,
+    "distance_m": 1900.0,
+    "relaxed_bps": 2222449.2467524847,
+    "sinr_db": 10.318460403879158
+   },
+   {
+    "actual_bps": 1875000.0,
+    "distance_m": 2000.0,
+    "relaxed_bps": 2138238.497525196,
+    "sinr_db": 9.873171853269994
+   },
+   {
+    "actual_bps": 1875000.0,
+    "distance_m": 2100.0,
+    "relaxed_bps": 2058876.7296978927,
+    "sinr_db": 9.449590247582321
+   },
+   {
+    "actual_bps": 1875000.0,
+    "distance_m": 2200.0,
+    "relaxed_bps": 1983934.713034152,
+    "sinr_db": 9.045698284931888
+   },
+   {
+    "actual_bps": 1875000.0,
+    "distance_m": 2300.0,
+    "relaxed_bps": 1913038.8382938004,
+    "sinr_db": 8.659747307257987
+   },
+   {
+    "actual_bps": 1875000.0,
+    "distance_m": 2400.0,
+    "relaxed_bps": 1845861.6717819667,
+    "sinr_db": 8.290211640209336
+   },
+   {
+    "actual_bps": 1875000.0,
+    "distance_m": 2500.0,
+    "relaxed_bps": 1782114.4402301488,
+    "sinr_db": 7.935752236000582
+   },
+   {
+    "actual_bps": 1875000.0,
+    "distance_m": 2600.0,
+    "relaxed_bps": 1721540.992222486,
+    "sinr_db": 7.595187434315974
+   },
+   {
+    "actual_bps": 1625000.0,
+    "distance_m": 2700.0,
+    "relaxed_bps": 1663912.9019925492,
+    "sinr_db": 7.267469232337021
+   },
+   {
+    "actual_bps": 1625000.0,
+    "distance_m": 2800.0,
+    "relaxed_bps": 1609025.4663124948,
+    "sinr_db": 6.95166386376583
+   },
+   {
+    "actual_bps": 1625000.0,
+    "distance_m": 2900.0,
+    "relaxed_bps": 1556694.406314874,
+    "sinr_db": 6.646935780986965
+   },
+   {
+    "actual_bps": 1625000.0,
+    "distance_m": 3000.0,
+    "relaxed_bps": 1506753.1306660885,
+    "sinr_db": 6.352534349122138
+   },
+   {
+    "actual_bps": 1625000.0,
+    "distance_m": 3100.0,
+    "relaxed_bps": 1459050.4494209564,
+    "sinr_db": 6.067782719149733
+   },
+   {
+    "actual_bps": 1625000.0,
+    "distance_m": 3200.0,
+    "relaxed_bps": 1413448.6524564938,
+    "sinr_db": 5.792068465505892
+   },
+   {
+    "actual_bps": 1625000.0,
+    "distance_m": 3300.0,
+    "relaxed_bps": 1369821.884916274,
+    "sinr_db": 5.524835662766819
+   },
+   {
+    "actual_bps": 1625000.0,
+    "distance_m": 3400.0,
+    "relaxed_bps": 1328054.766212619,
+    "sinr_db": 5.265578143925637
+   },
+   {
+    "actual_bps": 1625000.0,
+    "distance_m": 3500.0,
+    "relaxed_bps": 1288041.2099826687,
+    "sinr_db": 5.01383373496256
+   },
+   {
+    "actual_bps": 1250000.0,
+    "distance_m": 3600.0,
+    "relaxed_bps": 1249683.410803077,
+    "sinr_db": 4.769179300847668
+   },
+   {
+    "actual_bps": 1250000.0,
+    "distance_m": 3700.0,
+    "relaxed_bps": 1212890.9700367209,
+    "sinr_db": 4.531226469701124
+   },
+   {
+    "actual_bps": 1250000.0,
+    "distance_m": 3800.0,
+    "relaxed_bps": 1177580.1383545836,
+    "sinr_db": 4.299617926691084
+   },
+   {
+    "actual_bps": 1250000.0,
+    "distance_m": 3900.0,
+    "relaxed_bps": 1143673.1565729252,
+    "sinr_db": 4.07402418894516
+   },
+   {
+    "actual_bps": 1250000.0,
+    "distance_m": 4000.0,
+    "relaxed_bps": 1111097.6797139158,
+    "sinr_db": 3.854140788461308
+   },
+   {
+    "actual_bps": 1250000.0,
+    "distance_m": 4100.0,
+    "relaxed_bps": 1079786.2718209603,
+    "sinr_db": 3.6396858026139114
+   },
+   {
+    "actual_bps": 1250000.0,
+    "distance_m": 4200.0,
+    "relaxed_bps": 1049675.9611775721,
+    "sinr_db": 3.430397682032691
+   },
+   {
+    "actual_bps": 1250000.0,
+    "distance_m": 4300.0,
+    "relaxed_bps": 1020707.8472972083,
+    "sinr_db": 3.2260333338965665
+   },
+   {
+    "actual_bps": 1250000.0,
+    "distance_m": 4400.0,
+    "relaxed_bps": 992826.7524541699,
+    "sinr_db": 3.026366425433963
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 4500.0,
+    "relaxed_bps": 965980.9116752491,
+    "sinr_db": 2.8311858779546526
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 4600.0,
+    "relaxed_bps": 940121.6960587569,
+    "sinr_db": 2.640294526300167
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 4700.0,
+    "relaxed_bps": 915203.3650714662,
+    "sinr_db": 2.453507922380979
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 4800.0,
+    "relaxed_bps": 891182.8441241933,
+    "sinr_db": 2.270653264606466
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 4900.0,
+    "relaxed_bps": 868019.524270031,
+    "sinr_db": 2.0915684376416834
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5000.0,
+    "relaxed_bps": 845675.0813233057,
+    "sinr_db": 1.9161011491235342
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5100.0,
+    "relaxed_bps": 824113.3120789502,
+    "sinr_db": 1.7441081518207397
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5200.0,
+    "relaxed_bps": 803299.9856337629,
+    "sinr_db": 1.575454541287229
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5300.0,
+    "relaxed_bps": 783202.708083047,
+    "sinr_db": 1.410013120385031
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5400.0,
+    "relaxed_bps": 763790.7990965465,
+    "sinr_db": 1.2476638231783426
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5500.0,
+    "relaxed_bps": 745035.1790743252,
+    "sinr_db": 1.0882931916667644
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5600.0,
+    "relaxed_bps": 726908.2657502661,
+    "sinr_db": 0.9317938996461805
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5700.0,
+    "relaxed_bps": 709383.8792542387,
+    "sinr_db": 0.7780643186940495
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5800.0,
+    "relaxed_bps": 692437.1547669425,
+    "sinr_db": 0.627008121885666
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5900.0,
+    "relaxed_bps": 676044.4620069079,
+    "sinr_db": 0.4785339213721329
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6000.0,
+    "relaxed_bps": 660183.3308802926,
+    "sinr_db": 0.33255493640649547
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6100.0,
+    "relaxed_bps": 644832.3827028197,
+    "sinr_db": 0.18898868879939812
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6200.0,
+    "relaxed_bps": 629971.2664713738,
+    "sinr_db": 0.04775672312921131
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6300.0,
+    "relaxed_bps": 615580.5997217966,
+    "sinr_db": -0.09121565067047754
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6400.0,
+    "relaxed_bps": 601641.9135612772,
+    "sinr_db": -0.22799959445782747
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6500.0,
+    "relaxed_bps": 588137.601508227,
+    "sinr_db": -0.36266296065082315
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6600.0,
+    "relaxed_bps": 575050.8718121337,
+    "sinr_db": -0.49527049429828196
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6700.0,
+    "relaxed_bps": 562365.7029600804,
+    "sinr_db": -0.6258840199605658
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6800.0,
+    "relaxed_bps": 550066.8021068553,
+    "sinr_db": -0.7545626147500855
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6900.0,
+    "relaxed_bps": 538139.5661922186,
+    "sinr_db": -0.8813627687430312
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7000.0,
+    "relaxed_bps": 526570.0455322003,
+    "sinr_db": -1.0063385338528121
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7100.0,
+    "relaxed_bps": 515344.9096920354,
+    "sinr_db": -1.1295416621470906
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7200.0,
+    "relaxed_bps": 504451.4154667631,
+    "sinr_db": -1.2510217344931647
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7300.0,
+    "relaxed_bps": 493877.3768115043,
+    "sinr_db": -1.3708262803337732
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7400.0,
+    "relaxed_bps": 483611.1365782726,
+    "sinr_db": -1.4890008893150366
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7500.0,
+    "relaxed_bps": 473641.5399286525,
+    "sinr_db": -1.6055893154245666
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7600.0,
+    "relaxed_bps": 463957.90930350864,
+    "sinr_db": -1.7206335742332044
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7700.0,
+    "relaxed_bps": 454550.0208408965,
+    "sinr_db": -1.8341740337826309
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7800.0,
+    "relaxed_bps": 445408.08214275143,
+    "sinr_db": -1.9462494996100048
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7900.0,
+    "relaxed_bps": 436522.7112991904,
+    "sinr_db": -2.0568972943571993
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 8000.0,
+    "relaxed_bps": 427884.9170865737,
+    "sinr_db": -2.166153332374421
+   }
+  ],
+  "uav_to_bs": [
+   {
+    "actual_bps": 16500000.0,
+    "distance_m": 100.0,
+    "relaxed_bps": 16500000.0,
+    "sinr_db": 35.72831609802523
+   },
+   {
+    "actual_bps": 16500000.0,
+    "distance_m": 200.0,
+    "relaxed_bps": 16500000.0,
+    "sinr_db": 29.832055015739456
+   },
+   {
+    "actual_bps": 16500000.0,
+    "distance_m": 300.0,
+    "relaxed_bps": 16500000.0,
+    "sinr_db": 26.333241128759
+   },
+   {
+    "actual_bps": 16500000.0,
+    "distance_m": 400.0,
+    "relaxed_bps": 16500000.0,
+    "sinr_db": 23.842408222200064
+   },
+   {
+    "actual_bps": 16500000.0,
+    "distance_m": 500.0,
+    "relaxed_bps": 16500000.0,
+    "sinr_db": 21.907823995121873
+   },
+   {
+    "actual_bps": 16500000.0,
+    "distance_m": 600.0,
+    "relaxed_bps": 16500000.0,
+    "sinr_db": 20.326129505398356
+   },
+   {
+    "actual_bps": 16500000.0,
+    "distance_m": 700.0,
+    "relaxed_bps": 15814715.812617064,
+    "sinr_db": 18.988336992258212
+   },
+   {
+    "actual_bps": 16500000.0,
+    "distance_m": 800.0,
+    "relaxed_bps": 14865822.898267897,
+    "sinr_db": 17.829226550178277
+   },
+   {
+    "actual_bps": 12500000.0,
+    "distance_m": 900.0,
+    "relaxed_bps": 14032100.004810093,
+    "sinr_db": 16.806666243905468
+   },
+   {
+    "actual_bps": 12500000.0,
+    "distance_m": 1000.0,
+    "relaxed_bps": 13289609.89120668,
+    "sinr_db": 15.89186035408332
+   },
+   {
+    "actual_bps": 12500000.0,
+    "distance_m": 1100.0,
+    "relaxed_bps": 12621258.67579811,
+    "sinr_db": 15.064256169373621
+   },
+   {
+    "actual_bps": 11250000.0,
+    "distance_m": 1200.0,
+    "relaxed_bps": 12014409.964651668,
+    "sinr_db": 14.308670967362346
+   },
+   {
+    "actual_bps": 11250000.0,
+    "distance_m": 1300.0,
+    "relaxed_bps": 11459455.437731557,
+    "sinr_db": 13.613570675930475
+   },
+   {
+    "actual_bps": 11250000.0,
+    "distance_m": 1400.0,
+    "relaxed_bps": 10948915.861364605,
+    "sinr_db": 12.969987223437656
+   },
+   {
+    "actual_bps": 10000000.0,
+    "distance_m": 1500.0,
+    "relaxed_bps": 10476852.628454354,
+    "sinr_db": 12.37080979493463
+   },
+   {
+    "actual_bps": 10000000.0,
+    "distance_m": 1600.0,
+    "relaxed_bps": 10038469.428100454,
+    "sinr_db": 11.810305021813463
+   },
+   {
+    "actual_bps": 10000000.0,
+    "distance_m": 1700.0,
+    "relaxed_bps": 9629834.809380833,
+    "sinr_db": 11.283782738804803
+   },
+   {
+    "actual_bps": 10000000.0,
+    "distance_m": 1800.0,
+    "relaxed_bps": 9247684.13831055,
+    "sinr_db": 10.787357337573582
+   },
+   {
+    "actual_bps": 10000000.0,
+    "distance_m": 1900.0,
+    "relaxed_bps": 8889275.170006016,
+    "sinr_db": 10.317773678513532
+   },
+   {
+    "actual_bps": 7500000.0,
+    "distance_m": 2000.0,
+    "relaxed_bps": 8552280.722030595,
+    "sinr_db": 9.872277677182112
+   },
+   {
+    "actual_bps": 7500000.0,
+    "distance_m": 2100.0,
+    "relaxed_bps": 8234707.579352354,
+    "sinr_db": 9.448518478342578
+   },
+   {
+    "actual_bps": 7500000.0,
+    "distance_m": 2200.0,
+    "relaxed_bps": 7934834.30331161,
+    "sinr_db": 9.044473395445962
+   },
+   {
+    "actual_bps": 7500000.0,
+    "distance_m": 2300.0,
+    "relaxed_bps": 7651162.898403018,
+    "sinr_db": 8.658389540378252
+   },
+   {
+    "actual_bps": 7500000.0,
+    "distance_m": 2400.0,
+    "relaxed_bps": 7382380.794779885,
+    "sinr_db": 8.28873787931606
+   },
+   {
+    "actual_bps": 7500000.0,
+    "distance_m": 2500.0,
+    "relaxed_bps": 7127330.616990886,
+    "sinr_db": 7.934176669722717
+   },
+   {
+    "actual_bps": 7500000.0,
+    "distance_m": 2600.0,
+    "relaxed_bps": 6884985.904176156,
+    "sinr_db": 7.593522069930145
+   },
+   {
+    "actual_bps": 6500000.0,
+    "distance_m": 2700.0,
+    "relaxed_bps": 6654431.431825534,
+    "sinr_db": 7.265724296491413
+   },
+   {
+    "actual_bps": 6500000.0,
+    "distance_m": 2800.0,
+    "relaxed_bps": 6434847.128958989,
+    "sinr_db": 6.949848118305852
+   },
+   {
+    "actual_bps": 6500000.0,
+    "distance_m": 2900.0,
+    "relaxed_bps": 6225494.831819935,
+    "sinr_db": 6.645056774109136
+   },
+   {
+    "actual_bps": 6500000.0,
+    "distance_m": 3000.0,
+    "relaxed_bps": 6025707.295340733,
+    "sinr_db": 6.350598616764401
+   },
+   {
+    "actual_bps": 6500000.0,
+    "distance_m": 3100.0,
+    "relaxed_bps": 5834879.016544566,
+    "sinr_db": 6.065795947728262
+   },
+   {
+    "actual_bps": 6500000.0,
+    "distance_m": 3200.0,
+    "relaxed_bps": 5652458.523198874,
+    "sinr_db": 5.7900356243661975
+   },
+   {
+    "actual_bps": 6500000.0,
+    "distance_m": 3300.0,
+    "relaxed_bps": 5477941.85578093,
+    "sinr_db": 5.522761112711237
+   },
+   {
+    "actual_bps": 6500000.0,
+    "distance_m": 3400.0,
+    "relaxed_bps": 5310867.0277154865,
+    "sinr_db": 5.263465726698584
+   },
+   {
+    "actual_bps": 6500000.0,
+    "distance_m": 3500.0,
+    "relaxed_bps": 5150809.292552625,
+    "sinr_db": 5.011686847470941
+   },
+   {
+    "actual_bps": 5000000.0,
+    "distance_m": 3600.0,
+    "relaxed_bps": 4997377.080615167,
+    "sinr_db": 4.767000957062507
+   },
+   {
+    "actual_bps": 5000000.0,
+    "distance_m": 3700.0,
+    "relaxed_bps": 4850208.494085495,
+    "sinr_db": 4.529019352554627
+   },
+   {
+    "actual_bps": 5000000.0,
+    "distance_m": 3800.0,
+    "relaxed_bps": 4708968.2703045765,
+    "sinr_db": 4.297384431801021
+   },
+   {
+    "actual_bps": 5000000.0,
+    "distance_m": 3900.0,
+    "relaxed_bps": 4573345.139534601,
+    "sinr_db": 4.071766461625117
+   },
+   {
+    "actual_bps": 5000000.0,
+    "distance_m": 4000.0,
+    "relaxed_bps": 4443049.516578322,
+    "sinr_db": 3.851860755185683
+   },
+   {
+    "actual_bps": 5000000.0,
+    "distance_m": 4100.0,
+    "relaxed_bps": 4317811.476193411,
+    "sinr_db": 3.6373851978811302
+   },
+   {
+    "actual_bps": 5000000.0,
+    "distance_m": 4200.0,
+    "relaxed_bps": 4197378.970748496,
+    "sinr_db": 3.428078071389237
+   },
+   {
+    "actual_bps": 5000000.0,
+    "distance_m": 4300.0,
+    "relaxed_bps": 4081516.2554757977,
+    "sinr_db": 3.223696133746188
+   },
+   {
+    "actual_bps": 5000000.0,
+    "distance_m": 4400.0,
+    "relaxed_bps": 3970002.492306743,
+    "sinr_db": 3.0240129201415584
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 4500.0,
+    "relaxed_bps": 3862630.507895143,
+    "sinr_db": 2.8288172346642426
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 4600.0,
+    "relaxed_bps": 3759205.685235638,
+    "sinr_db": 2.6379118078150725
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 4700.0,
+    "relaxed_bps": 3659544.9714304227,
+    "sinr_db": 2.451112098394006
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 4800.0,
+    "relaxed_bps": 3563475.9867683584,
+    "sinr_db": 2.268245221520587
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 4900.0,
+    "relaxed_bps": 3470836.2224606765,
+    "sinr_db": 2.0891489871828384
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5000.0,
+    "relaxed_bps": 3381472.3161988636,
+    "sinr_db": 1.913671035914092
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5100.0,
+    "relaxed_bps": 3295239.3962326865,
+    "sinr_db": 1.741668060057009
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5200.0,
+    "relaxed_bps": 3212000.485956078,
+    "sinr_db": 1.5730051006419217
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5300.0,
+    "relaxed_bps": 3131625.9620794314,
+    "sinr_db": 1.4075549112359624
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5400.0,
+    "relaxed_bps": 3053993.060393184,
+    "sinr_db": 1.2451973812525807
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5500.0,
+    "relaxed_bps": 2978985.423913539,
+    "sinr_db": 1.0858190121737579
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5600.0,
+    "relaxed_bps": 2906492.688873008,
+    "sinr_db": 0.929312440963983
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5700.0,
+    "relaxed_bps": 2836410.104592949,
+    "sinr_db": 0.7755760056643055
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5800.0,
+    "relaxed_bps": 2768638.1837673024,
+    "sinr_db": 0.6245133487639833
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 5900.0,
+    "relaxed_bps": 2703082.3801110475,
+    "sinr_db": 0.47603305447583466
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6000.0,
+    "relaxed_bps": 2639652.7906905524,
+    "sinr_db": 0.33004831649412836
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6100.0,
+    "relaxed_bps": 2578263.880570389,
+    "sinr_db": 0.18647663321399932
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6200.0,
+    "relaxed_bps": 2518834.227682528,
+    "sinr_db": 0.045239527731268936
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6300.0,
+    "relaxed_bps": 2461286.286062046,
+    "sinr_db": -0.09373770975602724
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6400.0,
+    "relaxed_bps": 2405546.165799753,
+    "sinr_db": -0.23052625926098358
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6500.0,
+    "relaxed_bps": 2351543.4282419547,
+    "sinr_db": -0.3651939899233412
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6600.0,
+    "relaxed_bps": 2299210.895124791,
+    "sinr_db": -0.49780566221299694
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6700.0,
+    "relaxed_bps": 2248484.4704688373,
+    "sinr_db": -0.6284231149287791
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6800.0,
+    "relaxed_bps": 2199302.974180053,
+    "sinr_db": -0.7571054383448086
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 6900.0,
+    "relaxed_bps": 2151607.986410118,
+    "sinr_db": -0.8839091347172854
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7000.0,
+    "relaxed_bps": 2105343.7018224457,
+    "sinr_db": -1.0088882672437762
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7100.0,
+    "relaxed_bps": 2060456.7929938538,
+    "sinr_db": -1.1320945984566464
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7200.0,
+    "relaxed_bps": 2016896.2822543012,
+    "sinr_db": -1.2535777189385726
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7300.0,
+    "relaxed_bps": 1974613.4213329186,
+    "sinr_db": -1.3733851671606203
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7400.0,
+    "relaxed_bps": 1933561.5782365035,
+    "sinr_db": -1.491562541166843
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7500.0,
+    "relaxed_bps": 1893696.1308372521,
+    "sinr_db": -1.6081536027640482
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7600.0,
+    "relaxed_bps": 1854974.366694111,
+    "sinr_db": -1.7232003748100198
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7700.0,
+    "relaxed_bps": 1817355.3886717628,
+    "sinr_db": -1.8367432321434194
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7800.0,
+    "relaxed_bps": 1780800.025959199,
+    "sinr_db": -1.948820986646794
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 7900.0,
+    "relaxed_bps": 1745270.750122742,
+    "sinr_db": -2.059470966890899
+   },
+   {
+    "actual_bps": 0.0,
+    "distance_m": 8000.0,
+    "relaxed_bps": 1710731.5958578456,
+    "sinr_db": -2.168729092770178
+   }
+  ]
+ },
+ "seed": 955001,
+ "sweep": "UAV 0 on the line from the anchor toward the arena centre; other UAVs at their t = 0 positions",
+ "t": 0,
+ "uav": 0,
+ "uav_z_m": 50.0,
+ "user": 0
+}
