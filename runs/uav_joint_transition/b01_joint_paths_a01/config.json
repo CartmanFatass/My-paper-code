@@ -1,0 +1,331 @@
+{
+  "batch": "B01",
+  "clock": 30,
+  "direction": "uav_joint_transition",
+  "effective_native": {
+    "adapter_shape": [
+      8,
+      365
+    ],
+    "area_size_m": 8000.0,
+    "battery_capacity_wh": 160.0,
+    "enable_soft_handover": true,
+    "energy_stage": "S2",
+    "failure_enabled": false,
+    "max_speed": 30,
+    "max_steps": 3000,
+    "n_charging_stations": 2,
+    "n_ground_bs": 1,
+    "n_uavs": 8,
+    "n_users": 30,
+    "return_reserve_ratio": 0.1,
+    "routing_protocol": "widest_path",
+    "service_cutoff_threshold": 0.02,
+    "serving_set_size": 3,
+    "time_step": 1.0
+  },
+  "eval_seeds": [
+    62102801,
+    62102802,
+    62102803,
+    62102804,
+    62102805,
+    62102806,
+    62102807,
+    62102808
+  ],
+  "feature_dim": 559,
+  "fits": 1,
+  "horizon": 3000,
+  "information": "same current legal own/station records and central user/BS coordinates at clock30",
+  "initialization": "zero action weights; eligible probabilities .8,1/15,1/15,1/15; forced D otherwise",
+  "jobs": [
+    {
+      "arm": "L",
+      "job_key": "L/62102801",
+      "seed": 62102801
+    },
+    {
+      "arm": "L",
+      "job_key": "L/62102802",
+      "seed": 62102802
+    },
+    {
+      "arm": "L",
+      "job_key": "L/62102803",
+      "seed": 62102803
+    },
+    {
+      "arm": "L",
+      "job_key": "L/62102804",
+      "seed": 62102804
+    },
+    {
+      "arm": "L",
+      "job_key": "L/62102805",
+      "seed": 62102805
+    },
+    {
+      "arm": "L",
+      "job_key": "L/62102806",
+      "seed": 62102806
+    },
+    {
+      "arm": "L",
+      "job_key": "L/62102807",
+      "seed": 62102807
+    },
+    {
+      "arm": "L",
+      "job_key": "L/62102808",
+      "seed": 62102808
+    },
+    {
+      "arm": "O",
+      "job_key": "O/62102801",
+      "seed": 62102801
+    },
+    {
+      "arm": "O",
+      "job_key": "O/62102802",
+      "seed": 62102802
+    },
+    {
+      "arm": "O",
+      "job_key": "O/62102803",
+      "seed": 62102803
+    },
+    {
+      "arm": "O",
+      "job_key": "O/62102804",
+      "seed": 62102804
+    },
+    {
+      "arm": "O",
+      "job_key": "O/62102805",
+      "seed": 62102805
+    },
+    {
+      "arm": "O",
+      "job_key": "O/62102806",
+      "seed": 62102806
+    },
+    {
+      "arm": "O",
+      "job_key": "O/62102807",
+      "seed": 62102807
+    },
+    {
+      "arm": "O",
+      "job_key": "O/62102808",
+      "seed": 62102808
+    },
+    {
+      "arm": "R",
+      "job_key": "R/62102801",
+      "seed": 62102801
+    },
+    {
+      "arm": "R",
+      "job_key": "R/62102802",
+      "seed": 62102802
+    },
+    {
+      "arm": "R",
+      "job_key": "R/62102803",
+      "seed": 62102803
+    },
+    {
+      "arm": "R",
+      "job_key": "R/62102804",
+      "seed": 62102804
+    },
+    {
+      "arm": "R",
+      "job_key": "R/62102805",
+      "seed": 62102805
+    },
+    {
+      "arm": "R",
+      "job_key": "R/62102806",
+      "seed": 62102806
+    },
+    {
+      "arm": "R",
+      "job_key": "R/62102807",
+      "seed": 62102807
+    },
+    {
+      "arm": "R",
+      "job_key": "R/62102808",
+      "seed": 62102808
+    },
+    {
+      "arm": "P",
+      "job_key": "P/62102801",
+      "seed": 62102801
+    },
+    {
+      "arm": "P",
+      "job_key": "P/62102802",
+      "seed": 62102802
+    },
+    {
+      "arm": "P",
+      "job_key": "P/62102803",
+      "seed": 62102803
+    },
+    {
+      "arm": "P",
+      "job_key": "P/62102804",
+      "seed": 62102804
+    },
+    {
+      "arm": "P",
+      "job_key": "P/62102805",
+      "seed": 62102805
+    },
+    {
+      "arm": "P",
+      "job_key": "P/62102806",
+      "seed": 62102806
+    },
+    {
+      "arm": "P",
+      "job_key": "P/62102807",
+      "seed": 62102807
+    },
+    {
+      "arm": "P",
+      "job_key": "P/62102808",
+      "seed": 62102808
+    }
+  ],
+  "launch_sha": "18c9a6ba5094a19479eedc43977202877eb199d3",
+  "max_prediction_team_ticks": 9864000,
+  "max_radio_queries": 1312000,
+  "model": "joint nominal F/limp/dock/energy/queue projection; no intermediate guard/radio/users; independent static radio model",
+  "modes": [
+    "D",
+    "W",
+    "B+",
+    "B-"
+  ],
+  "optimizer_steps": 256,
+  "ordinary": {
+    "candidate_bound": 161,
+    "coordinate_sweeps": 2,
+    "pair_modes": [
+      0,
+      1
+    ],
+    "samples": [
+      10,
+      20,
+      30
+    ],
+    "score_tolerance": 1e-08,
+    "travel_tolerance_m": 1e-06
+  },
+  "pairing": "initial state, full users and native RNG digests; no evaluation updates",
+  "path": {
+    "detour_offset_m": 150,
+    "first_phase_steps": 15,
+    "xy_cap_mps": 30,
+    "z_cap_mps": 5
+  },
+  "planned_native_steps": 288000,
+  "policy_seed": 62092871,
+  "ppo": {
+    "batch_size": 100,
+    "clip_range": 0.2,
+    "device": "cpu",
+    "ent_coef": 0.0,
+    "gae_lambda": 0.95,
+    "gamma": 1.0,
+    "learning_rate": 0.0003,
+    "max_grad_norm": 0.5,
+    "n_epochs": 4,
+    "n_steps": 100,
+    "normalize_advantage": true,
+    "seed": 62092871,
+    "target_kl": null,
+    "vf_coef": 0.5
+  },
+  "references": {
+    "P": "exact central TransitHold P@10, not P_BS",
+    "R": "unchanged full R@30"
+  },
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  },
+  "threads_per_worker": 1,
+  "train_seeds": [
+    62092801,
+    62092802,
+    62092803,
+    62092804,
+    62092805,
+    62092806,
+    62092807,
+    62092808,
+    62092809,
+    62092810,
+    62092811,
+    62092812,
+    62092813,
+    62092814,
+    62092815,
+    62092816,
+    62092817,
+    62092818,
+    62092819,
+    62092820,
+    62092821,
+    62092822,
+    62092823,
+    62092824,
+    62092825,
+    62092826,
+    62092827,
+    62092828,
+    62092829,
+    62092830,
+    62092831,
+    62092832,
+    62092833,
+    62092834,
+    62092835,
+    62092836,
+    62092837,
+    62092838,
+    62092839,
+    62092840,
+    62092841,
+    62092842,
+    62092843,
+    62092844,
+    62092845,
+    62092846,
+    62092847,
+    62092848,
+    62092849,
+    62092850,
+    62092851,
+    62092852,
+    62092853,
+    62092854,
+    62092855,
+    62092856,
+    62092857,
+    62092858,
+    62092859,
+    62092860,
+    62092861,
+    62092862,
+    62092863,
+    62092864
+  ],
+  "workers": 2
+}

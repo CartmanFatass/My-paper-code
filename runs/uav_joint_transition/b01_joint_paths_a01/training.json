@@ -1,0 +1,114 @@
+{
+  "actual_native_steps": 192000,
+  "endpoint": {
+    "bytes": 2220232,
+    "checkpoint": "endpoint.zip",
+    "sha256": "216277daf6fdf4c0ba21bb7bb84b9f6b13056eef089db4a62f3db51d871dfb32"
+  },
+  "endpoint_fingerprint": "82536295bcbc64ebe1412bfdd1109dbaa6f0cc72c42f951a92001452d1b25620",
+  "exposure_records": 6400,
+  "fits_started": 1,
+  "initial": {
+    "bytes": 759894,
+    "checkpoint": "initial.zip",
+    "sha256": "70ae351c6399a86782101341265f855281f4b9a641d0cd45bcfb2d08c6b1c5b5"
+  },
+  "initial_fingerprint": "72b496306f43e338ac38796da8ca1ae192be88ad9f1e444dfdc0555e2be7174c",
+  "lane_counts": [
+    {
+      "episodes_completed": 32,
+      "episodes_started": 32,
+      "exhausted": true,
+      "lane": 0,
+      "macro_steps": 3200,
+      "native_steps": 96000,
+      "worker_cpu_seconds": 4335.405157000001,
+      "worker_peak_rss_kib": 615200,
+      "worker_wall_seconds": 4261.873567695962
+    },
+    {
+      "episodes_completed": 32,
+      "episodes_started": 32,
+      "exhausted": true,
+      "lane": 1,
+      "macro_steps": 3200,
+      "native_steps": 96000,
+      "worker_cpu_seconds": 4317.414761,
+      "worker_peak_rss_kib": 616376,
+      "worker_wall_seconds": 4261.853296799003
+    }
+  ],
+  "lane_progress": [
+    {
+      "completed_controller_work": {
+        "prediction_team_ticks": 1706190,
+        "service_snapshot_calls": 227492
+      },
+      "current_controller_work": {},
+      "current_episode_steps": 3000,
+      "current_seed": 62092863,
+      "episodes_completed": 32,
+      "episodes_started": 32,
+      "exhausted": true,
+      "lane": 0,
+      "macro_steps": 3200,
+      "native_steps": 96000,
+      "status": "exhausted",
+      "worker_cpu_seconds": 4335.40474,
+      "worker_peak_rss_kib": 615200,
+      "worker_wall_seconds": 4261.8391034540255
+    },
+    {
+      "completed_controller_work": {
+        "prediction_team_ticks": 1708170,
+        "service_snapshot_calls": 227756
+      },
+      "current_controller_work": {},
+      "current_episode_steps": 3000,
+      "current_seed": 62092864,
+      "episodes_completed": 32,
+      "episodes_started": 32,
+      "exhausted": true,
+      "lane": 1,
+      "macro_steps": 3200,
+      "native_steps": 96000,
+      "status": "exhausted",
+      "worker_cpu_seconds": 4317.414388,
+      "worker_peak_rss_kib": 616376,
+      "worker_wall_seconds": 4261.822814918007
+    }
+  ],
+  "macro_decisions": 6400,
+  "optimizer_steps": 256,
+  "parameter_movement": {
+    "actor": {
+      "l2": 0.06549459325497334,
+      "max_absolute": 0.004170015919953585
+    },
+    "all": {
+      "l2": 3.7947069560269613,
+      "max_absolute": 0.09013416524976492
+    },
+    "critic": {
+      "l2": 3.7941417132697843,
+      "max_absolute": 0.09013416524976492
+    }
+  },
+  "parent_cpu_seconds": 14.501192,
+  "parent_peak_rss_kib": 615896,
+  "parent_wall_seconds": 4263.975303809042,
+  "policy_seed": 62092871,
+  "ppo_epochs": 128,
+  "recorded_controller_work_lower_bound": {
+    "prediction_team_ticks": 3414360,
+    "service_snapshot_calls": 455248
+  },
+  "recorded_native_step_lower_bound": 192000,
+  "rollouts": 32,
+  "sample_presentations": 25600,
+  "sb3_version": "2.6.0",
+  "status": "complete",
+  "worker_cpu_seconds_sum": 8652.819128,
+  "worker_peak_rss_kib_max": 616376,
+  "worker_wall_seconds_sum": 8523.661918372032
+}

@@ -1,0 +1,94 @@
+{
+  "generation": 5,
+  "wake_id": "2ebba30f-995a-4bc4-b5a7-8f1bdf532cea",
+  "events": [
+    {
+      "id": "1260518e4a27d44022841bd5",
+      "kind": "READY",
+      "evidence": {
+        "job_id": "b01_joint_paths_a01",
+        "status": "ready",
+        "facts": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01/summary.json",
+              "state": "present"
+            }
+          },
+          "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/2228194b96f9bc2d25fad6624a65d85a2e5b62ddfa31228459b4bc2233827110.json",
+          "direction": "uav_joint_transition",
+          "execution": {
+            "exit_code": 0,
+            "exit_witness": {
+              "exit_code": 0,
+              "finished_at_epoch": 1790621757.4014223,
+              "path": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 934415,
+                "session_id": 934414,
+                "start_ticks": 96180430
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 934414,
+                "session_id": 934414,
+                "start_ticks": 96180428
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01/launch-manifest.json",
+          "node": "wsl_4070",
+          "observed_at": "2026-09-28T18:56:27.557049Z",
+          "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/2228194b96f9bc2d25fad6624a65d85a2e5b62ddfa31228459b4bc2233827110.json",
+          "output_root": "/home/wu/projects/HMASD/runs/uav_joint_transition/b01_joint_paths_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "18c9a6ba5094a19479eedc43977202877eb199d3",
+          "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/8864a6faa3604f989586c6928ae0f2a6"
+        }
+      },
+      "created": 1790621789.714229,
+      "consumed": false
+    }
+  ],
+  "delivery": {
+    "id": "2ebba30f-995a-4bc4-b5a7-8f1bdf532cea",
+    "status": "delivery_unknown",
+    "created": 1790621789.7210643,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+    "exposed_ids": [
+      "1260518e4a27d44022841bd5"
+    ]
+  }
+}

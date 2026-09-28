@@ -551,3 +551,317 @@ accepted consistent records, matching live runner/supervisor identities and
 no terminal witness. Observation remains on this one original handle; long
 deterministic waits and same-generation drain/rearm do not restart the worker.
 Collection, independent reading, scientific disposition and cleanup remain.
+
+## 2026-09-28 - B01 complete: unchanged learned deployment and mixed ordinary paths
+
+### Terminal evidence and complete saved-run reconstruction
+
+The one original operation at input
+`18c9a6ba5094a19479eedc43977202877eb199d3` completed with a valid native
+exit-zero witness at epoch `1790621757.4014223`. The runner and supervisor
+identities were absent and native records consistent. There was no restart,
+replacement request, checkpoint selection, changed seed, or extended horizon.
+Observer generations 1-4 ended in checkpoints and were drained/rearmed on the
+same handle; generation 5 delivered terminal READY. Queue attempts returned
+`-32600` for this unloaded native child, so the DM remained active through long
+deterministic waits. READY was consumed through generation 6, then observation
+was stopped without changing the already-terminal worker. The original
+[terminal observer event](../../../../runs/uav_joint_transition/b01_joint_paths_a01/observer-terminal.json)
+and [process witness](../../../../runs/uav_joint_transition/b01_joint_paths_a01/process-exit.json)
+remain compact evidence. Both stdout and stderr were empty.
+
+All **64 training and 32 evaluation H3000 worlds** completed: one result fit,
+288,000 native steps, 6,400 training macrodecisions, 25,600 optimizer sample
+presentations and **256 optimizer updates**. There were no missing, duplicate,
+short, orphan, or unstarted worlds. All same-world L/O/R/P initial, user-path
+and exogenous-RNG bindings match. The frozen offline reader verified all
+**113 manifest artifacts, 96 worlds, 11,200 controller clocks and 800 endpoint
+argmax decisions**. It reconstructed native J as QoS minus native return,
+cutoff and depletion costs plus graph-potential delta, with maximum per-step
+absolute error `2.220446049250313e-16`; no metric or reward was changed.
+Endpoint SHA256 is
+`216277daf6fdf4c0ba21bb7bb84b9f6b13056eef089db4a62f3db51d871dfb32`.
+Initial and final checkpoints have the recorded distinct fingerprints and the
+final optimizer state contains exactly 256 steps.
+
+Primary records are [summary](../../../../runs/uav_joint_transition/b01_joint_paths_a01/summary.json),
+[per-world results](../../../../runs/uav_joint_transition/b01_joint_paths_a01/perworld.json),
+[training](../../../../runs/uav_joint_transition/b01_joint_paths_a01/training.json),
+[training worlds](../../../../runs/uav_joint_transition/b01_joint_paths_a01/training_perworld.json),
+[artifact bindings](../../../../runs/uav_joint_transition/b01_joint_paths_a01/manifest.json),
+and [frozen-reader audit](../../../../runs/uav_joint_transition/b01_joint_paths_a01/reading.json).
+The additional [offline diagnostic audit](../../../../runs/uav_joint_transition/b01_joint_paths_a01/diagnostics.json)
+uses only those saved arrays/probabilities, never a new environment step,
+model update or sampled deployment. Its two pure-array tests passed in 0.10 s.
+Its SHA256 is `d9892e05823ab42620f301dd7c20e231c214ad11fd0cb7e816c7df38bf95655c`;
+the script SHA256 is `0d392a368c0e8195aa6138261a3bdde00ff395bd363bb3914b83b2df13db8851`.
+This post-result reading did not change the input implementation.
+
+### Complete outcomes, exposure and counterexamples
+
+Panel means are conditional on these eight worlds and one learned instance.
+Return cost below is the unweighted native sum; the native objective applies
+its unchanged coefficient 2. CPU is worker CPU, not just neural inference.
+
+| Arm | QoS/step | Native J | Return cost | CPU/world | Radio queries/world |
+|---|---:|---:|---:|---:|---:|
+| L | .818341 | 2395.254 | 14.595 | 130.320 s | 7183.000 |
+| O | .803819 | 2373.213 | 3.854 | 399.929 s | 38728.750 |
+| R | .818341 | 2395.254 | 14.595 | 122.297 s | 7183.000 |
+| P | .797092 | 2345.277 | 7.712 | 136.941 s | 2752.625 |
+
+**L chose all-D at every one of 800 evaluation clocks, including 4,522
+eligible member-windows. All 26 common saved arrays are byte-identical to R
+in all eight worlds**, excluding only the deliberately different planner-record
+JSON. This covers physical trajectories, actions, modes, energy, service and
+native rewards, not merely rounded summary equality. L-R is exactly zero on
+this panel. Its nominal L-O advantage is therefore retained R, not a learned
+motion increment. The mathematical zero-width descriptive L-R interval does
+not establish population equivalence.
+
+For L-O, mean QoS is +.014522 with t7 95% interval [-.009899,+.038944], and
+J is +22.041 [-54.238,+98.321]. R-P (identically L-P) is QoS +.021250
+[-.003691,+.046190], J +49.977 [-75.265,+175.218]. O-P is QoS +.006727
+[-.029012,+.042466], J +27.935 [-78.354,+134.225]. The complete summary
+retains all six signed contrasts and world differences. These wide conditional
+intervals and one fit do not justify ranking training procedures or declaring
+ordinary controllers equivalent or safe.
+
+Training did exercise the requested decision object: 35,804 eligible
+member-windows included **7,086 non-D choices**, 3,998 clocks with at least one
+and 2,043 with multiple non-D members. Counts were D 28,718, W 2,243,
+B+ 2,501, B- 2,342. Relative to the direct proposal on each visited state,
+84,020 changed member-ticks survived F submission; 66,706 also had nonzero
+actual displacement, including **1,201 windows with simultaneous changed
+submitted motion by at least two members**. There were 2,175 canceled
+intermediate member-ticks. F cancellation does not explain all exposure away.
+Nor is every stationary W a failure: a deliberate hold is a legitimate staged
+path even when its actual displacement is zero. Intermediate arrival was
+within one metre in 3,872/4,843 selected detour member-windows; R-target arrival
+was within one metre in 28,484/35,804 eligible member-windows.
+
+All saved training eligible distributions still had D as argmax. Their p(D)
+range was .772037-.835087 (mean .801119), and the final evaluation p(D) range
+was .776592-.834803 (mean .800443); the smallest final D-versus-best-alternative
+probability gap was .697898. Saved requested-label log probabilities reconstruct
+within `1.868407e-6`. Actor and critic parameter L2 movements were .065495 and
+3.794142. Approximate KL was .0000157-.0001393, clipping fraction zero, and
+value explained variance .0000351-.0042081. These are evidence of small finite
+optimization changes and unchanged deterministic decoding, not proof that the
+learner discovered D to be optimal. Large unnormalized value losses do not
+alone identify reward scale, clipping or architecture as the cause or a repair.
+The stored stochastic probabilities do not test stochastic endpoint usefulness.
+
+Restricting aliases to eligible members gives training 21,912/107,412,
+L evaluation 2,990/13,566, and O 2,823/13,479 alternative mode-member predictions
+matching D. Only 56 training, 8 L and 7 O eligible member-windows alias all
+three alternatives. These are conditional single-member nominal predictions,
+not exact native equivalence of joint paths. Counting forced ineligible aliases
+would overstate loss of decision exposure. A changed submitted proposal with
+nonzero displacement is also not an exact unguarded counterfactual path effect.
+
+O selected non-D at **396/800 clocks**, including 202 multi-member clocks:
+658 W, 150 B+ and 149 B- member choices. It had 13,789 changed submitted
+member-ticks, 3,133 with nonzero displacement and 49 windows with simultaneous
+changed submitted motion by multiple members. Of 396 non-D clocks, **107 tied
+all-D's surrogate score** within tolerance and were selected through the travel
+tie rule; none decreased the retained surrogate score. These own-state scores
+are not R's counterfactual future after trajectories diverge. O's source-level
+F/limp/docking correction is retained; omitted guard, association and user
+evolution and bounded local search remain approximations. The result does not
+identify which omission caused its losses or prove all joint paths exhausted.
+
+O-R service was negative in six worlds and J in five. Worlds **62102802/03**
+improved both outcomes, and **62102806** gained J 79.625 while losing QoS .044636
+because its return-cost sum was .725 versus R's 107.493. That one world's
+return-cost reduction exceeds the aggregate reduction across eight worlds.
+R's world 06 minimum battery was **.079926**, reserve exposure 12.5125% of
+UAV-steps, and seven members ended below 10%. O avoided that tail, but introduced
+seven-member terminal reserve tails in **07/08**, with minima .095091/.094521
+and reserve exposures 2.6250%/2.9958%. R also has small nonterminal reserve
+exposures in 02/04. P's world 08 has seven terminal reserve members, minimum
+.086735 and 8.0208% reserve exposure. No arm had cutoff or depletion events;
+that does not establish safety, reliable risk improvement or sustainability.
+
+Mean zero-service steps/longest gap were L/R 19.5, O 23.25 and P 19.125;
+per-world zeros here are the initial delay to first service, with no later
+zero-service interval. Fixed-third QoS for R was .832919/.921537/.700567 and
+O .780490/.931425/.699541, so O's early mean loss is not a universal timing
+benefit. All 32 evaluation worlds consumed more energy than their charger
+input. Means were R 1288.339/341.562 Wh, O 1289.570/341.528 Wh, and P
+1350.771/410.417 Wh. These complete outcomes preserve the storage drawdown
+and late service decline despite zero cutoff; they do not borrow the separate
+persistent-service direction's charging gains or geometry-release defect.
+
+Actual batch cost was **902,027 static-radio queries** (455,248 training and
+446,779 evaluation), **6,800,850 candidate-team prediction ticks**, 7,225.485 s
+runner wall (**120.425 min**) and **14,983.587 recorded CPU seconds / 4.162 CPU
+hours**. CPU components were training lanes 8,652.819 s, evaluation workers
+6,315.897 s and parent 14.871 s. This is below the prospective 11-16-hour
+sensitivity; host and work occupancy differ from its historical scale. It
+does not erase fitting, engineering or shared R costs. L added 6.56% worker
+CPU to R with identical native behavior; O used about 3.27 times R's CPU.
+L's zero transition-radio calls do not mean cheap total deployment: it still
+used R's 7,183 queries and 53,872.5 joint prediction ticks per world. The
+manifest binds 249,128,369 artifact bytes before additional compact reading.
+Engineering/review/readback time was not comprehensively metered; pre-launch
+correctness work is accounted above, with no additional result fit or rollout.
+
+### Independent scientific reading and DM disposition
+
+The registered ResearchCritic `/root/dm_joint_transition/joint_motion_reading_critic`
+ran in a separate context with no DM/Root conversation inheritance, no edits,
+children or scientific launches. It received the original question, corrected
+contract, source and original supporting/adverse evidence, then reconstructed
+the results and raw streams before reading the old selection verdict. Its
+complete substantive final answer follows; relative evidence links are rebased
+to this notebook. It was independent but not blinded to completion counts.
+
+> Recommend **stop further investment in this exact L/O path package**, retain R
+> and P as conditional ordinary references, and leave the broader joint-motion
+> question unresolved. No additional run is justified by B01 alone.
+>
+> No DM/Root conversation was inherited. The assignment disclosed completion
+> counts and the earlier forecast correction, so this was separate-context,
+> not blinded. I reconstructed the frozen protocol and native results before
+> reading the prior selection verdict. I also read the frozen executable source,
+> remote raw trajectories and training streams directly; local and remote
+> compact-result hashes match.
+>
+> The completed comparison at `18c9a6ba5094a19479eedc43977202877eb199d3`
+> supports these observations:
+>
+> | Arm | Mean Native J | Mean QoS/Step | Mean Return Cost | Worker CPU/World |
+> |---|---:|---:|---:|---:|
+> | L | 2395.254 | .818341 | 14.595 | 130.32 s |
+> | O | 2373.213 | .803819 | 3.854 | 399.93 s |
+> | R | 2395.254 | .818341 | 14.595 | 122.30 s |
+> | P | 2345.277 | .797092 | 7.712 | 136.94 s |
+>
+> [Summary](../../../../runs/uav_joint_transition/b01_joint_paths_a01/summary.json)
+> and [per-world evidence](../../../../runs/uav_joint_transition/b01_joint_paths_a01/perworld.json).
+>
+> **L produced no learned deployment increment.** Across 800 evaluation clocks
+> and 4,522 eligible member-windows, it requested zero non-D choices. Its native
+> summaries equal R in every world; my direct world-06 check also found all 26
+> common native arrays byte-identical. Consequently, L-O's +22.041 J and +.014522
+> QoS are fully explained by retaining R. They do not demonstrate useful learned
+> transition selection. The descriptive J interval is [-54.238,98.321],
+> conditional on one fit; eight worlds are not eight training replications.
+>
+> Training nonactivation has a more specific interpretation than "insufficient
+> opportunity." The 64 training worlds contained 7,086 non-D member choices,
+> 2,043 multi-member clocks and 84,020 distinct proposal ticks surviving F.
+> Training therefore exercised alternatives. However, every saved eligible
+> probability row still had D as argmax: p(D) ranged .772037-.835087, versus at
+> most .080886 for an alternative. The actor moved, but did not overcome the
+> deliberately strong initial D preference. Approximate KL remained
+> .0000157-.0001393; clipping fraction was zero throughout; value explained
+> variance remained below .00421. These observations support **limited finite
+> optimization and unchanged deterministic decoding** as the strongest alternative
+> to a claim that the learner discovered D was best. They do not identify reward
+> scale, gradient clipping, architecture or training length as a successful
+> repair. Sources: [training record](../../../../runs/uav_joint_transition/b01_joint_paths_a01/training.json)
+> and retained `training/{exposure,updates}.jsonl`.
+>
+> **O actively intervened and produced mixed, mean-adverse outcomes against R.**
+> It selected non-D modes at 396/800 clocks, including 202 multi-member clocks.
+> Its 957 non-D member choices comprised 658 W, 150 B+ and 149 B-. Of the 396
+> changed clocks, 107 tied all-D's surrogate score within tolerance; travel/tie
+> semantics also contributed to its decisions. A zero-displacement W choice can
+> be meaningful staging, so it must not automatically be counted as an alias
+> or failed execution.
+>
+> O-R lost service in six worlds and J in five. Preserve the positive worlds
+> 02/03 and world 06's risk benefit: O avoided R's severe reserve tail and gained
+> 79.625 J despite losing .044636 QoS. That one world's return-cost reduction
+> exceeds the aggregate reduction; meanwhile O introduced seven-member terminal
+> reserve tails in worlds 07/08. R had one such tail, in world 06, with minimum
+> battery .079926. Zero cutoff/depletion throughout establishes neither safety
+> nor sustained service.
+>
+> The corrected ordinary comparator remains a credible bounded comparison, not
+> a global optimum. It includes lawful F/limp/docking/capacity dynamics, but omits
+> intermediate guard, association and user evolution. Its local search also
+> cannot establish exhaustion of the joint support. Favorable surrogate choices
+> followed by mixed complete outcomes weaken this particular planning package;
+> they do not identify which omitted dynamics caused the losses.
+>
+> The resulting scientific distinctions are:
+>
+> - **Opportunity:** executed alternatives and favorable individual worlds
+>   remain; general headroom is neither established nor exhausted.
+> - **Representation:** the joint interface exercised staging and detours. This
+>   result does not demonstrate representational impossibility.
+> - **Learnability:** this one finite fit did not produce a different
+>   deterministic controller. General learnability remains unanswered.
+> - **Complete usefulness:** L reproduces R with added fitting/inference cost.
+>   O has not earned adoption over R from its complete service, risk and compute
+>   tradeoff.
+>
+> The strongest consequential objection is to treating L's apparent advantage
+> over O/P as learned-path success, or treating nonactivation as proof that
+> learning cannot help. Neither claim is needed to justify stopping this recipe.
+>
+> The smallest worthwhile observation for the present decision was the saved-run
+> reconstruction, now available. Extra evaluation of this unchanged endpoint
+> cannot create a learned increment. An unchanged replication would principally
+> test recurrence, without a current decision that requires that purchase. A
+> future revised learning comparison could be worthwhile, but is not selected
+> here: changed probabilities without changed deployed choices would retain
+> the nonactivation diagnosis; changed choices without complete benefit would
+> reject that revised package; gains beyond competent ordinary references with
+> acceptable observed tails would justify pricing independent training replication.
+>
+> Actual cost was **one fit, 288,000 native steps, 256 optimizer updates, 902,027
+> radio snapshots and 6,800,850 candidate-team prediction ticks**: 120.425 minutes
+> runner wall time and 4.162 recorded CPU-hours. Deployment compute is absent
+> from native J. Engineering, review and readback costs are incompletely metered;
+> the manifest lists 249.13 MB of retained artifacts. Historical radio-placement
+> positives, B02 ranking losses and the unexecuted transit-handoff proposal retain
+> their distinct meanings; none supplies independent replication or a diagnosed
+> repair for this study.
+>
+> MATERIAL_DISSENT: no. No contrary new investment was proposed. I recommend
+> publication with endpoint nonactivation, O's mixed outcomes and actual cost
+> preserved, followed by no new run or expanded learned-benefit claim.
+
+**DM disposition: adopt.** Complete the selected bounded comparison and end
+this exact L/O investment; retain R and central P as conditional comparators,
+not default safe or population-optimal controllers. I supplied the later
+all-eight-world bitwise audit and eligible-only exposure/alias counts to the
+critic as a factual addendum; they strengthen the scope of the factual reading
+without proposing a new investment or requiring another review.
+
+The adopted forecast correction mattered to comparator validity, but this run
+does not measure its causal benefit against the rejected frozen-F predictor.
+The main judgment changed from a plausible but untested joint-motion learning
+increment to **no learned deployed increment in this finite fit**, alongside
+**active but unpersuasive complete ordinary-path value at its added cost**.
+Representation and broader learnability remain open; neither positive
+individual worlds nor previous ordinary packages are a positive-headroom
+certificate for this learner. The results do not diagnose a dominant S7
+optimization, partial-observation or native guard bottleneck.
+
+I re-read current RESEARCH topic 6, including the published persistent-service
+reading, before deciding this boundary. That sibling's O-P gain, distinct
+charging object and actual dwell-release mismatch cannot be transferred to
+this package or ranked against our O-R on different worlds. The recurring
+distinction between sampled training exposure and deterministic deployment is
+relevant shared evidence, not an identified common failure cause. Update the
+directly affected shared background with this bounded distinction and the
+actual risk/cost counterexamples.
+
+No extra panel, training seed, stochastic endpoint, bias change, reward
+normalization, model expansion, exhaustive search or longer horizon is selected.
+An unchanged replication would test recurrence without a present decision that
+needs it; a targeted optimization revision lacks a supported native-benefit
+prediction, and a larger trajectory predictor risks buying more surrogate
+cost without a useful comparison. Saved evidence already resolves whether to
+adopt this package. The direction returns to **reserve** with no producer,
+unread result, open Pro, selected successor or external approval dependency.
+A concrete future proposal must explain why it should change deployed choices
+and improve full native outcomes beyond competent ordinary references at a
+worthwhile total cost. A cross-question pivot belongs to Root's next allocation,
+not an automatic extension of this batch. Publication and precise retention/
+cleanup follow; this scientific stop does not discard the unique adverse evidence.

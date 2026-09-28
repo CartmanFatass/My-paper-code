@@ -1,0 +1,15 @@
+{
+  "batch_status": "complete",
+  "complete_reading": true,
+  "endpoint_choices_verified": 800,
+  "evaluation_queries": 446779,
+  "launch_sha": "18c9a6ba5094a19479eedc43977202877eb199d3",
+  "native_reward_max_absolute_error": 2.220446049250313e-16,
+  "prediction_team_ticks": 6800850,
+  "training_queries": 455248,
+  "training_status": "complete",
+  "uncertainty": "one trained instance, eight paired worlds; no mechanistic or safety identification",
+  "verified_artifacts": 113,
+  "verified_clocks": 11200,
+  "verified_worlds": 96
+}
