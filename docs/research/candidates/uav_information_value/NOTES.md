@@ -1138,3 +1138,169 @@ including the replacement reader-test file). This is working-tree allocation,
 not Git-object-store reclamation or a whole-host free-space claim. The unique
 required raw evidence remains; no accepted worker, active observer, pending
 review, redundant raw copy or concrete cleanup blocker remains for B02.
+
+## 2026-09-28 - B03 prospective: geometric prior versus an ordinary relay anchor
+
+New native DM `/root/dm_information_round2`, parent Root
+`01a0e560-4333-7b03-8ff3-759a4add1d9a`, continues this question on shared main.
+The owner explicitly starts the next round; the predecessor's B01/B02 are fully
+read and closed, with no inherited live operation or pending advice. Root selects
+the substantive question and owns the common isolated selection review
+`/root/round2_question_review`. The design below was sent through native parent
+communication before substantial implementation. It is prospective, pending that
+applicable review, not a launch or a second selection-review request.
+
+**Question and use.** Does B02's algebraic station prior supply useful decision
+content beyond the simplest lawful anchor enabling the same pre-sighting relay
+branch, and which ordinary comparator should subsequent information/learning
+work use? The intended contribution is empirical understanding and a defensible
+ordinary reference. Neither algorithmic novelty nor re-proving B02's whole-
+package benefit is the target. B02's positive complete result, its three J/service
+loss worlds and its sustained seed-28100224 reserve counterexample remain facts.
+No favorable new average can erase the earlier default-replacement restriction.
+
+Relevant published background was refreshed at
+`2abfda5c048883483a27149c645701cbf79daf37`, with HEAD and origin/main matching.
+[RESEARCH section 2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练)
+requires a stronger ordinary comparator than forgetting an observed BS and warns
+that an inferred coordinate also enabled H1's relay branch. Sections 6/8 require
+complete native consequences and distinguish fixed-program information use from
+optimal information value, finite learning, or a pure mediator. These judgments
+lead directly to a matched anchor comparison with H_BS on the same fresh panel.
+The parent question stays open even if this particular construction is not useful.
+
+**Source premises and the ordinary alternative.** The existing generator
+`envs/pettingzoo/relay/energy_aware.py` places station 0 near
+`.70 * BS + .30 * initial_user_mean` and station 1 near initial user mean, with
+component jitter up to 960m, clipping and separation rejection. Consequently
+station 0 itself is a lawful, cheap BS-side anchor. The algebraic construction
+removes an idealized demand contribution but amplifies station noise and does
+not estimate a calibrated posterior. Either anchor may put the ordinary relay
+targets in a useful region. Existing H_park2 is a useful whole fixed-waypoint
+reference, but changes the motion/target program and does not control this same
+H1 branch; its historical score is not evidence against the matched station-0
+choice. No anchor is optimized or selected from exposed worlds.
+
+The actual interface is the unchanged PointSetHeuristic: canonical current legal
+users form up to six service centroids; a nonempty centroid set plus a supplied
+BS/anchor generates two relay targets, ahead of service targets. Non-shielded UAV
+capacity limits assignment, and Hungarian distance assignment retains 300m
+hysteresis. Plans persist 30 primitive calls; each step then passes through the
+same production return shield, energy handling and backhaul guard. Thus input
+supply, relay generation/assignment, proposed command, submitted command and
+realized movement are distinct. Truth assimilation does not add an interrupt.
+
+**Fixed comparison proposed for selection.** The three programs are:
+
+| Arm | Before a genuine BS sighting | After a genuine BS sighting |
+| --- | --- | --- |
+| H_BS | No BS input; existing ordinary fallback | Existing current/remembered legal BS |
+| P_BS | Unchanged B02 reset-frozen `clip((s0-.3*s1)/.7,0,8000)` | Current/remembered legal BS permanently supersedes inference |
+| S0_BS | Reset-frozen first valid legal station-0 xy | Identical permanent genuine-sighting priority |
+
+S0_BS decodes station ID 0 through the existing legal energy records, takes the
+first valid observer and requires finite coordinates. If unavailable at reset it
+stays H_BS; no later estimate is introduced. P_BS retains its existing two-record
+requirement. The actual S2 host supplies both stations. Every arm assimilates
+genuine BS sightings at each primitive step and uses the latest remembered truth
+at the next shared replan. Inference is never inserted into observations, counted
+as a sighting or stored as observed memory. The same real observation supplied to
+all three programs has the same priority; each program's later observations may
+differ because its trajectory differs. Canonical users, replan cadence, service/
+relay slots, assignment, speed/altitude, search, guard, reward, shield, native
+termination and observation rights are unchanged. There is no critic, learner,
+normalizer, optimizer, extra communication or fitted parameter.
+
+Freeze **28100301-28100332**, all three programs once on every seed, S2/H3000:
+**96 complete episodes, at most 288,000 native transitions, 9,600 ordinary replans,
+zero fits and optimizer updates**. These seeds are fresh, not a selected subgroup
+of either earlier panel. Tag `b03_anchor_content_a01`. Native early termination
+is retained at its actual length; a failed or missing cell prevents a complete
+paired conclusion and is not replaced. No outcome-dependent stopping, extra
+arms, panel extension, threshold tuning, learning or automatic retry.
+
+Primary estimand is paired total J for **P_BS-S0_BS** over the full initial-world
+panel. QoS/step is its service consequence, not independent corroboration.
+P_BS-H_BS and S0_BS-H_BS on this same panel determine the ordinary reference's
+conditional use. Report all native metrics, per-world differences, signs/ties,
+nominal paired t95 intervals and adverse worlds. These are exploratory world-
+level intervals without multiplicity adjustment, not independent training runs.
+Later activation/sighting groups are descriptive, never a selected estimand.
+
+Positive mean J and QoS with the primary J interval wholly above zero supports
+incremental geometric-construction value, conditional on the program and risk.
+If S0_BS is useful against H_BS (positive J/QoS means and J interval above zero)
+but P_BS's increment is unresolved, S0_BS may be the pragmatic simpler conditional
+reference; this is a choice under uncertainty, not equivalence or a claim that
+geometry is useless. The opposite signed primary result favors the simpler
+anchor directly. A primary gain without either anchor's established complete use
+against H_BS does not justify default adoption. Unresolved/adverse anchors retain
+H_BS and end this batch without an automatic larger panel. Intermediate changes
+without J/service benefit do not establish utility. Every outcome changes either
+comparator choice or the stated uncertainty/investment, not B02's original result.
+
+**Risk/use rule.** Keep B02's native .10 reserve threshold and exact post-step
+battery arrays, cutoff/depletion, capped/raw return-cost tails, reserve UAV-steps,
+final reserve counts and episode/final battery minima. For each anchor versus
+H_BS, any paired world with added cutoff/depletion or more final UAVs at/below
+reserve blocks default replacement. Higher mean return cost or a worse panel
+battery minimum is an explicit tradeoff. Apply the same descriptive comparisons
+between the two anchors; positive means never erase their adverse worlds. P_BS's
+already observed B02 replacement block persists even if B03 has no new blocker.
+Conditional reference value is distinct from risk dominance, operational safety
+or sustainable cycling after H3000; zero events prove none of those.
+
+**Cost and L0.** Prefer configured wsl_4070 and its existing scientific interpreter,
+four independent workers with one numerical thread each, subject to fresh actual
+node admission with Claude B05 and any other real work present. B02's measured
+rate scales to about 27-40 node minutes and 1.8 worker CPU-hours before contention;
+engineering, publication, review and readback add real cost. No GPU/dependency or
+sparse-checkout change is required. Compact config/per-world/summary/native
+records go to Git, with one hashed required trace copy in durable direction/tag
+storage at closure.
+
+Implementation is confined to new `b03/` modules and `run_b03.py` beneath this
+direction, plus matching tests. Reuse frozen B01/B02 controller and native reader
+assets unchanged; the sensing DM may import them independently. Deliver the
+single fixed comparison above with native admission, bounded failure-preserving
+execution, exact panel identity and declared reading. The read-only observer must
+retain supplied anchor/source, generated/assigned relay counts, controller proposal,
+shield-submitted commands, exact native pre/post movement and exact batteries,
+without affecting controller/RNG/environment behavior. Keep genuine observations
+and inferred input distinct, including sightings between replans.
+
+Checks use constructed observations and a short nonpanel native observer-off/on
+fixture: station-ID selection, reset freezing, memory/true-sighting priority,
+missing-record fallback, no raw-state leakage, existing P/H parity, branch and
+assignment conditions, action/movement distinction, risk counts, fixed-panel and
+failure serialization, and admission before scientific effects. No test exposes
+the declared 32 result seeds. Independent engineering review covers the final
+executable change; completed applicable selection advice will be recorded here.
+After one published/admitted run, retain this native child through deterministic
+same-handle observation, collect/read the full evidence, obtain independent
+scientific result diagnosis, publish standing/shared understanding and perform
+scoped measured cleanup. No new claim note is needed for this exploratory
+fixed-program comparison.
+
+### 2026-09-28 - Selection correction: simplicity does not resolve uncertainty
+
+The common independent critic supports the three-arm experiment but raises a
+material objection to the proposed inconclusive-result disposition. P_BS's
+algebraic overhead is negligible, so a wide P_BS-S0_BS interval cannot favor S0_BS
+mainly on simplicity: meaningful P benefit or a risk difference may remain
+unresolved. Root adopts that correction and the DM implements it. **This
+supersedes the preceding pragmatic-simplicity branch:** if uncertainty remains
+decision-wide, retain P_BS and S0_BS as unresolved conditional alternatives and
+keep H_BS as the default. A future conditional reference is selected only from
+the complete J/service/risk observations and real tradeoffs, not a crossing-zero
+test or trivial arithmetic savings. There is no equivalence claim, new numerical
+threshold, pilot, extra world or post-score repair. The original P_BS reserve
+counterexample and default-replacement block remain in force. Full selection
+advice is returning through Root and will be preserved in this notebook.
+
+The bounded Implementer owns only the new B03 executable modules/entrypoint and
+matching B03 tests for this one frozen three-program behavior. The DM owns this
+notebook, RESEARCH, acceptance, launch and collection. Both work in the existing
+shared main checkout; the Implementer has no Git-index/commit, shared-file, B01/
+B02-edit or launch permission and spawns no children. The selection correction
+changes interpretation, not the prescribed executable panel.
