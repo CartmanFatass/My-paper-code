@@ -299,3 +299,67 @@ checks on separate declared test seeds, not the eight result worlds. Engineering
 review covers this high-risk executable path independently before publication
 and result launch. Stop at this one fixed batch's complete reading, or a
 preserved technical failure needing a fresh scientific decision.
+
+### Engineering preparation and cost correction
+
+The full [combined scientific review and Root disposition](../../archive/2026-09-28/RESEARCH-expanded-native-dm-review.md)
+were subsequently published at `ee5799a2c`. The F section supports H/G/R,
+retains full native service/J/risk and computation, and states no material
+dissent against the selected comparison. Its static-package and no-automatic-
+repair boundaries are the boundaries adopted here.
+
+The Implementer returned the two owned placement files with eight focused
+checks passing. DM read the full implementation and accepts the intended
+controller behavior for integration/review. One accounting correction is
+required before execution: R constructs H separately from G's eight starts,
+so it performs nine k-means solves per clock, not eight. The implementation is
+simpler than sharing mutable assignment construction; retain it and record
+**14,400 solves / at most 432,000 Lloyd iterations** across the batch instead
+of the earlier 13,600/408,000 estimate. Actual iteration counts for original H
+are not instrumented and stay unmeasured. This adds no radio queries, episodes,
+fits, arms or search sweeps. All proposal seeds were searched in current
+docs/runs/experiment source; only this direction's prospective declaration
+matched, with no earlier exposure found.
+
+### Engineering acceptance before publication
+
+DM accepted the implementation after the registered independent engineering
+Reviewer `/root/dm_radio_placement/placement_engineering_review` read the fixed
+contract and all owned code in a separate context. It found one P2: caught
+worker failures could retain planning queries in a partial artifact but omit
+them from cost totals. This is fixed with invocation-started/completed counters,
+successful-record conservation and an explicit lower-bound/unmeasured-cost
+qualification for incomplete batches. An injected first native-step exception
+retains the already spent query and zero native steps. The Reviewer statically
+rechecked the correction and reported no remaining material issue. This is
+engineering acceptance, not scientific evidence or a launch witness.
+
+Final local command, with the configured toolchain PATH, passes **14 tests in
+11.89 s**. Coverage includes 31-step H/G/R paired raw records, a 35-step exact
+original-H1 native trajectory, separate-model/live RNG isolation, best-of-eight
+geometry, F/radio cutoff distinctions, search order/ties/clipping, admission
+before science, full offline metric/reward/hash/search-choice reconstruction,
+missing/duplicate worlds and artifact corruption refusal. The independent
+Reviewer earlier reran the then-current 13 tests: 13 passed in 12.90 s. No
+complete H3000 engineering run was added; late native charging/F transitions
+therefore remain a coverage limit, not a fabricated validation result.
+
+The first full DM command failed one model test because its shell omitted the
+configured venv PATH, making `ninja` unavailable. The remaining 12 tests passed;
+the configured PATH resolved the failure without source/toolchain modification.
+The four recorded full DM test invocations took 14.20, 12.19, 12.24 and 11.89 s,
+plus the Reviewer's 12.90 s. Each exercised 163 short native steps on engineering
+seeds 976801/976802: **815 native engineering steps** over these five invocations,
+separate from the 72k result-step ceiling. The injected test seed 976803 failed
+before its first native step. Earlier eight controller tests and the small
+non-native test subset add engineering costs; design, implementation and review
+human/model wall/compute were not comprehensively metered. Nothing is counted
+as a fit. The final source diff check is clean.
+
+The selected execution uses two single-threaded workers on `wsl_4070`, subject
+to actual native admission, output `runs/uav_radio_placement/b01_spatial_a01`.
+Exact source publication precedes launch. Native-child observation follows the
+published `f2c53785f` correction: arm the detached same-handle observer, keep
+this native turn active through long deterministic waits and drain/rearm. A
+queue registration is not proof of automatic child resumption. No changed
+operation, duplicate launch, alternate App target or per-run Root ACK is used.
