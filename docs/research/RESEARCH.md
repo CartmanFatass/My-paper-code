@@ -51,6 +51,12 @@ observation 与环境状态不同；仅凭当前 observation 未必能作闭合�
 重算计划与参数训练需分别解释。用户移动或故障可以是固定转移规律下的状态变化，不能直接等同于
 训练时队友更新策略造成的非平稳性。
 
+S7的合法BS缓存不是永久地图：每次同步用当前至少一架UAV可见的BS替换旧缓存，而BS在回合内静止。
+因此，保留曾合法见过的BS位置可检验具体的遗忘损失；从未见过的BS仍不因此已知。用户槽位则匿名且随距离排序，
+移动用户的跨时关联、尚未观察的需求与未来随机目标需要分别判断，不能由“加入历史”一并消除。
+这是源码支持的信息契约区别，尚无新服务收益证据；既有central/local差还含点集排序、聚类初始化与搜索回退，
+不构成信息上界。[源码重建与普通信息比较设计](candidates/uav_information_value/NOTES.md#2026-09-28---independent-scientific-challenge-adopted-static-memory-first)。
+
 已知 reward 公式不等于已知行动后的联合物理后果、队友响应和未来状态。若 reward 为 \(g(Y)\)，
 一般不能以 \(g(\mathbb E[Y])\) 代替 \(\mathbb E[g(Y)]\)。已知模拟器中怎样有限学习仍可构成 MARL 问题，
 不需要人为隐藏原本可查的策略或物理信息。模型已知、未知量可由合法反馈识别、有限数据足以支持决策，
@@ -855,7 +861,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
 | `uav_energy_coordination` | 全机队服务、返航／补能和重新部署的联合决策，能否产生超出有能力普通局部控制的完整净用途？ | exploring | Codex DM (native child) | 新DM已开始原始证据与完整比较设计，首轮检验实际空间／回传／能量耦合，不预定学习器或固定H1残差。0新fit／回合，尚无实验声明；成本和首项比较待实质返回与现行独立选题审查合并判断。[本轮范围](#current-research-plan)、[原生路由](#session-routing)。 |
-| `uav_information_value` | 集中真值与汇总合法观测的服务差，哪些源于有用信息，合法历史或信息获取能否恢复其用途？ | exploring | Codex DM (native child) | 新DM核对H_local／H_central信息、表示和回退差异，设计同一普通决策规则的完整信息比较；不把旧包差当信息上界。首轮只读既有源码／证据并写设计，0新fit／回合，未启动结果计算。[本轮范围](#current-research-plan)、[原生路由](#session-routing)。 |
+| `uav_information_value` | 集中真值与汇总合法观测的服务差，哪些源于有用信息，合法历史或信息获取能否恢复其用途？ | exploring | Codex DM (native child) | **首轮证据重建／设计完成，0新fit／回合／诊断。** 旧约.18差含信息与点集排序／聚类／搜索差；源码显示静态BS缓存可遗忘已见位置，匿名移动用户历史是另一问题。建议S2/H3000同一H1规则下用户／BS来源2x2，加原H_central桥接及仅保留曾合法见过BS的普通记忆臂；6程序×32新世界，拟576k步、0fit、约70–120分钟节点墙钟，尚未实施／启动。采纳独立科学审查的初步简化，去掉匿名用户跟踪；完整审查由Root汇总。只读条件控制器的总闭环后果，保留交互与风险，不作最优信息价值或可恢复比例结论。下一步为Root汇总本轮设计／审查后选择任务。[设计与采纳](candidates/uav_information_value/NOTES.md#2026-09-28---independent-scientific-challenge-adopted-static-memory-first)、[原生路由](#session-routing)。 |
 | `uav_roster_memory` | 真实leave/join/rejoin中，哪些实体历史对服务仍有价值，是否超出有能力的普通循环控制？ | exploring | Codex DM (native child) | 新DM核对原生成员、身份和观测语义，继承FOLR不利复制和N7技术缺失，提出或反驳有实质用途的完整比较。不是旧B03重启、槽位改名或固定N混合续投；首轮0新fit／回合。[本轮范围](#current-research-plan)、[原生路由](#session-routing)。 |
 | `energy_relay_diagnostics` | 护盾接管下的提案—执行关系如何影响有限学习，哪些同预算更新方案改善完整部署？ | reserve | Codex DM (independent session) | **Owner要求的原始证据重审及独立科学审查完成：实质修订，结束当前B02/cache投入。** A01训练前失败；A02为1个失败started fit、至少126k新增步／21 rollouts，mask始终关闭，无端点或配对结果。保留有限PPO问题为辅助优化后备；不建立新合作规划器或已证错误梯度。撤回约59min的getter-only 22-rollout重跑；固定分母不保证更新不增大，reset观测数组实际相等，差异在info的末位浮点数。无已选fit、修复项目或自动重试。B01有用普通学习及全部反例保留，原lead与observer责任不变。[完整重审与取舍](candidates/energy_relay_diagnostics/NOTES.md#2026-09-27--owner-requested-b02-re-audit-original-evidence-and-corrections)、[现行计划](#current-research-plan)、[路由](#session-routing)。 |
 | `energy_relay_baselines` | 在共同 S7 服务／风险、合法信息及声明曝光下，普通学习的缺口是否跨独立训练实例重现，哪些普通强化学习配方值得继续比较？ | reserve | Codex DM (independent session) | **B01两个新fit均技术失败，独立科学审查后结束本轮复制／替补投入。** 首个432k步SystemError，第二个858k步SIGSEGV；累计2fits／129万已记录步／约10.152h原生操作时间，两个1.2M端点均缺失，无新评分评价。已有恢复SET仍是条件性学习参照，跨实例重现未获答案。原始转储已保全并完成有界读取，二进制身份限制及共同根因未明；不选第三fit、CPU替补、恢复拼接或常驻诊断，无活动worker／等待依赖。闲置实现和两份源码快照已退役，原始证据保留。[完整失败及成本](candidates/energy_relay_baselines/NOTES.md#2026-09-27--second-original-seed-failed-both-fresh-endpoints-remain-missing)、[独立审查与取舍](candidates/energy_relay_baselines/NOTES.md#independent-reading-and-dm-disposition-end-b01-replenishment)、[路由](#session-routing)。 |
