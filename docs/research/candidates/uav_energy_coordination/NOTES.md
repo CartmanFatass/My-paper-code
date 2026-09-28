@@ -1086,3 +1086,28 @@ Fresh actual-node memory admission will decide execution. The16-episode plan,
 48k transition ceiling,222k snapshot bound and zero-fit scope are unchanged.
 Keep the native turn active through deterministic observation and complete
 reading/publication; registration alone does not establish child wake delivery.
+
+### B02 accepted - complete same-handle collection pending
+
+Exact input source **`2b66dc5125323326bc80709cb02a59111c1fc678`** was published
+and fetched on the configured node. One supervisor request `uec-b02-i-p-a01`
+invoked the native launcher, accepted **2026-09-28 06:19:57 UTC**. The original
+[manifest](../../../../runs/uav_energy_coordination/b02_i_vs_p_a01/launch-manifest.json),
+[status](../../../../runs/uav_energy_coordination/b02_i_vs_p_a01/launch-status.json)
+and [fresh admission](../../../../runs/uav_energy_coordination/b02_i_vs_p_a01/admission-preflight.json)
+are collected. Admission measured **14,873,579,520 available bytes** against the
+4,294,967,296-byte floor. At06:20:19 UTC native status was running, identities and
+records consistent, without an exit witness. This is acceptance, not a result.
+
+The accepted operation reference is
+`/home/wu/projects/HMASD/.git/hmasd-admission/a79433f817c0f17b5d382a4e4c28aabb5778859b59aa8266f891010a28366e2f.json`;
+its retained source snapshot is `101d9dc03932405d8c154bd90f9ef183`.
+`tools/hmasd_wait.py` is registered against that exact handle with1500-second
+windows. The first arm refused because the previous B01 observation was stopped;
+drain showed no pending events and B01 already terminal. Rearming only that empty
+observation state (generation2 to3) enabled the new B02 registration. Neither
+worker was restarted, no old job resumed, and no target/handle was replaced.
+The observer owner remains child UUID`01a0e5d9-7595-7010-b974-4dc802d1b7d8`.
+Keep this native turn active; the known queue limitation is not repaired by
+registration. Complete collection, J/service/risk/cost reading and publication
+remain outstanding. No retry, extension or second panel is authorized.

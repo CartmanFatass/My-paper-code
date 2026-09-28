@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-28T06:19:57.664496Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/101d9dc03932405d8c154bd90f9ef183/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/101d9dc03932405d8c154bd90f9ef183/experiments/candidates/uav_energy_coordination/run_b02.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01",
+    "--seed",
+    "41092801",
+    "--launch-sha",
+    "2b66dc5125323326bc80709cb02a59111c1fc678",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "claim_key": "a79433f817c0f17b5d382a4e4c28aabb5778859b59aa8266f891010a28366e2f",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a79433f817c0f17b5d382a4e4c28aabb5778859b59aa8266f891010a28366e2f.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/101d9dc03932405d8c154bd90f9ef183/experiments/candidates/uav_energy_coordination/run_b02.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01",
+    "--seed",
+    "41092801",
+    "--launch-sha",
+    "2b66dc5125323326bc80709cb02a59111c1fc678",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "command_sha256": "c9054d586ae5b972a51b7cc0d7a7e29f537627d62fbe2d04aa90ab20366c8a67",
+  "control_observation": {
+    "observed_at": "2026-09-28T06:19:57.561085Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "590f0be08e3a48cfffcf8db8dbe01305056f0094"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-28T06:19:57.571107Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/101d9dc03932405d8c154bd90f9ef183",
+  "direction": "uav_energy_coordination",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_energy_coordination/run_b02.py",
+    "--seed",
+    "41092801",
+    "--launch-sha",
+    "2b66dc5125323326bc80709cb02a59111c1fc678",
+    "--workers",
+    "2",
+    "--threads",
+    "1"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a79433f817c0f17b5d382a4e4c28aabb5778859b59aa8266f891010a28366e2f.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 884332,
+      "session_id": 884332,
+      "start_ticks": 92569184
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 884332,
+    "process_group_id": 884332
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 884333,
+      "session_id": 884332,
+      "start_ticks": 92569186
+    },
+    "pid": 884333,
+    "process_group_id": 884332,
+    "supervisor_pid": 884332
+  },
+  "schema_version": 1,
+  "sha": "2b66dc5125323326bc80709cb02a59111c1fc678",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/101d9dc03932405d8c154bd90f9ef183",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_energy_coordination/b02_i_vs_p_a01/stdout.log"
+}
