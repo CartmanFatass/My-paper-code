@@ -6681,3 +6681,16 @@ Root published the owner-requested method revision (scientific-tools "Design the
 | Stage 1 SET at c02 (raw, physical frame, 2 threads; descriptive) | .3181 (920.5) | .3026 (863.9) |
 
 Reading: at one third of training B is where the SET recipe was at the same point (Stage 1 c00 .209/.243 → c02 .318/.303 → c04 .406/.404 → c06 .437/.438), slightly below it deterministic and slightly above stochastic under a different evaluator setting; the comparison against the *endpoint* C_SW is expected to be negative here and carries no reading. Zero zero-service worlds; return-constraint cost 14.5 / 13.8 (c06 raw: 2.4 / 1.5) and minimum battery .073 / .078 — an early-training profile, to be re-read at c04–c06. Next: c03 at rollout 100, c04 at 134, c05 at 167, c06 at 200 (≈ 17:30 UTC at the current pace), each followed by its dev panel; hold-out once at c06.
+
+### 2026-09-28 — B dev panel at c03 read (600k, half of training; descriptive)
+
+c03 at rollout 100 (agent.pt sha 08c80ccb…, 600,000 transitions), copied unchanged to the durable path (sha256 verified). Panel `b05_b_c03_dev_a01` (claim `9efe6b49c5faca93b8ed3861d537fa0b5fcab973e1d07f69493cff7d371c9ac2`, supervisor 917646 / runner 917647, accepted ≈ 12:40 UTC, COMPLETE exit 0, 64 episodes, 856 s, 8 × 1 thread; mirrored locally).
+
+| c03 | det | stoch |
+|---|---|---|
+| B QoS/step (J) | .4454 (1296.2), 2 zero-service worlds, return cost 5.0, min battery .075 | .4182 (1202.8), 1 zero-service, return cost 10.8, min battery .076 |
+| L(c03) = B − C_SW (c06 wrapped), paired | −.012 (SE .031), 19 W / 13 L | −.045 (SE .031), 13 W / 19 L |
+| by frame | IDENTITY −.080 n13, MIRROR_Y +.028 n5, MIRROR_X +.084 n6, ROT180 +.002 n8 | −.141 / +.012 / +.073 / −.014 |
+| Stage 1 SET at c03 (raw; descriptive) | .3249 (944.0) | .3448 (995.9) |
+
+Reading: at half of its budget B is at the SET recipe's *endpoint* level (SET c03 .325/.345, c06 .437/.438) and within the ±.03 reading of C_SW on the dev panel deterministic; the per-world spread is large (SE .031, two zero-service worlds). The frame split is the notable early pattern: B is *behind* C_SW on the IDENTITY (W,S) worlds — where the wrapper does nothing and both policies see the same physical frame — and ahead on the E-half frames (MIRROR_X, ROT180 ≈ 0). This is a c03 snapshot, not a reading of the declared question; the endpoint dev and hold-out panels at c06 decide. Next: c04 at rollout 134 (≈ 14:20 UTC), c05 at 167, c06 at 200 (≈ 17:40 UTC).
