@@ -674,3 +674,51 @@ result and the primary-source novelty limits. There is no active producer, unrea
 result, open Pro request or automatically selected repair. Publish this bounded reading
 and directly affected shared background, then retire unused entrypoints/tests/scratch
 and the disposable source snapshot while retaining the unique evidence and pure reader.
+
+## 2026-09-28 - Published result and lifecycle retirement complete
+
+The complete result, independent disposition and directly affected communication
+background were published at `3567e73b0` before retirement. Searches of experimental,
+script, test, tool and control imports found no live consumer outside this study;
+both bounded helpers and the scientific reader had returned, the native worker had
+exited and the observer process was absent. The ordinary CADC/C2 implementations and
+all other directions' files remain untouched. The B01 runner/tests are now historical
+[source at b2a422088](https://github.com/CartmanFatass/My-paper-code/tree/b2a422088a20235e760e3aaebbc74f35236a4e82/experiments/candidates/uav_message_content/b01),
+not an installed active experiment. The pure readback utility remains on main.
+
+The snapshot collector's initial preview refused the protected `/proc/660/cwd` read
+with Permission denied and requested `--sudo-process-scan`. The documented read-only
+privileged process probe then passed; ordinary-user collection rechecked the terminal
+claim, source cleanliness, durable Git reachability and absent consumers and removed
+only snapshot `b064af76c39c490da655ba4a39b3f62b`.
+[Native removal record](../../../../runs/uav_message_content/b01_s19431/source-retirement.json)
+reports `eligible: true` and `removed: true`. No claim, manifest, output, authoring
+checkout or foreign snapshot was removed. The unrelated pre-existing node Git auto-GC
+warning was not repaired or used as a reason to retain this disposable copy.
+
+Measured allocated bytes before exact-target deletion (`du -B1 -s`), with zero bytes
+remaining at each target after absence checks:
+
+| Node | Removed target | Before bytes | After bytes |
+| --- | --- | ---: | ---: |
+| local | `experiments/candidates/uav_message_content/b01/` | 94,208 | 0 |
+| local | `tests/experiments/candidates/uav_message_content/` | 69,632 | 0 |
+| local | `temp/directions/uav_message_content/` | 20,480 | 0 |
+| wsl_4070 | `.git/hmasd-launch-sources/b064af76c39c490da655ba4a39b3f62b/` | 801,361,920 | 0 |
+| wsl_4070 | `temp/directions/uav_message_content/` | 24,576 | 0 |
+
+Net reduction across these retired paths is **801,570,816 allocated bytes**. This is
+target-directory space, not a claim about Git object storage or the host volume's
+total free-space change. No archive or duplicate retention package was created.
+All **213 stable evidence artifacts / 47,850,516 logical bytes** were rehashed again
+at the original node output after cleanup and still match; the reconstruction hash
+also remains unchanged. The unique raw/checkpoint/update copy, native recovery records,
+published compact evidence and pure reader are intentional retained evidence, not a
+cleanup blocker. No owned target or concrete cleanup refusal remains unresolved.
+
+Remote canonical control was narrowly synchronized to the published `reserve` state
+under its established writer lock, preserving the other sessions' dirty hunks. The
+broader scientific question remains open, with C retained and no selected next fit,
+diagnostic, producer, unread output, Pro operation or acknowledgment dependency. Return
+this fully read boundary to Root for project-level allocation; do not infer permission
+to run the optional replication alternative or restore an archived predecessor.

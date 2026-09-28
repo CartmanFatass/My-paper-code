@@ -1,0 +1,15 @@
+{
+  "mode": "apply",
+  "snapshots": [
+    {
+      "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/f4a4639f7f95943625705899a55ddcc41ccd04a87d5075a2d47f7cc6f99af6e6.json",
+      "durable_ref": "refs/remotes/origin/HEAD",
+      "eligible": true,
+      "output": "/home/wu/projects/HMASD/runs/uav_message_content/b01_s19431",
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/b064af76c39c490da655ba4a39b3f62b",
+      "removed": true,
+      "sha": "b2a422088a20235e760e3aaebbc74f35236a4e82",
+      "snapshot": "b064af76c39c490da655ba4a39b3f62b"
+    }
+  ]
+}
