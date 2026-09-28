@@ -872,3 +872,38 @@ matched H there, with six activated. That is not B01's denominator, a separately
 randomized subgroup or permission to select worlds. It reinforces the scope
 distinction only. B02's already selected fresh full panel, estimator, cost and
 stopping contract are unchanged and require no E result gate.
+
+### 2026-09-28 - B02 accepted and observed on its native handle
+
+Exact published inputs are `d6151ff5155d8bf3f3289bba727ee5148f6b76a6`.
+The single fixed B02 operation was accepted at **06:37:28 UTC**, with its original
+[native launch manifest](../../../../runs/uav_information_value/b02_station_prior_a01/launch-manifest.json)
+and [fresh actual-node admission](../../../../runs/uav_information_value/b02_station_prior_a01/admission-preflight.json)
+collected here. Available physical/effective memory was 14,881,013,760 bytes
+against the 4,294,967,296 floor. The configured supervisor's launch command
+finished exit 0 after 19 seconds; that is not the experiment exit. The first
+deterministic observation at 06:43:33 UTC reports the native runner/supervisor
+running with matching identities, accepted admission, no exit witness and zero
+observer errors. No B02 result has been read at this entry.
+
+The node's dirty canonical RESEARCH prose remains unchanged: its relevant lifted
+pause, exploring state and exact `Codex DM (native child)` lead match published
+controls. Source fetch through configured `zsh -lic` succeeded; the previously
+recorded old bad-tree automatic-GC warning remains and was not repaired. No
+sparse selection, unrelated evidence or source was reset or merged.
+
+Observation remains owned by this native child at
+`/home/fires/.local/state/hmasd-wait/01a0e5da-116b-72f3-b158-476344637e06`.
+The first new request was refused for a relative `ssh` executable; it was
+corrected to `/usr/bin/ssh`. A second arm was refused because the old B01 observer
+state was stopped. Draining that state showed no pending wake/event and only the
+already completed B01; rearming generation 4 to 5 cleared observation stop, then
+adding B02 established **generation 6**, job `b02_station_prior_a01`, window
+1,500 seconds. These were observer-setup corrections, not launches, worker
+restarts, result failures or a resumed B01. Its completed job remains completed.
+
+The accepted native handle is unchanged. This child stays active through long
+deterministic waits, drains the existing observer at terminal/checkpoint, rearms
+only that observation when needed, and will collect/read all declared outcomes.
+The earlier native-child automatic wake rejection is not assumed fixed or routed
+to Root. No replacement operation, panel extension or extra arm is authorized.
