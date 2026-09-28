@@ -186,3 +186,11 @@ preserved and the split is disjoint by construction. Everything else in the refe
 The copy will live at `experiments/candidates/uav_restoration_readiness/b01/preprocess_milan_b01.json` and is
 committed before preparation; the cache metadata records the dataset version (Dataverse v1.3, 2020-02-09), the
 ODbL 1.0 licence and the required attribution ("from BigDataChallenge contest").
+
+### 2026-09-28 — Owner decision (direct): direction shelved until the owner supplies the Milan data
+The owner: "先搁置这个需要数据的方向 等我拿到数据后才继续 选两个别的方向". b01 stays declared and unlaunched;
+no guestbook submission, no download, no synthetic substitute. Resume condition: the owner places the six daily
+files and `milano-grid.geojson` (or tells this session how to obtain them) — then gates (2)–(5) of the declaration
+run unchanged at the then-current source. RESEARCH row state set to `paused`. The session now selects two other
+directions from the owner's main line (separate selection record under those directions and in
+`energy_relay_benchmark/NOTES.md`).
