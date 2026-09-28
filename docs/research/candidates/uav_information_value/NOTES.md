@@ -1381,3 +1381,204 @@ consistent source records and both exact native identities running; no exit
 witness was present. The child stays active through terminal collection and
 reading, then drains/rearms this same observer if a checkpoint requires it.
 Neither summary-file presence nor supervisor command exit is scientific completion.
+
+### 2026-09-28 - B03 complete: construction increment with conditional risk tradeoffs
+
+The original process exited **0 at 10:30:40 UTC**. Generation 1's 25-minute
+CHECKPOINT (`ebe3f0c9d7397378618fb27c`, wake
+`780b2912-510c-493e-89f8-70f3386c7ab1`) confirmed the same runner/supervisor;
+generation 2 was rearmed without changing the operation. READY at 10:30:49 UTC
+(`822c0895270a8dd2a2c38343`, wake `d21f3e52-2f3a-4619-ab6e-395b0613c1ac`)
+matched the valid exit witness, absent native identities and consistent records.
+Both queue attempts returned -32600, unloaded spawned-child delivery not allowed.
+The child stayed active through deterministic waits, drained READY, consumed it
+into generation 3 and stopped observation. Final drain has no pending wake/event
+and `stopped: true`. No duplicate, restart, replacement or extra panel occurred.
+
+All **96 episodes / 32 fresh triplets** completed native H3000 truncation:
+**288,000 native transitions, 9,600 replans, zero fits or optimizer updates**.
+No failed, cancelled, missing, unreconciled, unstarted or orphan cells, pool/runner
+errors or partial transitions remain. The [config](../../../../runs/uav_information_value/b03_anchor_content_a01/config.json),
+[all world readings](../../../../runs/uav_information_value/b03_anchor_content_a01/perworld.json),
+[complete summary](../../../../runs/uav_information_value/b03_anchor_content_a01/summary.json),
+[manifest](../../../../runs/uav_information_value/b03_anchor_content_a01/manifest.json),
+[terminal status](../../../../runs/uav_information_value/b03_anchor_content_a01/terminal-status.json)
+and [readback audit](../../../../runs/uav_information_value/b03_anchor_content_a01/readback-audit.json)
+bind source `153a87e697a201b4c95a9ff62443e2e302b78b78`. Both native stdout/stderr
+are empty. All 195 original manifest entries, **101,243,101 file bytes**, passed
+byte-count/SHA-256 checks; collected compact artifact hashes match their originals.
+
+The DM loaded every NPZ with `allow_pickle=False`, checked numeric finiteness
+(allowing the declared missing-coordinate NaNs), reconstructed native `world_row`
+and exact battery/reserve readings, and rebuilt every summary field. Reset station
+records and initial native UAV positions match across each triplet. All recorded
+primitive sightings update real memory; all 9,600 planner inputs obey current
+truth, remembered truth, then frozen anchor precedence. Held-plan labels honestly
+retain their source between replans. Canonical legal/supplied user counts,
+generated/assigned relay counts, proposed/submitted commands and exact native
+displacement continuity were checked. No environment transition was used to audit.
+
+| Endpoint | H_BS mean | P_BS mean | S0_BS mean |
+| --- | ---: | ---: | ---: |
+| Total native J | 1578.232334 | 2133.070557 | 2000.284025 |
+| QoS/step | .584128 | .730522 | .691373 |
+| Capped return cost/step | .023935 | .004660 | .007216 |
+| Raw return cost/step | .023940 | .004660 | .007216 |
+| UAV-step fraction at/below .10 reserve | .065116 | .022836 | .024628 |
+| Final UAV count at/below reserve | 4.687500 | 2.718750 | 2.093750 |
+| Episode minimum battery | .085825 | .096542 | .097775 |
+
+| Contrast | Delta total J, nominal paired t95 | Delta QoS/step, nominal paired t95 | J up/down/tie | QoS up/down/tie |
+| --- | ---: | ---: | ---: | ---: |
+| P_BS-S0_BS (primary) | +132.786532 [72.406328, 193.166736] | +.039149 [.020694, .057604] | 19/1/12 | 18/2/12 |
+| P_BS-H_BS | +554.838223 [294.586774, 815.089673] | +.146393 [.077150, .215637] | 19/1/12 | 19/1/12 |
+| S0_BS-H_BS | +422.051691 [187.682434, 656.420948] | +.107244 [.043707, .170782] | 16/4/12 | 17/3/12 |
+
+The prospective positive P-S0 prediction is reached: positive mean native J and
+service, with the primary J interval wholly positive. These exploratory t95
+intervals use 32 initial worlds, without multiplicity adjustment, not training
+replications or confirmation. QoS contributes to native J and is not independent
+corroboration. The corrected decision-wide-uncertainty branch is not the observed
+primary result; it remains the right rule for that counterfactual outcome.
+
+Every native-J or service loss is retained, including disagreements between them:
+
+| Contrast | Seed | Delta J | Delta QoS/step | Delta capped return cost/step |
+| --- | --- | ---: | ---: | ---: |
+| P-S0 | 28100306 | +508.110822 | -.007918 | -.088644 |
+| P-S0 | 28100315 | -12.670171 | +.037337 | +.020780 |
+| P-S0 | 28100324 | +53.521804 | -.001547 | -.009694 |
+| P-H | 28100321 | -5.312298 | -.001171 | +.000319 |
+| S0-H | 28100316 | -261.138272 | -.090484 | -.001717 |
+| S0-H | 28100321 | -173.434091 | -.057924 | -.000049 |
+| S0-H | 28100324 | -8.761049 | +.003048 | +.002990 |
+| S0-H | 28100325 | -99.457917 | -.033362 | -.000105 |
+
+**Neither anchor becomes the default.** P has no new paired cutoff/depletion/final
+reserve-count blocker against H in B03, but B02's **28100224** block remains binding.
+S0 triggers its own prospective blocker in **28100314**: despite +102.260642 J and
++.034432 QoS/step, final reserve count rises **0 to 1**, reserve exposure **0 to 20
+UAV-steps**, minimum battery .101239 to .096941, final minimum .108077 to .097610.
+H remains the default under the frozen rule, not because H is uniformly safer.
+No deploy-safe subset or new runtime selection rule was identified.
+
+P also has important risk losses against S0, despite its better performance mean:
+
+| Seed | S0 to P final reserve count | S0 to P reserve UAV-steps | S0 to P episode minimum battery |
+| --- | ---: | ---: | ---: |
+| 28100307 | 0 to 7 | 0 to 1262 | .113268 to .091037 |
+| 28100308 | 0 to 7 | 1 to 2099 | .099844 to .085776 |
+| 28100309 | 0 to 7 | 0 to 1788 | .101353 to .087833 |
+| 28100315 | 0 to 7 | 2 to 2286 | .099534 to .084652 |
+
+P-S0 mean return cost is -.002556 t95 [-.008917,.003804]; final reserve count
+is +.625000 [-.364496,1.614496]; reserve fraction is -.001792 [-.018171,.014588];
+mean episode minimum is -.001233 [-.004435,.001968]. These are unresolved average
+risk contrasts, not equivalence or risk dominance. P improves final reserve count
+relative to S0 in 28100314/323; the four opposite worlds above are not cancelled.
+Panel minimum batteries H/P/S0 are .049781/.084652/.065968; worst world-mean capped
+return costs are .119388/.021812/.096235 (raw H .119559, other two unchanged).
+Zero cutoff/depletion in all 96 episodes proves neither safety nor sustainable
+cycling beyond H3000.
+
+All other adverse risk worlds are retained in full per-seed summary fields. For
+compactness, suffixes below all mean prefix **28100**:
+
+| Worsening endpoint | P-H | P-S0 | S0-H |
+| --- | --- | --- | --- |
+| Capped/raw return cost | 321,325,332 | 307,308,309,315,316,321,325,327,328,332 | 306,310,314,324,332 |
+| Reserve UAV-steps | 321,325,332 | 307,308,309,315,316,321,325,332 | 306,310,314,324 |
+| Episode minimum battery | 314,321,325,332 | 307,308,309,315,316,321,325,327,328,329,331,332 | 314,324,332 |
+| Final minimum battery | 332 | 307,308,309,315,321,325,329,331,332 | 314,324,332 |
+
+Both anchors supply inferred inputs in **24 worlds**, P for **1,017 replans** and
+S0 for **1,642**. Inferred relay targets are generated in **20 worlds**, at **950
+P / 1,575 S0 replans**, and at least one is assigned at **900 P / 1,448 S0 replans**.
+Across all sources, both arms generate 6,182 relay targets, but P assigns 5,208
+versus S0's 5,097. These are different readings: identical branch rules do not
+require identical later activation or assignment counts once trajectories diverge.
+P-S0 differs in proposal on 57,307 primitive steps, shield-submitted command on
+57,354 and exact realized team displacement on 50,453. Each difference occurs in
+the same 20 affected worlds. These are descriptive trajectory counts, not a causal
+mediation estimate or a decomposition of the score gain.
+
+The 12 outcome ties are exact native-trace/command ties: eight worlds already see
+BS at reset; **28100302/312/313/326** supply anchors only while no legal users permit
+an inferred relay, then acquire real BS knowledge before a consequential relay
+decision. They do not support anchor equivalence. Every affected world's first
+consequential inferred relay decision has identical pre-action positions and
+service centroids, two relays in each anchor arm, the predicted algebraic relay
+displacement, and different proposed/submitted commands and native movement.
+No inferred coordinate is relabelled observed. After genuine sighting there are
+256 P / 230 S0 primitive steps with a previously inferred held plan; those labels
+change honestly at the next common 30-step replan, not via an unplanned interrupt.
+H/P/S0 never-sighting counts are 19/9/12. More/faster sightings, later legal-user
+visibility and shielding/charging are endogenous consequences, not separately
+randomized explanatory variables. No observed-only conditional analysis replaces
+the complete 32-world estimand.
+
+Actual cost: **2,347.810 runner seconds (39.130 min)**, **2,449.469 acceptance-to-exit
+seconds (40.824 min)**, **9,608.617 summed worker CPU seconds (2.669 h)**. The maximum
+reported worker peak is 519,444 KiB (507.270 MiB); parent peak is 480,980 KiB. These
+individual peaks do not measure simultaneous node peak. All worker resource
+records are present. Engineering remains 372 transitions and zero fits; setup,
+readback, review and publication are additional incompletely timed work, not zero
+cost. Concurrent accepted sensing/Claude work was preserved.
+
+### 2026-09-28 - B03 independent reading and comparator disposition
+
+Registered ResearchCritic `/root/dm_information_round2/read_b03` used a fresh
+context with no inherited DM/Root conversation. It reconstructed the outputs
+before reading complete earlier interpretations and Root's disposition. The
+assignment and prospective note exposed interpretation guardrails/selection
+synopsis, so it correctly discloses that this is independent, not blinded.
+It independently verified snapshot SHA, terminal witness, all 195 hashes, all 96
+NPZs, primary/native/risk endpoints and intervals, and the first-consequential-
+decision geometry/action checks above. It also checked original raw evidence for
+the four B01 memory losses, three B02 J/service losses and B02's sustained reserve
+counterexample; it did not merely inherit the positive summary. No new episodes
+were executed. Its substantive recommendation is **P as the stronger conditional
+ordinary performance comparator, H as default under the frozen risk rule, S0 as
+the retained attribution control, and stop further anchor-attribution investment**.
+**MATERIAL_DISSENT: no** for that scoped disposition. The DM accepts it. No distinct
+Pro expertise or missing source warrants another consultation.
+
+The explanation changes from B02's "useful fallback, coordinate contribution
+unresolved" to **a useful fallback with supported incremental value of the
+construction over station 0 under this fixed controller**. S0's own benefit means
+a competent ordinary anchor already addresses part of the problem; mere branch
+enablement is nevertheless insufficient to explain P's additional complete
+consequence. This is neither exact-coordinate recovery nor a calibrated posterior,
+and it does not identify geometric accuracy or discovery as the mediator. Station
+0 is itself informative, not an information-free placebo. B03 does not quantify
+the share of B02 benefit due purely to activation, subtract fresh panels into an
+oracle-gap percentage, or establish optimal information value, learnability,
+algorithmic novelty or deployment transfer.
+
+For compatible subsequent J/service learning or information studies, **P_BS is the
+stronger available ordinary performance comparator; beating H alone does not show
+an increment beyond it**. This is conditional comparator use with explicit risk
+reporting, not a deployed safe policy or default replacement. Retain H for the
+existing default/risk comparison and S0's code/evidence as an attribution/risk
+alternative; do not prefer S0 merely for negligible algebraic simplicity or call
+it risk-dominating. The P-S0 adverse tradeoffs and both anchor-versus-H default
+blocks stay attached to reuse. The parallel sensing study's already frozen P use
+does not change, wait on or tune to this result.
+
+The selected decision now has a useful complete observation. End this fixed B03
+investment and return the revised explanation and comparator recommendation to
+Root. No extra world, fit, confirmation, threshold, anchor tuning or safety repair
+is selected. The broad actionable-information question stays open, but this is
+reserve with no producer/dependency, not an invented wait. Re-entry requires a
+new substantive question whose controller, host law or operational horizon makes
+this comparison relevantly incomplete; a positive score or those possibilities
+alone do not justify another run.
+
+Closure scope: preserve the unchanged B01/B02 reusable assets and unique adverse
+evidence. Keep B03's S0 controller, reusable observer, reader, read-only audit and
+their relevant tests. Retire only its completed batch/entrypoint and obsolete
+launch-wiring tests; move the unchanged controller factory to the reusable module.
+Check retained constructed tests with zero additional native transitions. After
+the critic releases all raw/source consumers, hash-check and move the one raw copy
+to durable direction/tag storage, reclaim only this terminal launcher snapshot,
+and delete own disposable caches/scratch with measured net allocated reduction.
