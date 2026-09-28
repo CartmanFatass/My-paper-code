@@ -24,6 +24,12 @@ require this review; DM reflection and pivots may use their existing NOTES and s
    prediction or investment choice in the direction's NOTES, and whether reusable changes reached
    RESEARCH. Judge those consequences, not citation counts; absent evidence is unverified use.
    This check belongs to the owner-triggered review, not a new watch or adoption-report cycle.
+   At a round boundary, explain which belief, ordinary reference or investment decision actually
+   changed and which did not. Include uninformative outcomes and the cost of finding out;
+   positive scores, completed batches and reviewed documents are not substitutes for that change.
+   A clearer comparison can justify retaining the workflow without proving it caused greater
+   research efficiency or paper-level novelty. Keep this in the existing synthesis, with no
+   information-gain score, extra form or routine review of the workflow itself.
    Use the section 2 Scientific Reviewer for an independent evidence-first diagnosis and
    direction-correction recommendation, in a separate context rather than a DM/Root history
    fork. Preserve material disagreement with Root as well as with DMs. Reuse that same review

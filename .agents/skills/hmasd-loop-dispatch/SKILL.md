@@ -42,6 +42,14 @@ prescribe a favored conclusion or ask the child to keep repairing a recipe until
 child only after selecting worthwhile concrete work, using the registered DM role and its
 owner-selected settings. Keep one writer per path and record the actual child route in RESEARCH.
 
+Owner-approved refinement, 2026-09-28: keep this division of work stable while Root puts more
+attention into consequential new questions and cross-question choices. An unchanged accepted
+study stays with its DM; routine execution does not need Root supervision or another approval.
+Use relevant project evidence and primary-source ideas to look beyond the last failed recipe.
+Diagnosis and baseline attribution remain useful when they change a decision, but should not
+become the programme's default destination. This is an allocation of attention, not a new-topic
+quota, a novelty gate, or a reason to interrupt accepted work.
+
 The child is a scientific DM, not an Operator: it can challenge the assigned question and
 select methods and ordinary in-scope continuations. A consequential source contradiction,
 already stronger relevant comparator or mismatch between the named decision and policy interface
