@@ -54,6 +54,12 @@ Owner, 2026-09-28 UTC: there is no fixed Codex DM/research-track count ceiling. 
 select useful questions without filling a quota; actual node resource admission remains.
 Use long native agent waits while the children carry out research, then integrate substantive
 returns and advance the next justified work rather than ending at dispatch or polling progress.
+An accepted launch is not the child's result boundary. On 2026-09-28 the App rejected
+`codex queue` delivery to an unloaded native child (`-32600`), although its detached
+same-handle observer remained healthy. Keep the child turn active with long deterministic
+waits and checkpoint drain/rearm until the assigned reading is complete; registration alone
+does not establish an automatic return. If it already ended, Root uses native follow-up on
+that same child and handle. Do not substitute an App target or relaunch the experiment.
 
 ## Select the session's work
 

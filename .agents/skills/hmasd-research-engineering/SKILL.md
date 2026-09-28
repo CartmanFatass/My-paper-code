@@ -236,9 +236,16 @@ archive file, chat archival or published commit alone is not space reclaimed.
    source snapshot when necessary to keep active inputs unchanged while authoring continues.
    Link the manifest/operation reference from `NOTES.md` and explain the scientific context;
    do not manually duplicate its command, node, native identities, SHA, cwd and output fields.
-4. Arm `tools/hmasd_wait.py` against the accepted launch status handle and end the Codex turn.
-   The detached standard-library controller observes the existing process and queues the assigning
-   session only on completion, error or a bounded checkpoint. A checkpoint is rearmed against the
+4. Arm `tools/hmasd_wait.py` against the accepted launch status handle. For an independent
+   Codex session with a supported queue-return path, end the turn after adopting the handle.
+   A native DM child instead keeps its turn active with long deterministic waits and drains
+   the same observer at completion or checkpoints: on 2026-09-28 App queue rejected unloaded
+   spawned children (`-32600`). Registration is not proof that an ended child will resume.
+   Root waits through native `wait_agent`; an already-ended child can continue through native
+   follow-up without changing its operation or observer owner. Do not reroute a failed queue
+   delivery to another App task. The detached standard-library controller observes the existing
+   process and attempts a wake only on completion, error or a bounded checkpoint; record actual
+   delivery separately from healthy process observation. A checkpoint is rearmed against the
    same handle; it never restarts the worker. Timeout or a lost connection is unknown, not terminal.
    Never launch a duplicate; reconcile the same handle. Claude uses deterministic external waiting
    plus native/manual return because Codex queue does not wake a Claude session.
