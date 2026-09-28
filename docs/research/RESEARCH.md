@@ -17,7 +17,7 @@ DM持续负责科学问题与解释，每次推进一个结果性研究，自主
 当前责任与工作区见[任务路由](#session-routing)，上一轮分工及采纳依据见[四DM审查](archive/2026-09-27/RESEARCH-four-codex-root-handover.md#four-dm-root-decision)。
 Owner已归档完成且文档齐全的DM；后继研究创建新DM并继承已发表证据，不恢复或复用这些旧会话。
 六个原生DM及A/B后继比较均已完整收口：7批、640完整回合、1.92M原生步、1fit；来源、独立判读和终态清理均保全。
-Owner于2026-09-28启动的第二轮两项比较已完整运行并独立判读：主动感知学习包未建立超出普通策略的增量，合法锚点比较建立构造的条件性增量并改变性能参照；1fit／960k原生步，原配方不自动追加。轻量方法调整后的第三轮两项独立问题也已完整运行、判读和清理：有限补能承诺保留条件性普通O；联合路径过渡包未建立用途。两学习端点均未改变各自普通参照的部署，不以此诊断共同原因或否定更广学习；2fits／624k原生步，原配方不自动追加。与Claude共同选定的下一轮中，Codex长任务服务与延迟通信内容两比较现已完整运行、独立判读和清理：长任务O_H有平均服务收益但新增耗尽风险，未通过采用规则；通信三臂均学得自身收益，新内容包未超过原聚合参照。共3fits／634368团队步，不自动追加。Claude已开设独立恢复方向，owner已授权最小必要公开数据准备及有上限的零训练比较，实际数据许可／准备条件仍须核验。不以DM数量下降宣称问题空间耗尽。具体结果、成本与选择见[现行计划](#current-research-plan)。
+Owner于2026-09-28启动的第二轮两项比较已完整运行并独立判读：主动感知学习包未建立超出普通策略的增量，合法锚点比较建立构造的条件性增量并改变性能参照；1fit／960k原生步，原配方不自动追加。轻量方法调整后的第三轮两项独立问题也已完整运行、判读和清理：有限补能承诺保留条件性普通O；联合路径过渡包未建立用途。两学习端点均未改变各自普通参照的部署，不以此诊断共同原因或否定更广学习；2fits／624k原生步，原配方不自动追加。与Claude共同选定的下一轮中，Codex长任务服务与延迟通信内容两比较现已完整运行、独立判读和清理：长任务O_H有平均服务收益但新增耗尽风险，未通过采用规则；通信三臂均学得自身收益，新内容包未超过原聚合参照。共3fits／634368团队步，不自动追加。Claude恢复方向已声明但未启动；其最新直接owner指令将该方向搁置到owner取得Milan数据，并另选两个问题。Root正依owner新要求讨论正向结果的建设性发展及合理额外信息／资源假设，尚未因此启动后继。不以DM数量下降宣称问题空间耗尽。具体结果、成本与选择见[现行计划](#current-research-plan)。
 本页在科学判断、计划或控制发生实质变化时更新；逐 cell 进度和操作恢复信息见相应 NOTES/runs。
 
 **计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
@@ -1298,7 +1298,7 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 ## Current research plan
 
-**共同分工已落实：两项Codex研究完成，Claude已开设恢复方向；owner已明确授权有边界的数据获取和恢复服务比较。**
+**两项Codex研究已完成；Claude的恢复方向按其最新直接owner指令搁置，待owner取得Milan数据后继续（`a6a816aa0`）。**
 本轮深化一个有实际收益的普通资产，并开辟两个不同决策角度；不把方向数量作为目标，
 也不把旧配方停止解释为问题耗尽。完整意见、异议修正和owner答复见
 [已完成共同计划](archive/2026-09-28/RESEARCH-joint-next-round-programme.md)。
@@ -1307,15 +1307,15 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 |---|---|---|
 | 原生DM `dm_persistent_service_round3`，现reserve | 连续长任务中，有限补能承诺O_H能否相对相同中央信息P保留完整及后半程服务价值？ | 八对H12000完整结束，0fit／192k步。全程／晚期QoS +.183776／+.216545，但两项J区间跨零，01/03各新增七次cutoff及depletion，预定采用规则失败。保留条件性H3000 O，不推广O_H；结果`b5d87dec9`、清理`31d62f6b5`。[完整判读](candidates/uav_persistent_service/NOTES.md#2026-09-28-----b02-complete-finite-benefit-failed-long-mission-retention)。 |
 | 原生DM `dm_message_content`，现reserve | 固定真实RR带宽/延迟下，学习共享内容及其分散式飞行响应是否优于当前聚合C和廉价历史编码H？ | N5/H256，C/H/L各一fit／442368团队步完整结束。三臂自身均改善，但L-C为-.020645净J／-1.358887服务用户每步，H也未超过C。保留C，停止原样H/L投入，不否定广义内容学习；结果`3567e73b0`、清理`f5c118c71`。[完整判读](candidates/uav_message_content/NOTES.md#2026-09-28---b01-complete-own-learning-no-incremental-content-package-use)。 |
-| Claude peer，`uav_restoration_readiness` | Milan活动需求驱动的单站故障后，同信息联合滚动重部署能否优于独立贪心和静止部署的完整恢复过程？ | owner已允许先核验来源/许可/成本，获取免费、无需账户授权的最小必要数据；付费、额外条款或大规模下载另问。最多8开发情景/24条1800秒完整轨迹，计价轨迹计入总量，0fit，工程与CPU各不超过8h。`1e9fd451a`已发表联合LP规划器及声明，`52ec6d9db`发表种子文件；真实数据条件尚未解决，无Milan结果。[当前NOTES](candidates/uav_restoration_readiness/NOTES.md)。 |
+| Claude peer，`uav_restoration_readiness`，owner搁置 | Milan活动需求驱动的单站故障后，同信息联合滚动重部署能否优于独立贪心和静止部署的完整恢复过程？ | 声明保留、尚未启动；owner向Claude直接要求“先搁置这个需要数据的方向 等我拿到数据后才继续 选两个别的方向”，本次方法讨论不恢复它。既有上限24条包含计价、0fit、工程与CPU各8h；数据许可和成本边界不变。源码、计数／CPU修订及停止条件见[当前NOTES](candidates/uav_restoration_readiness/NOTES.md)。 |
 
 Codex两比较合计3fits／1744完整回合／634368团队步／3072更新，另有211步已记录正确性检查；
 不同宿主/时域/估计量不混池，三臂训练不是三个L复制。两次独立审查均支持上述范围内的停止。
 唯一原始证据及读器／冻结源码已核验保留，匹配清理目标合计净释放1746829312 allocated bytes。
-Claude已实现普通联合规划器，但数据源所需guestbook e-mail与缓存准备条件仍在其NOTES中待决；
-本次最小公开数据授权不代替尚未取得的额外条款或个人资料提交授权。声明中的计价三条若再加
-完整八场景会是27条，Root已在同一peer计划来信要求启动前与24条总上限及8 CPU小时口径对齐，
-不是新增预算或更改已接受操作。不把合成fixture、既有静态差距或环境适配器当作新Milan成果。
+Claude已实现普通联合规划器，并在`1ec835b00`／`dddfff3ac`把计价三条纳入24条、添加进程CPU计量和限制；
+数据准备缩至六天文件加网格。其后owner决定搁置，故无guestbook提交、下载、Milan运行或合成替代。
+Claude按其owner指令另选两个问题，未在此预先代选。方法讨论和新的信息／资源候选不改动这项暂停。
+不把合成fixture、既有静态差距或环境适配器当作新Milan成果。
 该宿主是中央共享遥测加TTL/感知陈旧，不是已证的分散通信任务；普通联合方案获益也不自动证明
 MARL必要或批准fit。比较、来源与实际成本由各lead前瞻声明并完整发表。
 
@@ -1344,6 +1344,100 @@ Root继续负责问题设计、跨问题取舍和综合，DM拥有范围内执�
 
 <a id="portfolio-review-2026-09-28-independent-joint-transition"></a>
 [已完成联合过渡选题与Root处置](archive/2026-09-28/RESEARCH-joint-transition-selection.md)。
+
+## Portfolio review 2026-09-28 constructive-exploration-method
+
+**Working review, not an adopted instruction or run declaration.** Root source boundary
+`a6a816aa0`; one existing separate-context Scientific Reviewer (`question_space_review`) is
+reconstructing the consequential positive/adverse evidence. The same reviewer took part in
+earlier selection, which is disclosed rather than described as blinded. A bounded Scout mapped
+native information/control rights. No new fit, trajectory, data download or Pro is selected.
+
+**Owner's original concern:**
+> 同意 以及我发现当前工作方式可能会导致创新的错失 即对正向结果的防御性批判而没有对正向结果来源的积极探索 以及对于可能带来增益的方法 仅实验几次否定而缺乏推导和改良方式可能会导致错失探索方向 以及我们是否有能够引入额外假设即资源信息的方式合理的强化这个场景下的uav表现？
+
+**Owner's requested disposition and peer exchange:**
+> 确认方案后将我的话交给claude让给出意见 你来看看如何调整研究的工作流和方法论 决定后让claude也做相应的修改
+
+The issue is the practical allocation of reasoning and development effort, not a proposal to
+relax truthfulness, erase adverse outcomes or create a required number of rescue fits. Existing
+constitution sections 2/3/5 and scientific-tools already permit conjectures, targeted revision,
+new resource assumptions and continuation; no constitutional amendment is proposed.
+
+### Root proposal for peer comment
+
+- Separate the supported empirical conclusion, practical adoption and next research investment.
+  A failed adoption/risk rule keeps its verdict but does not decide whether the newly exposed
+  structure merits derivation and a changed comparison. A single adverse recipe does not close
+  its method family; nor does an open family oblige indefinite spending.
+- Give constructive explanation real weight alongside criticism: use the strongest supported
+  positive to identify what could be preserved, extended or deliberately changed. At a material
+  choice compare the worthwhile developmental continuation with replication, a new angle and
+  stopping. No positive-finding quota, compulsory mechanism study or extra report is proposed.
+- Own a question through a coherent hypothesis-development cycle, not just a batch. A targeted
+  improvement connects a modifiable link to a different intermediate prediction and complete
+  task consequence; an approximate model or literature bridge may motivate it without a proof
+  gate. Continuation ends when its predictions/reason or opportunity cost no longer warrant it,
+  not after an arbitrary number of attempts, and never extends a frozen batch retrospectively.
+- Treat additional information, training knowledge, control rights and physical resources as
+  explicit design variables. State what already exists, where the addition comes from, its
+  uncertainty and acquisition/communication/compute/physical cost. Retain a matched ordinary
+  comparator given the same addition; separate the resource-enabled gain from any incremental
+  learning claim. No hidden future truth or silent changes to accepted tasks.
+- Keep current roles: Root actively develops and compares worthwhile questions; DM derives and
+  improves within the question; the same independent critic examines constructive explanations
+  and premature stops as well as overclaims. Do not add an Innovator role, another reviewer,
+  fixed experiment allowance, mandatory positive screen or routine Root approval.
+
+### Evidence-grounded candidates, not selected runs
+
+1. **Legal pre-return access/assignment.** Persistent B02 (`b5d87dec9`) has finite service gains
+   and four realized seven-member groups drawing 1179.43 W at one 1000 W station, while the other
+   station is lightly occupied. This supports a local-deficit derivation, not a proven repair.
+   Ask whether a feasible pre-return decision prevents those groups without surrendering complete
+   service. S7 already exposes station capacity/queue/occupancy; station choice or reservation is
+   an action-right extension unless achieved through existing motion before the native nearest-
+   station override. Distinguish these contracts; do not change the shield silently.
+2. **Preserve useful content before learning a replacement.** Content B01 (`3567e73b0`) shows
+   own learning in all arms but no extra value from H/L. C itself has a learned decentralized
+   receiver/motion policy and ordinary encoding. Keeping its six informative scalars and learning
+   the constant centroid-z scalar (index 5, not count at index 6), or a bounded anchored modification,
+   is a different co-adaptation hypothesis,
+   not a diagnosis already established by B01. Same-budget ordinary content and real sampled
+   receiver exposure remain necessary; any common warm start and continued training are counted.
+3. **Deployable prior or intent resource.** Information B03's P-S0 positive (`uav_information_value`
+   NOTES, complete B03) shows a constructive geometry increment beyond simply enabling the relay
+   branch. An externally supplied static BS map with explicit error/cost is a genuinely richer
+   information contract beyond lawful sightings, not a free ground-truth getter. Intent messages
+   through base CADC's existing delayed seven-float RR channel are another option, but require
+   an actual locally chosen intention/commitment; actual future trajectories and hidden user IDs
+   are not messages. The RR channel is not already a feature of S7. Inferred history from lawful
+   observations is an algorithmic use of existing information, unlike a new identity/forecast feed.
+
+Primary-source bridges read by Root: [Johannink et al., residual RL, sections III/V](https://arxiv.org/html/1812.03201v2)
+combine ordinary control with learned corrections on robot assembly, not UAV communication;
+[Esrafilian et al., map-based UAV communication, sections II/III/VI](https://arxiv.org/html/1806.05165v2)
+explicitly supply a city map and node locations, learn channel parameters, and include imperfect
+estimation; [Arribas et al., recharge scheduling, sections III/IV](https://arxiv.org/html/2205.12656v1)
+couple service, travel and replacement/charging time under their own single-station model. These
+motivate testable analogies, not transplanted results, novelty or automatic fit permission.
+
+### Independent answer
+
+Pending complete return. Preliminary findings are not substituted for the final review.
+
+### Claude peer answer
+
+Requested through `docs/Claude_docs/inbox/20260928_constructive_exploration_method_ROOT.md`.
+Delivery is not agreement or actual adoption.
+
+### Decision
+
+Pending the complete independent answer and substantive Claude opinion. Root will decide the
+method changes within the owner's request, preserve any disagreement and publish concise shared
+source edits plus consistent generated Claude copies. Claude is asked to apply any agreed
+runtime-specific adjustment through the same exchange. No scientific successor has been launched;
+T3's owner pause and PPC/FSD/G33 controls remain unchanged.
 
 ### Shared runtime diagnosis
 
