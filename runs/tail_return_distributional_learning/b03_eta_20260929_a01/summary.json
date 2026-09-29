@@ -1,0 +1,2958 @@
+{
+  "status": "complete",
+  "launch_sha": "ccd96d4c868f800c8cc9827e799bc376aa17c990",
+  "planned_fits": [
+    {
+      "seed": 9621,
+      "arm": "S_eta"
+    },
+    {
+      "seed": 9621,
+      "arm": "Q32"
+    },
+    {
+      "seed": 9622,
+      "arm": "S_eta"
+    },
+    {
+      "seed": 9622,
+      "arm": "Q32"
+    },
+    {
+      "seed": 9623,
+      "arm": "S_eta"
+    },
+    {
+      "seed": 9623,
+      "arm": "Q32"
+    }
+  ],
+  "fits": [
+    {
+      "seed": 9621,
+      "arm": "S_eta",
+      "status": "complete",
+      "summary": "raw/9621_S_eta/summary.json",
+      "counts": {
+        "constructor_calls": 1,
+        "constructor_resets": 1,
+        "reset_calls": 768,
+        "explicit_resets": 768,
+        "step_calls": 196608,
+        "team_steps": 196608,
+        "train_team_steps": 131072,
+        "eval_team_steps": 65536,
+        "train_episodes": 512,
+        "eval_episodes": 256,
+        "completed_episode_steps": 196608,
+        "velocity_decisions": 983040,
+        "recurrent_observations": 983040,
+        "optimizer_attempts": 128,
+        "optimizer_steps": 128
+      },
+      "endpoint": {
+        "mean": 0.1537434587493875,
+        "lower_tail": 0.09495948458257027,
+        "tail_threshold": 0.12003372496828944,
+        "served_users_mean": 9.170394897460938,
+        "service_component_mean": 0.12838552856445312,
+        "sinr_quality_mean": 0.08452643394978127,
+        "sinr_component_mean": 0.025357930184934378
+      },
+      "failure": null
+    },
+    {
+      "seed": 9621,
+      "arm": "Q32",
+      "status": "complete",
+      "summary": "raw/9621_Q32/summary.json",
+      "counts": {
+        "constructor_calls": 1,
+        "constructor_resets": 1,
+        "reset_calls": 768,
+        "explicit_resets": 768,
+        "step_calls": 196608,
+        "team_steps": 196608,
+        "train_team_steps": 131072,
+        "eval_team_steps": 65536,
+        "train_episodes": 512,
+        "eval_episodes": 256,
+        "completed_episode_steps": 196608,
+        "velocity_decisions": 983040,
+        "recurrent_observations": 983040,
+        "optimizer_attempts": 128,
+        "optimizer_steps": 128
+      },
+      "endpoint": {
+        "mean": 0.15536090026942706,
+        "lower_tail": 0.09080060506463408,
+        "tail_threshold": 0.11677672690188537,
+        "served_users_mean": 9.1715087890625,
+        "service_component_mean": 0.12840112304687498,
+        "sinr_quality_mean": 0.08986592407517363,
+        "sinr_component_mean": 0.02695977722255209
+      },
+      "failure": null
+    },
+    {
+      "seed": 9622,
+      "arm": "S_eta",
+      "status": "complete",
+      "summary": "raw/9622_S_eta/summary.json",
+      "counts": {
+        "constructor_calls": 1,
+        "constructor_resets": 1,
+        "reset_calls": 768,
+        "explicit_resets": 768,
+        "step_calls": 196608,
+        "team_steps": 196608,
+        "train_team_steps": 131072,
+        "eval_team_steps": 65536,
+        "train_episodes": 512,
+        "eval_episodes": 256,
+        "completed_episode_steps": 196608,
+        "velocity_decisions": 983040,
+        "recurrent_observations": 983040,
+        "optimizer_attempts": 128,
+        "optimizer_steps": 128
+      },
+      "endpoint": {
+        "mean": 0.17774812986950342,
+        "lower_tail": 0.11494022256003752,
+        "tail_threshold": 0.14520723371434294,
+        "served_users_mean": 10.582046508789062,
+        "service_component_mean": 0.14814865112304687,
+        "sinr_quality_mean": 0.09866492915485506,
+        "sinr_component_mean": 0.02959947874645652
+      },
+      "failure": null
+    },
+    {
+      "seed": 9622,
+      "arm": "Q32",
+      "status": "complete",
+      "summary": "raw/9622_Q32/summary.json",
+      "counts": {
+        "constructor_calls": 1,
+        "constructor_resets": 1,
+        "reset_calls": 768,
+        "explicit_resets": 768,
+        "step_calls": 196608,
+        "team_steps": 196608,
+        "train_team_steps": 131072,
+        "eval_team_steps": 65536,
+        "train_episodes": 512,
+        "eval_episodes": 256,
+        "completed_episode_steps": 196608,
+        "velocity_decisions": 983040,
+        "recurrent_observations": 983040,
+        "optimizer_attempts": 128,
+        "optimizer_steps": 128
+      },
+      "endpoint": {
+        "mean": 0.17229691808592745,
+        "lower_tail": 0.10962419607363423,
+        "tail_threshold": 0.13271105742902006,
+        "served_users_mean": 10.2520751953125,
+        "service_component_mean": 0.143529052734375,
+        "sinr_quality_mean": 0.09589288450517493,
+        "sinr_component_mean": 0.028767865351552475
+      },
+      "failure": null
+    },
+    {
+      "seed": 9623,
+      "arm": "S_eta",
+      "status": "complete",
+      "summary": "raw/9623_S_eta/summary.json",
+      "counts": {
+        "constructor_calls": 1,
+        "constructor_resets": 1,
+        "reset_calls": 768,
+        "explicit_resets": 768,
+        "step_calls": 196608,
+        "team_steps": 196608,
+        "train_team_steps": 131072,
+        "eval_team_steps": 65536,
+        "train_episodes": 512,
+        "eval_episodes": 256,
+        "completed_episode_steps": 196608,
+        "velocity_decisions": 983040,
+        "recurrent_observations": 983040,
+        "optimizer_attempts": 128,
+        "optimizer_steps": 128
+      },
+      "endpoint": {
+        "mean": 0.200968612742549,
+        "lower_tail": 0.13431282075060752,
+        "tail_threshold": 0.1623759638382211,
+        "served_users_mean": 12.098602294921875,
+        "service_component_mean": 0.16938043212890624,
+        "sinr_quality_mean": 0.10529393537880924,
+        "sinr_component_mean": 0.03158818061364277
+      },
+      "failure": null
+    },
+    {
+      "seed": 9623,
+      "arm": "Q32",
+      "status": "complete",
+      "summary": "raw/9623_Q32/summary.json",
+      "counts": {
+        "constructor_calls": 1,
+        "constructor_resets": 1,
+        "reset_calls": 768,
+        "explicit_resets": 768,
+        "step_calls": 196608,
+        "team_steps": 196608,
+        "train_team_steps": 131072,
+        "eval_team_steps": 65536,
+        "train_episodes": 512,
+        "eval_episodes": 256,
+        "completed_episode_steps": 196608,
+        "velocity_decisions": 983040,
+        "recurrent_observations": 983040,
+        "optimizer_attempts": 128,
+        "optimizer_steps": 128
+      },
+      "endpoint": {
+        "mean": 0.16779817142710696,
+        "lower_tail": 0.10849559861524269,
+        "tail_threshold": 0.1345972350923623,
+        "served_users_mean": 9.925811767578125,
+        "service_component_mean": 0.13896136474609375,
+        "sinr_quality_mean": 0.09612268893671067,
+        "sinr_component_mean": 0.028836806681013197
+      },
+      "failure": null
+    }
+  ],
+  "batch_wall_seconds": 2802.797789171018,
+  "batch_process_cpu_seconds": 2674.795049932,
+  "runner_wall_seconds_through_summary": 2804.3849539920047,
+  "runner_user_cpu_seconds": 2647.183965,
+  "runner_system_cpu_seconds": 28.743978,
+  "peak_rss_bytes_process_high_water": 494563328,
+  "resource_scope": "single runner process; batch wall/CPU start after imports/admission; completed batch values include final reader; runner wall/user/system CPU start at entry and end before this summary write; RSS is process high-water, not per-fit independent peak",
+  "pairs": [
+    {
+      "seed": 9621,
+      "delta_tail": -0.004158879517936184,
+      "delta_mean": 0.0016174415200395642,
+      "paired_world_mean_differences": {
+        "J": 0.001617441520039577,
+        "served_users": 0.0011138916015625,
+        "service_component": 1.5594482421874434e-05,
+        "sinr_quality": 0.005339490125392364,
+        "sinr_component": 0.0016018470376177093
+      },
+      "adverse_worlds": [
+        {
+          "episode": 3,
+          "delta_J": -0.008134169582889594,
+          "delta_served_users": -0.45703125,
+          "delta_sinr_quality": -0.005785773609631187
+        },
+        {
+          "episode": 5,
+          "delta_J": -0.07762411865159975,
+          "delta_served_users": -6.0390625,
+          "delta_sinr_quality": 0.023075854494667536
+        },
+        {
+          "episode": 6,
+          "delta_J": -0.05375218663711173,
+          "delta_served_users": -3.49609375,
+          "delta_sinr_quality": -0.016022913790372163
+        },
+        {
+          "episode": 10,
+          "delta_J": -0.021470484261543826,
+          "delta_served_users": -1.8984375,
+          "delta_sinr_quality": 0.017025469128187073
+        },
+        {
+          "episode": 12,
+          "delta_J": -0.10129099502699222,
+          "delta_served_users": -6.70703125,
+          "delta_sinr_quality": -0.02464185842330756
+        },
+        {
+          "episode": 14,
+          "delta_J": -0.04669468072640365,
+          "delta_served_users": -3.0859375,
+          "delta_sinr_quality": -0.011638519088012146
+        },
+        {
+          "episode": 18,
+          "delta_J": -0.12392755136050426,
+          "delta_served_users": -8.2109375,
+          "delta_sinr_quality": -0.029914754535014063
+        },
+        {
+          "episode": 19,
+          "delta_J": -0.09630779261052938,
+          "delta_served_users": -6.4140625,
+          "delta_sinr_quality": -0.021703058701763978
+        },
+        {
+          "episode": 21,
+          "delta_J": -0.0003825796871701759,
+          "delta_served_users": 0.23046875,
+          "delta_sinr_quality": -0.012030473957233626
+        },
+        {
+          "episode": 22,
+          "delta_J": -0.05943894540588776,
+          "delta_served_users": -4.50390625,
+          "delta_sinr_quality": 0.01205247364704079
+        },
+        {
+          "episode": 24,
+          "delta_J": -0.02095811816480489,
+          "delta_served_users": -1.4453125,
+          "delta_sinr_quality": -0.002412477216016007
+        },
+        {
+          "episode": 25,
+          "delta_J": -0.034860877303536986,
+          "delta_served_users": -2.39453125,
+          "delta_sinr_quality": -0.00445813267845642
+        },
+        {
+          "episode": 26,
+          "delta_J": -0.05597864601864011,
+          "delta_served_users": -4.12109375,
+          "delta_sinr_quality": 0.005722221604532549
+        },
+        {
+          "episode": 28,
+          "delta_J": -0.12870481835638997,
+          "delta_served_users": -8.14453125,
+          "delta_sinr_quality": -0.04893793618796681
+        },
+        {
+          "episode": 29,
+          "delta_J": -0.05802004009574585,
+          "delta_served_users": -3.48046875,
+          "delta_sinr_quality": -0.03097825865248631
+        },
+        {
+          "episode": 31,
+          "delta_J": -0.05670149564362631,
+          "delta_served_users": -4.35546875,
+          "delta_sinr_quality": 0.014250222854579261
+        },
+        {
+          "episode": 32,
+          "delta_J": -0.07693772587321437,
+          "delta_served_users": -4.953125,
+          "delta_sinr_quality": -0.02531325291071425
+        },
+        {
+          "episode": 34,
+          "delta_J": -0.0776445412930502,
+          "delta_served_users": -4.9921875,
+          "delta_sinr_quality": -0.025846387643500834
+        },
+        {
+          "episode": 38,
+          "delta_J": -0.04951813477281225,
+          "delta_served_users": -3.984375,
+          "delta_sinr_quality": 0.02087705075729225
+        },
+        {
+          "episode": 43,
+          "delta_J": -0.00976873258937841,
+          "delta_served_users": -0.54296875,
+          "delta_sinr_quality": -0.00722390029792748
+        },
+        {
+          "episode": 44,
+          "delta_J": -0.013566274620630356,
+          "delta_served_users": -0.76953125,
+          "delta_sinr_quality": -0.009309457068767873
+        },
+        {
+          "episode": 45,
+          "delta_J": -0.0718330587280961,
+          "delta_served_users": -5.0,
+          "delta_sinr_quality": -0.006110195760320625
+        },
+        {
+          "episode": 46,
+          "delta_J": -0.023240286055535478,
+          "delta_served_users": -2.4296875,
+          "delta_sinr_quality": 0.035917796481548456
+        },
+        {
+          "episode": 48,
+          "delta_J": -0.01824890294748248,
+          "delta_served_users": -1.3359375,
+          "delta_sinr_quality": 0.001514073508391528
+        },
+        {
+          "episode": 50,
+          "delta_J": -0.045118066937765884,
+          "delta_served_users": -3.08203125,
+          "delta_sinr_quality": -0.006565431459219562
+        },
+        {
+          "episode": 54,
+          "delta_J": -0.035686041526009904,
+          "delta_served_users": -2.05078125,
+          "delta_sinr_quality": -0.02325034675336604
+        },
+        {
+          "episode": 56,
+          "delta_J": -0.005041585034325807,
+          "delta_served_users": 0.03515625,
+          "delta_sinr_quality": -0.01844590844775293
+        },
+        {
+          "episode": 57,
+          "delta_J": -0.0074314866736425594,
+          "delta_served_users": -0.9765625,
+          "delta_sinr_quality": 0.020801294421190913
+        },
+        {
+          "episode": 59,
+          "delta_J": -0.06695364985853314,
+          "delta_served_users": -4.94921875,
+          "delta_sinr_quality": 0.007784708804889573
+        },
+        {
+          "episode": 61,
+          "delta_J": -0.07563664414016519,
+          "delta_served_users": -5.26953125,
+          "delta_sinr_quality": -0.006210688800550104
+        },
+        {
+          "episode": 62,
+          "delta_J": -0.046663529613310495,
+          "delta_served_users": -3.53515625,
+          "delta_sinr_quality": 0.009428859622298238
+        },
+        {
+          "episode": 63,
+          "delta_J": -0.06873782132297651,
+          "delta_served_users": -4.44140625,
+          "delta_sinr_quality": -0.021860446076588144
+        },
+        {
+          "episode": 71,
+          "delta_J": -0.04042965502674728,
+          "delta_served_users": -3.13671875,
+          "delta_sinr_quality": 0.011614691577508801
+        },
+        {
+          "episode": 79,
+          "delta_J": -0.020297434485988697,
+          "delta_served_users": -2.03125,
+          "delta_sinr_quality": 0.02713355171337109
+        },
+        {
+          "episode": 80,
+          "delta_J": -0.05247711518666179,
+          "delta_served_users": -3.3125,
+          "delta_sinr_quality": -0.02034038395553958
+        },
+        {
+          "episode": 81,
+          "delta_J": -0.0009016538629319226,
+          "delta_served_users": 0.2734375,
+          "delta_sinr_quality": -0.01576592954310764
+        },
+        {
+          "episode": 84,
+          "delta_J": -0.013583245618191825,
+          "delta_served_users": -1.12890625,
+          "delta_sinr_quality": 0.007404806272694089
+        },
+        {
+          "episode": 86,
+          "delta_J": -0.018630690929166194,
+          "delta_served_users": -1.1953125,
+          "delta_sinr_quality": -0.00632105309722121
+        },
+        {
+          "episode": 87,
+          "delta_J": -0.008172270191485753,
+          "delta_served_users": -1.0234375,
+          "delta_sinr_quality": 0.020519516028379856
+        },
+        {
+          "episode": 88,
+          "delta_J": -0.020468683893383632,
+          "delta_served_users": -1.45703125,
+          "delta_sinr_quality": -0.00023415464461244706
+        },
+        {
+          "episode": 91,
+          "delta_J": -0.044185060201363424,
+          "delta_served_users": -3.01953125,
+          "delta_sinr_quality": -0.006372075671211702
+        },
+        {
+          "episode": 92,
+          "delta_J": -0.011633381872169724,
+          "delta_served_users": -1.1796875,
+          "delta_sinr_quality": 0.01627414375943452
+        },
+        {
+          "episode": 93,
+          "delta_J": -0.06851140123854836,
+          "delta_served_users": -4.74609375,
+          "delta_sinr_quality": -0.006886962461827947
+        },
+        {
+          "episode": 96,
+          "delta_J": -0.014245040460904412,
+          "delta_served_users": -0.94921875,
+          "delta_sinr_quality": -0.0031865932030142874
+        },
+        {
+          "episode": 98,
+          "delta_J": -0.023523382884516247,
+          "delta_served_users": -1.76953125,
+          "delta_sinr_quality": 0.004166848718278771
+        },
+        {
+          "episode": 99,
+          "delta_J": -0.002091752947907921,
+          "delta_served_users": -0.08203125,
+          "delta_sinr_quality": -0.0031443848263595225
+        },
+        {
+          "episode": 101,
+          "delta_J": -0.10202268101590209,
+          "delta_served_users": -6.65625,
+          "delta_sinr_quality": -0.029450603386340188
+        },
+        {
+          "episode": 103,
+          "delta_J": -0.10825369845311344,
+          "delta_served_users": -7.30078125,
+          "delta_sinr_quality": -0.020142536510377826
+        },
+        {
+          "episode": 104,
+          "delta_J": -0.003549731319135524,
+          "delta_served_users": -0.27734375,
+          "delta_sinr_quality": 0.0011102706028817827
+        },
+        {
+          "episode": 105,
+          "delta_J": -0.10830958133898175,
+          "delta_served_users": -8.03125,
+          "delta_sinr_quality": 0.013759728870061355
+        },
+        {
+          "episode": 106,
+          "delta_J": -0.09269380470162367,
+          "delta_served_users": -5.71875,
+          "delta_sinr_quality": -0.042104349005412135
+        },
+        {
+          "episode": 107,
+          "delta_J": -0.0011070287881856933,
+          "delta_served_users": -0.26953125,
+          "delta_sinr_quality": 0.00888802903938038
+        },
+        {
+          "episode": 108,
+          "delta_J": -0.033232354472731096,
+          "delta_served_users": -2.078125,
+          "delta_sinr_quality": -0.01379534824243707
+        },
+        {
+          "episode": 109,
+          "delta_J": -0.04547503656598534,
+          "delta_served_users": -2.5,
+          "delta_sinr_quality": -0.034916788553284575
+        },
+        {
+          "episode": 110,
+          "delta_J": -0.028839853167027293,
+          "delta_served_users": -2.09765625,
+          "delta_sinr_quality": 0.001757781109909054
+        },
+        {
+          "episode": 114,
+          "delta_J": -0.017046687504171237,
+          "delta_served_users": -1.34765625,
+          "delta_sinr_quality": 0.006068333319428992
+        },
+        {
+          "episode": 117,
+          "delta_J": -0.030726146386748837,
+          "delta_served_users": -2.16796875,
+          "delta_sinr_quality": -0.0012486129558296616
+        },
+        {
+          "episode": 119,
+          "delta_J": -0.01344203229757647,
+          "delta_served_users": -0.890625,
+          "delta_sinr_quality": -0.0032442743252546896
+        },
+        {
+          "episode": 125,
+          "delta_J": -0.0015718015639794303,
+          "delta_served_users": -0.19921875,
+          "delta_sinr_quality": 0.004057536453402497
+        },
+        {
+          "episode": 126,
+          "delta_J": -0.007538952500925483,
+          "delta_served_users": -0.28515625,
+          "delta_sinr_quality": -0.011822550003085242
+        },
+        {
+          "episode": 127,
+          "delta_J": -0.04513244023310639,
+          "delta_served_users": -2.94921875,
+          "delta_sinr_quality": -0.012811259110354467
+        },
+        {
+          "episode": 128,
+          "delta_J": -0.05470306617415943,
+          "delta_served_users": -4.99609375,
+          "delta_sinr_quality": 0.0508074877528015
+        },
+        {
+          "episode": 129,
+          "delta_J": -0.03932414606788903,
+          "delta_served_users": -2.9765625,
+          "delta_sinr_quality": 0.00782576310703667
+        },
+        {
+          "episode": 130,
+          "delta_J": -0.03515165153486327,
+          "delta_served_users": -2.7421875,
+          "delta_sinr_quality": 0.010796578217123418
+        },
+        {
+          "episode": 131,
+          "delta_J": -0.05695313796702117,
+          "delta_served_users": -3.671875,
+          "delta_sinr_quality": -0.018489626556737346
+        },
+        {
+          "episode": 134,
+          "delta_J": -0.031191963958947216,
+          "delta_served_users": -1.67578125,
+          "delta_sinr_quality": -0.025770088196491278
+        },
+        {
+          "episode": 137,
+          "delta_J": -0.05843433310206328,
+          "delta_served_users": -4.66015625,
+          "delta_sinr_quality": 0.022692847993122517
+        },
+        {
+          "episode": 142,
+          "delta_J": -0.07049267195058041,
+          "delta_served_users": -4.4140625,
+          "delta_sinr_quality": -0.02898598983526776
+        },
+        {
+          "episode": 143,
+          "delta_J": -0.032450228953417176,
+          "delta_served_users": -2.16796875,
+          "delta_sinr_quality": -0.006995554844723639
+        },
+        {
+          "episode": 144,
+          "delta_J": -0.022464654496380243,
+          "delta_served_users": -1.61328125,
+          "delta_sinr_quality": 0.00040427667873248196
+        },
+        {
+          "episode": 146,
+          "delta_J": -0.0023349390602227793,
+          "delta_served_users": -0.328125,
+          "delta_sinr_quality": 0.0075293697992573905
+        },
+        {
+          "episode": 154,
+          "delta_J": -0.018064563078804607,
+          "delta_served_users": -1.34375,
+          "delta_sinr_quality": 0.0024931230706512486
+        },
+        {
+          "episode": 161,
+          "delta_J": -0.017532111466920408,
+          "delta_served_users": -1.5703125,
+          "delta_sinr_quality": 0.014840878443598576
+        },
+        {
+          "episode": 165,
+          "delta_J": -0.003587679396371085,
+          "delta_served_users": -0.32421875,
+          "delta_sinr_quality": 0.0031712770120971706
+        },
+        {
+          "episode": 167,
+          "delta_J": -0.04404958122934319,
+          "delta_served_users": -3.34765625,
+          "delta_sinr_quality": 0.00939202090218845
+        },
+        {
+          "episode": 168,
+          "delta_J": -0.015720371080375023,
+          "delta_served_users": -0.84375,
+          "delta_sinr_quality": -0.013026236934583019
+        },
+        {
+          "episode": 169,
+          "delta_J": -0.10166281259881382,
+          "delta_served_users": -6.82421875,
+          "delta_sinr_quality": -0.02041250032937969
+        },
+        {
+          "episode": 170,
+          "delta_J": -0.04105251778974954,
+          "delta_served_users": -2.5,
+          "delta_sinr_quality": -0.02017505929916512
+        },
+        {
+          "episode": 174,
+          "delta_J": -0.07914459711746848,
+          "delta_served_users": -5.43359375,
+          "delta_sinr_quality": -0.010247615391561576
+        },
+        {
+          "episode": 177,
+          "delta_J": -0.10954675704687947,
+          "delta_served_users": -7.26171875,
+          "delta_sinr_quality": -0.026275648489598367
+        },
+        {
+          "episode": 182,
+          "delta_J": -0.014554122111251844,
+          "delta_served_users": -0.6875,
+          "delta_sinr_quality": -0.016430407037505784
+        },
+        {
+          "episode": 183,
+          "delta_J": -0.11155680028029412,
+          "delta_served_users": -7.4453125,
+          "delta_sinr_quality": -0.024408084267647748
+        },
+        {
+          "episode": 185,
+          "delta_J": -0.007662492467457482,
+          "delta_served_users": -0.59765625,
+          "delta_sinr_quality": 0.002348983441808866
+        },
+        {
+          "episode": 188,
+          "delta_J": -0.07753735331221613,
+          "delta_served_users": -4.9609375,
+          "delta_sinr_quality": -0.02694742770738682
+        },
+        {
+          "episode": 189,
+          "delta_J": -0.02220257411188714,
+          "delta_served_users": -1.21484375,
+          "delta_sinr_quality": -0.01731587203962407
+        },
+        {
+          "episode": 190,
+          "delta_J": -0.0728086725639635,
+          "delta_served_users": -4.87109375,
+          "delta_sinr_quality": -0.015377866879878507
+        },
+        {
+          "episode": 191,
+          "delta_J": -0.03935976287932122,
+          "delta_served_users": -2.67578125,
+          "delta_sinr_quality": -0.006329417931070155
+        },
+        {
+          "episode": 194,
+          "delta_J": -0.001173777121614955,
+          "delta_served_users": -0.1875,
+          "delta_sinr_quality": 0.004837409594616801
+        },
+        {
+          "episode": 195,
+          "delta_J": -0.06036509779463582,
+          "delta_served_users": -3.65625,
+          "delta_sinr_quality": -0.030591992648785954
+        },
+        {
+          "episode": 196,
+          "delta_J": -0.014027540618523737,
+          "delta_served_users": -0.94921875,
+          "delta_sinr_quality": -0.0024615937284123562
+        },
+        {
+          "episode": 197,
+          "delta_J": -0.0349120330479194,
+          "delta_served_users": -2.484375,
+          "delta_sinr_quality": -0.0004359434930644307
+        },
+        {
+          "episode": 199,
+          "delta_J": -0.019481108129993166,
+          "delta_served_users": -1.375,
+          "delta_sinr_quality": -0.0007703604333103159
+        },
+        {
+          "episode": 203,
+          "delta_J": -0.1193687459426383,
+          "delta_served_users": -8.01171875,
+          "delta_sinr_quality": -0.024015611475461232
+        },
+        {
+          "episode": 204,
+          "delta_J": -0.09097965755766785,
+          "delta_served_users": -5.59765625,
+          "delta_sinr_quality": -0.042041566858892356
+        },
+        {
+          "episode": 205,
+          "delta_J": -0.0242212408676368,
+          "delta_served_users": -1.98046875,
+          "delta_sinr_quality": 0.011684405441210632
+        },
+        {
+          "episode": 206,
+          "delta_J": -0.09382323474214324,
+          "delta_served_users": -6.6796875,
+          "delta_sinr_quality": -0.0010253658071444766
+        },
+        {
+          "episode": 207,
+          "delta_J": -0.025704947252478766,
+          "delta_served_users": -1.71875,
+          "delta_sinr_quality": -0.00547482417492913
+        },
+        {
+          "episode": 208,
+          "delta_J": -0.027116088086355017,
+          "delta_served_users": -2.01953125,
+          "delta_sinr_quality": 0.003857831378816262
+        },
+        {
+          "episode": 209,
+          "delta_J": -0.05854141468704163,
+          "delta_served_users": -4.33984375,
+          "delta_sinr_quality": 0.0073879927098609716
+        },
+        {
+          "episode": 210,
+          "delta_J": -0.053093632518574574,
+          "delta_served_users": -3.36328125,
+          "delta_sinr_quality": -0.02002565006191559
+        },
+        {
+          "episode": 212,
+          "delta_J": -0.02736045241611651,
+          "delta_served_users": -2.2109375,
+          "delta_sinr_quality": 0.01197557527961178
+        },
+        {
+          "episode": 213,
+          "delta_J": -0.07927309279032692,
+          "delta_served_users": -5.68359375,
+          "delta_sinr_quality": 0.0009907323655768963
+        },
+        {
+          "episode": 217,
+          "delta_J": -0.006085532584356984,
+          "delta_served_users": -0.48828125,
+          "delta_sinr_quality": 0.0025013497188099143
+        },
+        {
+          "episode": 221,
+          "delta_J": -0.045113985327609366,
+          "delta_served_users": -3.24609375,
+          "delta_sinr_quality": 0.0011044239079688045
+        },
+        {
+          "episode": 222,
+          "delta_J": -0.028768221453664533,
+          "delta_served_users": -1.70703125,
+          "delta_sinr_quality": -0.016232613178881763
+        },
+        {
+          "episode": 223,
+          "delta_J": -0.07284885005353253,
+          "delta_served_users": -4.81640625,
+          "delta_sinr_quality": -0.018063875178441435
+        },
+        {
+          "episode": 224,
+          "delta_J": -0.0033527206021122247,
+          "delta_served_users": -0.65625,
+          "delta_sinr_quality": 0.019449264659626736
+        },
+        {
+          "episode": 225,
+          "delta_J": -0.03257196177865475,
+          "delta_served_users": -2.35546875,
+          "delta_sinr_quality": 0.0013486690711506932
+        },
+        {
+          "episode": 226,
+          "delta_J": -0.0014522779018914522,
+          "delta_served_users": -0.03125,
+          "delta_sinr_quality": -0.003382593006304821
+        },
+        {
+          "episode": 229,
+          "delta_J": -0.07121445440450899,
+          "delta_served_users": -4.83203125,
+          "delta_sinr_quality": -0.011886723015029979
+        },
+        {
+          "episode": 230,
+          "delta_J": -0.036567159197517934,
+          "delta_served_users": -1.97265625,
+          "delta_sinr_quality": -0.029833238991726407
+        },
+        {
+          "episode": 231,
+          "delta_J": -0.00932935473387718,
+          "delta_served_users": -0.734375,
+          "delta_sinr_quality": 0.0031729842204094166
+        },
+        {
+          "episode": 232,
+          "delta_J": -0.07714419556235765,
+          "delta_served_users": -4.78125,
+          "delta_sinr_quality": -0.034022318541191754
+        },
+        {
+          "episode": 233,
+          "delta_J": -0.07038993045037838,
+          "delta_served_users": -4.96484375,
+          "delta_sinr_quality": -0.002940393167928171
+        },
+        {
+          "episode": 235,
+          "delta_J": -0.02848919183512108,
+          "delta_served_users": -2.25,
+          "delta_sinr_quality": 0.010036027216263316
+        },
+        {
+          "episode": 236,
+          "delta_J": -0.0481200682441148,
+          "delta_served_users": -3.40234375,
+          "delta_sinr_quality": -0.0016241858137162196
+        },
+        {
+          "episode": 239,
+          "delta_J": -0.03508444587955578,
+          "delta_served_users": -2.37109375,
+          "delta_sinr_quality": -0.006297111265185812
+        },
+        {
+          "episode": 240,
+          "delta_J": -0.034130014993955266,
+          "delta_served_users": -2.6640625,
+          "delta_sinr_quality": 0.010556200020149245
+        },
+        {
+          "episode": 244,
+          "delta_J": -0.02827399363663871,
+          "delta_served_users": -2.14453125,
+          "delta_sinr_quality": 0.0058314795445374296
+        },
+        {
+          "episode": 245,
+          "delta_J": -0.005551713685874121,
+          "delta_served_users": -0.2421875,
+          "delta_sinr_quality": -0.007203628952913321
+        },
+        {
+          "episode": 246,
+          "delta_J": -0.018937137011985294,
+          "delta_served_users": -1.60546875,
+          "delta_sinr_quality": 0.011798084960048624
+        },
+        {
+          "episode": 247,
+          "delta_J": -0.06421831649585391,
+          "delta_served_users": -4.22265625,
+          "delta_sinr_quality": -0.017003763319512838
+        },
+        {
+          "episode": 249,
+          "delta_J": -0.05108653167321743,
+          "delta_served_users": -2.765625,
+          "delta_sinr_quality": -0.04122593891072422
+        },
+        {
+          "episode": 251,
+          "delta_J": -0.088348088466353,
+          "delta_served_users": -5.73828125,
+          "delta_sinr_quality": -0.026707169887843246
+        },
+        {
+          "episode": 252,
+          "delta_J": -0.05770983318063805,
+          "delta_served_users": -3.8359375,
+          "delta_sinr_quality": -0.013355693935459947
+        },
+        {
+          "episode": 253,
+          "delta_J": -0.1082523340879043,
+          "delta_served_users": -7.0078125,
+          "delta_sinr_quality": -0.033809863626347796
+        },
+        {
+          "episode": 254,
+          "delta_J": -0.02046817607057741,
+          "delta_served_users": -1.390625,
+          "delta_sinr_quality": -0.0033314202352579397
+        }
+      ]
+    },
+    {
+      "seed": 9622,
+      "delta_tail": -0.005316026486403294,
+      "delta_mean": -0.0054512117835759655,
+      "paired_world_mean_differences": {
+        "J": -0.005451211783575927,
+        "served_users": -0.3299713134765625,
+        "service_component": -0.004619598388671874,
+        "sinr_quality": -0.0027720446496801478,
+        "sinr_component": -0.0008316133949040446
+      },
+      "adverse_worlds": [
+        {
+          "episode": 3,
+          "delta_J": -0.028256903387488097,
+          "delta_served_users": -1.875,
+          "delta_sinr_quality": -0.006689677958293047
+        },
+        {
+          "episode": 5,
+          "delta_J": -0.008373494291239708,
+          "delta_served_users": 0.16796875,
+          "delta_sinr_quality": -0.0357501893041325
+        },
+        {
+          "episode": 11,
+          "delta_J": -0.10103286687945404,
+          "delta_served_users": -6.41015625,
+          "delta_sinr_quality": -0.03763559793151353
+        },
+        {
+          "episode": 12,
+          "delta_J": -0.022171660103954077,
+          "delta_served_users": -1.7421875,
+          "delta_sinr_quality": 0.007396549653486489
+        },
+        {
+          "episode": 14,
+          "delta_J": -0.04125250969872474,
+          "delta_served_users": -2.90234375,
+          "delta_sinr_quality": -0.0020656573290824265
+        },
+        {
+          "episode": 15,
+          "delta_J": -0.042239127670475704,
+          "delta_served_users": -3.08984375,
+          "delta_sinr_quality": 0.003395616098414725
+        },
+        {
+          "episode": 20,
+          "delta_J": -0.07677778653212208,
+          "delta_served_users": -4.97265625,
+          "delta_sinr_quality": -0.023868663440407584
+        },
+        {
+          "episode": 23,
+          "delta_J": -0.0009149789662851737,
+          "delta_served_users": -0.5859375,
+          "delta_sinr_quality": 0.024293820112383166
+        },
+        {
+          "episode": 27,
+          "delta_J": -0.00845390095119189,
+          "delta_served_users": -0.41015625,
+          "delta_sinr_quality": -0.009039044837306442
+        },
+        {
+          "episode": 28,
+          "delta_J": -0.04813013124339552,
+          "delta_served_users": -3.13671875,
+          "delta_sinr_quality": -0.014053562477984935
+        },
+        {
+          "episode": 30,
+          "delta_J": -0.04431474424367178,
+          "delta_served_users": -2.8984375,
+          "delta_sinr_quality": -0.012455397478905741
+        },
+        {
+          "episode": 31,
+          "delta_J": -0.030722800451786575,
+          "delta_served_users": -1.765625,
+          "delta_sinr_quality": -0.020013501505955808
+        },
+        {
+          "episode": 33,
+          "delta_J": -0.057406360697330266,
+          "delta_served_users": -3.828125,
+          "delta_sinr_quality": -0.012708702324434107
+        },
+        {
+          "episode": 38,
+          "delta_J": -0.09031819543022274,
+          "delta_served_users": -5.4296875,
+          "delta_sinr_quality": -0.04767523476740891
+        },
+        {
+          "episode": 39,
+          "delta_J": -0.0665056504559775,
+          "delta_served_users": -4.13671875,
+          "delta_sinr_quality": -0.02863862651992464
+        },
+        {
+          "episode": 42,
+          "delta_J": -0.12206629370722095,
+          "delta_served_users": -8.25,
+          "delta_sinr_quality": -0.021887645690736188
+        },
+        {
+          "episode": 43,
+          "delta_J": -0.09330331714110833,
+          "delta_served_users": -5.65625,
+          "delta_sinr_quality": -0.047052723803694366
+        },
+        {
+          "episode": 46,
+          "delta_J": -0.04999412070105891,
+          "delta_served_users": -3.53515625,
+          "delta_sinr_quality": -0.0016731106701964177
+        },
+        {
+          "episode": 47,
+          "delta_J": -0.09503311294246136,
+          "delta_served_users": -6.65234375,
+          "delta_sinr_quality": -0.006334334808204833
+        },
+        {
+          "episode": 49,
+          "delta_J": -0.051285937174833984,
+          "delta_served_users": -3.265625,
+          "delta_sinr_quality": -0.01855729058277976
+        },
+        {
+          "episode": 50,
+          "delta_J": -0.026343099039890405,
+          "delta_served_users": -1.71484375,
+          "delta_sinr_quality": -0.007784288466301248
+        },
+        {
+          "episode": 52,
+          "delta_J": -0.03775037369806496,
+          "delta_served_users": -2.1875,
+          "delta_sinr_quality": -0.02375124566021626
+        },
+        {
+          "episode": 56,
+          "delta_J": -0.0978772729088241,
+          "delta_served_users": -6.17578125,
+          "delta_sinr_quality": -0.03805445136274711
+        },
+        {
+          "episode": 61,
+          "delta_J": -0.04426828205694483,
+          "delta_served_users": -2.71484375,
+          "delta_sinr_quality": -0.020868231856482664
+        },
+        {
+          "episode": 69,
+          "delta_J": -0.03420527651777665,
+          "delta_served_users": -2.37109375,
+          "delta_sinr_quality": -0.0033665467259221954
+        },
+        {
+          "episode": 71,
+          "delta_J": -0.020410558897729053,
+          "delta_served_users": -1.73046875,
+          "delta_sinr_quality": 0.012720012007569642
+        },
+        {
+          "episode": 72,
+          "delta_J": -0.09229229305244838,
+          "delta_served_users": -6.34375,
+          "delta_sinr_quality": -0.011599310174828042
+        },
+        {
+          "episode": 73,
+          "delta_J": -0.030949544997913275,
+          "delta_served_users": -2.1171875,
+          "delta_sinr_quality": -0.004363066659710979
+        },
+        {
+          "episode": 75,
+          "delta_J": -0.033949416423605244,
+          "delta_served_users": -1.69921875,
+          "delta_sinr_quality": -0.033867846412017386
+        },
+        {
+          "episode": 79,
+          "delta_J": -0.02371459236123105,
+          "delta_served_users": -2.04296875,
+          "delta_sinr_quality": 0.016289900462563622
+        },
+        {
+          "episode": 81,
+          "delta_J": -0.03867988275646751,
+          "delta_served_users": -2.6796875,
+          "delta_sinr_quality": -0.003880859188225158
+        },
+        {
+          "episode": 84,
+          "delta_J": -0.014513979503084862,
+          "delta_served_users": -1.05859375,
+          "delta_sinr_quality": 0.0010211099897173975
+        },
+        {
+          "episode": 86,
+          "delta_J": -0.010771510721544059,
+          "delta_served_users": -0.43359375,
+          "delta_sinr_quality": -0.015670660738479544
+        },
+        {
+          "episode": 87,
+          "delta_J": -0.011377592823406474,
+          "delta_served_users": -0.5390625,
+          "delta_sinr_quality": -0.012769059411354935
+        },
+        {
+          "episode": 89,
+          "delta_J": -0.0689233703759699,
+          "delta_served_users": -4.66796875,
+          "delta_sinr_quality": -0.011906026253233157
+        },
+        {
+          "episode": 90,
+          "delta_J": -0.04267134038529641,
+          "delta_served_users": -2.83984375,
+          "delta_sinr_quality": -0.009711759617654692
+        },
+        {
+          "episode": 91,
+          "delta_J": -0.02449421986541589,
+          "delta_served_users": -1.36328125,
+          "delta_sinr_quality": -0.01802760788471909
+        },
+        {
+          "episode": 94,
+          "delta_J": -0.05006920467326459,
+          "delta_served_users": -3.32421875,
+          "delta_sinr_quality": -0.011767140577548754
+        },
+        {
+          "episode": 95,
+          "delta_J": -0.027673457711537036,
+          "delta_served_users": -1.63671875,
+          "delta_sinr_quality": -0.01586465070512373
+        },
+        {
+          "episode": 96,
+          "delta_J": -0.05233592100362275,
+          "delta_served_users": -3.51953125,
+          "delta_sinr_quality": -0.010208278345409383
+        },
+        {
+          "episode": 97,
+          "delta_J": -0.06680093254856598,
+          "delta_served_users": -4.3359375,
+          "delta_sinr_quality": -0.020326025161885808
+        },
+        {
+          "episode": 98,
+          "delta_J": -0.04491189344514679,
+          "delta_served_users": -2.9140625,
+          "delta_sinr_quality": -0.013716728150490035
+        },
+        {
+          "episode": 99,
+          "delta_J": -0.015160478356497697,
+          "delta_served_users": -1.45703125,
+          "delta_sinr_quality": 0.01745986381167483
+        },
+        {
+          "episode": 101,
+          "delta_J": -0.1562283184187564,
+          "delta_served_users": -9.88671875,
+          "delta_sinr_quality": -0.05938085306252091
+        },
+        {
+          "episode": 102,
+          "delta_J": -0.0033521358250741123,
+          "delta_served_users": -0.4609375,
+          "delta_sinr_quality": 0.010336630583086495
+        },
+        {
+          "episode": 104,
+          "delta_J": -0.025576188127240523,
+          "delta_served_users": -2.12109375,
+          "delta_sinr_quality": 0.013730414575864575
+        },
+        {
+          "episode": 105,
+          "delta_J": -0.03575179015465532,
+          "delta_served_users": -2.30859375,
+          "delta_sinr_quality": -0.011438258848851121
+        },
+        {
+          "episode": 106,
+          "delta_J": -0.0720971729054094,
+          "delta_served_users": -5.0390625,
+          "delta_sinr_quality": -0.005167659684698289
+        },
+        {
+          "episode": 107,
+          "delta_J": -0.01963500493490565,
+          "delta_served_users": -1.21875,
+          "delta_sinr_quality": -0.008575016449685308
+        },
+        {
+          "episode": 111,
+          "delta_J": -0.02033042186107878,
+          "delta_served_users": -1.15234375,
+          "delta_sinr_quality": -0.013992031203596114
+        },
+        {
+          "episode": 112,
+          "delta_J": -0.08627317412031846,
+          "delta_served_users": -5.93359375,
+          "delta_sinr_quality": -0.010676205401061734
+        },
+        {
+          "episode": 113,
+          "delta_J": -0.022447115328343648,
+          "delta_served_users": -1.5078125,
+          "delta_sinr_quality": -0.004459134427811748
+        },
+        {
+          "episode": 114,
+          "delta_J": -0.05844209195915495,
+          "delta_served_users": -4.0234375,
+          "delta_sinr_quality": -0.007046556530516376
+        },
+        {
+          "episode": 115,
+          "delta_J": -0.05879824783849544,
+          "delta_served_users": -3.75390625,
+          "delta_sinr_quality": -0.02081186779498434
+        },
+        {
+          "episode": 117,
+          "delta_J": -0.023385124014746822,
+          "delta_served_users": -1.39453125,
+          "delta_sinr_quality": -0.012872288382489286
+        },
+        {
+          "episode": 118,
+          "delta_J": -0.07650147336461596,
+          "delta_served_users": -4.71875,
+          "delta_sinr_quality": -0.034796577882052884
+        },
+        {
+          "episode": 119,
+          "delta_J": -0.035200155061161725,
+          "delta_served_users": -2.56640625,
+          "delta_sinr_quality": 0.0024317747961272312
+        },
+        {
+          "episode": 123,
+          "delta_J": -0.003921934609363936,
+          "delta_served_users": -0.30859375,
+          "delta_sinr_quality": 0.001327926302119961
+        },
+        {
+          "episode": 124,
+          "delta_J": -0.07981648324104221,
+          "delta_served_users": -4.97265625,
+          "delta_sinr_quality": -0.033997652470140846
+        },
+        {
+          "episode": 129,
+          "delta_J": -0.0426469328279859,
+          "delta_served_users": -2.63671875,
+          "delta_sinr_quality": -0.01910956775995308
+        },
+        {
+          "episode": 131,
+          "delta_J": -0.021662222318888077,
+          "delta_served_users": -1.296875,
+          "delta_sinr_quality": -0.011686574396293212
+        },
+        {
+          "episode": 133,
+          "delta_J": -0.0230491592393533,
+          "delta_served_users": -2.01171875,
+          "delta_sinr_quality": 0.017049677535489458
+        },
+        {
+          "episode": 134,
+          "delta_J": -0.07217830180786877,
+          "delta_served_users": -4.23046875,
+          "delta_sinr_quality": -0.04317246435956197
+        },
+        {
+          "episode": 136,
+          "delta_J": -0.015440634668029085,
+          "delta_served_users": -0.98046875,
+          "delta_sinr_quality": -0.005713573893429386
+        },
+        {
+          "episode": 137,
+          "delta_J": -0.015574786676696456,
+          "delta_served_users": -0.83984375,
+          "delta_sinr_quality": -0.012723247255655282
+        },
+        {
+          "episode": 138,
+          "delta_J": -0.06391900532767097,
+          "delta_served_users": -4.44921875,
+          "delta_sinr_quality": -0.005433142758903636
+        },
+        {
+          "episode": 142,
+          "delta_J": -0.11751585908059514,
+          "delta_served_users": -8.0234375,
+          "delta_sinr_quality": -0.017292446935316896
+        },
+        {
+          "episode": 143,
+          "delta_J": -0.06692760695924224,
+          "delta_served_users": -4.484375,
+          "delta_sinr_quality": -0.01382118986414052
+        },
+        {
+          "episode": 144,
+          "delta_J": -0.08716063899891005,
+          "delta_served_users": -5.76171875,
+          "delta_sinr_quality": -0.021655254996366433
+        },
+        {
+          "episode": 145,
+          "delta_J": -0.08042221847722132,
+          "delta_served_users": -5.1953125,
+          "delta_sinr_quality": -0.025626144924071004
+        },
+        {
+          "episode": 146,
+          "delta_J": -0.044956074651082145,
+          "delta_served_users": -2.859375,
+          "delta_sinr_quality": -0.01641608217027353
+        },
+        {
+          "episode": 147,
+          "delta_J": -0.013857128850111033,
+          "delta_served_users": -0.94921875,
+          "delta_sinr_quality": -0.001893554500370126
+        },
+        {
+          "episode": 149,
+          "delta_J": -0.13016222044272088,
+          "delta_served_users": -8.93359375,
+          "delta_sinr_quality": -0.016973026475736147
+        },
+        {
+          "episode": 150,
+          "delta_J": -0.023785932903254772,
+          "delta_served_users": -1.71875,
+          "delta_sinr_quality": 0.0009218903224846448
+        },
+        {
+          "episode": 151,
+          "delta_J": -0.010014119109385433,
+          "delta_served_users": -0.44921875,
+          "delta_sinr_quality": -0.012416855364617743
+        },
+        {
+          "episode": 154,
+          "delta_J": -0.09017456898810525,
+          "delta_served_users": -5.70703125,
+          "delta_sinr_quality": -0.034253771627017274
+        },
+        {
+          "episode": 155,
+          "delta_J": -0.047037573352134196,
+          "delta_served_users": -2.76171875,
+          "delta_sinr_quality": -0.02791170284044743
+        },
+        {
+          "episode": 158,
+          "delta_J": -0.0625122822395589,
+          "delta_served_users": -4.109375,
+          "delta_sinr_quality": -0.01660344079852992
+        },
+        {
+          "episode": 159,
+          "delta_J": -0.01748988158302106,
+          "delta_served_users": -1.14453125,
+          "delta_sinr_quality": -0.004888146943403393
+        },
+        {
+          "episode": 163,
+          "delta_J": -0.1525778190979235,
+          "delta_served_users": -9.9453125,
+          "delta_sinr_quality": -0.04447814699307845
+        },
+        {
+          "episode": 164,
+          "delta_J": -0.07987546674633111,
+          "delta_served_users": -4.9765625,
+          "delta_sinr_quality": -0.034011972487770464
+        },
+        {
+          "episode": 167,
+          "delta_J": -0.06005109523939223,
+          "delta_served_users": -3.83984375,
+          "delta_sinr_quality": -0.020977609131307556
+        },
+        {
+          "episode": 172,
+          "delta_J": -0.10070065625559398,
+          "delta_served_users": -6.45703125,
+          "delta_sinr_quality": -0.03434072918531264
+        },
+        {
+          "episode": 173,
+          "delta_J": -0.04478073240652469,
+          "delta_served_users": -2.7421875,
+          "delta_sinr_quality": -0.021300358021748636
+        },
+        {
+          "episode": 174,
+          "delta_J": -0.045981517688167495,
+          "delta_served_users": -2.87109375,
+          "delta_sinr_quality": -0.01928735062722514
+        },
+        {
+          "episode": 175,
+          "delta_J": -0.06640220944611705,
+          "delta_served_users": -4.3828125,
+          "delta_sinr_quality": -0.01680944815372315
+        },
+        {
+          "episode": 176,
+          "delta_J": -0.0355566162939307,
+          "delta_served_users": -2.76953125,
+          "delta_sinr_quality": 0.010722737353564507
+        },
+        {
+          "episode": 181,
+          "delta_J": -0.14404585429808447,
+          "delta_served_users": -9.49609375,
+          "delta_sinr_quality": -0.03700180599361501
+        },
+        {
+          "episode": 182,
+          "delta_J": -0.03180788445866173,
+          "delta_served_users": -1.875,
+          "delta_sinr_quality": -0.018526281528872937
+        },
+        {
+          "episode": 185,
+          "delta_J": -0.0418004876316628,
+          "delta_served_users": -3.32421875,
+          "delta_sinr_quality": 0.015795249561123798
+        },
+        {
+          "episode": 186,
+          "delta_J": -0.05034226359788466,
+          "delta_served_users": -2.58203125,
+          "delta_sinr_quality": -0.04731275365961557
+        },
+        {
+          "episode": 187,
+          "delta_J": -0.015970624963903057,
+          "delta_served_users": -0.82421875,
+          "delta_sinr_quality": -0.014771874879677294
+        },
+        {
+          "episode": 188,
+          "delta_J": -0.05956462507289306,
+          "delta_served_users": -3.80078125,
+          "delta_sinr_quality": -0.021178958576309997
+        },
+        {
+          "episode": 189,
+          "delta_J": -0.01206864086018955,
+          "delta_served_users": -0.375,
+          "delta_sinr_quality": -0.022728802867297948
+        },
+        {
+          "episode": 191,
+          "delta_J": -0.033843090568339146,
+          "delta_served_users": -2.61328125,
+          "delta_sinr_quality": 0.009142823105537018
+        },
+        {
+          "episode": 192,
+          "delta_J": -0.053497149018773615,
+          "delta_served_users": -3.77734375,
+          "delta_sinr_quality": -0.002047788395912409
+        },
+        {
+          "episode": 194,
+          "delta_J": -0.08002941972426336,
+          "delta_served_users": -4.8984375,
+          "delta_sinr_quality": -0.0381709824142108
+        },
+        {
+          "episode": 195,
+          "delta_J": -0.049919343993024695,
+          "delta_served_users": -3.4453125,
+          "delta_sinr_quality": -0.005616563310081979
+        },
+        {
+          "episode": 196,
+          "delta_J": -0.08044374081268343,
+          "delta_served_users": -5.47265625,
+          "delta_sinr_quality": -0.012755177708944812
+        },
+        {
+          "episode": 197,
+          "delta_J": -0.0007084211263894968,
+          "delta_served_users": -0.21875,
+          "delta_sinr_quality": 0.0078469295787012
+        },
+        {
+          "episode": 198,
+          "delta_J": -0.03737170906953771,
+          "delta_served_users": -2.18359375,
+          "delta_sinr_quality": -0.02267132189845851
+        },
+        {
+          "episode": 199,
+          "delta_J": -0.02352033131819245,
+          "delta_served_users": -1.078125,
+          "delta_sinr_quality": -0.028088604393974523
+        },
+        {
+          "episode": 203,
+          "delta_J": -0.02360945672578149,
+          "delta_served_users": -1.64453125,
+          "delta_sinr_quality": -0.001953397419271946
+        },
+        {
+          "episode": 204,
+          "delta_J": -0.0913791177389805,
+          "delta_served_users": -5.703125,
+          "delta_sinr_quality": -0.03845122579660181
+        },
+        {
+          "episode": 205,
+          "delta_J": -0.0034773063949978533,
+          "delta_served_users": -0.0859375,
+          "delta_sinr_quality": -0.007580604649992426
+        },
+        {
+          "episode": 208,
+          "delta_J": -0.06452983281904581,
+          "delta_served_users": -3.97265625,
+          "delta_sinr_quality": -0.029708817730153284
+        },
+        {
+          "episode": 210,
+          "delta_J": -0.028909252027104093,
+          "delta_served_users": -1.66796875,
+          "delta_sinr_quality": -0.018525631757013633
+        },
+        {
+          "episode": 211,
+          "delta_J": -0.01088364943886097,
+          "delta_served_users": -0.88671875,
+          "delta_sinr_quality": 0.005101376870463345
+        },
+        {
+          "episode": 213,
+          "delta_J": -0.007497460967589659,
+          "delta_served_users": -0.42578125,
+          "delta_sinr_quality": -0.005121744891965402
+        },
+        {
+          "episode": 214,
+          "delta_J": -0.044232060198679285,
+          "delta_served_users": -3.1328125,
+          "delta_sinr_quality": -0.0012422839955974485
+        },
+        {
+          "episode": 216,
+          "delta_J": -0.06686759770011083,
+          "delta_served_users": -4.484375,
+          "delta_sinr_quality": -0.01362115900036917
+        },
+        {
+          "episode": 218,
+          "delta_J": -0.06776085608304941,
+          "delta_served_users": -4.20703125,
+          "delta_sinr_quality": -0.029541395276831334
+        },
+        {
+          "episode": 219,
+          "delta_J": -0.012312131595365455,
+          "delta_served_users": -0.3828125,
+          "delta_sinr_quality": -0.023175855317884797
+        },
+        {
+          "episode": 220,
+          "delta_J": -0.006437748764954343,
+          "delta_served_users": -0.0546875,
+          "delta_sinr_quality": -0.018907079216513883
+        },
+        {
+          "episode": 224,
+          "delta_J": -0.02979874417245648,
+          "delta_served_users": -2.50390625,
+          "delta_sinr_quality": 0.017519811091811638
+        },
+        {
+          "episode": 225,
+          "delta_J": -0.017284840314164746,
+          "delta_served_users": -0.63671875,
+          "delta_sinr_quality": -0.0279025927138825
+        },
+        {
+          "episode": 226,
+          "delta_J": -0.0637022456552325,
+          "delta_served_users": -4.09765625,
+          "delta_sinr_quality": -0.021116860517442035
+        },
+        {
+          "episode": 227,
+          "delta_J": -0.041850120192907306,
+          "delta_served_users": -2.48046875,
+          "delta_sinr_quality": -0.023745192309690882
+        },
+        {
+          "episode": 228,
+          "delta_J": -0.015065505567050455,
+          "delta_served_users": 0.26953125,
+          "delta_sinr_quality": -0.06279647689016839
+        },
+        {
+          "episode": 231,
+          "delta_J": -0.0502570451453426,
+          "delta_served_users": -4.12109375,
+          "delta_sinr_quality": 0.024794224515524613
+        },
+        {
+          "episode": 232,
+          "delta_J": -0.004698909174850718,
+          "delta_served_users": -0.20703125,
+          "delta_sinr_quality": -0.006001572249502693
+        },
+        {
+          "episode": 233,
+          "delta_J": -0.068240711500061,
+          "delta_served_users": -4.61328125,
+          "delta_sinr_quality": -0.012182580000202975
+        },
+        {
+          "episode": 234,
+          "delta_J": -0.031178725023956855,
+          "delta_served_users": -2.25390625,
+          "delta_sinr_quality": 0.0012532082534771893
+        },
+        {
+          "episode": 238,
+          "delta_J": -0.002117894363273587,
+          "delta_served_users": -0.359375,
+          "delta_sinr_quality": 0.009711185455754945
+        },
+        {
+          "episode": 239,
+          "delta_J": -0.016273602885956973,
+          "delta_served_users": -1.1953125,
+          "delta_sinr_quality": 0.0015359070468097813
+        },
+        {
+          "episode": 242,
+          "delta_J": -0.08964316192492955,
+          "delta_served_users": -5.91015625,
+          "delta_sinr_quality": -0.023003248083098393
+        },
+        {
+          "episode": 244,
+          "delta_J": -0.06320975835002579,
+          "delta_served_users": -4.54296875,
+          "delta_sinr_quality": 0.0013060138332473409
+        },
+        {
+          "episode": 247,
+          "delta_J": -0.09210477931022457,
+          "delta_served_users": -5.7578125,
+          "delta_sinr_quality": -0.03831801436741468
+        },
+        {
+          "episode": 249,
+          "delta_J": -0.008902909667525882,
+          "delta_served_users": -0.94921875,
+          "delta_sinr_quality": 0.014620509441580498
+        },
+        {
+          "episode": 250,
+          "delta_J": -0.10959426391501118,
+          "delta_served_users": -7.91796875,
+          "delta_sinr_quality": 0.004190995283294904
+        },
+        {
+          "episode": 251,
+          "delta_J": -0.07391438260546213,
+          "delta_served_users": -4.578125,
+          "delta_sinr_quality": -0.032735442018207064
+        },
+        {
+          "episode": 253,
+          "delta_J": -0.06967444108484847,
+          "delta_served_users": -4.2734375,
+          "delta_sinr_quality": -0.032821053616161236
+        },
+        {
+          "episode": 254,
+          "delta_J": -0.0778795785636239,
+          "delta_served_users": -5.26171875,
+          "delta_sinr_quality": -0.01405172021207965
+        },
+        {
+          "episode": 255,
+          "delta_J": -0.0281038877923072,
+          "delta_served_users": -1.8515625,
+          "delta_sinr_quality": -0.007273375974357177
+        }
+      ]
+    },
+    {
+      "seed": 9623,
+      "delta_tail": -0.02581722213536483,
+      "delta_mean": -0.033170441315442056,
+      "paired_world_mean_differences": {
+        "J": -0.03317044131544207,
+        "served_users": -2.17279052734375,
+        "service_component": -0.030419067382812498,
+        "sinr_quality": -0.009171246442098577,
+        "sinr_component": -0.002751373932629573
+      },
+      "adverse_worlds": [
+        {
+          "episode": 0,
+          "delta_J": -0.11887684209101257,
+          "delta_served_users": -7.890625,
+          "delta_sinr_quality": -0.028026973636708627
+        },
+        {
+          "episode": 1,
+          "delta_J": -0.011067686932886012,
+          "delta_served_users": -0.84765625,
+          "delta_sinr_quality": 0.002665001890379784
+        },
+        {
+          "episode": 2,
+          "delta_J": -0.03599707969308183,
+          "delta_served_users": -2.26171875,
+          "delta_sinr_quality": -0.014443390643606627
+        },
+        {
+          "episode": 3,
+          "delta_J": -0.06931333942384948,
+          "delta_served_users": -4.38671875,
+          "delta_sinr_quality": -0.026330923079497873
+        },
+        {
+          "episode": 4,
+          "delta_J": -0.058117265647007116,
+          "delta_served_users": -3.921875,
+          "delta_sinr_quality": -0.010703385490023767
+        },
+        {
+          "episode": 5,
+          "delta_J": -0.04867805063765904,
+          "delta_served_users": -3.07421875,
+          "delta_sinr_quality": -0.018796627125529805
+        },
+        {
+          "episode": 6,
+          "delta_J": -0.033838998562595285,
+          "delta_served_users": -3.125,
+          "delta_sinr_quality": 0.03303667145801539
+        },
+        {
+          "episode": 10,
+          "delta_J": -0.025840375173705882,
+          "delta_served_users": -1.7265625,
+          "delta_sinr_quality": -0.005561667245686616
+        },
+        {
+          "episode": 11,
+          "delta_J": -0.00933847250982378,
+          "delta_served_users": -0.44921875,
+          "delta_sinr_quality": -0.010164700032745805
+        },
+        {
+          "episode": 12,
+          "delta_J": -0.0788165496761078,
+          "delta_served_users": -5.125,
+          "delta_sinr_quality": -0.023555165587026042
+        },
+        {
+          "episode": 13,
+          "delta_J": -0.1007600990427078,
+          "delta_served_users": -7.44921875,
+          "delta_sinr_quality": 0.011763211524307315
+        },
+        {
+          "episode": 15,
+          "delta_J": -0.011752933286358083,
+          "delta_served_users": -0.84375,
+          "delta_sinr_quality": 0.0001985557121393089
+        },
+        {
+          "episode": 17,
+          "delta_J": -0.14948213753767248,
+          "delta_served_users": -10.046875,
+          "delta_sinr_quality": -0.029419625125574556
+        },
+        {
+          "episode": 18,
+          "delta_J": -0.08860335843968463,
+          "delta_served_users": -6.2109375,
+          "delta_sinr_quality": -0.005500778132281767
+        },
+        {
+          "episode": 21,
+          "delta_J": -0.0883912906860704,
+          "delta_served_users": -6.375,
+          "delta_sinr_quality": 0.0028623643797656695
+        },
+        {
+          "episode": 22,
+          "delta_J": -0.021396615470580166,
+          "delta_served_users": -1.48046875,
+          "delta_sinr_quality": -0.0022335099019339805
+        },
+        {
+          "episode": 23,
+          "delta_J": -0.021553168374582543,
+          "delta_served_users": -1.20703125,
+          "delta_sinr_quality": -0.015515769581942007
+        },
+        {
+          "episode": 24,
+          "delta_J": -0.031135649746923857,
+          "delta_served_users": -1.78515625,
+          "delta_sinr_quality": -0.020478207489745992
+        },
+        {
+          "episode": 25,
+          "delta_J": -0.04493991736482317,
+          "delta_served_users": -3.30078125,
+          "delta_sinr_quality": 0.004236733783922683
+        },
+        {
+          "episode": 27,
+          "delta_J": -0.0927726391818155,
+          "delta_served_users": -6.140625,
+          "delta_sinr_quality": -0.022679630606051604
+        },
+        {
+          "episode": 29,
+          "delta_J": -0.09500651891352715,
+          "delta_served_users": -6.16796875,
+          "delta_sinr_quality": -0.028849854711757356
+        },
+        {
+          "episode": 30,
+          "delta_J": -0.09574885535423519,
+          "delta_served_users": -5.65234375,
+          "delta_sinr_quality": -0.055386809514117175
+        },
+        {
+          "episode": 31,
+          "delta_J": -0.020779702778716463,
+          "delta_served_users": -1.51171875,
+          "delta_sinr_quality": 0.0012811990709450521
+        },
+        {
+          "episode": 33,
+          "delta_J": -0.04915599202124116,
+          "delta_served_users": -3.21484375,
+          "delta_sinr_quality": -0.013827265070803937
+        },
+        {
+          "episode": 34,
+          "delta_J": -0.010232875243149225,
+          "delta_served_users": -0.484375,
+          "delta_sinr_quality": -0.011505417477163507
+        },
+        {
+          "episode": 38,
+          "delta_J": -0.016988978290393697,
+          "delta_served_users": -1.01953125,
+          "delta_sinr_quality": -0.009051802634645209
+        },
+        {
+          "episode": 40,
+          "delta_J": -0.009589482268353156,
+          "delta_served_users": -0.61328125,
+          "delta_sinr_quality": -0.003345149227844388
+        },
+        {
+          "episode": 41,
+          "delta_J": -0.05872243438156216,
+          "delta_served_users": -4.0703125,
+          "delta_sinr_quality": -0.005793531271873167
+        },
+        {
+          "episode": 42,
+          "delta_J": -0.02451417114120219,
+          "delta_served_users": -1.7109375,
+          "delta_sinr_quality": -0.0018701538040076238
+        },
+        {
+          "episode": 43,
+          "delta_J": -0.05210805213186703,
+          "delta_served_users": -3.1796875,
+          "delta_sinr_quality": -0.025308090439556633
+        },
+        {
+          "episode": 44,
+          "delta_J": -0.0313464298394589,
+          "delta_served_users": -1.74609375,
+          "delta_sinr_quality": -0.02300372446486257
+        },
+        {
+          "episode": 45,
+          "delta_J": -0.006210248522263984,
+          "delta_served_users": -0.4765625,
+          "delta_sinr_quality": 0.0015387549257869504
+        },
+        {
+          "episode": 46,
+          "delta_J": -0.030583236279065146,
+          "delta_served_users": -2.109375,
+          "delta_sinr_quality": -0.0035066209302166973
+        },
+        {
+          "episode": 47,
+          "delta_J": -0.015677748991571858,
+          "delta_served_users": -1.0625,
+          "delta_sinr_quality": -0.0026758299719063794
+        },
+        {
+          "episode": 48,
+          "delta_J": -0.006649417237987232,
+          "delta_served_users": -0.26953125,
+          "delta_sinr_quality": -0.009586599126623921
+        },
+        {
+          "episode": 50,
+          "delta_J": -0.10534737453894047,
+          "delta_served_users": -7.1875,
+          "delta_sinr_quality": -0.015741248463134086
+        },
+        {
+          "episode": 51,
+          "delta_J": -0.046485789620811235,
+          "delta_served_users": -3.24609375,
+          "delta_sinr_quality": -0.0034682570693709974
+        },
+        {
+          "episode": 54,
+          "delta_J": -0.10445354603001347,
+          "delta_served_users": -6.41015625,
+          "delta_sinr_quality": -0.04903786176671193
+        },
+        {
+          "episode": 55,
+          "delta_J": -0.022659289787918035,
+          "delta_served_users": -1.47265625,
+          "delta_sinr_quality": -0.006807007626392858
+        },
+        {
+          "episode": 56,
+          "delta_J": -0.08143728920768266,
+          "delta_served_users": -5.359375,
+          "delta_sinr_quality": -0.02135346402560888
+        },
+        {
+          "episode": 57,
+          "delta_J": -0.06438535236139592,
+          "delta_served_users": -4.359375,
+          "delta_sinr_quality": -0.011180341204654623
+        },
+        {
+          "episode": 58,
+          "delta_J": -0.004778132540212976,
+          "delta_served_users": -0.41796875,
+          "delta_sinr_quality": 0.0035780998659565716
+        },
+        {
+          "episode": 61,
+          "delta_J": -0.07221074501414317,
+          "delta_served_users": -5.0859375,
+          "delta_sinr_quality": -0.0033587333804772773
+        },
+        {
+          "episode": 62,
+          "delta_J": -0.08234950940520985,
+          "delta_served_users": -5.77734375,
+          "delta_sinr_quality": -0.004888989684032438
+        },
+        {
+          "episode": 63,
+          "delta_J": -0.09521766434674159,
+          "delta_served_users": -5.859375,
+          "delta_sinr_quality": -0.0439547144891386
+        },
+        {
+          "episode": 66,
+          "delta_J": -0.05936388982712895,
+          "delta_served_users": -3.6171875,
+          "delta_sinr_quality": -0.02907754942376381
+        },
+        {
+          "episode": 67,
+          "delta_J": -0.05318783691030121,
+          "delta_served_users": -3.484375,
+          "delta_sinr_quality": -0.014688623034337822
+        },
+        {
+          "episode": 69,
+          "delta_J": -0.11114246006743567,
+          "delta_served_users": -7.953125,
+          "delta_sinr_quality": 0.000670966441881124
+        },
+        {
+          "episode": 70,
+          "delta_J": -0.06346784464047026,
+          "delta_served_users": -4.0078125,
+          "delta_sinr_quality": -0.0245282321349006
+        },
+        {
+          "episode": 71,
+          "delta_J": -0.07707544836940186,
+          "delta_served_users": -5.3125,
+          "delta_sinr_quality": -0.009001494564672322
+        },
+        {
+          "episode": 72,
+          "delta_J": -0.012428453284750368,
+          "delta_served_users": -1.05078125,
+          "delta_sinr_quality": 0.007608280717498431
+        },
+        {
+          "episode": 73,
+          "delta_J": -0.057904516931591155,
+          "delta_served_users": -3.75390625,
+          "delta_sinr_quality": -0.017832764771970516
+        },
+        {
+          "episode": 74,
+          "delta_J": -0.07029990057349902,
+          "delta_served_users": -4.6953125,
+          "delta_sinr_quality": -0.015218418578330561
+        },
+        {
+          "episode": 76,
+          "delta_J": -0.03990069165150234,
+          "delta_served_users": -2.26953125,
+          "delta_sinr_quality": -0.02709084717167483
+        },
+        {
+          "episode": 81,
+          "delta_J": -0.08622237232551383,
+          "delta_served_users": -5.9296875,
+          "delta_sinr_quality": -0.01068915775171228
+        },
+        {
+          "episode": 82,
+          "delta_J": -0.03545975599545029,
+          "delta_served_users": -2.03515625,
+          "delta_sinr_quality": -0.023225228318167507
+        },
+        {
+          "episode": 83,
+          "delta_J": -0.06753601937219263,
+          "delta_served_users": -4.03515625,
+          "delta_sinr_quality": -0.03681277290730832
+        },
+        {
+          "episode": 84,
+          "delta_J": -0.0011083939114666375,
+          "delta_served_users": -0.09375,
+          "delta_sinr_quality": 0.0006803536284440553
+        },
+        {
+          "episode": 85,
+          "delta_J": -0.1108548272889282,
+          "delta_served_users": -7.02734375,
+          "delta_sinr_quality": -0.0415733826297614
+        },
+        {
+          "episode": 86,
+          "delta_J": -0.045746528031590544,
+          "delta_served_users": -3.33203125,
+          "delta_sinr_quality": 0.003006364894697744
+        },
+        {
+          "episode": 87,
+          "delta_J": -0.07864738353317112,
+          "delta_served_users": -5.1796875,
+          "delta_sinr_quality": -0.0204391951105707
+        },
+        {
+          "episode": 88,
+          "delta_J": -0.13279695825780444,
+          "delta_served_users": -9.125,
+          "delta_sinr_quality": -0.01682319419268169
+        },
+        {
+          "episode": 90,
+          "delta_J": -0.12195406477986545,
+          "delta_served_users": -7.375,
+          "delta_sinr_quality": -0.06234688259955108
+        },
+        {
+          "episode": 91,
+          "delta_J": -0.08140497138865418,
+          "delta_served_users": -5.5703125,
+          "delta_sinr_quality": -0.011401987962180754
+        },
+        {
+          "episode": 92,
+          "delta_J": -0.08074841699544118,
+          "delta_served_users": -5.59765625,
+          "delta_sinr_quality": -0.007937431651470539
+        },
+        {
+          "episode": 93,
+          "delta_J": -0.007369947318021486,
+          "delta_served_users": -0.05859375,
+          "delta_sinr_quality": -0.02183211606007117
+        },
+        {
+          "episode": 94,
+          "delta_J": -0.16691481929776444,
+          "delta_served_users": -11.30859375,
+          "delta_sinr_quality": -0.02864835599254746
+        },
+        {
+          "episode": 96,
+          "delta_J": -0.1192375170852745,
+          "delta_served_users": -8.11328125,
+          "delta_sinr_quality": -0.01883859861758176
+        },
+        {
+          "episode": 97,
+          "delta_J": -0.018046620138921693,
+          "delta_served_users": -0.44921875,
+          "delta_sinr_quality": -0.03919185879640573
+        },
+        {
+          "episode": 99,
+          "delta_J": -0.03991026629282038,
+          "delta_served_users": -2.69140625,
+          "delta_sinr_quality": -0.007435262642734891
+        },
+        {
+          "episode": 100,
+          "delta_J": -0.08898334679941097,
+          "delta_served_users": -5.70703125,
+          "delta_sinr_quality": -0.030283030998036684
+        },
+        {
+          "episode": 101,
+          "delta_J": -0.048809071021873665,
+          "delta_served_users": -3.390625,
+          "delta_sinr_quality": -0.004467736739578981
+        },
+        {
+          "episode": 102,
+          "delta_J": -0.06648713513451798,
+          "delta_served_users": -4.2890625,
+          "delta_sinr_quality": -0.021467533781726528
+        },
+        {
+          "episode": 103,
+          "delta_J": -0.1534741098824901,
+          "delta_served_users": -10.48046875,
+          "delta_sinr_quality": -0.02249182460830043
+        },
+        {
+          "episode": 104,
+          "delta_J": -0.16177221531304556,
+          "delta_served_users": -10.62109375,
+          "delta_sinr_quality": -0.04358967604348535
+        },
+        {
+          "episode": 105,
+          "delta_J": -0.02579260730042801,
+          "delta_served_users": -1.7421875,
+          "delta_sinr_quality": -0.004673274334759114
+        },
+        {
+          "episode": 106,
+          "delta_J": -0.006021676199871706,
+          "delta_served_users": -0.6328125,
+          "delta_sinr_quality": 0.009458996000427058
+        },
+        {
+          "episode": 107,
+          "delta_J": -0.03723312874978596,
+          "delta_served_users": -2.875,
+          "delta_sinr_quality": 0.010056237500712453
+        },
+        {
+          "episode": 108,
+          "delta_J": -0.11361393106266535,
+          "delta_served_users": -7.5625,
+          "delta_sinr_quality": -0.025796436875551665
+        },
+        {
+          "episode": 109,
+          "delta_J": -0.13030464110875462,
+          "delta_served_users": -8.4609375,
+          "delta_sinr_quality": -0.03950505369584889
+        },
+        {
+          "episode": 110,
+          "delta_J": -0.03792433846227958,
+          "delta_served_users": -1.9375,
+          "delta_sinr_quality": -0.03599779487426483
+        },
+        {
+          "episode": 112,
+          "delta_J": -0.12164784213397617,
+          "delta_served_users": -8.0625,
+          "delta_sinr_quality": -0.02924280711325368
+        },
+        {
+          "episode": 113,
+          "delta_J": -0.04123439375434548,
+          "delta_served_users": -2.3671875,
+          "delta_sinr_quality": -0.026979229181151573
+        },
+        {
+          "episode": 115,
+          "delta_J": -0.07508723575157528,
+          "delta_served_users": -4.60546875,
+          "delta_sinr_quality": -0.0353689108385839
+        },
+        {
+          "episode": 118,
+          "delta_J": -0.01776182077528443,
+          "delta_served_users": -0.83203125,
+          "delta_sinr_quality": -0.02037794425094884
+        },
+        {
+          "episode": 119,
+          "delta_J": -0.07103411457488804,
+          "delta_served_users": -4.8515625,
+          "delta_sinr_quality": -0.010374131916293314
+        },
+        {
+          "episode": 120,
+          "delta_J": -0.04825697526771561,
+          "delta_served_users": -3.03515625,
+          "delta_sinr_quality": -0.019215959225719143
+        },
+        {
+          "episode": 123,
+          "delta_J": -0.06729568363714739,
+          "delta_served_users": -4.57421875,
+          "delta_sinr_quality": -0.01085540379049206
+        },
+        {
+          "episode": 124,
+          "delta_J": -0.10232247953781429,
+          "delta_served_users": -7.17578125,
+          "delta_sinr_quality": -0.006205140126047712
+        },
+        {
+          "episode": 128,
+          "delta_J": -0.09244361710660057,
+          "delta_served_users": -6.06640625,
+          "delta_sinr_quality": -0.025046432022001894
+        },
+        {
+          "episode": 129,
+          "delta_J": -0.06356244099461462,
+          "delta_served_users": -4.1953125,
+          "delta_sinr_quality": -0.016093553315382092
+        },
+        {
+          "episode": 130,
+          "delta_J": -0.09935892158831564,
+          "delta_served_users": -6.640625,
+          "delta_sinr_quality": -0.021300571961052076
+        },
+        {
+          "episode": 131,
+          "delta_J": -0.03009214224729692,
+          "delta_served_users": -2.203125,
+          "delta_sinr_quality": 0.0025053591756769855
+        },
+        {
+          "episode": 132,
+          "delta_J": -0.04600417623251987,
+          "delta_served_users": -2.83984375,
+          "delta_sinr_quality": -0.02082121244173349
+        },
+        {
+          "episode": 133,
+          "delta_J": -0.05233614246435969,
+          "delta_served_users": -3.31640625,
+          "delta_sinr_quality": -0.01968818321453228
+        },
+        {
+          "episode": 134,
+          "delta_J": -0.004856265568024931,
+          "delta_served_users": -0.17578125,
+          "delta_sinr_quality": -0.00798442689341644
+        },
+        {
+          "episode": 136,
+          "delta_J": -0.009276662065501429,
+          "delta_served_users": -0.28125,
+          "delta_sinr_quality": -0.017797206885004108
+        },
+        {
+          "episode": 138,
+          "delta_J": -0.049912731476535854,
+          "delta_served_users": -3.54296875,
+          "delta_sinr_quality": -0.0010372299217856068
+        },
+        {
+          "episode": 139,
+          "delta_J": -0.0004925307161821602,
+          "delta_served_users": -0.39453125,
+          "delta_sinr_quality": 0.01676968927939273
+        },
+        {
+          "episode": 140,
+          "delta_J": -0.055205150974332096,
+          "delta_served_users": -3.41796875,
+          "delta_sinr_quality": -0.024511961581105704
+        },
+        {
+          "episode": 142,
+          "delta_J": -0.05781144373861985,
+          "delta_served_users": -3.80078125,
+          "delta_sinr_quality": -0.015335020795399126
+        },
+        {
+          "episode": 145,
+          "delta_J": -0.16141152514829843,
+          "delta_served_users": -10.25,
+          "delta_sinr_quality": -0.05970508382766146
+        },
+        {
+          "episode": 146,
+          "delta_J": -0.12378579783802174,
+          "delta_served_users": -7.984375,
+          "delta_sinr_quality": -0.04001515946007203
+        },
+        {
+          "episode": 148,
+          "delta_J": -0.026453289024437276,
+          "delta_served_users": -1.765625,
+          "delta_sinr_quality": -0.005781796748124235
+        },
+        {
+          "episode": 149,
+          "delta_J": -0.03916436847902116,
+          "delta_served_users": -3.0,
+          "delta_sinr_quality": 0.009452105069929675
+        },
+        {
+          "episode": 150,
+          "delta_J": -0.0977440623563682,
+          "delta_served_users": -6.4296875,
+          "delta_sinr_quality": -0.02576145785456027
+        },
+        {
+          "episode": 151,
+          "delta_J": -0.01274155694283241,
+          "delta_served_users": -0.8359375,
+          "delta_sinr_quality": -0.0034614398094411913
+        },
+        {
+          "episode": 152,
+          "delta_J": -0.003320596816935306,
+          "delta_served_users": 0.08203125,
+          "delta_sinr_quality": -0.0148967810564508
+        },
+        {
+          "episode": 153,
+          "delta_J": -0.0997295849062429,
+          "delta_served_users": -7.1328125,
+          "delta_sinr_quality": 0.00043263364585716113
+        },
+        {
+          "episode": 154,
+          "delta_J": -0.0655062261768396,
+          "delta_served_users": -4.3046875,
+          "delta_sinr_quality": -0.017468670589465454
+        },
+        {
+          "episode": 158,
+          "delta_J": -0.029804961772293914,
+          "delta_served_users": -2.19140625,
+          "delta_sinr_quality": 0.0029157524256871598
+        },
+        {
+          "episode": 159,
+          "delta_J": -0.02226928064870716,
+          "delta_served_users": -0.7578125,
+          "delta_sinr_quality": -0.03886635216235711
+        },
+        {
+          "episode": 160,
+          "delta_J": -0.07152189100555031,
+          "delta_served_users": -4.82421875,
+          "delta_sinr_quality": -0.013276095018501258
+        },
+        {
+          "episode": 161,
+          "delta_J": -0.08340204534369286,
+          "delta_served_users": -5.34375,
+          "delta_sinr_quality": -0.028631817812309404
+        },
+        {
+          "episode": 162,
+          "delta_J": -0.02778293347159136,
+          "delta_served_users": -2.01953125,
+          "delta_sinr_quality": 0.0016350134280284229
+        },
+        {
+          "episode": 164,
+          "delta_J": -0.07348411260036308,
+          "delta_served_users": -5.21875,
+          "delta_sinr_quality": -0.0014053753345444897
+        },
+        {
+          "episode": 165,
+          "delta_J": -0.05173017232167823,
+          "delta_served_users": -3.4140625,
+          "delta_sinr_quality": -0.013110991072260797
+        },
+        {
+          "episode": 166,
+          "delta_J": -0.004194951973201216,
+          "delta_served_users": -0.0546875,
+          "delta_sinr_quality": -0.011431089910670655
+        },
+        {
+          "episode": 167,
+          "delta_J": -0.0131492790154083,
+          "delta_served_users": -1.4765625,
+          "delta_sinr_quality": 0.025075319948639527
+        },
+        {
+          "episode": 168,
+          "delta_J": -0.016466161736223728,
+          "delta_served_users": -1.2265625,
+          "delta_sinr_quality": 0.0023523775459205476
+        },
+        {
+          "episode": 171,
+          "delta_J": -0.058510067117039016,
+          "delta_served_users": -3.8359375,
+          "delta_sinr_quality": -0.016023140390130225
+        },
+        {
+          "episode": 173,
+          "delta_J": -0.0007681018884767299,
+          "delta_served_users": 0.15625,
+          "delta_sinr_quality": -0.00985200629492193
+        },
+        {
+          "episode": 174,
+          "delta_J": -0.15045239330646756,
+          "delta_served_users": -10.625,
+          "delta_sinr_quality": -0.005674644354891956
+        },
+        {
+          "episode": 176,
+          "delta_J": -0.09790621870126706,
+          "delta_served_users": -6.453125,
+          "delta_sinr_quality": -0.025208229004223606
+        },
+        {
+          "episode": 177,
+          "delta_J": -0.04918112061209476,
+          "delta_served_users": -3.20703125,
+          "delta_sinr_quality": -0.014275610373649009
+        },
+        {
+          "episode": 178,
+          "delta_J": -0.06488936650997991,
+          "delta_served_users": -4.4765625,
+          "delta_sinr_quality": -0.007391638366599701
+        },
+        {
+          "episode": 181,
+          "delta_J": -0.008327671916805696,
+          "delta_served_users": -0.27734375,
+          "delta_sinr_quality": -0.014816198056018179
+        },
+        {
+          "episode": 182,
+          "delta_J": -0.04024661702748317,
+          "delta_served_users": -2.51171875,
+          "delta_sinr_quality": -0.01694184842494456
+        },
+        {
+          "episode": 183,
+          "delta_J": -0.07099625233153661,
+          "delta_served_users": -5.0390625,
+          "delta_sinr_quality": -0.0014979244384561163
+        },
+        {
+          "episode": 184,
+          "delta_J": -0.11849199823568475,
+          "delta_served_users": -7.08203125,
+          "delta_sinr_quality": -0.06447853578561545
+        },
+        {
+          "episode": 186,
+          "delta_J": -0.11272902830037192,
+          "delta_served_users": -7.42578125,
+          "delta_sinr_quality": -0.029226969334572875
+        },
+        {
+          "episode": 187,
+          "delta_J": -0.1429282105389515,
+          "delta_served_users": -9.6484375,
+          "delta_sinr_quality": -0.02616695179650383
+        },
+        {
+          "episode": 188,
+          "delta_J": -0.05640839390395733,
+          "delta_served_users": -3.171875,
+          "delta_sinr_quality": -0.040007146346524594
+        },
+        {
+          "episode": 189,
+          "delta_J": -0.08930428416004055,
+          "delta_served_users": -5.59375,
+          "delta_sinr_quality": -0.03663928053346867
+        },
+        {
+          "episode": 190,
+          "delta_J": -0.02692047465783834,
+          "delta_served_users": -1.6875,
+          "delta_sinr_quality": -0.010984915526128194
+        },
+        {
+          "episode": 191,
+          "delta_J": -0.12015206803981619,
+          "delta_served_users": -7.91796875,
+          "delta_sinr_quality": -0.031001685132720655
+        },
+        {
+          "episode": 192,
+          "delta_J": -0.00789929290865063,
+          "delta_served_users": 0.0078125,
+          "delta_sinr_quality": -0.026695559695502344
+        },
+        {
+          "episode": 194,
+          "delta_J": -0.09879870628238051,
+          "delta_served_users": -6.203125,
+          "delta_sinr_quality": -0.039849854274601915
+        },
+        {
+          "episode": 195,
+          "delta_J": -0.05546222484225871,
+          "delta_served_users": -3.76171875,
+          "delta_sinr_quality": -0.009327207807530088
+        },
+        {
+          "episode": 196,
+          "delta_J": -0.11885248505511697,
+          "delta_served_users": -8.59765625,
+          "delta_sinr_quality": 0.005049008149609707
+        },
+        {
+          "episode": 197,
+          "delta_J": -0.07496161943518036,
+          "delta_served_users": -4.8515625,
+          "delta_sinr_quality": -0.02346581478393449
+        },
+        {
+          "episode": 198,
+          "delta_J": -0.04144754613664947,
+          "delta_served_users": -3.0078125,
+          "delta_sinr_quality": 0.0022060962111679766
+        },
+        {
+          "episode": 199,
+          "delta_J": -0.054589909689276434,
+          "delta_served_users": -3.21484375,
+          "delta_sinr_quality": -0.03194032396425471
+        },
+        {
+          "episode": 203,
+          "delta_J": -0.14119828284275973,
+          "delta_served_users": -9.1640625,
+          "delta_sinr_quality": -0.043004692809199094
+        },
+        {
+          "episode": 204,
+          "delta_J": -0.03776130269716349,
+          "delta_served_users": -1.8984375,
+          "delta_sinr_quality": -0.037277258990545015
+        },
+        {
+          "episode": 206,
+          "delta_J": -0.040004067493591755,
+          "delta_served_users": -2.73046875,
+          "delta_sinr_quality": -0.005925016645305967
+        },
+        {
+          "episode": 208,
+          "delta_J": -0.09811198992893413,
+          "delta_served_users": -6.2578125,
+          "delta_sinr_quality": -0.03500871642978061
+        },
+        {
+          "episode": 209,
+          "delta_J": -0.059225038837180416,
+          "delta_served_users": -3.9609375,
+          "delta_sinr_quality": -0.012573046123935228
+        },
+        {
+          "episode": 210,
+          "delta_J": -0.012536643864566377,
+          "delta_served_users": -1.21484375,
+          "delta_sinr_quality": 0.014903895451446075
+        },
+        {
+          "episode": 211,
+          "delta_J": -0.13377732372584694,
+          "delta_served_users": -8.97265625,
+          "delta_sinr_quality": -0.027200454086157233
+        },
+        {
+          "episode": 212,
+          "delta_J": -0.06282120327982793,
+          "delta_served_users": -3.62890625,
+          "delta_sinr_quality": -0.04005505259942674
+        },
+        {
+          "episode": 213,
+          "delta_J": -0.01698574689353264,
+          "delta_served_users": -1.125,
+          "delta_sinr_quality": -0.00411915631177559
+        },
+        {
+          "episode": 214,
+          "delta_J": -0.0013946481870671101,
+          "delta_served_users": 0.01171875,
+          "delta_sinr_quality": -0.005195702290224077
+        },
+        {
+          "episode": 215,
+          "delta_J": -0.000337510853276185,
+          "delta_served_users": 0.0546875,
+          "delta_sinr_quality": -0.0036771195109210064
+        },
+        {
+          "episode": 217,
+          "delta_J": -0.07548778148396998,
+          "delta_served_users": -4.9140625,
+          "delta_sinr_quality": -0.022303021613232984
+        },
+        {
+          "episode": 219,
+          "delta_J": -0.0020813868443501082,
+          "delta_served_users": 0.07421875,
+          "delta_sinr_quality": -0.010401497814499922
+        },
+        {
+          "episode": 220,
+          "delta_J": -0.1149679635775232,
+          "delta_served_users": -7.1640625,
+          "delta_sinr_quality": -0.04890362859174467
+        },
+        {
+          "episode": 221,
+          "delta_J": -0.11174593891536597,
+          "delta_served_users": -7.65234375,
+          "delta_sinr_quality": -0.015377088051220164
+        },
+        {
+          "episode": 224,
+          "delta_J": -0.018313839579458785,
+          "delta_served_users": -1.265625,
+          "delta_sinr_quality": -0.001983631931528951
+        },
+        {
+          "episode": 225,
+          "delta_J": -0.05434651349954678,
+          "delta_served_users": -3.5859375,
+          "delta_sinr_quality": -0.013811294998489224
+        },
+        {
+          "episode": 227,
+          "delta_J": -0.010743643614307297,
+          "delta_served_users": -0.5859375,
+          "delta_sinr_quality": -0.008468395381024882
+        },
+        {
+          "episode": 229,
+          "delta_J": -0.11585919621416274,
+          "delta_served_users": -7.62890625,
+          "delta_sinr_quality": -0.030181695713875717
+        },
+        {
+          "episode": 231,
+          "delta_J": -0.05538550898585626,
+          "delta_served_users": -3.6953125,
+          "delta_sinr_quality": -0.01217044661952113
+        },
+        {
+          "episode": 232,
+          "delta_J": -0.017341149577946663,
+          "delta_served_users": -0.05859375,
+          "delta_sinr_quality": -0.05506945692648889
+        },
+        {
+          "episode": 233,
+          "delta_J": -0.12902056234530118,
+          "delta_served_users": -8.54296875,
+          "delta_sinr_quality": -0.031396666151004504
+        },
+        {
+          "episode": 234,
+          "delta_J": -0.009276111025863898,
+          "delta_served_users": -0.5390625,
+          "delta_sinr_quality": -0.0057641200862127845
+        },
+        {
+          "episode": 235,
+          "delta_J": -0.010185671538395474,
+          "delta_served_users": -0.93359375,
+          "delta_sinr_quality": 0.009615469872015198
+        },
+        {
+          "episode": 236,
+          "delta_J": -0.04353418015936944,
+          "delta_served_users": -3.5625,
+          "delta_sinr_quality": 0.021136066135435214
+        },
+        {
+          "episode": 238,
+          "delta_J": -0.08226064372457914,
+          "delta_served_users": -5.28515625,
+          "delta_sinr_quality": -0.027561520748597426
+        },
+        {
+          "episode": 239,
+          "delta_J": -0.1245538981338373,
+          "delta_served_users": -8.29296875,
+          "delta_sinr_quality": -0.02817445211279032
+        },
+        {
+          "episode": 240,
+          "delta_J": -0.07259054657894731,
+          "delta_served_users": -4.80859375,
+          "delta_sinr_quality": -0.01756744692982408
+        },
+        {
+          "episode": 241,
+          "delta_J": -0.05252320073662456,
+          "delta_served_users": -4.10546875,
+          "delta_sinr_quality": 0.016511205877918697
+        },
+        {
+          "episode": 243,
+          "delta_J": -0.07672318111841199,
+          "delta_served_users": -5.00390625,
+          "delta_sinr_quality": -0.02222831206137347
+        },
+        {
+          "episode": 244,
+          "delta_J": -0.09022324209003765,
+          "delta_served_users": -5.7109375,
+          "delta_sinr_quality": -0.03423372363345897
+        },
+        {
+          "episode": 245,
+          "delta_J": -0.06652721867071656,
+          "delta_served_users": -4.27734375,
+          "delta_sinr_quality": -0.02214802056905492
+        },
+        {
+          "episode": 246,
+          "delta_J": -0.07156655404258394,
+          "delta_served_users": -4.97265625,
+          "delta_sinr_quality": -0.0064978884752796146
+        },
+        {
+          "episode": 247,
+          "delta_J": -0.054273805031186034,
+          "delta_served_users": -3.7109375,
+          "delta_sinr_quality": -0.007735600103954077
+        },
+        {
+          "episode": 248,
+          "delta_J": -0.05915219973323743,
+          "delta_served_users": -3.80859375,
+          "delta_sinr_quality": -0.019439624110791337
+        },
+        {
+          "episode": 251,
+          "delta_J": -0.08820597580953002,
+          "delta_served_users": -6.265625,
+          "delta_sinr_quality": -0.001624086031766267
+        },
+        {
+          "episode": 252,
+          "delta_J": -0.08606740924440417,
+          "delta_served_users": -5.89453125,
+          "delta_sinr_quality": -0.01181323914801427
+        },
+        {
+          "episode": 253,
+          "delta_J": -0.09235411798166901,
+          "delta_served_users": -6.20703125,
+          "delta_sinr_quality": -0.018185601605563553
+        },
+        {
+          "episode": 254,
+          "delta_J": -0.01271582400573154,
+          "delta_served_users": -0.88671875,
+          "delta_sinr_quality": -0.0010058716857721528
+        }
+      ]
+    }
+  ],
+  "tail_contrast": {
+    "mean": -0.01176404271323477,
+    "sd": 0.012184155127853265,
+    "t95_df2": [
+      -0.04203116195328951,
+      0.018503076526819963
+    ]
+  },
+  "mean_contrast": {
+    "mean": -0.01233473719299282,
+    "sd": 0.018387125647864724,
+    "t95_df2": [
+      -0.05801088942726308,
+      0.03334141504127744
+    ]
+  },
+  "recurrence": "S_ETA_RECURRING",
+  "interval_note": "Descriptive Student t95, df=2, three independent training pairs; assumes approximately normal training-pair effects. Worlds are nested, not extra training replicates.",
+  "claim_ceiling": "exploratory finite package comparison"
+}

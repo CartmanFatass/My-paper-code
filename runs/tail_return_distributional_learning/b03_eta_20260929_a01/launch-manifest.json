@@ -1,0 +1,87 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-29T15:08:03.529951Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d609499b0c7042e99af15510f023c125/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d609499b0c7042e99af15510f023c125/experiments/candidates/tail_return_distributional_learning/b03_eta/run.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01",
+    "--",
+    "batch",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01",
+    "--launch-sha",
+    "ccd96d4c868f800c8cc9827e799bc376aa17c990"
+  ],
+  "claim_key": "1af0f6aa74f3103046eadd6208cec2f81a78886f61a0f7358881ffbbaaa6d356",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1af0f6aa74f3103046eadd6208cec2f81a78886f61a0f7358881ffbbaaa6d356.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d609499b0c7042e99af15510f023c125/experiments/candidates/tail_return_distributional_learning/b03_eta/run.py",
+    "batch",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01",
+    "--launch-sha",
+    "ccd96d4c868f800c8cc9827e799bc376aa17c990"
+  ],
+  "command_sha256": "6ee8144fbaa71b08f299f53bc433d3ac27e43d5706de8153c571a250b5ca7475",
+  "control_observation": {
+    "observed_at": "2026-09-29T15:07:56.059567Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "6c2adf12344ccac853a997d6b657d78a199522e0"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-29T15:08:02.997492Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d609499b0c7042e99af15510f023c125",
+  "direction": "tail_return_distributional_learning",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/tail_return_distributional_learning/b03_eta/run.py",
+    "batch",
+    "--launch-sha",
+    "ccd96d4c868f800c8cc9827e799bc376aa17c990"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1af0f6aa74f3103046eadd6208cec2f81a78886f61a0f7358881ffbbaaa6d356.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3320122,
+      "session_id": 3320122,
+      "start_ticks": 13302767
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3320122,
+    "process_group_id": 3320122
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3320129,
+      "session_id": 3320122,
+      "start_ticks": 13302781
+    },
+    "pid": 3320129,
+    "process_group_id": 3320122,
+    "supervisor_pid": 3320122
+  },
+  "schema_version": 1,
+  "sha": "ccd96d4c868f800c8cc9827e799bc376aa17c990",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/d609499b0c7042e99af15510f023c125",
+  "stderr": "/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01/stdout.log"
+}

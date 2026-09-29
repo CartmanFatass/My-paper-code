@@ -1,0 +1,11 @@
+{
+  "claim_key": "1af0f6aa74f3103046eadd6208cec2f81a78886f61a0f7358881ffbbaaa6d356",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1af0f6aa74f3103046eadd6208cec2f81a78886f61a0f7358881ffbbaaa6d356.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1af0f6aa74f3103046eadd6208cec2f81a78886f61a0f7358881ffbbaaa6d356.json",
+  "pid": 3320122,
+  "runner_pid": 3320129,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-29T15:08:03.603800Z"
+}

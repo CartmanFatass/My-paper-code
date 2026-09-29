@@ -278,3 +278,236 @@ failure activates the already permitted local fallback; it does not bypass
 admission, change reward/actor/exposure/RNG/dtype, or migrate accepted work.
 Local CPU FP32/thread1 will be checked and admitted at launch using the
 configured scientific interpreter. Cross-host bit equality is not claimed.
+
+### Accepted Batch And Observation
+
+Exact inputs published at `ccd96d4c868f800c8cc9827e799bc376aa17c990`.
+Root removed the superseded reserve duplicate in `10e1902a6`; the active state
+and `Codex DM (native child)` lead were unambiguous at admission. The fixed
+`b03_eta_20260929_a01` batch was accepted at 15:08 UTC; all native identities,
+source/output bindings, command and authority observation are in the
+[launch manifest](../../../../runs/tail_return_distributional_learning/b03_eta_20260929_a01/launch-manifest.json).
+The actual-node [preflight](../../../../runs/tail_return_distributional_learning/b03_eta_20260929_a01/admission-preflight.json)
+recorded 9372807168 available physical/effective bytes against the 4294967296
+floor. Six fits are planned; started/completed counts come from the output,
+not from supervisor acceptance.
+
+`tools/hmasd_wait.py` was armed on this same launch handle, generation 1,
+window 1500 seconds. First drain observed consistent accepted/running
+supervisor and runner identities. The observer belongs to native child runtime
+`01a0eda1-4db6-78b1-9ead-47ec6aa792ff`; private request is
+`temp/directions/tail_return_distributional_learning/b03_eta_wait.json`.
+This child stays active for deterministic waiting, same-handle drain/rearm,
+collection, and reading. No fallback launch or restart follows an observation
+timeout. Current state is technically running, with no scientific result yet.
+
+Observer checkpoint, about 15:33 UTC: generation 1 reported consistent running
+identities, zero probe errors, no terminal witness. The native App queue rejected
+its wake (`-32600`, unloaded spawned sub-agent); the deterministic foreground
+wait on this child's observer event returned normally, so no replacement or
+App rerouting was needed. Drained and consumed that checkpoint, then rearmed
+generation 2 on the identical accepted handle. Progress-only read showed three
+completed fits and master 9622 Q32 at training batch 20 (336/512 train episodes,
+84 updates), with empty stderr. No endpoint selection or partial scientific
+reading was used. The historical 20-27 process-minute extrapolation is slow
+for this local invocation; based on completed work and current progress,
+revise the ordinary total runtime estimate to about 40-45 minutes. Exposure,
+endpoint, order, source, and stopping semantics remain fixed.
+
+### Complete B03 Result - Scalar Tail Signal With Training Uncertainty
+
+The same accepted operation exited 0 at 15:54:48 UTC on 2026-09-29, with a
+valid native `process-exit.json`, both process identities absent, consistent
+manifest/status/claim records, and empty stderr. Observer generation 2 delivered
+READY locally at 15:54:51 with zero probe errors. Its App wake again failed
+with the documented native-child -32600 limitation; the active deterministic
+foreground event wait returned. The READY event was consumed on the same
+handle, generation 3 was stopped, and no scientific restart or new attempt
+occurred. The [complete summary](../../../../runs/tail_return_distributional_learning/b03_eta_20260929_a01/summary.json)
+and [fixed configuration transcription](../../../../runs/tail_return_distributional_learning/b03_eta_20260929_a01/config.json)
+bind the output to the published inputs. The transcription records existing
+input facts after collection; it is not a revised prospective plan.
+
+All six fits completed. Direct recorded-byte audit read all 4608 episode rows,
+768 update rows, 192 frozen-batch records and six checkpoints. It checked every
+arm/master/reset/phase/order/H binding, complete update/epoch sequences, native
+reward sums, FP32 fourth-order eta and W statistics, final vectors, checkpoint
+source/identity/hash/finite dtype/parameter counts/final norms, and the own-tail
+reductions independently of the batch reader. Native component reconstruction
+agreed within 3.61e-16 in J. There were exactly 786432 training and 393216 final
+evaluation team steps, 3072 training and 1536 evaluation episodes, 768 joint
+Adam updates, six unscored constructor resets, and 5898240 velocity decisions.
+No missing fit, skipped world, intermediate evaluation or selected checkpoint
+was substituted. Q32's three fits used the planned 50331648 pinball terms.
+
+| Master | S_eta own tail | Q32 own tail | Q32-S_eta tail | S_eta mean J | Q32 mean J | Q32-S_eta mean J |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 9621 | .094959485 | .090800605 | -.004158880 | .153743459 | .155360900 | +.001617442 |
+| 9622 | .114940223 | .109624196 | -.005316026 | .177748130 | .172296918 | -.005451212 |
+| 9623 | .134312821 | .108495599 | -.025817222 | .200968613 | .167798171 | -.033170441 |
+
+Three-pair tail contrast mean is -.0117640427, sample SD .0121841551,
+descriptive t95(df=2) [-.0420311620,+.0185030765]. Mean-J contrast is
+-.0123347372, SD .0183871256, t95 [-.0580108894,+.0333414150]. These are
+training-pair intervals under approximate normality, not world-resampled
+confidence or confirmation. The prospective mirror rule labels this
+`S_ETA_RECURRING`: all three own-tail differences favor scalar and their mean
+exceeds .01 in magnitude. The first two differences are small; removing 9623
+leaves -.0047374530. This sensitivity is descriptive, not a replacement endpoint
+or a reason to exclude 9623. No pooled-mixture or tail-of-differences was used.
+
+| Master | S_eta / Q32 served users per tick | Q32-S_eta served | S_eta / Q32 quality | Q32-S_eta quality | J worlds worse for Q32 / S_eta |
+| --- | --- | ---: | --- | ---: | --- |
+| 9621 | 9.170395 / 9.171509 | +.001114 | .084526 / .089866 | +.005339 | 127 / 129 |
+| 9622 | 10.582047 / 10.252075 | -.329971 | .098665 / .095893 | -.002772 | 134 / 122 |
+| 9623 | 12.098602 / 9.925812 | -2.172791 | .105294 / .096123 | -.009171 | 182 / 74 |
+
+All counts are out of each paired 256-world final panel, with no J ties. The
+mean-J advantages in pairs 9622/9623 include both service and quality; 9621 is a
+tail-versus-mean/quality tradeoff, with nearly identical mean service. Q32's
+worst J world differences are -.128704818 (9621/e28), -.156228318 (9622/e101),
+and -.166914819 (9623/e94). S_eta's worst losses, expressed as positive Q32-S_eta,
+are +.167808023 (9621/e242), +.142426283 (9622/e10), +.112935035 (9623/e75).
+Service losses occur in 127/137/176 worlds for Q32 and 129/119/80 for S_eta;
+quality losses occur in 103/139/173 for Q32 and 153/117/83 for S_eta. The compact
+summary lists every adverse-Q32 world, while both complete raw streams preserve
+all scalar losses too. These are realized stochastic-policy/world comparisons,
+not paired common-action-noise counterfactuals or user-fairness claims.
+
+All actor/critic gradient norms were finite and nonzero. Actor parameter
+displacements (S_eta/Q32) were .911990/.891260, 1.103505/.887085,
+1.011165/.910893; critic displacements .562281/1.150257, .624731/1.173266,
+.527899/1.158277. This verifies parameter learning, not improved performance
+relative to an unmeasured initial-policy evaluation. All 192 batches had three
+strictly negative W targets and thirteen zeros, including the threshold row;
+zeros constrain scalar fitting. Joint norm clipping activated only for S_eta
+9621 update 1, norm .579327762; the other 767 updates were unclipped. Unlike the
+old B01/B02 observations, this new scalar package has one realized clipping
+event. It is an optimization detail, not an identified explanation for the
+tail pattern. Scalar and quantile losses have different targets/scales and
+their magnitudes are not evidence of superior baseline accuracy.
+
+Actual runner wall through final reader and before its last summary write was
+2804.384954 seconds (46.740 minutes), versus the historical 20-27 minute
+extrapolation and revised 40-45 minute progress estimate. Batch wall after
+imports/admission was 2802.797789 seconds; runner user/system CPU was
+2647.183965/28.743978 seconds (2675.927943 total), and process-high-water RSS
+494563328 bytes (about .461 GiB). Sequential fit walls were
+304.070/372.701/569.896/512.974/492.326/550.602 seconds in the fixed order.
+These are local invocation measurements, not a controlled S_eta/Q32 speed
+comparison or proof of a contention cause. The independent recorded-byte audit
+took 2.70 seconds and added zero native exposure. Engineering/review/test costs
+above are additional; preparation wall time was not instrumented, so the
+4-8 hour conjecture is not an actual measurement and unmeasured time is not zero.
+Independent scientific reading/publication/cleanup are additional work too.
+
+The durable unique bulk is the 24 files under this run's `raw/` directory on
+configured `local_linux` at `/home/fires/hmasd-wsl/runs/tail_return_distributional_learning/b03_eta_20260929_a01/raw/`.
+They contain all episode/update streams, six final checkpoints and six compact
+fit summaries: 3964148 logical bytes, 4059136 allocated file bytes at reading.
+The SHA256 of concatenated sorted records `file_sha256 + "  " + POSIX_relative_path
++ "\n"` (relative to `raw/`) is
+`390f84ec1cd35c7d19895f740bd0cc67dc2bf59cc2670d502273e17f8780d88c`.
+Batch summary SHA256 is
+`452be2a34c462c2e8a278755c5b0e4e7b9f5eb2fa4c5a455b83d792aad3b1491`.
+All checkpoints and streams are retained in this durable main checkout, which
+is not scheduled for retirement. Compact summaries/config/native records are
+published; no new ZIP, retention copy, or whole-tree backup is made.
+
+This complete observation weakens the specific expectation that factual
+distribution fitting adds recurring lower-tail value beyond the eta-conditioned
+scalar package at this finite exposure. It strengthens S_eta as a credible
+ordinary scalar alternative within the tested contract. It does not establish a
+stable population ranking, distributional redundancy, eta as the cause of B01,
+or equality of ideal estimands. The historical B01 positive and B02 adverse
+Q32-SCALAR results remain separate and unchanged. Independent scientific
+diagnosis of this evidence and the next investment is in progress; no extra
+fit or automatic extension has been selected.
+
+### Independent Scientific Reading And Investment Decision
+
+Registered ResearchCritic `/root/dm_tail_learning/eta_result_scientific_review`
+worked read-only in a separate context (`fork_turns=none`). It received the
+question, fixed contract, original B01/B02 sources/raw ZIPs and all B03 outputs.
+It reconstructed the data before reading the full Oracle answer and before
+receiving this DM's tentative interpretation. The prospective notebook did
+expose the original conjecture and selection-review summary; no DM/Root
+conversation was inherited. The completed review reports **MATERIAL_DISSENT:
+no**, recommending conditional scalar retention and stopping this fixed recipe.
+
+The Reviewer independently checked all B03 episode/update streams, identities,
+reset schedules, horizons, FP32 eta/W, own-tail endpoints, native components,
+gradients and clipping; it matched six checkpoint hashes and source files against
+the accepted SHA and launcher snapshot, and independently reduced both old raw
+archives. It did not deserialize checkpoints, recompute displacement, rerun
+policies, or inspect unavailable full action/state trajectories. The DM's
+separate checkpoint audit above covers finite tensors/counts/final norms; neither
+audit is a new rollout. The review reproduced every pair contrast, scalar
+recurrence and all tradeoffs. It emphasized that 9623 supplies about 73% of the
+total tail contrast: recurring sign is stronger than a stable material magnitude.
+
+Its strongest simpler explanation is that directly fitting the required scalar
+score is effective enough under this finite exposure, with initialization,
+fitting dynamics, private trajectories and shared-policy co-adaptation producing
+variable effects. Technical failure, missing updates and universal clipping are
+not viable accounts of this completed batch. Statistical dependence on the same
+returns survives eta detachment, so current-eta conditioning, input-width/init,
+target/loss and ideal conditional-object differences remain package distinctions,
+not separately identified causes. A scalar win cannot explain B01 retroactively.
+The constructive positive is the recurring scalar tail sign and simultaneous
+mean/service/quality advantages in two pairs. Preserve that ordinary learned
+comparator, all scalar losses, and both original Q32-SCALAR signs; do not call it
+a tuned task optimum, selected deployment checkpoint, distributional redundancy,
+or resolution of broader UAV control opportunity.
+
+The Reviewer compared the next investments explicitly. Stopping is justified
+because this exploratory comparison removes preferential investment in unchanged
+Q32 without needing a precise population ranking or an identified repair.
+An unchanged fresh three-pair replication would cost six fits, 1179648 native
+steps, and roughly the observed 47-minute runner wall as a planning reference,
+plus uncertain support/contention costs. It is worthwhile when recurrence or
+precision changes a named scientific conclusion or downstream choice; another
+three pairs does not guarantee adequate precision. Recurring scalar benefits
+would strengthen retention, small/mixed effects weaken a material ranking, and
+recurring Q32 benefits reopen package selection. An eta-visible versus eta-blinded
+scalar comparison using the same 138-input initialization could test finite
+conditioning value, with native improvement rather than proxy fitting error as
+the relevant consequence; it still would not explain B01. No identified current
+decision would change enough to buy that attribution study.
+
+DM accepts the review and ends new investment in this fixed Q32/S_eta recipe.
+Retain S_eta as the preferred *finite comparison reference*, both implementations,
+the pure reader and regression checks; retain all six policy assets and full
+positive/adverse records. This is an investment preference, not a confirmed
+population-superiority or deployment-adoption claim. No zero-clipping repair,
+eta ablation, additional seed, longer fit, model module or new Pro was selected.
+The direction becomes `reserve`, with no producer, unread result, approval wait
+or selected successor. The broader factual-distribution learning question remains
+open. A concrete re-entry condition is a named need to choose the default critic
+for this contract, or a new finite-learning prediction whose possible outcomes
+change method selection. Re-entry need not prove that scalar methods lack
+representational capacity. Any richer information, risk-query or training-resource
+contract must give the competent scalar comparator that same addition and count
+its full cost; cross-question changes return to Root for allocation.
+
+Before this investment decision, refreshed published main to `07aed46dc` and
+read the relevant learning/statistical background. Its distinction between
+representation, finite optimization, and training-pair versus world uncertainty
+continues to govern this result. Adjacent ordinary-control/history evidence does
+not supply a planner comparison for this critic question; we neither claim such
+superiority nor convert another direction's failure into a required repair here.
+The directly reusable update is that a scalar target with current-threshold
+conditioning is a serious finite risk-learning comparator, and zero scalar
+targets are information, while same-batch thresholds limit ideal-estimand claims.
+This useful scope correction will be added to shared learning background.
+
+Cost correction found by the Reviewer and verified directly in both original
+raw ZIP invocation-time records: B01 summed process walls are 395.64 seconds;
+B02 summed walls are 538.42 seconds, whereas 537.19 is B02 user+system CPU.
+The earlier notebook's wording mixed these timing bases. Across the selected
+B01/B02/B03 learning studies, ten fits used 1966080 native steps and 1280 updates,
+about 62.3 summed process-wall minutes with the recorded timing boundaries.
+Their total is not ten S_eta replications and not an elapsed cross-host duration.
+B03 alone used .7433 recorded runner CPU-hours. Preparation, independent reading,
+publication and cleanup remain incompletely metered. No scientific follow-on
+has been bought to consume the saved compute.

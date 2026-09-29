@@ -1,0 +1,81 @@
+{
+  "study": "b03_eta",
+  "direction": "tail_return_distributional_learning",
+  "source_sha": "ccd96d4c868f800c8cc9827e799bc376aa17c990",
+  "config_scope": "Post-collection transcription of the published fixed input contract; no new execution or tuning",
+  "masters": [9621, 9622, 9623],
+  "arm_order_per_master": ["S_eta", "Q32"],
+  "device": "cpu",
+  "dtype": "float32",
+  "torch_threads": 1,
+  "host": {
+    "factory": "experiments.candidates.ucope.uav_motion_prefix_b01.environment.make_real",
+    "agents": 5,
+    "users": 50,
+    "user_layout": "uniform_static",
+    "horizon": 256,
+    "channel": "free_space",
+    "fdma": false,
+    "reward": "native team reward, normalized episode sum",
+    "actor_features": 108,
+    "actor": "shared DENSE/GRU64, three sampled tanh-Gaussian velocity commands"
+  },
+  "per_fit": {
+    "training_episodes": 512,
+    "collection_episodes": 16,
+    "collections": 32,
+    "epochs_per_collection": 4,
+    "optimizer_updates": 128,
+    "final_stochastic_evaluation_episodes": 256,
+    "intermediate_evaluation_episodes": 0,
+    "tail_episode_count": 64,
+    "alpha": 0.25,
+    "recurrent_chunk": 32
+  },
+  "optimizer": {
+    "name": "joint Adam",
+    "learning_rate": 0.0003,
+    "betas": [0.9, 0.999],
+    "epsilon": 1e-8,
+    "weight_decay": 0,
+    "amsgrad": false,
+    "foreach": false,
+    "fused": false,
+    "joint_gradient_norm_limit": 0.5,
+    "ppo_ratio_clip": [0.8, 1.2],
+    "critic_loss_weight": 0.5,
+    "entropy_loss_weight": 0
+  },
+  "S_eta": {
+    "critic_layers": [138, 128, 128, 1],
+    "eta": "detached fourth smallest own-batch FP32 return appended after collection",
+    "target": "(G-eta)*1[G<=eta]/0.25 including zero targets",
+    "loss": "mean squared error"
+  },
+  "Q32": {
+    "critic_layers": [137, 128, 128, 32],
+    "target": "factual full-episode FP32 G",
+    "loss": "midpoint quantile pinball",
+    "baseline": "mean of current-eta tail transform of predicted quantiles"
+  },
+  "frozen_per_collection": ["eta", "W", "pre-update baseline", "actor advantages"],
+  "seeds": {
+    "base": "100000*master",
+    "actor_template": "base+11",
+    "actor_branch": "base+12",
+    "critic_trunk": "base+13",
+    "S_eta_head": "base+14",
+    "Q32_head": "base+15",
+    "training_resets": "base+1000+episode, episode=0..511",
+    "final_resets": "base+2000+episode, episode=0..255",
+    "S_eta_training_actions": "base+21",
+    "Q32_training_actions": "base+22",
+    "S_eta_final_actions": "base+3000+episode",
+    "Q32_final_actions": "base+6000+episode"
+  },
+  "primary": "Each policy's own lowest-64-of-256 J mean, then three Q32-S_eta training-pair contrasts",
+  "uncertainty_unit": "three independent training pairs, not nested evaluation worlds",
+  "prospective_recurrence_rule": "All three same-sign tail contrasts and absolute average above 0.01; exploratory only",
+  "scope": "Finite critic packages; same-batch eta and different critic input/init prevent pure representation or eta-causality attribution",
+  "automatic_extension": false
+}
