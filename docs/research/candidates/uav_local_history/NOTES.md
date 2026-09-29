@@ -318,3 +318,24 @@ one scientific process using about4 CPU cores, and 11,953MiB physical memory
 available on the earlier memory reading. These are planning observations, not the
 fresh admission receipt. B01 uses one NumPy/BLAS thread and no GPU. Other accepted
 workers, claims, dirty run statuses and sparse paths are preserved.
+
+### Prospective Host Fallback Before Any Launch
+
+Exact inputs were first published at `ae184f74175b59f6036a06b510be2b70a7205a69`.
+The wsl_4070 source fetch then stalled for over two minutes in git-remote-https;
+a separate bounded curl probe returned `curl: (28) SSL connection timeout` after
+5s. At 2026-09-29 14:32 UTC I terminated only this fetch's known git/remote-HTTP
+processes (1001103-1001105), and its command returned143. No result launcher,
+admission claim, environment or scientific step had started. The shared writer
+lock was released; no accepted worker, control or network configuration changed.
+
+Choose the authorized local_linux fallback prospectively: 16 logical CPUs,
+10,070MiB MemAvailable and load4.82 in the planning observation. The same reviewed
+float64 NumPy controller and unchanged native source run with the configured
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python`, NumPy1.26.3, SciPy1.15.2, one BLAS
+thread, no GPU or fitting. The focused checks already ran on this host. Keep the
+full C/H panel and all counters; this is a new launch location before acceptance,
+not migration/retry of an accepted experiment. Execution time is still estimated
+5-30min and will be measured. Local launcher fresh memory/publication/pause/lead
+admission remains required. Root was informed natively of the concrete dependency
+and fallback; this introduces no approval or scientific review round.
