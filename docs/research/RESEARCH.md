@@ -1451,6 +1451,170 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 <a id="portfolio-review-2026-09-29-radio-capability-innovator"></a>
 [已完成radio能力发展咨询：完整Pro答复、材料异议、聚焦独立审查与Root选择](archive/2026-09-29/RESEARCH-radio-capability-innovator.md#decision)。
 
+## Portfolio Review 2026-09-29 Joint Control Next Investment
+
+Conversation: continue the same local Jev-account conversation used for the completed
+Radio Capability Innovator consultation. No private address is part of this record.
+Status: new result-boundary advice requested; **no successor selected**.
+
+### Question
+
+Act as innovator at the now-complete B02 boundary. Which investment is worthwhile next:
+the independently proposed two-tick ordinary radio package, the genuinely independent
+constant-versus-state-dependent calibration learning comparison, both for their distinct
+scientific value, or neither? The owner usually wants3-4 substantive Codex DMs, but not a
+quota. Equally, "buy only one" is not a standing methodological rule: explain the marginal
+value/cost and genuine independence if two purchases are justified. Do not manufacture
+another question to fill slots or treat this menu as a requirement to select something.
+
+Your prior advice selected R/S/T after B01 and preserved the positive capability, adverse
+worlds and calibration reserve. B02 now gives a substantive split answer. Reuse the prior
+full source reasoning and the new adequate independent result diagnosis below; no extra
+workflow review or raw-audit ceremony is requested. Root seeks constructive allocation,
+not approval or a guaranteed repair. Original batches, conclusions and source identities
+remain frozen. A few losses do not refute a method; a modifiable link and different native
+prediction can justify further development without identifying the loss's unique cause.
+
+### New Complete Evidence
+
+B02 source `db5b9635850df204673871d4feb32e663ed8e5fd`, full result/independent
+diagnosis `ee19617e7`:192episodes/49152native steps/0fits, all192raw hashes and
+complete native endpoints, motion, radio, observations, C proposals/commitments and
+selections verified. Physics recomputation covered a declared candidate subset, not
+every matrix element; prior independent kernel checks remain. No deadline misses or
+resource truncation. The substantive outcome is:
+
+| Complete contrast | Mean J difference [paired descriptive t95] | Users/tick difference [t95] |
+| --- | --- | --- |
+| T-S | +.00416806 [.00045349,.00788263] | +.35498047 [.05005623,.65990470] |
+| T-R | -.00933808 [-.01650084,-.00217533] | -.15545654 [-.77228698,.46137390] |
+| S-R | -.01350614 [-.02005700,-.00695529] | -.51043701 [-1.05729476,.03642074] |
+
+T has42J/44service wins overS but47J losses againstR. T-R mean within-world service
+p10 is-1.296875users,45adverse worlds. Mean path is2466.960R/7471.535S/7479.787T m/UAV;
+T-R path increases in all64worlds. There are no zero-service ticks, but S/T minimum
+service worsens in13/14worlds with no improvements. No energy model exists.
+T-R quality mean-.02387231; reward identity allocates-.00716169 of the-.00933808J
+difference to quality and-.00217639 to service. That arithmetic is not a cause.
+
+The constructive interaction is demonstrably active. On T's4032visited report states,
+583strict joint-score advantages over both-orderS occur across all64worlds, with566
+displacement differences and419silent-move/reactivate cases. In world29306018, S/T
+share the prefix through transition35; T's first affected block36..39 gains.002239505J
+and.25users/tick after report32, yet complete T-S is-.02990433. The good intermediate
+can translate into a good immediate native block but still lose over the whole mission.
+Preserve this, world29306062's large positive and every adverse world; do not substitute
+shadows for completeS paths or pick effective worlds.
+
+S/T position errors are about.24m throughout committed blocks versus R's14.45m mean
+last-offset error. Accuracy did not earn package replacement. Report ages average
+2.494R versus5.5S/T, maxima4/7. The post hoc untrimmed arithmetic partition finds
+first4ticks contribute-.001735996 and remaining252ticks-.007602088 to T-R J.
+Thus loss is not only startup; stale suggestions, finite joint search, C navigation/
+proposal state and future endogenous trajectory consequences remain plausible and coupled.
+
+Native B02:2574.772wall/2573.626CPU-s,132408KiB RSS; whole reader935.56CPU-s.
+Collection+reader .974774CPUh; B01+B02 about1.300526CPUh,98304steps/0fits, excluding
+unmetered adviser/engineering support. Actual T/S/R max planner wall .899728/.150892/
+.043384s against3.456/3.456/.456 deadlines. T-S adds29.915complete-episode CPU-s/world.
+The exact summary records3969472candidate
+requests,3836149unique scores,15342612mask-state reductions and887232geometries.
+These measured anchors are not new runtime bounds or host-load replication.
+
+### Independent Recommendation and Options
+
+Read the FULL independent result diagnosis and DM response in
+`docs/research/candidates/uav_radio_activation/NOTES.md`, B02 Complete Reading,
+Independent Scientific Diagnosis / DM Interpretation and Next Investment.
+The registered source-first critic revised its own provisional stop preference after
+reading full exposure/timing. MATERIAL_DISSENT:yes concerns the no-further-investment
+preference, NOT R retention or closing frozenB02. DM preserves that recommendation and
+returns it to Root without a new launch; direction currently reserve.
+
+A. **R/S2/T2, two-tick delivery with four-tick holds.** Same actual telemetry, map,
+rights, full-team objectives, both sequential orders and837joint pairs. R remains
+unchanged. S2/T2 get1.456s full computation plus.544s airtime within2s; report0..252,
+predict two actual committed prefix ticks, then score the next execution block.
+The last report arrives254 and scores only positions255/256. Retain C-once
+initialization, versioned packets, atomic actual-team-command/mask fallback, all
+startup/terminal exposure, completeJ/service/tails/paths and timing.
+New64common worlds/192episodes/49152steps/0fits; upper4030464candidate requests,
+15997888mask-state reductions;8704recurring bytes plus400map per new-arm episode.
+Engineering/check/reader changes are not yet measured. B02's~.975CPUh is an anchor;
+a prospectively declared3CPUh native ceiling would be a guard, not a runtime estimate.
+The new conjecture is that lower delivery age preserves useful T-over-S choices while
+earning complete T2 usefulness overR. Actual max computation+.544s=1.443728s makes
+the abstract2s contract plausible on the observed platform, not guaranteed or known
+to repair the trajectory deficit. It is new exploration, not retrofitted B02 or pure
+latency causality. If worth purchase, identify why its changed prediction beats a
+clock-parameter sequence and when continued native deficits would end this route.
+
+B. **Trained constant calibration versus state-dependent bounded correction.** Same
+frozen B19451 parent/variance,40byte geometric messages, zero initialization, d=.10*tanh(b)
+with three shared learned parameters versus B05 d=.10*tanh(g(x)); matched composed
+likelihood/critic/native clock. Fresh masters19701/19702/19703,6fits of512xH256,
+6final endpoints+B40 on32fresh common worlds:786432train+57344eval=843776steps,
+6144actor+6144criticAdam calls,no predictor/search. Constant is trained, not a zero-fit
+heuristic or posthoc endpoint average. Engineering4-8h conjectural; B05's29.074min/
+.484397CPUh is only an anchor. Conditional on one parent, not independent-parent
+generalization. It tests whether state-dependent learning adds completeJ/service beyond
+a serious low-dimensional learned comparator andB40; retained positive calibration is
+valuable even if the larger correction earns no increment. New tails remain costs.
+B05 allthreeblock means positive versusB40, training intervals crosszero, M_O-M_G
+unresolved and service-tail harms persist; near-constant behavior was checked in one
+endpoint only. Historical27policy fits+3predictors/3907584steps remain cumulative
+exposure, not a veto on this NEW comparison. Core learning question is distinct fromA.
+
+C. **No new purchase / another concrete question.** R, G/E and T-S are retained
+capabilities. Held-mask provisioning remains a legitimate narrower reserve but does
+not by itself solve a long-horizon joint-control question. Do not propose a vague
+learner, deeper search, objective penalty, arbitrary model-error distribution or
+renamed energy/commitment problem. A truly different candidate must specify the
+decision, lawful information/resource contract, strong ordinary alternative, complete
+native prediction, contrary branch and dominant fit/non-fit cost. No novelty claim
+without a read primary source.
+
+### Advice Requested and Context
+
+Assess the strongest constructive explanation and simpler alternative, then recommend
+allocation based on changed knowledge and total cost. In particular distinguish actual
+latency-derived feasibility from evidence that latency causes the complete loss; do not
+demand causal attribution as a prerequisite to a useful package exploration. Explain
+whatA, B, or A+B would add independently and why the marginal second purchase is or is
+not worthwhile at these costs, without a blanket one-study policy or a DM-count target.
+Give the smallest scientifically complete comparison and prospective bounds/corrections;
+no new proof/pilot gate or automatic extra clock. Preserve MATERIAL_DISSENT yes/no
+against any consequential interpretation/investment recommendation.
+
+At source_sha supplied with the message, read:
+- Radio B02 original prospective contract and complete reading/independent diagnosis in
+  the NOTES above; `runs/uav_radio_activation/b02_joint_commitment_a01/{config,summary,reading}.json`
+  and direction b02 protocol/scheduler/study only for load-bearing semantics.
+  Local raw files are not remotely available; do not claim their independent inspection.
+- `docs/research/archive/2026-09-29/RESEARCH-radio-capability-innovator.md`: your COMPLETE
+  previous answer and Root adoption/focused review; `RESEARCH-radio-actuation-selection.md`
+  in the same directory for the full calibration comparator. This is supplied context,
+  not reliance on remembered chat.
+- `docs/research/candidates/uav_message_content/NOTES.md`, B05 Complete Reading and
+  `experiments/candidates/uav_message_content/b05/model.py` for optionB.
+- Current constitution sections1-5,7-8; scientific-tools Choose the question, Design
+  the comparison and decision exposure, Update the working explanation, Comparators,
+  Statistics, Cost and exposure; current portfolio-task method. Current instruction
+  overrides stale chat guidance without altering frozen experiments.
+
+G0 remains the same accepted study with its original DM and snapshot; no result is
+asserted here. Claude retains coupled-host/SET-slot work and its own scope/advice.
+Do not duplicate its question, use its node reservation or change its records.
+FSD/PPC pauses, G33 freeze, Milan data dependency and no reuse of fully completed
+archived DMs remain. Actual node admission is still required even for0fits.
+
+### Pro Answer
+
+### Decision
+
+Pending full advice and source checks. No new study or modification of accepted work
+is selected by publishing this question.
+
 ## Current research plan
 
 ### Owner-requested continuing research loop
@@ -1470,9 +1634,10 @@ Root在本会话持续执行这一委托；`innovator`是Pro的建设性选题�
 本会话的每小时heartbeat已删除，只保留原生任务返回和确定性观察事件驱动的接续；不设周期性
 兜底唤醒，不因时间经过重复Send／启动，也不广播未变状态。暂停、人工依赖和付费／额外授权边界优先。
 当前阶段：B05、local-history、TRDL及radio各自完整执行、核验和独立判读；radio建立条件性普通
-服务控制能力，原学习配方的正反结果均保留。Pro建设性建议及聚焦独立审查已完整读取，Root采纳
-一项R/S/T运动与静默联合比较，见[完整决定](archive/2026-09-29/RESEARCH-radio-capability-innovator.md#decision)。
-G0保持同一已接受训练并由原DM执行；其进度不是科学结论，新选题不改动其固定批次。
+服务控制能力，原学习配方的正反结果均保留。R/S/T后继B02也已完整判读：T-S正的条件增量
+未使新包超过原R，路径／服务尾部成本保留。Pro现比较有新依据的两步交付后继、独立校准学习
+与停止投入，见[当前问题](#portfolio-review-2026-09-29-joint-control-next-investment)，未选后继。
+G0保持同一已接受批次并由原DM执行；其进度不是科学结论，本次问题不改动其固定批次。
 
 ### Completed Round: Retained-Control Extension
 
