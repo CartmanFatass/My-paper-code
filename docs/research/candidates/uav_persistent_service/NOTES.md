@@ -2294,3 +2294,176 @@ B03 is now scientifically read, independently reviewed, published and cleaned.
 No live operation, observer, pending advice or uncollected result remains. The
 unchanged-R challenge recommendation is returned to Root for cross-question
 selection, not represented as an accepted producer or owner approval dependency.
+
+## 2026-09-29 - B04 prospective: unchanged R on the original B02 worlds
+
+Root selects the exact next investment recommended by the completed B03
+independent review: R, unchanged, on **all eight** original B02 worlds
+52292801..52292808 at H12000, reusing the original P/O_H only if their exact
+source/configuration/artifact/exogenous bindings hold. This is a new study,
+`b04_original_worlds_a01`, not append/resume of B03 and not confirmation.
+The current native DM retains question ownership; no old operation exists.
+The applicable B03 ResearchCritic answer above explicitly covers this choice,
+comparison, exposed status, cost and stop consequences. Reuse that selection
+review; independent engineering review and complete-result diagnosis remain
+separate. A material binding contradiction returns to Root with its cost choice,
+not silently regenerated controls or a changed question.
+
+### Question, inherited constraints and fixed prediction
+
+Current published shared background at `a23f4ae52`, topic6 and the complete B03
+entry, changes the task from finding legal access to challenging the recurrence
+of its useful finite consequence. B03 has67 actual legal transfers, positive
+descriptive mean package signs and no cutoff/depletion, but three service/J
+loss worlds, two persistent six-member F groups, a negative-net-charge transfer,
+unrecovered connected load, and retained arrival defects. It does not establish
+general overload prevention or sustainability. B02's original01/03 added seven
+O_H cutoff/depletion while P remained healthy; testing those original
+counterexamples directly has more explanatory value than merely lengthening
+a known-deficit trajectory. All eight worlds are included, not just failures.
+
+R's controller, legal information, service/query clock, duration set, load and
+energy screens, F precedence, strict decoded arrival detector, allocation,
+capacity and native reward stay exactly as executed in B03 source
+`a4bd3b5eccef6e83a71c00fdbb8eccd6ecaf5c67`. No controller repair, threshold tuning,
+changed station rights, learning arm, horizon extension or hidden pilot is
+included. There are0 fits/updates,8 new R trajectories,96000 maximum new native
+steps; the16 reused controls represent the already paid192000 B02 steps, not
+new execution. Four spawned single-thread CPU workers on configured wsl_4070
+are prospective, subject to fresh actual-node admission.
+
+The same complete finite-package prediction remains: positive mean full/late J
+and nonnegative full/late QoS versus O_H; positive J and at least.01 full/late
+QoS gain over P; no new cutoff/depletion, terminal-zero/early-ending or persistent
+final300 reserve worlds versus either reference, and no higher mean reserve
+exposure. In particular predict no R-added cutoff/depletion in original01/03.
+Read every world's signs and nominal paired t7 intervals, with full QoS/12000,
+late QoS/6000 and actual native J; no population confirmation or training n.
+Keep four3000-step bins, all service tails, cutoff/depletion timing, reserve,
+energy/input/consumption, movement, waits, option/transfer lifecycle and F/guard
+exposure. Early native endings have fixed service denominators and missing
+unobserved final windows, not invented zero-risk suffixes.
+
+The intermediate prediction is actual pre-F crossing/charging/release and
+reduced overload/failure. All new R station telemetry remains unchanged from
+B03. The older B02 raw lacks its new explicit station-target fields, so derive
+old eligible-station membership from **native post-step xy** and original
+native station xy: both stations have the same native height, and eligible
+members must be at a uniquely captured station. Verify eligible/charging
+members' geometric capture, unambiguous station separation, raw native count
+and power fields; fail closed if reconstruction is inconsistent. This is only
+readout, never a changed policy detector. Keep its provenance distinct from
+direct new-R target telemetry. Recompute overload ticks/spells and fixed final
+cohorts without equating a moving membership stock to cohort energy balance.
+
+Active legal transfer with continuing failure/new risk limits R's useful
+recurrence and ends unchanged-R expansion. Less overload with lost service/J
+defeats the complete prediction even if access remains useful. Little exposure
+or technically missing comparison is reported as such, not general
+infeasibility or automatic repair. Success supports finite reuse across two
+exposed development panels, not endless new screens, default safety or an
+automatic longer mission. The6-member deficit evidence remains regardless of
+this panel's outcome.
+
+### Exact-control reuse and L0
+
+The external original-control root is fixed to
+`/home/wu/projects/HMASD/runs/uav_persistent_service/b02_long_mission_a01/`
+on `hmasd-wsl-node`; source
+`e905d8842a6ad6006b2b6d82237e98f4a5dbb2d2`, manifest SHA256
+`5741dc165d5213345020f17378bc1088cf2efb6f7571731b071639eee5cd85d2`.
+Original raw stays there, never copied into the new batch or mutated.
+The notebook's historical B02 contract and compact original config/perworld/
+summary/manifest supply exact fixed controls; no alternate replacement claim.
+
+Before result execution, verify all51 original manifest files on the actual
+node, the16 complete control identities/seeds/H12000, their exact effective
+configurations, original control-pair initial/BS identity and full raw user/RNG
+streams. Compare source blobs across the native environment/configuration/core
+and imported retained controller/evaluator directories. They must match B02;
+the optional controller-factory addition in macro_env is the only accepted
+adapter difference and must match the already reviewed B03 source exactly.
+R controller and episode files, plus all retained dependencies, must match B03.
+Initial read-only local checks reproduce the prior critic's finding: no
+environment/retained-controller changes, only the accepted factory hook, and
+all B02/B03 effective-config records match. Binding evidence will record exact
+source identities and original artifacts; same seed labels are insufficient.
+
+Implementation owns only new `experiments/candidates/uav_persistent_service/b04/`
+and matching tests. Add a pure original-evidence binder/reconstructor, fixed
+R-only batch/reader and admitted entry. Reuse retained `b03.LongMissionEpisode`
+without edits or copied controller code. The runner verifies original-input
+digests and source bindings before constructing any new episode. Each new R
+effective config and initial/BS/user/RNG stream must match both old controls,
+using each pair's full observed common prefix and full hashes for equal lengths.
+Rehash original evidence at completed collection. If a new pair fails, preserve
+its native trajectory, mark incompatibility, stop new submissions while
+draining accepted workers, and suppress all complete contrasts. There is no
+fallback control regeneration, retry or extra seed.
+
+Store new R raw separately, compact reused-row references with source/path/hash,
+explicit old/new cost counts, all technical failures and partial artifacts,
+and a manifest for only newly produced artifacts. Reader comparison may enrich
+copies of old compact rows with derived station readings, but must not rewrite
+old native metrics or original files. Source/checksum/config failures before
+launch remain0 new trajectories. The bounded Implementer receives code/test
+ownership only; NOTES, shared index and execution remain the DM's.
+
+Correctness checks are **synthetic/read-only only:0 new native transitions**.
+Cover exact fixed R-only jobs, external-root/path and digest refusals, wrong
+source/config/seed rejection, old/new raw pairing including unequal endings,
+geometry-derived station loads, preserved old metric values, incomplete
+comparison suppression, stop-submission/drain behavior and admitted-entry
+ordering. Do not construct/reset an environment for a correctness smoke.
+Independent engineering review checks source identity and comparator reuse
+before published inputs and native admission.
+
+### Cost and boundary
+
+Measured B03 R cost3054.285121 worker-CPU s/96000 steps gives .848413 h for this
+panel, roughly15..25 min four-worker wall as a planning estimate. Allow about
+85 MB unique raw plus one disposable source snapshot,4 GiB estimated combined
+worker/parent memory, and1..2 h binding/implementation/reading work in addition
+to evaluation. These are estimates, not timeout rules or a guaranteed price.
+Actual costs and missing measurements are reported. Zero fits is not zero cost.
+Before B04, cumulative paid science is1fit/816000 steps/about6.485 worker-CPU h;
+this challenge would bring steps to912000 and CPU to about7.334 h at that rate.
+
+Root's cross-question choice prefers this bounded reuse challenge alongside
+the independent preserved-content reuse question. It is smaller than
+regenerating the192k control steps, and answers whether the original adverse
+cases constrain the finite asset more directly than an unchanged extension.
+At the complete-result boundary, retain empirical support, adoption and next
+investment as separate decisions. No outcome selects another panel, recipe,
+fit or a broader contract automatically; return the revised prediction and a
+reasoned next-investment recommendation after full reading/publication/cleanup.
+
+### Prospective original-control verification
+
+At2026-09-29T05:57:39Z, read-only verification on configured actual node
+LAPTOP-U9TDKC8A checked the exact original manifest and all51 declared artifacts
+(144030432 logical bytes), all16 complete control identities and the common
+effective config, plus every original P/O_H pair's complete user and RNG arrays.
+All passed. The compact report is
+`runs/uav_persistent_service/b04_original_worlds_a01/control-binding-prospective.json`;
+it pins per-world initial, base-station and full exogenous hashes. Original raw
+was read in place, not copied or changed. The check consumed0 fits and0 native
+steps. Current interpreter is the configured Python3.10.21 with numpy1.26.3;
+version labels alone are not an identity claim, hence the required actual new-R
+array comparisons remain fail-closed.
+
+All16 old trajectories' eligible members are within native20m horizontal
+capture (1e-6 readout tolerance), at uniquely separated stations; every charged
+member is eligible, and derived post-step membership agrees with recorded
+pre-decoded nearest for every eligible member. This supports the declared old
+station-load reconstruction without changing the strict decoded policy-arrival
+detector. Source comparison across retained native/configuration/imported
+controller code finds only the accepted optional macro-env controller factory
+between B02 and B03; no further R/episode/native change is present on current
+main. The new runner will independently enforce these bindings before creating
+an episode, and recheck old evidence at complete collection.
+
+Root's selected-study update is published at`b3f5bdc58`; current main subsequently
+includes the content DM's disjoint`d7903b488`. The owned Active row and routing
+now record B04 exploring while retaining the exact launch-bound Lead runtime.
+There is no new native operation at this prospective publication boundary.
