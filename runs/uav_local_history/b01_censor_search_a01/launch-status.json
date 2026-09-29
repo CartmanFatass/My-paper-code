@@ -1,0 +1,11 @@
+{
+  "claim_key": "4f31acfa31ba91c644027d45a2682ac72281df400b29ac0d8127c50f1c2ff1f1",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4f31acfa31ba91c644027d45a2682ac72281df400b29ac0d8127c50f1c2ff1f1.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_local_history/b01_censor_search_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4f31acfa31ba91c644027d45a2682ac72281df400b29ac0d8127c50f1c2ff1f1.json",
+  "pid": 3228232,
+  "runner_pid": 3228234,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-29T14:36:14.837311Z"
+}
