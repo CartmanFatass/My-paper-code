@@ -3269,3 +3269,68 @@ the diff and checks and obtains one independent engineering review of the
 complete high-risk path before publishing final inputs and launching. The
 declared3..5 CPUh execution and5..8h support estimates remain prospective;
 actual counts, waits, missing telemetry and any failure are retained.
+
+### B05 implementation acceptance and reference preparation
+
+The bounded Implementer delivered `b05/controller.py` and `b05/forecast.py`
+with matching pure tests; the DM read the diff and implemented the episode,
+exact-control binding, finite reader, batch and admitted entry. S is installed
+before the first native prepare. Frozen R, P, native environment and the
+291-file dependency map are unchanged; source-map SHA256 remains
+`e9aca789906052070e7fea9ceda83b5f8593de17b3ad89a9928fae468ade8d9c`.
+The runner executes S only and stops new submissions after a technical failure.
+Complete exogenous streams and initial battery/config/source identities bind
+each new trajectory to its original R; failed bindings do not buy new controls.
+
+The separate native Engineering Reviewer
+`/root/dm_service_continuity/review_service_scheduler` inspected the full path.
+Its consequential findings were repaired before acceptance: distinguish F
+from the native <=.05 battery limp rule; preserve signed consumption until
+charging and final clipping, use hover draw when docked, and distinguish
+radio cutoff from motion disablement at zero battery. Zero stock away from a
+station cannot move; an already captured, queued member can still recharge.
+Observed charging or queue eligibility without strict decoded arrival now
+persists for that commitment until actual arrival/release, so losing the slot
+does not fabricate an arrival or dwell completion. Newly chosen ordinary
+commitments already decoded within20m start dwell at age0, matching frozen
+execution. Defer records separately label return-margin deadlines and actual
+R trip-energy slack for each member/dwell, including the nominal next-clock
+access loss. Full/timeout release from inbound motion switches to outbound
+deployment when F does not still control it. None of these changes alters the
+native detector or execution law.
+
+Final reviewer disposition: **no material engineering finding remains**.
+It independently passed16 pure tests and reran9 controller/forecast tests after
+the final fixes, consuming0 native steps. The DM's complete B05 suite passed
+**19 tests** under configured Python3.10/torch CPU with single numeric threads;
+only14 existing third-party deprecation warnings were emitted. The native
+S/R30-step prefix has equal complete users/RNG histories and initial batteries,
+9 added radio snapshots per clock, no planner fallback, and serializable
+forecast/choice evidence. Actual B05 correctness exposure is180 native steps:
+60 from the Implementer's two bounded smokes and120 from the DM's two paired
+prefix checks. This is separate from scientific exposure, still0 B05 result
+steps/0 fits/0 updates at acceptance. Pure boundary tests cover duration,
+charging priority/deficit, queued mismatch, zero battery, complete/incomplete
+panels, early tails and admission-before-effects. These are correctness checks,
+not evidence that the additive/coarse forecast improves service.
+
+Root resolved the shared control dependency at2026-09-29T10:13:31.526153Z:
+canonical node main was fast-forwarded to`e9faa4ad4`, and live policy checking
+accepted this exploring direction with digest
+`83e8c0a52fab860957e9c1493a3c5319f5b2e32fe7b8ff65a88c01384e57a59a`.
+Existing foreign launch-status blobs and sparse patterns were preserved. A
+later read-only node check still showed Claude's two4-thread fits and12076MiB
+available; this is not the later admission guarantee. The allocation remains
+at most4 single-thread S workers, with fresh native admission required.
+
+Reference preparation found B03/B04 tracked manifest/config/summary metadata
+omitted from the sparse canonical working tree while both original raw
+directories remained. Their exact manifest hashes still match published local
+main. The DM is recovering only missing direction-owned manifest artifacts
+from their published Git blobs, with per-file digest/size verification and
+exclusive creation under the node writer lock. No sparse pattern, index,
+existing status, raw array or accepted source is overwritten. At this entry
+the recovery process waits for another writer's fetch; no result launch has
+been attempted. This maintenance operation is not a technical experiment
+retry. The next normal entry records its actual outcome and original-artifact
+rehash, then the single published-input admission handle.
