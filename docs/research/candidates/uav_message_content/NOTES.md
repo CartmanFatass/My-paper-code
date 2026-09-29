@@ -2054,3 +2054,44 @@ direction work would therefore be21 policy fits plus3 newly trained predictor
 instances,21504 PPO updates plus3072 predictor updates and3063808 native team steps.
 The scientific arms, dates/horizons, panel, packet assumption and pending independent
 selection review are unchanged.
+
+### B04 selected disposition and implementation scope
+
+Root selected the complete design at `029b36574` with the node/accounting correction
+at `192eacd23`. The complete independent selection answer and Root disposition are
+published at `eefe34dc6`,
+[continuity/forecast selection](../../archive/2026-09-29/RESEARCH-continuity-forecast-selection.md#answer).
+I read the whole answer. It reconstructs the prior positive and adverse evidence,
+endorses G/O/F as the smallest useful complete comparison, and records
+`MATERIAL_DISSENT: no`. It specifically retains the competent bounded first-sampled-
+then-central-command ordinary forecast, fixed-channel TTL limits, the40-byte richer
+contract, the common-parent limitation, and the possibility that F sends a useful
+private-state summary rather than establishing an accuracy-mediated mechanism.
+Native gains, ordinary-only gains, MSE-only improvement, mixed continuations and
+adaptation damage therefore keep their distinct prospective readings. No hold
+executor, extra arm, pilot or further selection review is selected.
+
+The direction is now exploring under the unchanged launch-bound lead literal
+`Codex DM (native child)`. Root owns synchronization of the canonical remote control
+checkout after this row publication and the already published shared allocation:
+wsl_4070, sequential one-thread Torch/inter-op/BLAS content fits alongside Claude's
+two accepted four-thread fits; service can use up to4 additional one-thread workers.
+Fresh actual-node admission still applies. This control synchronization is an actual
+execution dependency, not a scientific approval stage. There is no accepted B04
+operation yet. I own the implementation L0 above, independent engineering review,
+publication, execution, full reading, proportionate independent result diagnosis and
+cleanup, without an automatic retry or successor.
+
+Root also requested bounded **evaluation-only telemetry**, with no new episodes,
+objectives or adoption criterion: record50 connected-user bits after each native
+step by OR over the returned `[5,50]` connection matrix. Source inspection confirms
+`envs/pettingzoo/uav_env.py:318-345` already exposes this matrix in the normal step's
+global info. User index means the unchanged static `user_positions` row within the
+episode; record those positions once and identify the bits as post-action tick
+`t+1`, aligned with that transition's reward/service reading. The wrapper's returned
+info must be checked during implementation; no extra simulator/model query is allowed.
+At320x256x50 uint8 entries this is4096000 uncompressed bytes. Keep this telemetry out
+of actor/critic inputs, packets, predictor targets and training data, and out of B04
+selection/interpretation gates. Add a focused leakage/alignment test. This preserves
+a later Root question's evidence option without asserting current unfairness or
+selecting a fairness study.
