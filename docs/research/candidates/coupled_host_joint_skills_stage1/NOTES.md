@@ -798,3 +798,136 @@ C1 as a fit before its zero-fit gate (headroom bounded, 2.6); the team-level can
 7.3 Disagreement (ii): "the coordinator barely moves" is true but not the cause — SET has no coordinator and fails identically; do not build a coordinator-repair question on it.
 7.4 Disagreement (iii): the D1′ sharpening's "comparator = the planner itself" is right, but on this static host the planner is near-unbeatable with the same information; the correct first act is the zero-fit headroom gate (C1), and the per-agent slot form (C3), not the team-level candidate choice, is the version with MARL content.
 7.5 Disagreement (iv): none of the recommended questions is NEW; the owner's rejection of re-skinned ideas is met by labelling them RECORDED and justifying them by decision exposure and cost, not by novelty. If the owner requires a NEW idea for a slot, the honest answer is that the record contains none that is cheap, on-line and runnable on an existing competent asset today; the correlated-commitment question that Q-A band 1 would open is the first place a genuinely new algorithmic contribution could be attempted.
+
+## 2026-09-29 15:36 UTC — Critic review of the Oracle memo (ResearchCritic, Opus/high, separate context): MATERIAL_DISSENT on Q-A as written, ACCEPTED; correction to the 15:09 batch-reading "precise statement"; revised order of purchase (cheapest refuting fit first)
+
+**DM verification before disposition (from the committed records, not the critic's text).** `training.jsonl` `losses.action_entropy` at rollouts 1 / 23 / 45: H 931201 4.33 / 6.14 / 7.66, H 931307 4.33 / 6.13 / 7.56, H 931413 4.34 / 6.25 / 7.74, SET 932201 4.33 / 6.29 / 8.00 (SET 932307/932413 in the same class); c45 hold-out deterministic panel (H 931201) `action_clip_events` 2,848.5 of 3,000 UAV-steps per episode; per-rollout training C̄_bh mean first → last: .19 → .21, .10 → .26, .13 → .14, .16 → .19 (SET 932307 .07 → .28, SET 932413 .13 → .12) against the .18 random floor. `config.json` of every fit carries no `continuous_action_distribution` key; `hmasd/networks.py` 1626 and `hmasd/r_mappo_utils.py` 220 default to `gaussian` = `DiagGaussian` (state-independent log-std, no clamp), while `TanhDiagGaussian` (r_mappo_utils 112–165, clamp from `args`) exists and S7's `configs/config_1.py` 464–467 selects it with init −1 / clamp [−5, 0]. One trap found in the DM's own read: the `Args` wrapper in networks.py 1629–1638 defaults the log-std bounds to init 0 / min −20 / max 2, so selecting the head alone would **not** give the [−5, 0] clamp — all four keys must be set and must land in the run's config.json. Verified: the critic's load-bearing facts hold.
+
+**Correction to the 15:09 entry (batch reading).** The sentence "The precise statement is: incompetence under the per-step continuous velocity interface with the AND-coupled team reward …" overstates what is known and is withdrawn. Established: both packages ended far below the no-relay "hare" level (P_flat^on .639) with training C̄_bh never leaving the random floor; action entropy grew monotonically to ≈ 7.6–8.0 (σ ≈ 3.1–3.9 per axis under λ_l = .05 with an unclamped state-independent log-std) and ≈ 95 % of deterministic c45 actions lie outside the feasible unit ball. NOT established: the attribution to the per-step velocity interface or to the AND-coupled reward. The simplest alternative — the unbounded head plus the entropy bonus under this recipe (RECORDED: ACG B03–B05 action law / λ_l, S7 `tanh_gaussian` head) — fits the below-hare level, which the stag-hunt account (memo 2.5 / 7.2) does not. The SET execution-time information fact (2.4) stands. The round-boundary statement is amended accordingly: "not a learner substrate on it at this interface and exposure" → "not a learner substrate under this recipe (unbounded Gaussian head, λ_l .05, per-step velocity interface, 360k steps)". The RESEARCH row is corrected in the same commit.
+
+**Disposition (every critic item; nothing kept against the critic, so no residual goes to the owner or an independent review):**
+- R1 ACCEPT — every Q-A arm declares the head prospectively: `continuous_action_distribution = tanh_gaussian`, logstd init −1.0, clamp [−5.0, 0.0] (the S7 values), λ_l .05 unchanged so the head is the sole change from D2's SET recipe; two zero-cost readers: per-rollout log-std / σ trajectory and the fraction of decisions at or within one σ of the box bound. Configuration exposure of the four keys assigned to T-W (in flight; per-step default bit-identical).
+- R2 ACCEPT — band 0 rewritten as "no substrate at this interface, head and exposure"; every interface-attribution phrase struck from the bands. The recommended matched per-step control **SET-V-b** is bought and is the **first** fit of the round (owner-approved sizing rule 1: cheapest refuting run first): D2's SET recipe with the bounded head only, per-step velocity interface (the owner's path-planning interface), one seed, ≈ 4.3–4.6 CPU-h on `wsl_4070`, no macro adapter needed. Readings: activates → D2's failure was the action distribution, not the interface; the per-step interface stays a viable Stage-2 substrate and the target wrapper is unnecessary for Q-A. Does not activate → SET-T-b next. It is a new question with its own kill rule, not a repair of D2 (D2's four readings stay frozen; constitution §3).
+- R3 ACCEPT — the c00 deterministic floor and the all-at-BS static bound (≈ .20; BS at the arena centre) are reported beside the random-target floor; the declaration states where normalised 0 maps.
+- R4 ACCEPT — H-T at k = 1 macro tests a label→target factorisation at a shared clock, not temporally extended skills; H arms only after a SET arm clears band 0; d2 acceptance at k_max = k_Z = 1 verified in the probe before any H-T declaration.
+- R5–R10 ACCEPT (Q-B) — mechanism (conflicts, switches) read on training and sampled rollouts, contrast stated as learnability not representation; zero-cost coordinator-activation reader (`parameter_motion` already logged, label entropy and distinct labels per decision at c15/c45); "> M + .01 → fault" struck, replaced by a reported reading with a menu check only above M + .066; a held random-permutation floor added; row thresholds widened to the ≥ .05 class with the conflict rate co-primary; memo 6.5 corrected (the menu is new information for H's actor relative to D2, not privileged relative to Q-B's comparators); the thin Stage-2 link on a static host is stated.
+- D1′ gate ACCEPT WITH REVISIONS — one scale (closed-loop C̄_bh via integer backhauled-user counts), correction bounded to D1′'s own feasible set (300 m xy disc, |dz| ≤ 50 m), exact arithmetic in the kill rule (assigned to T-G as an addendum; its first hand-back had exactly the critic's two defects: sweep on r while the rule reads C_bh, unbounded drift up to 372 m). The gate runs once on `local_linux` (≈ 0.10 CPU-h measured on two worlds) as a recorded cheap check; "not bought" is the expected reading and it does not gate Q-A.
+- Cost ACCEPT — H-T re-priced from probes under the planned concurrency (D2 saw ≈ 2× under contention); the memo's > 10 CPU-h fallback applies.
+- Labels ACCEPT — C4 carries RECORDED; W/W′ objection (six co-varied changes) transfers to Q-A and is carried in the declaration.
+- Critic conjecture not adopted as fact: that S1's competence despite entropy growth came from S1's reward shape.
+
+**Revised order of purchase (all RECORDED).** (1) SET-V-b, one seed, first. (2) SET-T-b (needs T-W), one seed. (3) H-T / H-V conditional on a SET arm clearing band 0. Q-B (slot allocation) independent of Q-A, after T-W and its probes. Declarations follow the round-boundary Pro synthesis within a bounded window (inputs: memo, batch reading, this review); under sizing rule 4 the SET-V-b declaration carries an executing default.
+
+### Critic review (verbatim, ResearchCritic hand-back 2026-09-29)
+
+## Independent scientific review: Oracle memo for the next two questions after `coupled_host_joint_skills_stage1` b01 (ResearchCritic, 2026-09-29)
+
+**Disclosures.**
+- **Context contamination.** The assignment text summarised the memo's proposals (Q-A/Q-B/D1′, bands, kill rules) before I had looked at any evidence, so this was not a blind reconstruction. I did not inherit any DM or Root conversation. I reconstructed from NOTES lines 1–668, the run JSON and source, and only then opened the memo.
+- **Hold-out data.** I read the user positions of the hold-out worlds (`runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01/worlds/*.json`) to compute one static bound. The batch is closed and its hold-out references have already been read, so no seal is broken, but I am stating it.
+- **Scope.** Read-only. I wrote nothing and ran nothing except read-only analysis of existing JSON with the scientific venv.
+
+### A. My provisional reading of b01, formed before reading the memo
+
+The six `training.jsonl` files show the same pattern in every fit, H and SET alike:
+- **Action entropy** rises monotonically from 4.33 to 7.56–8.34 at rollout 45. The log-std is a single state-independent parameter per axis (`hmasd/r_mappo_utils.py` 73–107, no clamp), so σ goes from 1 to about 3.1–3.9 per axis. The driver is λ_l = .05 on the Gaussian entropy (`hmasd/agent.py` 6860–6868).
+- **Clip fraction** goes from .80 to .995. The host clips to the unit ball (`host.py` 104–127).
+- **Training backhauled coverage (C_bh) stays at the random-floor level for all 360k steps.** Per-rollout means range .08–.29 against a random floor of .18. The training team reward shows no trend in any fit (for example H 931201: .122 → .143; SET 932413: .089 → .079).
+- **Deterministic c45 panels clip 2,783–2,926 of 3,000 UAV-steps.** The c00 panels clip 0. So the policy mean itself ends up outside the feasible ball about 95% of the time: the deterministic policy flies at full speed and never holds a position.
+- **Both learners end far below the "hare" level.** Hold-out C̄_bh is .21–.24 against P_flat^on at .639. P_flat^on needs no relay: a UAV within about 1.19 km of the BS routes directly.
+
+My reading is that neither package learned anything useful. The behaviour policy is noise-dominated and saturated, so it cannot hold the kind of position that even the no-relay layout requires.
+
+This is the strongest simpler alternative to the NOTES and memo explanation ("per-step velocity interface under an AND-coupled reward"). I label it RECORDED, not NEW:
+- On S1, ACG saw the same entropy growth (7.3–9.0 in `s1_count_b01_*` and `s1_action_law_b03_*`) and studied the action law and λ_l = 0 in B03–B05, where the packages were still competent.
+- On S7, the native `tanh_gaussian` head (`configs/config_1.py` 464–467) was used and the learners were still incompetent.
+
+So I do **not** claim the entropy/clip effect is *the* cause. Its effect depends on the host. It is a confound that carries over to any continuous-action arm under this recipe, and it is the only explanation I found that fits the below-hare level.
+
+### B. Findings
+
+**F1. Source facts 2.1–2.8.** Seven are verified as stated and one only by grep; 2.3 and 2.5 are correct as facts but carry wrong inferences.
+- **2.1 verified.** G is .106 / .121 and G_C,cl is .152 / .141. Minima are −.010 / −.087. Worlds below .05: 3 of 32 (dev) and 7 of 32 (hold-out); that is the memo's "3/7".
+- **2.2 verified.** Hold-out C̄_bh and the counts of worlds below the stationary floor (12/12/9 and 9/12/17) are correct. Worlds above P_flat^on: 0 in every fit.
+- **2.3: the fact is correct; the inference is false.**
+  - The fact: DiagGaussian samples the unclipped action and its log-prob, the host clips inside its own `step`, and the runner asserts the stored actions are unchanged (`runner.py` 676–697).
+  - The inference: "disappears at a target-level interface" does not follow. Memo 4.1 specifies the target only as "absolute xyz in the arena/height box" and says nothing about the output head or λ_l. With the same DiagGaussian, λ_l = .05 and clip-to-box, the same mechanism pushes targets to the box boundaries, and σ of about 3.5 in normalised units makes sampled targets essentially the arena edges.
+  - The memo also missed the entropy trajectory, which I think is the more important half of the confound.
+- **2.4 verified.** `models.py` `SetActorBase.forward` (144–158) slices the 133-dim state out of the actor input, and `configuration.py` `information_entry_points` agrees. Minor: that string says H's actor receives "team and agent labels", but the T4 structural check (NOTES 474, 587) shows the team label has zero effect on the action.
+- **2.5: the structure is correct; the explanation is contradicted by the data.** In `host.py` 138–177 a user counts only if its serving UAV is in `routing_paths`, so AND-coupling holds for far clusters. But the stag-hunt account predicts that learners reach the hare (about .64) and fail only on relay chains. The observed .21–.24 is far below the hare, so the derivation does not explain the level actually reached. The NOTES "precise statement" and memo 7.2 both rest on it.
+- **2.6 verified by recomputation from the gate `worlds/*.json`.** Descent gain is .054 (dev) / .058 (hold-out), with max .115 on dev (.102 on hold-out). The best candidate beats P_flat by .052 / .063, on 28 of 32 worlds on both panels. Travel cost is .066 on both panels. Arrival averages 83 / 79 steps, with maxima 116 / 123.
+- **2.7** matches NOTES.
+- **2.8** is consistent: I grepped for mobility terms and found nothing. That is grep-level only.
+- The autoregressive z_i | Z, z_<i sampling at `networks.py` 824–845 is verified.
+
+**F2. The consequential question is right in kind but mis-specified.** "Is there any cheap competent substrate on this host" is the right successor. As designed, though, Q-A varies the interface while leaving the most likely confound in place, and it contains no arm at the owner's main-line interface: per-step velocity is the path-planning interface.
+
+The memo also rejects C4 as "a recipe repair after scores" while accepting an interface change after scores. Both are prospective changes after scores. Constitution §3 forbids repairing the failed arm to rescue D2's claim; it does not forbid declaring a new question. A bounded head can therefore sit inside the substrate question without becoming a diagnosis successor.
+
+The better question, stated concretely: **does an existing package with a bounded action head become a competent learner on this host, at the per-step velocity interface or only at the target interface?**
+- Arms: SET-V-b (the per-step interface with the native `tanh_gaussian`, logstd clamped to [−5, 0]; one seed, about 4.3 CPU-h from D2's SET cost) and SET-T-b (the target interface with the same head; about 1–1.5 CPU-h).
+- H arms only after a SET arm activates.
+- Comparators: P_flat^on (.639, the hare line), P_relay^on, stationary, random, and the c00 floor from F3.
+- Distinct predictions:
+  - SET-V-b activates: D2's failure was the action distribution, not the interface. The per-step path-planning interface stays a viable Stage-2 substrate, and the target wrapper is unnecessary.
+  - Only SET-T-b activates: holding or temporal abstraction matters given a bounded head. The memo's interface reading becomes supported.
+  - Neither activates: an honest "no substrate at this exposure".
+- What tempers the prior: S7 used tanh and was still incompetent.
+
+**F3. Q-A readability.**
+1. **Band 0 is the problem.** Its consequence ("the incompetence is not the velocity interface … stop learner fits on this host; Stage 2 not built on either package") is a causal, programme-level stop. It contradicts the memo's own disclaimer at line 96 ("no causal claim about the interface"), and it would be read from an observation that the 2.3 confound shapes if the head is unbounded.
+2. **Floors.** If normalised 0 maps to the arena centre, the initial deterministic mean (gain .01) sends all six UAVs to the BS, which `host.py` puts at the centre. My static bound for all six hovering over the BS is about .20 C̄_bh (dev .206, hold-out .195; 6 of 32 worlds reach ≥ .27). The band-0 line of .27 is therefore only about .07 above what an untrained target policy may deliver. Measure the c00 deterministic floor and the all-at-BS floor and report both.
+3. **H-T at k = 1 in macro units.** The low-level "skill" becomes a single action, so the hierarchy is a label→target factorisation at a shared clock rather than temporally extended skills. The discriminator intrinsic terms, which are 2–3× the environment term per step in D2 (team-discriminator −.042 and individual −.017 against env +.02 to +.03), see one-step segments. "Packages unchanged except the action contract" is therefore not credible for H. I did not verify d2's edge semantics at k_max = k_Z = 1; I only know the `validate_config` constraints from NOTES 393.
+4. **Effective horizon.** γ = .99 per macro step means the effective horizon becomes about 1,000 host steps. The memo's list of six co-varied changes covers this under "PPO horizon"; fine.
+5. The memo's 300 m counter for velocity-like use of the target interface is good; keep it.
+
+**F4. Q-B.**
+1. **The contrast is learnability, not representation.** SET's actor has the ego one-hot plus the full state (plus the menu), so independent per-agent argmax can represent any deterministic conflict-free permutation. The "sequential vs independent sampling" contrast can only show up in exploration and sampled behaviour, so conflicts must be read on training rollouts and the sampled panel. The deterministic panel is the outcome only.
+2. **Coordinator nonactivation.** In D2 the coordinator moved a relative L2 of only .068–.071 over 675 optimizer calls at lr 1e-4. A row 1 or row 2 null in Q-B would be confounded by finite optimisation of the coordinator. A zero-cost coordinator reader is needed so that a null reads as "coordinator nonactivated" versus "active but useless": parameter motion, label entropy, and distinct labels per team decision at c45.
+3. **M is not an upper bound.** Min-makespan minimises the maximum travel distance, not 500-step C̄_bh, and re-choosing slots every 10 steps can reorder deployment (relays first, for example). A learner can legitimately exceed M by up to about the .066 travel term. The rule "> M + .01 → fault" is wrong.
+4. **Ordinary comparators.** N (nearest-unclaimed) is an appropriate strong, simple decentralised rule. SCC's record says de-duplication (+.324) dominates assignment optimality (+.007), so add a **held random permutation** floor (conflict-free, no travel optimisation). That separates de-duplication value from travel value.
+5. **Row thresholds.** The ±.02 thresholds sit inside the observed within-arm seed spread of .02–.09.
+6. **Memo 6.5 needs correcting.** The menu contains no information beyond SET's actor input, though it hands SET the planner's search result. It is **new information for H's actor** relative to D2 (90-dim local observation only). It is not privileged relative to Q-B's own comparators.
+7. **Framing is honest.** Adoption value is nil, and the study is about understanding and investment. The link to Stage 2 (untied K/N) is thin on a static host: holding a slot is trivially "forever". Say so.
+
+**F5. D1′ gate: well-posed only weakly; not material.**
+- The budget never bound (1,143 of 3,000 evaluations on average, every start converged at 25 m). A 10× budget therefore measures only the extra starts and the 10 m stage, so H_static ≤ .02 is nearly assured by construction; the memo's 80% prior reflects that.
+- The kill rule mixes scales: static r at the final layout against closed-loop 500-step C̄_bh.
+- The ±25 m sweep has no feasible set bounded to D1′'s 300 m offset disc (Pro §7 asked for an identical feasible set).
+- The structural argument alone (static world, same-information planner, a 300 m offset cannot shorten chain formation) already justifies a recorded no-run.
+
+**F6. Cost.**
+- **SET-T: 1.1–1.8 CPU-h is plausible.** Low-level rows fall from 8,000 to 800 per rollout, the update was 84% of wall, and host steps (panels included) are unchanged. My estimate is about 0.8–1.5 CPU-h.
+- **H-T is probably underpriced.** D2's H−SET update gap of about 30 s per rollout on the node is coordinator and discriminator work, and the coordinator's row count (800 decisions per rollout) does not shrink at macro level. My derivation is 2–3 CPU-h per H-T fit, so six-fit Q-A is about 9–13.5 CPU-h. That probably triggers the memo's own ">10 CPU-h" fallback, which handles it.
+- Both batches plus menus (0.8) and probes land at about 20–28 CPU-h, inside the 35 CPU-h class but not "well under 10" per study.
+- Four concurrent fits (16 threads on 20 cores) will inflate metered CPU-seconds; D2 saw about 2× under contention locally. Price from the probes taken under the planned concurrency.
+
+**F7. Labels.**
+- W/W′ (energy_relay_benchmark NOTES 6737–6739): RECORDED is correct. Note that W was a 300 m disc target and Q-A uses an absolute destination; the earlier critic's six-co-varied-changes objection transfers.
+- cooperative_planning B02, uav_transit_handoff (residual declined, MATERIAL_DISSENT no, lines 398–449), and SCC (+.007 / +.324 at line 386): cited correctly.
+- C4 should also carry the label RECORDED (ACG B03/B04/B05 action law and entropy; S7 tanh). No label is wrong; C4's rejection reasoning is (F2).
+
+### C. Verdicts and required revisions
+
+**Q-A (`coupled_host_target_substrate`): MATERIAL DISSENT as written. It becomes ACCEPT WITH REVISIONS once R1–R4 are made.**
+- **R1.** Declare the target output head and entropy term prospectively: native `tanh_gaussian` with the logstd clamp, or a discrete target set. Add two zero-cost readers: the per-rollout logstd/σ trajectory, and the fraction of target decisions at or within one normalised σ of the box bound.
+- **R2.** Rewrite band 0 as "no substrate at this interface, head and exposure" and strike every interface-attribution phrase from the bands. Required: R2. Recommended in addition: the matched per-step control SET-V-b (same bounded head, one seed, about 4.3 CPU-h), tied to the per-step path-planning interface. Without it, no reading may say anything about "the velocity interface".
+- **R3.** Report the c00 deterministic floor and the all-at-BS static bound (about .20) beside the random-target floor; state where normalised 0 maps.
+- **R4.** Narrow the H-T wording: at k = 1 macro it tests a label→target factorisation, not temporally extended skills. The P4-style hierarchy claim is limited to that. Verify d2 acceptance at k_max = k_Z = 1 in the probe.
+- **Order.** SET-T-b (and SET-V-b if bought) first. H-T only after a SET arm clears band 0.
+
+**Q-B (`coupled_host_slot_allocation`): ACCEPT WITH REVISIONS.**
+- **R5.** Read the mechanism (conflicts, switches) on training and sampled rollouts, and state that the contrast is learnability, not representation.
+- **R6.** Add a zero-cost coordinator-activation reader: parameter motion, label entropy, and distinct labels per decision at c15/c45.
+- **R7.** Strike "> M + .01 → fault" and replace it with a reported reading plus a menu check only above M + .066.
+- **R8.** Add a held random-permutation floor.
+- **R9.** Widen the row thresholds to at least the .05–.10 class, or make the conflict rate co-primary.
+- **R10.** Correct 6.5 (new information for H's actor relative to D2) and state the thin link to Stage 2.
+
+**D1′ gate: ACCEPT WITH REVISIONS (not material).** Use one scale (C̄_bh, closed loop). Bound the correction to D1′'s own feasible set, or record D1′ as a justified no-run on the structural argument and skip the gate.
+
+**Round-boundary statement.** It should add that training never left the random floor, that σ grew to about 3.5 in all six fits, and that the "AND-coupled velocity interface" explanation is not established. The DM's "precise statement" in the b01 batch-reading entry overstates what is known.
+
+**Unverified by me.** d2 semantics at k = 1; the split of H's update time between coordinator and discriminators; 2.8 beyond grep; H-T/SET-T wall (derivation only); whether the S1 competence despite entropy growth came from S1's reward shape (conjecture).
+
+MATERIAL_DISSENT: yes. It is about Q-A's six-fit purchase and its band-0 stop consequence as written. The target head and entropy term are undeclared, so the 2.3 confound carries over. The evidence is all six `training.jsonl` files (entropy 4.33 → 7.6–8.3, clip fraction → .995, training C_bh at the random floor) and deterministic c45 clipping of about 95%. Separately, the memo's stag-hunt explanation is contradicted by learners ending far below the no-relay (hare) level of .639. None of this is dissent against Q-B or the D1′ gate.
