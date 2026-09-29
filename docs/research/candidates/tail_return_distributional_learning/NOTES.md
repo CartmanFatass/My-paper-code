@@ -511,3 +511,43 @@ Their total is not ten S_eta replications and not an elapsed cross-host duration
 B03 alone used .7433 recorded runner CPU-hours. Preparation, independent reading,
 publication and cleanup remain incompletely metered. No scientific follow-on
 has been bought to consume the saved compute.
+
+### Publication, Retention And Measured Cleanup
+
+The complete reading, independent scientific disposition, fixed config, compact
+batch/fit summaries and native admission/exit records were published to main at
+`25af96ea0ed18be32f9cf91dbeb8992476a8f07f`. Useful S_eta/Q32 code and focused
+tests were already published at input `ccd96d4c`. They remain the implemented
+ordinary comparator and exact result reader, not an authorization to repeat this
+batch. All old frozen cards/source/runs/verdicts remain unchanged.
+
+Before cleanup, the science worker and supervisor had valid terminal identities,
+the observer state was stopped with both checkpoint and READY consumed, and
+the independent scientific reader had returned. No consumer needed this source
+snapshot. The supported exact-target snapshot collector previewed it eligible,
+then removed it with its normal accepted-operation checks and the read-only
+`--sudo-process-scan`. No manual snapshot deletion, backup chain or new copy was
+used. An initial forced-rm cache command was rejected by the tool without an
+effect; exact `.pyc` deletion followed by empty-directory removal succeeded.
+There is no outstanding cleanup-tool blocker.
+
+Deleted targets and measured allocated bytes were:
+
+| Target relative to `/home/fires/hmasd-wsl` | Allocated bytes removed |
+| --- | ---: |
+| `.git/hmasd-launch-sources/d609499b0c7042e99af15510f023c125` | 1641111552 |
+| `experiments/candidates/tail_return_distributional_learning/b03_eta/__pycache__/` | 45056 |
+| `tests/experiments/candidates/tail_return_distributional_learning/b03_eta/__pycache__/` | 53248 |
+| `temp/directions/tail_return_distributional_learning/b03_eta_wait.json` and now-empty direction scratch directory | 8192 |
+
+All targets are absent, their allocated usage is now zero, and net measured
+reduction is **1641218048 bytes**. This is exact-target working-filesystem
+reclamation, not a claim about concurrent whole-host free space or Git history.
+The 24 raw evidence files remain at their one durable canonical path; the
+post-cleanup aggregate SHA256 is still
+`390f84ec1cd35c7d19895f740bd0cc67dc2bf59cc2670d502273e17f8780d88c`.
+Required operation/observer recovery records, useful code/tests, compact results
+and unique raw/checkpoints remain. No unused target or unread result remains
+from this selected batch. Direction standing/routing and the directly affected
+learning-background paragraph are published with this closure entry; substantive
+return to Root carries the reserve state and conditional re-entry recommendation.
