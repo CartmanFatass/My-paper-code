@@ -2762,3 +2762,38 @@ existing launch parser. No refused scientific invocation or replacement attempt
 was used to discover either condition. These are ordinary control corrections,
 not a new scientific approval requirement. The exact run tag remains
 `b05_retained_control`, and no native fit has yet started.
+
+Root completed the shared control reconciliation at published
+`08b694b054ec630070261699010f9cecba224b65`: the canonical node fast-forwarded
+to current main, the recognized state is `exploring`, and the exact existing
+`Codex DM (native child)` lead passed the local policy parser. Root reports both
+shared locks released, all five dirty status-file hashes and sparse-selection
+hash unchanged, and no scientific invocation. My direct remote HEAD check agreed.
+The accepted scientific source remains
+`69785db45a1240046f7d1a066dbe53a3b710e7c0`; this control-only descendant does not
+change its inputs. The canonical parent was staged as the single external input
+`/home/wu/hmasd-inputs/uav_message_content-b05-B-34871c49.pt` and SHA256 verified;
+that temporary 463357-byte duplicate will be removed after collection. Fresh
+published-policy and actual-memory admission remain launch-time checks.
+
+### B05 accepted operation and observation
+
+The configured remote supervisor `uav-content-b05-69785db4` invoked the admission
+kernel once. Native acceptance is2026-09-29T13:45:13.330252Z, claim
+`36e95a98916c0da436565f42501a6af537ede4d86a1a936286083ca117798538`, with immutable
+source snapshot `e6bc0c8404bc42218708e367eb8a1c37` at the accepted scientific SHA.
+The retained run manifest binds supervisor PID997054 and runner PID997055 to
+their Linux boot/start-tick identities. The fresh control observation was main
+`d9b3708e62a71e4516102b91b4b23667ee3fec6e`; preflight measured11810435072 available
+physical bytes against the4294967296-byte floor and passed. The supervisor's own
+exit0 is launch delivery, not completion of the scientific child.
+
+The same claim is observed by `tools/hmasd_wait.py`, generation1/window1500s,
+using owned private state `temp/directions/uav_message_content/b05-wait` and the
+read-only remote `hmasd_launch.py status` probe. First drain independently found
+both native identities running, consistent records and no exit witness. I keep
+this native child turn active for deterministic observation and the full reading;
+registration is not an assumed future wake, and no replacement worker is allowed.
+Manifest/preflight compact copies are retained under
+`runs/uav_message_content/b05_retained_control/`; the canonical remote output
+directory remains the sole raw/weight store while the run is live.
