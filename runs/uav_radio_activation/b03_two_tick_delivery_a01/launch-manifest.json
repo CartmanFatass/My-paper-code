@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-29T20:33:24.607559Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3d9c57d229864a02a8679bdf903af92e/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3d9c57d229864a02a8679bdf903af92e/experiments/candidates/uav_radio_activation/b03/run.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01",
+    "--launch-sha",
+    "2bff85091f85f6d52fc0344d0329b4fc39fa6d5c",
+    "--seed",
+    "29307000"
+  ],
+  "claim_key": "c0e0f240ff4084e66fbf95f0700853600869e747fa182db01cf2bbaf2f4bc748",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/c0e0f240ff4084e66fbf95f0700853600869e747fa182db01cf2bbaf2f4bc748.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3d9c57d229864a02a8679bdf903af92e/experiments/candidates/uav_radio_activation/b03/run.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01",
+    "--launch-sha",
+    "2bff85091f85f6d52fc0344d0329b4fc39fa6d5c",
+    "--seed",
+    "29307000"
+  ],
+  "command_sha256": "2eff42eb674c67b2ccedbf32357d956004957d99398f7831d28a38fa59ae0842",
+  "control_observation": {
+    "observed_at": "2026-09-29T20:33:24.395667Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "57c14b8ba895918312ac8fee66599825aba2d9b3"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-29T20:33:24.413896Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3d9c57d229864a02a8679bdf903af92e",
+  "direction": "uav_radio_activation",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_radio_activation/b03/run.py",
+    "--launch-sha",
+    "2bff85091f85f6d52fc0344d0329b4fc39fa6d5c",
+    "--seed",
+    "29307000"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/c0e0f240ff4084e66fbf95f0700853600869e747fa182db01cf2bbaf2f4bc748.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3910321,
+      "session_id": 3910321,
+      "start_ticks": 15254909
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3910321,
+    "process_group_id": 3910321
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3910322,
+      "session_id": 3910321,
+      "start_ticks": 15254913
+    },
+    "pid": 3910322,
+    "process_group_id": 3910321,
+    "supervisor_pid": 3910321
+  },
+  "schema_version": 1,
+  "sha": "2bff85091f85f6d52fc0344d0329b4fc39fa6d5c",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/3d9c57d229864a02a8679bdf903af92e",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01/stdout.log"
+}

@@ -1377,3 +1377,22 @@ The CPU-ceiling check injects an exception; an actual three-hour/SIGXCPU
 teardown was not run. Complete scientific reader execution awaits collected
 evidence. Publish these exact inputs, then one launch under current admission;
 no outstanding scientific selection issue or per-run Root approval remains.
+
+### Accepted B03 Operation
+
+Exact reviewed inputs published at `2bff85091f85f6d52fc0344d0329b4fc39fa6d5c`.
+Native launch accepted2026-09-29T20:33:24.607559Z on configured local_linux;
+the [original manifest](../../../../runs/uav_radio_activation/b03_two_tick_delivery_a01/launch-manifest.json)
+binds source snapshot, command, process identities and canonical output.
+Fresh actual-node physical/effective memory8828932096bytes passed the
+4294967296byte floor. Fixed192episodes/49152steps/0fits, one CPU thread and
+three-CPU-hour native-worker ceiling remain unchanged. No duplicate or
+inherited process was launched, and no scientific outcome has been read.
+
+Detached `hmasd_wait` is owned by this child's runtime
+`01a0eed3-b984-7f62-aa36-c623d55c3612`, with private B03 request in direction
+scratch,30s probes and1500s checkpoints on the same native operation. Keep this
+child turn active, drain/rearm the same handle at checkpoints, and distinguish
+queue-delivery facts from healthy observation. Registration is not proof that
+an ended native child could be woken. Source publication precedes execution;
+this start belongs in NOTES/runs, not another routine RESEARCH update.
