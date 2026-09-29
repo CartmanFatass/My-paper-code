@@ -1158,7 +1158,6 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | State | Note |
 | --- | --- | --- |
-| `tail_return_distributional_learning` | reserve | B01 正结果保留，B02 在 MEI 内，B02 Pro 未开始。没有选中的新比较；相关新问题面对强 scalar 参照。[证据](candidates/tail_return_distributional_learning/DIRECTION.md)。 |
 | `cross_play_compatible_population_learning` | reserve | DM2已完成0fit/0环境步的源码、资产与完整成本准备；技术上可用普通私有学习器加有限混编适配，但当前S1用途不要求独立控制器，决定不激活训练。条件设计4个population fits/8套学习器、2.88M训练+.768M评价（含正常搭配/共同初始），未实现、未接受。[准备结论](https://github.com/CartmanFatass/My-paper-code/blob/e38a8ec47/docs/research/candidates/complementary_skill_learning/NOTES.md#2026-09-24--cross-play-preparation-complete-decline-current-population-training-investment)；[历史科学参考](https://github.com/CartmanFatass/My-paper-code/blob/b793cf69b4935306708ad744b355acc4d5b33712/docs/research/portfolio/pro_packets/20260912_new_direction_discovery/archive/RESPONSE.md)。 |
 | `variable_n_fleet_churn` | reserve | 保留旧 MAPR/DIRECT/BCRH 证据；后续 INTERVAL/TERMINAL 比较两次 SIG11 后没有最终 primary，仍未回答。可因新比较的信息价值再选，不自动修复或重跑。[B03 技术失败](https://github.com/CartmanFatass/My-paper-code/blob/51965a896a4e3b9288fccb6abe277c2547dc07b8/docs/research/candidates/variable_n_fleet_churn/VNFC_N7_NATIVE_SERVICE_CREDIT_B03_RESULT_INTAKE_20260912.md)。 |
 | `flexible_skill_duration` | reserve | Claude DM；session 由 owner 手动恢复。B01–B14 没有正面性能主张，B13/B14 未翻转旧高层标签信用路线的停止判断。可变周期问题保留；新共同学习比较是建议，未出现推翻停止的新阳性发现。没有活动 producer、后继批次或开放 Pro。[完整证据与收尾](https://github.com/CartmanFatass/My-paper-code/blob/00eac27c535ccffb66354f8bfac62acb504874ca/docs/research/candidates/flexible_skill_duration/NOTES.md)；[当前 notebook](candidates/flexible_skill_duration/NOTES.md)。 |
@@ -1474,10 +1473,12 @@ R09技术失败；不能据旧摘要把整个方向视为从未试过。保留�
 Owner要求通常保持3–4个有实质工作的Codex DM，并保留少量真正值得比较的备选；数量不是
 科学质量判断，不把Oracle／scout／reviewer或只剩清理的旧研究算成活动DM，也不强凑第四题。
 
-已选择两个独立扩展。`uav_local_history`由 `/root/dm_local_history`研究合法匿名空间历史，
-首比较是同一普通局部控制器的当前观测C与有界历史H：0fit、64完整H256回合／16,384步，
-不预设GRU遗忘，也不要求普通比较先胜出才能提出有理由的学习研究。完整前瞻、成本与
-针对缺失用户删失信息的独立修正已发表于[NOTES](candidates/uav_local_history/NOTES.md)。
+`uav_local_history`由 `/root/dm_local_history`研究合法匿名空间历史，首比较已完成：
+同一普通局部控制器的当前观测C与有界历史H，0fit、64完整H256回合／16,384步；
+H-C平均J +.004461、服务 +.376953，区间跨零，不预设GRU遗忘或历史优势。
+已选择同一合法历史下的完整27指令学习比较，3fit、458,752总步，保留C/H及初始化对照；
+不是要求普通比较先胜出，也不把历史的特异学习增益混同于完整学习包的价值。
+完整结果、独立判读、建设性续接与成本见[NOTES](candidates/uav_local_history/NOTES.md#2026-09-29---b01-complete-reading)。
 
 Oracle具体化的`uav_availability_recovery`已交新DM `/root/dm_availability_recovery`：
 G0上两个备用UAV在一名主成员暂时退出及回归时联合选择补位、驻留与返回，比较三次学习实例、
@@ -1501,7 +1502,7 @@ CSI误差／时延、inactive时感知及airtime／开关成本，再考虑匹�
 未选启动、未称第四DM。匹配算法本身、无可信不确定性合同的无线模型适应、任意伙伴多样性
 及旧配方重命名不进入promising清单。备选不足时留空，不把条件性前提写成已经解决。
 
-`/root/oracle_question_expansion`为原生`gpt-6-astra`、`max`、独立上下文，继续筛选跨角度备选。
+`/root/oracle_question_expansion`为原生`gpt-6-astra`、`max`、独立上下文，已完成本次跨角度筛选。
 它是Root的科学推理方式，不拥有方向、记录、启动或审批，也不冒充独立Scientific Reviewer；
 Root选择跨题投入，DM负责问题内推理执行。建议区分可具体化与有关键前提的条件性备选，允许没有
 足够候选，不建新角色／评分表／审批层。新增假设或资源须明确来源、误差、成本，并给有能力普通
@@ -1549,10 +1550,13 @@ fits+3predictors/3,907,584steps, not reset for a new DM. The critic's optional p
 selected asset/B40 fresh-panel comparison costs0fits/16,384steps but is not bought because
 no concrete reuse decision presently requires another ranking panel.
 
-**Current independent work and reserves.** Local-history investigates lawful anonymous
-spatial history versus current observations with the same ordinary decentralized controller;
-its first complete comparison is0fits/16,384steps, learning not presumed useless if ordinary
-gains are uncertain. G0 availability recovery selects learned joint reserve deployment/
+**Current independent work and reserves.** Local-history completed its lawful anonymous
+spatial-history versus current-observation ordinary comparison:0fits/16,384steps,
+H-C mean J +.004461/service +.376953 with intervals crossing zero. It now selects three
+full27-command policy fits with that same lawful history, initialized/final instances and
+both ordinary C/H references on32fresh worlds,458,752totalsteps. This is a full learned-package
+comparison, not identification of history-specific learning value; no ordinary-positive
+prerequisite or automatic cache repair. G0 availability recovery selects learned joint reserve deployment/
 return versus qualified ordinary control under an explicit matched centralized map:
 3fits/960,000steps and substantial forecast construction. Its native unavailable member
 retains geometric interference; do not read it as a physically removed or radio-silent UAV.
@@ -1587,6 +1591,8 @@ sections, not a recursive archive census:
 - Relevant message/background passage in this RESEARCH and
   `docs/research/archive/2026-09-29/RESEARCH-oracle-reserve-selection.md`:
   full new Oracle recommendation, source-backed independent review and actual selections.
+  `docs/research/candidates/uav_local_history/NOTES.md#2026-09-29---b01-complete-reading`
+  provides the complete first reading and selected learning continuation.
   The older Pro advice in `RESEARCH-retained-control-selection.md` is historical context,
   not current evidence of how B05 performed.
 
