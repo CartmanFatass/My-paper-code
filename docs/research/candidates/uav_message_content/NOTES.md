@@ -895,3 +895,77 @@ its diff. Independent engineering Reviewer checks numerics/RNG/replay/warm start
 Substantial implementation follows resolution of the focused scalar/initialization
 review. Publish exact inputs, admit once, keep this child active through the same
 operation's deterministic observation, complete reading and independent interpretation.
+
+### Focused scientific review and adopted refinement
+
+The registered ResearchCritic `/root/dm_content_augmentation/content_contract_review`
+used `fork_turns=none`, reconstructed the original summary/frozen source, reread all
+192 retained B01 trajectories on the actual node and independently verified the C
+checkpoint. Its recommendation is **retain the complete B/O/L nine-fit comparison**,
+with **MATERIAL_DISSENT: no**. It received the proposed contract, so this was a
+separate-context contract review, not blinded selection. No policy or environment
+was called during its original-evidence reconstruction.
+
+The reviewer retains both the competent ordinary C learning and the adverse B01
+replacement results, including L-C world31 +.0956405 and world27 -.1409074. It agrees
+that prior H did not test O, and that changing constant-input columns in both actor
+paths and critic preserves the original function only at initialization. Fresh Adam
+and reset histories are appropriate to the retained checkpoint. The spread has valid
+unit-square normalization and lawful anonymous inputs, but is not an optimal encoding
+or unserved-demand signal. Delayed behavior-message score credit remains meaningful;
+the initial scalar is ignored, and neither gradients nor sensitivity guarantee later
+native value. Thus the actual design is suitable for direct complete learning without
+another arm, pilot or scientific review before implementation.
+
+Its consequential limitation is adopted: even L>B and L>O would support a learned
+**package** increment, not identify private-history semantics. Immediate sensitivity
+can reflect an offset or shared randomness; zero sensitivity at actual hidden states
+cannot exclude an earlier message effect already carried in recurrent memory. The
+diagnostic must not become a causal-information metric or exposure admission gate.
+
+The reviewer adds a useful adoption comparison already supplied by our initial panel:
+read the trained endpoint against the common uncontinued C. If L improves J/service
+over B/O **and initial C**, retain a conditional useful augmentation; independently
+trained C starts are a possible later purchase when generality matters. If L only
+beats deteriorated B/O and stays below initial C, keep the relative continuation
+observation while retaining uncontinued C for use. If O improves over B and initial C
+without an L increment, keep the ordinary capability. If neither augmentation gives
+complete useful benefit, retain C/B according to their measured endpoints and stop
+automatic extension. Mixed seeds, opposite J/service signs and adverse tails remain
+visible in every branch; none automatically buys a repair or new seed.
+
+DM disposition: adopt this substantive recommendation and refine the reuse reading
+accordingly, with no added native work or comparator arm. The question remains open
+at the task/representation/finite-learning levels, but this batch has an explicit
+use decision. The review verifies neither new code nor runtime; those engineering
+checks, exact-source publication and fresh actual-node admission still remain.
+Release the L0 above to the registered Implementer for the single preserved-content
+continuation behavior. DM owns this notebook, the separate pure reader and final
+acceptance; helper owns only B02 implementation/tests and performs no Git mutation.
+
+### Engineering acceptance and source publication
+
+The bounded Implementer returned six B02 modules and its six synthetic checks. DM
+reviewed and accepted the diff; no shared scientific module or native host changed.
+The separate pure reader reconstructs packets, delivery records, delayed masks,
+native rewards, exact initial action/reward equality, paired endpoints and counts
+from retained arrays/streams without calling a policy or environment. Its four
+synthetic checks include complete B/O/L protocol traces and rejection of an altered
+preserved field even after refreshing the trace digest. These are correctness
+fixtures, not native scientific probes.
+
+Registered engineering Reviewer `/root/dm_content_augmentation/review_content_b02`
+independently read the checkpoint, both actor input paths, critic offsets, scalar
+density, private RNG, behavior-message replay, diagnostic state handling, counts,
+partial-failure frontier and admission order. It found no material engineering
+issue and requested no repair. Its original seven checks passed in 5.11 s; after
+the additional complete-trace fixtures its four reader checks passed in 5.42 s
+(ten distinct checks across the two files). It also verified unchanged shared
+CADC/UCOPE dependencies and native environment/adapter against the pinned B01
+source. No native episode or new training occurred during engineering review.
+
+DM accepts this implementation and the reviewed comparison for exact-source
+publication. The actual retained checkpoint was separately hash/metadata-verified
+on `wsl_4070` by the read-only source Scout; production loading rechecks those bytes.
+The complete reader can only be accepted against native retained outputs after
+the admitted batch finishes. No scientific completion is asserted by these tests.
