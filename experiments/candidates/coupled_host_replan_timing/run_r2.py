@@ -109,7 +109,7 @@ def main(argv: list[str] | None = None) -> int:
     if os.environ.get(ADMISSION_ENV):
         from scripts.hmasd_admission import require_admission
 
-        admission: Any = dict(require_admission(__file__, direction=DIRECTION))
+        admission: Any = dict(require_admission(__file__, direction="coupled_host_replan_timing"))
         if args.launch_sha != admission["sha"]:
             print("error: --launch-sha disagrees with the admitted sha", file=sys.stderr)
             return 2
