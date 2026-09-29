@@ -20,8 +20,12 @@ changes exactly two things:
   depend on this flag (the base observation reads ``uav_sinr_matrix``, not
   ``uav_connections``).
 
-``step()`` is not overridden: the per-agent reward stays the team scalar / n_uavs
-(scenario2.py 289-290).  Note that ``MultiUAVEnv.step`` (uav_env.py 303) already calls
+``step()`` clips every UAV's normalised action to the unit 3-ball (L2 <= 1, so the executed
+3-D speed never exceeds ``max_speed``; the base env does not clip, uav_env.py 280-291) and
+counts the clipped UAVs of the step in ``reward_info["action_clip_events"]`` (and the episode
+total in ``self.action_clip_events_episode``).  The caller's action arrays are never mutated:
+clipped copies are passed to the parent.  Otherwise the parent step runs unchanged, so the
+per-agent reward stays the team scalar / n_uavs (scenario2.py 289-290).  Note that ``MultiUAVEnv.step`` (uav_env.py 303) already calls
 ``_compute_reward`` once with the new user connections and the *previous* routing paths;
 scenario2's ``step`` then refreshes the UAV links and routing and calls it again
 (scenario2.py 286).  The second value is the one returned and the one left in
@@ -61,7 +65,11 @@ HOST_CONTRACT_KWARGS: dict[str, Any] = {
     "use_fdma": True,
     "bandwidth": 20e6,
     "ground_bs_tx_power": 23,
+    "use_shadowing": False,
 }
+
+#: An action counts as a clip event when its L2 norm exceeds 1 by more than this.
+CLIP_EVENT_TOL = 1e-9
 
 #: SINR (dB) of the base class's per-UAV front-end ceiling (scenario2.py 745-746).
 FRONTEND_CEILING_SINR_DB = 30.0
@@ -86,6 +94,37 @@ class CoupledRelayHost(UAVCooperativeNetworkEnv):
         self.world_seed = kwargs.get("seed")
         super().__init__(*args, **kwargs)
         self.contract_denominator_bps = contract_denominator(self.n_uavs, self.bandwidth)
+
+    # ------------------------------------------------------------------ step / action clip
+
+    def reset(self, seed: Any = None, options: Any = None):
+        self.action_clip_events_episode = 0
+        return super().reset(seed=seed, options=options)
+
+    def step(self, actions: Any):
+        """Clip each UAV's normalised action to the unit 3-ball, then run the parent step."""
+        clipped: dict[Any, Any] = {}
+        events = 0
+        for agent, action in actions.items():
+            array = np.array(action, copy=True)
+            if not np.issubdtype(array.dtype, np.floating):
+                array = array.astype(float)
+            norm = float(np.linalg.norm(array))
+            if not np.isfinite(norm):
+                raise ValueError(f"non-finite action for {agent!r}")
+            if norm > 1.0:
+                array = array / norm
+                # Rounding-level excess (a unit vector built as delta / |delta|) is rescaled but
+                # not reported as a clip event.
+                events += int(norm > 1.0 + CLIP_EVENT_TOL)
+            clipped[agent] = array
+        result = super().step(clipped)
+        self.action_clip_events_episode = int(getattr(self, "action_clip_events_episode", 0)) + events
+        # scenario2 hands ``self.reward_info`` to every agent's info by reference, so the key
+        # is visible there too; the contract reward is not touched.
+        self.reward_info["action_clip_events"] = int(events)
+        self.reward_info["action_clip_events_episode"] = int(self.action_clip_events_episode)
+        return result
 
     # ------------------------------------------------------------------ connections
 

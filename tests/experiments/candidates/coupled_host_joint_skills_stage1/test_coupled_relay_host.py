@@ -262,3 +262,257 @@ def test_step_reward_is_team_scalar_over_n_uavs():
         # The returned reward uses the routing refreshed after the move (second call).
         expected = _independent_reward(env)
         assert r == pytest.approx(expected["r"], rel=1e-12, abs=1e-15)
+
+
+# ------------------------------------------------------------------------------ T3 additions
+# Host contract items added by the DM disposition of the Pro review (item 1): use_shadowing pin,
+# the unit-ball action clip inside the host, and the T1b fresh-state acceptance tests.
+
+
+def test_use_shadowing_is_pinned_in_the_contract_kwargs():
+    assert HOST_CONTRACT_KWARGS["use_shadowing"] is False
+    env = make_host(9104)
+    assert env.use_shadowing is False
+    env.use_shadowing = True
+    with pytest.raises(ContractError):
+        check_contract(env)
+
+
+def test_action_clip_to_unit_ball_counts_events_and_leaves_caller_arrays_untouched():
+    env = make_host(9105)
+    env.reset(seed=9105)
+    # Keep every UAV away from the arena and height boundaries so the displacement is the action.
+    env.uav_positions[:, :2] = 2500.0
+    env.uav_positions[:, 2] = 100.0
+    start = env.uav_positions.copy()
+    raw = np.zeros((env.n_uavs, 3), dtype=np.float32)
+    raw[0] = [1.0, 1.0, 1.0]            # |a| = sqrt(3): clipped
+    raw[1] = [0.6, 0.0, 0.0]            # inside the ball: unchanged
+    raw[2] = [0.0, -2.0, 0.0]           # |a| = 2: clipped
+    raw[3] = [0.0, 0.0, 0.0]
+    raw[4] = [0.6, 0.8, 0.0]            # |a| = 1 exactly: not an event
+    raw[5] = [-0.1, 0.2, -0.3]
+    actions = {agent: raw[i] for i, agent in enumerate(env.agents)}
+    snapshot = raw.copy()
+    _obs, _rewards, _terms, _truncs, infos = env.step(actions)
+    np.testing.assert_array_equal(raw, snapshot)
+    assert all(np.shares_memory(actions[agent], raw) for agent in env.agents)
+    moved = env.uav_positions - start
+    speed = np.linalg.norm(moved, axis=1)
+    assert np.all(speed <= env.max_speed * env.time_step + 1e-4)
+    np.testing.assert_allclose(moved[0], 30.0 * np.ones(3) / math.sqrt(3.0), rtol=1e-6)
+    np.testing.assert_allclose(moved[1], [18.0, 0.0, 0.0], atol=1e-5)
+    np.testing.assert_allclose(moved[2], [0.0, -30.0, 0.0], atol=1e-5)
+    np.testing.assert_allclose(moved[4], [18.0, 24.0, 0.0], atol=1e-5)
+    assert env.reward_info["action_clip_events"] == 2
+    assert infos[env.agents[0]]["reward_info"]["action_clip_events"] == 2
+    env.step({agent: np.array([3.0, 0.0, 0.0]) for agent in env.agents})
+    assert env.reward_info["action_clip_events"] == 6
+    assert env.action_clip_events_episode == 8
+    env.reset(seed=9105)
+    assert env.action_clip_events_episode == 0
+
+
+def test_clip_is_identity_inside_the_ball():
+    host = make_host(9106)
+    plain = UAVCooperativeNetworkEnv(area_size=5000, seed=9106, **HOST_CONTRACT_KWARGS)
+    rng = np.random.default_rng(6)
+    for _ in range(15):
+        raw = rng.uniform(-0.5, 0.5, (host.n_uavs, 3))
+        host.step({agent: raw[i] for i, agent in enumerate(host.agents)})
+        plain.step({agent: raw[i] for i, agent in enumerate(plain.agents)})
+        assert host.reward_info["action_clip_events"] == 0
+        np.testing.assert_array_equal(host.uav_positions, plain.uav_positions)
+        assert host.routing_paths == plain.routing_paths
+
+
+BS_XY = (2500.0, 2500.0)
+FAR_CORNERS = [(100.0, 100.0, 150.0), (4900.0, 100.0, 150.0), (100.0, 4900.0, 150.0),
+               (4900.0, 4900.0, 150.0), (4900.0, 2500.0, 150.0)]
+
+
+def _designed_users(env: CoupledRelayHost, groups: list[tuple[float, float, int]]) -> None:
+    """Static users: listed groups within 40 m of their centres, the rest at (2500, 50)."""
+    rng = np.random.default_rng(11)
+    users = np.tile([[BS_XY[0], 50.0]], (env.n_users, 1))
+    j = 0
+    for x, y, count in groups:
+        users[j:j + count] = np.array([x, y]) + rng.uniform(-40, 40, (count, 2))
+        j += count
+    env.user_positions = users
+
+
+def _fresh_evaluation(world: int, users: np.ndarray, positions: np.ndarray, allow_a2a: bool):
+    """A new host that has never seen another placement (no cache, no previous links)."""
+    fresh = CoupledRelayHost(area_size=5000, seed=world, a2a_enabled=allow_a2a, **HOST_CONTRACT_KWARGS)
+    fresh.user_positions = users.copy()
+    fresh.uav_positions = positions.copy()
+    fresh._begin_path_loss_step()
+    fresh._update_channel_state()
+    fresh._update_uav_connections()
+    fresh._compute_routing_paths()
+    fresh._compute_reward()
+    return fresh
+
+
+def _placement(uav0_x: float, relay_x: float | None = None) -> np.ndarray:
+    positions = np.array([(0, 0, 0)] + FAR_CORNERS, dtype=float)
+    positions[0] = [BS_XY[0] + uav0_x, BS_XY[1], 100.0]
+    if relay_x is not None:
+        positions[1] = [BS_XY[0] + relay_x, BS_XY[1], 100.0]
+    return positions
+
+
+def test_fresh_state_order_through_bs_disconnect_and_reconnect():
+    world = 9107
+    env = make_host(world)
+    _designed_users(env, [(BS_XY[0] + 800.0, BS_XY[1], 8), (BS_XY[0] + 1600.0, BS_XY[1], 8)])
+    in_range, out_of_range = _placement(800.0), _placement(1600.0)
+    readings = []
+    for positions in (in_range, out_of_range, in_range, out_of_range):
+        info = static_evaluate(env, positions, allow_a2a=True)
+        fresh = _fresh_evaluation(world, env.user_positions, positions, allow_a2a=True)
+        # Cache invalidation -> SINR/association -> routing -> reward, each equal to a new host's.
+        np.testing.assert_array_equal(env.sinr_matrix, fresh.sinr_matrix)
+        np.testing.assert_array_equal(env.connections, fresh.connections)
+        np.testing.assert_array_equal(env.uav_bs_connections, fresh.uav_bs_connections)
+        assert env.routing_paths == fresh.routing_paths
+        expected = _independent_reward(env)
+        assert info["coverage_backhauled"] == pytest.approx(expected["c_bh"], abs=1e-15)
+        assert info["frontend_capacity_with_path_mbps"] * 1e6 == pytest.approx(expected["s_formula"], rel=1e-12)
+        assert info["contract_reward"] == fresh.reward_info["contract_reward"]
+        readings.append((bool(env.uav_bs_connections[0, 0]), 0 in env.routing_paths, info))
+    (link_a, routed_a, info_a), (link_b, routed_b, info_b), (link_c, routed_c, info_c), _ = readings
+    assert link_a and routed_a and not link_b and not routed_b and link_c and routed_c
+    assert info_a["coverage_backhauled"] > 0 and info_a["throughput_term"] > 0
+    assert info_b["coverage_backhauled"] == 0.0 and info_b["throughput_term"] == 0.0
+    assert info_b["coverage_access"] > 0.0            # served but not backhauled counts zero
+    assert info_c == info_a                           # reconnect restores the same reading
+
+
+def test_a2a_switch_on_static_updates_relay_rescue():
+    world = 9108
+    env = make_host(world)
+    _designed_users(env, [(BS_XY[0] + 1900.0, BS_XY[1], 8)])
+    positions = _placement(1900.0, relay_x=950.0)
+    on = static_evaluate(env, positions, allow_a2a=True)
+    assert env.routing_paths[0] == [("uav", 0), ("uav", 1), ("ground_bs", 0)]
+    assert on["coverage_backhauled"] == pytest.approx(8 / 50)
+    fresh_on = _fresh_evaluation(world, env.user_positions, positions, allow_a2a=True)
+    assert fresh_on.routing_paths == env.routing_paths
+    off = static_evaluate(env, positions, allow_a2a=False)
+    assert 0 not in env.routing_paths and not env.uav_connections.any()
+    assert off["coverage_backhauled"] == 0.0
+    fresh_off = _fresh_evaluation(world, env.user_positions, positions, allow_a2a=False)
+    assert fresh_off.routing_paths == env.routing_paths
+    assert off["contract_reward"] == fresh_off.reward_info["contract_reward"]
+
+
+def test_a2a_off_holds_on_every_graph_update_of_a_stepped_episode():
+    world = 9109
+    off = make_host(world)
+    on = make_host(world)
+    for env, flag in ((off, False), (on, True)):
+        env.a2a_enabled = flag
+        env.reset(seed=world)
+        assert flag or not env.uav_connections.any()
+        static_evaluate(env, _relay_line(env) * [0.5, 1, 1] + [1250, 0, 0], allow_a2a=flag)
+    rng = np.random.default_rng(9)
+    links_on = 0
+    for _ in range(60):
+        raw = rng.uniform(-0.3, 0.3, (off.n_uavs, 3))
+        off.step({agent: raw[i] for i, agent in enumerate(off.agents)})
+        on.step({agent: raw[i] for i, agent in enumerate(on.agents)})
+        assert not off.uav_connections.any()
+        assert all(len(path) == 2 for path in off.routing_paths.values())
+        np.testing.assert_array_equal(off.uav_positions, on.uav_positions)
+        links_on += int(on.uav_connections.any())
+    assert links_on > 0  # the same trajectory forms links when A2A is on
+
+
+def test_terminal_step_500_contract_reward_and_flags():
+    env = make_host(9110)
+    env.reset(seed=9110)
+    zero = {agent: np.zeros(3) for agent in env.agents}
+    for t in range(1, 501):
+        _obs, rewards, terms, truncs, _infos = env.step(zero)
+        assert not any(truncs.values())
+        assert all(terms.values()) == (t == 500) and any(terms.values()) == (t == 500)
+    expected = _independent_reward(env)
+    assert env.reward_info["contract_reward"] == pytest.approx(expected["r"], rel=1e-12, abs=1e-15)
+    for agent in env.agents:
+        assert rewards[agent] * env.n_uavs == pytest.approx(env.reward_info["contract_reward"], abs=1e-12)
+
+
+def test_uav_without_users_contributes_zero_to_s():
+    env = make_host(9101)
+    _inject_state(env, sinr_db=12.0)
+    env.connections[0, :] = False                       # UAV 0 routed, serves nobody
+    with_route = env._compute_reward()
+    s_with = env.reward_info["frontend_capacity_with_path_mbps"]
+    env.routing_paths.pop(0)
+    without_route = env._compute_reward()
+    assert env.reward_info["frontend_capacity_with_path_mbps"] == s_with
+    assert with_route == without_route
+    served = sum(1 for i in range(1, env.n_uavs) if env.connections[i].any())
+    per_uav = env.bandwidth * math.log2(1.0 + 10.0 ** 1.2)
+    assert s_with * 1e6 == pytest.approx(served * per_uav, rel=1e-12)
+
+
+def test_max_connections_reached_leaves_the_eleventh_user_unserved():
+    env = make_host(9102)
+    users = np.tile([[2500.0, 50.0]], (env.n_users, 1))    # 39 users beyond every UAV's reach
+    users[:11] = np.array([2700.0, 2500.0]) + np.random.default_rng(2).uniform(-30, 30, (11, 2))
+    env.user_positions = users
+    positions = _placement(200.0)
+    info = static_evaluate(env, positions)
+    assert env.connections[0, :11].sum() == 10
+    unassigned = [j for j in range(11) if not env.connections[:, j].any()]
+    assert len(unassigned) == 1
+    assert not env.connections[:, 11:].any()
+    assert 0 in env.routing_paths
+    assert info["coverage_backhauled"] == pytest.approx(10 / 50)
+    assert info["coverage_access"] == pytest.approx(10 / 50)
+
+
+def test_weak_user_boundary_trade_off_on_the_contract_formula():
+    env = make_host(9101)
+    n = env.n_uavs
+    connections = np.zeros((n, env.n_users), dtype=bool)
+    connections[0, :5] = True
+    sinr = np.full((n, env.n_users), 20.0)
+    sinr[0, 4] = 3.0                                     # the weak user at the threshold
+    env.connections, env.sinr_matrix = connections, sinr
+    env.routing_paths = {0: [("uav", 0), ("ground_bs", 0)]}
+    r_with = env._compute_reward()
+    c_with, s_with = env.reward_info["coverage_backhauled"], env.reward_info["throughput_term"]
+    env.connections[0, 4] = False                        # drop the weak backhauled user
+    r_without = env._compute_reward()
+    c_without, s_without = env.reward_info["coverage_backhauled"], env.reward_info["throughput_term"]
+    assert c_without - c_with == pytest.approx(-0.02, abs=1e-15)
+    delta_s = env.bandwidth * (math.log2(1 + 10 ** 2.0) - math.log2(1 + 10 ** 0.3)) / D_EXPECTED
+    assert s_without - s_with == pytest.approx(delta_s, rel=1e-12)
+    assert delta_s == pytest.approx(0.0849, abs=5e-4)
+    assert r_without - r_with == pytest.approx(0.5 * (-0.02 + delta_s), rel=1e-12)
+    assert r_without - r_with == pytest.approx(0.0324, abs=5e-4) and r_without > r_with
+
+
+def test_original_reward_never_overrides_the_contract_reward():
+    from envs.pettingzoo.env_adapter import ParallelToArrayAdapter
+
+    host = make_host(9103)
+    adapter = ParallelToArrayAdapter(host, seed=9103)
+    adapter.reset(seed=9103)
+    rng = np.random.default_rng(13)
+    differing = 0
+    for _ in range(40):
+        _obs, scalar, _term, _trunc, info = adapter.step(rng.uniform(-1, 1, (host.n_uavs, 3)))
+        contract = host.reward_info["contract_reward"]
+        original = host.reward_info["original_normalized_reward"]
+        assert info["reward_info"]["contract_reward"] == contract
+        assert info["reward_components"]["reward_info"]["contract_reward"] == contract
+        for agent in host.agents:
+            assert info["rewards_dict"][agent] == pytest.approx(contract / host.n_uavs, abs=1e-15)
+        assert host.n_uavs * scalar == pytest.approx(contract, abs=1e-12)
+        differing += not math.isclose(original, contract, abs_tol=1e-9)
+    assert differing > 0  # the two rewards differ on real steps, and the contract one is returned
