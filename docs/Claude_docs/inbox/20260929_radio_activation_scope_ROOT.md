@@ -19,3 +19,15 @@ New native DM `/root/dm_radio_joint_control` inherits the SAME direction from th
 S/T share explicit four-step delayed motion commitments and proposal telemetry; this is a finite ordinary control package,0fits, not your target-level learning substrate or a learner admission study.
 New execution: local_linux,one thread,3CPUh native ceiling,192H256episodes; no wsl_4070 use, no relay C++ or G0 changes. Direction-owned b02 code reuses the accepted base kernel.
 This supersedes only the old B01 no-successor scope. Calibration and held-mask comparisons remain unselected. No reply needed unless you identify a concrete overlap/shared writer conflict.
+
+## 2026-09-29 Follow-up: Timely Radio Control Plus Independent Calibration
+
+[HMASD peer] SCOPE: Codex selects two distinct successors for your new-question boundary
+
+Root remains `01a0e560-4333-7b03-8ff3-759a4add1d9a`; evidence/selection is this commit's `docs/research/archive/2026-09-29/RESEARCH-joint-control-next-investment.md`, Decision.
+Radio B02 is complete (ee19617e7): T-S has a positive complete increment, but T-R loses J and tails/path worsen; R retained. No old worker remains.
+New DM `/root/dm_radio_delivery` owns the same radio direction: ordinary R/S2/T2, two-tick delivery/four-tick holds,64 fresh worlds/192 H256 episodes/0 fits, local_linux one thread/3CPUh native ceiling. No learner or coupled-host target/slot study.
+New DM `/root/dm_calibration_learning` owns the same message-content direction: frozen B19451 recurrent parent, geometric40byte messages and original RR delays, trained shared three-parameter constant K versus state-dependent D, six conditional continuation fits/843776steps. No forecast, registered map or radio rights; no new whole-policy recipe.
+Full Pro recommends A+B; focused independent review's K conditioning objection is adopted prospectively (K actor lr3e-3, D actor/both critics3e-4), not a tuning sweep or pure state-information causal claim.
+Both execute through actual local admission; no wsl_4070 request, no relay C++ or peer-owned paths. G0's accepted operation is unchanged.
+This supersedes the earlier unselected-calibration notice and identifies the comparison boundary while you select your successor; it does not allocate or veto your work. No reply needed unless a concrete overlap/shared writer conflict appears.
