@@ -639,3 +639,174 @@ remaining learning question, not because B01 ended or a slot is available. The D
 owns prospective exact design/implementation/admission if this selected investment
 continues; no routine per-fit Root acknowledgment is required. The direction stays
 exploring with this next investment, not idle with a fabricated outside dependency.
+
+## 2026-09-29 - B02 Same-History Full-Control Prospective Binding
+
+Root received the B01 boundary, accepted the explicit handoff of only this DM's
+three disjoint RESEARCH hunks during its concurrent shared-file publication, and
+requested continued concrete design/execution within the original question. B01
+owned evidence was published at1ff778810. This is continuation of the selected
+learning question under the completed independent review, not a new direction,
+restarted B01, checkpoint rescue, or per-fit Root approval. B01 is closed; B02 is
+the sole active result-bearing study. Current background/decision is the B01
+reading above plus the published B05 result; no premise now diagnoses forgetting.
+
+### Fixed Comparison and Information
+
+Train three independently initialized full categorical policies L with masters
+291021,291022,291023. Each fit has512 complete N5/S1 H256 episodes; block index
+b=0,1,2 uses reset seeds29110000+1000*b+episode (episode0..511). Independent
+parameter seed100000*master+11 and action-generator seed100000*master+29.
+Evaluation uses32 fresh common worlds29102000..29102031, disjoint from B01 and
+training. Evaluate the fixed B01 C/H programs once each, then for each master
+evaluate its initialization L0, train all512 episodes, evaluate its sole final L1.
+No panel-dependent checkpoint, training exposure, decoding, seed or arm selection.
+Ordinary world order alternates C/H and H/C as B01. Deterministic learned argmax
+deployment has the same ordered27 commands and4-primitive-step commitments; training
+samples categorical commands at that cadence. This is a complete policy, not a
+bounded residual around ordinary H or an inherited actor.
+
+Each learned UAV ingests only its own104-feature observation on every primitive
+step. It reuses B01's exact lawful .01m/64-point/LRU geometry association (no IDs),
+including the same last-seen and current-mask state. Point input has seven fields:
+absolute worldXY/1000, relativeXY/1000, age/256, current flag and current normalized
+SINR (zero when absent). The SINR is rebuilt from current rows at every ingest,
+never retained across absence. Padding has an explicit valid mask. Actor context
+is the current104 features plus its own last executed command (3), including the
+native time feature. No privileged state, team cache, peer track, past SINR, learned
+recurrent state, message or action feedback from another UAV enters the actor.
+Terminal observations are retained but not ingested after the last action.
+
+Ordinary C/H remain byte-unchanged B01 control programs: their last-command and
+fixed-waypoint navigation index are internal program state; H retains exactly the
+same lawful geometry/age/current mask. L has no persistent navigation index or
+recurrent navigation memory beyond its stated inputs. This explicitly favors
+ordinary control's existing navigation knowledge rather than silently adding actor
+history. Same history means the matched added geometry information, not identical
+internal representations or algorithmic knowledge. Both C/H are reported; beating
+H alone while trailing C is not useful superiority over the available alternatives.
+
+Actor: shared point encoder7->64 tanh->64 tanh, masked mean and max pooling
+(empty set gives zeros), concatenated with107 current/last-command features;
+MLP235->128 tanh->64 tanh->27 logits. No shared gradient with the critic. Native
+central state116 normalized by the existing `critic_features` helper plus five
+last-command/zero-remaining rows gives136 critic inputs; reuse the existing
+136->128 tanh->128 tanh->1 Critic. True current users/UAVs are CTDE-only training
+information, never actor inputs or synthetic future labels. The critic need not
+observe actor-cache history for the complete-return baseline to remain lawful;
+it is a function approximation, not a sufficient-state claim.
+
+### Training, Endpoints and Outcome Branches
+
+Collect two complete episodes per rollout:128 macro clocks/640 actor decisions.
+Gamma1 full Monte Carlo return with no terminal bootstrap; critic predicts returns
+divided by256 as a fixed numerical parameterization, while raw native rewards and
+all reported objectives remain unchanged. Advantages use these normalized returns
+minus collected critic values, standardized across rollout episode/time with
+population SD+1e-8 and shared across the five actors. Four full-rollout PPO epochs,
+per-agent categorical likelihood ratios clipped[.8,1.2], summed-agent surrogate
+averaged over episode/time; entropy coefficient.01 on summed categorical entropy.
+Separate Adam actor/critic at3e-4, betas(.9,.999), eps1e-8, zero decay, separate
+global gradient clipping.5; critic objective .5*MSE. Use the existing project
+`returns_to_go` and `clipped_policy_loss` functions. CPU FP32 Torch, one intra-op,
+inter-op and BLAS thread. No early stopping, imitation pretraining or online
+evaluation updates. Initial and final actor/critic checkpoints retained.
+
+Primary reading: full native J and mean service, each L1-L0, L1-H and L1-C on the
+same world panel, then three independent training-instance means (not96 independent
+training replicates). Preserve component quality/coverage, every world and seed,
+minimum/low service, zero-service ticks, actual motion/boundaries and all adverse
+tails. Three training instances permit a recurrence check with very wide df2
+intervals; no guarantee of confirmation precision. Record cache/legal exposure,
+action distributions, entropy, held/clipped actions, gradient norms, approximate
+KL/clipping, parameter displacement and actual training/update counts. Evaluation
+also computes a nonmutating current-only cache-input shadow on the learned
+trajectory; report changed logits/argmax and clipped4-step motion only as input
+sensitivity, not retention causality or another policy evaluation.
+
+Constructive prediction: experience learns useful complete consequences despite
+ordinary local-model approximations, improving L1 over its initialization and both
+competent ordinary controls on native J/service. L1>L0 alone is learning in the
+tested instances, not useful ordinary advantage. Any H/C advantage or mixed seed
+signs remain real alternatives; active updates/input sensitivity without complete
+gain constrain this finite recipe. A positive L1 does not attribute improvement to
+retention because no learned-no-history arm is present. No GRU-forgetting, optimal
+information value or pure coordination-mechanism claim. Preserve valid evidence
+on technical failure, mark incomplete and stop the fixed operation; no automatic
+retry, fourth fit, encoder/optimizer/horizon repair or more worlds follows closure.
+
+### Dominant Cost and L0
+
+3fits x512 x256 =393,216 training steps. Eight programs/endpoints x32 x256 =65,536
+evaluation steps, total458,752;1,536 training plus256 evaluation episodes. There
+are768 two-episode rollouts,3,072 actor and3,072 critic optimizer calls (6,144total),
+491,520 training agent decisions and1,966,080 replayed actor rows. Learned evaluation
+has61,440 actor rows plus61,440 diagnostic shadow rows; ordinary evaluation has
+20,480 search decisions/552,960 trajectories/2,211,840 model ticks and1,105,920 H
+shadow reductions. Count actual link/cache/forward work and process wall/CPU/RSS.
+There are no live counterfactual environment calls. B01.008271CPUh and all support
+remain cumulative; B05 cost is an analogy, not this direction's exposure.
+
+Prefer wsl_4070 if its source/control fetch and real-node admission are healthy;
+otherwise the local_linux configured CPU interpreter is the prospective fallback
+before acceptance. Exactly one worker runs all three fits serially; no GPU,
+parallel fits or remote control mutation. Existing workers/claims remain intact.
+Planning.5-2CPUh plus4-8 engineering hours remains uncertain (.263CPUh naive B05
+rate analogy). Reuse current components instead of cloning another learner.
+Per-episode/update diagnostics and six checkpoints are durable bulk; full raw
+evaluation trajectories retain actor inputs, commands and native consequences.
+Compact config/per-world/fit summaries and source/native operation identities go
+to Git. No scientific pilot or learner fit occurs during code checks.
+
+L0: direction-owned `b02/inputs.py` observation-only cache wrapper, `model.py`
+set actor/reused critic, `update.py` fixed categorical PPO, `study.py` complete
+collection/training/final evaluation, `run.py` admission-first entry, mirrored
+tests and offline reader. DM owns inputs/collector/entry/records; bounded
+Implementer owns only model/update and its focused test. Existing B01 and shared
+code stay unchanged. Independent engineering review covers likelihood, temporal
+alignment, initialization/action/evaluation RNG, actor/critic information boundary,
+update counts and complete result/admission contract before source acceptance.
+
+### B02 Implementation Acceptance and Host Binding
+
+DM read and accepts the Implementer's model/update diff and tests, then the
+integrated inputs/collector/entry. The registered independent engineering Reviewer
+`/root/dm_local_history/b01_engineering_review` found one P2: reused ordinary
+collection counted partial successful steps globally but not in the evaluation
+phase if it then raised. The DM fixed only the B02 wrapper: actual step delta is
+accounted in `finally`, while completed episodes stay success-only; frozen B01 was
+not edited. Injected-failure regression now establishes3successful evaluation
+steps/4attempted calls,0training and no retry. No material finding remains.
+
+Reviewed: actor/critic information separation, no retained SINR, cache mapping,
+four-step macro alignment, categorical density and summed-agent PPO, normalized
+complete-return targets, separate gradients/optimizers, independent initialization
+and action RNG, initial/final identities, exact panel indexing, nonmutating shadow,
+admission ordering, collision refusal and exposure accounting. The complete B02
+suite has11passing tests (DM6.32s, independent5.45s); the4affected collector tests
+pass5.12s after repair and the Reviewer reran the failure test successfully.
+These include synthetic fixture collection/update, not a scored native pilot or
+admission handshake. The later offline reader is not part of that engineering
+acceptance; it will independently check hashes, all native outcomes/holds, exact
+lawful input reconstruction and six checkpoint decisions after completion, with
+native J tolerance1e-12 and same-host logits/logp tolerance2e-6, reporting exact
+argmax agreement separately. It adds no environment or optimizer call.
+
+Accepted executable SHA256 values:
+
+- inputs.py:8a1e4eb7cb989d1fa65f9827b8a51168d86b6109f6b8494f12ad7a266f08947e
+- model.py:8b72f22bfbc122e215fa44c34344cf584f051bbbc5f01138410a939e4c56c228
+- update.py:efb16726ee1bd6e85c8384d86b32048b9ffd807e79506d2957a26598ca381856
+- study.py:cc3aecdfdca50588c650e7342219fdfae6e7ac8df62fbf3241d2eb40aea2f01c
+- run.py:d07e6edaeaf155570257bc2dbcb42cb82da1a233f3a16524e8e5164e4becb567
+
+At15:12UTC the actual preferred wsl_4070 node was idle with14,898MiB available
+and20logical CPUs, but a bounded fresh `curl -I https://github.com` again failed
+SSL connection after5s. No remote result request, claim, worker, configuration or
+canonical-control mutation was made. Bind the already declared local_linux
+fallback before acceptance:16logical CPUs,8,770MiB available, load5.00 at15:13UTC,
+configured `/home/fires/.venvs/hmasd-linux-cpu/bin/python`, one CPU worker/thread.
+The kernel's fresh actual-node memory/source/pause/lead/duplicate checks still
+determine admission. Exact output tag `b02_same_history_a01`, first CLI seed291021;
+no change to the fixed exposure or scientific program. Root has the concrete host
+facts; no additional approval gate is introduced.
