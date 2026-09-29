@@ -1,0 +1,133 @@
+{
+  "launch_sha": "db5b9635850df204673871d4feb32e663ed8e5fd",
+  "arms": [
+    "R",
+    "S",
+    "T"
+  ],
+  "seeds": [
+    29306000,
+    29306001,
+    29306002,
+    29306003,
+    29306004,
+    29306005,
+    29306006,
+    29306007,
+    29306008,
+    29306009,
+    29306010,
+    29306011,
+    29306012,
+    29306013,
+    29306014,
+    29306015,
+    29306016,
+    29306017,
+    29306018,
+    29306019,
+    29306020,
+    29306021,
+    29306022,
+    29306023,
+    29306024,
+    29306025,
+    29306026,
+    29306027,
+    29306028,
+    29306029,
+    29306030,
+    29306031,
+    29306032,
+    29306033,
+    29306034,
+    29306035,
+    29306036,
+    29306037,
+    29306038,
+    29306039,
+    29306040,
+    29306041,
+    29306042,
+    29306043,
+    29306044,
+    29306045,
+    29306046,
+    29306047,
+    29306048,
+    29306049,
+    29306050,
+    29306051,
+    29306052,
+    29306053,
+    29306054,
+    29306055,
+    29306056,
+    29306057,
+    29306058,
+    29306059,
+    29306060,
+    29306061,
+    29306062,
+    29306063
+  ],
+  "horizon": 256,
+  "arm_orders": [
+    [
+      "R",
+      "S",
+      "T"
+    ],
+    [
+      "S",
+      "T",
+      "R"
+    ],
+    [
+      "T",
+      "R",
+      "S"
+    ],
+    [
+      "R",
+      "T",
+      "S"
+    ],
+    [
+      "T",
+      "S",
+      "R"
+    ],
+    [
+      "S",
+      "R",
+      "T"
+    ]
+  ],
+  "order": "world index modulo six; balanced interleaved",
+  "node": "local_linux",
+  "compute_threads": 1,
+  "cpu_limit_seconds": 10800.0,
+  "planned_fits": 0,
+  "planned_episodes": 192,
+  "planned_steps": 49152,
+  "host": "N5 U50 static uniform free_space no-shadowing non-FDMA 3dB cap10",
+  "motion": "retained C(history=False); R B01 clock, S/T four-step delayed commitments",
+  "map_bytes": 400,
+  "report_bytes": 24,
+  "command_bytes": 16,
+  "link_bits_per_second": 2000,
+  "max_recurring_bytes": {
+    "R": 8704,
+    "S": 8568,
+    "T": 8568
+  },
+  "deadline_seconds": {
+    "R": 0.456,
+    "S": 3.456,
+    "T": 3.456
+  },
+  "score": "S/T: J,service,preserve Cq,more active,increasing mask,increasing COMMANDS index",
+  "R_score": "unchanged B01 J,service,more active,increasing mask",
+  "cpu_scope": "native worker process lifetime including imports/init/search/collection/output"
+}

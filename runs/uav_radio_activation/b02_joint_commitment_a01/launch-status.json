@@ -1,0 +1,11 @@
+{
+  "claim_key": "4622af5e2060b298b48fa553fb34fcbb1819cfca6ca1deb295382930ba2adea5",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4622af5e2060b298b48fa553fb34fcbb1819cfca6ca1deb295382930ba2adea5.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4622af5e2060b298b48fa553fb34fcbb1819cfca6ca1deb295382930ba2adea5.json",
+  "pid": 3701710,
+  "runner_pid": 3701711,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-29T18:31:10.179492Z"
+}

@@ -1,0 +1,21 @@
+{
+  "assessed_at": "2026-09-29T18:31:10.131933Z",
+  "available_physical_bytes": 8566013952,
+  "captured_at": "2026-09-29T18:31:10.131353Z",
+  "cgroup_headroom_bytes": null,
+  "cgroup_memory_current_bytes": null,
+  "cgroup_memory_max_bytes": null,
+  "claim_key": "4622af5e2060b298b48fa553fb34fcbb1819cfca6ca1deb295382930ba2adea5",
+  "direction": "uav_radio_activation",
+  "effective_available_bytes": 8566013952,
+  "effective_floor_pass": true,
+  "failure_reasons": [],
+  "measurement_source": "/proc/meminfo",
+  "minimum_available_bytes": 4294967296,
+  "node": "local_linux",
+  "passed": true,
+  "physical_floor_pass": true,
+  "preflight_id": "resource_76a9ea45e3e840108ea7e09c4f367c93",
+  "schema_version": 1,
+  "sha": "db5b9635850df204673871d4feb32e663ed8e5fd"
+}

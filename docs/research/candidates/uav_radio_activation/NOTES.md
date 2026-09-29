@@ -797,3 +797,354 @@ conversation inheritance, returned:
 DM accepts the diff and coverage. No scientific contract changed and no fresh
 panel seed was exercised. Publish exact inputs then launch once through native
 admission; any refusal/uncertain acceptance is reconciled at the same request.
+
+### Accepted B02 Operation
+
+Exact reviewed inputs published at `db5b9635850df204673871d4feb32e663ed8e5fd`.
+Native launch accepted2026-09-29T18:31:10.167269Z on configured local_linux;
+the [original manifest](../../../../runs/uav_radio_activation/b02_joint_commitment_a01/launch-manifest.json)
+binds source snapshot, command, processes and output. Fresh actual-node
+physical/effective available8,566,013,952bytes passed the4,294,967,296floor.
+No node migration, extra arm or duplicate request. The fixed192episodes/0fits
+and three-CPU-hour native-worker ceiling are unchanged.
+
+Detached `hmasd_wait` uses this child's actual runtime
+`01a0ee5c-3ec0-73c0-9937-a829cb1d4969`, private B02 request in direction scratch,
+30s probes and1500s checkpoints against the original manifest/output handle.
+Keep the child turn active through same-handle drain/rearm and full reading;
+registration alone does not establish future queue delivery to a native child.
+
+Generation1 checkpoint `ebe3f0c9d7397378618fb27c` (wake
+`38b9a43c-ba6c-42d1-bd3b-4da1142db1fa`) observed the original runner and
+supervisor still running. Latest printed exposure was112completeepisodes /
+28,672steps /1498.196CPU-s. Queue delivery returned code-32600, `direct
+app-server input is not allowed for unloaded spawned sub-agents`; the active
+child drained and rearmed that same operation into generation2. The deterministic
+in-turn wait reads only the existing observer's pending-event state. No worker
+restart, address rebinding, outcome reading or scope/ceiling change occurred.
+
+## 2026-09-29 - B02 Complete Reading
+
+### Complete Native Exposure and Reconstruction
+
+The original worker completed all192episodes /49,152native steps /0fits or
+optimizer updates and exited0; both recorded native process identities were
+absent at the19:14:08.497056Z terminal observation. Generation2 READY event
+`bb8ec644c17892ad48474d16`, wake `691740ac-cc52-4a78-be9d-f7a91d23697f`, again
+received the unloaded-native-child queue error. This still-active DM drained
+the same operation, consumed the event through generation3, then stopped
+observation. Both events are consumed, wake is null, stopped is true and the
+observer PID is absent. No accepted work was restarted or rebound. The compact
+[observer record](../../../../runs/uav_radio_activation/b02_joint_commitment_a01/observer-terminal.json)
+preserves checkpoint, terminal facts, delivery failures and stop separately.
+
+The [complete summary](../../../../runs/uav_radio_activation/b02_joint_commitment_a01/summary.json)
+has SHA256 `9a630e63ccd00e3177f133aa759a44475e0a55729c707a9b4fd42eb3995022de`.
+Its192per-arm/world rows retain every positive and adverse world, raw locator,
+byte count and digest. One canonical evidence copy remains on local_linux at
+`/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/raw/`:
+90,743,452content bytes /91,136,000allocated bytes. No extra scientific panel,
+partial-prefix inference, outcome exclusion or seed replacement occurred.
+
+The exact published source snapshot reader exited0 after all192rows and wrote
+[VERIFIED_COMPLETE reading](../../../../runs/uav_radio_activation/b02_joint_commitment_a01/reading.json).
+It verified all192raw hashes, complete paired initial worlds/maps, every native
+motion/radio/reward/observation, C decisions and navigation updates, actual
+commands, arrivals, commitments, deadlines/traffic and endpoint/paired metrics.
+Maximum reconstructed native J error5.5511e-17; native SINR and observation
+errors0. R's original complete candidate verification was retained. S/T matrix
+choice was reconstructed for all rounds; the prospectively fixed physics
+subset checked11,248S and15,305T candidate pairs. This does not claim exhaustive
+independent physics recomputation of every T candidate or new environment
+steps. All full endpoints include the initial four all-on S/T transitions.
+
+### Complete Package Results
+
+J is mean native reward, `.7 * served / 50 + .3 * quality`; service is users
+served per step. Descriptive paired t95 intervals use64reset worlds, not
+training seeds or independent host-load replications. This is exploratory,
+without a new confirmation claim or a multiplicity-adjusted guarantee.
+
+| Contrast | Mean Delta J [t95] | J Win/Loss | Mean Delta Service [t95] | Service Win/Loss |
+|---|---:|---:|---:|---:|
+| S-R | -.01350614 [-.02005700,-.00695529] |19/45| -.51043701 [-1.05729476,+.03642074] |23/41|
+| T-R | -.00933808 [-.01650084,-.00217533] |17/47| -.15545654 [-.77228698,+.46137390] |26/38|
+| T-S | +.00416806 [+.00045349,+.00788263] |42/22| +.35498047 [+.05005623,+.65990470] |44/20|
+
+T has39worlds with both J and service higher than S and25with at least one
+loss. All17T-R J gains also gain service; all47remaining worlds lose at least
+J. S has19joint gains and45worlds with at least one loss against R. Service
+intervals crossing zero do not establish equivalence; the declared positive
+T-S increment does not establish T dominance or T-R replacement.
+
+| Complete Mean/Endpoint | R | S | T |
+|---|---:|---:|---:|
+| Native J |.47066807|.45716193|.46132999|
+| Served users/step |28.875000|28.364563|28.719543|
+| Quality |.22139356|.20019348|.19752126|
+| Mean within-world service p10 |27.546875|25.757813|26.250000|
+| Mean within-world service minimum |12.125000|11.843750|11.828125|
+| Absolute minimum service |2|1|1|
+| Zero-service steps / longest outage |0/0|0/0|0/0|
+| Path m/UAV |2466.960|7471.535|7479.787|
+| XY-boundary UAV-ticks, total |559|7619|7451|
+| Lower-altitude UAV-ticks, total |81539|81417|81352|
+
+T-S quality -.00267223 [-.00586703,+.00052258],26wins/38losses. T-R quality
+-.02387231 [-.03187583,-.01586879],15wins/49losses. By the exact reward identity,
+T-R's service term contributes -.00217639 and quality term -.00716169 to the
+J difference; this is an arithmetic partition, not a causal explanation.
+S-R quality -.02120008 [-.02827071,-.01412945],13wins/51losses.
+
+T-S p10 +.492188 [-.115410,+1.099785],21wins/11losses/32ties, while T-R p10
+-1.296875 [-1.904565,-.689185],9wins/45losses/10ties. S-R p10 -1.789063
+[-2.439302,-1.138823],8wins/45losses/11ties. T-R minimum service declines in
+14worlds and S-R in13, with no improvements; T-S has one minimum loss in
+29306057 and63ties. Zero outages do not establish safety. T-R path increases
+5012.827m/UAV [4611.029,5414.625] in all64worlds; S-R increases5004.575 in63.
+T-S's8.252m difference [-173.135,189.639] does not establish path equivalence.
+The host has no energy model; these are motion costs, not battery conclusions.
+
+All adverse worlds remain in the linked complete rows. Named witnesses:
+
+| World | Contrast | Delta J | Delta Service | Delta p10 |
+|---|---|---:|---:|---:|
+|29306018|T-R|-.08950261|-6.261719|-4|
+|29306020|T-R|-.05702710|-4.917969|-7|
+|29306019|T-R|-.05481437|-4.523438|-3|
+|29306018|T-S|-.02990433|-2.226563|-1|
+|29306017|T-S|-.02391496|-1.945313|-3.5|
+|29306021|T-S|-.02019395|-1.882813|-1|
+|29306062|T-S|+.08188878|+6.949219|+17|
+|29306062|T-R|+.08249951|+7.789063|+8|
+|29306010|T-R|+.05999486|+5.199219|+3|
+|29306017|T-R|+.04208386|+3.292969|0|
+
+World62's large positive contribution is retained, not trimmed to change the
+estimand. S-R worst J is29306018 (-.05959828/-4.035156service); worst service
+is29306020 (-.05556977J/-4.726563service). Fresh29306038 is not the inherited
+B01 world29305038. This study neither repeats nor repairs that earlier adverse
+world; B01 positives and losses remain cumulative evidence under its own clock.
+
+### Decisions, Forecasts and Feedback
+
+S/T actually edited2,206/2,608selected-member C proposals; all of those edits
+changed executed displacement, with0clipping aliases against the proposal.
+Selected-member silent-to-active transitions were323/727. C empty-discovery
+fallback decisions were6,694R /7,186S /6,798T, of20,480/20,160/20,160decisions;
+S/T fallback here describes the internal C proposal, not automatic execution.
+Mean visible-user rows were6.2891/6.2673/6.2863, peer rows.10007/.10144/.08953.
+Mean active transmitters3.37506/3.24609/3.34277; total mask flips1,747/2,643/3,415.
+Silence/discovery/flight feedback is active, not removed by the planning model.
+
+On T's4,032visited report states, its recorded full matrix gives mean T-minus-S
+shadow J +.001243340 and service +.126240079. The chosen pair differs in583rounds
+and the selected member's executed displacement in566. In419rounds the selected
+member is currently silent, the best sequential pair keeps it silent, while T
+changes its C proposal and activates it with strictly higher predicted J. This
+is active decision exposure for the constructive conjecture. The shadow is on
+T's states and cannot be substituted for the complete S trajectories; the419
+cases do not establish causal mediation of the complete T-S mean.
+
+Committed-position prediction errors remain below.667214m. Mean errors at
+offsets+5/+6/+7/+8 are S .240410/.239763/.238850/.237962m and
+T .236992/.236283/.235328/.234348m; remaining packet quantization and threshold
+effects are retained. R's corresponding declared offsets+2/+3/+4/+5 have
+means.374359/.373790/.373545/14.450536m, maximum+5error85.527816m. Different
+rights/clocks/horizons mean this is not a calibration-causality comparison.
+Mean signed native-minus-predicted J at+5..8 is S
+(-.00004068,-.00006706,-.00006441,-.00002616), T
+(-.00005188,-.00001569,-.00002527,-.00008410); largest absolute errors are
+.02530979S and.01302387T. Accurate blocks coexist with complete package losses.
+Actual report ages average2.494ticks/max4 for R,5.5/max7 for S/T.
+
+### Resource and Support Accounting
+
+Native collection:2574.771866s wall,2571.774026user +1.851923system =
+2573.625949CPU-s (.714896CPUh),132,408KiB worker-lifetime peak RSS. It remained
+below the prospective3CPUh ceiling, on one configured thread, with no resource
+truncation. There were0deadline misses in every arm. Maximum measured planner
+wall times were.043384074R / .150891513S / .899728403T seconds, against
+.456/3.456/3.456s windows. This is observed load-conditional feasibility, not
+hardware certification, a latency guarantee, or a host replication.
+
+| Actual Work or Cost | R | S | T |
+|---|---:|---:|---:|
+| Algorithmic candidate requests |126976|467712|3374784|
+| Unique scored candidate pairs |126976|334389|3374784|
+| Mask-state reductions |505920|1337556|13499136|
+| Scored geometries |16320|435456|435456|
+| Prefix prediction ticks |0|16128|16128|
+| C decisions |20480|20160|20160|
+| Planner CPU-s |84.558282|254.626336|2167.939028|
+| C CPU-s, S/T already inside planner |9.766873|7.146803|7.054420|
+| Sum complete-episode CPU-s |111.066612|272.852638|2187.392580|
+| Recurring bytes/episode |8704|8568|8568|
+
+Each episode also carries400static-map bytes. Total3,969,472candidate requests,
+3,836,149unique scores,15,342,612mask-state reductions,887,232geometries,
+32,256prefix ticks and60,800C decisions, with1,641,600C trajectories and
+6,566,400C model ticks. Cached S duplicate requests explain reductions below
+the15,875,904upper bound; there was no reduced native exposure. T-S adds about
+29.915complete-episode CPU-s per world. No artificial compute penalty is added
+to native J, and R's C cost is not hidden in its scheduler timing.
+
+Complete reconstruction is separate support work: inner reader935.325617s wall /
+935.064555CPU-s; whole reader process935.90s wall,915.27user +20.29system =
+935.56CPU-s,102,800KiB lifetime peak RSS, exit0. Native-plus-whole-reader B02
+cost is.974774CPUh. Including inherited B01's.325752 gives about1.300526CPUh
+for the two batches' collection/readers,98,304native steps and0fits. This excludes
+unmetered adviser/engineering work and is not a complete labor/compute bill.
+The published registration18:11:38Z to exact-input publication18:30:25Z interval
+is18m47s elapsed preparation/review wall time, with parallel helper work; it is
+not additive agent-hours or human labor. Focused test times and independent
+checks are recorded above. The prospective12-24supporthour conjecture was not
+a measured quantity; aggregate other support remains incompletely metered.
+
+### Independent Scientific Diagnosis
+
+Registered ResearchCritic `/root/dm_radio_joint_control/result_diagnosis`
+worked in a separate context without DM/Root conversation inheritance. It
+received original source/config/manifest/results, B01 supporting/adverse records,
+the complete adopted Pro/review archive and current background, with the actual
+question rather than the DM's preferred interpretation. Its substantive final
+return follows; its change from its own provisional stop preference is preserved.
+
+> Recommend revise through one prospective two-tick-delivery comparison.
+> Retain R as the current complete-package reference and close frozen B02 with
+> its adverse result intact. Preserve T's conditional increment over S. My
+> earlier preference for no further purchase was provisional; the complete
+> exposure and timing evidence support this specific continuation.
+>
+> I received no DM/Root conversation history. I reconstructed original outputs
+> and consequential raw evidence before reading the full Pro answer, selection
+> corrections and Root disposition. Complete B02 gives T-S J +.004168
+> [.000453,.007883], service +.354980 [.050056,.659905]; T-R J -.009338
+> [-.016501,-.002175], service -.155457 [-.772287,.461374]; S-R J -.013506
+> [-.020057,-.006955], service -.510437 [-1.057295,.036421]. These are64paired
+> reset-world comparisons, conditional on observed host/deadlines, with zero
+> training inference. T-S improves J in42worlds and service in44. T-R loses J
+> in47worlds. T's mean service p10 is1.297users below R, with45adverse worlds;
+> mean path rises from approximately2467 to7480m/UAV. No arm has zero-service
+> ticks. Paths are movement costs, not measured battery consumption.
+>
+> The selection hypothesis has a substantive positive. On T's4032visited report
+> states, joint search has583strict predicted-J advantages over both-order S,
+> occurring in every world. There are566displacement differences and419silent
+> move/reactivate strict advantages. Shadows remain conditional on T's states.
+>
+> A direct native witness strengthens that interpretation. In29306018, S/T
+> share the same prefix until transition36. At report32, S leaves member3
+> silent; T changes its motion and activates it. The first affected native
+> block gains.0022395J and.25users/tick, closely matching the predicted J
+> increment. Nevertheless, complete T-S is-.0299043. Joint opportunity exists
+> and is executed, while local improvement can lead to a worse trajectory.
+>
+> The strongest simpler explanation is ordinary finite optimization under a
+> changed control contract. S already uses coordinated full-team scoring; T
+> purchases larger search and about29.915additional episode CPU seconds.
+> This establishes neither a special coordination mechanism, necessity of
+> exhaustive search, nor learning value. S/T's approximately.24m block-position
+> errors coexist with worse complete performance than R. Accurate committed-
+> block prediction is insufficient. Stale proposals and later trajectory
+> consequences remain plausible causes, but B02 does not separate them. My
+> post hoc partition finds startup contributes only-.001736 of T-R's-.009338J
+> difference; the loss persists afterward.
+>
+> The strongest consequential objection to stopping new investment now is
+> concrete: the interaction is active, its complete matched-contract increment
+> survives, and measured computation does not require four-tick delivery.
+> T's maximum observed planner wall.899728s plus declared.544s airtime gives
+> 1.443728s. This supports exploring two-tick delivery on the observed host,
+> neither a deadline guarantee nor hardware replication.
+>
+> The smallest worthwhile continuation is R/S2/T2 on64fresh common worlds,
+> retaining native H256. R keeps its original contract. S2/T2 share two-tick
+> delivery, four-tick command holds, identical information and1.456s complete
+> computation deadlines. Reports0,4,...252; predict two actual committed ticks,
+> then score the following execution block. Report252 arrives254 and scores
+> only the remaining transitions, at positions255and256. Preserve every
+> startup/terminal transition. Retain both sequential orders, all837T pairs,
+> atomic deadline fallback and complete J/service/tail/cost reading. This is
+> new exploration, not a B02 retrofit or pure latency-causality inference.
+>
+> This changes a real judgment beyond repeating T-S: can demonstrated
+> interaction become useful against R in a more responsive contract? Useful
+> T2 gains over S2 and R support a new conditional capability. S2 beating R
+> without earned T2 increment favors simpler composition. Continued R
+> deficits, unacceptable tradeoffs or failed timely execution weaken this
+> concrete continuation and support stopping it. Uncertainty establishes
+> neither equivalence nor an automatic purchase of another clock.
+>
+> Proposed exposure192episodes/49152native steps/0fits; upper4030464candidate
+> scores and15997888mask-state reductions. S2/T2 each8704recurring bytes plus
+> separate400byte map. B02 collection-plus-reader approximately.975CPUh is an
+> anchor, not forecast or bound. Collection2573.626CPU-s, reader approximately
+> 935.56; inherited B01+B02 approximately1.301CPUh excludes incompletely
+> metered support. New arrival ordering, terminal handling, reader changes
+> and engineering checks require work whose labor cost remains unknown.
+>
+> I independently checked executed-source semantics, manifest/config bindings,
+> twelve B02 raw files covering supportive/adverse/typical cases, six B01 raws,
+> matched prefixes, reward components, tails and paths. I also checked all T
+> recorded-score gaps and the post hoc reward partition. The completed reader
+> verifies all192raw identities, native endpoints, observations, C proposals,
+> commitments and selections; I verified its summary hash and bindings. Its
+> physics coverage is the declared subset, not every candidate. Prior scalar/
+> kernel checks remain applicable. Platform variability, physical positioning/
+> link costs and learning generalization remain unverified.
+>
+> Return the proposed continuation to Root at this one-study boundary. This
+> review authorizes no launch or source change. MATERIAL_DISSENT: yes,
+> relative to provisional no-new-investment. The disagreement concerns
+> purchasing the specified two-tick comparison, not retaining R, closing
+> frozen B02, or publishing reserve status pending Root's choice.
+
+### DM Interpretation and Next Investment
+
+Accept the full B02 verdict and revise the provisional no-new-investment
+preference in response to the complete independent reading. The constructive
+silent-member opportunity is real and executed, and T earns a positive
+complete J/service increment over the competent, already coordinated S. It
+does not extend the retained R capability under this four-tick contract.
+Neither a weak comparator nor unexpressed joint choices explain away that
+split result. R remains the reference for complete native usefulness; the
+new T/S asset is a retained conditional ordinary-control increment, not an
+adopted replacement, learner result or proof of necessary joint search.
+
+The native29306018 witness is especially discriminating: at report32/current
+mask19, S chooses(q2,mask7), keeping member3 silent; T chooses(q7,mask13), moving
+and reactivating it. Its first affected block36..39 gains.002239505J/.25users
+(predicted J gap.002230090), yet later endogenous trajectories lose overall.
+The post hoc full-panel arithmetic partition retains all256ticks: first4
+contribute-.001735996 and remaining252 contribute-.007602088 to T-R J.
+No startup omission, suffix re-estimand or causal latency attribution follows.
+Better block accuracy and positive local choices are insufficient; feedback,
+commitment timing and longer trajectory consequences remain coupled.
+
+There is a more specific next question than a blind larger panel or deeper
+search purchase. The observed .899728s planner maximum leaves room inside a
+1.456s window plus the same.544s link, so the critic's two-tick complete
+comparison has plausible decision value at roughly the measured B02 resource
+scale, without assuming it will win or be timely under future load. Its native
+prediction is that the more responsive package preserves useful T-over-S
+choices while improving complete T2-versus-R J/service; that prediction can
+fail even with accurate forecasts. The lower clock is not silently applied to
+B02, and a point maximum is not a prospective runtime upper bound.
+
+DM therefore returns the costed R/S2/T2 proposal to Root for the next allocation
+at this assigned one-study boundary, explicitly retaining the critic's
+MATERIAL_DISSENT against the earlier provisional stop preference. This accepts
+the recommendation to consider the specified continuation, not an additional
+launch or a scientific guarantee. Its final contract, fresh seeds, ceiling,
+engineering review and source/admission would belong to that new selection.
+No automatic tail repair, learner, deeper search, calibration/held-mask study
+or extra B02 panel is selected here. Cross-question changes remain Root-owned.
+
+B02 is now completely read with no active producer or unread result. The
+direction is reserve at publication, with the positive T-S capability and all
+R-relative costs retained. The actual next decision is Root's allocation of
+the proposed clock comparison versus a justified stop or another question;
+this is not a dependency for publishing or cleaning B02, nor a per-run approval
+gate. Preserve useful code/tests and the sole evidence copy, publish the shared
+background correction, and reclaim only reconciled snapshot/scratch/logs.

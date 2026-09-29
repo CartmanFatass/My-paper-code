@@ -1,0 +1,332 @@
+{
+  "checkpoint": {
+    "generation": 1,
+    "wake_id": "38b9a43c-ba6c-42d1-bd3b-4da1142db1fa",
+    "events": [
+      {
+        "id": "ebe3f0c9d7397378618fb27c",
+        "kind": "CHECKPOINT",
+        "evidence": {
+          "generation": 1,
+          "jobs": [
+            "launch-b02-joint-commitment-a01"
+          ]
+        },
+        "created": 1790708171.487845,
+        "consumed": false
+      }
+    ],
+    "jobs": {
+      "launch-b02-joint-commitment-a01": {
+        "spec": {
+          "id": "launch-b02-joint-commitment-a01",
+          "protocol": "launch",
+          "argv": [
+            "/home/fires/.venvs/hmasd-linux-science-tools/bin/python",
+            "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+            "status",
+            "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "interval": 30,
+          "timeout": 20
+        },
+        "status": "running",
+        "due": 1790708215.2119303,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/summary.json",
+              "state": "present"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4622af5e2060b298b48fa553fb34fcbb1819cfca6ca1deb295382930ba2adea5.json",
+          "direction": "uav_radio_activation",
+          "execution": {
+            "exit_witness": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/process-exit.json",
+              "state": "absent"
+            },
+            "runner": {
+              "observed_identity": {
+                "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                "kind": "linux_pid_start_ticks",
+                "pid": 3701711,
+                "session_id": 3701710,
+                "start_ticks": 14521465
+              },
+              "recorded_identity": {
+                "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                "kind": "linux_pid_start_ticks",
+                "pid": 3701711,
+                "session_id": 3701710,
+                "start_ticks": 14521465
+              },
+              "state": "running"
+            },
+            "state": "running",
+            "supervisor": {
+              "observed_identity": {
+                "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                "kind": "linux_pid_start_ticks",
+                "pid": 3701710,
+                "session_id": 3701710,
+                "start_ticks": 14521460
+              },
+              "recorded_identity": {
+                "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                "kind": "linux_pid_start_ticks",
+                "pid": 3701710,
+                "session_id": 3701710,
+                "start_ticks": 14521460
+              },
+              "state": "running"
+            }
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-09-29T18:56:25.021959Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4622af5e2060b298b48fa553fb34fcbb1819cfca6ca1deb295382930ba2adea5.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "db5b9635850df204673871d4feb32e663ed8e5fd",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4eeab042293b403b9a5aaeb2e2d89b52"
+        },
+        "observed": 1790708185.2119303
+      }
+    },
+    "delivery": {
+      "id": "38b9a43c-ba6c-42d1-bd3b-4da1142db1fa",
+      "status": "delivery_unknown",
+      "created": 1790708171.4914274,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+      "exposed_ids": [
+        "ebe3f0c9d7397378618fb27c"
+      ]
+    },
+    "stopped": false
+  },
+  "terminal": {
+    "generation": 2,
+    "wake_id": "691740ac-cc52-4a78-be9d-f7a91d23697f",
+    "events": [
+      {
+        "id": "bb8ec644c17892ad48474d16",
+        "kind": "READY",
+        "evidence": {
+          "job_id": "launch-b02-joint-commitment-a01",
+          "status": "ready",
+          "facts": {
+            "admission": {
+              "claim_state": "accepted",
+              "state": "accepted"
+            },
+            "artifacts": {
+              "stderr": {
+                "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/stderr.log",
+                "state": "present"
+              },
+              "stdout": {
+                "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/stdout.log",
+                "state": "present"
+              },
+              "summary": {
+                "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/summary.json",
+                "state": "present"
+              }
+            },
+            "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4622af5e2060b298b48fa553fb34fcbb1819cfca6ca1deb295382930ba2adea5.json",
+            "direction": "uav_radio_activation",
+            "execution": {
+              "exit_code": 0,
+              "exit_witness": {
+                "exit_code": 0,
+                "finished_at_epoch": 1790709245.184728,
+                "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/process-exit.json",
+                "state": "valid",
+                "termination": "process_exit"
+              },
+              "runner": {
+                "recorded_identity": {
+                  "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                  "kind": "linux_pid_start_ticks",
+                  "pid": 3701711,
+                  "session_id": 3701710,
+                  "start_ticks": 14521465
+                },
+                "state": "absent"
+              },
+              "state": "exited",
+              "supervisor": {
+                "recorded_identity": {
+                  "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                  "kind": "linux_pid_start_ticks",
+                  "pid": 3701710,
+                  "session_id": 3701710,
+                  "start_ticks": 14521460
+                },
+                "state": "absent"
+              }
+            },
+            "explicit_retry_available": false,
+            "kind": "hmasd_operation_status",
+            "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/launch-manifest.json",
+            "node": "local_linux",
+            "observed_at": "2026-09-29T19:14:08.497056Z",
+            "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4622af5e2060b298b48fa553fb34fcbb1819cfca6ca1deb295382930ba2adea5.json",
+            "output_root": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01",
+            "record_consistency": {
+              "mismatches": [],
+              "state": "consistent"
+            },
+            "schema_version": 1,
+            "sha": "db5b9635850df204673871d4feb32e663ed8e5fd",
+            "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4eeab042293b403b9a5aaeb2e2d89b52"
+          }
+        },
+        "created": 1790709248.6993418,
+        "consumed": false
+      }
+    ],
+    "jobs": {
+      "launch-b02-joint-commitment-a01": {
+        "spec": {
+          "id": "launch-b02-joint-commitment-a01",
+          "protocol": "launch",
+          "argv": [
+            "/home/fires/.venvs/hmasd-linux-science-tools/bin/python",
+            "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+            "status",
+            "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "interval": 30,
+          "timeout": 20
+        },
+        "status": "ready",
+        "due": 1790709278.6990001,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/summary.json",
+              "state": "present"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4622af5e2060b298b48fa553fb34fcbb1819cfca6ca1deb295382930ba2adea5.json",
+          "direction": "uav_radio_activation",
+          "execution": {
+            "exit_code": 0,
+            "exit_witness": {
+              "exit_code": 0,
+              "finished_at_epoch": 1790709245.184728,
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                "kind": "linux_pid_start_ticks",
+                "pid": 3701711,
+                "session_id": 3701710,
+                "start_ticks": 14521465
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                "kind": "linux_pid_start_ticks",
+                "pid": 3701710,
+                "session_id": 3701710,
+                "start_ticks": 14521460
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-09-29T19:14:08.497056Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/4622af5e2060b298b48fa553fb34fcbb1819cfca6ca1deb295382930ba2adea5.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b02_joint_commitment_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "db5b9635850df204673871d4feb32e663ed8e5fd",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/4eeab042293b403b9a5aaeb2e2d89b52"
+        },
+        "observed": 1790709248.6990001
+      }
+    },
+    "delivery": {
+      "id": "691740ac-cc52-4a78-be9d-f7a91d23697f",
+      "status": "delivery_unknown",
+      "created": 1790709248.702621,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+      "exposed_ids": [
+        "bb8ec644c17892ad48474d16"
+      ]
+    },
+    "stopped": false
+  },
+  "rearm": {
+    "generation": 3,
+    "pid": 3780370,
+    "window_seconds": 1500
+  },
+  "stop": {
+    "status": "observation_stop_requested",
+    "work_unchanged": true
+  },
+  "final_state": {
+    "generation": 3,
+    "all_events_consumed": true,
+    "wake": null,
+    "stopped": true,
+    "daemon_pid": 3780370,
+    "daemon_process_absent": true,
+    "runner_process_absent": true,
+    "supervisor_process_absent": true
+  }
+}
