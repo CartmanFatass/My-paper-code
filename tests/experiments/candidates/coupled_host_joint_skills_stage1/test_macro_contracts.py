@@ -417,8 +417,9 @@ def test_macro_spec_guards_and_cli_dispatch(tmp_path, monkeypatch):
                         "--continuous-action-distribution", "tanh_gaussian"]) == 0
     assert seen["spec"] == MacroFitSpec(contract="slot", continuous_action_distribution="tanh_gaussian")
     assert seen["probe"] and seen["arm"] == "H"
+    # Head flags in --contract step are accepted since b02 SET-V-b (DM edit 2026-09-29); a head that is
+    # not the declared b02 spec is a technical per-step spec (covered in test_contract_runner.py).
     for bad in (["--contract", "slot", "--area-size", "6000"],
-                ["--contract", "step", "--area-size", "5000", "--continuous-logstd-min", "-3"],
                 ["--contract", "target", "--area-size", "5000", "--smoke-no-admission"]):
         with pytest.raises(SystemExit):
             runner.main(["--arm", "H", "--seed", str(SEEDS["H"][0]), "--launch-sha", "abc", "--out",
