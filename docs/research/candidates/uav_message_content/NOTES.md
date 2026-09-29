@@ -1284,3 +1284,166 @@ and empty-directory removal completed the same validated targets. There is no
 remaining deletion blocker or leftover target. Required native bulk remains one
 durable node copy, and the pure reader remains usable without the deleted staging
 input or launcher source snapshots. No further study is selected or running.
+
+<a id="b03-frozen-assets-prospective"></a>
+## 2026-09-29 - B03 prospective: reuse four selected frozen assets on one new panel
+
+Root has now selected a new study at the B02 return boundary: include L19452 alongside
+the proposed O19452, B19451 and original uncontinued C. This is not an extension of
+frozen B02, an old-handle retry or restoration of an archived lead. The same current
+DM owns this newly selected question: **which already-paid complete asset is useful
+on a new deployment panel under the unchanged host/channel/action mode?** One fixed
+panel, no new fits, decoder changes, packet ablations or automatic second panel.
+
+Current published RESEARCH topics5/6/8 and B02 result `99291c8e6` directly inform this
+choice: initial-preservation/response evidence does not establish learned semantics;
+world variation of a fixed asset differs from continuation-training variation; free
+additional signals need not help a finite trained policy. B02's positive L sample
+means and strong ordinary assets are preserved. L19452 is selected because its B02
+endpoint has both the highest observed L J and service, not because it won an unseen
+world or because the learning recipe is established. B19451 and O19452 similarly
+come from observed B02 outcomes. All selection exposure is part of B03's estimand.
+
+This adds8192 steps to the earlier three-asset proposal and avoids discarding the
+favorable learned asset for lack of an algorithm-wide result. The existing independent
+final ResearchCritic is assigned a focused follow-up on this addition, the actual
+reuse estimand and the one decision rule below. It is not another portfolio review;
+material dissent returns to Root while independent preparation continues.
+
+### Bound assets, information and panel
+
+Canonical inputs on `wsl_4070`, all frozen in FP32 CPU evaluation, are:
+
+| Label | Source and canonical path relative to `/home/wu/projects/HMASD/` | SHA256 |
+| --- | --- | --- |
+| C | B01 `b2a422088`; `runs/uav_message_content/b01_s19431/C/final.pt` | `456832faaa94afb22cf3faa00bb97b0f129e2f5b72b2eedbb1148523b088cdad` |
+| B | B02 `02ede8a4a`; `runs/uav_message_content/b02_preserved_scalar/19451/B/final.pt` | `34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2` |
+| O | B02 `02ede8a4a`; `runs/uav_message_content/b02_preserved_scalar/19452/O/final.pt` | `90760a722081dec5442aeec85c9302ae3992dcfb96f0bf919aa81389815aa684` |
+| L | B02 `02ede8a4a`; `runs/uav_message_content/b02_preserved_scalar/19452/L/final.pt` | `c8df7428611608ae0c2786b6b9e395e8183d3b79b30fcdd197e4fcdc9c643f59` |
+
+Verify actual current bytes/metadata before binding launch; stage only these exact
+inputs as C.pt/B.pt/O.pt/L.pt in configured external-input root
+`/home/wu/hmasd-inputs/uav_message_content-b03/`. The admitted loader verifies each
+declared hash and strict actor state before native evaluation. The canonical files
+stay unchanged; these necessary small staging duplicates are deleted after reading.
+No optimizer/RNG/recurrent state is continued, and no new optimizer is constructed.
+No warm-start zeroing is performed: each actor/content tensor is the stored endpoint
+exactly, with parameter hashes checked before and after evaluation. Critic state can
+remain in the verified source file without a value forward, since it never enters
+sampled evaluation actions. There is no receiver or content-head adaptation.
+
+Use exactly the native BaseCADC N5/H256/50static-user host, reward
+`J_physical=.014*served_users+.3*Q`, fee.001/tick, and existing actor171-feature
+interface. RR sends one seven-float packet every tick, period5, delay1/5, channel
+flip.05, arrivals before action. C/B slot5 remains0; O keeps the frozen five-step
+anonymous sighting spread; L samples its retained scalar head. All other payload
+fields remain the original C convention. Preserve sampled motion and sampled L
+content, private motion/content generators, resets of GRU/channel/sighting history,
+the exact pre-action observation and packet order, and no hidden future/user-ID
+information. No deterministic action-mode substitution or diagnostic intervention.
+
+New invocation master19461; episode e=0..31 uses physical seed1946102000+e,
+channel1946107000+e, motion1946103000+e and content1946104000+e. The identical tuple
+is used for each frozen asset; this family is disjoint from B01 and B02. No scene or
+outcome at these seeds has been inspected. Fixed asset order C,B,O,L,32episodes each.
+Each episode owns fresh motion/content generators; construction RNG is isolated and
+cannot shift evaluation streams. Pairing is verified by scene/channel hashes and
+seed propagation, not seed labels alone. The fixed-asset world/protocol replicate is
+the deployment-sampling unit; it is not an independent training replication.
+
+### Proposed one-panel reading and cost
+
+Prospective endpoints are per-world/per-asset mean net/physical J, users/tick, Q,
+fee, transport counts and boundary/floor/ceiling fractions/mean height using the same
+pre-action convention. The host has no energy budget; these behavioral descriptors
+do not establish physical safety. Retain all128 complete raw trajectories and all
+six signed paired asset contrasts, including world-level adverse tails.
+
+The proposed deterministic exploratory reuse rule, subject to the focused review:
+C is the default. A B/O/L candidate is eligible only if its paired mean J and mean
+service differences versus C are both strictly positive. Among eligible candidates,
+choose highest mean J; exact ties use greater mean service, then fixed simplicity
+order C,B,O,L. Thus two assets can both improve C while trading J against service
+relative to one another; report that tradeoff rather than claim Pareto dominance.
+A mixed-sign candidate versus C is not eligible. If none is eligible, retain C.
+This selects a provisional conditional reuse asset once, not a generally superior
+training algorithm. Compute all nominal paired t95 df31 intervals as descriptive
+sampling uncertainty, uncorrected/not selection-adjusted; they are not an extra
+pass gate, zero-effect proof or more training seeds. No automatic new panel follows
+any positive, negative or mixed outcome. L winning would support this selected
+learned asset's complete use, not content semantics or recipe recurrence; an ordinary
+winner remains a constructive capability rather than a failed learned comparison.
+
+Full planned exposure:0 fits,4x32=128 episodes,32768 native team steps,163840
+motion samples,8192 L content samples,32768 sends and0 optimizer updates. Only
+actual deployed actor forwards are required; no ablation/extra sensitivity forward,
+search, planner, teacher, suffix replay or tuning is added. One CPU intra-op/inter-op/
+BLAS thread on the checkpoint node, subject to fresh actual-node admission. B02's
+blended rate scales to49.2s for these steps, a rough magnitude only; evaluation-only
+wall/import/build/readback and engineering are not measured yet. Record actual
+batch/per-asset wall, self CPU and process-lifetime RSS; no pricing pilot is required.
+
+Inherited selection cost remains B01+B02:12 fits,1769472 native steps,12288 updates,
+2649.747767s measured scientific wall and2647.095349s self CPU, plus incompletely
+measured engineering/readback. Completing B03 would yield12 cumulative fits,
+1802240 native steps and12288 updates, not new training evidence. All earlier
+checkpoints, positive/adverse continuations and no-causal-attribution limits remain.
+
+L0 for implementation after review resolution: narrowly recover only the necessary
+frozen policy/scalar/channel/evaluation behavior from source02ede8a4a into new
+`experiments/candidates/uav_message_content/b03/` and mirrored tests. Reuse current
+unchanged shared Actor/sample/environment helpers; do not resurrect the B02 trainer
+or alter shared core. Explicit admitted entry `b03/run.py` binds seed19461, published
+launch SHA, fixed external assets root, fixed128episodes/H256 and output
+`runs/uav_message_content/b03_frozen_assets/`. Hash-load exact actor weights with
+strict metadata/state validation, set frozen/eval mode, reset episode histories,
+stream compact per-world rows plus compressed raw arrays, count0fits/updates and
+retain partial failures without repair or missing-pair imputation. Pure reader is
+DM-owned outside b03 and performs no model/environment calls.
+
+Correctness checks use synthetic actors/checkpoints/protocol fixtures only: exact
+loaded tensor preservation including formerly zeroed columns, sampled RNG law and
+stream isolation, unchanged O/L payload generation and delivery order, complete
+frozen-state retention, counts/paired reduction/decision-rule branches, admission
+before scientific effects and partial-failure frontier. Independent engineering
+review covers source identity, numerics and RNG; no hidden native test-panel probe.
+The Implementer may own only b03 implementation/tests and makes no scientific choice,
+NOTE/index/Git write, result launch or child delegation. DM accepts its returned diff.
+
+### Focused review, input verification and final rule adoption
+
+The existing separate-context final ResearchCritic reviewed only the L addition,
+actual reuse estimand and proposed rule, after its original B02 reconstruction.
+It recommends retaining L19452 and the complete four-asset panel:
+**MATERIAL_DISSENT: no**. Marginal8192-step evaluation gives a plausible paid
+learned asset a fair use comparison without rescuing a training-method claim.
+The point-mean rule is an explicit provisional-use preference, not a guarantee.
+Apply eligibility and ties with unrounded values. The nominal df31 intervals are
+not selection-adjusted for choosing this panel's winner; a fresh panel removes
+B02-outcome reuse but does not remove new winner-selection optimism.
+
+DM adopts the rule exactly as proposed. If none qualifies, retain C without an
+equivalence or general continuation-failure claim. If one qualifies, select it
+provisionally with adverse worlds/uncertainty. If several qualify, prioritize J
+and report any service sacrificed relative to another eligible candidate. If L
+wins, this supports L19452's conditional complete use, not useful encoding or
+recipe superiority. If L's J is highest but service is below C, exclude it under
+the predeclared requirement; higher Q does not override that choice. A required
+incomplete/invalid comparison yields no selection from a reduced set. No extra
+significance gate, pilot, mandatory attribution study or automatic second panel.
+The review recognizes stopping with C as the cheapest alternative; given Root's
+selected reuse objective, this panel answers actual asset choice more directly
+than unchanged fits or packet ablation. No material disagreement remains.
+
+The registered source Scout independently hash-verified all four actual node files
+and inspected weights-only serialized states, with no model/environment call.
+Exact sizes C/B/O/L are463293/463357/463357/464366 bytes. C metadata is armC,
+master19431,input171,critic451; B is armB/master19451; O/L are their named arm/
+master19452. B/O/L carry the original C inherited_sha256. All actor/critic tensors
+are float32. L alone adds content weight(1,64),bias1,log_std1. No optimizer/RNG/
+hidden state exists. All named shared CADC/UCOPE/native-host dependencies are
+unchanged from B02 source02ede8a4a. Strict endpoint loading must not call B02's
+warm-start helper, which would zero learned receiver columns and reject endpoint
+metadata. Only matching architecture construction plus strict full actor loading
+is accepted. This resolves the bound-input facts needed by the L0; release it
+to the existing registered Implementer for the narrow evaluator and tests.
