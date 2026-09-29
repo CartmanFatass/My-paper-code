@@ -2472,3 +2472,42 @@ in this notebook are pinned to source `7bb6d2f8eedecd7479fc4cb830467b8c6601a5ec`
 not promises that retired entrypoints remain on current main. No tar, copied
 worktree or backup chain is needed. Actual deletions and allocated-byte change
 will be recorded below after the maintained collector succeeds.
+
+#### B04 retirement completed
+
+After result publication `0f8627a95`, all scientific/reader processes were complete,
+the critic had released its source/raw reads and the observer was stopped. The
+maintained exact-target snapshot collector first refused an unprivileged process
+scan at `/proc/660/cwd`; its supported read-only `--sudo-process-scan` retry
+established eligibility. Under the normal canonical-node writer/admission locks,
+`scripts/hmasd_snapshot_gc.py --snapshot db7c4d80a91442219c6da17294b8a8e1
+--sudo-process-scan --apply` removed that source snapshot. The source commit remains
+in published Git history, and the operation claim, manifest and exit witness remain.
+This resolved the concrete process-scan limitation; no manual snapshot deletion,
+permission change or shared Git repair was used.
+
+The following exact targets are now absent; before/after allocated-byte readings
+show **803610624 net bytes reclaimed** from this cleanup scope:
+
+| Deleted target | Allocated before | After |
+|---|---:|---:|
+|wsl_4070 `.git/hmasd-launch-sources/db7c4d80a91442219c6da17294b8a8e1`|802963456|0|
+|wsl_4070 `/home/wu/hmasd-inputs/uav_message_content-b04-B-34871c49.pt` staging duplicate|466944|0|
+|local `experiments/candidates/uav_message_content/b04/`, including bytecode|118784|0|
+|local `tests/experiments/candidates/uav_message_content/b04/`, including bytecode|53248|0|
+|local `temp/directions/uav_message_content/`, only the consumed B04 request|8192|0|
+
+The staging file had no `fuser` consumer; the canonical B19451 was already
+independently hash-verified and remains at its original B02 path. The canonical
+B04 result directory stays at100286464 allocated bytes, unchanged through cleanup.
+No raw trajectory, unique checkpoint, stream or evaluation-only user telemetry was
+deleted. No second bulk copy or archive was created. Git object storage and whole-
+host free space are not the measured scope of the reclamation claim.
+
+The seven one-shot source/test files were removed with explicit-path `git rm`;
+their historical source is `7bb6d2f8eedecd7479fc4cb830467b8c6601a5ec`. The
+retained pure reader and its independent synthetic fixtures still pass **19 tests
+in2.73s** after that retirement, with pytest scratch automatically removed and no
+imports of retired code. This check adds support cost only. There is no cleanup
+blocker or redundant B04 scratch left in these targets. Required positive/adverse
+evidence, prior records and the private consumed observer status are retained.
