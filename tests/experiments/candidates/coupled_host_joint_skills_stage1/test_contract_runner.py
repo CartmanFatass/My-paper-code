@@ -370,3 +370,54 @@ def test_package_import_keeps_torch_out():
     root = Path(runner.__file__).resolve().parents[3]
     result = subprocess.run([sys.executable, "-c", code], cwd=root, capture_output=True, text=True, check=True)
     assert result.stdout.strip() == "False"
+
+
+def test_b02_bounded_head_spec_is_declared_and_parsed_for_per_step_fits(monkeypatch, tmp_path):
+    """b02 SET-V-b: the per-step recipe with only the four action-head keys changed is a declared
+    spec (may touch the panels); any other head setting is technical; the CLI passes the four
+    flags into the per-step FitSpec and still refuses them for floors."""
+    from experiments.candidates.coupled_host_joint_skills_stage1.configuration import (
+        B02_BOUNDED_HEAD_SPEC,
+        apply_action_head,
+    )
+
+    assert is_declared_fit_spec(B02_BOUNDED_HEAD_SPEC)
+    assert B02_BOUNDED_HEAD_SPEC.continuous_action_distribution == "tanh_gaussian"
+    assert (B02_BOUNDED_HEAD_SPEC.continuous_logstd_init, B02_BOUNDED_HEAD_SPEC.continuous_logstd_min,
+            B02_BOUNDED_HEAD_SPEC.continuous_logstd_max) == (-1.0, -5.0, 0.0)
+    assert not is_declared_fit_spec(replace(DEFAULT_SPEC, continuous_action_distribution="tanh_gaussian"))
+    assert not is_declared_fit_spec(replace(B02_BOUNDED_HEAD_SPEC, continuous_logstd_max=0.5))
+    assert not is_declared_fit_spec(replace(B02_BOUNDED_HEAD_SPEC, area_size=6000))
+    # Only the four head keys differ from the b01 spec.
+    from dataclasses import asdict
+    diff = {k for k in asdict(DEFAULT_SPEC) if asdict(DEFAULT_SPEC)[k] != asdict(B02_BOUNDED_HEAD_SPEC)[k]}
+    assert diff == {"continuous_action_distribution", "continuous_logstd_init",
+                    "continuous_logstd_min", "continuous_logstd_max"}
+
+    class Cfg:
+        pass
+
+    cfg = Cfg()
+    apply_action_head(cfg, B02_BOUNDED_HEAD_SPEC)
+    assert (cfg.continuous_action_distribution, cfg.continuous_logstd_init, cfg.continuous_logstd_min,
+            cfg.continuous_logstd_max) == ("tanh_gaussian", -1.0, -5.0, 0.0)
+
+    seen = {}
+
+    def fake_run_fit(out, arm, seed, launch_sha, admission, spec, probe=False):
+        seen.update(arm=arm, seed=seed, spec=spec)
+        return 0
+
+    monkeypatch.setattr(runner, "run_fit", fake_run_fit)
+    monkeypatch.setattr(runner, "require_admission", lambda *a, **k: {"sha": "deadbeef", "status": "test"})
+    out = tmp_path / "fit"
+    rc = runner.main(["--arm", "SET", "--seed", "932201", "--launch-sha", "deadbeef", "--area-size", "5000",
+                      "--out", str(out), "--continuous-action-distribution", "tanh_gaussian",
+                      "--continuous-logstd-init", "-1.0", "--continuous-logstd-min", "-5.0",
+                      "--continuous-logstd-max", "0.0"])
+    assert rc == 0 and seen["arm"] == "SET" and seen["seed"] == 932201
+    assert seen["spec"] == B02_BOUNDED_HEAD_SPEC and is_declared_fit_spec(seen["spec"])
+    with pytest.raises(SystemExit):
+        runner.main(["--floor", "random-target", "--worlds", "9111", "--launch-sha", "deadbeef",
+                     "--out", str(tmp_path / "floor"), "--menu-dir", str(tmp_path / "menus"),
+                     "--continuous-action-distribution", "tanh_gaussian"])

@@ -5,6 +5,11 @@ the scenario-2 contract adapter and the b01 host in place of S1 lanes; arm H on 
 d2 route; explicit per-episode training worlds; dev panels (deterministic) after rollouts
 0/15/30/45 and hold-out panels (deterministic and sampled) after the final rollout; contract
 readers per world; per-fit CPU/RSS metering; the ``--probe`` timing mode.
+
+T-W: ``--contract target|slot|offset`` dispatches to ``macro_runner.run_macro_fit`` (macro-step
+action contracts) and ``--floor NAME --worlds ...`` to ``macro_runner.run_floor`` (zero-fit
+floors); admission stays in ``main`` for every mode.  The default ``--contract step`` is the b01
+path, unchanged.
 """
 from __future__ import annotations
 
@@ -869,22 +874,88 @@ def write_probe(out, arm, seed, agent, spec, timing_rows, summary, publish):
             "projected_fit_cpu_seconds": probe["projection"]["fit_cpu_seconds"]}
 
 
+MACRO_CHOICES = ("target", "slot", "offset")
+FLOOR_CHOICES = ("random-target", "random-slot", "sticky-random-slot", "nearest-unclaimed-slot",
+                 "planner-slots")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--arm", choices=tuple(SEEDS), required=True)
-    parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--arm", choices=tuple(SEEDS), help="learner arm (required for a fit)")
+    parser.add_argument("--seed", type=int, help="fit seed (required for a fit)")
     parser.add_argument("--launch-sha", required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--area-size", type=int, choices=(5000, 6000), required=True)
     parser.add_argument("--probe", action="store_true",
                         help="3 training rollouts + one timed panel-sized run; writes timing_probe.json")
+    parser.add_argument("--contract", choices=("step",) + MACRO_CHOICES, default="step",
+                        help="step = the b01 per-step fit (default, unchanged); target/slot/offset = "
+                             "the T-W macro-step fit (macro_runner.py; area 5000 only)")
+    parser.add_argument("--floor", choices=FLOOR_CHOICES,
+                        help="T-W zero-fit floor (no learner, no --arm/--seed) over --worlds")
+    parser.add_argument("--worlds", nargs="+", help="floor worlds: integers and inclusive ranges a-b")
+    parser.add_argument("--nearest-cadence", choices=("every_macro_step", "first_macro_step"),
+                        default="every_macro_step", help="nearest-unclaimed-slot re-choice cadence")
+    parser.add_argument("--menu-dir", type=Path,
+                        default=ROOT / "runs" / DIRECTION / "menus",
+                        help="planner menu cache root (<menu-dir>/<area>/<world>.json)")
+    parser.add_argument("--smoke-no-admission", action="store_true",
+                        help="engineering smoke of a floor only: non-panel worlds and --out under temp/")
+    parser.add_argument("--continuous-action-distribution", choices=("gaussian", "tanh_gaussian"),
+                        help="fits only: continuous action head (default gaussian; b02 SET-V-b uses "
+                             "tanh_gaussian with init -1, min -5, max 0)")
+    parser.add_argument("--continuous-logstd-init", type=float, help="fits only (default 0.0)")
+    parser.add_argument("--continuous-logstd-min", type=float, help="fits only (default -20.0)")
+    parser.add_argument("--continuous-logstd-max", type=float, help="fits only (default 2.0)")
     args = parser.parse_args(argv)
-    if args.seed not in SEEDS[args.arm]:
-        parser.error("arm/seed is outside the prospective six-fit batch")
-    admission = require_admission(__file__, direction="coupled_host_joint_skills_stage1")
-    if args.launch_sha != admission["sha"]:
-        raise ValueError("launch SHA disagrees with admission")
-    spec = replace(DEFAULT_SPEC, area_size=int(args.area_size))
+    head = {key: getattr(args, key) for key in ("continuous_action_distribution", "continuous_logstd_init",
+                                                "continuous_logstd_min", "continuous_logstd_max")
+            if getattr(args, key) is not None}
+    if head and args.floor is not None:
+        parser.error("the action-head options apply to fits only")
+    worlds = None
+    if args.floor is None:
+        if args.arm is None or args.seed is None:
+            parser.error("a fit needs --arm and --seed")
+        if args.seed not in SEEDS[args.arm]:
+            parser.error("arm/seed is outside the prospective six-fit batch")
+        if args.smoke_no_admission:
+            parser.error("--smoke-no-admission applies to floors only")
+        if args.worlds:
+            parser.error("--worlds applies to floors only")
+    else:
+        if args.arm is not None or args.seed is not None or args.probe or args.contract != "step":
+            parser.error("a floor takes no --arm/--seed/--probe/--contract")
+        if not args.worlds:
+            parser.error("a floor needs --worlds")
+        from experiments.candidates.coupled_host_joint_skills_stage1.run_gate import parse_worlds
+        try:
+            worlds = parse_worlds(args.worlds)
+        except ValueError as exc:
+            parser.error(str(exc))
+    if (args.contract != "step" or args.floor is not None) and args.area_size != 5000:
+        parser.error("macro fits and floors run at area 5000 (menus and sealed references are 5 km)")
+    if args.smoke_no_admission:
+        from experiments.candidates.coupled_host_joint_skills_stage1.macro_runner import smoke_refusal
+        refusal = smoke_refusal(worlds, args.out, args.menu_dir)
+        if refusal:
+            parser.error(refusal)
+        admission = {"sha": args.launch_sha, "status": "skipped (engineering smoke: non-panel worlds, temp output)"}
+    else:
+        admission = require_admission(__file__, direction="coupled_host_joint_skills_stage1")
+        if args.launch_sha != admission["sha"]:
+            raise ValueError("launch SHA disagrees with admission")
+    if args.floor is not None:
+        from experiments.candidates.coupled_host_joint_skills_stage1.macro_runner import run_floor
+        return run_floor(args.out, args.floor, worlds, args.area_size, args.menu_dir, args.launch_sha,
+                         dict(admission), args.nearest_cadence)
+    if args.contract != "step":
+        from experiments.candidates.coupled_host_joint_skills_stage1.configuration import MacroFitSpec
+        from experiments.candidates.coupled_host_joint_skills_stage1.macro_runner import run_macro_fit
+        spec = MacroFitSpec(contract=args.contract, **head)
+        return run_macro_fit(args.out, args.arm, args.seed, args.launch_sha, dict(admission), spec,
+                             args.menu_dir, probe=args.probe)
+    spec = replace(DEFAULT_SPEC, area_size=int(args.area_size), **head)
     return run_fit(args.out, args.arm, args.seed, args.launch_sha, dict(admission), spec, probe=args.probe)
 
 

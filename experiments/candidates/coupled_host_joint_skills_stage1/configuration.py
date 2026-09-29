@@ -43,14 +43,48 @@ class FitSpec:
     #: DM choice: non-panel worlds, so the probe never touches the declared panels.
     probe_panel_worlds: tuple = tuple(range(9000, 9032))
     probe_rollouts: int = 3
+    #: Continuous action head pass-through (``hmasd/networks.py`` ``Args`` -> ``r_mappo_utils.ACTLayer``).
+    #: The defaults are exactly the values ``Args`` uses when the keys are absent, so the b01 recipe is
+    #: unchanged; ``"tanh_gaussian"`` selects the bounded ``TanhDiagGaussian`` head with these log-std
+    #: init/bounds.  Discrete (slot) heads ignore all four.
+    continuous_action_distribution: str = "gaussian"
+    continuous_logstd_init: float = 0.0
+    continuous_logstd_min: float = -20.0
+    continuous_logstd_max: float = 2.0
 
 
 DEFAULT_SPEC = FitSpec()
 
 
+#: b02 ``coupled_host_bounded_head_substrate`` cell SET-V-b (NOTES 2026-09-29 16:12 UTC): the b01
+#: per-step recipe with only the native bounded action head changed (the S7 ``config_1.py`` values).
+B02_BOUNDED_HEAD_SPEC = FitSpec(continuous_action_distribution="tanh_gaussian",
+                                continuous_logstd_init=-1.0, continuous_logstd_min=-5.0,
+                                continuous_logstd_max=0.0)
+
+
 def is_declared_fit_spec(spec: FitSpec) -> bool:
-    """True for the declared cell-1 fit spec (area 5000 or the pre-declared 6000 fallback)."""
-    return asdict(spec) in (asdict(DEFAULT_SPEC), asdict(FitSpec(area_size=6000)))
+    """True for a declared per-step fit spec: b01 cell 1 (area 5000 or the pre-declared 6000
+    fallback) or b02 SET-V-b (the bounded head, area 5000 only)."""
+    return asdict(spec) in (asdict(DEFAULT_SPEC), asdict(FitSpec(area_size=6000)),
+                            asdict(B02_BOUNDED_HEAD_SPEC))
+
+
+ACTION_HEAD_KEYS = ("continuous_action_distribution", "continuous_logstd_init", "continuous_logstd_min",
+                    "continuous_logstd_max")
+ACTION_HEAD_DISTRIBUTIONS = ("gaussian", "tanh_gaussian")
+
+
+def apply_action_head(config, spec):
+    """Copy the four action-head keys from the spec onto the config (read by ``networks.Args``)."""
+    if spec.continuous_action_distribution not in ACTION_HEAD_DISTRIBUTIONS:
+        raise ValueError(f"unknown continuous_action_distribution {spec.continuous_action_distribution!r}")
+    if not float(spec.continuous_logstd_min) <= float(spec.continuous_logstd_max):
+        raise ValueError("continuous_logstd_min must not exceed continuous_logstd_max")
+    config.continuous_action_distribution = str(spec.continuous_action_distribution)
+    config.continuous_logstd_init = float(spec.continuous_logstd_init)
+    config.continuous_logstd_min = float(spec.continuous_logstd_min)
+    config.continuous_logstd_max = float(spec.continuous_logstd_max)
 
 
 def make_config(arm, envs, seed, spec=DEFAULT_SPEC):
@@ -66,6 +100,7 @@ def make_config(arm, envs, seed, spec=DEFAULT_SPEC):
     config.hidden_size = config.embedding_dim = config.gru_hidden_size = spec.hidden_size
     config.n_heads = spec.n_heads
     config.n_encoder_layers = config.n_decoder_layers = spec.n_layers
+    apply_action_head(config, spec)
     if arm == "H":
         config.policy_interruption_mode = "d2"
         config.interruption_delta = 1
@@ -115,6 +150,7 @@ def config_dict(config):
     use_statenorm use_lr_decay use_entropy_annealing total_timesteps seed
     policy_interruption_mode interruption_delta interruption_cost_c interruption_cost_c_Z
     skill_cap_k_max team_cap_k_Z age_feature
+    continuous_action_distribution continuous_logstd_init continuous_logstd_min continuous_logstd_max
     use_central_snapshot_in_flat_actor disable_high_level_training
     disable_discriminator_training disable_discriminator_rewards collects_high_level_samples
     use_process_exploration use_horizon_window use_opt_compact""".split()
@@ -271,3 +307,128 @@ def matching_table(config_H, config_SET, agents, spec=DEFAULT_SPEC):
         "config": per_arm,
     }
     return table
+
+
+# ================================================================================ macro-step recipes (T-W)
+#
+# Additive.  The per-step recipe above changed only by the four action-head pass-through keys at
+# the values ``networks.Args`` uses when they are absent (DM addendum): b01 networks, RNG streams
+# and numbers are unchanged; per-step config.json/summary/checkpoint config dicts gain the four keys.
+
+MACRO_CONTRACTS = ("target", "slot", "offset")
+MACRO_K_UNITS = 1
+
+
+@dataclass(frozen=True)
+class MacroFitSpec(FitSpec):
+    """``FitSpec`` plus the macro contract.  ``horizon`` stays in host steps (500).
+
+    ``menu_in_inputs=None`` resolves per contract (slot: menu appended to obs and state; target
+    and offset: no menu in the inputs) -- the T-W default, returned to the DM as a question for
+    offset.
+    """
+
+    contract: str = "slot"
+    macro_k: int = 10
+    menu_in_inputs: object = None
+
+    @property
+    def macro_horizon(self) -> int:
+        return int(self.horizon) // int(self.macro_k)
+
+    @property
+    def resolved_menu_in_inputs(self) -> bool:
+        return (self.contract == "slot") if self.menu_in_inputs is None else bool(self.menu_in_inputs)
+
+
+def is_declared_macro_spec(spec) -> bool:
+    """True for the declared macro spec of a contract (area 5000 only: menus/references are 5 km).
+
+    The four action-head keys may differ from their defaults (a declared arm may select the
+    bounded head); every other field must equal ``MacroFitSpec(contract=...)``.
+    """
+    if not isinstance(spec, MacroFitSpec) or spec.continuous_action_distribution not in ACTION_HEAD_DISTRIBUTIONS:
+        return False
+    fields = {k: v for k, v in asdict(spec).items() if k not in ACTION_HEAD_KEYS}
+    return any(fields == {k: v for k, v in asdict(MacroFitSpec(contract=contract)).items()
+                          if k not in ACTION_HEAD_KEYS} for contract in MACRO_CONTRACTS)
+
+
+def action_squash(spec) -> str:
+    """How the macro adapter reads continuous actions: raw Gaussian samples are tanh-squashed by the
+    adapter (``"tanh"``); the bounded head already emits tanh(raw) in (-1, 1) (``"none"``)."""
+    return "none" if spec.continuous_action_distribution == "tanh_gaussian" else "tanh"
+
+
+def make_macro_config(arm, envs, seed, spec):
+    """Macro-contract recipe: ``make_config``'s recipe with the declared macro differences.
+
+    Differences from b01: ``rollout_length = episode_length = 50`` macro steps; ``k = 1`` in
+    macro units for both arms (d2 caps ``skill_cap_k_max = team_cap_k_Z = 1`` for H; SET's
+    snapshot/BPTT clock one macro step); the action space of the contract (slot: Discrete(6);
+    target/offset: 3-D continuous); obs/state widths from the macro adapter (menu block when
+    present); ``total_timesteps`` in macro rows.
+    """
+    if arm not in SEEDS:
+        raise ValueError(f"unknown arm {arm}")
+    if not isinstance(spec, MacroFitSpec) or spec.contract not in MACRO_CONTRACTS:
+        raise ValueError("make_macro_config needs a MacroFitSpec with a known contract")
+    env0 = envs[0]
+    if getattr(env0, "contract", None) != spec.contract or int(env0.macro_k) != int(spec.macro_k):
+        raise ValueError("the lanes' macro contract differs from the spec")
+    config = Config()
+    config.n_uavs = env0.n_uavs
+    config.n_users = 50
+    config.num_envs = len(envs)
+    config.rollout_length = config.episode_length = spec.macro_horizon
+    config.k = MACRO_K_UNITS
+    config.seed = int(seed)
+    config.hidden_size = config.embedding_dim = config.gru_hidden_size = spec.hidden_size
+    config.n_heads = spec.n_heads
+    config.n_encoder_layers = config.n_decoder_layers = spec.n_layers
+    apply_action_head(config, spec)
+    if arm == "H":
+        config.policy_interruption_mode = "d2"
+        config.interruption_delta = 1
+        config.interruption_cost_c = float("inf")
+        config.interruption_cost_c_Z = float("inf")
+        config.skill_cap_k_max = MACRO_K_UNITS
+        config.team_cap_k_Z = MACRO_K_UNITS
+        config.age_feature = "off"
+    else:
+        config.policy_interruption_mode = "off"
+    config.use_obsnorm = config.use_statenorm = False
+    config.use_lr_decay = False
+    config.n_Z = config.n_z = 6
+    config.ppo_epochs = spec.ppo_epochs
+    config.sequence_batch_size = spec.sequence_batch_size
+    config.coordinator_batch_size = spec.coordinator_batch_size
+    config.total_timesteps = spec.train_lanes * spec.macro_horizon * spec.rollouts
+    action_space_type = str(env0.action_space_type)
+    config.action_space_type = action_space_type
+    config.action_dim = int(env0.action_dim)
+    config.update_env_dims(state_dim=env0.state_dim, obs_dim=env0.obs_dim, n_agents=env0.n_uavs)
+    config = apply_algorithm_config(config, ALGORITHM[arm])
+    config.k = MACRO_K_UNITS
+    config.action_space_type = action_space_type
+    config.action_dim = int(env0.action_dim)
+    config.use_central_snapshot_in_flat_actor = arm == "SET"
+    config.contract_arm = arm
+    config.macro_contract = spec.contract
+    config.calculate_and_set_buffer_sizes()
+    config.discriminator_batch_size = config.batch_size
+    config.validate_config()
+    if config.state_dim != env0.state_dim or config.obs_dim != env0.obs_dim:
+        raise ValueError("unexpected macro adapter observation/state widths")
+    if arm == "H" and config.policy_interruption_mode != "d2":
+        raise ValueError("arm H lost the d2 route")
+    if arm == "SET" and config.policy_interruption_mode != "off":
+        raise ValueError("arm SET left the off route")
+    return config
+
+
+def macro_config_dict(config):
+    """``config_dict`` plus the macro contract name."""
+    out = config_dict(config)
+    out["macro_contract"] = getattr(config, "macro_contract", None)
+    return out
