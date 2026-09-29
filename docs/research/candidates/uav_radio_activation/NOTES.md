@@ -1007,8 +1007,9 @@ Registered ResearchCritic `/root/dm_radio_joint_control/result_diagnosis`
 worked in a separate context without DM/Root conversation inheritance. It
 received original source/config/manifest/results, B01 supporting/adverse records,
 the complete adopted Pro/review archive and current background, with the actual
-question rather than the DM's preferred interpretation. Its substantive final
-return follows; its change from its own provisional stop preference is preserved.
+question rather than the DM's preferred interpretation. A condensed transcription
+of its substantive final return follows, preserving the recommendation, evidence,
+limits and dissent, including its change from its own provisional stop preference.
 
 > Recommend revise through one prospective two-tick-delivery comparison.
 > Retain R as the current complete-package reference and close frozen B02 with
@@ -1148,3 +1149,54 @@ the proposed clock comparison versus a justified stop or another question;
 this is not a dependency for publishing or cleaning B02, nor a per-run approval
 gate. Preserve useful code/tests and the sole evidence copy, publish the shared
 background correction, and reclaim only reconciled snapshot/scratch/logs.
+
+### Publication and Measured Cleanup
+
+Full B02 compact evidence, reconstruction, independent diagnosis/dissent, DM
+disposition and own RESEARCH standing/shared-background revision were published
+and pushed at `ee19617e7ca6f6df2d16fccb78c4fbdcfe9f9ebf`. This includes the
+complete native/observer records and every per-world result, not new bulk arrays.
+Executed inputs remain recoverable at `db5b9635850df204673871d4feb32e663ed8e5fd`.
+
+Import/test/entrypoint inspection retains useful B01/R and B02 S/T protocol,
+search, collection/reconstruction and focused tests as executable definitions
+of the conditional capabilities and their evidence. B02's reader consumes its
+protocol/study helpers; tests bind those semantics. No unused replacement
+implementation or other direction's code was removed. Retention is not a new
+experiment selection. The shared pure radio kernel and C remain unchanged.
+
+Both native identities, the whole reader, all bounded helpers and the stopped
+observer had finished before deletion. Exact-target snapshot-GC preview and
+apply both passed with the documented `--sudo-process-scan` read-only process
+inspection: clean source, terminal native operation, no live process references
+and durable `refs/heads/main` reachability. No new inspection refusal occurred.
+The collector removed only the B02 launcher snapshot; original operation claim,
+manifest, exit witness and source commit remain. The source is also absent
+from registered worktrees. No other snapshot, G0 operation or Claude input was
+touched, and no retention copy or archive was created.
+
+Allocated bytes immediately before exact-target deletion (`du -s -B1`):
+
+| Deleted Target | Allocated Bytes |
+|---|---:|
+| `.git/hmasd-launch-sources/4eeab042293b403b9a5aaeb2e2d89b52` |1645789184|
+| `temp/directions/uav_radio_activation/`, containing only retired `b02-wait.json` |8192|
+| `experiments/candidates/uav_radio_activation/b01/__pycache__/` |61440|
+| `experiments/candidates/uav_radio_activation/b02/__pycache__/` |61440|
+| `tests/experiments/candidates/uav_radio_activation/b01/__pycache__/` |53248|
+| `tests/experiments/candidates/uav_radio_activation/b02/__pycache__/` |98304|
+| `runs/uav_radio_activation/b02_joint_commitment_a01/stdout.log` |28672|
+| Same run's empty `stderr.log` |0|
+
+All eight targets are verified absent. Net allocated reduction over this exact
+target set is **1,646,100,480bytes**, from that sum to zero. This measures
+working-tree target reclamation, not Git-object shrinkage or whole-host free
+space amid other writers. Stdout only repeated row progress retained in the
+complete summary; stderr was empty. Rebuildable caches carried no unique result.
+
+The canonical192raw files remain90,743,452content bytes /91,136,000allocated
+bytes, with the complete reader's verified digests in the published summary.
+No cleanup blocker, active worker/observer, unread result or unreturned helper
+remains. The only future action proposed is the explicitly unselected clock
+comparison already returned to Root; B02's collection and scientific reading
+are complete independently of that allocation decision.
