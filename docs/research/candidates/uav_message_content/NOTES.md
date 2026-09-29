@@ -2022,3 +2022,35 @@ First return to Root is this complete design and its explicit richer-contract co
 The unresolved dependency is the one focused selection review/Root cross-question
 disposition; it is not a new owner permission request. No result-producing operation,
 code implementation, resource claim or cleanup has been created by this entry.
+
+### B04 prospective node/accounting correction before selection freeze
+
+Root's source-backed allocation correction, received after publication `029b36574`:
+the design-only instruction meant no node use during preparation, not exhausted
+remote capacity. The current peer allocation is approximately8 CPU cores/3.1GiB on
+a20-core/15.8GiB wsl_4070 node. These are Root-reported allocation facts, not this DM's
+fresh admission measurement. The proposal above inferred local necessity too early.
+
+**Replace the proposed primary node with wsl_4070**, its configured
+`/home/wu/.venvs/hmasd/bin/python`, sequential FP32 fits and one Torch/inter-op/BLAS
+thread. The measured same-host base-work extrapolation remains about31.5min; budget
+roughly35-50min for the new scientific workload before import/build, complete reading
+and publication, with actual predictor/runtime overhead still unmeasured. Root will
+verify the combined allocation and publish one concrete shared CONTROL notice before
+launch, preserving Claude's two accepted fits. Fresh runner-side actual-node admission
+remains necessary. This is shared-resource coordination, not per-fit scientific ACK.
+No launch is authorized by this correction or attempted here.
+
+Local_linux is a fallback only if actual remote insufficiency or unsuitability is
+recorded at execution. Its45-90min estimate remains an unmeasured fallback estimate,
+not a fresh timing or a reason to override the owner's remote-first preference.
+
+Accounting is **9 policy continuation fits plus3 trained predictor instances** inside
+the three F attempts. Each predictor consumes that F attempt's eligible native labels
+and1024 extra supervised Adam calls:3072 extra calls total, with the separate label,
+row-presentation and inference counts in the cost table above. They are not three
+additional native-data collection attempts, and their training is not free. Cumulative
+direction work would therefore be21 policy fits plus3 newly trained predictor
+instances,21504 PPO updates plus3072 predictor updates and3063808 native team steps.
+The scientific arms, dates/horizons, panel, packet assumption and pending independent
+selection review are unchanged.
