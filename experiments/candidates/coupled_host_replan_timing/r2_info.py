@@ -10,7 +10,10 @@ deep copy of the snapshot taken at the start of step call ``t_e``:
   UAV-UAV routing links; the decision end re-plans from own + received facts;
 * ``D``:        privileged reference -- at the first step any UAV's own facts show a user
   > 100 m from the old map, the true post-event users are granted (``grant_truth``, the only
-  truth accessor) and the cold procedure runs once; before that D is KEEP.
+  truth accessor) and the cold procedure runs once; before that D is KEEP;
+* ``shared_wide`` (R3): ``shared`` with one change, the forwarding neighbours: routing edges
+  UNION mutually visible UAV pairs under the host's own UAV-UAV visibility rule
+  (``env._get_local_uavs``, SINR >= min_sinr with interference; ``WIDE_FORWARDING_LINKS``).
 
 INFORMATION RIGHTS (the audit screen is ``facts_for_uav`` .. ``InfoArm.targets``):
 
@@ -78,7 +81,8 @@ from experiments.candidates.coupled_host_replan_timing.rules import (
     window_metrics,
 )
 
-ARMS = ("unshared", "shared", "D")
+ARMS = ("unshared", "shared", "D")          # R2 arms, the runner's default
+ALL_ARMS = ARMS + ("shared_wide",)         # R3 adds one arm; selected explicitly (--arms)
 TRIGGER_K = 3                      # users moved vs the last planned map (DM decision, NOTES 22:20)
 MOVE_THRESHOLD_M = 100.0           # strict: distance > 100 m
 MAX_REPLANS = 3                    # per world per arm (pricing bound)
@@ -88,6 +92,10 @@ FORWARDING_LINKS = ("consecutive UAV-UAV node pairs of env.routing_paths (the ho
 DECISION_END_RULE = ("shortest len(env.routing_paths[i]) in the branch-point snapshot (held "
                      "pre-event deployment); unrouted = +inf; ties -> lower index; no routed UAV "
                      "-> lower index, decision_end_reason = 'no routed uav'")
+WIDE_FORWARDING_LINKS = ("R3: FORWARDING_LINKS UNION {(a, b): b in visible_uavs(a) and a in "
+                         "visible_uavs(b)}, visible_uavs(i) = env._get_local_uavs(i) (the host's "
+                         "UAV-UAV SINR >= min_sinr rule with interference); mutual visibility "
+                         "required, one-way visibility gives no edge; re-read every step")
 VIEW_CAP_REPORTED = 20             # host obs vector cap (max_observed_users); facts are uncapped,
                                    # views above it are only counted
 
@@ -110,6 +118,25 @@ def routing_links(env: EventCoupledRelayHost) -> list[set[int]]:
         for a, b in zip(uavs, uavs[1:]):
             neighbours[a].add(b)
             neighbours[b].add(a)
+    return neighbours
+
+
+def visible_uavs(env: EventCoupledRelayHost, uav: int) -> list[int]:
+    """UAVs ``uav`` can hear this step under the host's own UAV-UAV visibility rule."""
+    return [int(j) for j, _sinr in env._get_local_uavs(int(uav))]
+
+
+def wide_links(env: EventCoupledRelayHost,
+               routing: list[set[int]] | None = None) -> list[set[int]]:
+    """Routing edges UNION mutually visible UAV pairs this step (R3's forwarding neighbours)."""
+    routing = routing_links(env) if routing is None else routing
+    visible = [set(visible_uavs(env, i)) for i in range(env.n_uavs)]
+    neighbours = [set(n) for n in routing]
+    for a in range(env.n_uavs):
+        for b in visible[a]:
+            if b != a and a in visible[b]:
+                neighbours[a].add(b)
+                neighbours[b].add(a)
     return neighbours
 
 
@@ -165,7 +192,7 @@ class InfoArm:
 
     def __init__(self, arm: str, env: EventCoupledRelayHost, keep_targets: np.ndarray,
                  old_map: np.ndarray, decision_end: int, world: int, budget: int) -> None:
-        if arm not in ARMS:
+        if arm not in ALL_ARMS:
             raise ValueError(f"unknown arm {arm!r}")
         self.arm, self.env, self.world, self.budget = arm, env, int(world), int(budget)
         self.old_map = np.array(old_map, dtype=float, copy=True)
@@ -181,6 +208,7 @@ class InfoArm:
         self.evaluations = 0
         self.truth_grants: list[int] = []
         self.link_counts: list[int] = []
+        self.wide_link_counts: list[int] = []  # shared_wide only
         self.views_over_cap = 0
 
     def targets(self, t: int) -> np.ndarray:
@@ -194,6 +222,10 @@ class InfoArm:
                 self.first_change_per_uav[i] = s
         if self.arm == "shared":
             self.holdings = forward(self.holdings, own, links)
+        elif self.arm == "shared_wide":
+            wide = wide_links(env, links)
+            self.wide_link_counts.append(sum(len(n) for n in wide) // 2)
+            self.holdings = forward(self.holdings, own, wide)
         else:                                  # unshared and D: own facts only
             for i in range(env.n_uavs):
                 merge(self.holdings[i], own[i])
@@ -231,7 +263,7 @@ class InfoArm:
 
     def record(self) -> dict[str, Any]:
         links = np.asarray(self.link_counts, dtype=float)
-        return {
+        out = {
             "arm": self.arm, "decision_end": self.de,
             "first_change_step_per_uav": list(self.first_change_per_uav),
             "first_change_step_at_decision_end": self.first_change_de,
@@ -251,6 +283,15 @@ class InfoArm:
                               "steps_with_zero_links": int(np.sum(links == 0))},
             "views_over_obs_cap": int(self.views_over_cap),
         }
+        if self.arm == "shared_wide":
+            wide = np.asarray(self.wide_link_counts, dtype=float)
+            out["wide_links"] = {"mean": float(wide.mean()) if wide.size else None,
+                                 "min": int(wide.min()) if wide.size else None,
+                                 "steps_with_zero_links": int(np.sum(wide == 0))}
+            out["wide_edges_added_mean"] = float((wide - links).mean()) if wide.size else None
+            out["wide_link_counts_per_step"] = [int(v) for v in self.wide_link_counts]
+            out["routing_link_counts_per_step"] = [int(v) for v in self.link_counts]
+        return out
 
 
 # ============================================================ harness (truth used for set-up/reporting)
@@ -335,11 +376,14 @@ def run_world_r2(env: EventCoupledRelayHost, budget: int = PLANNER_BUDGET,
 
 
 def stakes(post: dict[str, float], cold: float | None) -> dict[str, float | None]:
-    """Per-world stakes on the post-event window (cold = R1-lite reference F)."""
+    """Per-world stakes on the post-event window (cold = R1-lite reference F); ``delta_adj`` =
+    shared_wide - shared only when the run has the shared_wide arm (R2 rows unchanged)."""
     def diff(a, b):
         return None if a is None or b is None else float(a - b)
     return {"delta_share": diff(post.get("shared"), post.get("unshared")),
             "s_info_unshared": diff(cold, post.get("unshared")),
             "s_info_shared": diff(cold, post.get("shared")),
             "d_minus_shared": diff(post.get("D"), post.get("shared")),
-            "d_minus_unshared": diff(post.get("D"), post.get("unshared"))}
+            "d_minus_unshared": diff(post.get("D"), post.get("unshared")),
+            **({"delta_adj": diff(post.get("shared_wide"), post.get("shared"))}
+               if "shared_wide" in post else {})}
