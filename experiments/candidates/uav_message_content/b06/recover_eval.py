@@ -17,12 +17,14 @@ def main(argv=None):
     parser.add_argument("--out", required=True, type=Path)
     parser.add_argument("--launch-sha", required=True)
     parser.add_argument("--seed", required=True, type=int)
-    parser.add_argument("--original", required=True, type=Path)
+    parser.add_argument("--original-tag", required=True, choices=("b06_calibration",))
     parser.add_argument("--checkpoint", required=True, type=Path)
     parser.add_argument("--checkpoint-sha256", required=True)
     args = parser.parse_args(argv)
-    if args.seed != 19701 or not args.original.is_absolute() or not args.checkpoint.is_absolute():
-        parser.error("recovery fixes seed19701 and requires absolute original/checkpoint paths")
+    if args.seed != 19701 or not args.out.is_absolute() or not args.checkpoint.is_absolute():
+        parser.error("recovery fixes seed19701 and requires absolute output/checkpoint paths")
+    if args.out.parent.name != "uav_message_content" or args.out.parent.parent.name != "runs":
+        parser.error("recovery output must be under runs/uav_message_content")
     if args.checkpoint_sha256 != "34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2":
         parser.error("recovery fixes retained B19451 checkpoint")
     for key in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS",
@@ -33,6 +35,9 @@ def main(argv=None):
     admission = require_admission(__file__, direction="uav_message_content")
     if admission["sha"] != args.launch_sha:
         raise RuntimeError("launch SHA differs from admission")
+    # Snapshot launch restores --out to canonical storage; a bare identity tag is
+    # not rebound into the source snapshot like an absolute author-root input.
+    original = args.out.parent / args.original_tag
     start = resource.getrusage(resource.RUSAGE_SELF)
     import torch
 
@@ -40,7 +45,7 @@ def main(argv=None):
     torch.set_num_interop_threads(1)
     from experiments.candidates.uav_message_content.b06.recovery import run_recovery
 
-    return run_recovery(args.out, args.launch_sha, args.original, args.checkpoint,
+    return run_recovery(args.out, args.launch_sha, original, args.checkpoint,
                         args.checkpoint_sha256, args.seed, start_usage=start)
 
 

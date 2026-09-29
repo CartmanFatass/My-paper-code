@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/1f322e8efef04d45860f130b11795047/experiments/candidates/uav_message_content/b06/recover_eval.py", line 48, in <module>
+    if main()["status"] != "COMPLETE":
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/1f322e8efef04d45860f130b11795047/experiments/candidates/uav_message_content/b06/recover_eval.py", line 43, in main
+    return run_recovery(args.out, args.launch_sha, args.original, args.checkpoint,
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/1f322e8efef04d45860f130b11795047/experiments/candidates/uav_message_content/b06/recovery.py", line 298, in run_recovery
+    bindings = load_original_bindings(original, checkpoint, checkpoint_sha256)
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/1f322e8efef04d45860f130b11795047/experiments/candidates/uav_message_content/b06/recovery.py", line 98, in load_original_bindings
+    require(inv["sha256"] == ORIGINAL_INVENTORY and inv["files"] == ORIGINAL_FILES,
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/1f322e8efef04d45860f130b11795047/experiments/candidates/uav_message_content/b06/recovery.py", line 49, in require
+    raise ValueError(message)
+ValueError: original inventory mismatch

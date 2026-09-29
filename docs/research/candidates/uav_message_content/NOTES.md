@@ -3600,3 +3600,57 @@ and all-evidence reading remain obligations, not implications of green tests.
 Exact owned inputs are now ready for publication and fresh local_linux admission;
 this preserves the original host/interpreter/device/RNG semantics rather than
 moving the existing stopped operation to another node.
+
+### Effect-free admitted input-binding failure and prospective correction
+
+The inputs above were published at e52cda6c6ad3acc4ceabd892320691e24971857f.
+The first recovery admission was accepted at22:14:09.170889UTC, claim
+6652179ce25db278e9426be2bb55e906f1c6f4eb400c1b648ee0f72e1cf8e651,
+snapshot1f322e8efef04d45860f130b11795047, output
+`runs/uav_message_content/b06_eval_recovery/`. It exited1 at22:14:10.923894UTC
+(1.753005s after acceptance). Native status has consistent records, valid exit and
+absent runner/supervisor. No config, scientific summary, cell directory, checkpoint
+load, policy construction, environment construction, fit, update or native step
+occurred. Worker CPU was not finalized and is unknown, not zero.
+
+The exact failure is `ValueError: original inventory mismatch` in
+load_original_bindings before its checkpoint loader or evaluation. The accepted
+manifest reveals why: the launcher's snapshot contract rebound the absolute
+author-checkout `--original` argument into snapshot/runs, where only the tracked
+compact records exist. The original207-file canonical tree still matches its
+handoff digest. Source inspection of scripts/hmasd_launch.py:1507-1531 confirms
+this intentional rebinding; it was our new external-evidence interface error,
+not an environment/checkpoint failure or an adverse scientific observation.
+No live work or uncertain scientific effect remains to reconcile.
+
+I prospectively select one concrete interface correction at a new source and
+`b06_eval_recovery_a02` output: pass fixed `--original-tag b06_calibration`, then
+resolve that sibling under the already admitted canonical output's direction
+directory. The launcher binds `--out` to author storage even under a snapshot;
+the tag is an identity, not a source-file path. Original source/exit/inventory,
+parent/D hashes and every scientific condition stay fixed. This avoids copying
+bulk, alias tricks, changes to shared launcher code or an invented control-root
+field in require_admission (it returns no such field). A synthetic admitted-output
+binding regression and independent engineering re-review precede publication and
+new admission. The first failure stays recorded; its claim is never reset/reused.
+This is an explicit outcome-blind zero-effect repair, not an automatic retry or a
+new seed/panel: all55original missing episodes are still missing and scores unread.
+The600CPU-second ceiling and0fit/14080step bound remain unchanged.
+
+The failed-operation observer's terminal event75d1eae8db2badf01a025f3d was read and
+consumed, then observation stopped. Its known native-child queue refusal is recorded
+separately from successful process observation. It will not be resumed; the old
+training operation and its stopped observer also remain unchanged.
+
+The defect was reproduced from the exact failed source snapshot: its bound original
+directory contains12files, not207, and the same inventory refusal occurs with
+zero checkpoint/model/environment calls. The narrow entry correction is accepted:
+only recover_eval.py and its test changed; recovery.py remains2e416fc2...3382 and
+all scientific collection/reader code is unchanged. Twenty-one focused tests pass
+in2.64s. The added regression invokes the actual launcher's snapshot preparation
+argument mapping, with only Git/publication/snapshot-creation infrastructure mocked;
+it reproduces the old rebinding and proves the corrected bare tag and restored
+canonical output yield the original evidence sibling after admission. Independent
+Reviewer read the patch and ran that integration regression itself:1passed/.92s,
+no material finding. I accept the repair and explicit new effect-free-attempt
+disposition. No result values or native episodes were needed for this diagnosis.

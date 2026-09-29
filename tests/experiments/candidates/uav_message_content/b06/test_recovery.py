@@ -1,11 +1,14 @@
 """Synthetic recovery identity and fail-closed checks; no native environment calls."""
 
 from collections import defaultdict
+import argparse
 import copy
 import hashlib
 import io
 import json
 from pathlib import Path
+import sys
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -287,9 +290,100 @@ def test_entry_admission_precedes_checkpoint_effects(monkeypatch, tmp_path):
 
     monkeypatch.setattr(hmasd_admission, "require_admission", deny)
     monkeypatch.setattr(recovery, "run_recovery", lambda *a, **k: pytest.fail("ran before admission"))
+    out = tmp_path / "runs/uav_message_content/new"
     with pytest.raises(RuntimeError, match="admission test refusal"):
-        recover_eval.main(["--out", str(tmp_path / "new"), "--launch-sha", "fixture", "--seed", "19701",
-                           "--original", str(tmp_path / "absent-original"), "--checkpoint",
+        recover_eval.main(["--out", str(out), "--launch-sha", "fixture", "--seed", "19701",
+                           "--original-tag", "b06_calibration", "--checkpoint",
                            str(tmp_path / "absent-parent"), "--checkpoint-sha256",
                            "34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2"])
-    assert not (tmp_path / "new").exists()
+    assert not out.exists()
+
+
+def entry_args(out, checkpoint, tag="b06_calibration"):
+    return ["--out", str(out), "--launch-sha", "fixture", "--seed", "19701",
+            "--original-tag", tag, "--checkpoint", str(checkpoint), "--checkpoint-sha256",
+            "34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2"]
+
+
+def test_admitted_snapshot_entry_uses_canonical_output_sibling(monkeypatch, tmp_path):
+    from scripts import hmasd_admission, hmasd_launch
+
+    author = tmp_path / "author"
+    snapshot = author / ".git/hmasd-launch-sources/fixture"
+    out = author / "runs/uav_message_content/b06_eval_recovery_a02"
+    checkpoint = tmp_path / "external-parent.pt"
+    runner_relative = Path("experiments/candidates/uav_message_content/b06/recover_eval.py")
+    snapshot_runner = snapshot / runner_relative
+    snapshot_runner.parent.mkdir(parents=True)
+    snapshot_runner.write_bytes(Path(recover_eval.__file__).read_bytes())
+    (snapshot / "scripts").mkdir()
+    (snapshot / "scripts/hmasd_admission.py").write_text("# Fixture bootstrap identity only.\n")
+    # Compact tracked evidence exists in the snapshot, but the original bulk does not.
+    snapshot_original = snapshot / "runs/uav_message_content/b06_calibration"
+    snapshot_original.mkdir(parents=True)
+    (snapshot_original / "summary.json").write_text('{"status":"INCOMPLETE"}\n')
+    (author / ".codex").mkdir()
+    (author / ".codex/hmasd-compute.toml").write_text(
+        'status = "active"\n[nodes.fixture]\n' +
+        f"python = {json.dumps(sys.executable)}\nproject_root = {json.dumps(str(author))}\n")
+    monkeypatch.setattr(hmasd_launch, "_git_root", lambda path: author)
+    monkeypatch.setattr(hmasd_launch, "_git_common_dir", lambda path: author / ".git")
+    monkeypatch.setattr(hmasd_launch, "_run_git", lambda *a, **k: SimpleNamespace(returncode=0))
+    monkeypatch.setattr(hmasd_launch, "_require_policy", lambda *a, **k: None)
+    monkeypatch.setattr(hmasd_launch, "_validate_publication", lambda *a, **k: None)
+    monkeypatch.setattr(hmasd_launch.hmasd_source_snapshot, "prepare", lambda *a: snapshot)
+    launch = argparse.Namespace(direction="uav_message_content", lead="fixture", sha="f" * 40,
+                                output=str(out), source_root=str(author), node="fixture", remote="origin",
+                                snapshot=True, runner_argv=[str(runner_relative), *entry_args(out, checkpoint)])
+    paths, _, _, _, runner_args = hmasd_launch._prepare_paths_and_config(launch)
+    assert paths.runner == snapshot_runner and paths.output_root == out
+    assert runner_args[runner_args.index("--out") + 1] == str(out)
+    assert runner_args[runner_args.index("--original-tag") + 1] == "b06_calibration"
+    # Reconstruct the actual old failure boundary using the same launcher function.
+    previous = copy.deepcopy(launch)
+    i = previous.runner_argv.index("--original-tag")
+    previous.runner_argv[i:i + 2] = ["--original", str(author / "runs/uav_message_content/b06_calibration")]
+    _, _, _, _, old_args = hmasd_launch._prepare_paths_and_config(previous)
+    assert old_args[old_args.index("--original") + 1] == str(snapshot_original)
+    monkeypatch.setattr(recover_eval, "ROOT", snapshot)
+    events = []
+
+    def admit(*args, **kwargs):
+        events.append("admitted")
+        return {"sha": "fixture"}  # require_admission does not return control_root.
+
+    def run(*args, **kwargs):
+        events.append("run")
+        assert args[:4] == (out, "fixture", author / "runs/uav_message_content/b06_calibration", checkpoint)
+        assert snapshot not in args[2].parents
+        return {"status": "COMPLETE"}
+
+    monkeypatch.setattr(hmasd_admission, "require_admission", admit)
+    monkeypatch.setattr(torch, "set_num_threads", lambda n: None)
+    monkeypatch.setattr(torch, "set_num_interop_threads", lambda n: None)
+    monkeypatch.setattr(recovery, "run_recovery", run)
+    assert recover_eval.main(runner_args) == {"status": "COMPLETE"}
+    assert events == ["admitted", "run"]
+    assert not out.exists() and not checkpoint.exists()
+
+
+@pytest.mark.parametrize("tag", ["other", "../b06_calibration", "/abs/b06_calibration"])
+def test_original_tag_cannot_change_or_escape(monkeypatch, tmp_path, tag):
+    from scripts import hmasd_admission
+
+    monkeypatch.setattr(hmasd_admission, "require_admission", lambda *a, **k: pytest.fail("invalid tag admitted"))
+    monkeypatch.setattr(recovery, "run_recovery", lambda *a, **k: pytest.fail("invalid tag ran"))
+    with pytest.raises(SystemExit) as error:
+        recover_eval.main(entry_args(tmp_path / "runs/uav_message_content/new", tmp_path / "parent.pt", tag))
+    assert error.value.code == 2
+
+
+@pytest.mark.parametrize("layout", ["relative", "runs/other/new", "other/uav_message_content/new"])
+def test_output_requires_absolute_direction_layout(monkeypatch, tmp_path, layout):
+    from scripts import hmasd_admission
+
+    monkeypatch.setattr(hmasd_admission, "require_admission", lambda *a, **k: pytest.fail("invalid output admitted"))
+    out = Path(layout) if layout == "relative" else tmp_path / layout
+    with pytest.raises(SystemExit) as error:
+        recover_eval.main(entry_args(out, tmp_path / "parent.pt"))
+    assert error.value.code == 2
