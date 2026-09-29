@@ -1056,3 +1056,185 @@ float32 neighbor, as well as both near-one cases. Original native rows stay inta
 Independent engineering follow-up verified both boundaries and adjacent representable
 values, ran the five reader checks in 5.63 s, and found the remaining issue resolved.
 DM accepts the reader-only repair for a second pure read of the same retained data.
+
+<a id="b02-complete-reading"></a>
+## 2026-09-28 PDT - B02 complete: positive sample means, unstable continuation ranking
+
+The corrected pure reader from `d08e1becb33aa44d29d61ef2cacc80ecfc626110`
+completed with **all_checks_passed=true**. Its source-file SHA256 is
+`16a47388ff2e4872be0fb2aeb4fcd38f06970f5c3025d262a0d516782f35ba15`.
+[Original summary](../../../../runs/uav_message_content/b02_preserved_scalar/summary.json)
+has SHA256 `c0d747a4bf0ff47f2eef225378e4c2888ab96339786728a6c1cd93d14db993be`;
+[complete reconstruction](../../../../runs/uav_message_content/b02_preserved_scalar/reading.json)
+has SHA256 `53e8d186ed533f8e8d69b3379395459b0bdf81763808e43d2c5820b43e6b1889`.
+Local and remote compact-file hashes agree. The source snapshot used by native
+training remains the unchanged `02ede8a4a75cc83e6e18d8b6619f1cfa84bc8d92`.
+
+The reader checked all 576 eval NPZs, all nine 576-episode streams, all nine
+1024-update streams and all 18 initial/final checkpoints. It independently rebuilt
+six preserved packet fields, O's sighting spread, L's affine-tanh scalar, record
+delivery timing/pending state, terminal credit, action transforms, native rewards,
+behavioral readings and all declared seeds/counts. Every initial action and reward
+sequence is identical across all nine cells; initial scalar response is exactly
+zero, and B remains zero. This supports the prospective initial-preservation claim
+on the complete declared panel, not receiver invariance after learning.
+
+All arms share the new-panel initial C endpoint: net J .181825659, physical J
+.182825659, service10.956542969 users/tick and Q .098113526. Its difference from the
+old B01 .193790 net J is a different evaluation panel, not checkpoint degradation.
+The fee is .001/tick in every row, so physical J is net J plus .001 and paired
+physical/net differences coincide. Q is the host's clipped served-link SINR quality,
+not a service count or an energy measure.
+
+| Continuation | Arm | Final net J | Users/tick | Q | J change from initial C | Service change |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 19451 | B | .236163 | 14.164185 | .129548 | +.054337 | +3.207642 |
+| 19451 | O | .152227 | 8.533203 | .112539 | -.029599 | -2.423340 |
+| 19451 | L | .213626 | 12.356812 | .138770 | +.031801 | +1.400269 |
+| 19452 | B | .122788 | 6.503784 | .109117 | -.059038 | -4.452759 |
+| 19452 | O | .241901 | 14.622070 | .127305 | +.060075 | +3.665527 |
+| 19452 | L | .218227 | 12.929199 | .127394 | +.036401 | +1.972656 |
+| 19453 | B | .202452 | 11.638062 | .135065 | +.020627 | +.681519 |
+| 19453 | O | .172077 | 9.835083 | .117954 | -.009748 | -1.121460 |
+| 19453 | L | .173410 | 8.929932 | .164636 | -.008416 | -2.026611 |
+
+| Contrast | 19451 J / service | 19452 J / service | 19453 J / service | Mean J / service |
+| --- | ---: | ---: | ---: | ---: |
+| L-B | -.022537 / -1.807373 | +.095439 / +6.425415 | -.029043 / -2.708130 | +.014620 / +.636637 |
+| L-O | +.061400 / +3.823608 | -.023674 / -1.692871 | +.001333 / -.905151 | +.013020 / +.408529 |
+| O-B | -.083936 / -5.630981 | +.119112 / +8.118286 | -.030375 / -1.802979 | +.001600 / +.228109 |
+
+These positive L sample means are retained as favorable exploratory evidence,
+including mean L-initialC +.019929 J / +.448771 users/tick. Mixed seed signs are
+not a post-hoc unanimity requirement or proof of zero effect. They do show the
+uncertainty that the three conditional continuations were purchased to expose:
+L-B J SD .070067 versus mean .014620, descriptive df2 t interval
+[-.159436,.188676]; L-O SD .043724, interval[-.095597,.121636]. Corresponding
+service intervals are [-11.867067,13.140342] and [-7.003284,7.820341]. The intervals
+assume independent continuation contrasts and are not confirmation or equivalence
+tests. Worlds and steps are not extra training instances. No seed's L endpoint
+beats both B and O on both J and service; this is a description, not a new gate.
+
+All signed world vectors remain in reading.json. L-B has respectively10/22,
+30/2 and9/23 positive/adverse J worlds. In seed19451 world29 is +.133113 and
+world13 -.122551; seed19452 world16 is +.174924 and world15 -.010325;
+seed19453 world17 is +.076594 and world15 -.111086. O-B seed19452 improves J
+in32/32 worlds, while O-B seed19451 loses in31/32 and reaches -.210398 onworld31.
+These nested counts describe the evaluated policies, not 32 replications of training.
+L-O seed19453's positive J with negative service is a real tradeoff: Q +.046682
+offsets service -.905151. L's Q exceeds both B/O in all three seed means, but the
+complete service objective does not inherit that sign.
+
+### Exposure and explanation update
+
+L received129532/129508/129526 actual training content-credit rows and each content
+head had nonzero gradient norm in all1024 updates. Head displacements were
+.093574/.155626/.208739 from the declared zero mean/log-std initialization.
+Final local-response RMS averaged over worlds was .016332/.004699/.016487 for L,
+and .002582/.003796/.005273 for O, versus exactly0 for B. L's per-world maximum
+response reached .118318/.024418/.116073. O's transmitted means were
+.058210/.097424/.063982; L's were .511794/.416220/.359629. Both use[0,1], but
+their realized scales differ; larger response alone is not stronger information.
+
+Thus initial functional preservation and later learned input response were observed.
+The intended robust complete-task advantage is not established at this conditional
+sample size, despite favorable mean differences. A blanket unactivated-message or
+missing-gradient explanation is weakened directly. Local sensitivity, stochastic
+offsets/shared randomness and learned private-history semantics remain distinct;
+no semantic identification was obtained. Ordinary continuation itself can improve
+or damage C substantially, so altered optimization/trajectory selection remains a
+strong simpler explanation of the ranking. This does not identify why B01 full
+replacement L lost, nor establish that extra history lacks task opportunity.
+
+Behavioral endpoints also differ: final boundary fractions B .163/.501/.502,
+O .462/.282/.431 and L .539/.184/.733; floor fractions B .746/.886/.833,
+O .925/.553/.071 and L .423/.854/.534. O19453 has ceiling fraction .279 and
+mean height116.631m; other final mean heights are52.393--67.738m. These preserve
+behavioral risk descriptions on this no-energy host, not proof of physical safety,
+cutoff avoidance or energy feasibility. All exact per-world readings remain retained.
+
+### Measured cost and durable evidence
+
+Nine fits consumed1179648 training +147456 evaluation =1327104 native team steps,
+9216 optimizer steps,23592960 replayed actor rows and6635520 motion samples.
+The diagnostic added147456 actor forwards and zero environment steps/updates.
+There were4608 training episodes,288 initial and288 final eval episodes; all
+evaluation optimizer counts are0. Actual batch wall time was1991.281666s
+(33.188min total), self user+system CPU1989.353298s, process-lifetime peak RSS
+535432KiB (522.883MiB), one intra-op/inter-op thread. This closely matches the
+old-rate total estimate; it is not a per-arm timing. Engineering, both pure reads
+and independent reviews are additional work, without a complete measured time sum.
+
+Inherited C training remains one common131072-step/1024-update fit plus its old
+16384 eval steps, not nine new inherited fits. Including the entire original
+three-arm selection batch, cumulative direction cost is12 fits,1769472 native
+steps and12288 optimizer steps,2649.747767s measured scientific wall and
+2647.095349s self CPU. The pre-admission refusal added0 fits/steps/updates.
+
+One durable native copy remains at
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/`.
+The reader inventories627 stable files totaling135657594 logical bytes, with
+per-file hashes, excluding reading.json itself(667217 bytes) and mutable
+launch-status.json(603 bytes). These contain the576 compressed unique traces,
+all18 checkpoints and all episode/update streams. Retain all positive/adverse
+outcomes and the original B01 evidence. Compact source/summary/native status and
+reading are published locally; no bulk duplication or retention archive is needed.
+
+### Independent final reading and resolved investment
+
+Registered ResearchCritic `/root/dm_content_augmentation/read_content_b02` worked in
+a separate context with no DM/Root conversation inheritance. Before reading earlier
+interpretations, it independently reconstructed all576 original NPZs, all nine
+episode/update streams, all18 checkpoints and the retained C identity. Native
+endpoint errors were at most2.8e-16; its original `isclose` behavioral reconstruction
+matched exactly. It independently verified the initial action equality and active
+learning, including nonzero immediate L sensitivity on about98.88% of final ticks.
+It confirms the pure-reader arithmetic issue was separate from native execution.
+
+The review recommends preserving favorable L sample means while ending automatic
+scalar-training expansion: **MATERIAL_DISSENT: no**. The intermediate prediction
+succeeded; the directional sample-mean native prediction is favorable, but stable
+package preference and semantic value remain unresolved. DM adopts this precision:
+absence of a stable preference is not a failed sign prediction, zero-effect finding
+or an invented requirement that all three seeds win. Q is averaged over connected
+users; its positive sign can coexist with fewer users receiving service. All B01
+constraints and positive/adverse evidence remain, without a new co-adaptation story.
+
+Support, adoption and investment are separate. The retained C remains the uncontinued
+reference; neither O nor L is promoted as a generally better training recipe. Keep
+all paid final assets, especially ordinary O19452 and plain B19451, as constructive
+conditional capabilities. O19452's +.060075J/+3.665527service against C is not a
+failed ordinary comparator. Its advantage over B19451 is much smaller:
++.005738J/+.457886service, only13/32 current worlds with higher J. Selecting these
+assets after observing B02 does not make them preselected winners on unseen worlds.
+
+At the assigned substantive boundary, the recommended next purchase is a **new,
+prospectively bound frozen-asset reuse comparison**: O19452, B19451 and uncontinued
+C on one new matched32-world H256 sampled-action panel, retaining the same RR
+transport and information. Estimand: reuse value of these selected paid assets,
+not O-recipe superiority, independent training replication or learned semantics.
+Prediction: the ordinary asset gains against C may recur, while O-B's much smaller
+increment may not. Joint O improvement would support conditional O reuse; if the
+simpler B supplies the benefit, use B; if neither improves C or J/service disagree,
+retain C without automatically adding a panel. Actual seeds, checkpoint hashes and
+fixed decision rule would be bound before any future launch, not invented here as
+an active contract.
+
+Proposed cost is0 fits/96 episodes/24576 native steps/0 updates. B02's blended rate
+scales to about37s, only a rough magnitude; evaluation-only speed, preparation and
+readback are unmeasured. It answers the immediate reusable-baseline question more
+directly than another unchanged nine-fit learning batch (about33min at the observed
+rate) or a packet-ablation diagnostic (which addresses dependence/distribution
+shift, not which complete paid asset to use). More conditional fits could narrow
+the current means but would still share C; independently trained C starts address
+a different broader uncertainty. No diagnosed intervention currently predicts a
+better learning repair. A new cross-question investment or stopping remains a
+legitimate alternative if baseline reuse is not useful to Root's portfolio.
+
+DM disposition: return this concrete proposal to Root at the assigned boundary;
+**do not append it to B02 or launch it now**. B02 is completely read; the direction
+returns to reserve with no active producer, unread result, retry, Pro or selected
+successor. No Root approval dependency is fabricated. The broader content question
+remains open, with a favorable but uncertain conditional mean and useful ordinary
+assets retained. Any future re-entry starts from these recorded constraints and
+an explicit new comparison, not renewed full-payload replacement or automatic repair.
