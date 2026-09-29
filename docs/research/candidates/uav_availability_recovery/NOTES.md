@@ -753,3 +753,88 @@ deferred until a genuinely new remote admission; it is not a dependency of this
 completed local run. No present successor is selected. If the owner later archives
 this fully documented DM, any selected successor uses a new DM with this evidence,
 not a restored old session or a fresh scientific slate.
+
+### 2026-09-29 - Resumed publication and closure
+
+The owner explicitly resumed this Root workflow at21:59UTC with “阅读handoff
+我们继续工作”. Root `01a0ef2b-a391-7693-a748-60e24be246ae` published the pause
+lift and recovery routing at `ecd5b2583`, then assigned native child
+`/root/dm_availability_closure` this direction's unfinished publication/closure.
+The previous Root/child runtime is unavailable. This is explicit recovery of
+unfinished responsibility, not restoration of an archived completed DM or a new
+study. The launch-bound Lead, source and operation identities above stay fixed.
+The scientific disposition and complete independent review at `aa2c77e9f` remain
+applicable; there is no unread result, repeated review, native evaluation, fit,
+observer rearm or selected successor in this recovery.
+
+**Closure scope:** publish the already-resolved result and affected G0 shared
+background, retain the useful saved reader, public controller/predictor and
+checkpoint definitions, and remove only the reconciled source snapshot and
+direction-owned rebuildable caches/obsolete wait request. No executable semantics
+or evidence scope changes. Current source/import checks found no external code
+consumer of this direction. Within the retained package, `read_saved.py` imports
+the learning constants and runner's writer; the runner imports the control and
+policy definitions. The compact package and its focused tests remain useful for
+checking the preserved native positive/adverse evidence and loading all endpoints.
+They were already published at `3e8f31d14` / `a46eea11b`; no unused standalone
+implementation or duplicate output copy was identified.
+
+At22:01UTC all1,932 manifest-listed files were rehashed against the unchanged
+`artifacts.json`:41,049,062 bytes, including1,928 canonical `raw/` files and all
+six initialization/final checkpoints. The earlier handoff's “Manifest SHA256”
+refers to this artifact manifest (`5feec7eb…f7ebec0`), not the launch manifest.
+The launch manifest is unchanged at `1bf02640…e7e0157`, and `reading.json`
+remains `6d81c3a8…b08574b`. This was byte-identity checking, not another scientific
+reader run. Native runner3316004, supervisor3316003 and observer3972821 remain
+absent; the original observer is stopped atgeneration15, wake:null, with all14
+events consumed. The scratch wait request duplicates its retained job spec.
+
+The exact snapshot-GC preview first refused because `/proc/383/cwd` is protected.
+The supported `--sudo-process-scan` read-only probe then found the exact snapshot
+eligible: accepted exit0, no live references, clean snapshot, output outside the
+snapshot and source reachable from main. Cleanup completion and measured bytes
+are recorded below; the initial refusal was not bypassed with manual removal.
+
+The supported collector then removed the exact accepted snapshot under the shared
+main-writer lock, with `--apply --sudo-process-scan --snapshot
+40649116072b42aebeffda2fde5a89b6`. Its directory and Git worktree registration are
+both absent. The three inspected disposable directories were also deleted after
+their contents matched the expected wait request and compiled Python caches:
+
+| Deleted target (repository-relative) | Allocated bytes before | After |
+|---|---:|---:|
+| `.git/hmasd-launch-sources/40649116072b42aebeffda2fde5a89b6` | 1,641,029,632 | 0 |
+| `temp/directions/uav_availability_recovery/` | 8,192 | 0 |
+| `experiments/candidates/uav_availability_recovery/__pycache__/` | 73,728 | 0 |
+| `tests/experiments/candidates/uav_availability_recovery/__pycache__/` | 61,440 | 0 |
+| **Total** | **1,641,172,992** | **0** |
+
+The measured net target-allocation reduction is **1,641,172,992 bytes**; no copy,
+archive or backup was created. This is working-tree/scratch allocation, not a
+claim about Git object storage or whole-host free capacity. It is separate from
+the434,176 bytes of transport scratch already reclaimed before the pause.
+There is no remaining cleanup blocker or disposable target within this inspected
+scope. Required leftovers are intentional: the canonical `raw/` remains at the
+run path above (44,298,240 allocated bytes), together with compact results,
+progress, admission/exit identities and the stopped original observer record.
+All1,932 artifact hashes and the saved reader hash were checked unchanged again
+after deletion; no positive, adverse or checkpoint evidence was removed.
+
+Publication changes only the direction's result/standing/routing and directly
+affected G0 shared background. In particular, the earlier blanket statement
+that communication is disabled during absence is narrowed to the actual native
+service/routing mask with retained geometric interference, as already established
+by the pre-run scoped review. The result's reusable implication is conditional:
+actual member unavailability need not create an adaptive reserve-deployment need,
+and executed dispatch can itself cause service loss. No new interpretation or
+cross-direction scientific verdict is introduced by this closure.
+
+**Final state:** the exact B01 recipe is closed to further investment; the broader
+question is reserve/idle with no producer or selected successor. The full result
+and independent review above are technically and scientifically complete. This
+recovery added zero fits, zero episodes and zero native steps; B01 remains
+3fits /1,920episodes /960,000steps,5.718 worker wall-hours and5.669 CPU-hours on
+local_linux. Publication, byte checking and cleanup support cost was not separately
+metered. Root may later select a concrete consequential deployment question that
+retains stationary and competent ordinary conditional control; this is a re-entry
+condition, not a present dependency or automatic next experiment.
