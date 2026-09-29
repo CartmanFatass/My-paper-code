@@ -395,3 +395,27 @@ The relay best start was a relay-family subset layout on all three worlds; the s
 **Hazards recorded:** the unit-ball clip binds on ≈ 80 % of UAV-steps at initialisation (PPO stores the unclipped action and log-probability; the host executes the clipped one — same for both arms; early panels read accordingly); the declared H time estimate (from ACG's `off` route) omits the d2 per-step cost; checkpoints are evaluation weights only (`config` stores ∞ as "inf"); the panel readers import `planner.cluster_layout` (one far-cluster rule shared with the gate).
 
 **Gate re-smoke with the host clip (9001–9003, budget 3,000, `smoke_dm_t3_v4`):** G .155 ± .026 (min .126), static G_C .313 ± .046, **G_C_dev_cl .263 ± .059 (min .196)** — identical to the T2c values (the executor was already unit-ball clipped); random floor .097 (was .096–.10 range), ≈ 6.5 s wall per world (node loaded). The T2c smoke numbers are no longer provisional. Zero fits.
+
+## 2026-09-29 08:02 UTC — Cell 0 dev gate READ: both declared conditions pass at 5 km (P1 holds); hold-out references and technical probes launched
+
+**Launch:** `scripts/hmasd_launch.py launch --direction coupled_host_joint_skills_stage1 --lead "Claude DM (WSL session)" --sha f589523191c670e215e3d719fc4f2cd01492c301 --output runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01 --node local_linux --snapshot -- experiments/candidates/coupled_host_joint_skills_stage1/run_gate.py --worlds 1000-1031 --area-size 5000 --budget 3000 --out runs/coupled_host_joint_skills_stage1/b01_gate_dev_a01` (snapshot mode because the shared working tree held another writer's untracked file under `experiments/`; the gate reads no `runs/` inputs). Accepted 07:58:25 UTC, exited 0 at 08:00:33 UTC; 128.8 CPU s, peak RSS 91 MB, ≈ 4.0 s per world. Committed here: `summary.json` and the launcher's admission/manifest/status/exit records; `worlds/` (11 MB of candidate lists and descent histories) stays in the run directory as the durable copy (not committed; logs are ignored by `.gitattributes`/`.gitignore`).
+
+**Reading (rule fixed before the numbers: pass = static G ≥ .05 AND G_C,dev,cl ≥ .05, both as 32-world means):**
+
+| reading (32 dev worlds, 5 km, budget 3,000) | mean | SD | min | max |
+|---|---|---|---|---|
+| static G = P_relay − P_flat^off | **.106** | .054 | .030 | .282 |
+| static G_C (backhauled coverage) | .190 | .111 | .020 | .500 |
+| **G_C,dev,cl** = closed-loop 500-step C̄_bh, P_relay^on − P_flat^on | **.152** | .094 | −.010 | .403 |
+| P_relay static r / C_bh | .610 / .876 | .045 / .095 | | |
+| P_flat^off static r / C_bh | .504 / .686 | .074 / .140 | | |
+| closed-loop r (all 500 / final 100): P_relay^on | .561 / .610 | | | |
+| closed-loop r (all / final 100): P_flat^on | .480 / .504 | | | |
+| closed-loop r: P_flat^off (diag.) / stationary / random | .471 / .115 / .117 | | | |
+| closed-loop C̄_bh (all): P_relay^on / P_flat^on / floors | .810 / .658 / ≈ .18 | | | |
+| far-cluster backhauled share at the end: P_relay^on / P_flat^on | .891 / .300 | | | |
+| evaluations used, relay / flat (of 3,000) | 1,143 / 869 | | 896 / 519 | 1,537 / 1,239 |
+
+**Both conditions pass** (P1 held; the DM's prior was ≈ 70 %). Every search converged at the 25 m stage; the budget never bound. Spread is real: on 5 of 32 worlds one condition is below .05 (1005, 1006, 1014, 1026, 1031), and on world 1031 the closed-loop coverage gap is −.010 — the relay layout's deployment does not pay on every world; the opportunity is a mean effect of ≈ 7.6 users' service (.152 × 50) with world-to-world SD ≈ 4.7 users. No fallback is used (the 6 km fallback exists only for a failed 5 km gate). Cost so far in this line: 0 fits; ≈ 2 CPU-min for the gate.
+
+**Decided by this read (nothing else changes):** (1) hold-out references at 5 km (`--worlds 2000-2031`, same command, tag `b01_gate_holdout_a01`) — generated now and **sealed**: they are P2's comparators, recorded without interpretation until the hold-out panels are read; (2) the two technical probes through the launcher (`runner.py --probe`, arm H seed 931201 and arm SET seed 932201, 3 full rollouts = 24k team steps each plus one timed panel-sized run on non-panel worlds 9000–9031; not zero fits; timing/RSS only, no learner score is used for any research parameter); (3) the six formal fits wait for T4's acceptance and the probe projection against the 20 CPU-hour cap.
