@@ -13,6 +13,7 @@ MASTERS = (19451, 19452, 19453)
 ARMS = ("B", "O", "L")
 METRICS = ("J_net", "J_physical", "served_users_per_tick", "Q", "charge_per_tick")
 CHECKPOINT_SHA = "456832faaa94afb22cf3faa00bb97b0f129e2f5b72b2eedbb1148523b088cdad"
+CHECKPOINT_CANONICAL = "/home/wu/projects/HMASD/runs/uav_message_content/b01_s19431/C/final.pt"
 
 
 def digest(path):
@@ -161,7 +162,7 @@ def read_run(root):
     summary = json.loads((root / "summary.json").read_text())
     assert summary["status"] == "COMPLETE"
     assert summary["warm_start"]["sha256"] == CHECKPOINT_SHA
-    assert digest(summary["warm_start"]["path"]) == CHECKPOINT_SHA
+    assert digest(CHECKPOINT_CANONICAL) == CHECKPOINT_SHA
     cells = {(int(cell["master"]), cell["arm"]): cell for cell in summary["cells"]}
     assert set(cells) == {(seed, arm) for seed in MASTERS for arm in ARMS}
     actual = summary["actual"]
@@ -174,6 +175,7 @@ def read_run(root):
                            evaluation_optimizer_steps=0).items():
         assert actual[key] == value, (key, actual[key], value)
     reading = dict(source_sha=summary["source_sha"], summary_sha256=digest(root / "summary.json"),
+                   canonical_warm_start=dict(path=CHECKPOINT_CANONICAL, sha256=CHECKPOINT_SHA),
                    all_checks_passed=False, native_steps_added=0, optimizer_calls_added=0,
                    model_or_policy_calls_added=0, levels={}, contrasts={}, own_learning={},
                    seed_contrasts={}, raw_checks={}, update_checks={}, actual=actual,

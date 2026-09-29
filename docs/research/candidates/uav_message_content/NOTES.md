@@ -969,3 +969,27 @@ publication. The actual retained checkpoint was separately hash/metadata-verifie
 on `wsl_4070` by the read-only source Scout; production loading rechecks those bytes.
 The complete reader can only be accepted against native retained outputs after
 the admitted batch finishes. No scientific completion is asserted by these tests.
+
+### Pre-admission external-input binding correction
+
+Published implementation `e3ea2b10a88929b428abca48f88d0e92aff5b436` was invoked once
+through configured `agent-task` task `uav-content-b02-e3ea2b10a` at 2026-09-29
+04:34:15 UTC. The launcher refused before claim/output/native effects: absolute
+author-tree input `runs/uav_message_content/b01_s19431/C/final.pt` is not a tracked
+source-snapshot file. Same-output status confirms the run directory does not exist.
+This is an input-preparation refusal, not an incomplete scientific fit or accepted
+operation eligible for retry. The source-only snapshot is recorded for later GC.
+
+Correction: stage the same 463293 checkpoint bytes, SHA256
+`456832faaa94afb22cf3faa00bb97b0f129e2f5b72b2eedbb1148523b088cdad`, in the node's
+configured external-input root at
+`/home/wu/hmasd-inputs/uav_message_content-b02-C-456832fa.pt`. Keep the canonical
+B01 checkpoint unchanged, bind this staging path in the CLI, and hash the bytes again
+inside the admitted runner. This changes input location only, not model state,
+information rights, RNG, horizon or any scientific comparison. The 463293-byte
+temporary input duplicate will be removed after reading; the original canonical
+checkpoint remains the durable evidence. Publish this narrow correction before
+the first admitted scientific run. No shared launcher or control contract is changed.
+The pure reader verifies the durable canonical B01 checkpoint against the same hash,
+records that location, and does not require the disposable staging copy to survive.
+All ten synthetic checks passed together in 7.60 s after the CLI path correction.

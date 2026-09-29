@@ -21,8 +21,8 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.seed != 19451:
         parser.error("B02 fixes first continuation seed 19451")
-    if str(args.checkpoint) != "/home/wu/projects/HMASD/runs/uav_message_content/b01_s19431/C/final.pt":
-        parser.error("B02 fixes the retained C checkpoint path")
+    if str(args.checkpoint) != "/home/wu/hmasd-inputs/uav_message_content-b02-C-456832fa.pt":
+        parser.error("B02 fixes the digest-bound staged C checkpoint path")
     if args.checkpoint_sha256 != "456832faaa94afb22cf3faa00bb97b0f129e2f5b72b2eedbb1148523b088cdad":
         parser.error("B02 fixes the retained C checkpoint digest")
     from scripts.hmasd_admission import require_admission

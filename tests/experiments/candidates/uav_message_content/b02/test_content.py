@@ -262,7 +262,7 @@ def test_cli_rejects_unadmitted_invocation_before_output(tmp_path):
     output = tmp_path / "unadmitted"
     invocation = [sys.executable, str(runner), "--out", str(output),
                   "--launch-sha", "0" * 40, "--seed", "19451",
-                  "--checkpoint", "/home/wu/projects/HMASD/runs/uav_message_content/b01_s19431/C/final.pt",
+                  "--checkpoint", "/home/wu/hmasd-inputs/uav_message_content-b02-C-456832fa.pt",
                   "--checkpoint-sha256",
                   "456832faaa94afb22cf3faa00bb97b0f129e2f5b72b2eedbb1148523b088cdad"]
     process = subprocess.run(invocation, capture_output=True, text=True, check=False)
