@@ -1,6 +1,6 @@
 # HMASD research index
 
-当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-29 UTC（2026-09-28 PDT）。治理依据为
+当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-29 UTC（2026-09-29 PDT）。治理依据为
 [constitution](../project/OPERATING_CONSTITUTION.md)；本页维护现状，历史过程见[日期归档](archive/)。
 
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan) · [任务路由](#session-routing)。
@@ -18,7 +18,7 @@ DM持续负责科学问题与解释，每次推进一个结果性研究，自主
 Owner已归档完成且文档齐全的DM；后继研究创建新DM并继承已发表证据，不恢复或复用这些旧会话。
 六个原生DM及A/B后继比较均已完整收口：7批、640完整回合、1.92M原生步、1fit；来源、独立判读和终态清理均保全。
 Owner于2026-09-28启动的第二轮两项比较已完整运行并独立判读：主动感知学习包未建立超出普通策略的增量，合法锚点比较建立构造的条件性增量并改变性能参照；1fit／960k原生步，原配方不自动追加。轻量方法调整后的第三轮两项独立问题也已完整运行、判读和清理：有限补能承诺保留条件性普通O；联合路径过渡包未建立用途。两学习端点均未改变各自普通参照的部署，不以此诊断共同原因或否定更广学习；2fits／624k原生步，原配方不自动追加。与Claude共同选定的下一轮中，Codex长任务服务与延迟通信内容两比较现已完整运行、独立判读和清理：长任务O_H有平均服务收益但新增耗尽风险，未通过采用规则；通信三臂均学得自身收益，新内容包未超过原聚合参照。共3fits／634368团队步，不自动追加。
-建设性发展方法已落地；2026-09-28 PDT owner要求Claude用Oracle独立选择并推进两个不重叠方向，Codex推进服务改派和保留有效内容后的通信增量。两个新DM首项研究现已完整判读和清理，共9fit／1615104结果步：合法提前改派建立受残余F赤字限制的有限H12000能力，通信L样本均值有利但续训排序不稳定。Root选择两项零训练复用比较，由当前DM继续，具体前瞻、状态和投入见[现行计划](#current-research-plan)。Claude已启动独立Oracle第三轮选题并向Pro发出问题，未把候选当作已声明运行；恢复方向仍等owner的Milan数据。Root不预先限定Claude选题，不另开地图方向，也不以DM数量下降宣称问题空间耗尽。
+建设性发展方法已落地；2026-09-28 PDT owner要求Claude用Oracle独立选择并推进两个不重叠方向，Codex推进服务改派和保留有效内容后的通信增量。两个新DM各完成首项研究和一项零训练复用比较，共9fit／1743872结果步，均已完整独立判读：合法提前改派在新旧面板保留有限H12000收益，避免原新增耗尽反例，但新的末55步零服务与原残余F赤字阻止默认／持续性宣称；通信B/O/L已训练资产均在新世界保留相对C的联合收益，按固定规则暂用B19451，不把L未胜出改写为无能力。Root采纳停止原样扩展、保留能力与反例的处置，见[现行计划](#current-research-plan)。Claude已通过独立Oracle、critic和Pro选题，首方向`coupled_host_joint_skills_stage1`经其owner决定后声明并实现准备；第二题D1′仍为候选，未称两题均已开跑。恢复方向仍等owner的Milan数据，Root不接管Claude问题，也不以DM数量下降宣称问题空间耗尽。
 本页在科学判断、计划或控制发生实质变化时更新；逐 cell 进度和操作恢复信息见相应 NOTES/runs。
 
 **计算优先级（owner，2026-09-21）：先使用配置中的 WSL 远端 `wsl_4070`，再考虑本地资源。**
@@ -1352,8 +1352,9 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 ## Current research plan
 
-**两项建设性首轮研究已完整收尾；Root选择同一问题内的两项零训练复用比较，由当前新DM继续。**
-首轮完整结果、独立判读、跨题投入处置与退役计划见[建设性发展首轮](archive/2026-09-29/RESEARCH-constructive-development-round.md)。
+**Codex两项建设性问题及各自复用比较均已完整判读；保留已展示的能力，停止原样追加，Claude独立选题继续。**
+本轮完整结果、适用独立审查与Root处置见[建设性复用收尾](archive/2026-09-29/RESEARCH-constructive-development-reuse.md)；
+首轮问题与继续投入的原理由见[建设性发展首轮](archive/2026-09-29/RESEARCH-constructive-development-round.md)。
 2026-09-28 PDT原话："你让claude用oracle独立选题吧 让其选出两个不重叠的方向推进 你来做这两个方向"。
 给Claude的独立Oracle选题委托已于`de03d1c39`提交[约定inbox](../Claude_docs/inbox/20260928_oracle_independent_two_directions_ROOT.md)；
 这是owner分工的转达，不由Root替Claude选题或审批。Root此前的地图／R-star建议不构成指定或独占，
@@ -1367,15 +1368,15 @@ Root、独立审查和Claude完成实质交流与处置，完整原话、证据�
 选择中说明下一预测、什么观察会削弱或停止该路线，以及累计与拟投入成本，不增加逐cell表格、
 角色、固定重试数、正例预筛或Root日常审批。
 
-| 负责人及状态 | 下一问题与有效对照 | 投入边界 |
+| 负责人及状态 | 已获答案与实际用途 | 下一投入边界 |
 |---|---|---|
-| `dm_service_reassignment`，原问题继续 | 已选择固定R在原B02全八世界的已曝光开发挑战，特别检验52292801/03原新增失败；保持H12000、真实F和完整服务／风险比较，复用原P/O_H只在源／有效配置和全部外生流验证一致后成立。 | 0fit／96k新增步，按实测R速率约.85 worker-CPU h，另预计1..2h绑定／读取。复用B03独立审查对这一确切选择的意见，不作新鲜确认或自动延长。若有访问而服务／风险收益不复现，限制不变R用途，保留已观察访问能力。B03正反结果不变。[完整判读与前瞻](candidates/uav_persistent_service/NOTES.md#2026-09-29---b03-complete-finite-legal-access-benefit-residual-f-capture)。 |
-| `dm_content_augmentation`，原问题继续 | 已选择新32世界上的冻结资产C／B19451／O19452／L19452复用比较。Root在原三资产建议中保留已付费的最佳L，避免把不稳定配方排序误作放弃学习正例；L按已曝光面板最高L的J及服务选出，选择暴露明示。 | 0fit／128 H256回合／32768新增步／0更新，新增L只多8192步；实际评价速度及工程前瞻计价。已有critic聚焦跟进新增L和固定采用规则。只判已选资产的新世界用途，不推断学习配方／语义／独立C训练复制；不自动再选面板。B02共9fit及有利均值保留。[完整判读与前瞻](candidates/uav_message_content/NOTES.md#b02-complete-reading)。 |
-| Claude peer，Oracle独立选题推进中 | Oracle第三轮与critic已返回，Pro问题`round3-two-directions`已发送于`c947cf6eb`；候选及实质异议留在Claude笔记，未将临时D1/D2建议写成已声明运行。两题需互不重叠并避开Codex实际决策对象，Root不预选或接管。 | owner委托`de03d1c39`，实际接收／处理`468643a83`。等待一次实质SCOPE返回，不发ACK或状态循环。新研究仍需资源准入；Milan等owner数据，PPC/FSD暂停、G33冻结保持。[Claude当前记录](candidates/energy_relay_benchmark/NOTES.md)。 |
+| `dm_service_reassignment`，reserve | B04精确复用原P/O_H并完成8条R/H12000，完整外生流一致。71次改派均实现充电释放；0过载／cutoff／depletion，解决原01/03的O_H新增耗尽。R-O_H平均全／晚期QoS +.062092／+.106578；04/08退步，06新增末55步零服务，故完整采用规则失败。R是条件性有限任务资产，不是风险保持默认或可持续控制器。 | 新增0fit／96k步／.810728 worker-CPU h，工程读取另计。Root采纳独立建议，停止不变R加面板或延长；保留B03六机赤字及全部反例。可重开的是有明确可用性／部署中间预测与完整J／服务／风险后果的服务感知调度，需比较冻结R与完整成本；不要求先证明旧尾部原因，但当前未选新比较。[B04完整结果与独立处置](candidates/uav_persistent_service/NOTES.md#2026-09-29---b04-complete-original-failures-avoided-new-service-tail-counterexample)。 |
+| `dm_content_augmentation`，reserve | B03新32世界冻结C／B19451／O19452／L19452，三种续训资产相对C的平均J／服务均提升。固定点均值规则暂用B19451：+.062219 J／+3.811890用户每步；L也保留+.037189／+1.978271的能力。B是原C继续学习、空余标量不加内容，不是非学习或无通信对照。 | 新增0fit／32768步／41.15s评价，完整读取另67.47s。Root采纳复用选择，保留O/L和所有训练实例，不再为排名自动买面板／fit。B/O总体排序、学习配方优越性、标量语义均未建立；真实部署变化或不同学习问题才支持新的成本化比较。[B03完整结果与独立处置](candidates/uav_message_content/NOTES.md#b03-complete-reading)。 |
+| Claude peer，首方向已声明，第二题仍在形成 | 独立Oracle／critic／Pro后，Claude记录owner接受D2研究类型，已于`1d765aa3e`声明`coupled_host_joint_skills_stage1`：新耦合中继宿主上的HMASD／SET能力比较，非新算法宣称。D1′为同宿主上学习目标修正对合格普通修正的候选，尚未声明；二者决策对象不同但共享宿主失败风险，不能只凭两个名称算完成两题。 | 已读取其06:32 UTC的已提交SCOPE记录；无Codex两问题的实际比较重叠，不发ACK。首方向host／planner工程准备中，声明审查未收口，未据此写成已训练；第二题由Claude闭合独立问题与边际成本。Root不代选或接管；Milan等owner数据，PPC/FSD暂停、G33冻结保持。[D2声明与当前状态](candidates/coupled_host_joint_skills_stage1/NOTES.md)、[D1′候选及选题处置](candidates/energy_relay_benchmark/NOTES.md)。 |
 
 **已有成果继续使用，旧判定不改写。** 信息B03的P_BS作为兼容条件下的强性能参照，不重复购买
-已回答的分支/内容归因。持续服务保留B01有限收益和B02长任务采用失败，B03另建立受残余F赤字限制的条件性H12000 R资产；通信C含已学习的
-分散式运动/接收策略，原L/H劣势不否定所有内容学习。[持续服务判读](candidates/uav_persistent_service/NOTES.md)
+已回答的分支/内容归因。持续服务保留B01有限收益和B02长任务采用失败，B03/B04共同限定R的有限用途；通信C含已学习的
+分散式运动/接收策略，B成为兼容合同下的暂用参照，O/L保留为有实际增益的备选。[持续服务判读](candidates/uav_persistent_service/NOTES.md)
 与[通信判读](candidates/uav_message_content/NOTES.md)保留原始正反证据和成本；上一轮完整综合见
 [原共同计划](archive/2026-09-28/RESEARCH-joint-next-round-programme.md)。
 
@@ -1383,10 +1384,11 @@ Root、独立审查和Claude完成实质交流与处置，完整原话、证据�
 均须区分新增条件与已有合法信息/动作的更好利用，说明来源、误差和成本，给普通对照同样新增条件，
 分开读取资源本身收益和算法增量。这些是可比较的候选，不是自动增开方向或向部署actor提供未来真值。
 Root负责跨问题取舍，DM负责选定问题内的推导、执行与发表，原独立审查同时挑战夸大和过早停止。
-两个旧DM的完整返回已核对，均无活动操作或未读结果；新DM继承原始正反证据，不复用已完成并由owner归档的旧会话。
-两项问题的既有独立审查支持本次投入；具体设计实质改变其前提／比较时作聚焦跟进，不叠加例行审查。
-DM自主完成前瞻记录、工程、准入、完整判读和发表，Root使用长原生等待并负责跨题取舍，非逐fit审批。
-新的结果研究仍须实际节点准入。PPC/FSD暂停、G33冻结保持；实际新[任务路由](#session-routing)已登记。
+当前两DM均无活动结果操作或未读结果；方向自己的终态清理与恢复位置见[任务路由](#session-routing)。
+Root已读取并采纳两份完整独立结果建议，不再叠加同题审查；本轮合计9新fit／1743872结果步，
+不把两宿主分数相加，不把这次取得有用答案当作工作流改动的因果证明。保留方法，下一次投资仍比较
+具体预测、独立问题与停止。没有选定的新Codex实验，也没有等待Root例行批准的假依赖；较宽问题保留。
+DM自主完成科学工作，Root负责跨题设计与取舍，非逐fit审批。新的结果研究仍须实际节点准入，暂停与冻结不变。
 
 <a id="portfolio-review-2026-09-28-independent-joint-transition"></a>
 [已完成联合过渡选题与Root处置](archive/2026-09-28/RESEARCH-joint-transition-selection.md)。
