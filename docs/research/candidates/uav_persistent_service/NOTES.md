@@ -2514,3 +2514,33 @@ the DM's directly checked source. I accept the bounded implementation and
 review. Exact inputs are published next, followed by a fresh actual-node
 admission for this single fixed panel; neither test success nor review is
 scientific acceptance or a promise of sustainable service.
+
+### B04 accepted operation and observation
+
+Exact inputs were committed/pushed at
+`7bc0157f32caa8a1c29eb61e2ff483c6787b5f3e`. The configured remote supervisor
+accepted fresh task`ups-b04-original-a01`; kernel admission followed at
+2026-09-29T06:14:33.426371Z on wsl_4070/LAPTOP-U9TDKC8A. Actual-node available
+physical memory14789853184bytes passed the4294967296-byte floor. The runner
+uses4 spawned single-thread workers, unchanged R and only the8 declared jobs.
+No control or detector source was changed. Node fetch succeeded despite the
+same unrelated pre-existing Git auto-GC bad-tree warning; no repack, sparse
+change, branch/index update or checkout replacement was attempted.
+
+Accepted operation/claim:
+`/home/wu/projects/HMASD/.git/hmasd-admission/664894b4c6e5643ddd5b678cd4e995c7c076341a024cca17d12764bdb4d5f36e.json`.
+Exact source snapshot`861c9592d9444dec9c7a1b46f0184eb2`, runner PID971133,
+supervisor/session PID971132, native start ticks100931073/100931070 under boot
+`bb732fcb-1a33-4659-a786-331110ae41d3`. All outputs are at the declared canonical
+node `runs/uav_persistent_service/b04_original_worlds_a01/`, separate from the
+original B02/B03 raw. Launch manifest and actual preflight were collected here.
+The output summary exists after the runner's exact source/original-evidence
+checks; acceptance/progress is not a scientific result.
+
+`tools/hmasd_wait.py` generation1 is armed against that same output/status
+handle in the owning native child state directory
+`/home/fires/.local/state/hmasd-wait/01a0eb54-a1f1-7100-a33c-8fbcb14b0c97/b04`.
+Initial drain at06:15:10Z records consistent admitted runner/supervisor identity,
+both running, no exit witness or event (`observer-adopted.json`). Native child
+stays active using a long deterministic wait; any checkpoint rearms observation
+of this same operation, never the worker or a replacement task.
