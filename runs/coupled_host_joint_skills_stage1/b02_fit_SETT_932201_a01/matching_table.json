@@ -1,0 +1,325 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "mode": "macro",
+  "contract": "target",
+  "pairs_by_position": [
+    [
+      931201,
+      932201
+    ],
+    [
+      931307,
+      932307
+    ],
+    [
+      931413,
+      932413
+    ]
+  ],
+  "lanes": 16,
+  "horizon_host_steps": 500,
+  "macro_k": 10,
+  "macro_horizon": 50,
+  "rollouts": 45,
+  "exposure_host_steps_per_fit": 360000,
+  "exposure_macro_rows_per_fit": 36000,
+  "team_decisions_per_rollout_H": 800,
+  "action_contract": {
+    "contract": "target",
+    "action_space_type": "continuous",
+    "action_dim": 3,
+    "action_head": {
+      "continuous_action_distribution": "tanh_gaussian",
+      "continuous_logstd_init": -1.0,
+      "continuous_logstd_min": -5.0,
+      "continuous_logstd_max": 0.0
+    },
+    "squash": "none",
+    "decode": "low + (high - low) * (u + 1) / 2 per axis, box [0, A]^2 x [50, 150]; u = tanh(a) (Gaussian head) or a (bounded head)",
+    "executor": "planner.closed_loop_execute action rule for macro_k host steps (unit-ball clip)",
+    "menu_in_inputs": false,
+    "menu_width": 0,
+    "obs_dim": 90,
+    "state_dim": 133
+  },
+  "reward_units": "macro reward = mean of the macro_k per-step adapter scalars (team r / 6)",
+  "clock": "k = 1 macro step for both arms (H: d2 caps 1, costs +inf; SET: off route)",
+  "training_worlds": "300000 + lane + episode * 10000 (shared by every macro fit; no seed term)",
+  "counters": {
+    "decisions": "UAV-level macro decisions (6 per macro step)",
+    "far_target_decisions": "decisions whose held target is > 300 m (3-D) from the UAV's position at decision time",
+    "target_changes": "re-decisions (macro step >= 1) whose target differs from the previously held target by > 1e-06 m",
+    "redecisions": "UAV-level decisions at macro steps >= 1 (denominator of the target-change rate)",
+    "slot_conflicts": "slot contract: per macro step, 6 minus the number of distinct slots chosen (UAVs duplicating an already-chosen slot), summed",
+    "slot_switches": "slot contract: re-decisions whose slot differs from the previously held slot",
+    "offset_box_clips": "offset contract: UAV-decisions whose anchor + offset left the arena box and was clipped to it",
+    "team_decisions": "macro steps (team-level decisions)"
+  },
+  "parameter_counts": {
+    "SET": {
+      "skill_coordinator": 3841604,
+      "skill_discoverer": 1323911,
+      "coordinator.state_embedding": 129344,
+      "discoverer_actor.base": 400960,
+      "discoverer_actor.base.state_encoder": 129344,
+      "discoverer_critic.base": 129344,
+      "discoverer_actor": 798022,
+      "discoverer_critic": 525889
+    },
+    "H": {
+      "skill_coordinator": 3848014,
+      "skill_discoverer": 1017159,
+      "team_discriminator": 399573,
+      "individual_discriminator": 424378,
+      "coordinator.state_embedding": 129344,
+      "discoverer_critic.base": 129344,
+      "team_discriminator.state_encoder": 97733,
+      "discoverer_actor": 488710,
+      "discoverer_critic": 528449
+    }
+  },
+  "routes": {
+    "SET": {
+      "policy_interruption_mode": "off",
+      "d2_enabled": false,
+      "d2_cost_c": "inf",
+      "d2_cost_c_Z": "inf",
+      "d2_k_max": 1,
+      "d2_k_Z": 1,
+      "d2_age_feature": "off",
+      "use_ha_ctse": false,
+      "use_central_snapshot": true
+    },
+    "H": {
+      "policy_interruption_mode": "d2",
+      "d2_enabled": true,
+      "d2_cost_c": "inf",
+      "d2_cost_c_Z": "inf",
+      "d2_k_max": 1,
+      "d2_k_Z": 1,
+      "d2_age_feature": "off",
+      "use_ha_ctse": false,
+      "use_central_snapshot": false
+    }
+  },
+  "parameter_count_note": "H counts from a one-lane build of the same recipe",
+  "differing_config_fields": {
+    "algorithm": {
+      "H": "hmasd",
+      "SET": "mappo"
+    },
+    "collects_high_level_samples": {
+      "H": null,
+      "SET": false
+    },
+    "contract_arm": {
+      "H": "H",
+      "SET": "SET"
+    },
+    "disable_discriminator_rewards": {
+      "H": null,
+      "SET": true
+    },
+    "disable_discriminator_training": {
+      "H": null,
+      "SET": true
+    },
+    "disable_high_level_training": {
+      "H": null,
+      "SET": true
+    },
+    "lambda_D": {
+      "H": 0.05,
+      "SET": 0.0
+    },
+    "lambda_d": {
+      "H": 0.02,
+      "SET": 0.0
+    },
+    "lambda_h": {
+      "H": 0.07,
+      "SET": 0.0
+    },
+    "n_Z": {
+      "H": 6,
+      "SET": 1
+    },
+    "n_z": {
+      "H": 6,
+      "SET": 1
+    },
+    "policy_interruption_mode": {
+      "H": "d2",
+      "SET": "off"
+    },
+    "seed": {
+      "H": 931201,
+      "SET": 932201
+    },
+    "skill_cap_k_max": {
+      "H": 1,
+      "SET": 10
+    },
+    "team_cap_k_Z": {
+      "H": 1,
+      "SET": null
+    },
+    "use_central_snapshot_in_flat_actor": {
+      "H": false,
+      "SET": true
+    }
+  },
+  "config": {
+    "SET": {
+      "contract_arm": "SET",
+      "algorithm": "mappo",
+      "n_agents": 6,
+      "n_uavs": 6,
+      "n_users": 50,
+      "num_envs": 16,
+      "rollout_length": 50,
+      "episode_length": 50,
+      "k": 1,
+      "n_Z": 1,
+      "n_z": 1,
+      "state_dim": 133,
+      "obs_dim": 90,
+      "action_dim": 3,
+      "action_space_type": "continuous",
+      "gamma": 0.99,
+      "gae_lambda": 0.95,
+      "ppo_epochs": 15,
+      "num_mini_batch": 4,
+      "sequence_batch_size": 32,
+      "coordinator_batch_size": 1280,
+      "high_level_batch_size": 128,
+      "high_level_buffer_size": 800,
+      "batch_size": 1200,
+      "discriminator_batch_size": 1200,
+      "lambda_e": 1.0,
+      "lambda_D": 0.0,
+      "lambda_d": 0.0,
+      "lambda_h": 0.0,
+      "lambda_l": 0.05,
+      "lambda_cd": 0.0,
+      "lambda_mi": 0.0,
+      "lr_coordinator": 0.0001,
+      "lr_discoverer_actor": 0.0001,
+      "lr_discoverer_critic": 0.0001,
+      "lr_discriminator": 0.0001,
+      "weight_decay": 0.0,
+      "clip_epsilon": 0.2,
+      "value_loss_coef": 1.0,
+      "max_grad_norm": 0.5,
+      "hidden_size": 256,
+      "embedding_dim": 256,
+      "n_heads": 8,
+      "n_encoder_layers": 2,
+      "n_decoder_layers": 2,
+      "gru_hidden_size": 256,
+      "use_valuenorm": true,
+      "use_obsnorm": false,
+      "use_statenorm": false,
+      "use_lr_decay": false,
+      "use_entropy_annealing": false,
+      "total_timesteps": 36000,
+      "seed": 932201,
+      "policy_interruption_mode": "off",
+      "interruption_delta": 1,
+      "interruption_cost_c": "inf",
+      "interruption_cost_c_Z": "inf",
+      "skill_cap_k_max": 10,
+      "team_cap_k_Z": null,
+      "age_feature": "off",
+      "continuous_action_distribution": "tanh_gaussian",
+      "continuous_logstd_init": -1.0,
+      "continuous_logstd_min": -5.0,
+      "continuous_logstd_max": 0.0,
+      "use_central_snapshot_in_flat_actor": true,
+      "disable_high_level_training": true,
+      "disable_discriminator_training": true,
+      "disable_discriminator_rewards": true,
+      "collects_high_level_samples": false,
+      "use_process_exploration": false,
+      "use_horizon_window": false,
+      "use_opt_compact": false,
+      "macro_contract": "target"
+    },
+    "H": {
+      "contract_arm": "H",
+      "algorithm": "hmasd",
+      "n_agents": 6,
+      "n_uavs": 6,
+      "n_users": 50,
+      "num_envs": 16,
+      "rollout_length": 50,
+      "episode_length": 50,
+      "k": 1,
+      "n_Z": 6,
+      "n_z": 6,
+      "state_dim": 133,
+      "obs_dim": 90,
+      "action_dim": 3,
+      "action_space_type": "continuous",
+      "gamma": 0.99,
+      "gae_lambda": 0.95,
+      "ppo_epochs": 15,
+      "num_mini_batch": 4,
+      "sequence_batch_size": 32,
+      "coordinator_batch_size": 1280,
+      "high_level_batch_size": 128,
+      "high_level_buffer_size": 800,
+      "batch_size": 1200,
+      "discriminator_batch_size": 1200,
+      "lambda_e": 1.0,
+      "lambda_D": 0.05,
+      "lambda_d": 0.02,
+      "lambda_h": 0.07,
+      "lambda_l": 0.05,
+      "lambda_cd": 0.0,
+      "lambda_mi": 0.0,
+      "lr_coordinator": 0.0001,
+      "lr_discoverer_actor": 0.0001,
+      "lr_discoverer_critic": 0.0001,
+      "lr_discriminator": 0.0001,
+      "weight_decay": 0.0,
+      "clip_epsilon": 0.2,
+      "value_loss_coef": 1.0,
+      "max_grad_norm": 0.5,
+      "hidden_size": 256,
+      "embedding_dim": 256,
+      "n_heads": 8,
+      "n_encoder_layers": 2,
+      "n_decoder_layers": 2,
+      "gru_hidden_size": 256,
+      "use_valuenorm": true,
+      "use_obsnorm": false,
+      "use_statenorm": false,
+      "use_lr_decay": false,
+      "use_entropy_annealing": false,
+      "total_timesteps": 36000,
+      "seed": 931201,
+      "policy_interruption_mode": "d2",
+      "interruption_delta": 1,
+      "interruption_cost_c": "inf",
+      "interruption_cost_c_Z": "inf",
+      "skill_cap_k_max": 1,
+      "team_cap_k_Z": 1,
+      "age_feature": "off",
+      "continuous_action_distribution": "tanh_gaussian",
+      "continuous_logstd_init": -1.0,
+      "continuous_logstd_min": -5.0,
+      "continuous_logstd_max": 0.0,
+      "use_central_snapshot_in_flat_actor": false,
+      "disable_high_level_training": null,
+      "disable_discriminator_training": null,
+      "disable_discriminator_rewards": null,
+      "collects_high_level_samples": null,
+      "use_process_exploration": false,
+      "use_horizon_window": false,
+      "use_opt_compact": false,
+      "macro_contract": "target"
+    }
+  }
+}
