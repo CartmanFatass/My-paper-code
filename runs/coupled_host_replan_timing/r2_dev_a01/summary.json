@@ -1,0 +1,4696 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_replan_timing",
+  "tool": "coupled_host_replan_timing.run_r2",
+  "launch_sha": "793ec645a444aca0452d58fb3ee3ddee372e59e8",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_replan_timing",
+    "sha": "793ec645a444aca0452d58fb3ee3ddee372e59e8",
+    "command_sha256": "6eb9e40c25525bd56e94e5671a4eb746290f9850ec74d28e50765a9f42c5d617",
+    "parent_pid": 34362,
+    "child_pid": 34363,
+    "accepted_at_epoch": 1790721710.2134001
+  },
+  "git_head": "793ec645a444aca0452d58fb3ee3ddee372e59e8",
+  "training_fits_performed": 0,
+  "worlds": [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007,
+    1008,
+    1009,
+    1010,
+    1011,
+    1012,
+    1013,
+    1014,
+    1015,
+    1016,
+    1017,
+    1018,
+    1019,
+    1020,
+    1021,
+    1022,
+    1023,
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+  ],
+  "area_size": 5000,
+  "budget": 3000,
+  "arms": [
+    "unshared",
+    "shared",
+    "D"
+  ],
+  "information_contract": {
+    "trigger_k": 3,
+    "move_threshold_m": 100.0,
+    "max_replans": 3,
+    "forwarding_links": "consecutive UAV-UAV node pairs of env.routing_paths (the host's actual backhaul routes of that step), symmetrised; not the wider SINR adjacency env.uav_connections",
+    "decision_end_rule": "shortest len(env.routing_paths[i]) in the branch-point snapshot (held pre-event deployment); unrouted = +inf; ties -> lower index; no routed UAV -> lower index, decision_end_reason = 'no routed uav'",
+    "facts": "every user env._get_local_users(i) returns (uncapped)",
+    "clock": "facts of step s (state after call s) govern call s + 1"
+  },
+  "reference_run": {
+    "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/summary.json",
+    "sha256": "a604dacd011b6f3349fd0727da82f05efa7c5dd4ba11a9dc9313aafc0f5bbf47",
+    "budget": 3000,
+    "launch_sha": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+    "tool": "coupled_host_replan_timing.run_r1lite"
+  },
+  "definitions": {
+    "delta_share": "shared - unshared (post-event C_bh, per world, then paired)",
+    "s_info_unshared": "cold (R1-lite F) - unshared",
+    "s_info_shared": "cold - shared",
+    "d_minus_shared": "D - shared",
+    "d_minus_unshared": "D - unshared",
+    "post_event_window": "series indices t_e..499; t_e from the host record, reporting only"
+  },
+  "per_world": [
+    {
+      "world": 1000,
+      "t_e": 349,
+      "routing_class": "unserved",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7599999999999998,
+          "all_mean": 0.69368,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.16797300000000037,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7599999999999998,
+          "all_mean": 0.69368,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.16644299999999967,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.7599999999999998,
+          "all_mean": 0.69368,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.15561999999999987,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        }
+      },
+      "reference_cold_post_event_mean": 0.7599999999999998,
+      "reference_keep_post_event_mean": 0.7599999999999998,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.0,
+        "s_info_shared": 0.0,
+        "d_minus_shared": 0.0,
+        "d_minus_unshared": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.1850869309855625,
+          "cpu_s": 1.161654
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3287168290116824,
+          "cpu_s": 0.3229190000000002
+        },
+        "unshared": {
+          "wall_s": 0.1707594739855267,
+          "cpu_s": 0.16797300000000037
+        },
+        "shared": {
+          "wall_s": 0.16893948600045405,
+          "cpu_s": 0.16644299999999967
+        },
+        "D": {
+          "wall_s": 0.16194595998967998,
+          "cpu_s": 0.15561999999999987
+        },
+        "world_total": {
+          "wall_s": 2.0291386779863387,
+          "cpu_s": 1.9879499999999999
+        }
+      }
+    },
+    {
+      "world": 1001,
+      "t_e": 259,
+      "routing_class": "unserved",
+      "decision_end": 1,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 5,
+      "deployed_layout_gateway": 1,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7799999999999999,
+          "all_mean": 0.70064,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.25640399999999985,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7799999999999999,
+          "all_mean": 0.70064,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.26618099999999956,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.7799999999999999,
+          "all_mean": 0.70064,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.25203100000000056,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        }
+      },
+      "reference_cold_post_event_mean": 0.7563485477178422,
+      "reference_keep_post_event_mean": 0.7799999999999999,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": -0.023651452282157703,
+        "s_info_shared": -0.023651452282157703,
+        "d_minus_shared": 0.0,
+        "d_minus_unshared": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.902680432976922,
+          "cpu_s": 0.8903309999999998
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.24821879601222463,
+          "cpu_s": 0.24531300000000034
+        },
+        "unshared": {
+          "wall_s": 0.2594569360080641,
+          "cpu_s": 0.25640399999999985
+        },
+        "shared": {
+          "wall_s": 0.2690877279965207,
+          "cpu_s": 0.26618099999999956
+        },
+        "D": {
+          "wall_s": 0.2544862749928143,
+          "cpu_s": 0.25203100000000056
+        },
+        "world_total": {
+          "wall_s": 1.9454492969962303,
+          "cpu_s": 1.9215530000000007
+        }
+      }
+    },
+    {
+      "world": 1002,
+      "t_e": 204,
+      "routing_class": "chain",
+      "decision_end": 2,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 4,
+      "deployed_layout_gateway": 2,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.76552,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.33199299999999976,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 2,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.76552,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.32609899999999925,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 2,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.76552,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3365089999999995,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 2,
+          "truth_grant_steps": []
+        }
+      },
+      "reference_cold_post_event_mean": 0.7599999999999999,
+      "reference_keep_post_event_mean": 0.7599999999999999,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.0,
+        "s_info_shared": 0.0,
+        "d_minus_shared": 0.0,
+        "d_minus_unshared": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.9194305980054196,
+          "cpu_s": 0.9107409999999998
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.19026343000587076,
+          "cpu_s": 0.1867700000000001
+        },
+        "unshared": {
+          "wall_s": 0.334311707993038,
+          "cpu_s": 0.33199299999999976
+        },
+        "shared": {
+          "wall_s": 0.3281275189947337,
+          "cpu_s": 0.32609899999999925
+        },
+        "D": {
+          "wall_s": 0.3382466650218703,
+          "cpu_s": 0.3365089999999995
+        },
+        "world_total": {
+          "wall_s": 2.1200110819772817,
+          "cpu_s": 2.1015949999999997
+        }
+      }
+    },
+    {
+      "world": 1003,
+      "t_e": 206,
+      "routing_class": "chain",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.9720408163265309,
+          "all_mean": 0.9459600000000001,
+          "first_change_step_per_uav": [
+            206,
+            206,
+            206,
+            206,
+            206,
+            206
+          ],
+          "first_change_step_at_decision_end": 206,
+          "detection_step_any_uav": 206,
+          "trigger_steps": [
+            {
+              "fact_step": 206,
+              "first_call_with_new_targets": 207
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1851,
+          "cap_hit": false,
+          "cpu_s": 1.0735169999999998,
+          "routing_links": {
+            "mean": 1.9761904761904763,
+            "min": 1,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 1465,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.9729931972789118,
+          "all_mean": 0.9465200000000003,
+          "first_change_step_per_uav": [
+            206,
+            206,
+            206,
+            206,
+            206,
+            206
+          ],
+          "first_change_step_at_decision_end": 206,
+          "detection_step_any_uav": 206,
+          "trigger_steps": [
+            {
+              "fact_step": 206,
+              "first_call_with_new_targets": 207
+            },
+            {
+              "fact_step": 239,
+              "first_call_with_new_targets": 240
+            }
+          ],
+          "replans": 2,
+          "evaluations_used": 3721,
+          "cap_hit": false,
+          "cpu_s": 1.8321449999999988,
+          "routing_links": {
+            "mean": 2.772108843537415,
+            "min": 1,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 1464,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.9794557823129255,
+          "all_mean": 0.9503200000000002,
+          "first_change_step_per_uav": [
+            206,
+            206,
+            206,
+            206,
+            206,
+            206
+          ],
+          "first_change_step_at_decision_end": 206,
+          "detection_step_any_uav": 206,
+          "trigger_steps": [
+            {
+              "fact_step": 206,
+              "first_call_with_new_targets": 207
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1870,
+          "cap_hit": false,
+          "cpu_s": 1.1247839999999982,
+          "routing_links": {
+            "mean": 3.0374149659863945,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 1454,
+          "truth_grant_steps": [
+            206
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9797278911564629,
+      "reference_keep_post_event_mean": 0.9000000000000002,
+      "stakes": {
+        "delta_share": 0.0009523809523808158,
+        "s_info_unshared": 0.007687074829931917,
+        "s_info_shared": 0.006734693877551101,
+        "d_minus_shared": 0.006462585034013757,
+        "d_minus_unshared": 0.007414965986394573
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8836253059853334,
+          "cpu_s": 0.8796929999999996
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.1891804840124678,
+          "cpu_s": 0.1874950000000002
+        },
+        "unshared": {
+          "wall_s": 1.0762995179975405,
+          "cpu_s": 1.0735169999999998
+        },
+        "shared": {
+          "wall_s": 1.837100997014204,
+          "cpu_s": 1.8321449999999988
+        },
+        "D": {
+          "wall_s": 1.1236882209777832,
+          "cpu_s": 1.1247839999999982
+        },
+        "world_total": {
+          "wall_s": 5.119591085007414,
+          "cpu_s": 5.107239000000001
+        }
+      }
+    },
+    {
+      "world": 1004,
+      "t_e": 322,
+      "routing_class": "shared_only",
+      "decision_end": 1,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 1,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7999999999999998,
+          "all_mean": 0.7814400000000001,
+          "first_change_step_per_uav": [
+            null,
+            322,
+            null,
+            322,
+            null,
+            322
+          ],
+          "first_change_step_at_decision_end": 322,
+          "detection_step_any_uav": 322,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.17674099999999804,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7999999999999998,
+          "all_mean": 0.7814400000000001,
+          "first_change_step_per_uav": [
+            null,
+            322,
+            null,
+            322,
+            null,
+            322
+          ],
+          "first_change_step_at_decision_end": 322,
+          "detection_step_any_uav": 322,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.17895399999999917,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.8659550561797755,
+          "all_mean": 0.8049200000000001,
+          "first_change_step_per_uav": [
+            null,
+            322,
+            null,
+            322,
+            null,
+            322
+          ],
+          "first_change_step_at_decision_end": 322,
+          "detection_step_any_uav": 322,
+          "trigger_steps": [
+            {
+              "fact_step": 322,
+              "first_call_with_new_targets": 323
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1823,
+          "cap_hit": false,
+          "cpu_s": 0.9229669999999999,
+          "routing_links": {
+            "mean": 2.8202247191011236,
+            "min": 1,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 331,
+          "truth_grant_steps": [
+            322
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.8665168539325846,
+      "reference_keep_post_event_mean": 0.7999999999999998,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.06651685393258477,
+        "s_info_shared": 0.06651685393258477,
+        "d_minus_shared": 0.0659550561797757,
+        "d_minus_unshared": 0.0659550561797757
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.7137516869988758,
+          "cpu_s": 0.7149940000000008
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.28929850200074725,
+          "cpu_s": 0.2899080000000005
+        },
+        "unshared": {
+          "wall_s": 0.176342010992812,
+          "cpu_s": 0.17674099999999804
+        },
+        "shared": {
+          "wall_s": 0.17849983600899577,
+          "cpu_s": 0.17895399999999917
+        },
+        "D": {
+          "wall_s": 0.9200465430039912,
+          "cpu_s": 0.9229669999999999
+        },
+        "world_total": {
+          "wall_s": 2.2882444389979355,
+          "cpu_s": 2.2938100000000006
+        }
+      }
+    },
+    {
+      "world": 1005,
+      "t_e": 226,
+      "routing_class": "unserved",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 3,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7999999999999998,
+          "all_mean": 0.7255199999999999,
+          "first_change_step_per_uav": [
+            226,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 226,
+          "detection_step_any_uav": 226,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3014840000000003,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 274,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7999999999999998,
+          "all_mean": 0.7255199999999999,
+          "first_change_step_per_uav": [
+            226,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 226,
+          "detection_step_any_uav": 226,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3076989999999995,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 274,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.9311678832116785,
+          "all_mean": 0.7973999999999999,
+          "first_change_step_per_uav": [
+            226,
+            null,
+            252,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 226,
+          "detection_step_any_uav": 226,
+          "trigger_steps": [
+            {
+              "fact_step": 226,
+              "first_call_with_new_targets": 227
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1825,
+          "cap_hit": false,
+          "cpu_s": 0.992759999999997,
+          "routing_links": {
+            "mean": 2.95985401459854,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 278,
+          "truth_grant_steps": [
+            226
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9316788321167881,
+      "reference_keep_post_event_mean": 0.7999999999999998,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.13167883211678832,
+        "s_info_shared": 0.13167883211678832,
+        "d_minus_shared": 0.13116788321167872,
+        "d_minus_unshared": 0.13116788321167872
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.7309853989863768,
+          "cpu_s": 0.7336930000000006
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.21135449400753714,
+          "cpu_s": 0.21217099999999967
+        },
+        "unshared": {
+          "wall_s": 0.30021429900079966,
+          "cpu_s": 0.3014840000000003
+        },
+        "shared": {
+          "wall_s": 0.3063615090213716,
+          "cpu_s": 0.3076989999999995
+        },
+        "D": {
+          "wall_s": 0.9881708239845466,
+          "cpu_s": 0.992759999999997
+        },
+        "world_total": {
+          "wall_s": 2.546507929015206,
+          "cpu_s": 2.5571959999999976
+        }
+      }
+    },
+    {
+      "world": 1006,
+      "t_e": 314,
+      "routing_class": "direct",
+      "decision_end": 2,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 2,
+      "deployed_layout_gateway": 2,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.9002150537634408,
+          "all_mean": 0.8934000000000001,
+          "first_change_step_per_uav": [
+            314,
+            314,
+            314,
+            314,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 314,
+          "detection_step_any_uav": 314,
+          "trigger_steps": [
+            {
+              "fact_step": 314,
+              "first_call_with_new_targets": 315
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1723,
+          "cap_hit": false,
+          "cpu_s": 0.8774940000000022,
+          "routing_links": {
+            "mean": 1.9086021505376345,
+            "min": 1,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 391,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.9002150537634408,
+          "all_mean": 0.8934000000000001,
+          "first_change_step_per_uav": [
+            314,
+            314,
+            314,
+            314,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 314,
+          "detection_step_any_uav": 314,
+          "trigger_steps": [
+            {
+              "fact_step": 314,
+              "first_call_with_new_targets": 315
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1723,
+          "cap_hit": false,
+          "cpu_s": 0.9146920000000023,
+          "routing_links": {
+            "mean": 1.9086021505376345,
+            "min": 1,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 391,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.9419354838709674,
+          "all_mean": 0.9089200000000001,
+          "first_change_step_per_uav": [
+            314,
+            314,
+            314,
+            314,
+            334,
+            null
+          ],
+          "first_change_step_at_decision_end": 314,
+          "detection_step_any_uav": 314,
+          "trigger_steps": [
+            {
+              "fact_step": 314,
+              "first_call_with_new_targets": 315
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1829,
+          "cap_hit": false,
+          "cpu_s": 0.9170090000000002,
+          "routing_links": {
+            "mean": 3.7204301075268815,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 373,
+          "truth_grant_steps": [
+            314
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9422580645161287,
+      "reference_keep_post_event_mean": 0.88,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.042043010752687904,
+        "s_info_shared": 0.042043010752687904,
+        "d_minus_shared": 0.041720430107526574,
+        "d_minus_unshared": 0.041720430107526574
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.9392181419825647,
+          "cpu_s": 0.944027000000002
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3450031630054582,
+          "cpu_s": 0.346823999999998
+        },
+        "unshared": {
+          "wall_s": 0.8726243349956349,
+          "cpu_s": 0.8774940000000022
+        },
+        "shared": {
+          "wall_s": 0.9095204730110709,
+          "cpu_s": 0.9146920000000023
+        },
+        "D": {
+          "wall_s": 0.9113044789992273,
+          "cpu_s": 0.9170090000000002
+        },
+        "world_total": {
+          "wall_s": 3.987558638007613,
+          "cpu_s": 4.009921999999996
+        }
+      }
+    },
+    {
+      "world": 1007,
+      "t_e": 160,
+      "routing_class": "shared_only",
+      "decision_end": 3,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 1,
+      "deployed_layout_gateway": 3,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7800000000000001,
+          "all_mean": 0.7515599999999999,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.39950399999999675,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7800000000000001,
+          "all_mean": 0.7515599999999999,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.37995400000000146,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.7800000000000001,
+          "all_mean": 0.7515599999999999,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3714189999999995,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        }
+      },
+      "reference_cold_post_event_mean": 0.7608823529411765,
+      "reference_keep_post_event_mean": 0.7800000000000001,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": -0.019117647058823684,
+        "s_info_shared": -0.019117647058823684,
+        "d_minus_shared": 0.0,
+        "d_minus_unshared": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.7215351880004164,
+          "cpu_s": 0.7262699999999995
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.16235259600216523,
+          "cpu_s": 0.1634469999999979
+        },
+        "unshared": {
+          "wall_s": 0.39680354099255055,
+          "cpu_s": 0.39950399999999675
+        },
+        "shared": {
+          "wall_s": 0.3773861509980634,
+          "cpu_s": 0.37995400000000146
+        },
+        "D": {
+          "wall_s": 0.3688488569750916,
+          "cpu_s": 0.3714189999999995
+        },
+        "world_total": {
+          "wall_s": 2.036062163999304,
+          "cpu_s": 2.049721999999999
+        }
+      }
+    },
+    {
+      "world": 1008,
+      "t_e": 233,
+      "routing_class": "shared_only",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 1,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.73668,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            233,
+            233
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 233,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2604849999999992,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.73668,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            233,
+            233
+          ],
+          "first_change_step_at_decision_end": 234,
+          "detection_step_any_uav": 233,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3060389999999984,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.7742322097378277,
+          "all_mean": 0.74428,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            233,
+            233
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 233,
+          "trigger_steps": [
+            {
+              "fact_step": 233,
+              "first_call_with_new_targets": 234
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1615,
+          "cap_hit": false,
+          "cpu_s": 0.9789929999999991,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 246,
+          "truth_grant_steps": [
+            233
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.7743071161048689,
+      "reference_keep_post_event_mean": 0.7599999999999999,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.014307116104869011,
+        "s_info_shared": 0.014307116104869011,
+        "d_minus_shared": 0.014232209737827795,
+        "d_minus_unshared": 0.014232209737827795
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.6836589339945931,
+          "cpu_s": 0.6884949999999961
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.2050792410154827,
+          "cpu_s": 0.2065589999999986
+        },
+        "unshared": {
+          "wall_s": 0.2586418140272144,
+          "cpu_s": 0.2604849999999992
+        },
+        "shared": {
+          "wall_s": 0.3038303409994114,
+          "cpu_s": 0.3060389999999984
+        },
+        "D": {
+          "wall_s": 0.97190755198244,
+          "cpu_s": 0.9789929999999991
+        },
+        "world_total": {
+          "wall_s": 2.431993322010385,
+          "cpu_s": 2.4494649999999965
+        }
+      }
+    },
+    {
+      "world": 1009,
+      "t_e": 257,
+      "routing_class": "chain",
+      "decision_end": 3,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 3,
+      "deployed_layout_gateway": 3,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.8800000000000002,
+          "all_mean": 0.8438400000000001,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            257,
+            257,
+            257,
+            257
+          ],
+          "first_change_step_at_decision_end": 257,
+          "detection_step_any_uav": 257,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2839130000000054,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.8800000000000002,
+          "all_mean": 0.8438400000000001,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            257,
+            257,
+            257,
+            257
+          ],
+          "first_change_step_at_decision_end": 257,
+          "detection_step_any_uav": 257,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2989689999999996,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.9215637860082304,
+          "all_mean": 0.86404,
+          "first_change_step_per_uav": [
+            283,
+            null,
+            257,
+            257,
+            257,
+            257
+          ],
+          "first_change_step_at_decision_end": 257,
+          "detection_step_any_uav": 257,
+          "trigger_steps": [
+            {
+              "fact_step": 257,
+              "first_call_with_new_targets": 258
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1921,
+          "cap_hit": false,
+          "cpu_s": 1.0450829999999982,
+          "routing_links": {
+            "mean": 2.1316872427983538,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 17,
+          "truth_grant_steps": [
+            257
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9217283950617284,
+      "reference_keep_post_event_mean": 0.8800000000000002,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.04172839506172821,
+        "s_info_shared": 0.04172839506172821,
+        "d_minus_shared": 0.041563786008230186,
+        "d_minus_unshared": 0.041563786008230186
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.9302216490032151,
+          "cpu_s": 0.9371800000000015
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.2860705390048679,
+          "cpu_s": 0.28824000000000183
+        },
+        "unshared": {
+          "wall_s": 0.2817583940050099,
+          "cpu_s": 0.2839130000000054
+        },
+        "shared": {
+          "wall_s": 0.29671698398306035,
+          "cpu_s": 0.2989689999999996
+        },
+        "D": {
+          "wall_s": 1.037127554998733,
+          "cpu_s": 1.0450829999999982
+        },
+        "world_total": {
+          "wall_s": 2.8418423359980807,
+          "cpu_s": 2.8633390000000034
+        }
+      }
+    },
+    {
+      "world": 1010,
+      "t_e": 190,
+      "routing_class": "direct",
+      "decision_end": 2,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 3,
+      "deployed_layout_gateway": 2,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.8400000000000001,
+          "all_mean": 0.8376,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            190,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 190,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.4325279999999978,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 310,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.8400000000000001,
+          "all_mean": 0.8376,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            190,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 190,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3972240000000049,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 310,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.8212258064516128,
+          "all_mean": 0.82596,
+          "first_change_step_per_uav": [
+            196,
+            null,
+            null,
+            null,
+            190,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 190,
+          "trigger_steps": [
+            {
+              "fact_step": 190,
+              "first_call_with_new_targets": 191
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1964,
+          "cap_hit": false,
+          "cpu_s": 1.2661959999999972,
+          "routing_links": {
+            "mean": 2.1451612903225805,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 612,
+          "truth_grant_steps": [
+            190
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.8211612903225807,
+      "reference_keep_post_event_mean": 0.8400000000000001,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": -0.018838709677419407,
+        "s_info_shared": -0.018838709677419407,
+        "d_minus_shared": -0.018774193548387275,
+        "d_minus_unshared": -0.018774193548387275
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.0045210010139272,
+          "cpu_s": 1.0123359999999977
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.2794471739907749,
+          "cpu_s": 0.2818029999999965
+        },
+        "unshared": {
+          "wall_s": 0.4291438559885137,
+          "cpu_s": 0.4325279999999978
+        },
+        "shared": {
+          "wall_s": 0.39408277499023825,
+          "cpu_s": 0.3972240000000049
+        },
+        "D": {
+          "wall_s": 1.2562810689851176,
+          "cpu_s": 1.2661959999999972
+        },
+        "world_total": {
+          "wall_s": 3.3749371960002463,
+          "cpu_s": 3.401401
+        }
+      }
+    },
+    {
+      "world": 1011,
+      "t_e": 249,
+      "routing_class": "unserved",
+      "decision_end": 2,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 2,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.8600000000000001,
+          "all_mean": 0.7691600000000001,
+          "first_change_step_per_uav": [
+            249,
+            null,
+            249,
+            249,
+            null,
+            249
+          ],
+          "first_change_step_at_decision_end": 249,
+          "detection_step_any_uav": 249,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3113390000000038,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 500,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.9384860557768921,
+          "all_mean": 0.8085599999999998,
+          "first_change_step_per_uav": [
+            249,
+            null,
+            249,
+            249,
+            null,
+            249
+          ],
+          "first_change_step_at_decision_end": 249,
+          "detection_step_any_uav": 249,
+          "trigger_steps": [
+            {
+              "fact_step": 250,
+              "first_call_with_new_targets": 251
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1656,
+          "cap_hit": false,
+          "cpu_s": 0.9977529999999959,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 736,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.991394422310757,
+          "all_mean": 0.83512,
+          "first_change_step_per_uav": [
+            249,
+            null,
+            249,
+            249,
+            null,
+            249
+          ],
+          "first_change_step_at_decision_end": 249,
+          "detection_step_any_uav": 249,
+          "trigger_steps": [
+            {
+              "fact_step": 249,
+              "first_call_with_new_targets": 250
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2174,
+          "cap_hit": false,
+          "cpu_s": 1.2168700000000001,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 518,
+          "truth_grant_steps": [
+            249
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9919521912350597,
+      "reference_keep_post_event_mean": 0.8600000000000001,
+      "stakes": {
+        "delta_share": 0.07848605577689205,
+        "s_info_unshared": 0.13195219123505963,
+        "s_info_shared": 0.053466135458167585,
+        "d_minus_shared": 0.05290836653386488,
+        "d_minus_unshared": 0.13139442231075693
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.7773791990184691,
+          "cpu_s": 0.7835250000000009
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.29830494098132476,
+          "cpu_s": 0.3006409999999988
+        },
+        "unshared": {
+          "wall_s": 0.3093826100230217,
+          "cpu_s": 0.3113390000000038
+        },
+        "shared": {
+          "wall_s": 0.9897162229754031,
+          "cpu_s": 0.9977529999999959
+        },
+        "D": {
+          "wall_s": 1.2069878859911114,
+          "cpu_s": 1.2168700000000001
+        },
+        "world_total": {
+          "wall_s": 3.591711437009508,
+          "cpu_s": 3.620072000000004
+        }
+      }
+    },
+    {
+      "world": 1012,
+      "t_e": 224,
+      "routing_class": "shared_only",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 2,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.9399999999999998,
+          "all_mean": 0.8119999999999997,
+          "first_change_step_per_uav": [
+            null,
+            224,
+            null,
+            null,
+            null,
+            224
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 224,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3151380000000046,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 275,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.9399999999999998,
+          "all_mean": 0.8119999999999997,
+          "first_change_step_per_uav": [
+            null,
+            224,
+            null,
+            null,
+            null,
+            224
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 224,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2921270000000078,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 275,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.9202173913043479,
+          "all_mean": 0.8010800000000001,
+          "first_change_step_per_uav": [
+            null,
+            224,
+            null,
+            null,
+            null,
+            224
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 224,
+          "trigger_steps": [
+            {
+              "fact_step": 224,
+              "first_call_with_new_targets": 225
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1849,
+          "cap_hit": false,
+          "cpu_s": 1.0622939999999943,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 275,
+          "truth_grant_steps": [
+            224
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.920144927536232,
+      "reference_keep_post_event_mean": 0.9399999999999998,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": -0.01985507246376783,
+        "s_info_shared": -0.01985507246376783,
+        "d_minus_shared": -0.01978260869565196,
+        "d_minus_unshared": -0.01978260869565196
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.7409456440072972,
+          "cpu_s": 0.7470149999999975
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.23036709299776703,
+          "cpu_s": 0.23229100000000358
+        },
+        "unshared": {
+          "wall_s": 0.3125558650062885,
+          "cpu_s": 0.3151380000000046
+        },
+        "shared": {
+          "wall_s": 0.2897856500057969,
+          "cpu_s": 0.2921270000000078
+        },
+        "D": {
+          "wall_s": 1.0542323269764893,
+          "cpu_s": 1.0622939999999943
+        },
+        "world_total": {
+          "wall_s": 2.6376311299973167,
+          "cpu_s": 2.6586230000000057
+        }
+      }
+    },
+    {
+      "world": 1013,
+      "t_e": 279,
+      "routing_class": "direct",
+      "decision_end": 1,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 3,
+      "deployed_layout_gateway": 1,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.82,
+          "all_mean": 0.8094000000000001,
+          "first_change_step_per_uav": [
+            279,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 279,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.23282999999999276,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 221,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.82,
+          "all_mean": 0.8094000000000001,
+          "first_change_step_per_uav": [
+            279,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 280,
+          "detection_step_any_uav": 279,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2716270000000023,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 221,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.8200904977375566,
+          "all_mean": 0.80944,
+          "first_change_step_per_uav": [
+            279,
+            288,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 288,
+          "detection_step_any_uav": 279,
+          "trigger_steps": [
+            {
+              "fact_step": 279,
+              "first_call_with_new_targets": 280
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2011,
+          "cap_hit": false,
+          "cpu_s": 1.1237019999999944,
+          "routing_links": {
+            "mean": 3.9638009049773757,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 6,
+          "truth_grant_steps": [
+            279
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.8200904977375566,
+      "reference_keep_post_event_mean": 0.82,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 9.049773755664958e-05,
+        "s_info_shared": 9.049773755664958e-05,
+        "d_minus_shared": 9.049773755664958e-05,
+        "d_minus_unshared": 9.049773755664958e-05
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8354523080051877,
+          "cpu_s": 0.8414500000000089
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.31413480400806293,
+          "cpu_s": 0.316391000000003
+        },
+        "unshared": {
+          "wall_s": 0.23117524801637046,
+          "cpu_s": 0.23282999999999276
+        },
+        "shared": {
+          "wall_s": 0.26966938201803714,
+          "cpu_s": 0.2716270000000023
+        },
+        "D": {
+          "wall_s": 1.115894179994939,
+          "cpu_s": 1.1237019999999944
+        },
+        "world_total": {
+          "wall_s": 2.779037731990684,
+          "cpu_s": 2.798731999999994
+        }
+      }
+    },
+    {
+      "world": 1014,
+      "t_e": 326,
+      "routing_class": "direct",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 4,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.8199999999999998,
+          "all_mean": 0.87276,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            326,
+            326,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 326,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.17693700000000234,
+          "routing_links": {
+            "mean": 2.0,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 174,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.8199999999999998,
+          "all_mean": 0.87276,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            326,
+            326,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 326,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.18203100000000205,
+          "routing_links": {
+            "mean": 2.0,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 174,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.937241379310345,
+          "all_mean": 0.9135599999999999,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            326,
+            326,
+            338,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 326,
+          "trigger_steps": [
+            {
+              "fact_step": 326,
+              "first_call_with_new_targets": 327
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2104,
+          "cap_hit": false,
+          "cpu_s": 1.003739000000003,
+          "routing_links": {
+            "mean": 3.7011494252873565,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 371,
+          "truth_grant_steps": [
+            326
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9381609195402303,
+      "reference_keep_post_event_mean": 0.8199999999999998,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.11816091954023045,
+        "s_info_shared": 0.11816091954023045,
+        "d_minus_shared": 0.11724137931034517,
+        "d_minus_unshared": 0.11724137931034517
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.9610802420065738,
+          "cpu_s": 0.9675000000000011
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3269926590146497,
+          "cpu_s": 0.32911599999999197
+        },
+        "unshared": {
+          "wall_s": 0.17563873101607896,
+          "cpu_s": 0.17693700000000234
+        },
+        "shared": {
+          "wall_s": 0.18070485102362,
+          "cpu_s": 0.18203100000000205
+        },
+        "D": {
+          "wall_s": 0.996631604997674,
+          "cpu_s": 1.003739000000003
+        },
+        "world_total": {
+          "wall_s": 2.652874569990672,
+          "cpu_s": 2.671168999999999
+        }
+      }
+    },
+    {
+      "world": 1015,
+      "t_e": 297,
+      "routing_class": "chain",
+      "decision_end": 5,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 5,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7000000000000001,
+          "all_mean": 0.6684399999999999,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            297
+          ],
+          "first_change_step_at_decision_end": 297,
+          "detection_step_any_uav": 297,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.24286599999999936,
+          "routing_links": {
+            "mean": 5.0,
+            "min": 5,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 2,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7000000000000001,
+          "all_mean": 0.6684399999999999,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            297
+          ],
+          "first_change_step_at_decision_end": 297,
+          "detection_step_any_uav": 297,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.22612000000000165,
+          "routing_links": {
+            "mean": 5.0,
+            "min": 5,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 2,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.6827586206896551,
+          "all_mean": 0.6614399999999999,
+          "first_change_step_per_uav": [
+            332,
+            null,
+            356,
+            313,
+            null,
+            297
+          ],
+          "first_change_step_at_decision_end": 297,
+          "detection_step_any_uav": 297,
+          "trigger_steps": [
+            {
+              "fact_step": 297,
+              "first_call_with_new_targets": 298
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2047,
+          "cap_hit": false,
+          "cpu_s": 0.9891679999999923,
+          "routing_links": {
+            "mean": 2.8620689655172415,
+            "min": 1,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 2,
+          "truth_grant_steps": [
+            297
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.6830541871921182,
+      "reference_keep_post_event_mean": 0.7000000000000001,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": -0.016945812807881877,
+        "s_info_shared": -0.016945812807881877,
+        "d_minus_shared": -0.017241379310344973,
+        "d_minus_unshared": -0.017241379310344973
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.785810239991406,
+          "cpu_s": 0.7914669999999973
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.2892214379971847,
+          "cpu_s": 0.29133700000000573
+        },
+        "unshared": {
+          "wall_s": 0.24107764501241036,
+          "cpu_s": 0.24286599999999936
+        },
+        "shared": {
+          "wall_s": 0.2245880950067658,
+          "cpu_s": 0.22612000000000165
+        },
+        "D": {
+          "wall_s": 0.9849574920081068,
+          "cpu_s": 0.9891679999999923
+        },
+        "world_total": {
+          "wall_s": 2.5347017729945946,
+          "cpu_s": 2.5500069999999937
+        }
+      }
+    },
+    {
+      "world": 1016,
+      "t_e": 236,
+      "routing_class": "chain",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.66,
+          "all_mean": 0.71596,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2729940000000042,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.66,
+          "all_mean": 0.71596,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.28170300000000026,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.66,
+          "all_mean": 0.71596,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.27808500000000436,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        }
+      },
+      "reference_cold_post_event_mean": 0.722121212121212,
+      "reference_keep_post_event_mean": 0.66,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.06212121212121202,
+        "s_info_shared": 0.06212121212121202,
+        "d_minus_shared": 0.0,
+        "d_minus_unshared": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.7532967820006888,
+          "cpu_s": 0.7559750000000065
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.22230002700234763,
+          "cpu_s": 0.2231000000000023
+        },
+        "unshared": {
+          "wall_s": 0.27200824598548934,
+          "cpu_s": 0.2729940000000042
+        },
+        "shared": {
+          "wall_s": 0.28066551202209666,
+          "cpu_s": 0.28170300000000026
+        },
+        "D": {
+          "wall_s": 0.2775218379974831,
+          "cpu_s": 0.27808500000000436
+        },
+        "world_total": {
+          "wall_s": 1.8146114869741723,
+          "cpu_s": 1.8206200000000052
+        }
+      }
+    },
+    {
+      "world": 1017,
+      "t_e": 303,
+      "routing_class": "chain",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 2,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.82,
+          "all_mean": 0.8546800000000001,
+          "first_change_step_per_uav": [
+            303,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 303,
+          "detection_step_any_uav": 303,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2088499999999982,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 198,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.82,
+          "all_mean": 0.8546800000000001,
+          "first_change_step_per_uav": [
+            303,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 303,
+          "detection_step_any_uav": 303,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.21502399999999966,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 198,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.8222335025380711,
+          "all_mean": 0.85556,
+          "first_change_step_per_uav": [
+            303,
+            null,
+            null,
+            322,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 303,
+          "detection_step_any_uav": 303,
+          "trigger_steps": [
+            {
+              "fact_step": 303,
+              "first_call_with_new_targets": 304
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2007,
+          "cap_hit": false,
+          "cpu_s": 0.9972759999999994,
+          "routing_links": {
+            "mean": 3.6192893401015227,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 19,
+          "truth_grant_steps": [
+            303
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.8224365482233502,
+      "reference_keep_post_event_mean": 0.82,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.0024365482233502656,
+        "s_info_shared": 0.0024365482233502656,
+        "d_minus_shared": 0.002233502538071197,
+        "d_minus_unshared": 0.002233502538071197
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8753810889902525,
+          "cpu_s": 0.8784779999999941
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.2700307200138923,
+          "cpu_s": 0.27099399999999463
+        },
+        "unshared": {
+          "wall_s": 0.20809051001560874,
+          "cpu_s": 0.2088499999999982
+        },
+        "shared": {
+          "wall_s": 0.2142455989960581,
+          "cpu_s": 0.21502399999999966
+        },
+        "D": {
+          "wall_s": 0.9937725000199862,
+          "cpu_s": 0.9972759999999994
+        },
+        "world_total": {
+          "wall_s": 2.5704982940224,
+          "cpu_s": 2.5795730000000034
+        }
+      }
+    },
+    {
+      "world": 1018,
+      "t_e": 197,
+      "routing_class": "chain",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 2,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.9399999999999996,
+          "all_mean": 0.8874799999999998,
+          "first_change_step_per_uav": [
+            null,
+            197,
+            null,
+            197,
+            197,
+            197
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 197,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3030249999999981,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 302,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.9399999999999996,
+          "all_mean": 0.8874799999999998,
+          "first_change_step_per_uav": [
+            null,
+            197,
+            null,
+            197,
+            197,
+            197
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 197,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.32093799999999817,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 302,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.955841584158416,
+          "all_mean": 0.8970800000000001,
+          "first_change_step_per_uav": [
+            null,
+            197,
+            null,
+            197,
+            197,
+            197
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 197,
+          "trigger_steps": [
+            {
+              "fact_step": 197,
+              "first_call_with_new_targets": 198
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1865,
+          "cap_hit": false,
+          "cpu_s": 1.0357859999999945,
+          "routing_links": {
+            "mean": 2.9702970297029703,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 312,
+          "truth_grant_steps": [
+            197
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9559735973597362,
+      "reference_keep_post_event_mean": 0.9399999999999996,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.01597359735973658,
+        "s_info_shared": 0.01597359735973658,
+        "d_minus_shared": 0.01584158415841641,
+        "d_minus_unshared": 0.01584158415841641
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.9107045669807121,
+          "cpu_s": 0.9139580000000009
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.17306124299648218,
+          "cpu_s": 0.17369999999998953
+        },
+        "unshared": {
+          "wall_s": 0.3013997300004121,
+          "cpu_s": 0.3030249999999981
+        },
+        "shared": {
+          "wall_s": 0.318323238985613,
+          "cpu_s": 0.32093799999999817
+        },
+        "D": {
+          "wall_s": 1.0272666570090223,
+          "cpu_s": 1.0357859999999945
+        },
+        "world_total": {
+          "wall_s": 2.739265376003459,
+          "cpu_s": 2.7558930000000004
+        }
+      }
+    },
+    {
+      "world": 1019,
+      "t_e": 213,
+      "routing_class": "chain",
+      "decision_end": 1,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 4,
+      "deployed_layout_gateway": 1,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.92,
+          "all_mean": 0.8668800000000001,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            213,
+            213,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 213,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3408760000000015,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 574,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.92,
+          "all_mean": 0.8668800000000001,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            213,
+            213,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 213,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3418090000000049,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 574,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.9771428571428575,
+          "all_mean": 0.8996800000000001,
+          "first_change_step_per_uav": [
+            221,
+            null,
+            213,
+            213,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 213,
+          "trigger_steps": [
+            {
+              "fact_step": 213,
+              "first_call_with_new_targets": 214
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2095,
+          "cap_hit": false,
+          "cpu_s": 1.3219880000000046,
+          "routing_links": {
+            "mean": 2.1289198606271778,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 574,
+          "truth_grant_steps": [
+            213
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.977351916376307,
+      "reference_keep_post_event_mean": 0.92,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.05735191637630699,
+        "s_info_shared": 0.05735191637630699,
+        "d_minus_shared": 0.057142857142857495,
+        "d_minus_unshared": 0.057142857142857495
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8571077309898101,
+          "cpu_s": 0.8640800000000013
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.20434803600073792,
+          "cpu_s": 0.20605700000000127
+        },
+        "unshared": {
+          "wall_s": 0.33809755198308267,
+          "cpu_s": 0.3408760000000015
+        },
+        "shared": {
+          "wall_s": 0.33903151500271633,
+          "cpu_s": 0.3418090000000049
+        },
+        "D": {
+          "wall_s": 1.3113104710064363,
+          "cpu_s": 1.3219880000000046
+        },
+        "world_total": {
+          "wall_s": 3.0588903930038214,
+          "cpu_s": 3.0838019999999986
+        }
+      }
+    },
+    {
+      "world": 1020,
+      "t_e": 324,
+      "routing_class": "chain",
+      "decision_end": 1,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 3,
+      "deployed_layout_gateway": 1,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.58,
+          "all_mean": 0.65816,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            324,
+            null,
+            324
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 324,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.20201999999999742,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 175,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.58,
+          "all_mean": 0.65816,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            324,
+            null,
+            324
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 324,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.19120299999999446,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 175,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.6009090909090908,
+          "all_mean": 0.66552,
+          "first_change_step_per_uav": [
+            348,
+            349,
+            null,
+            324,
+            389,
+            324
+          ],
+          "first_change_step_at_decision_end": 349,
+          "detection_step_any_uav": 324,
+          "trigger_steps": [
+            {
+              "fact_step": 324,
+              "first_call_with_new_targets": 325
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1909,
+          "cap_hit": false,
+          "cpu_s": 0.947262000000002,
+          "routing_links": {
+            "mean": 3.8238636363636362,
+            "min": 0,
+            "steps_with_zero_links": 3
+          },
+          "views_over_obs_cap": 378,
+          "truth_grant_steps": [
+            324
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.6021590909090908,
+      "reference_keep_post_event_mean": 0.58,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.02215909090909085,
+        "s_info_shared": 0.02215909090909085,
+        "d_minus_shared": 0.020909090909090877,
+        "d_minus_unshared": 0.020909090909090877
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8070384459861089,
+          "cpu_s": 0.8136630000000054
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.30053614199277945,
+          "cpu_s": 0.3030259999999956
+        },
+        "unshared": {
+          "wall_s": 0.2003465790185146,
+          "cpu_s": 0.20201999999999742
+        },
+        "shared": {
+          "wall_s": 0.1896351629984565,
+          "cpu_s": 0.19120299999999446
+        },
+        "D": {
+          "wall_s": 0.9396088740031701,
+          "cpu_s": 0.947262000000002
+        },
+        "world_total": {
+          "wall_s": 2.4530862759856973,
+          "cpu_s": 2.473134999999999
+        }
+      }
+    },
+    {
+      "world": 1021,
+      "t_e": 238,
+      "routing_class": "chain",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.8400000000000001,
+          "all_mean": 0.8552400000000001,
+          "first_change_step_per_uav": [
+            null,
+            238,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 238,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2760510000000025,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 786,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.8400000000000001,
+          "all_mean": 0.8552400000000001,
+          "first_change_step_per_uav": [
+            null,
+            238,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 238,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2827650000000048,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 786,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.9516030534351145,
+          "all_mean": 0.9137200000000001,
+          "first_change_step_per_uav": [
+            null,
+            238,
+            null,
+            244,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 238,
+          "trigger_steps": [
+            {
+              "fact_step": 238,
+              "first_call_with_new_targets": 239
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2170,
+          "cap_hit": false,
+          "cpu_s": 1.1382860000000008,
+          "routing_links": {
+            "mean": 3.984732824427481,
+            "min": 2,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 531,
+          "truth_grant_steps": [
+            238
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9520610687022901,
+      "reference_keep_post_event_mean": 0.8400000000000001,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.11206106870229005,
+        "s_info_shared": 0.11206106870229005,
+        "d_minus_shared": 0.11160305343511445,
+        "d_minus_unshared": 0.11160305343511445
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8856441440002527,
+          "cpu_s": 0.8929469999999995
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.22771603899309412,
+          "cpu_s": 0.22961099999999846
+        },
+        "unshared": {
+          "wall_s": 0.2738270460104104,
+          "cpu_s": 0.2760510000000025
+        },
+        "shared": {
+          "wall_s": 0.28044037299696356,
+          "cpu_s": 0.2827650000000048
+        },
+        "D": {
+          "wall_s": 1.129165447986452,
+          "cpu_s": 1.1382860000000008
+        },
+        "world_total": {
+          "wall_s": 2.806735752004897,
+          "cpu_s": 2.8296300000000016
+        }
+      }
+    },
+    {
+      "world": 1022,
+      "t_e": 188,
+      "routing_class": "chain",
+      "decision_end": 3,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 2,
+      "deployed_layout_gateway": 3,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.6799999999999999,
+          "all_mean": 0.715,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3081800000000001,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 312,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.6799999999999999,
+          "all_mean": 0.715,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.3337439999999958,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 312,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.6799999999999999,
+          "all_mean": 0.715,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.33788600000000457,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 312,
+          "truth_grant_steps": []
+        }
+      },
+      "reference_cold_post_event_mean": 0.840448717948718,
+      "reference_keep_post_event_mean": 0.6799999999999999,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.16044871794871807,
+        "s_info_shared": 0.16044871794871807,
+        "d_minus_shared": 0.0,
+        "d_minus_unshared": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8215770540118683,
+          "cpu_s": 0.7701610000000016
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.17985610497999005,
+          "cpu_s": 0.16740999999999673
+        },
+        "unshared": {
+          "wall_s": 0.33116565499221906,
+          "cpu_s": 0.3081800000000001
+        },
+        "shared": {
+          "wall_s": 0.3586554600042291,
+          "cpu_s": 0.3337439999999958
+        },
+        "D": {
+          "wall_s": 0.36302094798884355,
+          "cpu_s": 0.33788600000000457
+        },
+        "world_total": {
+          "wall_s": 2.0636737369932234,
+          "cpu_s": 1.9263720000000006
+        }
+      }
+    },
+    {
+      "world": 1023,
+      "t_e": 344,
+      "routing_class": "chain",
+      "decision_end": 1,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 5,
+      "deployed_layout_gateway": 1,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7905128205128203,
+          "all_mean": 0.6902399999999999,
+          "first_change_step_per_uav": [
+            344,
+            344,
+            null,
+            344,
+            344,
+            344
+          ],
+          "first_change_step_at_decision_end": 344,
+          "detection_step_any_uav": 344,
+          "trigger_steps": [
+            {
+              "fact_step": 344,
+              "first_call_with_new_targets": 345
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2240,
+          "cap_hit": false,
+          "cpu_s": 1.0404200000000117,
+          "routing_links": {
+            "mean": 3.076923076923077,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 15,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7905128205128203,
+          "all_mean": 0.6902399999999999,
+          "first_change_step_per_uav": [
+            344,
+            344,
+            null,
+            344,
+            344,
+            344
+          ],
+          "first_change_step_at_decision_end": 344,
+          "detection_step_any_uav": 344,
+          "trigger_steps": [
+            {
+              "fact_step": 344,
+              "first_call_with_new_targets": 345
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2240,
+          "cap_hit": false,
+          "cpu_s": 1.0521770000000004,
+          "routing_links": {
+            "mean": 3.076923076923077,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 15,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.7898717948717948,
+          "all_mean": 0.69004,
+          "first_change_step_per_uav": [
+            344,
+            344,
+            null,
+            344,
+            344,
+            344
+          ],
+          "first_change_step_at_decision_end": 344,
+          "detection_step_any_uav": 344,
+          "trigger_steps": [
+            {
+              "fact_step": 344,
+              "first_call_with_new_targets": 345
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2170,
+          "cap_hit": false,
+          "cpu_s": 1.012906000000001,
+          "routing_links": {
+            "mean": 3.8333333333333335,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 13,
+          "truth_grant_steps": [
+            344
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.7905128205128203,
+      "reference_keep_post_event_mean": 0.7000000000000001,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.0,
+        "s_info_shared": 0.0,
+        "d_minus_shared": -0.0006410256410255277,
+        "d_minus_unshared": -0.0006410256410255277
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.0597046119801234,
+          "cpu_s": 0.9508589999999941
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3738021379976999,
+          "cpu_s": 0.3347039999999879
+        },
+        "unshared": {
+          "wall_s": 1.0740971360064577,
+          "cpu_s": 1.0404200000000117
+        },
+        "shared": {
+          "wall_s": 1.080390096991323,
+          "cpu_s": 1.0521770000000004
+        },
+        "D": {
+          "wall_s": 1.0354300079925451,
+          "cpu_s": 1.012906000000001
+        },
+        "world_total": {
+          "wall_s": 4.6343324539775494,
+          "cpu_s": 4.401041999999997
+        }
+      }
+    },
+    {
+      "world": 1024,
+      "t_e": 247,
+      "routing_class": "unserved",
+      "decision_end": 1,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 1,
+      "deployed_layout_gateway": 1,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.6676799999999999,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.271805999999998,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 506,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.6676799999999999,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2841629999999924,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 506,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.6676799999999999,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.27289899999999534,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 506,
+          "truth_grant_steps": []
+        }
+      },
+      "reference_cold_post_event_mean": 0.7599999999999999,
+      "reference_keep_post_event_mean": 0.7599999999999999,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.0,
+        "s_info_shared": 0.0,
+        "d_minus_shared": 0.0,
+        "d_minus_unshared": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.5687159330118448,
+          "cpu_s": 0.5577069999999935
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.22616067199851386,
+          "cpu_s": 0.2225299999999919
+        },
+        "unshared": {
+          "wall_s": 0.2762872120074462,
+          "cpu_s": 0.271805999999998
+        },
+        "shared": {
+          "wall_s": 0.28882622500532307,
+          "cpu_s": 0.2841629999999924
+        },
+        "D": {
+          "wall_s": 0.27764629398006946,
+          "cpu_s": 0.27289899999999534
+        },
+        "world_total": {
+          "wall_s": 1.646607900998788,
+          "cpu_s": 1.61785900000001
+        }
+      }
+    },
+    {
+      "world": 1025,
+      "t_e": 296,
+      "routing_class": "chain",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.5600000000000003,
+          "all_mean": 0.61312,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2087099999999964,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.5600000000000003,
+          "all_mean": 0.61312,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.21402199999999993,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.5600000000000003,
+          "all_mean": 0.61312,
+          "first_change_step_per_uav": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": null,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2061649999999986,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        }
+      },
+      "reference_cold_post_event_mean": 0.5078431372549019,
+      "reference_keep_post_event_mean": 0.5600000000000003,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": -0.05215686274509834,
+        "s_info_shared": -0.05215686274509834,
+        "d_minus_shared": 0.0,
+        "d_minus_unshared": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8411152029875666,
+          "cpu_s": 0.8279890000000023
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.2717931459774263,
+          "cpu_s": 0.2681479999999965
+        },
+        "unshared": {
+          "wall_s": 0.21146514298743568,
+          "cpu_s": 0.2087099999999964
+        },
+        "shared": {
+          "wall_s": 0.2168339210038539,
+          "cpu_s": 0.21402199999999993
+        },
+        "D": {
+          "wall_s": 0.20887922297697514,
+          "cpu_s": 0.2061649999999986
+        },
+        "world_total": {
+          "wall_s": 1.7589304330176674,
+          "cpu_s": 1.7336859999999916
+        }
+      }
+    },
+    {
+      "world": 1026,
+      "t_e": 342,
+      "routing_class": "chain",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 4,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.77248,
+          "first_change_step_per_uav": [
+            null,
+            342,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 342,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.18903000000000247,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.77248,
+          "first_change_step_per_uav": [
+            null,
+            342,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 342,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.20495400000000075,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.9100000000000004,
+          "all_mean": 0.8198800000000002,
+          "first_change_step_per_uav": [
+            null,
+            342,
+            null,
+            null,
+            356,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 342,
+          "trigger_steps": [
+            {
+              "fact_step": 342,
+              "first_call_with_new_targets": 343
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2095,
+          "cap_hit": false,
+          "cpu_s": 1.1386660000000006,
+          "routing_links": {
+            "mean": 3.6835443037974684,
+            "min": 1,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": [
+            342
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9113924050632914,
+      "reference_keep_post_event_mean": 0.7599999999999999,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.15139240506329155,
+        "s_info_shared": 0.15139240506329155,
+        "d_minus_shared": 0.15000000000000047,
+        "d_minus_unshared": 0.15000000000000047
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.0595108129782602,
+          "cpu_s": 1.0478319999999997
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.37942256199312396,
+          "cpu_s": 0.37595300000000975
+        },
+        "unshared": {
+          "wall_s": 0.1906461920007132,
+          "cpu_s": 0.18903000000000247
+        },
+        "shared": {
+          "wall_s": 0.20672003700747155,
+          "cpu_s": 0.20495400000000075
+        },
+        "D": {
+          "wall_s": 1.1471958959882613,
+          "cpu_s": 1.1386660000000006
+        },
+        "world_total": {
+          "wall_s": 2.9943104069971014,
+          "cpu_s": 2.9670479999999912
+        }
+      }
+    },
+    {
+      "world": 1027,
+      "t_e": 325,
+      "routing_class": "direct",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 3,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.9000000000000004,
+          "all_mean": 0.7778000000000002,
+          "first_change_step_per_uav": [
+            325,
+            null,
+            325,
+            null,
+            null,
+            325
+          ],
+          "first_change_step_at_decision_end": 325,
+          "detection_step_any_uav": 325,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.21049999999999613,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 175,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.9564571428571428,
+          "all_mean": 0.79756,
+          "first_change_step_per_uav": [
+            325,
+            null,
+            325,
+            null,
+            null,
+            325
+          ],
+          "first_change_step_at_decision_end": 325,
+          "detection_step_any_uav": 325,
+          "trigger_steps": [
+            {
+              "fact_step": 326,
+              "first_call_with_new_targets": 327
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2070,
+          "cap_hit": false,
+          "cpu_s": 1.112679,
+          "routing_links": {
+            "mean": 4.908571428571428,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 8,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.9582857142857141,
+          "all_mean": 0.7982,
+          "first_change_step_per_uav": [
+            325,
+            null,
+            325,
+            null,
+            null,
+            325
+          ],
+          "first_change_step_at_decision_end": 325,
+          "detection_step_any_uav": 325,
+          "trigger_steps": [
+            {
+              "fact_step": 325,
+              "first_call_with_new_targets": 326
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2023,
+          "cap_hit": false,
+          "cpu_s": 1.0287799999999976,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 175,
+          "truth_grant_steps": [
+            325
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9586285714285712,
+      "reference_keep_post_event_mean": 0.9000000000000004,
+      "stakes": {
+        "delta_share": 0.05645714285714243,
+        "s_info_unshared": 0.05862857142857081,
+        "s_info_shared": 0.00217142857142838,
+        "d_minus_shared": 0.0018285714285712906,
+        "d_minus_unshared": 0.05828571428571372
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8542088029789738,
+          "cpu_s": 0.8494400000000013
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3352357420080807,
+          "cpu_s": 0.3334689999999938
+        },
+        "unshared": {
+          "wall_s": 0.2114036249986384,
+          "cpu_s": 0.21049999999999613
+        },
+        "shared": {
+          "wall_s": 1.116643977991771,
+          "cpu_s": 1.112679
+        },
+        "D": {
+          "wall_s": 1.0236030659871176,
+          "cpu_s": 1.0287799999999976
+        },
+        "world_total": {
+          "wall_s": 3.5505636369925924,
+          "cpu_s": 3.5442309999999964
+        }
+      }
+    },
+    {
+      "world": 1028,
+      "t_e": 153,
+      "routing_class": "chain",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.9598847262247839,
+          "all_mean": 0.8410800000000002,
+          "first_change_step_per_uav": [
+            153,
+            null,
+            153,
+            153,
+            153,
+            153
+          ],
+          "first_change_step_at_decision_end": 153,
+          "detection_step_any_uav": 153,
+          "trigger_steps": [
+            {
+              "fact_step": 153,
+              "first_call_with_new_targets": 154
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2105,
+          "cap_hit": false,
+          "cpu_s": 1.3025949999999966,
+          "routing_links": {
+            "mean": 3.037463976945245,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 1375,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.9788472622478388,
+          "all_mean": 0.8542400000000001,
+          "first_change_step_per_uav": [
+            153,
+            164,
+            153,
+            153,
+            153,
+            153
+          ],
+          "first_change_step_at_decision_end": 153,
+          "detection_step_any_uav": 153,
+          "trigger_steps": [
+            {
+              "fact_step": 153,
+              "first_call_with_new_targets": 154
+            },
+            {
+              "fact_step": 154,
+              "first_call_with_new_targets": 155
+            }
+          ],
+          "replans": 2,
+          "evaluations_used": 3872,
+          "cap_hit": false,
+          "cpu_s": 1.9979289999999992,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 1377,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.978962536023055,
+          "all_mean": 0.8543200000000002,
+          "first_change_step_per_uav": [
+            153,
+            null,
+            153,
+            153,
+            153,
+            153
+          ],
+          "first_change_step_at_decision_end": 153,
+          "detection_step_any_uav": 153,
+          "trigger_steps": [
+            {
+              "fact_step": 153,
+              "first_call_with_new_targets": 154
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1498,
+          "cap_hit": false,
+          "cpu_s": 0.9621400000000051,
+          "routing_links": {
+            "mean": 4.0,
+            "min": 4,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 1038,
+          "truth_grant_steps": [
+            153
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.9790778097982712,
+      "reference_keep_post_event_mean": 0.9399999999999997,
+      "stakes": {
+        "delta_share": 0.018962536023054866,
+        "s_info_unshared": 0.019193083573487257,
+        "s_info_shared": 0.00023054755043239172,
+        "d_minus_shared": 0.00011527377521625137,
+        "d_minus_unshared": 0.019077809798271117
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.7830367440183181,
+          "cpu_s": 0.7930860000000024
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.15257202298380435,
+          "cpu_s": 0.15470899999999688
+        },
+        "unshared": {
+          "wall_s": 1.2841709810018074,
+          "cpu_s": 1.3025949999999966
+        },
+        "shared": {
+          "wall_s": 1.9674851739837322,
+          "cpu_s": 1.9979289999999992
+        },
+        "D": {
+          "wall_s": 0.9466467020101845,
+          "cpu_s": 0.9621400000000051
+        },
+        "world_total": {
+          "wall_s": 5.142966770014027,
+          "cpu_s": 5.219571999999999
+        }
+      }
+    },
+    {
+      "world": 1029,
+      "t_e": 272,
+      "routing_class": "shared_only",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 3,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.78,
+          "all_mean": 0.76604,
+          "first_change_step_per_uav": [
+            272,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 272,
+          "detection_step_any_uav": 272,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.28863799999999173,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.78,
+          "all_mean": 0.76604,
+          "first_change_step_per_uav": [
+            272,
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "first_change_step_at_decision_end": 272,
+          "detection_step_any_uav": 272,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2934400000000039,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.8450877192982457,
+          "all_mean": 0.7957200000000001,
+          "first_change_step_per_uav": [
+            272,
+            null,
+            null,
+            null,
+            null,
+            304
+          ],
+          "first_change_step_at_decision_end": 272,
+          "detection_step_any_uav": 272,
+          "trigger_steps": [
+            {
+              "fact_step": 272,
+              "first_call_with_new_targets": 273
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 2052,
+          "cap_hit": false,
+          "cpu_s": 1.1621039999999994,
+          "routing_links": {
+            "mean": 3.6008771929824563,
+            "min": 1,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": [
+            272
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.845701754385965,
+      "reference_keep_post_event_mean": 0.78,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.06570175438596493,
+        "s_info_shared": 0.06570175438596493,
+        "d_minus_shared": 0.06508771929824564,
+        "d_minus_unshared": 0.06508771929824564
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.9262298720132094,
+          "cpu_s": 0.9419460000000157
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.2487654619908426,
+          "cpu_s": 0.25299800000000516
+        },
+        "unshared": {
+          "wall_s": 0.2837262329994701,
+          "cpu_s": 0.28863799999999173
+        },
+        "shared": {
+          "wall_s": 0.2883750239852816,
+          "cpu_s": 0.2934400000000039
+        },
+        "D": {
+          "wall_s": 1.1457575020031072,
+          "cpu_s": 1.1621039999999994
+        },
+        "world_total": {
+          "wall_s": 2.9023452090041246,
+          "cpu_s": 2.948727000000005
+        }
+      }
+    },
+    {
+      "world": 1030,
+      "t_e": 331,
+      "routing_class": "chain",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.64,
+          "all_mean": 0.6870400000000001,
+          "first_change_step_per_uav": [
+            null,
+            331,
+            null,
+            null,
+            331,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 331,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.1606220000000036,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.64,
+          "all_mean": 0.6870400000000001,
+          "first_change_step_per_uav": [
+            null,
+            331,
+            null,
+            null,
+            331,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 331,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.17479600000000062,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 0,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.7011834319526629,
+          "all_mean": 0.70772,
+          "first_change_step_per_uav": [
+            358,
+            331,
+            null,
+            null,
+            331,
+            null
+          ],
+          "first_change_step_at_decision_end": 358,
+          "detection_step_any_uav": 331,
+          "trigger_steps": [
+            {
+              "fact_step": 331,
+              "first_call_with_new_targets": 332
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1820,
+          "cap_hit": false,
+          "cpu_s": 0.908608000000001,
+          "routing_links": {
+            "mean": 2.5680473372781063,
+            "min": 0,
+            "steps_with_zero_links": 7
+          },
+          "views_over_obs_cap": 3,
+          "truth_grant_steps": [
+            331
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.7020118343195267,
+      "reference_keep_post_event_mean": 0.64,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.062011834319526726,
+        "s_info_shared": 0.062011834319526726,
+        "d_minus_shared": 0.06118343195266285,
+        "d_minus_unshared": 0.06118343195266285
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8164323679811787,
+          "cpu_s": 0.8344000000000023
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.2807121640071273,
+          "cpu_s": 0.2869220000000041
+        },
+        "unshared": {
+          "wall_s": 0.15713358801440336,
+          "cpu_s": 0.1606220000000036
+        },
+        "shared": {
+          "wall_s": 0.17099969100672752,
+          "cpu_s": 0.17479600000000062
+        },
+        "D": {
+          "wall_s": 0.8887493850197643,
+          "cpu_s": 0.908608000000001
+        },
+        "world_total": {
+          "wall_s": 2.3233918320038356,
+          "cpu_s": 2.3748590000000007
+        }
+      }
+    },
+    {
+      "world": 1031,
+      "t_e": 251,
+      "routing_class": "chain",
+      "decision_end": 0,
+      "decision_end_reason": "shortest routing path at the branch-point snapshot",
+      "reset_gateway": 0,
+      "deployed_layout_gateway": 0,
+      "arms": {
+        "unshared": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.7779599999999998,
+          "first_change_step_per_uav": [
+            null,
+            251,
+            251,
+            null,
+            251,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 251,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2679379999999867,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 498,
+          "truth_grant_steps": []
+        },
+        "shared": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.7779599999999998,
+          "first_change_step_per_uav": [
+            null,
+            251,
+            251,
+            null,
+            251,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 251,
+          "trigger_steps": [],
+          "replans": 0,
+          "evaluations_used": 0,
+          "cap_hit": false,
+          "cpu_s": 0.2710399999999993,
+          "routing_links": {
+            "mean": 3.0,
+            "min": 3,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 498,
+          "truth_grant_steps": []
+        },
+        "D": {
+          "post_event_mean": 0.8705220883534137,
+          "all_mean": 0.833,
+          "first_change_step_per_uav": [
+            null,
+            251,
+            251,
+            null,
+            251,
+            null
+          ],
+          "first_change_step_at_decision_end": null,
+          "detection_step_any_uav": 251,
+          "trigger_steps": [
+            {
+              "fact_step": 251,
+              "first_call_with_new_targets": 252
+            }
+          ],
+          "replans": 1,
+          "evaluations_used": 1817,
+          "cap_hit": false,
+          "cpu_s": 0.983269000000007,
+          "routing_links": {
+            "mean": 2.682730923694779,
+            "min": 1,
+            "steps_with_zero_links": 0
+          },
+          "views_over_obs_cap": 734,
+          "truth_grant_steps": [
+            251
+          ]
+        }
+      },
+      "reference_cold_post_event_mean": 0.8711646586345382,
+      "reference_keep_post_event_mean": 0.7599999999999999,
+      "stakes": {
+        "delta_share": 0.0,
+        "s_info_unshared": 0.11116465863453828,
+        "s_info_shared": 0.11116465863453828,
+        "d_minus_shared": 0.11052208835341382,
+        "d_minus_unshared": 0.11052208835341382
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.8195918769924901,
+          "cpu_s": 0.8382010000000122
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.23553303701919504,
+          "cpu_s": 0.24089899999999886
+        },
+        "unshared": {
+          "wall_s": 0.2619375719805248,
+          "cpu_s": 0.2679379999999867
+        },
+        "shared": {
+          "wall_s": 0.2649351330182981,
+          "cpu_s": 0.2710399999999993
+        },
+        "D": {
+          "wall_s": 0.9611557289899793,
+          "cpu_s": 0.983269000000007
+        },
+        "world_total": {
+          "wall_s": 2.5526643240009435,
+          "cpu_s": 2.6110060000000033
+        }
+      }
+    }
+  ],
+  "means": {
+    "arms": {
+      "unshared": {
+        "post_event_mean": {
+          "n": 32,
+          "mean": 0.7975829192758618,
+          "sd": 0.1030983368350006,
+          "min": 0.5600000000000003,
+          "max": 0.9720408163265309,
+          "n_positive": 32,
+          "n_missing": 0
+        },
+        "replans": {
+          "n": 32,
+          "mean": 0.125,
+          "sd": 0.3360107525161235,
+          "min": 0.0,
+          "max": 1.0,
+          "n_positive": 4,
+          "n_missing": 0
+        },
+        "evaluations_used": {
+          "n": 32,
+          "mean": 247.46875,
+          "sd": 669.2280089955841,
+          "min": 0.0,
+          "max": 2240.0,
+          "n_positive": 4,
+          "n_missing": 0
+        },
+        "cap_hits": 0
+      },
+      "shared": {
+        "post_event_mean": {
+          "n": 32,
+          "mean": 0.8024222353886576,
+          "sd": 0.10870432331262422,
+          "min": 0.5600000000000003,
+          "max": 0.9788472622478388,
+          "n_positive": 32,
+          "n_missing": 0
+        },
+        "replans": {
+          "n": 32,
+          "mean": 0.25,
+          "sd": 0.5679618342470648,
+          "min": 0.0,
+          "max": 2.0,
+          "n_positive": 6,
+          "n_missing": 0
+        },
+        "evaluations_used": {
+          "n": 32,
+          "mean": 477.5625,
+          "sd": 1085.8871781680073,
+          "min": 0.0,
+          "max": 3872.0,
+          "n_positive": 6,
+          "n_missing": 0
+        },
+        "cap_hits": 0
+      },
+      "D": {
+        "post_event_mean": {
+          "n": 32,
+          "mean": 0.8340275528779412,
+          "sd": 0.1189809630719638,
+          "min": 0.5600000000000003,
+          "max": 0.991394422310757,
+          "n_positive": 32,
+          "n_missing": 0
+        },
+        "replans": {
+          "n": 32,
+          "mean": 0.75,
+          "sd": 0.43994134506405985,
+          "min": 0.0,
+          "max": 1.0,
+          "n_positive": 24,
+          "n_missing": 0
+        },
+        "evaluations_used": {
+          "n": 32,
+          "mean": 1454.78125,
+          "sd": 865.8611128430881,
+          "min": 0.0,
+          "max": 2174.0,
+          "n_positive": 24,
+          "n_missing": 0
+        },
+        "cap_hits": 0
+      }
+    },
+    "reference_cold_post_event_mean": {
+      "n": 32,
+      "mean": 0.8383405378171859,
+      "sd": 0.11831665802876344,
+      "min": 0.5078431372549019,
+      "max": 0.9919521912350597,
+      "n_positive": 32,
+      "n_missing": 0
+    },
+    "stakes": {
+      "delta_share": {
+        "n": 32,
+        "mean": 0.0048393161127959425,
+        "sd": 0.016999570543762593,
+        "min": 0.0,
+        "max": 0.07848605577689205,
+        "n_positive": 4,
+        "n_missing": 0
+      },
+      "s_info_unshared": {
+        "n": 32,
+        "mean": 0.040757618541324134,
+        "sd": 0.057327715069420214,
+        "min": -0.05215686274509834,
+        "max": 0.16044871794871807,
+        "n_positive": 22,
+        "n_missing": 0
+      },
+      "s_info_shared": {
+        "n": 32,
+        "mean": 0.0359183024285282,
+        "sd": 0.05547070114823831,
+        "min": -0.05215686274509834,
+        "max": 0.16044871794871807,
+        "n_positive": 22,
+        "n_missing": 0
+      },
+      "d_minus_shared": {
+        "n": 32,
+        "mean": 0.031605317489283455,
+        "sd": 0.047519506519629835,
+        "min": -0.01978260869565196,
+        "max": 0.15000000000000047,
+        "n_positive": 20,
+        "n_missing": 0
+      },
+      "d_minus_unshared": {
+        "n": 32,
+        "mean": 0.03644463360207939,
+        "sd": 0.05006427073722461,
+        "min": -0.01978260869565196,
+        "max": 0.15000000000000047,
+        "n_positive": 20,
+        "n_missing": 0
+      }
+    },
+    "by_routing_class": {
+      "chain": {
+        "worlds": [
+          1002,
+          1003,
+          1009,
+          1015,
+          1016,
+          1017,
+          1018,
+          1019,
+          1020,
+          1021,
+          1022,
+          1023,
+          1025,
+          1026,
+          1028,
+          1030,
+          1031
+        ],
+        "delta_share": {
+          "n": 17,
+          "mean": 0.001171465704437393,
+          "sd": 0.004590446326752104,
+          "min": 0.0,
+          "max": 0.018962536023054866,
+          "n_positive": 2,
+          "n_missing": 0
+        },
+        "s_info_unshared": {
+          "n": 17,
+          "mean": 0.044507466327660505,
+          "sd": 0.05959512594152624,
+          "min": -0.05215686274509834,
+          "max": 0.16044871794871807,
+          "n_positive": 13,
+          "n_missing": 0
+        },
+        "s_info_shared": {
+          "n": 17,
+          "mean": 0.04333600062322311,
+          "sd": 0.060307857906454,
+          "min": -0.05215686274509834,
+          "max": 0.16044871794871807,
+          "n_positive": 13,
+          "n_missing": 0
+        },
+        "d_minus_shared": {
+          "n": 17,
+          "mean": 0.03292322637386572,
+          "sd": 0.04906135756967588,
+          "min": -0.017241379310344973,
+          "max": 0.15000000000000047,
+          "n_positive": 11,
+          "n_missing": 0
+        },
+        "d_minus_unshared": {
+          "n": 17,
+          "mean": 0.03409469207830312,
+          "sd": 0.04844763853722987,
+          "min": -0.017241379310344973,
+          "max": 0.15000000000000047,
+          "n_positive": 11,
+          "n_missing": 0
+        }
+      },
+      "direct": {
+        "worlds": [
+          1006,
+          1010,
+          1013,
+          1014,
+          1027
+        ],
+        "delta_share": {
+          "n": 5,
+          "mean": 0.011291428571428485,
+          "sd": 0.025248401848797432,
+          "min": 0.0,
+          "max": 0.05645714285714243,
+          "n_positive": 1,
+          "n_missing": 0
+        },
+        "s_info_unshared": {
+          "n": 5,
+          "mean": 0.04001685795632528,
+          "sd": 0.05365418813141594,
+          "min": -0.018838709677419407,
+          "max": 0.11816091954023045,
+          "n_positive": 4,
+          "n_missing": 0
+        },
+        "s_info_shared": {
+          "n": 5,
+          "mean": 0.028725429384896795,
+          "sd": 0.05468886190807365,
+          "min": -0.018838709677419407,
+          "max": 0.11816091954023045,
+          "n_positive": 4,
+          "n_missing": 0
+        },
+        "d_minus_shared": {
+          "n": 5,
+          "mean": 0.02842133700712248,
+          "sd": 0.054321026157670496,
+          "min": -0.018774193548387275,
+          "max": 0.11724137931034517,
+          "n_positive": 4,
+          "n_missing": 0
+        },
+        "d_minus_unshared": {
+          "n": 5,
+          "mean": 0.03971276557855097,
+          "sd": 0.053268939318549396,
+          "min": -0.018774193548387275,
+          "max": 0.11724137931034517,
+          "n_positive": 4,
+          "n_missing": 0
+        }
+      },
+      "shared_only": {
+        "worlds": [
+          1004,
+          1007,
+          1008,
+          1012,
+          1029
+        ],
+        "delta_share": {
+          "n": 5,
+          "mean": 0.0,
+          "sd": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "n_positive": 0,
+          "n_missing": 0
+        },
+        "s_info_unshared": {
+          "n": 5,
+          "mean": 0.02151060098016544,
+          "sd": 0.04298861627421971,
+          "min": -0.01985507246376783,
+          "max": 0.06651685393258477,
+          "n_positive": 3,
+          "n_missing": 0
+        },
+        "s_info_shared": {
+          "n": 5,
+          "mean": 0.02151060098016544,
+          "sd": 0.04298861627421971,
+          "min": -0.01985507246376783,
+          "max": 0.06651685393258477,
+          "n_positive": 3,
+          "n_missing": 0
+        },
+        "d_minus_shared": {
+          "n": 5,
+          "mean": 0.025098475304039435,
+          "sd": 0.0388288575901159,
+          "min": -0.01978260869565196,
+          "max": 0.0659550561797757,
+          "n_positive": 3,
+          "n_missing": 0
+        },
+        "d_minus_unshared": {
+          "n": 5,
+          "mean": 0.025098475304039435,
+          "sd": 0.0388288575901159,
+          "min": -0.01978260869565196,
+          "max": 0.0659550561797757,
+          "n_positive": 3,
+          "n_missing": 0
+        }
+      },
+      "unserved": {
+        "worlds": [
+          1000,
+          1001,
+          1005,
+          1011,
+          1024
+        ],
+        "delta_share": {
+          "n": 5,
+          "mean": 0.01569721115537841,
+          "sd": 0.035100031200594135,
+          "min": 0.0,
+          "max": 0.07848605577689205,
+          "n_positive": 1,
+          "n_missing": 0
+        },
+        "s_info_unshared": {
+          "n": 5,
+          "mean": 0.04799591421393805,
+          "sd": 0.07712335555503234,
+          "min": -0.023651452282157703,
+          "max": 0.13195219123505963,
+          "n_positive": 2,
+          "n_missing": 0
+        },
+        "s_info_shared": {
+          "n": 5,
+          "mean": 0.03229870305855964,
+          "sd": 0.062332380363665285,
+          "min": -0.023651452282157703,
+          "max": 0.13167883211678832,
+          "n_positive": 2,
+          "n_missing": 0
+        },
+        "d_minus_shared": {
+          "n": 5,
+          "mean": 0.036815249949108717,
+          "sd": 0.05750542516023517,
+          "min": 0.0,
+          "max": 0.13116788321167872,
+          "n_positive": 2,
+          "n_missing": 0
+        },
+        "d_minus_unshared": {
+          "n": 5,
+          "mean": 0.05251246110448713,
+          "sd": 0.07190569334962071,
+          "min": 0.0,
+          "max": 0.13139442231075693,
+          "n_positive": 2,
+          "n_missing": 0
+        }
+      }
+    }
+  },
+  "decision_end_no_routed_uav_worlds": [],
+  "timing_totals": {
+    "cpu_s_by_arm": {
+      "unshared": 11.693400999999987,
+      "shared": 14.916443000000006,
+      "D": 27.49124999999999
+    },
+    "cpu_s_worlds": 89.92885
+  },
+  "cpu_seconds": {
+    "self_user_s": 90.137088,
+    "self_sys_s": 0.714283,
+    "children_user_s": 0.002515,
+    "children_sys_s": 0.001609,
+    "total_s": 90.855495,
+    "peak_rss_kib": 46748
+  },
+  "start_utc": "2026-09-29T22:41:50+00:00",
+  "end_utc": "2026-09-29T22:43:20+00:00",
+  "wall_clock_s": 90.13316655700328,
+  "arguments": [
+    "--worlds",
+    "1000-1031",
+    "--budget",
+    "3000",
+    "--reference-run",
+    "runs/coupled_host_replan_timing/r1lite_dev_a01",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r2_dev_a01",
+    "--launch-sha",
+    "793ec645a444aca0452d58fb3ee3ddee372e59e8"
+  ],
+  "interpreter": {
+    "executable": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "python": "3.10.20",
+    "numpy": "1.26.3",
+    "host": "Jacob"
+  }
+}

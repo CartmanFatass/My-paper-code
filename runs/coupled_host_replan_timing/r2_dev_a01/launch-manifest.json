@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-29T22:41:50.214779Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5aa8c913edda4fe9b0f2398215d7ade0/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5aa8c913edda4fe9b0f2398215d7ade0/experiments/candidates/coupled_host_replan_timing/run_r2.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r2_dev_a01",
+    "--",
+    "--worlds",
+    "1000-1031",
+    "--budget",
+    "3000",
+    "--reference-run",
+    "runs/coupled_host_replan_timing/r1lite_dev_a01",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r2_dev_a01",
+    "--launch-sha",
+    "793ec645a444aca0452d58fb3ee3ddee372e59e8"
+  ],
+  "claim_key": "54f6fc8f1b6b04f3b7d1a482fc16961e68154d1c3651f9e5925c5b36b298fc75",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/54f6fc8f1b6b04f3b7d1a482fc16961e68154d1c3651f9e5925c5b36b298fc75.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5aa8c913edda4fe9b0f2398215d7ade0/experiments/candidates/coupled_host_replan_timing/run_r2.py",
+    "--worlds",
+    "1000-1031",
+    "--budget",
+    "3000",
+    "--reference-run",
+    "runs/coupled_host_replan_timing/r1lite_dev_a01",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r2_dev_a01",
+    "--launch-sha",
+    "793ec645a444aca0452d58fb3ee3ddee372e59e8"
+  ],
+  "command_sha256": "6eb9e40c25525bd56e94e5671a4eb746290f9850ec74d28e50765a9f42c5d617",
+  "control_observation": {
+    "observed_at": "2026-09-29T22:41:49.967151Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "793ec645a444aca0452d58fb3ee3ddee372e59e8"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-29T22:41:49.990439Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5aa8c913edda4fe9b0f2398215d7ade0",
+  "direction": "coupled_host_replan_timing",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/coupled_host_replan_timing/run_r2.py",
+    "--worlds",
+    "1000-1031",
+    "--budget",
+    "3000",
+    "--reference-run",
+    "<SOURCE>/runs/coupled_host_replan_timing/r1lite_dev_a01",
+    "--launch-sha",
+    "793ec645a444aca0452d58fb3ee3ddee372e59e8"
+  ],
+  "lead": "Claude DM (WSL session)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r2_dev_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/54f6fc8f1b6b04f3b7d1a482fc16961e68154d1c3651f9e5925c5b36b298fc75.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r2_dev_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r2_dev_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 34362,
+      "session_id": 34362,
+      "start_ticks": 16025466
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 34362,
+    "process_group_id": 34362
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r2_dev_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 34363,
+      "session_id": 34362,
+      "start_ticks": 16025471
+    },
+    "pid": 34363,
+    "process_group_id": 34362,
+    "supervisor_pid": 34362
+  },
+  "schema_version": 1,
+  "sha": "793ec645a444aca0452d58fb3ee3ddee372e59e8",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5aa8c913edda4fe9b0f2398215d7ade0",
+  "stderr": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r2_dev_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r2_dev_a01/stdout.log"
+}
