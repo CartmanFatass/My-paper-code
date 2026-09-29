@@ -1515,3 +1515,48 @@ provisional message. Only after complete reading/review may the DM resolve
 predictions, publish its material RESEARCH/background judgment, recommend the
 next investment to Root and perform measured evidence-aware cleanup. Those
 steps are all presently paused, not implicitly approved or automatically queued.
+
+## 2026-09-29 - B03 Recovered Reading Responsibility
+
+Owner explicitly resumed the Root workflow at21:59UTC with “阅读handoff 我们继续工作”.
+Current Root `01a0ef2b-a391-7693-a748-60e24be246ae` recovered this unfinished
+responsibility as native DM `/root/dm_radio_recovery`; this is not a resumed
+old session or a newly selected study. Root's native follow-up could not find
+the old child and the old Root was not loaded. The published resume/routing
+commit `ecd5b2583` lifts only the authorized pause and preserves launch-bound
+lead `Codex DM (native child)`, original source, operation and evidence. No
+worker, observer or scientific episode is relaunched.
+
+At22:00UTC the recovered DM found all named old native/reader/observer PIDs
+absent. The accepted snapshot HEAD remains exactly
+`2bff85091f85f6d52fc0344d0329b4fc39fa6d5c`; current direction source/tests have
+no diff from it. Summary SHA256 matches the handoff, and all192raw digests and
+sizes match their retained manifest entries:79,442,992content bytes. Neither
+`reading.json` nor a resumed-reader timing file exists before recovery.
+
+Rerun only the existing full read-only reader from that snapshot with the
+configured local CPU interpreter and `PYTHONDONTWRITEBYTECODE=1`, retaining
+the original interrupted timing and writing new cost to
+`reader-resources-resumed.txt`. It reconstructs all192episodes/49,152saved
+transitions, with zero new native steps, fits or optimizer updates. The old
+39episode/253.66CPU-s verification remains paid interrupted work, not a prefix
+checkpoint; the complete rerun is expected to be roughly20minutes from that
+partial rate, with actual time recorded rather than a new scientific cutoff.
+No changed source, comparator, outcome rule or repeated engineering review.
+
+Recover the unfinished result diagnosis in a new registered ResearchCritic
+with separate context and original evidence first. Preserve the old provisional
+advice above, but do not call it a completed review or feed it as the desired
+verdict. The critic will read the previous predictions and supporting/adverse
+B01/B02 evidence after reconstructing B03, then confront the complete reader.
+Resolve the fixed predictions and publish the material result/standing and any
+useful background correction before measured cleanup. No successor launch is
+assigned; the substantive recommendation returns to current Root.
+
+The fresh22:01:42UTC local memory witness passed with10,251,472,896physical/
+effective available bytes above4GiB; it is retained as
+`reader-preflight-resumed.json`. Full reader runs in exec36521, PID4149209
+under time parent4149208, with the same snapshot and output path. These are
+reader identities only, not replacement native-run handles. The recovered
+ResearchCritic is `/root/dm_radio_recovery/result_diagnosis_recovery` in a
+separate context; no source or record write is delegated to it.
