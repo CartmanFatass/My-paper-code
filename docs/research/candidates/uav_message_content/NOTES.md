@@ -3952,3 +3952,49 @@ stay in these single durable evidence locations. Their per-file hashes are bound
 the saved cell summaries and complete reader. No bulk tree is copied or archived as
 a cleanup condition. Useful recovery/checkpoint/reader code and focused tests stay
 on main because they reconstruct this interrupted result and verify its semantics.
+
+### Measured closure after publication
+
+Complete result/background publication is `da3c164f59d89e415e988cf74b08582108220d57`.
+At22:31UTC all three native operations again had consistent valid exit witnesses
+(−15,1,0 respectively) and absent recorded runners/supervisors. All three observer
+states were stopped with no wake/unconsumed event and absent daemon PIDs. Reviewer,
+Implementer and Scientific Reviewer had no remaining evidence consumer or running
+work. No result, review, transport or new study remains active.
+
+After publication, exact-target `hmasd_snapshot_gc.py` preview initially refused
+ordinary process inspection of own process383 (`/proc/383/cwd`, permission denied).
+The tool's supported `--sudo-process-scan` read-only inspection resolved that refusal:
+all three snapshots were clean, terminal, unreferenced and reachable from main.
+Preview then `--apply` under the shared main writer lock removed:
+
+| Deleted target under `.git/hmasd-launch-sources/` | Allocated bytes before | After |
+| --- | ---: | ---: |
+| ad9d60efa12645809a86268a0aa464da | 1650012160 | 0 |
+| 1f322e8efef04d45860f130b11795047 | 1656188928 | 0 |
+| e32e808e2d854c3886de414ba28874c7 | 1656233984 | 0 |
+
+A fresh read-only process-reference scan also found no consumer for each remaining
+manual target. Deleted owned `temp/directions/uav_message_content/` (53248bytes,
+three stopped observers plus request scratch), and six rebuildable bytecode-cache
+directories: `experiments/candidates/uav_message_content/{__pycache__,b05/__pycache__,b06/__pycache__}`
+(98304/36864/65536bytes) and the matching paths under `tests/` (24576/40960/86016bytes).
+The redundant local463357-byte parent staging file
+`/home/fires/hmasd-inputs/uav-message-b06-B-34871c49.pt` freed466944allocated bytes.
+Before deletion I rehashed the canonical parent at
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/19451/B/final.pt`
+and verified the unchanged34871c49...59da2 digest, and checked the local copy matches.
+That remote canonical checkpoint remains the required parent; future reconstruction
+can stage those exact bytes, rather than assuming the retired local path still exists.
+
+All11 measured targets are absent. Net allocated bytes reclaimed from those targets
+are **4963307520** (snapshot subtotal4962435072; scratch/caches/staging872448), measured
+with `du -s -B1` before and absence/zero afterward. This is target disk reclamation,
+not a claim of shrinking retained Git history or a global host-free-space reading.
+No backup, tarball, replacement worktree or copied retention tree was made. No cleanup
+blocker remains. All three admission claims/manifests/exit records remain intact;
+final rehash confirms all207 original files,72 successful-recovery files and7 failed
+attempt files retain the inventories recorded above. Required trajectories, streams,
+checkpoints and useful reconstruction/checking code remain; unrelated writers are
+untouched. B06 is read and closed, the direction is reserve/idle, and the optional
+next scientific allocation belongs to Root without an automatic continuation.
