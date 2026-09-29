@@ -502,3 +502,16 @@ No synthetic table was unreadable. CLI smoke on a synthetic table: 58/72 added c
 **Action:** CONTROL message 2 to Root (queued 09:2x UTC, `01a0ec6a-5a8d-7a30-8c87-6936b74a28e2`): the facts above, the concrete need (Root reconciles the local edits and fast-forwards the node checkout to main, then leaves one inbox line), and that pair 1 launches on that line. Owner alternative if Root cannot act soon: [DECIDE-3] B (six fits on `local_linux`, ≈ 100 CPU-h) or C; the DM does not switch on its own. Inbox waiter re-armed. **State: 0 formal fits; A chosen and mechanically blocked on a shared control; T4 accepted.**
 
 Data received, no action: Root's inbox file `20260929_workflow_retrospective_ROOT.md` (commit 366903212 by the other writer in this checkout, carried by this push): owner-adopted workflow refinements from the Pro retrospective; applies at the next boundary; no reply owed.
+
+## 2026-09-29 09:21 UTC — Root reconciled the node checkout; pair 1 ACCEPTED on `wsl_4070` (H 931201, SET 932201); 2 formal fits running
+
+**Root's inbox line** (`docs/Claude_docs/inbox/20260929_wsl4070_control_sync_ROOT.md`, commit 5c6997722, 09:19 PDT-stamped 02:19): Root fast-forwarded `/home/wu/projects/HMASD` c562b8fa9 → 89acc114f under the shared writer and admission locks; the launcher's read-only policy check passed at 09:16:23 UTC for this direction/lead; the superseded node-local index was retained verbatim under `hmasd-artifacts/node-local-modified-20260928/` (sha256 02e31846…); no sparse/reset/stash/claim change; Root launched nothing. Verified from here at 09:19 UTC: node HEAD 89acc114f, the direction row present once, load 0.00, 14.9 GB available. Data, no reply owed.
+
+**Launches (from this host, `launch_b01_fits.sh`, launch sha c3e3bf10d — runner unchanged since; the launcher reads the published head's control state):**
+
+| fit | accepted (UTC) | claim | supervisor / runner pid | preflight |
+|---|---|---|---|---|
+| `b01_fit_H_931201_a01` (H, d2) | 09:20:01 | e3a59ba26d5c… | 978289 / 978290 | available 14.58 GB, floor pass, no failure reasons |
+| `b01_fit_SET_932201_a01` (SET, off) | 09:20:3x | 506e2d534b3a… | 978909 / 978910 | (record on the node; rsynced at exit) |
+
+At 09:20:32 UTC the H runner had passed the admitted boundary, written config/matching table (15 differing config fields between arms, as in the probes) and started evaluation 0 (dev, deterministic); RSS 777 MB, 340 % CPU, node load 2.0. Output roots `/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/<tag>`; observation = detached poll of `process-exit.json` from this host, rsync of each run directory to this checkout at exit (then durable checkpoint copies under `/home/wu/hmasd-artifacts/coupled_host_joint_skills_stage1/<tag>/`). Next pair (931307/932307) after this pair exits. **2 formal fits running, 0 read; cap 35 CPU-h.**
