@@ -451,3 +451,28 @@ The relay best start was a relay-family subset layout on all three worlds; the s
 - **C: stop at zero formal fits on cost** — the relay opportunity is established (gate), the learner instrument stays unpriced; recorded under the pre-declared technical/metering row as a cost stop, no scientific claim.
 - Not offered: two seeds (breaks §8 and the "2 of 3" rule) or fewer epochs/rollouts/lanes/threads (tuning after a probe that exposed learner scores; the stop rules forbid it).
 Default if no owner word arrives by the time T4 is accepted: A (the DM sends the CONTROL message and launches pair by pair, 931201/932201 first). Cumulative cost in this line: 0 formal fits; 48k technical training steps; ≈ 2.2 CPU-h (gate 129 s + hold-out 252 s + probes 7,681 s).
+
+## 2026-09-29 09:00 UTC — T4 accepted: P3 interaction reader (collector + reader), with the T4b support rule; 148 tests; ≈ 1 CPU-h per checkpoint collection
+
+**Files (committed with this entry):** `experiments/candidates/coupled_host_joint_skills_stage1/collect_commitments.py` (commitment collector: 16 rollouts × 16 lanes × 50 ten-step commitments = 12,800 rows per H checkpoint; at each commitment start it records `env.snapshot()` after `agent.step` and before `env.step`, i.e. the pre-commitment state, the six team labels, routed/relay/serving roles and the relay-relation matrix; response = mean team r of the ten executed steps), `interaction_reader.py` (the pre-specified P3 reading), `tests/…/test_interaction_reader.py` (19 tests). Direction suite: **148 passed** (fresh basetemp `scratch/dm_t4b_suite_01`, 204 s). Implementer (Opus/high) from `L0_b01_T4_scope.md` plus the DM's T4b message; the DM read the support/readability/decision code and the collector's snapshot point personally.
+
+**Reading (as implemented, verbatim strings written into every reading JSON):**
+- Reduced model R = intercept, time, c_bh_t0, sd_t0, relay/routed/serving per UAV, agent-specific label one-hots (label 0 = reference); full model F = R + the SUPPORTED columns of the 72-column added block (15 label-count products `n_z*n_w` (z < w; squares are spanned by R), 36 ordered relay-service `rs_zto w`, 21 relay-pair `rp_z_w`).
+- Support rule (DM, T4b, fixed on the design, never the response): "an added column is SUPPORTED iff its non-zero rows >= max(8, ceil(0.01 * rows)) (128 at 12,800 rows) AND its non-zero episodes >= 8; F = R + the supported columns of the 72-column block; unsupported columns are listed under missing_support.unsupported with their facts and are never treated as zero effects". "Episode" = one (lane, episode) pair = one independent 500-step trajectory in its own world (256 per checkpoint table); the same unit is the CV group and the bootstrap cluster.
+- Readability: "READABLE iff (a) at least 10 of the 15 label-count-product columns are supported, (b) the rank increment of R + supported columns over R equals the number of supported columns (otherwise the spanned ones are listed and the reading is unreadable), and (c) all K folds are non-empty; the secondary products-only reading applies the same rule to R + the supported product columns".
+- Statistic: Δ = mean over 8 grouped folds (fold = sha256("lane{l}:episode{e}") % 8) of held-out MSE_R − MSE_F; 1,000 wild-cluster Rademacher draws (one sign per episode, `default_rng(20260929 + b)`), null y* = fitted_R + e·w; pass = Δ > 0 and Δ > q95 of the null Δ*; computed by the exact linear-algebra equivalent of refitting (Gram route, checked against direct refits at rtol 1e-7). Primary decision = full supported block (`decision`); pre-declared secondary = the 15 products alone (`decision_products_only`); placebo = team-label one-hots (diagnostic only, not a veto). Wording: supported / unsupported / unreadable.
+- Design consequence accepted: one spanned column among the supported ones makes the primary reading unreadable (listed by declared-order Gram-Schmidt); the products-only secondary is the pre-declared fallback for that case, and both are reported whenever either is readable.
+
+**Synthetic calibration (40 seeds × 1,000 draws, 12,800-row tables from the T4 generator):**
+
+| case | primary pass | products-only pass | notes |
+|---|---|---|---|
+| additive null | 0/40 (Δ > q95 in 0/40) | 1/40 (Δ > q95 in 3/40) | placebo 3/40; unsupported columns per table 1–20 |
+| label-count product positive (+.03 when labels 1 and 2 are both held, 47 % of rows) | 40/40 | 40/40 | |
+| relay-service positive (+.03 on ≈ 4 % of rows; information only) | 33/40 (Δ > q95 39/40) | 3/40 | expected: the effect is outside the product block |
+
+No synthetic table was unreadable. CLI smoke on a synthetic table: 58/72 added columns supported (the 14 unsupported are mostly `rs_1*`/`rp_1*` and `rp_5_5`), rank increment 58/58, products 15/15, condition numbers R 9.2 / F 24.7 / products-only 22.8; 2.5 s, 192 MB. Structural fact (T4, unchanged): the team label does not reach H's actor (max |Δaction| over label swaps = 0.0; control 0.0167), so any P3 signal is about which joint contract was chosen, not about label-conditioned execution. Known limits: R's state terms are assumed correctly specified; R's condition number reads inf if every UAV is always routed (then the routed columns drop as zero-variance).
+
+**Cost:** collection ≈ 1.0 CPU-h per H checkpoint on the contended local host (16 rollouts, no update); reader ≈ 3 s. Three checkpoints ≈ 3 CPU-h, inside the cap. Zero formal fits so far.
+
+**Prior (recorded before any collection):** P3 primary supported on ≥ 2 of 3 H checkpoints ≈ 35 %; the products-only secondary alone supported ≈ 25 %. Both are reported; only the primary is the P3 reading.
