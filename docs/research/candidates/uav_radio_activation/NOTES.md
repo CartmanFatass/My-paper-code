@@ -1560,3 +1560,287 @@ under time parent4149208, with the same snapshot and output path. These are
 reader identities only, not replacement native-run handles. The recovered
 ResearchCritic is `/root/dm_radio_recovery/result_diagnosis_recovery` in a
 separate context; no source or record write is delegated to it.
+
+## 2026-09-29 - B03 Complete Reading
+
+### Complete Evidence and Native Outcomes
+
+The recovered full reader exited0 after192/192episodes and49,152saved native
+transitions. `reading.json` is `VERIFIED_COMPLETE`, bound to original source
+`2bff85091f85f6d52fc0344d0329b4fc39fa6d5c` and summary SHA256
+`554d27275b84c69479a1560c0ee9fa74be112fd933c6f60518c9b592bcb5edc1`.
+Its SHA256 is `765f4cffedbde6deb442b2b9139d701a9da2a8fb8aa158bae4de0bc1489a0d12`.
+The complete config, original native/observer/exit records, all per-world
+outcomes and paired differences remain in
+`runs/uav_radio_activation/b03_two_tick_delivery_a01/`. Recovery added zero
+native episodes, steps, fits or optimizer updates. The original192episodes/
+49,152steps/0fits were neither restarted nor extended.
+
+The reader verified all192raw identities and79,442,992content bytes, seeded
+initial geometry and shared resets, native clipped motion, masks, radio and
+reward, observations, C proposals/counters, actual team commands, both report
+and arrival clocks, final half-block, candidate enumeration/selection, packet
+identity and timing. Maximum native J reconstruction error is5.55e-17; SINR
+and observation errors are zero. Candidate physics coverage is every retained
+R mask score plus the predeclared S2/T2 subset:10,477/14,589candidate pairs.
+It does not independently recompute every T2 matrix entry. Retained engineering
+scalar/kernel checks supply their original separate coverage; shared-kernel
+reconstruction alone is not an independent numerical proof.
+
+World-average complete endpoints over64paired reset worlds are below. J,
+served users and quality are per-tick means; p10/minimum are first computed
+within each world, and path is per UAV.
+
+| Arm | J | Served Users | Quality | Service p10 | Minimum Service | Path m/UAV |
+|---|---:|---:|---:|---:|---:|---:|
+| R |.466315|28.755127|.212478|27.132813|11.781250|2446.52|
+| S2 |.482829|30.259277|.197330|27.687500|11.750000|4302.42|
+| T2 |.483682|30.422363|.192562|27.851563|11.750000|4553.44|
+
+The intervals below are descriptive paired t95 over reset worlds, conditional
+on this host/load and realized deadlines. They are not training-instance or
+hardware replication, physical safety, or equivalence tests. Full precision
+and all signed world effects remain in the summary.
+
+| Contrast | Mean J [t95] | Users/Tick [t95] | J + / - / = | Service + / - / = |
+|---|---|---|---|---|
+| S2-R |+.016514 [.010983,.022044]|+1.504150 [1.037317,1.970984]|48/16/0|53/11/0|
+| T2-R |+.017367 [.012025,.022708]|+1.667236 [1.221056,2.113417]|53/11/0|54/9/1|
+| T2-S2 |+.000853 [-.001805,.003510]|+.163086 [-.085845,.412016]|31/32/1|32/30/2|
+
+Both two-tick packages improve complete mean J and service against original R.
+The extra T2 increment over competent S2 is unresolved, not zero or equivalent.
+Mean quality falls by.015148/.019916 for S2/T2 against R; both descriptive
+intervals are below zero. T2-S2 quality is-.004768 [-.009032,-.000504].
+The native J arithmetic weights service share.7 and quality.3, so larger mean
+J coexists with this quality cost; that arithmetic does not identify a causal
+failure mechanism or license changing the objective.
+
+S2/T2 increase mean path by1855.89/2106.92m per UAV against R, with58path
+increases each. These are measured movement costs, not battery consumption.
+S2-R service p10 is+.554688 [-.076740,1.186115], with15adverse worlds;
+T2-R is+.718750 [.127518,1.309982], with14adverse worlds. S2 loses7p10 users
+on29307028; T2 loses5on29307062. All arms have zero zero-service ticks and
+zero longest outages on this finite panel; this does not establish safety.
+Minimum service is identical to R in63worlds and two users lower in29307020
+for both new arms. Raw records locate that loss at startup transition1:
+S2/T2 serve11while R's world minimum is13. It stays in the complete endpoint
+despite preceding the first new-plan arrival; no startup trimming is used.
+
+All adverse worlds are retained, including S2-R's largest J/service loss on
+29307006 (-.029503J/-2.613281users), T2-R's largest J loss on29307042
+(-.029652J/-1.117188users), and its largest service loss on29307062
+(-.018825J/-1.996094users). The strongest common positive29307060 gives
+S2-R +.075043J/+7.289063users and T2-R +.073347J/+7.230469users, while
+adding3482.24/3306.01m per UAV. Mean gains do not erase these world tradeoffs.
+
+### Executed Choices, Forecasts and Timing
+
+The targeted intermediate change occurred. Each S2/T2 arm delivered all4096
+rounds with mean actual-command report age887/254=3.492126ticks and maximum5;
+the original B02 four-tick contract had mean5.5. R here remains younger at
+2.494118(maximum4). Only the designed initial2ticks are excluded from S2/T2's
+age metric, never from J/service. No startup command persisted beyond nominal
+first delivery and no actual deadline fallback occurred.
+
+At their own states S2/T2 changed1748/2031C proposal commands, and all those
+changes altered executed displacement; none was only a clipping alias.
+They reactivated121/377previously silent rotating members. On T2's4096visited
+states, joint search selected330strictly better predicted-J pairs than its
+both-order S2 shadow, in63worlds;324changed the member's executed displacement
+and225were strict silent-move/reactivate advantages. Mean same-input matrix
+gaps are+.000535J/+.062927users. These shadows are conditional on T2 states,
+not another complete S2 rollout and not substitutes for T2-S2's native endpoint.
+
+Post hoc inspection of supporting/adverse witnesses uses saved native paths,
+not new counterfactual episodes. In29307011, S2/T2 have identical prefixes
+until transition2; T2 chooses(q13,mask7), S2(q16,mask14). The first affected
+block gains.009926J/.5users (predicted J gap.009937), and complete T2-S2 is
++.034239J/+3.613281users. In29307042, also first diverging at transition2,
+T2(q6,mask21) versus S2(q2,mask19) gives a genuine first-block gain
+.007375J/.75users, close to predicted.007468J. Complete T2-S2 is nevertheless
+-.026838J/-1.703125users. Thus active useful joint choices can survive in a
+full positive package without establishing the extra exhaustive program's
+complete incremental value. The prior local-gain/later-loss constraint remains.
+
+Selected commitment forecasts have mean position error approximately.325m
+for S2 and.321m for T2 across offsets3..6, with maximum.714m. R's offset5
+error is13.463m on average. Accurate blocks do not by themselves identify
+complete usefulness; the actual native comparisons above answer that question.
+This is a new-world complete contract comparison, not a paired B02-to-B03
+latency intervention. Changed feedback/commitment, C proposal evolution and
+later endogenous trajectories remain coupled; neither the sign change against
+R nor lower report age identifies latency as the cause of B02's losses.
+
+Each arm used8704recurring bytes per episode,557,056over64worlds, plus the
+separate400byte registered map. All4096rounds per arm met their deadlines.
+Maximum observed planner wall times are.045286s(R),.179326s(S2) and1.428485s(T2).
+The latter, on29307004, leaves only.027515s below its1.456s computation window;
+with.544s airtime it is1.972485s. This is successful measured execution, not a
+deadline guarantee under different processors or load, nor a physical link or
+switching-cost measurement.
+
+### Cost and Exposure
+
+| Work/Behavior | R | S2 | T2 |
+|---|---:|---:|---:|
+| Candidate requests |126976|475136|3428352|
+| Unique candidate scores |126976|302953|3428352|
+| Mask-state reductions |505920|1202360|13606272|
+| Geometry snapshots |16320|438912|438912|
+| Prefix model ticks |0|8192|8192|
+| Transmitter-on ticks |55947|57814|58040|
+| Mask bit flips |1281|1099|1708|
+| Empty-discovery fallback decisions |6548|6111|6053|
+| XY-boundary UAV-ticks |815|2334|2080|
+| Scheduler CPU seconds |92.331728|257.177695|2479.113128|
+| Complete episode CPU seconds |121.231970|277.046641|2501.254461|
+
+Actual combined work is4,030,464requests,3,858,281unique scores,
+15,314,552mask-state reductions,894,144scored geometries and16,384prefix ticks.
+All arms together made61,440C decisions,1,658,880C candidate trajectories and
+6,635,520C model ticks. The fixed upper work was respected; caching removes
+repeat S2 queries but does not remove their request exposure. C's measured
+CPU is included in S2/T2's full planning timer and reported separately in the
+summary; R's C work is part of episode cost rather than its radio timer.
+
+T2 uses9.64times S2's scheduler CPU and34.753247additional episode CPU seconds
+per world. This is a real cost with no established additional complete J/service
+increment on this panel; it is not an equivalence finding or a universal ban on
+joint search. The useful S2 package costs2.434604additional episode CPU seconds
+per world relative to R, alongside its movement/quality tradeoffs.
+
+Original whole native worker:2912.684244s wall,2899.402799user+2.611851system
+=2902.014650CPU-s,131,156KiB process-lifetime peak RSS, one compute thread.
+The interrupted pre-pause reader remains253.62s elapsed/253.66CPU-s,
+102,072KiB peak RSS, signal15/session exit143, no complete result. The recovered
+reader is a full rerun, not prefix continuation: inner955.791655s wall/
+955.369038CPU-s; whole process956.78s wall,936.32user+20.04system=
+956.36CPU-s,102,600KiB peak RSS, exit0. Both timing witnesses are preserved.
+Peak RSS values describe separate processes, not an additive simultaneous peak.
+
+B03 native plus both reader attempts cost1.142232CPUh. Together with the
+previous B01/B02 native/readers' approximately1.300526CPUh, this is about
+2.442758CPUh across576native episodes/147,456steps/0fits. These phase costs
+exclude incompletely metered adviser, engineering and other support; they are
+neither total project cost nor elapsed time across the owner pause. Recovery
+changed no executed scientific source and required no repeated engineering
+review or test suite.
+
+### Recovered Independent Scientific Diagnosis
+
+Registered ResearchCritic
+`/root/dm_radio_recovery/result_diagnosis_recovery` completed the interrupted
+review's responsibility in a new separate context, without DM/Root conversation
+inheritance. This does not pretend to resume the old critic. Navigation exposed
+brief inherited-study standings; it reconstructed B03 before reading detailed
+prospective reasoning, the preserved provisional advice and Pro explanations.
+Its substantive return is condensed below, preserving scope and disposition.
+
+> Retain the timely ordinary-control capability, prefer S2 as the economical
+> conditional reference, and stop automatic clock or exhaustive-search
+> expansion. B03 develops complete J/service performance beyond R, but does
+> not establish that T2's extra search is worth selecting over S2. T2-S2's
+> unresolved effect is not equivalence or proof of zero possible value.
+>
+> All complete gains and tradeoffs matter together: both new arms improve
+> mean J/service, lose quality, add roughly1.86/2.11km per UAV and retain
+> adverse service-tail worlds. Startup minimum loss29307020 stays in the
+> complete endpoint; zero outage ticks establish no safety guarantee. Keep
+> strong positives such as29307060 and adverse29307006/29307042.
+>
+> The intervention was active, not an unexecuted mechanism. The330strict
+> T2 shadow advantages,324displacement differences and225silent-member
+> move/reactivate opportunities are real, but describe T2 states rather
+> than complete S2 trajectories. In29307042 a checked first-block native
+> gain is followed by complete T2-S2 loss. Neither nonactivation nor wholly
+> fictitious model gains explains the result; useful local choices do not
+> determine subsequent trajectory value.
+>
+> The strongest ordinary explanation is competent finite planning under a
+> revised control contract. S2 already scores the full team and tries both
+> sequential orders. It obtains the established complete gain without T2's
+> larger enumeration. This strengthens timely ordinary composition and
+> weakens the case for exhaustive search in this contract; it establishes
+> neither a learning benefit nor a special coordination mechanism.
+>
+> Prior predictions resolve differently: more timely execution occurred;
+> committed choices were accurate and consequential; both new programs
+> extended complete mean J/service beyond R; earned T2-over-S2 value remains
+> unresolved. The frozen simpler-composition branch therefore applies.
+> Different B02/B03 worlds, startup/terminal semantics and clocks preclude
+> pure latency-causality attribution.
+>
+> T2's9.64fold scheduler CPU and34.753extra episode CPU seconds per world
+> reinforce the allocation judgment without being subtracted from J. Its
+> worst1.428485s round leaves only.027515s inside the declared window. This
+> successful observed execution is not load robustness. Preserve both
+> interrupted and completed reader costs: B03 native/readers1.142232CPUh,
+> B01-B03 approximately2.442758CPUh, with other support incompletely metered.
+>
+> Recommend no additional radio run now. The smallest remaining observation
+> required here was the complete saved-data reader, which has finished.
+> More worlds could refine T2-S2, but no specified adoption choice presently
+> requires that precision. Another clock, deeper search or learned program
+> needs a substantive prediction and S2 as a competent comparator. This is
+> not exhaustion of the parent question. Retain the capability and return
+> allocation to Root's requested synthesis, without automatic expansion or
+> relabeling the useful result as radio-control failure.
+>
+> Checked frozen configuration/manifest/exit and23source dependencies against
+> accepted snapshot/commit; all192raw endpoints and64seeded common reset
+> geometries; detailed radio/clock/block evidence in18B03 files spanning
+> positives, adverses, startup and near-deadline cases; every recorded T2
+> shadow gap; B01/B02 summary-reader bindings and15historical raws plus
+> complete diagnoses; full next-investment Pro advice/decision and relevant
+> background; final B03 reader hashes,192/192coverage and timing. The reader's
+> candidate physics coverage remains the declared10477/14589S2/T2 pairs.
+> I did not duplicate the full reader or recompute every candidate. Physical
+> costs, different processor loads, longer missions and learning generality
+> remain unverified. No edits, new episodes/fits, children or Pro sends.
+>
+> MATERIAL_DISSENT: no. Retain S2's conditional capability and decline an
+> unearned exhaustive-search expansion, preserving R, T/T2 local capability
+> and all adverse evidence.
+
+### DM Interpretation and Next Investment
+
+Accept this complete independent diagnosis. The prospective conditional
+branch **S2 exceeds R without an earned extra T2 increment** is the supported
+disposition. Retain S2 as the economical J/service reference for this explicit
+two-tick-delivery/four-tick-hold contract, alongside R as a lower-travel,
+higher-quality alternative. T2's demonstrated joint choices and individual
+positive worlds remain capabilities, not a discarded failed architecture.
+They do not establish an additional complete package benefit on this panel.
+No default physical adoption, statistical equivalence or universal ordering
+is asserted. One adequate independent result review covers this decision;
+no distinct unresolved expertise question calls for another Pro round here.
+
+The inherited shared-background judgment changes in a useful way. B02's
+adverse R comparison was a property of that complete contract, not evidence
+that motion/activation composition cannot develop R. B03 supplies a positive
+ordinary composition and an applicable simpler comparator. The older lesson
+that accurate prediction and local joint gains do not ensure trajectory value
+survives, now within an overall useful package. Local opportunity is supported,
+the lawful representation and control were exercised, finite learnability is
+untested (zero fits), and complete conditional usefulness is strengthened for
+S2/T2 versus R while extra exhaustive value is unresolved. This does not turn
+the shared map, finite planning or longer travel into a learning contribution.
+
+End the present clock/exhaustive-expansion investment and publish the useful
+positive result. An unchanged larger panel would chiefly refine an increment
+with no selected deployment threshold or consequential precision requirement;
+another clock or deeper search has no tested new prediction here. Learning is
+still an open different investment, not empirically refuted and not silently
+authorized by this result. Retaining the demonstrated S2 capability is more
+useful than an automatic repair or a renewed attempt to make T2 win. No new
+study, tail penalty, clock, world panel or fit is selected.
+
+At this assigned substantive boundary the direction becomes reserve/idle,
+with no unread result, active producer or scientific-review dependency. Root's
+already-requested round synthesis owns the next cross-question allocation;
+that is not a blocker or an approval requirement for this publication/cleanup.
+Return the evidence and recommendation through native child communication,
+not App messaging. Preserve useful ordinary-control source/tests and the sole
+required raw copy; remove reconciled snapshot, scratch and redundant logs only
+after publication and live-consumer checks.
