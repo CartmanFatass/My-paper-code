@@ -1,0 +1,97 @@
+{
+  "generation": 2,
+  "wake_id": null,
+  "events": [],
+  "jobs": {
+    "uav-persistent-service-b04-original-a01": {
+      "spec": {
+        "id": "uav-persistent-service-b04-original-a01",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "/home/wu/projects/HMASD/scripts/hmasd_launch.py",
+          "status",
+          "/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 60,
+        "timeout": 20
+      },
+      "status": "ready",
+      "due": 1790663362.0995865,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01/summary.json",
+            "state": "present"
+          }
+        },
+        "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/664894b4c6e5643ddd5b678cd4e995c7c076341a024cca17d12764bdb4d5f36e.json",
+        "direction": "uav_persistent_service",
+        "execution": {
+          "exit_code": 0,
+          "exit_witness": {
+            "exit_code": 0,
+            "finished_at_epoch": 1790663244.147015,
+            "path": "/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01/process-exit.json",
+            "state": "valid",
+            "termination": "process_exit"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 971133,
+              "session_id": 971132,
+              "start_ticks": 100931073
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 971132,
+              "session_id": 971132,
+              "start_ticks": 100931070
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry_available": false,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01/launch-manifest.json",
+        "node": "wsl_4070",
+        "observed_at": "2026-09-29T06:28:21.016419Z",
+        "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/664894b4c6e5643ddd5b678cd4e995c7c076341a024cca17d12764bdb4d5f36e.json",
+        "output_root": "/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "schema_version": 1,
+        "sha": "7bc0157f32caa8a1c29eb61e2ff483c6787b5f3e",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/861c9592d9444dec9c7a1b46f0184eb2"
+      },
+      "observed": 1790663302.0995865
+    }
+  },
+  "delivery": null,
+  "stopped": true
+}

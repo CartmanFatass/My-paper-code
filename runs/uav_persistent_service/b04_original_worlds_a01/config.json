@@ -1,0 +1,89 @@
+{
+  "arms_new": [
+    "R"
+  ],
+  "batch": "b04_original_worlds_a01",
+  "direction": "uav_persistent_service",
+  "evaluation_workers": 4,
+  "final_reserve_window": [
+    11700,
+    12000
+  ],
+  "fits": 0,
+  "fixed_bins": 3000,
+  "horizon": 12000,
+  "jobs": [
+    {
+      "arm": "R",
+      "job_key": "R/52292801",
+      "seed": 52292801
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52292802",
+      "seed": 52292802
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52292803",
+      "seed": 52292803
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52292804",
+      "seed": 52292804
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52292805",
+      "seed": 52292805
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52292806",
+      "seed": 52292806
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52292807",
+      "seed": 52292807
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52292808",
+      "seed": 52292808
+    }
+  ],
+  "late_window": [
+    6000,
+    12000
+  ],
+  "launch_sha": "7bc0157f32caa8a1c29eb61e2ff483c6787b5f3e",
+  "macro_steps": 30,
+  "max_new_native_transitions": 96000,
+  "mission_service_denominator": 12000,
+  "numeric_threads_per_worker": 1,
+  "optimizer_updates": 0,
+  "original_control_jobs": 16,
+  "original_control_native_steps_already_paid": 192000,
+  "original_control_root": "/home/wu/projects/HMASD/runs/uav_persistent_service/b02_long_mission_a01",
+  "original_control_source": "e905d8842a6ad6006b2b6d82237e98f4a5dbb2d2",
+  "original_manifest_sha256": "5741dc165d5213345020f17378bc1088cf2efb6f7571731b071639eee5cd85d2",
+  "original_station_provenance": "native post xyz plus original legal-decoded station xy at native floor z",
+  "original_station_z_m": 50.0,
+  "retained_R_source": "a4bd3b5eccef6e83a71c00fdbb8eccd6ecaf5c67",
+  "seeds": [
+    52292801,
+    52292802,
+    52292803,
+    52292804,
+    52292805,
+    52292806,
+    52292807,
+    52292808
+  ],
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  }
+}

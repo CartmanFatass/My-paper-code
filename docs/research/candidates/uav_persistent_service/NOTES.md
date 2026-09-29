@@ -2544,3 +2544,268 @@ Initial drain at06:15:10Z records consistent admitted runner/supervisor identity
 both running, no exit witness or event (`observer-adopted.json`). Native child
 stays active using a long deterministic wait; any checkpoint rearms observation
 of this same operation, never the worker or a replacement task.
+
+## 2026-09-29 - B04 complete: original failures avoided, new service-tail counterexample
+
+### Terminal witness, exact comparison and scope
+
+Input`7bc0157f32caa8a1c29eb61e2ff483c6787b5f3e` completed all8 new R trajectories
+at H12000,96000 native steps,0 fits/updates. Native exit0 is witnessed at
+2026-09-29T06:27:24Z; no runner/pool errors, missing/unstarted jobs, orphan raw,
+early endings or incompatible comparators. The first observer generation
+recorded READY at06:28:21Z. Its unsupported native-child App queue return was
+`delivery_unknown`/-32600, not a lost worker; the active DM's deterministic
+25-minute wait ended and drained the same READY event. Generation2 consumed it,
+then observation stopped, with no pending event or restarted process.
+
+The runner and independent read-only audit verified all29 new manifest artifacts
+(88324862 logical bytes), original51 artifacts (144030432 bytes), all24 actual
+native lengths/endpoints, and both R-vs-old comparisons for every original seed.
+All16 new/old comparisons have equal user and RNG arrays for every12001 observed state,
+with full-stream, initial-state, base-station and effective-config identities.
+The original P/O_H raw and metrics are unchanged; no controls were regenerated.
+The recorded291 source blobs retain exact B02/B03 bindings. This is the declared
+**exposed original-world development challenge**, not new confirmation.
+
+Complete compact source/config/pairing/cost evidence is in
+`runs/uav_persistent_service/b04_original_worlds_a01/`; `audit.json` independently
+reconstructs native J/QoS/risk, transfers and fixed final cohorts, and
+`terminal-tail-reading.json` is an additional0-step reading of all8 R arrays.
+`artifact-retention.json` pins the single necessary new raw copy on wsl_4070 at
+`/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01/raw/`.
+No B02/B03 or new R raw was copied locally, mutated, deleted or spliced.
+
+### Complete outcomes
+
+Mean R-O_H full QoS is **+.062091511** (nominal t7 95%[-.023458795,.147641817])
+and native J **+4644.140948** ([-101.044775,9389.326670]); fixed late6000 QoS is
+**+.106577856** ([-.048583606,.261739318]) and J **+4521.551768**
+([-136.725336,9179.828873]). All four intervals cross zero;6 worlds improve
+both full/late service/J and04/08 worsen all four endpoints. They are descriptive
+paired-world intervals, not a training-sample estimate or population proof.
+
+| Original seed suffix | R-O_H full QoS | Full J | Late6000 QoS | Late J | R transfers | R terminal-zero |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 01 | +.089903 | +6164.299 | +.172497 | +6118.945 | 11 | no |
+| 02 | +.068252 | +815.093 | +.030153 | +174.991 | 11 | no |
+| 03 | +.129995 | +8368.714 | +.244314 | +8271.459 | 7 | no |
+| 04 | -.065514 | -785.079 | -.081077 | -485.793 | 8 | no |
+| 05 | +.011370 | +135.467 | +.025233 | +149.803 | 8 | no |
+| 06 | +.197295 | +14106.985 | +.336652 | +13627.139 | 12 | **yes, new** |
+| 07 | +.153166 | +9411.903 | +.300435 | +9376.146 | 11 | no |
+| 08 | -.087734 | -1064.255 | -.175585 | -1060.275 | 3 | no |
+
+R-P full QoS/J means are **+.245867757/+9487.512113** with intervals
+[.131511554,.360223960]/[727.715545,18247.308681]; late6000 means are
+**+.323122485/+6471.696484**, intervals[.135074659,.511170311]/
+[246.152732,12697.240236]. All8 worlds improve all four endpoints versus P.
+The older O_H-P differences reproduce exactly; neither B02's failed long-mission
+adoption nor B01's finite O result is retrospectively changed.
+
+R has0 cutoff/depletion across all8 worlds. It avoids O_H's seven cutoff and
+seven depletion events in **each of01/03/06/07**, including both specifically
+selected original added-failure worlds01/03. P has no cutoff/depletion in01/03;
+P01 nevertheless retains its six persistent low-reserve members, so "healthy"
+in the motivating comparison meant absence of those failures, not general
+safety. R has no final300 persistent-reserve member in any world. Its only
+<=.10 reserve observation is one member-step in08, minimum.099729847;
+mean exposure.000001302 is lower than both controls. All R terminal minima
+are at least.121547642. These improvements are real finite native outcomes.
+
+However, **the prospectively fixed complete useful-package prediction fails**:
+R06 has terminal-zero service where neither P06 nor O_H06 does. Every other
+declared package flag passes, including full/late mean service/J and mean
+reserve exposure. The all-flags verdict is not rewritten to a cutoff-only
+criterion after seeing the result. R06's final zero-service spell is
+ticks[11945,12000),55 steps, not one isolated end tick; longest zero spell110,
+last3000 total zero steps312, and longest below-half spell705. Its final3000
+QoS/J are.517186/1513.448 versus O_H.224205/-5356.217, so the new terminal loss
+coexists with substantial average and final-block benefit, not total failure
+of the finite asset. R01's below-half tail98 exceeds P01's92, while R04's91
+worsens O_H04's56. Keep the actual reference explicit. The complete longest
+zero/below-half vectors for R are
+`[10,81,0,22,21,110,31,45]` / `[98,109,44,91,129,705,85,151]`; all control and
+R vectors plus all four3000-step bins remain in the audit, including04/08 losses.
+
+### What the intervention did, and did not do
+
+All71 requested transfers were executed, crossed the intended basin, decoded
+arrival, charged and released; none was overwritten by real F, and none spent
+an active step in F. Release reasons are60 full/11 dwell, no transfer timeout
+or censoring. Every transfer has positive net member battery change (minimum
+8.464024Wh).69 subsequently regain positive connected load in a free service
+command. The two nonrecoveries are05/member7 (released10705,1295-step free
+follow-up) and06/member6 (released3838,1892-step follow-up); neither is dismissed
+as an unobserved suffix. Assignment restoration alone is not useful service.
+
+No R station has any eligible-demand overload tick; maximum eligible membership
+is at most5 at either station, at most842.45W stationary demand versus1000W.
+Mean O_H overload4882 steps/world and P4915.25 fall to0. For original01/03,
+O_H overload begins at6000/5102, cutoff at10778/9916 and depletion11228/10370;
+R has none of these events. This strengthens the actual legal-access and local
+load-control capability, and directly addresses the original failure examples.
+It does not prove that every score gain is mediated by overload reduction:
+R simultaneously changes movement/redeployment and realized query exposure,
+and losses04/08 occur where O_H already has0 overload.
+
+No R fixed cohort remains eligible at a single station for the entire final3000
+in this panel. That observation **does not erase B03 R04/R08's six-member F
+cohorts**: each drew1010.94W against1000W and lost9.116667Wh. The original B02
+data also retains six-member deficits in P01 and O_H02/05 and seven-member
+deficits in depleted worlds; clipping near zero means consumed-minus-input
+need not equal realized battery-stock loss after depletion. No energy balance
+claim is inferred from a changing geometric station cohort.
+
+R06 ends with all8 members in F, no active commitment, five eligible atstation1
+and no overload; all8 final batteries lie.1215..1285. There are363 all-F steps,
+140 also zero-QoS, all during the last3000. R08 has505 all-F steps but no new
+zero-QoS beyond its initial45 steps, so simultaneous F alone is not identified
+as the cause. This is evidence that local charging feasibility and battery
+preservation do not guarantee useful service placement/coverage at every tail,
+not proof that a particular service-aware repair will work.
+
+All8 R full-mission fleet stocks still decline621.03..898.63Wh (mean738.31Wh).
+Seven decline in the last3000;08 gains120.136Wh then, without establishing a
+repeating sustainable cycle. The intact B03 local deficits and these finite
+stocks withhold sustainability; another unchanged horizon extension is not
+needed to rediscover the known counterexample.
+
+The original detector is not repaired: five O_H ordinary commitments charge
+without decoded arrival, as before, and13 R ordinary commitments do so
+(01x2,02x1,03x1,04x3,06x1,07x3,08x2). One R03 commitment is horizon-censored;
+one R01 releases full,11 time out without arrival. None is a cross-basin
+transfer; all71 transfers arrive. These13 are distinct from the narrower
+11 failed-arrival counter, and neither number explains the original01/03
+failures by itself. They restrict dwell interpretation and remain adverse
+executed semantics, not a retroactive corrected-policy comparison.
+
+### Cost and current investment judgment
+
+Actual new cost is0 fits,8 complete trajectories,96000 native steps,
+**2918.619634 worker-CPU seconds (.810728 h)** and744.807224 parent-wall seconds
+(12.4135min); parent CPU1.025656s, peak worker RSS722872KiB, parent508968KiB.
+There are69913 new service-snapshot calls, compared with already-paid O_H47015
+and P22078. Relative to those original O_H runs, observed R CPU is15.6% greater,
+travel65.9% greater, modeled consumption6.9% greater and realized snapshot
+calls48.7% greater. Same legal query mechanism/decision contract does not mean
+same actual computational cost; these costs are not included in native J.
+Source binding/readback/engineering time was not separately CPU-metered; the
+prospective1..2h support estimate was additional to evaluation, not0-cost work.
+Direction cumulative result cost is now **1fit/912000 steps/7.295320
+worker-CPU h**, summing B01 training/evaluation and B02/B03/B04 worker records.
+Historical correctness is at least1945 native transitions: B01 at least1525,
+B02 210 and B03 210, with up to150 additional uncertain B01 steps and six
+four-step synthetic optimizer checks. B04 correctness/readout added0 native
+steps; support remains incompletely metered.
+
+The actual-access prediction and original failure-avoidance prediction are
+strengthened; general complete risk-preserving reuse is weakened by the new
+service-tail counterexample and04/08 losses. Finite mean service/J benefit
+recurs without a controller repair. Provisional DM judgment is to retain R as
+a conditional H12000 ordinary performance asset, not a risk-preserving default,
+and end **unchanged-R panel/extension expansion**. This is not closing the
+broader lawful-control or learning question. A new mechanism or control package
+would need its own service-and-energy consequence and total-cost case against
+this competent R, rather than automatically tuning a gate to erase06.
+
+Another identical8-world R panel would cost roughly.8h worker CPU/96k steps
+plus setup/reading while estimating recurrence; it would not remove the known
+tail or six-member deficit. A longer unchanged panel spends more to revisit a
+known restriction. The selected B04 has answered its consequential original
+counterexamples; no concrete new candidate with a better discriminating
+prediction is selected here. Root's independent content-use study was the
+cross-question alternative when B04 was selected and has now completed B03,
+as current shared standing records. It is not a pending run displaced by this
+recommendation, a cross-host score ranking, a dependency or a permission gate.
+Further allocation needs a new consequential question, without inventing one
+merely to avoid a justified stop.
+
+### Independent B04 scientific reading and final disposition
+
+The registered ResearchCritic`/root/dm_service_reassignment/scientific_b04`
+received the actual question, fixed source/plan, original B02/B03 positive and
+adverse sources, and complete B04 artifacts in a fresh context without DM/Root
+conversation inheritance. It independently rehashed all old/new files and
+reconstructed all24 native endpoints and paired streams on the actual node;
+it also directly rechecked B03's two six-member cohorts. Its complete answer
+follows. No native experiment, edit or extra model fit was performed by review.
+
+#### Full independent answer
+
+Retain R as a conditional H12000 ordinary comparator, revise the explanation, and stop unchanged-R expansion. B04 strengthens the finite scheduling benefit but fails its complete-package rule. I recommend no further service run now.
+
+This review used separate context without inherited DM/Root conversation. The assignment supplied selected findings, so it was not blinded. I reconstructed the frozen comparison and native evidence before reading the earlier critic's recommendation. No code, records or experiments were changed.
+
+I independently rehashed the 51 original and 29 new manifest artifacts on the actual node, reconstructed all 24 native endpoints, and verified complete paired user/RNG streams. All trajectories reached 12000 steps. The comparison retains B03 R and the original B02 controls under the recorded source/configuration bindings; it is not compromised by missing controls or early-ending censoring. [Bindings and completion](/home/fires/hmasd-wsl/runs/uav_persistent_service/b04_original_worlds_a01/summary.json:5334)
+
+The complete effects are:
+
+| Endpoint | R-O_H mean [nominal t7 interval] | R-P mean [nominal t7 interval] |
+|---|---:|---:|
+| Full QoS | +.062092 [-.023459, +.147642] | +.245868 [+.131512, +.360224] |
+| Full J | +4644.141 [-101.045, +9389.327] | +9487.512 [+727.716, +18247.309] |
+| Late QoS | +.106578 [-.048584, +.261739] | +.323122 [+.135075, +.511170] |
+| Late J | +4521.552 [-136.725, +9179.829] | +6471.696 [+246.153, +12697.240] |
+
+All four endpoints improve over P in every world. Against O_H, they improve in 01/02/03/05/06/07 and decline in 04/08. The four O_H intervals span zero; these are descriptive comparisons on an exposed development panel, not population confirmation. There are zero new training units or updates. [Complete contrasts](/home/fires/hmasd-wsl/runs/uav_persistent_service/b04_original_worlds_a01/summary.json:3039)
+
+The strongest useful positive is substantial. All 71 transfers crossed, charged and released without F intervention during transfer; all gained member battery energy, and 69 subsequently recovered connected load. R recorded zero station-overload ticks, zero cutoff/depletion and no persistent final300 reserve member. It avoided the seven cutoff and seven depletion events that O_H introduced in each original world 01/03, while improving full/late service and J over both controls there. This establishes useful lawful access in the original counterexamples, beyond a merely favorable aggregate score. [Transfer evidence](/home/fires/hmasd-wsl/runs/uav_persistent_service/b04_original_worlds_a01/audit.json:830)
+
+However, describing original P01 as simply "healthy" is too strong: it avoided cutoff/depletion but had six persistent final300 reserve members. P03 had no persistent reserve member. The comparator's adverse evidence must remain visible.
+
+The strongest consequential objection is that **overload prevention does not suffice for complete service preservation**. R06 ends with 55 consecutive zero-service steps, `[11945,12000)`, versus nonzero terminal service under both controls. Its final3000 contains 312 zero-service steps; final300 QoS is only .150992. Batteries remain about .1215-.1285, with no reserve violation or station overload. All eight members are in F at the endpoint, but that is not an identified cause: R08 has 505 all-F steps without any zero-service interval after its initial 45 steps. This is observed adverse service behavior, not nonactivation or a missing comparison. [Terminal evidence](/home/fires/hmasd-wsl/runs/uav_persistent_service/b04_original_worlds_a01/terminal-tail-reading.json:340)
+
+Consequently, the fixed gate fails through new terminal-zero service, despite passing every mean service/J and mean-reserve condition. The prospective rule explicitly makes active transfer with new risk a reason to end unchanged-R expansion. Neither the large mean gains nor the relatively short terminal suffix permits changing that rule afterward. Conversely, this failure does not erase the finite gains or establish that R is generally worse. [Gate](/home/fires/hmasd-wsl/runs/uav_persistent_service/b04_original_worlds_a01/audit.json:546), [prospective consequence](/home/fires/hmasd-wsl/docs/research/candidates/uav_persistent_service/NOTES.md:2335)
+
+The supported explanation is now narrower and more useful: ordinary pre-F scheduling can redistribute charging access and avert particular overload failures, but service geometry, timing and energy availability remain coupled. Both O_H loss worlds 04/08 already had zero overload, yet R executed eight/three transfers and lost service/J. That supports a consequential scheduling tradeoff; it does not identify a deployable rule for knowing beforehand when to suppress transfers. Post-result world selection would not supply such a rule.
+
+This is a package effect under matched conditions. It does not isolate the load screen, deadline calculation, crossing or altered service schedule as the causal component. Ordinary baseline competence remains the appropriate explanation and comparator; B04 supplies no evidence of a learning bottleneck, private-information requirement or failed co-adaptation. The earlier learned deployment's nonactivation remains a separate result.
+
+Two limitations still matter. First, 13 R ordinary commitments charged without decoded arrival, versus five O_H commitments; all 13 reach the same `20.000001907... m` boundary discrepancy. Eleven time out, one releases full and one is censored. Thus nominal dwell semantics remain imperfectly realized, without establishing that this defect caused R06. Second, every R world consumes net initial storage over the full mission, and seven still lose storage in the final3000. I directly rechecked B03's two six-member R cohorts: each consumes 842.45 Wh against 833.333 Wh input and loses 9.116667 Wh while remaining in F. B04's absence of those groups does not overturn that counterexample or establish sustainability. [Arrival records](/home/fires/hmasd-wsl/runs/uav_persistent_service/b04_original_worlds_a01/audit.json:4), [B03 cohort](/home/fires/hmasd-wsl/runs/uav_persistent_service/b03_reassignment_a01/audit.json:450)
+
+For investment, B04 was the smallest worthwhile complete challenge to the original failures, and that observation is now complete. Another unchanged panel would refine recurrence around an already observed tradeoff without removing the adoption counterexample; extending known deficit trajectories would not establish useful sustainable service. Retain the asset and the broader question, but purchase neither automatically.
+
+A constructive reopening remains plausible: an ordinary service-aware charging schedule could preserve the successful transfers while reducing synchronized loss of useful deployment. Its discriminating prediction must include both that intermediate change and preserved full/late J, service and risks against frozen R. Complete improvement would support a revised finite asset; improved charging statistics with continued service losses would defeat that proposed route; negligible changed decisions would limit the test rather than identify a repair. No such candidate or costed comparison is presently established, and none is required merely to avoid stopping. If resources or rights change, give the competent ordinary comparator the same addition and distinguish that contract's benefit from the scheduler's increment.
+
+Root's independent content-reuse alternative has now completed B03 according to current shared standing. It should not be represented as a pending run displaced by this recommendation, nor should its scores be ranked against this different host. Further allocation needs a new consequential question; stopping current service spending does not require inventing a replacement. [Current content result](/home/fires/hmasd-wsl/docs/research/RESEARCH.md:650)
+
+Actual B04 cost is **0 fits, 96000 new steps, 2918.620 worker-CPU seconds (.810728 h), and 744.807 seconds parent wall (12.41 minutes)**, plus unmetered binding, engineering, review and collection. R makes 69913 service snapshots and averages 207.57 km more team travel and 345.18 Wh more consumption than O_H; native J does not charge computation. Historical CPU totals suggest 15.6% more R CPU than O_H, but those separate executions are not a controlled speed benchmark. Cumulative scientific execution is **1 fit, 912000 steps, approximately 7.2953 worker-CPU hours**. Historical correctness is not only 210 steps: B01 records at least 1525, B02 210 and B03 210, with up to 150 additional uncertain B01 steps; B04 adds zero. Full support cost remains unknown. [B04 cost](/home/fires/hmasd-wsl/runs/uav_persistent_service/b04_original_worlds_a01/summary.json:5335), [earlier accounting](/home/fires/hmasd-wsl/docs/research/candidates/uav_persistent_service/NOTES.md:674)
+
+MATERIAL_DISSENT: no. No conflicting new investment or expanded claim has been proposed. The recommendation retains demonstrated finite benefit while enforcing the prospective stop on unchanged expansion, directly supported by R06's terminal service failure and the preserved B03 cohort deficits.
+
+#### DM disposition
+
+Accept the independent diagnosis and recommendation. I checked the cited cost
+records: B01 training/evaluation6347.381355/4994.572786 CPU-s, B02 4466.392124,
+B03 7536.187070 and B04 2918.619634 sum to7.295320h. The draft's historical
+correctness count had incorrectly carried only B03's210; the complete B01/B02
+cost entries establish at least1945 plus up to150 uncertain native transitions.
+That accounting is corrected above, with B04 still0. The content study's
+completed standing is also verified on current main; it is not an unresolved
+producer. Historical CPU percentage is descriptive, not a controlled timing
+experiment. P01's low-reserve tail and the distinction between ordinary arrival
+defects and successful cross-basin transfers remain explicit.
+
+Final judgment: **keep the conditional finite R asset; reject risk-preserving
+default/sustainability claims; stop this unchanged-R expansion and leave the
+broader service question reserve**. B04 is a scientifically complete, informative
+mixed outcome: the original added-failure cases are overcome with better full
+and late service/J, while a distinct service-tail counterexample defeats the
+complete package prediction. Neither fact erases the other. We have learned
+that accessible local charging capacity is useful but insufficient for every
+service consequence under native F, not that legal scheduling or learning is
+impossible. No particular module receives causal credit or blame from this
+package comparison.
+
+No new panel, horizon, repair, model fit or contract is selected. The useful
+re-entry condition is a specific ordinary service-aware schedule with a
+prospective availability/placement intermediate and full/late J/service/risk
+prediction against unchanged R, plus a bounded total-cost comparison against
+stopping. The raw R06 all-F coincidence alone does not establish such a recipe;
+an identical panel or ad hoc post-result suppression rule is not that proposal.
+Any richer information, capacity or station rights would be a different
+contract and must also be given to a competent ordinary comparator. Within the
+current evidence there is no better established next marginal purchase than
+stopping new service expenditure, retaining useful code/raw and returning this
+result to Root for cross-question judgment. No approval or external producer is
+invented as an idle dependency.

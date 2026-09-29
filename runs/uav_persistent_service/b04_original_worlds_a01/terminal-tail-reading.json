@@ -1,0 +1,569 @@
+{
+  "new_native_steps": 0,
+  "worlds": [
+    {
+      "seed": 52292801,
+      "last_zero_spells": [
+        [
+          0,
+          10
+        ]
+      ],
+      "terminal_zero_spell": null,
+      "all_f_steps": 0,
+      "zero_qos_and_all_f_steps": 0,
+      "terminal_f_members": [
+        0,
+        2,
+        3,
+        5
+      ],
+      "terminal_charging_members": [],
+      "terminal_commit_members": [],
+      "terminal_native_load": [
+        12,
+        24,
+        15,
+        12,
+        2,
+        8,
+        7,
+        7
+      ],
+      "terminal_battery": [
+        0.12824407814995106,
+        0.42477984497895127,
+        0.12810412903654186,
+        0.12778540320122364,
+        0.3139451966009908,
+        0.12777940414203157,
+        0.5917217057673196,
+        0.7220159165365164
+      ],
+      "terminal_targets": [
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        -1
+      ],
+      "terminal_eligible_counts": [
+        0,
+        0
+      ],
+      "maximum_eligible_count_per_station": [
+        1,
+        4
+      ],
+      "maximum_demand_w_per_station": [
+        168.49,
+        673.96
+      ],
+      "all_f_last3000_steps": 0,
+      "last3000_zero_steps": 0,
+      "minimum_battery": 0.10081530415429868,
+      "reserve_member_steps": 0
+    },
+    {
+      "seed": 52292802,
+      "last_zero_spells": [
+        [
+          0,
+          81
+        ]
+      ],
+      "terminal_zero_spell": null,
+      "all_f_steps": 0,
+      "zero_qos_and_all_f_steps": 0,
+      "terminal_f_members": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "terminal_charging_members": [
+        3
+      ],
+      "terminal_commit_members": [],
+      "terminal_native_load": [
+        11,
+        12,
+        17,
+        9,
+        18,
+        14,
+        3,
+        6
+      ],
+      "terminal_battery": [
+        0.30447536662499614,
+        0.14941216039546637,
+        0.14976605331329768,
+        0.15036132327434612,
+        0.15003000555275506,
+        0.14863929874177562,
+        0.6742886876136214,
+        0.8410489983944557
+      ],
+      "terminal_targets": [
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "terminal_eligible_counts": [
+        0,
+        5
+      ],
+      "maximum_eligible_count_per_station": [
+        1,
+        5
+      ],
+      "maximum_demand_w_per_station": [
+        168.49,
+        842.45
+      ],
+      "all_f_last3000_steps": 0,
+      "last3000_zero_steps": 0,
+      "minimum_battery": 0.10328209870251899,
+      "reserve_member_steps": 0
+    },
+    {
+      "seed": 52292803,
+      "last_zero_spells": [],
+      "terminal_zero_spell": null,
+      "all_f_steps": 0,
+      "zero_qos_and_all_f_steps": 0,
+      "terminal_f_members": [
+        2,
+        6,
+        7
+      ],
+      "terminal_charging_members": [
+        6
+      ],
+      "terminal_commit_members": [
+        3
+      ],
+      "terminal_native_load": [
+        2,
+        11,
+        9,
+        13,
+        3,
+        23,
+        10,
+        19
+      ],
+      "terminal_battery": [
+        0.15137558784574928,
+        0.7260855971139754,
+        0.15070684260071537,
+        0.23099062956133573,
+        0.31401790573931243,
+        0.5508276955796875,
+        0.151663932590358,
+        0.15109349529174002
+      ],
+      "terminal_targets": [
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "terminal_eligible_counts": [
+        0,
+        4
+      ],
+      "maximum_eligible_count_per_station": [
+        1,
+        5
+      ],
+      "maximum_demand_w_per_station": [
+        168.49,
+        842.45
+      ],
+      "all_f_last3000_steps": 0,
+      "last3000_zero_steps": 0,
+      "minimum_battery": 0.10718656626300217,
+      "reserve_member_steps": 0
+    },
+    {
+      "seed": 52292804,
+      "last_zero_spells": [
+        [
+          0,
+          22
+        ]
+      ],
+      "terminal_zero_spell": null,
+      "all_f_steps": 0,
+      "zero_qos_and_all_f_steps": 0,
+      "terminal_f_members": [
+        0,
+        3,
+        5,
+        6,
+        7
+      ],
+      "terminal_charging_members": [
+        5
+      ],
+      "terminal_commit_members": [],
+      "terminal_native_load": [
+        8,
+        24,
+        2,
+        2,
+        27,
+        0,
+        2,
+        8
+      ],
+      "terminal_battery": [
+        0.12582310982443523,
+        0.8386967192234234,
+        0.32940501176329473,
+        0.12591007953646194,
+        0.7025934329478123,
+        0.12604194079255981,
+        0.1244389597484453,
+        0.12511108767157844
+      ],
+      "terminal_targets": [
+        0,
+        -1,
+        -1,
+        0,
+        -1,
+        0,
+        0,
+        0
+      ],
+      "terminal_eligible_counts": [
+        5,
+        0
+      ],
+      "maximum_eligible_count_per_station": [
+        5,
+        2
+      ],
+      "maximum_demand_w_per_station": [
+        842.45,
+        336.98
+      ],
+      "all_f_last3000_steps": 0,
+      "last3000_zero_steps": 0,
+      "minimum_battery": 0.11298636461746565,
+      "reserve_member_steps": 0
+    },
+    {
+      "seed": 52292805,
+      "last_zero_spells": [
+        [
+          0,
+          21
+        ]
+      ],
+      "terminal_zero_spell": null,
+      "all_f_steps": 0,
+      "zero_qos_and_all_f_steps": 0,
+      "terminal_f_members": [
+        1,
+        4,
+        5
+      ],
+      "terminal_charging_members": [
+        4
+      ],
+      "terminal_commit_members": [],
+      "terminal_native_load": [
+        10,
+        18,
+        2,
+        4,
+        24,
+        21,
+        11,
+        0
+      ],
+      "terminal_battery": [
+        0.7416611437721736,
+        0.12175473333105917,
+        0.16352135952797278,
+        0.7004805261144509,
+        0.12346344553105196,
+        0.12206982399441792,
+        0.27142846820774347,
+        0.6039882051899464
+      ],
+      "terminal_targets": [
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "terminal_eligible_counts": [
+        0,
+        3
+      ],
+      "maximum_eligible_count_per_station": [
+        2,
+        3
+      ],
+      "maximum_demand_w_per_station": [
+        336.98,
+        505.47
+      ],
+      "all_f_last3000_steps": 0,
+      "last3000_zero_steps": 0,
+      "minimum_battery": 0.11068926591746951,
+      "reserve_member_steps": 0
+    },
+    {
+      "seed": 52292806,
+      "last_zero_spells": [
+        [
+          11713,
+          11717
+        ],
+        [
+          11791,
+          11794
+        ],
+        [
+          11795,
+          11803
+        ],
+        [
+          11814,
+          11924
+        ],
+        [
+          11945,
+          12000
+        ]
+      ],
+      "terminal_zero_spell": [
+        11945,
+        12000
+      ],
+      "all_f_steps": 363,
+      "zero_qos_and_all_f_steps": 140,
+      "terminal_f_members": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "terminal_charging_members": [
+        5
+      ],
+      "terminal_commit_members": [],
+      "terminal_native_load": [
+        13,
+        19,
+        16,
+        0,
+        24,
+        18,
+        0,
+        0
+      ],
+      "terminal_battery": [
+        0.12154764237420851,
+        0.12156831497085849,
+        0.12307806595794075,
+        0.12771338060267295,
+        0.12297618583349766,
+        0.12308408573413734,
+        0.12852201440747668,
+        0.12843088863157637
+      ],
+      "terminal_targets": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "terminal_eligible_counts": [
+        0,
+        5
+      ],
+      "maximum_eligible_count_per_station": [
+        3,
+        5
+      ],
+      "maximum_demand_w_per_station": [
+        505.47,
+        842.45
+      ],
+      "all_f_last3000_steps": 363,
+      "last3000_zero_steps": 312,
+      "minimum_battery": 0.10027493439674705,
+      "reserve_member_steps": 0
+    },
+    {
+      "seed": 52292807,
+      "last_zero_spells": [
+        [
+          0,
+          31
+        ]
+      ],
+      "terminal_zero_spell": null,
+      "all_f_steps": 0,
+      "zero_qos_and_all_f_steps": 0,
+      "terminal_f_members": [
+        0,
+        1,
+        3,
+        4,
+        6
+      ],
+      "terminal_charging_members": [
+        1
+      ],
+      "terminal_commit_members": [],
+      "terminal_native_load": [
+        11,
+        7,
+        12,
+        15,
+        11,
+        9,
+        11,
+        14
+      ],
+      "terminal_battery": [
+        0.13059417535670012,
+        0.13109424842438436,
+        0.8720494359879943,
+        0.1305333337639896,
+        0.13066570720620727,
+        0.5865374668227648,
+        0.12963647818179402,
+        0.3009565972607074
+      ],
+      "terminal_targets": [
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1
+      ],
+      "terminal_eligible_counts": [
+        0,
+        5
+      ],
+      "maximum_eligible_count_per_station": [
+        1,
+        5
+      ],
+      "maximum_demand_w_per_station": [
+        168.49,
+        842.45
+      ],
+      "all_f_last3000_steps": 0,
+      "last3000_zero_steps": 0,
+      "minimum_battery": 0.10962236747611302,
+      "reserve_member_steps": 0
+    },
+    {
+      "seed": 52292808,
+      "last_zero_spells": [
+        [
+          0,
+          45
+        ]
+      ],
+      "terminal_zero_spell": null,
+      "all_f_steps": 505,
+      "zero_qos_and_all_f_steps": 0,
+      "terminal_f_members": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "terminal_charging_members": [
+        3
+      ],
+      "terminal_commit_members": [],
+      "terminal_native_load": [
+        18,
+        10,
+        15,
+        11,
+        9,
+        6,
+        16,
+        5
+      ],
+      "terminal_battery": [
+        0.5074161396783242,
+        0.1462395413787681,
+        0.13557492917460554,
+        0.14755872295280387,
+        0.14593739630600297,
+        0.14659817388151913,
+        0.14747379738954774,
+        0.5114376185289246
+      ],
+      "terminal_targets": [
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "terminal_eligible_counts": [
+        0,
+        4
+      ],
+      "maximum_eligible_count_per_station": [
+        3,
+        5
+      ],
+      "maximum_demand_w_per_station": [
+        505.47,
+        842.45
+      ],
+      "all_f_last3000_steps": 452,
+      "last3000_zero_steps": 0,
+      "minimum_battery": 0.09972984662800624,
+      "reserve_member_steps": 1
+    }
+  ]
+}

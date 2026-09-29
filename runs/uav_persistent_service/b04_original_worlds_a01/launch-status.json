@@ -1,0 +1,11 @@
+{
+  "claim_key": "664894b4c6e5643ddd5b678cd4e995c7c076341a024cca17d12764bdb4d5f36e",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/664894b4c6e5643ddd5b678cd4e995c7c076341a024cca17d12764bdb4d5f36e.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/664894b4c6e5643ddd5b678cd4e995c7c076341a024cca17d12764bdb4d5f36e.json",
+  "pid": 971132,
+  "runner_pid": 971133,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-29T06:14:33.441315Z"
+}
