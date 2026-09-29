@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "mode": "macro",
+  "contract": "slot",
+  "arm": "SET",
+  "seed": 932201,
+  "probe_rollouts": 3,
+  "host_steps": 24000,
+  "macro_steps": 2400,
+  "seconds_per_rollout": {
+    "collection": 18.302978512986254,
+    "update": 17.41391380612428,
+    "policy": 1.0616501316738625,
+    "env": 7.051098612059529,
+    "menu": 10.120747228773931,
+    "store": 0.04602608441685637,
+    "cpu": 93.31425233333334,
+    "wall": 35.724497388349846
+  },
+  "per_rollout": [
+    {
+      "collection_seconds": 18.565218382049352,
+      "update_seconds": 17.442294968059286,
+      "policy_seconds": 1.0620390204712749,
+      "env_seconds": 7.036401749122888,
+      "menu_seconds": 10.393697722349316,
+      "store_seconds": 0.049577089957892895,
+      "cpu_seconds": 92.27255000000001,
+      "wall_seconds": 36.01476912992075
+    },
+    {
+      "collection_seconds": 18.143253081012517,
+      "update_seconds": 17.323289845138788,
+      "policy_seconds": 1.0680124561768025,
+      "env_seconds": 7.07692986051552,
+      "menu_seconds": 9.929269217187539,
+      "store_seconds": 0.04530485416762531,
+      "cpu_seconds": 93.75970300000002,
+      "wall_seconds": 35.47444822010584
+    },
+    {
+      "collection_seconds": 18.20046407589689,
+      "update_seconds": 17.476156605174765,
+      "policy_seconds": 1.0548989183735102,
+      "env_seconds": 7.039964226540178,
+      "menu_seconds": 10.03927474678494,
+      "store_seconds": 0.0431963091250509,
+      "cpu_seconds": 93.910504,
+      "wall_seconds": 35.684274815022945
+    }
+  ],
+  "ms_per_host_step": {
+    "env": 0.8813873265074411,
+    "all_excluding_menus": 3.200468769946989
+  },
+  "ms_per_macro_step": {
+    "env": 8.813873265074411,
+    "policy": 1.3270626645923282,
+    "store": 0.05753260552107046,
+    "update": 21.76739225765535
+  },
+  "menu_seconds_excluded": {
+    "training": 30.362241686321795,
+    "panel": 20.320288696791977,
+    "note": "menu cache fills (planner searches) are one-off; a warm cache costs ~0"
+  },
+  "panel_run": {
+    "worlds": [
+      9000,
+      9001,
+      9002,
+      9003,
+      9004,
+      9005,
+      9006,
+      9007,
+      9008,
+      9009,
+      9010,
+      9011,
+      9012,
+      9013,
+      9014,
+      9015,
+      9016,
+      9017,
+      9018,
+      9019,
+      9020,
+      9021,
+      9022,
+      9023,
+      9024,
+      9025,
+      9026,
+      9027,
+      9028,
+      9029,
+      9030,
+      9031
+    ],
+    "deterministic": true,
+    "wall_seconds": 15.683124113129452,
+    "cpu_seconds": 25.376812303208,
+    "scores": "not recorded (timing only)"
+  },
+  "wall_cpu_ratio_training": 3.249270305562823,
+  "projection": {
+    "rollouts": 45,
+    "training_wall_seconds": 1152.1687571809161,
+    "training_cpu_seconds": 3743.7077297051733,
+    "panel_world_episodes": 192,
+    "panel_wall_seconds": 94.09874467877671,
+    "panel_cpu_seconds": 152.260873819248,
+    "fit_wall_seconds": 1246.2675018596929,
+    "fit_cpu_seconds": 3895.9686035244213
+  },
+  "memory": {
+    "peak_rss_kib_process": 691324,
+    "evaluation_overlap": [
+      {
+        "before_target_build": {
+          "VmRSS_kib": 688764,
+          "VmHWM_kib": 688764
+        },
+        "after_target_build": {
+          "VmRSS_kib": 689084,
+          "VmHWM_kib": 689084
+        }
+      }
+    ],
+    "now": {
+      "VmRSS_kib": 691324,
+      "VmHWM_kib": 691324
+    }
+  },
+  "note": "projection = declared rollouts x mean probe rollout (menu fills excluded) + declared panel episodes x probe per-world panel time; checkpoints and menu cache fills not included"
+}

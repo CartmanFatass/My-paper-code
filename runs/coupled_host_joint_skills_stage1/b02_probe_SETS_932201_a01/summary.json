@@ -1,0 +1,898 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "mode": "macro",
+  "contract": "slot",
+  "arm": "SET",
+  "seed": 932201,
+  "launch_sha": "d63fcd94853793fe99e1eff4bc237b551bb94eff",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_joint_skills_stage1",
+    "sha": "d63fcd94853793fe99e1eff4bc237b551bb94eff",
+    "command_sha256": "7764fbe4f55d5af8a215dbe0e52af525019743ef5e7b902dd8e0aba1deecb64b",
+    "parent_pid": 1011067,
+    "child_pid": 1011068,
+    "accepted_at_epoch": 1790708732.6399536
+  },
+  "probe": true,
+  "status": "complete",
+  "fit_started": true,
+  "failure": null,
+  "spec": {
+    "horizon": 500,
+    "train_lanes": 16,
+    "eval_lanes": 16,
+    "rollouts": 45,
+    "panels": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "hidden_size": 256,
+    "n_heads": 8,
+    "n_layers": 2,
+    "ppo_epochs": 15,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "torch_threads": 4,
+    "area_size": 5000,
+    "dev_worlds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014,
+      1015,
+      1016,
+      1017,
+      1018,
+      1019,
+      1020,
+      1021,
+      1022,
+      1023,
+      1024,
+      1025,
+      1026,
+      1027,
+      1028,
+      1029,
+      1030,
+      1031
+    ],
+    "holdout_worlds": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026,
+      2027,
+      2028,
+      2029,
+      2030,
+      2031
+    ],
+    "probe_panel_worlds": [
+      9000,
+      9001,
+      9002,
+      9003,
+      9004,
+      9005,
+      9006,
+      9007,
+      9008,
+      9009,
+      9010,
+      9011,
+      9012,
+      9013,
+      9014,
+      9015,
+      9016,
+      9017,
+      9018,
+      9019,
+      9020,
+      9021,
+      9022,
+      9023,
+      9024,
+      9025,
+      9026,
+      9027,
+      9028,
+      9029,
+      9030,
+      9031
+    ],
+    "probe_rollouts": 3,
+    "continuous_action_distribution": "tanh_gaussian",
+    "continuous_logstd_init": -1.0,
+    "continuous_logstd_min": -5.0,
+    "continuous_logstd_max": 0.0,
+    "contract": "slot",
+    "macro_k": 10,
+    "menu_in_inputs": null
+  },
+  "rollouts_run": 3,
+  "panels": [],
+  "checkpoints": [],
+  "counts": {
+    "training_team_steps": 24000,
+    "training_macro_steps": 2400,
+    "stored_team_steps": 2400,
+    "training_episodes": 48,
+    "updates": 3,
+    "evaluation_team_steps": 0,
+    "evaluation_macro_steps": 0,
+    "evaluation_episodes": 0
+  },
+  "memory": {
+    "evaluation_overlap": [],
+    "start": {
+      "VmRSS_kib": 419768,
+      "VmHWM_kib": 419768
+    },
+    "matching_table_build": {
+      "before": {
+        "VmRSS_kib": 588976,
+        "VmHWM_kib": 588976
+      },
+      "after": {
+        "VmRSS_kib": 633108,
+        "VmHWM_kib": 642096
+      }
+    }
+  },
+  "reward_units": {
+    "training": "macro scalar = mean over the 10 host steps of the adapter scalar (contract team r / 6)",
+    "readings": "team per-step r = 0.5 * (C_bh + S/D), every host step"
+  },
+  "counter_definitions": {
+    "decisions": "UAV-level macro decisions (6 per macro step)",
+    "far_target_decisions": "decisions whose held target is > 300 m (3-D) from the UAV's position at decision time",
+    "target_changes": "re-decisions (macro step >= 1) whose target differs from the previously held target by > 1e-06 m",
+    "redecisions": "UAV-level decisions at macro steps >= 1 (denominator of the target-change rate)",
+    "slot_conflicts": "slot contract: per macro step, 6 minus the number of distinct slots chosen (UAVs duplicating an already-chosen slot), summed",
+    "slot_switches": "slot contract: re-decisions whose slot differs from the previously held slot",
+    "offset_box_clips": "offset contract: UAV-decisions whose anchor + offset left the arena box and was clipped to it",
+    "team_decisions": "macro steps (team-level decisions)"
+  },
+  "label_reader_definitions": null,
+  "runtime": {
+    "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+    "torch": "2.7.0+cu118",
+    "numpy": "1.26.3",
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_threads": 4,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    }
+  },
+  "last_boundary": "complete",
+  "wall_seconds": 154.85820194589905,
+  "menus": {
+    "menu_dir": "runs/coupled_host_joint_skills_stage1/menus",
+    "area_size": 5000,
+    "budget": 3000,
+    "worlds": {
+      "9000": {
+        "sha256": "503a76d2886a1b5052aad7599cec31f960229e7d3ae0ba9c0fa4aee74f4ff2c8",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9000.json"
+      },
+      "9001": {
+        "sha256": "b19fe06a6bfb2c762513a5f6be36a55b6406b26c9e372df14371979909e4a282",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9001.json"
+      },
+      "9002": {
+        "sha256": "52b7b21b657eb3ca91e76713af42caa9e04c8c36300c738ac4821bcbb7a060fd",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9002.json"
+      },
+      "9003": {
+        "sha256": "8b02beeb829677306e873c2a6f02fb2477641d95f6a03ba73c92a45648a37320",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9003.json"
+      },
+      "9004": {
+        "sha256": "a23b980bed4b8793f734bb6a17d65fc1446c01dad3739ffd80f08eeab49228ec",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9004.json"
+      },
+      "9005": {
+        "sha256": "9474cfe3143a316e1c8ebcc2a95237a4a2204bfbe365ed83287e1535eb075f0a",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9005.json"
+      },
+      "9006": {
+        "sha256": "9b1e96cfda585c90158c375f79ba97eb8cdf0ba3474eda2901c4474c88fb02fb",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9006.json"
+      },
+      "9007": {
+        "sha256": "9c6620a0a1758e1856bbacf3fa4cdfdc0f0c8bf0cabad40ecdd424d6fee3ae1a",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9007.json"
+      },
+      "9008": {
+        "sha256": "89c6a86d647eabf8fba243079d24e83f0dbc324755fe998d3f95a227c099df6e",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9008.json"
+      },
+      "9009": {
+        "sha256": "1a18c24f7a7626a4079d32a6107403176eb7c0f48a880c6fe7793f3011c9d017",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9009.json"
+      },
+      "9010": {
+        "sha256": "05ae5d9e7654fcacd432e509ce95b3f6a66426b9bfec7891f2331c7f2d9d59e0",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9010.json"
+      },
+      "9011": {
+        "sha256": "9b9450f88d270c6b249df951f6f20f2c04307274a89de5a1d948da392eb79a92",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9011.json"
+      },
+      "9012": {
+        "sha256": "c997f9096360f62f9167e33b5b164ee2e22d5fe692cc225436301e956dce4da0",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9012.json"
+      },
+      "9013": {
+        "sha256": "60a9bcbc946024e04ba3e57113af6d5942a70cf3901b17ac689324f97edf2938",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9013.json"
+      },
+      "9014": {
+        "sha256": "b2237e31720230ed69723c6fc915d76abb6dde60ec603523bb5a6e4d848fedef",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9014.json"
+      },
+      "9015": {
+        "sha256": "7fa6b3412db352e83b117cf35273f744235567d54226fa79d31789e7c0e59544",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9015.json"
+      },
+      "9016": {
+        "sha256": "b00c3a6dbe8fe3ad675fb54439163d7d5109689e62d1a130277dc40d958007a4",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9016.json"
+      },
+      "9017": {
+        "sha256": "f1003ac1e0a5209c42decaad6750194c6decee72296e71ed8b822dd92aa4209e",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9017.json"
+      },
+      "9018": {
+        "sha256": "38a2e5088875c58bbd8359125169f6d94d61fb91a1b585040273c39445dba6d9",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9018.json"
+      },
+      "9019": {
+        "sha256": "47131eb50defdc70e98fa4ed12186f941f5e779c2be45d4fdc86af23ae219a2a",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9019.json"
+      },
+      "9020": {
+        "sha256": "d4efdd573e0952a2de5fe38e320cf6f47d19244495c27909b639745d2edd111c",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9020.json"
+      },
+      "9021": {
+        "sha256": "5163f6c318d89d5055d4dbd3233d5df2aed0704c3197ea87f8ef7c52180af0dc",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9021.json"
+      },
+      "9022": {
+        "sha256": "3c01676aaf5fcd9f6d3a10c3098471a74a0b2277db7be2f36b82a2fe939e3f87",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9022.json"
+      },
+      "9023": {
+        "sha256": "753a9c98d7306221c13d68c26be2d25f635a2696aebc1b6508a36b89a51ed1ae",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9023.json"
+      },
+      "9024": {
+        "sha256": "ea3ae267f865689054b5e6cc068b83b4f27a1669ec845a2f749ac49dd05648e2",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9024.json"
+      },
+      "9025": {
+        "sha256": "5891288d999e8090b5d6def084ca66b849ca7b94d4f5f8fcb83c6f28438f6467",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9025.json"
+      },
+      "9026": {
+        "sha256": "00d435f9fe42529eb52f8c57f4e8e790e92692e3d9d51908c2e6e5e24093af53",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9026.json"
+      },
+      "9027": {
+        "sha256": "c111f9a471247fcc579208e15f00593095c4ad7f97453c52d339c307628c6244",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9027.json"
+      },
+      "9028": {
+        "sha256": "b88606760e973b085e29849b10853be825e7372697bffc1439195d2c0492ecf0",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9028.json"
+      },
+      "9029": {
+        "sha256": "e8b5a4365c4035c04ee44fb2f9777732df13ced88dc6326e73029f53460a2607",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9029.json"
+      },
+      "9030": {
+        "sha256": "7150946b1e2c183995c1df0a068abc98cb3058a957c07baecfb0be71f452b5dd",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9030.json"
+      },
+      "9031": {
+        "sha256": "0b2b1e71f404d50abd52d2c9a3bb3b924412daa44f4bb819514844bc8417596e",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/9031.json"
+      },
+      "300000": {
+        "sha256": "00460bb80e32e8ac65b1ebc0f52cec665d637d10c0b59203cdacc5c8e135f160",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300000.json"
+      },
+      "300001": {
+        "sha256": "6001f0b5e5a24539b9afc58d79c6681170525f3e438d03f5b6040716abdf1f43",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300001.json"
+      },
+      "300002": {
+        "sha256": "f8ddaf95bb146fc61c8ba53ad80fbff1f5a7b529a5377a84378170b2f8f4e0a9",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300002.json"
+      },
+      "300003": {
+        "sha256": "77bca68031992ae16d81126156c6d921b903066e7aa37dd75d9375a3ff9eda40",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300003.json"
+      },
+      "300004": {
+        "sha256": "0703d1a889fe932741c945d003a018a8185792a5e54df51bb27bf33fbe7f916a",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300004.json"
+      },
+      "300005": {
+        "sha256": "1a8ac0abbeeb48457b6e3a50f861c8a50fe1ba17923e25aa2b9e0546e5988652",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300005.json"
+      },
+      "300006": {
+        "sha256": "4c47377ab51ed2a4c60a5d46aa9ce3b04f0cf3aea28fb1c1e4295164dfecf78b",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300006.json"
+      },
+      "300007": {
+        "sha256": "33903a442c26361a16fbad1b9f45b959926ef8a01b31ef2186c60df2232461e1",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300007.json"
+      },
+      "300008": {
+        "sha256": "d6129c59745ce30db9b9eb6592fa37235c3e61cbac77207e6b04e7d02a965186",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300008.json"
+      },
+      "300009": {
+        "sha256": "83c4e16728a3244eed12c576f86aab685e0bc2a8716a88854aec81f4ad4414aa",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300009.json"
+      },
+      "300010": {
+        "sha256": "6778ee0698e0e1c7a45cdfb8d8e60251c6d5756c0932315236f0302be53f1087",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300010.json"
+      },
+      "300011": {
+        "sha256": "6b2d49ad79448a3bcc3f397d7b45b3babd30ffc25247b4629af8a91d2945d4cf",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300011.json"
+      },
+      "300012": {
+        "sha256": "0ac571d55297ba0eebb2b3090a20b85905ea5cef91048a953b5c775c8c0f6f02",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300012.json"
+      },
+      "300013": {
+        "sha256": "ed21ffcd43448d629d2c6962128546fefae720662743a36b84b53cb248f3e92b",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300013.json"
+      },
+      "300014": {
+        "sha256": "817a6a3ceb9a7eb0b1bc22e7924fc1b26695fed4539304124225abb4376f2147",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300014.json"
+      },
+      "300015": {
+        "sha256": "38f87f1a2cdff64a185b1966d8d9678dcdbb6f84da8d27dcedd70f7da43d3b54",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/300015.json"
+      },
+      "310000": {
+        "sha256": "9da207b3ead5a9d3ecf5292bb4562d8e8b06222ba93d7e0217af59d5acb14fd0",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310000.json"
+      },
+      "310001": {
+        "sha256": "82469e17b2f1c0a16b01c038e6156720aa445175e6cfe7425ae918d4011ab023",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310001.json"
+      },
+      "310002": {
+        "sha256": "04e89d0d5e9c9e98d544052cc74e77c5d73b0b0429093694d327a1b673c35a8c",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310002.json"
+      },
+      "310003": {
+        "sha256": "a3b7201329b726a11e93bd9552b10abce4b4a8b772d931ff897dda4ccf673ae9",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310003.json"
+      },
+      "310004": {
+        "sha256": "c6271a0b96aadaeebf74973fd143feabad189578d4df5b16fab176d3cd5e2084",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310004.json"
+      },
+      "310005": {
+        "sha256": "379218f160c603680cba275d573a3f9de77f6f6c3706da50b6fe214d723add78",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310005.json"
+      },
+      "310006": {
+        "sha256": "526bb0d7aaf03b3fb56e65a2bd78552a089f7bd601a6c5a0c02f606e64ad69dc",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310006.json"
+      },
+      "310007": {
+        "sha256": "95ea35a27c70c810e9f5275c9e5a4c79fabeb7e9690f1046bcbcfeafafdfc9c6",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310007.json"
+      },
+      "310008": {
+        "sha256": "5a1489cd5e2446ec04e09a02e4fde0e88dcbb0dad7764d27edc9a54433ddf0ef",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310008.json"
+      },
+      "310009": {
+        "sha256": "4a6610944603abcedee22cf9a7fedcefb9ac4af8e4e7ab009185cfdc214503d6",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310009.json"
+      },
+      "310010": {
+        "sha256": "cf481d1fc079f87a854f0cff2bb1a93b64335419f14a26e47cf7a8bf0e7508d2",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310010.json"
+      },
+      "310011": {
+        "sha256": "8f689e1a0fc721f3e04a14cd50e3be844e192a7a1689254342432c4976e8c50d",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310011.json"
+      },
+      "310012": {
+        "sha256": "ff746383a7d881e8a5a06d5f2f90f09a98fd6a7c71264790a066ff7cc3f7593d",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310012.json"
+      },
+      "310013": {
+        "sha256": "ff2ec33e904a876b883af1662e467e8e39cd9f3e0352ec74f0c0ac05ecf9d59f",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310013.json"
+      },
+      "310014": {
+        "sha256": "9f26f82b756f6b4049c7c9ec16da482160f7b72c02c6977a5e2d9f1cac59f4c5",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310014.json"
+      },
+      "310015": {
+        "sha256": "4619220361fa020938a535fb80f86ff7d7a96a4e02f5c4a6e84aea88e383d5ce",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/310015.json"
+      },
+      "320000": {
+        "sha256": "ae5852c297d2f930bcb02b5cbdf5e9fb333b8c66d25ab0cdb84ff1b704b82f28",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320000.json"
+      },
+      "320001": {
+        "sha256": "96678f7d20b3a41ddb338021cda266d3605bba1997652ee871e8e06cdb32ed0b",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320001.json"
+      },
+      "320002": {
+        "sha256": "fb66660db04048f0d7ca6ecdc61c5a78de483b542da93d4c12ae20b34b98d438",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320002.json"
+      },
+      "320003": {
+        "sha256": "7ce7ac62e2b1439bec7d4987c846222a49e17f7866a83322236bc6e132ac2e42",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320003.json"
+      },
+      "320004": {
+        "sha256": "2ad3ca496988d733e46637e8bba6d5eccfa437df925e464462bf21905aef886b",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320004.json"
+      },
+      "320005": {
+        "sha256": "315e84fc134b1e3407807c6dd4bc1a14bdd1b85f42c4af04c03883714352d3a6",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320005.json"
+      },
+      "320006": {
+        "sha256": "514705e865ce5ece5b12188706bc6671c6a682348385eea9e0d40bab846302f6",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320006.json"
+      },
+      "320007": {
+        "sha256": "a8702db0df2f42d64fe1203f419f2fade886fe0bf811bf5e5b0fa4c1a8896046",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320007.json"
+      },
+      "320008": {
+        "sha256": "42e8d8e7ffb02d8ed08692c03a1993a20c78a2376855b24e2573c60b30b8033e",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320008.json"
+      },
+      "320009": {
+        "sha256": "599ac900ae8e9546eae103e478264e699886a5b9ed3d85267140c3651764d843",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320009.json"
+      },
+      "320010": {
+        "sha256": "47a8b9678d19b4f062ae33036d55034fb3af34bcacb9c91073c6af5a8077a53e",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320010.json"
+      },
+      "320011": {
+        "sha256": "d35f752cd661affbd650a92aa1d378a07bf2aadb6091c5dc336888ed1fb5be12",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320011.json"
+      },
+      "320012": {
+        "sha256": "c4f74079edd7daa0ed05df69eb0f4181b80e4b9a08fbd01121124af26d2a472d",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320012.json"
+      },
+      "320013": {
+        "sha256": "f4894e165847282d1281dbec72aefd5ac3ff86d854e91f3b8ca48b2b322cc869",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320013.json"
+      },
+      "320014": {
+        "sha256": "aef8417020d622a2e485b52cfde30fa886f39229f44e525fb4c3d7c678ee35ce",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320014.json"
+      },
+      "320015": {
+        "sha256": "894601d1efe51b3e3bbd6264eed0f1454e32082f8c70a53e32ccc3d83a18eb0f",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/320015.json"
+      },
+      "330000": {
+        "sha256": "ab0a13c7f0d0ef284ae3875d4568a46eee2f8900ac194e749b89542ac817d77e",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330000.json"
+      },
+      "330001": {
+        "sha256": "421ed8961e0b944e725ec54e9fbe19ee8e3391717947ef13f4e1522472c77b9c",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330001.json"
+      },
+      "330002": {
+        "sha256": "edd8adc2a129c5fcc02034b0684993b4c401234372d22b1eb2aa3a8d5b41fdfa",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330002.json"
+      },
+      "330003": {
+        "sha256": "aa3ebe7af0150f1830dd9f031c91643acc0b3e7b19c8644e77533c32e6359c5f",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330003.json"
+      },
+      "330004": {
+        "sha256": "a14c62eca2a3d36bb13efea2f6c9d3f8532599da6d5bfbe3cb8e0f5ff07cf7a7",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330004.json"
+      },
+      "330005": {
+        "sha256": "f87c4b7e954b24b7371f4cb30a2832e60888038b714467b9bc52b14364bad5d0",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330005.json"
+      },
+      "330006": {
+        "sha256": "f67a93daf4d55070d81428d149e1691d6b161a643b67f4676ee1325a2756e113",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330006.json"
+      },
+      "330007": {
+        "sha256": "f704090bd385970e322e30533932d64e84569eac644c0a297f27e9c7e84fcabe",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330007.json"
+      },
+      "330008": {
+        "sha256": "bb3afe2fdde50a6b716e170a2e1b2a104a8c558ce2c3fd5eff5eae091f5216c2",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330008.json"
+      },
+      "330009": {
+        "sha256": "8487079da51542f849b62f485974222603e7b16d54afab794c8ac111ef75b27a",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330009.json"
+      },
+      "330010": {
+        "sha256": "c1860195499c4ca6dd70aa0ba3cbe65cc80d8589052738842966e788e7c07fcc",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330010.json"
+      },
+      "330011": {
+        "sha256": "3ec8b62f62572fb4a053f26bf2c9d487b0639934f0e3f5ea278f986ae929f983",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330011.json"
+      },
+      "330012": {
+        "sha256": "c873abffec1b83d7b9201ebf0942f523eb5f88ff483732b6e5743aae6f0106f5",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330012.json"
+      },
+      "330013": {
+        "sha256": "2b3d17620448a682de7010a0ea43bcd2c1f1599089cb711b16c67283347e1d83",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330013.json"
+      },
+      "330014": {
+        "sha256": "01e0a1488416286a1f2c4b0a26ce8191b7e067fa7e92059833aa144bd2ff8a2f",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330014.json"
+      },
+      "330015": {
+        "sha256": "c915d2f073d72ddd950f25b6e5983e32aac51bdebce9c98525ddd98c5e38fa0d",
+        "source": "computed",
+        "path": "runs/coupled_host_joint_skills_stage1/menus/5000/330015.json"
+      }
+    },
+    "computed": 96,
+    "loaded": 0,
+    "seconds": 61.287572854198515
+  },
+  "config": {
+    "contract_arm": "SET",
+    "algorithm": "mappo",
+    "n_agents": 6,
+    "n_uavs": 6,
+    "n_users": 50,
+    "num_envs": 16,
+    "rollout_length": 50,
+    "episode_length": 50,
+    "k": 1,
+    "n_Z": 1,
+    "n_z": 1,
+    "state_dim": 169,
+    "obs_dim": 126,
+    "action_dim": 6,
+    "action_space_type": "discrete",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 800,
+    "batch_size": 1200,
+    "discriminator_batch_size": 1200,
+    "lambda_e": 1.0,
+    "lambda_D": 0.0,
+    "lambda_d": 0.0,
+    "lambda_h": 0.0,
+    "lambda_l": 0.05,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "use_entropy_annealing": false,
+    "total_timesteps": 36000,
+    "seed": 932201,
+    "policy_interruption_mode": "off",
+    "interruption_delta": 1,
+    "interruption_cost_c": "inf",
+    "interruption_cost_c_Z": "inf",
+    "skill_cap_k_max": 10,
+    "team_cap_k_Z": null,
+    "age_feature": "off",
+    "continuous_action_distribution": "tanh_gaussian",
+    "continuous_logstd_init": -1.0,
+    "continuous_logstd_min": -5.0,
+    "continuous_logstd_max": 0.0,
+    "use_central_snapshot_in_flat_actor": true,
+    "disable_high_level_training": true,
+    "disable_discriminator_training": true,
+    "disable_discriminator_rewards": true,
+    "collects_high_level_samples": false,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false,
+    "macro_contract": "slot"
+  },
+  "route": {
+    "policy_interruption_mode": "off",
+    "d2_enabled": false,
+    "d2_cost_c": "inf",
+    "d2_cost_c_Z": "inf",
+    "d2_k_max": 1,
+    "d2_k_Z": 1,
+    "d2_age_feature": "off",
+    "use_ha_ctse": false,
+    "use_central_snapshot": true
+  },
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 6750,
+    "discoverer_critic": 6750,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "parameter_counts": {
+    "skill_coordinator": 3860036,
+    "skill_discoverer": 1366151
+  },
+  "initial_parameter_digest": "f5ecafb66bc55cfb4fb3053ed0206f640a0d6decd3946a074a2ec38604c9ae44",
+  "training_started_wall": 11.65908499294892,
+  "terminal_facts": {
+    "low_level_dones_last_step_all_true": true,
+    "low_level_dones_before_last_any": false,
+    "high_level_valid_rows": 0,
+    "disable_high_level_training": true
+  },
+  "parameter_motion": {
+    "coordinator": {
+      "delta_l2": 0.0,
+      "relative_l2": 0.0
+    },
+    "discoverer_actor": {
+      "delta_l2": 11.001507895449025,
+      "relative_l2": 0.2756654441687822
+    },
+    "discoverer_critic": {
+      "delta_l2": 10.184034221630636,
+      "relative_l2": 0.27823807139880047
+    },
+    "coordinator.state_embedding": {
+      "delta_l2": 0.0,
+      "relative_l2": 0.0
+    },
+    "discoverer_actor.base": {
+      "delta_l2": 8.702733232699133,
+      "relative_l2": 0.39661650332525056
+    },
+    "discoverer_actor.base.state_encoder": {
+      "delta_l2": 3.092857654648344,
+      "relative_l2": 0.20657140753041667
+    },
+    "discoverer_critic.base": {
+      "delta_l2": 4.632761202914671,
+      "relative_l2": 0.3105772947425972
+    }
+  },
+  "last_training_row": {
+    "rollout": 3,
+    "team_steps": 24000,
+    "macro_steps": 2400,
+    "timing": {
+      "collection_seconds": 18.20046407589689,
+      "update_seconds": 17.476156605174765,
+      "policy_seconds": 1.0548989183735102,
+      "env_seconds": 7.039964226540178,
+      "menu_seconds": 10.03927474678494,
+      "store_seconds": 0.0431963091250509,
+      "cpu_seconds": 93.910504,
+      "wall_seconds": 35.684274815022945
+    },
+    "optimizer_total": {
+      "coordinator": 0,
+      "discoverer_actor": 6750,
+      "discoverer_critic": 6750,
+      "team_discriminator": 0,
+      "individual_discriminator": 0
+    },
+    "action_clip_events": 0,
+    "macro_counters": {
+      "decisions": 4800,
+      "far_target_decisions": 4503,
+      "target_changes": 3837,
+      "redecisions": 4704,
+      "slot_conflicts": 1693,
+      "slot_switches": 3850,
+      "offset_box_clips": 0,
+      "team_decisions": 800,
+      "far_target_fraction": 0.938125,
+      "target_change_rate": 0.8156887755102041,
+      "slot_conflicts_per_team_decision": 2.11625,
+      "episodes": 16,
+      "slot_switches_per_episode": 240.625
+    }
+  },
+  "probe_result": {
+    "timing_probe": "timing_probe.json",
+    "projected_fit_wall_seconds": 1246.2675018596929,
+    "projected_fit_cpu_seconds": 3895.9686035244213
+  },
+  "final_parameter_digest": "1d799e65fc9d6bffa86d0ccb2d11a5af5483a401b8be9b76be54786b9a752862",
+  "resources": {
+    "wall_seconds_in_run_fit": 154.85430520121008,
+    "command_wall_seconds": 154.85814046603628,
+    "cpu_user_seconds": 338.437355,
+    "cpu_system_seconds": 0.845818,
+    "cpu_seconds_in_run_fit": 337.89489000000003,
+    "peak_rss_kib": 691324,
+    "proc_memory_end": {
+      "VmRSS_kib": 691324,
+      "VmHWM_kib": 691324
+    },
+    "rss_scope": "scientific process Linux RUSAGE_SELF",
+    "resources_unmeasured": [
+      "peak_scratch_bytes"
+    ]
+  }
+}
