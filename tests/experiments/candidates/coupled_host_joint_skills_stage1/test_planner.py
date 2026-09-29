@@ -326,7 +326,8 @@ def test_descent_never_decreases_accepted_reward(world, area):
         assert result.contract_reward >= max(c["contract_reward"] for c in evaluated)
         again = static_evaluate(env, result.positions_xyz, allow_a2a=allow)
         assert again["contract_reward"] == result.contract_reward
-        assert np.all(result.positions_xyz[:, 2] == 100.0)
+        # z moves: +-50 m from 100 m, clipped to the host range -> heights in {50, 100, 150}.
+        assert set(np.unique(result.positions_xyz[:, 2])) <= {50.0, 100.0, 150.0}
 
 
 def test_plateau_potential_definition():
@@ -385,6 +386,131 @@ def test_descent_improves_on_small_arena():
     assert len(result.history) > 1
     assert result.contract_reward >= result.history[0]["contract_reward"]
     assert any(e["stage"] == "descent" for e in result.history)
+
+
+def test_z_moves_stay_inside_height_range(monkeypatch):
+    heights: list[np.ndarray] = []
+    original = planner.static_evaluate
+
+    def wrapper(env, positions, allow_a2a=True):
+        heights.append(np.asarray(positions, dtype=float)[:, 2].copy())
+        return original(env, positions, allow_a2a=allow_a2a)
+
+    monkeypatch.setattr(planner, "static_evaluate", wrapper)
+    env = make_host(9224, area_size=1000)
+    result = search_placement(env, True, budget=1500, rng=np.random.default_rng(9224))
+    seen = np.concatenate(heights)
+    assert np.all((seen >= env.height_range[0]) & (seen <= env.height_range[1]))
+    assert {50.0, 150.0} & set(np.unique(seen))  # z moves were actually tried
+    z_moves = [e for e in result.history if e.get("move") and e["move"][2] != 0.0]
+    assert all(abs(e["move"][2]) == 50.0 and e["move"][:2] == [0.0, 0.0] for e in z_moves)
+    assert np.all((result.positions_xyz[:, 2] >= 50.0) & (result.positions_xyz[:, 2] <= 150.0))
+
+
+def test_descent_reaches_25m_stage_on_small_arena():
+    env = make_host(9225, area_size=1000)
+    result = search_placement(env, True, budget=3000, rng=np.random.default_rng(9225))
+    converged = [s for s in result.starts if s["converged"]]
+    assert converged
+    assert all(s["final_xy_step_m"] == 25.0 for s in converged)
+    assert all(s["final_xy_step_m"] in (100.0, 50.0, 25.0) for s in result.starts)
+
+
+@pytest.mark.parametrize("world", [9001, 9002, 9003])
+def test_flat_incumbent_in_relay_search_gives_nonnegative_g(world):
+    env = make_host(world)
+    flat = search_placement(env, False, budget=3000, rng=np.random.default_rng(world))
+    relay = search_placement(env, True, budget=3000, rng=np.random.default_rng(world),
+                             extra_candidates=[flat.positions_xyz])
+    assert relay.evaluations <= 3000
+    incumbents = [c for c in relay.candidates if c["kind"] == "flat_result_incumbent"]
+    assert len(incumbents) == 1
+    incumbent = incumbents[0]
+    assert incumbent["index"] < relay.candidates_evaluated
+    assert np.array_equal(incumbent["positions_xyz"], flat.positions_xyz)
+    with_a2a = static_evaluate(env, flat.positions_xyz, allow_a2a=True)["contract_reward"]
+    assert incumbent["contract_reward"] == with_a2a >= flat.contract_reward
+    assert relay.contract_reward >= incumbent["contract_reward"] >= flat.contract_reward
+    assert relay.candidate_report["extra_candidates"] == 1
+
+
+def test_extra_candidate_evaluated_even_on_a_short_budget(counted):
+    env = make_host(9226)
+    extra = np.tile([2500.0, 2500.0, 100.0], (env.n_uavs, 1))
+    result = search_placement(env, True, budget=5, rng=np.random.default_rng(1),
+                              extra_candidates=[extra])
+    assert result.evaluations == len(counted) == 5
+    evaluated = result.candidates[: result.candidates_evaluated]
+    assert [c["kind"] for c in evaluated][-1] == "flat_result_incumbent"
+    with pytest.raises(ValueError):
+        search_placement(env, True, budget=5, rng=np.random.default_rng(1),
+                         extra_candidates=[extra + [0.0, 0.0, 500.0]])
+
+
+@pytest.mark.parametrize("budget", [1500, 3000])
+def test_incumbent_snapshots(budget):
+    env = make_host(9227, area_size=2500)
+    result = search_placement(env, True, budget=budget, rng=np.random.default_rng(9227))
+    keys = ["1000", "2000", "3000"]
+    assert list(result.incumbent_at) == keys
+    values = [result.incumbent_at[k] for k in keys]
+    assert all(b >= a for a, b in zip(values, values[1:]))
+    for key in keys:
+        if int(key) >= result.evaluations:
+            assert result.incumbent_at[key] == result.contract_reward
+    for start in result.starts:
+        assert list(start["incumbent_at"]) == keys
+        for key in keys:
+            mark = int(key)
+            value = start["incumbent_at"][key]
+            if start["began_at_evaluation"] >= mark and mark <= result.evaluations:
+                assert value is None
+            elif start["ended_at_evaluation"] <= mark:
+                assert value == start["final_reward"]
+            else:
+                assert start["start_reward"] <= value <= start["final_reward"]
+
+
+def test_episode_association_and_backhaul_loss_counts():
+    env = make_host(9228, area_size=1000)
+    still = stationary_floor(env)
+    assert still["association_change_count"] == 0
+    assert still["backhaul_loss_events"] == 0
+    noisy = random_floor(env, np.random.default_rng(3))
+    assert len(noisy["association_changes_per_step"]) == noisy["steps"]
+    assert noisy["association_change_count"] == sum(noisy["association_changes_per_step"]) > 0
+    assert noisy["backhaul_loss_events"] == sum(noisy["backhaul_losses_per_step"]) >= 0
+    association = planner.user_association(env)
+    assert association.shape == (env.n_users,)
+    assert np.array_equal(association >= 0, env.connections.any(axis=0))
+
+
+@pytest.mark.parametrize("world", [9231, 9232, 9233, 9234, 9235])
+def test_a2a_never_lowers_backhauled_coverage_or_s(world):
+    """Premise of G >= 0: enabling A2A can only add routes; association does not depend on it."""
+    env = make_host(world)
+    rng = np.random.default_rng(world)
+    bs = env.ground_bs_positions[0, :2]
+    failures = []
+    for trial in range(80):
+        positions = np.empty((env.n_uavs, 3))
+        if trial % 2:
+            positions[:, :2] = rng.uniform(0, env.area_size, (env.n_uavs, 2))
+        else:  # near the BS so that relayed and direct routes both occur
+            positions[:, :2] = np.clip(bs + rng.uniform(-2500, 2500, (env.n_uavs, 2)),
+                                       0, env.area_size)
+        positions[:, 2] = rng.uniform(*env.height_range, env.n_uavs)
+        on = static_evaluate(env, positions, allow_a2a=True)
+        connections_on, routed_on = env.connections.copy(), set(env.routing_paths)
+        off = static_evaluate(env, positions, allow_a2a=False)
+        if not (np.array_equal(connections_on, env.connections)
+                and set(env.routing_paths) <= routed_on
+                and on["coverage_backhauled"] >= off["coverage_backhauled"]
+                and on["frontend_capacity_with_path_mbps"] >= off["frontend_capacity_with_path_mbps"]
+                and on["contract_reward"] >= off["contract_reward"]):
+            failures.append({"world": world, "trial": trial, "positions": positions.tolist(),
+                             "on": on, "off": off})
+    assert not failures, failures[:1]
 
 
 def test_assign_targets_minimises_makespan():
@@ -501,6 +627,7 @@ def test_run_gate_smoke_writes_json(tmp_path):
     assert set(summary["closed_loop_labels"]) == set(summary["closed_loop"])
     assert summary["static"]["P_relay"]["evaluations"]["max"] <= 30
     assert summary["cpu_seconds"]["total_s"] > 0
+    cl_values: list[float] = []
     for world in (9301, 9302):
         row = json.loads((out / "worlds" / f"{world}.json").read_text(encoding="utf-8"))
         assert row["G_world"] == pytest.approx(
@@ -512,6 +639,33 @@ def test_run_gate_smoke_writes_json(tmp_path):
                                       "stationary_floor", "random_floor"}
         assert row["closed_loop"]["closed_loop_flat_a2a_on"]["allow_a2a"] is True
         assert row["closed_loop"]["closed_loop_flat_a2a_off_diagnostic"]["allow_a2a"] is False
+        # T2c: flat incumbent inside the relay search, G >= 0, snapshots, closed-loop coverage.
+        kinds = [c["kind"] for c in row["static"]["P_relay"]["candidates"]]
+        assert kinds.count("flat_result_incumbent") == 1
+        assert row["G_world"] >= 0.0
+        assert set(row["static"]["P_relay"]["incumbent_at"]) == {"1000", "2000", "3000"}
+        cl = row["closed_loop"]
+        expected_cl = (cl["closed_loop_relay"]["coverage_backhauled_mean_all"]
+                       - cl["closed_loop_flat_a2a_on"]["coverage_backhauled_mean_all"])
+        assert row["G_C_cl_world"] == pytest.approx(expected_cl, rel=0, abs=1e-15)
+        cl_values.append(float(np.mean(cl["closed_loop_relay"]["series"]["coverage_backhauled"]))
+                         - float(np.mean(cl["closed_loop_flat_a2a_on"]["series"]["coverage_backhauled"])))
+        for reference in cl.values():
+            assert reference["association_change_count"] == sum(
+                reference["association_changes_per_step"])
+            assert reference["backhaul_loss_events"] == sum(reference["backhaul_losses_per_step"])
+    assert summary["G_C_dev_cl"]["n"] == 2
+    assert summary["G_C_dev_cl"]["mean"] == pytest.approx(np.mean(cl_values), rel=0, abs=1e-12)
+    assert summary["G_C_dev_cl"]["sd"] == pytest.approx(np.std(cl_values, ddof=1), rel=0, abs=1e-12)
+    assert summary["G_C_cl_threshold_declared"] == 0.05
+    assert summary["gate_threshold_declared"] == 0.05
+    assert summary["panel"].startswith("other")
+    names = {key: value["name"] for key, value in summary["closed_loop_labels"].items()}
+    assert names["closed_loop_relay"] == "P_relay^on"
+    assert names["closed_loop_flat_a2a_on"] == "P_flat^on"
+    assert names["closed_loop_flat_a2a_off_diagnostic"] == "P_flat^off"
+    for reference in summary["closed_loop"].values():
+        assert set(reference["association_change_count_per_world"]) == {"9301", "9302"}
     # A second run into the same directory is refused without --force.
     again = subprocess.run(
         [_python(), str(RUNNER), "--worlds", "9301", "--budget", "3", "--out", str(out),

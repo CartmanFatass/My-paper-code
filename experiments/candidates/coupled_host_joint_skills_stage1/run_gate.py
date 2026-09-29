@@ -8,8 +8,12 @@ execution from the world's initial positions (straight-line flight at max_speed)
 P_flat targets in the host contract env (A2A enabled), plus a diagnostic execution of the
 P_flat targets with A2A disabled; stationary and uniform-random floors.  Writes
 ``worlds/<world>.json`` per world and ``summary.json`` with G = mean(P_relay - P_flat) on the
-static contract reward, G_C on static backhauled coverage, closed-loop means of every
-reference, evaluations used, wall and process CPU seconds.
+static contract reward, G_C on static backhauled coverage, G_C_dev_cl on closed-loop 500-step
+backhauled coverage (P_relay^on - P_flat^on), closed-loop means of every reference with
+association-change and backhaul-loss counts, incumbent snapshots at 1k/2k/3k evaluations,
+evaluations used, wall and process CPU seconds.  T2c: the flat search runs first and its found
+layout is one extra incumbent candidate of the relay search (inside the relay budget), so
+G >= 0 by construction.
 
 Deterministic derivations (no additional seed): planner rng for both searches =
 ``numpy.random.default_rng(world)`` (fresh instance per search, so the k-means centres are equal);
@@ -44,16 +48,27 @@ DIRECTION = "coupled_host_joint_skills_stage1"
 DECLARED_PANELS = (range(1000, 1032), range(2000, 2032))
 SCIENTIFIC_OUTPUTS = ("summary.json", "worlds")
 GATE_THRESHOLD_DECLARED = 0.05
+G_C_CL_THRESHOLD_DECLARED = 0.05
 REFERENCES = ("closed_loop_relay", "closed_loop_flat_a2a_on", "closed_loop_flat_a2a_off_diagnostic",
               "stationary_floor", "random_floor")
 REFERENCE_LABELS = {
-    "closed_loop_relay": "P_relay targets, host contract env (A2A enabled)",
-    "closed_loop_flat_a2a_on": "P_flat targets, host contract env (A2A enabled; relays may form "
-                               "incidentally) -- the competence reference",
-    "closed_loop_flat_a2a_off_diagnostic": "P_flat targets, A2A disabled in the env (diagnostic "
-                                           "only; not the environment the learners act in)",
-    "stationary_floor": "zero actions from the initial positions, host contract env",
-    "random_floor": "uniform [-1, 1]^3 actions each step, host contract env",
+    "closed_loop_relay": {
+        "name": "P_relay^on",
+        "description": "P_relay targets, host contract env (A2A enabled)"},
+    "closed_loop_flat_a2a_on": {
+        "name": "P_flat^on",
+        "description": "P_flat (A2A-off-planned) targets executed in the host contract env "
+                       "(A2A enabled; relays may form incidentally) -- the competence reference"},
+    "closed_loop_flat_a2a_off_diagnostic": {
+        "name": "P_flat^off",
+        "description": "P_flat targets planned and executed with A2A disabled (diagnostic "
+                       "only; not the environment the learners act in)"},
+    "stationary_floor": {
+        "name": "stationary floor",
+        "description": "zero actions from the initial positions, host contract env"},
+    "random_floor": {
+        "name": "random floor",
+        "description": "uniform [-1, 1]^3 actions each step, host contract env"},
 }
 READERS = ("contract_reward", "coverage_backhauled", "frontend_capacity_with_path_mbps",
            "mean_relays_per_routed_uav")
@@ -167,6 +182,14 @@ def _smoke_refusal(worlds: list[int], out: Path) -> str | None:
     return None
 
 
+def _panel_name(worlds: list[int]) -> str:
+    if all(w in DECLARED_PANELS[0] for w in worlds):
+        return "dev"
+    if all(w in DECLARED_PANELS[1] for w in worlds):
+        return "holdout"
+    return "other (non-panel or mixed worlds)"
+
+
 def _mean_sd(values: list[float]) -> dict[str, Any]:
     import numpy as np
 
@@ -242,10 +265,14 @@ def main(argv: list[str] | None = None) -> int:
         denominator = env.contract_denominator_bps
         initial = env.uav_positions.copy()
 
-        relay, t_relay = _timed(search_placement, env, True, args.budget,
-                                np.random.default_rng(world))
+        # Flat first: its found layout is one extra (incumbent) candidate of the relay search,
+        # evaluated with A2A on inside the relay budget, so G >= 0 by construction.
         flat, t_flat = _timed(search_placement, env, False, args.budget,
                               np.random.default_rng(world))
+        relay, t_relay = _timed(search_placement, env, True, args.budget,
+                                np.random.default_rng(world),
+                                extra_candidates=[flat.positions_xyz],
+                                extra_kind="flat_result_incumbent")
         if flat.max_uav_connections_seen != 0:
             print(f"error: world {world}: P_flat evaluation formed UAV-UAV links",
                   file=sys.stderr)
@@ -274,6 +301,8 @@ def main(argv: list[str] | None = None) -> int:
             "static": {"P_relay": relay.to_json(), "P_flat": flat.to_json()},
             "G_world": relay.contract_reward - flat.contract_reward,
             "G_C_world": relay.coverage_backhauled - flat.coverage_backhauled,
+            "G_C_cl_world": (references["closed_loop_relay"]["coverage_backhauled_mean_all"]
+                             - references["closed_loop_flat_a2a_on"]["coverage_backhauled_mean_all"]),
             "closed_loop": references,
             "timing": timing,
         }
@@ -300,6 +329,10 @@ def main(argv: list[str] | None = None) -> int:
                  if row["closed_loop"][reference]["arrival_step"] is not None])
             entry["not_arrived_worlds"] = [
                 row["world"] for row in rows if row["closed_loop"][reference]["arrival_step"] is None]
+        for count in ("association_change_count", "backhaul_loss_events"):
+            entry[count] = _mean_sd([row["closed_loop"][reference][count] for row in rows])
+            entry[f"{count}_per_world"] = {
+                str(row["world"]): row["closed_loop"][reference][count] for row in rows}
         closed_loop_summary[reference] = entry
 
     def timing_stats(component: str) -> dict[str, Any]:
@@ -324,13 +357,23 @@ def main(argv: list[str] | None = None) -> int:
         },
         "closed_loop_labels": REFERENCE_LABELS,
         "link_ranges": rows[0]["static"]["P_relay"]["ranges"] if rows else None,
-        "planner": "T2b: plain k-means + range-aware served-subset candidates (relay: chains of "
-                   "<= max_hops relays; flat: UAVs parked at min(d, R_direct - 1 m)); top-3 "
-                   "multi-start coordinate descent with plateau tie-break",
+        "planner": "T2b/T2c: plain k-means + range-aware served-subset candidates (relay: chains "
+                   "of <= max_hops relays; flat: UAVs parked at min(d, R_direct - 1 m)); relay "
+                   "search = relay + flat families + the flat search's result as incumbent; top-3 "
+                   "multi-start coordinate descent (xy 100 -> 50 -> 25 m, z +-50 m) with plateau "
+                   "tie-break; 3,000 evaluations per arm per world in total; best found, not a "
+                   "global optimum",
         "closed_loop_assignment": "min_makespan permutation of targets to UAVs",
         "gate_threshold_declared": GATE_THRESHOLD_DECLARED,
+        "G_C_cl_threshold_declared": G_C_CL_THRESHOLD_DECLARED,
+        "panel": _panel_name(worlds),
         "G": _mean_sd([row["G_world"] for row in rows]),
         "G_C": _mean_sd([row["G_C_world"] for row in rows]),
+        "G_C_dev_cl": _mean_sd([row["G_C_cl_world"] for row in rows]),
+        "G_C_dev_cl_definition": (
+            "mean over worlds of [500-step mean C_bh of closed_loop_relay (P_relay^on) - "
+            "500-step mean C_bh of closed_loop_flat_a2a_on (P_flat^on)]; named for the dev "
+            "panel, computed identically on whatever worlds were run (see 'panel')"),
         "static": {
             name: {
                 "contract_reward": _mean_sd([row["static"][name]["contract_reward"] for row in rows]),
@@ -347,6 +390,9 @@ def main(argv: list[str] | None = None) -> int:
                         "subsets_over_uav_budget")}
                     for row in rows],
                 "best_start": [row["static"][name]["best_start"] for row in rows],
+                "incumbent_at": {
+                    mark: _mean_sd([row["static"][name]["incumbent_at"][mark] for row in rows])
+                    for mark in ("1000", "2000", "3000")},
             }
             for name in ("P_relay", "P_flat")
         },

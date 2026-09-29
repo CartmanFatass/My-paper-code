@@ -22,8 +22,9 @@ the T2 plateau finding):
 * Multi-start coordinate descent from the top-3 evaluated candidates (contract reward
   descending, ties by candidate index), the remaining budget split equally (remainder to the
   first starts; budget a converged start leaves is not passed on).  Per start: for each UAV
-  in index order try +x, -x, +y, -y by the step (100 m, shrinking once to 50 m after a full
-  sweep without an accepted move); accept a strict improvement of the contract reward
+  in index order try +x, -x, +y, -y by the stage step (100 -> 50 -> 25 m; a stage ends
+  after a full sweep without an accepted move, convergence after the 25 m sweep) and +z, -z
+  by 50 m at every stage (heights clipped to the host range, 50-150 m) (T2c); accept a strict improvement of the contract reward
   (``stage="descent"``) or, when the reward is equal within ``IMPROVEMENT_TOL``, a strict
   decrease of the plateau potential (``stage="plateau"``).  The potential is the sum over
   unrouted UAVs of the 3-D distance to the nearest node they could route through: the BS,
@@ -36,7 +37,11 @@ the T2 plateau finding):
   flat-family subsets: the flat set is contained in the relay set, so the static gate
   ``G = P_relay - P_flat`` cannot be negative through candidate coverage alone (descent from
   the top-3 starts can still differ).  Duplicate layouts are removed before ranking, so the
-  three starts are distinct layouts.
+  three starts are distinct layouts.  T2c: ``extra_candidates`` (``run_gate.py`` passes the
+  flat search's found layout, kind ``flat_result_incumbent``) are evaluated after the
+  generated candidates inside the same budget and are eligible as starts, so ``G >= 0``
+  holds by construction (A2A can only add routes; association does not depend on it).
+  Incumbent rewards are snapshotted at cumulative evaluations 1,000 / 2,000 / 3,000.
 
 * ``closed_loop_execute(env, targets, max_steps)``: reset to the world's initial positions
   (``reset(seed=env.world_seed)``), assign targets to UAVs (default: the permutation that
@@ -71,8 +76,9 @@ K_SUBSET_ORDER = (5, 4, 6)
 RELAY_SPACING_M = 1100.0
 PARK_MARGIN_M = 1.0
 N_STARTS = 3
-INITIAL_STEP_M = 100.0
-FINAL_STEP_M = 50.0
+XY_STEPS_M = (100.0, 50.0, 25.0)
+Z_STEP_M = 50.0
+SNAPSHOT_MARKS = (1000, 2000, 3000)
 IMPROVEMENT_TOL = 1e-12
 POTENTIAL_TOL = 1e-9
 FINAL_WINDOW = 100
@@ -400,6 +406,7 @@ class PlacementResult:
     candidates_evaluated: int = 0
     ranges: dict[str, float] = field(default_factory=dict)
     candidate_report: dict[str, Any] = field(default_factory=dict)
+    incumbent_at: dict[str, Any] = field(default_factory=dict)
     info: dict[str, Any] = field(default_factory=dict)
     max_uav_connections_seen: int = 0
 
@@ -418,10 +425,11 @@ class PlacementResult:
             "candidates_total": len(self.candidates),
             "candidates_evaluated": self.candidates_evaluated,
             "candidate_report": self.candidate_report,
+            "incumbent_at": self.incumbent_at,
             "candidates": [
                 {key: c.get(key) for key in ("index", "kind", "k", "served", "relays",
                                              "leftover_target", "roles", "contract_reward",
-                                             "coverage_backhauled")}
+                                             "coverage_backhauled", "duplicate_of")}
                 | {"positions_xyz": np.asarray(c["positions_xyz"]).tolist(),
                    "descent_start": c["index"] in start_indices}
                 for c in self.candidates[: self.candidates_evaluated]
@@ -439,6 +447,8 @@ def search_placement(
     budget: int = 3000,
     rng: np.random.Generator | None = None,
     n_starts: int = N_STARTS,
+    extra_candidates: list[Any] | None = None,
+    extra_kind: str = "flat_result_incumbent",
 ) -> PlacementResult:
     """Static placement search; never uses more than ``budget`` static evaluations.
 
@@ -454,6 +464,25 @@ def search_placement(
         raise ValueError("budget must be >= 1")
     candidate_report: dict[str, Any] = {}
     candidates = build_candidates(env, rng, allow_a2a, report=candidate_report)
+    extras = []
+    for position in extra_candidates or []:
+        extra_positions = np.array(position, dtype=float).reshape(env.n_uavs, 3)
+        if not np.array_equal(_clip_positions(env, extra_positions), extra_positions):
+            raise ValueError("extra candidate outside the arena or height range")
+        key = np.round(extra_positions, 6).tobytes()
+        duplicate = next((c["index"] for c in candidates
+                          if np.round(np.asarray(c["positions_xyz"], dtype=float), 6).tobytes()
+                          == key), None)
+        extras.append({"kind": extra_kind, "k": None, "positions_xyz": extra_positions,
+                       "duplicate_of": duplicate})
+    if extras and budget < len(extras):
+        raise ValueError("budget smaller than the extra candidates")
+    # Extras are always evaluated: the generated list is truncated first if the budget is short.
+    generated_room = min(len(candidates), budget - len(extras))
+    candidates = candidates[:generated_room] + extras + candidates[generated_room:]
+    for index, candidate in enumerate(candidates):
+        candidate["index"] = index
+    candidate_report["extra_candidates"] = len(extras)
 
     evaluations = 0
     max_links = 0
@@ -466,6 +495,19 @@ def search_placement(
         max_links = max(max_links, int(info["uav_connection_count"]))
         return info, plateau_potential(env, allow_a2a)
 
+    # Snapshots at cumulative evaluation marks (taken after the mark-th evaluation is processed).
+    marks = [m for m in SNAPSHOT_MARKS]
+    overall_at: dict[str, float | None] = {}
+    tracker: dict[str, Any] = {"overall": -np.inf, "start": None, "start_reward": None}
+    start_at: list[dict[str, float | None]] = []
+
+    def snapshot() -> None:
+        if evaluations in marks:
+            key = str(evaluations)
+            overall_at[key] = float(tracker["overall"])
+            if tracker["start"] is not None:
+                start_at[tracker["start"]][key] = float(tracker["start_reward"])
+
     evaluated = candidates[: min(len(candidates), budget)]
     for candidate in evaluated:
         info, potential = evaluate(candidate["positions_xyz"])
@@ -473,6 +515,8 @@ def search_placement(
         candidate["coverage_backhauled"] = float(info["coverage_backhauled"])
         candidate["_info"] = info
         candidate["potential"] = potential
+        tracker["overall"] = max(tracker["overall"], candidate["contract_reward"])
+        snapshot()
     ranked = sorted(range(len(evaluated)),
                     key=lambda i: (-evaluated[i]["contract_reward"], i))[: max(1, int(n_starts))]
     history.append({"evaluations": evaluations, "stage": "candidates",
@@ -482,7 +526,6 @@ def search_placement(
     remaining = budget - evaluations
     shares = [remaining // len(ranked) + (1 if s < remaining % len(ranked) else 0)
               for s in range(len(ranked))]
-    moves = ((1.0, 0.0), (-1.0, 0.0), (0.0, 1.0), (0.0, -1.0))
     starts: list[dict[str, Any]] = []
     best: dict[str, Any] | None = None
     for s, index in enumerate(ranked):
@@ -492,22 +535,27 @@ def search_placement(
         reward = float(current_info["contract_reward"])
         potential = float(candidate["potential"])
         limit = evaluations + shares[s]
+        start_at.append({})
+        tracker["start"], tracker["start_reward"] = s, reward
+        start_began = evaluations
         history.append({"evaluations": evaluations, "stage": "start", "start": s,
                         "candidate_index": index, "contract_reward": reward,
                         "potential": potential})
-        step = INITIAL_STEP_M
+        stage_index = 0
         converged = False
         accepted = {"descent": 0, "plateau": 0}
         used_before = evaluations
         while evaluations < limit:
             moved = False
+            step = XY_STEPS_M[stage_index]
+            moves = ((step, 0.0, 0.0), (-step, 0.0, 0.0), (0.0, step, 0.0), (0.0, -step, 0.0),
+                     (0.0, 0.0, Z_STEP_M), (0.0, 0.0, -Z_STEP_M))
             for uav in range(env.n_uavs):
-                for dx, dy in moves:
+                for move in moves:
                     if evaluations >= limit:
                         break
                     trial = position.copy()
-                    trial[uav, 0] += dx * step
-                    trial[uav, 1] += dy * step
+                    trial[uav] += move
                     trial = _clip_positions(env, trial)
                     if np.array_equal(trial, position):
                         continue
@@ -519,23 +567,25 @@ def search_placement(
                     elif (abs(trial_reward - reward) <= IMPROVEMENT_TOL
                           and trial_potential < potential - POTENTIAL_TOL):
                         stage = "plateau"
-                    if stage is None:
-                        continue
-                    position, current_info = trial, info
-                    reward, potential = trial_reward, trial_potential
-                    moved = True
-                    accepted[stage] += 1
-                    history.append({"evaluations": evaluations, "stage": stage, "start": s,
-                                    "contract_reward": reward, "potential": potential,
-                                    "uav": uav, "step_m": step,
-                                    "move": [dx * step, dy * step]})
+                    if stage is not None:
+                        position, current_info = trial, info
+                        reward, potential = trial_reward, trial_potential
+                        moved = True
+                        accepted[stage] += 1
+                        tracker["start_reward"] = reward
+                        tracker["overall"] = max(tracker["overall"], reward)
+                        history.append({"evaluations": evaluations, "stage": stage, "start": s,
+                                        "contract_reward": reward, "potential": potential,
+                                        "uav": uav, "step_m": step,
+                                        "move": [float(v) for v in move]})
+                    snapshot()
                 if evaluations >= limit:
                     break
             if evaluations >= limit:
                 break
             if not moved:
-                if step > FINAL_STEP_M:
-                    step = FINAL_STEP_M
+                if stage_index + 1 < len(XY_STEPS_M):
+                    stage_index += 1
                 else:
                     converged = True
                     break
@@ -544,7 +594,10 @@ def search_placement(
                   "final_reward": reward, "share": shares[s],
                   "evaluations": evaluations - used_before, "converged": converged,
                   "accepted_descent": accepted["descent"],
-                  "accepted_plateau": accepted["plateau"]}
+                  "accepted_plateau": accepted["plateau"],
+                  "final_xy_step_m": XY_STEPS_M[stage_index],
+                  "began_at_evaluation": start_began, "ended_at_evaluation": evaluations,
+                  "incumbent_at": start_at[s]}
         starts.append(record)
         if best is None or reward > best["reward"] + IMPROVEMENT_TOL:
             best = {"reward": reward, "position": position, "info": current_info,
@@ -553,6 +606,20 @@ def search_placement(
     for candidate in candidates:
         candidate.pop("_info", None)
     assert best is not None
+    # Marks the search never reached take the final value; a start that had not begun at a
+    # mark records None, one that had ended records its final reward.
+    final_overall = max(tracker["overall"], float(best["reward"]))
+    for m in marks:
+        key = str(m)
+        overall_at.setdefault(key, final_overall)
+        for record in starts:
+            if key in record["incumbent_at"]:
+                continue
+            record["incumbent_at"][key] = (
+                None if record["began_at_evaluation"] >= m and m <= evaluations
+                else record["final_reward"])
+    for record in starts:
+        record["incumbent_at"] = {str(m): record["incumbent_at"][str(m)] for m in marks}
     return PlacementResult(
         positions_xyz=best["position"],
         contract_reward=float(best["reward"]),
@@ -568,6 +635,7 @@ def search_placement(
         candidates_evaluated=len(evaluated),
         ranges=link_ranges(env),
         candidate_report=candidate_report,
+        incumbent_at={str(m): overall_at[str(m)] for m in marks},
         info=dict(best["info"]),
         max_uav_connections_seen=max_links,
     )
@@ -632,6 +700,13 @@ def backhauled_users_mask(env: CoupledRelayHost) -> np.ndarray:
     return np.any(np.asarray(env.connections, dtype=bool) & routed[:, None], axis=0)
 
 
+def user_association(env: CoupledRelayHost) -> np.ndarray:
+    """Serving UAV index per user (-1 if unconnected); the base assignment is one-to-one."""
+    connections = np.asarray(env.connections, dtype=bool)
+    served = connections.any(axis=0)
+    return np.where(served, np.argmax(connections, axis=0), -1)
+
+
 def far_cluster_backhauled_share(env: CoupledRelayHost, layout: dict[str, Any] | None = None) -> float:
     layout = cluster_layout(env) if layout is None else layout
     members = layout["membership"] == layout["far_cluster"]
@@ -680,6 +755,12 @@ def _run_episode(
     series: dict[str, list[float]] = {"contract_reward": [], "coverage_backhauled": [],
                                       "frontend_capacity_with_path_mbps": [],
                                       "mean_relays_per_routed_uav": []}
+    # Association (serving UAV per user, -1 if none) and backhauled mask; the reset state is
+    # the t = 0 baseline.
+    association = user_association(env)
+    backhauled = backhauled_users_mask(env)
+    association_changes: list[int] = []
+    backhaul_losses: list[int] = []
     for t in range(horizon):
         actions_array = np.asarray(action_fn(env, t), dtype=float).reshape(env.n_uavs, 3)
         actions = {agent: actions_array[i] for i, agent in enumerate(env.agents)}
@@ -691,6 +772,11 @@ def _run_episode(
                 f"step {t}: returned team reward {team} != reward_info {info['contract_reward']}")
         for name in series:
             series[name].append(float(info[name]))
+        new_association = user_association(env)
+        new_backhauled = backhauled_users_mask(env)
+        association_changes.append(int(np.sum(new_association != association)))
+        backhaul_losses.append(int(np.sum(backhauled & ~new_backhauled)))
+        association, backhauled = new_association, new_backhauled
         if all(terminations.values()):
             break
 
@@ -701,6 +787,10 @@ def _run_episode(
         "initial_positions_xyz": initial.tolist(),
         "final_positions_xyz": env.uav_positions.tolist(),
         "series": series,
+        "association_change_count": int(sum(association_changes)),
+        "backhaul_loss_events": int(sum(backhaul_losses)),
+        "association_changes_per_step": association_changes,
+        "backhaul_losses_per_step": backhaul_losses,
         "final": {
             "contract_reward": final["contract_reward"],
             "coverage_backhauled": final["coverage_backhauled"],
