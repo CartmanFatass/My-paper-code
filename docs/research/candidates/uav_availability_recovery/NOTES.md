@@ -337,3 +337,31 @@ SINR invariance to the availability toggle, not the magnitude or cross-arm
 irrelevance of retained interference. Earlier literal radio-off wording is
 superseded by this entry. No pure-backhaul attribution or real-transmitter-outage
 claim will follow the planned native package comparison.
+
+### Execution destination before any acceptance
+
+The complete source/contract is published at
+`a46eea11b48018e3d58699f829bd8107a472f30c`. Preferred `wsl_4070` remains reachable
+over SSH, but direct origin reads are unavailable: the fetch timed out at35s,
+then `git ls-remote --heads origin refs/heads/main` timed out at20s and again
+after a full65s allowance, all exit124 with no output. An SSH delta bundle of the
+already-published commit imported successfully and moved only `origin/main` from
+`570fd4564` to `a46eea11b`; canonical HEAD stayed570fd4564. Its automatic Git
+maintenance reported an existing gc.log / missing-tree-object problem; this was
+not repaired or converted into a scientific failure. Canonical sparse selection
+and all five pre-existing dirty launch-status hashes are unchanged. Root retains
+canonical-control synchronization ownership.
+
+No remote launcher was invoked: zero claims, accepted workers, fits or result
+steps exist for this study on that node. Because the fresh published-control
+query cannot complete there, DM selects the configured **local_linux** fallback,
+one CPU worker with one numeric thread, using
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python` and normal fresh actual-node
+admission. This changes the prospective runtime environment, not a running
+operation or the frozen scientific exposure. All3 fit seeds,1536 training worlds,
+64 evaluation worlds, native H500,1536 optimizer updates and960000 steps remain
+fixed. Actual Python/NumPy/Torch versions and native timings will be recorded;
+no universal cross-host bit-equality or unmeasured runtime prediction is claimed.
+The prior native crash evidence still applies as a technical-risk constraint,
+and no automatic replacement run is authorized. Final output will be
+`runs/uav_availability_recovery/b01_joint_reserve_a01/` on the admitted local node.
