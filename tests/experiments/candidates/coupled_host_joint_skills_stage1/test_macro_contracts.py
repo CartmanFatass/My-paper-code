@@ -288,6 +288,27 @@ def test_floors_run_full_episodes_with_counters(menu_dir):
     assert rows["random-target"]["macro_counters"]["target_change_rate"] == 1.0
     held = MR.run_floor_world("nearest-unclaimed-slot", WORLD, 5000, provider, "first_macro_step")
     assert held["macro_counters"]["slot_switches"] == 0
+    # Permutation floors: conflict-free, held for the episode, no target changes.
+    for floor in MR.PERMUTATION_FLOORS:
+        counters = rows[floor]["macro_counters"]
+        assert counters["slot_conflicts"] == 0 and counters["slot_switches"] == 0, floor
+        assert counters["target_changes"] == 0 and counters["slot_conflicts_per_team_decision"] == 0.0, floor
+        assert sorted(rows[floor]["held_slots"]) == list(range(6)), floor
+    assert rows["identity-permutation-slots"]["held_slots"] == list(range(6))
+    permutation = rows["held-random-permutation-slots"]["held_slots"]
+    assert permutation == np.random.default_rng([WORLD, 2]).permutation(6).tolist()
+    again = MR.run_floor_world("held-random-permutation-slots", WORLD, 5000, provider)
+    assert again["held_slots"] == permutation
+    assert again["coverage_backhauled_mean_all"] == rows["held-random-permutation-slots"]["coverage_backhauled_mean_all"]
+    other = MR.run_floor_world("held-random-permutation-slots", WORLD + 1, 5000, provider)["held_slots"]
+    assert other == np.random.default_rng([WORLD + 1, 2]).permutation(6).tolist()
+    assert "held_slots" not in rows["planner-slots"]
+    # The [world, 1] stream of the random floors is unchanged by the [world, 2] permutation stream.
+    sticky = MR.FloorPolicy("sticky-random-slot", make_macro_envs(1, [WORLD], "slot", provider)[0], WORLD)
+    sticky.env.reset(seed=WORLD)
+    sticky.step()
+    np.testing.assert_array_equal(sticky.held, np.random.default_rng([WORLD, 1]).integers(0, 6, 6))
+    sticky.env.close()
     reference = closed_loop_execute(make_host(WORLD), provider(WORLD)["positions_xyz"])
     assert rows["planner-slots"]["coverage_backhauled_mean_all"] == reference["coverage_backhauled_mean_all"]
     assert rows["planner-slots"]["r_mean_all"] == reference["contract_reward_mean_all"]
@@ -318,6 +339,17 @@ def test_floor_cli_smoke_refuses_panels_and_skips_admission(tmp_path, monkeypatc
     summary = json.loads((out / "floor" / "summary.json").read_text())
     assert code == 0 and summary["status"] == "complete" and summary["training_fits_performed"] == 0
     assert summary["per_world"][0]["steps"] == 500 and summary["macro_counters"]["episodes"] == 1
+    for floor in MR.PERMUTATION_FLOORS:
+        code = runner.main(["--floor", floor, "--worlds", f"{WORLD}-{WORLD + 1}", "--launch-sha", "s", "--out",
+                            str(out / floor), "--area-size", "5000", "--smoke-no-admission",
+                            "--menu-dir", str(menu_dir)])
+        summary = json.loads((out / floor / "summary.json").read_text())
+        assert code == 0 and summary["status"] == "complete" and summary["contract"] == "slot", floor
+        assert summary["macro_counters"]["episodes"] == 2 and summary["macro_counters"]["team_decisions"] == 100
+        assert summary["macro_counters"]["slot_conflicts"] == 0 and summary["macro_counters"]["slot_switches"] == 0
+        assert summary["macro_counters"]["target_changes"] == 0
+        assert all(sorted(w["held_slots"]) == list(range(6)) for w in summary["per_world"])
+        assert ("[world, 2]" in summary["rng"]) == (floor == "held-random-permutation-slots")
 
 
 # ------------------------------------------------------------------------------ fits
@@ -346,6 +378,13 @@ def test_tiny_macro_fit_updates_and_evaluates(tmp_path, menu_dir, contract, arm)
     assert row["world_seeds"] == [300000, 300001]
     assert row["macro_counters"]["team_decisions"] == 100 and row["macro_counters"]["episodes"] == 2
     if arm == "H":
+        labels = row["labels"]
+        assert labels["label_team_decisions"] == 100 and sum(labels["agent_distinct_labels_histogram"]) == 100
+        assert sum(labels["agent_label_counts"]) == 600 and sum(labels["team_label_counts"]) == 100
+        assert labels["team_label_episodes"] == 2
+        assert 1.0 <= labels["agent_distinct_labels_per_team_decision_mean"] <= 6.0
+        assert 0.0 <= labels["agent_label_entropy_bits_per_team_decision_mean"] <= math.log2(6) + 1e-12
+        assert set(result["label_reader_definitions"]) >= set(labels)
         d2 = row["d2_metrics"]
         assert d2["team_decisions"] == d2["decision_steps"] == d2["steps"] == 100
         assert d2["sampled_total"] == 600
@@ -354,6 +393,7 @@ def test_tiny_macro_fit_updates_and_evaluates(tmp_path, menu_dir, contract, arm)
                      "coordinator.state_embedding", "team_discriminator.state_encoder"):
             assert result["parameter_motion"][name]["delta_l2"] > 0, name
     else:
+        assert "labels" not in row and result["label_reader_definitions"] is None
         assert result["parameter_motion"]["discoverer_actor.base"]["delta_l2"] > 0
         assert result["optimizer_calls"]["coordinator"] == 0
     panels = {p["file"]: p for p in result["panels"]}
@@ -367,7 +407,17 @@ def test_tiny_macro_fit_updates_and_evaluates(tmp_path, menu_dir, contract, arm)
         for key in runner.READER_KEYS:
             assert key in world
         if arm == "H":
-            assert panel["labels"]["d2_team_causes"] == {"reset": 1, "team_cap": 49, "other": 0}
+            labels = panel["labels"]
+            assert labels["d2_team_causes"] == {"reset": 1, "team_cap": 49, "other": 0}
+            assert labels["label_team_decisions"] == 50 and sum(labels["agent_distinct_labels_histogram"]) == 50
+            assert 1.0 <= labels["agent_distinct_labels_per_team_decision_mean"] <= 6.0
+            assert 0.0 <= labels["agent_label_entropy_bits_per_team_decision_mean"] <= math.log2(6) + 1e-12
+            assert labels["team_label_episodes"] == 1
+            assert 1.0 <= labels["team_distinct_labels_per_episode_mean"] <= 6.0
+            assert labels["team_label_entropy_bits_per_episode_mean"] == pytest.approx(
+                labels["team_label_entropy_bits"])  # one world = one episode
+        else:
+            assert "labels" not in panel
     table = json.loads((out / "matching_table.json").read_text())
     assert table["team_decisions_per_rollout_H"] == 100 and table["action_contract"]["contract"] == contract
     if contract == "target":  # free destinations: no menu is read
@@ -473,3 +523,25 @@ def test_discrete_slot_log_probs_round_trip_through_the_buffer(tmp_path, menu_di
     torch.testing.assert_close(log_probs.reshape(-1), torch.as_tensor(buffer.log_probs[:3].reshape(-1)),
                                rtol=0, atol=1e-6)
     assert float(entropy) == pytest.approx(math.log(6), abs=1e-3)
+
+
+def test_label_reader_counts_distinct_labels_and_entropy_per_team_decision():
+    reader = MR.LabelReader(6, 6, lanes=2)
+    reader.update(np.array([[0, 0, 0, 0, 0, 0], [0, 1, 2, 3, 4, 5]]), np.array([2, 3]))
+    reader.update(np.array([[0, 0, 0, 1, 1, 1], [5, 5, 5, 5, 5, 4]]), np.array([2, 4]))
+    with pytest.raises(ValueError):
+        reader.summary()
+    reader.end_episodes()
+    out = reader.summary(pooled=True)
+    assert out["label_team_decisions"] == 4
+    assert out["agent_distinct_labels_histogram"] == [1, 2, 0, 0, 0, 1]
+    assert out["agent_distinct_labels_per_team_decision_mean"] == pytest.approx((1 + 6 + 2 + 2) / 4)
+    h51 = -(5 / 6) * math.log2(5 / 6) - (1 / 6) * math.log2(1 / 6)
+    assert out["agent_label_entropy_bits_per_team_decision_mean"] == pytest.approx((0 + math.log2(6) + 1 + h51) / 4)
+    assert out["team_label_episodes"] == 2
+    assert out["team_distinct_labels_per_episode_mean"] == pytest.approx((1 + 2) / 2)
+    assert out["team_label_entropy_bits_per_episode_mean"] == pytest.approx((0 + 1) / 2)
+    assert out["agent_label_counts"] == [10, 4, 1, 1, 2, 6] and out["team_label_counts"] == [0, 0, 2, 1, 1, 0]
+    assert set(out) <= set(MR.LABEL_READER_DEFINITIONS)
+    with pytest.raises(ValueError):
+        reader.update(np.full((2, 6), 6), np.zeros(2))

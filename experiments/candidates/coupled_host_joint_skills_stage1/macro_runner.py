@@ -18,8 +18,14 @@ Floors (no learner): ``random-target`` (uniform destination in the arena box eve
 first macro step, then held), ``nearest-unclaimed-slot`` (UAVs in index order each take the
 nearest unclaimed slot, 3-D distance from the current position, ties by slot index; cadence
 ``every_macro_step`` (default) or ``first_macro_step``), ``planner-slots`` (M: the min-makespan
-assignment = ``P_relay^on``, held).  Floor randomness: ``numpy.random.default_rng([world, 1])``
-per world (the gate's random-floor derivation).
+assignment = ``P_relay^on``, held), ``identity-permutation-slots`` (UAV ``i`` takes menu slot ``i``
+in the stored menu order, held), ``held-random-permutation-slots`` (one uniform permutation of the
+six slots per world, held; conflict-free by construction, no travel optimisation).  Floor
+randomness: ``numpy.random.default_rng([world, 1])`` per world (the gate's random-floor derivation)
+for the random floors; the held random permutation draws once from a separate
+``numpy.random.default_rng([world, 2])`` so the ``[world, 1]`` stream is untouched.
+
+H label readers (panels and training rows, zero cost): see ``LABEL_READER_DEFINITIONS``.
 """
 from __future__ import annotations
 
@@ -49,12 +55,104 @@ from experiments.candidates.coupled_host_joint_skills_stage1.menus import MENU_W
 
 DEFAULT_MENU_DIR = R.ROOT / "runs" / DIRECTION / "menus"
 FLOORS = ("random-target", "random-slot", "sticky-random-slot", "nearest-unclaimed-slot",
-          "planner-slots")
+          "planner-slots", "identity-permutation-slots", "held-random-permutation-slots")
 FLOOR_CONTRACT = {"random-target": "target", "random-slot": "slot", "sticky-random-slot": "slot",
-                  "nearest-unclaimed-slot": "slot", "planner-slots": "slot"}
+                  "nearest-unclaimed-slot": "slot", "planner-slots": "slot",
+                  "identity-permutation-slots": "slot", "held-random-permutation-slots": "slot"}
+#: permutation floors: the episode-long assignment is recorded per world as ``held_slots``
+PERMUTATION_FLOORS = ("identity-permutation-slots", "held-random-permutation-slots")
 NEAREST_CADENCES = ("every_macro_step", "first_macro_step")
 MACRO_READER_COUNTERS = ("far_target_fraction", "target_change_rate", "slot_conflicts_per_team_decision",
                          "slot_switches_per_episode")
+
+
+LABEL_READER_DEFINITIONS = {
+    "label_team_decisions": "H team decisions read (lanes x macro steps; one team label Z and six agent labels "
+                            "z_i per team decision)",
+    "agent_distinct_labels_per_team_decision_mean": "mean over team decisions of the number of distinct agent "
+                                                    "labels z_i among the six UAVs",
+    "agent_distinct_labels_histogram": "team decisions with 1, 2, ..., 6 distinct agent labels (index 0 = 1)",
+    "agent_label_entropy_bits_per_team_decision_mean": "mean over team decisions of the entropy (bits, log2) of "
+                                                       "the empirical distribution of the six agent labels "
+                                                       "within that decision (0 = all six equal)",
+    "team_label_episodes": "lane-episodes read for the within-episode team-label analogue",
+    "team_distinct_labels_per_episode_mean": "one Z per team decision makes 'distinct team labels per team "
+                                             "decision' 1 and its entropy 0 by construction; recorded instead: "
+                                             "mean over lane-episodes of the number of distinct Z over the "
+                                             "episode's team decisions",
+    "team_label_entropy_bits_per_episode_mean": "mean over lane-episodes of the entropy (bits) of Z over the "
+                                                "episode's team decisions",
+    "agent_label_counts": "pooled agent-label counts (training rows; panels already record them)",
+    "team_label_counts": "pooled team-label counts (training rows; panels already record them)",
+    "agent_label_entropy_bits": "entropy (bits) of the pooled agent-label counts (training rows)",
+    "team_label_entropy_bits": "entropy (bits) of the pooled team-label counts (training rows)",
+}
+
+
+class LabelReader:
+    """Zero-cost H label reader over ``(lanes, 6)`` agent labels and ``(lanes,)`` team labels per
+    team decision (definitions in ``LABEL_READER_DEFINITIONS``); reads copies, never the step data."""
+
+    def __init__(self, n_z, n_Z, lanes, n_agents=6):
+        self.n_z, self.n_Z, self.lanes, self.n_agents = int(n_z), int(n_Z), int(lanes), int(n_agents)
+        self.decisions = 0
+        self.distinct_sum = 0
+        self.distinct_hist = np.zeros(self.n_agents, dtype=np.int64)
+        self.entropy_sum = 0.0
+        self.agent_counts = np.zeros(self.n_z, dtype=np.int64)
+        self.team_counts = np.zeros(self.n_Z, dtype=np.int64)
+        self.episode_team_counts = np.zeros((self.lanes, self.n_Z), dtype=np.int64)
+        self.episodes = 0
+        self.episode_distinct_sum = 0
+        self.episode_entropy_sum = 0.0
+
+    def update(self, agent_skills, team_skills):
+        agent = np.array(agent_skills, dtype=np.int64, copy=True)
+        team = np.array(team_skills, dtype=np.int64, copy=True).reshape(-1)
+        if agent.shape != (self.lanes, self.n_agents) or team.shape != (self.lanes,):
+            raise ValueError(f"label roster mismatch: agent {agent.shape}, team {team.shape}")
+        if agent.min() < 0 or agent.max() >= self.n_z or team.min() < 0 or team.max() >= self.n_Z:
+            raise ValueError("label outside the declared label range")
+        per_decision = (agent[:, :, None] == np.arange(self.n_z)).sum(axis=1)  # (lanes, n_z)
+        distinct = (per_decision > 0).sum(axis=1)
+        p = per_decision / float(self.n_agents)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            entropy = -np.where(p > 0, p * np.log2(p), 0.0).sum(axis=1)
+        self.decisions += self.lanes
+        self.distinct_sum += int(distinct.sum())
+        self.distinct_hist += np.bincount(distinct - 1, minlength=self.n_agents)[:self.n_agents]
+        self.entropy_sum += float(entropy.sum())
+        self.agent_counts += per_decision.sum(axis=0)
+        np.add.at(self.team_counts, team, 1)
+        np.add.at(self.episode_team_counts, (np.arange(self.lanes), team), 1)
+
+    def end_episodes(self):
+        """Close one episode on every lane (all lanes end together on this host)."""
+        for counts in self.episode_team_counts:
+            if counts.sum() == 0:
+                raise ValueError("closing an empty label episode")
+            self.episodes += 1
+            self.episode_distinct_sum += int((counts > 0).sum())
+            self.episode_entropy_sum += float(R.entropy_bits(counts))
+        self.episode_team_counts[:] = 0
+
+    def summary(self, pooled=False):
+        if self.episode_team_counts.sum():
+            raise ValueError("label reader has an unclosed episode")
+        n, e = self.decisions, self.episodes
+        out = {"label_team_decisions": n,
+               "agent_distinct_labels_per_team_decision_mean": self.distinct_sum / n if n else None,
+               "agent_distinct_labels_histogram": self.distinct_hist.tolist(),
+               "agent_label_entropy_bits_per_team_decision_mean": self.entropy_sum / n if n else None,
+               "team_label_episodes": e,
+               "team_distinct_labels_per_episode_mean": self.episode_distinct_sum / e if e else None,
+               "team_label_entropy_bits_per_episode_mean": self.episode_entropy_sum / e if e else None}
+        if pooled:
+            out.update(agent_label_counts=self.agent_counts.tolist(),
+                       agent_label_entropy_bits=R.entropy_bits(self.agent_counts),
+                       team_label_counts=self.team_counts.tolist(),
+                       team_label_entropy_bits=R.entropy_bits(self.team_counts))
+        return out
 
 
 def motion_modules(agent):
@@ -177,6 +275,7 @@ def run_macro_panel(learner, arm, seed, worlds, deterministic, spec, counters, m
             team_counts = np.zeros(int(config.n_Z), dtype=np.int64)
             per_agent_counts = np.zeros((6, int(config.n_z)), dtype=np.int64)
             d2_causes = {"reset": 0, "team_cap": 0, "other": 0}
+            label_reader = LabelReader(config.n_z, config.n_Z, lanes) if arm == "H" else None
             for chunk_index, chunk in enumerate(chunks):
                 if chunk_index:
                     for env in envs:
@@ -203,6 +302,7 @@ def run_macro_panel(learner, arm, seed, worlds, deterministic, spec, counters, m
                                 np.add.at(label_counts, agent_skills[lane], 1)
                                 np.add.at(per_agent_counts, (np.arange(6), agent_skills[lane]), 1)
                                 team_counts[team_skills[lane]] += 1
+                            label_reader.update(agent_skills, team_skills)
                             team_cause = np.asarray(data["d2_team_cause"], dtype=np.int64).reshape(-1)
                             if t == 0 and not np.all(team_cause == R.D2_CAUSE_RESET):
                                 raise AssertionError("evaluation episode did not start with a d2 reset")
@@ -233,6 +333,8 @@ def run_macro_panel(learner, arm, seed, worlds, deterministic, spec, counters, m
                             raise ValueError("unexpected evaluation terminal boundary")
                 if not dones.all():
                     raise ValueError("evaluation missing terminal boundary")
+                if label_reader is not None:
+                    label_reader.end_episodes()
                 for tracker, macro_counts in zip(trackers, world_counters):
                     summary = tracker.summary()
                     summary["macro_counters"] = macro_counts
@@ -252,6 +354,7 @@ def run_macro_panel(learner, arm, seed, worlds, deterministic, spec, counters, m
                     "team_label_entropy_bits": R.entropy_bits(team_counts),
                     "per_agent_label_entropy_bits": [R.entropy_bits(c) for c in per_agent_counts],
                     "d2_team_causes": d2_causes,
+                    **label_reader.summary(),
                 }
             row.update(optimizer_calls=calls.copy(), frozen_weights_and_normalizers=True,
                        config=macro_config_dict(config))
@@ -392,6 +495,7 @@ def run_macro_fit(out, arm, seed, launch_sha, admission, spec, menu_dir=DEFAULT_
                                             "(contract team r / 6)",
                                 "readings": "team per-step r = 0.5 * (C_bh + S/D), every host step"},
                "counter_definitions": MacroCounters.DEFINITIONS,
+               "label_reader_definitions": LABEL_READER_DEFINITIONS if arm == "H" else None,
                "runtime": {"python": sys.version, "torch": torch.__version__, "numpy": np.__version__,
                            "device": "cpu", "dtype": "float32", "torch_threads": spec.torch_threads,
                            "thread_environment": {name: os.environ.get(name) for name in
@@ -462,6 +566,7 @@ def run_macro_fit(out, arm, seed, launch_sha, admission, spec, menu_dir=DEFAULT_
             c_bh_sum = np.zeros(spec.train_lanes)
             clip_events = 0
             episode_counters = []
+            label_reader = LabelReader(config.n_z, config.n_Z, spec.train_lanes) if arm == "H" else None
             policy_s = env_s = store_s = 0.0
             for t in range(horizon):
                 tick = time.perf_counter()
@@ -472,6 +577,8 @@ def run_macro_fit(out, arm, seed, launch_sha, admission, spec, menu_dir=DEFAULT_
                 R.finite(data, "training step data")
                 if actions.shape != _action_shape(spec, spec.train_lanes):
                     raise ValueError("training action roster mismatch")
+                if label_reader is not None:
+                    label_reader.update(data["agent_skills"], data["team_skills"])
                 actions_before = actions.copy()
                 next_states, next_observations = [], []
                 rewards = np.zeros(spec.train_lanes)
@@ -521,6 +628,8 @@ def run_macro_fit(out, arm, seed, launch_sha, admission, spec, menu_dir=DEFAULT_
                     raise ValueError("unexpected training terminal boundary")
             if not dones.all():
                 raise ValueError("training rollout missing full episodes")
+            if label_reader is not None:
+                label_reader.end_episodes()
             menu_s = menus.seconds - menu_seconds_before
             collection_s = time.perf_counter() - rollout_start
             facts = R.terminal_facts(agent, arm, horizon)
@@ -562,6 +671,8 @@ def run_macro_fit(out, arm, seed, launch_sha, admission, spec, menu_dir=DEFAULT_
                    "optimizer_total": calls.copy(), "parameter_motion": motion,
                    "timing": timing, "memory": R.proc_memory(),
                    "rollout_wall_seconds": timing["wall_seconds"]}
+            if label_reader is not None:
+                row["labels"] = label_reader.summary(pooled=True)
             with (out / "training.jsonl").open("a", encoding="utf-8") as stream:
                 stream.write(json.dumps(R.jsonable(row), allow_nan=False) + "\n")
             summary["parameter_motion"] = motion
@@ -707,6 +818,7 @@ class FloorPolicy:
         self.floor = floor
         self.env = env
         self.rng = np.random.default_rng([int(world), 1])
+        self.world = int(world)
         self.cadence = nearest_cadence
         self.held = None
 
@@ -728,6 +840,14 @@ class FloorPolicy:
                 self.held = nearest_unclaimed(np.asarray(env.host.uav_positions, dtype=float),
                                               np.asarray(env.menu["positions_xyz"], dtype=float))
             slots = self.held
+        elif self.floor == "identity-permutation-slots":
+            if self.held is None:
+                self.held = np.arange(env.n_slots, dtype=np.int64)
+            slots = self.held
+        elif self.floor == "held-random-permutation-slots":
+            if self.held is None:  # separate stream: the [world, 1] draws of the other floors are unchanged
+                self.held = np.random.default_rng([self.world, 2]).permutation(env.n_slots).astype(np.int64)
+            slots = self.held
         else:  # planner-slots (M)
             slots = np.asarray(env.menu["m_permutation"], dtype=np.int64)
         return env.step(np.asarray(slots, dtype=np.int64), on_host_step=on_host_step)
@@ -747,6 +867,8 @@ def run_floor_world(floor, world, area_size, menus, nearest_cadence="every_macro
             _obs, _reward, done, _trunc, info = policy.step(on_host_step=tracker.update)
         row = tracker.summary()
         row["macro_counters"] = info["episode_counters"]
+        if floor in PERMUTATION_FLOORS:
+            row["held_slots"] = [int(s) for s in policy.held]
         return row
     finally:
         env.close()
@@ -764,7 +886,10 @@ def run_floor(out, floor, worlds, area_size, menu_dir, launch_sha, admission,
                "contract": FLOOR_CONTRACT[floor], "launch_sha": launch_sha, "admission": admission,
                "worlds": [int(w) for w in worlds], "area_size": int(area_size),
                "nearest_cadence": nearest_cadence if floor == "nearest-unclaimed-slot" else None,
-               "rng": "numpy.random.default_rng([world, 1]) per world (random floors)",
+               "rng": {"held-random-permutation-slots": "numpy.random.default_rng([world, 2]).permutation(6) "
+                                                        "once per world",
+                       "identity-permutation-slots": "none (UAV i -> menu slot i)"}.get(
+                           floor, "numpy.random.default_rng([world, 1]) per world (random floors)"),
                "training_fits_performed": 0, "status": "running", "per_world": [],
                "counter_definitions": MacroCounters.DEFINITIONS}
     try:

@@ -876,7 +876,7 @@ def write_probe(out, arm, seed, agent, spec, timing_rows, summary, publish):
 
 MACRO_CHOICES = ("target", "slot", "offset")
 FLOOR_CHOICES = ("random-target", "random-slot", "sticky-random-slot", "nearest-unclaimed-slot",
-                 "planner-slots")
+                 "planner-slots", "identity-permutation-slots", "held-random-permutation-slots")
 
 
 def main(argv=None):

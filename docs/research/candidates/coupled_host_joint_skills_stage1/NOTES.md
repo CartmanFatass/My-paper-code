@@ -1142,3 +1142,91 @@ D_i = r(joint) − r(joint with UAV i masked), SET-slot one seed, read on the co
 **Readings (pre-declared by the memo's first act).** Room condition M − sticky-random-slot on the hold-out mean = .7798 − .4182 = **.362 ≥ .15 → fits may be bought** (still a [DECIDE] behind the critic and the round-boundary Pro). Stakes priced with zero learning: conflicts cost ≈ .36 of service (M vs sticky-random; ≈ 2 of 6 UAVs collide per team decision under independent random slots); churn costs ≈ 0 here (sticky-random .418 vs random-slot .427 — re-choosing every macro step does not hurt when the choices are already conflicting); assignment optimality is worth ≈ .003 (M vs N; the S7 analogue was +.007) — the identity- and held-random-permutation floors (T-P, in flight) will separate de-duplication from travel. Provisional activation line for a learner = sticky-random hold-out + ½ G_C,ho,cl = .4182 + .0705 = **.49**; P_flat^on .639 and the P2 line .7095 lie above it, M/N at .78. Oracle predictions vs facts: sticky-random predicted .45–.55 → .42 hold-out (.49 dev); N predicted .74–.78 → .777; random-slot predicted .40–.50 → .427.
 
 **What this settles before any fit.** On this host the whole learnable content at the slot interface is de-duplication (≈ .36) — assignment optimality and churn are worth ≈ 0; a learner that merely stops colliding reaches ≈ .74–.78 by the held-permutation floors' expected level (to be measured by T-P). A fit is therefore a learnability test of anti-coordination under symmetric shared-parameter exploration, exactly as the memo and critic F4.1 framed it, and a positive reading says nothing about assignment quality.
+
+## 2026-09-29 18:41 UTC — Critic review of the successor memo (ResearchCritic, separate context): Q-B′ and the zero-fit floors ACCEPTED WITH REVISIONS; **MATERIAL DISSENT on the pair-1 executing default, ACCEPTED**; T-P accepted (two permutation floors + H label readers); revised order: SET-slot alone first, H-slot only behind a declared coordinator-activation gate; the Pro disagreement is recorded truthfully and goes back to Pro at this round boundary
+
+**DM verification (from the records).** b01 H fits: training `agent_skill_entropy` 1.69–1.73 → 1.78 (ln 6 = 1.79); sampled hold-out c45 agent-label entropy 2.583 / 2.583 / 2.580 bits of 2.585 (uniform), team 2.47 / 2.47 / 2.54; deterministic hold-out c45 agent entropy 1.81 / 1.63 / 1.25 bits with the top label taking .54 / .64 / .77 of agent-steps — the critic's numbers hold. Pro's Answer 4 (capture line 127) reads "SET 激活应是**预算上的必要门槛**，而不是 Q-B 科学可行性的逻辑前提；越过门槛也不应自动触发六个 fit" — "necessary": the Oracle's paraphrase dropped the word, and Pro's purchase-reason objection (adoption value nil, thin K/N link, a menu allocator is not path-planning competence) stands. `configuration.py` 168–179: H's 90-dim observation carries no ego id (SET's actor has the ego one-hot + full state + menu).
+
+**Disposition.**
+- R1–R3 ACCEPT (floors): identity and held-random-permutation floors reported against the activation line, and if either is ≥ the line an activation reads "a conflict-free convention was learned"; contrast-room condition added: if M − held-perm < .05 on the hold-out mean, row 3's C̄_bh path is struck and the conflict trajectory on training rollouts is the only H-vs-SET contrast (single instance); sticky-random's per-world SD (.194 hold-out) reported against the .0705 margin.
+- R4 ACCEPT — order: **SET-slot alone first** (≈ 1.3 CPU-h alone; cheapest refuting unit); H-slot only as a second purchase whose null reading is declared before buying.
+- R5 ACCEPT — H gate declared now: if H-slot's c45 sampled hold-out agent-label entropy ≥ 2.5 bits or `agent_distinct_labels_per_team_decision_mean` is at the independent-uniform level (≈ 3.99 of 6), the reading is "coordinator nonactivated" and no row-1/row-2 investment wording may be written; the distinct-labels-per-decision counter now exists (T-P).
+- R6 ACCEPT — H is worded as "the HMASD-d2 package (sequential labels, discriminator terms λ_D .05 / λ_d .02, λ_h .07, one-step segments at k = 1, no ego id in the 90-dim observation)", never "sequential sampling"; any H advantage is confounded by the discriminator terms; a conflict-free assignment for H needs distinct labels or a state tie-break (an information-rights alternative to row 1).
+- R7 ACCEPT — row 0 is worded at recipe level ("under λ_l .05, lr 1e-4, 360k host steps, shared r/6, fresh world per episode"); it does not "close the package line". The critic's simplest alternative for eight flat curves (the return gradient losing to λ_l .05 under shared r/6, 45 updates, fresh worlds) is RECORDED (ACG B03–B05) and untested by Q-B′; it is carried as a caveat, not bought.
+- R8 ACCEPT — disagreement with Pro's Answer 4 recorded as a disagreement on a changed premise (the substrate screening Q-B sat behind is closed by b02), not as "Pro's own text supports"; it is put to Pro in the round-boundary question below before any slot fit is declared. The Oracle's "budget ordering" quotation is corrected here.
+- Candidate 2 deferral ACCEPT. Cost: pair at two-concurrent ≈ 4.8 CPU-h (b01's 1.3× concurrency factor) — moot while SET-slot runs alone.
+
+**T-P accepted (implementer, Opus/high).** `macro_runner.py` +135: floors `identity-permutation-slots` (UAV i → menu slot i, held) and `held-random-permutation-slots` (one `default_rng([world, 2]).permutation(6)` per world, held; the existing random floors' `[world, 1]` stream is unchanged and tested), per-world `held_slots` recorded; `LabelReader` for H (zero cost, copies only): per team decision the number of distinct agent labels and their entropy (bits), histogram of distinct counts, and per lane-episode the distinct Z count and Z entropy (one Z per team decision makes the per-decision team measure trivial — the implementer's interpretation, accepted); written to H macro panels (`labels`) and H training rows; `runner.py` `FLOOR_CHOICES` +2. Already present before T-P: pooled label counts/entropies in H macro panels; training rows had none. Tests: DM ran `test_macro_contracts.py` with a fresh basetemp: **21 passed** (source pins green). Decision-bearing lines read: the two floor branches, the reader definitions and arithmetic.
+
+### Critic review (verbatim, ResearchCritic hand-back 2026-09-29)
+
+## ResearchCritic review: Oracle memo for the successor after b02 (`coupled_host_joint_skills_stage1`)
+
+**Disclosures.** This was not a blind reconstruction. The assignment text listed the memo's proposals (Q-B′, the six floors, the room condition, the activation line and the .38 cost ratio) before I looked at any evidence. I inherited no DM or Root conversation. I read NOTES 647–1068, the run JSON and the code first, and opened the memo (NOTES 1073–1126) only after that. Everything was read-only: I launched nothing and wrote nothing.
+
+### 1. Source facts: all verified
+- **Random-target floor** (`b02_floor_random_target_a02/summary.json`): pooled .3706, dev .376, hold-out .3652.
+- **Hold-out gate** (`b01_gate_holdout_a01/summary.json`): P_relay^on .77979; P_flat^on .63878; stationary .17125; random .17172.
+- **G_C,ho,cl .1410.** In the hold-out summary this key is named `G_C_dev_cl`. That is a naming oddity only; the value is correct.
+- **Headroom gate:** H_static 1/160 and H_corr 873/160000 (`b01_headroom_gate_dev_a01/summary.json`, `kill_rule`).
+- **SET-T-b** (`b02_fit_SETT_932201_a01`): hold-out deterministic .357105; dev-deterministic `far_target_fraction` .112 at c00 → .915 at c45; in training rows 1 and 45, .957 → .981; 3,867 CPU-s; 720 episodes.
+- **Menu timing:** .62 + .43 CPU-s per world on dev and 1.14 + .85 on hold-out, so the memo's .2–.4 CPU-h range holds.
+- **Code line cites:** adapter 396, 452, 524–526 and macro_runner 357 and 539 are all correct.
+- **Ancestors:** "Hungarian − identity +.007" is correct (`energy_relay_benchmark/NOTES.md` 5069), as is SCC 386.
+- **Missing floor and sticky-random.** At HEAD, `macro_runner.py` 51–53 has no permutation floor. Sticky-random is `rng.integers(0, n_slots, n_uavs)` drawn once and then held (699–733). That is independent sampling with replacement, so conflicts are possible; it is not a permutation. The memo is right on both points.
+- **Edit in flight:** the working copy has an uncommitted diff that adds `identity-permutation-slots` and `held-random-permutation-slots`.
+- **One correction to the memo's "evidence not found":** macro panels already record agent and team label counts plus entropy bits (`macro_runner.py` 185–262). Only a count of distinct labels per team decision is missing.
+
+### 2. Is Q-B′ the right successor? Strongest simpler alternative
+**My reading before opening the memo.**
+- In all eight fits, training C̄_bh is flat. Per-rollout 9-block means: b01 .14–.23; SET-V-b .145–.171; SET-T-b .307–.363, which sits at the random-target floor.
+- Policy entropy rose in every fit, including the two bounded-head fits: SET-V-b σ .37 → .66 and entropy .90 → 1.80; SET-T-b entropy .90 → 1.26.
+- **Simplest alternative:** the gradient from the return loses to λ_l .05. The causes would be the shared r/6 reward over six agents, 45 updates at lr 1e-4, and a fresh world every episode. This is interface-independent.
+- **Q-B′ varies none of these** (λ_l, lr, exposure or credit). So the row-0 consequence must be worded at the recipe level: "under λ_l .05, lr 1e-4, 360k, shared r/6". It must not "close the package line".
+- **This alternative does not undercut Q-B′ itself.** SET-T-b did move (dev .22 → .39), along the one easy direction: wandering. A menu makes "hold a good slot" an easy direction too. That is the real case for Q-B′.
+
+**Strongest consequential objection: the H arm inherits a coordinator that b01 shows inactive.** All three b01 H fits:
+- Training `agent_skill_entropy` went from 1.69–1.73 to 1.78; the maximum, ln 6, is 1.79.
+- The sampled hold-out panel labels are at 2.58 bits of a possible 2.585, i.e. uniform.
+- Under the deterministic policy, the labels collapse onto one label for 54%, 64% and 77% of agent-steps (`panel_45_holdout_*`).
+
+`make_macro_config` (`configuration.py` 363–420) keeps n_z = 6 and the `hmasd` algorithm config. Through that construction path it keeps b01's λ_h .07 and lr_coordinator 1e-4, and it gives the coordinator the same 800 decisions per rollout as b01. The memo's distinct prediction is that H's conflict rate falls faster by c15 through z_i | Z, z_<i. That device ended uniform (in effect independent) under this exact recipe. So:
+- a row-1 or row-2 null most likely reproduces "coordinator nonactivated";
+- H's deterministic panel carries a built-in conflict artefact, because the argmax of a near-uniform label distribution puts most agents on one label.
+
+**What would work better.** The cheapest refuting unit on existing assets is SET-slot alone, about 1.3 CPU-h, after the floors. H-slot should be bought only with the coordinator-activation reading declared beforehand as the gate for any row-1 or row-2 investment wording.
+
+### 3. Zero-fit first act and the room condition
+- **Six floors: well-posed.** Keep M ≡ P_relay^on on 64 worlds as a hard check.
+- **The floor predictions are plausible from the host's structure:** six independent draws give about 3.99 distinct slots; a relay without its server loses the far clusters; random-slot never arrives (300 m per macro step); identity is conflict-free. One caveat: role tags disagree with routing on 15% of slots (NOTES 1005).
+- **The room condition does not test what the fits need to show.** "M − sticky ≥ .15" will pass on the memo's own numbers (.45–.55 against .78). It separates learners from the floor, not H from SET.
+- **The room for the H-vs-SET contrast is M − held-perm.** The memo predicts .04–.08, and the S7 analogue is +.007. Row 3's C̄_bh path (H − SET ≥ .05) is therefore nearly unreachable unless SET fails to de-duplicate.
+- **SET can solve the task with a constant table.** The identity permutation is a fixed ego→slot map that SET's one-hot can represent. If it clears sticky + .0705, "activation" means "learned a conflict-free convention", which is not allocation.
+- Sticky-random's per-world SD should be reported against the .0705 margin; the random-target floor's was .144.
+
+### 4. Activation line, conflict co-primary and wording
+- **Readable on one pair only as a single-instance, learning-speed contrast** on training rollouts. The deterministic panel is the outcome, not the mechanism.
+- **Most likely over-reading:** row 1 ("flat suffices; coordinator deprioritised") read from an H arm whose coordinator never moved.
+- **"Learnability, not representation"** is correct for SET, which has the one-hot, the full state and the menu. It is not correct for H. The 90-dim observation has no ego id (`configuration.py` 168–179). So a conflict-free assignment for H needs either distinct labels or a state tie-break, which gives row 1 an information-rights alternative.
+- **Discriminator confound:** any H advantage is confounded by the λ_D and λ_d discriminator terms, which reward labels that map to distinct behaviour. In b01 these terms were 2–3 times the environment term.
+- **Required wording:** "the HMASD-d2 package (sequential labels, discriminator terms, λ_h .07, one-step segments)", never "sequential sampling".
+
+### 5. Cost
+- **Arithmetic holds:** 3.4 × .38 = 1.3 and 4.9 × .38 = 1.9.
+- The coordinator's 800 decisions per rollout were inside T-W's full-width H probe, so they are priced to that extent.
+- **Gaps:** the .38 ratio comes from SET-target (alone versus contended), and its transfer to H is untested; T-W's probe records were in deleted scratch, so NOTES 1005 is the only source; pair 1 runs two fits concurrently, not alone. b01 SET cost 4.3 CPU-h at two-concurrent against SET-V-b's 3.26 alone, about 1.3×, which puts the pair all-in at about 4.8 CPU-h.
+- The cap of 6 holds, and the pair is well under 10 CPU-h.
+
+### 6. Disagreements
+- **Pro's Answer 4 (`answer.txt` 125–136) does not support the memo's "budget ordering" reading as quoted.** Pro wrote "预算上的必要门槛", a *necessary* budget threshold. The memo's quotation drops "necessary". Pro also gave a substantive objection to the purchase reason that the memo omits: adoption value nil, a thin link to K/N, and a menu allocator is not path-planning competence. Pro's conditional buy was "an activated SET AND the K/N question still open because of allocation".
+- **One premise has legitimately changed:** the substrate screening that Q-B sat behind is now closed. But the DM must record this as a stated disagreement with Pro, on that changed premise. It must not be recorded as "Pro's own text supports".
+- **Candidate 2** is correctly labelled RECORDED/TRIED family (SCC 65/386; energy_relay 5069) and correctly deferred.
+
+### 7. Verdicts
+- **Zero-fit floors and the room check: ACCEPT WITH REVISIONS.** R1. Report identity and held-perm against the activation line. If identity or held-perm ≥ line, word activation as "a conflict-free convention was learned". R2. Add a contrast-room condition: if M − held-perm < .05, strike row 3's C̄_bh path and make the conflict trajectory the only contrast (single instance). R3. Report sticky-random's per-world SD against the .0705 margin.
+- **Pair 1 as an executing default: MATERIAL DISSENT as specified.** It clears once R1–R2 and R4–R8 are adopted: R4. Order: SET-slot first. H-slot only if its purchase states what a null would read as. R5. Pre-declared gate: if H's c45 sampled label entropy is ≥ 2.5 bits, or distinct labels per decision are near independent-uniform, the reading is "coordinator nonactivated". In that case, no row-1 or row-2 investment wording. Add the distinct-labels-per-decision counter. R6. H wording as in item 4. Name the missing ego id and the discriminator confound. R7. Row 0 at recipe level. R8. Record the Pro disagreement truthfully, including "necessary" and the purchase-reason objection.
+- **Candidate 2 deferral: ACCEPT.**
+
+**Unverified:** actual slot-floor values (not run); slot-fit cost alone; T-W's underlying probe records; λ inheritance for macro H (verified through the construction path only, no macro H `config.json` exists); whether H's actor handles the 126-dim observation with the menu (`macro_models.py` covers SET explicitly); the uncommitted permutation-floor diff (not reviewed as code).
+
+MATERIAL_DISSENT: yes. It concerns the pair-1 executing default (H-slot + SET-slot, cap 6 CPU-h) behind a room condition that cannot fail on the memo's own predictions and does not measure the contrast room. The direct evidence: the b01 H label entropies (training 1.78 of 1.79 nats; sampled panels 2.58 of 2.585 bits; deterministic collapse onto one label for 54/64/77% of agent-steps); the inherited recipe (`configuration.py` 363–420); no ego id in H's observation (`configuration.py` 168–179); the S7 Hungarian − identity figure of +.007 (`energy_relay_benchmark/NOTES.md` 5069). There is no dissent against Q-B′ as a question, against the zero-fit floors, or against the deferral of candidate 2.
