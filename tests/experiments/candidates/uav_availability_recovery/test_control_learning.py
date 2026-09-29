@@ -200,3 +200,11 @@ def test_missing_admission_precedes_output_creation(tmp_path, monkeypatch):
     with pytest.raises(RuntimeError, match="no test admission"):
         runner.main()
     assert not out.exists()
+
+
+def test_runner_matches_launcher_static_guard_contract():
+    from pathlib import Path
+    from experiments.candidates.uav_availability_recovery import runner
+    from scripts.hmasd_launch import _validate_guard_contract
+
+    _validate_guard_contract(Path(runner.__file__), "uav_availability_recovery")

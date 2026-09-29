@@ -480,7 +480,7 @@ def main():
         parser.error("B01 is the fixed three-fit seed sequence 2026092911..13")
     from scripts.hmasd_admission import require_admission
 
-    admission = require_admission(__file__, direction=DIRECTION)
+    admission = require_admission(__file__, direction="uav_availability_recovery")
     if args.launch_sha != admission["sha"]:
         raise ValueError("launch SHA does not match admission")
     run_study(Path(args.out), args.launch_sha)

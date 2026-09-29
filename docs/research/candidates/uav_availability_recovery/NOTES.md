@@ -295,3 +295,45 @@ seeds or action set changed; no result launch has occurred. This narrow premise
 is being resolved before launch. Engineering acceptance is not scientific
 acceptance of a changed host description. G0 environment/geometry/controllers,
 native reward/routed core and C++ radio bytes remain unchanged from `fed55fd0e`.
+
+The final launch-contract check found that the admission validator requires a
+literal direction string in the guarded call, not the equal-valued module
+constant. `runner.py` now passes `direction="uav_availability_recovery"` literally;
+the new regression invokes the actual launcher AST validator. This and the
+existing missing-admission check pass (2 tests, 1.92s). The same independent
+engineering Reviewer inspected this narrow delta and found no material issue;
+DM accepts it. Admission still precedes all output and scientific side effects.
+Normal remote `git fetch --no-tags origin main` made no progress and exited124
+at its35s timeout, before any launch or claim. Exact published-source objects
+will be transferred over SSH if needed, without changing canonical sparse
+selection, existing dirty outputs or accepted workers.
+
+### Scoped scientific review: native interference correction
+
+Root returned the same independent scientific Reviewer's complete focused answer
+below. This was a source-grounded implication review, not a repeated selection
+round or an empirical panel.
+
+> **Retain, With Corrected Host Scope**
+> The source confirms the contradiction. `envs/pettingzoo/relay/routed_core.py:2728` passes all eight positions into the radio calculation without an availability mask. The C++ interference loops (`envs/pettingzoo/native/uav_geometry_backend.cpp:299`) retain the unavailable UAV's contribution wherever the distance condition permits. Its desired-service SINR row is masked afterward; routing endpoints and motion are separately disabled.
+>
+> Our earlier "no radio" wording was too strong. Describe G0 as:
+> Temporary motion, service and routing unavailability, with the unavailable UAV's position retained in the native interference model. This is not physical removal or complete transmitter shutdown.
+>
+> This changes the physical interpretation, not the selected comparison's usefulness. Removing a service/relay endpoint still creates a vacancy and changes useful connectivity. Joint reserve placement can still trade vacancy repair against relay support and subsequent return. P's public snapshot model preserves the same interference law, so this discovery does not give L an information or physics advantage.
+>
+> However, retained interference does not simply cancel between arms: reserve movements change receivers, desired links and routing. It could alter which deployment is beneficial. Therefore, any gain supports the complete controller package under this native unavailability model, not a pure backhaul-connectivity mechanism or effectiveness under a real transmitter outage. The45dB leakage attenuation alone does not establish negligible influence.
+>
+> Keep the planned fits, arms and endpoints unchanged. Correct the notebook and eventual result wording; retain the proposed correctness fixture establishing service exclusion alongside persistent native interference. No shared-core alteration, additional arm or preliminary scientific study is warranted by this fact alone.
+>
+> I checked the access, air-link and base-link interference paths, G0 masks and P's public snapshot construction. I did not measure interference magnitude or run a model.
+>
+> **MATERIAL_DISSENT:no.** Retain the study with the explicit host correction; exclude full-radio-outage and physical-removal claims.
+
+Root adopts that disposition; DM accepts the changed physical interpretation and
+the unchanged comparison. There is no remaining scientific hold. The fixed
+geometry toggle fixture is retained; it measures service exclusion and active-row
+SINR invariance to the availability toggle, not the magnitude or cross-arm
+irrelevance of retained interference. Earlier literal radio-off wording is
+superseded by this entry. No pure-backhaul attribution or real-transmitter-outage
+claim will follow the planned native package comparison.
