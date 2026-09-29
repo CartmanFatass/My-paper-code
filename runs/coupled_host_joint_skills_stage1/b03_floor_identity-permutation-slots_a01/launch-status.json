@@ -1,0 +1,11 @@
+{
+  "claim_key": "6568c2b605c7ab32d203990b5aa142192977b73d3881422f1467e8410a2d98c3",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6568c2b605c7ab32d203990b5aa142192977b73d3881422f1467e8410a2d98c3.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b03_floor_identity-permutation-slots_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6568c2b605c7ab32d203990b5aa142192977b73d3881422f1467e8410a2d98c3.json",
+  "pid": 3721768,
+  "runner_pid": 3721769,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-29T18:41:37.725230Z"
+}
