@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-29T06:14:17.139256Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e0b9c4007994e71b45abe8bee05017c/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e0b9c4007994e71b45abe8bee05017c/experiments/candidates/uav_message_content/b03/run.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets",
+    "--launch-sha",
+    "ff15fe5df068589b15677ac3f0289fc92772548f",
+    "--seed",
+    "19461",
+    "--assets-root",
+    "/home/wu/hmasd-inputs/uav_message_content-b03"
+  ],
+  "claim_key": "3aa9bd753fb26e842d4262fc74e264326453f72cc07ecaa6b2d59c7e7239d57a",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3aa9bd753fb26e842d4262fc74e264326453f72cc07ecaa6b2d59c7e7239d57a.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e0b9c4007994e71b45abe8bee05017c/experiments/candidates/uav_message_content/b03/run.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets",
+    "--launch-sha",
+    "ff15fe5df068589b15677ac3f0289fc92772548f",
+    "--seed",
+    "19461",
+    "--assets-root",
+    "/home/wu/hmasd-inputs/uav_message_content-b03"
+  ],
+  "command_sha256": "5483c428bf33e860acc9ad7eeb757e37b729da9eeb50b5890f3835fe183b7dea",
+  "control_observation": {
+    "observed_at": "2026-09-29T06:14:17.027488Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "7bc0157f32caa8a1c29eb61e2ff483c6787b5f3e"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-29T06:14:17.041224Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e0b9c4007994e71b45abe8bee05017c",
+  "direction": "uav_message_content",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_message_content/b03/run.py",
+    "--launch-sha",
+    "ff15fe5df068589b15677ac3f0289fc92772548f",
+    "--seed",
+    "19461",
+    "--assets-root",
+    "/home/wu/hmasd-inputs/uav_message_content-b03"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3aa9bd753fb26e842d4262fc74e264326453f72cc07ecaa6b2d59c7e7239d57a.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 970707,
+      "session_id": 970707,
+      "start_ticks": 100929541
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 970707,
+    "process_group_id": 970707
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 970708,
+      "session_id": 970707,
+      "start_ticks": 100929543
+    },
+    "pid": 970708,
+    "process_group_id": 970707,
+    "supervisor_pid": 970707
+  },
+  "schema_version": 1,
+  "sha": "ff15fe5df068589b15677ac3f0289fc92772548f",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e0b9c4007994e71b45abe8bee05017c",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/stdout.log"
+}

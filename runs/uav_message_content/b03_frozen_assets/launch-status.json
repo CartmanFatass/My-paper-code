@@ -1,0 +1,67 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3aa9bd753fb26e842d4262fc74e264326453f72cc07ecaa6b2d59c7e7239d57a.json",
+  "direction": "uav_message_content",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790662499.2841206,
+      "path": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 970708,
+        "session_id": 970707,
+        "start_ticks": 100929543
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 970707,
+        "session_id": 970707,
+        "start_ticks": 100929541
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-29T06:17:03.850823Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/3aa9bd753fb26e842d4262fc74e264326453f72cc07ecaa6b2d59c7e7239d57a.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "ff15fe5df068589b15677ac3f0289fc92772548f",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/9e0b9c4007994e71b45abe8bee05017c"
+}

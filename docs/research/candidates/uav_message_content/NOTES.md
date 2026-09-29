@@ -1479,3 +1479,186 @@ Exact published source and fresh actual-node admission remain required before th
 single result invocation. The runner records scientific batch/per-asset wall and
 self CPU/RSS; launcher preparation/import/readback time is separately observable,
 not silently included in the49.2s blended-rate estimate or claimed as zero.
+
+<a id="b03-complete-reading"></a>
+## B03 complete frozen-asset panel: useful continuations, provisional B reuse (2026-09-29 UTC)
+
+### Accepted operation, complete evidence and costs
+
+Published scientific and reader source is
+`ff15fe5df068589b15677ac3f0289fc92772548f`. The new operation is bound by
+[`launch-manifest.json`](../../../../runs/uav_message_content/b03_frozen_assets/launch-manifest.json),
+not the old B02 handle. Supervisor `uav-content-b03-ff15fe5d` was accepted at
+06:14:17.139256UTC, and its actual exit witness records exit0 at06:14:59.284121UTC.
+Actual-node preflight observed14795661312 available physical/effective bytes,
+above4294967296; lead/pause/source checks passed against fresh published controls.
+The remote metadata-only row-refresh command encountered a lazy Git blob fetch
+without the configured network shell. DM stopped only that identified read-only
+Python/Git subprocess chain; no file rewrite occurred and no scientific process
+was signalled. The canonical active/lead cells already agreed with published
+controls, as the admission record verifies. No failed scientific invocation or
+replacement attempt was created. Existing remote Git auto-GC bad-tree warnings
+were not repaired as part of this direction.
+
+The existing owning-session observer was rearmed from stopped generation3, then
+registered the new B03 job in generation5. The same claim status returned terminal
+READY, exit0 and absent runner/supervisor, with no observation errors. App queue
+delivery again returned -32600 for the native child; the DM stayed active, used a
+60s deterministic wait and drained that same event. It was consumed into
+generation6 and observation stopped. This was a new job, never a B02 rearm/retry.
+
+The complete native contract is present:4 assets,128 H256 episodes,32768 team/native
+steps,163840 motion samples,8192 L content samples,32768 actual actor forwards,
+32768 broadcasts,32428 delivered and340 horizon-censored packets. There are
+0 fits,0 optimizer updates,0 critic forwards and0 diagnostic actor forwards.
+Every asset has8107 delivered/85 censored packets. Original checkpoint digests,
+all four per-asset before/after actor tensor hashes, all32 paired physical/channel/
+motion/content seed tuples, scene hashes and channel sequences match the binding.
+The reader independently reconstructed every one of128 retained NPZ trajectories,
+the preserved six fields and scalar, arrivals-before-action records, rewards,
+service/Q, behavioral readings, counters and the complete one-panel choice.
+It made zero environment, model or optimizer calls.
+
+Durable original evidence remains on `wsl_4070` at
+`/home/wu/projects/HMASD/runs/uav_message_content/b03_frozen_assets/`:
+138 stable native files totaling20353306 logical bytes, including128 compressed
+raw trajectories and four episode streams; `reading.json` adds188493 bytes.
+Compact summary/native controls/reading are also published locally under that tag.
+Original C and all nine B02 endpoints stay at their existing canonical paths.
+Hashes: summary `a7508521606e915b5cf659214e595317a206cd9310e9efe6a7fb3dd6657c2e97`;
+reader `6adb92d29c5bcc4186de77ebd0132498ab2ccaf9771df3c61fc48cb4ee3e6052`;
+reading `97f73789a166a8bcb9245ca1c9a2ae3b785bdfffcf6ab1d863e0153aae0baf5a`.
+
+Measured scientific batch wall41.154858s/self CPU41.293131s, process-lifetime
+peak RSS382032KiB (373.078125MiB); intra-op/inter-op threads1. C/B/O/L wall
+8.655316/10.092501/11.311136/11.076807s, self CPU
+8.793794/9.366754/11.691696/11.421227s. Per-asset RSS values are cumulative
+process-lifetime peaks, not independent simultaneous memory allocations.
+The supervisor task log starts at06:13:59UTC, about18s before admission;
+accepted-to-exit duration42.145s includes runner import/exit overhead outside
+the scientific interval. Pure full-trajectory readback cost67.47s wall,
+66.53s user+2.38s system CPU and41784KiB peak RSS, with no added native exposure.
+Preparation, repeated correctness checks and independent scientific reading are
+additional engineering/analysis costs, not fully measured and not zero.
+Cumulative B01+B02+B03:12 fits,1802240 native team steps,12288 updates,
+2690.902625s measured scientific wall and2688.388480s self CPU. The new evaluation
+was inexpensive; that does not erase all inherited selection/training cost.
+
+### Fixed-panel result and actual use decision
+
+All values below are32-world means. The fee remains.001/tick in every asset;
+B is continued C with a blank additional scalar, not a no-communication or
+nonlearning controller.
+
+| Fixed asset | Net J | Users/tick | Q | Boundary fraction | Height floor fraction | Mean height m |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Original C19431 | .187527956 | 11.336425781 | .099393318 | .118969727 | .192846680 | 87.606967 |
+| B19451 | .249746565 | 15.148315430 | .128900497 | .150830078 | .739160156 | 55.139982 |
+| O19452 | .241001564 | 14.458862305 | .131924973 | .267822266 | .547949219 | 61.525926 |
+| L19452 | .224716955 | 13.314697266 | .131037311 | .181835938 | .850805664 | 52.761903 |
+
+| Paired difference | Mean net J [nominal t95 df31] | Mean users/tick [nominal t95 df31] | J-positive / service-positive worlds |
+| --- | --- | --- | --- |
+| B-C | +.062218609 [.049510389,.074926829] | +3.811889648 [2.964911428,4.658867869] | 31 / 30 |
+| O-C | +.053473608 [.035303973,.071643242] | +3.122436523 [1.880297719,4.364575328] | 26 / 25 |
+| L-C | +.037188999 [.023279240,.051098757] | +1.978271484 [1.063079227,2.893463742] | 27 / 24 |
+| O-B | -.008745001 [-.027241688,.009751686] | -.689453125 [-1.946876271,.567970021] | 13 / 13 |
+| L-B | -.025029610 [-.040111999,-.009947221] | -1.833618164 [-2.860572073,-.806664255] | 6 / 6 |
+| L-O | -.016284609 [-.037244359,.004675140] | -1.144165039 [-2.555870345,.267540267] | 16 / 15 |
+
+Under the unchanged unrounded point-mean rule, **B/O/L all qualify against C;
+provisionally select B19451**. No additional significance or unanimity condition
+was imposed. B has the largest J and service means here, so no service sacrifice
+relative to another eligible candidate is needed. This is a complete-asset use
+choice in the original deployment distribution, not confirmation that B dominates
+O or is the best training recipe. O-B reverses the exposed B02 panel's small
+positive ranking; its new J/service intervals both include zero. Nominal intervals
+are uncorrected and not adjusted for this panel's winner selection.
+
+Adverse outcomes remain material. B-C loses J in world30 (-.015072208) and service
+in worlds20 (-.1484375) and30 (-1.6796875); its best J gain is world15 (+.127857129).
+O-C has6 J-adverse and7 service-adverse worlds; world29 gives -.037591378 J and
+-2.9609375 users/tick. L-C has5 J-adverse and8 service-adverse worlds, including
+world2 at-.036559315 J/-2.765625 service. L still jointly beats B in six worlds
+(1,12,13,14,26,30), and jointly improves C in24. Against O, L splits J16/16;
+its worst J difference is-.114697019 and best+.075866812. All world-level signed
+contrasts and Q/height/boundary outcomes remain in `reading.json`.
+
+Every continued asset's Q is above C in all32 worlds. L-B mean Q is slightly
+positive (+.002136814), yet native J/service are lower; Q alone is not the use
+criterion. Low-altitude occupancy is prominent for B and L, especially L's.850806
+floor fraction. This is a behavior descriptor in a host without energy, obstacle
+or physical-safety endpoints, not a verified safety result or causal explanation.
+
+### Explanation and provisional investment judgment
+
+Task opportunity is real for these paid complete assets: the selected B, O and L
+endpoints all retain joint mean gains over original C on new worlds. This
+strengthens the constructive reuse finding, including L's useful positive example;
+failure to win asset selection is not absence of a learned capability. Extra scalar
+content was not necessary for the best of these four selected assets, but B03 does
+not estimate the causal value of removing a scalar from O/L. B02's favorable L
+recipe sample means and large continuation variability remain unchanged.
+
+Representation and learning-method conclusions remain narrower. B03 neither
+explains the old replacement loss nor isolates preservation, scalar semantics,
+co-adaptation, representation opportunity or training-recipe superiority. Its32
+world/protocol samples concern these four frozen policies, not new C parents or
+additional continuation seeds. There is no optimizer nonactivation diagnosis:
+B02's actual delayed credit and updates remain genuine, while useful encoding
+increment beyond competent continued C/ordinary content is still unresolved.
+
+DM's provisional next choice is to use B19451 as the paid reference for an actual
+unchanged-host deployment need, keep O/L as durable useful alternatives, and stop
+automatic panel/fitting additions in this question. Another identical panel would
+mainly refine the relatively small B/O asset ranking, not the parent learning
+question; another same-parent fit set would still not establish independent C
+recurrence. A causal scalar ablation changes the question and is not required to
+make the current practical choice. Without a named decision that needs that
+precision or attribution, those costs have less marginal value than Root assigning
+a distinct substantive question. No second panel, extra fit or content intervention
+is selected. The final independent reading below owns any correction or dissent
+before this becomes the published standing.
+
+### Independent final reading and resolved next choice
+
+The same separate-context ResearchCritic completed an independent reconstruction
+from all128 original NPZs and four episode streams before seeing the DM's
+interpretation. All raw and input hashes matched; native endpoint discrepancies
+were at most2.8e-16, and independent behavioral reductions matched exactly.
+Paired exogenous tuples/channel sequences and frozen actor hashes also matched.
+It independently selected B19451 under the prescribed rule: B/O/L all eligible,
+B highest J/service. **MATERIAL_DISSENT: no.** No review process or snapshot
+consumer remains live.
+
+Its substantive recommendation is to retain B for provisional N5/H256 static-user
+sampled-action use, preserve O/L as useful conditional assets and end standalone
+ranking/automatic scalar-training expansion. It specifically warns that O-B's
+old-to-new sign reversal with fixed weights is deployment-panel variation
+(world/channel/action randomness), not a new training outcome. Ordinary
+continuation producing useful motion policies, with selection among training
+outcomes, remains a simpler explanation for the practical gain. Extra learned
+content is unnecessary for demonstrated B capability, without thereby refuting
+content opportunity or a learning recipe. Neither an uncertain B/O population
+order nor missing semantic identification mandates another experiment before
+this conditional practical choice.
+
+The Reviewer preserves all favorable and adverse evidence, including B-C's
+world30 J/service loss and world20 service-only loss; O-B world9
+-.109374987 J/-7.35546875 service; L-B world24 -.095084566/-7.09375;
+and L-O world11 -.114697019/-7.734375. O and L have slightly higher mean Q than
+B but their service losses dominate native J. Low altitude/boundary occupancy
+does not establish cause or physical safety. Its recommendation retains B02's
+favorable L sample means and adverse continuation instances unchanged.
+
+DM adopts that reading. Empirical support is fixed-asset joint improvement over
+C on a fresh panel; provisional adoption is B19451 for this declared use contract;
+further scientific investment is **reserve, no active producer and no selected
+new panel/fit**. A changed deployment condition or an explicitly important training
+recurrence/semantic question would create a different decision and require its own
+prospective comparison. There is no fabricated pending Root approval or automatic
+recheck. Root may carry this paid B reference into compatible subsequent work or
+assign a distinct substantive question. All required original C/nine continuation
+checkpoints and raw positive/adverse records remain durable; only unused code,
+the terminal launcher snapshot, duplicate staging and rebuildable scratch are
+eligible for measured cleanup. The useful pure readers/tests remain maintained.
