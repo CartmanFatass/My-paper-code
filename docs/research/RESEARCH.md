@@ -55,6 +55,15 @@ observation 与环境状态不同；仅凭当前 observation 未必能作闭合�
 重算计划与参数训练需分别解释。用户移动或故障可以是固定转移规律下的状态变化，不能直接等同于
 训练时队友更新策略造成的非平稳性。
 
+S1匿名静态用户的合法几何缓存也已完成普通控制比较：B01在32共同新N5/H256世界、64完整回合、
+0fit中，H相对同程序当前观测C的平均J +.004461、服务/步+.376953，描述区间均跨零，
+7升／10降／15完全同轨。全部32世界保留过已不可见用户，但只有543/10240个同输入决策改变实际动作；
+本面板从未填满20用户行、缓存最多19点且无关联错误，因而实际检验的是SINR阈值消失，非top20溢出。
+保留具体正例与损失，不推广H优于C；平均路径增加497.92m/UAV是运动代价，不是此宿主未建模的能源风险。
+这建立了合法表示与选择性使用，仍不建立GRU遗忘、充分状态或学习增量。下一比较选完整同历史学习策略
+对初始化及固定C/H，不要求普通历史先显著为正，也不把猜测的模型修补变成前置门槛。
+[完整结果、独立判读与成本](candidates/uav_local_history/NOTES.md#2026-09-29---b01-complete-reading)。
+
 S7的合法BS缓存不是永久地图：每次同步用当前至少一架UAV可见的BS替换旧缓存，而BS在回合内静止。
 因此，保留曾合法见过的BS位置可检验具体的遗忘损失；从未见过的BS仍不因此已知。用户槽位则匿名且随距离排序，
 移动用户的跨时关联、尚未观察的需求与未来随机目标需要分别判断，不能由“加入历史”一并消除。
@@ -1115,8 +1124,9 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `uav_availability_recovery` | Can learned joint reserve deployment and return preserve complete native service beyond competent ordinary reassignment when temporary member loss also changes backhaul geometry? | exploring | Codex DM (native child) | **Selected, implementation only; no new result.** G0 S7-S1, 8 UAVs/two reserves/H500, one temporary primary outage; L x3 vs same-map joint ordinary P and retained nearest-reserve S, 64 common worlds plus shared no-event reference. Three fits/960,000 native steps, at most270,336 planner snapshots; engineering14–28h conjectural, runtime unmeasured. Explicit centralized static-map addition to P/L; no hidden event ledger, entity-memory or general churn claim. Focused independent review retained the purchase with horizon, S-readiness, public-state and reward/event-accounting corrections. Preserve S4/N7 adverse evidence; no positive pilot prerequisite or automatic repair. [Full Oracle, review and Root decision](archive/2026-09-29/RESEARCH-availability-expansion-selection.md#root-decision), [routing](#session-routing). |
-| `uav_local_history` | Can lawful retained local spatial history improve complete decentralized UAV service, and can experience add value beyond competent ordinary control given the same history? | exploring | Codex DM (native child) | **B01 selected, no result yet:** same decentralized radio-aware controller with current users C versus bounded lawful XY history H, common N5/S1 32 worlds/H256; 0 fits, 64 episodes/16,384 native steps plus declared local search. Independent scientific review corrected absent-user censoring and blind-search fallback before implementation; full native J/service, component losses and all worlds govern reading. Current GRU forgetting and learned increment remain untested; a positive ordinary result is not a prerequisite for later learning. All historical cache/encoder adverse evidence and B19451 capability retained; distinct from B05 content/residual work. [Design, cost and complete review](candidates/uav_local_history/NOTES.md#2026-09-29---question-selection-and-b01-prospective-design), [routing](#session-routing). |
+| `tail_return_distributional_learning` | Does factual return-distribution fitting improve finite lower-tail UAV learning over a scalar critic explicitly conditioned on the current empirical threshold? | exploring | Codex DM (native child) | **New changed-comparator study selected; no result yet.** New DM, S_eta vs Q32 across3 paired masters;6fits/1,179,648native steps/768updates, sole-final own64-lowest-of256 endpoints. Retain B01 positive/B02 small adverse; empirical eta is postcollection and ideal conditional estimands differ, so no pure representation/eta-causality claim. Tail/mean/service tradeoffs and all instances govern use; no extra seeds or theorem/positive-pilot prerequisite. Historical20–27summed process-min plus4–8conjectural engineering hours; actual admission remains. Old owner stop explicitly reconciled by later TRDL reserve permission, old session/unsent Pro not restored. [Full Oracle, review and selection](archive/2026-09-29/RESEARCH-oracle-reserve-selection.md#root-decision), [routing](#session-routing). |
+| `uav_availability_recovery` | Can learned joint reserve deployment and return preserve complete native service beyond competent ordinary reassignment when temporary member loss also changes backhaul geometry? | exploring | Codex DM (native child) | **Selected, implementation only; no new result.** G0 S7-S1, 8 UAVs/two reserves/H500, one temporary native motion/service/routing unavailability, with geometric interference retained; L x3 vs same-map joint ordinary P and retained nearest-reserve S, 64 common worlds plus shared no-event reference. Three fits/960,000 native steps, at most270,336 planner snapshots; engineering14–28h conjectural, runtime unmeasured. Explicit centralized static-map addition to P/L; no hidden event ledger, entity-memory, physical-radio-outage or general churn claim. Focused independent review retained the purchase with horizon, S-readiness, public-state and reward/event-accounting corrections. Preserve S4/N7 adverse evidence; no positive pilot prerequisite or automatic repair. [Full Oracle, review and Root decision](archive/2026-09-29/RESEARCH-availability-expansion-selection.md#root-decision), [routing](#session-routing). |
+| `uav_local_history` | Can lawful retained local spatial history improve complete decentralized UAV service, and can experience add value beyond competent ordinary control given the same history? | exploring | Codex DM (native child) | **B01 complete and independently read; substantive same-history learning selected next.** Fixed H-C mean J +.004461/service +.376953, descriptive intervals cross zero; 7 gains/10 losses/15 identical trajectories, all32 worlds retain absent users,543/10240 same-input choices change. Threshold censoring active, no top20 saturation or cache association failure; path +497.92m/UAV, no H-superiority/GRU-forgetting/learning claim. 0fits/16384steps/30.34s wall; both ordinary C/H retained. Next envelope: three full27-command,4-step-policy fits with the same lawful history, initialized/finalx3 and C/H on32fresh worlds;458752 totalsteps, .5-2CPUh plus4-8engineeringh conjectural. Exact interface/seeds/update counts and source/admission remain DM work; no B02 accepted or automatic repair. Historical adverse evidence and B19451 capability preserved. [Full result, independent review and continuation](candidates/uav_local_history/NOTES.md#2026-09-29---b01-complete-reading), [routing](#session-routing). |
 | `uav_message_content` | Can message content and its learned decentralized response improve complete native J/service under the existing delayed RR channel, beyond competent ordinary content and matched learning controls? | reserve | Codex DM (native child) | **B05 complete and independently read: retain conditional continuation capability, no resolved forecast increment.** M_G-B40 mean J/service +.005999/+.458984; M_O-B40 +.006355/+.481445, positive observed means in all3 blocks but df2 intervals cross zero. M_O-M_G +.000356/+.022461 remains unresolved; fixed19602 positive case retained. Active bounded corrections/future sensitivity do not identify coordination or freezing causality; nearly constant retuning is a simpler account. All endpoints worsen mean worst-tick service, with new world10 zero ticks in block3. Keep B19451/all6 endpoints and prior positive/adverse evidence; no new default or automatic follow-up. 6fits/843776steps/.484397 CPUh; cumulative27 policy fits+3predictors/3907584steps. No producer/unread result/selected successor; next investment belongs to Root's loop, not an approval dependency. [Full reading, independent diagnosis and disposition](candidates/uav_message_content/NOTES.md#b05-complete-reading), [selection](archive/2026-09-29/RESEARCH-retained-control-selection.md#root-decision), [routing](#session-routing). |
 | `uav_joint_transition` | Under a common radio-aware destination-generation rule, can learned joint staging and intermediate paths improve complete native service beyond ordinary trajectory planning? | reserve | Codex DM (native child) | **B01 complete and independently read; stop this exact L/O package, broader joint-motion question unresolved.** L chose D at all 800 evaluation clocks and all 26 common L/R arrays match byte-for-byte in eight worlds, despite 7,086 non-D training choices. L-O +.014522 QoS / +22.041 J is retained R, not learned value. Active O-R is -.014522 QoS [-.038944,+.009899] / -22.041 J [-98.321,+54.238], with positive worlds 02/03 and world 06 risk benefit, but new 07/08 reserve tails. One fit / 96 H3000 worlds / 288k steps / 256 updates; 902,027 radio queries, 6,800,850 prediction ticks, 120.425 min runner wall / 4.162 recorded CPU-hours. R/P remain conditional references, no safety or general learning impossibility claim. Unique raw evidence retained; unused launch/training code, scratch and source snapshot retired, net 802,582,528 bytes reclaimed. No producer, unread result or selected successor; no automatic repair. [Complete results](candidates/uav_joint_transition/NOTES.md#2026-09-28---b01-complete-unchanged-learned-deployment-and-mixed-ordinary-paths), [independent reading](candidates/uav_joint_transition/NOTES.md#independent-scientific-reading-and-dm-disposition), [routing](#session-routing). |
 | `uav_persistent_service` | Under the same native S7 information, fleet, motion, return shield and charging physics, can joint replenishment and deployment scheduling improve complete finite-mission service continuity? | reserve | Codex DM (native child) | **B05 complete and independently read: reject S replacement and stop immediate S follow-on investment.** All16 exact-R H12000 pairs: S-R full/late QoS -.018925/-.021515 and J -314.403/-214.787, descriptive intervals cross zero. Late zero-service steps fall441 to0, preserving useful original06/reassignment08 cases; original04 gains8 persistent-reserve members, four worlds gain overload, and free positive-load deployment falls. The active additive forecast does not establish the predicted joint service/J/risk benefit. Retain conditional R and all old verdicts; broader scheduling remains unresolved, not refuted. New0fits/192ksteps/1.975245 CPUh; cumulative1fit/1104ksteps/9.270565 CPUh, support incompletely metered. No live producer, unread result, selected successor or external dependency; re-entry requires a newly selected substantive, costed deployment/energy prediction, not automatic repair or more worlds. Unique raw retained and unused S execution retired. [Complete evidence, independent review and disposition](candidates/uav_persistent_service/NOTES.md#b05-complete-reading), [prospective design](candidates/uav_persistent_service/NOTES.md#b05-service-shifts-prospective), [routing](#session-routing). |
@@ -1423,44 +1433,15 @@ Root在本会话持续执行这一委托；`innovator`是Pro的建设性选题�
 本固定批次结束，不自动追加；[新证据与处置](candidates/uav_message_content/NOTES.md#b05-complete-reading)
 进入Root的完整轮次总结和下一创新选题，其他已选独立工作保持自身范围。
 
-### Selected Round: Retained-Control Extension
+### Completed Round: Retained-Control Extension
 
-**问题。** 冻结已有B19451分散运动策略，只学习有界的消息条件化修正，能否形成更有用的完整
-控制包？普通有日期未来运动内容在同一扩展家族中是否有增量？这是条件性用途研究，不是新残差
-算法、冻结优于普通续训的因果比较或超越所有普通规划器；冻结参数不保证闭环表现。
-
-新DM `/root/dm_retained_control` 接续 `uav_message_content`，以B05为工作对象。B40冻结参照，
-M_G用几何和零尾部，M_O用真实组合命令生成的普通未来端点；共同40-byte抽象合同，非免费物理
-带宽。冻结基础actor／GRU／输入缩放／方差，独立零初始化修正，`c=.10`为pre-tanh均值单位，
-读取实际执行历史并使用组合分布似然。M_G／M_O各3个新条件续训区组，每fit 512个H256训练回合，
-最终32个新共同世界，加B40面板：6策略fit、0预测器fit、843776结果步。三个区组仍共用一个父策略。
-科学CPU约.418 h只是B04线性外推，4-8 agent-hours支持成本未验证；远端优先，至多一个单线程
-worker，仍须真实准入。内容此前21策略fit＋3预测器／3063808步及全部选择暴露继续计入。
-
-M_O同时超过M_G和B40才支持预测辅助扩展用途；只有M_G增益不把共同收益归于未来内容。
-只胜退化对照而不胜B40不支持采用。保留完整J／服务／Q、每实例／反例与尾部及修正曝光；
-继承标准差约1.11-1.16，.10仅为.086-.090个原标准差，失败只约束这个局部固定噪声家族。
-活跃却不利、实例反号或区间宽均结束固定批次，不自动扩大幅度／噪声／网络／训练／seed。
-零修正还原、信息或似然错误属于技术缺失，不是科学负例。原B04配方及服务S停止不变，保留B19451、
-条件性R与全部正反证据；[上轮完整结果边界](archive/2026-09-29/RESEARCH-continuity-forecast-result-boundary.md)。
-
-**未购买的替代。** 二阶联合缺席服务值有新理由，但额外无线求值及部署／充电预测不确定性较大，
-暂不重开服务DM。合法本地空间记忆是最强独立备选，其匹配普通局部控制器及完整成本仍待具体化；
-逐用户评价不建立actor遗忘、公平缺陷或免费身份／ACK。暂缓不是科学否定，也不以空闲并行度决定运行。
-
-只读来源核对进一步具体化记忆候选：此N5宿主当前提供最多20条SINR>=3dB、按SINR排序的匿名用户
-相对XY行及自身绝对XYZ；静态用户可能跌出阈值或被top20截断。合法缓存因此可以增加可检索的历史
-几何，但原actor已有私有GRU，不能据此断言它遗忘。观测经float32归一化，坐标关联容差、近点合并、
-容量和淘汰须明确；`infos`／central state／`local_indices()`的真实身份及连接状态不能进入缓存。
-未找到现成同宿主普通控制器，S7能源规划器不能直接充当此对照；新局部无线估值、动作候选及其完整
-成本仍待设计。来源为冻结`7bb6d2f8e`的[原生观测](../../envs/pettingzoo/uav_env.py)、
-[adapter](../../envs/pettingzoo/env_adapter.py)和[精确host构造](../../experiments/candidates/ucope/uav_motion_prefix_b01/environment.py)，
-Root核对三文件在本次准备时与冻结源无diff；只读源码，0模型调用／0原生步，不是新结果或启动门。
-
-新DM独立完成前瞻、必要工程检查、精确输入发表、真实节点准入、完整判读和保全清理；复用这次
-适用选择评估，不新增逐fit审批。Root在实质结果边界综合并继续下一次Pro innovator选题。
-Claude已接受的coupled-host研究继续，实际状态见其[NOTES](candidates/coupled_host_joint_skills_stage1/NOTES.md)，
-不强制同步结束或代判部分批次，不重复H／SET、D1′或恢复问题。Milan依赖、PPC/FSD暂停、G33冻结保持。
+B05的完整固定批次、独立判读及清理已结束，方向reserve，旧DM不计入活动研究。
+M_G与M_O相对B40的三组完整J／服务点均值均为正，但训练层区间跨零；普通未来端点相对几何
+信息的增量仍未解决。保留受限续训能力、六个端点及最差时刻服务损失，不把近似常数偏置
+这一替代解释写成已证实机制，不再自动加模块／幅度／seed或评估面板。
+[全部结果及独立诊断](candidates/uav_message_content/NOTES.md#b05-complete-reading)，
+[退休的完整计划](archive/2026-09-29/RESEARCH-oracle-reserve-selection.md#superseded-b05-plan)。
+下一步是下方已选独立研究，以及本轮Pro innovator对真正值得追加的能力发展／新问题的建议。
 
 ### Archived Questions: Preparation Priorities
 
@@ -1508,7 +1489,17 @@ G0上两个备用UAV在一名主成员暂时退出及回归时联合选择补位
 选择时B05消息研究仍在收口；其DM随后已完整发表并置reserve，不再计作新的活动研究：
 两种有界续训都保留相对B40的条件性均值收益，但普通未来端点相对几何信息的增量仍未解决，
 最差时刻服务反例保留。Root在实质结果边界综合，既不以新增模块为默认下一步，也不否定已有能力。
-本段发表时两个新问题在推进，下一项由Oracle备选的具体价值决定，不用已完成DM补足名额。
+随后Oracle提出的新TRDL比较已通过一次独立选题判读，交新DM `/root/dm_tail_learning`：
+显式输入当前阈值的标量critic对比Q32，3配对区组／6fit，不是对旧正例补seed或恢复旧暂停会话。
+保留原B01正、B02未复现，并明确后采样eta及初始化差异使它仍是有限学习包比较；不声称
+已证明分布表示必要、eta因果或胜过普通飞行规划器。由此三个Codex问题分别由history、
+availability和tail-learning DM负责；首批结束后的判读／后继选择与运行中训练须区分。
+[完整Oracle建议、独立重构、旧暂停消歧和Root选择](archive/2026-09-29/RESEARCH-oracle-reserve-selection.md#root-decision)。
+
+只保留一个额外具体条件性备选：服务无线发射开关／调度。它改变合法控制权，须明确测量、
+CSI误差／时延、inactive时感知及airtime／开关成本，再考虑匹配普通调度的完整比较；
+未选启动、未称第四DM。匹配算法本身、无可信不确定性合同的无线模型适应、任意伙伴多样性
+及旧配方重命名不进入promising清单。备选不足时留空，不把条件性前提写成已经解决。
 
 `/root/oracle_question_expansion`为原生`gpt-6-astra`、`max`、独立上下文，继续筛选跨角度备选。
 它是Root的科学推理方式，不拥有方向、记录、启动或审批，也不冒充独立Scientific Reviewer；
@@ -1520,6 +1511,118 @@ Claude已接受工作、能源原配方停止、FSD/PPC暂停、G33冻结和Mila
 <a id="pro-innovator-2026-09-29-next-round-after-continuity-and-forecasts"></a>
 <a id="portfolio-review-2026-09-29-retained-control-selection"></a>
 [完整原问题、Pro答复、独立评估与Root采纳／修改／延期理由](archive/2026-09-29/RESEARCH-retained-control-selection.md)。
+
+## Portfolio Review 2026-09-29 B05 Constructive Successors
+
+Conversation: reuse the current private Jev portfolio conversation if compatible; its URL
+stays in local transport state. This is the owner's event-driven round-end Pro-innovator
+request, not a new role or a routine approval gate. Current owner target is normally three
+to four substantive Codex DMs when worthwhile, with genuine reserves and no forced positives.
+
+**Decision asked.** After the complete B05 result, which constructive development, resource
+addition or genuinely independent question deserves the next marginal research purchase?
+Please develop the strongest positive explanation alongside its strongest simpler alternative.
+A justified decision to buy nothing beyond the already selected questions is acceptable.
+Do not repeat their completed selection reviews or relaunch B05 merely to fill capacity.
+
+**New evidence and changed judgment.** B05 at source
+`69785db45a1240046f7d1a066dbe53a3b710e7c0` froze B19451's actor/GRU/variance and learned
+bounded c=.10 pre-tanh corrections. Six conditional continuations, one parent, a matched40-byte
+abstract channel, 224 complete final trajectories and 843,776 total native steps were fully
+read. M_G-B40 mean J/service = +.005999/+.458984; M_O-B40 = +.006355/+.481445, positive means
+in all three continuation blocks but df2 intervals cross zero. M_O-M_G = +.000356/+.022461,
+unresolved despite actual valid future-cache exposure and policy response. One fixed19602
+O-G case is positive and retained; it does not settle the training-level comparison.
+
+All endpoints worsen mean worldwise minimum service; block3 creates new zero-service ticks
+in world10, even though pooled zero counts improve. Corrections execute, no hard-bound
+saturation is observed. The independent critic found nearly constant19602 M_G directional
+corrections, approximately[-.0830,+.0826,-.0790] with coordinateSD about.0056: ordinary
+retuning is a plausible simpler explanation, not a demonstrated replacement controller.
+Frozen parameters do not guarantee closed-loop competence or identify why B04 lost.
+
+The belief strengthened is that bounded development can preserve a useful inherited
+controller and add conditional native capability. Useful future-content mediation remains
+unestablished. B19451 and all six endpoints remain assets; no new default or automatic run
+is selected. B05 cost6fits/.484397CPUh plus reading/support; cumulative content cost27policy
+fits+3predictors/3,907,584steps, not reset for a new DM. The critic's optional prospectively
+selected asset/B40 fresh-panel comparison costs0fits/16,384steps but is not bought because
+no concrete reuse decision presently requires another ranking panel.
+
+**Current independent work and reserves.** Local-history investigates lawful anonymous
+spatial history versus current observations with the same ordinary decentralized controller;
+its first complete comparison is0fits/16,384steps, learning not presumed useless if ordinary
+gains are uncertain. G0 availability recovery selects learned joint reserve deployment/
+return versus qualified ordinary control under an explicit matched centralized map:
+3fits/960,000steps and substantial forecast construction. Its native unavailable member
+retains geometric interference; do not read it as a physically removed or radio-silent UAV.
+New TRDL S_eta/Q32 comparison selects6fits/1,179,648steps at historically20–27summed
+process-minutes plus4–8conjectural engineering hours, with empirical-threshold conditioning
+and package-attribution limits. These questions and their own reviews continue independently.
+
+Oracle's sole further concrete reserve is service-radio activation: all-on versus greedy
+removal versus exhaustive masks, prospective0fits/49,152steps/770,048mask scores, but no
+defensible CSI/airtime/latency/inactive-transmitter-sensing contract yet. Perfect free
+current-CSI enumeration would have a built-in nondegradation result, not automatically a
+useful learning opportunity. It is conditional, not an admitted experiment. Association-only
+matching lacks alternate eligible links under the retained host. FSD/PPC pauses and G33
+freeze remain; Claude owns coupled-host/D1-prime and restoration/Milan, not Root.
+
+**Context and source precedence.** Unless separately pinned above, the following paths
+resolve at the full source_sha in the actual transport message. Read only the relevant
+sections, not a recursive archive census:
+- `docs/project/OPERATING_CONSTITUTION.md` sections1–5,7–8: authority, exploration,
+  costs, independent review and advisory Pro.
+- `.agents/skills/hmasd-scientific-tools/SKILL.md`: Choose the question; Design the
+  comparison and decision exposure; Update the working explanation; Statistics; Cost and
+  exposure. Use their constructive-development and matched-resource principles, no theorem,
+  positive-pilot, universal effect-size or idea-count gate.
+- `.agents/skills/hmasd-portfolio-task/SKILL.md` Steps/Boundaries: complete round synthesis,
+  alternative investments and stopping, not leaderboard or more control machinery.
+- `docs/research/candidates/uav_message_content/NOTES.md#b05-complete-reading`,
+  including every adverse world, exposure, cost and complete independent diagnosis;
+  `runs/uav_message_content/b05_retained_control/summary.json` and `reading.json`.
+  These compact artifacts were independently checked against the full raw evidence;
+  inaccessible remote raw must be disclosed, not claimed read.
+- Relevant message/background passage in this RESEARCH and
+  `docs/research/archive/2026-09-29/RESEARCH-oracle-reserve-selection.md`:
+  full new Oracle recommendation, source-backed independent review and actual selections.
+  The older Pro advice in `RESEARCH-retained-control-selection.md` is historical context,
+  not current evidence of how B05 performed.
+
+**Questions for the innovator.**
+1. What is the strongest constructive use of the new capability and what explanation would
+   make its development fail? Separate empirical support, deployable adoption and next
+   investment. Do not defensively erase positives or promise a repair.
+2. Is there a complete next comparison that would change an actual use or scientific choice,
+   rather than only explain a completed score? Derive modifiable link -> predicted
+   intermediate quantity -> full native consequence, with a serious simpler comparator.
+   Compare its marginal cost with the already selected independent questions and stopping.
+3. Consider additional information, prior knowledge, actuation rights or physical resources
+   only with a concrete use case, source, error/latency and cost. Give the competent ordinary
+   comparator the same addition; separate resource gain from any added learning gain.
+   State decision-critical missing premises instead of inventing a convenient host.
+4. Recommend only genuinely worthwhile reserves, possibly none. For each selected
+   recommendation state complete minimal exposure, dominant engineering/planning/readback
+   costs, distinct outcome implications and stopping condition. State overlap explicitly.
+   Preserve consequential dissent and source gaps; no fixed number of proposals is owed.
+
+### Independent Basis
+
+Reuse the complete B05 separate-context scientific diagnosis already published in NOTES,
+and the focused independent selection reviews for local-history/G0/TRDL. This Pro request
+adds constructive synthesis and independent idea generation from new evidence; it is not
+another test of whether those accepted batches may run. Any genuinely new material
+selection still follows the existing scientific-review responsibility without stacked
+reviews of unchanged questions.
+
+### Pro Answer
+
+### Decision
+
+Pending complete advice and verified delivery. Existing accepted work and independently
+selected DM studies continue; no new operation follows from asking this question.
+
 
 ## Prior reviews and runtime context
 
@@ -1604,9 +1707,10 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
+| DM: threshold-conditioned scalar and distributional tail learning | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_tail_learning` | `/home/fires/hmasd-wsl` / `main` | New registered `hmasd-direction-manager` for `tail_return_distributional_learning`. New S_eta/Q32 successor, six fits, complete independent review adopted; owns matching paths/current NOTES, preserves historical contracts and positive/adverse records. No old session or unstarted old Pro restored; no routine Root launch approval. [Full selection](archive/2026-09-29/RESEARCH-oracle-reserve-selection.md#root-decision). |
 | DM: joint reserve deployment and return | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_availability_recovery` | `/home/fires/hmasd-wsl` / `main` | New registered `hmasd-direction-manager`, owns `uav_availability_recovery` and matching paths. Oracle-designed G0 complete L/P/S study selected after focused independent review; no archived DM restored. Adopt horizon, S-readiness, public-snapshot and native reward/event corrections; exact source, engineering checks, actual admission and full reading remain DM responsibility. No routine Root launch approval. [Selection](archive/2026-09-29/RESEARCH-availability-expansion-selection.md#root-decision). |
 | Prior DM: service-aware replenishment and deployment (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_service_continuity` | `/home/fires/hmasd-wsl` / `main` | 历史已完成`uav_persistent_service` B05，结果／独立判读及清理发表于`39f75795d`。保留有限R和S的具体中断改善，固定替换规则失败，结束原样S投入；无活动worker／observer、未读结果或已选后继。较宽服务问题仍开放。[完整结果](candidates/uav_persistent_service/NOTES.md#b05-complete-reading)。 |
-| DM: lawful local spatial history | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_local_history` | `/home/fires/hmasd-wsl` / `main` | New registered `hmasd-direction-manager`, owns `uav_local_history` and matching paths; selected after the owner-requested archive review and expansion. Complete native history/control question, not a resumed archived DM or a duplicate B05. Prospective design, competent ordinary comparison and dominant cost precede execution; own publication and long same-handle waits through the result. [Assignment](#parallel-expansion-20260929). |
+| DM: lawful local spatial history | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_local_history` | `/home/fires/hmasd-wsl` / `main` | B01 source932783744 completed on local_linux after a prospective pre-acceptance remote-network fallback; all64 trajectories independently verified and read. Worker/observer stopped, unique evidence retained, disposable snapshot/scratch removed. Selected continuation is the substantive same-history full-policy comparison; no new accepted operation. Returns first read-result boundary to Root's allocation loop; DM keeps exact-design, publication and execution ownership. [Result and decision](candidates/uav_local_history/NOTES.md#2026-09-29---b01-complete-reading), [assignment](#parallel-expansion-20260929). |
 | DM: retained-control message extension | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_retained_control` | `/home/fires/hmasd-wsl` / `main` | B05源69785db45完整执行，224轨迹/6续训全读并独立科学诊断，MATERIAL_DISSENT:no。条件续训正例与尾部反例均保留，预测内容增量未解，不选新默认或追加运行；方向reserve。科学worker/观察已停，原始证据保全及精确清理见[完整记录](candidates/uav_message_content/NOTES.md#b05-complete-reading)。DM自有发表完成，向Root返回本轮实质边界及下一投资建议，不复活旧B04。 |
 | Independent selection review: retained-control extension (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/retained_control_selection` | `/home/fires/hmasd-wsl` / read-only | 注册`hmasd-research-critic`、`fork_turns=none`，重构原始紧凑输出／源语义并复用既有raw审查；支持一次有界A比较，保留固定噪声／修正类、单父策略和因果限制。MATERIAL_DISSENT:no；完整实质意见与Root处置见[归档](archive/2026-09-29/RESEARCH-retained-control-selection.md#independent-scientific-assessment)。 |
 | Prior DM: delay-valid future-motion forecasts (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_delay_intent` | `/home/fires/hmasd-wsl` / `main` | 历史已完成DM，由上方`dm_retained_control`接续科学问题及写责任。B04源`7bb6d2f8e`完整运行、全320轨迹核验并独立判读；有限预测能力和原生正例保留，F-O平均J／服务为负，结束原样配方。旧观察已停、无活动操作或未读结果，不重启／拼接。[完整结果](candidates/uav_message_content/NOTES.md#b04-complete-reading)。 |

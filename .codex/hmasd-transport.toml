@@ -20,7 +20,7 @@ mode = "serial_reuse"
 # Conversation URLs of the Agentify account do not exist on this account; a question sent here
 # starts from "new" or from a URL this account returned. Credentials stay in Jev's own .env.
 [jev]
-root = "~/test/Jev/jev-ultrafast"
+root = "~/.venvs/jev-ultrafast"
 chrome = "~/.omp/puppeteer/chrome/linux-150.0.7871.24/chrome-linux64/chrome"
 profile = "~/.config/google-chrome-for-testing"
 cdp_url = "http://127.0.0.1:9222"
