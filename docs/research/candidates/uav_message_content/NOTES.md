@@ -1447,3 +1447,35 @@ warm-start helper, which would zero learned receiver columns and reject endpoint
 metadata. Only matching architecture construction plus strict full actor loading
 is accepted. This resolves the bound-input facts needed by the L0; release it
 to the existing registered Implementer for the narrow evaluator and tests.
+
+### B03 implementation acceptance and staging (2026-09-29 UTC)
+
+DM accepted the Implementer's narrow `b03/` evaluator after reading all six source
+files and synthetic tests. It reuses the unchanged sampled CADC actor/channel and
+native host; the only retained B02 content behavior is the selected scalar and
+private five-observation history. Strict verified-byte loading preserves every
+stored actor tensor, including learned scalar-input columns. A critic object is
+constructed only to validate checkpoint key/shape compatibility and is never
+forwarded; this small preparation cost is not native exposure. No optimizer,
+diagnostic intervention, training storage or learner is restored.
+
+The independent engineering Reviewer found two reader issues: unchecked reported
+exposure counters and a direct-script import path failure. DM repaired both before
+execution. `read_b03.py` now reconciles per-asset and aggregate counts against the
+complete128 H256 rows, including exactly32768 actual actor forwards,8192 L content
+samples and zero critic/diagnostic forwards/fits/updates. Eight corrupted-count
+fixtures reject invalid readings. Direct CLI `--help` works without PYTHONPATH.
+The Reviewer otherwise verified exact checkpoint loading, unchanged sampled RNG
+law/delivery order, frozen state and stop-on-partial behavior. Final DM suite:
+30 synthetic tests passed in14.84s; no native panel or real-checkpoint forward was
+used in correctness tests. The earlier paired-interval fixture used a mistyped
+hand-entered constant; its reference now uses the analytic variance88 of0..31.
+The independently checked df31 t95 critical value remains2.0395134463964077.
+
+The four declared canonical inputs were copied once to the external staging root
+without replacement and all four staged SHA256 values equal the prospective table.
+These are temporary byte-identical input copies, not replacement durable assets.
+Exact published source and fresh actual-node admission remain required before the
+single result invocation. The runner records scientific batch/per-asset wall and
+self CPU/RSS; launcher preparation/import/readback time is separately observable,
+not silently included in the49.2s blended-rate estimate or claimed as zero.
