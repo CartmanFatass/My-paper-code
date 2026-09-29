@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "arm": "H",
+  "seed": 931201,
+  "probe_rollouts": 3,
+  "team_steps": 24000,
+  "seconds_per_rollout": {
+    "collection": 80.5814618376656,
+    "update": 346.73448124433827,
+    "wall": 427.5339077606671,
+    "cpu": 1397.7351263333337
+  },
+  "per_rollout": [
+    {
+      "collection_seconds": 64.94803188400692,
+      "update_seconds": 382.75788204900164,
+      "policy_seconds": 41.143811726913555,
+      "env_seconds": 17.372297220834298,
+      "store_seconds": 5.870894980005687,
+      "cpu_seconds": 1453.2928670000001,
+      "wall_seconds": 448.2978421440057
+    },
+    {
+      "collection_seconds": 97.60521436898853,
+      "update_seconds": 300.4281452550058,
+      "policy_seconds": 63.03109340483206,
+      "env_seconds": 19.13897972891573,
+      "store_seconds": 14.817362761052209,
+      "cpu_seconds": 1292.48061,
+      "wall_seconds": 398.0646141999896
+    },
+    {
+      "collection_seconds": 79.19113926000136,
+      "update_seconds": 357.0174164290074,
+      "policy_seconds": 53.43769969623827,
+      "env_seconds": 18.357847979161306,
+      "store_seconds": 6.798380747844931,
+      "cpu_seconds": 1447.4319020000003,
+      "wall_seconds": 436.23926693800604
+    }
+  ],
+  "ms_per_team_step": {
+    "env": 2.2862135387046387,
+    "policy": 6.567191867832662,
+    "store": 1.1452766037042845,
+    "update": 43.341810155542284
+  },
+  "panel_run": {
+    "worlds": [
+      9000,
+      9001,
+      9002,
+      9003,
+      9004,
+      9005,
+      9006,
+      9007,
+      9008,
+      9009,
+      9010,
+      9011,
+      9012,
+      9013,
+      9014,
+      9015,
+      9016,
+      9017,
+      9018,
+      9019,
+      9020,
+      9021,
+      9022,
+      9023,
+      9024,
+      9025,
+      9026,
+      9027,
+      9028,
+      9029,
+      9030,
+      9031
+    ],
+    "deterministic": true,
+    "wall_seconds": 119.31792965900968,
+    "cpu_seconds": 338.2256729999999,
+    "scores": "not recorded (timing only)"
+  },
+  "wall_cpu_ratio_training": 3.269296542242408,
+  "projection": {
+    "rollouts": 45,
+    "training_wall_seconds": 19239.02584923002,
+    "training_cpu_seconds": 62898.080685000015,
+    "panel_world_episodes": 192,
+    "panel_wall_seconds": 715.9075779540581,
+    "panel_cpu_seconds": 2029.3540379999995,
+    "fit_wall_seconds": 19954.933427184078,
+    "fit_cpu_seconds": 64927.43472300001
+  },
+  "memory": {
+    "peak_rss_kib_process": 2270072,
+    "evaluation_overlap": [
+      {
+        "before_target_build": {
+          "VmRSS_kib": 2024760,
+          "VmHWM_kib": 2270072
+        },
+        "after_target_build": {
+          "VmRSS_kib": 2024776,
+          "VmHWM_kib": 2270072
+        }
+      }
+    ],
+    "now": {
+      "VmRSS_kib": 2025284,
+      "VmHWM_kib": 2270072
+    }
+  },
+  "note": "projection = declared rollouts x mean probe rollout + declared panel episodes x probe per-world panel time; checkpoints and the B12 reader are not included"
+}

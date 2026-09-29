@@ -1,0 +1,3308 @@
+{
+  "tool": "coupled_host_joint_skills_stage1.run_gate",
+  "direction": "coupled_host_joint_skills_stage1",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_joint_skills_stage1",
+    "sha": "f589523191c670e215e3d719fc4f2cd01492c301",
+    "command_sha256": "bb15f9144574af2a56ca2b1a03ab715a6b3c3282aa14663054a98c22453cc218",
+    "parent_pid": 2486786,
+    "child_pid": 2486787,
+    "accepted_at_epoch": 1790668978.1235108
+  },
+  "launch_sha": "f589523191c670e215e3d719fc4f2cd01492c301",
+  "git_head": "f589523191c670e215e3d719fc4f2cd01492c301",
+  "training_fits_performed": 0,
+  "worlds": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026,
+    2027,
+    2028,
+    2029,
+    2030,
+    2031
+  ],
+  "area_size": 5000,
+  "budget": 3000,
+  "host_contract_kwargs": {
+    "n_uavs": 6,
+    "n_users": 50,
+    "height_range": [
+      50,
+      150
+    ],
+    "max_speed": 30,
+    "time_step": 1.0,
+    "max_steps": 500,
+    "user_distribution": "cluster",
+    "channel_model": "free_space",
+    "min_sinr": 3,
+    "max_connections": 10,
+    "max_hops": 3,
+    "n_ground_bs": 1,
+    "max_observed_uavs": 6,
+    "max_observed_users": 20,
+    "use_fdma": true,
+    "bandwidth": 20000000.0,
+    "ground_bs_tx_power": 23,
+    "use_shadowing": false
+  },
+  "contract_denominator_bps": 1196067151.0603192,
+  "rng_derivations": {
+    "planner": "numpy.random.default_rng(world), fresh instance for each search",
+    "random_floor": "numpy.random.default_rng([world, 1])"
+  },
+  "closed_loop_labels": {
+    "closed_loop_relay": {
+      "name": "P_relay^on",
+      "description": "P_relay targets, host contract env (A2A enabled)"
+    },
+    "closed_loop_flat_a2a_on": {
+      "name": "P_flat^on",
+      "description": "P_flat (A2A-off-planned) targets executed in the host contract env (A2A enabled; relays may form incidentally) -- the competence reference"
+    },
+    "closed_loop_flat_a2a_off_diagnostic": {
+      "name": "P_flat^off",
+      "description": "P_flat targets planned and executed with A2A disabled (diagnostic only; not the environment the learners act in)"
+    },
+    "stationary_floor": {
+      "name": "stationary floor",
+      "description": "zero actions from the initial positions, host contract env"
+    },
+    "random_floor": {
+      "name": "random floor",
+      "description": "uniform [-1, 1]^3 actions each step, host contract env"
+    }
+  },
+  "link_ranges": {
+    "r_link_uav_m": 1193.6620731892153,
+    "r_link_bs_m": 1193.6620731892153,
+    "r_direct_horizontal_m": 1191.6077983004204,
+    "relay_spacing_m": 1100.0
+  },
+  "planner": "T2b/T2c: plain k-means + range-aware served-subset candidates (relay: chains of <= max_hops relays; flat: UAVs parked at min(d, R_direct - 1 m)); relay search = relay + flat families + the flat search's result as incumbent; top-3 multi-start coordinate descent (xy 100 -> 50 -> 25 m, z +-50 m) with plateau tie-break; 3,000 evaluations per arm per world in total; best found, not a global optimum",
+  "closed_loop_assignment": "min_makespan permutation of targets to UAVs",
+  "gate_threshold_declared": 0.05,
+  "G_C_cl_threshold_declared": 0.05,
+  "panel": "holdout",
+  "G": {
+    "n": 32,
+    "mean": 0.12060006337055437,
+    "sd": 0.068137368133289,
+    "min": 0.025982598225838482,
+    "max": 0.323019444545533
+  },
+  "G_C": {
+    "n": 32,
+    "mean": 0.17750000000000002,
+    "sd": 0.13447628403455358,
+    "min": -0.07999999999999996,
+    "max": 0.52
+  },
+  "G_C_dev_cl": {
+    "n": 32,
+    "mean": 0.1410112500000001,
+    "sd": 0.11336830949779174,
+    "min": -0.08732000000000006,
+    "max": 0.4315200000000001
+  },
+  "G_C_dev_cl_definition": "mean over worlds of [500-step mean C_bh of closed_loop_relay (P_relay^on) - 500-step mean C_bh of closed_loop_flat_a2a_on (P_flat^on)]; named for the dev panel, computed identically on whatever worlds were run (see 'panel')",
+  "static": {
+    "P_relay": {
+      "contract_reward": {
+        "n": 32,
+        "mean": 0.6031854932889837,
+        "sd": 0.04186663210928647,
+        "min": 0.49161934940700114,
+        "max": 0.6806078958998416
+      },
+      "coverage_backhauled": {
+        "n": 32,
+        "mean": 0.8456250000000001,
+        "sd": 0.11373249599459817,
+        "min": 0.6,
+        "max": 1.0
+      },
+      "evaluations": {
+        "n": 32,
+        "mean": 1127.46875,
+        "sd": 116.19810235944253,
+        "min": 924.0,
+        "max": 1334.0
+      },
+      "converged_worlds": 32,
+      "candidates_evaluated": [
+        186,
+        187,
+        143,
+        170,
+        163,
+        191,
+        180,
+        176,
+        161,
+        164,
+        167,
+        185,
+        144,
+        185,
+        167,
+        182,
+        181,
+        177,
+        162,
+        173,
+        181,
+        204,
+        174,
+        179,
+        164,
+        175,
+        158,
+        158,
+        188,
+        175,
+        174,
+        159
+      ],
+      "candidate_counts": [
+        {
+          "world": 2000,
+          "total": 185,
+          "plain": 3,
+          "subset": 182,
+          "subset_relay": 76,
+          "subset_flat": 106,
+          "duplicates_removed": 8,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 28
+        },
+        {
+          "world": 2001,
+          "total": 186,
+          "plain": 3,
+          "subset": 183,
+          "subset_relay": 78,
+          "subset_flat": 105,
+          "duplicates_removed": 5,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 30
+        },
+        {
+          "world": 2002,
+          "total": 142,
+          "plain": 3,
+          "subset": 139,
+          "subset_relay": 42,
+          "subset_flat": 97,
+          "duplicates_removed": 30,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 49
+        },
+        {
+          "world": 2003,
+          "total": 169,
+          "plain": 3,
+          "subset": 166,
+          "subset_relay": 58,
+          "subset_flat": 108,
+          "duplicates_removed": 3,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 49
+        },
+        {
+          "world": 2004,
+          "total": 162,
+          "plain": 3,
+          "subset": 159,
+          "subset_relay": 51,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 58
+        },
+        {
+          "world": 2005,
+          "total": 190,
+          "plain": 3,
+          "subset": 187,
+          "subset_relay": 79,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 30
+        },
+        {
+          "world": 2006,
+          "total": 179,
+          "plain": 3,
+          "subset": 176,
+          "subset_relay": 69,
+          "subset_flat": 107,
+          "duplicates_removed": 5,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 37
+        },
+        {
+          "world": 2007,
+          "total": 175,
+          "plain": 3,
+          "subset": 172,
+          "subset_relay": 66,
+          "subset_flat": 106,
+          "duplicates_removed": 5,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 41
+        },
+        {
+          "world": 2008,
+          "total": 160,
+          "plain": 3,
+          "subset": 157,
+          "subset_relay": 49,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 60
+        },
+        {
+          "world": 2009,
+          "total": 163,
+          "plain": 3,
+          "subset": 160,
+          "subset_relay": 52,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 57
+        },
+        {
+          "world": 2010,
+          "total": 166,
+          "plain": 3,
+          "subset": 163,
+          "subset_relay": 59,
+          "subset_flat": 104,
+          "duplicates_removed": 9,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 46
+        },
+        {
+          "world": 2011,
+          "total": 184,
+          "plain": 3,
+          "subset": 181,
+          "subset_relay": 74,
+          "subset_flat": 107,
+          "duplicates_removed": 5,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 32
+        },
+        {
+          "world": 2012,
+          "total": 143,
+          "plain": 3,
+          "subset": 140,
+          "subset_relay": 41,
+          "subset_flat": 99,
+          "duplicates_removed": 18,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 60
+        },
+        {
+          "world": 2013,
+          "total": 184,
+          "plain": 3,
+          "subset": 181,
+          "subset_relay": 73,
+          "subset_flat": 108,
+          "duplicates_removed": 2,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 35
+        },
+        {
+          "world": 2014,
+          "total": 166,
+          "plain": 3,
+          "subset": 163,
+          "subset_relay": 55,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 54
+        },
+        {
+          "world": 2015,
+          "total": 181,
+          "plain": 3,
+          "subset": 178,
+          "subset_relay": 70,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 39
+        },
+        {
+          "world": 2016,
+          "total": 180,
+          "plain": 3,
+          "subset": 177,
+          "subset_relay": 71,
+          "subset_flat": 106,
+          "duplicates_removed": 5,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 36
+        },
+        {
+          "world": 2017,
+          "total": 176,
+          "plain": 3,
+          "subset": 173,
+          "subset_relay": 65,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 44
+        },
+        {
+          "world": 2018,
+          "total": 161,
+          "plain": 3,
+          "subset": 158,
+          "subset_relay": 51,
+          "subset_flat": 107,
+          "duplicates_removed": 3,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 57
+        },
+        {
+          "world": 2019,
+          "total": 172,
+          "plain": 3,
+          "subset": 169,
+          "subset_relay": 61,
+          "subset_flat": 108,
+          "duplicates_removed": 4,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 45
+        },
+        {
+          "world": 2020,
+          "total": 180,
+          "plain": 3,
+          "subset": 177,
+          "subset_relay": 70,
+          "subset_flat": 107,
+          "duplicates_removed": 3,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 38
+        },
+        {
+          "world": 2021,
+          "total": 203,
+          "plain": 3,
+          "subset": 200,
+          "subset_relay": 95,
+          "subset_flat": 105,
+          "duplicates_removed": 5,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 13
+        },
+        {
+          "world": 2022,
+          "total": 173,
+          "plain": 3,
+          "subset": 170,
+          "subset_relay": 62,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 47
+        },
+        {
+          "world": 2023,
+          "total": 178,
+          "plain": 3,
+          "subset": 175,
+          "subset_relay": 69,
+          "subset_flat": 106,
+          "duplicates_removed": 6,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 37
+        },
+        {
+          "world": 2024,
+          "total": 163,
+          "plain": 3,
+          "subset": 160,
+          "subset_relay": 52,
+          "subset_flat": 108,
+          "duplicates_removed": 2,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 56
+        },
+        {
+          "world": 2025,
+          "total": 174,
+          "plain": 3,
+          "subset": 171,
+          "subset_relay": 63,
+          "subset_flat": 108,
+          "duplicates_removed": 3,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 44
+        },
+        {
+          "world": 2026,
+          "total": 157,
+          "plain": 3,
+          "subset": 154,
+          "subset_relay": 46,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 63
+        },
+        {
+          "world": 2027,
+          "total": 157,
+          "plain": 3,
+          "subset": 154,
+          "subset_relay": 49,
+          "subset_flat": 105,
+          "duplicates_removed": 7,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 57
+        },
+        {
+          "world": 2028,
+          "total": 187,
+          "plain": 3,
+          "subset": 184,
+          "subset_relay": 85,
+          "subset_flat": 99,
+          "duplicates_removed": 11,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 23
+        },
+        {
+          "world": 2029,
+          "total": 174,
+          "plain": 3,
+          "subset": 171,
+          "subset_relay": 63,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 46
+        },
+        {
+          "world": 2030,
+          "total": 173,
+          "plain": 3,
+          "subset": 170,
+          "subset_relay": 66,
+          "subset_flat": 104,
+          "duplicates_removed": 9,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 39
+        },
+        {
+          "world": 2031,
+          "total": 158,
+          "plain": 3,
+          "subset": 155,
+          "subset_relay": 47,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 62
+        }
+      ],
+      "best_start": [
+        {
+          "start": 2,
+          "candidate_index": 70,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.5637632316403367,
+          "final_reward": 0.627730708974139,
+          "share": 938,
+          "evaluations": 338,
+          "converged": true,
+          "accepted_descent": 36,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 822,
+          "ended_at_evaluation": 1160,
+          "incumbent_at": {
+            "1000": 0.6240735927829829,
+            "2000": 0.627730708974139,
+            "3000": 0.627730708974139
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 40,
+          "kind": "subset_relay",
+          "k": 4,
+          "start_reward": 0.5494455357004004,
+          "final_reward": 0.6277965184518675,
+          "share": 938,
+          "evaluations": 246,
+          "converged": true,
+          "accepted_descent": 33,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 456,
+          "ended_at_evaluation": 702,
+          "incumbent_at": {
+            "1000": 0.6277965184518675,
+            "2000": 0.6277965184518675,
+            "3000": 0.6277965184518675
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 26,
+          "kind": "subset_relay",
+          "k": 4,
+          "start_reward": 0.5395673887960462,
+          "final_reward": 0.6049427229575954,
+          "share": 952,
+          "evaluations": 531,
+          "converged": true,
+          "accepted_descent": 46,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 766,
+          "ended_at_evaluation": 1297,
+          "incumbent_at": {
+            "1000": 0.5824256792063931,
+            "2000": 0.6049427229575954,
+            "3000": 0.6049427229575954
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 12,
+          "kind": "subset_relay",
+          "k": 5,
+          "start_reward": 0.5460095647443,
+          "final_reward": 0.5865836954791187,
+          "share": 944,
+          "evaluations": 315,
+          "converged": true,
+          "accepted_descent": 29,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 170,
+          "ended_at_evaluation": 485,
+          "incumbent_at": {
+            "1000": 0.5865836954791187,
+            "2000": 0.5865836954791187,
+            "3000": 0.5865836954791187
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 36,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.5806380401551563,
+          "final_reward": 0.649426057304006,
+          "share": 946,
+          "evaluations": 336,
+          "converged": true,
+          "accepted_descent": 37,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 163,
+          "ended_at_evaluation": 499,
+          "incumbent_at": {
+            "1000": 0.649426057304006,
+            "2000": 0.649426057304006,
+            "3000": 0.649426057304006
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 81,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.5691934484367088,
+          "final_reward": 0.6351126741749155,
+          "share": 936,
+          "evaluations": 313,
+          "converged": true,
+          "accepted_descent": 33,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 874,
+          "ended_at_evaluation": 1187,
+          "incumbent_at": {
+            "1000": 0.6349069488996789,
+            "2000": 0.6351126741749155,
+            "3000": 0.6351126741749155
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 19,
+          "kind": "subset_relay",
+          "k": 5,
+          "start_reward": 0.5683055684565965,
+          "final_reward": 0.6189401976951379,
+          "share": 940,
+          "evaluations": 330,
+          "converged": true,
+          "accepted_descent": 44,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 180,
+          "ended_at_evaluation": 510,
+          "incumbent_at": {
+            "1000": 0.6189401976951379,
+            "2000": 0.6189401976951379,
+            "3000": 0.6189401976951379
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 18,
+          "kind": "subset_relay",
+          "k": 5,
+          "start_reward": 0.5203736563933968,
+          "final_reward": 0.5810118789692693,
+          "share": 941,
+          "evaluations": 366,
+          "converged": true,
+          "accepted_descent": 44,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 542,
+          "ended_at_evaluation": 908,
+          "incumbent_at": {
+            "1000": 0.5810118789692693,
+            "2000": 0.5810118789692693,
+            "3000": 0.5810118789692693
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 40,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.557542274583789,
+          "final_reward": 0.6309638087722793,
+          "share": 946,
+          "evaluations": 427,
+          "converged": true,
+          "accepted_descent": 33,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 774,
+          "ended_at_evaluation": 1201,
+          "incumbent_at": {
+            "1000": 0.6136084947209786,
+            "2000": 0.6309638087722793,
+            "3000": 0.6309638087722793
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 48,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.5149671210284672,
+          "final_reward": 0.5838804826399264,
+          "share": 946,
+          "evaluations": 336,
+          "converged": true,
+          "accepted_descent": 34,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 164,
+          "ended_at_evaluation": 500,
+          "incumbent_at": {
+            "1000": 0.5838804826399264,
+            "2000": 0.5838804826399264,
+            "3000": 0.5838804826399264
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 25,
+          "kind": "subset_relay",
+          "k": 4,
+          "start_reward": 0.5073693617389141,
+          "final_reward": 0.5684721395031809,
+          "share": 944,
+          "evaluations": 366,
+          "converged": true,
+          "accepted_descent": 39,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 512,
+          "ended_at_evaluation": 878,
+          "incumbent_at": {
+            "1000": 0.5684721395031809,
+            "2000": 0.5684721395031809,
+            "3000": 0.5684721395031809
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 41,
+          "kind": "subset_relay",
+          "k": 4,
+          "start_reward": 0.5928038368603051,
+          "final_reward": 0.6402960544991876,
+          "share": 938,
+          "evaluations": 276,
+          "converged": true,
+          "accepted_descent": 29,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 491,
+          "ended_at_evaluation": 767,
+          "incumbent_at": {
+            "1000": 0.6402960544991876,
+            "2000": 0.6402960544991876,
+            "3000": 0.6402960544991876
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 18,
+          "kind": "subset_relay",
+          "k": 5,
+          "start_reward": 0.415165383030184,
+          "final_reward": 0.49161934940700114,
+          "share": 952,
+          "evaluations": 346,
+          "converged": true,
+          "accepted_descent": 26,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 144,
+          "ended_at_evaluation": 490,
+          "incumbent_at": {
+            "1000": 0.49161934940700114,
+            "2000": 0.49161934940700114,
+            "3000": 0.49161934940700114
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 28,
+          "kind": "subset_relay",
+          "k": 4,
+          "start_reward": 0.5187647955451207,
+          "final_reward": 0.579691534737116,
+          "share": 938,
+          "evaluations": 276,
+          "converged": true,
+          "accepted_descent": 32,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 648,
+          "ended_at_evaluation": 924,
+          "incumbent_at": {
+            "1000": 0.579691534737116,
+            "2000": 0.579691534737116,
+            "3000": 0.579691534737116
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 19,
+          "kind": "subset_relay",
+          "k": 5,
+          "start_reward": 0.5391885529581711,
+          "final_reward": 0.6247371147023835,
+          "share": 945,
+          "evaluations": 246,
+          "converged": true,
+          "accepted_descent": 27,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 167,
+          "ended_at_evaluation": 413,
+          "incumbent_at": {
+            "1000": 0.6247371147023835,
+            "2000": 0.6247371147023835,
+            "3000": 0.6247371147023835
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 71,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.5353054402497027,
+          "final_reward": 0.5703834581582414,
+          "share": 939,
+          "evaluations": 276,
+          "converged": true,
+          "accepted_descent": 36,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 824,
+          "ended_at_evaluation": 1100,
+          "incumbent_at": {
+            "1000": 0.5687093485710397,
+            "2000": 0.5703834581582414,
+            "3000": 0.5703834581582414
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 49,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.6224632091555502,
+          "final_reward": 0.6806078958998416,
+          "share": 940,
+          "evaluations": 248,
+          "converged": true,
+          "accepted_descent": 39,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 547,
+          "ended_at_evaluation": 795,
+          "incumbent_at": {
+            "1000": 0.6806078958998416,
+            "2000": 0.6806078958998416,
+            "3000": 0.6806078958998416
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 67,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.46586686139615563,
+          "final_reward": 0.543082066904326,
+          "share": 941,
+          "evaluations": 246,
+          "converged": true,
+          "accepted_descent": 32,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 446,
+          "ended_at_evaluation": 692,
+          "incumbent_at": {
+            "1000": 0.543082066904326,
+            "2000": 0.543082066904326,
+            "3000": 0.543082066904326
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 161,
+          "kind": "flat_result_incumbent",
+          "k": null,
+          "start_reward": 0.46178732110181575,
+          "final_reward": 0.5741366930440774,
+          "share": 946,
+          "evaluations": 360,
+          "converged": true,
+          "accepted_descent": 36,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 528,
+          "ended_at_evaluation": 888,
+          "incumbent_at": {
+            "1000": 0.5741366930440774,
+            "2000": 0.5741366930440774,
+            "3000": 0.5741366930440774
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 11,
+          "kind": "subset_relay",
+          "k": 5,
+          "start_reward": 0.48996192241397557,
+          "final_reward": 0.5832899079711986,
+          "share": 942,
+          "evaluations": 306,
+          "converged": true,
+          "accepted_descent": 40,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 846,
+          "ended_at_evaluation": 1152,
+          "incumbent_at": {
+            "1000": 0.5785267076071621,
+            "2000": 0.5832899079711986,
+            "3000": 0.5832899079711986
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 70,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.49839080173487027,
+          "final_reward": 0.5871694437451124,
+          "share": 940,
+          "evaluations": 502,
+          "converged": true,
+          "accepted_descent": 40,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 508,
+          "ended_at_evaluation": 1010,
+          "incumbent_at": {
+            "1000": 0.5871694437451124,
+            "2000": 0.5871694437451124,
+            "3000": 0.5871694437451124
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 20,
+          "kind": "subset_relay",
+          "k": 5,
+          "start_reward": 0.6333264028006118,
+          "final_reward": 0.6683156042056914,
+          "share": 932,
+          "evaluations": 306,
+          "converged": true,
+          "accepted_descent": 32,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 204,
+          "ended_at_evaluation": 510,
+          "incumbent_at": {
+            "1000": 0.6683156042056914,
+            "2000": 0.6683156042056914,
+            "3000": 0.6683156042056914
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 53,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.5537277784904613,
+          "final_reward": 0.6176966332382172,
+          "share": 942,
+          "evaluations": 246,
+          "converged": true,
+          "accepted_descent": 28,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 810,
+          "ended_at_evaluation": 1056,
+          "incumbent_at": {
+            "1000": 0.6176966332382172,
+            "2000": 0.6176966332382172,
+            "3000": 0.6176966332382172
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 56,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.6131972717536125,
+          "final_reward": 0.673649306121586,
+          "share": 941,
+          "evaluations": 424,
+          "converged": true,
+          "accepted_descent": 51,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 179,
+          "ended_at_evaluation": 603,
+          "incumbent_at": {
+            "1000": 0.673649306121586,
+            "2000": 0.673649306121586,
+            "3000": 0.673649306121586
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 41,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.48925898480769237,
+          "final_reward": 0.5824924350028511,
+          "share": 945,
+          "evaluations": 268,
+          "converged": true,
+          "accepted_descent": 33,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 950,
+          "ended_at_evaluation": 1218,
+          "incumbent_at": {
+            "1000": 0.5605164640880753,
+            "2000": 0.5824924350028511,
+            "3000": 0.5824924350028511
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 12,
+          "kind": "subset_relay",
+          "k": 5,
+          "start_reward": 0.5391795003647656,
+          "final_reward": 0.5863495336589145,
+          "share": 942,
+          "evaluations": 336,
+          "converged": true,
+          "accepted_descent": 33,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 511,
+          "ended_at_evaluation": 847,
+          "incumbent_at": {
+            "1000": 0.5863495336589145,
+            "2000": 0.5863495336589145,
+            "3000": 0.5863495336589145
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 15,
+          "kind": "subset_relay",
+          "k": 5,
+          "start_reward": 0.43832921727619373,
+          "final_reward": 0.5407408514094688,
+          "share": 947,
+          "evaluations": 501,
+          "converged": true,
+          "accepted_descent": 25,
+          "accepted_plateau": 18,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 751,
+          "ended_at_evaluation": 1252,
+          "incumbent_at": {
+            "1000": 0.48317720956947224,
+            "2000": 0.5407408514094688,
+            "3000": 0.5407408514094688
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 41,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.47599223680532776,
+          "final_reward": 0.6000605576453684,
+          "share": 947,
+          "evaluations": 362,
+          "converged": true,
+          "accepted_descent": 47,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 710,
+          "ended_at_evaluation": 1072,
+          "incumbent_at": {
+            "1000": 0.5965678412501276,
+            "2000": 0.6000605576453684,
+            "3000": 0.6000605576453684
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 76,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.6077207525995731,
+          "final_reward": 0.6447152465493902,
+          "share": 937,
+          "evaluations": 338,
+          "converged": true,
+          "accepted_descent": 39,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 614,
+          "ended_at_evaluation": 952,
+          "incumbent_at": {
+            "1000": 0.6447152465493902,
+            "2000": 0.6447152465493902,
+            "3000": 0.6447152465493902
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 174,
+          "kind": "flat_result_incumbent",
+          "k": null,
+          "start_reward": 0.5235997425239566,
+          "final_reward": 0.5495823407497951,
+          "share": 942,
+          "evaluations": 270,
+          "converged": true,
+          "accepted_descent": 23,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 175,
+          "ended_at_evaluation": 445,
+          "incumbent_at": {
+            "1000": 0.5495823407497951,
+            "2000": 0.5495823407497951,
+            "3000": 0.5495823407497951
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 64,
+          "kind": "subset_relay",
+          "k": 6,
+          "start_reward": 0.4842632456584315,
+          "final_reward": 0.6186583083717863,
+          "share": 942,
+          "evaluations": 396,
+          "converged": true,
+          "accepted_descent": 48,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 480,
+          "ended_at_evaluation": 876,
+          "incumbent_at": {
+            "1000": 0.6186583083717863,
+            "2000": 0.6186583083717863,
+            "3000": 0.6186583083717863
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 11,
+          "kind": "subset_relay",
+          "k": 5,
+          "start_reward": 0.5648378915998749,
+          "final_reward": 0.6298005643044906,
+          "share": 947,
+          "evaluations": 339,
+          "converged": true,
+          "accepted_descent": 37,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 522,
+          "ended_at_evaluation": 861,
+          "incumbent_at": {
+            "1000": 0.6298005643044906,
+            "2000": 0.6298005643044906,
+            "3000": 0.6298005643044906
+          }
+        }
+      ],
+      "incumbent_at": {
+        "1000": {
+          "n": 32,
+          "mean": 0.6018659915996334,
+          "sd": 0.04205273104598448,
+          "min": 0.49161934940700114,
+          "max": 0.6806078958998416
+        },
+        "2000": {
+          "n": 32,
+          "mean": 0.6031854932889837,
+          "sd": 0.04186663210928647,
+          "min": 0.49161934940700114,
+          "max": 0.6806078958998416
+        },
+        "3000": {
+          "n": 32,
+          "mean": 0.6031854932889837,
+          "sd": 0.04186663210928647,
+          "min": 0.49161934940700114,
+          "max": 0.6806078958998416
+        }
+      }
+    },
+    "P_flat": {
+      "contract_reward": {
+        "n": 32,
+        "mean": 0.48258542991842945,
+        "sd": 0.07945301311420822,
+        "min": 0.28333121854347915,
+        "max": 0.6292508516635347
+      },
+      "coverage_backhauled": {
+        "n": 32,
+        "mean": 0.668125,
+        "sd": 0.13883007715398218,
+        "min": 0.36,
+        "max": 0.96
+      },
+      "evaluations": {
+        "n": 32,
+        "mean": 869.5,
+        "sd": 165.15154331117986,
+        "min": 575.0,
+        "max": 1222.0
+      },
+      "converged_worlds": 32,
+      "candidates_evaluated": [
+        111,
+        111,
+        100,
+        111,
+        111,
+        111,
+        111,
+        109,
+        111,
+        111,
+        107,
+        111,
+        102,
+        111,
+        111,
+        111,
+        111,
+        111,
+        110,
+        111,
+        110,
+        111,
+        111,
+        111,
+        111,
+        111,
+        111,
+        108,
+        111,
+        111,
+        107,
+        111
+      ],
+      "candidate_counts": [
+        {
+          "world": 2000,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2001,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2002,
+          "total": 100,
+          "plain": 3,
+          "subset": 97,
+          "subset_relay": 0,
+          "subset_flat": 97,
+          "duplicates_removed": 12,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2003,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2004,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2005,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2006,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2007,
+          "total": 109,
+          "plain": 3,
+          "subset": 106,
+          "subset_relay": 0,
+          "subset_flat": 106,
+          "duplicates_removed": 3,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2008,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2009,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2010,
+          "total": 107,
+          "plain": 3,
+          "subset": 104,
+          "subset_relay": 0,
+          "subset_flat": 104,
+          "duplicates_removed": 5,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2011,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2012,
+          "total": 102,
+          "plain": 3,
+          "subset": 99,
+          "subset_relay": 0,
+          "subset_flat": 99,
+          "duplicates_removed": 10,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2013,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2014,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2015,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2016,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2017,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2018,
+          "total": 110,
+          "plain": 3,
+          "subset": 107,
+          "subset_relay": 0,
+          "subset_flat": 107,
+          "duplicates_removed": 2,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2019,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2020,
+          "total": 110,
+          "plain": 3,
+          "subset": 107,
+          "subset_relay": 0,
+          "subset_flat": 107,
+          "duplicates_removed": 2,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2021,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2022,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2023,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2024,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2025,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2026,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2027,
+          "total": 108,
+          "plain": 3,
+          "subset": 105,
+          "subset_relay": 0,
+          "subset_flat": 105,
+          "duplicates_removed": 4,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2028,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2029,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2030,
+          "total": 107,
+          "plain": 3,
+          "subset": 104,
+          "subset_relay": 0,
+          "subset_flat": 104,
+          "duplicates_removed": 5,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        },
+        {
+          "world": 2031,
+          "total": 111,
+          "plain": 3,
+          "subset": 108,
+          "subset_relay": 0,
+          "subset_flat": 108,
+          "duplicates_removed": 1,
+          "excluded_centre_count": 0,
+          "subsets_over_uav_budget": 0
+        }
+      ],
+      "best_start": [
+        {
+          "start": 2,
+          "candidate_index": 102,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.5370459248338119,
+          "final_reward": 0.567260834149815,
+          "share": 963,
+          "evaluations": 426,
+          "converged": true,
+          "accepted_descent": 29,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 663,
+          "ended_at_evaluation": 1089,
+          "incumbent_at": {
+            "1000": 0.5651914406508395,
+            "2000": 0.567260834149815,
+            "3000": 0.567260834149815
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 105,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.478018843431228,
+          "final_reward": 0.49893584869510166,
+          "share": 963,
+          "evaluations": 216,
+          "converged": true,
+          "accepted_descent": 11,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 327,
+          "incumbent_at": {
+            "1000": 0.49893584869510166,
+            "2000": 0.49893584869510166,
+            "3000": 0.49893584869510166
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 33,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.4544868940836424,
+          "final_reward": 0.4907102378161032,
+          "share": 967,
+          "evaluations": 276,
+          "converged": true,
+          "accepted_descent": 24,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 100,
+          "ended_at_evaluation": 376,
+          "incumbent_at": {
+            "1000": 0.4907102378161032,
+            "2000": 0.4907102378161032,
+            "3000": 0.4907102378161032
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 33,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.41915458534715583,
+          "final_reward": 0.46253731764746797,
+          "share": 963,
+          "evaluations": 276,
+          "converged": true,
+          "accepted_descent": 21,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 387,
+          "incumbent_at": {
+            "1000": 0.46253731764746797,
+            "2000": 0.46253731764746797,
+            "3000": 0.46253731764746797
+          }
+        },
+        {
+          "start": 2,
+          "candidate_index": 101,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.289828865613182,
+          "final_reward": 0.32640661275847305,
+          "share": 963,
+          "evaluations": 346,
+          "converged": true,
+          "accepted_descent": 17,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 844,
+          "ended_at_evaluation": 1190,
+          "incumbent_at": {
+            "1000": 0.29756866716173036,
+            "2000": 0.32640661275847305,
+            "3000": 0.32640661275847305
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 32,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.5498771216683808,
+          "final_reward": 0.5557766082657938,
+          "share": 963,
+          "evaluations": 216,
+          "converged": true,
+          "accepted_descent": 11,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 327,
+          "incumbent_at": {
+            "1000": 0.5557766082657938,
+            "2000": 0.5557766082657938,
+            "3000": 0.5557766082657938
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 105,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.43583837792902247,
+          "final_reward": 0.5074905482458736,
+          "share": 963,
+          "evaluations": 276,
+          "converged": true,
+          "accepted_descent": 17,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 387,
+          "incumbent_at": {
+            "1000": 0.5074905482458736,
+            "2000": 0.5074905482458736,
+            "3000": 0.5074905482458736
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 45,
+          "kind": "subset_flat",
+          "k": 4,
+          "start_reward": 0.48553207469720094,
+          "final_reward": 0.5024272227291745,
+          "share": 964,
+          "evaluations": 220,
+          "converged": true,
+          "accepted_descent": 10,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 109,
+          "ended_at_evaluation": 329,
+          "incumbent_at": {
+            "1000": 0.5024272227291745,
+            "2000": 0.5024272227291745,
+            "3000": 0.5024272227291745
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 105,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.43832720861952723,
+          "final_reward": 0.4404769183773086,
+          "share": 963,
+          "evaluations": 156,
+          "converged": true,
+          "accepted_descent": 7,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 267,
+          "incumbent_at": {
+            "1000": 0.4404769183773086,
+            "2000": 0.4404769183773086,
+            "3000": 0.4404769183773086
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 105,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.3670989050690464,
+          "final_reward": 0.3789230811503422,
+          "share": 963,
+          "evaluations": 216,
+          "converged": true,
+          "accepted_descent": 13,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 327,
+          "incumbent_at": {
+            "1000": 0.3789230811503422,
+            "2000": 0.3789230811503422,
+            "3000": 0.3789230811503422
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 101,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.45990751755354364,
+          "final_reward": 0.4680590642098561,
+          "share": 965,
+          "evaluations": 246,
+          "converged": true,
+          "accepted_descent": 16,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 107,
+          "ended_at_evaluation": 353,
+          "incumbent_at": {
+            "1000": 0.4680590642098561,
+            "2000": 0.4680590642098561,
+            "3000": 0.4680590642098561
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 33,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.4939792015876586,
+          "final_reward": 0.5291253970072324,
+          "share": 963,
+          "evaluations": 276,
+          "converged": true,
+          "accepted_descent": 18,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 327,
+          "ended_at_evaluation": 603,
+          "incumbent_at": {
+            "1000": 0.5291253970072324,
+            "2000": 0.5291253970072324,
+            "3000": 0.5291253970072324
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 33,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.32644173188378245,
+          "final_reward": 0.38569485588080366,
+          "share": 966,
+          "evaluations": 377,
+          "converged": true,
+          "accepted_descent": 16,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 102,
+          "ended_at_evaluation": 479,
+          "incumbent_at": {
+            "1000": 0.38569485588080366,
+            "2000": 0.38569485588080366,
+            "3000": 0.38569485588080366
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 102,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.4592704550638384,
+          "final_reward": 0.5118485430013034,
+          "share": 963,
+          "evaluations": 246,
+          "converged": true,
+          "accepted_descent": 18,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 357,
+          "incumbent_at": {
+            "1000": 0.5118485430013034,
+            "2000": 0.5118485430013034,
+            "3000": 0.5118485430013034
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 105,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.4469234553549958,
+          "final_reward": 0.49273410426453335,
+          "share": 963,
+          "evaluations": 247,
+          "converged": true,
+          "accepted_descent": 23,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 358,
+          "incumbent_at": {
+            "1000": 0.49273410426453335,
+            "2000": 0.49273410426453335,
+            "3000": 0.49273410426453335
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 102,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.48667804199973175,
+          "final_reward": 0.5175438355016747,
+          "share": 963,
+          "evaluations": 216,
+          "converged": true,
+          "accepted_descent": 19,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 327,
+          "incumbent_at": {
+            "1000": 0.5175438355016747,
+            "2000": 0.5175438355016747,
+            "3000": 0.5175438355016747
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 33,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.5077712994591786,
+          "final_reward": 0.5918941247339848,
+          "share": 963,
+          "evaluations": 216,
+          "converged": true,
+          "accepted_descent": 23,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 327,
+          "incumbent_at": {
+            "1000": 0.5918941247339848,
+            "2000": 0.5918941247339848,
+            "3000": 0.5918941247339848
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 105,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.4246810311602471,
+          "final_reward": 0.4469264858633425,
+          "share": 963,
+          "evaluations": 156,
+          "converged": true,
+          "accepted_descent": 9,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 267,
+          "incumbent_at": {
+            "1000": 0.4469264858633425,
+            "2000": 0.4469264858633425,
+            "3000": 0.4469264858633425
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 104,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.40357003500162314,
+          "final_reward": 0.46178732110181575,
+          "share": 963,
+          "evaluations": 276,
+          "converged": true,
+          "accepted_descent": 17,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 296,
+          "ended_at_evaluation": 572,
+          "incumbent_at": {
+            "1000": 0.46178732110181575,
+            "2000": 0.46178732110181575,
+            "3000": 0.46178732110181575
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 33,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.4074795267343877,
+          "final_reward": 0.44295150339140366,
+          "share": 963,
+          "evaluations": 366,
+          "converged": true,
+          "accepted_descent": 31,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 477,
+          "incumbent_at": {
+            "1000": 0.44295150339140366,
+            "2000": 0.44295150339140366,
+            "3000": 0.44295150339140366
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 104,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.36610828269307977,
+          "final_reward": 0.3887091921453142,
+          "share": 964,
+          "evaluations": 247,
+          "converged": true,
+          "accepted_descent": 13,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 110,
+          "ended_at_evaluation": 357,
+          "incumbent_at": {
+            "1000": 0.3887091921453142,
+            "2000": 0.3887091921453142,
+            "3000": 0.3887091921453142
+          }
+        },
+        {
+          "start": 1,
+          "candidate_index": 33,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.6031548299191268,
+          "final_reward": 0.6292508516635347,
+          "share": 963,
+          "evaluations": 251,
+          "converged": true,
+          "accepted_descent": 24,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 387,
+          "ended_at_evaluation": 638,
+          "incumbent_at": {
+            "1000": 0.6292508516635347,
+            "2000": 0.6292508516635347,
+            "3000": 0.6292508516635347
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 105,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.48553475342055785,
+          "final_reward": 0.5634252141915208,
+          "share": 963,
+          "evaluations": 186,
+          "converged": true,
+          "accepted_descent": 11,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 297,
+          "incumbent_at": {
+            "1000": 0.5634252141915208,
+            "2000": 0.5634252141915208,
+            "3000": 0.5634252141915208
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 33,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.48524351414181566,
+          "final_reward": 0.5276274931604228,
+          "share": 963,
+          "evaluations": 307,
+          "converged": true,
+          "accepted_descent": 23,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 418,
+          "incumbent_at": {
+            "1000": 0.5276274931604228,
+            "2000": 0.5276274931604228,
+            "3000": 0.5276274931604228
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 33,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.490618219995264,
+          "final_reward": 0.5473255769232043,
+          "share": 963,
+          "evaluations": 276,
+          "converged": true,
+          "accepted_descent": 18,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 387,
+          "incumbent_at": {
+            "1000": 0.5473255769232043,
+            "2000": 0.5473255769232043,
+            "3000": 0.5473255769232043
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 105,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.41142894558257004,
+          "final_reward": 0.445804935969736,
+          "share": 963,
+          "evaluations": 246,
+          "converged": true,
+          "accepted_descent": 22,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 357,
+          "incumbent_at": {
+            "1000": 0.445804935969736,
+            "2000": 0.445804935969736,
+            "3000": 0.445804935969736
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 105,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.27585665180200686,
+          "final_reward": 0.28333121854347915,
+          "share": 963,
+          "evaluations": 222,
+          "converged": true,
+          "accepted_descent": 12,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 333,
+          "incumbent_at": {
+            "1000": 0.28333121854347915,
+            "2000": 0.28333121854347915,
+            "3000": 0.28333121854347915
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 102,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.3396552662471615,
+          "final_reward": 0.38264265443196355,
+          "share": 964,
+          "evaluations": 336,
+          "converged": true,
+          "accepted_descent": 21,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 108,
+          "ended_at_evaluation": 444,
+          "incumbent_at": {
+            "1000": 0.38264265443196355,
+            "2000": 0.38264265443196355,
+            "3000": 0.38264265443196355
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 104,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.6035838552728707,
+          "final_reward": 0.6152174552098555,
+          "share": 963,
+          "evaluations": 216,
+          "converged": true,
+          "accepted_descent": 19,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 327,
+          "incumbent_at": {
+            "1000": 0.6152174552098555,
+            "2000": 0.6152174552098555,
+            "3000": 0.6152174552098555
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 105,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.4587361248999736,
+          "final_reward": 0.5235997425239566,
+          "share": 963,
+          "evaluations": 306,
+          "converged": true,
+          "accepted_descent": 28,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 417,
+          "incumbent_at": {
+            "1000": 0.5235997425239566,
+            "2000": 0.5235997425239566,
+            "3000": 0.5235997425239566
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 101,
+          "kind": "subset_flat",
+          "k": 6,
+          "start_reward": 0.4460914712089638,
+          "final_reward": 0.4472849573701991,
+          "share": 965,
+          "evaluations": 156,
+          "converged": true,
+          "accepted_descent": 8,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 107,
+          "ended_at_evaluation": 263,
+          "incumbent_at": {
+            "1000": 0.4472849573701991,
+            "2000": 0.4472849573701991,
+            "3000": 0.4472849573701991
+          }
+        },
+        {
+          "start": 0,
+          "candidate_index": 26,
+          "kind": "subset_flat",
+          "k": 5,
+          "start_reward": 0.4406742315536091,
+          "final_reward": 0.5090040004651509,
+          "share": 963,
+          "evaluations": 186,
+          "converged": true,
+          "accepted_descent": 10,
+          "accepted_plateau": 0,
+          "final_xy_step_m": 25.0,
+          "began_at_evaluation": 111,
+          "ended_at_evaluation": 297,
+          "incumbent_at": {
+            "1000": 0.5090040004651509,
+            "2000": 0.5090040004651509,
+            "3000": 0.5090040004651509
+          }
+        }
+      ],
+      "incumbent_at": {
+        "1000": {
+          "n": 32,
+          "mean": 0.48250887869266273,
+          "sd": 0.07940682889446492,
+          "min": 0.28333121854347915,
+          "max": 0.6292508516635347
+        },
+        "2000": {
+          "n": 32,
+          "mean": 0.48258542991842945,
+          "sd": 0.07945301311420822,
+          "min": 0.28333121854347915,
+          "max": 0.6292508516635347
+        },
+        "3000": {
+          "n": 32,
+          "mean": 0.48258542991842945,
+          "sd": 0.07945301311420822,
+          "min": 0.28333121854347915,
+          "max": 0.6292508516635347
+        }
+      }
+    }
+  },
+  "closed_loop": {
+    "closed_loop_relay": {
+      "contract_reward_mean_all": {
+        "n": 32,
+        "mean": 0.5534696694674317,
+        "sd": 0.04131759050407914,
+        "min": 0.46477618012863503,
+        "max": 0.6318116027578599
+      },
+      "contract_reward_mean_final100": {
+        "n": 32,
+        "mean": 0.6031854932889837,
+        "sd": 0.041866632109286456,
+        "min": 0.4916193494070012,
+        "max": 0.6806078958998414
+      },
+      "coverage_backhauled_mean_all": {
+        "n": 32,
+        "mean": 0.77979,
+        "sd": 0.10028351654346088,
+        "min": 0.5691199999999998,
+        "max": 0.9442800000000002
+      },
+      "coverage_backhauled_mean_final100": {
+        "n": 32,
+        "mean": 0.8456250000000001,
+        "sd": 0.11373249599459824,
+        "min": 0.6,
+        "max": 1.0
+      },
+      "frontend_capacity_with_path_mbps_mean_all": {
+        "n": 32,
+        "mean": 391.29257779108883,
+        "sd": 87.00035050893281,
+        "min": 216.31088741454272,
+        "max": 645.8789981335117
+      },
+      "frontend_capacity_with_path_mbps_mean_final100": {
+        "n": 32,
+        "mean": 431.4764244227538,
+        "sd": 94.32542938238323,
+        "min": 240.98564628142853,
+        "max": 693.8638096357266
+      },
+      "mean_relays_per_routed_uav_mean_all": {
+        "n": 32,
+        "mean": 0.7463020833333334,
+        "sd": 0.2607724799586096,
+        "min": 0.3484999999999999,
+        "max": 1.544933333333333
+      },
+      "mean_relays_per_routed_uav_mean_final100": {
+        "n": 32,
+        "mean": 0.8125,
+        "sd": 0.3074639006114563,
+        "min": 0.3333333333333334,
+        "max": 1.8333333333333335
+      },
+      "final_far_cluster_backhauled_share": {
+        "n": 32,
+        "mean": 0.765625,
+        "sd": 0.39725621455176763,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "final_coverage_backhauled": {
+        "n": 32,
+        "mean": 0.8456250000000001,
+        "sd": 0.11373249599459817,
+        "min": 0.6,
+        "max": 1.0
+      },
+      "arrival_step": {
+        "n": 32,
+        "mean": 79.0625,
+        "sd": 19.109088362988857,
+        "min": 46.0,
+        "max": 123.0
+      },
+      "not_arrived_worlds": [],
+      "association_change_count": {
+        "n": 32,
+        "mean": 60.84375,
+        "sd": 22.700162533168303,
+        "min": 29.0,
+        "max": 108.0
+      },
+      "association_change_count_per_world": {
+        "2000": 81,
+        "2001": 60,
+        "2002": 77,
+        "2003": 52,
+        "2004": 89,
+        "2005": 70,
+        "2006": 33,
+        "2007": 40,
+        "2008": 43,
+        "2009": 58,
+        "2010": 55,
+        "2011": 63,
+        "2012": 40,
+        "2013": 60,
+        "2014": 29,
+        "2015": 73,
+        "2016": 64,
+        "2017": 44,
+        "2018": 44,
+        "2019": 77,
+        "2020": 37,
+        "2021": 94,
+        "2022": 67,
+        "2023": 97,
+        "2024": 55,
+        "2025": 77,
+        "2026": 60,
+        "2027": 32,
+        "2028": 107,
+        "2029": 29,
+        "2030": 32,
+        "2031": 108
+      },
+      "backhaul_loss_events": {
+        "n": 32,
+        "mean": 13.25,
+        "sd": 11.007328936784829,
+        "min": 0.0,
+        "max": 43.0
+      },
+      "backhaul_loss_events_per_world": {
+        "2000": 24,
+        "2001": 8,
+        "2002": 14,
+        "2003": 2,
+        "2004": 1,
+        "2005": 22,
+        "2006": 1,
+        "2007": 2,
+        "2008": 25,
+        "2009": 0,
+        "2010": 6,
+        "2011": 13,
+        "2012": 9,
+        "2013": 13,
+        "2014": 15,
+        "2015": 19,
+        "2016": 2,
+        "2017": 17,
+        "2018": 4,
+        "2019": 33,
+        "2020": 18,
+        "2021": 14,
+        "2022": 16,
+        "2023": 13,
+        "2024": 11,
+        "2025": 35,
+        "2026": 5,
+        "2027": 2,
+        "2028": 9,
+        "2029": 27,
+        "2030": 1,
+        "2031": 43
+      }
+    },
+    "closed_loop_flat_a2a_on": {
+      "contract_reward_mean_all": {
+        "n": 32,
+        "mean": 0.45905844459744083,
+        "sd": 0.07716996990662196,
+        "min": 0.2760712739678097,
+        "max": 0.6051875134010584
+      },
+      "contract_reward_mean_final100": {
+        "n": 32,
+        "mean": 0.48258542991842945,
+        "sd": 0.07945301311420822,
+        "min": 0.28333121854347926,
+        "max": 0.6292508516635348
+      },
+      "coverage_backhauled_mean_all": {
+        "n": 32,
+        "mean": 0.63877875,
+        "sd": 0.13430018258940826,
+        "min": 0.35344,
+        "max": 0.9181200000000002
+      },
+      "coverage_backhauled_mean_final100": {
+        "n": 32,
+        "mean": 0.6681250000000001,
+        "sd": 0.13883007715398218,
+        "min": 0.35999999999999993,
+        "max": 0.96
+      },
+      "frontend_capacity_with_path_mbps_mean_all": {
+        "n": 32,
+        "mean": 334.107172329313,
+        "sd": 68.97646477735252,
+        "min": 215.2073143593594,
+        "max": 487.50419995402757
+      },
+      "frontend_capacity_with_path_mbps_mean_final100": {
+        "n": 32,
+        "mean": 355.2867953093346,
+        "sd": 75.50856579483323,
+        "min": 221.09832994020286,
+        "max": 534.4631188261875
+      },
+      "mean_relays_per_routed_uav_mean_all": {
+        "n": 32,
+        "mean": 0.031962500000000005,
+        "sd": 0.015305788138401577,
+        "min": 0.011133333333333332,
+        "max": 0.07666666666666667
+      },
+      "mean_relays_per_routed_uav_mean_final100": {
+        "n": 32,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "final_far_cluster_backhauled_share": {
+        "n": 32,
+        "mean": 0.284375,
+        "sd": 0.23155766368855776,
+        "min": 0.0,
+        "max": 0.9
+      },
+      "final_coverage_backhauled": {
+        "n": 32,
+        "mean": 0.668125,
+        "sd": 0.13883007715398218,
+        "min": 0.36,
+        "max": 0.96
+      },
+      "arrival_step": {
+        "n": 32,
+        "mean": 70.4375,
+        "sd": 13.377731858481068,
+        "min": 43.0,
+        "max": 97.0
+      },
+      "not_arrived_worlds": [],
+      "association_change_count": {
+        "n": 32,
+        "mean": 52.46875,
+        "sd": 16.15246785299186,
+        "min": 25.0,
+        "max": 88.0
+      },
+      "association_change_count_per_world": {
+        "2000": 51,
+        "2001": 50,
+        "2002": 25,
+        "2003": 68,
+        "2004": 42,
+        "2005": 72,
+        "2006": 56,
+        "2007": 56,
+        "2008": 74,
+        "2009": 42,
+        "2010": 53,
+        "2011": 50,
+        "2012": 26,
+        "2013": 45,
+        "2014": 29,
+        "2015": 69,
+        "2016": 72,
+        "2017": 47,
+        "2018": 51,
+        "2019": 62,
+        "2020": 59,
+        "2021": 86,
+        "2022": 44,
+        "2023": 60,
+        "2024": 46,
+        "2025": 40,
+        "2026": 28,
+        "2027": 46,
+        "2028": 63,
+        "2029": 34,
+        "2030": 45,
+        "2031": 88
+      },
+      "backhaul_loss_events": {
+        "n": 32,
+        "mean": 9.75,
+        "sd": 6.169644732805306,
+        "min": 2.0,
+        "max": 27.0
+      },
+      "backhaul_loss_events_per_world": {
+        "2000": 9,
+        "2001": 4,
+        "2002": 2,
+        "2003": 7,
+        "2004": 5,
+        "2005": 11,
+        "2006": 17,
+        "2007": 2,
+        "2008": 27,
+        "2009": 3,
+        "2010": 6,
+        "2011": 8,
+        "2012": 3,
+        "2013": 22,
+        "2014": 12,
+        "2015": 14,
+        "2016": 10,
+        "2017": 18,
+        "2018": 9,
+        "2019": 10,
+        "2020": 9,
+        "2021": 11,
+        "2022": 2,
+        "2023": 13,
+        "2024": 6,
+        "2025": 10,
+        "2026": 14,
+        "2027": 3,
+        "2028": 2,
+        "2029": 12,
+        "2030": 18,
+        "2031": 13
+      }
+    },
+    "closed_loop_flat_a2a_off_diagnostic": {
+      "contract_reward_mean_all": {
+        "n": 32,
+        "mean": 0.44946490059633576,
+        "sd": 0.07692836251531227,
+        "min": 0.2659081820454004,
+        "max": 0.5953284258681397
+      },
+      "contract_reward_mean_final100": {
+        "n": 32,
+        "mean": 0.48258542991842945,
+        "sd": 0.07945301311420822,
+        "min": 0.28333121854347926,
+        "max": 0.6292508516635348
+      },
+      "coverage_backhauled_mean_all": {
+        "n": 32,
+        "mean": 0.6238225,
+        "sd": 0.1344281164666611,
+        "min": 0.33815999999999996,
+        "max": 0.8977200000000002
+      },
+      "coverage_backhauled_mean_final100": {
+        "n": 32,
+        "mean": 0.6681250000000001,
+        "sd": 0.13883007715398218,
+        "min": 0.35999999999999993,
+        "max": 0.96
+      },
+      "frontend_capacity_with_path_mbps_mean_all": {
+        "n": 32,
+        "mean": 329.0468059734118,
+        "sd": 68.72868434798812,
+        "min": 210.08891369775472,
+        "max": 484.8837720272319
+      },
+      "frontend_capacity_with_path_mbps_mean_final100": {
+        "n": 32,
+        "mean": 355.2867953093346,
+        "sd": 75.50856579483323,
+        "min": 221.09832994020286,
+        "max": 534.4631188261875
+      },
+      "mean_relays_per_routed_uav_mean_all": {
+        "n": 32,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "mean_relays_per_routed_uav_mean_final100": {
+        "n": 32,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "final_far_cluster_backhauled_share": {
+        "n": 32,
+        "mean": 0.284375,
+        "sd": 0.23155766368855776,
+        "min": 0.0,
+        "max": 0.9
+      },
+      "final_coverage_backhauled": {
+        "n": 32,
+        "mean": 0.668125,
+        "sd": 0.13883007715398218,
+        "min": 0.36,
+        "max": 0.96
+      },
+      "arrival_step": {
+        "n": 32,
+        "mean": 70.4375,
+        "sd": 13.377731858481068,
+        "min": 43.0,
+        "max": 97.0
+      },
+      "not_arrived_worlds": [],
+      "association_change_count": {
+        "n": 32,
+        "mean": 52.46875,
+        "sd": 16.15246785299186,
+        "min": 25.0,
+        "max": 88.0
+      },
+      "association_change_count_per_world": {
+        "2000": 51,
+        "2001": 50,
+        "2002": 25,
+        "2003": 68,
+        "2004": 42,
+        "2005": 72,
+        "2006": 56,
+        "2007": 56,
+        "2008": 74,
+        "2009": 42,
+        "2010": 53,
+        "2011": 50,
+        "2012": 26,
+        "2013": 45,
+        "2014": 29,
+        "2015": 69,
+        "2016": 72,
+        "2017": 47,
+        "2018": 51,
+        "2019": 62,
+        "2020": 59,
+        "2021": 86,
+        "2022": 44,
+        "2023": 60,
+        "2024": 46,
+        "2025": 40,
+        "2026": 28,
+        "2027": 46,
+        "2028": 63,
+        "2029": 34,
+        "2030": 45,
+        "2031": 88
+      },
+      "backhaul_loss_events": {
+        "n": 32,
+        "mean": 8.53125,
+        "sd": 3.732891078835761,
+        "min": 3.0,
+        "max": 18.0
+      },
+      "backhaul_loss_events_per_world": {
+        "2000": 17,
+        "2001": 6,
+        "2002": 7,
+        "2003": 8,
+        "2004": 5,
+        "2005": 13,
+        "2006": 6,
+        "2007": 9,
+        "2008": 13,
+        "2009": 6,
+        "2010": 6,
+        "2011": 7,
+        "2012": 8,
+        "2013": 6,
+        "2014": 6,
+        "2015": 11,
+        "2016": 6,
+        "2017": 9,
+        "2018": 4,
+        "2019": 9,
+        "2020": 10,
+        "2021": 18,
+        "2022": 5,
+        "2023": 17,
+        "2024": 9,
+        "2025": 10,
+        "2026": 5,
+        "2027": 3,
+        "2028": 10,
+        "2029": 7,
+        "2030": 10,
+        "2031": 7
+      }
+    },
+    "stationary_floor": {
+      "contract_reward_mean_all": {
+        "n": 32,
+        "mean": 0.11045699551243304,
+        "sd": 0.09257751362627697,
+        "min": 0.0,
+        "max": 0.3476058141239054
+      },
+      "contract_reward_mean_final100": {
+        "n": 32,
+        "mean": 0.11045699551243304,
+        "sd": 0.09257751362627695,
+        "min": 0.0,
+        "max": 0.34760581412390523
+      },
+      "coverage_backhauled_mean_all": {
+        "n": 32,
+        "mean": 0.17125,
+        "sd": 0.15060630154318289,
+        "min": 0.0,
+        "max": 0.5600000000000003
+      },
+      "coverage_backhauled_mean_final100": {
+        "n": 32,
+        "mean": 0.17125,
+        "sd": 0.15060630154318289,
+        "min": 0.0,
+        "max": 0.5600000000000003
+      },
+      "frontend_capacity_with_path_mbps_mean_all": {
+        "n": 32,
+        "mean": 59.4014682553968,
+        "sd": 49.7415639559594,
+        "min": 0.0,
+        "max": 171.61639143571648
+      },
+      "frontend_capacity_with_path_mbps_mean_final100": {
+        "n": 32,
+        "mean": 59.4014682553968,
+        "sd": 49.7415639559594,
+        "min": 0.0,
+        "max": 171.61639143571648
+      },
+      "mean_relays_per_routed_uav_mean_all": {
+        "n": 32,
+        "mean": 0.22656249999999997,
+        "sd": 0.36369419228493616,
+        "min": 0.0,
+        "max": 1.25
+      },
+      "mean_relays_per_routed_uav_mean_final100": {
+        "n": 32,
+        "mean": 0.2265625,
+        "sd": 0.36369419228493616,
+        "min": 0.0,
+        "max": 1.25
+      },
+      "final_far_cluster_backhauled_share": {
+        "n": 32,
+        "mean": 0.06875,
+        "sd": 0.1767766952966369,
+        "min": 0.0,
+        "max": 0.8
+      },
+      "final_coverage_backhauled": {
+        "n": 32,
+        "mean": 0.17125,
+        "sd": 0.15060630154318289,
+        "min": 0.0,
+        "max": 0.56
+      },
+      "association_change_count": {
+        "n": 32,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "association_change_count_per_world": {
+        "2000": 0,
+        "2001": 0,
+        "2002": 0,
+        "2003": 0,
+        "2004": 0,
+        "2005": 0,
+        "2006": 0,
+        "2007": 0,
+        "2008": 0,
+        "2009": 0,
+        "2010": 0,
+        "2011": 0,
+        "2012": 0,
+        "2013": 0,
+        "2014": 0,
+        "2015": 0,
+        "2016": 0,
+        "2017": 0,
+        "2018": 0,
+        "2019": 0,
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0,
+        "2028": 0,
+        "2029": 0,
+        "2030": 0,
+        "2031": 0
+      },
+      "backhaul_loss_events": {
+        "n": 32,
+        "mean": 0.0,
+        "sd": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "backhaul_loss_events_per_world": {
+        "2000": 0,
+        "2001": 0,
+        "2002": 0,
+        "2003": 0,
+        "2004": 0,
+        "2005": 0,
+        "2006": 0,
+        "2007": 0,
+        "2008": 0,
+        "2009": 0,
+        "2010": 0,
+        "2011": 0,
+        "2012": 0,
+        "2013": 0,
+        "2014": 0,
+        "2015": 0,
+        "2016": 0,
+        "2017": 0,
+        "2018": 0,
+        "2019": 0,
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0,
+        "2027": 0,
+        "2028": 0,
+        "2029": 0,
+        "2030": 0,
+        "2031": 0
+      }
+    },
+    "random_floor": {
+      "contract_reward_mean_all": {
+        "n": 32,
+        "mean": 0.11286107265832733,
+        "sd": 0.08161456081051968,
+        "min": 0.0,
+        "max": 0.33408015094448673
+      },
+      "contract_reward_mean_final100": {
+        "n": 32,
+        "mean": 0.11670741924098739,
+        "sd": 0.10241223813159367,
+        "min": 0.0,
+        "max": 0.35461029013638373
+      },
+      "coverage_backhauled_mean_all": {
+        "n": 32,
+        "mean": 0.17171750000000002,
+        "sd": 0.13291740474396485,
+        "min": 0.0,
+        "max": 0.5441200000000002
+      },
+      "coverage_backhauled_mean_final100": {
+        "n": 32,
+        "mean": 0.17571874999999998,
+        "sd": 0.16205146024065636,
+        "min": 0.0,
+        "max": 0.5392
+      },
+      "frontend_capacity_with_path_mbps_mean_all": {
+        "n": 32,
+        "mean": 64.59318226791416,
+        "sd": 44.51757252201766,
+        "min": 0.0,
+        "max": 181.9420001247885
+      },
+      "frontend_capacity_with_path_mbps_mean_final100": {
+        "n": 32,
+        "mean": 69.00839617795967,
+        "sd": 58.51206172934508,
+        "min": 0.0,
+        "max": 203.35603106847117
+      },
+      "mean_relays_per_routed_uav_mean_all": {
+        "n": 32,
+        "mean": 0.22207187500000003,
+        "sd": 0.24511366043355884,
+        "min": 0.0,
+        "max": 0.9106666666666666
+      },
+      "mean_relays_per_routed_uav_mean_final100": {
+        "n": 32,
+        "mean": 0.20059375000000002,
+        "sd": 0.3642755734830156,
+        "min": 0.0,
+        "max": 1.445
+      },
+      "final_far_cluster_backhauled_share": {
+        "n": 32,
+        "mean": 0.06875,
+        "sd": 0.18911935128975582,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "final_coverage_backhauled": {
+        "n": 32,
+        "mean": 0.17375000000000002,
+        "sd": 0.17110174298239308,
+        "min": 0.0,
+        "max": 0.58
+      },
+      "association_change_count": {
+        "n": 32,
+        "mean": 326.9375,
+        "sd": 127.80654168224017,
+        "min": 129.0,
+        "max": 698.0
+      },
+      "association_change_count_per_world": {
+        "2000": 698,
+        "2001": 517,
+        "2002": 269,
+        "2003": 502,
+        "2004": 231,
+        "2005": 272,
+        "2006": 524,
+        "2007": 233,
+        "2008": 307,
+        "2009": 316,
+        "2010": 162,
+        "2011": 346,
+        "2012": 167,
+        "2013": 457,
+        "2014": 304,
+        "2015": 352,
+        "2016": 318,
+        "2017": 307,
+        "2018": 456,
+        "2019": 402,
+        "2020": 214,
+        "2021": 385,
+        "2022": 254,
+        "2023": 379,
+        "2024": 191,
+        "2025": 173,
+        "2026": 370,
+        "2027": 329,
+        "2028": 436,
+        "2029": 288,
+        "2030": 174,
+        "2031": 129
+      },
+      "backhaul_loss_events": {
+        "n": 32,
+        "mean": 84.6875,
+        "sd": 78.5355631381055,
+        "min": 0.0,
+        "max": 275.0
+      },
+      "backhaul_loss_events_per_world": {
+        "2000": 180,
+        "2001": 0,
+        "2002": 84,
+        "2003": 54,
+        "2004": 0,
+        "2005": 34,
+        "2006": 217,
+        "2007": 67,
+        "2008": 258,
+        "2009": 0,
+        "2010": 17,
+        "2011": 41,
+        "2012": 12,
+        "2013": 68,
+        "2014": 275,
+        "2015": 49,
+        "2016": 41,
+        "2017": 85,
+        "2018": 37,
+        "2019": 62,
+        "2020": 118,
+        "2021": 102,
+        "2022": 23,
+        "2023": 35,
+        "2024": 275,
+        "2025": 114,
+        "2026": 72,
+        "2027": 7,
+        "2028": 135,
+        "2029": 112,
+        "2030": 58,
+        "2031": 78
+      }
+    }
+  },
+  "timing_per_world": {
+    "search_relay": {
+      "wall_s": {
+        "n": 32,
+        "mean": 1.2485782982189448,
+        "sd": 0.3557003742559423,
+        "min": 0.6392775389977032,
+        "max": 2.2515261999942595
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 1.138429406250002,
+        "sd": 0.22423562095589433,
+        "min": 0.6383350000000001,
+        "max": 1.5907569999999964
+      }
+    },
+    "search_flat": {
+      "wall_s": {
+        "n": 32,
+        "mean": 0.9201042976246754,
+        "sd": 0.27447656804786813,
+        "min": 0.4603872559964657,
+        "max": 1.634080110990908
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 0.8479899999999965,
+        "sd": 0.2065272740949669,
+        "min": 0.459982000000001,
+        "max": 1.274298000000016
+      }
+    },
+    "closed_loop_relay": {
+      "wall_s": {
+        "n": 32,
+        "mean": 1.30862469906333,
+        "sd": 0.28600556907403724,
+        "min": 0.6814442879986018,
+        "max": 1.8369949199986877
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 1.2164578749999972,
+        "sd": 0.1980523577066044,
+        "min": 0.6814079999999998,
+        "max": 1.5625549999999748
+      }
+    },
+    "closed_loop_flat_a2a_on": {
+      "wall_s": {
+        "n": 32,
+        "mean": 1.2826971416566266,
+        "sd": 0.26615166132415613,
+        "min": 0.5921535689994926,
+        "max": 1.8519457910006167
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 1.2030530937500021,
+        "sd": 0.19421837424493654,
+        "min": 0.5921509999999999,
+        "max": 1.5192790000000116
+      }
+    },
+    "closed_loop_flat_a2a_off_diagnostic": {
+      "wall_s": {
+        "n": 32,
+        "mean": 1.2723029033109015,
+        "sd": 0.27014918586389897,
+        "min": 0.7410612709936686,
+        "max": 1.9241300089925062
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 1.191206374999997,
+        "sd": 0.18842246537120805,
+        "min": 0.7409659999999998,
+        "max": 1.4690050000000099
+      }
+    },
+    "stationary_floor": {
+      "wall_s": {
+        "n": 32,
+        "mean": 1.2131550541857905,
+        "sd": 0.3020621341590148,
+        "min": 0.7641336240048986,
+        "max": 2.3430832180019934
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 1.1009958749999995,
+        "sd": 0.15410411364393836,
+        "min": 0.7641200000000001,
+        "max": 1.3977239999999824
+      }
+    },
+    "random_floor": {
+      "wall_s": {
+        "n": 32,
+        "mean": 1.1894351063433533,
+        "sd": 0.23220612356639841,
+        "min": 0.7265139990049647,
+        "max": 1.7438169480010401
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 1.1149169999999946,
+        "sd": 0.16047277908065732,
+        "min": 0.7240959999999994,
+        "max": 1.3948749999999848
+      }
+    },
+    "world_total": {
+      "wall_s": {
+        "n": 32,
+        "mean": 8.442275047907515,
+        "sd": 1.7574838780882207,
+        "min": 4.707100512998295,
+        "max": 11.95744294799806
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 7.819325031249996,
+        "sd": 1.1269292424072905,
+        "min": 4.703509,
+        "max": 9.475868999999989
+      }
+    }
+  },
+  "cpu_seconds": {
+    "self_user_s": 249.392785,
+    "self_sys_s": 3.043477,
+    "children_user_s": 0.0021089999999999998,
+    "children_sys_s": 0.003085,
+    "total_s": 252.441456,
+    "peak_rss_kib": 90012
+  },
+  "interpreter": {
+    "executable": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "python": "3.10.20",
+    "numpy": "1.26.3",
+    "host": "Jacob"
+  },
+  "arguments": [
+    "--worlds",
+    "2000-2031",
+    "--area-size",
+    "5000",
+    "--budget",
+    "3000",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b01_gate_holdout_a01"
+  ],
+  "start_utc": "2026-09-29T08:02:58+00:00",
+  "end_utc": "2026-09-29T08:07:29+00:00",
+  "wall_clock_s": 271.61743856400426
+}
