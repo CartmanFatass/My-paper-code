@@ -3334,3 +3334,45 @@ the recovery process waits for another writer's fetch; no result launch has
 been attempted. This maintenance operation is not a technical experiment
 retry. The next normal entry records its actual outcome and original-artifact
 rehash, then the single published-input admission handle.
+
+### B05 accepted operation and same-handle observation
+
+Published exact input SHA is`b3afc6f3fa117f005eeaeaf7f86c7796521bcaa5`.
+Reference recovery completed after the plain-SSH lazy fetch was reconciled:
+only the DM-owned blocked process group981064 was terminated, before any
+artifact writes, then the same missing-only operation ran through configured
+`zsh -lic`. It restored10 compact files totaling1,142,405 bytes: manifest,
+config, perworld and summary for B03, plus those four and control-refs/
+source-binding for B04. All104 original manifest artifacts rehashed exactly:
+B03 75files/232,109,945 bytes, B04 29files/88,324,862 bytes. No raw/status/index/
+sparse overwrite or full-tree copy occurred. Existing node commit-graph and
+bad-tree auto-GC warnings remain outside this direction's repair scope; the
+specific reads and hashes succeeded. The writer lock was released.
+
+The first supervisor invocation at10:34:07 UTC ended exit4 at10:34:25 because
+the launcher's publication fetch hit a TLS handshake error. The
+[pre-admission refusal](../../../../runs/uav_persistent_service/b05_service_shifts_a01/pre-admission-refusal.json)
+is retained. Same-tag status/output were absent and the shared claim store
+had no matching source/tag claim; no scientific worker, fit or native step
+started. After the identical publication fetch succeeded in the configured
+network shell, the same source/argv/tag was resubmitted through the kernel.
+This is pre-claim transport recovery, not a replacement scientific attempt.
+
+The native kernel accepted at2026-09-29T10:38:26.671528Z. The authoritative
+[launch manifest](../../../../runs/uav_persistent_service/b05_service_shifts_a01/launch-manifest.json)
+binds claim`27e9fc8e599445563d8cb1926587b3f7184d6959a592bac4db491d63026007aa`,
+supervisor984059/runner984060, immutable source snapshot
+`72f7145a3b0a418998417cdaee5b3ba1`, and the original node output root.
+[Fresh admission](../../../../runs/uav_persistent_service/b05_service_shifts_a01/admission-preflight.json)
+measured13,032,497,152 available bytes against the4GiB floor. Four single-thread
+workers execute the fixed S-only plan; source/control binding passed before
+environment construction. Supervisor-command exit0 is only launch completion,
+not a scientific result.
+
+`tools/hmasd_wait.py` generation1 is armed with60-second read-only probes and
+a1500-second checkpoint under child identity
+`01a0ec86-4e27-7832-8ff0-ba75882f9aa9`. First drain observed the exact accepted
+handle consistently running with0 probe errors and no exit witness. The DM
+remains active through deterministic native waits and same-handle drain/rearm,
+then full collection/reading. No queue wake is assumed to restart an unloaded
+native child, and no duplicate worker or accepted-handle migration is allowed.

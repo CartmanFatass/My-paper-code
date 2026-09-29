@@ -1,0 +1,16 @@
+{
+  "direction": "uav_persistent_service",
+  "tag": "b05_service_shifts_a01",
+  "source_sha": "b3afc6f3fa117f005eeaeaf7f86c7796521bcaa5",
+  "node": "wsl_4070",
+  "supervisor_task": "ups-b05-service-a01",
+  "supervisor_log": "/home/wu/.agent-tasks/ups-b05-service-a01/task.log",
+  "started_at": "2026-09-29T10:34:07Z",
+  "ended_at": "2026-09-29T10:34:25Z",
+  "supervisor_exit_code": 4,
+  "error": "hmasd launch refused: git fetch --quiet --prune --no-tags origin refused: fatal: unable to access 'https://github.com/CartmanFatass/My-paper-code.git/': gnutls_handshake() failed: The TLS connection was non-properly terminated.",
+  "reconciliation": "Original same-tag native status reference and output directory absent; publication fetch precedes claim registration and native construction.",
+  "scientific_fit_count": 0,
+  "scientific_native_steps": 0,
+  "scope": "Pre-admission transport refusal; not a failed scientific trajectory or changed-input retry. Preserve same source, argv and tag."
+}
