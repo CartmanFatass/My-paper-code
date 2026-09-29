@@ -1844,3 +1844,61 @@ Return the evidence and recommendation through native child communication,
 not App messaging. Preserve useful ordinary-control source/tests and the sole
 required raw copy; remove reconciled snapshot, scratch and redundant logs only
 after publication and live-consumer checks.
+
+### Publication and Measured Cleanup
+
+Complete compact evidence, recovered independent review, interpretation and
+own RESEARCH standing/shared-background correction were committed and pushed
+at `7e43ebc6c14bc825251daf88a75462f3d66f23e9`. Original executed source
+remains recoverable at `2bff85091f85f6d52fc0344d0329b4fc39fa6d5c`; no code
+semantics changed during recovery. This publication preceded deletion.
+
+Import/test/entrypoint inspection retains useful B01/R, B02 and B03 protocol,
+search, collection and reconstruction code and its focused tests. B03 consumes
+B01's retained reader/metrics and B02's command/search helpers. These small
+published definitions preserve the useful ordinary capability and its historical
+comparison; no unused replacement implementation or other direction code was
+removed. Shared C and the radio kernel remain unchanged.
+
+Both old native identities, both old reader identities, the old observer and
+the recovered reader/time parent were absent; the new ResearchCritic completed
+its source reading and returned its final verdict. The original observer is
+still stopped at generation3 with no wake. No active operation, accepted Send,
+reader or helper consumes the snapshot. No new observer was armed in recovery.
+
+Exact-target snapshot-GC preview and apply passed using the documented
+`--sudo-process-scan` read-only process inspection. The collector verified
+terminal native identity, clean source, no live process reference and durable
+`refs/heads/main` reachability, then removed only the accepted B03 snapshot.
+Original operation claim, manifest, exit witness, compact result and source
+commit remain. Its registered worktree entry is also absent. No refusal or
+cleanup blocker occurred, and no backup/archive/retention copy was created.
+
+Allocated bytes immediately before deletion, measured with `du -s -B1`:
+
+| Deleted Target | Allocated Bytes |
+|---|---:|
+| `.git/hmasd-launch-sources/3d9c57d229864a02a8679bdf903af92e` |1649856512|
+| `temp/directions/uav_radio_activation/` (only retired `b03-wait.json`) |8192|
+| `experiments/candidates/uav_radio_activation/b01/__pycache__/` |57344|
+| `experiments/candidates/uav_radio_activation/b02/__pycache__/` |24576|
+| `experiments/candidates/uav_radio_activation/b03/__pycache__/` |69632|
+| `tests/experiments/candidates/uav_radio_activation/b03/__pycache__/` |57344|
+| `runs/uav_radio_activation/b03_two_tick_delivery_a01/stdout.log` |28672|
+| Same run's empty `stderr.log` |0|
+
+All eight exact targets are verified absent, from1,650,102,272allocated bytes
+to zero: **net reclaimed1,650,102,272bytes**. This is working-tree target
+reclamation, not Git-object shrinkage or whole-host free-space change amid
+other writers. Stdout contained exactly192progress rows already represented
+in the complete summary; stderr was empty. Removed caches held only rebuildable
+bytecode and scratch only the retired request. No required unique data moved.
+
+The sole canonical192raw files remain at
+`/home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01/raw/`,
+79,442,992content bytes /79,876,096allocated bytes, with per-file digests in
+the summary and complete verification above. Both reader cost witnesses,
+full positive/adverse/failed records and earlier B01/B02 evidence remain.
+No deletion target is left over. B03 is fully read and published with no active
+producer, unread review, new successor or unreturned helper; the recommendation
+now returns to Root through the native parent channel.
