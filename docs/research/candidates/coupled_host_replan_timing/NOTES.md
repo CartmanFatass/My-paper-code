@@ -185,3 +185,6 @@ Return (≤ 20 lines, single-instance wording, no new instrument/role/record): (
 
 ### Answer
 
+
+### Send record (2026-09-29 22:50 UTC): Pro question `replan-timing-second-boundary` sent as a follow-up in the same conversation
+Key `hmasd:a7cb7cff73389726a4629276b96f05ac24270d9fa1743d25bff375606d662f89`; source pinned at 912315f23 (this notebook, heading "Pro question 2026-09-29 replan-timing-second-boundary"); transport Jev headless, effort pill `6 Pro` verified at the send; document sha256 1db21e67…; `send_effect: sent`, attachment seen, first attempt (the model-control wait of 341ccb100 held). Operation directory `temp/directions/coupled_host_replan_timing/scratch/pro-second-boundary-20260929/`. Nothing runs while the answer is pending; slot 1 awaits the owner's [DECIDE-B].
