@@ -668,3 +668,88 @@ That is a possible future question for Root's allocation, not a demanded positiv
 pilot, an owner-approval dependency or a presently selected experiment. Current
 state is idle with no producer. The S4/N7 adverse evidence, inherited radio scope,
 and untouched Claude/paused-direction boundaries remain intact.
+
+### 2026-09-29 - Owner pause and bounded handoff
+
+At 21:25 UTC the owner asked Root to pause the workflow and write a handoff.
+Root relayed that instruction to this native child: stop scientific development,
+new experiments, interpretation expansion, cleanup and successor work; only
+bounded pause reconciliation and this handoff are authorized. This supersedes
+the earlier continuous-work assignment. Root published the direction pause at
+`c4cf7dbd24eb6c43d044ee28aeb45259dd73b6e6`, keeping the exact Lead unchanged.
+No pause lift, new launch, automatic observer rearm or successor is inferred.
+
+**State at interruption:** B01 was already technically complete, fully read and
+independently reviewed. The complete evidence and full scientific review were
+published at `aa2c77e9f9317628174d16b455425137578d9905`. All three fits,
+1,920 complete episodes /960,000 native steps and 121,856 public planner snapshots
+are retained; the saved reader verified 1,932 files /41,049,062 bytes. There are
+no unread B01 outputs or pending review answers. The resolved scientific choice
+above predates the pause: retain the positive stationary behavior and adverse
+fits, end this recipe's investment, and keep the parent recovery question in
+reserve. The pause is an owner interruption of publication/closure work, not a
+technical failure or a new scientific verdict.
+
+**Exact execution and evidence identities:**
+
+- Input commit: `b60b71e00d3b3b1c420cbff3b3bf03a805f4c14a`.
+- Local run: `/home/fires/hmasd-wsl/runs/uav_availability_recovery/b01_joint_reserve_a01`.
+- Operation/claim: `/home/fires/hmasd-wsl/.git/hmasd-admission/2a20d6ed5ea752cf1f451afffc30badf3f6606ae80ce83e4d7545027d542d563.json`.
+- Accepted source snapshot: `/home/fires/hmasd-wsl/.git/hmasd-launch-sources/40649116072b42aebeffda2fde5a89b6`.
+- Compact published evidence: `launch-manifest.json`, `admission-preflight.json`,
+  `config.json`, `launch-status.json`, `process-exit.json`, `summary.json`,
+  `perworld.json`, `curves.json`, `artifacts.json` and `reading.json`
+  under the run. The canonical unique native arrays and initialization/final
+  checkpoints remain in its ignored `raw/`; `progress.jsonl` remains at run root.
+  Do not treat ignored bulk as disposable or replace it with the summaries.
+- Manifest SHA256: `5feec7eb56c5c9c144a239c1f8d2ab42a7920d8e27b083cb6fd480221f7ebec0`;
+  reader SHA256: `6d81c3a81c9cd6248567ebf480c47f01df5a43ce6dd1990c32c22e024b08574b`.
+  Both were rechecked unchanged during pause reconciliation, without rerunning
+  the scientific reader or any native episode.
+
+**Handles reconciled at 21:27 UTC:** supervisor3316003 and runner3316004 are
+absent. `process-exit.json` records ordinary exit0 at 20:50:40 UTC, not a pause
+termination. The direction-specific process search found no live reader,
+runner or snapshot-GC process. All three helpers (`public_predictor`,
+`b01_engineering_review`, `b01_scientific_reading`) are completed and their
+answers already read. None required interruption.
+
+Observer `availability-recovery-b01-joint-reserve-a01` belongs to child thread
+`01a0ed8d-b36f-7eb0-a419-acbc3144276a`; its state remains at
+`/home/fires/.local/state/hmasd-wait/01a0ed8d-b36f-7eb0-a419-acbc3144276a/state.json`.
+Generation15 is already `stopped:true`, with `wake:null`, job `ready`, zero
+observation errors and every event consumed, including terminal event
+`0f67513c6d29d4a75ea04703`. Recorded daemon3972821 is absent. The historical
+App-queue -32600 delivery failures were manually reconciled during the active
+turn; they are not an undrained operation or grounds to relaunch. The held
+main-writer-lock PTY73639 was released immediately on pause and exited0; no
+RESEARCH edit had been made under it.
+
+**Published/dirty paths and retained work:** direction implementation and tests
+are published from `3e8f31d14` onward; the accepted input and later compact
+evidence commits above preserve their exact versions. Owned code, tests, run
+records and NOTES were clean before this handoff append. This NOTES append is
+the only new owned edit for pause reconciliation; unrelated dirty files belong
+to other writers and were left untouched. Root owns the shared pause/handoff
+control edit. The completed scientific result has not yet replaced this
+direction's older planning wording in RESEARCH or revised its affected shared
+background. That is pending publication, not pending collection or analysis.
+
+No cleanup was performed after the pause. The accepted source snapshot, own
+`__pycache__` directories and `temp/directions/uav_availability_recovery/` remain;
+snapshot GC had only been previewed before the interruption. Keep the canonical
+run `raw/` regardless of later scratch cleanup. Two transport scratch containers
+had already been removed before this pause, reclaiming 434,176 allocated bytes
+across the two hosts; this is not completion of the deferred closure cleanup.
+
+**Resume instructions:** only an explicit owner resumption permits further
+work. Re-read the current pause/ownership and this completed reading, then finish
+the narrow RESEARCH result/background/routing publication and decide useful-code
+retention plus unused-snapshot/cache/scratch cleanup after checking live consumers.
+Do not rerun B01, restart its worker, rearm its stopped observer, repeat the review,
+or auto-select another fit or revised host. There is no unread-result dependency.
+The known remote canonical-control/origin-query catch-up remains Root-owned and
+deferred until a genuinely new remote admission; it is not a dependency of this
+completed local run. No present successor is selected. If the owner later archives
+this fully documented DM, any selected successor uses a new DM with this evidence,
+not a restored old session or a fresh scientific slate.
