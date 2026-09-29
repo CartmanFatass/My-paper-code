@@ -1350,6 +1350,137 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 <a id="portfolio-review-2026-09-28-joint-next-round-programme"></a>
 [本轮完整选题、独立审查、Root/Claude实质交流和采纳](archive/2026-09-28/RESEARCH-joint-next-round-programme.md)。
 
+## Portfolio review 2026-09-29 workflow-retrospective-pro
+
+**Owner-requested Pro-only retrospective; no experiment or method change selected.**
+Owner: "这两次修订工作流后似乎有了好转 我们筛选出了较为正面的结果 你对我们工作流还有意见吗 回头审视这几次研究推进的过程 是否有可以优化的地方"。
+Owner then clarified: "这个问题交给Pro审查即可 独立reviewer不必启用 让其也对工作流做一下建议"。
+Root stopped the just-started independent reviewer before obtaining or using a new answer.
+This request uses Pro alone; it is not a permanent change to the project's review rules.
+Conversation: new on the configured Jev account; its address stays private in transport state.
+
+### Question And Decision
+
+Review how the recent research was actually selected, developed, compared and stopped after
+the workflow revisions. Did the changes improve scientific choices or only yield more positive
+selected packages? Recommend whether to keep the workflow, adjust a few practices, or make a
+larger change, with concrete reasons. Challenge Root's question design and allocation as well
+as DM execution. No assumption that the latest positives prove efficiency or innovation.
+This review informs the owner's next workflow decision, not a new research launch.
+Prospective cost: one Pro consultation and Root reading/publication; zero fits or environment
+steps, no new standing helper, no benchmark of the workflow itself.
+
+### Context And Reading Order
+
+All paths below resolve at the full `source_sha` in the send message unless a frozen input is
+explicitly identified in the notebook. Read only the named consequential sections, not the
+whole archive. The current instructions supersede conflicting historical chat rules; skills
+are methods, the constitution/current owner instruction are authority, and records are evidence.
+State decision-critical unread sources. Do not imply access to remote raw files from a manifest.
+
+1. Authority and present method: `docs/project/OPERATING_CONSTITUTION.md` sections 1-5 and 7-8;
+   `.agents/skills/hmasd-scientific-tools/SKILL.md` sections "Choose the question", "Design the comparison and decision exposure", "Update the working explanation";
+   `.agents/skills/hmasd-loop-dispatch/SKILL.md` "Root-led DM trial";
+   `.agents/skills/hmasd-portfolio-task/SKILL.md` Steps 1 and Boundaries.
+   Codex uses question-owning native DMs; no fixed DM quota. Claude is a peer. Milan remains
+   owner-paused for data, PPC/FSD paused and G33 frozen. This review resumes none of them.
+2. Reconstruct the key prospective decisions and actual results before reading Root's final
+   syntheses. Primary sequence A: `docs/research/candidates/uav_persistent_service/NOTES.md`,
+   B01/B02 result and B03/B04 prospective, complete reading and cost sections;
+   `runs/uav_persistent_service/b03_reassignment_a01/summary.json`;
+   `runs/uav_persistent_service/b04_original_worlds_a01/{summary,audit}.json`.
+   Primary sequence B: `docs/research/candidates/uav_message_content/NOTES.md`,
+   B01 complete reading, B02 preserved-scalar continuation, B03 frozen-assets prospective/result;
+   `runs/uav_message_content/{b02_preserved_scalar,b03_frozen_assets}/{summary,reading}.json`.
+   Read published originals selectively to test the workflow conclusions; this is not a new
+   full trajectory audit. Frozen source identities and original meanings remain those in NOTES.
+3. Contrary/context examples as needed: `docs/research/candidates/uav_information_value/NOTES.md`
+   B02/B03 and `runs/uav_information_value/b03_anchor_content_a01/summary.json`;
+   `docs/research/candidates/uav_joint_transition/NOTES.md` B01 and
+   `runs/uav_joint_transition/b01_joint_paths_a01/summary.json`. These avoid judging the process
+   only from its most recent positives. Do not compare numeric scores across these hosts.
+4. Then inspect what the workflow changed and what Root concluded:
+   `docs/research/archive/2026-09-28/RESEARCH-method-workflow-review.md` (question/comparator/
+   decision-exposure corrections, applied at `2a9073410`, followed by focus refinement `858e8cff5`);
+   `docs/research/archive/2026-09-28/RESEARCH-constructive-exploration-method.md` (constructive
+   development, support/adoption/investment distinction, matched additions; `1d65ea4ca`);
+   `docs/research/archive/2026-09-29/RESEARCH-constructive-development-{round,reuse}.md`;
+   current RESEARCH background topics 5-7, relevant direction rows and current plan.
+   The earlier native-DM topology change `c0796c48b` is a precursor, not another controlled arm.
+5. Peer selection is an optional process example, not a request to select or veto Claude's work:
+   `docs/research/candidates/energy_relay_benchmark/NOTES.md`, 2026-09-29 round-3 selection,
+   Pro disposition and D1-prime candidate; `docs/research/candidates/coupled_host_joint_skills_stage1/NOTES.md`,
+   declaration and its subsequent Pro disposition. One direction is declared, the second is
+   still a candidate; distinguish selection advice, declaration correction and implementation
+   review rather than automatically calling every pass redundant. No new peer message is owed.
+
+### Consequential Observations To Test
+
+These are navigation facts, not a preferred verdict. The service sequence followed finite O
+benefit into H12000; the seven-member local power deficit motivated lawful pre-F reassignment.
+B03 retained a finite R benefit with six-member deficit counterexamples. B04 reused exact old
+controls and challenged all eight original worlds: 71 completed transfers, zero overload or
+cutoff/depletion, original added failures avoided, but a new 55-step terminal service loss
+failed its complete adoption rule. Root retained the capability and stopped unchanged expansion.
+Is that an appropriate development boundary or still too defensive? Do not rewrite the old rule.
+
+Content B01 had own learning in all arms but adverse full-content replacement. B02 preserved
+six C fields and compared blank/ordinary/learned spare-scalar continuations, three seeds each
+from one C parent. L had favorable sample means but unstable seed rankings. Root added the
+already-paid best L to a fresh frozen-asset panel, not just B/O/C. B03 kept positive O/L use
+but selected continued-C B19451 by the fixed point-mean rule. That is paid-asset evidence,
+not independent C training replication or established scalar semantics/recipe superiority.
+Did this answer a worthwhile question, or shift the programme too far toward finding usable
+assets while leaving the learning contribution insufficiently developed?
+
+The complete constructive round cost 9 new fits and 1743872 result steps. Service B04 cost
+.810728 worker-CPU h plus binding/engineering/reading; content B03 evaluation was 41.15 s,
+complete pure reading another 67.47 s, with engineering/reviews additional. Some support costs
+are unmetered. Native child App queue returns still report -32600; active same-handle long
+waits collect completion without relaunch. Use actual timestamps if judging its critical-path
+cost; do not convert every elapsed interval into active research labour.
+
+### Requested Review
+
+1. What changed in question quality, falsifiable explanation, comparator choice and useful
+   carry-forward? Separate supported process improvements from selection effects, easier
+   questions, familiar ordinary methods and untested workflow-causality claims.
+2. Does Root still underinvest in derivation, broad independent questions or development of
+   positives? Conversely, where did a follow-up merely refine ranking, repeat a gate or postpone
+   a substantive learning choice? Use supporting and contrary concrete episodes.
+3. Are adoption rules or binary success/failure language conflating capability, tradeoff,
+   deployment suitability and further investment? How should future studies expose service,
+   energy/risk and cost without diluting constraints or changing completed verdicts?
+4. Where are review, declaration, implementation, source binding, observation and readback
+   proportionate, and where are they excessive? Distinguish necessary correctness from duplicated
+   scientific review/owner gates and avoid inventing a new bureaucracy to measure bureaucracy.
+5. Are useful ordinary assets actually reused and connected to the project's K/N/cooperation
+   questions, or just stored as stronger comparators? What is the strongest alternative to
+   blaming workflow, and what would refute that explanation? Additional information/resources
+   remain legitimate only with declared source/error/cost and matched-addition comparators.
+6. Recommend the smallest worthwhile adjustments and practices to retain or remove, explaining
+   where each would have changed an actual decision and what downside it risks. Specific wording
+   or a bounded technical improvement is welcome; no new role, quota, mandatory pilot, rescue fit,
+   automatic successor, routine review cycle or extra confirmation requirement is presumed.
+   Say if no further workflow change is warranted. Distinguish recommendations within current
+   practice from changes that genuinely require owner adoption. End with MATERIAL_DISSENT
+   yes/no tied to a particular current choice, and identify any important unresolved source gap.
+
+Answer in Chinese, grounded in sources actually read. Prefer a few consequential recommendations
+over an exhaustive checklist. Preserve positive/adverse/technical evidence and the distinction
+between empirical conclusion, adoption and investment. Give advice, not launch permission.
+Write only the empty `### Pro Answer` subsection within this review on branch `main`.
+Reason from the pinned source; fetch the latest target blob before writing, preserve every other
+byte, and stop on overlapping edits. Return the actual commit after a successful write. If
+GitHub writeback is unavailable, return the complete answer in chat, not a receipt or link.
+
+### Pro Answer
+
+### Decision
+
+Pending complete Pro reading. No method edit, new result operation or additional reviewer is
+selected by publishing this question. Root will report a reasoned recommendation to the owner.
+
 ## Current research plan
 
 **Codex两项建设性问题及各自复用比较均已完整判读；保留已展示的能力，停止原样追加，Claude独立选题继续。**
