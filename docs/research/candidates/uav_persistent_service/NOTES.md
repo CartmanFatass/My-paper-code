@@ -3215,3 +3215,57 @@ well enough, not whether all-F must be forbidden. Nothing has been implemented,
 tested on the environment or launched in this selection return: actual new
 fits, optimizer updates and native steps are all zero. No source snapshot,
 bulk data or cleanup target was created.
+
+### B05 adopted choice and bounded implementation L0
+
+Root selected the complete proposal at `4a188a330`; the full independent
+selection answer and reasoned disposition are published at `eefe34dc6` in
+[the completed selection](../../archive/2026-09-29/RESEARCH-continuity-forecast-selection.md#answer).
+I read the whole answer and adopt its recommendation and limitations. The
+compulsory-transfer objection was resolved by the real defer option; the
+forecast distinguishes 30-second replanning from 1200 seconds of delayed
+charging, F and deployment consequences. The review names additive service
+losses and model mismatch as the strongest competing explanation, and gives
+content marginal priority if resources conflict. MATERIAL_DISSENT is no; this
+selection is not another result or empirical support for S. No duplicate
+selection critic or Pro consultation is required.
+
+The selected study is exactly the preceding B05 proposal. Update this direction
+to exploring with its enduring question; keep the historical lead literal.
+Root owns synchronization of that published control row to the canonical
+remote checkout, an actual launch dependency rather than scientific approval.
+Preferred node is `wsl_4070`, at most four single-thread workers, with fresh
+admission and reduction/wait if Claude's accepted fits or content need the
+resources. There is no accepted B05 operation yet.
+
+Implementation deliverable: an executable S/R complete comparison with exact
+reused-R identities, full native readings and the declared intermediate
+exposure. The bounded Implementer owns only new `b05/__init__.py`,
+`b05/controller.py`, `b05/forecast.py` and their `test_controller.py` /
+`test_forecast.py` under matching direction test paths. It implements
+`ServiceShiftController` with the retained controller interface (`prepare`,
+`ordinary_action`, `apply_choice`, `propose`, `finish`, `costs`), the selected
+lawful candidates, nominal full-fleet/native-radio loss weights, and coarse
+priority/F/return forecast. It records candidate scores, q0/weights, requested
+and fallback R actions, actual chosen member/dwell, defer slack, forecast
+release/readiness and cost counters. No runner, NOTES, shared code or index
+ownership is delegated; no result launch or scientific redesign. Existing
+R/controller/host bytes remain immutable. The DM owns `b05/episode.py`,
+binding/readout/batch/entry files and corresponding tests, plus all records.
+Both writers share main and preserve others' changes; only the DM commits
+under `.git/hmasd-main-writer.lock`.
+
+Focused correctness checks include defer when a transfer exists, all duration
+semantics, no implicit removal of radio-active F/charging members, signed
+six-member station deficit, battery/wait/index priority, full/dwell/timeout and
+actual-F precedence, no arrival invention after an observed mismatch,
+forecast/current execution separation and no RNG mutation. The runner checks
+admission before effects, exact control/config/source bindings, complete
+exogenous pairing, per-panel and combined contrasts and the predeclared rule;
+missing/early evidence cannot pass as a clean tail. Synthetic tests cover most
+cases; total planned native correctness exposure remains at most240 steps,
+with the Implementer assigned up to60 and the DM retaining180. The DM reviews
+the diff and checks and obtains one independent engineering review of the
+complete high-risk path before publishing final inputs and launching. The
+declared3..5 CPUh execution and5..8h support estimates remain prospective;
+actual counts, waits, missing telemetry and any failure are retained.
