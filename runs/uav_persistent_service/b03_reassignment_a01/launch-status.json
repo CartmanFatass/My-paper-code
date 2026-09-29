@@ -54,7 +54,7 @@
   "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/projects/HMASD/runs/uav_persistent_service/b03_reassignment_a01/launch-manifest.json",
   "node": "wsl_4070",
-  "observed_at": "2026-09-29T05:26:45.535424Z",
+  "observed_at": "2026-09-29T05:46:54.911503Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/a4e4eb7e26952cd298dd3cd7aa43c8938a65e70694c8fdf0df2b7cae73530363.json",
   "output_root": "/home/wu/projects/HMASD/runs/uav_persistent_service/b03_reassignment_a01",
   "record_consistency": {

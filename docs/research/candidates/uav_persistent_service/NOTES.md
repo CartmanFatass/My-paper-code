@@ -2236,3 +2236,61 @@ confirmation. Root owns cross-question allocation against the independently
 selected preserved-content study and other peer work. B03 itself is complete;
 the direction moves to reserve with this recommendation and no selected next
 operation, unread result, pending advice, or invented approval dependency.
+
+### Publication, retention and measured retirement
+
+Complete results, the read-only audit, full independent scientific reading,
+disposition and directly affected RESEARCH standing/background were committed
+and pushed as `68cc107924a3edd20a7127b3c4c8f8b28ff991a8`. Exact run inputs remain
+at `a4bd3b5eccef6e83a71c00fdbb8eccd6ecaf5c67`. The unique necessary raw evidence
+stays on the original node at
+`/home/wu/projects/HMASD/runs/uav_persistent_service/b03_reassignment_a01/raw/`.
+`artifact-retention.json` records the host, canonical location, original
+manifest digest and every raw file's bytes/hash. All75 original manifest files
+were independently rehashed on that node before deleting the temporary local
+reading copy. B01/B02 raw files, source identities and adverse records were
+neither copied nor deleted.
+
+Live-consumer checks found no runner, observer, reader process or pending
+scientific review using the nominated material. The fixed B03 batch/entry had
+no imports outside its own retired runner. Keep the useful R controller,
+controller factory, episode adapter, raw readers/audit and their focused tests;
+delete the no-longer-selected `b03/batch.py` and `b03/run_b03.py`. Their exact
+executed source remains reachable at the input commit, rather than preserved
+as another workspace copy. Also deleted the local B03 raw directory, both B03
+code/test `__pycache__` directories, and the owned
+`temp/directions/uav_persistent_service/` observer request/test scratch.
+
+The maintained snapshot collector preview initially refused protected process
+inspection at `/proc/660/cwd`. Its supported `--sudo-process-scan` option used
+existing passwordless sudo only for read-only process inspection; the second
+preview was eligible, and apply removed exactly source snapshot
+`bcddfbda9b574b299aa6a35821622fd0`. No remote sparse selection, branch switch,
+working index overwrite or repack was used. The earlier unrelated auto-GC
+warning did not block the targeted collector. Claims, manifest, exit witness,
+all original outputs and duplicate-prevention identity remain. A final status
+read after deletion still reports consistent accepted identity and valid exit0.
+
+Retirement check: an initially mistyped pytest exclusion accidentally selected
+the native test, which failed during environment reset before any transition
+because the unprefixed local PATH lacked ninja; nine synthetic tests passed in
+that invocation. The exact native-test-name exclusion then passed nine tests
+with one deselected. No toolchain repair, native retry or additional transition
+was made; correctness remains210 steps. Existing shared toolchain caches were
+not included in the owned cleanup. A force-style local removal was refused by
+the tool; ordinary non-force recursive removal of the same inspected disposable
+paths succeeded, with no remaining deletion blocker.
+
+Allocated bytes were measured on the same owned run/code/test/temp roots,
+including the retained compact output. Local roots decreased232878080 ->991232
+bytes, a net **231886848 bytes** reclaimed. The remote output plus source
+snapshot decreased1034108928 ->232345600 bytes, reclaiming **801763328 bytes**;
+the remote output itself is unchanged. Total measured net reclamation is
+**1033650176 bytes**. All nominated deletion targets are absent. This is net
+allocated working/output storage, not whole-host free space or Git-object GC.
+No new archive, backup chain or redundant retention package was created.
+
+B03 is now scientifically read, independently reviewed, published and cleaned.
+No live operation, observer, pending advice or uncollected result remains. The
+unchanged-R challenge recommendation is returned to Root for cross-question
+selection, not represented as an accepted producer or owner approval dependency.

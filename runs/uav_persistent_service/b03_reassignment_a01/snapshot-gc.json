@@ -1,0 +1,15 @@
+{
+  "mode": "apply",
+  "snapshots": [
+    {
+      "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/a4e4eb7e26952cd298dd3cd7aa43c8938a65e70694c8fdf0df2b7cae73530363.json",
+      "durable_ref": "refs/remotes/origin/HEAD",
+      "eligible": true,
+      "output": "/home/wu/projects/HMASD/runs/uav_persistent_service/b03_reassignment_a01",
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/bcddfbda9b574b299aa6a35821622fd0",
+      "removed": true,
+      "sha": "a4bd3b5eccef6e83a71c00fdbb8eccd6ecaf5c67",
+      "snapshot": "bcddfbda9b574b299aa6a35821622fd0"
+    }
+  ]
+}
