@@ -67,4 +67,17 @@ the default next step, and at a study or round boundary say which belief, ordina
 investment decision changed and which did not, including uninformative outcomes and their cost;
 no information-gain score, extra form or workflow review.
 
+Owner-approved workflow sizing (2026-09-29): the Claude DM keeps two directions live at once,
+and each study is sized to that. (1) The first action on a question is the cheapest run that can
+refute it; instruments are built only after the conditioning result holds, and pre-specification is
+a written rule, not prior code. (2) Prefer questions on existing competent assets (frozen policies,
+verified planners, sealed references); a new host only when the question cannot be asked otherwise.
+(3) Pro is used at a round boundary for synthesis and next-question selection; a pre-declaration
+section-5 review only for a new host or a new metric. (4) A [DECIDE] item carries a default that
+executes; only a genuine resource or scope fork goes to the owner, and none blocks work. (5)
+Independent implementation tasks are dispatched concurrently; the DM reads decision-bearing code,
+not every line. (6) Prefer bounded continuations or corrections from competent frozen policies over
+from-scratch fits, and price a study's fits well under 10 CPU-h before launch. No new role, record
+type or review is implied; constitution sections 3, 4 and 8 are unchanged.
+
 Non-direction deliverables, when needed, use `docs/Claude_docs/<category>/`.
