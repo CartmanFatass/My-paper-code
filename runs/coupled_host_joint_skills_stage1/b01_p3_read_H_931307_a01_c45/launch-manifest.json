@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-29T13:40:34.670547Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/92b799fa206f41f9ab23c09f681b9d75/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/92b799fa206f41f9ab23c09f681b9d75/experiments/candidates/coupled_host_joint_skills_stage1/interaction_reader.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_read_H_931307_a01_c45",
+    "--",
+    "--table",
+    "runs/coupled_host_joint_skills_stage1/b01_p3_collect_H_931307_a01_c45/commitments.npz",
+    "--launch-sha",
+    "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+    "--out",
+    "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_read_H_931307_a01_c45"
+  ],
+  "claim_key": "11b2656104312db19e9ec99ae4f38e86adec6ce41522b4c54ceb43d88b17735d",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/11b2656104312db19e9ec99ae4f38e86adec6ce41522b4c54ceb43d88b17735d.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/92b799fa206f41f9ab23c09f681b9d75/experiments/candidates/coupled_host_joint_skills_stage1/interaction_reader.py",
+    "--table",
+    "runs/coupled_host_joint_skills_stage1/b01_p3_collect_H_931307_a01_c45/commitments.npz",
+    "--launch-sha",
+    "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+    "--out",
+    "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_read_H_931307_a01_c45"
+  ],
+  "command_sha256": "fff393e896da8518ea9d81c9192f9230de3d0f7c83407797e4725ab47097915c",
+  "control_observation": {
+    "observed_at": "2026-09-29T13:40:34.401664Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "08b694b054ec630070261699010f9cecba224b65"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-29T13:40:34.425940Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/92b799fa206f41f9ab23c09f681b9d75",
+  "direction": "coupled_host_joint_skills_stage1",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/coupled_host_joint_skills_stage1/interaction_reader.py",
+    "--table",
+    "<SOURCE>/runs/coupled_host_joint_skills_stage1/b01_p3_collect_H_931307_a01_c45/commitments.npz",
+    "--launch-sha",
+    "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0"
+  ],
+  "lead": "Claude DM (WSL session)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_read_H_931307_a01_c45/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/11b2656104312db19e9ec99ae4f38e86adec6ce41522b4c54ceb43d88b17735d.json",
+  "output_root": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_read_H_931307_a01_c45",
+  "preflight": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_read_H_931307_a01_c45/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 996202,
+      "session_id": 996202,
+      "start_ticks": 103514090
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 996202,
+    "process_group_id": 996202
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_read_H_931307_a01_c45/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 996203,
+      "session_id": 996202,
+      "start_ticks": 103514094
+    },
+    "pid": 996203,
+    "process_group_id": 996202,
+    "supervisor_pid": 996202
+  },
+  "schema_version": 1,
+  "sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/92b799fa206f41f9ab23c09f681b9d75",
+  "stderr": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_read_H_931307_a01_c45/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_read_H_931307_a01_c45/stdout.log"
+}
