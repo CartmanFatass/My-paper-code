@@ -1,0 +1,607 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "arm": "H",
+  "seed": 931307,
+  "launch_sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_joint_skills_stage1",
+    "sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+    "command_sha256": "56548bfe700dfb148ed036f81258084169c67703c565d7fbe68511f3d6dd315b",
+    "parent_pid": 988195,
+    "child_pid": 988196,
+    "accepted_at_epoch": 1790680376.9847677
+  },
+  "probe": false,
+  "status": "complete",
+  "fit_started": true,
+  "failure": null,
+  "spec": {
+    "horizon": 500,
+    "train_lanes": 16,
+    "eval_lanes": 16,
+    "rollouts": 45,
+    "panels": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "hidden_size": 256,
+    "n_heads": 8,
+    "n_layers": 2,
+    "ppo_epochs": 15,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "torch_threads": 4,
+    "area_size": 5000,
+    "dev_worlds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014,
+      1015,
+      1016,
+      1017,
+      1018,
+      1019,
+      1020,
+      1021,
+      1022,
+      1023,
+      1024,
+      1025,
+      1026,
+      1027,
+      1028,
+      1029,
+      1030,
+      1031
+    ],
+    "holdout_worlds": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026,
+      2027,
+      2028,
+      2029,
+      2030,
+      2031
+    ],
+    "probe_panel_worlds": [
+      9000,
+      9001,
+      9002,
+      9003,
+      9004,
+      9005,
+      9006,
+      9007,
+      9008,
+      9009,
+      9010,
+      9011,
+      9012,
+      9013,
+      9014,
+      9015,
+      9016,
+      9017,
+      9018,
+      9019,
+      9020,
+      9021,
+      9022,
+      9023,
+      9024,
+      9025,
+      9026,
+      9027,
+      9028,
+      9029,
+      9030,
+      9031
+    ],
+    "probe_rollouts": 3
+  },
+  "rollouts_run": 45,
+  "panels": [
+    {
+      "after_rollout": 0,
+      "training_team_steps": 0,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_00_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.11869710450340804,
+        "r_mean_final100": 0.12369957034292156,
+        "coverage_backhauled_mean_all": 0.18513500000000002,
+        "coverage_backhauled_mean_final100": 0.19155625,
+        "coverage_backhauled_final": 0.19312500000000002,
+        "frontend_capacity_with_path_mbps_mean_all": 62.505523233448244,
+        "far_cluster_backhauled_share_mean_all": 0.028106250000000003,
+        "far_cluster_backhauled_share_final": 0.037500000000000006,
+        "far_cluster_a2a_path_user_time_share": 0.008675,
+        "association_changes_per_step_mean": 0.0138125,
+        "uav_backhaul_loss_events": 0.40625,
+        "user_backhaul_loss_events": 3.75,
+        "action_clip_events": 0.0
+      }
+    },
+    {
+      "after_rollout": 15,
+      "training_team_steps": 120000,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_15_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.07515438620811135,
+        "r_mean_final100": 0.015736749849467695,
+        "coverage_backhauled_mean_all": 0.11419875000000002,
+        "coverage_backhauled_mean_final100": 0.0254625,
+        "coverage_backhauled_final": 0.01625,
+        "frontend_capacity_with_path_mbps_mean_all": 43.19001163609573,
+        "far_cluster_backhauled_share_mean_all": 0.01923125,
+        "far_cluster_backhauled_share_final": 0.0,
+        "far_cluster_a2a_path_user_time_share": 0.0115375,
+        "association_changes_per_step_mean": 0.371625,
+        "uav_backhaul_loss_events": 9.0,
+        "user_backhaul_loss_events": 64.21875,
+        "action_clip_events": 944.1875
+      }
+    },
+    {
+      "after_rollout": 30,
+      "training_team_steps": 240000,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_30_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.14427660399408077,
+        "r_mean_final100": 0.100800241851809,
+        "coverage_backhauled_mean_all": 0.21981375,
+        "coverage_backhauled_mean_final100": 0.149725,
+        "coverage_backhauled_final": 0.14250000000000002,
+        "frontend_capacity_with_path_mbps_mean_all": 82.21700768133077,
+        "far_cluster_backhauled_share_mean_all": 0.07118125,
+        "far_cluster_backhauled_share_final": 0.040625,
+        "far_cluster_a2a_path_user_time_share": 0.048931249999999996,
+        "association_changes_per_step_mean": 0.8365625,
+        "uav_backhaul_loss_events": 26.90625,
+        "user_backhaul_loss_events": 179.96875,
+        "action_clip_events": 2118.5
+      }
+    },
+    {
+      "after_rollout": 45,
+      "training_team_steps": 360000,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_45_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.15181304607353943,
+        "r_mean_final100": 0.12554685403689325,
+        "coverage_backhauled_mean_all": 0.22089375,
+        "coverage_backhauled_mean_final100": 0.18544375000000002,
+        "coverage_backhauled_final": 0.175,
+        "frontend_capacity_with_path_mbps_mean_all": 98.95343677240419,
+        "far_cluster_backhauled_share_mean_all": 0.08416874999999999,
+        "far_cluster_backhauled_share_final": 0.0625,
+        "far_cluster_a2a_path_user_time_share": 0.07171875,
+        "association_changes_per_step_mean": 0.7328125,
+        "uav_backhaul_loss_events": 40.9375,
+        "user_backhaul_loss_events": 198.0625,
+        "action_clip_events": 2892.09375
+      }
+    },
+    {
+      "after_rollout": 45,
+      "training_team_steps": 360000,
+      "kind": "holdout",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_45_holdout_deterministic.json",
+      "means": {
+        "r_mean_all": 0.14306385537195404,
+        "r_mean_final100": 0.11415129565995547,
+        "coverage_backhauled_mean_all": 0.21096125,
+        "coverage_backhauled_mean_final100": 0.16685,
+        "coverage_backhauled_final": 0.19625,
+        "frontend_capacity_with_path_mbps_mean_all": 89.90413455725346,
+        "far_cluster_backhauled_share_mean_all": 0.046006250000000005,
+        "far_cluster_backhauled_share_final": 0.0375,
+        "far_cluster_a2a_path_user_time_share": 0.026318750000000002,
+        "association_changes_per_step_mean": 0.7419375,
+        "uav_backhaul_loss_events": 32.1875,
+        "user_backhaul_loss_events": 171.78125,
+        "action_clip_events": 2897.34375
+      }
+    },
+    {
+      "after_rollout": 45,
+      "training_team_steps": 360000,
+      "kind": "holdout",
+      "mode": "sampled",
+      "status": "complete",
+      "file": "panel_45_holdout_sampled.json",
+      "means": {
+        "r_mean_all": 0.17110528146974288,
+        "r_mean_final100": 0.22770418185826372,
+        "coverage_backhauled_mean_all": 0.256585,
+        "coverage_backhauled_mean_final100": 0.33921250000000003,
+        "coverage_backhauled_final": 0.3425,
+        "frontend_capacity_with_path_mbps_mean_all": 102.41392312296678,
+        "far_cluster_backhauled_share_mean_all": 0.08501250000000002,
+        "far_cluster_backhauled_share_final": 0.103125,
+        "far_cluster_a2a_path_user_time_share": 0.05357499999999999,
+        "association_changes_per_step_mean": 0.8930625,
+        "uav_backhaul_loss_events": 17.5,
+        "user_backhaul_loss_events": 146.8125,
+        "action_clip_events": 2982.09375
+      }
+    }
+  ],
+  "checkpoints": [
+    {
+      "path": "checkpoint_00.pt",
+      "sha256": "00bc45b7371f6765dac79c698cd12aa5879068d8773d8358b213df3c6a598496",
+      "bytes": 23030746
+    },
+    {
+      "path": "checkpoint_15.pt",
+      "sha256": "0794763f4cdc2b717206b39e98e2450b6dfe4cb443c59410cc8c69ede0d76753",
+      "bytes": 23030746
+    },
+    {
+      "path": "checkpoint_30.pt",
+      "sha256": "6d78b7e8d418727d94d62b7043add4e5356dec0a0498444a96b98a4ecabb5511",
+      "bytes": 23030746
+    },
+    {
+      "path": "checkpoint_45.pt",
+      "sha256": "1132a5dca2c8bccbd627071444d84dabfbec972ffae83799253405e08bed4f27",
+      "bytes": 23030746
+    }
+  ],
+  "counts": {
+    "training_team_steps": 360000,
+    "stored_team_steps": 360000,
+    "training_episodes": 720,
+    "updates": 45,
+    "evaluation_team_steps": 96000,
+    "evaluation_episodes": 192
+  },
+  "memory": {
+    "evaluation_overlap": [
+      {
+        "after_rollout": 0,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 664716,
+          "VmHWM_kib": 686748
+        },
+        "after_target_build": {
+          "VmRSS_kib": 769504,
+          "VmHWM_kib": 769504
+        }
+      },
+      {
+        "after_rollout": 15,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 2067732,
+          "VmHWM_kib": 2553112
+        },
+        "after_target_build": {
+          "VmRSS_kib": 2067732,
+          "VmHWM_kib": 2553112
+        }
+      },
+      {
+        "after_rollout": 30,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 2304948,
+          "VmHWM_kib": 2553112
+        },
+        "after_target_build": {
+          "VmRSS_kib": 2304948,
+          "VmHWM_kib": 2553112
+        }
+      },
+      {
+        "after_rollout": 45,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 2332496,
+          "VmHWM_kib": 2553112
+        },
+        "after_target_build": {
+          "VmRSS_kib": 2332496,
+          "VmHWM_kib": 2553112
+        }
+      },
+      {
+        "after_rollout": 45,
+        "kind": "holdout",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 2332496,
+          "VmHWM_kib": 2553112
+        },
+        "after_target_build": {
+          "VmRSS_kib": 2332496,
+          "VmHWM_kib": 2553112
+        }
+      },
+      {
+        "after_rollout": 45,
+        "kind": "holdout",
+        "mode": "sampled",
+        "before_target_build": {
+          "VmRSS_kib": 2332496,
+          "VmHWM_kib": 2553112
+        },
+        "after_target_build": {
+          "VmRSS_kib": 2332496,
+          "VmHWM_kib": 2553112
+        }
+      }
+    ],
+    "start": {
+      "VmRSS_kib": 421740,
+      "VmHWM_kib": 421740
+    },
+    "matching_table_build": {
+      "before": {
+        "VmRSS_kib": 661788,
+        "VmHWM_kib": 661788
+      },
+      "after": {
+        "VmRSS_kib": 664236,
+        "VmHWM_kib": 686748
+      }
+    }
+  },
+  "reward_units": {
+    "training": "adapter scalar = contract team r / 6",
+    "readings": "team per-step r = 0.5 * (C_bh + S/D)"
+  },
+  "runtime": {
+    "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+    "torch": "2.7.0+cu118",
+    "numpy": "1.26.3",
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_threads": 4,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    }
+  },
+  "last_boundary": "complete",
+  "wall_seconds": 5068.617739015957,
+  "config": {
+    "contract_arm": "H",
+    "algorithm": "hmasd",
+    "n_agents": 6,
+    "n_uavs": 6,
+    "n_users": 50,
+    "num_envs": 16,
+    "rollout_length": 500,
+    "episode_length": 500,
+    "k": 10,
+    "n_Z": 6,
+    "n_z": 6,
+    "state_dim": 133,
+    "obs_dim": 90,
+    "action_dim": 3,
+    "action_space_type": "continuous",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 800,
+    "batch_size": 12000,
+    "discriminator_batch_size": 12000,
+    "lambda_e": 1.0,
+    "lambda_D": 0.05,
+    "lambda_d": 0.02,
+    "lambda_h": 0.07,
+    "lambda_l": 0.05,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "use_entropy_annealing": false,
+    "total_timesteps": 360000,
+    "seed": 931307,
+    "policy_interruption_mode": "d2",
+    "interruption_delta": 1,
+    "interruption_cost_c": "inf",
+    "interruption_cost_c_Z": "inf",
+    "skill_cap_k_max": 10,
+    "team_cap_k_Z": 10,
+    "age_feature": "off",
+    "use_central_snapshot_in_flat_actor": false,
+    "disable_high_level_training": null,
+    "disable_discriminator_training": null,
+    "disable_discriminator_rewards": null,
+    "collects_high_level_samples": null,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false
+  },
+  "route": {
+    "policy_interruption_mode": "d2",
+    "d2_enabled": true,
+    "d2_cost_c": "inf",
+    "d2_cost_c_Z": "inf",
+    "d2_k_max": 10,
+    "d2_k_Z": 10,
+    "d2_age_feature": "off",
+    "use_ha_ctse": false,
+    "use_central_snapshot": false
+  },
+  "optimizer_calls": {
+    "coordinator": 675,
+    "discoverer_actor": 101250,
+    "discoverer_critic": 101250,
+    "team_discriminator": 675,
+    "individual_discriminator": 2700
+  },
+  "parameter_counts": {
+    "skill_coordinator": 3848014,
+    "skill_discoverer": 1017159,
+    "team_discriminator": 399573,
+    "individual_discriminator": 424378
+  },
+  "initial_parameter_digest": "82f973620c5aa6ab0fb53382170be1958f26396f8a516096505f67d6ca754e08",
+  "training_started_wall": 37.22845369100105,
+  "terminal_facts": {
+    "low_level_dones_last_step_all_true": true,
+    "low_level_dones_before_last_any": false,
+    "d2_team_rows": 800,
+    "d2_team_rows_terminal": 16,
+    "d2_last_team_row_terminal_all": true,
+    "d2_last_agent_row_terminal_all": true,
+    "d2_open_segments_before_update": 0
+  },
+  "parameter_motion": {
+    "coordinator": {
+      "delta_l2": 7.437469817217744,
+      "relative_l2": 0.07073696401214792
+    },
+    "discoverer_actor": {
+      "delta_l2": 47.474914352554656,
+      "relative_l2": 1.1665761730321058
+    },
+    "discoverer_critic": {
+      "delta_l2": 40.400868107945286,
+      "relative_l2": 1.1728746766475757
+    },
+    "team_discriminator": {
+      "delta_l2": 1.8352965773246757,
+      "relative_l2": 0.034958056762912644
+    },
+    "individual_discriminator": {
+      "delta_l2": 11.18901212788589,
+      "relative_l2": 0.20401064386549317
+    },
+    "coordinator.state_embedding": {
+      "delta_l2": 2.2823099106586193,
+      "relative_l2": 0.15336366653310407
+    },
+    "discoverer_critic.base": {
+      "delta_l2": 18.834740283463503,
+      "relative_l2": 1.2687284173318212
+    },
+    "team_discriminator.state_encoder": {
+      "delta_l2": 0.9461660989190507,
+      "relative_l2": 0.07047496022308865
+    }
+  },
+  "last_training_row": {
+    "rollout": 45,
+    "team_steps": 360000,
+    "timing": {
+      "collection_seconds": 18.269031226984225,
+      "update_seconds": 67.54733353597112,
+      "policy_seconds": 9.308123230817728,
+      "env_seconds": 7.2632087271194905,
+      "store_seconds": 1.4622633313992992,
+      "cpu_seconds": 345.0709719999977,
+      "wall_seconds": 85.82882726797834
+    },
+    "optimizer_total": {
+      "coordinator": 675,
+      "discoverer_actor": 101250,
+      "discoverer_critic": 101250,
+      "team_discriminator": 675,
+      "individual_discriminator": 2700
+    },
+    "action_clip_events": 47715
+  },
+  "final_parameter_digest": "9035383676f6766538b2cf06f42b248a85cd2b36f2a1b608c279623ee95206dc",
+  "resources": {
+    "wall_seconds_in_run_fit": 5067.389562319964,
+    "command_wall_seconds": 5068.617663740995,
+    "cpu_user_seconds": 20226.47265,
+    "cpu_system_seconds": 132.966654,
+    "cpu_seconds_in_run_fit": 20358.216432,
+    "peak_rss_kib": 2553112,
+    "proc_memory_end": {
+      "VmRSS_kib": 2332496,
+      "VmHWM_kib": 2553112
+    },
+    "rss_scope": "scientific process Linux RUSAGE_SELF",
+    "resources_unmeasured": [
+      "peak_scratch_bytes"
+    ]
+  }
+}

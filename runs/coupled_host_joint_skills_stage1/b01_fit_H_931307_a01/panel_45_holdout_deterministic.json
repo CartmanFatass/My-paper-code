@@ -1,0 +1,3703 @@
+{
+  "after_rollout": 45,
+  "training_team_steps": 360000,
+  "kind": "holdout",
+  "mode": "deterministic",
+  "status": "complete",
+  "file": "panel_45_holdout_deterministic.json",
+  "means": {
+    "r_mean_all": 0.14306385537195404,
+    "r_mean_final100": 0.11415129565995547,
+    "coverage_backhauled_mean_all": 0.21096125,
+    "coverage_backhauled_mean_final100": 0.16685,
+    "coverage_backhauled_final": 0.19625,
+    "frontend_capacity_with_path_mbps_mean_all": 89.90413455725346,
+    "far_cluster_backhauled_share_mean_all": 0.046006250000000005,
+    "far_cluster_backhauled_share_final": 0.0375,
+    "far_cluster_a2a_path_user_time_share": 0.026318750000000002,
+    "association_changes_per_step_mean": 0.7419375,
+    "uav_backhaul_loss_events": 32.1875,
+    "user_backhaul_loss_events": 171.78125,
+    "action_clip_events": 2897.34375
+  },
+  "worlds": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026,
+    2027,
+    2028,
+    2029,
+    2030,
+    2031
+  ],
+  "deterministic": true,
+  "rng_seed": 2051,
+  "steps": 16000,
+  "episodes": 32,
+  "per_world": [
+    {
+      "world_seed": 2000,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            2637.7838064524312,
+            4338.276645055834
+          ],
+          [
+            1309.371891805733,
+            2496.9756062063484
+          ],
+          [
+            2142.8220065801174,
+            2650.019443397884
+          ],
+          [
+            2869.734108987331,
+            1959.278250237329
+          ],
+          [
+            397.57057681035155,
+            4336.405051858483
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          1843.4330476256123,
+          1190.6319494201716,
+          387.404120242499,
+          655.0445191092437,
+          2791.5216269957346
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          2852.58642689233,
+          2822.6437760242,
+          98.84418325445054
+        ],
+        [
+          1682.3887673266236,
+          1879.340889059794,
+          103.2035868838685
+        ],
+        [
+          340.5314423355632,
+          2922.6453009831903,
+          73.78977634210982
+        ],
+        [
+          803.7829076987468,
+          760.595745739615,
+          62.706921895137256
+        ],
+        [
+          1637.2058318600584,
+          3470.769365056284,
+          85.89664694069509
+        ],
+        [
+          4456.8282794979095,
+          1009.3993971234561,
+          61.06025034536127
+        ]
+      ],
+      "contract_reward_mean_all": 0.31205827981539136,
+      "contract_reward_mean_final100": 0.29757547832367115,
+      "contract_reward_final": 0.2962966602327941,
+      "coverage_backhauled_mean_all": 0.49084000000000005,
+      "coverage_backhauled_mean_final100": 0.4522,
+      "coverage_backhauled_final": 0.5,
+      "frontend_capacity_with_path_mbps_mean_all": 159.40771498071106,
+      "frontend_capacity_with_path_mbps_mean_final100": 170.97894345853393,
+      "frontend_capacity_with_path_mbps_final": 110.74782901649131,
+      "far_cluster_backhauled_share_mean_all": 0.0092,
+      "far_cluster_backhauled_share_mean_final100": 0.01,
+      "far_cluster_backhauled_share_final": 0.1,
+      "r_mean_all": 0.31205827981539136,
+      "r_mean_final100": 0.29757547832367115,
+      "far_cluster_a2a_path_user_steps": 9,
+      "far_cluster_a2a_path_user_time_share": 0.0018,
+      "far_cluster_backhauled_user_steps": 46,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          1463,
+          374,
+          13,
+          1
+        ],
+        "links_per_routed_uav_step_mean": 1.217720151269584,
+        "routed_uavs_per_step_mean": 3.702
+      },
+      "relay_position_share_by_agent": [
+        0.088,
+        0.502,
+        0.0,
+        0.108,
+        0.0,
+        0.042
+      ],
+      "association_changes_per_step_mean": 1.174,
+      "association_changes_total": 587,
+      "uav_backhaul_loss_events": 15,
+      "user_backhaul_loss_events": 148,
+      "action_clip_events": 2884
+    },
+    {
+      "world_seed": 2001,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            2905.5036913257622,
+            1697.7163906305625
+          ],
+          [
+            4087.4794584940414,
+            408.0065978307729
+          ],
+          [
+            3271.07852562415,
+            3222.621367342301
+          ],
+          [
+            4521.265360154846,
+            4124.851295293856
+          ],
+          [
+            1318.6631693723778,
+            2157.7576155876527
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          898.9395049399437,
+          2626.124030936108,
+          1056.7609631408466,
+          2593.386856598919,
+          1229.9132315271531
+        ],
+        "far_cluster": 1,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          835.6282145455074,
+          404.99018444249305,
+          146.02257400218494
+        ],
+        [
+          4692.2512207631125,
+          3104.294270561626,
+          92.56019675259421
+        ],
+        [
+          3448.9064490375745,
+          1210.1731085389872,
+          86.6600635033013
+        ],
+        [
+          709.7551347946851,
+          1050.9611995649386,
+          140.7944516934796
+        ],
+        [
+          3220.253581455839,
+          1036.3610364257047,
+          93.59656327315665
+        ],
+        [
+          4781.785437468137,
+          3488.9386492323238,
+          102.98924317977071
+        ]
+      ],
+      "contract_reward_mean_all": 0.25063962715516686,
+      "contract_reward_mean_final100": 0.20072132105786827,
+      "contract_reward_final": 0.22413400917656473,
+      "coverage_backhauled_mean_all": 0.35603999999999997,
+      "coverage_backhauled_mean_final100": 0.29159999999999997,
+      "coverage_backhauled_final": 0.34,
+      "frontend_capacity_with_path_mbps_mean_all": 173.71590112508594,
+      "frontend_capacity_with_path_mbps_mean_final100": 131.37917602030723,
+      "frontend_capacity_with_path_mbps_final": 129.49582026257383,
+      "far_cluster_backhauled_share_mean_all": 0.0024000000000000002,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.25063962715516686,
+      "r_mean_final100": 0.20072132105786827,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 12,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          1112,
+          646,
+          113,
+          20
+        ],
+        "links_per_routed_uav_step_mean": 1.4928609201480698,
+        "routed_uavs_per_step_mean": 3.782
+      },
+      "relay_position_share_by_agent": [
+        0.08,
+        0.25,
+        0.25,
+        0.0,
+        0.25,
+        0.228
+      ],
+      "association_changes_per_step_mean": 0.86,
+      "association_changes_total": 430,
+      "uav_backhaul_loss_events": 30,
+      "user_backhaul_loss_events": 166,
+      "action_clip_events": 2866
+    },
+    {
+      "world_seed": 2002,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            4907.646560632517,
+            4675.01570355964
+          ],
+          [
+            3235.7277681790647,
+            2515.0999002850017
+          ],
+          [
+            2264.0585031650176,
+            1146.388976599143
+          ],
+          [
+            962.6484707067873,
+            117.53339957625452
+          ],
+          [
+            3344.363265963441,
+            1160.5237391890987
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          3244.6040238612522,
+          735.8827052311833,
+          1374.0200844969652,
+          2835.41828074005,
+          1583.3969742880026
+        ],
+        "far_cluster": 0,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          3272.5686913254426,
+          1486.4169150434964,
+          102.38870808737097
+        ],
+        [
+          2572.159484970709,
+          3370.8368391569197,
+          60.16370240255739
+        ],
+        [
+          3723.1501563435554,
+          305.8942860146585,
+          54.71147361481764
+        ],
+        [
+          494.750578991891,
+          1962.4262433901913,
+          68.00017409719254
+        ],
+        [
+          2425.3860856849356,
+          3591.2974620772993,
+          82.58051153210951
+        ],
+        [
+          1908.789599470151,
+          2809.9516850945283,
+          82.14546771109607
+        ]
+      ],
+      "contract_reward_mean_all": 0.1455721460637972,
+      "contract_reward_mean_final100": 0.11357368500920954,
+      "contract_reward_final": 0.11461154269341423,
+      "coverage_backhauled_mean_all": 0.23168,
+      "coverage_backhauled_mean_final100": 0.19459999999999997,
+      "coverage_backhauled_final": 0.2,
+      "frontend_capacity_with_path_mbps_mean_all": 71.12328647487034,
+      "frontend_capacity_with_path_mbps_mean_final100": 38.928840132436534,
+      "frontend_capacity_with_path_mbps_final": 34.952772483816354,
+      "far_cluster_backhauled_share_mean_all": 0.0,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.1455721460637972,
+      "r_mean_final100": 0.11357368500920954,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 0,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          918,
+          299,
+          25,
+          3
+        ],
+        "links_per_routed_uav_step_mean": 1.287550200803213,
+        "routed_uavs_per_step_mean": 2.49
+      },
+      "relay_position_share_by_agent": [
+        0.084,
+        0.164,
+        0.068,
+        0.0,
+        0.116,
+        0.068
+      ],
+      "association_changes_per_step_mean": 0.424,
+      "association_changes_total": 212,
+      "uav_backhaul_loss_events": 58,
+      "user_backhaul_loss_events": 248,
+      "action_clip_events": 2941
+    },
+    {
+      "world_seed": 2003,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            4237.634973765727,
+            3701.705570039732
+          ],
+          [
+            3141.261641355877,
+            2098.723813847394
+          ],
+          [
+            192.3145648577085,
+            3668.1238125219247
+          ],
+          [
+            3743.9785983350553,
+            2283.106441856425
+          ],
+          [
+            4757.396228486104,
+            4537.601886098438
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2112.692968492662,
+          756.4648506359132,
+          2586.4889926208125,
+          1262.7452509036925,
+          3040.9964121345483
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          2461.4517719888418,
+          2227.9697907334335,
+          90.51284680411595
+        ],
+        [
+          1731.9709171720992,
+          4235.4200850964635,
+          68.83620483973816
+        ],
+        [
+          4868.245589763965,
+          4188.981893483035,
+          136.9232804849164
+        ],
+        [
+          1466.6056911072124,
+          4141.643075477938,
+          60.17629460142221
+        ],
+        [
+          3227.945035604426,
+          2225.538080763006,
+          58.51443613034533
+        ],
+        [
+          3683.0094367540046,
+          4678.711863515892,
+          101.64020414320902
+        ]
+      ],
+      "contract_reward_mean_all": 0.09691215975827921,
+      "contract_reward_mean_final100": 0.12057466070575637,
+      "contract_reward_final": 0.11501596722649124,
+      "coverage_backhauled_mean_all": 0.15832,
+      "coverage_backhauled_mean_final100": 0.19999999999999996,
+      "coverage_backhauled_final": 0.2,
+      "frontend_capacity_with_path_mbps_mean_all": 42.46555029450532,
+      "frontend_capacity_with_path_mbps_mean_final100": 49.21735162873345,
+      "frontend_capacity_with_path_mbps_final": 35.92021028200899,
+      "far_cluster_backhauled_share_mean_all": 0.0,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.09691215975827921,
+      "r_mean_final100": 0.12057466070575637,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 0,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          624,
+          0,
+          0,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.0,
+        "routed_uavs_per_step_mean": 1.248
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "association_changes_per_step_mean": 0.626,
+      "association_changes_total": 313,
+      "uav_backhaul_loss_events": 15,
+      "user_backhaul_loss_events": 63,
+      "action_clip_events": 2888
+    },
+    {
+      "world_seed": 2004,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            4832.188819467137,
+            4629.602162512445
+          ],
+          [
+            4113.29900337265,
+            3521.0124163420437
+          ],
+          [
+            4984.188797447222,
+            4913.503658471156
+          ],
+          [
+            3666.0459744159466,
+            4731.681498989257
+          ],
+          [
+            696.1054187343108,
+            1436.524658995576
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          3158.213111907618,
+          1909.2406942572236,
+          3463.552207029068,
+          2517.9486744933015,
+          2094.042850861508
+        ],
+        "far_cluster": 2,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          2938.741445549428,
+          4022.1949169977324,
+          97.03352975879017
+        ],
+        [
+          2428.479249749011,
+          3793.693730312791,
+          129.19159965790885
+        ],
+        [
+          2931.58711118865,
+          4859.90304678249,
+          106.31974945472723
+        ],
+        [
+          355.9085755262176,
+          2095.1091541332844,
+          94.27334563007115
+        ],
+        [
+          2463.2437433925174,
+          720.2897636013178,
+          65.37066145631792
+        ],
+        [
+          3302.549266584273,
+          1050.4045318268236,
+          56.706495510497426
+        ]
+      ],
+      "contract_reward_mean_all": 0.013420920518119411,
+      "contract_reward_mean_final100": 0.0,
+      "contract_reward_final": 0.0,
+      "coverage_backhauled_mean_all": 0.019399999999999997,
+      "coverage_backhauled_mean_final100": 0.0,
+      "coverage_backhauled_final": 0.0,
+      "frontend_capacity_with_path_mbps_mean_all": 8.900941606857941,
+      "frontend_capacity_with_path_mbps_mean_final100": 0.0,
+      "frontend_capacity_with_path_mbps_final": 0.0,
+      "far_cluster_backhauled_share_mean_all": 0.0,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.013420920518119411,
+      "r_mean_final100": 0.0,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 0,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          143,
+          97,
+          0,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.4041666666666666,
+        "routed_uavs_per_step_mean": 0.48
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.048,
+        0.146
+      ],
+      "association_changes_per_step_mean": 0.758,
+      "association_changes_total": 379,
+      "uav_backhaul_loss_events": 12,
+      "user_backhaul_loss_events": 28,
+      "action_clip_events": 2913
+    },
+    {
+      "world_seed": 2005,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            1090.0882925252774,
+            4380.743249499918
+          ],
+          [
+            2322.043290028287,
+            4663.456774035617
+          ],
+          [
+            1238.1663804228172,
+            2419.6231964599897
+          ],
+          [
+            1282.6378241156915,
+            2148.209945857303
+          ],
+          [
+            2314.363289375302,
+            269.65332999542403
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2350.5416808501395,
+          2170.7634149636287,
+          1264.3909656599749,
+          1267.1728017391708,
+          2238.058814404139
+        ],
+        "far_cluster": 0,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          902.8296271243707,
+          4658.236163865942,
+          65.8780917209827
+        ],
+        [
+          3757.2570889194867,
+          4184.477173646641,
+          82.22715225163728
+        ],
+        [
+          3615.6386696169284,
+          3641.205337108476,
+          117.4654188699863
+        ],
+        [
+          428.15325325238405,
+          2657.0871389252575,
+          117.6794291861624
+        ],
+        [
+          2869.267982479642,
+          2171.339677230807,
+          83.77223240511714
+        ],
+        [
+          4941.935649518063,
+          4443.045146252477,
+          63.34777303856557
+        ]
+      ],
+      "contract_reward_mean_all": 0.038859811651465626,
+      "contract_reward_mean_final100": 0.0,
+      "contract_reward_final": 0.0,
+      "coverage_backhauled_mean_all": 0.0626,
+      "coverage_backhauled_mean_final100": 0.0,
+      "coverage_backhauled_final": 0.0,
+      "frontend_capacity_with_path_mbps_mean_all": 18.0840847690422,
+      "frontend_capacity_with_path_mbps_mean_final100": 0.0,
+      "frontend_capacity_with_path_mbps_final": 0.0,
+      "far_cluster_backhauled_share_mean_all": 0.0,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.038859811651465626,
+      "r_mean_final100": 0.0,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 0,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          162,
+          0,
+          0,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.0,
+        "routed_uavs_per_step_mean": 0.324
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "association_changes_per_step_mean": 0.716,
+      "association_changes_total": 358,
+      "uav_backhaul_loss_events": 4,
+      "user_backhaul_loss_events": 72,
+      "action_clip_events": 2915
+    },
+    {
+      "world_seed": 2006,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            3736.734571218356,
+            3553.6098606849855
+          ],
+          [
+            1749.1815727303822,
+            2366.139370617853
+          ],
+          [
+            2713.8963677422907,
+            1352.3743120500903
+          ],
+          [
+            1418.2068422794957,
+            4863.323650380489
+          ],
+          [
+            242.3204217462771,
+            4525.955390030613
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          1624.6864738094196,
+          762.657838631589,
+          1167.3886995237913,
+          2599.148920808244,
+          3033.4159491335836
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          1207.7762913176405,
+          4858.771314363429,
+          113.42650306445243
+        ],
+        [
+          1327.1219513569777,
+          3694.3127018791956,
+          122.4654484840638
+        ],
+        [
+          3828.9334297695714,
+          1474.7326267350286,
+          125.66148401206051
+        ],
+        [
+          3945.9714607500437,
+          1659.3314994511754,
+          68.88652274097204
+        ],
+        [
+          512.6683277553834,
+          3348.461517952858,
+          109.37945823905318
+        ],
+        [
+          1949.7882176511798,
+          4487.174782806913,
+          74.14457082936447
+        ]
+      ],
+      "contract_reward_mean_all": 0.11167420057157341,
+      "contract_reward_mean_final100": 0.14648029102007337,
+      "contract_reward_final": 0.3376656142666299,
+      "coverage_backhauled_mean_all": 0.16568,
+      "coverage_backhauled_mean_final100": 0.21380000000000002,
+      "coverage_backhauled_final": 0.48,
+      "frontend_capacity_with_path_mbps_mean_all": 68.97528026148723,
+      "frontend_capacity_with_path_mbps_mean_final100": 94.68137183703494,
+      "frontend_capacity_with_path_mbps_final": 233.62926602488812,
+      "far_cluster_backhauled_share_mean_all": 0.034,
+      "far_cluster_backhauled_share_mean_final100": 0.08599999999999998,
+      "far_cluster_backhauled_share_final": 0.2,
+      "r_mean_all": 0.11167420057157341,
+      "r_mean_final100": 0.14648029102007337,
+      "far_cluster_a2a_path_user_steps": 170,
+      "far_cluster_a2a_path_user_time_share": 0.034,
+      "far_cluster_backhauled_user_steps": 170,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          460,
+          169,
+          118,
+          59
+        ],
+        "links_per_routed_uav_step_mean": 1.7220843672456576,
+        "routed_uavs_per_step_mean": 1.612
+      },
+      "relay_position_share_by_agent": [
+        0.018,
+        0.036,
+        0.184,
+        0.15,
+        0.092,
+        0.0
+      ],
+      "association_changes_per_step_mean": 1.42,
+      "association_changes_total": 710,
+      "uav_backhaul_loss_events": 102,
+      "user_backhaul_loss_events": 478,
+      "action_clip_events": 2913
+    },
+    {
+      "world_seed": 2007,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            4063.2079782196306,
+            3958.0481854428986
+          ],
+          [
+            1600.2872559370458,
+            2192.2194042825754
+          ],
+          [
+            1111.6914132940049,
+            3223.6213620958324
+          ],
+          [
+            1502.68451586399,
+            1018.9917763126166
+          ],
+          [
+            4660.265625848324,
+            2531.95551515499
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2137.6444265225296,
+          950.9005820428673,
+          1565.576126415776,
+          1785.503719830094,
+          2160.5019623158573
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          3217.859706444868,
+          1350.4551589532332,
+          111.45380233382448
+        ],
+        [
+          3803.373362337071,
+          4172.825635180385,
+          97.74762667559723
+        ],
+        [
+          3155.26804254906,
+          493.4560770311258,
+          69.57077791225642
+        ],
+        [
+          407.788219534303,
+          2048.045360570584,
+          91.93337763245847
+        ],
+        [
+          4482.6472380712,
+          3075.671730222437,
+          89.9263394537742
+        ],
+        [
+          2527.1587352221213,
+          1996.9285419060072,
+          81.27759614946754
+        ]
+      ],
+      "contract_reward_mean_all": 0.14882480906675835,
+      "contract_reward_mean_final100": 0.09540309831996595,
+      "contract_reward_final": 0.11941200704796666,
+      "coverage_backhauled_mean_all": 0.22932,
+      "coverage_backhauled_mean_final100": 0.14179999999999998,
+      "coverage_backhauled_final": 0.2,
+      "frontend_capacity_with_path_mbps_mean_all": 81.7268116939948,
+      "frontend_capacity_with_path_mbps_mean_final100": 58.61470199942515,
+      "frontend_capacity_with_path_mbps_final": 46.43612793244862,
+      "far_cluster_backhauled_share_mean_all": 0.040999999999999995,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.14882480906675835,
+      "r_mean_final100": 0.09540309831996595,
+      "far_cluster_a2a_path_user_steps": 16,
+      "far_cluster_a2a_path_user_time_share": 0.0032,
+      "far_cluster_backhauled_user_steps": 205,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          563,
+          257,
+          84,
+          33
+        ],
+        "links_per_routed_uav_step_mean": 1.5592315901814302,
+        "routed_uavs_per_step_mean": 1.874
+      },
+      "relay_position_share_by_agent": [
+        0.198,
+        0.0,
+        0.26,
+        0.062,
+        0.0,
+        0.182
+      ],
+      "association_changes_per_step_mean": 0.678,
+      "association_changes_total": 339,
+      "uav_backhaul_loss_events": 58,
+      "user_backhaul_loss_events": 372,
+      "action_clip_events": 2892
+    },
+    {
+      "world_seed": 2008,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            1963.1319749742877,
+            473.8127532345127
+          ],
+          [
+            2009.7137198194853,
+            4663.375069090487
+          ],
+          [
+            830.9480591173052,
+            3210.900498315329
+          ],
+          [
+            1589.7298676216853,
+            1142.7027209808898
+          ],
+          [
+            1288.9376969439386,
+            1968.6878715094258
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2096.1063988381206,
+          2218.236309795581,
+          1814.142745174501,
+          1634.2728100083887,
+          1322.4842077562348
+        ],
+        "far_cluster": 1,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          1340.9646179563294,
+          362.49722933273887,
+          78.99143450728945
+        ],
+        [
+          895.8594278201082,
+          3427.926916261775,
+          78.05288606895856
+        ],
+        [
+          1507.894600399749,
+          57.02734986590907,
+          143.92401215544675
+        ],
+        [
+          1425.559351710139,
+          3042.415251444215,
+          58.81356374461719
+        ],
+        [
+          2267.8224797788703,
+          1340.7178498904805,
+          79.08888366663808
+        ],
+        [
+          853.8993360400132,
+          4341.061182129553,
+          130.9069378100189
+        ]
+      ],
+      "contract_reward_mean_all": 0.03189282764080727,
+      "contract_reward_mean_final100": 0.07813759269001444,
+      "contract_reward_final": 0.11968184546044158,
+      "coverage_backhauled_mean_all": 0.05064,
+      "coverage_backhauled_mean_final100": 0.11979999999999996,
+      "coverage_backhauled_final": 0.2,
+      "frontend_capacity_with_path_mbps_mean_all": 15.723086461501738,
+      "frontend_capacity_with_path_mbps_mean_final100": 43.62677106188816,
+      "frontend_capacity_with_path_mbps_final": 47.08161765495965,
+      "far_cluster_backhauled_share_mean_all": 0.0202,
+      "far_cluster_backhauled_share_mean_final100": 0.081,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.03189282764080727,
+      "r_mean_final100": 0.07813759269001444,
+      "far_cluster_a2a_path_user_steps": 101,
+      "far_cluster_a2a_path_user_time_share": 0.0202,
+      "far_cluster_backhauled_user_steps": 101,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          83,
+          44,
+          27,
+          2
+        ],
+        "links_per_routed_uav_step_mean": 1.6666666666666667,
+        "routed_uavs_per_step_mean": 0.312
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.01,
+        0.052,
+        0.014,
+        0.044,
+        0.0
+      ],
+      "association_changes_per_step_mean": 0.818,
+      "association_changes_total": 409,
+      "uav_backhaul_loss_events": 22,
+      "user_backhaul_loss_events": 149,
+      "action_clip_events": 2881
+    },
+    {
+      "world_seed": 2009,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            4507.062723068992,
+            1710.6383403917946
+          ],
+          [
+            1786.3041340715308,
+            533.1339614336733
+          ],
+          [
+            545.3558321183915,
+            770.0404749501
+          ],
+          [
+            1536.3772366599414,
+            685.2944402036554
+          ],
+          [
+            4139.043041127405,
+            4604.742859983531
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2156.7087434311893,
+          2092.348872131266,
+          2610.247839065184,
+          2054.683697989278,
+          2667.659010690801
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          301.12919721867524,
+          4351.746922301642,
+          65.5763783054396
+        ],
+        [
+          3261.812733953589,
+          201.50812402632502,
+          72.83787427442168
+        ],
+        [
+          4686.203813825638,
+          89.65344575563749,
+          99.12595397357919
+        ],
+        [
+          625.4839147424235,
+          2401.5362662806156,
+          61.48739303145864
+        ],
+        [
+          4398.077357297561,
+          4087.1156774511496,
+          94.52935183622114
+        ],
+        [
+          4325.075722411405,
+          3386.509427870778,
+          81.39466193023195
+        ]
+      ],
+      "contract_reward_mean_all": 0.029205072390061083,
+      "contract_reward_mean_final100": 0.016157681584244854,
+      "contract_reward_final": 0.0,
+      "coverage_backhauled_mean_all": 0.04072,
+      "coverage_backhauled_mean_final100": 0.019400000000000004,
+      "coverage_backhauled_final": 0.0,
+      "frontend_capacity_with_path_mbps_mean_all": 21.158601069005293,
+      "frontend_capacity_with_path_mbps_mean_final100": 15.447641629844865,
+      "frontend_capacity_with_path_mbps_final": 0.0,
+      "far_cluster_backhauled_share_mean_all": 0.0936,
+      "far_cluster_backhauled_share_mean_final100": 0.09699999999999999,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.029205072390061083,
+      "r_mean_final100": 0.016157681584244854,
+      "far_cluster_a2a_path_user_steps": 415,
+      "far_cluster_a2a_path_user_time_share": 0.083,
+      "far_cluster_backhauled_user_steps": 468,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          342,
+          191,
+          88,
+          55
+        ],
+        "links_per_routed_uav_step_mean": 1.78698224852071,
+        "routed_uavs_per_step_mean": 1.352
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.0,
+        0.064,
+        0.064,
+        0.1,
+        0.228
+      ],
+      "association_changes_per_step_mean": 0.304,
+      "association_changes_total": 152,
+      "uav_backhaul_loss_events": 27,
+      "user_backhaul_loss_events": 35,
+      "action_clip_events": 2914
+    },
+    {
+      "world_seed": 2010,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            4159.431625461095,
+            2605.451644166237
+          ],
+          [
+            3449.4125299996203,
+            895.8164935442281
+          ],
+          [
+            973.6497555302975,
+            3712.9997920400524
+          ],
+          [
+            975.4194681810329,
+            25.24542977531685
+          ],
+          [
+            3264.848541495379,
+            2168.24645230702
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          1662.7788093543334,
+          1864.078559102329,
+          1949.6444712516,
+          2906.6743850746957,
+          833.6988112229061
+        ],
+        "far_cluster": 3,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          212.25989080200515,
+          2025.1832675771093,
+          98.76338410492055
+        ],
+        [
+          4683.469816994217,
+          2441.0322120004753,
+          88.6236129090388
+        ],
+        [
+          1167.6537434080515,
+          3948.0965491408997,
+          86.96408043958732
+        ],
+        [
+          11.006188287152053,
+          2094.7989803376495,
+          81.41304347036342
+        ],
+        [
+          1866.9236423218733,
+          2248.7984393579695,
+          108.25754107386557
+        ],
+        [
+          3370.8859385782434,
+          4385.414083773706,
+          147.80999831971593
+        ]
+      ],
+      "contract_reward_mean_all": 0.12596886646444314,
+      "contract_reward_mean_final100": 0.14332647296472642,
+      "contract_reward_final": 0.16089689084211167,
+      "coverage_backhauled_mean_all": 0.20148000000000002,
+      "coverage_backhauled_mean_final100": 0.22320000000000004,
+      "coverage_backhauled_final": 0.26,
+      "frontend_capacity_with_path_mbps_mean_all": 60.35083687321545,
+      "frontend_capacity_with_path_mbps_mean_final100": 75.89398426422508,
+      "frontend_capacity_with_path_mbps_final": 73.90951241229232,
+      "far_cluster_backhauled_share_mean_all": 0.0,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.12596886646444314,
+      "r_mean_final100": 0.14332647296472642,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 0,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          738,
+          116,
+          34,
+          8
+        ],
+        "links_per_routed_uav_step_mean": 1.2321428571428572,
+        "routed_uavs_per_step_mean": 1.792
+      },
+      "relay_position_share_by_agent": [
+        0.17,
+        0.036,
+        0.0,
+        0.016,
+        0.094,
+        0.0
+      ],
+      "association_changes_per_step_mean": 0.296,
+      "association_changes_total": 148,
+      "uav_backhaul_loss_events": 15,
+      "user_backhaul_loss_events": 74,
+      "action_clip_events": 2903
+    },
+    {
+      "world_seed": 2011,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            1436.8213596955397,
+            714.3816905251276
+          ],
+          [
+            2710.33007300801,
+            194.72048894262684
+          ],
+          [
+            1951.5038138105872,
+            4412.787971505383
+          ],
+          [
+            2255.5315019927707,
+            2463.006561763765
+          ],
+          [
+            1794.274344221952,
+            3385.7121348401893
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2078.167839307389,
+          2314.85471762538,
+          1989.87584793625,
+          247.25161473779863,
+          1132.4904798833945
+        ],
+        "far_cluster": 1,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          4636.5064785681325,
+          2695.312568472494,
+          87.03908138151937
+        ],
+        [
+          4134.812932612363,
+          3041.0744182894546,
+          125.71580086969487
+        ],
+        [
+          2766.5555962535427,
+          1788.9313752085218,
+          82.26797393003122
+        ],
+        [
+          1352.113084960407,
+          4666.272431684878,
+          146.85678110612685
+        ],
+        [
+          843.2838740893977,
+          1767.970409609149,
+          69.78026166329582
+        ],
+        [
+          712.5149835001565,
+          3502.76171991923,
+          74.25538850440844
+        ]
+      ],
+      "contract_reward_mean_all": 0.12411569250712015,
+      "contract_reward_mean_final100": 0.051041221283752485,
+      "contract_reward_final": 0.11570005033826541,
+      "coverage_backhauled_mean_all": 0.19776,
+      "coverage_backhauled_mean_final100": 0.08659999999999997,
+      "coverage_backhauled_final": 0.2,
+      "frontend_capacity_with_path_mbps_mean_all": 60.36716568405085,
+      "frontend_capacity_with_path_mbps_mean_final100": 18.518040973170674,
+      "frontend_capacity_with_path_mbps_final": 37.55662895918541,
+      "far_cluster_backhauled_share_mean_all": 0.1164,
+      "far_cluster_backhauled_share_mean_final100": 0.12699999999999995,
+      "far_cluster_backhauled_share_final": 0.2,
+      "r_mean_all": 0.12411569250712015,
+      "r_mean_final100": 0.051041221283752485,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 582,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          658,
+          139,
+          0,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.1744040150564616,
+        "routed_uavs_per_step_mean": 1.594
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.278,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "association_changes_per_step_mean": 0.936,
+      "association_changes_total": 468,
+      "uav_backhaul_loss_events": 22,
+      "user_backhaul_loss_events": 256,
+      "action_clip_events": 2906
+    },
+    {
+      "world_seed": 2012,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            4700.882658912326,
+            4995.058271624254
+          ],
+          [
+            2101.438002989059,
+            422.387768325469
+          ],
+          [
+            3585.6195533659134,
+            4614.095078439387
+          ],
+          [
+            4923.011937729808,
+            1878.1603913466677
+          ],
+          [
+            1650.808838523808,
+            3763.223401732885
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          3327.040765770928,
+          2115.4962185418754,
+          2376.545353098073,
+          2501.533799346171,
+          1522.1231853614497
+        ],
+        "far_cluster": 0,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          356.5406021971718,
+          1889.5490843411628,
+          74.80745978855239
+        ],
+        [
+          2174.4242091146975,
+          3105.6104844974197,
+          146.9515325406026
+        ],
+        [
+          2056.8054285243957,
+          2842.766269311188,
+          108.28107041978745
+        ],
+        [
+          249.00469071473364,
+          3745.683047469674,
+          74.25397603068009
+        ],
+        [
+          3829.5868794894877,
+          3706.849936089734,
+          113.74709216372075
+        ],
+        [
+          1227.675148309446,
+          3442.531058250381,
+          65.95766274386756
+        ]
+      ],
+      "contract_reward_mean_all": 0.11057761651438386,
+      "contract_reward_mean_final100": 0.058695654176924766,
+      "contract_reward_final": 0.1710774540120746,
+      "coverage_backhauled_mean_all": 0.13520000000000001,
+      "coverage_backhauled_mean_final100": 0.07959999999999999,
+      "coverage_backhauled_final": 0.26,
+      "frontend_capacity_with_path_mbps_mean_all": 102.80823068744407,
+      "frontend_capacity_with_path_mbps_mean_final100": 45.200942517630885,
+      "frontend_capacity_with_path_mbps_final": 98.2627867860667,
+      "far_cluster_backhauled_share_mean_all": 0.0,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.11057761651438386,
+      "r_mean_final100": 0.058695654176924766,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 0,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          633,
+          277,
+          203,
+          16
+        ],
+        "links_per_routed_uav_step_mean": 1.6474756421612047,
+        "routed_uavs_per_step_mean": 2.258
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.518,
+        0.154,
+        0.032,
+        0.01,
+        0.082
+      ],
+      "association_changes_per_step_mean": 0.42,
+      "association_changes_total": 210,
+      "uav_backhaul_loss_events": 20,
+      "user_backhaul_loss_events": 47,
+      "action_clip_events": 2735
+    },
+    {
+      "world_seed": 2013,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            2579.2588222500926,
+            3936.233731113267
+          ],
+          [
+            552.3475367944664,
+            2471.258240863014
+          ],
+          [
+            1925.3713942818413,
+            2050.5909197388246
+          ],
+          [
+            2466.305352808978,
+            4501.002246715251
+          ],
+          [
+            4432.756704478924,
+            501.83154681766484
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          1438.4190249339752,
+          1947.8645245881119,
+          729.4974680770255,
+          2001.2859167567262,
+          2779.968641190277
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          3377.2411991336203,
+          4781.740776824023,
+          76.75763762689157
+        ],
+        [
+          2999.058469927278,
+          3159.1034548972752,
+          74.38689548755114
+        ],
+        [
+          3506.0607048872316,
+          4202.621958831101,
+          109.54045764730229
+        ],
+        [
+          2926.1893724001607,
+          4361.818864113429,
+          119.7012499492543
+        ],
+        [
+          423.62190370727416,
+          1652.7459855424165,
+          58.42016940348077
+        ],
+        [
+          827.0945897782922,
+          3361.760254151935,
+          92.65005950949208
+        ]
+      ],
+      "contract_reward_mean_all": 0.08506170930804438,
+      "contract_reward_mean_final100": 0.0,
+      "contract_reward_final": 0.0,
+      "coverage_backhauled_mean_all": 0.12996,
+      "coverage_backhauled_mean_final100": 0.0,
+      "coverage_backhauled_final": 0.0,
+      "frontend_capacity_with_path_mbps_mean_all": 48.03814568098833,
+      "frontend_capacity_with_path_mbps_mean_final100": 0.0,
+      "frontend_capacity_with_path_mbps_final": 0.0,
+      "far_cluster_backhauled_share_mean_all": 0.0,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.08506170930804438,
+      "r_mean_final100": 0.0,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 0,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          172,
+          192,
+          113,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.8763102725366876,
+        "routed_uavs_per_step_mean": 0.954
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.214,
+        0.21,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "association_changes_per_step_mean": 0.586,
+      "association_changes_total": 293,
+      "uav_backhaul_loss_events": 9,
+      "user_backhaul_loss_events": 99,
+      "action_clip_events": 2887
+    },
+    {
+      "world_seed": 2014,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            1448.3732241613018,
+            4840.462867835413
+          ],
+          [
+            4167.843580196015,
+            1339.2457313126326
+          ],
+          [
+            2777.4475417637573,
+            876.5780946921003
+          ],
+          [
+            3832.056762839641,
+            299.3085953655833
+          ],
+          [
+            1980.7393558809129,
+            1421.88259275242
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2565.8693090992106,
+          2032.0070571425204,
+          1646.9595687400108,
+          2572.434231979241,
+          1196.6489712280766
+        ],
+        "far_cluster": 3,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          927.9059834830811,
+          1508.2942919332258,
+          83.77379495445459
+        ],
+        [
+          4950.188588639095,
+          1980.4379418589162,
+          120.37508320049614
+        ],
+        [
+          3393.6187021527708,
+          862.2237648857512,
+          87.83219231276823
+        ],
+        [
+          4777.748430377736,
+          4437.0635344724315,
+          78.2049821432837
+        ],
+        [
+          2178.502322682756,
+          383.27334366996257,
+          105.33462115747122
+        ],
+        [
+          2575.9758009441707,
+          1697.2968532418931,
+          59.35083044941358
+        ]
+      ],
+      "contract_reward_mean_all": 0.2707556927063372,
+      "contract_reward_mean_final100": 0.1789692660814071,
+      "contract_reward_final": 0.1682532136491574,
+      "coverage_backhauled_mean_all": 0.35172000000000003,
+      "coverage_backhauled_mean_final100": 0.23160000000000003,
+      "coverage_backhauled_final": 0.22,
+      "frontend_capacity_with_path_mbps_mean_all": 227.00324164632838,
+      "frontend_capacity_with_path_mbps_mean_final100": 151.10936823311974,
+      "frontend_capacity_with_path_mbps_final": 139.34951057891163,
+      "far_cluster_backhauled_share_mean_all": 0.05600000000000001,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.2707556927063372,
+      "r_mean_final100": 0.1789692660814071,
+      "far_cluster_a2a_path_user_steps": 221,
+      "far_cluster_a2a_path_user_time_share": 0.0442,
+      "far_cluster_backhauled_user_steps": 280,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          1076,
+          773,
+          107,
+          17
+        ],
+        "links_per_routed_uav_step_mean": 1.5261023821591484,
+        "routed_uavs_per_step_mean": 3.946
+      },
+      "relay_position_share_by_agent": [
+        0.188,
+        0.416,
+        0.22,
+        0.0,
+        0.112,
+        0.202
+      ],
+      "association_changes_per_step_mean": 0.704,
+      "association_changes_total": 352,
+      "uav_backhaul_loss_events": 18,
+      "user_backhaul_loss_events": 154,
+      "action_clip_events": 2933
+    },
+    {
+      "world_seed": 2015,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            1293.875470801531,
+            3165.4281119111015
+          ],
+          [
+            915.7372748200987,
+            2567.6245961657237
+          ],
+          [
+            4646.4482728137145,
+            3294.134155484964
+          ],
+          [
+            1098.2289744165048,
+            683.672382791291
+          ],
+          [
+            2113.884573458989,
+            1427.1622142029105
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          1377.508966234268,
+          1585.705353589066,
+          2288.643538162463,
+          2294.342611991607,
+          1140.2043839798848
+        ],
+        "far_cluster": 3,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          3687.9761379795427,
+          2587.857740873798,
+          138.4189446294582
+        ],
+        [
+          2258.6199274988016,
+          4723.380422468465,
+          132.2389979666748
+        ],
+        [
+          318.0166038337734,
+          4694.4596566328655,
+          83.24535136202283
+        ],
+        [
+          3136.0870467543573,
+          16.091859183813284,
+          120.40227079908125
+        ],
+        [
+          355.2905271641038,
+          277.70805959033027,
+          78.90197873732221
+        ],
+        [
+          1432.4830821368218,
+          1344.4779774612382,
+          70.7215415106613
+        ]
+      ],
+      "contract_reward_mean_all": 0.20044703888323642,
+      "contract_reward_mean_final100": 0.0979020198152693,
+      "contract_reward_final": 0.0,
+      "coverage_backhauled_mean_all": 0.3014,
+      "coverage_backhauled_mean_final100": 0.1536,
+      "coverage_backhauled_final": 0.0,
+      "frontend_capacity_with_path_mbps_mean_all": 119.00159814151901,
+      "frontend_capacity_with_path_mbps_mean_final100": 50.47886544413514,
+      "frontend_capacity_with_path_mbps_final": 0.0,
+      "far_cluster_backhauled_share_mean_all": 0.07560000000000001,
+      "far_cluster_backhauled_share_mean_final100": 0.039,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.20044703888323642,
+      "r_mean_final100": 0.0979020198152693,
+      "far_cluster_a2a_path_user_steps": 139,
+      "far_cluster_a2a_path_user_time_share": 0.0278,
+      "far_cluster_backhauled_user_steps": 378,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          561,
+          332,
+          356,
+          143
+        ],
+        "links_per_routed_uav_step_mean": 2.0581896551724137,
+        "routed_uavs_per_step_mean": 2.784
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.272,
+        0.006,
+        0.478,
+        0.4,
+        0.068
+      ],
+      "association_changes_per_step_mean": 0.738,
+      "association_changes_total": 369,
+      "uav_backhaul_loss_events": 64,
+      "user_backhaul_loss_events": 300,
+      "action_clip_events": 2876
+    },
+    {
+      "world_seed": 2016,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            1862.993952599712,
+            2259.9466787962424
+          ],
+          [
+            2254.207047387892,
+            165.56151069517023
+          ],
+          [
+            847.1174224184924,
+            900.7747728543475
+          ],
+          [
+            1763.7283854787584,
+            1714.0315554867614
+          ],
+          [
+            1388.1922334772112,
+            1878.896430912047
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          680.7365874150532,
+          2347.3425902287026,
+          2299.900463587838,
+          1076.9597421075107,
+          1273.5329415583194
+        ],
+        "far_cluster": 1,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          4483.526782471727,
+          3651.1960717814823,
+          128.32757580057512
+        ],
+        [
+          3708.25832937706,
+          2310.4524877997933,
+          114.25651297218928
+        ],
+        [
+          1124.3211235298934,
+          3542.7331461227936,
+          124.71260123697537
+        ],
+        [
+          3125.537077400841,
+          2899.782047319057,
+          74.26403440612702
+        ],
+        [
+          659.7819691378976,
+          719.7423516488782,
+          110.3637970977732
+        ],
+        [
+          2943.9540912164534,
+          346.7371926245638,
+          144.28288694956402
+        ]
+      ],
+      "contract_reward_mean_all": 0.3048045523475953,
+      "contract_reward_mean_final100": 0.24825733897416327,
+      "contract_reward_final": 0.235830556671878,
+      "coverage_backhauled_mean_all": 0.4891999999999999,
+      "coverage_backhauled_mean_final100": 0.3788000000000002,
+      "coverage_backhauled_final": 0.38,
+      "frontend_capacity_with_path_mbps_mean_all": 144.01737481450022,
+      "frontend_capacity_with_path_mbps_mean_final100": 140.79465949163784,
+      "frontend_capacity_with_path_mbps_final": 109.63284670008323,
+      "far_cluster_backhauled_share_mean_all": 0.1422,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.3048045523475953,
+      "r_mean_final100": 0.24825733897416327,
+      "far_cluster_a2a_path_user_steps": 381,
+      "far_cluster_a2a_path_user_time_share": 0.0762,
+      "far_cluster_backhauled_user_steps": 711,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          1000,
+          448,
+          201,
+          78
+        ],
+        "links_per_routed_uav_step_mean": 1.6276780544296467,
+        "routed_uavs_per_step_mean": 3.454
+      },
+      "relay_position_share_by_agent": [
+        0.204,
+        0.33,
+        0.0,
+        0.318,
+        0.014,
+        0.47
+      ],
+      "association_changes_per_step_mean": 1.23,
+      "association_changes_total": 615,
+      "uav_backhaul_loss_events": 38,
+      "user_backhaul_loss_events": 275,
+      "action_clip_events": 2918
+    },
+    {
+      "world_seed": 2017,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            380.84503770289655,
+            3519.5480333198097
+          ],
+          [
+            350.4007817926247,
+            1535.190967496305
+          ],
+          [
+            1660.095887727816,
+            1548.1134021448006
+          ],
+          [
+            2188.276645261461,
+            3834.220494867137
+          ],
+          [
+            2366.9854082408297,
+            30.746325702187825
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2351.658127040308,
+          2356.1904142319386,
+          1269.4593388478702,
+          1370.1517356895026,
+          2472.8337165394087
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          104.80112703058708,
+          3835.350823412439,
+          94.7919799800602
+        ],
+        [
+          602.7080778365223,
+          4653.8648054349305,
+          114.95504104423961
+        ],
+        [
+          703.3553010850602,
+          1157.9716877378953,
+          72.64752906385947
+        ],
+        [
+          1300.2747267466063,
+          564.3612516379054,
+          113.19048399664803
+        ],
+        [
+          1936.5406682967896,
+          1581.2281029782316,
+          113.08905941545848
+        ],
+        [
+          1473.2554064446147,
+          4724.322645693457,
+          65.16257130972008
+        ]
+      ],
+      "contract_reward_mean_all": 0.07787258261813677,
+      "contract_reward_mean_final100": 0.10652544030808951,
+      "contract_reward_final": 0.08643057122865413,
+      "coverage_backhauled_mean_all": 0.11932,
+      "coverage_backhauled_mean_final100": 0.17279999999999998,
+      "coverage_backhauled_final": 0.14,
+      "frontend_capacity_with_path_mbps_mean_all": 43.56694361105109,
+      "frontend_capacity_with_path_mbps_mean_final100": 48.14275610626221,
+      "frontend_capacity_with_path_mbps_final": 39.30413303949998,
+      "far_cluster_backhauled_share_mean_all": 0.026400000000000003,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.07787258261813677,
+      "r_mean_final100": 0.10652544030808951,
+      "far_cluster_a2a_path_user_steps": 132,
+      "far_cluster_a2a_path_user_time_share": 0.0264,
+      "far_cluster_backhauled_user_steps": 132,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          205,
+          135,
+          110,
+          35
+        ],
+        "links_per_routed_uav_step_mean": 1.9484536082474226,
+        "routed_uavs_per_step_mean": 0.97
+      },
+      "relay_position_share_by_agent": [
+        0.058,
+        0.012,
+        0.012,
+        0.12,
+        0.174,
+        0.0
+      ],
+      "association_changes_per_step_mean": 0.594,
+      "association_changes_total": 297,
+      "uav_backhaul_loss_events": 42,
+      "user_backhaul_loss_events": 275,
+      "action_clip_events": 2925
+    },
+    {
+      "world_seed": 2018,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            3343.6618557560787,
+            3464.522774076922
+          ],
+          [
+            2084.3125314608583,
+            859.0477972748395
+          ],
+          [
+            4884.452530625431,
+            1651.12071632119
+          ],
+          [
+            3145.220752489701,
+            803.0547566049939
+          ],
+          [
+            449.7632230204479,
+            4854.111794290773
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          1281.4326000889907,
+          1692.784748019971,
+          2531.0491716015854,
+          1815.4704565275395,
+          3121.7484174254696
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          4411.74655876973,
+          521.6386893023883,
+          140.70093335163403
+        ],
+        [
+          1531.9944930317574,
+          2232.04436213711,
+          108.99853915235484
+        ],
+        [
+          4185.555497381365,
+          3489.0030357665537,
+          130.28028375301017
+        ],
+        [
+          536.0753943011409,
+          3785.462630636321,
+          149.96710127833262
+        ],
+        [
+          3629.6549879166414,
+          707.241197645449,
+          85.67205964881046
+        ],
+        [
+          4713.520550778074,
+          3050.8094341870446,
+          72.75774729141621
+        ]
+      ],
+      "contract_reward_mean_all": 0.13663816406612211,
+      "contract_reward_mean_final100": 0.13893110833552438,
+      "contract_reward_final": 0.0,
+      "coverage_backhauled_mean_all": 0.16744,
+      "coverage_backhauled_mean_final100": 0.17139999999999997,
+      "coverage_backhauled_final": 0.0,
+      "frontend_capacity_with_path_mbps_mean_all": 126.58735546781847,
+      "frontend_capacity_with_path_mbps_mean_final100": 127.33596018930778,
+      "frontend_capacity_with_path_mbps_final": 0.0,
+      "far_cluster_backhauled_share_mean_all": 0.0644,
+      "far_cluster_backhauled_share_mean_final100": 0.05599999999999999,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.13663816406612211,
+      "r_mean_final100": 0.13893110833552438,
+      "far_cluster_a2a_path_user_steps": 322,
+      "far_cluster_a2a_path_user_time_share": 0.0644,
+      "far_cluster_backhauled_user_steps": 322,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          782,
+          651,
+          11,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.4660664819944598,
+        "routed_uavs_per_step_mean": 2.888
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.262,
+        0.476,
+        0.0,
+        0.086,
+        0.0
+      ],
+      "association_changes_per_step_mean": 0.582,
+      "association_changes_total": 291,
+      "uav_backhaul_loss_events": 13,
+      "user_backhaul_loss_events": 100,
+      "action_clip_events": 2893
+    },
+    {
+      "world_seed": 2019,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            1005.645233918313,
+            4430.054369639511
+          ],
+          [
+            2568.099595832147,
+            2891.507932949372
+          ],
+          [
+            1496.4132651266477,
+            4185.987022126013
+          ],
+          [
+            2633.2491510339455,
+            524.2211894034415
+          ],
+          [
+            1390.647046057238,
+            232.97468425062084
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2440.9436774894302,
+          397.3864825516737,
+          1962.0750681844709,
+          1980.2669629758557,
+          2523.8993162703823
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          4517.411072096372,
+          1965.4025332512126,
+          112.39699612977535
+        ],
+        [
+          3189.387005111133,
+          4402.495343891311,
+          79.91720193952575
+        ],
+        [
+          3510.9913509327585,
+          4516.030806611217,
+          138.1381926481617
+        ],
+        [
+          2028.7489898995664,
+          2262.2331028270355,
+          76.70703235948052
+        ],
+        [
+          814.3243514596254,
+          4446.073477038737,
+          64.84762258202882
+        ],
+        [
+          4923.617425183378,
+          161.8060973612051,
+          101.53507541718032
+        ]
+      ],
+      "contract_reward_mean_all": 0.11989345925807976,
+      "contract_reward_mean_final100": 0.03276309884989149,
+      "contract_reward_final": 0.0,
+      "coverage_backhauled_mean_all": 0.17224000000000003,
+      "coverage_backhauled_mean_final100": 0.053200000000000004,
+      "coverage_backhauled_final": 0.0,
+      "frontend_capacity_with_path_mbps_mean_all": 80.79065039252644,
+      "frontend_capacity_with_path_mbps_mean_final100": 14.742960166185686,
+      "frontend_capacity_with_path_mbps_final": 0.0,
+      "far_cluster_backhauled_share_mean_all": 0.0668,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.11989345925807976,
+      "r_mean_final100": 0.03276309884989149,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 334,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          746,
+          98,
+          29,
+          29
+        ],
+        "links_per_routed_uav_step_mean": 1.26940133037694,
+        "routed_uavs_per_step_mean": 1.804
+      },
+      "relay_position_share_by_agent": [
+        0.09,
+        0.0,
+        0.058,
+        0.058,
+        0.0,
+        0.106
+      ],
+      "association_changes_per_step_mean": 0.768,
+      "association_changes_total": 384,
+      "uav_backhaul_loss_events": 31,
+      "user_backhaul_loss_events": 173,
+      "action_clip_events": 2913
+    },
+    {
+      "world_seed": 2020,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            620.8938886286486,
+            1598.6824222676394
+          ],
+          [
+            4766.069365853675,
+            686.783953988902
+          ],
+          [
+            2847.0654844016535,
+            4878.32741461603
+          ],
+          [
+            2516.835304801391,
+            3338.3210307405297
+          ],
+          [
+            170.95749007195127,
+            2280.5968315521486
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2084.0856877111582,
+          2902.2099855752335,
+          2403.517368686385,
+          838.4900584202653,
+          2339.3539200764176
+        ],
+        "far_cluster": 1,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          4931.384144307995,
+          4366.959729103273,
+          100.97455249715816
+        ],
+        [
+          1359.1785714103787,
+          1684.5936387298177,
+          71.69542650169242
+        ],
+        [
+          1382.385715768998,
+          1716.5779638972879,
+          136.2158935459853
+        ],
+        [
+          783.498350047443,
+          704.4362242620766,
+          125.70802806406883
+        ],
+        [
+          3681.6245907680413,
+          1778.3154581789086,
+          84.1093016511376
+        ],
+        [
+          3334.0152527666323,
+          1085.50319377047,
+          106.14269824329372
+        ]
+      ],
+      "contract_reward_mean_all": 0.13568067735566666,
+      "contract_reward_mean_final100": 0.07369357369379853,
+      "contract_reward_final": 0.08550695855182441,
+      "coverage_backhauled_mean_all": 0.19148,
+      "coverage_backhauled_mean_final100": 0.11640000000000005,
+      "coverage_backhauled_final": 0.14,
+      "frontend_capacity_with_path_mbps_mean_all": 95.54346435242323,
+      "frontend_capacity_with_path_mbps_mean_final100": 37.06270909536941,
+      "frontend_capacity_with_path_mbps_final": 37.09472747338215,
+      "far_cluster_backhauled_share_mean_all": 0.0024000000000000002,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.13568067735566666,
+      "r_mean_final100": 0.07369357369379853,
+      "far_cluster_a2a_path_user_steps": 9,
+      "far_cluster_a2a_path_user_time_share": 0.0018,
+      "far_cluster_backhauled_user_steps": 12,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          613,
+          231,
+          297,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.7230499561787906,
+        "routed_uavs_per_step_mean": 2.282
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.018,
+        0.0,
+        0.288,
+        0.242,
+        0.1
+      ],
+      "association_changes_per_step_mean": 1.078,
+      "association_changes_total": 539,
+      "uav_backhaul_loss_events": 37,
+      "user_backhaul_loss_events": 159,
+      "action_clip_events": 2921
+    },
+    {
+      "world_seed": 2021,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            2871.5214722733535,
+            1855.8042407889081
+          ],
+          [
+            2260.7262189478215,
+            1009.2512391730979
+          ],
+          [
+            2846.525590252863,
+            975.4798717105767
+          ],
+          [
+            2918.52008161989,
+            2381.5673679605816
+          ],
+          [
+            2589.0720015058705,
+            4115.493169826735
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          743.6507113865455,
+          1509.8290665522206,
+          1563.407050725976,
+          434.95441950956604,
+          1617.9468480790995
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          3029.8913940370235,
+          3666.8468059674906,
+          63.89471567283987
+        ],
+        [
+          1563.3654192734348,
+          4986.216406701594,
+          62.81623754189607
+        ],
+        [
+          894.9655297509402,
+          3764.6271438804692,
+          116.2160514309534
+        ],
+        [
+          3921.550660705613,
+          484.4719796243041,
+          55.8571285088036
+        ],
+        [
+          4811.979951051959,
+          3082.7872194728707,
+          58.662996124854715
+        ],
+        [
+          2806.361812500983,
+          3082.6235430899505,
+          146.3843022875632
+        ]
+      ],
+      "contract_reward_mean_all": 0.2157192406321428,
+      "contract_reward_mean_final100": 0.10739089198174165,
+      "contract_reward_final": 0.12919014617049665,
+      "coverage_backhauled_mean_all": 0.3495599999999999,
+      "coverage_backhauled_mean_final100": 0.17039999999999997,
+      "coverage_backhauled_final": 0.2,
+      "frontend_capacity_with_path_mbps_mean_all": 97.93216181891977,
+      "frontend_capacity_with_path_mbps_mean_final100": 53.08359390417793,
+      "frontend_capacity_with_path_mbps_final": 69.82674993836044,
+      "far_cluster_backhauled_share_mean_all": 0.4050000000000001,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.2157192406321428,
+      "r_mean_final100": 0.10739089198174165,
+      "far_cluster_a2a_path_user_steps": 1089,
+      "far_cluster_a2a_path_user_time_share": 0.2178,
+      "far_cluster_backhauled_user_steps": 2025,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          813,
+          240,
+          107,
+          148
+        ],
+        "links_per_routed_uav_step_mean": 1.6865443425076452,
+        "routed_uavs_per_step_mean": 2.616
+      },
+      "relay_position_share_by_agent": [
+        0.188,
+        0.182,
+        0.0,
+        0.228,
+        0.0,
+        0.246
+      ],
+      "association_changes_per_step_mean": 0.994,
+      "association_changes_total": 497,
+      "uav_backhaul_loss_events": 25,
+      "user_backhaul_loss_events": 193,
+      "action_clip_events": 2894
+    },
+    {
+      "world_seed": 2022,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            4887.648192106426,
+            482.16538818985856
+          ],
+          [
+            3721.0310612730773,
+            1462.4973704769084
+          ],
+          [
+            1493.376754824761,
+            3762.367363449289
+          ],
+          [
+            93.31863852537647,
+            2618.687179924637
+          ],
+          [
+            4322.179236001844,
+            1944.2142013198882
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          3126.103070899626,
+          1602.2885379546929,
+          1614.5778761115978,
+          2409.60615502779,
+          1905.0551231213115
+        ],
+        "far_cluster": 0,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          46.79306903882352,
+          2495.28905425994,
+          61.33836899348351
+        ],
+        [
+          249.87009088815236,
+          3427.0379712154586,
+          98.69880682157304
+        ],
+        [
+          4488.286132216348,
+          3237.2603537163313,
+          139.6963122790997
+        ],
+        [
+          3605.6746458234275,
+          4156.7671038809485,
+          132.75680688218048
+        ],
+        [
+          4167.897920290702,
+          4785.2216783140275,
+          86.80444370049888
+        ],
+        [
+          2474.1881494264385,
+          1697.5473729374542,
+          111.94293262449902
+        ]
+      ],
+      "contract_reward_mean_all": 0.0335815240057639,
+      "contract_reward_mean_final100": 0.07172746577015841,
+      "contract_reward_final": 0.13384894361552377,
+      "coverage_backhauled_mean_all": 0.03676,
+      "coverage_backhauled_mean_final100": 0.07919999999999998,
+      "coverage_backhauled_final": 0.18,
+      "frontend_capacity_with_path_mbps_mean_all": 36.36408701869815,
+      "frontend_capacity_with_path_mbps_mean_final100": 76.8532129090026,
+      "frontend_capacity_with_path_mbps_final": 104.8925621344482,
+      "far_cluster_backhauled_share_mean_all": 0.0,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.0335815240057639,
+      "r_mean_final100": 0.07172746577015841,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 0,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          196,
+          108,
+          72,
+          16
+        ],
+        "links_per_routed_uav_step_mean": 1.7653061224489797,
+        "routed_uavs_per_step_mean": 0.784
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.0,
+        0.026,
+        0.088,
+        0.032,
+        0.128
+      ],
+      "association_changes_per_step_mean": 0.306,
+      "association_changes_total": 153,
+      "uav_backhaul_loss_events": 11,
+      "user_backhaul_loss_events": 61,
+      "action_clip_events": 2894
+    },
+    {
+      "world_seed": 2023,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            1954.9570056996063,
+            178.24105202044083
+          ],
+          [
+            2824.3082445923674,
+            1017.3074593653042
+          ],
+          [
+            1603.0222883278523,
+            1882.8189138133905
+          ],
+          [
+            920.270709137832,
+            519.7591817646413
+          ],
+          [
+            2274.636122736283,
+            979.3191874572487
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2384.8766169676555,
+          1517.746028676851,
+          1088.7981945168194,
+          2533.159752288302,
+          1537.2895013012408
+        ],
+        "far_cluster": 3,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          1609.9415199598388,
+          4452.1122589474035,
+          108.80522554504738
+        ],
+        [
+          632.9804675214561,
+          706.7061128742619,
+          96.78955922748659
+        ],
+        [
+          110.44830809078366,
+          3636.3735632801963,
+          102.43873422722226
+        ],
+        [
+          2724.6761940524507,
+          2281.866302128865,
+          100.1382264664029
+        ],
+        [
+          1972.3427640075124,
+          755.8615162292698,
+          86.08751771330354
+        ],
+        [
+          810.3850343369945,
+          1689.7934652939578,
+          68.03232807598883
+        ]
+      ],
+      "contract_reward_mean_all": 0.09168709933082227,
+      "contract_reward_mean_final100": 0.03887033360049105,
+      "contract_reward_final": 0.1696768312637568,
+      "coverage_backhauled_mean_all": 0.14787999999999998,
+      "coverage_backhauled_mean_final100": 0.06080000000000002,
+      "coverage_backhauled_final": 0.28,
+      "frontend_capacity_with_path_mbps_mean_all": 42.45344507240216,
+      "frontend_capacity_with_path_mbps_mean_final100": 20.262175556139656,
+      "frontend_capacity_with_path_mbps_final": 70.99096604427879,
+      "far_cluster_backhauled_share_mean_all": 0.1376,
+      "far_cluster_backhauled_share_mean_final100": 0.09699999999999999,
+      "far_cluster_backhauled_share_final": 0.5,
+      "r_mean_all": 0.09168709933082227,
+      "r_mean_final100": 0.03887033360049105,
+      "far_cluster_a2a_path_user_steps": 639,
+      "far_cluster_a2a_path_user_time_share": 0.1278,
+      "far_cluster_backhauled_user_steps": 688,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          286,
+          368,
+          220,
+          193
+        ],
+        "links_per_routed_uav_step_mean": 2.2999062792877227,
+        "routed_uavs_per_step_mean": 2.134
+      },
+      "relay_position_share_by_agent": [
+        0.08,
+        0.236,
+        0.0,
+        0.374,
+        0.256,
+        0.118
+      ],
+      "association_changes_per_step_mean": 0.442,
+      "association_changes_total": 221,
+      "uav_backhaul_loss_events": 108,
+      "user_backhaul_loss_events": 273,
+      "action_clip_events": 2896
+    },
+    {
+      "world_seed": 2024,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            3350.871484463478,
+            3678.8329622595666
+          ],
+          [
+            1289.978190390968,
+            477.7107693018273
+          ],
+          [
+            4804.548711183388,
+            1258.8364338400554
+          ],
+          [
+            1410.825597218216,
+            3841.2696733139255
+          ],
+          [
+            3989.6169855749167,
+            2720.1859920020806
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          1453.8326712461605,
+          2356.651546649891,
+          2617.5239750917062,
+          1727.803581494928,
+          1505.8023226131781
+        ],
+        "far_cluster": 2,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          2940.0725944769897,
+          3495.5437384079123,
+          68.8151960038506
+        ],
+        [
+          219.04281873432407,
+          1025.094761971444,
+          60.60628744762657
+        ],
+        [
+          3636.200718422274,
+          3397.002617625708,
+          97.38457034082185
+        ],
+        [
+          2241.479122401523,
+          95.53473936233014,
+          125.25983372085793
+        ],
+        [
+          3012.242695040633,
+          4808.887876540948,
+          116.43686473564756
+        ],
+        [
+          3033.1480965933815,
+          2245.7565746585824,
+          72.53541631926956
+        ]
+      ],
+      "contract_reward_mean_all": 0.19214545802577998,
+      "contract_reward_mean_final100": 0.24255371431753212,
+      "contract_reward_final": 0.2995707405667526,
+      "coverage_backhauled_mean_all": 0.26224000000000003,
+      "coverage_backhauled_mean_final100": 0.28919999999999996,
+      "coverage_backhauled_final": 0.32,
+      "frontend_capacity_with_path_mbps_mean_all": 145.98109144609145,
+      "frontend_capacity_with_path_mbps_mean_final100": 234.31844003909407,
+      "frontend_capacity_with_path_mbps_final": 333.87195608210936,
+      "far_cluster_backhauled_share_mean_all": 0.0402,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.19214545802577998,
+      "r_mean_final100": 0.24255371431753212,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 201,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          880,
+          831,
+          168,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.6210750399148484,
+        "routed_uavs_per_step_mean": 3.758
+      },
+      "relay_position_share_by_agent": [
+        0.026,
+        0.05,
+        0.536,
+        0.224,
+        0.0,
+        0.226
+      ],
+      "association_changes_per_step_mean": 0.738,
+      "association_changes_total": 369,
+      "uav_backhaul_loss_events": 32,
+      "user_backhaul_loss_events": 162,
+      "action_clip_events": 2836
+    },
+    {
+      "world_seed": 2025,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            1500.575023723183,
+            1242.9931833535495
+          ],
+          [
+            3331.960524516644,
+            4937.664554299082
+          ],
+          [
+            2341.352030372141,
+            616.4368976317719
+          ],
+          [
+            4580.156933662195,
+            4730.717667417126
+          ],
+          [
+            1388.486866521038,
+            2598.2684437898024
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          1605.9005013703556,
+          2575.726459397455,
+          1890.2325621124155,
+          3050.1072408015116,
+          1115.8486156020854
+        ],
+        "far_cluster": 3,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          677.440818389809,
+          4439.25851365189,
+          143.26056398865023
+        ],
+        [
+          2227.8408202379755,
+          1941.177730569913,
+          75.7596435301159
+        ],
+        [
+          3286.8379273551886,
+          2463.0846875313123,
+          146.42384192500572
+        ],
+        [
+          4004.9223743472003,
+          2276.026426047874,
+          130.10580865919948
+        ],
+        [
+          208.58986409375558,
+          3847.2893596890576,
+          50.317111675529425
+        ],
+        [
+          1464.0469602473843,
+          3054.571663334395,
+          141.3027391420646
+        ]
+      ],
+      "contract_reward_mean_all": 0.12354682184758996,
+      "contract_reward_mean_final100": 0.0,
+      "contract_reward_final": 0.0,
+      "coverage_backhauled_mean_all": 0.18984,
+      "coverage_backhauled_mean_final100": 0.0,
+      "coverage_backhauled_final": 0.0,
+      "frontend_capacity_with_path_mbps_mean_all": 68.47920250231643,
+      "frontend_capacity_with_path_mbps_mean_final100": 0.0,
+      "frontend_capacity_with_path_mbps_final": 0.0,
+      "far_cluster_backhauled_share_mean_all": 0.0,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.12354682184758996,
+      "r_mean_final100": 0.0,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 0,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          493,
+          311,
+          109,
+          82
+        ],
+        "links_per_routed_uav_step_mean": 1.778894472361809,
+        "routed_uavs_per_step_mean": 1.99
+      },
+      "relay_position_share_by_agent": [
+        0.0,
+        0.17,
+        0.324,
+        0.356,
+        0.0,
+        0.004
+      ],
+      "association_changes_per_step_mean": 0.48,
+      "association_changes_total": 240,
+      "uav_backhaul_loss_events": 42,
+      "user_backhaul_loss_events": 248,
+      "action_clip_events": 2917
+    },
+    {
+      "world_seed": 2026,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            3472.4653997464384,
+            4616.840410218094
+          ],
+          [
+            152.9653377110868,
+            607.0271929499421
+          ],
+          [
+            1159.5318494299167,
+            3214.4847488758564
+          ],
+          [
+            1179.6680038645663,
+            4834.328847607429
+          ],
+          [
+            745.8356653667624,
+            234.48219748747002
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2329.5283376761718,
+          3015.2807090247184,
+          1518.994180064221,
+          2681.859009864465,
+          2865.2510232788454
+        ],
+        "far_cluster": 1,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          1096.7281746346148,
+          2065.058684393336,
+          147.66354781603013
+        ],
+        [
+          444.4951082406462,
+          2396.449298400908,
+          148.755049423767
+        ],
+        [
+          990.7054450945907,
+          4558.575909226373,
+          105.82501148658582
+        ],
+        [
+          3916.1473423788057,
+          1512.3829480977463,
+          89.73009934862343
+        ],
+        [
+          1479.8365734521146,
+          4470.4423050725,
+          54.817510271285265
+        ],
+        [
+          2225.338213817927,
+          2809.469446012027,
+          86.3714630265662
+        ]
+      ],
+      "contract_reward_mean_all": 0.1337050997273335,
+      "contract_reward_mean_final100": 0.05894033993091404,
+      "contract_reward_final": 0.12460104126403121,
+      "coverage_backhauled_mean_all": 0.17068,
+      "coverage_backhauled_mean_final100": 0.07280000000000002,
+      "coverage_backhauled_final": 0.2,
+      "frontend_capacity_with_path_mbps_mean_all": 115.69581408324004,
+      "frontend_capacity_with_path_mbps_mean_final100": 53.91952033019899,
+      "frontend_capacity_with_path_mbps_final": 58.8489946755743,
+      "far_cluster_backhauled_share_mean_all": 0.06420000000000002,
+      "far_cluster_backhauled_share_mean_final100": 0.002,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.1337050997273335,
+      "r_mean_final100": 0.05894033993091404,
+      "far_cluster_a2a_path_user_steps": 251,
+      "far_cluster_a2a_path_user_time_share": 0.0502,
+      "far_cluster_backhauled_user_steps": 321,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          462,
+          619,
+          167,
+          55
+        ],
+        "links_per_routed_uav_step_mean": 1.8580199539524176,
+        "routed_uavs_per_step_mean": 2.606
+      },
+      "relay_position_share_by_agent": [
+        0.202,
+        0.132,
+        0.0,
+        0.412,
+        0.0,
+        0.352
+      ],
+      "association_changes_per_step_mean": 0.5,
+      "association_changes_total": 250,
+      "uav_backhaul_loss_events": 76,
+      "user_backhaul_loss_events": 303,
+      "action_clip_events": 2906
+    },
+    {
+      "world_seed": 2027,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            4870.5764664600265,
+            1968.1746398981443
+          ],
+          [
+            2548.6436331494792,
+            4876.743821586151
+          ],
+          [
+            1115.9744468121423,
+            737.684786249928
+          ],
+          [
+            4635.667749630837,
+            2186.9698301737944
+          ],
+          [
+            750.5973592200082,
+            4866.040618115889
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2429.5001537315397,
+          2377.2415519870765,
+          2240.821644953457,
+          2158.486651345026,
+          2942.5427449983163
+        ],
+        "far_cluster": 4,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          4007.836292088417,
+          4519.752055627818,
+          128.06665787903137
+        ],
+        [
+          4374.87940715813,
+          2669.200589387796,
+          60.996450214714
+        ],
+        [
+          4208.8511260003015,
+          1156.8318062314454,
+          134.60553664826966
+        ],
+        [
+          4309.581442882021,
+          1858.325408945547,
+          139.1429780257854
+        ],
+        [
+          2327.2613926511654,
+          2636.7504033999107,
+          99.4698737645862
+        ],
+        [
+          3994.1994666542673,
+          4197.122402000209,
+          50.24010581237604
+        ]
+      ],
+      "contract_reward_mean_all": 0.0842075796918698,
+      "contract_reward_mean_final100": 0.08951046619599681,
+      "contract_reward_final": 0.062011716778742315,
+      "coverage_backhauled_mean_all": 0.0964,
+      "coverage_backhauled_mean_final100": 0.08280000000000001,
+      "coverage_backhauled_final": 0.06,
+      "frontend_capacity_with_path_mbps_mean_all": 86.13496651726423,
+      "frontend_capacity_with_path_mbps_mean_final100": 115.0866964784594,
+      "frontend_capacity_with_path_mbps_final": 76.57632577620028,
+      "far_cluster_backhauled_share_mean_all": 0.0334,
+      "far_cluster_backhauled_share_mean_final100": 0.08999999999999998,
+      "far_cluster_backhauled_share_final": 0.1,
+      "r_mean_all": 0.0842075796918698,
+      "r_mean_final100": 0.08951046619599681,
+      "far_cluster_a2a_path_user_steps": 142,
+      "far_cluster_a2a_path_user_time_share": 0.0284,
+      "far_cluster_backhauled_user_steps": 167,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          1225,
+          313,
+          0,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.2035110533159947,
+        "routed_uavs_per_step_mean": 3.076
+      },
+      "relay_position_share_by_agent": [
+        0.044,
+        0.402,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "association_changes_per_step_mean": 0.78,
+      "association_changes_total": 390,
+      "uav_backhaul_loss_events": 5,
+      "user_backhaul_loss_events": 62,
+      "action_clip_events": 2917
+    },
+    {
+      "world_seed": 2028,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            2813.4651513560316,
+            3092.5911510973674
+          ],
+          [
+            2691.096041664169,
+            2349.8052684763575
+          ],
+          [
+            2688.0485305253005,
+            1956.1924100533518
+          ],
+          [
+            3675.1518219180116,
+            3970.2677343399596
+          ],
+          [
+            1652.3551215002763,
+            2315.030252776894
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          670.3914330251862,
+          243.05586707004824,
+          575.4032887604196,
+          1882.197921367033,
+          867.5918668559492
+        ],
+        "far_cluster": 3,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          422.8109375329187,
+          875.4397442759704,
+          118.15763954212507
+        ],
+        [
+          1313.9974642064362,
+          2986.7476677132654,
+          83.47158030009942
+        ],
+        [
+          2264.3045753651804,
+          2990.13195458211,
+          133.2261893237204
+        ],
+        [
+          2540.248225864706,
+          627.6497194033376,
+          55.24179285795172
+        ],
+        [
+          1045.6936776755488,
+          936.4071288414127,
+          91.27047055827907
+        ],
+        [
+          2290.55312420698,
+          1377.82858076764,
+          71.34775218224785
+        ]
+      ],
+      "contract_reward_mean_all": 0.3954498718006463,
+      "contract_reward_mean_final100": 0.45032571545250505,
+      "contract_reward_final": 0.4610406702271187,
+      "coverage_backhauled_mean_all": 0.58104,
+      "coverage_backhauled_mean_final100": 0.6788000000000001,
+      "coverage_backhauled_final": 0.72,
+      "frontend_capacity_with_path_mbps_mean_all": 251.00634565144708,
+      "frontend_capacity_with_path_mbps_mean_final100": 265.34920892121056,
+      "frontend_capacity_with_path_mbps_final": 241.70285315955016,
+      "far_cluster_backhauled_share_mean_all": 0.0026000000000000007,
+      "far_cluster_backhauled_share_mean_final100": 0.013000000000000003,
+      "far_cluster_backhauled_share_final": 0.1,
+      "r_mean_all": 0.3954498718006463,
+      "r_mean_final100": 0.45032571545250505,
+      "far_cluster_a2a_path_user_steps": 4,
+      "far_cluster_a2a_path_user_time_share": 0.0008,
+      "far_cluster_backhauled_user_steps": 13,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          1662,
+          807,
+          107,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.3963509316770186,
+        "routed_uavs_per_step_mean": 5.152
+      },
+      "relay_position_share_by_agent": [
+        0.314,
+        0.0,
+        0.584,
+        0.018,
+        0.258,
+        0.16
+      ],
+      "association_changes_per_step_mean": 1.856,
+      "association_changes_total": 928,
+      "uav_backhaul_loss_events": 4,
+      "user_backhaul_loss_events": 135,
+      "action_clip_events": 2918
+    },
+    {
+      "world_seed": 2029,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            2824.522837623825,
+            1630.7976220972587
+          ],
+          [
+            4788.548700847589,
+            948.5460528244621
+          ],
+          [
+            1197.8139049156428,
+            2344.6755736246914
+          ],
+          [
+            1713.8860547622653,
+            1033.285697685854
+          ],
+          [
+            4187.938977063561,
+            4452.336983262818
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          927.8080867782946,
+          2764.8624751256157,
+          1311.416906883492,
+          1664.0991495431117,
+          2580.844374716565
+        ],
+        "far_cluster": 1,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          688.8058670668368,
+          1320.0296619681662,
+          138.5447696937227
+        ],
+        [
+          3117.6887014077565,
+          2250.3139276631773,
+          105.1829799615951
+        ],
+        [
+          4262.957112329994,
+          2251.1556540288293,
+          121.48424943972756
+        ],
+        [
+          1130.8515114100837,
+          3421.001140145686,
+          104.44391083175375
+        ],
+        [
+          4674.41270736858,
+          2078.0393953864996,
+          63.47766800613003
+        ],
+        [
+          2440.633804891593,
+          379.66139571994796,
+          106.91545776257502
+        ]
+      ],
+      "contract_reward_mean_all": 0.30620074562497474,
+      "contract_reward_mean_final100": 0.2900032573174707,
+      "contract_reward_final": 0.28966291701881386,
+      "coverage_backhauled_mean_all": 0.43904000000000004,
+      "coverage_backhauled_mean_final100": 0.42260000000000003,
+      "coverage_backhauled_final": 0.42,
+      "frontend_capacity_with_path_mbps_mean_all": 207.3519849428956,
+      "frontend_capacity_with_path_mbps_mean_final100": 188.26876151774866,
+      "frontend_capacity_with_path_mbps_final": 190.5643964076946,
+      "far_cluster_backhauled_share_mean_all": 0.03820000000000001,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.30620074562497474,
+      "r_mean_final100": 0.2900032573174707,
+      "far_cluster_a2a_path_user_steps": 169,
+      "far_cluster_a2a_path_user_time_share": 0.0338,
+      "far_cluster_backhauled_user_steps": 191,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          946,
+          1190,
+          82,
+          22
+        ],
+        "links_per_routed_uav_step_mean": 1.6339285714285714,
+        "routed_uavs_per_step_mean": 4.48
+      },
+      "relay_position_share_by_agent": [
+        0.128,
+        0.584,
+        0.342,
+        0.0,
+        0.164,
+        0.052
+      ],
+      "association_changes_per_step_mean": 0.952,
+      "association_changes_total": 476,
+      "uav_backhaul_loss_events": 25,
+      "user_backhaul_loss_events": 208,
+      "action_clip_events": 2924
+    },
+    {
+      "world_seed": 2030,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            1866.070821851546,
+            2922.8060849442977
+          ],
+          [
+            3097.7259617740133,
+            895.7148528483306
+          ],
+          [
+            4812.071269741641,
+            1766.4483225313859
+          ],
+          [
+            3414.3116742191914,
+            4609.949389883479
+          ],
+          [
+            1869.9799703095155,
+            305.60119781983195
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          761.9915933748213,
+          1712.0184457972766,
+          2425.6487008389613,
+          2299.533053792262,
+          2283.04869436045
+        ],
+        "far_cluster": 2,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          1803.6514667955023,
+          3369.9523933383225,
+          143.06280407091748
+        ],
+        [
+          3549.6970547537944,
+          4982.173414003929,
+          73.58889260702203
+        ],
+        [
+          4448.10022792112,
+          3547.3310003023244,
+          120.25882264707023
+        ],
+        [
+          645.2849877873534,
+          3054.8312460834004,
+          89.98251657316484
+        ],
+        [
+          1869.7716285661952,
+          4594.42054250741,
+          148.38903792612712
+        ],
+        [
+          3677.451893145713,
+          4396.940676075893,
+          114.24418701514021
+        ]
+      ],
+      "contract_reward_mean_all": 0.09986987523897856,
+      "contract_reward_mean_final100": 0.10479027335741392,
+      "contract_reward_final": 0.10341928951663601,
+      "coverage_backhauled_mean_all": 0.168,
+      "coverage_backhauled_mean_final100": 0.1822,
+      "coverage_backhauled_final": 0.18,
+      "frontend_capacity_with_path_mbps_mean_all": 37.96287292953557,
+      "frontend_capacity_with_path_mbps_mean_final100": 32.74897250367813,
+      "frontend_capacity_with_path_mbps_final": 32.100742762832894,
+      "far_cluster_backhauled_share_mean_all": 0.0,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.09986987523897856,
+      "r_mean_final100": 0.10479027335741392,
+      "far_cluster_a2a_path_user_steps": 0,
+      "far_cluster_a2a_path_user_time_share": 0.0,
+      "far_cluster_backhauled_user_steps": 0,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          469,
+          54,
+          0,
+          0
+        ],
+        "links_per_routed_uav_step_mean": 1.1032504780114722,
+        "routed_uavs_per_step_mean": 1.046
+      },
+      "relay_position_share_by_agent": [
+        0.102,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "association_changes_per_step_mean": 0.662,
+      "association_changes_total": 331,
+      "uav_backhaul_loss_events": 10,
+      "user_backhaul_loss_events": 104,
+      "action_clip_events": 2900
+    },
+    {
+      "world_seed": 2031,
+      "steps": 500,
+      "clusters": {
+        "centres_xy": [
+          [
+            4715.250218254483,
+            4027.4845268674812
+          ],
+          [
+            3967.973592560917,
+            2910.009697382509
+          ],
+          [
+            3926.7310902250933,
+            3453.2742275171336
+          ],
+          [
+            4124.7478071318465,
+            3184.554983379848
+          ],
+          [
+            315.64028739826335,
+            963.0890988459678
+          ]
+        ],
+        "centre_source": "generator_replay",
+        "centre_distance_to_bs_m": [
+          2690.8256185223354,
+          1524.1569539925677,
+          1715.894331438644,
+          1763.0714568757353,
+          2670.865491207605
+        ],
+        "far_cluster": 0,
+        "far_cluster_size": 10
+      },
+      "initial_positions_xyz": [
+        [
+          1894.6035482385987,
+          3392.1562279230056,
+          70.61110977579128
+        ],
+        [
+          2942.0229115302586,
+          3824.6571831940228,
+          72.31052797930488
+        ],
+        [
+          4167.739813051455,
+          4903.423943559709,
+          95.53929984641843
+        ],
+        [
+          1442.249736281484,
+          3421.264538762996,
+          125.89275560881522
+        ],
+        [
+          666.0898552191458,
+          681.3728192010227,
+          131.05910125168606
+        ],
+        [
+          1146.9041748251752,
+          156.4871926777206,
+          57.833793850306435
+        ]
+      ],
+      "contract_reward_mean_all": 0.03105414931604216,
+      "contract_reward_mean_final100": 0.0,
+      "contract_reward_final": 0.0,
+      "coverage_backhauled_mean_all": 0.046880000000000005,
+      "coverage_backhauled_mean_final100": 0.0,
+      "coverage_backhauled_final": 0.0,
+      "frontend_capacity_with_path_mbps_mean_all": 18.214067760372863,
+      "frontend_capacity_with_path_mbps_mean_final100": 0.0,
+      "frontend_capacity_with_path_mbps_final": 0.0,
+      "far_cluster_backhauled_share_mean_all": 0.0004,
+      "far_cluster_backhauled_share_mean_final100": 0.0,
+      "far_cluster_backhauled_share_final": 0.0,
+      "r_mean_all": 0.03105414931604216,
+      "r_mean_final100": 0.0,
+      "far_cluster_a2a_path_user_steps": 2,
+      "far_cluster_a2a_path_user_time_share": 0.0004,
+      "far_cluster_backhauled_user_steps": 2,
+      "relay_hops": {
+        "relays_per_routed_uav_step_hist": [
+          174,
+          302,
+          115,
+          2
+        ],
+        "links_per_routed_uav_step_mean": 1.9072512647554807,
+        "routed_uavs_per_step_mean": 1.186
+      },
+      "relay_position_share_by_agent": [
+        0.346,
+        0.202,
+        0.008,
+        0.0,
+        0.0,
+        0.024
+      ],
+      "association_changes_per_step_mean": 0.322,
+      "association_changes_total": 161,
+      "uav_backhaul_loss_events": 40,
+      "user_backhaul_loss_events": 77,
+      "action_clip_events": 2896
+    }
+  ],
+  "relay_position_share_by_agent_mean": [
+    0.0815,
+    0.164875,
+    0.11981249999999999,
+    0.1065,
+    0.07787500000000001,
+    0.101
+  ],
+  "labels": {
+    "agent_label_counts": [
+      61130,
+      7390,
+      10270,
+      3550,
+      80,
+      13580
+    ],
+    "agent_label_entropy_bits": 1.6279475277651707,
+    "team_label_counts": [
+      0,
+      0,
+      0,
+      11110,
+      0,
+      4890
+    ],
+    "team_label_entropy_bits": 0.8880585548278975,
+    "per_agent_label_entropy_bits": [
+      1.3916922653907515,
+      1.766102957782256,
+      1.1851445253016917,
+      1.0701726872167685,
+      0.9309564379789661,
+      0.6065083013691298
+    ],
+    "d2_team_causes": {
+      "reset": 32,
+      "team_cap": 1568,
+      "other": 0
+    }
+  },
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 0,
+    "discoverer_critic": 0,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "frozen_weights_and_normalizers": true,
+  "config": {
+    "contract_arm": "H",
+    "algorithm": "hmasd",
+    "n_agents": 6,
+    "n_uavs": 6,
+    "n_users": 50,
+    "num_envs": 16,
+    "rollout_length": 500,
+    "episode_length": 500,
+    "k": 10,
+    "n_Z": 6,
+    "n_z": 6,
+    "state_dim": 133,
+    "obs_dim": 90,
+    "action_dim": 3,
+    "action_space_type": "continuous",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 800,
+    "batch_size": 12000,
+    "discriminator_batch_size": 12000,
+    "lambda_e": 1.0,
+    "lambda_D": 0.05,
+    "lambda_d": 0.02,
+    "lambda_h": 0.07,
+    "lambda_l": 0.05,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "use_entropy_annealing": false,
+    "total_timesteps": 360000,
+    "seed": 931307,
+    "policy_interruption_mode": "d2",
+    "interruption_delta": 1,
+    "interruption_cost_c": "inf",
+    "interruption_cost_c_Z": "inf",
+    "skill_cap_k_max": 10,
+    "team_cap_k_Z": 10,
+    "age_feature": "off",
+    "use_central_snapshot_in_flat_actor": false,
+    "disable_high_level_training": null,
+    "disable_discriminator_training": null,
+    "disable_discriminator_rewards": null,
+    "collects_high_level_samples": null,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false
+  },
+  "wall_seconds": 34.48544232395943
+}

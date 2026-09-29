@@ -548,3 +548,34 @@ Facts, not the reading: (i) both arms end ≈ .05–.06 C̄_bh above the station
 | `b01_fit_SET_932307_a01` | 11:13:34 | d84f699678dd… | 988757 / 988758 |
 
 Watcher armed for pair 2; pair 3 (931413/932413) follows its exit. **Cumulative: 2 fits complete (10.4 CPU-h), 2 running, 0 batch readings.**
+
+## 2026-09-29 12:56 UTC — Pair 2 complete and read; pair 3 accepted (H 931413, SET 932413); 4 of 6 fits done, 20.4 CPU-h
+
+**Pair 2 exit (both `complete`, exit 0; rsynced at exit; c00/c15/c30/c45 copied to `hmasd-artifacts/coupled_host_joint_skills_stage1/<tag>/`, sha256s as in each summary):**
+
+| fit | exited (UTC) | wall | CPU | peak RSS | d2 / terminal facts |
+|---|---|---|---|---|---|
+| `b01_fit_H_931307_a01` | 12:41 | 5,069 s = 1.41 h | 20,358 s = **5.66 CPU-h** | 2.55 GB | 800 team rows, 16 terminal, 0 open segments |
+| `b01_fit_SET_932307_a01` | 12:22 | 3,952 s = 1.10 h | 15,545 s = **4.32 CPU-h** | 1.12 GB | 0 high-level rows |
+
+**Ordinary readings, pair 2 (same panels and sealed references as pair 1):**
+
+| panel | H r / C̄_bh | SET r / C̄_bh | paired Δ (H − SET) r / C̄_bh |
+|---|---|---|---|
+| dev det. c00 | .119 / .185 | .115 / .178 | +.004 / +.007 |
+| dev det. c15 | .075 / .114 | .105 / .147 | −.030 / −.033 |
+| dev det. c30 | .144 / .220 | .167 / .234 | −.023 / −.014 |
+| dev det. c45 | .152 / .221 | .142 / .211 | +.010 / +.010 |
+| **hold-out det. c45 (P2/P4 panel)** | **.143 / .211** | **.152 / .225** | **−.009 / −.014** |
+| hold-out sampled c45 | .171 / .257 | .168 / .252 | +.003 / +.005 |
+
+Facts: L2(H, pair 2) = .211 − .639 − .0705 = **−.499** (SET −.485); H loses the paired P4 panel on this pair (pairs so far: +.014, −.009 — the "≥ +.03 on ≥ 2 of 3" rule can no longer be met by cell 1: P4 is already decided NOT MET on the pre-declared rule, formally recorded at batch end). The same churn signature as pair 1: association changes/step ≈ .7–.9, 130–200 user backhaul-loss events and ≈ 2,900 action clips per episode at c45 in both arms; far-cluster backhauled share .046 (H) / .049 (SET) det. hold-out. H's relay-position share per UAV stays diffuse. Parameter motion H coordinator .071, discoverer actor 1.17 (SET 1.17) — the actors move as much in both arms; the coordinator barely moves. No changes to anything declared; pair 3 runs to complete the batch as declared (the batch cost is inside the cap and the third pair still prices P2's "2 of 3" and the P3 instrument on three H seeds).
+
+**Pair 3 launches (same script and launch sha; node load before launch 0.00 — Root's Codex operations exited before 11:12 UTC):**
+
+| fit | accepted (UTC) | claim | supervisor / runner pid |
+|---|---|---|---|
+| `b01_fit_H_931413_a01` | 12:55:03 | 9877e262c1c6… | 991746 / 991747 |
+| `b01_fit_SET_932413_a01` | 12:55:43 | 5b3ea1ead905… | 992290 / 992291 |
+
+Watcher armed. After pair 3: B12 collections on the node (`collect_commitments.py` on H c15/c30/c45 from the artifacts copies, three H fits × 3 checkpoints ≈ 9 collections; cost re-priced from the first one before the rest), the reader, then the batch reading by the fixed rules. **Cumulative: 4 fits complete = 20.4 CPU-h; 2 running; projected batch ≈ 30.5 CPU-h + collections.**
