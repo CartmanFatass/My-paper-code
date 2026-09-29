@@ -1439,6 +1439,209 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 <a id="portfolio-review-2026-09-29-workflow-retrospective-pro"></a>
 [已完成Pro工作流复盘：完整问题、原答与Root建议](archive/2026-09-29/RESEARCH-workflow-retrospective-pro.md)。
 
+## Portfolio Review 2026-09-29 Radio Capability Innovator
+
+Conversation: new Jev-account consultation; its address stays local. Subject: portfolio.
+Status: **Question published for Pro's constructive selection advice; no successor selected.**
+The accepted G0 study continues unchanged. This is the completed radio/local-history/TRDL
+result boundary, not a claim that G0 or Claude's current work has finished.
+
+### Question and Owner Intent
+
+Act as an innovator and scientific adviser: after a substantial ordinary radio-control
+gain, which next research investment, if any, develops useful capability or answers a
+genuinely independent question better than the already specified calibration comparison
+and stopping? Give only candidates you can make scientifically concrete; no fixed count.
+We normally want 3-4 substantive Codex DMs, but do not promote a weak question to fill
+capacity. Advisors, finished studies and cleanup do not count as research parallelism.
+
+The owner's continuing-loop request is to summarize completed comparisons, ask Pro for
+constructive next questions, select worthwhile work and iterate without a fresh owner
+"continue" for each step. The owner also explicitly warned against treating positive
+results only defensively, or rejecting a method after a few failed recipes without
+developing a reasoned improvement. Supported conclusions, default adoption and further
+investment are distinct. Neither a positive result nor a repair is owed. Ordinary control,
+task usefulness and scientific understanding are legitimate contributions; learning is
+not compulsory. Additional information, control rights or physical resources are legitimate
+if provenance, errors and costs are stated and competent ordinary comparators get the same
+addition. Do not present added resources as a learning advantage.
+
+A result-specific independent critic recommended retaining G/E and no further purchase now.
+Reuse its numerical/evidence reconstruction below; do not redo the entire audit. Critically
+consider its investment stop alongside the strongest constructive successor. Root's concern
+is that "no currently requested deployment decision" must not become an extra authorization
+gate for worthwhile exploratory research. This is not an instruction to overturn the stop.
+A fully justified no-purchase answer is valid if the best new predictions do not warrant
+their cumulative and prospective cost. Distinguish a missing real-world premise from a
+transparent, useful abstract deployment assumption.
+
+### Evidence That Changed the Decision
+
+Radio B01 is complete, source `4d5ccefe6`, full reading/independent diagnosis
+`46fa68117`, cleanup `10bb6cdd4`. All 192 episodes, 49,152 native steps and zero fits
+are collected, all raw hashes and full observation/controller replay verified. Keep the
+adverse outcomes and limits, not only the favorable table.
+
+| Complete-world contrast | Mean native J difference [descriptive paired t95] | Mean users/tick difference [descriptive paired t95] |
+| --- | --- | --- |
+| Greedy G minus all-on A | +.115009 [.099886,.130132] | +7.396606 [6.298708,8.494505] |
+| Exhaustive E minus all-on A | +.119393 [.104491,.134296] | +7.781250 [6.690212,8.872288] |
+| E minus G | +.004385 [.001026,.007743] | +.384644 [.038274,.731013] |
+
+Host: N5/U50/H256, free-space/no shadowing, non-FDMA, 3dB threshold, cap10, static
+uniform users. Retained competent C is `LocalController(history=False)`; its code,
+not its realized trajectory, stays fixed. Each four ticks ordinary G or exhaustive
+31-mask E schedules transmitter silence. Muted transmitters lose service eligibility,
+interference and user discovery; peer discovery requires both endpoints active.
+Own position/flight/out-of-band reporting remain. The shared base NumPy kernel/mask
+has all-on parity and independent engineering checks; relay C++ and G0 are unchanged.
+
+The package provisions a 400-byte registered-site map, known propagation and a 2kbit/s
+effective out-of-band control link. Encoded own-position/new-held-command reports
+are legal; no live hidden SINR, connections or future state reaches the planner.
+Recurring traffic is 8,704 bytes per episode for G/E, zero for A. Quantization is
+not demonstrated physical positioning accuracy. Delayed masks affect transitions
+t+1..t+4 and score post-movement positions +2..+5, with terminal truncation and
+a fallible fourth prediction across the next motion choice. Switching has zero
+EXTRA modeled energy/guard time, not a hardware/battery claim.
+
+G/E improve J in 62/64 worlds and service in 61/64. E-G loses J in 13 worlds and
+service in 14; 18 complete trajectories match exactly. E-G quality mean is -.003335,
+interval crossing zero. Both lose .055369 J and 5.710938 users/tick against A in
+world29305038. At that adverse world's own recorded geometry, masking nevertheless
+improves J by .081003 and service by 5.007813 relative to all-on: snapshot improvement
+does not guarantee a better endogenous trajectory. This does not uniquely identify
+sensing loss or the C objective as its cause. All arms have no zero-service ticks;
+minimum service never worsens against A, but sustained service/p10 can.
+
+The positive is extensively active: G/E choose non-all-on in3955/4037 of4096 rounds,
+mean active transmitters3.446/3.371. Fallback motion rises sharply while visible users
+increase. Mean +5 position error is18.61/15.80m versus about.37m at +2..+4. No .456s
+deadline is missed; maximum E round latency .039457s. E adds about.728 scheduler
+CPU-s/episode over G. Collection totals188.335wall/188.099CPU-s; full offline replay
+984.845wall/984.609CPU-s. Engineering/review labor remains unmetered. These are
+conditional simulated results with observed platform timing, not hardware robustness,
+isolated information value, universal nondegradation or training replication.
+
+The critic retains E as the stronger conditional J/service reference and G as cheaper
+ordinary capability. Its best continuation, explicitly NOT selected, is one initial
+report with permanently held mask versus rolling E, 64 fresh paired worlds:
+128episodes/32768steps/0fits, runtime/engineering unknown. E changes its initial mask
+in58/64 observed worlds, so equality cannot be assumed. This would purchase a
+recurring-link provisioning comparison, not automatically a new learning question.
+
+Other completed investments provide distinct constraints:
+- Local history B02: three from-scratch 27-command policy fits all lose competent C;
+  all96 L1-C world pairs lose both J/service. Two instances improve initialization.
+  C and H remain useful ordinary capabilities; the failure does not refute history or
+  generic learning. H-C fresh-panel mean reverses B01's small positive, both uncertain.
+  Three fits/475136 cumulative steps/.378094 runner CPUh. Stop unchanged recipe.
+- TRDL B03: three paired Q32-S_eta own-tail differences -.004159/-.005316/-.025817,
+  mean-.011764, df2 interval crosses zero; one block dominates, one has positive mean-J
+  tradeoff. Retain explicit-threshold scalar as finite reference, not eta causality or
+  representation-class superiority. Six fits/1179648steps/.7433 runner CPUh.
+- B05 message continuation retains conditional positive capability: all three block
+  means of M_G/M_O versus B40 are positive on J/service, but training intervals cross
+  zero and service-tail harms remain. M_O-M_G mean+.000356J/+.022461users is unresolved.
+  Near-constant correction was inspected in one endpoint, not established for all six.
+  Cumulative27 policy fits+3predictors/3907584steps; latest six-fit batch .484397CPUh.
+
+### Live Work and Real Alternatives
+
+G0 `uav_availability_recovery` remains with `/root/dm_availability_recovery` on its
+accepted local_linux snapshot. Three fit L/P/S comparison, 960000native steps, two
+reserves around a temporary native motion/service/routing loss with geometric
+interference RETAINED. Fit1 completed512episodes/256000steps/512updates in6225CPU-s;
+fit2 was143/512 at latest native message, no evaluation then. This is progress and
+cost, NOT a scientific result. Do not interrupt, extend, move or infer its outcome.
+
+Claude owns `coupled_host_joint_skills_stage1`, the distinct coupled relay/learner
+capability question and target-level substrate work. Its SET-V-b complete reading is
+one-instance non-activation; SET-T-b was accepted at17:25UTC from186b8649e on wsl_4070.
+Do not assign that question to a new Codex DM, infer all its work completed, duplicate
+its fits or assume the node is vacant. FSD/PPC pauses, G33 freeze and owner-provided
+Milan data dependency remain. No restore of completed archived DMs.
+
+The concrete competing B05 reserve is **trained constant calibration versus
+state-dependent bounded correction**, not another future-message module:
+same frozen B19451 parent/variance, geometric40byte messages, zero-initialized
+d=.10*tanh(b) with three shared parameters versus B05's d=.10*tanh(g(x)), matched
+composed likelihood/critic/native clock. Fresh masters19701/19702/19703.
+Six512xH256 fits plus six endpoints and B40 on32common fresh worlds:
+786432train+57344eval=843776steps,6144actor+6144criticAdam calls,no predictor/search.
+New engineering4-8h conjectural, runtime unmeasured; B05's29.074min/.484397CPUh is
+only an anchor. A must add fullJ/service beyond trained constant C and B40; C gain
+without A's useful increment strengthens simple calibration; new tails remain costs.
+It remains conditional on one parent. This is a substantive alternative, not a
+mandatory mechanism explanation before developing radio.
+
+### Advice Requested
+
+1. Explain what radio's positive has actually made possible, the strongest constructive
+   explanation and the strongest simpler/adverse alternative. Which parent research
+   question can now be asked that could not be asked with only the old weak learners?
+   Do not reduce every successor to re-ranking frozen assets or repairing one tail.
+2. Derive the best next comparison or small set of truly independent alternatives,
+   including development/combination of the retained ordinary capability and an
+   optional learning question only if scientifically meaningful. Consider a changed
+   information/resource premise when justified, without inventing private truth or a
+   cosmetic new interface. Specify use case/assumption, control object, information,
+   ordinary comparator, predicted intermediate difference and COMPLETE native
+   consequence. Explain what each plausible result changes and what weakens/stops it.
+   Compare to constant calibration, held-mask provisioning, and stopping. Do not buy
+   all three merely for parallelism or require a proof/positive toy/headroom census
+   before a useful complete exploratory comparison.
+3. Price the recommended next purchase: arms/fits/steps plus nested search/prediction,
+   engineering, shared code and known versus unknown runtime. Distinguish measured
+   anchors from estimates and cross-question conflicts. Recommend an allocation, not
+   a budget authorization or fixed quota. Preserve cumulative adverse evidence.
+   Flag MATERIAL_DISSENT yes/no on a consequential existing interpretation or stop;
+   novelty claims must rest on read primary evidence, otherwise say unknown/recorded.
+
+### Context and Reading Order
+
+All unqualified paths below resolve at the full `source_sha` in the send message.
+Current method context replaces stale chat rules, never frozen experiment meaning.
+Read the consequential original evidence before the DM/Root investment preferences:
+- `docs/research/candidates/uav_radio_activation/NOTES.md`: B01 Prospective Complete
+  Ordinary Comparison; B01 Complete Reading through Complete Reconstruction and
+  Intermediate Reading; then Independent Scientific Diagnosis and DM Interpretation.
+- `runs/uav_radio_activation/b01_delayed_masks_a01/{config,summary,reading}.json`
+  and `experiments/candidates/uav_radio_activation/b01/{protocol,scheduler,study,run}.py`
+  only as needed for actual semantics.
+  Compact outputs are published; raw trajectory files are local and not remotely
+  available. Reuse the independent reader's disclosed coverage, do not claim to have
+  independently inspected those raw files from the connector.
+- `docs/research/archive/2026-09-29/RESEARCH-radio-actuation-selection.md`: full
+  Oracle/reviewer and Root Decision, including calibration alternative.
+- `docs/research/candidates/uav_local_history/NOTES.md`: B02 Complete Reading.
+  `docs/research/candidates/tail_return_distributional_learning/NOTES.md`:
+  Complete B03 Result and Independent Scientific Reading And Investment Decision.
+  `docs/research/candidates/uav_message_content/NOTES.md`: B05 Complete Reading;
+  `docs/research/archive/2026-09-29/RESEARCH-b05-constructive-successors.md`.
+  Prior Pro could not fully read some raw/compact data; its source limits remain.
+- `docs/project/OPERATING_CONSTITUTION.md` sections1-5,7-8;
+  `.agents/skills/hmasd-scientific-tools/SKILL.md`: Choose the question, Design
+  the comparison and decision exposure, Update the working explanation, Comparators,
+  Statistics, Cost and exposure; `.agents/skills/hmasd-portfolio-task/SKILL.md`
+  Steps/Boundaries.
+- This index's relevant shared-background radio-control/learning-comparator topics,
+  Active rows and live-work boundaries above. These are revisable understanding,
+  not a scientific veto. No exhaustive archive or new workflow review is requested.
+
+No experiments, independent task creation or repository edits other than the empty
+`### Pro Answer` below. Read the question at pinned source; fetch latest main target
+before writing, use its actual blob SHA, preserve every other byte and stop on
+overlapping edits. Return the actual answer commit on success, otherwise the COMPLETE
+answer in chat. Never return only a receipt or link. Account URLs stay local.
+
+### Pro Answer
+
+### Decision
+
+Pending complete advice and source checks. No successor selected by this question;
+accepted G0/Claude work and all existing pauses remain unchanged.
+
 ## Current research plan
 
 ### Owner-requested continuing research loop
@@ -1457,9 +1660,10 @@ Root在本会话持续执行这一委托；`innovator`是Pro的建设性选题�
 已接受Pro／运行用原句柄的确定性观察。Owner同日明确“取消每小时 保持事件驱动模式”，
 本会话的每小时heartbeat已删除，只保留原生任务返回和确定性观察事件驱动的接续；不设周期性
 兜底唤醒，不因时间经过重复Send／启动，也不广播未变状态。暂停、人工依赖和付费／额外授权边界优先。
-当前阶段：已选B05完整执行、全224轨迹核验并独立判读；条件续训有正的用途信号，未来内容增量未解。
-本固定批次结束，不自动追加；[新证据与处置](candidates/uav_message_content/NOTES.md#b05-complete-reading)
-进入Root的完整轮次总结和下一创新选题，其他已选独立工作保持自身范围。
+当前阶段：B05、local-history、TRDL及radio各自完整执行、核验和独立判读；radio建立条件性普通
+服务控制能力，原学习配方的正反结果均保留。Root正以这些完整结果请Pro做建设性创新选题，见
+[当前问题](#portfolio-review-2026-09-29-radio-capability-innovator)，未选新后继。
+G0保持同一已接受训练并由原DM执行；其进度不是科学结论，也不等待本次Pro或改动其固定批次。
 
 ### Completed Round: Retained-Control Extension
 
