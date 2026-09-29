@@ -1630,3 +1630,258 @@ No result worker, live observer, pending advice, uncollected result or selected
 successor remains. The next-action recommendation is reserve with conditional
 H3000 O retained, not automatic continuation; Root may compare a newly specified
 legal capacity/access question against other questions using this evidence.
+
+## 2026-09-28 - B03 prospective: pre-return load and deadline reassignment
+
+Root assigns this question to native child `/root/dm_service_reassignment` under
+parent `01a0e560-4333-7b03-8ff3-759a4add1d9a`. The preceding DM's B02 result
+`b5d87dec9` and retirement `31d62f6b5` are complete, with no accepted operation
+to inherit. This is one newly selected idea, not a restart or repair of B02.
+The owner pause remains lifted; result execution still requires the active
+direction/lead entry and actual-node admission. Root is publishing the initial
+routing change; this entry initially changes only the owned notebook.
+
+The intended contribution is useful complete long-mission service from lawful
+ordinary control, plus an empirical answer about access to existing charging
+capacity. It is not a learning method, confirmation, sustainability claim or
+diagnosis that the original allocation caused every service loss.
+
+### Evidence, comparison and decision authority
+
+I reconstructed the B01/B02 compact results and actual source, read the full
+independent constructive-exploration answer and Root disposition in
+[the completed method review](../../archive/2026-09-28/RESEARCH-constructive-exploration-method.md#independent-answer)
+(`ae35487d0`, `1d65ea4ca`, retired at `6f1a850a0`). That review explicitly
+recommends this question and P/as-executed O_H comparison, and is the applicable
+selection review. This concrete ordinary policy stays within its premise; no
+ritual second selection pass or positive pilot is added. Independent engineering
+review and independent scientific reading of the new result remain distinct.
+
+Current published shared background at `de03d1c39`, especially
+[topic 6](../../RESEARCH.md#6-实证研究是在具体条件下缩小解释空间), changes this design:
+retain the actual O_H program despite its failed adoption rule; do not repair
+the strict decoded-arrival detector; preserve complete service/J/risk and
+low-service tails; and measure real movement authority instead of treating the
+two chargers' total 2000 W as accessible capacity. B01 O-P +.062866 QoS and
++196.349 J, 15/16 joint gains, remain a useful finite asset. B02's +.183776
+full and +.216545 late QoS coexist with new seven-member cutoff/depletion in
+01/03, and both J intervals cross zero. The realized seven-member stationary
+group consumes 1179.43 W against 1000 W locally. That arithmetic motivates the
+transfer prediction without establishing the group's origin or a service-free
+repair. B02's five arrival misses are in 04/08, not the newly failing 01/03.
+
+Source inspection and a bounded read-only Scout establish the relevant rights.
+The native action is xyz plus a nearest-station dock bit, not a station ID or
+reservation. Ordinary xyz can cross a station Voronoi boundary before F.
+F enters at return margin <=0 and persists to >=.05; native limp-home applies
+at battery <=.05. These can replace the proposed motion. A dock-false transfer
+remains subject to the native backhaul guard, which blocks a proposed step
+when a current dependent link would fall below its capacity threshold. Docking
+has its existing stationward exception, 160 m approach override, 20 m capture,
+speed qualification and lowest-battery/wait/index allocation. None changes.
+All arms receive current central user/BS xy at P's existing 10-step clock and
+current legal fleet/energy/station observations. No user velocity, future RNG,
+hidden association, new station telemetry, native counterfactual rollout or
+additional physical resource is supplied.
+
+### Fixed candidate R
+
+R retains O_H's service planning, nearest-station ordinary options and 30-step
+decision clock, adding a finite cross-basin relocation option. It is an ordinary
+load/deadline policy, not an optimal planner or identified causal repair.
+
+- At each clock, estimate the prospective charging population by each member's
+  current nearest station, substituting the intended destination for active R
+  relocations. Include every S2 member in this accounting, including members
+  below the service cutoff: an unavailable hovering member still consumes
+  energy. The parked-load proxy is population times 168.49 W. It is a planning
+  proxy, separate from the measured native eligible group's actual draw.
+- A transfer can be considered only from a group whose proxy exceeds its
+  capacity (1000 W per observed slot), to a group which would remain at or
+  below capacity after adding that member. The destination must have no current
+  voluntary option/transfer or effective real-F target. This prevents the
+  controller's own simultaneous arrivals; it does not reserve a native slot.
+  At most two options, including transfers, remain active globally, and at
+  most one new option starts at each clock.
+- The member must be service-available, outside effective F and without an
+  option. Its ordinary H1 service target must be finite. Estimate direct capped
+  travel to the other observed station with the retained approach model. A
+  conservative nominal battery requirement is return reserve .10 plus
+  `(P_max * tau + P_limp * max_nearest_distance / 3) / (160 * 3600)`.
+  `P_max` is the host's known power at 30 m/s horizontal plus 5 m/s vertical;
+  `P_limp` is its power at 3 m/s. The maximum nearest-station distance along
+  the straight segment is obtained at its endpoints or its Voronoi crossing.
+  This deliberately charges the full trip burn plus the largest return reserve;
+  it is an approximate conservative screen, not a guarantee under guard stalls.
+- Let departure slack be positive battery above that requirement, divided by
+  the same observed-draw estimate used by O (at least hover power). Consider
+  departure when `0 < slack <= 600 + 30` seconds. The 600 seconds comes from
+  the longest retained finite recharge interval, not outcome tuning. Among
+  feasible candidates choose smallest slack, then lower current connection
+  load, shorter travel and lower member index. Choose the longest retained
+  dwell in {120,300,600} satisfying destination-peer arrival `D_k + tau_k`
+  and finite restoration `tau + dwell + 10 + tau_out <= remaining`, exactly
+  the existing O meanings applied to the new destination.
+- The transfer commands the observed destination xyz with the existing 30/5
+  speed caps. Before it is nearest, dock=0; once it is nearest, use the same
+  nearest-station dock/approach primitive as O. This internal waypoint is not
+  a new native station-selection action. Real F is always applied afterward.
+  If F takes over while another station remains nearest, cancel the transfer
+  and record lost authority. The next clock follows the same fixed rule.
+- Transfer members are excluded from the ordinary service assignment just as
+  committed members are, but stay in radio snapshots at observed positions.
+  Arrival is the retained strict decoded <=20 m threshold at the intended
+  station. Full battery, elapsed selected dwell, or 900 seconds from initiation
+  releases the member to P; interruption and final censoring are explicit.
+  Waiting consumes dwell time, and the known decoded boundary mismatch remains
+  possible. Original nearest-station O options retain all executed semantics.
+- When no transfer is selected, use the original O rule with masks accounting
+  for the active transfers. R introduces no new radio model query, station
+  reservation, altered shield, priority override or permanent charger claim.
+
+This invests in dynamic reassignment and replenishment, not permanent parking
+at the other station or a changed set of service anchors. The strongest simple
+skeptical explanation is that the useful radio geometry requires the overloaded
+region, so earlier lawful transfers either cannot pass the guard or lose more
+service than they recover. Another is that O's existing cycling already uses
+all useful alternate access. Both can defeat this particular package without
+establishing general infeasibility.
+
+### Fixed exposure, readings and implications
+
+Tag `b03_reassignment_a01`: arms P, O_H, R on eight new common worlds
+52392801..52392808, each H12000 continuous one-second native steps. These worlds
+are development observations after prior evidence exposure, not confirmation.
+There are 0 fits, 0 optimizer updates, 24 trajectories and at most 288000 native
+transitions. No extra pilot, seed, automatic retry, detector correction or
+outcome-triggered tuning is included. O_H and P use the exact B02 horizon
+binding before their first choice; their program and native environment stay
+unchanged. Full exogenous initial/user/RNG pairing is checked from raw streams.
+
+Primary complete readings remain full accrued native J and QoS/12000, and late
+actual J and QoS/6000 on [6000,12000). Keep the four fixed 3000-step bins,
+cutoff/depletion first crossings, reserve exposure, final [11700,12000) persistent
+reserve, zero and below-half-service spells, stored energy, gross charger input,
+modeled consumption, charging wait and actual travel. Native early termination
+is retained: no synthetic reward/state suffix, mission service keeps its fixed
+denominator, and an unobserved final300 window is missing, not a clean risk.
+Use paired descriptive t7 intervals and every world's signs; no learning n or
+population safety statement is inferred.
+
+The intermediate prediction is fewer persistent native eligible groups with
+actual demand above their station's 1000 W capacity and fewer late depleted
+members, through observed cross-basin movement, docking, charge and release.
+Measure per-station eligible counts, actual consumption/input, overload ticks,
+longest overload spell and final3000 load/stock. Preserve planned transfers,
+feasibility rejections, intended/current/native station, F overrides, aggregate
+guard counters, proposed/submitted actions, actual displacement and whether
+each transfer crosses, arrives, charges, releases and recovers service.
+Guard counters are fleet-level unless a trace separately establishes membership;
+zero displacement alone is not attributed to the guard.
+
+The useful-package prediction is positive mean full and late J versus O_H,
+nonnegative full and late service versus O_H, retained positive full/late J
+and >=.01 full/late QoS benefit over P, with no new cutoff/depletion,
+terminal-zero/early-ending or persistent-reserve worlds versus either reference
+and no higher mean reserve exposure. These descriptive signs organize reading,
+not confirmation or an automatic adoption certificate. Lower overload with
+service loss defeats this prediction. Few or blocked transfers limit intended
+decision exposure. Mixed or technically missing evidence stays unresolved.
+Every arm/world is read; failures do not grant a retry or erase adverse evidence.
+
+### L0 implementation, cost and next-choice boundary
+
+Implement new direction-owned `b03/` runner, controller, finite episode adapter
+and compact reader under `experiments/candidates/uav_persistent_service/`, with
+matching tests. Reuse the B02 evaluator at source `e905d8842` through an explicit
+new B03 version, not a resumed/deleted runner handle. A small optional controller
+factory in owned `macro_env.py` is permitted if necessary to construct R before
+the first plan and pairing attachment; default behavior must stay unchanged.
+No other shared code, physics, P, F, allocation, reward or B01/B02 output edits.
+The Implementer owns only these code/test paths, no notebook, index or launch.
+The DM accepts the diff/checks and obtains independent engineering review.
+
+Focused tests cover controller-before-first-plan wiring, untouched P/O_H
+semantics, transfer eligibility and load counts, energy/slack arithmetic, ties,
+timing and duration meanings, dock-false cross-basin commands, actual F override
+and interruption, total option limit, capture/dwell/full/timeout/censor and
+restoration, complete/early window denominators, raw pairing corruption and
+incomplete batch suppression. Synthetic fixtures cover most cases; at most
+240 native correctness transitions are planned, separately counted from results.
+No test supplies hidden result-bearing scientific probes.
+
+Prospective node is configured `wsl_4070`, CPU evaluation with four spawned
+single-thread workers, subject to actual admission at launch. Original B02 cost
+was 4466.39 worker-CPU s/192k steps, giving 6699.59 s (1.861 h) for 288k
+at that rate. R adds only O(8) fleet/destination geometry per macro clock,
+at most 25600 member evaluations and no extra native radio branches. Allow
+2..3 worker-CPU h and 30..55 min runner wall as a planning estimate, not a
+scientific timeout or guaranteed price. The P-style radio bound is at most
+24*1200*19=547200 service snapshot queries; actual F/option masks reduce it.
+Expect 0.2..0.4 GB unique compressed raw evidence plus one disposable launcher
+snapshot. Engineering/review/readback are additional; roughly 2..4 h engineering
+is estimated rather than hidden within zero fits. Counts and costs will be
+reported as measured; missing telemetry is not zero.
+
+At the complete-result boundary, compare further reassignment work with the
+independent preserved-content question and stopping. Direction cumulative paid
+science before B03 is 1 fit/528k native steps (B01 336k plus B02 192k), about
+4.392 worker-CPU h, plus recorded correctness and unmetered engineering/readback.
+This study adds a testable access intervention to an established finite benefit;
+unchanged O_H replication would not answer access, and detector repair does not
+address the new B02 failures. A further investment needs a new falsifiable
+intermediate and native prediction with its full marginal cost. Ending this
+recipe, withholding adoption, and ending the wider question remain separate.
+No further run or cross-question pivot is automatically selected here.
+
+### Implementation and engineering acceptance
+
+The bounded Implementer added the B03 controller, episode instrumentation,
+three-arm reader/batch/admitted entry and focused tests, with one optional
+controller-factory argument in the retained `NativeEpisode`. The default P/O
+construction remains unchanged. The DM read the code and the independent
+engineering Reviewer traced the retained P/O_H source against `e905d8842`, the
+pre-first-choice horizon binding, F precedence, native allocation and guard,
+transfer actions and lifecycle, artifact integrity, pairing and partial-run
+handling. No result-bearing experiment or profiling pilot has been run.
+
+Review found measurement defects, not a reason to alter the fixed policy:
+time-based transfer reading could confuse release/restart events at the same
+step, concurrent members needed separate event filtering, and a three-arm
+minimum prefix could hide a longer-pair exogenous mismatch after an early third
+ending. The reader now uses event indices, same-member events bounded by the
+next same-member option, actual releases and free intervals for service
+recovery. Pairing checks every pair's own shared prefix and equal-length full
+hashes. Native basin telemetry now uses native station geometry only for
+readout; policy inputs remain legal decoded observations. Synthetic regressions
+cover these cases and the declared action/lifecycle boundaries. The full
+useful-package rule is a manual complete-reading obligation, not a summary flag.
+
+Check accounting: the initial five-test suite passed with 90 native steps;
+the expanded six-test suite passed with another 90. One R-only 30-step telemetry
+smoke passed. A synthetic fixture first failed because its monkeypatch omitted
+the parent module; the fixture was corrected and the synthetic checks passed.
+After the review repairs, nine synthetic tests pass with one native test
+deselected; compilation and the tracked-file whitespace check pass. The final
+ten-test file was not run as a single suite and the native-geometry readout
+repair had no extra native smoke. Total measured correctness exposure is
+**210 native transitions**, separate from the prospective 288000 result steps.
+No scalar from these short correctness checks selected the policy or its
+hyperparameters; they do not count as a scientific positive pilot.
+
+The prospective actual-node memory estimate is 4 GiB total for four workers
+and parent, based on B02's largest observed worker peak of about 0.67 GiB plus
+parent and allocation headroom. This is an estimate, not a measured summed
+peak. Fresh runner-side admission still checks the configured physical and
+effective memory floors. Read-only node inspection found adequate disk and
+memory but is not substituted for admission. The remote canonical checkout
+has unrelated local research-index edits and retained unique old raw outputs;
+use a published exact-SHA launcher snapshot without merging, switching its
+branch or changing its sparse selection.
+
+The independent engineering re-review reports the P2 resolved, no remaining
+material finding, nine synthetic checks passed and zero added native steps.
+The DM accepts this bounded implementation and its disclosed check limits for
+the fixed B03 panel. This is engineering acceptance, not scientific acceptance
+or adoption. Root's initial active/routing publication is `498ef2f6c`;
+the current main entry still assigns this runtime with owner pause lifted.

@@ -41,14 +41,15 @@ def longest_spell(mask):
 
 
 class NativeEpisode:
-    def __init__(self, seed, arm, *, horizon=HORIZON):
+    def __init__(self, seed, arm, *, horizon=HORIZON, controller_factory=None):
         self.started, self.cpu_started = time.monotonic(), _cpu_seconds()
         self.seed, self.arm, self.horizon = int(seed), arm, int(horizon)
         self.config = make_eval_config(self.horizon, POLICY_SEED)
         self.layout = replace(S7S2_LAYOUT, max_steps=self.horizon)
         self.env = make_env(self.config, self.seed)
         self.effective_config = effective_config(self.env, self.horizon)
-        self.controller = (TransitHoldController(self.env) if arm == "P" else
+        self.controller = (controller_factory(self.env, self.config) if controller_factory is not None else
+                           TransitHoldController(self.env) if arm == "P" else
                            CommitmentController(self.env, self.config, arm=arm))
         self.controller.reset()
         observations, info = self.env.reset(seed=self.seed)
