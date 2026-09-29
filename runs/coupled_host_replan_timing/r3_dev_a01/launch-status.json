@@ -1,0 +1,11 @@
+{
+  "claim_key": "2cd687c28db6596d371985d64e4061a37f2c309fd6238977d68934b63435cb93",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/2cd687c28db6596d371985d64e4061a37f2c309fd6238977d68934b63435cb93.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r3_dev_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/2cd687c28db6596d371985d64e4061a37f2c309fd6238977d68934b63435cb93.json",
+  "pid": 86835,
+  "runner_pid": 86836,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-29T23:14:04.693140Z"
+}
