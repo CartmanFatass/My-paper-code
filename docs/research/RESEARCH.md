@@ -6,7 +6,7 @@
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan) · [任务路由](#session-routing)。
 
 **本Root工作流已恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”。**
-本次解除21:25 UTC的本Root及三个Codex方向暂停；三项已接受研究现已完成判读、补评、发表与收尾，进入原委托的轮次综合与下一轮选择。
+本次解除21:25 UTC的本Root及三个Codex方向暂停；三项已接受研究现已完成判读、补评、发表与收尾；两项后继比较已选择，新原生DM正在准备。
 新Root已核对三个方向无活动进程；旧Root／子代理未加载，故明确转交未完成责任给当前原生DM，保留全部Lead／源码／原操作身份。
 这不改变Claude独立授权、FSD/PPC暂停、G33冻结或Milan数据依赖。[恢复范围](#resume-20260929)、[原暂停交接](#paused-handoff-20260929)。
 
@@ -1528,7 +1528,7 @@ Total selected scope is **544 complete episodes/139,264 native steps/0 fits/0 up
 <a id="parallel-expansion-20260929"></a>
 [Prior pause, recovery and source identities](archive/2026-09-29/RESEARCH-completed-recovery-round.md). Current Root remains `01a0ef2b-a391-7693-a748-60e24be246ae`; completed old DMs are not restored.
 
-**Remote execution preparation:** configured `zsh -lic` origin queries work. Canonical HEAD remains570fd4564; at the read-only64b3b0913 comparison, all92 untracked/incoming collisions matched published bytes (3,964,928 allocated bytes), and five dirty launch statuses did not overlap incoming changes. Launch/admission/resource/compute code matched. A narrow current RESEARCH control sync plus an admitted source snapshot can preserve peer outputs; fresh source/direction/lead/resource checks still apply. The old gc.log/commit-graph missing-object observation is not repaired or established harmless; a limited32-commit traversal succeeds with/without the graph. Do not perform a blind whole-tree update, sparse change or cleanup of peer outputs.
+**Remote execution preparation:** configured `zsh -lic` origin queries work. Canonical HEAD remains570fd4564; at the read-only64b3b0913 comparison, all92 untracked/incoming collisions matched published bytes (3,964,928 allocated bytes), and five dirty launch statuses did not overlap incoming changes. Launch/admission/resource/compute code matched. Root then synchronized only canonical RESEARCH to published e6d520455 (SHA256 534d4444629f4c7efecab3bc398eda1605d072771975b70950d1165435c38c47), verified exact bytes and preserved all five dirty statuses/peer outputs. This prepares admitted source snapshots; fresh source/direction/lead/resource checks still apply. The old gc.log/commit-graph missing-object observation is not repaired or established harmless; a limited32-commit traversal succeeds with/without the graph. Do not perform a blind whole-tree update, sparse change or cleanup of peer outputs.
 
 ### Owner-requested continuing research loop
 
@@ -1565,7 +1565,7 @@ FSD/PPC暂停、G33冻结、Milan数据依赖及不复用完整收尾旧DM均保
 [Retained-control原完整选择](archive/2026-09-29/RESEARCH-retained-control-selection.md)。
 <a id="portfolio-review-2026-09-29-b05-constructive-successors"></a>
 [已退休B05轮边界Pro答复与原取舍](archive/2026-09-29/RESEARCH-b05-constructive-successors.md#decision)。
-原先暂缓校准是当时的边际投入选择，不是永久单研究规则；当前采用修正后的B，旧结果不改写。
+原先暂缓校准是当时的边际投入选择，不是永久单研究规则；该B06现已完整收尾，当前后继见上方所选两题，旧结果不改写。
 
 ## Prior reviews and runtime context
 
@@ -1650,8 +1650,8 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| DM: fixed correction deployment | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_correction_compression` | `/home/fires/hmasd-wsl` / `main` | New native DM owns `uav_correction_compression`, inherits complete B06 assets/positive and adverse evidence. Selected seven-arm zero-fit comparison; no old operation resumed. [Current plan](#current-research-plan). |
-| DM: registered-user periodic service | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | New native DM owns `uav_registered_service`, inherits R/S2/T2 and all B03 tradeoffs. Selected five-arm zero-fit comparison under lawful model history; distinct from Claude R3 adjacency work. [Current plan](#current-research-plan). |
+| DM: fixed correction deployment | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_correction_compression` | `/home/fires/hmasd-wsl` / `main` | Actual first turn verified gpt-6-astra/max (native UUID01a0ef78-6628-7593-b359-b608f0c80190). New DM owns `uav_correction_compression`, inherits complete B06 assets/positive and adverse evidence. Selected seven-arm zero-fit comparison; no old operation resumed. [Current plan](#current-research-plan). |
+| DM: registered-user periodic service | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | Actual first turn verified gpt-6-astra/max (native UUID01a0ef79-3abf-7cd0-a605-29a13d23105d). New DM owns `uav_registered_service`, inherits R/S2/T2 and all B03 tradeoffs. Selected five-arm zero-fit comparison under lawful model history; distinct from Claude R3 adjacency work. [Current plan](#current-research-plan). |
 | DM: timely joint radio control (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_radio_recovery` | `/home/fires/hmasd-wsl` / `main` | Recovered unfinished B03 responsibility with original operation/source intact. Full192/192 saved-data reconstruction and independent diagnosis complete, zero new episodes. Reserve with conditional S2 capability, R tradeoffs and all adverses; no active reader, unread review or successor. [Complete result and disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b03-complete-reading), [original pause handoff](candidates/uav_radio_activation/NOTES.md#owner-pause-and-handoff---2026-09-29-2131-utc). |
 | Prior DM: joint motion and radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_joint_control` | `/home/fires/hmasd-wsl` / `main` | B02 fully collected, reconstructed and independently read. R retained alongside T-S capability and all adverses. No active producer/unread result; cleanup69dc18003 reclaimed1646100480allocated bytes and preserved unique evidence. New successor ownership is above, not a resumed old process. [Full reading and next-investment disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b02-complete-reading). |
 | Prior DM: delayed joint radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_activation` | `/home/fires/hmasd-wsl` / `main` | B01 fully collected, reconstructed and independently read, G/E retained with adverse worlds. No old active producer or unread result; cleanup10bb6cdd4 reclaimed1642991616bytes with unique evidence preserved. New B02 ownership is above; this completed child is not reused. [B01 result and original investment boundary](candidates/uav_radio_activation/NOTES.md#2026-09-29---b01-complete-reading). |
