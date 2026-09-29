@@ -11,8 +11,9 @@ Owner 于 2026-09-23 进一步要求本任务作为科学项目管理者，给�
 **Claude 的 FSD session 仍暂时停止，仅由 owner 手动开启；G33 保持冻结。**
 
 **当前科学项目管理：** Owner于2026-09-27 PDT（2026-09-28 UTC）指定本会话接任Root，负责四个已收尾Codex DM的周期复盘与下一轮计划，
-维护问题计划、跨方向取舍与后继安排；Root只协调。Owner最新指令（2026-09-28 UTC）取消Codex DM／研究线固定数量上限，
-要求Root更积极选题并推进完整检验；不设替代名额，真实节点资源准入、Claude自身授权范围与既有暂停不变。
+维护问题计划、跨方向取舍与后继安排；Root只协调。Owner于2026-09-28 UTC取消Codex DM／研究线固定数量上限，
+2026-09-29进一步要求通常维持3–4个有实质工作的Codex DM，并由Astra max Oracle筛选有依据的备选；
+不足时不强行标为promising，Oracle／scout／reviewer不计入DM数。真实节点资源准入、Claude自身授权范围与既有暂停不变。
 DM持续负责科学问题与解释，每次推进一个结果性研究，自主实施、判读和发表；训练与评价均按实际节点资源准入。
 当前责任与工作区见[任务路由](#session-routing)，上一轮分工及采纳依据见[四DM审查](archive/2026-09-27/RESEARCH-four-codex-root-handover.md#four-dm-root-decision)。
 Owner已归档完成且文档齐全的DM；后继研究创建新DM并继承已发表证据，不恢复或复用这些旧会话。
@@ -1114,6 +1115,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
+| `uav_availability_recovery` | Can learned joint reserve deployment and return preserve complete native service beyond competent ordinary reassignment when temporary member loss also changes backhaul geometry? | exploring | Codex DM (native child) | **Selected, implementation only; no new result.** G0 S7-S1, 8 UAVs/two reserves/H500, one temporary primary outage; L x3 vs same-map joint ordinary P and retained nearest-reserve S, 64 common worlds plus shared no-event reference. Three fits/960,000 native steps, at most270,336 planner snapshots; engineering14–28h conjectural, runtime unmeasured. Explicit centralized static-map addition to P/L; no hidden event ledger, entity-memory or general churn claim. Focused independent review retained the purchase with horizon, S-readiness, public-state and reward/event-accounting corrections. Preserve S4/N7 adverse evidence; no positive pilot prerequisite or automatic repair. [Full Oracle, review and Root decision](archive/2026-09-29/RESEARCH-availability-expansion-selection.md#root-decision), [routing](#session-routing). |
 | `uav_local_history` | Can lawful retained local spatial history improve complete decentralized UAV service, and can experience add value beyond competent ordinary control given the same history? | exploring | Codex DM (native child) | **B01 selected, no result yet:** same decentralized radio-aware controller with current users C versus bounded lawful XY history H, common N5/S1 32 worlds/H256; 0 fits, 64 episodes/16,384 native steps plus declared local search. Independent scientific review corrected absent-user censoring and blind-search fallback before implementation; full native J/service, component losses and all worlds govern reading. Current GRU forgetting and learned increment remain untested; a positive ordinary result is not a prerequisite for later learning. All historical cache/encoder adverse evidence and B19451 capability retained; distinct from B05 content/residual work. [Design, cost and complete review](candidates/uav_local_history/NOTES.md#2026-09-29---question-selection-and-b01-prospective-design), [routing](#session-routing). |
 | `uav_message_content` | Can message content and its learned decentralized response improve complete native J/service under the existing delayed RR channel, beyond competent ordinary content and matched learning controls? | reserve | Codex DM (native child) | **B05 complete and independently read: retain conditional continuation capability, no resolved forecast increment.** M_G-B40 mean J/service +.005999/+.458984; M_O-B40 +.006355/+.481445, positive observed means in all3 blocks but df2 intervals cross zero. M_O-M_G +.000356/+.022461 remains unresolved; fixed19602 positive case retained. Active bounded corrections/future sensitivity do not identify coordination or freezing causality; nearly constant retuning is a simpler account. All endpoints worsen mean worst-tick service, with new world10 zero ticks in block3. Keep B19451/all6 endpoints and prior positive/adverse evidence; no new default or automatic follow-up. 6fits/843776steps/.484397 CPUh; cumulative27 policy fits+3predictors/3907584steps. No producer/unread result/selected successor; next investment belongs to Root's loop, not an approval dependency. [Full reading, independent diagnosis and disposition](candidates/uav_message_content/NOTES.md#b05-complete-reading), [selection](archive/2026-09-29/RESEARCH-retained-control-selection.md#root-decision), [routing](#session-routing). |
 | `uav_joint_transition` | Under a common radio-aware destination-generation rule, can learned joint staging and intermediate paths improve complete native service beyond ordinary trajectory planning? | reserve | Codex DM (native child) | **B01 complete and independently read; stop this exact L/O package, broader joint-motion question unresolved.** L chose D at all 800 evaluation clocks and all 26 common L/R arrays match byte-for-byte in eight worlds, despite 7,086 non-D training choices. L-O +.014522 QoS / +22.041 J is retained R, not learned value. Active O-R is -.014522 QoS [-.038944,+.009899] / -22.041 J [-98.321,+54.238], with positive worlds 02/03 and world 06 risk benefit, but new 07/08 reserve tails. One fit / 96 H3000 worlds / 288k steps / 256 updates; 902,027 radio queries, 6,800,850 prediction ticks, 120.425 min runner wall / 4.162 recorded CPU-hours. R/P remain conditional references, no safety or general learning impossibility claim. Unique raw evidence retained; unused launch/training code, scratch and source snapshot retired, net 802,582,528 bytes reclaimed. No producer, unread result or selected successor; no automatic repair. [Complete results](candidates/uav_joint_transition/NOTES.md#2026-09-28---b01-complete-unchanged-learned-deployment-and-mixed-ordinary-paths), [independent reading](candidates/uav_joint_transition/NOTES.md#independent-scientific-reading-and-dm-disposition), [routing](#session-routing). |
@@ -1488,18 +1490,32 @@ R09技术失败；不能据旧摘要把整个方向视为从未试过。保留�
 <a id="parallel-expansion-20260929"></a>
 ### Parallel Expansion
 
-Owner随后明确要求扩展方向，并允许像Claude一样使用Astra max Oracle分担学术决策。
-Root已选择`uav_local_history`，由新原生DM `/root/dm_local_history`承接上述第一问题并推进
-完整初始研究，不再停在准备报告。复用刚完成的独立选题判断；实际方案的新增材料假设／比较
-由DM按现有方法处理，不重复整套项目复盘，也不等待每fit的Root许可。该方向尚无结果性启动，
-普通控制器及完整成本未知，须写入正常前瞻后发表／准入，不能以选题代替运行合同。
+Owner要求通常保持3–4个有实质工作的Codex DM，并保留少量真正值得比较的备选；数量不是
+科学质量判断，不把Oracle／scout／reviewer或只剩清理的旧研究算成活动DM，也不强凑第四题。
 
-Root同时委托 `/root/oracle_question_expansion`（原生`gpt-6-astra`、`max`、独立上下文）
-对下一项独立问题做建设性选择与完整比较设计，优先审视实际成员可用性变化，允许提出更好的
-替代。Oracle只是Root科学推理的工作方式，读源后给建议；不拥有方向、写记录、启动或审批，
-也不冒充独立Scientific Reviewer。Root保留跨题选择，DM保留问题内推理和执行；不是新的
-宪章角色、每轮必经环节或固定名额。本次新问题尚待其具体设计，未声称另一DM已经选定。
-现有B05和Claude已接受工作继续，能源原配方、FSD/PPC暂停、G33冻结和Milan依赖均不变。
+已选择两个独立扩展。`uav_local_history`由 `/root/dm_local_history`研究合法匿名空间历史，
+首比较是同一普通局部控制器的当前观测C与有界历史H：0fit、64完整H256回合／16,384步，
+不预设GRU遗忘，也不要求普通比较先胜出才能提出有理由的学习研究。完整前瞻、成本与
+针对缺失用户删失信息的独立修正已发表于[NOTES](candidates/uav_local_history/NOTES.md)。
+
+Oracle具体化的`uav_availability_recovery`已交新DM `/root/dm_availability_recovery`：
+G0上两个备用UAV在一名主成员暂时退出及回归时联合选择补位、驻留与返回，比较三次学习实例、
+同信息普通联合规划P及原最近备用S，3fit／960,000原生步。中央静态用户地图是给P/L共同增加的
+资源，不假称免费去中心化信息；完整任务而非只看恢复窗口。独立科学审查支持直接完整比较，
+采纳剩余时域、S逐步readiness、公共预测状态及原生奖励／事件边界四项修正，无新增试验门。
+[完整Oracle建议、独立答复和Root决定](archive/2026-09-29/RESEARCH-availability-expansion-selection.md#root-decision)。
+
+选择时B05消息研究仍在收口；其DM随后已完整发表并置reserve，不再计作新的活动研究：
+两种有界续训都保留相对B40的条件性均值收益，但普通未来端点相对几何信息的增量仍未解决，
+最差时刻服务反例保留。Root在实质结果边界综合，既不以新增模块为默认下一步，也不否定已有能力。
+本段发表时两个新问题在推进，下一项由Oracle备选的具体价值决定，不用已完成DM补足名额。
+
+`/root/oracle_question_expansion`为原生`gpt-6-astra`、`max`、独立上下文，继续筛选跨角度备选。
+它是Root的科学推理方式，不拥有方向、记录、启动或审批，也不冒充独立Scientific Reviewer；
+Root选择跨题投入，DM负责问题内推理执行。建议区分可具体化与有关键前提的条件性备选，允许没有
+足够候选，不建新角色／评分表／审批层。新增假设或资源须明确来源、误差、成本，并给有能力普通
+对照同样增量；建设性解释落实为可改变的中间量和完整任务预测，保留相反证据及停止条件。
+Claude已接受工作、能源原配方停止、FSD/PPC暂停、G33冻结和Milan依赖均不变。
 
 <a id="pro-innovator-2026-09-29-next-round-after-continuity-and-forecasts"></a>
 <a id="portfolio-review-2026-09-29-retained-control-selection"></a>
@@ -1588,6 +1604,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
+| DM: joint reserve deployment and return | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_availability_recovery` | `/home/fires/hmasd-wsl` / `main` | New registered `hmasd-direction-manager`, owns `uav_availability_recovery` and matching paths. Oracle-designed G0 complete L/P/S study selected after focused independent review; no archived DM restored. Adopt horizon, S-readiness, public-snapshot and native reward/event corrections; exact source, engineering checks, actual admission and full reading remain DM responsibility. No routine Root launch approval. [Selection](archive/2026-09-29/RESEARCH-availability-expansion-selection.md#root-decision). |
 | Prior DM: service-aware replenishment and deployment (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_service_continuity` | `/home/fires/hmasd-wsl` / `main` | 历史已完成`uav_persistent_service` B05，结果／独立判读及清理发表于`39f75795d`。保留有限R和S的具体中断改善，固定替换规则失败，结束原样S投入；无活动worker／observer、未读结果或已选后继。较宽服务问题仍开放。[完整结果](candidates/uav_persistent_service/NOTES.md#b05-complete-reading)。 |
 | DM: lawful local spatial history | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_local_history` | `/home/fires/hmasd-wsl` / `main` | New registered `hmasd-direction-manager`, owns `uav_local_history` and matching paths; selected after the owner-requested archive review and expansion. Complete native history/control question, not a resumed archived DM or a duplicate B05. Prospective design, competent ordinary comparison and dominant cost precede execution; own publication and long same-handle waits through the result. [Assignment](#parallel-expansion-20260929). |
 | DM: retained-control message extension | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_retained_control` | `/home/fires/hmasd-wsl` / `main` | B05源69785db45完整执行，224轨迹/6续训全读并独立科学诊断，MATERIAL_DISSENT:no。条件续训正例与尾部反例均保留，预测内容增量未解，不选新默认或追加运行；方向reserve。科学worker/观察已停，原始证据保全及精确清理见[完整记录](candidates/uav_message_content/NOTES.md#b05-complete-reading)。DM自有发表完成，向Root返回本轮实质边界及下一投资建议，不复活旧B04。 |
