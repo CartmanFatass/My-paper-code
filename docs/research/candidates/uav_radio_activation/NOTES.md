@@ -1396,3 +1396,122 @@ child turn active, drain/rearm the same handle at checkpoints, and distinguish
 queue-delivery facts from healthy observation. Registration is not proof that
 an ended native child could be woken. Source publication precedes execution;
 this start belongs in NOTES/runs, not another routine RESEARCH update.
+
+Generation1 checkpoint `ebe3f0c9d7397378618fb27c`, wake
+`65571785-91ac-4928-9e90-7931ed7030e8`, observed both original native identities
+running at20:57:50Z. Latest progress102completeepisodes/26112steps/1482.090CPU-s.
+Queue delivery returned code-32600, `direct app-server input is not allowed for
+unloaded spawned sub-agents`. This active child drained and rearmed the same
+operation into generation2. No worker restart, address change, scope/ceiling
+extension or partial outcome interpretation occurred.
+
+### Owner Pause and Handoff - 2026-09-29 21:31 UTC
+
+The owner explicitly requested a workflow pause and written handoff. Root
+relayed that instruction to this native DM; it takes precedence immediately,
+including before any RESEARCH control publication. Scientific development,
+new execution, further interpretation/review, cleanup and successor work are
+stopped. Only this bounded reconciliation and evidence publication continue.
+Root owns the global pause/control update, preserving launch-bound leads.
+**B03 is technically complete, but its full independent reading and scientific
+disposition are incomplete. No adopted result, route closure or next investment
+is established by this pause entry. Owner resume is required.**
+
+Published reviewed source is
+`2bff85091f85f6d52fc0344d0329b4fc39fa6d5c`; accepted-operation publication is
+`6b1fdd41f`. The sole native operation remains
+`.git/hmasd-admission/c0e0f240ff4084e66fbf95f0700853600869e747fa182db01cf2bbaf2f4bc748.json`,
+with accepted source snapshot
+`.git/hmasd-launch-sources/3d9c57d229864a02a8679bdf903af92e` and canonical output
+`runs/uav_radio_activation/b03_two_tick_delivery_a01/`. No duplicate operation,
+native restart or batch extension occurred.
+
+The native supervisor3910321 and worker3910322 terminated normally before the
+pause. `process-exit.json` records exit0, `normal_process_exit`, finished epoch
+1790716917.7261229; terminal status was observed at2026-09-29T21:22:20.857001Z.
+Runner summary is COMPLETE with one constructor,192explicit resets,
+192complete episodes/49152native and team steps,0fits/optimizer steps and no
+failure. Whole-worker wall2912.68424427s, user2899.402799s plus system2.611851s
+=2902.01465CPU-s, peakRSS131156KiB, one thread. These are technical collection
+facts, not a completed independently read scientific conclusion. Summary
+SHA256 is `554d27275b84c69479a1560c0ee9fa74be112fd933c6f60518c9b592bcb5edc1`.
+
+Observer generation2 returned terminal READY event
+`731f4862a4e8ed0767dfb596`, wake
+`1071362f-5bd8-495d-bce3-985dbe3001a9`. Its queue attempt, like generation1,
+returned code-32600 (`direct app-server input is not allowed for unloaded
+spawned sub-agents`). The active DM drained that terminal event and consumed
+it into stopped generation3 before this pause. Retained compact witness:
+`observer-terminal.json`. Private request:
+`temp/directions/uav_radio_activation/b03-wait.json`; private state:
+`/home/fires/.local/state/hmasd-wait/01a0eed3-b984-7f62-aa36-c623d55c3612/state.json`.
+State is stopped, wake null, both events consumed; final observer4008278 is
+absent. There is no automatic wake to await or rearm. Do not restart/rearm it
+under the pause.
+
+The full reader had started from the exact accepted snapshot, in exec
+session49205, with `/usr/bin/time -v` writing `reader-resources.txt`. On pause,
+the DM identity-checked reader4008315 against the exact B03 snapshot command
+and sent SIGTERM; its time parent was4008308. The session drained with exit143.
+Last emitted completed verification was39/192, T2/reset seed29307012. The
+reader has no resumable aggregate checkpoint and **`reading.json` is absent**.
+The stopped reader cost is user248.21s/system5.45s, elapsed4:13.62,
+peakRSS102072KiB. Its time witness says `Command terminated by signal 15`;
+the footer's `Exit status: 0` does not supersede that signal or session exit143.
+This is owner-paused partial verification, not reader success or a failed
+native scientific package. No raw or summary artifact was overwritten.
+
+At21:30:57Z, `ps` found none of native supervisor3910321, native worker3910322,
+reader4008315, time parent4008308 or observer4008278. All owned exec waits are
+drained. Helper states: `/root/dm_radio_delivery/two_tick_protocol` completed;
+`/root/dm_radio_delivery/engineering_review` completed;
+`/root/dm_radio_delivery/result_diagnosis` interrupted. The DM's explicit
+interrupt found the critic already interrupted; no further review is assigned.
+This DM remains active only to publish the handoff, then returns to Root.
+
+The independent result critic's only received diagnostic message is retained
+here as **provisional and unfinished**, not an adequate completed result
+verdict. Before reading B02's prior critic/DM or Pro explanations, it reported
+independent checks of192raw hashes, matched reset sites/initial positions/map
+packets, and reconstruction of complete J/service/quality/p10/min/zero/path/
+deadline/traffic endpoints matching summary. It reported S2-R
+`+.016514J/+1.504150users`, T2-R `+.017367J/+1.667236users`, and T2-S2
+`+.000853J/+.163086users`, with the last contrast's descriptive intervals
+crossing zero and31/32J wins/losses. Its tentative preference was to retain
+timely ordinary capability, favor S2 as the economical reference and not buy
+exhaustive-search expansion on this increment; quality, path and adverse worlds
+remained material. It explicitly had active-choice/block evidence and prior
+interpretations still to check, with the full reader pending. That unfinished
+message does not authorize a scientific disposition or further investment.
+The runner's complete summary and192world artifacts remain available, including
+positive/adverse outcomes; the DM has not completed the independent read or
+answered the prior predictions at the study boundary.
+
+At pause, the only unpublished owned changes were this notebook's checkpoint
+and handoff entries plus compact `config.json`, `launch-status.json`,
+`observer-terminal.json`, `process-exit.json`, `reader-resources.txt` and
+`summary.json` in the canonical run directory. Publish these exact paths under
+the shared-main writer lock, preserving all unrelated writers. Source/tests
+are already clean and published. Existing tracked `launch-manifest.json` and
+`admission-preflight.json` bind the launch. Ignored `raw/` contains the sole
+canonical192compressed world records, declared content79442992bytes and
+allocated79876096bytes at reconciliation. Retain stdout/stderr, private wait
+request/state and the accepted source snapshot (allocated1649856512bytes);
+direction scratch is8192allocatedbytes. No backup copy is created. No targets
+were deleted and net reclaimed disk is0bytes: cleanup was stopped by the owner
+pause, not a technical cleanup failure. Prior B01/B02 evidence stays unchanged.
+
+Resume is conditional on an explicit owner lift, current lead/pause checks and
+loading this handoff. Do not repeat the native192episode run. Inspect the same
+terminal manifest/status/exit and source/raw identity, then rerun only the
+read-only full reader on existing canonical artifacts from the accepted
+snapshot using the configured CPU interpreter and `PYTHONDONTWRITEBYTECODE=1`.
+Write any resumed reader timing to a new `reader-resources-resumed.txt`, keeping
+the interrupted-reader witness and cost. The full reader must produce its
+complete192/192 `reading.json`; do not splice a39-row prefix into a verdict.
+Then resume the same independent critic, or transparently recover its unfinished
+review with these exact sources if the helper cannot be resumed, preserving the
+provisional message. Only after complete reading/review may the DM resolve
+predictions, publish its material RESEARCH/background judgment, recommend the
+next investment to Root and perform measured evidence-aware cleanup. Those
+steps are all presently paused, not implicitly approved or automatically queued.

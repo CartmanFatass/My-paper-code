@@ -1,0 +1,24 @@
+Command terminated by signal 15
+	Command being timed: "/home/fires/.venvs/hmasd-linux-cpu/bin/python /home/fires/hmasd-wsl/.git/hmasd-launch-sources/3d9c57d229864a02a8679bdf903af92e/experiments/candidates/uav_radio_activation/b03/read.py --out /home/fires/hmasd-wsl/runs/uav_radio_activation/b03_two_tick_delivery_a01"
+	User time (seconds): 248.21
+	System time (seconds): 5.45
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 4:13.62
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 102072
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2
+	Minor (reclaiming a frame) page faults: 43606
+	Voluntary context switches: 129
+	Involuntary context switches: 1177
+	Swaps: 0
+	File system inputs: 1504
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
