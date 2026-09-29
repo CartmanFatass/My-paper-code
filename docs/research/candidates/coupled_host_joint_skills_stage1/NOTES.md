@@ -515,3 +515,36 @@ Data received, no action: Root's inbox file `20260929_workflow_retrospective_ROO
 | `b01_fit_SET_932201_a01` (SET, off) | 09:20:3x | 506e2d534b3a… | 978909 / 978910 | (record on the node; rsynced at exit) |
 
 At 09:20:32 UTC the H runner had passed the admitted boundary, written config/matching table (15 differing config fields between arms, as in the probes) and started evaluation 0 (dev, deterministic); RSS 777 MB, 340 % CPU, node load 2.0. Output roots `/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/<tag>`; observation = detached poll of `process-exit.json` from this host, rsync of each run directory to this checkout at exit (then durable checkpoint copies under `/home/wu/hmasd-artifacts/coupled_host_joint_skills_stage1/<tag>/`). Next pair (931307/932307) after this pair exits. **2 formal fits running, 0 read; cap 35 CPU-h.**
+
+## 2026-09-29 11:15 UTC — Pair 1 complete and read (ordinary readings only; the P2/P4 rule applies at batch end); pair 2 accepted (H 931307, SET 932307)
+
+**Pair 1 exit (both `status complete`, exit 0, 45 rollouts = 360k team steps, 45 updates, all declared panels written; rsynced to this checkout at exit; checkpoints c00/c15/c30/c45 copied to `/home/wu/hmasd-artifacts/coupled_host_joint_skills_stage1/<tag>/` with the summary's sha256s):**
+
+| fit | wall | CPU | peak RSS | last rollout wall / update | d2 / terminal facts |
+|---|---|---|---|---|---|
+| `b01_fit_H_931201_a01` (exited 10:54:06 UTC) | 5,442 s = 1.51 h | 21,796 s = **6.05 CPU-h** | 2.56 GB | 132.5 s / 101.8 s | 800 team rows, 16 terminal, 0 open segments; dones all true at 500 only |
+| `b01_fit_SET_932201_a01` (exited 10:29:38 UTC) | 3,991 s = 1.11 h | 15,697 s = **4.36 CPU-h** | 1.11 GB | 85.6 s / 71.6 s | 0 high-level rows (off) |
+
+Cost: pair 1 = 10.4 CPU-h on the idle node, 2.9× cheaper per fit than the contended local probes projected and inside option A's 25–35 CPU-h projection; three pairs ≈ 31 CPU-h + B12 collections (≈ 1–3 CPU-h on the node) ≈ 32–34 CPU-h against the 35 CPU-h cap — tight; a third-pair overrun would be reported, never trimmed.
+
+**Ordinary readings, pair 1, closed-loop 500-step means over the declared panels (32 worlds each), against the sealed hold-out references** (P_relay^on C̄_bh .780 / r .553; P_flat^on .639 / .459; stationary floor .171 / .110; random .172 / .113; G_C,ho,cl = .141):
+
+| panel | H r / C̄_bh | SET r / C̄_bh | paired Δ (H − SET) r / C̄_bh |
+|---|---|---|---|
+| dev det. c00 (init) | .117 / .183 | .121 / .190 | −.004 / −.007 |
+| dev det. c15 | .135 / .205 | .046 / .071 | +.089 / +.134 |
+| dev det. c30 | .215 / .311 | .074 / .116 | +.141 / +.195 |
+| dev det. c45 | .162 / .244 | .123 / .190 | +.039 / +.054 |
+| **hold-out det. c45 (P2/P4 panel)** | **.155 / .235** | **.142 / .219** | **+.014 / +.016** |
+| hold-out sampled c45 | .146 / .216 | .151 / .235 | −.005 / −.019 |
+
+Facts, not the reading: (i) both arms end ≈ .05–.06 C̄_bh above the stationary floor and ≈ .40 below P_flat^on; the pair-1 P2 quantity L2(H) = .235 − .639 − ½·.141 = **−.475** (SET −.491) — far from the ≥ 0 competence line; (ii) H's paired advantage on the P4 panel is +.014 r (rule needs ≥ +.03 on ≥ 2 of 3 pairs) with ΔC̄_bh +.016 ≥ 0; (iii) H's dev curve is non-monotone (c30 .311 → c45 .244) and SET's collapses at c15/c30 (final-100 C̄_bh .000 / .014) before recovering; (iv) association changes per step rise from .003 (init) to ≈ .8 in both arms, with 150–175 user backhaul-loss events and ≈ 2,800 action clips per 500-step episode — the learned policies churn; (v) H's relay-position share per UAV on hold-out is .09–.17 (diffuse), the far-cluster backhauled share .123 (H) vs .074 (SET) det. hold-out, both far under P_relay^on's .891 dev. Parameter motion: H coordinator relative L2 .068 (1,350 optimizer calls' worth over 675 steps), discoverer actor 1.15; SET coordinator 0 (as designed). No parameter, seed or recipe changes; the six-fit batch continues as declared. What this pair changes: the prior on P2(H) drops from the declared value toward the S7 pattern ("learner not competent on a host where the ordinary planner is"), and the cell-2 contingency is now unlikely; nothing is decided until the three pairs are read by the fixed rule.
+
+**Pair 2 launches (same script, launch sha c3e3bf10d; node HEAD e9faa4ad4 after Root's sync; node load before launch 0.43):**
+
+| fit | accepted (UTC) | claim | supervisor / runner pid |
+|---|---|---|---|
+| `b01_fit_H_931307_a01` | 11:12:57 | 06c3c015f6d2… | 988195 / 988196 |
+| `b01_fit_SET_932307_a01` | 11:13:34 | d84f699678dd… | 988757 / 988758 |
+
+Watcher armed for pair 2; pair 3 (931413/932413) follows its exit. **Cumulative: 2 fits complete (10.4 CPU-h), 2 running, 0 batch readings.**
