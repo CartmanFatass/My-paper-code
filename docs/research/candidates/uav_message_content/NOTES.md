@@ -2179,3 +2179,296 @@ The first drain observes consistent accepted/running supervisor and child identi
 zero probe errors and no terminal event. This native DM remains active through
 deterministic waits and same-handle drain/rearm; registration alone is not a queue
 wake or a read result. No completed scientific conclusion exists at this boundary.
+
+At the generation1 observer checkpoint (drained11:00UTC), the same operation remains
+consistent/running with no probe errors and the first six cells technically complete;
+the remaining third-master cells and B0 panel are not yet all collected/read. Native
+queue delivery returned `-32600` (unloaded spawned sub-agent), as anticipated; the
+observer itself remained healthy. This active DM consumed that checkpoint and rearmed
+the same operation as generation2, without a launch, restart, endpoint change or
+partial-result interpretation. The original35-50min estimate remains adequate.
+
+<a id="b04-complete-reading"></a>
+### B04 complete reading: better fallible forecasts, no demonstrated package increment
+
+The one accepted operation exited0 at2026-09-29T11:11:40UTC. The terminal witness
+and same-handle observation agree; runner and supervisor are absent. Generation2
+event `c6c705b894797619f87f7e13` was consumed, with zero probe errors. The subsequent
+generation3 observer was stopped and drained with no unread events. The native
+queue's unsupported-child delivery error did not restart the scientific work.
+The fixed nine continuation fits, three trained predictors and frozen B0 panel are
+complete. No cell was extended, replaced, selected early or retried.
+
+I ran the published independent NumPy reader over **all320 complete H256 raw
+trajectories**, manifests, checkpoint hashes and training/update streams. It reports
+`all_checks_passed: true`, with zero added native steps, optimizer calls or model
+calls. The checks reconstruct native movement/clipping, send-time packet geometry
+and dated forecasts, fixed RR transport and RNG addresses, arrival/cache expiry,
+old/new actor and critic inputs, scene/action/channel identities, user connections,
+native J/service/Q and complete exposure accounting. This is an independent
+numerical reconstruction, not320 independent training replications. The separate
+registered scientific critic's diagnosis is recorded below.
+
+The compact collected [summary](../../../../runs/uav_message_content/b04_future_motion/summary.json),
+[full reading](../../../../runs/uav_message_content/b04_future_motion/reading.json)
+and [exit witness](../../../../runs/uav_message_content/b04_future_motion/process-exit.json)
+have identical local and canonical-node hashes. Respectively their SHA256 values
+are `0ec4d12e9699745a8388cffe23b313d0b468b1c9f6065c2beff969da852f6e87`,
+`1238939e1a4fec49ab4a9671836641551238a32441965a6b510172616ddbcfa2` and
+`39f2ae94a76bee6a5026e5ab0fe79991e2007d1754b4d8a8ee4230c4168d9554`.
+The one durable bulk copy is
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_message_content/b04_future_motion/`:
+99345917 apparent bytes including directory entries,100286464 allocated bytes at
+collection. All320 compressed raw files total81191722 file bytes; their individual
+hashes/locators and all18 initial/final checkpoint identities are bound by the
+summary, and the reader also hashes each update stream. Keep the unique raw,
+checkpoints and episode/update streams. Empty stdout/stderr have the standard
+empty-file SHA256; there is no hidden scientific failure log. Source and the
+one-shot runner/tests remain recoverable at
+`7bb6d2f8eedecd7479fc4cb830467b8c6601a5ec`.
+
+#### Complete native outcomes
+
+All readings below are final32-world means, with service in connected users per
+tick. Native physical J equals net J plus.001 in every arm; no cost saving explains
+the differences. B0 uses the original28-byte contract and is an explicit
+cross-contract capability anchor, not a primary40-byte trained comparator.
+
+| Continuation | Arm | Net J | Service | Q |
+|---|---|---:|---:|---:|
+|19501|G|.161905260|9.079468|.119309036|
+|19501|O|.251428127|14.961914|.143204435|
+|19501|F|.220705895|12.869873|.138425574|
+|19502|G|.229489094|13.898682|.119691838|
+|19502|O|.209828483|12.457275|.121422090|
+|19502|F|.197693989|11.628662|.119642398|
+|19503|G|.231786208|13.317139|.154487557|
+|19503|O|.226120131|13.405518|.131476282|
+|19503|F|.239545562|14.163208|.140868834|
+|frozen|B0|.235095768|14.075684|.130120659|
+
+G/O/F continuation-average net J is .207726854/.229125580/.219315149;
+service is12.098429/13.608236/12.887248. The primary **F-O** net-J mean is
+**-.009810431**, continuation differences
+`[-.030722232,-.012134494,+.013425432]`; its descriptive df2 t95 interval is
+`[-.064872340,+.045251477]`. F-O service is **-.720988**, differences
+`[-2.092041,-.828613,+.757690]`, interval `[-4.268115,+2.826140]`.
+Q difference is+.000944666 with both signs across continuations; interval
+`[-.017607341,+.019496674]`. Mean per-world worst-tick service is lower for F
+than O in all three continuations, by1.3125/.1875/.09375 users; pooled difference
+-.53125, interval `[-2.216003,+1.153503]`. This last behavior reading is not a
+new adoption gate.
+
+F-G has favorable sample means, **+.011588295 J/+.788818 service**, but mixed
+continuation J `+.058800635/-.031795106/+.007759354` and service
+`+3.790405/-2.270020/+.846069`. Its intervals are
+`[-.101238950,+.124415539]` J and `[-6.739654,+8.317291]` service. O-G also
+has favorable pooled means, **+.021398726 J/+1.509806 service**, but J
+`+.089522868/-.019660612/-.005666078` and service
+`+5.882446/-1.441406/+.088379`; intervals
+`[-.126185728,+.168983180]` and `[-8.087150,+11.106762]`. These are
+three matched continuation contrasts from **one selected B parent**, with32
+nested deployment worlds each, not96 independent learning replications. Wide
+intervals and sign reversals do not demonstrate equivalence or impossibility;
+there is no post-hoc all-seeds-positive rule.
+
+All three arm averages fall below B0: G/O/F J differences are
+`-.027368914/-.005970188/-.015780619`, service
+`-1.977254/-.467448/-1.188436`. G loses both J and service in every
+continuation. Its19501 deficit alone is-.073190508 J/-4.996216 users against
+B0, so the positive F-G/O-G pools compete with degraded G, not a demonstrated
+forecast-over-preserved-competence result. The zero-initialized added inputs kept
+the initial function; they did not keep it unchanged through PPO. This does not
+erase the positive O19501 endpoint (+.016332359 J/+.886230 service versus B0)
+or F19503 endpoint (+.004449794 J/+.087524 service). Neither endpoint is newly
+selected for deployment or confirmation from this same exposed panel.
+
+All signed per-world differences and extrema remain in the reading, including
+F-O's24/16/11 J-loss worlds and25/16/12 service-loss worlds. The worst F-O
+case,19502 world23, loses **-.133423687 J/-8.277344 service**; the best,
+19503 world0, gains **+.096653747/+6.226563**. F-G retains the19501 world16
+gain **+.158066888/+9.445313** and19503 world12 loss
+**-.100442192/-6.816406**. Favorable sample means are not discarded, and
+the adverse tail is not reduced to a standard error.
+
+Boundary/altitude behavior also changes. Mean boundary fractions for G/O/F are
+.341463/.329004/.445475 versus B0 .162646; mean ceiling fractions are
+.019393/.007104/.097282 versus .001514. F19501 spends.21875 at the ceiling
+with mean altitude98.4668m, compared with B0's55.3449m; F19502/F19503 mean
+altitudes are86.4692/57.4593m. These are retained policy differences, not
+battery, collision-safety or real-flight risk measurements, and not an identified
+cause of the native losses.
+
+#### Intermediate prediction and its limit
+
+The learned forecasts were neither expired endpoints mislabeled as future nor
+unused outputs. Each final32-world cell sent8192 packets, delivered8082 before
+termination and censored110. The cached future endpoint appeared in160688
+receiver-record uses:64452 at ages1..4 and96236 at ages5..9, always with1..9
+ticks remaining. There were178 delivered shortened-horizon sends near termination.
+These equal exposure counts follow the common exogenous transport, not forecast
+quality. Forecast fields expire at ageK while geometry remains; the dated endpoint
+continues to be a fallible prediction, never a hold or future-truth commitment.
+
+On **each F policy's own realized trajectories**, compare its learned endpoint
+with the qualified ordinary shadow computed from exactly that same lawful
+send-time state, first sampled command and subsequent central-command persistence.
+Receiver-cache-weighted horizontal RMS errors in meters are:
+
+| F continuation | Learned | Qualified ordinary shadow | Age5..9 learned / ordinary |
+|---|---:|---:|---:|
+|19501|67.9465|81.8201|67.6840 /81.7171|
+|19502|68.8663|77.8686|68.9070 /77.7854|
+|19503|65.9057|75.1994|65.5677 /74.4383|
+
+Height RMS also falls,28.4080/33.9200/13.8026m versus ordinary
+30.9381/37.4492/15.4275m. The stronger ordinary baseline matters: a
+sampled-command-only persistence shadow has horizontal RMS
+194.1585/205.1770/204.3453m on these same trajectories, far worse than the
+selected bounded central-command predictor. This shadow is a diagnostic, not a
+fourth trained arm. O's own-trajectory errors cannot be interchanged with the
+same-F-trajectory comparison because the realized paths differ.
+
+The improvements are not universal across losses or horizons. Cache-weighted
+height MAE worsens for19501 and19503 (19.1563 versus18.8588m and8.3101
+versus5.9576m), while19502 improves. At shortened terminal horizons,19502
+height RMS worsens35.3908 versus32.5773m; terminal height MAE worsens in
+all three. Horizontal RMS improves in both early and late age bins, so the
+record does not isolate an older-cache-specific benefit. Initial/final training
+loss summaries likewise do not justify universal convergence: first16 versus
+last16 rollout means are.0211098/.0226111,.0215586/.0215100 and
+.0234622/.0170519. Online target distributions change during policy learning.
+
+With the actual pre-decision recurrent state held fixed, replacing F's forecast
+fields by its ordinary shadows changes the actor central command by RMS
+.0040383/.0100610/.0054207, maxima.0187616/.0308269/.0261469.
+Blanking O's forecast fields gives RMS.0231282/.0193388/.0156480. These
+nonzero responses and the exposure above establish that the extra content can
+affect the policy, not that it improves action selection or causally mediates
+reward. The saved shadows are never fed into the real rollout. Old actor
+parameter displacement is23.08..30.30% of its initial norm across the nine
+fits; O/F new projections and all three predictors move, while G's unused
+forecast projections remain exactly zero. There is real primitive policy
+learning and predictor learning, not an untrained or no-communication control.
+
+Thus the predicted **forecast fidelity intermediate is supported**, including
+under stale-but-future cache use. The proposed consequence, useful complete F
+coordination beyond matched O, is **not demonstrated**. The loss in19502
+world23 occurs despite its same-F horizontal RMS improving92.15 to80.22m,
+as independently rederived by the critic. Better forecasts alone cannot be
+credited with a native payoff, and this finite result is not a proof that
+future information lacks task opportunity. Receiver co-adaptation, a service-
+insensitive endpoint target and general continuation drift remain possible;
+this batch does not causally identify one as the failure explanation.
+
+Root's optional connected-user telemetry is present as4096000 uncompressed
+uint8 bits: native OR over UAV assignments after each action, aligned to reward
+at tick`t+1`, with stable user index bound to that episode's saved static
+positions. The reader checks its shape/counts against served users. It was not
+fed to actor, critic, packet, predictor training or B04 selection, and I have not
+introduced fairness/coverage metrics or a new adoption criterion from it.
+
+#### Actual and cumulative cost
+
+The measured scientific batch used2248.564107s wall (37.476min),2248.187853
+process CPU seconds and540116KiB Linux process-lifetime peak RSS, with one
+Torch/inter-op/BLAS thread and no GPU. This is within the corrected35-50min
+scientific estimate; it is not the unmeasured local fallback rate.
+
+| Exposure | Actual B04 |
+|---|---:|
+|Policy continuation fits / trained predictor instances|9 /3|
+|Training / final evaluation episodes|4608 /320|
+|Explicit resets / constructors|4928 /10|
+|Training / evaluation native team steps|1179648 /81920|
+|Total team steps / motion samples|1261568 /6307840|
+|PPO updates / replayed actor rows|9216 /23592960|
+|Predictor Adam calls / eligible labels / row presentations|3072 /388560 /1554240|
+|Send-time predictor forwards / diagnostic actor forwards|417792 /49152|
+|Behavior actor / critic forward calls|1261568 /1261568|
+|PPO actor / critic batched forward calls|9216 /9216|
+|Behavior actor / critic rows|6307840 /1261568|
+|PPO critic rows|4718592|
+|Broadcasts / delivered / terminally censored packets|1261568 /1246500 /15068|
+|Rollouts / evaluation optimizer calls|2304 /0|
+
+The full raw reader adds84.04s wall,84.67s user+system CPU and55668KiB peak
+RSS, with0 simulator/policy calls. The three documented focused test runs cost
+11.66s/10.45s/11.11s wall, separate from science. Implementation, source/network
+reconciliation, manual reading and independent reviews were not fully instrumented;
+their cost is unknown, not zero or falsely reported as the4-6 agent-hour estimate.
+The critic's selected raw checks are additional read-only support work, not fits.
+
+Including inherited B01-B03, paid direction totals are **21 policy fits plus3
+trained predictors,3063808 native team steps,21504 PPO updates plus3072
+predictor updates**, and4939.467107s measured scientific wall. The separate
+engineering/readback and earlier incompletely measured support remain additional.
+Three continuations here do not buy independent retraining of B19451, and the
+40-byte packet assumption remains42.9% wider than B0 at the original abstract
+fee/delay, not zero-cost physical bandwidth.
+
+#### Independent diagnosis and investment disposition
+
+Registered ResearchCritic `/root/dm_delay_intent/diagnose_b04` worked in a separate
+context without DM/Root conversation inheritance. Its assignment included the
+prospective summaries, so the review was not blinded. It reconstructed results
+before receiving my explanation. It checked the published source, manifest/exit,
+configuration, counts, reader, prospective rule and consequential B01-B03 evidence;
+independently hashed and reconstructed seven positive/adverse remote trajectories
+and the canonical B19451 hash; and relied on the full reader for the remainder.
+It made no fit, policy or simulator call. The seven traces were F/O19502 world23,
+F/O19503 world0, and F/G19501 plus B0 world16. It finished all source/raw access
+before allowing retirement of the unused launcher source, explicitly excluding
+canonical raw/checkpoints/streams and the bound parent from that cleanup.
+
+Its substantive recommendation is **retain B19451 for compatible provisional use
+and close the exact B04 recipe, with no additional run selected**. The critic
+retains the finite learned endpoint-prediction capability and the19503 native
+positive, while declining the inference from prediction accuracy or immediate
+input sensitivity to beneficial complete coordination. It emphasizes the adverse
+F-O mean, the favorable but G-degradation-sensitive F-G mean, all adverse worlds
+and altitude/boundary changes, conditional-parent intervals, the40-byte abstract
+contract and incomplete support-cost measurement. The older-message-specific
+story is unsupported because both age bins improve. The critic considers finite
+motion optimization/co-adaptation around the competent learned parent the strongest
+simpler competing explanation, not an isolated demonstrated cause. It preserves
+B01 own learning, B02 favorable L sample means and reversals, and all B03 asset
+gains over C. Its conclusion is not that forecasting lacks task opportunity.
+
+The critic also compared concrete next purchases against stopping. Frozen F with
+ordinary forecasts substituted throughout deployment would cost0 fits and24576
+new steps across three matched panels, plus unmeasured implementation/check/read
+cost. Either sign would concern dependence/co-adaptation or predictor removal for
+those assets, not overturn the primary separately-trained F-versus-O comparison
+or itself justify replacing B19451. No predictor-removal deployment decision is
+pending, so that observation is not bought. An unchanged F/O continuation repeat
+alone would cost6 policy fits,3 predictors and835584 steps before new anchors;
+it refines conditional recurrence, while independent-parent evidence additionally
+requires parent construction. A changed commitment/cadence/information contract
+could address another question, but must grant the same addition to the competent
+ordinary comparator and price its cost. None is an automatic repair selected by
+this result. The critic reports **`MATERIAL_DISSENT: no`**.
+
+I adopt that recommendation. B04's result strengthens finite forecast learnability
+and weakens the expired/unexposed/entirely-ignored explanation; it does not establish
+the predicted complete-package improvement. The broader substantive question remains
+open, but unchanged extra epochs, seeds, head capacity or a hold executor have no
+selected rationale here. I decline further investment in this exact recipe, retain
+the learned and ordinary positive assets as evidence rather than retrospectively
+selecting a winner, and retain B19451 for its existing compatible provisional use.
+This is a read-result stop, not a technical failure, a claim of equivalence, or a
+pause waiting for permission. The direction returns to reserve with no active
+producer, unread result or selected successor. Root owns any future cross-question
+selection; a consequential changed deployment/decision premise, rather than better
+MSE alone or spare capacity, is the concrete re-entry condition.
+
+Cleanup scope after publication is the reconciled exact B04 launcher source, the
+temporary staging copy of B19451, consumed request scratch and obsolete B04
+one-shot implementation/tests. A repository import/entrypoint scan found only
+self-imports and the mirrored B04 tests, with no external executable consumer.
+Keep direction-root `read_b04.py` and its synthetic reader tests, all required
+canonical result evidence, B19451 and prior B01-B03 records. Historical code paths
+in this notebook are pinned to source `7bb6d2f8eedecd7479fc4cb830467b8c6601a5ec`,
+not promises that retired entrypoints remain on current main. No tar, copied
+worktree or backup chain is needed. Actual deletions and allocated-byte change
+will be recorded below after the maintained collector succeeds.
