@@ -3338,3 +3338,114 @@ witness. I keep this child active through the full reading; a checkpoint only
 rearms this observer and never restarts or replaces scientific work. Original
 outputs are authored directly under `runs/uav_message_content/b06_calibration/`;
 bulk raw/checkpoint/streams will remain the single durable local evidence copy.
+
+At the generation1 checkpoint (about21:12UTC), three cells were complete and
+19702/D had413/512 training episodes; no batch limit was recorded. I consumed
+eventebe3f0c9d7397378618fb27c and rearmed the same claim asgeneration2/window1500.
+Native queue delivery reported the known unloaded-child -32600 refusal; actual
+process observation remained healthy and this child turn stayed active. No worker
+restart, source change, duplicate launch or reading of partial scores occurred.
+
+<a id="b06-owner-pause-handoff-20260929"></a>
+### 2026-09-29 B06 owner pause and handoff
+
+The owner explicitly paused this Root workflow at21:25UTC and requested a handoff.
+Root published the direction pause at `c4cf7dbd2`, preserving the launch-bound Lead.
+This section records interruption/reconciliation only, not a scientific reading or
+a technical/scientific failure. No new experiment, evaluation, review, interpretation,
+successor or cleanup is authorized. Only an explicit owner resume changes this state.
+
+The accepted source remains `f288de6416dff6f8b73ea634995bbe163ad9b5fd`; the original
+admission/observer note was published at `bda368ef2ea8109218dd96f1b8fd85015bcb1db7`.
+The sole run is `/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration` on
+`local_linux`/Jacob. Its original claim/operation is
+`.git/hmasd-admission/58e472fad05fbbb67b1bd3877064f649766cf32d61c77cb8a72b622bf22e376e.json`,
+and its immutable source is
+`.git/hmasd-launch-sources/ad9d60efa12645809a86268a0aa464da`.
+The managed launcher has `launch` and `status`, but no stop subcommand. After
+reconciling this exact claim and the matching observed/recorded native identities,
+I opened a pidfd for runner3936313, rechecked start_ticks15336778 and boot_id
+16933456-3d53-469c-99a9-e7599f804ba7, and sent SIGTERM only to that runner. I did not
+kill its supervisor or process group. The original supervisor3936305 (same session/
+PGID3936305, start_ticks15336756) wrote the valid [native exit witness](../../../../runs/uav_message_content/b06_calibration/process-exit.json)
+at2026-09-29T21:29:10.581501Z: exit_code-15, termination=signal. Subsequent same-handle
+status reports `exited`, consistent records and absent runner/supervisor. This
+signal was the requested owner stop, not a discovered implementation failure.
+
+The deterministic observer in `temp/directions/uav_message_content/b06-wait` was
+stopped using `tools/hmasd_wait.py stop` and drained without rearm. Generation2 is
+`stopped=true`, wake_id=null and has no unconsumed event; its cached job still says
+running from its last21:28:52 probe, which is stale and does not override the native
+exit witness. Original observer3936495, rearm observer3988028 and local wait process
+3988418 are absent. Exec waiter49862 exited0 after observing stopped=true. A fresh
+process scan found no B06 producer, reader or observer. The implementation and
+engineering-review helpers were already completed; both were explicitly interrupted
+without new turns. No result critic was started. Nothing will wake/rearm itself.
+
+Count-only reconciliation of persisted summaries, episode/update row identities and
+file presence gives the following state. No reward/service/correction values were
+read and `read_b06.py` has not run.
+
+| Cells | Training episodes | Saved final-evaluation episodes | State |
+| --- | ---: | ---: | --- |
+| 19701/K,19701/D,19702/K,19702/D,19703/K | 5 x512 | 5 x32 | Cell outputs COMPLETE, unread |
+| 19703/D | 512 | 9 (worlds0..8) | Training endpoint saved; evaluation interrupted |
+| B40 | 0 | 0 | Not started; no directory |
+
+All six `initial.pt` and `final.pt` files exist; all six streams contain1024 update
+records. Persisted totals are3072 training episodes/786432 training native steps,
+169 evaluation episodes/43264 evaluation steps,829696 native steps,1536 rollouts,
+6144 actor plus6144 critic Adam calls,15728640 actor replay rows and no predictor.
+The last episode boundary cannot account for in-flight evaluation world9; at most
+another256 native steps may have executed without a saved trace/row. Report native
+exposure as829696 persisted plus0..256 unpersisted, never as the planned843776.
+Cumulative exposure is therefore33 policy fits+3 predictors and4737280 persisted
+native steps plus0..256 unpersisted. The top-level batch summary is deliberately
+unchanged: `INCOMPLETE`, active_cell19703/D, five returned cells, b40=null. Its
+`actual` field counts only returned cells, so the separate19703/D summary is required
+for this reconciliation. Empty `limits` is not proof of completion: SIGTERM bypassed
+the Python finalizer. Five completed-cell resource records sum to2008.655337 CPU-s;
+sixth-cell/batch final CPU accounting is absent, not zero. Acceptance to native exit
+was2525.748568s wall. No reader cost exists.
+
+Preserve the sole local evidence tree in place:207 files,60391081 logical bytes and
+60796928 allocated bytes at handoff. It includes169 compressed trajectories
+(46435061 bytes), twelve checkpoints (6427860 bytes), twelve streams (6717962 bytes),
+and compact original summaries/config/admission/exit records. The SHA256 inventory
+digest is `74d949fefdb07bed87a8eec0479002c326aaf01adb4874e6e1313a7dbe9fe15b`, computed
+over all files sorted by relative path, appending UTF-8
+`relative_path + NUL + decimal_size + NUL + file_sha256 + LF` to one SHA256 stream.
+The original batch summary digest is
+`2cf1c6884a9584e0005e62f8284582dadc43d82cf6ebb24ea70e7ed32bd88b7f`; the unfinished
+19703/D summary digest is `327cde4412772d01f5bbb9ca3bff5d96d901b0f44c55c7634b33283735674458`.
+Its saved final checkpoint is568164 bytes/SHA256
+`140aee1b9fdbd2708fc787d788d25466bec8f46d9cbbdaaf8f099d0c1d415e13`; its episode and
+update streams have hashes `1175cd06203221d98aa19a427b1f66c013b29d9aad8bf021563f204725bf79e8`
+and `b440d6f54e2b668c07de44e7255cf834d13ca7e7898365cdc87d9e7565d2f10f` respectively.
+All other checkpoint/stream identities remain in their original completed-cell
+summaries. The staging parent `/home/fires/hmasd-inputs/uav-message-b06-B-34871c49.pt`
+is463357 bytes/SHA25634871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2;
+its canonical B19451 remote location above, the launch snapshot, claim, observer
+request/state and all raw outputs are retained. No deletion or disk reclamation was
+attempted during this pause.
+
+Publication scope is this existing NOTES append and the unmodified compact B06
+config, native launch-status/exit, batch summary and six cell summaries. New bulk
+checkpoints/streams/trajectories stay local at the stated durable run path, not in
+Git. Prior generation1 checkpoint narration is included. No helper has an unresolved
+write; foreign dirty files belong to their owners and are untouched. Root owns the
+global pause/index handoff; this DM makes no scientific standing/background change.
+
+Resume procedure: first obtain explicit owner authorization and check the current
+pause/ownership control. Reconcile the same stopped claim, exit witness and saved
+evidence before choosing any further work; do not rearm the stopped observer or
+restart this worker. The fixed driver rejects an existing output tree and has no
+resume mode. Its remaining planned evaluation is23 worlds for19703/D and32 forB40;
+all training is already spent and all trained endpoints are saved. No missing world
+is authorized by this handoff. Any later evaluation-only recovery or partial-result
+reading needs a prospectively stated disposition under the resumed authority, with
+the interruption and extra/unpersisted exposure preserved. Do not silently splice
+outputs, rerun six fits, replace the source or relax the reader's complete-batch
+checks. Until then all saved scientific outputs are unread, no complete comparison
+exists, and result diagnosis, publication of a scientific conclusion and cleanup
+remain undone because the owner paused them.
