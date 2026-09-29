@@ -582,3 +582,51 @@ broader radio-control question or an owner-approval dependency. Publish own
 standing and directly affected shared background, then retire only unused
 snapshot/scratch and redundant logs while keeping unique evidence and the
 useful implementation.
+
+### Publication and Measured Cleanup
+
+Full compact results, reconstruction, scientific diagnosis and own RESEARCH
+standing/background/routing were published at `46fa68117`. Subsequent peer
+commits retain that result as an ancestor. The useful base-radio kernel and
+opt-in mask remain shared; retained protocol/scheduler/collector/reader and
+focused tests remain the executable definition of G/E and their evidence.
+Import/test/entrypoint inspection found those live code relationships; no
+unneeded replacement implementation or cross-direction file was removed.
+
+After both native processes, both observer identities and the reader had
+terminated, and after the independent Reviewer had finished its snapshot
+inspection, the exact source snapshot was collected by the supported
+`scripts/hmasd_snapshot_gc.py` preview/apply path. First unprivileged preview
+refused because `/proc/383/cwd` was permission denied. The documented
+`--sudo-process-scan` read-only process inspection then passed: terminal native
+identities, clean source, no process references and durable `refs/heads/main`
+reachability. Apply removed only
+`.git/hmasd-launch-sources/ad114b6707d14961a2fcf76e33dd8cee`; operation claim,
+manifest, exit witness, original source commit and all results remain.
+The refusal was an inspection limit, resolved without bypassing the check.
+
+Allocated bytes measured with `du -s -B1` before deletion:
+
+| Exact Deleted Target | Allocated Bytes |
+|---|---:|
+| `.git/hmasd-launch-sources/ad114b6707d14961a2fcf76e33dd8cee` | 1,642,831,872 |
+| `temp/directions/uav_radio_activation/`, containing only retired `b01-wait.json` | 8,192 |
+| `experiments/candidates/uav_radio_activation/b01/__pycache__/` | 61,440 |
+| `tests/experiments/candidates/uav_radio_activation/b01/__pycache__/` | 53,248 |
+| `runs/uav_radio_activation/b01_delayed_masks_a01/stdout.log` | 24,576 |
+| `runs/uav_radio_activation/b01_delayed_masks_a01/reader.log` | 12,288 |
+| Same run's empty `stderr.log` and `reader-stderr.log` | 0 |
+
+All eight targets are verified absent; the source is absent from registered
+worktrees. Net allocated reduction over this exact cleanup target set is
+**1,642,991,616 bytes**, from that sum to zero, with no copied retention tree,
+tarball or backup chain. This is working-tree target reclamation, not a claim
+about Git object storage or free space on a concurrently written filesystem.
+The two nonempty logs only repeated row progress now preserved in complete
+summary/reading records. Both stderr files were empty at verified completion.
+
+Required raw evidence remains at the canonical path above: 20,661,922 content
+bytes / 21,049,344 allocated bytes, with all 192 digests verified. The compact
+native records preserve process and observer history after scratch deletion.
+No cleanup blocker, active worker/observer, unread result or pending scientific
+decision remains. No other direction's snapshots or caches were swept.
