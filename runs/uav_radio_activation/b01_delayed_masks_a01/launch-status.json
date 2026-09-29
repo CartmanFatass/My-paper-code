@@ -1,0 +1,11 @@
+{
+  "claim_key": "e9db588c8e2e68899789812e3ef48f3801ee2a3ec6d8fe8136c0e65133041855",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/e9db588c8e2e68899789812e3ef48f3801ee2a3ec6d8fe8136c0e65133041855.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/e9db588c8e2e68899789812e3ef48f3801ee2a3ec6d8fe8136c0e65133041855.json",
+  "pid": 3550571,
+  "runner_pid": 3550588,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-29T16:56:11.509510Z"
+}

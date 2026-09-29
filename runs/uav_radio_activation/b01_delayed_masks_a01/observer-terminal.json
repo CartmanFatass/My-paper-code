@@ -1,0 +1,285 @@
+{
+  "terminal_observation": {
+    "generation": 1,
+    "wake_id": "658750f6-d68a-4d33-bfa0-cf0bca4a45f5",
+    "events": [
+      {
+        "id": "4a3911c60d7f8a405e38e9a2",
+        "kind": "READY",
+        "evidence": {
+          "job_id": "launch-b01-delayed-masks-a01",
+          "status": "ready",
+          "facts": {
+            "admission": {
+              "claim_state": "accepted",
+              "state": "accepted"
+            },
+            "artifacts": {
+              "stderr": {
+                "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/stderr.log",
+                "state": "present"
+              },
+              "stdout": {
+                "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/stdout.log",
+                "state": "present"
+              },
+              "summary": {
+                "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/summary.json",
+                "state": "present"
+              }
+            },
+            "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/e9db588c8e2e68899789812e3ef48f3801ee2a3ec6d8fe8136c0e65133041855.json",
+            "direction": "uav_radio_activation",
+            "execution": {
+              "exit_code": 0,
+              "exit_witness": {
+                "exit_code": 0,
+                "finished_at_epoch": 1790701159.9270678,
+                "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/process-exit.json",
+                "state": "valid",
+                "termination": "process_exit"
+              },
+              "runner": {
+                "recorded_identity": {
+                  "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                  "kind": "linux_pid_start_ticks",
+                  "pid": 3550588,
+                  "session_id": 3550571,
+                  "start_ticks": 13951600
+                },
+                "state": "absent"
+              },
+              "state": "exited",
+              "supervisor": {
+                "recorded_identity": {
+                  "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                  "kind": "linux_pid_start_ticks",
+                  "pid": 3550571,
+                  "session_id": 3550571,
+                  "start_ticks": 13951596
+                },
+                "state": "absent"
+              }
+            },
+            "explicit_retry_available": false,
+            "kind": "hmasd_operation_status",
+            "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/launch-manifest.json",
+            "node": "local_linux",
+            "observed_at": "2026-09-29T16:59:33.978989Z",
+            "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/e9db588c8e2e68899789812e3ef48f3801ee2a3ec6d8fe8136c0e65133041855.json",
+            "output_root": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01",
+            "record_consistency": {
+              "mismatches": [],
+              "state": "consistent"
+            },
+            "schema_version": 1,
+            "sha": "4d5ccefe6c90dbc6c132bcc71ffe6dd73535ae47",
+            "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ad114b6707d14961a2fcf76e33dd8cee"
+          }
+        },
+        "created": 1790701174.1797686,
+        "consumed": false
+      }
+    ],
+    "jobs": {
+      "launch-b01-delayed-masks-a01": {
+        "spec": {
+          "id": "launch-b01-delayed-masks-a01",
+          "protocol": "launch",
+          "argv": [
+            "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+            "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+            "status",
+            "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "interval": 30,
+          "timeout": 20
+        },
+        "status": "ready",
+        "due": 1790701204.1793954,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/summary.json",
+              "state": "present"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/e9db588c8e2e68899789812e3ef48f3801ee2a3ec6d8fe8136c0e65133041855.json",
+          "direction": "uav_radio_activation",
+          "execution": {
+            "exit_code": 0,
+            "exit_witness": {
+              "exit_code": 0,
+              "finished_at_epoch": 1790701159.9270678,
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                "kind": "linux_pid_start_ticks",
+                "pid": 3550588,
+                "session_id": 3550571,
+                "start_ticks": 13951600
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                "kind": "linux_pid_start_ticks",
+                "pid": 3550571,
+                "session_id": 3550571,
+                "start_ticks": 13951596
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-09-29T16:59:33.978989Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/e9db588c8e2e68899789812e3ef48f3801ee2a3ec6d8fe8136c0e65133041855.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "4d5ccefe6c90dbc6c132bcc71ffe6dd73535ae47",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ad114b6707d14961a2fcf76e33dd8cee"
+        },
+        "observed": 1790701174.1793954
+      }
+    },
+    "delivery": {
+      "id": "658750f6-d68a-4d33-bfa0-cf0bca4a45f5",
+      "status": "delivery_unknown",
+      "created": 1790701174.1830547,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+      "exposed_ids": [
+        "4a3911c60d7f8a405e38e9a2"
+      ]
+    },
+    "stopped": false
+  },
+  "rearm_result": {
+    "generation": 2,
+    "pid": 3559338,
+    "window_seconds": 1500
+  },
+  "after_stop": {
+    "generation": 2,
+    "wake_id": null,
+    "events": [],
+    "jobs": {
+      "launch-b01-delayed-masks-a01": {
+        "spec": {
+          "id": "launch-b01-delayed-masks-a01",
+          "protocol": "launch",
+          "argv": [
+            "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+            "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+            "status",
+            "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01"
+          ],
+          "cwd": "/home/fires/hmasd-wsl",
+          "interval": 30,
+          "timeout": 20
+        },
+        "status": "ready",
+        "due": 1790701204.1793954,
+        "errors": 0,
+        "last": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/summary.json",
+              "state": "present"
+            }
+          },
+          "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/e9db588c8e2e68899789812e3ef48f3801ee2a3ec6d8fe8136c0e65133041855.json",
+          "direction": "uav_radio_activation",
+          "execution": {
+            "exit_code": 0,
+            "exit_witness": {
+              "exit_code": 0,
+              "finished_at_epoch": 1790701159.9270678,
+              "path": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                "kind": "linux_pid_start_ticks",
+                "pid": 3550588,
+                "session_id": 3550571,
+                "start_ticks": 13951600
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+                "kind": "linux_pid_start_ticks",
+                "pid": 3550571,
+                "session_id": 3550571,
+                "start_ticks": 13951596
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01/launch-manifest.json",
+          "node": "local_linux",
+          "observed_at": "2026-09-29T16:59:33.978989Z",
+          "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/e9db588c8e2e68899789812e3ef48f3801ee2a3ec6d8fe8136c0e65133041855.json",
+          "output_root": "/home/fires/hmasd-wsl/runs/uav_radio_activation/b01_delayed_masks_a01",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "4d5ccefe6c90dbc6c132bcc71ffe6dd73535ae47",
+          "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ad114b6707d14961a2fcf76e33dd8cee"
+        },
+        "observed": 1790701174.1793954
+      }
+    },
+    "delivery": null,
+    "stopped": true
+  }
+}
