@@ -80,3 +80,6 @@ Return: (1) Is the host contract closed and legitimate — reward ½(C_bh + S/D)
 
 ### Answer
 
+
+### Send record (2026-09-29): Pro question `b01-declaration-review` sent
+Question key `hmasd:0740cd163091672591ac4de9c339d0f76c04990d1e9e44f61a8d808da79bd5ca` (source sha cf62cef7b, question heading above); attachment `hmasd-pro-question-b01-declaration-review.md` (4,000 bytes); Jev transport, ChatGPT 6 Pro (effort pill verified), new conversation (address stays in the local operation file); dry run reached the send button with effort, text and attachment verified, then sent at 2026-09-28T23:33:34-0700 (`send_effect: sent`, attachment seen). Passive observation by the transport's `wait`; the answer is recorded verbatim under `### Answer` when it arrives. Cell 0 waits for this review; bounded implementer tasks T1–T2 (host subclass, placement planner) proceed in parallel as zero-fit engineering whose contract the review may still adjust. Nothing running on any node; 0 fits.
