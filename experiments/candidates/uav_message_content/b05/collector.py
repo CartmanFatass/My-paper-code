@@ -48,7 +48,8 @@ def longest_zero_run(values):
 
 @torch.no_grad()
 def collect_episode(env, actor, critic, arm, horizon, reset_seed, channel_seed,
-                    motion_rng, metadata, counts, emit, check=lambda: None, raw_path=None):
+                    motion_rng, metadata, counts, emit, check=lambda: None, raw_path=None,
+                    sampler=sample_actions):
     if arm not in ("B40", "M_G", "M_O"):
         raise ValueError("B05 arm")
     training = metadata["phase"] == "train"
@@ -112,7 +113,7 @@ def collect_episode(env, actor, critic, arm, horizon, reset_seed, channel_seed,
             counts["behavior_critic_forward_calls"] += 1
             counts["behavior_critic_forward_rows"] += 1
         eligible = torch.from_numpy(~channel.pending.copy())
-        u, sends = sample_actions(actor, mean, recurrent, eligible, t, motion_rng, None)
+        u, sends = sampler(actor, mean, recurrent, eligible, t, motion_rng, None)
         sender = t % 5
         if int(sends.sum()) != 1 or not bool(sends[sender]):
             raise RuntimeError("fixed RR sender/eligibility changed")

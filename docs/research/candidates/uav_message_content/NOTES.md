@@ -3140,3 +3140,181 @@ measurement of summed agent labor; the original4-8 agent-hour suggestion remains
 an unverified estimate rather than a claimed actual. There is no remaining accepted
 operation, observation, pending advice, unread result or selected follow-up in this
 child. Root receives the complete scientific boundary and owns the next selection.
+
+<a id="b06-calibration-prospective"></a>
+## 2026-09-29 - B06 prospective: trained constant calibration versus state-dependent correction
+
+Root selects the corrected option B from the complete Joint Control Next Investment
+advice preserved at `d7c74268f`, with the separate-context selection critic's
+one prospective conditioning correction adopted: K actor Adam lr3e-3, D actor
+and both critics lr3e-4. The original literal unscaled K drew material scientific
+dissent; adoption resolves that objection without claiming equal optimization.
+The full Pro answer and forthcoming dated selection archive are reused. No new
+selection consultation or learning pilot is needed. Native lead/writer is
+`/root/dm_calibration_learning`, a new DM under the same Root; the completed B05
+DM and every old operation remain complete. This is exploration, not confirmation.
+
+The question is whether developing competent retained B19451 under the same legal
+delayed message contract benefits from a learned state-dependent bounded correction
+beyond a seriously trained shared three-parameter calibration. A useful constant
+calibration is a substantive capability too. The intended contribution is conditional
+learning-package usefulness and empirical understanding, not a new architecture,
+causal state-information test, forecast module or radio repair.
+
+Current published communication background at `d7c74268f` and the complete
+[B05 reading](#b05-complete-reading) change the design directly: retain B19451 and
+the full geometric messages, train an ordinary constant comparator rather than
+substitute a post-hoc B05 mean, and report full service tails alongside average
+J/service. B01's content replacement losses, B02's favorable learned-content means
+and reversals, B03's useful B/O/L assets with provisional B19451 use, and B04's
+forecast capability with mixed/adverse package effects all remain inherited.
+B05 M_G-B40 mean J/service +.005999/+.458984 and M_O-B40 +.006355/+.481445
+support a constructive restricted-continuation conjecture; df2 intervals cross
+zero and M_O-M_G is unresolved. Near-constant correction was inspected in ONE
+19602 M_G endpoint, not all six. Every B05 endpoint lowered mean worldwise minimum
+service; fewer aggregate zero ticks coexisted with new adverse worlds.
+
+The competing predictions are that D learns consequential state variation and
+earns complete J/service beyond K and B40, or that ordinary fixed calibration
+provides most useful incremental control under this finite training recipe.
+D's ability to represent constants is no finite optimization dominance guarantee.
+Nonconstant output alone is not useful state dependence. Both complete policies
+remain state/history dependent through the same frozen recurrent parent.
+
+### Fixed decision contract, pairing and interpretation
+
+Keep native N5/50 static users/H256, sampled primitive motion, frozen B19451
+encoder/GRU/mean/log-variance and fixed scaling, fixed RR sender t%5, unchanged
+GOOD/BAD persistence .95, delay1/5, no loss and fee.001. All arms use the same
+40-byte message with the seven retained geometry values and three zero tails;
+the widened abstract bandwidth retains its physical-network limitation. No new
+map, telemetry, control right, predictor, reward or clock enters this comparison.
+Canonical parent remains the B19451 checkpoint and digest bound in B05 above.
+
+K has only one shared learned vector b of length3, b0=0, with d=.10*tanh(b).
+D uses the retained 250->64->3 tanh MLP with zero last layer and
+d=.10*tanh(g(x,h_B)). Both use u~N(mu_B+d,sigma_B^2), a=tanh(u).
+The frozen base GRU consumes each arm's actual observations and previous executed
+COMPOSED actions; its state is never replayed from a B40 trajectory. PPO likelihood
+is the composed tanh-Gaussian density. Fixed Gaussian entropy is a constant in
+the actor objective, not active regularization of executed-action entropy.
+
+Each arm starts with fresh copies of the same parent critic tensors plus the same
+zero forecast projection, identical within each pair, and fresh separate Adam
+states. Two full episodes/rollout, four full-rollout PPO epochs, chunk32 replay,
+undiscounted terminal returns, standardized team advantages, agent-summed PPO
+clipping[.8,1.2], separate actor/critic norm clips .5 and critic loss .5*MSE are
+unchanged. Only K actor lr is3e-3, from the selected one-time parameter-unit
+adjustment; D actor and both critics retain3e-4. Adam(.9,.999),eps1e-8, no decay.
+The illustrative unscaled constant-direction calculation d~.02979 after1024
+calls is not a reachability theorem or a forecast of K failure. This correction
+removes an avoidable rival explanation, not all optimization differences.
+
+Masters19701/19702/19703 each train K then D for512 H256 episodes. Construction
+seed100000*m+11, scene100000*m+1000+e, channel100000*m+6000+e, and one dedicated
+continuous training motion generator100000*m+21 per fit. Different constructors
+must not advance this generator. Actual innovations and scene/channel hashes
+are checked, not just seed labels. Later on-policy trajectories and critics may
+legitimately diverge. Final six endpoints and B40 once use32 COMMON fresh tuples
+scene1970002000+e/channel1970007000+e/motion1970003000+e, e0..31. Deployment
+remains sampled with common innovations. One innovation per tuple does not estimate
+within-scene stochastic risk. No initial score panel, best-checkpoint selection,
+extra seed, radius/variance extension or duplicate retry is included.
+
+Read D-K, K-B40 and D-B40 full J/service per training pair, Q/fee, every endpoint's
+adverse worlds, mean worldwise minimum service, zero counts and longest gaps,
+correction mean/variation and executed motion, actual parameters/updates and cost.
+Three continuation pairs are the learning units, conditional on one selected
+parent and common evaluation panel; report descriptive df2 t95 intervals. Separate
+fixed-endpoint world intervals use df31 and never create96 learning replicas.
+These are exploratory and not selection-adjusted. No equivalence margin or
+retrospective all-worlds-positive adoption gate is introduced.
+
+D earning full J/service use over both K/B40 supports this finite extension package,
+not causal message coordination. K benefit without a resolved D increment retains
+calibration, not equivalence. D>K with both below B40 does not establish useful
+development. Positive means with adverse tails remain a conditional tradeoff.
+Technical missingness is not negative science. The fixed batch ends after complete
+reading, followed by independent result diagnosis and a comparison of further
+investment with independent questions and stopping; no rescue run is presumed.
+
+### Prospective cost and L0
+
+Six fits mean3072 training+224 final evaluation episodes,786432+57344=843776
+native steps and4218880 motion samples. There are1536 rollouts,6144 actor and6144
+critic Adam calls,15728640 actor and3145728 critic replay rows; no predictor/search.
+Inherited cost is27 policy fits+3 predictors/3907584 result steps. Complete B06
+would make33 policy fits+3 predictors/4751360 steps. B05's.484397 worker CPUh,
+29.074min wall and about49 reader CPU-s are anchors, not this host's estimate.
+Support4-8h remains conjectural. Use configured `local_linux`, one CPU/Torch/BLAS
+thread with actual admission accounting for concurrent G0/radio/Claude activity.
+Prospectively impose a3 CPU-hour scientific-worker resource ceiling covering
+initialization, six fits, final evaluation and output. A hit preserves the prefix
+as resource-incomplete and does not authorize extension or restart. Pure readback
+and engineering are separately metered. No wall-based scientific stopping rule.
+
+L0: deliver the exact K/D model and optimizers, six-fit driver, lawful zero-tail
+collector and complete compact/raw reader at `experiments/candidates/uav_message_content/b06/`
+and direction `read_b06.py`, mirrored tests, `runs/uav_message_content/b06_calibration/`
+and owned scratch. Reuse the retained B05 model/collector/update/channel, shared
+native host and existing numerical readers where semantics match. Do not modify
+shared core or revive an old result driver. The bounded Implementer owns only
+`b06/{__init__,model,update}.py` and mirrored `b06/test_model.py`; the DM owns driver,
+collection/reader, remaining tests, NOTES and acceptance. No helper index/commit,
+launch, notebook or child authority. Other sessions' writes must be preserved.
+
+Checks cover exact zero-correction identity at common history/noise, genuinely
+three-parameter shared K, bound and composed density, frozen parent despite actor
+updates, identical fresh initial critics, exact optimizer learning rates/states,
+actual-action recurrent history, constructor-independent continuous innovations,
+lawful geometry/zero tails, output counts, synthetic writer-reader integration and
+all final raw evidence. These are correctness exposure, not additional native
+learning. Independent focused engineering review must resolve reachable numerical,
+RNG, likelihood and output defects before exact-source publication and admission.
+
+Root's completed selection and this DM's `exploring` route are published at
+`b6d9e3b97`; I read the full focused critique and adopted disposition in
+[the dated archive](../../archive/2026-09-29/RESEARCH-joint-control-next-investment.md#focused-independent-calibration-review).
+Its specific objection and resolution above remain intact. I rehashed the canonical
+remote parent as34871c49...59da2. The retained collector receives one optional
+sampler callback, defaulting to its unchanged primitive sampler; B06 uses it to
+compare every actual sampled u with an independent clone of the dedicated RNG.
+This records hashes of actual-verified innovations, including continuous training
+stream boundaries, without another policy/environment call or scientific sample.
+
+### B06 implementation accepted before result exposure
+
+The bounded registered Implementer `/root/dm_calibration_learning/implement_calibration_model`
+returned only the assigned model/optimizer files and focused checks. I read and
+accepted them, adapted the driver to its existing two-argument optimizer API and
+corrected the synthetic previous-action fixture to indices104:107. K has exactly3
+trainable actor parameters and D16259; both critics have identical parent tensors
+and zero forecast projections before learning. D reuses the exact retained B05
+actor and both arms reuse the inherited composed-density/recurrent PPO update.
+The dedicated motion generator is unaffected by model construction.
+
+The integrated B06/B05/retained-reader suite passed40 tests in12.34s with
+`--import-mode=importlib`; test scratch was removed. It covers zero identity,
+active updates/frozen bases, matched initial critics, full-H256 synthetic traces
+for K/D/B40, lawful actual-action history, zero tails, composed likelihood,
+actual-verified innovations, and a miniature six-fit/B40 driver with checkpoints,
+update streams and complete counts. Both native CLI help entrypoints exit0.
+The local staging copy `/home/fires/hmasd-inputs/uav-message-b06-B-34871c49.pt`
+matches the canonical463357-byte parent digest/metadata and inherited sigmas.
+No correctness test ran a native scientific episode.
+
+Registered independent engineering Reviewer `/root/dm_calibration_learning/review_b06`
+found one P2 reader defect: inherited negative-difference adverse labels reverse
+the meaning of fewer zero-service ticks/shorter gaps. I repaired B06 with explicit
+metric directions and neutral signed descriptive height/boundary differences;
+historical B05 evidence is unchanged. Eight focused study tests passed in5.27s,
+and the reviewer independently confirmed the three new regressions in1.29s.
+It reports no material finding remains after checking the collector, own-history
+replay, composed density, optimizers, actual RNG pairing, checkpoint/B40 binding,
+counts and admission. Full production-size read_run has not run; complete native
+collection and reading remain the obligation, not a conclusion from green tests.
+
+Result inputs will be published together before admission. Current local memory
+and process observations include the accepted G0 and radio workers; this one-thread
+study keeps its own resource guard and must still pass fresh actual-node admission.
+No accepted producer, observer or source snapshot is changed to make room.
