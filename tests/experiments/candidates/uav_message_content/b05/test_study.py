@@ -1,3 +1,4 @@
+from collections import defaultdict
 import hashlib
 import io
 
@@ -10,10 +11,9 @@ from experiments.candidates.contention_aware_decentralized_communication.cadc_b0
 )
 from experiments.candidates.ucope.uav_motion_prefix_b01.environment import AGENTS, SyntheticAdapter
 from experiments.candidates.ucope.uav_motion_prefix_b01.policy import generator
-from experiments.candidates.uav_message_content.b05 import model, study
+from experiments.candidates.uav_message_content.b05 import model
 from experiments.candidates.uav_message_content.b05.channel import ForecastChannel, endpoints, packet_for
 from experiments.candidates.uav_message_content.b05.collector import collect_episode
-from experiments.candidates.uav_message_content import read_b05 as reader
 from experiments.candidates.uav_message_content.read_b05 import contrast, longest_zero_interval, read_trace
 
 
@@ -40,7 +40,6 @@ def checkpoint(monkeypatch):
     value = content.getvalue()
     digest = hashlib.sha256(value).hexdigest()
     monkeypatch.setattr(model, "SOURCE_SHA256", digest)
-    monkeypatch.setattr(study, "SOURCE_SHA256", digest)
     return value, digest
 
 
@@ -55,7 +54,7 @@ def test_same_history_zero_residual_and_detached_actual_rollout(monkeypatch):
         row = []
         episodes[arm] = collect_episode(
             NativeInfoFixture(0, 32), actor, critic, arm, 32, 84, 184, generator(284),
-            dict(phase="train", episode=0), study.new_counts(), row.append,
+            dict(phase="train", episode=0), defaultdict(int), row.append,
         )
         rows[arm] = row[0]
     assert torch.equal(episodes["M_G"]["u"], episodes["M_O"]["u"])
@@ -105,7 +104,7 @@ def test_full_writer_reader_composition_and_native_metrics(tmp_path, monkeypatch
             actor.residual_output.weight.fill_(.03)
             actor.residual_output.bias.fill_(.01)
     before = {key: value.clone() for key, value in actor.state_dict().items()}
-    counts, rows = study.new_counts(), []
+    counts, rows = defaultdict(int), []
     collect_episode(
         NativeInfoFixture(0, 256), actor, critic, arm, 256, 1960002000, 1960007000, generator(1960003000),
         dict(phase="final_eval", arm=arm, master=19451 if arm == "B40" else 19601,
@@ -127,38 +126,6 @@ def test_full_writer_reader_composition_and_native_metrics(tmp_path, monkeypatch
             assert result["response_rms"] > 0
         else:
             assert not np.any(data["packet"][:, 7:])
-
-
-def test_miniature_fixed_batch_counts_and_parameter_invariants(tmp_path, monkeypatch):
-    torch.set_num_threads(1)
-    content, digest = checkpoint(monkeypatch)
-    source = tmp_path / "parent.pt"
-    source.write_bytes(content)
-    result = study.run_batch(tmp_path / "batch", "synthetic-source", source, digest,
-                             factory=lambda seed: NativeInfoFixture(seed, 32), horizon=32, train=2, evaluation=1)
-    assert result["status"] == "COMPLETE", result
-    assert result["actual"]["fit_started"] == 6
-    assert result["actual"]["team_steps"] == 608
-    assert result["actual"]["optimizer_steps"] == result["actual"]["actor_optimizer_steps"] == result["actual"]["critic_optimizer_steps"] == 24
-    assert result["actual"]["behavior_critic_forward_calls"] == 384
-    assert result["actual"]["diagnostic_forward_calls"] == 96
-    initial_by_master = {}
-    monkeypatch.setattr(reader, "BOUND_SHA", digest)
-    _, parent = reader.checkpoint_arrays(source)
-    for cell in result["cells"]:
-        assert cell["exposure"]["base_actor"]["displacement"] == 0
-        assert cell["exposure"]["residual_output"]["displacement"] > 0
-        assert cell["after_eval_tensor_sha256"] == cell["final_tensor_sha256"]
-        master = cell["master"]
-        if master in initial_by_master:
-            assert initial_by_master[master] == cell["initial_tensor_sha256"]
-        initial_by_master[master] = cell["initial_tensor_sha256"]
-        assert reader.read_checkpoints(cell, parent)["base_matches_canonical"]
-        assert reader.read_updates(cell)["ppo_records"] == 4
-    assert result["b40"]["initial_base_sha256"] == result["cells"][0]["initial_tensor_sha256"]["base_actor"]
-    with pytest.raises(FileExistsError):
-        study.run_batch(tmp_path / "batch", "synthetic-source", source, digest,
-                         factory=lambda seed: NativeInfoFixture(seed, 32), horizon=32, train=2, evaluation=1)
 
 
 def test_training_unit_and_service_tail_readers():

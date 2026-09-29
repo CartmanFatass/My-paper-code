@@ -3082,3 +3082,61 @@ Canonical raw/weights/streams and the parent are excluded from deletion. The
 observer's terminal event was consumed through generation3, then stopped/drained
 with no pending events. Actual absence and allocated-byte change will be recorded
 after the supported exact-target collector, without a backup or retention chain.
+
+#### B05 retirement completed
+
+The complete result was published at683f94830 and this direction's standing and
+directly affected shared understanding at93956bb96. All scientific, reader and
+critic processes had finished, and the observer was stopped with no pending
+events before cleanup. The exact-target snapshot collector, using its supported
+read-only sudo process scan, first refused because the pure reader had generated
+one ignored `read_b04.cpython-310.pyc` inside the snapshot. Inspection found no
+other changed/untracked/ignored file. I removed only that rebuildable bytecode and
+empty cache directory; the next preview established eligibility. No experiment
+source or result was changed to make this check pass.
+
+The apply waited behind another session's canonical-node writer lock. I kept that
+same cleanup handle and reported the concrete holder to Root; Root relayed that
+its owner stopped only its own stalled network fetch and released the lock before
+any launch. I did not interrupt or migrate that work. The original waiting
+collector then removed snapshot `e6bc0c8404bc42218708e367eb8a1c37` under the
+writer/admission locks. The source remains reachable in published Git, and the
+claim/manifest/exit witness remain. A fresh post-cleanup status still reports
+consistent exit0, valid witness and absent runner/supervisor.
+
+The following measured cleanup scopes show **803946496 net allocated bytes
+reclaimed**. Deleted targets are absent; the two partially retained directories
+contain the useful components/tests, not a failed deletion.
+
+| Scope | Allocated before | After |
+|---|---:|---:|
+|wsl_4070 `.git/hmasd-launch-sources/e6bc0c8404bc42218708e367eb8a1c37`, including reader bytecode|803250176|0|
+|wsl_4070 `/home/wu/hmasd-inputs/uav_message_content-b05-B-34871c49.pt` duplicate|466944|0|
+|local B05 implementation/test directories: delete `run.py`, `study.py`, driver-only test and bytecode; retain useful components/tests|188416|61440|
+|local `experiments/candidates/uav_message_content/__pycache__`|57344|0|
+|local `tests/experiments/candidates/uav_message_content/__pycache__`|24576|0|
+|local consumed `temp/directions/uav_message_content/` observer/request scratch|20480|0|
+
+The staging input had no `fuser` consumer and its SHA matched the unchanged
+canonical parent before deletion. The two one-shot tracked source files were
+removed with explicit-path `git rm`; the driver-specific synthetic test was
+removed, and retained collector tests now use their own zero-default counters.
+No core policy, likelihood, channel or collector behavior changed. The retained
+component and B04/B05 reader suite passes **31 tests in7.74s**, with pytest scratch
+removed. Its original32-test implementation remains at the fixed execution SHA.
+
+The canonical B05 evidence directory remains82194432 allocated bytes, unchanged.
+After all deletions, SHA256 checks passed again for all249 bound evidence files:
+224 trajectories,12 initial/final checkpoints,7 episode streams and6 update streams.
+The compact summary/reading and original B19451 hashes also remain unchanged.
+No raw trajectory, unique endpoint, initial state, update stream or evaluator-only
+user telemetry was deleted. No backup, tarball, relocated bulk or extra retention
+copy was created. Git object storage and whole-host free space are outside the
+reported allocated-byte scope. No selected deletion target or tool blocker remains.
+
+The preparation-to-cleanup calendar span was approximately13:05-14:34UTC, including
+the29-minute scientific worker interval and deterministic waiting. This is not a
+measurement of summed agent labor; the original4-8 agent-hour suggestion remains
+an unverified estimate rather than a claimed actual. There is no remaining accepted
+operation, observation, pending advice, unread result or selected follow-up in this
+child. Root receives the complete scientific boundary and owns the next selection.
