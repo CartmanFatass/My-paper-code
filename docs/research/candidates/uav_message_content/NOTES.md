@@ -2147,3 +2147,35 @@ Root reports the existing five dirty launch-status blobs and sparse-pattern blob
 unchanged; no control/status/claim edit or accepted operation restart occurred.
 Only normal fresh actual-node admission and published exact source binding remain
 before execution. Resource allocation and scientific endpoints remain as selected.
+
+### B04 accepted operation and observation
+
+Exact inputs were published/pushed at
+`7bb6d2f8eedecd7479fc4cb830467b8c6601a5ec`. The configured supervisor accepted one
+invocation, and the launcher subsequently admitted the scientific child at
+2026-09-29T10:34:09.788643Z. Its native identities, immutable source snapshot,
+command, output and operation reference are retained in
+[`launch-manifest.json`](../../../../runs/uav_message_content/b04_future_motion/launch-manifest.json).
+Fresh actual-node admission measured12747161600 physical/effective available bytes,
+above the4GiB floor, in
+[`admission-preflight.json`](../../../../runs/uav_message_content/b04_future_motion/admission-preflight.json).
+The first cell reports one Torch thread and one inter-op thread; the CLI sets the
+OpenMP/OpenBLAS/MKL/NumExpr/Accelerate limits to1 before numerical imports. No GPU
+training or parallel content fits were added.
+
+Preparation had no scientific failure: an initial plain-SSH Git fetch and a
+missing-object `cat-file` lazy fetch stalled in remote HTTPS without the configured
+network shell. I terminated only those two identified Git request trees; their SSH
+exits143/255 and zero scientific launches were retained. A subsequent bounded
+writer-lock wait expired while the service direction restored its own metadata.
+After that owner released the lock, `zsh -lic` fetch succeeded. Git printed a
+pre-existing automatic-repack bad-tree warning; source publication/snapshot checks
+and actual admission then passed. No sparse/control/status edit, accepted worker
+restart or scientific retry was used to resolve preparation.
+
+`tools/hmasd_wait.py` is armed for this same operation, owner
+`01a0ec87-9c4e-7722-945e-0ad2e0e7c410`, generation1,1500-second bounded window.
+The first drain observes consistent accepted/running supervisor and child identities,
+zero probe errors and no terminal event. This native DM remains active through
+deterministic waits and same-handle drain/rearm; registration alone is not a queue
+wake or a read result. No completed scientific conclusion exists at this boundary.
