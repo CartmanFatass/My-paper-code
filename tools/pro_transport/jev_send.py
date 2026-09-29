@@ -222,6 +222,11 @@ MODEL_PROOF = """(() => {
     now, max, trigger_id: triggers[0].id};
 })()""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP)
 
+MODEL_CONTROL_PRESENT = """(() => {
+  const form = (__COMPOSER_LOOKUP__)()?.closest('form');
+  return !!form && !!form.querySelector('[aria-haspopup="menu"]');
+})()""".replace("__COMPOSER_LOOKUP__", COMPOSER_LOOKUP)
+
 MODEL_SLIDER_FOCUS = """(() => {
   const proof = __MODEL_PROOF__;
   if (!proof) return false;
@@ -575,6 +580,12 @@ def command_send(args, cfg):
                              windowsVirtualKeyCode=virtual, **{k: v for k, v in extra.items() if k == "modifiers"})
             wait_for(browser, lambda f: not f["composer"], 10, "the emptied message box")
         time.sleep(2)  # the composer's pills render after the box
+        # On a long conversation the model/effort control renders seconds after the box
+        # (2026-09-29: about 3 s on a three-turn Pro thread, so a fixed 2 s pause raised
+        # 'no reasoning-effort control'). Wait for it, bounded; the proof below still decides.
+        deadline = time.monotonic() + 30
+        while time.monotonic() < deadline and not browser.evaluate(MODEL_CONTROL_PRESENT):
+            time.sleep(0.5)
         # Jev runs the whole goal. The loop only keeps the books: it records the attempt before a
         # send click, refuses that one click if effort or text is wrong, and ends once the outcome shows.
         steps, attached = [], False

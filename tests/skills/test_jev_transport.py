@@ -486,6 +486,9 @@ def test_send_choice_needs_fresh_proof_and_recognized_target(
             return {'actions': [action], 'fingerprint': 'current'}
 
         def evaluate(self, expression):
+            if expression == driver.MODEL_CONTROL_PRESENT:
+                self.control_polls = getattr(self, 'control_polls', 0) + 1
+                return self.control_polls >= 2  # the model control renders after the box
             assert expression.startswith(driver.NODE_FACTS)
             if expression.endswith('(1)'):
                 return {'is_composer': True, 'is_send': False}
