@@ -49,6 +49,11 @@ the T2 plateau finding):
   hold on arrival.  The normalised action is clipped to the unit ball, so the executed 3-D
   speed never exceeds max_speed (the env itself does not clip actions, uav_env.py 283).
 
+* ``retargeting_closed_loop_execute(env, targets, correction, period)``: the same executor
+  (``straight_line_actions``) whose assigned targets a caller-supplied correction may move
+  every ``period`` steps (T-G headroom gate, ``run_headroom_gate.py``); an identity correction
+  reproduces ``closed_loop_execute`` bit for bit.
+
 * ``stationary_floor(env)`` (zero actions) and ``random_floor(env, rng)`` (uniform
   normalised actions in [-1, 1]^3 each step).
 
@@ -409,6 +414,7 @@ class PlacementResult:
     incumbent_at: dict[str, Any] = field(default_factory=dict)
     info: dict[str, Any] = field(default_factory=dict)
     max_uav_connections_seen: int = 0
+    xy_steps_m: tuple[float, ...] = XY_STEPS_M
 
     def to_json(self) -> dict[str, Any]:
         start_indices = {s["candidate_index"] for s in self.starts}
@@ -438,7 +444,8 @@ class PlacementResult:
             "history": self.history,
             "info": self.info,
             "max_uav_connections_seen": self.max_uav_connections_seen,
-        }
+        } | ({} if tuple(self.xy_steps_m) == tuple(XY_STEPS_M)
+             else {"xy_steps_m": [float(v) for v in self.xy_steps_m]})
 
 
 def search_placement(
@@ -449,8 +456,13 @@ def search_placement(
     n_starts: int = N_STARTS,
     extra_candidates: list[Any] | None = None,
     extra_kind: str = "flat_result_incumbent",
+    xy_steps_m: tuple[float, ...] | None = None,
 ) -> PlacementResult:
     """Static placement search; never uses more than ``budget`` static evaluations.
+
+    ``xy_steps_m`` (default ``XY_STEPS_M``) is the descent's xy step schedule; a schedule that
+    extends the default as a prefix (e.g. ``(100, 50, 25, 10)``) reproduces the default
+    trajectory of every start up to the default's convergence and then continues it.
 
     Candidates are evaluated in order until the budget (all of them at the declared budget);
     the rest of the budget goes to the multi-start descent.  The env is left at the last
@@ -462,6 +474,9 @@ def search_placement(
     budget = int(budget)
     if budget < 1:
         raise ValueError("budget must be >= 1")
+    xy_steps = XY_STEPS_M if xy_steps_m is None else tuple(float(v) for v in xy_steps_m)
+    if not xy_steps or any(not v > 0.0 for v in xy_steps):
+        raise ValueError("xy_steps_m must be a non-empty sequence of positive steps")
     candidate_report: dict[str, Any] = {}
     candidates = build_candidates(env, rng, allow_a2a, report=candidate_report)
     extras = []
@@ -547,7 +562,7 @@ def search_placement(
         used_before = evaluations
         while evaluations < limit:
             moved = False
-            step = XY_STEPS_M[stage_index]
+            step = xy_steps[stage_index]
             moves = ((step, 0.0, 0.0), (-step, 0.0, 0.0), (0.0, step, 0.0), (0.0, -step, 0.0),
                      (0.0, 0.0, Z_STEP_M), (0.0, 0.0, -Z_STEP_M))
             for uav in range(env.n_uavs):
@@ -584,7 +599,7 @@ def search_placement(
             if evaluations >= limit:
                 break
             if not moved:
-                if stage_index + 1 < len(XY_STEPS_M):
+                if stage_index + 1 < len(xy_steps):
                     stage_index += 1
                 else:
                     converged = True
@@ -595,7 +610,7 @@ def search_placement(
                   "evaluations": evaluations - used_before, "converged": converged,
                   "accepted_descent": accepted["descent"],
                   "accepted_plateau": accepted["plateau"],
-                  "final_xy_step_m": XY_STEPS_M[stage_index],
+                  "final_xy_step_m": xy_steps[stage_index],
                   "began_at_evaluation": start_began, "ended_at_evaluation": evaluations,
                   "incumbent_at": start_at[s]}
         starts.append(record)
@@ -638,6 +653,7 @@ def search_placement(
         incumbent_at={str(m): overall_at[str(m)] for m in marks},
         info=dict(best["info"]),
         max_uav_connections_seen=max_links,
+        xy_steps_m=tuple(xy_steps),
     )
 
 
@@ -808,6 +824,32 @@ def _run_episode(
     return result
 
 
+def straight_line_actions(positions_xyz: np.ndarray, assigned_xyz: np.ndarray,
+                          stride: float) -> tuple[np.ndarray, np.ndarray]:
+    """The closed-loop action rule: fly straight at max_speed, land exactly, hold on arrival.
+
+    Returns (normalised actions [n, 3], distance to the assigned target [n]).  A UAV within
+    ``stride`` (= max_speed * time_step) of its target moves exactly onto it; the actions are
+    clipped to the unit ball, so the executed 3-D speed never exceeds max_speed (the env does
+    not clip actions, uav_env.py 283).
+    """
+    delta = assigned_xyz - positions_xyz
+    distance = np.linalg.norm(delta, axis=1)
+    n = delta.shape[0]
+    actions = np.zeros((n, 3), dtype=float)
+    for i in range(n):
+        if distance[i] <= ARRIVAL_TOL_M:
+            continue
+        if distance[i] <= stride:
+            actions[i] = delta[i] / stride
+        else:
+            actions[i] = delta[i] / distance[i]
+    norms = np.linalg.norm(actions, axis=1)
+    over = norms > 1.0
+    actions[over] /= norms[over][:, None]
+    return actions, distance
+
+
 def closed_loop_execute(
     env: CoupledRelayHost,
     target_positions_xyz: Any,
@@ -829,21 +871,7 @@ def closed_loop_execute(
             state["perm"] = perm
             state["assigned"] = targets[perm]
             state["arrival_step"] = None
-        delta = state["assigned"] - host.uav_positions
-        distance = np.linalg.norm(delta, axis=1)
-        actions = np.zeros((host.n_uavs, 3), dtype=float)
-        for i in range(host.n_uavs):
-            if distance[i] <= ARRIVAL_TOL_M:
-                continue
-            if distance[i] <= stride:
-                actions[i] = delta[i] / stride
-            else:
-                actions[i] = delta[i] / distance[i]
-        # Unit-ball clip: the executed 3-D speed never exceeds max_speed (the env does not
-        # clip actions, uav_env.py 283).
-        norms = np.linalg.norm(actions, axis=1)
-        over = norms > 1.0
-        actions[over] /= norms[over][:, None]
+        actions, distance = straight_line_actions(host.uav_positions, state["assigned"], stride)
         if state["arrival_step"] is None and np.all(distance <= ARRIVAL_TOL_M):
             state["arrival_step"] = t
         return actions
@@ -861,6 +889,72 @@ def closed_loop_execute(
         "targets_xyz": targets.tolist(),
         "max_travel_distance_m": float(distance0.max()),
         "arrival_step": arrival,
+        "final_max_distance_to_target_m": float(final_gap.max()),
+    })
+    return result
+
+
+def retargeting_closed_loop_execute(
+    env: CoupledRelayHost,
+    target_positions_xyz: Any,
+    correction: Callable[[int, np.ndarray], np.ndarray],
+    period: int,
+    max_steps: int | None = None,
+    allow_a2a: bool = True,
+    assignment: str = "min_makespan",
+) -> dict[str, Any]:
+    """``closed_loop_execute`` whose assigned targets a ``correction`` may move during flight.
+
+    Same reset, target-to-UAV assignment (fixed at t = 0) and action rule
+    (``straight_line_actions``).  At every step ``t`` with ``t % period == 0`` (t = 0 included,
+    before that step's action) ``correction(t, assigned)`` receives a copy of the current
+    assigned targets (row i = UAV i's target) and returns the new ones; it must not touch
+    ``env``.  With a correction that returns its input unchanged the episode equals
+    ``closed_loop_execute`` bit for bit.  ``arrival_step`` is the first step at which every UAV
+    sat on its then-current target.
+    """
+    targets = np.array(target_positions_xyz, dtype=float).reshape(env.n_uavs, 3)
+    if assignment not in ("min_makespan", "identity"):
+        raise ValueError(f"unknown assignment {assignment!r}")
+    period = int(period)
+    if period < 1:
+        raise ValueError("period must be >= 1")
+    stride = float(env.max_speed) * float(env.time_step)
+    state: dict[str, Any] = {"decisions": []}
+
+    def action_fn(host: CoupledRelayHost, t: int) -> np.ndarray:
+        if t == 0:
+            perm = (assign_targets(host.uav_positions, targets) if assignment == "min_makespan"
+                    else np.arange(host.n_uavs))
+            state["perm"] = perm
+            state["assigned"] = targets[perm]
+            state["arrival_step"] = None
+        if t % period == 0:
+            before = state["assigned"].copy()
+            after = np.array(correction(t, before.copy()), dtype=float).reshape(host.n_uavs, 3)
+            if not np.all(np.isfinite(after)):
+                raise ValueError(f"step {t}: correction returned non-finite targets")
+            state["assigned"] = after
+            state["decisions"].append({"t": int(t), "moved_uavs": int(np.sum(np.any(after != before, axis=1)))})
+        actions, distance = straight_line_actions(host.uav_positions, state["assigned"], stride)
+        if state["arrival_step"] is None and np.all(distance <= ARRIVAL_TOL_M):
+            state["arrival_step"] = t
+        return actions
+
+    result = _run_episode(env, action_fn, max_steps, allow_a2a)
+    final_gap = np.linalg.norm(np.asarray(result["final_positions_xyz"]) - state["assigned"], axis=1)
+    anchor = targets[state["perm"]]
+    drift = np.linalg.norm(state["assigned"] - anchor, axis=1)
+    result.update({
+        "reference": "closed_loop_retargeted",
+        "assignment": assignment,
+        "target_permutation": state["perm"].tolist(),
+        "targets_xyz": targets.tolist(),
+        "final_assigned_xyz": state["assigned"].tolist(),
+        "final_target_drift_from_anchor_m": drift.tolist(),
+        "correction_period": period,
+        "decisions": state["decisions"],
+        "arrival_step": state["arrival_step"],
         "final_max_distance_to_target_m": float(final_gap.max()),
     })
     return result
