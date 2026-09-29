@@ -373,3 +373,5 @@ The relay best start was a relay-family subset layout on all three worlds; the s
 **Owner items:** none new; [DECIDE-2] stands accepted, [DECIDE-1] stands unexercised.
 
 **Next §5 point:** the revised declaration, the cell-0 readings (gate, `G_C,dev,cl`, references, probe timing) and the T3/T4 acceptances go to one independent review before cell 1; no further selection round. Until then: T3 (runner, models adaptation, host clip and `use_shadowing` pin, fresh-state tests, per-step trade-off logging) and T4 (B12 pre-spec reader) are engineering with zero formal fits; then the cell-0 gate launch through `scripts/hmasd_launch.py` on `local_linux`. Zero fits.
+
+**Time correction (2026-09-29 07:19 UTC):** the disposition entry above is stamped 07:40 UTC in error; it was written at 07:17 UTC (`date -u` at the append).
