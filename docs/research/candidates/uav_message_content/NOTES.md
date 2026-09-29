@@ -722,3 +722,176 @@ broader scientific question remains open, with C retained and no selected next f
 diagnostic, producer, unread output, Pro operation or acknowledgment dependency. Return
 this fully read boundary to Root for project-level allocation; do not infer permission
 to run the optional replication alternative or restore an archived predecessor.
+
+<a id="b02-preserved-content-prospective"></a>
+
+## 2026-09-29 - B02 preserved-content continuation: prospective comparison and L0
+
+Root assigned this question to fresh native DM `/root/dm_content_augmentation` after
+the previous DM completed its result and retirement. The authoring checkout remains
+shared main at `/home/fires/hmasd-wsl`; the new DM owns the same direction paths and
+inherits the evidence, not the completed runtime or any operation. The owner requested
+that Codex progress the two constructive questions while Claude independently selects
+two others. Root is publishing the initial active standing/routing. No B02 result has
+started, and this entry does not change any other direction or owner pause.
+
+The question is whether extra private-history content, while preserving C's useful
+six packet fields, improves complete native J/service beyond continued C and a
+competent ordinary scalar. The contribution sought is conditional empirical/task
+understanding, not an architecture novelty or confirmation claim. The original B01
+summary and reconstruction were read directly along with this complete notebook.
+All three old arms learned their own useful behavior; L-C was -.020645285 J and
+-1.358886719 users/tick, including 11 positive/21 adverse worlds. L had 129511 train
+credit rows and mean-head updates. Neither nonactivation nor co-adaptation is an
+established explanation. H changed several fields, so its adverse result does not
+answer this preserved-field comparison.
+
+Published RESEARCH at `12c70a7b128ccc89b50be0357b9cb7fe150a6478`, especially
+[topic 5](../../RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据) and
+[topic 8](../../RESEARCH.md#8-数学信息与博弈结构怎样帮助dm选择实验), supplies three
+concrete design constraints: keep the demonstrably useful RR process; compare finite
+trained packages rather than infer a nonnegative value-of-information theorem; and
+treat the continuation instance as the unit, not its evaluation worlds. The full
+[constructive review](../../archive/2026-09-28/RESEARCH-constructive-exploration-method.md)
+(`ae35487d0`, disposition `1d65ea4ca`, retirement `6f1a850a0`) already selects preserved
+six fields, blank/ordinary/learned scalar and a common retained C start. Its illustrative
+three-fit count was not an allowance. This study uses three continuation seeds per
+arm to observe previously unmeasured continuation variability. A focused independent
+scientific follow-up covers the concrete scalar and initial-function preservation below;
+it does not repeat question selection or add a positive-pilot gate.
+
+### Bound starting point and decision interface
+
+The actual retained checkpoint was read and hashed on `wsl_4070` on 2026-09-29:
+`/home/wu/projects/HMASD/runs/uav_message_content/b01_s19431/C/final.pt`,
+463293 bytes, SHA256
+`456832faaa94afb22cf3faa00bb97b0f129e2f5b72b2eedbb1148523b088cdad`.
+Its source is `b2a422088a20235e760e3aaebbc74f35236a4e82`; keys are actor, critic,
+arm C, master19431, input_size171 and critic_size451. No Adam, RNG or recurrent state
+was retained. Therefore all arms load the exact actor/critic parameters, create fresh
+identical Adam states, start new independent continuation RNG streams and reset private
+GRU/channel/sighting state each episode. No normalization state exists. The five shared
+CADC/UCOPE dependency modules are unchanged from that source. The runner checks the
+external checkpoint digest before loading; no duplicate bulk source is required.
+
+The N5/H256/50-static-user native host, reward, 171/451 actor/critic information,
+seven-float RR channel, one/five-tick send-time delay, .001 fee, sampled motion,
+episode termination and four-epoch recurrent PPO law remain as specified for B01.
+All arms keep C payload indices 0,1,2 (sender xyz), 3,4 (current visible centroid xy)
+and 6 (current visible count/20) exactly. Only the constant centroid-z index 5 changes:
+
+| Arm | Slot 5 | Trained parameters |
+| --- | --- | --- |
+| B | Zero, the continued C packet. | Full common receiver/motion and critic. |
+| O | Five-observation anonymous visible-demand RMS spread, normalized to [0,1]. | Full common receiver/motion and critic. |
+| L | `(1+tanh(u))/2`, one sampled scalar from the sender's private GRU64. | Same receiver/motion/critic plus 66 content-head/log-std parameters. |
+
+For O, reconstruct normalized absolute xy from valid local rows, pool sufficient
+moments over the last up-to-five observations, and send
+`sqrt(2*max(E[||xy||^2]-||E[xy]||^2,0))`, clipped only for roundoff to [0,1]. Empty
+history gives zero. This is weighted anonymous sightings, not distinct user identity,
+unserved demand, connection ownership or future truth. Five ticks matches RR period
+and maximum transit, chosen without outcome tuning. At equal centroid/count, spread
+can change how useful one shared target is for coverage. The receiver must learn that
+response. L has the same lawful information rights but can encode other context from
+its existing private history; no forecast, intention commitment or synthetic target is
+provided. Its new linear mean weights/bias and log_std start at zero. The affine-tanh
+density includes its constant Jacobian; entropy remains explicitly pre-tanh Gaussian.
+
+To preserve the starting C function, zero the incoming spare-coordinate columns in
+both actor encoder paths (`126+10*s`, s=0..4) and critic first layer
+(`154+63*i+10*s`, i,s=0..4), identically in B/O/L. Every such column previously
+multiplied a structural zero. All other checkpoint tensors stay exact. This leaves
+the architecture and future trainability unchanged while initially ignoring the new
+scalar. Source algebra, synthetic sequence checks and the declared initial panels
+must verify the claimed invariance; six preserved fields alone would not establish it.
+This construction does not diagnose why B01 L lost. The first rollout has no true
+task benefit from the new scalar; finite noisy joint learning remains an open difficulty.
+
+Only the scheduled RR sender samples L's scalar using its private content RNG; motion
+RNG consumption is unchanged. A send arriving before H contributes its one-dimensional
+content log density to that sender's compound PPO term, with the original native
+return advantage. Arrivals at 255 are active, arrivals at 256 are censored. Replay
+uses actual behavior packets and detached chunk-start hidden states, not re-encoded
+packets or differentiation through the simulator. The inherited approximation and
+extra entropy/global clipping remain part of the L package, not isolated semantics.
+
+### Predictions, exposure and reading
+
+Prediction: equal starting policies, then learnable response to the added scalar,
+followed by positive complete-task J/service differences. Read initial/final local
+response by one extra actor forward at the same actual pre-step hidden state, with
+only received slot-5 inputs zeroed; record bounded motion-mean RMS/max differences.
+This adds no environment step and is a diagnostic of immediate input sensitivity,
+not a counterfactual episode, full historical dependence or causal information value.
+Its expected initial value is zero in all arms. Nonzero final response, delivery or
+head movement without native improvement fails the useful-package prediction.
+
+Freeze continuation masters **19451, 19452, 19453**, paired B/O/L within each master.
+Train worlds/channel use `100000*master+1000+e` / `+6000+e`, e=0..511; continuous
+motion/content streams use `+21/+22`. Head construction uses `+12` without consuming
+motion or training RNG. All nine initial/final panels use the same new 32 worlds:
+physical `1945002000+e`, channel `1945007000+e`, motion `1945003000+e`, content
+`1945004000+e`, e=0..31. Train and evaluation states/RNG are isolated. No old B01
+evaluation panel is reused and no checkpoint is selected by a score. Execute master
+order then B/O/L, final endpoint after exactly 512 H256 training episodes per fit.
+
+Read L-B, L-O and O-B complete net/physical J, served users/tick and Q, paired world
+vectors and adverse extremes, plus each arm's own continuation. Report all three
+continuation-seed means and differences; their shared initial C makes the estimand
+conditional, not three independent C trainings. World variation is nested. A t-based
+interval across three seed contrasts (df2) is descriptive and explicitly assumption
+dependent, not a confirmation/p-value/equivalence result. Native host has no energy
+failure metric: retain boundary/height fractions, lowest service and adverse J/service
+worlds as behavioral/tail facts without calling them physical safety validation.
+
+L exceeding both B and O in complete J/service supports a conditional learned-package
+increment; O exceeding B with no L increment supports an ordinary content capability.
+L beating only O while O loses to B gives no reuse case. Mixed seed signs, J/service
+tradeoffs or adverse tails remain explicit. Sensitivity or own learning alone cannot
+rescue the endpoint. Missing comparisons stay technical missingness. No outcome adds
+seeds, epochs, an arm, deterministic evaluation or a new delay regime to this batch.
+
+### Prospective cost and implementation scope
+
+Nine new conditional fits: 4608 train episodes / **1179648 train steps**, 576 initial
+and final eval episodes / **147456 eval steps**, **1327104 team steps total**,
+**9216 Adam updates**, 23592960 replayed actor rows and 6635520 motion samples.
+The local-response diagnostic adds 147456 batch-of-five actor forwards across all
+initial/final panels, zero native steps/updates. No planner/suffix/model search occurs.
+All arms keep their required packet/delivery/credit counts and complete sampled panel.
+Inherited C separately cost one fit / 131072 train steps / 1024 updates plus 16384
+eval steps. Each final policy has that common training plus its declared continuation.
+The full preceding C/H/L study cost three fits / 442368 steps / 3072 updates; cumulative
+direction cost after complete B02 would be 12 started fits / 1769472 steps / 12288
+updates, without counting duplicated C inheritance nine times as new compute.
+
+The original whole three-arm batch cost 658.466 s wall, 657.742 self-CPU s and
+524.391 MiB lifetime RSS. Old-rate extrapolation for nine fits is **about 33 min total**,
+before changed diagnostic/serialization/engineering work; it is neither 11 min per arm
+nor a guaranteed new rate. Plan sequential CPU FP32, one Torch/inter-op/BLAS thread on
+the retained-checkpoint node `wsl_4070`, subject to fresh actual-node admission. No
+resource-pricing probe or native pilot is needed; wall/RSS are measured by the batch.
+Engineering/review/publication/readback effort has no credible hours estimate yet.
+
+L0: narrowly recover the required retired B01 collector/channel/model/study/entry
+logic from the pinned source into new `experiments/candidates/uav_message_content/b02/`
+and mirrored tests. Reuse unchanged CADC/UCOPE helpers; do not restore B01, copy shared
+learners, alter the native host or edit shared modules. Implement exactly the three
+scalar arms, common digest-bound C initialization, matched seed/exposure/replay path,
+compact per-seed/per-world endpoint and diagnostic records, raw traces/update streams
+and initial/final checkpoint hashes. Use admitted CLI entry `b02/run.py`; write to
+`runs/uav_message_content/b02_preserved_scalar/`. Keep bulk in one durable node copy,
+publish compact config/summary/source/status and an independently usable pure reader.
+
+Correctness checks: six unchanged fields and index5; lawful spread moments/window
+reset; initial sequence/function invariance; exact checkpoint state/digest; single
+scalar affine density and terminal masks; detached behavior-packet replay; independent
+RNG streams and no evaluation updates; count/reduction and partial failure retention;
+native reward units; admission before model loading/results. Use synthetic fixtures
+and tests-managed scratch, no hidden native scientific pilots. Registered Implementer
+may own only B02 code/tests, no NOTES/index/commit/launch or children; the DM accepts
+its diff. Independent engineering Reviewer checks numerics/RNG/replay/warm start.
+Substantial implementation follows resolution of the focused scalar/initialization
+review. Publish exact inputs, admit once, keep this child active through the same
+operation's deterministic observation, complete reading and independent interpretation.
