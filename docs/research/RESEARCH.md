@@ -1437,6 +1437,31 @@ Root核对三文件在本次准备时与冻结源无diff；只读源码，0模�
 Claude已接受的coupled-host研究继续，实际状态见其[NOTES](candidates/coupled_host_joint_skills_stage1/NOTES.md)，
 不强制同步结束或代判部分批次，不重复H／SET、D1′或恢复问题。Milan依赖、PPC/FSD暂停、G33冻结保持。
 
+### Archived Questions: Preparation Priorities
+
+Owner于2026-09-29要求并行scout回看已关闭／归档方向并使用两座本地图书馆。六路只读scout及
+一次独立科学判读已完成代表性审查；不是全历史穷举，也没有新fit／评价／旧操作重启。
+结论是扩展问题准备，不批量复活配方。当前两项已选研究不变，DM数量减少不支持问题空间耗尽。
+
+优先具体化合法静态本地历史：比较同一普通局部控制器使用当前观测与有界坐标历史时的完整服务，
+再问学习能否更好利用相同历史。原GRU并非已证实遗忘；匿名关联误差、普通控制器和全成本仍待定。
+普通比较能保留可用能力，但其先取得正结果不是有理由的探索性学习比较的通行证。
+第二优先是实际成员不可用／回归后的任务重分配：先明确事件、合法可见性与命令持续语义，
+同信息／权利的普通重分配是主比较，不只胜过维持旧分配。固定N插值、成员可用性变化和独立伙伴
+策略兼容性是三个不同问题；后者只有确切部署需求时另议，不用人为多样性制造任务。
+资源受限的自适应感知／控制时长保留为条件性备选，须有真实交互预算、延迟或计算成本，不能
+加一个任意切换惩罚制造收益；不借新名称绕过FSD暂停。以上为选题准备次序，未声明新结果批次。
+
+旧证据区分保留：cap10时长、B20人数配方及多种编码有真实不利结果；cross-play未运行是用途／
+成本选择；技术缺失不是负例。SCC曾有不当接受条件，但更正后仍有微型宿主上的停止理由。
+FRRIE的“没有原生结果”只适用于早期R01：后续B01／R07／R08已有相等、正反混合及归因不支持，
+R09技术失败；不能据旧摘要把整个方向视为从未试过。保留原历史文本，修正当前推论。
+
+两库现有入口已核验：Inst-sci的`MyLib`有190套PDF／JSON；My-lib有1519份PDF与1519条
+`.local-llm-index`目录／提示，通过[已有检索器](../../tools/reference_libraries/README.md)定位后读原文。
+默认SQLite的合成样例不是实际论文索引，检索提示也不是证据。不重建库或新增流程门。
+[完整回看、原始证据、两库文献桥、独立判读及Root取舍](archive/2026-09-29/RESEARCH-archive-reentry-review.md)。
+
 <a id="pro-innovator-2026-09-29-next-round-after-continuity-and-forecasts"></a>
 <a id="portfolio-review-2026-09-29-retained-control-selection"></a>
 [完整原问题、Pro答复、独立评估与Root采纳／修改／延期理由](archive/2026-09-29/RESEARCH-retained-control-selection.md)。
