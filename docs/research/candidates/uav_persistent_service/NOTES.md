@@ -2865,3 +2865,353 @@ The direction is reserve with a retained finite ordinary asset, no active
 operation, unread result, pending advice or selected successor. The substantive
 re-entry condition and stopping rationale immediately above remain unchanged;
 neither the cleanup nor Root's acceptance authorizes another panel or repair.
+
+<a id="b05-service-shifts-prospective"></a>
+## 2026-09-29 - Prospective B05 selection: service-aware replenishment shifts
+
+Root assigned the continuing question to native DM
+`/root/dm_service_continuity`, under parent
+`01a0e560-4333-7b03-8ff3-759a4add1d9a`, after the preceding DM completed B04,
+reading and retirement. There is no accepted operation, unread result or
+selected run to inherit. Root's published design/routing boundary is
+`ef2fd853c`; the historical launch-bound lead remains `Codex DM (native child)`.
+This entry proposes one complete ordinary-control package for Root's focused
+selection review. It is not launch acceptance or an implementation start.
+Root is obtaining that one independent review across the concrete new designs;
+the DM does not duplicate it with another critic or Pro request.
+
+**Question and intended answer.** With the same current central information,
+eight members, native motion, F and charging physics, can ordinary joint
+departure/re-entry scheduling preserve R's useful access capability while
+improving complete finite-mission service continuity? A positive answer would
+be a useful control asset and an empirical result about service/energy timing.
+This is not a learning-method proposal, a sustainability test or a claim that
+R06's cause has already been identified. The proposal is S, a service-weighted
+receding replenishment scheduler, compared with frozen R.
+
+### Evidence and source bridge that change this design
+
+Current published shared background at `ef2fd853c`, especially
+[topic 6](../../RESEARCH.md#6-实证研究是在具体条件下缩小解释空间) and
+[the structural background](../../RESEARCH.md#structural-research-background),
+is used in three concrete ways. First, R is the primary competent ordinary
+reference: its legal access and finite service gains are capabilities to
+develop. Second, local charging adequacy is not the same as useful deployment,
+so the new choice explicitly values service during absence and return. Third,
+unchanged inputs and full native outcomes remain necessary: a better planning
+proxy, more charging or fewer F steps does not establish package value. The
+owner-adopted `366903212` refinements are applied by separating physical and
+information constraints, a particular conditional-use decision, and whether
+further research is worth buying. No old decision rule is relaxed.
+
+The original supporting and adverse readings remain load-bearing:
+
+- [B02 complete reading](#2026-09-28-----b02-complete-finite-benefit-failed-long-mission-retention)
+  and `runs/uav_persistent_service/b02_long_mission_a01/reading.json`: O_H has
+  useful full/late mean service but new seven-member cutoff/depletion in 01/03;
+  a realized seven-member station group draws 1179.43 W against 1000 W.
+- [B03 complete reading](#2026-09-29---b03-complete-finite-legal-access-benefit-residual-f-capture)
+  and `b03_reassignment_a01/audit.json`: 67 lawful transfers; conditional
+  finite gains and three R-O_H loss worlds; two final six-member F cohorts
+  draw 1010.94 W against 1000 W and each lose 9.116667 Wh. Their deficit is
+  real even though fleet aggregate input can look adequate.
+- [B04 complete reading](#2026-09-29---b04-complete-original-failures-avoided-new-service-tail-counterexample),
+  `b04_original_worlds_a01/audit.json` and `terminal-tail-reading.json`: all
+  71 transfers reach charging/release without F override, 69 regain connected
+  load, and no station overload/cutoff/depletion occurs. Full/late R-O_H mean
+  QoS improves .062092/.106578, yet 04/08 lose service/J and 06 ends with
+  55 zero-service steps. R06 has 363 all-F steps with 140 zero-QoS overlaps;
+  R08 has 505 all-F steps and no zero-QoS overlap. An all-F prohibition would
+  substitute a count for the unmeasured service mechanism.
+- The 13 R versus five O_H B04 ordinary commitments that charge without
+  decoded arrival, all at the 20.000001907 m boundary, remain actual executed
+  semantics. Neither a detector correction nor a renamed dwell treatment is
+  included. The B01 learned-deployment nonactivation remains separate.
+
+Primary bridge, read directly: Arribas, Cholvi and Mancuso,
+*Optimizing UAV Recharge Scheduling for Heterogeneous and Persistent Aerial
+Service*, arXiv:2205.12656v1, [sections III and IV-A, Algorithm 1](https://arxiv.org/html/2205.12656v1#S4.SS1),
+[PDF](https://arxiv.org/pdf/2205.12656v1). Their service locations are fixed;
+replacement is timed before departure and travel plus recharge consume fleet
+availability. Their optimal homogeneous schedule assumes sufficient backup
+members and a fixed recharge model. Our eight members have no dedicated spare,
+users move, radio/backhaul is jointly determined, allocation is battery-priority
+and F can seize motion. Thus the source motivates planning a complete service
+absence and return; its guarantees and fleet-size bound do not transfer. No
+novelty claim is made for rotating recharge or this ordinary adaptation.
+
+### Native feasibility and the modifiable decision
+
+The actual native action is xyz plus a nearest-station dock bit. A member can
+cross a station boundary through ordinary xyz before F, but cannot select a
+station ID in the native allocator. The policy sees the existing 10-step
+central user/BS positions, legal per-member position/battery/margin/load and
+station records, and its own past 30 battery observations. F enters at margin
+<=0 and exits at >=.05; the native <=.05 battery limp-home, 160 m approach,
+20 m capture and battery/wait/index charger priority remain authoritative.
+Returning/charging UAVs remain in the radio graph unless the native service
+cutoff makes them unavailable. Native backhaul protection can stall a proposed
+move; a nominal planner cannot promise it will execute.
+
+Decisive executable sources are `controllers.py` (`prepare`, `ordinary_dispatch`,
+`_observe`, `CommitmentAwareHeuristic.plan`), `b03/controller.py` (`_candidates`,
+`apply_choice`, `propose`), and `macro_env.py` (`step_native`) in this direction;
+`energy_relay_benchmark/b01/feedback.py` (`apply_feedback_params`);
+`energy_relay_availability/b04/transit_hold.py`
+(`_service_qos_at_snapshot`); and
+`envs/pettingzoo/relay/energy_aware.py` (`_raw_return_energy_margins`,
+`_apply_energy_dynamics`, `_select_charging_uavs`). The snapshot evaluator resets
+association and uses current disclosed geometry, rather than future users or
+the hidden live serving-set history. Its computation is paid and logged.
+
+S changes **which member leaves, how early it leaves, and which retained
+120/300/600-second dwell label it receives**, accounting jointly for the
+remaining deployment and predicted returns. Execution still uses R's existing
+nearest-dock/cross-basin commands, full/dwell/900-second releases and ordinary
+P rematching of available members. It does not add a station, slot, reservation,
+priority override, spare UAV, sleep action, communication or future observation.
+The modifiable link is service-weighted scheduling of lawful commitments,
+not changing the load threshold or classifying old world IDs.
+
+### One concrete candidate S
+
+The scheduler runs every 30 native steps. Between clocks, retained P uses its
+10-step current central refresh and the actual F/option state. There is at most
+one new commitment per clock and at most two active commitments in total.
+
+1. **Preserve R's access screens, with a real timing choice.** If any R
+   cross-basin candidate is currently eligible, consider service/defer and its
+   feasible member/dwell alternatives. Keep R's source
+   load test, destination capacity/busy test, positive slack <=630, conservative
+   nominal trip-energy screen and peer-arrival/horizon checks exactly. Service
+   can win even when a transfer is currently feasible. In that branch, the
+   forecast continues P and existing commitments, recomputes return margins,
+   and applies mandatory nearest-station F if the deadline is crossed. It
+   credits no later voluntary cross-basin departure: waiting can lose access
+   and create charger contention or a long service absence. Record current
+   slack, predicted remaining slack after the next clock and loss of predicted
+   transfer feasibility. These are explicit consequences, not an outcome-tuned
+   veto or a claim that a nominal screen proves physical impossibility. The
+   next actual clock may replan using only its then-current observations.
+2. **Otherwise schedule ordinary replenishment proactively.** Consider service
+   plus each eligible nearest-station member and each retained dwell satisfying
+   the original peer-arrival and finite-restoration checks. The member must be
+   available, outside effective F, uncommitted, and target an unoccupied station.
+   Its observed-draw deadline must fall within `min(1200, remaining)` seconds.
+   This replaces O's immediate deadline trigger with a joint finite schedule;
+   it does not change any F threshold. Include the action that frozen R would
+   take on this current S state, so an unhelpful/tied forecast has a known
+   fallback. No world seed, historical outcome or panel label enters the rule.
+3. **Price service absence using native current geometry.** On an isolated
+   copy of the ordinary H1 assignment memory, form its current-user service
+   targets for the full fleet as a *nominal deployment reference*. Use current
+   disclosed batteries in the existing native radio snapshot, yielding q0.
+   For each of the eight members, put that member
+   at its observed/intended station capture point, rematch the remaining members
+   with the same H1 target priority, and compute qi. All eight UAVs remain in
+   this radio calculation. Set `w_i = max(0, q0 - qi)`. Existing committed/F
+   members use their current intended/nearest station in this calculation.
+   Thus a critical backhaul member can have a large weight despite few direct
+   connections, and a docked radio member can retain value. These are reference
+   placement losses, not measured future service or deletion of a radio node.
+4. **Predict one absence/return cycle for the joint fleet.** For every candidate
+   next choice, make a deterministic arithmetic forecast on 30-second bins out
+   to `min(1200, remaining)`. Include all existing commitments and F modes;
+   nominal capped travel, observed 30-step draw (hover fallback), known power,
+   signed station input minus hover draw, return-margin geometry and F
+   hysteresis determine predicted ready/returning/docked states and batteries.
+   At each bin use the native station rule: rank predicted eligible members by
+   post-consumption battery, descending wait and index, allocate only the
+   observed number of slots at the known 1000 W/slot, cap charge at full, reset
+   selected waiting time and add elapsed time to the rest. Apply this on the
+   coarse 30-second forecast grid, not as a claim of exact one-second native
+   replay. A six-member 1010.94 W group consequently has nonpositive aggregate
+   recharge and is not credited with free recovery. Individual lowest-battery
+   priority can still change which member leaves first. After
+   release, include capped travel back to the ordinary target before marking
+   useful deployment restored. Other future voluntary starts are not invented:
+   the policy replans after the next actual 30 steps.
+5. **Choose the joint schedule.** Let `u_i(k)` indicate that member i has not
+   regained its nominal service deployment in forecast bin k. Initially free,
+   available, assigned members count ready; existing commitments/F members
+   must complete their predicted release and outbound trip. Score
+   `qhat(k) = clip(q0 - sum_i w_i*u_i(k), 0, 1)`. Choose the candidate with
+   fewest predicted native cutoff/depletion member-ticks, then highest minimum
+   qhat over the forecast, then highest time-integrated qhat, then lowest
+   forecast reserve exposure; exact ties prefer R's choice, then
+   lower member index and shorter dwell. The service term is a deliberately
+   cheap additive approximation to a coupled radio system, not a theorem or
+   an all-F rule. In particular, all-F does not force qhat to zero by definition.
+   Nonfinite/inconsistent planning input falls back to the legal R choice and
+   is recorded. Physical execution always passes through the unchanged F.
+
+For present commitments already observed charging without decoded arrival,
+the forecast cannot invent an arrival: use the actual full/timeout release
+possibility until the detector records arrival. For new commitments the
+nominal travel estimate predicts geometric arrival; its failure is recorded
+against actual arrival, release and restoration. This residual modeling error
+is an explicit reason the complete comparison could fail, not a detector fix.
+The 1200-second forecast spans the retained 900-second timeout and a useful
+restoration interval; it is fixed here, with no horizon/duration/weight search.
+
+The most consequential approximation is that individual service losses may
+not add when several members leave, and an all-members nominal target layout
+may be unreachable on the current energy/guard path. Moving users, within-bin
+priority changes and motion, guard stalls and missed arrivals can invalidate
+the forecast.
+`qhat` is neither native J nor an unbiased service prediction. Those limitations
+are accepted risks of this bounded ordinary package; they are not grounds for
+claiming that its failure would refute service-aware scheduling in general.
+
+**Selection correction before publication.** During Root's same focused review,
+the reviewer objected to the first draft's compulsory transfer whenever R had
+an eligible candidate: that would remove the proposed WHEN decision. Root
+agreed and requested a genuine lawful defer/service alternative, without a
+post-outcome veto. The DM accepts the objection; Step 1 above now includes
+service at transfer opportunities and prices the lost-deadline/nearest-F
+consequence. Compulsory transfer was the draft's policy restriction, not a
+native requirement. The same review also asked that the forecast cover delayed
+loss/recovery and native waiting/charging rather than only an instantaneous
+removal score. The specification above explicitly distinguishes the 30-step
+cadence from the 1200-step forecast, includes outbound redeployment and uses
+battery/wait/index priority on its coarse grid. This replaces the draft's
+equal-sharing approximation. These are design corrections within the assigned
+question; the full selection review and resolved investment remain pending.
+
+### Prediction, complete comparison and use decision
+
+The modifiable-link prediction is that S starts some low-service-cost
+replenishments earlier and chooses shorter useful absences when the fleet
+would otherwise lose valuable deployment together. Its intermediate prediction
+is less overlapping loss of service-bearing deployment and earlier actual
+post-recharge connected-load recovery in the late mission, while preserving
+legal cross-basin access. Count requested/eligible/executed choices, difference
+from current-state R choice, destination changes, F overwrites, real charge,
+arrival misses, release-to-assignment and release-to-positive-load delays,
+free/committed/F members with positive load, and station overload. Compare
+forecast readiness/release with the realized trace. Do not label all-F ticks
+as service loss, interpret fewer transfers as failure by itself, or infer
+mediation from co-improving intermediate statistics.
+
+**Proposed tag `b05_service_shifts_a01`: all 16 existing development worlds,**
+`52292801..52292808` and `52392801..52392808`, H12000, candidate S versus
+unchanged R. Launch S only: 0 fits, 0 updates, 16 complete new trajectories,
+192000 new native steps and 6400 scheduler clocks. No seed addition, truncation
+extension, supplementary panel, post-outcome tuning or automatic retry is part
+of this proposal. Use both complete panels because one contains the retained
+six-member deficits and the other the distinct terminal-service failure;
+selecting only 04/08/06 would be outcome targeting. Eight complete old worlds
+would halve cost but omit one of these observed conditions. A fresh eight-world
+two-arm comparison would use the same 192000 new steps while discarding the
+direct challenge and requiring more new R work. The full retained 16 is the
+smallest proposed comparison that preserves both observed problems here.
+
+The exact R inputs are B03 source `a4bd3b5ec` and B04 source `7bc0157f3`.
+Reuse only when native source blobs/effective configuration, R policy bytes,
+initial state, central query rights/cadence, horizon/termination and complete
+exogenous user/RNG streams are bound. Extend the retained `b04/binding.py`
+method to the two original manifests; do not silently create a new R control
+when a binding fails. Unique original raw remains on `wsl_4070` under
+`/home/wu/projects/HMASD/runs/uav_persistent_service/` in the two named tags,
+at the hashes in their compact `artifact-retention.json` files. Reused P/O_H
+can describe retained absolute capabilities if their bindings also match;
+they are not an additional primary comparator or newly paid exposure.
+
+Primary readings are paired full native J/QoS and late `[6000,12000)` native
+J/QoS, with fixed denominators 12000/6000. Retain all four 3000-step bins,
+late zero-service total and longest spell, below-half-service spells, final300
+service, terminal zero suffix length, cutoff/depletion, reserve exposure and
+persistent final300 reserve, input/consumption/stock, travel and actual compute.
+Use all 16 per-world differences, equal-weight combined means and descriptive
+paired t15 intervals; retain the two panel means/t7 intervals rather than
+pooling away a reversal. These are exposed development observations, not
+fresh confirmation, 16 learning replicas or a population-safety estimate.
+Native early endings are recorded with actual accrued J and the fixed service
+denominator; missing late/final windows are not clean tails.
+
+Hard feasibility means unchanged information/actions/physics and legal actual
+execution, not a positive performance threshold. Added station choice rights,
+reservation, capacity or spare members would change this question and return
+to Root rather than being introduced during implementation. Failure to obtain
+an exact control binding makes the dependent comparison technically missing.
+
+For the conditional finite-use decision, prospectively seek nonnegative mean
+full QoS, at least +.01 mean late QoS, nonnegative mean full and late native J
+versus R, and reduced mean late zero-service time. Require no new cutoff,
+depletion, early-ending, persistent-reserve or terminal-zero worlds versus R,
+no higher mean reserve exposure, and no worse maximum late zero-service spell
+over the declared panel. These criteria define the proposed risk-preserving
+replacement use on this finite central-information contract. They do not revise
+B04's original rule, require every service difference to be positive, certify
+physical safety or establish persistent operation. Extra travel, charging and
+CPU are allowed costs to be reported; they are not free because native J omits
+computation.
+
+The new scientific prediction is joint mean full/late service/J improvement
+with shorter late service gaps. Earlier re-entry or lower overlap without that
+native consequence weakens this package's proposed route. A useful aggregate
+gain with a new tail still fails the declared replacement use; it may preserve
+a narrower capability, with any further investment requiring its own explicit
+reason. Little changed execution limits the exposure; it is not proof that
+service scheduling has no value. A technical failure is not a negative result.
+None of these branches automatically purchases a detector fix, denser model,
+new gate, tuning sweep, fit or additional panel.
+
+### Full cost, implementation scope and present recommendation
+
+The maximum additional radio work is one q0 plus eight qi per clock:
+`16 * 400 * 9 = 57600` isolated service snapshots. They are reused across dwell
+alternatives. At most 25 arithmetic schedules, 40 forecast bins and eight
+members give `6400 * 25 * 40 * 8 = 51200000` member-bin updates. There is no
+native `env.step` inside planning, learned model, suffix replay, combinatorial
+sequence tree or preliminary result-bearing audit. Existing P snapshot calls
+remain additional and trajectory dependent; its broad bound is
+`16 * 1200 * 19 = 364800`, rather than assuming S has R's exact realized cost.
+Actual query counts, CPU user/system/children, worker wall and RSS are reported.
+
+The measured old R evaluations cost 3054.285121 CPU-s on B03 and 2918.619634
+on B04: 1.659140 worker-CPU h for 192000 steps. Using that base plus the bounded
+queries/arithmetic, price S at **3..5 worker-CPU h**, approximately 45..90 min
+wall with four admitted single-thread workers. This is an estimate, not a
+scientific timeout or a promised speed. Increased free deployment can trigger
+more P queries than R, so 3 hours is not a hard upper bound. The initial
+engineering/review/readback estimate is **5..8 hours**, including the joint
+forecast and counterexample checks; it is a real addition to the execution
+cost, not hidden under zero fits. Expect about 0.2..0.3 GB new unique compressed
+raw and compact prediction/event records, plus one disposable input snapshot.
+No result-node admission is attempted now; Claude's accepted work and Root's
+future resource allocation remain intact.
+
+Prospective L0, only after resolved selection: add a direction-owned `b05/`
+controller/forecast, finite batch entry, binding adapter and compact reader,
+with matching tests; retain R and shared host bytes unchanged. Reuse the
+retained episode/evaluation sources through an explicit controller factory.
+Tests cover lawful eligibility, fallback/ties, candidate duration meanings,
+nonpositive local charging surplus, actual F priority, no implicit radio removal,
+forecast/execution separation and no RNG/hidden-state leakage, unchanged R
+binding, release/restoration bookkeeping and complete/early window readings.
+Pure fixtures supply most checks; price at most 240 native correctness steps
+separately, with no result-bearing pilot. Obtain independent engineering review
+for the new control and prediction path; the scientific selection review is
+already Root's assigned work. Stage only owned explicit paths and serialize
+shared index mutations with `.git/hmasd-main-writer.lock`.
+
+Direction cost before this proposal remains **1 fit / 912000 result steps /
+7.295320 worker-CPU h**, plus at least 1945 historical correctness steps and
+up to 150 uncertain steps, and incompletely metered support. A selected complete
+B05 would raise result exposure to 1104000 steps with no new fit; no historical
+control is charged again. Further service work competes with stopping and
+Root's separate delay-valid-intent question on its own information value and
+cost, not on incomparable host score levels. This design buys a direct answer
+about whether service-aware timing adds useful finite continuity to lawful
+access. It does not buy an explanation of every B04 tail.
+
+**Recommendation at this boundary:** select this one 16-world S/R development
+comparison if the focused review finds the deliberately approximate service
+and charging forecast worth its 5..8-hour support cost; otherwise reframe or
+stop before substantial implementation. The uncertainty worth challenging is
+whether an additive deployment-loss proxy can guide the coupled radio task
+well enough, not whether all-F must be forbidden. Nothing has been implemented,
+tested on the environment or launched in this selection return: actual new
+fits, optimizer updates and native steps are all zero. No source snapshot,
+bulk data or cleanup target was created.
