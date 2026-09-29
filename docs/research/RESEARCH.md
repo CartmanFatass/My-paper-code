@@ -1513,121 +1513,17 @@ Claude已接受工作、能源原配方停止、FSD/PPC暂停、G33冻结和Mila
 <a id="portfolio-review-2026-09-29-retained-control-selection"></a>
 [完整原问题、Pro答复、独立评估与Root采纳／修改／延期理由](archive/2026-09-29/RESEARCH-retained-control-selection.md)。
 
-## Portfolio Review 2026-09-29 B05 Constructive Successors
+<a id="portfolio-review-2026-09-29-b05-constructive-successors"></a>
+### B05 Round-Boundary Decision
 
-Conversation: reuse the current private Jev portfolio conversation if compatible; its URL
-stays in local transport state. This is the owner's event-driven round-end Pro-innovator
-request, not a new role or a routine approval gate. Current owner target is normally three
-to four substantive Codex DMs when worthwhile, with genuine reserves and no forced positives.
-
-**Decision asked.** After the complete B05 result, which constructive development, resource
-addition or genuinely independent question deserves the next marginal research purchase?
-Please develop the strongest positive explanation alongside its strongest simpler alternative.
-A justified decision to buy nothing beyond the already selected questions is acceptable.
-Do not repeat their completed selection reviews or relaunch B05 merely to fill capacity.
-
-**New evidence and changed judgment.** B05 at source
-`69785db45a1240046f7d1a066dbe53a3b710e7c0` froze B19451's actor/GRU/variance and learned
-bounded c=.10 pre-tanh corrections. Six conditional continuations, one parent, a matched40-byte
-abstract channel, 224 complete final trajectories and 843,776 total native steps were fully
-read. M_G-B40 mean J/service = +.005999/+.458984; M_O-B40 = +.006355/+.481445, positive means
-in all three continuation blocks but df2 intervals cross zero. M_O-M_G = +.000356/+.022461,
-unresolved despite actual valid future-cache exposure and policy response. One fixed19602
-O-G case is positive and retained; it does not settle the training-level comparison.
-
-All endpoints worsen mean worldwise minimum service; block3 creates new zero-service ticks
-in world10, even though pooled zero counts improve. Corrections execute, no hard-bound
-saturation is observed. The independent critic found nearly constant19602 M_G directional
-corrections, approximately[-.0830,+.0826,-.0790] with coordinateSD about.0056: ordinary
-retuning is a plausible simpler explanation, not a demonstrated replacement controller.
-Frozen parameters do not guarantee closed-loop competence or identify why B04 lost.
-
-The belief strengthened is that bounded development can preserve a useful inherited
-controller and add conditional native capability. Useful future-content mediation remains
-unestablished. B19451 and all six endpoints remain assets; no new default or automatic run
-is selected. B05 cost6fits/.484397CPUh plus reading/support; cumulative content cost27policy
-fits+3predictors/3,907,584steps, not reset for a new DM. The critic's optional prospectively
-selected asset/B40 fresh-panel comparison costs0fits/16,384steps but is not bought because
-no concrete reuse decision presently requires another ranking panel.
-
-**Current independent work and reserves.** Local-history completed its lawful anonymous
-spatial-history versus current-observation ordinary comparison:0fits/16,384steps,
-H-C mean J +.004461/service +.376953 with intervals crossing zero. It now selects three
-full27-command policy fits with that same lawful history, initialized/final instances and
-both ordinary C/H references on32fresh worlds,458,752totalsteps. This is a full learned-package
-comparison, not identification of history-specific learning value; no ordinary-positive
-prerequisite or automatic cache repair. G0 availability recovery selects learned joint reserve deployment/
-return versus qualified ordinary control under an explicit matched centralized map:
-3fits/960,000steps and substantial forecast construction. Its native unavailable member
-retains geometric interference; do not read it as a physically removed or radio-silent UAV.
-New TRDL S_eta/Q32 comparison selects6fits/1,179,648steps at historically20–27summed
-process-minutes plus4–8conjectural engineering hours, with empirical-threshold conditioning
-and package-attribution limits. These questions and their own reviews continue independently.
-
-Oracle's sole further concrete reserve is service-radio activation: all-on versus greedy
-removal versus exhaustive masks, prospective0fits/49,152steps/770,048mask scores, but no
-defensible CSI/airtime/latency/inactive-transmitter-sensing contract yet. Perfect free
-current-CSI enumeration would have a built-in nondegradation result, not automatically a
-useful learning opportunity. It is conditional, not an admitted experiment. Association-only
-matching lacks alternate eligible links under the retained host. FSD/PPC pauses and G33
-freeze remain; Claude owns coupled-host/D1-prime and restoration/Milan, not Root.
-
-**Context and source precedence.** Unless separately pinned above, the following paths
-resolve at the full source_sha in the actual transport message. Read only the relevant
-sections, not a recursive archive census:
-- `docs/project/OPERATING_CONSTITUTION.md` sections1–5,7–8: authority, exploration,
-  costs, independent review and advisory Pro.
-- `.agents/skills/hmasd-scientific-tools/SKILL.md`: Choose the question; Design the
-  comparison and decision exposure; Update the working explanation; Statistics; Cost and
-  exposure. Use their constructive-development and matched-resource principles, no theorem,
-  positive-pilot, universal effect-size or idea-count gate.
-- `.agents/skills/hmasd-portfolio-task/SKILL.md` Steps/Boundaries: complete round synthesis,
-  alternative investments and stopping, not leaderboard or more control machinery.
-- `docs/research/candidates/uav_message_content/NOTES.md#b05-complete-reading`,
-  including every adverse world, exposure, cost and complete independent diagnosis;
-  `runs/uav_message_content/b05_retained_control/summary.json` and `reading.json`.
-  These compact artifacts were independently checked against the full raw evidence;
-  inaccessible remote raw must be disclosed, not claimed read.
-- Relevant message/background passage in this RESEARCH and
-  `docs/research/archive/2026-09-29/RESEARCH-oracle-reserve-selection.md`:
-  full new Oracle recommendation, source-backed independent review and actual selections.
-  `docs/research/candidates/uav_local_history/NOTES.md#2026-09-29---b01-complete-reading`
-  provides the complete first reading and selected learning continuation.
-  The older Pro advice in `RESEARCH-retained-control-selection.md` is historical context,
-  not current evidence of how B05 performed.
-
-**Questions for the innovator.**
-1. What is the strongest constructive use of the new capability and what explanation would
-   make its development fail? Separate empirical support, deployable adoption and next
-   investment. Do not defensively erase positives or promise a repair.
-2. Is there a complete next comparison that would change an actual use or scientific choice,
-   rather than only explain a completed score? Derive modifiable link -> predicted
-   intermediate quantity -> full native consequence, with a serious simpler comparator.
-   Compare its marginal cost with the already selected independent questions and stopping.
-3. Consider additional information, prior knowledge, actuation rights or physical resources
-   only with a concrete use case, source, error/latency and cost. Give the competent ordinary
-   comparator the same addition; separate resource gain from any added learning gain.
-   State decision-critical missing premises instead of inventing a convenient host.
-4. Recommend only genuinely worthwhile reserves, possibly none. For each selected
-   recommendation state complete minimal exposure, dominant engineering/planning/readback
-   costs, distinct outcome implications and stopping condition. State overlap explicitly.
-   Preserve consequential dissent and source gaps; no fixed number of proposals is owed.
-
-### Independent Basis
-
-Reuse the complete B05 separate-context scientific diagnosis already published in NOTES,
-and the focused independent selection reviews for local-history/G0/TRDL. This Pro request
-adds constructive synthesis and independent idea generation from new evidence; it is not
-another test of whether those accepted batches may run. Any genuinely new material
-selection still follows the existing scientific-review responsibility without stacked
-reviews of unchanged questions.
-
-### Pro Answer
-
-### Decision
-
-Pending complete advice and verified delivery. Existing accepted work and independently
-selected DM studies continue; no new operation follows from asking this question.
+完整6 Pro创新建议已读取，GitHub写回核验为NOT_DELIVERED后由Root原样保全并采纳：
+继续当前history／availability／tail-learning三个独立比较，本次新增0fit／0原生评价步，
+不为第四个名额追加研究。B05的受限续训正面能力和服务尾部反例均保留，未来内容增量仍未解决。
+低维常量校准与状态依赖修正是具体但未选择的后继问题，不是B05欠缺的完成条件；
+其暂缓是边际投入选择，不要求先有部署项目，也不禁止有理由的后续发展。
+无线激活仍需有依据的测量／先验、误差时延及开关成本定义，暂不称可执行备选。
+Pro未完整取得reading.json及远端raw，所用统计依赖已发表NOTES及既有独立判读，不冒充新复算。
+[完整固定问题、原样答复、来源限制与Root决定](archive/2026-09-29/RESEARCH-b05-constructive-successors.md#decision)。
 
 
 ## Prior reviews and runtime context
