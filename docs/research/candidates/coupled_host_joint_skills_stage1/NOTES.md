@@ -1123,3 +1123,22 @@ D_i = r(joint) − r(joint with UAV i masked), SET-slot one seed, read on the co
 5. Brief's (i): the anchor-in-observation distinction is not real for the offset form.
 
 **Evidence not found.** Measured cost of any slot fit alone; seed SD at the slot interface (b01's .013 H / .052 SET, NOTES 972, the only guide); whether macro panels compute label entropy / distinct labels for H (R6); first-hand reads of the two allocation papers (hints only); actual slot-floor values (predictions only).
+
+## 2026-09-29 18:34 UTC — Q-B′ first act READ (zero fit): four slot floors on dev + hold-out; **room condition PASSES** (M − sticky-random = .362 hold-out ≥ .15); planner-slots M reproduces P_relay^on on all 64 worlds exactly; provisional activation line .49
+
+**Operations.** `b03_floor_{planner-slots,nearest-unclaimed-slot,sticky-random-slot,random-slot}_a01`, `local_linux`, sha 6fd55c6dc (the Oracle-memo commit; snapshot), accepted 18:29–18:30Z, all exit 0 by 18:33Z; 32 dev + 32 hold-out worlds, 500 host steps, menus filled lazily under `runs/coupled_host_joint_skills_stage1/menus/5000/` (64 panel menus, cached, untracked); CPU 128–137 s each (≈ .15 CPU-h all four).
+
+| floor (rule) | dev C̄_bh (SD) | hold-out C̄_bh (SD) | conflicts per team decision | slot switches per episode | far-target fraction |
+|---|---|---|---|---|---|
+| planner-slots **M** (min-makespan permutation, held) | **.8099** (.092) | **.7798** (.100) | 0 | 0 | .097 |
+| nearest-unclaimed **N** (re-chosen every macro step) | .8051 (.088) | .7772 (.106) | 0 | 0 | .106 |
+| sticky-random-slot (independent random slot per UAV, held; may conflict) | .4927 (.178) | .4182 (.194) | 1.97 | 0 | .149 |
+| random-slot (independent random slot every macro step) | .4628 (.127) | .4274 (.148) | 2.01 | 245 | .950 |
+| random-target (b02, uniform destinations) | .376 (.111) | .365 (.144) | — | — | .989 |
+| references | P_relay^on .810 / P_flat^on .658 (dev) | P_relay^on .780 / P_flat^on .639 (hold-out) | | | |
+
+**Identity check.** The M floor's per-world `coverage_backhauled_mean_all` equals the sealed `closed_loop_relay` value of every `b01_gate_{dev,holdout}_a01/worlds/<w>.json` (64 of 64, difference 0): the macro executor over the menu is the planner's own closed loop.
+
+**Readings (pre-declared by the memo's first act).** Room condition M − sticky-random-slot on the hold-out mean = .7798 − .4182 = **.362 ≥ .15 → fits may be bought** (still a [DECIDE] behind the critic and the round-boundary Pro). Stakes priced with zero learning: conflicts cost ≈ .36 of service (M vs sticky-random; ≈ 2 of 6 UAVs collide per team decision under independent random slots); churn costs ≈ 0 here (sticky-random .418 vs random-slot .427 — re-choosing every macro step does not hurt when the choices are already conflicting); assignment optimality is worth ≈ .003 (M vs N; the S7 analogue was +.007) — the identity- and held-random-permutation floors (T-P, in flight) will separate de-duplication from travel. Provisional activation line for a learner = sticky-random hold-out + ½ G_C,ho,cl = .4182 + .0705 = **.49**; P_flat^on .639 and the P2 line .7095 lie above it, M/N at .78. Oracle predictions vs facts: sticky-random predicted .45–.55 → .42 hold-out (.49 dev); N predicted .74–.78 → .777; random-slot predicted .40–.50 → .427.
+
+**What this settles before any fit.** On this host the whole learnable content at the slot interface is de-duplication (≈ .36) — assignment optimality and churn are worth ≈ 0; a learner that merely stops colliding reaches ≈ .74–.78 by the held-permutation floors' expected level (to be measured by T-P). A fit is therefore a learnability test of anti-coordination under symmetric shared-parameter exploration, exactly as the memo and critic F4.1 framed it, and a positive reading says nothing about assignment quality.
