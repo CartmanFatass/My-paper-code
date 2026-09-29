@@ -1,0 +1,1179 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "reading_wording": "pre-specified non-additive predictive structure on a competent checkpoint: supported / unsupported / unreadable",
+  "rows": 12800,
+  "design": {
+    "response": "segment_mean_r (mean contract team r of the ten executed steps)",
+    "reduced_columns_declared": [
+      "intercept",
+      "time",
+      "c_bh_t0",
+      "sd_t0",
+      "relay_0",
+      "relay_1",
+      "relay_2",
+      "relay_3",
+      "relay_4",
+      "relay_5",
+      "routed_0",
+      "routed_1",
+      "routed_2",
+      "routed_3",
+      "routed_4",
+      "routed_5",
+      "serving_0",
+      "serving_1",
+      "serving_2",
+      "serving_3",
+      "serving_4",
+      "serving_5",
+      "agent0_label1",
+      "agent0_label2",
+      "agent0_label3",
+      "agent0_label4",
+      "agent0_label5",
+      "agent1_label1",
+      "agent1_label2",
+      "agent1_label3",
+      "agent1_label4",
+      "agent1_label5",
+      "agent2_label1",
+      "agent2_label2",
+      "agent2_label3",
+      "agent2_label4",
+      "agent2_label5",
+      "agent3_label1",
+      "agent3_label2",
+      "agent3_label3",
+      "agent3_label4",
+      "agent3_label5",
+      "agent4_label1",
+      "agent4_label2",
+      "agent4_label3",
+      "agent4_label4",
+      "agent4_label5",
+      "agent5_label1",
+      "agent5_label2",
+      "agent5_label3",
+      "agent5_label4",
+      "agent5_label5"
+    ],
+    "reduced_columns_used": [
+      "intercept",
+      "time",
+      "c_bh_t0",
+      "sd_t0",
+      "relay_0",
+      "relay_1",
+      "relay_2",
+      "relay_3",
+      "relay_4",
+      "relay_5",
+      "routed_0",
+      "routed_1",
+      "routed_2",
+      "routed_3",
+      "routed_4",
+      "routed_5",
+      "serving_0",
+      "serving_1",
+      "serving_2",
+      "serving_3",
+      "serving_4",
+      "serving_5",
+      "agent0_label1",
+      "agent0_label2",
+      "agent0_label3",
+      "agent0_label4",
+      "agent0_label5",
+      "agent1_label1",
+      "agent1_label2",
+      "agent1_label3",
+      "agent1_label4",
+      "agent1_label5",
+      "agent2_label1",
+      "agent2_label2",
+      "agent2_label3",
+      "agent2_label4",
+      "agent2_label5",
+      "agent3_label1",
+      "agent3_label2",
+      "agent3_label3",
+      "agent3_label4",
+      "agent3_label5",
+      "agent4_label1",
+      "agent4_label2",
+      "agent4_label3",
+      "agent4_label4",
+      "agent4_label5",
+      "agent5_label1",
+      "agent5_label2",
+      "agent5_label3",
+      "agent5_label4",
+      "agent5_label5"
+    ],
+    "reduced_columns_dropped_zero_variance": [],
+    "reduced_note": "n_routed_t0 omitted: it equals sum_i routed_i exactly",
+    "added_columns_declared": [
+      "n0*n1",
+      "n0*n2",
+      "n0*n3",
+      "n0*n4",
+      "n0*n5",
+      "n1*n2",
+      "n1*n3",
+      "n1*n4",
+      "n1*n5",
+      "n2*n3",
+      "n2*n4",
+      "n2*n5",
+      "n3*n4",
+      "n3*n5",
+      "n4*n5",
+      "rs_0to0",
+      "rs_0to1",
+      "rs_0to2",
+      "rs_0to3",
+      "rs_0to4",
+      "rs_0to5",
+      "rs_1to0",
+      "rs_1to1",
+      "rs_1to2",
+      "rs_1to3",
+      "rs_1to4",
+      "rs_1to5",
+      "rs_2to0",
+      "rs_2to1",
+      "rs_2to2",
+      "rs_2to3",
+      "rs_2to4",
+      "rs_2to5",
+      "rs_3to0",
+      "rs_3to1",
+      "rs_3to2",
+      "rs_3to3",
+      "rs_3to4",
+      "rs_3to5",
+      "rs_4to0",
+      "rs_4to1",
+      "rs_4to2",
+      "rs_4to3",
+      "rs_4to4",
+      "rs_4to5",
+      "rs_5to0",
+      "rs_5to1",
+      "rs_5to2",
+      "rs_5to3",
+      "rs_5to4",
+      "rs_5to5",
+      "rp_0_0",
+      "rp_0_1",
+      "rp_0_2",
+      "rp_0_3",
+      "rp_0_4",
+      "rp_0_5",
+      "rp_1_1",
+      "rp_1_2",
+      "rp_1_3",
+      "rp_1_4",
+      "rp_1_5",
+      "rp_2_2",
+      "rp_2_3",
+      "rp_2_4",
+      "rp_2_5",
+      "rp_3_3",
+      "rp_3_4",
+      "rp_3_5",
+      "rp_4_4",
+      "rp_4_5",
+      "rp_5_5"
+    ],
+    "added_blocks": {
+      "label_count_products": [
+        "n0*n1",
+        "n0*n2",
+        "n0*n3",
+        "n0*n4",
+        "n0*n5",
+        "n1*n2",
+        "n1*n3",
+        "n1*n4",
+        "n1*n5",
+        "n2*n3",
+        "n2*n4",
+        "n2*n5",
+        "n3*n4",
+        "n3*n5",
+        "n4*n5"
+      ],
+      "relay_service": [
+        "rs_0to0",
+        "rs_0to1",
+        "rs_0to2",
+        "rs_0to3",
+        "rs_0to4",
+        "rs_0to5",
+        "rs_1to0",
+        "rs_1to1",
+        "rs_1to2",
+        "rs_1to3",
+        "rs_1to4",
+        "rs_1to5",
+        "rs_2to0",
+        "rs_2to1",
+        "rs_2to2",
+        "rs_2to3",
+        "rs_2to4",
+        "rs_2to5",
+        "rs_3to0",
+        "rs_3to1",
+        "rs_3to2",
+        "rs_3to3",
+        "rs_3to4",
+        "rs_3to5",
+        "rs_4to0",
+        "rs_4to1",
+        "rs_4to2",
+        "rs_4to3",
+        "rs_4to4",
+        "rs_4to5",
+        "rs_5to0",
+        "rs_5to1",
+        "rs_5to2",
+        "rs_5to3",
+        "rs_5to4",
+        "rs_5to5"
+      ],
+      "relay_pair": [
+        "rp_0_0",
+        "rp_0_1",
+        "rp_0_2",
+        "rp_0_3",
+        "rp_0_4",
+        "rp_0_5",
+        "rp_1_1",
+        "rp_1_2",
+        "rp_1_3",
+        "rp_1_4",
+        "rp_1_5",
+        "rp_2_2",
+        "rp_2_3",
+        "rp_2_4",
+        "rp_2_5",
+        "rp_3_3",
+        "rp_3_4",
+        "rp_3_5",
+        "rp_4_4",
+        "rp_4_5",
+        "rp_5_5"
+      ]
+    },
+    "count_contrasts": "the 15 products n_z*n_z' (z < z'); squares are spanned by R's additive terms and the products because n_z^2 = 6 n_z - sum_{z' != z} n_z n_z'",
+    "relay_pair_definition": "unordered pairs of distinct UAVs both relays at t0 (any paths)",
+    "support_rule": "an added column is SUPPORTED iff its non-zero rows >= max(8, ceil(0.01 * rows)) (128 at 12,800 rows) AND its non-zero episodes >= 8; F = R + the supported columns of the 72-column block; unsupported columns are listed under missing_support.unsupported with their facts and are never treated as zero effects",
+    "support_threshold": {
+      "min_nonzero_rows": 128,
+      "min_nonzero_episodes": 8,
+      "min_supported_products": 10
+    },
+    "readability_rule": "READABLE iff (a) at least 10 of the 15 label-count-product columns are supported, (b) the rank increment of R + supported columns over R equals the number of supported columns (otherwise the spanned ones are listed and the reading is unreadable), and (c) all K folds are non-empty; the secondary products-only reading applies the same rule to R + the supported product columns",
+    "added_support": {
+      "n0*n1": {
+        "nonzero_rows": 4997,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n0*n2": {
+        "nonzero_rows": 5773,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n0*n3": {
+        "nonzero_rows": 5360,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n0*n4": {
+        "nonzero_rows": 5375,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n0*n5": {
+        "nonzero_rows": 5036,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n1*n2": {
+        "nonzero_rows": 5418,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n1*n3": {
+        "nonzero_rows": 5010,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n1*n4": {
+        "nonzero_rows": 5064,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n1*n5": {
+        "nonzero_rows": 4749,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n2*n3": {
+        "nonzero_rows": 5896,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n2*n4": {
+        "nonzero_rows": 5990,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n2*n5": {
+        "nonzero_rows": 5572,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n3*n4": {
+        "nonzero_rows": 5520,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n3*n5": {
+        "nonzero_rows": 5202,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "n4*n5": {
+        "nonzero_rows": 5157,
+        "nonzero_episodes": 256,
+        "supported": true
+      },
+      "rs_0to0": {
+        "nonzero_rows": 266,
+        "nonzero_episodes": 147,
+        "supported": true
+      },
+      "rs_0to1": {
+        "nonzero_rows": 287,
+        "nonzero_episodes": 139,
+        "supported": true
+      },
+      "rs_0to2": {
+        "nonzero_rows": 326,
+        "nonzero_episodes": 155,
+        "supported": true
+      },
+      "rs_0to3": {
+        "nonzero_rows": 313,
+        "nonzero_episodes": 145,
+        "supported": true
+      },
+      "rs_0to4": {
+        "nonzero_rows": 296,
+        "nonzero_episodes": 136,
+        "supported": true
+      },
+      "rs_0to5": {
+        "nonzero_rows": 266,
+        "nonzero_episodes": 128,
+        "supported": true
+      },
+      "rs_1to0": {
+        "nonzero_rows": 267,
+        "nonzero_episodes": 128,
+        "supported": true
+      },
+      "rs_1to1": {
+        "nonzero_rows": 254,
+        "nonzero_episodes": 122,
+        "supported": true
+      },
+      "rs_1to2": {
+        "nonzero_rows": 291,
+        "nonzero_episodes": 146,
+        "supported": true
+      },
+      "rs_1to3": {
+        "nonzero_rows": 310,
+        "nonzero_episodes": 136,
+        "supported": true
+      },
+      "rs_1to4": {
+        "nonzero_rows": 309,
+        "nonzero_episodes": 144,
+        "supported": true
+      },
+      "rs_1to5": {
+        "nonzero_rows": 240,
+        "nonzero_episodes": 121,
+        "supported": true
+      },
+      "rs_2to0": {
+        "nonzero_rows": 310,
+        "nonzero_episodes": 145,
+        "supported": true
+      },
+      "rs_2to1": {
+        "nonzero_rows": 285,
+        "nonzero_episodes": 126,
+        "supported": true
+      },
+      "rs_2to2": {
+        "nonzero_rows": 413,
+        "nonzero_episodes": 160,
+        "supported": true
+      },
+      "rs_2to3": {
+        "nonzero_rows": 340,
+        "nonzero_episodes": 146,
+        "supported": true
+      },
+      "rs_2to4": {
+        "nonzero_rows": 318,
+        "nonzero_episodes": 139,
+        "supported": true
+      },
+      "rs_2to5": {
+        "nonzero_rows": 320,
+        "nonzero_episodes": 142,
+        "supported": true
+      },
+      "rs_3to0": {
+        "nonzero_rows": 281,
+        "nonzero_episodes": 131,
+        "supported": true
+      },
+      "rs_3to1": {
+        "nonzero_rows": 286,
+        "nonzero_episodes": 133,
+        "supported": true
+      },
+      "rs_3to2": {
+        "nonzero_rows": 347,
+        "nonzero_episodes": 145,
+        "supported": true
+      },
+      "rs_3to3": {
+        "nonzero_rows": 318,
+        "nonzero_episodes": 148,
+        "supported": true
+      },
+      "rs_3to4": {
+        "nonzero_rows": 290,
+        "nonzero_episodes": 136,
+        "supported": true
+      },
+      "rs_3to5": {
+        "nonzero_rows": 255,
+        "nonzero_episodes": 128,
+        "supported": true
+      },
+      "rs_4to0": {
+        "nonzero_rows": 294,
+        "nonzero_episodes": 137,
+        "supported": true
+      },
+      "rs_4to1": {
+        "nonzero_rows": 285,
+        "nonzero_episodes": 142,
+        "supported": true
+      },
+      "rs_4to2": {
+        "nonzero_rows": 356,
+        "nonzero_episodes": 152,
+        "supported": true
+      },
+      "rs_4to3": {
+        "nonzero_rows": 334,
+        "nonzero_episodes": 151,
+        "supported": true
+      },
+      "rs_4to4": {
+        "nonzero_rows": 335,
+        "nonzero_episodes": 141,
+        "supported": true
+      },
+      "rs_4to5": {
+        "nonzero_rows": 287,
+        "nonzero_episodes": 135,
+        "supported": true
+      },
+      "rs_5to0": {
+        "nonzero_rows": 292,
+        "nonzero_episodes": 138,
+        "supported": true
+      },
+      "rs_5to1": {
+        "nonzero_rows": 300,
+        "nonzero_episodes": 136,
+        "supported": true
+      },
+      "rs_5to2": {
+        "nonzero_rows": 361,
+        "nonzero_episodes": 159,
+        "supported": true
+      },
+      "rs_5to3": {
+        "nonzero_rows": 319,
+        "nonzero_episodes": 143,
+        "supported": true
+      },
+      "rs_5to4": {
+        "nonzero_rows": 329,
+        "nonzero_episodes": 144,
+        "supported": true
+      },
+      "rs_5to5": {
+        "nonzero_rows": 298,
+        "nonzero_episodes": 136,
+        "supported": true
+      },
+      "rp_0_0": {
+        "nonzero_rows": 68,
+        "nonzero_episodes": 53,
+        "supported": false
+      },
+      "rp_0_1": {
+        "nonzero_rows": 123,
+        "nonzero_episodes": 66,
+        "supported": false
+      },
+      "rp_0_2": {
+        "nonzero_rows": 167,
+        "nonzero_episodes": 91,
+        "supported": true
+      },
+      "rp_0_3": {
+        "nonzero_rows": 141,
+        "nonzero_episodes": 83,
+        "supported": true
+      },
+      "rp_0_4": {
+        "nonzero_rows": 140,
+        "nonzero_episodes": 77,
+        "supported": true
+      },
+      "rp_0_5": {
+        "nonzero_rows": 157,
+        "nonzero_episodes": 80,
+        "supported": true
+      },
+      "rp_1_1": {
+        "nonzero_rows": 69,
+        "nonzero_episodes": 50,
+        "supported": false
+      },
+      "rp_1_2": {
+        "nonzero_rows": 165,
+        "nonzero_episodes": 80,
+        "supported": true
+      },
+      "rp_1_3": {
+        "nonzero_rows": 145,
+        "nonzero_episodes": 86,
+        "supported": true
+      },
+      "rp_1_4": {
+        "nonzero_rows": 159,
+        "nonzero_episodes": 76,
+        "supported": true
+      },
+      "rp_1_5": {
+        "nonzero_rows": 135,
+        "nonzero_episodes": 69,
+        "supported": true
+      },
+      "rp_2_2": {
+        "nonzero_rows": 98,
+        "nonzero_episodes": 65,
+        "supported": false
+      },
+      "rp_2_3": {
+        "nonzero_rows": 186,
+        "nonzero_episodes": 85,
+        "supported": true
+      },
+      "rp_2_4": {
+        "nonzero_rows": 170,
+        "nonzero_episodes": 88,
+        "supported": true
+      },
+      "rp_2_5": {
+        "nonzero_rows": 170,
+        "nonzero_episodes": 84,
+        "supported": true
+      },
+      "rp_3_3": {
+        "nonzero_rows": 61,
+        "nonzero_episodes": 48,
+        "supported": false
+      },
+      "rp_3_4": {
+        "nonzero_rows": 176,
+        "nonzero_episodes": 83,
+        "supported": true
+      },
+      "rp_3_5": {
+        "nonzero_rows": 156,
+        "nonzero_episodes": 79,
+        "supported": true
+      },
+      "rp_4_4": {
+        "nonzero_rows": 74,
+        "nonzero_episodes": 53,
+        "supported": false
+      },
+      "rp_4_5": {
+        "nonzero_rows": 169,
+        "nonzero_episodes": 89,
+        "supported": true
+      },
+      "rp_5_5": {
+        "nonzero_rows": 84,
+        "nonzero_episodes": 59,
+        "supported": false
+      }
+    },
+    "full_columns_used": [
+      "intercept",
+      "time",
+      "c_bh_t0",
+      "sd_t0",
+      "relay_0",
+      "relay_1",
+      "relay_2",
+      "relay_3",
+      "relay_4",
+      "relay_5",
+      "routed_0",
+      "routed_1",
+      "routed_2",
+      "routed_3",
+      "routed_4",
+      "routed_5",
+      "serving_0",
+      "serving_1",
+      "serving_2",
+      "serving_3",
+      "serving_4",
+      "serving_5",
+      "agent0_label1",
+      "agent0_label2",
+      "agent0_label3",
+      "agent0_label4",
+      "agent0_label5",
+      "agent1_label1",
+      "agent1_label2",
+      "agent1_label3",
+      "agent1_label4",
+      "agent1_label5",
+      "agent2_label1",
+      "agent2_label2",
+      "agent2_label3",
+      "agent2_label4",
+      "agent2_label5",
+      "agent3_label1",
+      "agent3_label2",
+      "agent3_label3",
+      "agent3_label4",
+      "agent3_label5",
+      "agent4_label1",
+      "agent4_label2",
+      "agent4_label3",
+      "agent4_label4",
+      "agent4_label5",
+      "agent5_label1",
+      "agent5_label2",
+      "agent5_label3",
+      "agent5_label4",
+      "agent5_label5",
+      "n0*n1",
+      "n0*n2",
+      "n0*n3",
+      "n0*n4",
+      "n0*n5",
+      "n1*n2",
+      "n1*n3",
+      "n1*n4",
+      "n1*n5",
+      "n2*n3",
+      "n2*n4",
+      "n2*n5",
+      "n3*n4",
+      "n3*n5",
+      "n4*n5",
+      "rs_0to0",
+      "rs_0to1",
+      "rs_0to2",
+      "rs_0to3",
+      "rs_0to4",
+      "rs_0to5",
+      "rs_1to0",
+      "rs_1to1",
+      "rs_1to2",
+      "rs_1to3",
+      "rs_1to4",
+      "rs_1to5",
+      "rs_2to0",
+      "rs_2to1",
+      "rs_2to2",
+      "rs_2to3",
+      "rs_2to4",
+      "rs_2to5",
+      "rs_3to0",
+      "rs_3to1",
+      "rs_3to2",
+      "rs_3to3",
+      "rs_3to4",
+      "rs_3to5",
+      "rs_4to0",
+      "rs_4to1",
+      "rs_4to2",
+      "rs_4to3",
+      "rs_4to4",
+      "rs_4to5",
+      "rs_5to0",
+      "rs_5to1",
+      "rs_5to2",
+      "rs_5to3",
+      "rs_5to4",
+      "rs_5to5",
+      "rp_0_2",
+      "rp_0_3",
+      "rp_0_4",
+      "rp_0_5",
+      "rp_1_2",
+      "rp_1_3",
+      "rp_1_4",
+      "rp_1_5",
+      "rp_2_3",
+      "rp_2_4",
+      "rp_2_5",
+      "rp_3_4",
+      "rp_3_5",
+      "rp_4_5"
+    ],
+    "missing_support": {
+      "unsupported": {
+        "rp_0_0": {
+          "nonzero_rows": 68,
+          "nonzero_episodes": 53,
+          "supported": false
+        },
+        "rp_0_1": {
+          "nonzero_rows": 123,
+          "nonzero_episodes": 66,
+          "supported": false
+        },
+        "rp_1_1": {
+          "nonzero_rows": 69,
+          "nonzero_episodes": 50,
+          "supported": false
+        },
+        "rp_2_2": {
+          "nonzero_rows": 98,
+          "nonzero_episodes": 65,
+          "supported": false
+        },
+        "rp_3_3": {
+          "nonzero_rows": 61,
+          "nonzero_episodes": 48,
+          "supported": false
+        },
+        "rp_4_4": {
+          "nonzero_rows": 74,
+          "nonzero_episodes": 53,
+          "supported": false
+        },
+        "rp_5_5": {
+          "nonzero_rows": 84,
+          "nonzero_episodes": 59,
+          "supported": false
+        }
+      },
+      "spanned": []
+    },
+    "placebo_columns": [
+      "team_label1",
+      "team_label2",
+      "team_label3",
+      "team_label4",
+      "team_label5"
+    ],
+    "placebo_support": {
+      "team_label1": {
+        "nonzero_rows": 2875,
+        "nonzero_episodes": 256
+      },
+      "team_label2": {
+        "nonzero_rows": 2497,
+        "nonzero_episodes": 256
+      },
+      "team_label3": {
+        "nonzero_rows": 2659,
+        "nonzero_episodes": 256
+      },
+      "team_label4": {
+        "nonzero_rows": 1430,
+        "nonzero_episodes": 255
+      },
+      "team_label5": {
+        "nonzero_rows": 1886,
+        "nonzero_episodes": 256
+      }
+    },
+    "standardisation": "non-intercept columns centred and scaled by full-table mean/SD",
+    "rank": {
+      "reduced": 52,
+      "reduced_columns": 52,
+      "full": 117,
+      "full_columns": 117,
+      "added_increment": 65,
+      "added_supported_columns": 65,
+      "products_only_increment": 15,
+      "products_supported": 15,
+      "placebo_increment": 5,
+      "rank_rule": "numpy.linalg.matrix_rank's SVD tolerance on the standardised design"
+    },
+    "condition_number": {
+      "reduced": 5.3572530219666055,
+      "full": 20.570285980008254,
+      "products_only": 16.421301403060472,
+      "placebo": 5.65834653513921,
+      "definition": "sigma_max / sigma_min of the standardised design (inf if rank-deficient)"
+    },
+    "products_only": {
+      "columns_used": [
+        "n0*n1",
+        "n0*n2",
+        "n0*n3",
+        "n0*n4",
+        "n0*n5",
+        "n1*n2",
+        "n1*n3",
+        "n1*n4",
+        "n1*n5",
+        "n2*n3",
+        "n2*n4",
+        "n2*n5",
+        "n3*n4",
+        "n3*n5",
+        "n4*n5"
+      ],
+      "unsupported": {},
+      "spanned": [],
+      "products_supported": 15,
+      "rank": {
+        "reduced": 52,
+        "full": 67,
+        "full_columns": 67,
+        "added_increment": 15,
+        "added_supported_columns": 15
+      },
+      "readable": true,
+      "reasons": []
+    }
+  },
+  "folds": {
+    "k": 8,
+    "groups": 256,
+    "group_definition": "(lane, episode)",
+    "assignment_rule": "int.from_bytes(sha256(f\"lane{lane}:episode{episode}\")[:8], \"big\") % K",
+    "assignment_sha256": "d3c2681e216ddeb7212f4dd7393eb0e1bbe0b2d559396ddb9c28f1cf73a34df2",
+    "groups_per_fold": [
+      26,
+      40,
+      38,
+      26,
+      31,
+      34,
+      31,
+      30
+    ],
+    "rows_per_fold": [
+      1300,
+      2000,
+      1900,
+      1300,
+      1550,
+      1700,
+      1550,
+      1500
+    ]
+  },
+  "bootstrap": {
+    "draws": 1000,
+    "seed_rule": "numpy default_rng(20260929 + b), b = 1..1000",
+    "multiplier": "Rademacher, one per episode (sorted (lane, episode) order)",
+    "null": "y*_b = fitted_R + e * w_b[group] (R fitted on all rows)",
+    "pass_rule": "Delta > 0 and Delta > numpy.quantile(Delta*, 0.95)",
+    "refit_method": "exact linear-algebra equivalent of refitting OLS on each y*_b: per fold/model one OLS solve on the (1 + G) basis {fitted_R, e_g} (normal equations when well conditioned, else min-norm lstsq), held-out residual Gram, quadratic forms"
+  },
+  "decision": "unsupported",
+  "reason": null,
+  "omnibus": {
+    "delta": -8.30717595210262e-06,
+    "delta_per_fold": [
+      -1.5624064437043698e-05,
+      -7.718437375462003e-06,
+      -3.3984573104132217e-06,
+      -1.6217108691669608e-05,
+      8.69849671551997e-06,
+      -3.488912868065985e-05,
+      4.379799729324857e-06,
+      -1.6885075664174048e-06
+    ],
+    "mse_reduced_per_fold": [
+      0.0010787945562564243,
+      0.000947270517959199,
+      0.000895197093849304,
+      0.0007765555707251512,
+      0.0010620999918654922,
+      0.0009943678019563192,
+      0.0007809500542918062,
+      0.0008408013303702022
+    ],
+    "mse_full_per_fold": [
+      0.001094418620693468,
+      0.000954988955334661,
+      0.0008985955511597172,
+      0.0007927726794168208,
+      0.0010534014951499723,
+      0.001029256930636979,
+      0.0007765702545624813,
+      0.0008424898379366196
+    ],
+    "null_quantile_95": -5.712576923814184e-06,
+    "null_fraction_below_observed": 0.573,
+    "null_summary": {
+      "mean": -8.585897113848323e-06,
+      "sd": 1.7185267194211687e-06,
+      "min": -1.4489629242573197e-05,
+      "q50": -8.602036511588522e-06,
+      "q90": -6.299716245292518e-06,
+      "q95": -5.712576923814184e-06,
+      "q99": -4.8047639786944625e-06,
+      "max": -3.5247625272650872e-06
+    },
+    "passed": false,
+    "decision": "unsupported",
+    "fold_rank_reduced": [
+      52,
+      52,
+      52,
+      52,
+      52,
+      52,
+      52,
+      52
+    ],
+    "fold_rank_full": [
+      117,
+      117,
+      117,
+      117,
+      117,
+      117,
+      117,
+      117
+    ],
+    "fold_solver_reduced": [
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations"
+    ],
+    "fold_solver_full": [
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations"
+    ],
+    "reduced_fit_residual_sd": 0.030179888000508002,
+    "direct_refit_delta": -8.307175952101671e-06
+  },
+  "decision_products_only": "unsupported",
+  "reason_products_only": null,
+  "omnibus_products_only": {
+    "delta": -2.1635675697967297e-06,
+    "delta_per_fold": [
+      -3.701737751924273e-06,
+      -1.651272161467274e-06,
+      -3.5687770833092844e-06,
+      -5.473202763311004e-06,
+      -6.225999534784261e-08,
+      -3.248965983691657e-06,
+      1.3765898851004913e-06,
+      -9.789147044229939e-07
+    ],
+    "mse_reduced_per_fold": [
+      0.0010787945562564243,
+      0.000947270517959199,
+      0.000895197093849304,
+      0.0007765555707251512,
+      0.0010620999918654922,
+      0.0009943678019563192,
+      0.0007809500542918062,
+      0.0008408013303702022
+    ],
+    "mse_full_per_fold": [
+      0.0010824962940083485,
+      0.0009489217901206663,
+      0.0008987658709326133,
+      0.0007820287734884622,
+      0.00106216225186084,
+      0.0009976167679400108,
+      0.0007795734644067057,
+      0.0008417802450746252
+    ],
+    "null_quantile_95": -3.1273702004722645e-07,
+    "null_fraction_below_observed": 0.007,
+    "null_summary": {
+      "mean": -1.1376371155439688e-06,
+      "sd": 4.785105681303254e-07,
+      "min": -2.5340500538442208e-06,
+      "q50": -1.1681701977669175e-06,
+      "q90": -5.084535184545966e-07,
+      "q95": -3.1273702004722645e-07,
+      "q99": -1.5036598737056828e-08,
+      "max": 5.628962217566104e-07
+    },
+    "passed": false,
+    "decision": "unsupported",
+    "fold_rank_reduced": [
+      52,
+      52,
+      52,
+      52,
+      52,
+      52,
+      52,
+      52
+    ],
+    "fold_rank_full": [
+      67,
+      67,
+      67,
+      67,
+      67,
+      67,
+      67,
+      67
+    ],
+    "fold_solver_reduced": [
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations"
+    ],
+    "fold_solver_full": [
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations",
+      "normal_equations"
+    ]
+  },
+  "placebo": {
+    "readable": true,
+    "role": "conditional diagnostic, not a veto",
+    "delta": 3.0597740706417038e-09,
+    "delta_per_fold": [
+      6.143971122050083e-07,
+      3.6000309537175413e-07,
+      4.6468167054611494e-07,
+      -2.1503290058906988e-07,
+      -3.5282503333951103e-07,
+      -1.765993589457164e-06,
+      -5.621423222716563e-07,
+      1.4813901600996575e-06
+    ],
+    "null_quantile_95": 9.302279697140961e-08,
+    "null_fraction_below_observed": 0.924,
+    "null_summary": {
+      "mean": -4.2933220206235993e-07,
+      "sd": 3.15373665588518e-07,
+      "min": -1.4606449195897264e-06,
+      "q50": -4.5817365232189353e-07,
+      "q90": -3.161220605579246e-08,
+      "q95": 9.302279697140961e-08,
+      "q99": 4.6132231644926113e-07,
+      "max": 1.1710341651036138e-06
+    },
+    "passed": false,
+    "fold_rank": [
+      57,
+      57,
+      57,
+      57,
+      57,
+      57,
+      57,
+      57
+    ]
+  },
+  "timing": {
+    "design_seconds": 0.16379233403131366,
+    "one_fit_reduced_seconds": 0.011424710974097252,
+    "one_fit_full_seconds": 0.04172265995293856,
+    "direct_observed_cv_seconds": 0.37323546002153307,
+    "fold_fits_and_bootstrap_seconds": 1.1729920669458807,
+    "total_seconds": 1.409298061975278
+  },
+  "table": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_collect_H_931413_a01_c45/commitments.npz",
+  "table_sha256": "e5270bb1290c4df3ee0dbdfae50d5faf018fe1927b6b047b7ae2629a2de364d7",
+  "bootstrap_seed_base": 20260929,
+  "fit_seed": 931413,
+  "checkpoint_sha256": "fe819d46a5284e9962324246c95476b2be283f277f59480ee57b3b6d3fee52d3",
+  "checkpoint": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_fit_H_931413_a01/checkpoint_45.pt",
+  "structural_zero_check": {
+    "rows": 200,
+    "row_source": "evenly spaced rows of collection rollout 0",
+    "team_labels_tried": "every other team label (n_Z - 1 per row)",
+    "max_abs_action_difference": {
+      "deterministic": 0.0,
+      "sampled": 0.0
+    },
+    "control_individual_label_change_max_abs_difference": 5.218347787857056,
+    "torch_seed": 20260929,
+    "code_fact": "arm H actor = SkillDiscoverer.forward(observation, agent_skill, hidden_state, compact_context=None, central_input=None) (hmasd/networks.py 1801-1809; hmasd/agent.py _batched_select_action); the team label enters only skill_discoverer.get_value (critic)",
+    "team_label_reaches_actor": false,
+    "passed": true
+  },
+  "collection_counters": {
+    "team_steps": 128000,
+    "commitments": 12800,
+    "lane_episodes": 256,
+    "commitments_per_lane_episode": 50,
+    "clip_events": 764406
+  },
+  "launch_sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+  "smoke": false,
+  "resources": {
+    "wall_seconds": 1.4355767919914797,
+    "cpu_seconds": 1.476669,
+    "peak_rss_kib": 191056,
+    "rss_scope": "RUSAGE_SELF"
+  }
+}
