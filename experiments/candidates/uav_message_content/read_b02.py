@@ -44,6 +44,20 @@ def packet_from_observations(observations, t, sender, arm):
     return packet
 
 
+def behavior_from_observations(obs):
+    # Evaluate distances to the boundary, without rounding a near-one threshold to float32.
+    xyz = obs[:, :, :3].astype(np.float64)
+    tolerance = float(np.float32(1e-7))
+    near_zero = np.abs(xyz) <= tolerance
+    near_one = np.abs(xyz - 1) <= tolerance
+    return {
+        "boundary_fraction": np.any(near_zero[:, :, :2] | near_one[:, :, :2], axis=-1).mean(),
+        "height_floor_fraction": near_zero[:, :, 2].mean(),
+        "height_ceiling_fraction": near_one[:, :, 2].mean(),
+        "mean_height_m": (50 + 100 * xyz[:, :, 2]).mean(),
+    }
+
+
 def read_trace(row, arm):
     path = Path(row["raw"])
     assert digest(path) == row["raw_sha256"]
@@ -113,14 +127,7 @@ def read_trace(row, arm):
         if arm == "B" or row["phase"] == "initial_eval":
             close(response_rms, 0, 0)
             close(response_max, 0, 0)
-        xyz = obs[:, :, :3]
-        behavior = {
-            "boundary_fraction": np.any((xyz[:, :, :2] <= 1e-7) |
-                                         (xyz[:, :, :2] >= 1 - 1e-7), axis=-1).mean(),
-            "height_floor_fraction": (xyz[:, :, 2] <= 1e-7).mean(),
-            "height_ceiling_fraction": (xyz[:, :, 2] >= 1 - 1e-7).mean(),
-            "mean_height_m": (50 + 100 * xyz[:, :, 2].astype(np.float64)).mean(),
-        }
+        behavior = behavior_from_observations(obs)
         for key, value in behavior.items():
             close(row[key], value, 2e-5 if key == "mean_height_m" else 1e-7)
         return dict(delivered=delivered, censored=int(pending.sum()), content_credit_rows=active,
@@ -175,6 +182,7 @@ def read_run(root):
                            evaluation_optimizer_steps=0).items():
         assert actual[key] == value, (key, actual[key], value)
     reading = dict(source_sha=summary["source_sha"], summary_sha256=digest(root / "summary.json"),
+                   reader_sha256=digest(__file__),
                    canonical_warm_start=dict(path=CHECKPOINT_CANONICAL, sha256=CHECKPOINT_SHA),
                    all_checks_passed=False, native_steps_added=0, optimizer_calls_added=0,
                    model_or_policy_calls_added=0, levels={}, contrasts={}, own_learning={},

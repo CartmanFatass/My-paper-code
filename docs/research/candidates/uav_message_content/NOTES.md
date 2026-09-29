@@ -1020,3 +1020,39 @@ scientific operation. Drain at 04:37:23 UTC confirmed adoption: accepted admissi
 matching live runner/supervisor identities, consistent records and no exit witness.
 Keep this native child active with long deterministic waits; rearm only this same
 handle if the observation window ends. No additional native work is selected.
+
+### B02 terminal collection and pure-reader correction
+
+Generation1 reached its deterministic checkpoint while the same operation was live;
+native queue delivery returned code -32600 for the spawned child. The active child
+drained it, consumed event `ebe3f0c9d7397378618fb27c` and rearmed generation2 on the
+same claim, without restarting work. At the later deterministic drain, generation2
+reported terminal READY: native runner exit0 at **2026-09-29 05:10:02 UTC**,
+consistent records and both runner/supervisor absent. The READY event
+`6fd3f21f5a69a308c0b8745d` was consumed and observation stopped after collection.
+Queue delivery again rejected an unloaded-child address; no reliance on a future
+queue wake or migration was introduced. All nine fixed cells report COMPLETE,
+1327104 native team steps and 9216 optimizer updates. Scientific reading follows;
+the normal exit alone does not validate the result.
+
+The original frozen pure reader stopped on a behavioral boundary fraction:
+logged .46015625 versus reconstructed .4609375, exactly one of 1280 UAV ticks.
+This was reproduced as reader arithmetic, not inferred from the error alone:
+`float32(1-2**-23)` is .9999998807907104 and its distance to one is
+1.1920928955078125e-7. The runner's `isclose(..., atol=1e-7, rtol=0)` correctly
+excludes it. The reader's `float32_array >= 1-1e-7` rounded that threshold back to
+float32 and incorrectly included it. The pure reader now evaluates absolute
+boundary distances in float64, retaining the exact 1e-7 criterion. A focused
+synthetic boundary regression plus four previous reader checks passed in 5.26 s.
+No tolerance was widened, native data edited, model called or scientific fit added.
+The new reading records its reader source-file hash; independent engineering
+review of this correction precedes final acceptance of the native reconstruction.
+That independent check identified the companion near-zero edge: NumPy's float32
+distance comparison represents atol1e-7 as `float32(1e-7)`, slightly above decimal
+1e-7. The corrected independent calculation therefore uses exact float64 distances
+and the runner's represented float32 tolerance; it does not change the nominal
+criterion. The regression includes that exact coordinate and its next larger
+float32 neighbor, as well as both near-one cases. Original native rows stay intact.
+Independent engineering follow-up verified both boundaries and adjacent representable
+values, ran the five reader checks in 5.63 s, and found the remaining issue resolved.
+DM accepts the reader-only repair for a second pure read of the same retained data.

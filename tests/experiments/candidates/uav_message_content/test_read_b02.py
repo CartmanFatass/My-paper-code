@@ -4,7 +4,21 @@ import numpy as np
 import pytest
 
 from experiments.candidates.uav_message_content.b02.channel import ContentChannel
-from experiments.candidates.uav_message_content.read_b02 import packet_from_observations, read_trace
+from experiments.candidates.uav_message_content.read_b02 import (
+    behavior_from_observations, packet_from_observations, read_trace,
+)
+
+
+def test_boundary_distance_does_not_round_threshold_to_float32():
+    observations = np.full((1, 6, 171), .5, dtype=np.float32)
+    coordinates = [1 - 2**-23, 1 - 2**-24, 0, 2e-7, np.float32(1e-7),
+                   np.nextafter(np.float32(1e-7), np.float32(np.inf))]
+    observations[0, :, 0] = coordinates
+    observations[0, :, 2] = coordinates
+    result = behavior_from_observations(observations)
+    assert result["boundary_fraction"] == .5
+    assert result["height_floor_fraction"] == 2 / 6
+    assert result["height_ceiling_fraction"] == 1 / 6
 
 
 def test_independent_packet_reconstruction_preserves_current_fields_and_history_spread():
