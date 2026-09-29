@@ -1380,6 +1380,23 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 ## Current research plan
 
+### Owner-requested continuing research loop
+
+Owner，2026-09-29："开始下一轮 我们要建立一个长流程 在完成一轮后总结并让pro做innovator提出建议 然后开始下一轮的迭代"。
+Root在本会话持续执行这一委托；`innovator`是Pro的建设性选题工作方式，不是新增角色、审批人或
+每个cell的审查关口。已接受操作、原判定及各方向暂停不因这个流程改变。
+
+1. 完成本轮前瞻所选比较，收齐完整／失败证据并按原规则判读；Root汇总保留的能力、反例、改变／未改变的解释及实际成本，不能把进程退出当作完成。
+2. 在现有RESEARCH中写一份有新证据的轮次问题，请Pro积极推导能力的保留／组合／发展和真正独立的问题，给出可检验预测、合格普通比较与全成本。读完整答复、核验影响选择的来源，再记录采纳／修改／拒绝。
+3. Root选择下一轮有价值的具体问题并分派原生DM，按既有科学／工程方法实现、准入、执行和读取，不等待owner重复发“继续”；不设DM或新想法配额，Pro也不直接授权运行。
+4. 重复上述循环直到owner暂停／停止，或真正的外部条件使有价值的下一步不可执行。若建议不足，具体化缺失前提、修订问题或报告无值得投入的下一项，不空转发同一Pro问题、无理由补seed或强造正结果。
+
+每轮是Root已选研究问题的完整结果边界，不要求Claude的独立批次同步结束。重用仍适用的独立
+科学判读；对新核心问题仍完成一次适当质疑，不叠加已做过的复盘。活跃DM用长native wait，
+已接受Pro／运行用原句柄的确定性观察；本会话的低频heartbeat只作遗漏接续的兜底，不代替这些
+观察，不因时间经过重复Send／启动，也不广播未变状态。暂停、人工依赖和付费／额外授权边界优先。
+当前阶段：上轮服务B05／内容B04已读并收口；下面的首次Pro innovator问题指导下一轮，尚未选择新fit。
+
 **2026-09-29：本轮两项Codex研究已完整收口，Claude的已接受批次继续。** Root已读两份完整
 结果、原始紧凑输出及各自独立科学判读，采纳停止原样配方、保留具体能力与反例的处置。
 这不是新增全面复盘或第二次审查，也没有因为采用规则失败就否定父问题。
@@ -1416,6 +1433,213 @@ Claude已接受工作不暂停／迁移／重启。旧R、通信B/O/L、P_BS及S
 Milan仍等owner数据，PPC/FSD暂停、G33冻结。新增资源仍须与合格普通对照匹配、公开来源／误差／
 成本。方法保留[已采纳Pro复盘](archive/2026-09-29/RESEARCH-workflow-retrospective-pro.md)，不因本轮
 结果再造审查步骤，也不把完成批次数或正负号当作工作流创新效率的因果证据。
+
+## Pro innovator 2026-09-29: next round after continuity and forecasts
+
+Conversation: new Jev-account portfolio conversation; its address remains private in
+the existing transport operation. Model request: 6 Pro, with the existing same-key
+5.6 Pro fallback only on a concrete quota/model-availability signal.
+
+### Question and decision
+
+The owner explicitly requests an ongoing research cycle: after each complete
+Root-led round, summarize what was learned, ask Pro to act in an **innovator mode**,
+then select and execute the next round. This is the first such consultation. We
+are asking for constructive scientific proposals and investment advice, **not
+another workflow audit or a repetition of the already completed result critiques**.
+The latest round is complete; the choice is what substantive research to buy next.
+Root has delegated selection authority and will implement the resolved choice.
+
+Treat supported positives as capabilities to preserve, combine or extend. Develop
+their strongest plausible constructive explanation as seriously as their strongest
+criticism. A failed adoption rule does not by itself close that development path.
+At the same time, a positive proxy, open parent question or unused compute does
+not oblige more experiments. You may challenge Root's current candidate questions
+and the critics' investment stops, but preserve the tested results and identify
+the new reason, not an automatic rescue or a relabeling of an old approach.
+
+### Standing and consequential evidence
+
+The following is a synthesis, not a claim of complete mechanism identification.
+The original notebook readings and compact outputs are the evidence. All paths
+in this question use the published `source_sha` supplied in the send message,
+unless a frozen source is explicitly named in the notebook.
+
+**A. Service scheduling, B05, complete.** On the same S7 information, fleet,
+motion, shield and charging physics, ordinary S replans every 30 steps with a
+1200-step additive availability/service forecast, genuine service/defer choice,
+and R's lawful station-access capability. All 16 retained H12000 worlds completed
+against exact frozen R. S removed all 441 late zero-service steps, including the
+old terminal outage; particular worlds improved full/late J and service without
+new reserve exposure. But mean S-R full/late QoS was -.018925/-.021515, J
+-314.40/-214.79, with wide descriptive intervals. Four worlds gained overload;
+one gained eight persistent-reserve members, drawing 1347.92 W at a 1000 W
+station while still providing positive service. The fixed replacement rule fails.
+
+The intervention was active, not an empty interface: 398/997 choice clocks depart
+from current-state R, 258 first decided by service scores. Yet service scores tie
+at 637/997 clocks and all marginal weights are zero at 424/997. Late free-positive-load
+exposure falls 5701 member-steps/world. Faster observed releases, service while in
+F/charging, connected load and native satisfied QoS are different consequences.
+The main reserve case has no charging-without-arrival event. The critic considered
+reserve-first reprioritization: it targets that case poorly as a general answer,
+because 13/16 overrides in the largest service-loss world already predict less
+reserve. It recommends no immediate same-S batch, while preserving positive
+scheduling cases and R. This is an investment judgment, not impossibility.
+Price paid: 0 fits, 192000 new steps, 1.975 worker-CPU h, 29.69 min runner wall;
+support time is additional and incompletely measured.
+
+**B. Dated future-motion communication, B04, complete.** Native N5/50 static
+users/H256 decentralized host, fixed round-robin send and 1/5-step channel delay,
+no packet loss. All three arms preserve the seven old geometry fields and add
+three payload floats at a common 40-byte abstract fee/delay contract. G sends
+zero padding; O predicts from the sampled first command plus subsequent central-
+command persistence; F learns a bounded residual endpoint forecast, with only
+later own observations as detached training labels. Expiry is date-valid. Every
+arm continues primitive actor/critic learning from the same useful B19451 parent,
+with zero-initialized added projections. Three matched continuations per arm,
+512 H256 training episodes each, final-only 32-world evaluations plus frozen B0.
+This is not three independent parent fits or a commitment executor; packet width
+is 42.9% above original B0, not free physical bandwidth.
+
+All 9 policy fits, 3 predictors and 320 evaluations passed the full independent
+raw reader. F's own-trajectory endpoint horizontal RMS is 67.95/68.87/65.91 m
+versus the same-trajectory ordinary shadow's 81.82/77.87/75.20 m. Predictions
+are exposed while future, and substituting the shadow changes receiver actions.
+But F-O mean is -.009810 J/-.720988 users per tick, two adverse and one positive
+continuation, wide df2 intervals. F-G and O-G have positive pooled means but mixed
+signs; all arm means are below frozen B0, and G loses in all three continuations.
+O19501/F19503 are genuine native positives, not retrospectively selected winners.
+Retain B19451. Continuation drift/co-adaptation and task-irrelevant target detail
+are competing explanations, not identified causes. The critic declines a frozen
+forecast-removal panel because no such deployment decision is pending; it would
+measure dependence, not overturn separately trained F/O. Price paid: 9 policy fits
+plus 3 predictors, 1261568 steps, 37.48 min scientific wall/approximately 0.6245
+process-CPU h, plus unmeasured implementation/review work.
+
+**C. Independent observational lead, not a new experiment.** Reading only all
+32 frozen B0 trajectories, each world ever serves 35-50 of 50 static users (mean
+45.375), but 31 worlds have never-served users: 148 of 1600 episode-user pairs.
+The one world reaching all 50 still has a 227-tick unserved spell ending at the
+horizon. The others' 256-tick maximum gaps are censored at both boundaries.
+Connection bits are evaluator-only, aligned to reward, independently hash/count
+checked, not actor information. Actor user rows are anonymous and SINR-sorted;
+saved stable evaluator identities are not free deployed IDs/history. These facts
+do not establish a fairness failure, avoidable loss, a service entitlement or the
+benefit of adding acknowledgements. They reject the overly strong fixed-small-
+subset description while exposing measurable temporal-coverage heterogeneity.
+
+**D. Other project evidence and ownership.** Ordinary P_BS built from lawful site
+coordinates has conditional native value beyond a simpler anchor, with retained
+reserve tails; static priors can matter without an identified coordinate-accuracy
+mechanism. Genuine learner improvement on earlier communication and S1 tasks is
+recorded; recent adverse increments do not mean learning is uniformly absent.
+Claude independently owns `coupled_host_joint_skills_stage1`: ordinary relay
+opportunity gate passed; its six H/SET fits are in flight. The first published
+pair has H/SET hold-out C_bh .235/.219 versus P_flat/P_relay .639/.780, not the
+complete batch verdict. Its D1-prime bounded joint-target correction remains
+a candidate. Do not duplicate either decision object or interrupt its batch.
+Milan restoration awaits owner data; PPC/FSD pauses and G33 freeze stay in force.
+
+### Requested constructive reasoning
+
+1. What important question should we now ask, and what knowledge or useful
+   capability would an answer add beyond repairing the last recipe? Start from
+   the strongest positive explanations and an independent problem angle, not just
+   a catalogue of missing controls. Root's two current leads are temporal user
+   service and preserving learned motion competence while adding content. They
+   are suggestions to challenge, not a restriction of your search to those two.
+2. Develop a task-proportionate small set of worthwhile candidates, not a fixed
+   count. For each serious recommendation give a derivation or explicit conjectural
+   bridge: modifiable link -> predicted intermediate -> complete native consequence.
+   Identify the closest actually read primary-source idea when useful, what it
+   proves, what you transfer, and what MARL coupling it omits. A new architecture,
+   theorem, positive toy pilot or exhaustive headroom proof is not required.
+3. Distinguish a better use of already lawful information/actions from a new
+   information, prior, control-right or physical-resource assumption. Added IDs,
+   service ACKs, maps, forecasts, commitments or capacity need a deployment use,
+   source/error/cost and a competent ordinary comparator receiving the same
+   addition. Separate the ordinary resource gain from any incremental learning
+   gain. Future truth is only a labeled privileged bound. Do not retroactively
+   replace our native objective with a fairness criterion after seeing C.
+4. Make the best next comparison executable in principle: scientific object,
+   matched ordinary/learned arms as needed, information/action interface, preserved
+   capability, exposure/independent units, full horizon/endpoints, predictions under
+   competing explanations and what success/adversity/uncertainty changes. Give
+   fits, native steps and dominant engineering/solver/evaluation work; derive
+   estimates from the measured anchors above where compatible, otherwise say
+   unknown. Include stopping and a truly independent question as relevant
+   alternatives, without requiring every candidate to beat all conceivable ones.
+5. Recommend a next-round allocation and priority based on knowledge/use per full
+   cost, with real overlap and resource constraints. Constructive development may
+   be worth buying despite a previous failed adoption rule; an ordinary-method
+   result can be worthwhile. Explain why your chosen investment beats merely
+   repeating the old fit, ranking paid assets or tuning one exposed failure.
+   State consequential disagreement with Root or the recorded critics, including
+   `MATERIAL_DISSENT: yes/no` and exactly what decision should change.
+
+Do not spend this answer redesigning governance. No experiment, role, budget,
+confirmation or performance claim is authorized by advice itself. We will use
+one applicable independent scientific assessment for the actual selected new
+question, preserving existing valid review rather than rerunning the old audits.
+
+### Context to read
+
+- Current owner instruction above; `docs/project/OPERATING_CONSTITUTION.md`
+  sections 1-5, 7-8. This explicitly requested round-boundary consultation does
+  not turn routine per-cell execution into a recurring review obligation.
+- `.agents/skills/hmasd-scientific-tools/SKILL.md`: Choose the question; Design
+  the comparison and decision exposure; Update the working explanation; Simple-
+  model and literature bridges; Statistics; Cost and exposure. Read
+  `.agents/skills/hmasd-loop-dispatch/SKILL.md`, Root-led DM trial, for the actual
+  Root/DM ownership and constructive-development division.
+- `docs/research/RESEARCH.md`: current plan, relevant communication content in
+  shared-background section 5, service/ordinary planning in section 6, and actual
+  active/reserve rows. Historical project narrative is not an instruction.
+- `docs/research/archive/2026-09-29/RESEARCH-continuity-forecast-result-boundary.md`:
+  complete cross-question boundary and reproducible B0-only extraction/limits.
+- `docs/research/candidates/uav_persistent_service/NOTES.md`: B05 prospective and
+  complete-reading sections, including independent diagnosis; consequential B03/B04
+  positive and adverse evidence. `runs/uav_persistent_service/b05_service_shifts_a01/`
+  contains `summary.json`, `perworld.json` and `intermediate-reading.json`.
+- `docs/research/candidates/uav_message_content/NOTES.md`: B03 capability panel,
+  B04 prospective and complete-reading sections including independent diagnosis.
+  `runs/uav_message_content/b04_future_motion/summary.json` and `reading.json`
+  are the complete compact outputs. Large unique raw remains on the node and is
+  not accessible through GitHub; do not claim to have re-read it.
+- For candidate relevance only: the P_BS/S0 result in
+  `docs/research/candidates/uav_information_value/NOTES.md`, and Claude's declared
+  scope/latest published incomplete-batch status in
+  `docs/research/candidates/coupled_host_joint_skills_stage1/NOTES.md`.
+
+Read the pinned question and these Context sources before answering. Paths
+marked source_sha resolve at the full source_sha supplied in the send message;
+named frozen contracts retain their own revisions. Current owner instruction and
+constitution are governance, skills are methods, historical files are evidence.
+These replace conflicting old chat rules; do not substitute chat memory or a
+moving branch for reasoning inputs. Cite sources actually used for consequential
+advice and disclose any decision-critical unread source. An unread source is not
+verified; give the dependent uncertainty instead of a read-receipt table.
+
+### Answer delivery
+
+Repository `CartmanFatass/My-paper-code`, branch `main`, target
+`docs/research/RESEARCH.md`. Write **only** the empty `### Pro Answer` under this
+unique `## Pro innovator 2026-09-29: next round after continuity and forecasts`
+heading. Read the immutable question; fetch the latest target blob for writing
+and preserve all other bytes, including other writers' changes and Root Decision.
+Stop on overlapping edits. Report the actual commit on success. If connector
+writeback fails, return the **complete answer in chat**, not merely a receipt,
+commit hash or link. No launch, source edit or change to direction records.
+
+### Pro Answer
+
+### Root Decision
+
+Pending complete advice reading and the resulting next-round selection. No new
+scientific operation is selected by this question or its submission.
+
+## Prior reviews and runtime context
 
 <a id="portfolio-review-2026-09-29-continuity-intent-selection"></a>
 [已完成本轮完整选题、独立审查与Root处置](archive/2026-09-29/RESEARCH-continuity-forecast-selection.md)。
