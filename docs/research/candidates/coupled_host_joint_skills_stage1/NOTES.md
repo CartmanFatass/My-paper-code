@@ -80,6 +80,237 @@ Return: (1) Is the host contract closed and legitimate — reward ½(C_bh + S/D)
 
 ### Answer
 
+#### Pro 声明评审：保留 D2，修正可执行合同后再启动
+
+**结论：MATERIAL_DISSENT = yes，但异议已经收窄到可直接修订的声明条件，不再是是否允许选择 D2 的异议。** 固定分母、取消 clip、训练与主要读数统一为回传覆盖、真正重新优化的禁 A2A 对照、能力／仪器定位，以及非自动、单独计价的 SCC 后续问题，都是实质修订。我支持保留它们。现稿仍不能直接作为计时训练和六个正式 fit 的完整执行合同，主要缺口是 P2 的参照定义、P3 的识别／校准、若干确定会阻断 ACG 适配的代码条件，以及成本单位与停止规则。
+
+**材料与边界。** 本评审以发送记录固定的 `cf62cef7b45ace34419bc475837f185cbf5a8592` 为研究来源，完整阅读了 b01 声明、round-3 的 BRIEF／MEMO／REVIEW、前轮 Pro Answer、2026-09-29 的 DM disposition、owner “2”及 D1′ 条目；核对了点名代码的实际奖励、路由、观测、训练和 B12 收集／统计路径，并补读直接依赖 `agent_count_generalization/models.py`、`env_adapter.py` 和宪章 §8。下文的数值是代码公式重算，不是新环境面板、planner gate、计时探针或训练结果。本次没有运行训练，没有把前轮 proxy 当作复现，也没有重做整个历史／文献库查重。尚缺的是待实现合同的验收与运行数据，不是本次所需文本来源。文末列出固定版本的来源定位，正文用短码引用。
+
+Owner “2”已经接受 [DECIDE-2]；[DECIDE-1]没有行使，D1 的 S7-S2 探索没有被购买。D1′仍是候选，不是已宣告批次。这些不需要再表决一次。[N：06:26 UTC owner decision 与紧随其后的 D1′ 条目]
+
+#### 1. 宿主：奖励变更合法，旧分母通道已关闭，但不能宣称所有激励都服务单调
+
+令 A_i 为按原生关联规则分配给 UAV i 的用户集合，p_i 表示 i 有合法 BS 路径，γ_i 为 A_i 中最差用户的 SINR（dB）。实际声明对应：
+
+`C_bh = (1/50) Σ_i p_i |A_i|`
+
+`S = Σ_{i:p_i=1, |A_i|>0} B log2(1 + 10^(γ_i/10))`
+
+`D = 6 × 20,000,000 × log2(1001) = 1,196,067,151.0603 bit/s`
+
+`r = 0.5(C_bh + S/D)`。
+
+原生贪心关联保证一个用户最多归给一个 UAV，所以这里没有重复覆盖计数。旧奖励的分母会计入全部 UAV 的位置相关直达 BS 容量，包括闲置／无路径 UAV；新 D 不含这些位置。**在 C_bh 和 S 不变的条件下，单纯把闲置 UAV 移远，不再提高 r。** 取消 clip 也消除了该处的饱和平台。统一 C_bh 为训练项与主要读数、把 S 准确命名为“有路径的前端容量和”、声明并断言 max_connections=10，均应接受。free_space 与理想 FDMA 也应该继续明确钉住。[E2：701–835；E0：117–122、945–979]
+
+但有三个不能省略的限定。
+
+**第一，30 dB 是参考尺度，不是前端容量上界。** E2:745–746 是旧 normaliser 使用的参考容量；实际 `_compute_uav_frontend_capacity` 没有把 SINR 截到 30 dB。按此处自由空间、23 dBm、−80 dBm、最低高度 50 m，最近地面用户的 SINR 可达约 30.5582 dB。因此无 clip 后不能写严格的 `S/D≤1` 或 `r≤1`。在所声明常数及合法高度下，一个安全的解析上界是 `S/D≤1.01859`、`r≤1.00930`；这是上界，不是正常世界的预期成绩。另外，带宽是构造参数，不是“不能通过参数改变”的常量；应写“本方向显式固定 B=20 MHz”，而不是陈述错误的 API 事实。[E2：18–42、701–767；E0：21–46、117–122、773–783、895–930]
+
+**第二，仍存在舍弃弱用户／改变关联来抬高容量项的激励。** 一个 UAV 的整个前端容量由其最差用户决定。若一次移动或无回传 UAV 的抢关联使一个弱用户失去回传服务，却让原服务 UAV 的最差 SINR 从 3 dB 变为 20 dB，其他项不变，则 `ΔC_bh=−.02`、`Δ(S/D)≈+.08487`，从而 `Δr≈+.03244`。这是按代码公式给出的条件算术例子，不是我已经在本次世界面板上观察到的事件。它说明：**P4 的 +.03 可能由覆盖下降、容量项上升构成，不能自动叫作服务覆盖改善。** 原关联只按 SINR 和连接数上限贪心分配，不先排除无 BS 路径的 UAV，故关联竞争本身也必须记录。[E2：701–732、786–806；E0：945–979]
+
+这不同于旧分母的“指标全不变却涨分”：现在发生了声明中的容量—覆盖取舍。不过，它仍足以否定“修复后不存在其他可利用激励”或“奖励提高必然覆盖提高”。我的建议不是临时扩充成完整网络流量模拟，而是保留当前抽象，记录覆盖损失与关联转移，并在 package 的采用读数中显式检查主要覆盖量，见第 4 节。
+
+**第三，有路径不等于有端到端交付能力。** 当前 S 不调用 `_compute_effective_throughput` 的瓶颈路径，没有共享 BS／中继流量守恒约束；刚越过 SINR 阈值的路径和宽裕路径都能打开相同的前端容量计入资格。纯中继、兼任服务／中继、用户争用和路由替代都可能存在，但“需要一条路径”不证明中继角色不可替代。可以在这个路由—覆盖抽象上做能力研究，不能外推为真实交付 Mbps 或 SCC 的非替代性保证。[E2：596–732、786–806；R3-R、N：前轮 Pro §§1–2]
+
+**S/D 的量级与权重。** 写成 `T=S/D=(1/6)Σ_{活跃且有路径的i} q_i`，其中 `q_i=log2(1+10^(γ_i/10))/log2(1001)`。对一个活跃服务 UAV，连接阈值附近 q≈.1588；最差用户三维距离约 300、500、1000 m 时，q 分别约 .5043、.3641、.1949。于是：
+
+| 条件示例：最差用户三维距离 | 4 架实际服务且有路径时 T | 5 架实际服务且有路径时 T |
+|---|---:|---:|
+| 300 m | .3362 | .4202 |
+| 500 m | .2427 | .3034 |
+| 1000 m | .1299 | .1624 |
+| 约 1194 m，连接阈值附近 | .1059 | .1323 |
+
+这些是条件尺度示例；中继也可能同时服务，不能先验把活跃服务架数固定成 4 或 5。**规划用的合理量级是“有用布局常可在约 .1–.4，四五架服务且最差距离在 300–1000 m 时约 .13–.42”；实际分布均值尚未测得，随机／断网状态可以为零，紧密近距离布局可以更高。** 不能把这个范围写成已验证的宿主统计。[E0、E2；本答复公式计算]
+
+我的选择是：**保留 D 和两个 1/2，不在 cell 0 前无依据地放大吞吐项。** 此时覆盖通常占较大份额，但吞吐绝非数值消失；放大它反而强化上述舍弃弱用户的动机。先固定合同并分项报告。若研究目的改成吞吐优先，当然可另定权重，但那是另一份预先声明的目标与阈值，不能看过 gate／learner 后校准。
+
+宿主还需要几个明确的验收点，而不只是 100 个随机状态的等式测试：
+
+- **路由跳数语义。** 当前 BFS 在 `len(path)>=max_hops` 时才停止扩展，且先检查直达 BS；参数 3 可以允许 3 条 A2A 链路再接 1 条地面链路，即总计 4 条链路。原观测又用节点数 `len(path)` 归一化，直达路径的长度为 2；它不是 `avg_hops` 使用的 `len(path)−1`。最小改动是保留原生路由行为、准确声明参数语义，并用真实链路数／是否有路径做诊断。若要改成总链路数最多 3，必须在 direction-owned subclass 内于 gate 前固定，不能默默混用两种宿主。[E2：221–255、365–449、807–823]
+- **新鲜状态与一致性。** `scenario2.step` 先经过父类 step，再更新 A2A／BS 路由并重新算 reward。静态 evaluator 直接改坐标时，也必须依次失效缓存、重算 SINR／关联、重算开关后的路由、再取新奖励。断开／接通 BS、A2A 开关、终止步、空服务 UAV、连接数达到 10 和上述弱用户边界，都要有定向测试；旧 reward 的诊断不得覆盖新训练 reward。[E2：267–309；E0：264–350、773–982]
+- 明确 `use_shadowing=False`、B、原生动作约束和观测布局；6 km fallback 若继承生成器，用户散布标准差也变为 600 m。原生成器的 cluster_centers 是局部变量，far-cluster 读数需保存同一次生成的中心与归属，不能重新抽样或把 k-means 中心冒充原生成中心。[E0：516–532]
+
+#### 2. Placement gate：对照形式正确，但只能证明给定搜索器／预算下的实用机会
+
+真正禁 A2A、保留整个舰队并重新优化 P_flat，是正确的普通对照。静态 placement 与共同初态下的 500 步部署分开，也是正确修订。但是“best”应读作 **best found**；相同求值次数不自动保证两个非凸搜索同样接近最优，不能称作全局耦合证明。[D：Cells；R3-R、N：前轮 placement 讨论]
+
+**我保留每臂每世界 3,000 次的主预算，不建议立即翻倍，也不建议看完正负后加预算。** 应把这个预算实际分配规则写死：初始候选也计数，固定 k-means 随机流、重启数、坐标顺序、tie-break 和停止条件；两臂使用同一候选生成原则。建议在 3,000 内预分配粗搜与精修，例如 2,400 次粗搜、600 次 25 m 的末段精修，并把高度候选明确为 50／100／150 m；只有一个 100 m 的三维步长可能根本没有对中间高度起点做有效高度搜索。
+
+P_flat 的起点不能只有远端用户簇中心：要包含向 BS 收缩的直达服务候选，否则“没有 relay seed”可能变成“没有可行 flat seed”。最好把找到的 P_flat 布局也作为 P_relay 的一个 incumbent，计入原预算；在相同关联与奖励下，增加可用路由不应使这个同一布局的得分降低。记录两臂在 1k／2k／3k 求值处的 incumbent 和各起点贡献，检查结果是否由明显未收敛或单一起点灾难主导。若这些检查暴露搜索不足，应写“本预算未建立机会／搜索读数不充分”，而不是“整个 Scenario 2 没有耦合”。预算之外的追加搜索不在本次建议中自动获准。
+
+**门槛建议：保留静态 dev reward gap `G≥.05`，并增加与本问题一致的闭环 dev 覆盖机会条件 `G_C,dev,cl≥.05`。** 后者是建议的前瞻性实用下限，即平均约 2.5 个用户的服务差，不是统计显著性界，也不是从未运行的面板估出来的门槛。理由是当前研究购买的是可实现的回传覆盖能力：一个只有吞吐差、没有有意义闭环覆盖差的 gate，不足以支撑“关闭一半覆盖差距”的 P2。静态 G_C 仍报告，但不拿来代替闭环值。如果 DM 选择另一个有理由的正覆盖下限，应在任何 gate／probe 结果前固定，不以过门为目标回调。
+
+5 km 不满足预先固定的机会条件时，保留唯一一次 6 km fallback；后者失败便停止这一合同／预算下的 D2。不得外推为任意便宜参数化皆不存在，也不得自动启动 S7-S1。host 选择只看 dev；hold-out reference 只在所选宿主生成并封存，不参与 fallback 或调参。
+
+**闭环参照是合适的能力下限，但不是已证明最强的普通闭环规划器。** 静态最优目标再直线飞行，优化的不是完整 500 步平均回报。应称“预定预算的 placement-plus-executor 参照”，保留全程成绩与最终阶段成绩，明确目标到 UAV 的分配规则，避免任意编号导致额外行程。它可以很好地回答 learner 是否达到了普通部署能力；不能仅因 learner 超过它就排除所有普通路径规划。
+
+还有一个直接的公平性问题：原生 `Box([-1,1]^3)` 的 action 逐坐标乘 30，没有速度向量的 L2 归一化。合法对角动作可有 30√2 的水平速度。**不能让普通参照按 L2 速度≤30 飞，而 learner 按原生逐轴上限飞。** 最小改动是两者都保留原生 Box／逐轴规则，普通直线 executor 按同一可行域缩放，临近目标不越过；若改成 L2 限速，则所有臂一起在 host 合同中改。不要只修 planner。[E0：173–176、280–291；EA：动作转换]
+
+#### 3. H6+d2、SET、1280 与 360k：配方可以保留，适配远不止换 make_envs
+
+**H6+d2 对 SET 是可辩护的 existing-package 比较，不是 ACG H6 的原样复现，也不是 duration-interruption 实验。** 保留 coordinator batch 1280、16×500×45=360k 团队环境步和每臂三个预定种子；没有代码依据要求先追加 D128 臂或加长训练。固定十步 cadence 时，每 rollout 有 `16×(500/10)=800` 个团队 commitment、4,800 个 agent commitment 行。1280 是所声明批量上限，不意味着凭空得到 1280 条独立团队样本；实际采样／优化计数要输出。B12 的收集检查也明确要求团队行数不超过 coordinator_batch_size，因此 800≤1280 与其协议相容。[AC；B12：391–450、851–908、1060–1078]
+
+d2 的理由要说准。`hmasd/agent.py:478–510` 的 off 分支同样设置 `d2_k_max` 和 `d2_k_Z`，所以不能说 off 没有这两个属性。真正的限制是 B12 的 `commitment_cap` 显式要求 `d2_enabled`，并检查两项 interruption cost 为无穷、age feature 为 off，随后从 D2 segment／cause 数据收集。因此“为复用这个收集协议选择 d2”成立，“只有 d2 才存在 cap 属性”不成立。应把 `skill_cap_k_max=team_cap_k_Z=10`、两项 cost=∞、age_feature=off 以及 HA-CTSE 路径关闭逐一固定，验收只有 reset／team_cap 两种原因且六个 agent 同步更新。SET 仍按其 off＋held central snapshot 的十步信息时钟运行。[HA：478–510；B12：327–345、851–908]
+
+**确定存在的适配阻塞如下，不是风险猜测。**
+
+| 位置 | 固定代码的行为 | 本方向必须做的处理 |
+|---|---|---|
+| AC `make_config` 末尾 | `state_dim !=133 or obs_dim !=104` 即报错 | 用明确的新 adapter 契约替换，不是删掉所有验证 |
+| AM `build_agent` | 拒绝任何非 off 模式；再次检查 133／104 | direction-owned H 构造允许经验证的固定-cap d2；保持 SET 的正确路径 |
+| AM `StateSetEncoder` | 按 8×3 UAV 位置、8 个 validity bit、100 用户坐标和时间解析 133 维 | 不能把原生 119 维硬塞进去，也不能仅改一个数字让切片错位 |
+| AM `SetActorBase` | 强制 obs=104，hidden=256 时强制 concat=721 | 原生本配置 obs=90；保留现有编码方式时 concat 应为 693，相关线性层和断言一起改变 |
+| AA 工厂和 AR 内部 imports | 仍创建 S1 uniform 环境；训练与 evaluator 分别引用 ACG 工厂 | 两条路径、admission direction、seed 规则、测试 N 和面板都要实际切换 |
+| AR `native_components` | 验证 `.7 coverage+.3 quality−energy`，并要求 S1 奖励键 | 改为逐步验证 `N×adapter_scalar=.5(C_bh+S/D)`；不借用旧 key 的错误语义 |
+| AR checkpoint／B12 loader | ACG 保存 `modules`／normalizers；B12 构造旧 FSD 对象并调用其 load_model、旧 seed／reference 验证 | 新 reader 必须走新工厂及严格 checkpoint 加载，不能只替换 FSD CLI 参数 |
+
+[E0、E2、AC、AA、AR、AM；B12：910–1055]
+
+**维度和语义应直接写进匹配表。** 原生 state 为 `6×3+50×2+1=119`；本配置 observation 为 `3+20×3+6×4+1+1+1=90`。其索引布局是 own `[0:3]`、users `[3:63]`、other-UAV slots `[63:87]`、time `[87]`、BS connection `[88]`、legacy hop `[89]`。用户三元组的末项、UAV 四元组的末项，实际都是归一化 SINR，而不是部分注释所称的距离。空槽、排序及 hop 的歧义不能靠改 shape 掩盖。[E0：150–155、383–501；E2：117–134、221–255]
+
+最小风险的复用方案是保留 ACG 的**有缩放、8 槽／validity 的 133 维 adapter state**，明确它只是同一原生 119 维信息的编码，换成本场景 90 维原生 observation，并相应适配 AM；不是给 flat 多加世界信息。若改为新的 119 维 encoder 也可以，但要声明架构改动、重新绑定优化器，并验证所有替换模块真正更新。不能为了绕过 d2／维度断言而退回一个失去 StateSetEncoder／SET actor 的不同 baseline。尤其不要在 `use_statenorm=False` 下，误将原来缩放到单位尺度的输入换成数千米的裸坐标。[AA、AM]
+
+EA 返回的是各 agent 奖励的平均值，原生每个 agent 已拿到 r/N，因此 scalar 仍是 r/N，不是 r。读数恢复团队尺度时只能乘一次 N。原生动作还是连续三维速度，不是目的地 offset，也不是离散角色动作；核对采样动作的合法范围和 requested／executed action，保留真实 terminal successor 在 reset 前存储的现有正确顺序。[EA：185–315；AR：训练与 evaluation 循环]
+
+当前匹配表是骨架，**不充分**。还应逐项输出：准确观测／state 编码和 snapshot 时点，reward 单位及 H 的辅助目标权重，gamma／GAE、value norm、观测／state norm、learning rates／schedule、PPO clipping／梯度裁剪、批量单位与实际 optimizer calls、网络参数量与信息入口、episode reset／bootstrap 规则、评估时冻结的参数和 normalizers、CPU dtype／线程数、训练／环境／评估 RNG 的分工，以及 final-45 不择优 checkpoint 的规则。H 的 coordinator 和 discriminator 有梯度步而 SET 没有，因此“equal update count”只能指已明确定义的外层 rollout／共同 low-level 更新日程；不能说全部优化计算匹配。三组 seed 应固定按声明顺序配对，公开两臂不同训练 seed 不等于共享了相同训练世界／初始化。[AC、AR、AM、C §8]
+
+#### 4. P1–P4 与结果用途：修正参照、联合实例及“不显著”的文字
+
+P1 的 .70、P2 的 .40／.45、P3 的 .35、P4 的 .30 可以保留为 DM 的主观预期，不是测得概率。旧奖励＋弱布局的 +.14 不能标定新 G；这些条件概率也不足以直接算出 cell 2 的联合概率。[D；R3-R；N]
+
+**P2 必须改成同一 hold-out、同一闭环、同一全程平均量。** 当前 G_C 只在 cell 0(a) 定义成 static dev gap，P2 却直接把它带进 hold-out closed-loop 式子。应分别命名，并定义：
+
+`G_C,ho,cl = mean_w[C̄_bh(P_relay,w) − C̄_bh(P_flat,w)]`
+
+`L2(a,s) = mean_w[C̄_bh(a,s,w) − C̄_bh(P_flat,w)] − 0.5 G_C,ho,cl`。
+
+这里每个 C̄ 都是同一 500 步的均值，a 为 H 或 SET，w 为相同 32 个 hold-out 世界。最终 100 步与最终时刻留作已命名的次要读数。若 hold-out 闭环覆盖 gap 非正或明显不足以支撑“机会”解释，应报告机会没有转移／P2 此项不可解释，不能让负 gap 自动制造“有能力”。不再逐世界除以 gap，也不用 static-dev 数替代。
+
+far-cluster share>0 是一个很弱的存在性条件：最远簇也可能可直达，微小的早期用户时间亦可能满足它。保留它作已声明描述，并同时报告该簇通过 A2A 路径获得的用户时间、全程与末段覆盖；它本身不能证明 relay necessity 或已学会角色分工。其中心及用户归属必须来自原始生成记录，而非看完轨迹后重新选簇。[D；E0：516–532]
+
+**P4 的 +.03 可保留，但只表示新团队奖励尺度上的 package 差。** 在容量项不变时它等于 +.06 覆盖，不是三个百分点覆盖。鉴于第 1 节的反例，建议把“优先保留 H 作为覆盖能力 package”的读法加上同一配对实例 `ΔC_bh(H−SET)≥0` 的点估计检查；这不是统计非劣性证明。若奖励赢而主要覆盖下降，应单列“容量—覆盖取舍”，不能悄悄归入覆盖更好的层级 package。
+
+“2 of 3 是预先读法，不是显著性”这句话已经诚实，应保留。还要报告全部三个 L2／paired Δr／ΔC、失败状态及世界条件不确定性，不把 32 世界、256 lane-episodes 或 128k 步冒充独立训练次数。三个公平独立符号中至少两个为正的概率就是 1/2；三种子满足宪章最低数，不保证分辨 .03。不同 checkpoint 不能挑最好，sampled 模式不能在 deterministic 不利时替换主终点。[C §8；AC、AR]
+
+**购买 cell 2 的联合条件还必须说明是不是同一实例。** 例如 P2 在 seeds 1、2 通过，P3 在 2、3 通过，P4 在 1、3 通过，则各项都是 2/3，却没有一个 seed 同时通过全部三项。我的建议是：需要**同一组至少两个 H／SET 配对 block**满足 P2(H)、有效 P3、P4 及上述覆盖检查，才称为支持 SCC re-entry 的强实例；通过后仍只进入单独声明，不自动运行 SeqAU。
+
+结果表方向正确，但应按以下优先顺序解释，避免重叠或缺行：
+
+| 结果 | 应改变的投资 |
+|---|---|
+| 技术、合同、计量失败 | 该部分不产生科学结论；保留失败；依预算停止，不换 seed |
+| 两个预定宿主的机会 gate 都失败 | 停止这份 D2 合同／搜索预算；不是“MARL 无用”或自动获准转跑 S7 |
+| 有机会，但 H、SET 都未达到 P2 | 当前训练预算的能力仪器失败；不续训、不改 reward、不买 credit |
+| SET 达到 P2，H 未达到；或两者有能力且 SET 明确更好 | 优先 SET；不能仅因 SET 比同样无能的 H 好一点就称“flat suffices” |
+| H 达到 P2，但 package 差未分辨，无论 P3 为正还是未分辨 | 最多保留这一仪器及已明示用途；没有自动追加 fit 的理由 |
+| H 有有用的 package 增量，但有效 P3 不支持所测交互 | 可以保留 package；不能宣称已证实联合角色，更不能据此购买 credit |
+| 同一组至少两个实例满足完整联合条件 | 保留 H，重新评价单独计价的 cell 2；不是 credit 增益的保证 |
+
+因此各行确实可以改变“保留谁／停止什么／是否购买下一项”，不必每行都启动新实验。**Modal outcome“cell 2 不被购买”是合理的低先验让步；但“P3 失败即 additive map”不正确，应改成“所测交互不获支持或不可分辨”。** 有限统计量失败不证明所有技能可加。问题开头的“non-additive map，即 who relays/who serves，且 beyond SET”也应收窄：P3 读 H checkpoint 的特定关联结构，P4 读 package 差；两者并不自动识别这种机制优于 SET。[D；C §8]
+
+#### 5. B12：需要新的、真正写出的统计预规格，不能只泛化 FSD 参数
+
+现稿“count regression＋pairwise＋relay-pair＋lane/step-block permutation”还没有给出可识别的完整模型。旧 B12 主要检验 label spread，cap=500 时另加 `Σ n_z²` 同质性项；它不是现在所需的一般 pair-interaction 检验。旧脚本还默认四个 cap、旧种子、旧 FSD 权重与 reference，照搬会改变 128k 的暴露量甚至根本读不到新模型。[B12：1–65、391–850、910–1135]
+
+我的建议是预先固定下面这套最小可解释读法，而不是事后挑显著项。
+
+**观测单位与响应。** 只读训练时的 cap=10，最终 checkpoint，冻结所有参数／normalizers，零 optimizer step；每个十步 commitment 对应一个全队 label vector 和该段的团队每步平均 r。每个 H 的 128k 步成为 12,800 个 commitment，名义上最多 256 个 lane-episode cluster；若世界重复，按真实 world ID 合并 cluster。记录动作前 state、时点、labels、路径／角色、执行动作和对应 reward 时间对齐。不能把十个相同 label vector 的逐步行当成十次独立指派。[B12：327–345、391–481、851–908、1066–1185]
+
+**模型与 rank。** 旧 count-additive 模型可以保留作描述。主检验的 reduced model 至少包含预先指定的动作前 state／时间控制和 agent-index-specific 的单标签加性项；否则“同一个标签放在不同位置的 agent 上效果不同”就会被错误挤进联合项。full model 再加入事先指定的 label-count 二次基与 relay-service／relay-pair 项。固定 N 时 `Σn_z=6`；若平方与所有交叉项都纳入，又有 `Σ_{z'}n_z n_z'=6n_z` 等关系。必须选择独立对比基并检查实际支持下的 rank／条件数，而不是用伪逆得到系数便宣称已识别。不能在已经包含完整 pair 基后，再把同质性项当成独立机制。稀有组合、label collapse 或 relay 变量无变化时，读作不可识别，不是交互为零。[B12：483–613、621–783；数学关系由固定计数直接推出]
+
+**relay 定义不能偷看响应。** “某 label 的成员占据 relay positions”需指明：实际中继是他人通往 BS 路径的内部 UAV 节点，不是凡出现在自己路径里就算 relay；服务与中继可兼任。主模型用 commitment 开始前的角色／图结构作条件，且给 reduced model 相应角色主效应。段结束后才形成的 relay 角色是行动结果的一部分，可单独描述，但不能作为已经控制好的前置变量来证明 labels 造成协作。聚合 counts 更不能独自识别“谁”的因果角色。
+
+**校准的零假设必须是“在加性基线之外没有增量”，而不是“labels 与回报完全无关”。** 原始 label permutation 会破坏已有的加性效应和状态选择关系；在 lane 和 step block 内打乱，并不自动修复这个问题。逐步 shuffle 会破坏十步 commitment；若 block 本身只有一个 commitment，则根本没有可置换对象；若跨多个 commitment，又需处理状态与历史变化。仅按位置分组的旧 B12 permutation 不能直接改名为已保证交换性的角色检验。[B12：613–683]
+
+一个具体可采用的替代方案是：按完整 world／episode 分组做固定交叉验证，以 full 相对 reduced 的 held-out MSE 减少为单一 omnibus 统计量；在 reduced null 下保留其拟合值，对完整 episode 的残差向量施加同一个 wild-cluster multiplier，重新拟合并以 1,000 次 null draws 校准。要求观察到的 held-out 改善为正且超过预定 95% 分位。预先固定控制变量、folds、正则化（如使用）、乘子、seed、基函数和 rank 失败处置，交互族一次联合检验，不逐项捞最显著者。**这是有模型及 cluster 假设的近似校准，不是精确随机指派试验，更不是因果证明。** 若仍坚持 label permutation，应明确所保留的加性／状态条件、交换单位及为何可交换，不能只写“respect within-world dependence”。
+
+**team-label placebo 不能机械移植。** 旧 B12 的“team label 不直接输入低层 actor”不足以保证在新 checkpoint 的观测数据里它与回报独立：它可能代理 state，或经 individual-label law 与行动关联。其回归为正不能自动使整个 P3 无效；为零也不证明无混杂。保留它作为条件诊断，并加一个已知零效应的结构检查：固定 individual labels、state、hidden state，只改变不进入当前低层动作路径的 team-label 输入，应不改变执行动作；或者预先生成与轨迹独立的伪标签作统计校准。必须验证所用新网络确实满足这个结构前提，而不是沿用旧注释。[B12：210–241；HA、AM 的本方向构造]
+
+T4 的 synthetic tests 应覆盖“强加性＋状态相关标签＋episode 内相关”而不仅仅 iid 零效应，也要有已知 pair interaction 的正例、缺支持／rank 失败例及奖励缩放检查。新 reader 保留旧 B12 的冻结权重、禁止 optimizer step、faithful-load、segment geometry、reward tape 和 RNG 恢复保护，但不继承其旧宿主 reference、四-cap 暴露或“placebo 一过即作废”的未经验证假设。
+
+最后，**最终权重上有条件关联，不等于证明该结构是训练新学到的，也不等于它导致了 P4 的增益。** 本次可把措辞收窄为“有能力的 checkpoint 上存在预指定的非加性预测结构”。若要再证明 acquisition 或 causal coordination，须另列 c00／受控 label 干预等对照及成本；本评审不自动购买这些新增读数。P3 的重写和计算报价必须在 fit 前完成；没有有效 P3，就没有基于 P3 的 cell 2 购买。
+
+#### 6. 成本：上限可以保留，但目前不是同一种“小时”，也不是完整报价
+
+40 工程小时作为硬停止上限是合理的；现列工程项目合计 24–38 h，含 engineering review，余量很小。上面的 models 迁移、terminal／cache 验收与统计重写都在真实工作量内，不能因为分给 implementer 就不计工程成本。原 4–6 h 的 reader-extension 项不应被当成已经验证的报价。[D：Cost；AC、AM、B12]
+
+**计时探针不是 zero fits。** 声明一面写 cell 0 zero fits，一面明确说 probe 是 short training run。应改成“零正式科学 fits 的 gate／合同检查，随后两臂各一次已记录的技术训练探针”。明确 20k 是每臂还是合计；我的工程建议是每臂 3 个完整 8k rollout，即 24k、合计 48k，以免为精确 20k 新造半个 rollout 的更新路径。它们不是六个正式 fit 的独立结果，也不用于选配方，但确实消耗训练步和 CPU，不能记成零。gate／fallback 与合同冻结先于 probe，probe 之后只使用事先允许的 timing／RSS 信息作资源准入，不用 learner 分数改研究参数。该建议的额外步数仍须落在已有 probe／工程上限内，不是新增无限技术尝试额度。[D：Cells、Stop rules；AR：完整 rollout 更新]
+
+**process wall-hours 与 `getrusage` CPU-hours 不同。** ACG runner 同时记录墙钟和 user＋system CPU，且设 `torch_threads=4`。一个运行一小时的多线程进程可能消耗多于一 CPU 小时。因而 7–11 累计进程墙钟小时不能直接证明能落在“20 个 getrusage CPU 小时”内；并发只能改变总历时，不能把累计 CPU 自动除以并发数。probe 必须测两臂各自的 wall／CPU 比、收集／更新／评估时间和峰值内存，再按同一单位做六 fit 的准入预算。[AR：1–25、run_fit、resources]
+
+当前 b01 的最低 cell-1 暴露量应按新面板重算，而不是沿用前轮的旧面板报价：
+
+| 项目 | 团队环境步／求值量 |
+|---|---:|
+| 六个正式 fit | 2,160,000 团队训练步 |
+| 每 fit 四个 dev 加最终 hold-out 两模式 | 576,000 评估步 |
+| 三个 H 的单-cap B12 收集 | 384,000 评估／收集步 |
+| 上述小计 | **3,120,000 步**，还没有 permutation／bootstrap 回归成本 |
+| 技术 probe | 单独列明；按本建议为 48,000 训练步，不混成 0 |
+
+门槛的“3 configurations×64 worlds”也不是 placement-search 求值账。单个 arena 的 dev 搜索是 `2×32×3000=192,000` 次静态求值；两个 arena 的 dev 最多 384,000，加所选 arena 的 hold-out reference 搜索 192,000，可达 576,000 次。另计完整轨迹的 planner／stationary／random panels、k-means、缓存重算、prefix reader、checkpoint 读写及失败成本。纯 evaluator 足够快时这些仍可能是分钟级，但目前没有本实现的实测，不能把“分钟”当作已闭合报价。
+
+20 CPU 小时若保留为 cell-1 总 cap，就应涵盖六 fit、所有规定面板、独立启动的 B12 收集和 1,000 次统计重拟合；不能只对训练进程调用 getrusage，遗漏独立 reader／worker。声明中的“单 fit 超过 2×投影停止”“一个 fit 失败后剩余 seeds 完成”与总 cap 需明确优先级：**总 cap 优先；预算不足就保留未完成／不可作三种子结论，不能为凑齐三个而超支，也不能悄悄减读数。** ACG checkpoint 明确不是 optimizer 恢复合同，故恢复／重启不能假装免费。[AR：save_checkpoint、resources；D：Stop rules]
+
+**并发建议从两个进程开始，不预先承诺三个。** 按声明的 2.75 GiB／fit 和约 9 GB 余量作规划，三个已约 8.25 GiB≈8.86 GB，几乎没有系统、评估副本和峰值波动余量；这不是本次对节点可用内存的新测量。AR evaluation 会在 learner 仍存活时构造另一个 agent，必须测这个重叠峰值及 PPO 更新峰值。只有实际节点准入和安全余量支持时才升到三个，同时核对 CPU 线程、BLAS、其他工作和 scratch。历史 B07 kill 只能提醒风险，不能给出新配置必然安全的概率。[D：Cost；AR：evaluate_panel]
+
+#### 7. D1′：已是独立问题，但普通修正合同与总边际成本还不够完整
+
+**是，现有 D1′ 比前轮已经明显进步。** 它的决策对象是“计划修正采用 learned 还是 ordinary”，主要比较 learned correction 对同锚点的普通 correction，次要比较 anchor；D2 决定的是现有 learner package 能否形成有用仪器。接受近似可加但有用的 learned gain，且不要求 `joint > sum of independent offsets` 才采用，也正确。共享宿主不是自动重复问题；共享同一失败点则必须继续承认。[N：D1′ candidate]
+
+但在宣布三 fit 前至少补齐以下合同。
+
+**普通 correction 的相同可行域必须是真的相同。** 明确每个十步 offset 是相对原 assigned anchor 还是累积到上次 target；300 m 是 XY 圆盘，不应让 ordinary 改高度、learner 却只能改 XY，或一方累积漂移而另一方每次被限制在原锚点附近。两者同一信息、target assignment、边界裁剪、executor 与动作范数；ordinary 保留零修正 incumbent，使用有实际竞争力的多方向／较细步长，而不是故意只做一个很粗的 sweep。300 evaluations 应定义为哪些原始模型调用；“一次 sweep”不足以复现实验。
+
+同样要承认目标差异：learner 优化完整部署回报，而只看最终静态 reward 的普通 sweep 未必是最强的短程部署修正。至少明确它是“300-evaluation static local correction”这一有界对照，或在相同原始求值预算内加入考虑行程时间的候选评价；不能以一个静态、可能已经被 anchor 局部最优化的 sweep，直接代表所有普通在线修正。D2 gate 有 relay gap 也不保证 D1′ 还有值得购买的 correction headroom。cell 0 的搜索轨迹和闭环参照可帮助判断是否还有独立、可改变选择的问题，而不是因为第二槽空着就必须训练。
+
+**身份检查及宏时间合同。** assigned target 要在动作发生前缓存，并对 actor／critic 可用；重放不能重新运行一个改变内部状态的 planner 来补 target。确定性零均值 offset 必须在完整执行链逐动作等于 anchor，包括 target assignment、裁剪、停靠和终止；随机 c00 不会因均值为零就自动等于 anchor。360k 应继续指原生团队步，等于每 fit 36k 个十步宏决策；16 lanes／500 步的 rollout 只有 800 个团队宏决策，不能继承按 8,000 原生步生成的宏 minibatch。若保持原逐步折扣目标，宏奖励应为 `Σ_{j=0}^9 γ^j r_{t+j}`、边界折扣 γ^10，并明确 GAE 时间单位。[N：D1′ 与前轮 Pro 的宏时间分析；AR]
+
+**结果行还需补洞。** learned≈ordinary 不能由“不显著”直接定义；需预先固定实用区间及未分辨分支。learned>ordinary 但二者都低于 anchor，不能保留 learned 当作规划改善。最好让 ordinary 的合格基线包含 anchor／零修正保护，并同时报告 learned−ordinary 与 learned−anchor。保留“加性 gain 也值得采用”，但继续使用主要覆盖检查、全部三 seed、固定配对／终点，不把 2/3 写成总体优越性证明；未来第二宿主仍是新投资，不自动获准。
+
+**边际报价漏了反复求 anchor 的成本。** `64×50×300=960,000` 是一套普通修正面板的静态求值数；多个模式／dev checkpoint 是否重用，必须说明。如果每个新训练世界都用 3,000 次搜索生成 P_relay anchor，那么三 fit 的 `3×360k/500=2160` 个训练 episode 还需要 **6.48 million 次 anchor 求值**，不包含在 D2 的 64 个 reference 世界里。若有缓存，列明缓存命中所对应的确切世界；不能把训练世界重复使用悄悄当作免费缓存。在线 300-evaluation correction 是否也在学习训练循环中运行，要单列，不能把每次十步的成本都隐藏在“调用 anchor”里。宏策略的实际训练调用／更新次数不同于 SET 原生逐步 actor，所以 3–5 process-hours 仍只是待测投影。12–20 工程小时之外的 review 2–4 h、全部面板、接口验收、CPU／wall／内存和失败成本，也需闭合。[N：D1′；本答复工作量重算]
+
+**应等待 D2 的 cell 0 gate 与实际普通部署读数，但不必等待 D2 六个 learner fit 成功。** 等的是它依赖的宿主合同、ordinary capability 和计算报价，不是借用一个未来 HMASD positive。若 gate 失败，不能自动改名迁移继续买 D1′；若通过且上面合同闭合，再形成自己的声明及适用的独立科学评审。当前仍标 RECORDED／未宣告／未购买，这个状态是正确的。
+
+#### 8. MATERIAL_DISSENT 与能一次解决它的修改
+
+**MATERIAL_DISSENT：yes。** 异议不是反对常数 D、不是要求做成真实通信模拟器、不是再次否决 D2 的能力／仪器类型，也不是默认重开 D1。它针对“现稿已经足以直接启动声明中的技术训练和正式六 fit，并据 P3 决定 SCC 投资”的说法。
+
+解决方式是一份由 DM 记录的收口修订，不是另一轮同题选题循环：
+
+1. **宿主／执行语义固定。** D 改称 30 dB 参考尺度；准确写出原生 hop、速度、B 和 fallback 用户分布；接受并报告容量—覆盖取舍。完成 fresh-routing／cache／reward-unit 定向测试及 AC／AM／AR 的 direction-owned 适配验收，随后才做训练 probe。
+2. **机会与终点统一。** 保留 3,000 主预算和 reward gate .05，固定一个有意义的闭环 dev 覆盖机会下限；P2 改用同一 hold-out closed-loop gap，P4 同报并检查主要覆盖量；结果行按技术／机会／能力／package／机制分层，cell 2 要求同一组至少两个配对实例满足联合条件。
+3. **P3 成为可执行统计规格。** 固定 commitment 数据、独立对比基／rank 规则、状态／角色时点、单一增量统计量、保留加性 null 的 cluster 校准、placebo 的真实含义和 synthetic 验收；删去“不支持交互即证明 additive”“非加性即因果 who-relays／优于 SET”的等号。若做不到有效读数，就不能用这一项购买 cell 2。
+4. **资源账与停止优先级闭合。** 技术训练不记零；分开累计 wall 与 CPU，把所有正式面板、reader 和统计计算计入 20 CPU 小时 cap，完成六 fit 的准入投影；默认两个并发，第三个以真实重叠峰值与节点余量决定；总 cap 优先于补齐种子。
+
+这些修改保留了 D2 的研究选择与主要预算，不要求先运行新的调参批次。T1–T2 的无训练工程可按用户已述范围继续，但执行 gate 要用修订后固定合同；probe／cell 1 不应越过尚未解决的物质条件。D1′ 的独立声明缺口不应反过来无限拖住已闭合的 D2，也不能借 D2 的已接受状态被默认为购买。
+
+**本轮没有新增必须交 owner 的 [DECIDE] 项。** [DECIDE-2]已经接受；[DECIDE-1]没有被行使。参数／统计规格／adapter／资源计量的闭合属于 DM 的科学与工程责任。只有另行重访 D1、改变 owner 的既有暂停／资源约束，或按声明真正改变 K/N programme 时，才提交对应的新 owner 选择。通过上述修改后，应进入既定的实现验收与有界观察，而不是再以“还需要一轮意见”替代结果。
+
+#### 写回检查发现的并发追加记录：与固定快照分开处理
+
+准备写入时重新读取 main，发现目标文件已追加“T1 + T2 implementation received”，当前 blob 为 `66cc1866ded6cc5f28c4209b94b0a805e3e8f43e`；Answer 仍为空，没有重叠编辑。该追加全文在写回时保留。**本答复的主体仍是固定提交的声明评审；没有据此冒称已读完这批新增实现代码、复跑了其 53 项测试或独立复测 smoke。** 仅依据追加记录的文字，补充以下执行边界。
+
+其 range-aware relay chains、top-3 multi-start 和 plateau tie-break 方案，与本答复第 2 节所要求的可行起点／搜索充分性方向相容；3,000 必须仍是两臂各自跨全部起点的总预算，而不是每个起点 3,000。smoke 与候选分数不能替代完整 gate。记录已经披露 dev 1000–1002 的候选分数被查看，因此后续搜索器修订不能再称从未看过任何 dev 结果的全盲设计。继续保留开发披露，固定修订后的完整面板与规则，不换掉这三个世界，也不将“预先声明”回填到这次调试之前。不能借这些候选分数改写旧 P1 预期。
+
+**追加记录将 P_flat 的主要闭环执行明确设为 A2A on。这个比较可以成立，但不能继续与真正禁 A2A 的 P_flat 共用一个无后缀名称。** 应区分 `P_flat^off`（禁 A2A 规划且禁 A2A 执行）、`P_flat^on`（禁 A2A 所得布局，在完整宿主执行，允许偶然中继）和 `P_relay^on`。我建议能力 P2 与其闭环覆盖机会条件使用同宿主的 `P_relay^on−P_flat^on`，这是更强的普通部署参照；第 4 节公式中的闭环 P_flat 明确取 on。静态物理耦合 gate 仍使用真正 off 的对照，闭环 off 读数另列并保留。前一个差距是普通布局／部署差，不能冒称禁用物理 A2A 的效果；若 on 对照消除了覆盖差距，P2 的“关闭 gap”问题就不再成立，不能拿 off 的较大 gap 顶替。
+
+追加记录报告 host step 约 1.84 ms、约 11 min／360k 环境步，不是固定声明的旧 .75 ms／4.5 min 估计。它尚未由本评审独立复测，但已足以要求用两臂 probe 重报成本；也不能把完整 host-step 时间不加区分地当成 S1 learner 时间之外的增量。其“最差用户距 500 m 时 S/D≈.06”是**单架活跃服务 UAV 的贡献**：本答复算得 `.36409/6≈.06068`，四五架这样的 UAV 总贡献约 `.2427–.3034`。不能把单架贡献误读为全队必然只有 .06，进而据此放大吞吐权重。
+
+#### 固定来源定位
+
+除上节显式标明的写回并发记录外，以下均指 `CartmanFatass/My-paper-code` 的 `cf62cef7b45ace34419bc475837f185cbf5a8592`；代码数字为该版本文件行号，文档以原 heading／章节定位。
+
+- **D**：`docs/research/candidates/coupled_host_joint_skills_stage1/NOTES.md`，b01 declaration、Predictions、Outcome rows、Cost、Stop rules、Pro question。
+- **R3-B／R3-M／R3-R**：`docs/research/candidates/energy_relay_benchmark/successor_selection_20260929/` 下 `BRIEF_ROUND3_TWO_DIRECTIONS.md`、`MEMO_ROUND3_TWO_DIRECTIONS.md`、`REVIEW_ROUND3_TWO_DIRECTIONS.md`。
+- **N**：`docs/research/candidates/energy_relay_benchmark/NOTES.md`，`Pro question 2026-09-29 round3-two-directions` 的 Answer、06:11 UTC DM disposition、06:26 UTC owner “2”、紧随其后的 D1′ candidate entry。
+- **C**：`docs/project/OPERATING_CONSTITUTION.md` §8，五项 scientific minimums。
+- **E2／E0／EA**：`envs/pettingzoo/scenario2.py`；`envs/pettingzoo/uav_env.py`；`envs/pettingzoo/env_adapter.py`。
+- **AC／AA／AR／AM**：`experiments/candidates/agent_count_generalization/` 下 `configuration.py`、`adapter.py`、`runner.py`、`models.py`。
+- **HA**：`hmasd/agent.py:478–510`。
+- **B12**：`scripts/run_fsd_commitment_visibility_b12.py`，尤其 `commitment_cap`、`commitment_frame`、`design_matrix`／`fit_centred`／`label_regression`、`permutation_calibration`、`response_block`、`check_cap_geometry`、`_run`／`cap_reading`。旧脚本的科学用途与断言不能未经验证移植为新宿主结论。
+
 
 ### Send record (2026-09-29): Pro question `b01-declaration-review` sent
 Question key `hmasd:0740cd163091672591ac4de9c339d0f76c04990d1e9e44f61a8d808da79bd5ca` (source sha cf62cef7b, question heading above); attachment `hmasd-pro-question-b01-declaration-review.md` (4,000 bytes); Jev transport, ChatGPT 6 Pro (effort pill verified), new conversation (address stays in the local operation file); dry run reached the send button with effort, text and attachment verified, then sent at 2026-09-28T23:33:34-0700 (`send_effect: sent`, attachment seen). Passive observation by the transport's `wait`; the answer is recorded verbatim under `### Answer` when it arrives. Cell 0 waits for this review; bounded implementer tasks T1–T2 (host subclass, placement planner) proceed in parallel as zero-fit engineering whose contract the review may still adjust. Nothing running on any node; 0 fits.
