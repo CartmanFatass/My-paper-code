@@ -393,3 +393,278 @@ from217,088 bytes to zero for each exact container, reclaiming434,176 bytes in
 total across the two hosts. Both targets are verified absent. No required source,
 raw scientific evidence, canonical control, other direction file or process was
 removed; published source objects remain in Git.
+
+At the first1500s checkpoint the same runner remains healthy:118 complete episodes
+of fit1 at about27.8min elapsed, one native thread,461,532KiB RSS and92.6% process
+CPU. This is an initial workload-specific rate, not a completion-time promise or
+permission to change exposure. The observer's App wake returned exit1 with the
+known unloaded-child queue rejection (`-32600`); process observation itself was
+successful and consistent. The still-active DM turn drained checkpoint
+`ebe3f0c9d7397378618fb27c` and rearmed the same operation from generation1 to2.
+No worker was restarted or duplicated. Later unchanged checkpoints remain in the
+same deterministic observer's state and are consolidated at readback.
+
+The17:16Z checkpoint retains the same accepted worker. Fit2026092911 completed
+all512 episodes /256000 native steps /512 optimizer updates in6398.206s wall
+and6224.749s CPU (1.73 CPU-h); source construction used59.021s wall. Fit2 had143
+completed episodes when inspected. Evaluation had not started. These are
+collection and cost facts only, not an outcome-based intervention or result
+verdict. Generations2 through5 each observed a consistent live operation, met
+the same queue-delivery rejection, and were consumed/rearmed; generation6 is
+active. The frozen exposure and worker are unchanged.
+
+<a id="b01-complete-native-reading"></a>
+### B01 complete native reading, 2026-09-29
+
+The same accepted worker exited0 at20:50:40Z. Observer generations1 through13
+delivered consistent live checkpoints; generation14 observed a valid terminal
+witness and absent runner/supervisor. Every App queue delivery encountered the
+documented `-32600` child limitation; the active DM drained and rearmed the same
+handle, never a replacement worker. Terminal event `0f67513c6d29d4a75ea04703`
+was consumed into generation15, then observation was stopped with work unchanged.
+See the [OS exit witness](../../../../runs/uav_availability_recovery/b01_joint_reserve_a01/process-exit.json),
+[summary](../../../../runs/uav_availability_recovery/b01_joint_reserve_a01/summary.json),
+[per-world reading](../../../../runs/uav_availability_recovery/b01_joint_reserve_a01/perworld.json)
+and [curves](../../../../runs/uav_availability_recovery/b01_joint_reserve_a01/curves.json).
+
+The published `read_saved.py` completed over all1932 manifest-listed files,
+41,049,062 bytes, with maximum native/accounting reconstruction error3.55e-15.
+It verified1536 training and384 evaluation episodes,960000 native steps,
+1536 optimizer updates, disjoint training/evaluation world addresses,320 exact
+pre-event comparisons, source identity, macro interval sums, native gamma.99 and
+the planned availability/decision clocks. All three checkpoint optimizer counts
+are512, with parameter displacement norms5.082366 /5.293719 /4.904813. This is
+verified complete collection, not technical missingness or an inactive optimizer.
+The [reader result](../../../../runs/uav_availability_recovery/b01_joint_reserve_a01/reading.json)
+does not itself decide scientific usefulness.
+
+The complete primary native means are:
+
+| Final arm | Native J | Mean QoS | J minus P | QoS minus P | J minus S | G0 event catastrophe worlds |
+|---|---:|---:|---:|---:|---:|---:|
+| L, seed2026092911 | 484.704855 | .981389710 | -8.967013 | -.017934025 | -8.888627 | 41/64 |
+| L, seed2026092912 | 484.704855 | .981389710 | -8.967013 | -.017934025 | -8.888627 | 41/64 |
+| L, seed2026092913 | 494.010000 | 1.000000000 | +.338132 | +.000676265 | +.416518 | 0/64 |
+| P | 493.671868 | .999323735 | 0 | 0 | +.078385 | 14/64 |
+| S | 493.593482 | .999166964 | -.078385 | -.000156771 | 0 | 16/64 |
+| Shared no-event S reference | 494.010000 | 1.000000000 | reference only | reference only | reference only | 0/64 |
+
+Across the three independent training units, mean L-P is -5.865298 J /
+-.011730595 QoS; descriptive df2 intervals are [-19.210900,+7.480305] and
+[-.038421801,+.014960610]. Mean L-S is -5.786912 J /-.011573824 QoS with
+similarly unresolved df2 uncertainty. Two fits are worse than both ordinary
+arms in every evaluation world. Their worst L-P loss is world2026093011:
+-18.668012 J /-.037336025 QoS. The positive third fit improves24 worlds and
+ties40 against P; it improves27 and ties37 against S, with no adverse world.
+Its conditional-world L-P J interval is [.213288,.462977], not an interval over
+independent training. These mixed fits neither establish equivalence nor a
+population-wide inferiority theorem. They do not support adopting this learned
+recipe or retrospectively selecting its best seed as a confirmed recipe.
+
+P improves S in exactly3 worlds (2026093042/3052/3064), with J differences
+1.75 /2.60 /.666667, and ties the other61. Its mean J difference+.078385 has
+conditional t63 interval[-.020504,+.177275]; QoS difference+.000156771 has
+interval[-.000041008,+.000354549]. Preserve that limited ordinary benefit and
+two fewer registered event catastrophes, without calling P/S equivalent or a
+stable material ranking. Deployment computation is not included in native J.
+
+#### What the controllers actually did
+
+Each L/P endpoint made2007 event/t10 decisions over the64 worlds. Seeds11 and12
+selected category5, `(vacancy,vacancy)`, at every decision; their positions,
+native metrics, user rates, targets, requested actions and executed velocities
+are exactly equal in all64 worlds despite distinct fitted parameters. Seed13
+selected category3, `(own_stage,hold_current)`, at every decision. This is a
+constant deployed command, not observed state-responsive joint recovery.
+
+For seed13, all64 complete position and executed-velocity trajectories are
+exactly equal to the no-event S reference, and all native metric arrays are
+exactly equal too. After the observed leave, total reserve path length is0 in
+every world. The event is real: active masks differ from no-event in5703
+member-step entries; delivered user rates differ (up to9Mbps), but remain enough
+for native QoS1 and weakest-hotspot service1 at every step. Targets/requested
+actions can differ below3e-7m /1e-8 due hold capture and the native near-zero
+motion threshold, so command-byte equality is not asserted. This is a native
+stationary-service witness under the selected law, not a radio-off simulation,
+an absent event, or an added no-dispatch evaluation arm. Its realized constant
+action sequence is implementable without learned state conditioning on these
+observed worlds; generalization outside them is not established.
+
+The planner's recorded scores illuminate its limitation. Category3(stage,hold)
+and category15(both hold) tie the maximum at all2007 decisions. The selected
+score is always1; all16 candidates tie at1554 decisions. S's incumbent is among
+the maxima at1973 decisions, and P differs from it only34 times. Incumbent-first
+tie-breaking selects greater nominal travel than the minimum tied candidate
+at1745 decisions, including60 of64 first-leave decisions. These are actual
+recorded public forecasts, not extra native rescores. They weaken the premise
+that this expensive ordinary comparison excludes a simple non-dispatch account
+of the positive learned endpoint. They do not establish the performance of a
+new travel-first planner, which was not run.
+
+P's7196 selected endpoint comparisons have mean prediction-minus-realized error
+.000870459 and RMSE.00625270. These use the declared boundary/completed-step
+clock difference and include subsequent replanning, so they are not exact-suffix
+calibration estimates. Small mean forecast error does not erase the tie-rule
+failure or establish decision value.
+
+#### Complete service and tails
+
+Pre-event native QoS and weakest-hotspot service equal1 for every arm. Mean QoS
+in absence /rejoin60 /post windows is:
+
+| Arm | Absence | Rejoin60 | Post |
+|---|---:|---:|---:|
+| L11 and L12 | .992199440 | .959201821 | .959162884 |
+| L13 | 1 | 1 | 1 |
+| P | .996689799 | .999238281 | 1 |
+| S | .995953322 | .999118924 | 1 |
+
+For L11/L12, weakest-hotspot service in those windows averages .860783 /
+.463255 /.462500; the complete mean is .748878, and the maximum complete
+below.6 streak is292 steps (event-window maximum127). P and S have complete
+weakest-service means .991869 and .989988, maximum below.6 streaks34 and39.
+The G0 event catastrophe is the registered below.6 streak lasting at least10,
+not a physical safety certificate. J_event means are .726213 for L11/L12,
+1 for L13, .975698 for P and .970025 for S. No-event J_event1 /deficit0 retain
+their inherited normalization and are not the proof of stationary service;
+the actual per-step native arrays provide that proof on this panel.
+
+Native backhaul-guard blocked-action means per episode are456.1875 for L11/L12,
+0 for L13,11.359375 for P and12.75 for S. Reserve motion-modified row totals
+are27517 for each bad L endpoint,103 for L13/no-event,1224 for P and1277 for S;
+motion modifications are not interchangeable with guard blocks. The bad L
+endpoints still travel5091.459m after leave on average, versus4398.429m for P,
+4584.117m for S and0 for L13. Thus action application and harmful native motion
+occurred; neither blanket nonactivation nor complete guard suppression explains
+away the adverse result. The data do not isolate interference, routing,
+association or guard mediation as the unique cause.
+
+The retained native graph-potential delta sum happens to be exactly -5.99 in
+every evaluated episode, so J differences on this panel equal500 times mean-QoS
+differences. This is an observed panel property, not a changed native reward or
+a general J=QoS identity. Return penalties, cutoff and depletion are zero under
+the selected battery-off host, not evidence for battery-risk robustness.
+
+Training sampled the full action library and all fitted parameters moved. The
+final policies retain substantial categorical entropy (evaluation means2.436 /
+2.644 /2.343 nats); deterministic decoding nevertheless selects one category per
+fit everywhere. The first/last64 training-episode mean J is492.734/491.606,
+493.397/492.585 and492.802/493.666 respectively. Those are different training
+worlds, not matched initial/final evaluation. The curves support finite-fit
+unreliability, not a diagnosis that more training, rescaling or another head
+would necessarily repair it.
+
+Actual runner cost is20586.016s wall (5.718h),20408.955 CPU-s (5.669h), with
+peak RSS468100KiB for the single scientific worker. Three fitting CPU costs are
+6224.749 /4771.545 /5041.922s. P used121856 native radio/service snapshots,
+below270336's declared upper bound; its64 episode evaluations used1370.725 CPU-s
+versus591.683 for S, with773.882s planner wall time included. Source initialization
+retains the full1600 constructions and129024000 assignment-candidate count.
+Engineering/review and saved-reader CPU/wall were not separately metered and are
+not imputed as zero. There were no failures, missing cells, extra fits, diagnostic
+native worlds or retries in B01.
+
+A separate-context registered Scientific Reviewer is independently reconstructing
+the completed evidence. DM's provisional judgment is to retain the stationary
+capability and adverse seed-specific behavior, reject learned-recipe adoption,
+and stop additional investment in this exact native recipe. The full review and
+resolved next-action choice follow below; no successor is being launched.
+
+### Independent scientific reading and resolved investment
+
+Registered Reviewer `/root/dm_availability_recovery/b01_scientific_reading`
+received the actual question, fixed inputs, original positive/adverse sources
+and completed outputs in a fresh context (`fork_turns=none`), without this DM's
+interpretation. It reconstructed the decisive results before reading the old
+selection advice. Its complete returned answer is retained here:
+
+> Recommend **retaining the conditional positive and simple non-dispatch behavior, stopping further B01 learning or planner refinement, and keeping the broader recovery question in reserve**. The complete result weakens the premise that this G0 task needs adaptive reserve deployment.
+>
+> No DM/Root conversation or proposed result explanation was supplied. I reconstructed the endpoints and decisive behaviors before reading the archived Oracle/reviewer recommendations. General memory guidance was injected; the targeted memory search found no relevant entry.
+>
+> I independently checked the frozen source `b60b71e00d3b3b1c420cbff3b3bf03a805f4c14a`, launch/exit/configuration, all **384 evaluation NPZ files**, their hashes, source geometry/map bindings, native service reconstruction, actual availability masks, and consequential contrasts. I also checked all training episode records and curves, six sampled training trajectories, and all six initialization/final checkpoints. Each fit has512 optimizer updates and distinct parameter movement; training worlds are disjoint and exclude evaluation worlds. The DM's broader1,932-file verification remains its complete reading.
+>
+> The observed complete endpoints are:
+>
+> | Controller | Native J | Mean QoS | Weakest-hotspot service | Event catastrophes |
+> |---|---:|---:|---:|---:|
+> | S | 493.593482 | .999166964 | .9899875 | 16/64 |
+> | P | 493.671868 | .999323735 | .9918688 | 14/64 |
+> | L seed2026092911 | 484.704855 | .981389710 | .7488781 | 41/64 |
+> | L seed2026092912 | 484.704855 | .981389710 | .7488781 | 41/64 |
+> | L seed2026092913 | 494.010000 | 1.000000000 | 1.0000000 | 0/64 |
+>
+> Fits11 and12 lose to P and S in **every world**. Each L-P mean is -8.967013 J and -.017934025 QoS. Fit13 genuinely exceeds P on24 worlds, ties on40, and never loses; its means are +.338132 J and +.000676265 QoS. It also exceeds S on27 worlds. Preserve that positive rather than describing all learning as ineffective.
+>
+> Across the three training units, however, mean L-P is -5.865298 J and -.011730595 QoS. The descriptive t2 J interval is [-19.210900,+7.480305]. This neither establishes a stable learning advantage nor equivalence. The64 common worlds are conditional evaluations, not additional training replications.
+>
+> The decisive diagnosis comes from actual choices:
+>
+> - Fits11/12 issue **category5, both reserves toward the vacancy**, at all2,007 evaluated decisions each. Their native metric trajectories coincide. These are active adverse interventions: mean reserve travel is5,112.72m and guard blocks456.19, versus P's4,419.69m and11.36. Loss persists after recovery: post-window QoS is .95916 and weakest service .4625, while P/S recover to1. Guard suppression alone does not identify the causal mechanism.
+> - Fit13 issues **category3, own-stage/hold-current**, at all2,007 decisions. It makes zero reserve movement after onset. Every world's positions and native metric arrays equal the no-event S trajectory, despite the genuine unavailable member having zero association and motion during its absence. Actual service arrays confirm the positive; it is not inferred from the no-event `J_event=1` normalization.
+> - Training exposed every category hundreds or thousands of times per fit, with approximately16,000 macro decisions each. Sparse category exposure is therefore not the explanation. High sampled entropy alongside constant deterministic outputs is consequential, but it does not identify an optimizer or decoding repair. Without initialization evaluation, parameter movement cannot establish that fit13's endpoint improved over its own initial policy.
+>
+> The strongest simpler explanation is **sufficient service without dispatch, combined with harmful discretionary movement**. The positive endpoint realizes a constant ordinary command on the entire evaluated panel. It supports a useful capability and a simpler future comparator; it does not demonstrate a need for state-dependent learned recovery.
+>
+> P's saved predictions reinforce this interpretation. Category3 and both-hold tie for its best score at **all2,007 decisions**. All16 scores tie at1,554 decisions; its incumbent-first rule chooses S's command1,973 times. Only34 choices depart from that incumbent, across four worlds, and complete P-S gains occur in just three. P-S is +.078385 J, with descriptive interval[-.020504,+.177275]. Thus ordinary forecasting has specific useful cases, but these data do not warrant default replacement of S or additional planner investment. A small forecast error also cannot validate its ranking or transient service predictions.
+>
+> Native reward accounting remains intact. On this particular panel every graph-potential sum is -5.99, so the observed J differences equal cumulative QoS differences. That is an empirical property of these trajectories, not a general policy-independent PBRS identity.
+>
+> The prior constructive prediction concerned useful joint placement and return. B01 instead shows that retained placement already satisfies the native service objective across all sampled events, while repeated joint dispatch can worsen both recovery and the remaining horizon. The original exploratory purchase was reasonable under its stated uncertainty; its result now changes the investment case. The S4 timing result and both N7 learning pairs remain relevant contrary evidence, not pooled replications or proof of a common failure cause. I checked their original summary/episode outputs; I did not reopen their full native trajectories.
+>
+> Retain the checkpoints, native positive/adverse evidence, simple stage/hold behavior, and P's specific improvements. Update the directly affected shared understanding: **observed member unavailability does not itself establish consequential service-recovery demand; executed response can be the source of loss**. Private memory, map value, broader churn and decentralized learning remain untested. The unavailable position's interference remains part of this host and does not cancel across moving controllers.
+>
+> Actual scientific cost was **960,000 native steps, three fits,121,856 planner snapshots,5.718 worker wall-hours and5.669 CPU-hours**. Fits consumed4.504 wall-hours; the remaining worker work consumed1.214 hours. P's planner alone used773.88 seconds. Peak worker RSS was468,100KiB. Engineering, remote-query failures, publication and review are additional and incompletely measured; deployment telemetry/acquisition cost remains unmeasured.
+>
+> The smallest useful complete observation at this boundary was the saved-data reconstruction above, now completed with zero new fits or native evaluations. I recommend no confirmation panel, extra seed, fault strengthening or automatic optimizer repair. Another identical fit could test recurrence, but it would not address the missing need for adaptive deployment demonstrated here.
+>
+> A constructive re-entry remains possible when a concrete deployment contract makes conditional reserve choices worth studying. Its comparison should retain the simple non-dispatch alternative and give ordinary control any added information/resources. If that simple controller remains sufficient, simplify; if ordinary conditional deployment helps, retain that capability; if learned control adds complete benefit beyond both, reconsider learning investment. No such new contract or sufficiently consequential adoption decision is currently supplied, so reserve/idle is justified without declaring availability recovery exhausted.
+>
+> **MATERIAL_DISSENT: no** against completing and publishing B01 and ending this recipe's investment. The direct evidence does object to promoting the single positive fit into a reliable learned-coordination claim or treating further fits as the default next action.
+
+DM accepts the evidence reconstruction and recommendation, including the limit
+on claiming learning progress without initial-policy evaluation. No separate Pro
+round is added: this independent source-level review resolves the current
+interpretation and investment choice without an unresolved expertise gap.
+
+**Resolved choice: retain the useful behavior and evidence, end investment in the
+exact B01 recipe, place the broader question in reserve/idle.** No additional fit,
+confirmation panel, planner repair, stronger event or enlarged action set is
+selected. The observation that changes the explanation is not merely a negative
+average: one evaluated stationary endpoint preserves the complete service ceiling
+under all64 actual events, while the failed learned endpoints and ordinary
+dispatch introduce avoidable losses. P's small improvements remain a real
+conditional ordinary capability, but its incumbent tie rule does not exclude the
+simpler non-dispatch alternative. Keep the positive seed13 endpoint as a
+conditional capability witness, not a post-hoc validated default or proof that
+its optimization improved its own initialization.
+
+The distinctions guiding this stop are:
+
+- **Task opportunity:** the selected native event is real, but adaptive reserve
+  deployment is not shown necessary for service on this panel. Retained placement
+  already meets the registered demand despite endpoint loss.
+- **Representation:** the16-command interface contains a useful stationary
+  response. No representation impossibility, new MARL method, private-memory
+  need or identified map benefit follows from B01.
+- **Finite learning:** three complete fits yield two adverse constant dispatch
+  endpoints and one useful constant non-dispatch endpoint. Full support exposure
+  and parameter movement distinguish this from no training, but do not diagnose
+  a successful optimization repair or broader unlearnability.
+- **Complete-package use:** the learned recipe has not earned adoption over P/S;
+  P's extra computation has not earned default adoption over S. Preserve the
+  stationary witness and all contrary outcomes rather than treating failed
+  adoption as absence of every useful capability.
+
+The cheapest useful next observation was the completed saved-data reconstruction,
+which directly changed the decision without another model run. Identical repeats
+would price recurrence rather than resolve the missing adaptive-deployment need;
+changing ties or optimizing PPO on this ceiling-level host would not by itself
+make the parent question consequential. Broader recovery remains open. Re-entry
+would require a concrete justified deployment contract and a useful choice
+between stationary, competent ordinary conditional, and learned reserve control,
+with any new information/resource granted to the ordinary comparator as well.
+That is a possible future question for Root's allocation, not a demanded positive
+pilot, an owner-approval dependency or a presently selected experiment. Current
+state is idle with no producer. The S4/N7 adverse evidence, inherited radio scope,
+and untouched Claude/paused-direction boundaries remain intact.

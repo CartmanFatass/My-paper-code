@@ -1,0 +1,30 @@
+{
+  "evaluation_episodes": 384,
+  "fit_checks": [
+    {
+      "actual_optimizer_updates": 512,
+      "parameter_change_norm": 5.082365989685059,
+      "seed": 2026092911
+    },
+    {
+      "actual_optimizer_updates": 512,
+      "parameter_change_norm": 5.293719291687012,
+      "seed": 2026092912
+    },
+    {
+      "actual_optimizer_updates": 512,
+      "parameter_change_norm": 4.904813289642334,
+      "seed": 2026092913
+    }
+  ],
+  "identical_pre_event_comparisons": 320,
+  "launch_sha": "b60b71e00d3b3b1c420cbff3b3bf03a805f4c14a",
+  "maximum_numeric_reconstruction_error": 3.552713678800501e-15,
+  "native_steps": 960000,
+  "scope": "saved-byte/native-accounting verification; scientific interpretation remains separate",
+  "service_snapshot_calls": 121856,
+  "state": "verified_complete",
+  "training_episodes": 1536,
+  "verified_bytes": 41049062,
+  "verified_files": 1932
+}
