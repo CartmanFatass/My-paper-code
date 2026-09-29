@@ -1269,3 +1269,6 @@ Return (≤ 20 lines, single-instance wording, no new instrument, role or record
 
 ### Answer
 
+
+### Send record (2026-09-29 18:57 UTC): Pro question `slot-round-boundary` sent as a follow-up in the `round-boundary-synthesis` conversation
+Key `hmasd:25593344dbe3ad42ba435ba09a0c0b120272c7c5f30fbcda63bc17cb36de0581`; source pinned at 6f4c3d5ee (this notebook, heading "Pro question 2026-09-29 slot-round-boundary"); transport Jev headless, effort pill `6 Pro` verified in the dry run and the send; document sha256 a9bd544e…; `send_effect: sent`, attachment seen (provider display name carries a "(1)" collision suffix; accepted by the driver's collision rule). Two refused pre-send attempts preceded it: the dry run had left its uploaded file as a persisted draft card in this conversation's composer, which the driver refuses ("the composer already contains an attachment"); a Chrome restart did not clear it; the DM removed that one card (name verified, exactly one "Remove" button) with a read-then-click through the driver's browser and resent under the same key. Operation directory `temp/directions/coupled_host_joint_skills_stage1/scratch/pro-slot-round-boundary-20260929/`. The conversation address stays in the local operation file.
