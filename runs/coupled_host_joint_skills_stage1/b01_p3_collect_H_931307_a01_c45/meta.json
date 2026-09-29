@@ -1,0 +1,1150 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "kind": "p3_commitment_table",
+  "table": "commitments.npz",
+  "table_sha256": "1b7377912f9e6536b3cbf63634fb5d9f5e84f40a35b42a43a88a52a47fdeeb27",
+  "rows": 12800,
+  "columns": {
+    "world": {
+      "dtype": "int64",
+      "shape": [
+        12800
+      ]
+    },
+    "lane": {
+      "dtype": "int16",
+      "shape": [
+        12800
+      ]
+    },
+    "rollout": {
+      "dtype": "int16",
+      "shape": [
+        12800
+      ]
+    },
+    "episode": {
+      "dtype": "int16",
+      "shape": [
+        12800
+      ]
+    },
+    "t0": {
+      "dtype": "int16",
+      "shape": [
+        12800
+      ]
+    },
+    "state": {
+      "dtype": "float32",
+      "shape": [
+        12800,
+        133
+      ]
+    },
+    "observations": {
+      "dtype": "float32",
+      "shape": [
+        12800,
+        6,
+        90
+      ]
+    },
+    "team_label": {
+      "dtype": "int8",
+      "shape": [
+        12800
+      ]
+    },
+    "agent_labels": {
+      "dtype": "int8",
+      "shape": [
+        12800,
+        6
+      ]
+    },
+    "routed": {
+      "dtype": "bool",
+      "shape": [
+        12800,
+        6
+      ]
+    },
+    "relay": {
+      "dtype": "bool",
+      "shape": [
+        12800,
+        6
+      ]
+    },
+    "serving": {
+      "dtype": "int16",
+      "shape": [
+        12800,
+        6
+      ]
+    },
+    "relay_matrix": {
+      "dtype": "bool",
+      "shape": [
+        12800,
+        6,
+        6
+      ]
+    },
+    "n_routed": {
+      "dtype": "int8",
+      "shape": [
+        12800
+      ]
+    },
+    "c_bh_t0": {
+      "dtype": "float64",
+      "shape": [
+        12800
+      ]
+    },
+    "sd_t0": {
+      "dtype": "float64",
+      "shape": [
+        12800
+      ]
+    },
+    "actions": {
+      "dtype": "float32",
+      "shape": [
+        12800,
+        10,
+        6,
+        3
+      ]
+    },
+    "executed_actions": {
+      "dtype": "float32",
+      "shape": [
+        12800,
+        10,
+        6,
+        3
+      ]
+    },
+    "rewards": {
+      "dtype": "float64",
+      "shape": [
+        12800,
+        10
+      ]
+    },
+    "c_bh": {
+      "dtype": "float64",
+      "shape": [
+        12800,
+        10
+      ]
+    },
+    "sd": {
+      "dtype": "float64",
+      "shape": [
+        12800,
+        10
+      ]
+    },
+    "segment_mean_r": {
+      "dtype": "float64",
+      "shape": [
+        12800
+      ]
+    },
+    "structural_row": {
+      "dtype": "int64",
+      "shape": [
+        200
+      ]
+    },
+    "structural_actor_hidden": {
+      "dtype": "float32",
+      "shape": [
+        200,
+        6,
+        256
+      ]
+    }
+  },
+  "column_notes": {
+    "episode": "training-world-law episode index (spec.rollouts + 1 + rollout)",
+    "relay_matrix": "[i, j] = UAV i is an interior node of UAV j's BS path at t0",
+    "relay": "any(relay_matrix[i, :])",
+    "serving": "users associated with UAV i at t0",
+    "c_bh_t0/sd_t0": "pre-commitment C_bh and S/D of the host state at t0",
+    "actions": "policy output; executed_actions = the host's unit-ball clip of it",
+    "rewards": "contract team r of steps t0..t0+9 (time-aligned); segment_mean_r = their mean",
+    "structural_row": "rows whose pre-commitment actor hidden is stored for the structural check"
+  },
+  "checkpoint": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_fit_H_931307_a01/checkpoint_45.pt",
+  "checkpoint_sha256": "1132a5dca2c8bccbd627071444d84dabfbec972ffae83799253405e08bed4f27",
+  "checkpoint_rollout": 45,
+  "checkpoint_launch_sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+  "fit_seed": 931307,
+  "spec": {
+    "horizon": 500,
+    "train_lanes": 16,
+    "eval_lanes": 16,
+    "rollouts": 45,
+    "panels": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "hidden_size": 256,
+    "n_heads": 8,
+    "n_layers": 2,
+    "ppo_epochs": 15,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "torch_threads": 4,
+    "area_size": 5000,
+    "dev_worlds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014,
+      1015,
+      1016,
+      1017,
+      1018,
+      1019,
+      1020,
+      1021,
+      1022,
+      1023,
+      1024,
+      1025,
+      1026,
+      1027,
+      1028,
+      1029,
+      1030,
+      1031
+    ],
+    "holdout_worlds": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026,
+      2027,
+      2028,
+      2029,
+      2030,
+      2031
+    ],
+    "probe_panel_worlds": [
+      9000,
+      9001,
+      9002,
+      9003,
+      9004,
+      9005,
+      9006,
+      9007,
+      9008,
+      9009,
+      9010,
+      9011,
+      9012,
+      9013,
+      9014,
+      9015,
+      9016,
+      9017,
+      9018,
+      9019,
+      9020,
+      9021,
+      9022,
+      9023,
+      9024,
+      9025,
+      9026,
+      9027,
+      9028,
+      9029,
+      9030,
+      9031
+    ],
+    "probe_rollouts": 3
+  },
+  "smoke": false,
+  "launch_sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+  "world_law": "training_world_seed(seed, lane, spec.rollouts + 1 + r)",
+  "worlds": [
+    [
+      790700,
+      790701,
+      790702,
+      790703,
+      790704,
+      790705,
+      790706,
+      790707,
+      790708,
+      790709,
+      790710,
+      790711,
+      790712,
+      790713,
+      790714,
+      790715
+    ],
+    [
+      800700,
+      800701,
+      800702,
+      800703,
+      800704,
+      800705,
+      800706,
+      800707,
+      800708,
+      800709,
+      800710,
+      800711,
+      800712,
+      800713,
+      800714,
+      800715
+    ],
+    [
+      810700,
+      810701,
+      810702,
+      810703,
+      810704,
+      810705,
+      810706,
+      810707,
+      810708,
+      810709,
+      810710,
+      810711,
+      810712,
+      810713,
+      810714,
+      810715
+    ],
+    [
+      820700,
+      820701,
+      820702,
+      820703,
+      820704,
+      820705,
+      820706,
+      820707,
+      820708,
+      820709,
+      820710,
+      820711,
+      820712,
+      820713,
+      820714,
+      820715
+    ],
+    [
+      830700,
+      830701,
+      830702,
+      830703,
+      830704,
+      830705,
+      830706,
+      830707,
+      830708,
+      830709,
+      830710,
+      830711,
+      830712,
+      830713,
+      830714,
+      830715
+    ],
+    [
+      840700,
+      840701,
+      840702,
+      840703,
+      840704,
+      840705,
+      840706,
+      840707,
+      840708,
+      840709,
+      840710,
+      840711,
+      840712,
+      840713,
+      840714,
+      840715
+    ],
+    [
+      850700,
+      850701,
+      850702,
+      850703,
+      850704,
+      850705,
+      850706,
+      850707,
+      850708,
+      850709,
+      850710,
+      850711,
+      850712,
+      850713,
+      850714,
+      850715
+    ],
+    [
+      860700,
+      860701,
+      860702,
+      860703,
+      860704,
+      860705,
+      860706,
+      860707,
+      860708,
+      860709,
+      860710,
+      860711,
+      860712,
+      860713,
+      860714,
+      860715
+    ],
+    [
+      870700,
+      870701,
+      870702,
+      870703,
+      870704,
+      870705,
+      870706,
+      870707,
+      870708,
+      870709,
+      870710,
+      870711,
+      870712,
+      870713,
+      870714,
+      870715
+    ],
+    [
+      880700,
+      880701,
+      880702,
+      880703,
+      880704,
+      880705,
+      880706,
+      880707,
+      880708,
+      880709,
+      880710,
+      880711,
+      880712,
+      880713,
+      880714,
+      880715
+    ],
+    [
+      890700,
+      890701,
+      890702,
+      890703,
+      890704,
+      890705,
+      890706,
+      890707,
+      890708,
+      890709,
+      890710,
+      890711,
+      890712,
+      890713,
+      890714,
+      890715
+    ],
+    [
+      900700,
+      900701,
+      900702,
+      900703,
+      900704,
+      900705,
+      900706,
+      900707,
+      900708,
+      900709,
+      900710,
+      900711,
+      900712,
+      900713,
+      900714,
+      900715
+    ],
+    [
+      910700,
+      910701,
+      910702,
+      910703,
+      910704,
+      910705,
+      910706,
+      910707,
+      910708,
+      910709,
+      910710,
+      910711,
+      910712,
+      910713,
+      910714,
+      910715
+    ],
+    [
+      920700,
+      920701,
+      920702,
+      920703,
+      920704,
+      920705,
+      920706,
+      920707,
+      920708,
+      920709,
+      920710,
+      920711,
+      920712,
+      920713,
+      920714,
+      920715
+    ],
+    [
+      930700,
+      930701,
+      930702,
+      930703,
+      930704,
+      930705,
+      930706,
+      930707,
+      930708,
+      930709,
+      930710,
+      930711,
+      930712,
+      930713,
+      930714,
+      930715
+    ],
+    [
+      940700,
+      940701,
+      940702,
+      940703,
+      940704,
+      940705,
+      940706,
+      940707,
+      940708,
+      940709,
+      940710,
+      940711,
+      940712,
+      940713,
+      940714,
+      940715
+    ]
+  ],
+  "per_rollout": [
+    {
+      "rollout": 0,
+      "rng_seed": 1399960981,
+      "worlds": [
+        790700,
+        790701,
+        790702,
+        790703,
+        790704,
+        790705,
+        790706,
+        790707,
+        790708,
+        790709,
+        790710,
+        790711,
+        790712,
+        790713,
+        790714,
+        790715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47723,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 32.87536772002932,
+      "cpu_seconds": 112.388438
+    },
+    {
+      "rollout": 1,
+      "rng_seed": 1273903189,
+      "worlds": [
+        800700,
+        800701,
+        800702,
+        800703,
+        800704,
+        800705,
+        800706,
+        800707,
+        800708,
+        800709,
+        800710,
+        800711,
+        800712,
+        800713,
+        800714,
+        800715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47739,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 31.00502876797691,
+      "cpu_seconds": 107.19691700000001
+    },
+    {
+      "rollout": 2,
+      "rng_seed": 1196648634,
+      "worlds": [
+        810700,
+        810701,
+        810702,
+        810703,
+        810704,
+        810705,
+        810706,
+        810707,
+        810708,
+        810709,
+        810710,
+        810711,
+        810712,
+        810713,
+        810714,
+        810715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47713,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 28.593244833988138,
+      "cpu_seconds": 100.971812
+    },
+    {
+      "rollout": 3,
+      "rng_seed": 1853619902,
+      "worlds": [
+        820700,
+        820701,
+        820702,
+        820703,
+        820704,
+        820705,
+        820706,
+        820707,
+        820708,
+        820709,
+        820710,
+        820711,
+        820712,
+        820713,
+        820714,
+        820715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47731,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 28.729178269044496,
+      "cpu_seconds": 99.845214
+    },
+    {
+      "rollout": 4,
+      "rng_seed": 1805282070,
+      "worlds": [
+        830700,
+        830701,
+        830702,
+        830703,
+        830704,
+        830705,
+        830706,
+        830707,
+        830708,
+        830709,
+        830710,
+        830711,
+        830712,
+        830713,
+        830714,
+        830715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47736,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 31.128047914942726,
+      "cpu_seconds": 107.12831899999998
+    },
+    {
+      "rollout": 5,
+      "rng_seed": 1654246858,
+      "worlds": [
+        840700,
+        840701,
+        840702,
+        840703,
+        840704,
+        840705,
+        840706,
+        840707,
+        840708,
+        840709,
+        840710,
+        840711,
+        840712,
+        840713,
+        840714,
+        840715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47723,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 29.08678300504107,
+      "cpu_seconds": 101.13805100000013
+    },
+    {
+      "rollout": 6,
+      "rng_seed": 2020612807,
+      "worlds": [
+        850700,
+        850701,
+        850702,
+        850703,
+        850704,
+        850705,
+        850706,
+        850707,
+        850708,
+        850709,
+        850710,
+        850711,
+        850712,
+        850713,
+        850714,
+        850715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47754,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 31.14140339405276,
+      "cpu_seconds": 108.26505099999997
+    },
+    {
+      "rollout": 7,
+      "rng_seed": 157516991,
+      "worlds": [
+        860700,
+        860701,
+        860702,
+        860703,
+        860704,
+        860705,
+        860706,
+        860707,
+        860708,
+        860709,
+        860710,
+        860711,
+        860712,
+        860713,
+        860714,
+        860715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47711,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 30.646096363081597,
+      "cpu_seconds": 105.92214299999989
+    },
+    {
+      "rollout": 8,
+      "rng_seed": 975434145,
+      "worlds": [
+        870700,
+        870701,
+        870702,
+        870703,
+        870704,
+        870705,
+        870706,
+        870707,
+        870708,
+        870709,
+        870710,
+        870711,
+        870712,
+        870713,
+        870714,
+        870715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47722,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 30.73671845404897,
+      "cpu_seconds": 105.79649800000004
+    },
+    {
+      "rollout": 9,
+      "rng_seed": 1242764595,
+      "worlds": [
+        880700,
+        880701,
+        880702,
+        880703,
+        880704,
+        880705,
+        880706,
+        880707,
+        880708,
+        880709,
+        880710,
+        880711,
+        880712,
+        880713,
+        880714,
+        880715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47736,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 28.995664097950794,
+      "cpu_seconds": 101.443577
+    },
+    {
+      "rollout": 10,
+      "rng_seed": 1133554714,
+      "worlds": [
+        890700,
+        890701,
+        890702,
+        890703,
+        890704,
+        890705,
+        890706,
+        890707,
+        890708,
+        890709,
+        890710,
+        890711,
+        890712,
+        890713,
+        890714,
+        890715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47712,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 30.596485069021583,
+      "cpu_seconds": 105.59498600000029
+    },
+    {
+      "rollout": 11,
+      "rng_seed": 1841016782,
+      "worlds": [
+        900700,
+        900701,
+        900702,
+        900703,
+        900704,
+        900705,
+        900706,
+        900707,
+        900708,
+        900709,
+        900710,
+        900711,
+        900712,
+        900713,
+        900714,
+        900715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47718,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 31.980534530011937,
+      "cpu_seconds": 109.98923799999989
+    },
+    {
+      "rollout": 12,
+      "rng_seed": 485728272,
+      "worlds": [
+        910700,
+        910701,
+        910702,
+        910703,
+        910704,
+        910705,
+        910706,
+        910707,
+        910708,
+        910709,
+        910710,
+        910711,
+        910712,
+        910713,
+        910714,
+        910715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47731,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 30.548880503047258,
+      "cpu_seconds": 103.33751000000007
+    },
+    {
+      "rollout": 13,
+      "rng_seed": 1111525209,
+      "worlds": [
+        920700,
+        920701,
+        920702,
+        920703,
+        920704,
+        920705,
+        920706,
+        920707,
+        920708,
+        920709,
+        920710,
+        920711,
+        920712,
+        920713,
+        920714,
+        920715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47695,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 30.27622982894536,
+      "cpu_seconds": 106.78288799999996
+    },
+    {
+      "rollout": 14,
+      "rng_seed": 378310642,
+      "worlds": [
+        930700,
+        930701,
+        930702,
+        930703,
+        930704,
+        930705,
+        930706,
+        930707,
+        930708,
+        930709,
+        930710,
+        930711,
+        930712,
+        930713,
+        930714,
+        930715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47739,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 28.432098919991404,
+      "cpu_seconds": 100.41603299999997
+    },
+    {
+      "rollout": 15,
+      "rng_seed": 491791126,
+      "worlds": [
+        940700,
+        940701,
+        940702,
+        940703,
+        940704,
+        940705,
+        940706,
+        940707,
+        940708,
+        940709,
+        940710,
+        940711,
+        940712,
+        940713,
+        940714,
+        940715
+      ],
+      "team_steps": 8000,
+      "commitments": 800,
+      "clip_events": 47721,
+      "reset": 16,
+      "team_cap": 784,
+      "wall_seconds": 33.162688669981435,
+      "cpu_seconds": 113.78722799999991
+    }
+  ],
+  "counters": {
+    "team_steps": 128000,
+    "commitments": 12800,
+    "lane_episodes": 256,
+    "commitments_per_lane_episode": 50,
+    "clip_events": 763604
+  },
+  "frozen": {
+    "digest_before": "9035383676f6766538b2cf06f42b248a85cd2b36f2a1b608c279623ee95206dc",
+    "digest_after": "9035383676f6766538b2cf06f42b248a85cd2b36f2a1b608c279623ee95206dc",
+    "optimizer_calls": {
+      "coordinator": 0,
+      "discoverer_actor": 0,
+      "discoverer_critic": 0,
+      "team_discriminator": 0,
+      "individual_discriminator": 0
+    },
+    "optimizer_steps_refused": true,
+    "rng_digest_before": "51b172b5e2c47d964b6b2f3ae435f4b4cd27218b9ce7b7a9a5ef87cc5fbc0e87",
+    "rng_digest_after": "51b172b5e2c47d964b6b2f3ae435f4b4cd27218b9ce7b7a9a5ef87cc5fbc0e87"
+  },
+  "load": {
+    "checkpoint_rollout": 45,
+    "checkpoint_launch_sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+    "fit_config_equal": true,
+    "collection_config_fields_excused_by_lanes": [],
+    "faithful_load": {
+      "tensors_bitwise_equal": true,
+      "normalizers_equal": true,
+      "normalizers_present": [
+        "value_norm_coordinator",
+        "value_norm_discoverer"
+      ]
+    },
+    "route": {
+      "policy_interruption_mode": "d2",
+      "d2_enabled": true,
+      "d2_cost_c": "inf",
+      "d2_cost_c_Z": "inf",
+      "d2_k_max": 10,
+      "d2_k_Z": 10,
+      "d2_age_feature": "off",
+      "use_ha_ctse": false,
+      "use_central_snapshot": false
+    }
+  },
+  "structural_zero_check": {
+    "rows": 200,
+    "row_source": "evenly spaced rows of collection rollout 0",
+    "team_labels_tried": "every other team label (n_Z - 1 per row)",
+    "max_abs_action_difference": {
+      "deterministic": 0.0,
+      "sampled": 0.0
+    },
+    "control_individual_label_change_max_abs_difference": 3.394238233566284,
+    "torch_seed": 20260929,
+    "code_fact": "arm H actor = SkillDiscoverer.forward(observation, agent_skill, hidden_state, compact_context=None, central_input=None) (hmasd/networks.py 1801-1809; hmasd/agent.py _batched_select_action); the team label enters only skill_discoverer.get_value (critic)",
+    "team_label_reaches_actor": false,
+    "passed": true
+  },
+  "timing": {
+    "policy_seconds": 309.5949578122236,
+    "env_seconds": 173.83645362674724,
+    "tracking_seconds": 4.107030154089443,
+    "ms_per_team_step": {
+      "policy": 2.4187106079079967,
+      "env": 1.3580972939589628,
+      "tracking": 0.032086173078823776
+    },
+    "ms_per_team_step_total": 3.8088940749457834
+  },
+  "resources": {
+    "wall_seconds": 490.94623479095753,
+    "cpu_seconds": 1695.4565190000003,
+    "cpu_user_seconds": 1693.683133,
+    "cpu_system_seconds": 3.824659,
+    "peak_rss_kib": 759828,
+    "rss_scope": "RUSAGE_SELF"
+  }
+}

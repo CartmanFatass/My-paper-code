@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "kind": "p3_interaction_reading",
+  "status": "complete",
+  "failure": null,
+  "table": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b01_p3_collect_H_931201_a01_c45/commitments.npz",
+  "launch_sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_joint_skills_stage1",
+    "sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+    "command_sha256": "8d416c8d2ff1ef5a948f1b34e5610a745f3381b94606fa9ed93e7dd60ba9d3a5",
+    "parent_pid": 994471,
+    "child_pid": 994472,
+    "accepted_at_epoch": 1790687938.7395637
+  },
+  "smoke": false,
+  "bootstrap_draws": 1000,
+  "bootstrap_seed_base": 20260929,
+  "table_sha256": "d5f4f26ee07b4ea68eea6cea7091a79a549a89f588bb32e60e1764058d0b45fa",
+  "decision": "unsupported",
+  "decision_products_only": "unsupported",
+  "reading": "interaction_reading.json",
+  "resources": {
+    "wall_seconds": 2.4871979290619493,
+    "command_wall_seconds": 2.7095524120377377,
+    "cpu_seconds": 2.2896769999999997,
+    "peak_rss_kib": 188336
+  }
+}

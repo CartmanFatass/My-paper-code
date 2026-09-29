@@ -601,3 +601,19 @@ Watcher armed. After pair 3: B12 collections on the node (`collect_commitments.p
 Fact recorded without reinterpretation: the observed Δ sits above 99.7 % of the additive-null draws (the null distribution of Δ is centred near −1e−5 because 66 noise columns cost held-out MSE), i.e. the added block predicts slightly better than 66 spurious columns would, yet still worse than R alone; the pre-specified rule requires an outright held-out improvement and reads **unsupported**. On the synthetic additive null, Δ > q95 occurred in 0/40 tables, so this position is unusual under the null; it is one H seed, and no rule is changed by it. The reading is also on an incompetent checkpoint (pair-1 L2(H) −.475), which the disposition anticipated: P3 is conditioned on P2(H) for the roles claim.
 
 **Launches:** collection 2 (`b01_p3_collect_H_931307_a01_c45`, checkpoint sha256 1132a5dc…, accepted 13:18:26 UTC, claim 3709c2366b66…, pids 993989/993990); reading launch entry `launch_b01_read.sh <sha> <collection tag>` (5259ed8c4). Collection 3 and readings 2–3 follow pair 3's H fit. Cost so far: 4 fits 20.4 CPU-h + collection 0.46 + reading ≈ 0; pair 3 running.
+
+## 2026-09-29 13:41 UTC — P3 collection 2 and reading 2 (H 931307, c45): UNSUPPORTED again; two of three H seeds read, P3 can no longer reach "≥ 2 of 3"
+
+**Collection 2** (`b01_p3_collect_H_931307_a01_c45`, accepted 13:18:26 UTC, exit 0 ≈ 13:27 UTC, rsynced): checkpoint sha256 1132a5dc… (matches the fit summary; faithful load), 12,800 commitments (256 lane-episodes × 50), zero optimizer steps; structural zero check 0.0 / 0.0 (control 3.39); **493 s wall, 1,695 CPU s = 0.47 CPU-h**, peak RSS 0.76 GB; clip events 763,604 of 768,000.
+
+**Reading 2** (`b01_p3_read_H_931307_a01_c45`, accepted 13:40:34 UTC, claim 11b265610431…, pids 996202/996203, exit 0; table sha256 1b737791…):
+
+| item | value |
+|---|---|
+| readability | READABLE: 67 of 72 supported (all 15 products; unsupported = `rp_0_0`…`rp_4_4`, 83–118 non-zero rows); rank increment 67/67; placebo readable |
+| primary Δ / q95 / fraction of null below | **−4.54e−6** / −5.39e−6 / .990 → **unsupported** (Δ < 0) |
+| per-fold Δ | −1.0e−5, +5e−6, −7e−6, −9e−6, +5e−6, −5e−6, −4e−6, −1.1e−5 (MSE_R .00095–.00132; residual SD .033) |
+| products-only Δ / q95 / fraction below | −4.39e−7 / −4.33e−7 / .948 → **unsupported** |
+| placebo | Δ −6.6e−7, q95 +1.5e−7, not passed |
+
+Same pattern as reading 1 (Δ < 0 in both, both above q95 of the additive null at .997/.990). With two of three H seeds unsupported, the P3 rule "supported on ≥ 2 of 3 H seeds" cannot be met; the third seed's reading is still produced for the record (its cost is ≈ 0.5 CPU-h + seconds) and the batch reading is written once pair 3 exits. Cumulative cost: 4 fits 20.4 CPU-h + 2 collections 0.93 CPU-h; pair 3 at rollouts 21/29 at 13:40 UTC (slower while the collections shared the node).
