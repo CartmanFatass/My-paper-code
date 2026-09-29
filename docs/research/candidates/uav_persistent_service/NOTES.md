@@ -2467,3 +2467,50 @@ Root's selected-study update is published at`b3f5bdc58`; current main subsequent
 includes the content DM's disjoint`d7903b488`. The owned Active row and routing
 now record B04 exploring while retaining the exact launch-bound Lead runtime.
 There is no new native operation at this prospective publication boundary.
+
+### Implementation and engineering checks
+
+The bounded Implementer returned the new B04 binder, old-evidence reconstructor,
+R-only runner and admitted entry; retained R/controller/episode/native files
+are unchanged. The DM owns the additional read-only complete audit. Source
+binding verifies291 exact Git blobs:287 original dependencies and4 retained R
+files, map`e9aca789906052070e7fea9ceda83b5f8593de17b3ad89a9928fae468ade8d9c`.
+Old51-artifact binding precedes episode construction; each new R is checked
+against both original raw streams before another job can be submitted. An
+incompatibility preserves native completion/steps/raw, suppresses contrasts and
+drains already running workers. Submitted jobs and witnessed constructions are
+counted separately. No caller-selectable old root or control-regeneration path
+exists. Final original-artifact rehash is also required.
+
+Engineering review found one P2 in the new read-only audit: mixed released and
+censored transfer reasons could include a null dictionary key, failing sorted
+JSON serialization. Normalize only aggregate labels to the explicit event end
+kind; retain the original per-transfer null. A pure regression covers released,
+censored and partial cases. The reviewer also correctly noted that original
+`station_xy` is **legal observation-decoded absolute xy**, not a retained native
+float64 station-position array. This corrects the earlier prospective shorthand
+"native station xy". Old eligibility uses native post xyz and these original
+decoded positions, with the declared1e-6 geometric readout tolerance and direct
+native occupancy/queue/power consistency checks. Unique station separation makes
+eligible assignment unambiguous. All16 actual old trajectories pass those
+checks: max eligible3D distance20.000000004071488m at native floor50m, counts
+equal occupancy+queue, and positive input equals charging. The new-R audit uses
+direct native nearest/target membership, requiring decoded agreement only for
+eligible members; noneligible decoded bisector ties are not incompatibility.
+No policy detector, action, allocation or F semantics changes.
+
+Ten synthetic B04 tests pass after the serialization fix; the retained-source
+binder and AST checks pass. All B04 correctness work is0 environment
+construction/reset/transition and0 fits. An initial read-only geometry assertion
+used an incorrect100m floor assumption; checking the actual config corrected it
+to50m before repeating only the array check. It neither modified evidence nor
+ran a trajectory. Engineering review otherwise found no material runner/binding
+issue; final fix verification is requested before exact input publication.
+
+The independent Engineering Reviewer subsequently verified the fixes and all10
+synthetic tests: **no material engineering finding remains**. The reviewer did
+not repeat the remote original-control verification; that read-only evidence is
+the DM's directly checked source. I accept the bounded implementation and
+review. Exact inputs are published next, followed by a fresh actual-node
+admission for this single fixed panel; neither test success nor review is
+scientific acceptance or a promise of sustainable service.
