@@ -3318,3 +3318,23 @@ Result inputs will be published together before admission. Current local memory
 and process observations include the accepted G0 and radio workers; this one-thread
 study keeps its own resource guard and must still pass fresh actual-node admission.
 No accepted producer, observer or source snapshot is changed to make room.
+
+### B06 accepted operation and observation
+
+Exact inputs were committed and published at
+`f288de6416dff6f8b73ea634995bbe163ad9b5fd`. One `local_linux` admission was accepted
+at2026-09-29T20:47:04.832934Z. The
+[native manifest](../../../../runs/uav_message_content/b06_calibration/launch-manifest.json)
+binds claim58e472fad05fbbb67b1bd3877064f649766cf32d61c77cb8a72b622bf22e376e
+and immutable snapshotad9d60efa12645809a86268a0aa464da. Fresh actual memory was
+9054691328 available bytes against the4294967296-byte floor; published ownership
+and source also passed. This is launch acceptance, not a completed result.
+
+`tools/hmasd_wait.py` generation1/window1500 observes this same handle in owned
+`temp/directions/uav_message_content/b06-wait`; its assigning native child UUID is
+01a0eedb-12d3-7e01-ba73-98228dabc599. The initial drain confirms the recorded
+supervisor/runner identities both running with consistent records and no exit
+witness. I keep this child active through the full reading; a checkpoint only
+rearms this observer and never restarts or replaces scientific work. Original
+outputs are authored directly under `runs/uav_message_content/b06_calibration/`;
+bulk raw/checkpoint/streams will remain the single durable local evidence copy.

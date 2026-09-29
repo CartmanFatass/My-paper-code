@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-29T20:47:04.832934Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ad9d60efa12645809a86268a0aa464da/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ad9d60efa12645809a86268a0aa464da/experiments/candidates/uav_message_content/b06/run.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration",
+    "--launch-sha",
+    "f288de6416dff6f8b73ea634995bbe163ad9b5fd",
+    "--seed",
+    "19701",
+    "--checkpoint",
+    "/home/fires/hmasd-inputs/uav-message-b06-B-34871c49.pt",
+    "--checkpoint-sha256",
+    "34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2"
+  ],
+  "claim_key": "58e472fad05fbbb67b1bd3877064f649766cf32d61c77cb8a72b622bf22e376e",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/58e472fad05fbbb67b1bd3877064f649766cf32d61c77cb8a72b622bf22e376e.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ad9d60efa12645809a86268a0aa464da/experiments/candidates/uav_message_content/b06/run.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration",
+    "--launch-sha",
+    "f288de6416dff6f8b73ea634995bbe163ad9b5fd",
+    "--seed",
+    "19701",
+    "--checkpoint",
+    "/home/fires/hmasd-inputs/uav-message-b06-B-34871c49.pt",
+    "--checkpoint-sha256",
+    "34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2"
+  ],
+  "command_sha256": "5962621721da7bb16feda0f9909fef95be26b636f94aef5aa7c0c263bcb994f9",
+  "control_observation": {
+    "observed_at": "2026-09-29T20:47:00.375721Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "f288de6416dff6f8b73ea634995bbe163ad9b5fd"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-29T20:47:02.883132Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ad9d60efa12645809a86268a0aa464da",
+  "direction": "uav_message_content",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_message_content/b06/run.py",
+    "--launch-sha",
+    "f288de6416dff6f8b73ea634995bbe163ad9b5fd",
+    "--seed",
+    "19701",
+    "--checkpoint",
+    "/home/fires/hmasd-inputs/uav-message-b06-B-34871c49.pt",
+    "--checkpoint-sha256",
+    "34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/58e472fad05fbbb67b1bd3877064f649766cf32d61c77cb8a72b622bf22e376e.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3936305,
+      "session_id": 3936305,
+      "start_ticks": 15336756
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3936305,
+    "process_group_id": 3936305
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3936313,
+      "session_id": 3936305,
+      "start_ticks": 15336778
+    },
+    "pid": 3936313,
+    "process_group_id": 3936305,
+    "supervisor_pid": 3936305
+  },
+  "schema_version": 1,
+  "sha": "f288de6416dff6f8b73ea634995bbe163ad9b5fd",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/ad9d60efa12645809a86268a0aa464da",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/stdout.log"
+}
