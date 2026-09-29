@@ -419,3 +419,35 @@ The relay best start was a relay-family subset layout on all three worlds; the s
 **Both conditions pass** (P1 held; the DM's prior was ≈ 70 %). Every search converged at the 25 m stage; the budget never bound. Spread is real: on 5 of 32 worlds one condition is below .05 (1005, 1006, 1014, 1026, 1031), and on world 1031 the closed-loop coverage gap is −.010 — the relay layout's deployment does not pay on every world; the opportunity is a mean effect of ≈ 7.6 users' service (.152 × 50) with world-to-world SD ≈ 4.7 users. No fallback is used (the 6 km fallback exists only for a failed 5 km gate). Cost so far in this line: 0 fits; ≈ 2 CPU-min for the gate.
 
 **Decided by this read (nothing else changes):** (1) hold-out references at 5 km (`--worlds 2000-2031`, same command, tag `b01_gate_holdout_a01`) — generated now and **sealed**: they are P2's comparators, recorded without interpretation until the hold-out panels are read; (2) the two technical probes through the launcher (`runner.py --probe`, arm H seed 931201 and arm SET seed 932201, 3 full rollouts = 24k team steps each plus one timed panel-sized run on non-panel worlds 9000–9031; not zero fits; timing/RSS only, no learner score is used for any research parameter); (3) the six formal fits wait for T4's acceptance and the probe projection against the 20 CPU-hour cap.
+
+## 2026-09-29 08:31 UTC — Hold-out references sealed; technical probes read: the declared 20 CPU-hour cap is mis-priced by 2–5× (DM error); [DECIDE-3] on where and whether to buy the six fits
+
+**Hold-out references** (`b01_gate_holdout_a01`, worlds 2000–2031, 5 km, budget 3,000; accepted 08:03 UTC, exited 0; 252 CPU s; summary and launch records committed a745bc786, `worlds/` 11 MB in the run directory): generated from the dev decision only and **sealed** — the DM has not read its G, G_C or reference values and will not until the hold-out panels are read.
+
+**Technical probes** (`b01_probe_H_a01` H seed 931201; `b01_probe_SET_a01` SET seed 932201; 3 full rollouts = 24k team steps each + one timed 32-world panel-sized run on non-panel worlds 9000–9031; both exited 0; records committed a745bc786; `training.jsonl` is git-ignored and stays in the run directory). Node load during the probes: 17–23 on 16 cores from the owner's other projects (node tests, playwright, the Codex app), plus the hold-out gate and both probes together. **Not zero fits: 48k technical training steps consumed.**
+
+| probe (local_linux, CPU float32, torch_threads 4, loaded node) | H (d2) | SET (off) |
+|---|---|---|
+| wall per rollout: collection / update / total | 80.6 / 346.7 / 427.5 s | 44.3 / 259.6 / 303.9 s |
+| CPU per rollout | 1,397.7 s | 989.7 s |
+| ms per team step: env / policy / store / update | 2.29 / 6.57 / 1.15 / 43.3 | 2.39 / 2.92 / 0.14 / 32.5 |
+| CPU ÷ wall (training) | 3.27 | 3.26 |
+| timed panel run (32 worlds): wall / CPU | 119 / 338 s | 85 / 175 s |
+| **projection per fit (45 rollouts + declared panels): wall / CPU** | **5.5 h / 18.0 CPU-h** | **3.9 h / 12.7 CPU-h** |
+| peak RSS (VmHWM = ru_maxrss) | 2,216 MiB | 879 MiB |
+| d2 acceptance | causes reset 16 / team_cap 784 = 800 decisions, no gap/cap; six agents synchronised | — (0 high-level rows) |
+| terminal facts | dones all True at step 500 only; all last d2 rows terminal; 0 open segments | same low-level facts |
+| action clip events per rollout (of 48,000 UAV-steps) | 38.7k–39.8k | 38.5k–40.0k |
+
+**Contention adjustment (declared as an estimate, not a measurement):** the single-threaded host step went from 1.1–1.2 ms (T3 smoke, load ≈ 10) to 2.3–2.4 ms in the probes (load 17–23); that ≈ 2× is contention and SMT inflation of CPU seconds, not recipe. Contention-adjusted: ≈ 9 CPU-h (H) and ≈ 6.4 CPU-h (SET) per fit, six fits ≈ 46 CPU-h; nominal six fits ≈ 92 CPU-h (+ ≈ 1 CPU-h for three B12 collections + the refits). **Either row exceeds the declared 20 CPU-hour cap by more than 2×, so the conclusion does not depend on the adjustment.** Two concurrent fits fit the memory (≈ 3.1 GB H+SET, ≈ 4.4 GB H+H against ≈ 9 GB free; the evaluation-overlap record showed no extra peak at the target build, and VmHWM equals ru_maxrss).
+
+**DM error, recorded:** the declaration's cell-1 cost ("7–11 process-hours", cap 20 CPU-h) was projected from ACG's 62–99-minute fits, which ran on `wsl_4070` (CPU float32, torch_threads 4); the cap was a wsl_4070 number applied to `local_linux`. Here the update phase alone is 81–85 % of a rollout's wall (347 s H / 260 s SET) against ≈ 85–130 s for a whole rollout on that node; the gap is mostly hardware and load, d2's collection cost (80 vs 44 s per rollout) is a secondary term. Pro's warning that the cost was not a verified quotation was right.
+
+**Disclosure:** reading the probe records the DM saw the training team-reward means of the three probe rollouts per arm (H .122/.074/.107; SET .100/.085/.083, 16-lane means). No parameter, seed, threshold, cap reasoning or reader uses them; they are not learner results (3 rollouts, sampled actions, the fit restarts from scratch).
+
+**[DECIDE-3] (owner; a resource choice reserved to the owner by the disposition's item 8; it does not block, because the six fits also wait for T4's acceptance):**
+- **A (recommended): run the six fits on `wsl_4070`, CPU float32, torch_threads 4 — the node ACG's anchors come from; recipe unchanged, only the execution node.** Projection from the anchors × the d2 collection factor: H ≈ 1.2–2 h, SET ≈ 1–1.5 h wall per fit, ≈ 25–35 CPU-h for six at two concurrent (≈ 5–8 h wall); the cap is re-declared to **35 CPU-h** for fits + panels + B12 collections + refits. Needs one CONTROL message to Root for node time, the SPARSE-CONE rule on the node checkout (rsync every run at once), and the declared node amended before launch.
+- **B: stay on `local_linux`**, cap re-declared to 100 CPU-h nominal, two concurrent, ≈ 15 h wall on the owner's working machine under its current load.
+- **C: stop at zero formal fits on cost** — the relay opportunity is established (gate), the learner instrument stays unpriced; recorded under the pre-declared technical/metering row as a cost stop, no scientific claim.
+- Not offered: two seeds (breaks §8 and the "2 of 3" rule) or fewer epochs/rollouts/lanes/threads (tuning after a probe that exposed learner scores; the stop rules forbid it).
+Default if no owner word arrives by the time T4 is accepted: A (the DM sends the CONTROL message and launches pair by pair, 931201/932201 first). Cumulative cost in this line: 0 formal fits; 48k technical training steps; ≈ 2.2 CPU-h (gate 129 s + hold-out 252 s + probes 7,681 s).
