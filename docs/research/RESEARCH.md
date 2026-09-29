@@ -1141,6 +1141,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
+| `uav_radio_activation` | Can ordinary joint transmitter activation improve complete native service under delayed encoded telemetry and observation-dependent retained motion, and is exhaustive search worth its cost over greedy removal? | exploring | Codex DM (native child) | **Selected, implementation not yet a scientific result.** New DM owns complete A(all-on)/G(greedy)/E(all31 masks), N5/U50/H256, 64 fresh paired worlds: 192episodes/49,152steps/0fits. Retain competent C motion while allowing sensing-induced trajectory changes. Explicit 400byte registered-site prior and 2kbit/s OOB link; .544s airtime/.456s scheduler deadline, discard late results, balanced arm order; silence removes interference, eligibility and discovery. NumPy base-radio opt-in shared exception only, all-on parity and independent engineering review required; no relay C++ or G0 changes. local_linux one thread/one CPU-hour ceiling with fresh admission; 10-18 engineering hours conjectural. Preserve full service/J/tails and platform-conditional timing; no learning, battery or novelty claim. Calibration remains unselected. [Full Oracle, independent review and Root decision](archive/2026-09-29/RESEARCH-radio-actuation-selection.md#root-decision), [routing](#session-routing). |
 | `tail_return_distributional_learning` | Does factual return-distribution fitting improve finite lower-tail UAV learning over a scalar critic explicitly conditioned on the current empirical threshold? | reserve | Codex DM (native child) | **B03 complete and independently read; retain S_eta as finite comparison reference, end this fixed recipe's additional runs.** Q32-S_eta own-tail contrasts -.004159/-.005316/-.025817, mean -.011764, descriptive training-pair t95 [-.042031,+.018503]. Prespecified exploratory scalar recurrence passes, not population superiority; 9623 drives magnitude, 9621 has mean/quality tradeoff, and both arms' adverse worlds remain. Six fits/1,179,648 native steps/768 updates; 46.74 min runner wall/.7433 CPU-hours, support incompletely metered. Same-batch eta/input/init/target differences prevent eta or pure-representation causality; B01 positive/B02 adverse remain unchanged. No producer, unread result, selected successor or approval wait. Re-entry requires a named critic-selection decision or a new costed finite-learning prediction; no automatic replication/repair. [Complete result](candidates/tail_return_distributional_learning/NOTES.md#complete-b03-result---scalar-tail-signal-with-training-uncertainty), [independent diagnosis and decision](candidates/tail_return_distributional_learning/NOTES.md#independent-scientific-reading-and-investment-decision), [routing](#session-routing). |
 | `uav_availability_recovery` | Can learned joint reserve deployment and return preserve complete native service beyond competent ordinary reassignment when temporary member loss also changes backhaul geometry? | exploring | Codex DM (native child) | **Selected, implementation only; no new result.** G0 S7-S1, 8 UAVs/two reserves/H500, one temporary native motion/service/routing unavailability, with geometric interference retained; L x3 vs same-map joint ordinary P and retained nearest-reserve S, 64 common worlds plus shared no-event reference. Three fits/960,000 native steps, at most270,336 planner snapshots; engineering14–28h conjectural, runtime unmeasured. Explicit centralized static-map addition to P/L; no hidden event ledger, entity-memory, physical-radio-outage or general churn claim. Focused independent review retained the purchase with horizon, S-readiness, public-state and reward/event-accounting corrections. Preserve S4/N7 adverse evidence; no positive pilot prerequisite or automatic repair. [Full Oracle, review and Root decision](archive/2026-09-29/RESEARCH-availability-expansion-selection.md#root-decision), [routing](#session-routing). |
 | `uav_local_history` | Can lawful retained local spatial history improve complete decentralized UAV service, and can experience add value beyond competent ordinary control given the same history? | reserve | Codex DM (native child) | **B02 complete and independently read; stop this from-scratch full-control recipe, broader learning question open.** Three instances have L1-L0 J +.051090/+.165789/-.040432; all96 L1-C world comparisons lose J/service. Mean L1-H J -.258158/service -15.900472 despite active updates/history sensitivity. Retain best instance291022's all32-world own-learning gains, both ordinary C/H and all adverse tails; no history-causality, GRU-forgetting or general impossibility claim. Fresh H-C reverses B01's small positive point estimate (-.010167 J/-.632324 service, intervals cross zero), not a default H upgrade. Cumulative3fits/475136steps/.378094 runner CPUh; support incompletely metered. No producer, unread result, selected successor or approval wait; decline automatic stochastic-panel/encoder/optimizer/exposure repairs. Re-entry needs a substantive costed native prediction over C/H. [Complete reading and independent disposition](candidates/uav_local_history/NOTES.md#2026-09-29---b02-complete-reading), [routing](#session-routing). |
@@ -1516,18 +1517,24 @@ Q32-S_eta自身尾部差-.004159／-.005316／-.025817，均值-.011764，描述
 由此原三项中只有availability仍在执行；已结束的两个DM、Oracle及清理工作不计为并行研究。
 [完整Oracle建议、独立重构、旧暂停消歧和Root选择](archive/2026-09-29/RESEARCH-oracle-reserve-selection.md#root-decision)。
 
-只保留一个额外具体条件性备选：服务无线发射开关／调度。它改变合法控制权，须明确测量、
-CSI误差／时延、inactive时感知及airtime／开关成本，再考虑匹配普通调度的完整比较；
-未选启动、未称第四DM。匹配算法本身、无可信不确定性合同的无线模型适应、任意伙伴多样性
-及旧配方重命名不进入promising清单。备选不足时留空，不把条件性前提写成已经解决。
+Oracle已完成无线控制的具体化，并与B05常数校准／状态依赖纠正比较边际价值；独立科学
+Reviewer重构源语义和已有结果后支持先买一项无线普通控制研究，MATERIAL_DISSENT:no。
+Root采纳全部四项修正，新增`uav_radio_activation`，交新注册DM `/root/dm_radio_activation`。
+保留C的普通运动能力，完整比较all-on／贪心关断／穷举31非空mask，N5/U50/H256，64配对世界，
+192回合／49,152步／0fit。它检验干扰缓解能否抵消容量与感知损失，不冻结实际飞行轨迹。
+静态注册地图、量化自身遥测及2kbit/s带外控制链路是明确增加的资源；延迟后的原生奖励时间索引、
+.456s计算截止／超期丢弃、静默感知和map编码边界均已明确。只改base NumPy无线接口的opt-in
+开关及必要共享kernel，保持all-on兼容，不动relay C++或G0；独立工程审查及真实准入仍由DM完成。
+配置local_linux单线程，批次一CPU小时上限，工程10-18h为猜测而非观测。完整失败或新服务尾部
+如实保留，运行超限不把不完整前缀作科学结论，不自动加学习、快时钟、传播变体或第二面板。
+[完整Oracle、独立答复和Root采纳](archive/2026-09-29/RESEARCH-radio-actuation-selection.md#root-decision)。
 
-`/root/oracle_question_expansion`为原生`gpt-6-astra`、`max`、独立上下文，原选题已完成；
-在上述两个完整结果之后，正只读具体化无线控制的合法信息／资源合同，并与已记录的校准续接
-比较边际价值。此推导未声明或启动新实验，不因空位自动把有前提的候选升级为promising。
-它是Root的科学推理方式，不拥有方向、记录、启动或审批，也不冒充独立Scientific Reviewer；
-Root选择跨题投入，DM负责问题内推理执行。建议区分可具体化与有关键前提的条件性备选，允许没有
-足够候选，不建新角色／评分表／审批层。新增假设或资源须明确来源、误差、成本，并给有能力普通
-对照同样增量；建设性解释落实为可改变的中间量和完整任务预测，保留相反证据及停止条件。
+常数校准与状态依赖纠正保留为实质备选而未选：同冻结B19451父策略、同几何消息和训练预算，
+三配对／六fit／843,776步，常数臂是真正学习的简单对照而非零fit启发式。是否有超出校准的
+完整J／服务增量仍有价值，但不因空位同时购买。当前实质Codex并行为availability加radio两项；
+不把已结束DM或顾问算成3-4项。无可信资源合同的模型适应、任意伙伴多样性和旧配方换名不入选。
+Oracle是Root的科学推理方式，不拥有方向、记录、启动或审批，不替代独立Scientific Reviewer。
+资源增量须匹配普通对照，建设性解释须预测中间量和完整任务结果；这些边界不制造新角色或审批层。
 Claude已接受工作、能源原配方停止、FSD/PPC暂停、G33冻结和Milan依赖均不变。
 
 <a id="pro-innovator-2026-09-29-next-round-after-continuity-and-forecasts"></a>
@@ -1631,6 +1638,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
+| DM: delayed joint radio activation | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_activation` | `/home/fires/hmasd-wsl` / `main` | New registered `hmasd-direction-manager`; owns `uav_radio_activation` and matching direction paths. Complete ordinary A/G/E comparison selected after full Oracle and independent scientific reading. Root grants only opt-in base NumPy radio-mask/pure-kernel shared change with focused independent engineering review, not relay C++ or G0. Actual source/admission/full reading remain DM responsibility, no routine Root launch approval. [Selection and adopted corrections](archive/2026-09-29/RESEARCH-radio-actuation-selection.md#root-decision). |
 | DM: threshold-conditioned scalar and distributional tail learning | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_tail_learning` | `/home/fires/hmasd-wsl` / `main` | B03 six-fit S_eta/Q32 successor completed, raw/checkpoint audit and independent scientific reading complete, MATERIAL_DISSENT:no. Direction reserve; retain scalar reference and all positive/adverse evidence, no selected successor or active operation. Own result/background publication and exact cleanup recorded in [NOTES](candidates/tail_return_distributional_learning/NOTES.md#independent-scientific-reading-and-investment-decision); return the substantive boundary and cross-question recommendations through native parent. Old session/unsent Pro unchanged. |
 | DM: joint reserve deployment and return | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_availability_recovery` | `/home/fires/hmasd-wsl` / `main` | New registered `hmasd-direction-manager`, owns `uav_availability_recovery` and matching paths. Oracle-designed G0 complete L/P/S study selected after focused independent review; no archived DM restored. Adopt horizon, S-readiness, public-snapshot and native reward/event corrections; exact source, engineering checks, actual admission and full reading remain DM responsibility. No routine Root launch approval. [Selection](archive/2026-09-29/RESEARCH-availability-expansion-selection.md#root-decision). |
 | Prior DM: service-aware replenishment and deployment (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_service_continuity` | `/home/fires/hmasd-wsl` / `main` | 历史已完成`uav_persistent_service` B05，结果／独立判读及清理发表于`39f75795d`。保留有限R和S的具体中断改善，固定替换规则失败，结束原样S投入；无活动worker／observer、未读结果或已选后继。较宽服务问题仍开放。[完整结果](candidates/uav_persistent_service/NOTES.md#b05-complete-reading)。 |
