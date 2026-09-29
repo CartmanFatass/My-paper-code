@@ -1691,3 +1691,334 @@ retained manifests and all four selected canonical checkpoint hashes; this
 preserves original C and all nine B02 endpoints. Exact snapshot/staging paths are
 absent. Canonical raw evidence, compact records and stopped observer/claim metadata
 are intentional retained evidence, not cleanup leftovers or active work.
+
+## 2026-09-29 - B04 prospective: dated future-motion forecasts with a competent persistence control
+
+<a id="b04-future-motion-prospective"></a>
+
+**Source-backed proposal for the current selection review; no implementation or result
+launch.** Root assigned successor question ownership to native DM
+`/root/dm_delay_intent`; routing was published at `ef2fd853c154fb3d9834a821d6363547b0a49959`.
+The launch-bound lead remains `Codex DM (native child)`. The direction row is still
+reserve during this selection boundary. B01-B03 are fully read/retired, with no
+accepted operation or unread output inherited by this child. This entry changes no
+PPC/FSD pause, G33 freeze, Milan-data hold or Claude ownership. Root is arranging one
+independent selection review covering the concrete new questions. Its preliminary
+warnings about a noisy current-command baseline and an expired five-step forecast
+are incorporated below; the completed review and selection disposition remain to be
+recorded before substantial implementation. No duplicate critic or Pro was started.
+
+### Question, inherited evidence and actual temporal opportunity
+
+Can a learned, fallible forecast of a sender's own future position improve complete
+decentralized service beyond both geometry-only continuation and a qualified ordinary
+motion forecast, under matched primitive control and a stated larger packet budget?
+The intended contribution is empirical understanding and possible task usefulness,
+not a novel communication algorithm, a committed-intent claim or confirmation.
+
+Keep the [B01](#b01-complete-reading), [B02](#b02-complete-reading) and
+[B03](#b03-complete-reading) readings intact. All original content arms learned useful
+motion. B02's learned-scalar sample means were favorable but continuation rankings
+reversed; its real credit, updates and input response do not identify semantics.
+B03's B/O/L assets all jointly improved on C on fresh worlds; B19451 was provisionally
+selected by the fixed rule. B is learned continued C with geometry communication, not
+a no-learning/no-communication control. Its B03 gain over C was +.062219 J and
++3.811890 users/tick, while world30 lost J/service and world20 lost service. More
+ordinary motion training and selection among training outcomes remain strong
+explanations of the useful assets. Those facts motivate a matched continuation G
+and a frozen B anchor here, rather than declaring the old scalar recipe repaired.
+
+Read current published main at `ec20983291359d91ab59e670627363415854b6bb`, refreshed
+to `ef2fd853c` without changes to the relevant background:
+[topic 5](../../RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据) preserves the useful
+RR process and separates transport time from decision-time information;
+[topic 8](../../RESEARCH.md#8-数学信息与博弈结构怎样帮助dm选择实验) separates a signal,
+finite learned response and complete value. Concretely, keep all useful geometry,
+retain primitive control in every arm, date the forecast at its send time, and buy
+complete native learning/evaluation rather than infer benefit from prediction MSE.
+S7 energy/BS findings do not supply this host with battery, queues or moving users.
+
+The source-verified host is unchanged N5/50 static users/H256, map1000m,
+height50-150m, component speed30m/s and dt1s. Its native physical objective is
+`.014*served_users + .3*Q`; net J subtracts the identical .001 fee per team tick.
+At t, due messages arrive, actors update private GRUs, all primitive commands are
+sampled, the RR sender t mod5 transmits, native motion/reward occurs, then the channel
+advances. A send takes1/5 ticks in GOOD/BAD. The actor has a one-step velocity head;
+there is no future target, timer or commitment in this executor. Current command can
+legally enter a packet after sampling, but does not assert future command persistence.
+Sources: unchanged [CADC model](../../../../experiments/candidates/contention_aware_decentralized_communication/cadc_b01/model.py),
+[channel](../../../../experiments/candidates/contention_aware_decentralized_communication/cadc_b01/channel.py),
+[host binding](../../../../experiments/candidates/ucope/uav_motion_prefix_b01/environment.py),
+and [native movement](../../../../envs/pettingzoo/uav_env.py#L265).
+
+The conjectured decision coupling is that a receiver choosing its next motion can use
+a dated estimate of where a teammate is going to provide service, in addition to that
+teammate's old position and observed demand. Static users do not make those joint
+trajectories static. Whether the prediction changes a useful motion choice is unknown;
+no private-history bottleneck or positive headroom is assumed. Existing geometry and
+the lawful current policy center may already provide enough predictive information.
+
+### Primary bridge and why not a commitment executor
+
+Kim/Park/Sung, ICLR2021, [Intention Sharing](https://openreview.net/pdf?id=qpsl2dR9twy),
+uses learned imagined trajectories as message content. The published abstract on the
+[author page](https://bitsandscraps.github.io/publication/iclr2021/) and the accessible
+[original review-version PDF](https://openreview.net/references/pdf?id=k71zbVCDy)
+were read: sections3/4 describe next-tick communication, modeled future observations
+and actions, supervised model losses and an attention encoder; section5.3 explicitly
+allows imagined/actual trajectories to differ. The published PDF endpoint currently
+returns a browser challenge, so method details here are attributed to that identified
+review version, not an asserted audit of the final PDF. The bridge is predictive
+content, not future truth. Our direct endpoint forecaster is not an IS reproduction:
+it omits imagined joint rollouts, attention and differentiable message training, and
+faces RR caches plus endogenous teammate responses under one/five-tick delay.
+
+[DACOM, arXiv2212.01619, methods](https://arxiv.org/html/2212.01619v1) makes waiting
+time part of action and trades information against response delay; its TimeNet is not
+an intervention in this fixed primitive-action/RR channel. Local locator:
+`MARL-0006`, `/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0006.json` and
+`pdf/MARL-0006.pdf`; the primary methods passage, not the catalog hint, supports this
+distinction. [CAIC, PMLR337 li26h](https://proceedings.mlr.press/v337/li26h.html)
+provides a related published abstract about trajectory prediction and asynchronous
+messages, but also changes communication frequency under queueing congestion. Our
+channel has neither learned frequency nor endogenous queueing. None of these results
+is native UAV evidence or a novelty claim for the proposed study. The three local
+library title/catalog searches are discovery only; a miss is not absence of prior art.
+
+A constant-velocity hold would make truthful advertised velocity and qualified
+constant-velocity prediction coincide during the hold. It would also remove primitive
+feedback opportunities. A target/waypoint commitment could differ, but would require a
+new executor, an explicit flexibility cost and geometry/controller controls with the
+same rights and cadence. That is a larger control question, not necessary to test the
+current predictive-content conjecture. Select the forecast comparison provisionally;
+do not add a hold solely to make the word "intent" true. These messages promise a
+forecast for a dated endpoint, not an executed future control or guaranteed position.
+
+### Three adapted arms and the richer communication contract
+
+All three arms start from the exact B19451 actor/critic and train the complete
+receiver/motion policy. Preserve the seven original fields, including blank slot5:
+sender xyz, current anonymous visible-user centroid xy, zero, and count/20. Append
+three FP32 endpoint coordinates. The RR sender, delivery1/5, channel flip.05,
+metadata, .001 fee, reward, termination and primitive action rights remain identical.
+
+| Arm | Appended three floats | Extra learning |
+| --- | --- | --- |
+| G | Zero padding; original geometry content. | Native receiver/motion PPO and critic. |
+| O | Ordinary dated endpoint from the sampled first command, then persistence of the lawful policy's central command, with native bounds. | The same native PPO and critic. |
+| F | Learned residual correction of that same ordinary endpoint, from lawful send-time context. | The same native PPO/critic plus a separately trained small future-position predictor. |
+
+Every primary arm sends10 FP32 values,40 payload bytes instead of the old28, a42.9%
+increase. All have the same one-packet/tick access and delivery law. Fixed fees/delays
+despite size are an explicit abstract-channel assumption, not measured free bandwidth
+or a real-network cost model. G pays the same padding cost. Frozen B0 retains its
+original7-float interface and is a cross-contract capability/continuation anchor,
+not the primary incremental-content control. Replacing old geometry with velocities
+in the frozen receiver is not proposed.
+
+Keep each old171-feature actor path intact and append the five three-float forecast
+records, giving186 total features. Add a zero-initialized bias-free15->64 projection
+to the existing pre-GRU encoder output. Similarly preserve the old451-feature critic
+path and add a zero-initialized75->128 projection at its first preactivation, giving
+526 total features. All three adapted arms use those same10560 added parameters.
+Old tensor shapes/order/values stay exact. At initialization the additions contribute
+zero, preserving the B function even when O/F packet bytes differ; do not rely on
+inserting zero columns into a differently shaped GEMM for bitwise invariance. All
+new receiver parameters become trainable. GRU/channel state resets each episode;
+there is no optimizer, RNG or normalizer state inherited from B's saved endpoint.
+
+Canonical B input is `wsl_4070:/home/wu/projects/HMASD/runs/uav_message_content/`
+`b02_preserved_scalar/19451/B/final.pt`, source `02ede8a4a`, SHA256
+`34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2`.
+Its current bytes/metadata will be reverified for input binding before implementation
+acceptance/launch; this proposal uses the already published identity. B includes
+131072 original C plus131072 continuation training steps; each new instance adds
+its own stated continuation, not an independent B training history.
+
+### Send-time forecast, expiry and training-only labels
+
+Write normalized own position as `p_s=(x/1000,y/1000,(z-50)/100)` and
+`D=(.03,.03,.30)`. Let `u_s=tanh(sampled_pre_tanh_motion)` be the actual normalized
+command passed to the environment, `m_s=tanh(motion_mean_s)` the lawful central
+command, and `K_s=min(10,256-s)`. The ordinary endpoint is
+
+`p1=clip(p_s+D*u_s,0,1)`;
+`pO=clip(p1+(K_s-1)*D*m_s,0,1)`.
+
+This reproduces repeated native clipping for the constant remaining command, given
+the available own-position sensor precision. It treats the known first action
+separately, including a boundary hit followed by reversal. `tanh(mean)` is the
+policy's central command, not `E[tanh(Gaussian)]`. This avoids treating one fresh
+noise draw as a persistent plan without pretending to predict later policy feedback.
+Plain sampled-command CV is recorded cheaply as an error reference, not bought as a
+weaker fourth training arm. O uses the same legal actor output/private context access
+as F; the ordinary forecast is selected from source reasoning, not a score screen.
+
+F input is the saved send-time private GRU64, own p3, sampled u3, central m3 and K/10:
+74 floats, all available after sampling and before current native motion. Its
+74->64(tanh)->3 MLP has4995 parameters, with output weights/bias initially zero.
+Let r be its output. Form
+`pF=clip(pO+2*(K-1)*D*tanh(r), lower, upper)`, where
+`lower=max(0,p1-(K-1)*D)` and `upper=min(1,p1+(K-1)*D)`.
+Thus F initially equals O, and every predicted endpoint respects the known component
+speed/map reachable box. It still does not guarantee the path or endpoint.
+
+The packet encodes the normalized endpoint at absolute tick `s+K_s`. A receiver
+uses the original validity/send-time/age metadata and public H256 to recover the
+remaining forecast lead `K_s-age`; no extra timestamp, readiness bit or future label
+is supplied for free. Missing records have zero appended coordinates. Expired
+forecast coordinates are zeroed while geometry stays available; expiration is
+`age>=K_s`. With RR period5 and maximum delay5, the newest active cache has age<=9.
+Consequently every in-horizon delivered forecast has a strictly future endpoint,
+including the terminal-shortened K. This is a structural timing fact, not evidence
+of accurate or useful prediction. No sender is held to its advertised endpoint.
+
+During training only, after the complete episode has been collected, label each
+eligible send with that sender's later *own observation* `y_s=p_(s+K_s)`.
+Eligibility means its message arrived before H; include every eligible send without
+filtering on error, service, future movement or policy response. No simulator rollout,
+future channel draw, unseen user label or other agent's hidden state is queried.
+The future label cannot enter current actor/critic inputs, packet construction or
+evaluation adaptation. Freeze the predictor during each two-episode behavior rollout;
+then take four full-data Adam updates, lr3e-4, other Adam settings as native PPO,
+grad-norm cap.5, on mean squared `((pF-y)/(K*D))`, a displacement/speed-normalized
+loss. Do not backpropagate into saved hidden/action/mean or the actor/critic.
+All episodes and complete native rewards remain in the policy comparison.
+
+The predictor is never native-return-trained, and there is no synthetic reward.
+Motion/receiver PPO replays the actual detached behavior packets, with its original
+motion likelihood, four epochs, two episodes/rollout, chunk32, gamma1, no terminal
+bootstrap, lr3e-4 and unchanged clipping/entropy/value/gradient settings. Neither
+current forecasts nor their targets replace old packets during replay. This is a
+predictive-content package with co-adapting motion, not an exact joint-gradient or
+semantic-identification claim. F's extra supervised work and parameters are priced
+explicitly; G/O have the same native-data, policy-update and communication budgets
+and may use all lawful context, but do not waste matching dummy predictor updates.
+
+There is no outcome-selected readiness threshold: before its first completed update
+F is exactly O, thereafter its current predictor is used, and evaluation freezes it.
+Model/policy drift, noise, packet compression and receiver learning can all limit
+usefulness. They are prospective limitations, not automatic repair licenses.
+
+### Fixed exposure, predictions and result reading
+
+Propose three continuation masters **19501,19502,19503**, paired G/O/F inside each,
+512 complete H256 episodes per fit (131072 team steps), final checkpoint only.
+Training physical/channel seeds are `100000*master+1000+e` / `+6000+e`, e=0..511;
+motion stream `+21`, predictor construction `+12` in an isolated generator scope.
+There is no content-sampling RNG. Execute master order, then G/O/F. Do not select a
+checkpoint or add epochs/seeds/arms after outcomes. Any technical failure preserves
+the attempted fit and missing comparison; no duplicate/restart is automatic.
+
+Evaluate all nine final policies and exact frozen B0 on one new common32-world,
+sampled-motion H256 panel, with physical/channel/motion seeds
+`1950002000+e` / `1950007000+e` / `1950003000+e`, e=0..31. No scene/outcome at
+these seeds has been inspected. Pair actual scene/channel/seed witnesses, not seed
+names alone. B0 supplies the common uncontinued/initial-function anchor. Initial
+checkpoints and zero-projection/sequence checks establish the common start; nine
+duplicate initial scientific panels are not necessary. All evaluation has zero
+updates and isolated state/RNG. Three continuations remain conditional on one selected
+B parent, not three independent B fits or confirmation. No claim note is created.
+
+The temporal prediction is that F improves the dated forecast beyond O particularly
+where delivered records are old, and the adapted receivers learn a consequential
+response that improves complete J and service. Required intermediate readings are
+send count, delivered/censored count, cache-use ages and positive remaining leads;
+prediction error in horizontal metres and height at the dated endpoint, both per-send
+and weighted by actual cache use; and F-versus-O prediction differences on the *same*
+F trajectories. Include early/late age bins1-4/5-9 and terminal-shortened horizons,
+with counts and empty groups explicit. Better errors on different arm trajectories
+alone do not identify a better predictor. No MSE threshold admits or rescues a run.
+
+At each final O/F tick only, one additional actor forward starts from the actual
+pre-step hidden state. For O, blank only forecast coordinates; for F, replace only
+forecast coordinates by the ordinary shadow predictions computed at those same
+actual F send times. Record central-motion RMS/max change, ages and receiver-use
+counts. These are zero-extra-step immediate-response diagnostics, not full historical
+counterfactuals, mediation estimates or proof of beneficial response. No diagnostic
+result is fed to the live actor. Full native outcomes decide useful package value.
+
+Read F-O (primary), F-G and O-G net/physical J, served users/tick, Q, each continuation
+against B0, all per-seed contrasts and per-world signed vectors/extremes. Retain height
+floor/ceiling, boundary occupancy and worst service; this host supplies no battery or
+physical-safety endpoint. Worlds are nested deployment variation. Report the three
+conditional continuation means and descriptive df2 t intervals with their assumptions;
+32 worlds are not extra training replications. Mixed signs and J/service tradeoffs
+are reported, not turned into an after-the-fact unanimity or equivalence rule.
+
+Positive F-O and F-G complete J/service means support a conditional learned-package
+signal. Better dated predictions plus receiver response would strengthen the proposed
+explanation, without establishing that semantics caused the gain. O-G improvement
+with no F increment supports an ordinary anticipation capability. Forecast/error or
+response improvement without native benefit weakens this finite package's use case;
+native gain without improved fidelity remains a package result with mechanism
+unresolved. G/O/F losing to B0 preserves the possibility of continuation damage and
+the paid B capability. No branch automatically purchases replication, a hold, a richer
+model, another panel or a new delay regime. At the read boundary compare further
+independent-parent work, a materially different question and stopping for what each
+would change; leave the original scalar interpretations untouched.
+
+### Prospective cost and implementation boundary
+
+| Work | New exposure |
+| --- | ---: |
+| Policy continuation fits | 3 arms x3 masters =9 |
+| Training episodes / team steps | 4608 /1179648 |
+| Final policies plus frozen B0 evaluation | 320 episodes /81920 team steps |
+| Total native team steps / motion samples | 1261568 /6307840 |
+| Native PPO Adam updates / replayed actor rows | 9216 /23592960 |
+| F predictors / extra supervised Adam updates | 3 /3072 |
+| Eligible F training labels / four-epoch row presentations | 385536-391680 /1542144-1566720, exact channel-dependent counts retained |
+| F send-time predictor forwards, train plus final eval | 417792 |
+| Extra final diagnostic actor forwards, batch-of-five | 49152; zero native steps/updates |
+
+No model branching, imagined rollout, candidate search, calibration fit or old-asset
+ranking panel is included. Every study tick still has one RR send. Cumulative direction
+exposure after a complete B04 would be21 fits,3063808 native steps and21504 PPO
+updates, plus the3072 new predictor updates. Do not count inherited B training nine
+times as newly purchased compute. Earlier B01-B03 cost2690.903s scientific wall plus
+incompletely measured engineering, reading and review; it is not erased here.
+
+B02's nine fits/1327104 native steps cost1991.282s on wsl_4070 with one CPU thread;
+B03 evaluation cost41.155s and full readback another67.47s. Simple step scaling gives
+about31.5min for this base workload on that old node/runtime, before the new predictor
+and changed decoding/reading. This is a magnitude estimate, not a measured new rate.
+Plan **local_linux**, configured CPU interpreter
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python`, FP32, sequential fits, one Torch,
+inter-op and BLAS thread. The actual local CPU is Ryzen7 8745H. Root reports the
+preferred wsl_4070 occupied by Claude's two four-thread fits, six sequential fits in
+its accepted35CPUh batch; do not consume that node now. Local timing is unmeasured:
+budget roughly45-90min scientific wall, plus import/build and readback, without a
+pricing pilot or shortened endpoint. Use fresh actual-node admission at launch, not
+as a prerequisite for this reasoning. Record measured wall/CPU/RSS and thread teams;
+the old approximately523MiB RSS is only a planning reference, not a current admission.
+
+Working engineering estimate is4-6 agent-hours total: about2-3h for direction-owned
+channel/warm-start/predictor/collector work,1-2h for focused checks and independent
+high-risk engineering review, and about1h for collection, pure reconstruction,
+scientific reading/publication. These are estimates, not measured totals or human
+labor claims. Expected durable bulk is roughly100-200MiB from comparable existing
+traces plus forecast context; actual bytes/hashes will be recorded. No whole-source
+backup or duplicate evidence archive is needed. Engineering expansion to a learned
+world model, joint rollout planner or commitment executor returns to the scientific
+choice instead of being silently added to this batch.
+
+L0 after selection: recover only required owned B02 collector/runner pieces from
+`02ede8a4a` into `experiments/candidates/uav_message_content/b04/` and mirrored tests;
+reuse unchanged CADC/UCOPE helpers without copying or changing shared learners/host.
+Implement the declared10-float channel, exact old-path warm start, ordinary bounded
+forecast, separate supervised head/label timing, detached replay, final-only panel,
+compact summary and pure reader. Entry `b04/run.py`, output
+`runs/uav_message_content/b04_future_motion/`; scratch stays under the owned temp path.
+Checks cover native clipping/first-action semantics, age/expiry including terminal
+truncation, unchanged geometry/transport and initial function, checkpoint identity,
+no future-label leakage or shared-gradient path, target indexing, actual counts,
+RNG isolation and zero evaluation updates. Tests use synthetic fixtures and owned
+scratch, not an undeclared native pilot. Independent engineering review is required
+for this scientific-interface/replay/checkpoint change. Publish exact accepted inputs
+before any result launch; retain the existing native observer lifecycle when running.
+
+First return to Root is this complete design and its explicit richer-contract cost.
+The unresolved dependency is the one focused selection review/Root cross-question
+disposition; it is not a new owner permission request. No result-producing operation,
+code implementation, resource claim or cleanup has been created by this entry.
