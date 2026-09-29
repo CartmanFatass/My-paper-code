@@ -1,0 +1,167 @@
+{
+  "O_H": "retained O with controller/readout max_steps bound to H12000",
+  "P": "unchanged TransitHold with controller/readout H12000 clock",
+  "R": "O_H plus finite load/deadline cross-basin transfer",
+  "arms": [
+    "P",
+    "O_H",
+    "R"
+  ],
+  "arrival_detector": "retained strict decoded <=20 m; no repair",
+  "batch": "b03_reassignment_a01",
+  "direction": "uav_persistent_service",
+  "evaluation_workers": 4,
+  "final_reserve_window": [
+    11700,
+    12000
+  ],
+  "fits": 0,
+  "fixed_bins": 3000,
+  "horizon": 12000,
+  "jobs": [
+    {
+      "arm": "P",
+      "job_key": "P/52392801",
+      "seed": 52392801
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52392801",
+      "seed": 52392801
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52392801",
+      "seed": 52392801
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52392802",
+      "seed": 52392802
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52392802",
+      "seed": 52392802
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52392802",
+      "seed": 52392802
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52392803",
+      "seed": 52392803
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52392803",
+      "seed": 52392803
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52392803",
+      "seed": 52392803
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52392804",
+      "seed": 52392804
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52392804",
+      "seed": 52392804
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52392804",
+      "seed": 52392804
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52392805",
+      "seed": 52392805
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52392805",
+      "seed": 52392805
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52392805",
+      "seed": 52392805
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52392806",
+      "seed": 52392806
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52392806",
+      "seed": 52392806
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52392806",
+      "seed": 52392806
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52392807",
+      "seed": 52392807
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52392807",
+      "seed": 52392807
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52392807",
+      "seed": 52392807
+    },
+    {
+      "arm": "P",
+      "job_key": "P/52392808",
+      "seed": 52392808
+    },
+    {
+      "arm": "O_H",
+      "job_key": "O_H/52392808",
+      "seed": 52392808
+    },
+    {
+      "arm": "R",
+      "job_key": "R/52392808",
+      "seed": 52392808
+    }
+  ],
+  "late_window": [
+    6000,
+    12000
+  ],
+  "launch_sha": "a4bd3b5eccef6e83a71c00fdbb8eccd6ecaf5c67",
+  "macro_steps": 30,
+  "max_native_transitions": 288000,
+  "mission_service_denominator": 12000,
+  "numeric_threads_per_worker": 1,
+  "optimizer_updates": 0,
+  "seeds": [
+    52392801,
+    52392802,
+    52392803,
+    52392804,
+    52392805,
+    52392806,
+    52392807,
+    52392808
+  ],
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  }
+}

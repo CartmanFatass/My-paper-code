@@ -1918,3 +1918,321 @@ observed accepted, consistent identities and the live runner/supervisor.
 This child stays active through native long waits; a queued checkpoint is not
 assumed to wake an unloaded child, and neither checkpoint nor lost observation
 authorizes another worker. No result or partial score has been read yet.
+
+## 2026-09-29 - B03 complete: finite legal-access benefit, residual F capture
+
+### Complete collection and fixed reading
+
+The original accepted operation exited 0 at epoch 1790658488.3399844
+(`2026-09-29T05:08:08Z`). All 24 trajectories completed the full H12000;
+there are no failed/unstarted jobs, orphan raw files, missing final windows,
+early endings or terminal-zero-service worlds. The 75 original manifest
+artifacts total 232109945 bytes and verify locally against their recorded
+lengths and SHA256s. Every within-world pair has identical initial/BS identity,
+all 12001 user-position states and RNG digests. A separate pure reader
+`b03/audit.py` reconstructs native full/late endpoints, events, reserve exposure,
+station eligible membership/demand, and all exogenous streams from the raw
+arrays. Its engineering review found no material issue. It is a completed-data
+audit, not another simulation, fitted model or policy search.
+
+The observer reached a generation-1 checkpoint while running; I consumed that
+event and rearmed the same handle as generation 2. It recorded READY and the
+valid terminal witness at `05:08:58Z`. Both attempted App queue deliveries
+returned code -32600 (`unloaded spawned sub-agents`), as anticipated; this
+native child stayed active through two deterministic 1500-second waits and
+drained the original observer. READY was consumed, generation 3 was stopped,
+and the stopped record has no pending events/wake. No worker was restarted.
+Native manifest/preflight/status/exit and observer records are retained with
+the compact result; source snapshot disposal follows verified collection.
+
+Means and paired descriptive t7 intervals on the eight development worlds:
+
+| Endpoint | P mean | O_H mean | R mean | R-O_H mean [t95] | R-P mean [t95] |
+| --- | ---: | ---: | ---: | --- | --- |
+| Full QoS/12000 | .471060 | .722268 | .802167 | +.079899 [-.013181,.172980] | +.331107 [.226699,.435516] |
+| Full native J | -2817.390 | 4556.278 | 9499.474 | +4943.197 [-716.430,10602.823] | +12316.865 [4354.570,20279.160] |
+| Late QoS/6000 | .317982 | .634871 | .786890 | +.152019 [-.022179,.326218] | +.468908 [.321655,.616160] |
+| Late native J | -4191.955 | -234.348 | 4656.863 | +4891.211 [-702.139,10484.560] | +8848.818 [2962.001,14735.635] |
+
+R-P improves both full and late QoS/J in all eight worlds. R-O_H has five joint
+gains and three joint losses in both windows; all four R-O_H intervals cross
+zero. O_H-P also improves all eight full/late signs on this *new* panel:
+full QoS +.251208/J +7373.668, late +.316889/+3957.607. This does not erase
+B02's newly failing O_H worlds or pool the two panels into confirmation.
+
+The complete per-world R-O_H reading is:
+
+| World suffix | Full QoS delta | Full J delta | Late QoS delta | Late J delta | O_H -> R cutoff/depletion per kind | O_H -> R overload ticks |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| 01 | -.012853 | -154.904 | -.015726 | -92.138 | 0 -> 0 | 0 -> 0 |
+| 02 | +.039571 | +472.464 | +.060395 | +357.335 | 0 -> 0 | 5713 -> 0 |
+| 03 | +.025619 | +306.554 | +.014555 | +88.738 | 0 -> 0 | 391 -> 0 |
+| 04 | -.025698 | -309.998 | -.017822 | -109.651 | 0 -> 0 | 7017 -> 3211 |
+| 05 | +.271355 | +13175.614 | +.509699 | +12974.250 | 7 -> 0 | 7932 -> 0 |
+| 06 | -.008225 | -96.731 | -.002994 | -16.498 | 0 -> 0 | 0 -> 0 |
+| 07 | +.179439 | +12713.529 | +.360716 | +12722.360 | 7 -> 0 | 7773 -> 0 |
+| 08 | +.169987 | +13439.046 | +.307330 | +13205.287 | 7 -> 0 | 7807 -> 3960 |
+
+R has zero cutoff/depletion and no persistent final300 reserve members in all
+eight worlds. P has seven cutoff/depletion in each 03/05/07/08, and six final
+persistent-reserve members in 02; O_H has seven in each 05/07/08. Mean native
+reserve exposure P/O_H/R is .330560/.157779/.000025. R's overall minimum battery
+is .095499, so zero cutoff is not zero reserve exposure; its smallest terminal
+battery is .113223. No new adverse-world presence occurs versus either reference,
+and both positive-J/nonnegative-service requirements and the .01 service
+benefit over P are met. Thus **all prospectively stated descriptive finite
+useful-package signs hold**, with the declared interval uncertainty and adverse
+worlds intact. These are not confirmation or a deployment certificate.
+
+Low-service tails remain part of the result, not omitted safety proxies. Against
+O_H, R04's longest zero-service spell rises 68 -> 84 steps and below-half spell
+507 -> 554; R06's below-half spell rises 109 -> 134. R01 has slightly shorter
+below-half tail (55 -> 51) despite its lower full/late service. In 05/07/08 the
+long below-half tails shrink 3613/3949/4364 -> 55/103/126. The complete P/O_H/R
+tails, four fixed bins, energy and risks remain in `perworld.json` and `audit.json`.
+
+### Actual access, residual deficit and explanation change
+
+There are 67 transfers (per world 6/10/6/7/17/2/10/9); all cross into the
+intended native station basin, satisfy the retained decoded arrival detector,
+receive charge and release. During these transfer intervals there are zero real
+F member-steps and zero F-overwritten commands. Release reasons are 53 full,
+12 dwell and two timeout. Sixty-five transfers later carry connected load
+while released and free; both exceptions are in 07 despite recorded assignment
+restoration. Cross/charge/release alone therefore is not proof of member-level
+service restoration. One transfer in 03 (member 4, steps 9270..10170) receives
+31.6667 Wh but consumes 46.5700 Wh, ending with -14.9034 Wh net battery and a
+timeout after late arrival. Neither elapsed travel delay nor fleet guard counts
+alone identifies a per-member guard cause.
+
+The intermediate load prediction changes in the predicted direction: mean
+overload ticks/longest overload spell fall O_H4579.125 -> R896.375, a paired
+-3682.75 [-6453.920,-911.580], lower in six worlds and tied in two. The native
+seven-member depleted groups of 05/07/08 are absent in R. This shows that some
+capacity access and useful full-mission service can be obtained with existing
+xyz/dock actions before F, without station-selection/reservation rights or
+allocation changes. It contradicts a broad claim that lawful transfer is
+unavailable or necessarily loses the finite service benefit. It does not
+identify the original B02 formation mechanism, isolate a causal mediator, or
+make R optimal; R changes subsequent assignment, energy and F trajectories as
+one closed-loop package.
+
+The residual is stronger than an ambiguous fleet energy trend. In R04 the fixed
+members {0,2,3,4,5,6}, and in R08 {0,1,2,3,4,6}, remain stationary, native
+eligible and in F at station 1 for the entire final3000 window. Each group has
+18000 F member-steps, draws 1010.94 W against 1000 W input, and loses exactly
+9.116667 Wh. Their minimum terminal batteries are .126903 and .119094. Hence
+the policy **does not prevent all persistent local overload**. It has avoided
+depletion through H12000 here, but retains a smaller locked-group deficit. A
+total-2000-W argument cannot change the legal authority over these F members.
+
+All R worlds end with lower fleet energy than at initialization; seven of eight
+also draw down over the final3000 window (08 rises by88.331 Wh). Mean full stock
+change is P -1004.567/O_H -852.131/R -685.293 Wh; R's final3000 mean is
+-84.438 Wh versus O_H -58.969. The final-block averages mix active replenishment
+and terminal commitment suppression, so they are not alone a steady-state
+proof. The fixed six-member cohorts above are a direct realized local deficit.
+Native modeled consumption can exceed available stock after depletion in P/O_H;
+do not read their clamped near-zero stocks as energy balance or sustainability.
+
+R-O_H additionally buys +457.861 Wh mean gross charger input and spends
++224.929 Wh modeled consumption and +143494.282 m team travel. Its large native
+J gains are not purely service gains: reduced accumulated native return-risk
+cost is important in the three rescued worlds. Raw reward components are
+unchanged and retained. Complete event reading finds four charged ordinary
+options without a decoded arrival in O_H (01:1,06:3), and six in R
+(01:2 including one censored,04:1,07:1,08:2). The summary's narrower
+`commitment_failed_arrivals` counts only timeout-no-arrival releases (3/2),
+not full releases or censoring; it is not the complete mismatch count.
+No transfer misses arrival in this panel. These executed defects stay in the
+comparison rather than being repaired after seeing the result.
+
+Empirical support now favors R as a conditional H12000 ordinary asset, not only
+as a queue-balancing proposal. Broad prevention/sustainability is unsupported
+and concretely limited by the residual F groups. The former skeptical account
+that ordinary movement cannot expose useful alternative access is weakened;
+the remaining account is heterogeneous radio/energy consequences and incomplete
+pre-F prevention, not missing native rights for all transfers. The independent
+scientific review below will separately resolve the next investment judgment.
+
+### Actual cost
+
+B03 used **0 fits,0 optimizer updates,288000 result transitions**, plus the
+separately recorded 210 correctness transitions. Worker CPU sum is
+7536.18707 s (2.093385 h), worker wall sum7381.765564 s, parent wall2003.331055 s
+(33.388851 min), parent CPU2.189464 s. Largest observed worker RSS is724980 KiB,
+parent511952 KiB; these are not a simultaneous summed peak. Actual P/O_H/R
+CPU sums are1895.415735/2586.486214/3054.285121 s. Radio snapshot queries total
+151793 (21394/48583/81816); R uses the same query policy and information rights,
+but changed closed-loop availability increases realized query count and cost.
+The 2..3 worker-CPU-hour and30..55-minute estimates covered this execution;
+engineering, review and reading time were not instrumented and are not zero.
+
+Direction cumulative result cost is now **1 fit,816000 native steps,about
+6.485 worker-CPU hours**, plus recorded correctness and unmetered engineering.
+No automatic tuning, horizon extension, new learning arm or additional seed
+has been launched. The successful finite signs do not select a next experiment
+by themselves; that choice is separated from empirical support and adoption.
+
+### Independent scientific reading and DM disposition
+
+The registered ResearchCritic worked in a separate context without DM/Root
+conversation inheritance. It reconstructed the prospective protocol and B03
+raw evidence before reading the applicable earlier independent review and Root
+disposition. It used no new simulation or fit. Its complete substantive return:
+
+> **Recommendation: retain R as a useful H12000 ordinary-control candidate;
+> pursue one bounded challenge on the complete prior B02 panel. Do not promote
+> it to a sustainable controller or buy an unchanged horizon extension.**
+>
+> No DM/Root conversation was inherited. I reconstructed the frozen protocol
+> and B03 outputs before reading the earlier independent answer and Root
+> disposition. I verified all 75 manifest artifacts, recomputed primary
+> endpoints from all 24 NPZ trajectories, and checked all 24 pairwise exogenous
+> streams. Source a4bd3b5ec completed 288000 steps, zero fits/updates, with no
+> missing trajectories or early endings.
+>
+> R passes the prospectively stated descriptive useful-package prediction.
+> Against O_H, mean full/late J improves by 4943.197/4891.211, and QoS by
+> .079899/.152019. Against P, improvements are12316.865/8848.818 J and
+> .331107/.468908 QoS, with all four endpoints positive in every world. R has
+> no cutoff, depletion, terminal-zero-service or final persistent-reserve
+> worlds. The nominal intervals for all four R-O_H primary effects cross zero;
+> this remains an exploratory fixed-controller comparison.
+>
+> Every world matters. R-O_H full J, late J, full QoS, late QoS, and R overload
+> seconds by suffix are:
+> 01: -154.904,-92.138,-.012853,-.015726,0;
+> 02: +472.464,+357.335,+.039571,+.060395,0;
+> 03: +306.554,+88.738,+.025619,+.014555,0;
+> 04: -309.998,-109.651,-.025698,-.017822,3211;
+> 05: +13175.614,+12974.250,+.271355,+.509699,0;
+> 06: -96.731,-16.498,-.008225,-.002994,0;
+> 07: +12713.529,+12722.360,+.179439,+.360716,0;
+> 08: +13439.046,+13205.287,+.169987,+.307330,3960.
+>
+> The largest gains coincide with avoiding O_H's seven-member cutoff/depletion
+> events in05/07/08. Independent service improvement accompanies native-J gains,
+> so this is more than avoiding reward penalties. Nevertheless,01/04/06 lose
+> both full and late service/J against O_H. R's longest zero-service spells
+> are0,0,15,84,0,0,55,74; longest below-half-service spells are
+> 51,29,54,554,55,134,103,126. Adverse tails include04's84/554 versus O_H68/507,
+> 06's134 versus109 below-half spell, and08's74 versus72 zero-service spell.
+> R03 and R08 retain one and eighteen reserve member-steps, respectively.
+>
+> The intervention received substantial exposure:67 transfers crossed, arrived,
+> charged and released; none had real-F steps or overwritten commands during
+> the transfer. Sixty-five subsequently regained connected load. The two
+> exceptions, both in07, had1938 and981 follow-up steps, so they cannot simply
+> be called end-censored. One transfer in03 lost14.90 Wh net despite receiving
+> charge; transfers in03 and04 reached the900-second timeout after arrival.
+> Fleet-level guard counters cannot identify the cause of those individual
+> delays.
+>
+> The strongest supported explanation is that existing motion rights permit
+> useful access to the other charger before forced return, and the complete
+> ordinary package can preserve substantial service while doing so. Mean
+> overload exposure falls4579.125 to896.375 seconds. This weakens a blanket
+> 'legal transfers are prevented or necessarily destroy service' explanation.
+> It does not isolate load awareness, deadline calculation or reassignment as
+> the unique cause: transfers also change service assignments and subsequent
+> ordinary commitments. There is no evidence here of learning necessity,
+> learned-duration benefit or independent training replication.
+>
+> The consequential limitation is demonstrated continuing local deficit. In
+> R04 and R08, the same six station-1 members remain eligible and in F
+> throughout final3000. Each group draws1010.94 W against1000 W, losing exactly
+> 9.11667 Wh. Their final mean battery ratios are.127683 and.120066; the last
+> controller choice excludes all six because F is active. R08's fleet stock
+> rises88.33 Wh during that window while this group continues draining. Thus
+> aggregate energy recovery or total2000 W capacity cannot establish persistent
+> viability. This supports restricting R to its demonstrated finite mission,
+> without declaring lawful prevention generally impossible.
+>
+> The retained arrival defect remains substantive:four O_H and six R
+> commitments charge without a decoded arrival, including one censored R01
+> commitment. Their minimum decoded distance is20.000001907 m. None is a
+> cross-basin transfer. Preserve executed semantics; the result does not justify
+> silently repairing the detector or attributing the finite gain to such repair.
+>
+> For adoption, preserve B01 O's finite result and B02 O_H's failed long-mission
+> verdict. Add R as a conditional H12000 performance comparator, while
+> withholding unrestricted default or sustainability claims. The earlier
+> selection review's constructive prediction received support; its
+> recommendation supplies no additional replication.
+>
+> The smallest worthwhile next complete observation is unchanged R on all
+> eight original B02 worlds, H12000, compared with retained P/O_H outputs.
+> This directly tests the original adverse cases, especially52292801/03,
+> where P remained healthy and O_H introduced failures. It is an exposed
+> development challenge, not fresh confirmation. Using the entire panel avoids
+> selecting only convenient failures.
+>
+> Prediction: lawful completed transfers reduce overload/failure and preserve
+> the same full/late package criterion, including avoiding O_H's added failures
+> in01/03. Success supports wider finite use across the two development panels;
+> it does not license unlimited extension or another automatic screen.
+> Active transfer with continuing failure or new risk restricts R's usefulness
+> further and stops unchanged-R expansion; revision needs a concrete different
+> prediction. Less overload with lost service/J means complete benefit fails
+> to recur; preserve observed access capability and its service tradeoff.
+> Little activation or missing evidence is reported directly, neither general
+> infeasibility nor automatic repair.
+>
+> Comparator reuse appears feasible: B02/B03 recorded effective configurations
+> are identical. Inspected environment, configuration and retained controller
+> dependencies are unchanged betweene905d8842 anda4bd3b5ec; the relevant adapter
+> change only adds the optional R factory. A prospective challenge still needs
+> exact bindings and direct verification of each new R stream against remote
+> original streams. I did not independently re-read B02 remote NPZ files in
+> this review.
+>
+> B03 cost7536.187 worker-CPU seconds (2.0934 h) and2003.331 s parent wall,
+> plus engineering/readback. R costs about18.1% more worker CPU,44.2% more
+> travel and4.5% more modeled consumption than O_H; realized service-snapshot
+> calls increase68.4%, despite no new query mechanism. Cumulative declared
+> science is one fit,816000 steps,about6.485 worker-CPU h, with support work
+> incompletely measured. Proposed challenge adds zero fits,eight trajectories,
+> 96000 steps:about3054 worker-CPU s (.8484 h) androughly85 MB raw at B03's
+> R rate. Runner adaptation, remote pairing verification and readback remain
+> unpriced. This limited cost is justified by the original unresolved
+> counterexamples; it does not displace the independently assigned preserved-
+> content question or authorize any launch.
+>
+> **MATERIAL_DISSENT: no.** No conflicting new investment or expanded claim
+> has been proposed. Retain the supported finite benefit while explicitly
+> withholding sustainability and unchanged-extension claims because of the
+> directly observed six-member deficits.
+
+DM disposition: accept the review. Its arrival-event audit corrected my initial
+draft's overreading of the narrower timeout counter; the published result now
+preserves the full4/6 mismatches and the narrower3/2 count separately. Also
+retain R08's slightly worse zero-service tail and the substantial free follow-up
+for both non-recovered transfer members, rather than dismissing them as censored.
+The conditional H12000 asset is useful enough to retain, while default adoption,
+general prevention of overload and sustainability remain withheld. The group
+deficit is demonstrated; it is not a reason to spend an unchanged longer run
+merely to produce a later failure, nor a reason to dismiss the finite benefit.
+
+At this assigned substantive boundary I recommend the unchanged-R, complete
+eight-world B02 challenge as the next marginal purchase, not an immediate
+automatic continuation. It can change whether R addresses the *original*
+added-failure cases, which a further fresh panel or unchanged extension would
+answer less directly. It is0fit/96000 new steps, preliminarily .85 worker-CPU h
+at the measured R rate (not a guaranteed price), about85 MB raw, plus an
+estimated1..2 h for narrowly binding the old comparators, reader adaptation,
+verification and reading. A full new three-arm repetition would spend192000
+extra steps regenerating unchanged controls; reuse is conditional on source,
+effective-config and direct exogenous checks, never on matching seed labels
+alone. No old raw is deleted or copied into another retention chain.
+
+The next prediction and stop consequences are those in the review: retained
+full/late package signs and no new risk, particularly no added failures in
+52292801/03; observed access without useful recurrence stops unchanged-R
+expansion, not the entire lawful-control family. Any different recipe needs a
+specific revised intermediate/native prediction and cost. This is a positive
+case for a small exposed challenge, not a commitment to endless development or
+confirmation. Root owns cross-question allocation against the independently
+selected preserved-content study and other peer work. B03 itself is complete;
+the direction moves to reserve with this recommendation and no selected next
+operation, unread result, pending advice, or invented approval dependency.
