@@ -1490,12 +1490,12 @@ R09技术失败；不能据旧摘要把整个方向视为从未试过。保留�
 Owner要求通常保持3–4个有实质工作的Codex DM，并保留少量真正值得比较的备选；数量不是
 科学质量判断，不把Oracle／scout／reviewer或只剩清理的旧研究算成活动DM，也不强凑第四题。
 
-`uav_local_history`由 `/root/dm_local_history`研究合法匿名空间历史，首比较已完成：
-同一普通局部控制器的当前观测C与有界历史H，0fit、64完整H256回合／16,384步；
-H-C平均J +.004461、服务 +.376953，区间跨零，不预设GRU遗忘或历史优势。
-已选择同一合法历史下的完整27指令学习比较，3fit、458,752总步，保留C/H及初始化对照；
-不是要求普通比较先胜出，也不把历史的特异学习增益混同于完整学习包的价值。
-完整结果、独立判读、建设性续接与成本见[NOTES](candidates/uav_local_history/NOTES.md#2026-09-29---b01-complete-reading)。
+`uav_local_history`的两项比较已完整判读、独立审查并收尾，当前reserve，不计为活动DM。
+B02三次完整27指令学习中两次胜初始化，但96个L1-C世界配对全输J及服务；L1-H均值
+-.258158 J／-15.900472服务。保留291022的真实学习收益、C/H普通能力及全部反例，
+不把此配方失败改写为历史无用。H-C新面板-.010167 J，与B01小正均值均有跨零区间。
+停止原样学习和未选的随机部署诊断；累计3fit／475,136步／.378094 runner CPUh。
+完整结果、独立判读和停止范围见[NOTES](candidates/uav_local_history/NOTES.md#2026-09-29---b02-complete-reading)。
 
 Oracle具体化的`uav_availability_recovery`已交新DM `/root/dm_availability_recovery`：
 G0上两个备用UAV在一名主成员暂时退出及回归时联合选择补位、驻留与返回，比较三次学习实例、
@@ -1507,11 +1507,13 @@ G0上两个备用UAV在一名主成员暂时退出及回归时联合选择补位
 选择时B05消息研究仍在收口；其DM随后已完整发表并置reserve，不再计作新的活动研究：
 两种有界续训都保留相对B40的条件性均值收益，但普通未来端点相对几何信息的增量仍未解决，
 最差时刻服务反例保留。Root在实质结果边界综合，既不以新增模块为默认下一步，也不否定已有能力。
-随后Oracle提出的新TRDL比较已通过一次独立选题判读，交新DM `/root/dm_tail_learning`：
-显式输入当前阈值的标量critic对比Q32，3配对区组／6fit，不是对旧正例补seed或恢复旧暂停会话。
-保留原B01正、B02未复现，并明确后采样eta及初始化差异使它仍是有限学习包比较；不声称
-已证明分布表示必要、eta因果或胜过普通飞行规划器。由此三个Codex问题分别由history、
-availability和tail-learning DM负责；首批结束后的判读／后继选择与运行中训练须区分。
+随后Oracle提出的新TRDL比较也已完成并独立判读：3配对区组／6fit／1,179,648步，
+Q32-S_eta自身尾部差-.004159／-.005316／-.025817，均值-.011764，描述性区间跨零。
+保留显式当前阈值的标量critic为有限比较参照，停止本配方追加；不称总体优越、eta因果或
+分布表示无用，也不删除旧B01正／B02未复现及新的均值取舍。46.74min runner墙钟，
+.7433 CPUh；当前reserve，无活动操作。原选题见下方，完整结果见
+[TRDL NOTES](candidates/tail_return_distributional_learning/NOTES.md#independent-scientific-reading-and-investment-decision)。
+由此原三项中只有availability仍在执行；已结束的两个DM、Oracle及清理工作不计为并行研究。
 [完整Oracle建议、独立重构、旧暂停消歧和Root选择](archive/2026-09-29/RESEARCH-oracle-reserve-selection.md#root-decision)。
 
 只保留一个额外具体条件性备选：服务无线发射开关／调度。它改变合法控制权，须明确测量、
@@ -1519,7 +1521,9 @@ CSI误差／时延、inactive时感知及airtime／开关成本，再考虑匹�
 未选启动、未称第四DM。匹配算法本身、无可信不确定性合同的无线模型适应、任意伙伴多样性
 及旧配方重命名不进入promising清单。备选不足时留空，不把条件性前提写成已经解决。
 
-`/root/oracle_question_expansion`为原生`gpt-6-astra`、`max`、独立上下文，已完成本次跨角度筛选。
+`/root/oracle_question_expansion`为原生`gpt-6-astra`、`max`、独立上下文，原选题已完成；
+在上述两个完整结果之后，正只读具体化无线控制的合法信息／资源合同，并与已记录的校准续接
+比较边际价值。此推导未声明或启动新实验，不因空位自动把有前提的候选升级为promising。
 它是Root的科学推理方式，不拥有方向、记录、启动或审批，也不冒充独立Scientific Reviewer；
 Root选择跨题投入，DM负责问题内推理执行。建议区分可具体化与有关键前提的条件性备选，允许没有
 足够候选，不建新角色／评分表／审批层。新增假设或资源须明确来源、误差、成本，并给有能力普通
@@ -1534,7 +1538,8 @@ Claude已接受工作、能源原配方停止、FSD/PPC暂停、G33冻结和Mila
 ### B05 Round-Boundary Decision
 
 完整6 Pro创新建议已读取，GitHub写回核验为NOT_DELIVERED后由Root原样保全并采纳：
-继续当前history／availability／tail-learning三个独立比较，本次新增0fit／0原生评价步，
+该次取舍是推进已选history／availability／tail-learning比较，不额外购买第四题，新增0fit／0原生评价步；
+其后history和tail-learning完整结果及当前运行状态见上方，Pro旧输入不是这两个新结果的审查。
 不为第四个名额追加研究。B05的受限续训正面能力和服务尾部反例均保留，未来内容增量仍未解决。
 低维常量校准与状态依赖修正是具体但未选择的后继问题，不是B05欠缺的完成条件；
 其暂缓是边际投入选择，不要求先有部署项目，也不禁止有理由的后续发展。
