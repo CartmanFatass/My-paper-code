@@ -2713,3 +2713,52 @@ correctness exposure, never native scientific or positive-result gates. Publish
 exact accepted inputs before runner-side admission. Preserve terminal failures,
 read the full output with independent material diagnosis, publish this direction's
 standing/shared implications and measure exact cleanup at the result boundary.
+
+### B05 implementation accepted, before native execution
+
+The bounded registered Implementer
+`/root/dm_retained_control/implement_composed_policy` returned the frozen composed
+model, independent PPO updater and six focused tests. I read its full diff and
+checks. I corrected its initial agent-average surrogate reduction to the inherited
+sum-over-five-agent reduction before any result execution; the documented
+per-agent density and clipping are unchanged. The accepted code reuses the
+existing base network and PPO primitives rather than copying shared learners.
+I implemented the lawful channel/collector, six-fit driver, B40 reference and
+complete reader. The reader reuses the maintained B04 transport/native numerical
+reconstruction; B05 adds composed density, bounded/executed correction, service
+tails, actual checkpoint tensor identity, update streams and separated df2/df31
+readings. It uses torch only to deserialize checkpoints, with no policy,
+environment or optimizer calls during readback.
+
+The integrated tests passed32 in7.37s, then32 in7.97s after reader/checkpoint
+coverage and CLI repair. These are synthetic correctness checks, not native UAV
+episodes or additional scientific fits. Pytest removed its invocation scratch.
+Coverage includes same-history/noise zero identity; matched arm RNG and detached
+actual-action inputs; active residual/critic updates with zero base movement;
+three arm types' full256-step writer/reader including composed densities and
+qualified clipped forecasts; a miniature six-fit/one-reference driver; and its
+actual initial/final checkpoint and update-log readers. Full native `read_run`
+over the224 promised trajectories, admission manifest and terminal witness has
+not yet run and remains the result-collection obligation.
+
+Independent engineering Reviewer `/root/dm_retained_control/review_b05` worked
+read-only in a separate context. It found the direct reader command initially
+failed before argparse because the repository root was not on sys.path. I added
+the same root bootstrap used by native entrypoints; reviewer independently
+verified `--help` exit0. Its final assessment is **no material finding remains**
+after tracing checkpoint binding/freezing, RNG, composed sampling/density,
+actual-history recurrent replay, agent-summed PPO/separate clipping, dated
+forecasts, native inputs/outcomes, counts, admission ordering and partial-failure
+preservation. Its full-run deserialization/manifest integration coverage is static;
+it does not claim a remote native run or scientific checkpoint verification.
+
+My remote read-only load directly verified the canonical parent metadata and
+sigmas `[1.1606353521347046,1.1109598875045776,1.1309105157852173]`, in addition to
+the earlier SHA256. No source contradiction was found. Source/publication controls
+were refreshed before implementation; canonical remote RESEARCH still carried
+the old B04 row. I reported that concrete shared-control dependency to Root and
+also identified that the new published word `active` must be `exploring` for the
+existing launch parser. No refused scientific invocation or replacement attempt
+was used to discover either condition. These are ordinary control corrections,
+not a new scientific approval requirement. The exact run tag remains
+`b05_retained_control`, and no native fit has yet started.
