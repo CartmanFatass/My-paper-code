@@ -1,25 +1,48 @@
 """Ordinary placement planner, closed-loop executor and floors (coupled_host_joint_skills_stage1 b01).
 
 Same-information planner (ground-truth user and BS positions; the env's own connection,
-routing and reward functions via ``host.static_evaluate``):
+routing and reward functions via ``host.static_evaluate``).  T2b design (DM decision after
+the T2 plateau finding):
 
-* ``search_placement(env, allow_a2a, budget, rng)``: initial candidates from k-means service
-  centroids (k in {4, 5, 6}, own numpy k-means with k-means++ seeding from ``rng``); for
-  k < 6 the remaining UAVs are relays at the midpoints of the BS -> centroid lines of the
-  farthest centroids (one relay per line, farthest first); height 100 m.  Then coordinate
-  descent from the best candidate: for each UAV in index order try +x, -x, +y, -y by the
-  step (100 m, shrinking once to 50 m after a full sweep without improvement), accept strict
-  improvements of the contract reward (first improvement), stop at the evaluation budget or
-  after a 50 m sweep without improvement (``converged``).  Candidate evaluations count
-  toward the budget; a move clipped to no displacement is skipped without an evaluation.
-  ``P_relay`` = ``allow_a2a=True``; ``P_flat`` = ``allow_a2a=False`` (UAV-UAV links disabled
-  in the evaluator), same budget and, given equal rng states, the same candidates.
+* Candidates (all evaluated statically, in this order, until the budget):
+  1. plain k-means candidates (k in {4, 5, 6}; k-means++ seeding from ``rng``): service
+     UAVs at the k centres, the remaining 6 - k UAVs at the midpoints of the BS -> centre
+     lines of the farthest centres (the T2 rule, kept as a candidate family);
+  2. range-aware served-subset candidates for the k = 5, 4, 6 centres.  Relay family
+     (``allow_a2a=True``): a centre at horizontal distance d from the BS needs
+     ``ceil(max(0, d - R_direct) / 1100)`` relays; the service UAV sits at the centre and the
+     relays on the BS -> centre line (``relay_distances``); centres needing more relays than
+     the router can chain (``max_routable_relays`` = max_hops) are excluded and recorded.
+     Flat family (``allow_a2a=False``, DM amendment): every centre is served by one UAV
+     parked at ``min(d, R_direct - 1 m)`` along the BS -> centre line (direct backhaul kept),
+     no relays.  For every non-empty subset of servable centres whose total need (1 service
+     + its relays, no relay sharing) is <= n_uavs a candidate is built; leftover UAVs go to
+     the largest unserved cluster (relay: its centre; flat: its parked point), else above
+     the BS.  All heights 100 m.
+* Multi-start coordinate descent from the top-3 evaluated candidates (contract reward
+  descending, ties by candidate index), the remaining budget split equally (remainder to the
+  first starts; budget a converged start leaves is not passed on).  Per start: for each UAV
+  in index order try +x, -x, +y, -y by the step (100 m, shrinking once to 50 m after a full
+  sweep without an accepted move); accept a strict improvement of the contract reward
+  (``stage="descent"``) or, when the reward is equal within ``IMPROVEMENT_TOL``, a strict
+  decrease of the plateau potential (``stage="plateau"``).  The potential is the sum over
+  unrouted UAVs of the 3-D distance to the nearest node they could route through: the BS,
+  plus routed UAVs when A2A is enabled.  The best start's result is returned (ties: the
+  earlier start).
+* ``P_relay`` = ``allow_a2a=True``; ``P_flat`` = ``allow_a2a=False`` (UAV-UAV links disabled
+  in the evaluator), same budget and descent; given equal rng states the k-means centres and
+  plain candidates are equal.  The relay search's candidate list is plain + relay-family +
+  flat-family subsets (the flat layouts evaluated with A2A on), the flat search's is plain +
+  flat-family subsets: the flat set is contained in the relay set, so the static gate
+  ``G = P_relay - P_flat`` cannot be negative through candidate coverage alone (descent from
+  the top-3 starts can still differ).  Duplicate layouts are removed before ranking, so the
+  three starts are distinct layouts.
 
 * ``closed_loop_execute(env, targets, max_steps)``: reset to the world's initial positions
   (``reset(seed=env.world_seed)``), assign targets to UAVs (default: the permutation that
-  minimises the largest straight-line distance, then the sum), fly straight at max_speed
-  (normalised velocity action = unit direction; the final partial stride lands exactly) and
-  hold on arrival.
+  minimises the largest straight-line distance, then the sum), fly straight at max_speed and
+  hold on arrival.  The normalised action is clipped to the unit ball, so the executed 3-D
+  speed never exceeds max_speed (the env itself does not clip actions, uav_env.py 283).
 
 * ``stationary_floor(env)`` (zero actions) and ``random_floor(env, rng)`` (uniform
   normalised actions in [-1, 1]^3 each step).
@@ -31,6 +54,7 @@ contract the learners act in); pass ``allow_a2a`` to override.
 from __future__ import annotations
 
 import itertools
+import math
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
@@ -43,9 +67,14 @@ from experiments.candidates.coupled_host_joint_skills_stage1.host import (
 
 SERVICE_HEIGHT_M = 100.0
 K_CANDIDATES = (4, 5, 6)
+K_SUBSET_ORDER = (5, 4, 6)
+RELAY_SPACING_M = 1100.0
+PARK_MARGIN_M = 1.0
+N_STARTS = 3
 INITIAL_STEP_M = 100.0
 FINAL_STEP_M = 50.0
 IMPROVEMENT_TOL = 1e-12
+POTENTIAL_TOL = 1e-9
 FINAL_WINDOW = 100
 ARRIVAL_TOL_M = 1e-6
 
@@ -93,7 +122,58 @@ def kmeans(points: np.ndarray, k: int, rng: np.random.Generator, max_iter: int =
     return centres, labels
 
 
-# ------------------------------------------------------------------------------ candidates
+# ------------------------------------------------------------------------------ geometry
+
+
+def link_ranges(env: CoupledRelayHost) -> dict[str, float]:
+    """Free-space link ranges at the 3 dB threshold, derived from the host's constants.
+
+    ``r_link_uav_m``: 3-D range of a UAV-UAV link (tx_power); ``r_link_bs_m``: 3-D range of
+    the UAV-BS link (ground_bs_tx_power); ``r_direct_horizontal_m``: horizontal distance at
+    which a UAV at SERVICE_HEIGHT_M reaches the BS directly.
+    """
+    if env.channel_model != "free_space":
+        raise ValueError("link_ranges assumes the free-space channel")
+    constant_db = 20.0 * math.log10(4.0 * math.pi * env.carrier_frequency / 3e8)
+
+    def reach(tx_dbm: float) -> float:
+        return 10.0 ** ((tx_dbm - env.noise_power - env.min_sinr - constant_db) / 20.0)
+
+    r_uav = reach(env.tx_power)
+    r_bs = reach(env.ground_bs_tx_power)
+    dz = SERVICE_HEIGHT_M - float(env.ground_bs_positions[0, 2])
+    if r_bs <= abs(dz):
+        raise ValueError("the BS is out of range at the service height")
+    if RELAY_SPACING_M > r_uav:
+        raise ValueError("relay spacing exceeds the UAV-UAV link range")
+    return {
+        "r_link_uav_m": r_uav,
+        "r_link_bs_m": r_bs,
+        "r_direct_horizontal_m": math.sqrt(r_bs ** 2 - dz ** 2),
+        "relay_spacing_m": RELAY_SPACING_M,
+    }
+
+
+def relays_needed(distance_m: float, r_direct_m: float, spacing_m: float = RELAY_SPACING_M) -> int:
+    """ceil(max(0, d - R_direct) / spacing)."""
+    excess = float(distance_m) - float(r_direct_m)
+    return 0 if excess <= 0.0 else int(math.ceil(excess / float(spacing_m)))
+
+
+def relay_distances(distance_m: float, n_relays: int, spacing_m: float = RELAY_SPACING_M) -> list[float]:
+    """Distances from the BS of the n relays on the BS -> centre line (service UAV at d).
+
+    As even as the spacing allows: the first leg is ``a = max(d / (n + 1), d - n * spacing)``
+    and the n remaining legs are equal, ``(d - a) / n`` (<= spacing).  With ``n`` from
+    ``relays_needed`` the first leg is <= R_direct, so every link is inside range.
+    """
+    d = float(distance_m)
+    n = int(n_relays)
+    if n <= 0:
+        return []
+    first = max(d / (n + 1), d - n * float(spacing_m))
+    leg = (d - first) / n
+    return [first + m * leg for m in range(n)]
 
 
 def _clip_positions(env: CoupledRelayHost, positions: np.ndarray) -> np.ndarray:
@@ -104,31 +184,204 @@ def _clip_positions(env: CoupledRelayHost, positions: np.ndarray) -> np.ndarray:
     return clipped
 
 
-def build_candidates(env: CoupledRelayHost, rng: np.random.Generator) -> list[dict[str, Any]]:
-    """One candidate per k in K_CANDIDATES: service UAVs at centroids, relays at midpoints."""
+# ------------------------------------------------------------------------------ candidates
+
+
+def kmeans_centres(env: CoupledRelayHost, rng: np.random.Generator) -> dict[int, dict[str, Any]]:
+    """k-means on user xy for k in K_CANDIDATES (in that order, consuming ``rng``)."""
     users = np.asarray(env.user_positions, dtype=float)[:, :2]
-    bs_xy = np.asarray(env.ground_bs_positions[0, :2], dtype=float)
-    candidates = []
+    out = {}
     for k in K_CANDIDATES:
         if k > env.n_uavs:
             continue
-        centres, _labels = kmeans(users, k, rng)
-        order = np.argsort(-np.linalg.norm(centres - bs_xy, axis=1), kind="stable")
-        positions = np.zeros((env.n_uavs, 3), dtype=float)
-        positions[:k, :2] = centres
-        for r in range(env.n_uavs - k):
-            target = centres[order[r % k]]
-            positions[k + r, :2] = 0.5 * (bs_xy + target)
-        positions[:, 2] = SERVICE_HEIGHT_M
-        candidates.append({
-            "k": int(k),
-            "positions_xyz": _clip_positions(env, positions),
-            "relay_targets": [int(order[r % k]) for r in range(env.n_uavs - k)],
-        })
+        centres, labels = kmeans(users, k, rng)
+        out[k] = {"centres": centres, "labels": labels,
+                  "sizes": np.bincount(labels, minlength=k)}
+    return out
+
+
+def _plain_candidate(env: CoupledRelayHost, k: int, centres: np.ndarray) -> dict[str, Any]:
+    bs_xy = np.asarray(env.ground_bs_positions[0, :2], dtype=float)
+    order = np.argsort(-np.linalg.norm(centres - bs_xy, axis=1), kind="stable")
+    positions = np.zeros((env.n_uavs, 3), dtype=float)
+    positions[:k, :2] = centres
+    for r in range(env.n_uavs - k):
+        positions[k + r, :2] = 0.5 * (bs_xy + centres[order[r % k]])
+    positions[:, 2] = SERVICE_HEIGHT_M
+    return {
+        "kind": "kmeans_plain",
+        "k": int(k),
+        "positions_xyz": _clip_positions(env, positions),
+        "relay_targets": [int(order[r % k]) for r in range(env.n_uavs - k)],
+    }
+
+
+def max_routable_relays(env: CoupledRelayHost) -> int:
+    """Relays the scenario-2 router can chain between a UAV and the BS.
+
+    ``_bfs_shortest_path`` (scenario2.py 397-450) skips expanding a node whose UAV prefix has
+    ``len(path) >= max_hops`` but still checks that node's own BS link first, so the longest
+    routable chain is start -> r1 -> ... -> r_{max_hops} -> BS: ``max_hops`` relays.
+    """
+    return int(env.max_hops)
+
+
+def _subset_candidates(env: CoupledRelayHost, k: int, clusters: dict[str, Any],
+                       family: str, ranges: dict[str, float],
+                       report: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+    """Served-centre subset candidates for one k-means solution, ``family`` in {"relay", "flat"}.
+
+    Relay family: service UAV at the centre, ``relays_needed`` relays on the BS -> centre
+    line; a centre needing more relays than ``max_routable_relays`` is excluded (recorded in
+    ``report["excluded_centres"]``), never built and scored zero.  Flat family: every centre
+    is servable by one UAV parked at ``min(d, R_direct - PARK_MARGIN_M)`` along the BS ->
+    centre line (direct backhaul kept); no relays.  Leftover UAVs: relay family -> the
+    largest unserved cluster's centre; flat family -> the largest unserved cluster's parked
+    point; otherwise above the BS.  The family is a layout rule; the evaluation mode
+    (``allow_a2a``) is chosen by the caller: the relay search evaluates both families with
+    A2A on (DM T2b decision: the flat layouts are a subset of the relay search's candidates,
+    so G >= 0 by construction), the flat search evaluates the flat family with A2A off.
+    """
+    if family not in ("relay", "flat"):
+        raise ValueError(f"unknown candidate family {family!r}")
+    allow_a2a = family == "relay"
+    centres, sizes = clusters["centres"], clusters["sizes"]
+    bs_xy = np.asarray(env.ground_bs_positions[0, :2], dtype=float)
+    distance = np.linalg.norm(centres - bs_xy, axis=1)
+    r_direct = ranges["r_direct_horizontal_m"]
+    park = r_direct - PARK_MARGIN_M
+    max_relays = max_routable_relays(env)
+    report = {} if report is None else report
+    report.setdefault("excluded_centres", [])
+    report.setdefault("subsets_over_uav_budget", 0)
+    report.setdefault("subsets_built", 0)
+
+    def unit(c: int) -> np.ndarray:
+        return (centres[c] - bs_xy) / distance[c] if distance[c] > 0 else np.zeros(2)
+
+    def service_point(c: int) -> np.ndarray:
+        if allow_a2a:
+            return centres[c]
+        return bs_xy + min(float(distance[c]), park) * unit(c)
+
+    need: dict[int, int] = {}
+    for c in range(k):
+        if not allow_a2a:
+            need[c] = 0
+            continue
+        n = relays_needed(distance[c], r_direct)
+        if n > max_relays:
+            report["excluded_centres"].append({
+                "k": int(k), "centre": int(c), "distance_m": float(distance[c]),
+                "relays_needed": int(n), "max_routable_relays": max_relays,
+                "reason": "chain longer than the router's max_hops"})
+            continue
+        need[c] = n
+    servable = sorted(need)
+    out = []
+    for size in range(1, len(servable) + 1):
+        for subset in itertools.combinations(servable, size):
+            total = sum(1 + need[c] for c in subset)
+            if total > env.n_uavs:
+                report["subsets_over_uav_budget"] += 1
+                continue
+            rows: list[list[float]] = []
+            roles: list[str] = []
+            for c in subset:
+                point = service_point(c)
+                rows.append([point[0], point[1], SERVICE_HEIGHT_M])
+                roles.append(f"service:{c}")
+                assert need[c] <= max_relays
+                for m, along in enumerate(relay_distances(distance[c], need[c])):
+                    xy = bs_xy + along * unit(c)
+                    rows.append([xy[0], xy[1], SERVICE_HEIGHT_M])
+                    roles.append(f"relay:{c}:{m}")
+            leftover = env.n_uavs - total
+            pool = [c for c in range(k) if c not in subset]
+            if pool:
+                target = max(pool, key=lambda c: (int(sizes[c]), -c))
+                spot, role = service_point(target), f"extra_service:{target}"
+            else:
+                target, spot, role = None, bs_xy, "above_bs"
+            for _ in range(leftover):
+                rows.append([spot[0], spot[1], SERVICE_HEIGHT_M])
+                roles.append(role)
+            report["subsets_built"] += 1
+            out.append({
+                "kind": f"subset_{family}",
+                "k": int(k),
+                "served": [int(c) for c in subset],
+                "relays": {int(c): int(need[c]) for c in subset},
+                "leftover_target": None if target is None else int(target),
+                "roles": roles,
+                "positions_xyz": _clip_positions(env, np.asarray(rows, dtype=float)),
+            })
+    return out
+
+
+def _dedupe(candidates: list[dict[str, Any]], report: dict[str, Any]) -> list[dict[str, Any]]:
+    """Drop candidates whose clipped positions repeat an earlier candidate (first kept)."""
+    seen: set[bytes] = set()
+    kept = []
+    for candidate in candidates:
+        key = np.round(np.asarray(candidate["positions_xyz"], dtype=float), 6).tobytes()
+        if key in seen:
+            report["duplicates_removed"] = report.get("duplicates_removed", 0) + 1
+            continue
+        seen.add(key)
+        kept.append(candidate)
+    report.setdefault("duplicates_removed", 0)
+    return kept
+
+
+def build_candidates(env: CoupledRelayHost, rng: np.random.Generator,
+                     allow_a2a: bool = True,
+                     report: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+    """Plain k-means candidates, then range-aware served-subset candidates (k = 5, 4, 6).
+
+    ``allow_a2a=True`` (relay search): plain + relay-family subsets + flat-family subsets, so
+    the flat search's candidate set is contained in the relay search's.  ``allow_a2a=False``
+    (flat search): plain + flat-family subsets.  Duplicate layouts are removed (first kept).
+    ``report`` (optional dict) receives the candidate summary: counts per family, excluded
+    centres with reasons, subsets over the UAV budget, duplicates removed.
+    """
+    report = {} if report is None else report
+    ranges = link_ranges(env)
+    clusters = kmeans_centres(env, rng)
+    candidates = [_plain_candidate(env, k, clusters[k]["centres"]) for k in clusters]
+    families = ("relay", "flat") if allow_a2a else ("flat",)
+    for family in families:
+        for k in K_SUBSET_ORDER:
+            if k in clusters:
+                candidates.extend(_subset_candidates(env, k, clusters[k], family, ranges, report))
+    candidates = _dedupe(candidates, report)
+    for index, candidate in enumerate(candidates):
+        candidate["index"] = index
+    report["plain"] = sum(c["kind"] == "kmeans_plain" for c in candidates)
+    report["subset_relay"] = sum(c["kind"] == "subset_relay" for c in candidates)
+    report["subset_flat"] = sum(c["kind"] == "subset_flat" for c in candidates)
+    report["subset"] = report["subset_relay"] + report["subset_flat"]
+    report["total"] = len(candidates)
+    report["excluded_centre_count"] = len(report.get("excluded_centres", []))
     return candidates
 
 
 # ------------------------------------------------------------------------------ search
+
+
+def plateau_potential(env: CoupledRelayHost, allow_a2a: bool) -> float:
+    """Sum over unrouted UAVs of the 3-D distance to the nearest node they could route via."""
+    routed = set(int(i) for i in env.routing_paths)
+    nodes = [np.asarray(env.ground_bs_positions[b], dtype=float) for b in range(env.n_ground_bs)]
+    if allow_a2a:
+        nodes.extend(np.asarray(env.uav_positions[i], dtype=float) for i in sorted(routed))
+    nodes_array = np.stack(nodes)
+    total = 0.0
+    for i in range(env.n_uavs):
+        if i in routed:
+            continue
+        total += float(np.min(np.linalg.norm(nodes_array - env.uav_positions[i], axis=1)))
+    return total
 
 
 @dataclass
@@ -141,12 +394,17 @@ class PlacementResult:
     allow_a2a: bool
     budget: int
     converged: bool
-    start_candidate_k: int
+    best_start: dict[str, Any]
+    starts: list[dict[str, Any]] = field(default_factory=list)
     candidates: list[dict[str, Any]] = field(default_factory=list)
+    candidates_evaluated: int = 0
+    ranges: dict[str, float] = field(default_factory=dict)
+    candidate_report: dict[str, Any] = field(default_factory=dict)
     info: dict[str, Any] = field(default_factory=dict)
     max_uav_connections_seen: int = 0
 
     def to_json(self) -> dict[str, Any]:
+        start_indices = {s["candidate_index"] for s in self.starts}
         return {
             "positions_xyz": self.positions_xyz.tolist(),
             "contract_reward": self.contract_reward,
@@ -155,13 +413,20 @@ class PlacementResult:
             "budget": self.budget,
             "allow_a2a": self.allow_a2a,
             "converged": self.converged,
-            "start_candidate_k": self.start_candidate_k,
+            "best_start": self.best_start,
+            "starts": self.starts,
+            "candidates_total": len(self.candidates),
+            "candidates_evaluated": self.candidates_evaluated,
+            "candidate_report": self.candidate_report,
             "candidates": [
-                {"k": c["k"], "contract_reward": c["contract_reward"],
-                 "coverage_backhauled": c["coverage_backhauled"],
-                 "positions_xyz": np.asarray(c["positions_xyz"]).tolist()}
-                for c in self.candidates
+                {key: c.get(key) for key in ("index", "kind", "k", "served", "relays",
+                                             "leftover_target", "roles", "contract_reward",
+                                             "coverage_backhauled")}
+                | {"positions_xyz": np.asarray(c["positions_xyz"]).tolist(),
+                   "descent_start": c["index"] in start_indices}
+                for c in self.candidates[: self.candidates_evaluated]
             ],
+            "ranges": self.ranges,
             "history": self.history,
             "info": self.info,
             "max_uav_connections_seen": self.max_uav_connections_seen,
@@ -173,89 +438,137 @@ def search_placement(
     allow_a2a: bool,
     budget: int = 3000,
     rng: np.random.Generator | None = None,
+    n_starts: int = N_STARTS,
 ) -> PlacementResult:
     """Static placement search; never uses more than ``budget`` static evaluations.
 
-    The env is left at the last evaluated trial (not necessarily the best placement) and
-    with ``a2a_enabled = allow_a2a``; callers that step the env must reset it.
+    Candidates are evaluated in order until the budget (all of them at the declared budget);
+    the rest of the budget goes to the multi-start descent.  The env is left at the last
+    evaluated trial (not necessarily the best placement) and with ``a2a_enabled =
+    allow_a2a``; callers that step the env must reset it.
     """
     if rng is None:
         raise ValueError("search_placement needs an explicit rng")
     budget = int(budget)
-    candidates = build_candidates(env, rng)
-    if budget < len(candidates):
-        raise ValueError(f"budget {budget} is smaller than the {len(candidates)} candidates")
+    if budget < 1:
+        raise ValueError("budget must be >= 1")
+    candidate_report: dict[str, Any] = {}
+    candidates = build_candidates(env, rng, allow_a2a, report=candidate_report)
 
     evaluations = 0
     max_links = 0
     history: list[dict[str, Any]] = []
 
-    def evaluate(positions: np.ndarray) -> dict[str, Any]:
+    def evaluate(positions: np.ndarray) -> tuple[dict[str, Any], float]:
         nonlocal evaluations, max_links
         info = static_evaluate(env, positions, allow_a2a=allow_a2a)
         evaluations += 1
         max_links = max(max_links, int(info["uav_connection_count"]))
-        return info
+        return info, plateau_potential(env, allow_a2a)
 
-    best_index = -1
-    best_info: dict[str, Any] = {}
-    for index, candidate in enumerate(candidates):
-        info = evaluate(candidate["positions_xyz"])
+    evaluated = candidates[: min(len(candidates), budget)]
+    for candidate in evaluated:
+        info, potential = evaluate(candidate["positions_xyz"])
         candidate["contract_reward"] = float(info["contract_reward"])
         candidate["coverage_backhauled"] = float(info["coverage_backhauled"])
-        if best_index < 0 or info["contract_reward"] > best_info["contract_reward"] + IMPROVEMENT_TOL:
-            best_index, best_info = index, info
-    position = np.array(candidates[best_index]["positions_xyz"], dtype=float)
-    best_reward = float(best_info["contract_reward"])
-    history.append({"evaluations": evaluations, "contract_reward": best_reward,
-                    "stage": "candidates", "k": candidates[best_index]["k"]})
+        candidate["_info"] = info
+        candidate["potential"] = potential
+    ranked = sorted(range(len(evaluated)),
+                    key=lambda i: (-evaluated[i]["contract_reward"], i))[: max(1, int(n_starts))]
+    history.append({"evaluations": evaluations, "stage": "candidates",
+                    "contract_reward": evaluated[ranked[0]]["contract_reward"],
+                    "candidate_index": ranked[0]})
 
-    step = INITIAL_STEP_M
-    converged = False
+    remaining = budget - evaluations
+    shares = [remaining // len(ranked) + (1 if s < remaining % len(ranked) else 0)
+              for s in range(len(ranked))]
     moves = ((1.0, 0.0), (-1.0, 0.0), (0.0, 1.0), (0.0, -1.0))
-    while evaluations < budget:
-        improved = False
-        for uav in range(env.n_uavs):
-            for dx, dy in moves:
-                if evaluations >= budget:
-                    break
-                trial = position.copy()
-                trial[uav, 0] += dx * step
-                trial[uav, 1] += dy * step
-                trial = _clip_positions(env, trial)
-                if np.array_equal(trial, position):
-                    continue
-                info = evaluate(trial)
-                if info["contract_reward"] > best_reward + IMPROVEMENT_TOL:
-                    position, best_info = trial, info
-                    best_reward = float(info["contract_reward"])
-                    improved = True
-                    history.append({"evaluations": evaluations, "contract_reward": best_reward,
-                                    "stage": "descent", "uav": uav, "step_m": step,
+    starts: list[dict[str, Any]] = []
+    best: dict[str, Any] | None = None
+    for s, index in enumerate(ranked):
+        candidate = evaluated[index]
+        position = np.array(candidate["positions_xyz"], dtype=float)
+        current_info = candidate["_info"]
+        reward = float(current_info["contract_reward"])
+        potential = float(candidate["potential"])
+        limit = evaluations + shares[s]
+        history.append({"evaluations": evaluations, "stage": "start", "start": s,
+                        "candidate_index": index, "contract_reward": reward,
+                        "potential": potential})
+        step = INITIAL_STEP_M
+        converged = False
+        accepted = {"descent": 0, "plateau": 0}
+        used_before = evaluations
+        while evaluations < limit:
+            moved = False
+            for uav in range(env.n_uavs):
+                for dx, dy in moves:
+                    if evaluations >= limit:
+                        break
+                    trial = position.copy()
+                    trial[uav, 0] += dx * step
+                    trial[uav, 1] += dy * step
+                    trial = _clip_positions(env, trial)
+                    if np.array_equal(trial, position):
+                        continue
+                    info, trial_potential = evaluate(trial)
+                    trial_reward = float(info["contract_reward"])
+                    stage = None
+                    if trial_reward > reward + IMPROVEMENT_TOL:
+                        stage = "descent"
+                    elif (abs(trial_reward - reward) <= IMPROVEMENT_TOL
+                          and trial_potential < potential - POTENTIAL_TOL):
+                        stage = "plateau"
+                    if stage is None:
+                        continue
+                    position, current_info = trial, info
+                    reward, potential = trial_reward, trial_potential
+                    moved = True
+                    accepted[stage] += 1
+                    history.append({"evaluations": evaluations, "stage": stage, "start": s,
+                                    "contract_reward": reward, "potential": potential,
+                                    "uav": uav, "step_m": step,
                                     "move": [dx * step, dy * step]})
-            if evaluations >= budget:
+                if evaluations >= limit:
+                    break
+            if evaluations >= limit:
                 break
-        if evaluations >= budget:
-            break
-        if not improved:
-            if step > FINAL_STEP_M:
-                step = FINAL_STEP_M
-            else:
-                converged = True
-                break
+            if not moved:
+                if step > FINAL_STEP_M:
+                    step = FINAL_STEP_M
+                else:
+                    converged = True
+                    break
+        record = {"start": s, "candidate_index": index, "kind": candidate["kind"],
+                  "k": candidate["k"], "start_reward": float(candidate["contract_reward"]),
+                  "final_reward": reward, "share": shares[s],
+                  "evaluations": evaluations - used_before, "converged": converged,
+                  "accepted_descent": accepted["descent"],
+                  "accepted_plateau": accepted["plateau"]}
+        starts.append(record)
+        if best is None or reward > best["reward"] + IMPROVEMENT_TOL:
+            best = {"reward": reward, "position": position, "info": current_info,
+                    "record": record}
 
+    for candidate in candidates:
+        candidate.pop("_info", None)
+    assert best is not None
     return PlacementResult(
-        positions_xyz=position,
-        contract_reward=best_reward,
-        coverage_backhauled=float(best_info["coverage_backhauled"]),
+        positions_xyz=best["position"],
+        contract_reward=float(best["reward"]),
+        coverage_backhauled=float(best["info"]["coverage_backhauled"]),
         evaluations=evaluations,
         history=history,
         allow_a2a=bool(allow_a2a),
         budget=budget,
-        converged=converged,
-        start_candidate_k=int(candidates[best_index]["k"]),
+        converged=all(s["converged"] for s in starts),
+        best_start=best["record"],
+        starts=starts,
         candidates=candidates,
-        info=dict(best_info),
+        candidates_evaluated=len(evaluated),
+        ranges=link_ranges(env),
+        candidate_report=candidate_report,
+        info=dict(best["info"]),
         max_uav_connections_seen=max_links,
     )
 
@@ -436,6 +749,11 @@ def closed_loop_execute(
                 actions[i] = delta[i] / stride
             else:
                 actions[i] = delta[i] / distance[i]
+        # Unit-ball clip: the executed 3-D speed never exceeds max_speed (the env does not
+        # clip actions, uav_env.py 283).
+        norms = np.linalg.norm(actions, axis=1)
+        over = norms > 1.0
+        actions[over] /= norms[over][:, None]
         if state["arrival_step"] is None and np.all(distance <= ARRIVAL_TOL_M):
             state["arrival_step"] = t
         return actions

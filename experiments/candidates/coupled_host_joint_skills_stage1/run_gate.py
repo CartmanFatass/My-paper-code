@@ -2,16 +2,17 @@
 """b01 cell 0 static gate and closed-loop ordinary references (coupled_host_joint_skills_stage1).
 
 Zero fits.  For each world seed: ``make_host(world, area_size)``; static placement searches
-``P_relay`` (A2A allowed) and ``P_flat`` (A2A disabled in the evaluator), same budget and the
-same k-means candidates; closed-loop execution of both targets from the world's initial
-positions (straight-line flight at max_speed, host contract env with A2A enabled); stationary
-and uniform-random floors.  Writes ``worlds/<world>.json`` per world and ``summary.json``
-with G = mean(P_relay - P_flat) on the static contract reward, G_C on static backhauled
-coverage, closed-loop means of the four references, evaluations used, wall and process CPU
-seconds.
+``P_relay`` (A2A allowed) and ``P_flat`` (A2A disabled in the evaluator), same budget, the
+same k-means centres and the T2b candidate/multi-start design (``planner.py``); closed-loop
+execution from the world's initial positions (straight-line flight at max_speed): P_relay and
+P_flat targets in the host contract env (A2A enabled), plus a diagnostic execution of the
+P_flat targets with A2A disabled; stationary and uniform-random floors.  Writes
+``worlds/<world>.json`` per world and ``summary.json`` with G = mean(P_relay - P_flat) on the
+static contract reward, G_C on static backhauled coverage, closed-loop means of every
+reference, evaluations used, wall and process CPU seconds.
 
 Deterministic derivations (no additional seed): planner rng for both searches =
-``numpy.random.default_rng(world)`` (fresh instance per search, so the candidates are equal);
+``numpy.random.default_rng(world)`` (fresh instance per search, so the k-means centres are equal);
 random-floor rng = ``numpy.random.default_rng([world, 1])``.
 
 Admission (``scripts/hmasd_launch.py``) precedes every environment import and every output.
@@ -43,7 +44,17 @@ DIRECTION = "coupled_host_joint_skills_stage1"
 DECLARED_PANELS = (range(1000, 1032), range(2000, 2032))
 SCIENTIFIC_OUTPUTS = ("summary.json", "worlds")
 GATE_THRESHOLD_DECLARED = 0.05
-REFERENCES = ("closed_loop_relay", "closed_loop_flat", "stationary_floor", "random_floor")
+REFERENCES = ("closed_loop_relay", "closed_loop_flat_a2a_on", "closed_loop_flat_a2a_off_diagnostic",
+              "stationary_floor", "random_floor")
+REFERENCE_LABELS = {
+    "closed_loop_relay": "P_relay targets, host contract env (A2A enabled)",
+    "closed_loop_flat_a2a_on": "P_flat targets, host contract env (A2A enabled; relays may form "
+                               "incidentally) -- the competence reference",
+    "closed_loop_flat_a2a_off_diagnostic": "P_flat targets, A2A disabled in the env (diagnostic "
+                                           "only; not the environment the learners act in)",
+    "stationary_floor": "zero actions from the initial positions, host contract env",
+    "random_floor": "uniform [-1, 1]^3 actions each step, host contract env",
+}
 READERS = ("contract_reward", "coverage_backhauled", "frontend_capacity_with_path_mbps",
            "mean_relays_per_routed_uav")
 
@@ -243,8 +254,11 @@ def main(argv: list[str] | None = None) -> int:
         timing: dict[str, Any] = {"search_relay": t_relay, "search_flat": t_flat}
         references["closed_loop_relay"], timing["closed_loop_relay"] = _timed(
             closed_loop_execute, env, relay.positions_xyz)
-        references["closed_loop_flat"], timing["closed_loop_flat"] = _timed(
-            closed_loop_execute, env, flat.positions_xyz)
+        references["closed_loop_flat_a2a_on"], timing["closed_loop_flat_a2a_on"] = _timed(
+            closed_loop_execute, env, flat.positions_xyz, allow_a2a=True)
+        (references["closed_loop_flat_a2a_off_diagnostic"],
+         timing["closed_loop_flat_a2a_off_diagnostic"]) = _timed(
+            closed_loop_execute, env, flat.positions_xyz, allow_a2a=False)
         references["stationary_floor"], timing["stationary_floor"] = _timed(
             stationary_floor, env)
         references["random_floor"], timing["random_floor"] = _timed(
@@ -308,7 +322,11 @@ def main(argv: list[str] | None = None) -> int:
             "planner": "numpy.random.default_rng(world), fresh instance for each search",
             "random_floor": "numpy.random.default_rng([world, 1])",
         },
-        "closed_loop_env": "host contract (a2a_enabled=True) for every reference, incl. P_flat",
+        "closed_loop_labels": REFERENCE_LABELS,
+        "link_ranges": rows[0]["static"]["P_relay"]["ranges"] if rows else None,
+        "planner": "T2b: plain k-means + range-aware served-subset candidates (relay: chains of "
+                   "<= max_hops relays; flat: UAVs parked at min(d, R_direct - 1 m)); top-3 "
+                   "multi-start coordinate descent with plateau tie-break",
         "closed_loop_assignment": "min_makespan permutation of targets to UAVs",
         "gate_threshold_declared": GATE_THRESHOLD_DECLARED,
         "G": _mean_sd([row["G_world"] for row in rows]),
@@ -320,13 +338,22 @@ def main(argv: list[str] | None = None) -> int:
                     [row["static"][name]["coverage_backhauled"] for row in rows]),
                 "evaluations": _mean_sd([row["static"][name]["evaluations"] for row in rows]),
                 "converged_worlds": sum(bool(row["static"][name]["converged"]) for row in rows),
-                "start_candidate_k": [row["static"][name]["start_candidate_k"] for row in rows],
+                "candidates_evaluated": [row["static"][name]["candidates_evaluated"] for row in rows],
+                "candidate_counts": [
+                    {"world": row["world"]}
+                    | {key: row["static"][name]["candidate_report"].get(key) for key in (
+                        "total", "plain", "subset", "subset_relay", "subset_flat",
+                        "duplicates_removed", "excluded_centre_count",
+                        "subsets_over_uav_budget")}
+                    for row in rows],
+                "best_start": [row["static"][name]["best_start"] for row in rows],
             }
             for name in ("P_relay", "P_flat")
         },
         "closed_loop": closed_loop_summary,
         "timing_per_world": {component: timing_stats(component) for component in (
-            "search_relay", "search_flat", "closed_loop_relay", "closed_loop_flat",
+            "search_relay", "search_flat", "closed_loop_relay", "closed_loop_flat_a2a_on",
+            "closed_loop_flat_a2a_off_diagnostic",
             "stationary_floor", "random_floor", "world_total")},
         "cpu_seconds": _cpu_seconds(),
         "interpreter": {
