@@ -810,3 +810,380 @@ The kernel's fresh actual-node memory/source/pause/lead/duplicate checks still
 determine admission. Exact output tag `b02_same_history_a01`, first CLI seed291021;
 no change to the fixed exposure or scientific program. Root has the concrete host
 facts; no additional approval gate is introduced.
+
+### B02 Accepted Operation and Observation
+
+Exact inputs were published at `ce104088d66dade2aa042619be2e2b59ccde8e60`.
+The canonical launcher accepted `runs/uav_local_history/b02_same_history_a01/`
+on local_linux at2026-09-29 15:15:42.022751UTC. Its `launch-manifest.json` is the
+authoritative operation/native-process/source/argv record; claim
+`e65fd0869032af9d9977fe66b255070d704022f7f04b3f1ce27b8a26f321b3c1`.
+Fresh admission measured9,209,835,520 effective available bytes against the
+4,294,967,296 floor, with published control equal to the input revision. One
+accepted worker runs the fixed whole package; no result existed at acceptance.
+
+POSIX observer generation1 was armed from
+`temp/directions/uav_local_history/b02_wait_request.json`, state
+`temp/directions/uav_local_history/b02-wait`, window1500s. Its probe reads the
+same original launch handle every30s. This native DM remains active through
+long deterministic waits and same-handle drains; an unsupported App queue wake
+does not authorize a duplicate process, migration or redirected notification.
+The first collected compact progress had45 complete ordinary episodes and0fits;
+that is progress, not the completed comparison or a learning conclusion.
+
+## 2026-09-29 - B02 Complete Reading
+
+The original accepted operation completed at2026-09-29 15:40:11.664250UTC,
+exit0, `COMPLETE`. All three independent fits reached exactly512 H256 training
+episodes; no restart, retry, endpoint selection, additional fit or changed decoder
+occurred. Source remains `ce104088d66dade2aa042619be2e2b59ccde8e60`; native
+identities and terminal witness are in the original run's manifest/status/exit
+files. Supervisor3337656 and runner3337657 are absent. Generation1 observed READY
+event321562c63c4ffa646b8c4de9; its App queue attempt failed with the known unloaded
+native-child `-32600`/delivery-unknown condition. This active child read the same
+handle natively, consumed the event with wakef36086c7-e101-4db1-b097-79a43fea107f,
+rearmed observation to generation2 only, then stopped it. Retained
+`observer-terminal.json` records consumed=true and stopped=true; no worker was
+restarted or notification redirected.
+
+### Exact Exposure and Verification
+
+The authoritative [summary](../../../../runs/uav_local_history/b02_same_history_a01/summary.json)
+contains every endpoint/world, fit, component, count and artifact identity. The
+fixed offline [reading](../../../../runs/uav_local_history/b02_same_history_a01/reading.json)
+verified all256 raw hashes/20,132,487bytes, six checkpoint identities,1,536 distinct
+training worlds,3,072 epoch records and32 distinct common evaluation worlds.
+All65,536 evaluation steps independently reconstruct exact served counts and
+native J within3.08781e-16. All61,440 learned actor input rows reconstruct byte
+exactly from lawful observations/history; checkpoint logits/logp have maximum
+error0 and every deterministic argmax agrees. It executes no environment step or
+optimizer update. Reader cost48.16s wall/47.84s CPU,239,076KiB peak; its source was
+not part of the earlier engineering Reviewer's acceptance, as declared above.
+
+Actual scientific counts match the envelope:3 started/completed fits;
+393,216 train+65,536 evaluation=458,752 native steps;1,536 train+256 evaluation
+complete episodes;768 two-episode rollouts;3,072 actor+3,072 critic optimizer calls.
+Training used491,520 sampled actor decisions and1,966,080 replayed actor rows.
+Evaluation used61,440 actor rows plus61,440 nonmutating current-only shadow rows.
+The learned caches had2,211,840 ingests,67,944,005 association-distance evaluations,
+3,727,811 matches,199,082 inserts and0evictions. Across the evaluation records,
+maximum cache size33, maximum geometry error.00004520555m, and0unmatched,
+duplicate or ambiguous truth matches. Truth is audit-only, not a cache input.
+
+Ordinary references add20,480 search decisions,552,960 own trajectories,
+2,211,840 model ticks,1,105,920 H-shadow reductions and11,957,064 link evaluations
+(including861,312 grid-prior calculations). Their0calibration/censor discrepancies
+coexist with276 prior-versus-censor conflicts in seven H worlds; those are the
+declared conservative-prior correction being used, not hidden erasure of outcomes.
+
+Runner wall1468.708569s (24.4785min); user1242.171527+system89.193685=
+1331.365212CPU seconds/.369823670CPUh; process-lifetime peak483,008KiB. One CPU
+worker and one Torch intra/inter-op, OpenMP, OpenBLAS and MKL thread throughout.
+Per-instance walls including each initial/train/final sequence are485.043130,
+508.485046,435.979148s; their CPU times are423.770961,446.608305,428.814282s.
+This beats the rough .5-2CPUh planning range, not an algorithmic speed claim.
+Engineering, admission/network support, review and publication are incompletely
+metered rather than zero. B01+B02 cumulative scientific exposure is3fits,
+475,136 steps and.378094449 measured runner CPUh, plus the separately named
+readers/checks/support; the different endpoint panels are not pooled as one test.
+
+### Native Endpoints and Contrary Cases
+
+All values below are complete-episode mean native J and users served per step;
+masters are291021/291022/291023. C and H are unchanged ordinary programs.
+
+| Program | Mean J | Mean service | Total zero-service ticks in32 worlds |
+| --- | ---: | ---: | ---: |
+| C | .361942736 |21.73828125 |0 |
+| H | .351775330 |21.10595703 |0 |
+| L0,291021 | .011206323 |.59008789 |6896 |
+| L1,291021 | .062296382 |2.77380371 |1909 |
+| L0,291022 | .039627836 |1.89343262 |4149 |
+| L1,291022 | .205417074 |12.10852051 |0 |
+| L0,291023 | .053570174 |2.78674316 |4087 |
+| L1,291023 | .013138424 |.73413086 |7316 |
+
+L1-L0 instance J differences are(+.051090059,+.165789238,-.040431751), service
+(+2.18371582,+10.21508789,-2.05261230). The first fit has29positive/3negative
+worlds; the second improves both endpoints in all32; the third has3positive/
+29negative J worlds and6positive/26negative service worlds. Thus two actual
+initial-to-final improvements and one active regression are retained. The mean
+over three independent instances is+.058815849 J/+3.44873047 service, with broad
+descriptive df2 t95 intervals[-.197863502,.315495199]/[-12.029723,18.927184].
+The32 common evaluation worlds are not96 independent training replicates.
+
+All three L1 instances lose to both competent ordinary references. L1-H J
+differences are(-.289478948,-.146358256,-.338636906), service
+(-18.33215332,-8.99743652,-20.37182617); three-instance means-.258158036 J
+[-.506304861,-.010011212] and-15.90047201 service[-30.965695,-.835249].
+L1-C means are-.268325443 J[-.516472267,-.020178618] and-16.53279622 service
+[-31.598019,-1.467573]. Every one of96 L1-C world comparisons loses both metrics.
+For H,95lose both; the positive exception is master291022/world29102021:
+J+.051524215/service+3.9296875. That same learned trajectory loses to C by
+.185555766 J/12.015625 service, so it is not useful superiority over the available
+ordinary alternatives. All intervals are descriptive, conditional on this common
+world panel and small training sample, not a universal learning claim.
+
+The fresh ordinary comparison H-C is-.010167406 J[-.032253778,.011918966] and
+-.63232422 service[-2.19797927,.93333083],11gains/6losses/15ties. This reverses the
+small positive B01 point estimate without erasing it; both intervals include zero.
+H has6047absent-point decisions and410same-input command/executed differences
+out of10,240 decisions. H's strongest positive world29102005 is+.134653458 J/
++9.8828125 service, and29102028 is+.082359909/+6.1953125. Its strongest loss,
+29102021, is-.237079981/-15.9453125, with mean service4.0625 versus C20.0078125.
+The H/C average path difference+493.931843m/UAV is retained alongside that tail;
+no energy or physical-flight-safety claim is available on this source.
+
+Component/tail reading also limits any favorable average interpretation. C/H
+quality means are.192022661/.187639770; the L1 means are.078210433/.119659289/
+.009535305. C/H minimum-world mean service is15.9609375/4.0625, versus L1
+.62109375/5.08203125/.13671875. Mean within-episode minimum service is12.03125/
+12.15625 for C/H and.53125/7.78125/0 for L1. The corresponding L1 mean path
+lengths are7219.91649/2999.58351/910.06698m per UAV, versus C2479.52477 and
+H2973.45662. Short motion in the last learned instance accompanies severe loss,
+not efficiency. Every world and all component/risk-proxy vectors remain readable
+in the original summary rather than being replaced by these selected cases.
+
+### Learning, Decision Use and Explanation Limits
+
+Training genuinely occurred: all3 actor displacement norms are2.975868/3.255067/
+3.367072, with critic displacement1.291599/1.223534/1.286594. All27 command
+categories were sampled during each fit. For every first replay epoch, old/current
+likelihoods agree (max KL0, clip fraction0), consistent with on-policy collection;
+maximum absolute approximate KL over all epochs is.006362/.004344/.004138 and
+mean clip fraction.000016785/0/0. Final sampled-policy entropies per agent remain
+3.152357/3.225955/3.033575 against log27=3.295837. These are observations, not an
+identified insufficient-update or clipping bottleneck.
+
+First64-to-last64 training-world mean J is.167764->.166573,
+.155944->.160002,.162025->.167032. Those blocks use different worlds and sampled
+policies, so they neither match the deterministic deployment estimand nor provide
+a paired causal training curve. In particular, high categorical entropy is not
+diverse argmax deployment: final291023 chooses(+1,-1,0) on9622/10240 decisions;
+291022 chooses(0,0,-1) on6804,(-1,-1,0) on2083 and(+1,+1,-1) on1325;
+291021 uses only(0,+1,-1),(+1,-1,-1),(+1,+1,-1). Mean XY-boundary UAV-steps
+per episode are1146.8125/150.09375/1208.90625 of1280, versus C105.40625 and
+H78.78125. These conditional motion patterns describe the packages, not a proof
+that entropy, boundary handling, representation or decoder caused their losses.
+
+Absent retained points are present at9211/6489/9514 of10,240 final decisions;
+removing only absent points in the same-input shadow changes executed four-step
+motion577/743/6407times. The particularly poor third fit is therefore not an
+untreated/nonactivation case. Shadow sensitivity is not a live no-history policy
+comparison and does not measure a retention-mediated effect. The result weakens
+this full-control finite recipe's complete-use prediction, leaves the two actual
+learning gains intact, and establishes no GRU forgetting, sufficient-statistic
+property, general history uselessness or general inability to learn. The broader
+same-history learning question and the next investment require an explicit
+judgment, not an automatic extension or diagnostic repair.
+
+### B02 Independent Scientific Reading
+
+The existing registered ResearchCritic
+`/root/dm_local_history/b01_scientific_review` received the original prospective
+contract, source, all supporting/adverse results and next-investment question in
+its separate original context. This reuses its applicable B01/B02 selection work,
+not DM self-clearance. Its complete substantive response follows, with ASCII
+formatting normalized and links resolved to the evidence above:
+
+> Recommendation: Stop This Recipe. B02 supplies the genuine learning comparison
+> that B01 lacked. It does not support further investment in this from-scratch
+> controller now. Retain the ordinary assets and learned positive; leave the
+> broader same-history learning question open.
+>
+> This remains a separate-context review, although assignment messages disclosed
+> preliminary results and priorities. I reconstructed the original evidence before
+> receiving a preferred explanation.
+>
+> Evidence checked: I read the prospective B02 contract, frozen implementation,
+> configuration, manifest, exit witness, all endpoint vectors, and training records.
+> The relevant C/H and native-environment sources are unchanged from B01.
+> Independently checked all256 raw hashes, distinct common initial worlds, held
+> commands and clipping, and reconstructed all65,536 evaluation reward/service
+> steps: maximum reward discrepancy3.09e-16, exact service. I also replayed lawful
+> inputs and checkpoint argmax for six representative initial/final trajectories,
+> covering1,920 decisions with zero logit discrepancy. The offline reader covers
+> all61,440 learner decisions. Training trajectories were not independently
+> reconstructed; their retained episode/update records and identities were checked.
+>
+> Scientific reading: for291021/291022/291023, L1 J=.062296/.205417/.013138;
+> L1-L0 J=+.051090/+.165789/-.040432; L1-C J=-.299646/-.156526/-.348804;
+> L1 mean users=2.774/12.109/.734. C serves21.738; H serves21.106. Every L1
+> endpoint loses J and service to C on every world. Against H,95/96 instance-world
+> comparisons lose; the lone win occurs in H's unusually poor world, not against C.
+> These are three independent training units, not96.
+>
+> Preserve the useful positive:291022 improves over initialization on all32
+> worlds, eliminates its team-zero-service ticks, and sustains meaningful service.
+> Experience changed native capability. But it still trails C by9.630users.
+> Instance291021 gains with much more motion;291023 regresses, producing zero
+> team service on7,316/8,192 evaluation ticks.
+>
+> This is active adverse intervention, not missing exposure. Parameters changed,
+> all training actions occurred, caches populated, and removing absent points
+> changes577/743/6,407 executed final-policy decisions respectively. That diagnostic
+> establishes input sensitivity, not beneficial history use or the causal reason
+> for failure. No observed cache reaches capacity; no current user row reaches the
+> 20-user cap.
+>
+> The new ordinary panel also prevents promoting H: H-C J=-.010167, with11wins,
+> six losses and15ties, alongside approximately494additional path metres per UAV.
+> Its worst loss is-.237080 J and-15.945users. Keep B01's positive examples.
+> The descriptive combined64-world mean is near zero(-.002853), not reliable
+> retained-history superiority.
+>
+> Changed explanation: replace "a full learner has not been tried" with "this
+> lawful representation and finite learning/deployment package actively uses
+> history but does not approach the competent ordinary controller." The strongest
+> simpler explanation is an unsuccessful learned control policy, rather than
+> absent task opportunity or inaccessible history. Greedy deployment concentrates
+> on few commands and sometimes boundary-bound trajectories. Meanwhile stochastic
+> training remains high-entropy, with64-episode block means roughly.15-.17 and no
+> clear sustained upward trend. This makes training/deployment behavior a legitimate
+> unresolved distinction; it does not establish that sampling, more training, or
+> another encoder would repair the ordinary-performance deficit.
+>
+> C/H possess explicit radio/search knowledge; the learner receives centralized
+> training resources but not that algorithmic competence. Consequently this is a
+> complete-package comparison, not proof that experience cannot exploit history.
+> Earlier adverse encoder packages strengthen caution without becoming additional
+> seeds of B02 or evidence of GRU forgetting.
+>
+> Next investment: no additional run now. Another identical fit or world
+> replication would refine an already substantial deficit, without a supported
+> prediction of changed capability. An ordinary-controller revision would
+> investigate H's model/search failures, not explain an experience increment. A
+> new encoder, optimizer, longer exposure, or ordinary-guided learner changes the
+> package without a presently evidenced reason to expect useful improvement.
+>
+> The strongest inexpensive alternative is a frozen stochastic-deployment
+> comparison, retaining all six initial/final checkpoints plus C/H on one fresh
+> 32-world panel:0fits,65,536steps. Existing collection timings suggest a few
+> worker-minutes, plus new audited protocol/runner work. It could distinguish
+> brittle argmax deployment from poor stochastic control. Consistent learned
+> superiority to C would reopen practical investment; recovery only toward the
+> observed.15-.17 training regime would not. I do not currently recommend it:
+> available stochastic evidence is flat and far below ordinary performance, so
+> it is more likely to classify the failure than change the investment decision.
+>
+> B02 cost24.48worker-wall minutes and1,331.37CPU seconds. Current-question
+> cumulative cost is three fits,475,136steps, approximately24.98wall minutes
+> and.378CPUh; actual engineering time was not measured. Stop this recipe,
+> preserve its evidence and assets, and do not convert that bounded decision into
+> "learning/history is impossible."
+>
+> MATERIAL_DISSENT: no. No further study is accepted; my recommendation is against
+> an automatic continuation, not against the completed comparison or its retained
+> positives.
+
+### DM Disposition and Remaining Question
+
+Adopt the independent recommendation: end further investment in the B02
+from-scratch set-PPO/argmax recipe and put this direction in reserve. The actual
+learning part of the assigned question was executed; stopping is not an inference
+from the end of the zero-fit ordinary batch. The two positive initial-to-final
+instances, especially291022's complete service improvement, remain capabilities,
+but they do not meet the intended use beyond competent C/H. All initial/final
+checkpoints and their adverse trajectories remain inspectable; no best-seed
+selection becomes the reported training program.
+
+At this material decision, fetched published main wasc7b5f1901 (shared main also
+had a concurrent Claude-owned commit7ee3e46d1). RESEARCH topics2/4/8 still require
+separating legal information, decision use, finite training and package value;
+the published B05 retained-controller capability does not establish a benefit
+from this cache or certify a new cache-aware initialization. Those distinctions
+change the decision: neither cache activity nor an L1-L0 improvement buys another
+learning attempt by itself, and neither H's negative fresh panel nor B02's deficit
+refutes history's possible value. The independent critic's pooled ordinary number
+is a descriptive context only; the two panels and their opposite point estimates
+remain the primary separate records, not a new confirmation.
+
+The frozen stochastic panel has a concrete prediction and low evaluation cost,
+but its likely information would classify deployment failure without establishing
+the missing ordinary advantage. I decline it now, rather than assume sampled
+behavior fixes argmax. An ordinary-model repair concerns a different within-family
+explanation, while ordinary-guided or retained-actor learning would require a
+substantive control/learning prediction and properly matched resources, not a
+renamed fit, automatic warm start or obligatory tiny residual. No additional run,
+diagnostic, confirmation or candidate is selected. This is an investment judgment,
+not an empirical refutation of those untested alternatives.
+
+The broader question remains open. Re-entry requires a newly selected substantive
+same-history decision/learning comparison whose predicted native benefit over C/H
+is worth its complete engineering/training/evaluation cost, or consequential new
+evidence that the declined deployment comparison could change use. There is no
+pending producer, unread advice, resource wait or approval dependency. Root owns
+the next cross-question allocation; this DM returns the complete read-result and
+reasoned stop within the original assignment, without launching a new track.
+
+Retirement L0: retain useful C/H control, legal cache/input and checkpoint model
+definitions, readers and focused tests. Retire B02-only launch/collection/update
+entrypoints and their no-longer-used execution fixtures after confirming no
+external imports or live consumers. Preserve their exact source atce104088d;
+retained deployment/evidence definitions and all frozen result bytes stay unchanged.
+Use the maintained exact-snapshot GC, stopped observer scratch cleanup and focused
+post-retirement tests. This changes no scientific algorithm or output contract.
+
+### B02 Retention, Retirement and Publication Checks
+
+Canonical unique output is
+`local_linux:/home/fires/hmasd-wsl/runs/uav_local_history/b02_same_history_a01/`.
+The shared main checkout is not being retired. Keep its256 hashed raw evaluation
+files(20,132,487bytes), six initial/final checkpoints(3,887,664bytes) and six
+training episode/update streams(3,122,235bytes), total27,142,386bulk bytes. Their
+per-file hashes/locators are in the original summary and were verified by the
+reader; every checkpoint includes an actual inspected positive or adverse
+initial-to-final comparison. These are one necessary evidence copy, not a new
+backup/retention tree. Compact summary/config/reading, native manifest/status/
+preflight/exit witness and terminal observer state go to Git; raw/checkpoints/
+streams remain durable ignored output. Small native stdout/stderr are retained
+as the original operation record, not duplicated.
+
+No external experiment/test/script/tool imports B02's retired execution modules;
+the only consumers were its own execution tests. All worker/observer native PIDs
+are absent, the critic has returned, and the retained reader imports only the
+unchanged input/model and ordinary modules. Historical B02 execution and its
+11-test accepted suite remain recoverable at
+[exact executed source](https://github.com/CartmanFatass/My-paper-code/tree/ce104088d66dade2aa042619be2e2b59ccde8e60/experiments/candidates/uav_local_history/b02).
+
+Removed exactly:
+
+- Launcher snapshot `.git/hmasd-launch-sources/c3bd3533ba644e32886cb2f119b831b7`:
+  maintained `hmasd_snapshot_gc.py` preview and apply, with supported read-only
+  `--sudo-process-scan`, both eligible; source reachable from main. Allocated
+ 1,641,402,368bytes removed. Original claim/manifest/result retained.
+- Stopped `temp/directions/uav_local_history/`: only B02 request/state/locks/log;
+  the final state was byte-identical to the one retained in the run before deletion.
+- B02 source/test `__pycache__` directories.
+- Unused B02 `run.py`, `study.py`, `update.py`, execution `test_study.py`, and the
+  obsolete update-test portion. The first three model-contract tests are retained
+  as `test_model.py`; cache tests, ordinary code/tests and both readers remain.
+
+The initial forced-removal shell invocation was refused with "rm -f style commands
+are not permitted. Use a safer approach". A normal, non-force `rm -r --` on the
+same verified owned scratch/cache targets succeeded; no bypass, permission change,
+other direction deletion or remaining tool blocker. Manual source retirement used
+`apply_patch`. Target absence was then verified explicitly.
+
+For source+tests+scratch, measured allocated bytes changed258,048->135,168,
+including the retained model-test replacement: net122,880bytes. Together with the
+exact snapshot, B02 net reclaimed1,641,525,248bytes. B01's earlier independent
+cleanup was1,639,370,752bytes; cumulative actual deletions3,280,896,000bytes.
+This is allocated target reduction, not a claim about Git object reclamation or
+whole-host free space. No selected cleanup target remains.
+
+Post-retirement focused suite:25passed in5.89s;14upstream matplotlib/pyparsing
+deprecation warnings, no failures. Pytest cleaned its own scratch. The retained
+B02 reader still imports/renders its CLI after retirement; it and the actor/input
+definitions are byte-unchanged from the full successful audit. No scientific
+re-execution or additional exposure was used for cleanup verification. Own
+RESEARCH standing/routing and directly affected partial-observation background
+are updated with this result; other directions and owner controls stay intact.
+
+Publication reconciliation: concurrent shared-main commita6b086c33 included this
+DM's already-written three RESEARCH hunks (topic2, own standing and own routing)
+while publishing Claude's separate row. I inspected that diff: these hunks match
+the completed reading/disposition above, so they are retained without rewriting
+the shared file or duplicating the index change. This DM's explicit owned-path
+commit publishes the notebook, compact run evidence and retirement; no unrelated
+staged/dirty file is included or reverted.
