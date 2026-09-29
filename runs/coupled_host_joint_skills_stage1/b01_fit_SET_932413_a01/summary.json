@@ -1,0 +1,598 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "arm": "SET",
+  "seed": 932413,
+  "launch_sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_joint_skills_stage1",
+    "sha": "c3e3bf10d163ce265ca4ad2b333831ec35bce6c0",
+    "command_sha256": "416a9eef6ea7f3695bfd9f279090fb623f52eb43600e5f35859ef7be816418bc",
+    "parent_pid": 992290,
+    "child_pid": 992291,
+    "accepted_at_epoch": 1790686543.2017772
+  },
+  "probe": false,
+  "status": "complete",
+  "fit_started": true,
+  "failure": null,
+  "spec": {
+    "horizon": 500,
+    "train_lanes": 16,
+    "eval_lanes": 16,
+    "rollouts": 45,
+    "panels": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "hidden_size": 256,
+    "n_heads": 8,
+    "n_layers": 2,
+    "ppo_epochs": 15,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "torch_threads": 4,
+    "area_size": 5000,
+    "dev_worlds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014,
+      1015,
+      1016,
+      1017,
+      1018,
+      1019,
+      1020,
+      1021,
+      1022,
+      1023,
+      1024,
+      1025,
+      1026,
+      1027,
+      1028,
+      1029,
+      1030,
+      1031
+    ],
+    "holdout_worlds": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026,
+      2027,
+      2028,
+      2029,
+      2030,
+      2031
+    ],
+    "probe_panel_worlds": [
+      9000,
+      9001,
+      9002,
+      9003,
+      9004,
+      9005,
+      9006,
+      9007,
+      9008,
+      9009,
+      9010,
+      9011,
+      9012,
+      9013,
+      9014,
+      9015,
+      9016,
+      9017,
+      9018,
+      9019,
+      9020,
+      9021,
+      9022,
+      9023,
+      9024,
+      9025,
+      9026,
+      9027,
+      9028,
+      9029,
+      9030,
+      9031
+    ],
+    "probe_rollouts": 3
+  },
+  "rollouts_run": 45,
+  "panels": [
+    {
+      "after_rollout": 0,
+      "training_team_steps": 0,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_00_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.11544818949082035,
+        "r_mean_final100": 0.11773518286007731,
+        "coverage_backhauled_mean_all": 0.17998375,
+        "coverage_backhauled_mean_final100": 0.1834125,
+        "coverage_backhauled_final": 0.18375000000000002,
+        "frontend_capacity_with_path_mbps_mean_all": 60.89492309906202,
+        "far_cluster_backhauled_share_mean_all": 0.034375,
+        "far_cluster_backhauled_share_final": 0.034375,
+        "far_cluster_a2a_path_user_time_share": 0.018750000000000003,
+        "association_changes_per_step_mean": 0.0026875000000000002,
+        "uav_backhaul_loss_events": 0.03125,
+        "user_backhaul_loss_events": 0.46875,
+        "action_clip_events": 0.0
+      }
+    },
+    {
+      "after_rollout": 15,
+      "training_team_steps": 120000,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_15_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.053181604209229405,
+        "r_mean_final100": 0.00687183977499803,
+        "coverage_backhauled_mean_all": 0.08142625,
+        "coverage_backhauled_mean_final100": 0.010475,
+        "coverage_backhauled_final": 0.01,
+        "frontend_capacity_with_path_mbps_mean_all": 29.826276811675672,
+        "far_cluster_backhauled_share_mean_all": 0.022337500000000003,
+        "far_cluster_backhauled_share_final": 0.003125,
+        "far_cluster_a2a_path_user_time_share": 0.0132875,
+        "association_changes_per_step_mean": 0.2488125,
+        "uav_backhaul_loss_events": 7.71875,
+        "user_backhaul_loss_events": 45.1875,
+        "action_clip_events": 441.84375
+      }
+    },
+    {
+      "after_rollout": 30,
+      "training_team_steps": 240000,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_30_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.11223891766772076,
+        "r_mean_final100": 0.08496486315839542,
+        "coverage_backhauled_mean_all": 0.170715,
+        "coverage_backhauled_mean_final100": 0.13121875,
+        "coverage_backhauled_final": 0.1375,
+        "frontend_capacity_with_path_mbps_mean_all": 64.30396129258659,
+        "far_cluster_backhauled_share_mean_all": 0.03725625,
+        "far_cluster_backhauled_share_final": 0.03125,
+        "far_cluster_a2a_path_user_time_share": 0.026037499999999998,
+        "association_changes_per_step_mean": 0.6075625,
+        "uav_backhaul_loss_events": 14.4375,
+        "user_backhaul_loss_events": 102.1875,
+        "action_clip_events": 1966.25
+      }
+    },
+    {
+      "after_rollout": 45,
+      "training_team_steps": 360000,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_45_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.11248736332277949,
+        "r_mean_final100": 0.08032434735269739,
+        "coverage_backhauled_mean_all": 0.17281999999999997,
+        "coverage_backhauled_mean_final100": 0.1237375,
+        "coverage_backhauled_final": 0.10562500000000001,
+        "frontend_capacity_with_path_mbps_mean_all": 62.38055531328345,
+        "far_cluster_backhauled_share_mean_all": 0.05591875,
+        "far_cluster_backhauled_share_final": 0.065625,
+        "far_cluster_a2a_path_user_time_share": 0.03626875,
+        "association_changes_per_step_mean": 0.6664375,
+        "uav_backhaul_loss_events": 16.0625,
+        "user_backhaul_loss_events": 126.9375,
+        "action_clip_events": 2782.90625
+      }
+    },
+    {
+      "after_rollout": 45,
+      "training_team_steps": 360000,
+      "kind": "holdout",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_45_holdout_deterministic.json",
+      "means": {
+        "r_mean_all": 0.08617244454943135,
+        "r_mean_final100": 0.06336117902478275,
+        "coverage_backhauled_mean_all": 0.13231875000000004,
+        "coverage_backhauled_mean_final100": 0.09734375,
+        "coverage_backhauled_final": 0.09625,
+        "frontend_capacity_with_path_mbps_mean_all": 47.873950159920746,
+        "far_cluster_backhauled_share_mean_all": 0.033981250000000005,
+        "far_cluster_backhauled_share_final": 0.03125,
+        "far_cluster_a2a_path_user_time_share": 0.01763125,
+        "association_changes_per_step_mean": 0.64125,
+        "uav_backhaul_loss_events": 12.53125,
+        "user_backhaul_loss_events": 93.25,
+        "action_clip_events": 2809.5625
+      }
+    },
+    {
+      "after_rollout": 45,
+      "training_team_steps": 360000,
+      "kind": "holdout",
+      "mode": "sampled",
+      "status": "complete",
+      "file": "panel_45_holdout_sampled.json",
+      "means": {
+        "r_mean_all": 0.13064296199246386,
+        "r_mean_final100": 0.13882755800363605,
+        "coverage_backhauled_mean_all": 0.19540125,
+        "coverage_backhauled_mean_final100": 0.20510625,
+        "coverage_backhauled_final": 0.18437499999999998,
+        "frontend_capacity_with_path_mbps_mean_all": 78.80249431169044,
+        "far_cluster_backhauled_share_mean_all": 0.05755,
+        "far_cluster_backhauled_share_final": 0.043750000000000004,
+        "far_cluster_a2a_path_user_time_share": 0.03580625,
+        "association_changes_per_step_mean": 0.8484375000000001,
+        "uav_backhaul_loss_events": 15.71875,
+        "user_backhaul_loss_events": 129.15625,
+        "action_clip_events": 2989.375
+      }
+    }
+  ],
+  "checkpoints": [
+    {
+      "path": "checkpoint_00.pt",
+      "sha256": "b19d794d059e98e6de737f032f9af0f566d85ea9a8a020b5db728bc82a41eca9",
+      "bytes": 20918851
+    },
+    {
+      "path": "checkpoint_15.pt",
+      "sha256": "977f80f48fa4d0df5734d7e47568bab6df2bdc681f0523522b71a096c0e83a10",
+      "bytes": 20918851
+    },
+    {
+      "path": "checkpoint_30.pt",
+      "sha256": "4affaf95fadceb0d10c9875c91bd97cc06aec3963a0d1b630928f701841f536f",
+      "bytes": 20918851
+    },
+    {
+      "path": "checkpoint_45.pt",
+      "sha256": "77f59a28bd7e2cff126c537b1112a81991895e103e297c379e355ff4add19bc1",
+      "bytes": 20918851
+    }
+  ],
+  "counts": {
+    "training_team_steps": 360000,
+    "stored_team_steps": 360000,
+    "training_episodes": 720,
+    "updates": 45,
+    "evaluation_team_steps": 96000,
+    "evaluation_episodes": 192
+  },
+  "memory": {
+    "evaluation_overlap": [
+      {
+        "after_rollout": 0,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 686548,
+          "VmHWM_kib": 695116
+        },
+        "after_target_build": {
+          "VmRSS_kib": 737732,
+          "VmHWM_kib": 737732
+        }
+      },
+      {
+        "after_rollout": 15,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 861372,
+          "VmHWM_kib": 1117352
+        },
+        "after_target_build": {
+          "VmRSS_kib": 909376,
+          "VmHWM_kib": 1117352
+        }
+      },
+      {
+        "after_rollout": 30,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 812872,
+          "VmHWM_kib": 1138868
+        },
+        "after_target_build": {
+          "VmRSS_kib": 860728,
+          "VmHWM_kib": 1138868
+        }
+      },
+      {
+        "after_rollout": 45,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 812796,
+          "VmHWM_kib": 1138868
+        },
+        "after_target_build": {
+          "VmRSS_kib": 860804,
+          "VmHWM_kib": 1138868
+        }
+      },
+      {
+        "after_rollout": 45,
+        "kind": "holdout",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 812836,
+          "VmHWM_kib": 1138868
+        },
+        "after_target_build": {
+          "VmRSS_kib": 877484,
+          "VmHWM_kib": 1138868
+        }
+      },
+      {
+        "after_rollout": 45,
+        "kind": "holdout",
+        "mode": "sampled",
+        "before_target_build": {
+          "VmRSS_kib": 829748,
+          "VmHWM_kib": 1138868
+        },
+        "after_target_build": {
+          "VmRSS_kib": 877756,
+          "VmHWM_kib": 1138868
+        }
+      }
+    ],
+    "start": {
+      "VmRSS_kib": 420820,
+      "VmHWM_kib": 420820
+    },
+    "matching_table_build": {
+      "before": {
+        "VmRSS_kib": 637996,
+        "VmHWM_kib": 637996
+      },
+      "after": {
+        "VmRSS_kib": 686068,
+        "VmHWM_kib": 695116
+      }
+    }
+  },
+  "reward_units": {
+    "training": "adapter scalar = contract team r / 6",
+    "readings": "team per-step r = 0.5 * (C_bh + S/D)"
+  },
+  "runtime": {
+    "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+    "torch": "2.7.0+cu118",
+    "numpy": "1.26.3",
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_threads": 4,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    }
+  },
+  "last_boundary": "complete",
+  "wall_seconds": 4165.395428720047,
+  "config": {
+    "contract_arm": "SET",
+    "algorithm": "mappo",
+    "n_agents": 6,
+    "n_uavs": 6,
+    "n_users": 50,
+    "num_envs": 16,
+    "rollout_length": 500,
+    "episode_length": 500,
+    "k": 10,
+    "n_Z": 1,
+    "n_z": 1,
+    "state_dim": 133,
+    "obs_dim": 90,
+    "action_dim": 3,
+    "action_space_type": "continuous",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 800,
+    "batch_size": 12000,
+    "discriminator_batch_size": 12000,
+    "lambda_e": 1.0,
+    "lambda_D": 0.0,
+    "lambda_d": 0.0,
+    "lambda_h": 0.0,
+    "lambda_l": 0.05,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "use_entropy_annealing": false,
+    "total_timesteps": 360000,
+    "seed": 932413,
+    "policy_interruption_mode": "off",
+    "interruption_delta": 1,
+    "interruption_cost_c": "inf",
+    "interruption_cost_c_Z": "inf",
+    "skill_cap_k_max": 10,
+    "team_cap_k_Z": null,
+    "age_feature": "off",
+    "use_central_snapshot_in_flat_actor": true,
+    "disable_high_level_training": true,
+    "disable_discriminator_training": true,
+    "disable_discriminator_rewards": true,
+    "collects_high_level_samples": false,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false
+  },
+  "route": {
+    "policy_interruption_mode": "off",
+    "d2_enabled": false,
+    "d2_cost_c": "inf",
+    "d2_cost_c_Z": "inf",
+    "d2_k_max": 10,
+    "d2_k_Z": 10,
+    "d2_age_feature": "off",
+    "use_ha_ctse": false,
+    "use_central_snapshot": true
+  },
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 101250,
+    "discoverer_critic": 101250,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "parameter_counts": {
+    "skill_coordinator": 3841604,
+    "skill_discoverer": 1323911
+  },
+  "initial_parameter_digest": "730aab0612fc22b6b722e00b3ca04d6c5fe1a2467e9a05e57926f3c02afa4108",
+  "training_started_wall": 27.09239010605961,
+  "terminal_facts": {
+    "low_level_dones_last_step_all_true": true,
+    "low_level_dones_before_last_any": false,
+    "high_level_valid_rows": 0,
+    "disable_high_level_training": true
+  },
+  "parameter_motion": {
+    "coordinator": {
+      "delta_l2": 0.0,
+      "relative_l2": 0.0
+    },
+    "discoverer_actor": {
+      "delta_l2": 46.89527836517279,
+      "relative_l2": 1.1790047329127367
+    },
+    "discoverer_critic": {
+      "delta_l2": 37.620846868613235,
+      "relative_l2": 1.0350904000187682
+    },
+    "coordinator.state_embedding": {
+      "delta_l2": 0.0,
+      "relative_l2": 0.0
+    },
+    "discoverer_actor.base": {
+      "delta_l2": 28.4171459287644,
+      "relative_l2": 1.302142522768573
+    },
+    "discoverer_actor.base.state_encoder": {
+      "delta_l2": 7.654797824672994,
+      "relative_l2": 0.5173898539842361
+    },
+    "discoverer_critic.base": {
+      "delta_l2": 16.7047747131979,
+      "relative_l2": 1.1216646029530752
+    }
+  },
+  "last_training_row": {
+    "rollout": 45,
+    "team_steps": 360000,
+    "timing": {
+      "collection_seconds": 12.88026292505674,
+      "update_seconds": 75.53587686398532,
+      "policy_seconds": 3.8814073011744767,
+      "env_seconds": 8.20740598521661,
+      "store_seconds": 0.5029755806317553,
+      "cpu_seconds": 354.8421989999988,
+      "wall_seconds": 88.42699649406131
+    },
+    "optimizer_total": {
+      "coordinator": 0,
+      "discoverer_actor": 101250,
+      "discoverer_critic": 101250,
+      "team_discriminator": 0,
+      "individual_discriminator": 0
+    },
+    "action_clip_events": 47832
+  },
+  "final_parameter_digest": "d1d53233353a7afbc5e054b96721cbd80825f2df4c1c7adacf67feca0f1b8a12",
+  "resources": {
+    "wall_seconds_in_run_fit": 4163.926551472978,
+    "command_wall_seconds": 4165.395327350008,
+    "cpu_user_seconds": 16354.987958,
+    "cpu_system_seconds": 33.139383,
+    "cpu_seconds_in_run_fit": 16386.693979000003,
+    "peak_rss_kib": 1138868,
+    "proc_memory_end": {
+      "VmRSS_kib": 829780,
+      "VmHWM_kib": 1138868
+    },
+    "rss_scope": "scientific process Linux RUSAGE_SELF",
+    "resources_unmeasured": [
+      "peak_scratch_bytes"
+    ]
+  }
+}

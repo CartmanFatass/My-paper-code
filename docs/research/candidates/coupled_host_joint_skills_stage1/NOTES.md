@@ -617,3 +617,29 @@ Fact recorded without reinterpretation: the observed Δ sits above 99.7 % of the
 | placebo | Δ −6.6e−7, q95 +1.5e−7, not passed |
 
 Same pattern as reading 1 (Δ < 0 in both, both above q95 of the additive null at .997/.990). With two of three H seeds unsupported, the P3 rule "supported on ≥ 2 of 3 H seeds" cannot be met; the third seed's reading is still produced for the record (its cost is ≈ 0.5 CPU-h + seconds) and the batch reading is written once pair 3 exits. Cumulative cost: 4 fits 20.4 CPU-h + 2 collections 0.93 CPU-h; pair 3 at rollouts 21/29 at 13:40 UTC (slower while the collections shared the node).
+
+## 2026-09-29 14:43 UTC — Pair 3 complete and read; six fits done (31.0 CPU-h); collection 3 launched; batch reading follows reading 3
+
+**Pair 3 exit (both `complete`, exit 0; rsynced; c00–c45 copied to the artifacts directory):**
+
+| fit | exited (UTC) | wall | CPU | peak RSS |
+|---|---|---|---|---|
+| `b01_fit_H_931413_a01` | 14:36 | 5,285 s = 1.47 h | 21,379 s = **5.94 CPU-h** | 2.56 GB |
+| `b01_fit_SET_932413_a01` | 14:16 | 4,165 s = 1.16 h | 16,387 s = **4.55 CPU-h** | 1.14 GB |
+
+d2/terminal facts as in pairs 1–2 (800 team rows, 16 terminal, 0 open segments; SET 0 high-level rows). Parameter motion H coordinator .068, actors 1.12/1.18.
+
+**Ordinary readings, pair 3:**
+
+| panel | H r / C̄_bh | SET r / C̄_bh | paired Δ (H − SET) r / C̄_bh |
+|---|---|---|---|
+| dev det. c00 | .129 / .200 | .115 / .180 | +.014 / +.020 |
+| dev det. c15 | .086 / .134 | .053 / .081 | +.033 / +.053 |
+| dev det. c30 | .157 / .237 | .112 / .171 | +.045 / +.066 |
+| dev det. c45 | .147 / .228 | .112 / .173 | +.035 / +.055 |
+| **hold-out det. c45 (P2/P4 panel)** | **.142 / .215** | **.086 / .132** | **+.056 / +.083** |
+| hold-out sampled c45 | .144 / .213 | .131 / .195 | +.013 / +.018 |
+
+Facts: SET 932413 ends **below the stationary floor** on the deterministic hold-out (C̄_bh .132 vs floor .171; its final-100 .097) — a collapsed flat policy, so this pair's H advantage is SET's failure, not H's competence (H .215 ≈ pairs 1–2); L2(H, pair 3) = .215 − .639 − .0705 = **−.495**. Same churn signature (association changes .84/step, ≈ 2,900 clips per episode).
+
+**Collection 3** (`b01_p3_collect_H_931413_a01_c45`, checkpoint sha256 fe819d46…, accepted 14:43:17 UTC, claim cd78abb65f9f…, pids 1002431/1002432). Reading 3 follows; then the batch reading by the fixed rules. **Cumulative: 6 fits = 31.0 CPU-h; collections 0.93 + 1 running; cap 35 CPU-h holds.**
