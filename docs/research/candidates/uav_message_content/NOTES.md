@@ -3654,3 +3654,301 @@ canonical output yield the original evidence sibling after admission. Independen
 Reviewer read the patch and ran that integration regression itself:1passed/.92s,
 no material finding. I accept the repair and explicit new effect-free-attempt
 disposition. No result values or native episodes were needed for this diagnosis.
+
+### Corrected recovery admitted and observed
+
+Corrected inputs and failed-attempt records were published at
+77c1cd9f40bf40a2e36e4238ffd7fa5eb958b1e5. The separate
+[recovery manifest](../../../../runs/uav_message_content/b06_eval_recovery_a02/launch-manifest.json)
+was accepted22:19:19.331971UTC, claim1db566b592126ed7a0447f706314b303db436ef9f0ea88c584593a2cca972513,
+snapshot e32e808e2d854c3886de414ba28874c7. Fresh local_linux memory was
+10374225920available bytes against4294967296required. The accepted argv retains
+the fixed original tag and canonical output, and the parent remains hash-bound
+outside the source snapshot. This starts exactly the prospective missing55episodes,
+not another fit or a restart of either stopped operation.
+
+The new observer at owned temp/directions/uav_message_content/b06-recovery-a02-wait
+is armed generation1/window1500 on this exact manifest. This native DM remains
+active through terminal facts, complete reading and independent diagnosis. Both
+older observers remain stopped; no old claim is rearmed or relabeled successful.
+
+<a id="b06-complete-reading"></a>
+### 2026-09-29 B06 complete endpoint reading across the interrupted and recovery operations
+
+The corrected recovery exited0 at22:19:47.662533UTC after28.330562s from native
+acceptance. Native status agrees with the exit witness and both runner4183204 and
+supervisor4183203 are absent. It produced exactly the missing23 D19703 worlds9..31
+and32 B40 worlds0..31:55 H256 evaluations,14080 native steps,70400 motion samples,
+zero fits/optimizer calls and two replacement constructors. No earlier evaluation
+was repeated. The original207 files still have inventory SHA256
+74d949fefdb07bed87a8eec0479002c326aaf01adb4874e6e1313a7dbe9fe15b; its owner-stop
+exit-15 and its source remain unchanged. **Endpoint coverage is complete; the
+original operation remains interrupted.** The effect-free first recovery failure
+above remains part of engineering cost and is not relabeled successful.
+
+The same-handle observer delivered terminal eventcde72694a020b31b95db50eb. It was
+read/consumed and stopped at generation2 with no queued event or wake. Its known
+native-child queue error did not prevent deterministic observation or this active
+DM's reading. The compact observer terminal is retained in the recovery output.
+
+The pure reader ran from the exact accepted77c1cd9f4 snapshot and completed exit0:
+[complete reading](../../../../runs/uav_message_content/b06_eval_recovery_a02/reading.json),
+[recovery summary](../../../../runs/uav_message_content/b06_eval_recovery_a02/summary.json),
+[original summary](../../../../runs/uav_message_content/b06_calibration/summary.json).
+It verified all224 raw trajectories, all3072 training records and6144 update records,
+all12 original initial/final checkpoints, both empty recovery update streams and
+both recovery episode streams; every identity, coverage, seed/scene/channel/motion
+pairing, composed-density check and count passed. There are no new reader policy,
+model, optimizer or native calls. Reader source SHA256 is
+32786487b0d94cb82e64aa9f1503614a14481748198826deaed2b9b49b33aee9;
+its inherited full reader is0119711ea3f11074c75190f0a94d24d0306cd6ba1a38fb6b337589a4512e9174.
+Original/recovery summary digests are respectively2cf1c6884a9584e0005e62f8284582dadc43d82cf6ebb24ea70e7ed32bd88b7f
+and2c97ed4976ebcde2594d43f98438e81f921001943761994705ea025e5477250c.
+
+**Full endpoint values and prospective contrasts.** All means below weight the32
+worlds equally. Service is connected users per tick; J is complete native net J.
+All arms have exactly.001 average fee, so physical-J contrasts equal net-J contrasts.
+
+| Endpoint | J | Service | Q | Mean world minimum service | Zero ticks/world | Longest zero gap/world |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| B40 | .214409451 | 12.696166992 | .125543711 | 4.31250 | 1.68750 | .59375 |
+| K19701 | .220574991 | 13.163818359 | .124271781 | 4.43750 | 1.34375 | .81250 |
+| D19701 | .222947240 | 13.390869141 | .121583573 | 4.31250 | .25000 | .15625 |
+| K19702 | .217206889 | 12.914428711 | .124682956 | 4.25000 | 1.65625 | .75000 |
+| D19702 | .223787295 | 13.398803711 | .124013477 | 4.53125 | .37500 | .12500 |
+| K19703 | .217115603 | 12.919677734 | .124133716 | 4.46875 | 1.50000 | .50000 |
+| D19703 | .220934168 | 13.185424805 | .124460736 | 4.21875 | 1.06250 | .43750 |
+
+| Contrast | J mean [descriptive conditional df2 t95] | Service mean [conditional df2 t95] | J averaged fixed-endpoint world df31 t95 | Service averaged fixed-endpoint world df31 t95 |
+| --- | --- | --- | --- | --- |
+| D−K | +.004257073 [−.001054199,+.009568346] | +.325724284 [−.018952737,+.670401305] | [.000041617,.008472529] | [.028372020,.623076547] |
+| K−B40 | +.003889710 [−.001007656,+.008787076] | +.303141276 [−.050833666,+.657116218] | [−.000209533,.007988953] | [.020791374,.585491178] |
+| D−B40 | +.008146783 [.004504537,.011789030] | +.628865560 [.328362082,.929369038] | [.000745462,.015548105] | [.127192056,1.130539064] |
+
+The three paired continuation means in master order19701/19702/19703 are:
+D−K J+.002372249/+.006580406/+.003818565 and service+.227050781/+.484375/+.265747070;
+K−B40 J+.006165540/+.002797438/+.002706152 and service+.467651367/+.218261719/+.223510742;
+D−B40 J+.008537789/+.009377844/+.006524717 and service+.694702148/+.702636719/+.489257813.
+Every observed joint mean is positive, but this is not a retrospective unanimity
+adoption rule. The df2 intervals concern fresh continuation variability conditional
+on the selected B19451 and this common panel. They do not count96 endpoint/world
+rows as96 training replicates. Averaged fixed-endpoint deployment intervals are a
+different estimand. D−K and D−B40 individual endpoint J/service world intervals
+exclude zero only for19702; K−B40 individual intervals exclude zero for19701/19702,
+not19703. Thus the positive average does not certify each endpoint. No interval is
+selection-adjusted; this remains exploratory and is not confirmation.
+
+**All adverse world identities and tails.** The reader retains signed vectors,
+positive/tied/negative counts and extrema for every metric and all224 trajectories.
+For the main J contrast, adverse world indices are:
+
+| Contrast/master | Adverse J worlds |
+| --- | --- |
+| D−K/19701 | 0,2,4,5,6,7,8,9,15,16,19,21,23,24,27,31 |
+| D−K/19702 | 2,6,7,8,9,13,15,19,22,25,31 |
+| D−K/19703 | 0,2,4,10,14,16,18,21,22,23,24,29 |
+| K−B40/19701 | 2,5,6,7,8,13,14,15,22,24,25,30 |
+| K−B40/19702 | 2,5,6,7,8,12,13,15,16,22,25,27,28,30 |
+| K−B40/19703 | 2,4,5,6,7,8,9,11,13,14,15,16,18,24,27,29,30 |
+| D−B40/19701 | 2,5,6,7,8,9,15,16,19,24 |
+| D−B40/19702 | 2,5,6,7,8,13,15,19,22,25,31 |
+| D−B40/19703 | 2,4,5,7,8,9,14,16,18,22,23,24,27,29 |
+
+Service-adverse worlds differ and are separately preserved: D−K has14/9/14 losses,
+K−B40 has12/10/16, and D−B40 has10/11/12. D−K's worst J and service losses coincide
+at19701/world15:−.029607961 J/−2.1484375 users; its greatest gains occur at19702/world10:
++.068993614/+4.84375. D−B40 at19701/world15 loses−.050991350 J/−3.53515625 users,
+and at19701/world10 gains+.087161393/+5.83984375. K−B40's worst J is−.021383389 at19701/world15;
+its worst service is−1.40234375 at19703/world2. Positive grand means are not dominance.
+
+D−K, K−B40 and D−B40 mean differences in worst-tick service are respectively
+−.03125/+.072916667/+.041666667; all conditional and averaged-world intervals cross zero.
+D−K can lower a world's minimum by5 (19702/world22), and D−B40 by5 (19701/world15).
+Mean zero-tick differences are−.9375/−.1875/−1.125; only D−B40's conditional df2
+interval excludes zero, while its averaged-world interval crosses zero. D−K zero
+counts worsen at19702/world29 and19703/worlds14,17, including+5ticks at19703/world17.
+D−B40 zero counts worsen at19702/world29 and19703/worlds14,17,29; its greatest increase
+is+4 at19703/world14, versus a30-tick reduction at19701/world26. K−B40 increases zero
+counts at19701/worlds12,29;19702/worlds1,12,29;19703/worlds12,14,29, with+12ticks at19703/world29.
+Mean longest-gap differences are−.447916667/+.09375/−.354166667, all intervals cross zero.
+D−B40's longest gap worsens inworld29 for every master and in19703/worlds14,17;
+19701/world29 has+2ticks despite its mean zero-tick reduction. K19701/world12 has an
+8-tick longer gap. These are consequential package tradeoffs, not physical-safety tests.
+
+Quality also has a tradeoff: D−K/K−B40/D−B40 mean Q differences are
+−.001010222/−.001180893/−.002191115. Only K−B40's conditional interval is wholly
+negative; none of the averaged-world Q intervals excludes zero. D lowers height
+relative to K by.2365m on average and to B40 by.4977m; D floor occupancy is
+75.91%/77.39%/76.11%, versus K75.04%/75.68%/75.78% and B4074.45%. Boundary occupancy
+moves in mixed directions (D19703 exceeds both K19703 and B40). Mean paths per UAV
+are7086.19/7038.57/7020.96m for D,7081.35/7053.00/7053.09m for K,7063.76m for B40.
+Neither a shorter path nor a lower altitude supplies a battery/collision/safety conclusion.
+
+**The learned interventions executed.** All39942 base-actor parameters per endpoint,
+including GRU and variance, remain exactly parent-identical. The zero forecast
+critic projection remains zero; old critic tensors move by norms3.08–3.71. K's
+three parameters move from zero to nonzero b in all three fits, with final correction
+vectors (pre-tanh mean units):
+19701(−.032851357,+.035475388,−.000204057),
+19702(−.016468851,+.008935112,−.033845045),
+19703(−.013916681,+.048647176,−.013122307).
+Raw traces verify these corrections are constant. The approximately1e-9 aggregate
+standard deviations are cancellation arithmetic, not state variation. This is an
+active, learned ordinary calibration comparator, not a static or untrained policy.
+
+D hidden/output groups have16064/195 parameters and both move; hidden displacement
+norms2.881/3.269/3.709 and output norms.372/.393/.385. Across all final rows, its
+correction means and coordinate standard deviations are:
+
+| Master | D mean correction (x,y,z) | D correction SD (x,y,z) | D correction RMS / K RMS | Same-noise executed-action change RMS, D / K |
+| --- | --- | --- | --- | --- |
+| 19701 | (−.082360,+.078409,−.011514) | (.006212,.007446,.002251) | .066219/.027915 | .042586/.017995 |
+| 19702 | (−.059002,+.025838,−.084447) | (.006933,.012167,.006509) | .061953/.022335 | .035713/.012641 |
+| 19703 | (+.005579,+.058983,−.015484) | (.010907,.030731,.006724) | .040111/.030180 | .025805/.019412 |
+
+Thus D has real variation and changed actions; D19701/19702 also have large nearly
+constant offsets. D produces larger corrections than K despite K's prospective10x
+actor-lr adjustment. This leaves finite optimization geometry/amplitude as a serious
+ordinary account of D's package difference. It does not establish useful state use,
+message semantics or coordination. Both whole policies still depend on state/history
+through B19451. D19703 has six final-evaluation coordinate entries at the declared
+95%-of-bound threshold (fraction.000048828125); all other endpoint fractions and
+all training aggregate saturation fractions are zero. No correction exceeds the.1
+hard bound. Near-zero saturation does not establish adequacy of the radius/noise.
+
+Each fit completed1024 actor and1024 critic updates with nonzero actor gradients.
+K first/last16-rollout mean gradient norms remain about.0127–.0144/.0131–.0144;
+D about.0229–.0277/.0405–.0468. Critic value losses decrease across first/last16-rollout
+windows for every fit (initial74.27–92.33; final36.37–51.68). Fixed Gaussian entropy
+stays23.17015457 as designed; it is not executed-action entropy or evidence of newly
+learned stochasticity. The first two training episodes in every fit have zero
+correction, and all final rows have nonzero correction. These facts rule out an
+inactive/interchangeable implementation, not undertraining or all optimization accounts.
+
+**Actual exposure and resource cost.** Combined persisted exposure is3296 resets:
+3072 training plus224 final-evaluation episodes;786432+57344=843776 native team steps,
+4218880 motion samples and843776 RR attempts. There are1536 rollouts,6144 actor and
+6144 critic Adam calls,15728640 actor replay rows and3145728 critic replay rows,
+with833905 delivered/9871 censored packets. Eight actual constructors include six
+original and two recovery constructors. The original interrupted world9 may add
+0..256 unpersisted native steps, which cannot be reconstructed as zero. It is not
+a seventh fit or a new sampled panel. Inherited27 policy fits+3 predictors and
+3907584 result steps therefore become33 policy fits+3 predictors and4751360 persisted
+steps, plus that unknown original prefix. Recovery adds0fits/0predictors/14080steps.
+
+Five completed original-cell resource records total2008.655337 CPU-s. The original
+sixth-cell and batch CPU finalizers did not run; their missing values stay unknown.
+Original acceptance-to-exit wall is2525.748568s, not an imputed CPU count. Recovery
+adds27.833739 worker CPU-s and26.358138s worker wall after input validation (native
+acceptance-to-exit28.330562s), lifetime peak264400KiB; the full reader adds55.93CPU-s,
+56.03s wall and234592KiB peak. The failed first recovery adds1.753005s acceptance-to-exit
+wall and unknown CPU, with zero scientific calls. Engineering/tests/reviews are
+support costs without complete timing. The3CPU-hour original and600CPU-second
+recovery limits were not triggered, but absent original CPU telemetry is not proof
+of a measured full-batch budget total. Known finalized CPU subtotal for original
+five cells+successful recovery+reader is2092.419076s; it excludes the original sixth
+cell, failed attempt and support. No complete cumulative CPU-hour figure is invented.
+
+**Working explanation after the complete read.** B06 strengthens the bounded
+continuation capability beyond B05: D's complete mean J/service gains over B40 have
+positive descriptive conditional intervals, while all adverse worlds remain. K's
+active three-vector also has positive observed joint means in each continuation,
+retaining calibration as a useful ordinary candidate. D's mean increment over K is
+positive in each pair and in the averaged fixed-endpoint world intervals, but the
+three-continuation interval remains unresolved. This supports a finite package
+signal, not equivalence, robust recipe preference, causal state-information value,
+message-content value or proof that freezing caused the gain. It neither erases
+B01–B04 adverse results nor requires declaring broader learning impossible.
+Independent result diagnosis and the investment disposition follow below; no new
+world, fit, parent, counterfactual or architecture is implied by this reading.
+
+### Independent diagnosis, DM response and investment boundary
+
+Registered Scientific Reviewer `/root/dm_calibration_recovery/critic_b06_recovery`
+formed its result explanation in the separate context used for the outcome-blind
+recovery disposition; it received original evidence and fixed comparisons, not the
+DM/Root result explanation. It independently reconstructed all224 raw hashes and
+J/service/Q/fee/tail/correction values, primary intervals and exogenous witnesses;
+loaded all12 learned checkpoints for equality/finiteness/movement, inspected all6144
+update records and five consequential raw positive/adverse cases. It relied on the
+completed reader for exhaustive physical/channel/density reconstruction and checked
+B05's hash-bound reading and relevant source without duplicating its remote raw
+archive. Its evidence consumers have all finished. **MATERIAL_DISSENT: no.**
+
+The reviewer recommends closing B06 while retaining its positive conditional
+capability. It distinguishes positive observed D−K means from uncertain continuation
+inference, and explicitly rejects both equivalence and a causal state-dependent
+coordination claim. Its strongest ordinary explanation is effective calibration
+with different finite optimization. It verified that the constant mean component
+accounts for99.25%/97.93%/77.18% of D correction second moment. I recomputed these
+fractions as squared global coordinate means divided by their squared means plus
+variances: .992471610/.979297268/.771829693. They measure correction magnitude, not
+the fraction of return explained; small variable components can be consequential.
+This quantitative diagnosis strengthens the competing calibration account without
+pretending that D's varying component was already ablated.
+
+The reviewer also sharpened two tail statements. D panels contain8/12/34 total zero
+service ticks, versus B40's54 and K's43/53/48. D19703/world14 newly introduces four
+zero ticks where B40 has none; world17 gains4.910156 users/tick yet doubles zero
+ticks from4 to8. I checked both records. Unlike B05, mean world minimum service does
+not deteriorate for every D endpoint. D−B40's mean J decomposes into+.008804118 from
+service and−.000657335 from Q at equal fees. I checked that accounting as well.
+Thus B06 strengthens useful bounded adaptation and active ordinary calibration,
+while leaving message mediation, useful varying corrections, independent-parent
+generalization and optimality of K unresolved. The sparse threshold exposure is not
+a bound-saturation diagnosis, and all actual cost/missing telemetry above is retained.
+
+I accept the recommendation to **end this fixed batch, retain B19451, all six B06
+endpoints and their positive/adverse evidence, select no new default from this panel,
+and buy no further training now**. This is closure of the tested recipe, not
+rejection of the parent learning question or denial of the observed D capability.
+B06 used the competent trained K comparator requested by the selection review;
+its active learning and positive conditional means rule out treating it as a failed
+straw comparator. D's larger useful package still merits preservation as an asset.
+
+For Root's marginal-allocation comparison, the reviewer favors a concrete optional
+zero-fit functional comparison over another six-fit block: freeze each D endpoint's
+mean pre-tanh correction using this completed panel, compare all three D endpoints,
+all three corresponding constant variants and B40 on fresh common tuples, with each
+policy evolving on its own executed history. At32 worlds this would cost224 H256
+episodes/57344native steps/0fits; recovery throughput is only a rough110CPU-second
+scientific anchor, excluding engineering/reading. Constant variants preserving the
+benefit would favor inexpensive calibration without asserting equivalence; a retained
+D increment after matching its constant component would support further development
+of varying corrections, still not message-specific causality. Failure to transfer
+or continued decision uncertainty would preserve B06's positive but narrow result
+and favor redirection, without automatic extra panels.
+
+I judge this a more discriminating in-question possibility than unchanged training,
+new-parent replication before a deployment decision exists, or radius/noise tuning
+without evidence of their predicted bottleneck. It is **not an admission gate** for
+all learning and is not selected or authorized as a new study here. A complete direct
+experiment on a consequential independent question may be worth more; Root owns
+that cross-question comparison. Current cost is33policy fits+3predictors and4751360
+persisted steps plus0..256 unknown original steps. Closure/retention is the selected
+present action; independent-parent confirmation, a fresh-panel asset decision or the
+above targeted comparison each require a concrete prospective purpose. No producer
+or owner decision is fabricated as an idle dependency. Current native scientific
+scope is complete; Root receives the evidence and optional next-investment choice.
+
+### Durable evidence before source/scratch retirement
+
+Required evidence stays on configured local_linux at the two canonical paths
+`/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/` and
+`/home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02/`.
+The original207-file tree is unchanged:60391081 logical bytes/60796928 allocated
+file bytes, inventory74d949fe...15b. The recovery tree has72files,
+16344235logical/16482304allocated file bytes and inventory
+aea1337a31e958e149cb245ca5eb01137f6439b0a72351765305d2819bc9b1fa.
+The inventory algorithm is the same sorted(relative-path,NUL,decimal-size,NUL,
+file-SHA256,newline) concatenation used above. Recovery `reading.json` is855118bytes,
+SHA2568906099bd8280c378bb9a520df3f1118eca7fc0095bfac792dd8cba3be94e4b7.
+The separate failed attempt remains at `runs/uav_message_content/b06_eval_recovery/`
+with7files/11329logical bytes, inventory
+8b20bd9177b53a44ad794054d79b022a1425256366fdd45188ac663f19ebbc32.
+Compact config/summary/readings/source/native status/observer and reader-resource
+records are published; raw NPZ trajectories, training/update streams and12checkpoints
+stay in these single durable evidence locations. Their per-file hashes are bound by
+the saved cell summaries and complete reader. No bulk tree is copied or archived as
+a cleanup condition. Useful recovery/checkpoint/reader code and focused tests stay
+on main because they reconstruct this interrupted result and verify its semantics.

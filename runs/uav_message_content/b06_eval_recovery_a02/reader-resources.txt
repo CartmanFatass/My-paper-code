@@ -1,0 +1,23 @@
+	Command being timed: "/home/fires/.venvs/hmasd-linux-cpu/bin/python /home/fires/hmasd-wsl/.git/hmasd-launch-sources/e32e808e2d854c3886de414ba28874c7/experiments/candidates/uav_message_content/read_b06_recovery.py --original /home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration --recovery /home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02 --parent /home/fires/hmasd-inputs/uav-message-b06-B-34871c49.pt --output /home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02/reading.json"
+	User time (seconds): 55.14
+	System time (seconds): 0.79
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:56.03
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 234592
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 2
+	Minor (reclaiming a frame) page faults: 204101
+	Voluntary context switches: 136
+	Involuntary context switches: 294
+	Swaps: 0
+	File system inputs: 1976
+	File system outputs: 1672
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

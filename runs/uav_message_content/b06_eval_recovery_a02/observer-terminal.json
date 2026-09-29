@@ -1,0 +1,95 @@
+{
+  "generation": 2,
+  "wake_id": null,
+  "events": [],
+  "jobs": {
+    "launch-b06-eval-recovery-a02": {
+      "spec": {
+        "id": "launch-b06-eval-recovery-a02",
+        "protocol": "launch",
+        "argv": [
+          "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+          "/home/fires/hmasd-wsl/scripts/hmasd_launch.py",
+          "status",
+          "/home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02/launch-manifest.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      },
+      "status": "ready",
+      "due": 1790720427.0311563,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02/summary.json",
+            "state": "present"
+          }
+        },
+        "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1db566b592126ed7a0447f706314b303db436ef9f0ea88c584593a2cca972513.json",
+        "direction": "uav_message_content",
+        "execution": {
+          "exit_code": 0,
+          "exit_witness": {
+            "exit_code": 0,
+            "finished_at_epoch": 1790720387.6625328,
+            "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02/process-exit.json",
+            "state": "valid",
+            "termination": "process_exit"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+              "kind": "linux_pid_start_ticks",
+              "pid": 4183204,
+              "session_id": 4183203,
+              "start_ticks": 15890386
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+              "kind": "linux_pid_start_ticks",
+              "pid": 4183203,
+              "session_id": 4183203,
+              "start_ticks": 15890383
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry_available": false,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02/launch-manifest.json",
+        "node": "local_linux",
+        "observed_at": "2026-09-29T22:19:56.789055Z",
+        "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/1db566b592126ed7a0447f706314b303db436ef9f0ea88c584593a2cca972513.json",
+        "output_root": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_eval_recovery_a02",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "schema_version": 1,
+        "sha": "77c1cd9f40bf40a2e36e4238ffd7fa5eb958b1e5",
+        "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/e32e808e2d854c3886de414ba28874c7"
+      },
+      "observed": 1790720397.0311563
+    }
+  },
+  "delivery": null,
+  "stopped": true
+}
