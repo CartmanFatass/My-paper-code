@@ -2797,3 +2797,288 @@ registration is not an assumed future wake, and no replacement worker is allowed
 Manifest/preflight compact copies are retained under
 `runs/uav_message_content/b05_retained_control/`; the canonical remote output
 directory remains the sole raw/weight store while the run is live.
+
+<a id="b05-complete-reading"></a>
+### B05 complete reading: conditional continuation gain, forecast increment unresolved
+
+The fixed operation exited0 at2026-09-29T14:14:19.746Z. Its terminal witness and
+same-handle observation agree, with runner/supervisor identities absent and
+consistent records. At the generation1 checkpoint the observer was rearmed for
+the same claim as generation2. The terminal event
+`ca122fd22b17696fa14c9369` was read, the observer was stopped, and no scientific
+worker was restarted or replaced. Native queue delivery returned the known
+unsupported spawned-child error `-32600`; deterministic observation and this
+active child turn continued normally. The complete event is retained in
+`runs/uav_message_content/b05_retained_control/observer-terminal.json`.
+
+The accepted pure reader at source69785db45a1240046f7d1a066dbe53a3b710e7c0 read
+**all224 full-H256 trajectories**, all3072 training episode records, all6144 PPO
+records and all12 initial/final learned checkpoints. It reports
+`all_checks_passed: true`. No reader repair, added model call, native step or
+optimizer call was needed. Checks cover the canonical parent, matched initial
+tensors/exogenous streams, frozen base and inherited sigmas, detached actual
+history, the composed sampled density, physical movement/clipping, original
+geometry, dated future fields/cache expiry, evaluator-only connected-user bits,
+J/service/Q/fee, count closure and unchanged evaluation parameters. The largest
+reconstructed density discrepancy is2.546e-6, within the frozen numerical check.
+Initial/final base tensors are byte-identical to the canonical parent; executable
+freezing/optimizer exclusion is also checked. There is no per-update archive of
+base tensors, and endpoint identity is not a closed-loop competence guarantee.
+
+The compact [summary](../../../../runs/uav_message_content/b05_retained_control/summary.json),
+[full reading](../../../../runs/uav_message_content/b05_retained_control/reading.json)
+and [exit witness](../../../../runs/uav_message_content/b05_retained_control/process-exit.json)
+have equal local/canonical-node SHA256s, respectively
+`9cd7ea9b5eb1e7fd7fdc9aaea10679ba84ea437b62182a0e2b475d8450fd3ef8`,
+`3ceaa83a48591f9d8d7c4b64fe582436380d5a0eef8ac73f84f93ce879d6165c` and
+`a8575e4c44391b62f1aaa8272fc7e484ad1f8a308c3e412391cf22059e954de4`.
+Manifest/preflight hashes also agree across those locations. One durable raw copy
+remains at `wsl_4070:/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/`,
+82194432 allocated bytes at collection. Its224 compressed traces total66776282
+file bytes, including2867200 uncompressed evaluator-only user connection bits;
+individual raw/checkpoint hashes and locators are bound by the summary, and stream
+hashes are independently verified by the reader. All positive/adverse endpoints,
+initial checkpoints and episode/update streams remain required evidence. The
+canonical B19451 and prior B01-B04 raw evidence remain untouched.
+
+#### Native outcomes and the two uncertainty scopes
+
+All J values below are full-H256 per-step means, service is connected users per
+tick, and the fee is.001 in every arm. Physical J is net J plus.001, so no fee
+saving explains any contrast. All cells share the same32 evaluation worlds and
+motion/channel streams. B40 is evaluated once and is not three independent fits.
+
+| Continuation | Arm | Net J | Service | Q |
+|---|---|---:|---:|---:|
+|19601|M_G|.236846589|14.223511|.129058130|
+|19601|M_O|.236715308|14.208984|.129298421|
+|19602|M_G|.236266174|14.229248|.126855673|
+|19602|M_O|.236979328|14.279419|.126891541|
+|19603|M_G|.231268165|13.835083|.128590011|
+|19603|M_O|.231754831|13.866821|.128731110|
+|19451 frozen|B40|.228795101|13.636963|.129592068|
+
+M_G-B40 per-block J differences are[.008051489,.007471074,.002473065],
+service[.586548,.592285,.198120]. Means are **+.005998542 J / +.458984 service**.
+The conditional continuation-level t95 intervals, df2, are
+[-.001620096,+.013617180] J and[-.102265,+1.020234] service. These intervals
+condition on this selected parent and common panel, not independent parent
+training. Separately, the df31 deployment-panel intervals for the mean of these
+three fixed endpoints are[+.001022296,+.010974788] J and[+.101488,+.816481]
+service. Their positivity does not replace the df2 uncertainty or turn96 rows
+into independent learning replications.
+
+M_O-B40 per-block J differences are[.007920207,.008184227,.002959730],
+service[.572021,.642456,.229858]. Means are+.006354721 J / +.481445 service;
+df2 intervals[-.000956371,+.013665813] / [-.066825,+1.029716]. The separate
+deployment intervals for the average over three fixed endpoints are
+[+.001193612,+.011515831] /
+[+.110879,+.852012]. Both learning arms therefore have positive observed
+panel-mean gains in all three blocks, with unresolved training-level magnitude.
+These positive averaged-endpoint intervals do not apply to each individual
+endpoint. Only19601 has individual J/service deployment intervals strictly above
+zero for both arms. Both19602 J intervals cross zero; its M_G service interval
+crosses zero, while M_O service is[+.009731,+1.275181]. Both19603 endpoints cross
+zero for J and service.
+
+The prospective future-content increment M_O-M_G is much smaller:
+per-block J[-.000131282,+.000713153,+.000486666],
+service[-.014526,+.050171,+.031738]; mean **+.000356179 J / +.022461 service**.
+Df2 intervals are[-.000729584,+.001441942] / [-.060339,+.105261]; the separate
+deployment intervals also cross zero,[-.000251412,+.000963770] /
+[-.022982,+.067904]. This is unresolved, not equivalence, an established content
+gain or permission to add seeds after reading it.
+The fixed19602 O-G contrast is a retained positive case: its separate32-world
+deployment intervals are[+.000193645,+.001232661] J and[+.011120,+.089222]
+service. That one endpoint-pair result is not the unresolved training-level
+recipe comparison and does not select a winner after evaluation.
+
+J decomposition preserves the tradeoff: M_G-B40 has+.006425781 from service but
+-.000427239 from Q; M_O-B40 has+.006740234 from service and-.000385513 from Q.
+The M_O-M_G mean divides into+.000314453 service contribution and+.000041726 Q.
+The new capability signal is chiefly restricted continuation, not demonstrated
+benefit of dated future content. There is no claim that this mechanism caused B04's
+degradation or that these policies beat all competent ordinary planners.
+
+#### Every adverse world and service tails
+
+The full reading retains every raw-derived world level and paired difference,
+with endpoint/world extrema and adverse-world lists for each metric. I read all
+224 rows, not only the averages. J-negative worlds versus B40 are:
+
+| Block | M_G adverse J worlds | M_O adverse J worlds |
+|---|---|---|
+|19601|0,4,11,12,18,19,20,26|4,11,12,18,19,22,26|
+|19602|0,1,2,5,7,11,12,15,19,20,22,24,26,27|0,1,2,5,7,11,12,15,19,20,22,24,26,27|
+|19603|1,2,4,6,7,10,14,19,21,23,24,26,27,31|0,2,4,6,7,10,12,14,19,21,24,26,27,31|
+
+Service-negative lists differ and remain explicit in the reading:8/13/14 worlds
+for M_G and8/13/16 for M_O. Mean gain is not worldwise dominance. The largest
+M_G/M_O J losses versus B40 are-.042322806/-.043249160, both19602/world11;
+the largest gains+.051784096/+.051972889 are both19602/world30. Worlds19 and26
+lose J and service for every continuation, while29 and30 improve both in all six.
+For M_O-M_G, J loses in19/9/15 worlds; the largest loss is-.007664551 at19603/26
+and largest gain+.008296640 at19603/17. Thus the tiny mean increment is mixed
+even within this one shared deployment panel.
+
+Across32 worlds, B40 has13 zero-service ticks:2 inworld21 (longest1),11 inworld28
+(longest7). M_G total zero ticks by block are7/1/10; M_O totals9/2/11. The block3
+corrections introduce zero service inworld10, where B40 has none: M_G3 ticks
+(longest1), M_O4 (longest2). M_O block2 retains one zero tick inworld21, where
+M_G has none. World28 improves relative to B40 in every endpoint, with M_G7/1/7
+and M_O9/1/7 zero ticks. This is useful aggregate tail improvement versus B40
+alongside new adverse worlds, and four more pooled zero ticks for M_O than M_G.
+
+Mean per-world minimum service is5.34375 for B40,5.25/4.96875/5.28125 for M_G
+and5.21875/4.90625/5.15625 for M_O: every continuation is worse on this distinct
+tail statistic. Boundary fractions are B40 .157910, M_G .152222/.138062/.156177,
+M_O .152246/.137915/.153833. Floor fractions remain large: B40 .737329, M_G
+.753418/.777002/.736743, M_O .752759/.777271/.747412. Mean altitude is55.3107m
+for B40,54.9063/54.3664/55.3370m for M_G and54.9244/54.3587/55.0529m for M_O;
+ceiling fractions remain.001245-.001465. These descriptive boundary/altitude
+changes are not physical-safety evidence.
+
+#### Exposure, useful assets and limits
+
+All6144 PPO records contain finite actual losses and actor/critic gradients;
+all6144 separate actor Adam and6144 critic Adam calls occurred. Base displacement
+is exactly zero in all endpoints. Residual hidden displacement is2.968-3.200,
+output displacement.283-.404, old critic displacement2.717-3.599. M_G's zero-only
+forecast critic projection remains zero, while M_O's projection moves1.453-1.599.
+Last16-rollout value MSEs are45.669-55.584 versus70.127-82.519 in the first16;
+actor surrogate means are small, with maximum pre-clip actor gradient.074-.110
+and critic maxima396.5-465.1. Separate clipping prevents the critic norm from
+scaling the actor step. These facts establish learning exposure, not correctness
+of a preferred causal explanation.
+
+The first two episodes of every fit have exactly zero residual. Final correction
+RMS in pre-tanh units is .034838/.081728/.032973 for M_G and
+.032501/.080975/.043254 for M_O. Every final correction coordinate is nonzero;
+the fraction at or above.095 is zero in training and evaluation. The mean of
+worldwise maximum corrections lies.062906-.088324; no fit is diagnosed as hard
+bound saturation. Same-noise normalized-action RMS changes are
+.022107/.049990/.020854 for M_G and.020532/.049462/.026155 for M_O. Combined
+with unchanged inherited sigmas, this is a genuinely active but restricted
+fixed-noise mean-correction family, not a test of all useful control corrections.
+
+Every M_O endpoint has160768 qualified future-cache uses on the common panel.
+Valid-field removal at the same history gives central-command RMS sensitivity
+.002213/.001801/.003953 (max.010521/.007087/.014515). Ordinary forecast cache-use
+horizontal RMS error is81.996/82.367/81.669m, with height MAE3.750/3.211/3.908m;
+dates, expiry, terminal-short targets and clipped first-sampled/central persistence
+all check. Future information is delivered and the composed policy responds;
+neither nonzero sensitivity nor forecast validity proves useful mediation. The
+forecast increment remains unresolved despite this exposure.
+
+The frozen B19451 and six new endpoints are retained as concrete capabilities and
+evidence, not selected retrospectively as a new default winner. M_G's repeated
+positive panel means strengthen the premise that bounded learning can develop a
+useful inherited controller. They do not yet establish reliable improvement over
+the distribution of continuations/parents, eliminate adverse worlds, or authorize
+deployment replacement. Future-content usefulness remains open, with this fixed
+extension offering no resolved increment. B04's measured predictor capability,
+its mixed/adverse package result, and the earlier ordinary/learned positive cases
+are all preserved rather than explained away.
+
+#### Measured cost
+
+B05 completed exactly6 policy fits,3072 training plus224 final evaluation
+episodes,786432+57344=843776 native steps and4218880 motion samples. All1536
+rollouts,6144 PPO records and their separate actor/critic calls occurred;
+15728640 actor and3145728 critic replay rows are counted separately. There were
+24576 evaluation-only shadow forward calls and no evaluation optimization.
+Runner wall was1744.424536s (29.074min), worker self CPU1743.827520s (.484397h),
+with one Torch/inter-op thread and lifetime peak RSS531300KiB. The CPU use is
+about16% above the rough.418CPUh estimate, not a violated bound. Full reader wall
+was46.66s, user47.43s plus system1.56s, peak RSS387716KiB; it added no scientific
+exposure. Correctness tests and agent support remain separately scoped and not
+claimed as exhaustively metered agent-hours.
+
+Cumulative content investment is now27 policy fits plus3 predictors,
+3907584 result steps,27648 PPO records plus3072 predictor updates, and
+6683.891643s scientific runner wall. This carries all prior positive, adverse and
+failed exposure. It does not reset cost because a new native DM owns B05.
+
+#### Independent scientific reading and DM disposition
+
+Registered ResearchCritic `/root/dm_retained_control/critic_b05` worked read-only
+with `fork_turns=none`, without inherited DM/Root conversation. It reconstructed
+the frozen protocol and evidence before reading the full Pro/selection assessment
+and my interpretation. It independently read all224 raw native J/service/Q and
+service tails, matched scenes/users/channel timing and realized Gaussian
+innovations, checked3072 training-stream bindings, all12 checkpoints and6144
+update records, and directly inspected complete action/density/forecast/cache
+semantics on25 positive/adverse trajectories. Eleven relevant accepted snapshot
+files matched69785db45a1240046f7d1a066dbe53a3b710e7c0 and the canonical parent
+hash agreed. It found no consequential source/evidence contradiction. It did not
+replay neural forwards or radio physics, nor re-audit old B03/B04 raw data.
+
+Its substantive recommendation is to **retain the demonstrated restricted-
+continuation capability and end B05 without another run**. Both extension arms
+have positive observed mean J/service in all three blocks, useful evidence for
+developing the retained controller but not reliable improvement across training
+or parent populations. The positive df31 intervals belong to the average of three
+fixed endpoints, not every endpoint: only19601 individually excludes zero in
+J/service against B40 for both arms. I incorporated this factual clarification
+above, while preserving the separately favorable fixed19602 M_O-M_G contrast.
+The overall content comparison remains unresolved; neither its specific positive
+case nor adverse19601 is erased by the pooled uncertainty.
+
+The critic preserved native tradeoffs:19602/world11 loses.042323 J/2.660156
+users for M_G and.043249/2.765625 for M_O versus B40; M_O19603/world19 loses
+3.164063 users. All endpoints lower mean worst-tick service, and block3 creates
+zero-service ticks inworld10. Conversely, aggregate zero counts improve and
+M_G19602/world30 gains.051784 J/3.628906 users. No retrospective unanimity rule
+is introduced.
+
+Its explanation update has three parts. First, small correction-to-noise scale
+does not prevent useful native changes: corrections execute and none reaches the
+declared.095 saturation threshold. Nonactivation and observed hard-bound
+saturation are not supported explanations. Second, **ordinary retuning is the
+strongest simpler account of the shared gain**. Its post-hoc raw inspection found
+19602 M_G corrections averaging approximately[-.0830,+.0826,-.0790], with each
+coordinate SD about.0056. These nearly constant directional offsets are a credible
+alternative to learned message coordination, not proof a constant controller would
+reproduce the benefit. Third, forecast delivery and nonzero same-history sensitivity
+are established, but useful mediation is not. B05 does not identify why B04 degraded:
+panels, training instances and multiple learning properties differ. A persistent-
+bias comparator would matter to a future state-dependent coordination claim, not
+retroactively become a missing requirement for this completed package question.
+
+The critic recommends **no additional native work in this fixed family now**.
+There is no declared replacement decision that another ranking panel would settle,
+and no saturation evidence specifically supporting a radius increase. It offered
+one conditional future investment if concrete asset reuse becomes consequential:
+prospectively select one M_G endpoint and compare it with B40 on32 fresh complete
+worlds,0fits/64episodes/16384steps. Joint gains would support provisional reuse of
+that one asset; losses/tradeoffs would favor B40; unresolved intervals would leave
+replacement unresolved. This would be deployment testing, not training replication.
+The observed12.19s B40 panel suggests tens of worker-seconds, with unpriced evaluator
+preparation/readback. The critic explicitly does not recommend buying that panel
+now merely to refine rankings. It reports **`MATERIAL_DISSENT: no`**, all its
+read-only processes finished, and no remaining raw/source consumer.
+
+I adopt that disposition and simpler-explanation limit. B05 strengthens the
+constructive premise that bounded continuation can develop an already useful
+controller, without establishing reproducible future-content advantage, a new
+default endpoint, learned message coordination or freezing causality. The six
+endpoints, B19451, earlier ordinary/learned capabilities and every adverse result
+remain assets/evidence. No radius, noise, architecture, training length, seed,
+predictor or ranking panel is selected. This fixed study is complete, and the
+broader question returns to `reserve` with no active producer, unread result or
+external blocker. Root owns the next investment choice under the continuing
+complete-round/Pro-innovator/selection loop; the conditional reuse comparison and
+simpler-bias issue are recommendations for that choice, not a waiting approval
+gate or authorization for another study in this child.
+
+At this complete boundary, retain the reusable bounded model, separate PPO
+updater, dated channel/collector, their correctness tests and pure reader as
+useful capability code. Retire only the ended fixed six-fit `run.py`/`study.py`
+entrypoints and driver-specific test, plus the exact disposable launch snapshot,
+temporary parent staging copy and consumed observer scratch. The import scan found
+no external executable consumer of those driver paths. Historical implementation
+and its original32-test contract remain recoverable at69785db45a1240046f7d1a066dbe53a3b710e7c0.
+Canonical raw/weights/streams and the parent are excluded from deletion. The
+observer's terminal event was consumed through generation3, then stopped/drained
+with no pending events. Actual absence and allocated-byte change will be recorded
+after the supported exact-target collector, without a backup or retention chain.

@@ -1,0 +1,185 @@
+{
+  "generation": 2,
+  "wake_id": "a26ac766-d054-46bf-bbb0-15369c86202c",
+  "events": [
+    {
+      "id": "ca122fd22b17696fa14c9369",
+      "kind": "READY",
+      "evidence": {
+        "job_id": "launch-b05-retained-control",
+        "status": "ready",
+        "facts": {
+          "admission": {
+            "claim_state": "accepted",
+            "state": "accepted"
+          },
+          "artifacts": {
+            "stderr": {
+              "path": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/stderr.log",
+              "state": "present"
+            },
+            "stdout": {
+              "path": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/stdout.log",
+              "state": "present"
+            },
+            "summary": {
+              "path": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/summary.json",
+              "state": "present"
+            }
+          },
+          "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/36e95a98916c0da436565f42501a6af537ede4d86a1a936286083ca117798538.json",
+          "direction": "uav_message_content",
+          "execution": {
+            "exit_code": 0,
+            "exit_witness": {
+              "exit_code": 0,
+              "finished_at_epoch": 1790691259.745767,
+              "path": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/process-exit.json",
+              "state": "valid",
+              "termination": "process_exit"
+            },
+            "runner": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 997055,
+                "session_id": 997054,
+                "start_ticks": 103540775
+              },
+              "state": "absent"
+            },
+            "state": "exited",
+            "supervisor": {
+              "recorded_identity": {
+                "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+                "kind": "linux_pid_start_ticks",
+                "pid": 997054,
+                "session_id": 997054,
+                "start_ticks": 103540772
+              },
+              "state": "absent"
+            }
+          },
+          "explicit_retry_available": false,
+          "kind": "hmasd_operation_status",
+          "manifest_ref": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/launch-manifest.json",
+          "node": "wsl_4070",
+          "observed_at": "2026-09-29T14:14:32.656456Z",
+          "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/36e95a98916c0da436565f42501a6af537ede4d86a1a936286083ca117798538.json",
+          "output_root": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control",
+          "record_consistency": {
+            "mismatches": [],
+            "state": "consistent"
+          },
+          "schema_version": 1,
+          "sha": "69785db45a1240046f7d1a066dbe53a3b710e7c0",
+          "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e6bc0c8404bc42218708e367eb8a1c37"
+        }
+      },
+      "created": 1790691272.9520054,
+      "consumed": false
+    }
+  ],
+  "jobs": {
+    "launch-b05-retained-control": {
+      "spec": {
+        "id": "launch-b05-retained-control",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "/home/wu/projects/HMASD/scripts/hmasd_launch.py",
+          "status",
+          "/home/wu/projects/HMASD/.git/hmasd-admission/36e95a98916c0da436565f42501a6af537ede4d86a1a936286083ca117798538.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      },
+      "status": "ready",
+      "due": 1790691302.9513714,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/summary.json",
+            "state": "present"
+          }
+        },
+        "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/36e95a98916c0da436565f42501a6af537ede4d86a1a936286083ca117798538.json",
+        "direction": "uav_message_content",
+        "execution": {
+          "exit_code": 0,
+          "exit_witness": {
+            "exit_code": 0,
+            "finished_at_epoch": 1790691259.745767,
+            "path": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/process-exit.json",
+            "state": "valid",
+            "termination": "process_exit"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 997055,
+              "session_id": 997054,
+              "start_ticks": 103540775
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 997054,
+              "session_id": 997054,
+              "start_ticks": 103540772
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry_available": false,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control/launch-manifest.json",
+        "node": "wsl_4070",
+        "observed_at": "2026-09-29T14:14:32.656456Z",
+        "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/36e95a98916c0da436565f42501a6af537ede4d86a1a936286083ca117798538.json",
+        "output_root": "/home/wu/projects/HMASD/runs/uav_message_content/b05_retained_control",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "schema_version": 1,
+        "sha": "69785db45a1240046f7d1a066dbe53a3b710e7c0",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/e6bc0c8404bc42218708e367eb8a1c37"
+      },
+      "observed": 1790691272.9513714
+    }
+  },
+  "delivery": {
+    "id": "a26ac766-d054-46bf-bbb0-15369c86202c",
+    "status": "delivery_unknown",
+    "created": 1790691272.9585662,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for unloaded spawned sub-agents (code -32600)\n",
+    "exposed_ids": [
+      "ca122fd22b17696fa14c9369"
+    ]
+  },
+  "stopped": false
+}
