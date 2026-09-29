@@ -2095,3 +2095,55 @@ of actor/critic inputs, packets, predictor targets and training data, and out of
 selection/interpretation gates. Add a focused leakage/alignment test. This preserves
 a later Root question's evidence option without asserting current unfairness or
 selecting a fairness study.
+
+### B04 implementation acceptance and fixed input binding
+
+The scoped implementation is `experiments/candidates/uav_message_content/b04/`
+with mirrored synthetic tests and independent direction-root `read_b04.py`.
+The registered Implementer `/root/dm_delay_intent/implement_b04` returned the
+collector/channel, exact-path warm start, detached predictor/PPO updates, fixed
+nine-fit driver, frozen B0 panel and raw output schema. I read the full code and
+tests, corrected aggregate accounting to include B0 and kept zero diagnostic
+endpoints for G. Every final trajectory retains the actual old actor/critic fields,
+forecast tail, dated endpoints, commands/positions, channel records and hashes,
+native outcomes and evaluation-only connection bits. The pure NumPy reader rebuilds
+transport, bounds, native metrics and conditional contrasts without simulator or
+policy calls; it also accounts for all update and episode streams.
+
+Independent registered engineering Reviewer
+`/root/dm_delay_intent/review_b04` read collection through replay/update/evaluation
+and raw reading against this contract and B02 source `02ede8a4a`. It found no
+material engineering issue after the synthetic fixture's SINR dtype was corrected
+from FP32 to native FP64; production code/tolerances did not change for that fixture
+failure. The review verifies preserved old tensor paths, zero tail initialization,
+explicit RNG/reset semantics, post-episode labels, detached predictor gradients,
+stored behavior packets, clipped dated forecasts/TTL, nonfeeding ordinary shadows,
+telemetry isolation and admission before scientific effects. Its final run passed
+28 tests in11.11s. My combined run passed28 in11.66s, with automatic pytest scratch
+teardown. These include all four arm types' complete256-step synthetic writer-reader
+checks plus a miniature nine-cell driver, not native UAV episodes or a pricing pilot.
+Full native read_run across manifests, checkpoints, update logs and320 trajectories
+remains to be exercised on accepted outputs. No scientific result is claimed yet.
+
+I accept the reviewed implementation for exact-input publication and the fixed B04
+launch. The latest small reader change permits later reading from the canonical B
+input after the temporary staging copy is removed; its digest is unchanged. Fresh
+remote read-only verification confirmed the463357-byte B19451 SHA256 above and
+metadata armB/master19451/input171/critic451/inheritedC digest
+`456832faaa94afb22cf3faa00bb97b0f129e2f5b72b2eedbb1148523b088cdad`.
+Because a snapshot launcher cannot bind an untracked absolute input inside its
+author tree, stage exactly those bytes outside the checkout at
+`/home/wu/hmasd-inputs/uav_message_content-b04-B-34871c49.pt`; reverify the declared
+digest inside the admitted runner. This is a temporary463357-byte input duplicate,
+not a new learned checkpoint or evidence copy, and will be removed after full
+reading. Canonical B19451 stays unchanged. No pre-admission failed launch was needed
+to discover this already documented B02 input-binding constraint.
+
+Root resolved the shared-control dependency at2026-09-29T10:13:31.526153Z by a
+locked canonical-node fast-forward from `5c6997722` to `e9faa4ad44827a61ca44d225cef4f03296b86467`.
+Fresh `_require_policy` passed this exploring direction with policy digest
+`027095b84343f72c961f5a8706f902c5ff90a5265da3cfe5ac226a964e49f12b`.
+Root reports the existing five dirty launch-status blobs and sparse-pattern blob
+unchanged; no control/status/claim edit or accepted operation restart occurred.
+Only normal fresh actual-node admission and published exact source binding remain
+before execution. Resource allocation and scientific endpoints remain as selected.
