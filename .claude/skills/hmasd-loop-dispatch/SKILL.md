@@ -54,6 +54,12 @@ quota, a novelty gate, or a reason to interrupt accepted work.
 At material investment boundaries, distinguish empirical support, default adoption and research
 continuation. Root gives development of demonstrated capabilities real consideration alongside
 independent questions and stopping; an adoption failure alone does not settle that allocation.
+Keep the enduring question distinct from the latest study's narrower answer. Say what the next
+investment buys: capability development, a learning comparison, asset use for this or another
+question, or a different question. Consider only relevant alternatives, not a mandatory set of
+proposals. Repeated asset ranking is not progress on a learning question by itself; ordinary
+control, task performance and empirical understanding remain worthwhile contributions in their
+own right. Neither an open parent question nor a retained positive asset obliges another run.
 Use scientific-tools' constructive-prediction and richer-contract reasoning, including cumulative
 cost and the observation that would change the next choice. This is question ownership across
 studies, not automatic repair dispatch or a required extra line/review for every batch. No new

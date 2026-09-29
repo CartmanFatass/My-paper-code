@@ -62,7 +62,11 @@ bounded comparison can be preferable to a chain of cheap patches or diagnostics.
 
 Keep empirical support, practical adoption and further investment distinct. A package can fail
 its adoption/risk rule yet expose a useful capability or limitation worth developing; that
-investment does not reverse the failed rule. At closure distinguish an adverse tested prediction,
+investment does not reverse the failed rule. For a selected future study, distinguish hard
+feasibility requirements, task-relevant service/risk tradeoffs and conditional-use criteria before
+outcome exposure, with the reference, population and horizon explicit. A rule for one adoption
+decision is not a universal veto on a method family; never relax a completed study's rule to
+make its result pass. At closure distinguish an adverse tested prediction,
 a technically missing comparison and a proposal declined for its value/cost. None alone exhausts
 the parent question. Conversely, an open question does not oblige another attempt. Use the
 existing notebook reasoning and one applicable independent review; this adds no form, candidate
@@ -185,7 +189,10 @@ source rather than claiming independence from the role name.
 
 Use this review at question/approach selection and material interpretation or route correction,
 not each completed cell or unchanged batch. Reuse applicable independent analysis and combine
-overlapping claim/direction criticism in the same pass. Return through the actual parent;
+overlapping claim/direction criticism in the same pass. For a follow-up, identify the changed
+question, premise, comparator or evidence and review its consequences while retaining still-valid
+analysis; a new batch number alone does not require restarting selection. Reuse must cover the
+actual decision and frozen design, not just a related topic. Return through the actual parent;
 preserve the substantive recommendation, material dissent and disposition in existing NOTES
 or the assigned RESEARCH review. Uncontested in-scope recommendations need no Root ACK;
 Root resolves material direction disagreements within its assigned coordination; between the

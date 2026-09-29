@@ -144,7 +144,10 @@ At an applicable publication boundary:
    if there is no useful shared change, leave it alone. Preserve other direction rows, owner controls
    and launch-bound lead values; link to evidence rather than copying an old whole index.
    Keep the standing to its scientific judgment, scope/contrary evidence and next comparison;
-   task/checkouts belong in the existing routing block. Do not copy process handles, observer
+   keep the Question cell about the enduring scientific question, with the latest study's
+   narrower answer in standing. A completed asset-use comparison does not silently replace a
+   learning question, and an unresolved parent question does not authorize automatic continuation.
+   Task/checkouts belong in the existing routing block. Do not copy process handles, observer
    generations, per-file hashes or per-cell check transcripts into the index.
    Check the diff and commit explicit paths.
 3. Refresh main before pushing and reconcile any new relevant changes locally. Push normally
