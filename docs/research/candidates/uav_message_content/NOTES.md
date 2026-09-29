@@ -993,3 +993,30 @@ the first admitted scientific run. No shared launcher or control contract is cha
 The pure reader verifies the durable canonical B01 checkpoint against the same hash,
 records that location, and does not require the disposable staging copy to survive.
 All ten synthetic checks passed together in 7.60 s after the CLI path correction.
+
+### Accepted B02 operation and deterministic observation
+
+The corrected exact source is `02ede8a4a75cc83e6e18d8b6619f1cfa84bc8d92`.
+Independent engineering follow-up found no material issue in the input-location
+correction; fixed digest, admission order, launch identity and numerical path remain
+unchanged. The configured supervisor task `uav-content-b02-02ede8a4a` invoked the
+launcher once; **native acceptance was 2026-09-29 04:36:49 UTC**. The supervisor's
+command completion is not the scientific runner's completion.
+
+[Native manifest](../../../../runs/uav_message_content/b02_preserved_scalar/launch-manifest.json)
+binds claim `15a68a5875aea6af7216bb125efd5593469102355af49f6d8b04001f19df1514`,
+source snapshot `a4c43170c0d446b3a002d8b66608660e`, supervisor PID964204 and runner
+PID964205 with boot/start identities. Durable outputs are under
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/`.
+[Fresh actual-node admission](../../../../runs/uav_message_content/b02_preserved_scalar/admission-preflight.json)
+measured 12967636992 available/effective bytes against the 4294967296-byte floor.
+
+`tools/hmasd_wait.py` generation1 is registered under this native child's identity
+`01a0eb55-63aa-7242-b5ec-1e16b98e58dc`, using the read-only same-claim request
+`temp/directions/uav_message_content/observe-b02-preserved-scalar.json`, window1500s.
+The first request omitted the required absolute `/usr/bin/ssh` executable and was
+rejected before observer registration; correcting that probe does not affect the
+scientific operation. Drain at 04:37:23 UTC confirmed adoption: accepted admission,
+matching live runner/supervisor identities, consistent records and no exit witness.
+Keep this native child active with long deterministic waits; rearm only this same
+handle if the observation window ends. No additional native work is selected.
