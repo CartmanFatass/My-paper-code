@@ -97,6 +97,25 @@ Return (≤ 20 lines, single-instance wording, no new instrument/role/record): (
 
 ### Answer
 
+**材料边界：** 按固定源 `7b82dc3f07a9abcdfa5155ef8e9b805f22267f73` 读完指定五组条目及 RESEARCH 两行，并核对局部可见性源码；以下是基于记录的审查，未复算全部原始 JSON、未执行实验。[固定源](https://github.com/CartmanFatass/My-paper-code/blob/7b82dc3f07a9abcdfa5155ef8e9b805f22267f73/docs/research/candidates/coupled_host_replan_timing/NOTES.md#L17-L99)
+**（1）批次处置保留：** 冻结 cold 参照后的 `room=-.0079` 支持“本轮不买 learner”；三个 ≥.05 的 dev 世界是 warm 已胜过 cold，不是新增时序收益。应写“该 dev 小网格相对 warm 的最大增益 .019、均值 .0006”，不能写成持有布局的一切出发时序均无收益。[更正](https://github.com/CartmanFatass/My-paper-code/blob/7b82dc3f07a9abcdfa5155ef8e9b805f22267f73/docs/research/candidates/coupled_host_replan_timing/NOTES.md#L65-L84)
+**更正中还剩一个逻辑错误：** 网格与普通包络都包含 warm，并不推出 grid ≤ envelope；它们只各自 ≥ warm。`room_envelope≤0` 是这批实测结果，不是集合包含关系保证的结果；这不改变已记录的两列数值或停止决定。
+**面板不能混用：** `room` 与“每世界增益≤.019”只在 dev 网格上读过；hold-out 验证的是普通规则。warm−cold 在 dev 为 −.0085、范围 −.132…+.148，在 hold-out 为 −.0212、范围 −.264…+.133，不能合写“均值≈0、都在±.13–.15”；也不能把 cold−KEEP 的 +.0681 当已识别的纯时序收益。[两面板](https://github.com/CartmanFatass/My-paper-code/blob/7b82dc3f07a9abcdfa5155ef8e9b805f22267f73/docs/research/candidates/coupled_host_replan_timing/NOTES.md#L31-L84)
+**支持、采用、投资分开：** 记录中的约 .12 CPU-h 买到了该事件法则下的普通参照与一次停止理由，没有买到学习胜任或实际采用收益；seeded 的服务均值接近 cold，只说明本指标下新增选择价值有限，不能由“有预设区间”推出每项购买都同样有信息。
+**（2）科研排序：修订 A ＞ 修订 C ＞ B；不是原样批准 A。** A 最便宜的反驳性动作是复用现有事件与 cold，先两世界核对合法信息和计价，再做 32 dev 的一个配对信息传递开关；不先建设完整自定义检测／估计协议。
+**C 排第二，但须撤掉“等一个即将可读的 B01”前提：** 固定版本及当前 RESEARCH 均写 `uav_availability_recovery` 在 21:25 UTC 被 owner 暂停，implementation only、无新结果、不得自动继续；C 可以是主动休息和保留资产，不是承诺未来结果或无限等待依赖。[状态行](https://github.com/CartmanFatass/My-paper-code/blob/7b82dc3f07a9abcdfa5155ef8e9b805f22267f73/docs/research/RESEARCH.md#L1171)
+**B 排第三：** 先声明一套确有决策对象的新运动法则并给普通 cadence 比较计价，才谈运行；现有单事件结果既不排除多事件时序收益，也不构成靠增加事件追求阳性、填满第二槽的购买理由。
+**（3）A 缺的一个设计元素是“匹配的合法信息传递干预”：** 同一局部观测生成、旧地图／估计更新、触发规则、cold 搜索预算和执行器，只切换“无他机观测共享／固定邻接上一跳每步无损转发已观测事实”；主对照用同一 C̄_bh 读数的 `Δ_share=共享−不共享`，而非只拿弱局部协议与全知者相减。
+**把合同钉住：** 只选团队重规划一种决策方式，明确既有决策端、命令下发权利、初始共同旧地图、未观测用户的保留规则与转发方向；两臂一致。触发只能来自实际合法观测，不能偷读事件时刻、迁移簇标签或新坐标；SINR 可见性不能直接替换为一个精确的 1.19 km 圆。[可见性源码](https://github.com/CartmanFatass/My-paper-code/blob/7b82dc3f07a9abcdfa5155ef8e9b805f22267f73/envs/pettingzoo/uav_env.py#L583-L663)
+**时钟要重新守住信息权利：** 当前实现记录说新用户在 step t_e 后才进 observation，而 full-information 规则通过 `post_event_user_positions()` 在 t_e 反应；A 的首个合法动作据真实观测返回时序确定，不能沿用该特权入口。未检测／不可达世界继续保留，不用真实事件日志代发通知。[实现记录](https://github.com/CartmanFatass/My-paper-code/blob/7b82dc3f07a9abcdfa5155ef8e9b805f22267f73/docs/research/candidates/coupled_host_replan_timing/NOTES.md#L22-L25)
+**保留 detection-only，但收窄解释：** 首次合法检测时授予全局真值是明示的特权参照 D；F−D 是固定 cold 下该延迟干预的结果，D−local 仍混合未见状态、传播与估计更新，不能自动命名“纯估计损失”。任一 UAV 察觉也不等于团队已收到完整新簇地图。
+**第一名的预先购买区间应绑定 Δ_share：** <.03 → 该共享改动在本实例／法则／预算未交付购买裕量，停止本项；.03–<.05 → 未决，报告、不自动扩展；≥.05 → 冻结实现后读既有 32-world hold-out，保留负世界，决定是否值得单独购买有限的通信／协调问题；没有训练或 untied-K 许可。这些是建议的新问题阈值，不改 R1-lite。
+**S_info 留作次要参照差：** F−local<.03 只能说这个普通局部方案接近 F；≥.05 只能说其与 F 有缺口。若 Δ_share 很小而 S_info 很大，不能据此买通信学习；cold 是有限规划器，不是信息价值的上界，差值为负也不自动是错误；不确定性从本次配对世界差读取。
+**A 的性质与购买对象：** 原样的 S_info 容易成为协议质量比赛；修订后问“给这个普通重规划器传递已观测事实，是否改变完整服务、值得实现共享”，不是追查旧学习失败。匹配干预仍受固定估计器限制，但它能支持有限的共享取舍，不冒充协议无关的信息瓶颈证明；RECORDED 邻域与 owner／Root 的范围限制保留。
+**（4）删去：** 新运动法则、主动搜索轨迹、检测器／估计器调参、同时做 per-UAV 与 team 两套控制、各种消息压缩及学习臂；复用现有 C̄_bh 和同世界比较，不添仪器或记录类别。若无法在同一信息合同下构造匹配两臂，选 C，不用全知−弱协议的差额替代证据。
+**费用与顺序：** A 的 3–4 工程小时、约 1 CPU-h 尚是报价；建议合计封顶 4 工程小时＋1 CPU-h，包含合法性检查、探针、dev 及条件性 hold-out。dev 后冻结全部选择；只有读数达到预定后续条件才花 hold-out 成本，且这些既有世界不称新未曝光世界；超限报告，不暗中缩减或补预算。
+**执行状态独立于科研排序：** 21:34 发送记录要求本会话的暂停状态明确且本答复被处置后才启动新结果运行；本答复只完成选择与审查，不构成 pause/resume 指令。当前不启动 A，也不把 C 中不存在的在跑结果当下一步前提。
+
 
 ### Send record (2026-09-29 21:34 UTC): Pro question `replan-timing-next-question` sent as a follow-up in the same conversation
 Key `hmasd:fcef9c02453444e84a8b51d2a640272b2e1d5aa1843ec2410d1edf29866eff74`; source pinned at 7b82dc3f0 (this notebook, heading "Pro question 2026-09-29 replan-timing-next-question"); transport Jev headless, effort pill `6 Pro` verified at the send; document sha256 b93f12d0…; `send_effect: sent`, attachment seen; no dry run. Two earlier attempts under the same key failed **pre-send** ("no reasoning-effort control in the composer": on this three-turn thread the composer's model control renders ≈ 3 s after the message box, the driver observed at 2 s); fixed in `tools/pro_transport/jev_send.py` by a bounded wait for that control (341ccb100, tests 94 passed, change note `docs/Claude_docs/changes/2026-09-29-jev-model-control-wait.md`), then the third attempt sent. Operation directory `temp/directions/coupled_host_replan_timing/scratch/pro-next-question-20260929/`. Root's workflow pause (RESEARCH c4cf7dbd2, owner 21:25 UTC, "不替Claude独立会话作新的pause/resume决定") was published minutes before this send; this session launches no new result-bearing run until the Pro answer is dispositioned and the owner's word on the Claude session's pause status is known — observation and records only.
