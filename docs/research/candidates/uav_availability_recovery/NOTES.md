@@ -365,3 +365,31 @@ no universal cross-host bit-equality or unmeasured runtime prediction is claimed
 The prior native crash evidence still applies as a technical-risk constraint,
 and no automatic replacement run is authorized. Final output will be
 `runs/uav_availability_recovery/b01_joint_reserve_a01/` on the admitted local node.
+
+### Accepted B01 operation and observation
+
+The local kernel accepted B01 at2026-09-29T15:07:31Z. The canonical recovery
+identity is the [native manifest](../../../../runs/uav_availability_recovery/b01_joint_reserve_a01/launch-manifest.json),
+with [actual-node preflight](../../../../runs/uav_availability_recovery/b01_joint_reserve_a01/admission-preflight.json)
+and [fixed runtime config](../../../../runs/uav_availability_recovery/b01_joint_reserve_a01/config.json).
+The fresh memory reading was10,240,045,056 available bytes against a4GiB floor.
+The runtime is Python3.10.20, NumPy1.26.3 and Torch2.7.0+cpu. No remote attempt
+was accepted and no worker was migrated. Source publication's push reported a
+ref-lock conflict, but a fresh direct origin lookup confirmed the exact commit
+`b60b71e00d3b3b1c420cbff3b3bf03a805f4c14a` was already published; the kernel
+then independently verified the current published controls and source.
+
+`tools/hmasd_wait.py` generation1 observes that same native operation using the
+direction-owned request in `temp/directions/uav_availability_recovery/`.
+First drain at15:08:03Z confirms consistent accepted identity, live supervisor
+and live scientific runner, with no exit witness yet. The native DM child stays
+active through deterministic waits and same-handle drain/rearm. Registration
+does not imply a future unloaded-child wake, and launch acceptance is not a
+scientifically read result. No scope or exposure change is made during collection.
+
+Both now-unused `source-transfer/a46eea11b.bundle` scratch containers were deleted
+after import, one locally and one on the configured remote. Allocated usage fell
+from217,088 bytes to zero for each exact container, reclaiming434,176 bytes in
+total across the two hosts. Both targets are verified absent. No required source,
+raw scientific evidence, canonical control, other direction file or process was
+removed; published source objects remain in Git.
