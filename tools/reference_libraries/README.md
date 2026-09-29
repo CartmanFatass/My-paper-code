@@ -8,6 +8,24 @@ repository, in the ignored directory `/mnt/c/Projects/My-lib/.local-llm-index/`.
 **Hints locate papers; they are not evidence. A miss says nothing beyond this corpus.** Open and
 read the PDF before relying on anything a hint says.
 
+## Full-text reading notes in the original libraries
+
+The owner-requested 2026-09-29 reading work is stored in each original library, separately
+from these first-two-page hints. Luna screened the sources; Astra Max readers retained
+source versions, hashes, physical PDF pages, actual reading coverage and limitations.
+
+- My-lib: `/mnt/c/Projects/My-lib/.local-llm-index/deep-reading-index.jsonl` and
+  `DEEP_READING_INDEX.md`; per-paper notes are in the adjacent `deep-readings/` directory.
+- Inst-sci: `/home/fires/projects/Inst-sci/papers/MyLib/llm-index/deep-reading-index.jsonl` and
+  `DEEP_READING_INDEX.md`; notes are in `../metadata/deep-readings/`.
+
+Search the deep-reading JSONL with `rg` for mechanisms, keywords or paper IDs, then read the
+referenced note and load-bearing primary passages. The existing CLI below still searches
+the shallow locator index; it does not silently incorporate these notes. A missing prior
+reading record is not proof that nobody read the paper. Completed, partial prior readings,
+supplementary-source checks and deferred selections remain distinguished; no novelty verdict
+or automatic research restart follows from these reference notes.
+
 ## Search
 
 ```bash

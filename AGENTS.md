@@ -135,9 +135,12 @@ calling an idea new, together with the July record and the external-review round
   `tools/search_corpus.py`).
 - Inst-sci formal library `/home/fires/projects/Inst-sci/papers/MyLib/` (WSL host): 190 MARL papers as
   `pdf/<id>.pdf` + structured `json/<id>.json` + `assets/`. `metadata/integrity.json` is authoritative
-  for counts (its README's "185 JSON" is stale). Retrieval order per `llm-index/INSTRUCTIONS.md`:
+  for counts. Retrieval order per `llm-index/INSTRUCTIONS.md`:
   `llm-index/catalog.v2.jsonl` (title, abstract, algorithm_names, method_family, marl_setting,
   benchmarks, keywords) or `titles.tsv` with `rg` → `json/<id>.json` → the PDF only for verification.
+  Owner-requested full-text reading notes are in `metadata/deep-readings/<id>.json`, indexed by
+  `llm-index/deep-reading-index.jsonl` and `DEEP_READING_INDEX.md`; inspect actual coverage,
+  source versions/pages and DIRECT versus INFERENCE, not just a completion label.
 - My-lib corpus `/mnt/c/Projects/My-lib/` (Windows `C:\Projects\My-lib`; its tracked project is a
   read-only mechanism sidecar with its own `AGENTS.md` — do not edit it from here): Phase-0
   title-screened RL/MARL arXiv preprints of ICLR/ICML/NeurIPS 2023–2025 main tracks, 1,519 PDFs under
@@ -152,7 +155,9 @@ calling an idea new, together with the July record and the external-review round
   hint), `INDEX_BY_TOPIC.md`, `INDEX_BY_RELEVANCE.md`, `README.md` (model, prompt version, build
   date, counts, cost). Search: `python3 tools/reference_libraries/search_mylib.py <term> [<term>…]`
   from this checkout; rebuild with `tools/reference_libraries/build_mylib_llm_index.py`. Hints locate
-  papers; they are not evidence and carry no novelty verdict.
+  papers; they are not evidence and carry no novelty verdict. Owner-requested Astra Max reading
+  notes live separately in `.local-llm-index/deep-readings/<id>.json`, with prior-reading evidence,
+  actual coverage and source hashes in `deep-reading-index.jsonl` / `DEEP_READING_INDEX.md`.
 
 `docs/project/CONTROL_PLANE_MAP.md` and `CONTROL_PLANE_GUIDANCE.md` are optional descriptive
 navigation. The owner-requested `docs/research/designs/PREDICTIVE_INTERACTION_AUGMENTATION_PROPOSAL_20260919.md`
