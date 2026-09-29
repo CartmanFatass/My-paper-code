@@ -339,3 +339,33 @@ accepted source before reclaiming its snapshot. Terminal model completion is
 separately timed evaluator support outside the online deadline, included in
 worker resources, and never affects actor behavior. No unresolved scientific
 or engineering issue remains; publish exact inputs and admit actual resources.
+
+### Accepted B01 native operation
+
+Exact inputs were published at `6f4c21ba5bd4774b91a1f3545099a9ac58b2b233` before
+execution. The single native operation was accepted2026-09-29T23:50:49.446516Z on
+wsl_4070, after A's short evaluation/forward timing had ended and its native
+processes were absent. Fresh node observation had20logical CPUs, load averages
+.225/.267/.109 and about14.5GiB available physical memory; actual launch preflight
+passed with14,683,545,600available bytes against4,294,967,296required bytes.
+These are admission facts, not deadline outcomes or completed science.
+
+The canonical native identity, exact invocation, source snapshot and output
+location are in [launch-manifest.json](../../../../runs/uav_registered_service/b01_periodic_service_a01/launch-manifest.json)
+and [admission-preflight.json](../../../../runs/uav_registered_service/b01_periodic_service_a01/admission-preflight.json).
+Outer supervisor `registered-service-b01-a01` accepted once; no duplicate or
+replacement request. The remote fetch did update origin/main successfully but
+reported an existing automatic-GC failure (`bad tree object
+9e40125ee3e24973b69754649226d18847b45862`, failed repack). The requested source's
+full recursive tree listing succeeded20,603paths; native snapshot/admission then
+succeeded. No GC repair, gc.log removal, branch/sparse change or peer cleanup was
+performed to bypass that warning.
+
+Deterministic observer generation1 is armed on that same native status handle,
+state directory `/home/fires/.local/state/hmasd-wait/01a0ef79-3abf-7cd0-a605-29a13d23105d`.
+The initial arm request was refused before registration because its executable
+was relative `ssh`; changing that read-only probe to `/usr/bin/ssh` succeeded.
+Drain witnessed accepted admission, consistent source/records and matching live
+runner/supervisor identities. This native child remains active through collection
+and reading; a future queue call is not assumed to wake an unloaded child.
+The fixed320episodes are running; no partial endpoint has been interpreted.
