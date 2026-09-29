@@ -7835,3 +7835,6 @@ Return: an independent scientific review of the revised pair (constitution secti
 
 ### Answer
 
+
+### Send record (2026-09-29): Pro question `round3-two-directions` sent
+Question key `hmasd:6dbf978409b576027285049955a2b8ad421c2140a841cda541c91abb500ee50f` (source sha c797fd792, question heading above); attachment `hmasd-pro-question-round3-two-directions.md` sha256 `68d5d30d…` (5,337 bytes); Jev transport, ChatGPT 6 Pro (effort pill verified), new conversation (address stays in the local operation file). Two pre-send failures, nothing submitted: the first dry run timed out waiting for the composer (transient page load) and had been composed from a question file truncated by the DM's own extraction (it stopped at the literal "### Answer" inside the Constraints line; 1,844 bytes, sha `4dc2537b…`); the local operation record, never send-attempted, had bound that truncated attachment, so its attachment/prompt fields were cleared before recomposing the full 5,337-byte question. The third dry run reached the send button with effort, text and attachment verified, then sent at 2026-09-28T22:20:56-0700 (`send_effect: sent`, attachment seen). Passive observation by the transport's `wait`; the answer is recorded verbatim under `### Answer` when it arrives. Nothing running on the node; 0 fits.
