@@ -1423,6 +1423,15 @@ M_O同时超过M_G和B40才支持预测辅助扩展用途；只有M_G增益不�
 暂不重开服务DM。合法本地空间记忆是最强独立备选，其匹配普通局部控制器及完整成本仍待具体化；
 逐用户评价不建立actor遗忘、公平缺陷或免费身份／ACK。暂缓不是科学否定，也不以空闲并行度决定运行。
 
+只读来源核对进一步具体化记忆候选：此N5宿主当前提供最多20条SINR>=3dB、按SINR排序的匿名用户
+相对XY行及自身绝对XYZ；静态用户可能跌出阈值或被top20截断。合法缓存因此可以增加可检索的历史
+几何，但原actor已有私有GRU，不能据此断言它遗忘。观测经float32归一化，坐标关联容差、近点合并、
+容量和淘汰须明确；`infos`／central state／`local_indices()`的真实身份及连接状态不能进入缓存。
+未找到现成同宿主普通控制器，S7能源规划器不能直接充当此对照；新局部无线估值、动作候选及其完整
+成本仍待设计。来源为冻结`7bb6d2f8e`的[原生观测](../../envs/pettingzoo/uav_env.py)、
+[adapter](../../envs/pettingzoo/env_adapter.py)和[精确host构造](../../experiments/candidates/ucope/uav_motion_prefix_b01/environment.py)，
+Root核对三文件在本次准备时与冻结源无diff；只读源码，0模型调用／0原生步，不是新结果或启动门。
+
 新DM独立完成前瞻、必要工程检查、精确输入发表、真实节点准入、完整判读和保全清理；复用这次
 适用选择评估，不新增逐fit审批。Root在实质结果边界综合并继续下一次Pro innovator选题。
 Claude已接受的coupled-host研究继续，实际状态见其[NOTES](candidates/coupled_host_joint_skills_stage1/NOTES.md)，
