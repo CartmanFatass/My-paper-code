@@ -1200,3 +1200,180 @@ No cleanup blocker, active worker/observer, unread result or unreturned helper
 remains. The only future action proposed is the explicitly unselected clock
 comparison already returned to Root; B02's collection and scientific reading
 are complete independently of that allocation decision.
+
+## 2026-09-29 - B03 Prospective Timely Joint Control
+
+Lead: new native `hmasd-direction-manager` `/root/dm_radio_delivery`, parent
+Root `01a0e560-4333-7b03-8ff3-759a4add1d9a`, shared main. Current selection,
+exploring state and routing are published at `1afc7a68d`. Owner pause is lifted
+for this direction. B01/B02 are fully read, with no active producer or unread
+result adopted. This is cumulative question ownership, not reuse of old handles.
+Read the complete B02 prospective/result/independent diagnosis/DM response,
+the prior adoption archive's focused review and decision, and the complete
+6 Pro answer at `d7c74268f` in RESEARCH's Joint Control Next Investment section.
+The adequate B02 independent diagnosis supports this exact two-tick comparison;
+reuse it without a duplicate selection review. Its material dissent against
+the provisional stop preference and subsequent DM/Root adoption remain intact.
+
+### Question, Prediction and Complete Comparison
+
+Can the demonstrated motion/silence interaction extend complete native service
+beyond original R under a supported, more timely delivery contract? Contribution
+is conditional ordinary-control usefulness and empirical understanding, not
+learning, novelty, pure latency causality or physical deployment. Published
+RESEARCH `1afc7a68d`, background sections1/2 and the current selection, concretely
+requires original R, matched S2 rights/information, and complete J AND service.
+B01's activation capability and B02's T-S +.004168J/+.354980users coexist with
+T-R -.009338J, service-p10 -1.296875 and about5013m/UAV additional path. Accurate
+blocks and real local gains did not earn replacement; later motion/feedback and
+stale proposals remain coupled alternatives, not uniquely diagnosed causes.
+
+The constructive prediction is lower report age while preserving meaningful
+joint choices, with useful complete T2-R J/service. The stronger ordinary
+alternative is original R's timely feedback, or S2 if it earns the same useful
+package without enough extra T2 value. This study does not demand a positive
+activation count. Keep all worlds and complete startup/terminal exposure.
+
+Fixed host: N5/U50/H256, uniform static users, registered400byte map with the
+same quantization error, known free_space model, unchanged native reward and
+opt-in radio mask semantics. Reuse C(history=False), all27 commands, all31
+nonempty masks and deterministic J/service/C-preserving/mask/command tie order.
+R is original C+rolling E with one-tick delivery and.456s planner window.
+S2 tries both full-team sequential orders; T2 tests27commands x31masks for
+member `(tick // 4) % 5`, other members retaining their C proposals. T2-S2 is
+finite joint search plus computation; S2/T2-R is a whole-contract comparison.
+
+S2/T2 reports are at0,4,...252. Actual team commands execute two prefix ticks;
+arrival at t+2 atomically sets team commands and mask for transitions t+2..t+5,
+with scoring on postmove positions t+3..t+6. Final report252 arrives254 and
+scores only255/256. Initialize each C once at0, reuse that decision as actual
+startup command and first proposal. Later C proposals occur only at report
+clocks, with no extra C update on arrival. Save completed reward/radio/connection
+data before atomic arrival and observation refresh. A complete missed plan
+holds actual whole-team commands+mask, without partial winner, suggestion leak,
+state rollback or an expired hold label preventing lawful continued execution.
+
+Version3 packets retain24byte reports and16byte commands, binding two-tick
+delivery separately from four-tick hold. Both new arms have1.456s full planning
+time, including consequential C proposal/encoding/prediction/search/decode,
+plus.544s airtime on the unchanged2kbit/s link. At most8704recurringbytes/episode
+plus400map; record actual missed-round traffic. Nominal plan-controlled report
+age is887/254=3.492126ticks (startup2ticks excluded only from this age metric,
+never endpoints). Deadline failures and resulting older information are native
+package outcomes. No future state/SINR, battery claim or physical-use guarantee.
+
+Fresh common reset seeds29307000..29307063, fixed before result exposure;
+192episodes/49152native steps/0fits or updates. Cycle orders R-S2-T2,
+S2-T2-R,T2-R-S2,R-T2-S2,T2-S2-R,S2-R-T2, balanced within one per position.
+Upper work:4030464candidate requests,15997888mask-state reductions,
+894144scored geometries,16384prefix ticks,61440C decisions,
+1658880C candidate trajectories and6635520C model ticks. Cache repeated
+queries/geometry and report actual unique scores separately from requests.
+T2 matrix S2 shadows describe T2 states only; they never replace S2 trajectories.
+
+Configured local_linux, one CPU thread, fresh actual-node4GiB memory floor;
+three-CPU-hour native-worker ceiling includes imports/init/native/C/search/output.
+Local NumPy is suitable, preserves G0's same accepted operation, and uses none
+of Claude's remote reservation. B02 native+reader.974774CPUh is an anchor, not a
+new estimate. Reader and support are separately measured where available;
+new engineering labor is unknown. Cumulative prior98304native steps/0fits and
+about1.300526native+readerCPUh remain. Resource/technical incompleteness is not
+a native negative, and permits no automatic extension, restart or prefix verdict.
+
+### L0 Implementation Scope
+
+Deliver new direction-owned `b03/{protocol,scheduler,study,run,read}.py`, tests
+under matching `tests/experiments/candidates/uav_radio_activation/b03/`, this
+notebook, `runs/uav_radio_activation/b03_two_tick_delivery_a01/` and direction
+scratch. Preserve B01/B02/C/kernel/shared launchers, G0 and Claude sources.
+Registered Implementer owns only B03 protocol/scheduler and their focused test
+file: version3 two-tick forecast, terminal half-block, full timer and atomic
+fallback. DM owns collector/reader/run and their tests. The helper writes on
+shared main, spawns no children, launches no result and has no NOTES/RESEARCH/
+index/commit ownership; preserve concurrent edits. Reuse existing helpers where
+they retain semantics, without a gratuitous shared abstraction.
+
+Checks cover version rejection and exact effective tick; two actual prefix
+ticks/+3..+6 with252 terminal truncation; both S2 orders/T2 joint choices and
+tie/cache counts; full deadline including proposal/encode/decode; repeated
+misses beyond old hold expiration; separate report/arrival clocks; C-once
+startup and report-only updates; saved transition before mask refresh; no new
+proposal leaked on fallback; unchanged R; full endpoint reconstruction; partial
+resource evidence and admitted fixed source/seed binding. Fixture seeds are
+outside the scientific panel. Independent engineering review checks the new
+timing/packet/collector/reader contract; DM accepts its diff/checks. Commit and
+publish exact source before one native admitted detached launch and same-handle
+observation, keeping the native child active through complete reading.
+
+Keep one canonical compressed raw per arm/world and compact Git evidence.
+Reconstruct all native transitions, C/actual/proposal/commitment states,
+observations, rewards and choices; reuse complete R checks and the B02 fixed
+candidate subset (Cq/all-on, Cq/current, selected, sequential, round-index
+sentinel where evaluated), adapted to two-tick delivery and final half-block.
+No claim to independently recompute every T2 candidate. Read full J/service/
+quality, p10/min/zero counts/longest gaps, path/boundaries, discovery/fallback,
+requested/executed choices, predictions, ages, traffic, deadlines and costs.
+Paired descriptive t95 uses reset worlds, conditional on observed host/load,
+not training-instance or platform replication. Independent result diagnosis
+will confront all positive/adverse evidence at the complete study boundary.
+
+Useful T2 gains over S2 and R retain a conditional capability; S2>R without
+earned T2 increment favors simpler composition without equivalence. T2>S2
+without developing R stops this clock-shortening route as current investment.
+Proxy-only gains, tails or cost harms remain limitations; no automatic1tick,
+deeper search, path penalty, learner, more worlds or retry. Publish own material
+RESEARCH result/background and measured cleanup, then return changed knowledge,
+remaining alternatives and a reasoned next-investment recommendation to Root.
+Broader allocation is Root's question choice, not a routine launch ACK.
+
+### Outcome-Blind Implementation and Checks
+
+Registered Implementer `/root/dm_radio_delivery/two_tick_protocol` supplied the
+version3 codec and two-tick S2/T2 scheduler plus nine focused checks; DM read
+the full diff and accepted its interface. B03 imports B02's unchanged command
+index/rank/two-order search helpers. New collector stores explicit pending
+arrival time, with reports0..252, arrivals2..254, and NaN-only padding after the
+terminal two-state forecast. C proposals, actual commands and commitments stay
+distinct. The reader reconstructs both clocks, full native endpoints and the
+declared candidate subset, including final half-block physics and report age.
+
+Author configured-scientific pytest:18passed in3.06s, only existing third-party
+Pyparsing deprecation warnings. Fixtures use nonpanel seeds811..816 plus
+packet-only29306999/29307064, not scientific panel exposure or a timing pilot.
+Checks establish two actual prefix ticks, final two-state scoring, single t0C,
+report-only C thereafter, reward-before-arrival observation refresh, unchanged
+R trajectory and candidate evidence, atomic encode/decode/partial-score misses,
+repeated continued actual commands beyond four ticks, fixed seed/admission
+order and preserved incomplete-resource evidence. Full-source upper arithmetic
+matches4030464requests/15997888reductions/894144geometries/16384prefix ticks;
+actual unique work remains to be measured. Independent engineering acceptance
+of the complete path is next; no result-bearing operation has started.
+
+Independent engineering review identified that first-round deadline failure
+would leave the inherited age reader without an origin, omitting continued
+startup commands until a timely plan. Corrected before any outcome exposure:
+the age metric uses each actual command's source-observation tick, initializing
+to the legal t0 C observation; only transitions0/1 are excluded. This initial
+origin does not claim a delivered scheduler plan. An additional count exposes
+startup-command hold transitions after the nominal first arrival until a timely
+plan arrives. All-missed and first-missed-then-recovered fixtures protect the
+complete denominator. No controller, objective, panel or execution rule changed.
+
+### Engineering Acceptance
+
+Independent registered Reviewer `/root/dm_radio_delivery/engineering_review`,
+without DM/Root conversation inheritance, reviewed versioned packets, prefix/
+arrival/final-block timing, full C-through-decode deadline, both sequential
+orders/ties/cache, atomic actual-team fallback, native reset/RNG/radio/reward/
+observation consumers, unchanged R, admission/source and incomplete-resource
+paths. It identified the initial-miss age omission above, then reviewed the
+repair and returned no remaining material engineering finding. Independent
+configured-scientific pytest:20passed in3.65s; author20passed in3.53s.
+Only existing third-party deprecation warnings. Inherited B01/B02/C/kernel/
+environment files have no diff from executed B02 source `db5b9635850df204673871d4feb32e663ed8e5fd`.
+
+DM accepts the implementation and checks. No scientific panel was exercised.
+The CPU-ceiling check injects an exception; an actual three-hour/SIGXCPU
+teardown was not run. Complete scientific reader execution awaits collected
+evidence. Publish these exact inputs, then one launch under current admission;
+no outstanding scientific selection issue or per-run Root approval remains.
