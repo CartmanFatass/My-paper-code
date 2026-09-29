@@ -1662,3 +1662,32 @@ assign a distinct substantive question. All required original C/nine continuatio
 checkpoints and raw positive/adverse records remain durable; only unused code,
 the terminal launcher snapshot, duplicate staging and rebuildable scratch are
 eligible for measured cleanup. The useful pure readers/tests remain maintained.
+
+### B03 closure cleanup
+
+Result/shared understanding was published at `cd5270e25`. All implementation,
+engineering-review and scientific-review consumers completed; the native process
+and observer are terminal/stopped. Imports and entry references identify no live
+consumer of the one-shot `b03/` evaluator. Its six source files and mirrored
+one-shot test are removed from current main, recoverable at `ff15fe5df`; pure
+`read_b03.py`, `read_b02.py` and their focused tests remain useful and retained.
+
+The first exact-target source-GC preview refused only the reader-created ignored
+`read_b02.cpython-310.pyc`. After deleting that exact rebuildable cache, a fresh
+preview passed and the supported collector removed terminal snapshot
+`9e0b9c4007994e71b45abe8bee05017c`, including Git worktree registration. The four
+duplicate staged C/B/O/L.pt files and their external staging directory were
+deleted. Local one-shot code/test caches, pure-reader test caches and the private
+`temp/directions/uav_message_content/observe-b03.json` request/directory were also
+deleted. No archive, full copy, retention chain or replacement snapshot was made.
+
+Measured allocated bytes: remote snapshot802144256 plus staging1871872 went to0,
+releasing804016128 bytes. Local owned source/tests/docs/runs/scratch trees were
+4513792 bytes before cleanup; the after total includes this additional compact
+closure record. Combined net reduction is804208640 bytes, excluding Git object
+storage and unrelated sessions' files. No concrete deletion blocker remains.
+Post-cleanup hashing verified all627 B02 and138 B03 stable files against their
+retained manifests and all four selected canonical checkpoint hashes; this
+preserves original C and all nine B02 endpoints. Exact snapshot/staging paths are
+absent. Canonical raw evidence, compact records and stopped observer/claim metadata
+are intentional retained evidence, not cleanup leftovers or active work.
