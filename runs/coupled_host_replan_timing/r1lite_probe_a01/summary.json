@@ -1,0 +1,780 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_replan_timing",
+  "launch_sha": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_replan_timing",
+    "sha": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+    "command_sha256": "9a7c64cf47a8136a3774c51fa76a5833f0ad150e0257b52c91bff633f12c4182",
+    "parent_pid": 3981276,
+    "child_pid": 3981354,
+    "accepted_at_epoch": 1790716133.7151897
+  },
+  "git_head": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+  "training_fits_performed": 0,
+  "worlds": [
+    1002,
+    1011
+  ],
+  "area_size": 5000,
+  "budget": 3000,
+  "event_law": {
+    "rng": "numpy.random.default_rng([world, 3])",
+    "draw_order": [
+      "t_e = rng.integers(150, 351)",
+      "cluster = rng.integers(0, 5)",
+      "centre = rng.uniform(0, area, 2)",
+      "per member j in index order: clip(centre + rng.normal(0, area/10, 2), 0, area)"
+    ],
+    "timing": "applied inside step() of the call with current_step == t_e, before that call's actions; series index t_e is the first post-event value; every rule reacts from its decision for step t_e (full information)"
+  },
+  "rng_derivations": {
+    "planner": "numpy.random.default_rng(world), fresh instance per search (D2 run_gate rule), for the pre-event, cold and seeded searches",
+    "event": "numpy.random.default_rng([world, 3])"
+  },
+  "windows": {
+    "pre_event": "series indices 0..t_e-1",
+    "post_event": "series indices t_e..499 (primary)",
+    "all": "0..499",
+    "cross_world": "per-world window means first, then equal-weight means across worlds; paired SDs over per-world differences"
+  },
+  "arguments": [
+    "--worlds",
+    "1002-1002",
+    "1011-1011",
+    "--launch-sha",
+    "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_probe_a01"
+  ],
+  "interpreter": {
+    "executable": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "python": "3.10.20",
+    "numpy": "1.26.3",
+    "host": "Jacob"
+  },
+  "tool": "coupled_host_replan_timing.run_r1lite",
+  "rules": [
+    "keep",
+    "cold",
+    "warm",
+    "seeded"
+  ],
+  "definitions": {
+    "S_switch": "warm - keep (post-event C_bh, per world, then paired across worlds)",
+    "S_cold": "warm - cold (post-event C_bh, per world, then paired across worlds)",
+    "transition_loss_steps": "post-event steps with C_bh below the world's pre-event mean",
+    "arrival_step": "first step >= t_e at which every UAV sat on the rule's final targets",
+    "S_seeded": "seeded - keep (post-event C_bh, per world, then paired across worlds)",
+    "warm": "held re-placement only (non-movable UAVs keep their targets); empty movable set -> single-UAV fallback at 500 evaluations per candidate, adopted only above the held layout's static reward, else warm == KEEP",
+    "seeded": "cold relay search seeded with the pre-event sites; all UAVs may move"
+  },
+  "per_world": [
+    {
+      "world": 1002,
+      "t_e": 204,
+      "cluster": 2,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.7735294117647059,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.76552,
+          "pre_event_mean": 0.7735294117647059,
+          "transition_loss_steps": 296,
+          "arrival_step": 204
+        },
+        "cold": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.76552,
+          "pre_event_mean": 0.7735294117647059,
+          "transition_loss_steps": 296,
+          "arrival_step": 224
+        },
+        "warm": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.76552,
+          "pre_event_mean": 0.7735294117647059,
+          "transition_loss_steps": 296,
+          "arrival_step": 217
+        },
+        "seeded": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.76552,
+          "pre_event_mean": 0.7735294117647059,
+          "transition_loss_steps": 296,
+          "arrival_step": 216
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": 0.0,
+        "S_seeded": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.4227781500085257,
+          "cpu_s": 1.3618699999999992
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.24667203999706544,
+          "cpu_s": 0.24663299999999966
+        },
+        "keep": {
+          "wall_s": 0.3538027839967981,
+          "cpu_s": 0.35377299999999945
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.6446470129885711,
+          "cpu_s": 0.644501
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.1230225799954496,
+            "cpu_s": 1.122857000000001
+          },
+          "rollout": {
+            "wall_s": 0.49529753101523966,
+            "cpu_s": 0.4952279999999991
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.07727822699234821,
+            "cpu_s": 0.07728599999999908
+          },
+          "rollout": {
+            "wall_s": 0.5030445650045294,
+            "cpu_s": 0.5018660000000006
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.8225605849875137,
+            "cpu_s": 0.816624
+          },
+          "rollout": {
+            "wall_s": 0.42991055399761535,
+            "cpu_s": 0.42685800000000107
+          }
+        },
+        "world_total": {
+          "wall_s": 6.1348630909924395,
+          "cpu_s": 6.063135000000001
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          3
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 108
+      }
+    },
+    {
+      "world": 1011,
+      "t_e": 249,
+      "cluster": 1,
+      "routing_class": "unserved",
+      "chain_served": false,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.677590361445783,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.8600000000000001,
+          "all_mean": 0.7691600000000001,
+          "pre_event_mean": 0.677590361445783,
+          "transition_loss_steps": 0,
+          "arrival_step": 249
+        },
+        "cold": {
+          "post_event_mean": 0.9919521912350597,
+          "all_mean": 0.8354000000000001,
+          "pre_event_mean": 0.677590361445783,
+          "transition_loss_steps": 0,
+          "arrival_step": 287
+        },
+        "warm": {
+          "post_event_mean": 0.9706772908366536,
+          "all_mean": 0.8247200000000001,
+          "pre_event_mean": 0.677590361445783,
+          "transition_loss_steps": 0,
+          "arrival_step": 313
+        },
+        "seeded": {
+          "post_event_mean": 0.9919521912350597,
+          "all_mean": 0.8354000000000001,
+          "pre_event_mean": 0.677590361445783,
+          "transition_loss_steps": 0,
+          "arrival_step": 287
+        }
+      },
+      "stakes": {
+        "S_switch": 0.11067729083665345,
+        "S_cold": -0.021274900398406182,
+        "S_seeded": 0.13195219123505963
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.092084647010779,
+          "cpu_s": 1.0876700000000001
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3665286629984621,
+          "cpu_s": 0.36651900000000026
+        },
+        "keep": {
+          "wall_s": 0.37858672300353646,
+          "cpu_s": 0.37861400000000067
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8913867920055054,
+          "cpu_s": 0.8910860000000014
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.5613903540070169,
+            "cpu_s": 1.5613390000000003
+          },
+          "rollout": {
+            "wall_s": 0.4834447059838567,
+            "cpu_s": 0.48104000000000013
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.17389114500838332,
+            "cpu_s": 0.17390600000000056
+          },
+          "rollout": {
+            "wall_s": 0.42594368298887275,
+            "cpu_s": 0.42587300000000106
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.7591426800063346,
+            "cpu_s": 0.7504939999999998
+          },
+          "rollout": {
+            "wall_s": 0.39994764799484983,
+            "cpu_s": 0.39975699999999925
+          }
+        },
+        "world_total": {
+          "wall_s": 6.550677325983997,
+          "cpu_s": 6.534373000000001
+        }
+      },
+      "warm": {
+        "movable_source": "fallback_single_uav",
+        "movable_uavs": [
+          0
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 177
+      }
+    }
+  ],
+  "means": {
+    "rules": {
+      "keep": {
+        "post_event_mean": {
+          "n": 2,
+          "mean": 0.81,
+          "sd": 0.07071067811865489,
+          "min": 0.7599999999999999,
+          "max": 0.8600000000000001
+        },
+        "all_mean": {
+          "n": 2,
+          "mean": 0.76734,
+          "sd": 0.002573868683519095,
+          "min": 0.76552,
+          "max": 0.7691600000000001
+        },
+        "pre_event_mean": {
+          "n": 2,
+          "mean": 0.7255598866052444,
+          "sd": 0.0678391530611078,
+          "min": 0.677590361445783,
+          "max": 0.7735294117647059
+        },
+        "transition_loss_steps": {
+          "n": 2,
+          "mean": 148.0,
+          "sd": 209.30360723121808,
+          "min": 0.0,
+          "max": 296.0
+        },
+        "arrival_step": {
+          "n": 2,
+          "mean": 226.5,
+          "sd": 31.81980515339464,
+          "min": 204.0,
+          "max": 249.0
+        }
+      },
+      "cold": {
+        "post_event_mean": {
+          "n": 2,
+          "mean": 0.8759760956175298,
+          "sd": 0.1640149673333897,
+          "min": 0.7599999999999999,
+          "max": 0.9919521912350597
+        },
+        "all_mean": {
+          "n": 2,
+          "mean": 0.8004600000000001,
+          "sd": 0.04941262186931606,
+          "min": 0.76552,
+          "max": 0.8354000000000001
+        },
+        "pre_event_mean": {
+          "n": 2,
+          "mean": 0.7255598866052444,
+          "sd": 0.0678391530611078,
+          "min": 0.677590361445783,
+          "max": 0.7735294117647059
+        },
+        "transition_loss_steps": {
+          "n": 2,
+          "mean": 148.0,
+          "sd": 209.30360723121808,
+          "min": 0.0,
+          "max": 296.0
+        },
+        "arrival_step": {
+          "n": 2,
+          "mean": 255.5,
+          "sd": 44.54772721475249,
+          "min": 224.0,
+          "max": 287.0
+        }
+      },
+      "warm": {
+        "post_event_mean": {
+          "n": 2,
+          "mean": 0.8653386454183267,
+          "sd": 0.14897134099260828,
+          "min": 0.7599999999999999,
+          "max": 0.9706772908366536
+        },
+        "all_mean": {
+          "n": 2,
+          "mean": 0.79512,
+          "sd": 0.04186072144624371,
+          "min": 0.76552,
+          "max": 0.8247200000000001
+        },
+        "pre_event_mean": {
+          "n": 2,
+          "mean": 0.7255598866052444,
+          "sd": 0.0678391530611078,
+          "min": 0.677590361445783,
+          "max": 0.7735294117647059
+        },
+        "transition_loss_steps": {
+          "n": 2,
+          "mean": 148.0,
+          "sd": 209.30360723121808,
+          "min": 0.0,
+          "max": 296.0
+        },
+        "arrival_step": {
+          "n": 2,
+          "mean": 265.0,
+          "sd": 67.88225099390856,
+          "min": 217.0,
+          "max": 313.0
+        }
+      },
+      "seeded": {
+        "post_event_mean": {
+          "n": 2,
+          "mean": 0.8759760956175298,
+          "sd": 0.1640149673333897,
+          "min": 0.7599999999999999,
+          "max": 0.9919521912350597
+        },
+        "all_mean": {
+          "n": 2,
+          "mean": 0.8004600000000001,
+          "sd": 0.04941262186931606,
+          "min": 0.76552,
+          "max": 0.8354000000000001
+        },
+        "pre_event_mean": {
+          "n": 2,
+          "mean": 0.7255598866052444,
+          "sd": 0.0678391530611078,
+          "min": 0.677590361445783,
+          "max": 0.7735294117647059
+        },
+        "transition_loss_steps": {
+          "n": 2,
+          "mean": 148.0,
+          "sd": 209.30360723121808,
+          "min": 0.0,
+          "max": 296.0
+        },
+        "arrival_step": {
+          "n": 2,
+          "mean": 251.5,
+          "sd": 50.204581464244875,
+          "min": 216.0,
+          "max": 287.0
+        }
+      }
+    },
+    "stakes": {
+      "S_switch": {
+        "n": 2,
+        "mean": 0.055338645418326726,
+        "sd": 0.07826066287395339,
+        "min": 0.0,
+        "max": 0.11067729083665345
+      },
+      "S_cold": {
+        "n": 2,
+        "mean": -0.010637450199203091,
+        "sd": 0.015043626340781394,
+        "min": -0.021274900398406182,
+        "max": 0.0
+      },
+      "S_seeded": {
+        "n": 2,
+        "mean": 0.06597609561752982,
+        "sd": 0.0933042892147348,
+        "min": 0.0,
+        "max": 0.13195219123505963
+      }
+    },
+    "by_routing_class": {
+      "chain": {
+        "worlds": [
+          1002
+        ],
+        "post_event_mean": {
+          "keep": {
+            "n": 1,
+            "mean": 0.7599999999999999,
+            "sd": null,
+            "min": 0.7599999999999999,
+            "max": 0.7599999999999999
+          },
+          "cold": {
+            "n": 1,
+            "mean": 0.7599999999999999,
+            "sd": null,
+            "min": 0.7599999999999999,
+            "max": 0.7599999999999999
+          },
+          "warm": {
+            "n": 1,
+            "mean": 0.7599999999999999,
+            "sd": null,
+            "min": 0.7599999999999999,
+            "max": 0.7599999999999999
+          },
+          "seeded": {
+            "n": 1,
+            "mean": 0.7599999999999999,
+            "sd": null,
+            "min": 0.7599999999999999,
+            "max": 0.7599999999999999
+          }
+        },
+        "S_switch": {
+          "n": 1,
+          "mean": 0.0,
+          "sd": null,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "S_cold": {
+          "n": 1,
+          "mean": 0.0,
+          "sd": null,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "S_seeded": {
+          "n": 1,
+          "mean": 0.0,
+          "sd": null,
+          "min": 0.0,
+          "max": 0.0
+        }
+      },
+      "unserved": {
+        "worlds": [
+          1011
+        ],
+        "post_event_mean": {
+          "keep": {
+            "n": 1,
+            "mean": 0.8600000000000001,
+            "sd": null,
+            "min": 0.8600000000000001,
+            "max": 0.8600000000000001
+          },
+          "cold": {
+            "n": 1,
+            "mean": 0.9919521912350597,
+            "sd": null,
+            "min": 0.9919521912350597,
+            "max": 0.9919521912350597
+          },
+          "warm": {
+            "n": 1,
+            "mean": 0.9706772908366536,
+            "sd": null,
+            "min": 0.9706772908366536,
+            "max": 0.9706772908366536
+          },
+          "seeded": {
+            "n": 1,
+            "mean": 0.9919521912350597,
+            "sd": null,
+            "min": 0.9919521912350597,
+            "max": 0.9919521912350597
+          }
+        },
+        "S_switch": {
+          "n": 1,
+          "mean": 0.11067729083665345,
+          "sd": null,
+          "min": 0.11067729083665345,
+          "max": 0.11067729083665345
+        },
+        "S_cold": {
+          "n": 1,
+          "mean": -0.021274900398406182,
+          "sd": null,
+          "min": -0.021274900398406182,
+          "max": -0.021274900398406182
+        },
+        "S_seeded": {
+          "n": 1,
+          "mean": 0.13195219123505963,
+          "sd": null,
+          "min": 0.13195219123505963,
+          "max": 0.13195219123505963
+        }
+      }
+    },
+    "far_near": {
+      "far": "routing class 'chain' (chain-served before the event)",
+      "near": "routing class 'direct'",
+      "other_classes_reported_separately": [
+        "unrouted",
+        "shared_only",
+        "unserved"
+      ]
+    }
+  },
+  "timing_per_world": {
+    "cold": {
+      "plan": {
+        "wall_s": {
+          "n": 2,
+          "mean": 1.3422064670012332,
+          "sd": 0.3099728256572312,
+          "min": 1.1230225799954496,
+          "max": 1.5613903540070169
+        },
+        "cpu_s": {
+          "n": 2,
+          "mean": 1.3420980000000007,
+          "sd": 0.31005359562823914,
+          "min": 1.122857000000001,
+          "max": 1.5613390000000003
+        }
+      },
+      "rollout": {
+        "wall_s": {
+          "n": 2,
+          "mean": 0.4893711184995482,
+          "sd": 0.008381212955908546,
+          "min": 0.4834447059838567,
+          "max": 0.49529753101523966
+        },
+        "cpu_s": {
+          "n": 2,
+          "mean": 0.4881339999999996,
+          "sd": 0.010032431011474014,
+          "min": 0.48104000000000013,
+          "max": 0.4952279999999991
+        }
+      }
+    },
+    "keep": {
+      "wall_s": {
+        "n": 2,
+        "mean": 0.3661947535001673,
+        "sd": 0.017524891336178485,
+        "min": 0.3538027839967981,
+        "max": 0.37858672300353646
+      },
+      "cpu_s": {
+        "n": 2,
+        "mean": 0.36619350000000006,
+        "sd": 0.01756523955145589,
+        "min": 0.35377299999999945,
+        "max": 0.37861400000000067
+      }
+    },
+    "keep_unbranched_check": {
+      "wall_s": {
+        "n": 2,
+        "mean": 0.7680169024970382,
+        "sd": 0.17447137093134446,
+        "min": 0.6446470129885711,
+        "max": 0.8913867920055054
+      },
+      "cpu_s": {
+        "n": 2,
+        "mean": 0.7677935000000007,
+        "sd": 0.1743619256388858,
+        "min": 0.644501,
+        "max": 0.8910860000000014
+      }
+    },
+    "pre_event_plan": {
+      "wall_s": {
+        "n": 2,
+        "mean": 1.2574313985096524,
+        "sd": 0.23383561846404058,
+        "min": 1.092084647010779,
+        "max": 1.4227781500085257
+      },
+      "cpu_s": {
+        "n": 2,
+        "mean": 1.2247699999999997,
+        "sd": 0.1938886794013507,
+        "min": 1.0876700000000001,
+        "max": 1.3618699999999992
+      }
+    },
+    "pre_event_prefix": {
+      "wall_s": {
+        "n": 2,
+        "mean": 0.30660035149776377,
+        "sd": 0.0847514308944071,
+        "min": 0.24667203999706544,
+        "max": 0.3665286629984621
+      },
+      "cpu_s": {
+        "n": 2,
+        "mean": 0.30657599999999996,
+        "sd": 0.08477220356933086,
+        "min": 0.24663299999999966,
+        "max": 0.36651900000000026
+      }
+    },
+    "seeded": {
+      "plan": {
+        "wall_s": {
+          "n": 2,
+          "mean": 0.7908516324969241,
+          "sd": 0.04484323066083591,
+          "min": 0.7591426800063346,
+          "max": 0.8225605849875137
+        },
+        "cpu_s": {
+          "n": 2,
+          "mean": 0.7835589999999999,
+          "sd": 0.04676097143986656,
+          "min": 0.7504939999999998,
+          "max": 0.816624
+        }
+      },
+      "rollout": {
+        "wall_s": {
+          "n": 2,
+          "mean": 0.4149291009962326,
+          "sd": 0.02118697401861061,
+          "min": 0.39994764799484983,
+          "max": 0.42991055399761535
+        },
+        "cpu_s": {
+          "n": 2,
+          "mean": 0.41330750000000016,
+          "sd": 0.01916330087693791,
+          "min": 0.39975699999999925,
+          "max": 0.42685800000000107
+        }
+      }
+    },
+    "warm": {
+      "plan": {
+        "wall_s": {
+          "n": 2,
+          "mean": 0.12558468600036576,
+          "sd": 0.06831564947935839,
+          "min": 0.07727822699234821,
+          "max": 0.17389114500838332
+        },
+        "cpu_s": {
+          "n": 2,
+          "mean": 0.12559599999999982,
+          "sd": 0.06832065719824527,
+          "min": 0.07728599999999908,
+          "max": 0.17390600000000056
+        }
+      },
+      "rollout": {
+        "wall_s": {
+          "n": 2,
+          "mean": 0.4644941239967011,
+          "sd": 0.054518556508734765,
+          "min": 0.42594368298887275,
+          "max": 0.5030445650045294
+        },
+        "cpu_s": {
+          "n": 2,
+          "mean": 0.4638695000000008,
+          "sd": 0.053735165622708976,
+          "min": 0.42587300000000106,
+          "max": 0.5018660000000006
+        }
+      }
+    },
+    "world_total": {
+      "wall_s": {
+        "n": 2,
+        "mean": 6.3427702084882185,
+        "sd": 0.2940250652764272,
+        "min": 6.1348630909924395,
+        "max": 6.550677325983997
+      },
+      "cpu_s": {
+        "n": 2,
+        "mean": 6.298754000000001,
+        "sd": 0.3332155853527866,
+        "min": 6.063135000000001,
+        "max": 6.534373000000001
+      }
+    }
+  },
+  "cpu_seconds": {
+    "self_user_s": 12.86199,
+    "self_sys_s": 0.724162,
+    "children_user_s": 0.0018859999999999999,
+    "children_sys_s": 0.002411,
+    "total_s": 13.590449000000001,
+    "peak_rss_kib": 46936
+  },
+  "start_utc": "2026-09-29T21:08:53+00:00",
+  "end_utc": "2026-09-29T21:09:06+00:00",
+  "wall_clock_s": 12.864846615993883
+}
