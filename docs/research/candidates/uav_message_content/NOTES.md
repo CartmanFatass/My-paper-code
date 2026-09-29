@@ -3449,3 +3449,154 @@ outputs, rerun six fits, replace the source or relax the reader's complete-batch
 checks. Until then all saved scientific outputs are unread, no complete comparison
 exists, and result diagnosis, publication of a scientific conclusion and cleanup
 remain undone because the owner paused them.
+
+<a id="b06-evaluation-recovery-prospective"></a>
+## 2026-09-29 - B06 resumed evaluation-only recovery disposition (before scores)
+
+The owner explicitly resumed Root with "阅读handoff 我们继续工作". Root published
+the scoped pause lift and responsibility transfer at `ecd5b2583`: current parent
+`01a0ef2b-a391-7693-a748-60e24be246ae`, native DM
+`/root/dm_calibration_recovery`. The old child is unavailable; this transfers the
+unfinished question, not an old process or a new study. The launch-bound Lead stays
+`Codex DM (native child)`. At22:00UTC the original claim again reports consistent
+exit-15 and absent runner/supervisor. The original207-file inventory still hashes
+to74d949fe...15b, exactly the handoff inventory. No original output, observer or
+accepted operation has been restarted or modified, and scientific scores remain
+unread while this disposition is formed.
+
+The proposed recovery completes only the missing original endpoint coverage:
+19703/D worlds9..31 from final checkpoint140aee1b...e13, then B40 worlds0..31
+from parent34871c49...9da2. This is55H256 episodes/14080native steps,0fits,0updates,
+70400motion samples and two fresh environment constructors. No completed episode
+is rerun. The interrupted world9 may already have executed0..256 unpersisted steps;
+that possible duplicate prefix stays in total exposure. Complete saved coverage
+would therefore be843776steps plus0..256unpersisted,33 cumulative policy fits plus
+3predictors and4751360saved cumulative steps plus that prefix. The original
+829696saved-step attempt remains interrupted rather than relabeled complete.
+
+The current published communication background (RESEARCH section5 at ecd5b2583)
+and the original B06 comparison remain applicable: state-dependent correction must
+be read against the seriously trained constant K and B40, with native service tails
+and the single-selected-parent limitation. The pause introduces no scientific reason
+to change any comparator, sample, decision rule, checkpoint or uncertainty unit.
+Ending with169/224 episodes would leave B40 entirely absent and the third D panel
+selectively truncated by time; buying only55missing episodes can recover the original
+question at far less cost than the six paid fits. This is a prospective recovery
+choice, not a score-informed repair or a new evaluation panel.
+
+Source tracing supports separable episodes. `b06/study.py` gives every evaluation
+world its own motion generator1970003000+e, scene1970002000+e and channel1970007000+e.
+The retained collector resets the native environment, constructs a fresh channel,
+zeros the GRU state and previous actual action, and never calls the critic during
+evaluation. `MultiUAVEnv.reset` reseeds its RandomState, resets time/agents/positions/
+users/connections/SINR/transmitter mask and invalidates the physical-state caches;
+the adapter forwards the reset seed. The free-space, no-shadowing host introduces
+no evaluation-history RNG dependence. The same local_linux interpreter, CPU float32,
+one Torch/BLAS thread and sampled policy will be retained. Construction/loading is
+not training and must not consume the dedicated episode generator. The frozen
+collector/model/source closure is checked against f288de641, with a synthetic
+split/load/reconstruct identity test instead of buying another native episode.
+
+An independent, outcome-blind ResearchCritic has the original prospective contract,
+interruption and source to challenge this recovery choice. Its disposition will be
+recorded before substantial implementation. Engineering review separately covers
+checkpoint/RNG/reset/output identity. If these checks contradict separability, stop
+the dependent recovery and return a bounded partial-reading choice; no native
+duplicate panel or training retry is presumed.
+
+L0 for the selected bounded implementation: add an admitted evaluation-only entry
+and recovery module under `experiments/candidates/uav_message_content/b06/`, with
+mirrored focused tests; preserve the original driver, collector, models and all
+original run bytes. Verify the original inventory/exit/source and exact D/parent
+checkpoint digests before scientific effects. Reject an existing recovery result,
+changed or overlapping episode sets, changed input bindings and altered fixed
+semantics. Write only `runs/uav_message_content/b06_eval_recovery/`:55 raw traces,
+episode rows, fixed config, compact summary, exact input/provenance hashes and
+parameter-before/after witnesses. No optimizer is constructed. Record actual counts,
+wall/CPU/RSS; enforce a600CPU-second recovery-worker ceiling, with no automatic
+extension/retry, separately from the original missing batch CPU accounting.
+
+The Implementer may own this one evaluation-only behavior and its tests; the DM owns
+NOTES, a separate two-source reader, acceptance, index and Git mutations. The reader
+must independently validate every original and recovered trace/checkpoint/update,
+explicitly identify169original+55recovery episodes and both source/exit identities,
+retain original missing telemetry and extra exposure, and apply the unchanged full
+panel contrasts/tail readings. It must not overwrite original summaries, fabricate
+exit0 or weaken the original complete-run reader. Tests use synthetic fixtures under
+pytest-managed scratch; no new native result appears before source publication and
+fresh actual-node admission. Shared main contains other writers' edits; these are
+preserved and commits use explicit owned paths under the shared index lock.
+
+The outcome-blind Scientific Reviewer independently reconstructed the original
+inventory, all six training/update counts, checkpoint/raw hashes and matched
+exogenous witnesses. Its initial disposition is that the55-episode recovery is
+scientifically defensible conditional on fresh-process episode equivalence, with
+no scientific need for a duplicate native panel or new fit. The independent
+Engineering Reviewer then traced the native reset/cache and actor state and found
+no material semantics defect: the changing cache generation is only an identity,
+and the Linear/Tanh/single-layer GRU actor has no dropout or persistent evaluation
+buffer outside saved tensors and the collector-reset hidden state. Twelve frozen
+source paths match f288de641. I select the bounded recovery on those findings;
+the focused critic's final wording and implementation review remain to be read.
+This is permission for the scoped implementation under resumed authority, not
+evidence that the missing episodes have run or that the result is favorable.
+
+The critic's complete focused disposition is now read and adopted: **retain the
+exact55-episode recovery; MATERIAL_DISSENT:no**. It received no inherited DM/Root
+conversation (the assignment did disclose the proposed route), reconstructed the
+filtered original evidence before reading the recovery rationale, and viewed no
+B06 scientific metric values. Its independent checks cover all207files, all six
+final endpoints, parent/manifest/exit identities,512training and1024update rows per
+fit,169contiguous saved evaluation rows/raw hashes, within-pair training witnesses,
+matched evaluation RNG/scene/channel witnesses, and twelve unchanged source paths.
+Its strongest remaining hazard is an unnoticed process-dependent change confounded
+with missing D worlds and all B40 worlds, addressed by strict loading, frozen
+dependencies, synthetic split/load identity and recovered exogenous-witness checks.
+It requires a distinction between complete endpoint coverage and a completed
+original operation; the separate two-source reader implements that distinction.
+The600CPU-second recovery ceiling adds no replication and does not fill missing
+original CPU telemetry. Original interpretation and uncertainty units remain
+unchanged. No distinct Pro expertise is needed for this recovery choice. A
+contradictory implementation check would stop the dependent recovery and trigger
+bounded partial reading rather than an improvised replacement.
+
+### Recovery engineering accepted before native evaluation
+
+The registered bounded Implementer `/root/dm_calibration_recovery/implement_eval_recovery`
+returned only the admitted entry, recovery module and focused tests. I read its
+diff and checks and accept the implementation. It runs D9..31 from the exact saved
+final tensors, then the unchanged baseline-only B40 branch; there is no optimizer
+construction, learned-cell driver call or new checkpoint. Fifteen frozen dependency
+files are byte-bound to f288de641. The original inventory, terminal exit, source,
+checkpoint metadata/dtype/shape/finiteness and exact nonoverlapping coverage are
+verified before effects, and the inventory is checked again afterward. The600CPU-s
+guard checks collector boundaries and finalization; it is not OS preemption of an
+individual native call.
+
+The DM-owned separate reader retains both operation/source identities and original
+interruption, validates169original+55recovery trajectories and the original six fits,
+and applies the unchanged B06 contrasts. It records eight actual constructors
+(six original, replacement D, B40) and the unknown0..256original prefix. It adds
+only explicitly sourced in-memory interrupted-D checkpoint/stream witnesses; no
+original summary, stream, checkpoint, status or exit is rewritten. The strict old
+complete-run reader is unchanged.
+
+Independent Reviewer `/root/dm_calibration_recovery/review_recovery` found a P2
+reader omission of the recovered-D stream and recovery update/config artifacts.
+I repaired it and added corruption regressions. Its integrated review found no
+remaining material issue and independently passed34focused tests in3.64s. The
+Implementer's complete B06 suite passed46tests in12.71s, including synthetic
+nonzero-D uninterrupted versus reload/fresh-environment equality for every trace
+array, B40 identity, no optimizer calls, input/source/coverage rejection, partial
+stop preservation and admission-before-effects. Twenty reader tests separately
+passed in.22s; these overlap the46, not additional scientific exposure. Scratch
+was cleaned by pytest. Both CLI help paths pass. A final four-part defensive patch
+(source/dtype checks, scoped output byte telemetry, final CPU check) was re-reviewed
+against the prior exact digest; no new finding. Accepted recovery.py hash is
+2e416fc2cf8a0ca6fc9de12f6341bee385b6eacc51ad1362922de73afddc3382.
+
+No native episode or score reading occurred in preparation. Full native recovery
+and all-evidence reading remain obligations, not implications of green tests.
+Exact owned inputs are now ready for publication and fresh local_linux admission;
+this preserves the original host/interpreter/device/RNG semantics rather than
+moving the existing stopped operation to another node.
