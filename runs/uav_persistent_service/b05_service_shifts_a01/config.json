@@ -1,0 +1,156 @@
+{
+  "arms_new": [
+    "S"
+  ],
+  "batch": "b05_service_shifts_a01",
+  "direction": "uav_persistent_service",
+  "estimand": "S minus exact frozen R; exposed development worlds",
+  "evaluation_workers": 4,
+  "final_reserve_window": [
+    11700,
+    12000
+  ],
+  "fits": 0,
+  "fixed_bins": 3000,
+  "forecast_steps": 1200,
+  "horizon": 12000,
+  "jobs": [
+    {
+      "arm": "S",
+      "job_key": "S/52292801",
+      "seed": 52292801
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52292802",
+      "seed": 52292802
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52292803",
+      "seed": 52292803
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52292804",
+      "seed": 52292804
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52292805",
+      "seed": 52292805
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52292806",
+      "seed": 52292806
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52292807",
+      "seed": 52292807
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52292808",
+      "seed": 52292808
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52392801",
+      "seed": 52392801
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52392802",
+      "seed": 52392802
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52392803",
+      "seed": 52392803
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52392804",
+      "seed": 52392804
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52392805",
+      "seed": 52392805
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52392806",
+      "seed": 52392806
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52392807",
+      "seed": 52392807
+    },
+    {
+      "arm": "S",
+      "job_key": "S/52392808",
+      "seed": 52392808
+    }
+  ],
+  "late_window": [
+    6000,
+    12000
+  ],
+  "launch_sha": "b3afc6f3fa117f005eeaeaf7f86c7796521bcaa5",
+  "macro_steps": 30,
+  "max_new_native_transitions": 192000,
+  "mission_service_denominator": 12000,
+  "numeric_threads_per_worker": 1,
+  "optimizer_updates": 0,
+  "original_control_jobs": 16,
+  "original_control_native_steps_already_paid": 192000,
+  "panels": {
+    "original": [
+      52292801,
+      52292802,
+      52292803,
+      52292804,
+      52292805,
+      52292806,
+      52292807,
+      52292808
+    ],
+    "reassignment": [
+      52392801,
+      52392802,
+      52392803,
+      52392804,
+      52392805,
+      52392806,
+      52392807,
+      52392808
+    ]
+  },
+  "seeds": [
+    52292801,
+    52292802,
+    52292803,
+    52292804,
+    52292805,
+    52292806,
+    52292807,
+    52292808,
+    52392801,
+    52392802,
+    52392803,
+    52392804,
+    52392805,
+    52392806,
+    52392807,
+    52392808
+  ],
+  "selection": "4a188a330; completed independent review eefe34dc6",
+  "shield": {
+    "enter_margin": 0.0,
+    "exit_margin": 0.05
+  }
+}

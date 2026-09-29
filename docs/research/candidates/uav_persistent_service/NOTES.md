@@ -3376,3 +3376,290 @@ handle consistently running with0 probe errors and no exit witness. The DM
 remains active through deterministic native waits and same-handle drain/rearm,
 then full collection/reading. No queue wake is assumed to restart an unloaded
 native child, and no duplicate worker or accepted-handle migration is allowed.
+
+<a id="b05-complete-reading"></a>
+## 2026-09-29 - B05 complete: outage reduction without service-safe replacement
+
+### Complete collection and fixed comparison
+
+The sole accepted B05 operation exited0 at2026-09-29T11:09:14.531726Z,
+with consistent native records and both runner/supervisor identities absent.
+All16 S worlds reached exactlyH12000: **192000 new native steps,0 fits,
+0 updates,0 failed or early worlds**. The exact executable source remains
+[`b3afc6f3f`](https://github.com/CartmanFatass/My-paper-code/tree/b3afc6f3fa117f005eeaeaf7f86c7796521bcaa5/experiments/candidates/uav_persistent_service/b05).
+No R control was executed again and no parameter, detector, station right,
+capacity, shield or mission horizon was changed after exposure.
+
+The DM checked all54 manifest artifacts locally and at their one durable node
+location, `/home/wu/projects/HMASD/runs/uav_persistent_service/b05_service_shifts_a01`
+on`wsl_4070`:203,330,501 logical bytes, manifest SHA256
+`bc3976fbc95eb0ca10c43379ffec1b76f0db00817e339e472aa19576e5b905fa`.
+The [manifest](../../../../runs/uav_persistent_service/b05_service_shifts_a01/manifest.json)
+pins every raw array and decision stream. All16 complete users/RNG histories
+and initial batteries match their exact R controls; both old manifests were
+rehashed at completion. The DM independently rebuilt summary contrasts/rule
+from all perworld rows and continuity/recovery from the S native arrays.
+The independent critic also read original R arrays on the node and verified
+the paired exogenous histories, rather than treating compact hashes alone as
+scientific interpretation.
+
+Observer generation1 reached its1500-second checkpoint, was drained, then
+generation2 observed READY on the same claim. The native-child queue rejected
+both automatic deliveries because the spawned child was not an unloaded
+queue-return session; the DM remained active and collected the exact handle.
+READY event`eee7cdb05fffce87560b1ca8` was consumed by generation3 and the
+observer stopped, with0 probe errors. The retained
+[terminal observation](../../../../runs/uav_persistent_service/b05_service_shifts_a01/observer-ready.json)
+and process-exit witness are distinct from the launch-command success. No
+worker restart, splice, accepted-request resend or replacement occurred.
+
+### Native package result and adverse cases
+
+[Summary](../../../../runs/uav_persistent_service/b05_service_shifts_a01/summary.json),
+[all S worlds](../../../../runs/uav_persistent_service/b05_service_shifts_a01/perworld.json)
+and [exact augmented R readings](../../../../runs/uav_persistent_service/b05_service_shifts_a01/control-readings.json)
+retain every contrast. The inference unit remains an already exposed
+development world; t15/t7 intervals are descriptive, not confirmation.
+
+| S minus frozen R, all16 | Mean | Paired t95 interval | Positive / negative worlds |
+| --- | ---: | --- | --- |
+| Full mission QoS | -.018924768 | [-.061684847,+.023835311] | 8 / 8 |
+| Late6000 QoS | -.021514897 | [-.090880194,+.047850399] | 6 / 10 |
+| Full native J | -314.402781 | [-876.615133,+247.809571] | 7 / 9 |
+| Late6000 native J | -214.786784 | [-704.129342,+274.555774] | 6 / 10 |
+
+Original-eight mean full/late QoS is-.034446755/-.042026502 and J
+-586.596015/-423.411907. Reassignment-eight means are-.003402781/-.001003293
+and-42.209547/-6.161661. All corresponding panel intervals cross zero; this
+does not establish population inferiority, equivalence or impossibility.
+The complete prewritten replacement rule **fails** on all four benefit
+conditions, mean reserve exposure and a new persistent-reserve world.
+
+The positive continuity result is real: R's441 late zero-service steps
+(312 in original06,129 in reassignment08) become0 under S. Maximum late
+zero spell falls110 to0; no S world has a terminal-zero suffix, including the
+old original06 55-step suffix. Original06's full/late QoS rises
+.045586866/.137107153; original08 rises.081642854/.160693252 and
+reassignment08 rises.049193414/.115750467. These gains are retained, not
+explained away by the failed use rule.
+
+But original02 loses.283921110 full and.409330793 late QoS. Original04 loses
+.045080226/.120399552 and newly has **8 persistent-reserve members** in its
+final300, versus0 under R. Mean reserve fraction rises.005786458; total
+native reserve member-steps are8908 versus20. No S or R cutoff/depletion was
+observed, but this does not make the new tail safe. Direct final300 arrays in
+`raw/S_52292804.npz` show all2400 member-steps in F, QoS.560865 and native
+J-433.104; battery range.032166..056374. All eight are eligible at station0:
+hover demand1347.92W against1000W, other-station demand0. Consumption
+112.326667Wh exceeds input83.333333Wh by28.993333Wh in that window.
+This is observed positive service with worsening stock, not clean recovery
+or a reason to extend the known-deficit trajectory.
+
+S adds station-overload ticks in original01/02/04 and reassignment02; mean
+overload ticks rises779.125 despite reductions in reassignment04/08. The
+original-panel no-overload property of R is therefore not preserved. S still
+executes127 lawful transfers,125 crossing/arrival/charging and127 releases,
+125 with observed post-release connected load and0 F-overwritten steps;
+R had138 transfers. This preserves evidence that access is feasible, not the
+claim that the whole S package preserves R's complete access/service benefit.
+
+### Predicted intermediate versus observed deployment
+
+The compact [intermediate reading](../../../../runs/uav_persistent_service/b05_service_shifts_a01/intermediate-reading.json)
+is reconstructed by direction-owned`b05/audit.py` from the54 bound artifacts,
+without environment steps, future-policy counterfactuals or new fitting.
+Its two focused pure tests pass. It retains exact-zero semantics, endogenous
+event selection and the distinction among predicted nominal readiness,
+assignment restoration, connected load and native satisfied QoS.
+
+S offers multiple actions at997/6400 clocks and changes398 choices relative
+to the R action at the **actual S state**, not an unexecuted full R suffix.
+There are168 transfer opportunities and41 genuine service deferrals,22 in
+original04. The first differing lexicographic score is minimum qhat85,
+integrated qhat173 and reserve140; no changed choice is first decided by
+cutoff/depletion. Thus the scheduling intervention is exercised, and service
+ranking affects258 choices, but it is not exclusively a service decision.
+
+All eight marginal weights are exactly zero at2711/6400 clocks, including
+424/997 clocks with alternatives and258/645 chosen commitment starts.
+Service score components tie across candidates at637/997 alternative clocks.
+Zero marginal weight at the nominal full-fleet radio snapshot does not mean
+zero actual service value: radio remains active during F/charging, simultaneous
+withdrawals and dynamic geometry are not additive, and the reference snapshot
+is not the actual deployed fleet. These observations weaken trust in the
+selected additive availability objective, without isolating it as the cause
+of every positive or negative world.
+
+All645 selected starts have a release forecast and observed release. Initial
+forecast minus observed release has mean+6.896s, median+20s, absolute mean
+33.420s and range[-750,+124]s. Later starts can alter charging competition;
+this is not a fixed-policy forecast calibration experiment. Eight commitments
+charge without strict decoded geometric arrival, preserving the old mismatch
+constraint;21 selected starts have no nominal-readiness forecast within their
+remaining forecast. The separate recorded assignment/load timestamps are not
+silently used as the same readiness target. The already observed mismatch
+handling does not establish that future strict arrivals can be predicted.
+
+The more direct deployment prediction is not supported on its declared proxy:
+mean late **free positive-load member-steps falls5701.0625**, t95
+[-10703.2455,-698.8795],10 losses/6 gains. Observed late release-to-free-load
+delay is shorter on average, but S has254 late releases with15 unobserved
+followups versus R215 with9; distinct endogenous events and censoring prevent
+a causal recovery-speed claim. F/committed members can deliver service and
+connected load is not satisfied QoS. Removing zero-service gaps, increasing
+free useful deployment and improving integrated native service are different
+consequences here; B05 establishes only the first consistently on this panel.
+
+S travels60061.46m less per world on average and consumes1368.373Wh less
+across all16, yet takes2462.991Wh less charging input and ends with1094.618Wh
+less stored energy. Every S world still makes a full-mission net withdrawal
+(523.873..1036.685Wh). Neither efficient travel,0 cutoff nor a nonzero terminal
+QoS is a sustainability certificate. The B03 six-member deficit, historical
+arrival mismatch and all B01-B04 adverse results remain in force.
+
+### Cost and boundary
+
+New S worker CPU is7110.880326s = **1.975245 hours**, worker wall sum
+6872.217034s, runner wall1781.531560s =29.692 minutes, parent CPU1.882352s.
+This is below the prospective3..5 CPUh envelope. Exact reused R originally
+cost5972.904755s, so S's recorded per-world worker CPU is19.052% higher;
+this is not charged again and is not a contention-controlled benchmark.
+S adds57600 radio snapshots and3,386,392 arithmetic member-bin updates;
+its retained base service snapshots are110438 versus R151729. Controller
+compute remains outside native J, so extra CPU is not hidden in the score.
+
+Cumulative direction science is **1fit/1,104,000 result steps/9.270565 recorded
+worker-CPU hours**. B05 correctness used180 native steps; alongside the prior
+at-least1945 and at-most150 uncertain historical steps these remain separate
+from result exposure. Implementation had one bounded Implementer, one
+independent Engineering Reviewer,19 passing original tests, and the two new
+pure reading tests. Selection and interpretation use separate scientific
+review contexts. Support/model CPU was not comprehensively instrumented;
+the prospective5..8 support-hour estimate is not relabeled as measured usage.
+There is no unreported new native diagnostic, pilot, fit or extended horizon.
+
+### Independent scientific reading and DM disposition
+
+Dedicated ResearchCritic`/root/dm_service_continuity/interpret_service_b05`
+returned its complete answer in a separate, non-inherited context. Its
+assignment disclosed the reported mixed outcome; the review is independent,
+not claimed outcome-blind. It reconstructed the original protocol and
+consequential outputs before reading the complete prior selection answer and
+Root disposition. It independently checked all16 S raw/decision hashes, native
+primary/reserve/deployment readings, original R trajectories directly on the
+node, complete paired users/RNG/initial batteries and all291 dependency blobs
+against`b3afc6f3f`. It inspected decision mapping, the forecast, legal snapshot
+interface and declared rule. It did not repeat engineering review, every old
+P/O_H reconstruction or the literature bridge, and used0 new native steps.
+
+Its recommendation is **stop this S package and make no immediate new
+experimental purchase**. Retain conditional finite R, the positive outage
+cases, and the unresolved broader scheduling question. Both panels have
+negative means on all four primary endpoints, while the exposed intervals
+do not prove population inferiority/equivalence. The prewritten use rule
+fails substantively; it is not a missing-data failure or a claim that S never
+changed the available decisions. Original06 and reassignment08 improve full
+and late QoS/J without new reserve exposure, so they demonstrate particular
+useful complete scheduling changes under unchanged resources. They do not
+identify service weights as the cause or supply an outcome-independent way
+to select favorable worlds.
+
+The review's decisive objection is to treating fewer outages or shorter
+observed recovery as validation of the proposed availability-to-benefit
+explanation. Of398 departures from current-state R,187 are additional ordinary
+starts and88 shorter dwells for the same member. The intervention is active.
+Yet late free-positive-load exposure falls5701 member-steps/world while
+F-positive-load exposure rises6957; observed recovery events differ by policy
+and missing followups rise. Service rankings are tied at637/997 alternative
+clocks, but do decide258 departures and are therefore consequential rather
+than universally inactive. Ordinary scheduling competence combined with an
+inadequate additive service approximation is the strongest competing
+explanation, not a demonstrated unique cause.
+
+The critic independently reproduced the645 release errors and notes the
+one-clock qhat/native-QoS discrepancy has pooled absolute mean.21365 and
+both signs. Release, nominal deployment readiness and connected load remain
+different targets; this does not select an exact forecast repair. Original04
+has no charging-without-arrival event, so the detector mismatch cannot simply
+be assumed to cause or repair its new reserve tail. Unexecuted alternatives'
+native consequences remain unobserved. No learning or finite-optimization
+conclusion follows from this0-fit study.
+
+It considered moving forecast reserve ahead of service as an apparently
+inexpensive revision. Although concrete for original04, it poorly addresses
+the principal service loss:13/16 overrides in original02 already predict
+less reserve exposure than R. That proposal mainly targets one exposed
+adverse case and does not currently earn another complete batch. This is an
+investment judgment, not a proof or toy-pass prerequisite. The selected
+all16 comparison plus the saved-artifact reading is the smallest worthwhile
+completed observation. No unchanged replication, larger panel, detector patch
+or forecast refinement is recommended now. A later substantive candidate
+would need a prospective realized-deployment/energy and full-outcome
+prediction, not only a proxy gain. Native gains with new tails would remain a
+tradeoff, not the failed replacement use. Any richer rights/resource contract
+would also be given to competent R and priced separately.
+
+**MATERIAL_DISSENT: no.** I accept the review and its limits. Hard native
+feasibility is established for the tested lawful S choices, not all desired
+schedules. Conditional adoption is rejected by the fixed benefit/reserve
+rule. Further research investment in this exact additive1200-step S package
+ends; it is not rescued by retuning priority, clipping, dwell or forecast
+length on the observed worlds. The prediction of better free useful deployment
+and integrated full/late service/J has weakened, despite the demonstrated
+outage reduction. The parent question remains open because positive complete
+worlds and R's earlier access capability remain real; this study supplies no
+general scheduling or learning impossibility argument.
+
+Return this substantive boundary to Root with the evidence and recommendation,
+not a request for routine approval. Set the enduring direction to reserve:
+**no live producer, unread result, selected successor or external dependency**.
+Re-entry would be a newly selected, costed candidate that substantively changes
+the deployment/energy prediction under the same rights, or an explicitly
+different rights/resource question. No automatic repair, extra world or
+horizon extension is selected here. Existing R, P and B01 finite O assets and
+all previous verdicts remain unchanged.
+
+### Retention, retirement and measured cleanup
+
+The complete source is durably published at`b3afc6f3f`; compact outputs,
+the failed pre-admission transport record, all adverse worlds and the saved
+intermediate reader are retained. One required raw/decision copy remains in
+the verified canonical node run root, with all54 manifest artifacts and the
+203,330,501-byte/hash binding above. Original B03/B04 controls remain at their
+original locations. No source or raw backup chain was created.
+
+After the worker, observer and scientific reviewer were terminal, an import/
+entrypoint search found only the completed B05 execution/tests consuming the
+new scheduler. Explicit-path retirement removes`b05/controller.py`,
+`forecast.py`, `episode.py`, `batch.py`, `run_b05.py`, and corresponding
+`test_controller.py`, `test_forecast.py`, `test_episode.py`, `test_batch.py`.
+The package now retains`binding.py`, `readout.py`, `audit.py` and their three
+test files; all **9 retained pure tests pass after retirement**, with only
+the same14 third-party warnings and0 native steps. Historical executable
+references resolve to the frozen input commit above, not a maintained S
+implementation or an automatically selected successor. R/shared code and
+all other directions are untouched.
+
+Exact-target snapshot GC first refused ordinary process inspection at
+`/proc/660/cwd` (permission denied). The documented read-only
+`--sudo-process-scan` preview then verified terminal identities, no process
+references, clean source and durable reachability; applying to only
+`72f7145a3b0a418998417cdaee5b3ba1` removed it. Allocated bytes fell
+**803,086,336 to0**, and the path is absent; claim, manifest and output survive.
+
+Locally, the critic had finished reading and no raw-file consumer was observed.
+The attempted`rm -rf --` on the explicit owned targets was rejected with
+"rm -f style commands are not permitted. Use a safer approach" before any
+effect. Non-forced`rm -r --` on those same explicit redundant targets then
+succeeded under normal tool review. Deleted targets are the temporary local
+`b05_service_shifts_a01/raw/` copy (202,137,600 allocated bytes), its two empty
+log copies, the stopped`temp/directions/uav_persistent_service/b05-wait-request.json`
+(4096 bytes), and the two B05 source/test`__pycache__/` directories. Together
+with executable/test retirement, the two local code trees fell274432 to57344
+allocated bytes. All selected deletion paths are absent. The local net
+reduction is**202,358,784 bytes**; combined measured target-tree reduction is
+**1,005,445,120 bytes**. This is allocated working-tree storage, not a claim
+about Git object pruning or host free-space accounting. No selected cleanup
+target or cleanup blocker remains. The sole required raw evidence is not
+misreported as deleted, and foreign node warnings/status blobs remain outside
+this cleanup scope.

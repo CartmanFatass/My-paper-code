@@ -1,5 +1,1 @@
-"""Prospective B05 service-aware ordinary replenishment scheduler."""
-
-from .controller import ServiceShiftController
-
-__all__ = ["ServiceShiftController"]
+"""Retained B05 evidence readers; execution is frozen at input b3afc6f3f."""
