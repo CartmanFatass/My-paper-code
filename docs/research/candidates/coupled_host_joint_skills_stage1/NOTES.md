@@ -1385,3 +1385,95 @@ Answer to "buyable without a recipe question first": yes — at zero fits, and v
 7. EVIDENCE NOT FOUND. No measured cost of any run under the event variant (derivation only); no seed SD at any macro interface (b02c per-world SD .150 is neither a seed SD nor a mean SE); the λ_l config key; first-hand reads of ACAC/CoDe (catalog hits only); any store entry on relay-chain re-planning timing; the "用户运动预测暂不另开方向" sentence in RESEARCH.md (round-3 memo inference only); the owner's rule-6 wording on D1′ in a repository file.
 
 8. WHERE I DISAGREE WITH THE SESSION'S FRAMING. (i) The brief's constraint 2 treats a recipe change as an escape equal to rule 6; I rank rule 6 behind a measured stake above it because it does not reopen the wall. (ii) The asset table counts "eight zero-fit floors" as competent assets: they are references, not policies to continue; the only continuable competent Claude asset is the planner/ordinary rule. (iii) "Fits ≪ 10 CPU-h" binds nothing here; the binding costs are engineering hours and the rule-3 review latency, priced above. (iv) The round-boundary line "no further fit on this recipe family" should read "no from-scratch fit"; an anchored learner with a declared head recipe is a different object.
+
+## 2026-09-29 20:32 UTC — Critic review of the Oracle successor memo: R1 as a question ACCEPTED; **MATERIAL DISSENT on the executing default's zero-fit design and learner gate, ACCEPTED**; revised executing default = **R1-lite** (`coupled_host_replan_timing`, pre-declaration below, folded into the round-boundary Pro send)
+
+**DM verification of the load-bearing claims.** `planner.py` 451–500: `search_placement` is a cold multi-start search over the whole layout with `extra_candidates` as its only warm hook (457, 483) — a cold re-run at the event can discard the four unchanged clusters' layout, so "best − SET-now" would mostly price layout discard, not timing. `planner.py` 732–745: `assign_targets` is a brute-force min-makespan search over all 720 permutations, **not** the Hungarian algorithm — **correction to earlier entries: the slot floor "M (Hungarian)" is "M (min-makespan permutation search)"; values unchanged.** `planner.py` 910–913: the `correction` callable must not touch `env`, so an event hook belongs in the subclass `step()`. `uav_env.py` 541–555: cluster centres uniform in the arena, std = area/10 = 500 m, clipped. `uav_availability_recovery` (RESEARCH row): Codex native child, `exploring`, S7-S1 with 8 UAVs, one temporary member unavailability, L ×3 vs joint ordinary P and nearest-reserve S; run `b01_joint_reserve_a01` state `running` — a neighbour object (member loss, not demand relocation); one SCOPE note to Root is owed and sent below. Root's 2026-09-29 innovator-loop inbox file explicitly excludes the coupled host from duplicate Root assignments.
+
+**Disposition (item by item).** (1) ACCEPT WITH REVISIONS: R1 is main-line swarm re-deployment planning, not a diagnosis; its modal product is an ordinary reference, legitimate only because the reading decides whether the untied-K line (round-3 memo C4, "blocked: no cheap host with exogenous events") gets a host — stated as the consequence. Rule-2 exception holds on cost, not impossibility (S7-S2 has moving users at node price; the static native host cannot ask it) — worded so. Post-event window (t_e..500, clock-aligned) primary, all-500 secondary; cluster-draw rule declared; far-/near-cluster events reported separately. (2) MATERIAL DISSENT ACCEPTED: family = KEEP / cold SET-now / warm SET (four unaffected slots held; only the relocated cluster's server (and relay, if chain-served) re-placed; cold search seeded with the current layout as a second warm candidate) / departure-subset oracle over the learner's own action space (2⁶ departure subsets × delay {0, 20, 50} under warm SET's targets); S_switch = warm SET − KEEP; learner room = oracle − best ordinary rule; the .02–.05 "adopt reference" band is declared near-uninformative (no consumer) and reads only "reference exists, learner closed"; the k = 10/50 clocks, SET-sync and HYST-300 (an assignment-cost continuation discount at replan period 30 in H_central, not a trigger — "adapted" if ever used) are cut until R1-lite's conditions hold. (3) ACCEPT WITH REVISIONS: the anchored KEEP/GO head is TRIED (July R30: no entropy on KEEP/SWITCH, p_keep .6; JDSL cap-10; FSD B07) and is fit ten in substance unless a measured oracle room ≥ .05 (post-event scale) exists; base rate for anchored discrete heads is non-activation (`uav_joint_transition` D at 800/800 clocks; `uav_cooperative_planning` L − P −.016; `uav_transit_handoff` declined); information rights (full-information rules vs min_sinr-limited learner observations) must be fixed in any later fit declaration; a non-activation band (learner ≡ anchor on ≥ 95 % of decisions) and single-instance wording; the .03 margin is not readable as learning (three-seed SD .052 at the per-step interface). No fit is declared now. (4) ACCEPT: R1-lite is the cheapest refuting run; R2 stays below (recipe repair; λ_l undercut as single cause by SET-V-b and SET-slot's entropy fall without learning); R3 rank 3. (5) ACCEPT: labels corrected — learner head TRIED; missed ancestors recorded: `uav_availability_recovery` (live), S4 availability B02 (removing replanning lag −.013 QoS), VNFC N7 B01, `uav_cooperative_planning` B02, `uav_transit_handoff`, H_central replan-30/hysteresis-300; the new instance is the zero-fit timing stake on a relay-chain host. (6) MATERIAL DISSENT ACCEPTED: engineering cut to ≈ 3–4 h (event hook, warm SET, oracle, one reader, focused tests) and < .5 CPU-h on 32 dev worlds; the rule-3 host-variant review is folded into this round's Pro send, no second send. (7) ACCEPT: [DECIDE-A] is a DM rule-2 judgment (recorded as such, executes at zero fits after the Pro disposition); [DECIDE-B] answered by the owner's "no diagnosis successor" (not re-put); [DECIDE-C] Root-row matter (peer message only if ever opened). Nothing blocks work.
+
+### Critic review (verbatim, ResearchCritic hand-back 2026-09-29)
+ResearchCritic: independent scientific review of the Oracle memo for the second live direction (R1 `coupled_host_replan_timing`). Checkout /home/fires/hmasd-wsl, main 09f5cd297. Read-only: I wrote nothing and launched nothing.
+
+**Context disclosure.** This was a separate context with no fork of the DM conversation. Your brief already summarised R1, so my reconstruction was not blind to the proposal. Reading order was: NOTES 948–1330, host.py, uav_env.py and planner.py first; the memo (NOTES 1331–1387) second; RESEARCH rows, heuristic.py, the July record and the round-3 memo after that.
+
+**Provisional reading before the memo.** The host has 6 UAVs, 50 users in 5 clusters of 10 (500 m std), a 5 km arena, one BS and 30 m/s top speed (host.py 51–70; uav_env.py 539–555). A redrawn cluster is .2 of C_bh and sits about 2.6 km away on average, roughly 87 steps of travel. So the gain from re-planning at all (best − KEEP) is bounded by about .2 × (post-event steps − travel)/500. The gap between re-plan rules can only come from transient chain breaks while UAVs reshuffle. That transient depends on whether the re-plan keeps the layout of the four clusters that did not move.
+
+## 1. Main line or diagnosis; is the rule-2 exception valid; artefacts — ACCEPT WITH REVISIONS
+- **Main line.** In topic, yes: re-deploying a relay chain when demand moves is swarm cooperative planning. It is not a diagnosis of b01/b02. But the memo's own prior is P(S_timing ≥ .05) = 15% (NOTES 1357), so about 85% of outcomes end with an ordinary-rule measurement and no learner. It is a planning study whose likely product is an ordinary reference. That is legitimate only if the reading changes an investment, namely whether the untied-K line (round-3 memo C4, "ON but blocked … no cheap host with exogenous events", MEMO_ROUND3_TWO_DIRECTIONS.md:28) gets a host. State that consequence explicitly.
+- **Rule-2 exception.** It holds on cost, not on impossibility. Existing hosts with exogenous demand change and relays already exist:
+  - S7-S2 has moving users, and H_central replans every 30 steps with a 300 m switch margin (RESEARCH.md:1183; heuristic.py 72–73, 286–297).
+  - The cadence stake on S7 is already measured at +.016 QoS (RESEARCH.md:1182).
+  - Codex's live `uav_availability_recovery` (RESEARCH.md:1166; run `runs/uav_availability_recovery/b01_joint_reserve_a01/summary.json`, state "running", 3 fits) uses an exogenous outage event and compares joint re-deployment with competent ordinary reassignment on native S7-S1.
+  - Correct wording: "cannot be asked *cheaply* on an existing host (S7 is H3000/node-priced); the coupled chain is the cheap host." The static native host cannot ask it (NOTES 17–18, static users).
+- **Artefacts (the memo's own 6(a) is correct).**
+  - (i) Reading on the all-500 mean dilutes any effect by (500 − t_e)/500 ∈ [.30, .70], so .02 and .05 partly measure the t_e draw.
+  - (ii) The stake depends on which cluster is redrawn. If it is the chain-served far cluster, the chain is rebuilt; if it is a near cluster, one UAV moves.
+  - (iii) SET-now's cold re-search is the largest artefact (item 2).
+  - Revisions: make the post-event window (t_e..500, clock-aligned) primary and the all-500 mean secondary; declare the cluster-draw rule and report far-cluster and near-cluster events separately.
+
+## 2. Is the zero-fit switching family well-posed — MATERIAL DISSENT
+- **SET-now is a strawman.** `search_placement` is a cold search: it builds k-means candidates on all users (k ∈ {4, 5, 6}) and runs a multi-start descent over the whole layout (planner.py 451–500, 481). Its only warm hook is `extra_candidates` (457), which the memo does not use. It cannot hold the four unaffected slots fixed. A cold re-run can therefore return a wholesale different layout, and `assign_targets` then reshuffles UAVs. (That function is a brute-force min-makespan search over 720 permutations, not Hungarian: planner.py 732–745.)
+- So "best − SET-now" (NOTES 1352) mostly measures the loss from discarding the unchanged layout, not timing. SET-min's "slot moved > 100 m" is applied after the cold layout and inherits the same issue.
+- **Missing competent ordinary re-plan.** Hold the four unaffected slots, re-place only the relocated cluster's server/relay, and seed the search with the current layout via `extra_candidates`. This rule must be in the family and must be the reference.
+- **The gate does not measure the learner's room.** With full information and a host that is deterministic given the world seed, the learner's action space (per-UAV KEEP/GO) can be searched ordinarily at zero fits: 2⁶ departure subsets at t_e × a small delay grid {0, 20, 50} is about 64–192 rollouts per world. Then "oracle-in-head-space − best ordinary rule" is the most any learner can gain. RESEARCH.md:54 also asks that re-planning and parameter training be explained separately. The learner's stake is that oracle gap, not best − SET-now. A large best − SET-now can coexist with zero learner room.
+- **Thresholds.** For deterministic zero-fit rules on shared worlds, the floors' paired SD .025 (NOTES 1247) gives a 32-world SE ≈ .0045, so .02 is readable. Band consequences:
+  - < .02 is informative: C4 stays blocked on this host family.
+  - .02–.05 ("adopt the best rule as sealed reference, no learner") changes no investment, because no consumer of that reference exists. It is close to uninformative and should be declared as such.
+  - ≥ .05 on the current definition does not license a learner (see above).
+- **Smaller fixes.**
+  - HYST-300 in H_central is a 300 m continuation discount inside the assignment cost at replan period 30 (heuristic.py 286–297), not a re-plan trigger. Label the transplanted rule "adapted".
+  - The k = 10/50 clocks need a declared rng convention, or a cold re-search thrashes on unchanged users.
+  - Cost is understated. "≈ 3 s/world-rule" (NOTES 1355) is below the D1′ gate's ≈ 12 s/world (NOTES 960), and k = 10 means about 15–35 re-searches per episode at about 1,143 evaluations each (NOTES 962).
+- **Concrete revision:** the family becomes KEEP / cold SET-now / warm SET (unaffected slots held) / departure-subset oracle, with the post-event window primary. S_switch = warm SET − KEEP. Learner room = oracle − best rule.
+
+## 3. The anchored learner — ACCEPT WITH REVISIONS (bordering dissent)
+- **Rule 6 in letter.** CLAUDE.md sizing rule 2 lists "verified planners" as competent assets, and rule 6 prefers corrections from competent frozen policies. An ordinary anchor with a zero-init KEEP/GO deviation head fits the wording. In substance it is fit ten with a new head: the same b02c macro recipe (lr 1e-4, shared r/6, 45 updates) failed on Discrete(6) even with a .34 floor gap (NOTES 1302–1317).
+- **Base rate for an anchored discrete head is non-activation.** `uav_joint_transition`'s learner chose D at all 800 evaluation clocks, and all 26 common L/R arrays matched byte for byte (RESEARCH.md:1169). `uav_cooperative_planning` learned-over-planner at the same clock scored L−P −.016 (RESEARCH.md:1180). `uav_transit_handoff` declined the same residual-over-ordinary design (RESEARCH.md:1181).
+- **Information rights are unfixed.** The rules are "all with full information" (NOTES 1352). The macro recipe's per-UAV observations are min_sinr-limited (uav_env.py 598–612). Either the learner sees less than its comparator, or it sees global state and the oracle in item 2 dominates it with nil adoption value. The declaration must pick one.
+- **The .03 margin is not readable as learning.** The three-seed sample SD is .052 SET (NOTES 972), larger than .03, and no macro-interface seed SD exists. So "≥ best + .03 → first learned timing gain; K-line host found" (NOTES 1353) overclaims. It reads only as "this instance exceeded"; any K-line investment needs replication first.
+- **Revisions:**
+  - Declare the fit only if oracle − best ≥ .05 on the post-event scale, and only after `uav_availability_recovery` B01 is read (the closest live prior, due within hours). This does not block the zero-fit work.
+  - Declare a non-activation band (learner ≡ anchor on ≥ 95% of decisions).
+  - Use single-instance wording.
+
+## 4. Strongest simpler alternative; ranking of R2 and R3 — ACCEPT WITH REVISIONS
+- **R1-lite.** Put the event hook in the subclass `step()`. The `correction` callable must not touch the env (planner.py 910–913), so it cannot carry the event. Then run KEEP / cold SET-now / warm SET / departure-subset oracle on 32 dev worlds, post-event primary: about 3–4 h engineering and < .5 CPU-h. This is the cheapest refuting run under sizing rule 1. Build HYST, SET-sync, the clocks, readers and tests only if warm SET − KEEP ≥ .02 and oracle − best is non-trivial. A no-run outcome ("second slot unresolved") remains valid.
+- **R2 below R1-lite is correct.** It is a recipe repair, and the owner excluded diagnosis successors. The evidence also undercuts λ_l as the single cause: SET-V-b removed the entropy blow-up and stayed flat (NOTES 1022), and SET-slot's entropy fell 1.75 → 1.52 with no learning (NOTES 1315).
+- **R3.** It needs no host exception and addresses the information structure that makes the problem multi-agent, but it has the weak-baseline trap and still needs the learner fork. Rank 3 is acceptable.
+
+## 5. TRIED/RECORDED/NEW labels — ACCEPT WITH REVISIONS
+- **The learner head is TRIED, not RECORDED.**
+  - R30 KEEP/SET was implemented and run: "R30 supplies asynchronous KEEP/SET lifetimes" (docs/research/decisions/R29_R31_EFFECT_REWARD_FAILURE_REVIEW_20260714.md:25). Its design already had no entropy on KEEP/SWITCH and a keep prior of .6 (DISPOSITION.md, "conditional switch-skill entropy … no entropy bonus is applied to KEEP/SWITCH", "p_keep=0.6").
+  - JDSL cap-10 and FSD B07 (k = 1 vs 10, no change) are TRIED untied-K learners (MEMO_ROUND3:28).
+- **Missed ancestors:**
+  - `uav_availability_recovery` (RESEARCH.md:1166; live; same event-driven joint-re-deployment-vs-ordinary-reassignment object). One SCOPE note to Root is owed.
+  - S4 availability B02, where removing replanning lag gave QoS −.013172 (uav_availability_recovery/NOTES.md ≈ 38–40).
+  - VNFC N7 B01, where learned arms were below BCRH (same NOTES).
+  - `uav_cooperative_planning` B02, `uav_transit_handoff` (RESEARCH.md:1180–1181).
+  - H_central's own replan-30 / hysteresis-300 on moving users (RESEARCH.md:1183).
+- **Correct as cited:** the memo's `uav_joint_transition` distinction and its C14 note that "not opened" is the round-3 memo's inference only.
+- **The new instance** is a zero-fit timing stake on a relay-chain host.
+
+## 6. Cost and process — MATERIAL DISSENT, same object as item 2
+- 10–14 h of engineering plus a separate rule-3 Pro review for a zero-fit study whose modal outcome is "reference only" is out of proportion under sizing rules 1 and 3. Codex's comparable ordinary package was 0 fits and about 3 CPU-h.
+- **Cut:** SET-sync, HYST, the k-clocks, the full reader and test suite until R1-lite conditions hold.
+- **Fold** the rule-3 host-variant review into the round-boundary Pro send already due after D2 went to reserve (sizing rule 3). Do not add a second send.
+
+## 7. The [DECIDE] items — ACCEPT WITH REVISIONS
+- **A** is not an owner fork. It is a DM rule-2 judgment plus the rule-3 Pro review; record it as a DM decision.
+- **B** is already answered by the owner's "no diagnosis successor"; default no is correct and it should not be re-put.
+- **C** is a Root-row matter (RESEARCH.md:1168, "next investment belongs to Root's loop"); default no is correct, and it is a peer message if ever opened.
+- None of the three blocks work.
+
+## Recommendation
+**Revise, not stop.** Execute R1-lite: the warm re-plan and the departure-subset oracle are the competent comparators, and the post-event window is primary. Hold the learner until oracle − best is measured and the Codex availability B01 is read. Folding the Pro review into the round-boundary send and fixing information rights are the other revisions in items 3 and 6.
+
+Outcomes of R1-lite and what each changes:
+- warm SET − KEEP < .02: the timing object has no stake on this host, C4 stays blocked and the slot stays open.
+- warm SET − KEEP ≥ .02 with oracle − best < .03: an ordinary reference exists and the learner is closed at zero fits.
+- oracle − best ≥ .05: a declared, single-instance anchored fit becomes defensible.
+
+**Unverified:** the ≈ 1.19 km min_sinr range; ACAC/CoDe first-hand; the n_k literature deep-dive; the owner's rule-6/D1′ wording in a repository file; the `uav_availability_recovery` B01 result (still running).
+
+MATERIAL_DISSENT: yes. It concerns the executing default's zero-fit study and learner gate (best − SET-now on the all-500 mean, a cold `search_placement` at planner.py 451–500, and no oracle over the learner's action space), not R1 as a question.
