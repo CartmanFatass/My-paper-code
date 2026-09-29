@@ -1,0 +1,4135 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_replan_timing",
+  "launch_sha": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_replan_timing",
+    "sha": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+    "command_sha256": "e92f08c2e6192fe2f42137ff083ca78250dd1c0b1a3d9cdfc8784e58435a45f3",
+    "parent_pid": 3994606,
+    "child_pid": 3994627,
+    "accepted_at_epoch": 1790716541.8250062
+  },
+  "git_head": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+  "training_fits_performed": 0,
+  "worlds": [
+    2000,
+    2001,
+    2002,
+    2003,
+    2004,
+    2005,
+    2006,
+    2007,
+    2008,
+    2009,
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025,
+    2026,
+    2027,
+    2028,
+    2029,
+    2030,
+    2031
+  ],
+  "area_size": 5000,
+  "budget": 3000,
+  "event_law": {
+    "rng": "numpy.random.default_rng([world, 3])",
+    "draw_order": [
+      "t_e = rng.integers(150, 351)",
+      "cluster = rng.integers(0, 5)",
+      "centre = rng.uniform(0, area, 2)",
+      "per member j in index order: clip(centre + rng.normal(0, area/10, 2), 0, area)"
+    ],
+    "timing": "applied inside step() of the call with current_step == t_e, before that call's actions; series index t_e is the first post-event value; every rule reacts from its decision for step t_e (full information)"
+  },
+  "rng_derivations": {
+    "planner": "numpy.random.default_rng(world), fresh instance per search (D2 run_gate rule), for the pre-event, cold and seeded searches",
+    "event": "numpy.random.default_rng([world, 3])"
+  },
+  "windows": {
+    "pre_event": "series indices 0..t_e-1",
+    "post_event": "series indices t_e..499 (primary)",
+    "all": "0..499",
+    "cross_world": "per-world window means first, then equal-weight means across worlds; paired SDs over per-world differences"
+  },
+  "arguments": [
+    "--worlds",
+    "2000-2031",
+    "--launch-sha",
+    "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_holdout_a01"
+  ],
+  "interpreter": {
+    "executable": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "python": "3.10.20",
+    "numpy": "1.26.3",
+    "host": "Jacob"
+  },
+  "tool": "coupled_host_replan_timing.run_r1lite",
+  "rules": [
+    "keep",
+    "cold",
+    "warm",
+    "seeded"
+  ],
+  "definitions": {
+    "S_switch": "warm - keep (post-event C_bh, per world, then paired across worlds)",
+    "S_cold": "warm - cold (post-event C_bh, per world, then paired across worlds)",
+    "transition_loss_steps": "post-event steps with C_bh below the world's pre-event mean",
+    "arrival_step": "first step >= t_e at which every UAV sat on the rule's final targets",
+    "S_seeded": "seeded - keep (post-event C_bh, per world, then paired across worlds)",
+    "warm": "held re-placement only (non-movable UAVs keep their targets); empty movable set -> single-UAV fallback at 500 evaluations per candidate, adopted only above the held layout's static reward, else warm == KEEP",
+    "seeded": "cold relay search seeded with the pre-event sites; all UAVs may move"
+  },
+  "per_world": [
+    {
+      "world": 2000,
+      "t_e": 266,
+      "cluster": 2,
+      "routing_class": "direct",
+      "chain_served": false,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.8166917293233084,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.8,
+          "all_mean": 0.8088800000000002,
+          "pre_event_mean": 0.8166917293233084,
+          "transition_loss_steps": 234,
+          "arrival_step": 266
+        },
+        "cold": {
+          "post_event_mean": 0.8035042735042737,
+          "all_mean": 0.8105200000000002,
+          "pre_event_mean": 0.8166917293233084,
+          "transition_loss_steps": 48,
+          "arrival_step": 320
+        },
+        "warm": {
+          "post_event_mean": 0.8,
+          "all_mean": 0.8088800000000002,
+          "pre_event_mean": 0.8166917293233084,
+          "transition_loss_steps": 234,
+          "arrival_step": 266
+        },
+        "seeded": {
+          "post_event_mean": 0.8035042735042737,
+          "all_mean": 0.8105200000000002,
+          "pre_event_mean": 0.8166917293233084,
+          "transition_loss_steps": 48,
+          "arrival_step": 320
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": -0.003504273504273625,
+        "S_seeded": 0.003504273504273625
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.502205872995546,
+          "cpu_s": 1.5067530000000002
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.37858755298657343,
+          "cpu_s": 0.3776510000000002
+        },
+        "keep": {
+          "wall_s": 0.36858151701744646,
+          "cpu_s": 0.36770299999999967
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8586951939796563,
+          "cpu_s": 0.8568029999999998
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.3321697189821862,
+            "cpu_s": 1.3276589999999993
+          },
+          "rollout": {
+            "wall_s": 0.3692367179901339,
+            "cpu_s": 0.3686290000000012
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.03934599700733088,
+            "cpu_s": 0.03701600000000038
+          },
+          "rollout": {
+            "wall_s": 0.3930291760188993,
+            "cpu_s": 0.3936869999999999
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.7638212610036135,
+            "cpu_s": 0.7694320000000001
+          },
+          "rollout": {
+            "wall_s": 0.33800436797901057,
+            "cpu_s": 0.3424959999999997
+          }
+        },
+        "world_total": {
+          "wall_s": 6.35958409900195,
+          "cpu_s": 6.363595
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          1
+        ],
+        "warm_equals_keep": true,
+        "warm_equals_keep_reason": "the re-placement kept every movable row",
+        "evaluations": 48
+      }
+    },
+    {
+      "world": 2001,
+      "t_e": 218,
+      "cluster": 0,
+      "routing_class": "direct",
+      "chain_served": false,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.762935779816514,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.84,
+          "all_mean": 0.8064000000000001,
+          "pre_event_mean": 0.762935779816514,
+          "transition_loss_steps": 0,
+          "arrival_step": 218
+        },
+        "cold": {
+          "post_event_mean": 0.7441134751773051,
+          "all_mean": 0.7523200000000001,
+          "pre_event_mean": 0.762935779816514,
+          "transition_loss_steps": 54,
+          "arrival_step": 309
+        },
+        "warm": {
+          "post_event_mean": 0.84,
+          "all_mean": 0.8064000000000001,
+          "pre_event_mean": 0.762935779816514,
+          "transition_loss_steps": 0,
+          "arrival_step": 218
+        },
+        "seeded": {
+          "post_event_mean": 0.84,
+          "all_mean": 0.8064000000000001,
+          "pre_event_mean": 0.762935779816514,
+          "transition_loss_steps": 0,
+          "arrival_step": 232
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": 0.09588652482269489,
+        "S_seeded": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.1757581290148664,
+          "cpu_s": 1.1914970000000018
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3319556200003717,
+          "cpu_s": 0.33645999999999887
+        },
+        "keep": {
+          "wall_s": 0.40462624200154096,
+          "cpu_s": 0.4077590000000004
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7590239109995309,
+          "cpu_s": 0.7583590000000004
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.215766462002648,
+            "cpu_s": 1.2138270000000002
+          },
+          "rollout": {
+            "wall_s": 0.3535835689981468,
+            "cpu_s": 0.3531119999999994
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.021890651987632737,
+            "cpu_s": 0.021897000000000943
+          },
+          "rollout": {
+            "wall_s": 0.34405099297873676,
+            "cpu_s": 0.3435410000000001
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.5050743000174407,
+            "cpu_s": 0.504391
+          },
+          "rollout": {
+            "wall_s": 0.351053858990781,
+            "cpu_s": 0.3508589999999998
+          }
+        },
+        "world_total": {
+          "wall_s": 5.481016406993149,
+          "cpu_s": 5.499912
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          3
+        ],
+        "warm_equals_keep": true,
+        "warm_equals_keep_reason": "the re-placement kept every movable row",
+        "evaluations": 43
+      }
+    },
+    {
+      "world": 2002,
+      "t_e": 310,
+      "cluster": 3,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.8392258064516129,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7199999999999998,
+          "all_mean": 0.7939200000000001,
+          "pre_event_mean": 0.8392258064516129,
+          "transition_loss_steps": 190,
+          "arrival_step": 310
+        },
+        "cold": {
+          "post_event_mean": 0.7218947368421051,
+          "all_mean": 0.79464,
+          "pre_event_mean": 0.8392258064516129,
+          "transition_loss_steps": 190,
+          "arrival_step": 395
+        },
+        "warm": {
+          "post_event_mean": 0.7199999999999998,
+          "all_mean": 0.7939200000000001,
+          "pre_event_mean": 0.8392258064516129,
+          "transition_loss_steps": 190,
+          "arrival_step": 310
+        },
+        "seeded": {
+          "post_event_mean": 0.7218947368421051,
+          "all_mean": 0.79464,
+          "pre_event_mean": 0.8392258064516129,
+          "transition_loss_steps": 190,
+          "arrival_step": 395
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": -0.0018947368421053934,
+        "S_seeded": 0.0018947368421053934
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.1255263539787848,
+          "cpu_s": 1.1243409999999994
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.37312296402524225,
+          "cpu_s": 0.374428
+        },
+        "keep": {
+          "wall_s": 0.24378089400124736,
+          "cpu_s": 0.24582900000000052
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.6542946559784468,
+          "cpu_s": 0.6596309999999992
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.1041998880100437,
+            "cpu_s": 1.1135439999999956
+          },
+          "rollout": {
+            "wall_s": 0.22945331601658836,
+            "cpu_s": 0.23136900000000082
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.0302447380090598,
+            "cpu_s": 0.03051800000000071
+          },
+          "rollout": {
+            "wall_s": 0.21574874999350868,
+            "cpu_s": 0.2175869999999982
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.60002483901917,
+            "cpu_s": 0.604924000000004
+          },
+          "rollout": {
+            "wall_s": 0.22808049101149663,
+            "cpu_s": 0.22981300000000005
+          }
+        },
+        "world_total": {
+          "wall_s": 4.818636462994618,
+          "cpu_s": 4.846019999999999
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          3
+        ],
+        "warm_equals_keep": true,
+        "warm_equals_keep_reason": "the re-placement kept every movable row",
+        "evaluations": 60
+      }
+    },
+    {
+      "world": 2003,
+      "t_e": 183,
+      "cluster": 4,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": true,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.6549726775956283,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7800000000000001,
+          "all_mean": 0.73424,
+          "pre_event_mean": 0.6549726775956283,
+          "transition_loss_steps": 0,
+          "arrival_step": 183
+        },
+        "cold": {
+          "post_event_mean": 0.7822082018927446,
+          "all_mean": 0.73564,
+          "pre_event_mean": 0.6549726775956283,
+          "transition_loss_steps": 0,
+          "arrival_step": 227
+        },
+        "warm": {
+          "post_event_mean": 0.79596214511041,
+          "all_mean": 0.7443599999999999,
+          "pre_event_mean": 0.6549726775956283,
+          "transition_loss_steps": 0,
+          "arrival_step": 264
+        },
+        "seeded": {
+          "post_event_mean": 0.7822082018927446,
+          "all_mean": 0.73564,
+          "pre_event_mean": 0.6549726775956283,
+          "transition_loss_steps": 0,
+          "arrival_step": 227
+        }
+      },
+      "stakes": {
+        "S_switch": 0.01596214511040983,
+        "S_cold": 0.013753943217665321,
+        "S_seeded": 0.00220820189274451
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 0.9399631400010549,
+          "cpu_s": 0.9427340000000015
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.24188270600279793,
+          "cpu_s": 0.24183299999999974
+        },
+        "keep": {
+          "wall_s": 0.3723713769868482,
+          "cpu_s": 0.37233600000000067
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.633993378985906,
+          "cpu_s": 0.6337989999999998
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 0.9524727999814786,
+            "cpu_s": 0.952332000000002
+          },
+          "rollout": {
+            "wall_s": 0.40846645800047554,
+            "cpu_s": 0.40842099999999704
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.02870494101080112,
+            "cpu_s": 0.02868700000000146
+          },
+          "rollout": {
+            "wall_s": 0.4433082299947273,
+            "cpu_s": 0.44329600000000013
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.5542225250101183,
+            "cpu_s": 0.5543689999999977
+          },
+          "rollout": {
+            "wall_s": 0.4036213189829141,
+            "cpu_s": 0.4051679999999962
+          }
+        },
+        "world_total": {
+          "wall_s": 4.993273144005798,
+          "cpu_s": 4.997066
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          2
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 43
+      }
+    },
+    {
+      "world": 2004,
+      "t_e": 184,
+      "cluster": 1,
+      "routing_class": "direct",
+      "chain_served": false,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.6593478260869563,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.8200000000000001,
+          "all_mean": 0.7608800000000001,
+          "pre_event_mean": 0.6593478260869563,
+          "transition_loss_steps": 0,
+          "arrival_step": 184
+        },
+        "cold": {
+          "post_event_mean": 0.8262658227848102,
+          "all_mean": 0.76484,
+          "pre_event_mean": 0.6593478260869563,
+          "transition_loss_steps": 8,
+          "arrival_step": 197
+        },
+        "warm": {
+          "post_event_mean": 0.8200000000000001,
+          "all_mean": 0.7608800000000001,
+          "pre_event_mean": 0.6593478260869563,
+          "transition_loss_steps": 0,
+          "arrival_step": 185
+        },
+        "seeded": {
+          "post_event_mean": 0.8262658227848102,
+          "all_mean": 0.76484,
+          "pre_event_mean": 0.6593478260869563,
+          "transition_loss_steps": 8,
+          "arrival_step": 197
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": -0.006265822784810138,
+        "S_seeded": 0.006265822784810138
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.2930606629815884,
+          "cpu_s": 1.298444
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.21643875900190324,
+          "cpu_s": 0.21738699999999866
+        },
+        "keep": {
+          "wall_s": 0.36835176800377667,
+          "cpu_s": 0.3699469999999998
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.5944542100187391,
+          "cpu_s": 0.5970340000000007
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.3744504659844097,
+            "cpu_s": 1.3800600000000003
+          },
+          "rollout": {
+            "wall_s": 0.4944472089991905,
+            "cpu_s": 0.4964439999999968
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.034334875002969056,
+            "cpu_s": 0.03451700000000102
+          },
+          "rollout": {
+            "wall_s": 0.4468565260176547,
+            "cpu_s": 0.4488090000000007
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.7406700579740573,
+            "cpu_s": 0.7438020000000023
+          },
+          "rollout": {
+            "wall_s": 0.4261621090117842,
+            "cpu_s": 0.4276319999999991
+          }
+        },
+        "world_total": {
+          "wall_s": 6.0019873609999195,
+          "cpu_s": 6.026692000000001
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          5
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 53
+      }
+    },
+    {
+      "world": 2005,
+      "t_e": 272,
+      "cluster": 0,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": true,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.7504411764705884,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.8200000000000001,
+          "all_mean": 0.7821600000000001,
+          "pre_event_mean": 0.7504411764705884,
+          "transition_loss_steps": 0,
+          "arrival_step": 272
+        },
+        "cold": {
+          "post_event_mean": 0.9490350877192986,
+          "all_mean": 0.8410000000000002,
+          "pre_event_mean": 0.7504411764705884,
+          "transition_loss_steps": 14,
+          "arrival_step": 322
+        },
+        "warm": {
+          "post_event_mean": 0.880701754385965,
+          "all_mean": 0.8098400000000001,
+          "pre_event_mean": 0.7504411764705884,
+          "transition_loss_steps": 0,
+          "arrival_step": 425
+        },
+        "seeded": {
+          "post_event_mean": 0.9490350877192986,
+          "all_mean": 0.8410000000000002,
+          "pre_event_mean": 0.7504411764705884,
+          "transition_loss_steps": 14,
+          "arrival_step": 322
+        }
+      },
+      "stakes": {
+        "S_switch": 0.06070175438596492,
+        "S_cold": -0.06833333333333358,
+        "S_seeded": 0.1290350877192985
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.1366529380029533,
+          "cpu_s": 1.1362710000000007
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.4143888629914727,
+          "cpu_s": 0.41443800000000053
+        },
+        "keep": {
+          "wall_s": 0.3580807510006707,
+          "cpu_s": 0.3582339999999995
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.859089950012276,
+          "cpu_s": 0.8552709999999983
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.3948398930078838,
+            "cpu_s": 1.3953850000000045
+          },
+          "rollout": {
+            "wall_s": 0.3216648810193874,
+            "cpu_s": 0.32180100000000067
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.05142598002566956,
+            "cpu_s": 0.05146799999999985
+          },
+          "rollout": {
+            "wall_s": 0.32758936600293964,
+            "cpu_s": 0.32772800000000046
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.9852756469917949,
+            "cpu_s": 0.9856839999999991
+          },
+          "rollout": {
+            "wall_s": 0.3955444510211237,
+            "cpu_s": 0.3957279999999983
+          }
+        },
+        "world_total": {
+          "wall_s": 6.259345444996143,
+          "cpu_s": 6.256618000000003
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          0
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 83
+      }
+    },
+    {
+      "world": 2006,
+      "t_e": 323,
+      "cluster": 0,
+      "routing_class": "direct",
+      "chain_served": false,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.8562229102167185,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7800000000000001,
+          "all_mean": 0.82924,
+          "pre_event_mean": 0.8562229102167185,
+          "transition_loss_steps": 177,
+          "arrival_step": 323
+        },
+        "cold": {
+          "post_event_mean": 0.8663276836158194,
+          "all_mean": 0.8598000000000001,
+          "pre_event_mean": 0.8562229102167185,
+          "transition_loss_steps": 58,
+          "arrival_step": 392
+        },
+        "warm": {
+          "post_event_mean": 0.8882485875706213,
+          "all_mean": 0.86756,
+          "pre_event_mean": 0.8562229102167185,
+          "transition_loss_steps": 49,
+          "arrival_step": 418
+        },
+        "seeded": {
+          "post_event_mean": 0.8663276836158194,
+          "all_mean": 0.8598000000000001,
+          "pre_event_mean": 0.8562229102167185,
+          "transition_loss_steps": 58,
+          "arrival_step": 392
+        }
+      },
+      "stakes": {
+        "S_switch": 0.10824858757062117,
+        "S_cold": 0.02192090395480195,
+        "S_seeded": 0.08632768361581922
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.1493061250075698,
+          "cpu_s": 1.1497770000000003
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.5439980929950252,
+          "cpu_s": 0.5442529999999977
+        },
+        "keep": {
+          "wall_s": 0.26032895100070164,
+          "cpu_s": 0.26046300000000144
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7110900499974377,
+          "cpu_s": 0.7113849999999999
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.306882754986873,
+            "cpu_s": 1.278255999999999
+          },
+          "rollout": {
+            "wall_s": 0.2764347759948578,
+            "cpu_s": 0.26504400000000317
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.06146170702413656,
+            "cpu_s": 0.058942000000001826
+          },
+          "rollout": {
+            "wall_s": 0.26138718699803576,
+            "cpu_s": 0.25060200000000066
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.7004015569982585,
+            "cpu_s": 0.6954350000000034
+          },
+          "rollout": {
+            "wall_s": 0.2613309420121368,
+            "cpu_s": 0.2613860000000017
+          }
+        },
+        "world_total": {
+          "wall_s": 5.549795401020674,
+          "cpu_s": 5.492545
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          3
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 83
+      }
+    },
+    {
+      "world": 2007,
+      "t_e": 203,
+      "cluster": 3,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.8001970443349756,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7400000000000001,
+          "all_mean": 0.7644400000000001,
+          "pre_event_mean": 0.8001970443349756,
+          "transition_loss_steps": 297,
+          "arrival_step": 203
+        },
+        "cold": {
+          "post_event_mean": 0.8460606060606057,
+          "all_mean": 0.82744,
+          "pre_event_mean": 0.8001970443349756,
+          "transition_loss_steps": 59,
+          "arrival_step": 270
+        },
+        "warm": {
+          "post_event_mean": 0.7400000000000001,
+          "all_mean": 0.7644400000000001,
+          "pre_event_mean": 0.8001970443349756,
+          "transition_loss_steps": 297,
+          "arrival_step": 222
+        },
+        "seeded": {
+          "post_event_mean": 0.8460606060606057,
+          "all_mean": 0.82744,
+          "pre_event_mean": 0.8001970443349756,
+          "transition_loss_steps": 59,
+          "arrival_step": 270
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": -0.10606060606060563,
+        "S_seeded": 0.10606060606060563
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.30407916099648,
+          "cpu_s": 1.304271
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3359714299731422,
+          "cpu_s": 0.33603899999999953
+        },
+        "keep": {
+          "wall_s": 0.4799570949980989,
+          "cpu_s": 0.48005000000000564
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.9721611270215362,
+          "cpu_s": 0.9723020000000062
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.544273480976699,
+            "cpu_s": 1.5445080000000004
+          },
+          "rollout": {
+            "wall_s": 0.44242555400705896,
+            "cpu_s": 0.44249500000000097
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.05509910700493492,
+            "cpu_s": 0.055128000000003397
+          },
+          "rollout": {
+            "wall_s": 0.4710523249814287,
+            "cpu_s": 0.47113499999999675
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.9694239009986632,
+            "cpu_s": 0.9684640000000044
+          },
+          "rollout": {
+            "wall_s": 0.43673541900352575,
+            "cpu_s": 0.4362470000000016
+          }
+        },
+        "world_total": {
+          "wall_s": 7.032493593986146,
+          "cpu_s": 7.031743000000006
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          2
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 88
+      }
+    },
+    {
+      "world": 2008,
+      "t_e": 340,
+      "cluster": 1,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": true,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.8148235294117647,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7599999999999999,
+          "all_mean": 0.79728,
+          "pre_event_mean": 0.8148235294117647,
+          "transition_loss_steps": 160,
+          "arrival_step": 340
+        },
+        "cold": {
+          "post_event_mean": 0.7055000000000001,
+          "all_mean": 0.77984,
+          "pre_event_mean": 0.8148235294117647,
+          "transition_loss_steps": 160,
+          "arrival_step": 400
+        },
+        "warm": {
+          "post_event_mean": 0.8327500000000001,
+          "all_mean": 0.82056,
+          "pre_event_mean": 0.8148235294117647,
+          "transition_loss_steps": 19,
+          "arrival_step": 398
+        },
+        "seeded": {
+          "post_event_mean": 0.806,
+          "all_mean": 0.812,
+          "pre_event_mean": 0.8148235294117647,
+          "transition_loss_steps": 44,
+          "arrival_step": 392
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0727500000000002,
+        "S_cold": 0.12724999999999997,
+        "S_seeded": 0.04600000000000015
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.2606879980012309,
+          "cpu_s": 1.2592039999999969
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.6487520119990222,
+          "cpu_s": 0.6479929999999996
+        },
+        "keep": {
+          "wall_s": 0.28331672900822014,
+          "cpu_s": 0.2830289999999991
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8181715139944572,
+          "cpu_s": 0.8175619999999952
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.3508568130200729,
+            "cpu_s": 1.3510080000000002
+          },
+          "rollout": {
+            "wall_s": 0.27741248899837956,
+            "cpu_s": 0.2735089999999971
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.28668081702198833,
+            "cpu_s": 0.2794319999999999
+          },
+          "rollout": {
+            "wall_s": 0.2906539099931251,
+            "cpu_s": 0.2833080000000052
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.7994663809949998,
+            "cpu_s": 0.7807910000000007
+          },
+          "rollout": {
+            "wall_s": 0.3125253780162893,
+            "cpu_s": 0.305613000000001
+          }
+        },
+        "world_total": {
+          "wall_s": 6.349170505010989,
+          "cpu_s": 6.301774000000002
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          1,
+          5
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 347
+      }
+    },
+    {
+      "world": 2009,
+      "t_e": 267,
+      "cluster": 2,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.5743071161048691,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.78,
+          "all_mean": 0.6701600000000001,
+          "pre_event_mean": 0.5743071161048691,
+          "transition_loss_steps": 0,
+          "arrival_step": 267
+        },
+        "cold": {
+          "post_event_mean": 0.7170815450643778,
+          "all_mean": 0.6408400000000001,
+          "pre_event_mean": 0.5743071161048691,
+          "transition_loss_steps": 51,
+          "arrival_step": 352
+        },
+        "warm": {
+          "post_event_mean": 0.850472103004292,
+          "all_mean": 0.703,
+          "pre_event_mean": 0.5743071161048691,
+          "transition_loss_steps": 0,
+          "arrival_step": 400
+        },
+        "seeded": {
+          "post_event_mean": 0.7170815450643778,
+          "all_mean": 0.6408400000000001,
+          "pre_event_mean": 0.5743071161048691,
+          "transition_loss_steps": 51,
+          "arrival_step": 352
+        }
+      },
+      "stakes": {
+        "S_switch": 0.07047210300429196,
+        "S_cold": 0.13339055793991417,
+        "S_seeded": -0.0629184549356222
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.2743618529930245,
+          "cpu_s": 1.2491619999999983
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3611220069869887,
+          "cpu_s": 0.3548589999999976
+        },
+        "keep": {
+          "wall_s": 0.3222277140012011,
+          "cpu_s": 0.3166569999999993
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7579932220105547,
+          "cpu_s": 0.7431679999999972
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.0826212689862587,
+            "cpu_s": 1.0673770000000005
+          },
+          "rollout": {
+            "wall_s": 0.30986309100990184,
+            "cpu_s": 0.3057330000000036
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.060296402021776885,
+            "cpu_s": 0.059558000000002664
+          },
+          "rollout": {
+            "wall_s": 0.3236472500138916,
+            "cpu_s": 0.31986599999999754
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.6118429390189704,
+            "cpu_s": 0.6046830000000014
+          },
+          "rollout": {
+            "wall_s": 0.324077996017877,
+            "cpu_s": 0.32069699999999557
+          }
+        },
+        "world_total": {
+          "wall_s": 5.444909145007841,
+          "cpu_s": 5.358096000000003
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          3
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 83
+      }
+    },
+    {
+      "world": 2010,
+      "t_e": 271,
+      "cluster": 0,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.6682656826568266,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.64,
+          "all_mean": 0.6553199999999999,
+          "pre_event_mean": 0.6682656826568266,
+          "transition_loss_steps": 229,
+          "arrival_step": 271
+        },
+        "cold": {
+          "post_event_mean": 0.733711790393013,
+          "all_mean": 0.69824,
+          "pre_event_mean": 0.6682656826568266,
+          "transition_loss_steps": 35,
+          "arrival_step": 334
+        },
+        "warm": {
+          "post_event_mean": 0.7384279475982533,
+          "all_mean": 0.7003999999999999,
+          "pre_event_mean": 0.6682656826568266,
+          "transition_loss_steps": 76,
+          "arrival_step": 396
+        },
+        "seeded": {
+          "post_event_mean": 0.733711790393013,
+          "all_mean": 0.69824,
+          "pre_event_mean": 0.6682656826568266,
+          "transition_loss_steps": 35,
+          "arrival_step": 334
+        }
+      },
+      "stakes": {
+        "S_switch": 0.09842794759825324,
+        "S_cold": 0.004716157205240212,
+        "S_seeded": 0.09371179039301303
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.2636117590009235,
+          "cpu_s": 1.251337999999997
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3135662229906302,
+          "cpu_s": 0.310766000000001
+        },
+        "keep": {
+          "wall_s": 0.2910675680032,
+          "cpu_s": 0.2886390000000034
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.6923708610120229,
+          "cpu_s": 0.6869950000000031
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.0028103269869462,
+            "cpu_s": 1.0097049999999967
+          },
+          "rollout": {
+            "wall_s": 0.3100568460067734,
+            "cpu_s": 0.3147519999999986
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.043979020992992446,
+            "cpu_s": 0.04467999999999961
+          },
+          "rollout": {
+            "wall_s": 0.31781571998726577,
+            "cpu_s": 0.3227540000000033
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.6692683779983781,
+            "cpu_s": 0.6798159999999953
+          },
+          "rollout": {
+            "wall_s": 0.2955559320107568,
+            "cpu_s": 0.30038599999998894
+          }
+        },
+        "world_total": {
+          "wall_s": 5.215508097986458,
+          "cpu_s": 5.225007999999974
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          5
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 78
+      }
+    },
+    {
+      "world": 2011,
+      "t_e": 299,
+      "cluster": 0,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.7517725752508364,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.9000000000000001,
+          "all_mean": 0.8113600000000001,
+          "pre_event_mean": 0.7517725752508364,
+          "transition_loss_steps": 0,
+          "arrival_step": 299
+        },
+        "cold": {
+          "post_event_mean": 0.9399004975124379,
+          "all_mean": 0.8274000000000002,
+          "pre_event_mean": 0.7517725752508364,
+          "transition_loss_steps": 7,
+          "arrival_step": 326
+        },
+        "warm": {
+          "post_event_mean": 0.9000000000000001,
+          "all_mean": 0.8113600000000001,
+          "pre_event_mean": 0.7517725752508364,
+          "transition_loss_steps": 0,
+          "arrival_step": 318
+        },
+        "seeded": {
+          "post_event_mean": 0.921791044776119,
+          "all_mean": 0.82012,
+          "pre_event_mean": 0.7517725752508364,
+          "transition_loss_steps": 12,
+          "arrival_step": 322
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": -0.03990049751243774,
+        "S_seeded": 0.021791044776118818
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.1050841440155637,
+          "cpu_s": 1.1234999999999928
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.430567853996763,
+          "cpu_s": 0.43792200000000037
+        },
+        "keep": {
+          "wall_s": 0.3780537739803549,
+          "cpu_s": 0.3774310000000014
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8648002799891401,
+          "cpu_s": 0.8616489999999999
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.3306830810033716,
+            "cpu_s": 1.3265320000000003
+          },
+          "rollout": {
+            "wall_s": 0.3252706970088184,
+            "cpu_s": 0.3243480000000005
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.06128330802312121,
+            "cpu_s": 0.06113799999999969
+          },
+          "rollout": {
+            "wall_s": 0.33352761098649353,
+            "cpu_s": 0.3326879999999903
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.7908296230016276,
+            "cpu_s": 0.7889040000000023
+          },
+          "rollout": {
+            "wall_s": 0.3204030290071387,
+            "cpu_s": 0.32535400000000436
+          }
+        },
+        "world_total": {
+          "wall_s": 5.9555758839997,
+          "cpu_s": 5.974588000000011
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          4
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 83
+      }
+    },
+    {
+      "world": 2012,
+      "t_e": 273,
+      "cluster": 3,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.5434432234432234,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.42000000000000004,
+          "all_mean": 0.48739999999999994,
+          "pre_event_mean": 0.5434432234432234,
+          "transition_loss_steps": 227,
+          "arrival_step": 273
+        },
+        "cold": {
+          "post_event_mean": 0.6884581497797357,
+          "all_mean": 0.6092799999999998,
+          "pre_event_mean": 0.5434432234432234,
+          "transition_loss_steps": 63,
+          "arrival_step": 368
+        },
+        "warm": {
+          "post_event_mean": 0.6725991189427313,
+          "all_mean": 0.60208,
+          "pre_event_mean": 0.5434432234432234,
+          "transition_loss_steps": 57,
+          "arrival_step": 366
+        },
+        "seeded": {
+          "post_event_mean": 0.6884581497797357,
+          "all_mean": 0.6092799999999998,
+          "pre_event_mean": 0.5434432234432234,
+          "transition_loss_steps": 63,
+          "arrival_step": 368
+        }
+      },
+      "stakes": {
+        "S_switch": 0.25259911894273124,
+        "S_cold": -0.015859030837004462,
+        "S_seeded": 0.2684581497797357
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.572390365996398,
+          "cpu_s": 1.607883000000001
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.42534103099023923,
+          "cpu_s": 0.43512400000000184
+        },
+        "keep": {
+          "wall_s": 0.38044882999383844,
+          "cpu_s": 0.3892019999999974
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8469894349982496,
+          "cpu_s": 0.8665770000000066
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.5818181170034222,
+            "cpu_s": 1.5800749999999937
+          },
+          "rollout": {
+            "wall_s": 0.4053564039932098,
+            "cpu_s": 0.404956999999996
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.22621885599801317,
+            "cpu_s": 0.22600999999998805
+          },
+          "rollout": {
+            "wall_s": 0.41489573699072935,
+            "cpu_s": 0.41450500000000545
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.8039502250030637,
+            "cpu_s": 0.8032930000000107
+          },
+          "rollout": {
+            "wall_s": 0.3561289999925066,
+            "cpu_s": 0.35588600000001236
+          }
+        },
+        "world_total": {
+          "wall_s": 7.034842471010052,
+          "cpu_s": 7.104984999999999
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          1,
+          4
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 300
+      }
+    },
+    {
+      "world": 2013,
+      "t_e": 234,
+      "cluster": 4,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": true,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.7284615384615386,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.62,
+          "all_mean": 0.67076,
+          "pre_event_mean": 0.7284615384615386,
+          "transition_loss_steps": 266,
+          "arrival_step": 234
+        },
+        "cold": {
+          "post_event_mean": 0.7701503759398497,
+          "all_mean": 0.7506400000000001,
+          "pre_event_mean": 0.7284615384615386,
+          "transition_loss_steps": 74,
+          "arrival_step": 327
+        },
+        "warm": {
+          "post_event_mean": 0.7530075187969926,
+          "all_mean": 0.74152,
+          "pre_event_mean": 0.7284615384615386,
+          "transition_loss_steps": 107,
+          "arrival_step": 404
+        },
+        "seeded": {
+          "post_event_mean": 0.7701503759398497,
+          "all_mean": 0.7506400000000001,
+          "pre_event_mean": 0.7284615384615386,
+          "transition_loss_steps": 74,
+          "arrival_step": 327
+        }
+      },
+      "stakes": {
+        "S_switch": 0.13300751879699257,
+        "S_cold": -0.017142857142857126,
+        "S_seeded": 0.1501503759398497
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.2279437319957651,
+          "cpu_s": 1.2298430000000025
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.42523156901006587,
+          "cpu_s": 0.4273239999999987
+        },
+        "keep": {
+          "wall_s": 0.3841367199784145,
+          "cpu_s": 0.38605400000000145
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8006332280056085,
+          "cpu_s": 0.8046290000000056
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.2044332689838484,
+            "cpu_s": 1.210525000000004
+          },
+          "rollout": {
+            "wall_s": 0.4122477220080327,
+            "cpu_s": 0.41436500000000365
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.15914933898602612,
+            "cpu_s": 0.15998399999999435
+          },
+          "rollout": {
+            "wall_s": 0.4309932989999652,
+            "cpu_s": 0.4332200000000057
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.7588778100034688,
+            "cpu_s": 0.762841999999992
+          },
+          "rollout": {
+            "wall_s": 0.4662494790100027,
+            "cpu_s": 0.4687049999999999
+          }
+        },
+        "world_total": {
+          "wall_s": 6.2894321189960465,
+          "cpu_s": 6.316866999999988
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          1,
+          2
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 227
+      }
+    },
+    {
+      "world": 2014,
+      "t_e": 267,
+      "cluster": 3,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": true,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.7552808988764045,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.6199999999999999,
+          "all_mean": 0.69224,
+          "pre_event_mean": 0.7552808988764045,
+          "transition_loss_steps": 233,
+          "arrival_step": 267
+        },
+        "cold": {
+          "post_event_mean": 0.7645493562231759,
+          "all_mean": 0.7596000000000002,
+          "pre_event_mean": 0.7552808988764045,
+          "transition_loss_steps": 34,
+          "arrival_step": 322
+        },
+        "warm": {
+          "post_event_mean": 0.711931330472103,
+          "all_mean": 0.7350800000000001,
+          "pre_event_mean": 0.7552808988764045,
+          "transition_loss_steps": 92,
+          "arrival_step": 371
+        },
+        "seeded": {
+          "post_event_mean": 0.7645493562231759,
+          "all_mean": 0.7596000000000002,
+          "pre_event_mean": 0.7552808988764045,
+          "transition_loss_steps": 34,
+          "arrival_step": 322
+        }
+      },
+      "stakes": {
+        "S_switch": 0.09193133047210311,
+        "S_cold": -0.05261802575107288,
+        "S_seeded": 0.144549356223176
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.2624858579947613,
+          "cpu_s": 1.2469449999999966
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.43605414099874906,
+          "cpu_s": 0.4292289999999923
+        },
+        "keep": {
+          "wall_s": 0.40325379598652944,
+          "cpu_s": 0.3959339999999969
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.855445724009769,
+          "cpu_s": 0.8518959999999964
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.2105247619911097,
+            "cpu_s": 1.2180489999999935
+          },
+          "rollout": {
+            "wall_s": 0.3870491269917693,
+            "cpu_s": 0.39028999999999314
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.05695564899360761,
+            "cpu_s": 0.057456999999999425
+          },
+          "rollout": {
+            "wall_s": 0.3959306030010339,
+            "cpu_s": 0.3992839999999944
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.7207667419861536,
+            "cpu_s": 0.7232560000000063
+          },
+          "rollout": {
+            "wall_s": 0.41109497999423184,
+            "cpu_s": 0.40671199999999885
+          }
+        },
+        "world_total": {
+          "wall_s": 6.159782892005751,
+          "cpu_s": 6.138931999999997
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          2
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 68
+      }
+    },
+    {
+      "world": 2015,
+      "t_e": 274,
+      "cluster": 3,
+      "routing_class": "shared_only",
+      "chain_served": false,
+      "cluster_is_gate_far": true,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.6613138686131387,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.84,
+          "all_mean": 0.74208,
+          "pre_event_mean": 0.6613138686131387,
+          "transition_loss_steps": 0,
+          "arrival_step": 274
+        },
+        "cold": {
+          "post_event_mean": 0.9695575221238941,
+          "all_mean": 0.8006400000000001,
+          "pre_event_mean": 0.6613138686131387,
+          "transition_loss_steps": 0,
+          "arrival_step": 315
+        },
+        "warm": {
+          "post_event_mean": 0.9595575221238941,
+          "all_mean": 0.7961200000000002,
+          "pre_event_mean": 0.6613138686131387,
+          "transition_loss_steps": 0,
+          "arrival_step": 333
+        },
+        "seeded": {
+          "post_event_mean": 0.9695575221238941,
+          "all_mean": 0.8006400000000001,
+          "pre_event_mean": 0.6613138686131387,
+          "transition_loss_steps": 0,
+          "arrival_step": 315
+        }
+      },
+      "stakes": {
+        "S_switch": 0.11955752212389414,
+        "S_cold": -0.010000000000000009,
+        "S_seeded": 0.12955752212389415
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.4944371659948956,
+          "cpu_s": 1.4808940000000064
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.48150167998392135,
+          "cpu_s": 0.47758799999999724
+        },
+        "keep": {
+          "wall_s": 0.4228525089856703,
+          "cpu_s": 0.41977899999999124
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7576784639968537,
+          "cpu_s": 0.7523419999999987
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.2058434519858565,
+            "cpu_s": 1.1994569999999953
+          },
+          "rollout": {
+            "wall_s": 0.38192936099949293,
+            "cpu_s": 0.38483199999998874
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.1730574469838757,
+            "cpu_s": 0.17438699999999585
+          },
+          "rollout": {
+            "wall_s": 0.38837403201614507,
+            "cpu_s": 0.39144199999999785
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.8918088649807032,
+            "cpu_s": 0.8993339999999961
+          },
+          "rollout": {
+            "wall_s": 0.45896844600792974,
+            "cpu_s": 0.46308399999999494
+          }
+        },
+        "world_total": {
+          "wall_s": 6.673246161022689,
+          "cpu_s": 6.659636000000006
+        }
+      },
+      "warm": {
+        "movable_source": "fallback_single_uav",
+        "movable_uavs": [
+          5
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 217
+      }
+    },
+    {
+      "world": 2016,
+      "t_e": 228,
+      "cluster": 4,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.8105263157894738,
+      "rules": {
+        "keep": {
+          "post_event_mean": 1.0,
+          "all_mean": 0.9136,
+          "pre_event_mean": 0.8105263157894738,
+          "transition_loss_steps": 0,
+          "arrival_step": 228
+        },
+        "cold": {
+          "post_event_mean": 1.0,
+          "all_mean": 0.9136,
+          "pre_event_mean": 0.8105263157894738,
+          "transition_loss_steps": 0,
+          "arrival_step": 242
+        },
+        "warm": {
+          "post_event_mean": 1.0,
+          "all_mean": 0.9136,
+          "pre_event_mean": 0.8105263157894738,
+          "transition_loss_steps": 0,
+          "arrival_step": 229
+        },
+        "seeded": {
+          "post_event_mean": 1.0,
+          "all_mean": 0.9136,
+          "pre_event_mean": 0.8105263157894738,
+          "transition_loss_steps": 0,
+          "arrival_step": 242
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": 0.0,
+        "S_seeded": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.3872118649887852,
+          "cpu_s": 1.3941219999999959
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.35923981000087224,
+          "cpu_s": 0.3581670000000088
+        },
+        "keep": {
+          "wall_s": 0.4205440299992915,
+          "cpu_s": 0.41925000000000523
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8765363619895652,
+          "cpu_s": 0.8739149999999967
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.5103576469991822,
+            "cpu_s": 1.505708999999996
+          },
+          "rollout": {
+            "wall_s": 0.45668325800215825,
+            "cpu_s": 0.45578700000000083
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.036450118001084775,
+            "cpu_s": 0.03639799999999127
+          },
+          "rollout": {
+            "wall_s": 0.39874986800714396,
+            "cpu_s": 0.39799100000000465
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.6955826430057641,
+            "cpu_s": 0.708358000000004
+          },
+          "rollout": {
+            "wall_s": 0.43991858800291084,
+            "cpu_s": 0.45100000000002183
+          }
+        },
+        "world_total": {
+          "wall_s": 6.603301224997267,
+          "cpu_s": 6.622618000000017
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          2
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 48
+      }
+    },
+    {
+      "world": 2017,
+      "t_e": 218,
+      "cluster": 2,
+      "routing_class": "direct",
+      "chain_served": false,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.5537614678899081,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.6,
+          "all_mean": 0.5798399999999999,
+          "pre_event_mean": 0.5537614678899081,
+          "transition_loss_steps": 0,
+          "arrival_step": 218
+        },
+        "cold": {
+          "post_event_mean": 0.7184397163120568,
+          "all_mean": 0.64664,
+          "pre_event_mean": 0.5537614678899081,
+          "transition_loss_steps": 8,
+          "arrival_step": 264
+        },
+        "warm": {
+          "post_event_mean": 0.6185815602836879,
+          "all_mean": 0.59032,
+          "pre_event_mean": 0.5537614678899081,
+          "transition_loss_steps": 0,
+          "arrival_step": 241
+        },
+        "seeded": {
+          "post_event_mean": 0.5851063829787234,
+          "all_mean": 0.57144,
+          "pre_event_mean": 0.5537614678899081,
+          "transition_loss_steps": 18,
+          "arrival_step": 288
+        }
+      },
+      "stakes": {
+        "S_switch": 0.01858156028368796,
+        "S_cold": -0.0998581560283689,
+        "S_seeded": -0.014893617021276562
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.0715154059871566,
+          "cpu_s": 1.0867039999999974
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3509477780025918,
+          "cpu_s": 0.3504729999999938
+        },
+        "keep": {
+          "wall_s": 0.39757478397223167,
+          "cpu_s": 0.3970369999999974
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.6814949409745168,
+          "cpu_s": 0.6806660000000022
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.1832968500093557,
+            "cpu_s": 1.182134000000005
+          },
+          "rollout": {
+            "wall_s": 0.3905653709953185,
+            "cpu_s": 0.39023300000000916
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.03956194099737331,
+            "cpu_s": 0.03954500000000394
+          },
+          "rollout": {
+            "wall_s": 0.46777083398774266,
+            "cpu_s": 0.46741600000000005
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.6943393709952943,
+            "cpu_s": 0.6938559999999967
+          },
+          "rollout": {
+            "wall_s": 0.5041513300093357,
+            "cpu_s": 0.5036810000000003
+          }
+        },
+        "world_total": {
+          "wall_s": 5.799274062999757,
+          "cpu_s": 5.809832
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          3
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 58
+      }
+    },
+    {
+      "world": 2018,
+      "t_e": 199,
+      "cluster": 4,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": true,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.6038190954773871,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7800000000000001,
+          "all_mean": 0.70988,
+          "pre_event_mean": 0.6038190954773871,
+          "transition_loss_steps": 0,
+          "arrival_step": 199
+        },
+        "cold": {
+          "post_event_mean": 0.8680398671096347,
+          "all_mean": 0.7628800000000001,
+          "pre_event_mean": 0.6038190954773871,
+          "transition_loss_steps": 19,
+          "arrival_step": 263
+        },
+        "warm": {
+          "post_event_mean": 0.7994684385382059,
+          "all_mean": 0.7216000000000001,
+          "pre_event_mean": 0.6038190954773871,
+          "transition_loss_steps": 0,
+          "arrival_step": 226
+        },
+        "seeded": {
+          "post_event_mean": 0.8680398671096347,
+          "all_mean": 0.7628800000000001,
+          "pre_event_mean": 0.6038190954773871,
+          "transition_loss_steps": 19,
+          "arrival_step": 263
+        }
+      },
+      "stakes": {
+        "S_switch": 0.01946843853820579,
+        "S_cold": -0.06857142857142873,
+        "S_seeded": 0.08803986710963452
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.3767820369976107,
+          "cpu_s": 1.3770600000000002
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3603266680147499,
+          "cpu_s": 0.36285500000001036
+        },
+        "keep": {
+          "wall_s": 0.5269310729927383,
+          "cpu_s": 0.530540000000002
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8317713680153247,
+          "cpu_s": 0.8376269999999977
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.1633901619934477,
+            "cpu_s": 1.1716420000000056
+          },
+          "rollout": {
+            "wall_s": 0.5084720730083063,
+            "cpu_s": 0.5112120000000004
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.07678132297587581,
+            "cpu_s": 0.07677599999999529
+          },
+          "rollout": {
+            "wall_s": 0.4697566000104416,
+            "cpu_s": 0.46966399999999453
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.8118806990096346,
+            "cpu_s": 0.8115510000000086
+          },
+          "rollout": {
+            "wall_s": 0.44636772299418226,
+            "cpu_s": 0.4462919999999997
+          }
+        },
+        "world_total": {
+          "wall_s": 6.59297214000253,
+          "cpu_s": 6.615571000000003
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          3
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 98
+      }
+    },
+    {
+      "world": 2019,
+      "t_e": 268,
+      "cluster": 1,
+      "routing_class": "direct",
+      "chain_served": false,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.7339552238805971,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7799999999999999,
+          "all_mean": 0.7553200000000001,
+          "pre_event_mean": 0.7339552238805971,
+          "transition_loss_steps": 0,
+          "arrival_step": 268
+        },
+        "cold": {
+          "post_event_mean": 0.7900862068965518,
+          "all_mean": 0.7600000000000001,
+          "pre_event_mean": 0.7339552238805971,
+          "transition_loss_steps": 45,
+          "arrival_step": 318
+        },
+        "warm": {
+          "post_event_mean": 0.7799999999999999,
+          "all_mean": 0.7553200000000001,
+          "pre_event_mean": 0.7339552238805971,
+          "transition_loss_steps": 0,
+          "arrival_step": 276
+        },
+        "seeded": {
+          "post_event_mean": 0.7900862068965518,
+          "all_mean": 0.7600000000000001,
+          "pre_event_mean": 0.7339552238805971,
+          "transition_loss_steps": 45,
+          "arrival_step": 318
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": -0.01008620689655193,
+        "S_seeded": 0.01008620689655193
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.4409312359930482,
+          "cpu_s": 1.4405919999999952
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.4010917719861027,
+          "cpu_s": 0.4010889999999989
+        },
+        "keep": {
+          "wall_s": 0.33910077801556326,
+          "cpu_s": 0.3389849999999939
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7748218729975633,
+          "cpu_s": 0.7749250000000103
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.5435856640106067,
+            "cpu_s": 1.5450349999999986
+          },
+          "rollout": {
+            "wall_s": 0.37980330700520426,
+            "cpu_s": 0.38017599999999163
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.21553934601251967,
+            "cpu_s": 0.21575599999999895
+          },
+          "rollout": {
+            "wall_s": 0.3691719740163535,
+            "cpu_s": 0.36954400000000476
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.782922089972999,
+            "cpu_s": 0.7836990000000128
+          },
+          "rollout": {
+            "wall_s": 0.439872513001319,
+            "cpu_s": 0.4284289999999942
+          }
+        },
+        "world_total": {
+          "wall_s": 6.7051619429839775,
+          "cpu_s": 6.696330000000003
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          2,
+          5
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 307
+      }
+    },
+    {
+      "world": 2020,
+      "t_e": 299,
+      "cluster": 4,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.6830100334448161,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.58,
+          "all_mean": 0.6416000000000001,
+          "pre_event_mean": 0.6830100334448161,
+          "transition_loss_steps": 201,
+          "arrival_step": 299
+        },
+        "cold": {
+          "post_event_mean": 0.6158208955223881,
+          "all_mean": 0.656,
+          "pre_event_mean": 0.6830100334448161,
+          "transition_loss_steps": 86,
+          "arrival_step": 416
+        },
+        "warm": {
+          "post_event_mean": 0.6246766169154229,
+          "all_mean": 0.6595599999999999,
+          "pre_event_mean": 0.6830100334448161,
+          "transition_loss_steps": 201,
+          "arrival_step": 403
+        },
+        "seeded": {
+          "post_event_mean": 0.6158208955223881,
+          "all_mean": 0.656,
+          "pre_event_mean": 0.6830100334448161,
+          "transition_loss_steps": 86,
+          "arrival_step": 416
+        }
+      },
+      "stakes": {
+        "S_switch": 0.044676616915422906,
+        "S_cold": 0.00885572139303481,
+        "S_seeded": 0.035820895522388096
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.5481828569900244,
+          "cpu_s": 1.549705000000003
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.5613735359802376,
+          "cpu_s": 0.5612830000000031
+        },
+        "keep": {
+          "wall_s": 0.3224568639998324,
+          "cpu_s": 0.32281799999999805
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8082996520097367,
+          "cpu_s": 0.8091440000000034
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.177716625010362,
+            "cpu_s": 1.1756829999999923
+          },
+          "rollout": {
+            "wall_s": 0.2817282660107594,
+            "cpu_s": 0.2801639999999992
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.06662463999236934,
+            "cpu_s": 0.0662579999999906
+          },
+          "rollout": {
+            "wall_s": 0.2510542680101935,
+            "cpu_s": 0.24969300000000771
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.6088324149895925,
+            "cpu_s": 0.6055089999999979
+          },
+          "rollout": {
+            "wall_s": 0.28810146398609504,
+            "cpu_s": 0.2865120000000019
+          }
+        },
+        "world_total": {
+          "wall_s": 5.937145368981874,
+          "cpu_s": 5.929343000000003
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          1
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 95
+      }
+    },
+    {
+      "world": 2021,
+      "t_e": 299,
+      "cluster": 3,
+      "routing_class": "direct",
+      "chain_served": false,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.8925083612040134,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.9600000000000002,
+          "all_mean": 0.9196400000000002,
+          "pre_event_mean": 0.8925083612040134,
+          "transition_loss_steps": 0,
+          "arrival_step": 299
+        },
+        "cold": {
+          "post_event_mean": 0.9786069651741296,
+          "all_mean": 0.9271200000000002,
+          "pre_event_mean": 0.8925083612040134,
+          "transition_loss_steps": 0,
+          "arrival_step": 315
+        },
+        "warm": {
+          "post_event_mean": 0.9600000000000002,
+          "all_mean": 0.9196400000000002,
+          "pre_event_mean": 0.8925083612040134,
+          "transition_loss_steps": 0,
+          "arrival_step": 308
+        },
+        "seeded": {
+          "post_event_mean": 0.9786069651741296,
+          "all_mean": 0.9271200000000002,
+          "pre_event_mean": 0.8925083612040134,
+          "transition_loss_steps": 0,
+          "arrival_step": 315
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": -0.01860696517412941,
+        "S_seeded": 0.01860696517412941
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.0739348880015314,
+          "cpu_s": 1.0679969999999912
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.4448809470050037,
+          "cpu_s": 0.44138799999998923
+        },
+        "keep": {
+          "wall_s": 0.2821191160182934,
+          "cpu_s": 0.28058199999998124
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7307145929953549,
+          "cpu_s": 0.7304730000000177
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.0263571639952715,
+            "cpu_s": 1.0265159999999867
+          },
+          "rollout": {
+            "wall_s": 0.2827496470126789,
+            "cpu_s": 0.28280800000001705
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.039513521012850106,
+            "cpu_s": 0.03954300000000899
+          },
+          "rollout": {
+            "wall_s": 0.285864325996954,
+            "cpu_s": 0.2859239999999943
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.800815896014683,
+            "cpu_s": 0.8009480000000053
+          },
+          "rollout": {
+            "wall_s": 0.29185563800274394,
+            "cpu_s": 0.29190600000001155
+          }
+        },
+        "world_total": {
+          "wall_s": 5.273602770990692,
+          "cpu_s": 5.2625810000000115
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          2
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 55
+      }
+    },
+    {
+      "world": 2022,
+      "t_e": 314,
+      "cluster": 2,
+      "routing_class": "direct",
+      "chain_served": false,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.7696178343949045,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.9399999999999996,
+          "all_mean": 0.833,
+          "pre_event_mean": 0.7696178343949045,
+          "transition_loss_steps": 0,
+          "arrival_step": 314
+        },
+        "cold": {
+          "post_event_mean": 0.9389247311827953,
+          "all_mean": 0.8325999999999999,
+          "pre_event_mean": 0.7696178343949045,
+          "transition_loss_steps": 1,
+          "arrival_step": 324
+        },
+        "warm": {
+          "post_event_mean": 0.9399999999999996,
+          "all_mean": 0.833,
+          "pre_event_mean": 0.7696178343949045,
+          "transition_loss_steps": 0,
+          "arrival_step": 314
+        },
+        "seeded": {
+          "post_event_mean": 0.9389247311827953,
+          "all_mean": 0.8325999999999999,
+          "pre_event_mean": 0.7696178343949045,
+          "transition_loss_steps": 1,
+          "arrival_step": 324
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": 0.0010752688172043223,
+        "S_seeded": -0.0010752688172043223
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.0192046930023935,
+          "cpu_s": 1.0193749999999966
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.44465930698788725,
+          "cpu_s": 0.44473500000000854
+        },
+        "keep": {
+          "wall_s": 0.24699382099788636,
+          "cpu_s": 0.24700500000000147
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7021373239986133,
+          "cpu_s": 0.7022049999999922
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.1833784890186507,
+            "cpu_s": 1.1833790000000022
+          },
+          "rollout": {
+            "wall_s": 0.31195855198893696,
+            "cpu_s": 0.31202899999999545
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.0408064020157326,
+            "cpu_s": 0.0408339999999896
+          },
+          "rollout": {
+            "wall_s": 0.3172035199822858,
+            "cpu_s": 0.31724499999998557
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.6285313309927005,
+            "cpu_s": 0.6275679999999966
+          },
+          "rollout": {
+            "wall_s": 0.28865862599923275,
+            "cpu_s": 0.28874700000000075
+          }
+        },
+        "world_total": {
+          "wall_s": 5.20138285800931,
+          "cpu_s": 5.200763999999992
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          1
+        ],
+        "warm_equals_keep": true,
+        "warm_equals_keep_reason": "the re-placement kept every movable row",
+        "evaluations": 58
+      }
+    },
+    {
+      "world": 2023,
+      "t_e": 167,
+      "cluster": 3,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": true,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.5960479041916168,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7999999999999999,
+          "all_mean": 0.7318800000000001,
+          "pre_event_mean": 0.5960479041916168,
+          "transition_loss_steps": 0,
+          "arrival_step": 167
+        },
+        "cold": {
+          "post_event_mean": 0.9333933933933937,
+          "all_mean": 0.82072,
+          "pre_event_mean": 0.5960479041916168,
+          "transition_loss_steps": 12,
+          "arrival_step": 241
+        },
+        "warm": {
+          "post_event_mean": 0.9290690690690694,
+          "all_mean": 0.8178400000000001,
+          "pre_event_mean": 0.5960479041916168,
+          "transition_loss_steps": 0,
+          "arrival_step": 293
+        },
+        "seeded": {
+          "post_event_mean": 0.9333933933933937,
+          "all_mean": 0.82072,
+          "pre_event_mean": 0.5960479041916168,
+          "transition_loss_steps": 12,
+          "arrival_step": 241
+        }
+      },
+      "stakes": {
+        "S_switch": 0.12906906906906945,
+        "S_cold": -0.00432432432432428,
+        "S_seeded": 0.13339339339339373
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.3719705870025791,
+          "cpu_s": 1.3722020000000157
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.24865800701081753,
+          "cpu_s": 0.2487030000000061
+        },
+        "keep": {
+          "wall_s": 0.5183838120137807,
+          "cpu_s": 0.5185020000000122
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8061620509834029,
+          "cpu_s": 0.8063019999999881
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.2502695469884202,
+            "cpu_s": 1.2481439999999964
+          },
+          "rollout": {
+            "wall_s": 0.46100091899279505,
+            "cpu_s": 0.459401999999983
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.034870003000833094,
+            "cpu_s": 0.03476799999998548
+          },
+          "rollout": {
+            "wall_s": 0.47778676098096184,
+            "cpu_s": 0.4761659999999779
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.7362347339803819,
+            "cpu_s": 0.7336870000000033
+          },
+          "rollout": {
+            "wall_s": 0.49254268599906936,
+            "cpu_s": 0.4909619999999961
+          }
+        },
+        "world_total": {
+          "wall_s": 6.413632501993561,
+          "cpu_s": 6.404384000000022
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          2
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 48
+      }
+    },
+    {
+      "world": 2024,
+      "t_e": 175,
+      "cluster": 4,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.5684571428571428,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.54,
+          "all_mean": 0.54996,
+          "pre_event_mean": 0.5684571428571428,
+          "transition_loss_steps": 325,
+          "arrival_step": 175
+        },
+        "cold": {
+          "post_event_mean": 0.674646153846154,
+          "all_mean": 0.63748,
+          "pre_event_mean": 0.5684571428571428,
+          "transition_loss_steps": 20,
+          "arrival_step": 235
+        },
+        "warm": {
+          "post_event_mean": 0.5797538461538461,
+          "all_mean": 0.5758,
+          "pre_event_mean": 0.5684571428571428,
+          "transition_loss_steps": 4,
+          "arrival_step": 184
+        },
+        "seeded": {
+          "post_event_mean": 0.58,
+          "all_mean": 0.5759599999999999,
+          "pre_event_mean": 0.5684571428571428,
+          "transition_loss_steps": 0,
+          "arrival_step": 189
+        }
+      },
+      "stakes": {
+        "S_switch": 0.03975384615384603,
+        "S_cold": -0.09489230769230794,
+        "S_seeded": 0.039999999999999925
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.3990786689973902,
+          "cpu_s": 1.399327999999997
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.25353003799682483,
+          "cpu_s": 0.2536089999999831
+        },
+        "keep": {
+          "wall_s": 0.4747418620099779,
+          "cpu_s": 0.4747849999999971
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.755052992986748,
+          "cpu_s": 0.7552270000000192
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.440373682999052,
+            "cpu_s": 1.4265860000000146
+          },
+          "rollout": {
+            "wall_s": 0.48603124197688885,
+            "cpu_s": 0.4732539999999972
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.0373947249900084,
+            "cpu_s": 0.03654399999999214
+          },
+          "rollout": {
+            "wall_s": 0.45687319798162207,
+            "cpu_s": 0.44607399999995323
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.742466322000837,
+            "cpu_s": 0.725752
+          },
+          "rollout": {
+            "wall_s": 0.5384415849985089,
+            "cpu_s": 0.5273719999999855
+          }
+        },
+        "world_total": {
+          "wall_s": 6.600200815999415,
+          "cpu_s": 6.534494999999964
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          3
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 58
+      }
+    },
+    {
+      "world": 2025,
+      "t_e": 200,
+      "cluster": 0,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.6506000000000001,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.82,
+          "all_mean": 0.7522400000000001,
+          "pre_event_mean": 0.6506000000000001,
+          "transition_loss_steps": 0,
+          "arrival_step": 200
+        },
+        "cold": {
+          "post_event_mean": 0.7512000000000001,
+          "all_mean": 0.71096,
+          "pre_event_mean": 0.6506000000000001,
+          "transition_loss_steps": 35,
+          "arrival_step": 259
+        },
+        "warm": {
+          "post_event_mean": 0.82,
+          "all_mean": 0.7522400000000001,
+          "pre_event_mean": 0.6506000000000001,
+          "transition_loss_steps": 0,
+          "arrival_step": 205
+        },
+        "seeded": {
+          "post_event_mean": 0.7512000000000001,
+          "all_mean": 0.71096,
+          "pre_event_mean": 0.6506000000000001,
+          "transition_loss_steps": 35,
+          "arrival_step": 259
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": 0.06879999999999986,
+        "S_seeded": -0.06879999999999986
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.5207915479841176,
+          "cpu_s": 1.493424000000033
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.31826318000094034,
+          "cpu_s": 0.31324699999998984
+        },
+        "keep": {
+          "wall_s": 0.46605984700727277,
+          "cpu_s": 0.458911999999998
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7762562480056658,
+          "cpu_s": 0.7654320000000041
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.42616229201667,
+            "cpu_s": 1.4090079999999716
+          },
+          "rollout": {
+            "wall_s": 0.4307619019818958,
+            "cpu_s": 0.4261189999999999
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.04400293200160377,
+            "cpu_s": 0.043554000000000315
+          },
+          "rollout": {
+            "wall_s": 0.38662960901274346,
+            "cpu_s": 0.38272500000002196
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.9111741140077356,
+            "cpu_s": 0.8957839999999919
+          },
+          "rollout": {
+            "wall_s": 0.4164496519952081,
+            "cpu_s": 0.4143919999999923
+          }
+        },
+        "world_total": {
+          "wall_s": 6.716431848995853,
+          "cpu_s": 6.6219230000000096
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          5
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 68
+      }
+    },
+    {
+      "world": 2026,
+      "t_e": 261,
+      "cluster": 3,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.6979310344827587,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7000000000000001,
+          "all_mean": 0.6989200000000001,
+          "pre_event_mean": 0.6979310344827587,
+          "transition_loss_steps": 0,
+          "arrival_step": 261
+        },
+        "cold": {
+          "post_event_mean": 0.8837656903765692,
+          "all_mean": 0.7867600000000001,
+          "pre_event_mean": 0.6979310344827587,
+          "transition_loss_steps": 20,
+          "arrival_step": 322
+        },
+        "warm": {
+          "post_event_mean": 0.7830125523012553,
+          "all_mean": 0.7386,
+          "pre_event_mean": 0.6979310344827587,
+          "transition_loss_steps": 68,
+          "arrival_step": 382
+        },
+        "seeded": {
+          "post_event_mean": 0.8837656903765692,
+          "all_mean": 0.7867600000000001,
+          "pre_event_mean": 0.6979310344827587,
+          "transition_loss_steps": 20,
+          "arrival_step": 322
+        }
+      },
+      "stakes": {
+        "S_switch": 0.08301255230125526,
+        "S_cold": -0.10075313807531383,
+        "S_seeded": 0.1837656903765691
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.1425252740154974,
+          "cpu_s": 1.143572000000006
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.3729267530143261,
+          "cpu_s": 0.37349200000002725
+        },
+        "keep": {
+          "wall_s": 0.31327806701301597,
+          "cpu_s": 0.313997999999998
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.710189571022056,
+          "cpu_s": 0.7118260000000021
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.0660338529851288,
+            "cpu_s": 1.0683420000000012
+          },
+          "rollout": {
+            "wall_s": 0.38518227299209684,
+            "cpu_s": 0.3865240000000085
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.05777527898317203,
+            "cpu_s": 0.0580099999999959
+          },
+          "rollout": {
+            "wall_s": 0.3507360530202277,
+            "cpu_s": 0.3520680000000027
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.6947732679836918,
+            "cpu_s": 0.6977379999999869
+          },
+          "rollout": {
+            "wall_s": 0.33095709400367923,
+            "cpu_s": 0.33241499999999746
+          }
+        },
+        "world_total": {
+          "wall_s": 5.438928396994015,
+          "cpu_s": 5.452356000000009
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          4
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 73
+      }
+    },
+    {
+      "world": 2027,
+      "t_e": 216,
+      "cluster": 0,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.5285185185185185,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.42,
+          "all_mean": 0.46688,
+          "pre_event_mean": 0.5285185185185185,
+          "transition_loss_steps": 284,
+          "arrival_step": 216
+        },
+        "cold": {
+          "post_event_mean": 0.6837323943661973,
+          "all_mean": 0.6166800000000001,
+          "pre_event_mean": 0.5285185185185185,
+          "transition_loss_steps": 39,
+          "arrival_step": 309
+        },
+        "warm": {
+          "post_event_mean": 0.42,
+          "all_mean": 0.46688,
+          "pre_event_mean": 0.5285185185185185,
+          "transition_loss_steps": 284,
+          "arrival_step": 230
+        },
+        "seeded": {
+          "post_event_mean": 0.6837323943661973,
+          "all_mean": 0.6166800000000001,
+          "pre_event_mean": 0.5285185185185185,
+          "transition_loss_steps": 39,
+          "arrival_step": 309
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": -0.2637323943661973,
+        "S_seeded": 0.2637323943661973
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.417124377010623,
+          "cpu_s": 1.4163049999999942
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.2955227909842506,
+          "cpu_s": 0.29465399999998
+        },
+        "keep": {
+          "wall_s": 0.36013345801620744,
+          "cpu_s": 0.3591030000000046
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7627643760060892,
+          "cpu_s": 0.765119999999996
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.2137992840143852,
+            "cpu_s": 1.2128339999999866
+          },
+          "rollout": {
+            "wall_s": 0.373572949989466,
+            "cpu_s": 0.37657399999997665
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.46752065198961645,
+            "cpu_s": 0.4712779999999839
+          },
+          "rollout": {
+            "wall_s": 0.4107685669732746,
+            "cpu_s": 0.4121340000000089
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.6547218160121702,
+            "cpu_s": 0.6601649999999779
+          },
+          "rollout": {
+            "wall_s": 0.4399807770096231,
+            "cpu_s": 0.44372300000000564
+          }
+        },
+        "world_total": {
+          "wall_s": 6.411509986995952,
+          "cpu_s": 6.42727800000003
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          1,
+          2,
+          4
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 804
+      }
+    },
+    {
+      "world": 2028,
+      "t_e": 237,
+      "cluster": 3,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": true,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.9268354430379748,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.9600000000000001,
+          "all_mean": 0.9442800000000002,
+          "pre_event_mean": 0.9268354430379748,
+          "transition_loss_steps": 0,
+          "arrival_step": 237
+        },
+        "cold": {
+          "post_event_mean": 0.9603802281368822,
+          "all_mean": 0.9444800000000002,
+          "pre_event_mean": 0.9268354430379748,
+          "transition_loss_steps": 0,
+          "arrival_step": 264
+        },
+        "warm": {
+          "post_event_mean": 0.9600000000000001,
+          "all_mean": 0.9442800000000002,
+          "pre_event_mean": 0.9268354430379748,
+          "transition_loss_steps": 0,
+          "arrival_step": 242
+        },
+        "seeded": {
+          "post_event_mean": 0.9600000000000001,
+          "all_mean": 0.9442800000000002,
+          "pre_event_mean": 0.9268354430379748,
+          "transition_loss_steps": 0,
+          "arrival_step": 239
+        }
+      },
+      "stakes": {
+        "S_switch": 0.0,
+        "S_cold": -0.0003802281368820992,
+        "S_seeded": 0.0
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.1411569670017343,
+          "cpu_s": 1.1509259999999983
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.35247739200713113,
+          "cpu_s": 0.3555949999999939
+        },
+        "keep": {
+          "wall_s": 0.38209287298377603,
+          "cpu_s": 0.3854560000000049
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.8032272180134896,
+          "cpu_s": 0.810401000000013
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.1991712700109929,
+            "cpu_s": 1.201042000000001
+          },
+          "rollout": {
+            "wall_s": 0.3582191590103321,
+            "cpu_s": 0.3626910000000123
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.03912717298953794,
+            "cpu_s": 0.03988499999999817
+          },
+          "rollout": {
+            "wall_s": 0.3857220110076014,
+            "cpu_s": 0.3930119999999988
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.5482727490016259,
+            "cpu_s": 0.5587219999999888
+          },
+          "rollout": {
+            "wall_s": 0.363819759018952,
+            "cpu_s": 0.3707560000000285
+          }
+        },
+        "world_total": {
+          "wall_s": 5.59089514700463,
+          "cpu_s": 5.646074999999996
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          2
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 53
+      }
+    },
+    {
+      "world": 2029,
+      "t_e": 315,
+      "cluster": 3,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.6911111111111112,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.62,
+          "all_mean": 0.6648,
+          "pre_event_mean": 0.6911111111111112,
+          "transition_loss_steps": 185,
+          "arrival_step": 315
+        },
+        "cold": {
+          "post_event_mean": 0.6605405405405405,
+          "all_mean": 0.6798,
+          "pre_event_mean": 0.6911111111111112,
+          "transition_loss_steps": 172,
+          "arrival_step": 363
+        },
+        "warm": {
+          "post_event_mean": 0.6621621621621621,
+          "all_mean": 0.6804,
+          "pre_event_mean": 0.6911111111111112,
+          "transition_loss_steps": 61,
+          "arrival_step": 389
+        },
+        "seeded": {
+          "post_event_mean": 0.5828108108108109,
+          "all_mean": 0.6510400000000001,
+          "pre_event_mean": 0.6911111111111112,
+          "transition_loss_steps": 60,
+          "arrival_step": 377
+        }
+      },
+      "stakes": {
+        "S_switch": 0.042162162162162065,
+        "S_cold": 0.001621621621621605,
+        "S_seeded": -0.03718918918918912
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.2401796859921888,
+          "cpu_s": 1.2639000000000067
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.40634651298751123,
+          "cpu_s": 0.4141620000000046
+        },
+        "keep": {
+          "wall_s": 0.2789588390151039,
+          "cpu_s": 0.28435699999997155
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7671066990005784,
+          "cpu_s": 0.781913000000003
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.4397948060068302,
+            "cpu_s": 1.4446849999999927
+          },
+          "rollout": {
+            "wall_s": 0.2887797559960745,
+            "cpu_s": 0.2887269999999944
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.06398228098987602,
+            "cpu_s": 0.06398699999999735
+          },
+          "rollout": {
+            "wall_s": 0.2675734870135784,
+            "cpu_s": 0.2674740000000213
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.602816445985809,
+            "cpu_s": 0.6026720000000125
+          },
+          "rollout": {
+            "wall_s": 0.2714403140125796,
+            "cpu_s": 0.27134900000001494
+          }
+        },
+        "world_total": {
+          "wall_s": 5.64449547501863,
+          "cpu_s": 5.7008069999999975
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          5
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 87
+      }
+    },
+    {
+      "world": 2030,
+      "t_e": 160,
+      "cluster": 2,
+      "routing_class": "chain",
+      "chain_served": true,
+      "cluster_is_gate_far": true,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.5558750000000001,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.7400000000000001,
+          "all_mean": 0.6810800000000001,
+          "pre_event_mean": 0.5558750000000001,
+          "transition_loss_steps": 0,
+          "arrival_step": 160
+        },
+        "cold": {
+          "post_event_mean": 0.8719411764705883,
+          "all_mean": 0.7708,
+          "pre_event_mean": 0.5558750000000001,
+          "transition_loss_steps": 39,
+          "arrival_step": 207
+        },
+        "warm": {
+          "post_event_mean": 0.769294117647059,
+          "all_mean": 0.7010000000000001,
+          "pre_event_mean": 0.5558750000000001,
+          "transition_loss_steps": 0,
+          "arrival_step": 277
+        },
+        "seeded": {
+          "post_event_mean": 0.8818823529411762,
+          "all_mean": 0.7775599999999998,
+          "pre_event_mean": 0.5558750000000001,
+          "transition_loss_steps": 0,
+          "arrival_step": 228
+        }
+      },
+      "stakes": {
+        "S_switch": 0.029294117647058915,
+        "S_cold": -0.10264705882352931,
+        "S_seeded": 0.14188235294117613
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.0350461779744364,
+          "cpu_s": 1.020733999999976
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.22879972698865458,
+          "cpu_s": 0.22424499999999625
+        },
+        "keep": {
+          "wall_s": 0.46002105399384163,
+          "cpu_s": 0.4514050000000225
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.6953141929989215,
+          "cpu_s": 0.6832799999999963
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.3649114390136674,
+            "cpu_s": 1.3261630000000082
+          },
+          "rollout": {
+            "wall_s": 0.4851336079882458,
+            "cpu_s": 0.47886199999999235
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.04405969800427556,
+            "cpu_s": 0.04350700000000529
+          },
+          "rollout": {
+            "wall_s": 0.506374892021995,
+            "cpu_s": 0.5005900000000167
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.7868701489933301,
+            "cpu_s": 0.7671090000000049
+          },
+          "rollout": {
+            "wall_s": 0.4655547169968486,
+            "cpu_s": 0.4610580000000084
+          }
+        },
+        "world_total": {
+          "wall_s": 6.0891398759849835,
+          "cpu_s": 5.973646000000031
+        }
+      },
+      "warm": {
+        "movable_source": "pre_event_routing",
+        "movable_uavs": [
+          2
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 88
+      }
+    },
+    {
+      "world": 2031,
+      "t_e": 237,
+      "cluster": 4,
+      "routing_class": "unserved",
+      "chain_served": false,
+      "cluster_is_gate_far": false,
+      "routing_actual_equals_static": true,
+      "pre_event_mean": 0.6626160337552742,
+      "rules": {
+        "keep": {
+          "post_event_mean": 0.8400000000000001,
+          "all_mean": 0.75592,
+          "pre_event_mean": 0.6626160337552742,
+          "transition_loss_steps": 0,
+          "arrival_step": 237
+        },
+        "cold": {
+          "post_event_mean": 0.980532319391635,
+          "all_mean": 0.82984,
+          "pre_event_mean": 0.6626160337552742,
+          "transition_loss_steps": 0,
+          "arrival_step": 301
+        },
+        "warm": {
+          "post_event_mean": 0.9094296577946765,
+          "all_mean": 0.7924399999999998,
+          "pre_event_mean": 0.6626160337552742,
+          "transition_loss_steps": 0,
+          "arrival_step": 309
+        },
+        "seeded": {
+          "post_event_mean": 0.980532319391635,
+          "all_mean": 0.82984,
+          "pre_event_mean": 0.6626160337552742,
+          "transition_loss_steps": 0,
+          "arrival_step": 301
+        }
+      },
+      "stakes": {
+        "S_switch": 0.06942965779467647,
+        "S_cold": -0.07110266159695844,
+        "S_seeded": 0.1405323193916349
+      },
+      "timing": {
+        "pre_event_plan": {
+          "wall_s": 1.108386406005593,
+          "cpu_s": 1.0989230000000134
+        },
+        "pre_event_prefix": {
+          "wall_s": 0.348107058001915,
+          "cpu_s": 0.3454849999999965
+        },
+        "keep": {
+          "wall_s": 0.36939863199950196,
+          "cpu_s": 0.3668430000000171
+        },
+        "keep_unbranched_check": {
+          "wall_s": 0.7105661749956198,
+          "cpu_s": 0.7059069999999963
+        },
+        "cold": {
+          "plan": {
+            "wall_s": 1.0354741319897585,
+            "cpu_s": 1.0423140000000046
+          },
+          "rollout": {
+            "wall_s": 0.39239648802322336,
+            "cpu_s": 0.3961129999999855
+          }
+        },
+        "warm": {
+          "plan": {
+            "wall_s": 0.20403782100765966,
+            "cpu_s": 0.2059770000000185
+          },
+          "rollout": {
+            "wall_s": 0.396868642012123,
+            "cpu_s": 0.40084699999999884
+          }
+        },
+        "seeded": {
+          "plan": {
+            "wall_s": 0.4840394020138774,
+            "cpu_s": 0.4890359999999987
+          },
+          "rollout": {
+            "wall_s": 0.38238873399677686,
+            "cpu_s": 0.38641300000000456
+          }
+        },
+        "world_total": {
+          "wall_s": 5.4476191269932315,
+          "cpu_s": 5.453516000000008
+        }
+      },
+      "warm": {
+        "movable_source": "fallback_single_uav",
+        "movable_uavs": [
+          2
+        ],
+        "warm_equals_keep": false,
+        "warm_equals_keep_reason": null,
+        "evaluations": 302
+      }
+    }
+  ],
+  "means": {
+    "rules": {
+      "keep": {
+        "post_event_mean": {
+          "n": 32,
+          "mean": 0.74875,
+          "sd": 0.1434089572943687,
+          "min": 0.42,
+          "max": 1.0
+        },
+        "all_mean": {
+          "n": 32,
+          "mean": 0.7314250000000001,
+          "sd": 0.11116378280020711,
+          "min": 0.46688,
+          "max": 0.9442800000000002
+        },
+        "pre_event_mean": {
+          "n": 32,
+          "mean": 0.70509043447345,
+          "sd": 0.10764464816723579,
+          "min": 0.5285185185185185,
+          "max": 0.9268354430379748
+        },
+        "transition_loss_steps": {
+          "n": 32,
+          "mean": 94.0,
+          "sd": 119.56426265078461,
+          "min": 0.0,
+          "max": 325.0
+        },
+        "arrival_step": {
+          "n": 32,
+          "mean": 249.28125,
+          "sd": 49.80493198469404,
+          "min": 160.0,
+          "max": 340.0
+        }
+      },
+      "cold": {
+        "post_event_mean": {
+          "n": 32,
+          "mean": 0.8168240438547801,
+          "sd": 0.11200410794754279,
+          "min": 0.6158208955223881,
+          "max": 1.0
+        },
+        "all_mean": {
+          "n": 32,
+          "mean": 0.7671575000000002,
+          "sd": 0.08790574655515622,
+          "min": 0.6092799999999998,
+          "max": 0.9444800000000002
+        },
+        "pre_event_mean": {
+          "n": 32,
+          "mean": 0.70509043447345,
+          "sd": 0.10764464816723579,
+          "min": 0.5285185185185185,
+          "max": 0.9268354430379748
+        },
+        "transition_loss_steps": {
+          "n": 32,
+          "mean": 42.21875,
+          "sd": 49.548109156331506,
+          "min": 0.0,
+          "max": 190.0
+        },
+        "arrival_step": {
+          "n": 32,
+          "mean": 306.84375,
+          "sd": 56.47386456611817,
+          "min": 197.0,
+          "max": 416.0
+        }
+      },
+      "warm": {
+        "post_event_mean": {
+          "n": 32,
+          "mean": 0.7955970640272078,
+          "sd": 0.12848818027844094,
+          "min": 0.42,
+          "max": 1.0
+        },
+        "all_mean": {
+          "n": 32,
+          "mean": 0.75402875,
+          "sd": 0.10199724688725992,
+          "min": 0.46688,
+          "max": 0.9442800000000002
+        },
+        "pre_event_mean": {
+          "n": 32,
+          "mean": 0.70509043447345,
+          "sd": 0.10764464816723579,
+          "min": 0.5285185185185185,
+          "max": 0.9268354430379748
+        },
+        "transition_loss_steps": {
+          "n": 32,
+          "mean": 54.34375,
+          "sd": 89.0232334208867,
+          "min": 0.0,
+          "max": 297.0
+        },
+        "arrival_step": {
+          "n": 32,
+          "mean": 306.3125,
+          "sd": 75.9449875174936,
+          "min": 184.0,
+          "max": 425.0
+        }
+      },
+      "seeded": {
+        "post_event_mean": {
+          "n": 32,
+          "mean": 0.8131405689644946,
+          "sd": 0.12425403465383598,
+          "min": 0.58,
+          "max": 1.0
+        },
+        "all_mean": {
+          "n": 32,
+          "mean": 0.76465875,
+          "sd": 0.09690251515594626,
+          "min": 0.57144,
+          "max": 0.9442800000000002
+        },
+        "pre_event_mean": {
+          "n": 32,
+          "mean": 0.70509043447345,
+          "sd": 0.10764464816723579,
+          "min": 0.5285185185185185,
+          "max": 0.9268354430379748
+        },
+        "transition_loss_steps": {
+          "n": 32,
+          "mean": 32.03125,
+          "sd": 38.596744284393196,
+          "min": 0.0,
+          "max": 190.0
+        },
+        "arrival_step": {
+          "n": 32,
+          "mean": 303.6875,
+          "sd": 59.73351439464686,
+          "min": 189.0,
+          "max": 416.0
+        }
+      }
+    },
+    "stakes": {
+      "S_switch": {
+        "n": 32,
+        "mean": 0.04684706402720772,
+        "sd": 0.05817798078015089,
+        "min": 0.0,
+        "max": 0.25259911894273124
+      },
+      "S_cold": {
+        "n": 32,
+        "mean": -0.021226979827572365,
+        "sd": 0.07506797850766121,
+        "min": -0.2637323943661973,
+        "max": 0.13339055793991417
+      },
+      "S_seeded": {
+        "n": 32,
+        "mean": 0.0643905689644946,
+        "sd": 0.08590705534047301,
+        "min": -0.06879999999999986,
+        "max": 0.2684581497797357
+      }
+    },
+    "by_routing_class": {
+      "chain": {
+        "worlds": [
+          2002,
+          2003,
+          2005,
+          2007,
+          2008,
+          2009,
+          2010,
+          2011,
+          2012,
+          2013,
+          2014,
+          2016,
+          2018,
+          2020,
+          2023,
+          2024,
+          2025,
+          2026,
+          2027,
+          2028,
+          2029,
+          2030
+        ],
+        "post_event_mean": {
+          "keep": {
+            "n": 22,
+            "mean": 0.7163636363636363,
+            "sd": 0.1506350194706035,
+            "min": 0.42,
+            "max": 1.0
+          },
+          "cold": {
+            "n": 22,
+            "mean": 0.7964550312358951,
+            "sd": 0.11342213701573775,
+            "min": 0.6158208955223881,
+            "max": 1.0
+          },
+          "warm": {
+            "n": 22,
+            "mean": 0.7701494873226259,
+            "sd": 0.1322099428848754,
+            "min": 0.42,
+            "max": 1.0
+          },
+          "seeded": {
+            "n": 22,
+            "mean": 0.7927993772368725,
+            "sd": 0.12295462613099778,
+            "min": 0.58,
+            "max": 1.0
+          }
+        },
+        "S_switch": {
+          "n": 22,
+          "mean": 0.053785850958989426,
+          "sd": 0.06184928592821102,
+          "min": 0.0,
+          "max": 0.25259911894273124
+        },
+        "S_cold": {
+          "n": 22,
+          "mean": -0.026305543913269284,
+          "sd": 0.08411548690052417,
+          "min": -0.2637323943661973,
+          "max": 0.13339055793991417
+        },
+        "S_seeded": {
+          "n": 22,
+          "mean": 0.07643574087323612,
+          "sd": 0.09467101523313609,
+          "min": -0.06879999999999986,
+          "max": 0.2684581497797357
+        }
+      },
+      "direct": {
+        "worlds": [
+          2000,
+          2001,
+          2004,
+          2006,
+          2017,
+          2019,
+          2021,
+          2022
+        ],
+        "post_event_mean": {
+          "keep": {
+            "n": 8,
+            "mean": 0.815,
+            "sd": 0.11096975134821971,
+            "min": 0.6,
+            "max": 0.9600000000000002
+          },
+          "cold": {
+            "n": 8,
+            "mean": 0.8332836093309677,
+            "sd": 0.09048546967888767,
+            "min": 0.7184397163120568,
+            "max": 0.9786069651741296
+          },
+          "warm": {
+            "n": 8,
+            "mean": 0.8308537684817887,
+            "sd": 0.1073610884825385,
+            "min": 0.6185815602836879,
+            "max": 0.9600000000000002
+          },
+          "seeded": {
+            "n": 8,
+            "mean": 0.8286027582671379,
+            "sd": 0.11810084771825861,
+            "min": 0.5851063829787234,
+            "max": 0.9786069651741296
+          }
+        },
+        "S_switch": {
+          "n": 8,
+          "mean": 0.01585376848178864,
+          "sd": 0.037895147244954595,
+          "min": 0.0,
+          "max": 0.10824858757062117
+        },
+        "S_cold": {
+          "n": 8,
+          "mean": -0.0024298408491791046,
+          "sd": 0.053585468951520075,
+          "min": -0.0998581560283689,
+          "max": 0.09588652482269489
+        },
+        "S_seeded": {
+          "n": 8,
+          "mean": 0.01360275826713793,
+          "sd": 0.030925384672973972,
+          "min": -0.014893617021276562,
+          "max": 0.08632768361581922
+        }
+      },
+      "shared_only": {
+        "worlds": [
+          2015
+        ],
+        "post_event_mean": {
+          "keep": {
+            "n": 1,
+            "mean": 0.84,
+            "sd": null,
+            "min": 0.84,
+            "max": 0.84
+          },
+          "cold": {
+            "n": 1,
+            "mean": 0.9695575221238941,
+            "sd": null,
+            "min": 0.9695575221238941,
+            "max": 0.9695575221238941
+          },
+          "warm": {
+            "n": 1,
+            "mean": 0.9595575221238941,
+            "sd": null,
+            "min": 0.9595575221238941,
+            "max": 0.9595575221238941
+          },
+          "seeded": {
+            "n": 1,
+            "mean": 0.9695575221238941,
+            "sd": null,
+            "min": 0.9695575221238941,
+            "max": 0.9695575221238941
+          }
+        },
+        "S_switch": {
+          "n": 1,
+          "mean": 0.11955752212389414,
+          "sd": null,
+          "min": 0.11955752212389414,
+          "max": 0.11955752212389414
+        },
+        "S_cold": {
+          "n": 1,
+          "mean": -0.010000000000000009,
+          "sd": null,
+          "min": -0.010000000000000009,
+          "max": -0.010000000000000009
+        },
+        "S_seeded": {
+          "n": 1,
+          "mean": 0.12955752212389415,
+          "sd": null,
+          "min": 0.12955752212389415,
+          "max": 0.12955752212389415
+        }
+      },
+      "unserved": {
+        "worlds": [
+          2031
+        ],
+        "post_event_mean": {
+          "keep": {
+            "n": 1,
+            "mean": 0.8400000000000001,
+            "sd": null,
+            "min": 0.8400000000000001,
+            "max": 0.8400000000000001
+          },
+          "cold": {
+            "n": 1,
+            "mean": 0.980532319391635,
+            "sd": null,
+            "min": 0.980532319391635,
+            "max": 0.980532319391635
+          },
+          "warm": {
+            "n": 1,
+            "mean": 0.9094296577946765,
+            "sd": null,
+            "min": 0.9094296577946765,
+            "max": 0.9094296577946765
+          },
+          "seeded": {
+            "n": 1,
+            "mean": 0.980532319391635,
+            "sd": null,
+            "min": 0.980532319391635,
+            "max": 0.980532319391635
+          }
+        },
+        "S_switch": {
+          "n": 1,
+          "mean": 0.06942965779467647,
+          "sd": null,
+          "min": 0.06942965779467647,
+          "max": 0.06942965779467647
+        },
+        "S_cold": {
+          "n": 1,
+          "mean": -0.07110266159695844,
+          "sd": null,
+          "min": -0.07110266159695844,
+          "max": -0.07110266159695844
+        },
+        "S_seeded": {
+          "n": 1,
+          "mean": 0.1405323193916349,
+          "sd": null,
+          "min": 0.1405323193916349,
+          "max": 0.1405323193916349
+        }
+      }
+    },
+    "far_near": {
+      "far": "routing class 'chain' (chain-served before the event)",
+      "near": "routing class 'direct'",
+      "other_classes_reported_separately": [
+        "unrouted",
+        "shared_only",
+        "unserved"
+      ]
+    }
+  },
+  "timing_per_world": {
+    "cold": {
+      "plan": {
+        "wall_s": {
+          "n": 32,
+          "mean": 1.2630849831548403,
+          "sd": 0.16904681464857357,
+          "min": 0.9524727999814786,
+          "max": 1.5818181170034222
+        },
+        "cpu_s": {
+          "n": 32,
+          "mean": 1.2605473437499983,
+          "sd": 0.16665558061881403,
+          "min": 0.952332000000002,
+          "max": 1.5800749999999937
+        }
+      },
+      "rollout": {
+        "wall_s": {
+          "n": 32,
+          "mean": 0.3743105309067687,
+          "sd": 0.07320673133860783,
+          "min": 0.22945331601658836,
+          "max": 0.5084720730083063
+        },
+        "cpu_s": {
+          "n": 32,
+          "mean": 0.3737742499999983,
+          "sd": 0.07310302477700972,
+          "min": 0.23136900000000082,
+          "max": 0.5112120000000004
+        }
+      }
+    },
+    "keep": {
+      "wall_s": {
+        "n": 32,
+        "mean": 0.37125703578112734,
+        "sd": 0.07571824361222292,
+        "min": 0.24378089400124736,
+        "max": 0.5269310729927383
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 0.3708945000000001,
+        "sd": 0.07525929722739767,
+        "min": 0.24582900000000052,
+        "max": 0.530540000000002
+      }
+    },
+    "keep_unbranched_check": {
+      "wall_s": {
+        "n": 32,
+        "mean": 0.7696656513126072,
+        "sd": 0.08048622489041042,
+        "min": 0.5944542100187391,
+        "max": 0.9721611270215362
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 0.7694926562500014,
+        "sd": 0.0813585328065008,
+        "min": 0.5970340000000007,
+        "max": 0.9723020000000062
+      }
+    },
+    "pre_event_plan": {
+      "wall_s": {
+        "n": 32,
+        "mean": 1.2619243104036286,
+        "sd": 0.16988392607991923,
+        "min": 0.9399631400010549,
+        "max": 1.572390365996398
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 1.2624289375000006,
+        "sd": 0.17016903594859553,
+        "min": 0.9427340000000015,
+        "max": 1.607883000000001
+      }
+    },
+    "pre_event_prefix": {
+      "wall_s": {
+        "n": 32,
+        "mean": 0.37830105568446015,
+        "sd": 0.09641617910090332,
+        "min": 0.21643875900190324,
+        "max": 0.6487520119990222
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 0.3783273749999992,
+        "sd": 0.09679017414865036,
+        "min": 0.21738699999999866,
+        "max": 0.6479929999999996
+      }
+    },
+    "seeded": {
+      "plan": {
+        "wall_s": {
+          "n": 32,
+          "mean": 0.720312452998769,
+          "sd": 0.12359654032909814,
+          "min": 0.4840394020138774,
+          "max": 0.9852756469917949
+        },
+        "cpu_s": {
+          "n": 32,
+          "mean": 0.7197366875000001,
+          "sd": 0.12173430495019036,
+          "min": 0.4890359999999987,
+          "max": 0.9856839999999991
+        }
+      },
+      "rollout": {
+        "wall_s": {
+          "n": 32,
+          "mean": 0.38081369994051784,
+          "sd": 0.07941127050924719,
+          "min": 0.22808049101149663,
+          "max": 0.5384415849985089
+        },
+        "cpu_s": {
+          "n": 32,
+          "mean": 0.3809616562500018,
+          "sd": 0.07860739502625225,
+          "min": 0.22981300000000005,
+          "max": 0.5273719999999855
+        }
+      }
+    },
+    "warm": {
+      "plan": {
+        "wall_s": {
+          "n": 32,
+          "mean": 0.09056802159557265,
+          "sd": 0.09700376157645109,
+          "min": 0.021890651987632737,
+          "max": 0.46752065198961645
+        },
+        "cpu_s": {
+          "n": 32,
+          "mean": 0.09041996874999828,
+          "sd": 0.09721159210163234,
+          "min": 0.021897000000000943,
+          "max": 0.4712779999999839
+        }
+      },
+      "rollout": {
+        "wall_s": {
+          "n": 32,
+          "mean": 0.37493016640655696,
+          "sd": 0.07501314832395167,
+          "min": 0.21574874999350868,
+          "max": 0.506374892021995
+        },
+        "cpu_s": {
+          "n": 32,
+          "mean": 0.37443809374999965,
+          "sd": 0.07525412474017583,
+          "min": 0.2175869999999982,
+          "max": 0.5005900000000167
+        }
+      }
+    },
+    "world_total": {
+      "wall_s": {
+        "n": 32,
+        "mean": 6.002634147936988,
+        "sd": 0.6059526245482176,
+        "min": 4.818636462994618,
+        "max": 7.034842471010052
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 5.9982998750000025,
+        "sd": 0.6036521611846959,
+        "min": 4.846019999999999,
+        "max": 7.104984999999999
+      }
+    }
+  },
+  "cpu_seconds": {
+    "self_user_s": 192.073204,
+    "self_sys_s": 0.783647,
+    "children_user_s": 0.002062,
+    "children_sys_s": 0.002276,
+    "total_s": 192.861189,
+    "peak_rss_kib": 46588
+  },
+  "start_utc": "2026-09-29T21:15:41+00:00",
+  "end_utc": "2026-09-29T21:18:54+00:00",
+  "wall_clock_s": 192.32689221701003
+}

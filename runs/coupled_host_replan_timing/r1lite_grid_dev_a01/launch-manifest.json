@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-29T21:15:06.468405Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6346f8fcd25242f3ae2ab01c6f83f48b/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6346f8fcd25242f3ae2ab01c6f83f48b/experiments/candidates/coupled_host_replan_timing/run_r1lite.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_grid_dev_a01",
+    "--",
+    "--rules",
+    "grid",
+    "--warm-run",
+    "runs/coupled_host_replan_timing/r1lite_dev_a01",
+    "--worlds",
+    "1000-1031",
+    "--launch-sha",
+    "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_grid_dev_a01"
+  ],
+  "claim_key": "3142125c9066a04530ef9c5c71537270d8beb766e2051f1d8fbe7c3ee0caf4e4",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/3142125c9066a04530ef9c5c71537270d8beb766e2051f1d8fbe7c3ee0caf4e4.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6346f8fcd25242f3ae2ab01c6f83f48b/experiments/candidates/coupled_host_replan_timing/run_r1lite.py",
+    "--rules",
+    "grid",
+    "--warm-run",
+    "runs/coupled_host_replan_timing/r1lite_dev_a01",
+    "--worlds",
+    "1000-1031",
+    "--launch-sha",
+    "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_grid_dev_a01"
+  ],
+  "command_sha256": "9538d937010f4f1bb97a48ed0814643125338f87e75ebee7fd7d252f5a542e9d",
+  "control_observation": {
+    "observed_at": "2026-09-29T21:14:49.452071Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-29T21:14:52.946805Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6346f8fcd25242f3ae2ab01c6f83f48b",
+  "direction": "coupled_host_replan_timing",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/coupled_host_replan_timing/run_r1lite.py",
+    "--rules",
+    "grid",
+    "--warm-run",
+    "<SOURCE>/runs/coupled_host_replan_timing/r1lite_dev_a01",
+    "--worlds",
+    "1000-1031",
+    "--launch-sha",
+    "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41"
+  ],
+  "lead": "Claude DM (WSL session)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_grid_dev_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/3142125c9066a04530ef9c5c71537270d8beb766e2051f1d8fbe7c3ee0caf4e4.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_grid_dev_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_grid_dev_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3993340,
+      "session_id": 3993340,
+      "start_ticks": 15503762
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 3993340,
+    "process_group_id": 3993340
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_grid_dev_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 3993540,
+      "session_id": 3993340,
+      "start_ticks": 15505077
+    },
+    "pid": 3993540,
+    "process_group_id": 3993340,
+    "supervisor_pid": 3993340
+  },
+  "schema_version": 1,
+  "sha": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/6346f8fcd25242f3ae2ab01c6f83f48b",
+  "stderr": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_grid_dev_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_grid_dev_a01/stdout.log"
+}

@@ -1,0 +1,1177 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_replan_timing",
+  "launch_sha": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_replan_timing",
+    "sha": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+    "command_sha256": "9538d937010f4f1bb97a48ed0814643125338f87e75ebee7fd7d252f5a542e9d",
+    "parent_pid": 3993340,
+    "child_pid": 3993540,
+    "accepted_at_epoch": 1790716506.467841
+  },
+  "git_head": "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+  "training_fits_performed": 0,
+  "worlds": [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007,
+    1008,
+    1009,
+    1010,
+    1011,
+    1012,
+    1013,
+    1014,
+    1015,
+    1016,
+    1017,
+    1018,
+    1019,
+    1020,
+    1021,
+    1022,
+    1023,
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+  ],
+  "area_size": 5000,
+  "budget": 3000,
+  "event_law": {
+    "rng": "numpy.random.default_rng([world, 3])",
+    "draw_order": [
+      "t_e = rng.integers(150, 351)",
+      "cluster = rng.integers(0, 5)",
+      "centre = rng.uniform(0, area, 2)",
+      "per member j in index order: clip(centre + rng.normal(0, area/10, 2), 0, area)"
+    ],
+    "timing": "applied inside step() of the call with current_step == t_e, before that call's actions; series index t_e is the first post-event value; every rule reacts from its decision for step t_e (full information)"
+  },
+  "rng_derivations": {
+    "planner": "numpy.random.default_rng(world), fresh instance per search (D2 run_gate rule), for the pre-event, cold and seeded searches",
+    "event": "numpy.random.default_rng([world, 3])"
+  },
+  "windows": {
+    "pre_event": "series indices 0..t_e-1",
+    "post_event": "series indices t_e..499 (primary)",
+    "all": "0..499",
+    "cross_world": "per-world window means first, then equal-weight means across worlds; paired SDs over per-world differences"
+  },
+  "arguments": [
+    "--rules",
+    "grid",
+    "--warm-run",
+    "runs/coupled_host_replan_timing/r1lite_dev_a01",
+    "--worlds",
+    "1000-1031",
+    "--launch-sha",
+    "b00ff4b2a5f01d1cc75d530d82454b1f189e4d41",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_grid_dev_a01"
+  ],
+  "interpreter": {
+    "executable": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "python": "3.10.20",
+    "numpy": "1.26.3",
+    "host": "Jacob"
+  },
+  "tool": "coupled_host_replan_timing.run_r1lite grid",
+  "rules": [
+    "grid"
+  ],
+  "grid": {
+    "name": "small-grid best",
+    "subsets": 64,
+    "delays": [
+      0,
+      20,
+      50
+    ],
+    "departing_set": "leaves together at t_e + delay; others hold"
+  },
+  "inputs": {
+    "1000": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1000.json",
+      "sha256": "66649ba81c0ad7ef88a9f46e857f1b3b265372713acd3211e42424b93ced8316"
+    },
+    "1001": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1001.json",
+      "sha256": "7bc06d5b66c6e20508666ca9c103e67c0f05c68c172bc0451d15d8e8adbd0074"
+    },
+    "1002": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1002.json",
+      "sha256": "bc8bfc41d331ecfc204d21c0f17dd6518ebb6d8c3e331b5ed51e2a9b8b2fb10a"
+    },
+    "1003": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1003.json",
+      "sha256": "aec55e32eca637ab8a495f1c46c48091cdbe996e94a39ac35cd11d7913116ca5"
+    },
+    "1004": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1004.json",
+      "sha256": "61f0634529d071e0bb114ada62893790717c29b34c0916b51a4784304bb3342e"
+    },
+    "1005": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1005.json",
+      "sha256": "99a9629b8e664baa834ab8f9114b425fbb9fbbe5d3393b0b5695acbbb76327c7"
+    },
+    "1006": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1006.json",
+      "sha256": "9f862d49384e897d5f75828bc7c0e0e074e02cd3a8aaa368d103ae6aa0aba88c"
+    },
+    "1007": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1007.json",
+      "sha256": "711dbdafed7e8b0462b8d7e6701bec68fc256990f1959b3ed90ee4225ae2e2f7"
+    },
+    "1008": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1008.json",
+      "sha256": "3ef102826a5356e4ea1aa5e4e469d134f3d93457fdcc0c203425d4fe24747218"
+    },
+    "1009": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1009.json",
+      "sha256": "31f1f15e44dfa14eda1d290bc6f9d298e58a9c48998fe05c0dafda3736b47675"
+    },
+    "1010": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1010.json",
+      "sha256": "6952a06ce95ba011f56fa7bd50d7f90b2ea6b8596b923307fe84f3e0e4592ed0"
+    },
+    "1011": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1011.json",
+      "sha256": "b6ec865362679d32b8713a058da5937e8e438c3fdd6ca09bbe910d8169621fa7"
+    },
+    "1012": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1012.json",
+      "sha256": "d3d7e4b71c541ca3020e2e419e66b17babd9d0624f6ee2af5be98e188fcf49a4"
+    },
+    "1013": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1013.json",
+      "sha256": "c1a7c461792ba8664ee08079d71e299dec3660802f678d486ab50d638b890896"
+    },
+    "1014": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1014.json",
+      "sha256": "9839906b0e70ecb16fe5b7a169ee8068dd4c980f84faa30f358a0262d8c2994c"
+    },
+    "1015": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1015.json",
+      "sha256": "3cca0fcb8164f60fc8ddf4e632c0992e4bb98e21729ac4939f5f0ce863a49e5b"
+    },
+    "1016": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1016.json",
+      "sha256": "c48b4f13c8e422d3dfc7deee525c5280d00b601f206cd9d186737fe9850022da"
+    },
+    "1017": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1017.json",
+      "sha256": "d9ddb7e66b15d5d4d81b743ea4d8cc420dbaae1c9d60481671c671fbebc6f7df"
+    },
+    "1018": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1018.json",
+      "sha256": "eecf47449c087b997efcb81970cf749da8fd92199715024bc3e85c8fb7efab44"
+    },
+    "1019": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1019.json",
+      "sha256": "0cc70b4de1b3bb0daa9361e9619a2a5eb3991e4f858755f53ad2452ff0b9cdfa"
+    },
+    "1020": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1020.json",
+      "sha256": "e0345df19f146dcb586e1dd45f0307962fd5e00c9c6aebf1ff329b2b46b1fee5"
+    },
+    "1021": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1021.json",
+      "sha256": "19587a66f40927b6fa7d0df596f627a4cd470ee5db21e79c1e920b66a788aaaf"
+    },
+    "1022": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1022.json",
+      "sha256": "52d37156dab78db6e2c434ecff3b6934a960b862455c2b684a3ba8e63caa0968"
+    },
+    "1023": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1023.json",
+      "sha256": "f0506ebdee2f3f15417db33339186863497a3fbb8cb21649ba557689a0850999"
+    },
+    "1024": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1024.json",
+      "sha256": "fd77c2139d3ccbc9b74f79f9308288b281eea0e7a3bf2c415fa2f6df9c5253ae"
+    },
+    "1025": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1025.json",
+      "sha256": "2e05c8aee2af1a4331fd3134641703014d2a55f302214147c7f87a1bf1b416a9"
+    },
+    "1026": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1026.json",
+      "sha256": "cf88a1eec61a401ed0dbdff7fb96fc111d0f8f3800b309f7fe922710cdc3b994"
+    },
+    "1027": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1027.json",
+      "sha256": "e3f7d4956a28fcfd32a7de73a38481ccf0e2169fb01981416fb0c8ed7cc8e237"
+    },
+    "1028": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1028.json",
+      "sha256": "261e1b894fd5ea2523dcba708bbd5345a5ced0ffc715c1a4f9c9fae3898076d0"
+    },
+    "1029": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1029.json",
+      "sha256": "358e99192d65d3a45b9bfaf980878fc0472440440fd6f38714f32ece79679c32"
+    },
+    "1030": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1030.json",
+      "sha256": "b7c12e30984f86fac396d1d5d903d75e42654cc250b65639641d8cf87d47c6af"
+    },
+    "1031": {
+      "path": "/home/fires/hmasd-wsl/runs/coupled_host_replan_timing/r1lite_dev_a01/worlds/1031.json",
+      "sha256": "99faa7ce16699d021ec468c3c2fff516e454c775dea44ecfe8ec60d0f4841f7d"
+    }
+  },
+  "per_world": [
+    {
+      "world": 1000,
+      "routing_class": "unserved",
+      "t_e": 349,
+      "room": 0.0,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.7599999999999998,
+        "all_mean": 0.69368,
+        "transition_loss_steps": 0,
+        "arrival_step": 349,
+        "index": 0
+      },
+      "unique_rollouts": 1,
+      "timing": {
+        "grid_total": {
+          "wall_s": 0.7323374019761104,
+          "cpu_s": 0.7189619999999999
+        },
+        "rollouts_executed": 1
+      }
+    },
+    {
+      "world": 1001,
+      "routing_class": "unserved",
+      "t_e": 259,
+      "room": 0.0,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.7799999999999999,
+        "all_mean": 0.70064,
+        "transition_loss_steps": 0,
+        "arrival_step": 259,
+        "index": 0
+      },
+      "unique_rollouts": 1,
+      "timing": {
+        "grid_total": {
+          "wall_s": 0.5804447229893412,
+          "cpu_s": 0.5815740000000005
+        },
+        "rollouts_executed": 1
+      }
+    },
+    {
+      "world": 1002,
+      "routing_class": "chain",
+      "t_e": 204,
+      "room": 0.0,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.7599999999999999,
+        "all_mean": 0.76552,
+        "transition_loss_steps": 296,
+        "arrival_step": 204,
+        "index": 0
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.5956856349948794,
+          "cpu_s": 1.6003029999999998
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1003,
+      "routing_class": "chain",
+      "t_e": 206,
+      "room": -0.02340136054421804,
+      "best": {
+        "mask": 6,
+        "subset": [
+          1,
+          2
+        ],
+        "delay": 0,
+        "post_event_mean": 0.9563265306122448,
+        "all_mean": 0.9367200000000001,
+        "transition_loss_steps": 9,
+        "arrival_step": 266,
+        "index": 18
+      },
+      "unique_rollouts": 10,
+      "timing": {
+        "grid_total": {
+          "wall_s": 4.9592059010174125,
+          "cpu_s": 4.9795510000000025
+        },
+        "rollouts_executed": 10
+      }
+    },
+    {
+      "world": 1004,
+      "routing_class": "shared_only",
+      "t_e": 322,
+      "room": 0.0,
+      "best": {
+        "mask": 32,
+        "subset": [
+          5
+        ],
+        "delay": 0,
+        "post_event_mean": 0.8677528089887641,
+        "all_mean": 0.8055600000000002,
+        "transition_loss_steps": 0,
+        "arrival_step": 369,
+        "index": 96
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.464539248001529,
+          "cpu_s": 1.4803990000000002
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1005,
+      "routing_class": "unserved",
+      "t_e": 226,
+      "room": -0.13167883211678832,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.7999999999999998,
+        "all_mean": 0.7255199999999999,
+        "transition_loss_steps": 0,
+        "arrival_step": 226,
+        "index": 0
+      },
+      "unique_rollouts": 1,
+      "timing": {
+        "grid_total": {
+          "wall_s": 0.6348720270034391,
+          "cpu_s": 0.6480369999999986
+        },
+        "rollouts_executed": 1
+      }
+    },
+    {
+      "world": 1006,
+      "routing_class": "direct",
+      "t_e": 314,
+      "room": 0.0,
+      "best": {
+        "mask": 8,
+        "subset": [
+          3
+        ],
+        "delay": 0,
+        "post_event_mean": 0.9712903225806453,
+        "all_mean": 0.9198400000000001,
+        "transition_loss_steps": 4,
+        "arrival_step": 362,
+        "index": 24
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.292279385990696,
+          "cpu_s": 1.3190560000000016
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1007,
+      "routing_class": "shared_only",
+      "t_e": 160,
+      "room": 0.0,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.7800000000000001,
+        "all_mean": 0.7515599999999999,
+        "transition_loss_steps": 0,
+        "arrival_step": 160,
+        "index": 0
+      },
+      "unique_rollouts": 1,
+      "timing": {
+        "grid_total": {
+          "wall_s": 0.5537453469878528,
+          "cpu_s": 0.565472999999999
+        },
+        "rollouts_executed": 1
+      }
+    },
+    {
+      "world": 1008,
+      "routing_class": "shared_only",
+      "t_e": 233,
+      "room": -0.018426966292134916,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.7599999999999999,
+        "all_mean": 0.73668,
+        "transition_loss_steps": 0,
+        "arrival_step": 233,
+        "index": 0
+      },
+      "unique_rollouts": 1,
+      "timing": {
+        "grid_total": {
+          "wall_s": 0.5866559040150605,
+          "cpu_s": 0.599126
+        },
+        "rollouts_executed": 1
+      }
+    },
+    {
+      "world": 1009,
+      "routing_class": "chain",
+      "t_e": 257,
+      "room": 0.0,
+      "best": {
+        "mask": 1,
+        "subset": [
+          0
+        ],
+        "delay": 0,
+        "post_event_mean": 0.927736625514403,
+        "all_mean": 0.8670399999999999,
+        "transition_loss_steps": 0,
+        "arrival_step": 331,
+        "index": 3
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.3008070880023297,
+          "cpu_s": 1.310981
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1010,
+      "routing_class": "direct",
+      "t_e": 190,
+      "room": 0.0,
+      "best": {
+        "mask": 16,
+        "subset": [
+          4
+        ],
+        "delay": 0,
+        "post_event_mean": 0.8789032258064515,
+        "all_mean": 0.8617200000000002,
+        "transition_loss_steps": 0,
+        "arrival_step": 203,
+        "index": 48
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.6699496979999822,
+          "cpu_s": 1.6684809999999999
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1011,
+      "routing_class": "unserved",
+      "t_e": 249,
+      "room": -0.021274900398406182,
+      "best": {
+        "mask": 1,
+        "subset": [
+          0
+        ],
+        "delay": 0,
+        "post_event_mean": 0.9706772908366536,
+        "all_mean": 0.8247200000000001,
+        "transition_loss_steps": 0,
+        "arrival_step": 313,
+        "index": 3
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.550197371019749,
+          "cpu_s": 1.5507179999999998
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1012,
+      "routing_class": "shared_only",
+      "t_e": 224,
+      "room": 0.0,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.9399999999999998,
+        "all_mean": 0.8119999999999997,
+        "transition_loss_steps": 0,
+        "arrival_step": 224,
+        "index": 0
+      },
+      "unique_rollouts": 1,
+      "timing": {
+        "grid_total": {
+          "wall_s": 0.5483927780005615,
+          "cpu_s": 0.5500829999999972
+        },
+        "rollouts_executed": 1
+      }
+    },
+    {
+      "world": 1013,
+      "routing_class": "direct",
+      "t_e": 279,
+      "room": 0.0,
+      "best": {
+        "mask": 2,
+        "subset": [
+          1
+        ],
+        "delay": 0,
+        "post_event_mean": 0.8392760180995475,
+        "all_mean": 0.8179200000000001,
+        "transition_loss_steps": 0,
+        "arrival_step": 297,
+        "index": 6
+      },
+      "unique_rollouts": 10,
+      "timing": {
+        "grid_total": {
+          "wall_s": 2.8196086940006353,
+          "cpu_s": 2.8287099999999974
+        },
+        "rollouts_executed": 10
+      }
+    },
+    {
+      "world": 1014,
+      "routing_class": "direct",
+      "t_e": 326,
+      "room": -0.11816091954023045,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.8199999999999998,
+        "all_mean": 0.87276,
+        "transition_loss_steps": 174,
+        "arrival_step": 326,
+        "index": 0
+      },
+      "unique_rollouts": 10,
+      "timing": {
+        "grid_total": {
+          "wall_s": 2.116453246009769,
+          "cpu_s": 2.1141690000000004
+        },
+        "rollouts_executed": 10
+      }
+    },
+    {
+      "world": 1015,
+      "routing_class": "chain",
+      "t_e": 297,
+      "room": 0.0,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.7000000000000001,
+        "all_mean": 0.6684399999999999,
+        "transition_loss_steps": 0,
+        "arrival_step": 297,
+        "index": 0
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.0580612829944585,
+          "cpu_s": 1.0446950000000008
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1016,
+      "routing_class": "chain",
+      "t_e": 236,
+      "room": -0.06212121212121202,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.66,
+        "all_mean": 0.71596,
+        "transition_loss_steps": 264,
+        "arrival_step": 236,
+        "index": 0
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.2225507650000509,
+          "cpu_s": 1.2196049999999978
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1017,
+      "routing_class": "chain",
+      "t_e": 303,
+      "room": 0.0,
+      "best": {
+        "mask": 1,
+        "subset": [
+          0
+        ],
+        "delay": 0,
+        "post_event_mean": 0.8595939086294416,
+        "all_mean": 0.8702799999999999,
+        "transition_loss_steps": 197,
+        "arrival_step": 313,
+        "index": 3
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.0807747519866098,
+          "cpu_s": 1.0868149999999979
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1018,
+      "routing_class": "chain",
+      "t_e": 197,
+      "room": 0.0,
+      "best": {
+        "mask": 8,
+        "subset": [
+          3
+        ],
+        "delay": 0,
+        "post_event_mean": 0.9573597359735974,
+        "all_mean": 0.898,
+        "transition_loss_steps": 0,
+        "arrival_step": 250,
+        "index": 24
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.3512464050145354,
+          "cpu_s": 1.3614090000000019
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1019,
+      "routing_class": "chain",
+      "t_e": 213,
+      "room": -0.0476655052264815,
+      "best": {
+        "mask": 32,
+        "subset": [
+          5
+        ],
+        "delay": 0,
+        "post_event_mean": 0.9296864111498255,
+        "all_mean": 0.87244,
+        "transition_loss_steps": 0,
+        "arrival_step": 301,
+        "index": 96
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.2839038750098553,
+          "cpu_s": 1.2772819999999996
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1020,
+      "routing_class": "chain",
+      "t_e": 324,
+      "room": 0.0,
+      "best": {
+        "mask": 3,
+        "subset": [
+          0,
+          1
+        ],
+        "delay": 0,
+        "post_event_mean": 0.7496590909090909,
+        "all_mean": 0.71788,
+        "transition_loss_steps": 40,
+        "arrival_step": 411,
+        "index": 9
+      },
+      "unique_rollouts": 22,
+      "timing": {
+        "grid_total": {
+          "wall_s": 4.228643488022499,
+          "cpu_s": 4.213731999999997
+        },
+        "rollouts_executed": 22
+      }
+    },
+    {
+      "world": 1021,
+      "routing_class": "chain",
+      "t_e": 238,
+      "room": 0.0,
+      "best": {
+        "mask": 2,
+        "subset": [
+          1
+        ],
+        "delay": 0,
+        "post_event_mean": 0.9548854961832063,
+        "all_mean": 0.91544,
+        "transition_loss_steps": 0,
+        "arrival_step": 263,
+        "index": 6
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.3946169989940245,
+          "cpu_s": 1.4107349999999954
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1022,
+      "routing_class": "chain",
+      "t_e": 188,
+      "room": -0.08474358974358986,
+      "best": {
+        "mask": 1,
+        "subset": [
+          0
+        ],
+        "delay": 0,
+        "post_event_mean": 0.7557051282051281,
+        "all_mean": 0.76224,
+        "transition_loss_steps": 312,
+        "arrival_step": 225,
+        "index": 3
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 2.06806869697175,
+          "cpu_s": 2.0808159999999987
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1023,
+      "routing_class": "chain",
+      "t_e": 344,
+      "room": -0.09051282051282028,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.7000000000000001,
+        "all_mean": 0.662,
+        "transition_loss_steps": 0,
+        "arrival_step": 344,
+        "index": 0
+      },
+      "unique_rollouts": 22,
+      "timing": {
+        "grid_total": {
+          "wall_s": 6.102654495014576,
+          "cpu_s": 6.121997
+        },
+        "rollouts_executed": 22
+      }
+    },
+    {
+      "world": 1024,
+      "routing_class": "unserved",
+      "t_e": 247,
+      "room": 0.0,
+      "best": {
+        "mask": 1,
+        "subset": [
+          0
+        ],
+        "delay": 0,
+        "post_event_mean": 0.770197628458498,
+        "all_mean": 0.67284,
+        "transition_loss_steps": 0,
+        "arrival_step": 347,
+        "index": 3
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.8698404059978202,
+          "cpu_s": 1.878892999999998
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1025,
+      "routing_class": "chain",
+      "t_e": 296,
+      "room": 0.0,
+      "best": {
+        "mask": 16,
+        "subset": [
+          4
+        ],
+        "delay": 0,
+        "post_event_mean": 0.6031372549019609,
+        "all_mean": 0.6307200000000001,
+        "transition_loss_steps": 153,
+        "arrival_step": 466,
+        "index": 48
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.4657903700135648,
+          "cpu_s": 1.464266000000002
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1026,
+      "routing_class": "chain",
+      "t_e": 342,
+      "room": -0.041645569620253675,
+      "best": {
+        "mask": 4,
+        "subset": [
+          2
+        ],
+        "delay": 0,
+        "post_event_mean": 0.8697468354430378,
+        "all_mean": 0.80716,
+        "transition_loss_steps": 37,
+        "arrival_step": 433,
+        "index": 12
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.1873460070055444,
+          "cpu_s": 1.1866620000000054
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1027,
+      "routing_class": "direct",
+      "t_e": 325,
+      "room": -0.05862857142857081,
+      "best": {
+        "mask": 0,
+        "subset": [],
+        "delay": 0,
+        "post_event_mean": 0.9000000000000004,
+        "all_mean": 0.7778000000000002,
+        "transition_loss_steps": 0,
+        "arrival_step": 325,
+        "index": 0
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.2992277280136477,
+          "cpu_s": 1.2988709999999983
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1028,
+      "routing_class": "chain",
+      "t_e": 153,
+      "room": -0.0004034582132563802,
+      "best": {
+        "mask": 4,
+        "subset": [
+          2
+        ],
+        "delay": 0,
+        "post_event_mean": 0.9786743515850148,
+        "all_mean": 0.8541200000000001,
+        "transition_loss_steps": 0,
+        "arrival_step": 225,
+        "index": 12
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.9066684569988865,
+          "cpu_s": 1.9227190000000007
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1029,
+      "routing_class": "shared_only",
+      "t_e": 272,
+      "room": -0.04517543859649131,
+      "best": {
+        "mask": 2,
+        "subset": [
+          1
+        ],
+        "delay": 0,
+        "post_event_mean": 0.8005263157894736,
+        "all_mean": 0.7754000000000001,
+        "transition_loss_steps": 81,
+        "arrival_step": 416,
+        "index": 6
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.3691213209822308,
+          "cpu_s": 1.38079299999999
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1030,
+      "routing_class": "chain",
+      "t_e": 331,
+      "room": -0.024852071005917242,
+      "best": {
+        "mask": 32,
+        "subset": [
+          5
+        ],
+        "delay": 0,
+        "post_event_mean": 0.6771597633136095,
+        "all_mean": 0.6996000000000001,
+        "transition_loss_steps": 122,
+        "arrival_step": 486,
+        "index": 96
+      },
+      "unique_rollouts": 4,
+      "timing": {
+        "grid_total": {
+          "wall_s": 1.1855291309766471,
+          "cpu_s": 1.1898100000000085
+        },
+        "rollouts_executed": 4
+      }
+    },
+    {
+      "world": 1031,
+      "routing_class": "chain",
+      "t_e": 251,
+      "room": 0.0,
+      "best": {
+        "mask": 40,
+        "subset": [
+          3,
+          5
+        ],
+        "delay": 0,
+        "post_event_mean": 0.8943775100401608,
+        "all_mean": 0.8448799999999999,
+        "transition_loss_steps": 67,
+        "arrival_step": 372,
+        "index": 120
+      },
+      "unique_rollouts": 10,
+      "timing": {
+        "grid_total": {
+          "wall_s": 3.256158656993648,
+          "cpu_s": 3.255702999999997
+        },
+        "rollouts_executed": 10
+      }
+    }
+  ],
+  "means": {
+    "room": {
+      "n": 32,
+      "mean": -0.024021600480011594,
+      "sd": 0.0374645148236154,
+      "min": -0.13167883211678832,
+      "max": 0.0
+    },
+    "by_routing_class": {
+      "chain": {
+        "worlds": [
+          1002,
+          1003,
+          1009,
+          1015,
+          1016,
+          1017,
+          1018,
+          1019,
+          1020,
+          1021,
+          1022,
+          1023,
+          1025,
+          1026,
+          1028,
+          1030,
+          1031
+        ],
+        "room": {
+          "n": 17,
+          "mean": -0.02207915217574994,
+          "sd": 0.03173872347607338,
+          "min": -0.09051282051282028,
+          "max": 0.0
+        }
+      },
+      "direct": {
+        "worlds": [
+          1006,
+          1010,
+          1013,
+          1014,
+          1027
+        ],
+        "room": {
+          "n": 5,
+          "mean": -0.03535789819376025,
+          "sd": 0.052793009648404846,
+          "min": -0.11816091954023045,
+          "max": 0.0
+        }
+      },
+      "shared_only": {
+        "worlds": [
+          1004,
+          1007,
+          1008,
+          1012,
+          1029
+        ],
+        "room": {
+          "n": 5,
+          "mean": -0.012720480977725246,
+          "sd": 0.019819940448910812,
+          "min": -0.04517543859649131,
+          "max": 0.0
+        }
+      },
+      "unserved": {
+        "worlds": [
+          1000,
+          1001,
+          1005,
+          1011,
+          1024
+        ],
+        "room": {
+          "n": 5,
+          "mean": -0.0305907465030389,
+          "sd": 0.057255932785471,
+          "min": -0.13167883211678832,
+          "max": 0.0
+        }
+      }
+    },
+    "best_grid_post_event_mean": {
+      "n": 32,
+      "mean": 0.8303960079068986,
+      "sd": 0.10337317045337385,
+      "min": 0.6031372549019609,
+      "max": 0.9786743515850148
+    }
+  },
+  "timing_per_world": {
+    "grid_total": {
+      "wall_s": {
+        "n": 32,
+        "mean": 1.7417305401249905,
+        "sd": 1.273588271546573,
+        "min": 0.5483927780005615,
+        "max": 6.102654495014576
+      },
+      "cpu_s": {
+        "n": 32,
+        "mean": 1.7472008124999996,
+        "sd": 1.2753751437128642,
+        "min": 0.5500829999999972,
+        "max": 6.121997
+      }
+    },
+    "rollouts_executed": {
+      "n": 32,
+      "mean": 5.3125,
+      "sd": 5.050950086290058,
+      "min": 1.0,
+      "max": 22.0
+    }
+  },
+  "cpu_seconds": {
+    "self_user_s": 56.188975,
+    "self_sys_s": 0.657978,
+    "children_user_s": 0.001682,
+    "children_sys_s": 0.0022299999999999998,
+    "total_s": 56.850865,
+    "peak_rss_kib": 46332
+  },
+  "start_utc": "2026-09-29T21:15:06+00:00",
+  "end_utc": "2026-09-29T21:16:02+00:00",
+  "wall_clock_s": 56.455474343005335
+}
