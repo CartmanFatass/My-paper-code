@@ -3,6 +3,7 @@ import gymnasium as gym
 from gymnasium.spaces import Box, Dict
 from pettingzoo import ParallelEnv
 from pettingzoo.utils import wrappers
+from envs.pettingzoo import uav_radio
 
 class MultiUAVEnv(ParallelEnv):
     """
@@ -41,6 +42,7 @@ class MultiUAVEnv(ParallelEnv):
         ground_bs_tx_power=30,  # 地面基站发射功率 (dBm)
         step_path_loss_cache=True,  # 每步复用完全相同链路的路径损耗
         channel_backend="vectorized",  # 信道模型求值路径: "vectorized" 或 "reference"
+        enable_transmitter_mask=False,
     ):
         """
         初始化多无人机基站环境
@@ -83,6 +85,10 @@ class MultiUAVEnv(ParallelEnv):
                 f"channel_backend must be one of {self.CHANNEL_BACKENDS}, got {channel_backend!r}"
             )
         self.channel_backend = channel_backend
+        if not isinstance(enable_transmitter_mask, (bool, np.bool_)):
+            raise TypeError("enable_transmitter_mask must be a bool")
+        self.enable_transmitter_mask = bool(enable_transmitter_mask)
+        self._transmitter_mask = np.ones(n_uavs, dtype=bool)
         
         # 局部观测参数
         self.max_observed_uavs = max_observed_uavs
@@ -209,6 +215,22 @@ class MultiUAVEnv(ParallelEnv):
     def get_obs_dim(self):
         """返回观测维度"""
         return self.obs_dim
+
+    @property
+    def transmitter_mask(self):
+        """A copy of the current physical transmitter activation state."""
+        return self._transmitter_mask.copy()
+
+    def set_transmitter_mask(self, mask):
+        """Change radio activation at the current position without advancing the channel."""
+        if not self.enable_transmitter_mask:
+            raise RuntimeError("transmitter masking is not enabled")
+        next_mask = np.asarray(mask)
+        if next_mask.dtype != np.dtype(bool) or next_mask.shape != (self.n_uavs,):
+            raise ValueError("transmitter_mask must be a boolean [n_uavs] array")
+        self._transmitter_mask = next_mask.copy()
+        self._update_channel_state(reuse_physical_channel=True)
+        return {agent: self._get_observation(agent) for agent in self.agents}
     
     def reset(self, seed=None, options=None):
         """
@@ -225,6 +247,7 @@ class MultiUAVEnv(ParallelEnv):
         # 重置环境状态
         self.current_step = 0
         self.agents = self.possible_agents.copy()
+        self._transmitter_mask = np.ones(self.n_uavs, dtype=bool)
         
         # 初始化无人机位置
         self.uav_positions = np.zeros((self.n_uavs, 3))
@@ -771,12 +794,12 @@ class MultiUAVEnv(ParallelEnv):
 
     def _compute_path_loss_matrix(self):
         """[n_uavs, n_users] path loss in dB — `_compute_path_loss_reference`, broadcast."""
+        if self.channel_model == "free_space":
+            return uav_radio.free_space_user_path_loss(
+                self.uav_positions, self.user_positions, self.carrier_frequency
+            )
         distance_3d, _distance_2d, elevation_angle, height = self._uav_user_geometry()
         safe_distance = np.maximum(distance_3d, 1e-6)
-
-        if self.channel_model == "free_space":
-            wavelength = 3e8 / self.carrier_frequency
-            return 20 * np.log10(safe_distance) + 20 * np.log10(4 * np.pi / wavelength)
 
         if self.channel_model == "urban":
             return 128.1 + 37.6 * np.log10(safe_distance / 1000)
@@ -921,13 +944,10 @@ class MultiUAVEnv(ParallelEnv):
         path_loss = self._uav_user_path_loss_matrix
         if path_loss is None:
             raise RuntimeError("path-loss matrices were not primed for this step")
-        if self.use_fdma:
-            interference = np.zeros_like(path_loss)
-        else:
-            interference = self._sum_excluding_own_row(
-                10 ** ((self.tx_power - path_loss) / 10)
-            )
-        return self._sinr_from_path_loss(path_loss, interference)
+        return uav_radio.user_sinr_from_path_loss(
+            path_loss, self.tx_power, self.noise_power, self.use_fdma,
+            self._transmitter_mask,
+        )
 
     def _compute_uav_uav_sinr_matrix(self):
         """[sender, receiver] SINR in dB, matching `_compute_uav_to_uav_sinr`."""
@@ -941,45 +961,25 @@ class MultiUAVEnv(ParallelEnv):
             # 接收方自己不是干扰源。把对角线置零后按 k 升序累加，与标量路径的
             # "跳过 k == receiver" 同序（加 0.0 是精确运算）。
             np.fill_diagonal(linear, 0.0)
+            if self.enable_transmitter_mask:
+                linear[~self._transmitter_mask] = 0.0
             interference = self._sum_excluding_own_row(linear)
-        return self._sinr_from_path_loss(path_loss, interference)
+        sinr = self._sinr_from_path_loss(path_loss, interference)
+        if self.enable_transmitter_mask:
+            active_pair = self._transmitter_mask[:, None] & self._transmitter_mask[None, :]
+            sinr[~active_pair] = -np.inf
+        return sinr
 
     def _greedy_connection_assignment(self):
         """The scalar path's greedy rule, with its exact descending/tie order."""
-        sinr = self.sinr_matrix
-        n_uavs, n_users = sinr.shape
-        connections = np.zeros((n_uavs, n_users), dtype=bool)
-        flat = np.asarray(sinr).reshape(-1)
-        eligible = np.flatnonzero(flat >= self.min_sinr)
-        if eligible.size == 0:
-            return connections
+        return uav_radio.greedy_connection_assignment(
+            self.sinr_matrix, self.min_sinr, self.max_connections
+        )
 
-        # 降序，等值保持 (uav, user) 升序 —— 与 list.sort(key=sinr, reverse=True)
-        # 的稳定性完全一致。
-        order = eligible[np.argsort(-flat[eligible], kind="stable")]
-
-        uav_connections = [0] * n_uavs
-        user_connected = [False] * n_users
-        connected_total = 0
-        full_uavs = 0
-        for position in order.tolist():
-            uav_idx = position // n_users
-            user_idx = position - uav_idx * n_users
-            if user_connected[user_idx] or uav_connections[uav_idx] >= self.max_connections:
-                continue
-            connections[uav_idx, user_idx] = True
-            uav_connections[uav_idx] += 1
-            if uav_connections[uav_idx] >= self.max_connections:
-                full_uavs += 1
-            user_connected[user_idx] = True
-            connected_total += 1
-            if connected_total == n_users or full_uavs == n_uavs:
-                break
-        return connections
-
-    def _update_channel_state_vectorized(self):
+    def _update_channel_state_vectorized(self, reuse_physical_channel=False):
         """SINR for every pair by matrix operations, then the same greedy assignment."""
-        self._prime_path_loss_matrices()
+        if not (reuse_physical_channel and self._path_loss_matrices_are_current()):
+            self._prime_path_loss_matrices()
 
         sinr = self._compute_uav_user_sinr_matrix()
         if (
@@ -1003,6 +1003,17 @@ class MultiUAVEnv(ParallelEnv):
             and self.uav_sinr_matrix is not None
             and self._channel_state_generation == self._path_loss_cache_generation
             and self._path_loss_matrix_context == self._path_loss_context()
+        )
+
+    def _path_loss_matrices_are_current(self):
+        return (
+            self._uav_user_path_loss_matrix is not None
+            and self._uav_uav_path_loss_matrix is not None
+            and self._path_loss_matrix_context == self._path_loss_context()
+            and self._path_loss_uav_position_bytes
+            == tuple(row.tobytes() for row in self.uav_positions)
+            and self._path_loss_user_position_bytes
+            == tuple(row.tobytes() for row in self.user_positions)
         )
 
     def _cached_uav_user_path_loss(self, uav_idx, user_idx):
@@ -1214,6 +1225,8 @@ class MultiUAVEnv(ParallelEnv):
         """
         # 检查索引并获取位置
         uav_is_index = isinstance(uav_idx, (int, np.integer))
+        if uav_is_index and self.enable_transmitter_mask and not self._transmitter_mask[uav_idx]:
+            return -np.inf
         if uav_is_index:
             uav_pos = self.uav_positions[uav_idx]
         else:
@@ -1242,7 +1255,7 @@ class MultiUAVEnv(ParallelEnv):
             # 原始模式：计算干扰功率
             interference_power = []
             for i in range(self.n_uavs):
-                if i != uav_idx:
+                if i != uav_idx and (not self.enable_transmitter_mask or self._transmitter_mask[i]):
                     interferer_pos = self.uav_positions[i]
                     if user_is_index:
                         interferer_path_loss = self._cached_uav_user_path_loss(i, int(user_idx))
@@ -1274,6 +1287,10 @@ class MultiUAVEnv(ParallelEnv):
         返回:
             sinr: SINR值 (dB)
         """
+        if self.enable_transmitter_mask and not (
+            self._transmitter_mask[sender_idx] and self._transmitter_mask[receiver_idx]
+        ):
+            return -np.inf
         sender_pos = self.uav_positions[sender_idx]
         receiver_pos = self.uav_positions[receiver_idx]
         
@@ -1291,7 +1308,9 @@ class MultiUAVEnv(ParallelEnv):
             # 原始模式：计算干扰功率
             interference_power = []
             for i in range(self.n_uavs):
-                if i != sender_idx and i != receiver_idx:  # 排除发送方和接收方
+                if i != sender_idx and i != receiver_idx and (
+                    not self.enable_transmitter_mask or self._transmitter_mask[i]
+                ):  # 排除发送方、接收方和静默发射机
                     interferer_pos = self.uav_positions[i]
                     interferer_path_loss = self._cached_uav_uav_path_loss(i, receiver_idx)
                     interferer_power = self.tx_power - interferer_path_loss
@@ -1376,18 +1395,19 @@ class MultiUAVEnv(ParallelEnv):
             
         return path_loss
     
-    def _update_channel_state(self):
+    def _update_channel_state(self, reuse_physical_channel=False):
         """
         更新信道状态和连接
         """
         if self.channel_backend == "reference":
-            self._update_channel_state_reference()
+            self._update_channel_state_reference(reuse_physical_channel)
         else:
-            self._update_channel_state_vectorized()
+            self._update_channel_state_vectorized(reuse_physical_channel)
 
-    def _update_channel_state_reference(self):
+    def _update_channel_state_reference(self, reuse_physical_channel=False):
         """Scalar reference path: one `_compute_sinr` call per (UAV, user) pair."""
-        self._prime_path_loss_matrices()
+        if not (reuse_physical_channel and self._path_loss_matrices_are_current()):
+            self._prime_path_loss_matrices()
 
         # 计算所有UAV-用户对的SINR
         for i in range(self.n_uavs):
@@ -1461,27 +1481,9 @@ class MultiUAVEnv(ParallelEnv):
             return total_reward
         
         else:
-            # 原始奖励函数
-            # 基本奖励：已连接用户数
-            connected_users = np.sum(self.connections)
-            reward = connected_users / self.n_users
-            
-            # 额外奖励：SINR质量
-            total_sinr = 0
-            for i in range(self.n_uavs):
-                for j in range(self.n_users):
-                    if self.connections[i, j]:
-                        # 归一化SINR到[0,1]范围
-                        normalized_sinr = np.clip((self.sinr_matrix[i, j] - self.min_sinr) / 30, 0, 1)
-                        total_sinr += normalized_sinr
-            
-            # 平均SINR质量
-            avg_sinr_quality = total_sinr / max(connected_users, 1)
-            
-            # 组合奖励
-            reward = 0.7 * reward + 0.3 * avg_sinr_quality
-            
-            return reward
+            return uav_radio.service_metrics(
+                self.sinr_matrix, self.connections, self.min_sinr
+            )["J"]
     
     def render(self):
         """
