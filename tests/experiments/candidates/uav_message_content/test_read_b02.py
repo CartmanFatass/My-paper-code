@@ -3,7 +3,7 @@ import hashlib
 import numpy as np
 import pytest
 
-from experiments.candidates.uav_message_content.b02.channel import ContentChannel
+from experiments.candidates.contention_aware_decentralized_communication.cadc_b01.channel import Channel
 from experiments.candidates.uav_message_content.read_b02 import (
     behavior_from_observations, packet_from_observations, read_trace,
 )
@@ -48,7 +48,7 @@ def test_complete_trace_reader_and_corrupted_preserved_field(tmp_path, arm):
     scalar = {"B": 0., "O": np.sqrt(.08), "L": .7}[arm]
     pre_content = np.array([np.arctanh(2 * scalar - 1) if arm == "L" else 0], dtype=np.float32)
     packet = np.array([.5, .5, .5, .5, .5, scalar, .1], dtype=np.float32)
-    channel = ContentChannel(771)
+    channel = Channel(771)
     trace = {name: [] for name in (
         "actor_input", "critic_input", "packet", "pre_tanh_content", "due", "good",
         "sender", "deliveries", "content_credit_mask", "records", "pending_after_send",
@@ -61,7 +61,11 @@ def test_complete_trace_reader_and_corrupted_preserved_field(tmp_path, arm):
         actor_input = np.concatenate((raw, np.zeros((5, 4), dtype=np.float32), extras), axis=1)
         critic_input = np.r_[np.zeros(136, dtype=np.float32), extras.ravel()]
         good = int(channel.good)
-        _, due = channel.resolve_payload(t % 5, packet)
+        sender = t % 5
+        assert not channel.pending[sender]
+        due = t + (1 if good else 5)
+        channel.inflight.append((sender, t, due, packet.copy()))
+        channel.pending[sender] = True
         values = (actor_input, critic_input, packet.copy(), pre_content.copy(), due, good,
                   t % 5, channel.delivered - before, arm == "L" and due < 256,
                   channel.records.copy(), channel.pending.copy(),

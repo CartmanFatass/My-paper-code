@@ -1238,3 +1238,49 @@ successor. No Root approval dependency is fabricated. The broader content questi
 remains open, with a favorable but uncertain conditional mean and useful ordinary
 assets retained. Any future re-entry starts from these recorded constraints and
 an explicit new comparison, not renewed full-payload replacement or automatic repair.
+
+### Publication and measured retirement
+
+Complete evidence, independent disposition, reserve standing and directly affected
+shared communication background were published at `99291c8e6`. Before retirement,
+the native exit witness, stopped observer with no pending event, completed helpers
+and absent external B02 code consumers were checked. The final critic explicitly
+released both source snapshots; no accepted/native or readback process still used
+them. No live source or output was moved to change ownership.
+
+The configured snapshot collector previewed and removed, with its read-only
+`--sudo-process-scan`, only these two source worktrees:
+
+| Deleted target on wsl_4070 | Allocated bytes before | After |
+| --- | ---: | ---: |
+| `.git/hmasd-launch-sources/0d64575e6baa4ced93b7b02d3b368d75` (refused source-only preparation) | 801873920 | 0 |
+| `.git/hmasd-launch-sources/a4c43170c0d446b3a002d8b66608660e` (terminal accepted B02 source) | 801886208 | 0 |
+| `/home/wu/hmasd-inputs/uav_message_content-b02-C-456832fa.pt` (temporary input duplicate) | 466944 | 0 |
+| `temp/directions/uav_message_content/` (standalone published reader copy) | 24576 | 0 |
+
+Both source-directory and Git-worktree-registration absence were verified. Claims,
+manifests, source commits and all unique evidence remain. Rehashed all627 stable
+B02 files after deletion:135657594 bytes unchanged; original C's canonical hash
+also unchanged. Snapshot removal neither erases the operation nor grants retry.
+
+On author main, retired the six-file `experiments/candidates/uav_message_content/b02/`
+training package and `tests/experiments/candidates/uav_message_content/b02/`, whose
+exact accepted implementation remains at native source `02ede8a4a`. Removed their
+generated caches, the root direction/read-test caches and the stopped observer's
+`temp/directions/uav_message_content/` request. Retained the useful independent
+`read_b02.py` and all five reader checks; their synthetic channel fixture now uses
+the existing shared Channel directly rather than depending on retired B02 code.
+All five checks passed after retirement in6.12s with bytecode/cache writes disabled;
+no experimental environment or policy was invoked. No B02 imports remain in live
+experiments/tests outside the retired source history.
+
+The local selected targets plus retained test file measured229376 allocated bytes
+before and8192 after: **221184 bytes reclaimed locally**. Remote selected targets
+reclaimed **1604251648 bytes**. Total measured net release is **1604472832 allocated
+bytes**, excluding Git object-store accounting and unrelated concurrent disk writes.
+No full copy, archive or backup chain was created. One force-style scratch-removal
+command was rejected by the tool before deletion; explicit non-force file removals
+and empty-directory removal completed the same validated targets. There is no
+remaining deletion blocker or leftover target. Required native bulk remains one
+durable node copy, and the pure reader remains usable without the deleted staging
+input or launcher source snapshots. No further study is selected or running.
