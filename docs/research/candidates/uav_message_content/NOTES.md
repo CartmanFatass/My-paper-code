@@ -2511,3 +2511,205 @@ in2.73s** after that retirement, with pytest scratch automatically removed and n
 imports of retired code. This check adds support cost only. There is no cleanup
 blocker or redundant B04 scratch left in these targets. Required positive/adverse
 evidence, prior records and the private consumed observer status are retained.
+
+<a id="b05-retained-control-prospective"></a>
+## 2026-09-29 - B05 prospective: bounded learning around the retained controller
+
+Root's published selection and writer handoff are `bece6ea4b35870d9e18cfddd2bd633975faadd9b`.
+The direction is active under the unchanged launch lead `Codex DM (native child)`;
+the current native writer is `/root/dm_retained_control`. I read the complete Pro
+answer, independent selection assessment and adopted disposition in the
+[retained-control selection](../../archive/2026-09-29/RESEARCH-retained-control-selection.md).
+The adequate separate-context review reports no material dissent and covers this
+unchanged comparison. It is reused, not repeated for implementation. No accepted
+old operation is resumed. This is exploration, not confirmation; no claim note or
+independent-parent claim is introduced.
+
+### Question, structural premise and competing explanation
+
+Can bounded learning around useful decentralized B19451 produce a useful complete
+native controller, and does ordinary dated future-motion content help within that
+extension family? The intended contribution is conditional capability/use and its
+empirical boundary, not a new residual architecture or a causal diagnosis of B04.
+The current published [communication background](../../RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据)
+at `bece6ea4b` changes the comparison concretely: retain B19451 as an unchanged
+complete-use anchor, preserve the original geometry, and distinguish restricted
+learning from the incremental value of qualified ordinary forecasts. B03's joint
+B/O/L gains over C, B02's favorable learned-content means and reversals, and B04's
+learned forecast accuracy/positive endpoints all remain capabilities/evidence.
+The B04 adverse F-O mean and degradation of every G instance remain contrary
+evidence; no new name resets those costs or verdicts.
+
+The constructive conjecture is that a fixed useful motion mapping can support
+additional message-conditioned control without relearning that mapping. The
+strongest ordinary rival is useful finite optimization under the old geometry
+alone; M_G can succeed without crediting future content. A small mean correction
+may also be ineffective at the inherited noise scale. Parameter freezing excludes
+gradient changes to the base; it does not hold its closed-loop state distribution
+fixed and cannot guarantee competent trajectories. The base GRU must consume real
+observations and previous executed composed actions throughout.
+
+I checked the three local literature catalogs for the two named method bridges
+(no matching indexed record), then read the primary passages directly:
+[RPL arXiv:1812.06298v1, section IV](https://arxiv.org/pdf/1812.06298v1)
+defines an additive fixed-controller residual and zero last-layer initialization,
+and warns that actor-critic learning can degrade a good initial policy;
+[RESPRECT arXiv:2401.14858v1, section III-B](https://arxiv.org/html/2401.14858v1#S3.SS2)
+fixes a pretrained RL policy and initializes residual critics from pretrained
+weights. These support the construction, not success or novelty here. They omit
+the present jointly adapting teammates, delayed private messages and endogenous
+shared trajectories. No proof, toy-success or headroom pilot is bought.
+
+### Frozen contract and decision exposure
+
+Use unchanged native N5, 50 static uniform users, H256, free-space vectorized
+radio, primitive sampled actions, fixed RR sender `t % 5`, GOOD/BAD persistence
+.95 and send-time delay1/5, no loss, fee.001 per step. All arms send the same
+seven geometry fields plus three FP32 values: 40 bytes rather than the original
+28, a42.9% increase under unchanged abstract fee/delay. This is not free physical
+bandwidth. No ACK/served-user identity, map truth, reward change, commitment,
+learned predictor, additional send or altered terminal semantics is included.
+
+Canonical parent is
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/19451/B/final.pt`,
+463357 bytes, SHA256
+`34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2`.
+I rehashed those bytes on the node before this declaration. Its metadata is
+B/master19451, input171/critic451, inherited C SHA256
+`456832faaa94afb22cf3faa00bb97b0f129e2f5b72b2eedbb1148523b088cdad`;
+source identity `02ede8a4a75cc83e6e18d8b6619f1cfa84bc8d92`. Stage only this bound
+file outside the source checkout for immutable launcher input, and recheck its
+digest in the admitted runner. Canonical B19451 remains the required evidence.
+
+| Arm | Controller and payload | Training |
+|---|---|---|
+|B40|Frozen B19451, seven old geometry floats plus three ignored zeros|0 fits; one final32-world reference panel|
+|M_G|Same frozen base plus a separate bounded mean residual; geometry plus zeros|3 conditional continuation fits|
+|M_O|Same residual learner and base; geometry plus qualified dated ordinary endpoints|3 conditional continuation fits|
+
+For M_G/M_O, `mu = mu_B + .10*tanh(g_theta)` and the actual sample is
+`u = mu + sigma_B*epsilon`, executed as `tanh(u)`. The correction is in PRE-TANH
+MEAN units. All base encoder/GRU/mean/log_std parameters and its fixed input
+scaling stay frozen. There is no running normalizer in this source. The residual
+is a separate250->64 tanh->3 MLP over the legal current186 inputs and the
+frozen64-dimensional recurrent output; its last weight and bias start at zero.
+Future inputs never enter the base GRU. Residual hidden initialization is shared
+between M_G/M_O within a block and fresh across blocks. This is one fixed network,
+not an outcome-dependent capacity choice. The inherited sigmas are approximately
+`[1.16064,1.11096,1.13091]`: the bound is .086-.090 SD per coordinate and limits
+the immediate same-history/noise action difference to.10, or about3m per coordinate
+in one step. It places no bound on later trajectory or complete service loss.
+
+The critic starts from the parent's451-input critic with a separate zero75->128
+forecast projection, yielding526 inputs. It trains independently of the frozen
+actor. Both learner arms use two complete episodes per rollout, undiscounted
+terminal returns with no bootstrap, standardized team advantages, per-agent
+three-coordinate composed tanh-Gaussian PPO ratios clipped[.8,1.2], chunk32
+replay, four full-rollout epochs and lr3e-4 Adam(.9,.999),eps1e-8, no decay.
+Residual and critic have separate optimizers and separate.5 gradient clipping;
+actor loss retains the.01 inherited Gaussian-entropy term (constant at fixed
+variance), critic loss is.5 mean squared return error. The critic cannot rescale
+actor clipping through a shared gradient norm. This is fixed for both arms.
+Replay uses detached realized packets, observations and actual entry GRU states;
+it neither regenerates packets under new parameters nor creates a base-only
+counterfactual trajectory. All recorded likelihoods describe the actual composed
+sampled distribution, not the base distribution alone.
+
+At each send t, M_O predicts the sender's position at `t+K`, K=min(10,H-t): apply
+the actual composed sampled first command with native clipping, then persist the
+current composed central command `tanh(mu)` for K-1 steps with clipping. Packet
+dates and cache remaining horizon retain B04 semantics: delivery precedes action,
+only delivered forecasts are read, forecast coordinates expire at ageK while
+geometry remains, and no future truth is used to generate content. No forecast
+commitment is enforced. B40/M_G send exactly zero tails at all times.
+
+### Seeds, readings and prospective outcome branches
+
+Fixed new masters are19601,19602,19603, cell order M_G then M_O within each.
+For master m, construction seed100000*m+11, training scene seeds100000*m+1000+e,
+channel seeds100000*m+6000+e (e=0..511), and one continuous motion RNG
+100000*m+21. The two arms match all these exogenous streams and initialization.
+Final-only evaluation for every cell and B40 uses32 fresh common tuples:
+scene1960002000+e, channel1960007000+e, motion1960003000+e (e=0..31).
+No initial scoring panel, intermediate checkpoint selection, extra panel, omitted
+adverse world, fourth block or automatic retry is selected. The zero-residual
+identity check is correctness work at identical inputs/history/noise, not an
+additional significance panel. B40 is evaluated once after the six fixed fits.
+
+Read complete H256 J_net and users/step together, physical J/Q/fee decomposition,
+all instances and signed world differences, worst-step service, zero-service
+counts and longest intervals, boundary/floor/ceiling fractions and mean altitude.
+Stable user positions and post-action connected-user bits stay evaluator-only,
+outside actor, critic, packet, reward and training. These behavior measures are
+not energy or physical-flight safety endpoints. The raw reader reconstructs the
+transport, action/composition/likelihood, native outcomes and cost counts.
+
+Intermediate readings are base tensor identity, nonzero residual execution,
+pre-tanh magnitude and fraction of coordinates with abs(correction)>=.095,
+same-noise executed-action changes, and M_O response when valid forecast tails
+are zeroed at the same real pre-decision state. This shadow consumes no RNG and
+never enters the actual rollout. Exposure/sensitivity supports an opportunity
+to affect behavior, not beneficial mediation. Record actual residual and critic
+losses, gradient norms, parameter movement and separate optimizer calls.
+
+Compute paired M_O-M_G and each extension-minus-B40 differences within each
+block, then the three block means and descriptive t95 intervals with df2.
+These describe conditional continuation variation on one parent and this fixed
+deployment panel. Separately report paired world-level t95 df31 intervals per
+fixed endpoint and the average-over-blocks deployment contrast; shared worlds
+and time rows never increase training n. These intervals assume independent
+draws at the respective unit and are not selection-adjusted confirmation.
+No fabricated application MEI, unanimity gate or equivalence region is used.
+
+Joint J/service gains for M_O against M_G and B40 support a conditional
+forecast-assisted extension. Gains for M_G against B40 without a resolved M_O
+increment credit restricted continuation. M_O>M_G with both below B40 does not
+establish net usefulness. Active adverse corrections, mixed blocks or wide
+uncertainty end this fixed batch and return the next investment choice to Root;
+there is no radius/noise/network/training/seed scan. Broken identity, information
+or likelihood yields a technically missing comparison. None of these outcomes
+alone closes all future-motion or residual-learning questions.
+
+### Prospective cost and L0
+
+Six512x256 fits cost786432 training steps; seven32x256 final panels cost57344
+evaluation steps, total843776 and4218880 motion samples. There are
+1536 two-episode rollouts,6144 PPO update records,6144 actor Adam calls and6144
+critic Adam calls,15728640 replayed actor rows and3145728 critic replay rows.
+No predictor is trained. Count actual forward/diagnostic calls and all correctness
+exposure separately. One configured wsl_4070 worker uses one Torch/inter-op/BLAS
+thread, subject to fresh node admission; Claude's accepted work remains intact.
+B04's2248.187853 process CPU seconds/1261568 steps implies about.418 CPUh by
+linear scaling only, not a bound or wall promise. Pro's4-8 agent-hour support
+estimate is unverified. Read-only preparation began about13:05UTC; meaningful
+support timings will be recorded with their limits. Stop and reconsider with Root
+if engineering/recovery substantially expands without corresponding value.
+
+Inherited paid exposure before B05 remains21 policy fits plus3 predictors,
+3063808 result steps,21504 PPO plus3072 predictor updates and4939.467107s
+scientific wall, with additional incompletely measured engineering/readback.
+A complete B05 would yield27 policy fits plus3 predictors and3907584 result
+steps; inherited failed/adverse studies are not removed from that accounting.
+
+L0 deliverable: implement exactly this composed residual policy, lawful collector,
+six-fit driver, common B40 evaluator and complete compact/raw reader under
+`experiments/candidates/uav_message_content/b05/` and direction-root `read_b05.py`,
+mirrored tests, `runs/uav_message_content/b05_retained_control/`, and owned
+`temp/directions/uav_message_content/`. Reuse existing shared native host, base
+model, primitive sampler, PPO loss and dated-channel semantics; do not copy or
+modify shared core. Historical B04 source is7bb6d2f8e for selective reference,
+not a revived batch. I own NOTES, run/channel/collector/reader and acceptance.
+A bounded Implementer owns only the composed model/PPO modules and their model
+tests, with no index/commit/launch/notebook authority and no children. Independent
+engineering review covers all high-risk executable changes before launch.
+
+Checks: exact zero-residual base mapping and sampling at same history/noise;
+frozen base despite active residual and critic updates; no forecast-to-base path;
+composed log-density analytic agreement; lawful detached replay and correct actual
+action history; clipped first-sampled/central persistence and date/expiry;
+matched RNG/initialization and fixed complete counts; evaluation-only user bits;
+miniature synthetic driver and full-H synthetic writer-reader. These tests are
+correctness exposure, never native scientific or positive-result gates. Publish
+exact accepted inputs before runner-side admission. Preserve terminal failures,
+read the full output with independent material diagnosis, publish this direction's
+standing/shared implications and measure exact cleanup at the result boundary.
