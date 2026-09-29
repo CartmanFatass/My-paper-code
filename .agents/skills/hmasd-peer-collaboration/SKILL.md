@@ -49,8 +49,10 @@ need goes to Root until the owner extends the standing request.
 the shared working tree and committed with its explicit path (never a whole-tree add). One file
 per need; a follow-up on the same topic appends a dated section to the same file, told apart
 by its commit and date. The Claude session checks for every commit that touched that directory
-since the last commit it has seen (a background poll while the session is active; a
-`git log -- docs/Claude_docs/inbox/` check at natural boundaries otherwise) and reads each
+since the last commit it has seen (while the session is active, a blocking filesystem trigger
+on the inbox directory, the checkout's `.git/logs/HEAD` and `temp/claude_inbox_trigger/` —
+`tools/claude_inbox_wait.py`, no polling; a `git log -- docs/Claude_docs/inbox/` check at
+natural boundaries otherwise) and reads each
 delivered file from its own commit (`git show <sha>:<path>`), never from the working copy and
 never from a `HEAD` that may have moved on: the commit is the delivery, a half-written file is
 never read, and delivery is not reading. A queue message from Root to the Claude session does
@@ -124,3 +126,4 @@ new record type: messages are ephemeral, the records stay in RESEARCH, NOTES and
 - 2026-09-27 — draft by the Claude session (this page created).
 - 2026-09-27 — outbound command needs the App's `CODEX_HOME` / `CODEX_SQLITE_HOME` (added after the first successful send).
 - 2026-09-27 — Root's six scoped revisions (`docs/Claude_docs/inbox/20260927_peer_collaboration_ROOT.md`, commit `d648676c1`) adopted item by item: maintenance-only later edits; lock scope and staged-diff check; delivery by commit SHA and "delivery is not reading"; content responsibility including section 4 shared background; node sparse-selection method of `0f5d78903`; disagreement sequence. Both peers agree; awaiting owner adoption.
+- 2026-09-28 — maintenance (Claude session): the active-session wake is a filesystem trigger (`tools/claude_inbox_wait.py`) instead of a fetch poll; channel, write responsibility and scope unchanged. Root may additionally touch a file under `temp/claude_inbox_trigger/` after an inbox commit made outside this checkout; not required while it commits here.
