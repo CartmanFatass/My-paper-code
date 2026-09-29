@@ -1355,6 +1355,14 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 ## Current research plan
 
+**2026-09-29 owner明确要求继续推进研究。** 下列旧批次收尾判断不变；本次已创建两个新原生DM，
+承接有完整文档的持续问题，先形成完整的下一比较及成本，不恢复旧App会话或旧操作。
+`dm_service_continuity`具体化服务感知补能／部署调度，`dm_delay_intent`具体化延迟下有效的
+动作意图／预测信息。一次独立选题审查将覆盖两份具体设计；当前仅有推导和前瞻准备，
+不是两个已接受的新实验。[本次选题与待决边界](#portfolio-review-2026-09-29-continuity-intent-selection)。
+Claude首对H／SET训练已接受；Root于09:34 UTC只读核对两个实际进程均在跑，未读取未完成分数，
+未重启或追加其批次。下表原负责人对应已完成批次，新准备责任见任务路由。
+
 **Codex两项建设性问题及各自复用比较均已完整判读；保留已展示的能力，停止原样追加，Claude独立选题继续。**
 本轮完整结果、适用独立审查与Root处置见[建设性复用收尾](archive/2026-09-29/RESEARCH-constructive-development-reuse.md)；
 首轮问题与继续投入的原理由见[建设性发展首轮](archive/2026-09-29/RESEARCH-constructive-development-round.md)。
@@ -1401,6 +1409,52 @@ Root已读取并采纳两份完整独立结果建议，不再叠加同题审查�
 不把两宿主分数相加，不把这次取得有用答案当作工作流改动的因果证明。保留方法，下一次投资仍比较
 具体预测、独立问题与停止。没有选定的新Codex实验，也没有等待Root例行批准的假依赖；较宽问题保留。
 DM自主完成科学工作，Root负责跨题设计与取舍，非逐fit审批。新的结果研究仍须实际节点准入，暂停与冻结不变。
+
+<a id="portfolio-review-2026-09-29-continuity-intent-selection"></a>
+## Portfolio review 2026-09-29 continuity-intent-selection
+
+**Standing:** 两个新DM在既有方向NOTES形成下一前瞻，尚无新fit／评价／原生结果操作；
+一次独立科学选题审查由`/root/continuity_intent_selection_review`承担，独立上下文，
+复用仍适用的旧结果核验，只补充影响本次选择的事实。此次不是重审已完成的Pro工作流复盘。
+证据基线`ec2098329`；B04与通信B03的原始输入、正反判定和成本保持各自NOTES所记身份。
+当前准入资源须保留Claude已接受的两并发、共六fit安排；本次准备不取得节点运行资格。
+
+**Question A: 服务能力发展。** 同S7信息、动作、F、充电物理与机队下，服务感知的联合补能／
+部署时序能否在冻结R之上保留合法访问能力、改善完整有限任务的服务连续性？
+R在B04消除了过载及cutoff／depletion，但04/08退步、06有新增末55步零服务；B03六机赤字
+反例和到站／驻留失配保留。新问题不是已识别的all-F或解码故障修复，也不要求把普通性能改良
+变成学习创新。DM须把可修改的调度环节、可用性／部署中间预测及完整J／服务／风险后果连起来，
+事前区分硬可行性、权衡和条件用途；不改旧采用规则。暂估0fit、8-16组完整H12000比较及低个位数
+CPU小时，工程成本待实际方案计价；精确可兼容时才复用旧控制。若需要预约／站点选择／容量改变，
+须作为不同权利或资源合同返回并给普通对照同样增加。固定服务点轮换的桥接来源是
+[Arribas等](https://arxiv.org/abs/2205.12656)，其保证不能外推到此动态无线／护盾宿主。
+
+**Question B: 时序信息与学习。** 在真实延迟RR信道下，队友未来控制的有效信息能否使共同适配的
+分散式策略优于合格几何内容及匹配运动学习？现有B19451仅有单步速度，没有目标、承诺或hold。
+已核实顺序为到包、输入／GRU、采样动作、发送、运动、推进信道；发送后1／5步交付，RR为`t mod 5`。
+因此当前采样速度可合法发送但不是未来承诺。若引入目标／hold／到期，必须显式计价动作灵活性
+并提供同执行权限／节奏的普通对照；预测则须有合法训练标签、部署误差与计算成本，无未来真值。
+保留B的既有能力、几何与增量学习控制；不把冻结几何接收器直接换字段当作公平比较，也不继续
+空槽标量排名。暂估2-3适配臂各3个续训实例、每fit96k-192k步及新H256完整评价，实际必要臂和
+工程／计算成本待DM确定；共同B父资产不是独立父训练复制。预测必须涉及有用时效／实际决策
+和完整J／服务，而非仅预测MSE。参考桥接
+[Intention Sharing](https://openreview.net/pdf?id=qpsl2dR9twy)使用学习的想象轨迹，
+[DACOM](https://arxiv.org/abs/2212.01619)研究延迟等待；均不证明本宿主有增量，也不恢复暂停的FSD。
+
+**Decision exposure:** 选定具体比较、修订问题、只选一题或停止均可。原样R扩面、重复资产排名
+和仅凭已有正均值续投不选；开放母问题也不构成运行义务。审查对比建设性解释、普通替代、
+完整代价与最相关独立问题，挑战Root选题本身；不要求正例预筛、机制证明或新架构。
+Milan仍等owner数据，PPC/FSD暂停和G33冻结不变。两题与Claude耦合宿主学习／目标修正候选
+按实际决策对象及比较分界，不按名称制造并行。
+
+### Answer
+
+Pending the two priced prospective designs and the focused independent reading. No result-bearing launch selected here.
+
+### Decision
+
+Root已选择并委派上述问题的有界前瞻工作；具体实验投入在同一选题审查完成后处置，
+不增加后续逐运行Root批准。旧批次正反判定、暂停及已接受操作不变。
 
 <a id="portfolio-review-2026-09-28-independent-joint-transition"></a>
 [已完成联合过渡选题与Root处置](archive/2026-09-28/RESEARCH-joint-transition-selection.md)。
@@ -1480,6 +1534,9 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
+| DM: service-aware replenishment and deployment | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_service_continuity` | `/home/fires/hmasd-wsl` / `main` | 新注册`hmasd-direction-manager`，接续已完整收尾的`uav_persistent_service`问题及方向写责任。当前推导下一完整比较／成本，无新原生操作；不改变B01-B04判定或复活旧句柄。[本次选题](#portfolio-review-2026-09-29-continuity-intent-selection)。 |
+| DM: delay-valid teammate intent | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_delay_intent` | `/home/fires/hmasd-wsl` / `main` | 新注册`hmasd-direction-manager`，接续已完整收尾的`uav_message_content`问题及方向写责任。当前推导有效时序信息与匹配学习／执行比较；无新fit或评价，不复活B01-B03。[本次选题](#portfolio-review-2026-09-29-continuity-intent-selection)。 |
+| Independent selection review: continuity and intent | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/continuity_intent_selection_review` | `/home/fires/hmasd-wsl` / read-only | 新注册`hmasd-research-critic`，`fork_turns=none`，合并本次两题选择，不重复已完成的Pro工作流复盘；直接向Root返回，不编辑方向记录或运行。[本次选题](#portfolio-review-2026-09-29-continuity-intent-selection)。 |
 | DM: preserved-content augmentation | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_content_augmentation` | `/home/fires/hmasd-wsl` / `main` | Current native DM completed/read B03 from source `ff15fe5df`; provisional B19451 reuse, O/L capabilities and all adverse evidence retained. No active operation or selected successor panel/fit. B02 results `99291c8e6`, cleanup `ed2479280` reclaimed1604472832 allocated bytes; original C/nine endpoints remain durable. B01 `3567e73b0`/`f5c118c71` unchanged. [B03 complete NOTES](candidates/uav_message_content/NOTES.md#b03-complete-reading), [current plan](#current-research-plan). |
 | DM: joint transitions between radio-aware destinations | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_joint_transition` | `/home/fires/hmasd-wsl` · `main` | Registered `hmasd-direction-manager`; owns `uav_joint_transition` and matching paths. B01 result, full independent reading, unique evidence retention and measured cleanup complete. Exact L/O investment ended; reserve, no live producer, unread result, pending advice or selected successor. Broader learning question remains open; Root owns any next cross-question allocation, not a pending approval. [NOTES](candidates/uav_joint_transition/NOTES.md). |
 | DM：强制返航前服务／补能改派 | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_service_reassignment` | `/home/fires/hmasd-wsl` · `main` | 同一当前原生`hmasd-direction-manager`已完整执行并独立判读B04（源7bc0157f3，句柄664894b4、exit0、8完整H12000）；保留有限R资产，结束原样扩展，终态清理完成，净回收802578432字节。无活动worker／observer、未读结果或已选后继。B01/B02/B03/B04唯一raw及全部正反判定保持，不复活旧操作，不靠App队列恢复。[B04结果与投资判断](candidates/uav_persistent_service/NOTES.md#2026-09-29---b04-complete-original-failures-avoided-new-service-tail-counterexample)、[当前计划](#current-research-plan)。 |
