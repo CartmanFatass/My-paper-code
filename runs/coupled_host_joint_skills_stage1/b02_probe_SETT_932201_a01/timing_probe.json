@@ -1,0 +1,139 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "mode": "macro",
+  "contract": "target",
+  "arm": "SET",
+  "seed": 932201,
+  "probe_rollouts": 3,
+  "host_steps": 24000,
+  "macro_steps": 2400,
+  "seconds_per_rollout": {
+    "collection": 7.941655538937387,
+    "update": 16.333597939345054,
+    "policy": 1.0155535864178091,
+    "env": 6.858522735458489,
+    "menu": 0.0,
+    "store": 0.04563866998068988,
+    "cpu": 81.92734233333333,
+    "wall": 24.284030279649112
+  },
+  "per_rollout": [
+    {
+      "collection_seconds": 7.765264436951838,
+      "update_seconds": 16.48528638703283,
+      "policy_seconds": 0.9947603322798386,
+      "env_seconds": 6.700833102688193,
+      "menu_seconds": 0.0,
+      "store_seconds": 0.04780145827680826,
+      "cpu_seconds": 82.316157,
+      "wall_seconds": 24.259470139979385
+    },
+    {
+      "collection_seconds": 8.06784221495036,
+      "update_seconds": 16.430919616948813,
+      "policy_seconds": 1.05913570150733,
+      "env_seconds": 6.941494741593488,
+      "menu_seconds": 0.0,
+      "store_seconds": 0.04503947333432734,
+      "cpu_seconds": 81.89138999999999,
+      "wall_seconds": 24.508238921989687
+    },
+    {
+      "collection_seconds": 7.991859964909963,
+      "update_seconds": 16.08458781405352,
+      "policy_seconds": 0.9927647254662588,
+      "env_seconds": 6.933240362093784,
+      "menu_seconds": 0.0,
+      "store_seconds": 0.04407507833093405,
+      "cpu_seconds": 81.57448000000002,
+      "wall_seconds": 24.08438177697826
+    }
+  ],
+  "ms_per_host_step": {
+    "env": 0.8573153419323111,
+    "all_excluding_menus": 3.035503784956139
+  },
+  "ms_per_macro_step": {
+    "env": 8.573153419323111,
+    "policy": 1.2694419830222614,
+    "store": 0.057048337475862354,
+    "update": 20.416997424181318
+  },
+  "menu_seconds_excluded": {
+    "training": 0.0,
+    "panel": 0.0,
+    "note": "menu cache fills (planner searches) are one-off; a warm cache costs ~0"
+  },
+  "panel_run": {
+    "worlds": [
+      9000,
+      9001,
+      9002,
+      9003,
+      9004,
+      9005,
+      9006,
+      9007,
+      9008,
+      9009,
+      9010,
+      9011,
+      9012,
+      9013,
+      9014,
+      9015,
+      9016,
+      9017,
+      9018,
+      9019,
+      9020,
+      9021,
+      9022,
+      9023,
+      9024,
+      9025,
+      9026,
+      9027,
+      9028,
+      9029,
+      9030,
+      9031
+    ],
+    "deterministic": true,
+    "wall_seconds": 16.091122571961023,
+    "cpu_seconds": 26.463471,
+    "scores": "not recorded (timing only)"
+  },
+  "wall_cpu_ratio_training": 3.37371274001381,
+  "projection": {
+    "rollouts": 45,
+    "training_wall_seconds": 1092.78136258421,
+    "training_cpu_seconds": 3686.730405,
+    "panel_world_episodes": 192,
+    "panel_wall_seconds": 96.54673543176614,
+    "panel_cpu_seconds": 158.780826,
+    "fit_wall_seconds": 1189.3280980159761,
+    "fit_cpu_seconds": 3845.511231
+  },
+  "memory": {
+    "peak_rss_kib_process": 673864,
+    "evaluation_overlap": [
+      {
+        "before_target_build": {
+          "VmRSS_kib": 644168,
+          "VmHWM_kib": 673864
+        },
+        "after_target_build": {
+          "VmRSS_kib": 667880,
+          "VmHWM_kib": 673864
+        }
+      }
+    ],
+    "now": {
+      "VmRSS_kib": 670760,
+      "VmHWM_kib": 673864
+    }
+  },
+  "note": "projection = declared rollouts x mean probe rollout (menu fills excluded) + declared panel episodes x probe per-world panel time; checkpoints and menu cache fills not included"
+}
