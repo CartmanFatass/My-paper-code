@@ -185,6 +185,24 @@ Return (≤ 20 lines, single-instance wording, no new instrument/role/record): (
 
 ### Answer
 
+**材料边界：** 已按固定源 `912315f236a403a2d7f94e1b2ad761e9cb53d71f` 读完四组指定条目及 RESEARCH 两行，并核对 `r2_info.py` 的观测、转发与触发代码；未独立复算全部原始 JSON，未执行实验。[本轮依据](https://github.com/CartmanFatass/My-paper-code/blob/912315f236a403a2d7f94e1b2ad761e9cb53d71f/docs/research/candidates/coupled_host_replan_timing/NOTES.md#L143-L177)
+**（1）保留停止决定与两项更正：** Δ_share=+.0048 未达 .03，故本项结束、不补 hold-out；但四个正世界及最大 +.078 必须保留，“没有达到购买裕量”不等于共享从未起作用。约 .03 CPU-h 和约 1.5 工程小时买到了有限闭环对照与停止依据，没有买到本宿主的信息问题已关闭。[读数](https://github.com/CartmanFatass/My-paper-code/blob/912315f236a403a2d7f94e1b2ad761e9cb53d71f/docs/research/candidates/coupled_host_replan_timing/NOTES.md#L157-L177)
+**图与时钟再收紧：** 0–1 步是14个到达世界的条件读数，不包括10个未到达世界；代码每步重取 `env.routing_paths`，固定的是取边规则而非全程边表。快照分量分离是快照证据，全程未送达以到达记录为据，不能仅凭一个快照证明时变图全程不可达。[代码](https://github.com/CartmanFatass/My-paper-code/blob/912315f236a403a2d7f94e1b2ad761e9cb53d71f/experiments/candidates/coupled_host_replan_timing/r2_info.py#L1-L210)
+**不要把三种限制混成感知覆盖：** 8例网关已知1–2个变化用户却不重规划，直接受 K=3 的固定触发限制；另8例无“大于100 m的变化事实”，不等于看不见任何用户。24例有变化事实也不等于看见完整迁移簇；这些计数不识别各限制的反事实服务代价。[更正与合同](https://github.com/CartmanFatass/My-paper-code/blob/912315f236a403a2d7f94e1b2ad761e9cb53d71f/docs/research/candidates/coupled_host_replan_timing/NOTES.md#L143-L177)
+**信息范围仍须显式保留：** 本次事实集合不截断到原生观测的20用户，并共享初始旧地图、保留网关的团队命令权；“合法”指此声明合同，不是原生局部 actor 的同信息结果。F/D 是特权普通参照，F−local 或 D−local 都不是所有信息干预／学习收益的上界。[已接受偏离](https://github.com/CartmanFatass/My-paper-code/blob/912315f236a403a2d7f94e1b2ad761e9cb53d71f/docs/research/candidates/coupled_host_replan_timing/NOTES.md#L151-L177)
+**（2）第二槽排序：一次有界的宽合法邻接比较 ＞ rest ＞ 缺席推断 ＞ 重复／连续移动；不另添“其他”问题。** 购买理由是已发现的数据路由森林阻断了部分已观测事实：现在有一个具体的普通控制选择——事件信息是否应跨非路由的合法 UAV 链路传播；不是因为又有一个便宜开关可试，也不是救回 R2 的旧判决。
+**最便宜的反驳性运行：** 同一32个 dev 世界完整闭环，比较宽邻接共享与原 R2 shared，主量 `Δ_adj=宽邻接共享−原路由边共享`，仍读逐世界等权的事件后 C̄_bh；不只选10个失联世界。原 unshared、F、D仅作已有次要参照；复用旧 shared 的前提是原模式回归一致，否则不把不匹配的运行相减。
+**只改变可用转发边：** 用宿主实际 SINR 可见规则定义新增有向边／双向条件，明确方向，保留原合法路由边；不得把单向可见无条件对称化、改为距离圆、加入全局广播或经 BS 转发。保留逐步取边、一跳一步、观测可用时序、网关、旧地图、完整事实集合、K=3／100 m、三次重规划上限、搜索与执行器。[原转发合同](https://github.com/CartmanFatass/My-paper-code/blob/912315f236a403a2d7f94e1b2ad761e9cb53d71f/experiments/candidates/coupled_host_replan_timing/r2_info.py#L1-L210)
+**读的是闭环用途，不是静态可达性：** 新事实可以改变重规划，继而改变位置、后续可见性与边；这些是此开关的后续效应，不能锁住旧轨迹再冒充完整服务结果。更宽图未必把10例全部接通，也未必让收到的事实满足触发或改善服务；三种结果都如实保留，不因没有阳性再改 K。
+**建议事前区间（针对 Δ_adj，不改 R2）：** <.03 → 这次拓扑扩展未交付购买裕量，第二槽 rest；.03–<.05 → 报告未决，不自动扩展；≥.05 → 冻结实现后读既有32个 hold-out 的同一宽／窄对照，再决定是否保留宽图为普通通信参考。门槛不是显著性线；报告配对差和负世界，不宣布宿主族结论、实际采用收益或训练许可。
+**投资边界：** 这是一例 RECORDED 邻域的普通重规划／通信能力比较，结果只决定是否继续使用该转发规则；即使为正，也没有证明学习器需要什么信用分配或该给 untied-K 一次 fit。若为负，剩余 F−local 缺口不能自动授权“再改估计器”，本轮预承诺停在这里。
+**费用：** ≈.03 CPU-h 是从旧运行外推的报价，更多重规划可能增费；建议新增工程及复核总帽1小时，回归／计价、dev和条件性hold-out总帽 .15 CPU-h。计入搜索、快照和三次上限命中情况；超出上限或权限不能匹配便选 rest，不减世界、缩搜索或追加预算来完成“便宜重跑”。
+**rest 排第二：** 零新增结果运行，保留 R1-lite 普通参照及 R2 各臂、正世界和不确定性；它购买的是停止追加注意力与工程，不是一个新的科学阴性，也不依赖 Root 未来交付。宽图无法在上述范围成立时，rest立即成为第一选择。
+**缺席推断排第三：** 最小可提案单元是一条事前固定的估计更新规则对 retention 的同图同触发比较，尚未有已计价的具体规则；用户缺席本身不给出新坐标，亦不能把移动、遮蔽／阈值和观测截断混同。它最多购买该估计器的用途，不是“缺席信息必有价值”；本轮不实现、不顺手调触发器。
+**重复／连续移动排第四：** 最小单元须先有独立规划决策对象与唯一固定运动法则，再对已有普通节拍计价；它更换外生任务，不能由一次迁移的阴性自动购买，也不能不断加事件直到出现 .05。现有记录没有使它优于上述单开关的具体预测，本轮不建新主机法则。
+**（3）第一槽：在已读记录的既有 Claude 资产和本轮约束下，none without [DECIDE-B]。** 这不是一般不存在主线问题的证明；这里只没有一个比已选第二槽问题更便宜、且不靠诊断或第十次拟合的具名学习购买。λ_l→0 的候选仍由 owner 决定、默认不买，本答复不替其放行；宽图问题不能复制一份来填第一槽。[D2与本题状态](https://github.com/CartmanFatass/My-paper-code/blob/912315f236a403a2d7f94e1b2ad761e9cb53d71f/docs/research/RESEARCH.md#L1233-L1234)
+**（4）删去：** R2 的补 hold-out、图／K／100 m／估计器联合扫描、挑世界、主动搜索、新事件法则、消息压缩及所有学习臂；不以“已有普通 anchor”把重新训练包装成免费续接，不为两槽都非空而买研究。Root 已恢复的 native 资产属于其循环，availability 是邻居，不是等待条件或借用许可。[本题范围](https://github.com/CartmanFatass/My-paper-code/blob/912315f236a403a2d7f94e1b2ad761e9cb53d71f/docs/research/candidates/coupled_host_replan_timing/NOTES.md#L179-L184)
+
 
 ### Send record (2026-09-29 22:50 UTC): Pro question `replan-timing-second-boundary` sent as a follow-up in the same conversation
 Key `hmasd:a7cb7cff73389726a4629276b96f05ac24270d9fa1743d25bff375606d662f89`; source pinned at 912315f23 (this notebook, heading "Pro question 2026-09-29 replan-timing-second-boundary"); transport Jev headless, effort pill `6 Pro` verified at the send; document sha256 1db21e67…; `send_effect: sent`, attachment seen, first attempt (the model-control wait of 341ccb100 held). Operation directory `temp/directions/coupled_host_replan_timing/scratch/pro-second-boundary-20260929/`. Nothing runs while the answer is pending; slot 1 awaits the owner's [DECIDE-B].
