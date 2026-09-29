@@ -1,17 +1,12 @@
-"""B04 binding and runner contracts; no native environment construction."""
+"""B04 binding and readout contracts; no native environment construction."""
 
-from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
-from pathlib import Path
-import threading
-from types import SimpleNamespace
 
 import numpy as np
 import pytest
 
-from experiments.candidates.energy_relay_availability.runner import execute_bounded
-from experiments.candidates.uav_persistent_service.b04 import batch, binding, readout, run_b04
+from experiments.candidates.uav_persistent_service.b04 import binding, readout
 
 
 def _sha(path):
@@ -42,15 +37,11 @@ def _row(root, arm, seed, length, *, changed_state=None):
             "decisions_path": decisions.name, "decisions_sha256": _sha(decisions)}
 
 
-def test_fixed_r_only_plan_and_old_root_refusal(tmp_path):
+def test_fixed_r_only_plan():
     jobs = readout.plan()
     assert len(jobs) == 8
     assert {job["seed"] for job in jobs} == set(binding.SEEDS)
     assert {job["arm"] for job in jobs} == {"R"}
-    out = tmp_path/"out"
-    with pytest.raises(ValueError, match="root cannot be changed"):
-        batch.run(out, "sha", old_root=tmp_path/"alternate")
-    assert not out.exists()
 
 
 def test_source_blob_refuses_changed_or_linked_file(tmp_path):
@@ -188,47 +179,3 @@ def test_incomplete_suppresses_all_contrasts():
     assert result["status"] == "incomplete"
     assert result["native_completed_new_jobs"] == 8
     assert result["contrasts"] == {}
-
-
-def test_incompatible_result_stops_submission_and_drains_started_jobs():
-    gate = threading.Event()
-    begun = threading.Barrier(4)
-    jobs = [{"job_key": str(index)} for index in range(8)]
-    submitted = []
-    received = []
-
-    def worker(job):
-        begun.wait(5)
-        if job["job_key"] != "0":
-            assert gate.wait(5)
-        return job | {"status": "completed", "native_completed": True,
-                      "actual_length": 12000, "raw_path": job["job_key"]+".npz"}
-
-    def on_result(row):
-        if row["job_key"] == "0":
-            row["status"] = "incompatible_comparator"
-            gate.set()
-        received.append(row)
-
-    with ThreadPoolExecutor(max_workers=4) as executor:
-        execute_bounded(executor, jobs, 4, lambda job: job, on_result,
-                        submitted, worker_fn=worker)
-    assert submitted == ["0", "1", "2", "3"]
-    assert {row["job_key"] for row in received} == set(submitted)
-    assert all(row["native_completed"] and row["raw_path"] for row in received)
-
-
-def test_admission_precedes_batch_import_or_outputs(tmp_path, monkeypatch):
-    import sys
-
-    called = []
-    def reject(*args, **kwargs):
-        called.append("admission")
-        raise RuntimeError("admission rejected")
-    monkeypatch.setitem(sys.modules, "scripts.hmasd_admission",
-                        SimpleNamespace(require_admission=reject))
-    out = tmp_path/"out"
-    with pytest.raises(RuntimeError, match="admission rejected"):
-        run_b04.main(["--out", str(out), "--launch-sha", "any"])
-    assert called == ["admission"]
-    assert not out.exists()

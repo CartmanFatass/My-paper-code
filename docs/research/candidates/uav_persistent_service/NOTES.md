@@ -2809,3 +2809,59 @@ current evidence there is no better established next marginal purchase than
 stopping new service expenditure, retaining useful code/raw and returning this
 result to Root for cross-question judgment. No approval or external producer is
 invented as an idle dependency.
+
+### Publication, retention and measured retirement
+
+Complete results, full independent scientific reading, disposition and the
+affected RESEARCH standing/background were committed and pushed as
+`fba5b4763750fca458cbc4ca378d6832f333c56f`. Exact executed inputs remain reachable
+at `7bc0157f32caa8a1c29eb61e2ff483c6787b5f3e`. Root read and adopted the result:
+retain finite R, stop unchanged-R expansion, preserve both the original-failure
+avoidance and the new55-step terminal service failure. No new run is selected.
+
+The unique necessary B04 raw remains at
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01/raw/`.
+The retention record binds all29 original manifest files, 88324862 logical bytes,
+to that location and their original hashes. Both DM and independent critic
+verified those files, and the final post-cleanup check verifies them again.
+No local raw copy or new retention package was created. Original B01/B02/B03
+raw, source bindings, positive results and adverse outcomes remain untouched.
+
+Live-consumer inspection found no running worker, observer, reader or pending
+review consuming the nominated disposable material. B04's fixed batch and
+entrypoint had no external import consumers. Retain the useful unchanged R,
+episode adapter, binder, readout, audit and focused tests. Delete
+`experiments/candidates/uav_persistent_service/b04/batch.py` and `b04/run_b04.py`;
+their executed versions remain in the exact published input commit. Remove
+only their now-obsolete admission/drain tests, retaining the source/stream
+identity and raw-reading checks. The retirement check passed8 pure tests in
+3.36s with14 pre-existing matplotlib/pyparsing warnings, no environment
+construction, reset, fit or native transition.
+
+Also deleted `experiments/candidates/uav_persistent_service/__pycache__/`, its
+`b03/__pycache__/` and `b04/__pycache__/`, the B04 test `__pycache__/`, and
+`temp/directions/uav_persistent_service/` containing the consumed observer
+request. The maintained snapshot collector, after a successful
+preview and read-only `--sudo-process-scan`, removed exactly accepted source
+snapshot `861c9592d9444dec9c7a1b46f0184eb2`. The snapshot path and its Git worktree
+registration are absent. Claims, duplicate-prevention identity, all original
+outputs and valid exit witness remain. The final operation read still reports
+consistent accepted source/claim identity, exit0, and absent runner/supervisor;
+the observer is stopped with its terminal event consumed. No remote sparse
+change, shared index overwrite, branch switch, repack, backup or archive was
+needed. `snapshot-gc.json` and `native-status-final.json` retain the witnesses.
+
+Measured allocated storage over the entire owned code and test roots, owned
+temp root and compact local B04 run decreased1359872 ->991232 bytes, reclaiming
+**368640 local bytes**, including the newly retained cleanup/status records.
+On the actual node, source snapshot plus B04 output decreased890830848 ->88621056
+bytes, reclaiming **802209792 bytes**; B04 output itself remains88621056 bytes.
+Total net reclamation is **802578432 bytes**. This measures nominated working
+and output storage, not whole-host free space or Git-object GC. Every nominated
+deletion target is absent; there is no remaining cleanup blocker.
+
+B04 is now scientifically read, independently diagnosed, published and cleaned.
+The direction is reserve with a retained finite ordinary asset, no active
+operation, unread result, pending advice or selected successor. The substantive
+re-entry condition and stopping rationale immediately above remain unchanged;
+neither the cleanup nor Root's acceptance authorizes another panel or repair.

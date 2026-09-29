@@ -1,0 +1,15 @@
+{
+  "mode": "apply",
+  "snapshots": [
+    {
+      "claim": "/home/wu/projects/HMASD/.git/hmasd-admission/664894b4c6e5643ddd5b678cd4e995c7c076341a024cca17d12764bdb4d5f36e.json",
+      "durable_ref": "refs/remotes/origin/HEAD",
+      "eligible": true,
+      "output": "/home/wu/projects/HMASD/runs/uav_persistent_service/b04_original_worlds_a01",
+      "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/861c9592d9444dec9c7a1b46f0184eb2",
+      "removed": true,
+      "sha": "7bc0157f32caa8a1c29eb61e2ff483c6787b5f3e",
+      "snapshot": "861c9592d9444dec9c7a1b46f0184eb2"
+    }
+  ]
+}
