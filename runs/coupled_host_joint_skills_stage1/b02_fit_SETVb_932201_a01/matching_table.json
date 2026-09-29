@@ -1,0 +1,447 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "pairs_by_position": [
+    [
+      931201,
+      932201
+    ],
+    [
+      931307,
+      932307
+    ],
+    [
+      931413,
+      932413
+    ]
+  ],
+  "lanes": 16,
+  "horizon": 500,
+  "rollouts": 45,
+  "exposure_team_steps_per_fit": 360000,
+  "evaluation": {
+    "panels_after_rollouts": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "dev_worlds": [
+      1000,
+      1031
+    ],
+    "holdout_worlds": [
+      2000,
+      2031
+    ],
+    "modes": "dev deterministic at every panel; hold-out deterministic and sampled at the final rollout",
+    "frozen_rule": "target built through the direction factory, strict_sync from the learner, train(False), zero optimizer calls, parameter/normaliser digest unchanged",
+    "eval_lanes": 16
+  },
+  "observation_encoding": {
+    "width": 90,
+    "own_position": "[0:3] x/area, y/area, (z - 50)/100",
+    "users": "[3:63] 20 slots x (dx/area, dy/area, clip((SINR + 10)/50, 0, 1)); users with SINR >= 3 dB, SINR-descending",
+    "uavs": "[63:87] 6 slots x (dx/area, dy/area, dz/100, clip((SINR + 10)/50, 0, 1)); from uav_sinr_matrix (not uav_connections), SINR-descending",
+    "time": "[87] current_step / 500",
+    "bs_connection": "[88] UAV-BS link bit (SINR >= 3 dB)",
+    "legacy_hop": "[89] min(len(path)/3, 1) if routed else 1.0 (cannot tell 'unrouted' from 'one relay')",
+    "source": "uav_env.py 382-433 + scenario2.py 220-259"
+  },
+  "state_encoding": {
+    "width": 133,
+    "uav_slots": "[0:24) 8 slots x (x/area, y/area, (z - 50)/100); slots 6-7 zero",
+    "validity": "[24:32) six ones, two zeros",
+    "users": "[32:132) 50 x (x/area, y/area)",
+    "time": "[132] current_step / 500",
+    "information": "the native 119-dim state (UAV xyz, user xy, step fraction) rescaled; no BS/link/routing field"
+  },
+  "state_consumers": {
+    "H": "coordinator state embedding, discoverer critic base and team discriminator via StateSetEncoder",
+    "SET": "coordinator (inactive) and discoverer critic base via StateSetEncoder; actor via SetActorBase (current obs, state, held team-observation snapshot, one-hot ego)"
+  },
+  "snapshot_timing": {
+    "H": "coordinator decides on the d2 clock: reset at episode start, then team_cap every 10 steps (both costs infinite, so no gap/cap interruption); every decision re-samples all six agents",
+    "SET": "held central snapshot refreshed at the 'off' route's ten-step skill timer (use_central_snapshot_in_flat_actor, hmasd/agent.py 507-516)"
+  },
+  "reward_units": {
+    "environment": "contract team reward r = 0.5 * (C_bh + S/D) per step; the adapter scalar is r / 6",
+    "training_signal": "scalar r/6 per lane enters store_transition_batch for both arms",
+    "H_auxiliary_weights": {
+      "lambda_e": 1.0,
+      "lambda_D": 0.05,
+      "lambda_d": 0.02,
+      "lambda_h": 0.07,
+      "lambda_l": 0.05,
+      "lambda_cd": 0.0,
+      "lambda_mi": 0.0
+    },
+    "SET_auxiliary_weights": {
+      "lambda_e": 1.0,
+      "lambda_D": 0.0,
+      "lambda_d": 0.0,
+      "lambda_h": 0.0,
+      "lambda_l": 0.05,
+      "lambda_cd": 0.0,
+      "lambda_mi": 0.0
+    },
+    "readings": "team per-step r; J = 6 * scalar"
+  },
+  "gamma_gae": {
+    "H": {
+      "gamma": 0.99,
+      "gae_lambda": 0.95
+    },
+    "SET": {
+      "gamma": 0.99,
+      "gae_lambda": 0.95
+    }
+  },
+  "normalisation": {
+    "H": {
+      "use_valuenorm": true,
+      "use_obsnorm": false,
+      "use_statenorm": false
+    },
+    "SET": {
+      "use_valuenorm": true,
+      "use_obsnorm": false,
+      "use_statenorm": false
+    }
+  },
+  "learning_rates": {
+    "H": {
+      "lr_coordinator": 0.0001,
+      "lr_discoverer_actor": 0.0001,
+      "lr_discoverer_critic": 0.0001,
+      "lr_discriminator": 0.0001,
+      "weight_decay": 0.0,
+      "use_lr_decay": false,
+      "use_entropy_annealing": false
+    },
+    "SET": {
+      "lr_coordinator": 0.0001,
+      "lr_discoverer_actor": 0.0001,
+      "lr_discoverer_critic": 0.0001,
+      "lr_discriminator": 0.0001,
+      "weight_decay": 0.0,
+      "use_lr_decay": false,
+      "use_entropy_annealing": false
+    }
+  },
+  "ppo": {
+    "H": {
+      "clip_epsilon": 0.2,
+      "max_grad_norm": 0.5,
+      "value_loss_coef": 1.0,
+      "ppo_epochs": 15,
+      "num_mini_batch": 4
+    },
+    "SET": {
+      "clip_epsilon": 0.2,
+      "max_grad_norm": 0.5,
+      "value_loss_coef": 1.0,
+      "ppo_epochs": 15,
+      "num_mini_batch": 4
+    }
+  },
+  "batch_units": {
+    "H": {
+      "sequence_batch_size": 32,
+      "coordinator_batch_size": 1280,
+      "batch_size": 12000,
+      "high_level_batch_size": 128,
+      "high_level_buffer_size": 800,
+      "discriminator_batch_size": 12000
+    },
+    "SET": {
+      "sequence_batch_size": 32,
+      "coordinator_batch_size": 1280,
+      "batch_size": 12000,
+      "high_level_batch_size": 128,
+      "high_level_buffer_size": 800,
+      "discriminator_batch_size": 12000
+    }
+  },
+  "optimizer_calls": "counted per module by step post-hooks in every fit (summary.json optimizer_calls and training.jsonl optimizer_delta)",
+  "parameter_counts": {
+    "SET": {
+      "skill_coordinator": 3841604,
+      "skill_coordinator.state_embedding": 129344,
+      "skill_discoverer": 1323911,
+      "skill_discoverer.actor.base": 400960,
+      "skill_discoverer.actor.base.state_encoder": 129344,
+      "skill_discoverer.critic.base": 129344,
+      "discoverer_actor": 798022,
+      "discoverer_critic": 525889
+    },
+    "H": {
+      "skill_coordinator": 3848014,
+      "skill_coordinator.state_embedding": 129344,
+      "skill_discoverer": 1017159,
+      "skill_discoverer.critic.base": 129344,
+      "team_discriminator": 399573,
+      "team_discriminator.state_encoder": 97733,
+      "individual_discriminator": 424378,
+      "discoverer_actor": 488710,
+      "discoverer_critic": 528449
+    }
+  },
+  "routes": {
+    "SET": {
+      "policy_interruption_mode": "off",
+      "d2_enabled": false,
+      "d2_cost_c": "inf",
+      "d2_cost_c_Z": "inf",
+      "d2_k_max": 10,
+      "d2_k_Z": 10,
+      "d2_age_feature": "off",
+      "use_ha_ctse": false,
+      "use_central_snapshot": true
+    },
+    "H": {
+      "policy_interruption_mode": "d2",
+      "d2_enabled": true,
+      "d2_cost_c": "inf",
+      "d2_cost_c_Z": "inf",
+      "d2_k_max": 10,
+      "d2_k_Z": 10,
+      "d2_age_feature": "off",
+      "use_ha_ctse": false,
+      "use_central_snapshot": false
+    }
+  },
+  "information_entry_points": {
+    "H": "per-agent obs (90) to the discoverer actor; 133-dim state to coordinator/critic/discriminator; team and agent labels to the actor",
+    "SET": "per-agent obs (90) + 133-dim state + held six-row observation snapshot + ego one-hot to the actor; 133-dim state to the critic; labels constant (n_Z = n_z = 1)"
+  },
+  "reset_bootstrap_rule": "episodes end at step 500 with terminated True / truncated False; the runner passes last_values = 0 and dones = True to agent.update for both arms (ACG rule); every reset passes an explicit world seed",
+  "training_worlds": "300000 + (seed % 1000) * 100 + lane + episode * 10000; paired seeds share it",
+  "dtype_threads": {
+    "dtype": "float32",
+    "device": "cpu",
+    "torch_threads": 4,
+    "blas_threads": 1
+  },
+  "rng_roles": {
+    "fit_seed": "random/numpy/torch global seeds at fit start (network init, action and label sampling)",
+    "training_worlds": "explicit reset seeds by the rule above (no draw from the global streams)",
+    "panels": "global streams saved, reseeded to first_world + 51 per panel run, restored afterwards"
+  },
+  "final_rule": "the rollout-45 checkpoint is the endpoint; no checkpoint selection; sampled mode never replaces the deterministic endpoint",
+  "equal_update_count": "means the outer rollout schedule (45 updates) and the low-level update schedule (ppo_epochs x sequence batches) only; H additionally updates the coordinator and discriminators, SET does not",
+  "cost_asymmetry": "d2 runs a teacher-forced coordinator forward (evaluate_held_batch) on every non-reset step even with infinite costs; the off route (SET) does not",
+  "differing_config_fields": {
+    "algorithm": {
+      "H": "hmasd",
+      "SET": "mappo"
+    },
+    "collects_high_level_samples": {
+      "H": null,
+      "SET": false
+    },
+    "contract_arm": {
+      "H": "H",
+      "SET": "SET"
+    },
+    "disable_discriminator_rewards": {
+      "H": null,
+      "SET": true
+    },
+    "disable_discriminator_training": {
+      "H": null,
+      "SET": true
+    },
+    "disable_high_level_training": {
+      "H": null,
+      "SET": true
+    },
+    "lambda_D": {
+      "H": 0.05,
+      "SET": 0.0
+    },
+    "lambda_d": {
+      "H": 0.02,
+      "SET": 0.0
+    },
+    "lambda_h": {
+      "H": 0.07,
+      "SET": 0.0
+    },
+    "n_Z": {
+      "H": 6,
+      "SET": 1
+    },
+    "n_z": {
+      "H": 6,
+      "SET": 1
+    },
+    "policy_interruption_mode": {
+      "H": "d2",
+      "SET": "off"
+    },
+    "seed": {
+      "H": 931201,
+      "SET": 932201
+    },
+    "team_cap_k_Z": {
+      "H": 10,
+      "SET": null
+    },
+    "use_central_snapshot_in_flat_actor": {
+      "H": false,
+      "SET": true
+    }
+  },
+  "config": {
+    "H": {
+      "contract_arm": "H",
+      "algorithm": "hmasd",
+      "n_agents": 6,
+      "n_uavs": 6,
+      "n_users": 50,
+      "num_envs": 16,
+      "rollout_length": 500,
+      "episode_length": 500,
+      "k": 10,
+      "n_Z": 6,
+      "n_z": 6,
+      "state_dim": 133,
+      "obs_dim": 90,
+      "action_dim": 3,
+      "action_space_type": "continuous",
+      "gamma": 0.99,
+      "gae_lambda": 0.95,
+      "ppo_epochs": 15,
+      "num_mini_batch": 4,
+      "sequence_batch_size": 32,
+      "coordinator_batch_size": 1280,
+      "high_level_batch_size": 128,
+      "high_level_buffer_size": 800,
+      "batch_size": 12000,
+      "discriminator_batch_size": 12000,
+      "lambda_e": 1.0,
+      "lambda_D": 0.05,
+      "lambda_d": 0.02,
+      "lambda_h": 0.07,
+      "lambda_l": 0.05,
+      "lambda_cd": 0.0,
+      "lambda_mi": 0.0,
+      "lr_coordinator": 0.0001,
+      "lr_discoverer_actor": 0.0001,
+      "lr_discoverer_critic": 0.0001,
+      "lr_discriminator": 0.0001,
+      "weight_decay": 0.0,
+      "clip_epsilon": 0.2,
+      "value_loss_coef": 1.0,
+      "max_grad_norm": 0.5,
+      "hidden_size": 256,
+      "embedding_dim": 256,
+      "n_heads": 8,
+      "n_encoder_layers": 2,
+      "n_decoder_layers": 2,
+      "gru_hidden_size": 256,
+      "use_valuenorm": true,
+      "use_obsnorm": false,
+      "use_statenorm": false,
+      "use_lr_decay": false,
+      "use_entropy_annealing": false,
+      "total_timesteps": 360000,
+      "seed": 931201,
+      "policy_interruption_mode": "d2",
+      "interruption_delta": 1,
+      "interruption_cost_c": "inf",
+      "interruption_cost_c_Z": "inf",
+      "skill_cap_k_max": 10,
+      "team_cap_k_Z": 10,
+      "age_feature": "off",
+      "continuous_action_distribution": "tanh_gaussian",
+      "continuous_logstd_init": -1.0,
+      "continuous_logstd_min": -5.0,
+      "continuous_logstd_max": 0.0,
+      "use_central_snapshot_in_flat_actor": false,
+      "disable_high_level_training": null,
+      "disable_discriminator_training": null,
+      "disable_discriminator_rewards": null,
+      "collects_high_level_samples": null,
+      "use_process_exploration": false,
+      "use_horizon_window": false,
+      "use_opt_compact": false
+    },
+    "SET": {
+      "contract_arm": "SET",
+      "algorithm": "mappo",
+      "n_agents": 6,
+      "n_uavs": 6,
+      "n_users": 50,
+      "num_envs": 16,
+      "rollout_length": 500,
+      "episode_length": 500,
+      "k": 10,
+      "n_Z": 1,
+      "n_z": 1,
+      "state_dim": 133,
+      "obs_dim": 90,
+      "action_dim": 3,
+      "action_space_type": "continuous",
+      "gamma": 0.99,
+      "gae_lambda": 0.95,
+      "ppo_epochs": 15,
+      "num_mini_batch": 4,
+      "sequence_batch_size": 32,
+      "coordinator_batch_size": 1280,
+      "high_level_batch_size": 128,
+      "high_level_buffer_size": 800,
+      "batch_size": 12000,
+      "discriminator_batch_size": 12000,
+      "lambda_e": 1.0,
+      "lambda_D": 0.0,
+      "lambda_d": 0.0,
+      "lambda_h": 0.0,
+      "lambda_l": 0.05,
+      "lambda_cd": 0.0,
+      "lambda_mi": 0.0,
+      "lr_coordinator": 0.0001,
+      "lr_discoverer_actor": 0.0001,
+      "lr_discoverer_critic": 0.0001,
+      "lr_discriminator": 0.0001,
+      "weight_decay": 0.0,
+      "clip_epsilon": 0.2,
+      "value_loss_coef": 1.0,
+      "max_grad_norm": 0.5,
+      "hidden_size": 256,
+      "embedding_dim": 256,
+      "n_heads": 8,
+      "n_encoder_layers": 2,
+      "n_decoder_layers": 2,
+      "gru_hidden_size": 256,
+      "use_valuenorm": true,
+      "use_obsnorm": false,
+      "use_statenorm": false,
+      "use_lr_decay": false,
+      "use_entropy_annealing": false,
+      "total_timesteps": 360000,
+      "seed": 932201,
+      "policy_interruption_mode": "off",
+      "interruption_delta": 1,
+      "interruption_cost_c": "inf",
+      "interruption_cost_c_Z": "inf",
+      "skill_cap_k_max": 10,
+      "team_cap_k_Z": null,
+      "age_feature": "off",
+      "continuous_action_distribution": "tanh_gaussian",
+      "continuous_logstd_init": -1.0,
+      "continuous_logstd_min": -5.0,
+      "continuous_logstd_max": 0.0,
+      "use_central_snapshot_in_flat_actor": true,
+      "disable_high_level_training": true,
+      "disable_discriminator_training": true,
+      "disable_discriminator_rewards": true,
+      "collects_high_level_samples": false,
+      "use_process_exploration": false,
+      "use_horizon_window": false,
+      "use_opt_compact": false
+    }
+  },
+  "parameter_count_note": "H counts from a one-lane build of the same recipe"
+}

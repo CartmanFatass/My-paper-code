@@ -1,0 +1,11 @@
+{
+  "claim_key": "974e8affdf229f605dc613c6a7afc855e1640a57ee139e128df732cf3af0673d",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/974e8affdf229f605dc613c6a7afc855e1640a57ee139e128df732cf3af0673d.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/coupled_host_joint_skills_stage1/b02_fit_SETVb_932201_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/974e8affdf229f605dc613c6a7afc855e1640a57ee139e128df732cf3af0673d.json",
+  "pid": 1008429,
+  "runner_pid": 1008430,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-29T16:16:18.569209Z"
+}
