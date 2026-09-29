@@ -226,3 +226,31 @@ Stage bytes are redundant execution inputs and will be deleted after verified
 collection and source-snapshot cleanup; required evidence remains in its original
 canonical location. The selected complete panel, per-asset rule and inherited
 costs are unchanged. Exact owned sources are ready for publication and admission.
+
+### Effect-free pre-admission state refusal and explicit control correction
+
+Source `8688b549c0672aa3349a344f14e6e3d4036af9cb` was published. Remote fetch
+completed and the frozen input JSON matched its declared digest. The existing remote
+Git auto-maintenance warning still reports bad tree 9e40125e…5862 and failed repack;
+source objects were readable, and no GC repair or peer-output change was attempted.
+At 2026-09-29 23:40:25 UTC the configured supervisor accepted the one launch request,
+but `hmasd_launch` immediately exited 4: `direction 'uav_correction_compression'
+has unrecognized active state 'active'`. This was NOT native result acceptance.
+
+Read-only reconciliation found no output directory, manifest or matching admission
+claim. Source tracing shows live policy validation precedes snapshot preparation, so
+no source snapshot or scientific worker was created; 0 native episodes/steps/fits/
+updates occurred. Preserve the [exact refusal record and supervisor log](../../../../runs/uav_correction_compression/b01_mean_deployment_a01/refusal.json).
+Supervisor start/exit have the same coarse second; subsecond wall and CPU are unknown,
+not a measured zero. There is no uncertain or accepted worker to restart.
+
+Root identifies the new registry state spelling as its registration error. I correct
+only my direction's state to the supported `exploring`, keeping the assigned lead,
+pause lift and scientific contract. Root/other lead handles the separate B row.
+Publish and narrowly synchronize only this control field under the remote writer
+lock, preserving the intentionally dirty canonical control file and peer rows.
+Select an explicit outcome-blind next launch at `b01_mean_deployment_a02` from the
+corrected published source: the same 224 still-unexecuted episodes and frozen assets,
+not a repeated accepted operation, extra panel or changed interpretation. All other
+inputs/code/rules are unchanged. No new scientific review is needed for this spelling
+repair; the first pre-admission refusal remains part of the complete record.
