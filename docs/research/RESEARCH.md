@@ -1502,6 +1502,274 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 <a id="portfolio-review-2026-09-29-joint-control-next-investment"></a>
 [Completed round decision: full Pro advice, focused independent review and A+B selection](archive/2026-09-29/RESEARCH-joint-control-next-investment.md#decision).
 
+<a id="portfolio-review-20260929-registered-service-and-calibration"></a>
+## Portfolio review 2026-09-29 registered-service-and-calibration
+
+Conversation: reuse the prior local Jev-account allocation conversation; its address stays local.
+Standing: all three inherited studies are fully read, independently diagnosed and closed.
+This is the owner-requested round-boundary innovator consultation, not permission to launch.
+The current Root independently checked the source passages below after receiving the separate-context review.
+
+### Question
+
+What is the best next bounded scientific investment after this complete round: deployment
+compression of useful learned corrections, a materially independent registered-user periodic-service
+question, both, a better concrete alternative, or stopping? Give constructive advice that can change
+Root's choice. Do not convert the critic's two suggestions into a required menu or permanent pairing.
+The owner usually wants3-4 substantive Codex DMs but not a quota; worthwhile work and actual node
+admission decide. An ordinary-control capability, empirical understanding or useful learning method
+can each be valuable. No positive finding, new architecture, proof/pilot, full headroom census or
+real-client prerequisite is required. More asset ranking is not learning progress by itself.
+
+**Complete changes in knowledge.**
+
+- Radio B03/source2bff85091, result7e43ebc6c, closure6e986dfb9:192episodes/49152steps/0fits.
+  S2-R J+.016514[.010983,.022044], service+1.504150[1.037317,1.970984]; T2-R
+  +.017367J/+1.667236service. T2-S2+.000853J/+.163086service intervals cross zero,
+  with9.64x scheduler CPU. S2/T2 lose quality and add mean1856/2107m per UAV versusR;
+  all adverse worlds remain. Real joint actions and locally positive native blocks can still
+  have adverse full trajectories. Retain S2 conditionally and R's quality/travel advantages;
+  no learning or pure-latency causality. Full collection+both readers1.142232CPUh.
+- G0/sourceb60b71e00, resultaa2c77e9f, closure1458d2c66:3fits/1920episodes/960000steps,
+  5.669workerCPUh/5.718wallh. A stationary evaluated endpoint retains full service in all64
+  events; two dispatch endpoints are adverse. Actual temporary motion/service/routing loss
+  retains native geometric interference; it is not full transmitter removal. This host has
+  not established a need for adaptive deployment. No matched initialization evaluation proves
+  learning progress of that positive endpoint. The fixed recipe ends, broader question stays open.
+- Calibration B06/sourcef288de641 plus recovered evaluation77c1cd9f4, resultda3c164f5,
+  closure25629ad82:6fits/843776persistedsteps plus0..256unknown original interrupted steps.
+  All224evaluation trajectories now covered by169original+55recovery, no repeated fits.
+  D-B40 meanJ+.008146783[.004504537,.011789030], service+.628865560[.328362082,.929369038]
+  across three continuation pairs, conditional on selected parentB19451 and common panel.
+  D-K+.004257073[-.001054199,.009568346] and+.325724284[-.018952737,.670401305].
+  Averaged fixed-endpoint world intervals are positive but answer a different question.
+  K is active/trained and has positive observed joint means in every pair; it is not a straw
+  baseline. D correction mean accounts for99.25/97.93/77.18percent of second moment, not return.
+  D introduces adverse worlds/new zero-service periods despite mean gains. Retain all assets,
+  no new default, no state-information/message-causality or parent-population claim. Known
+  finalized five-cell+recovery+reader cost2092.419CPU-s excludes original sixth-cell/failed-attempt
+  CPU and support; unknown is not zero. Original interrupted operation remains interrupted.
+
+The three studies total9fits/1852928persistedsteps plus the unknown prefix. This recovery
+added0fits/14080steps. Support is incompletely metered; do not invent a precise combined CPU total.
+The previous A+B Pro answer predicted simpler-composition/calibration branches; it is a prior
+reasoning source, not advice that has already assessed these new complete results.
+
+**Concrete possibilities and questions for your judgment.**
+
+A. Can expressive training be deployed as a simpler correction while preserving useful complete
+behavior? Freeze each of the three D endpoints' mean pre-tanh correction from completed B06,
+then compare D1..3, their three constants and B40 on32fresh common scene/channel/motion tuples:
+224H256episodes/57344steps/0fits. Preserve own actual histories, sampled composed action,
+parent variance, legal40-byte messages, all tails, and full nativeJ/service. No amplitude tuning,
+best-constant selection or hidden new-parent claim. A constant inherits D's entire training and
+calibration exposure; its success would not prove three-parameter training finds it or explainK.
+The observation can change representation/asset use and motivate train-expressive/deploy-simple,
+not automatically establish a new algorithm. About110CPU-s is an evaluation anchor only;
+engineering/reader and actual savings require measurement. If preservation is the decision,
+recommend a meaningful prospective tolerance and uncertainty reading rather than non-significance
+as equivalence. Is this decision worth buying now, compared with a direct finite-learning question
+or leaving the useful conditional asset alone? Generalizable scientific knowledge may justify
+replication without a literal deployment customer, but another parent/seed block is not automatic.
+
+B. Can ordinary scheduling of registered users improve periodic link-service opportunities
+at a worthwhile full-nativeJ/service/travel cost? The changed premise is the later radio contract's
+ordered400-byte quantized site map: earlier B0 user-identity telemetry was evaluator-only, so long
+gaps did not establish actor access or avoidability. Source now computes per-user predicted
+connections before aggregate scoring. A proposed explicit use case is one native link opportunity
+per registered user in each of four64-tick windows. This is not a claim about actual packet/queue
+service or a retrospective fairness criterion for frozen studies. Keep long gaps, total service,
+quality, nativeJ, motion and deadline costs beside the new periodic endpoint; window boundaries
+must not hide gaps crossing them.
+
+The independent review proposes S2, T2, oldest-predicted-service-first and a within-window
+unserved-user priority, all using the existing finite sequential search where applicable:
+64freshworlds/256H256episodes/65536steps/0fits, about4.85million candidate requests and .93CPUh
+native anchor before changed scoring/readback/engineering. T2 remains a meaningful ordinary
+alternative despite its unresolved aggregate-J increment. Two reviewed native examples show
+S2/T2's aggregate and periodic rankings differ, but are selected examples, not population headroom.
+Root raises one comparison question: R remains a cheaper retained ordinary reference and has not
+been dominated on the new periodic objective. Would including unchangedR earn its modest marginal
+cost (64episodes/16384steps, about121CPU-s at B03 throughput), or is another comparison more
+informative? A five-arm option would be320episodes/81920steps and roughly4,980,736requests,
+not the four-arm quote. R's original timing is a cross-contract reference, not a falsely matched
+attribution control. Do not require a factorial merely because a control is possible.
+
+Crucially the controllers may use only decoded reports, known issued/executed commands/masks,
+the quantized registry and lawful model. True evaluator connection bits cannot become actor
+inputs. Specify the minimal causal history update at report/arrival/actual execution, preserving
+startup, terminal half-block, quantization, deadline/fallback and accumulated model error; candidate
+rollouts must not update factual history. If acknowledgements are necessary, justify/cost a changed
+contract and give it to all relevant ordinary comparators rather than silently adding oracle feedback.
+Use an actually competent ordinary age/history rule; a convenient weak weighted score is not enough.
+No new learning is demanded or excluded; this comparison is not a mandatory gateway before learning.
+The new predicted effect must concern realized periodic service, not merely internal predicted coverage.
+
+C. A better independent concrete learning/decision question or no additional purchase remains
+legitimate. It must identify the native phenomenon/use, legal information/resources, strongest
+ordinary alternative, what the smallest complete observation changes, and dominant fit/nonfit/
+engineering cost. Do not produce a vague learner, a deeper search, arbitrary objective knobs,
+renamed energy/availability repair, another integer clock or a count-filling third track.
+The relevant literature bridge can motivate conjecture; no novelty claim follows from one paper
+or an index miss. Consider useful capability development alongside diagnosis and stopping.
+
+Return a reasoned allocation, strongest constructive and simpler explanations, concrete corrections,
+prospective intermediate and complete-native predictions, adverse/outcome branches and full costs.
+Explain whether the marginal second question is worth its distinct contribution; neither buy-one
+nor buy-both is a standing rule. Preserve MATERIAL_DISSENT yes/no against consequential claims or
+recommendations. Do not launch, change another direction, grant budgets or add approvals.
+
+### Context and source boundaries
+
+At source_sha supplied with the send, read the affected RESEARCH background (lawful information,
+ordinary control, communication/finite learning, cost/uncertainty) and the exact current direction rows.
+Use these as revisable judgments, not instructions that must win. Read:
+
+- `docs/research/candidates/uav_radio_activation/NOTES.md`: B03 Complete Reading, Recovered
+  Independent Scientific Diagnosis and disposition; `runs/uav_radio_activation/b03_two_tick_delivery_a01/{config,summary,reading}.json`.
+- `docs/research/candidates/uav_availability_recovery/NOTES.md`: completeB01 and Independent
+  scientific reading and resolved investment; corresponding `runs/.../b01_joint_reserve_a01/` compact outputs.
+- `docs/research/candidates/uav_message_content/NOTES.md`: B06 prospective and complete endpoint
+  reading/Independent diagnosis, DM response and investment boundary;
+  `runs/uav_message_content/b06_eval_recovery_a02/{summary,reading}.json` and originalB06 config.
+- `docs/research/archive/2026-09-29/RESEARCH-joint-control-next-investment.md`: complete previous
+  Pro answer, focused comparator correction and Root decision, not remembered chat rules.
+- `docs/research/archive/2026-09-29/RESEARCH-continuity-forecast-result-boundary.md`, Root read-only
+  question preparation: earlier long-gap/identity limitation, not a new fair-service result.
+- Load-bearing new-contract source: `experiments/candidates/uav_radio_activation/b01/protocol.py`
+  encode_map/decode_map and `b03/scheduler.py` score. Root read their current source: registry order
+  is retained, coordinates quantized to integer metres; scorer derives per-user connections from
+  lawful forecasts. Neither source supplies actual service acknowledgements or a periodic controller.
+- Primary bridge **icml-2024-pmlr-v235-alamdari24a**, Alamdari et al., *Remembering to Be Fair:
+  Non-Markovian Fairness in Sequential Decision Making*, arXiv2312.04772v4, PDFpp4-5,
+  definitions4.2-4.9: terminal/periodic assessment differs, and known dynamics may support planning.
+  Public source: https://arxiv.org/pdf/2312.04772v4 . Root personally read pp1/4/5 in
+  `/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/icml-2024/pmlr-v235-alamdari24a/arxiv-2312.04772.pdf`,
+  SHA256c2a038efe6ae66360b61eff6c8ffcadd2b3e77ad04615531a0c542e9e2831483.
+  The local path is not connector-accessible; this paragraph supplies only the verified bridge,
+  not a theorem for UAVs, a FairQCM proposal or evidence that RL must help. Reviewer checked three
+  local stores and relevant July/external records; no novelty or exhaustive coverage claim is made.
+- Constitution §§1-5,7-8; scientific-tools Choose the question, Design the comparison, Update the
+  working explanation, Comparators, Statistics, Cost and exposure; portfolio-task Steps/Boundaries.
+  These current methods replace stale chat rules while frozen comparisons retain their meanings.
+
+Full new cross-question independent review is preserved below. It reconstructs compact evidence
+and selected raw examples, reusing adequate full critics; it does not claim exhaustive new raw audit.
+Local raws are not connector-visible. Pro must disclose critical unread sources rather than claim
+new verification. Claude owns `coupled_host_replan_timing` R2 lawful fact forwarding/replanning and
+its D2/SET-slot legacy; do not duplicate or take over them. FSD/PPC pauses, G33 freeze, Milan
+owner-data dependency and completed-DM non-reuse remain. Codex Root is resumed; this consultation
+awaits only the decision it can change. Actual memory/node admission applies even to0fit studies.
+Remote login-shell origin query now works but canonical checkout/peer-output conflicts remain
+unresolved; no immediate parallel remote occupancy is promised. Engineering staging facts do not
+establish scientific feasibility or require a new governance process.
+
+### Answer
+
+Complete separate-context ResearchCritic `/root/round_investment_review` return.
+Wording preserved; checkout-relative links rebased for this index. Native source text SHA256
+`53b2c57e093892d892a81aa1c856db0c1ead81565c015bb5216a73d967ff07fb`.
+
+**Recommend a bounded two-question round:** test whether B06’s useful residual policies can deploy as fixed calibrations, and develop an independent registered-user temporal-service comparison. Retain S2 and the G0 stationary capability; stop the present radio-clock/search and G0 fitting recipes. If engineering capacity permits only one purchase, take the compression comparison first.
+
+No DM/Root conversation was inherited. Brief index dispositions appeared during navigation, and Root’s optional-compression message arrived during reconstruction; this was a separate-context review, not a fully blinded one.
+
+**What the completed round changed**
+
+| Question | Supported change | Strongest simpler explanation |
+|---|---|---|
+| Radio B03 | S2/T2 develop complete mean J/service beyond R. S2 captures the established benefit economically; T2’s additional benefit remains unresolved. | Competent ordinary composition under the revised delivery/commitment contract supplies the gain. More joint enumeration has not earned its cost. |
+| G0 availability | Actual member unavailability can coexist with full service without reserve dispatch. The positive endpoint supplies a useful stationary witness. | Existing placement is sufficient on this battery-off panel; discretionary movement introduces losses. |
+| B06 calibration | Bounded continuation develops the selected parent’s complete mean J/service across three continuation pairs. The value of the varying correction remains unresolved. | D may find a better largely constant calibration through different finite optimization. |
+
+Radio’s S2−R means are **+.016514 J / +1.504150 users per tick**. T2−S2 is **+.000853 / +.163086**, with both descriptive intervals crossing zero, while scheduler CPU is **9.64×** S2’s. Quality, travel and adverse service-tail worlds remain costs. These are active interventions: the result cannot be explained by an unexecuted joint controller. They also do not identify pure latency causality. [B03 evidence](../../runs/uav_radio_activation/b03_two_tick_delivery_a01/summary.json), [complete diagnosis](candidates/uav_radio_activation/NOTES.md#recovered-independent-scientific-diagnosis).
+
+G0’s two constant-dispatch endpoints lose to P in every evaluation world; each has mean **−8.967013 J**. The stage/hold endpoint reaches QoS **1 in all 64 worlds**, exceeding P by **+.338132 J**. All commands received training exposure, and parameters moved; sparse action exposure is not the explanation. Without initialization evaluation, however, the positive endpoint does not establish improvement through its own training. P’s three-world gains remain useful conditional evidence, but its incumbent-favoring ties did not eliminate the stationary alternative. [G0 per-world evidence](../../runs/uav_availability_recovery/b01_joint_reserve_a01/perworld.json), [independent reading](candidates/uav_availability_recovery/NOTES.md#independent-scientific-reading-and-resolved-investment).
+
+B06’s D−B40 means are **+.008147 J / +.628866 users per tick**, with positive descriptive conditional training intervals. D−K means are **+.004257 / +.325724**, with intervals crossing zero despite positive means in every pair. D loses service against B40 in **10/11/12 worlds**, and introduces some new zero-service periods. Its constant component supplies **99.25%/97.93%/77.18% of correction second moment**—not those fractions of return. This supports the calibration alternative while leaving consequential state variation possible. K remains a trained, active comparator; it should not be retrospectively dismissed because D produced larger offsets. [Complete B06 reading](../../runs/uav_message_content/b06_eval_recovery_a02/reading.json), [published interpretation at da3c164f5](candidates/uav_message_content/NOTES.md#independent-diagnosis-dm-response-and-investment-boundary).
+
+The [previous allocation advice and decision](archive/2026-09-29/RESEARCH-joint-control-next-investment.md) anticipated these branches. Radio reaches its simpler-composition branch. B06 strengthens useful parent development but does not settle its proposed varying-correction advantage. G0 weakens the adaptive-deployment premise itself. These are different updates, not evidence of one shared learning failure.
+
+**First purchase: train with D, test deployment as a constant**
+
+I support the proposed **three D endpoints versus their three frozen mean-correction variants, plus B40**, on **32 fresh common tuples: 224 complete H256 episodes, 57,344 steps, zero new fits**.
+
+The consequential question is:
+
+> Can the useful result of expressive training be retained after removing the correction network’s online state dependence?
+
+Freeze each vector from the completed B06 panel before evaluating new worlds. Preserve sampled deployment, inherited variance, legal messages and each program’s own evolving observations and executed-action GRU history. Do not replay B40 histories, select the best constant, or tune amplitudes on the fresh panel.
+
+The outcomes change real choices:
+
+- **Constants retain useful complete gains and D supplies no consequential additional benefit:** preserve a simpler deployment representation. This supports developing “train expressive, deploy simple.”
+- **D retains a useful increment over its corresponding constant and B40:** preserve varying corrections as a substantive deployment capability worth developing.
+- **Neither transfers, or the comparison remains unresolved:** retain B06’s original conditional result and end this functional comparison without automatic extra panels.
+- **Mean gains carry materially worse service tails:** retain the tradeoff rather than declaring a replacement.
+
+Any preservation/noninferiority tolerance used for an adoption statement must be declared prospectively; a nonsignificant D−constant contrast does not establish equivalence.
+
+The strongest consequential objection to the optional proposal is its possible interpretation: **a constant extracted from D inherits D’s training and calibration exposure.** Success would not show that cheap three-parameter training finds that constant, explain why K differed, or establish message-mediated coordination. The approximately 16,000-parameter correction network is also only part of the full policy; actual deployment savings must be measured rather than inferred from parameter count.
+
+Recovery throughput gives roughly **110 CPU-seconds** as a scientific evaluation anchor. Own-history integration checks, reader work and engineering remain additional and unmeasured. That bounded cost buys a direct deployment intervention, making this more worthwhile than another six-fit block or an attribution-only replay. It is not a prerequisite for other learning research.
+
+**Second purchase: periodic service to registered users**
+
+The strongest concrete independent question I found is:
+
+> Under the existing registered-map radio contract, can ordinary scheduling using predicted per-user service history increase periodic service opportunities, at a worthwhile complete J/service/travel cost?
+
+This revisits an existing question with a changed information premise. Earlier B0 traces showed broad eventual contact alongside long gaps, but evaluator identities were unavailable to its anonymous actor. That did not establish avoidable unfairness. The later radio contract now supplies an **ordered 400-byte quantized site map**, and its scorer already computes per-user connection matrices before reducing them to aggregate J/service. [Earlier temporal evidence and limits](archive/2026-09-29/RESEARCH-continuity-forecast-result-boundary.md#root-read-only-question-preparation), [map encoding](../../experiments/candidates/uav_radio_activation/b01/protocol.py:27), [candidate scoring](../../experiments/candidates/uav_radio_activation/b03/scheduler.py:81).
+
+Two checked B03 examples show why aggregate and temporal readings can differ:
+
+- World **29307060**: S2 serves all 50 users eventually, but covers **166/200 user–64-tick-window pairs**; T2 covers **177/200**, despite slightly lower complete J/service.
+- World **29307006**: S2 covers **169/200** such pairs versus R’s **149/200**, despite lower complete J/service.
+
+These selected cases establish neither population gains nor avoidable losses. They motivate a distinct prospective service contract.
+
+A complete bounded comparison would use **64 fresh worlds, four fixed ordinary programs, 256 H256 episodes and 65,536 steps, zero fits**:
+
+1. Retained S2.
+2. Retained T2, preserving its potentially different temporal capability.
+3. An ordinary oldest-predicted-service-first controller using the same sequential candidate search.
+4. A periodic-service controller prioritizing registered users not yet predicted served in the current reporting window, with native J/service tie-breaking.
+
+Use four declared 64-tick reporting windows as an explicit experimental use case: one native link-service opportunity per registered user per window. Preserve original J, aggregate service, quality, travel, deadlines, per-user gaps and every adverse world. This is a new temporal-service objective, not a retrospective failure criterion for S2/B06 or a claim about actual application-packet delivery.
+
+All programs receive the same map, reports, clocks and control rights. Their service-history estimates must come from decoded reports, known issued commands/masks and the lawful model. **True evaluator connection bits cannot enter the controller.** Quantization and accumulated prediction errors remain part of the tested package. If acknowledgements are later added, that is a different information contract whose acquisition, traffic and timing costs must reach every comparator.
+
+Distinct predictions:
+
+- History priorities change which registered users receive opportunities, and complete periodic coverage improves over both retained control and the ordinary age rule: retain the conditional scheduling capability.
+- The simple age rule supplies the benefit: retain it; no learning purchase follows automatically.
+- Predicted coverage improves but actual coverage does not: weaken this modelled-history recipe.
+- Coverage improves only through an unattractive aggregate-service/travel tradeoff, or existing controllers remain preferable: stop this recipe without claiming temporal scheduling impossible.
+
+This is a complete ordinary-control question, not a mandatory gate before learning. It differs from Claude’s R2 fact sharing/replanning question, D2/SET-slot learning, G33 demand bursts, and energy replenishment.
+
+The dominant cost remains online search. Four-arm upper candidate requests are approximately **4.85 million**. B03’s measured T2 plus three S2 episode costs provide a rough **0.93 CPU-hour native-work anchor**, before changed scoring, initialization/readback and engineering. Engineering is likely the dominant uncertainty; no new implementation has been inspected or timed. That uncertainty is more substantial than for compression.
+
+The primary-source bridge is limited but relevant: *Remembering to Be Fair*, **icml-2024-pmlr-v235-alamdari24a / arXiv:2312.04772v4**, definitions 4.2–4.9, distinguishes terminal from periodic assessment and explicitly allows planning when dynamics are known. It supplies neither a UAV result nor a reason learning must win. I checked the three local stores and relevant July/external-review references; this is **not a novelty claim**. [Primary PDF, pp. 4–5](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/icml-2024/pmlr-v235-alamdari24a/arxiv-2312.04772.pdf).
+
+**Cost, stopping and verification limits**
+
+The completed three studies purchased **nine fits and 1,852,928 persisted native steps**, plus B06’s unknown **0–256** interrupted steps. Radio B03 used **1.142232 CPU-hours including both reader attempts**; G0 used **5.669 worker CPU-hours**; B06’s known five-cell/recovery/reader subtotal is **2,092.419 CPU-seconds**, with the original sixth-cell and batch CPU totals missing. Support is incompletely metered. These cannot honestly be collapsed into an exact total project cost.
+
+Stopping all new work would preserve useful results, but relinquish two bounded choices: whether D’s learned capability needs its online correction network, and whether the newly available registered-map control can support a different temporal-service objective. Those have more marginal value than refining T2−S2 precision without a decision threshold, repeating G0 on a panel already admitting stationary full service, or automatically adding parent/seeds/radius changes.
+
+I checked the frozen protocols/configuration identities, compact endpoints and costs; independently aggregated consequential radio/G0 fields; verified radio and recovery summary-reader hash bindings; and inspected **15 native trajectory files** spanning positive/adverse cases, checking endpoints and common exogenous inputs. I reused the completed critics for exhaustive physical, training-checkpoint, optimizer and candidate-subset reconstruction. I did not rerun full readers, audit every dependency, or establish feasibility/performance of the proposed controllers.
+
+Preserve Claude’s existing R2 work, D2/SET-slot evidence, FSD/PPC pauses, G33 freeze and Milan dependency. No run, edit, child or external message was made.
+
+**MATERIAL_DISSENT: no.** The completed closures and narrow claims are supported, and Root has selected no conflicting next allocation. My recommendation is constructive continuation through the two specified questions, with compression given priority—not renewed investment in the completed recipes.
+
+### Pro Answer
+
+### Decision
+
+Pending the complete innovator answer and Root source-grounded disposition; no new study selected.
+
 ## Current research plan
 
 ### Completed inherited round
@@ -1521,8 +1789,8 @@ B06原操作仍是owner中断，单独补评完成覆盖；一次补评路径绑
 三个方向净删除8,254,582,784allocated bytes，唯一必要raw／checkpoint／compact正反失败证据均保持；
 不把回收量称为Git对象缩减或全宿主空闲量。完整成本及缺失测量见各NOTES。
 
-**下一步：** Root独立跨问题审查`/root/round_investment_review`正在重构结果并比较边际投入；
-按owner原委托请Pro作建设性创新建议，再选择值得购买的具体问题。当前未选追加fit、面板或新方向。
+**下一步：** Root独立跨问题审查`/root/round_investment_review`已完成，提出压缩部署与注册用户周期服务两项有界建议；
+Root核对关键来源并提出R参照／因果历史更新等待决问题，按owner原委托请Pro作建设性创新建议，再选择具体投入。当前未选追加fit、面板或新方向。
 认真考虑发展已有能力与实质独立的问题，也允许不购买；不把低fit成本当作零工程成本，
 不把未通过采用规则等同于能力不存在，不把开放问题当作自动续跑理由。
 
