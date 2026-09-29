@@ -581,3 +581,23 @@ Facts: L2(H, pair 2) = .211 − .639 − .0705 = **−.499** (SET −.485); H lo
 Watcher armed. After pair 3: B12 collections on the node (`collect_commitments.py` on H c15/c30/c45 from the artifacts copies, three H fits × 3 checkpoints ≈ 9 collections; cost re-priced from the first one before the rest), the reader, then the batch reading by the fixed rules. **Cumulative: 4 fits complete = 20.4 CPU-h; 2 running; projected batch ≈ 30.5 CPU-h + collections.**
 
 **2026-09-29 12:57 UTC — correction and B12 start.** The previous entry's "H c15/c30/c45 ≈ 9 collections" misstated the declared P3 unit: one table per H fit from its final checkpoint c45 (P3 = supported on ≥ 2 of 3 H seeds), i.e. three collections. The first collection (H 931201, c45, sha256 0a74c705…) is launched now, in parallel with pair 3 (node has spare cores; collections are inside the 35 CPU-h cap and do not depend on pair 3); its measured cost prices the other two before they are launched. Launch entry `launch_b01_collect.sh <sha> <fit tag> <seed> [c-index]` (committed here), launch sha c3e3bf10d (the collector is unchanged since 68e441f3e). Argument fact: the checkpoint is passed relative to the checkout (`runs/<fit>/checkpoint_45.pt`); the snapshot launcher leaves relative arguments untouched and the collector resolves them against the checkout that holds `runs/` and records the digest.
+
+## 2026-09-29 13:20 UTC — P3 collection 1 and reading 1 (H 931201, c45): reading UNSUPPORTED by the pre-specified rule; collection 2 and reading 1 launched
+
+**Collection 1** (`b01_p3_collect_H_931201_a01_c45`, accepted 12:58:13 UTC, claim 8f6270599d09…, pids 992858/992859; exit 0 at ≈ 13:06 UTC; rsynced; `commitments.npz` is git-ignored — durable copies: the node run directory and this checkout): checkpoint `runs/…/b01_fit_H_931201_a01/checkpoint_45.pt` sha256 0a74c705… (matches the fit summary; tensors bitwise equal after load, normalisers equal, config equal, route d2/k 10/costs ∞/age off), 16 rollouts × 16 lanes, episodes 46–61 (worlds 7801xx…, never a panel world), 128,000 team steps, **12,800 commitments = 256 lane-episodes × 50**, zero optimizer steps, digest equal. Structural zero check: max |Δaction| = 0.0 (deterministic and sampled) over 200 rows × 5 other team labels; control (agent 0's individual label) 4.45. Cost: **472 s wall, 1,661 CPU s = 0.46 CPU-h**, peak RSS 0.76 GB; 3.66 ms per team step (policy 2.34, env 1.29). Clip events 763,893 of 768,000 UAV-steps (99 %).
+
+**Reading 1** (`b01_p3_read_H_931201_a01_c45`, accepted 13:18:58 UTC, claim 155f4a240650…, pids 994471/994472, exit 0; table sha256 d5f4f26e…; 1,000 draws, seed base 20260929; 2.5 s):
+
+| item | value |
+|---|---|
+| readability | READABLE: 66 of 72 added columns supported (all 15 products); the 6 unsupported are the diagonal `rp_z_z` (58–123 non-zero rows, below the 128 floor); rank increment 66/66; folds non-empty; placebo readable |
+| primary Δ (MSE_R − MSE_F, 8 folds) | **−4.20e−6** (per fold: +2e−6, +1.1e−5, −1.4e−5, −1.1e−5, −1.7e−5, −9e−6, −9e−6, +1.4e−5); direct refit −4.20e−6 |
+| null q95 / fraction of null below Δ | −6.29e−6 / .997 |
+| **primary decision** | **unsupported** (rule: Δ > 0 AND Δ > q95; the first clause fails) |
+| products-only Δ / q95 / fraction below | −8.53e−7 / −3.99e−7 / .823 → **unsupported** |
+| placebo (team-label one-hots) | Δ −2.8e−7, q95 +1.3e−7, not passed (as it should) |
+| scale | fold MSE_R ≈ 7.4e−4 – 1.24e−3; residual SD of R .032; \|Δ\| ≈ .4 % of MSE_R |
+
+Fact recorded without reinterpretation: the observed Δ sits above 99.7 % of the additive-null draws (the null distribution of Δ is centred near −1e−5 because 66 noise columns cost held-out MSE), i.e. the added block predicts slightly better than 66 spurious columns would, yet still worse than R alone; the pre-specified rule requires an outright held-out improvement and reads **unsupported**. On the synthetic additive null, Δ > q95 occurred in 0/40 tables, so this position is unusual under the null; it is one H seed, and no rule is changed by it. The reading is also on an incompetent checkpoint (pair-1 L2(H) −.475), which the disposition anticipated: P3 is conditioned on P2(H) for the roles claim.
+
+**Launches:** collection 2 (`b01_p3_collect_H_931307_a01_c45`, checkpoint sha256 1132a5dc…, accepted 13:18:26 UTC, claim 3709c2366b66…, pids 993989/993990); reading launch entry `launch_b01_read.sh <sha> <collection tag>` (5259ed8c4). Collection 3 and readings 2–3 follow pair 3's H fit. Cost so far: 4 fits 20.4 CPU-h + collection 0.46 + reading ≈ 0; pair 3 running.
