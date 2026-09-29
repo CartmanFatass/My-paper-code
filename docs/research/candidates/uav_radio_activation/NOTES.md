@@ -630,3 +630,170 @@ bytes / 21,049,344 allocated bytes, with all 192 digests verified. The compact
 native records preserve process and observer history after scratch deletion.
 No cleanup blocker, active worker/observer, unread result or pending scientific
 decision remains. No other direction's snapshots or caches were swept.
+
+## 2026-09-29 - B02 Prospective Joint Motion and Activation
+
+Lead: new native `hmasd-direction-manager` `/root/dm_radio_joint_control`, parent
+Root `01a0e560-4333-7b03-8ff3-759a4add1d9a`, shared main. Selection, exploring
+state and routing are published at `64eccccb24136ea5ea6fb3ca7df6a70b39203410`.
+The former B01 child is fully complete; inherit this same direction, useful
+C/G/E code, positive/adverse evidence and cost, with no adopted live operation.
+Owner pause is lifted here; other direction pauses and accepted work are unchanged.
+The complete [Pro question/answer, focused independent review and Root decision](../../archive/2026-09-29/RESEARCH-radio-capability-innovator.md)
+have been read. Root resolved Pro's material dissent against no further purchase
+by selecting this changed comparison with all four reviewer corrections. This
+completed selection review applies without a new review or positive pilot.
+
+### Question and Fixed Comparison
+
+Can useful ordinary joint motion-and-transmitter activation extend retained
+C+E beyond competent coordinated sequential control under explicit delayed
+motion commitments? The target is conditional task usefulness and empirical
+understanding, not learning, novelty, pure coordination causality or hardware use.
+Published RESEARCH at `64eccccb2`, background sections1/2/6/8, concretely motivates
+retaining C+E, giving S the same new rights as T, and reading complete native J
+AND service rather than forecast containment. B01's E-A +.119393J/+7.781250users
+and E-G +.004385/+.384644 remain capabilities; world29305038 and mixed ordinary
+planning evidence prevent a trajectory guarantee. If a member is silent, its
+movement has no current radio value at that fixed mask, while move+reactivate
+may. Both sequential orders can miss that pair. Occurrence and full benefit
+remain conjectural; stale proposals, limited support and short horizon can lose.
+
+The full Root Decision linked above fixes the unchanged N5/U50/H256 host,
+registered static50site map, native reward, retained C(history=False), pure
+radio kernel, all27commands and31nonempty masks. R is original C+rolling E
+with B01 timing. S tries both full-team sequential orders, motion at current
+mask then mask, and mask at original C then motion, taking the better. T tests
+all837pairs for fixed member `(tick // 4) % 5`; others keep their C proposals.
+S/T rank J, served, preservation of selected member's C command, more active
+transmitters, increasing mask integer, then increasing existing COMMANDS index.
+No tolerance changes a decision. T-S is joint-search+compute; S/T-R is the
+whole rights/information/clock package. Expose command aliases at boundaries
+through actual executed displacement as well as command-index differences.
+
+At t0, C is called once per member and reused as initial actual command and
+first proposal. S/T call C only at reports0,4,...248 on actual refreshed local
+observations, preserving its navigation updates even on misses. C suggestion,
+commitment and actual command are distinct. Predict four ticks of current
+actual commands then the candidate block; score positions+5..+8. Save preceding
+transition reward before atomic arrival at t+4, refresh observations, then
+generate the following proposal. First four all-on transitions remain; no
+terminal t252 proposal. A late plan holds prior actual TEAM commands+mask,
+without suggestion execution, state rollback, partial winner or queued work.
+
+Version2 reports24bytes repurpose three reserved bytes for next C proposal;
+the old velocity fields carry actual commands. Version2 commands16bytes bind
+mask/member/COMMANDS index/sequence/effective tick/hold. Nominal136bytes/round,
+63rounds=8,568recurring bytes per S/T episode, plus400byte map. Count actual
+traffic on misses;8,568 is the upper bound. No hidden channel/connections/future
+state. S/T's3.456s timer starts before C proposal generation and covers reports,
+prediction/search and command encode/decode; .544s airtime completes the4s
+window. Native transitions/radio refresh and evidence serialization remain
+outside planner time. R retains.456s and its C cost is separately reported.
+Timing is conditional on host/load, not a platform-replication result.
+
+Fresh paired seeds29306000..29306063;192episodes/49,152native steps/0fits and
+updates, no extra arm/pilot/panel. Orders cycle RST,STR,TRS,RTS,TSR,SRT, balanced
+to within one per position. Upper work:3,969,472candidate scores,
+15,875,904mask-state reductions,887,232scored geometries,32,256prefix ticks,
+60,800Cdecisions/1,641,600Ctrajectories/6,566,400Cmodelticks. Cache geometry across
+masks and repeated S queries; record actual work and request counts. T's matrix
+supports same-input S shadow only at T's visited states, never S trajectories.
+
+Configured local_linux/one thread/fresh4GiB floor, three-CPU-hour native-worker
+ceiling including setup/collection/search/output. Preserve incomplete evidence
+on ceiling, with no prefix inference/resumption/retry. Old ~42.1schedulerCPUmin
+is sensitivity arithmetic, not runtime or a bound. Collection and reconstruction
+are measured separately;12-24supporthours remain conjectural. B01's49,152steps
+and.325752collection+readerCPUh remain inherited; complete B02 adds49,152steps.
+Local NumPy CPU is suitable and avoids Claude's remote allocation; G0's accepted
+local snapshot is untouched and admission still checks actual resources.
+
+### L0 Implementation Scope
+
+Deliver B02 codecs/search/runner/reader under direction-owned `b02/`, matching
+tests, this notebook, runs and scratch. No edits to B01/C/kernel/shared launcher,
+relay C++, G0 or Claude code. Registered Implementer owns only B02 `protocol.py`,
+`scheduler.py` and `test_protocol_scheduler.py`; DM owns other files. Helper
+uses shared main with no index/commit/NOTES/RESEARCH/launch ownership, spawns no
+children and preserves all concurrent edits. Scheduler accepts only own-position
+rows, actual commands, proposals, tick/mask and start clocks taken before C;
+returns decoded commitment, packets, forecasts/scores, work and timing. Reuse
+source-owned physics, cache geometry and S duplicate scores, derive S shadow
+from T's existing matrix. No live environment enters search.
+
+Focused checks: both-order choice, silent move+reactivate synthetic scores,
+C-preserving ties/clipping aliases, codecs/rejects, four-step prefix/+5..+8,
+single t0C/no t252, reward-before-arrival, distinct actual/suggestion state,
+atomic late proposal/encoding/decoding fallback, unchanged R, full raw/endpoint
+reconstruction, partial resource evidence and fixed admission/source binding.
+Fixture seeds differ from panel; no scientific pilot. Independent registered
+engineering review covers executable timing/numerical/identity risks; DM accepts
+diff and checks. Exact inputs commit/push before native admitted detached launch.
+Keep child active through deterministic same-handle observation and reading.
+
+One canonical compressed raw per arm/world; compact results in Git. Reader
+reconstructs every native motion/reward/service/observation/C suggestion and
+commitment, validates search selection from recorded matrices, and checks a
+prospectively fixed small candidate subset against physics. Recomputing every
+candidate physics is not required; disclose coverage and reuse kernel checks.
+Read full J/service/quality and every world, p10/minimum/zero outages, paths,
+discovery/fallback, requested/executed changes, forecast errors, traffic and
+compute/deadlines. Paired t95 uses reset worlds, not training instances or load
+replication. T useful over S AND R retains capability; S>R without earned T
+increment favors S without equivalence; T>S but not R earns no replacement.
+Active choices/better forecasts without native benefit weaken this finite
+package; tails remain costs. Independent diagnosis at material result boundary.
+No automatic deeper search/learner/repair/panel; calibration/held-mask remain
+unselected outside this task. Own publication/shared-background revision and
+measured cleanup precede native return of evidence, changed judgment and next
+action versus stop. Cross-question allocation belongs to Root.
+
+### Outcome-Blind Implementation and Checks
+
+Registered Implementer `/root/dm_radio_joint_control/commitment_search` returned
+the version2 codec and S/T search, with eight focused checks. DM read the full
+diff and integrated native collection and reconstruction. S caches duplicate
+scores but counts116 algorithmic requests, excluding final ranking lookups;
+T counts837 and reads its sequential shadow from the same completed matrix.
+The fixed reader subset is Cq/all-on, Cq/current-mask, selected pair, sequential
+pair, and `(round_index % 27, 1 + round_index % 31)`, wherever the S score exists;
+all native transitions/C/commitments and matrix decisions are reconstructed.
+R reuses the original complete reader and every retained E score check.
+
+Two outcome-blind test corrections: duplicate B01/B02 test module names caused
+collection failure, resolved by unique `test_b02_*` filenames (the attempted
+package marker shadowed the source namespace and was removed). The atomic
+pre-search deadline fixture caught empty pair-list assignment into a `(0,2)`
+recorder slice; it now preserves the empty record and prior actual team command.
+The synthetic silent-member fixture also now holds its radio score identical
+across that member's commands, matching the declared structural conjecture.
+Combined B01/B02 author checks pass48tests in2.89s, with only existing third-party
+Pyparsing deprecation warnings. Fixtures use seeds811..815 and synthetic data,
+not the result panel or a timing pilot. Final terminal-observation reconstruction
+was then added. Required engineering review of the whole executable path is next.
+
+### Engineering Acceptance
+
+The final terminal-observation change passes all seven collector/reader tests
+in2.47s. Registered independent Reviewer
+`/root/dm_radio_joint_control/engineering_review`, separate context without
+conversation inheritance, returned:
+
+> No material engineering finding remains. No repair requested; acceptance
+> remains with the DM. Reviewed the complete packet -> scheduler -> collector
+> -> raw evidence -> reader path: single t0 C, separate actual/suggestion,
+> reports through248, four actual prefix ticks and +5..+8 scoring; saved reward
+> before arrival, refresh before proposal, atomic previous-actual-team fallback;
+> both S orders,837 T pairs, ties/cache/displacement; unchanged R, admission,
+> fixed exposure, partial-resource evidence and declared candidate subset.
+> Independent verification:48tests passed in2.54s using configured scientific
+> Python and pytest-owned scratch. Shared radio/environment, C and B01 sources
+> match producing4d5ccefe6; inherited numerical evidence remains applicable.
+> No full panel, actual SIGXCPU teardown or host-load deadline replication was
+> exercised. Admission/publication remained prospective. No edits, Git
+> mutations, launches or timing pilots performed.
+
+DM accepts the diff and coverage. No scientific contract changed and no fresh
+panel seed was exercised. Publish exact inputs then launch once through native
+admission; any refusal/uncertain acceptance is reconciled at the same request.
