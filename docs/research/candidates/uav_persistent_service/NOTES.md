@@ -1885,3 +1885,36 @@ The DM accepts this bounded implementation and its disclosed check limits for
 the fixed B03 panel. This is engineering acceptance, not scientific acceptance
 or adoption. Root's initial active/routing publication is `498ef2f6c`;
 the current main entry still assigns this runtime with owner pause lifted.
+
+### Accepted B03 operation and deterministic observation
+
+Exact inputs were committed and pushed as
+`a4bd3b5eccef6e83a71c00fdbb8eccd6ecaf5c67` before execution. On configured
+`wsl_4070` (`LAPTOP-U9TDKC8A`), supervisor task `ups-b03-reassign-a01`
+invoked the native launcher once. It accepted at `2026-09-29T04:33:59.901050Z`:
+
+- Operation/claim: `a4e4eb7e26952cd298dd3cd7aa43c8938a65e70694c8fdf0df2b7cae73530363`.
+- Native output: `/home/wu/projects/HMASD/runs/uav_persistent_service/b03_reassignment_a01/`.
+- Source snapshot: `/home/wu/projects/HMASD/.git/hmasd-launch-sources/bcddfbda9b574b299aa6a35821622fd0`.
+- Supervisor/runner PIDs 963104/963105, start ticks 100343448/100343450,
+  boot `bb732fcb-1a33-4659-a786-331110ae41d3`. Identities are recorded in
+  the retained native launch manifest, not inferred from process names.
+- Admission saw fresh published control `e3ea2b10a88929b428abca48f88d0e92aff5b436`
+  and 14821216256 physical/effective available bytes, above the 4294967296
+  configured floor. Both actual-node checks passed.
+
+The configured network shell was needed for a preparatory source fetch. An
+initial plain-shell fetch was terminated before any launch, then the configured
+`zsh -lic` fetch succeeded. Remote Git reported an existing unrelated auto-GC
+bad-tree error; source publication/snapshot admission succeeded and no cleanup,
+repack, sparse change or remote working-file overwrite was attempted.
+
+`tools/hmasd_wait.py` is armed against this same output handle with 60-second
+deterministic observations and a 1500-second checkpoint window, owned by native
+child session `01a0eb54-a1f1-7100-a33c-8fbcb14b0c97`. The first attempted
+observer registration rejected a relative `ssh` executable without arming;
+the absolute `/usr/bin/ssh` request registered generation 1. Initial drain
+observed accepted, consistent identities and the live runner/supervisor.
+This child stays active through native long waits; a queued checkpoint is not
+assumed to wake an unloaded child, and neither checkpoint nor lost observation
+authorizes another worker. No result or partial score has been read yet.
