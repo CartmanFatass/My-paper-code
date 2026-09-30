@@ -1708,7 +1708,7 @@ FSD/PPC暂停、G33冻结、Milan数据依赖及不复用完整收尾旧DM均保
 
 ## Portfolio review 2026-09-30 owner-deep-report-and-next-question
 
-Conversation: owner-supplied completed Deep Research report; independent native scientific review in progress.
+Conversation: owner-supplied completed Deep Research report; independent native scientific review completed.
 The ongoing round's complete result and the requested constructive Pro synthesis remain pending.
 
 Source: [complete owner report](archive/2026-09-30/RESEARCH-owner-deep-research-report.md),
@@ -1742,7 +1742,104 @@ test does not become a standing prerequisite merely by being cheap or zero-resul
 
 ### Answer
 
-Independent scientific review pending. No new result-bearing work has been selected by this review.
+Independent scientific review by native `hmasd-research-critic` `/root/deep_report_review`,
+2026-09-30. Separate context; full response below, with repository links rebased for this file.
+This review does not replace the service-age DM's pending result diagnosis.
+
+**Recommendation: revise the report’s investment sequence.** Its emphasis on competent ordinary control and complete native outcomes survives. Its proposed slot-allocation and generic temporal-information purchases do not survive the current evidence.
+
+I reviewed the report in a separate context, verified its supplied SHA256, and reconstructed consequential native summaries, per-world outputs, frozen contracts and costs before reading the corresponding explanations. I have not reviewed the pending service-age results.
+
+Several omissions were already present at the report’s cited `a46d9087` snapshot; this is more than ordinary publication lag.
+
+| Consequential evidence checked | Supported interpretation |
+|---|---|
+| Coupled-host hold-out coverage: held permutation **.763514**, nearest-unclaimed **.777243**, planner **.779790**. | Almost all measured assignment benefit is available through simple conflict-free conventions. The proposed ordinary-floor purchase has already happened. |
+| SET-slot: sampled **.428788**, random-slot **.427433**; conflicts **2.1525** versus **2.00875** per team decision. | The paid capability test did not deliver useful de-duplication. Deterministic improvement from initialization remains real, but does not justify automatically purchasing HMASD-slot. |
+| Subsequent target-policy recipe revision: deterministic hold-out **.349564**. | The later entropy-term revision also failed its purchase rule. Returning to the report’s earlier target-policy diagnosis would discard adverse evidence. |
+| Planner distillation: student **.400410**, initialization **.287050**, matched teacher **.758656**, reduced-budget teacher **.732738**. Student loses to the teacher in **32/32** dev worlds. | Learning improved the student, but the fixed exposure did not transfer the planner’s capability. Preserve the ordinary teacher and the learning positive; retain the declared stop. |
+| Replanning: cold replan improves hold-out post-event coverage over KEEP by **.068074**. Routing-edge sharing adds **.004839** on dev; wider lawful adjacency adds **.004670**. | Ordinary redeployment is useful. These particular communication interventions did not justify expansion. They do not bound all information value. |
+| Native future-motion B04: learned forecasts improve horizontal prediction error in all three continuations, yet F−O averages **−.009810 J / −.720988 users per tick**. | The repository already demonstrates that improved prediction, valid future availability and action sensitivity need not produce complete control benefit. |
+
+Sources: [slot floors](../../runs/coupled_host_joint_skills_stage1/b03_floor_planner-slots_a01/summary.json), [SET-slot](../../runs/coupled_host_joint_skills_stage1/b02_fit_SETS_932201_a01/summary.json), [target revision](../../runs/coupled_host_joint_skills_stage1/b03_fit_SETT_932201_a01/summary.json), [distillation](../../runs/coupled_host_planner_distillation/b01_eval_dev_a01/summary.json), [replanning](../../runs/coupled_host_replan_timing/r1lite_holdout_a01/summary.json), [R2](../../runs/coupled_host_replan_timing/r2_dev_a01/summary.json), [R3](../../runs/coupled_host_replan_timing/r3_dev_a01/summary.json), [future-motion reading](../../runs/uav_message_content/b04_future_motion/reading.json).
+
+**The strongest useful reading of the report is a research principle, not its proposed experiment queue:** identify where experience adds complete value while retaining competent structure. The current evidence makes that principle more constructive than “learning keeps failing.”
+
+For example, local-history B02 has two favorable own-initialization mean changes and one adverse change, while all 96 L1−C world comparisons lose J/service. That distinguishes finite learning from competitive usefulness; it does not establish that history lacks information. C/H also incorporate explicit physics and search knowledge. [Native summary](../../runs/uav_local_history/b02_same_history_a01/summary.json)
+
+Likewise, bounded correction learning produced useful assets. Replacing each D endpoint with its old-panel mean correction subsequently reduced J/service for all three assets on fresh worlds; D19702 retained a positive B40 increment. This is evidence that those varying functions have useful behavior beyond those particular constants. It is not proof of message mediation, superiority to an optimally trained constant, or recurrence across independently trained parents. These positives deserve more attention than another generic temporal encoder proposal. [Frozen-asset comparison](../../runs/uav_correction_compression/b01_mean_deployment_a02/reading.json)
+
+My corrections to the report’s specific recommendations are:
+
+1. **Retain completion of the frozen service-age study; remove runtime repair as a current research gate.** Collection has finished under the accepted source. Root should await the DM’s complete reading and follow the owner’s instruction to revisit CPython investigation only after another crash. The load/downclock explanation remains unverified.
+
+   Preserve L1−M as the declared primary contrast. Investment must also consider W, O and the other complete trajectories: beating M alone need not make L1 preferable to an available ordinary controller. Conversely, an ordinary age benefit is useful even if the selector fails.
+
+   A consequential L1 benefit can justify an independently trained repetition when recurrence changes a real decision. It is not automatic confirmation, and a second fit still does not establish training-population superiority. No result-dependent “acceptable” exchange rate between mean age, service, gaps and transmission exposure should be invented.
+
+2. **Decline the proposed coupled-host allocation progression.** Its useful ordinary comparison has already been completed; the later capability and distillation purchases are adverse. This supports retaining the ordinary assets and stopping these recipes. It does not prove that the host is unlearnable or that sparse coordination is generally unnecessary.
+
+   Claude’s pause independently rules out Root resuming or taking over these directions. A different substantive question would need its own ownership and comparison; renaming this sequence would not create one.
+
+3. **Revise the offline history test from a mandatory gate to an optional, question-specific measurement.** Held-out prediction is neither necessary nor sufficient for useful control. A ridge null only constrains that representation, model, target and logged distribution. A positive can reflect predictable nuisance variation with no actionable consequence.
+
+   “Whether W would outperform O from this state” also requires a genuine same-state counterfactual target. Separate O/W trajectories on the same world are not such labels after their histories diverge. Obtaining those labels may require costly branching; it is not automatically an offline calculation.
+
+   If such a study is selected, predeclare which policy decision its output could improve, preserve world-level separation, control current features and ordinary temporal summaries, and record labeling and fitting cost. The decisive purchase should ultimately be a complete controller comparison. B04 already supplies a direct warning against substituting forecast accuracy for that comparison.
+
+4. **Decline the supplied age-index prototype as a new scientific baseline.** Its `candidate_age_score` accumulates predicted age over a candidate contact sequence. That is already the leading criterion used by W and by M’s O/W comparison. After aligning the delayed prefix, terminal horizon and tie-breaking, reproducing the rankings would mostly reproduce an existing calculation. [Scheduler](../../experiments/candidates/uav_service_age/b01/scheduler.py#L48)
+
+   Tripathi–Modiano’s actual reliable-channel index is derived from a single-arm activation-charge relaxation; for linear age it is proportional to \(a(a+1)/2\). With identical users, that priority preserves age ordering. Their one-source-per-slot model does not establish optimality for coupled moving UAV plans. A genuinely different low-cost controller remains possible, but needs a specified decision difference and full native cost comparison—not an index label. [Primary paper, model and equations 7–8](https://arxiv.org/pdf/1908.10438v2)
+
+5. **Revise the statistical supplement.** Pairing worlds does not itself justify independently flipping difference signs. The supplied p-value needs sign symmetry or an appropriate exchangeability/randomization justification; it is not a distribution-free check of a zero-mean null. Keep it only as a clearly conditional sensitivity calculation, or omit it. The complete differences, adverse tails and declared interval already address much of the diagnostic need. None supplies additional independent training units.
+
+6. **Do not make pairwise interaction screens universal entry gates.** Ding et al.’s guarantee requires compatibility of the action-dependency graph with the value function across states. A few pairwise finite differences do not establish that condition; small pairwise effects can coexist with higher-order relay dependencies. The paper supports a structural conjecture, not a requirement to estimate a sparse graph before exploration. [Primary paper, Definition 4.3 and Theorem 4.4](https://raw.githubusercontent.com/mlresearch/v337/main/assets/ding26a/ding26a.pdf)
+
+For subsequent investment, my provisional ordering is:
+
+| Priority | Smallest worthwhile observation | What the outcomes change |
+|---|---|---|
+| **First: complete service-age reading** | The accepted full reading, including choice exposure, all ordinary programs, tails and actual cost. No additional experiment yet. | Separates an ordinary age capability, useful learned selection, an adverse active intervention, and limited choice exposure. These imply different continuations. |
+| **Conditional: independent repetition of consequential learning** | One prospectively fixed independent training unit if recurrence would affect use or a later claim. | Recurrence strengthens the recipe; failure weakens investment. Neither automatically licenses architectural expansion. |
+| **Constructive alternative: preservation of competent behavior during learning** | If Root chooses this question, a bounded complete comparison retaining a competent parent, state-dependent adaptation and a trained ordinary calibration control; independent parents are needed when claiming recurrence beyond the current parent. | Tests whether the useful restricted-learning effect survives its strongest ordinary account and parent dependence. This develops an observed capability rather than restarting from-scratch control. |
+| **A materially different information/control contract** | A complete comparison in a stated use case—for example, fallible delayed service feedback or uncertain model parameters—with the same added resource given to a competent ordinary method. | Distinguishes resource value from a learning increment. A gain supplied entirely by ordinary use can still be valuable; no gain ends that purchase. |
+
+The last option is an opportunity to formulate, not a run recommendation. Feedback availability, errors, communication cost and the ordinary adaptive estimator are currently unspecified. The existing G/O evidence does not identify feedback error as the main bottleneck: only two of G’s seven additional missed obligations coincide with the recorded erroneous-release cases. Root should not purchase ACKs as an already diagnosed repair. G’s service gain and longer gaps remain a real objective tradeoff. [Registered-service reading](../../runs/uav_registered_service/b02_periodic_efficiency_a02/reading.json)
+
+Known costs reinforce this ordering. The slot capability purchase cost about **1.33 CPU-h including its probe**; the later target revision **1.79 CPU-h**; planner distillation about **.95 CPU-h and 3.5 engineering hours**. The three replanning purchases totaled about **.17 CPU-h**. Future-motion B04 already cost **nine policy continuations, three predictors, 1,261,568 native steps and 2,248.6 seconds of scientific wall time**, plus reading. Calling another proposal “zero-fit” does not remove labeling, planner search, branching, engineering or readback cost. Independent-parent adaptation and a richer-contract study remain unpriced.
+
+I checked source/configuration identities, summary-reader hashes for the native history/service/forecast results, teacher-reference hashes, training/update counts, per-world positive and adverse outcomes, and identical initial positions/cluster inputs for the slot comparisons. I also checked the registered-service failed attempt as a technical failure, not adverse scientific evidence. I did not replay native physics, optimizer states or every raw trajectory.
+
+I read the load-bearing primary passages of Tripathi–Modiano, CAIC, TIGER and sparse ADG. CAIC’s queue-dependent channel and TIGER’s temporal graph results motivate narrower hypotheses; neither establishes this report’s mandatory predictive gate. The remaining cited papers were not independently assessed, so I make no novelty or implementation recommendation from them. [CAIC, §§4–5.3](https://raw.githubusercontent.com/mlresearch/v337/main/assets/li26h/li26h.pdf), [TIGER, §§4–6.2](https://raw.githubusercontent.com/mlresearch/v331/main/assets/gupta26a/gupta26a.pdf)
+
+**MATERIAL_DISSENT: yes — against renewing slot/hierarchy investment and treating generic prediction or age-index diagnostics as required next purchases. Direct evidence shows those allocation steps already occurred, better forecasts already failed to establish control benefit, and the supplied age score largely duplicates the current ordinary comparator. No dissent against completing the frozen service-age reading or a consequential, prospectively justified independent repetition.**
+
+#### Root primary-source verification
+
+Root independently read the load-bearing passages before relying on the bridges:
+Tripathi–Modiano §§II–IV (model and index, pp2–4); CAIC §§3–5 and queue/communication ablation
+passages; TIGER §§3–5 (temporal graph and actor inputs); Sparse ADG §§3–5, including
+Definition4.3/Theorem4.4/Corollary4.6 and Algorithm1/Theorem5.1. This is selected-passage
+verification, not a claim to have read every proof or all papers in the report. CAIC's queue
+depends on channel load; TIGER uses current/historical neighbor inputs; Sparse ADG's guarantee
+uses compatible value decomposition and exact tabular iteration in a finite, fully observed
+discounted model. None supplies an optimality or predictive-screen requirement for this UAV host.
+The report itself acknowledges W's greater complexity; its proposed simpler contact-age loop
+nevertheless supplies no new leading ranking criterion once the same input sequence is used.
+
+The four fetched primary PDF identities (URLs above) are retained here so temporary copies can
+be removed after reading:
+
+| Paper identifier | Bytes | SHA256 |
+|---|---:|---|
+| Tripathi–Modiano, arXiv1908.10438v2 | 632312 | `d445843c648e19f9a59882f3c64d534ad55d85b0e0465a07bfd5e01665aaa6e5` |
+| CAIC, PMLR337/li26h | 3417952 | `1a78b868c3cec9f54a6de5207be6da083192623ac3831db63dc25701bc93e934` |
+| TIGER, PMLR331/gupta26a | 5374616 | `b400e6c9c012fa0bea9b72f688c4feef62538cf8a86d4cc239843683d80d3444` |
+| Sparse ADG, PMLR337/ding26a | 1139634 | `ceff0f54766cf8b755152c4638424324c549fed519469867fc107bc500b32f44` |
+
+The three local literature stores were searched for these report bridges; their coverage misses
+carry no novelty verdict. No new result-bearing fit, controller evaluation, counterfactual label
+generation or supplied prototype execution was performed for this report review.
 
 ### Pro Answer
 
@@ -1751,8 +1848,17 @@ and verified report bridges; no Send has occurred for this question.
 
 ### Decision
 
-Pending the complete scientific result and applicable independent review. Continue the accepted
-study and preserve the owner's report; no change to its arms, seeds, claims or fixed reading rule.
+Interim disposition, Root,2026-09-30: adopt the independent review's material corrections.
+Do not renew the completed coupled-host allocation sequence, run the duplicate age score,
+introduce a generic prediction gate or append an unjustified sign-flip test to B01. Preserve
+the report's useful ordinary-control and complete-outcome principles and the primary literature
+as conditional hypothesis sources. Preserve the measured bounded-learning positives and
+parent/calibration uncertainty as constructive alternatives, without selecting a new run yet.
+
+Final next-investment decision remains pending the complete service-age result and the requested
+round-boundary Pro synthesis. Continue the accepted study; its arms, seeds, claims and fixed
+reading rule are unchanged. Claude's quota pause and runtime-investigation-on-recurrence policy
+remain in effect.
 
 ## Prior reviews and runtime context
 
