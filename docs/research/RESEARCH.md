@@ -1645,12 +1645,14 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 ### Parallel allocation: three substantive scientific owners
 
-The owner's request for 3–4 DMs is implemented with the continuing parent-adaptation DM and two new
-scientific owners. Astra Max's independent review selected both additions from original positive
-and adverse results and checked the consequential native interfaces. The [complete question,
-response and Root disposition](archive/2026-09-30/RESEARCH-parallel-allocation.md#root-decision)
-preserve the evidence, cost assumptions and absence of material dissent. These are independent
-questions; implementation, execution and advice on one do not block preparation on the others.
+Three scientific owners currently advance distinct work: native N8 adaptation has an accepted
+study, the parent-adaptation DM implements the selected ordinary U comparison, and the waiting
+DM develops a concrete service-continuity question from its completed R/O/W/M result. The
+[original parallel selection](archive/2026-09-30/RESEARCH-parallel-allocation.md#root-decision)
+retains its complete independent Astra Max review; the [U investment](archive/2026-09-30/RESEARCH-parent-adaptation-development.md#decision)
+retains the full subsequent advice and decision. Design, accepted execution and complete reading
+are different phases; no reserve or helper is counted as an active result operation. Independent
+questions progress without a common round barrier.
 
 **`uav_fleet_adaptation`: develop native N8 learning under E.** Prior E management improved H6
 N8 service in every world, while C/E remained the stronger mean complete-use reference. Two
@@ -1668,28 +1670,35 @@ C_N motion requests, plus neural replay, initialization, output and full reading
 A useful F increment may be retained even if C/E remains preferable; absent/adverse improvement
 ends this fixed recipe without automatic architecture repair or added fit.
 
-**`uav_user_waiting`: completed worst-user-mean comparison; conditional R retained.**
-The fixed R/O/W/M panel is fully verified and independently diagnosed, result0b9e2fee4:
-64 common H256 worlds,256 episodes/65,536 steps/0 fits. R−O worst-user mean age
-is−1.889343[−3.013856,−.764831],45 improving/19 adverse worlds; service improves
-in all64. Yet pooled age p95 and mean per-user maximum gaps increase even versus O;
-R also trades aggregate age/service against W/M. Retain all four as conditional references,
-not a general waiting-protection default. The90-tick closed-wait witness has correct age and
-burden, so no ACK/history repair is selected. All evidence is published, cleanup complete and
-the direction reserve. Replication would currently sharpen precision without changing retention;
-a new temporal-continuity contract needs a concrete policy, matched ordinary comparison,
-discriminating prediction and complete cost. It is a re-entry candidate, not a dependency or
-queued run. [Complete reading/independent disposition](candidates/uav_user_waiting/NOTES.md#b01-complete-reading).
+**`uav_user_waiting`: develop a concrete temporal service-continuity comparison.** The fixed
+R/O/W/M B01 is complete, fully read and independently diagnosed. R−O worst-user mean age
+improves −1.889343 [−3.013856,−.764831] and service +2.873962 users/tick (all64 worlds), while
+pooled age p95 increases2.499219 and mean per-user maximum gap increases3.387500. R improves
+worst-user mean age versus W/M while losing aggregate age/service. Retain the positive package
+and all temporal, quality and transmitter costs; no general protection or memory-causality claim.
+The correctly reconstructed90-tick adverse wait rejects missing history for that witness,
+without proving a full-support reachability limit. [Complete result and diagnosis](candidates/uav_user_waiting/NOTES.md#b01-complete-reading)
+retain 0fits/65,536 study steps plus136 fixture steps and1,824.068 worker/reader CPU seconds,
+with additional support. Cleanup is complete; no B01 operation is restarted.
 
-Both DMs freeze remaining numerical/source/RNG/replay details, implement and obtain appropriate
-engineering review, publish exact inputs and pass actual-node admission before execution.
-The applicable completed scientific review is reused; no duplicate selection pass or Pro wait
-is added. They own full result reading, independent diagnosis, publication and cleanup. Their
-first actual turns were verified as gpt-6-astra/max. The existing parent DM retains its question
-through the B01 result and selected ordinary U continuation comparison described below.
-Planner amortization is deferred because a concrete useful retention-versus-cost study is not
-yet selected; no fourth question is invented to fill capacity. Roll forward worthwhile work
-at each boundary while preserving all pauses, ownership and live-operation bindings.
+Root has selected **bounded scientific design work** by the same DM: determine whether a
+lawful ordinary controller that anticipates service discontinuity offers a useful complete
+temporal-gap/burden/service tradeoff beyond the retained references. Return a concrete policy,
+actual information/control contract, competent comparator, constructive/adverse predictions,
+complete endpoints and full cost, or a reasoned no-investment. Use source and primary passages;
+a small analytic/simple-model prototype is useful only if it changes the design. The task does
+not select a horizon/penalty sweep or any new native exposure. Existing Astra Max allocation
+review independently challenges this proposed investment against retention and other worthwhile
+questions; Root will send the concrete constructive choice to Pro under the continuing loop.
+This is active question development, not a dependency on the U or fleet result.
+
+Each DM retains its question, direction-owned paths, full result reading and publication.
+Selected executable inputs still require the existing engineering checks, exact publication
+and actual-node admission. The fleet's accepted operation is unchanged; no routine Root ACK
+is added. Planner amortization remains unselected because a concrete useful retention/cost
+comparison has not been made. A fourth substantive question may be selected when justified;
+current source/planning work is not an invented extra research track. Preserve all pauses,
+Claude ownership, accepted-operation bindings and rolling evidence-led allocation.
 
 ### Parent adaptation: develop the retained parents with ordinary continuation
 
@@ -1764,7 +1773,7 @@ Owner于2026-09-30纠正DM数量回落：按通常3–4个有实质工作的研�
 Oracle(Astra Max)承担需要时的独立科学选题帮助，沿现有Scientific Reviewer职责工作；
 助手不计入DM数。Root此前把轮次循环过度串行化，现改为各线独立推进、滚动补充有依据的
 问题；有希望的家族可以拆成科学问题／比较／估计对象不同的子方向，而非同一批次重复派工。
-当前父策略适配B01的原输入、结果与完整判读继续，其他问题的设计和选择并行进行。
+已完成的父策略B01和等待B01保留原输入与完整结果；普通U续训、N8适配及服务连续性问题按各自实际阶段滚动推进。
 新增问题仍须具体、值得投入并尊重已有负责人；实际节点资源准入和所有owner暂停保持。
 
 1. 完成已选完整比较，保留正面／不利／失败证据，按原规则判读；进程退出不等于科学读完。
