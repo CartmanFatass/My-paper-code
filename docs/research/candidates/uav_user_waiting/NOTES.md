@@ -1362,3 +1362,56 @@ would need a selected complete controller/comparison with a consequential
 continuity-versus-tail/service/compute purpose; no such object is currently
 specified. A cross-question successor remains Root's allocation decision, not
 an outstanding task for this finished batch.
+
+
+<a id="b02-final-cleanup"></a>
+### B02 final publication and measured cleanup
+
+Useful frozen policy/protocol/predictor/readers, continuation provenance and
+failure-only instrumentation remain published because they support this exact
+retained comparison and its reconstruction. The compact reading and independent
+disposition were published at `87a66f083`. No new policy execution is selected.
+Before deletion, all three worker identities and the bound pure reader were
+terminal, the deterministic observer was stopped with every event consumed, and
+the independent Reviewer confirmed no live scratch consumers. Reference checks
+found only the disposable test using the private reader adapter; both are removed.
+No other direction's files or controls were deleted.
+
+Local full summary/reading hashes match their one canonical remote copies; native
+terminal JSONs are preserved inside the published compact result. The seven
+failure raw copies match retained canonical inputs, and the remote diagnosis
+script matches its published run-record copy. Disposable64-step correctness
+raws/scripts and caches are retired after the complete fixed-panel verification;
+their check outcome and exposure remain above. They are not result endpoints.
+The sole complete native trajectories, original partial failure, full readings,
+all operations/manifests and native exits remain in the canonical run directories.
+After deletion, all256 complete raw files and the original553,351-byte partial
+were present with their expected sizes; the partial hash and full summary/reading
+hashes were rechecked. These257 unique raw files total409,197,248 logical bytes.
+
+Allocated-byte measurements below are `du -B1` on the exact disposable targets
+before deletion and zero after; they concern reclaimed working files, not Git
+object storage or whole-host free-space changes during other sessions' work.
+
+| Deleted target | Net allocated bytes reclaimed |
+|---|---:|
+| Local `temp/directions/uav_user_waiting/` |10,387,456|
+| Local disposable `tests/experiments/candidates/uav_user_waiting/b02/test_reader_observer.py` |12,288|
+| Local owned source `b01/b02/b02_continuation/__pycache__/` |339,968|
+| Local owned test `b02/b02_continuation/__pycache__/` |139,264|
+| Local `b02_continuity_a03/{summary.json,reading.json,reader-terminal.json,terminal-status.json,stdout.log,stderr.log}` duplicates |9,605,120|
+| Node snapshot `.git/hmasd-launch-sources/659e9fd1fe8a48eaba8dd80b40409443` |809,299,968|
+| Node snapshot `.git/hmasd-launch-sources/074beee0d94642b98af7b8e0db31e0ba` |809,230,336|
+| Node snapshot `.git/hmasd-launch-sources/97402e6dc42c44dfbac06b78f3c7f145` |809,340,928|
+| Node `temp/directions/uav_user_waiting/` diagnosis scratch |16,384|
+
+Local total **20,484,096**; node total **2,427,887,616**; combined measured net
+reclamation **2,448,371,712 allocated bytes**. Initial supported snapshot-GC
+preview refused A01/A03 because23/2 ignored `.pyc` files remained. Only those
+25 cache files and now-empty cache directories were removed (already included
+in the snapshot totals). A fresh exact-target preview with the read-only
+`--sudo-process-scan` then found all three eligible, and supported `--apply`
+removed each. Actual absence was checked. No snapshot, tar, backup chain or
+extra retention copy was created as a deletion condition. **No cleanup target
+or concrete tool blocker remains.** The scientific runtime TypeError remains
+unexplained in its preserved adverse record; that is not a live cleanup block.
