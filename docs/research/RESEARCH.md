@@ -1648,6 +1648,12 @@ Current Root is `01a0ef2b-a391-7693-a748-60e24be246ae`; actual child contacts ar
 [session routing](#session-routing). Claude retains its coupled-host question/checkpoint family;
 this selected comparison uses Root's native host. Queued progress does not transfer ownership.
 
+**Owner control,2026-09-30:** Claude's session is paused because of quota limits. Its existing
+reserve/paused directions and evidence remain with that owner; this report review does not
+resume or transfer them. Root continues the accepted service-age study and its delegated
+research loop. The latest published Claude directions are reserve, except the existing
+Milan-data-dependent `uav_restoration_readiness` pause, which also remains.
+
 **Shared node controls:** source snapshots use configured `zsh -lic` and native admission.
 Canonical HEAD remains570fd4564; update only the maintained RESEARCH controls as needed from
 published main under locks before dependent admission. The maintained launcher is published
@@ -1699,6 +1705,54 @@ FSD/PPC暂停、G33冻结、Milan数据依赖及不复用完整收尾旧DM均保
 [Completed next-question review: original objections, full Pro answer, independent follow-up and Root decision](archive/2026-09-30/RESEARCH-cumulative-service-age-selection.md#decision).
 该次Pro观察及浏览器操作已闭合；完整问答已保全后删除11份指定传输／撰写／论文临时文件，
 净释放1,138,688 allocated bytes，目标均已消失。仅保留归档中的完整证据及本地终态操作／观察元数据。
+
+## Portfolio review 2026-09-30 owner-deep-report-and-next-question
+
+Conversation: owner-supplied completed Deep Research report; independent native scientific review in progress.
+The ongoing round's complete result and the requested constructive Pro synthesis remain pending.
+
+Source: [complete owner report](archive/2026-09-30/RESEARCH-owner-deep-research-report.md),
+original SHA256 `4afd91dccdbbfdf322672039cafd48c0150740b1d89282923525af51fe5a029d`.
+Root has read all488 lines. The report observed repository SHA `a46d9087299bb50b23ca02f2baea1d11d54f325d`;
+its recommendations and prototype code have not been adopted or executed.
+
+Standing and context: current Constitution §§2–5/8, scientific-tools' consequential-question,
+ordinary-comparator and evidence-first review method, and the current shared background apply.
+The selected [service-age contract](archive/2026-09-30/RESEARCH-cumulative-service-age-selection.md#decision)
+is unchanged. One960-episode batch has completed on `d4430e619`; its full saved-data reader
+and independent result diagnosis are owned by its native DM. Claude is owner-paused for quota;
+its latest [stage1](candidates/coupled_host_joint_skills_stage1/NOTES.md),
+[distillation](candidates/coupled_host_planner_distillation/NOTES.md) and
+[replanning](candidates/coupled_host_replan_timing/NOTES.md) evidence must inform any related suggestion.
+Runtime cause investigation is deferred until recurrence per the owner's latest instruction.
+
+Decisions asked: Which report recommendations add a consequential question after the complete
+current result, which repeat or conflict with existing evidence, and what should Root select next
+within the continuing research delegation? Compare useful replication, a substantive new complete
+learning/control question, targeted diagnosis and stopping by the knowledge/capability and full cost
+that each could change. Preserve existing pauses and the learning-versus-ordinary-control distinction.
+
+Options under review: learning-instance replication conditional on a useful complete service-age
+increment; ordinary age-controller development; legal temporal information or predictive intent;
+sparse joint-action or explicit temporal-task structure. These are proposals, not selected studies.
+The independent reviewer first reads the supplied report and original relevant evidence, without
+Root's recommendation. It will evaluate source freshness, paper assumptions, duplicate work,
+proposed diagnostic conclusions and actual investment implications. A report's suggested structural
+test does not become a standing prerequisite merely by being cheap or zero-result-fit.
+
+### Answer
+
+Independent scientific review pending. No new result-bearing work has been selected by this review.
+
+### Pro Answer
+
+The owner-requested round-boundary constructive synthesis will use the complete current result
+and verified report bridges; no Send has occurred for this question.
+
+### Decision
+
+Pending the complete scientific result and applicable independent review. Continue the accepted
+study and preserve the owner's report; no change to its arms, seeds, claims or fixed reading rule.
 
 ## Prior reviews and runtime context
 
@@ -1856,7 +1910,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | DM2 | `01a0e1e9-0fda-74c1-80c9-8b660eca0991` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：当前App标题DM2（旧文档DM4），继续负责`energy_relay_availability`，当前reserve。B03关闭，B04/B05全部原始输出已核验并独立判读；B05保留条件性评分收益与全部风险反例，未选后续实验。终态事件已消费、观察停止，无活动操作／未读Pro。B04仍被DM3使用；旧B02/B03实现退役及清理实测见NOTES。两份B04/B05源码snapshot共约3.20GB因GC进程检查拒绝仍留存，唯一必要raw保全，未称全部清理成功。旧DM4 `01a0e0f9-ae03-75b2-80b3-c7a2f9adf190`仅供历史恢复；本次未发App消息或重启操作。[完整B05](candidates/energy_relay_availability/NOTES.md#2026-09-27--complete-native-b05-reading)、[审查、取舍与清理](candidates/energy_relay_availability/NOTES.md#2026-09-27--independent-b05-reading-and-dm-disposition)。 |
 | DM1：S7 普通学习基线 | `01a0e0ad-0710-71f3-8d9d-8012fe7b65b0` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：直接 DM，`energy_relay_baselines`；保留 D1，未执行 D4 后继现归 DM3；共同observer接口仍由`energy_relay_diagnostics`负责人（App DM4）负责。原生读取已核对启动及当前职责／方法读取；独立完成和发布，无自动 App 回复。[NOTES](candidates/energy_relay_baselines/NOTES.md)。 |
 | DM4 | `01a0e1e7-922d-73c1-a2ad-f9a60033105e` / `local` | `/home/fires/hmasd-wsl` · `main` | 已完成历史会话；owner已归档的任务不恢复或复用，后继新建DM并继承完整文档。以下为收尾时的责任与证据定位：App当前标题为DM4（旧文档DM2），Owner明确要求的新直接DM，接手`energy_relay_diagnostics`、B02和observer接口责任。已完成原始证据重审及新的独立科学审查，采纳实质异议：B02为reserve、结束当前cache投入，无活动操作／未读Pro／已选新fit；普通PPO、有限优化与规划贡献边界及两处更正已发表于NOTES。旧DM2 `01a0e0af-35fd-78e1-87a5-0ac2c37df085`的B01已完整关闭，地址仅作历史恢复；首次旧会话投递被归档状态拒绝，未恢复旧B01。[科学选择](#current-research-plan)、[NOTES](candidates/energy_relay_diagnostics/NOTES.md)。 |
-| Claude DM S7 能源中继参照研究 | this session / `local` | `/home/fires/hmasd-wsl` · `main` | 结果节点 wsl_4070，经 `scripts/hmasd_launch.py` 准入；Claude 无 Codex 唤醒，用分离轮询观察，运行句柄与读数在 NOTES。与 Root 为平级（owner 2026-09-27）：Root→Claude 写 `docs/Claude_docs/inbox/YYYYMMDD_<主题>_ROOT.md` 并按显式路径提交（本会话监视该目录）；Claude→Root 用 `codex queue --thread 01a0e560-4333-7b03-8ff3-759a4add1d9a --message`，每条只办一件具体事、不回 ACK。[NOTES](candidates/energy_relay_benchmark/NOTES.md)。 2026-09-27 起本会话同时担任第二个方向 `sequential_coordinator_credit` 的 DM（owner 授权“同时两个相关方向”）：同一会话、同一 checkout、同一入口；其运行同样经 `hmasd_launch.py` 于 `local_linux` 准入，句柄与读数在其 NOTES。 2026-09-28：`energy_relay_benchmark` 的 Pro 评审已答复并采纳；零 fit 探针 `b04_geometry_probe_a03` 已完成并读出（A 行：地图系固定、WSW 固定初始航向、速度欠饱和）；Pro §5 评审已答并采纳；`b05_canonical_frame_a01`（1 fit，wsl_4070）已实现（193cb57cc）、工程审查通过、启动 sha 5886a7504；07:23 UTC 准入（claim e38d6934…；R2 c00 指纹通过），**13:14 UTC 于 rollout 113 因与 Stage 1 相同的 CPython 内部错误退出，c03（600k）为最后检查点，按配方 resume 契约从 c03 续跑为 `b05_canonical_frame_a01r`（同一 fit，非第二 fit）**；零 fit 面板 C_SW dev/hold-out、C_SW_FULL 及 B 的 c02/c03 dev 面板已完成并读出；句柄与读数在 NOTES。 **2026-09-28 19:17 UTC：`b05_canonical_frame_a01r` 已完成（exit 0，c06），B 的 c06 dev 与 hold-out 面板及声明读器已完成并读出（adverse：L −.080/−.084 dev，−.089/−.029 hold-out）；本方向无在跑操作、无已声明 fit；后继选题待一次 Pro §5 评审与 owner 决定；句柄与读数在 NOTES。** **2026-09-28 后继选题第 2 轮已处置：不再购买 S7-S2 fit；T3 readiness 待 owner Milan 数据决定；方向 reserve，无在跑操作；programme 建议已发 Root；细节在 NOTES。** **2026-09-28 23:20 UTC 两方向选题已读 Pro §5 并处置：第二槽留空，A′ 仅为归因候选（未声明），R 恢复候选，N 不选；0 fit；等待 owner 一项 [DECIDE]；细节在 NOTES。** **2026-09-29 第 3 轮已处置：D2 修订版选定（待 [DECIDE-2]），第二槽未决（D1′ 待写成独立问题；D1 仅凭 [DECIDE-1] 重访）；0 fit；细节在 NOTES。** **2026-09-29 owner "2"：[DECIDE-2] 接受、[DECIDE-1] 不行使；`coupled_host_joint_skills_stage1` b01 已声明（Active 行），待 §5 声明评审后启动 cell 0；本会话同时担任该方向 DM。** |
+| Claude DM S7 能源中继参照研究 | this session / `local` | `/home/fires/hmasd-wsl` · `main` | 结果节点 wsl_4070，经 `scripts/hmasd_launch.py` 准入；Claude 无 Codex 唤醒，用分离轮询观察，运行句柄与读数在 NOTES。与 Root 为平级（owner 2026-09-27）：Root→Claude 写 `docs/Claude_docs/inbox/YYYYMMDD_<主题>_ROOT.md` 并按显式路径提交（本会话监视该目录）；Claude→Root 用 `codex queue --thread 01a0e560-4333-7b03-8ff3-759a4add1d9a --message`，每条只办一件具体事、不回 ACK。[NOTES](candidates/energy_relay_benchmark/NOTES.md)。 2026-09-27 起本会话同时担任第二个方向 `sequential_coordinator_credit` 的 DM（owner 授权“同时两个相关方向”）：同一会话、同一 checkout、同一入口；其运行同样经 `hmasd_launch.py` 于 `local_linux` 准入，句柄与读数在其 NOTES。 2026-09-28：`energy_relay_benchmark` 的 Pro 评审已答复并采纳；零 fit 探针 `b04_geometry_probe_a03` 已完成并读出（A 行：地图系固定、WSW 固定初始航向、速度欠饱和）；Pro §5 评审已答并采纳；`b05_canonical_frame_a01`（1 fit，wsl_4070）已实现（193cb57cc）、工程审查通过、启动 sha 5886a7504；07:23 UTC 准入（claim e38d6934…；R2 c00 指纹通过），**13:14 UTC 于 rollout 113 因与 Stage 1 相同的 CPython 内部错误退出，c03（600k）为最后检查点，按配方 resume 契约从 c03 续跑为 `b05_canonical_frame_a01r`（同一 fit，非第二 fit）**；零 fit 面板 C_SW dev/hold-out、C_SW_FULL 及 B 的 c02/c03 dev 面板已完成并读出；句柄与读数在 NOTES。 **2026-09-28 19:17 UTC：`b05_canonical_frame_a01r` 已完成（exit 0，c06），B 的 c06 dev 与 hold-out 面板及声明读器已完成并读出（adverse：L −.080/−.084 dev，−.089/−.029 hold-out）；本方向无在跑操作、无已声明 fit；后继选题待一次 Pro §5 评审与 owner 决定；句柄与读数在 NOTES。** **2026-09-28 后继选题第 2 轮已处置：不再购买 S7-S2 fit；T3 readiness 待 owner Milan 数据决定；方向 reserve，无在跑操作；programme 建议已发 Root；细节在 NOTES。** **2026-09-28 23:20 UTC 两方向选题已读 Pro §5 并处置：第二槽留空，A′ 仅为归因候选（未声明），R 恢复候选，N 不选；0 fit；等待 owner 一项 [DECIDE]；细节在 NOTES。** **2026-09-29 第 3 轮已处置：D2 修订版选定（待 [DECIDE-2]），第二槽未决（D1′ 待写成独立问题；D1 仅凭 [DECIDE-1] 重访）；0 fit；细节在 NOTES。** **2026-09-29 owner "2"：[DECIDE-2] 接受、[DECIDE-1] 不行使；`coupled_host_joint_skills_stage1` b01 已声明（Active 行），待 §5 声明评审后启动 cell 0；本会话同时担任该方向 DM。**  **Owner2026-09-30：Claude会话因额度暂停；本行早期启动叙述为历史，当前科学standing见各方向行。此暂停不移交方向、不恢复任何后继。** |
 | DM 规划压缩学习 | `01a0db8e-361c-7b13-a086-3fe1303fa4b7` / `local` | `/home/fires/hmasd-wsl` · `main`；旧持久数据 `/home/fires/hmasd-artifacts/planning_policy_compression/<tag>/`，新raw见NOTES原生节点路径 | 已按owner要求完成当前任务并停止，交接在NOTES。B01–B03合计20fit核验发布；B03源snapshot净回收793542656bytes，唯一raw保留。B04代码/独立工程检查完成，0科学工作/无handle；PPC本地及节点控制均paused，观察已停。无App消息、责任转移或由读交接自动恢复。节点Git GC警告及未来恢复前检查点已写入交接。[交接](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)。 |
 | DM 伙伴曝光独立复制 | `01a0db8f-1fab-7503-ae4b-feff2d4da8f5` / `local` | `/home/fires/.codex/worktrees/fsd-c/hmasd-wsl` · 当前`codex/partner-exposure-b03-publication`；源码/证据分支`codex/partner-exposure-replication-sept25`保留 | B03两新F2/M区组已完整执行、核验、判读并独立出版；结束当前50:50固定库投入，无活动操作、未读证据、开放Pro或已选后继。全量数据在`/home/fires/hmasd-retained-runs/controller_composition/b03_partner_replication_20260925`逐文件核验保全。fsd-c不在本任务原生附件中，节点源树也非launcher snapshot，两目录保留待可用原生归档路径，不使用shell删除。旧B01/B02及ab18来源/原分支保持终态；无App消息。[完整结果和生命周期边界](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)。 |
 | DM 有限模型知识与决策价值 | `01a0d937-e2f7-7d03-982a-d16bf16385cc` / `local` | `/home/fires/.codex/worktrees/3839/hmasd-wsl` · `codex/finite-model-decision-value-sept25` | B01/B02均已完整核验、保全并独立发表；两次Pro已收清，当前NEAR预算修补投入结束，无活动结果操作、未读证据或已选后继。保留原输入/原始产物与本任务地址；未接管其他方向、未发App消息。[完整结果与决定](https://github.com/CartmanFatass/My-paper-code/blob/99485cf41ce0bc530683b683100c41fa0f8bd975/docs/research/candidates/finite_model_decision_value/NOTES.md#2026-09-25--end-current-near-budget-repair-investment-retain-the-finite-result)。 |
