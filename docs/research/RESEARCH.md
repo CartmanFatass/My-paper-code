@@ -1647,8 +1647,9 @@ abandoned lazy-NPZ support reader404.55CPU-s, and corrected complete reader354.0
 not fully metered; inherited policy/predictor fits do not disappear. The stopped reader made no
 new environment episodes; its pure materialization change was independently checked and has source
 `de81cf9d8e337d9c2a2c628c95110ce7dd3b9f5d`, distinct from the fixed scientific source. A fully
-closed and reclaimed874639360allocated bytes while preserving required evidence; B only has
-terminal cleanup remaining at this question's preparation. Child observation stalled after technical
+closed and reclaimed874639360allocated bytes while preserving required evidence; B's closure
+`b7216efb9` reclaimed809480192bytes. Round cleanup totals1684119552allocated bytes, with all
+necessary unique evidence retained and no live operation, unread result or cleanup blocker. Child observation stalled after technical
 completion and Root recovered the same worker result; dispatch and a queued wake were not proof of
 progress. This round changes real comparison choices; it does not prove the workflow is more efficient.
 
@@ -1729,8 +1730,9 @@ that recipe. Search existing evidence before novelty claims; no novelty claim is
 wireless masking or coverage-gated control. Three literature stores and July/external-review history
 have partial, explicitly bounded review coverage; a missing title is not evidence of novelty.
 
-Claude is a peer and owns its current coupled-host work, including joint skills and lawful-sensing
-follow-ons; do not take it over or force its independent batch into this round. FSD/PPC pauses,
+Claude is a peer and retains ownership of its coupled-host questions, including joint skills and
+lawful-sensing work; its latest published b03/b04 standing is reserve at a separate round boundary.
+Do not take over that question or require its independent selection to synchronize with this round. FSD/PPC pauses,
 G33 freeze and Milan data dependency remain. Completed archived DMs are not restored for new work.
 Root assigns selected successor questions to new native DMs; actual node resource admission applies,
 with no replacement DM quota or per-fit allowance. Ending a recipe is not ending the research loop.
@@ -1771,21 +1773,25 @@ owner approval, candidate count or another required review round.
   `docs/research/archive/2026-09-29/RESEARCH-registered-service-and-calibration.md`, full Pro Answer
   and Decision. It is historical advice on the old choice, not current governance or a command
   to buy a third candidate. The present new evidence and current methods control this question.
-- **N's frozen evidence and actual rights:** evaluation source
-  `c770220d3abc4e32a9e80347dea87bdea88080e8`,
-  `runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/summary.json`,
+- **N's frozen evidence and actual rights:** result publication
+  `1847293df231c8b567ff9abb73270c81404799ba` contains
+  `runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/summary.json`.
+  Its scientific evaluation source is `c770220d3abc4e32a9e80347dea87bdea88080e8`; read code there:
   `experiments/candidates/load_critical_member_generalization/load_probe/probe.py` (`evaluate_cell`),
   `experiments/candidates/agent_count_generalization/{adapter.py,models.py}`,
   `hmasd/agent.py` (`step`, `_batched_assign_skills`, `_central_actor_input`), and
   `hmasd/networks.py` (`assign_and_value_batch`, `SkillDiscoverer.forward`). Original training
   source `89486d32ea569728f39d6e21b53f8a7c8854e74c`,
   `docs/research/candidates/agent_count_generalization/NOTES.md`, original central-state comparator
-  design and B03, plus `runs/agent_count_generalization/s1_action_law_b03_{h6_clip_s942201,set_clip_s943201}/summary.json`.
+  design and B03. The later saved training configs are present at evaluation source `c770220d3abc4e32a9e80347dea87bdea88080e8`,
+  `runs/agent_count_generalization/s1_action_law_b03_{h6_clip_s942201,set_clip_s943201}/summary.json`;
+  they are outputs of training source89486d32e, not files present in that pre-run commit.
   Relevant execution methods have matching ASTs across training/evaluation sources, as the independent
   reviewer checked. This proves the named input route, not remote checkpoint availability or a new E result.
-- **Radio capability and contrary world:** at `4d5ccefe6c90dbc6c132bcc71ffe6dd73535ae47`,
+- **Radio capability and contrary world:** result publication `46fa68117e523d22f88d617ec35f248cf04ee912`,
   `runs/uav_radio_activation/b01_delayed_masks_a01/summary.json` and the corresponding NOTES B01
-  reading. Retained S2/T2 source `2bff85091` is separately frozen; B's complete fresh comparison
+  reading. Its original scientific source is `4d5ccefe6c90dbc6c132bcc71ffe6dd73535ae47`,
+  which predates those outputs. Retained S2/T2 source `2bff85091` is separately frozen; B's complete fresh comparison
   supplies the relevant new ordinary reference. Do not compare cross-contract scores as paired data.
 - **Rejected automatic value-learning migration:** at `23748959f2ab8a1ce0f29f7142e8204c8f6b0bbe`,
   `runs/uav_cooperative_planning/b02_transit_value_a01/summary.json` and its NOTES result/decision.
@@ -1821,7 +1827,10 @@ reading. It was given source/result summaries and discloses that this is not a b
 Root later challenged the execution-information premise and causal contribution wording;
 the complete focused correction follows. The B result/G review is preserved in the pinned B
 notebook and summarized above; A's complete review remains in its pinned notebook. These are
-reused applicable reviews, not votes or new observations.
+reused applicable reviews, not votes or new observations. The reviewer's original “source” labels
+below name scientific launch commits; use the Context's separate result-publication revisions to
+retrieve outputs created after those launches. Local clickable references have been rendered as
+repository/host paths here; the substantive recommendation and correction are retained.
 
 建议只保留 **一个优先候选**：**无线静默权能否改变固定机队数量增加后的完整服务代价？** 本轮不推荐多步搜索／续值学习作为第二题。
 
