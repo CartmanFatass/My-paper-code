@@ -1726,11 +1726,12 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 
 **Four native DMs have concrete work:** local-C learned inheritance (`dm_fleet_adaptation`),
 ordinary-C development (`dm_parent_adaptation`), N8 silent repositioning (`dm_fleet_transmission`),
-and the new lawful local-peer forecast design (`dm_local_peer_forecast`). The waiting DM has
+and lawful local-peer forecasting (`dm_local_peer_forecast`). The waiting DM has
 completed B02, independent reading, publication and cleanup; it is no longer counted as active.
-The N8 question reuses its existing non-owner-archived lead and B01 evidence. The new forecast
-DM owns a separate scientific question/design; no forecast implementation or result exposure
-has yet been selected. Helpers/Oracle do not count as DMs. Root chooses the
+The N8 question reuses its existing non-owner-archived lead and B01 evidence. The forecast
+DM now owns the selected zero-fit C/V/R comparison. Full inheritance and C-prior readings
+inform the next investment; the Oracle develops that choice while these two ordinary-control
+questions proceed independently. Helpers/Oracle do not count as DMs. Root chooses the
 cross-question allocation; Astra Max Oracle develops detailed new ideas using original research
 records, all three local libraries and relevant primary web sources. Independent lines have
 no common round barrier. Completion triggers a reasoned continuation/next assignment, not
@@ -1833,39 +1834,52 @@ Selected executable inputs still require the existing engineering checks, exact 
 and actual-node admission. Waiting's completed standing and retained evidence are published
 by its current owner; no routine Root ACK is added. The selected inheritance observation
 concerns a learned starting asset, not a proven computation-saving use. Completed waiting work
-is followed by the independent local-peer design responsibility below, maintaining four
+is followed by the selected independent local-peer study below, maintaining four
 substantive DMs at different phases. Preserve all pauses,
 Claude ownership, accepted-operation bindings and rolling evidence-led allocation.
 
-### Local peer forecast: selected scientific design, no native study yet
+<a id="local-peer-forecast-selected-scientific-design-no-native-study-yet"></a>
+### Local peer forecast: selected C/V/R comparison
 
-Root selects **question/design ownership** for `uav_local_peer_forecast`: can lawful anticipation
-of currently visible teammates improve competent local C under the same N5/all-on/4-tick27-command
-contract, and what finite complete comparison would discriminate it from current-state planning?
-The new registered DM makes the candidate scientifically executable and may challenge its
-value; the existing Astra Max Oracle owns detailed constructive discovery and independent
-criticism, using cumulative records, the three local libraries and needed primary web sources.
-This is substantive prospective research design,0fits/0native exposure, not a selected forecast
-trainer, an idle reservation or a claim of innovation from a module name.
+Root selects the complete **32-world C/V/R comparison**, published prospectively at
+35540584dadc89839a2d7b5f6ad2f417280a9707: 96 H256 episodes, 24,576 native steps,
+zero fits, current N5/all-on host and unchanged four-tick 27-command support. C keeps
+visible peers stationary; V extrapolates their lawful adjacent-frame displacement;
+R reverses it at the synchronized command renewal. Six fixed arm orders rotate across
+worlds 29401000–29401031. The same DM owns implementation, independent engineering
+review, publication, actual-node admission, complete reading and result disposition.
 
-The prior Oracle identifies ordinary constant-velocity versus stationary-peer C as a concrete
-candidate and a useful next design priority. Its provisional two-program32-world/H256 envelope
-is16,384native steps and2,211,840 C candidate-model ticks; anonymous matching, peer-power,
-reconstruction and implementation costs remain to be resolved. Exact visibility/sorting,
-association, own-motion correction, initialization/loss/reappearance, simultaneous new commands,
-clipping and current-SINR/unobserved-interference calibration may materially change or defeat
-the construction. Neither hidden peer history nor a new public map/ACK is available. New host
-J is local .7*served/50+.3quality, not the N8 height-penalty objective.
+The original 32 C trajectories materially changed the hypothesis: only 109 of 10,240
+agent decisions had both current users and a uniquely matched moving peer. Sixty-eight
+of those peers next reversed their command. On that slice, stationary/CV mean Euclidean
+position errors over leads 1–4 were 78.932/139.201 m. This is development exposure and
+an opposing forecast conjecture, not proof of future command knowledge or native benefit.
+Installing V/R changes every teammate's behavior, so the old pattern may disappear.
 
-A final costed design and full independent recommendation must precede selecting any result
-study. Success would concern useful lawful anticipation beside competent C; old B04 forecast
-accuracy without native gains and the completed waiting A result prevent assuming prediction
-quality is task value, without refuting this different question. No positive toy, automatic
-learned predictor, broad tuning or additional native pilot is selected. The same DM can propose
-a better concrete question if source evidence defeats this premise; Root owns that allocation.
-[Source-grounded candidate and alternatives](archive/2026-09-30/RESEARCH-silent-reserve-repositioning.md#full-independent-oracle-answer),
-[competent C contract](candidates/uav_parent_adaptation/NOTES.md#ordinary-parent-design-20260930),
-[completed waiting evidence](candidates/uav_user_waiting/NOTES.md#b02-complete-reading).
+The lawful interface preserves anonymous matching/abstention, own-motion correction,
+C's user set, frozen unseen-interference calibration, ties and navigation. Only future
+powers of qualifying moving visible peers change; inactive cases retain exact C behavior.
+Read primary R−C native J, all R−C/V−C/R−V service and adverse outcomes, actual score and
+physical-action changes, and same-path C/V/R forecast errors. Do not promote lower model
+error, a relative R−V win or sparse exposure to complete-use superiority. Old B04 and
+waiting adverses remain; no learned predictor, sign grid or automatic extra panel follows.
+
+Worker cost is 3,317,760 own candidate model ticks and at most 82,663,475 controller/native
+power slots; the independent reader adds 5,529,600 scored ticks and at most 82,663,200
+unique power slots with its declared within-decision reuse. Planning estimates are
+1.5–7.5 CPU minutes each for worker/reader, 2–4 hours implementation and .5–1.5 hours
+engineering review, not caps. The extra R arm buys a concrete contrary prediction for
+8,192 native steps. This scientific value, rather than DM count, supports the selection.
+
+Root read the full proposal and independent answer and accepts the revised comparison
+without material dissent. The MAG primary passage requires joint observation/action and
+coupled model-policy reasoning; it supplies no guarantee for this local forecast. The
+inherited sampled actor is a stronger developing capability, but C remains the matched
+forecast-component comparator. This study makes no best-use claim against that asset.
+[Exact selected law and adoption](candidates/uav_local_peer_forecast/NOTES.md#selected-study-20260930),
+[complete independent source/evidence review](candidates/uav_local_peer_forecast/NOTES.md#full-independent-selection-answer-20260930),
+[full design and cost](candidates/uav_local_peer_forecast/NOTES.md#complete-proposal-20260930).
+The superseded design-only scope is [retired here](archive/2026-09-30/RESEARCH-local-peer-forecast-design.md).
 
 ### Parent adaptation: retain ordinary stochastic capability; B03 complete
 
@@ -2128,7 +2142,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | Completed DM: registered-user B01 | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | Completed B01 and full cleanup, result01e1b6e85/closureb7216efb9; no live worker, unread result or cleanup blocker. Sole direction ownership now passes to the new periodic-efficiency DM below; this old session is not restored. [Complete inheritance](candidates/uav_registered_service/NOTES.md#b01-investment-decision). |
 | DM: periodic-service efficiency | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_periodic_efficiency` | `/home/fires/hmasd-wsl` / `main` | Sole current owner of `uav_registered_service`, B02 G/O/S2; actual first turn verified gpt-6-astra/max, native UUID01a0f028-0d02-7093-9e46-fef762b6d749. Complete a02 primary panel, full reading and independent diagnosis; reserve, no live result producer, unread result, pending advice or selected successor. Original failure and both attempts' required raw evidence retained. Result8e87c58de; exact terminal snapshots/registrations, unused scratch and B02 caches removed,1,619,988,480 allocated bytes reclaimed. No cleanup blocker. [Read result and disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading), [measured closure](candidates/uav_registered_service/NOTES.md#b02-final-cleanup). |
 | DM: fleet transmission control | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_transmission` | `/home/fires/hmasd-wsl` / `main` | Owns `uav_fleet_transmission`; B01 complete/read/published/cleaned, same non-owner-archived native lead now owns selected B02 N8 C/J/R,0fits/24000steps, through exact design/implementation/admission/full reading/publication. Distinct from local-C inheritance; no old asset-screen continuation. Actual first turn gpt-6-astra/max,native UUID01a0f02a-2102-7aa3-be5a-adfb99e49910. [Full proposal/selection](archive/2026-09-30/RESEARCH-silent-reserve-repositioning.md#root-decision), [B01 evidence](candidates/uav_fleet_transmission/NOTES.md#b01-complete-reading). |
-| DM: lawful local-peer forecasting | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_local_peer_forecast` | `/home/fires/hmasd-wsl` / `main` | New registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max,native UUID01a0f300-8dad-7670-b5df-e98b1806afd7. Owns `uav_local_peer_forecast` and matching direction paths. Substantive question/design responsibility with existing Oracle independent construction; exact prospective contract/cost before result selection,0fits/0native. No takeover of completed waiting or active C-prior/inheritance. [Scope](#local-peer-forecast-selected-scientific-design-no-native-study-yet). |
+| DM: lawful local-peer forecasting | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_local_peer_forecast` | `/home/fires/hmasd-wsl` / `main` | New registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max,native UUID01a0f300-8dad-7670-b5df-e98b1806afd7. Owns `uav_local_peer_forecast` and matching direction paths. Owns selected C/V/R:32fresh H256 worlds,96episodes/24576native steps/0fits, through implementation/review/admission/full reading/publication. Full independent selection and prospective law published35540584d. No takeover of completed waiting or active C-prior/inheritance. [Scope](#local-peer-forecast-selected-scientific-design-no-native-study-yet). |
 | DM: timely joint radio control (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_radio_recovery` | `/home/fires/hmasd-wsl` / `main` | Recovered unfinished B03 responsibility with original operation/source intact. Full192/192 saved-data reconstruction and independent diagnosis complete, zero new episodes. Reserve with conditional S2 capability, R tradeoffs and all adverses; no active reader, unread review or successor. [Complete result and disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b03-complete-reading), [original pause handoff](candidates/uav_radio_activation/NOTES.md#owner-pause-and-handoff---2026-09-29-2131-utc). |
 | Prior DM: joint motion and radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_joint_control` | `/home/fires/hmasd-wsl` / `main` | B02 fully collected, reconstructed and independently read. R retained alongside T-S capability and all adverses. No active producer/unread result; cleanup69dc18003 reclaimed1646100480allocated bytes and preserved unique evidence. New successor ownership is above, not a resumed old process. [Full reading and next-investment disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b02-complete-reading). |
 | Prior DM: delayed joint radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_activation` | `/home/fires/hmasd-wsl` / `main` | B01 fully collected, reconstructed and independently read, G/E retained with adverse worlds. No old active producer or unread result; cleanup10bb6cdd4 reclaimed1642991616bytes with unique evidence preserved. New B02 ownership is above; this completed child is not reused. [B01 result and original investment boundary](candidates/uav_radio_activation/NOTES.md#2026-09-29---b01-complete-reading). |
