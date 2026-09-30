@@ -2098,7 +2098,7 @@ Primary L2_E−K2_E native J asks whether learned ordering allocates the same br
 more usefully. Read every service/quality/path/height/tail consequence, actual physical choices,
 and selection/controller/complete cost, with R/T_E contrasts. Prospectively retain t40+ suffix
 metrics because shared-prefix minima can hide later effects. Equal branch count is not equal
-CPU: path duration, recurrence and neural feature work remain charged. The direct-L75%/half-
+CPU: path duration, recurrence, feature construction and learned scoring remain charged. The direct-L75%/half-
 CPU target is not this study's criterion. Favorable conditional value at similar actual cost
 supports the shortlist use; no useful increment favors ordinary K2_E. Little remaining saving
 against T_E weakens practical value. One fixed artifact/16worlds is exploratory, not replication
@@ -2325,14 +2325,17 @@ count equality, quality/J, inherited motion/transmitter/manager costs, changed g
 capacity-denied versus no-link intervals. Use64paired world clusters;576law/path rows are not
 independent replications. Preserve adverse users and all three paths, with LRS−RR and M/S/U
 comparisons under equally supplied rights. These reused worlds are development evidence.
-Useful RR favors the simple capability; an LRS increment supports ordinary local memory.
+Useful RR favors the simple capability; an LRS increment supports its full recency/tie rule.
+RR already has cursor state, so LRS−RR does not isolate a causal memory effect; capacity-denied
+and no-link ticks likewise do not additively decompose a mixed unserved gap.
 M reaching U's tail range would revise the physical-program tradeoff; persistent U benefit
 retains its distinct contribution. Sparse intervention or substantial changes without useful
 continuity end this purchase without a global-ACK/weight/learner escalation. Invalid source
 invariance or baseline reconstruction stops the affected replay, with no automatic native
 replacement. No live deployment or next learning study is selected.
 
-[Source feasibility and complete bill](candidates/uav_user_waiting/NOTES.md#post-b04-source-assessment).
+[Source feasibility and complete bill](candidates/uav_user_waiting/NOTES.md#post-b04-source-assessment),
+[full original Oracle question/answer and DM response](candidates/uav_user_waiting/NOTES.md#b05-original-oracle-advice).
 
 [Complete result and cost](candidates/uav_user_waiting/NOTES.md#b04-complete-reading),
 [independent diagnosis/DM disposition](candidates/uav_user_waiting/NOTES.md#b04-independent-review-and-disposition),
