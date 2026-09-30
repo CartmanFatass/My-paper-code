@@ -1917,22 +1917,35 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs own the selected static-count development, temporal-planning,
-planner-amortization and service-continuity questions.** `dm_fleet_adaptation` has closed B05
-and now develops both retained S lineages through the selected F/M acquisition comparison;
-`dm_fleet_transmission` carries the accepted two-opportunity study; `dm_parent_adaptation`
-owns the paid-label approximation; `dm_user_waiting` has completed the ordinary M/S/U/K
-study, independent interpretation, publication and cleanup, and now holds its question in reserve. Existing
-leads keep their questions and accepted handles. Oracle/helpers are not DMs, and four
-assignments do not imply four admitted workers. The completed forecast and service-age DMs
-remain reserve.
+**Four native DMs continue substantive work across static-count development, temporal
+planning, planner amortization and service continuity.** `dm_fleet_adaptation` implements the
+selected F/M count-development study. The N8 temporal and parent approximation workers and
+complete readers have finished; their DMs own independent interpretation, publication and
+cleanup. `dm_user_waiting` has fully closed B04 and now owns a bounded source/interface/cost
+assessment with Oracle for its next worthwhile question or a reasoned stop. Its result direction
+remains reserve with no new run selected. Existing leads keep question continuity; Oracle/helpers
+are not DMs, and four substantive assignments do not imply four admitted workers. The completed
+forecast and service-age DMs remain reserve.
 
 Astra Max Oracle owns detailed idea discovery and independent criticism using the research
-record, all three local libraries and needed primary web passages. Root selects the scientific
-objects and cross-question allocation; DMs retain reasoning, implementation, review, actual-node
-admission and complete publication/cleanup. The selected ordinary continuity comparison is
-fully read below, preserving its original recommendation and bounded disposition. No routine Root run
-acknowledgment is added.
+record, all three local libraries and needed primary web passages. Root selects scientific
+objects and cross-question allocation; DMs retain reasoning, implementation, review, admission
+and complete publication/cleanup. The existing Oracle `deep_report_review` now considers the
+complementary N8 temporal/approximation evidence together; `oracle_next_capability` considers
+what the completed continuity comparison makes worth developing or using. Both assignments
+are source-only: reuse original result critics, retain contrary evidence, price the whole useful
+comparison and allow a reasoned decline or materially different question. No additional fit,
+model/native probe, code change or successor result study is selected by these assignments.
+
+Root read B04's complete waiting result, original independent diagnosis and final verifier
+addendum and accepts its disposition: retain M, costed U, cheaper S and K's mixed near-M
+facts; end automatic K extension without claiming equivalence or impossibility. U supplies a
+new conditional ordinary capability, while K's satisfied local modeled floor does not establish
+native trajectory service preservation. That result changes the next comparison's reference;
+it does not identify an ACK, weight, horizon or learning repair. The DM remains responsible for
+bounded source feasibility alongside Oracle's detailed innovation. [Complete result and
+independent disposition](candidates/uav_user_waiting/NOTES.md#b04-independent-review-and-disposition).
+Routine implementation/publication still needs no Root acknowledgment.
 
 Root adopts the independent **reserve/defer** recommendation for actual-S2 learning, preserving
 its distinct proposal-consequence question. The complete two-fit comparison now costs2560H256
@@ -1959,16 +1972,15 @@ capabilities against competent ordinary alternatives. Detailed innovation remain
 Oracle; no transfer-only prerequisite, S2 acquisition or fifth DM is selected.
 
 **Actual compute placement.** The configured local_linux and wsl_4070 are distinct physical
-Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). Waiting's M/S/U/K producer and
-full reader reached verified terminal completion on wsl_4070 at22:11:37 UTC on September30,
-releasing its timed/heavy window. Unaccepted fleet B06 therefore resumes the owner's configured
-remote-first placement, subject to fresh actual-node admission; an actual remote constraint may
-justify local use. Already accepted T/G2/A2 and parent B06 approximation remain on local_linux
-under their original handles. These untimed studies use one compute thread; any overlap needs
-fresh memory/occupancy admission and explicitly conditional timing. Preserve actual interpreter,
-node identity and published source, and do not migrate accepted operations or create a new
-resource-management mechanism. Completed real-deadline comparisons retain their recorded
-hardware, accepted windows and observed fallbacks.
+Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). Waiting's verified worker/reader
+completion released wsl_4070 at22:11:37 UTC on September30. Fleet B06 therefore uses the owner's
+configured remote-first placement, with fresh actual-node admission; an actual remote constraint
+may justify local use. N8 T/G2/A2 and parent B06 also finished their accepted local worker/readers;
+interpretation and cleanup remain with their DMs. No operation was migrated or repeated.
+Any new overlap needs fresh memory/occupancy admission and explicitly conditional timing.
+Preserve actual interpreter, node identity and published source; do not create a new resource
+management mechanism. Completed real-deadline comparisons retain their recorded hardware,
+accepted windows and observed fallbacks.
 
 The [retired initial four-study allocation](archive/2026-09-30/RESEARCH-four-study-initial-allocation.md)
 preserves its complete selection reasons, costs, resource decisions and source revision.
