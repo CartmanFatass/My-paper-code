@@ -1,0 +1,50 @@
+{
+  "kind": "service_age_pure_reader_status_adapter",
+  "operation_ref": "service-age-b01-read-a01",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/3b7b624907224d5e987284297dc9fa95",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_service_age/b01_age_selector_a01",
+  "record_consistency": {
+    "state": "consistent"
+  },
+  "execution": {
+    "state": "exited",
+    "runner": {
+      "recorded_identity": {
+        "name": "service-age-b01-read-a01",
+        "pid": 1088170,
+        "start_ticks": 109698123,
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "task_start": "1790752578",
+        "wrapper_sha256": "c9a0ac59d702ecea8d116caa5ea3884561a04cacd1e75774b84233d6510d581a",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/3b7b624907224d5e987284297dc9fa95",
+        "output_root": "/home/wu/projects/HMASD/runs/uav_service_age/b01_age_selector_a01",
+        "science_sha": "d4430e6198f95d599b79f23575445a18e6566c26",
+        "scope": "Unchanged pure saved-data reader; zero native episodes/steps/fits",
+        "threads": 1,
+        "task": {
+          "task": "service-age-b01-read-a01",
+          "status": "running",
+          "exit_code": null,
+          "pid": 1088170,
+          "uptime_seconds": 23,
+          "tmux_active": true
+        }
+      },
+      "observed": null
+    },
+    "exit_witness": {
+      "state": "valid",
+      "source": "/home/wu/.agent-tasks/service-age-b01-read-a01/exit_code"
+    },
+    "exit_code": 0
+  },
+  "task": {
+    "task": "service-age-b01-read-a01",
+    "status": "finished",
+    "exit_code": 0,
+    "pid": 1088170,
+    "uptime_seconds": 2150,
+    "tmux_active": false
+  },
+  "scope": "exact named supervisor only; no scientific validation"
+}
