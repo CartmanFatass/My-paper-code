@@ -2799,3 +2799,44 @@ separately admitted only after exact inputs are published. Required outputs
 remain one canonical node copy plus compact Git evidence. Source publication,
 fresh actual-node admission, detached observation, full reading, independent
 result diagnosis and cleanup complete this one selected chain.
+
+
+<a id="b04-implementation-review"></a>
+## 2026-09-30 — B04 implementation accepted; exact native fixture next
+
+The bounded Implementer authored only the new scheduler and scheduler tests.
+DM inspection accepted unchanged M/S delegation, common unmodified O/W/S paths,
+integer assigned-user-tick filtering after generation, the final two-tick block,
+and retained partial/late records with old-action fallback. The DM authored the
+collector, metrics, fixed configuration, reader and admitted entries. The B04
+collector and storage functions are verbatim B02, with the new scheduler/arm and
+metric bindings; all 62 inherited scientific dependency files remain unchanged.
+The complete focused analytical/mock suite passed42 checks in3.84s, including
+reader rejection of altered floors, feasibility, union order, winners, request
+paths and costs. These tests use no native result world, native step or fit.
+CLI/AST checks also passed.
+
+A separate registered Engineering Reviewer inspected all eight new modules,
+both test modules and their actual frozen stage/storage/reader/launcher consumers.
+It found no material open failure and independently reran42 tests in3.80s. The
+reviewed ten-file aggregate SHA256 (sorted path, NUL, binary per-file SHA256) is
+`03bfadebce9a83413456398874e15564222136fe7dee4de6524059119f605e8b`.
+The DM accepts this implementation within the published L0. This covers
+engineering semantics, not a scientific outcome. Actual native integration,
+source-layout binding and deadline evidence remain for the fixed32-step fixture.
+
+The separately admitted reader uses the canonical `--generic-summary` artifact
+path with worker-summary digest and worker source SHA, while retaining its own
+admission SHA. This preserves the supported external-input contract established
+by the completed B03 reader. It reconstructs every saved native/C/history record,
+all contact-to-cost/key arithmetic, complete and interrupted search paths, and
+U/K pool/filter/selection. Physical recomputation covers all selected same-state
+M/S/U/K programs and search winners, plus all visited pairs at0/60/124/248.
+Current-C reconstruction, candidate physics, prefix and executed-history counts
+are reported separately from the producer's new native exposure. No additional
+pilot, fit, threshold, arm or scientific stopping change was introduced.
+
+Source publication below precedes the single selected native fixture at
+seed29426999,H8×M/S/U/K=32 steps on the retained `wsl_4070` window. A successful
+fixture is followed by the fixed64 fresh worlds and complete saved-data reading;
+there is no per-run Root acknowledgment or adaptive quality gate.
