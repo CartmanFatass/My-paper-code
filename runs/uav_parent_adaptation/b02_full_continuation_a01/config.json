@@ -1,0 +1,119 @@
+{
+  "direction": "uav_parent_adaptation",
+  "source_sha": "f5f165ec772a1fed7c9d7689bd897fe16391a18e",
+  "lineages": [
+    1,
+    2,
+    3
+  ],
+  "train_program": "U",
+  "programs": [
+    "P",
+    "U",
+    "K",
+    "D"
+  ],
+  "horizon": 256,
+  "train": 512,
+  "evaluation": 32,
+  "rng": {
+    "1": {
+      "U": {
+        "master": 29813,
+        "construction": 2981300011,
+        "scene_start": 2981301000,
+        "scene_end": 2981301511,
+        "channel_start": 2981306000,
+        "channel_end": 2981306511,
+        "motion": 2981300021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "evaluation": {
+        "master": 29815,
+        "scene_start": 2981502000,
+        "scene_end": 2981502031,
+        "channel_start": 2981507000,
+        "channel_end": 2981507031,
+        "motion_start": 2981503000,
+        "motion_end": 2981503031,
+        "motion_mode": "fresh_per_episode"
+      }
+    },
+    "2": {
+      "U": {
+        "master": 29823,
+        "construction": 2982300011,
+        "scene_start": 2982301000,
+        "scene_end": 2982301511,
+        "channel_start": 2982306000,
+        "channel_end": 2982306511,
+        "motion": 2982300021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "evaluation": {
+        "master": 29825,
+        "scene_start": 2982502000,
+        "scene_end": 2982502031,
+        "channel_start": 2982507000,
+        "channel_end": 2982507031,
+        "motion_start": 2982503000,
+        "motion_end": 2982503031,
+        "motion_mode": "fresh_per_episode"
+      }
+    },
+    "3": {
+      "U": {
+        "master": 29833,
+        "construction": 2983300011,
+        "scene_start": 2983301000,
+        "scene_end": 2983301511,
+        "channel_start": 2983306000,
+        "channel_end": 2983306511,
+        "motion": 2983300021,
+        "motion_mode": "continuous_across_training_episodes"
+      },
+      "evaluation": {
+        "master": 29835,
+        "scene_start": 2983502000,
+        "scene_end": 2983502031,
+        "channel_start": 2983507000,
+        "channel_end": 2983507031,
+        "motion_start": 2983503000,
+        "motion_end": 2983503031,
+        "motion_mode": "fresh_per_episode"
+      }
+    }
+  },
+  "device": "cpu",
+  "dtype": "float32",
+  "torch_threads": 1,
+  "packet_bytes": 40,
+  "actor_input_size": 171,
+  "critic_input_size": 451,
+  "episode_endpoint": "fixed_final",
+  "action_mode": "sampled",
+  "checkpoint_selection": false,
+  "parent_quality_selection": false,
+  "evaluation_order": "world-major; rotate P,U,K,D left by world mod4; lineage1,2,3",
+  "parent_source": "930a0789dad4adbba67592c5fff07802a3dd40c2",
+  "parent_root": "/home/wu/projects/HMASD/runs/uav_parent_adaptation/b01_unscreened_a01",
+  "parent_summary_sha256": "02ad55031ca64e58ea03582ba7bcb18825f01568dc8f1cb8613ede793240948b",
+  "new_fits": 3,
+  "parent_generation_fits": 0,
+  "retained_adaptation_refits": 0,
+  "expected_team_steps": 491520,
+  "expected_adam_calls": 3072,
+  "expected_actor_replay_rows": 7864320,
+  "runtime": {
+    "python": "3.10.21",
+    "torch": "2.7.0+cu118",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "torch_threads": 1
+  },
+  "timing_scope": {
+    "actor_forward": "actual full actor calls, including GRU/composition",
+    "episode_loop": "collector reset/host/channel/sampler/trace/NPZ/hash/stream write; excludes cell JSON",
+    "setup": "checkpoint load, isolated actor/critic construction and native env constructor",
+    "worker": "RUSAGE_SELF; includes all support and nested costs, do not add them again"
+  }
+}

@@ -937,3 +937,300 @@ No worker was restarted. The session remains active with deterministic observati
 on this same operation through terminal collection and full scientific reading.
 The prior native-child queue delivery limitation remains; registration is not
 relied on to wake an ended child.
+
+<a id="b02-complete-reading"></a>
+## B02 complete: ordinary continuation yields one useful endpoint and two adverse means
+
+2026-09-30 UTC. The one accepted worker exited **0** at
+`2026-09-30T12:46:36.655274Z`; all three final U endpoints and all 384 scheduled
+P/U/K/D evaluation episodes are complete. Source remains
+`f5f165ec772a1fed7c9d7689bd897fe16391a18e`, without a native retry, new parent,
+K/D refit, omitted endpoint or exposure extension. The same-operation observer
+reported terminal consistent facts and ready event `da0921f5d0fb075a1da0209e`.
+Its native-child wake again returned `-32600`; the session was still active and
+consumed that event, rearmed generation5→6 solely to reconcile observation, then
+stopped the observer. There is no live worker or observation dependency.
+
+The unchanged published pure reader completed its first full attempt successfully.
+It checked every bound checkpoint, all three training/update streams, all 1,536
+actual U-to-K/D exogenous training witnesses and every final trajectory, including
+native radio/assignment/reward, motion, delays/packet fields, own-history cache,
+FP32 action composition, innovations and current learned-sigma likelihood. Maximum
+independent density error is `3.4128929e-6` against `1e-5`; exact FP32 compositions
+all pass, with maximum FP64 reconstruction roundoff `2.3841858e-7`. Reading added
+zero model/policy calls, native steps or updates. No post-launch code repair was
+needed. The DM read all six contrasts across all thirteen native metrics, all
+12 program levels, training curves/groups/sigmas and measured costs, and directly
+inspected 32 raw trajectories from eight consequential worlds in addition to the
+complete automated reading. Independent scientific diagnosis follows below.
+
+The [compact complete result](../../../../runs/uav_parent_adaptation/b02_full_continuation_a01/result.json)
+retains all 384 outcome rows and paired vectors, all uncertainty calculations,
+all zero-service tick indices, 64-episode training bins, learned parameter groups,
+endpoint/stream bindings and timing scopes. The original bulk summary and full
+reading remain unchanged in the unique canonical output on `wsl_4070`:
+`/home/wu/projects/HMASD/runs/uav_parent_adaptation/b02_full_continuation_a01/`.
+
+| Canonical evidence | Logical bytes | SHA256 |
+|---|---:|---|
+| `summary.json` | 1,361,049 | `29cf9dc8b4adb4bba6e0f536088c3497a96a1ca7bd40a6f5dbdcd38cda3b3d9e` |
+| `reading.json` | 2,909,372 | `68277eb6b72f2736f8c96b66e987ae678d51a72204327a21324a1dfcc21d2e2c` |
+| `config.json` | 3,579 | `0ea20a42f240bcb310cc5e9f1e9de50fbd1af41806a6e83eff934b8cfe803326` |
+| `reader-a01-time.txt` | 903 | `b3a49a89321f2c3fb194168756c6b48d197229505fd7b28190c8660a654bad5b` |
+
+The canonical tree contains 434 files, 106,040,756 logical bytes and 106,885,120
+allocated file bytes, including 94,440,818 bytes for all 384 raw trajectories.
+The sorted `(relative path TAB bytes TAB SHA256 LF)` inventory digest is
+`51d4be7a5eed3e18ac0d122319d21dafc6dd8525955728be889dd6d130af24b6`.
+Full summary fields bind every raw trajectory and every training/checkpoint artifact.
+B01's original P/K/D endpoints, original summary and training-stream witnesses remain
+at their prior canonical paths; this study consumed them without replacing them.
+
+### Fixed endpoints and the primary comparison
+
+All values below are averages of 32 H256 worlds for the stated retained lineage.
+J includes the unchanged .001 abstract charge; service is users per tick.
+
+| Lineage/program | J | Service | Quality Q | Mean minimum tick service | Mean p05 tick service | Total zero ticks |
+|---|---:|---:|---:|---:|---:|---:|
+| 1/P | .183246 | 9.080078 | .190417 | 2.343750 | 5.078125 | 37 |
+| 1/U | .170475 | 8.351685 | .181838 | 2.656250 | 4.796875 | 40 |
+| 1/K | .184004 | 9.159424 | .189239 | 2.218750 | 4.984375 | 33 |
+| 1/D | .185764 | 9.212646 | .192622 | 2.312500 | 5.140625 | 34 |
+| 2/P | .200413 | 11.724487 | .124235 | 3.218750 | 5.648438 | 27 |
+| 2/U | .192067 | 10.957153 | .132224 | 2.812500 | 4.960938 | 216 |
+| 2/K | .198173 | 11.579102 | .123552 | 3.000000 | 5.546875 | 31 |
+| 2/D | .200973 | 11.695190 | .127468 | 3.312500 | 5.687500 | 24 |
+| 3/P | .137579 | 7.475342 | .113080 | 2.031250 | 3.046875 | 233 |
+| 3/U | .191157 | 10.813721 | .135881 | 4.281250 | 6.320313 | 1 |
+| 3/K | .140270 | 7.667480 | .113085 | 2.093750 | 3.179688 | 145 |
+| 3/D | .143507 | 7.886108 | .113673 | 2.125000 | 3.429688 | 87 |
+
+Primary U−D J means are **−.015288625, −.008905816, +.047649059**;
+the equal-lineage average is **+.007818206**. Its conditional deployment SE is
+`.004503618`, normal-approximation 95% interval **[−.001008885,+.016645298]**.
+U−D service means are **−.860961914, −.738037109, +2.927612305**;
+the average is **+.442871094**, SE `.280986258`, corresponding interval
+**[−.107861973,+.993604160]**. These primary averages do not establish a stable
+U preference or equivalence. The interval is conditional on these twelve fixed
+endpoints, not all future training outcomes.
+
+The outer descriptive df2 intervals are much wider: J **[−.078236917,+.093873329]**,
+service **[−4.904798,+5.790540]**. Their independent-block approximation remains
+limited by reused P/K/D and the result-selected U question; neither the 96 worlds
+nor this extra panel creates new parent-generation replications. The three means
+are scientifically consequential, rather than noise to hide in an aggregate:
+lineage 1's paired t31 U−D J interval is `[−.024531,−.006047]`, lineage 2's
+`[−.028603,+.010792]`, lineage 3's `[+.030740,+.064558]`. Lineage 1 is below
+all three references and lineage 3 above all three on both J and service under
+their respective paired-world intervals; lineage 2's adverse means remain less
+precisely resolved. No statement here is a simultaneous multiple-comparison claim.
+
+| Contrast | J means by lineage 1/2/3 | Equal-lineage mean J [conditional deployment 95%] | Mean service [conditional deployment 95%] |
+|---|---|---|---|
+| U−P | −.012771 / −.008346 / +.053578 | +.010820 [.000972,.020669] | +.614217 [−.004128,1.232562] |
+| U−K | −.013529 / −.006106 / +.050886 | +.010417 [.000891,.019944] | +.572184 [−.022403,1.166771] |
+| D−P | +.002517 / +.000560 / +.005929 | +.003002 [−.000006,.006010] | +.171346 [−.020093,.362785] |
+| K−P | +.000757 / −.002240 / +.002691 | +.000403 [−.001826,.002632] | +.042033 [−.098396,.182462] |
+| D−K | +.001760 / +.002800 / +.003237 | +.002599 [.001048,.004150] | +.129313 [.025224,.233403] |
+
+The fresh panel strengthens the average **fixed-endpoint D−K** ordering: all
+three J/service means are positive and its conditional average intervals are
+positive. Its outer J interval happens to be positive too, `[.000714,.004484]`,
+while the outer service interval crosses zero. This is still neither independent
+K/D retraining nor retrospective confirmation of B01. Individual D−K J losses
+occur in 11/11/10 worlds and service losses in 12/12/11. B01's all-three positive
+own-parent means do not all transfer: here K−P J/service are negative in lineage 2,
+and D−P service is −.029297 there despite positive J. No old/new panels were pooled
+as training replication and no old-I/new-U contrast was calculated.
+
+### Useful capability and adverse worlds coexist
+
+Lineage 3's U establishes a useful finite ordinary learning outcome beyond its
+actual P and retained K/D. U−P mean service is +3.338379 and J +.053578;
+minimum and p05 service improve, and total zero ticks fall 233→1. In world 23,
+U−D gains `.121684970` J and 8.816406 users/tick; U serves 15.6875 versus P's
+5.917969. In world 19, P's 41 zero ticks fall to zero under U, while D has four.
+This capability must be preserved alongside the earlier harmful B19452/B04-G
+continuations. Those adverse studies did not establish that ordinary continuation
+can never help.
+
+The result supplies no uniform development or service-preservation rule:
+
+- **Lineage 2/world 31:** P/U/K/D service is 9.402344/3.617188/7.742188/8.054688.
+  U has **85 zero ticks**, including **76 consecutive ticks 113–188 inclusive**;
+  each other program has zero zero-service ticks. This is a new severe native
+  outage, not a small averaging artefact.
+- **Lineage 2/world 6:** U−P loses `.128093757` J and **7.9765625 users/tick**;
+  U has 66 zero ticks and a longest interval of 23; P/K/D have none.
+- **Lineage 3/world 1:** even this improved U endpoint loses **5.714844 users/tick**
+  relative to P. World 11 adds a zero at tick121 despite P having no zeros.
+- U adds zero-service worlds relative to P at lineage 1 worlds21/28, lineage 2
+  worlds3/6/13/14/27/29/31, and lineage 3 world11. D also adds zeros relative to P
+  at lineage 1/world31 and lineage 3/world3. K adds none on this panel, which is
+  not a general no-harm guarantee. Complete zero indices and every adverse vector
+  are retained; no world is excluded.
+
+U−D loses J in **23/20/4** worlds and service in **22/18/4**; U−P loses both in
+**22/18/3**. Average longest-zero changes cannot erase individual long outages.
+Nor are whole-team zero ticks a measurement of every user's waiting history.
+
+### What changed, and what remains unidentified
+
+Full-policy training is active: all 39,942 actor parameters and 74,497 critic
+parameters are trainable; the encoder, recurrence, mean, log standard deviation
+and critic all move in every lineage. Initial U tensors exactly equal P, fresh
+optimizer state is empty, and each fit takes 1,024 joint Adam calls under the
+specified clipping/update law. All 512 exogenous episode witnesses per lineage
+match both paid K and D training streams, while U stores its own actual history.
+These facts rule out substituted parents, absent optimization and unmatched
+exogenous training as explanations for the complete comparison.
+
+The eight successive 64-episode training J means are:
+
+| U lineage | Bins 0–7 |
+|---|---|
+| 1 | .175956, .166540, .163224, .179000, .179818, .171296, .179740, .182969 |
+| 2 | .212299, .194631, .206497, .216564, .221372, .203965, .232508, .220881 |
+| 3 | .099961, .161202, .183803, .187327, .172616, .180142, .183471, .202343 |
+
+All first-to-last-bin J/service means rise, yet fresh-world complete continuation
+means are adverse in lineages 1/2. Different training worlds and evolving policies
+make these descriptive curves, not an alternative endpoint-selection rule.
+First16-to-last16 rollout mean value losses fall 26.627→8.040, 92.638→72.927,
+41.145→36.318; the improved fits do not identify critic quality as the native
+bottleneck or success mechanism. Every coordinate's final sigma rises, by about
+4.3–10.6%; this common intermediate change coexists with opposite outcome signs.
+It supplies no basis for automatically freezing sigma or reducing entropy.
+
+U3 mean height falls 74.261→52.310m relative to P and height-floor fraction rises
+.505420→.879785; its path falls about163.027m/UAV. U1 instead travels about
+1364.825m/UAV farther than P while serving fewer users; U2's path falls about
+592.507m/UAV with service loss and more zeros. Geometry, changed recurrence and
+variance, exploration/optimization, threshold effects and interaction through
+executed messages all remain combined. Lower height is not demonstrated to cause
+U3's gain, and neither path nor the abstract charge is a physical energy result.
+D's mean correction component still accounts for 98.10%/95.17%/98.28% of correction
+second moment on the new worlds, not those fractions of reward. Prior failed
+mean compression continues to constrain the claim that its variation is disposable.
+
+The working explanation is now **ordinary full-policy development can produce a
+large useful conditional outcome, while its complete effects are substantially
+heterogeneous and can be harmful**. The native task has demonstrated development
+opportunity; the broader original architecture can express K's constant mean bias,
+not necessarily D's added residual network; finite training supplied one strong U
+outcome and two adverse means; complete-package default usefulness remains
+unestablished. This compares joint optimization/trainable variance/full recurrent
+adaptation against different restricted programs. It does not identify freezing,
+state dependence, message coordination or any one optimizer component as causal.
+With one U fit per P, parent identity and U training variability remain confounded;
+three endpoints cannot yield a learned rule for selecting which parent to continue.
+
+### Actual cost and scope of compute savings
+
+B02 used **3 new fits, 1,536 training plus 384 final evaluation episodes,
+491,520 native steps, 768 rollouts and 3,072 joint Adam calls**. Actor/critic replay
+rows are 7,864,320/1,572,864; 2,457,600 three-dimensional motion samples and 15 env
+constructions are recorded separately. No diagnostic policy calls or evaluation
+updates occurred. Worker CPU is **764.215039s**; each U fit uses
+197.230462/201.397212/198.742770s, already included in that total. Worker monotonic
+wall is739.912158s but its recorded epoch span is763.680624s; this discrepancy
+remains unexplained, as for B01, so both are retained. Worker lifetime peak RSS
+is534,828KiB, not a sum of per-cell peaks. The prior553–586s worker anchor
+underestimated the actual complete worker; it was not a stopping limit.
+
+External complete-reader timing is91.93s wall,90.87s user+.76s system =
+**91.63 CPU-s**, maximum RSS406,236KiB. Its internal post-import measurement
+(87.087263s wall/90.319516 CPU-s/RSS366,944KiB) overlaps and is not added again.
+Thus B02 adds **855.845039 measured worker-plus-reader CPU-s**. B01+B02 cumulative
+cost is **15 fits,2,162,688 native steps,21,504 Adam calls and3,136.021884 measured
+CPU-s**; earlier parent/adapter history and incompletely metered implementation,
+checks, review, transfer and cleanup are additional, not zero.
+
+U's full actor-forward CPU is28.19%/28.63%/28.59% below D's in the three interleaved
+panels, consistent with avoiding the extra residual forward. The complete recorded
+episode loop saves only3.22%/4.82%/4.10%. That loop includes reset, native host,
+sampling, traces, NPZ writes, hashing and episode-stream serialization; setup is
+separately measured and batch time includes it. These savings do not promise an
+online deadline, a bare-deployment speedup of the same size or net energy savings,
+and must be read with the service losses, learning cost and adverse worlds.
+
+<a id="b02-independent-review-and-disposition"></a>
+### Independent diagnosis and next-investment disposition
+
+2026-09-30 UTC. The registered ResearchCritic reviewed B02 in a separate context
+without DM/Root conversation inheritance. It reconstructed the protocol and outputs
+before reading the older explanations and my provisional interpretation/stop
+recommendation. Its recommendation is to **retain all endpoints and end immediate
+investment in the unchanged continuation recipe**; `MATERIAL_DISSENT: no`.
+I accept this recommendation. The current published background at `4a3063fc7`,
+especially topics4/5, continues to separate task opportunity, expressibility,
+finite learning and complete-package usefulness. B02 changes the evidence about
+ordinary continuation on these unscreened parents; it does not collapse those layers.
+
+The critic independently checked all384 outcome rows; all78 contrast vectors,
+means and conditional variances; per-lineage and outer interval arithmetic;
+aggregate counts and all three1,024-record update streams; accepted source and
+configuration; initial U=P tensors, endpoint-file bindings and recorded evaluation
+freeze checks; all1,536 training witnesses against both K and D; and20 original
+trajectories covering positive/adverse worlds. It reused the complete physical
+reader for exhaustive radio/channel/density reconstruction rather than rerunning
+policies or the historical raw archives. The only interval difference was negligible
+t2 critical-value rounding (at most9.7e-8 on a metre-scale interval), with no
+consequential discrepancy. All its remote/disposable-source consumers have finished.
+
+Its scientific reading supports the simultaneous useful U3 changes, including
+service tails and lower recorded actor cost, while preserving U1/U2 losses and
+U3's adverse worlds. In aggregate U−D loses J in47/96 worlds; that does not erase
+its positive conditional mean or make D safe. B01's D1/world1 remains a severe
+counterexample to service preservation. The fresh D−K ordering strengthens those
+fixed endpoints' comparison and does not add training replication. No nonactivation,
+missing update or substituted-parent explanation survives the checked facts.
+
+The critic usefully sharpened the simpler explanation by returning to the original
+[message-content B02 table](../uav_message_content/NOTES.md#2026-09-28-pdt---b02-complete-positive-sample-means-unstable-continuation-ranking),
+which I reread together with the original B04 table. The same C checkpoint already
+yielded B19451/B19453 gains of+.054337/+.020627 J and+3.207642/+.681519 service,
+versus B19452's−.059038 J/−4.452759 service. B04's three further G continuations
+all lost J/service relative to their retained parent. Thus continuation variability
+already has direct support without changing parents. The current sign split cannot
+be credited to parent quality, and U3 is a useful extension to an unscreened lineage,
+not the first-ever example that ordinary further learning can help. Common sigma
+increases, improved value fitting and changed height still do not select a mechanism.
+
+**The strongest alternative purchase is a bounded repeat, not a diagnosed repair.**
+One new U from every retained P, with fresh training streams and the existing
+32-world tuples, would add3fits,393,216 train+24,576 evaluation steps and3,072 joint
+Adam calls. Current anchors are about600 training plus40 evaluation CPU-seconds;
+reader, engineering and review remain additional, and these are not caps. Existing
+P/K/D evaluation could be reused with its fixed endpoints and exposed-panel limits.
+Repeating the split would strengthen conditional recurrence on these parents;
+flipped signs would favor continuation variability over a stable parent-specific
+account; broad joint gains could reopen ordinary-U investment. None would learn
+a parent-selection rule, and a new matched training-program comparison would need
+fresh matched D training too, with its added complete cost.
+
+I agree with the critic **not to buy that repeat now**. It has genuine but narrow
+information value: one extra fit per exposed parent leaves reproducible program
+benefit and generalizable conditional use substantially unresolved, while older
+same-parent continuations already establish variation. U3's demonstrated capability
+is retained without another fit. This is a comparative investment judgment, not a
+requirement to diagnose a mechanism before exploration, a fixed failure-count rule,
+or a claim that the open statistical questions are uninteresting. Another fixed
+endpoint panel would only refine deployment uncertainty; neither a universal choice
+nor an operational service/cost rule is currently awaiting that refinement. Sigma,
+clipping, radius or objective variants would be new conjectures without an identified
+prediction distinguishing them here; no automatic sweep, longer training or selected
+U3-only retry follows.
+
+**Disposition:** B02 and this immediate continuation investment are complete. Retain
+P/K/D and U, all unique positive/adverse evidence and the useful source/readers;
+choose no new default and leave the broader adaptation question open in reserve.
+There is no active producer, accepted operation, pending advice or new study. Root
+owns cross-question allocation; this is idle with no fabricated owner-approval
+blocker. A concrete re-entry would be a selected decision about reproducible
+conditional development or a deployment service/cost tradeoff whose complete matched
+comparison can change which learning program to use. The counterfactual U repeat
+above is costed reasoning, not registration or authorization for another batch.
+One adequate independent review covers this disposition; the same evidence supplies
+no distinct Pro question that would justify another advice cycle here.
