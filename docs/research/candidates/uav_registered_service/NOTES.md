@@ -1299,3 +1299,32 @@ observer correction. The same-session deterministic observer remains at the
 existing state location and the native DM stays active through complete reading.
 The explicit-retry dependency is now resolved; neither a further launch ACK nor
 a documentation-only scientific SHA change was used.
+
+
+### a02 collection complete; unchanged pure reading in progress
+
+The accepted successor ended exit0 at2026-09-30T03:28:32UTC; original native
+runner/supervisor are absent with a valid consistent exit witness. Collection
+contains all192complete episodes/49152native steps,192resets,1constructor and
+0fits/updates. New worker cost577.357922wall seconds,590.005111CPU seconds,
+185280KiB lifetime peak RSS. Combined with a01, actual exposure is75020native
+steps/293complete episodes plus12failed transitions,294resets,2constructors and
+0fits. Nothing from a01 is substituted into the primary a02 comparison.
+
+Observer generation4 captured READY on disk. Its App queue delivery was again
+rejected with-32600 for a native child; the active turn's deterministic local
+wait and same-handle drain supplied the observation. The event was consumed in
+generation5, without any restart. Compact summary/exit/status files are collected;
+all192unique new raws remain in the canonical node output. Full interpretation
+still awaits validation, so technical completion is not a scientific verdict.
+
+The unchanged frozen b02/read.py is now running from the accepted source snapshot
+under named supervisor `registered-service-b02-read-a02`, single numerical thread,
+Python -B, with external `/usr/bin/time -v` measurement. It adds0native episodes,
+steps or fits and performs the original complete raw verification. The native
+identity is in [reader-supervisor.json](../../../../runs/uav_registered_service/b02_periodic_efficiency_a02/reader-supervisor.json).
+Observer generation6 adopts a bounded read-only adapter for that exact named
+supervisor/PID/start-tick/boot identity, with its actual completion marker and
+absence of the original process required for terminal classification. It never
+launches the reader or certifies the scientific result. No partial contrasts have
+been used for a follow-up decision.

@@ -1,0 +1,21 @@
+{
+  "task": {
+    "task": "registered-service-b02-read-a02",
+    "status": "running",
+    "exit_code": null,
+    "pid": 1030866,
+    "uptime_seconds": 17,
+    "tmux_active": true
+  },
+  "identity": {
+    "pid": 1030866,
+    "start_ticks": 108374791,
+    "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3"
+  },
+  "science_sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+  "scope": "Pure unchanged saved-data full reader; zero native episodes/steps/fits",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3",
+  "entry": "experiments/candidates/uav_registered_service/b02/read.py",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02",
+  "threads": 1
+}
