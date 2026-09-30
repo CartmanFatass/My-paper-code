@@ -2214,3 +2214,418 @@ material issue. CLI help and diff checks passed. No test invoked a model, fit,
 reader replay or native transition. I accepted the bounded adapter; the current
 adapter admission identity and original producer/scientific identity remain
 separate. The refused request record is retained in the reader run directory.
+
+The corrected first reader admission was accepted at 2026-09-30
+19:57:08.864276 UTC from published adapter source
+`737a50333e794fbca02bce45f335e9e92b1e0b56`. Its output is
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_user_waiting/b03_value_read_a01/`;
+operation claim is
+`/home/wu/projects/HMASD/.git/hmasd-admission/e07b3bcb24d3579339183f140cdc8104eb21ec183413b69f02c511e8208e8e82.json`.
+Snapshot `548aeb29c8a14a93b942c992862cdd31` carries the unchanged original
+scientific sources plus the adapter. Native supervisor/runner are
+1152868/1152869, start ticks 114090275/114090278 on the same recorded boot.
+Observer generation 28 adopted those consistent live identities at 19:57:27 UTC.
+The adapter's source identity is distinct from original worker/scientific SHA
+`a045bc9b4e3ba9ef211474293c4bc43ad8b16b08`; the worker summary digest above is
+bound before the selected verification replay. The existing independent
+Scientific Reviewer is reading the original evidence and bounded raw witnesses
+in parallel, with any conclusion explicitly conditional on the full reader.
+
+<a id="b04-conditional-selection"></a>
+## 2026-09-30 — Conditional ordinary service–extreme-continuity question
+
+Root's native assignment at 20:38 UTC selects one M/S/U/K comparison **only if
+the already accepted B03 full reader completes without material discrepancy**.
+B03 collection, interpretation, publication and cleanup remain required first.
+Until that boundary this entry is source-only reasoning; it adds no successor
+code, model query, fit or native transition. The same DM owns the selected
+successor after the condition is satisfied, without another acknowledgment.
+Root subsequently retained the configured remote `wsl_4070` real-deadline
+window for this chain; exact published inputs and fresh actual-node admission
+are still required. No accepted operation is moved.
+
+The substantive question changes openly: can a competent ordinary controller
+retain square-age S's recurring extreme-wait improvement without its native
+service loss? Here S is the ordinary square-age scheduler, never the inherited
+neural motion policy. This develops a demonstrated ordinary capability; it
+does not repair or rename the adverse G0/LR/LN recipe. Root assigns 64 fresh
+matched worlds × M/S/U/K, H256 (256 episodes/65,536 steps/0 fits), plus at most
+one necessary H8×4 correctness panel (32 separately charged steps, no final
+worlds or complete quality pilot). Estimated full worker/bounded-reader cost
+is 0.9–1.3 CPU-hours and implementation 3–6 engineering hours, with scientific
+reading/publication additional. No sweep or adaptive extension is selected.
+
+The source bridge and decision use current published background at
+`239360b03f5d7acf788bd9ae5d4dccbde4f9237e`, especially RESEARCH topics 2 and 8:
+native mean age, typical-user maximum gap and extreme continuity are distinct
+uses; low regression error or locally favorable ranking does not certify the
+whole dynamic policy. The earlier B02 S tradeoff and the still-provisional B03
+replication supply the constructive premise. U and K must use the identical
+union of all pairs visited by **unmodified** full M and S generators at the
+same history. Only after generation does K filter on modeled mean delivered-
+block service at least that of the same-state M winner, then use exactly U's
+S key. M is in the pool and feasible. Changing the inner search path would
+confound the filter with generation and is excluded. Entire-pool completion
+must meet the existing deadline; otherwise retain old-action hold, without a
+new M rescue. Precise terminal convention, service arithmetic/ties, fresh
+addresses, bounded physics subset and source identities will be fixed in the
+prospective L0 before implementation and execution.
+
+<a id="b04-original-oracle-advice"></a>
+### Original independent successor advice (complete)
+
+The following is the complete unchanged recommendation returned by Root's
+independent `oracle_next_capability` scientific reviewer. It reused its prior
+separate-context review and original result critics; it is not an outcome-blind
+review or a second raw-data audit. Root selected its bounded M/S/U/K question.
+
+> **I recommend the ordinary M/S/U/K comparison as the next native investment, conditional on B03’s pending full reader finding no material discrepancy.** Its question is whether a service constraint can retain the ordinary square-age controller’s improvement in extreme waiting. End purchases for the unchanged B05 composition and B03 learned-value recipes. The saved B05 continuity reduction is feasible, but I would not make it a prerequisite for this distinct question.
+>
+> This follow-up reuses my earlier independent analysis and the original result critics. It is not outcome-blind. I checked source compatibility and consequential summaries; I did not repeat their raw/model audits or execute the proposed reduction.
+>
+> The evidence changes the opportunity:
+>
+> - **B05 weakens generic motion–radio complementarity.** S+S2 loses `.004497 J` against C+S2, with an interval crossing zero, and `.010311 J` against C+T2, with a negative interval. Its narrow positive against Q+S2 survives, as does substantially shorter travel. Ordinary management absorbs much of the earlier all-on S advantage. This supports retaining useful packages and tradeoffs, without selecting further composition training. [Complete B05 reading](/home/fires/hmasd-wsl/docs/research/candidates/uav_parent_adaptation/NOTES.md:4030)
+> - **B03’s producer result actively contradicts the learned continuation-value prediction.** LN−M increases mean user maximum gap by `11.9028` ticks in all 64 worlds; LN−G0 is adverse in 59. LR is also strongly adverse. Both fits updated, so nonactivation does not explain this. The full reader remains pending; no feature, ACK or horizon repair is selected by these results.
+> - **The constructive positive is ordinary extreme-continuity control.** M versus square-age S has mean maximum gap `57.77 → 48.33` ticks and worst-user mean age `13.32 → 10.29`, while service falls `24.59 → 21.08` users/tick in all 64 worlds. Typical-user G remains approximately unchanged, `20.19 → 20.63`. Thus the proposed successor changes the scientific question openly; it does not rescue B03’s failed G prediction.
+> - **A missing-comparator claim needed correction.** The earlier service-age B01 already compared S2 and M on the same worlds: S2 delivered about `30.10` users/tick versus M’s `24.56`, but G was `69.78` versus `20.20`, and maximum gap `250.59` versus `55.66`. The basic service/continuity tradeoff does not require rediscovery. [Verified B01 result](/home/fires/hmasd-wsl/runs/uav_service_age/b01_age_selector_a01/result.json)
+>
+> For M/S/U/K, **S means the ordinary square-age scheduler, not the inherited neural motion policy**:
+>
+> | Arm | Decision rule |
+> |---|---|
+> | M | Existing ordinary M search and selection. |
+> | S | Existing square-age search and selection. |
+> | U | Generate the union of every pair visited by unmodified M and S searches; select globally using the existing S key. |
+> | K | Generate that identical union; retain pairs whose modeled delivered service is at least the same-state M winner’s, then use the same S key. |
+>
+> The constraint must not alter search generation. The M winner is already in the pool, ensuring modeled feasibility. U separates the service constraint from the benefit of additional ordinary search. These are identical construction rules at any given history; deployed trajectories will diverge.
+>
+> All arms retain C motion proposals, existing lawful information, action rights, two-tick delivery, the 141-byte report contract and the 1.436-second computation deadline. A missed deadline retains the existing hold behavior. No additional ACK, future truth, actor state or fitted predictor enters.
+>
+> The proposed service floor is **a local model constraint, not a native or episode-level guarantee**. Quantization can cause prediction error; even an exact local comparison evaluates M at K’s current history, not along M’s counterfactual trajectory. Age/throughput scheduling already has ordinary antecedents, while stronger competitive guarantees require assumptions and deviation accounting absent here. [Age/throughput primary source](https://www.mit.edu/~modiano/papers/CV_C_204.pdf), [Anytime-Competitive RL](https://papers.neurips.cc/paper_files/paper/2023/hash/f53437debdd397c42929d929614bc705-Abstract-Conference.html)
+>
+> The smallest worthwhile complete observation is **64 fresh matched worlds × four arms: 256 H256 episodes, 65,536 native steps and zero fits**. Read native service jointly with maximum gap and worst-user mean age; retain original G, native J, path, all adverse worlds and complete cost. This is a fixed-program frontier comparison, without a training-generalization claim or assertion of overall controller optimality.
+>
+> The outcomes change the decision:
+>
+> - K improves extreme continuity while preserving native service relative to M: retain a useful conditional ordinary capability.
+> - U matches or exceeds K: additional search explains the useful result; prefer the simpler unconstrained program where its service tradeoff permits.
+> - K mostly reproduces M: the local floor seldom exposes consequential alternatives. That does not establish a learning limitation or an impossible frontier.
+> - K changes actions but loses service or continuity: weaken this local-floor approach. Another weight, horizon or learned repair is not automatic.
+> - A mean gain with meaningful service, J or tail losses remains a tradeoff, not a service-preserving upgrade.
+>
+> The complete cost estimates are:
+>
+> | Option | Scientific work | Planning cost |
+> |---|---|---|
+> | **M/S/U/K** | 256 episodes; 0 fits; 4,276,224 pre-cache candidate requests; up to 16,971,264 delivered-state reductions | Approximately **0.9–1.3 CPU-hours** including bounded reading; **3–6 engineering hours**, with scientific publication additional |
+> | Saved B05 continuity reduction | All 512 existing traces; 0 native/model/actor calls; 0 fits | Expected seconds to under **1 CPU-minute**, with a **5 CPU-minute incomplete-stop envelope**; approximately **1–2 engineering hours**, plus interpretation |
+> | Stop unchanged composition/value recipes | Preserve completed evidence and assets | No new scientific exposure |
+>
+> The native estimate includes approximately 29.4 scheduler CPU-minutes plus 0.35–0.7 reader CPU-hours. It is a scaling estimate, not profiling or resource admission. The reader must check all executed endpoints/history, selection arithmetic and a prospectively bounded physics subset. Any required native correctness exposure needs separate accounting.
+>
+> The saved B05 reduction is **compatible as endpoint measurement**:
+>
+> - B05 and waiting B03 share the frozen native factory, static uniform population, five UAVs, 50 users, H256 horizon, channel law and capacity-constrained connection assignment.
+> - Both record connections after physical movement and before an arriving mask refresh can mutate the current connection arrays. Contact means actual assignment, not merely SINR eligibility.
+> - Reuse the exact waiting definitions: reset contacts are unscored; the first unserved transition has age one; initial and terminal gaps remain censored; never-served users have a 256-tick gap counted in both boundary groups. Include two-tick startup and the final executed transitions.
+> - B05 has **32 world units**, with Q/S tapes averaged within world. B03 has **64 different worlds**. Users, ticks and tapes do not become independent replicates, and the panels cannot establish matched M/S trajectory dominance.
+>
+> A full reduction would hash the existing 231.3 MB archive once and decompress about 1.25 MB of required members, covering 25,600 user histories. It needs neither the source snapshot nor staged S. No such reduction has been performed.
+>
+> Its decision value is narrower than K/U’s. It could reveal whether C_T2 or S motion changes the **matched B05** service/path/individual-continuity frontier, informing which existing package deserves a later continuity comparison. It cannot establish M/S dominance, test K’s service preservation, diagnose B03’s learning failure, or revise B05’s failed primary prediction. Given the existing matched S2/M evidence, I would buy it only when Root is actually choosing among those B05 packages for individual continuity—not as another gate before the native frontier study.
+>
+> I would defer motion×M/S composition and fixed-S2 learning. Both remain plausible questions, but the former has lost its generic managed-S premise, and the latter lacks a complete costed training comparison. CAL/CONT already supplies a selected, distinct learning investment.
+>
+> The three-library, July and external-review checks support ordinary scheduling/control antecedents, not a novelty verdict. Current measured expenditure also remains visible: B05 cost approximately **1,902 worker/reader CPU-seconds** with zero new fits; B03 has already cost approximately **3,300 worker CPU-seconds**, two fits and additional pending reader work.
+>
+> **MATERIAL_DISSENT: no.** No conflicting successor purchase is committed. I recommend the bounded M/S/U/K question above, preserving B03’s pending-reader condition and selecting no automatic repair or composition expansion.
+
+### DM response and primary-source boundary
+
+I accept this conditional change of question. The recurring S result supplies a
+constructive capability worth developing; B03 does not supply a rationale for
+another learned-value repair. The intended native pattern is K−M lower episode
+maximum gap and lower worst-user mean age, jointly with nonnegative *sample*
+mean service. This is a directional exploratory prediction, not a confirmed
+noninferiority margin, adoption tolerance or required changed-choice count.
+K−U asks what the floor adds at matched search; U−S asks what expanded ordinary
+search adds. A successful model floor is an intermediate prediction only. Its
+native service and continuity consequence must be read even if they contradict
+it. Sparse intervention and active adverse intervention lead to distinct
+interpretations; neither forces a new repair.
+
+I directly read the following load-bearing passages, using the reviewer's
+source locators. Searches of the three stores, July and earlier review are
+antecedent checks, not novelty certificates. These are source identities and
+scope, not new experimental evidence:
+
+- Foundations **B01**, Albrecht/Schaefer/Christianos (2024),
+  `docs/new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf`, physical p60 /
+  printed p31, Eqs.2.38–2.42; metadata
+  `docs/new-libs/corpus/papers/B01/metadata.json`. PDF SHA256
+  `4eec7be5bcabaf912846ddd295925c35d46502d92fcd9f7ba3311656fd2e9091`.
+  The exact-value all-state improvement premise is stronger than keeping M
+  feasible under a local service floor; it supplies no K performance theorem.
+- Inst-sci **MARL-0558**, Zhao et al., *Multi-Agent First Order Constrained
+  Optimization in Policy Space* (NeurIPS 2023),
+  `/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0558.json` and
+  `/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0558.pdf`, §3 pp3–4 and
+  §4/§§4.1–4.2 pp4–5. PDF SHA256
+  `821c8ffad73bec4dfe73841047ea877076b2bce518239ff0dd3b6dee2103eb87`.
+  Its expected discounted cost constraints, nonparametric update and parametric
+  approximation are distinct from this finite deterministic local filter.
+- My-lib **neurips-2023-f53437debdd397c42929d929614bc705**, Yang et al.,
+  *Anytime-Competitive Reinforcement Learning with Policy Prior*, arXiv
+  2311.01568v3 (2024-02-02),
+  `/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/neurips-2023/f53437debdd397c42929d929614bc705/arxiv-2311.01568.pdf`,
+  §3.1 pp3–4 and §4.1 pp5–6, especially Definition3.1, Assumptions3.2/3.4,
+  Proposition4.1 and Corollary4.2. PDF SHA256
+  `b277315650f1ed867406601bb344e6cbbdfd1a092e32bde4602708a5ab92ccc2`.
+  Its comparator cost follows the prior's own unobserved trajectory; known
+  Lipschitz and telescoping bounds support future-deviation accounting. We
+  establish none of those premises by testing K at its current history.
+- Kadota/Sinha/Modiano (INFOCOM 2018), *Optimizing Age of Information in
+  Wireless Networks with Throughput Constraints*,
+  [original primary PDF](https://www.mit.edu/~modiano/papers/CV_C_204.pdf),
+  §II physical pp2–3 and §III-C physical p6 (printed1849), Eqs.35–40 and
+  Theorem6. The reviewer's p5 locator was off by one physical PDF page. Its
+  single-hop one-transmission/slot model, fixed independent link probabilities,
+  feasible per-node targets, observed throughput debt and age reset to one
+  differ from moving UAVs, delayed commands, modeled history without ACK,
+  finite maximum-gap outcomes and our aggregate same-state service floor.
+  This is an ordinary age/throughput antecedent; neither its theorem nor its
+  debt mechanism is implemented here. No verified local-library id is claimed.
+- July `docs/research/designs/R30_FIXED_CLOCK_AR_EDIT_DESIGN_20260714.md`,
+  lines9–23,66–89,202–224; SHA256
+  `502ea67df79a0f37991a7d95d712da297ef7e7648e6a5cf25d6f90c972bb04b6`;
+  and `docs/external-review/rounds/20260718_stage_c_skill_bottleneck_portfolio/41_PRO_CONVERGENT_RAW.md`,
+  §1, §6 (lines163–177, “Ordinary-MARL objection”) and final boundaries; SHA256
+  `467dd9ec85c0cb2358df7c90c3f18cca35bf24204646db717ec9e4b6e3cbc6cd`.
+  These preserve active-adverse versus nonactivation distinctions and competent
+  ordinary comparators, but do not derive this particular filter or add gates.
+
+The independent recommendation has no material dissent. I retain its adverse
+alternatives and local-constraint caveat. B05 saved-data continuity reduction,
+motion×M/S composition and fixed-S2 learning remain unselected; this assignment
+does not spend on any of them.
+
+<a id="b03-complete-reading"></a>
+## 2026-09-30 — B03 complete reading: fitted values actively worsen interruption control
+
+The accepted reader exited zero at 20:50:07.476823 UTC. Observer generation29
+exposed checkpoint `044af9f83013473e6eecbe46` and READY
+`d060b0ddf2c70794642be49b`, wake `0a1516f4-6a98-44c1-8e2b-ac7518da671b`;
+both were drained and acknowledged into generation30 on the same claim.
+The complete canonical reader output is
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_user_waiting/b03_value_read_a01/reading.json`,
+7,320,501 bytes, SHA256
+`448ecaf87e604642c19cdcbe70dc989757f5e74eedf65abc1d73c26bb2281722`.
+Its local temporary collection matches the canonical hash. It reports
+`VERIFIED_COMPLETE`, reproduces both fits bitwise, verifies all 512 new
+episodes/131,072 native transitions and all 517 worker artifacts, and binds
+the original producer SHA and summary independently of the adapter's admission
+SHA. No material discrepancy is present. B04's verification condition is met;
+B03's final publication/cleanup still precedes successor implementation.
+
+**Compact-reading L0:** publish one standard-library extractor outside the
+frozen B03 source glob, plus its compact run result. It reads the two pinned
+complete JSON records and accepted terminal bindings only: no native/model/
+optimizer calls, new hypothesis or scientific exposure. Preserve all paired
+world vectors and adverse endpoints, per-user mean age/gap categories, every
+raw/source identity, fit/calibration provenance, verification coverage and
+measured cost; full large summaries and raw remain at their existing canonical
+node paths. Verify source hashes, exact paired-value equality and complete arm/
+world coverage before publication. This small deterministic postprocessing is
+disposable research support, not a change to the accepted scientific worker or
+reader. Existing independent scientific review receives the final reading.
+
+The published compact endpoint record is
+[`runs/uav_user_waiting/b03_value_a01/result.json`](../../../../runs/uav_user_waiting/b03_value_a01/result.json),
+4,125,068 bytes, SHA256
+`224d232fa40b165e7d4ba5e9f0ea611a9ab18cd789585bfdacd45eafa30ce3a7`.
+It retains all 512 episode scalar records, all 320 evaluation per-user endpoint
+vectors, all paired world vectors, 512 verification rows, training/source/fit
+identities and all 517 artifact identities. Exact round-trip checks against the
+two complete inputs passed for every retained row, per-user field, paired
+statistic and artifact, as did diff checks. Extraction took0.164813 CPU seconds,
+0.165264 wall seconds, peak57,296KiB, with zero scientific calls. The extractor
+`experiments/candidates/uav_user_waiting/b03_result.py` preserves the pinned
+input hashes; the accepted 75 scientific sources remain unchanged.
+
+### Complete native comparison and active exposure
+
+All values below are means over the same64 evaluation worlds. G is mean
+per-user episode maximum unserved gap; F_user is the worst user's complete
+episode mean age. Lower G/age/gaps are favorable; service and native J retain
+their original meanings. The original141-byte recurring contract and1.436s
+computation deadline are common to all arms.
+
+| Arm | G ticks | Episode maximum gap | F_user | Served users/tick | Native J | Scheduler CPU s/episode |
+|---|---:|---:|---:|---:|---:|---:|
+| M | 20.194375 | 57.765625 | 13.316406 | 24.586731 | .397487 | 5.188154 |
+| S | 20.632813 | 48.328125 | 10.289795 | 21.075317 | .351806 | 4.005727 |
+| G0 | 23.780000 | 86.312500 | 23.950378 | 22.819336 | .379510 | 5.860538 |
+| LR | 30.759063 | 104.078125 | 28.354187 | 21.191040 | .354718 | 7.569228 |
+| LN | 32.097188 | 96.109375 | 27.816040 | 20.319458 | .348096 | 8.550679 |
+
+The primary **LN−M G difference is +11.902813**, descriptive paired t95
+[+10.414273,+13.391352], with **all64 worlds adverse**. The declared bootstrap95
+is [+10.474984,+13.396898]. Experience use LN−G0 is +8.317188
+[+6.743167,+9.891208],59 adverse/5 improving. LR−G0 is likewise adverse,
++6.979063[+5.481500,+8.476625],58 adverse/6 improving; LR−M is +10.564688,
+63 adverse/1 improving. Even direct G0−M is +3.585625
+[+2.542372,+4.628878],48 adverse/15 improving/1 tie. LN−LR is
++1.338125[−.171901,+2.848151]; this establishes neither neural advantage nor
+equivalence. These intervals describe paired-world variation conditional on
+one acquisition/initialization realization, not independent training repeats.
+
+The native costs are not hidden by the primary mean: LN−M loses4.267273
+served users/tick and .049390 J, both in all64 worlds, raises overall age by
+3.241183 in all64, and adds943.171m/UAV travel in all64. Episode maximum gap
+rises38.34375 ticks (60 adverse/4 improving); worst-user mean age rises14.499634
+(59 adverse/5 improving). LN does raise measured quality by.034505 and reduces
+transmitter-on exposure by59ticks on average; those are retained tradeoffs,
+not success on waiting or an energy claim.
+
+All G0/LR/LN eligible4,096 evaluation rounds executed. Their same-history
+departures from M are2,855/3,472/3,845; no missing-maximum fallback or deadline
+miss occurred. Maximum observed scheduler round wall times are
+.200192/.204620/.224446s, below1.436s on this node only. LR/LN made
+427,018/443,089 value calls, with132,488/30,357 clipped outputs. The
+`value_pair_changes_from_visited_zero` diagnostic is266/2,713/3,641: it reranks
+the cached all-visited pool, including M-generation candidates, and **is not a
+complete same-state G0-policy counterfactual**. G0's nonzero diagnostic count
+therefore does not imply a broken zero-value control. This is active adverse
+intervention, not an untrained model, inactive choice channel or missed deadline.
+
+S retains the constructive ordinary result. S−M reduces episode maximum gap
+by9.4375[−13.755527,−5.119473] and worst-user mean age by3.026611
+[−4.232096,−1.821127], with47 and52 improving worlds respectively. It loses
+3.511414 served users/tick and .045680 J in **every** world, raises overall age
+by.211328, adds505.268m/UAV travel, and uses less scheduler CPU. Its G contrast,
++.438438[−.404622,+1.281497], is unresolved rather than equivalent. S's extreme-
+continuity/service tradeoff recurs from B02; M remains the stronger typical-user
+and service reference. Neither controller is a universal replacement.
+
+### Fitting, factual calibration and what remains unidentified
+
+Both estimators fitted13,182 eligible causal M-suffix labels across256 training
+episodes, including64 old M episodes by canonical reference. Equal-episode
+weighted training RMSE is1.221189 ticks for LR and.653347 for LN. Every one of
+LN's4,096 Adam updates moved parameters; the saved sampling trace covers all
+rows and episodes. The complete numerical reader reproduced both final
+parameter states bitwise, with one ridge solve and4,096 deterministic Adam
+updates explicitly counted as verification, not scientific replication.
+
+Fresh factual M-suffix calibration has4,032 queries/model over64 fresh worlds:
+
+| Clipped calibration in native ticks | LR | LN |
+|---|---:|---:|
+| RMSE | 2.329478 | 2.254624 |
+| MAE | 1.811133 | 1.700276 |
+| Mean signed bias | +.232525 | +.233862 |
+
+The actual target mean is4.757520. Both improve on zero initialization's RMSE
+6.6293. The independent reviewer computed paired-world LN−LR MSE
+−.3431[−1.1086,+.4223],33 improving/31 adverse; the small aggregate difference
+does not establish neural forecasting superiority. More fundamentally, factual
+M-suffix prediction improved while deploying the values worsened the complete
+native objective. This weakens wholly absent predictive signal as an account,
+but does not validate ranking synthetic selected states or identify why that
+ranking failed. The lawfully available partial state, modeled history, acquired
+coverage and repeatedly replanned state distribution all remain possible gaps.
+An observed LN suffix is not a measured M-counterfactual target.
+
+The declared complete checks verify131,072 native/model transitions,333,656
+candidate physical pairs in the prospective selected/anchor subset,
+870,107 value calculations, all training feature/target rows and all worker
+artifacts. Native J maximum reconstruction error is5.55e−17; native SINR and
+actor-observation maximum errors are0. The shared native radio kernel remains
+part of verification, and candidate physics remains the declared bounded
+subset; this is not an independent reimplementation of every physical law or
+all candidate physics. Actual and modeled burden/history discrepancies remain
+recorded per episode; correctness does not make model history native truth.
+
+<a id="b03-independent-review-and-disposition"></a>
+### Independent scientific reading and DM disposition
+
+The separate-context ResearchCritic reconstructed endpoints **before** reading
+the proposed B03 explanation and original Oracle advice. It checked all75
+scientific source identities; independently recomputed all contrasts;
+reconstructed every saved age/gap in15 hash-verified evaluation trajectories;
+checked190 causal805-feature/target rows from four old, pure-M and early/late-
+perturbed M sources; and inspected saved fit traces without new model queries,
+fits or native trajectories. It retained these positive/adverse witnesses:
+
+- Largest LN−M G loss, world29424010:48.02 versus23.26,46/50 users worse.
+  Its87/83/81tick closed gaps have exactly correct recorded age **and running
+  maximum** for those three users at every report anchor. All59 same-state
+  departures from M change forecast motion/mask.
+- Largest LN−G0 loss,29424047:42.70 versus17.68,42 users worse. Its111tick
+  closed and94/94tick terminal gaps coexist with exact checked histories.
+  At the initial common state LN accepts immediate modeled increment2.64
+  versus M's2.44 because continuation predictions are18.33059 versus19.49810;
+  the changed program executes. This demonstrates the mechanism, not causal
+  attribution of the full later loss or an M-counterfactual suffix observation.
+- Strongest LN−G0 gain,29424005:30.78 versus40.26, yet M/S achieve23.28/17.58.
+  Nineteen users improve versus G0 and29 worsen; a few long-gap reductions
+  drive the favorable mean. LR's sole M improvement is29424027,24.80 versus
+  28.16. G0 improves on M at29424046,18.02 versus25.48, while S reaches17.40.
+  These exceptions remain evidence, without a prospectively known selector.
+
+After receiving the full reading, the reviewer independently verified local
+and canonical hashes, accepted identities/exit, the unchanged75 scientific
+sources, all512 episode and517 artifact identities, bitwise fit replay and
+calibration arithmetic. Its final recommendation is: **retain M and conditional
+S; end investment in unchanged G0/LR/LN. No further B03 observation is needed.
+MATERIAL_DISSENT: no.** It explicitly distinguishes useful factual prediction
+from useful state-dependent action ranking and preserves selected-state
+extrapolation as uncertainty, not established cause. The final addendum made
+no new model queries, optimizer replay or raw-witness checks.
+
+I accept that diagnosis. Task opportunity persists in S's recurring extreme
+continuity capability and tradeoff. This finite representation/training/search
+package supplies no G improvement; fitting and factual predictive signal are
+real but did not translate into useful deployment. No general unlearnability,
+information ceiling, missing-ACK diagnosis or isolated optimizer/feature cause
+follows. Keeping M among candidates is not a policy-improvement guarantee under
+approximate ranking. Stop this fixed recipe and retain all adverse evidence;
+do not purchase another fit, horizon, feature or acquisition repair. The parent
+learning question remains open. Root's **explicitly changed**, independently
+reviewed M/S/U/K question above is the selected next investment, after this
+batch's publication and cleanup, not a renamed G-value rescue.
+
+### Complete cost and retained evidence
+
+Scientific exposure is512 new H256 episodes/131,072 steps and2 fits, plus the
+40-step correctness fixture. Of512 episodes,192 acquire data and320 evaluate
+fixed policies with zero evaluation parameter updates. Reused16,384 old steps
+are not new exposure. The producer performs one ridge solve and4,096 Adam
+updates/1,048,576 presentations; the reader repeats those operations for
+numerical verification, adds327,680 C calls,870,107 value replays,8,064 factual
+calibration queries and26,364 final-training predictions, with zero new native
+steps or independent scientific fits. Producer requests total8,564,736 and
+delivered state reductions17,137,344.
+
+Producer lifetime CPU is3,300.383555s, reader lifetime CPU3,174.845006s:
+**6,475.228561s /1.798675 CPU-hours** together. Wall times are3,251.435954s and
+3,175.478258s; peak RSS939,196KiB and807,980KiB. The separately paid fixture
+used4.469529 CPU seconds and4.67145 wall seconds. The provisional critic's
+bounded remote inspection used6.55 CPU seconds, with local support, engineering
+and review not comprehensively metered; they are not zero. The complete compact
+extraction cost above is additional. Across B01–B03 this direction has262,256
+new result steps,240 correctness steps and2 scientific fits; previously known
+B01/B02 CPU4,475.374087s plus this worker/reader is10,950.602648s before the
+separately recorded fixture/support costs. No failed or refused work is erased.
+
+The worker's517 unique retained artifacts occupy916,234,958 logical bytes,
+besides the full summary/reader/config/native receipts. Native trajectories,
+training data, both fitted models and fit traces remain at the canonical node
+paths in the compact manifest; the64 old M trajectories remain at their original
+canonical paths. Full large JSON copies used for local interpretation will be
+deleted only after compact publication and final live-consumer checks. Useful
+frozen source, tests and the small argument adapter stay published. Managed
+source snapshots, redundant progress data and unused direction scratch are
+the cleanup targets; no archive or duplicate backup is a prerequisite.
