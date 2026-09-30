@@ -65,8 +65,22 @@ Independent clones and other nodes do not share that claim store; reconcile thei
 handles before moving execution. A lost acknowledgement, timeout or missing PID is unknown.
 Ordinary replay of the same request returns the existing operation before new-effect gates;
 it never retries even a known spawn/preflight failure. Changed inputs at an existing output
-tag refuse with a mismatch. Explicit new attempts are not implemented; changing tags, deleting
-outputs or TTL expiry does not provide that capability. A short-lived admission is
+tag refuse with a mismatch. A separately justified new attempt may use
+`launch --retry-of <original-operation-ref>` with `--snapshot`, a fresh output tag and the
+same scientific SHA, direction, lead, configured interpreter, runner and normalized scientific
+arguments. The original
+operation must be reconciled accepted, have a consistent terminal nonzero exit, and have both
+native runner and supervisor definitely stopped on the same node and Git common claim store.
+Success, unknown/conflicting evidence, pre-release failure or changed scientific inputs do not
+qualify. The maintained control launcher supplies this capability; the scientific source stays
+at its declared SHA. All current policy, published-source and fresh memory checks still apply.
+
+An explicit parent can have only one successor. Repeating that request, including after a lost
+acknowledgement or with another fresh output tag, returns the same successor before new-effect
+gates; its own failure or uncertainty does not create another attempt. Ordinary replay without
+`--retry-of` continues to return the original operation. A later separately justified attempt
+must name its failed immediate predecessor explicitly. Original records and outputs remain
+unchanged. Changing tags, deleting outputs or TTL expiry never grants a retry. A short-lived admission is
 single-use and bound to the child, parent, interpreter, source, direction and exact argv.
 
 ## Runner integration and observation
@@ -90,7 +104,10 @@ no test/bypass switch.
 Retain the manifest, preflight, stdout/stderr and `process-exit.json` in the run's output.
 Use `<configured-python> scripts/hmasd_launch.py status <operation_ref>` on the original
 executing node. A manifest path or original output directory is also accepted. This is read-only
-and works during a pause, dirty author edits or control-network failure; it never grants retry.
+and works during a pause, dirty author edits or control-network failure. Its explicit-retry
+eligibility reports native evidence only, not scientific authorization or current admission.
+When a successor is already reserved, status exposes that successor's operation reference;
+it does not offer a second new attempt from the same parent.
 The response separates admission, runner/supervisor identity, exit witness and basic artifact
 presence. Missing or conflicting evidence stays unknown; presence alone does not certify
 scientific completeness. A copied remote record does not establish a local process identity.

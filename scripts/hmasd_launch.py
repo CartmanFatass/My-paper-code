@@ -744,6 +744,10 @@ def _claim_key(direction: str, sha: str, identity_command: Sequence[str]) -> str
     return hashlib.sha256(encoded).hexdigest()
 
 
+def _retry_claim_key(parent_key: str) -> str:
+    return hashlib.sha256(("hmasd-explicit-retry-v1:" + parent_key).encode("ascii")).hexdigest()
+
+
 @contextlib.contextmanager
 def _claim_lock(common_dir: Path) -> Iterator[Path]:
     state_root = common_dir / "hmasd-admission"
@@ -894,7 +898,7 @@ def _find_existing_operation(
         mismatches = _claim_request_mismatches(claim, args, sha, probe)
         if same_output and mismatches:
             output_conflict = (claim_path, claim, mismatches)
-        if not mismatches:
+        if not mismatches and claim.get("retry_of") is None:
             exact.append((claim_path, claim))
     if output_conflict is not None:
         claim_path, _claim, mismatches = output_conflict
@@ -921,7 +925,7 @@ def _write_status(output: Path, status: str, **extra: Any) -> None:
         except (OSError, json.JSONDecodeError):
             existing = None
         if isinstance(existing, Mapping):
-            for key in ("claim_key", "operation_ref", "claim_ref", "manifest_ref"):
+            for key in ("claim_key", "operation_ref", "claim_ref", "manifest_ref", "retry_of"):
                 if key in existing:
                     payload[key] = existing[key]
     payload.update(extra)
@@ -1252,6 +1256,140 @@ def _resolve_status_records(
     return manifest_path, manifest, claim_path, claim, output
 
 
+def _retry_record_errors(
+    manifest_path: Path | None, manifest: Mapping[str, Any] | None,
+    claim_path: Path | None, claim: Mapping[str, Any] | None, output: Path,
+) -> list[str]:
+    """Validate native retry bindings without reading policy or changing records."""
+    if manifest is None or claim is None or manifest_path is None or claim_path is None:
+        return ["retry requires both native claim and manifest"]
+    errors: list[str] = []
+    for key in (
+        "schema_version", "claim_key", "direction", "lead", "sha", "node", "host_identity",
+        "published_remote", "source_root", "output_root", "identity_command", "command_sha256",
+        "operation_ref", "claim_ref", "manifest_ref", "retry_of",
+    ):
+        if (key != "retry_of" and claim.get(key) is None) or claim.get(key) != manifest.get(key):
+            errors.append("record binding: " + key)
+    if claim.get("schema_version") != SCHEMA_VERSION:
+        errors.append("unsupported native schema")
+    if claim.get("host_identity") != platform.node():
+        errors.append("operation belongs to another host")
+    for record in (claim, manifest):
+        for key, expected in (
+            ("operation_ref", claim_path), ("claim_ref", claim_path),
+            ("manifest_ref", manifest_path), ("output_root", output),
+        ):
+            if record.get(key) != str(expected):
+                errors.append("noncanonical record reference: " + key)
+    if manifest_path != output / "launch-manifest.json":
+        errors.append("manifest is outside its native output root")
+    if manifest.get("process_exit") != str(output / "process-exit.json"):
+        errors.append("exit witness is outside its native output root")
+    try:
+        common = _git_common_dir(Path(manifest["control_root"]))
+        if claim_path.parent != common / "hmasd-admission":
+            errors.append("operation is outside its Git common claim store")
+    except (KeyError, TypeError, LaunchRefusal, OSError):
+        errors.append("Git common claim store is unavailable")
+
+    identity = claim.get("identity_command")
+    key = claim.get("claim_key")
+    if (not isinstance(identity, list) or len(identity) < 2
+            or any(not isinstance(value, str) for value in identity)
+            or not isinstance(key, str) or re.fullmatch(r"[0-9a-f]{64}", key) is None
+            or not isinstance(claim.get("sha"), str)
+            or FULL_SHA_RE.fullmatch(claim["sha"]) is None
+            or not isinstance(claim.get("direction"), str)):
+        errors.append("invalid scientific claim identity")
+    else:
+        parent = claim.get("retry_of")
+        if parent is None:
+            expected_key = _claim_key(claim["direction"], claim["sha"], identity)
+        elif (isinstance(parent, Mapping) and isinstance(parent.get("claim_key"), str)
+                and re.fullmatch(r"[0-9a-f]{64}", parent["claim_key"]) is not None
+                and parent.get("operation_ref") == str(claim_path.parent / (parent["claim_key"] + ".json"))):
+            expected_key = _retry_claim_key(parent["claim_key"])
+        else:
+            expected_key = None
+        if key != expected_key or claim_path.name != key + ".json":
+            errors.append("claim key does not match its native operation")
+
+    for field, manifest_field in (
+        ("process_identity", "process"), ("runner_process_identity", "runner_process"),
+    ):
+        process = manifest.get(manifest_field)
+        native = process.get("identity") if isinstance(process, Mapping) else None
+        if not isinstance(native, Mapping) or claim.get(field) != native:
+            errors.append("record binding: " + field)
+            continue
+        kind = native.get("kind")
+        required = ("pid", "creation_time_100ns") if kind == "windows_pid_creation_time" else (
+            "pid", "start_ticks", "session_id"
+        ) if kind == "linux_pid_start_ticks" else ()
+        if (not required or any(isinstance(native.get(k), bool) or not isinstance(native.get(k), int)
+                               or native[k] <= 0 for k in required)
+                or (kind == "linux_pid_start_ticks" and not native.get("boot_id"))
+                or process.get("pid") != native.get("pid")):
+            errors.append("invalid native process identity: " + field)
+    return errors
+
+
+def _retry_eligibility_errors(
+    manifest: Mapping[str, Any] | None, claim: Mapping[str, Any] | None,
+    observation: Mapping[str, Any],
+) -> list[str]:
+    if (claim is None or manifest is None or claim.get("status") != "accepted"
+            or claim.get("acceptance") != "accepted" or manifest.get("acceptance") != "accepted"):
+        return ["parent admission is not reconciled accepted"]
+    execution = observation["execution"]
+    if (execution["state"] != "exited" or execution["exit_witness"]["state"] != "valid"
+            or execution.get("exit_code", 0) == 0):
+        return ["parent has no consistent terminal nonzero native exit"]
+    stopped = {"absent", "not_running", "identity_mismatch"}
+    if any(execution[role]["state"] not in stopped for role in ("runner", "supervisor")):
+        return ["old runner and supervisor are not both definitely stopped"]
+    return []
+
+
+def _find_retry_operation(
+    state_root: Path, args: argparse.Namespace, sha: str, probe: RequestProbe,
+) -> tuple[dict[str, str], tuple[Path, Mapping[str, Any]] | None]:
+    records = _resolve_status_records(args.retry_of)
+    manifest_path, manifest, parent_path, parent, output = records
+    errors = _retry_record_errors(*records)
+    if parent_path is None or parent_path.parent != state_root:
+        errors.append("retry parent is outside this Git common claim store")
+    if errors:
+        raise LaunchRefusal("retry parent refused: " + "; ".join(errors), exit_code=5)
+    assert parent_path is not None and parent is not None and manifest is not None
+    mismatches = _claim_request_mismatches(parent, args, sha, probe)
+    if mismatches:
+        raise LaunchRefusal("retry parent input mismatch: " + ", ".join(mismatches), exit_code=5)
+    linkage = {"operation_ref": str(parent_path), "claim_key": parent["claim_key"]}
+    successor_path = state_root / (_retry_claim_key(parent["claim_key"]) + ".json")
+    # A tag bound to another operation must never conceal an input/parent mismatch.
+    for candidate in state_root.glob("*.json"):
+        claim = _read_claim(candidate)
+        if claim is not None and claim.get("output_root") == str(probe.output_root) and candidate != successor_path:
+            raise LaunchRefusal("existing operation input mismatch for this output tag: retry_of", exit_code=5)
+    successor = _read_claim(successor_path)
+    if successor is not None:
+        mismatches = _claim_request_mismatches(successor, args, sha, probe)
+        if (successor.get("retry_of") != linkage or successor.get("claim_key") != successor_path.stem
+                or successor.get("host_identity") != platform.node()
+                or successor.get("operation_ref") != str(successor_path)):
+            mismatches.append("retry_of/operation binding")
+        if mismatches:
+            raise LaunchRefusal("retry successor input mismatch: " + ", ".join(mismatches), exit_code=5)
+        return linkage, (successor_path, successor)
+    observation = status(parent_path)
+    errors = _retry_eligibility_errors(manifest, parent, observation)
+    if errors:
+        raise LaunchRefusal("retry parent refused: " + "; ".join(errors), exit_code=5)
+    return linkage, None
+
+
 def status(reference: str | os.PathLike[str]) -> Mapping[str, Any]:
     """Return read-only operation facts without consulting launch authority."""
 
@@ -1396,6 +1534,24 @@ def status(reference: str | os.PathLike[str]) -> Mapping[str, Any]:
         result["execution"]["conflict"] = "matching runner identity is live with exit witness"
     if valid_exit and not record_conflicts and not live_exit_conflict:
         result["execution"]["exit_code"] = exit_witness["exit_code"]
+    retry_errors = _retry_record_errors(manifest_path, manifest, claim_path, claim, output)
+    successor_ref = None
+    if not retry_errors and claim_path is not None and claim is not None:
+        successor_path = claim_path.parent / (_retry_claim_key(claim["claim_key"]) + ".json")
+        if successor_path.exists():
+            successor_ref = str(successor_path)
+            retry_errors.append("successor already reserved; explicit request only replays it")
+    retry_errors += _retry_eligibility_errors(manifest, claim, result)
+    result["explicit_retry_available"] = not retry_errors
+    result["explicit_retry"] = {
+        "supported": True,
+        "eligible": not retry_errors,
+        "reasons": retry_errors,
+        "scientific_authorization": False,
+        "successor_ref": successor_ref,
+    }
+    if claim is not None and claim.get("retry_of") is not None:
+        result["retry_of"] = claim["retry_of"]
     return result
 
 
@@ -1576,8 +1732,12 @@ def launch(args: argparse.Namespace) -> Mapping[str, Any]:
     if REMOTE_RE.fullmatch(args.remote) is None:
         raise LaunchRefusal("--remote must be a configured simple Git remote name")
     probe = _probe_launch_request(args, sha)
+    retry_of: dict[str, str] | None = None
     with _claim_lock(probe.git_common_dir) as state_root:
-        existing = _find_existing_operation(state_root, args, sha, probe)
+        if getattr(args, "retry_of", None) is not None:
+            retry_of, existing = _find_retry_operation(state_root, args, sha, probe)
+        else:
+            existing = _find_existing_operation(state_root, args, sha, probe)
         if existing is not None:
             claim_path, _claim = existing
             recovered = dict(status(claim_path))
@@ -1587,7 +1747,27 @@ def launch(args: argparse.Namespace) -> Mapping[str, Any]:
     # Hold the same lock as source GC from snapshot creation until the claim
     # is durable. A clean, unclaimed snapshot may otherwise still be preparing.
     with _claim_lock(probe.git_common_dir) as state_root:
+        # A competing request may have reserved the successor while this call
+        # waited. Resolve it before snapshot, policy, or publication effects.
+        if retry_of is not None:
+            retry_of, existing = _find_retry_operation(state_root, args, sha, probe)
+        else:
+            existing = _find_existing_operation(state_root, args, sha, probe)
+        if existing is not None:
+            recovered = dict(status(existing[0]))
+            recovered["request_resolution"] = "existing_operation"
+            return recovered
+        if retry_of is not None:
+            # Each successor executes the same committed bytes in a fresh
+            # snapshot, even when the author checkout has advanced meanwhile.
+            args = argparse.Namespace(**{**vars(args), "snapshot": True})
         paths, node, node_entry, python, runner_arguments = _prepare_paths_and_config(args)
+        if retry_of is not None:
+            parent = _read_json_object(Path(retry_of["operation_ref"]), label="retry parent")
+            if node != parent["node"]:
+                raise LaunchRefusal("retry parent input mismatch: node", exit_code=5)
+            if _normalized_path(python) != parent["identity_command"][0]:
+                raise LaunchRefusal("retry parent input mismatch: interpreter", exit_code=5)
         _require_policy(paths.control_root, args.direction, args.lead, args.remote)
         _validate_source(paths.source_root, sha, args.remote)
 
@@ -1605,7 +1785,8 @@ def launch(args: argparse.Namespace) -> Mapping[str, Any]:
         ]
         identity_command = [_normalized_path(python), *probe.identity_command_tail]
         command_sha256 = hmasd_admission.command_digest(python, paths.runner, runner_arguments)
-        claim_key = _claim_key(args.direction, sha, identity_command)
+        claim_key = (_retry_claim_key(retry_of["claim_key"]) if retry_of is not None
+                     else _claim_key(args.direction, sha, identity_command))
 
         claim_path = state_root / f"{claim_key}.json"
         existing = _read_claim(claim_path)
@@ -1649,6 +1830,8 @@ def launch(args: argparse.Namespace) -> Mapping[str, Any]:
             "claim_ref": str(claim_path),
             "manifest_ref": str(manifest_path),
         }
+        if retry_of is not None:
+            claim["retry_of"] = retry_of
         _atomic_write_json(claim_path, claim)
         _write_status(
             paths.output_root,
@@ -1657,6 +1840,7 @@ def launch(args: argparse.Namespace) -> Mapping[str, Any]:
             operation_ref=str(claim_path),
             claim_ref=str(claim_path),
             manifest_ref=str(manifest_path),
+            **({"retry_of": retry_of} if retry_of is not None else {}),
         )
 
         listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -1725,6 +1909,8 @@ def launch(args: argparse.Namespace) -> Mapping[str, Any]:
             manifest["operation_ref"] = str(claim_path)
             manifest["claim_ref"] = str(claim_path)
             manifest["manifest_ref"] = str(manifest_path)
+            if retry_of is not None:
+                manifest["retry_of"] = retry_of
             _atomic_write_json(manifest_path, manifest)
             claim.update(
                 pid=process.pid,
@@ -1992,6 +2178,9 @@ def _parser() -> argparse.ArgumentParser:
     launch_parser.add_argument("--source-root", default=".")
     launch_parser.add_argument("--snapshot", action="store_true",
                                help="execute published SHA in a retained linked worktree")
+    launch_parser.add_argument("--retry-of",
+                               help="explicit same-source successor of an accepted failed native operation; "
+                                    "requires a published notebook decision and fresh admission")
     launch_parser.add_argument("--node")
     launch_parser.add_argument("--remote", default="origin")
     launch_parser.add_argument(

@@ -980,6 +980,268 @@ def test_concurrent_identical_requests_spawn_once(
     assert len({result["operation_ref"] for result in results}) == 1
 
 
+def _wait_native_terminal(output):
+    _wait_for(Path(output) / "process-exit.json")
+    deadline = time.monotonic() + 10
+    while True:
+        execution = hmasd_launch.status(output)["execution"]
+        if all(execution[role]["state"] in {"absent", "not_running", "identity_mismatch"}
+               for role in ("runner", "supervisor")):
+            return
+        assert time.monotonic() < deadline, execution
+        time.sleep(0.02)
+
+
+def _failed_retry_parent(launch_repo, monkeypatch):
+    source, _remote, sha = launch_repo
+    monkeypatch.setattr(hmasd_launch.hmasd_resource_preflight, "capture_snapshot", lambda: SAFE_SNAPSHOT)
+    args = _arguments(source, sha, "failed-parent")
+    args.runner_argv[0] = "scripts/atexit_runner.py"
+    manifest = hmasd_launch.launch(args)
+    _wait_native_terminal(args.output)
+    assert hmasd_launch.status(manifest["operation_ref"])["explicit_retry_available"]
+    return args, manifest
+
+
+def _retry_arguments(parent_args, parent, tag="explicit-successor"):
+    args = _arguments(Path(parent_args.source_root), parent_args.sha, tag)
+    args.runner_argv[0] = parent_args.runner_argv[0]
+    args.retry_of = parent["operation_ref"]
+    return args
+
+
+def test_explicit_retry_creates_one_fresh_linked_successor_and_preserves_parent(launch_repo, monkeypatch):
+    parent_args, parent = _failed_retry_parent(launch_repo, monkeypatch)
+    files = [Path(parent["operation_ref"]), *Path(parent_args.output).iterdir()]
+    before = {p: p.read_bytes() for p in files if p.is_file()}
+    # Maintain the launcher independently while executing the parent's frozen SHA.
+    source = Path(parent_args.source_root)
+    _git(source, "rm", parent_args.runner_argv[0])
+    _git(source, "commit", "-m", "advance author checkout without old runner")
+    args = _retry_arguments(parent_args, parent)
+    successor = hmasd_launch.launch(args)
+    assert successor["operation_ref"] != parent["operation_ref"]
+    assert successor["sha"] == parent["sha"]
+    assert successor["identity_command"] == parent["identity_command"]
+    assert successor["source_root"] != parent["source_root"]
+    assert successor["process"]["identity"] != parent["process"]["identity"]
+    linkage = {"operation_ref": parent["operation_ref"], "claim_key": parent["claim_key"]}
+    assert successor["retry_of"] == linkage
+    assert json.loads(Path(successor["operation_ref"]).read_text())["retry_of"] == linkage
+    assert json.loads((Path(args.output) / "launch-status.json").read_text())["retry_of"] == linkage
+    _wait_native_terminal(args.output)
+    assert {p: p.read_bytes() for p in before} == before
+    assert hmasd_launch.launch(parent_args)["operation_ref"] == parent["operation_ref"]
+    assert hmasd_launch.status(successor["operation_ref"])["retry_of"] == linkage
+    observed = hmasd_launch.status(parent["operation_ref"])
+    assert observed["explicit_retry"]["supported"] is True
+    assert observed["explicit_retry"]["scientific_authorization"] is False
+    assert observed["explicit_retry_available"] is False
+    assert observed["explicit_retry"]["eligible"] is False
+    assert observed["explicit_retry"]["successor_ref"] == successor["operation_ref"]
+
+    monkeypatch.setattr(hmasd_launch, "_prepare_paths_and_config", lambda *_: pytest.fail("replay reached gates"))
+    changed_tag = _retry_arguments(parent_args, parent, "another-tag")
+    changed_tag.retry_of = parent["manifest_ref"]
+    replay = hmasd_launch.launch(changed_tag)
+    assert replay["operation_ref"] == successor["operation_ref"]
+    assert replay["request_resolution"] == "existing_operation"
+    assert not Path(changed_tag.output).exists()
+    monkeypatch.setattr(hmasd_launch, "_observe_native_identity", lambda _: {"state": "unknown"})
+    observed = hmasd_launch.status(parent["operation_ref"])
+    assert observed["explicit_retry"]["successor_ref"] == successor["operation_ref"]
+    assert observed["explicit_retry_available"] is False
+    assert hmasd_launch.launch(changed_tag)["operation_ref"] == successor["operation_ref"]
+
+
+def test_concurrent_explicit_retries_reserve_one_successor(launch_repo, monkeypatch):
+    parent_args, parent = _failed_retry_parent(launch_repo, monkeypatch)
+    real_spawn = hmasd_launch._spawn
+    spawns = []
+    def spawn(*args, **kwargs):
+        spawns.append(args)
+        return real_spawn(*args, **kwargs)
+    monkeypatch.setattr(hmasd_launch, "_spawn", spawn)
+    requests = [_retry_arguments(parent_args, parent, tag) for tag in ("race-a", "race-b")]
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        results = list(pool.map(hmasd_launch.launch, requests))
+    assert len(spawns) == 1
+    assert len({r["operation_ref"] for r in results}) == 1
+    assert sum(r.get("request_resolution") == "existing_operation" for r in results) == 1
+    _wait_native_terminal(results[0]["output_root"])
+
+
+@pytest.mark.parametrize("failure", ["lost_ack", "after_reservation", "spawn"])
+def test_retry_uncertainty_and_reservation_failure_never_reopen_on_new_tag(launch_repo, monkeypatch, failure):
+    parent_args, parent = _failed_retry_parent(launch_repo, monkeypatch)
+    args = _retry_arguments(parent_args, parent)
+    if failure == "lost_ack":
+        real_read = hmasd_launch._read_message
+        def read(stream):
+            message = dict(real_read(stream))
+            if message.get("kind") == "accepted":
+                message["kind"] = "lost-ack"
+            return message
+        monkeypatch.setattr(hmasd_launch, "_read_message", read)
+    elif failure == "after_reservation":
+        def crash(*args, **kwargs):
+            raise RuntimeError("fixture reservation crash")
+        monkeypatch.setattr(hmasd_launch, "_write_status", crash)
+    else:
+        def spawn(*args, **kwargs):
+            raise OSError("fixture spawn failure")
+        monkeypatch.setattr(hmasd_launch, "_spawn", spawn)
+    with pytest.raises((hmasd_launch.LaunchRefusal, RuntimeError)):
+        hmasd_launch.launch(args)
+    if failure == "lost_ack":
+        _wait_native_terminal(args.output)
+    monkeypatch.setattr(hmasd_launch, "_prepare_paths_and_config", lambda *_: pytest.fail("reserved replay reached gates"))
+    changed_tag = _retry_arguments(parent_args, parent, "replay-unknown")
+    replay = hmasd_launch.launch(changed_tag)
+    assert replay["output_root"] == args.output
+    assert replay["request_resolution"] == "existing_operation"
+    assert replay["admission"]["state"] in {"unknown", "not_released"}
+    assert hmasd_launch.status(parent["operation_ref"])["explicit_retry"]["successor_ref"] == replay["operation_ref"]
+    assert not Path(changed_tag.output).exists()
+
+
+@pytest.mark.parametrize("mutation", ["sha", "argv", "runner", "direction", "lead", "node", "common_store"])
+@pytest.mark.parametrize("replay", [False, True])
+def test_retry_parent_request_mismatches_refuse_before_effects(launch_repo, monkeypatch, tmp_path, mutation, replay):
+    parent_args, parent = _failed_retry_parent(launch_repo, monkeypatch)
+    if replay:
+        successor = hmasd_launch.launch(_retry_arguments(parent_args, parent))
+        _wait_native_terminal(successor["output_root"])
+    args = _retry_arguments(parent_args, parent, "mismatch")
+    if mutation == "sha":
+        args.sha = "0" * 40
+    elif mutation == "argv":
+        args.runner_argv += ["--seed", "2"]
+    elif mutation == "runner":
+        args.runner_argv[0] = "scripts/fixture_runner.py"
+    elif mutation == "direction":
+        args.direction = "other_direction"
+        args.output = str(Path(args.source_root) / "runs" / args.direction / "mismatch")
+        args.runner_argv[-1] = args.output
+    elif mutation == "common_store":
+        other = tmp_path / "another-repo"
+        other.mkdir()
+        _git(other, "init", "-b", "main")
+        args.source_root = str(other)
+        args.output = str(other / "runs" / args.direction / "mismatch")
+        args.runner_argv[-1] = args.output
+    else:
+        setattr(args, mutation, "other")
+    monkeypatch.setattr(hmasd_launch, "_prepare_paths_and_config", lambda *_: pytest.fail("mismatch reached gates"))
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="mismatch|common claim store"):
+        hmasd_launch.launch(args)
+    assert not Path(args.output).exists()
+
+
+@pytest.mark.parametrize("mutation", ["exit0", "missing_exit", "exit_conflict", "claim_conflict", "unknown", "preflight_only", "other_host", "copied_claim", "runner_live", "supervisor_live", "unobservable"])
+def test_retry_rejects_ineligible_or_inconsistent_parent(launch_repo, monkeypatch, tmp_path, mutation):
+    parent_args, parent = _failed_retry_parent(launch_repo, monkeypatch)
+    args = _retry_arguments(parent_args, parent)
+    claim_path = Path(parent["operation_ref"])
+    manifest_path = Path(parent["manifest_ref"])
+    exit_path = Path(parent_args.output) / "process-exit.json"
+    if mutation in {"exit0", "exit_conflict"}:
+        witness = json.loads(exit_path.read_text())
+        witness["exit_code" if mutation == "exit0" else "supervisor_identity"] = 0 if mutation == "exit0" else {}
+        exit_path.write_text(json.dumps(witness))
+    elif mutation == "missing_exit":
+        exit_path.unlink()
+    elif mutation in {"claim_conflict", "unknown", "preflight_only", "other_host"}:
+        claim = json.loads(claim_path.read_text())
+        if mutation == "claim_conflict":
+            claim["runner_process_identity"] = {}
+        elif mutation == "other_host":
+            claim["host_identity"] = "other-host"
+            stored = json.loads(manifest_path.read_text())
+            stored["host_identity"] = "other-host"
+            manifest_path.write_text(json.dumps(stored))
+        else:
+            claim["status"] = "release_unknown" if mutation == "unknown" else "preflight_refused"
+            claim["acceptance"] = "unknown" if mutation == "unknown" else "not_released"
+        claim_path.write_text(json.dumps(claim))
+    elif mutation == "copied_claim":
+        copied = tmp_path / claim_path.name
+        shutil.copyfile(claim_path, copied)
+        args.retry_of = str(copied)
+    else:
+        real_observe = hmasd_launch._observe_native_identity
+        chosen = parent["runner_process" if mutation == "runner_live" else "process"]["identity"]
+        def observe(identity):
+            if mutation == "unobservable" or identity == chosen:
+                return {"state": "unknown" if mutation == "unobservable" else "running"}
+            return real_observe(identity)
+        monkeypatch.setattr(hmasd_launch, "_observe_native_identity", observe)
+    monkeypatch.setattr(hmasd_launch, "_prepare_paths_and_config", lambda *_: pytest.fail("ineligible reached gates"))
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="retry parent refused"):
+        hmasd_launch.launch(args)
+    assert not Path(args.output).exists()
+    assert hmasd_launch.status(args.retry_of)["explicit_retry_available"] is False
+
+
+@pytest.mark.parametrize("guard", ["pause", "publication", "memory"])
+def test_retry_successor_requires_current_admission(launch_repo, monkeypatch, guard):
+    parent_args, parent = _failed_retry_parent(launch_repo, monkeypatch)
+    args = _retry_arguments(parent_args, parent)
+    if guard == "pause":
+        (Path(args.source_root) / "docs/research/RESEARCH.md").write_text(_research(pause="in force"))
+    elif guard == "publication":
+        def refuse(*_args):
+            raise hmasd_launch.LaunchRefusal("fixture publication refused")
+        monkeypatch.setattr(hmasd_launch, "_validate_publication", refuse)
+    else:
+        monkeypatch.setattr(hmasd_launch.hmasd_resource_preflight, "assess_memory_floor",
+                            lambda _: {"passed": False, "reason": "fixture low memory"})
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="pause|publication|memory"):
+        hmasd_launch.launch(args)
+    if guard == "memory":
+        _wait_native_terminal(args.output)
+        replay = hmasd_launch.launch(_retry_arguments(parent_args, parent, "memory-replay"))
+        assert replay["admission"]["state"] == "not_released"
+    else:
+        assert not Path(args.output).exists()
+
+
+def test_retry_refuses_changed_configured_interpreter_but_replay_ignores_config(launch_repo, monkeypatch):
+    parent_args, parent = _failed_retry_parent(launch_repo, monkeypatch)
+    real_prepare = hmasd_launch._prepare_paths_and_config
+    def changed_interpreter(args):
+        paths, node, entry, python, argv = real_prepare(args)
+        return paths, node, entry, Path("/different/native/python"), argv
+    monkeypatch.setattr(hmasd_launch, "_prepare_paths_and_config", changed_interpreter)
+    args = _retry_arguments(parent_args, parent)
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="input mismatch: interpreter"):
+        hmasd_launch.launch(args)
+    assert not Path(args.output).exists()
+    monkeypatch.setattr(hmasd_launch, "_prepare_paths_and_config", real_prepare)
+    successor = hmasd_launch.launch(args)
+    _wait_native_terminal(args.output)
+    monkeypatch.setattr(hmasd_launch, "_prepare_paths_and_config", changed_interpreter)
+    replay = hmasd_launch.launch(_retry_arguments(parent_args, parent, "changed-config-replay"))
+    assert replay["operation_ref"] == successor["operation_ref"]
+
+
+def test_later_retry_requires_explicit_failed_successor_parent(launch_repo, monkeypatch):
+    parent_args, parent = _failed_retry_parent(launch_repo, monkeypatch)
+    args = _retry_arguments(parent_args, parent)
+    successor = hmasd_launch.launch(args)
+    _wait_native_terminal(args.output)
+    assert hmasd_launch.status(successor["operation_ref"])["explicit_retry_available"]
+    later_args = _retry_arguments(parent_args, successor, "later-explicit-retry")
+    later = hmasd_launch.launch(later_args)
+    _wait_native_terminal(later_args.output)
+    assert later["retry_of"]["operation_ref"] == successor["operation_ref"]
+    assert hmasd_launch.launch(_retry_arguments(parent_args, parent, "first-parent-replay"))["operation_ref"] == successor["operation_ref"]
+    assert hmasd_launch.launch(parent_args)["operation_ref"] == parent["operation_ref"]
+    wrong_parent_same_tag = _retry_arguments(parent_args, parent, "later-explicit-retry")
+    with pytest.raises(hmasd_launch.LaunchRefusal, match="input mismatch.*retry_of"):
+        hmasd_launch.launch(wrong_parent_same_tag)
+
+
 @pytest.mark.parametrize(
     ("mutation", "message"),
     [
