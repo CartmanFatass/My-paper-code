@@ -3868,3 +3868,34 @@ remote originals remain retained. The paid B04 calibration reading matches
 its declared SHA256. Source publication precedes result execution. The next
 action is fresh canonical pause/lead, source, actual-node memory and occupancy
 admission followed by one detached worker+reader chain at the fixed exposure.
+
+
+<a id="b05-launch-a01"></a>
+### B05 a01 — accepted original operation, collection active
+
+Exact inputs were committed and publication verified at
+`2e22a2ccf6cafbde5b85a6658077ddcb2bbfcf94`. The original detached operation was
+accepted at2026-09-30T20:38:02.465376Z; its authoritative command, node,
+immutable source snapshot, native identities and output binding are in the
+[launch manifest](../../../../runs/uav_fleet_adaptation/b05_native_consequence_a01/launch-manifest.json).
+No second request, worker or reader was launched. The canonical owner pause
+was lifted and this direction remained exploring with its exact native-child
+lead. Fresh runner-side admission recorded6875746304 physical/effective
+available bytes against the4294967296-byte floor; no live local result
+producer appeared in the immediate occupancy check. The released parent
+worker/reader exit0 and absent processes were independently reconciled at its
+actual `b05_radio_composition_a01` handle. The earlier mistyped status locator
+returned missing and caused no external effect.
+
+The existing session observer was stopped after B04. The first B05 arm
+therefore refused with “drain and rearm the existing state before adding
+observations”; drain showed generation20, no wake and no pending events.
+Rearm advanced21 and registration of the new original handle advanced22.
+Drain then showed the accepted B05 runner and supervisor both running, no
+pending event, and zero probe errors. The observer uses30-second deterministic
+status probes and a1500-second checkpoint. Native-child queue delivery remains
+unsupported as previously measured; this DM stays active through deterministic
+waiting and same-handle drain/rearm, not a replacement operation.
+Collection has begun under the fixed contract. No endpoint is read or selected
+from this progress entry; worker, full declared reader and scientific reading
+remain outstanding.
