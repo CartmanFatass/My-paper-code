@@ -3899,3 +3899,307 @@ waiting and same-handle drain/rearm, not a replacement operation.
 Collection has begun under the fixed contract. No endpoint is read or selected
 from this progress entry; worker, full declared reader and scientific reading
 remain outstanding.
+
+
+B05 observer checkpoint at2026-09-30T21:03:11UTC: original worker has finished
+all4 fits/8192 Adam steps/1048576 cached presentations and4448 full episodes/
+1138688 native steps. Worker wall1446.904711s, CPU1444.100055s; stderr empty.
+The same process is still executing its priced reader; these are technical
+progress facts, not a scientific disposition. Generation22 checkpoint
+`ead35aeaa9482a022590db5a`, wake`b7fa3906-c0ed-4bf8-9467-74d0bfaf58ed`, was
+read and consumed; queue delivery returned the same native-child `-32600`
+restriction. Foreground deterministic observation supplied the event. Rearm
+advanced23 on the same accepted operation, without another worker or reader.
+
+
+<a id="b05-complete-reading"></a>
+### B05 complete reading — active native-consequence fitting, no added fleet value
+
+**Complete observation.** All declared work and its priced reader finished at
+the original source `2e22a2ccf6cafbde5b85a6658077ddcb2bbfcf94`; native exit0 was
+witnessed at2026-09-30T21:05:12.498259Z, with both process identities absent.
+The reader is **VERIFIED**, including all4448 raw files and36 source bindings.
+CONT's mean native J is below unchanged S in both lineages and does not
+consistently exceed same-data CAL. All three central contrasts have conditional
+world intervals spanning zero. This fixed purchase therefore supplies no
+positive added-value result or default replacement. It does not establish
+population harm, equivalence, a common failure cause or general inability to
+learn. Both original S assets retain useful fresh-panel comparisons with Q.
+The independent scientific result review is running separately; the disposition
+below is the DM's provisional recommendation until its full answer is read.
+
+**Fixed endpoint levels.** Each row averages its32 disjoint final worlds.
+Service-p10 is the mean within-episode temporal10th percentile; minimum is
+mean episode-minimum total service, not individual-user continuity. Path is
+metres per UAV. L1 B*=S is exact policy-identity reuse, not another32 episodes.
+
+| Lineage / arm | Native J | Mean service | Service p10 | Minimum service | Quality | Path m/UAV | Query CPU s/episode |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| L0 C | .326612 | 19.500854 | 18.875000 | 10.500000 | .178668 | 2330.696 | .023242 |
+| L0 Q | .357172 | 21.668823 | 16.531250 | 9.531250 | .179362 | 3876.909 | .114586 |
+| L0 S | .380706 | 23.325073 | 20.062500 | 10.281250 | .180516 | 2952.085 | .109606 |
+| L0 old B* (T2) | .382841 | 23.546509 | 19.421875 | 9.968750 | .177298 | 4371.311 | .145162 |
+| L0 CAL | .381390 | 23.355103 | 20.781250 | 10.125000 | .181396 | 3003.002 | .140807 |
+| L0 CONT | .375571 | 22.975342 | 20.078125 | 10.031250 | .179721 | 2854.776 | .137102 |
+| L1 C | .332437 | 19.642090 | 19.062500 | 10.968750 | .191492 | 3219.292 | .024062 |
+| L1 Q | .373866 | 22.710205 | 18.250000 | 10.187500 | .186410 | 3978.513 | .111986 |
+| L1 S = old B* | .401578 | 24.740601 | 21.453125 | 10.937500 | .184032 | 3276.640 | .112584 |
+| L1 CAL | .394629 | 24.224365 | 21.578125 | 10.937500 | .184960 | 3201.210 | .141419 |
+| L1 CONT | .396080 | 24.361450 | 20.968750 | 10.812500 | .183401 | 3179.594 | .143141 |
+
+The complete signed comparisons are in the unmodified
+[reading](../../../../runs/uav_fleet_adaptation/b05_native_consequence_a01/reading.json).
+Central native-J contrasts and the pertinent controls are:
+
+| Contrast | L0 mean [descriptive paired t95] | L1 mean [descriptive paired t95] |
+|---|---:|---:|
+| CONT−S | −.005135 [−.021858,+.011589] | −.005498 [−.018206,+.007211] |
+| CONT−CAL | −.005819 [−.018043,+.006404] | +.001451 [−.013173,+.016075] |
+| CONT−old-B* | −.007269 [−.024725,+.010186] | −.005498 [−.018206,+.007211] |
+| CAL−S | +.000684 [−.014937,+.016306] | −.006949 [−.016153,+.002255] |
+| CAL−old-B* | −.001450 [−.016158,+.013258] | −.006949 [−.016153,+.002255] |
+| CONT−Q | +.018399 [+.004663,+.032135] | +.022215 [+.004795,+.039634] |
+| CONT−C | +.048959 [+.027332,+.070585] | +.063644 [+.043900,+.083387] |
+| CAL−Q | +.024218 [+.010764,+.037672] | +.020763 [+.000590,+.040937] |
+| CAL−C | +.054778 [+.035288,+.074267] | +.062192 [+.037036,+.087348] |
+| S−Q | +.023534 [+.006811,+.040257] | +.027712 [+.009724,+.045700] |
+| old-B*−S | +.002135 [−.014907,+.019176] | 0, exact reuse |
+
+CONT−S wins17 and loses15 J worlds in each lineage; CONT−CAL wins14/19 and
+loses18/13. CAL−S wins17/14 and loses15/18. Neither pooled world counts nor the
+stored equal-weight point averages create additional training instances.
+There are two inherited-lineage outcomes for each finite head program, not64
+independent fits, and no confirmation or simultaneous-inference claim.
+
+**Native consequences and adverse cases.** CONT−S mean service changes
+−.349731/−.379150 users per tick, service-p10+.015625/−.484375, mean minimum
+−.250000/−.125000, and path−97.309/−97.046m. The service and path intervals
+span both signs. CONT−CAL service changes−.379761/+.137085 while p10 changes
+−.703125/−.609375. CAL−S's L0+.000684J point is accompanied by only+.030029
+mean service; L1 loses.516235 service despite+.125 p10. No final arm has a
+zero-total-service tick, which does not establish service to every user.
+
+Consequential losses and positive witnesses remain in the complete record:
+
+- L0 world29481131: CONT−S J−.112368, service−7.644531, p10−6.5; against
+  old B*, CONT loses.210862J/14.335938service/17p10 users. CONT's own S
+  shadow changes only13 physical decisions here, yet the independently
+  reconstructed64-tick service differences are−5.546875,−7.718750,
+  −7.312500,−10.000000. Small policy changes do not imply small world harm.
+- L0 world29481125: CONT−S gains.132992J/9.730469service/10p10 users but
+  travels2093.014m more per UAV. CAL gives a similar positive outcome
+  (+.133442J/+9.765625service), so this example does not select contextuality.
+- L0 world29481123: CAL−S loses.132411J/8.75service while adding1444.286m;
+  CONT is better than CAL by.091469J but still loses.040942J to S.
+- L1 world29483102: CONT−S loses.111252J/7.859375service/7p10 users and
+  travels314.553m more. Its nine same-history physical changes and complete
+  loss are both retained.
+- L1 world29483116: CONT−S gains.063370J/4.0625service/3p10 users while
+  travelling1938.726m less. World29483107 also has CONT−S+.057632J/
+  +3.945313service, while CAL−S there is−.071741J/−4.4375service.
+
+These are observed witnesses, not a prospective gate, causal attribution to
+the first changed command, or authority to select a best head/world after
+seeing outcomes. Native path differences have no measured energy price here.
+
+**Acquisition and fitting were active.** Every address has its declared3 or4
+worlds (256 addresses with3,64 with4), with weights summing1024 per lineage.
+Each of the1024 cached local feature rows per lineage is distinct. Both full
+branches really executed; there are2048 unique paired contexts and4096
+complete acquisition episodes, not1,048,576 independent labels.
+
+L0/L1 ΔJ standard deviations are.011955/.012126, mean absolute values
+.004466/.004894 and median absolute values.000561/.000575. Zero contrasts
+number280/231;259/195 pairs draw exactly the same category, with21/36
+additional different-category zero contrasts retained. The near-zero signed
+mean of ΔJ is expected from symmetric iid a/b sampling and is not evidence
+that action information is absent. Positive/negative counts374/370 and378/415
+show consequential observations, without estimating their learnable conditional
+signal or guaranteeing low variance.
+
+I directly reconstructed eight acquisition pairs (16 full raw files), covering
+largest positive/negative labels, equal requests and different-category aliases
+in both lineages. For example, L0 world29480424 forces actions10/2 at tick48,
+agent1, giving J difference+.131710 and service+9.886719; L1 world29482767
+forces0/21 at tick20,agent0, giving−.091174J/−6.167969service. Different
+categories in worlds29480101 and29482011 produce identical clipped four-tick
+paths and complete positions, with zero labels. Both branches' actual prefixes,
+local features, cached hidden vectors and μ match at intervention. These checks
+recomputed saved algebra/geometry only, with no new actor, head, native, radio
+or controller query.
+
+All four fits complete2048 finite, nonzero-gradient Adam updates and262144
+cached presentations. CAL changes28/28 parameters in each lineage (L2 movement
+2.059285/2.102354); CONT changes2889/3483 and2592/3483 (L2 6.547904/6.537775).
+Both immutable S tensor identities remain exact. Within a lineage, CAL and
+CONT use identical data and batch-order digests, with zero first-step KL and
+identical first-step scalar objectives. No critic, expert target, return
+normalization, additional epoch, early stopping or selected checkpoint was used.
+
+Saved first256→last256 update-mean losses are:
+
+| Head | First256 mean loss | Last256 mean loss | Last256 mean F | Last256 mean KL |
+|---|---:|---:|---:|---:|
+| CAL0 | +.000037444 | −.000153216 | +.000195790 | .004257418 |
+| CONT0 | −.000150246 | −.000547157 | +.000652535 | .010537868 |
+| CAL1 | +.000207988 | +.000073090 | −.000046727 | .002636303 |
+| CONT1 | +.000043755 | −.000308818 | +.000391215 | .008239709 |
+
+CONT's last-window surrogate loss is lower than CAL on the matched minibatch
+stream in both lineages. These are training-stream summaries with changing
+heads, not endpoint held-out label error, convergence proof or a demonstrated
+native policy-improvement mechanism. The finite-grid caveat to the ideal
+first-order320-factor identity remains unchanged; neither the theorem's
+expectation nor its derivative at S predicts a successful finite deployment
+at every member's later endogenous history.
+
+**Actual deployed changes.** CAL changes364/10240 (3.555%) and264/10240
+(2.578%) physical four-tick paths relative to original S's same-uniform shadow
+on its own lawful histories. CONT changes499/10240 (4.873%) and436/10240
+(4.258%). Every head changes physical decisions in all32 final worlds. Mean
+TV is.025343/.019370 for CAL and.034135/.030928 for CONT; requested versus
+physical changes and modal differences remain in the reader. These changes
+are much smaller than the different B04 PPO program's drift, but are neither
+absent nor only command aliases. CONT's mean deployed entropy changes
+−.013486/+ .006885 from S, inconsistent with a shared entropy-collapse diagnosis.
+The shadows show policy/physical change; they are not native reward
+counterfactuals on the new history.
+
+**Capabilities and complete-package cost.** Original S−Q gives service
++1.656250/+2.030396, p10+3.531250/+3.203125 and path−924.824/−701.873m.
+Both J and path intervals favor S on these panels, while11/9 J worlds and4/5
+p10 worlds remain adverse. L0 world29481125 loses.082683J/5.988281service to Q;
+L1 world29483116 loses.070562J/4.761719service. These new worlds strengthen
+conditional use of the unchanged assets beyond this Q, not general ordinary
+control dominance or new construction replication. The heads' positive C/Q
+comparisons mostly retain the already available S capability and do not show
+benefit from the new fit.
+
+L0 old B*−S's+.002135J point has14 wins/18 losses and spans zero, while p10
+falls.640625 and path increases1419.226m (27/32 longer). L1 old B* is S by
+identity. No new calibration was purchased, and no default T2 upgrade follows.
+Q−C remains useful for mean J/service (+.030560/+2.167969 and+.041429/
++3.068115), with service-p10−2.343750/−.812500 and mean minimum−.968750/
+−.781250. Competent stochastic control and its tail cost both survive.
+
+CONT decision-query CPU is.137102/.143141s per episode versus S
+.109606/.112584; CAL is.140807/.141419. Complete instrumented episode CPU is
+.335760/.346830 CONT, .342083/.344583 CAL, .292913/.294116 S. The heads' full
+measurements include their required extra shadow and larger evidence writes
+(about.016 shadow CPU-s/episode); query CPU separately retains the implemented
+head cost. These are within-run one-thread package timings, not deployment
+latency or intrinsic complexity bounds. The original acquisition and native
+physical costs remain part of any use decision.
+
+**Complete incurred cost.** B05 totals4 head fits,4448 H256 episodes,
+1138688 native steps (1048576 acquisition,90112 final),8192 Adam updates and
+1048576 cached head rows;0 new critics, expert labels or calibrations.
+Worker Student requests1382400 yield786693 actual backbone forwards and
+595707 memo hits. Final head cache misses require22656 head forwards; all40960
+final head decisions get saved S shadows with no extra backbone/helper query.
+C/Q make40960 requests and16926 actual rankings,457002 model paths/1828008
+model ticks. Worker combined power work is332977344 link slots, comprising
+314362675 native dense slots and18614669 controller/helper slots. Summed cache
+bytes are sequential per-episode allocations, not concurrent memory.
+
+The reader adds exactly73728 backbone rows (2048 intervention contexts and
+71680 final decisions),40960 head rows,163840 shadow motion ticks and200988
+C/Q fallback-ranking geometry ticks. It verifies1138688 saved native team
+ticks/5693440 agent-motion ticks, with0 new native, radio, critic or optimizer
+calls. Worker+reader therefore use860421 backbone rows and1112192 head rows
+including the1048576 fitting presentations; shadow geometry totals327680.
+These are distinct workloads, not more fits or labels.
+
+Summed fit wall/CPU is151.107105/149.628541s, with individual fits36.56–38.84
+wall seconds. Worker wall/CPU is1446.904711/1444.100055s; reader is
+181.924511/175.887418s. The enclosing chain measures1629.309645wall/
+1620.467427CPU seconds (27.008CPU minutes), including its import/serialization
+gaps. Peak501220KiB is the whole-process high-water mark through the reader,
+not incremental reader RSS; worker peak is495112KiB. The configured local
+Python3.10.20, NumPy1.26.3, Torch2.7.0+cpu run uses one intra/inter-op thread.
+N8 B04 was accepted on this same physical node at20:43:15.594033UTC and shares
+part of this timing window; its original operation is untouched. Support,
+engineering, scientific review and publication labor remain unmetered.
+
+Original asset acquisition+B04+B05 now totals8 fits plus2 paid calibrations,
+1687552 native steps and2343.116291 measured worker/reader CPU seconds across
+their actual scopes/hosts. This includes the earlier16000 supervised updates,
+8.192million presentations and163840 labels; it does not erase older fleet
+B01's separate2 fits/576000 steps/31190.348CPU seconds or its zero-exposure
+technical failure. No left-over estimate or completed fit authorizes an
+extension.
+
+**Verification and preserved original artifacts.** The priced reader checks
+all raw/source/checkpoint/data identities, complete native metric and motion
+algebra, lawful feature/navigation and four-tick holds, paired prefixes, forced
+independent μ draws, address weights, labels, fitted tensor/Adam identities,
+all final decisions and required shadows. Other acquisition clocks retain saved
+logit/density/RNG evidence without neural replay; full optimizer arithmetic is
+not replayed. My separate saved-data inspection covers57 raw files:41 complete
+positive/adverse final trajectories and16 acquisition branches, plus all
+aggregate/signed readings and complete update streams. The independent
+scientific reviewer adds its own disclosed scope; it does not repeat charged
+model work.
+
+Canonical durable storage is this configured local node's
+`/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b05_native_consequence_a01/`.
+There is one required evidence copy, not a new backup/archive package:
+
+- `summary.json`:17507780bytes, SHA256
+  `424b1b381aa38c029a0c19d602a726fed68e95fbe0ab4d4e46639f35f022d0de`.
+  Its4448 episode rows are bulk and remain unmodified outside Git publication.
+- `reading.json`:1111657bytes, SHA256
+  `4b7f2d5512f0ef21d7ecde24744fe77b065e7dcc38213436ef7a0d7a383a5d5c`;
+  this compact full reading is published with the native exit witness.
+- `raw/`:4448 original NPZ files,2043729923bytes; every individual hash is
+  bound in the original summary and was checked by the reader.
+- `data/`:two paired datasets plus four complete update traces,7374169bytes;
+  `assets/`:four small head+Adam checkpoints,144296bytes. Individual hashes,
+  immutable original-S identities and the paid calibration source are in the
+  published reading. Original S remains at its already retained remote paths.
+
+Generation23 READY event`b8db8533bab214443bfb80c5`, wake
+`a4b762f6-42b2-409f-b4fc-361c8cca6281`, was drained and consumed; generation24
+is stopped, with no pending wake/event. Native queue again returned`-32600`;
+foreground observation supplied the terminal event. No unread operation,
+additional reader, model call or cleanup relaunch is outstanding.
+
+**Working explanation and investment recommendation.** This study meets its
+intermediate exposure predictions: many exact paid local interventions alter
+complete native returns, both function classes fit and all four endpoints
+change actual physical decisions. The complete added-value prediction is not
+supported. Task opportunity and inherited lawful representation remain useful
+through S; CONT's greater training-stream fitting does not establish useful
+finite native learning, and its added compute currently lacks an observed
+package benefit. The result weakens the selected finite direct-consequence
+recipe, without proving that labels are useless, the features are insufficient,
+or small/big policy movement, optimization or missing multi-agent credit is the
+cause. There is no identified repair. This is a different contract from B04,
+not a controlled attribution of its critic or PPO failure.
+
+At this boundary I read current published shared main
+`5861a1b19` topic4 through the new composition result, topic3's retained N8
+complete-continuation capability, and topic2's now-complete user-waiting B03.
+Their concrete effect is to keep conditional capabilities and native losses
+together: factual or training-stream signal does not supply action-ranking or
+complete-use value by itself, and useful ordinary continuation planning is a
+capability to develop. Their hosts/rights, inference units and control laws
+differ, so they are not pooled learning failures and do not license taking
+another direction's selected study.
+
+I recommend ending this exact CAL/CONT purchase, retaining both original S,
+C/Q/old-B*, all four heads and their adverse evidence, with no automatic extra
+fit, epoch, label sweep or threshold change. More endpoint worlds could refine
+these conditional intervals without producing training replication. A fresh
+unchanged four-fit acquisition at the present scope would buy recurrence for
+another1138688 native steps, approximately27CPU minutes on this measured
+anchor plus support; recurrence alone is not presently tied to a deployment
+choice. The stronger claim that every constructive continuation is exhausted
+would be unjustified. A future aggregation, objective or representation
+proposal would need its own concrete native prediction and a competent
+same-resource comparator; the present data do not select one. The parent
+native-development question stays open. No successor study is selected, and
+a small point loss does not itself constitute falsification. The assigned
+substantive result returns to Root for cross-question allocation after
+independent diagnosis, own publication and cleanup; this is not a request for
+per-run approval or a fabricated external dependency.
