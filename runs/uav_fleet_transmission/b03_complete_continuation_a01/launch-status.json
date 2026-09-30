@@ -1,0 +1,74 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a01/summary.json",
+      "state": "absent"
+    }
+  },
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/f0bf0c99e766f375d496f6a59ebbcd46b2649b640999f8c69ecc743f37bd5c5f.json",
+  "direction": "uav_fleet_transmission",
+  "execution": {
+    "exit_code": 1,
+    "exit_witness": {
+      "exit_code": 1,
+      "finished_at_epoch": 1790794339.7290742,
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1147861,
+        "session_id": 1147860,
+        "start_ticks": 23293230
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1147860,
+        "session_id": 1147860,
+        "start_ticks": 23293226
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": true,
+    "reasons": [],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": true,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a01/launch-manifest.json",
+  "node": "local_linux",
+  "observed_at": "2026-09-30T18:57:27.170672Z",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/f0bf0c99e766f375d496f6a59ebbcd46b2649b640999f8c69ecc743f37bd5c5f.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "837b7d2376d06131c13be66d17c9e5cf2f97fb6e",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8341f5d7c61343a3bf8d0898931b925a"
+}

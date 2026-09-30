@@ -197,7 +197,7 @@ def run_study(out, launch_sha, admission):
     out.mkdir(parents=True, exist_ok=True)
     if any((out/name).exists() for name in ("summary.json", "config.json", "raw", "reading.json")):
         raise FileExistsError("existing attempt; no implicit replay/resume")
-    config = dict(fixed_config(), launch_sha=launch_sha, admission_operation=admission["operation_id"],
+    config = dict(fixed_config(), launch_sha=launch_sha, admission_command_sha256=admission["command_sha256"],
         versions={"python": platform.python_version(), "numpy": np.__version__, "torch": torch.__version__})
     write_json(out/"config.json", config)
     summary = {"launch_sha": launch_sha, "config": config, "config_artifact": artifact(out/"config.json", out),

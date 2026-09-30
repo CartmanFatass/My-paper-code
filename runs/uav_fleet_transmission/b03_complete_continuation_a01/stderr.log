@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8341f5d7c61343a3bf8d0898931b925a/experiments/candidates/uav_fleet_transmission/b03/run.py", line 25, in <module>
+    main()
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8341f5d7c61343a3bf8d0898931b925a/experiments/candidates/uav_fleet_transmission/b03/run.py", line 21, in main
+    run_study(args.out.resolve(), args.launch_sha, accepted)
+  File "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/8341f5d7c61343a3bf8d0898931b925a/experiments/candidates/uav_fleet_transmission/b03/study.py", line 200, in run_study
+    config = dict(fixed_config(), launch_sha=launch_sha, admission_operation=admission["operation_id"],
+KeyError: 'operation_id'

@@ -50,16 +50,22 @@ def validate_worker(summary, out):
     config = summary["config"]
     if (not re.fullmatch(r"[0-9a-f]{40}", summary["launch_sha"])
         or config["launch_sha"] != summary["launch_sha"]
-        or not isinstance(config.get("admission_operation"), str) or not config["admission_operation"]):
+        or not isinstance(config.get("admission_command_sha256"), str)
+        or not re.fullmatch(r"[0-9a-f]{64}", config["admission_command_sha256"])):
         raise ValueError("source or accepted operation identity differs")
     expected_config = fixed_config()
     if any(config.get(k) != v for k, v in expected_config.items()):
         raise ValueError("fixed source or configuration differs")
-    if set(config) != set(expected_config) | {"launch_sha", "admission_operation", "versions"}:
+    if set(config) != set(expected_config) | {"launch_sha", "admission_command_sha256", "versions"}:
         raise ValueError("unexpected executable configuration field")
     path = checked_path(out, summary["config_artifact"])
     if path != out / "config.json" or json.loads(path.read_text()) != config:
         raise ValueError("saved configuration differs from worker binding")
+    manifest = json.loads((out / "launch-manifest.json").read_text())
+    if (manifest.get("acceptance") != "accepted" or manifest.get("sha") != summary["launch_sha"]
+        or manifest.get("direction") != config["direction"]
+        or manifest.get("command_sha256") != config["admission_command_sha256"]):
+        raise ValueError("worker admission differs from accepted launch manifest")
     expected = [(ARMS[(index + offset) % 3], w)
                 for index, w in enumerate(WORLD_IDS) for offset in range(3)]
     rows = summary["episodes"]

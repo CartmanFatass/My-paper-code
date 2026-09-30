@@ -1348,3 +1348,74 @@ The concrete execution dependency is the existing fleet-adaptation producer+read
 handle reaching terminal/resource release, coordinated by Root. No N8 result worker or full
 reader will overlap that reserved local heavy-CPU window. The planned fresh output is
 `runs/uav_fleet_transmission/b03_complete_continuation_a01/`; it does not yet exist.
+
+### Published inputs and resource release, 18:51 UTC
+
+Published exact B03 source, bound arrays and tests at
+`837b7d2376d06131c13be66d17c9e5cf2f97fb6e`; origin/main publication verified. Before any
+N8 acceptance, Root publishes `4e05c7d60` and releases the preceding local sequencing hold:
+both fleet studies have no online wall deadline and use one computation thread on this
+16-affinity-CPU host, while deadline-sensitive work uses the separate machine. They may
+overlap when actual-node memory/occupancy permits. This supersedes the prior dependency;
+it changes no scientific input or result scope and authorizes no second N8 chain.
+
+The fresh18:51:20UTC local sample reports16affinity CPUs, load averages
+`.3081/.4424/.3926`, MemAvailable6,845,812KiB and no observed live heavy Python worker;
+two older Python processes report0.0%CPU. This is a point-in-time occupancy reading,
+not admission or a promise of an idle host throughout execution. The launcher still checks
+fresh effective/physical memory before release. Retain actual CPU/wall times; they are not
+an interference-free speed benchmark. Owner pause is lifted, the direction remains exploring
+under its unchanged lead, and the B03 executable/test paths are clean. Proceed with one
+`local_linux` snapshot launch at the published source above and one continuous worker/reader.
+
+### A01 accepted technical failure and narrow repair scope
+
+A01 was accepted at18:52:17UTC from837b7d237 on `local_linux`; the kernel measured
+7,161,356,288available/effective bytes against the4GiB floor. Preserve
+[manifest](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a01/launch-manifest.json),
+[preflight](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a01/admission-preflight.json)
+and [exit witness](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a01/process-exit.json).
+The same-handle observer immediately returned valid exit1 at18:52:19.729UTC, with both native
+runner and supervisor absent and records consistent. The operation reference is
+`.git/hmasd-admission/f0bf0c99e766f375d496f6a59ebbcd46b2649b640999f8c69ecc743f37bd5c5f.json`;
+source snapshot8341f5d7c61343a3bf8d0898931b925a remains until verified reclamation.
+
+The traceback reaches `study.run_study` configuration construction and reports
+`KeyError: 'operation_id'`. No config, summary or raw directory was created. The code reaches
+this before any episode/environment/model/controller query, after initial-array validation:
+**zero result episodes, native transitions, fits or model/controller queries**. Import/support
+cost was paid; no worker CPU/RSS telemetry was emitted, and it is not treated as zero. This
+is missing execution, not an adverse C/R/T observation. The full panel remains unexposed.
+
+Source inspection of the actual `require_admission` return shows schema_version, direction,
+sha, command_sha256, parent_pid, child_pid and accepted_at_epoch; it has no operation_id.
+The earlier mocked worker test supplied the nonexistent field, so neither it nor review
+covered the real interface. Narrow L0 repair: reproduce this mismatch against the actual
+guard's returned mapping in a zero-native fixture, consume its real command_sha256 in the
+worker config, validate that binding against the accepted manifest in the complete reader,
+and obtain focused independent engineering review. No controller, world, score, branch,
+endpoint or budget changes. Preserve A01, publish the repair and justify one fresh A02 at
+the repaired source after fresh admission; do not replay A01 or label its failure as data.
+
+`hmasd_wait` generation1 delivered the terminal fact through manual same-state drain; native
+App queue delivery is unsupported for this child, as already known. Its event was consumed
+with generation2 and observation stopped without touching any worker. The same active-turn
+deterministic observation discipline applies to a subsequent accepted operation.
+
+The zero-native regression called the actual guard body with a mocked effect-free grant and
+reproduced A01's exact KeyError before changing production code. The guard bytes also match
+the failed immutable snapshot (SHA256
+`0faa5d53fba5af9b1a2fc4979bde5bd50bcbcaac2dbef938e90a64680156cf4d`). The repaired worker
+records `admission_command_sha256`; the reader validates its64hex form and agreement with
+the accepted manifest's command/source/direction. Four focused reader tests pass in1.66s,
+including the real-return fixture and a mismatched-manifest refusal. They add zero native
+transitions; the cumulative native correctness count remains26.
+
+The same independent engineering Reviewer inspected these three changed files, the actual
+guard/launcher and A01 manifest, independently ran all four tests and found no material
+remaining issue in the repair. Full native worker-to-reader completion remains to be tested
+by the selected operation. I accept this narrow repair. Record A01's compact native/traceback
+evidence and publish the three-file correction, then execute one outcome-blind
+`b03_complete_continuation_a02` at that new published source with the same16worlds and all48
+complete programs. A01 has no exposed trajectory to repeat, and a new source is needed to
+correct the interface; this is not a same-source retry or a changed scientific study.
