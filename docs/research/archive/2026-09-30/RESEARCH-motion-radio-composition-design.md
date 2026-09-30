@@ -33,7 +33,7 @@ costs intact. It adds no reward-learning evidence. The earlier allocation disagr
 now resolved by selecting the fully specified reward/calibration comparison: the recurrence
 reviewer's requested B04 information is available, and the Oracle's direct-development
 proposal confronts the ordinary alternative inside the new study. The earlier dissent and
-all original reasoning remain in the [fleet notebook](candidates/uav_fleet_adaptation/NOTES.md#b04-original-independent-recommendation).
+all original reasoning remain in the [fleet notebook](../../candidates/uav_fleet_adaptation/NOTES.md#b04-original-independent-recommendation).
 
 N8 capability development has a stronger demonstrated starting point than learned continuity,
 and a cheaper complete comparison; its full T proposal is now read and selected below.
@@ -72,9 +72,9 @@ declined without reopening A/B or inventing a repair. This assignment is0fits/0n
 model or actor queries/noresult-code; no next result study is selected. It reuses the actual
 lead and existing append-only notebook, not an archived session or new record system.
 
-[Complete B04 reading](candidates/uav_parent_adaptation/NOTES.md#b04-complete-reading),
-[independent reconstruction and disposition](candidates/uav_parent_adaptation/NOTES.md#b04-independent-disposition),
-[original law/cost](candidates/uav_parent_adaptation/NOTES.md#b04-marginal-coupling-proposal),
-[complete original recommendation](candidates/uav_parent_adaptation/NOTES.md#b04-original-independent-recommendation),
-[B03 adverses](candidates/uav_parent_adaptation/NOTES.md#b03-complete-reading).
+[Complete B04 reading](../../candidates/uav_parent_adaptation/NOTES.md#b04-complete-reading),
+[independent reconstruction and disposition](../../candidates/uav_parent_adaptation/NOTES.md#b04-independent-disposition),
+[original law/cost](../../candidates/uav_parent_adaptation/NOTES.md#b04-marginal-coupling-proposal),
+[complete original recommendation](../../candidates/uav_parent_adaptation/NOTES.md#b04-original-independent-recommendation),
+[B03 adverses](../../candidates/uav_parent_adaptation/NOTES.md#b03-complete-reading).
 

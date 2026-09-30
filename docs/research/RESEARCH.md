@@ -1917,7 +1917,7 @@ within the ongoing four-DM assignment, with separate actual-node admission, rath
 imposing that hypothetical one-study restriction. The historical inheritance sequencing
 dissent is explicitly resolved by the available B04 evidence in the current allocation.
 Same N8 DM owns L0, bounded implementation, independent engineering review, exact-source
-publication, **configured wsl_4070-first** admission, same-handle complete observation/reading,
+publication, **configured local_linux** admission under the current two-host allocation, same-handle complete observation/reading,
 independent diagnosis, its own result/index publication and measured cleanup. Prior local
 execution is not fallback authorization; no worker has been admitted by this selection.
 
