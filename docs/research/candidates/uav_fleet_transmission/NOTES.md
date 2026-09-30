@@ -2760,3 +2760,42 @@ verified, retain the uncompressed ceilings; B04/early-rule speedup is unmeasured
 uncompressed full reader still pays its complete reconstruction bill even if the worker later
 reuses transitions. These facts support Root's comparison of timing, economy or no new
 purchase; they do not turn an engineering possibility into a scientific investment decision.
+
+
+<a id="b04-final-cleanup"></a>
+### B04 publication and measured cleanup — 2026-09-30
+
+Scientific reading, complete original critic/disposition, compact evidence, own standing/routing,
+topic3 revision and retirement of the completed substantive allocation are published at
+`8598d7f75efb98333979b5d07371aab6b5527a56`. After terminal process/observer reconciliation and
+critic/Oracle consumer release, native snapshot GC preview accepted the exact B04 snapshot
+against published main; supported apply removed it and its Git worktree registration.
+The same operation handle was never restarted. Actual deleted targets:
+
+- `.git/hmasd-launch-sources/08885e0b953e4b26a89380d0fa6ccc38`
+- `temp/directions/uav_fleet_transmission`
+- `experiments/candidates/uav_fleet_transmission/__pycache__`
+- `experiments/candidates/uav_fleet_transmission/b02/__pycache__`
+- `experiments/candidates/uav_fleet_transmission/b03/__pycache__`
+- `experiments/candidates/uav_fleet_transmission/b04/__pycache__`
+- `tests/experiments/candidates/uav_fleet_transmission/b04/__pycache__`
+
+All seven targets are absent and the snapshot is unregistered. Across the explicit deletion
+targets plus local run and canonical retained-output union, allocated usage fell from
+**1,960,984,576bytes** to **236,662,784bytes**: net
+**1,724,321,792allocated bytes reclaimed**. This includes the small canonical metadata
+copy cost rather than reporting gross deleted sizes alone. The local run now occupies
+524,288allocated bytes and its canonical evidence location
+236,138,496bytes. All1,701raw hashes and the full original reader hash
+were reverified after deletion; raw and full-reading symlinks resolve. Required unique evidence,
+compact positive/adverse conclusions and published useful code/tests remain. There is no
+remaining cleanup tool blocker. Other directions, their accepted snapshots, and the earlier
+B01–B03 unique evidence were not deleted.
+
+Root has read the complete B04 critique and declined the priced G_E/A_E timing extension for
+now. It separately assigned a source-only possible next question about retained categorical S
+versus competent ordinary stochastic choice from C scores. After this closure, I supply lawful
+interface/coverage/cost facts in this existing notebook; no new study, fit, actor/controller/model
+query or launch is selected. Parent B06 learning and fleet B06 count contracts remain their
+original leads’ work. No active result producer, unread B04 result/review or cleanup dependency
+remains.
