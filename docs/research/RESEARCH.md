@@ -245,6 +245,14 @@ K−M的−598不同：这些M参照位于K状态，不能当成M自身轨迹。
 保留M/U/S各自用途与K近M的正反证据，结束该固定比较而不自动修补或追加世界；较宽控制和学习问题保持开放。
 [完整B04、独立诊断、全部世界及成本](candidates/uav_user_waiting/NOTES.md#b04-complete-reading)。
 
+同一固定N5宿主的源端约束进一步限定可改变的决策：cochannel、SINR门槛3dB时，每名用户至多对一架
+UAV合格；固定位置/掩码下，原最高SINR分配已最大化容量10下的服务人数，以及该人数下的质量。
+改动本地合格用户的容量内优先级可逐tick保留人数，但不能提高同一路径的原生J；质量相同时可保留J。
+M/S/U的实际连接和奖励不回流至C或管理器，故在原控制、模型历史和交付时序保持不变时，可重用完整
+物理路径比较因果本地分配。此为源条件推导，不证明存在可利用的容量饱和或尾部收益，也不外推为
+FDMA、S7或原信息/动作合同下的新能力。更丰富本地分配权的源端比较已计价，尚未选中或执行。
+[接口、推导、普通参照与完整前瞻成本](candidates/uav_user_waiting/NOTES.md#post-b04-source-assessment)。
+
 S7的合法BS缓存不是永久地图：每次同步用当前至少一架UAV可见的BS替换旧缓存，而BS在回合内静止。
 因此，保留曾合法见过的BS位置可检验具体的遗忘损失；从未见过的BS仍不因此已知。用户槽位则匿名且随距离排序，
 移动用户的跨时关联、尚未观察的需求与未来随机目标需要分别判断，不能由“加入历史”一并消除。
@@ -2265,6 +2273,15 @@ active producer, unread result/advice or selected successor remains. Reserve; no
 K extension, new weight/debt/horizon/fit or confirmation. The broader question stays open.
 Re-entry requires a newly selected substantive prediction or prospective service/tail valuation,
 with a competent complete comparator and declared cost; Root owns a new cross-question allocation.
+
+The bounded source-only next-use assessment prices a richer local allocation right on the
+192 retained M/S/U paths: original highest-SINR allocation versus causal cyclic-ID round-robin
+and local least-recently-served. Contact counts would be structurally preserved on each fixed
+path; quality/J cannot improve there. Opportunity and tail benefit remain unmeasured. The
+uncalibrated complete replay/reader estimate is0.05–0.20CPUh plus roughly4–6 active engineering,
+review and publication hours, with zero new native/model/C calls or fits. This is a possible
+empirical-understanding/use purchase, not a selected result, native integration or adoption.
+Stopping remains an alternative. [Source assessment and full bill](candidates/uav_user_waiting/NOTES.md#post-b04-source-assessment).
 
 [Complete result and cost](candidates/uav_user_waiting/NOTES.md#b04-complete-reading),
 [independent diagnosis/DM disposition](candidates/uav_user_waiting/NOTES.md#b04-independent-review-and-disposition),

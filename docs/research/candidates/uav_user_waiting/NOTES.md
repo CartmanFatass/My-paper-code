@@ -3211,3 +3211,216 @@ U's useful conditional capability and the local-floor/trajectory distinction;
 it does not turn them into adoption, learning or a general impossibility claim.
 The substantive prospective B04 selection is retained in the dated research
 archive. No new study, automatic retry or owner/adviser dependency is created.
+
+<a id="post-b04-source-assessment"></a>
+## 2026-09-30 — source-only next-use assessment after B04
+
+Root assigned a bounded source-only next-allocation assessment after reading
+the complete B04 result and original independent diagnosis. The question is
+whether a substantive remaining service/continuity capability or materially
+different use merits development, compared with stopping. Root assigned the
+existing independent Oracle `/root/oracle_next_capability` to innovation and
+challenge; this DM owns interface feasibility and the complete prospective
+bill. Parent/N8 design and fleet-count development are separately owned and
+excluded. **The direction remains reserve; no next result study, code,
+prototype, model/controller/native query, pilot, acquisition or fit is
+selected.** B04 operations and cleanup remain closed.
+
+The relevant published background is
+[RESEARCH topic2](../../RESEARCH.md) at
+`d02e5029f4c9687e12a5d03746527aee2d979ae5`, including B01–B04 and the prior
+service-age result. Its concrete effect here is to retain M's service/typical
+continuity, U's useful costed expansion, cheaper S and all contrary outcomes;
+to reject an automatic local-floor, horizon, ACK or learned-value repair; and
+to examine a different decision right only with a competent ordinary rule
+under the same added information. Prior fitted factual predictions do not
+justify another fitted selector. A new objective weight chosen after these
+outcomes would not establish preservation or complete-package value.
+
+### Source facts and the remaining decision right
+
+The inspected source is unchanged from B04's frozen
+`dd3b2577d407b57a3b76ea4ba95b6ead4349d0d4`. Load-bearing locations are
+`envs/pettingzoo/uav_radio.py:33–118`,
+`envs/pettingzoo/uav_env.py:23–159,288–456,598–604,979–997,1441–1490`,
+`envs/pettingzoo/env_adapter.py:201–318`,
+`experiments/candidates/ucope/uav_motion_prefix_b01/environment.py:8–24`,
+`experiments/candidates/uav_radio_activation/b01/study.py:52–55`,
+`experiments/candidates/uav_registered_service/b01/history.py:39–108`,
+and the waiting B01 history, B02 scheduler and B04 scheduler/collector.
+CodeGraph was used first; omitted source ranges were then read directly.
+
+1. The actual factory fixes five UAVs,50 users, cochannel interference,
+   free-space radio, no shadowing, native non-paper reward and H256. The
+   native threshold is3dB and each UAV's capacity is10.
+   Write an active signal as P_i and gamma=10^(3/10)>1. Eligibility requires
+   P_i >= gamma(noise + sum_{j!=i}P_j). Two eligible UAVs for the same user
+   would require both P_i>P_j and P_j>P_i. Therefore the eligible user sets
+   are disjoint. This is a source-conditioned mathematical consequence,
+   not a measured frequency or a claim for FDMA, another threshold or S7.
+
+2. Highest-SINR native allocation already attains the largest number of
+   contacts for fixed geometry/mask: sum_i min(10,|E_i|). Its remaining
+   freedom is which eligible users receive a saturated UAV's slots, not a
+   general cross-UAV matching problem. Any work-conserving alternative with
+   the same eligible sets preserves that tick's contact count. Native
+   quality is monotone clipped SINR, so highest-SINR allocation also
+   maximizes quality at that count. An alternate allocation cannot raise
+   mathematical native J on the same path; quality ties can preserve it,
+   and strict quality loss lowers J. This is a substantive valuation
+   constraint, not a new reward success criterion.
+
+3. Connections affect actual contacts, native reward and evaluator histories,
+   but not the selected physical transition or policy observations. Native
+   observations expose the top20 eligible users' geometry/SINR, peers,
+   position and time. They do not expose assigned connections. The adapter
+   packages rewards separately without feeding them into observations.
+   B04 C receives only observation/tick. The scheduler receives own
+   positions, actual/proposed commands, tick, mask and post-C navigation
+   indices. Its executed log receives commands/mask only; it reconstructs
+   contacts from rounded anchors and the original greedy model. Actual
+   connections/reward are copied only afterward to evaluator raw.
+
+4. Consequently a new local allocation layer can preserve each saved
+   complete physical path **provided** it leaves the original C, commands,
+   masks, observations, reports, modeled-greedy histories and delivery/
+   timeliness unchanged. Feeding new actual contacts into the manager or
+   changing its forecast law invalidates that statement. Source invariance
+   does not establish integrated runtime deadlines, hardware link behavior
+   or the absence of contention from added local work.
+
+5. The new local layer would need current eligible registered IDs/SINR,
+   its own grant memory, and the right to choose the capacity subset.
+   The native radio layer already computes eligibility, but exposing it
+   to a new decision rule is an explicit richer local information/action
+   contract. It is not part of the old104-feature C or141-byte BS message.
+   Grant equals service in this simulator, so remembering one's own
+   grants needs no new global ACK. Local grant age is not actual global
+   user age after handover. No claim of zero real implementation or
+   protocol cost follows.
+
+Existing B04 rows contain `mean_visible_users`, `mean_visible_peers` and
+`empty_discovery_uav_steps`, derived from pre-step capped observation lists.
+There is no saved capacity-exclusion/saturation aggregate in this reading,
+and those fields have no arm aggregate in B04's paired summaries. The raw
+schema retains full postmove `sinr[T,5,50]`, `connections[T,5,50]`, masks,
+positions and commands. No new saturation, opportunity or outcome panel
+was computed during this assessment. In particular, mean service below50
+does not identify capacity denial, and the source proof does not establish
+that fair allocation will reduce complete-episode tails.
+
+### Prospective complete comparison and cost; not selected
+
+Oracle requested a price for immutable B04 M/U/S paths on all64 worlds,
+with original allocation and ordinary causal work-conserving fair rules.
+The minimal useful comparison proposed to the Oracle is:
+
+- **Highest SINR:** the frozen native allocation and its existing path.
+- **Cyclic round-robin:** scan at most50 registered IDs cyclically per UAV,
+  grant min(10,|E_i|) eligible users, then advance past the last grant.
+- **Local least-recently-served:** choose oldest own grant first, ties by
+  higher current SINR then registered ID; own last-grant times start at−1.
+
+The two fair rules receive the same current eligible IDs/SINR and own-grant
+history, with no future eligibility, cross-UAV ACK or global actual age.
+Round-robin tests a simple ordinary service opportunity; local recency is
+the competent history-based comparator and can differ under changing
+eligibility/handover. Neither is a learned method or new optimality claim.
+The existing motion/radio manager deliberately retains its modeled-greedy
+history. No K extension, objective-weight sweep, learned rule or new
+physical acquisition is included.
+
+All192 proposed source members are available at the canonical node under
+`/home/wu/projects/HMASD/runs/uav_user_waiting/b04_service_floor_a01/raw/`:
+M/S/U × seeds29426000–29426063. A read-only existence/size check found192
+members, zero missing and zero size mismatches; it did not open raw arrays
+or recompute outcomes. Their compressed sizes are91,404,329 /78,207,842 /
+93,129,012 bytes, total262,741,183. Every individual SHA256 is already in
+the published compact result's `rows`/`raw_artifacts`. Bindings are:
+
+- compact `result.json` SHA256
+  `ccd52d06fe48c7e3f5315b834cb702e1b22b826df25af68a6e2eeb7e3a09707a`;
+- complete worker summary SHA256
+  `49754e61f38009681d5a842d320a1878bdd260518300a5391cc3c8678db47c47`;
+- complete reader SHA256
+  `69787803a4de84555c534d9b7f21a23c290c7d4446bc874a2da6e49237289513`.
+
+The prior complete reader verified all256 raw identities. A selected replay
+would verify its192 required raw files anew; this metadata check does not
+replace that verification. It would be **new result-bearing allocation
+replay**, despite zero new native or radio-model calls.
+
+| Prospective work | Producer | Independent complete reader | Combined |
+|---|---:|---:|---:|
+| Existing physical trace ticks consumed |49,152|49,152|98,304 reads of49,152 unique ticks|
+| New fair-allocation complete outcomes |384|384 reconstructions|384 distinct new outcomes|
+| Original-law complete reconstructions |192|192|192 distinct original paths|
+| Fleet allocation calls, all three laws |147,456|147,456|294,912|
+| Corresponding per-UAV allocation decisions |737,280|737,280|1,474,560|
+| Service/quality/age transition reductions |147,456|147,456|294,912|
+| User-tick age updates |7,372,800|7,372,800|14,745,600|
+| Eligibility threshold entries, conservative two scans/tick |24,576,000|24,576,000|49,152,000|
+| New native steps/resets, physics/geometry/model predictions, C/search calls |0|0|0|
+| Fits, optimizer updates, new physical acquisition episodes |0|0|0|
+
+The two fair rules themselves account for98,304 fleet calls /491,520
+per-UAV decisions per pass. The conservative eligibility bill permits the
+frozen greedy kernel's separate threshold scan plus one shared scan for
+the two fair laws; sharing all three would halve threshold entries, not
+allocation or outcome counts. The eventual implementation must expose its
+actual scans. Correctness fixtures, all allocation/reduction work, source
+and input hashing, reading and support are still costs, not fits. The576
+law/path rows contain only64 independent world clusters; users, ticks,
+physical programs and allocation variants are nested.
+
+Without executing a pilot, the source-based planning estimate is0.05–0.20
+CPUh for producer plus complete reader, including two raw SHA scans of
+262.7MB, selective NPZ decompression, all allocations, metrics, paired
+summaries and serialization. This is **uncalibrated**, not a measured cost
+or execution allowance. A streaming pure-NumPy/stdlib implementation is
+expected to stay within0.25GiB RSS and needs no GPU; unnecessary native
+environment/learner imports would invalidate that memory estimate. Rough
+active engineering work is4–6 hours: approximately2–3 for rules, producer
+and causal/edge-case tests;1–2 for a separate reader and independent replay
+review;0.5–1 for scientific reading, publication and retention. These
+overlapping planning ranges are not observed labor or runtime. Separate
+review/support CPU and unmetered time would be reported honestly. No
+current code or test was written to estimate them.
+
+A complete reading would retain every world and rule, changed-grant
+exposure, no-link versus eligible-but-capacity-excluded interruption,
+service counts, maximum gap, worst-user mean age, typical-user gaps,
+mean/quantile ages, quality and J. It must preserve adverse users and
+boundary censoring, and show whether continuity improvement merely trades
+quality. Source guarantees count equality on fixed paths, not lower
+tails. Reused B04 worlds are development evidence, not fresh confirmation;
+post hoc best-rule selection would not establish a new default.
+
+Retention can reference original raw in place and keep one canonical new
+50-user contact stream per fair law/path:4,915,200 uncompressed Boolean
+bytes total, or688,128 bytes if each50-bit row is packed into7 bytes,
+before metadata/compression. New compact records would retain all world/
+per-user outcomes, exposure, cost and source/input identities. No second
+SINR/path tree or duplicate original evidence is needed. Full live native
+integration, grant latency, manager-deadline interference, hardware channel
+and ACK realism, or a manager that consumes the new assignments remain
+unverified and would require a separately justified complete study.
+
+The present DM recommendation is to consider this only as a bounded
+empirical-understanding/use purchase: can a real local capacity-allocation
+right improve individual continuity on retained competent motion/radio
+paths, at what quality cost? It can locate an assignment bottleneck but
+cannot rescue K, demonstrate learning or improve J on those paths. A
+new fitted or live-control program is not warranted by source feasibility
+alone. Stopping remains reasonable if that limited information is not
+worth the engineering cost relative to other project questions. The
+independent Oracle's completed recommendation and Root's subsequent
+allocation remain distinct from this source price.
+
+Actual assessment cost so far is source/document/JSON-metadata reading,
+one remote metadata-only availability check and reasoning; shell/support
+CPU is not fully metered. There are zero new scientific fits, native
+steps, model/controller queries, allocation replays, outcome reductions
+or code/test changes. Cumulative completed B01–B04 cost remains two fits,
+327,792 result steps,272 correctness steps and13,293.473639 measured
+worker/reader CPU seconds, plus separately described support/fixtures.
