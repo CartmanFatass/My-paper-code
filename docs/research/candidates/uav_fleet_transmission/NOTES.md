@@ -2332,3 +2332,30 @@ thread and a separate admitted snapshot, subject to the launcher's fresh actual 
 published pause/lead checks. Do not disturb, migrate or duplicate either accepted process.
 The standing/routing rows are updated to this already-selected B04 contract; source publication
 and successful admission, not this prospective note, establish the actual operation handle.
+
+
+<a id="b04-accepted-operation"></a>
+### B04 A01 accepted and observation adopted — 2026-09-30 20:44 UTC
+
+Published exact source/tests, engineering acceptance and selected standing/routing in
+`239360b03f5d7acf788bd9ae5d4dccbde4f9237e`. The single fixed worker/full-reader chain is
+accepted on local_linux; its native identities, command, immutable snapshot and output
+binding are in the [original launch manifest](../../../../runs/uav_fleet_transmission/b04_temporal_complementarity_a01/launch-manifest.json).
+The [fresh actual-node preflight](../../../../runs/uav_fleet_transmission/b04_temporal_complementarity_a01/admission-preflight.json)
+passed the4GiB physical/effective floor with6,734,266,368bytes available. The remote waiting
+reader was still running when placement was checked. Root's subsequent placement refinement
+explicitly keeps this B04 on suitable local capacity beside the untimed CAL/CONT work,
+reserving remote for waiting's accepted reader and newly selected real-deadline successor.
+No accepted process was displaced or changed.
+
+The ordinary observer `arm` first refused because this same session's default state remained
+stopped after B01/B02. `drain` exposed generation7, no pending events/wake and both old jobs
+already ready; supported `rearm --generation7` advanced to8 without resuming an old worker
+or probe. Adding the new exact B04 status request advanced to**generation9**. Its first
+observed facts at20:44:15UTC show accepted admission, matching live runner/supervisor
+identities and consistent records. Observation is adopted under job`launch-b04-temporal-a01`
+in the session's existing default observer directory; task-local request is
+`temp/directions/uav_fleet_transmission/b04/observer-request.json`. The25minute checkpoints
+will drain/rearm this same operation. The initial observer refusal did not alter or repeat
+the scientific launch. Native-child queue delivery is not presumed to work; this DM keeps
+its turn active through complete collection and reading. No new result conclusion yet.
