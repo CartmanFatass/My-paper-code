@@ -4392,3 +4392,50 @@ a separately selected consequential comparison with an ordinary reference,
 declared resource/task value and complete costs. Cross-question allocation and
 the critic's unpriced S2-development candidate return to Root through the native
 parent boundary; ordinary publication and cleanup remain this DM's responsibility.
+
+<a id="b05-final-cleanup"></a>
+### B05 publication, retained evidence and measured terminal cleanup
+
+The complete compact aggregate/world/tape reading, source/config identities,
+native terminal records and independent disposition were published at
+`4d516f3a77eedf5bdb5e7765384ee3f2fa6739c9`. The512 raw trajectories remain in
+their one canonical configured-node output; the original S checkpoint remains
+at its original remote canonical path. After source retirement, all512 raw
+sizes/SHA256 values were checked again with0 mismatches, and a fresh remote
+SHA256 check confirmed the original S identity. No result array or adverse
+trajectory was deleted or silently rewritten. The evaluated implementation,
+tests and bounded reader remain useful capability/evidence code on published
+main; their imported B02/B04/radio dependencies also remain required. There is
+no unused new variant or separate authoring checkout to preserve.
+
+Before deletion, worker/reader native identities were reconciled terminal;
+the scientific critic and Root's source-only Oracle explicitly released all
+snapshot/staged-S file consumers. The observer is stopped at generation16,
+with no pending event and all five historical operation jobs ready. Its old
+identity/operation records are retained; no scientific worker was restarted.
+
+The maintained exact-target source collector first refused because it could
+not inspect `/proc/383/cwd`. The documented `--sudo-process-scan` option
+resolved that refusal by elevating **only the read-only process scan**. A fresh
+preview was eligible; apply removed exactly source snapshot
+`.git/hmasd-launch-sources/34fd31f19f3d4b1eaa5fa2ccb8ebc984` after checking the
+terminal operation, source cleanliness and durable main reachability. The
+source directory's measured allocated bytes fell1713655808→0. The initial
+refusal and successful native collector result are preserved in
+[cleanup.json](../../../../runs/uav_parent_adaptation/b05_radio_composition_a01/cleanup.json);
+no tool blocker remains.
+
+Local deletion removed the staged `b05-original-S.pt` (425984 allocated bytes),
+the stopped observer's `b05-wait-request.json` (4096), the implementation's
+`b05_radio_composition/__pycache__` (90112), the matching test cache (32768),
+and the then-empty owned `temp/directions/uav_parent_adaptation` directory
+(4096). All listed paths are absent. The local deleted total is557056 bytes;
+together with the source snapshot, gross allocated reduction is1714212864 bytes.
+The final net calculation charges the new compact cleanup record and this
+notebook's allocation growth. Git object storage, shared-index publication and
+unrelated concurrent host writes are outside this exact-target measurement.
+No tar, whole-tree copy, backup chain or redundant raw retention was created.
+There are no remaining disposable targets or concrete cleanup blockers.
+
+Final measured **net reclaimed:1714204672 bytes**:1714212864 removed minus
+4096 for the new cleanup record and4096 for notebook allocation growth.

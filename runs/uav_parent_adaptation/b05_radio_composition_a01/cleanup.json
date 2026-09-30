@@ -1,0 +1,85 @@
+{
+  "object": "UAV-PARENT-RADIO-COMPOSITION-B05",
+  "result_commit": "4d516f3a77eedf5bdb5e7765384ee3f2fa6739c9",
+  "source_commit": "b0731ce69a4f15bc840f560cb1356a1b48a61f7b",
+  "consumers": {
+    "producer": "terminal_exit_0",
+    "reader": "VERIFIED_512_rows_terminal",
+    "scientific_critic": "all_file_reads_released",
+    "root_source_oracle": "all_file_reads_released",
+    "observer": "generation16_stopped_no_events"
+  },
+  "initial_preview_refusal": "cannot inspect own process 383: [Errno 13] Permission denied: '/proc/383/cwd'; retry with --sudo-process-scan",
+  "readonly_sudo_preview_eligible": true,
+  "source_gc": {
+    "mode": "apply",
+    "snapshots": [
+      {
+        "claim": "/home/fires/hmasd-wsl/.git/hmasd-admission/cef85978049ccd07b2785f993337a2b25a688177b87d13066a74266794b9131a.json",
+        "durable_ref": "refs/heads/main",
+        "eligible": true,
+        "output": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b05_radio_composition_a01",
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/34fd31f19f3d4b1eaa5fa2ccb8ebc984",
+        "removed": true,
+        "sha": "b0731ce69a4f15bc840f560cb1356a1b48a61f7b",
+        "snapshot": "34fd31f19f3d4b1eaa5fa2ccb8ebc984"
+      }
+    ]
+  },
+  "local_cleanup_status": "complete",
+  "notebook_allocated_before_cleanup": 323584,
+  "source_allocated_before": 1713655808,
+  "source_allocated_after": 0,
+  "source_path_absent": true,
+  "local_deleted": [
+    {
+      "path": "/home/fires/hmasd-wsl/temp/directions/uav_parent_adaptation/b05-original-S.pt",
+      "allocated_before": 425984,
+      "allocated_after": 0,
+      "removed": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/temp/directions/uav_parent_adaptation/b05-wait-request.json",
+      "allocated_before": 4096,
+      "allocated_after": 0,
+      "removed": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/experiments/candidates/uav_parent_adaptation/b05_radio_composition/__pycache__",
+      "allocated_before": 90112,
+      "allocated_after": 0,
+      "removed": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_parent_adaptation/b05_radio_composition/__pycache__",
+      "allocated_before": 32768,
+      "allocated_after": 0,
+      "removed": true
+    },
+    {
+      "path": "/home/fires/hmasd-wsl/temp/directions/uav_parent_adaptation",
+      "allocated_before": 4096,
+      "allocated_after": 0,
+      "removed": true
+    }
+  ],
+  "raw_retention": {
+    "canonical_path": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b05_radio_composition_a01/raw",
+    "files": 512,
+    "bytes": 231301715,
+    "post_source_gc_size_and_sha256_mismatches": 0
+  },
+  "original_asset_retention": {
+    "node": "wsl_4070",
+    "path": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt",
+    "sha256_after_source_gc": "b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a"
+  },
+  "remaining_disposable_targets": [],
+  "tool_blockers": [],
+  "gross_allocated_bytes_removed": 1714212864,
+  "cleanup_record_allocated_bytes": 4096,
+  "notebook_allocated_after_cleanup": 327680,
+  "notebook_cleanup_growth_allocated_bytes": 4096,
+  "net_allocated_bytes_reclaimed": 1714204672,
+  "measurement_scope": "Exact removed source/staging/request/cache/directory allocations minus new cleanup record and notebook cleanup allocation growth. Excludes Git object storage, shared-index publication and unrelated concurrent writes."
+}
