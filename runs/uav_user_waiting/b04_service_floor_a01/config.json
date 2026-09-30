@@ -1,0 +1,534 @@
+{
+  "object": "UAV-USER-WAITING-B04",
+  "launch_sha": "dd3b2577d407b57a3b76ea4ba95b6ead4349d0d4",
+  "seeds": [
+    29426000,
+    29426001,
+    29426002,
+    29426003,
+    29426004,
+    29426005,
+    29426006,
+    29426007,
+    29426008,
+    29426009,
+    29426010,
+    29426011,
+    29426012,
+    29426013,
+    29426014,
+    29426015,
+    29426016,
+    29426017,
+    29426018,
+    29426019,
+    29426020,
+    29426021,
+    29426022,
+    29426023,
+    29426024,
+    29426025,
+    29426026,
+    29426027,
+    29426028,
+    29426029,
+    29426030,
+    29426031,
+    29426032,
+    29426033,
+    29426034,
+    29426035,
+    29426036,
+    29426037,
+    29426038,
+    29426039,
+    29426040,
+    29426041,
+    29426042,
+    29426043,
+    29426044,
+    29426045,
+    29426046,
+    29426047,
+    29426048,
+    29426049,
+    29426050,
+    29426051,
+    29426052,
+    29426053,
+    29426054,
+    29426055,
+    29426056,
+    29426057,
+    29426058,
+    29426059,
+    29426060,
+    29426061,
+    29426062,
+    29426063
+  ],
+  "arms": [
+    "M",
+    "S",
+    "U",
+    "K"
+  ],
+  "arm_orders": [
+    [
+      "M",
+      "S",
+      "U",
+      "K"
+    ],
+    [
+      "S",
+      "U",
+      "K",
+      "M"
+    ],
+    [
+      "U",
+      "K",
+      "M",
+      "S"
+    ],
+    [
+      "K",
+      "M",
+      "S",
+      "U"
+    ],
+    [
+      "K",
+      "U",
+      "S",
+      "M"
+    ],
+    [
+      "U",
+      "S",
+      "M",
+      "K"
+    ],
+    [
+      "S",
+      "M",
+      "K",
+      "U"
+    ],
+    [
+      "M",
+      "K",
+      "U",
+      "S"
+    ]
+  ],
+  "horizon": 256,
+  "planned_fits": 0,
+  "planned_optimizer_updates": 0,
+  "planned_episodes": 256,
+  "planned_steps": 65536,
+  "fixture": {
+    "seed": 29426999,
+    "horizon": 8,
+    "episodes": 4,
+    "native_steps": 32
+  },
+  "delivery_ticks": 2,
+  "hold_ticks": 4,
+  "deadline_seconds": 1.436,
+  "report_bytes_per_uav": 25,
+  "command_bytes": 16,
+  "round_bytes": 141,
+  "map_bytes": 400,
+  "transmission_seconds": 0.564,
+  "nodes": 5,
+  "users": 50,
+  "M": "unchanged B02 O and W two-order searches; choose their winners by W key",
+  "S": "unchanged B02 S two-order search; negative delivered age-square sum then native ties",
+  "U": "same-state O/W/S unmodified searches; choose maximum S key over every distinct visited pair",
+  "K": "same completed U pool; admit integer delivered assigned-user-tick total>=same-state M total; then same S key",
+  "union_order": "first visit in sequential O/W/S requests with shared cache; floor never changes generation",
+  "terminal": "delivered length=min(4,H-t-2); last report252 scores254/255 only; prefix excluded",
+  "native_ties": [
+    "J",
+    "served",
+    "q==proposal_q",
+    "mask.bit_count()",
+    "-mask",
+    "-q"
+  ],
+  "actual_age": "postmove service resets0; otherwise+1 from initial0; native gaps keep boundary censoring",
+  "nav_contract": "post-current-C index in common report byte; no future C, ACK, truth, extra actor information or learned value",
+  "fallback": "any whole-round late, incomplete union or missing history holds old commands and mask; no M rescue",
+  "unknown_prefix": "no invented transitions; burden permanently censored if first lawful anchor>0",
+  "dtype": "int64 age costs and assigned-user-tick floor; float64 radio/history/forecast",
+  "seed_rng": "native RandomState(world seed), inherited reset; no policy RNG",
+  "primary": "K-M native mean service>=0, episode maximum gap<0, worst-user mean age<0; exploratory joint signs",
+  "secondary": "K-U local floor; U-S expanded ordinary search; preserve all six contrasts",
+  "bootstrap": {
+    "seed": 29426998,
+    "resamples": 10000
+  },
+  "upper_work": {
+    "candidate_requests": 4276224,
+    "delivered_state_reductions": 16971264,
+    "prefix_transitions": 32768,
+    "current_c_calls": 81920,
+    "future_c_calls": 0
+  },
+  "reader": "all native/C/age/periodic/history/contact-cost-key/path/pool/floor arithmetic; selected programs and search winners every round; all visited at0/60/124/248; same native radio kernel",
+  "reader_current_c_calls": 163840,
+  "source_identities": [
+    {
+      "path": ".codex/hmasd-compute.toml",
+      "bytes": 3542,
+      "sha256": "2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f"
+    },
+    {
+      "path": "envs/pettingzoo/env_adapter.py",
+      "bytes": 25232,
+      "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40"
+    },
+    {
+      "path": "envs/pettingzoo/uav_env.py",
+      "bytes": 68827,
+      "sha256": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e"
+    },
+    {
+      "path": "envs/pettingzoo/uav_radio.py",
+      "bytes": 5001,
+      "sha256": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc"
+    },
+    {
+      "path": "experiments/candidates/uav_local_history/b01/controller.py",
+      "bytes": 14309,
+      "sha256": "b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/__init__.py",
+      "bytes": 58,
+      "sha256": "b0392e94f590eb0fd016ce26529485215b128b9accff9b1dc5fdd6ffd7d11b8a"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/protocol.py",
+      "bytes": 4643,
+      "sha256": "4976e6739d1e5c919bd298b86091dcf6cf5d62d5c3cc3a7b977fa5b5f0956431"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/read.py",
+      "bytes": 16058,
+      "sha256": "8d9f8d469335d2ac2c7551dd81217b9194c81c6a92d44725b202078c4a7b1347"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/run.py",
+      "bytes": 1619,
+      "sha256": "02ca51bd761be8cbde3706f9f9ae3b3556fdff304480ec1bf45adc92388e971f"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/scheduler.py",
+      "bytes": 4524,
+      "sha256": "2b75232b9b57464b31a113458e9bab6b5c47b00272cf4d255dd670914b05e792"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/study.py",
+      "bytes": 16773,
+      "sha256": "7af060ca82f357722e76588669e7319b10da7254f317bc312f71d25eca14aa24"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/__init__.py",
+      "bytes": 70,
+      "sha256": "3e9e194f32194488a58d2bee13d5be625f5142b2d4330b76c729809924bf950e"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/protocol.py",
+      "bytes": 5120,
+      "sha256": "a1dbec8e5aecead2c702fab54376c95c8b9d1fd134cb0894a3c0eb705ebab69b"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/read.py",
+      "bytes": 18060,
+      "sha256": "ef4baedfe98630064ee1545637dcc932304b39f934b055800ed9c970eaa5a04d"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/run.py",
+      "bytes": 1630,
+      "sha256": "9d8633e865f76f1801611f2026e2264f2198134089fce32d9ebc5e3f1076f1c4"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/scheduler.py",
+      "bytes": 7781,
+      "sha256": "5c748f097a7597806f0adb3e5b49a242f000391c7da9ab7eedb2f7efce7535e7"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/study.py",
+      "bytes": 19057,
+      "sha256": "e6bb046907e195e02c65308015a29eb9c49bb479a22efa4bcac6ddd6dbe1ed75"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/__init__.py",
+      "bytes": 70,
+      "sha256": "e7f16638203ff2d8d5254017185d2b2133c21fc41b1fef22aa4709cbafc9c350"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/protocol.py",
+      "bytes": 5146,
+      "sha256": "3561dd0c2ea274a7e24e5a8bc6da3d6ee03b21fcec8768d18adb45b4f524b2c1"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/read.py",
+      "bytes": 18928,
+      "sha256": "ed137cd753b2961ef1518f22a1a90475f55eef17fb688f574563e0e2cd89c3af"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/run.py",
+      "bytes": 1632,
+      "sha256": "89c0e43aac625199305076a1a3188875e34969cdcb16588fe2d4dc05d1b74558"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/scheduler.py",
+      "bytes": 6844,
+      "sha256": "41cdda90f1bb677c16f1ca12ee57cef2ac656b9b597a146cf8b4e6be9039d54f"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/study.py",
+      "bytes": 19661,
+      "sha256": "aadd16bdac244757edb5736684b3d5432f8b4372b5e36fda124566987801a715"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/__init__.py",
+      "bytes": 62,
+      "sha256": "ef0474c939a8e83168c671d537bd3d6b178b533d268f48eae8cfcf4357218c31"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/history.py",
+      "bytes": 4562,
+      "sha256": "d67ee807bb29fe4346c070f72d9f7110bc0696ef898b24b13bb49b5db9d626ed"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/metrics.py",
+      "bytes": 3542,
+      "sha256": "ca6f5b3895f6101ac2b4bb1e590d2c7b278d90cffe8b4cd4fa614fab0624fbbb"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/read.py",
+      "bytes": 24261,
+      "sha256": "ed9d3a96c538b906f5ef11aec03b0ec934ea8354410a97e5ff14aeab38d86616"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/run.py",
+      "bytes": 1353,
+      "sha256": "0829c43177b19bdd200ab2ce157cd0bb54fe15394e0e16761c8cb8d901aa507d"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/scheduler.py",
+      "bytes": 11880,
+      "sha256": "30c9d7d923a2f89ef61dd3fe2f662ac85dc3e0571240c9989f4c384d845ff1b5"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/study.py",
+      "bytes": 20079,
+      "sha256": "a705d26145cb35d9a9e83d70a45c2206ddc3d04dfa0a99c438a1dbc795aded50"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/__init__.py",
+      "bytes": 56,
+      "sha256": "93e2a4c8326dc374289560fa9c465f59c006c97bd4d17fa888c11bb8c36a2da6"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/metrics.py",
+      "bytes": 5181,
+      "sha256": "7c40bc481c984395abba2c5b915327d94fda6fa63d030f54bb69851c64c35446"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/read.py",
+      "bytes": 27988,
+      "sha256": "75ccbdeacdd17fa29ae426592865354e29a02194821b5735509c98bbfd341eda"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/run.py",
+      "bytes": 1365,
+      "sha256": "234d72c002447686bd526d8de5c62aca6355a14c7bc9eeca2fba722254b8181b"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/scheduler.py",
+      "bytes": 12569,
+      "sha256": "fd12bd64ff076897988042073d75743c063960b665770542168852a5bba4c7b8"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/study.py",
+      "bytes": 18668,
+      "sha256": "c6914962ea2419ffe7f240ed8423bfd86732ce8e1fe4601a8a1cb604f134ec99"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/__init__.py",
+      "bytes": 71,
+      "sha256": "a30d900ab2439ea58777f157cd60b4ad3dab5f5c6aa8f13363420a647dc097df"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/features.py",
+      "bytes": 5106,
+      "sha256": "55d2b58377019a2edcd3407639047314db58be2bffcbeac31860bf1ddddb28d2"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/learner.py",
+      "bytes": 8669,
+      "sha256": "9ad461b2a64d3439cf7004ad656758b02d3579c7c5b57ec127cbfc9db60f7ac8"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/metrics.py",
+      "bytes": 4240,
+      "sha256": "8e85fc959ff06fb96fd87fe6154155f31d460392d55e74c2f26d934e2a01d6ec"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/read.py",
+      "bytes": 34142,
+      "sha256": "7a6244085d44e126809d9bac63197fb9159b8206154047c4d4b7248026375604"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/run.py",
+      "bytes": 1408,
+      "sha256": "6397b73ea24be7821071553003a034e8a7d979c29915d96897560b2da24541ab"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/scheduler.py",
+      "bytes": 21161,
+      "sha256": "84e506aa6a538a7f8aa0d7d15ce25914345faa642eb9d89e4a88895f645db89e"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/study.py",
+      "bytes": 21963,
+      "sha256": "9d153bdde6aa7df06806d9168be53f7c1f3bd69160a632d0b9abacb6f3625cd0"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/__init__.py",
+      "bytes": 62,
+      "sha256": "8fde437b9ee3fa4dad6859adbd35c48e75192e32ca1f9ddbc233d7c1f5a94e9f"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/history.py",
+      "bytes": 1480,
+      "sha256": "a839438052c6c57337eade4a1b066802830a5fbd0af78e49f45564160f57a7f4"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/metrics.py",
+      "bytes": 2771,
+      "sha256": "b3e5cf2f0dd5d6246a27ad2a40bfd9e9157895782f1f103dc00fbcc2b5537d53"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/read.py",
+      "bytes": 21847,
+      "sha256": "ac0ab412c19782b98a07127ed4678588fcd02d891385ddcc920e669fdfe63286"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/run.py",
+      "bytes": 1393,
+      "sha256": "f323b7e9448e940e5d373713bda2e48d8885ffbff9bf148b8c2397aa511e9e56"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/scheduler.py",
+      "bytes": 12897,
+      "sha256": "b93213bfb53c01d9d24d6247d2bfb5ef9967eeeb0cef46333ed6c4ed454355f7"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/study.py",
+      "bytes": 15855,
+      "sha256": "6608cac2f8c2e7746b66d4919cb3527baf16993802c6801cd63e00ed19f46a00"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/__init__.py",
+      "bytes": 52,
+      "sha256": "419ff3be5e484c47b704cbcaa13eeab4ad652c538833b3619c53c737cacd1da9"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/metrics.py",
+      "bytes": 4385,
+      "sha256": "bf51affe06f92fb45558d12abb4516e2d6b2d3be3d57e0ca161564cfba724629"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/predictor.py",
+      "bytes": 3957,
+      "sha256": "b356a04de8525a24764822044cd72af7c57aa286cd5d873bd8db54ac9be7db10"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/protocol.py",
+      "bytes": 4020,
+      "sha256": "038bddbfa0f694e9b5aa2a6c3f0e659d945369a951b55497a1da2a9ec839e1d4"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/read.py",
+      "bytes": 32455,
+      "sha256": "04e799dce7c0158473d018348d4fe2d2628e60eea1e2f57c2874d01251ca0f15"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/run.py",
+      "bytes": 1393,
+      "sha256": "703db2414a8e7dfd0cc367f2f6a3a9e03b52dde1684e16a1d057c7e628977681"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/scheduler.py",
+      "bytes": 25379,
+      "sha256": "b752521080a9fa12c24a05e696880a2f94e74734fe273d77fee5e20a0df85b41"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/storage.py",
+      "bytes": 3196,
+      "sha256": "0a631080a9f3fc9acf4cd15aa43c29e052652b57dabedabb61e9bf12bf010154"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/study.py",
+      "bytes": 18786,
+      "sha256": "e69ccca9d8213a07de56a13b1110365b74545a5312be53e23e84604c4d51753d"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b04/__init__.py",
+      "bytes": 82,
+      "sha256": "56ba4787562d05673bdc0b046260429a30e7bfa0c880e8e13d59ab457000d5e0"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b04/correctness.py",
+      "bytes": 3602,
+      "sha256": "f355f0621a495091796634e5091f5561465226e990de7e475cecb77c50701962"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b04/metrics.py",
+      "bytes": 5986,
+      "sha256": "0ceacf5629b981690813c5efa4b25d1fc7377b528c4c5e926d53d419aa09b155"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b04/read.py",
+      "bytes": 7442,
+      "sha256": "7a93ddc53225ad35910cad51290ab1c9f62e32fd43056d4f56040c77da80e76a"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b04/read_core.py",
+      "bytes": 18935,
+      "sha256": "160f17b37c9bc4ea9b0063eb4effa6840478230d7f06af5676d5dd2abbb750a4"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b04/run.py",
+      "bytes": 1378,
+      "sha256": "3c40bacc586674b6467a85131dcb835e65f7da8330a5845f3223795172825eb5"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b04/scheduler.py",
+      "bytes": 9957,
+      "sha256": "6db0f5b4bcdc728c39b9ab25b7b3153a6b239cbffd2a0e1d21b770293edc2fad"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b04/study.py",
+      "bytes": 16073,
+      "sha256": "c16a83bdf3b1d26874a91ee5347326d7e21bf36079057ca6736ceeaa0eb004f0"
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "bytes": 4819,
+      "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6"
+    },
+    {
+      "path": "scripts/hmasd_admission.py",
+      "bytes": 19793,
+      "sha256": "0faa5d53fba5af9b1a2fc4979bde5bd50bcbcaac2dbef938e90a64680156cf4d"
+    }
+  ]
+}

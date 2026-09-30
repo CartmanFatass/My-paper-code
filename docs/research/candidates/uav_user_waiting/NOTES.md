@@ -2895,3 +2895,254 @@ same-source worker, supervisor, node or direction substitutions. The DM and
 Reviewer independently observed five passes; the Reviewer resolved P2 with no
 material remaining finding. Actual extraction awaits the complete producer and
 reader. No accepted B04 input, scientific endpoint or live process changed.
+
+
+### B04 producer complete; final reconstruction in progress
+
+The fixed producer exited zero at21:52:42.074888UTC. Its canonical full summary
+is5,139,433 bytes with SHA256
+`49754e61f38009681d5a842d320a1878bdd260518300a5391cc3c8678db47c47`.
+Collection verified this digest plus the configuration and exit witness. It
+reports exactly256 complete episodes/65,536 native steps/zero fits/zero optimizer
+updates and zero deadline misses. Worker wall1355.281210s, lifetime process CPU
+1354.406528s and peak RSS569,076KiB. The observer's consistent terminal fact is
+retained as `b04_service_floor_a01/native-status.json`; generation34's READY
+was consumed before the next observation was armed.
+
+The separately admitted unchanged-source reader
+[`b04_service_floor_read_a01`](../../../../runs/uav_user_waiting/b04_service_floor_read_a01/launch-manifest.json)
+was accepted at21:55:08.240108UTC, binding that exact canonical summary digest
+and worker source. Its operation claim is
+`/home/wu/projects/HMASD/.git/hmasd-admission/f6c6cd4a5ab546ae9b7f4785d655248358f5b6ae05e72215955b797b90451bfa.json`.
+Generation36 adopted the same consistent live native identities at21:56:12UTC.
+The child remains active through this selected reading; no duplicate or retry
+has been launched. The named ResearchCritic is independently reconstructing the
+complete producer and original supporting/adverse advice while the verifier
+runs. Producer completion is not yet a fully verified scientific conclusion.
+
+
+<a id="b04-complete-reading"></a>
+## 2026-09-30 — B04 complete: useful expanded search, local floor does not establish trajectory preservation
+
+**Disposition.** Retain M's service/typical-interruption reference, U's measured
+S-relative capability, and S's cheaper operating point. K misses the frozen joint
+sign on native service; its near-zero mixed contrast and favourable tail point
+estimates remain evidence, not equivalence or a demonstrated service-preserving
+upgrade. Close this fixed comparison without an automatic K extension, repair,
+new fit or confirmation. The broader service/continuity and learning questions
+remain open. No new out-of-question study is selected here.
+
+The exact worker and reader source is
+`dd3b2577d407b57a3b76ea4ba95b6ead4349d0d4`. The separately admitted reader
+exited zero at22:11:37.370681UTC with **VERIFIED_COMPLETE**. Its complete
+11,309,402-byte reading has SHA256
+`69787803a4de84555c534d9b7f21a23c290c7d4446bc874a2da6e49237289513`.
+It binds the worker's full summary digest
+`49754e61f38009681d5a842d320a1878bdd260518300a5391cc3c8678db47c47`.
+Both terminal statuses have consistent accepted claims and distinct matched
+supervisor/runner identities. Generation36's READY event was consumed; generation37
+was then stopped with no pending event. Native-child queue rejection caused no
+repeat launch. Root received the actual timed-node release after both processes
+and the full verification finished; no further heavy or native work is selected.
+
+[`result.json`](../../../../runs/uav_user_waiting/b04_service_floor_a01/result.json)
+is the compact Git reading:2,509,981 bytes, SHA256
+`ccd52d06fe48c7e3f5315b834cb702e1b22b826df25af68a6e2eeb7e3a09707a`.
+The published, independently reviewed extractor binds both complete JSONs and
+their own native terminal identities. All256 scalar rows, six paired contrasts
+with every signed world, declared bootstrap, per-user age/gap/censoring vectors,
+raw hashes, source identities and verification summaries agree with the pinned
+inputs. The512 omitted aggregate all/closed-gap summaries reconstruct exactly
+from retained per-user counts/totals/maxima; complete slot records and satisfied-
+window histograms remain in the canonical full JSONs. No outcome was dropped
+because of its sign. Extraction used0.138204 CPU seconds and0.138204 wall seconds,
+with zero policy/radio/native/optimizer queries; local support is not included.
+
+### Native outcomes under the fixed rule
+
+All64 new common worlds29426000…29426063 completed all four H256 programs in
+the fixed balanced orders:256 episodes,65,536 steps,0 fits/optimizer updates.
+G is mean per-user maximum gap; F_user is the worst user's whole-episode mean
+age. These are different from the episode maximum over every user's gap.
+
+| Arm | Served users/tick | Episode maximum gap | F_user | G | Native J | Overall age A | Scheduler CPU s/episode |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| M |24.736206|55.078125|12.982300|19.534375|.399790|3.130050|5.031795|
+| S |21.180481|51.406250|10.962158|20.901563|.353223|3.517103|3.870323|
+| U |21.666870|46.828125|9.362488|19.797188|.358628|3.273011|5.223771|
+| K |24.699707|52.515625|11.963806|19.786875|.399501|3.183102|5.330757|
+
+The declared paired-world t95 intervals describe these fixed policies over64
+worlds; they are not training replication, simultaneous confirmation or an
+adoption tolerance.
+
+| Contrast | Service difference [t95] | Episode maximum-gap difference [t95] | F_user difference [t95] |
+|---|---|---|---|
+| K−M |−.036499 [−.243719,+.170721]|−2.562500 [−6.365632,+1.240632]|−1.018494 [−2.052410,+.015423]|
+| U−S |+.486389 [+.271307,+.701471]|−4.578125 [−9.381291,+.225041]|−1.599670 [−2.788147,−.411194]|
+| K−U |+3.032837 [+2.792975,+3.272698]|+5.687500 [+1.648206,+9.726794]|+2.601318 [+1.630085,+3.572552]|
+| U−M |−3.069336 [−3.331439,−2.807233]|−8.250000 [−12.437878,−4.062122]|−3.619812 [−4.640074,−2.599550]|
+| S−M |−3.555725 [−3.818581,−3.292869]|−3.671875 [−8.565182,+1.221432]|−2.020142 [−3.287653,−.752630]|
+
+**K primary.** The mean service sign is negative, while both extreme-continuity
+point estimates are favourable; all three t95 intervals cross zero. Service
+falls in36 worlds and rises in28. Maximum gap falls in31, rises in21 and ties
+in12; F_user falls in37 and rises in27. Eight worlds meet all three constructive
+signs. K−M G+.252500, J−.000289, A+.053052, quality+.000740 and
+travel+2.023m/UAV all have intervals crossing zero. K adds.298963 scheduler
+CPU seconds/episode. The predeclared10,000 paired bootstraps at29426998 give
+F_user percentile95[−2.014221,−.034966], unlike its t95 interval; this diagnostic
+does not replace the frozen reading or rescue the failed joint mean sign.
+This is not B03's uniformly adverse learned-value result. Neither no effect,
+noninferiority nor a small positive population benefit is established.
+
+**Useful U result with explicit costs.** U−S improves service in47 worlds and
+loses in17; F_user improves in39 and worsens in25. It also reduces G1.104375
+[−1.945315,−.263435], A.244092 and age-p95 1.031250, and increases
+J.005405[+.002425,+.008385]. Its episode maximum-gap contrast remains uncertain.
+The added search costs1.353448 scheduler CPU seconds/episode in every world;
+quality falls.004682[−.007604,−.001759] and transmitter exposure rises16.8125
+UAV-ticks/episode. Travel+11.705m/UAV has an interval crossing zero. U therefore
+does not dominate the full benefit/cost vector. Against M, U loses service and
+J in all64 worlds, adds544.900m/UAV travel and increases A.142961, despite its
+clearer extreme-tail gains. Retain a useful operating option, not a service-
+preserving upgrade or global optimum. S retains its lower compute/stronger
+quality operating point, and its recurring service/F_user tradeoff; the
+maximum-gap contrast versus M is less precise on this fresh panel.
+
+K−U restores3.032837 served users/tick and J.040874 in all64 worlds, but gives
+back5.6875 maximum-gap ticks and2.601318 F_user ticks on average. It shortens
+travel542.877m/UAV, lowers quality.005287 and adds82 transmitter UAV-ticks.
+This measures this floor's complete deployed consequence at matched generation;
+it does not prove an unavoidable service/continuity frontier.
+
+### Intermediate prediction, lawful history and adverse trajectories
+
+All16,384 rounds were complete and timely with zero deadline misses. Executed
+command/mask/forecast changes total16,282/16,142/16,384. Each arm completes4,096
+rounds. U/K use the same source construction at a given history; their deployed
+trajectories need not share literal pools. Along K histories the completed floor
+changes U's selected pair2,211 times, yet K differs from same-state M only289
+times(7.06%;1–10 per world). U differs from same-state S521 times along U histories.
+Sparse K exposure is real, not a new minimum gate or a nonactivation claim.
+
+K's exact modeled floor holds at all4,096 decisions, satisfying the intermediate
+prediction. Its modeled selected service exceeds same-state modeled M by1,034
+assigned user-ticks; actual selected-block service minus its model totals−88.
+Thus K delivers946 user-ticks above its accumulated local modeled references,
+while those references total1,544 fewer user-ticks than M's actual trajectory:
+full K−M service is−598 user-ticks, with common startup. **This is an accounting
+identity, not a causal decomposition.** M's unexecuted references at K states
+are different objects from M's deployed trajectory. Prediction error on selected
+blocks alone does not explain the episode loss; errors in unexecuted references
+and future state/opportunity consequences remain unresolved.181 K blocks fall
+below their modeled M floor, not an executed counterfactual M block. Local
+modeled feasibility supplies no native trajectory guarantee.
+
+The independent critic hash-checked12 complete raw traces, reconstructing
+contacts, ages and censored gaps. These retain both the joint-positive case and
+strong adverse cases. Filenames are exact under the canonical worker's `raw/`;
+full hashes are in `result.json`. Each native outcome pair lists the first arm
+then its comparator. First-difference comparisons use actual delivered blocks.
+
+| Exact raw pair | First report→execution; block service | Full service | Maximum gap | F_user |
+|---|---|---|---|---|
+| K_29426061.npz / M_29426061.npz |28→30;94/94|23.65625/22.97656|33/87|7.27734/22.06250|
+| K_29426006.npz / M_29426006.npz |88→90;80/77|23.34375/24.98438|50/49|9.63281/11.43750|
+| K_29426034.npz / M_29426034.npz |8→10;110/109|25.08984/25.24609|75/45|12.68750/13.67188|
+| K_29426030.npz / M_29426030.npz |108→110;116/102|28.00781/28.26172|57/45|17.13281/11.23047|
+| U_29426030.npz / S_29426030.npz |28→30;105/79|22.01953/24.28906|70/33|10.78516/8.52734|
+| U_29426001.npz / S_29426001.npz |4→6;93/100|20.42578/19.46484|65/117|10.34375/31.14453|
+
+K06/K34 first-difference modeled service and squared-age costs equal the actual
+first-block values, yet the episodes have adverse service or maximum-gap effects.
+K34 also has total modeled surplus+53 and net selected-model residual0, while
+losing episode service and adding30 maximum-gap ticks. Conversely U01 initially
+sacrifices service and later improves episode service and tails. These witnesses
+refute a simple attribution to initial comparison error without identifying a
+unique later mediator. K61 preserves genuine joint-positive evidence. M61 user47's
+87-tick gap[62,149), K34's75/74/70-tick gaps and S01 user4's117-tick gap[96,213)
+are closed gaps; these adverse tails do not disappear under boundary censoring.
+
+The full reader checks all256 raw files/358,763,054 logical bytes,65,536 native
+and modeled transitions, all C/observation/history/age metrics, every saved
+contact-to-cost/key calculation, exact O/W/S paths and U/K pool/filter/choice
+arithmetic. Physical reconstruction covers every selected same-state program
+and search winner plus every visited pair at0/60/124/248:154,478 candidate pairs,
+617,014 candidate transitions and32,768 prefix transitions. It uses the shared
+native radio kernel and the existing independent observation reader. Native
+SINR/observation errors are0; maximum J error is5.55e−17. This is the declared
+bounded physical reconstruction, not exhaustive independent physics replay.
+
+Legal model history need not equal truth: M/S/U/K respectively have3,745/3,651/
+3,572/3,711 of4,096 report anchors with some cumulative-burden discrepancy;
+maximum absolute discrepancies are943/870/616/532. They are retained model
+limitations, not reconstruction failures, an identified cause of K's loss or
+permission for an ACK/truth repair. Full anchor/slot details remain canonical.
+
+<a id="b04-independent-review-and-disposition"></a>
+### Independent scientific diagnosis and DM response
+
+The registered ResearchCritic worked in its original separate context without
+inherited DM/Root conversation. It reconstructed the actual design and complete
+outcomes before reading the original Oracle answer and DM response; it checked
+all70 source identities and12 positive/adverse raw traces. It initially conditioned
+its recommendation on the accepted full reader. After reading the entire pinned
+reading and terminal bindings, it removed that condition: all256 identities and
+the full paired object agree, with no consequential reconstruction discrepancy.
+Engineering review remains a separate, already completed judgment.
+
+The critic's substantive recommendation is retained: **retain M and the costed U
+option, preserve S's cheaper operating point and K's near-M evidence, and close
+the fixed experiment without automatic K extension or repair.** It rejects a
+native-preservation claim, not the possibility of a small service-preserving
+population improvement. More unchanged worlds would principally improve
+population precision, not identify the local-floor failure mechanism; a future
+prospectively specified service/tail valuation could make that investment useful.
+No such tolerance or confirmation claim was selected here. **MATERIAL_DISSENT:no.**
+
+The DM accepts that diagnosis and investment disposition. Task opportunity is
+supported by U's improvement over ordinary S and its service/continuity tradeoff
+against M. Representation supports a lawful local model but not equality to
+native trajectories or their counterfactual opportunity. Learnability is untouched
+by this zero-fit study. Complete-package value is conditional on service, quality,
+travel and compute preferences; neither K nor U is adopted as a universal M
+replacement. The changed explanation is specific: satisfying this modeled floor
+and increasing modeled local service is insufficient to establish complete native
+service preservation. Initial prediction error alone is not a sufficient account.
+K's small mixed service contrast leaves precision unresolved, unlike the active
+uniform losses in B03; this distinction survives the stop decision.
+
+No automatic new debt, weight, horizon, ACK, fit or expanded panel is selected.
+Retain the useful ordinary source/tests and complete positive/adverse evidence.
+The wider parent question is open; a re-entry requires a newly selected substantive
+prediction or declared service/tail valuation with competent same-resource
+comparators and a prospective complete cost. Root owns any new cross-question
+allocation. There is no missing adviser, owner ACK or fabricated producer on which
+this completed reading depends.
+
+### Complete cost and evidence retention
+
+The worker used4,276,224 pre-cache requests,1,975,375 distinct evaluated plans,
+7,841,314 delivered-state reductions,1,755,648 geometry snapshots,32,768 prefix
+transitions and81,920 current-C calls. It made no future-C/value query or fit.
+Scheduler CPU totals1,245.225374s, nested within worker lifetime CPU1,354.406528s;
+reader lifetime CPU988.464463s makes **2,342.870991s/.650797CPUh** in total,
+below the .9–1.3h planning estimate. Wall1355.281210/987.461429s and peak
+RSS569,076/552,760KiB are worker/reader separately, not summed peaks. Reader
+163,840 C reconstructions and the physical counts above add zero new native
+steps/fits. The separate four-episode/32-step fixture cost3.300429 CPU seconds.
+The critic's bounded remote raw/source inspection cost.72user+.05system CPU
+seconds,.79wall,peak82,828KiB; its other saved-JSON/source/SSH work, implementation,
+review, observation and collection remain incompletely metered, not zero.
+
+Across B01–B04 this direction has327,792 new result steps,272 correctness steps
+and2 scientific fits, preserving B02's failed-prefix exposure. Known worker/full-
+reader CPU is13,293.473639s/3.692632h, before separately recorded fixture/support
+costs. Result-level reconstruction calls are not independent training replicates.
+The B04 worker's256 raw artifacts occupy358,763,054 logical bytes and remain once
+at their canonical node paths, alongside complete summaries/readings and receipts.
+The32-step fixture raw evidence also remains canonical. Useful source/tests and
+compact readings are published; no full-tree copy, tar or duplicate backup is a
+cleanup condition. Terminal snapshots, redundant progress data and local copies
+are the final cleanup targets after publication and fresh live-consumer checks.
