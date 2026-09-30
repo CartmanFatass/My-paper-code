@@ -202,9 +202,29 @@ def test_failed_worker_keeps_partial_new_exposure(retained, tmp_path):
 def test_cli_requires_admission_before_scientific_effect(tmp_path):
     from experiments.candidates.uav_fleet_adaptation.b03 import run
     command = [sys.executable, str(Path(run.__file__).resolve()), "--out", str(tmp_path / "forbidden"),
-               "--retained-out", str(tmp_path / "old"), "--launch-sha", "x", "--seed", "29344001"]
+               "--launch-sha", "x", "--seed", "29344001"]
     result = subprocess.run(command, capture_output=True, text=True, check=False)
     assert result.returncode != 0 and "admission" in result.stderr.lower()
     assert not (tmp_path / "forbidden").exists()
     source = Path(run.__file__).read_text()
     assert source.index("admission = require_admission") < source.index("    import torch")
+
+
+def test_cli_uses_only_source_bound_canonical_controls(tmp_path, monkeypatch):
+    from experiments.candidates.uav_fleet_adaptation.b03 import run, study as worker
+    from scripts import hmasd_admission
+    monkeypatch.setattr(hmasd_admission, "require_admission", lambda *a, **kw: {"sha": "fixture"})
+    for name in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS",
+                 "VECLIB_MAXIMUM_THREADS"):
+        monkeypatch.setenv(name, "1")
+    for name in ("set_num_threads", "set_num_interop_threads", "use_deterministic_algorithms"):
+        monkeypatch.setattr(torch, name, lambda *a, **kw: None)
+    called = []
+    monkeypatch.setattr(worker, "run_batch", lambda *a, **kw: called.append((a, kw)) or {"status": "COMPLETE"})
+    args = ["--out", str(tmp_path / "uncreated"), "--launch-sha", "fixture", "--seed", "29344001"]
+    assert run.main(args)["status"] == "COMPLETE"
+    assert called[0][1]["retained_out"] == Path(
+        "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01")
+    assert called[0][1]["scientific_invocation"] is True and not (tmp_path / "uncreated").exists()
+    with pytest.raises(SystemExit):
+        run.main(args + ["--retained-out", str(tmp_path / "different")])

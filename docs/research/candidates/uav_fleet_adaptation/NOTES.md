@@ -1545,3 +1545,47 @@ failure leaves zero native exposure and does not authorize added control episode
 No new native smoke/pilot, architecture change or repeat of unchanged B02 tests is
 needed for this outer-layer integration. The source is ready for exact publication
 and the already-selected one-fit actual-node admission.
+
+### B03 pre-admission path refusal and bounded entrypoint correction
+
+Inputs `4bc0c28a5f088401702d0c17d34bd3edf1afd3dd` were pushed and verified on
+published main. The first primary-node outer task
+`fleet-b03-inheritance-recurrence-a01-20260930` ended with launcher refusal/exit4
+at2026-09-30T16:47:16Z, before any claim or native admission:
+`absolute author input is absent from published snapshot:` followed by the
+canonical B02 run directory. Inspection confirmed **no B03 output directory,
+no matching claim, zero native episodes and zero scientific fits**. The launcher
+had created only the source copy
+`.git/hmasd-launch-sources/08587f6b1f25416c858f8bbc5f020e6f`, recorded for
+exact unclaimed-source reclamation. The original B02 evidence is unchanged.
+
+The cause is the launcher's generic remapping of absolute author-tree CLI inputs
+to the published source snapshot, where retained raw bulk deliberately does not
+live. The bounded fix removes the input-path CLI override and places the already
+declared canonical B02 root directly in the B03 entrypoint's published source.
+After admission it passes that fixed locator to the unchanged strict retained
+loader. The five original metadata pins, all retained raw/source hashes, actual
+host/runtime/recipe checks and canonical manifest root binding still precede
+native construction. No shared launcher change, evidence move/copy, control
+reevaluation, identity/recipe change or scientific retry is involved.
+
+The two affected CLI checks passed in1.56s after the correction: absent admission
+has no effects; mocked admitted entry passes only the source-bound canonical root
+and rejects an input-path override. The other52-test coverage and unchanged
+kernel review remain applicable. A focused independent engineering acceptance
+is required before publishing the corrected entrypoint and making the first
+admitted scientific attempt. The primary repository's pre-existing Git repack
+warning (`dfe82c...` missing tree) did not prevent fetch/source publication and
+was not altered.
+
+Observer generation15 had been armed before the manifest returned; its missing
+handle probes produced BLOCKED event`f848aafc39d8768bcb0984f7` and rejected
+native-child queue wake`cb81cc4a-52dd-43da-a60f-8b706450bad6` (`-32600`). The
+observer was stopped and the failed request reconciled as above. The native DM
+stayed active. Only after an actual accepted manifest will this same observation
+job be rearmed/resumed; registration alone is not acceptance.
+
+The independent engineering Reviewer inspected the exact correction against
+`4bc0c28a5`, independently passed both CLI checks in1.38s and found no material
+issue or requested repair. The DM accepts this correction; production-node
+loading remains guarded and the original review's local coverage limit remains.
