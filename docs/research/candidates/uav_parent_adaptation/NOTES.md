@@ -3221,3 +3221,625 @@ experiment or whole-host disk change. [Exact local deletion, log hashes and net 
 No cleanup tool blocker or owned disposable leftover remains. Required raw, joint
 diagnostics, original S, compact readings and all adverse outcomes remain; no
 worker, reader, observer or unread scientific review remains active for B04.
+
+<a id="b05-radio-composition-design"></a>
+## 2026-09-30 — Design only: inherited local motion with actual radio management
+
+Root assigns a distinct scientific **design-only** question after reading B04 and
+its complete independent diagnosis: can the retained local stochastic motion
+capability remain useful when actual radio/interference management is added,
+beyond competent ordinary motion-plus-radio under the same information and
+control rights? The existing, non-owner-archived lead remains this DM. Root's
+Oracle `/root/oracle_next_capability` independently reconstructs the evidence,
+consults the relevant libraries/primary sources and challenges selection; this
+DM owns source-law feasibility, the exact comparison and prospective cost. Its
+complete original advice and my disposition will be preserved below.
+
+This entry is a proposal, **not a selected result purchase**. At preparation:
+0 started fits, 0 native transitions, 0 new actor/helper/radio-model queries,
+0 result implementation and no launch/observer. Reading existing sources,
+hashes and saved summaries is the only computational work. There is no B04
+extension, new A/B law, reward continuation, calibration, N8 relocation or
+waiting-cost study. All old rules, assets, adverses and closures remain fixed.
+
+### Why this question, and what the existing evidence changes
+
+I read current published main through
+`0816df3b7806f31701832eecf0cdedcb4247dcc3`, including
+[RESEARCH topic2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练),
+[topic4](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面)
+and the [structural background](../../RESEARCH.md#structural-research-background).
+The relevant new premise is B04's conditional S_I−Q_I increment: mean J
++.024075, service +1.767029, service-p10 +3.546875 and 1232.241m less path/UAV,
+alongside the large world29346004 loss. S is therefore a capability to compose,
+not merely a new baseline to beat. The failed fixed A/B prediction remains
+closed; none of this assigns a coordination, entropy or learning-cause mechanism.
+
+N5 radio activation B01 supplies a different ordinary capability. On its own
+64-world panel, C+E versus C/all-on gains J .119393 and service 7.781250,
+with harmful worlds retained. B03 S2 improves on C+E/R by J .016514 and
+service 1.504150, but adds 1855.89m path/UAV and loses quality; T2's much
+larger search did not establish a useful increment over S2. Thus E-only
+composition cannot be advertised as surpassing the strongest applicable
+ordinary motion/radio reference. S2 and the R path/quality tradeoff both matter.
+[Complete N5 results and independent disposition](../uav_radio_activation/NOTES.md#2026-09-29---b03-complete-reading).
+
+The N4/N8 fleet results make transfer caution concrete: E can help one fleet
+and hurt another, and an all-on candidate in a one-step search does not protect
+complete closed-loop service. Those are supporting adverse examples, not
+numerically pooled replications of this N5 comparison. Their CountAdapter,
+ten-tick central snapshot, SINR0 threshold and height-penalized objective differ
+from the present local N5/SINR3/no-height-penalty law.
+[Fleet evidence](../uav_fleet_transmission/NOTES.md#b01-complete-reading).
+
+The intended contribution is **empirical understanding and conditional package
+use**, not a new learning algorithm. Local motion, radio activation and later
+observations are coupled: a scheduler changes which members can observe users
+and peers, which subsequently changes their motion proposals, and motion changes
+the scheduler's useful masks. Consequently separately favorable mean effects
+need not add. The competing ordinary explanation is that joint ordinary S2
+absorbs the useful motion increment, or that cheap Q randomization supplies all
+the compositional benefit. A further possibility is that the all-on-trained S
+does not transfer usefully to actual silence and delayed/overridden execution.
+None is assumed true before the complete comparison.
+
+### Frozen actor, helper and actual-mask feedback
+
+Use **only the original B02 S** already bound in B04: immutable asset
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt`,
+424487bytes, file SHA256
+`b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`,
+state SHA256
+`6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c`.
+It is the fixed 8000-update, 114→128ReLU→128ReLU→27 FP32 network.
+No B03 replacement, checkpoint selection, new normalizer, optimizer or label
+acquisition is proposed. Its original one-fit/81920-label/8000-update acquisition
+remains charged; retaining a checkpoint does not make its construction free.
+
+The host remains N5/U50/H256, uniform static users, 1000m square, height50–150m,
+30m/s and one-second ticks, free-space radio, SINR3 eligibility, ten connections
+per UAV, no FDMA/shadowing/paper reward. The team objective is the saved native
+mean of `.7*served/50 + .3*connected_quality`; path and transmitter-on time are
+reported separately. There is no battery, switching-energy or service-age model.
+The direction-owned experiment would use the existing N5 factory with physical
+masking enabled, exactly as radio activation B01/B03 do. It would not adapt the
+incompatible N4/N8 scorer or silently rewrite the frozen B04 collector's all-on
+assertion.
+
+Each local policy is queried at t=0,4,…,252 from its current **actual-mask**
+104-field FP32 observation. Only the first103 non-clock fields, own pre-navigation
+one-hot and existing analytic fallback bit enter S. The helper uses own geometry,
+observed users/SINR and visible peer geometry; it never receives the registered
+map, mask, peer commands, another policy's probabilities, true positions or
+coordinator forecasts. C and Q receive the same lawful local row and navigation.
+Navigation updates follow the existing helper/C law on the policy's own actual
+trajectory, even if the coordinator later overrides that motion proposal.
+
+The native mask setter retains physical UAVs and refreshes radio/observations
+without moving time. A silent member's user-SINR row is −infinity; its peer row
+is also −infinity because the native peer-link mask requires both endpoints
+active. Its actor input therefore contains own position and navigation but zero
+user/peer slots, with analytic fallback=True. **S still uses the network and
+private categorical draw**: the fallback flag does not bypass the network for
+a hard waypoint command. C uses its ordinary waypoint fallback. Empty discovery
+also occurred under all-on, so this is not necessarily a previously unseen
+numeric input; its occupancy and subsequent control consequences are untested.
+
+Visible peers of an active member are transmitting, rather than silent members
+incorrectly charged as interferers. The unchanged helper estimates unobserved
+interference from observed SINR when fewer than four peers are visible. It is
+finite and source-legal under masking, but it models own-on candidate service
+with frozen peers and does not anticipate a future mask or coordinator override.
+This is an inherited modeling limitation, not evidence of a helper bug. There
+is no all-on counterfactual observation, synthetic discovery, extra ACK or
+mask-feature repair in this proposal.
+
+C is the source-bound `MemoC`; Q uses its modal command with probability .9 and
+each of the other26 commands with probability .1/26. S uses the original
+temperature-one float64 probability calculation from its fixed one-row FP32
+network. Q and S both use **B04's unchanged private I finite-grid decoder**,
+including modal/tail bins on 2^53 integers. There is no A/B or public-coin
+intervention. C/Q never borrow S logits; S never queries C's ranking. Cache hits
+reuse only exact local helper/features/logits, never a sampled command. New
+private draws occur at every report. World/tape addresses stay evaluator-owned.
+
+At design time all23 source hashes in B04's config still match current files.
+The selected radio B01 protocol/scheduler, B02 sequential search, B03 protocol/
+scheduler/study and shared radio kernel also match B03's original launch
+`2bff85091f85f6d52fc0344d0329b4fc39fa6d5c` byte-for-byte. A future implementation
+must retain these semantic bindings and record any necessary direction-owned
+adapter explicitly. No native/actor/helper call was needed for these checks.
+
+### Coordinator rights and the two distinct deployment contracts
+
+The additional resource is the existing rounded400-byte registered user map and
+a dedicated2000bit/s out-of-band control link. This map is an explicit provisioned
+input with at most half-metre coordinate rounding, not a locally discovered map.
+Each four-tick report includes all five **own** reported positions and current
+commands; S2 also uses proposed commands. Reports round coordinates to metres.
+The coordinator can use those packets, previous issued mask and the known
+free-space/motion model, but no hidden state, unrounded map, local observation
+rows beyond own xyz, actor probabilities or future truth. The actor never reads
+the map. The same addition and action rights are supplied to C, Q and S within
+each coordinator comparison. Physical control-link power and switching costs
+remain unmodeled, not zero.
+
+| Contract | Local motion and radio timing | Ordinary selection and resources |
+|---|---|---|
+| all: all-on | Immediate local proposals at0,4,… held4ticks; mask31 throughout | Original B04 local decision law; no radio search/link traffic |
+| E: original C+E/R interface | Local proposal executes immediately for4ticks; mask computed from that report arrives after1tick; next local input reflects actual mask | All31 nonempty masks; predicted postmove rewards at report offsets+2…+5 (last round+2…+4); 5×24-byte reports+16-byte command=136bytes/round, .456s compute deadline |
+| S2: retained two-step joint interface | At t0 the proposal acts for startup2ticks; thereafter report-r proposals await r+2 delivery, then all five committed commands hold4ticks through the next report; one rotating member may be revised | Both sequential full-team motion-then-mask and mask-then-motion searches,27 commands/31 masks; known2tick prefix and scored offsets+3…+6 (last round+3,+4);136bytes/round,1.456s compute deadline |
+
+S2's report includes actual and newly proposed commands in the same24-byte
+packet. There is **no added navigation telemetry**: the later waiting study's
+141bytes/1.436s contract is a different interface. S2's rotating member is
+`(report_tick//4)%5`, and the existing tie order and both search orders stay fixed.
+The coordinator chooses all five received proposals except the selected
+member's command. No pair or mask is selected by realized future reward.
+Report-r's next local proposal at r+4 is formed while the previous commitment
+still acts until r+6. Starting local queries are charged inside S2's existing
+deadline; E retains its source deadline scope while reporting local policy time
+separately. A late result retains the last actual commands/mask under the
+declared source fallback. Malformed inputs instead fail as a technical error;
+neither case triggers another query or fresh run.
+
+Thus S+S2 preserves the **proposal law**, not B04's immediate execution law.
+It is a delayed, corrected policy package. E offers the direct composition that
+preserves immediate motion. S2-versus-E is not a pure radio or pure latency effect,
+and all-on-versus-managed differences include the supplied resources and changed
+feedback. The primary within-S2 C/Q/S comparisons have matching rights, report
+clock, model, deadline and coordinator. Equal rights do not require equal CPU:
+the actual local/helper/coordinator costs must be reported.
+
+### Proposed complete comparison and outcome reading
+
+The provisional recommendation to the Oracle is one compact complete study:
+C/Q_I/S_I crossed with all/E/S2, on32 fresh common worlds with two fixed private
+tapes for Q/S and one trajectory per deterministic C cell. This gives
+9programs,480episodes and122880native steps, **0new fits**. All cells are full
+H256 episodes; there is no candidate screening, checkpoint maximization,
+world-dependent gate or outcome-adaptive stopping. Exact fresh world/tape roots,
+execution order, reader scope, costs and final investment disposition follow
+the independent advice below before any result purchase.
+
+The main package comparisons are **S+S2 versus C+S2 and Q+S2**. Native mean J
+is the principal score, with service/step and service-p10, minimum/team-zero
+service, quality, path, transmitter exposure and computation retained as explicit
+task tradeoffs. S+E versus C+E/Q+E is the direct-composition comparison. Each
+managed S versus its all-on S reference measures that complete resource/control
+addition for the fixed asset. Matched all-on C/Q/S establish what capability
+recurs on this panel; they do not expand the training sample size.
+
+Average the two tapes within each world before world-paired means and descriptive
+intervals; keep every world/tape and adverse component. Sharing private tapes
+across policies/coordinators reduces some sampling variation without making
+divergent trajectories identical. A difference-of-differences can describe this
+finite interaction, not identify a reward mediator, causal learning mechanism
+or optimal composition. Count actual silence, empty inputs/fallbacks, local
+proposals, sampled departures, coordinator revisions, physical command changes,
+mask changes and deadline misses on each arm's own trajectory. These are reading
+diagnostics inside the complete study, not eligibility filters or pilot gates.
+
+Beating Q+S2 while trailing C+S2 would preserve a narrower learned-proposal result
+without establishing package preference over the stronger ordinary controller.
+Beating C+S2 but not Q+S2 would make ordinary randomization a sufficient competing
+program for that comparison. Favorable S+E with adverse S+S2 would retain a
+direct-composition capability with a correction/commitment limitation, not allow
+retrospective replacement of the primary. Gains with worse p10/path/quality are
+tradeoffs, not automatic adoption. If all-on usefulness itself does not recur,
+the managed result cannot be diagnosed solely as masking damage. If usefulness
+recurs all-on but is lost with management, transfer is implicated at package
+level, without identifying whether empty feedback, timing, override or proposal
+quality is responsible. Failure, modest unresolved differences and technical
+missingness each retain their own meaning; none automatically buys repairs,
+another S, another clock, calibration or training.
+
+<a id="b05-radio-composition-costed-contract"></a>
+### Costed contract after the ordinary-reference challenge
+
+The Oracle challenged the provisional nine-program proposal on a consequential
+point: S2 is the economical retained ordinary reference, but the existing T2
+one-member exhaustive search has not been shown equivalent to it. I accept the
+costed addition of **one C+T2 cell per world**. This is the same two-tick/136-byte
+information and action contract as S2, using all27×31=837 candidate pairs for
+the rotating member. It is not exhaustive joint action over all five members.
+No S+T2 or Q+T2 cell is needed to answer this purchase. We are not required to
+beat every untested planner, but should not omit an applicable retained one when
+claiming useful composition beyond ordinary joint control.
+
+The resulting proposed object is `UAV-PARENT-RADIO-COMPOSITION-B05`, prospective
+tag `b05_radio_composition_a01`: **10 programs,512 complete episodes,
+131072 native steps,0new fits/labels/optimizer updates**. Exact proposed arms:
+
+| Programs | Episodes per world |32-world episodes |Native steps |
+|---|---:|---:|---:|
+| C_all, Q_I_all, S_I_all |1+2+2|160|40960|
+| C_E, Q_I_E, S_I_E |1+2+2|160|40960|
+| C_S2, Q_I_S2, S_I_S2 |1+2+2|160|40960|
+| C_T2 |1|32|8192|
+| Total |16|512|131072|
+
+The main matched-proposal contrasts stay S_I_S2−C_S2 and S_I_S2−Q_I_S2.
+The predeclared full-use comparison **S_I_S2−C_T2** constrains any broader
+ordinary-control preference. An S2 win that remains below C_T2 is at most a
+conditional lower-compute alternative, with its measured cost/risk tradeoff;
+it is not a superior-service verdict. Nor would an interval crossing zero
+establish equivalence to T2 or deadline-independent speedup. The retained T2
+maximum measured round time was1.428485s against1.456s, leaving only27.515ms
+on that node. This study must preserve late fallbacks and their partial work,
+rather than assuming the old no-miss record transfers.
+
+The proposed fresh world IDs are29347000…29347031, with the unchanged native
+reset generator, paired across all programs. They do not occur in the relevant
+published direction notebooks checked during design. Tapes are0/1 for Q/S;
+C uses sentinel−1 and is run once per world/program. Use B04's exact
+`make_bundle` with new roots29347091/29347092/29347093 for its public/private-
+departure/private-tail fields. The public field is unused by I, is not a new
+coordination device and conveys no world state. Keep it only for exact retained
+decoder compatibility. Each of64 world/tape bundles is constructed once and
+reused across Q/S and the three deployment contracts; private innovations remain
+independent across members within a tape. All five local distributions are
+formed before their current tape entries are delivered. No scene seed or tape
+root is a policy/coordinator feature.
+
+Before execution, fix the per-world16-row order as the table's program order,
+with tape0 then1 for each Q/S cell; rotate it by the zero-based world index modulo16
+and reverse the rotated order for odd world indices. This is a mechanical
+runtime balance, not score-based allocation. Fresh per-episode policy caches,
+navigation and coordinator state prevent cross-world memory. One native
+constructor has one unscored reset, followed by512 explicit episode resets;
+these are counted separately from131072 transitions.
+
+For each named contrast, compute both tape-specific differences and the
+world-level difference after averaging Q/S tapes. The headline is the mean of
+32 world differences and a descriptive paired df31 t interval, with all32
+world values, both tapes, positive/negative counts and worst worlds retained.
+These are conditional-world intervals for one S asset, not training-population
+confirmation or multiple-comparison-adjusted family guarantees. No result is
+discarded because the asset, scheduler or task performed poorly. J is the
+principal scalar endpoint; complete service and its p10/minimum/zero-service,
+quality, path and compute distribution constrain the resulting use claim.
+Favorable mean J alone never becomes a claim of user continuity or physical
+adoption. No fitted calibration or threshold is selected on these worlds.
+
+The E model's +5 prediction extends past the next immediate-motion renewal at
+r+4, whose new local proposal is unavailable. It deliberately retains the old
+forecast's continued-command approximation; no future proposal is queried.
+S2/T2 score a known committed two-tick prefix followed by a four-tick planned
+block, subject to report/map rounding. This is another reason not to read
+E−S2 as a pure latency or pure radio effect.
+
+### Prospective work, including the reader rather than just zero fits
+
+Worker bounds below follow from source/configuration; actual query/cache/
+deadline counts and timings must also be saved. A deadline may reduce completed
+search, but cannot enlarge the declared purchase.
+
+| Worker work | Proposed requests or upper work |
+|---|---:|
+| Local policy requests |163840 =512×64×5|
+| C/Q full-ranking requests before episode cache |102400|
+| C candidate trajectories/model ticks before cache |2764800 /11059200|
+| C candidate user-power links/setup links upper bound |221184000 /10240000|
+| S policy/helper/network requests before cache |61440|
+| S helper setup/extreme user-power links upper bound |6144000 /2457600|
+| E candidate requests/unique mask scores |317440|
+| E mask-state reductions/scored geometries |1264800 /40800|
+| S2 candidate requests |1187840|
+| S2 unique mask scores upper bound |1146880|
+| S2 mask-state reductions upper bound/scored geometries |4551680 /1097280|
+| C_T2 candidate requests/unique mask scores |1714176|
+| C_T2 mask-state reductions/scored geometries |6803136 /219456|
+| Combined coordinator requests |3219456|
+| Combined mask-state reductions upper bound |12619616|
+| Combined scored geometries/user-power links |1357536 /339384000|
+| S2/T2 prefix-only motion ticks |24576|
+| Private departure/tail integer reads |245760|
+| Once-per-bundle generated integers |45056 (40960 private,4096 unused public)|
+
+C links use at most20 visible users and four peers; masking usually reduces that
+work, but no reduction is assumed. S counts include the still-paid analytic
+helper; helper and neural cache misses are charged separately from61440 logical
+requests. The C/Q and S figures are different programs, not equal-FLOP claims.
+Native transition radio, mask-setter refresh, object construction/reset, encoding,
+sampling, compression and I/O are additional to coordinator model search.
+
+The exact S2 bound is **112 unique pairs per round**, not111: the two search
+orders request two27-element columns and two31-element rows (116 requests),
+with four intersections when rows/columns are distinct. Coincident rows/columns
+reduce the union further. A complete S2/T2 episode has63 four-state scoring
+blocks and one two-state terminal block, totaling254 states per candidate;
+E has255. Geometry is shared across masks within each command, but the original
+T2 still visits all837 pairs. These counts are source arithmetic, not a new
+model query or timing probe.
+
+Managed cells have22528 four-tick report rounds. If all deliveries are timely,
+136 recurring bytes give3063808 bytes across their352 episodes, plus400
+provisioned bytes per managed episode (140800bytes;12800 unique map bytes across
+32 worlds). Late reports retain the actual120-byte or zero-report exposure and
+no command packet; record actual traffic. Compute/link timing, mask changes,
+transmitter-on ticks and physical path remain separate quantities, not interchangeable
+energy measures. The unused public sampler stream sends no packet.
+
+The planned reader is a complete reading of all512 results with bounded
+independent model verification, not another full trajectory experiment:
+
+- Verify every source/asset/raw identity, reset world, private tape, cache key,
+  navigation transition, proposal, actual command, commitment/arrival, mask,
+  endpoint, capacity assignment and declared statistic. Reconstruct all131072
+  native endpoint radio formulae from saved positions, plus all32768 policy-used
+  report observations and512 terminal observations: at most164352 native/observation
+  formula checks, **0 environment transitions**. Non-boundary local observations
+  unused by the actor remain saved; they are not a new decision query.
+- Perform exactly61440 one-row frozen-S forwards and61440 analytic-helper
+  recomputations from saved local rows, without optimizer or labeling. Validate
+  every C/Q choice against its paid saved source-bound scores, fallback and
+  navigation, and regenerate every I choice from the addressed integers. There
+  are **0 new C full-ranking queries**. Worst-case added S helper work is the
+  same6144000 setup+2457600 extreme links before any reader reuse.
+- Recompute all E mask-state scores:1264800 reductions. For S2/T2 use the
+  already established, outcome-independent set of at most five pairs per report:
+  proposal/all-on, proposal/current, selected, sequential and the round-index
+  sentinel `(round_index%27, 1+round_index%31)`. Recompute only pairs actually
+  scored in that arm, deduplicate the set, and reuse the selected pair's per-state
+  values when checking forecast error. This adds at most243840 mask-state
+  reductions, so reader candidate work is at most1508640 reductions, rather than
+  repeating the worker's12619616 upper bound. All saved candidate arrays and
+  search/tie decisions are checked even where their radio scores are not
+  independently recomputed. Source tests and bindings retain that distinction.
+
+The reader records attempted/completed forwards, helper queries, radio reductions,
+geometry requests/misses, arithmetic reconstructions and timing. Shared geometry
+can be reused only within its exact saved-input identity. It does not simulate
+unexecuted native suffixes, produce counterfactual all-on actor feedback, rerank
+the panel or add a diagnostic after seeing scores. A failed/incomplete reader
+retains progress and does not automatically repeat paid work.
+
+Using B03's measured episode rates (R121.231970CPU-s/64, S2 277.046641/64,
+T2 2501.254461/64) and B04's C/Q_I/S_I rates, the complete worker projects to
+approximately **2281.91CPU-s (38.03min)**. The extra C_T2 accounts for1250.63s
+of this projection. These are planning extrapolations across different worlds,
+policies, memoization and load, not new measurements or an admission guarantee.
+Use a provisional **30–60 worker CPU minutes and10–30 reader CPU minutes**,
+with2CPUh worker and1CPUh reader hard-stop envelopes preserving any incomplete
+outcome. Timers for import/setup/finalization and child processes remain separate
+where not included. No source claim assumes lower wall time from lower CPU.
+Expected raw storage is approximately0.5–1GB and peak RAM below2GB, both unmeasured
+planning estimates; actual-node admission must check fresh resources before any
+selected launch, with the configured WSL4070 node preferred and one compute thread.
+
+Engineering/review is estimated at4–8 elapsed person-hours and scientific
+reading/review/publication at1–2 hours, not zero because the fits count is zero.
+This is a new costed purchase atop the parent direction's18 prior started fits,
+2760704 native steps and3841.717 measured CPU-s, plus the separately recorded S
+acquisition and radio-reference studies; these overlapping historical accounts
+are not summed as independent project cost. Design work itself has still made
+no new actor/helper/model/native call.
+
+### Bounded implementation if this proposal is later selected
+
+Own only `experiments/candidates/uav_parent_adaptation/b05_radio_composition/`,
+its matching tests, this notebook and its run/scratch directories. Reuse the
+frozen policy/helper/sampler, native mask capability and source-bound E/S2/T2
+interfaces; do not edit their historical programs or shared host. A new collector
+must distinguish local proposal, actual command, pending commitment and applied
+mask, and copy transition SINR/connections before arrival mutates the native
+arrays. It must accept −infinity only in the expected silent-radio entries,
+while keeping observations/features/logits/probabilities/rewards finite.
+
+Outcome-blind synthetic checks cover the two arrival clocks, startup/terminal
+blocks, deadline fallback, source-only coordinator inputs, empty masked rows,
+still-active S sampling, cache/nav independence, private-I identity, C reference
+parity and complete/incomplete accounting. They use stub policies and synthetic
+arrays, not undeclared production-asset forwards, native pilots or calibration.
+Independent engineering review is appropriate for this new collector/reader;
+the unchanged kernels do not need a new rewrite. Publish exact accepted inputs
+before one admitted detached operation. Preserve all outputs/attempt counts on
+failure and use same-handle observation; no duplicate retry is included.
+
+Retain compact config/readings/source identity in Git and one durable canonical
+copy of raw trajectories/candidate evidence. Do not create result artifacts,
+execution scratch or a new claim note during this design-only assignment.
+At an eventual result boundary, the independent scientific reading must receive
+all positive/adverse worlds and the original comparison, not only a favorite
+explanation. Useful published code/evidence stays; unused implementation variants,
+completed source snapshot and redundant scratch would be removed only after
+checking live consumers, with actual net bytes measured. This proposal itself
+has created no disposable implementation or data to clean up.
+
+
+<a id="b05-original-oracle-recommendation"></a>
+### Complete original independent Oracle recommendation
+
+Received from Root-assigned `/root/oracle_next_capability` at2026-09-30 18:25UTC.
+The complete recommendation follows. Only the adviser's own source-directory
+corrections and completed fleet-source identity, supplied at18:26UTC and preserved
+after the recommendation, are applied. No substantive passage has been omitted.
+
+> I recommend revising the initial nine-cell sketch to the accepted ten-program, zero-fit composition study, and selecting that bounded study if Root judges its 5–10 hours of engineering/scientific work worthwhile. Retain the original S_I asset and the closed A/B verdict. Do not purchase joint training at this boundary. The question is whether an acquired local-motion capability remains useful inside actual radio management, including comparison with the strongest applicable ordinary finite-search package. This can produce useful empirical knowledge without a new algorithm, a learning-mechanism explanation or a positive result.
+>
+> This is a separate-context source review without an inherited Root/DM conversation. I received Root's question and B04 headline, so it is not blind discovery. I reconstructed the consequential prior evidence before reading the DM's B05 explanation, then used the DM for exact interface/cost feasibility. I reuse the adequate B04 result critic; this is a new selection review, not a claim to have independently replayed that entire batch. During this assignment I made no actor/helper/radio-model/native query, fit, result-code change or experiment launch.
+>
+> 1. The evidence warrants a reuse question, while leaving its answer open.
+>
+> B04's fixed S_I has real all-on competence on its 32-world panel: S_I−C mean J +.042359 [descriptive t95 .022299,.062418] and service +3.199524; S_I−Q_I J +.024075 [.008176,.039974], service +1.767029, within-episode service-p10 +3.546875 and path −1232.241m/UAV. The p10 increment over C, however, is unresolved, and path is essentially unresolved versus C. The positive S−Q contrast is conditional on one inherited checkpoint and this Q law; it is not evidence against every ordinary stochastic controller. Serious adversity remains: world29346004 has S_I−Q_I J −.100149, service −7.037109 and p10 −9.25; world29346016 has +.126770,+8.396484,+12.5. Those are not dispensable exceptions. Static A/B coupling already changed physical actions without rescuing the primary: S_A−S_I J −.002998 and p10 −.609375, with3051 physical departures. Keep that intervention closed. Source: runs/uav_parent_adaptation/b04_joint_sampling_a01/{config,summary,reading}.json, launch e7225b0c7c428472b7349b6cce1f64fd42b97049.
+>
+> Ordinary N5 radio competence is stronger than a C/all-on baseline. B01 C+E−C/all-on gains J .119393 and service7.781250, but world29305038 loses J .055369 and service5.710938. E−G is only +.004385J/+ .384644service on that panel. B03 then improves C+S2 over C+E/R by .016514J/1.504150service, while adding1855.89m/UAV and losing quality. T2−S2 is .000853J with interval [−.001805,.003510], and .163086service [−.085845,.412016]. This does not establish equivalence. T2 is the retained 27×31 exhaustive search for one rotating member, not exhaustive five-member joint control; it costs about9.64 times S2 scheduler CPU. Sources: runs/uav_radio_activation/b01_delayed_masks_a01 and b03_two_tick_delivery_a01 compact outputs, launch identities in their configs; B03 source2bff85091f85f6d52fc0344d0329b4fc39fa6d5c.
+>
+> N4/N8 evidence makes nontransfer concrete without answering N5. Under the different SINR0/height-penalized/H500/ten-tick host, H6_E−H6_all at N4 is −.02005J/−1.474375service, while N8 H6 gains .096344J/6.235125service; N8 SET gains .254920J/15.029375service, yet the asset+E packages remain below ordinary C+E. At native N4 world29310010 the H6 all/E/C_E J values are .599746/.467753/.642700 and service38.86/29.202/39.956. At N8 world29310007 SET all/E/C_E gives .021349/.524278/.559522 and service5.972/33.758/34.984. These show active gains and harm, not a theorem that added radio helps or damages inheritance. Source: runs/uav_fleet_transmission/b01_native_s1_a01, sourcea2f62e613a12331ad380876a6c764f8a46a893ee and its bound config.
+>
+> My direct checks were the relevant compact configurations/readings; eight raw B04 Q_I/S_I records across both tapes in worlds04/16; four N5 C/all-on versus C/E raw records spanning favorable/adverse worlds; and six native N4/N8 records described above. I checked their raw identities and endpoint/reward reductions and, for B04, matching initial users/positions. I inspected the local-policy/host/mask/coordinator laws bearing on this comparison. I did not independently replay all previous worlds or every B03 candidate. The DM reports all23 B04 source hashes and the seven chosen radio/kernel files still match their accepted sources; the existing B04 independent critic supplies the broader original-batch reconstruction. Source gaps are not replaced by an author's summary.
+>
+> 2. The strongest useful explanation is complementary capability; the strongest simpler alternative is absorption by ordinary joint control.
+>
+> Motion changes user geometry; masking changes interference, which users/peers are visible, subsequent motion and the eventual capacity assignment. Thus two favorable all-on/component means need not add. In the actual source a silent UAV has zero user/peer feature slots, own position/navigation remain, and fallback=True. S still runs its network and takes a private categorical draw; C instead follows its waypoint fallback. Empty discovery existed under all-on, so this is not proof of a novel numeric input or a bug. The untested object is the frequency, history and control effect of those inputs. For active members the helper uses transmitting visible peers and SINR-based hidden-interference estimation; it does not anticipate future masks or overrides. That is a modeling limitation, not a demonstrated corruption.
+>
+> S2 adds another change: S remains a proposal law, but proposals are delayed and one member may be corrected. Its all-on immediate-execution advantage might survive; alternatively, C+S2 might already supply what made S useful, Q+S2 might suffice, or mask-conditioned feedback/commitment might make this frozen S actively worse. Neither restricted local representation nor lack of retraining by itself decides complete benefit. My prior expectation is that any S increment over a strong managed C will be smaller than the old all-on increment; its sign under S2 is uncertain. The constructive prediction to test is positive mean-J increments versus both C+S2 and Q+S2, with no presumed lower-tail or path guarantee. No defensible numerical effect size or power claim is available.
+>
+> The literature narrows rather than licenses the claim. Foundations B01, docs/new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf, printed pp51–55, explicitly permits action-dependent observations and distinguishes environmental from communication actions. DeCOM, formal paperMARL-0007 at /home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0007.json, pp2–4, combines base actions with learned corrections under joint optimization and richer communication; it does not guarantee arbitrary frozen composition. Decision Stacks, paperneurips-2023-fe1c4991d57f37dfef62d01b3901ca54, PDF /mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/neurips-2023/fe1c4991d57f37dfef62d01b3901ca54/arxiv-2306.06253.pdf, pp2–5, trains conditional modules with aligned data and feeds actual history in closed loop; its factorization is not a reuse guarantee here. Wu, Zeng and Zhang's primary UAV study (https://arxiv.org/html/1705.02723v2, §§II–III) jointly optimizes known-user trajectories, power and association under different throughput/action assumptions. Residual RL (https://arxiv.org/html/1812.03201v1, §III-A) still optimizes the combined controller because its components affect common dynamics. Joint motion/radio control and modular correction have clear antecedents. The July R30 record and 20260718 Stage-C external review also require competent ordinary and matched-rights comparisons; they do not turn an available hierarchy into a benefit. I checked all three libraries for relevant antecedents; this is no exhaustive novelty search or novelty claim.
+>
+> 3. The smallest complete purchase I recommend is the accepted512-episode comparison.
+>
+> Use C/Q_I/S_I crossed with all-on/E/S2, plus C+T2. On32 fresh common worlds, each deterministic C cell has one episode; each Q/S cell has two private tapes. Counts are160 all-on,160 E,160 S2 and32 C_T2 episodes:10 programs,512 complete H256 episodes,131072 native transitions,0new fits,0new labels and0updates. The all-on cells establish current-panel asset competence and help distinguish transfer loss from nonrecurrence. The E cells answer direct composition while preserving immediate local motion. The S2 cells answer usefulness after ordinary joint correction. C_T2 closes a consequential stronger-reference gap. I do not recommend S/Q×T2, another lineage, a calibration sweep or a new learning arm. Thirty-two worlds is a bounded conditional panel, not a significance guarantee; more episodes do not create independent training units.
+>
+> Freeze the exact B04-bound original B02 S checkpoint (fileSHA b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a), its114→128ReLU→128ReLU→27 FP32 network, helper/navigation/features, temperature-one probability law and I decoder. Q remains .9C modal plus .1/26 alternatives. Use the same2^53 private departure/tail law, fresh draws even on cache hits, and exact make_bundle compatibility; its unused public stream is provisioned but never consumed by I and creates no online coordination. C/Q never use S logits; S never acquires C's full ranking. No map/mask/future-state feature is added to the actor. DM's worlds29347000…31, tapes0/1, roots29347091/92/93 and balanced fixed16-row-per-world execution order are suitable provided the eventual published source binds them.
+>
+> Keep the native N5/U50/H256, static users, free-space/SINR3/capacity10, noFDMA/shadowing/height-penalty host and J=.7*served/50+.3*quality. E adds the existing rounded400-byte user map and136-byte report/command round over2000bit/s. Immediate local commands hold four ticks; mask arrives after one tick, leaving .456s compute. Its +2…+5 forecast crosses a later local renewal and retains that source approximation. S2/T2 use the same136-byte/map information, two-tick delivery and1.456s compute; they retain the actual two-tick prefix, then commit received proposals with one rotating-member correction. S2 pays116 requests, at most112 distinct pairs; T2 pays837. No141-byte waiting-study telemetry or silent extra navigation state belongs here. Preserve startup, terminal truncation, ties, local-query timing and whole-round late fallback. E-versus-S2 bundles timing, commitment, correction and forecast changes; it is not a pure latency experiment. Within each matched coordinator, C/Q/S have the same rights. Giving them the map/link makes this a richer-contract package comparison, not free decentralised learning improvement.
+>
+> 4. Read complete use, not just distribution change or a favorable contrast.
+>
+> Principal endpoint is mean native J. Report service/step, within-episode service-p10, minimum and team-zero service, quality, path/UAV, transmitter-on ticks, traffic, CPU/wall/deadlines and adverse worlds. Average the two tapes inside each world, then use32 paired world differences and descriptive df31 t intervals; preserve tape-specific values and every world. The main proposal contrasts are S_S2−C_S2 and S_S2−Q_S2. The predeclared S_S2−C_T2 comparison constrains any broader ordinary-control preference. S_E−C_E/Q_E is the meaningful direct-composition secondary, not a rescue primary selected afterward. Difference-of-differences may describe interaction without identifying a learning mechanism.
+>
+> Trace actual local proposals, modal/sample departures, delivered/overridden commands, clipping aliases, masks, silent/empty decision rows and deadline fallbacks on each arm's own trajectory. Sparse physical change can explain weak decision exposure; active adverse change rejects the finite package more directly. Neither automatically diagnoses a repair. Saved SINR/connections can also support the accounting identity50−served=no-eligible-server users+eligible-but-unassigned users; this is a descriptive opportunity/service distinction, not causal attribution to geometry versus interference. No counterfactual all-on actor query or unexecuted native suffix is needed.
+>
+> Consequences are prospective. If S_S2 improves on C_S2 and Q_S2 and is favorable against C_T2 at acceptable measured tradeoffs, retain this conditional package for its native use; consider further work only for a named next use. If it beats C/Q_S2 but trails C_T2, preserve a possible compute/service frontier, not superior-service or equivalence claims. If Q supplies the same useful managed performance, prefer the ordinary program where its complete costs favor it. If S_E helps but S_S2 does not, direct composition may remain useful while the primary corrected package fails; do not relabel that a general success. If all-on competence recurs but managed S actively loses, stop this frozen deployment recipe without inferring whether feedback, delay, override or proposal quality caused the loss. If all-on competence does not recur, mask damage alone is not a supported diagnosis. Unresolved intervals remain unresolved; technical failure or exhausted execution envelopes remain incomplete evidence, not scientific negatives. No branch automatically buys another fit, seed sweep, new feature or decoder.
+>
+> 5. Zero fits still buys substantial work.
+>
+> Worker upper accounting is163840 local requests:102400 C/Q full rankings before cache (2764800 candidate paths/11059200 local model ticks) and61440 S helper/network requests. Coordinator requests total3219456:317440 E,1187840 S2 and1714176 C_T2. Their unique mask-state reductions are at most12619616, with1357536 scored geometry matrices/339384000 user-power links and24576 prefix-only motion ticks. Native stepping, refreshes, reset/constructor, encoding, sampling and I/O are additional, not hidden inside that model count.
+>
+> The proposed complete reader checks all source/raw identities, worlds/tapes, decisions, arrivals, endpoints and statistics. It adds61440 S forwards plus61440 helper recomputations; C/Q choices are reconstructed from paid source-bound arrays with0new full rankings. It checks all E scores and the fixed at-most-five actually-paid S2/T2 pairs per report, for at most1508640 additional mask-state reductions. All saved search arrays/ties are checked, while unsampled candidate physics is not independently re-evaluated. Up to164352 native endpoint/policy-used/terminal formula checks add0environment transitions. That is adequate proportional reading if its partial model-verification scope stays explicit; it is not an exhaustive duplicate of12.6million reductions.
+>
+> The DM's existing-rate projection is2281.91worker CPU-s, about38.03min, of which C_T2 adds1250.63s. Plan30–60worker and10–30reader CPU minutes; new visitation, cache behavior, setup/finalization and hardware/load remain uncertain. The proposed2CPUh worker/1CPUh reader envelopes must retain incompleteness and do not authorize a repeat. Engineering including independent engineering review is estimated4–8 elapsed person-hours; scientific reading/review/publication1–2h. Storage .5–1GB and RAM<2GB are unmeasured estimates, requiring fresh actual-node admission if selected. Use actual wall/node occupancy as well as CPU. The historical T2 worst round1.428485s leaves only27.515ms before its1.456s deadline: do not turn that into a portable runtime guarantee.
+>
+> Timely managed rounds total22528, or3063808 recurring bytes, plus400provisioned map bytes per managed episode (140800logical bytes;12800unique map bytes). Actual late-packet exposure is retained. Sixty-four exact bundles generate45056 integers/360448bytes, including4096unused public integers;384Q/S episodes consume245760 private integers. Radio/link power, switching energy and real flight cost remain unmodeled, rather than being inferred from path or bytes. The original S acquisition remains one fit,81920teacher labels,8000updates/4096000sample presentations,256training plus192evaluation episodes/114688native steps and about101.990measured worker CPU-s. Parent and radio historical accounts remain visible but overlapping accounts must not be added as independent cost.
+>
+> 6. Why this purchase rather than immediate joint training or stopping.
+>
+> A meaningful future development would train motion proposals under the actual masked observation process, fixed coordinator and delayed/overridden execution, using resulting team reward. That changes the deployed learning problem; training on all-on immediate motion again would not test adaptation to this interaction. Giving a learned joint controller map/mask/peer proposals would change information rights and require equally provisioned ordinary comparators, as well as charging acquisition, network/inference, communication and fits. Even with the local114-field representation unchanged, finite optimization, credit through a deterministic search and off-policy visitation remain unresolved. No current evidence establishes their necessity, feasibility or worthwhile return, and no complete training horizon/comparator/fit contract has been costed. Therefore I select no such training campaign now. This is a priority choice, not a requirement that exploration first produce a positive toy or fully diagnose failure; any later development needs its own constructive prediction and complete cost rather than being an automatic repair.
+>
+> Declining the entire composition purchase is also coherent: C radio controllers are already useful, and5–10hours of engineering/review could go to other questions. My preference is to buy this one bounded comparison because both component capabilities have native N5 evidence, their interfaces exist, and favorable, adverse or null complete outcomes would change whether the frozen asset should be deployed under radio control. It is distinct from the other DM's all-on reward/calibration, N8 relocation and continuity studies. Relevance of a newly published stronger ordinary baseline should be reconsidered before source freeze, without duplicating those owned studies. There is no justification for filling a fourth slot for its own sake or for extending B04's failed coupling.
+>
+> The consequential objection was omission of the retained C_T2 reference while claiming usefulness beyond the strongest applicable ordinary joint control. The accepted ten-cell revision resolves it. I recommend retain S_I's established domain, revise the composition design as above, execute only after Root's investment disposition and ordinary source/admission requirements, then retain or stop according to complete evidence. No new Pro round or second scientific approval is needed for the unchanged selection question.
+>
+> MATERIAL_DISSENT: no — the DM accepted the C_T2 comparator and complete-cost correction. I would dissent from a nine-cell/E-only superiority claim or an automatic joint-training purchase, neither of which remains the proposed investment.
+
+Adviser's complete follow-up source erratum:
+
+> Source-path correction to the complete original just sent: the radio compact-output directories are runs/uav_radio_activation/b01_delayed_masks_a01 and runs/uav_radio_activation/b03_two_tick_delivery_a01. Replace the mistaken shorthand b01_native_activation_a01 / b03_joint_search_a01 in that original when preserving it. All quoted values refer to the delayed-masks/two-tick results actually read. Fleet launch full identity is a2f62e613a12331ad380876a6c764f8a46a893ee.
+
+<a id="b05-design-disposition"></a>
+### DM disposition, primary-source checks and final design boundary
+
+I recommend the **ten-program,512-episode,131072-transition,0-new-fit**
+comparison in the [costed contract](#b05-radio-composition-costed-contract),
+including C+T2. The earlier nine-program sketch is superseded prospectively,
+without changing any prior result. I accept the Oracle's independent diagnosis
+and its material comparator correction. Its full advice preserves the strongest
+ordinary explanation and the large existing adverse worlds; there is no remaining
+scientific disagreement to resolve or distinct need for another Pro round.
+This is an investment recommendation within the design-only assignment, not a
+launch selection. Root owns its cross-question investment disposition.
+
+I independently read the load-bearing primary passages before adopting their
+interpretation. Foundations B01's printed pp51–55 (PDF pp80–84) describe
+action-dependent observation probabilities and distinguish physical/environmental
+actions from communication actions; they support tracing actual mask feedback,
+not treating radio silence as a free message. Source:
+[B01 PDF](../../../new-libs/papers/B01_Albrecht_MARL_Foundations_2024.pdf).
+DeCOM, formal library **MARL-0007**, JSON
+`/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0007.json` and PDF
+`/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0007.pdf`, pp2–3, conditions
+its continuous correction on local/base and neighboring base actions and jointly
+optimizes the modules. Those information/training assumptions are absent here;
+its representational argument does not establish usefulness of our fixed discrete
+asset. Decision Stacks, **neurips-2023-fe1c4991d57f37dfef62d01b3901ca54**, PDF
+`/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/neurips-2023/fe1c4991d57f37dfef62d01b3901ca54/arxiv-2306.06253.pdf`,
+pp2–5, uses learned conditional modules aligned to the dataset and actual history
+in closed-loop execution; that alignment is not supplied by arbitrary frozen
+motion/radio composition. These are scoped analogies, not a novelty verdict or
+a theorem transferred to our host.
+
+The primary [Wu–Zeng–Zhang UAV paper, §§II–III](https://arxiv.org/html/1705.02723v2)
+uses known static users, fixed height, TDMA/association, power and a max–min
+throughput objective with joint block-coordinate optimization. It establishes
+an antecedent for joint motion/radio optimization, but its action/service law
+does not substitute for the native C+S2/T2 comparison.
+[Johannink et al., Residual RL, §III-A](https://arxiv.org/html/1812.03201v1)
+optimizes the sum of the feedback and residual controller because their actions
+share system dynamics; it supplies no guarantee for two independently frozen
+controllers. I verified these passages directly. Original full advice above
+retains the Oracle's broader reading and its expressly limited raw reconstruction.
+
+The working explanation is now **conditional complementary capability worth one
+complete reuse test**. Task opportunity is supported by ordinary N5 radio gains,
+but those gains do not imply an S increment. The inherited representation is
+source-legal under silence; neither sufficiency nor insufficiency is established.
+Finite learnability under delayed/corrected execution remains untested. Complete
+package value is precisely what the proposed comparison would answer. I expect
+any managed S increment to be smaller than its old all-on increment, with uncertain
+sign under S2; I do not assign a numerical effect, power or guaranteed benefit.
+
+I choose this comparison over immediate joint training because a measured native
+reuse outcome changes a concrete deployment choice, the component interfaces
+already exist, and the full cost is bounded. Joint training would be a different
+learning problem and needs its own prediction, ordinary competitor and acquisition
+contract. A composition loss would stop this frozen recipe, without establishing
+that training cannot solve the broader question. Declining this5–10-hour purchase
+for a better cross-question use of effort is also coherent and would be an
+investment choice, not an empirical refutation.
+
+The **two-sided descriptive95% Student-t intervals use32 paired world means and
+df31**, with tapes averaged inside each world and all tape/world values retained.
+They are not simultaneous confidence guarantees, an equivalence test, an extra
+training sample or an outcome-dependent adoption threshold. Mean-J comparisons
+against both C+S2 and Q+S2 are primary; C+T2 bounds the stronger ordinary-control
+claim. The fixed direct-E secondary cannot replace a failed S2 primary. If
+S+S2 beats C+T2 because the latter incurs deadline fallbacks, the evidence concerns
+the actual compute-envelope package, not unconstrained planner quality or causal
+motion superiority. Path, tail service, quality, traffic and measured compute can
+still prevent a general deployment preference. No outcome purchases another fit.
+
+The exact tape provisioning additionally costs45056 uint64 integers,360448bytes,
+including4096 unused public entries; I consumes only the private addressed streams.
+This implementation-compatible provision creates no online communication. The
+worker/reader query totals, .5–1GB storage and below2GB RAM estimates,30–60/10–30
+CPU-minute ranges,2/1CPU-hour incomplete-stop envelopes and5–10-hour combined
+engineering/scientific effort remain those stated prospectively above. Node wall
+occupancy and fresh admission are additional factual requirements if selected,
+not guaranteed by these CPU estimates.
+
+### Exact source clock and fallback clarification before publication
+
+Root relayed a read-only Scout concern that retained E might include local policy
+time in its deadline. Direct examination of both current files and frozen source
+`2bff85091f85f6d52fc0344d0329b4fc39fa6d5c` resolves the concern: in
+`experiments/candidates/uav_radio_activation/b03/study.py`, lines205–209,
+the R branch calls retained `E.decide(own_xyz, actual, tick, current_mask)`
+**without** `started`/`cpu_started`; only the S2/T2 branch receives the pre-local
+`c_start`/`c_cpu`. The retained B01 scheduler's `decide` signature at lines35–37
+has no such arguments and starts its own clocks. Thus the proposed clock scope
+already matches the actual retained source; no new baseline clock is introduced.
+Root independently confirmed the branch and both current/frozen file hashes.
+
+For every C/Q/S+E round, local decisions execute immediately, their wall/CPU time
+is retained separately, and the original **.456-second elapsed-wall** deadline
+starts inside E.decide. A late E round suppresses its new mask packet and retains
+the previous mask; it does **not** undo the immediately applied local commands.
+For S2/T2, the original **1.456-second elapsed-wall** deadline starts before all
+five local policy calls and includes intervening report preparation plus search.
+A late S2/T2 round suppresses the entire new coordinator commitment and keeps
+the previous actual commands/mask, subject to the existing t0 immediate-startup
+law. Timely/late packets, partial search, actual commands and both clocks remain
+saved. CPU time is reported for cost and the batch envelope; it is never substituted
+for the online elapsed-wall deadline. This paragraph resolves the earlier generic
+"last actual commands/mask" phrase separately for E and S2/T2.
+
+Current admission checks memory and source/ownership; it does not reserve CPU
+slots or guarantee exclusivity. Root is arranging an actual-node CPU window for
+the concurrent deadline studies. That is a concrete cross-direction scheduling
+dependency before execution if the study is selected, not another scientific
+review, owner approval or already-granted runtime guarantee. The old T2 maximum
+left27.515ms of wall deadline margin, so actual future misses remain part of the
+package evidence even in a coordinated window. No timing pilot or new query was
+used to settle this source question.
+
+At this design boundary there are **0 started fits,0 new native transitions,
+0 new actor/helper/radio-model queries,0 result-code changes and no accepted
+operation, observer or unread adviser answer**. Source reads, hashes and document
+edits are complete. No disposable result/scratch target was created or deleted;
+new cleanup targets:none, new disk bytes reclaimed:0, cleanup blocker:none.
+B04's separately measured cleanup and all existing positive/adverse evidence stay
+intact. Publication of this proposal and the owned RESEARCH standing completes
+the assigned design boundary; the next concrete action belongs to Root's
+cross-question selection/resource disposition.
