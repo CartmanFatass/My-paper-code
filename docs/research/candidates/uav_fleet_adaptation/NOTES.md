@@ -402,3 +402,129 @@ F−A component and original I/E/C_N/E capabilities. Independent ResearchCritic
 positive/adverse parent study, actual full new records and current shared background in a
 separate context. Its result and disposition will be appended before final route/publication
 closure; no follow-on experiment or broader question has been selected.
+
+### Durable evidence and source-snapshot reclamation
+
+Compact original a02 summary/reading/config/native records plus the full read interpretation
+were published at `2e0cbc39087f5697789238e501a5508683ba200f`. Unique bulk remains at the configured
+wsl_4070 durable canonical output
+`/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b01_warmstart_a02/` (SSH alias
+`hmasd-wsl-node`), outside the disposable source snapshot. Fresh post-run byte/hash verification
+passed every bound file:64 training NPZ1654993937logical bytes;128 evaluation NPZ128109581bytes;
+128 decision gz36700130bytes; two endpoint checkpoints46147252bytes; two full fit summaries
+34367636bytes. All individual identities remain in the original summary/fit records. No second
+raw/checkpoint copy was created; the original parent remains in its existing retained location.
+
+Large A/F summaries are bulk, not rewritten or force-added to Git. A/summary.json:7218823bytes,
+SHA256 `1ff34917f6df591e82cb7847596637bffcb5b14106fd79c6ed28a58d60b3ae6f`; F/summary.json:
+27148813bytes, SHA256 `e04302708b843964d35e4e16c6f3746b532299f16796ac0c23d856d88ac3c2f3`.
+The compact committed summary points to these same identities and endpoint hashes. Local
+collected copies were verified identical to the durable originals and are temporary review copies.
+The retained raw supports the complete physics/feedback/action/mask read and adverse trajectories;
+endpoints preserve the actual evaluated fitted instances. Remote a01 failed-operation records
+also remain intact.
+
+Exact snapshot preview initially refused both a01/a02 because `/proc/660/cwd` was not readable
+(`Permission denied`; offered `--sudo-process-scan`). The documented option used existing
+passwordless sudo for the read-only process scan only; re-preview confirmed both snapshots
+eligible with durable Git reachability, terminal native identities and no live process/source
+consumer. Under the shared Git writer lock, the supported collector then removed exactly:
+
+- `/home/wu/projects/HMASD/.git/hmasd-launch-sources/f25246d8c0cf47089df3ab90c14cdd6b`
+  (807849984 allocated bytes) and its same-ID `.git/worktrees/` registration(3543040bytes).
+- `/home/wu/projects/HMASD/.git/hmasd-launch-sources/2338e6fa78a341dbac70b199189dce9d`
+  (808603648 allocated bytes) and its same-ID `.git/worktrees/` registration(3543040bytes).
+
+All four exact targets were checked absent afterward:1623539712 allocated bytes reclaimed
+on wsl_4070. Claims, manifests, exit witnesses, durable output and canonical authoring checkout
+were preserved. No archive, whole-tree backup, source relocation or Git-object reclamation is
+claimed. The initial process-inspection refusal is resolved; it is not a remaining tool blocker.
+Local temporary-copy/cache cleanup follows completion of their active review consumer.
+
+### Independent scientific diagnosis and resolved disposition
+
+Read the complete separate-context ResearchCritic response from
+`/root/dm_fleet_adaptation/result_diagnosis`. The Reviewer reconstructed the frozen contract
+and actual records before reading the allocation advice and this DM interpretation; no DM/Root
+conversation was inherited. It independently checked all aggregate and signed world differences,
+all102 frozen bootstrap intervals, actual fit/sample/update totals, matched resets, source/config
+and frozen-evaluation records, source/endpoint hashes and a01 failure. It directly reconstructed
+metrics/motion/clipping/masks/world/reward bindings for20 positive/adverse evaluation trajectories,
+plus first-group raw collection for both fits, and recomputed consequential prior fleet contrasts.
+It did not replay actors, GRUs, optimizer arithmetic or every E/C search; the completed full
+reader and engineering review supply their declared, narrower coverage. No discrepancy emerged.
+
+Recommendation, adopted: **stop the unchanged warm-start recipe; retain the conditional F−A
+native-J improvement and existing I/E and C_N/E capabilities. MATERIAL_DISSENT:no.** The J
+advantage is legitimate, and its component arithmetic does not identify a causal mediator.
+F masks were actually active throughout collection (mean4.234727 versus A's8); all five
+optimizer streams and substantial parameter changes rule out nonactivation or an unchanged
+actor as the explanation. The training curves establish neither convergence nor a prediction
+that more of this recipe will repair the endpoint. A/E's deterioration is a consequential
+simpler comparison: favorable F−A does not establish useful development from I/E. Optimizer
+reset, multiobjective optimization, sampling-versus-deterministic deployment and representation
+remain unseparated possibilities, not automatic repair tasks. The native lower-height benefit
+is retained even though complete service performance did not improve.
+
+The Reviewer retained the strongest objection to stopping: genuine positive complete-world
+witnesses and F's conditional J signal remain, and C_N/E is neither an upper bound nor uniformly
+superior. Those exceptions give no prospective selection rule. Prior N8 management opportunity,
+its service-tail capability and N4 harms survive this result. The changed judgment is that
+useful management opportunity did not automatically become useful additional learning under
+this inherited finite recipe. The broader constructive learning question stays open; no
+unlearnability, pure-feedback mechanism or universal ordinary-controller superiority is claimed.
+
+Choice among continuations: more fixed-policy worlds only refine the current conditional
+estimates. Another matched A/F pair with I/E and C_N/E on a fresh panel would buy another576000
+native steps at roughly this study's2.4-hour measured wall cost, with source fit variation still
+requiring careful scope. Repeating F>A while both remain below I/C would leave today's investment
+choice unchanged; a reversal would weaken recurrence; genuine complete gains over own parent
+and competent comparison would change the constructive conclusion. Replication is not owed
+merely because training n=1, and there is no supported repair prediction worth that purchase
+now. I accept the Reviewer's justified stop rather than extend the completed batch.
+
+Cumulative context was checked against original records: the prior fleet screen used80000
+native steps and602.244 run_study wall seconds; the retained H6 source reports5423.537 fit-wall
+seconds (plus its separate evaluation/support). These are antecedent costs, not new fits in
+this batch; broader historical selection and support remain unaggregated. C_N/E's faster CPU
+but slower measured wall than neural endpoints also stays visible, so neither quality nor
+compute dominance is silently broadened.
+
+No additional Pro round has distinct unresolved expertise/disagreement value for this decision.
+No successor run is selected. A concrete future re-entry could be an actual online-latency
+requirement making C_N/E's measured computation consequential, or a separately motivated
+learning/control-contract change with an explicit full native prediction and cost. It would
+retain I/E and give the ordinary comparator the same changed information/resources; today's
+result supplies neither that external requirement nor an identified repair. Direction is reserve,
+with no live producer, unread result/advice or automatic continuation. Root receives this
+completed assigned boundary and owns any later cross-question selection; idle is not a blocker.
+
+<a id="b01-final-cleanup"></a>
+### Final cleanup and retained reproducibility
+
+After the independent review consumer finished, verified exact remote originals permitted
+removal of local redundant A/F bulk-summary copies. Exact local deletions and allocated bytes:
+
+- `temp/directions/uav_fleet_adaptation/`:23126016bytes, including the verified duplicate23MB
+  parent checkpoint and obsolete observer request/drain scratch.
+- `runs/uav_fleet_adaptation/b01_warmstart_a02/A/`:7225344bytes; `F/`:27156480bytes.
+  Each contained only the corresponding verified temporary summary copy.
+- `experiments/candidates/uav_fleet_adaptation/__pycache__/`:81920bytes and matching
+  `tests/experiments/candidates/uav_fleet_adaptation/__pycache__/`:57344bytes.
+
+All five local targets are absent and allocated usage fell by57647104bytes. Combined with
+1623539712bytes from the two remote snapshots and their registrations, **1681186816 allocated
+bytes were reclaimed**. This is measured target allocation, not a claim about Git object size or
+whole-host free space during concurrent work. No cleanup blocker remains. Shared controls and
+other directions' files were preserved.
+
+Useful direction implementation,17 checks and the exact required input metadata stay published
+for the retained experiment and saved-data reader; no unused additional entrypoint was found.
+Checked imports/tests/entrypoints/notebook/index consumers before deletion. Existing review/
+selection references are evidence consumers, not live producers. Complete unique bulk and the
+two evaluated endpoint assets remain in the single durable canonical output with verified hashes;
+compact positive/adverse/failed records and original source identities remain in Git. Future
+exact-parent tests can restage the already retained source checkpoint; deleting its local
+redundant copy does not change any recorded17/17 validation or claim present reproducibility
+without that input. No training, native evaluation, new policy selection or extra output copy
+was added during interpretation or cleanup.
