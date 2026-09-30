@@ -784,3 +784,107 @@ richer-information and runtime costs instead of obtaining hidden future-C state.
 That information value justifies recommending the bounded comparison; the actual
 selection remains Root's current allocation-review/Pro task. Broader horizons,
 larger candidate sets and learning are unselected alternatives, not a queue.
+
+<a id="b02-selected-implementation"></a>
+### B02 selected; full advice adopted and implementation scope
+
+Root selected the fixed comparison at `e82a361eac44f88a81b62fb84e0ed7dfe47e83e5`;
+the [complete independent and 6 Pro answers and decision](../../archive/2026-09-30/RESEARCH-temporal-service-continuity.md#decision)
+have now been read in full. I adopt their no-dissent recommendation and precise
+shared-trajectory construction: the private state/history at t+4 comes from the
+first candidate, the next S prefix reproduces its last two transitions, and Q8
+counts every delivered tick once. Synthetic observations contain native eligible
+top20 users, not only capacity-assigned users. Current post-C waypoint state is
+serialized before any hypothetical C call. All work shares one deadline; a late
+A holds the old whole-team command/mask rather than falling back to its new S.
+The already computed c0/c1 branches will record predicted current sacrifice and
+continuation benefit, without new native counterfactuals. M's O/W candidates and
+A's S candidate do not imply complete-trajectory dominance. Pro's limited compact
+result retrieval remains disclosed; adviser agreement supplies no new empirical
+evidence. There is no dependency on the other directions' progress.
+
+**L0, one bounded behavior change:** implement the selected lawful A/S/M/R
+decision API in `experiments/candidates/uav_user_waiting/b02/`, with tests under
+the matching test directory; preserve all B01 files and existing native physics.
+The kernel owns the25-byte codec, native-format synthetic observations from
+decoded model geometry/map, decoded-state C clone, private current/continuation
+search and common1.436s whole-plan fallback. Reuse the existing settled execution
+history and radio kernels. Keep an independently reconstructible record of every
+request, completed candidate/key/contact/cost, two finalists, continuation state,
+synthetic packet/C result, timing phase and actual returned command. Empty/partial
+records must describe timeout progress without pretending that an uncomputed
+candidate completed. Integer age/burden/cost arithmetic uses int64.
+
+The bounded Implementer owns only `b02/{protocol,predictor,scheduler}.py` and
+`tests/.../b02/test_scheduler.py`; it has no notebook, shared-source or Git-index
+ownership and launches no result or native fixture. The DM owns `__init__`,
+collector/metrics/reader/entrypoint and their tests, accepts the helper's diff and
+checks, then commissions independent engineering review of the complete path.
+All authors share main; preserve other writers. The stable integration API is
+`Scheduler(arm,map_packet,clock,cpu_clock,horizon=...)`, `executed(...)`, and
+`decide(own_position_rows,actual,proposals,tick,current_mask,nav_indices,
+started=...,cpu_started=...)`. Return actual command/mask/timeliness, packets,
+timings/counters and a self-contained numeric/string record tree; the collector
+stores its leaves losslessly in the episode NPZ without pickle. The scheduler's
+`execution` supports the unchanged terminal history drain.
+
+Checks cover source-equivalent R/M ranking, reset-zero squared costs, codec/state
+boundaries, eligible synthetic observations, independent cloned C state,
+two-finalist support, integer-grid report/prefix continuity, terminal248/252
+semantics and every deadline/fallback phase. Use mocked or algebraic fixtures for
+these. The DM will run the declared four-arm16-tick native fixture once(64steps),
+collect/save/read it completely; additional checks use those saved data or
+non-native construction unless a concrete correctness defect requires an honestly
+recorded reproduction. Result exposure remains exactly the selected256episodes,
+65,536steps,0fits; source publication, independent engineering acceptance and
+actual-node admission precede its one detached launch.
+
+**Implementation and declared correctness check (2026-09-30 UTC).** I read and
+accepted the bounded four-file kernel/test implementation. It preserves the
+frozen R ranking and M's deterministic W-key selection between O/W plans under
+the new common codec. M is not a randomized mixture. All new result files are
+under `b02/`; B01 source remains unchanged. The independent reader reconstructs
+actual C/movement/radio/observations, age/gaps, causal settled history, all completed
+candidate keys/costs, both request orders and each continuation. It checks all
+selected plans/two A finalists physically and all evaluated candidates at reports
+0/60/124/248. Saved partial prefix/candidate work is also reconstructible. The
+reader's radio/observation references share frozen native kernels; this is not a
+second independently implemented physical law.
+
+The kernel's25 non-native checks passed in3.93s, then three strengthened A
+selection/truncation checks passed in1.20s. My complete30-check suite passed
+in3.18s, including the pickle-free record storage and its corruption rejection.
+The final test strengthening changed only the synthetic oracle. Both direct CLI
+help paths load correctly. The source review exposed C's nonfinite absent-user
+diagnostic scalar; explicit lossless NaN/Inf tags were added before the fixture,
+and their roundtrip is tested. No native call was used to discover that issue.
+
+Exactly the declared **four16-tick episodes/64 native steps/0fits** were then
+collected once on configured local scientific Python, seed92731, and saved in
+`temp/directions/uav_user_waiting/correctness_b02/`. All four passed the complete
+reader without repair or recollection. Counts are one constructor, four resets,
+64 calls/transitions, four complete episodes, zero optimizer updates. All64
+native and all64 model transitions were checked; candidate physical pairs were
+346/118/117/115 for A/S/M/R. No deadline was missed; A's largest fixture round
+was.241496s against1.436s. A exercised three two-finalist continuation rounds and
+30 virtual C calls. The four raw files total513708bytes. These are correctness
+observations, not the selected world-panel evidence or a performance estimate.
+Their saved arrays remain available for the independent engineering Reviewer;
+reviewer checks may reuse them without new native exposure.
+
+The selected result tag is `b02_continuity_a01`, still64 fresh worlds
+29322000..29322063 and256H256 episodes/65,536steps/0fits. Independent engineering
+review of the full implementation/reader is in progress. Its acceptance and
+published exact inputs precede the one detached result launch.
+
+**Engineering acceptance.** The independent Reviewer found no material issue in
+the stable B02 source after checking the common wire/deadline contract, lawful
+post-C clones, native observation eligibility, shared t+4 trajectory, Q8 timing,
+terminal clipping, frozen M/R ranking, whole-team fallback, partial evidence,
+collector/reader and source/admission bindings. Its30 non-native checks passed
+in3.25s. It re-read the four saved fixture episodes with **zero additional native
+steps**, verified all62 fixture source identities, independently recomputed the
+primary gap endpoint and demonstrated rejection of corrupt Q8, S keys and
+virtual navigation state. I accept this review and the implementation. Shared
+radio kernels and the declared candidate-physics subset remain explicit limits;
+no full-panel result or destination admission is asserted by these checks.
