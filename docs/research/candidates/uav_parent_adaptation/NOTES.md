@@ -2880,3 +2880,28 @@ and random untrained actor are not this study's evidence. The original S file on
 the configured node remains424487 bytes with the selected `b9e25fca…` SHA256.
 No scientific launch or checkpoint replay has yet occurred. Complete execution
 still requires exact-input publication and fresh actual-node admission.
+
+<a id="b04-accepted-execution"></a>
+### B04 accepted execution, 2026-09-30
+
+Exact inputs were committed and published at
+`e7225b0c7c428472b7349b6cce1f64fd42b97049`. The selected operation was accepted
+once at17:31:54.067838UTC on `wsl_4070`; its source, command, native identities,
+status handle and canonical output are bound by the
+[launch manifest](../../../../runs/uav_parent_adaptation/b04_joint_sampling_a01/launch-manifest.json).
+[Fresh actual-node admission](../../../../runs/uav_parent_adaptation/b04_joint_sampling_a01/admission-preflight.json)
+passed with14,689,841,152 effective available bytes versus the4GiB floor. The
+prelaunch disk check found851,842,764,800 free bytes. Only this direction's live
+canonical index row was synchronized from published main; other entries and
+edits were preserved. Fetch succeeded with the previously recorded unrelated
+Git auto-GC bad-tree warning; it did not prevent source reachability or admission.
+
+The single operation includes the complete collector and separately metered
+saved-data reader. This is acceptance, not a read result. The POSIX deterministic
+observer is armed against the same status handle, generation11, job
+`launch-uav-parent-b04-joint-sampling`, with the owned request at
+`temp/directions/uav_parent_adaptation/b04-wait-request.json`. Its first adopted
+facts at17:32:28UTC show accepted/running native identities and consistent records,
+with0 observation errors. The native child remains active through terminal
+collection and reading; an App queue delivery is not assumed to wake an unloaded
+child. No checkpoint rearm will repeat the worker or paid reader.
