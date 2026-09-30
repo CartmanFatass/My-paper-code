@@ -1,0 +1,11 @@
+{
+  "claim_key": "6c7c97285c2067caab054f0c86aa0a55030561a5921f2066b51cfb22f2b31b9c",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6c7c97285c2067caab054f0c86aa0a55030561a5921f2066b51cfb22f2b31b9c.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b04_temporal_complementarity_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6c7c97285c2067caab054f0c86aa0a55030561a5921f2066b51cfb22f2b31b9c.json",
+  "pid": 1206741,
+  "runner_pid": 1206742,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-30T20:43:15.606822Z"
+}

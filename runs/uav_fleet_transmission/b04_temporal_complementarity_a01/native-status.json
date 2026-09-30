@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b04_temporal_complementarity_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b04_temporal_complementarity_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b04_temporal_complementarity_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6c7c97285c2067caab054f0c86aa0a55030561a5921f2066b51cfb22f2b31b9c.json",
+  "direction": "uav_fleet_transmission",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790807225.1532986,
+      "path": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b04_temporal_complementarity_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1206742,
+        "session_id": 1206741,
+        "start_ticks": 23959057
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1206741,
+        "session_id": 1206741,
+        "start_ticks": 23959053
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b04_temporal_complementarity_a01/launch-manifest.json",
+  "node": "local_linux",
+  "observed_at": "2026-09-30T22:27:07.739815Z",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/6c7c97285c2067caab054f0c86aa0a55030561a5921f2066b51cfb22f2b31b9c.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b04_temporal_complementarity_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "239360b03f5d7acf788bd9ae5d4dccbde4f9237e",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/08885e0b953e4b26a89380d0fa6ccc38"
+}

@@ -2359,3 +2359,404 @@ in the session's existing default observer directory; task-local request is
 will drain/rearm this same operation. The initial observer refusal did not alter or repeat
 the scientific launch. Native-child queue delivery is not presumed to work; this DM keeps
 its turn active through complete collection and reading. No new result conclusion yet.
+
+B04 observation checkpoint21:09UTC: generation9 CHECKPOINT `9b2962f1d11c25b5ccb0d4fe` / wake `ba6a9a48-2857-4996-bf74-754e0efaa361` was drained and consumed by supported rearm to10 against the same accepted operation. Native App queue returned explicit multi-agent-v2 rejection(-32600); the active DM read it through the deterministic observer-state wait. Latest native observation remains running/consistent, with23/48completed episodes,11,500recorded native steps,38,241,116recorded worker requests and1549.862672548completed-cell CPU seconds. stderr is empty; full reader remains pending. No score interpretation, source change, replay or added exposure.
+
+B04 observation checkpoint21:34UTC: generation10 CHECKPOINT `03d91bd4a38c5d1fd628865a` / wake `1f712c1c-8dca-4c8c-8e03-dc0986286511` was drained and consumed by supported same-operation rearm to11. Queue again explicitly rejects native-child delivery(-32600); active deterministic waiting remains effective. Native identities are running/consistent,47/48episodes and23,500steps recorded,74,859,533worker requests and2970.952721717completed-cell CPU seconds. stderr remains empty; worker is finishing its fixed final cell and full reader is pending. No quality interpretation or change to exposure/inputs.
+
+B04 observation checkpoint21:59UTC: generation11 CHECKPOINT `f02e8c2ad4ac6d3d2b4e583c` / wake `19f69cdd-991c-4d4c-812f-ddc8913bfad2` drained and consumed by same-operation rearm to12. Queue delivery again has the known explicit native-child rejection; active deterministic observation continues. Worker is complete at48episodes/24,000steps,78,066,287worker requests,3094.712765347CPU /3095.437050657wall seconds; peakRSS351,524KiB at worker boundary. Full reader has verified23/48episodes, native identities remain running/consistent and stderr is empty. This is technical collection, not a completed scientific reading. The original dedicated ResearchCritic now reconstructs the immutable saved worker evidence in parallel with remaining reader work, without new physics/control/model calls; current findings remain provisional until complete verification. No result or added investment is selected by this checkpoint.
+
+B04 observation checkpoint 22:25 UTC: generation12 CHECKPOINT `b0e1297798d2ccf3479bf41c` / wake `fd0dd0bd-60cd-4343-ac23-b0b7e7faff58` was drained and consumed by same-operation rearm to13. Native identities remain running/consistent; full reader has verified47/48episodes and stderr remains empty. Native-child queue delivery again returned the known explicit rejection(-32600), handled by active deterministic waiting. Independent critic has completed all saved-data/source consumption and waits only for terminal reader identity and costs before final disposition. Root also assigned the existing Oracle a source-only successor allocation; no follow-on result execution or new queries are selected.
+
+<a id="b04-complete-reading"></a>
+### B04 complete reading: useful anticipation under matched opportunities, with material costs — 2026-09-30
+
+**Disposition:** retain the conditional T/G2/A2 capabilities and close the fixed B04 study.
+The primary anticipation comparison is positive and its predicted physical first-choice
+reversals occur. It does not establish learning advantage, optimal relocation timing, overall
+cost dominance or a default deployment choice. The complete original independent result
+review and my response are preserved below; there is no material dissent on this disposition.
+
+The single accepted source is `239360b03f5d7acf788bd9ae5d4dccbde4f9237e`. Its worker and
+full reader completed 48 H500 episodes / 24,000 native steps / zero fits or updates on the
+16 prospective worlds `29497000–29497015`. The native process exited successfully at
+**22:27:05.153298 UTC**; the observed terminal facts at22:27:07.739815 show both runner and
+supervisor absent, exit0 and consistent records. Generation13 READY
+`5663f8e4f56ead1a366332e6` / wake `0c75df7d-5602-40f5-92e9-08b9f6fb64fb` was drained,
+consumed by same-handle rearm to14, and observation explicitly stopped. Final state has no
+wake or pending event. No launch, native episode or model query was repeated to recover the
+unsupported native-child App queue delivery.
+
+The [original summary](../../../../runs/uav_fleet_transmission/b04_temporal_complementarity_a01/summary.json)
+SHA is `8bdf64a6bafd75864c10df6a2c5992fb668c393ce271b02adccd472fe4226aa2`.
+The [compact complete reading](../../../../runs/uav_fleet_transmission/b04_temporal_complementarity_a01/reading-summary.json)
+contains all 36 paired contrasts, all16world readings, all80 selected forecast comparisons,
+cost ledgers and the saved native window witnesses. The unchanged full reading is
+3,989,184bytes with SHA `c9eaac15e69d1195e73710e4b071b5c196402bc6811b3a0bac333c771fd39363`;
+its larger nested-plan/alias detail is retained with the canonical raw rather than added to
+Git. [Native terminal facts](../../../../runs/uav_fleet_transmission/b04_temporal_complementarity_a01/native-status.json)
+and [process exit](../../../../runs/uav_fleet_transmission/b04_temporal_complementarity_a01/process-exit.json)
+bind the completed operation. Configuration SHA remains
+`3651cf713225bcd148297b7434b70270d35c592ecdfb9ca2240d1eb667a29c54`.
+
+T makes one t40 relocation selection. G2 makes that same first selection and a fresh actual
+t120 selection. A2 evaluates its t40 alternatives through a modeled t120 selector, then also
+replans at actual t120. Its stay-first comparator includes the later selection. Consequently
+A2−G2 tests anticipation under the same two opportunities; G2−T prices the additional
+opportunity. All three share the complete native0–39prefix, and T/G2 share0–119 exactly.
+
+| Complete native mean | T | G2 | A2 |
+| --- | ---: | ---: | ---: |
+| J | .658213347084 | .660257386639 | .661963463474 |
+| Served users/tick |42.545500|42.725750|42.969625|
+| Quality |.208918844430|.207330017946|.201678294898|
+| Height penalty |.000099306245|.000102118745|.000114774995|
+| Path, m/UAV |473.338235|558.918200|601.864789|
+| Service fifth percentile |38.5625|38.5625|38.5625|
+| Minimum service |32.8125|32.8125|32.8125|
+| Zero-service steps |0|0|0|
+
+| Paired contrast | Mean J [95% world-bootstrap interval] | Mean service [interval] | Mean path, m/UAV [interval] |
+| --- | --- | --- | --- |
+| **A2−G2** | **+.001706076836 [.000277842988,.003935420760]** | **+.243875 [.022625,.543378125]** |+42.946589 [−10.635655,130.320720]|
+| G2−T |+.002044039555 [.000106455994,.004580958189]|+.180250 [−.000375,.408500]|+85.579965 [39.226349,145.208953]|
+| A2−T |+.003750116391 [.001346704560,.006675754055]|+.424125 [.156750,.746262500]|+128.526554 [46.194194,232.397600]|
+
+These are the fixed10,000-replicate percentile intervals, seed29497991, over16fresh worlds
+for deterministic programs. They are descriptive world uncertainty, not learning replication.
+A2−G2 has6positive /10zero /0negative J differences, and5positive /10zero /1negative service
+differences. G2−T has12positive /4zero J differences; A2−T has14positive /2zero. Every
+individual world's service fifth percentile and minimum are unchanged. These aggregate
+service tails do not measure individual-user continuity.
+
+The six changed A2 first choices are actual physical commitments, not merely different site
+labels; the other ten complete A2/G2 native arrays are byte-for-byte equal. In all six changed
+worlds, the selected A2 first option has a lower complete C-only modeled return than G2's
+first option, but a higher return with the subsequent selector. Actual cumulative J before
+t120 is also lower in all six and the later gain exceeds it. The earlier explanation that the
+second opportunity adds approximately the same value regardless of the first choice is
+weakened. The supported explanation is that anticipating later control can change the useful
+present commitment. Full modeled/native correspondence supports this reading without
+turning it into a general policy-improvement theorem.
+
+| World | G2 first → second | A2 first → second | ΔJ | Δservice | Δpath m/UAV |
+| --- | --- | --- | ---: | ---: | ---: |
+| 29497000 | m7_s83@60 → m0_s9@140 | m7_s83@60 → m0_s9@140 | +0.000000000 | +0.000 | +0.000000 |
+| 29497001 | m0_s60@60 → stay | m0_s60@60 → stay | +0.000000000 | +0.000 | +0.000000 |
+| 29497002 | m6_s54@70 → stay | m6_s54@70 → stay | +0.000000000 | +0.000 | +0.000000 |
+| 29497003 | m1_s29@50 → m3_s15@150 | m1_s29@50 → m3_s15@150 | +0.000000000 | +0.000 | +0.000000 |
+| 29497004 | m1_s22@60 → m6_s43@130 | m2_s21@60 → m1_s54@130 | +0.000884368 | +0.002 | -25.073593 |
+| 29497005 | m4_s55@70 → m0_s77@150 | m4_s55@70 → m0_s77@150 | +0.000000000 | +0.000 | +0.000000 |
+| 29497006 | m2_s18@50 → m1_s38@140 | m2_s18@50 → m1_s38@140 | +0.000000000 | +0.000 | +0.000000 |
+| 29497007 | stay → m2_s7@150 | m1_s2@60 → m0_s74@140 | +0.000491523 | +0.726 | +613.328109 |
+| 29497008 | m5_s85@70 → m6_s85@130 | m5_s85@70 → m6_s85@130 | +0.000000000 | +0.000 | +0.000000 |
+| 29497009 | m6_s23@50 → m1_s23@130 | m6_s23@50 → m1_s23@130 | +0.000000000 | +0.000 | +0.000000 |
+| 29497010 | m7_s66@60 → m6_s71@130 | m4_s66@70 → m6_s37@140 | +0.004637319 | +0.356 | -87.432689 |
+| 29497011 | m4_s56@60 → stay | m6_s58@60 → m7_s68@150 | +0.003007085 | +0.736 | -10.716991 |
+| 29497012 | m5_s19@50 → m2_s9@140 | m7_s7@70 → m2_s37@150 | +0.016091706 | +2.086 | +135.110390 |
+| 29497013 | m5_s60@60 → m1_s51@150 | m5_s60@60 → m1_s51@150 | +0.000000000 | +0.000 | +0.000000 |
+| 29497014 | m6_s40@70 → stay | m1_s26@70 → m1_s26@130 | +0.002185229 | -0.004 | +61.930195 |
+| 29497015 | m4_s47@70 → m1_s19@140 | m4_s47@70 → m1_s19@140 | +0.000000000 | +0.000 | +0.000000 |
+
+Here `mXsY@Z` identifies the member, stationary site and actual arrival tick, with zero-based
+member/site indices. No actual selected second commitment has zero physical path. Initiation
+counts are T15; G2 first15 / second12; A2 first16 / second14. More initiations alone do not
+explain the primary contrast because the selected first paths and downstream control differ.
+
+The useful and adverse witnesses sharpen the result:
+
+- **29497012:** A2 selects first member7/site7, whose original stationary gain over stay is
+  **−.0428320218072 cumulative J**, and whose complete C-only gain over stay is
+  **−.000909885235**. With the subsequent selector it exceeds G2's first-program value by
+  **8.0458531365 cumulative modeled J**, and exceeds the full stay-first/later-selector
+  branch by **8.0641530644**. This is not merely avoiding a poor first choice by waiting.
+  Native J before120 falls .0095832102, while service is unchanged; afterward service gains
+  1,043user-ticks, producing +2.086users/tick overall. The selected first member activates at70,
+  remutes at80, briefly reactivates at150–159 and remutes again. It is active only20ticks after
+  the first arrival. The second relocation is member2/site37 with arrival150. The complete
+  +.016091706J gain supplies about59% of the aggregate J difference, alongside quality
+  −.043682647 and135.110390m/UAV extra travel.
+- **29497014:** A2 selects member1/site26 first despite stationary gain−.5912585415 and
+  complete C-only gain−.00151501448 versus stay. That member activates at70, remutes at80,
+  and is selected again at120 with arrival130; the repeated site identifier still denotes
+  a nonzero second movement. Native J rises .002185229, but two user-ticks are lost
+  (−.004users/tick), and travel rises61.930195m/UAV. The model predicts this objective tradeoff.
+- **29497010:** the alternative first commitment loses128user-ticks before120 and another34
+  at120–159, then gains340 at160–499. The complete result is +.004637319J /+.356users/tick
+  with87.432689m/UAV less travel. An unchanged full-episode minimum or percentile does not
+  erase that initial sacrifice.
+- **29497007:** A2 starts a first relocation where G2 declines, then uses a different second
+  relocation. Its +.000491523J /+.726users/tick comes with quality−.031591591 and
+  **613.328109m/UAV** more travel. The independent reviewer found most of this extra travel
+  in ordinary resumption before120. Native J contains no travel-distance charge.
+- **29497013:** G2 and A2 coincide; both improve J over T while losing3user-ticks
+  (−.006users/tick) and adding about288.07m/UAV. Additional opportunity is not service-safe.
+
+Thus B03's particular “positive options reordered, then continuously active” pattern does
+not extend to B04. Nonpositive stationary and C-only champions can become useful parts of a
+later control program, and early selected members may be remuted. This supports sequential
+control complementarity; it does not isolate remuting as the cause of benefit. No additional
+native counterfactual was acquired to assign such a mechanism.
+
+A2−G2 mean quality is−.005651723048 [−.013102479851,.000502444714]; height penalty rises
+.00001265625. Service is accompanied by .264125 fewer eligible-unserved users and .020250
+more ineligible users on average. Those are accounting differences along changed trajectories,
+not causal shares. A2−T quality is−.007240549531 [−.014561713631,−.000942840467]. The retained
+capability therefore includes service/quality/travel tradeoffs, not a claim of overall utility.
+
+The accepted full reader reconstructed all34source bindings, 1,701bulk artifacts,
+24,048native snapshots, all48episodes, all700modeled branches and all157stationary banks.
+The DM independently checked source/artifact bindings, complete native reductions, prefixes,
+all80 selected forecast comparisons and the displayed witnesses from saved arrays. The
+ResearchCritic independently reconstructed all748decision traces, cost ledgers and36contrasts;
+its full scope and distinction from scorer replay are in the original answer below.
+
+All80 executed forecast comparisons reproduce commands, masks and per-tick service exactly.
+Maximum remaining-total-J error is **3.265939596985845e−6** and maximum physical-coordinate
+error **5.775788815753913e−5m**. The80comparisons consist of16T complete t40suffixes,
+16G2first prefixes through119,16G2complete actual120suffixes,16A2complete outer t40forecasts,
+and16A2complete actual120suffixes. They are not80new episodes. A2's predicted second choice
+matches its fresh actual second choice in all16worlds. G2's original t40C-only forecast is
+only tested before its additional120decision; it is not mislabeled as a complete forecast of
+G2. The critic also checked the modeled A2 outer branch corresponding to G2's first option
+against G2's actual complete continuation. Unexecuted modeled alternatives remain forecasts.
+
+| Measured worker quantity,16worlds/arm | T | G2 | A2 |
+| --- | ---: | ---: | ---: |
+| State/mask requests |10,889,698|17,271,568|49,905,021|
+| Model transitions |35,420|60,500|188,560|
+| Candidate-transit ticks |119,290|218,790|733,620|
+| Stationary rows |6,100|11,100|37,100|
+| Modeled branches |77|143|480|
+| Stationary banks |16|32|109|
+| Episode CPU seconds |436.621932491|683.353064851|1,973.802400477|
+
+The worker total is **78,066,287requests /284,480model transitions /1,071,700candidate-transit
+ticks /54,300rows**, with63,414,360ordinary candidate-position predictions. All prospective
+ceilings hold. The full reader repeats the corresponding search ledger, adding another
+78,066,287requests (156,132,574across the two search ledgers), and reconstructs native physics.
+No cycle reuse was implemented. A2 costs **2.888407914×G2** and **4.520621283×T** in measured
+episode CPU, including evidence recording. These are the implemented packages, not isolated
+planning latency, minimum algorithmic complexity or a physical deployment benchmark.
+
+Worker CPU/wall is3094.712765347 /3095.437050657seconds; full-reader CPU/wall is
+3128.531899457 /3131.787420640seconds. Total measured study CPU/wall is
+**6223.404735426 /6227.384584262seconds** (about1.729CPU-hours), including final aggregation.
+Peak process RSS is394,132KiB. Process-lifetime self CPU including imports is6226.029166seconds;
+child CPU is separately.001736seconds. Preparation, engineering/review, saved-data inspection,
+publication and cleanup are additional and not comprehensively metered. The26constructed
+native correctness transitions remain separately charged; no result-world pilot was run.
+Across B01–B04 the direction has **304result episodes /152,000native steps /0new scientific
+fits** and approximately **12,466.810297worker/reader CPU seconds**. Earlier imported training
+assets and failed-attempt/support costs remain in the earlier records; unmetered CPU is not zero.
+
+Required evidence is now uniquely retained at
+`/home/fires/hmasd-artifacts/uav_fleet_transmission/b04_temporal_complementarity_a01/` on
+local_linux. Its `raw/` contains1,701files /225,118,040logical bytes; the sorted compact JSON
+list of existing `{path,bytes,sha256}` bindings hashes to
+`46192dd0f3c8f2479367e5d1ec19a09d29db6ef0e6ed82032d0a85c25319cf49`.
+All hashes were rechecked after relocation. The original full `reading.json` is also there;
+local `run/raw` and `run/reading.json` are symlinks. Small config/summary/status/read-summary
+copies allow the canonical run root to remain self-contained. Any later complete reader
+must use that canonical root, because its containment guard intentionally rejects raw paths
+escaping a supplied local symlink root. No repeat reader is needed now. The critic and Root's
+source-only Oracle released raw/snapshot consumption; accepted snapshot/scratch cleanup will
+follow publication and is recorded separately below.
+
+<a id="b04-original-result-critic"></a>
+#### Complete original independent scientific review
+
+Original final from `/root/dm_fleet_transmission/result_diagnosis`, read in full:
+
+> I recommend **retaining B04’s conditional anticipation capability and closing the fixed study**. The predicted first-choice changes and complete native benefit occurred. Additional planning depth, unchanged replication or a learning experiment is not justified automatically.
+>
+> I reconstructed B04 in this dedicated reviewer context, retaining my earlier B01–B03 analysis, before reading the original next-design recommendation. The accepted source is `239360b03f5d7acf788bd9ae5d4dccbde4f9237e`. The [final reading](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b04_temporal_complementarity_a01/reading.json) and [summary](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b04_temporal_complementarity_a01/summary.json) are complete; the process exited successfully and the terminal records agree.
+>
+> T retains the single t40 decision. G2 adds a fresh t120 decision. A2 anticipates that same later decision when choosing at t40, then replans at actual t120. Thus **A2−G2 is the relevant anticipation comparison**.
+>
+> | Complete H500 contrast | Mean J difference, 95% world-bootstrap interval | Mean service difference, users/tick | Mean path difference, m/UAV |
+> |---|---:|---:|---:|
+> | **A2−G2** | **+0.001706 [0.000278, 0.003935]** | **+0.243875 [0.022625, 0.543378]** | **+42.947** |
+> | G2−T | +0.002044 [0.000106, 0.004581] | +0.180250 [−0.000375, 0.408500] | +85.580 |
+> | A2−T | +0.003750 [0.001347, 0.006676] | +0.424125 [0.156750, 0.746263] | +128.527 |
+>
+> These are descriptive intervals over sixteen fresh worlds for fixed deterministic programs. There were zero fits or updates.
+>
+> The consequential evidence is stronger than a positive aggregate score. A2 changes the **first physical commitment** in worlds `29497004`, `007`, `010`, `011`, `012` and `014`. All six improve native J; five improve service and world `014` slightly reduces it. The other ten produce exactly identical complete A2/G2 trajectories.
+>
+> In every changed world, A2’s chosen first option has **lower modeled one-opportunity return** than T’s choice, but higher modeled two-opportunity return. Actual A2 also loses J before t120 in all six, then gains more afterward. This weakens the explanation that the second opportunity merely supplies an approximately choice-independent increment. It supports the narrower explanation that anticipating future control changes a useful present commitment.
+>
+> The positive and adverse cases both matter:
+>
+> - **World `010`:** A2 gains 0.004637 J and 0.356 users/tick while reducing travel by **87.43 m/UAV**.
+> - **World `012`:** the largest gain is 0.016092 J and 2.086 users/tick, accompanied by lower quality and **135.11 m/UAV** more travel. It supplies approximately 59% of the aggregate J gain.
+> - **World `007`:** A2 gains only 0.000492 J despite adding **613.33 m/UAV**. Service rises by 0.726, while quality falls by 0.031592. Most additional travel occurs during ordinary resumption before t120, rather than in the committed transit itself.
+> - **World `014`:** A2 gains 0.002185 J but loses two user-ticks, or 0.004 users/tick, and adds **61.93 m/UAV**. This is an accurately predicted objective tradeoff.
+> - G2 also has an adverse service case: world `013` loses 0.006 users/tick while gaining J and adding 288.07 m/UAV over T.
+>
+> A2−G2’s mean quality change is −0.005652. Its path interval spans −10.64 to +130.32 m/UAV. Every world’s service fifth percentile and minimum remain unchanged across the three arms; no zero-service steps occur. Travel is not charged by native J, so these observations do not establish overall cost dominance or a practical adoption threshold.
+>
+> The activation interpretation also needs revision from B03. In A2 worlds `012` and `014`, the first selected member activates at t70 and is remuted at t80. World `014` selects that same member again at t120. The useful object is the complete evolving control program; “two persistently active additions” would misdescribe it.
+>
+> The strongest sufficient explanation remains **ordinary finite planning under the known host law**. The matched G2 control separates anticipation from simply granting another opportunity. The result establishes neither a learning advantage nor optimality over all relocation programs: the search still retains one stationary champion per muted member. Unexecuted branches remain model forecasts.
+>
+> Numerical and execution evidence supports that explanation. All eighty selected forecast comparisons reproduce native commands, masks and per-tick service exactly; maximum remaining-total-J error is approximately \(3.27\times10^{-6}\). Predicted and actual second physical choices agree for both G2 and A2 in all sixteen worlds. I additionally checked A2’s modeled outer branch corresponding to G2’s first choice against G2’s actual complete continuation. This avoids incorrectly using G2’s original one-opportunity forecast as its two-opportunity value.
+>
+> My independent checks covered:
+>
+> - All 34 source bindings against the accepted snapshot/current files; all sixteen fixture arrays, seed addresses and native initial conditions.
+> - All 1,701 bulk-artifact bindings, plus configuration and final reading.
+> - All 48 native metric reductions, objective arithmetic, public-state encoding, motion, mask clocks, assignment/capacity identities and required shared prefixes.
+> - All 700 saved model-array summaries, 157 candidate-bank digests and champion rankings, eighty actual selection rankings and seventy-seven inner rankings.
+> - The decoded inner report/history binding and preservation of the unrounded outer physical state.
+> - All 748 saved decision traces and their cost counters, and all thirty-six final paired contrasts, including per-world values and bootstrap intervals.
+>
+> I made no new controller, radio, model-score or native-transition queries. I did not independently replay every scorer calculation; the completed accepted reader performed that reconstruction.
+>
+> The full measured study cost is **6,223.40 CPU seconds and 6,227.38 wall seconds**, approximately **1.73 CPU-hours**. This includes 3,094.71 worker CPU seconds and 3,128.53 reader CPU seconds. Peak process RSS was about 385 MiB; bulk evidence is 225.1 MB.
+>
+> T, G2 and A2 used respectively **436.62, 683.35 and 1,973.80 worker CPU seconds** across sixteen worlds. A2 therefore costs **2.89 times G2** in this implementation, including evidence recording. The worker made **78,066,287 state/mask requests**, with 284,480 complete-model transitions and 1,071,700 candidate-transit ticks; the reader repeated the corresponding search work and reconstructed native physics. No cycle reuse was implemented. Engineering, review and correctness-support costs remain additional and incompletely metered. Across B01–B04, the record now contains 304 result episodes, 152,000 native steps and approximately 12,466.81 measured worker–reader CPU seconds, preserving earlier failed-attempt costs.
+>
+> The six reversals strengthen the scientific premise of Root’s resolved temporal allocation. They do not retrospectively compare its investment value with the unrun approximation alternative. My earlier preference for amortization also cannot treat uncompressed rollout cost as irreducible: competent exact reuse remains an applicable ordinary alternative, although its B04 runtime has not been measured.
+>
+> **No new result run is recommended now.** Retain T, G2 and A2 with their demonstrated tradeoffs. Further depth needs a distinct prediction or use decision. If economical execution later becomes the selected question, a worthwhile complete observation would compare a prespecified cheaper selector against G2 and A2 on fresh complete missions, accounting for menu construction, teacher data, fitting and runtime, with competent ordinary reuse as a cost reference. Preserved native benefit at lower total cost would support that continuation; forecast improvement without useful executed choices would not; native harm would reject the candidate while preserving B04. Features, fitting budget and compressed-runtime costs remain unselected, so that continuation is not launch-ready.
+>
+> **MATERIAL_DISSENT: no — for retaining the bounded anticipation claim and closing B04. No additional experiment is currently selected.**
+
+<a id="b04-independent-disposition"></a>
+#### DM response and changed explanation
+
+I accept this scoped independent recommendation. B04 establishes a useful within-host
+anticipation capability: six actual first commitments sacrifice one-opportunity and early
+native value to obtain a better complete outcome under the same two selection opportunities.
+It improves on both G2 and T on this panel, while retaining all service, quality, travel and
+computation costs. This is empirical understanding and a constructive ordinary-control asset;
+it is not a new learning method or evidence that neural learning is necessary. Search remains
+restricted to one original stationary champion per currently muted member and fixed40/120
+selection times. Neither all-site/sequence optimality nor optimal selection timing is claimed.
+
+The original review's statement about second-choice correspondence is read with its stated
+comparison scopes: A2 has a t40 prediction of the actual120choice; G2 checks its choice and
+execution from the actual120report, not a nonexistent anticipatory prediction at40. Native
+correspondence and accurate adverse predictions support complete-program ranking, not a
+claim that every modeled alternative has an independent native label.
+
+The negative first-champion and early-remuting cases revise the local B03 explanation. They
+show why first-destination positivity or permanent extra activation is too narrow a capability
+model. They do not isolate the causal role of remuting. The finite known-model planner remains
+a sufficient account of the observed gains, with no identified learning or representation
+bottleneck. Native J also omits travel distance, and its quality/service weighting permits
+small service sacrifices; the adverse cases are part of the result rather than prediction
+repairs. A practical adoption decision needs a substantive use/cost contract, not merely the
+positive aggregate J.
+
+Close the fixed B04 allocation. No unchanged replication, deeper search, additional decision,
+fit or teacher acquisition is selected. The parent temporal question is broader than this
+fixed recipe and remains open. Root now owns a concrete source-only next-allocation review
+with the existing Oracle; that is not a new result producer or a request for routine launch
+approval. Parent B06 already owns its R/T_E/K2_E/L amortization comparison and is not silently
+extended to the temporal target. The preserved B03 critic's earlier approximation preference
+and Root's resolved allocation remain informative alternatives, not a retrospectively won
+investment contest.
+
+<a id="post-b04-source-only-design"></a>
+### Source-only next-allocation facts: timing and ordinary exact reuse — 2026-09-30
+
+Root assigned the existing `/root/deep_report_review` a source-only successor allocation
+using the complete B04 evidence and original result critic. No new result study, controller
+query, native/model transition, benchmark, fit or acquisition is selected. The following
+answers the Oracle's concrete source/arithmetic questions; it neither changes B04 nor silently
+extends parent B06. The Oracle has read the complete original B04 review above and released
+its raw/snapshot consumer requirement. Its final next-allocation advice remains with Root.
+
+The candidate ordinary timing rule is at most two selections: first at40; second at the
+first actual arrival plus one public-report cadence, `t2=40+duration+10`, or50after first
+decline. Thus initiated first options lead to60/70/80/90, and the stay-first branch to50.
+A matched greedy G_E and anticipatory A_E must both use this rule; each modeled first candidate
+carries its own second clock. A_E's stay-first comparator also uses the later opportunity.
+Compared with fixed120 this changes the first member's chance to be remuted, the muted/eligible
+candidate set and the absolute ordinary-control phase. It is not an equivalent menu with a
+renamed timestamp. The original120clock ensured one full40phase cycle after the latest first
+arrival, not optimal timing or a settling guarantee.
+
+Source mapping, read through CodeGraph and the specific unshown gaps:
+
+- B04 `option.enumerate_champions` and `surrogate.simulate_segment` deliberately reject starts
+  outside40/120. Menu pricing otherwise uses`500−start_t`; plan validation and commitment
+  indexing are already start-relative and ordinary control retains its absolute phase.
+- B04 `TemporalProgram` fixes120in the G2 delegation boundary, dispatch, nested prefix stop,
+  report encoding, inner/outer starts, branch/bank labels and80offset annotation. Reader
+  correspondence also binds that clock. A new rule requires a new owned contract and full
+  reading, not a launch-time parameter change to this accepted source.
+- Arrival+10is report-aligned and gives the arrival mask an executed interval. Actual fresh
+  reports/history, replacement of the expired first plan even on decline, and decoded inner
+  versus unrounded outer physical state remain required. There is no identified physical
+  interface obstruction, but no timing benefit has been measured.
+
+For an **unselected fresh16world /four-arm G2,A2,G_E,A_E comparison**, there would be64H500
+episodes /32,000native steps /0fits. The integer-only uncompressed ceiling follows the same
+accounting as B04. Let`B=89,601`, native ordinary ceiling`C500=120,750`,
+`S(t)=242.5(500−t)`, and full eight-branch continuation-bank ceiling
+`F(t)=8S(t)−19,306`. An initiated suffix is bounded by`S(t)−2,758`, attained in this request
+bound at the shortest10tick commitment. For an early first commitment of durationL, the outer
+prefix through`t2−1` costs at most`L+2,082`; its stay-first prefix costs2,425.
+The early nested stay context costs`2425+B+F(50)+S(50)=1,054,845`; each initiated context
+costs`(L+2082)+B+F(50+L)+S(50+L)`, whose maximum is1,032,687 atL10.
+
+| Unselected arm | Request ceiling/world |16world ceiling|Model-transition ceiling/world|
+| --- | ---: | ---: | ---: |
+| G2 |1,891,196|30,259,136|6,720|
+| A2 |8,351,156|133,618,496|31,040|
+| G_E |2,026,996|32,431,936|7,280|
+| A_E |9,437,556|151,000,896|35,520|
+
+For clarity, G_E is`C500+2(B+128)+F(40)+F(50)`. A_E is
+`C500+2(B+128)+1054845+7*1032687+F(50)`; all actual second replanning is charged.
+Each first outer trajectory still totals460ticks; its prefix and suffix are not counted as
+independent500tick episodes. A_E inner work is bounded by`8*(450+7*440)`ticks, since an
+initiated first option cannot lead to an earlier second selection than60.
+
+The four-arm total is **347,310,464worker requests /1,288,960model transitions /384banks /
+268,800stationary rows /10,752,000candidate-transit ticks**, plus32,000native transitions
+and native physics. Scaling B04's measured worker and full-reader CPU/request ratios to this
+uncompressed ceiling yields about **3.8245worker +3.8663reader =7.691combined CPU-hours**
+including scaled aggregation overhead. This is a planning estimate for a conservative request
+ceiling, not expected runtime, node timing or an optimized-runtime measurement. Approximate
+implementation/checking is3–5hours plus1–2hours of independent engineering review, **4–7hours**;
+scientific reading, publication and support are additional and not formally metered. A simple
+B04 model-tick storage scaling gives1.02GB; allow roughly **1–1.5GBcanonical raw**,2–3GiB
+output/scratch headroom plus about1.6GiB accepted-source snapshot, and streamed peak process
+memory around0.4–0.8GiB. These are source-derived estimates, not a fresh node admission.
+
+The Oracle separately asked about reusing B04's verified old controls. If those same16world
+arrays, host law, interfaces and immutable G2/A2 programs are retained, **32new G_E/A_E
+H500episodes /16,000new native steps /0fits**, paired with32reused G2/A2episodes, would be an
+exposed exploratory development panel. New ceilings become **183,432,832requests /
+684,800model transitions /192banks /134,400rows /5,376,000candidate-transit ticks**.
+The corresponding uncompressed estimate is **2.0199worker +2.0420reader ≈4.062combined
+CPU-hours**, assuming old controls need hash/metric readback and no repeated old scorer
+reconstruction. New raw is roughly0.55–0.8GB. New-program implementation and complete reading
+burdens remain essentially unchanged. Old-world/result-selection exposure and sunk costs must
+remain explicit; this is neither fresh confirmation nor a clean newly timed four-arm benchmark.
+No such panel is selected.
+
+The B06 `cycle.py` implementation was also read for the specific reuse question. Its exact
+byte key contains physical positions, C's estimated positions, FP32 issued commands, public
+user bits, entering mask and`t%40`. Within a known-law ordinary segment, post-arrival transition
+reuse remains conceptually compatible. The current callable is nevertheless tied to40:
+`_copy_history`/`_copy_plan`, initial physical decoding, the loop origin and report normalization
+are fixed; it also returns no terminal controller/mask. A bounded segment adapter would need
+separate start/end/report-horizon fields, optional unrounded outer physical positions, copied
+terminal history and a fresh cache at every decision barrier. It must advance absolute clocks,
+regenerate lawful reports, preserve each floating addition and report actual versus logical
+counts. Early first prefixes allow only ten post-arrival ticks, so no period40 saving is
+promised there. Never reuse a transition across a later selection or its arrival event.
+
+This is a compatible ordinary optimization with a **new core executable adapter and reader
+obligation**, not a drop-in use of the already verified B06 callable. Estimate another2–4hours
+of implementation/checks and1–2hours of independent engineering review (**3–6additional
+hours**). B06's accepted source and result remain untouched. Until such a new implementation is
+verified, retain the uncompressed ceilings; B04/early-rule speedup is unmeasured. An unchanged
+uncompressed full reader still pays its complete reconstruction bill even if the worker later
+reuses transitions. These facts support Root's comparison of timing, economy or no new
+purchase; they do not turn an engineering possibility into a scientific investment decision.
