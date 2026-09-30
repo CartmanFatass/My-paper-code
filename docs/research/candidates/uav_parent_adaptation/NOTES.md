@@ -6463,3 +6463,32 @@ observer event; all prior own operations remain terminal. Root received the
 complete concrete blocker/disposition. Exact source publication precedes the
 single result request. Full worker/reader, original independent scientific
 diagnosis, result publication and measured cleanup remain ahead.
+
+### B07 accepted operation and observation
+
+Exact scientific inputs were committed and published as
+`31285a226c2aec4bbfe32d37c059b5834d26e4c5` before the single request. The
+local_linux operation was accepted at2026-09-30T23:57:14.559222Z, after fresh
+actual-node admission observed7980621824effective available bytes against the
+4294967296-byte floor. The configured runtime is Python3.10.20/NumPy1.26.3/
+torch2.7.0+cpu, one numerical thread. Source, command and native identity are in
+[launch-manifest.json](../../../../runs/uav_parent_adaptation/b07_shortlist_amortization_a01/launch-manifest.json)
+and [admission-preflight.json](../../../../runs/uav_parent_adaptation/b07_shortlist_amortization_a01/admission-preflight.json).
+The immutable source snapshot is `c110bfbadd8241c6920763a323e1ea25`; the stable
+operation is
+`/home/fires/hmasd-wsl/.git/hmasd-admission/7c925de6feb70e0cda13ab402ef2da0a86edaf97d5f98268c316939735b8334e.json`.
+Supervisor1304438 and runner1304439 were observed with the accepted native
+start identities, with no record mismatch or observation error. The local
+snapshot includes the bound fit/evidence; validation completed and the worker
+entered its fixed panel. No remote B07 operation or duplicate local request
+exists.
+
+The deterministic observer was rearmed from the fully drained/stopped old state
+and registered `launch-b07-shortlist-amortization-a01` through
+`temp/directions/uav_parent_adaptation/b07-wait-request.json`. Generation24
+first observed this same accepted/running handle at23:58:00UTC. Registration
+is therefore followed by actual handle adoption. The native DM keeps this turn
+active through complete worker/reader collection; any checkpoint rearming uses
+the same operation and does not restart the worker. Acceptance and initial
+progress establish technical execution only. No B07 scientific result is read
+at this point; all64episodes and complete independent replay remain required.

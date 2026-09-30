@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-30T23:57:14.559222Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c110bfbadd8241c6920763a323e1ea25/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c110bfbadd8241c6920763a323e1ea25/experiments/candidates/uav_parent_adaptation/b07_shortlist_amortization/run.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01",
+    "--launch-sha",
+    "31285a226c2aec4bbfe32d37c059b5834d26e4c5",
+    "--seed",
+    "29367991",
+    "--fit-sha256",
+    "a2b5d1a8c127c50494e8b8aa76ff84ba3ca61e4b5db6281e4713e524ea2fd0c1"
+  ],
+  "claim_key": "7c925de6feb70e0cda13ab402ef2da0a86edaf97d5f98268c316939735b8334e",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/7c925de6feb70e0cda13ab402ef2da0a86edaf97d5f98268c316939735b8334e.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c110bfbadd8241c6920763a323e1ea25/experiments/candidates/uav_parent_adaptation/b07_shortlist_amortization/run.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01",
+    "--launch-sha",
+    "31285a226c2aec4bbfe32d37c059b5834d26e4c5",
+    "--seed",
+    "29367991",
+    "--fit-sha256",
+    "a2b5d1a8c127c50494e8b8aa76ff84ba3ca61e4b5db6281e4713e524ea2fd0c1"
+  ],
+  "command_sha256": "03721bcb4c6f66187ad1b406f9cf2e4b3794233ebc49d088f8d282e2add4a780",
+  "control_observation": {
+    "observed_at": "2026-09-30T23:57:14.341552Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "31285a226c2aec4bbfe32d37c059b5834d26e4c5"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-30T23:57:14.369598Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c110bfbadd8241c6920763a323e1ea25",
+  "direction": "uav_parent_adaptation",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_parent_adaptation/b07_shortlist_amortization/run.py",
+    "--launch-sha",
+    "31285a226c2aec4bbfe32d37c059b5834d26e4c5",
+    "--seed",
+    "29367991",
+    "--fit-sha256",
+    "a2b5d1a8c127c50494e8b8aa76ff84ba3ca61e4b5db6281e4713e524ea2fd0c1"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/7c925de6feb70e0cda13ab402ef2da0a86edaf97d5f98268c316939735b8334e.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1304438,
+      "session_id": 1304438,
+      "start_ticks": 25122950
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1304438,
+    "process_group_id": 1304438
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1304439,
+      "session_id": 1304438,
+      "start_ticks": 25122955
+    },
+    "pid": 1304439,
+    "process_group_id": 1304438,
+    "supervisor_pid": 1304438
+  },
+  "schema_version": 1,
+  "sha": "31285a226c2aec4bbfe32d37c059b5834d26e4c5",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/c110bfbadd8241c6920763a323e1ea25",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b07_shortlist_amortization_a01/stdout.log"
+}
