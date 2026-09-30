@@ -1152,3 +1152,88 @@ seed numbers. Review will address this condition and a predeclared sensitivity
 without that world. No new result attempt is selected by this paragraph. The
 current N worker/resource coordination still blocks heavy/timed recovery; short
 remote evidence reconciliation was independent.
+
+
+<a id="b02-recovery-decision"></a>
+### B02 recovery decision — unchanged-code complete reattempt
+
+Independent ResearchCritic `/root/dm_periodic_efficiency/critic_recovery` read the
+original source/evidence in a separate context, without inherited conversation or
+B02 endpoint/contrast exposure. The assignment disclosed the DM's preferred
+missing-only proposal. The critic checked the38source identities against both
+original8ab72e5e2 and current main, config/summary hashes, and canonical world33
+G/O/S2 raw hashes, common initial geometry and256/256/12completed transitions.
+It inspected seeded reset and fresh per-episode controllers/scheduler/history.
+It did not repeat the one-report reconstruction or run the full raw verifier.
+
+The critic's substantive recommendation is **one separately recorded full attempt
+of the same64world G/O/S2 panel using unchanged runner, policies, reader, node and
+configured interpreter; that new192episode attempt alone is primary**. This buys
+a missing complete observation; it is not runtime diagnosis or a repair. It
+materially dissented from the initial missing-only preference. World29309033's
+S2 would occur in a new process/load period while G/O are retained from the old
+one; primary G-O stays together, so this does not invalidate all prior evidence,
+but S2 remains consequential to the complete-use comparison. Hardware timing
+being intrinsic does not remove the imbalance; an exclusion sensitivity can
+expose influence, not restore matching. Frozen read.py requires one successful
+operation,192resets/49152steps and exact original interleaving: simply relabeling
+a merged result COMPLETE would be false.
+
+The critic initially favored prospectively replacing all3arms of interrupted
+world33, then finishing the remaining worlds. With an existing reviewed composite
+reader that would be defensible:93new episodes/23808steps,49676cumulative steps,
+versus missing-only91/23296/49164. Here neither continuation has such a path.
+Both require new provenance/reader/wrapper code, tests and engineering review to
+save about5minutes of collection. After that feasibility clarification, the
+critic prefers unchanged reviewed code and full-panel reattempt on total cost
+and risk, rather than introducing recovery machinery solely to save native work.
+It found no scientific reason to abandon B02: independently recomputed B01 O-S2
+contrasts show more periodic coverage but less native service and more travel in
+all64worlds. Neither that evidence nor the adviser guarantees a G gain.
+
+The critic retains these predictions and limits: favorable complete-service/path
+and coverage/gap readings can support conditional G use; similar F with longer
+continuous gaps remains a tradeoff; later-window losses favor the continued
+refresh explanation; false completion/deadline loss limits this information and
+execution package. Nonactivation or unresolved effects need not identify a repair.
+The unknown opcode is an unquantified runtime-reliability threat; hashes validate
+retained bytes, not every computation. Nonexpiring-clock input reconstruction
+weakens deterministic input failure only. Actual node/library identities are
+limited to the recorded observations. No additional Pro consultation is useful
+for this narrow decision. Shared native kernels/candidate subsets remain reader
+limits; full verification is still required before any scientific reading.
+
+**DM disposition:** adopt the critic's material correction. There is no unresolved
+direction disagreement; Root receives the evidence and resolved choice through
+native communication. No partial B02 outcome was used to select this route.
+The earlier91episode candidate is superseded, not silently implemented. Keep the
+original terminal claim, status,101complete/one partial record, all102raws and
+cost. Do not choose between duplicate outcomes or treat them as new independent
+worlds. The full new attempt alone is prospectively primary, before exposure.
+
+Prospective operation: output `b02_periodic_efficiency_a02`, SAME seeds29309000..
+29309063, SAME six cyclic/reversed orders, S2/O/G, N5/U50/H256,400byte map,2tick
+delivery,4tick commitment,1.456s computation deadline plus0.544s wire time,
+27commands/31nonempty masks, exact lawful G gate,0fits/updates. All38scientific
+source identities still match original8ab72e5e2; no executable change or new
+engineering implementation is needed. Reuse the accepted41test engineering
+checks and independent final-code review, since their actual code bytes are
+unchanged. A new publication SHA records this specific lead decision under
+constitution3; it does not erase or reuse the old acceptance. Fresh native
+admission must release the separate operation after old-process reconciliation.
+
+Cost:192new complete episodes/49152new native steps/0fits, with the same declared
+upper search work as B02. Historical worker estimate~590CPU seconds, not a cap or
+resource claim. Cumulative actual endpoints would be293completed episodes plus
+one12step failed episode:75020native steps,294explicit resets,2constructors,
+0fits; primary inference remains64paired reset worlds. Reader/support cost is
+additional. Keep original314.167874CPU/309.214783wall seconds and all measured
+support cost. Unknown unmeasured support stays unknown.
+
+Execution stays on original wsl_4070/LAPTOP-U9TDKC8A and configured interpreter.
+Root corrected the resource mapping: N is on separate local_linux/Jacob, so this
+remote operation may proceed independently while avoiding heavy local CPU work.
+Verify available interpreter/NumPy identities, without claiming a complete bound
+of originally resident libraries. Use unchanged full read.py on the new completed
+panel before interpretation. Any new technical failure is retained and the route
+reconsidered; this entry selects no subsequent retry or runtime modification.
