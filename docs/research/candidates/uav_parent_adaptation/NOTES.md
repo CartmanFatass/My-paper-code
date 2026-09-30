@@ -911,3 +911,29 @@ and the direction remains exploring under `Codex DM (native child)`; no other pa
 or ownership changes. The configured `wsl_4070` CPU/FP32/one-thread path is retained.
 Actual fresh resource admission still occurs at launch, alongside other accepted
 work; no scientific serialization or change in the declared experiment is introduced.
+
+### B02 accepted operation and observation
+
+2026-09-30T12:36:09.447030+00:00. Exact source inputs were committed/published as
+`f5f165ec772a1fed7c9d7689bd897fe16391a18e` before accepted execution;
+Git records source commit time `2026-09-30T05:31:58-07:00`. The preceding engineering heading's
+12:34 minute label was approximate, not a later verification or exposure event.
+The actual admission time is `2026-09-30T12:33:49.847028Z`. Native identity, immutable source
+snapshot and output paths are in the [launch manifest](../../../../runs/uav_parent_adaptation/b02_full_continuation_a01/launch-manifest.json);
+the [fresh node preflight](../../../../runs/uav_parent_adaptation/b02_full_continuation_a01/admission-preflight.json)
+passed with 11,598,868,480 effective available bytes against 4,294,967,296.
+Only this accepted operation exists; no replacement or scientific retry. The
+canonical control synchronization changed only this direction's published row and
+kept active/lead unchanged. Its prior unrelated Git auto-GC bad-tree warning did
+not prevent source retrieval or accepted native admission; it remains outside
+this direction's edits.
+
+Observation initially refused `arm` because B01's drained terminal observer state
+was explicitly stopped. The controller required rearming that existing state;
+`drain` showed no pending event/wake and the old completed B01 identity. Rearm
+generation3→4 and adding the new operation produced generation5; first observed
+facts are accepted/running/consistent, both native identities present, errors0.
+No worker was restarted. The session remains active with deterministic observation
+on this same operation through terminal collection and full scientific reading.
+The prior native-child queue delivery limitation remains; registration is not
+relied on to wake an ended child.
