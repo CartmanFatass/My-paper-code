@@ -318,3 +318,55 @@ fixture steps and24 synthetic optimizer steps, plus its recorded stress/build/
 reader costs. This direction's earlier640 native support steps remain retained;
 no additional DM test or native transition was run during the hold. This binding
 adds no empirical evidence about the service-age question.
+
+### B01 first native operation accepted
+
+Fresh admission accepted at2026-09-30T05:58:34.569859Z on wsl_4070 from published
+source `d4430e6198f95d599b79f23575445a18e6566c26`. The
+[manifest](../../../../runs/uav_service_age/b01_age_selector_a01/launch-manifest.json)
+binds claim `430ac2a4edbb7da92f4bd8a82e5657763a93976fc30a6d781a2199c8d28041f6`,
+original tag and one fixed operation. Native runner1076587/start109244981 and
+supervisor1076586/start109244978 share boot
+`bb732fcb-1a33-4659-a786-331110ae41d3`; accepted input snapshot is
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/3b7b624907224d5e987284297dc9fa95`.
+The named launch transport `service-age-b01-launch-a01` ended exit0 after native
+acceptance and is not the scientific worker. Canonical node HEAD, maintained
+launcher, peer files and sparse selection were preserved.
+
+[Actual-node admission](../../../../runs/uav_service_age/b01_age_selector_a01/admission-preflight.json)
+passed with14,688,006,144 physical/effective available bytes against4,294,967,296.
+The collected config binds all46 source files; each byte count/SHA256 matches
+the published inputs. Same-session deterministic observer generation1 at
+`/home/fires/.local/state/hmasd-wait/01a0f0a3-e515-7701-b805-6565d0cc4c07`
+has adopted accepted/running/consistent native facts for this same claim.
+The native DM remains active through collection and reading. No completed
+scientific result or deadline reliability conclusion follows from acceptance.
+
+### B01 collection complete; full saved-data verification running
+
+The original worker ended exit0 at2026-09-30T07:14:44UTC, with matching absent
+runner/supervisor and a valid consistent native exit witness. All960 episodes,
+245760 transitions and960 explicit resets completed under one constructor and
+one fit;512 training episodes produced2048 actor and2048 critic optimizer calls.
+The448 evaluation episodes/114688 steps used frozen policies and0 updates.
+Worker-reported wall is4437.545376s, measured post-study-import CPU4564.267789s,
+total lifetime user+system CPU4565.373851s and peak RSS793032KiB. No recurrence
+occurred in this operation; that does not prove the runtime repair or reliability.
+
+Observer checkpoints1 and2 were consumed and rearmed to generations2 and3 on
+the original claim. Generation3 captured READY; its event was consumed in4.
+Native-child App queue delivery returned−32600, so this active turn used
+deterministic waits and same-session drain/rearm, never a worker restart. Compact
+summary/native records are collected; unique raw artifacts remain canonical on
+wsl_4070. Collection completion is not yet a validated scientific conclusion.
+
+The unchanged admitted-source `b01/read.py` is running from the same input
+snapshot under `service-age-b01-read-a01`, one numerical thread with external
+`/usr/bin/time -v` support accounting. It creates0 native episodes/steps/fits;
+replaying512 stored updates validates this existing fit. The exact named
+supervisor/PID/start-tick/boot/start-time/wrapper identity is recorded in
+[reader-supervisor.json](../../../../runs/uav_service_age/b01_age_selector_a01/reader-supervisor.json).
+The direction-local read-only observer adapter received a focused independent
+engineering review: no material finding,11 mocked identity/classification cases
+passed,0 remote/native calls. It cannot validate scientific results. Generation5
+has adopted that exact running reader; full reading and interpretation remain.
