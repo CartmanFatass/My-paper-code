@@ -1,0 +1,4740 @@
+{
+  "status": "complete",
+  "launch_sha": "13da38312ab6ab4af9dc94c160955b01b479a37d",
+  "counts": {
+    "started_fits": 0,
+    "optimizer_calls": 0,
+    "training_labels": 0,
+    "constructors_started": 1,
+    "constructors_complete": 1,
+    "explicit_resets": 96,
+    "started_episodes": 96,
+    "complete_episodes": 96,
+    "native_steps": 24576,
+    "native_steps_attempted": 24576,
+    "actor_ingests": 122880,
+    "rankings": 30720
+  },
+  "episodes": [
+    {
+      "arm": "C",
+      "seed": 29401000,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401000.npz",
+        "bytes": 63985,
+        "sha256": "b7a84143c002025d1698b6f98a0d0bab9c72c282387b90a61121d922f5f0e8cb"
+      },
+      "actor_cpu_seconds": 0.1139982629999996,
+      "actor_wall_seconds": 0.10821130545809865,
+      "telemetry": {
+        "wall_seconds": 0.26871086610481143,
+        "process_cpu_seconds": 0.283162308,
+        "peak_rss_kib": 72768,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 152
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 94608,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 95677,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1069,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401000,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401000.npz",
+        "bytes": 64792,
+        "sha256": "637f750b19178fee52204b523d47f2596ce4d5d36b4ced7162d2fa53101afb6e"
+      },
+      "actor_cpu_seconds": 0.18522333299999916,
+      "actor_wall_seconds": 0.1758240421768278,
+      "telemetry": {
+        "wall_seconds": 0.33889340702444315,
+        "process_cpu_seconds": 0.35711851399999994,
+        "peak_rss_kib": 72768,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 288
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 94608,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 95689,
+        "matched_rows": 511,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 12,
+        "moving_peer_ticks": 8,
+        "moving_rows": 8,
+        "objective_reductions": 34560,
+        "pair_gates": 511,
+        "setup_link_evaluations": 1069,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401000,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401000.npz",
+        "bytes": 82386,
+        "sha256": "788473382dc2197e2d0b835e71dce6539099acc5a897aa752024dd3044922264"
+      },
+      "actor_cpu_seconds": 0.17345618800000107,
+      "actor_wall_seconds": 0.16459492221474648,
+      "telemetry": {
+        "wall_seconds": 0.320055436110124,
+        "process_cpu_seconds": 0.337268083,
+        "peak_rss_kib": 72768,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 472
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 94176,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 5,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 95294,
+        "matched_rows": 519,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 48,
+        "moving_peer_ticks": 20,
+        "moving_rows": 20,
+        "objective_reductions": 34560,
+        "pair_gates": 519,
+        "setup_link_evaluations": 1070,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401001,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401001.npz",
+        "bytes": 76307,
+        "sha256": "d32d1f1cc17974bd9a21c0425b03a2e8c4daedb2ec20c1b5682969e80efdd57b"
+      },
+      "actor_cpu_seconds": 0.10864866099999904,
+      "actor_wall_seconds": 0.10316677112132311,
+      "telemetry": {
+        "wall_seconds": 0.2620600420050323,
+        "process_cpu_seconds": 0.2761487140000001,
+        "peak_rss_kib": 72928,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 640
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 154224,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 4,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 155656,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1432,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401001,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401001.npz",
+        "bytes": 76546,
+        "sha256": "5325f6b7f93ce210fb0426fa61b3836c32ec67ae829c35639e3929d193398dd9"
+      },
+      "actor_cpu_seconds": 0.1722478670000014,
+      "actor_wall_seconds": 0.16352145140990615,
+      "telemetry": {
+        "wall_seconds": 0.3219852189067751,
+        "process_cpu_seconds": 0.33930031000000005,
+        "peak_rss_kib": 72928,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 808
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 154224,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 4,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 155660,
+        "matched_rows": 9,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 4,
+        "moving_peer_ticks": 4,
+        "moving_rows": 8,
+        "objective_reductions": 34560,
+        "pair_gates": 9,
+        "setup_link_evaluations": 1432,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401001,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401001.npz",
+        "bytes": 76544,
+        "sha256": "ee072eeaebe63be254cfa1a8c3af389ca2ad2ce03c5eda508ba1c58fe3c111b9"
+      },
+      "actor_cpu_seconds": 0.16155575099999786,
+      "actor_wall_seconds": 0.15334133547730744,
+      "telemetry": {
+        "wall_seconds": 0.301839912077412,
+        "process_cpu_seconds": 0.3180657320000002,
+        "peak_rss_kib": 72928,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 984
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 154224,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 4,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 155660,
+        "matched_rows": 9,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 4,
+        "moving_peer_ticks": 4,
+        "moving_rows": 8,
+        "objective_reductions": 34560,
+        "pair_gates": 9,
+        "setup_link_evaluations": 1432,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401002,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401002.npz",
+        "bytes": 144060,
+        "sha256": "93f570fa23ba71134505219d2b4ea1097c8803a9074d0f63e4203fefbd25b51f"
+      },
+      "actor_cpu_seconds": 0.17574643600000206,
+      "actor_wall_seconds": 0.16679743281565607,
+      "telemetry": {
+        "wall_seconds": 0.330091280862689,
+        "process_cpu_seconds": 0.34784251899999985,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 1296
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 147528,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 7,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 149090,
+        "matched_rows": 72,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 96,
+        "moving_peer_ticks": 40,
+        "moving_rows": 53,
+        "objective_reductions": 34560,
+        "pair_gates": 72,
+        "setup_link_evaluations": 1466,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401002,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401002.npz",
+        "bytes": 73922,
+        "sha256": "eeea706f6bb7e0fba87193ab6d9fb8dc3b74703e49d2c807d9952c1ed2fbcbab"
+      },
+      "actor_cpu_seconds": 0.10220565600000109,
+      "actor_wall_seconds": 0.09702882450073957,
+      "telemetry": {
+        "wall_seconds": 0.2462928609456867,
+        "process_cpu_seconds": 0.2595378030000002,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 1480
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 101412,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 66,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 102613,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1201,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401002,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401002.npz",
+        "bytes": 75225,
+        "sha256": "210653e7fcf6e10fedc4bb78302f9a2b7e1af9f0c26b13b45b462f50c8b976a9"
+      },
+      "actor_cpu_seconds": 0.17366281999999966,
+      "actor_wall_seconds": 0.16482856660149992,
+      "telemetry": {
+        "wall_seconds": 0.3205219048541039,
+        "process_cpu_seconds": 0.3377510909999999,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 1664
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 101520,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 67,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 102774,
+        "matched_rows": 761,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 56,
+        "moving_peer_ticks": 24,
+        "moving_rows": 49,
+        "objective_reductions": 34560,
+        "pair_gates": 761,
+        "setup_link_evaluations": 1198,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401003,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401003.npz",
+        "bytes": 101396,
+        "sha256": "7c38a4ada3ca426d4688743ff13f341c40e89e91e85844a81c921f708151ee08"
+      },
+      "actor_cpu_seconds": 0.17810850400000033,
+      "actor_wall_seconds": 0.16904113767668605,
+      "telemetry": {
+        "wall_seconds": 0.33136975299566984,
+        "process_cpu_seconds": 0.3491318060000004,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 1896
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 146772,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 9,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 148428,
+        "matched_rows": 479,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 16,
+        "moving_peer_ticks": 8,
+        "moving_rows": 29,
+        "objective_reductions": 34560,
+        "pair_gates": 479,
+        "setup_link_evaluations": 1640,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401003,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401003.npz",
+        "bytes": 134441,
+        "sha256": "a0fba61e0b5a3c5174613fd4d2f3db1caf72b50985ef7d64345a3af4d58e7b55"
+      },
+      "actor_cpu_seconds": 0.17686896299999866,
+      "actor_wall_seconds": 0.16793257975950837,
+      "telemetry": {
+        "wall_seconds": 0.3285814980044961,
+        "process_cpu_seconds": 0.3460934919999996,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 2200
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 145044,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 12,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 146664,
+        "matched_rows": 465,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 12,
+        "moving_peer_ticks": 8,
+        "moving_rows": 39,
+        "objective_reductions": 34560,
+        "pair_gates": 465,
+        "setup_link_evaluations": 1608,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401003,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401003.npz",
+        "bytes": 133439,
+        "sha256": "5b9691ffa4b0e52d95deba744f41294ec606980d3ef894bc46bcc4b6e5f05be9"
+      },
+      "actor_cpu_seconds": 0.11128443900000073,
+      "actor_wall_seconds": 0.10570759954862297,
+      "telemetry": {
+        "wall_seconds": 0.2686029290780425,
+        "process_cpu_seconds": 0.2829173800000002,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 2504
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 145044,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 12,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 146652,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1608,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401004,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401004.npz",
+        "bytes": 48324,
+        "sha256": "b2f6d8e00b8fc81bc22d503ebe93b3a6bd615455fed8d1bbfada25195b49e4bc"
+      },
+      "actor_cpu_seconds": 0.17153856899999642,
+      "actor_wall_seconds": 0.1628921739757061,
+      "telemetry": {
+        "wall_seconds": 0.3176790170837194,
+        "process_cpu_seconds": 0.33460185400000064,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 2648
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 170640,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 172512,
+        "matched_rows": 251,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 40,
+        "moving_peer_ticks": 12,
+        "moving_rows": 6,
+        "objective_reductions": 34560,
+        "pair_gates": 251,
+        "setup_link_evaluations": 1832,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401004,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401004.npz",
+        "bytes": 47539,
+        "sha256": "d380d2858a0f77602625c7facfc3ce37902786994f002d43363181654c52b1d3"
+      },
+      "actor_cpu_seconds": 0.10929999299999338,
+      "actor_wall_seconds": 0.10381568619050086,
+      "telemetry": {
+        "wall_seconds": 0.2579327221028507,
+        "process_cpu_seconds": 0.27167908799999996,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 2792
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 170640,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 172472,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1832,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401004,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401004.npz",
+        "bytes": 48318,
+        "sha256": "a40925975790a0d7f3ab250e2c53bcb270eaaa8b7eddd1b515eb6e9b1863667c"
+      },
+      "actor_cpu_seconds": 0.17754722799999278,
+      "actor_wall_seconds": 0.16857904708012938,
+      "telemetry": {
+        "wall_seconds": 0.3264794680289924,
+        "process_cpu_seconds": 0.3438783929999998,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 2936
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 170640,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 172512,
+        "matched_rows": 251,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 40,
+        "moving_peer_ticks": 12,
+        "moving_rows": 6,
+        "objective_reductions": 34560,
+        "pair_gates": 251,
+        "setup_link_evaluations": 1832,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401005,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401005.npz",
+        "bytes": 95597,
+        "sha256": "8fc5ccb6fa366699084ec9c0adb77a7013bdc305203e3d85152cc20ccfa008d7"
+      },
+      "actor_cpu_seconds": 0.17615538699999078,
+      "actor_wall_seconds": 0.16726777027361095,
+      "telemetry": {
+        "wall_seconds": 0.3276464659720659,
+        "process_cpu_seconds": 0.34508287999999965,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 3184
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 141912,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 0,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 143235,
+        "matched_rows": 3,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 1,
+        "objective_reductions": 34560,
+        "pair_gates": 3,
+        "setup_link_evaluations": 1323,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401005,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401005.npz",
+        "bytes": 95597,
+        "sha256": "ca814c529f59dc1ee11a9662f19bc91d9c0a7fe3ab3d21e590e7443437d37ef0"
+      },
+      "actor_cpu_seconds": 0.1710541370000076,
+      "actor_wall_seconds": 0.16242242441512644,
+      "telemetry": {
+        "wall_seconds": 0.31999966502189636,
+        "process_cpu_seconds": 0.3370447519999997,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 3432
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 141912,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 0,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 143235,
+        "matched_rows": 3,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 1,
+        "objective_reductions": 34560,
+        "pair_gates": 3,
+        "setup_link_evaluations": 1323,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401005,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401005.npz",
+        "bytes": 95444,
+        "sha256": "50f6182b1c71280c0e2d64d6467d6caa48ecbefba69b58833f3269c856eeacb7"
+      },
+      "actor_cpu_seconds": 0.10143915299999673,
+      "actor_wall_seconds": 0.09632890741340816,
+      "telemetry": {
+        "wall_seconds": 0.24261370790190995,
+        "process_cpu_seconds": 0.25554346000000017,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 3688
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 141912,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 0,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 143235,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1323,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401006,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401006.npz",
+        "bytes": 110277,
+        "sha256": "f0f071953f264c4b7588aa28989ddb448fb6d458d5dff3afd9b0dd08c8223e56"
+      },
+      "actor_cpu_seconds": 0.09925315800000245,
+      "actor_wall_seconds": 0.09427965781651437,
+      "telemetry": {
+        "wall_seconds": 0.23840944096446037,
+        "process_cpu_seconds": 0.25110891400000046,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 3968
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 115668,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 22,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 116756,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1088,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401006,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401006.npz",
+        "bytes": 110836,
+        "sha256": "eac4a865eedb0ccc04f665c08ef4fad4c0388efd1595519792e436c713ce9b24"
+      },
+      "actor_cpu_seconds": 0.17535219600000485,
+      "actor_wall_seconds": 0.16646877815946937,
+      "telemetry": {
+        "wall_seconds": 0.32781935296952724,
+        "process_cpu_seconds": 0.34528993700000044,
+        "peak_rss_kib": 73088,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 4264
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 115668,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 22,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 116792,
+        "matched_rows": 95,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 36,
+        "moving_peer_ticks": 12,
+        "moving_rows": 80,
+        "objective_reductions": 34560,
+        "pair_gates": 98,
+        "setup_link_evaluations": 1088,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401006,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401006.npz",
+        "bytes": 125470,
+        "sha256": "b04e538307366ed821396a54c331ee47381b38ec61a8fa8882b385d0a9a4a4a6"
+      },
+      "actor_cpu_seconds": 0.16841193400000076,
+      "actor_wall_seconds": 0.1599098350852728,
+      "telemetry": {
+        "wall_seconds": 0.3196463640779257,
+        "process_cpu_seconds": 0.3366819940000001,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 4584
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 97740,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 23,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 98681,
+        "matched_rows": 87,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 24,
+        "moving_peer_ticks": 12,
+        "moving_rows": 79,
+        "objective_reductions": 34560,
+        "pair_gates": 90,
+        "setup_link_evaluations": 917,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401007,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401007.npz",
+        "bytes": 59595,
+        "sha256": "78a11331f5a6409c2f442152d4359e2d1c178bb21035d598ebb2afbb8f00534d"
+      },
+      "actor_cpu_seconds": 0.10257970200000255,
+      "actor_wall_seconds": 0.09741898067295551,
+      "telemetry": {
+        "wall_seconds": 0.24561291886493564,
+        "process_cpu_seconds": 0.25870245099999956,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 4776
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 157140,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 158600,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1460,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401007,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401007.npz",
+        "bytes": 59789,
+        "sha256": "79df21c4e3ec69c7832b89f3b0a0f7f0e03bb3c7dea05643e6d5c8865a80ba08"
+      },
+      "actor_cpu_seconds": 0.16416373099999593,
+      "actor_wall_seconds": 0.15588954323902726,
+      "telemetry": {
+        "wall_seconds": 0.3077743120957166,
+        "process_cpu_seconds": 0.32416776499999944,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 4976
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 157140,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 158600,
+        "matched_rows": 4,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 3,
+        "objective_reductions": 34560,
+        "pair_gates": 4,
+        "setup_link_evaluations": 1460,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401007,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401007.npz",
+        "bytes": 59790,
+        "sha256": "df5a4960d011734fa7b12c89d966c4dd6f9338ae95eaab09ff76c3fea327d915"
+      },
+      "actor_cpu_seconds": 0.1719216989999932,
+      "actor_wall_seconds": 0.16323008644394577,
+      "telemetry": {
+        "wall_seconds": 0.3219828549772501,
+        "process_cpu_seconds": 0.3391425220000004,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 5176
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 157140,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 158600,
+        "matched_rows": 4,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 3,
+        "objective_reductions": 34560,
+        "pair_gates": 4,
+        "setup_link_evaluations": 1460,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401008,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401008.npz",
+        "bytes": 102614,
+        "sha256": "3b1d9891c3ae309d02388240645693dc69096c6ce7d1c9eaf1f40b0af59659da"
+      },
+      "actor_cpu_seconds": 0.1772535559999966,
+      "actor_wall_seconds": 0.16830304893665016,
+      "telemetry": {
+        "wall_seconds": 0.3295275359414518,
+        "process_cpu_seconds": 0.3470883880000004,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 5472
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 152604,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 154526,
+        "matched_rows": 197,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 400,
+        "moving_peer_ticks": 128,
+        "moving_rows": 196,
+        "objective_reductions": 34560,
+        "pair_gates": 197,
+        "setup_link_evaluations": 1522,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401008,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401008.npz",
+        "bytes": 101321,
+        "sha256": "25a00e6a207070012c5ba0b9aaaaf8db57275d4b956cdea8230506736cf1f6b1"
+      },
+      "actor_cpu_seconds": 0.10837037099998525,
+      "actor_wall_seconds": 0.10292805265635252,
+      "telemetry": {
+        "wall_seconds": 0.2632297039963305,
+        "process_cpu_seconds": 0.2772533360000011,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 5760
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 152604,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 154126,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1522,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401008,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401008.npz",
+        "bytes": 102610,
+        "sha256": "68393bddc10b1e1e15c75b3d0e05b42ef26c4e6e2c34f0f06eca016dc18db9db"
+      },
+      "actor_cpu_seconds": 0.17001809500000498,
+      "actor_wall_seconds": 0.161427907878533,
+      "telemetry": {
+        "wall_seconds": 0.3159359567798674,
+        "process_cpu_seconds": 0.33277203899999996,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 6056
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 152604,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 154526,
+        "matched_rows": 197,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 400,
+        "moving_peer_ticks": 128,
+        "moving_rows": 196,
+        "objective_reductions": 34560,
+        "pair_gates": 197,
+        "setup_link_evaluations": 1522,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401009,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401009.npz",
+        "bytes": 51619,
+        "sha256": "c70ea99218db592079f395e11e261ecc14ec29ecbb4f50c3cf0381d72778f5fa"
+      },
+      "actor_cpu_seconds": 0.17631701000001598,
+      "actor_wall_seconds": 0.16740993736311793,
+      "telemetry": {
+        "wall_seconds": 0.3225611038506031,
+        "process_cpu_seconds": 0.3397509549999995,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 6256
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 137808,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 139781,
+        "matched_rows": 510,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 508,
+        "moving_peer_ticks": 256,
+        "moving_rows": 262,
+        "objective_reductions": 34560,
+        "pair_gates": 510,
+        "setup_link_evaluations": 1465,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401009,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401009.npz",
+        "bytes": 60933,
+        "sha256": "ae0486ed53f5048f4d7d89dce325c68a62a83f8ff74bff14aeac5d49ff72402e"
+      },
+      "actor_cpu_seconds": 0.18082691900001713,
+      "actor_wall_seconds": 0.1716939837206155,
+      "telemetry": {
+        "wall_seconds": 0.3303965211380273,
+        "process_cpu_seconds": 0.3479973259999998,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 6472
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 137700,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 139653,
+        "matched_rows": 503,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 492,
+        "moving_peer_ticks": 248,
+        "moving_rows": 255,
+        "objective_reductions": 34560,
+        "pair_gates": 503,
+        "setup_link_evaluations": 1461,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401009,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401009.npz",
+        "bytes": 50169,
+        "sha256": "b1a9870682104a400df0a030aa65f47548c4f22615a4810c5e167ac200013be2"
+      },
+      "actor_cpu_seconds": 0.10224507600001331,
+      "actor_wall_seconds": 0.09710947563871741,
+      "telemetry": {
+        "wall_seconds": 0.25001922994852066,
+        "process_cpu_seconds": 0.263337997999999,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 6680
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 137808,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 139273,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1465,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401010,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401010.npz",
+        "bytes": 59626,
+        "sha256": "0bc6c81110530865482174e6333f5f01611cc491e75e5d743e220476d00ef97f"
+      },
+      "actor_cpu_seconds": 0.18662605000002763,
+      "actor_wall_seconds": 0.17719646822661161,
+      "telemetry": {
+        "wall_seconds": 0.34559927112422884,
+        "process_cpu_seconds": 0.36401713899999955,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 6904
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 184464,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 186483,
+        "matched_rows": 495,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 52,
+        "moving_peer_ticks": 12,
+        "moving_rows": 9,
+        "objective_reductions": 34560,
+        "pair_gates": 495,
+        "setup_link_evaluations": 1967,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401010,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401010.npz",
+        "bytes": 58464,
+        "sha256": "626d49f5729b78e85b32e182f2e5ae15d7848b64db52ef865760bc0d098b4371"
+      },
+      "actor_cpu_seconds": 0.10552848900000278,
+      "actor_wall_seconds": 0.10024303384125233,
+      "telemetry": {
+        "wall_seconds": 0.2506022669840604,
+        "process_cpu_seconds": 0.26395782200000006,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 7128
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 184356,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 186322,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1966,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401010,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401010.npz",
+        "bytes": 59277,
+        "sha256": "bf772f94101bb63d9cee715f53a1a8a4dbb6a9b240a4d27e2f6f3c573c375046"
+      },
+      "actor_cpu_seconds": 0.18261948400001593,
+      "actor_wall_seconds": 0.173388437833637,
+      "telemetry": {
+        "wall_seconds": 0.33915659692138433,
+        "process_cpu_seconds": 0.3572239029999995,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 7360
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 184356,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 186370,
+        "matched_rows": 501,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 48,
+        "moving_peer_ticks": 8,
+        "moving_rows": 7,
+        "objective_reductions": 34560,
+        "pair_gates": 501,
+        "setup_link_evaluations": 1966,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401011,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401011.npz",
+        "bytes": 96906,
+        "sha256": "f4a1365594c2c88ee97585f723ebc36485417a3e49c7aae59ac2c79c81405e33"
+      },
+      "actor_cpu_seconds": 0.18037827700000086,
+      "actor_wall_seconds": 0.17126563750207424,
+      "telemetry": {
+        "wall_seconds": 0.33416486508212984,
+        "process_cpu_seconds": 0.3519730499999998,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 7664
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 201528,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 6,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 203543,
+        "matched_rows": 248,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 28,
+        "moving_peer_ticks": 16,
+        "moving_rows": 17,
+        "objective_reductions": 34560,
+        "pair_gates": 249,
+        "setup_link_evaluations": 1987,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401011,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401011.npz",
+        "bytes": 96818,
+        "sha256": "4bd99cb7623122ff71364e2f9be3d718b2571b601c7e7532d0d868822b4f852b"
+      },
+      "actor_cpu_seconds": 0.18015304399998655,
+      "actor_wall_seconds": 0.1710586934350431,
+      "telemetry": {
+        "wall_seconds": 0.3402103439439088,
+        "process_cpu_seconds": 0.35834212700000023,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 7976
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 201528,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 6,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 203543,
+        "matched_rows": 248,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 28,
+        "moving_peer_ticks": 16,
+        "moving_rows": 17,
+        "objective_reductions": 34560,
+        "pair_gates": 249,
+        "setup_link_evaluations": 1987,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401011,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401011.npz",
+        "bytes": 95886,
+        "sha256": "8bb486d23413339ba266d6bd214636e4fdc9d79e20a30feabaee333feacb6f85"
+      },
+      "actor_cpu_seconds": 0.11475574300001767,
+      "actor_wall_seconds": 0.10901918052695692,
+      "telemetry": {
+        "wall_seconds": 0.27280195290222764,
+        "process_cpu_seconds": 0.28731191099999975,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 8288
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 201528,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 6,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 203515,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1987,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401012,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401012.npz",
+        "bytes": 50009,
+        "sha256": "7002e0db8cae8d5b4963f059ad6691b2a0e378f024ed75f684241ee855dfa6a1"
+      },
+      "actor_cpu_seconds": 0.11202896400000562,
+      "actor_wall_seconds": 0.10649544792249799,
+      "telemetry": {
+        "wall_seconds": 0.27545012393966317,
+        "process_cpu_seconds": 0.2899111819999991,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 8520
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 119340,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 120848,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1508,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401012,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401012.npz",
+        "bytes": 77237,
+        "sha256": "e5c975307516dd5e1dbad7b4350fbc1a2b0ad4a65d734e0df000fc757d67bf28"
+      },
+      "actor_cpu_seconds": 0.1676605459999969,
+      "actor_wall_seconds": 0.15931455721147358,
+      "telemetry": {
+        "wall_seconds": 0.30860850610770285,
+        "process_cpu_seconds": 0.3248111660000017,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 8800
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 141156,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 4,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 142862,
+        "matched_rows": 90,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 84,
+        "moving_peer_ticks": 20,
+        "moving_rows": 19,
+        "objective_reductions": 34560,
+        "pair_gates": 90,
+        "setup_link_evaluations": 1622,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401012,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401012.npz",
+        "bytes": 50977,
+        "sha256": "e95a0c1b27cf1b3e6ed3870bd6865f296c964cbb4488451bb00304f3b06a07e7"
+      },
+      "actor_cpu_seconds": 0.21467857799999202,
+      "actor_wall_seconds": 0.20397507632151246,
+      "telemetry": {
+        "wall_seconds": 0.3967136638239026,
+        "process_cpu_seconds": 0.4175268679999995,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 9032
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 119340,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 120872,
+        "matched_rows": 501,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 24,
+        "moving_peer_ticks": 8,
+        "moving_rows": 7,
+        "objective_reductions": 34560,
+        "pair_gates": 501,
+        "setup_link_evaluations": 1508,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401013,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401013.npz",
+        "bytes": 77485,
+        "sha256": "ca7f9da682e3924f6529c6b8bad8a0d0bcc17981b8f6f12fc0a7f98736e86cfe"
+      },
+      "actor_cpu_seconds": 0.10910083300001538,
+      "actor_wall_seconds": 0.10371875460259616,
+      "telemetry": {
+        "wall_seconds": 0.26268008700571954,
+        "process_cpu_seconds": 0.2764705379999999,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 9320
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 143748,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 145087,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1339,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401013,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401013.npz",
+        "bytes": 77644,
+        "sha256": "67e61bd4e4f86f0d46f04e3844b903c1c4a0fd6ffb1d98856635ebe2efd7e49d"
+      },
+      "actor_cpu_seconds": 0.18037667099997456,
+      "actor_wall_seconds": 0.17139604361727834,
+      "telemetry": {
+        "wall_seconds": 0.33727074903436005,
+        "process_cpu_seconds": 0.3549775850000003,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 9608
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 143748,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 145119,
+        "matched_rows": 2,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 32,
+        "moving_peer_ticks": 8,
+        "moving_rows": 2,
+        "objective_reductions": 34560,
+        "pair_gates": 2,
+        "setup_link_evaluations": 1339,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401013,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401013.npz",
+        "bytes": 77659,
+        "sha256": "7c76647fe0045d56877d9231f6c4b52d06aa1a86a43fd3b46fcb25ae4c7243f4"
+      },
+      "actor_cpu_seconds": 0.16118894399999562,
+      "actor_wall_seconds": 0.15316703217104077,
+      "telemetry": {
+        "wall_seconds": 0.3008615199942142,
+        "process_cpu_seconds": 0.31665762100000094,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 9904
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 143748,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 145119,
+        "matched_rows": 2,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 32,
+        "moving_peer_ticks": 8,
+        "moving_rows": 2,
+        "objective_reductions": 34560,
+        "pair_gates": 2,
+        "setup_link_evaluations": 1339,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401014,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401014.npz",
+        "bytes": 86243,
+        "sha256": "dbf008183a9f8c4d417eff636c68daf0aef4c78b9d918bd723090be6cba49bdb"
+      },
+      "actor_cpu_seconds": 0.182800061,
+      "actor_wall_seconds": 0.17369830841198564,
+      "telemetry": {
+        "wall_seconds": 0.34001186210662127,
+        "process_cpu_seconds": 0.3578476979999987,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 10224
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 154332,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 7,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 156180,
+        "matched_rows": 504,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 48,
+        "moving_peer_ticks": 16,
+        "moving_rows": 14,
+        "objective_reductions": 34560,
+        "pair_gates": 504,
+        "setup_link_evaluations": 1800,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401014,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401014.npz",
+        "bytes": 85522,
+        "sha256": "34bd44fe5c55c8f37a1571a7c5aaa1b3e01c59662d2058edb4afadc68a6d27dc"
+      },
+      "actor_cpu_seconds": 0.10818716599997913,
+      "actor_wall_seconds": 0.10283999308012426,
+      "telemetry": {
+        "wall_seconds": 0.2568078951444477,
+        "process_cpu_seconds": 0.2702903600000006,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 10536
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 154332,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 7,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 156132,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1800,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401014,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401014.npz",
+        "bytes": 86239,
+        "sha256": "32531d62c80c275ab3993b3edd1e586136b317107aa9398444d04f041d8ba51f"
+      },
+      "actor_cpu_seconds": 0.1756339739999664,
+      "actor_wall_seconds": 0.16689223400317132,
+      "telemetry": {
+        "wall_seconds": 0.3251341860741377,
+        "process_cpu_seconds": 0.342203382000001,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 10864
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 154332,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 7,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 156180,
+        "matched_rows": 504,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 48,
+        "moving_peer_ticks": 16,
+        "moving_rows": 14,
+        "objective_reductions": 34560,
+        "pair_gates": 504,
+        "setup_link_evaluations": 1800,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401015,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401015.npz",
+        "bytes": 59556,
+        "sha256": "47e957c68f9eea7e8ed2afb2bbde1cef7b2644904c7ce200add0e2f9bd3b24b8"
+      },
+      "actor_cpu_seconds": 0.16782282299999096,
+      "actor_wall_seconds": 0.1594707954209298,
+      "telemetry": {
+        "wall_seconds": 0.31059366185218096,
+        "process_cpu_seconds": 0.3268999620000006,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 11136
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 146124,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 147503,
+        "matched_rows": 21,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 16,
+        "moving_peer_ticks": 12,
+        "moving_rows": 21,
+        "objective_reductions": 34560,
+        "pair_gates": 21,
+        "setup_link_evaluations": 1363,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401015,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401015.npz",
+        "bytes": 59588,
+        "sha256": "ac40afbf5a3e78804153d1d213c5cb4c0ad1411488abf8705054e98b5a6c1405"
+      },
+      "actor_cpu_seconds": 0.17073483000000067,
+      "actor_wall_seconds": 0.16223849868401885,
+      "telemetry": {
+        "wall_seconds": 0.31566677102819085,
+        "process_cpu_seconds": 0.3322400020000007,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 11416
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 146124,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 147503,
+        "matched_rows": 21,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 16,
+        "moving_peer_ticks": 12,
+        "moving_rows": 21,
+        "objective_reductions": 34560,
+        "pair_gates": 21,
+        "setup_link_evaluations": 1363,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401015,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401015.npz",
+        "bytes": 59214,
+        "sha256": "33f3116c8dfe5125acb4abb36d33cb2548c058cb942e4570ed6c05cdfe6dace6"
+      },
+      "actor_cpu_seconds": 0.10178361900000077,
+      "actor_wall_seconds": 0.09675169759429991,
+      "telemetry": {
+        "wall_seconds": 0.24185978691093624,
+        "process_cpu_seconds": 0.2545574049999999,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 11696
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 146124,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 3,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 147487,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1363,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401016,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401016.npz",
+        "bytes": 59676,
+        "sha256": "5852c16367a3137bf04a3a25e00a29a742a6c8a7a38246f55818ab6986366c65"
+      },
+      "actor_cpu_seconds": 0.16721301300001734,
+      "actor_wall_seconds": 0.15885063400492072,
+      "telemetry": {
+        "wall_seconds": 0.31381665891967714,
+        "process_cpu_seconds": 0.33028689,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 11976
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 125712,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 67,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 126939,
+        "matched_rows": 503,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 12,
+        "objective_reductions": 34560,
+        "pair_gates": 503,
+        "setup_link_evaluations": 1227,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401016,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401016.npz",
+        "bytes": 58980,
+        "sha256": "716f6d9e8e094aaf3abedb86bc7b127a33f4bfdbdac72bdb6b16ce1a521594b6"
+      },
+      "actor_cpu_seconds": 0.10194434800001417,
+      "actor_wall_seconds": 0.09696758189238608,
+      "telemetry": {
+        "wall_seconds": 0.24417967209592462,
+        "process_cpu_seconds": 0.2569992130000003,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 12264
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 125712,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 67,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 126939,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1227,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401016,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401016.npz",
+        "bytes": 59678,
+        "sha256": "5d82f69a6ad4ba2143c87ca4509703f24f98c393c0260a8e88b4161efaac0df8"
+      },
+      "actor_cpu_seconds": 0.16065512499999812,
+      "actor_wall_seconds": 0.1526690477039665,
+      "telemetry": {
+        "wall_seconds": 0.298961543943733,
+        "process_cpu_seconds": 0.3146568739999971,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 12552
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 125712,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 67,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 126939,
+        "matched_rows": 503,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 12,
+        "objective_reductions": 34560,
+        "pair_gates": 503,
+        "setup_link_evaluations": 1227,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401017,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401017.npz",
+        "bytes": 56828,
+        "sha256": "b60520201efde56bcf868d9810fb31ea30100e7997c9ba8ec8d29c06fb3518fe"
+      },
+      "actor_cpu_seconds": 0.16273425500003214,
+      "actor_wall_seconds": 0.15464829141274095,
+      "telemetry": {
+        "wall_seconds": 0.29958088183775544,
+        "process_cpu_seconds": 0.3153019890000017,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 12840
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 121500,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 6,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 122844,
+        "matched_rows": 505,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 32,
+        "moving_peer_ticks": 20,
+        "moving_rows": 19,
+        "objective_reductions": 34560,
+        "pair_gates": 505,
+        "setup_link_evaluations": 1312,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401017,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401017.npz",
+        "bytes": 89173,
+        "sha256": "9da46f9befd88f6398d8f0b063473875cad0897f85980db55188bea9b0a71e6a"
+      },
+      "actor_cpu_seconds": 0.1553940390000328,
+      "actor_wall_seconds": 0.1476359588559717,
+      "telemetry": {
+        "wall_seconds": 0.29001276893541217,
+        "process_cpu_seconds": 0.3052383049999996,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 13192
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 136512,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 9,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 137806,
+        "matched_rows": 22,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 24,
+        "moving_peer_ticks": 8,
+        "moving_rows": 15,
+        "objective_reductions": 34560,
+        "pair_gates": 22,
+        "setup_link_evaluations": 1270,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401017,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401017.npz",
+        "bytes": 55589,
+        "sha256": "096a89bb9fcdc8eb283cf12b83114d201dc07a897e53af41b9f14ac806811f11"
+      },
+      "actor_cpu_seconds": 0.09850591100001793,
+      "actor_wall_seconds": 0.09363726549781859,
+      "telemetry": {
+        "wall_seconds": 0.2344920989125967,
+        "process_cpu_seconds": 0.2468030369999994,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 13488
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 121608,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 5,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 122923,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1315,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401018,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401018.npz",
+        "bytes": 50494,
+        "sha256": "243f0e459cd392e11c85d65a36752eea5b2f8535c89cf4e51ff449cf858911c1"
+      },
+      "actor_cpu_seconds": 0.0984523319999866,
+      "actor_wall_seconds": 0.09359099250286818,
+      "telemetry": {
+        "wall_seconds": 0.23448446416296065,
+        "process_cpu_seconds": 0.24679573000000232,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 13776
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 112644,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 114003,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1359,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401018,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401018.npz",
+        "bytes": 51504,
+        "sha256": "088f3bd7443019d474a7fda8ef5f8800fb5ec64043f12bf5c49f60967ced821a"
+      },
+      "actor_cpu_seconds": 0.16509046000001248,
+      "actor_wall_seconds": 0.15687246178276837,
+      "telemetry": {
+        "wall_seconds": 0.3037077630870044,
+        "process_cpu_seconds": 0.3196441820000011,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 14064
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 112644,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 114023,
+        "matched_rows": 510,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 20,
+        "moving_peer_ticks": 12,
+        "moving_rows": 12,
+        "objective_reductions": 34560,
+        "pair_gates": 510,
+        "setup_link_evaluations": 1359,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401018,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401018.npz",
+        "bytes": 51503,
+        "sha256": "37ebd7bd172ba201bdb2c72932aa3a476808a9bc96e129e8de36b5b65c9b241c"
+      },
+      "actor_cpu_seconds": 0.16576467399999828,
+      "actor_wall_seconds": 0.15751503803767264,
+      "telemetry": {
+        "wall_seconds": 0.3059829219710082,
+        "process_cpu_seconds": 0.3220424940000015,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 14360
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 112644,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 114023,
+        "matched_rows": 510,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 20,
+        "moving_peer_ticks": 12,
+        "moving_rows": 12,
+        "objective_reductions": 34560,
+        "pair_gates": 510,
+        "setup_link_evaluations": 1359,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401019,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401019.npz",
+        "bytes": 102006,
+        "sha256": "08f2fea6fc8471267a4280f60ea950df776942c0231b165c2d1ce680c1164d0a"
+      },
+      "actor_cpu_seconds": 0.09002391099998874,
+      "actor_wall_seconds": 0.0855781864374876,
+      "telemetry": {
+        "wall_seconds": 0.22249154094606638,
+        "process_cpu_seconds": 0.23417232399999932,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 14752
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 85428,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 128,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 86239,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 811,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401019,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401019.npz",
+        "bytes": 102838,
+        "sha256": "923c140cb39e9d6375627c8816ee536a18a27fc0c5de2dca3707718b46cfca2f"
+      },
+      "actor_cpu_seconds": 0.15459162899997025,
+      "actor_wall_seconds": 0.1468985106330365,
+      "telemetry": {
+        "wall_seconds": 0.2867701631039381,
+        "process_cpu_seconds": 0.3018141949999986,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 15160
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 85428,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 128,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 86239,
+        "matched_rows": 521,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 68,
+        "objective_reductions": 34560,
+        "pair_gates": 521,
+        "setup_link_evaluations": 811,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401019,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401019.npz",
+        "bytes": 102837,
+        "sha256": "ca5c51b0a286943f1d60c0a9e18afcbfbda5afc25f21b9053c0105e996d9685c"
+      },
+      "actor_cpu_seconds": 0.152452531999959,
+      "actor_wall_seconds": 0.14486307324841619,
+      "telemetry": {
+        "wall_seconds": 0.2853295460809022,
+        "process_cpu_seconds": 0.3003098719999997,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 15568
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 85428,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 128,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 86239,
+        "matched_rows": 521,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 68,
+        "objective_reductions": 34560,
+        "pair_gates": 521,
+        "setup_link_evaluations": 811,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401020,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401020.npz",
+        "bytes": 84954,
+        "sha256": "268aba01aa807e86e88c7b31d74d68754cbe26c4cb3e09fcf4ddfc86eb6e3a15"
+      },
+      "actor_cpu_seconds": 0.15499963699999952,
+      "actor_wall_seconds": 0.14729820820502937,
+      "telemetry": {
+        "wall_seconds": 0.2892551098484546,
+        "process_cpu_seconds": 0.30442623200000085,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 15936
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 125280,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 8,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 126451,
+        "matched_rows": 34,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 8,
+        "moving_peer_ticks": 4,
+        "moving_rows": 22,
+        "objective_reductions": 34560,
+        "pair_gates": 36,
+        "setup_link_evaluations": 1163,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401020,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401020.npz",
+        "bytes": 84575,
+        "sha256": "5470857da447534eac7944cdbe8dc85fc048c21462306a4c944a28c4429dc9fe"
+      },
+      "actor_cpu_seconds": 0.11584535800003337,
+      "actor_wall_seconds": 0.11014238488860428,
+      "telemetry": {
+        "wall_seconds": 0.2780931128654629,
+        "process_cpu_seconds": 0.2926930729999988,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 16312
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 125280,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 8,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 126443,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1163,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401020,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401020.npz",
+        "bytes": 84960,
+        "sha256": "e9f307c79fa7c5fd9a6576c97e9b3a82c35cddf200765c945dc6682436f71066"
+      },
+      "actor_cpu_seconds": 0.1561087639999741,
+      "actor_wall_seconds": 0.14836209849454463,
+      "telemetry": {
+        "wall_seconds": 0.29404071788303554,
+        "process_cpu_seconds": 0.30947006199999905,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 16688
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 125280,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 8,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 126451,
+        "matched_rows": 34,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 8,
+        "moving_peer_ticks": 4,
+        "moving_rows": 22,
+        "objective_reductions": 34560,
+        "pair_gates": 36,
+        "setup_link_evaluations": 1163,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401021,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401021.npz",
+        "bytes": 57753,
+        "sha256": "319b1624b8f79f64c62dbf3650d9ebe0ffb880e88f9239a769aee46c815bc455"
+      },
+      "actor_cpu_seconds": 0.15372568200004366,
+      "actor_wall_seconds": 0.14610456652007997,
+      "telemetry": {
+        "wall_seconds": 0.2845592729281634,
+        "process_cpu_seconds": 0.29945279400000047,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 17024
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 75924,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 76761,
+        "matched_rows": 4,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 8,
+        "moving_peer_ticks": 4,
+        "moving_rows": 3,
+        "objective_reductions": 34560,
+        "pair_gates": 4,
+        "setup_link_evaluations": 829,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401021,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401021.npz",
+        "bytes": 57740,
+        "sha256": "5cc576c89f57cb10089c826c858dd321e1c8a8ead65b65d2c99f85f6305f8c95"
+      },
+      "actor_cpu_seconds": 0.16969523800002406,
+      "actor_wall_seconds": 0.16124814888462424,
+      "telemetry": {
+        "wall_seconds": 0.31230134703218937,
+        "process_cpu_seconds": 0.3286570630000014,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 17360
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 75924,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 76761,
+        "matched_rows": 4,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 8,
+        "moving_peer_ticks": 4,
+        "moving_rows": 3,
+        "objective_reductions": 34560,
+        "pair_gates": 4,
+        "setup_link_evaluations": 829,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401021,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401021.npz",
+        "bytes": 57555,
+        "sha256": "9faa15b9872dad8b159cfd7b9b024308a5504a847479e7bf4b620900dbe6f52e"
+      },
+      "actor_cpu_seconds": 0.0932601329999585,
+      "actor_wall_seconds": 0.08867394155822694,
+      "telemetry": {
+        "wall_seconds": 0.22268004482612014,
+        "process_cpu_seconds": 0.23432777200000032,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 17696
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 75924,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 76753,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 829,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401022,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401022.npz",
+        "bytes": 59378,
+        "sha256": "831912138937c5d51caf9bceb6e262462da76838763ac8988232bcf438b72154"
+      },
+      "actor_cpu_seconds": 0.15868145400001765,
+      "actor_wall_seconds": 0.15082514565438032,
+      "telemetry": {
+        "wall_seconds": 0.30088040814734995,
+        "process_cpu_seconds": 0.31411266699999985,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 18040
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 140292,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 0,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 141591,
+        "matched_rows": 0,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 0,
+        "objective_reductions": 34560,
+        "pair_gates": 0,
+        "setup_link_evaluations": 1299,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401022,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401022.npz",
+        "bytes": 59285,
+        "sha256": "504716935b3ca04e67ec853d6f26b36da4c52c331486fc500ed016c351c7fa69"
+      },
+      "actor_cpu_seconds": 0.0989728439999844,
+      "actor_wall_seconds": 0.09410421992652118,
+      "telemetry": {
+        "wall_seconds": 0.2357914880849421,
+        "process_cpu_seconds": 0.2481402370000012,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 18384
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 140292,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 0,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 141591,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1299,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401022,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401022.npz",
+        "bytes": 59379,
+        "sha256": "5443ad79d5a683b28cc4890b3e397148e2d5dcc49dfbe8af8f0a6c4997582e0a"
+      },
+      "actor_cpu_seconds": 0.15902970199996957,
+      "actor_wall_seconds": 0.15115081006661057,
+      "telemetry": {
+        "wall_seconds": 0.2959449589252472,
+        "process_cpu_seconds": 0.3114407460000024,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 18736
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 140292,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 0,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 141591,
+        "matched_rows": 0,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 0,
+        "objective_reductions": 34560,
+        "pair_gates": 0,
+        "setup_link_evaluations": 1299,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401023,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401023.npz",
+        "bytes": 60185,
+        "sha256": "4b2dba91cfa9a20fa12d16cf26baa64e8dc7d072afede7adb612eef5d5c43567"
+      },
+      "actor_cpu_seconds": 0.15997100600002057,
+      "actor_wall_seconds": 0.1520293401554227,
+      "telemetry": {
+        "wall_seconds": 0.30014705704525113,
+        "process_cpu_seconds": 0.3158480889999993,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 19088
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 151416,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 152823,
+        "matched_rows": 7,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 4,
+        "moving_peer_ticks": 4,
+        "moving_rows": 7,
+        "objective_reductions": 34560,
+        "pair_gates": 7,
+        "setup_link_evaluations": 1403,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401023,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401023.npz",
+        "bytes": 60194,
+        "sha256": "9c8d336c8f6818c38b426cd7bed79b0336d9ef5537527c22d95f7fe9270a81e6"
+      },
+      "actor_cpu_seconds": 0.1626335769999585,
+      "actor_wall_seconds": 0.15457816771231592,
+      "telemetry": {
+        "wall_seconds": 0.30146775604225695,
+        "process_cpu_seconds": 0.317250688999998,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 19448
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 151416,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 152823,
+        "matched_rows": 7,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 4,
+        "moving_peer_ticks": 4,
+        "moving_rows": 7,
+        "objective_reductions": 34560,
+        "pair_gates": 7,
+        "setup_link_evaluations": 1403,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401023,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401023.npz",
+        "bytes": 59965,
+        "sha256": "5bd59401ac3296217fb29a05bbc22ac204d8dc79ec1c54da5f851126f1954ce1"
+      },
+      "actor_cpu_seconds": 0.10156481899999292,
+      "actor_wall_seconds": 0.09656524960882962,
+      "telemetry": {
+        "wall_seconds": 0.24216738808900118,
+        "process_cpu_seconds": 0.25483779500000026,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 19808
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 151416,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 152819,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1403,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401024,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401024.npz",
+        "bytes": 60149,
+        "sha256": "fb2b1ac8e84b860898f500e2faf6cbb6e1e126c0a5a49fc1ad0a7b863e9d5f2b"
+      },
+      "actor_cpu_seconds": 0.10216743999999878,
+      "actor_wall_seconds": 0.09712367504835129,
+      "telemetry": {
+        "wall_seconds": 0.24036559695377946,
+        "process_cpu_seconds": 0.2529474759999992,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 20168
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 166536,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 168205,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1669,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401024,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401024.npz",
+        "bytes": 60301,
+        "sha256": "630230a92b5d70e770d18ed9eb6ee14d034703e0b72e68bdebdf59d856c50d74"
+      },
+      "actor_cpu_seconds": 0.16250558299995532,
+      "actor_wall_seconds": 0.15445319539867342,
+      "telemetry": {
+        "wall_seconds": 0.30305836093612015,
+        "process_cpu_seconds": 0.3189307659999976,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 20536
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 166536,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 168205,
+        "matched_rows": 4,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 1,
+        "objective_reductions": 34560,
+        "pair_gates": 4,
+        "setup_link_evaluations": 1669,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401024,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401024.npz",
+        "bytes": 60302,
+        "sha256": "4a86ac4cec750e290993b8918f24fbcba3b691adbed44beb60aea878838e6538"
+      },
+      "actor_cpu_seconds": 0.1691212429999851,
+      "actor_wall_seconds": 0.16072279890067875,
+      "telemetry": {
+        "wall_seconds": 0.31315645785070956,
+        "process_cpu_seconds": 0.32955816399999804,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 20904
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 166536,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 2,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 168205,
+        "matched_rows": 4,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 1,
+        "objective_reductions": 34560,
+        "pair_gates": 4,
+        "setup_link_evaluations": 1669,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401025,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401025.npz",
+        "bytes": 49625,
+        "sha256": "a9eae45351668f922fc7272c983effcba1cea76d3d1b9abb816daa255259ec56"
+      },
+      "actor_cpu_seconds": 0.09893699200000228,
+      "actor_wall_seconds": 0.09406279097311199,
+      "telemetry": {
+        "wall_seconds": 0.2368409049231559,
+        "process_cpu_seconds": 0.24924485600000068,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 21264
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 139860,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 141158,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1298,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401025,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401025.npz",
+        "bytes": 49785,
+        "sha256": "5cf463128427851916f185841a04d3374759066c336aec4432eaf53543ecf5f8"
+      },
+      "actor_cpu_seconds": 0.15787848500004031,
+      "actor_wall_seconds": 0.1500367010012269,
+      "telemetry": {
+        "wall_seconds": 0.29576073586940765,
+        "process_cpu_seconds": 0.3112443849999984,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 21624
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 139860,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 141158,
+        "matched_rows": 2,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 2,
+        "objective_reductions": 34560,
+        "pair_gates": 2,
+        "setup_link_evaluations": 1298,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401025,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401025.npz",
+        "bytes": 49784,
+        "sha256": "257d471d4311c818bdfe90d350b5b9abbb6051d2a5cf359a72c0ce4e831cd4f9"
+      },
+      "actor_cpu_seconds": 0.1574813259999992,
+      "actor_wall_seconds": 0.14965575747191906,
+      "telemetry": {
+        "wall_seconds": 0.2941014259122312,
+        "process_cpu_seconds": 0.30949644300000045,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 21984
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 139860,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 141158,
+        "matched_rows": 2,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 2,
+        "objective_reductions": 34560,
+        "pair_gates": 2,
+        "setup_link_evaluations": 1298,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401026,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401026.npz",
+        "bytes": 64692,
+        "sha256": "53335bc86ae123ff76339c7834cb917b8aacffc56727bb1d7bab3f10f0c37c6d"
+      },
+      "actor_cpu_seconds": 0.15866717399999786,
+      "actor_wall_seconds": 0.15079252002760768,
+      "telemetry": {
+        "wall_seconds": 0.2940766119863838,
+        "process_cpu_seconds": 0.3094782890000012,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 22376
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 69876,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 10,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 70660,
+        "matched_rows": 500,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 16,
+        "moving_peer_ticks": 12,
+        "moving_rows": 27,
+        "objective_reductions": 34560,
+        "pair_gates": 504,
+        "setup_link_evaluations": 768,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401026,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401026.npz",
+        "bytes": 63794,
+        "sha256": "353a1df59b8ac45f80f6a3e1b02513ce16b69a800aa8239b53fa658da55cdb1a"
+      },
+      "actor_cpu_seconds": 0.10422940000001546,
+      "actor_wall_seconds": 0.09907072526402771,
+      "telemetry": {
+        "wall_seconds": 0.24830759898759425,
+        "process_cpu_seconds": 0.26129533800000004,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 22768
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 82620,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 10,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 83506,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 886,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401026,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401026.npz",
+        "bytes": 64726,
+        "sha256": "799e3ecba6ac626635145dbe8e6a8519be5bb1179594eefea0ac64c2c154ae46"
+      },
+      "actor_cpu_seconds": 0.15951782099998013,
+      "actor_wall_seconds": 0.15158154838718474,
+      "telemetry": {
+        "wall_seconds": 0.293640345800668,
+        "process_cpu_seconds": 0.3090205570000002,
+        "peak_rss_kib": 73248,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 23168
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 82620,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 10,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 83526,
+        "matched_rows": 262,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 20,
+        "moving_peer_ticks": 12,
+        "moving_rows": 27,
+        "objective_reductions": 34560,
+        "pair_gates": 266,
+        "setup_link_evaluations": 886,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401027,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401027.npz",
+        "bytes": 163651,
+        "sha256": "b192cf9b711ac87d3ae5b78dc42412b38689807df00e5e1788044707273de5e3"
+      },
+      "actor_cpu_seconds": 0.18226228000000688,
+      "actor_wall_seconds": 0.17319814255461097,
+      "telemetry": {
+        "wall_seconds": 0.3363049670588225,
+        "process_cpu_seconds": 0.3539183010000002,
+        "peak_rss_kib": 73408,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 23760
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 114480,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 21,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 115862,
+        "matched_rows": 486,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 216,
+        "moving_peer_ticks": 216,
+        "moving_rows": 272,
+        "objective_reductions": 34560,
+        "pair_gates": 490,
+        "setup_link_evaluations": 1166,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401027,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401027.npz",
+        "bytes": 164119,
+        "sha256": "e430694e9397bc2f4491f9fb4ae5badcd7bfe666afc06d33af0cb81bc3e9f424"
+      },
+      "actor_cpu_seconds": 0.16922177800001847,
+      "actor_wall_seconds": 0.16082511004060507,
+      "telemetry": {
+        "wall_seconds": 0.3126971460878849,
+        "process_cpu_seconds": 0.3290446100000004,
+        "peak_rss_kib": 73408,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 24360
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 114480,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 22,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 115866,
+        "matched_rows": 490,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 220,
+        "moving_peer_ticks": 220,
+        "moving_rows": 279,
+        "objective_reductions": 34560,
+        "pair_gates": 494,
+        "setup_link_evaluations": 1166,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401027,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401027.npz",
+        "bytes": 162082,
+        "sha256": "1ac930ffa3830c6c1facfc37fa92419326aff7dfb65cf85bc76f64bdbeedb8ba"
+      },
+      "actor_cpu_seconds": 0.10341803800001159,
+      "actor_wall_seconds": 0.09818553854711354,
+      "telemetry": {
+        "wall_seconds": 0.2533588719088584,
+        "process_cpu_seconds": 0.2666283300000032,
+        "peak_rss_kib": 73408,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 24960
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 114480,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 21,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 115646,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1166,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401028,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401028.npz",
+        "bytes": 39593,
+        "sha256": "a3fd7c098d21b6255b5d127bed1bce79a3f62b2876437cdfd45563838a513a85"
+      },
+      "actor_cpu_seconds": 0.1698368139999893,
+      "actor_wall_seconds": 0.1614165510982275,
+      "telemetry": {
+        "wall_seconds": 0.3188297541346401,
+        "process_cpu_seconds": 0.33292843499999947,
+        "peak_rss_kib": 73408,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 25320
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 199584,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 0,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 201684,
+        "matched_rows": 251,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 0,
+        "objective_reductions": 34560,
+        "pair_gates": 251,
+        "setup_link_evaluations": 2100,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401028,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401028.npz",
+        "bytes": 39062,
+        "sha256": "f952a754e8ece0f7e063bc33432436a044e6b52c1cbc6b8d030c37d83103b8d0"
+      },
+      "actor_cpu_seconds": 0.10474693600004059,
+      "actor_wall_seconds": 0.09958940697833896,
+      "telemetry": {
+        "wall_seconds": 0.24619300314225256,
+        "process_cpu_seconds": 0.25908707500000006,
+        "peak_rss_kib": 73408,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 25688
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 199584,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 0,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 201684,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 2100,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401028,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401028.npz",
+        "bytes": 39593,
+        "sha256": "346e513299d1d2258066149ff1da9cb10b94d01ec3bd5bee0854efd6c8bb3986"
+      },
+      "actor_cpu_seconds": 0.16833598199999145,
+      "actor_wall_seconds": 0.15998492250218987,
+      "telemetry": {
+        "wall_seconds": 0.31143084983341396,
+        "process_cpu_seconds": 0.327719290000001,
+        "peak_rss_kib": 73408,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 26056
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 199584,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 0,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 201684,
+        "matched_rows": 251,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 0,
+        "objective_reductions": 34560,
+        "pair_gates": 251,
+        "setup_link_evaluations": 2100,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401029,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401029.npz",
+        "bytes": 56964,
+        "sha256": "960c9838994d2d186a8a68e5dc5635b690580f80cc05748b912907a5e8146306"
+      },
+      "actor_cpu_seconds": 0.15141631099999842,
+      "actor_wall_seconds": 0.14389762561768293,
+      "telemetry": {
+        "wall_seconds": 0.2817745248321444,
+        "process_cpu_seconds": 0.296532470999999,
+        "peak_rss_kib": 73408,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 26464
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 101628,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 7,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 102569,
+        "matched_rows": 6,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 6,
+        "objective_reductions": 34560,
+        "pair_gates": 6,
+        "setup_link_evaluations": 941,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401029,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401029.npz",
+        "bytes": 56963,
+        "sha256": "7fcee8c4c5223a943156ae96db5e8d22a4c812d6390d4c44cf8792106ae82dab"
+      },
+      "actor_cpu_seconds": 0.15189019299998208,
+      "actor_wall_seconds": 0.14432877535000443,
+      "telemetry": {
+        "wall_seconds": 0.283646248979494,
+        "process_cpu_seconds": 0.2985022569999991,
+        "peak_rss_kib": 73408,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 26872
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 101628,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 7,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 102569,
+        "matched_rows": 6,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 6,
+        "objective_reductions": 34560,
+        "pair_gates": 6,
+        "setup_link_evaluations": 941,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401029,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401029.npz",
+        "bytes": 56770,
+        "sha256": "2dc696a4bb33e042c0952288c9d003c477570efa7fd4a6b406e4a2d44843be79"
+      },
+      "actor_cpu_seconds": 0.09498908999998079,
+      "actor_wall_seconds": 0.09033914818428457,
+      "telemetry": {
+        "wall_seconds": 0.2274036470334977,
+        "process_cpu_seconds": 0.2393086800000006,
+        "peak_rss_kib": 73408,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 27280
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 101628,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 7,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 102569,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 941,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401030,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401030.npz",
+        "bytes": 102969,
+        "sha256": "a13d5dcfcb69ca22d78a84bf7124040e6cfafddae32d9d7d1452c109d455c28f"
+      },
+      "actor_cpu_seconds": 0.09958028600000901,
+      "actor_wall_seconds": 0.09474932425655425,
+      "telemetry": {
+        "wall_seconds": 0.23646715912036598,
+        "process_cpu_seconds": 0.24887052600000104,
+        "peak_rss_kib": 73568,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 27792
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 141480,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 5,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 143203,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1723,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401030,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401030.npz",
+        "bytes": 103852,
+        "sha256": "82a7cd5a6324d31556deed0bf32e37ae64c4fcc4838d6bfca315d5545f64d1b2"
+      },
+      "actor_cpu_seconds": 0.16372733600005773,
+      "actor_wall_seconds": 0.15544680156745017,
+      "telemetry": {
+        "wall_seconds": 0.3059441950172186,
+        "process_cpu_seconds": 0.32233248000000003,
+        "peak_rss_kib": 73568,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 28304
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 141480,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 5,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 143243,
+        "matched_rows": 278,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 40,
+        "moving_peer_ticks": 24,
+        "moving_rows": 47,
+        "objective_reductions": 34560,
+        "pair_gates": 278,
+        "setup_link_evaluations": 1723,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401030,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401030.npz",
+        "bytes": 86126,
+        "sha256": "a50e58d3d22a99f89353dd430f31afe03c8dffd1d146695ae70a92b13e16b21d"
+      },
+      "actor_cpu_seconds": 0.16477690400002132,
+      "actor_wall_seconds": 0.15637539327144623,
+      "telemetry": {
+        "wall_seconds": 0.3036765579599887,
+        "process_cpu_seconds": 0.3199661700000007,
+        "peak_rss_kib": 73568,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 28792
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 141696,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 7,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 143435,
+        "matched_rows": 272,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 8,
+        "moving_peer_ticks": 8,
+        "moving_rows": 37,
+        "objective_reductions": 34560,
+        "pair_gates": 272,
+        "setup_link_evaluations": 1731,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "C",
+      "seed": 29401031,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401031.npz",
+        "bytes": 50117,
+        "sha256": "74d740d2bcab1c2d3c378968be90e7e8d75c2dc04273365d950039961aac0c9b"
+      },
+      "actor_cpu_seconds": 0.0967665400000115,
+      "actor_wall_seconds": 0.09186710184440017,
+      "telemetry": {
+        "wall_seconds": 0.23217328893952072,
+        "process_cpu_seconds": 0.24462462700000032,
+        "peak_rss_kib": 73568,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 29208
+      },
+      "controller_counts": {
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 134460,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 135707,
+        "model_ticks": 34560,
+        "objective_reductions": 34560,
+        "setup_link_evaluations": 1247,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "R",
+      "seed": 29401031,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401031.npz",
+        "bytes": 50309,
+        "sha256": "f7895062ac96055ab5e78dfd49f3a99d3479d7c1179e613f9c3c6fd00027a7fa"
+      },
+      "actor_cpu_seconds": 0.1542376130000207,
+      "actor_wall_seconds": 0.14640749874524772,
+      "telemetry": {
+        "wall_seconds": 0.2890877090394497,
+        "process_cpu_seconds": 0.3046034569999989,
+        "peak_rss_kib": 73568,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 29624
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 134460,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 135707,
+        "matched_rows": 4,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 4,
+        "objective_reductions": 34560,
+        "pair_gates": 4,
+        "setup_link_evaluations": 1247,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    },
+    {
+      "arm": "V",
+      "seed": 29401031,
+      "steps": 256,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401031.npz",
+        "bytes": 50310,
+        "sha256": "bf08f0b05890a7f57808f70d3ad78f7576f453847129982a3c76f5b010540d74"
+      },
+      "actor_cpu_seconds": 0.15526764800001303,
+      "actor_wall_seconds": 0.1474018944427371,
+      "telemetry": {
+        "wall_seconds": 0.29078851686790586,
+        "process_cpu_seconds": 0.30639556699999915,
+        "peak_rss_kib": 73568,
+        "peak_rss_scope": "process lifetime Linux",
+        "input_blocks": 0,
+        "output_blocks": 30048
+      },
+      "controller_counts": {
+        "adjacent_updates": 1275,
+        "cache_evicts": 0,
+        "cache_inserts": 0,
+        "cache_matches": 0,
+        "calibration_discrepancy_rows": 0,
+        "candidate_link_evaluations": 134460,
+        "censor_discrepancy_rows": 0,
+        "censor_prior_conflicts": 0,
+        "decisions": 320,
+        "fallback_decisions": 1,
+        "grid_power_evaluations": 0,
+        "ingests": 1280,
+        "link_evaluations": 135707,
+        "matched_rows": 4,
+        "model_ticks": 34560,
+        "moving_link_evaluations": 0,
+        "moving_peer_ticks": 0,
+        "moving_rows": 4,
+        "objective_reductions": 34560,
+        "pair_gates": 4,
+        "setup_link_evaluations": 1247,
+        "shadow_decisions": 0,
+        "shadow_objective_reductions": 0,
+        "trajectories": 8640
+      }
+    }
+  ],
+  "raw": [
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401000.npz",
+      "bytes": 63985,
+      "sha256": "b7a84143c002025d1698b6f98a0d0bab9c72c282387b90a61121d922f5f0e8cb"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401001.npz",
+      "bytes": 76307,
+      "sha256": "d32d1f1cc17974bd9a21c0425b03a2e8c4daedb2ec20c1b5682969e80efdd57b"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401002.npz",
+      "bytes": 73922,
+      "sha256": "eeea706f6bb7e0fba87193ab6d9fb8dc3b74703e49d2c807d9952c1ed2fbcbab"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401003.npz",
+      "bytes": 133439,
+      "sha256": "5b9691ffa4b0e52d95deba744f41294ec606980d3ef894bc46bcc4b6e5f05be9"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401004.npz",
+      "bytes": 47539,
+      "sha256": "d380d2858a0f77602625c7facfc3ce37902786994f002d43363181654c52b1d3"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401005.npz",
+      "bytes": 95444,
+      "sha256": "50f6182b1c71280c0e2d64d6467d6caa48ecbefba69b58833f3269c856eeacb7"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401006.npz",
+      "bytes": 110277,
+      "sha256": "f0f071953f264c4b7588aa28989ddb448fb6d458d5dff3afd9b0dd08c8223e56"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401007.npz",
+      "bytes": 59595,
+      "sha256": "78a11331f5a6409c2f442152d4359e2d1c178bb21035d598ebb2afbb8f00534d"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401008.npz",
+      "bytes": 101321,
+      "sha256": "25a00e6a207070012c5ba0b9aaaaf8db57275d4b956cdea8230506736cf1f6b1"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401009.npz",
+      "bytes": 50169,
+      "sha256": "b1a9870682104a400df0a030aa65f47548c4f22615a4810c5e167ac200013be2"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401010.npz",
+      "bytes": 58464,
+      "sha256": "626d49f5729b78e85b32e182f2e5ae15d7848b64db52ef865760bc0d098b4371"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401011.npz",
+      "bytes": 95886,
+      "sha256": "8bb486d23413339ba266d6bd214636e4fdc9d79e20a30feabaee333feacb6f85"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401012.npz",
+      "bytes": 50009,
+      "sha256": "7002e0db8cae8d5b4963f059ad6691b2a0e378f024ed75f684241ee855dfa6a1"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401013.npz",
+      "bytes": 77485,
+      "sha256": "ca7f9da682e3924f6529c6b8bad8a0d0bcc17981b8f6f12fc0a7f98736e86cfe"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401014.npz",
+      "bytes": 85522,
+      "sha256": "34bd44fe5c55c8f37a1571a7c5aaa1b3e01c59662d2058edb4afadc68a6d27dc"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401015.npz",
+      "bytes": 59214,
+      "sha256": "33f3116c8dfe5125acb4abb36d33cb2548c058cb942e4570ed6c05cdfe6dace6"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401016.npz",
+      "bytes": 58980,
+      "sha256": "716f6d9e8e094aaf3abedb86bc7b127a33f4bfdbdac72bdb6b16ce1a521594b6"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401017.npz",
+      "bytes": 55589,
+      "sha256": "096a89bb9fcdc8eb283cf12b83114d201dc07a897e53af41b9f14ac806811f11"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401018.npz",
+      "bytes": 50494,
+      "sha256": "243f0e459cd392e11c85d65a36752eea5b2f8535c89cf4e51ff449cf858911c1"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401019.npz",
+      "bytes": 102006,
+      "sha256": "08f2fea6fc8471267a4280f60ea950df776942c0231b165c2d1ce680c1164d0a"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401020.npz",
+      "bytes": 84575,
+      "sha256": "5470857da447534eac7944cdbe8dc85fc048c21462306a4c944a28c4429dc9fe"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401021.npz",
+      "bytes": 57555,
+      "sha256": "9faa15b9872dad8b159cfd7b9b024308a5504a847479e7bf4b620900dbe6f52e"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401022.npz",
+      "bytes": 59285,
+      "sha256": "504716935b3ca04e67ec853d6f26b36da4c52c331486fc500ed016c351c7fa69"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401023.npz",
+      "bytes": 59965,
+      "sha256": "5bd59401ac3296217fb29a05bbc22ac204d8dc79ec1c54da5f851126f1954ce1"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401024.npz",
+      "bytes": 60149,
+      "sha256": "fb2b1ac8e84b860898f500e2faf6cbb6e1e126c0a5a49fc1ad0a7b863e9d5f2b"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401025.npz",
+      "bytes": 49625,
+      "sha256": "a9eae45351668f922fc7272c983effcba1cea76d3d1b9abb816daa255259ec56"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401026.npz",
+      "bytes": 63794,
+      "sha256": "353a1df59b8ac45f80f6a3e1b02513ce16b69a800aa8239b53fa658da55cdb1a"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401027.npz",
+      "bytes": 162082,
+      "sha256": "1ac930ffa3830c6c1facfc37fa92419326aff7dfb65cf85bc76f64bdbeedb8ba"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401028.npz",
+      "bytes": 39062,
+      "sha256": "f952a754e8ece0f7e063bc33432436a044e6b52c1cbc6b8d030c37d83103b8d0"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401029.npz",
+      "bytes": 56770,
+      "sha256": "2dc696a4bb33e042c0952288c9d003c477570efa7fd4a6b406e4a2d44843be79"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401030.npz",
+      "bytes": 102969,
+      "sha256": "a13d5dcfcb69ca22d78a84bf7124040e6cfafddae32d9d7d1452c109d455c28f"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/C_29401031.npz",
+      "bytes": 50117,
+      "sha256": "74d740d2bcab1c2d3c378968be90e7e8d75c2dc04273365d950039961aac0c9b"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401000.npz",
+      "bytes": 82386,
+      "sha256": "788473382dc2197e2d0b835e71dce6539099acc5a897aa752024dd3044922264"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401001.npz",
+      "bytes": 76546,
+      "sha256": "5325f6b7f93ce210fb0426fa61b3836c32ec67ae829c35639e3929d193398dd9"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401002.npz",
+      "bytes": 75225,
+      "sha256": "210653e7fcf6e10fedc4bb78302f9a2b7e1af9f0c26b13b45b462f50c8b976a9"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401003.npz",
+      "bytes": 134441,
+      "sha256": "a0fba61e0b5a3c5174613fd4d2f3db1caf72b50985ef7d64345a3af4d58e7b55"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401004.npz",
+      "bytes": 48324,
+      "sha256": "b2f6d8e00b8fc81bc22d503ebe93b3a6bd615455fed8d1bbfada25195b49e4bc"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401005.npz",
+      "bytes": 95597,
+      "sha256": "8fc5ccb6fa366699084ec9c0adb77a7013bdc305203e3d85152cc20ccfa008d7"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401006.npz",
+      "bytes": 125470,
+      "sha256": "b04e538307366ed821396a54c331ee47381b38ec61a8fa8882b385d0a9a4a4a6"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401007.npz",
+      "bytes": 59789,
+      "sha256": "79df21c4e3ec69c7832b89f3b0a0f7f0e03bb3c7dea05643e6d5c8865a80ba08"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401008.npz",
+      "bytes": 102610,
+      "sha256": "68393bddc10b1e1e15c75b3d0e05b42ef26c4e6e2c34f0f06eca016dc18db9db"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401009.npz",
+      "bytes": 60933,
+      "sha256": "ae0486ed53f5048f4d7d89dce325c68a62a83f8ff74bff14aeac5d49ff72402e"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401010.npz",
+      "bytes": 59626,
+      "sha256": "0bc6c81110530865482174e6333f5f01611cc491e75e5d743e220476d00ef97f"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401011.npz",
+      "bytes": 96906,
+      "sha256": "f4a1365594c2c88ee97585f723ebc36485417a3e49c7aae59ac2c79c81405e33"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401012.npz",
+      "bytes": 50977,
+      "sha256": "e95a0c1b27cf1b3e6ed3870bd6865f296c964cbb4488451bb00304f3b06a07e7"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401013.npz",
+      "bytes": 77644,
+      "sha256": "67e61bd4e4f86f0d46f04e3844b903c1c4a0fd6ffb1d98856635ebe2efd7e49d"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401014.npz",
+      "bytes": 86239,
+      "sha256": "32531d62c80c275ab3993b3edd1e586136b317107aa9398444d04f041d8ba51f"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401015.npz",
+      "bytes": 59588,
+      "sha256": "ac40afbf5a3e78804153d1d213c5cb4c0ad1411488abf8705054e98b5a6c1405"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401016.npz",
+      "bytes": 59676,
+      "sha256": "5852c16367a3137bf04a3a25e00a29a742a6c8a7a38246f55818ab6986366c65"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401017.npz",
+      "bytes": 56828,
+      "sha256": "b60520201efde56bcf868d9810fb31ea30100e7997c9ba8ec8d29c06fb3518fe"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401018.npz",
+      "bytes": 51503,
+      "sha256": "37ebd7bd172ba201bdb2c72932aa3a476808a9bc96e129e8de36b5b65c9b241c"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401019.npz",
+      "bytes": 102838,
+      "sha256": "923c140cb39e9d6375627c8816ee536a18a27fc0c5de2dca3707718b46cfca2f"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401020.npz",
+      "bytes": 84960,
+      "sha256": "e9f307c79fa7c5fd9a6576c97e9b3a82c35cddf200765c945dc6682436f71066"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401021.npz",
+      "bytes": 57740,
+      "sha256": "5cc576c89f57cb10089c826c858dd321e1c8a8ead65b65d2c99f85f6305f8c95"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401022.npz",
+      "bytes": 59378,
+      "sha256": "831912138937c5d51caf9bceb6e262462da76838763ac8988232bcf438b72154"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401023.npz",
+      "bytes": 60185,
+      "sha256": "4b2dba91cfa9a20fa12d16cf26baa64e8dc7d072afede7adb612eef5d5c43567"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401024.npz",
+      "bytes": 60302,
+      "sha256": "4a86ac4cec750e290993b8918f24fbcba3b691adbed44beb60aea878838e6538"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401025.npz",
+      "bytes": 49785,
+      "sha256": "5cf463128427851916f185841a04d3374759066c336aec4432eaf53543ecf5f8"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401026.npz",
+      "bytes": 64726,
+      "sha256": "799e3ecba6ac626635145dbe8e6a8519be5bb1179594eefea0ac64c2c154ae46"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401027.npz",
+      "bytes": 164119,
+      "sha256": "e430694e9397bc2f4491f9fb4ae5badcd7bfe666afc06d33af0cb81bc3e9f424"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401028.npz",
+      "bytes": 39593,
+      "sha256": "a3fd7c098d21b6255b5d127bed1bce79a3f62b2876437cdfd45563838a513a85"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401029.npz",
+      "bytes": 56964,
+      "sha256": "960c9838994d2d186a8a68e5dc5635b690580f80cc05748b912907a5e8146306"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401030.npz",
+      "bytes": 86126,
+      "sha256": "a50e58d3d22a99f89353dd430f31afe03c8dffd1d146695ae70a92b13e16b21d"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/R_29401031.npz",
+      "bytes": 50309,
+      "sha256": "f7895062ac96055ab5e78dfd49f3a99d3479d7c1179e613f9c3c6fd00027a7fa"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401000.npz",
+      "bytes": 64792,
+      "sha256": "637f750b19178fee52204b523d47f2596ce4d5d36b4ced7162d2fa53101afb6e"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401001.npz",
+      "bytes": 76544,
+      "sha256": "ee072eeaebe63be254cfa1a8c3af389ca2ad2ce03c5eda508ba1c58fe3c111b9"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401002.npz",
+      "bytes": 144060,
+      "sha256": "93f570fa23ba71134505219d2b4ea1097c8803a9074d0f63e4203fefbd25b51f"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401003.npz",
+      "bytes": 101396,
+      "sha256": "7c38a4ada3ca426d4688743ff13f341c40e89e91e85844a81c921f708151ee08"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401004.npz",
+      "bytes": 48318,
+      "sha256": "a40925975790a0d7f3ab250e2c53bcb270eaaa8b7eddd1b515eb6e9b1863667c"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401005.npz",
+      "bytes": 95597,
+      "sha256": "ca814c529f59dc1ee11a9662f19bc91d9c0a7fe3ab3d21e590e7443437d37ef0"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401006.npz",
+      "bytes": 110836,
+      "sha256": "eac4a865eedb0ccc04f665c08ef4fad4c0388efd1595519792e436c713ce9b24"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401007.npz",
+      "bytes": 59790,
+      "sha256": "df5a4960d011734fa7b12c89d966c4dd6f9338ae95eaab09ff76c3fea327d915"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401008.npz",
+      "bytes": 102614,
+      "sha256": "3b1d9891c3ae309d02388240645693dc69096c6ce7d1c9eaf1f40b0af59659da"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401009.npz",
+      "bytes": 51619,
+      "sha256": "c70ea99218db592079f395e11e261ecc14ec29ecbb4f50c3cf0381d72778f5fa"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401010.npz",
+      "bytes": 59277,
+      "sha256": "bf772f94101bb63d9cee715f53a1a8a4dbb6a9b240a4d27e2f6f3c573c375046"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401011.npz",
+      "bytes": 96818,
+      "sha256": "4bd99cb7623122ff71364e2f9be3d718b2571b601c7e7532d0d868822b4f852b"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401012.npz",
+      "bytes": 77237,
+      "sha256": "e5c975307516dd5e1dbad7b4350fbc1a2b0ad4a65d734e0df000fc757d67bf28"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401013.npz",
+      "bytes": 77659,
+      "sha256": "7c76647fe0045d56877d9231f6c4b52d06aa1a86a43fd3b46fcb25ae4c7243f4"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401014.npz",
+      "bytes": 86243,
+      "sha256": "dbf008183a9f8c4d417eff636c68daf0aef4c78b9d918bd723090be6cba49bdb"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401015.npz",
+      "bytes": 59556,
+      "sha256": "47e957c68f9eea7e8ed2afb2bbde1cef7b2644904c7ce200add0e2f9bd3b24b8"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401016.npz",
+      "bytes": 59678,
+      "sha256": "5d82f69a6ad4ba2143c87ca4509703f24f98c393c0260a8e88b4161efaac0df8"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401017.npz",
+      "bytes": 89173,
+      "sha256": "9da46f9befd88f6398d8f0b063473875cad0897f85980db55188bea9b0a71e6a"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401018.npz",
+      "bytes": 51504,
+      "sha256": "088f3bd7443019d474a7fda8ef5f8800fb5ec64043f12bf5c49f60967ced821a"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401019.npz",
+      "bytes": 102837,
+      "sha256": "ca5c51b0a286943f1d60c0a9e18afcbfbda5afc25f21b9053c0105e996d9685c"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401020.npz",
+      "bytes": 84954,
+      "sha256": "268aba01aa807e86e88c7b31d74d68754cbe26c4cb3e09fcf4ddfc86eb6e3a15"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401021.npz",
+      "bytes": 57753,
+      "sha256": "319b1624b8f79f64c62dbf3650d9ebe0ffb880e88f9239a769aee46c815bc455"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401022.npz",
+      "bytes": 59379,
+      "sha256": "5443ad79d5a683b28cc4890b3e397148e2d5dcc49dfbe8af8f0a6c4997582e0a"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401023.npz",
+      "bytes": 60194,
+      "sha256": "9c8d336c8f6818c38b426cd7bed79b0336d9ef5537527c22d95f7fe9270a81e6"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401024.npz",
+      "bytes": 60301,
+      "sha256": "630230a92b5d70e770d18ed9eb6ee14d034703e0b72e68bdebdf59d856c50d74"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401025.npz",
+      "bytes": 49784,
+      "sha256": "257d471d4311c818bdfe90d350b5b9abbb6051d2a5cf359a72c0ce4e831cd4f9"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401026.npz",
+      "bytes": 64692,
+      "sha256": "53335bc86ae123ff76339c7834cb917b8aacffc56727bb1d7bab3f10f0c37c6d"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401027.npz",
+      "bytes": 163651,
+      "sha256": "b192cf9b711ac87d3ae5b78dc42412b38689807df00e5e1788044707273de5e3"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401028.npz",
+      "bytes": 39593,
+      "sha256": "346e513299d1d2258066149ff1da9cb10b94d01ec3bd5bee0854efd6c8bb3986"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401029.npz",
+      "bytes": 56963,
+      "sha256": "7fcee8c4c5223a943156ae96db5e8d22a4c812d6390d4c44cf8792106ae82dab"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401030.npz",
+      "bytes": 103852,
+      "sha256": "82a7cd5a6324d31556deed0bf32e37ae64c4fcc4838d6bfca315d5545f64d1b2"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/raw/V_29401031.npz",
+      "bytes": 50310,
+      "sha256": "bf08f0b05890a7f57808f70d3ad78f7576f453847129982a3c76f5b010540d74"
+    }
+  ],
+  "config": {
+    "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/config.json",
+    "bytes": 4103,
+    "sha256": "d53529aaa3361bc572cbac1c355ca3f228f333f44e147abfece873e9f8bd82f1"
+  },
+  "error": null,
+  "telemetry": {
+    "wall_seconds": 28.82221295288764,
+    "process_cpu_seconds": 30.244983526,
+    "peak_rss_kib": 73568,
+    "peak_rss_scope": "process lifetime Linux",
+    "input_blocks": 0,
+    "output_blocks": 30368
+  }
+}

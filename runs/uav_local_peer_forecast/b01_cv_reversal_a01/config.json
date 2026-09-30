@@ -1,0 +1,161 @@
+{
+  "direction": "uav_local_peer_forecast",
+  "launch_sha": "13da38312ab6ab4af9dc94c160955b01b479a37d",
+  "seeds": [
+    29401000,
+    29401001,
+    29401002,
+    29401003,
+    29401004,
+    29401005,
+    29401006,
+    29401007,
+    29401008,
+    29401009,
+    29401010,
+    29401011,
+    29401012,
+    29401013,
+    29401014,
+    29401015,
+    29401016,
+    29401017,
+    29401018,
+    29401019,
+    29401020,
+    29401021,
+    29401022,
+    29401023,
+    29401024,
+    29401025,
+    29401026,
+    29401027,
+    29401028,
+    29401029,
+    29401030,
+    29401031
+  ],
+  "arms": [
+    "C",
+    "V",
+    "R"
+  ],
+  "orders": [
+    [
+      "C",
+      "V",
+      "R"
+    ],
+    [
+      "C",
+      "R",
+      "V"
+    ],
+    [
+      "V",
+      "C",
+      "R"
+    ],
+    [
+      "V",
+      "R",
+      "C"
+    ],
+    [
+      "R",
+      "C",
+      "V"
+    ],
+    [
+      "R",
+      "V",
+      "C"
+    ]
+  ],
+  "horizon": 256,
+  "started_fits": 0,
+  "optimizer_calls": 0,
+  "training_labels": 0,
+  "actor_contract": "copied local FP32[104] row and primitive clock only",
+  "workers": 1,
+  "cpu_threads": 1,
+  "torch_fit": false,
+  "source_manifest": [
+    {
+      "path": "experiments/candidates/uav_local_peer_forecast/__init__.py",
+      "bytes": 50,
+      "sha256": "ba8b9f2babb1377553575ce517ed540d25020b93ea09b8daf8083ed6fedee18e",
+      "git_blob": "ffd55e249b55be1cbfafe4b33bcd817734c6b927"
+    },
+    {
+      "path": "experiments/candidates/uav_local_peer_forecast/controller.py",
+      "bytes": 5853,
+      "sha256": "a7c3992738e01c72a40bd7e2b68702e5bcd52f984191f542d991f395659a1649",
+      "git_blob": "b697cc2171951d04e524f2824e1242ecc2e5c2b0"
+    },
+    {
+      "path": "experiments/candidates/uav_local_peer_forecast/study.py",
+      "bytes": 9681,
+      "sha256": "a4a5de62f131730d0077dc785490e63a19d45747bbf726527911d0f9713fc20f",
+      "git_blob": "f13297b0a13f5093125005ceadd171900a933ed9"
+    },
+    {
+      "path": "experiments/candidates/uav_local_peer_forecast/reader.py",
+      "bytes": 36579,
+      "sha256": "10fa6b48d29bcb3ab3d9289df3570a0d7d1e815a12f9dbf564a5e2f772e8b457",
+      "git_blob": "43b7b534680c2275c0bb8ce87835b3fa0d0c4708"
+    },
+    {
+      "path": "experiments/candidates/uav_local_peer_forecast/run.py",
+      "bytes": 9840,
+      "sha256": "2b9b45a8bb96dc10ddfbe1dd5296b31947b563abe6ba4eda69d9a43590d6e330",
+      "git_blob": "4736a11c8570eef208b23403e0dc291df398c69e"
+    },
+    {
+      "path": "experiments/candidates/uav_local_history/b01/controller.py",
+      "bytes": 14309,
+      "sha256": "b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2",
+      "git_blob": "9c98f540f74e4d4605dce84a797e6b932cd9cb50"
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "bytes": 4819,
+      "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6",
+      "git_blob": "4b59281bfb76245dd3283fe860327e35463c2b26"
+    },
+    {
+      "path": "envs/pettingzoo/uav_env.py",
+      "bytes": 68827,
+      "sha256": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e",
+      "git_blob": "1e67c3a56fc1824db968485366dadcc54c7d8125"
+    },
+    {
+      "path": "envs/pettingzoo/uav_radio.py",
+      "bytes": 5001,
+      "sha256": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc",
+      "git_blob": "cf7cdbf3562e78e41bc06d32f733e806d7190313"
+    },
+    {
+      "path": "envs/pettingzoo/env_adapter.py",
+      "bytes": 25232,
+      "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40",
+      "git_blob": "58da35c3263e00319d90b93169a6d14b0f7e5bda"
+    }
+  ],
+  "scientific_import_telemetry": {
+    "wall_seconds": 0.04231252311728895,
+    "process_cpu_seconds": 0.044559007,
+    "scope": "study/numpy imports; native factory imports counted separately"
+  },
+  "declared_counts": {
+    "episodes": 96,
+    "native_steps": 24576,
+    "ingests": 122880,
+    "rankings": 30720,
+    "model_ticks": 3317760,
+    "worker_power_ceiling": 82663475,
+    "reader_score_requests": 51200,
+    "reader_model_ticks": 5529600,
+    "reader_power_ceiling": 82663200
+  }
+}

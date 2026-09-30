@@ -950,3 +950,357 @@ formulas. No shared controller/environment source was changed, no fit/native
 experiment has run, and no scientific design revision resulted from the
 engineering repairs. Target-node numerical behavior and the complete panel
 remain to be observed. Publish these inputs before requesting admission.
+
+### 2026-09-30 17:01 UTC — Accepted native operation and observation
+
+Inputs were published and verified at
+`13da38312ab6ab4af9dc94c160955b01b479a37d`. A first direct-shell Git fetch on the
+node waited without completing; its own HTTPS helper was stopped before any
+control write, snapshot, claim or runner effect. Repeating only source/control
+synchronization through the configured `zsh -lic` network environment succeeded.
+The preexisting automatic-GC warning about missing historical tree
+`dfe82c9813ee82191abb8385cc12a6886fd0a77b` was preserved; no shared Git repair
+or broad cleanup was attempted. Only the owned active row was inserted in
+live canonical RESEARCH; other dirty controls/outputs were preserved.
+
+Supervisor `peer-cvr-b01-a01-20260930` submitted the single launch and ended
+exit0 after returning native acceptance at **2026-09-30T17:01:17.298181Z**.
+The [manifest](../../../../runs/uav_local_peer_forecast/b01_cv_reversal_a01/launch-manifest.json)
+and [fresh admission](../../../../runs/uav_local_peer_forecast/b01_cv_reversal_a01/admission-preflight.json)
+bind source, current control observation, command and actual node resources.
+Operation:
+`/home/wu/projects/HMASD/.git/hmasd-admission/1c0fd47795a240ff32a35fa8b2242bc8a06cbba6930c2ae32e28be193cc47be4.json`.
+Snapshot:
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/c3b7702e04984830ab4355b038174722`.
+RunnerPID1140807 and native supervisorPID1140806 are recorded identities, not
+relaunch instructions. Source remains the published SHA above despite later
+main/control publication.
+
+`tools/hmasd_wait.py` registered generation1 with600-second checkpoint window,
+30-second status interval and25-second probe timeout, observing that exact
+operation. The first drain directly observed accepted/running native identities
+and consistent records at17:01:42UTC. This native DM stays active through
+collection and interpretation; registration or launcher acceptance is not a
+scientific result boundary. The worker and reader are one accepted process.
+
+<a id="b01-complete-reading"></a>
+## 2026-09-30 — B01 complete result reading
+
+The same operation exited0 with a valid witness at17:02:22UTC; the deterministic
+observer recorded READY/consistent terminal facts at17:02:24UTC. Native-child
+queue delivery was rejected by the runtime, as anticipated; the active DM
+drained the event directly, consumed it in generation2 and stopped the finished
+observer without restarting the worker. All96 episodes and the independent
+full reader completed at the original source13da38312. The summary and reading
+are [run records](../../../../runs/uav_local_peer_forecast/b01_cv_reversal_a01/summary.json)
+and [full reading](../../../../runs/uav_local_peer_forecast/b01_cv_reversal_a01/reading.json).
+Summary SHA256 `0545b3fd02c375ac573c856418d212acdea7e52ab39b2c8ee7663bfb1b77641d`;
+reading SHA256 `fdc6012b80d9e0ef72d0105319e974f0e56f0176433aa11694412bf63bd0bb9e`.
+The DM verified all summary-linked compact hashes, all10 source-manifest files,
+and directly on the canonical node all96 raw hashes/byte counts:7,215,902bytes
+at the declared single raw location. No bulk duplicate was collected.
+
+Before the continuation judgment, read the relevant published RESEARCH at
+`6307afcc1e789b419c062491a9d45dce6b0691ab`: §2's local-history C/H and newly
+completed ordinary C-prior I evidence, plus §5's delayed future-motion B04.
+They preserve the distinction between lawful history, prediction accuracy,
+actual decisions and complete use. Ordinary I's new conditional positive
+strengthens the simpler alternative of changing behavior around competent C;
+cross-panel magnitudes do not rank it against V/R here. The inherited sampled
+asset remains another capability, not this component comparison's attribution
+baseline. These readings give no reason to buy a predictor fit automatically.
+
+### Complete native endpoints and contrary outcomes
+
+| Program | Mean native J | Users/tick | Mean within-episode service-p10 | Mean episode minimum | Mean path m/UAV |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| C | .332121330 | 19.634033 | 18.984375 | 11.3125 | 2205.271 |
+| V | .336812229 | 19.925903 | 19.375000 | 11.3125 | 2409.165 |
+| R | .330925842 | 19.527954 | 18.984375 | 11.3125 | 2274.776 |
+
+The fixed paired t95 intervals are descriptive across32 worlds, df31, with no
+filtering, resampling choice or outcome-dependent panel extension:
+
+| Contrast | Mean delta J [t95] | Mean delta users/tick [t95] | J positive/negative/exactly same worlds |
+| --- | --- | --- | --- |
+| **R−C primary** | **−.001195487 [−.003726104,+.001335129]** | **−.106079 [−.312271,+.100113]** | 4/4/24 |
+| V−C | +.004690899 [−.002234368,+.011616165] | +.291870 [−.184840,+.768581] | 4/1/27 |
+| R−V | −.005886386 [−.013004277,+.001231504] | −.397949 [−.910936,+.115038] | 4/7/21 |
+
+The primary constructive R prediction is not established. R−C service improves
+in3 and falls in5 worlds, with24 equal; its small quality increase+.000965400
+does not offset the mean service loss. V's positive J/service point estimate is
+preserved, not promoted to reliable superiority. All program/world minima are
+identical and all96 episodes have zero zero-service ticks; this does not measure
+individual-user continuity or physical safety.
+
+Preserve concrete strong positive and adverse outcomes. V−C in29401002 is
++.097783118J/+6.550781 users, with service-p10+6 and path+3703.971m/UAV;
+29401012 and29401017 also gain+2.828125/+1.585938 users. V loses
+−.017340924J/−1.855469 users in29401026, with service-p10−2. R's largest
+J gain is29401002 (+.002732434), but its service there is−.019531;
+29401006 loses−.039539521J/−3.238281 users, service-p10−2 and
+path+1774.880m/UAV. R−C mean service-p10 is exactly0 because one−2 and
+one+2 offset; V−C is+.390625, not a uniform tail improvement. Mean path
+increases are+203.894m/UAV forV and+69.505m/UAV forR. Mean xy-boundary
+exposure rises7.875/7.21875 UAV-ticks; mean altitude rises .019531/.058594m.
+There is no altitude penalty or energy model in this native J, so neither
+height nor path changes are to be renamed energy/safety outcomes.
+
+The DM separately compared saved commands, full positions, local observations,
+J/service/quality arrays: V/C are exactly identical in27 worlds, R/C in24,
+R/V in21. This is a trajectory fact, not merely equality of rounded endpoints.
+The earlier seed29401000 correctness-prefix exposure remains declared above;
+all32 original worlds are retained without deletion or replacement.
+
+### Information, prediction and actual decision exposure
+
+All122,880 actor ingests,30,720 deployed rankings and3,317,760 own candidate
+model ticks occurred. The complete reader made51,200 rankings including20,480
+stationary-C shadows, sharing powers only within each decision. It reconstructed
+all24,672 saved native states, all radio/observation/assignment/reward/movement,
+all actual controller scores/selections/navigation/holds, and the declared
+same-path predictions. No actor received evaluator identity, truth, other
+observations, current teammate commands or future information.
+
+| Actual recorded policy | Moving-peer + current-user decisions | Changed score vectors | Changed argmax / command / physical path | Worlds with physical changes |
+| --- | ---: | ---: | ---: | ---: |
+| C | 202 | 0 (self reference) | 0 | 0 |
+| V | 207 | 206 | 5 / 5 / 5 | 5 |
+| R | 202 | 202 | 9 / 9 / 9 | 8 |
+
+Each program has10,240 decisions. Thus score perturbations usually leave the
+decision unchanged; 14 total altered commands are all physically distinct,
+with no clipping alias. This is sparse decision use, not nonactivation of the
+tracker or scorer. The full reader found22,539 accepted adjacent-frame matches
+across all paths with zero evaluator-identity errors and zero ambiguous rows;
+809 visible rows lacked a match. These finite traces validate observed
+associations, not a universal association guarantee. All worker calibration
+discrepancy counters are0. No association/calibration defect has been identified
+as a reason for another repair.
+
+The following errors are arithmetic mean Euclidean meters over leads1–4 then
+eligible pairs, always comparing all three forecasts **on the same recorded
+path**. They are not RMS and are not causal outcome conditioning:
+
+| Recorded policy; fixed slice | Peer pairs | Stationary C forecast | V forecast | R forecast |
+| --- | ---: | ---: | ---: | ---: |
+| C; moving matched + users | 203 | 68.574035 | 108.916915 | 24.919163 |
+| V; moving matched + users | 208 | 71.008630 | 109.130302 | 28.188739 |
+| R; moving matched + users | 203 | 69.738419 | 109.167159 | 29.025438 |
+| V; actual physical-change slice | 5 | 45.000008 | 64.571250 | 96.213203 |
+| R; actual physical-change slice | 10 | 43.072018 | 71.210592 | 76.170357 |
+
+Peer-pair and decision denominators differ when multiple peers are visible.
+The last two slices were prospectively declared descriptive diagnostics; they
+do not identify the effect of a forecast error or a counterfactual C continuation.
+Reversal still predicts geometry better on the broad moving+users slice even
+under R deployment. Its nine consequential choices do not inherit that error
+advantage: on their ten peer pairs, R's error is higher than stationary C's.
+Conversely, V has four beneficial complete worlds despite worse broad errors.
+Thus neither the old-reversal premise disappearing everywhere nor aggregate
+accuracy translating automatically into native value fits these observations.
+The simplest supported change in explanation is that most model changes leave
+competent C's ranking winner intact, while rare changed choices can change the
+subsequent path substantially. This does not identify which local error or
+longer-horizon consequence caused any specific native gain/loss.
+
+### Complete measured cost and provisional continuation judgment
+
+The study used96 complete episodes/24,576 native steps,0fits/updates/new
+training labels, one constructor/unscored reset and96 explicit scored resets.
+Worker counts are13,208,570 controller power values (only3,300 additional
+moving-peer values) plus6,785,075 native dense slots =19,993,645 total.
+The reader uses19,993,370 combined slots; both are well below their prospective
+ceilings. Dense diagonal placeholders remain charged; physical nonself native
+links total6,661,710 including the constructor reset.
+
+Worker wall/CPU were28.822213/30.244984s; full reader32.234286/33.959248s;
+complete process61.084482 wall/64.233721 CPU seconds with peakRSS78,320KiB
+(process-lifetime Linux scope). Imports and native factory are included; their
+separate wall/CPU values are .042313/.044559s and .217704/.229393s.
+Measured C/V/R actor CPU over32 episodes is3.314114/5.356443/5.426546s;
+V/R cost about1.62/1.64 times C here. No deadline or fastest-controller claim
+was tested; known exact memoization is an additional ordinary compute option.
+The DM's final raw-hash/trajectory-identity pass added .161206wall/.668323CPU
+seconds excluding imports/SSH. Engineering, Git/network synchronization,
+admission/snapshot, transfer and scientific review remain additional support;
+the earlier correctly disclosed test exposure is not folded into native steps.
+
+**DM initial disposition, pending independent scientific diagnosis:** retain C,
+the exact V positive/adverse witnesses and R's geometric prediction capability,
+but do not adopt R or claim V superiority. The selected reversal recipe has
+not converted its broad accuracy advantage into useful complete mean value.
+Sparse physical use limits an active-anticipation harm claim;0fits says nothing
+about forecast learnability. Decline automatic sign/weight/gate tuning, learner
+fitting, encounter densification or a new panel merely to shrink these intervals.
+A fresh fixed-program replication could test recurrence of V's rare gains,
+but it would still need an actual deployment choice to change and competent
+ordinary alternatives. No new operation is selected while the separate-context
+ResearchCritic reconstructs these facts and recommends the bounded next action
+or justified stop. This is an unresolved broader prediction/control question,
+not an empirical impossibility or a technical failure.
+
+<a id="b01-independent-diagnosis"></a>
+## 2026-09-30 — Independent scientific diagnosis and resolved disposition
+
+The dedicated ResearchCritic ran in a separate context with no inherited DM or
+Root conversation. It reconstructed the frozen protocol, source and native
+evidence before reading the original Oracle answer and proponents' interpretations.
+Its completed substantive recommendation follows. No new native episode or fit
+was launched for this review.
+
+### Independent review
+
+**Recommend revising the explanation and stopping further investment in this
+fixed C/V/R recipe.** Retain C as the component reference, V's conditional
+capability, and every adverse result. The reviewer agrees with the DM's proposed
+disposition. No additional fit, replication or Pro consultation is warranted by
+this result alone.
+
+The reviewer independently checked all 96 raw hashes; all 32 distinct initialized
+geometries; three-arm pairing and identical first four ticks; native movement;
+reward/service/quality reductions; and every signed J/service contrast and
+declared interval. Maximum reward-formula discrepancy was 1.67e-16. It also
+independently reconstructed the relevant same-path forecast errors. All 10 current
+source files matched launch 13da38312ab6ab4af9dc94c160955b01b479a37d. The existing
+full reader completed successfully; the critic did not repeat its complete
+controller/physics reconstruction or the engineering suite.
+
+The complete comparisons in the preceding reading are exploratory fixed-program
+comparisons across worlds. They establish neither equivalence nor a reliable
+population ranking. The recorded correctness exposure to seed 29401000's prefix
+remains provenance; all 32 worlds remain in the frozen reading.
+
+These raw witnesses are consequential. Actors are **zero-indexed**. Error is
+mean Euclidean error over the next four leads for the moving visible peer at
+the first differing decision.
+
+| Program/world | First differing tick/actor | Stationary / used forecast error, m | First changed block delta J | Complete delta J / users per tick |
+| --- | --- | ---: | ---: | ---: |
+| R29401006 | t4 / actor 1 | 75.000 / .000011 | +.026952 | −.039540 / −3.238281 |
+| V29401002 | t8 / actor 2 | .000020 / 75.000020 | −.002285 | +.097783 / +6.550781 |
+| V29401012 | t8 / actor 4 | .000001 / 105.110526 | −.023468 | +.038055 / +2.828125 |
+| V29401017 | t4 / actor 1 | 75.000004 / .000016 | −.011377 | +.028682 / +1.585938 |
+| V29401026 | t16 / actor 4 | 75.000005 / .000017 | −.007569 | −.017341 / −1.855469 |
+
+For each row, the two complete programs have identical observed prefixes through
+the decision input:
+
+- **R29401006:** actor 1 moves left instead of holding. Peer 0 actually reverses
+  its horizontal motion, making R almost exact. Initial service improves from
+  C's `[5,6,7,7]` to `[5,9,9,8]`, but during ticks 64–255 C averages 18 served
+  and R 14.25. Full-episode service p10 falls 2; mean path increases 1774.880m/UAV.
+- **V29401002:** actor 2 chooses `(1,1,1)` instead of `(0,−1,0)`. Peer 1 stops,
+  so stationary prediction is accurate. Subsequent service nevertheless improves:
+  ticks 64–255 average 22.0625 versus C 15. Actor 2's observed-user count averages 6.62
+  versus C 0. Service p10 rises 6, with 3703.971m/UAV extra path.
+- **V29401012:** actor 4 chooses `(1,1,1)` instead of holding while peer 3 stops.
+  Late service becomes 20.25 versus 17.125; p10 rises 3 and path increases 1511.675m/UAV.
+- **V29401017:** actor 1 chooses `(1,−1,1)` instead of `(−1,0,0)`. Persistence
+  accurately predicts peer 2. Despite the initial loss, late service becomes 19.875
+  versus 18; p10 rises 1 and path increases 1562.562m/UAV.
+- **V29401026:** actor 4 holds instead of moving left while peer 0 continues left.
+  Only four ticks have different team commands, but the positional consequence
+  persists: subsequent service settles at 10 versus 12. Service p10 falls 2.
+
+These are **observed matched-program contrasts**, including subsequent coupled
+responses. Forecast errors describe the recorded paths. They are not evaluations
+of arbitrary alternative suffixes, proofs of mediation, or evidence that the
+same intervention would help another world.
+
+The supported diagnosis is more specific than “accuracy does not guarantee reward”:
+
+1. **The reversal representation prediction survives deployment.** On R's 203
+   moving-peer pairs with current users, errors are C 69.738 m, V 109.167 m and
+   R 29.025 m; 149 next commands exactly reverse. Corresponding reversal advantages
+   also remain on C and V paths. Destruction of the old reversal pattern is a
+   weak explanation of this result.
+2. **Consequential choice exposure is sparse.** V has 207 eligible decisions and
+   206 score changes, producing five physical changes. R has 202 eligible
+   decisions/score changes, producing nine physical changes. Each denominator
+   is 10240 actor decisions; eligible events occur in 22 worlds. This is substantial
+   nonconsequential scoring alongside sparse executed intervention, not universal
+   nonactivation. R29401006 and V29401026 are active adverse witnesses.
+3. **Average geometric accuracy poorly targets the decisions that determine
+   complete value.** On R's action-changing slice, stationary error is 43.072 m
+   versus R 76.170 m across ten peer pairs. That selected slice is descriptive.
+   More decisively, accurate forecasts can improve the first block and harm the
+   episode, while inaccurate forecasts can harm the block and improve the episode.
+4. **The strongest simpler explanation is trajectory redirection under competent,
+   short-horizon local planning.** Different early choices change later visibility,
+   interference and configurations. Raw service and observation traces support
+   this account, but do not isolate discovery, invisible interference, horizon
+   truncation or coupled responses as its sole cause. Tracking failure is
+   unsupported here; learnability was not tested.
+
+V's strongest useful positive is a sparse, lawful intervention that sometimes
+reaches substantially better complete trajectories, with both inaccurate and
+accurate forecasts among its gains. Preserve that capability. Also retain R's
+three small joint J/service gains and its quality/service tradeoff in 29401002;
+its adverse mean is not universal failure.
+
+The newly available ordinary I policy strengthens the competing explanation
+without empirically ranking I against V. The critic checked its policy/source
+reading, declared block results, and paired positive/adverse raw witnesses:
+30300109 gives +.234261 J/+16.488281 service;30300220 gives −.093560/−7.039063.
+Its overall +.023721 J/+1.709106 service comes with greater travel and worse
+within-episode service p10. This demonstrates useful ordinary perturbation
+without a forecast. It does not establish that randomization explains V's gains
+or that I dominates V. [I reading](../../../../runs/uav_parent_adaptation/b03_c_prior_a01/reading.json).
+
+**The stopping recommendation is an investment judgment, not a family-wide
+impossibility claim.** An unchanged V replication could test recurrence but
+would leave the ordinary-perturbation explanation largely unresolved. The
+reviewer would not allocate it now. No further observation is needed to publish
+this study and end the fixed-sign recipe.
+
+If a later decision specifically concerns using V, a worthwhile complete
+observation would compare fixed V, C and the competent ordinary stochastic
+alternative on prospectively matched worlds, preserving service continuity
+and movement costs. Recurrent V−C gains would support package recurrence;
+an advantageous matched V-versus-ordinary tradeoff could support use; mixed
+or adverse recurrence would weaken expansion. None alone proves forecast
+mediation. A reasoned, costed successor conjecture is sufficient: do not require
+a complete downstream causal diagnosis before allowing future exploration.
+
+The critic independently agreed with the preceding measured native/worker/reader
+cost. One additional reviewer arithmetic pass cost 34.417 wall/36.105 CPU seconds,
+with zero native transitions or fits. Engineering and total support cost remain
+incompletely metered. No live review process or snapshot/scratch consumer remains;
+preserve the sole raw evidence copy, with no continued snapshot retention needed.
+
+**MATERIAL_DISSENT: no.** The reviewer supports this fixed-recipe stop and
+retention of V's conditional capability, grounded in verified sparse interventions,
+positive/adverse trajectories and the failed primary improvement prediction.
+
+### DM resolution and next condition
+
+Accept the independent diagnosis and recommendation. The initial explanation
+is sharpened by the first-block/full-episode reversals above: poor error on the
+aggregate action-changing slice cannot by itself explain R's large loss, whose
+first forecast is nearly exact and initially beneficial. Likewise V's gains
+do not depend uniformly on forecast correctness or initial reward improvement.
+The empirically supported account is sparse trajectory redirection; the exact
+roles of later discovery, interference and coupled responses remain unresolved.
+
+**Keep:** competent C as the matched component reference; frozen C/V/R code and
+independent reader; V's conditional positive/adverse trajectories; R's improved
+geometric prediction and all small positive/adverse endpoints; the complete
+raw/compact evidence and disclosed prefix exposure. **Stop:** the unchanged
+fixed-sign recipe and automatic sign/weight/gate tuning, fitting or panel
+extension. Neither R adoption nor reliable V superiority is established.
+Task opportunity, lawful representation, learnability and complete-package
+value remain distinct; no forecast learner was fitted.
+
+Place the direction in **reserve**, idle with no accepted producer or pending
+scientific dependency. The assigned one-panel boundary is complete. Return the
+evidence and this choice to Root for cross-question allocation; do not silently
+start a successor. A concrete re-entry condition is an actual V-use decision
+or a materially different, reasoned and costed anticipation/control conjecture
+with an applicable independent selection review. An eventual complete comparison
+should preserve C and competent ordinary same-resource alternatives such as I;
+no proof of mediation, exhaustive suffix replay or successful toy is an admission
+gate. A future proposal is optional, not owed by the still-open parent question.
+No additional Pro consultation supplies a distinct unresolved role at this
+decision; the evidence-first ResearchCritic review is adequate and uncontested.

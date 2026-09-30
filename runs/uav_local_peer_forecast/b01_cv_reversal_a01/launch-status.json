@@ -1,0 +1,76 @@
+{
+  "admission": {
+    "claim_state": "accepted",
+    "state": "accepted"
+  },
+  "artifacts": {
+    "stderr": {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/stderr.log",
+      "state": "present"
+    },
+    "stdout": {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/stdout.log",
+      "state": "present"
+    },
+    "summary": {
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/summary.json",
+      "state": "present"
+    }
+  },
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/1c0fd47795a240ff32a35fa8b2242bc8a06cbba6930c2ae32e28be193cc47be4.json",
+  "direction": "uav_local_peer_forecast",
+  "execution": {
+    "exit_code": 0,
+    "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790787742.5777261,
+      "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/process-exit.json",
+      "state": "valid",
+      "termination": "process_exit"
+    },
+    "runner": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1140807,
+        "session_id": 1140806,
+        "start_ticks": 113075062
+      },
+      "state": "absent"
+    },
+    "state": "exited",
+    "supervisor": {
+      "recorded_identity": {
+        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+        "kind": "linux_pid_start_ticks",
+        "pid": 1140806,
+        "session_id": 1140806,
+        "start_ticks": 113075059
+      },
+      "state": "absent"
+    }
+  },
+  "explicit_retry": {
+    "eligible": false,
+    "reasons": [
+      "parent has no consistent terminal nonzero native exit"
+    ],
+    "scientific_authorization": false,
+    "successor_ref": null,
+    "supported": true
+  },
+  "explicit_retry_available": false,
+  "kind": "hmasd_operation_status",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/launch-manifest.json",
+  "node": "wsl_4070",
+  "observed_at": "2026-09-30T17:02:24.548061Z",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/1c0fd47795a240ff32a35fa8b2242bc8a06cbba6930c2ae32e28be193cc47be4.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01",
+  "record_consistency": {
+    "mismatches": [],
+    "state": "consistent"
+  },
+  "schema_version": 1,
+  "sha": "13da38312ab6ab4af9dc94c160955b01b479a37d",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/c3b7702e04984830ab4355b038174722"
+}

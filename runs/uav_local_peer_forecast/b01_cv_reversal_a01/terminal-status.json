@@ -1,0 +1,16 @@
+{
+  "status": "complete",
+  "summary": {
+    "path": "/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/summary.json",
+    "bytes": 122111,
+    "sha256": "0545b3fd02c375ac573c856418d212acdea7e52ab39b2c8ee7663bfb1b77641d"
+  },
+  "telemetry": {
+    "wall_seconds": 61.08831165195443,
+    "process_cpu_seconds": 64.23775844,
+    "peak_rss_kib": 78320,
+    "peak_rss_scope": "process lifetime Linux",
+    "input_blocks": 0,
+    "output_blocks": 32464
+  }
+}
