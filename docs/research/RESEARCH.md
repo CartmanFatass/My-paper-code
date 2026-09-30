@@ -1,13 +1,13 @@
 # HMASD research index
 
-当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-29 UTC（2026-09-29 PDT）。治理依据为
+当前研究背景、共享认识、项目状态与研究计划，更新于 2026-09-30 UTC（2026-09-29 PDT）。治理依据为
 [constitution](../project/OPERATING_CONSTITUTION.md)；本页维护现状，历史过程见[日期归档](archive/)。
 
 阅读入口：[研究背景与共享认识](#研究背景与共享认识) · [方向状态](#active) · [现行计划](#current-research-plan) · [任务路由](#session-routing)。
 
 **本Root工作流已恢复：2026-09-29 21:59 UTC，owner明确要求“阅读handoff 我们继续工作”。**
-本次解除21:25 UTC的本Root及三个Codex方向暂停；三项已接受研究现已完成判读、补评、发表与收尾；两项后继比较已选择，新原生DM正在准备。
-新Root已核对三个方向无活动进程；旧Root／子代理未加载，故明确转交未完成责任给当前原生DM，保留全部Lead／源码／原操作身份。
+本次解除21:25 UTC的本Root及三个Codex方向暂停；原已接受研究及后续A/B、G/N两轮均已完整判读、发表和收尾。
+Root继续owner委托的轮次循环：当前综合G/N结果并向Pro征求下一项有价值的问题，尚未选定新结果运行。原责任恢复保留全部Lead／源码／原操作身份。
 这不改变Claude独立授权、FSD/PPC暂停、G33冻结或Milan数据依赖。[恢复范围](#resume-20260929)、[原暂停交接](#paused-handoff-20260929)。
 
 **Owner pause: lifted** 项目历史解除与本次Root范围恢复并存；其他明确暂停仍有效。
@@ -1594,17 +1594,20 @@ result, learning claim or fixed number of directions is owed.
 
 | Question / current DM | Selected complete comparison | Judgment the observation can change |
 | --- | --- | --- |
-| `uav_registered_service` B02 / `/root/dm_periodic_efficiency` | G/O/S2,64 fresh paired N5/U50/H256 worlds;192 episodes/49,152 steps/0 fits. G switches to native ranking only after its same-window obligation is model-complete under the exact legal-history gate. | Whether periodic service can have lower average-service/travel cost, or O's continuous refresh purchases future geometry and shorter gaps. Preserve F, J/service, quality, path, actual gaps, tails and deadlines; no invented preservation threshold or actual ACK. |
+| `uav_registered_service` B02 / `/root/dm_periodic_efficiency` | **Complete/read:** G/O/S2,64 fresh paired N5/U50/H256 worlds;192 primary episodes/49,152 steps/0 fits. Full reading, independent diagnosis and measured cleanup complete; a01 technical evidence remains separate. | Retain G's conditional service/travel gains, O's stronger coverage/refresh and S2's native efficiency. Loss-free preservation is contradicted; maximum waits worsen broadly. Reserve, no selected successor. [Scientific disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading). |
 | `uav_fleet_transmission` B01 / `/root/dm_fleet_transmission` | **Complete/read:** N4/N8 c10,16 paired H500 worlds; five programs per N,160episodes/80000steps/0newfits. Full independent diagnosis, canonical evidence and measured cleanup complete. | Retain N8 E capability and C/E mean-J reference; N4 H6 E is adverse, while H6/all retains a service tradeoff. Fixed screen ended; reserve, no selected successor or live dependency. [Scientific disposition](candidates/uav_fleet_transmission/NOTES.md#b01-complete-reading). |
 
-New scope totals **352 complete episodes/129,152 native steps/0 new fits/0 updates**. G has
-priority for deadline-sensitive node use; N prepares in parallel but its result execution/heavy
-remote work waits for G's calculation-release fact and fresh admission. G's maxima are1,425,408
-requests/5,657,088 candidate reductions; N adds648,000 mask requests and2,592,000 ordinary-motion
-candidate requests. These are different costs, not equal-priced counts. Historical worker
-anchors exclude unknown new integration/readers/support; no guessed hours or hard CPU cutoff
-is made a partial-prefix stopping rule. A material feasibility or cost contradiction returns
-to Root; ordinary implementation and each DM's publication require no per-run approval.
+The selected primary panels total **352 complete episodes/129,152 native steps/0 new fits/0 updates**.
+G's failed original attempt adds101 complete episodes and12 partial transitions: actual native
+result exposure is453 complete episodes plus that partial episode,155,020 steps. Its a02-only
+primary rule remains intact; N's352 separate correctness transitions are support exposure.
+Known worker/reader cost is2,657.133613 CPU seconds across G's attempts and N's full entry;
+G diagnostic/trace work adds .187336 seconds, while preparation, checks, transfers and reviews
+remain incompletely metered. The two studies reclaimed4,997,165,056 allocated bytes, preserving
+all294 G raw files and all320 N raw/decision files in their canonical locations. Both DMs are
+fully closed; no unread advice, live producer or selected next experiment remains in this round.
+The continuing Root question is the next worthwhile scientific investment, with the complete
+independent recommendation and open Pro consultation [below](#portfolio-review-2026-09-30-next-native-service-question).
 
 The prior A+B round is fully complete:544 episodes/139,264 steps/0 new fits, with3,033.782534
 known worker/reader CPU-seconds and1,684,119,552 allocated bytes reclaimed at verified closure.
@@ -1632,8 +1635,10 @@ selected comparisons remain on Root's native S1 objects. Neither side's queued p
 reclassifies the host or authorizes taking over the other's work.
 
 **Shared node controls:** source snapshots use configured `zsh -lic` and native admission.
-Canonical HEAD remains570fd4564; only its RESEARCH control file is narrowly synchronized to
-published main, under locks and with concurrent edits preserved. Do not perform a blind
+Canonical HEAD remains570fd4564; its RESEARCH control file is narrowly synchronized to
+published main. The maintained launcher was separately updated to published3e4629867ceeafed4936c152a2dafdde98974f18
+for the explicit same-source retry contract; it is intentionally modified relative to the old
+canonical HEAD. Both updates preserve concurrent edits under locks. Do not perform a blind
 whole-tree update, sparse-selection change or cleanup of peer outputs. The previously observed
 Git missing-object/auto-GC issue is not repaired or proven harmless by successful snapshots;
 preserve the verified old N checkpoint worktree and all required unique evidence.
@@ -1675,6 +1680,386 @@ FSD/PPC暂停、G33冻结、Milan数据依赖及不复用完整收尾旧DM均保
 <a id="portfolio-review-2026-09-29-b05-constructive-successors"></a>
 [已退休B05轮边界Pro答复与原取舍](archive/2026-09-29/RESEARCH-b05-constructive-successors.md#decision)。
 原先暂缓校准是当时的边际投入选择，不是永久单研究规则；该B06现已完整收尾，当前后继见上方所选两题，旧结果不改写。
+
+
+## Portfolio review 2026-09-30 next-native-service-question
+
+Conversation: reuse the current WSL/Jev portfolio conversation; its account address stays local.
+Standing: G/N are scientifically read, independently diagnosed, published and fully closed.
+Root has read both DMs' complete interpretations, the independent result diagnoses, the relevant
+complete saved readings and the independent cross-question recommendation below. This is the
+owner-requested round-boundary Pro innovator consultation, not permission to launch.
+Paths marked `source_sha` resolve at the question's published revision supplied in the send.
+Separately named scientific and evidence revisions retain their original identities.
+
+### Question
+
+**What worthwhile complete native-host research question should Root invest in next, if any?**
+Develop the retained capabilities or identify a consequential independent question with an
+explicit task objective, competent ordinary alternative and bounded first comparison. Challenge
+our priorities: the independent reviewer now recommends no immediate allocation to the two
+completed screens or to the concrete constrained selector described below. Root agrees that
+that selector, as currently framed, is not selected, but has not concluded that useful native
+questions are exhausted. Your distinct contribution is constructive synthesis and problem
+formulation after the new evidence, rather than another review of whether G or N is positive.
+
+A useful question can concern ordinary control, finite learning or empirical limits. Direct
+native learning is permitted without a positive toy, exact headroom or a proved mediator.
+Do not fill a DM quota, prescribe another generic review round, or turn every surviving
+uncertainty into an experiment. If no alternative earns its whole cost, recommend that plainly
+and identify what concrete premise would change the investment choice. No new architecture,
+positive result or novelty verdict is owed. This consultation fulfils the owner's continuing
+loop; it does not manufacture a successor merely to keep workers busy.
+
+Please address these connected decisions:
+
+1. What consequential knowledge or capability is now worth buying? Distinguish developing
+   G/O/S2's demonstrated service tradeoff from repairing a presumed cause, retesting old asset
+   rankings, or claiming a general MARL learning method. State the surviving reason for hope
+   and strongest ordinary explanation, including the contrary evidence below.
+2. If service continuity is the next scientific object, specify the objective before the
+   learner/controller: fixed-window obligations, continuous service gaps and mean native J
+   are different. We have no owner-supplied physical waiting deadline, energy model or F/J
+   exchange rate. A new prospective mathematical service criterion may be chosen for research,
+   but must be named as a new contract and compared fairly; do not backfill it into B01/B02.
+   Is a concrete anticipatory or adaptive controller comparison more useful than the proposed
+   expected-F-constrained selector, or is a different native question preferable?
+3. For any recommended action give an executable first comparison: legal actor information,
+   controls and clocks; ordinary reference and initialization when learning; one fixed primary
+   objective/estimand with consequential other endpoints retained; fresh panel/training units;
+   fits, native steps, nested model/search work and unknown implementation/readback costs.
+   State an intermediate prediction and complete-task consequence, and what positive,
+   adverse or unresolved outcomes would change. Do not offer a long menu of unspecified sweeps.
+4. Explain why this investment is preferable to retaining the useful assets and stopping these
+   immediate continuations. Use a verified primary-source bridge if it actually changes the
+   proposal. State assumptions and omitted MARL coupling, sources actually read and critical
+   gaps; a library hint or old Pro suggestion is not evidence of novelty or feasibility.
+   Return **MATERIAL_DISSENT: yes/no** for material objections to our framing or investment.
+
+### Complete-round evidence and changed judgments
+
+**G: a real efficiency capability with temporal costs.** `uav_registered_service` B02 used
+scientific source `8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc`, complete result/diagnosis
+`8e87c58de68c605393e272d4b60291c57712882a`, closure
+`f63f6c3393d69ea6807fe5819968356389e482bb`. It compares G/O/S2 on64 fresh paired worlds,
+192 H256 episodes/49,152 steps/0 fits. Contract: N5/U50, static uniform users, free-space,
+no shadowing, non-FDMA,3dB/c10,400-byte ordered quantized map, two-tick delivery/four-tick
+commitment. G uses the native S2 ordering only after its lawful model history/private prefix
+marks the whole same-window obligation complete; crossing/missing histories retain O/fallback.
+Actual connections/ACK and future outcomes are evaluator-only. F counts actual service to each
+of50 users in each of four64-tick windows, maximum200; it is not continuous waiting time.
+
+| Mean endpoint | S2 | O | G |
+| --- | ---: | ---: | ---: |
+| Actual F /200 |161.359375|199.968750|199.859375|
+| Native J |.480615|.322071|.403068|
+| Served users/tick |29.985168|18.607300|24.342224|
+| Path m/UAV |4442.61|8479.82|6880.23|
+| Episode maximum unserved gap |249.4375|50.7031|72.3125|
+
+G-O J+.080997 (all64 worlds), service+5.734924 (63 positive/1 negative), path-1599.590m
+(all64 shorter). But G loses seven additional user-window obligations across six worlds:
+G9 misses versus O2, F200 in56 versus62 worlds. F difference-.109375, descriptive paired
+t95[-.199683,-.019067]. Episode maximum gap rises21.609ticks[15.916,27.303], worse in57
+worlds, better in5 and tied in2. Closed gaps also worsen; quality's difference is unresolved.
+The loss-free conjecture fails; no formal preservation tolerance had been frozen, so no
+invented noninferiority test is applied. G still improves F but lowers J/service and lengthens
+travel versus S2 in every world. Preserve all three capabilities rather than declaring a default.
+
+The constructive witness matters: in29309003, G/O both F200, G service19.309→25.527,
+path-1502m/UAV, max gap106→62. Yet in29309000 both F200 while G user3 has a115-tick
+closed gap versus35 for the same O user. In29309019 G increases J through quality but lowers
+service .0625/tick and has a107-tick closed gap versus O's episode maximum35. G has7 zero
+service ticks against O14, but introduces a new zero in29309034. Saturated F cannot protect
+continuous service or certify per-world joint improvement.
+
+All64 worlds activate G:2338/4096 timely releases,9228 transitions. No missing initial history
+or deadline failure explains this panel.31 false-prefix releases concern four correlated
+user-window obligations, only two eventually missed; five other extra misses occur in worlds
+with no false releases and in windows with no release. Earlier release changes can persist
+into later age-ranked service. This supports future value from continued refreshing without
+identifying geometry or model-history error as the dominant mediator. ACK benefit cannot be
+calculated by subtracting two misses. G/O request equal search counts; G's modest episode CPU
+saving is .157s, while transmitter-on exposure increases148.375 team ticks/episode. Shorter
+flight does not prove energy savings.
+
+The full reader verified every primary raw file and its declared model-history/gate/key and
+candidate-physics scope; physics shares frozen kernels and candidate verification is a subset.
+G's a01 failed with a CPython unknown-opcode error after101 complete episodes plus12 steps.
+One prospectively chosen full same-source a02 retry, with a02 alone primary, completed. The
+101 repeated summary rows match on non-timing science fields, which adds no independent n
+and identifies no runtime cause. Both attempts remain archived with their cost and raw evidence.
+
+**N: configuration-dependent actuator utility changes the relevant comparator.**
+`uav_fleet_transmission` B01 used source `a2f62e613a12331ad380876a6c764f8a46a893ee`,
+result `6b51a962e2295b44ea2d79fba128a943e761c39b`, independent disposition
+`7f4c8432ff081692842458d43dedc04b69f6e189`, closure
+`cf31b4935ce8e9ea61ac28b9b45f8125a5d1ba61`. Five programs at each N4/N8/c10,
+16 paired H500 worlds:160episodes/80,000steps/0 new fits. Native0dB Scenario1, ten-step
+mask anchor, unchanged original H6/SET clipped final45 assets; E exhaustively selects a
+nonempty transmit mask using immediate native J. C/E uses one-pass ordinary coordinate
+motion under the old mask before E. This host is different from G's3dB/N5/two-tick contract.
+
+E-all at N8: H6 J+.096344/service+6.235125 and SET J+.254920/service+15.029375, both
+positive in all16 worlds. At N4 H6 J-.020050/service-1.474375, with negative descriptive
+intervals; SET mean-.005838/-.707250 remains unresolved. C/E has highest mean J at both
+sizes (N4 .555347/service33.2225; N8 .624592/service39.718875), and much shorter path.
+But H6/all N4 serves1.72275 more users/tick than C/E while scoring .013247 lower; H6/E
+beats C/E in both endpoints in five N4 worlds. Preserve these tradeoffs and do not claim
+C/E optimality, a world-selection rule or universal dominance.
+
+In N4's worst H6/E world, its first common-state mask choice increases immediate J but
+already drops service31→30; later feedback/actions/positions diverge and full service falls
+38.860→29.202. All-on's presence among candidates is not complete-trajectory protection.
+N8 SET's192 zero ticks disappear under E. Eligibility/eligible-unserved accounting differs
+between N4 and N8, but is not a causal interference fraction. N changes total capacity as
+well as fleet size. Two old training instances and world intervals establish no learning
+population claim. No specific training defect or architecture remedy is identified. End this
+unchanged fixed-asset screen, retaining N8 E, C/E and N4 service tradeoffs.
+
+**Cost and practical closure.** Primary G/N panels total352episodes/129,152steps/0fits;
+G's failed attempt makes actual native result exposure453 complete episodes plus12 partial
+steps,155,020steps. Known worker/reader CPU is2,657.133613s; G diagnostic/trace adds .187336s.
+Tests, engineering, transfers and reviews are additional and incompletely metered. N's two
+consumed historical fits each used360k training steps/720episodes/45 updates plus96k evaluation
+steps, together158.145606 fit-minutes; this is not the entire prior selection history.
+G's prior B01 worker/reader cost is2,911.112s. These sunk costs neither vanish in a zero-fit
+study nor justify further investment. Measured cleanup recovered4,997,165,056 allocated bytes;
+all294 G raw files and320 N raw/decision files remain canonical. Both directions are reserve;
+no current producer, unread result or selected new fit remains.
+
+### Options and current scientific disagreement
+
+The independent reviewer initially developed one concrete learned selector, then declined it
+after reading the full G result. It chooses retain O versus release S2 within G's legal gate,
+on its own visited states, maximizing expected episode-mean native J subject to expected F at
+least O's. This is a **new constrained training objective**, not the frozen native reward and
+not a supplied application tolerance. O training rollouts provide episode reference targets,
+never statewise counterfactual labels from paired end results. No actual ACK or future truth
+enters the actor. It needs both plans on learner states and a new training wrapper.
+
+The proposed finite experiment is1 exploratory fit/512H256 episodes/131,072steps,512matched
+O reference episodes/131,072steps, plus initialization/final selector and O/G/S2 over64 fresh
+worlds:320evaluation episodes/81,920steps. Total1,344episodes/344,064steps. Maximum candidate
+requests are14,729,216 if both plans are materialized at eligible reports. Verification/training
+and exact deadlines remain unknown. One fit is one training unit. This is a costed candidate,
+**not selected work**, not a proven feasible constrained learner, and not a hidden seed sweep.
+
+Its live promise is selective anticipation of refreshing costs; the strongest alternative is
+that O/G already supply the useful ordinary tradeoff and this finite learning package adds
+little. Rare F failures give sparse constraint information; the more widespread closed-gap
+loss is outside the objective. Root provisionally accepts the recommendation to decline this
+formulation. A different service criterion or genuine anticipatory candidate could change the
+question, but no arbitrary gap threshold, exhaustive statewise label study, ACK repair or
+new architecture is automatically selected. Explain the value of a replacement question before
+buying its implementation. No additional allocation is a legitimate comparator to every option.
+
+Broader native questions remain possible; use actual prior evidence rather than selecting by
+an empty worker slot. The prior A/B round retained learned variable corrections D over their
+old-panel means and ordinary O over S2 for periodic service, with all adverse tails. The mean
+projection failed to preserve D despite small residual variance; it was not the J-optimal
+constant and did not establish message causality. Prior native learning has both own-learning
+positives and failures to exceed competent ordinary programs. These facts prevent both
+"all learning is useless" and "a neural selector must add value" shortcuts. The representative
+archive re-entry review already considered K/N, roster/partner, legal information, finite-model
+and earlier questions with actual positive/adverse/technically missing evidence; it did not
+prove native research exhausted. Select a materially worthwhile independent question if it
+beats the G continuation; do not require one as a second slot.
+
+Claude owns its coupled-host joint-skill/replanning/planner-distillation work and checkpoint
+family. Root's new work must concern native hosts/checkpoints or another materially independent
+estimand, not reimplement that work under a different name. FSD/PPC remain paused, G33 frozen,
+Milan is an owner-data dependency. No old fully closed/archived DM is restarted for a new study.
+New native DM creation follows Root selection, current node admission and one writer per path.
+
+### Context and source precedence
+
+At `source_sha` read these current governance/method sections for this decision:
+
+- `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–9: exploratory purpose, delegated choices,
+  independent scientific review/advisory Pro, costs, records, minimum claims and cleanup.
+- `.agents/skills/hmasd-portfolio-task/SKILL.md` Steps/Boundaries and
+  `.agents/skills/hmasd-scientific-tools/SKILL.md` Mathematics, Choose the question, Update the
+  working explanation, Comparators, Statistics, Cost and exposure. These allow constructive
+  native experiments without a proof/headroom gate, while preserving ordinary competence,
+  complete outcomes and actual cost. Engineering is relevant only to a concrete feasibility
+  claim; the current engineering skill and source code do not certify an unimplemented learner.
+- This index's shared-background topics2,3,4,6,8, relevant G/N standing and current plan. These
+  are revisable understanding, not governance. The explicit owner continuing-loop instruction
+  and peer/pause boundaries above are current; old chat rules do not replace them.
+
+Read consequential evidence at its own revisions, including contrary outputs:
+
+- G result/interpretation at `8e87c58de68c605393e272d4b60291c57712882a`:
+  `docs/research/candidates/uav_registered_service/NOTES.md`, heading `B02 complete reading`;
+  `runs/uav_registered_service/b02_periodic_efficiency_a02/{summary,reading,trace_reading,duplicate-summary-check}.json`.
+  Summary SHA256 `99fac8086f621fc0d07a3d4a1edbc9c10d1b053a0966309bc9c27f4100409192`;
+  reading `10e2a542055526d76eebb6cc56528b8eabba479abbddfd16b7496380b1736397`.
+  Source/collector/reader at `8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc` under
+  `experiments/candidates/uav_registered_service/b02/`; source identities and preceding NOTES
+  define the frozen comparison. B01 interpretation at `01e1b6e85b3b69a6403ad660879563845be9aa50`.
+- N result at `6b51a962e2295b44ea2d79fba128a943e761c39b`:
+  `runs/uav_fleet_transmission/b01_native_s1_a01/{summary,reading}.json`;
+  summary SHA256 `1020f99704c1fb5a4742be314dc45db0bce8fad57e27d8e6a79e635ae80837af`.
+  Full interpretation and independent diagnosis at `7f4c8432ff081692842458d43dedc04b69f6e189`,
+  `docs/research/candidates/uav_fleet_transmission/NOTES.md`, heading `B01 complete reading`.
+  Frozen source `a2f62e613a12331ad380876a6c764f8a46a893ee` under
+  `experiments/candidates/uav_fleet_transmission/`; original assets and action-law scope are
+  identified in the source manifest/NOTES. Do not substitute another asset or the G host.
+- Prior selection/full Pro response: `docs/research/archive/2026-09-30/RESEARCH-periodic-efficiency-and-fleet-control.md`
+  at `source_sha`; original question `9b28197595305c6af0e63374fe60c5b292691c42`, advice
+  `cf45e361cba3e8f3230f8d33a8de7175492c4771`. It predates the G/N outcomes and is not another experiment.
+- For a broader alternative, `docs/research/archive/2026-09-29/RESEARCH-archive-reentry-review.md`
+  at `source_sha`, with its representative scope and FRRIE correction, plus only the actual
+  direction evidence needed for your proposal. Check its inherited contrary evidence and the
+  July/external-review record before calling anything new. Do not recursively preload the archive.
+
+The independent reviewer searched all three local stores and reused the July/external-review
+record for targeted candidates; this is not a complete novelty audit. Root directly read the
+load-bearing constrained-optimization formulation in **MARL-0558**, Zhao et al., *Multi-Agent
+First Order Constrained Optimization in Policy Space*, NeurIPS2023, PDF p3 §3. It formulates
+expected discounted team reward with separate expected accumulated-cost constraints. That is
+an established mathematical formulation, not a guarantee or selected algorithm for our finite,
+partially observed binary selector. The local sources are
+`/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0558.json` and
+`/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0558.pdf`; Pro cannot assume access to those
+host paths. The [official primary PDF](https://proceedings.neurips.cc/paper_files/paper/2023/file/7b64c47dcb067efd6be5eee854c14835-Paper-Conference.pdf)
+supplies the same formulation. Do not claim library contents were read through the GitHub
+connector. Any additional literature bridge needs its actual primary passage and scope.
+
+### Answer
+
+Independent Scientific Reviewer `/root/next_question_preparation`, registered
+`hmasd-research-critic`, separate context without Root/DM conversation inheritance; no edits,
+fits, result-bearing execution or child delegation. Complete substantive recommendation follows;
+line wrapping and local evidence-link destinations are normalized for the repository.
+
+**I would not buy the proposed one-fit selector now.** Retain G/O/S2 and N's demonstrated
+capabilities, and make no additional allocation to these immediate continuations this round.
+I have no second candidate with a sufficiently strong evidence, comparator and cost case.
+This does not close native-host research or establish an optimal controller.
+
+I reconstructed N before reading its interpretation. For G, Root supplied a factual summary
+first; I then checked the frozen protocol, source/configuration bindings, complete summary and
+reader, and consequential raw evidence before reading the result critic and published DM
+interpretation. I did not repeat either complete verifier.
+
+**The evidence changes the priority of the proposed learner.**
+
+- **N supports conditional actuator utility.** At N8, E improves H6 by .09634 J and6.235 served
+  users/tick; its SET improvement is larger. At N4, H6/E loses .02005 J and1.474 users/tick.
+  C/E supplies a strong ordinary comparison, while N4 H6/all-on still serves1.723 more users/tick
+  than C/E. These results neither diagnose a learning defect nor establish C/E optimality. My
+  raw check of the worst N4 H6/E world confirmed an initially beneficial J intervention that
+  already sacrifices one served user, followed by substantial complete-episode harm.
+  [N evidence](../../runs/uav_fleet_transmission/b01_native_s1_a01/summary.json)
+- **G supplies a substantial ordinary capability.** Against O, it gains .080997 J in all64
+  worlds, gains5.735 users/tick on average, and shortens travel by1,599.59m/UAV in every world.
+  Its cost includes seven additional user-window misses across six worlds and longer maximum
+  waits in57 worlds. G remains below S2 in J/service and above it in travel in every world,
+  while supplying much higher periodic coverage.
+  [G evidence](../../runs/uav_registered_service/b02_periodic_efficiency_a02/summary.json)
+- **The strongest useful positive survives.** In world29309003, G and O both achieve F200;
+  G improves service from19.309 to25.527, shortens travel, and reduces maximum gap from106 to62.
+  Selective joint improvement is therefore a constructive possibility.
+- **Expected F is nevertheless an inadequate proxy for continuity.** I directly checked canonical
+  G/O raw files for world29309000: both achieve F200, but G gives user3 a **115-tick closed gap**,
+  versus35 for that user under O. Across the panel, closed-gap deterioration is widespread.
+  An expected-F constraint would leave this demonstrated cost unprotected.
+  [Trace and identities](../../runs/uav_registered_service/b02_periodic_efficiency_a02/trace_reading.json)
+
+G was active:2,338 timely releases across every world, with no unavailable initial anchors or
+deadline misses. Its31 false-prefix releases concern four correlated obligations; only two
+remain missed. Five other additional misses occur without false releases and in windows
+containing no release, after earlier trajectory changes. Thus a model-error-only repair is
+insufficient as an explanation. These observations do not identify a dominant mediator or
+provide statewise retain/release labels.
+
+**The concrete candidate I considered remains testable, but its current objective does not earn its cost.**
+
+Its exact question would be:
+
+> Under the existing registered-service contract, can a learned choice between retaining O and
+> releasing to S2 improve expected episode-mean native J while keeping expected F at least as high as O?
+
+That is a **new constrained training objective**, separate from the frozen native reward. No
+F/J exchange rate or preservation tolerance was previously selected. It also supplies no
+continuous-gap protection.
+
+The contract is N5/U50, static free-space users, no shadowing, non-FDMA,3dB threshold,
+capacity10, two-tick delivery and four-tick commitment. N's0dB,N4/N8,ten-tick-anchor evidence
+cannot supply comparator values or causal conclusions for it.
+
+The actor could use the existing public map, decoded reports, issued commands, proposals and
+lawful model history. It would receive no actual service ACK or future outcomes. Matched O
+rollouts would supply **training-only episode reference targets**. Both candidate plans would
+be evaluated on the learner's own visited states; aliases, requested choices, executed changes
+and fallbacks would remain distinct.
+
+The competing explanations are consequential:
+
+1. Legal history contains useful predictors of future refreshing costs, allowing selective
+   release to improve the complete comparison.
+2. O/G already capture the useful ordinary tradeoff; learning adds insufficient benefit.
+3. Model errors and trajectory feedback limit this gate family's usefulness.
+4. A finite fit fails to exploit an available opportunity. Such failure would constrain that
+   recipe, without establishing impossibility.
+
+The smallest costed exploratory comparison I considered was:
+
+| Work | Episodes | Native steps |
+| --- | ---: | ---: |
+| One selector fit |512|131,072|
+| Matched O training references |512|131,072|
+| Initialization/final selector and O/G/S2,64 fresh common worlds |320|81,920|
+| **Total** |**1,344**|**344,064**|
+
+Materializing both plans at eligible reports gives an upper bound of **14,729,216 candidate
+requests**, using the verified116-request search. Cache savings, state reductions, training
+overhead, reader work and deadlines require measurement. This is one independent training
+unit;64 evaluation worlds cannot establish training replication. Existing schedulers/history
+are feasible assets, but the constrained training wrapper and its full runtime remain
+unimplemented and unverified.
+
+A complete positive would require useful improvement over initialization and the appropriate
+ordinary reference under an explicitly selected service criterion. Higher J with worse F or
+waits would establish another tradeoff. Convergence to O/G, inadequate distinct-action exposure,
+or execution-cost losses would support retaining the ordinary programs and ending that recipe.
+None requires an automatic repair or additional seeds.
+
+**My consequential objection is to the present investment target:** it focuses learning on scarce
+F failures while leaving the most widespread adverse effect outside its objective. G already
+provides large service/travel gains with zero fitting. More precision on its current tradeoff,
+or a learned gate optimized against the incomplete criterion, has limited incremental decision
+value. A future anticipatory-control question could merit investment after Root selects the
+service objective it is meant to improve; exact headroom or a proved mediator is not a prerequisite.
+
+Known relevant sunk costs remain visible: B01's recorded worker/reader cost is2,911.112 CPU
+seconds. G B02 consumed75,020 native steps including the failed attempt, with1,130.943 CPU
+seconds for workers plus the external reader measurement, and additional diagnostic/support
+costs. N's complete worker/reader entry used about1,526.19 CPU seconds. These costs do not
+justify another allocation by themselves.
+
+Targeted checks covered all three literature stores and reused the July/external-review evidence.
+Constrained expected-return optimization is established: I read MARL-0558's formulation in its
+JSON (`/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0558.json`) and verified PDF page3
+(`/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0558.pdf`). It supplies a standard
+formulation, not a guarantee for this selector. No novelty claim is warranted. The prior
+compression failure, learning outcomes and S7 positive/adverse results likewise supply constraints,
+without selecting another native-host study automatically. Claude's coupled-host work and the
+existing pause/freeze boundaries remain outside this recommendation.
+
+**MATERIAL_DISSENT: no.** I agree with retaining the completed capabilities and ending the
+selected screens. The selector is an unselected proposal; my recommendation is to decline
+its current investment case.
+
+### Pro Answer
+
+### Decision
+
+Pending complete Pro advice and source assessment. Root has selected no new result-bearing
+operation from this review. G/N closure and retained capabilities remain effective; the
+owner-authorized continuing research loop remains active.
 
 ## Prior reviews and runtime context
 
