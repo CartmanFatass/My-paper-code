@@ -754,3 +754,160 @@ RNG/own-history replay, joint optimization, numerical reading and failure counts
 These are correctness checks, not a preliminary scientific pilot or a new model
 of why U must improve. Exact inputs must be published before any future admitted
 execution. The present preparation does not authorize that execution.
+
+<a id="b02-u-prospective"></a>
+## B02 prospective: ordinary full-policy development of the three retained parents
+
+2026-09-30 UTC, before U implementation or native exposure. Root selected this
+comparison at `ec4defe9cc6e62e5b468cbed891370f0c0c589af` after the complete independent
+B01 diagnosis and complete 6 Pro answer in
+[the archived investment review](../../archive/2026-09-30/RESEARCH-parent-adaptation-development.md#decision).
+I have read that complete answer and Decision and accept the recommendation without
+material dissent. This is the same U prepared at `50ce0c34313355288ce6d2900980afc42ac5c5bb`;
+it is the direction's one active study. B01 remains complete and unchanged.
+
+**Question and predictions.** Does the ordinary finite full-policy continuation
+develop these actual unscreened learned controllers more usefully than the retained
+K/D restricted programs? Positive K/D own-parent means are capabilities worth
+developing, not a demand that D defeat the next comparator. U changes the original
+representation, recurrence, mean and variance and may escape a restricted program's
+finite solution; it may instead repeat the harmful continuation seen in B19452 and
+all three B04 G continuations. A moved parameter, changed sigma, smaller critic loss
+or changed path is only an intermediate observation; full native J/service and
+adverse worlds determine what the program accomplishes. U can express K's constant
+pre-tanh bias by shifting its mean-head bias, but the original architecture does not
+automatically contain D's extra residual network. Joint optimization, trainable
+variance and parameterization differ, so this does not isolate freezing causality.
+
+The current published [shared topics 4 and 5](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面)
+were read before this continuation: expressibility does not imply finite learning;
+near-constant D amplitude did not make the variation dispensable in the previous
+mean-compression comparison; the unscreened-parent B01's conditional development and
+severe adverse worlds both stand. These judgments select a complete ordinary
+comparator, preserve competing optimization explanations, and rule out promoting
+parameter movement or small corrections to service guarantees. No novelty claim,
+new literature hypothesis, extra attribution arm or additional Pro consultation is
+introduced. The independent scientific review and Pro advice cover this exact
+selection; engineering review is still required for the new executable path.
+
+**Fixed experiment.** Each lineage 1,2,3 loads its exact original B01 B-final actor
+and critic (source `930a0789dad4adbba67592c5fff07802a3dd40c2`), all trainable, with no
+structural re-zeroing, optimizer restoration or parent/endpoint selection. Fresh
+joint Adam 3e-4, original global .5 clip, four PPO epochs per two full episodes,
+chunk32, original agent-summed clipped ratio, terminal undiscounted returns,
+standardized team advantage, value coefficient .5 and Gaussian entropy .01 remain.
+Variance is trainable and enters each current behavior/replay density. Exactly
+512 H256 episodes per U; all final endpoints enter the comparison. The existing
+strict B01 checkpoint validator continues to bind old inputs; a separate U schema
+binds the new launch and the unchanged old parent. U does not call C-to-B construction
+or inherit its structural zeroing rule.
+
+Transport remains geometry-only 40 bytes (seven fields plus three zero tails),
+N5/U50/static, 3dB/c10, RR tick%5, GOOD/BAD persistence .95, delay1/5, no loss, abstract
+fee .001. Actor/critic still see the original 171/451 views. The learner stores U's
+own actual observation, chunk-entry hidden state, critic input, pre-tanh action,
+sends/eligibility, log density, value and net reward. No predictor/map/ACK/new
+objective, shadow-parent forward, counterfactual label or replayed K/D trajectory.
+
+| Lineage | U construction/train master | Fresh evaluation master |
+|---|---:|---:|
+| 1 | 29813 | 29815 |
+| 2 | 29823 | 29825 |
+| 3 | 29833 | 29835 |
+
+With `base=100000*master`, U construction is `base+11`, training scenes
+`base+1000+[0,511]`, channels `base+6000+[0,511]`, and one continuous dedicated
+motion generator at `base+21`. These deliberately match each lineage's paid K/D
+exogenous streams, checked by actual initial-scene/channel/innovation/RNG-state
+hashes against both retained episode streams. Construction/load uses isolated RNG.
+Fresh evaluation tuples use scene `base+2000+[0,31]`, channel `base+7000+[0,31]`,
+and fresh-per-episode motion `base+3000+[0,31]`. Lineages have independent panels;
+within a lineage each tuple is common to P/U/K/D on their own histories.
+
+Run lineages in order 1,2,3. Within each lineage train U once, then evaluate all
+32 worlds with the four private frozen programs. For world w, rotate the fixed
+order `(P,U,K,D)` left by `w mod 4`. Each program owns its actor/critic/env and is
+reset for each world; construction never consumes the dedicated evaluation RNG.
+Record this interleaving explicitly. No I/C panel, old-I/new-U subtraction, new
+parent, K/D refit, additional panel, selected checkpoint, sweep or automatic extension.
+A technical incomplete cell retains actual costs and stops without substitution.
+
+**Estimand and reading.** Primary is equally weighted U-D mean net J across the
+three retained lineages; preserve U-P/U-K/D-P/K-P/D-K, all paired-world vectors,
+service/quality, minimum and p05 tick service, zero totals/longest intervals,
+path/boundary/height, sigma, parameter groups and measured costs. Conditional on the
+12 fixed endpoints, new-deployment sampling variance is
+`SE_deploy²=(1/9)*sum_r(s_r²/32)` for the per-lineage paired differences. Report SE
+and a labelled normal-approximation 1.96-SE interval, together with each lineage's
+paired t31 interval and its complete vector. Keep the three lineage means and their
+sample spread separately; an outer t2 interval is descriptive only under independent
+block assumptions, reused K/D and result-selected question. It is not three freshly
+generated complete-program replications, 96 training seeds or confirmation. No
+multiple-metric default rule, equivalence margin or post-result tail penalty is added.
+
+**Prospective cost and stopping.** Three new fits, 1,536 train plus 384 final
+evaluation episodes = 491,520 native steps; 768 two-episode rollouts, 3,072 actual
+joint Adam calls, 7,864,320 actor and 1,572,864 critic replay rows, 2,457,600
+three-dimensional single-agent motion samples. Fifteen env constructions, three
+training and twelve evaluation, are counted separately from explicit resets.
+553-586 worker CPU-s is a prior scaling anchor only, not a cap or promise. Record
+new implementation/check/reader costs; B01's 12 fits/1,671,168 steps/18,432 calls
+and 2,280.176845 measured worker-plus-reader CPU-s, and all older history, remain.
+Completed cumulative B01+B02 would be 15 fits/2,162,688 steps/21,504 Adam calls.
+Finish the fixed comparison and read all outcomes with independent diagnosis before
+recommending a next investment to Root; no outcome automatically unlocks another fit.
+
+**L0 implementation scope.** Owned new `b02/` protocol, strict U checkpoint loader,
+40-byte training collector, driver/admitted runner and pure `read_b02.py`, plus mirrored
+focused checks; append-only notebook and compact run publication. Reuse shared CADC
+joint PPO, inherited host/channel and B01/B05/B06 frozen evaluation/raw verification;
+do not edit shared learners or change B01. Verify initial exact P identity and fresh
+optimizer, all-parameter/variance trainability, constructor isolation, 40-byte versus
+original storage/action identity, realized-history recurrence, fixed interleaving,
+actual matching against paid K/D witnesses, failure/count preservation, changing-sigma
+likelihood, pure-reader output and uncertainty arithmetic. An independent engineering
+Reviewer reads the full executable change before publication/admission. Bound local
+synthetic fixtures are correctness checks, never scientific native exposure.
+
+### B02 engineering acceptance before native exposure
+
+2026-09-30 12:34 UTC. The bounded registered Implementer returned only B02's strict
+model/identity module and its tests; I inspected and accepted that diff. Its initial
+U manifests must exactly equal P, and its separate schema binds the original source,
+new source, nested parent and all tensor/group bytes. Its 35 focused tests passed
+in 3.57s, including unchanged formerly structural columns, constructor-free reading,
+RNG isolation, fresh optimizer and movement of all five groups in synthetic joint PPO.
+I authored/integrated the remaining owned collector, assets, fixed driver, admitted
+entrypoint, full reader and behavioral tests. Shared CADC/UCOPE/B05/B06 source has
+no diff against B01's `930a0789` inputs. No shared learner or previous study was edited.
+
+The first integrated synthetic check was 42 passed/1 failed in 10.45s. The failure
+was reader-only: NumPy's FP32 `exp` differed from PyTorch's recorded FP32 sigma by
+one ULP (`1.1920929e-7` at sigma about1.002365), exceeding a fixed `1e-7` bound.
+The prospective repair now checks exact Torch FP32 clamp/exp identity and an
+independent FP64 formula within two FP32 relative epsilons, with a regression that
+rejects one-ULP corruption of the recorded value. No data or native exposure existed
+to tune against. The full integrated rerun passed **44 tests in 11.61s**; both CLI
+help paths and whitespace checks passed. Checks cover original versus 40-byte joint
+storage/action identity, changed sigma, actual matched streams, private rotating
+evaluations, frozen tensors, complete H256 all-program trace reading, conditional
+variance arithmetic, wrong-input rejection and preserved partial/nonfinite failures.
+These are elapsed pytest measurements, not a complete support CPU ledger.
+
+The independent registered engineering Reviewer traced the complete executable
+contract and reports **no material finding**. It inspected the 44-test evidence
+without rerunning unchanged checks. I accept its review and the implementation.
+The full 384-trajectory `read_run` and actual-node scientific path remain unexecuted;
+their execution and complete reading are still required, not inferred from these tests.
+
+Read-only node verification found the unique original summary at its frozen
+`02ad55031ca64e58ea03582ba7bcb18825f01568dc8f1cb8613ede793240948b` hash/1,571,422
+bytes and all nine P/K/D checkpoint file hashes equal to the bindings recorded
+above/B01 result. Integer-boundary searches of candidate records/code/run JSON found
+no prior new evaluation masters/addresses; the only outside matches were decimal
+`.29825`, not RNG addresses. The maintained canonical launcher/compute file hashes
+match this author checkout. Current published and canonical owner pause are lifted,
+and the direction remains exploring under `Codex DM (native child)`; no other pause
+or ownership changes. The configured `wsl_4070` CPU/FP32/one-thread path is retained.
+Actual fresh resource admission still occurs at launch, alongside other accepted
+work; no scientific serialization or change in the declared experiment is introduced.
