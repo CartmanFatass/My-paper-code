@@ -4916,3 +4916,624 @@ the existing independent `/root/deep_report_review` Oracle. That task grants
 no fit, fresh acquisition, native/model/controller query, executable change
 or fleet-transmission write/handle ownership. Its prospective reasoning stays
 in this same notebook; no result-bearing successor is selected by the handover.
+
+<a id="n8-amortization-source-design"></a>
+### 2026-09-30 — source-only N8 continuation amortization: interface and complete price
+
+**Assignment and actual work.** Root assigned this bounded assessment after
+accepting the S2 reserve/defer disposition. The consequential question is
+whether experience can retain useful complete-continuation choices on fresh
+worlds while reducing their deployment computation. It is separate from the
+already-selected fleet T/G2/A2 question about anticipating a later opportunity.
+The existing independent Astra Max Oracle, /root/deep_report_review, owns its
+scientific design/source/literature critique; I check the actual interface,
+feasibility and complete cost. We used native internal communication. No fleet
+file, active handle, accepted input or ownership changed. This entry is a
+prospective comparison, not an implementation or launch selection. Actual new
+fits, optimizer updates, controller/radio/model/actor/native queries are all0.
+
+The relevant published background was read from main (initial1eceb000e,
+refreshedfd20615f7): RESEARCH topic3's R/T capability and costs, and topic4's
+learning/representation distinction and planning-compression evidence. They
+have concrete effects here: keep R and a competent cheaper ordinary planner;
+charge the candidate bank and complete native consequences; distinguish model
+labels, native validation, one fitted artifact and independent world contexts;
+retain adverse service/path outcomes. CrossingHost's weighted partial
+compression result supports neither N8 transfer nor this residual feature
+map. Its teacher gap and conditional fixed-archive findings remain relevant
+negative constraints, not a veto or an instruction to resume that paused work.
+This is a finite approximation question, with no new learning-method or
+novelty claim. No additional literature search or preliminary toy is required
+to price the interface; the Oracle's original primary-source bridge remains
+attributed to its review.
+
+**Bound evidence.** The original N8 B03 source is
+02e8c1adc5a625037490facc6388e4b8bc9fd74e; complete results were published in
+0791f8a25460f6c841dc04ed779b63ccfb8a1090. I read the original controller,
+stationary option enumeration, full surrogate, compact result and affected
+notebook passages. Current control.py, b02/controller.py, b02/option.py,
+b03/controller.py, b03/option.py and b03/surrogate.py were byte-equal to that
+source. Original evidence remains at
+[B03 run](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a02/)
+and [complete reading](../uav_fleet_transmission/NOTES.md#b03-complete-reading).
+The existing raw symlink resolves to its single canonical copy at
+/home/fires/hmasd-artifacts/uav_fleet_transmission/b03_complete_continuation_a02/raw.
+No copy was made. The compact identities checked here are:
+
+| File | Bytes | SHA256 |
+| --- | ---: | --- |
+| config.json | 5,904 | a945dcd2fda619d68d8c1a025e5ef2762e50e11fc023c683106434c3a94023be |
+| summary.json | 776,774 | df0d60b900d816bc93fed1855feca1afc9050dc2b719b017a7beb5d159a5cd7d |
+| reading.json | 620,695 | e3cbc277e478d4e17ac6c347d86c776376fd6a50bbe58994c7f125e5a47c97e9 |
+
+The paid evidence contains74 complete modeled continuations:58 per-silent-
+member champions and16 C/stay branches in16 independent world contexts,
+29326000–29326015. Champion counts by world are
+3,4,4,4,3,4,4,4,3,3,3,4,4,3,4,4. Only38 distinct C/R/T native programs were
+executed;36 other model branches have no native counterfactual label. The48
+executed suffixes match model actions, masks and per-tick service; that does
+not turn74 branches into native observations or58 independent learning units.
+The original positive T−R J+.007400167/service+.558625,9 changed choices,
+one service-loss change, quality decline and+22.486m/UAV remain intact. All
+original C prefixes had stopped moving by32; fresh C histories need not do so.
+
+**The real decision and retained inputs.** At t40 the same N8/H500 ordinary C
+prefix supplies a133-FP32 public report:24 UAV coordinates,8 validity fields,
+100 user coordinates and time. Decode only these rounded public coordinates.
+The existing controller also holds its lawful estimated positions and last
+issued FP32 commands. T copies that history. The menu has one stationary
+champion per silent member (at most7) plus C/stay, including nonpositive
+stationary champions. It is not the full700-candidate optimal decision.
+
+The paid model-stay archive has reports(46,133)FP32 with its first report at40,
+positions/controller_estimates(461,8,3)FP64, actions(460,8,3)FP32, masks(460),
+reward_components(460,4), and report_times(46). Its summary records the entering
+mask and complete returns. Each champion's compact stationary metadata already
+contains member, site, offsets, duration, path, predicted destination/mask,
+stationary/transit totals and tail J/service/quality/height cost. The full paid
+candidate array has40 FP64 columns and is hash-bound. Thus a manifest can
+extract the lawful t40 features and existing model targets without executing
+a new physics, scoring or controller call. This session inspected schemas and
+compact identities only; it did not fit or produce a new ranking result.
+
+Online, the original bank still scores stay and128 member-on masks at each of
+100 sites for each silent member. Its ceiling is1+7*100*128=89,601 scoring
+requests/world,700 candidate rows and28,000 separate candidate-transit motion
+ticks/world. Sites are the50 public user positions plus50 local centroids.
+Each option commits one currently silent UAV for10/20/30/40 ticks while peers
+hold, then reselects a member-on mask from the new legal arrival report and
+resumes ordinary C. A learned selector changes only which of those complete
+programs is committed. It receives no future native position/mask, hidden
+radio quantity, unrounded world state or full-continuation result as a feature.
+
+**One source-corrected, fixed small learner proposed by the Oracle.** Let Qs_a
+be an option's stationary remaining-total J, Qs_0=460*stay_J, and Qm_a/Qm_0
+the existing complete-model remaining totals. Use
+
+    a_R = (Qs_a - Qs_0) / 500
+    y   = (Qm_a - Qm_0) / 500 - a_R
+
+The /500 scale matches complete episode mean-J differences because the first
+40 ticks are common; it is not a /460 conditional-tail objective. Fit one
+13-coefficient FP64 ridge residual model to the58 nonstay rows, grouped by
+their16 worlds. The12 features are fixed before any fit:
+
+1. a_R.
+2. Stationary total-served advantage over stay, divided by500*50.
+3. Predicted stationary tail quality minus current stay quality.
+4. Commitment duration/40.
+5. Commitment path/1000.
+6. Moved member's current public z/150.
+7. Predicted destination's 3D distance to the nearest OTHER transmitter under
+   its predicted arrival mask, /1000; use2000m if no other transmitter exists.
+8. Fraction of the50 users for which the moved member is strictly the nearest
+   transmitter under that predicted destination and mask.
+9. Mean per-user change in nearest-transmitter 3D distance from current public
+   geometry/entering mask to predicted destination/mask (arrival minus current),
+   /1000.
+10. Population SD (ddof0) of the same50 distance changes, /1000.
+11. Entering mask popcount/8.
+12. Predicted arrival mask popcount/8.
+
+For these geometric summaries user z is defined as0; this is a cheap feature,
+not a claim that nearest distance is the native radio law. Equal nearest
+distances do not count toward feature8's strict-nearest fraction; this follows
+the Oracle's final feature definition, superseding the provisional lowest-
+member-index tie proposal before any fit or selection. An empty active set
+uses2000m nearest distances;
+the current contract actually has a nonempty mask and the predicted arrival
+mask includes the moved member. The moved-nearest fraction is0 if it is
+muted. All arrival features use predicted geometry, never the later native
+report. Feature7 originally proposed destination z/150; source inspection
+showed the option always descends to50. The Oracle replaced this structural
+constant with crowding before selection/fit. This is a source-driven design
+correction, with no fitted-result-based feature search. Current height may
+also have empirical zero variance; it is retained under the stated rule.
+
+Compute weighted feature means and population SD on the58 training rows with
+each world total weight1/16 and each of its m rows weight1/(16m); zero SD uses1.
+Append intercept1 and solve exactly one13x13 FP64 system for
+
+    (1/16) sum_world (1/m_world) sum_a (w·x_a - y_a)^2 + .1 ||w||².
+
+The fixed .1 penalty includes the intercept. There is no optimizer loop,
+hyperparameter search, held-out model selection, in-sample success gate or
+refit after evaluation. Stay has predicted advantage0. Choose the largest
+a_R+w·x only if strictly positive, otherwise stay; tie by stationary served,
+shorter path, shorter duration, lower member and site, as in R. Zero residual
+weights reproduce R. Scaler, coefficients, rows/worlds, source hashes and
+features would be published before any new native evaluation. One fixed fit
+does not supply learning-run replication.
+
+The feature map intentionally omits the full legal controller memory and much
+of the joint geometry. Last-issued command history can affect resumed C if a
+new prefix has not settled at40. This limits a failure's interpretation; it
+does not make fitting or a pilot a prerequisite. Any positive would establish
+only this finite conditional approximation's complete value/cost tradeoff,
+not a sufficient representation, optimal planning or a new general method.
+
+**Smallest proposed complete comparison.** One16-fresh-world paired panel,
+fixed before execution, would compare R, exact-reuse T, ordinary K2 and direct
+learned L:64 H500 episodes/32,000 native steps. R retains the original global
+stationary champion rule. T retains every per-member champion plus stay and
+the exact original complete-return/tie/strict-decline rule. K2 evaluates stay
+and the top2 stationary champions (or all if fewer), using the same complete
+model and exact-reuse machinery, then the same complete-return rule. L uses
+the one fitted residual ranker and performs0 online full continuations. All
+four preserve the original bank, information, commitment and native host.
+
+The Oracle's reduction of the already-paid model labels finds that evaluating
+only the stationary winner and stay chooses R in all16 worlds; K2 recovers
+modeled J+.002977008 over R (40.2% of T's old model increment), and K3 gives
++.005005808 (67.6%). T's winner has stationary rank3 in worlds03/07/14 and
+rank4 in05/12/15. These are attributed saved-model readings, not new native
+tests. They justify a competent K2 comparator without declaring a preferred
+new learned outcome. K3 is not an additional proposed arm or a later rescue.
+
+The empirical comparison must read complete J, service, quality, height cost,
+service tails, all world losses, path, physical choice/initiation, ranking
+changes and actual timing. World intervals are conditional on the one paid
+training archive/fitted artifact. Training loss, prediction error, retention
+fraction or action agreement alone does not establish useful native retention.
+Report the J/service–compute frontier against both R and K2, rather than call
+any lower teacher query count an adoption. No deadline or population-equivalence
+claim is proposed. Full model labels newly produced inside T/K2 evaluation
+are evaluation evidence only, barred from refitting; "no new teacher
+acquisition" here means0 new TRAINING acquisition, not0 evaluation model work.
+
+**Competent exact reuse and its cost are inside that same comparison.** The
+Oracle's complete saved-trace audit finds bitwise40-tick recurrences in all74
+old model branches after the last commitment/arrival event, with first repeat
+at absolute t81–142. The reported avoidable28,963/34,040 model ticks and
+7,006,621/7,916,026 model requests are counterfactual algorithmic savings.
+The resulting old T request total3,518,987 is1.351x R's2,604,752; it is not an
+optimized runtime or proof of recurrence on fresh worlds. It weakens a price
+claim based only on T's old4.02x measured CPU without refuting amortization.
+
+A correct new evaluator would reuse only after exact recurrence of model
+physical positions, C estimates, issued command bits, entering mask and
+phase modulo40, with static public-user bits and controller/event schedule
+fixed. It must respect commitment/arrival/selection barriers, preserve issued
+commands even under clipping, regenerate absolute report times and controller
+clock, and sum every per-tick floating reward in original order. Multiplying
+a cycle total by its repeat count can change a decision and is excluded.
+No model estimate is a native state certificate. Reuse applies identically to
+T and K2; the bank/cache/feature implementation and host instrumentation must
+be matched across arms. No shared across-arm result cache may make one arm's
+standalone timing artificially free. A full independent reader reconstructs
+the original uncompressed branch semantics and validates the reuse certificate,
+actions, masks, reports, rewards, totals and selected physical program. Preserve
+logical work, actual computed work, reused work, feature/fit/inference time,
+controller-only CPU/wall and end-to-end CPU/wall separately. This reader's
+uncompressed work and trace generation remain charged below. An exact-T
+benchmark belongs within the complete comparison, not a prerequisite pilot.
+Selection CPU must include bank construction, feature work, complete model/
+reuse and final choice; optional diagnostic export/serialization is timed
+separately and still charged end-to-end. Existing B03's425.094114 CPU-s for T's
+controller plus branch records includes serialization, so it is not a pure
+deployment-selection timing reference. No learned advantage may be inferred
+merely from writing fewer diagnostic branches.
+
+**Whole proposed cost, including the ordinary alternatives.** Conservative
+per-world ceilings keep suppressed native C decisions rather than subtracting
+them. Native ordinary work is500*216+50*255=120,750 scoring requests. Add the
+89,601 bank and128 arrival requests: R/L each at most210,479. A stay model
+tail costs460*216+46*255+460=111,550. A shortest10-tick option tail costs at
+most449*216+44*255+128+460=108,792; longer commitments only lower this ceiling.
+
+| Quantity | Direct-ranker four-arm proposal |
+| --- | ---: |
+| New training acquisition | 0 |
+| Paid model rows used for fit | 58 nonstay residuals,16 world groups;74 original model totals |
+| Fits / coefficients / optimizer updates | 1 /13 /0 |
+| Fresh complete native episodes / steps | 64 /32,000 |
+| T model branches per world | at most8 |
+| K2 model branches per world | at most3 |
+| Fresh evaluation complete model branches / logical model ticks | at most176 /80,960 |
+| R / T / K2 / L requests per world, before reuse | 210,479 /1,083,573 /539,613 /210,479 |
+| Total worker request ceiling, before reuse | 32,706,304 |
+| Stationary candidate rows / separate transit ticks | at most44,800 /1,792,000 |
+| Feature distance-pair arithmetic on paid fit / fresh L panel | at most30,006 /51,984 |
+| L coefficient products per world | at most7*13=91 |
+| Full-reader new native transitions / new fits | 0 /0 |
+
+Current geometry can be shared across its world's feature rows: at most400
+current user/UAV distances plus400 destination user/UAV and7 crowding
+distances per champion, at most3,249 distance pairs/world. Fitting the13x13
+Gram system needs at most58*13*13=9,802 row-products plus the small solve.
+The trained artifact and row manifest are small; fitting is a real1-fit cost,
+even though there are0 gradient updates. Estimate1–5 CPU-minutes for complete
+hash-bound extraction, fit, serialization and checks, not a measured fit time.
+
+Original B03 measured631.790445 worker CPU-s plus590.606499 reader CPU-s over
+15,062,360 worker requests:1,222.447506 combined CPU-s, excluding the separately
+recorded small process-import difference. Scaling that combined rate to the
+new worker ceiling gives .737337 CPU-hours (44.24 minutes), **before fitting
+and support**, and without crediting any realized reuse. The rate is only an
+estimate: branch serialization, recurrence hashes, small-arm work and reader
+mix differ. Budget .75–1.25 worker+full-reader CPU-hours plus the1–5 fit/check
+CPU-minutes. No hardware speedup or new-node admission has been measured.
+
+Original retained raw is44,795,108 bytes:22,315,248 model arrays/decision traces,
+1,858,048 candidate arrays,20,621,812 native/other records. Scaling176 model
+branches,64 native episodes and the full44,800*40-double candidate-row ceiling
+suggests approximately .095GB raw. Allow **.10–.25GB** canonical evidence,
+**1–2GiB** for accepted source/scratch and **.35–.75GiB** streamed process RSS;
+all are estimates, no GPU required. Retain one necessary evidence copy, not
+duplicate saved training data. New source would consume the original paid
+manifest read-only and own its new compact fit/evaluation records.
+
+Implementation, checking and review are the larger bill: **4–6 support hours**
+for fixed extraction/fit/ranker, matched K2, collector/reader integration and
+engineering checks; **another4–7 hours** for exact recurrence, its certificate,
+tests and independent engineering review; **1–2 hours** for complete scientific
+reading/review/publication. Total **9–15 support hours**, estimated separately
+from CPU. The source-only work found no hard interface blocker. A future code
+scope must implement one fixed artifact/selector, one matched K2 path, exact
+reuse with uncompressed verification, and the complete four-arm records; core
+numerical/clock/reuse changes require the engineering method's independent
+Reviewer. That is a concrete prospective work scope, not authorization now.
+
+For comparison, replacing direct L by learned top2 screening plus exact
+continuation would keep the same1 fit and64 episodes but add48 model branches:
+224 branches/103,040 logical model ticks and37,972,448 worker requests before
+reuse, approximately .856058 combined CPU-hours at the same old rate. The
+learned and ordinary shortlists would each evaluate top2 plus stay, with the
+same information, model and recurrence implementation. This tests better
+screening at matched branch resources; it supplies no branch-count advantage
+over ordinary K2 and adds learned feature cost. It is priced as an alternative,
+not an extra selected arm. The direct ranker is the clearer bounded test of
+avoiding online continuation work.
+
+**Investment boundary before the Oracle's final recommendation.** The paid
+archive permits a real complete experiment without fresh teacher acquisition,
+a positive pilot,128 training worlds, or an architecture expansion. It also
+permits a justified decline: exact ordinary reuse may leave little useful
+deployment saving after the still-paid bank, while the same finite13-parameter
+fit has only16 world contexts and no established retention. Neither potential
+explanation is an empirical result. Root owns the cross-question choice after
+the independent Oracle's recommendation and this complete price; no run, fit,
+new direction, entrypoint, world list, active idea or resource claim follows
+from recording it. All original positive/adverse evidence and costs remain.
+
+<a id="n8-amortization-independent-disposition"></a>
+### 2026-09-30 — complete independent recommendation and DM response
+
+I read the whole final /root/deep_report_review recommendation. It is a
+follow-up by the existing independent Astra Max ResearchCritic using its
+earlier B03 reconstruction, original supporting/adverse evidence and primary
+reading. The reviewer explicitly says it has now read the original critic's
+amortization preference and Root's temporal allocation; this is not claimed
+as a blind new review. Root receives that review directly. It changes neither
+the accepted temporal study nor execution authority for this source-only task.
+The substantive recommendation is preserved here.
+
+**Independent recommendation: select one bounded direct-ranker companion
+study, with no additional training acquisition. MATERIAL_DISSENT: no.** Its
+actual object is the fixed13-coefficient residual ranker above, one paid
+16-world archive, and16 fresh worlds/64 complete H500 episodes against R,
+exact-reuse T_E and ordinary top2-plus-stay K2_E. It is not a request for
+another broad search, extra teacher contexts or a larger architecture. The
+review retains the full support estimate9–15 hours, including4–7 for the
+recurrence certificate/review, and the32,706,304-request ceiling/.75–1.25
+worker+full-reader CPU-hour planning range plus1–5 fit/check CPU-minutes.
+
+Its reasoning combines the demonstrated native value of continuation ranking
+with the strengthened ordinary alternatives. Only R's best plus stay fails
+to change any old choice; K2 recovers40.2% and K3 67.6% of the old modeled T
+increment. Those saved-model outcomes are not new native tests. Exact reuse
+could remove88.5% of old model requests, so uncompressed fourfold CPU cannot
+be the sole efficiency reference. At the same time, selection-only accounting
+gives742,416 old requests for the bank and1,651,821 for the bank plus unavoidable
+post-reuse model work: direct L would retain44.95% of that selection request
+count before feature overhead. This is the reviewer's saved-trace arithmetic,
+not measured CPU. It leaves a plausible material decision-time saving even
+though the old counterfactual whole-episode request ratio is only1.351.
+
+The reviewer retains the fixed12-feature map, single .1-penalized FP64 ridge
+fit, equal-world training weights, strict-positive initiation and original
+stationary tie order described above. The final feature8 uses strict nearest,
+as now recorded. It highlights the missing command history, small16-context
+support and36 model-only branches. Neither a branch count nor an episode
+count supplies independent training replication. Each fresh arm must pay its
+own bank and continuation computation; the panel is disjoint from training
+and the accepted temporal panel. Its up to176 evaluation model branches are
+forbidden as refit data. Fresh nonrecurring tails are evaluated fully, not
+discarded, truncated or assigned an assumed recurrence.
+
+The primary native contrast is L−R, with L−T_E and L−K2_E and all complete
+service/quality/tail/zero-service/path outcomes retained. The reviewer proposes
+these **point exploratory investment targets**, not confirmation or adoption:
+
+- Fresh mean(T_E−R)>0 and
+  mean(L−R)−.75*mean(T_E−R)>=0.
+- Mean selection CPU_L <= .5*mean selection CPU_T_E.
+
+Read continuous paired contrasts and uncertainty even if either point target
+fails. Do not manufacture a retention ratio when fresh T_E−R is nonpositive.
+K2_E's measured benefit–cost frontier is consequential even if both targets
+pass. Selection timing covers the bank, features, continuation/reuse and choice;
+logging is separate, while full episode, initialization, fit, verification and
+reader costs remain charged. Preserve original acquisition exposure1,222.45
+combined CPU-s separately from incremental reuse costs; pure teacher-generation
+cost was not isolated. Deployment break-even is unknown without measured
+savings and a concrete repeated-use scenario. Neither request ratios nor the
+original trace-inclusive T timing answer it.
+
+The review's outcome-dependent recommendations are also bounded. Useful
+native retention, real savings and a competitive K2_E position retain L as a
+conditional capability; independent training-panel replication is considered
+only for a consequential broader claim or use. Mostly reproducing R means
+this correction did not change consequential choices. Changed choices that
+lose native value reject this feature-map/data-budget package. Good prediction
+or native retention without useful savings, or domination by K2_E, favors
+the ordinary method. Failure to establish exact-reuse correctness leaves the
+intended efficiency comparison incomplete; uncompressed T cannot rescue that
+claim. None of these automatically buys teachers, a model expansion, a repair
+or a repeat panel.
+
+The adviser links the proposal to familiar approximate-policy-iteration
+reasoning and explicitly withholds novelty or inherited policy-improvement
+guarantees. Its original macro-action/model-error/planning-target source bridge
+remains advice, not new empirical evidence. This DM's acceptance rests on the
+directly checked legal interface, full native comparison, exact ordinary
+alternatives and complete bill above. The reviewer performed only saved
+record/source/arithmetic reading:0 new fits, queries, code edits or experiments.
+
+**DM judgment and response.** I accept this bounded recommendation for Root's
+allocation choice. My initial concern was that ordinary recurrence might leave
+too little gain after paying the candidate bank. The selection-time accounting
+narrows that concern: it makes a material saving plausible enough to test,
+without predicting success from requests or presenting engineering as free.
+The capable ordinary K2 comparison and direct-only ranker make the knowledge
+purchase specific. A learned shortlist would buy a different matched-compute
+screening question, so I do not add it to this panel. No competing recipe is
+owed if this fixed approximation is unhelpful.
+
+The unresolved alternatives are consequential: the small map may not preserve
+the continuation distinction,16 old world contexts may not support useful
+generalization, model-only target error may matter on L's choices, fresh T's
+increment may shrink, or competent exact reuse/K2 may absorb the practical
+saving. These are reasons to read a bounded complete result carefully, not
+requirements for preparatory experiments. Success would be conditional
+amortization capability/empirical understanding; failure would not refute
+the parent learning or planning questions. S2 reserve/defer and B05's retained
+positive/adverse conclusions remain unchanged.
+
+This source-only assignment is technically complete. Root owns selection and
+the prospective direction/lead assignment; this entry does not select or
+launch the study. There is no producer, observer, new data collection, fit,
+unread run result or open scientific objection here. No experimental code,
+scratch or redundant bulk was created, so actual newly deleted targets are
+none and new net disk reclamation is0 bytes, with no cleanup/tool blocker.
+Only this notebook and the narrow own-entry/routing publication are due.
+
+<a id="b06-original-oracle-advice"></a>
+### Original complete Oracle recommendation, preserved before B06 effects
+
+The following is the complete original recommendation returned directly to
+Root by /root/deep_report_review, before the normalization clarification below.
+
+> **I recommend one bounded amortization study alongside the accepted T/G2/A2 study:** fit one small continuation-value ranker from the paid B03 labels, then compare its complete native benefit and computation against competent ordinary alternatives. Buy no additional training contexts in this first comparison.
+>
+> This is a follow-up review using my earlier independent B03 reconstruction. I have now read the original critic’s amortization preference and Root’s temporal allocation; this is not a blind new review. Nothing here changes the accepted temporal experiment or authorizes execution.
+>
+> **The evidence supports a concrete learning target, but also a strong ordinary competitor.**
+>
+> B03 established consequential continuation ranking: T−R improved native mean J by **0.007400** and service by **0.558625 users/tick**, with nine changed physical programs. It also added **22.486 m/UAV** of travel, left service tails unchanged, and included an accurately predicted service loss. Ordinary known-model planning explains this capability; learned necessity remains unestablished. [B03 evidence and complete independent diagnosis](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md:1477).
+>
+> The available training material is **74 modeled branches from 16 worlds: 58 champions and 16 stay continuations**. Only 38 distinct programs received native execution; 36 branches remain forecasts. The 5,800 stationary candidate rows are neither independent worlds nor complete-continuation labels.
+>
+> My new arithmetic on those saved labels strengthens the comparison:
+>
+> - Complete evaluation of only R’s best stationary candidate plus stay reproduces R in all 16 old worlds.
+> - Complete evaluation of the **two** best stationary champions plus stay retains **40.2%** of T’s modeled J increment: +0.002977 versus +0.007400.
+> - Three champions retain 67.6%. T’s winner occupies stationary rank three or four in six worlds.
+>
+> These are saved-model comparisons, **not new native counterfactual results**. They show why merely copying R is insufficient and why an ordinary limited-search comparator matters.
+>
+> Exact recurrence changes the efficiency case without eliminating it. My previous saved-array audit found certified period-40 repetition in all 74 branches after their final option event. Reuse could avoid 88.5% of their model scoring requests. The resulting whole-episode T/R request ratio would be approximately **1.351**, rather than the original implementation’s fourfold CPU ratio.
+>
+> However, selection-only work remains **742,416 requests for R’s candidate bank versus 1,651,821 for T’s bank plus unavoidable continuation work** across those worlds. A direct ranker would retain about **45% of that selection work**, before feature overhead. That is a plausible material saving, not a runtime measurement.
+>
+> The proposed comparison is:
+>
+> | Arm | Selection at t40 |
+> |---|---|
+> | **R** | Original stationary ranking. |
+> | **T_E** | Original complete T ranking, with certified exact recurrence reuse. |
+> | **K2_E** | Complete evaluation of the top two stationary champions plus stay, using the same exact reuse. |
+> | **L** | Learned residual ranking of every retained champion, without online complete-continuation simulation. |
+>
+> All retain the original N8/U50/c10/0dB host, H500, reports, candidate support, commitments, actual arrival control and subsequent C policy. **L still pays for the entire original candidate bank and ordinary controller.** It is not model-free, and it does not amortize candidate construction.
+>
+> Use **16 fresh paired worlds, 64 complete episodes and 32,000 native steps**, disjoint from training and the accepted temporal panel. Each arm performs and pays for its own computation; no free shared bank or cross-arm cache. Freeze the fit before evaluation. Evaluation may generate up to 176 complete model branches, but none may enter a refit.
+>
+> **One fixed, inexpensive fit is sufficient for this exploratory purchase.**
+>
+> For champion \(b\), define the stationary advantage
+>
+> \[
+> a_b^R=(Q_b^{stationary}-Q_{stay}^{stationary})/500
+> \]
+>
+> and train the residual target
+>
+> \[
+> y_b=(Q_b^{complete}-Q_{stay}^{complete})/500-a_b^R.
+> \]
+>
+> Fit one **13-coefficient FP64 ridge regression**, including its intercept, on the 58 champion rows. Give each of the 16 worlds equal total weight, standardize features using those same training weights, use standard deviation one for constant features, and fix penalty **0.1 on all coefficients**. This is one deterministic supervised fit with zero optimizer updates, no hyperparameter search and no checkpoint selection.
+>
+> Fix these 12 features:
+>
+> 1. Stationary J advantage \(a_b^R\).
+> 2. Stationary served-user advantage divided by \(500×50\).
+> 3. Stationary tail quality minus stay quality.
+> 4. Duration/40.
+> 5. Path/1000.
+> 6. Current moved-member height/150.
+> 7. Distance from its predicted destination to the nearest **other** enabled transmitter under the predicted arrival mask, divided by 1000.
+> 8. Fraction of users for whom it is strictly the nearest enabled transmitter at that predicted arrival.
+> 9. Mean change in users’ nearest-transmitter distance, arrival minus current, divided by 1000.
+> 10. Population standard deviation of that distance change, divided by 1000.
+> 11. Current enabled-transmitter fraction.
+> 12. Predicted arrival enabled-transmitter fraction.
+>
+> Use public user coordinates with ground height zero. An empty transmitter set gets distance 2000 m; the nearest-member fraction is zero when that member is disabled. Features must use the **decoded t40 FP32 public report and predicted candidate metadata**, never native double-precision positions, future SINR, native outcomes or continuation summaries.
+>
+> At deployment, score each champion as \(a_b^R+\hat y_b\), keep stay at zero, and require strict positive improvement to initiate. Resolve positive-score ties with the original stationary served/path/duration/member/site ordering. Zero coefficients reproduce R.
+>
+> The DM independently checked these interfaces against the frozen source. This feature map deliberately compresses lawful information and omits command history. It may fail to represent the relevant future interaction, especially if fresh C trajectories have not settled by t40. That is a limitation of the candidate being tested, not a prerequisite for another diagnostic experiment.
+>
+> **The complete bill is modest in compute but substantial in engineering.**
+>
+> | Item | Prospective cost |
+> |---|---:|
+> | New training acquisition | **0 contexts** |
+> | Fitting | **1 fit**, estimated **1–5 CPU minutes** including extraction and checks |
+> | Native evaluation | **64 episodes / 32,000 steps** |
+> | Worker scoring ceiling before reuse | **32,706,304 requests** |
+> | Complete-model evaluation ceiling | **80,960 transitions** |
+> | Original stationary search | **44,800 rows / 1,792,000 separate candidate-transit ticks** |
+> | Worker plus full reader | **0.737 CPU hours** at the old uncompressed rate; plan **0.75–1.25 hours**, plus fitting |
+> | Engineering, checks, review and publication | **9–15 hours** |
+> | Canonical raw evidence | **0.10–0.25 GB** |
+> | Estimated streamed process RSS | **0.35–0.75 GiB**, no GPU |
+>
+> The DM verified the integer ceilings independently. The engineering estimate includes **4–7 hours for exact-recurrence implementation, certificates, tests and engineering review**. These are estimates, not measured new performance.
+>
+> Implement exact reuse within this comparison, without a separate profiling purchase. Reuse must preserve the sufficient controller/model state, clock phase and future-event semantics, and reproduce floating-point accumulation order. If a fresh branch does not recur, simulate its full suffix. The frozen B03 source and accepted B04 experiment remain unchanged.
+>
+> Measure selection CPU around **candidate generation, feature extraction, continuation computation and choice**. Record logging separately and charge complete episode, initialization, fit and reader costs as well. The original T timing includes branch recording and cannot serve as the optimized deployment benchmark.
+>
+> The original acquisition study’s **1,222.45 CPU seconds** remain part of cumulative exposure; its pure teacher-generation cost was not isolated. Report incremental reuse cost and cumulative cost separately. A deployment break-even count requires measured savings and an actual reuse scenario; it is presently unknown.
+>
+> **Read the result as a benefit–cost comparison, not a prediction contest.**
+>
+> The primary native contrast is **L−R**. Also report L−T_E, L−K2_E, their actual computation, changed physical choices, initiation changes, service, quality, service tails, zero-service events and travel.
+>
+> A useful prospective exploratory target is:
+>
+> - Positive fresh mean T_E−R, with
+>   **mean(L−R) − 0.75 mean(T_E−R) ≥ 0**; and
+> - Mean selection CPU for L at most **half** that of T_E.
+>
+> These are point criteria for deciding whether this approximation deserves further investment. Report continuous paired contrasts and uncertainty; passing them does not establish equivalence, training robustness or adoption. K2_E’s measured benefit–cost position remains consequential even if both criteria pass. If fresh T_E−R is nonpositive, do not manufacture a retention ratio.
+>
+> The outcomes would change the decision as follows:
+>
+> - **Useful native retention with real savings and a competitive K2_E comparison:** retain L as a conditional capability. Consider independent training-panel replication only if a broader claim or use decision warrants it.
+> - **L mostly reproduces R:** the correction failed to change consequential choices; stop this candidate without inferring that amortization is impossible.
+> - **Changed L choices lose native value:** reject this feature-map/data-budget package. Additional teachers or a larger model require a new reasoned purchase.
+> - **Good predictions or native retention without useful savings, or domination by K2_E:** retain the ordinary method.
+> - **Failure to establish exact-reuse correctness:** the intended efficiency comparison is incomplete; uncompressed T alone cannot rescue that claim.
+>
+> One fit and sixteen evaluation worlds support only a conditional exploratory reading. More branches or episodes do not supply independent training replication.
+>
+> The proposal follows familiar approximate-policy-iteration reasoning: paid rollout decisions or values can train a cheaper policy approximation, but approximation does not inherit rollout’s improvement guarantee. [Bhattacharya et al., §5](https://arxiv.org/html/2011.04222). I reused the three-library primary reading: B03’s macro-action treatment preserves complete commitment semantics; [MARL-0016, MAG](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0016.json) supplies caution about interacting model errors; and [MAZero’s primary paper](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2024/d74e6bfe9ce029526e69db14d2c281ec/arxiv-2405.11778.pdf) connects planning targets with learned policies under substantially different assumptions. None establishes success or novelty here. The July/external review’s warning against treating a myopic frontier as an opportunity upper bound remains applicable, as does the closed peer-forecast result’s distinction between prediction accuracy and complete native benefit.
+>
+> I checked saved branch choices and metadata, the new ordinary-subset arithmetic, input schemas, source interfaces and cost algebra, reusing the earlier B03 source/native audit. **No new model, controller or native queries, fits, code edits or experiments were performed.** Generalization, optimized runtime and the adequacy of this small feature map remain unverified.
+>
+> **MATERIAL_DISSENT: no — recommend this bounded companion investment with exact-reuse T and ordinary K2 retained. It does not reverse Root’s resolved temporal-study allocation.**
+
+<a id="b06-selected-contract"></a>
+### Root selection, final normalization and B06 prospective implementation
+
+Root subsequently read the complete original advice and **selected** this one
+bounded study as B06 under uav_parent_adaptation, with the same DM. It authorized
+implementation, high-risk engineering review, exact-source publication, actual
+node admission, the declared worker/full reader, independent scientific reading,
+publication and cleanup without another ACK. The bill above is accepted as a
+planning estimate, not a measured promise. Fleet B03 source/ownership and B04's
+accepted operation remain untouched. S2 acquisition/transfer remains unselected.
+
+Root required explicit confirmation of the objective scale. The Oracle replied:
+
+> Confirmed: exactly the intended objective. Each champion row has w_i=1/(16*n_champions_in_its_world), so each world contributes1/16 and sum_i w_i=1. Minimize sum_i w_i(beta·x_i−y_i)^2 +0.1||beta||², penalizing all13 coefficients including the intercept. With X=[1, standardized12features], solve (XᵀWX+0.1I_13) beta=XᵀWy in FP64; no extra multiplication/division of0.1 by16,58, or2. Standardize only the12features using those same weighted population moments; the intercept stays1. For a training column whose values are all identical, set its mean to that common value and scale to1 so it maps exactly to0, avoiding a floating-roundoff pseudo-variance. Strict-nearest feature8 is final: equal-distance ties do not count. Zero beta must reproduce originalR physical selection, including strict decline and ties; an explicit zero-coefficient fallback to originalR is acceptable and clearest. No change to the accepted panel, fit count, support estimate or scientific recommendation, and no additional review round is needed for this clarification.
+
+I adopt that exact objective, constant-column rule and explicit zero-coefficient
+R fallback. This resolves normalization, not a new scientific-review round.
+The statistical unit remains the16 paid training worlds and one fitted artifact.
+
+Fix fresh evaluation addresses now, before drawing or seeing their outcomes:
+world IDs29366000–29366015; SeedSequence[260930,66,world_id,stream,*suffix].
+Streams1 and2 give separate user/UAV RandomState seeds, with the original
+member-major uniform geometry law; stream3,suffix8 gives the common native
+runtime seed within world. Bootstrap seed29366991,10,000 paired-world draws.
+These addresses are distinct from paid B03, accepted B04 temporal and this
+direction's earlier panels (including B04's29346000 range). Ascending worlds,
+cyclic R/T_E/K2_E/L arm order starting at world index modulo4. No final world
+is used for implementation checks or a quality screen. All16 remain in the
+complete reading regardless of activation, recurrence or outcome.
+
+The implementation uses two serial parts of this one selected study: a single
+admitted paid-label fit, then the fixed64-episode evaluation after its compact
+coefficients/scaler/manifest are published. This honors the earlier prospective
+input-publication statement. No fit choice or extra fitting lies between them.
+Each part has its own immutable admission/source binding and complete reader;
+the evaluation reader checks the existing fit numerically without creating a
+new scientific fit. No additional training context, controller/model/native
+label acquisition or result panel is added. Proposed run tags are
+b06_paid_ranker_fit_a01 and b06_continuation_amortization_a01.
+
+**L0 scope before code work.** Own
+experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/,
+the matching tests path, these NOTES, and the two new run paths. New entrypoints
+stay there; no shared or fleet executable is edited. Reuse frozen ordinary
+controller/host/option/radio components through imports at their bound hashes.
+Deliver: lawful paid-row extraction and one immutable ridge artifact; selector
+with explicit R fallback; exact-recurrence T_E and K2_E with independent
+uncompressed replay; matched native collector, complete reader and requested
+value/choice/cost outputs. Preserve report rounding, issued-command history,
+state/mask/clock semantics, strict decline/ties, actual arrival replanning,
+per-step float accumulation, native H500 and all64 episodes.
+
+Bounded helper ownership may separate two verifiable behaviors: the pure
+feature/fit/selection module and its tests; and the exact-recurrence evaluator
+and its tests. Helpers own only their assigned files on shared main, make no
+Git index mutation, edit no notebook, launch no study and spawn no children.
+The DM owns integration/entries/readers and accepts every diff/check. An
+independent engineering Reviewer receives this contract and actual diff before
+either result-bearing phase. No new native fixture is currently needed.
+
+Checks are synthetic plus fixed saved-input correctness. The saved-input
+recurrence check scope is at most3 original paid branches:29326000 stay and
+its first member champion, plus29326002's original R physical branch. A new
+optimized computation may be compared against those already-saved full arrays/
+decisions, without generating labels or new native trajectories. Ceiling1,380
+logical model ticks and334,650 scoring requests (3*111,550), separately charged
+as engineering verification, not training/evaluation evidence. Prefer bounded
+synthetic tests for no-recurrence fallback, arrival barriers, phases, clipped
+commands and accumulation order; do not turn a quality result into admission.
+Allow up to10 CPU-minutes for these checks in the accepted support scope;
+actual costs will be recorded. Any indispensable extra native fixture requires
+an exact prospective L0 update before it and cannot use the final worlds.
+
+Use the configured local_linux interpreter, one numerical thread, streamed
+branches and detached kernel admission/observation. WSL4070 remains reserved
+for Root's waiting chain. Fresh actual-node admission still decides launch
+timing; another operation's terminal status is not memory admission. Stop
+only the dependent phase for a real implementation/correctness/ownership or
+resource failure, preserving outputs and count. No positive fit screen,
+automatic retry, rescue panel or new teacher budget is authorized.
