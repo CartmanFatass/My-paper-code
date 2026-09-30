@@ -833,3 +833,120 @@ The implementation includes the live controller, guarded fixed collector and
 independent saved-data reader for this one comparison. It selects no new
 science, arm, fit, world or native pilot. A separate engineering Reviewer checks
 the resulting numerical, information, state and reader behavior before launch.
+
+### 2026-09-30 — Primary-passage verification during implementation
+
+Personally checked new-libs B03 against Oliehoek–Amato's
+[author preprint](https://www.fransoliehoek.net/docs/OliehoekAmato16book.pdf),
+printed pp.34–37 (PDF pages40–43), §3.2–3.3. Policies use an agent's own
+history; the general local history does not become a sufficient Markov state
+merely by retaining two frames. Their multiagent-belief discussion additionally
+depends on assumptions about other agents' future policies. These passages
+support the declared legal-input boundary and the deployment-coupling caveat,
+not sufficiency or value of the selected displacement statistic. The fixed
+C/V/R design and its predictions remain unchanged. The catalogue's absent
+local B03 PDF was not treated as read; this verification used the original
+author-hosted source.
+
+### 2026-09-30 16:43 UTC — Engineering review and correctness exposure
+
+The implementation handoff contains the direction controller, collector,
+independent reader, guarded runner, package initializer and focused tests.
+The DM found and repaired two issues before result launch: delegated inactive
+C decisions originally overwrote cumulative moving-peer work counters, and
+the new runner originally rejected the launcher's correctly precreated output
+directory. Regression checks now preserve exact inactive actions/scores while
+retaining cumulative work, and permit launcher metadata while refusing prior
+scientific outputs. Timing now starts before scientific imports, whose measured
+scope is separate from native factory construction.
+
+Independent engineering review passed the current 22 checks and 300 additional
+in-memory C/V/R rankings (maximum score difference 1.11e-16 with matching choices
+and navigation). It found one remaining P2: a late reader verification failure
+would lose completed/partial reader work counts. The same Implementer is adding
+incremental failed-reader accounting and a late-failure regression; launch waits
+for that correction and focused review, not a second scientific selection.
+
+The DM additionally found **selected-world correctness exposure**: test fixtures
+used seed29401000's initial geometry with a pure, independent-radio `SavedFixture`
+for eight transitions per C/V/R arm and an injected R failure after three
+returned transitions. These were not native environment constructor/reset/step
+calls, but they did compute policy choices and model outcomes for the first
+selected world's prefix. Do not describe that prefix as unseen. The C/V/R
+programs, scientific comparison, primary and panel were already fixed before
+these checks; no outcome-based scientific selection or policy revision followed.
+The correction replaces test geometry with a handcrafted test fixture and
+identity7; **production seeds remain 29401000..29401031**.
+
+The Implementer's audited two test invocations were 20passed/0.89s and
+22passed/0.47s. Each incurred 27 returned/28 attempted pure fixture transitions,
+140 actor ingests and35 live rankings (3,780 logical model ticks): together
+54 returned/56 attempted transitions,280 ingests,70 rankings/7,560 model ticks.
+The Reviewer's one 22-test invocation incurred the same fixture prefix once,
+bringing known selected-prefix correctness totals to **81 returned/84 attempted
+pure transitions,420 ingests,105 rankings/11,340 logical model ticks**, all on the
+same seed and with zero native environment steps. Repeated saved-data corruption
+checks add verification work whose exact counters were not retained in normal
+test scratch; these totals are therefore not complete engineering cost. No
+numeric scientific endpoint was printed by the checks. The fixed complete panel
+remains the result experiment; its provenance will retain this exposure rather
+than silently replacing a seed or claiming pristine freshness for all32 worlds.
+
+The Reviewer's additional300 rankings used `RandomState(913)` only to construct
+100 independent synthetic local rows, each scored under C/V/R; they used no
+selected seed, initial-world generator, native transition or collected path.
+This adds300 live and300 independent reader rankings,32,400 logical model
+ticks on each side. The Implementer's clean and final-counter checks alone
+add at least200 reader score requests/21,600 logical ticks over its two earlier
+test invocations; other corruption checks remain incompletely metered.
+
+### Fixed execution and retention details
+
+Use the configured `wsl_4070` node, canonical checkout
+`/home/wu/projects/HMASD`, configured
+`/home/wu/.venvs/hmasd-gcc-31021/bin/python`, one NumPy/BLAS thread and no GPU.
+The current native control launcher and compute configuration already match
+published authoring-source bytes. Synchronize only this direction's published
+active row into its live canonical RESEARCH (preserving other direction edits),
+fetch the exact published source, then request a retained launcher snapshot.
+There is no accepted operation to migrate or retry.
+
+The new tag is `runs/uav_local_peer_forecast/b01_cv_reversal_a01`. The frozen
+scientific argv is
+`experiments/candidates/uav_local_peer_forecast/run.py --seed 29401000 --launch-sha <published-source-sha> --out runs/uav_local_peer_forecast/b01_cv_reversal_a01`.
+The launcher receives that same full SHA, direction `uav_local_peer_forecast`,
+lead `Codex DM (native child)`, node `wsl_4070`, source root above and `--snapshot`.
+It must freshly admit actual-node memory and current pause/lead/publication.
+The admitted process completes the fixed worker and then its full independent
+saved-data reader; it never retries a failed worker. Arm `tools/hmasd_wait.py`
+on the one accepted status handle and keep this native DM turn active through
+complete reading. A technical reader failure preserves accepted worker outputs
+and incurred counts; it does not authorize new native episodes.
+
+Keep the single bulk `raw/` copy under that canonical node/tag. Collect only
+compact configuration, summary/reading, worker/reader/terminal status and native
+admission/process records locally for Git publication; use the recorded raw
+byte counts and hashes for direct node readback. No duplicate bulk collection
+or backup chain is needed. After terminal verification and scientific reading,
+check live consumers and use maintained snapshot GC on this exact accepted
+snapshot, recording actual targets and net allocated bytes reclaimed.
+
+### 2026-09-30 16:51 UTC — Executable acceptance
+
+Independent Reviewer rechecked the repaired incremental reader accounting and
+both failure entrypoints: **no material finding remains**. Its final full suite
+passed27 tests in0.66s, including late score/counter failure and interrupted
+arithmetic. The DM independently ran the final full suite:27passed/0.70s;
+syntax and whitespace checks passed. Current fixtures contain no selected-seed
+literal or call to `initial_geometry`; their geometry is handcrafted. The
+Implementer's final tests were27passed/0.75s and focused5passed/0.97s.
+These test times are support checks, not native result runtime. Exact total
+engineering CPU and labor are not metered.
+
+The DM accepts the six-file diff against the frozen L0, including original-C
+reuse, anonymous local history, inactive/mixed numerical behavior, guarded
+collector, partial-failure evidence and independently implemented saved-data
+formulas. No shared controller/environment source was changed, no fit/native
+experiment has run, and no scientific design revision resulted from the
+engineering repairs. Target-node numerical behavior and the complete panel
+remain to be observed. Publish these inputs before requesting admission.
