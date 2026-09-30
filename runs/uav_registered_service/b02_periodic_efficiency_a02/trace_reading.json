@@ -1,0 +1,202 @@
+{
+  "scope": "Saved verified raw only; no environment, policy, counterfactual, fit or added episode. Four false-prefix-release worlds and the maximum-gap G world among F200 worlds.",
+  "summary_sha256": "99fac8086f621fc0d07a3d4a1edbc9c10d1b053a0966309bc9c27f4100409192",
+  "native_steps": 0,
+  "fits": 0,
+  "inputs": [
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/raw/G_29309006.npz",
+      "bytes": 681491,
+      "sha256": "aca95438277ccd30ae08f290c0dd55f2147ff2f07c452ff066fad90c0fc61000"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/raw/G_29309021.npz",
+      "bytes": 728269,
+      "sha256": "cd4248241285f52f732489c3c572b79e9739b42e844b8bb95509b0dc986cf6f3"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/raw/G_29309027.npz",
+      "bytes": 720322,
+      "sha256": "6dc912a5b1b060c635775b2ddb9f09bda824516afae259004d00960b54ba5c64"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/raw/G_29309048.npz",
+      "bytes": 782229,
+      "sha256": "b913ed7ba4412a8f23b4f4884ad7d2ab933a0c11a5161fb718b68429a69dbc39"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/raw/G_29309000.npz",
+      "bytes": 764091,
+      "sha256": "08cbc827eac010d608de6deac19e70adb2543453d2df6f56654249cdd43067fe"
+    },
+    {
+      "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/raw/O_29309000.npz",
+      "bytes": 791180,
+      "sha256": "8f9682218ca88e595c2698856d2e4505f778ddbac914847338bd59effcd626c6"
+    }
+  ],
+  "false_release_groups": [
+    {
+      "seed": 29309006,
+      "window": 3,
+      "report_ticks": [
+        208,
+        212,
+        216,
+        220,
+        224,
+        228,
+        232,
+        236,
+        240,
+        244,
+        248
+      ],
+      "missing_user_ids": [
+        17
+      ],
+      "actual_window_missing_user_ids": []
+    },
+    {
+      "seed": 29309021,
+      "window": 1,
+      "report_ticks": [
+        80
+      ],
+      "missing_user_ids": [
+        31
+      ],
+      "actual_window_missing_user_ids": []
+    },
+    {
+      "seed": 29309027,
+      "window": 0,
+      "report_ticks": [
+        28,
+        32,
+        36,
+        40,
+        44,
+        48,
+        52,
+        56
+      ],
+      "missing_user_ids": [
+        19
+      ],
+      "actual_window_missing_user_ids": [
+        19
+      ]
+    },
+    {
+      "seed": 29309048,
+      "window": 2,
+      "report_ticks": [
+        144,
+        148,
+        152,
+        156,
+        160,
+        164,
+        168,
+        172,
+        176,
+        180,
+        184
+      ],
+      "missing_user_ids": [
+        44
+      ],
+      "actual_window_missing_user_ids": [
+        44
+      ]
+    }
+  ],
+  "F200_gap_witness": {
+    "seed": 29309000,
+    "F_G": 200,
+    "F_O": 200,
+    "user": 3,
+    "gap": {
+      "user": 3,
+      "start_inclusive": 66,
+      "end_exclusive": 181,
+      "unserved_ticks": 115,
+      "left_censored": 0,
+      "right_censored": 0
+    },
+    "G_user_contacts": [
+      0,
+      1,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      18,
+      19,
+      20,
+      65,
+      181,
+      210,
+      211,
+      212,
+      213
+    ],
+    "O_same_user_contacts": [
+      0,
+      1,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      18,
+      19,
+      20,
+      45,
+      81,
+      110,
+      111,
+      112,
+      113,
+      133,
+      157,
+      168,
+      169,
+      191,
+      192,
+      193,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      223,
+      224,
+      225,
+      232,
+      233,
+      255
+    ],
+    "O_same_user_max_gap": 35,
+    "O_episode_max_gap": 37,
+    "G_user_window_bits": [
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "resources": {
+    "wall_seconds": 0.01344774616882205,
+    "cpu_seconds": 0.013774282999999998
+  }
+}

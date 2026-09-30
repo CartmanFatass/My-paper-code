@@ -1,0 +1,32 @@
+{
+  "scope": "Post-primary-reading comparison of original complete summary rows only; repeated worlds add no independent n and never replace primary a02 endpoints. This does not verify all original raw arrays or repair the runtime.",
+  "original_summary_sha256": "203885babdf7d5d97ab9c15010a0808e40fdb8c2909fc182ef2890e95ce9bcb6",
+  "primary_summary_sha256": "99fac8086f621fc0d07a3d4a1edbc9c10d1b053a0966309bc9c27f4100409192",
+  "checked_complete_rows": 101,
+  "matched_complete_rows": 101,
+  "scientific_fields_per_row_min": 50,
+  "scientific_fields_per_row_max": 87,
+  "excluded_fields": [
+    "c_cpu_seconds",
+    "c_wall_seconds",
+    "candidate_cpu",
+    "candidate_wall",
+    "cpu_seconds",
+    "gate_cpu_seconds",
+    "gate_wall_seconds",
+    "history_cpu",
+    "history_wall",
+    "max_scheduler_wall_seconds",
+    "prefix_cpu",
+    "prefix_wall",
+    "raw",
+    "scheduler_cpu_seconds",
+    "scheduler_wall_seconds",
+    "terminal_history_cpu",
+    "terminal_history_wall",
+    "wall_seconds"
+  ],
+  "differences": [],
+  "native_steps": 0,
+  "fits": 0
+}

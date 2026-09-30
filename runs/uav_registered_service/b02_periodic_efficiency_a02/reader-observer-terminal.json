@@ -1,0 +1,296 @@
+{
+  "generation": 6,
+  "wake_id": "6af45f60-4641-4516-843f-aa481b8b5f73",
+  "events": [
+    {
+      "id": "b8d9870ced4958a956de745a",
+      "kind": "READY",
+      "evidence": {
+        "job_id": "registered-service-b02-read-a02",
+        "status": "ready",
+        "facts": {
+          "kind": "named_support_reader_status",
+          "task": {
+            "task": "registered-service-b02-read-a02",
+            "status": "finished",
+            "exit_code": 0,
+            "pid": 1030866,
+            "uptime_seconds": 234,
+            "tmux_active": false
+          },
+          "expected_identity": {
+            "pid": 1030866,
+            "start_ticks": 108374791,
+            "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3"
+          },
+          "observed_start_ticks": null,
+          "execution": {
+            "state": "exited",
+            "exit_code": 0,
+            "exit_witness": {
+              "state": "valid",
+              "scope": "named support supervisor exit plus original process absent; no scientific-result acceptance"
+            }
+          },
+          "record_consistency": {
+            "state": "consistent"
+          }
+        }
+      },
+      "created": 1790739214.3339498,
+      "consumed": false
+    }
+  ],
+  "jobs": {
+    "launch-b02-periodic-efficiency-a01": {
+      "spec": {
+        "id": "launch-b02-periodic-efficiency-a01",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "/home/wu/projects/HMASD/scripts/hmasd_launch.py",
+          "status",
+          "/home/wu/projects/HMASD/.git/hmasd-admission/7b2c9de4c24d7e5ad9fb59c378d7136d703d0e94581a4b0c7b66084c6cf23413.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      },
+      "status": "failed",
+      "due": 1790736785.16976,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a01/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a01/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a01/summary.json",
+            "state": "present"
+          }
+        },
+        "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7b2c9de4c24d7e5ad9fb59c378d7136d703d0e94581a4b0c7b66084c6cf23413.json",
+        "direction": "uav_registered_service",
+        "execution": {
+          "exit_code": 1,
+          "exit_witness": {
+            "exit_code": 1,
+            "finished_at_epoch": 1790736745.0454097,
+            "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a01/process-exit.json",
+            "state": "valid",
+            "termination": "process_exit"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1028049,
+              "session_id": 1028048,
+              "start_ticks": 108125188
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1028048,
+              "session_id": 1028048,
+              "start_ticks": 108125185
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry_available": false,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a01/launch-manifest.json",
+        "node": "wsl_4070",
+        "observed_at": "2026-09-30T02:52:34.394456Z",
+        "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7b2c9de4c24d7e5ad9fb59c378d7136d703d0e94581a4b0c7b66084c6cf23413.json",
+        "output_root": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a01",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "schema_version": 1,
+        "sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/79cec060155e4252bc9d82b5c3d08e34"
+      },
+      "observed": 1790736755.16976
+    },
+    "registered-service-b02-a02": {
+      "spec": {
+        "id": "registered-service-b02-a02",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/ssh",
+          "hmasd-wsl-node",
+          "/home/wu/.venvs/hmasd/bin/python",
+          "/home/wu/projects/HMASD/scripts/hmasd_launch.py",
+          "status",
+          "/home/wu/projects/HMASD/.git/hmasd-admission/9626ce7ddc190ad3507d1189b71e3308b366e6f1777e4d7bdf4d1d71d4465601.json"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      },
+      "status": "ready",
+      "due": 1790738967.3497195,
+      "errors": 0,
+      "last": {
+        "admission": {
+          "claim_state": "accepted",
+          "state": "accepted"
+        },
+        "artifacts": {
+          "stderr": {
+            "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/stderr.log",
+            "state": "present"
+          },
+          "stdout": {
+            "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/stdout.log",
+            "state": "present"
+          },
+          "summary": {
+            "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/summary.json",
+            "state": "present"
+          }
+        },
+        "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/9626ce7ddc190ad3507d1189b71e3308b366e6f1777e4d7bdf4d1d71d4465601.json",
+        "direction": "uav_registered_service",
+        "execution": {
+          "exit_code": 0,
+          "exit_witness": {
+            "exit_code": 0,
+            "finished_at_epoch": 1790738912.5935981,
+            "path": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/process-exit.json",
+            "state": "valid",
+            "termination": "process_exit"
+          },
+          "runner": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1029865,
+              "session_id": 1029864,
+              "start_ticks": 108310534
+            },
+            "state": "absent"
+          },
+          "state": "exited",
+          "supervisor": {
+            "recorded_identity": {
+              "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+              "kind": "linux_pid_start_ticks",
+              "pid": 1029864,
+              "session_id": 1029864,
+              "start_ticks": 108310532
+            },
+            "state": "absent"
+          }
+        },
+        "explicit_retry": {
+          "eligible": false,
+          "reasons": [
+            "parent has no consistent terminal nonzero native exit"
+          ],
+          "scientific_authorization": false,
+          "successor_ref": null,
+          "supported": true
+        },
+        "explicit_retry_available": false,
+        "kind": "hmasd_operation_status",
+        "manifest_ref": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/launch-manifest.json",
+        "node": "wsl_4070",
+        "observed_at": "2026-09-30T03:28:56.332994Z",
+        "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/9626ce7ddc190ad3507d1189b71e3308b366e6f1777e4d7bdf4d1d71d4465601.json",
+        "output_root": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02",
+        "record_consistency": {
+          "mismatches": [],
+          "state": "consistent"
+        },
+        "retry_of": {
+          "claim_key": "7b2c9de4c24d7e5ad9fb59c378d7136d703d0e94581a4b0c7b66084c6cf23413",
+          "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7b2c9de4c24d7e5ad9fb59c378d7136d703d0e94581a4b0c7b66084c6cf23413.json"
+        },
+        "schema_version": 1,
+        "sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+        "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3"
+      },
+      "observed": 1790738937.3497195
+    },
+    "registered-service-b02-read-a02": {
+      "spec": {
+        "id": "registered-service-b02-read-a02",
+        "protocol": "launch",
+        "argv": [
+          "/usr/bin/python3",
+          "/home/fires/hmasd-wsl/temp/directions/uav_registered_service/b02-a02-observe/probe_reader.py",
+          "registered-service-b02-read-a02",
+          "1030866",
+          "108374791",
+          "bb732fcb-1a33-4659-a786-331110ae41d3"
+        ],
+        "cwd": "/home/fires/hmasd-wsl",
+        "interval": 30,
+        "timeout": 20
+      },
+      "status": "ready",
+      "due": 1790739244.3334134,
+      "errors": 0,
+      "last": {
+        "kind": "named_support_reader_status",
+        "task": {
+          "task": "registered-service-b02-read-a02",
+          "status": "finished",
+          "exit_code": 0,
+          "pid": 1030866,
+          "uptime_seconds": 234,
+          "tmux_active": false
+        },
+        "expected_identity": {
+          "pid": 1030866,
+          "start_ticks": 108374791,
+          "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3"
+        },
+        "observed_start_ticks": null,
+        "execution": {
+          "state": "exited",
+          "exit_code": 0,
+          "exit_witness": {
+            "state": "valid",
+            "scope": "named support supervisor exit plus original process absent; no scientific-result acceptance"
+          }
+        },
+        "record_consistency": {
+          "state": "consistent"
+        }
+      },
+      "observed": 1790739214.3334134
+    }
+  },
+  "delivery": {
+    "id": "6af45f60-4641-4516-843f-aa481b8b5f73",
+    "status": "delivery_unknown",
+    "created": 1790739214.3418314,
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Error: failed to queue session message: thread/queue/add failed: direct app-server input is not allowed for multi-agent v2 sub-agents (code -32600)\n",
+    "exposed_ids": [
+      "b8d9870ced4958a956de745a"
+    ]
+  },
+  "stopped": false
+}

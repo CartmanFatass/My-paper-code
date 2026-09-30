@@ -1328,3 +1328,201 @@ supervisor/PID/start-tick/boot identity, with its actual completion marker and
 absence of the original process required for terminal classification. It never
 launches the reader or certifies the scientific result. No partial contrasts have
 been used for a follow-up decision.
+
+
+<a id="b02-complete-reading"></a>
+### B02 complete reading — retain a conditional efficiency capability; reject loss-free preservation
+
+The primary a02 panel is **complete and read**, using unchanged source/reader
+`8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc`: 64 paired worlds, 192 complete episodes,
+49,152 native transitions, 0 fits/updates. Its original a01 attempt remains a
+technical failure with its own 101 complete episodes, 12 failed transitions,
+102 raw files and measured cost. The prospectively selected a02-only primary rule
+was followed. Neither mixing attempts nor increasing the independent sample to
+293 completed episodes is legitimate.
+
+The unchanged pure reader returned `VERIFIED_COMPLETE` for all 192 raw files
+(125,150,096 bytes) and all 49,152 transitions. It reconstructed all 32,768 O/G
+executed model-history transitions, G gates/exposure and candidate keys, plus
+67,127 declared candidate-physics pairs and 20,933 additional S2 candidate pairs.
+Worst native J error was 5.5511e-17; native SINR and saved-observation errors were
+zero. Candidate verification retains the declared subset and shared-radio-kernel
+limits; this is not an independent reimplementation of every physical equation.
+The complete per-world readings, missing-gap handling and paired distributions
+are in [reading.json](../../../../runs/uav_registered_service/b02_periodic_efficiency_a02/reading.json),
+bound to summary SHA256 `99fac8086f621fc0d07a3d4a1edbc9c10d1b053a0966309bc9c27f4100409192`.
+All 294 raw files from both attempts remain at their original canonical
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_registered_service/` outputs, identified
+by the respective summary artifact paths, byte counts and SHA256 values. The
+original 102 are retained for the failure/recovery contract, including timing and
+partial evidence; they are not discarded as scientific duplicates.
+
+| Mean endpoint | S2 | O | G |
+| --- | ---: | ---: | ---: |
+| Actual user-window coverage F, maximum 200 | 161.359375 | 199.968750 | 199.859375 |
+| Native J | .480615 | .322071 | .403068 |
+| Native served users/tick | 29.985168 | 18.607300 | 24.342224 |
+| Native quality | .202742 | .205229 | .207589 |
+| Path, m/UAV | 4442.61 | 8479.82 | 6880.23 |
+| Episode maximum unserved gap, ticks | 249.4375 | 50.7031 | 72.3125 |
+| Mean user maximum unserved gap, ticks | 71.9950 | 24.2144 | 34.6859 |
+
+G-O increases J by .080997, descriptive paired t95 [.074767, .087227], in all
+64 worlds; increases service by 5.734924/tick [5.250875, 6.218974], in 63 worlds
+with one loss; and shortens path by 1599.590 m/UAV [1463.364, 1735.816], in every
+world. Quality's increment .002360 [-.002920, .007640] remains unresolved. These
+intervals describe reset-world variation within this fixed execution contract,
+not training replication or physical deployment guarantees.
+
+Coverage is close to its upper bound but is not preserved without loss. G-O F
+is -.109375 [-.199683, -.019067], with 0 gains, 6 losses and 58 ties. G misses
+9 of the 12,800 possible user-window obligations, O misses 2: **seven additional
+misses in six worlds**. G reaches F200 in 56 worlds (seven F199, one F198), O in
+62 (two F199). Both serve every user at least once; S2 leaves a mean 2.671875
+users never served. No formal noninferiority/adoption tolerance was frozen, so
+this is a contradicted loss-free-preservation conjecture, not a failed invented
+retention test. Relative to S2, G still raises F by 38.5 but lowers J by .077547
+and service by 5.642944/tick, while adding 2437.620 m/UAV path. All 64 worlds
+share those four directions. G reduces, but does not eliminate, the complete-task
+cost of periodic coverage. The repeated O-S2 tradeoff is also clear in all worlds:
+F +38.609375, service -11.377869/tick, path +4037.210 m/UAV.
+
+The gap consequence is substantial despite the saturated F mean. G-O increases
+episode maximum gap by 21.609 ticks [15.916, 27.303]: 57 worse, 5 better, 2 tied.
+Mean user maximum gap increases 10.471563 [9.141499, 11.801626], worse in 62 worlds.
+Mean unserved-gap length increases 2.830721 ticks in all 64 worlds. This is not
+merely censoring: mean closed-gap length increases 2.351387 and mean closed-gap
+maximum increases 22.578125. In world29309000, G and O both achieve F200, yet
+G user3 has a 115-tick **closed** gap [66,181), with service at transitions65 and181;
+O's same-user maximum is35 and episode maximum37. All four G window bits for
+that user are true. [Saved-raw trace and identities](../../../../runs/uav_registered_service/b02_periodic_efficiency_a02/trace_reading.json)
+retain this witness and its full contact list. Fixed-window coverage is not a
+rolling waiting-time bound.
+
+Preserve the constructive and adverse cases together. In world29309003, G/O
+both achieve F200, while service rises 19.308594 to25.527344, path falls 8583.53565
+to7081.45321 m/UAV, and maximum gap falls106 to62: useful joint gains do exist.
+In world29309019, both achieve F200 and G increases J .013110 through quality,
+but service falls .0625/tick and G has a107-tick closed gap versus O's episode
+maximum35. Aggregate tail service improves (G-O service p10 +4.1875 and minimum
+service +2.25), while one p10 and seven minimum-service worlds worsen. G has
+7 zero-service ticks across5 worlds versus O's14 across10 and S2's0; G nevertheless
+introduces a new zero at tick87 of29309034, where S2/O have none. No universal
+service improvement, tail guarantee or continuous-wait preservation is supported.
+
+**Exposure and the changed explanation.** G computes 4096 gates, of which3904 are
+eligible; it releases2338 reports, between18 and45 in every world, with9228
+transitions executed under released decisions. All releases are timely. All
+initial history anchors are at0 and all report histories are reconstructable.
+Maximum charged scheduling time is .08018/.09728/.09929 s for S2/O/G, below the
+1.456 s budget; there are no deadline misses. Thus nonactivation, unavailable
+initial history and deadline fallback do not explain this panel. The1073 command
+edits compare released decisions with C proposals, and649 mask changes compare
+with the previous actual mask; neither is a same-input alternate-O action count.
+The full policy comparison supports an effect of this gate package, without
+isolating every trajectory mediator.
+
+At2157 of the2338 releases the actual window was already complete through t-1.
+Another150 become actually complete within the lawful two-tick private prefix.
+The31 false-prefix releases concern **four correlated user-window obligations**:
+world06/window3/user17 (11 releases), world21/window1/user31 (1),
+world27/window0/user19 (8), and world48/window2/user44 (11). The first two later
+complete; the latter two remain missed. Nineteen repeated releases therefore
+refer to two final misses, not19 independent failures. G has two terminal model
+window false positives, O none. Earlier B01 O/P model-window accuracy does not
+transfer as a guarantee along G's changed trajectories. Both O/G also have
+per-transition model service errors, retained in their full readings.
+
+False completion is only part of the evidence. Additional G losses occur in
+world09/window2 (users8 and9), world32/window1 (user14), world46/window3 (one
+user), and world59/window2 (one user). These four worlds lose five obligations
+without any false release anywhere and without a G release inside the missed
+window. They used age ordering there after earlier releases. World32 has an
+actual142-tick closed gap [6,148), versus O's episode maximum38. This supports
+continued refreshing having future service value and weakens a false-completion-
+only explanation. It does not identify geometry, model history or another
+intermediary as the dominant cause. An ACK intervention would change information
+and trajectories; its full benefit cannot be obtained by subtracting the two
+observed false-completion misses.
+
+The mathematical distinction now has direct empirical force: once **actual**
+current-window completion occurs, its F contribution is irreversible, but the
+model gate need not certify that fact, and future states/windows/gaps remain
+coupled through the chosen motion and activation. The evidence supports both
+limits. It does not demand an exact mediator proof before a useful future
+learning/controller question, and it does not establish learnability or select
+such a question itself.
+
+**Complete execution cost and recovery scope.** All arms keep the same400-byte
+map,8704 recurring bytes/episode, two-tick delivery/four-tick commitment and frozen
+physical rights. G/O each make7424 candidate requests and6858 geometry forecasts
+per episode. G evaluates fewer unique plans (5413.375 versus O5969.203125;
+S24771.875). Mean instrumented episode CPU is3.219455 for G,3.376187 for O and
+2.588943 for S2. G-O is -.156732 s [-.194894, -.118569], lower in57 worlds and
+higher in7; scheduler CPU explains about .154039 s of that reduction. This is a
+modest measured saving in this implementation, not a general complexity claim.
+G adds148.375 team-transmitter-on ticks/episode over O [133.005,163.745], in63
+worlds with one decline. Shorter travel does not establish energy savings.
+
+The successful worker used590.005111 CPU/577.357922 wall seconds, peak185280 KiB.
+With failed a01, worker cost is904.172985 CPU/886.572706 wall seconds, with75,020
+native transitions,293 complete episodes plus one12-transition failed episode,
+294 resets and2 constructors. The reader adds226.77 externally measured CPU and
+226.05 wall seconds, peak141116 KiB; its internal scope reports226.465469 CPU,
+220.812043 wall,139824 KiB. Do not add the overlapping reader measurements.
+Known B02 workers plus reader total1130.942985 CPU seconds; one-report diagnostic
+and saved-raw trace add .173562+.013774 CPU seconds. Preparation, tests, review
+and transfer are additional and incompletely metered. Peaks are per process,
+not a simultaneous memory sum. [Reader measurement](../../../../runs/uav_registered_service/b02_periodic_efficiency_a02/reader-time.txt)
+is retained. Generation6 observed the reader's terminal success; the same native
+child queue rejection was handled by the active deterministic wait. Events were
+drained/consumed and the observer stopped at generation7. No live G worker or
+reader remains.
+
+Only after primary reading, all101 complete a01 summary rows were compared with
+a02. They match exactly on all non-timing scientific fields (50–87 fields per
+row), excluding raw identity and all wall/CPU measurements. [Exact comparison
+scope and exclusions](../../../../runs/uav_registered_service/b02_periodic_efficiency_a02/duplicate-summary-check.json)
+are preserved. This is neither a second independent panel nor full validation
+of every original raw array. It identifies no cause or repair for the earlier
+unknown-opcode failure. No runtime installation or further retry was selected.
+
+**Independent scientific review and investment decision.** The dedicated
+ResearchCritic `/root/dm_periodic_efficiency/critic_recovery`, still in its separate
+context without DM/Root conversation inheritance, reconstructed a02 before
+receiving the DM interpretation. It checked source/config/summary bindings and
+panel order, recomputed consequential contrasts and distributions, and directly
+verified18 canonical raw files across worlds03/09/19/27/32/34. Those checks covered
+hashes, initial geometry, F/windows, J/service/quality, path, gaps and initial
+G/O divergence. It read the false-release trace and independently confirmed the
+101 repeated complete summary rows. It did not repeat the entire frozen verifier
+or reconstruct every raw array; the declared full-reader and shared-kernel limits
+remain. The original independent recovery review also remains applicable.
+
+Its substantive recommendation is to retain G as a **conditional service/travel
+tradeoff capability**, keep O as the stronger periodic coverage/refresh/gap
+reference and S2 as the native-service efficiency reference, and close this
+selected study with no automatic next run. It rejects loss-free preservation
+without fabricating a formal adoption test. It explicitly retains the world03
+constructive example, the tails and closed-gap failures, and the four correlated
+false-release groups. Model-error-only repair has not earned priority because
+it does not account for the other losses. More worlds would refine precision
+without resolving the substantive measured tradeoff. A future anticipatory
+controller or different service contract could be worth selecting with competent
+G/O references and a complete costed comparison; exact headroom or a proved
+mediator is not a prerequisite. ACKs, thresholds, learning and another panel
+are not selected automatically. **MATERIAL_DISSENT: no.**
+
+DM disposition: accept this diagnosis and stopping point. This develops G as a
+useful ordinary capability rather than discarding it because loss-free preservation
+fails. The parent question remains open; no worthy next investment is implied
+merely by remaining uncertainty. Set the direction to **reserve**, retain useful
+G/O/S2 implementations and all positive/adverse/technical evidence, and select
+no further result-bearing operation here. There is no pending owner approval,
+scientific advice or producer. Root owns any later cross-question selection; a
+consequential complete comparison under an explicitly chosen service contract is
+a possible re-entry condition, not an outstanding dependency. No additional Pro
+round offers distinct value for this agreed reading. Publish the shared-background
+updates about conditional efficiency and fixed-window versus continuous service;
+then remove unused snapshots/scratch after checking consumers. Cleanup facts will
+be appended below after measured deletion, not inferred from publication.
