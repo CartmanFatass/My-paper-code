@@ -1234,3 +1234,55 @@ comparison can change which learning program to use. The counterfactual U repeat
 above is costed reasoning, not registration or authorization for another batch.
 One adequate independent review covers this disposition; the same evidence supplies
 no distinct Pro question that would justify another advice cycle here.
+
+<a id="b02-publication-and-cleanup"></a>
+### B02 publication and measured closure
+
+2026-09-30 UTC. Complete compact evidence and the independent scientific disposition
+were published first as `6adc792489484f8d248b7cae0c1739df5f63d872`; source remains
+`f5f165ec772a1fed7c9d7689bd897fe16391a18e`. Projection checks reproduce all 78
+contrast-vector/mean/conditional-variance reductions, all 384 rotating-order records,
+all 1,536 training-witness counts and exact source/summary/reading identities. No
+scientific executable changed after launch; the full 44-test engineering acceptance
+and first-pass complete native reading stand without a gratuitous test rerun.
+
+Before deletion, both native processes were absent with a valid exit 0 witness,
+the scientific critic had finished all consumers, and local file-use checks found
+no open readers of the redundant copies. Observer generation 6 is stopped, its
+daemon process is absent, wake is null and all terminal/checkpoint events are
+consumed. Its small recovery state and native launch/admission/exit records remain.
+The maintained exact-target snapshot collector previewed eligible, then removed
+only `.git/hmasd-launch-sources/75154183726c4389b0a343fc5f4bcb6a` on `wsl_4070`,
+using its supported read-only sudo process scan. Published source ancestry remains
+recoverable; no accepted worker or preserved output was moved or relaunched.
+
+| Actually deleted target | Allocated bytes before | After |
+|---|---:|---:|
+| `wsl_4070:/home/wu/projects/HMASD/.git/hmasd-launch-sources/75154183726c4389b0a343fc5f4bcb6a` | 808,804,352 | 0 |
+| Local `experiments/candidates/uav_parent_adaptation/__pycache__/` | 57,344 | 0 |
+| Local `experiments/candidates/uav_parent_adaptation/b01/__pycache__/` | 53,248 | 0 |
+| Local `experiments/candidates/uav_parent_adaptation/b02/__pycache__/` | 53,248 | 0 |
+| Local `tests/experiments/candidates/uav_parent_adaptation/b02/__pycache__/` | 61,440 | 0 |
+| Local `temp/directions/uav_parent_adaptation/` (B02 observer request and rebuildable inventory) | 98,304 | 0 |
+| Local `runs/uav_parent_adaptation/b02_full_continuation_a01/summary.json` duplicate | 1,363,968 | 0 |
+| Local `runs/uav_parent_adaptation/b02_full_continuation_a01/reading.json` duplicate | 2,912,256 | 0 |
+| Same local run's `reader-a01.log` duplicate | 4,096 | 0 |
+| Same local run's `delivery01.log` startup notice | 4,096 | 0 |
+
+Every listed target is absent. Net allocated working-tree space reclaimed during
+this closure is **813,412,352 bytes**: 808,804,352 remote + 4,608,000 local, with no
+new retention copy, tarball or backup chain. This excludes the previously reported
+B01 reclamation and makes no claim about Git object storage or whole-host free space.
+After source deletion the entire canonical B02 tree was rehashed: all 434 files,
+106,040,756 logical bytes and inventory digest
+`51d4be7a5eed3e18ac0d122319d21dafc6dd8525955728be889dd6d130af24b6`
+are unchanged. All384 raw trajectories, six U initial/final checkpoints, training
+and update streams and complete reader/log evidence remain in that one canonical
+location. Original B01 parent/K/D evidence remains at its recorded locations.
+
+The published strict loaders, native study programs, readers and their focused
+checks remain useful for these retained conditional capabilities and future
+reproduction; no additional unused source module was identified. There is **no
+remaining cleanup tool blocker**, missing required evidence or active operation.
+The direction's RESEARCH standing/background now records this complete result,
+retention and reserve condition without changing another lead or owner pause.
