@@ -1,0 +1,49 @@
+{
+  "schema": "hmasd.runtime_deployment.v1",
+  "utc": "2026-09-30T05:52:19Z",
+  "source_sha": "6c930e5c54a2f79f390a6c8a0f8f8e66b237f335",
+  "node": "wsl_4070",
+  "before": {
+    "head": "570fd45646ea62f4e28d86c74770e835b2e0a963",
+    "index_sha256": "dd86a6c7f51df585c0f6374c96f232edd23407c12e87a8ef1825bce6b946817b",
+    "compute_sha256": "ac465a1357486c96441147b9b2eda3ad75332778877654d50ae86eeb59649ef6",
+    "workers": []
+  },
+  "after": {
+    "head": "570fd45646ea62f4e28d86c74770e835b2e0a963",
+    "index_sha256": "dd86a6c7f51df585c0f6374c96f232edd23407c12e87a8ef1825bce6b946817b",
+    "compute_sha256": "2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f"
+  },
+  "foreign_tracked_paths_unchanged": {
+    "docs/research/RESEARCH.md": "4dbc48a0b19bed9cbf6ecf2944c3ef24e92c98c1e20e0eb2fd483723b46477a6",
+    "runs/energy_relay_baselines/b01_set_a01/seed-26092711/launch-status.json": "df768d3ffdcc8c27886586ec2688eb8eab94f0f131aa6a252123f8d0ea7be7fe",
+    "runs/energy_relay_baselines/b01_set_a01/seed-26092731/launch-status.json": "6067ee63aee812322a4504c2ed34e697ae9ef020f2e2b2691f6c213eca0a922b",
+    "runs/uav_message_content/b01_s19431/launch-status.json": "87317f3d64ee803c88169f895debe1a4cf7a1cdaa5e09dc81cd7ef2f9f3e473a",
+    "runs/uav_message_content/b03_frozen_assets/launch-status.json": "5243589c5c89ed7c8b97a9b3bb67757d28583d85f331ff1f0dcd15af4bdd11ed",
+    "runs/uav_persistent_service/b03_reassignment_a01/launch-status.json": "7d0730ac348edb24789319b53672ddda8bf06dd0dc560f57bbd06fcf0ec009fa",
+    "scripts/hmasd_launch.py": "6a22fef75e7bbc0997b2f4b0096d278de793d43e466497b36bba49884cab23f9"
+  },
+  "probe": {
+    "executable": "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "base_prefix": "/home/wu/.local/opt/hmasd-cpython-3.10.21-gcc",
+    "compiler": "GCC 13.3.0",
+    "version": "3.10.21 (main, Sep 30 2026, 13:28:54) [GCC 13.3.0]",
+    "exe_sha256": "039033f129d33a69044ceff71ca87b109ad99d511b59946f81ffc3f728b1a3a1",
+    "numpy": "1.26.3",
+    "numpy_file": "/home/wu/.venvs/hmasd/lib/python3.10/site-packages/numpy/__init__.py",
+    "torch": "2.7.0+cu118",
+    "torch_file": "/home/wu/.venvs/hmasd/lib/python3.10/site-packages/torch/__init__.py",
+    "cuda_available": true,
+    "ssl": "OpenSSL 3.0.13 30 Jan 2024",
+    "path_python": "/home/wu/.venvs/hmasd-gcc-31021/bin/python",
+    "ninja": "/home/wu/.venvs/hmasd/bin/ninja"
+  },
+  "probe_stderr": "",
+  "scientific_effects": {
+    "new_fits": 0,
+    "native_steps": 0,
+    "optimizer_steps": 0
+  },
+  "scope": "One configured interpreter/path switch for future admissions. No live worker found or migrated; old environment and failure evidence retained.",
+  "prewrite_attempt": "Prior published-blob retrieval triggered a partial-clone lazy network fetch outside configured network shell. Its exact owned git process tree was terminated, parent exited1, and old compute digest was reverified before this write. Supplied bytes here come from local git show at published source, not working tree."
+}

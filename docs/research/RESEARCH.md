@@ -1284,7 +1284,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
-| `uav_service_age` | Can finite experience reduce cumulative native service age beyond competent lawful ordinary control under the same delayed commitment? | exploring | Codex DM (native child) | **Selected one-fit study; exact inputs published dd6cdf780, no accepted run.** New wsl_4070 admission awaits Root’s owner-requested intermittent-runtime repair; no scientific scope change. New prospective mean-age objective, H256 N5/U50/3dB/c10; legal model history, no actual-service ACK. L0/L1/M/W/O/G/S2 on64 fresh worlds;512 training plus448 evaluation episodes,245760 native steps. Primary L1−M with own-initialization and all ordinary references, user tails and complete cost. Standalone W and fixed-slot/causal-feature corrections accepted after full Pro and independent review. New DM owns bounded implementation, normal admission, complete reading and publication; no automatic extra fits. [Selection and full scope](archive/2026-09-30/RESEARCH-cumulative-service-age-selection.md#decision), [routing](#session-routing). |
+| `uav_service_age` | Can finite experience reduce cumulative native service age beyond competent lawful ordinary control under the same delayed commitment? | exploring | Codex DM (native child) | **Selected one-fit study; runtime dependency released after reviewed provisional mitigation.** Scientific inputs dd6cdf780 remain unchanged; DM binds the new published wsl_4070 runtime before fresh admission. Root cause remains unresolved; no scientific scope change or extra fit. New prospective mean-age objective, H256 N5/U50/3dB/c10; legal model history, no actual-service ACK. L0/L1/M/W/O/G/S2 on64 fresh worlds;512 training plus448 evaluation episodes,245760 native steps. Primary L1−M with own-initialization and all ordinary references, user tails and complete cost. Standalone W and fixed-slot/causal-feature corrections accepted after full Pro and independent review. New DM owns bounded implementation, normal admission, complete reading and publication; no automatic extra fits. [Selection and full scope](archive/2026-09-30/RESEARCH-cumulative-service-age-selection.md#decision), [routing](#session-routing). |
 | `uav_correction_compression` | Can useful learned residual corrections be deployed as fixed calibrations while preserving complete native behavior and reducing online work? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; no mean replacement.** Published result e17f4fdf9:224 episodes/57344 steps/0fits. All three C−D J/service intervals are below zero and all frozen retention rules fail; D19702 retains a positive conditional B40 increment. Keep D/B40/all adverse outcomes, choose no new default or automatic tuning/panel. Nearly constant magnitude does not imply dispensable variation; optimal constants/message causality remain open. Full actor CPU saves21–22.5%, trace-inclusive loop only2.7–3.8%. Re-entry needs a consequential deployment-cost question and complete comparison. [Evidence/disposition](candidates/uav_correction_compression/NOTES.md#b01-complete-reading); [closure complete](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup), no live work or cleanup blocker. [Routing](#session-routing). |
 | `uav_registered_service` | Can lawful model-history scheduling improve registered users' periodic native link opportunities at a worthwhile complete-service and execution cost? | reserve | Codex DM (native child) | **B02 complete/read/independently diagnosed; retain conditional G, select no further run.** Primary a02, source8ab72e5e2:192episodes/49152steps/0fits, all raw and full declared reader complete. G-O J+.080997, service+5.734924/tick, path-1599.590m/UAV, but F-.109375 (7 extra missed obligations in6worlds) and maximum gap+21.609ticks. Every world activates; no deadline failures. Two terminal false model-window completions do not explain five other lost obligations. Reject loss-free preservation without inventing an adoption tolerance; keep G for service/travel tradeoff, O for stronger coverage/refresh, S2 for native efficiency. Original a01 failure/102raws retained; cumulative75020steps and1130.943 measured worker/reader CPU seconds, no runtime fix established. B01 O capability, P-O unresolved superiority and adverse gaps stand. Reserve with no producer, unread result or selected successor; re-entry needs a consequential complete service-contract comparison chosen by Root. [Complete B02 evidence and disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading), [closure complete](candidates/uav_registered_service/NOTES.md#b02-final-cleanup):1,619,988,480 allocated bytes reclaimed, no cleanup blocker; [failure/recovery](candidates/uav_registered_service/NOTES.md#b02-recovery-decision), [B01 evidence](candidates/uav_registered_service/NOTES.md#b01-complete-reading), [routing](#session-routing). |
 | `uav_fleet_transmission` | Can ordinary transmitter management alter N4/N8 native service and preserve useful frozen learning assets beside a competent full-team physical controller? | reserve | Codex DM (native child) | **B01 complete/read; no selected successor.**160episodes/80000steps/0newfits, full reader and independent diagnosis. N8 E−all improves H6/SET J by+.096344/+.254920 and service by+6.235125/+15.029375 in all16worlds; N4 H6 loses−.020050J/−1.474375service. C/E has best mean J at both N; preserve N4 H6/all service tradeoff, all losses and fixed two-asset scope. Retain conditional N8 management and ordinary C/E; end unchanged screen expansion, no identified learning repair, pure-N or interference-fraction claim. Evidence `6b51a962e`, source `a2f62e613`; raw retained, net3377176576allocated bytes reclaimed, no active producer/advice. [Complete reading and disposition](candidates/uav_fleet_transmission/NOTES.md#b01-complete-reading). |
@@ -1713,11 +1713,29 @@ FSD/PPC暂停、G33冻结、Milan数据依赖及不复用完整收尾旧DM均保
 
 ### Shared runtime diagnosis
 
-**2026-09-30 owner要求Root解决反复出现的CPython间歇故障。** Root接手共享运行环境修复：
-核对原始core／解释器与库身份、隔离Python／原生扩展／宿主机原因，选择有证据的修复并做针对性验证。
-`uav_service_age`已发表精确输入dd6cdf780，但尚无结果准入、worker或observer；其新wsl_4070启动
-暂待这一技术依赖，不更改已选科学比较，也不以诊断购买新fit。当前没有本方向已接受操作需要重启或迁移。
-运行库修复与配置切换按实际进程和独立工程审查处理；旧故障、原始环境及证据继续保留，短暂检查通过不称根因已解决。
+**2026-09-30 owner要求的共享运行环境修复：临时缓解已部署，根因尚未确定。**
+Root在独立工程复核后发表`6c930e5c5`，将wsl_4070后续启动切换到独立GCC13.3构建的同版本
+CPython3.10.21（O2、无PGO/LTO）。NumPy1.26.3／Torch2.7.0+cu118包字节仍来自原环境；
+原包目录是新venv的实际依赖，旧解释器、原始core和失败科学轨迹保留。配置已在节点实核，未迁移／重启worker。
+[完整诊断、检查与限制](../../runs/runtime_repair/cpython_20260930/diagnosis.json)、
+[部署实核](../../runs/runtime_repair/cpython_20260930/deployment.json)。
+
+SET原始core的驻留GNU notes与故障指令绑定了CPython、NumPy及libc的当前磁盘构建。
+直接故障为`PyErr_Format`释放预存异常值时读取地址7；该值来自线程状态`curexc_value`，
+不是格式参数。谁写坏状态仍未知。最新G的unknown-opcode路径不需要Torch或自定义C++扩展。
+Owner报告过热后降频；宿主机96条固件限频事件与此线索一致，但不能证明过热导致这些异常。
+512MiB单轮内存检查通过也不认证整机健康；未修改功耗／固件设置。
+
+两套运行时各通过30项consumer检查；初始化、创新流、完整评估检查点内容及跨解释器读取一致。
+同一保存输入的300秒S2重放两者均未失败（旧5986／新5318份报告）；各128次真实时钟重放无超时。
+新构建吞吐约低11%，不能外推所有deadline或故障率。工程支持成本含696个native fixture步、
+24个合成优化器步，0结果fit；完整测量与源码绑定见[证据](../../runs/runtime_repair/cpython_20260930/evidence.json)。
+有限无故障样本没有识别编译器缺陷，也不证明故障已治愈。再次发生须保全证据并重新判断节点准入，
+不能自动重跑科学操作。
+
+`uav_service_age`原输入dd6cdf780尚未准入，现已解除本项临时技术依赖；原DM记录新运行身份后按原科学合同
+正常准入。诊断／编译／下载／fixture冗余目录已实际删除，含清理记录增长后净回收293,646,336 allocated bytes；
+无剩余清理目标，活动解释器与原包目录保留，删除后导入检查通过。[实测清理](../../runs/runtime_repair/cpython_20260930/cleanup.json)。
 
 Root 于 2026-09-24 完成一次跨方向只读核查，新增 0 fits、0 环境步，未重启原批次或改运行环境。
 B18 与 B08 使用同一 `wsl_4070` boot 和 Python 路径；当前 Python3.10.21、NumPy1.26.3、

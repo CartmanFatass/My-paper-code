@@ -79,7 +79,7 @@
     "First memtester invocation used wrong usr/bin path and exited before workload; corrected usr/sbin invocation passed."
   ],
   "decision": {
-    "state": "Accepted by Root after independent engineering review; exact-input publication and node deployment pending",
+    "state": "Published, deployed and verified; technical launch dependency released. Root cause remains unresolved; mitigation is provisional.",
     "root_cause": "unresolved; both old and new runtimes pass bounded replays",
     "runtime_cost": "New build completed5318 vs old5986 same-input reports in300s (~11% fewer); not a uniform latency guarantee",
     "scientific_result_fits": 0,
@@ -94,5 +94,7 @@
     "scope": "Read-only independent reviewer; no additional workloads launched",
     "verified": "Seven checkpoint-content fields match; configured venv path preserved; old package tree and tool PATH intentionally retained",
     "limits": "Provisional mitigation; root cause, improved reliability, general CUDA and optimizer-resume compatibility not established"
-  }
+  },
+  "deployment_record": "deployment.json",
+  "cleanup_record": "cleanup.json"
 }
