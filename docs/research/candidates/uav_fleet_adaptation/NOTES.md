@@ -2730,3 +2730,163 @@ are another planning anchor, not a runtime guarantee for this larger collector
 and one-row gradient replay. Current work still totals **0new fits/native/model
 queries and no result implementation**. This closes the assigned preparation
 with all evidence incorporated; no live operation or unread advice remains here.
+
+
+<a id="b04-native-development-l0"></a>
+## 2026-09-30 — B04 selected implementation L0
+
+Root selected the complete `0816df3b7` design at
+`1ab42997a5a805764d5c54e3fdd810fcc2fdf514`, after reading the full design,
+original independent advice/corrections and both result reviews. The requested
+parent-B04 information is now available; Root disposes the earlier sequencing
+dissent without treating S−Q as an admission gate or new learning evidence.
+This selection changes the prior design-only boundary. It authorizes exactly
+the two immutable-asset continuations, two paid calibrations, strict reference
+reuse, shadows and complete reading above, with no extra horizon, temperature,
+replacement fit or automatic continuation. The current RESEARCH direction is
+active and assigned to this native DM; the owner pause is lifted.
+
+Deliver one guarded runner and saved-evidence reader under
+`experiments/candidates/uav_fleet_adaptation/b04_native_development/`, with
+focused tests at the matching `tests/experiments/candidates/` path. Planned
+canonical output is `runs/uav_fleet_adaptation/b04_native_development_a01/` on
+the configured `wsl_4070` node, CPU/one Torch and BLAS thread as for the bound
+source assets. The immutable original S files stay at their current node paths.
+Verify their file/tensor/architecture/source identities before any native
+constructor. Production is admission-gated and frozen; dependency-injected
+short fixtures are explicitly nonscientific and cannot use the production
+protocol. There is no public resume/retry or science-changing CLI interface.
+
+All scientific semantics, exact seeds and costs are the selected prospective
+entry above. In particular: 114 lawful actor features on own histories; separate
+136-input critic; original one-row FP32/FP64 inverse-CDF probability law; all27
+requested categories including fallback/boundary aliases; four-tick commitments;
+per-agent clipped ratios with common detached team advantage; fresh separate
+Adam; fixed256episodes/group-of-two/four-epochs; paid calibration using only its
+first32 training-world identities with independent innovations; both untouched
+final panels collected after both fits/calibrations; only exact identity reuse.
+Keep old densities FP64 and verify first-epoch identity using already-paid
+replay. No C label/model call enters R collection. Save all native/density/update,
+choice/kinematic/cost evidence and all successful/adverse/incomplete outcomes.
+
+The DM owns protocol/asset guards, policy/collector, batch orchestration, reader,
+integration tests, NOTES, RESEARCH and publication. A bounded Implementer may
+own only `learning.py` and `test_learning.py`: the differentiable two-episode
+Student continuation update and fresh critic/optimizers, with a pure array
+interface to the collector. It owns no index, shared kernels, run, notebook,
+model selection or launch. The interface accepts per-episode arrays named
+`features`, `logits`, `probabilities`, `action_index`, `logp`, `critic_features`,
+`values`, `macro_rewards`; production shapes are respectively64×5×114,
+64×5×27,64×5×27,64×5,64×5,64×136,64,64. Exactly two episodes are stacked;
+suffix targets reset at each episode. A `horizon` argument supports only the
+runner's already-frozen protocol or a nonscientific fixture, not a production
+override. Counts and all four epoch diagnostics return to the DM's runner.
+
+Checks cover probability/gradient and initial-density identity, individual versus
+joint clipping, all-action exposure, episode boundaries, detached critic targets,
+fresh Adam and exact update counts; source/asset identity rejection before reset;
+per-arm/reset/version cache isolation and fresh draws; complete native/hold
+recording; calibration ties and final-panel separation; exact reuse versus
+merely coincident outcomes; shadow requested/physical differences; reader
+tamper rejection and the compact final reading. Use synthetic fixtures for
+correctness, with no undeclared native pilot or canonical-policy queries.
+Independent high-risk engineering review covers the integrated executable path.
+The DM reviews the diff and checks and accepts it before publication/admission.
+
+Author on shared main with disjoint writer paths and no helper Git index changes.
+Scientific source, tests and exact inputs are committed/published together before
+result effects. Node admission is fresh at the actual launch; it is not needed
+for this implementation. The accepted handle then receives deterministic
+observation through collection and full interpretation, without a duplicate launch.
+Actual result cost remains the declared327680–344064steps/two actor–critic fits
+and two discrete calibrations; tests, implementation, model/shadow/reader work
+and unmeasured support are accounted separately. A material source contradiction
+returns to Root; ordinary engineering corrections stay in scope. Any admitted
+failure preserves its paid prefix and does not create a replacement allowance.
+
+Implementation clarification, before execution: the final lawful feature is the
+unchanged source's **fallback** bit (`1` means not eligible), rather than a
+positive eligibility indicator. This preserves the inherited asset's actual
+representation. The Implementer's first bounded update kernel returned18 passing
+synthetic checks. After DM source review, the same helper receives a second
+bounded behavior: a complete saved-evidence verifier in `read.py` and
+`test_reader.py`, while the DM retains orchestration and integration tests. It
+may replay only final Student and R-shadow rows within the priced81920-row
+ceiling; training/calibration logits and update diagnostics receive algebra and
+provenance checks, without replaying their actors, critics or optimizer steps.
+Saved native-transition and fallback-ranking geometric checks are separately
+counted reader arithmetic, alongside the at-most81920 shadow motion ticks;
+they make no native, C-model or radio query. No scientific design or exposure
+has changed, and actual new result exposure remains zero.
+
+Before source publication or any fleet acceptance, Root explicitly changed this
+study's execution allocation to configured `local_linux`. Its host `Jacob`
+(AMD Ryzen7 8745H) and `wsl_4070` (i9-13900H) are distinct physical machines,
+allowing the already selected waiting study's online wall-deadline operation to
+use the latter independently. B04 has no online wall deadline. This supersedes
+the preliminary `wsl_4070` placement and brief concrete resource wait; it is a
+prospective allocation, with no failed/accepted fleet operation moved or retried.
+Actual local inspection found CPython3.10.20 (Clang22.1.3), NumPy1.26.3 and
+PyTorch2.7.0+cpu at `/home/fires/.venvs/hmasd-linux-cpu/bin/python`, host `Jacob`,
+16logical CPUs. The runner fixes CPU/FP32 actors, FP64 densities and one
+Torch/BLAS/interop thread; fresh admission still occurs only at the actual launch.
+The native source, decision law, two assets, seeds, calibration, horizons and
+all exposure remain unchanged. No equality to prior-host deployment scores is
+claimed; all new controls/fits/final panels run contemporaneously here.
+
+Only the two424487-byte S files were transferred, into
+`temp/directions/uav_fleet_adaptation/b04_inputs/S_b02.pt` and `S_b03.pt`.
+Their exact file hashes remain respectively
+`b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a` and
+`cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d`.
+The original canonical node paths and tensor/source hashes remain bound in
+`CANONICAL_ASSETS`; `STAGED_ASSETS` adds fixed local paths and that provenance.
+Production accepts only those bindings and checks bytes/tensors before any
+constructor. No original file was changed, and no policy was queried during
+transport. These necessary input copies are temporary and will be removed
+after complete reading and live-consumer checks; the unique original evidence
+stays in its existing canonical locations.
+
+Root subsequently allowed the selected N8 study and this study to overlap on
+`local_linux`: each has one compute thread and no online wall deadline, while
+the deadline-sensitive waiting operation uses the other physical machine.
+There is one fleet worker→reader chain. Fresh actual-node admission and the
+4GiB memory floor still apply; CPU/wall readings describe the actual concurrent
+host, not an interference-free hardware benchmark. No fleet operation was
+accepted before this resource allocation.
+
+### B04 implementation accepted before execution
+
+The DM read and accepted the bounded update kernel and complete reader, and
+the full direction suite passed **57 tests in10.16s** on the selected local
+interpreter. Independent engineering review of the integrated path reports
+**57 passed in10.24s** and no remaining material finding. It checked the actual
+adapter `state`/`next_state` interface, local/critic separation, requested
+categories and own-navigation/cache resets, one-row density gradients,
+detached return/advantage semantics, fresh continuous Adam, paid counts,
+calibration isolation/ties, strict source/decoder/tape reuse, staged asset
+provenance and saved-evidence reduction/tamper rejection. Mixed fallback-bit
+states are both included in the learner gradient/count fixture.
+
+One engineering finding was repaired: a critic failure after a successful
+actor step could otherwise lose that group's prior diagnostics. A live group
+record now precedes effects and retains initial density, targets, each epoch's
+loss/gradient/movement, separate actor/critic completion flags and after-state
+hashes; a regression injects that failure and verifies the paid prefix. This
+changes evidence retention, not the learner's arithmetic, update order or
+exposure. No native pilot or canonical-policy query was used for correctness
+testing. The actual source assets' initial replay-density identity remains a
+check inside the already priced first update of each paid group.
+
+The runner completes exactly one worker→reader chain on the same admitted
+source and handle. `reading.json` is exclusively created before any paid reader
+forward, becoming VERIFIED or preserving FAILED work/timing; an existing
+record refuses another production read. Final Student and shadow rows are
+replayed within the declared allowance. Training/calibration logits, collected
+critic outputs, optimizer and radio physics remain saved algebra/provenance
+checks, without their replay. The reader records its separate costs and
+whole-process high-water RSS; outer chain wall/CPU also captures import and
+serialization gaps. No automatic extra read, fit or native episode follows a
+failure. Actual new result exposure is still **0 fits/0 native steps** at this
+acceptance. Engineering/support labor is unmetered; synthetic check times are
+not result costs or an end-to-end engineering measurement.
