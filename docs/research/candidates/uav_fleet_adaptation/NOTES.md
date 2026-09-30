@@ -155,3 +155,46 @@ state. Replaying saved E/C choices is verification cost, separately counted from
 8160000 E and3456000 motion requests; no added environment episodes or fits. Full reader wall
 and CPU will be reported alongside worker cost. The original N6 wall anchor omits the increased
 N8 recurrent replay and is particularly approximate. No hard scientific wall stop is imposed.
+
+## 2026-09-30 — implementation accepted for the fixed B01 comparison
+
+Accepted the bounded Implementer's host/collector and its focused checks, then integrated the
+direction-owned admission entry, fixed endpoint evaluation and complete saved-data reader.
+No shared learner, old frozen loader, old world panel or control policy was modified. The
+strict source loader reconstructs the original N8 final-panel model config and verifies all
+parent modules/normalizers. Training retains original terminal-as-done/no-bootstrap semantics,
+including source-style post-storage lane/runtime reset; this is not a time-limit repair.
+Per-step collection and per-update accounting retain partial Python failures, with raw collection
+saved before update; a failed fit remains a counted technical attempt rather than a negative
+scientific result. There is no automatic continuation/retry path.
+
+RNG detail now explicit: global Python/NumPy/Torch fit RNG is freshly seeded29316101 after
+construction/restoration for each arm. The original factory's private rollout sampler is also
+newly constructed, deriving seed12969983988895470261 from `[942201,0x484D4153,0]`; its state is
+never restored from the parent or shared across fits. Both initial states are recorded and
+compared. This retains the original factory's named stream while making the global sampling
+reset explicit. The source config still records its historical360000 total_timesteps; original
+LR, entropy and weight annealing are off, and the actual new exposure is fixed by the32-group
+loop/recorded256000steps per arm. No extra group or policy selection is inferred from that field.
+
+Independent read-only `hmasd-reviewer` `/root/dm_fleet_adaptation/engineering_review` inspected
+the actual retained parent, old and new collector/store/recurrent/update interfaces, raw Gaussian
+replay, old-mask actor-before-E ordering, masked next-feedback, fresh optimizers/runtime/private
+RNG, terminal/reset handling, full H6 objectives and sampler counts, checkpoint/evaluation
+isolation, admission/failure markers, and the complete reader. It reports no material finding
+remaining. It ran all16 direction tests:16passed,0skipped,5.33seconds. My integrated run likewise
+passed16 in5.93seconds. Coverage includes exact staged parent restoration and endpoint save/load,
+real five-optimizer updates on two-lane synthetic20tick fixtures, raw action replay beyond[-1,1],
+masked feedback/clock/reset checks, failed-store partial counts and full22tick unchanged-H6/E
+trajectory equality against the old evaluator on an old world. Equality includes runtime digests
+after matching the unused16-slot reset bookkeeping. No fresh final-panel policy was evaluated.
+Existing Matplotlib/Pyparsing warnings are unrelated; no production fit or full production reader
+has yet run, and exhaustive actor/GRU/optimizer replay is not claimed. I accept the implementation.
+
+The remote canonical checkout's owned active row already matches current published main;
+compute config and maintained launcher match local byte hashes. Its unrelated dirty files and
+sparse selection were preserved. Fetch through configured `zsh -lic` succeeds, with the known
+Git auto-GC bad-tree/repack warning; this warning is not a failed scientific operation. The
+original remote parent checkpoint was reverified at the declared SHA; one23MB local temporary
+copy is used by the exact-checkpoint tests and will be removed at cleanup. Actual result launch
+still requires committed/published inputs and fresh destination memory/admission.
