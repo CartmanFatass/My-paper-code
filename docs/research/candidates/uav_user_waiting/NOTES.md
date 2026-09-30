@@ -2629,3 +2629,50 @@ deleted only after compact publication and final live-consumer checks. Useful
 frozen source, tests and the small argument adapter stay published. Managed
 source snapshots, redundant progress data and unused direction scratch are
 the cleanup targets; no archive or duplicate backup is a prerequisite.
+
+<a id="b03-final-cleanup"></a>
+### B03 publication and cleanup
+
+Complete evidence, independent interpretation and the conditional successor's
+full original advice were published to main at
+`fd20615f79a09648220fc2bcc27aa5eee09f76b7`. The accepted operations, complete
+reader and independent addendum were terminal before cleanup; generation30
+observation was stopped with work unchanged. There is no unread B03 result,
+pending model query, review, Pro request or selected B03 continuation. Root's
+retained `wsl_4070` deadline window is for the separately selected B04 study.
+
+The exact-target collector first refused normal process inspection because
+PID660's `/proc/660/cwd` returned permission denied. Its supported
+`--sudo-process-scan` performed the read-only scan; fresh preview then verified
+terminal accepted identities, no live source consumers, clean source and
+durable Git reachability. The refused first-reader source was identified as the
+clean unclaimed snapshot made at19:49 with original SHAa045bc9b4, matching the
+recorded outer refusal time/source; explicit `--unclaimed-source` was used for
+that target. No claim, manifest or evidence directory was removed to obtain
+eligibility. Subsequent exact-target apply deleted all four snapshots:
+
+| Deleted path under `/home/wu/projects/HMASD/.git/hmasd-launch-sources/` | Allocated bytes reclaimed |
+|---|---:|
+| `44a238c7a07d45b1b72f03493a2d26a5` | 811,012,096 |
+| `d913f7219d8b43c6baa5dd66a0f8d5c4` | 811,024,384 |
+| `f572dbb398bd45f1acb9ef999e1f9531` | 811,024,384 |
+| `548aeb29c8a14a93b942c992862cdd31` | 811,745,280 |
+
+Also deleted canonical-node redundant
+`runs/uav_user_waiting/b03_value_read_a01/reading-progress.json` (4,341,760
+allocated bytes), after rechecking the complete reading's pinned hash and
+zero process exit. Local `temp/directions/uav_user_waiting/b03/` contained only
+`worker-summary.json`, `full-reading.json`, `correctness-wait.json`,
+`worker-wait.json`, and `reader-wait.json`; those five files and the empty
+directory were deleted (17,952,768 allocated bytes). All exact targets are
+absent. **Net target disk reduction is3,267,100,672 allocated bytes**:
+3,249,147,904 on the execution node and17,952,768 locally. This measures actual
+working-tree/scratch deletion, not hypothetical Git-object or filesystem-wide
+reclamation. No backup, tarball or replacement evidence tree was created.
+
+No cleanup target or tool blocker remains. Canonical raw, models/training/fit
+traces, full summary and complete reading remain the one necessary evidence
+copy; original64 M traces remain by reference. Useful frozen implementation,
+tests, argument adapter and compact extractor stay published. B03 is fully
+read, diagnosed, published and cleaned; the changed ordinary M/S/U/K question
+may now proceed under Root's existing allocation.
