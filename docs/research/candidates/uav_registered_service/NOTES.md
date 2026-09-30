@@ -443,3 +443,381 @@ world binding, verifier functions, candidate coverage and output calculation are
 unchanged; only small world/position references persist between episodes. Actual
 full-panel memory/performance remain to be measured. DM accepts and publishes
 this support revision; original scientific source6f4c21ba5 remains fixed.
+
+### Corrected full reader completion and measured support cost
+
+The support revision is published at
+`de81cf9d8e337d9c2a2c628c95110ce7dd3b9f5d`. Its read.py SHA256 is
+`ed9d3a96c538b906f5ef11aec03b0ec934ea8354410a97e5ff14aeab38d86616`.
+Only that published file was placed in the owned remote
+`temp/directions/uav_registered_service/reader-support/experiments/candidates/uav_registered_service/b01/`
+tree, with the original accepted snapshot on PYTHONPATH. Imported study.py was
+verified to resolve to that original snapshot; no accepted source file was
+edited. A direct remote promisor-blob fetch lacked the configured network-shell
+environment and was cancelled/reconciled without starting a reader. Exact
+published bytes were then copied and hashed successfully. The existing remote
+automatic-GC bad-tree warning remains unrelated and was not suppressed.
+
+Support supervisor `registered-service-b01-read-a02`, PID1022663, accepted once
+and finished exit0 at2026-09-30T01:29:38UTC. Its same-handle deterministic status
+observer finished and returned terminal facts; it did not restart work.
+The [full reading](../../../../runs/uav_registered_service/b01_periodic_service_a01/reading.json)
+is952701bytes, SHA256
+`f8b247a54e6487dbcba7ac6a60276b251dc377130e70289fe838777500e7d25e`.
+It verifies all320raw files/178488494bytes,81920actual transitions,32768O/P model
+transitions, fixed interleaving/paired worlds, all actual/C/periodic endpoints,
+all causal history and ordering keys, and the declared candidate physics scope.
+S2/T2 have10387/14481candidate-physics pairs checked; O/P have28871/28736,
+including every selected pair and every visited pair at reports0/60/124/252.
+R retains its all-mask-score check. Native SINR and observation discrepancies
+are0, maximum native J discrepancy5.551115123125783e-17. All ten paired readings
+exactly reproduce summary.json. Shared radio kernels remain a stated limit;
+this is independent causal/key reconstruction, not an independent radio model.
+Source/admission/exit consistency was checked separately.
+
+The reader's internal scope records353.713376CPU seconds,348.508973wall seconds
+and141228KiB lifetime peak RSS. Whole-process `/usr/bin/time` includes startup:
+353.89user +.13system =354.02CPU seconds,353.65wall seconds,144908KiB peak RSS.
+Native worker + terminated first reader + completed reader total
+2911.112003measured CPU seconds (about.80864CPUh); their measured wall sum is
+2911.219848seconds. These exclude Git/network waiting, code work, tests,
+independent review and untimed compact-result diagnostics; they are not the
+entire project cost. Focused test/review wall times are recorded above. Zero
+new native steps/fits were added by collection, the support repair or reading.
+
+<a id="b01-complete-reading"></a>
+
+## 2026-09-30 — B01 complete reading
+
+Scientific source remains `6f4c21ba5bd4774b91a1f3545099a9ac58b2b233`;
+[config, full per-world outcomes and all signed contrasts](../../../../runs/uav_registered_service/b01_periodic_service_a01/summary.json)
+are published in `de81cf9d8`. The full fixed panel is64fresh paired reset worlds,
+320H256episodes/81920native steps/0fits/0updates. All320complete trajectories,
+including startup and the final half-block, are retained. The independent unit
+is the reset world; users/windows/decision rounds do not enlarge n64. Intervals
+below are descriptive paired t95, conditional on realized node/load/deadlines,
+not confirmation, equivalence or a training-population claim.
+
+### Complete task outcomes and the primary contrast
+
+Means across64worlds; F is satisfied actual user-window pairs out of200. Gap is
+the per-episode maximum consecutive unserved run across all users, including
+task-edge censoring; path is metres per UAV. P10 is each episode's service p10,
+then averaged across worlds.
+
+| Arm | F | Native J | Served/tick | Quality | Path m/UAV | Max gap, ticks | Service p10 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| R |132.046875|.465609|28.531250|.220570|2379.463579|256.000000|27.148438|
+| S2 |161.375000|.484883|30.324036|.201154|4236.931981|250.312500|27.187500|
+| T2 |162.578125|.486748|30.500000|.199159|4307.722797|251.546875|27.640625|
+| O |199.890625|.323299|18.651855|.207243|8532.220852|52.546875|11.085938|
+| P |199.875000|.327957|19.130127|.200449|8482.843554|57.375000|11.468750|
+
+**Primary P-O: F -.015625, interval[-.109956,+.078706],3positive/3negative/
+58ties.** The predicted F increment is not supported. O already leaves only
+.109375mean pair opportunities below the physical200ceiling; this is a useful
+ordinary solution, not evidence that periodic service is unavailable. The
+interval crossing zero is not an equivalence result, and P is behaviorally
+different. P-O native J is+.004657787[+.001699589,+.007615986],45positive/
+19negative; service+.478271484[+.283638964,+.672904005],47positive/17negative.
+Quality is-.006793378[-.011163622,-.002423134], and mean maximum gap increases
+4.828125ticks[+.939066,+8.717184],38worse/19better/7ties. Average user-level maximum
+gap moves the other way,24.519375(O) to24.250313(P), a-.269063difference with
+interval[-1.062604,+.524479]. P is neither a uniform loser nor a periodic winner;
+its secondary changes are a mixed tradeoff.
+
+All ten predeclared F contrasts are retained here as well as in the full
+machine-readable paired reading:
+
+| Contrast | Mean F difference | Descriptive t95 | Positive / negative / tie worlds |
+|---|---:|---|---|
+| S2-R |+29.328125|[25.678570,32.977680]|62/2/0|
+| T2-R |+30.531250|[26.681246,34.381254]|60/4/0|
+| O-R |+67.843750|[65.077094,70.610406]|64/0/0|
+| P-R |+67.828125|[65.061349,70.594901]|64/0/0|
+| T2-S2 |+1.203125|[-2.177963,4.584213]|32/26/6|
+| O-S2 |+38.515625|[35.531031,41.500219]|64/0/0|
+| P-S2 |+38.500000|[35.520053,41.479947]|64/0/0|
+| O-T2 |+37.312500|[34.117661,40.507339]|64/0/0|
+| P-T2 |+37.296875|[34.089720,40.504030]|64/0/0|
+| P-O |-.015625|[-.109956,.078706]|3/3/58|
+
+The O/P coverage gain over every retained control occurs in all64worlds, but so
+do lower native J/service and longer travel. O-S2 is-.161583916J,
+-11.672180176served/tick and+4295.288870m/UAV; P-S2 is-.156926129J,
+-11.193908691served/tick and+4245.911573m/UAV. Their J/service/path intervals all
+exclude zero in these directions. Thus O develops a real conditional periodic
+capability, not a default replacement for the native-service policy. No exchange
+rate between F, service, quality and movement has been specified. The host does
+not turn path length into an observed battery cost or packet-delivery guarantee.
+
+S2-R again has positive mean native J+.019274186[+.012041785,+.026506587] and
+service+1.792785645[+1.143019,+2.442552], with R's better quality/shorter mean path
+retained. T2-S2 J+.001865103[-.001278054,+.005008261] and service+.175964355
+[-.112850579,+.464779290] remain unresolved, with9.72times scheduler CPU.
+On T2's own inputs,318/4096rounds have higher selected J than the saved sequential
+alternative, mean local gap.000482343;314change executed displacement and232
+strict silent-move/reactivate advantages remain. Yet worlds29308032 and29308042
+lose complete J-.0366669/-.0370258 and F29/4 despite9/7locally positive T2 rounds.
+The useful local capability and contrary complete outcomes both remain.
+
+### User distribution, tails, execution and model history
+
+Mean per-window coverage is R[39.671875,31.546875,30.531250,30.296875],
+S2[44.734375,40.281250,38.812500,37.546875],
+T2[45.078125,40.453125,38.718750,38.328125],
+O[49.953125,49.968750,49.968750,50] and
+P[49.921875,49.968750,49.984375,50]. Across3200users per arm, the counts satisfying
+0/1/2/3/4windows are R[573,602,91,69,1865], S2[152,355,264,271,2158],
+T2[136,383,234,234,2213], O[0,0,0,7,3193] and P[0,0,0,8,3192]. Both O and P
+serve every actual user at least once in every world. The lower-F worlds are
+O16/25/45/53/55/57/63(all199), P29/44/45/53/57(all199) and63(197), with the common
+293080prefix. Neither full-window satisfaction nor ever-served status implies a
+bound of64on continuous unserved time; full raw continuous/closed/censored gaps
+are retained, without inventing outside-episode waiting.
+
+R/S2/T2 have no zero-service ticks. O has5such ticks in worlds18/26/62; P has
+8single ticks in04/05/26/27/36/44/47/52. Mean episode minimum service falls from
+R11.625/S2=T211.546875 to O5.125/P4.5. These tails remain beside O/P's large gain
+for users missed by the native objective. Mean active transmitters fall from
+S2/T2about3.49/3.51 to O/P2.24/2.30, while mask flips rise from18.59/25.75 to
+160.16/164.03per episode. This is a changed service/motion/activation policy,
+not a free additional label attached to unchanged trajectories.
+
+All20480report rounds met their deadlines on this actual node. Maximum charged
+scheduler wall seconds are R.033149/S2.079690/T2.476753/O.095477/P.111595, against
+.456seconds for R and1.456for the others. Mean scheduler CPU seconds per episode
+are .838598/2.366982/23.008494/3.029393/3.074753. All arms pay400map bytes and
+8704recurring bytes per episode; no new ACK or evaluator truth was introduced.
+Zero actual timeouts and zero unavailable-history rounds mean the late-first-
+anchor recovery branch was not exposed by this panel; its evidence remains the
+focused correctness checks, not an empirical improvement claim.
+
+Actual finite-search totals are4980736requests,4622366completed unique plans,
+18346898candidate state reductions and1771968geometry snapshots. O/P cache hits
+are94022/90892, with0interrupted uncached requests. Their settled history has
+16128reductions each plus256terminal-support reductions each; private prefixes
+add8192each, for49152extra history/prefix/terminal reductions overall. Terminal
+support uses only.078978measured CPU seconds in total and is included in the
+scientific worker resources, outside online decision deadlines.
+
+O/P model history has413/398 and430/420false-positive/false-negative user-tick
+bits, respectively, among819200user-tick opportunities per arm. Their completed
+model-window bits have0false positives and0false negatives in this panel. All
+initial anchors arrive at0, so no model prefix is unknown. Selected-block contact
+errors are also retained (O411/396,P428/418); accurate history/window totals do
+not prove a decision attribution or remove future closed-loop consequences.
+True contacts remain evaluator-only throughout.
+
+### Independent scientific diagnosis and DM response
+
+Registered ResearchCritic `/root/dm_registered_service/diagnose_result` worked
+in a separate context with no inherited DM/Root discussion, reconstructed the
+original outcomes before reading this prospective interpretation, and then read
+the complete saved-data result. It independently checked all320raw hashes,
+paired reset geometry, F/native endpoints/continuous censored gaps, seven
+original owned source identities, the inspected frozen radio/C/kernel paths,
+the summary binding and all ten reproduced comparisons. Its final recommendation
+is: **retain O's conditional periodic-service capability; end unchanged P-O
+superiority investment; return the specified G/O/S2 efficiency study unlaunched
+to Root. MATERIAL_DISSENT: no.** The shared-kernel/declared-subset and conditional
+world-sample limits remain explicit. It has no continuing need for the source
+snapshot; canonical raw evidence remains required.
+
+Its independent diagnosis narrows the explanation beyond a near-zero mean:
+
+- P's priority reverses the age-only ordering in388/4096rounds across all64worlds,
+  among candidates visited on P's own history. The reversals occur near window
+  resets (report ticks60–80,124–136,188–204). Thus no decision exposure or an
+  inactive intervention does not explain this result. This is a saved-candidate
+  comparison, not a complete same-state alternate O trajectory.
+- In world29308063, actual O/P contacts are identical through tick61 and positions
+  through66. At report60, both choose command7, but O chooses mask18 and P mask22.
+  On P's own saved common prefix, their predicted new-pair counts at ticks62–65
+  are [1,1,20,1] versus [0,0,28,1], totals23 versus29. Actual users36/39 first
+  receive service at62/63 under O and64/65 under P. Both then fill the three later
+  windows; O ends atF199 and P at197. This is an active finite-lookahead trade of
+  expiring opportunities for early next-window credit, not lost model-window
+  truth. It explains a concrete negative without claiming every world shares
+  that mechanism or purchasing a boundary repair after exposure.
+- In `P_29308027.npz`, registered user40 has contacts at145 and249 and no contact
+  in [146,249): a103-tick closed gap despite episodeF200. The witness raw SHA256
+  is `32de7d33e80eba4e40599f1185d4a38c1c8eaed871e2a6832a42e743ec2aa682`.
+  Across the panel, unserved gap events longer than64ticks number O12/P32;
+  these nested events are descriptive, not another independent sample.
+- After excluding blocks crossing a window boundary,2395/4096P rounds already
+  have all50predicted users covered in the candidate's window. In2335, another
+  saved visited candidate has strictly higher native J; the mean local gap over
+  all2395rounds is.106424228. The broader2581count included186crossing rounds and
+  is explicitly superseded for this explanation. Remaining age priority after
+  current-window success supplies a concrete release hypothesis. It is not an
+  achievable complete-trajectory saving, as the retained T2 counterexamples
+  also demonstrate.
+
+I accept this diagnosis and its distinction between empirical support, adoption
+and further investment. The useful task opportunity is to serve users missed by
+the native aggregate objective across fixed periods. Lawful model history can
+represent the needed contact/window state under this paid static-map contract;
+zero window-bit errors here do not establish general state sufficiency. No
+learning was tested, so neither a learning failure nor a requirement to train
+follows. Complete-package value is conditional: O makes the periodic task nearly
+complete, while native service/tails/travel prevent default adoption. The
+positive secondary P gains and every adverse case above remain in the record.
+
+The critic's saved-key reconstruction is preserved below, with equivalent
+explicit tuple indices for the configured Python3.10 interpreter. It reads only
+the existing raw data; it does not create a new episode or counterfactual rollout.
+
+```python
+from pathlib import Path
+import numpy as np
+
+root = Path('/home/wu/projects/HMASD/runs/'
+            'uav_registered_service/b01_periodic_service_a01/raw')
+reversals = eligible = worse = 0
+gaps = []
+for seed in range(29308000, 29308064):
+    with np.load(root / f'P_{seed}.npz', allow_pickle=False) as z:
+        K, L, Q, M, T, W, S = [z[k] for k in (
+            'ordering_keys', 'key_length', 'selected_q', 'selected_mask',
+            'round_tick', 'prefix_windows', 'candidate_scores')]
+    for i, tick in enumerate(T):
+        length = int(L[i])
+        chosen = int(Q[i]), int(M[i])
+        pairs = list(map(tuple, np.argwhere(np.isfinite(K[i, :, :, 0]))))
+        age = lambda pair: tuple(K[i, pair[0], pair[1], 1:length])
+        native = lambda pair: tuple(K[i, pair[0], pair[1], length-6:length])
+        reversals += age(max(pairs, key=age)) > age(chosen)
+        start = int(tick) + 2
+        end = min(start + 4, 256) - 1
+        if start // 64 == end // 64 and W[i, start // 64].all():
+            eligible += 1
+            best = max(pairs, key=native)
+            delta = S[i, best[0], best[1], 0] - S[i, chosen[0], chosen[1], 0]
+            worse += delta > 1e-12
+            gaps.append(float(delta))
+print(reversals, eligible, worse, np.mean(gaps))
+# 388, 2395, 2335, 0.10642422842079073
+with np.load(root / 'P_29308027.npz', allow_pickle=False) as z:
+    c = z['connections'].any(axis=1)
+    assert c.reshape(4, 64, 50).any(axis=1).sum() == 200
+    assert c[145, 40] and c[249, 40] and not c[146:249, 40].any()
+```
+
+<a id="b01-investment-decision"></a>
+
+### Investment decision and concrete unlaunched continuation
+
+**End the unchanged P-O F-superiority recipe; retain O as a conditional periodic
+reference and S2 as the economical native J/service reference, with R/T2/P's
+distinct capabilities and contrary outcomes intact.** No repeat panel, boundary
+patch, extra search, ACK or fit is selected by B01 completion. The wider
+service-efficiency question remains open. This is the assigned substantive
+boundary: the direction moves to reserve, with no active producer/unread result,
+and Root owns cross-question selection. A failed default-adoption argument does
+not refute a constructive successor.
+
+I reread the relevant current published RESEARCH backgrounds2/6/8 for this
+material interpretation and continuation. The present result extends lawful
+history from a representation to a demonstrated conditional temporal-service
+capability; it also distinguishes a fixed-window opportunity count from a
+continuous-wait guarantee. The common-information/finite coupled-decision model
+still applies. Changing a score after an objective is already locally satisfied
+changes motion, interference, capacity, observation and later C proposals; an
+instantaneous improvement cannot remove those future couplings. These are
+reusable background changes, not a claim that ordinary control or learning is
+exhausted. The original selection advice remains applicable; the new independent
+scientific result review above covers this correction. No additional Pro was
+needed within this DM; Root will compare the proposed question with other
+questions in its own synthesis.
+
+Root requested a concrete proposal for that comparison, **not execution**. The
+candidate is coverage-gated O, denoted G only within this notebook. Contribution
+sought is useful ordinary periodic service at a lower native-service/motion cost,
+not architectural novelty or an inferred learning mechanism.
+
+**Fixed legal trigger/exit, if selected:** at a report tick t, settle exactly the
+same reconstructable executed history as O and construct its common private
+two-tick prefix using already executed team commands/mask. The candidate block
+is t+2 through min(t+5,255). Compute one scalar gate before either inner search
+order: it is true only if that entire block lies in one window b, the window is
+fully reconstructable (start64b is at or after the lawful initial anchor), and
+all50prefix model-window bits for b are already true. When true, use exactly S2's
+native ordering: J, served, retain C command, more active transmitters, lower mask,
+lower command index. Otherwise use full O lexicographic age-group/native order.
+Keep the gate fixed across both sequential orders and final selection. This
+changes the objective only; retain27commands,31masks, rotating edited member,
+radio assignment, two-tick delivery/four-tick commitment and1.456second budget.
+
+Recompute at every report. Every crossing block, including62–65,126–129 and
+190–193, returns to O because a next window may be unfilled. A new incomplete
+window also returns to O until its own gate is satisfied. Continue settling and
+recording model history during native-ranked rounds; release never freezes the
+history. If no lawful complete planning snapshot exists, or charged work misses
+the deadline, preserve the existing whole executed team commands/mask fallback.
+A censored first window cannot trigger the gate. The terminal254–255block remains
+inside the actual final window; do not add imaginary future service. Prefix
+forecasts remain private, not falsely appended as executed contacts. All gate
+work is charged; no actual service bits/ACK, relaxed timeout or wider search.
+
+This rule is fixed at all50users and64tick windows because those are the task
+contract, not an outcome-tuned threshold. On a fully covered same-window prefix,
+the candidate's marginal fixed-window coverage is zero; dropping age priority
+then permits a different local native-service decision. It does not make later
+coverage or continuous waits free. In particular, release can abandon positions
+useful after the next reset, lengthen closed gaps even when F is unchanged, or
+act on a falsely complete model window on G's different future trajectory.
+
+**Complete comparison and cost proposed to Root:** G, frozen O and frozen S2;
+64fresh common worlds,192H256episodes/49152native steps,0fits/0updates, one fixed
+endpoint per policy/world. Proposed seeds29309000..29309063 had no occurrence in
+the current research/code records inspected before this proposal; recheck
+ownership/exposure if Root later selects it. No source or worlds are executed
+now. Freeze all seeds and the six cyclic/reversed-cyclic orders of[S2,O,G] before
+exposure, world index modulo6. Do not select worlds or tune the gate after new
+outcomes. R/T2/P are not rerun for this narrower efficiency question: O is the
+competent periodic comparator and S2 the economical native-service reference.
+Their other capabilities remain explicit limits on broader dominance claims.
+
+Nominal12288decision rounds×116requests give1425408maximum candidate requests,
+5657088candidate-state reductions before cache reuse,1316736geometry snapshots,
+and49152O/G history/private-prefix/terminal reductions. Unique scores may be
+fewer through the existing cache; a timeout must be recorded rather than
+assumed away. These counts exclude unchanged C's own work and native transition
+arithmetic, which remain charged. Using observed B01 per-episode CPU,
+64×(2×3.328048+2.553781) gives about589.4CPU seconds as a worker anchor only.
+Full B01 saved-data reading cost354.02CPU seconds is an additional support anchor;
+the new192-row reader mix and G checks remain unmeasured. Neither number is a
+hard stop or a fit allowance, and tests/review/engineering add cost. The completed
+B01 worker/readers already cost2911.112CPU seconds; that investment is not erased
+by renaming the candidate.
+
+Dominant engineering work is a narrow gate/score branch plus a trace that the
+independent reader reconstructs from lawful inputs, retaining frozen O/S2 and
+their full output contract. Check49versus50covered users, same-window versus
+crossing blocks, window restart, censored anchor/history backlog, terminal
+half-block and charged whole-team fallback. Reuse the now-materialized reader;
+do not build a new learner, solver or validation programme. This is enough to
+make the actual complete comparison reviewable; no positive toy, suffix replay
+or extra diagnostic panel is an admission gate.
+
+**Predictions and failure branches:** G should expose released rounds, remove
+post-success age overrides and improve complete J/service while reducing
+travel, with actual F and continuous gaps preserved as hypotheses. Read all
+world differences, window/user distributions, closed/censored tails, false model
+completion, zero-service ticks, deadlines and compute. If local gains fail to
+survive the later trajectory, the efficiency explanation loses support. If F
+falls or long gaps worsen despite higher J/shorter paths, retain that explicit
+tradeoff rather than declaring a free improvement. If differences remain
+unresolved, claim neither equivalence nor preservation and do not auto-extend.
+No F-to-J exchange rate or formal adoption/noninferiority margin is invented:
+this proposed study reads the full exploratory vector. Any later formal adoption
+claim needs its actual tolerances and fixed confirmation plan before exposure.
+
+The independent critic explicitly supports this exact gate, scope and counts;
+it stresses holding the scalar gate fixed, continuing history settlement and
+retaining future-window/gap counterexamples. It favors this discriminating
+complete comparison over unchanged P-superiority replication or declaring
+temporal scheduling exhausted, while leaving Root's cross-question investment
+choice open. I accept those corrections. The candidate remains a proposal in
+this existing notebook; it has no active batch, implementation or producer.

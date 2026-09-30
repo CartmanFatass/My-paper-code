@@ -1,0 +1,8 @@
+{
+  "task": "registered-service-b01-read-a02",
+  "status": "finished",
+  "exit_code": 0,
+  "pid": 1022663,
+  "uptime_seconds": 355,
+  "tmux_active": true
+}
