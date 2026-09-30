@@ -1270,7 +1270,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 | `energy_relay_benchmark` | 冻结S7-S2/H3000宿主、充电分配不变（policy study）：合法普通控制可达的完整服务是多少，剩余损失中返航/离站时机与移动用户下的布局各占多少，学习控制器能否缩小任一差距？ | reserve | Claude DM (WSL session) | **B01 已完成并按预登记分支读取（2026-09-26，操作 02f762d2，tag b01_ref_a02，SHA e1fdbe72f，540 episode，0 fit，节点约 2 h）。** 生产设置 (0,.05) 下 32 个未曝光世界（955001–955032）：H_central .774 QoS/步（J 2282）、H_local .597（J 1628）、N .328（J 955）。P2 成立；P1 不成立（N 宽度 .45 − .05 = +.023，J +72，倒 U 形且全在 .03 阈内，H_central 同形 +.0075）；P1c 符号不成立而排队/等待过程随宽度单调上升（拥挤存在但不损服务）；P3 按登记计数不成立（19/32 < 24），但公共窗口内 H_central − N 在全部 32 个世界 ≥ +.30（均值 +.585）；P0 中位数成立、τ_w = .036 > .03 故不读逐世界效应；等价性 CPU/CUDA 逐世界不一致而面板均值一致（仅记录）。分支 (b) 成立：损失在学习器的部署而非护盾时机；离站宽度不是 S7 损失。未登记发现：匹配宽度下进入余量 .20 使 N 上升 +.048–.079 QoS/步（匹配宽度；J +15–29 %），使 H_central 下降；这正是 S7 收口拒绝购买的"恒定提前返航"控制，B01 不采纳、仅作上界（约闭合 N–H_central 差距的 1/5）。内部评审同日纠正：N 部署缺口最直接的描述是 UAV 停在区域边界（正常模式 UAV-步的 49.8 % 位于 x=8000 或 y=0，前 1000 步 67.7 %，H 参照为 0）并贴 50 m 高度下限；"站点作为部署先验"的过程证据是时间混杂，已撤回；护盾进入把 UAV 拉离边界是最简单的解释，机制待零 fit 的随机动作检验（评估使用确定性均值动作）。拴系机制按增量证实（宽度 .05 时 +391/+411 m 对推导 ≈447 m；宽度 .25 时 ≈1.7 km 对 2.2 km；与进入余量无关）。两份评审（内部 critic、Pro）均对原 B02 两阶段提出实质异议，已合并回应并修订：第 0 阶段（0 fit）：**第 1 项已完成并按 S0-1 读取（2026-09-26，操作 07ebcf70，tag b02_s0_stoch_a01，SHA 8d88f72d0，64 episode，节点 12.6 min）：N 采样动作两次抽样的 QoS/步 .308/.318（合并 .313，对确定性 .328 差 −.016，每次抽样均在 .03 内），边界停靠占正常模式 UAV-步 .22（确定性 .50）、高度下限占比 .46（.70）；按声明规则落在中间分支——服务缺口属于策略本身而非确定性评估伪影（不触发对 B09–B11/B01 的重标），但边界停靠描述依赖评估模式，评估模式成为第 1 阶段的声明轴（每检查点确定性 + 一次采样评估）。采样使护栏阻断次数 1949→408/565、F 模式占比 .18→.22、充电输入 147→196 Wh、返航约束代价 1.2→2.3–4.3 而服务不升；零服务世界基本同为 955005/012/021（955005 在第二次抽样得到服务）。** **第 2 项也已完成并按 S0-2/S0-3 读取（操作 e94bf1fe，tag b02_s0_refs_a01，SHA e5857e0c2，96 episode，15 min）：H_spawn .232、H_park2 .379、H_central@10 .769（H_central .774）；S0-2 = +.147（SE .023，32/32 为正，公共早期窗口 +.269），两个固定站点航点的包效应达到预期 ≥ +.10 的水平；S0-3 = −.005（SE .005），H 的重规划周期敏感度低于阈值。附带：N 落在 H_spawn 与 H_park2 之间（+.096 / −.050）；空闲团队仅靠生产护盾的站点访问就达 .23 QoS/步，读取学习器必须保留阶段拆分与公共早期窗口；固定航点控制器在护盾释放后来回振荡（每世界 113/94 次进入），属包本身。第 0 阶段结束：160 episode，0 fit，节点约 28 min。** **第 1 阶段已启动（2026-09-26 18:22:52Z，操作 d682c906，tag b02_s1_set_a01，SHA 759927b5e，节点 wsl_4070 CUDA）**：一个固定曝光 1.2M 的 SET 开发 fit（B09 的 S7 配方 + SET 开关 + 训练态生产护盾，种子 925031，检查点 c00 初始化及 204k/402k/600k/804k/1,002k/1.2M；逐检查点确定性 + 一次采样评估，957001–957032 只作一次留出），删除"典型性"预测；工程评审（hmasd-reviewer）结论"可按提交启动"，四项低/信息级发现已记录并修正配方注释。成本：按 B09 实测速率上界约 11 h 节点墙钟（取代此前约 5 h 的估计；实际速率见 NOTES 追加）+ 检查点评估约 1.4 h；可随时 TERM 停止。**第 1 阶段已完成并按声明读取，独立科学审查已完成（2026-09-27 06:59Z 读取；fit 操作 d682c906 + 续跑 faf881bc，最终模型 c06，留出集 957001–957032 已一次读取）：**开发集 c06 QoS/步 .437 确定性 / .438 采样（曲线 .209/.243 → .437/.438，J 587 → 1276），留出集 .462 / .440，同集比较器 H_central .781、H_local .611、N .344（留出集为第二个未经选择的 32 世界样本：比较器偏移 +.007/+.014/+.015，学习器 +.025/+.002，说明开发集估计不是世界抽样伪影，不涉及种子方差）。相对 N +.10–.12 QoS、+285–353 J（配对，23–26/32 世界为正；返航约束代价符号上更高，仅留出集分辨、J 上可忽略）；高于两站点包 H_park2 +.06；低于 H_local .15–.17 QoS 且 J 低 336–404（J 已按 λ_return = 2 计入返航代价，学习器的软返航代价远低于 H_local 但差额仅值约 110–130 J），低于 H_central .32–.34 QoS、约 950–1010 J（返航代价差未分辨）；608 个回合无 cutoff/depletion；.60 里程碑未达（每面板 1–3 个世界，差 .14–.16）。按学习器首次护盾进入（约第 1044 步）做时钟对齐分解：进入前的每步缺口最大，该窗口占对 H_local 差距的约 70%、对 H_central 差距的约一半；进入后同窗口学习器约 .51/步，H_central 约 .75、H_local 约 .58。训练侧：采集时 QoS 最后三块 .33/.37/.38，熵持续下降（普通锐化，两模式在 c06 收敛）；开发面板 c04→c06 采样 +.034（SE .019）、确定性 +.031（SE .020），单步 SE 约 .02，末步依赖世界 955016（H_local 在该世界亦为零服务）；`still_improving` 规则下为否，平台亦未确立。Pro 六行失败表按读取器代理填写（第 1 行前半程成立、末端部分成立；第 3 行不成立；第 4 行未测量；第 2 行为终态候选族；第 5、6 行开放）；c04/c05 条目误归 Pro 表的"过早收敛"行已更正。成本：fit 11.0 h（= 修订上界，含作废 0.84 h），评估 2.75 h（声明约 1.4 h，超出已记录），跨度 12 h 36 min。独立审查（ResearchCritic，独立上下文）MATERIAL_DISSENT: yes——原条目"更低风险下的服务差距、非同类亏损"与"缺口集中在进入前阶段、输入后达 H_local 水平"两项解读超出证据，已全部接受并按审查更正（NOTES 追加条目），无残余分歧。§8 下为探索性结果（单种子、续跑进程），不构成配方主张；本方向已接受范围至此完成，续接经 Root 协调（开放问题：进入前阶段与边界/贴地占比作为 DM2/DM3 的读数；同配方更长曝光是否值得购买属 DM1/Root，且末步依赖 955016；评估模式轴按检查点差 −.043 至 +.034）。[Stage 1 结果条目](candidates/energy_relay_benchmark/NOTES.md#2026-09-27--stage-1-result-one-set-development-fit-at-fixed-exposure-read-by-the-pre-registered-readings-b02_s1_set_a01--b02_s1_set_a01r-final-model-c06-957001957032-read-once)、[审查结论与更正](candidates/energy_relay_benchmark/NOTES.md#independent-scientific-review-of-the-stage-1-result-5-2026-09-27--0725-utc-material_dissent-yes-on-two-readings-accepted-corrections-to-the-entry-above)、[第 1 阶段读数 JSON](candidates/energy_relay_benchmark/b02_stage1_readings.json)。证据位置（2026-09-27 08:30Z）：本方向全部运行 JSON 在 main、traces 与 c00–c06 检查点在本地 checkout；节点共享 checkout 于 04:28Z 的 sparse-checkout 变更把本方向已提交的节点运行目录（含 c00–c03 检查点原件）整目录清除（Git cone 模式对"全为已跟踪或忽略文件"的目录的稀疏清理），`/home/wu/hmasd-artifacts/energy_relay_benchmark/b02_s1_set_a01/checkpoints/` 是 c00–c03 在节点上的唯一副本且为 DM2 已准入操作的输入，勿删；任何 DM 的 `git sparse-checkout add` 都会同样清除其他方向已完成、已提交的节点运行目录，属共享控制风险（详见 NOTES 收尾记录）。[B01 结果条目](candidates/energy_relay_benchmark/NOTES.md#2026-09-26--b01-result-read-by-the-pre-registered-branches-operation-02f762d2-tag-b01_ref_a02)、[B01 读数 JSON](candidates/energy_relay_benchmark/b01_ref_a02_readings.json)、[第 0 阶段读数 JSON](candidates/energy_relay_benchmark/b02_stage0_readings.json)。 **第 2 阶段已声明（2026-09-27，B03，未启动）：** owner 要求算法创新而非工程；候选按记录标注后选定"接地分配技能"（GAS-HMASD）——保留 HMASD 协调器与顺序解码，把个体技能改为由中央快照推出的部署锚点（B01 参照同一生成器：6 个 k-means 服务质心 + 2 个中继点 + FREE，n_z = 9，n_Z = 1），低层为同一 SET actor 附加锚点块，无内在奖励，协调器按 k 步团队回报做 PPO；信息与 SET 完全匹配（同一 k = 10 快照），SET 策略类嵌套于 T。T × 2 种子（26092711/26092731，与 DM1 的 SET 同种子配对）各 1.2M、护盾开；读数：c06 配对差、进入前分解、标签占用/重复/稳定性、c06 零 fit 干预（PERMUTE / ALL-FREE）；2b 规则预写（两种子均 ≥ +.05 且 ≥ 20/32 世界为正才买第三种子与 MI-skill HMASD 对照臂 × 3）。成本上界 13 h/fit、评估 3 h；先做独立科学审查 + Pro 与工程审查，再经准入启动。[第 2 阶段声明](candidates/energy_relay_benchmark/NOTES.md#2026-09-27--stage-2-declaration-b03-grounded-assignment-skills-on-hmasds-coordinator-against-the-flat-set-learner-at-matched-information-and-exposure-declared-before-any-run-no-launch-until-the-5-review-and-the-engineering-review)。 **第 2 阶段修订（2026-09-27，§5 独立审查 MATERIAL_DISSENT=yes、"修订而非停止"，四项异议全部采纳；未启动任何 fit）：** T−SET 混合了注入的 H_central 规划器特征、HMASD 包本身与学到的分配三者，原干预读数分不开；协调器看不到锚点；λ_h 实际为名义值 8 倍；S1 记录中 ACG B01 的 H6>SET（3 对 3 全高于）推翻了"S1 上语义无关技能不起作用"的说法。修订后 B03 v2：先做零 fit 的 **Stage 2-0**——H_central 在 HUNGARIAN／IDENTITY／INDEPENDENT-NEAREST 三种分配下跑 955001–955032（96 回合，本机 CPU，≤1 h），S = HUNGARIAN − max(两种无协调规则) < .03 则不把 T 作为协调研究启动并另行声明；S ≥ .03 则首批 T′（协调器状态令牌含锚点块、λ_h=.00125）×2 + **SET+A**（flat SET 直接看到全部 8 锚点、无标签）×2，主读数 T′−SET+A（同锚点下的协调价值），T′−SET 为次；c06 干预改为逐回合 PERMUTE、HUNGARIAN／IDENTITY 标签与 ALL-FREE；按 fit 层面（最低 T′ − 最高对照）与逐世界配对双读；评价与 DM1 同为 CPU FP32；三种子 2b 规则已写。上界：Stage 2-0 1 h／0 fit；首批 4 fit × 13 h = 52 节点小时（DM1 释放节点后串行约 52 h）+ 评价 6 h。学习器 L0-A 已交付并接受（`0e329dbe8`，156 项测试通过）。[处置与 v2 声明](candidates/energy_relay_benchmark/NOTES.md)（NOTES 2026-09-27 "independent scientific review received" 条目）。 **Stage 2-0 已完成并按第二次修订的树读取（2026-09-27 10:17–11:01Z，tag b03_stake_a01，SHA 5e8da3d94，96 回合，0 fit，本机 CPU 44.5 min ≤ 1 h 上界；hungarian 面板与已记录 H_central 面板逐世界完全一致，差 0.0）：** HUNGARIAN .774 / IDENTITY .767 / INDEPENDENT-NEAREST .450 QoS/步（原生 J 2282 / 2224 / 1286）；S = HUNGARIAN − IDENTITY = +.007（配对 SE .007，18/32 世界领先），J +58 ± 25；对 NEAREST +.324 ± .033（32/32）。同一截点（第 1300 步）的时钟对齐拆分：部署窗口 +.023 ± .006（22/32），之后 −.006 ± .012（12/32）——Hungarian 匹配的全部净收益在参照控制器首次进入护盾之前；NEAREST 的损失来自共位起飞下全队叠在同一锚点（抽样 distinct target 1.02，86 % UAV 共享目标，300 m 滞后把它们留在原地；5 个世界近零服务），是去重的价值而非最优匹配的价值。预测核对：IDENTITY 预测 −.03…−.10、实测 −.007；NEAREST 预测 ≈ −.10（部分覆盖）、实测 −.32（叠加机制，Pro 答复事先指出）。按第二次修订（5401fb8ad，写于读取之前；取代本格此前“S < .03 则不把 T 作为协调研究启动”的句子）：S 是固定控制器的条件事实，既不启动也不取消 T′，不是 learned − SET+A 的上界；降低对分配学习研究的投入偏好。Pro 答复 b03-v2 已于 11:13Z 收到（连接器无写操作，按 chat 保存入 NOTES；MATERIAL_DISSENT: yes 针对 v2 声明的自动启动规则与过强解释，二者已在第二次修订中撤回，无残余分歧；建议 ranked-IDENTITY、SET+A 补六个簇人数、以 R = 固定 Hungarian 标签从头训练为最强替代、信用侧优先前缀条件反事实基线）。两份书面贡献论证（T′；技能级移除差分信用 D-credit，即环境侧 D_i = R − R(−i) 按技能段累计、替代协调器的共享回报）已写入 NOTES，交一次独立挑战；之后的 0 fit 步骤已声明：H_central 下 955001–955032 的中继跳流量份额、逐步 D_i 分布与方差分解、移除重算耗时，以及它们改变的选择（份额 < 10 % 不买 fit；≥ 25 % 且差分信号明显更干净才写有界 fit 声明并另行 Pro 跟进与工程评审）。[Stage 2-0 结果条目](candidates/energy_relay_benchmark/NOTES.md#2026-09-27--stage-2-0-b03-v2-result-read-by-the-second-revision-of-the-tree-operation-b03_stake_a01-launch-sha-5e8da3d94-s--007-qosstep-with-paired-se-007-hungarian--identity-1832-worlds-the-whole-hungarian-advantage-lies-in-the-deployment-window-independent-nearest-stacks-the-team-on-one-anchor-pro-answer-b03-v2-saved-from-chat-and-answered-t-prime-and-skill-level-removal-difference-credit-contribution-arguments-written-for-one-independent-challenge)、[时钟对齐读数 JSON](../../runs/energy_relay_benchmark/b03_stake_a01/stake-sizing/clock_aligned_readings.json)、[运行摘要](../../runs/energy_relay_benchmark/b03_stake_a01/stake-sizing/summary.json)。 独立挑战（hmasd-research-critic，独立上下文）已返回 MATERIAL_DISSENT: yes，11 项均经原始 trace 与代码复核后接受：“全部收益在部署窗口”仅对 QoS 成立，原生 J 上 identity 约定总计少 58 ± 25 J、1300 步后多付 37 ± 22 J 非服务代价（行程 186 对 136 km 的推导）；“+.32 去重价值”撤回（共位起飞下的退化吸收叠加）；D-credit 论证撤回修订（移除探针有软切换副作用、返航代价为团队 max、QoS 回程来自 routing_paths、共享回报无偏只是有噪、D 是控制变量或目标改变、比较对象须为同架构共享回报、新颖性待读 COSAC/AAMAS-2023/EGRCR）；D-credit 以 T′ 的接地标签为前提基底，T′ 成为前提问题而非“低”。下一步零 fit 诊断已重定义（中继跳份额、D_i 绝对值的稀疏度含预写退役规则、探针位一致性、每步耗时上限），先重写论证再运行；不买 ranked-IDENTITY、slot id、D-credit 对 SET 的 fit、基底问题未决前的 T′/SET+A 批次。 D-credit 论证已按挑战重写（第二版：基底 = T′，隔离比较对象 = T′(共享回报) 对 T′(D)，D 只作用于服务项、其余团队项共享，路由事实按代码更正，D 是目标改变而非去偏，COSAC/LIDR/EGRCR 首读后新颖性改为“未见、暂定”）；零 fit 诊断重定义为 H_central 重仿真中的中继跳份额、深拷贝探针下的 D_i 分布与稀疏度、探针位一致性与耗时，预写规则不变；信用问题的可控宿主部分交给新方向 `sequential_coordinator_credit`。 **2026-09-27 Root 转达 owner 主线澄清**（UAV 路径规划／集群合作规划、MARL 增强；“能量中继优化有点跑偏”）：本方向从未优化能量目标，对象是 S7 上联合布局／角色承诺规划的真实服务收益——Stage 1 学习器 .437 对 H_local .597／H_central .774，Stage 2-0 固定布局下分配协调仅值 S = +.007；贡献主张收敛为 T′ grounded hierarchical assignment 相对等 grounding 平坦学习器 SET+A 的规划增量（先 0 fit 诊断 ≤ 2 h CPU，随后 4 fits）；预写转向条件：中继跳份额 < 10 % → 链信用在本宿主退役，增量问题转向规划器薄弱处（按服务收益自适应的锚点、与覆盖联合规划的返航／充电轮换），先书面论证再声明。回复已经既定通道发出；owner 直接确认待本会话汇报。 **2026-09-27 peer 第二轮（Root f3d7cd49b，同一独立审查复用）：** T′×2/SET+A×2 首批撤回；T′ 纯协调主张按 Stage 2-0（+.007 < .03）退役，R 不为其购买；首个完整比较改为分阶段隔离对 Fit A = T′(共享回报) → 预写规则 S（占用／到位／Δ_H）→ Fit B = T′(信用臂)，最坏 2 fit ≈ 26 h GPU + 6 h CPU；信用 fit 需 C1（微宿主首格）、C2（诊断坐标与 ≤ 1.5× 探针成本）、C3（规则 S）三项零 fit 条件，不再由诊断自动触发；rho_t 重标为执行规划器访问状态上的一阶移除非可加性，不是 COSAC 的 ε。见 NOTES 当日条目。 Fit A 同样有条件：诊断读数落在退役分支之外且 C1、C2 成立后才买；否则不买任何 T′ fit。 **信用诊断已完成并读取（2026-09-27，操作 b03_credit_a01，sha db4e2a3a6，0 fit，31.8 min，32/32 世界，位相同 (a) 与 Stage 1 面板差 0.0）：** 中继跳流量份额 .908（逐世界 ≥ .707），不取退役分支；C2 阈值全部满足（中继/其他 abs D 3.36×、稀疏 .37、每 10 步探针 1.21×），placement 待 C1；rho 中位数 −.615（31/32 世界 < −.25）：单机移除只占服务约 .4，宿主处于高可替代区，即移除差分信用最弱的区域，D 先验下调、SeqAU/β 混合上调；一阶读数看不到二阶绑定（记录为测量限制）；(b) 原地探针不中性（+.06），训练用 D 须走复制/恢复路径；未登记观察：10.7 % 负 D、切换滞回是规划旋钮。不声明 fit；下一步微宿主首格 L0（增加按宿主移除统计量校准与成对移除读数）。 **C1 评审已返回（2026-09-27，ResearchCritic，MATERIAL_DISSENT yes，全部接受）：** C1 按原文未满足且不可在同一数据上改写（事后自由度）；Fit A / Fit B 不声明，T′ 信用臂问题关闭，T′ 无任何 fit（纯协调主张已按 Stage 2-0 退役），Fit A 的评估器 trace 工程需求不建；“SeqAU 在 HMASD 退火计划下有利”撤回——T′ 声明 λ_h = .00125 恒定且 HMASD 默认关闭熵退火，在该区微宿主的可实现信用估计输给共享回报。本方向无操作在跑、无已声明 fit；已确立：普通控制 .774 / .597 对学习器 .437，约 70 % 的对 H_local 差距在首次护盾进入前的部署窗口；固定锚点下分配协调值 +.007；宿主处于逐 agent 信用最弱的可替代区。下一步按 owner 主线（UAV 合作规划、MARL 算法创新、先推理后实验）向 owner 提出：一个不跑任何 fit 的推理阶段，针对已测缺口（返航／充电约束下的部署规划、按服务自适应而非固定 k-means 的锚点）选出规划侧候选，按 7 月记录与本地文献库标注 TRIED / RECORDED / NEW，先与 DM3 `uav_cooperative_planning` 划界，再在选题点交 Pro 评审；本方向承载该阶段还是关闭由 owner 决定。[评审结论条目](candidates/energy_relay_benchmark/NOTES.md)。 **Owner 2026-09-27 选 A：T′ 线关闭；本方向承载不跑 fit 的推理阶段**——选出一个规划侧 MARL 算法候选（创新主张、最强替代、判别性预测、有界首实验；逐条按 7 月记录与本地文献库标注 TRIED / RECORDED / NEW），先与 DM3 `uav_cooperative_planning` 划界，选题点交 Pro（6 Pro，额度不足时 5.6 Pro）独立评审，评审前不声明任何运行。[决定条目](candidates/energy_relay_benchmark/NOTES.md)。 **2026-09-27 推理阶段条目 1 已发表（0 fit、0 回合；零 fit 读数与读器已发表：b04_deployment_reading_a01）：** 机制事实：SET 学习器前 100 步航向在地图坐标系里按智能体编号固定（R_map .60，c00–c03 为 .76–1.00），相对出生角几乎不一致（R_spawnrel .20）；规划器相反（R_map .17–.21，R_spawnrel .96–.98）；学习器前 1000 步 64 % 的 UAV-步贴墙（60 m 内），规划器 0；步 100 的团队展开 411 m 与 H_local 相同但运动一致性 .18（规划器 .97–.99），即已学会按编号分散、未学会按几何部署。代码事实：奖励的图势能对无回程 UAV 恒为 0，奖励里没有逐机趋向用户或基站的梯度（联合 AND 结构）。推断（标注）：护盾强制返航把学习器带到服务锚定的充电站附近，之后服务达 H_local 水平。候选族已按 TRIED/RECORDED/NEW 标注（学习型目标生成为 RECORDED 族；关系型参数化为新）。选定候选：HMASD 协调器的关系型目标解码——每机动作 = 两个实体指针（基站、快照中 30 个用户、已解码队友目标）+ 分数，构造线段上的目标点，低层沿用 T 已实现的目标条件化 discoverer，不给 k-means 锚点/启发式中继点/Hungarian；最强简单替代：同结构绝对坐标目标（消融臂 A）、flat 学习器的输入坐标系修正（B）；判别预测 P1–P4 用已发表读器在 c01–c02（20–40 万步）可读；首个有界实验 2 fits（≈ 26 h GPU + 6 h CPU）仅在 Pro（6 Pro）评审后声明。边界：与 DM3 `uav_cooperative_planning`（规划器侧学习增量）及 Root 新选 `uav_transit_handoff`（返航期临时覆盖交接）决策对象不重合。Pro 问题已写入 NOTES（reasoning-phase-candidate-selection），待答复；无操作在跑。 **2026-09-28 Pro §5 评审（6 Pro，MATERIAL_DISSENT = yes）已逐条对照写入代码核实并全部采纳，R + A 未声明：** 撤回"图势能对无回程 UAV 恒为 0 / 奖励无逐机梯度／首个非零信号需覆盖∧连通同时成立"（势能用放松 Shannon 容量与 max–min 回传传播，处处为正且平滑；原生 QoS 为分级阶梯；规划器与 SET 各检查点在有服务世界的首次服务中位数均为第 0 步；按编码链路预算的 SNR 手算推导（干扰与 FDMA 分带未计，待探针内实测曲线替换）3 dB 门限约 4.3 km，任何位置至多一跳即可连通，容量充足需 ≲ 3 km）、"部署方向不是世界几何的函数"（R_map 只是地图系航向集中度；智能体编号 = 出生网格槽位，c00 的高集中度是近零位移伪影）、"关系构造保证链路可行"、"A 恰好只去掉关系坐标"（复合消融）及重引的已撤回数字 .543/.544；读器 −1 记入均值已更正（修正后排序不变）。声明零 fit 探针 `b04_geometry_probe_a01`：保存的 c06 在生成器一致的 BS 沿边平移／站点重抖动／簇平移／全图 180° 旋转（出生网格按生成规则重生）干预下的原始动作响应，t = 0 与 t = 10…90 决策步，恒等对照逐位复现为有效性门槛，规划器为响应参照，外加 32 个旋转世界的闭环配对读数（Block 2：曾因疑似与 Root 子代理 `uav_geometric_generalization` 重合而撤回，Root 澄清其比较为同一世界上的原策略对规范化策略，不含旋转世界，故恢复，同一操作内）；决策表预写——地图系固定且无几何响应→先买 B（flat 学习器输入坐标系规范化，1 fit，预测先写）；只对基站响应→仍先 B；等变响应→撤回机制、读动作饱和与贴墙时序；识别失败→不买 fit。约 0.5 天、本机 CPU < 30 min、0 fit。**探针已读（2026-09-28，`b04_geometry_probe_a03`，0 fit，本机 50 min）：门槛通过（恒等对照 32 世界逐位相等，本机轨迹与节点轨迹差 0.002 m）；判定为决策表 A 行——地图系固定：180° 旋转下对称误差中位 158°（t = 0）／146°（t = 10…90），镜像 138°／44°，规划器 0.25°；对基站沿边平移的响应中位 11.6°、站点重抖动 4.6°、簇平移 1–2°（规划器在 t = 0 亦不响应，故相对规划器的判据在 t = 0 空置，按绝对量读）。更尖锐的事实：保存的 c06 在每个世界 t = 0 都朝地图系 WSW（集中度 R .85），与出生角落无关（西南角出生的 13 个世界 t = 0 全部背离中心）；动作幅值中位 .74（t = 0）/.44（t = 10…90），规划器 1.0；轨迹中学习器首千步满速步份额 0（规划器 .26–.29）；各检查点各有自己的地图系偏好方向（c03 R_map .93），无一为出生相对。闭环旋转配对（Block 2）ROT − ID 合计 −.025 ± .022 QoS/步，但按原出生角落拆分（DM 事后推导）符号一致地随目的半区而变：西半区出生 ≈ .49、东半区 ≈ .38 QoS/步，旋转后互换（W 类 −.10、E 类 +.04…+.10，配对 SE .02–.05），贴墙份额同向——地图系固定策略的服务依赖出生朝向约 .10 QoS/步；固定航向指向近墙的西半区反而更好，“撞墙”机制不成立，东半区失分原因未明。Root 子代理 DM4 的固定 NE 规范化结果（变换世界 −.067/−.111）是同一现象的镜像相容证据。Oracle 备忘录经复算采纳（条目 3）；Pro §5 评审（MATERIAL_DISSENT yes）采纳其唯一核心修改（条目 4）：**已声明 `b05_canonical_frame_a01`（1 fit）**——冻结 B02 SET 配方在逐回合 SW 出生角落规范化包装（G4 = {I, M_x, M_y, R_180}，观测/状态变换、动作在 shield 前逆变换）下训练，主读数 L = Q(B) − Q(C_SW)（C_SW = 冻结 c06 在同一包装下评估，开发集与留出集各 64 回合，0 fit），两端点面板同一对照；P1/P2/P4 与物理旋转差为解释性读数；另含 C_SW_FULL（幅值归一到上限，32 回合）作次级零 fit 读数；实用目标 L ≥ +.05 QoS/步；≈ 16.5 h 空闲节点墙钟（wsl_4070）；无第二 seed 例外。待 L0→Implementer→工程审查→准入；无操作在跑。** [条目 4](candidates/energy_relay_benchmark/NOTES.md)。 **2026-09-28 07:23 UTC：`b05_canonical_frame_a01`（1 fit：B02 SET 配方在 SW 出生角规范化包装下训练，对照 C_SW = 冻结 c06 同包装；主读数 L = Q(B) − Q(C_SW)，目标 ≥ +.05；启动 sha 5886a7504）在 wsl_4070 准入运行，R2 初始化指纹检查通过；C_SW 面板并行；预计 ≈ 16.5 h 空闲节点墙钟。** **2026-09-28 19:17 UTC：`b05_canonical_frame_a01` 已完成并按声明读取（fit 于 rollout 113 因同一 CPython 内部错误退出，从 c03 按配方 resume 契约续跑为 `a01r`，同一 fit；c06 sha e8e2e1c1…；主读数 L = Q(B) − Q(C_SW) 同评估器逐世界配对）：开发集 L = −.080（SE .018，8/32 世界为正）确定性 / −.084（SE .023，10/32）采样；留出集 L = −.089（SE .020，6/32）/ −.029（SE .021，13/32，落在 ±.03 读数带内）；B c06 为 .377/.380（开发）、.374/.449（留出），C_SW 为 .457/.464 / .463/.477；四个角落类在两个确定性面板上全部为负；B 相对未包装 SET c06 亦低 ≈ .06。按预写结果表取“B 明显低于 C_SW → 本训练实例为 adverse”与“P1 与有用 L 皆不成立 → 该表示/配方/曝光未交付”两行；不推断“部署失败非表示问题”、不称该类已死、不合并、不救援、不加 seed、不延长。解释性读数：P1 不成立（B 出生相对航向 R .63–.73、偏离中心方向约 70°，c02 时为近乎固定的规范系航向 R .99；C_SW 指向角落）；P2 不成立（B 前 100 步向心位移中位 144–245 m，C_SW 为 −180…−320 m 外移）；速度饱和份额 ≈ 0（幅值不是杠杆，C_SW_FULL −.031 已读）；B 在 W,S/E,N 两类世界早期贴墙份额高出 +.18/+.19，与损失最重的两类同现（同现而非机制）；b04 Block 1/2 在 B 上的稳健性读数未跑（adverse 实例上不改变任何判断，已明示省略）。成本：fit 10.7 h CUDA 进程时间（保留 10.1 h，崩溃作废 0.64 h）+ 面板 2.0 h 节点 CPU；声明到完成 ≈ 13.1 h。**轮次边界复盘（b01–b05，858e8cff5 形式）：** 改变的——普通规划参照 H_central .774 / H_central@10 .769 / H_local .597 / N .328（b01）；学习器参照 SET c06 .437/.438（b02）；以证据关闭的投资：离站宽度、T′ 信用线（b03）、速度幅值（C_SW_FULL）、规范系训练（b05）；零 fit 最佳学习器参照 C_SW .457/.464；b04 的地图系固定现象记录、其“表示即学习难点”解释经 b05 一个实例不获支持。未变的——普通规划仍是本宿主协作布局的答案，本方向无学习控制器胜过普通规划，S7 seed SD 未测，CPython 堆错误根因未明。无信息结果：S0-3、b03 二阶绑定、b04 Block 1 站点/基站响应、b05 P1/P2、两次崩溃（≈ 1.5 h 作废）。轮次成本：2 fit ≈ 21.7 h CUDA，零 fit 节点 CPU ≈ 7.5 h，本机 < 2 h，Pro §5 评审 2 次、critic 3 次、工程评审 1 次、Oracle 备忘 1 次。**本方向标准：b05 关闭、adverse；无在跑操作、无已声明 fit；按 owner 2026-09-28 直接决定，本会话下一问题从主线（UAV 路径规划／集群合作规划 + MARL）选出，不再购买能源中继诊断或归因续接；后继选题记录（Oracle 备忘 W、critic 评审，MATERIAL_DISSENT）在 `candidates/energy_relay_benchmark/successor_selection_20260928/`，三个选项交一次 Pro §5 评审后由 owner 决定，方向进入 reserve 待该决定。[b05 结果条目](candidates/energy_relay_benchmark/NOTES.md#2026-09-28--b05_canonical_frame_a01-result-read-by-the-declaration-lc06-is-negative-on-both-panels-dev-080--084-hold-out-089--029-adverse-for-this-training-instance-no-rescue-no-second-seed-b05-closes)、[读数 JSON](candidates/energy_relay_benchmark/../../../runs/energy_relay_benchmark/b05_read_c06_a01/readers.json)。** **2026-09-28 后继选题（第 2 轮）已读并处置：Pro §5（6 Pro，MATERIAL_DISSENT yes）排序 N > O > W′，独立 programme 评审（critic，MATERIAL_DISSENT yes）对 Oracle 备忘录的路线提出三项阻断修正，均已采纳（`successor_selection_20260928/REVIEW_PROGRAMME.md`）。本方向不再购买 S7-S2 新 fit；W′ 不推荐；O 仅作 owner 可选的一次探索性 fit（零残差恒等合同）；T3（`uav_service_restoration`）登记为未就绪宿主，只在 owner 决定 Milan 数据获取后做一次有上限的零 fit readiness（≤ 8 场景 × 3 普通控制器，工程/CPU 各 8 h 上限；缓存本地与 wsl_4070 均不存在）；新颖性仅相对本地库（近邻 Xu et al. MobiCom'24 / arXiv 2505.08448）。方向转入 reserve，等待 owner [DECIDE]；programme 建议已按 Root 已采纳的选题重定基并发送。读数与处置在 NOTES。** **2026-09-28 两方向选题（owner "选两个别的方向"）已完成 Oracle → critic → Pro §5（6 Pro，MATERIAL_DISSENT yes）并采纳：B（协调者标签信用）撤回（= FSD B13 已试不利家族的未试变体）；A′ 降为条件性仪器/归因候选、未声明、三项缺口闭合前不训练；R 恢复候选资格但非第二方向；untied-N 不选；第二槽留空（E）。本轮未形成两个可辩护的新合作规划方向；4 km/6 km 场地恢复中继耦合的说法撤回（Pro 链路预算，DERIVATION）。0 fit，无在跑操作；唯一 owner [DECIDE]：是否接受明确标为归因研究的 A′ 作为有限资源选择。[Pro 答复与处置](candidates/energy_relay_benchmark/NOTES.md#pro-question-2026-09-28-two-directions-selection)。** **2026-09-29 第 3 轮（owner 经 Root 转达："让其选出两个不重叠的方向推进"）：Oracle → critic → Pro §5（MATERIAL_DISSENT yes，采纳）。选定 D2 修订版 `coupled_host_joint_skills_stage1`（scenario 2 参数化的便宜耦合中继宿主；现有学习器 HMASD×3 vs 同信息 SET×3 的能力/仪器研究，带单独计价、低先验、非自动的 SCC 再入格；不是新算法贡献），待 owner [DECIDE-2] 接受该类型；第二槽为未决选择（Pro 倾向 D1′：D2 宿主上学习联合目标修正 vs 合格普通修正，尚未写成独立问题并闭合成本；D1 仅在 owner 重访 09-28 未选的 C 时购买，[DECIDE-1]，默认不选）。scenario 2 奖励的状态相关分母通道与 clip 记为宿主缺陷，由方向自有子类修复。0 fit，无在跑操作。[第 3 轮记录](candidates/energy_relay_benchmark/NOTES.md#pro-question-2026-09-29-round3-two-directions)。** |
 | `sequential_coordinator_credit` | 固定顺序分配技能标签、只用一个共享 k 步团队回报训练的分层 MARL 协调器（HMASD 的自回归 SkillCoordinator），用哪种逐 agent 学习信号才能学到非可加的角色结构（中继链：团队服务取决于中继与其服务者的共同在场），在哪些区域（角色冗余、链绑定强度、回报噪声）各信号成立或失效？ | reserve | Claude DM (WSL session) | **已声明并按一次独立挑战修订（2026-09-27，MATERIAL_DISSENT: yes 六项全部接受；未写代码、未运行）：** 可控 chain_bandit 微宿主，团队回报 Σ_c min(需求, 接入, 回程)（中继只经他人回程起作用、中继可替代），学习器严格采用 HMASD 协调器的更新形式（单一共享参数自回归策略、一次联合 PPO 更新、逐 agent 优势、联合归一化、逐 agent 熵求和、按状态与全部观测编码的上下文价值基线），比较 E1 共享回报、E3 COSAC 的 Sequential Aristocrat Utility（arXiv 2604.17693，首读；其 §6.1 已在序列 bandit 上扫非可加性并含 C3 反事实重放臂，故本方向标注为“COSAC 研究变体”而非 NEW：新增高阶 min/AND 耦合、可替代性旋钮、保持已实现标签的 WLU 型移除、HMASD 联合更新）、E4 精确移除差分 D，以及 K = 4 时免费的两个 oracle 臂（精确 SeqAU、给定 IDLE 重采样 z_>i 的 D）。修订要点：精确的策略依赖量在 K = 8 不可行，阶段 A 改为 K = 4 的**第一格**（16 个固定 context、两种配置：高绑定 × 中继不可替代 / 可替代），主读数为对精确 ∇J 的梯度偏差（余弦/投影）与逐样本方差（三个策略快照），再看 ≥ 100 种子的遗憾；噪声进入 min 内部（需求）而非可被 D 抵消的团队加性噪声；预登记三重校准（原生联合归一化 / 逐估计器标准化 / 无尺度梯度读数）作为 EGRCR 再入条件；P2 的“可替代者得零信用而闲置”撤回，改为固定顺序下经 z_>i 的间接效应（符号待测）；结论只限模型类与一个决定——未来 T′ fit 声明中的第二臂用 SeqAU 还是 D，增加“全部臂在种子 SE 内 → 不选信用臂”的分支，不做全项目退役。规则：D 在最有利的不可替代格都赢不了 E3 → T′ 的信用臂默认 SeqAU。顺序：先做 `energy_relay_benchmark` 的零 fit 信用诊断（同一 CPU，其“中继跳份额 < 10 %”规则可直接取消 D 臂的迁移动机），再首读 D++/Kuba–HAPPO–MAT/Shapley 邻居，再写第一格的实现 L0（成本上界由干跑实测后声明）。不买：18 格网格、K = 8 精确真值、E5 或学习型 E2、阶段 B、任何全项目退役、第一格之前的 Pro 跟进。[声明与修订](candidates/sequential_coordinator_credit/NOTES.md)。 Root 2026-09-27 意见（小模型只服务 T′ 第二臂的判断，不作独立主线）：同意；第一格之外不扩展，且以 `energy_relay_benchmark` 的零 fit 诊断为前置。邻居已首读（HATRPO Lemma 1、MAT、SQDDPG、D++）：E1 = MAT/HMASD 联合优势，E3 = COSAC SeqAU（Kuba 序列优势的样本估计），oracle 增加精确 Shapley（移除 = IDLE）；D++ 命名了 D 在 AND 耦合下的零梯度区，作为第三个机制记录。 Root 反例（独立 Bernoulli、R = a1a2、移除置零 ⇒ D1 = R，logit 梯度 p1(1−p1)p2 > 0，数值核对 .1260）接受：“AND 耦合下 D 无梯度／期望更新为零”撤回，改为“D 在 AND 下退化为共享回报（无优势），pivotal 样本稀疏时信号稀疏”；首格读数不变，不买新网格。 宿主坐标已读（b03_credit_a01）：处于高可替代区（rho −.615、稀疏 .37、中继/其他 3.4×、一个绑定世界 955016），首格增加零成本校准步骤并报告成对移除结构；D 先验下调；L0 进行中。 负责人栏已改为与启动绑定的精确值 Claude DM (WSL session)（launcher 要求逐字匹配）；owner 2026-09-27 授权本会话同时运行两个相关方向。 第一格已实现（63da2bfff，36 项测试通过）并读校准表：12 个 K = 4 配置无一达到宿主 Σ D / R ≈ .40（均匀策略下 S1 ∈ [.69, 1.16]），原因是结构性的——微宿主回程对中继是二值的（任一中继即切换到 B：中继非关键即冗余），而宿主是分布式多跳中继（每步平均 3.28 架 UAV 充当他机路径的中间节点，中继路径平均约 2 个中间节点、最长 5 跳）且移除后重新路由，服务者冗余来自几何覆盖；宿主匹配槽按声明取均匀策略下的 argmin (β .9, s 2, σ .2)，标注“最近、未匹配”，与绑定角 (β .9, s 1, σ .2) 只差可替代性旋钮；成对移除结构：中继–服务者互补（−.35 / −.22），同角色可替代（服务者 +.2，中继 +.8）。成本上界 ≤ 2 h 墙钟（干跑投影 34 分钟，2 000 次微训练，0 UAV fit）；读数规则（规则 1：绑定角 D 对 E3；规则 2：天花板；规则 3 = benchmark 的 C1）在启动前写定；K = 6 可加中继格仅在 D 赢下最有利格时购买。启动句柄见 NOTES。 **第一格已读（b01_first_cell_a02，35 分钟，2 000 次微训练，0 UAV fit，规则在启动前写定）：** 规则 1 取 (b)——D 在最有利的绑定角也输给 SeqAU（配对遗憾差 +.0038 ± .0001 与 +.0787 ± .0009，两种熵设置，100 种子），T′ 的信用臂如有则默认 SeqAU，移除差分族对固定顺序协调器退役、不买 K = 6 格；规则 2 无天花板；规则 3（C1）按原文未满足——遗憾子句在绑定角满足、在宿主匹配格混合（低熵下岭估计输给共享回报 +.0078，退火下赢 −.0488），读数子句发现写错（以期望更新恰为 ∇J 的 E1 作余弦基准、以联合归一化单位比方差），故未声明 Fit A/B，改写子句是否可采用交独立科学评审。机制读数（经独立评审更正）：精确序列优势四格遗憾最低，但在宿主匹配 × 恒定熵格终点仍低于共享回报 .0021；岭 SeqAU 在该格从第 5 次更新起即落后（近均匀策略下可加拟合的偏差：更新 0 处对 ∇J 余弦 .88、投影 .77），三分之一种子终点低于共享回报 .01 以上——此前“策略变尖后岭退化（余弦 .97 → .51）”的解释撤回：余弦下降是 ‖∇J‖ 缩小 90–300 倍后 32 次抽样读数自身的噪声（投影仍为 .94–.97，跨种子 SD 与 jackknife SE 同为 .6–.7）；移除差分在宿主匹配格与 ∇J 正交（余弦 .01），经后续 agent 的补偿 +.41（中继对）量化了固定顺序的间接效应；E4* 在角点最差是联合归一化未对逐 agent 正偏移居中所致；“投影排序学习速度”猜想的因果读法撤回（逐元素 Adam 下优势尺度只相对熵项起作用），改记为“沿 ∇J 的原生信噪比 + 偏差 + 强熵下的尺度／λ_h”。 **独立科学评审已返回（ResearchCritic，独立上下文，2026-09-27）：MATERIAL_DISSENT: yes 三项，经 npz 与代码复核后全部接受：** 不采用改写的 C1 子句（事后自由度——改写后的结果取决于子句从未定下的投影门槛；且退火列不是 T′ 的区：T′ 声明 λ_h = .00125 恒定，`hmasd/agent.py` 1047 与 `configs/config_1.py` 196 默认关闭熵退火，微宿主的退火臂是开关打开时的默认 .2 → .01）；“退火计划是 HMASD 的原生／有利区”撤回，SeqAU 仅保留规则 1(b) 预写的默认标签而非有证据支持的第二臂——在 T′ 的恒定熵区，可实现的岭估计在宿主匹配格输给共享回报（遗憾 +.0078、终点 −.0072），精确 oracle 终点亦不增益；不声明 Fit A / Fit B，不买重复格、K = 6 格、“不退化估计器”或逐 agent 标准化训练；尺度匹配退火核查（≈ 20 min、0 fit）记为选项、默认不跑。 规划语义：协调器（角色分配层）的共享回报已是精确无偏信号，逐 agent 信用最多买到 .1 % J* 的遗憾、宿主类终点无增益，唯一取胜的强退火区被归一化尺度（等效更小熵系数）混杂——在该 K = 4“最近、未匹配”微宿主与固定顺序协调器的分配层内，逐 agent 信用未显示算法增益（2026-09-27 Root 独立审查后收窄：不外推为宿主范围的信用排除；+.007 是固定锚点下 Hungarian 对一种固定分配的差，不是协调价值上界；理想 score 恒等式不证明有限归一化/裁剪 PPO 更新无偏）；Stage 1 的部署前窗口缺口指向部署规划本身。 **状态：首格已读并评审，无值得购买的下一格，方向空闲（0 UAV fit）**；再入条件：将来声明带信用臂的协调器 fit 时，尺度匹配核查与读数设计教训作为记录的设计教训参考，不是普遍前置检查。处置（作为方向结果关闭，或按规划主线重构）已提交 owner。[评审、复核与更正条目](candidates/sequential_coordinator_credit/NOTES.md)。 **Owner 2026-09-27 选 A：首格即本方向结果，方向转 reserve。** 结果：固定顺序协调器在 HMASD 联合 PPO 更新形式下，共享团队回报已是精确无偏的学习信号，逐 agent 信用只改变方差与尺度；K = 4 微宿主中精确序列优势最多买到 .1 % J* 的遗憾、宿主类终点无增益，可实现的岭 SeqAU 在中继可替代区（宿主的区）因早期可加拟合偏差而输，移除差分与 ∇J 正交并退役，唯一取胜的强退火区被归一化尺度混杂。负约束：D 不在无逐 agent 居中的联合归一化下复活；继承本格估计器的信用臂 fit 参考教训 (a)–(f)（设计教训，非门槛）。成本 0 UAV fit、35.39 min elapsed、约 4.71 h 累计 worker 墙钟（8 workers；CPU 时间未测，a01 被杀尝试另计）。再入条件：项目内任何地方声明带信用臂的协调器 fit。后继推理阶段在 `energy_relay_benchmark` 承载。[关闭条目](candidates/sequential_coordinator_credit/NOTES.md)。 **2026-09-27 范围与成本按 Root 独立审查收窄（NOTES 同时条目）：** 见上文括号内更正；首格判定、C1 未满足与 T′ 关闭不变。 |
 | `uav_restoration_readiness` | 在米兰真实活动数据、单站故障、四机的服务恢复宿主（T3）上，同信息的联合滚动普通规划相对独立贪心重部署与静止部署，是否在完整 1800 s 恢复轨迹上产生独立动作不能解释的效应——即是否存在可形成下一个学习问题的联合重部署机会，而不只是静态容量缺口或弱基线缺口？ | paused | Claude DM (WSL session) | **2026-09-28 owner 直接决定：搁置到 owner 提供 Milan 数据后再继续（不提交 guestbook、不下载、不用合成数据替代）；b01 声明与代码保留，未启动。** **2026-09-28 owner 确认 A 并准许（"确认A 准许"）后开设；`energy_relay_benchmark` 的后继，Pro §5 合同：≤ 8 个 dev 场景 × 3 个普通控制器 = 24 条完整轨迹，0 fit，工程/CPU 各 8 h 上限，先计价一条轨迹，不附带任何训练许可。** b01 已声明（比较对象 static_uav / backhaul_aware_greedy / 新建 joint_rolling_lp：以宿主自己的 NetworkSnapshot + LP 联合评估放置，坐标上升，空闲回退到贪心槽位；读器为逐种子配对的 satisfaction 与 restored 差 D_J、D_G 及恢复时间/删失；结果行不批准 fit）。门槛：owner 的 Milan 数据决定（Dataverse guestbook 需 e-mail）→ `prepare_milan.py --real-data` + 质量报告 + 预设对账 → 代码发布 → 计价运行 → 8 种子运行（`local_linux`，`hmasd_launch.py`）。缓存本地与 wsl_4070 均不存在（2026-09-28 探测）。新颖性仅相对本地库（近邻 Xu et al. MobiCom'24 / arXiv 2505.08448）。[NOTES](candidates/uav_restoration_readiness/NOTES.md) |
-| `coupled_host_joint_skills_stage1` | 在把 scenario 2 参数化成的便宜耦合中继宿主（5 km、基站 23 dBm、簇状用户、free_space 钉住、方向自有奖励契约 ½(C_bh + S/D)、无 clip）上，先由普通放置规划器证明耦合（允许中继 − 重优化禁 A2A ≥ .05），现有学习器 HMASD（D-route，k = 10）与同信息 flat（SET）各三种子能否达到普通规划器回传服务的有用比例，HMASD 的协调器是否学成非加性的"谁中继、谁服务"角色（B12 交互读器）并超过 flat？类型：能力/仪器研究，含单独计价、低先验、非自动的 SCC 再入格（cell 2）；不是新算法贡献。 | exploring | Claude DM (WSL session) | **2026-09-29 b01 已声明（owner [DECIDE-2] 接受，6136bc2c9）；等待一次 §5 声明评审后启动 cell 0（0 fit，`local_linux`）。** 宿主契约、cell 0–1、P1–P4 及赔率、Pro 的结果行表、成本上限（cell 0 工程 40 h；cell 1 CPU 20 进程小时）、停止规则与继承在 [NOTES](candidates/coupled_host_joint_skills_stage1/NOTES.md)。第二槽未决：D1′（同宿主上学习联合目标修正 vs 合格普通修正）已写成候选问题与边际成本（energy_relay_benchmark NOTES 2026-09-29），待 D2 cell 0 门读出后再声明。无在跑操作，0 fit。 2026-09-29：Pro §5 声明评审（owner 录入 805abef99）MATERIAL_DISSENT 已由 DM 收口修订接受（54a51a9df）：D 为 30 dB 参照尺度、宿主统一动作限幅、gate 增加闭环 dev 覆盖条件 G_C,dev,cl ≥ .05、P2/P4 改为 hold-out 闭环 500 步均值并加配对 ΔC_bh 检查、P3 改为可执行统计预规格（T4）、探针计 48k 步、20 CPU 小时总上限优先；T2b 搜索修订已接受（890ecd701）；T2c/T3 已验收（445158cea, f58952319）；**cell 0 dev gate 通过**（c3c121991：32 个 dev 世界 5 km，静态 G .106、闭环 dev 覆盖差 .152，均 ≥ .05，P1 成立）；hold-out 参照已生成并封存；技术探针读出本地节点每 fit H 18.0 / SET 12.7 CPU 小时（争用修正后约 9 / 6.4），六 fit 超出声明的 20 CPU 小时上限 2–5 倍（DM 定价错误：把 wsl_4070 的锚定用在 local_linux）；**[DECIDE-3] 待 owner**：A 推荐改在 wsl_4070 跑（配方不变，上限改 35 CPU 小时）/ B 留在 local_linux（约 100 CPU 小时）/ C 零 fit 成本停止；T4（P3 读数器：承诺采集器 + 交互读数器，支持规则与只用乘积列的次读数，148 测试）已验收（68e441f3e）；[DECIDE-3] 至 T4 验收无 owner 回复，按记录缺省执行 A（c3e3bf10d：六 fit 改在 wsl_4070，配方不变，上限改 35 CPU 小时，两并发按配对顺序）；首对启动被准入拒绝——节点规范 checkout 停在 c562b8fa9 且有他人未提交的 RESEARCH.md 改动，准入先读该工作副本的 Active 表（本方向无行），Root 已于 09:16 UTC 收口并 fast-forward 节点 checkout（5c6997722）；**b01 六 fit 批已完成并按预规格判读（NOTES 2026-09-29 批读）：P1 耦合 MET（G .106/.121，闭环覆盖差 .152/.141）；P2 胜任 NOT MET（H 与 SET 三种子 hold-out C̄_bh .13–.24 对规划器 .639/.780、地板 .171，L2 ≈ −.48 至 −.58）；P4 层级 NOT MET（配对 Δr +.014/−.009/+.056，仅 1/3）；P3 角色 NOT MET（0/3 supported，且读于不胜任 checkpoint）；cell 2 未购买。** 失败形态（critic 评审后纠正，NOTES 2026-09-29 critic 条目）：两个包训练期 C̄_bh 从未离开随机地板，动作熵单调升至 ≈ 7.6–8.0（无夹持高斯头 + λ_l .05，σ ≈ 3.5/轴），c45 确定性动作 ≈ 95 % 限幅、关联切换 .8/步、协调器几乎不动、SET 执行时已有全状态；归因于速度接口或 AND 耦合奖励**未成立**，最简单的替代解释是本配方的无界动作头 + 熵项（RECORDED）。成本 ≈ 33.0 CPU 小时（上限 35）；scratch 与节点 worktree 已清理，checkpoint/表留节点与 artifacts。可复用资产：宿主 + 已验证同信息规划器 + 封存 dev/hold-out 参照。后继（critic 评审 + 轮边界 Pro 综合后，NOTES 2026-09-29 16:12）：**b02 已声明** `coupled_host_bounded_head_substrate` cell SET-V-b——b01 的 SET 配方只换原生有界动作头（tanh_gaussian，logstd init −1、夹持 [−5, 0]），逐步速度接口，seed 932201 与 b01 配对，单 fit、360k、上限 5.0 CPU 小时（wsl_4070）；主读数 hold-out 确定性 c45 C̄_bh，激活线 .40（< .40 → 只买一例目标级 SET-T-b，上限 2.0；≥ .639 才放行一例同接口 H-V，上限 6.5；≥ .7095 = b01 P2 单实例线）。**SET-V-b 已读（NOTES 2026-09-29 17:2x）：C̄_bh .2099，带 0 非激活**（配对 b01 .2187；确定性限幅 0.5/episode 对 b01 2,819，σ .37→.68 在夹持内，训练期 C̄_bh 始终在地板）——有界头去掉了饱和，学习器仍不学；3.26 CPU-h。按声明执行：目标级 SET-T-b 一例（探针计价 ≈ 1.1 CPU-h，声明线 .44 = 随机目标地板 .365 + ½G）。**SET-T-b 已读（NOTES 2026-09-29 18:1x）：hold-out C̄_bh .3571，低于随机目标地板 .365，非激活**；学到的是"每次决策都选远目标、持续移动"（far-target 比例 .11→.91），即模仿随机目标地板的行为与水平。**b02 关闭**：两个预声明 SET 实例（逐步 + 有界头 .21；目标级 + 有界头 .36）在各自接口/头/暴露下均非底座；未跑 H 臂，不读 H；b02 合计 4.52 CPU-h。零学习事实：目标接口 + 直线执行器本身把地板从 .17 抬到 .37。本轮边界起选后继（Oracle → critic → Pro）；本配方族不再买 fit。D1′ 零 fit 门已读：不购买（H_static 1/160、H_corr 873/160000，0.10 CPU-h）。Oracle 后继备忘选 Q-B′（槽位分配，先零 fit 地板）；critic 评审的实质异议已接受（SET-slot 先于 H-slot，H 需 coordinator 激活门；b01 coordinator 训练熵 1.78/1.79 nat、采样标签熵 2.58/2.585 bit，未激活）。**Q-B′ 零 fit 槽位地板已读（六个地板，64 世界，合计 ≈ 0.2 CPU-h，local_linux）：M（匈牙利）.780 = P_relay^on（64/64 hold-out 世界）、最近未占 .777、恒等排列 .762、固定随机排列 .764、sticky-random .418（逐世界 SD .191）、random-slot .427。** 任何无冲突常量 ego→slot 表已达 .76/.78：去重值 ≈ .34，分配最优性 ≈ .02；对比余量 M − 固定排列 .016 < .05，H-vs-SET 的 C̄_bh 对比路径划掉。SET-slot 单例的剩余价值是配方-vs-接口判别（冻结配方在最易接口上能否学会六路无冲突约定；采样面板 ≤ .49 → 配方是阻碍，≥ .70 → 学会约定、b01/b02 平坦归于连续接口）。轮边界 Pro 追问已发（key hmasd:25593344…，同一会话，Answer 4 分歧如实记录）：A SET-slot 单例（[DECIDE] 默认，≈ 1.3–1.6 CPU-h，上限 2）/ B 配方 fit / C 转 reserve；Pro 排序 A > C > B（修订采纳）：SET-slot 作一次性能力购买、上限 2 CPU-h、主读数 hold-out c45 采样面板、购买线 .50 = random-slot .4274 + .0705、预承诺分流（≥ .70 且 c00 不同等 → 另议主线连续控制问题，否则转 reserve，不自动买 B）。**b02c SET-slot 已读（NOTES 2026-09-29 19:5x，tag b02_fit_SETS_932201_a01，SHA d63fcd948，1.33 CPU-h）：采样 .4288 = random-slot 地板（配对 +.0014），冲突 2.15/团队决策 ≥ 地板 2.01，无去重；确定性面板从 c00 的单槽塌缩（.097，冲突 5.0）升到随机水平（.42）；训练 C̄_bh 45 次更新平坦 .40–.45。按预承诺 D2 转 reserve：**九个单种子 fit（三接口 + 三 coordinator）均在零学习地板；不再为该配方族买 fit；配方病因假说（回报梯度输给 λ_l .05 / 共享 r/6）RECORDED 未测。保留资产：宿主、已验证规划器、余量门、八个零 fit 地板、宏观合约代码。D2 合计按 26 份 run summary 重算 40.2 CPU-h（加三次规划器门运行 ≈ .3）≈ 40.5 CPU-h；Pro 轮边界更正已采纳（九个 fit 含三个 H 实例、不另计“三个 coordinator”；slot 地板只是菜单分配问题的匹配参照；SET-V-b/T-b 购买的是限定实例的非激活结论）。后继已选（Oracle → critic 实质异议采纳 → Pro 轮边界追问已发）：`coupled_host_replan_timing`，见其行。 **2026-09-29 owner 自主授权后 DM 自决 [DECIDE-B] = 买：b03 SET-T-b′（目标契约 + 有界头 + λ_l .05 → 0，seed 932201，360k 步，单实例；匹配对照 SET-T-b .3571；区间 < .40 / .40–.64 / ≥ .64 / ≥ .71 预定；local_linux，上限 2.5 CPU-h），本行仅为该 cell 回到 exploring；实现 `--lambda-l` 后启动。** **b03 已读（NOTES 2026-09-30 01:4x，ed3ddb2b3）：hold-out 确定性 c45 C̄_bh .3496，带 < .40（亦 < .44），非激活；配对 SET-T-b −.0075（SE .014）、配对随机目标地板 .3652 −.0156（SE .011）；λ_l → 0 使 σ .37 → .20，但 far-target 比例仍 .86–.94、每次决策换目标，C̄_bh 不动——RECORDED 配方假说的熵项一半被单例否定，共享奖励一半未测；1.79 CPU-h（上限 2.5）；不跑 H-T；本宿主 from-scratch 连续线对该 seed/暴露/头初始化关闭。D2 十个单种子 fit 均在学习地板，本配方族不再买 fit，D2 合计 ≈ 42.3 CPU-h。** **后继零 fit cell b04（Oracle 2A，B0：冻结规划器只用六机合法即时汇集的目击、空图起步、≥ 3 新知触发重规划）已预声明（accd80110）并在启动前修订：重规划上限 5 → 20 为主读数（探针世界 1024 上限 5 时 S_info0 .275 为上限所致，上限 20 为 .042；1002 不变 .1245），上限 5 作次运行保留；带 < .05 / .05–.15 / ≥ .15 不变，另按出生可见簇数分层报告；两次运行 ≈ .1 CPU-h，local_linux。本行在 b04 读出前保持 exploring。** |
+| `coupled_host_joint_skills_stage1` | 在把 scenario 2 参数化成的便宜耦合中继宿主（5 km、基站 23 dBm、簇状用户、free_space 钉住、方向自有奖励契约 ½(C_bh + S/D)、无 clip）上，先由普通放置规划器证明耦合（允许中继 − 重优化禁 A2A ≥ .05），现有学习器 HMASD（D-route，k = 10）与同信息 flat（SET）各三种子能否达到普通规划器回传服务的有用比例，HMASD 的协调器是否学成非加性的"谁中继、谁服务"角色（B12 交互读器）并超过 flat？类型：能力/仪器研究，含单独计价、低先验、非自动的 SCC 再入格（cell 2）；不是新算法贡献。 | reserve | Claude DM (WSL session) | **2026-09-29 b01 已声明（owner [DECIDE-2] 接受，6136bc2c9）；等待一次 §5 声明评审后启动 cell 0（0 fit，`local_linux`）。** 宿主契约、cell 0–1、P1–P4 及赔率、Pro 的结果行表、成本上限（cell 0 工程 40 h；cell 1 CPU 20 进程小时）、停止规则与继承在 [NOTES](candidates/coupled_host_joint_skills_stage1/NOTES.md)。第二槽未决：D1′（同宿主上学习联合目标修正 vs 合格普通修正）已写成候选问题与边际成本（energy_relay_benchmark NOTES 2026-09-29），待 D2 cell 0 门读出后再声明。无在跑操作，0 fit。 2026-09-29：Pro §5 声明评审（owner 录入 805abef99）MATERIAL_DISSENT 已由 DM 收口修订接受（54a51a9df）：D 为 30 dB 参照尺度、宿主统一动作限幅、gate 增加闭环 dev 覆盖条件 G_C,dev,cl ≥ .05、P2/P4 改为 hold-out 闭环 500 步均值并加配对 ΔC_bh 检查、P3 改为可执行统计预规格（T4）、探针计 48k 步、20 CPU 小时总上限优先；T2b 搜索修订已接受（890ecd701）；T2c/T3 已验收（445158cea, f58952319）；**cell 0 dev gate 通过**（c3c121991：32 个 dev 世界 5 km，静态 G .106、闭环 dev 覆盖差 .152，均 ≥ .05，P1 成立）；hold-out 参照已生成并封存；技术探针读出本地节点每 fit H 18.0 / SET 12.7 CPU 小时（争用修正后约 9 / 6.4），六 fit 超出声明的 20 CPU 小时上限 2–5 倍（DM 定价错误：把 wsl_4070 的锚定用在 local_linux）；**[DECIDE-3] 待 owner**：A 推荐改在 wsl_4070 跑（配方不变，上限改 35 CPU 小时）/ B 留在 local_linux（约 100 CPU 小时）/ C 零 fit 成本停止；T4（P3 读数器：承诺采集器 + 交互读数器，支持规则与只用乘积列的次读数，148 测试）已验收（68e441f3e）；[DECIDE-3] 至 T4 验收无 owner 回复，按记录缺省执行 A（c3e3bf10d：六 fit 改在 wsl_4070，配方不变，上限改 35 CPU 小时，两并发按配对顺序）；首对启动被准入拒绝——节点规范 checkout 停在 c562b8fa9 且有他人未提交的 RESEARCH.md 改动，准入先读该工作副本的 Active 表（本方向无行），Root 已于 09:16 UTC 收口并 fast-forward 节点 checkout（5c6997722）；**b01 六 fit 批已完成并按预规格判读（NOTES 2026-09-29 批读）：P1 耦合 MET（G .106/.121，闭环覆盖差 .152/.141）；P2 胜任 NOT MET（H 与 SET 三种子 hold-out C̄_bh .13–.24 对规划器 .639/.780、地板 .171，L2 ≈ −.48 至 −.58）；P4 层级 NOT MET（配对 Δr +.014/−.009/+.056，仅 1/3）；P3 角色 NOT MET（0/3 supported，且读于不胜任 checkpoint）；cell 2 未购买。** 失败形态（critic 评审后纠正，NOTES 2026-09-29 critic 条目）：两个包训练期 C̄_bh 从未离开随机地板，动作熵单调升至 ≈ 7.6–8.0（无夹持高斯头 + λ_l .05，σ ≈ 3.5/轴），c45 确定性动作 ≈ 95 % 限幅、关联切换 .8/步、协调器几乎不动、SET 执行时已有全状态；归因于速度接口或 AND 耦合奖励**未成立**，最简单的替代解释是本配方的无界动作头 + 熵项（RECORDED）。成本 ≈ 33.0 CPU 小时（上限 35）；scratch 与节点 worktree 已清理，checkpoint/表留节点与 artifacts。可复用资产：宿主 + 已验证同信息规划器 + 封存 dev/hold-out 参照。后继（critic 评审 + 轮边界 Pro 综合后，NOTES 2026-09-29 16:12）：**b02 已声明** `coupled_host_bounded_head_substrate` cell SET-V-b——b01 的 SET 配方只换原生有界动作头（tanh_gaussian，logstd init −1、夹持 [−5, 0]），逐步速度接口，seed 932201 与 b01 配对，单 fit、360k、上限 5.0 CPU 小时（wsl_4070）；主读数 hold-out 确定性 c45 C̄_bh，激活线 .40（< .40 → 只买一例目标级 SET-T-b，上限 2.0；≥ .639 才放行一例同接口 H-V，上限 6.5；≥ .7095 = b01 P2 单实例线）。**SET-V-b 已读（NOTES 2026-09-29 17:2x）：C̄_bh .2099，带 0 非激活**（配对 b01 .2187；确定性限幅 0.5/episode 对 b01 2,819，σ .37→.68 在夹持内，训练期 C̄_bh 始终在地板）——有界头去掉了饱和，学习器仍不学；3.26 CPU-h。按声明执行：目标级 SET-T-b 一例（探针计价 ≈ 1.1 CPU-h，声明线 .44 = 随机目标地板 .365 + ½G）。**SET-T-b 已读（NOTES 2026-09-29 18:1x）：hold-out C̄_bh .3571，低于随机目标地板 .365，非激活**；学到的是"每次决策都选远目标、持续移动"（far-target 比例 .11→.91），即模仿随机目标地板的行为与水平。**b02 关闭**：两个预声明 SET 实例（逐步 + 有界头 .21；目标级 + 有界头 .36）在各自接口/头/暴露下均非底座；未跑 H 臂，不读 H；b02 合计 4.52 CPU-h。零学习事实：目标接口 + 直线执行器本身把地板从 .17 抬到 .37。本轮边界起选后继（Oracle → critic → Pro）；本配方族不再买 fit。D1′ 零 fit 门已读：不购买（H_static 1/160、H_corr 873/160000，0.10 CPU-h）。Oracle 后继备忘选 Q-B′（槽位分配，先零 fit 地板）；critic 评审的实质异议已接受（SET-slot 先于 H-slot，H 需 coordinator 激活门；b01 coordinator 训练熵 1.78/1.79 nat、采样标签熵 2.58/2.585 bit，未激活）。**Q-B′ 零 fit 槽位地板已读（六个地板，64 世界，合计 ≈ 0.2 CPU-h，local_linux）：M（匈牙利）.780 = P_relay^on（64/64 hold-out 世界）、最近未占 .777、恒等排列 .762、固定随机排列 .764、sticky-random .418（逐世界 SD .191）、random-slot .427。** 任何无冲突常量 ego→slot 表已达 .76/.78：去重值 ≈ .34，分配最优性 ≈ .02；对比余量 M − 固定排列 .016 < .05，H-vs-SET 的 C̄_bh 对比路径划掉。SET-slot 单例的剩余价值是配方-vs-接口判别（冻结配方在最易接口上能否学会六路无冲突约定；采样面板 ≤ .49 → 配方是阻碍，≥ .70 → 学会约定、b01/b02 平坦归于连续接口）。轮边界 Pro 追问已发（key hmasd:25593344…，同一会话，Answer 4 分歧如实记录）：A SET-slot 单例（[DECIDE] 默认，≈ 1.3–1.6 CPU-h，上限 2）/ B 配方 fit / C 转 reserve；Pro 排序 A > C > B（修订采纳）：SET-slot 作一次性能力购买、上限 2 CPU-h、主读数 hold-out c45 采样面板、购买线 .50 = random-slot .4274 + .0705、预承诺分流（≥ .70 且 c00 不同等 → 另议主线连续控制问题，否则转 reserve，不自动买 B）。**b02c SET-slot 已读（NOTES 2026-09-29 19:5x，tag b02_fit_SETS_932201_a01，SHA d63fcd948，1.33 CPU-h）：采样 .4288 = random-slot 地板（配对 +.0014），冲突 2.15/团队决策 ≥ 地板 2.01，无去重；确定性面板从 c00 的单槽塌缩（.097，冲突 5.0）升到随机水平（.42）；训练 C̄_bh 45 次更新平坦 .40–.45。按预承诺 D2 转 reserve：**九个单种子 fit（三接口 + 三 coordinator）均在零学习地板；不再为该配方族买 fit；配方病因假说（回报梯度输给 λ_l .05 / 共享 r/6）RECORDED 未测。保留资产：宿主、已验证规划器、余量门、八个零 fit 地板、宏观合约代码。D2 合计按 26 份 run summary 重算 40.2 CPU-h（加三次规划器门运行 ≈ .3）≈ 40.5 CPU-h；Pro 轮边界更正已采纳（九个 fit 含三个 H 实例、不另计“三个 coordinator”；slot 地板只是菜单分配问题的匹配参照；SET-V-b/T-b 购买的是限定实例的非激活结论）。后继已选（Oracle → critic 实质异议采纳 → Pro 轮边界追问已发）：`coupled_host_replan_timing`，见其行。 **2026-09-29 owner 自主授权后 DM 自决 [DECIDE-B] = 买：b03 SET-T-b′（目标契约 + 有界头 + λ_l .05 → 0，seed 932201，360k 步，单实例；匹配对照 SET-T-b .3571；区间 < .40 / .40–.64 / ≥ .64 / ≥ .71 预定；local_linux，上限 2.5 CPU-h），本行仅为该 cell 回到 exploring；实现 `--lambda-l` 后启动。** **b03 已读（NOTES 2026-09-30 01:4x，ed3ddb2b3）：hold-out 确定性 c45 C̄_bh .3496，带 < .40（亦 < .44），非激活；配对 SET-T-b −.0075（SE .014）、配对随机目标地板 .3652 −.0156（SE .011）；λ_l → 0 使 σ .37 → .20，但 far-target 比例仍 .86–.94、每次决策换目标，C̄_bh 不动——RECORDED 配方假说的熵项一半被单例否定，共享奖励一半未测；1.79 CPU-h（上限 2.5）；不跑 H-T；本宿主 from-scratch 连续线对该 seed/暴露/头初始化关闭。D2 十个单种子 fit 均在学习地板，本配方族不再买 fit，D2 合计 ≈ 42.3 CPU-h。** **后继零 fit cell b04（Oracle 2A，B0：冻结规划器只用六机合法即时汇集的目击、空图起步、≥ 3 新知触发重规划）已预声明（accd80110）并在启动前修订：重规划上限 5 → 20 为主读数（探针世界 1024 上限 5 时 S_info0 .275 为上限所致，上限 20 为 .042；1002 不变 .1245），上限 5 作次运行保留；带 < .05 / .05–.15 / ≥ .15 不变，另按出生可见簇数分层报告；两次运行 ≈ .1 CPU-h，local_linux。本行在 b04 读出前保持 exploring。** **b04 已读（NOTES 2026-09-30 02:0x）：S_info0 = F − B0 = +.072（SE .015，27/32 > 0；上限 5 次运行 +.094，上限在 13/32 世界起作用），落在 .05–.15 带：只报告、不购买——不声明协同/独立搜索切换，不跑 hold-out，不上学习器。损失持续存在（final-100 仍 +.068，瞬态仅 +.005），位于团队始终未目击的用户（均 6.7/50，9 个世界整簇未见），与出生可见簇数无关；机制是未见用户的覆盖而非信息传播或重规划时机。.10 CPU-h。D2 转 reserve（资产保留：宿主、已验证规划器、门参照、八个零 fit 地板、十个 fit 读数、B0 臂；D2 合计 ≈ 42.4 CPU-h）。轮边界：两个 Claude 槽位进入下一问题选择（Oracle → Pro → 预声明；与 Root 的 SCOPE 划分不变）。** |
 | `coupled_host_replan_timing` | 耦合中继宿主上一个用户簇中途迁移时，集群重部署的时机与范围（不重部署 / 冷重规划 / 保持未受影响站点的暖重规划）值多少完整回传服务，学习者自身的逐 UAV 出发时机动作空间在最优普通规则之上还剩多少余量？ | reserve | Claude DM (WSL session) | **已预声明（2026-09-29，D2 notebook 77d569d46；Pro 轮边界评审 `replan-timing-round-boundary` 待答）。** 方向自有单事件宿主子类（按宿主自身簇生成法则重抽一个簇，t_e ~ U{150..350}，逐世界 rng），零 fit 规则族 KEEP / cold SET-now / warm SET（可动 UAV 由事件前实际关联/路由决定，其余保持 UAV–站点分配），事件后窗口 C̄_bh 为主读数（逐世界窗口均值后等权配对），赌注 S_switch = warm − KEEP（重部署收益，非纯时序）、S_cold = warm − cold、room = 小网格最佳（2⁶ 出发子集 × 延迟 {0,20,50}，非上界）− dev 冻结的最优普通规则；Pro 评审（2026-09-29，采纳全部修订）：S_switch < .02 → 仅停止本事件法则/面板下的这笔购买，不宣布宿主族无赌注；S_switch ≥ .02 且 room < .03 → 普通参照存在、本轮不买学习器；.03–.05 报告不训练；room ≥ .05 → 仅支持进一步审查（先冻结参照读 hold-out），不是训练许可。**R1-lite 已全部读完（2026-09-29，零 fit，合计 0.12 CPU-h，local_linux，SHA b00ff4b2a，tags r1lite_{probe,dev,grid_dev,holdout}_a01）：** dev 32 世界 S_switch = warm − KEEP +.0385（配对 SD .048）≥ .02；最优普通规则 = 事件时冷全量重规划 cold SET-now（dev .838 vs KEEP .791，warm .830，seeded .834），冻结后 hold-out：cold − KEEP **+.068**（SD .089，5/32 世界为负），warm − KEEP +.047，cold − warm +.021；出发网格（warm 目标下 2⁶ 子集 × 延迟 {0,20,50}）room 已更正（NOTES 2026-09-29 CORRECTION 条目）：对**冻结的 dev 参照 cold** room = 网格最佳 − cold 均值 **−.008**（配对 SD .056，16/32 世界为正，三个世界 ≥ .05 且均恰等于 warm − cold，网格最佳即 warm 本身）；先前发布的“每个世界 ≤ 0（均值 −.024）”是对逐世界最优普通规则包络的读数（Pro 曾指出的 envelope，非预声明比较者），已撤回；网格最佳 − warm 在所有世界 ≤ .019。按预定区间（两种比较者下 room 均 < .03）：普通重部署参照存在（事件时冷全量重规划，比不重部署多 ≈ .07 事件后回传覆盖；保持未受影响分配的 warm 规则在两面板均值上不优于它（warm − cold：dev −.0085，范围 −.132…+.148，16/32 为正；hold-out −.0212，范围 −.264…+.133，10/32 为正）；dev 小网格相对 warm 的增益最大 .019、均值 .0006——只是 dev 网格读数，不是“持有布局下一切出发时序均无收益”），**本轮不买学习器**；不作宿主族或 untied-K 主张。单事件法则、全信息决策、单实例；不是种子离散。**Pro 轮边界综合已答（`replan-timing-next-question`，Pro 经连接器直接写入 Answer，95f94147a/3fabe024f）：批次处置保留，更正条目中的集合包含推理与面板混用已按 Pro 撤回；排序 修订 A ＞ 修订 C ＞ B。第二槽下一问题已预声明为 R2（NOTES 2026-09-29 处置条目）：同一事件宿主、同 32 dev 世界上，团队普通重规划只用合法局部观测，两臂除“是否沿保持的回传邻接逐跳无损转发已观测事实”外完全一致，主读数 Δ_share = 共享 − 不共享（事件后 C̄_bh 配对），F（冻结全信息 cold）与 D（首次合法检测时授予真值）只作特权参照，S_info 次要且单侧；区间 Δ_share < .03 停止 / .03–.05 报告不扩展 / ≥ .05 冻结后读既有 32 hold-out 再决定是否单独声明有限通信问题，任何区间无训练或 untied-K 许可；顺序两世界合法性与计价探针 → 32 dev → 条件性 hold-out，封顶 4 工程小时 + 1 CPU-h；不能在同一信息合同下构造匹配两臂则选 C（主动休息、保留资产，不依赖已暂停的 `uav_availability_recovery` B01）。**R2 已读（2026-09-29，owner 恢复后，零 fit，0.03 CPU-h，local_linux，SHA 793ec645a，tag r2_dev_a01，32 dev 世界）：Δ_share = 共享 − 不共享 = +.0048（配对 SD .017，4/32 为正，最大 +.078）→ 区间 < .03，本项停止，不买 hold-out。** 臂均值：不共享 .798、共享 .802、D（首次合法检测授真值）.834、F（冻结 cold）.838、KEEP .791；F − 局部 +.036…+.041，D − 局部 +.032…+.036。信息在哪里（已按 CORRECTION 条目更正）：24/32 世界有某 UAV 合法看到迁移用户；网关持有该事实的世界 14 个（首次看见后 0–1 步），其余 10 个世界在快照上无任何看见者与网关处于同一 UAV–UAV 路由连通分量（声明的转发图只用保持的路由边，各链之间不连通；更宽的合法邻接未测）；触发（已知 ≥ 3 用户移动）只在 6/4 个世界触发，8 个世界决策端只知 1–2 个迁移用户从不重规划，8 个世界无人看见。测到的是：一种估计器（保留、不由缺席推断）、一种触发、一种转发图、一种决策方式，对一个有界规划器 F；F 不是信息价值上界，S_info 单侧；此共享干预关闭，本宿主上是否值得另买信息问题交轮边界 Pro 综合（唯一在手尺度：dev 上 F − 局部 ≈ .04）。不变：重部署参照（冷重规划 hold-out 比 KEEP +.068）、P1/P_relay^on、Root 对耦合宿主的排除、配方墙。**轮边界 Pro 综合已答（`replan-timing-second-boundary`，Pro 经连接器写入 Answer，ec2517c55）：更正采纳（0–1 步是 14 个到达世界的条件读数；三种限制——固定触发 K=3、无 >100 m 变化事实、看见 ≠ 看全簇——不混为“感知覆盖”；“合法”指本声明合同而非原生 actor 同信息；四个正世界与 +.078 保留）。排序：一次有界宽合法邻接比较 ＞ rest ＞ 缺席推断 ＞ 重复移动。第二槽已预声明 R3：与 R2 完全相同的合同，只改转发边规则——保持路由边之外，a、b 互相在对方 `_get_local_uavs` 可见列表中（双向条件，逐步重取）也可一跳转发；主读数 Δ_adj = 宽邻接共享 − R2 路由边共享（同一运行内复算 shared 并逐世界回归一致后才相减）；区间 < .03 → 第二槽休息 / .03–.05 报告不扩展 / ≥ .05 冻结后读既有 32 hold-out 再定是否保留宽图为普通通信参照；上限 1 工程小时 + .15 CPU-h；不改触发/估计器/事件法则，不挑世界，无学习臂。**R3 已读（2026-09-29，零 fit，0.02 CPU-h，SHA 9837cc689，tag r3_dev_a01；复算 shared 与 r2_dev_a01 在 32/32 世界精确一致）：Δ_adj = 宽邻接共享 − 路由边共享 = +.0047（配对 SD .020，3/32 为正，最大 +.111）→ 区间 < .03，拓扑扩展未交付购买裕量，第二槽休息。** 互相可见平均每步只多 0.85 条边；网关持有变化事实的世界 16（R2 为 14），新到达的两个链式世界正是两个大正值（1021 +.111、1026 +.033）；R2 十个未到达世界中 8 个在互相可见下仍未到达（不同链的 UAV 多在彼此 SINR 阈值之外）；8 个世界已知迁移用户 < 3 从不触发。**方向转 reserve**（三笔零 fit 购买合计 ≈ 0.17 CPU-h）：本宿主现有迁移事件的普通重部署参照（冷全量重规划 hold-out 比 KEEP +.068）、出发时序无余量（dev 网格 − warm ≤ .019）、合法信息参照（局部重规划落后全信息 ≈ .04，路由边或互见对的一跳转发各只补回 ≈ .005）。资产保留：事件宿主、四条普通规则、带真值守卫的合法信息臂、dev/hold-out 参照、三份运行记录。按预承诺不再买估计器/触发/搜索改动。第一槽：none without [DECIDE-B]（owner 的话，缺省不买）；两槽下一问题需 owner 的话或新的主线选题。D2 NOTES 三个 Answer 待 owner 粘贴。 |
 | `planning_policy_compression` | 有限合法历史与数据下，哪些近似教师区别值得保留，何时普通模仿足以提供完整联合用途？ | paused | Codex DM (independent session) | **已按owner要求收尾交接、停止新实验。** B03完整：O−S +12/+14、O−BC +14/+17、S−BC +2/+3任务，六fit/121.036s，完整核验并保留全部损失/负面分量；只支持单D条件性用途。B04当前实现/独立工程检查完成，4 tests通过且无实质工程问题；0科学fit/采集/评价、无原生操作，不启动。前瞻/代码保留待owner明确恢复；观察已停，无未读结果/Pro。[交接与恢复边界](candidates/planning_policy_compression/NOTES.md#2026-09-26--handoff-owner-hold-b03-published-and-b04-unlaunched)、[完整B03](candidates/planning_policy_compression/NOTES.md#2026-09-26--b03-complete-original-correspondence-helps-on-this-fixed-archive)、[原固定claim](candidates/planning_policy_compression/CLAIM_weighted_partial_compression.md)。 |
 | `controller_composition` | 普通成员策略的完整团队收益是否存在超出可加单策略质量的组合效应，怎样转成合算的协调方法？ | archived | Codex DM (independent session) | **B03完整，当前固定库50:50混合投入结束。** 两新区组M−F2@伙伴3为−.009834/−.049463 J、−.638688/−2.647500服务；对伙伴1/2也均为负，12项自身平均J/服务仍改善。原B02伙伴3正例保留，但正负取舍未在新训练/新面板条件重现；不作训练总体排名或一般协调否定。4fits、1.744M团队步、101.56min科学墙钟及781文件已完整核验保全。复用完整Pro已覆盖分支，比较复制、面板归因和独立候选后未选后继；无活动操作、未读结果或开放Pro。保留所有普通/混合响应资产。[完整结果与决定](candidates/controller_composition/NOTES.md#2026-09-25--b03-complete-partner3-gain-does-not-recur-both-new-mixed-responders-trail-f2)；[任务路由](#session-routing)。 |
@@ -1545,6 +1545,375 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 <a id="portfolio-review-20260929-registered-service-and-calibration"></a>
 
 [Complete independent review, Pro advice and Root selection](archive/2026-09-29/RESEARCH-registered-service-and-calibration.md#decision).
+
+## Portfolio review 2026-09-30 periodic-efficiency-and-fleet-control
+
+Conversation: reuse the current WSL/Jev portfolio conversation; its account address remains local.
+Standing: the selected A/B round is scientifically complete and independently diagnosed; both
+directions are reserve. Root has read both complete interpretations and the B saved-data result.
+This is the owner's continuing round-boundary innovator consultation, not a launch approval.
+The full question and sources below inherit the published `source_sha` supplied in the send,
+except where a separate frozen/evidence revision is explicitly named.
+
+### Question
+
+**Which worthwhile complete research questions should Root select next, and why?** Compare the
+two concrete proposals below with a stronger constructive alternative if one is worth its full
+cost. The choice is open: select either, both, a better independent question, or decline a proposal.
+Do not fill a DM quota or restrict the programme to the smallest editable repair. Explain what a
+successful answer teaches beyond improving the last recipe, and what adverse outcomes would change.
+An empirical boundary, useful ordinary capability, or learning method can each be valuable.
+Direct native learning is allowed when the mechanism and competent comparison justify it; a positive
+toy, exhaustive physics diagnosis, proved headroom or novelty verdict is not an entry gate.
+
+The prior Pro answer selected A/B before these results existed. It cannot answer the changed
+round-boundary investment question by itself. Your distinct role here is constructive synthesis:
+turn the retained capabilities and coupled-trajectory counterexamples into a consequential next
+question, challenge Root's priorities, and identify a stronger bridge or comparison when useful.
+The independent scientific reviews below already cover A/B interpretation and the two proposals;
+do not prescribe another generic critic ceremony. Return MATERIAL_DISSENT yes/no for any material
+objection to the proposed scope, explanation or investment. Advice does not grant resources or
+change the owner pause, other leads' work or frozen evidence.
+
+**What changed in this complete round.**
+
+1. **A: small residual variance did not make the learned variation dispensable.**
+   `uav_correction_compression` B01, scientific source `8da8e2df82963daf07c7e32234f7863c6e6f794e`,
+   result `e17f4fdf91bd9e81d6614b0d6af6c38ca0020aa9`: three fixed D checkpoints, their three
+   old-panel mean corrections C, and B40, on32fresh paired H256 worlds:224episodes/57344steps/0fits.
+   C-D mean J differences are[-.001649983,-.002117960,-.006793451], service differences
+   [-.109252930,-.143554688,-.404174805]. All six paired intervals are below zero, and all three
+   prospectively fixed exploratory retention rules fail. The first two loss intervals span the
+   tolerance; this does not prove all three true losses exceed that tolerance. D19702-B40 retains
+   J+.007748583[+.000185802,+.015311364], service+.529541016[+.012575037,+1.046506994], but loses
+   service in18/32worlds. Only this D has both positive intervals on this panel. Preserve all
+   checkpoints, tails, zero-service and gap witnesses; no new default was chosen.
+   The old mean is an MSE projection, not the J-optimal constant. This comparison neither identifies
+   message causality nor rules out better constants or cheaper varying representations. Removing
+   the residual actor saves21–22.5% of measured actor CPU but only2.66–3.76% of the instrumented
+   trace-inclusive loop, not measured flight energy. Root agrees with the independent diagnosis:
+   do not automatically buy tuning or another panel without a consequential deployment-cost question.
+
+2. **B: ordinary history-based age scheduling nearly solves fixed-window coverage, at a large
+   complete-service/travel cost; the periodic priority is active but adds no primary gain.**
+   `uav_registered_service` B01, scientific source `6f4c21ba5bd4774b91a1f3545099a9ac58b2b233`,
+   complete result/independent diagnosis `01e1b6e85b3b69a6403ad660879563845be9aa50`:
+   R/S2/T2/O/P×64fresh H256 worlds=320episodes/81920steps/0fits. F counts actual satisfied
+   user-window pairs for50registered users and four64-transition windows (maximum200).
+   The unit is the reset world, n64, conditional on realized node/load/deadlines; user/window and
+   decision counts are not independent sample sizes. Full actual user gaps and task-edge censoring
+   are retained. O is the competent lexicographic age comparator; P prioritizes new window coverage
+   before age/native ties. All actor history is inferred from legal quantized reports, known dynamics
+   and past execution; actual ACK/connection truth is evaluator-only.
+
+   | Arm | F | Native mean J | Served/tick | Path m/UAV | Mean episode maximum user gap |
+   | --- | ---: | ---: | ---: | ---: | ---: |
+   | R |132.046875|.465609|28.531250|2379.464|256.000|
+   | S2 |161.375000|.484883|30.324036|4236.932|250.313|
+   | T2 |162.578125|.486748|30.500000|4307.723|251.547|
+   | O |199.890625|.323299|18.651855|8532.221|52.547|
+   | P |199.875000|.327957|19.130127|8482.844|57.375|
+
+   Primary P-O F=-.015625, descriptive t95[-.109956,+.078706],3positive/3negative/58ties:
+   no supported F increment, no equivalence claim. P-O has useful secondary mean J+.004657787
+   and service+.478271484 with positive intervals, but quality-.006793378 and maximum gap
+   +4.828125ticks with adverse intervals. O-S2 F+38.515625 occurs in all64worlds, alongside
+   J-.161583916, service-11.672180176/tick and path+4295.288870m/UAV, also adverse in all64worlds.
+   Both O/P serve every user at least once; O/P still create5/8zero-service ticks while R/S2/T2
+   create none. F200 does not guarantee a64-tick continuous wait: P world29308027/user40 has
+   a103-tick closed gap. There is no agreed exchange rate among F, service, quality and travel,
+   no observed battery conversion of path, and no packet-delivery guarantee.
+
+   The independent reconstruction rules out an inactive intervention: P changes age-priority
+   ordering in388/4096visited-candidate rounds. At world29308063/report60, P trades two expiring
+   user opportunities at62/63 for more predicted contacts in the next window at64/65; O/P end
+   F199/197. This is a concrete active lookahead trade, not a lost model-window bit. Conversely,
+   in2395non-crossing P rounds all50model-window bits are already true;2335contain a saved visited
+   candidate with higher local J (mean local gap.106424228 over2395rounds). These are local
+   comparisons on P's trajectory, not achievable complete-policy improvements.
+
+   All320raws/178488494logical bytes and declared reader coverage were verified. O/P completed
+   model-window bits have zero errors here despite some user-tick errors; no actual truth was fed
+   back. All20480reports met deadlines, so censored-start recovery remains correctness-tested,
+   not empirically beneficial on this panel. T2's complete J/service increment over S2 is again
+   unresolved despite local positive choices and9.72×scheduler CPU; complete adverse worlds remain.
+   Retain O for this periodic contract, S2 for economical native service, and R/T2/P's distinct
+   tradeoffs. End unchanged P-over-O F-superiority investment, not the broader scheduling question.
+
+**Complete marginal cost and workflow limits.** A+B used544complete episodes/139264native
+steps/0newfits/0updates. Known A worker+reader cost122.670531CPU-s; B worker2152.542003CPU-s,
+abandoned lazy-NPZ support reader404.55CPU-s, and corrected complete reader354.02CPU-s: B total
+2911.112003CPU-s, round known3033.782534CPU-s. Engineering/tests/transfer and some support are
+not fully metered; inherited policy/predictor fits do not disappear. The stopped reader made no
+new environment episodes; its pure materialization change was independently checked and has source
+`de81cf9d8e337d9c2a2c628c95110ce7dd3b9f5d`, distinct from the fixed scientific source. A fully
+closed and reclaimed874639360allocated bytes while preserving required evidence; B only has
+terminal cleanup remaining at this question's preparation. Child observation stalled after technical
+completion and Root recovered the same worker result; dispatch and a queued wake were not proof of
+progress. This round changes real comparison choices; it does not prove the workflow is more efficient.
+
+**Proposal G — periodic service with release after the obligation is satisfied.**
+The B DM and independent result critic support one complete, unlaunched comparison, recorded
+precisely in `uav_registered_service/NOTES.md#b01-investment-decision`. Root considers it worthwhile
+but has not selected it. Contribution: whether ordinary periodic coverage can be retained with
+less native-service/motion cost, not a new architecture or a proved mechanism.
+
+- G uses O until a legal model-history gate is true. Settle reconstructable executed history and
+  the common private two-tick prefix; fix the gate before either search order. It is true only when
+  the entire upcoming executed block t+2..min(t+5,255) lies in one fully reconstructable64-tick
+  window and all50prefix model-window bits are already true. Then use exactly S2's native ranking;
+  otherwise use full O age/native ranking. Recompute each report, continue history settlement,
+  return to O on crossing blocks/new unfilled windows, retain censored-history and charged whole-team
+  deadline fallback. No actual ACK, extra search, command, mask, report or relaxed deadline.
+- Compare G/O/S2 on64fresh paired H256 worlds:192episodes/49152steps/0fits/0updates. Proposed
+  seeds29309000..29309063 remain unexposed; freeze/recheck them and balanced arm order before launch.
+  O is the periodic reference and S2 the ordinary service reference. No claim requires re-running
+  every previous R/T2/P package; keep their limits and adverse evidence. The prospective vector is
+  full F, J/service, quality, travel, continuous/censored gaps, zero-service tails, model errors,
+  releases and deadlines—not an invented post-result utility or automatic preservation verdict.
+- Max1425408candidate requests/5657088candidate reductions/1316736geometry snapshots before cache
+  reuse, plus49152history/prefix/terminal reductions and unchanged C/native work. Historical worker
+  anchor~589.4CPU-s; full reader, engineering and new gate checks add unmeasured cost. This is not
+  a hard time cutoff. Change only the lawful gate/ranking and its complete reader, with the listed
+  boundary/fallback checks; no prerequisite diagnostic panel or suffix replay.
+- Predicted release exposure and local-score changes must survive full trajectories. G may leave
+  positions valuable for the next window, lengthen continuous gaps despite unchanged F, or release
+  on false model completion on its different trajectory. If coverage/gaps worsen, retain the
+  tradeoff; if effects are unresolved, do not call that preservation or automatically add worlds.
+  Is this substantial enough to buy, or does another scheduling/learning question offer more value?
+
+**Proposal N — ordinary transmitter management and the conditional use of frozen N4/N8 assets.**
+The independent selection reviewer recommended this before B's final result, then corrected its
+information-contract reasoning after Root's challenge. Complete recommendation and correction
+are preserved in `### Answer`. Root accepts the correction but asks you to challenge the investment.
+
+- Motivating native evidence: frozen H6 beats its contemporaneous SET at N4/c10 and N8/c10,
+  while both absolute service levels deteriorate with the larger fleet. H6 mean SINR-ineligible
+  users rises about10.83→20.35; high-capacity truncation is small. This does not identify a count
+  representation failure. Separate N5 radio B01 E-all-on gives J+.119393/service+7.78125, but
+  world29305038 loses J-.055369/service-5.710938. A local mask search containing all-on still has
+  contrary complete trajectories. These different contracts are not a pooled policy ranking.
+- Candidate: S1 static50users, N4/N8 each capacity10, H500,16new common worlds with independent
+  user RNG and eight-UAV initialization prefixes. At each N compare H6/all-on, H6/E, SET/all-on,
+  SET/E and ordinary C/E:160episodes/80000steps/0newfits. Preserve checkpoint/normalizer, recurrent
+  state and old motion semantics; no mixed-N training, churn, old-confirmation reopening or skill
+  mechanism claim. C/E tests useful assets beyond a competent ordinary alternative, while SET is
+  the contemporaneous learned reference. Challenge C/E's adequacy rather than assuming it.
+- E enumerates15/255nonempty masks only at existing ten-step central decision times. Under a
+  one-position score this is648000mask requests across the three E programs; further lookahead
+  multiplies cost. Its exact score time, primitive-action/mask sequencing and hold semantics still
+  need to be fixed prospectively. A one-step position prediction is not a forecast of all later
+  low-level actions. Do not silently copy N5/B03's paid latency/clock contract.
+- The original global state is not critic-only: frozen evaluation calls `agent.step(state,obs)`;
+  H6's coordinator embeds it at k10 and SET's held central actor snapshot consumes the same state.
+  The original design expressly grants the same global state/joint observation at these clocks.
+  E can use those fields at those clocks, not every-step fresh coordinates. Its physical model,
+  enumeration and mute actuator remain new common control resources. Both learned assets are
+  untrained on the new silent-control feedback distribution. Check current asset availability/hashes
+  before execution; it has not yet been verified for this proposal.
+- N4→N8 also changes total capacity40→80, vehicles and closed-loop movement: no equal-resource,
+  pure-N effect or causal fraction of an interference loss. Read complete increments within each
+  configuration and their interaction. A positive answer can change the ordinary capability
+  reference or retain a conditional frozen asset, not establish training-population superiority.
+  Old80k-step reading/worker throughput is an anchor only (354.66wall-s/1437.16CPU-s); mask
+  integration, N8 cost, asset recovery and full saved-data reading are additional. Do not call
+  this cheaper merely because it has zero fits.
+
+**Other opportunities and scope.** A's cheaper varying representation remains open but presently
+lacks a consequential cost target. Longer lookahead or learned continuation value is a possible
+direct research question; accurate four-step forecasts and full-trajectory losses alone do not
+identify short-sightedness. The old S7 value study used1fit/480k steps and L-P QoS-.016488/J-55.389;
+this does not refute an S1 learning proposal. A new contribution should name its useful learning
+problem, source bridge, comparator and plausible complete cost, rather than automatically migrate
+that recipe. Search existing evidence before novelty claims; no novelty claim is made for ordinary
+wireless masking or coverage-gated control. Three literature stores and July/external-review history
+have partial, explicitly bounded review coverage; a missing title is not evidence of novelty.
+
+Claude is a peer and owns its current coupled-host work, including joint skills and lawful-sensing
+follow-ons; do not take it over or force its independent batch into this round. FSD/PPC pauses,
+G33 freeze and Milan data dependency remain. Completed archived DMs are not restored for new work.
+Root assigns selected successor questions to new native DMs; actual node resource admission applies,
+with no replacement DM quota or per-fit allowance. Ending a recipe is not ending the research loop.
+
+Please return: (i) what the complete evidence strengthens/weakens/leaves open; (ii) the next selected
+questions in priority order, their intended contribution and strongest ordinary alternative;
+(iii) a bounded full comparison with plausible fit and dominant non-fit cost, predictions and
+adverse-result implications; (iv) what to decline now and a concrete reason to revisit it; and
+(v) any material dissent or decision-critical unread source. Prefer a substantive question over
+an indefinite sequence of tiny repairs. Do not invent an adoption tolerance, universal CPU cutoff,
+owner approval, candidate count or another required review round.
+
+### Context and source boundaries
+
+- **Current owner/governance at source_sha:** `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8;
+  the owner-requested continuing research loop under Current research plan in this RESEARCH file.
+  These authorize Root's scientific choice and retain independent review, evidence and resource rules.
+- **Applicable current methods at source_sha:** `.agents/skills/hmasd-scientific-tools/SKILL.md`,
+  Choose the question; Design the comparison and decision exposure; Update the working explanation;
+  Simple-model and literature bridges; Comparators and MARL information; Statistics; Cost and exposure.
+  `.agents/skills/hmasd-portfolio-task/SKILL.md`, Steps and Boundaries. They are methods under the
+  constitution, not new authority. The relevant shared understanding is RESEARCH topics2/3/5/6/8:
+  legal model history can be useful, joint trajectory consequences differ from local improvements,
+  small residual variation can matter, and satisfied windows do not bound continuous waits.
+- **A evidence:** at `e17f4fdf91bd9e81d6614b0d6af6c38ca0020aa9`,
+  `docs/research/candidates/uav_correction_compression/NOTES.md#b01-complete-reading` and
+  `runs/uav_correction_compression/b01_mean_deployment_a02/summary.json`; the corresponding source
+  and frozen retention comparison are in the same notebook. Final closure at `02ddc5c4d`.
+- **B complete result and G proposal:** at `01e1b6e85b3b69a6403ad660879563845be9aa50`,
+  `docs/research/candidates/uav_registered_service/NOTES.md#b01-complete-reading` and
+  `#b01-investment-decision`, and `runs/uav_registered_service/b01_periodic_service_a01/`
+  `summary.json`, `reading.json`, `config.json`. The original scientific source is
+  `6f4c21ba5bd4774b91a1f3545099a9ac58b2b233`; the materialization-only reader is
+  `de81cf9d8e337d9c2a2c628c95110ce7dd3b9f5d`. Read full contrast/tail and critic sections;
+  a compact summary is not independent raw reconstruction. Bulk raw is on the configured node
+  and may be unavailable to your connector; state that limit rather than claiming to inspect it.
+- **Prior A/B advice:** at `e6d5204554527c1e40316678f41579f8fbe94096`,
+  `docs/research/archive/2026-09-29/RESEARCH-registered-service-and-calibration.md`, full Pro Answer
+  and Decision. It is historical advice on the old choice, not current governance or a command
+  to buy a third candidate. The present new evidence and current methods control this question.
+- **N's frozen evidence and actual rights:** evaluation source
+  `c770220d3abc4e32a9e80347dea87bdea88080e8`,
+  `runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/summary.json`,
+  `experiments/candidates/load_critical_member_generalization/load_probe/probe.py` (`evaluate_cell`),
+  `experiments/candidates/agent_count_generalization/{adapter.py,models.py}`,
+  `hmasd/agent.py` (`step`, `_batched_assign_skills`, `_central_actor_input`), and
+  `hmasd/networks.py` (`assign_and_value_batch`, `SkillDiscoverer.forward`). Original training
+  source `89486d32ea569728f39d6e21b53f8a7c8854e74c`,
+  `docs/research/candidates/agent_count_generalization/NOTES.md`, original central-state comparator
+  design and B03, plus `runs/agent_count_generalization/s1_action_law_b03_{h6_clip_s942201,set_clip_s943201}/summary.json`.
+  Relevant execution methods have matching ASTs across training/evaluation sources, as the independent
+  reviewer checked. This proves the named input route, not remote checkpoint availability or a new E result.
+- **Radio capability and contrary world:** at `4d5ccefe6c90dbc6c132bcc71ffe6dd73535ae47`,
+  `runs/uav_radio_activation/b01_delayed_masks_a01/summary.json` and the corresponding NOTES B01
+  reading. Retained S2/T2 source `2bff85091` is separately frozen; B's complete fresh comparison
+  supplies the relevant new ordinary reference. Do not compare cross-contract scores as paired data.
+- **Rejected automatic value-learning migration:** at `23748959f2ab8a1ce0f29f7142e8204c8f6b0bbe`,
+  `runs/uav_cooperative_planning/b02_transit_value_a01/summary.json` and its NOTES result/decision.
+  This is adverse S7 evidence, not a general theorem about S1 learning or longer lookahead.
+- **Limited primary bridge already read:** MARL-0438, formal library
+  `/home/fires/projects/Inst-sci/papers/MyLib/{json,pdf}/MARL-0438.*`, §2.1–2.3/PDFpp3–4,
+  uses empirical mean-field/weak influence assumptions; Root also read these passages. They do not
+  give a guarantee for finite-N summed interference/discrete assignment, and are not the nearest
+  wireless-mask novelty reference. The reviewer additionally read `iclr-2023-virtual-11586` /
+  arXiv2303.03955, PDFpp1–5, at
+  `/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2023/iclr-2023-virtual-11586/arxiv-2303.03955.pdf`:
+  perfect dynamics/longer value expansion can have diminishing returns in its continuous-control
+  experiments. That is a cost caution, not UAV evidence. These host-local files may be inaccessible
+  to Pro; no next-study selection depends on pretending they were remotely verified.
+
+Read the pinned question and these Context sources before answering. Current owner/constitution
+govern; skills are applicable methods; named frozen/historical records retain their bounded meaning.
+These current instructions replace conflicting old chat instructions for this question. Do not use
+chat memory or moving main as a substitute for pinned reasoning inputs. Cite sources actually used
+for consequential claims and identify decision-critical unread sources. Do not train or launch.
+
+Write only the empty `### Pro Answer` below in this question, on repository
+`CartmanFatass/My-paper-code`, branch `main`, target `docs/research/RESEARCH.md`. Fetch the latest
+target blob and use its actual SHA for writing; preserve the question, independent Answer,
+Decision and all other bytes. Stop on overlapping edits. Return the actual commit on success;
+on write failure return the COMPLETE answer in chat, not just a receipt, hash or link.
+
+### Answer
+
+Independent selection reviewer `/root/next_question_preparation`, registered ResearchCritic,
+separate context (`fork_turns=none`), returned the following recommendation before B's final
+reading. It was given source/result summaries and discloses that this is not a blind review.
+Root later challenged the execution-information premise and causal contribution wording;
+the complete focused correction follows. The B result/G review is preserved in the pinned B
+notebook and summarized above; A's complete review remains in its pinned notebook. These are
+reused applicable reviews, not votes or new observations.
+
+建议只保留 **一个优先候选**：**无线静默权能否改变固定机队数量增加后的完整服务代价？** 本轮不推荐多步搜索／续值学习作为第二题。
+
+未继承 Root/DM 对话；任务书和中途消息已提供结果摘要，因此这是独立上下文审查，但不是盲审。
+
+**候选的依据与贡献**
+
+旧人数研究留下了真实能力，也留下了具体物理问题。冻结 H6 在 N4/c10、N8/c10 均胜同批 SET，但两者绝对服务随 N 增大下降；H6 的 SINR 不合格用户均值由约 **10.83 增至20.35**，高容量时剩余容量截断已很小。这不能直接归因于人数表示或训练覆盖。原生 summary，source `c770220d3`：`runs/load_critical_member_generalization/s1_load_critical_member_b01_20260923/summary.json`。
+
+另一方面，无线 B01 的普通 E−all-on 已得到 **J +.119393、服务 +7.78125人/步**，同时保留世界29305038的 **J −.055369、服务 −5.710938**。所以静默是已测得的能力，但即时搜索包含 all-on 并不保证完整轨迹占优。原生 summary，source `4d5ccefe6`：`runs/uav_radio_activation/b01_delayed_masks_a01/summary.json`。
+
+贡献句可以是：
+
+> 在明确的信息和无线控制合同下，量化已有控制器的机队规模代价有多少可由普通发射管理改变，并判断冻结学习资产是否仍具有超过普通控制的完整用途。
+
+这是**机队配置与控制权的经验问题**，不是重新确认旧 N 泛化、混合人数训练、回合内 churn 或技能机制。
+
+**最小完整比较**
+
+建议准备以下一个完整包，交 Root 取舍：
+
+| 项目 | 候选设计 |
+|---|---|
+| 物理条件 | S1静态50用户，N4与N8，均c10，H500；16个新共同世界，独立用户流与八机初始位置前缀 |
+| 每个N的程序 | 冻结H6/all-on、H6/E；冻结SET/all-on、SET/E；普通C/E |
+| E | 普通全非空mask枚举：N4为15种、N8为255种；同一公开评分和确定性规则 |
+| 信息与动作 | 沿旧CountAdapter中央快照合同，所有程序均获同样信息及静默权；E统一每10步决策。原运动权、冻结参数、normalizer、GRU／技能状态语义保留 |
+| 主读数 | 完整服务人数的mask增量及其N交互；同时读native J、质量、路径、低服务尾部、实际静默与成本 |
+
+C/E是普通完整用途参照；SET是同批普通学习及归因参照，**不能只胜旧SET便宣称实用优势**。E的评分时点、决策顺序和保持语义还须在具体设计中钉住，不能把N5/B03的时钟直接冒充N8合同。
+
+这里N4→N8同时增加车辆和总容量40→80，**不是纯N效应或等资源比较**。中央状态本已含用户坐标和fleet positions；不需要单方追加注册地图。也不能把这个中央合同包装成B03已经计价的延迟2kbit/s链路。源码依据：`experiments/candidates/agent_count_generalization/adapter.py`，`envs/pettingzoo/uav_radio.py`。
+
+不同结果会改变实际选择：
+
+- **E改善较大N的完整服务，C/E已足够强：**保留普通发射管理，未来人数研究据此更换能力参照；不自动购买人数训练。
+- **H6/E仍超过C/E且尾部可接受：**保留这份冻结学习资产的条件用途；没有新增训练总体或技能因果结论。
+- **即时评分改善而全程不改善，或新增尾部损失：**拒绝该部署包；不把结果改写为“需要更大网络／更多训练”。
+- **规模代价仍在：**限制的是此次控制包的补救能力，不能据此锁定表示缺陷。
+
+**成本与可行性**
+
+上述规模为 **0新fits、160完整episodes、80,000原生步**；继承的训练成本不归零。若E每10步只评分一个预测位置，三种E程序共约 **648,000个mask评分**；加入多步预测须显式乘入成本，不能免费扩展。
+
+历史锚点：旧80k步评价耗354.66s墙钟、1437.16 CPU-s；无线B01的192回合另耗188.10 runner CPU-s，完整reader约984.61 CPU-s。节点、线程和程序不同，不能据此承诺新墙钟。主要工程工作是N参数化、冻结资产接入、mask对真实观测／回报的反馈和完整读器。checkpoint当前可达性、N8运行成本及完整实现工时本次未验证；没有把它写成可立即launch的批次。
+
+**本轮不买的两个方向**
+
+- 多步／续值学习仍可成为合法直接学习问题，但目前“准确四步预测仍有全程损失”没有单独识别短视原因。既有S7离线值学习已付 **1fit／480k步**，L−P为 **QoS −.016488、J −55.389**；这不否定S1续值学习，却使原样迁移缺乏足够强的新投入理由。原生输出：`runs/uav_cooperative_planning/b02_transit_value_a01/summary.json`。
+- 不从B的暂报推出P优势，也不提出ACK、窗口或阈值后继。暂报普通O已接近周期覆盖上限且代价显著，下一判断应由完整B读取决定；本次未审计B raw。
+
+三本地库及相关July／external-review已做针对性检索，复用了归档覆盖，没有遍历全部历史，也**不主张新颖性**。实际读过的负载原文包括：**MARL-0438** §2.1–2.3，PDF pp.3–4，明确采用经验分布与弱相互作用假设；这不为当前求和干扰、有限N、离散连接分配提供泛化保证。JSON/PDF：`/home/fires/projects/Inst-sci/papers/MyLib/{json,pdf}/MARL-0438.*`。另读 **iclr-2023-virtual-11586／2303.03955** pp.1–5：其连续控制实验显示完美动力学与更长值展开也可收益递减；这里只作为成本警示，不是UAV否定证据。PDF：`/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2023/iclr-2023-virtual-11586/arxiv-2303.03955.pdf`。
+
+我核对了上述原生compact的正反结果、成本、source身份和关键接口；未重复完整轨迹重建或验证远端checkpoint。未修改文件、运行实验或发送Pro。
+
+**MATERIAL_DISSENT: no。** Root尚未选择冲突投资；建议是转向上述独立问题的具体比较准备，同时保留旧停止决定、原claim与全部反例。
+
+**Focused correction after Root's challenge (complete substantive response; source paths retained).**
+
+1. **核实后不是 critic-only，但我此前仅凭 CountAdapter 推断执行权限，依据不足。**
+
+最短源码链如下；读取的是冻结评价提交 `c770220d3`，相关执行方法与训练提交 `89486d32e` 的 AST 一致：
+
+- **共同入口：**`CountAdapter.reset/step` → `experiments/candidates/load_critical_member_generalization/load_probe/probe.py:545` 的 `evaluate_cell` 取 `state/next_state` → `agent.step(state, observations, …)`。
+- **H6：**`hmasd/agent.py:2168` 的 `_batched_assign_skills` 在 `step % k == 0` 调用协调器 → `hmasd/networks.py:795` 的 `assign_and_value_batch` 将全局 state 编入决策特征，生成团队和个体技能 → 低层 actor 以本地观测、个体技能生成动作。全局 state 确实进入执行决策。
+- **SET：**`step` 在相同决策点刷新中央快照 → `_central_actor_input` → `hmasd/networks.py:1801` 的 `SkillDiscoverer.forward` → `experiments/candidates/agent_count_generalization/models.py:128` 的 `SetActorBase.forward`。后者明确消费快照 state；`StateSetEncoder` 保留全部50名用户坐标。冻结配置为 `use_central_snapshot_in_flat_actor=True`、`k=10`。
+
+训练提交所含 `docs/research/candidates/agent_count_generalization/NOTES.md:123` 前瞻设计也明确约定：SET 与 H6 协调器每十步获得相同合法全局状态及联合观测；H6 低层仍只接收本地观测和技能。
+
+因此建议改写为：**E 若严格在既有十步决策点读取相同字段，可以沿用已有坐标信息权限；这不包括每步刷新全局信息。** E 的物理模型、枚举计算和静默动作仍是新增控制包，须统一赋权并计成本。旧资产接受过上述坐标信息训练，**没有接受静默控制及其反馈分布的训练**；直接接入只能评价冻结资产的条件用途。旧 N 证据及其含义不变。本次未重验远端 checkpoint，也未运行评价。
+
+2. **收紧候选贡献，删除“恢复比例”的纯因果含义。**
+
+接受修正：无线 mask 控制是成熟能力；MARL-0438 只支持平均场假设边界，不能充当最接近的无线方法或新颖性依据。候选问题应限定为：
+
+> 在指定 N4／N8 配置、信息时钟和完整成本下，加入普通发射管理是否改善这些冻结控制器的用途；学习资产是否仍超过普通 C/E。
+
+报告各 N 的完整轨迹增量及其交互即可。它们不识别“人数损失中由干扰造成的比例”：N 同时改变车辆、容量和闭环运动，静默还会改变连接、观测及后续动作。建议 **revise** 合同比较与贡献表述，不新增候选或投资。
+
+**MATERIAL_DISSENT: no。** 上述修正接受 Root 的具体异议；源码支持已有中央执行信息权限，不支持更宽的信息时钟或因果归因。
+
+Root accepts this correction. The earlier broad contribution sentence is historical reviewer text,
+superseded by the narrower proposal N above. Root personally read the original central-state design
+and the named state-consuming path; a state field alone would not have established execution rights.
+The G proposal benefits from B's later complete independent diagnosis; the reviewer's earlier
+declining a B continuation was based on partial B evidence and does not overrule that new reading.
+
+### Pro Answer
+
+### Decision
+
+Pending complete Pro advice. No proposal in this review has been selected or launched.
 
 ## Current research plan
 
