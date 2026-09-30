@@ -1335,7 +1335,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 | `uav_service_age` | Can finite experience reduce cumulative native service age beyond competent lawful ordinary control under the same delayed commitment? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; retain W/M, end unchanged selector investment.** Source d4430e619, compact result0b358981a:1fit/960episodes/245760steps; full frozen reader and 2048 updates per network replayed. L1−M mean age+.269054[+.069315,+.468793], L1−W+.229916; own-initialization gain−.273965 is retained but does not establish training-population or foresight superiority. W−O age−1.086826 with service/travel gains and worse user tails; retain both W/M with their measured compute tradeoff. All choices executed, no deadline misses. No active producer, unread result/advice or selected successor; wider learning question stays open. [Complete evidence/disposition](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup complete:822185984bytes reclaimed](candidates/uav_service_age/NOTES.md#b01-final-cleanup), [routing](#session-routing). |
 | `uav_fleet_adaptation` | Can experience under transmitter management develop useful native N8 learned control beyond ordinary N8 continuation and C_N/E? | exploring | Codex DM (native child) | **Selected: two H6 warm-start continuations, E-active versus all-on training.**512 H500 episodes each; I/E, A/E, F/E and C/E on 32 fresh common worlds; 576,000 native steps. Primary F/E−A/E plus own-parent and competent complete-use comparisons. Conditional exploration from one selected parent, not a diagnosed feedback defect or exact training resume. [Selection/full independent review](archive/2026-09-30/RESEARCH-parallel-allocation.md#root-decision); [routing](#session-routing). |
 | `uav_user_waiting` | Can causal accumulated per-user burden improve worst-user mean waiting beyond O while retaining a useful aggregate-service tradeoff against W/M? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; retain conditional R beside O/W/M, no selected next run.** Source86ae782ca, result0b9e2fee4:64 common H256 worlds/256episodes/65,536steps/0fits. R−O worst-user mean age−1.889343[−3.013856,−.764831],45 wins/19 losses; service+2.873962 in all64, aggregate age−.066434 unresolved. Temporal costs remain: age p95+2.499219, mean per-user max gap+3.387500, quality lower and transmitter exposure higher. R improves the primary against W/M while losing aggregate age/service. Correct history during a90-tick closed wait rejects a missing-age repair for that witness; no memory-causality or protection guarantee. No live producer, unread result/advice or pending approval. Re-entry needs a concrete complete temporal-continuity comparison; cleanup reclaimed818479104 allocated bytes, no blocker. [Evidence/disposition](candidates/uav_user_waiting/NOTES.md#b01-complete-reading), [cleanup](candidates/uav_user_waiting/NOTES.md#b01-final-cleanup); [routing](#session-routing). |
-| `uav_parent_adaptation` | Can a fixed bounded adaptation program develop independently generated, unscreened decentralized parents beyond credible learned constant calibration? | exploring | Codex DM (native child) | **B01 complete; question remains active.** All three unscreened roots retained: K and D each improve own-parent observed mean J/service, while D−K mean J +.001452 [−.004054,+.006957] remains unresolved. Parent-generation losses and severe D world-level losses persist; no default or causal claim.12fits/1,671,168 steps; all24 checkpoints/raw evidence retained. Next recommendation: ordinary full-policy U continuation from these three parents,3fits/491,520 new steps with fresh P/U/K/D panels; conditional reuse, not accepted new exposure. [Full result/independent disposition](candidates/uav_parent_adaptation/NOTES.md#b01-complete-reading); [compact evidence](../../runs/uav_parent_adaptation/b01_unscreened_a01/result.json); [routing](#session-routing). |
+| `uav_parent_adaptation` | Can further learning develop unscreened decentralized parents, and when are bounded corrections useful against ordinary full-policy continuation? | exploring | Codex DM (native child) | **B01 complete; three-fit U comparison selected.** K/D improve own-parent observed mean J/service across all three unscreened roots, but D−K remains unresolved and severe world losses persist. New U uses all retained P; fresh P/U/K/D panels,3fits/491,520 steps. Conditional full-program comparison, not freezing causality or new parent-generation replication. [Result](candidates/uav_parent_adaptation/NOTES.md#b01-complete-reading); [investment/advice](archive/2026-09-30/RESEARCH-parent-adaptation-development.md#decision); [routing](#session-routing). |
 | `uav_correction_compression` | Can useful learned residual corrections be deployed as fixed calibrations while preserving complete native behavior and reducing online work? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; no mean replacement.** Published result e17f4fdf9:224 episodes/57344 steps/0fits. All three C−D J/service intervals are below zero and all frozen retention rules fail; D19702 retains a positive conditional B40 increment. Keep D/B40/all adverse outcomes, choose no new default or automatic tuning/panel. Nearly constant magnitude does not imply dispensable variation; optimal constants/message causality remain open. Full actor CPU saves21–22.5%, trace-inclusive loop only2.7–3.8%. Re-entry needs a consequential deployment-cost question and complete comparison. [Evidence/disposition](candidates/uav_correction_compression/NOTES.md#b01-complete-reading); [closure complete](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup), no live work or cleanup blocker. [Routing](#session-routing). |
 | `uav_registered_service` | Can lawful model-history scheduling improve registered users' periodic native link opportunities at a worthwhile complete-service and execution cost? | reserve | Codex DM (native child) | **B02 complete/read/independently diagnosed; retain conditional G, select no further run.** Primary a02, source8ab72e5e2:192episodes/49152steps/0fits, all raw and full declared reader complete. G-O J+.080997, service+5.734924/tick, path-1599.590m/UAV, but F-.109375 (7 extra missed obligations in6worlds) and maximum gap+21.609ticks. Every world activates; no deadline failures. Two terminal false model-window completions do not explain five other lost obligations. Reject loss-free preservation without inventing an adoption tolerance; keep G for service/travel tradeoff, O for stronger coverage/refresh, S2 for native efficiency. Original a01 failure/102raws retained; cumulative75020steps and1130.943 measured worker/reader CPU seconds, no runtime fix established. B01 O capability, P-O unresolved superiority and adverse gaps stand. Reserve with no producer, unread result or selected successor; re-entry needs a consequential complete service-contract comparison chosen by Root. [Complete B02 evidence and disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading), [closure complete](candidates/uav_registered_service/NOTES.md#b02-final-cleanup):1,619,988,480 allocated bytes reclaimed, no cleanup blocker; [failure/recovery](candidates/uav_registered_service/NOTES.md#b02-recovery-decision), [B01 evidence](candidates/uav_registered_service/NOTES.md#b01-complete-reading), [routing](#session-routing). |
 | `uav_fleet_transmission` | Can ordinary transmitter management alter N4/N8 native service and preserve useful frozen learning assets beside a competent full-team physical controller? | reserve | Codex DM (native child) | **B01 complete/read; no selected successor.**160episodes/80000steps/0newfits, full reader and independent diagnosis. N8 E−all improves H6/SET J by+.096344/+.254920 and service by+6.235125/+15.029375 in all16worlds; N4 H6 loses−.020050J/−1.474375service. C/E has best mean J at both N; preserve N4 H6/all service tradeoff, all losses and fixed two-asset scope. Retain conditional N8 management and ordinary C/E; end unchanged screen expansion, no identified learning repair, pure-N or interference-fraction claim. Evidence `6b51a962e`, source `a2f62e613`; raw retained, net3377176576allocated bytes reclaimed, no active producer/advice. [Complete reading and disposition](candidates/uav_fleet_transmission/NOTES.md#b01-complete-reading). |
@@ -1686,30 +1686,37 @@ engineering review, publish exact inputs and pass actual-node admission before e
 The applicable completed scientific review is reused; no duplicate selection pass or Pro wait
 is added. They own full result reading, independent diagnosis, publication and cleanup. Their
 first actual turns were verified as gpt-6-astra/max. The existing parent DM retains its question
-through the B01 result and next-investment choice; no additional parent study is implied here.
+through the B01 result and selected ordinary U continuation comparison described below.
 Planner amortization is deferred because a concrete useful retention-versus-cost study is not
 yet selected; no fourth question is invented to fill capacity. Roll forward worthwhile work
 at each boundary while preserving all pauses, ownership and live-operation bindings.
 
-### Parent adaptation: completed B01 and next development choice
+### Parent adaptation: develop the retained parents with ordinary continuation
 
 B01 is fully read and independently diagnosed: all three unscreened parents were retained,
 and both K and D improve their own parent's observed mean J/service. D−K is mixed and unresolved;
-parent generation itself loses service in two roots, and D has a severe individual-world loss.
-Retain both conditional capabilities without a default, equivalence or state-dependence claim.
-[Full result and recommendation](candidates/uav_parent_adaptation/NOTES.md#b01-independent-review-and-next-investment)
-preserve the original outcomes, full costs and source identities. The [completed B01 plan](archive/2026-09-30/RESEARCH-parent-adaptation-b01-plan.md)
-is historical; no extension of its 12-fit batch is selected.
+parent generation loses service in two roots, and D has a severe individual-world loss.
+Retain these conditional capabilities without a default, equivalence or state-dependence claim.
+The [full result](candidates/uav_parent_adaptation/NOTES.md#b01-independent-review-and-next-investment)
+and [completed B01 plan](archive/2026-09-30/RESEARCH-parent-adaptation-b01-plan.md) retain all outcomes and costs.
 
-The existing DM continues the question and prepares the concrete ordinary full-policy
-continuation U proposed by its independent critic: three 512-episode fits from all three P,
-then fresh P/U/K/D panels on 32 worlds per lineage. Primary U−D plus own-parent, K, service,
-tails and complete cost would compare finite learning programs, not isolate freezing.
-Prospective new exposure is 491,520 native steps / 3 fits; the 553–586 worker-CPU-second
-anchor excludes reader and engineering work. B02/B04's damaging ordinary continuations
-remain contrary evidence. The [current Pro innovator review](#portfolio-review-2026-09-30-parent-adaptation-development)
-can change this next-investment choice; no U result operation is yet accepted. The two
-new independent DMs continue their selected comparisons while that advice is pending.
+**Selected next investment: ordinary full-policy U continuation from the same three P.**
+The [complete independent review, 6 Pro advice and Root decision](archive/2026-09-30/RESEARCH-parent-adaptation-development.md#decision)
+support three 512-episode fits, then frozen P/U/K/D on 32 fresh common worlds per lineage.
+Primary U−D plus U−P/U−K, service, quality, tails and complete cost compares useful finite
+learning programs. U starts with the complete P function, fresh joint Adam, trainable variance
+and original joint PPO; it uses the existing legal geometry-only 40-byte contract and its own
+histories under matched exogenous training streams. This does not isolate freezing or assume
+U contains D's extra residual architecture. Earlier damaging continuations lower expectations.
+
+New exposure is 3 fits / 491,520 native steps / 3,072 joint Adam calls; the 553–586 worker-CPU-second
+historical anchor excludes engineering and reading. New world uncertainty is conditional on the
+retained endpoints; report lineage differences separately, not 96 training seeds or three new
+parent-generation replications. Preserve every fixed endpoint and adverse or missing outcome;
+no automatic extension, parameter search or added attribution arm follows. The existing DM owns
+implementation, independent engineering checks, exact publication, node admission, complete reading
+and result publication. Its source preparation is published at `50ce0c343`; no U launch is claimed
+by this selection. Fleet adaptation and user waiting continue independently.
 
 ### Retained completed-round capabilities
 
@@ -1801,153 +1808,10 @@ FSD/PPC暂停、G33冻结、Milan数据依赖及不复用完整收尾旧DM均保
 <a id="portfolio-review-2026-09-30-owner-deep-report-and-next-question"></a>
 [Completed owner-report review, full Pro advice, focused independent assessment and Root selection](archive/2026-09-30/RESEARCH-owner-deep-report-next-question.md#decision).
 
-## Portfolio review 2026-09-30 parent-adaptation-development
-
-Conversation: existing Jev Portfolio conversation; its URL remains private to local operation state.
-Question: Which next bounded comparison most usefully develops the observed parent-adaptation capability now? Assess the concrete ordinary full-policy continuation U proposal against a materially stronger alternative or a reasoned stop. Work as an innovator: use the positive capabilities and the contrary evidence to propose a consequential next observation, not an automatic repair or another asset ranking.
-
-### Owner scope and decision
-
-The owner requested a continuing result → synthesis/Pro innovator → next-iteration loop and, most recently, normally 3–4 substantive scientific DMs in parallel. Root had let allocation become serial and has corrected that. Three owners now have concrete work: the current parent-adaptation DM owns this result/next-investment boundary; two newly selected DMs independently implement native N8 learning under deterministic transmission management and individual-user waiting protection. Neither new study waits for this answer. A fourth is optional only if there is a distinct worthwhile question; do not manufacture variants to fill a slot.
-
-Root selects project investment under constitution §2; DMs own their scientific question, implementation, reading and publication. Your answer advises this live choice and can challenge the proposal. It does not grant execution permission or impose an approval round. Claude is paused for quota and retains ownership of its directions; FSD/PPC pause, G33 freeze and Milan-data dependency remain. Do not take over or reactivate them.
-
-This is an exploratory personal UAV/MARL project. Useful ordinary control, finite learning capability and empirical understanding are legitimate contributions. A new architecture or positive result is not owed. Conversely, a completed batch or failure to establish a preferred method does not settle investment in its broader question.
-
-### New complete evidence and current explanation
-
-B01 source `930a0789dad4adbba67592c5fff07802a3dd40c2` generated three independent, unscreened C→B parents P, then trained K and D from each. C and B each used 512 H256 episodes; K and D each used 512. All parents and fixed endpoints were retained without competence filtering, replacement seeds, checkpoint selection or extension. I/P/K/D were evaluated on 32 fresh common worlds per lineage, with independent panels across lineages. Exact completed cost: 12 fits, 6,144 training plus 384 evaluation episodes, 1,671,168 native steps and 18,432 Adam calls.
-
-The full saved-data reader passed all 384 trajectories at reader source `f55937874a42c99703de0da9deb99901d9ee3dca`; two preceding reader-only FP32/FP64 predicate/composition defects were reproduced and repaired with independent engineering review, adding no native or optimizer exposure. The compact complete result and notebook are published from `8feee3006` onward. Source/lineage/frozen-parent/own-history/density/geometry/transport/update bindings passed. Independent result diagnosis is complete and reproduced the consequential original results before considering the interpretation; its full answer is preserved below.
-
-| Lineage | I J / service | P J / service | K J / service | D J / service |
-| --- | --- | --- | --- | --- |
-| 1 | .156637 / 9.334961 | .179053 / 8.909790 | .181215 / 9.052490 | .180252 / 8.971680 |
-| 2 | .095505 / 5.449951 | .205285 / 12.029297 | .206609 / 12.117065 | .208535 / 12.236328 |
-| 3 | .141326 / 8.528198 | .133709 / 7.250000 | .142408 / 7.735840 | .145800 / 7.875610 |
-
-Primary D−K J blocks are −.000963274 / +.001926071 / +.003392202; mean +.001451666, descriptive outer df2 t95 [−.004053565,+.006956898]. Service mean +.059408 [−.243321,+.362136]. Both K and D improve their own parent's observed mean J and service in all three roots; D−P means are +.005513 J/+ .298177 service and K−P +.004061/+ .238770, with wide outer intervals. These are three independent complete-program blocks, including generation, adaptation and deployment sampling; 96 worlds do not increase training n. D superiority, equivalence, population improvement and a deployment default are not established.
-
-Parent generation itself loses service in roots 1 and 3 and loses J in root 3. There is no intermediate-C evaluation, so C versus B training cannot be separated. Root1/world1 is a consequential adverse witness: P/K/D service 8.789063/8.019531/2.019531, D−P J−.137772/service−6.769531, zero-service ticks P5/K7/D83 and longest gap 3/3/38. Root1/world11 supplies the opposite retained capability: D eliminates P51/K45 zero ticks. Root3/world30 D improves P by4.894531 users/tick but still trails I by4.468750. The .10 same-history action bound is not a closed-loop outcome bound; no world can be dropped to rescue the result.
-
-All K/D fits genuinely updated. K is an active learned three-parameter comparator. D correction RMS .07898/.05045/.06483 versus K .02640/.02076/.02958; D mean-component shares of correction second moment are98.23%/95.03%/98.37%. These are not return fractions. Larger directional offsets and different finite optimization remain simpler accounts of D's unresolved increment. The earlier complete mean-substitution study failed all three retention comparisons, so near-constant magnitude does not establish dispensable variation. State conditioning, message causality, optimal constant calibration, and freezing's causal benefit are untested.
-
-B01 measured worker-plus-three-reader CPU cost is2,280.176845 seconds, excluding incompletely metered support. Monotonic worker duration2,003.590777 differs from epoch span2,086.022848; retain the discrepancy rather than infer a runtime cause or claim speed. The inherited message-content record includes33 policy fits+3 predictors/4,751,360 persisted steps plus0..256 interrupted steps; correction compression adds57,344 steps. Current parent acquisition is already paid but is not free history.
-
-### Actual interface and the concrete U option
-
-Current native contract: N5/50 static uniform users/H256, vectorized free-space radio3dB/c10, sampled motion each tick; RR sender t%5, GOOD/BAD persistence.95, delay1/5, no loss, abstract fee.001. Complete J_net=.7*served/50+.3*Q−.001. Decentralized actors use lawful local observations/received geometry and their own recurrent history. There is no registered user map, actual service identity/ACK, transmission mask, new predictor or age objective. O/W/M belong to another information/control contract and are not interchangeable baselines here.
-
-C/B use actor171/critic451 and original joint PPO/Adam; B preserves the C function while zeroing only structural-zero input columns, then starts fresh joint Adam. K/D use the original parent recurrent encoder, means and variance frozen. K learns d=.10*tanh(b), three parameters at actor lr.003. D is a zero-initialized 250→64→3 bounded correction network at actor lr.0003 over legal current186 features and parent64 hidden output. Critics use parent451 plus a zero-input75→128 projection. Both have separate actor/critic Adam and separate.5 clips. Two episodes/rollout, four full-rollout epochs, recurrent chunks32, undiscounted terminal returns, standardized team advantages, agent-summed composed tanh-Gaussian PPO ratio [.8,1.2], and inherited entropy coefficient.01. All endpoints use identical40-byte geometry-plus-zero-tail messages with the same abstract delay/fee; parent generation used28-byte geometry. No physical bandwidth gain is inferred.
-
-The DM and independent critic recommend:
-- Retain all three existing P parents and K/D endpoints without selection.
-- Train U once from each P for512 H256 episodes using the original B-style unrestricted actor/critic PPO: fresh joint Adam lr.0003, global.5 clip and trainable actor variance. Preserve P's entire initial function; use the same legal geometry/communication/execution contract and recorded K/D exogenous training streams on each policy's own history. Source tracing found that B01 build_b cannot load U: it expects C and structurally zeros columns. U must strictly load the original B-final checkpoint, preserving every P tensor and resetting only optimizer/runtime as declared. The frozen B40 collector rejects training and omits learner storage; a direction-owned 40-byte collector must supply the original171-actor/451-critic views and reuse CADC joint PPO. No shared learner or simulator rewrite is indicated. These details must be fixed before effects.
-- Evaluate P/U/K/D on32 new common worlds per lineage, independent between lineages. Primary U−D net J; U−P/U−K, service/quality, all tails, movement and full cost remain consequential.
-- Three new fits/1,536 training+384 evaluation episodes =491,520 native steps and3,072 new joint Adam calls. Existing measurements give roughly553–586 worker CPU seconds plus reader/integration/review, not a quote or bound. There is no extra parent acquisition, pilot, checkpoint selection or automatic extension.
-
-This compares finite training programs with different parameterization, variance freedom and optimizer laws, not isolated freezing. Existing K/D make it conditional asset reuse, not three fresh independent parent-generation replications. Historical unrestricted continuation is contrary evidence: B02 B19452 was damaged, and all three B04 geometry-only G continuations lost J/service (G19501−B0 J−.073191/service−4.996216). Different selected parent/contracts do not answer U on these new unscreened parents, but they lower expectations.
-
-U developing P and exceeding K/D would change which learning program deserves development. U damaging P while bounded programs retain gains would strengthen a finite-program practical case, without causal freezing attribution. Mixed outcomes or quality/service trades constrain continuation. An unchanged12-fit replication costs1,671,168 steps and mainly buys recurrence of the uncertain D−K effect; another deployment panel alone adds no training replication. Radius/noise/optimizer searches have no identified target. A reasoned alternative or stop is allowed; keep the parent's new useful assets and adverse evidence.
-
-### Concurrent investments, not dependencies
-
-The complete Astra Max allocation review at `docs/research/archive/2026-09-30/RESEARCH-parallel-allocation.md` selected:
-1. `uav_fleet_adaptation`: two warm-start H6 programs at N8,512 H500 episodes each under E versus all-on; final I/E,A/E,F/E,C/E on32 common worlds.576,000 steps,8.16million E-mask requests,3.456million C_N motion requests, plus neural replay. Historical~7,713 fit-wall seconds exclude added E/readback and do not price N8's larger recurrent workload. The fleet DM reconciled the original sampler: each32-group fit entails96,000 actor and96,000 critic optimizer calls,480 coordinator,480 team-discriminator and1,920 individual-discriminator calls, with the strict N8 factory discriminator batch16,000 versus original N6's12,000; all five objectives remain active. Source/recipe detail is published at5420a0d6a. Original parent was N6; raw Gaussian replay plus environment clipping is retained, not this parent's tanh law.
-2. `uav_user_waiting`: ordinary accumulated per-user burden R versus O/W/M,64 common H256 worlds,256episodes/65,536steps/0fits.2,375,680 plan requests, at most9,502,720 post-prefix candidate-state reductions;~987scheduler CPU-second partial anchor. No ACK or future-C rights.
-
-They are meaningful independent comparisons already selected and being implemented. Do not require them to await a global round, restart their selection or duplicate their questions. Their outcomes are not known. Planner amortization was deferred; observed compute expense does not establish a deadline deficit.
-
-### Context and source precedence
-
-All repository paths in this question resolve at the full `source_sha` supplied in the Send message unless an explicit original revision is named. Read the original evidence needed for your judgment before the DM/Root preference; summaries do not become raw evidence. Critical unavailable primary or raw sources should be disclosed, with only the dependent conclusion qualified.
-
-- Current governance: `docs/project/OPERATING_CONSTITUTION.md` §§1–5,7–8; current owner instructions above prevail over older chat assumptions. Scientific responsibility, exploratory comparison, recorded cost and adviser status are the consequential parts.
-- Methods: `.agents/skills/hmasd-scientific-tools/SKILL.md` — Choose the question, Update the working explanation, Comparators, Statistics, Cost and exposure; `.agents/skills/hmasd-portfolio-task/SKILL.md` — Steps1/4 and Boundaries. These are methods, not extra authority or gates.
-- Current shared understanding: `docs/research/RESEARCH.md` topics4–7 and the three current question rows/plan. Bounded corrections, ordinary competitors, unscreened-parent heterogeneity and complete native tails should change the decision; they are revisable evidence.
-- Primary current result: `docs/research/candidates/uav_parent_adaptation/NOTES.md` sections B01 prospective, complete reading, and independent review/next investment; `runs/uav_parent_adaptation/b01_unscreened_a01/{config,result}.json`. Original bound summaries/raw/checkpoints are recorded on wsl_4070; lack of connector access to bulk must not be represented as independent raw verification.
-- Relevant inherited support/adverse evidence: `docs/research/candidates/uav_message_content/NOTES.md` B02/B04/B05/B06; `docs/research/candidates/uav_correction_compression/NOTES.md` complete B01 and its full result. Read the named contrasts, not a recursive entire project audit.
-- Prior applicable Pro advice and its limits: `docs/research/archive/2026-09-30/RESEARCH-owner-deep-report-next-question.md` full Pro answer and decision. The current unscreened-parent result is new and was unavailable then; do not substitute its prediction for this result.
-- Construction-only primary bridges already verified: RPL arXiv1812.06298v1 §IV–IVC and RESPRECT arXiv2401.14858v1 §IIIB. They motivate residual construction/critic considerations, not empirical UAV improvement, causality or algorithm novelty. If a new bridge materially changes the proposed investment, cite and actually read its load-bearing passage; literature hints and adviser agreement are not evidence of novelty.
-- For a consequential implementation premise, inspect `experiments/candidates/uav_parent_adaptation/b01/` and its actual inherited source binding. Do not invent a shared-learner rewrite, exact optimizer resume or an execution defect from a diagnostic statistic.
-
-### Requested advice
-
-Explain what this completed round strengthens, weakens and leaves unresolved, including why a useful positive should be developed or why further cost is no longer attractive. Decide whether U as specified buys the most useful next observation, modify it for a material scientific reason, or offer a stronger concrete alternative. A novel proposal is optional; its question, legal decision interface, strongest ordinary comparator, expected intermediate/native outcomes, smallest complete comparison and dominant fit/non-fit cost must be explicit. No exhaustive benchmark, diagnostic ladder or parameter sweep is requested.
-
-If a complementary fourth owner is genuinely worthwhile, explain its independent estimand and dependency rather than repeat these studies. Otherwise say so. Prefer the next investment that could change understanding or use, without reducing innovation to module replacement or mandatory causal attribution. For each recommended next action, explain what unfavorable as well as favorable outcomes would change and what would end that recipe. State `MATERIAL_DISSENT: yes/no` about the proposed scientific investment and any unresolved source-dependent issue.
-
-Do not run experiments or edit other sections/files. Read the pinned question; for delivery fetch the latest `docs/research/RESEARCH.md` on branch `main`, use its actual blob SHA and fill only this review's empty `### Pro Answer` subsection. Preserve every other byte, including other DMs' concurrent updates; stop on overlap. Return the actual commit if written. If GitHub writeback is unavailable, return the complete answer in chat, not only a SHA, receipt or link.
-
-### Answer
-
-**Recommend retaining both K and D as demonstrated conditional capabilities, and revising the next comparison to ordinary full-policy continuation on the three retained parents.** B01 supports bounded development beyond selected B19451; it leaves D’s advantage over trained calibration unresolved. Neither confirmation nor closure of the broader adaptation question follows.
-
-I used a separate task context without inherited DM/Root conversation. This was not outcome-blinded: the assignment supplied completion facts. My provisional B01 reconstruction preceded reading the adviser explanation and the subsequently appended DM interpretation. The published interpretation agrees with the consequential evidence I checked.
-
-| Contrast | Lineage J differences | Mean J [descriptive outer t95] | Mean service difference |
-|---|---|---|---:|
-| D−K | −.000963, +.001926, +.003392 | +.001452 [−.004054, +.006957] | +.059408 |
-| D−P | +.001199, +.003250, +.012091 | +.005513 [−.008866, +.019892] | +.298177 |
-| K−P | +.002162, +.001324, +.008699 | +.004061 [−.005969, +.014092] | +.238770 |
-| P−I | +.022416, +.109780, −.007617 | +.041527 [−.109973, +.193027] | +1.625326 |
-
-These are three independent complete-program units, combining parent generation, adaptation and deployment sampling. The 96 worlds do not increase the training sample size. D−K’s service interval also crosses zero, [−.243321, +.362136]. The intervals retain the declared small-sample assumptions; they establish neither equivalence nor a stable preference. [Frozen protocol and complete reading](/home/fires/hmasd-wsl/docs/research/candidates/uav_parent_adaptation/NOTES.md:136)
-
-The strongest useful positive is that **both adapters improve their own parent’s observed mean J and service in all three unscreened lineages**. The capability is therefore no longer confined to B19451. Lineage 3 supplies particularly useful conditional evidence: both K−P and D−P have positive paired-world intervals for J and service. That does not make every endpoint’s gain resolved or identify a population-wide improvement.
-
-Parent production remains a substantive limitation. P loses service relative to I in lineages 1 and 3, and loses J in lineage 3. D’s improvement does not recover I’s mean service in either of those lineages. All parents increase Q and reduce path length, so the generator sometimes exchanges service for other outcomes. The absent intermediate-C evaluation prevents assigning these changes to C training versus B continuation.
-
-The adverse evidence materially limits the interpretation:
-
-- **Lineage 1/world 1:** P/K/D serve 8.7891/8.0195/2.0195 users per tick. D−K is −.121547 J and −6 users/tick. Zero-service ticks rise from K’s 7 to D’s 83; the longest gap rises from 3 to 38.
-- **Lineage 1/world 11:** D−K instead gains .059347 J and 3.136719 users/tick, eliminating K’s 45 zero-service ticks.
-- **Lineage 3/world 30:** D gains 4.894531 users/tick over P, yet remains 4.468750 below I.
-
-I reconstructed these outcomes directly from saved connection bits, rewards and trajectories. They show consequential closed-loop changes despite the small same-history action bound. The favorable average longest-gap contrast does not neutralize the severe adverse world. No world should be removed, and three roots cannot support a learned parent-selection rule.
-
-The changed working explanation is **active, useful calibration and bounded adaptation, with uncertain additional value from D’s finite learning program**. K executes nonzero learned constants; D’s heads and inherited critics move while its base remains fixed. Nonactivation, missing updates or substituted parents cannot explain this result.
-
-D’s correction RMS is .07898/.05045/.06483, versus K’s .02640/.02076/.02958. Its mean component accounts for 98.23%/95.03%/98.37% of correction second moment. Different finite optimization and larger directional offsets therefore remain the strongest simpler account of its incremental performance. Those percentages are not fractions of return explained. The earlier compression study directly showed that replacing nearly constant D functions with their recorded means can lose native value; repeating that shortcut here is not the most useful purchase. [Compression evidence](/home/fires/hmasd-wsl/docs/research/candidates/uav_correction_compression/NOTES.md:259)
-
-State conditioning, message-mediated coordination and freezing’s causal benefit remain untested. Parent generation, adapter optimization and deployment noise also remain combined. Critic quality, recurrent feedback and threshold-sensitive geometry are plausible contributors, but the present evidence does not select one as a repair target. The verified [RPL construction and critic warning](https://arxiv.org/html/1812.06298v1#S4) and [RESPRECT pretrained-actor/critic construction](https://arxiv.org/html/2401.14858v1#S3.SS2) support the construction bridge, not a UAV improvement guarantee.
-
-For the next investment, I favor **one conditional comparison against ordinary unrestricted continuation**, provisionally called U to avoid confusion with B04’s forecast arm:
-
-- Retain all three P parents and their existing K/D endpoints.
-- Train U once from each P for 512 H256 episodes using the original B-style full actor/critic PPO program, including fresh joint Adam at .0003 and trainable actor variance.
-- Preserve the legal geometry inputs, sampled execution, objective and communication contract. Match the recorded K/D training exogenous streams where supported by the existing witnesses.
-- Evaluate P/U/K/D on 32 new matched worlds per lineage, independently across lineages. Primary U−D net J; retain U−P, U−K, service, tails, movement and complete cost.
-
-This is a comparison of specified finite programs, including their different parameterization and optimizer laws. It would not isolate freezing. Existing K/D assets make it conditional reuse, not three new independent parent-generation replications.
-
-The new reason for considering U is concrete: the unscreened parents now exist, their quality is heterogeneous, and small bounded adaptations develop them without resolving the preferred adaptation program. Ordinary further learning may offer useful capability that the bounded correction cannot reach. The contrary prediction is credible too: unrestricted continuation may cause larger harmful drift.
-
-Historical evidence must remain prominent. B02’s plain continuation B19452 substantially damaged its starting controller. In B04, geometry-only G lost J and service against B0 in all three continuations, including −.073191 J/−4.996216 service in 19501. Those results lower expectations for U; their selected parent and different experiment do not answer the proposed comparison on these three unscreened parents. [B02 evidence](/home/fires/hmasd-wsl/docs/research/candidates/uav_message_content/NOTES.md:1061), [B04 evidence](/home/fires/hmasd-wsl/docs/research/candidates/uav_message_content/NOTES.md:2192)
-
-The useful outcome branches are:
-
-- U develops P and exceeds retained D/K in complete J/service: preserve an ordinary learning capability and reconsider whether bounded adaptation deserves priority.
-- U damages P while K/D retain gains: strengthen the practical case for these restricted programs under this contract, without attributing the difference solely to freezing.
-- Mixed effects, quality/service exchanges, or failure of existing gains to transfer: retain the conditional assets and limit further investment. No automatic longer horizon or optimizer search follows.
-
-The smallest complete version costs **3 new fits, 393,216 training steps and 98,304 evaluation steps: 491,520 native steps total**. Current measurements suggest roughly 553–586 worker CPU seconds, with reader and engineering work additional; this is a scaling anchor, not a bound. No new parent production is needed. Implementation still requires a prospectively fixed U loader/update/reader contract; no shared learner rewrite or new information source is justified.
-
-An unchanged three-root replication would cost another 12 fits and approximately the original 2,086 worker CPU seconds. It could improve evidence about recurrence of D−K, but currently offers less direct guidance about which available learning program to develop. Another fixed-policy panel would refine conditional deployment uncertainty without adding training replication. Radius/noise changes lack an identified bottleneck, and repeated mean compression has weak marginal value. Idle remains legitimate if Root prioritizes a more consequential question; it should be recorded as an allocation choice, not scientific-family rejection.
-
-Actual B01 cost is **12 fits, 1,671,168 native steps and 18,432 Adam calls**. Worker plus all three reader attempts totals **2,280.176845 measured CPU seconds**, excluding incompletely metered support. The monotonic worker duration, 2,003.59 seconds, disagrees with the 2,086.02-second epoch span; retain both. The reader failures changed numerical validation contracts, not native outcomes.
-
-My checks covered source/configuration/summary/reader identities; all 384 native endpoint rows and consequential contrast calculations; evaluation pairing and unchanged tensor hashes; all 24 checkpoint digests and frozen bases; all 12 training/update stream hashes and 1,536 matched K/D training pairs; 24 consequential raw trajectories plus the separate saturation case. I reused the complete reader for exhaustive radio/channel/density reconstruction and did not rerun policies, physics or old raw archives. All evidence consumers have finished.
-
-**MATERIAL_DISSENT: no.** The DM’s B01 interpretation is supported. I recommend the bounded U comparison above for the next allocation decision; this review does not authorize its execution.
-
-### Pro Answer
-
-### Decision
-
-Pending the complete Pro innovator answer and Root's reasoned next-investment decision. Existing accepted work and the two separately selected new questions continue independently. No new U exposure is selected by this pending review.
-
 ## Prior reviews and runtime context
+
+<a id="portfolio-review-2026-09-30-parent-adaptation-development"></a>
+[Completed parent-adaptation development review and selected U comparison](archive/2026-09-30/RESEARCH-parent-adaptation-development.md#decision).
 
 <a id="portfolio-review-2026-09-29-continuity-intent-selection"></a>
 [已完成本轮完整选题、独立审查与Root处置](archive/2026-09-29/RESEARCH-continuity-forecast-selection.md)。
@@ -2072,7 +1936,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | --- | --- | --- | --- |
 | DM: native N8 management adaptation | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. Owns new `uav_fleet_adaptation` and matching paths; two warm-start fits and I/E,A/E,F/E,C/E complete panel selected. Independent of parent B01/Pro completion. Own implementation, admitted execution, reading, publication and cleanup; broad pivots return to Root. [Selection](archive/2026-09-30/RESEARCH-parallel-allocation.md#root-decision). |
 | DM: individual-user waiting | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_user_waiting` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f5-8634-7e13-b931-e75abdb10d45. Owns `uav_user_waiting` and matching paths. Fixed R/O/W/M panel complete, fully read and independently diagnosed; result0b9e2fee4 retains worst-user-mean benefit, temporal-tail costs and all adverse worlds. Reserve, no live operation/unread advice/selected successor; measured cleanup complete,818479104bytes reclaimed, no blocker. Returns the completed question boundary and conditional reference to Root; no automatic extension. [Result/decision](candidates/uav_user_waiting/NOTES.md#b01-independent-review-and-disposition), [cleanup](candidates/uav_user_waiting/NOTES.md#b01-final-cleanup). |
-| DM: independent-parent adaptation | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. Owns active `uav_parent_adaptation` and matching paths. B01 execution, full reading, independent diagnosis and compact publication complete; completed snapshot/scratch reclaimed, all required native assets retained. Preparing costed U source/recipe details while Root integrates the next allocation/advice; no new native exposure selected. [Result and retained ownership](candidates/uav_parent_adaptation/NOTES.md#b01-independent-review-and-next-investment). |
+| DM: independent-parent adaptation | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. Owns active `uav_parent_adaptation` and matching paths. B01 execution, full reading, independent diagnosis and compact publication complete; completed snapshot/scratch reclaimed, all required native assets retained. Selected to implement/read the three-fit ordinary U continuation comparison against retained P/K/D after complete independent and 6 Pro review. Own publication and actual-node admission; no per-run Root ACK. [Investment](archive/2026-09-30/RESEARCH-parent-adaptation-development.md#decision). |
 | DM: cumulative native service age | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_service_age` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f0a3-e515-7701-b805-6565d0cc4c07. Owns `uav_service_age` and matching paths. B01 one fit/source d4430e619 fully collected, verified, independently diagnosed and published; reserve, no live worker/reader/observer, unread advice or selected successor. Compact result0b358981a retains conditional W/M capability, own-initialization learning and primary/tail losses. Terminal cleanup reclaimed822185984allocated bytes, required unique evidence retained, no blocker. Returns this substantive boundary and proposed re-entry questions to Root; no automatic extra fit or new track. [Complete result](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup](candidates/uav_service_age/NOTES.md#b01-final-cleanup). |
 | DM: fixed correction deployment | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_correction_compression` | `/home/fires/hmasd-wsl` / `main` | Actual first turn verified gpt-6-astra/max; native UUID01a0ef78-6628-7593-b359-b608f0c80190. B01 fully read/independently diagnosed, reserve; scientific result e17f4fdf9. Cleanup complete: terminal source snapshot/registration, redundant staging, local bulk replicas/scratch/caches removed;874639360allocated bytes reclaimed. Required evidence/assets intact; no live operation, unread review or remaining cleanup dependency. [Result](candidates/uav_correction_compression/NOTES.md#b01-complete-reading), [final cleanup](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup). |
 | Completed DM: registered-user B01 | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | Completed B01 and full cleanup, result01e1b6e85/closureb7216efb9; no live worker, unread result or cleanup blocker. Sole direction ownership now passes to the new periodic-efficiency DM below; this old session is not restored. [Complete inheritance](candidates/uav_registered_service/NOTES.md#b01-investment-decision). |
