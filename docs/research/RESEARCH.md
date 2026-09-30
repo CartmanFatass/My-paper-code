@@ -1730,37 +1730,180 @@ FSD/PPC暂停、G33冻结、Milan数据依赖及不复用完整收尾旧DM均保
 
 ## Portfolio review 2026-09-30 owner-deep-report-and-next-question
 
-Conversation: owner-supplied completed Deep Research report; independent native scientific review completed.
-The ongoing round's complete result and the requested constructive Pro synthesis remain pending.
+Conversation: continuing Pro consultation through the private Jev operation; the shared record
+uses its question key only. Independent report review is complete. This is the owner's requested
+round-boundary **constructive synthesis / Innovator** question, not another approval of B01.
+
+**Question:** After the complete service-age result below, what is the most worthwhile next
+scientific investment for Root's native-host programme, and what bounded complete comparison
+would make its answer consequential? Develop the strongest source-grounded opportunity rather
+than automatically repairing the last selector, adding a generic diagnostic, or filling a DM slot.
+Compare it with the strongest ordinary account and with retaining current capabilities without
+another run. You may challenge Root's priorities and the report review. No positive result, new
+architecture, novelty claim or fixed number of candidates is owed.
 
 Source: [complete owner report](archive/2026-09-30/RESEARCH-owner-deep-research-report.md),
 original SHA256 `4afd91dccdbbfdf322672039cafd48c0150740b1d89282923525af51fe5a029d`.
 Root has read all488 lines. The report observed repository SHA `a46d9087299bb50b23ca02f2baea1d11d54f325d`;
 its recommendations and prototype code have not been adopted or executed.
 
-Standing and context: current Constitution §§2–5/8, scientific-tools' consequential-question,
-ordinary-comparator and evidence-first review method, and the current shared background apply.
-The selected [service-age contract](archive/2026-09-30/RESEARCH-cumulative-service-age-selection.md#decision)
-is unchanged. One960-episode batch has completed on `d4430e619`; its full saved-data reader
-and independent result diagnosis are owned by its native DM. Claude is owner-paused for quota;
-its latest [stage1](candidates/coupled_host_joint_skills_stage1/NOTES.md),
-[distillation](candidates/coupled_host_planner_distillation/NOTES.md) and
-[replanning](candidates/coupled_host_replan_timing/NOTES.md) evidence must inform any related suggestion.
-Runtime cause investigation is deferred until recurrence per the owner's latest instruction.
+**Current owner scope and context.** The owner requested an ongoing loop: complete a round,
+synthesize it, ask Pro for constructive recommendations, then select and execute worthwhile
+next work. This new evidence materially changes the earlier Pro selection question. Root has
+scientific selection authority; Pro advises. Claude is paused for quota and retains its coupled-host
+family. Do not resume, rename or take over that work. FSD/PPC pauses, G33's frozen obligations
+and Milan's data dependency remain. No replacement concurrency quota exists; actual compute
+admission still applies. Per the owner's latest instruction, investigate CPython again only upon
+recurrence. Both B01 collection and its full reader completed under the provisional runtime;
+the cause and load/downclock hypothesis remain unresolved, without being a new research gate.
 
-Decisions asked: Which report recommendations add a consequential question after the complete
-current result, which repeat or conflict with existing evidence, and what should Root select next
-within the continuing research delegation? Compare useful replication, a substantive new complete
-learning/control question, targeted diagnosis and stopping by the knowledge/capability and full cost
-that each could change. Preserve existing pauses and the learning-versus-ordinary-control distinction.
+Read these **specific current sources**, resolving repository paths at `source_sha` in the send
+message unless an immutable evidence/source revision is explicitly named:
 
-Options under review: learning-instance replication conditional on a useful complete service-age
-increment; ordinary age-controller development; legal temporal information or predictive intent;
-sparse joint-action or explicit temporal-task structure. These are proposals, not selected studies.
-The independent reviewer first reads the supplied report and original relevant evidence, without
-Root's recommendation. It will evaluate source freshness, paper assumptions, duplicate work,
-proposed diagnostic conclusions and actual investment implications. A report's suggested structural
-test does not become a standing prerequisite merely by being cheap or zero-result-fit.
+- `docs/project/OPERATING_CONSTITUTION.md` §§1–5/7–8: purpose, scientific responsibility,
+  cost, records, independent advice and bounded exploration/confirmation.
+- `.agents/skills/hmasd-scientific-tools/SKILL.md`, **Mathematics, conjectures and experiments**,
+  **Choose the question**, **Design the comparison and decision exposure**, **Update the working
+  explanation**, **Simple-model and literature bridges**, and its statistics/cost sections:
+  reasoning should change a comparison or investment; direct complete learning is permitted
+  without a proof, predictive gate, exhaustive headroom census or preparatory native pilot.
+- `.agents/skills/hmasd-portfolio-task/SKILL.md`, Steps1/4–5 and Boundaries, and
+  `.agents/skills/hmasd-loop-dispatch/SKILL.md`, **Root-led DM trial**: Root constructs questions,
+  native DMs own their science, and retained positive capabilities deserve development alongside
+  independent questions and stopping. There is no requirement to keep every old recipe active.
+- This question, its complete independent `### Answer`, and RESEARCH's shared discussion of
+  service-age objectives and the B04–B06/bounded-correction evidence. The shared discussion is
+  revisable evidence, not governance. The completed owner report is advice, not an instruction.
+- [B01 prospective contract and complete result/disposition](candidates/uav_service_age/NOTES.md),
+  published at `df30c7e27e066fcb21a50ec028d3143d0c177444`, especially **B01 complete: ordinary
+  age capability retained, unchanged selector investment ended**, **Complete native comparison**,
+  **Exposure, simpler explanation and retained adverse trajectory**, and **Actual and cumulative
+  cost**. Frozen scientific source is `d4430e6198f95d599b79f23575445a18e6566c26`;
+  [compact full comparisons](../../runs/uav_service_age/b01_age_selector_a01/result.json) were
+  published at `0b358981a4512238f675a335d6a3467f2469a43f` and include every world difference, endpoint, source and canonical
+  bulk locator. Its full native reader completed; remote raw bytes are not assumed accessible
+  through the GitHub connector. State any consequential source-reading limit.
+- [Previous full Pro proposal and independent selection review](archive/2026-09-30/RESEARCH-cumulative-service-age-selection.md#decision):
+  B01 deliberately included standalone W, not merely M. Use the new result below rather than
+  reusing the old expected-F proposal or assuming that M is an ordinary optimum.
+- [Message-content B04/B05/B06 complete readings](candidates/uav_message_content/NOTES.md#b06-complete-reading)
+  and [mean-correction replacement result](candidates/uav_correction_compression/NOTES.md#b01-complete-reading),
+  with their linked native outputs. These supply positive restricted-learning evidence and its
+  ordinary-calibration/parent limitations; B06 **already trained** the constant K control.
+  The report review below reconstructs the completed coupled-host and forecast evidence; do not
+  purchase those already completed floors again.
+
+**What this round establishes.** The unchanged one-fit study completed all960 H256 episodes /
+245,760 native steps:512 training and448 evaluations across64 fresh paired worlds. The full
+reader checked all trajectories, causal history/features/selection,512 saved update steps and
+2,048 actor plus2,048 critic optimizer updates; candidate physics retains its declared subset and
+shared-kernel limitations. No new fit or environment step was generated by reading.
+
+Mean actual post-step service age A is lower-is-better, with age reset by real service and
+continuous waiting across old window boundaries. No actual-service ACK is an actor/critic input.
+The fixed N5/U50/3dB/c10 host uses legal quantized reports, two-tick delivery and four-tick
+commitment. L selects complete O/W plans; M selects by predicted age cost; W alone uses that
+age-cost ranking throughout its searches. L0/L1 evaluation is sampled, with common report-clock
+innovations. One training instance gives conditional world evidence only.
+
+| Program | Mean A | F /200 | Native J | Served/tick | Mean episode maximum gap | Worst-user mean age | Scheduler CPU s/episode |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| L0 | 3.816882 | 199.828125 | .358269 | 21.387390 | 55.343750 | 11.521179 | 4.507763 |
+| L1 | 3.542917 | 199.687500 | .381830 | 23.259277 | 59.500000 | 13.537537 | 4.602291 |
+| M | 3.273864 | 199.937500 | .397838 | 24.560852 | 55.656250 | 13.001892 | 4.666301 |
+| W | 3.313002 | 199.812500 | .399864 | 24.699585 | 59.484375 | 13.652283 | 3.692153 |
+| O | 4.399828 | 199.921875 | .325898 | 18.890137 | 52.625000 | 10.829956 | 3.371091 |
+| G | 6.501581 | 199.906250 | .406879 | 24.552124 | 70.421875 | 21.844360 | 3.236629 |
+| S2 | 26.001744 | 161.593750 | .483739 | 30.104919 | 250.593750 | 123.872437 | 2.664988 |
+
+The frozen primary L1−M A difference is **+.269054**, descriptive paired t95
+[+.069315,+.468793],24 improved/40 worsened worlds. L1−W is+.229916
+[+.044051,+.415781]; L1−L0 is−.273965 [−.475866,−.072063],47 improved/17 worsened.
+Learning improved initialization without establishing superiority to competent ordinary control.
+All requested sampled decisions executed; no deadline miss or late-sample fallback occurred.
+The actor moved, and L1 averaged P(W)=.806930 across3,421 distinct evaluation slots, versus
+initialized.5. It sampled W in2,759 slots, while M would choose W in3,285 of those same visited
+states. A broadly useful W preference is a strong simpler account; state dependence or longer
+foresight is not identified. No constant-mixture attribution run is necessary to stop this recipe.
+
+The consequential ordinary positive is W−O: A−1.086826, service+5.809448/tick, J+.073966,
+and path−624.822m/UAV. But mean maximum gap increases6.859375 ticks, worst-user mean age
+increases2.822327, transmitter-on exposure increases161.65625 team ticks, and quality falls.024555.
+W misses12 user-windows versus O's5. These are conditional capabilities and tradeoffs, not a
+user-level guarantee or a post hoc physical adoption rule. M−W mean A is−.039138 with an
+interval crossing zero; M has smaller mean maximum gaps but costs.974147 more scheduler CPU
+seconds/episode (about26.4%). No equivalence/dominance or energy claim follows.
+
+The strongest adverse L1 witness, world29312024, has A8.520234/F194/gap189/worst-user age74.628906,
+versus M3.177656/200/37/8.582031. Three users have genuine closed unserved intervals of189/183/181
+ticks. Their settled model last-service times equal actual times at every report anchor: missing
+age knowledge is not established as the cause. This does not identify the responsible earlier
+choice or prove ACKs useless; it does invalidate treating that witness as a diagnosed ACK repair.
+
+The DM's independent result critic reconstructed all616 contrasts, source/update identities and
+consequential raw positive/adverse episodes. It recommends retaining W/M and own-initialization
+learning while ending unchanged B01 selector investment, with no material dissent. Root agrees
+with that finite disposition. No second fit, architecture change, calibration panel or new physical
+tolerance is selected. Ordinary mean-age improvement and its user tails change the working
+reference; the broad question of useful experience-based control remains open.
+
+**Relevant positive alternatives and prior cost.** Native B05/B06 kept B19451's actor/GRU/variance
+fixed and learned bounded pre-tanh corrections. B06 D−B40 means are+.008147 J/+.628866 service
+with positive descriptive conditional df2 intervals. K's trained constant correction is active:
+K−B40+.003890/+.303141 and D−K+.004257/+.325724 have intervals crossing zero. These are three
+continuations of **one parent**, not independent parent training. Near-constant correction energy
+does not identify return contribution. A fresh-world compression comparison found all three
+varying D functions better in mean J/service than their frozen old-visitation means; each fixed
+retention rule failed. D19702 retained+.007749 J/+.529541 service against B40, while two other
+D intervals crossed zero. This supports those assets over those constants, not superiority to
+all ordinary calibration or causal message use. Preserve adverse worlds and new zero-service cases.
+
+Thus simply adding a K comparator or rerunning the mean substitution would repeat work.
+Independent-parent recurrence, a better specified task contribution, useful function preservation,
+or a genuine compute/use benefit could be different questions, but none is selected merely by
+being unresolved. Repeated ranking of frozen endpoints is not itself a learning contribution.
+The local-history, future-motion and coupled-host failures below remain evidence against an
+automatic from-scratch/representation rescue, without proving those families impossible.
+
+Known current B01 worker+reader cost is **6,687.213851 CPU seconds** (worker4,437.545s wall,
+reader2,123.46s wall), plus39.62 measured correctness CPU seconds, separately recorded shared
+runtime support and incompletely metered authoring/review/transfer. The actual search used
+12,353,536 candidate requests /6,961,433 unique plans /27,634,552 candidate-state reductions.
+This is a cost anchor, not the price of another design. Earlier B04 bought9 policy continuations
+plus3 predictors /1,261,568 steps; B05/B06 each bought6 continuations, and the content lineage
+reached33 policy fits+3 predictors /4,751,360 persisted steps plus the documented interruption.
+The compression comparison then added224 episodes/57,344 steps with0fits. New labels,
+branching, planning, independent parents, engineering and complete reading must be priced too.
+
+**Real options, not a prescribed experiment menu.** Develop an observed restricted-learning
+capability beyond its parent/calibration account; construct a consequential longer-horizon or
+compute-saving control question against W/M and other applicable ordinary methods; state a
+materially different lawful information/control contract with the same addition given to a
+competent ordinary comparator; or explain why none currently earns its cost. A literature bridge
+may supply a new opportunity beyond these examples. If richer feedback, uncertainty, dynamics,
+task structure or resources are proposed, explain the use case and acquisition/error/cost contract.
+Do not infer that an inherited restriction is permanent, invent a restriction to weaken the
+ordinary comparator, or retroactively reinterpret the finished study.
+
+**Requested return.** Start with what changed in the scientific explanation and what did not.
+Recommend the next useful question (or justified stop), its intended contribution, strongest
+simpler account and a specific smallest worthwhile complete comparison. Explain why experience
+or structure could add value; give the primary-source/simple-model bridge, its assumptions and
+omitted MARL coupling where useful. For a targeted intervention, state intermediate and native
+predictions; for a package comparison, explicitly delimit attribution. Name arms, meaningful
+decision support, training units, evaluation population/horizon, lawful information, consequential
+tail/compute outcomes, plausible result-dependent choices, fit and dominant non-fit cost, and
+material feasibility unknowns. An exploratory run need not await proof of the mechanism.
+Do not force a positive effect, create generic prerequisite diagnostics, repeat completed
+purchases or supply a broad literature list in place of a concrete investment recommendation.
+Disclose critical unread sources and any material disagreement with Root or the independent review.
+
+**Writing boundary.** Read this question at the supplied immutable `source_sha`. For delivery,
+fetch the latest `docs/research/RESEARCH.md` on `main` and change **only the empty `### Pro Answer`**
+inside this exact review heading; preserve every other byte, including the independent `### Answer`
+and Root's `### Decision`. Stop on overlapping edits. No experiments, other repository edits,
+new approval requirements or external messages. Return the actual commit if written; otherwise
+return the **complete answer in chat**, not merely a receipt, SHA or link.
 
 ### Answer
 
@@ -1872,9 +2015,6 @@ with no leftovers; the complete owner report and review remain in the repository
 
 ### Pro Answer
 
-The owner-requested round-boundary constructive synthesis will use the complete current result
-and verified report bridges; no Send has occurred for this question.
-
 ### Decision
 
 Interim disposition, Root,2026-09-30: adopt the independent review's material corrections.
@@ -1884,10 +2024,10 @@ the report's useful ordinary-control and complete-outcome principles and the pri
 as conditional hypothesis sources. Preserve the measured bounded-learning positives and
 parent/calibration uncertainty as constructive alternatives, without selecting a new run yet.
 
-Final next-investment decision remains pending the complete service-age result and the requested
-round-boundary Pro synthesis. Continue the accepted study; its arms, seeds, claims and fixed
-reading rule are unchanged. Claude's quota pause and runtime-investigation-on-recurrence policy
-remain in effect.
+Final next-investment decision remains pending the requested round-boundary Pro synthesis.
+The service-age result and its fixed reading rule stand; retain W/M and the learned initialization
+increment, and end unchanged selector investment. No new result-bearing study is selected.
+Claude's quota pause and runtime-investigation-on-recurrence policy remain in effect.
 
 ## Prior reviews and runtime context
 
