@@ -1,0 +1,11 @@
+{
+  "claim_key": "d40eaaf7792690173e358093d8ae2777e841441a13818fbdcaebce25816f2023",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d40eaaf7792690173e358093d8ae2777e841441a13818fbdcaebce25816f2023.json",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b03_inheritance_recurrence_a01/launch-manifest.json",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d40eaaf7792690173e358093d8ae2777e841441a13818fbdcaebce25816f2023.json",
+  "pid": 1139377,
+  "runner_pid": 1139378,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-30T16:52:03.480422Z"
+}
