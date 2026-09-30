@@ -1982,11 +1982,11 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 <a id="root-successor-designs-20260930"></a>
 **Four native DMs continue substantive work across static-count development, local service
 allocation, planner amortization and ordinary stochastic control.** `dm_fleet_adaptation` owns
-the admitted four-fit count-development study through complete reading. Root now selects the
-M/S/U saved-trajectory allocator comparison for `dm_user_waiting`, and the fixed learned-top2
-computation-allocation comparison for `dm_parent_adaptation`. The completed N8 DM checks
-existing coverage, interfaces and cost for a possible competent score-aware stochastic
-comparator; that assignment remains source-only with no successor result purchase selected.
+the four-fit count-development result through full scientific interpretation, independent
+review, publication and cleanup; its producer and bounded reader are complete. Root selects
+the M/S/U saved-trajectory allocator comparison for `dm_user_waiting`, fixed learned-top2
+computation allocation for `dm_parent_adaptation`, and the fixed score-directed ordinary G
+comparison for the same `dm_fleet_transmission` lead after its completed N8 study.
 The existing leads retain question continuity; Oracle/helpers are not DMs and four substantive
 assignments do not imply four admitted workers. Forecast and service-age remain reserve.
 
@@ -2004,9 +2004,11 @@ critics. It retains the demonstrated anticipation capability and declines the pr
 replanning extension now: that narrower renewal-law question has a substantial engineering
 bill and does not address the newly exposed decision-economics difficulty. The [complete
 question, independent answer and resolved decision](archive/2026-09-30/RESEARCH-n8-next-allocation.md)
-are preserved. Oracle `deep_report_review` now examines the separate ordinary stochastic
-control question; it may recommend a useful complete comparison, a different question or no
-purchase. No count comparator, accepted operation or other owner's scope changes mid-study.
+are preserved. Oracle `deep_report_review` then completed the separate ordinary stochastic
+control assessment; Root read its entire answer, the DM's full source price and response,
+verified the score/decoder premises, and selects G's complete comparison below. This tests
+ordinary use and changes the reference for future learning; it does not explain S's gains.
+No count comparator, accepted operation or other owner's scope changes mid-study.
 DMs own implementation, review, actual-node admission, complete interpretation, publication
 and cleanup without per-step Root acknowledgment.
 
@@ -2030,8 +2032,9 @@ persistent-service B05, whose outage repair did not satisfy the full service/ene
 Static-count development remains selected with its complete ordinary controls and fairly
 shared revised count interface; the frozen N5 package is not count-portable. The new allocator
 purchase tests a distinct causal lever on already-demonstrated motion/radio capabilities.
-Root accepts their substantial support costs for those questions. The failed parent retention
-target is now read as evidence, not an unfinished prerequisite or reason for automatic repair.
+Root accepts the substantial support costs for these distinct questions. G adds a bounded
+ordinary use/reference comparison, while L2_E tests allocation of a fixed planning budget.
+The failed parent retention target is evidence, not an unfinished prerequisite or automatic repair.
 Detailed innovation remains with Astra Max Oracle; no transfer-only gate, S2 acquisition or
 fifth DM is selected.
 
@@ -2227,13 +2230,78 @@ planning capability and close the fixed allocation, with no automatic deeper sea
 
 Root read the full result critique and declined the priced early-timing extension for now.
 B04 publication and cleanup are complete, reclaiming1,724,321,792net allocated bytes; no
-result producer or cleanup blocker remains. The same DM now supplies source-only facts to
-Root’s existing Oracle on a possible retained-S/ordinary-score comparator question; no
-successor study is selected. Parent learning and fleet count contracts remain separately owned.
+B04 result producer or cleanup blocker remains. The same DM now owns the separately selected
+N5 all-on local-motion comparison below. The N8 temporal result, parent learning and fleet
+count contracts remain unchanged, with their original questions and inputs recoverable.
 [Complete result and original independent review](candidates/uav_fleet_transmission/NOTES.md#b04-complete-reading),
 [DM disposition](candidates/uav_fleet_transmission/NOTES.md#b04-independent-disposition),
 [unselected timing/reuse facts](candidates/uav_fleet_transmission/NOTES.md#post-b04-source-only-design),
 [completed substantive allocation](archive/2026-09-30/RESEARCH-n8-temporal-complementarity-selected.md).
+
+<a id="ordinary-score-control-root-decision-20260930"></a>
+**Selected successor: a fixed score-directed ordinary stochastic controller versus retained S.**
+Root adopts the complete independent Astra Max Oracle recommendation and source assessment
+at0fd639636. Both fitted S assets have repeated useful S−Q behavior, alongside adverse worlds,
+quality/path/tail tradeoffs and failed later learning increments. Those construction facts stand.
+The measured ordinary Q assigned its non-C mass uniformly; C departure-rate calibration and
+parent joint-sampling studies did not test a tail using C's already-computed27scores. This is a
+concrete comparator gap and possible ordinary capability, not novelty or a diagnosed cause of S.
+Root considers that use/reference question worth4–8support hours; another fit or sweep is not selected.
+
+One fixed program G keeps nominal p(C)=.9, including C's legal waypoint fallback, and puts .1
+on the26other categories proportional to exp((score−max_alternative_score)/.014). The scale
+.014=.7/50 is one modeled served user's contribution to C's four-tick-mean proxy, holding
+quality fixed; it is prospective and not an optimum. Those weights match native N5 J. Local
+censoring, frozen inferred interference and stationary-peer forecasts remain approximation
+limits. A better conditional local proxy may suppress useful joint departures and harm native
+performance; real-arithmetic proxy improvement is no native-value guarantee.
+
+Preserve all27ordered categories and clipped physical aliases, C's navigation transition on
+each policy's own actual path, four-tick holds, private episode caches, and original fleet FP64
+one-uniform indexed flat-CDF decoding. All-score ties use Q_.10's exact probability construction.
+Cache deterministic scores/logits, never sampled actions. Tiny CDF bins and53-bit draws remain
+finite; shared uniforms need not preserve realized departure events when tail mass is reweighted.
+Both original trained S_L0/S_L1 and their analytic fallback helper are immutable; these are not
+the historical untrained S0 arm. No added information or free current-C action enters the students.
+
+Use32fresh common N5/U50/H256worlds29630000–29630031 and private roots29630101/29630102,
+all transmitters on. Run C once/world; Q_.10,Q_.05,G,S_L0/T1,S_L1/T1 and paid B*0=S_L0/T2
+twice/world. Paid B*1 is exactly S_L1/T1 and reuses that outcome. Total416episodes/106496native
+steps,0new fits/training labels/calibration. The .10 ordinary candidate led paid lineage0
+calibration and .05 led lineage1; both remain competent references, with paid B* selection costs.
+No final-world pilot, added native correctness panel or mid-study count-comparator change is selected.
+
+Primary retained-package contrasts are S_L0−G and S_L1−G separately; G−Q_.10 tests the new
+ordinary law, with G−Q_.05/C and paid B* comparisons preserving the practical choices. Average
+the two tapes within each of32world clusters and retain every signed difference/descriptive
+interval, all service-p10/minimum/zero ticks, quality/J, path, aliases, cache work and complete
+CPU/wall. Neither tapes, users nor repeated panels enlarge the number of fitted lineages;
+aggregate service does not establish individual-user continuity. The full reader additionally
+derives Q_.10's same-history/same-uniform choice on20480saved G decisions and at most81920
+four-tick geometry comparisons. This measures physical intervention exposure without a new
+controller/model/native rollout or counterfactual reward/causal-mediation claim.
+
+The worker makes71680full-C and61440student requests; pre-cache C work is1935360candidate
+trajectories/7741440modeled ticks,154828800candidate and7168000setup links. Student helpers
+add at most8601600links and61440one-row forwards. Full-reader native reconstruction, independent
+scores/helpers/actors/probabilities/cache/navigation/decoder replay and all metrics are charged,
+with no additional native steps. Complete estimated worker+reader cost is3–12CPU minutes,
+4–8active support hours, .15–.30GBsingle canonical raw, .6–1.0GBprocess planning memory and a
+1.6–1.9GBdisposable snapshot. These are uncalibrated estimates, not node admission or measured G.
+The broader B02–B05 chain already spent8fits/two calibrations/1687552native steps/2343.116CPU
+seconds across differing timing scopes; B01 and other parent studies/support remain separate.
+
+Useful G can become a stronger ordinary reference while preserving S's construction; further S
+value keeps both capabilities. Active G loss ends the fixed score-tail proposal. Sparse exposure
+or uncertain effects remain valid boundaries without automatic temperature/epsilon searches,
+extra evaluation or a learning claim. Native J prices neither travel nor compute, and a better
+mean with worse tails is a tradeoff rather than an automatic deployment upgrade.
+[Complete source assessment, original cost bindings and coverage limits](candidates/uav_fleet_transmission/NOTES.md#ordinary-score-source-assessment).
+DM owns the full original advice/response and prospective contract in its notebook, direction-
+owned versioned implementation, focused synthetic law/RNG/alias checks, independent high-risk
+review, exact input publication, fresh remote-first admission, complete scientific reading and
+independent result diagnosis/publication/cleanup. The original Oracle covers this selection;
+no duplicate selection audit or routine Root approval is added.
 
 **`uav_user_waiting`: B03 complete; end unchanged learned-value investment.**
 <a id="waiting-value-root-decision-20260930"></a>
@@ -2673,7 +2741,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | DM: fixed correction deployment | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_correction_compression` | `/home/fires/hmasd-wsl` / `main` | Actual first turn verified gpt-6-astra/max; native UUID01a0ef78-6628-7593-b359-b608f0c80190. B01 fully read/independently diagnosed, reserve; scientific result e17f4fdf9. Cleanup complete: terminal source snapshot/registration, redundant staging, local bulk replicas/scratch/caches removed;874639360allocated bytes reclaimed. Required evidence/assets intact; no live operation, unread review or remaining cleanup dependency. [Result](candidates/uav_correction_compression/NOTES.md#b01-complete-reading), [final cleanup](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup). |
 | Completed DM: registered-user B01 | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | Completed B01 and full cleanup, result01e1b6e85/closureb7216efb9; no live worker, unread result or cleanup blocker. Sole direction ownership now passes to the new periodic-efficiency DM below; this old session is not restored. [Complete inheritance](candidates/uav_registered_service/NOTES.md#b01-investment-decision). |
 | DM: periodic-service efficiency | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_periodic_efficiency` | `/home/fires/hmasd-wsl` / `main` | Sole current owner of `uav_registered_service`, B02 G/O/S2; actual first turn verified gpt-6-astra/max, native UUID01a0f028-0d02-7093-9e46-fef762b6d749. Complete a02 primary panel, full reading and independent diagnosis; reserve, no live result producer, unread result, pending advice or selected successor. Original failure and both attempts' required raw evidence retained. Result8e87c58de; exact terminal snapshots/registrations, unused scratch and B02 caches removed,1,619,988,480 allocated bytes reclaimed. No cleanup blocker. [Read result and disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading), [measured closure](candidates/uav_registered_service/NOTES.md#b02-final-cleanup). |
-| DM: fleet transmission control | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_transmission` | `/home/fires/hmasd-wsl` / `main` | Existing native lead, actual first turn gpt-6-astra/max; UUID01a0f02a-2102-7aa3-be5a-adfb99e49910. B01–B04 complete/read/independently diagnosed/published/cleaned. B04 retains bounded anticipation and adverse service/quality/travel evidence;1,724,321,792net allocated bytes reclaimed, no producer/unread result/cleanup blocker. Root declined the priced timing extension. Same DM now supplies source-only lawful-interface/coverage/cost facts on retained S versus ordinary score-aware stochastic choice; no new study/query/fit/launch selected and fleet count/parent-learning contracts remain separately owned. [B04 reading](candidates/uav_fleet_transmission/NOTES.md#b04-complete-reading), [disposition](candidates/uav_fleet_transmission/NOTES.md#b04-independent-disposition), [cleanup and next source scope](candidates/uav_fleet_transmission/NOTES.md#b04-final-cleanup). |
+| DM: fleet transmission control | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_transmission` | `/home/fires/hmasd-wsl` / `main` | Existing native lead, actual first turn gpt-6-astra/max; UUID01a0f02a-2102-7aa3-be5a-adfb99e49910. N8 B01–B04 fully read/independently diagnosed/published/cleaned; retain anticipation/tradeoffs,1724321792net bytes reclaimed, no B04 blocker. Same DM now owns Root-selected N5 fixed G versus retained S/paid B*/C/Q.10/Q.05 on32fresh worlds/two tapes:416H256episodes/106496steps/0new fits or calibration. Owns prospective notebook/row, versioned implementation, numerical/RNG review, exact publication/admission, full worker/reader/result diagnosis and cleanup. Parent/count/waiting ownership and all frozen N8 results unchanged. [G source assessment](candidates/uav_fleet_transmission/NOTES.md#ordinary-score-source-assessment), [selected question](#ordinary-score-control-root-decision-20260930), [B04 disposition](candidates/uav_fleet_transmission/NOTES.md#b04-independent-disposition). |
 | DM: lawful local-peer forecasting (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_local_peer_forecast` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max, native UUID 01a0f300-8dad-7670-b5df-e98b1806afd7. B01 C/V/R fully read, independently diagnosed and published at `d7445071f`; source `13da38312`, 32 worlds/96 episodes/24576 steps/0 fits. Reserve: retain conditional V gains, R geometry and all adverses; end the unchanged sign recipe with no active producer, unread result/advice or selected successor. Complete cleanup reclaimed 810602496 allocated bytes; sole canonical raw evidence and useful code remain, no blocker. Root owns any cross-question allocation. [Reading](candidates/uav_local_peer_forecast/NOTES.md#b01-complete-reading), [disposition](candidates/uav_local_peer_forecast/NOTES.md#b01-independent-diagnosis), [cleanup](candidates/uav_local_peer_forecast/NOTES.md#b01-publication-cleanup). |
 | DM: timely joint radio control (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_radio_recovery` | `/home/fires/hmasd-wsl` / `main` | Recovered unfinished B03 responsibility with original operation/source intact. Full192/192 saved-data reconstruction and independent diagnosis complete, zero new episodes. Reserve with conditional S2 capability, R tradeoffs and all adverses; no active reader, unread review or successor. [Complete result and disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b03-complete-reading), [original pause handoff](candidates/uav_radio_activation/NOTES.md#owner-pause-and-handoff---2026-09-29-2131-utc). |
 | Prior DM: joint motion and radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_joint_control` | `/home/fires/hmasd-wsl` / `main` | B02 fully collected, reconstructed and independently read. R retained alongside T-S capability and all adverses. No active producer/unread result; cleanup69dc18003 reclaimed1646100480allocated bytes and preserved unique evidence. New successor ownership is above, not a resumed old process. [Full reading and next-investment disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b02-complete-reading). |
