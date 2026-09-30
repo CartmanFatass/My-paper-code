@@ -1,0 +1,119 @@
+{
+  "admission_operation": null,
+  "arms": [
+    "C",
+    "J",
+    "R"
+  ],
+  "direction": "uav_fleet_transmission",
+  "launch_sha": "9928d34b54628baaa542961debb65c5ce7ef0f23",
+  "new_fits": 0,
+  "object_id": "fleet_silent_repositioning_b02",
+  "option_model_tick_ceiling": 448000,
+  "position_prediction_ceiling": 5184000,
+  "radio_request_ceiling": 50918864,
+  "source_bindings": {
+    "envs/pettingzoo/env_adapter.py": {
+      "bytes": 25232,
+      "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40"
+    },
+    "envs/pettingzoo/scenario1.py": {
+      "bytes": 7476,
+      "sha256": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e"
+    },
+    "envs/pettingzoo/uav_env.py": {
+      "bytes": 68827,
+      "sha256": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e"
+    },
+    "envs/pettingzoo/uav_radio.py": {
+      "bytes": 5001,
+      "sha256": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc"
+    },
+    "experiments/candidates/agent_count_generalization/adapter.py": {
+      "bytes": 4364,
+      "sha256": "b59d7028771b5acc4148f7dd90b5480c3143ae88580bb1b8154944831e2c0fbc"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/controller.py": {
+      "bytes": 5847,
+      "sha256": "d3766108d55662e0eea19e82227221d11e2ffedf0f971ad526071df2e142afb2"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/host.py": {
+      "bytes": 2791,
+      "sha256": "822745022a2842d4e683a677d2e3fa4c1dfc52db2dd781f4c0afb018cc09e0e3"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/option.py": {
+      "bytes": 9269,
+      "sha256": "dbf1dcb827e881986ccadf65c061662900df80b65cd01494c967773ad0815cc8"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/reader.py": {
+      "bytes": 10409,
+      "sha256": "e0a85eca3bf98784dce92e5d7bb661092b2f730d7ddaeab00d8ef84a598202b3"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/run.py": {
+      "bytes": 879,
+      "sha256": "484c5c36cab36f50273e8d9030beba0f51c0b923e3874b3ec0cc2fbe6b770b8b"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/study.py": {
+      "bytes": 11807,
+      "sha256": "b4e969f8352f27fa1d3dc6aaa76e9eba15f76ce40ce649ec5665ce0645039ced"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/worlds.json": {
+      "bytes": 83088,
+      "sha256": "b1be4cdb2f187a65e98283d9b72ab457edc63e55378636304de8d09d8ca7cbfa"
+    },
+    "experiments/candidates/uav_fleet_transmission/control.py": {
+      "bytes": 10050,
+      "sha256": "8fee671dcdf1183201f6a3e8290347a30e90b20b33955477b638cdbb5e5f36b5"
+    },
+    "experiments/candidates/uav_fleet_transmission/host.py": {
+      "bytes": 4306,
+      "sha256": "f46d4053f6fb0798f2d70e0d6aed3df6b63f012318b4df23207d06dbe0432f76"
+    },
+    "experiments/candidates/uav_fleet_transmission/reader.py": {
+      "bytes": 16221,
+      "sha256": "639dd22d6314067c6a526bc8534d525738a7de46a57b850c3e1c5950b4b86ce2"
+    },
+    "experiments/candidates/uav_fleet_transmission/study.py": {
+      "bytes": 19049,
+      "sha256": "1ce5f91d7ef67b17181a385021f854d2794e7cfb919662efff2b55d4711424cc"
+    }
+  },
+  "spec": {
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 26093024,
+    "cadence": 10,
+    "horizon": 500,
+    "n": 8,
+    "option_t": 40,
+    "world_ids": [
+      29324000,
+      29324001,
+      29324002,
+      29324003,
+      29324004,
+      29324005,
+      29324006,
+      29324007,
+      29324008,
+      29324009,
+      29324010,
+      29324011,
+      29324012,
+      29324013,
+      29324014,
+      29324015
+    ]
+  },
+  "updates": 0,
+  "versions": {
+    "numpy": "1.26.3",
+    "python": "3.10.20",
+    "torch": "2.7.0+cpu"
+  },
+  "world_file": {
+    "bytes": 83088,
+    "path": "experiments/candidates/uav_fleet_transmission/b02/worlds.json",
+    "sha256": "b1be4cdb2f187a65e98283d9b72ab457edc63e55378636304de8d09d8ca7cbfa"
+  },
+  "world_order": "ascending world; cyclic C/J/R starting at world index mod3"
+}
