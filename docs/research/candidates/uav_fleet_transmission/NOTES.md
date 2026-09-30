@@ -3032,3 +3032,211 @@ b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a and
 cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d; original bindings are in
 [the inherited contract](../../../../experiments/candidates/uav_fleet_adaptation/b04_native_development/contract.py).
 No new copy, asset reconstruction or deletion was needed for this source-only assessment.
+
+<a id="b05-original-selection-review"></a>
+### B05 selection: complete original independent question and answer — 2026-09-30
+
+Root's native question was sent2026-09-30 22:48:31UTC to its existing independent
+deep_report_review context. The final original answer returned23:10:40UTC. Both are preserved
+below in full, with their historical wording; later timing/allocation changes do not edit the
+question. Root read the full answer and selected the fixed score-aware comparison after reading
+the complete source assessment. This is the applicable independent selection review; no extra
+consultation or Pro Send is pending.
+
+#### Original Root question
+
+I have read your FULL final timing recommendation and both original B04/B06 critics. I accept no further N8 timing/temporal-depth purchase now, while retaining the demonstrated anticipation and all tradeoffs; I will preserve the full recommendation and reasoned Root decision. Parent DM has a separate bounded source-only pricing task for the original critic's already-fitted learned-top2 shortlist, with no new fit/labels or selected run. Do not absorb or duplicate that task.
+New candidate question for source-only independent innovation/selection assessment, potentially replacing the completed fleet-transmission allocation, not a fifth DM: do the retained categorical S assets still offer useful complete-package value against competent ordinary stochastic choice that uses C's actual candidate scores, rather than only the fixed uniform .10 perturbation Q? The existing positive S−Q result is substantial but Q ignores the modeled gaps among its26 alternatives. This may be an overlooked economically useful ordinary capability, or may already be covered/too close to repeated asset ranking to deserve purchase. Root is NOT asserting novelty, superiority, an identified cause of S's gains or that this candidate is promising enough to run. Please first check the original C-prior, fleet B02–B05 calibration, parent sampling/composition, July/external and shared records for actual coverage or stronger already-measured controls; do not simply invent a temperature sweep.
+If still useful, develop the smallest complete FAIR ordinary-policy comparison that can change use or the learning reference: available local information/nav/holds/fallback, existing C scores and score units/aliases, stochastic law and paid prospective calibration if indispensable, unchangedS/bothlineages/paidB*/Q/C references, panel/tape identities and complete cost/tail/quality/path outcomes. Explain whether it answers worthwhile ordinary-control/use knowledge rather than progress on learning by itself. Keep inherited learning evidence and all adverse/calibration exposure intact; do not rewrite S's demonstrated construction if an ordinary alternative performs well. Your reasoned recommendation may be to decline or propose a materially better independent question instead. Use all3libraries and load-bearing primary sources as needed, reusing applicable reading rather than ritual rescan. Source-only, no controller/actor/model/native queries, outcome calculation/pilot, implementation, fit or launch. Fleet B06 count study's fixed inputs/comparators remain untouched; this assessment cannot add arms mid-study. Work with the SAME /root/dm_fleet_transmission for concrete source/feasibility/cost facts after its B04 closure; I am assigning that source task there. Return full evidence-led reasoning, outcome implications, incremental and cumulative cost, and material dissent for Root selection.
+
+#### Complete original independent answer
+
+**Recommend selecting one bounded N5 comparison against a fixed score-aware ordinary policy.** Its value is practical: it can reveal a useful ordinary controller and change the reference for future learning. The evidence does not justify another fit, a temperature search, or a claim that this explains S’s gains.
+
+The question remains worthwhile alongside the separately selected waiting-allocation and L2_E studies. It does not depend on filling the completed DM’s slot.
+
+I checked the original C and memoization/decoder sources, native N5 objective, saved B02–B05 results and costs, original C-prior, parent sampling/composition records, relevant historical coverage, and primary passages from all three libraries. I reconstructed the comparison before reading the DM’s completed feasibility assessment. This review calculated no candidate outcomes and performed no controller, actor, model or native queries. G’s activation, performance and runtime remain unmeasured.
+
+The retained positive deserves this comparison. The saved fleet results report:
+
+| Existing S−Q mean J | Fitted B02 lineage | Fitted B03 lineage |
+|---|---:|---:|
+| B04 | +.014836 [−.003726, +.033398] | +.021881 [+.007273, +.036490] |
+| B05 | +.023534 [+.006811, +.040257] | +.027712 [+.009724, +.045700] |
+
+These are descriptive paired-world intervals conditional on two retained fitted assets. Repeated evaluation panels do not create additional training replications. B05 also retained mean service gains of 1.656/2.030 users per tick, higher service p10 and shorter paths. This is useful complete behavior, beyond a training-loss improvement. [B04 saved results](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b04_native_development_a01/summary.json), [B05 saved results](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b05_native_consequence_a01/summary.json)
+
+The adverse evidence remains consequential. B04 world 29351009 gives S−Q −.110627 J and −7.429688 users per tick; world 29353015 also strongly favors Q. B05’s S in world 29483104 has **two zero-service ticks**, despite improving that world’s mean service over Q. Quality is not uniformly improved: B04’s first lineage loses mean SINR quality. The failed PPO and consequence-head increments remain active, finite-learning failures; an ordinary-control comparison neither repairs nor erases them.
+
+The coverage gap is specific:
+
+- Original C-prior used a nominal .90 C/.10 uniform-alternative initialization; its actor inputs did not include C’s complete score vector.
+- Fleet B04 calibrated C departure rates 0/.05/.10/.20 and S temperatures. **C_.10 led the ordinary candidates in lineage 0; C_.05 led in lineage 1.** The overall paid winners remain S_L0 at T=2 and S_L1 at T=1.
+- Parent B04 changed joint sampling while retaining the marginal probabilities. Parent B05 demonstrated valuable managed-radio alternatives, but their additional information/control rights do not answer this all-on local-motion comparison.
+- C7 and history-based H supply useful existing ordinary controls, but neither establishes a stronger score-aware stochastic alternative. The inspected July/external records reinforce information-matched comparison; they do not supply this missing measured policy. This is bounded coverage, not a novelty claim.
+
+The important correction is therefore to the **ordinary reference**, not to the established construction of S.
+
+C already computes 27 candidate scores from lawful current local information and its private navigation state. Each score is a four-tick **mean** of `.7 × served/50 + .3 × quality`. These weights match native N5 J; neither objective includes height, travel or compute penalties. The approximation comes from truncated local observations, inferred frozen unknown interference and stationary peers while all five actual agents move jointly. [Controller](/home/fires/hmasd-wsl/experiments/candidates/uav_local_history/b01/controller.py), [native reading](/home/fires/hmasd-wsl/experiments/candidates/uav_local_history/b01/study.py:60)
+
+I recommend one prospective law, G. Let \(c\) be C’s current lawful choice, including fallback, and \(s_a\) its candidate score:
+
+\[
+p_G(c)=0.9,\qquad
+p_G(a\ne c)=0.1
+\frac{\exp((s_a-m)/0.014)}
+{\sum_{b\ne c}\exp((s_b-m)/0.014)},\quad
+m=\max_{b\ne c}s_b.
+\]
+
+Here `.014 = .7/50` represents one additional modeled served user throughout the four-tick mean, holding quality fixed. It is a physically interpretable prospective scale, **not an estimated optimum**. No calibration is indispensable for testing this one specified ordinary capability.
+
+Preserve the following semantics:
+
+- Original ordered 27 categories, including clipped physical aliases; do not merge categories.
+- C’s returned navigation transition on each policy’s actual trajectory, four-tick holds, and episode-private caches.
+- Exact Q_.10 probability construction when all scores tie, including the zero-service waypoint fallback.
+- The original fleet FP64, one-uniform, indexed flat-CDF decoder. Cache scores/logits, never sampled actions.
+- Both **fitted** S_L0/S_L1 endpoints and their original helper semantics. These names must not be confused with the historical untrained `S0` arm.
+
+Weighting by score increases the conditional tail’s expected C proxy in real arithmetic. That does **not** guarantee native improvement. Numerical interpretation must also respect FP64/53-bit sampling: tiny bins may have no representable width. Under the flat CDF, reweighting alternatives shifts the modal interval, so common uniforms do not preserve the realized departure event.
+
+The strongest objection to this purchase is that a locally better tail might suppress productive departures from a misleading forecast. A negative G result would reject this fixed program, not establish an ordinary-control ceiling or identify a repair. That uncertainty is the experiment’s useful content.
+
+The smallest complete comparison I consider worthwhile is:
+
+| Program | Episodes per fresh world |
+|---|---:|
+| Deterministic C | 1 |
+| Q_.10, Q_.05, G | 2 each |
+| S_L0/T1, S_L1/T1, paid B*0 = S_L0/T2 | 2 each |
+| Paid B*1 = S_L1/T1 | Reuse identical output |
+
+Use **32 fresh common worlds**, two prospectively fixed private sampling roots, N5/U50/H256, all transmitters on, unchanged physics and native objective: **416 episodes and 106,496 native steps**. Bind source/assets, initial geometry, static users, configuration and indexed draws before execution. Fresh world identities prevent this becoming another ranking on repeatedly exposed panels. Fleet B06’s count-study inputs and comparators remain untouched.
+
+Freeze the reading before outcome exposure:
+
+- Primary retained-package contrasts: S_L0−G and S_L1−G separately.
+- G−Q_.10 measures the new ordinary law; G versus Q_.05/C and paid B* supplies the practical reference.
+- Average the two tapes within each world, then report all 32 paired differences and descriptive paired-world uncertainty. Shared controls remain correlated; neither tapes nor repeated panels enlarge the number of fitted lineages.
+- Retain native J, mean service, p10, minima, zero-service ticks, quality, path, boundary/alias behavior, cache work and complete CPU/wall cost. Aggregate service does not establish individual-user continuity.
+
+The saved G scores, C index and uniform also permit a reader-only comparison with Q_.10’s same-history categorical choice: 20,480 decisions and at most 81,920 four-tick geometry comparisons. This distinguishes weak exposure or aliases from physically active intervention without another rollout or counterfactual reward claim.
+
+The outcomes would change decisions as follows:
+
+- **G improves over Q and credibly surpasses retained S with acceptable service/path/cost tradeoffs:** adopt G as a useful ordinary reference for future N5 learning comparisons. Preserve S’s demonstrated construction.
+- **G improves over Q while S retains additional value:** keep both capabilities; future learning must address the stronger ordinary reference.
+- **G is actively adverse:** retain the existing packages and close this fixed score-tail proposal. No automatic temperature sweep follows.
+- **Differences are uncertain or exposure is sparse:** report that boundary. An interval crossing zero is not equivalence, and uncertainty alone does not purchase more evaluation.
+
+A J increase coupled to worse tails, travel or compute is a tradeoff, not an automatic deployment upgrade. No task-specific conversion among those costs has been supplied.
+
+The complete prospective bill is modest in compute but meaningful in support work. The DM’s published source assessment prices **3–12 combined worker/reader CPU minutes**, **4–8 support hours**, approximately **.15–.30 GB** of canonical raw evidence, a temporary 1.6–1.9 GB launcher snapshot and .6–1.0 GB process-memory planning range. These are estimates, not benchmarks or node admission. The worker makes 71,680 full-C requests and 61,440 student requests; before cache savings, C alone permits 1,935,360 candidate trajectories/7,741,440 modeled ticks. Full reading and its reconstruction cost are included. [Published source assessment, commit 0fd639636](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_transmission/NOTES.md#ordinary-score-source-assessment)
+
+Sunk cost remains explicit. The two original S acquisitions involved two fits, 163,840 expert labels and 16,000 optimizer updates; their complete B02/B03 studies consumed 212,992 native steps and 205.046 measured worker/reader CPU seconds. The paid B* calibrations added 512 episodes/131,072 steps within B04. Through B05, the broader chain totals **8 fits, 2 calibrations, 1,687,552 native steps and 2,343.116 measured CPU seconds**, with differing timer scopes/hosts. The proposed comparison raises that step total to **1,794,048**, with no additional fits or calibration. Earlier fleet B01’s separate two fits/576,000 steps/31,190.348 CPU seconds and technical failure remain incurred; parent studies and unmetered scientific/engineering labor also remain separate.
+
+The literature supports familiarity and limits, not a performance promise. Foundations **P13**, §2.2, defines Boltzmann choice from marginalized utilities in static potential games. **MARL-0405/ADER** discusses reward scale and entropy tradeoffs. **MEHARL, arXiv:2306.10715v6**, §4, uses soft action values and sequential policy improvement. None turns C’s truncated four-tick forecast into those objects or justifies `.014` as optimal. [P13 metadata](/home/fires/hmasd-wsl/docs/new-libs/corpus/papers/P13/metadata.json), [P13 primary text](https://arxiv.org/pdf/2204.05466), [MARL-0405 primary extraction](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0405.json), [MEHARL primary PDF](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2024/fe066022bab2a6c6a3c57032a1623c70/arxiv-2306.10715.pdf)
+
+**MATERIAL_DISSENT: no.** I recommend this bounded ordinary-capability comparison on its own value/cost. The evidence supports neither a broader superiority claim nor further investment contingent only on obtaining a positive result.
+
+<a id="b05-selected-contract"></a>
+### DM response and fixed prospective B05 contract
+
+I accept the recommendation without material dissent. The source assessment and current
+published topic4 support this ordinary-capability/use question. Both inherited S endpoints
+are worth preserving, and G tests one competent way to spend already lawful C scores, without
+assuming that extra reward training, temperature search or a new architecture is needed.
+The promising premise is limited: G improves the conditional local proxy in real arithmetic;
+the native consequence remains uncertain because local censoring and simultaneous motion can
+make that forecast misleading. A negative or unresolved result can close the fixed law. Neither
+retained learned gains nor this ordinary proposal supplies a general learning or coordination
+claim. All positive/adverse earlier evidence and the cost chain above remain binding context.
+
+Root selected this scope and delegated execution, reading, publication and cleanup to the same
+direction lead. The new owned implementation is b05_score_sampling, object
+UAV-SCORE-SAMPLING-B05; intended initial run tag b05_score_sampling_a01. This revises the active
+question to retained local categorical packages versus score-directed ordinary stochastic
+control. It does not resume N8 timing/depth investment or alter any fleet-count/parent source.
+
+The exact G law, fitted asset hashes, seven distinct programs and B*1 identity reuse are those
+in the source assessment and complete answer above. Frozen production details:
+
+- Native host N5/U50, all radios on, H256,4-tick holds; original ordered27 categories,
+  original source C, original114-feature helpers and original FP32 student endpoints.
+  Student temperatures1/1/2 are fixed by the retained S_L0/S_L1/B*0 identities.
+- Worlds29630000..29630031, two private indexed sampling roots29630101 and29630102,
+  actor-constructor-only seeds29630111/29630112, master identity29630100. Address search
+  found no prior use of this exact seed block;29510000 was rejected because fleet B06 owns it.
+  Constructor seeds do not fit or replace any loaded parameter.
+- Each world contains C once and Q10,Q05,G,S_L0,S_L1,Bstar_L0 on both tapes:
+ 13episodes/world,416total/106496native transitions. Bstar_L1 reuses S_L1 exactly.
+  Rotate the13-member episode order by the world index to avoid fixed timing position.
+  Every arm/tape resets from the same world; static users/initial geometry must agree by digest.
+- CPU, one Torch/inter-op/BLAS thread, deterministic algorithms, FP32 actor/command and FP64
+  score/probability/native-coordinate arithmetic. Preferred executing node is the configured
+  remote wsl_4070 with its current interpreter; fresh actual-node admission remains required.
+  No trial, pilot, partial panel, adaptive stop or selected retry is authorized.
+- Retain every episode and all unique21 signed paired contrasts between seven programs.
+  Primary S_L0−G and S_L1−G remain separate; G−Q10 is the fixed ordinary-law contrast.
+  G−Q05/C and both paid B* readings are required, with Bstar_L1 transparently aliasing S_L1.
+  All other contrasts are descriptive references, not additional confirmation tests.
+- Average each stochastic metric across its two tapes within a world; C has its single value.
+  Compute descriptive paired-world percentile-bootstrap95% intervals with10000 resamples,
+  root29630191, using the same resample indices across metrics/contrasts. Preserve all32
+  differences and each episode/tape. No fitted-lineage pooling, multiplicity-adjusted
+  confirmation, equivalence margin or deployment utility price is asserted.
+- Read native J/return, mean service, service-p10/minimum/zero-service ticks, quality,
+  mean path/UAV, boundaries/zero displacement, fallback, categorical/physical exposure,
+  cache/query/model/helper work and complete CPU/wall. G's saved-only Q10 comparison uses
+  20480 categorical checks and at most81920 geometric agent steps; no reward counterfactual
+  or new model/native shadow rollout is permitted. Report both nominal and realized
+  departures; preserve finite-grid effects and clipped aliases.
+- The full worker/reader count envelope and estimates remain those priced above. Reader
+  reconstructs all ordinary C scores on each episode's actual saved histories with exact
+  episode-private memoization; student helper state is replayed, and every logged student
+  decision receives a one-row actor check (61440rows). Reader policy work is explicitly
+  additional; it performs no new native environment transition. Source hashes, immutable
+  assets, all saved arrays/metrics/decoders/clocks and paired geometry are checked.
+- Stop the fixed study after complete reading and independent scientific diagnosis. An
+  adverse/null/inconclusive observation does not authorize a new epsilon/tau, extra worlds,
+  another fit or duplicated operation. Technical missingness is preserved as such and any
+  repair has its own prospective exposure decision. This is exploratory fixed-policy work,
+  not confirmation or a new population-learning claim.
+
+The declared new fit/label/calibration/optimizer counts are all zero. The priced106496steps
+would raise the selected inherited-chain exposure to1794048steps, while earlier fleet B01,
+parent work and support remain separate incurred costs. Target canonical evidence stays one
+copy on the executing node; collection retains compact local readings and verified locators.
+No change to the earlier B04 evidence/cleanup is required.
+
+<a id="b05-score-sampling-l0"></a>
+### L0 — fixed score-tail kernel and complete paired native study
+
+Deliver one bounded B05 worker plus full reader with immutable-source/asset bindings, exact
+per-world/tape identity, partial-failure records, raw arrays and a compact complete reading.
+Owned code is experiments/candidates/uav_fleet_transmission/b05_score_sampling/;
+tests mirror that path under tests/experiments/candidates/; records/scratch remain in this
+direction's existing NOTES, runs and temp paths. Author on shared main; no other direction
+or shared host/launcher file is assigned. Existing frozen code is imported unchanged.
+One bounded Implementer at a time may own only the policy-kernel module and its focused
+tests; the DM owns contract, collection, reading, runner, notebook and Git index/publication.
+
+The kernel interface is FixedPolicy(arm, actor, world, agent, sampling_root). Query receives
+one local row, decision tick and predecision navigation; it returns original feature/cache/
+next_nav fields plus action index/command, probabilities, innovation, entropy and chosen
+density. Ordinary arms retain c_index/full scores/service. Student arms retain original
+one-row logits. G uses exactly tau.014 and .1 departure mass, all-score ties reuse exact Q10,
+and no cache stores sampled choices. No model or policy accepts evaluator truth. The DM will
+review the implementation and checks; the engineer does not acquire notebook/index ownership.
+
+Checks cover synthetic unequal/tied scores, finite-grid/tiny bins and original Q identity;
+fallback/nav and copied-cache behavior; indexed RNG independence and no global-RNG mutation;
+original S/T2 behavior on synthetic fixed actors; commanded versus clipped physical paths;
+and a small synthetic-environment collector→storage→reader fixture with deliberately corrupted
+draw, score, source or metric evidence rejected. No extra native correctness episode is planned.
+Fixture observations/actors are fabricated, cannot use production worlds or immutable fitted
+assets, and cannot pass the production admission path. Record actual test requests/support
+costs; do not treat these as native results. Reuse unchanged host checks. Independent numerical/
+RNG/reader/launch review is required before result execution. The DM accepts that review and
+the bounded change, then commits/pushes exact inputs and performs remote-first fresh admission.
