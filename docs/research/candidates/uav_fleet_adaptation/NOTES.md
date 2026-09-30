@@ -5197,3 +5197,427 @@ the old snapshot or same-source retry option for this changed implementation.
 This repair leaves both the conjecture and independent scientific selection
 advice unchanged. The next scientific boundary remains the complete read result
 or a material obstruction, not launch acceptance.
+
+<a id="b06-a02-operation"></a>
+**A02 acceptance,22:50:49 UTC.** The repaired published input is
+`f529ba39906ec8f86f267d335be5d4346eec9771`; the
+[native manifest](../../../../runs/uav_fleet_adaptation/b06_count_development_a02/launch-manifest.json)
+binds the one accepted producer/full-reader chain and its stable operation.
+Fresh wsl_4070 preflight passed with14,669,373,440 physical/effective available
+bytes against the4GiB floor; no active heavy process was observed immediately
+before launch. CPU/one thread and canonical original assets are unchanged.
+The prior A01 remains terminal and scientifically empty.
+
+The same child-owned deterministic controller adopted the live A02 runner and
+supervisor at generation29, with no event yet. It observes the manifest's
+handle every30s; the native child remains active through complete reading.
+The five H8 native fixtures and their saved-array checks passed, and F0's
+first2,400 optimizer updates completed before phase1 acquisition. This is
+execution progress only: no final panel or count-development conclusion has
+been read. All later terminal collection, review and publication remain owed.
+
+<a id="b06-complete-reading"></a>
+### B06 complete reading — active count-diverse learning, uncertain increment over ordinary continuation
+
+**Technical boundary and evidence.** The one A02 producer/fixed-reader chain from
+published source `f529ba39906ec8f86f267d335be5d4346eec9771` finished successfully
+at23:07:11.424650 UTC on2026-09-30. The worker and full priced reader are complete;
+none was restarted or rerun. [Original complete reading](../../../../runs/uav_fleet_adaptation/b06_count_development_a02/reading.json)
+is `VERIFIED`,5,388,192 bytes, SHA-256
+`3ca895a0f6a5ea6bd4ec35c239e3dde9a78302ccc134efdbacdbf2f5b82e8af9`.
+The [native manifest](../../../../runs/uav_fleet_adaptation/b06_count_development_a02/launch-manifest.json),
+[terminal status](../../../../runs/uav_fleet_adaptation/b06_count_development_a02/native-status.json)
+and [exit record](../../../../runs/uav_fleet_adaptation/b06_count_development_a02/process-exit.json)
+bind source, host and successful operation. Both accepted native process identities
+were absent with a consistent exit0 record. All nine collected original files matched
+the remote byte hashes; native-status.json is an additional terminal observation.
+The separate A01 input failure remains recorded above with zero scientific exposure.
+
+The deterministic observer returned a READY event at generation29:
+`84d5a4562d03f28a9701de5b`, wake `3af1e9e3-0754-47f4-921e-1ae5d090616d`.
+Its event was drained, rearmed to30 and stopped. The native-child queue again
+returned `-32600`; the active same child received completion through the foreground
+deterministic observer. Later interruption during interpretation did not restart
+any operation; the same DM and original independent Critic resumed their unfinished
+reading. Technical completion alone was not treated as the scientific boundary.
+
+**Question and conditioning.** F is ordinary further N5 teacher imitation; M is
+balanced N3/N7-episode imitation, with the same reliable count input, initialized
+network, labels and optimizer exposure. P reuses the original S parameters under
+the revised count-aware controller/helper interface. B*0 retains the already-paid
+temperature2 choice, and B*1 is exactly P1 by program identity. C/Q use the same
+count rights. No new calibration was selected. The fixed primary effect averages
+N4/N6 and both inherited-lineage blocks equally after averaging the two private
+tapes within each of32 world clusters. Counts, tapes, agents and training rows
+are not additional independent world or training replications. All intervals below
+are conditional descriptive t95 intervals over those32 worlds, not confirmation,
+training-population inference or an equivalence test. N5 is retained separately.
+
+The current published background was re-read at `bd9bd7cd1aa592df02c9d3b635440766e21f2100`,
+[topic2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练) and
+[topic4](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面).
+Its distinction between parameter reuse, active fitting and complete native value
+remains load-bearing. The revised interface means this cannot be called unchanged
+S package portability. Earlier PPO/CAL/CONT losses and B20's distinct Gaussian
+count results are contrary evidence, not pooled experiments or a diagnosed common
+cause. The present record tests the selected finite development package directly.
+
+**Fixed primary and lineage targets.**
+
+| Contrast / metric | Mean and world t95 | Positive / negative / tied worlds |
+|---|---:|---:|
+| M−F target, J | +0.005574 [-0.000643,+0.011791] | 18/14/0 |
+| M−F target, mean_served | +0.276520 [-0.187345,+0.740384] | 17/15/0 |
+| M−F target, service_p10 | +0.318359 [-0.233789,+0.870508] | 14/17/1 |
+| M−F target, min_served | -0.082031 [-0.303588,+0.139526] | 15/14/3 |
+| M−F target, mean_sinr_quality | +0.005675 [+0.002637,+0.008713] | 23/9/0 |
+| M−F target, mean_path_length_m | +919.854876 [+739.506585,+1100.203167] | 31/1/0 |
+| L0 M−F N4/N6, J | +0.001897 [-0.006365,+0.010159] | 16/16/0 |
+| L0 M−F N4/N6, mean_served | +0.023804 [-0.584005,+0.631613] | 15/17/0 |
+| L0 M−F N4/N6, service_p10 | +0.109375 [-0.771662,+0.990412] | 14/18/0 |
+| L0 M−F N4/N6, mean_path_length_m | +951.320281 [+654.131049,+1248.509513] | 27/5/0 |
+| L1 M−F N4/N6, J | +0.009250 [+0.000585,+0.017915] | 19/13/0 |
+| L1 M−F N4/N6, mean_served | +0.529236 [-0.106186,+1.164657] | 20/12/0 |
+| L1 M−F N4/N6, service_p10 | +0.527344 [+0.008835,+1.045853] | 21/11/0 |
+| L1 M−F N4/N6, mean_path_length_m | +888.389470 [+607.436757,+1169.342183] | 29/3/0 |
+
+The primary J point is positive but its interval spans zero; service and p10 remain
+uncertain and the mean episode minimum does not improve. L1 has a positive
+conditional target J interval and p10 signal; preserve that result rather than
+calling both lineages negative. M travels substantially farther than F in31/32
+primary world averages. The objective arithmetic is coverage +.003871277 and
+quality +.001702450, summing to J +.005573727; this decomposition is not a causal
+mediation analysis. No movement-energy utility is modeled here.
+
+**Every count/lineage comparison.** J intervals, service/p10 point differences and
+mean path differences are within-count, with identical world/tape matching.
+
+| Lineage,N | M−F J [t95] | M−F service / p10 | M−F path m/UAV | M−P J [t95] | M−P service / path m/UAV |
+|---|---:|---:|---:|---:|---:|
+| L0,N4 | +0.010093 [-0.005632,+0.025818] | +0.510803 / +0.187500 | +1355.554 | +0.002340 [-0.010490,+0.015170] | -0.002869 / +1218.985 |
+| L0,N5 | +0.005418 [-0.008014,+0.018850] | +0.282959 / +0.242188 | +1133.493 | -0.005071 [-0.018207,+0.008065] | -0.484436 / +847.088 |
+| L0,N6 | -0.006299 [-0.016938,+0.004340] | -0.463196 / +0.031250 | +547.086 | -0.004384 [-0.013997,+0.005229] | -0.375793 / +237.661 |
+| L1,N4 | +0.008562 [-0.000994,+0.018119] | +0.458496 / +0.359375 | +1111.631 | -0.003946 [-0.017817,+0.009924] | -0.422546 / +740.140 |
+| L1,N5 | +0.009601 [-0.002897,+0.022100] | +0.653137 / +0.351562 | +591.282 | -0.002234 [-0.013681,+0.009214] | -0.281311 / +386.711 |
+| L1,N6 | +0.009939 [-0.001793,+0.021670] | +0.599976 / +0.695312 | +665.148 | -0.001929 [-0.012841,+0.008984] | -0.207825 / +140.396 |
+
+Each of the six individual M−F J intervals crosses zero; the L0/N6 point is
+negative. Every M−P J interval also crosses zero. M−P mean service is nonpositive
+in all six cells, and mean path is higher in all six. This does not establish a
+useful incremental native capability over the retained P. F−P J points are
+−.007753/−.010489/+.001915 for L0,N4/5/6 and
+−.012508/−.011835/−.011867 for L1; the latter N5 and N6 intervals are strictly
+negative. F travels less than P in all cells. M's advantage over F is therefore
+consistent with attenuating an ordinary continuation loss; the paired comparison
+does not identify the cause of that attenuation.
+
+M−B*0 J is−.011163[−.025819,+.003492] atN4,
+−.013205[−.024104,−.002306] atN5, and−.001059[−.011466,+.009348] atN6.
+B*0−P0 J is+.013503/+.008134/−.003325, all intervals crossing zero, with
++1019.196/+1481.825/+1665.584m/UAV. B*1=P1 is reused by identity, not evaluated
+again. No retrospective temperature upgrade follows.
+
+**Retained complete native capability and absolute scale.** All native means below
+first average private tapes within a world. C/Q are shared within a count; repeated
+C/Q rows are intentionally omitted. B*1's equal P1 row is also omitted.
+
+| Program | N | J | Service/step | Episode p10 | Episode minimum | SINR quality | Path m/UAV | Decision CPU s / whole-episode CPU s |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| C | 4 | 0.367287 | 21.963623 | 21.640625 | 13.031250 | 0.199320 | 2504.676 | 0.013399 / 0.143151 |
+| Q | 4 | 0.388338 | 23.491272 | 20.187500 | 11.781250 | 0.198200 | 4022.270 | 0.066158 / 0.206689 |
+| P0 | 4 | 0.405882 | 24.803528 | 22.250000 | 12.859375 | 0.195443 | 2201.324 | 0.060985 / 0.198370 |
+| F0 | 4 | 0.398129 | 24.289856 | 22.023438 | 12.640625 | 0.193569 | 2064.754 | 0.055210 / 0.190428 |
+| M0 | 4 | 0.408222 | 24.800659 | 22.210938 | 12.796875 | 0.203377 | 3420.308 | 0.069336 / 0.207894 |
+| Bstar0 | 4 | 0.419386 | 25.832458 | 22.218750 | 12.390625 | 0.192437 | 3220.520 | 0.092135 / 0.234309 |
+| C | 5 | 0.348957 | 20.827759 | 20.187500 | 11.593750 | 0.191229 | 2519.627 | 0.018169 / 0.162588 |
+| Q | 5 | 0.359352 | 21.635071 | 17.703125 | 10.109375 | 0.188205 | 4119.363 | 0.088140 / 0.245464 |
+| P0 | 5 | 0.382096 | 23.417664 | 20.523438 | 11.015625 | 0.180830 | 2918.984 | 0.101114 / 0.256850 |
+| F0 | 5 | 0.371607 | 22.650269 | 20.023438 | 10.906250 | 0.181678 | 2632.579 | 0.087165 / 0.240847 |
+| M0 | 5 | 0.377025 | 22.933228 | 20.265625 | 11.156250 | 0.186533 | 3766.072 | 0.104572 / 0.261796 |
+| Bstar0 | 5 | 0.390230 | 24.083069 | 20.117188 | 10.421875 | 0.176891 | 4400.809 | 0.150619 / 0.313473 |
+| C | 6 | 0.322519 | 19.198975 | 17.984375 | 8.937500 | 0.179112 | 2481.657 | 0.025489 / 0.185300 |
+| Q | 6 | 0.328142 | 19.724243 | 15.476562 | 7.953125 | 0.173341 | 4296.427 | 0.111488 / 0.287489 |
+| P0 | 6 | 0.350412 | 21.488098 | 17.804688 | 8.781250 | 0.165263 | 3695.687 | 0.159422 / 0.336309 |
+| F0 | 6 | 0.352328 | 21.575500 | 17.945312 | 8.812500 | 0.167569 | 3386.263 | 0.138370 / 0.312730 |
+| M0 | 6 | 0.346028 | 21.112305 | 17.976562 | 8.812500 | 0.168187 | 3933.349 | 0.143033 / 0.317779 |
+| Bstar0 | 6 | 0.347087 | 21.332336 | 16.437500 | 7.906250 | 0.161449 | 5361.272 | 0.193257 / 0.374336 |
+| P1 | 4 | 0.409502 | 25.135742 | 22.890625 | 13.125000 | 0.192004 | 2198.411 | 0.060858 / 0.196812 |
+| F1 | 4 | 0.396993 | 24.254700 | 22.421875 | 13.265625 | 0.191425 | 1826.920 | 0.053504 / 0.188666 |
+| M1 | 4 | 0.405555 | 24.713196 | 22.781250 | 12.625000 | 0.198569 | 2938.551 | 0.069278 / 0.208740 |
+| P1 | 5 | 0.387610 | 23.799683 | 20.757812 | 11.500000 | 0.181383 | 2948.432 | 0.104706 / 0.261976 |
+| F1 | 5 | 0.375775 | 22.865234 | 20.429688 | 11.453125 | 0.185539 | 2743.861 | 0.094338 / 0.251078 |
+| M1 | 5 | 0.385377 | 23.518372 | 20.781250 | 11.093750 | 0.187064 | 3335.142 | 0.106742 / 0.264103 |
+| P1 | 6 | 0.352801 | 21.578491 | 18.226562 | 8.796875 | 0.169007 | 3827.617 | 0.160431 / 0.336895 |
+| F1 | 6 | 0.340934 | 20.770691 | 17.492188 | 8.750000 | 0.167146 | 3302.865 | 0.142910 / 0.316638 |
+| M1 | 6 | 0.350872 | 21.370667 | 18.187500 | 8.906250 | 0.172276 | 3968.014 | 0.150582 / 0.326624 |
+
+P−Q J is+.017545/+.022744/+.022271 for L0,N4/5/6 and
++.021164/+.028258/+.024659 for L1, with every conditional interval strictly
+positive. Its mean service increments are1.312256/1.782593/1.763855 and
+1.644470/2.164612/1.854248; episode p10 increments are2.0625/2.820313/2.328125
+and2.703125/3.054688/2.75. P also travels1820.946/1200.379/600.740 and
+1823.860/1170.931/468.810m/UAV less than Q. All six M−Q and M−C J intervals
+are also positive. Thus development has not erased learned competence, but the
+retained P already supplies the useful increment beyond these ordinary references.
+No cross-count pooling ranks N: native J falls as N4→N5→N6 for all programs on
+these shared layouts, because more transmitters alter interference and capacity
+together. This is not a causal decomposition or proof that extra fleet capacity
+is universally harmful. CPU is actual cached CPU/one-thread work on wsl_4070,
+not a deadline experiment or a comparison to earlier differently threaded hosts.
+
+**Adverse and favorable worlds.** No final evaluation trajectory among1,632 has
+a zero-total-service tick. This does not erase the B02–B05 zero-service outcomes
+or establish individual-user continuity. Acquisition has17 zero-service ticks
+(F0,N5:6;F1,N5:2;M0,N3:7;M0,N7:1;M1,N3:0;M1,N7:1), retained with its own
+training semantics. Large final losses remain despite the absence of total outage.
+
+| Lineage,N | Worst M−F J world | J / service / p10 difference | Best M−F J world | J / service / p10 difference |
+|---|---:|---:|---:|---:|
+| L0,N4 | 29515003 | -0.088373 / -5.912109 / -8.250000 | 29515010 | +0.143728 / +9.224609 / +12.000000 |
+| L0,N5 | 29515018 | -0.073431 / -5.773438 / -4.250000 | 29515020 | +0.107921 / +8.267578 / +5.500000 |
+| L0,N6 | 29515014 | -0.066803 / -4.482422 / -4.250000 | 29515026 | +0.046710 / +3.439453 / +6.500000 |
+| L1,N4 | 29515005 | -0.040024 / -2.953125 / -3.250000 | 29515017 | +0.067746 / +4.828125 / +2.250000 |
+| L1,N5 | 29515017 | -0.060867 / -4.160156 / -4.750000 | 29515019 | +0.084273 / +6.748047 / +3.000000 |
+| L1,N6 | 29515009 | -0.045257 / -3.748047 / -5.250000 | 29515021 | +0.093193 / +6.314453 / +6.500000 |
+
+L0/N5 world29515009 loses7.25p10 users under M−F even though another world
+has the largest J loss. L1/N4 world29515010 loses.142737J and10.085938
+service/step under M−P; its positive29515026 witness gains.061666J and
+4.259766 service. P−Q is not per-world dominance: L1/N4 world29515014
+loses.058418J/3.556641service/6.25p10, and L0/N5 world29515014 loses
+.056345J/3.861328service/1.5p10. All full paired vectors and identities remain
+in the original reading, rather than retaining only these selected illustrations.
+
+**Learning and representation exposure.** All four full-network fits completed
+8,000 Adam updates and4,096,000 sample presentations apiece. Every ordinary
+network update had nonzero gradients. F's count gradients/weight/Adam moments
+remain zero by its N5 input; M's count gradient is nonzero on every one of its
+8,000 updates in both lineages. Initial lifted weights are identical within a
+lineage, and the saved original/state/checkpoint bindings all verify. Final full
+network L2 movement and count-branch movement are:
+
+| Fit | Full-network L2 / changed of34,843 | Count L2 / changed of128 | Distinct combined feature rows of81,920 | Last paid-stream CE / accuracy | Complete-fit CPU s |
+|---|---:|---:|---:|---:|---:|
+| F0 | 25.983034 / 27774 | 0.000000 / 0 | 9238 | 0.243070 / 0.947974 | 68.910648 |
+| M0 | 26.365262 / 28306 | 0.609702 / 126 | 10605 | 0.219724 / 0.948364 | 66.712726 |
+| F1 | 24.981893 / 24184 | 0.000000 / 0 | 8820 | 0.251375 / 0.941064 | 65.757986 |
+| M1 | 26.678119 / 27443 | 0.714381 / 128 | 10723 | 0.259637 / 0.934778 | 66.857192 |
+
+All12 phase training-stream cross entropies fall from first to last epoch. These
+are losses/accuracies at the changing models during paid optimizer forwards,
+not fixed-endpoint validation. Repeated held decisions remain fitting rows;
+the distinct-row counts are not independent supervision counts. F has81,920 N5
+rows, while M has24,576 N3 and57,344 N7 rows: episode balance is30/70 row
+balance. Source/fit/label/shuffle identities and all280 epoch records are retained;
+there is no no-learning escape for this result.
+
+The exposure limits the representation conclusion sharply: **all acquisition,
+evaluation and fixture visible-peer histograms stop at2 peers**, including N7.
+No previously unused high-index peer slot was exercised; all final decisions
+with more than4 visible peers count zero. Acquisition histograms (0/1/2 peers)
+are F0,N5:66238/15626/56;M0,N3:17291/5966/1319;
+M0,N7:46951/10356/37;F1,N5:69634/12206/80;
+M1,N3:17968/5799/809;M1,N7:47908/9390/46.
+N3 can expose its complete two-peer roster; N7 remains locally sparse.
+This is actual static-count/interference/capacity interpolation with a scalar
+count branch, not crowded roster stress or evidence for invariant representation.
+The fixed fixtures also checked layout and interface mechanics, not a dense-roster
+quality pilot. Whether different completeness exposure, count weights, supervised
+data or altered visitation explains the small M−F increment remains unresolved.
+
+Own-history final entropy for P/F/M is respectively
+L0,N4:.307690/.230270/.312955;N5:.426474/.301814/.354046;
+N6:.547168/.384218/.373528;L1,N4:.304166/.203663/.336496;
+N5:.433777/.328151/.391173;N6:.567050/.422408/.444426.
+F entropy is lower than P everywhere, but M is higher atN4 and lower atN5/N6.
+M has fewer zero-displacement UAV ticks and longer paths than F/P in every cell.
+These are descriptive own-history changes, not same-history physical shadows
+or a common identified entropy failure. No additional actor shadows were bought.
+
+**Exposure and complete cost.** The selected1,024 acquisition episodes contribute
+262,144 native steps and327,680 C_N labels;1,632 final episodes contribute
+417,792 steps. Five separately priced H8 fixtures add40 steps, for2,661 saved
+trajectories/679,976 native calls/3,399,880 UAV ticks. Four fits consume32,000
+updates and16,384,000 presentations. Five constructors and2,661 explicit resets
+and refreshes are charged; native dense power slots total189,267,523.
+There are zero new calibrations, early-stopping selections or extra final fits.
+
+Worker C receives419,890 requests (331,767 cache hits/88,123 misses), computing
+2,379,321 paths/9,517,284 model ticks,35,188,776 candidate and363,010 setup
+links. Helper work is289,738 actual calls/1,278,500 setup/2,366,124 extreme
+links. There are593,920 student requests and268,864 actual uncached neural rows.
+The491,520 sampled-draw counter includes61,440 Q draws plus430,080 final
+student-family draws; it is not491,520 neural queries. C's sampled_draws field
+records those same Q draws, not an additional61,440 draws. Total controller
+power links39,196,410 plus native links gives228,463,933.
+
+The already-completed bounded reader reads all2,661 raw files/873,616,739 bytes,
+679,976 saved ticks/3,399,880 agent ticks,849,970 decision rows,
+3,413,185 observation rows and682,637 assignment matrices. Pure fallback
+geometry includes33,104 rankings/893,808 paths/3,575,232 ticks. It executes the
+fixed430,080 final student forwards and80 C plus80 helper contexts, charging
+2,160 C paths/8,640 model ticks/37,198 C links and1,052 helper links. It runs
+zero native steps or optimizer updates and no extra acquisition actor, complete
+teacher or radio-physics replay. The worker's immediate pure fixture audit also
+has25 fallback rankings/675 paths/2,700 model ticks; the reader's fixture checks
+are separately charged. Saved algebra, sparse C/helper reconstruction and full
+final actor reconstruction are distinct levels of verification.
+
+Worker wall/CPU is695.392740/693.615286 seconds, peak706,140KiB;
+reader284.704350/284.663623 seconds. Enclosing entry-through-reader chain is
+980.482682 wall/978.664369 CPU seconds, including import/serialization gaps.
+Process peak866,444KiB includes producer and reader; it is not an incremental
+reader memory claim. Git blob-verification child CPU, admission, publication,
+independent review and engineering/support labor remain outside those process
+CPU timers. Acquisition-row CPU is189.178074, evaluation-row421.236186 and
+fixture-row.061945; phase optimizer CPU totals76.399310. These disjoint partial
+instruments do not replace the enclosing chain measurement.
+
+The failed A01 additionally cost1.286401 main-process CPU seconds/2.009999 wall
+with no scientific exposure. Acquisition B02/B03 through B06 now totals12 fits
+and2 paid calibrations,2,367,528 native steps and3,321.780660 measured successful
+chain CPU seconds across the stated hosts/scopes; including B06 A01 makes
+3,323.067061 seconds. Older B01 remains separately incurred:2 fits/576,000
+steps/31,190.348 CPU seconds plus its recorded technical attempt. No support cost
+is silently reset or called zero. The prospective25–60 CPU-minute estimate was
+higher than this observed16.311-minute successful chain; no exact support-hour
+measurement was made against the prospective8–14 support-hour bill.
+
+**Required durable artifacts.** One canonical bulk copy remains at
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b06_count_development_a02/`.
+Its original `summary.json` is12,774,199 bytes/SHA-256
+`0d1fc9af270a376f3836fe256cee93c31bc698ae9cd131339d80960ee92d4073`;
+raw2,661 files total873,616,739 bytes. Each trajectory's path, byte count and
+hash is in that summary; all final/fixture hashes and required learner bindings
+are also in the published complete reading. Twelve phase datasets total2,613,751
+compressed bytes and12 checkpoints total5,168,100 bytes; they remain required
+for the recorded full fit/source identities, original reader and independent
+reconstruction. The four endpoint file identities are:
+
+| Endpoint | Relative path in canonical run | Bytes | SHA-256 |
+|---|---|---:|---|
+| F0 | `assets/F0_phase2.pt` | 430675 | `8cd5082bda9f466f06f7eac41024aadbd8376c00c8d715af9f1f04a4d596e9d0` |
+| M0 | `assets/M0_phase2.pt` | 430675 | `2fafc6e729f948a7e679014b356072b41fdc1725ac8e37aa59f72bc09a01097e` |
+| F1 | `assets/F1_phase2.pt` | 430675 | `8b755ec4aa983d86d061a928dc2b6ad58844ac9f9809bc64e58b11d55c3ca54d` |
+| M1 | `assets/M1_phase2.pt` | 430675 | `10d2b515ba789c1990c716d3bbb603e37f240930c2d203e2bcf6f02aab260a1a` |
+
+The original B02/B03 S files remain immutable in their canonical remote runs;
+the lifted initials and original states are pinned in `initial_assets` and each
+fit. The local full summary is a temporary verified review copy; after the
+original Critic has finished, remove that duplicate while retaining its canonical
+remote bytes and the complete aggregate/per-world reading in Git. No raw tree or
+checkpoint tree was copied locally. Actual retirement, absence checks and net
+allocated-byte decrease are reported in the final-cleanup entry below.
+
+**Working explanation before the final independent recommendation.** The selected
+primary count-development claim is not established; L1's conditional positive
+and the native learned capability beyond C/Q remain real evidence. Active mixed
+training mainly looks less damaging than active N5 continuation, with more
+travel and no established P/B* increment. That reading weakens this fixed
+count-mixture purchase while leaving the enduring development question open.
+Sparse peer exposure, differing imitation/visitation, loss/decoder effects and
+finite training could explain parts, but none has been identified causally.
+No extra fit, architecture change, count-feature ablation or denser-roster run
+follows automatically. The original separate-context scientific recommendation
+and resolved disposition are recorded next; a broad family closure is not inferred.
+
+
+<a id="b06-independent-disposition"></a>
+### B06 independent diagnosis and resolved disposition
+
+The original registered `hmasd-research-critic` ran in a separate context without
+DM/Root conversation inheritance. Its original evidence-first reconstruction
+preceded reading the prior count-selection advice. The same reviewer resumed
+after the reading interruption; it was not replaced and no duplicate review was
+commissioned. Its complete answer follows, preserving favorable evidence,
+alternative explanation and stopping scope.
+
+> **Recommend stopping this exact B06 mixture recipe and retaining P/Bstar as conditional capabilities.** B06 establishes active full-network development and a small, heterogeneous advantage of mixed-count continuation over ordinary continuation. It does **not** establish useful added interpolation value over inherited reuse. This ends the tested recipe, not the broader question of developing competent native policies.
+>
+> This was a separate-context review. I reconstructed the protocol, source bindings and saved results before reading the earlier count-selection recommendation. The DM’s later message about sparse peer visibility confirmed a fact I had already computed.
+>
+> The primary equal-N4/N6, equal-lineage M−F effect is **+0.005574 J**, with the declared descriptive world-cluster interval **[−0.000643, +0.011791]**; 18 of 32 world effects are positive. That interval describes these fitted policies on sampled worlds. Two tapes and four fits do not establish training-population reliability.
+>
+> The decisive comparison is with inherited reuse:
+>
+> | Lineage | N | M−F J | M−P J | F−P J | M−Bstar J |
+> |---|---:|---:|---:|---:|---:|
+> | 0 | 4 | +.010093 | +.002340 | −.007753 | −.011163 |
+> | 0 | 5 | +.005418 | −.005071 | −.010489 | −.013205 |
+> | 0 | 6 | −.006299 | −.004384 | +.001915 | −.001059 |
+> | 1 | 4 | +.008562 | −.003946 | −.012508 | −.003946 |
+> | 1 | 5 | +.009601 | −.002234 | −.011835 | −.002234 |
+> | 1 | 6 | +.009939 | −.001929 | −.011867 | −.001929 |
+>
+> F loses to P in five of six cells. M recovers some of that loss, but exceeds P in only one cell and falls below Bstar in all six. On the primary target, **M−P is −.001980 J; F−P is −.007553; M−Bstar is −.004524**. The strongest consequential objection to a positive development claim is therefore comparator choice: a positive M−F alone would credit recovery from ordinary continuation’s deterioration.
+>
+> The useful positive should remain explicit. Both lineage-level interpolation M−F means are positive: **+.001897** and **+.009250**; the latter’s conditional interval is [.000585, .017915]. M also retains higher mean J than C and Q in every count/lineage cell. Yet P already supplies that capability: its primary-target advantage is **+.034746 J over C and +.021410 over Q**, versus M’s +.032766 and +.019430. These results support useful parameter reuse under the revised interface, without proving unchanged-package portability.
+>
+> The components prevent either blanket dismissal or adoption. Primary M−F gives:
+>
+> - Mean service **+.277 users**, service-p10 **+.318**, and episode minimum **−.082**; their descriptive intervals span zero.
+> - Quality **+.005675**, accompanied by **+920 m/UAV** of travel; travel increases in 31 of 32 world clusters.
+> - Against P, M has **−.252 mean service**, approximately unchanged mean p10, **+.005173 quality**, and **+584 m/UAV** travel.
+>
+> M improves quality relative to P in every count/lineage cell, so it is not uniformly inferior. Conversely, P’s stronger J does not establish dominance on every component. Bstar also carries tail/travel tradeoffs and should not become an automatic temperature replacement. No final episode has zero total service, but adverse minima and individual worlds remain. For example, the independently checked lineage-0 N5 world **29515005** has two-tape M−P **−.075294 J**. Average N5 M−P is negative in both lineages, with service losses and additional travel. No retention-equivalence margin was declared, so neither “retention preserved” nor “equivalent” is supported. Travel is measured motion cost, not a measured energy or safety outcome. [Complete B06 evidence](</home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b06_count_development_a02/reading.json>).
+>
+> The scientific distinctions are:
+>
+> - **Opportunity:** changing fleet count changes the actual physical problem. The comparison supplies genuine count variation, matched public-count rights and shared addressed layouts.
+> - **Representation:** the scalar count branch was active in both M fits, but every saved acquisition/evaluation/fixture decision had **at most two visible peers**, including N7. Consequently, the proposal’s anticipated exposure of previously unused higher peer slots did not occur. B06 cannot diagnose learning over larger visible peer sets.
+> - **Learning:** all four fits completed 8,000 updates. Stream fitting improved, substantial original-network movement occurred, and M’s count-weight norms reached approximately **.610/.714**; F’s stayed zero as intended. This is not absent optimization or whole-intervention nonactivation. Stream accuracy is measured during changing-model training, not an independent frozen-endpoint assessment.
+> - **Complete value:** active learning and higher quality did not produce a coherent gain over retained references once service, retention, travel and computation are included.
+>
+> The strongest simpler explanation is **further imitation changes the useful inherited stochastic behavior, while diverse acquisition attenuates some of ordinary continuation’s damage**. F has lower trajectory-average entropy than P in every cell, more stationary behavior, and usually lower native value. M generally retains more entropy and movement than F. These observations are compatible with changed visitation, finite fitting and decoder behavior; they do not identify entropy as the cause. C is the teacher, yet sampled P already outperforms C on native outcomes, so better reproduction of C’s labels need not improve native value.
+>
+> A constructive alternative remains plausible: mixed acquisition learns count-relevant behavior that improves quality and some interpolation outcomes. The result supports that possibility narrowly, but does not isolate the scalar branch from acquisition distribution or demonstrate a useful increment over reuse. Neither this study nor the distinct B04/B05 adverses identifies a common optimization, representation or credit-assignment failure.
+>
+> The fixed outcome branches now resolve the investment choice. Coherent gains over F **and** retained references would have supported further development; improvements by both F/M over P would have supported ordinary continued imitation. The observed pattern instead favors retaining reuse and ending this mixture. **No additional experiment is recommended.** More evaluation episodes would refine conditional precision; unchanged new fits would test recurrence. Neither currently has a sufficiently consequential use or claim to justify automatic purchase. The broader question remains open to a future explicit conjecture or use case; a new architecture, exhaustive diagnosis or positive preliminary test is not required.
+>
+> The complete new bill matters. A02 used **4 fits, 327,680 labels, 32,000 updates, 16,384,000 presentations and 679,976 native steps**, including the fixtures. Worker CPU was **693.615 s**, reader CPU **284.664 s**, and enclosing-chain CPU/wall **978.664/980.483 s**. The four fit scopes, including acquisition and dataset work, total **269.307 wall-s**; optimizer phases alone account for about **76.399 CPU-s**. Original acquisition, complete evaluation and the reader cannot be omitted from an efficiency account. Cached C remains much cheaper at deployment: its mean episode CPU is approximately **.143/.163/.185 s at N4/N5/N6**, versus M’s approximately **.208/.262–.264/.318–.327 s**. There is no demonstrated learned speed advantage.
+>
+> A01 separately cost **1.286 CPU-s/2.010 wall-s** and failed before scientific exposure. Through B06, the acquisition/development chain totals **12 fits, two calibrations and 2,367,528 native steps**; earlier costs, including the separate older B01 investment, remain incurred. Admission, final publication, Git children and engineering/review/support are additional incompletely metered work. This study’s measured runtime is not a guarantee for another recipe.
+>
+> I checked the following directly:
+>
+> - All **29 source hashes** against pinned `f529ba39906ec8f86f267d335be5d4346eec9771` and local source; consequential initializer, controller, model, decoder and aggregation semantics; configuration and inherited calibration blob.
+> - Canonical original-asset byte identities, all **12 checkpoint** and **12 dataset** file hashes, successful process exit and the failed A01 record.
+> - All **1,632 final rows**, independently reconstructing **1,680 means/pairwise entries** and the primary clustered vectors.
+> - **49 selected raw files**, covering favorable/adverse final cases, N5 retention, acquisition and all fixtures: **11,304 saved ticks and 13,554 decisions**. Checks covered layouts, assignment/reward algebra, motion/holds, feature binding, saved probability laws and addressed draws.
+> - Original B02/B03 competence summaries and consequential B04/B05 adverse comparisons and behavioral evidence.
+>
+> I did not repeat native physics, learned-policy forwards, teacher/helper queries, optimizer replay or the production reader. Beyond the selected raw checks, I rely on the completed reader’s declared coverage; it does not exhaustively replay acquisition actors, teacher arithmetic or Adam. No new scientific execution or record edits occurred.
+>
+> **MATERIAL_DISSENT: no — the evidence supports the fixed protocol’s reuse/stop branch. I recommend no new B06 investment and no expanded claim of useful count-development benefit.**
+
+**DM response and choice.** I accept the recommendation and preserve the full
+independent reasoning. Stop the exact B06 count-mixture continuation recipe; do
+not replace either original S/P by M or F, and do not promote B*0 by its exposed
+positive cells. P/B* remain conditional capabilities and M's higher quality and
+L1 target M−F increment remain positive evidence. The complete package did not
+establish added reward/service value over reuse and requires more movement.
+“N5 retention” names the evaluated panel, not a demonstrated equivalence result.
+The strongest working explanation is partial attenuation of harmful further
+imitation, with decoder/visitation effects unresolved; it is not an identified
+entropy mechanism. The active scalar branch without larger observed rosters
+also narrows the representation story. This result neither refutes broader
+count learning nor explains the distinct previous PPO/CAL/CONT failures.
+
+This one completed independent review adequately covers the actual read result
+and finite stopping decision. A further Pro consultation would add no identified
+distinct framing or unresolved-disagreement value here, so none is added. No
+additional result execution, repeated reader or verification query is selected.
+Replication could address conditional precision or construction recurrence but
+currently has no consequential enough expected use to justify its complete cost.
+A new useful question need not first prove the present failure mechanism.
+
+Root has separately requested source-only next-allocation reasoning with its
+existing `/root/oracle_next_capability`, after this study's full publication and
+cleanup. That keeps this same DM's question ownership active without another
+result-bearing study. I may supply concrete interface/feasibility/full-cost facts
+in this notebook; no new policy/controller query, outcome probe, code, fit or
+native run is selected. Waiting allocation, parent shortlist use and fleet
+transmission comparisons have separate owners and are not successor slots here.
+Root owns a cross-question selection; this reading and own publication need no
+routine Root acknowledgment. The immediate remaining B06 work is publication
+of evidence/standing/shared scope and measured retirement of disposable targets.
