@@ -2774,3 +2774,109 @@ I independently checked consequential B03 compact outputs and 16 native positive
 **MATERIAL_DISSENT: no — I support the selected single inheritance recurrence and the complementary design allocation. I recommend the bounded coupling study as the next parent-DM purchase, while preserving the entropy ablation as a legitimate unselected alternative.**
 
 </details>
+
+<a id="b04-selected-implementation"></a>
+### B04 selected implementation — L0, 2026-09-30
+
+Root selected the exact proposal at
+`e20fbe81ff7228f084bf3ff655498786f3d39eed`,
+[allocation decision](../../RESEARCH.md#joint-sampling-root-decision-20260930).
+Owner pause is lifted and the active direction remains assigned to this runtime.
+This supersedes the earlier design-only boundary; the scientific law, original S,
+416 episodes/106496 native steps/0fits, source bindings, reading and cost remain
+as declared. Implementation does not add native pilots or another selection review.
+
+L0 deliverable: a fixed-policy B04 worker and saved-data reader implementing this
+one complete comparison. New implementation lives in
+`experiments/candidates/uav_parent_adaptation/b04_joint_sampling/` with matching
+tests; entry points are `run.py` and `read.py`. Reuse the pinned inheritance C/S,
+helper/model and original host. No shared core or other direction source is edited.
+The DM owns contract, collector, orchestration, reading, tests for those paths,
+NOTES, result artifacts and publication. A registered Implementer is lent only
+`sampling.py` and matching `test_sampling.py`: exact53-bit sampling, independent
+tape addressing, effective categorical probabilities and pair-overlap algebra.
+It edits shared main without index/commit operations, launches no result work,
+spawns no helpers and returns its diff/checks; it does not own NOTES or the study.
+
+The fixed sampler interface takes only a local probability vector, rank, law and
+current public/private integers. Bundle creation stays evaluator-side. The collector
+must compute probabilities before reading that decision's integers, draw on cache
+hits, retain matched tails and every promised native/alias/continuity diagnostic,
+and count all source/helper/forward/native work. Verify original S and all source
+pins before the single native constructor. Failure keeps partial counts and never
+silently resumes or duplicates an episode. Reader work is separately measured and
+bounded by the declared replay counts, with no environment/radio/optimizer calls.
+
+Meaningful checks cover exhaustive small-grid marginal/overlap identities, endpoint
+rounding/ties/invalid input, public/private RNG isolation and pairing, repeated-input
+fresh sampling, lawful feature/cache/navigation provenance, four-tick command/motion
+semantics, one-constructor reset accounting, fixed schedule and asset/source drift,
+and corrupt saved fields/identities rejected by the reader. End-to-end checks use
+nonproduction synthetic fixtures under pytest-owned scratch. The full executable
+change then receives a separate read-only engineering review. No test is a positive
+scientific screen; no added native trajectory is authorized by this L0.
+
+Stop implementation for a material contradiction in the accepted interface or
+scientific contract and return it through native Root communication; routine
+engineering defects are repaired here. After acceptance, publish exact inputs,
+perform fresh preferred-node admission and launch only the selected operation.
+
+Implementation accounting refinement, before exposure: independently checking a
+saved C fallback choice also reconstructs its27 four-tick geometric endpoints on
+cache misses. The original reader already uses this deterministic calculation;
+the design's paid-score check alone did not price the fallback branch. Charge up
+to7741440 additional **reader-only own-motion candidate steps**, with the actual
+fallback-miss count reported. This invokes no radio, environment, reward branch,
+teacher or optimizer and changes no arm or estimand. The separate491520 modal
+alias-motion ceiling and532480 actual-motion checks remain. No positive-result
+screen or new native exposure is added. The disabled historical S sampler is
+constructed with constant world/agent metadata0; only the explicit decoder receives
+the declared roster rank/current random integers.
+
+<a id="b04-implementation-acceptance"></a>
+### B04 implementation acceptance, 2026-09-30
+
+The registered Implementer returned the bounded integer sampler and its43
+synthetic checks. I read the complete implementation/checks and accepted it:
+small-grid exhaustive outcome counts independently preserve every agent's finite
+categorical marginal under I/A/B; interval enumeration checks unequal-q overlaps,
+Q's disjoint shifted intervals, half-open endpoints and lowest-index modal ties.
+The normalized tail CDF may saturate only a rounding overshoot of at most64 FP64
+epsilons at1 before ceiling conversion; material/decreasing CDF errors fail.
+Modal mass is never retuned. Tape addressing, stream isolation, matched tails and
+fresh draws on repeated local inputs are covered. These are correctness fixtures,
+not a scientific positive screen.
+
+The collector and independent saved-data reader add synthetic complete-schedule,
+immutable-state, source/asset guard, cache-hit/fresh-sampler, native-motion/hold,
+feature/navigation provenance, paired aggregation and rehashed-corruption checks.
+The reader retains per-joint conditional expectations and per-agent requested and
+physical departure masks in `audit/joint_sampling.npz`, with its ordered index,
+size/hash and schema in the compact reading. Production reader attempts cannot
+silently repeat paid forwards; its progress/failure record keeps attempted work.
+Constructor/reset/step attempts and completed work are distinguished. A failed
+scientific attempt remains an adverse technical outcome, not permission to rerun.
+
+The independent Engineering Reviewer read the complete path and independently ran
+the initial56 checks (2.73s). It found two real reader defects: saved own-position
+sensors were not bound to the saved physical trajectory, and failed motion checks
+lost their already-performed geometry count. Both were repaired before exposure.
+Every primitive and terminal own-position sensor is now checked against the raw
+position with rtol0 and one normalized FP32 epsilon times the coordinate scale;
+raw motion itself remains exact. Regressions corrupt nondecision sensors, jointly
+corrupt decision sensors/features, corrupt terminal sensors and check attempted
+geometry counts on a failing row. The reviewer found no further substantive issue
+in finite-grid semantics, source/asset binding, one-constructor lifecycle,
+coin-after-probability ordering, four-tick commitments, costs or two-tape/world
+aggregation. I accepted the repaired implementation.
+Its final independent rerun passed59 checks in2.75s and both CLI help entrypoints;
+its final recommendation was engineering acceptance with no material finding left.
+
+Final direction check:
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q tests/experiments/candidates/uav_parent_adaptation/b04_joint_sampling/`
+— **59 passed in2.66s**. Standalone `read.py --help` passes. All checks are synthetic:
+0 result-native steps and0 empirical fits; the test fixture's analytic trajectories
+and random untrained actor are not this study's evidence. The original S file on
+the configured node remains424487 bytes with the selected `b9e25fca…` SHA256.
+No scientific launch or checkpoint replay has yet occurred. Complete execution
+still requires exact-input publication and fresh actual-node admission.
