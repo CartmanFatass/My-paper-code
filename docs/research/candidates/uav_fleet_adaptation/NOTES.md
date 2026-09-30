@@ -4468,3 +4468,189 @@ dependency remains. The assigned result returns to Root; the subsequent
 source-only accounting continues in this notebook for its cross-question
 choice. No successor result study has been selected, and no automatic rescue
 or recurring status check follows from B05's end.
+
+
+<a id="count-generalization-source-feasibility"></a>
+### Source-only count-generalization feasibility and full cost — unselected candidate
+
+Root explicitly assigned this bounded source/interface and cost assessment
+after B05 publication6d6af7eb8. The existing separate-context Oracle owns idea
+discovery and independent scientific challenge; Root owns the cross-question
+choice. Nothing below selects a new result study or authorizes implementation,
+new actor/teacher/controller/model/native queries, fits, a quality pilot or a
+new direction. I read source and existing saved JSON only. The B05 disposition,
+immutable original S assets, four heads and explicit zero-service correction
+remain unchanged.
+
+The Oracle's current candidate asks about **static-count interpolation and
+N5 retention**, not within-episode loss, rejoining or teammate learning.
+For each retained S lineage, F would continue full-network teacher imitation
+only atN5; M would use equally many complete N3/N7 episodes in each128/64/64
+acquisition phase. Both would receive81920 C_N labels and8000 updates. The
+suggested final panel contains original-parameter P, F and M for each lineage,
+ordinary C_N/Q_N and previously paid B*0 at its fixed temperature2; B*1 is P1
+by identity. N4/N6 are held out from both continuations and N5 is retention.
+The two fixed stochastic tapes are within-world replicates. No new temperature
+search, selected endpoint or proof of transfer is supplied by this sketch.
+
+I refreshed the relevant published background at6d6af7eb8: topic2's B18
+technical missingness, B19 positive and B20 adverse mixed-count comparison;
+the native fleet-loss/availability result; and topic4 through B05. Their
+concrete effect is to preserve unchanged reuse and competent fixed-count
+training as substantive controls, report every count and retention outcome,
+and avoid a pure-count, general-transfer or failure-repair claim. The earlier
+Gaussian actor/critic mixed-count program is different from this categorical
+teacher-imitation candidate; its adverse confirmation is neither erased nor
+treated as a universal veto. B18's missing M endpoint remains technical
+missingness. Static population interpolation also does not test adaptation
+to actual member loss or establish a need to move replacements.
+[Current reusable background](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练),
+[original mixed-count fixed result](../agent_count_generalization/CLAIM_ordered_roster_interpolation_20260924.md#2026-09-25--fixed-b20-result),
+[native availability scope](../uav_availability_recovery/NOTES.md#b01-complete-native-reading).
+
+**Actual interface.** The inherited Student has114 inputs and34715 parameters
+(`b02/model.py:15–40`), but the complete program is not count-portable:
+`b02/controllers.py:32–37` rejects more than four visible peers;
+`_setup:74–82` and the original C's `_decide:171–194` infer residual
+interference only when p<4. Correct static-count analogues need p<N−1 for
+both teacher/controller and analytic helper. The ten peer slots accommodate
+the proposed maximum N7, but slots beyond the first four were always padded
+under original N5 training. Learning them is part of different exposure,
+not evidence of scalar-count causality. The helper's eligibility bit and
+navigation transitions remain consequential actor inputs.
+
+`b02/policies.py:19–23` restricts private addresses to agent<5;
+`b02/collect.py:39–105` fixes observation, command, mask and agent loops toN5;
+the native factory in `ucope/uav_motion_prefix_b01/environment.py:8–24`
+constructs N5 explicitly. Reward/reader shapes and count checks also need
+new N-aware direction-local paths. Frozen source cannot be patched in place:
+other results and live consumers bind its exact hashes. C_N/Q_N must use the
+same declared known N; Q_N remains the .10 departure law around corrected C_N.
+C, helper and policy caches stay episode/model/count-local. Original weights
+with this new helper/interface should be called parameter reuse P_N, not
+unchanged execution of the original complete package outsideN5.
+
+The proposed count-conditioning branch is128 zero-initialized weights added
+to the original first-layer preactivation as v·phi(N), with phi=(N−5)/2.
+Total actor parameters would be34843, an increase of128 (about.37%). This
+retains the original114-wide matrix operation rather than replacing it with
+a115-wide GEMM. In real arithmetic the initial logits agree; implementation
+would still need explicit source/arithmetic identity checks. With phi(5)=0,
+fresh zero Adam state and no weight decay, F supplies zero data gradient to
+the count branch, while M can learn it. That asymmetry follows from the
+experience support, not unequal permission to use known count. The Oracle
+explicitly retained **fresh Adam**, rather than silently loading a frozen
+checkpoint optimizer that has no new branch state.
+
+The original construction has another consequential semantic:
+phase0 executes C and uses the same query as its label; phases1/2 execute
+the current student **greedily**. `b02/study.py:124–142` passes aggregate1/2,
+and `collect.py:54` samples only the separate S_sampled evaluation arm. The
+Oracle retained this greedy aggregation law. Sampled aggregation would be a
+different acquisition process even with identical row/update counts.
+
+**Initial layouts and matching.** Native `MultiUAVEnv.reset:252–263` draws
+3N UAV coordinates before generating users. A repeated numeric seed therefore
+does not preserve user layouts across N. I raised this source fact; the Oracle
+prefers a new evaluator-side contract with an independently addressed50-user
+map and seven-UAV position array, taking its first N rows. It preserves the
+native uniform marginals while explicitly changing the joint initialization
+coupling. The candidate would match F/M acquisition layouts and share final
+layouts across N/lineages. C/Q reuse is only within identical N/world/tape
+conditions, never a cross-N trajectory reuse. Initial geometry, command laws,
+interference and total capacity still change with N; matching exogenous inputs
+does not isolate a pure population mechanism.
+
+This initializer must refresh channel state and observations after any
+evaluator-side placement, bind all initial arrays, and keep truth outside
+policy inputs. If layered over native reset it adds a refresh per complete
+episode plus its addressed draws; constructors and discarded native resets
+remain charged. Its exact implementation has not been selected. The numerical
+initializer is small; source, pairing and stale-state verification are its
+main engineering cost. No layout was generated to prepare this assessment.
+
+**Complete exposure under the current sketch.** Balanced N3/N7 episodes give
+30%/70% of M's label rows under the unchanged row-uniform cross entropy. Each
+fit still has40960/61440/81920 cumulative rows,30/20/20 epochs, batch512,
+2400/2400/3200 updates and4096000 presentations. F/M match labels, updates,
+team steps and aggregate UAV steps; differing N, teacher geometry and
+endogenous cache hits prevent calling them exactly compute-matched.
+
+| Proposed work | Complete count |
+|---|---:|
+| Full-network fits | 4 |
+| Acquisition episodes / native steps | 1024 /262144 |
+| Final episodes / native steps | 1632 /417792 |
+| Total H256 episodes / native steps | **2656 /679936** |
+| Total native UAV ticks | 3399680 |
+| New C_N labels | 327680 |
+| Adam updates / fitting presentations | 32000 /16384000 |
+| Worker full-C requests, including labels | 419840 |
+| Full-C no-memo paths / candidate model ticks | 11335680 /45342720 |
+| Worker student requests, before memo reuse | 593920 |
+| Helper request ceiling, including phase0 | 757760 |
+
+Final accounting is6 P/F/M programs×3counts×32worlds×2tapes=1152episodes,
+plus192 B*0,192 Q and96 deterministic C episodes. B*1 reuses P1, with no
+extra acquisition or calibration. Of the593920 student requests,163840 are
+greedy acquisition requests and430080 are final requests. Phase0's executing
+C and expert label are the same327680-label accounting stream, not an extra
+163840 C calls. Full-C requests by N3/4/5/6/7 are49152/24576/194560/36864/
+114688. At20 visible users and p<=N−1, their power-link ceiling is951705600;
+the analytic-helper ceiling is109854720. These are no-memo arithmetic ceilings,
+not forecasts of actual queries. Native dense slot counts, extra initializer
+refreshes and constructor resets must be included separately at the selected
+N schedule; the fixed N5 multiplier275 cannot be reused for all counts.
+
+The Oracle's concrete proposed reader scope is all saved episode metrics,
+states, sources, innovations, label-score and counter checks; **430080 final
+student neural rows**; and at most80 predeclared saved contexts with C/helper
+numerical spot-checks spanning five N regimes. If each context evaluates both
+programs, charge up to80C rankings/2160paths/8640candidate model ticks plus
+80helper calls separately. It does not include an acquisition-actor sweep,
+full teacher arithmetic or optimizer replay. Such additions would cost up to
+163840 extra actor rows,419840 C requests/45342720candidate ticks and32000
+verification Adam calls/16384000 presentations respectively. Saved provenance
+and trace checks are not renamed full arithmetic replay. This scope still
+needs prospective fixation if a study is selected; it is not a new audit now.
+
+**Timing, storage and support estimate.** Original B02/B03 worker CPU is
+101.990390/92.334372s on the remote one-thread CPU runtime. Acquisition-only
+episode totals are46.412287/45.547210s, and fit totals14.515561/15.168131s.
+Original sampled final episodes average.234974/.245807CPU-s. On the different
+local host, B05 S/Q/B*0 final episodes average.293515/.293031/.330199CPU-s,
+with the recorded concurrent operation. Those scopes suggest roughly11–14
+worker CPU minutes for an unchanged-N5 extrapolation of this larger panel.
+They are not a benchmark of the new program.
+
+I find **15–30 worker CPU minutes plus10–30 reader CPU minutes** plausible
+planning allowances, subject to the above bounded reader and actual cache
+behavior. B02/B03 full-C memo hit rates were about90%, with observed users
+far below20; new N and learned visitation can materially increase scoring
+and assignment work. Worst-case misses can exceed these timing estimates.
+B02/B03's5.553/5.168s readers executed zero actor, expert, radio or optimizer
+calls and do not price the new neural reader. B05's175.887s reader checked
+1138688 saved native ticks plus73728 neural rows; it supplies another scoped
+anchor, not a linear throughput guarantee.
+
+One complete fit's FP32 features/int64 labels require38010880bytes, plus
+327680bytes for a saved FP32 count scalar, before copies. Sequential fits
+and episode-streamed reading can plausibly remain below1GiB working RAM;
+allow roughly1–3GB of new retained evidence depending on saved arrays and
+compression. Checkpoint/Adam storage is small relative to raw trajectories.
+These are source-derived estimates, not admission or measurements.
+
+My support estimate is **8–14 unmetered planning hours**, approximately5–9
+for implementation and independent engineering review plus3–5 for complete
+reading, publication and cleanup. It includes roughly1–2hours for the new
+layout initializer and cross-N binding work. No API blocker is apparent,
+but this is a new complete comparison rather than a cheap portability panel.
+Actual compute placement and fresh admission are not needed for source work
+and are not yet assigned to this candidate.
+
+The code identities and original costs above are read from the frozen B02/
+B03 source and their canonical summaries, with B05 as an explicitly different
+timing anchor. They were sent directly to the assigning Oracle, including the
+pairing and greedy-aggregation corrections. This completes my factual scope;
+the Oracle's independent recommendation and Root's allocation remain the next
+decision. No new source file, fit, model query or native step has been created.
