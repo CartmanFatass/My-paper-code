@@ -1,0 +1,55 @@
+{
+  "targets": [
+    {
+      "target": "experiments/candidates/uav_parent_adaptation/b04_joint_sampling/__pycache__",
+      "allocated_bytes_before": 73728,
+      "allocated_bytes_after": 0,
+      "absent_after": true
+    },
+    {
+      "target": "tests/experiments/candidates/uav_parent_adaptation/b04_joint_sampling/__pycache__",
+      "allocated_bytes_before": 65536,
+      "allocated_bytes_after": 0,
+      "absent_after": true
+    },
+    {
+      "target": "temp/directions/uav_parent_adaptation",
+      "allocated_bytes_before": 8192,
+      "allocated_bytes_after": 0,
+      "absent_after": true
+    },
+    {
+      "target": "runs/uav_parent_adaptation/b04_joint_sampling_a01/stdout.log",
+      "allocated_bytes_before": 4096,
+      "allocated_bytes_after": 0,
+      "absent_after": true
+    },
+    {
+      "target": "runs/uav_parent_adaptation/b04_joint_sampling_a01/stderr.log",
+      "allocated_bytes_before": 0,
+      "allocated_bytes_after": 0,
+      "absent_after": true
+    }
+  ],
+  "net_reclaimed_bytes": 147456,
+  "canonical_log_identities": {
+    "stdout.log": {
+      "bytes": 2481,
+      "sha256": "b951537289ad70593f1b1a0ccfab5260c0b985fae57648f6a604402ded6967ca"
+    },
+    "stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "observer_generation": 12,
+  "observer_stopped": true,
+  "unconsumed_events": 0,
+  "scope": "Only owned completed-test caches, inactive observer-request scratch and byte-verified redundant log copies; source, compact evidence and canonical raw retained.",
+  "deleted_target_bytes": 151552,
+  "new_local_record_allocated_bytes": 4096,
+  "snapshot_record_allocated_bytes": 4096,
+  "combined_deleted_target_bytes": 810692608,
+  "combined_net_reclaimed_bytes_after_new_records": 810684416,
+  "measurement_scope": "Allocated bytes in deleted targets minus the two new compact cleanup records; excludes concurrent host activity, retained scientific evidence and Git object-store changes."
+}

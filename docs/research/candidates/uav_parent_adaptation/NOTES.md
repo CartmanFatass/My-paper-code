@@ -3192,3 +3192,32 @@ was made. [Exact collector result and measurements](../../../../runs/uav_parent_
 Local rebuildable caches, observer-request scratch and redundant tiny log copies
 will be removed after this compact result/standing publication, with their measured
 deletions appended here. They are not required evidence or a live result producer.
+
+The complete scientific reading, independent disposition, reserve standing and
+directly affected background were published at
+`c0a9ddc5a856e83c01583cd17afed3652cb16ef4`. The substantive selected plan was
+retired by date; earlier evidence and other direction entries were preserved.
+After that publication, the stopped observer had no unconsumed event/wake and
+all owned jobs were terminal. Finished test/reader helpers had no live cache
+consumer. Local stdout/stderr bytes were checked against the retained canonical
+logs before deleting only the redundant copies.
+
+| Deleted local target | Allocated bytes removed |
+|---|---:|
+| `experiments/candidates/uav_parent_adaptation/b04_joint_sampling/__pycache__/` | 73728 |
+| `tests/experiments/candidates/uav_parent_adaptation/b04_joint_sampling/__pycache__/` | 65536 |
+| `temp/directions/uav_parent_adaptation/` (inactive B04 observer request only) | 8192 |
+| Local B04 `stdout.log` duplicate | 4096 |
+| Local B04 `stderr.log` duplicate | 0 |
+
+All five exact local targets are absent. Local deleted targets total151552 bytes;
+the new4096-byte compact cleanup record leaves147456 bytes net local reduction
+for that deletion batch. Including the source snapshot, deleted targets total
+810692608 bytes. Deducting both new4096-byte compact cleanup records gives
+**810684416 net allocated bytes reclaimed** across the measured cleanup targets
+and records. This excludes Git object-store changes, concurrent host activity and
+the deliberately retained scientific evidence; it is not a measurement of whole-
+experiment or whole-host disk change. [Exact local deletion, log hashes and net accounting](../../../../runs/uav_parent_adaptation/b04_joint_sampling_a01/local-cleanup.json).
+No cleanup tool blocker or owned disposable leftover remains. Required raw, joint
+diagnostics, original S, compact readings and all adverse outcomes remain; no
+worker, reader, observer or unread scientific review remains active for B04.
