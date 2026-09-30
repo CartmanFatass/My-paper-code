@@ -1,0 +1,1897 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_planner_distillation",
+  "cell": "b01",
+  "piece": "2 (Markov teacher T_M, zero fit)",
+  "tool": "coupled_host_planner_distillation.run_markov",
+  "launch_sha": "213274c7003ffa73b12c81a5a57e1a652547486d",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_planner_distillation",
+    "sha": "213274c7003ffa73b12c81a5a57e1a652547486d",
+    "command_sha256": "437e563e279ddca696f65acb79372087c6fa7f60f1557e74d55561a05d5be7a9",
+    "parent_pid": 539325,
+    "child_pid": 539326,
+    "accepted_at_epoch": 1790738630.7689595
+  },
+  "git_head": "213274c7003ffa73b12c81a5a57e1a652547486d",
+  "training_fits_performed": 0,
+  "worlds": [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007,
+    1008,
+    1009,
+    1010,
+    1011,
+    1012,
+    1013,
+    1014,
+    1015,
+    1016,
+    1017,
+    1018,
+    1019,
+    1020,
+    1021,
+    1022,
+    1023,
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+  ],
+  "budget": 200,
+  "seed": 0,
+  "label_seeds": null,
+  "mode": "dev_panel",
+  "worlds_in_dev_panel": [
+    1000,
+    1001,
+    1002,
+    1003,
+    1004,
+    1005,
+    1006,
+    1007,
+    1008,
+    1009,
+    1010,
+    1011,
+    1012,
+    1013,
+    1014,
+    1015,
+    1016,
+    1017,
+    1018,
+    1019,
+    1020,
+    1021,
+    1022,
+    1023,
+    1024,
+    1025,
+    1026,
+    1027,
+    1028,
+    1029,
+    1030,
+    1031
+  ],
+  "worlds_in_holdout_panel": [],
+  "worlds_in_label_set": [],
+  "b04_run": {
+    "path": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01",
+    "summary_sha256": "196ee0131f0f7d5d900133a2237bd77c99b8397b1d1191d334e041b69f9bde41",
+    "launch_sha": "c8ff47d2c85141f27badaf4353108219373718f5",
+    "budget": 3000
+  },
+  "information_contract": {
+    "macro_k": 10,
+    "decisions_per_episode": 50,
+    "min_known_for_search": 6,
+    "pooling": "every host step (every rollout call of targets_fn) and once at the terminal state: the union of all six UAVs' env._get_local_users views enters the team map (latest xy per user)",
+    "trigger": "re-plan iff the pooled known set (frozenset of user ids) differs from the set of the last plan (or no plan exists yet) and >= 6 users are known; layout cached by the known set; targets = layout[assign_targets(current positions, layout)] at every decision",
+    "hold_rule": "targets decided at t % 10 == 0 are held for 10 host steps; while fewer than 6 users are known every UAV's target is its spawn position",
+    "planner_cap": null,
+    "planner_seed": "constant --seed (the planner's world argument is only its RNG seed)",
+    "shadow_user_set": "known users only: deep copy of the live host with n_users = n_known and user_positions = the known users' latest sighted xy (index order), channel state recomputed by static_evaluate; unknown users are absent from k-means, association and reward; the host's own contract reward normalises C_bh by n_known (not by 50)",
+    "no_event_t_e": 1000000000,
+    "sightings": "every user env._get_local_users(i) returns (uncapped), read row by row"
+  },
+  "features": {
+    "dim": 168,
+    "layout": "50 x [known, x/5000, y/5000] (user index order; unknown -> 0) + 6 x [x/5000, y/5000, (z-50)/100] (teacher.features without ego)"
+  },
+  "definitions": {
+    "all_mean": "mean C_bh over the 500 host steps of T_M",
+    "final_100_mean": "mean C_bh over steps 400..499 of T_M",
+    "b04_B0_all_mean": "committed b04 B0 all-500 C_bh (budget 3000, world-seeded planner)",
+    "tm_minus_b0": "all_mean - b04_B0_all_mean (a reading, not a gate)",
+    "planner_calls": "control plans (re-plans), one per distinct known set with >= 6 users",
+    "cache_hits": "decisions with >= 6 known whose known set equals the last plan's set",
+    "assignment_changed": "on a cache-hit decision: the assign_targets permutation differs from the previous decision's permutation (same cached layout); None on re-plan and hold decisions",
+    "hold_steps": "host steps whose targets are the spawn positions because no plan exists",
+    "labelled_decisions": "one per re-plan; layouts for every label seed",
+    "labels_z_all_50": "every z of every labelled layout (all seeds) equals 50 m exactly",
+    "layout_box_faces": "labelled-layout components within 1e-9 m of each face of the box",
+    "cpu_s.planner": "process CPU inside the control-seed B4.plan_on_known calls",
+    "cpu_s.label_planner": "process CPU inside the extra label-seed plan_on_known calls",
+    "cpu_s.assign": "process CPU inside B4.assign_targets",
+    "cpu_s.rest": "episode CPU minus planner, label planner and assignment",
+    "replay": "per-decision targets replayed on a second fresh host under the same 10-step hold; C_bh and reward series asserted identical"
+  },
+  "per_world": [
+    {
+      "world": 1000,
+      "all_mean": 0.5435599999999999,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": 0.5511999999999999,
+      "tm_minus_b0": -0.00763999999999998,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2000,
+      "users_known_terminal": 34,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 7,
+        "z_high": 0,
+        "labels": 30,
+        "labels_on_any_face": 7
+      },
+      "cpu_s": {
+        "planner": 0.9362058590000004,
+        "label_planner": 0.0,
+        "assign": 0.12063118199999878,
+        "rest": 0.5053566770000006,
+        "total": 1.5621937179999998
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 37824,
+      "timing": {
+        "wall_s": 2.081580694997683,
+        "cpu_s": 2.0813239999999995
+      }
+    },
+    {
+      "world": 1001,
+      "all_mean": 0.7,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": 0.69024,
+      "tm_minus_b0": 0.009759999999999991,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2000,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 6,
+        "z_high": 0,
+        "labels": 30,
+        "labels_on_any_face": 6
+      },
+      "cpu_s": {
+        "planner": 0.7523857079999994,
+        "label_planner": 0.0,
+        "assign": 0.13437581200000004,
+        "rest": 0.5813393810000007,
+        "total": 1.4681009010000001
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 38760,
+      "timing": {
+        "wall_s": 1.9271948460082058,
+        "cpu_s": 1.927098
+      }
+    },
+    {
+      "world": 1002,
+      "all_mean": 0.87416,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": 0.7594400000000001,
+      "tm_minus_b0": 0.11471999999999993,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        20,
+        40,
+        60,
+        70,
+        80,
+        90
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2800,
+      "users_known_terminal": 48,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 2,
+        "z_high": 0,
+        "labels": 42,
+        "labels_on_any_face": 2
+      },
+      "cpu_s": {
+        "planner": 1.1559185039999988,
+        "label_planner": 0.0,
+        "assign": 0.11614054300000198,
+        "rest": 0.5209195309999988,
+        "total": 1.7929785779999996
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 46886,
+      "timing": {
+        "wall_s": 2.2487172949768137,
+        "cpu_s": 2.248639
+      }
+    },
+    {
+      "world": 1003,
+      "all_mean": 0.8577200000000003,
+      "final_100_mean": 0.88,
+      "b04_B0_all_mean": 0.8773200000000001,
+      "tm_minus_b0": -0.01959999999999984,
+      "planner_calls": 2,
+      "plan_steps": [
+        0,
+        10
+      ],
+      "cache_hits": 48,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 800,
+      "users_known_terminal": 48,
+      "decisions": 50,
+      "labelled_decisions": 2,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 5,
+        "z_high": 0,
+        "labels": 12,
+        "labels_on_any_face": 5
+      },
+      "cpu_s": {
+        "planner": 0.3088070869999999,
+        "label_planner": 0.0,
+        "assign": 0.11534080000000291,
+        "rest": 0.5085536449999966,
+        "total": 0.9327015319999994
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 29441,
+      "timing": {
+        "wall_s": 1.3910592919855844,
+        "cpu_s": 1.3909590000000005
+      }
+    },
+    {
+      "world": 1004,
+      "all_mean": 0.7544,
+      "final_100_mean": 0.8400000000000002,
+      "b04_B0_all_mean": 0.8020000000000003,
+      "tm_minus_b0": -0.04760000000000031,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2400,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 2,
+        "z_high": 0,
+        "labels": 36,
+        "labels_on_any_face": 2
+      },
+      "cpu_s": {
+        "planner": 0.9651808899999974,
+        "label_planner": 0.0,
+        "assign": 0.16769392399999639,
+        "rest": 0.697799706000005,
+        "total": 1.8306745199999988
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 44358,
+      "timing": {
+        "wall_s": 2.272388129000319,
+        "cpu_s": 2.2723239999999993
+      }
+    },
+    {
+      "world": 1005,
+      "all_mean": 0.7188799999999999,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": 0.7171199999999999,
+      "tm_minus_b0": 0.0017599999999999838,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2400,
+      "users_known_terminal": 38,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 1,
+        "z_high": 0,
+        "labels": 36,
+        "labels_on_any_face": 1
+      },
+      "cpu_s": {
+        "planner": 0.8978398830000014,
+        "label_planner": 0.0,
+        "assign": 0.11894051900000058,
+        "rest": 0.5049099729999966,
+        "total": 1.5216903749999986
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 41349,
+      "timing": {
+        "wall_s": 2.0226268190017436,
+        "cpu_s": 2.022528000000001
+      }
+    },
+    {
+      "world": 1006,
+      "all_mean": 0.86692,
+      "final_100_mean": 0.9200000000000002,
+      "b04_B0_all_mean": 0.9219200000000002,
+      "tm_minus_b0": -0.05500000000000016,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 1600,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 0,
+        "z_high": 0,
+        "labels": 24,
+        "labels_on_any_face": 0
+      },
+      "cpu_s": {
+        "planner": 0.6851171889999996,
+        "label_planner": 0.0,
+        "assign": 0.1177562050000045,
+        "rest": 0.513371345999996,
+        "total": 1.3162447400000001
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 37864,
+      "timing": {
+        "wall_s": 1.7708676069742069,
+        "cpu_s": 1.7707590000000017
+      }
+    },
+    {
+      "world": 1007,
+      "all_mean": 0.76592,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": 0.7924000000000001,
+      "tm_minus_b0": -0.02648000000000006,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2800,
+      "users_known_terminal": 45,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 7,
+        "z_high": 0,
+        "labels": 42,
+        "labels_on_any_face": 7
+      },
+      "cpu_s": {
+        "planner": 1.1182271280000027,
+        "label_planner": 0.0,
+        "assign": 0.11759390699999983,
+        "rest": 0.49066648499999843,
+        "total": 1.726487520000001
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 44730,
+      "timing": {
+        "wall_s": 2.436941226973431,
+        "cpu_s": 2.4366909999999997
+      }
+    },
+    {
+      "world": 1008,
+      "all_mean": 0.5638399999999999,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": 0.54968,
+      "tm_minus_b0": 0.01415999999999995,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        60
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2400,
+      "users_known_terminal": 39,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 8,
+        "z_high": 0,
+        "labels": 36,
+        "labels_on_any_face": 8
+      },
+      "cpu_s": {
+        "planner": 1.2762835670000072,
+        "label_planner": 0.0,
+        "assign": 0.12166230500000808,
+        "rest": 0.5085542729999837,
+        "total": 1.906500144999999
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42002,
+      "timing": {
+        "wall_s": 2.3649651310115587,
+        "cpu_s": 2.3647540000000014
+      }
+    },
+    {
+      "world": 1009,
+      "all_mean": 0.7605999999999999,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": 0.7942000000000001,
+      "tm_minus_b0": -0.033600000000000185,
+      "planner_calls": 2,
+      "plan_steps": [
+        0,
+        20
+      ],
+      "cache_hits": 48,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 800,
+      "users_known_terminal": 41,
+      "decisions": 50,
+      "labelled_decisions": 2,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 1,
+        "z_high": 0,
+        "labels": 12,
+        "labels_on_any_face": 1
+      },
+      "cpu_s": {
+        "planner": 0.3066271039999968,
+        "label_planner": 0.0,
+        "assign": 0.11760416299998155,
+        "rest": 0.5066444740000193,
+        "total": 0.9308757409999977
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 30354,
+      "timing": {
+        "wall_s": 1.3770656609849539,
+        "cpu_s": 1.3769569999999973
+      }
+    },
+    {
+      "world": 1010,
+      "all_mean": 0.9070400000000002,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": 0.7960400000000002,
+      "tm_minus_b0": 0.11099999999999999,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 3200,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 5,
+        "z_high": 0,
+        "labels": 48,
+        "labels_on_any_face": 5
+      },
+      "cpu_s": {
+        "planner": 1.224330700999996,
+        "label_planner": 0.0,
+        "assign": 0.11518448899999356,
+        "rest": 0.5062095340000106,
+        "total": 1.845724724
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 49368,
+      "timing": {
+        "wall_s": 2.2990095549903344,
+        "cpu_s": 2.298789000000003
+      }
+    },
+    {
+      "world": 1011,
+      "all_mean": 0.5761999999999999,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": 0.5388,
+      "tm_minus_b0": 0.03739999999999999,
+      "planner_calls": 2,
+      "plan_steps": [
+        0,
+        10
+      ],
+      "cache_hits": 48,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 800,
+      "users_known_terminal": 30,
+      "decisions": 50,
+      "labelled_decisions": 2,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 0,
+        "z_high": 0,
+        "labels": 12,
+        "labels_on_any_face": 0
+      },
+      "cpu_s": {
+        "planner": 0.29349976499999997,
+        "label_planner": 0.0,
+        "assign": 0.1208698539999915,
+        "rest": 0.512529744000009,
+        "total": 0.9268993630000004
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 29080,
+      "timing": {
+        "wall_s": 1.3777080720174126,
+        "cpu_s": 1.376804
+      }
+    },
+    {
+      "world": 1012,
+      "all_mean": 0.7307199999999999,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": 0.74836,
+      "tm_minus_b0": -0.0176400000000001,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 1200,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 0,
+        "z_high": 0,
+        "labels": 18,
+        "labels_on_any_face": 0
+      },
+      "cpu_s": {
+        "planner": 0.4405206390000025,
+        "label_planner": 0.0,
+        "assign": 0.11849175599999384,
+        "rest": 0.5236408210000043,
+        "total": 1.0826532160000006
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 33209,
+      "timing": {
+        "wall_s": 1.547078492003493,
+        "cpu_s": 1.5469690000000007
+      }
+    },
+    {
+      "world": 1013,
+      "all_mean": 0.5234800000000003,
+      "final_100_mean": 0.5600000000000003,
+      "b04_B0_all_mean": 0.8292800000000002,
+      "tm_minus_b0": -0.30579999999999996,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        60
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2000,
+      "users_known_terminal": 31,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 1,
+        "z_high": 0,
+        "labels": 30,
+        "labels_on_any_face": 1
+      },
+      "cpu_s": {
+        "planner": 0.744095282,
+        "label_planner": 0.0,
+        "assign": 0.11956889000001425,
+        "rest": 0.5039402739999836,
+        "total": 1.3676044459999979
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 37713,
+      "timing": {
+        "wall_s": 1.8464089170156512,
+        "cpu_s": 1.846390999999997
+      }
+    },
+    {
+      "world": 1014,
+      "all_mean": 0.8660799999999997,
+      "final_100_mean": 0.9399999999999996,
+      "b04_B0_all_mean": 0.9060000000000002,
+      "tm_minus_b0": -0.03992000000000051,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2400,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 0,
+        "z_high": 0,
+        "labels": 36,
+        "labels_on_any_face": 0
+      },
+      "cpu_s": {
+        "planner": 1.0373859870000004,
+        "label_planner": 0.0,
+        "assign": 0.11636921599999539,
+        "rest": 0.5183053650000033,
+        "total": 1.6720605679999991
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 43765,
+      "timing": {
+        "wall_s": 2.131132881011581,
+        "cpu_s": 2.13091
+      }
+    },
+    {
+      "world": 1015,
+      "all_mean": 0.54028,
+      "final_100_mean": 0.6399999999999999,
+      "b04_B0_all_mean": 0.63184,
+      "tm_minus_b0": -0.09155999999999997,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 1200,
+      "users_known_terminal": 36,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 2,
+        "z_high": 0,
+        "labels": 18,
+        "labels_on_any_face": 2
+      },
+      "cpu_s": {
+        "planner": 0.4795826709999993,
+        "label_planner": 0.0,
+        "assign": 0.11576551399998891,
+        "rest": 0.49028438700000976,
+        "total": 1.085632571999998
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 32485,
+      "timing": {
+        "wall_s": 1.5385278520116117,
+        "cpu_s": 1.5383539999999947
+      }
+    },
+    {
+      "world": 1016,
+      "all_mean": 0.8366800000000001,
+      "final_100_mean": 0.9200000000000002,
+      "b04_B0_all_mean": 0.7246000000000001,
+      "tm_minus_b0": 0.11207999999999996,
+      "planner_calls": 9,
+      "plan_steps": [
+        0,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90
+      ],
+      "cache_hits": 41,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 3600,
+      "users_known_terminal": 48,
+      "decisions": 50,
+      "labelled_decisions": 9,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 1,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 1
+      },
+      "cpu_s": {
+        "planner": 1.3489243389999928,
+        "label_planner": 0.0,
+        "assign": 0.11408746900001177,
+        "rest": 0.5011703539999957,
+        "total": 1.9641821620000002
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 52969,
+      "timing": {
+        "wall_s": 2.4131075619952753,
+        "cpu_s": 2.412942000000001
+      }
+    },
+    {
+      "world": 1017,
+      "all_mean": 0.8977600000000002,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": 0.9102000000000001,
+      "tm_minus_b0": -0.012439999999999896,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2800,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 0,
+        "z_high": 0,
+        "labels": 42,
+        "labels_on_any_face": 0
+      },
+      "cpu_s": {
+        "planner": 1.0907801309999954,
+        "label_planner": 0.0,
+        "assign": 0.1407783480000333,
+        "rest": 0.6104741199999708,
+        "total": 1.8420325989999995
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 47093,
+      "timing": {
+        "wall_s": 2.316098590992624,
+        "cpu_s": 2.3159399999999977
+      }
+    },
+    {
+      "world": 1018,
+      "all_mean": 0.7311199999999999,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": 0.6866800000000001,
+      "tm_minus_b0": 0.04443999999999981,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        50
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2000,
+      "users_known_terminal": 38,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 25,
+        "z_high": 0,
+        "labels": 30,
+        "labels_on_any_face": 25
+      },
+      "cpu_s": {
+        "planner": 0.7423926729999977,
+        "label_planner": 0.0,
+        "assign": 0.11738548600001053,
+        "rest": 0.49599592499999545,
+        "total": 1.3557740840000037
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 37409,
+      "timing": {
+        "wall_s": 1.8020374159968924,
+        "cpu_s": 1.8019239999999996
+      }
+    },
+    {
+      "world": 1019,
+      "all_mean": 0.8188800000000002,
+      "final_100_mean": 0.9000000000000005,
+      "b04_B0_all_mean": 0.8966000000000002,
+      "tm_minus_b0": -0.07772000000000001,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        40,
+        50
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2000,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 2,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 3,
+        "z_high": 0,
+        "labels": 30,
+        "labels_on_any_face": 4
+      },
+      "cpu_s": {
+        "planner": 0.8190527180000018,
+        "label_planner": 0.0,
+        "assign": 0.12406150900002189,
+        "rest": 0.5466123329999704,
+        "total": 1.489726559999994
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 40583,
+      "timing": {
+        "wall_s": 1.9450932150066365,
+        "cpu_s": 1.944966000000008
+      }
+    },
+    {
+      "world": 1020,
+      "all_mean": 0.7607999999999999,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": 0.73008,
+      "tm_minus_b0": 0.03071999999999997,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 1600,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 3,
+        "z_high": 0,
+        "labels": 24,
+        "labels_on_any_face": 3
+      },
+      "cpu_s": {
+        "planner": 0.6449344169999947,
+        "label_planner": 0.0,
+        "assign": 0.11473086999999538,
+        "rest": 0.49028523200001217,
+        "total": 1.2499505190000022
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 36168,
+      "timing": {
+        "wall_s": 1.7084232619963586,
+        "cpu_s": 1.7083019999999962
+      }
+    },
+    {
+      "world": 1021,
+      "all_mean": 0.9029199999999996,
+      "final_100_mean": 0.9399999999999996,
+      "b04_B0_all_mean": 0.8829200000000001,
+      "tm_minus_b0": 0.019999999999999463,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 1600,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 1,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 4,
+        "z_high": 0,
+        "labels": 24,
+        "labels_on_any_face": 5
+      },
+      "cpu_s": {
+        "planner": 0.6413122069999915,
+        "label_planner": 0.0,
+        "assign": 0.11602100400001092,
+        "rest": 0.49815594300000043,
+        "total": 1.2554891540000028
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 37602,
+      "timing": {
+        "wall_s": 1.7073711259872653,
+        "cpu_s": 1.7072080000000014
+      }
+    },
+    {
+      "world": 1022,
+      "all_mean": 0.7363999999999999,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": 0.8366800000000002,
+      "tm_minus_b0": -0.10028000000000026,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2400,
+      "users_known_terminal": 44,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 0,
+        "z_high": 0,
+        "labels": 36,
+        "labels_on_any_face": 0
+      },
+      "cpu_s": {
+        "planner": 0.8830899259999825,
+        "label_planner": 0.0,
+        "assign": 0.138961973999983,
+        "rest": 0.5893573060000321,
+        "total": 1.6114092059999976
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42790,
+      "timing": {
+        "wall_s": 2.1657144560012966,
+        "cpu_s": 2.165440000000004
+      }
+    },
+    {
+      "world": 1023,
+      "all_mean": 0.57824,
+      "final_100_mean": 0.66,
+      "b04_B0_all_mean": 0.64464,
+      "tm_minus_b0": -0.06640000000000001,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2000,
+      "users_known_terminal": 39,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 6,
+        "z_high": 0,
+        "labels": 30,
+        "labels_on_any_face": 6
+      },
+      "cpu_s": {
+        "planner": 0.7577372689999962,
+        "label_planner": 0.0,
+        "assign": 0.11453432400001162,
+        "rest": 0.4847113939999943,
+        "total": 1.356982987000002
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 39071,
+      "timing": {
+        "wall_s": 1.8146213250001892,
+        "cpu_s": 1.8145610000000048
+      }
+    },
+    {
+      "world": 1024,
+      "all_mean": 0.59308,
+      "final_100_mean": 0.7199999999999999,
+      "b04_B0_all_mean": 0.62524,
+      "tm_minus_b0": -0.032159999999999966,
+      "planner_calls": 15,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        80,
+        90,
+        100,
+        110,
+        120,
+        140,
+        150,
+        160
+      ],
+      "cache_hits": 35,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 6000,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 15,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 1,
+        "y_high": 0,
+        "z_low": 27,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 28
+      },
+      "cpu_s": {
+        "planner": 2.305336519000008,
+        "label_planner": 0.0,
+        "assign": 0.11961270599998386,
+        "rest": 0.5215284990000129,
+        "total": 2.9464777240000046
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 64849,
+      "timing": {
+        "wall_s": 3.540762150019873,
+        "cpu_s": 3.540463999999993
+      }
+    },
+    {
+      "world": 1025,
+      "all_mean": 0.6041599999999998,
+      "final_100_mean": 0.6800000000000002,
+      "b04_B0_all_mean": 0.6968,
+      "tm_minus_b0": -0.09264000000000017,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 3200,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 11,
+        "z_high": 1,
+        "labels": 48,
+        "labels_on_any_face": 12
+      },
+      "cpu_s": {
+        "planner": 1.3459326930000088,
+        "label_planner": 0.0,
+        "assign": 0.11686951200002937,
+        "rest": 0.49037668199996176,
+        "total": 1.953178887
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 49690,
+      "timing": {
+        "wall_s": 2.3876443409826607,
+        "cpu_s": 2.3873609999999985
+      }
+    },
+    {
+      "world": 1026,
+      "all_mean": 0.8207600000000003,
+      "final_100_mean": 0.9000000000000005,
+      "b04_B0_all_mean": 0.7204,
+      "tm_minus_b0": 0.10036000000000023,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 1600,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 3,
+        "z_high": 0,
+        "labels": 24,
+        "labels_on_any_face": 3
+      },
+      "cpu_s": {
+        "planner": 0.6110095619999996,
+        "label_planner": 0.0,
+        "assign": 0.111968198999989,
+        "rest": 0.48577958100000984,
+        "total": 1.2087573419999984
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 36905,
+      "timing": {
+        "wall_s": 1.667753494984936,
+        "cpu_s": 1.667515999999999
+      }
+    },
+    {
+      "world": 1027,
+      "all_mean": 0.7128,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": 0.67916,
+      "tm_minus_b0": 0.03364,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        50,
+        60,
+        90,
+        100
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 3200,
+      "users_known_terminal": 42,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 1,
+        "z_high": 0,
+        "labels": 48,
+        "labels_on_any_face": 1
+      },
+      "cpu_s": {
+        "planner": 1.2607854550000042,
+        "label_planner": 0.0,
+        "assign": 0.11330943300002616,
+        "rest": 0.5019743069999691,
+        "total": 1.8760691949999995
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 49146,
+      "timing": {
+        "wall_s": 2.3411680859862827,
+        "cpu_s": 2.341056000000002
+      }
+    },
+    {
+      "world": 1028,
+      "all_mean": 0.7300800000000001,
+      "final_100_mean": 0.8400000000000002,
+      "b04_B0_all_mean": 0.80196,
+      "tm_minus_b0": -0.07187999999999994,
+      "planner_calls": 11,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110
+      ],
+      "cache_hits": 39,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 4400,
+      "users_known_terminal": 45,
+      "decisions": 50,
+      "labelled_decisions": 11,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 11,
+        "z_high": 0,
+        "labels": 66,
+        "labels_on_any_face": 11
+      },
+      "cpu_s": {
+        "planner": 1.7554124469999977,
+        "label_planner": 0.0,
+        "assign": 0.118842058999995,
+        "rest": 0.505042574000008,
+        "total": 2.3792970800000006
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 57346,
+      "timing": {
+        "wall_s": 2.8383883599890396,
+        "cpu_s": 2.8380269999999967
+      }
+    },
+    {
+      "world": 1029,
+      "all_mean": 0.7736400000000002,
+      "final_100_mean": 0.88,
+      "b04_B0_all_mean": 0.5604,
+      "tm_minus_b0": 0.2132400000000002,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        60,
+        70
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2800,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 7,
+        "z_high": 0,
+        "labels": 42,
+        "labels_on_any_face": 7
+      },
+      "cpu_s": {
+        "planner": 1.0945851840000032,
+        "label_planner": 0.0,
+        "assign": 0.11448029900001444,
+        "rest": 0.5092715719999887,
+        "total": 1.7183370550000063
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 46491,
+      "timing": {
+        "wall_s": 2.3631028950039763,
+        "cpu_s": 2.362867999999999
+      }
+    },
+    {
+      "world": 1030,
+      "all_mean": 0.5672399999999999,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": 0.72684,
+      "tm_minus_b0": -0.1596000000000002,
+      "planner_calls": 2,
+      "plan_steps": [
+        0,
+        10
+      ],
+      "cache_hits": 48,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 800,
+      "users_known_terminal": 43,
+      "decisions": 50,
+      "labelled_decisions": 2,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 2,
+        "z_high": 0,
+        "labels": 12,
+        "labels_on_any_face": 2
+      },
+      "cpu_s": {
+        "planner": 0.4243751850000024,
+        "label_planner": 0.0,
+        "assign": 0.12695283599999385,
+        "rest": 0.5379839840000074,
+        "total": 1.0893120050000036
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 29792,
+      "timing": {
+        "wall_s": 1.5458419490023516,
+        "cpu_s": 1.545732000000001
+      }
+    },
+    {
+      "world": 1031,
+      "all_mean": 0.8332400000000002,
+      "final_100_mean": 0.88,
+      "b04_B0_all_mean": 0.57168,
+      "tm_minus_b0": 0.26156000000000024,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 3200,
+      "users_known_terminal": 47,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 29,
+        "z_high": 0,
+        "labels": 48,
+        "labels_on_any_face": 29
+      },
+      "cpu_s": {
+        "planner": 1.6203485269999902,
+        "label_planner": 0.0,
+        "assign": 0.1216604279999558,
+        "rest": 0.5188216850000487,
+        "total": 2.2608306399999947
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 49785,
+      "timing": {
+        "wall_s": 2.7170689920021687,
+        "cpu_s": 2.7168510000000055
+      }
+    }
+  ],
+  "means": {
+    "TM_all_mean": {
+      "n": 32,
+      "mean": 0.7327375,
+      "sd": 0.12148187893540924,
+      "min": 0.5234800000000003,
+      "max": 0.9070400000000002
+    },
+    "TM_final_100_mean": {
+      "n": 32,
+      "mean": 0.7925000000000001,
+      "sd": 0.12399271570696035,
+      "min": 0.5600000000000003,
+      "max": 0.96
+    },
+    "tm_minus_b0": {
+      "n": 32,
+      "mean": -0.004785000000000057,
+      "sd": 0.10468023481675198,
+      "min": -0.30579999999999996,
+      "max": 0.26156000000000024
+    },
+    "planner_calls": {
+      "n": 32,
+      "mean": 5.78125,
+      "sd": 2.7677214921419595,
+      "min": 2.0,
+      "max": 15.0
+    },
+    "cache_hits": {
+      "n": 32,
+      "mean": 44.21875,
+      "sd": 2.7677214921419595,
+      "min": 35.0,
+      "max": 48.0
+    },
+    "hold_steps": {
+      "n": 32,
+      "mean": 0.0,
+      "sd": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "evaluations_used": {
+      "n": 32,
+      "mean": 2312.5,
+      "sd": 1107.0885968567839,
+      "min": 800.0,
+      "max": 6000.0
+    },
+    "labelled_decisions": {
+      "n": 32,
+      "mean": 5.78125,
+      "sd": 2.7677214921419595,
+      "min": 2.0,
+      "max": 15.0
+    },
+    "cpu_planner_s": {
+      "n": 32,
+      "mean": 0.936500537999999,
+      "sd": 0.44776639022104603,
+      "min": 0.29349976499999997,
+      "max": 2.305336519000008
+    },
+    "cpu_label_planner_s": {
+      "n": 32,
+      "mean": 0.0,
+      "sd": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "cpu_teacher_total_s": {
+      "n": 32,
+      "mean": 1.5789634330625,
+      "sd": 0.4521933555478288,
+      "min": 0.9268993630000004,
+      "max": 2.9464777240000046
+    },
+    "cpu_world_incl_replay_s": {
+      "n": 32,
+      "mean": 2.059419,
+      "sd": 0.47372570750157794,
+      "min": 1.376804,
+      "max": 3.540463999999993
+    },
+    "world_json_bytes_max": 64849
+  },
+  "labels_total": 185,
+  "labels_z_all_50": false,
+  "box_faces": {
+    "x_low": 1,
+    "x_high": 2,
+    "y_low": 1,
+    "y_high": 0,
+    "z_low": 180,
+    "z_high": 1,
+    "labels": 1110,
+    "labels_on_any_face": 184
+  },
+  "cpu_projection": {
+    "per_world_cpu_s_incl_replay": 2.059419,
+    "dev_panel_worlds": 32,
+    "dev_panel_cpu_s": 65.901408,
+    "label_worlds": 128,
+    "label_worlds_cpu_s": 263.605632,
+    "note": "probe-mean basis: per-world CPU (T_M episode, label planners in label mode and the replay check) times the world count; applies to the mode and budget of this run"
+  },
+  "cpu_seconds": {
+    "self_user_s": 66.357475,
+    "self_sys_s": 1.047914,
+    "children_user_s": 0.0,
+    "children_sys_s": 0.004828,
+    "total_s": 67.410217,
+    "peak_rss_kib": 79444
+  },
+  "start_utc": "2026-09-30T03:23:50+00:00",
+  "end_utc": "2026-09-30T03:24:56+00:00",
+  "wall_clock_s": 66.03736349500832,
+  "arguments": [
+    "--worlds",
+    "1000-1031",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_tm200_dev_a01",
+    "--budget",
+    "200",
+    "--seed",
+    "0",
+    "--launch-sha",
+    "213274c7003ffa73b12c81a5a57e1a652547486d"
+  ],
+  "interpreter": {
+    "executable": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "python": "3.10.20",
+    "numpy": "1.26.3",
+    "host": "Jacob"
+  }
+}

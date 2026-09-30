@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-30T03:23:50.769885Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5fa16e64c40449c89d3e9aa89dace1ee/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5fa16e64c40449c89d3e9aa89dace1ee/experiments/candidates/coupled_host_planner_distillation/run_markov.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_tm200_dev_a01",
+    "--",
+    "--worlds",
+    "1000-1031",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_tm200_dev_a01",
+    "--budget",
+    "200",
+    "--seed",
+    "0",
+    "--launch-sha",
+    "213274c7003ffa73b12c81a5a57e1a652547486d"
+  ],
+  "claim_key": "d5624869dea6e57017bb735696be91b2da910dfc0e830877402cd89986991c0f",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/d5624869dea6e57017bb735696be91b2da910dfc0e830877402cd89986991c0f.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5fa16e64c40449c89d3e9aa89dace1ee/experiments/candidates/coupled_host_planner_distillation/run_markov.py",
+    "--worlds",
+    "1000-1031",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_tm200_dev_a01",
+    "--budget",
+    "200",
+    "--seed",
+    "0",
+    "--launch-sha",
+    "213274c7003ffa73b12c81a5a57e1a652547486d"
+  ],
+  "command_sha256": "437e563e279ddca696f65acb79372087c6fa7f60f1557e74d55561a05d5be7a9",
+  "control_observation": {
+    "observed_at": "2026-09-30T03:23:50.192274Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "213274c7003ffa73b12c81a5a57e1a652547486d"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-30T03:23:50.209298Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5fa16e64c40449c89d3e9aa89dace1ee",
+  "direction": "coupled_host_planner_distillation",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/coupled_host_planner_distillation/run_markov.py",
+    "--worlds",
+    "1000-1031",
+    "--budget",
+    "200",
+    "--seed",
+    "0",
+    "--launch-sha",
+    "213274c7003ffa73b12c81a5a57e1a652547486d"
+  ],
+  "lead": "Claude DM (WSL session)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_tm200_dev_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/d5624869dea6e57017bb735696be91b2da910dfc0e830877402cd89986991c0f.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_tm200_dev_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_tm200_dev_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 539325,
+      "session_id": 539325,
+      "start_ticks": 17717488
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 539325,
+    "process_group_id": 539325
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_tm200_dev_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 539326,
+      "session_id": 539325,
+      "start_ticks": 17717492
+    },
+    "pid": 539326,
+    "process_group_id": 539325,
+    "supervisor_pid": 539325
+  },
+  "schema_version": 1,
+  "sha": "213274c7003ffa73b12c81a5a57e1a652547486d",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5fa16e64c40449c89d3e9aa89dace1ee",
+  "stderr": "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_tm200_dev_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_tm200_dev_a01/stdout.log"
+}
