@@ -1,12 +1,31 @@
-"""Bound original tensor assets; new count branch is zero and no Adam is inherited."""
+"""Bound original assets and previously paid calibration; no Adam is loaded."""
+import hashlib
+import json
 from pathlib import Path
+import subprocess
 
 import torch
 
 from experiments.candidates.uav_fleet_adaptation.b02.model import state_digest
 from experiments.candidates.uav_local_history.b01.study import file_identity
-from .contract import FROZEN, INITIAL_ASSETS
+from .contract import CALIBRATION_SOURCE, FROZEN, INITIAL_ASSETS
 from .model import make_inherited
+
+
+def verify_calibration(repo):
+    """Read the pinned published blob even when a sparse checkout omits it."""
+    binding = CALIBRATION_SOURCE
+    blob = subprocess.check_output(
+        ["git", "-C", str(repo), "show", binding["evidence_commit"] + ":" + binding["reading_path"]],
+        stderr=subprocess.PIPE, timeout=30)
+    if hashlib.sha256(blob).hexdigest() != binding["reading_sha256"]:
+        raise ValueError("paid calibration source bytes changed")
+    saved = json.loads(blob)
+    if (saved["status"] != "VERIFIED" or saved["launch_sha"] != binding["launch_sha"]
+            or [(r["lineage"], r["winner"]) for r in saved["calibrations"]]
+            != list(enumerate(binding["winners"]))):
+        raise ValueError("paid calibration choices/source changed")
+    return True
 
 
 def verify_initial_assets(bindings=INITIAL_ASSETS):

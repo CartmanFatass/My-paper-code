@@ -5129,3 +5129,71 @@ in1.62s. The Reviewer reports no remaining material finding after the repairs.
 I accept the implementation. Review was synthetic/source-only, with no real
 asset forward, native episode, production fit or complete production reader.
 This is engineering acceptance, not empirical validation of the conjecture.
+
+<a id="b06-a01-zero-exposure-failure"></a>
+**A01 accepted-input failure and bounded repair,22:44 UTC.** The first remote
+operation used source `50bc15328174d79b290fe00fee47ea8596b2fa6a` and was admitted
+at22:40:57.683594 UTC, then exited1 at22:40:59.993821 UTC. Its
+[native manifest](../../../../runs/uav_fleet_adaptation/b06_count_development_a01/launch-manifest.json)
+and [complete failed summary](../../../../runs/uav_fleet_adaptation/b06_count_development_a01/summary.json)
+are retained. Source verification completed, but the calibration-reading
+existence check failed before loading S or constructing an environment.
+All native calls/steps, actor/controller queries, labels, fits, updates and
+reader replay were zero. Worker import/check scope cost2.009999 wall-s/
+1.286401 CPU-s, whole-process peak381256KiB. Native status is consistent,
+with both runner and supervisor absent. This is missing execution evidence,
+not an adverse count-development outcome.
+
+Direct inspection of the original snapshot reproduced the cause: the tracked
+B04 `reading.json` has Git's skip-worktree flag `S` and no filesystem copy
+under the inherited remote sparse selection. The committed blob is present
+after explicit retrieval and matches the original879195 bytes/SHA-256
+`93c681eba38f8fcd7fd9059eb9eaa75142771d085bf645e831099bed63b25a50`.
+No accepted source file or sparse selection was changed. The canonical remote
+control file received only this direction's published row; lead/pause/state
+were already equal. Both original remote S byte hashes were checked unchanged.
+The older remote automatic-GC bad-tree warning remains separate from this
+verified missing-file cause; no GC repair or control change is being inferred.
+
+L0 for the narrow repair: in B06 `assets.py`, verify the exact B04 evidence
+commit's calibration-reading Git blob, hash and two recorded winners;
+producer and reader both use that binding instead of assuming the committed
+file is materialized by a sparse checkout. The immutable input and calibration
+choices stay identical. A managed synthetic Git fixture checks omitted working
+files, dirty copies, changed bytes and changed winner metadata; the registered
+Engineering Reviewer checks this repair. No new native/actor/optimizer test
+is needed. Publish the repair and failed records before a separately declared
+fresh A02 attempt at its new source; it uses the original fixed seeds/exposure
+and adds no scientific work beyond the selected plan because A01 consumed none.
+Do not treat the launcher's same-source retry eligibility as authorization or
+edit/restart the accepted A01 operation. The complete study remains unexecuted.
+
+A01 deterministic observation adopted the same terminal handle at generation26;
+event `0638a19766bb6917b6c5a361` was drained/rearmed and the observer stopped.
+Native-child queue delivery returned the known `-32600`; this active child
+read the terminal facts directly. All original compact output files were
+collected without running the priced production reader.
+
+**Repair acceptance and A02 prospective declaration,22:49 UTC.** The independent
+Reviewer reports no material finding in this narrow binding repair and verified
+the original879195-byte blob. Its5 managed synthetic checks passed in1.21s
+(mine:1.27s). `git show` can lazily fetch a missing promisor object; the timeout
+is not an offline guarantee. I explicitly retrieved the required blob in the
+remote common object store before this decision, without materializing it in
+or changing the accepted A01 snapshot. The same pinned input is now available
+to the next snapshot and is hash-checked by both producer and reader. The two
+small Git verification children are outside Python's process-CPU counters;
+their wait is included in wall time, and their CPU remains unmetered support.
+
+I accept this outcome-blind input repair and declare
+`runs/uav_fleet_adaptation/b06_count_development_a02/` as the fresh attempt
+after its exact source and A01 evidence are published. It executes the same
+five native correctness fixtures, four fits,2,656 study episodes and bounded
+reader, at the original addresses; A01 has consumed none of them. No new
+comparator, fit, calibration, pilot or verification query is added. Admission
+must again verify current pause/lead, published new source and actual remote
+memory. Preserve the stopped A01 handle and all failed records; do not use
+the old snapshot or same-source retry option for this changed implementation.
+This repair leaves both the conjecture and independent scientific selection
+advice unchanged. The next scientific boundary remains the complete read result
+or a material obstruction, not launch acceptance.

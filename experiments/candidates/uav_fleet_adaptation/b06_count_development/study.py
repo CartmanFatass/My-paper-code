@@ -12,7 +12,7 @@ import torch
 
 from experiments.candidates.uav_fleet_adaptation.b02.model import state_copy, state_digest, movement
 from experiments.candidates.uav_local_history.b01.study import file_identity, write_json
-from .assets import load_initial_assets, verify_initial_assets
+from .assets import load_initial_assets, verify_initial_assets, verify_calibration
 from .collect import collect_episode
 from .contract import CALIBRATION_SOURCE, COUNTS, FINAL_COUNTS, FITS, FROZEN, OBJECT, array_digest, new_counts, source_identities
 from .environment import make_real
@@ -89,8 +89,7 @@ def run_batch(out, launch_sha, *, admission, entry_start=None, entry_cpu=None):
 
     try:
         batch["sources"] = source_identities(ROOT)
-        if file_identity(ROOT / CALIBRATION_SOURCE["reading_path"])["sha256"] != CALIBRATION_SOURCE["reading_sha256"]:
-            raise ValueError("paid calibration source changed")
+        verify_calibration(ROOT)
         original_states, originals, batch["initial_assets"] = load_initial_assets()
         original_generalized_sha = [state_digest(m.state_dict()) for m in originals]
         write_json(out / "config.json", {key: batch[key] for key in

@@ -11,7 +11,7 @@ import torch
 
 from experiments.candidates.uav_fleet_adaptation.b02.model import state_digest, state_copy, movement
 from experiments.candidates.uav_local_history.b01.study import file_identity, write_json
-from .assets import load_initial_assets
+from .assets import load_initial_assets, verify_calibration
 from .audit import check_episode
 from .contract import CALIBRATION_SOURCE, COUNTS, FINAL_COUNTS, FITS, FROZEN, OBJECT, array_digest, source_identities
 from .controllers import MemoC, analyze
@@ -229,9 +229,9 @@ def _read(out, repo, work):
             raise AssertionError("config/summary binding changed: " + key)
     if batch["sources"] != source_identities(repo):
         raise AssertionError("read source differs from producer")
-    if (batch["inherited_calibration"] != CALIBRATION_SOURCE
-            or file_identity(repo / CALIBRATION_SOURCE["reading_path"])["sha256"] != CALIBRATION_SOURCE["reading_sha256"]):
+    if batch["inherited_calibration"] != CALIBRATION_SOURCE:
         raise AssertionError("paid Bstar source changed")
+    verify_calibration(repo)
     if torch.get_num_threads() != 1 or batch["runtime"]["torch_threads"] != 1:
         raise AssertionError("same one-thread CPU arithmetic required")
     original_states, originals, initial_records = load_initial_assets()
