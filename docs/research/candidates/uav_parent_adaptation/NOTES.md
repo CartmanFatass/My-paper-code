@@ -1770,3 +1770,134 @@ design ready for the focused Pro boundary; no implementation or exposure.** Root
 owns that pending allocation and advice, rather than a fabricated compute or
 per-fit permission dependency. No new RESEARCH standing or direction takeover is
 made by publishing this notebook-only proposal.
+
+<a id="b03-accepted-scope"></a>
+## 2026-09-30 — B03 selected scope, executable law and L0
+
+Root selected the exact three-fit C/I/Lg/Ls envelope at
+`c5ff2774ec4423dfb8629abf49a71cc4bd4772cd`. I read the complete original independent
+answer, both addenda and full 6 Pro chat fallback in the
+[selection archive](../../archive/2026-09-30/RESEARCH-ordinary-controller-development.md#decision).
+The initial six-versus-three-fit dissent remains historical; the settled design has
+no outstanding material dissent. I accept its complete-development scope and retain
+the omitted K-only-success alternative. This is now the sole active result study;
+the accepted allocation addendum above supplies its hypotheses, arms, counts and
+interpretation. No new scientific question or additional advice round is selected.
+
+The advice changes the required reading concretely: retain Ls−I, I−C and Lg−Ls
+beside primary Lg−C, including their accounting identity but without causal mediation.
+Read the initial exploratory law as a real policy, distinguish requested departures
+from executed displacements, and preserve a useful sampled result even if the primary
+greedy use fails. Current published background topics2/5/8 retain the competence,
+heterogeneity and information distinctions already applied in the design. Root's
+source check confirms the actual local J has no height penalty or message fee;
+the other fleet host's reward must not enter this collector or reader.
+
+**Remaining executable details fixed before exposure.** Use FP32 CPU tensors and
+one Torch intra/inter-op thread. The 27 COMMANDS and C remain imported unchanged.
+Construct the actor under `torch.random.fork_rng(devices=[])`, then reseed at
+`100000*master+11` before explicit uniform initialization in this order: first
+hidden weight, first hidden bias, second hidden weight, second hidden bias. Bounds
+are ±1/sqrt(fan_in). Table and output head are exactly zero. Restore the caller's
+global Torch RNG afterwards. Construct the unchanged Critic in a separate fork at
+`100000*master+17`, preserving its existing constructor draw order. Save exact
+initial checkpoints and digests; source versions, not seed names alone, bind them.
+
+For each categorical decision/agent, derive an isolated CPU Torch generator seed
+from SHA256 of ASCII
+`b03-c-prior-v1|DOMAIN|MASTER|WORLD_SEED|MACRO_INDEX|AGENT_INDEX`, interpreting the
+first eight digest bytes little-endian and masking to63bits. DOMAIN is `train` for
+training and `eval` for I/Ls. Integer fields use decimal without padding. Use one
+`torch.multinomial(softmax(logits), 1, generator=generator)` call on that agent's
+27-category FP32 vector. I/Ls use identical addresses, regardless of their arm
+names; C/Lg do not consume action RNG. Store addresses/seed witnesses and actual
+actions, logits and FP32 log-softmax probabilities. Fixed per-agent call shape
+and independently reconstructed addresses preserve paired primitive sampling
+innovations without claiming the resulting states/actions are identical. No global
+NumPy/Torch RNG supplies action draws. World seeds and masters are exactly those
+in the allocation addendum. All episode and macro indices are zero-based.
+
+L0 deliverable: `experiments/candidates/uav_parent_adaptation/b03_c_prior/` implements
+the fixed actor/wrapper,64-clock PPO, complete runner and pure saved-output reader;
+tests mirror that directory. Run target is
+`runs/uav_parent_adaptation/b03_c_prior_a01/`. The public runner has no scientific
+sweep/horizon/arm override. All three final checkpoints are fixed before evaluation;
+within block/world rotate the four-arm order by `(block_index+world_index)%4`.
+Initial C shadows remain diagnostic actor work only. Emit complete counts, source
+and checkpoint binding, retained training/behavior records and every requested
+native/departure/tail/cost reading. Keep bulk in the one canonical admitted-node
+run directory, with a compact Git result and verified identities after collection.
+
+One registered Implementer owns only `b03_c_prior/{policy,update}.py` and
+`tests/.../b03_c_prior/test_policy_update.py`: implement the declared trainable
+categorical law, initialization, addressed sampler, optimizer groups and fixed
+two-episode update. It may read dependencies but has no index, commit, notebook,
+shared-code, launch or native-exposure ownership and spawns nothing. I own the
+wrapper/collector/reader/runner and all records, and accept the Implementer's diff
+and checks. Both work in shared main and preserve every other writer's edits.
+
+Focused checks cover exact zero-head/table identity and initial probabilities,
+legal feature packing/C state/hold/reset behavior, matched addressed randomness,
+sampled-label density including physical aliases, return/advantage/gradient/optimizer
+arithmetic, source/checkpoint/result bindings and counted fake-host integration.
+These use synthetic fixtures, not a native pilot or outcome screen. Independent
+engineering review covers the full executable path before launch. Planned scientific
+cost remains exactly3fits/1,920H256 episodes/491,520native steps and3,072 actor plus
+3,072 critic updates; no result-bearing effect occurs until exact inputs are
+published and current pause/lead plus actual-node admission pass. The configured
+first-choice node is wsl_4070; estimates are not caps. Accepted handles will be
+collected and read without duplicate launch or an early launch-only return.
+
+### B03 implementation acceptance and pre-exposure checks
+
+The selected wrapper, actor/update, fixed runner and pure reader are implemented
+under `experiments/candidates/uav_parent_adaptation/b03_c_prior/`. I reviewed the
+Implementer's three owned files and accepted the exact law and independent
+arithmetic checks. The collector maps its stored `macro_log_prob`, `macro_values`
+and four-tick `macro_reward` arrays to the updater's `logp`, `value`, `reward`
+fields without changing their values. Requested categorical labels retain their
+own likelihood when distinct labels execute the same boundary-clipped displacement.
+C/greedy endpoint probabilities are explicitly marked categorical references,
+not their deterministic behavior density.
+
+Independent engineering Reviewer `review_b03_engineering` traced the complete
+execution and reading path in a separate context. Three findings were repaired
+before any native exposure: checkpoint references are now relative to the canonical
+run, the pure reader's existing native-physics reconstruction dependency is included
+explicitly in the source manifest, and loaded-module discovery excludes Torch's
+relative synthetic `_classes.py`/`_ops.py` filenames. These fixes alter artifact
+binding/startup only. Its final verdict is **no material finding remains**, with
+23 synthetic checks independently passed across focused invocations. I accept the
+repaired implementation; no scientific law, arm, seed, fit or exposure was revised.
+
+My final complete test invocation was
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python -m pytest -q tests/experiments/candidates/uav_parent_adaptation/b03_c_prior`:
+**23 passed in8.00s**. Checks include independently reconstructed PPO/Adam arithmetic,
+initialization draw order/RNG restoration, exact greedy C identity and sampled
+prior, every-tick actual-history ingestion, learned four-tick hold, addressed
+I/Ls innovations, stored local/critic packing, requested-action density, native
+formula reconstruction on an analytic fixture, failure counts/partial evidence,
+checkpoint relocation, clean-process manifests, and a reduced synthetic complete
+batch that freezes all three finals before any evaluation. Neither these checks
+nor the Reviewer constructed/stepped the native host or ran a scientific fit.
+The target-node runtime/full-scale execution remains an execution check, not a
+completed result or a new pilot requirement.
+
+The pure reader verifies all1,920 retained episode files, all384 endpoint actor
+trajectories, training sampled densities/addresses, every independent saved native
+objective, checkpoint/source identities, C waypoint/tie choices using already-paid
+candidate scores, and nested radio-work counts from actual visible row lengths.
+It never reruns an optimizer or the native environment. The three fixed contrasts
+Lg−C, Ls−I and the exploratory/decoder decomposition remain descriptive, without
+post-result decoder selection or causal mediation. Raw training traces, six endpoint
+checkpoints and full update diagnostics stay in the one canonical admitted-node
+output; compact source/status/readings will be published after collection.
+
+Fresh local main/RESEARCH at `7bb778764d4de030179f9b4d06681c35073fb372` retains the
+lifted owner pause and active `exploring` direction with lead `Codex DM (native child)`.
+The remote canonical own row still reflected B02 reserve when inspected; it will
+be synchronized narrowly from the current published row before admission, preserving
+other directions and remote control edits. The configured first-choice scientific
+interpreter is now `/home/wu/.venvs/hmasd-gcc-31021/bin/python` on `wsl_4070`, the
+existing provisional runtime mitigation. All scientific inputs will be committed
+and published before the single fixed B03 launch. No accepted B03 operation yet.
