@@ -203,6 +203,7 @@ def _paired(values: np.ndarray, ids: list[int], indices: np.ndarray):
 
 def read_run(out: Path):
     wall, cpu = time.perf_counter(), time.process_time()
+    usage_start = resource.getrusage(resource.RUSAGE_SELF)
     summary = json.loads((out / "summary.json").read_text())
     validate_worker(summary)
     spec_data = summary["config"]["spec"]
@@ -258,7 +259,10 @@ def read_run(out: Path):
         "uncertainty_scope": "paired percentile world bootstrap, conditional on two fixed old training instances; not training replication or equivalence",
         "bootstrap": {"seed": spec.bootstrap_seed,"replicates":spec.bootstrap_replicates},
         "timing": {"wall_seconds":time.perf_counter()-wall,"cpu_seconds":time.process_time()-cpu,
-                   "peak_rss_kib_process":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}}
+                   "user_seconds":resource.getrusage(resource.RUSAGE_SELF).ru_utime-usage_start.ru_utime,
+                   "system_seconds":resource.getrusage(resource.RUSAGE_SELF).ru_stime-usage_start.ru_stime,
+                   "peak_rss_kib_process":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+                   "rss_scope":"process lifetime; not a separate reader peak"}}
     write_json(out / "reading.json", result)
     return result
 

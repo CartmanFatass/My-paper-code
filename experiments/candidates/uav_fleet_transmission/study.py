@@ -5,6 +5,7 @@ from dataclasses import asdict, dataclass
 import gzip
 import hashlib
 import json
+import platform
 from pathlib import Path
 import resource
 import time
@@ -55,6 +56,14 @@ def write_json(path: Path, value: Any) -> None:
 def artifact(path: Path, base: Path) -> dict:
     return {"path": str(path.relative_to(base)), "bytes": path.stat().st_size,
             "sha256": sha256(path)}
+
+
+def process_resources() -> dict:
+    own, children = resource.getrusage(resource.RUSAGE_SELF), resource.getrusage(resource.RUSAGE_CHILDREN)
+    return {"self_user_seconds": own.ru_utime, "self_system_seconds": own.ru_stime,
+            "children_user_seconds": children.ru_utime, "children_system_seconds": children.ru_stime,
+            "peak_rss_kib_process": own.ru_maxrss,
+            "scope": "process lifetime including imports; self CPU includes native threads; child totals separate"}
 
 
 def make_env(n: int, world_id: int, horizon: int):
@@ -265,6 +274,9 @@ def run_study(out: Path, checkpoint_root: Path, launch_sha: str, admission: dict
               "world_address": [260930, 14], "world_streams": {"users": 1, "fleet": 2, "runtime": 3},
               "world_order": "N4 then N8; world increasing; cyclic five-arm order by world index",
               "components": list(frozen.COMPONENTS), "new_fits": 0, "updates": 0,
+              "runtime": {"python":platform.python_version(), "numpy":np.__version__,
+                  "torch":torch.__version__, "torch_threads":torch.get_num_threads(),
+                  "torch_interop_threads":torch.get_num_interop_threads(), "device":"cpu"},
               "expected_episodes": 160, "expected_native_steps": 80000,
               "expected_mask_requests": 648000, "expected_motion_requests": 2592000}
     write_json(out / "config.json", config)
@@ -320,7 +332,8 @@ def run_study(out: Path, checkpoint_root: Path, launch_sha: str, admission: dict
         summary["status"] = "collected"
         summary["worker_timing"] = {"wall_seconds": time.perf_counter()-started,
                                      "cpu_seconds": time.process_time()-cpu_started,
-                                     "peak_rss_kib_process": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}
+                                     "interval": "run_study entry through complete collection, excluding module import/admission",
+                                     "process_resources": process_resources()}
         write_json(out / "summary.json", summary)
         # Reading consumes only saved trajectories; it never invokes an actor or environment step.
         from .reader import read_run
@@ -329,7 +342,8 @@ def run_study(out: Path, checkpoint_root: Path, launch_sha: str, admission: dict
         summary["status"] = "complete"
         summary["total_timing"] = {"wall_seconds": time.perf_counter()-started,
                                     "cpu_seconds": time.process_time()-cpu_started,
-                                    "peak_rss_kib_process": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}
+                                    "interval": "run_study entry through full reader",
+                                    "process_resources": process_resources()}
         write_json(out / "summary.json", summary)
         return summary
     except BaseException as exc:

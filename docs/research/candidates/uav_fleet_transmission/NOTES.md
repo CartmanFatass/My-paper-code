@@ -189,3 +189,41 @@ N tag is `b01_native_s1_a01`; the immutable launcher snapshot will use the publi
 and checkpoint bytes may be read directly from the verified original worktree paths above.
 Only the two exact binaries will be copied to owned local temporary input paths for the required
 equivalence checks; those redundant check copies will be deleted after use. No old worktree GC.
+
+## 2026-09-30 — final frozen checks and prospective local-node choice
+
+Root established G's calculation release: valid native exit1 at02:52:25UTC, absent worker and
+supervisor, matching source/identities. G's scientific result is not completed or adopted by
+this fact. Both declared checkpoint binaries were then copied into
+`temp/directions/uav_fleet_transmission/final45_checks/<original-tag>/checkpoint_45.pt` and
+their exact sizes/SHA256s above matched. All four actual final45 H6/SET×N4/N8 equivalence tests
+passed in5.98s (352 native correctness transitions across both paths/resets), including exact
+actions, observation/state progression, recurrent/skill runtime and unchanged frozen digests.
+Twenty-one other unit/integration tests pass. Existing one-label debug-standard-deviation and
+Matplotlib deprecation warnings do not enter actions, native metrics or the frozen digests.
+
+Before any N acceptance, Root supplied the concrete new runtime reliability evidence: G
+terminated with CPython `SystemError: unknown opcode` in NumPy `_all_dispatcher`, reached
+through `uav_radio.py`'s `np.all(mask)`, after101complete episodes+12steps. Similar peer runtime
+failures are recorded, but the root cause is unproven. This is technical missingness, not a
+scientific result against G or masking. I choose configured `local_linux` for N's first attempt
+because that unresolved repeated failure family makes the remote node unsuitable for this
+bounded full-panel collection. No N run has started, moved or been retried. This choice follows
+the configured fallback rule and Root's explicit resource release, with no extra outcome pilot.
+
+Actual local runtime: Python3.10.20 (Clang22.1.3), NumPy1.26.3, Torch2.7.0+cpu, x86_64 WSL2.
+Keep four Torch threads and one interop thread; all actors remain CPU float32, public coordinates
+retain float32 quantization and native physics remain float64. The final45 equivalence checks
+ran on this node. This is not a cross-node bitwise replay claim; old remote timing remains only
+a historical anchor. An actual-node memory preview at02:54:38UTC found9,276,903,424available
+bytes versus4,294,967,296floor; the launch kernel will recheck immediately before release.
+G's potential recovery stays outside N's active local calculation window under Root allocation.
+
+The runner/reader now report process-lifetime user/system CPU (native threads included), child
+CPU separately, the scoped collection and reader intervals, versions/thread counts, and
+process-lifetime RSS explicitly. Collection interval timing excludes module imports/admission;
+process totals and the native exit record retain that broader cost. These telemetry additions
+change no decision or scientific exposure. Full panel, declared seeds and all160 episodes remain
+fixed. The accepted local worker will consume the verified staged checkpoint paths; the source
+remote originals remain required, untouched assets. Canonical bulk retention and actual cleanup
+follow terminal collection, not an assumption that launch acceptance is a read result.
