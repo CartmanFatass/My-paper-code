@@ -51,6 +51,10 @@ class FitSpec:
     continuous_logstd_init: float = 0.0
     continuous_logstd_min: float = -20.0
     continuous_logstd_max: float = 2.0
+    #: Low-level entropy coefficient override (b03 SET-T-b', NOTES 2026-09-30 00:45 UTC).  ``None`` keeps
+    #: the recipe's value (``Config.lambda_l`` = 0.05, untouched by the hmasd/mappo algorithm switches),
+    #: so the produced config is unchanged; a float replaces ``config.lambda_l`` after the switch.
+    lambda_l: object = None
 
 
 DEFAULT_SPEC = FitSpec()
@@ -87,6 +91,23 @@ def apply_action_head(config, spec):
     config.continuous_logstd_max = float(spec.continuous_logstd_max)
 
 
+def apply_lambda_l(config, spec):
+    """Apply ``spec.lambda_l`` (if set) after ``apply_algorithm_config``, the last writer of ``lambda_l``.
+
+    Refuses the override when entropy annealing or entropy targets are on: the agent then rewrites
+    ``config.lambda_l`` itself (``hmasd/agent.py`` annealing init and ``_adapt_entropy_coef``), so the
+    override would be recorded but not used.  Both are off for both arms of every recipe here.
+    """
+    if spec.lambda_l is None:
+        return
+    value = float(spec.lambda_l)
+    if not 0.0 <= value < float("inf"):
+        raise ValueError(f"lambda_l must be a finite non-negative float, got {spec.lambda_l!r}")
+    if getattr(config, "use_entropy_annealing", False) or getattr(config, "use_entropy_targets", False):
+        raise ValueError("lambda_l override would be overwritten by entropy annealing/targets")
+    config.lambda_l = value
+
+
 def make_config(arm, envs, seed, spec=DEFAULT_SPEC):
     if arm not in SEEDS:
         raise ValueError(f"unknown arm {arm}")
@@ -121,6 +142,7 @@ def make_config(arm, envs, seed, spec=DEFAULT_SPEC):
     config.update_env_dims(state_dim=envs[0].state_dim, obs_dim=envs[0].obs_dim,
                            n_agents=envs[0].n_uavs)
     config = apply_algorithm_config(config, ALGORITHM[arm])
+    apply_lambda_l(config, spec)
     # MAPPO's algorithm switch also changes the recurrent chunk length. Restore
     # the declared ten-step information clock and truncated-BPTT length.
     config.k = K
@@ -344,14 +366,16 @@ class MacroFitSpec(FitSpec):
 def is_declared_macro_spec(spec) -> bool:
     """True for the declared macro spec of a contract (area 5000 only: menus/references are 5 km).
 
-    The four action-head keys may differ from their defaults (a declared arm may select the
-    bounded head); every other field must equal ``MacroFitSpec(contract=...)``.
+    The four action-head keys and the ``lambda_l`` override may differ from their defaults (a declared
+    arm may select the bounded head; b03 SET-T-b' declares lambda_l 0); every other field must equal
+    ``MacroFitSpec(contract=...)``.
     """
     if not isinstance(spec, MacroFitSpec) or spec.continuous_action_distribution not in ACTION_HEAD_DISTRIBUTIONS:
         return False
-    fields = {k: v for k, v in asdict(spec).items() if k not in ACTION_HEAD_KEYS}
+    free = ACTION_HEAD_KEYS + ("lambda_l",)
+    fields = {k: v for k, v in asdict(spec).items() if k not in free}
     return any(fields == {k: v for k, v in asdict(MacroFitSpec(contract=contract)).items()
-                          if k not in ACTION_HEAD_KEYS} for contract in MACRO_CONTRACTS)
+                          if k not in free} for contract in MACRO_CONTRACTS)
 
 
 def action_squash(spec) -> str:
@@ -409,6 +433,7 @@ def make_macro_config(arm, envs, seed, spec):
     config.action_dim = int(env0.action_dim)
     config.update_env_dims(state_dim=env0.state_dim, obs_dim=env0.obs_dim, n_agents=env0.n_uavs)
     config = apply_algorithm_config(config, ALGORITHM[arm])
+    apply_lambda_l(config, spec)
     config.k = MACRO_K_UNITS
     config.action_space_type = action_space_type
     config.action_dim = int(env0.action_dim)

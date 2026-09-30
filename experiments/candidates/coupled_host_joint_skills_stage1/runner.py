@@ -907,12 +907,15 @@ def main(argv=None):
     parser.add_argument("--continuous-logstd-init", type=float, help="fits only (default 0.0)")
     parser.add_argument("--continuous-logstd-min", type=float, help="fits only (default -20.0)")
     parser.add_argument("--continuous-logstd-max", type=float, help="fits only (default 2.0)")
+    parser.add_argument("--lambda-l", type=float,
+                        help="fits only: low-level entropy coefficient (default: the recipe's 0.05; "
+                             "b03 SET-T-b' uses 0)")
     args = parser.parse_args(argv)
     head = {key: getattr(args, key) for key in ("continuous_action_distribution", "continuous_logstd_init",
-                                                "continuous_logstd_min", "continuous_logstd_max")
+                                                "continuous_logstd_min", "continuous_logstd_max", "lambda_l")
             if getattr(args, key) is not None}
     if head and args.floor is not None:
-        parser.error("the action-head options apply to fits only")
+        parser.error("the action-head and --lambda-l options apply to fits only")
     worlds = None
     if args.floor is None:
         if args.arm is None or args.seed is None:
