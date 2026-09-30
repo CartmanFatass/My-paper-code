@@ -613,3 +613,262 @@ The accepted operation exited0 at17:11:05 UTC with a valid native witness; both 
 Compact [summary](../../../../runs/uav_fleet_transmission/b02_silent_repositioning_a01/summary.json):191,509 bytes, SHA256`11d2a85260ac00b4c47846fb31268a3e9c00d9fabf716a8b76b5ec726d5d27bb`; reading111,805 bytes, SHA256`269fc6aca11d085d53375961ba031524af2964255ba3ea0acc3bf574cf3f15fd`. Worker1777.508580 wall/1776.094880 CPU seconds; reader1719.989952 wall/1718.653590 CPU; combined3497.517491 wall/3494.767428 CPU seconds. PeakRSS599,368KiB is the whole process lifetime, not a separately measured reader peak; process-lifetime CPU including imports is3497.870927 self seconds, child system.002832 seconds separately. This is58.25CPU minutes of computation, not a zero-cost study because it had no fits.
 
 Observation generation6 READY event`09f13cd2bd7baeaffb8ccdfc`, wake`7db090a9-0a53-4a32-b7bb-06cbed21c94e` was drained with the terminal facts, consumed by rearm generation7, then observation stopped; drain confirmed stopped/no pending events or wake. The unsupported native child queue delivery did not lose collection because this turn remained active. Root received calculation release, explicitly distinguished from a scientific conclusion. Complete evidence is now with the isolated registered ResearchCritic; DM reads the full contrasts and adverse trajectories independently. All unique raw evidence stays available during that reading; final interpretation/publication and measured cleanup follow it.
+
+
+<a id="b02-complete-reading"></a>
+## 2026-09-30 — B02 complete reading: retain silent relocation–activation–resumed control
+
+**Retain R as a conditional ordinary control capability and close this fixed comparison.**
+The fresh complete N8 panel supports useful mean J and service beyond both unchanged C/E and
+stronger immediate joint control J. The original blind-spot explanation is now strengthened
+by realized reachable-placement value, with explicit adverse worlds, quality/tail losses and
+extra travel. This is exploration, not confirmation, a learned method, or an option-necessity
+claim. No new run, fitting, candidate expansion or repair is selected at this boundary.
+
+Exact inputs were published at `9928d34b54628baaa542961debb65c5ce7ef0f23`; compact complete
+[summary](../../../../runs/uav_fleet_transmission/b02_silent_repositioning_a01/summary.json),
+[reader](../../../../runs/uav_fleet_transmission/b02_silent_repositioning_a01/reading.json) and
+terminal evidence at `b7165f3294481c50335e43a5151f8b3b7d8f7459`. All48 episodes/24,000 native
+transitions and24,048 saved snapshots passed the declared complete reader, including all
+C/J/R candidate decisions, initial-array/source bindings, capacity identities and sixteen
+exact C/R prefixes through t39. There were zero fits, optimizer updates or failed result cells.
+The node-choice deviation and observer queue limitation remain recorded above; neither is
+hidden by the successful scientific result.
+
+### Complete outcomes and retained adverse worlds
+
+Service is mean users served per native tick. All other means below first reduce each complete
+H500 world, then average the sixteen equally weighted worlds. In this table `J score` denotes
+the native objective; the middle program is the stronger joint controller named J.
+
+| Program | J score | Service | Quality | Mean active | Path m/UAV | Service p05 | Episode minimum |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| C | 0.615036072 | 39.049875 | 0.229656803 | 4.178750 | 260.115119 | 38.750000 | 34.437500 |
+| J | 0.631313484 | 40.300750 | 0.223979923 | 4.488750 | 274.176743 | 40.375000 | 35.875000 |
+| R | 0.648963246 | 41.853000 | 0.210589572 | 4.786250 | 450.673593 | 38.750000 | 34.437500 |
+
+The fixed10,000-draw paired-world percentile bootstrap, seed26093024, gives the following
+**descriptive** intervals. They condition on these deterministic programs and this host;
+they are not training replication, simultaneous tests, equivalence or a universal guarantee.
+Positive/negative/zero counts use the unrounded world differences.
+
+| Contrast | Mean ΔJ [95%] | J +/−/0 worlds | Mean Δservice [95%] | Service +/−/0 worlds |
+| --- | --- | --- | --- | --- |
+| R-C | +0.033927174 [+0.021367181, +0.046673855] | 14/0/2 | +2.803125000 [+1.703246875, +3.857765625] | 11/1/4 |
+| J-C | +0.016277412 [+0.003530419, +0.031960374] | 9/7/0 | +1.250875000 [+0.294625000, +2.275034375] | 12/4/0 |
+| R-J | +0.017649762 [+0.004632463, +0.031449777] | 11/5/0 | +1.552250000 [+0.476487500, +2.732384375] | 9/7/0 |
+
+Every world remains visible below; each cell is `J score / users per tick`. The raw and reader
+retain all other requested outcomes and all three unfiltered comparisons. World IDs are not
+selected for a new gate or a posthoc tuning panel.
+
+| World | C | J | R | R−C | R−J |
+| --- | --- | --- | --- | --- | --- |
+| 29324000 | 0.637006213 / 39.990 | 0.637765475 / 39.994 | 0.637006213 / 39.990 | +0.000000000 / +0.000 | -0.000759262 / -0.004 |
+| 29324001 | 0.632517317 / 39.980 | 0.632241193 / 40.000 | 0.684508495 / 45.244 | +0.051991178 / +5.264 | +0.052267302 / +5.244 |
+| 29324002 | 0.684157529 / 44.724 | 0.685152491 / 44.864 | 0.684524389 / 44.724 | +0.000366860 / +0.000 | -0.000628102 / -0.140 |
+| 29324003 | 0.584396502 / 35.986 | 0.613710244 / 38.982 | 0.636158552 / 40.382 | +0.051762050 / +4.396 | +0.022448309 / +1.400 |
+| 29324004 | 0.607622777 / 37.972 | 0.648277400 / 41.980 | 0.650692470 / 42.464 | +0.043069693 / +4.492 | +0.002415070 / +0.484 |
+| 29324005 | 0.605045402 / 37.934 | 0.624831460 / 40.830 | 0.661084917 / 43.176 | +0.056039515 / +5.242 | +0.036253457 / +2.346 |
+| 29324006 | 0.538290760 / 34.894 | 0.637146736 / 39.946 | 0.622316118 / 40.176 | +0.084025358 / +5.282 | -0.014830618 / +0.230 |
+| 29324007 | 0.571368788 / 36.992 | 0.564280526 / 36.000 | 0.618719490 / 39.612 | +0.047350702 / +2.620 | +0.054438964 / +3.612 |
+| 29324008 | 0.615979382 / 37.996 | 0.612832343 / 37.994 | 0.685712474 / 44.252 | +0.069733092 / +6.256 | +0.072880131 / +6.258 |
+| 29324009 | 0.612628491 / 38.014 | 0.601042257 / 36.886 | 0.630207368 / 39.772 | +0.017578878 / +1.758 | +0.029165112 / +2.886 |
+| 29324010 | 0.625121682 / 39.898 | 0.624731404 / 39.912 | 0.625121682 / 39.898 | +0.000000000 / +0.000 | +0.000390278 / -0.014 |
+| 29324011 | 0.587536971 / 38.562 | 0.619444189 / 39.756 | 0.602410134 / 38.544 | +0.014873163 / -0.018 | -0.017034055 / -1.212 |
+| 29324012 | 0.629850541 / 39.990 | 0.619736113 / 39.008 | 0.673734052 / 44.272 | +0.043883511 / +4.282 | +0.053997940 / +5.264 |
+| 29324013 | 0.613945647 / 39.984 | 0.610096308 / 39.998 | 0.614659028 / 39.984 | +0.000713381 / +0.000 | +0.004562720 / -0.014 |
+| 29324014 | 0.699080507 / 44.896 | 0.717313201 / 46.848 | 0.719310319 / 46.652 | +0.020229812 / +1.756 | +0.001997118 / -0.196 |
+| 29324015 | 0.596028640 / 36.986 | 0.652414400 / 41.814 | 0.637246237 / 40.506 | +0.041217598 / +3.520 | -0.015168162 / -1.308 |
+
+R−C's service gain decomposes into1.421625 fewer SINR-ineligible users and1.381500 fewer
+eligible-but-unserved users per tick; R−J's corresponding reductions are.949625/.602625.
+These are identities along changed complete trajectories, not pure interference or capacity
+causal shares. R−C quality falls.019067231 and R−J quality falls.013390351. The mean weighted
+height charge in J is C .000559219, J .000090993 and R .000155625; all physical members count.
+The fourteen selected silent members were already at50m, with zero descent ticks. The benefit
+cannot be attributed to descending an otherwise unused silent member, although subsequent
+ordinary control can change other members' heights.
+
+All48 episodes have zero zero-service ticks and runs. R's service p05 and minimum equal C
+**in every world**, preserving their common early-history tail; relative to J, the respective
+world-mean differences are−1.625 and−1.4375users. R−J p05 improves in3worlds, worsens in8 and
+ties in5. Thus higher mean service does not establish better startup or lower-tail service.
+R's path rises190.558474m/UAV versus C and176.496850 versus J. Native J has no explicit path, battery or
+delivery-reliability charge. Transit is included on the native movement clock, which alone
+is not a physical deployment model.
+
+Consequential witnesses from saved trajectories:
+
+- **29324011:** the only R−C mean-service loss is−.018, nine user-ticks lost over seven ticks
+  (64,72,73,74,75,76,80), with no positive service differences. C stays at39 users after t40;
+  R transiently serves37/38, then settles to39 by t86. Its quality gain supports+.014873163J,
+  despite the loss. The chosen arrival mask216→212 adds member2 and removes member3; the
+  planner's small+.05462294 total-J improvement predicted no added service. R−J loses
+  .017034055J/1.212users, and its p05 is35 versus J's40.
+- **29324015:** R−J has the largest service loss,−1.308, alongside−.015168162J. Both finish
+  with mask214, yet R settles at41served and J at42; R arrives at t60 and its last motion is at t68,
+  while J last moved at t17. Their p05 values are37/42. Matching final masks is not matching
+  geometry or trajectory value.
+- **29324006:** R−J gains.230service but loses.014830618J because its quality is lower;
+  J/service rankings cannot be interchanged. C's settled mean height57.5 versus R's50 also
+  contributes to R−C J, precluding an exclusively service-capacity interpretation.
+- **29324008:** R−J gains.072880131J/6.258users, the largest J and service gains. C and J
+  finish with38served/mask51; activating member6 gives R mask115 and45served. Quality falls.
+- **29324002/29324013:** the selected relocation paths are989.117/964.264m for tiny full-J
+  gains.000366860/.000713381 over C and no extra service. This is a real cost of strict-J
+  initiation when path is unpriced, not grounds to remove the worlds.
+- **29324012:** R−C adds5299.04m of team travel, although the fixed option itself travels
+  360m. Resumed ordinary movement accounts for much of the complete path consequence.
+
+### Choice exposure, calibration and changed explanation
+
+R initiates in14/16worlds. In29324000/29324010 the best modeled total-J gains are negative
+(−.088018837/−.061723333); declining the option leaves the **entire** native C/R trajectories
+exactly equal. All14 selected members activate at their legal arrival and remain active through
+t499:6170 active member-ticks after arrival, no remuting. Durations are10ticks in3worlds,
+20in9 and30in2. The program pays270 forced-transit ticks plus14 all-zero arrival transitions,
+then resumes C/E from actual issued history. It makes759 normal mask calls and7716 ordinary
+motion calls; the suppressed calls are part of the complete package, not omitted cost.
+
+There are6100 considered member/site candidates, from61 muted members over16worlds, with
+120240 model-propagation ticks. All actual arrival masks equal their predictions; native arrival
+service matches, absolute J discrepancies are at most4.705e−9 and public-coordinate discrepancy
+at most4.530e−5m. This validates the arrival approximation on observed options, not the complete
+return of unchosen plans.
+
+Every new C team stopped moving by t36, before the fixed t40 opportunity. Consequently all14
+R transit trajectories have exactly C's service and reward components during transit: freezing
+other vehicles incurs no foregone C motion in this panel. The stationary stay surrogate matches
+actual remaining C return to within1.782e−6 total J, attributable here to public float32
+coordinates. This removes an artificially weak stay comparator as an explanation of R−C on
+these worlds; it does **not** establish no-cost transit for a moving host or for J's history.
+
+Mean predicted option gain over stay, normalized by the full500steps and16worlds with zero
+for no initiation, is+.017855987J; realized R−C is+.033927174. Twelve of fourteen initiated
+worlds improve further after ordinary control resumes; only29324002/29324013 retain the
+stationary destination prediction to numerical precision. The supported mechanism is the
+**complete relocation–activation–resumed-control program**. Destination scoring alone is an
+incomplete account of its realized value. R−J is a comparison of complete programs whose
+pre-t40 trajectories differ; it does not identify the effect of adding an option to J.
+
+Task opportunity is now established for this particular finite proposal on a fresh settled
+N8 panel, beyond the old B01 proposal blind spot. J's own positive mean gains show that
+immediate joint motion/mask coordination is also useful, but it does not absorb R's increment.
+Lawful public coordinates, a known model, finite search and ordinary reoptimization suffice
+for the observed capability. Learned representation, selector learnability and learning
+necessity were not tested. Complete-package value is conditional on mean service/J use with
+explicit path, quality and startup-tail tradeoffs. Earlier N4 harms and the B01 immediate-positive/
+complete-negative witness remain unchanged; no policy-improvement theorem or host-general
+recommendation follows.
+
+### Measured cost and independent scientific diagnosis
+
+Each row sums sixteen complete worker episode intervals, including its recording work.
+No cross-program cache is credited; candidate counts distinguish requests from unique scored
+state/mask pairs within decisions and geometry reuse.
+
+| Program | Wall seconds | CPU seconds | Radio requests | Actually scored | Cache hits | Geometry computed | Geometry reused |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| C | 81.562988 | 81.551673 | 1932000 | 1301320 | 630680 | 1158725 | 9251835 |
+| J | 1590.266503 | 1589.091872 | 45619200 | 29229861 | 16389339 | 1154853 | 232684035 |
+| R | 104.884154 | 104.681497 | 2642809 | 1904265 | 738544 | 1119179 | 14114941 |
+
+Worker total is50,194,009radio requests, below the prospective50,918,864 bound, with5,122,656
+ordinary position predictions and120,240option-model ticks. The reader independently repeats
+candidate work and native reconstruction; it is additional scientific-verification computation.
+R episode CPU is1.2836×C; J is15.1803×R in this implementation. Exact cross-decision memoization
+was not implemented; these timings are neither algorithmic lower bounds nor deployment deadlines.
+Worker1776.094880CPU seconds plus reader1718.653590 equals3494.767428CPU seconds; wall total
+3497.517491seconds. Whole-process peak RSS is599368KiB. Import-inclusive lifetime CPU and
+correctness costs remain separately recorded above. Engineering, review and publication labor
+were not comprehensively metered and are not treated as zero.
+
+Cumulative B01+B02 result exposure is208episodes/104,000native steps/zero new fits, with
+5020.958056worker-plus-reader CPU seconds (83.68minutes); the two historical asset fits and
+all earlier adverse/correctness/engineering costs remain incurred. B02 does not erase B01's
+conditional asset findings or create a zero-cost learning dataset.
+
+Independent `hmasd-research-critic` `/root/dm_fleet_transmission/result_diagnosis` reused its
+separate-context B01 review and reconstructed B02 from the prospective contract, actual source
+and native outputs before reading the complete archived Oracle proposal/Root decision. It
+received no new DM explanation. It independently checked all96 artifact hashes, source/world
+bindings against accepted snapshot and Git, exogenous arrays/seeds, all48 native metric reductions,
+motion/mask/terminal constraints, capacity identities, all16exact C/R prefixes and all6primary
+intervals; it reproduced all14 arrival-mask searches,70 native-physics snapshots and12 selected
+J boundary scores. It read the full controller/option semantics. It did not repeat every
+candidate enumeration of the complete reader; those verification scopes remain distinct.
+No result-invalidating discrepancy emerged.
+
+Its substantive recommendation is to **retain R and close the fixed B02 comparison without
+automatic replication, fitting or expansion**. It specifically identifies resumed C as part of
+the positive mechanism, rejects a destination-only attribution and a learned-necessity claim,
+and retains the five R−J J losses, seven service losses, unchanged C tails, lower quality and
+extra travel. It preserves a possible learned selector as a separately priced constructive
+successor, not a required repair. I adopt these recommendations and limits. `MATERIAL_DISSENT:
+no` for this actual conditional retention/closure; no distinct additional Pro question or
+unresolved material scientific objection remains.
+
+### DM disposition and next investment
+
+Keep the complete R implementation, J and unchanged C/E as ordinary references, their tests
+and reader, the canonical evidence and all positive/adverse world outcomes. Put this direction
+in **reserve**, with no active producer, unread result/advice or selected next experiment. This
+closes the bounded C/J/R study, not the broader question of developing useful fleet control.
+
+The smallest useful complete experiment has discriminated the selected alternatives: J-only
+success would have reduced the option's priority; sparse initiation would have limited exposure;
+active aggregate harm would have rejected this package. The observed R mean gains beyond both
+controls instead create a conditional capability worth retaining. Unchanged replication would
+narrow its world uncertainty, but is not required to preserve that capability and does not itself
+address deployment costs or selection learnability. No automatic sites/times/surrogate repair,
+extra J pass, further N cell or attribution replay is selected.
+
+A separately selected learned member/site proposal could build on R if it predicts either
+better complete outcomes than unchanged R or comparable outcomes with lower **total** cost.
+Such a comparison must charge teacher/data generation, fits, inference and increased travel,
+retain competent R with the same added information, and state a break-even use count for any
+amortization claim. Fourteen selected options supply no labels for complete unchosen-plan
+returns; more representation or fitting is not an evidenced remedy. A physical travel-price or
+moving-demand extension would change the use contract and needs its own substantive question.
+These are candidate continuations, not new work or pending approvals. Root owns any next
+cross-question selection at this assigned boundary; no owner decision is manufactured as a
+current dependency. The relevant shared background is revised only for the supported ordinary
+capability and its limits.
+
+### Canonical evidence and completed cleanup
+
+After full DM and independent readings, the unique96 raw/decision files were moved to
+`local_linux:/home/fires/hmasd-artifacts/uav_fleet_transmission/b02_silent_repositioning_a01/raw/`
+(16,101,141logical bytes). Every size/SHA256 in summary.json was verified before and after
+moving. The SHA256 of sorted binding lines `path + NUL + decimal-bytes + NUL + sha256 + newline`
+is `8f50ccf3a3669d4711a3d2ee4532af20ee14ef6085ad8134c7f9ea1aa99776e1`.
+The local run's untracked `raw` symlink resolves to this one canonical copy. No required raw
+was deleted. Nine exact compact files accompany it so that the canonical directory can be
+consumed directly: summary, reader, config, launch manifest, admission preflight, terminal
+status, exit witness and stdout/stderr. Their hashes match the published/local originals;
+summary/reader identities remain those recorded above. No whole-tree backup or archive was made.
+
+Useful code and machine readings were already published. CodeGraph followed by exact import/
+entrypoint/reference inspection found the retained B02 implementation and its own tests as
+consumers; all useful code is kept. All helpers completed. Native snapshot GC's privileged
+read-only process scan found no live source consumer, and a separate privileged cwd/argv/open-file
+scan found no consumer or permission error for the owned scratch/caches. The B02 observer's
+terminal event was consumed and generation7 stopped, with no pending event or delivery.
+
+The supported native collector previewed and removed exactly
+`.git/hmasd-launch-sources/3c88e1ef6f92472294c00ae056408d00` and its matching
+`.git/worktrees/3c88e1ef6f92472294c00ae056408d00` registration, after verifying the exited
+operation and reachable published source. It retained claims, manifests and all results.
+Also actually deleted were `temp/directions/uav_fleet_transmission/` (obsolete wait request),
+`experiments/candidates/uav_fleet_transmission/b02/__pycache__/` and
+`tests/experiments/candidates/uav_fleet_transmission/b02/__pycache__/`. All five targets are
+absent. No other snapshot, B01 canonical evidence, original asset, shared cache or peer output
+was touched, and there is no cleanup blocker.
+
+Allocated-byte measurement covers those five targets plus the run and new canonical destination,
+so relocation is not counted as freed space: **1,724,604,416 before →17,002,496 after;
+net1,707,601,920bytes reclaimed**. Remaining measured evidence is344,064allocated bytes in
+the local run plus16,658,432in the canonical directory. Broader Git object storage is outside
+this scoped measurement. This deletion result is separate from the already-handled native-child
+queue-delivery limitation and the recorded node-choice deviation.
