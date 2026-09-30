@@ -237,3 +237,10 @@ and fresh actual-node admission. This replaces no accepted work and does not use
 retry. The scientific budget remains the declared two fits and576000 native steps, with zero
 used by a01; all partial future exposure remains counted. No new scientific premise or selection
 review is required for this input-path correction.
+
+Correction accepted: the independent engineering reviewer inspected the actual diff and exact
+owned input, independently passed the sparse-binding regression1/1 (no skip,1.73s), and found
+no remaining material issue. After local input commit `6508ab45aa743f9caae031474aa2b455e62d9c0f`,
+all17 direction tests passed in5.69s with no skips. This includes exact parent restoration and
+old-evaluator parity under the new binding; only pre-existing deprecation warnings remain.
+The fixed experiment is unchanged and ready for source publication and fresh a02 admission.
