@@ -96,5 +96,51 @@
     "limits": "Provisional mitigation; root cause, improved reliability, general CUDA and optimizer-resume compatibility not established"
   },
   "deployment_record": "deployment.json",
-  "cleanup_record": "cleanup.json"
+  "cleanup_record": "cleanup.json",
+  "owner_followup": {
+    "date": "2026-09-30",
+    "instruction": "Preserve records and prioritize research; revisit cause investigation if a crash recurs.",
+    "hypothesis": "Owner suspects load together with CPU downclocking; causal relationship and temporal coincidence remain unverified.",
+    "recurrence_evidence": "Preserve exact operation, exception/core and available contemporaneous load, frequency and firmware-limit records before reassessing cause.",
+    "research_status": "Continue accepted research and full reading under the deployed runtime."
+  },
+  "subsequent_study_observation": {
+    "observed_at": "2026-09-30T07:27:47.334036+00:00",
+    "node": "wsl_4070",
+    "summary_path": "/home/wu/projects/HMASD/runs/uav_service_age/b01_age_selector_a01/summary.json",
+    "summary_sha256": "2dc25c98769738040ec04248060a9ecff7749b42bf7a37f8794d6ef1fa7393f1",
+    "source_sha": "d4430e6198f95d599b79f23575445a18e6566c26",
+    "worker_status": "COMPLETE",
+    "counts": {
+      "constructors": 1,
+      "explicit_resets": 960,
+      "native_step_calls": 245760,
+      "team_steps": 245760,
+      "complete_episodes": 960,
+      "fit_started": 1,
+      "fit_completed": 1,
+      "actor_updates": 2048,
+      "critic_updates": 2048,
+      "training_episodes": 512,
+      "evaluation_episodes": 448
+    },
+    "resources": {
+      "wall_seconds": 4437.545376189984,
+      "measured_cpu_seconds": 4564.267789298,
+      "process_user_seconds": 4556.643065,
+      "process_system_seconds": 8.730786,
+      "peak_rss_kib": 793032,
+      "rss_scope": "worker lifetime peak; Linux KiB",
+      "scope": "entry wall includes imports; measured_cpu starts after study import; process CPU includes import/init",
+      "torch_threads": 1,
+      "torch_interop_threads": 1,
+      "thread_environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1"
+      }
+    },
+    "runtime_recurrence_reported": false,
+    "scope": "One subsequent scientific operation completed. Full saved-data reader and independent scientific interpretation were pending at this observation. This is not reliability proof or an extra diagnostic fit."
+  }
 }
