@@ -867,3 +867,135 @@ which owns the cross-question allocation. Another Pro round adds no distinct
 unresolved expertise for this bounded design; Root's separate parent-C advice is
 not treated as an answer about this student. **Design is complete; execution
 remains unselected, and B01's reserve/cleanup standing is unchanged.**
+
+<a id="b02-l0"></a>
+## 2026-09-30 — B02 selected; adoption, fixed identities and L0
+
+Root selected the final six-arm developmental comparison in published
+`ec1545411c220fe9d24688f6cb3546ceea9b1489`. I read the
+[complete original independent answer and Root decision](../../archive/2026-09-30/RESEARCH-local-controller-inheritance.md)
+in full and adopt it without copying the answer here. Owner pause remains lifted
+for this assigned direction; the current entry is exploring with the same
+`Codex DM (native child)` lead. B01 outcomes, exposure and cleanup stay unchanged.
+This allocation supersedes only the preceding design-only execution status.
+
+Freeze B02 identities before implementation: expert worlds29340000–29340127;
+aggregation1 worlds29340128–29340191; aggregation2 worlds29340192–29340255;
+evaluation worlds29341000–29341031; actor initialization29342001;
+minibatch-shuffle root29342002; sampled-evaluation root29342003. The shuffle
+address is(root,phase_index,epoch_index); sampled innovations use
+(root,world,decision_tick,agent). No Python hash, loop-order-dependent shared
+sampling stream or global NumPy state determines these addresses. All evaluation
+arms reuse the same reset seed per world; evaluation order rotates by world index.
+The root's identity is unrelated to any inference about independent training seeds.
+
+The exact integer ranges were absent from current research/code/config records
+before this entry. Parent C-prior's proposed training30310000+1000*block+episode
+and evaluation30300000+100*block+world are disjoint, as are the old local-history
+29091000/29102000 panels and B01's recorded identities. Final executable contract
+will assert all internal separation and bind source hashes, and the publication
+check will repeat the current proposed-peer/range scan before launch.
+
+**L0 deliverable.** One admitted B02 runner, actor/collector/trainer, exact ordinary
+comparators, compact results and saved-data reader implementing the selected
+1fit/448episode/114688step,8000update/4096000presentation contract. Owned new
+paths are `experiments/candidates/uav_fleet_adaptation/b02/`, matching
+`tests/experiments/candidates/uav_fleet_adaptation/b02/`, this notebook, future
+`runs/uav_fleet_adaptation/b02_inheritance_a01/` and owned temporary scratch.
+Entry points are `b02/run.py` and a saved-data-only `b02/read.py`. No B01/shared
+environment/controller edits, extra fit, extra evaluation or later PPO are in scope.
+
+The bounded Implementer owns only `b02/controllers.py` and its mirrored
+`test_controllers.py`: implement the analytic eligibility/navigation helper,
+source-bound original-C queries with exact per-agent episode-reset memoization,
+and seven-action C7 ranking with the full-support fallback rule. DM owns remaining
+files, notebook, Git index, acceptance and launch. All work is on shared main;
+no helper staging/commit, checkout creation, children, native experiment or change
+to scientific choices. Other writers' files remain untouched.
+
+The frozen teacher is imported from the original local-history source, last changed
+at `ae184f74175b59f6036a06b510be2b70a7205a69`, file SHA256
+`b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2`.
+Original full-C queries use the actual observed row and predecision navigation;
+cache values retain command, next navigation and paid label diagnostics. C7 shares
+the declared helper but never calls full C to choose its command. Neural policies
+consume only114 lawful features; sampled memoization stores logits and next-nav
+and always consumes a fresh independently addressed innovation, even on a hit.
+Every four-tick decision/hold/reset, requested versus actual displacement,
+teacher/helper/link count and worker/reader cost must remain measurable.
+
+**Checks and stop.** Focused synthetic, outcome-blind checks cover the helper's
+fallback/navigation equivalence at threshold/clipping/ties, actual-history teacher
+labels, cache reset/key/value isolation, C7 subset scoring, indexed RNG with cache
+hits, exact actor/optimizer/data counts, native-observation leakage boundaries,
+all six readers and admission before scientific effects. Existing small native
+host checks may verify correctness without becoming a result pilot. An independent
+high-risk numerical/RNG/executable reviewer reads the exact diff and checks before
+source acceptance. Any consequential interface contradiction returns to Root;
+numerical/coding defects are repaired in scope, preserving the fixed scientific
+law. The worker/reader and engineering cost estimates above are planning estimates,
+not authority for additional exposure or automatic retries.
+
+### B02 implementation and prospective execution
+
+The bounded Implementer returned only `controllers.py` and its mirrored tests;
+I read and accepted those changes into the integrated study. The helper preserves
+the source's power, total-minus-own SINR and iterated-clipping arithmetic, then
+uses per-coordinate extrema to decide whether any full-support candidate has an
+eligible link. Numerical checks cover180 randomized local cases and260 own-link
+plus260 peer-link threshold cases, empty discovery, clipping, arrival/ties and
+the C7/full-support distinction. No mismatch in those cases is a universal FP
+equivalence proof. Training additionally compares every already-paid C label's
+fallback/navigation against the helper on the student's actual row/pre-nav.
+
+The completed pipeline retains one CPU FP32 actor and one Adam state through
+the fixed30/20/20 epochs, saves S0/BC/D1/final assets, and binds every training and
+evaluation trajectory to its actual policy/source. C expert roll-in shares its
+execution/label query; student aggregation queries C only on actual student
+histories. Evaluation has no C-label diagnostics for neural arms. Cache scopes
+are per agent/episode; the sampled arm caches logits and draws afresh at every
+indexed decision. The saved-data reader checks all fixed worlds/arms/holds,
+native metric reductions, recorded motion, lawful features/navigation, paid
+rankings, cache keys/counters, stochastic draws, checkpoint tensors and
+data/shuffle/update counts. It makes no new native, expert-radio, actor-forward
+or optimizer calls and does not claim a replay of those computations.
+
+Local configured CPU verification passed17 tests in4.60s (only upstream
+matplotlib/pyparsing deprecation warnings). This includes the complete synthetic
+three-phase/six-arm pipeline, deliberate rehashed draw and endpoint corruption,
+source/helper/cache checks and admission before scientific imports/output. One
+separate correctness test used an8-tick native C trajectory with nonstudy seeds
+819171/819172,0fits/0updates; this verifies the live factory/adapter/collector
+interface and is not an additional study world or result pilot. The study's
+prospective exposure remains1fit/114688steps.
+
+Independent engineering review reproduced the17 passing checks and found one
+failure-accounting defect: partial-episode query costs were omitted when no
+complete row existed. I repaired it by retaining live counter/timing references
+and recording partial costs separately from complete scientific rows. An
+interrupted call's unfinished internal work remains explicitly unmeasured.
+The existing failure fixture now retains its5teacher requests/135trajectories
+and5helper calls after3successful native steps plus one failed call, with0complete
+episodes/0fits. That targeted regression and the full synthetic reader passed
+2 tests in2.43s; final review acceptance follows below.
+
+Prospective node choice is the configured primary `wsl_4070`, CPU FP32 with one
+Torch/BLAS thread and deterministic algorithms. The2026-09-30 prepublication read-only
+probe found the configured CPython3.10.21 runtime present,15,235,796KiB available
+memory and low load; this is host-selection evidence, not launch admission.
+The launcher will enforce fresh actual-node memory/pause/lead/publication checks
+on the exact published inputs. No external input checkpoint or dataset is needed:
+all data arise within the declared448 episodes and the original teacher/host
+source bindings are in `b02/contract.py`. No result operation is accepted yet.
+
+The independent engineering Reviewer completed its full-path review with no
+material finding remaining after that repair; it reran the two affected checks
+in2.48s. The review covers helper/teacher arithmetic, C7 support, memoization,
+indexed RNG, actual-history labels, continuous Adam, frozen assets, admission and
+saved-data reading. I accept the implementation for the fixed study, retaining
+the numerical-fixture and nonreplay limits above. No scientific choice, arm,
+epoch, world range or fitted endpoint changed during implementation/review.
+The final exact-integer identity scan found the B02 ranges only in this notebook
+and its three implementation declarations. The now-implemented parent C-prior
+protocol still uses30310000+1000*block+episode and30300000+100*block+world;
+the selected world and randomness identities remain disjoint.
