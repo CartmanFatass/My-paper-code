@@ -1901,3 +1901,26 @@ other directions and remote control edits. The configured first-choice scientifi
 interpreter is now `/home/wu/.venvs/hmasd-gcc-31021/bin/python` on `wsl_4070`, the
 existing provisional runtime mitigation. All scientific inputs will be committed
 and published before the single fixed B03 launch. No accepted B03 operation yet.
+
+### B03 accepted execution
+
+Exact inputs were published as `a36f20e14cc434803f1d8e6f6e346f34197f6d19` before
+result execution. The single B03 operation was accepted at2026-09-30T15:51:22.502583Z
+on the configured first-choice node; its complete source, native identity, output,
+control observation and admission binding are in
+[launch-manifest.json](../../../../runs/uav_parent_adaptation/b03_c_prior_a01/launch-manifest.json)
+and [admission-preflight.json](../../../../runs/uav_parent_adaptation/b03_c_prior_a01/admission-preflight.json).
+The remote canonical own row was synchronized from published main under its writer
+lock, preserving all other lines. A first read-only Git fetch omitted the configured
+network login shell and was stopped with no result request/acceptance; the corrected
+`zsh -lic` fetch succeeded. Its unrelated historical auto-GC warning was preserved;
+the published B03 tree was reachable and the snapshot/runner admission succeeded.
+
+The detached observer owns this exact manifest operation, registered through
+`temp/directions/uav_parent_adaptation/b03-wait-request.json`. The completed B01/B02
+observer state was drained before rearming; B03 generation8 first observed accepted,
+consistent native identities and a running worker at15:53:07UTC, with zero probe
+errors. Registration alone was not treated as adoption. This native child remains
+active through collection/reading; a checkpoint will rearm observation of the same
+operation, never restart or duplicate the worker. No result has yet been read and
+the fixed3fit/491520-step envelope is unchanged.
