@@ -3154,3 +3154,153 @@ contract is a Root cross-question allocation, not silently authorized by this
 batch. The separate-context ResearchCritic receives original supporting and
 adverse sources and owns the independent diagnosis; its recommendation and
 any dissent will be recorded below before the final disposition.
+
+
+<a id="b04-final-cleanup"></a>
+### B04 measured cleanup after evidence publication
+
+Compact evidence/config/status and the complete signed reading were published
+on main at `978c622c37207067dd673247cf6729d786383304`; useful fixed source and
+its checks remain published at `98307b0c5`. No source/test module is retired:
+the exact update, collection, local policy and one-shot reader are still needed
+to interpret and check this retained positive/adverse comparison. The B02
+local-policy implementation remains a live cross-direction dependency.
+
+The exact launcher collector first previewed, then applied retirement of
+`d765a99550474b9b95de0994f8f7310b`, under the shared main writer lock. It
+rechecked terminal native identities, no live process references, clean source
+and durable source reachability on main. This deletes the disposable accepted
+snapshot, not an authoring checkout, claim, manifest or output. The owner-
+approved privileged read-only process scan also found no live references to
+the six temporary-input/request/cache targets; the independent reader reported
+that it had finished reading both temporary S tensors and no longer needed
+them. The next-investment Oracle was given the canonical remote paths, not a
+temporary-copy dependency. Both424487-byte canonical original S files on
+`wsl_4070` were freshly rehashed to their unchanged bound digests before the
+redundant local copies were removed. Observer generation20 is explicitly
+stopped with no pending wake or unconsumed event.
+
+| Deleted exact target | Allocated bytes before | After |
+| --- | ---: | ---: |
+| `.git/hmasd-launch-sources/d765a99550474b9b95de0994f8f7310b` | 1712513024 | 0 |
+| `.git/worktrees/d765a99550474b9b95de0994f8f7310b` | 3547136 | 0 |
+| `temp/directions/uav_fleet_adaptation/` (only `b04_inputs/S_b02.pt`, `S_b03.pt`, consumed `b04-wait-request.json` and their directories) | 864256 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/__pycache__/` | 8192 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b02/__pycache__/` | 98304 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b04_native_development/__pycache__/` | 110592 | 0 |
+| `tests/experiments/candidates/uav_fleet_adaptation/b04_native_development/__pycache__/` | 110592 | 0 |
+
+All seven targets are absent. The snapshot/admin decrease is1716060160bytes;
+scratch/cache decrease1191936bytes; **B04 net reclaimed allocated disk is
+1717252096bytes**. This is actual target deletion, not Git-object collection,
+free-space capacity or a moved archive. There is no concrete cleanup blocker
+or leftover from those targets. Required unique raw/summary/R endpoint
+outputs stay at the one local canonical path above, and original S assets
+stay at their original remote paths. No tarball, backup chain or extra raw
+copy was created. B01/B02/B03 prior cleanups remain separate (4122198016bytes);
+all four completed studies' measured deletions total5839450112bytes.
+
+
+<a id="b04-independent-disposition"></a>
+### B04 independent scientific diagnosis and resolved disposition
+
+The dedicated `hmasd-research-critic` ran in separate context as native child
+`/root/dm_fleet_adaptation/b04_result_review`, with no inherited DM/Root
+conversation. It reconstructed the original outputs and recorded a provisional
+reading before reading Oracle/Root/DM explanations. The full original answer
+follows (local source links are retained as supplied):
+
+> **Recommend stopping this exact B04 PPO recipe and preserving both original students, C/Q, calibration outcomes and the adverse R endpoints.** The study demonstrates active policy change without additional mean native competence over unchanged S or the paid calibration reference. The broader learned-development question remains open.
+>
+> I received no DM/Root conversation history. I recorded my provisional diagnosis before reading the original Oracle advice, Root’s allocation rationale or the DM’s result explanation. The subsequent DM stop/preserve recommendation agrees with my independent reading.
+>
+> The evidence is bound to source `98307b0c5cb6e42763458d780568d105d3f631af`, the [frozen protocol](/home/fires/hmasd-wsl/docs/research/candidates/uav_fleet_adaptation/NOTES.md:2121), and the original [summary](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b04_native_development_a01/summary.json) and [verified reading](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b04_native_development_a01/reading.json).
+>
+> The consequential endpoint comparisons are:
+>
+> | Mean native J contrast | L0: B02 initialization | L1: B03 initialization |
+> |---|---:|---:|
+> | R−S | −.040278 [−.063750, −.016805] | −.005212 [−.024294, +.013869] |
+> | R−B* | −.047522 [−.067707, −.027337] | −.005212 [−.024294, +.013869] |
+> | R−Q | −.025442 [−.047615, −.003268] | +.016669 [−.001488, +.034825] |
+> | R−C | +.000716 [−.027594, +.029027] | +.063188 [+.037741, +.088634] |
+>
+> These intervals describe paired-world variation conditional on each endpoint. There are two continuation outcomes, not 64 independent training replications. L1’s R−S result establishes neither equivalence nor population harm. Its favorable R−C point cannot establish added learning: unchanged S already performs better.
+>
+> R−S mean service changes are −2.653442/−.290527 users per tick; temporal service-p10 changes are −2.312500/−.859375. L0 travels 1,105.566 m less per UAV; L1 travels 668.288 m more. Mean quality falls in both. L0’s slightly higher episode minimum does not erase its mean and p10 losses. R, S and Q have no zero-total-service ticks on these final panels; this does not establish individual-user continuity.
+>
+> The heterogeneity matters. L0 world `29351014` loses .170115 J and 12.007813 mean service against S. L1 world `29353007` loses .094177 J. Useful R cases also exist: world `29353015` gains .148425 J and 10.953125 mean service while travelling less. Those cases preserve evidence of locally useful changes; they supply no prospective rule for choosing those changes.
+>
+> Calibration selected `S_T2` in L0 and unchanged `S_T1` in L1. L1 B* is correctly reused by full policy identity. L0 B*−S is +.007244 J, with interval [−.010900, +.025389] and 16 positive/16 negative worlds. It adds 1,814.912 m per UAV while reducing p10 by .9375 and mean episode minimum by .71875. Thus the paid search preserves a conditional objective tradeoff, without establishing a default temperature upgrade or recurring improvement over S.
+>
+> The strongest useful positive remains **the original students’ competence**. On these fresh panels, S−Q gives J +.014836/+.021881, mean service +1.273926/+1.557617, p10 +3.5/+3.328125 and path −895.062/−861.858 m. L0’s J interval crosses zero, and large adverse worlds remain. This strengthens conditional asset reuse, alongside the parent B04 positive, while leaving general ordinary-control dominance and training-population reliability unresolved.
+>
+> The learning intervention was substantial. Each actor and critic completed 512 Adam steps; all recorded actor gradients were finite and nonzero. Actor L2 movements were 1.737203/1.782680. On R’s own lawful histories, frozen-S shadows disagree in physical four-tick paths on **46.494%/28.857%** of agent decisions. Every final world contains physical changes. Nonactivation, sparse exposure or command aliasing cannot explain away the failed improvement prediction. The shadows establish distribution and action change, without estimating S’s counterfactual reward on R’s history.
+>
+> My supported diagnosis separates four judgments:
+>
+> - **Opportunity:** preserved. Useful local control and the S−Q gains remain observable.
+> - **Representation:** neither insufficiency nor transferable-feature benefit is identified. The same actor class already expresses S.
+> - **Finite learnability:** the selected full-actor reward program failed to add mean value in both tested lineages, with a substantial conditional loss in L0.
+> - **Complete package value:** neither R endpoint supports replacing its original S. Calibration’s marginal benefit is also unestablished as a general upgrade.
+>
+> L0’s lower entropy, greater stationarity, boundary exposure and fallback use are compatible with loss of useful stochastic behavior. L1 retains nearly unchanged mean entropy despite substantial physical drift. Consequently, a common identified “entropy-collapse” explanation is unsupported. The sequential training returns also use different worlds; they cannot select a better checkpoint retrospectively. Critic error, credit assignment and optimization remain possible mechanisms, but the current evidence does not select a repair.
+>
+> The earlier evidence makes this correction consequential. Parent C-prior learning lost to its competent initialization in 93/96 sampled-endpoint worlds; fleet B01 failed to improve its unchanged parent despite its narrower training-program contrast. These are different contracts and cannot be pooled as replications. Together with B04, however, they weaken the practical inference that a competent starting policy alone predicts useful reward continuation. They do not erase the supervised construction success.
+>
+> Actual cost was:
+>
+> | Work | Realized exposure |
+> |---|---:|
+> | Native reward learning | 2 actor–critic fits; 131,072 steps |
+> | Paid calibration | 2 selections; 131,072 steps |
+> | Final evaluation | 288 episodes; 73,728 steps |
+> | Complete new study | 1,312 episodes; **335,872 steps** |
+> | Actor/critic Adam steps | 1,024 each |
+> | Total actor/critic forward rows, including paid reader | 900,211 / 163,840 |
+>
+> Recorded training-episode plus update-group wall time was 110.947/123.565 seconds per lineage, excluding fit-specific serialization and shared overhead. Complete worker wall/CPU was 469.369/467.107 seconds; reader was 50.290/50.268 seconds; the enclosing chain was **519.887 wall/517.603 CPU seconds**. Peak 430,004 KiB is process lifetime RSS. These are measurements on the actual concurrent host.
+>
+> Acquisition plus B04 totals **four fits, two calibrations, 548,864 native steps and 722.649 measured CPU seconds**, retaining the differing timing scopes and hosts. Acquisition includes 16,000 supervised updates, 8.192 million presentations and 163,840 labels. Earlier fleet B01’s two fits/576,000 steps/31,190.348 CPU seconds and parent-direction investments remain separately incurred. Engineering, scientific review and publication labor are unmetered.
+>
+> My independent checks covered all 26 source hashes against the launch commit, all 1,312 raw hashes, both initial and final actor tensor identities, critic identities, endpoint movement and saved Adam counters. I reconstructed native metrics for all 512 calibration and 288 final episodes, calibration winners and paired contrasts; checked world/domain ordering, initial-input pairing, local feature packing, fallback-bit semantics, own-navigation continuity, holds, clipped motion and saved shadow decoding. I also directly retrieved 12 consequential parent C-prior and eight positive/adverse parent B04 raw episodes from their canonical node.
+>
+> I performed no actor/critic forward, optimizer replay, native rollout or second charged reader. Radio/helper calculations, neural training arithmetic and the complete older bulk record were not independently replayed. The original reader and engineering review retain their stated scope.
+>
+> The current complete observation is sufficient for the stop/preserve decision. More final worlds would refine these endpoints without providing additional training replication. Another unchanged fit, longer horizon or entropy/KL modification has no automatic investment claim. The original prospective branches remain useful: improvement over S and B* would have supported conditional development; calibration exceeding R could support simpler reuse; substantial change without improvement supports ending this recipe. The observed result falls in that last branch.
+>
+> Preserving S leaves a constructive basis for a separately selected capability question. A future proposal can proceed from a testable conjecture without first proving the present failure’s cause. Its comparator and full costs must follow its actual information and control rights. The current source-only successor search is compatible with this recommendation; this review selects no successor experiment.
+>
+> **MATERIAL_DISSENT: no — the DM’s proposed stop of the tested PPO recipe, preservation of the useful assets and rejection of automatic extension are supported by the direct evidence.**
+
+**DM resolved disposition.** I accept that independent recommendation: end
+unchanged full-actor PPO investment, retain both original S assets and all
+ordinary/calibrated/adverse endpoints, and make no default R or temperature
+replacement. The useful change in belief is narrower than “learning fails”:
+a competent local starting policy and substantial physical policy movement
+were both present, yet this finite reward program added no mean native
+competence over that starting capability. This weakens a starting-point-only
+rationale for another unrestricted continuation. It does not identify a
+common entropy, critic or credit cause, close the broader finite-learning
+question, or require proof of the old cause before a new conjecture can be
+considered. World heterogeneity is retained without inventing a deployable
+selection rule. Calibration is a paid, uncertain tradeoff, not a demonstrated
+upgrade over unchanged S.
+
+The completed original scientific review is adequate for this result/stop
+choice; there is no material dissent and no distinct unresolved question
+requiring an additional Pro round. The result, complete interpretation and
+cleanup are ready for own standing/shared-background publication. Parent and
+other-direction costs remain separate and are not pooled as replications.
+
+**Question continuity after the closed batch.** Root explicitly requested
+source-only next-investment discovery with its existing Oracle, preserving
+this DM's question ownership. That work may compare development of retained
+capability with a justified stop or an out-of-question proposal for Root.
+There is no selected successor experiment, new result code, native/model/actor
+query, calibration or fit. I supplied only original output/asset provenance,
+interface inspection and bounded cost arithmetic for an unselected complete-
+intervention alternative; Root's new N8 positive is another actual allocation
+consideration. No expansive next design is selected or published from those
+feasibility facts, and existing composition/N8/waiting work stays with its
+current DMs. The final B04 result is published independently of that discovery.
