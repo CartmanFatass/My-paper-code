@@ -539,3 +539,17 @@ root. Git object storage and unrelated directions are outside this scoped measur
 No other source snapshot, original checkpoint worktree, shared cache or peer output was touched.
 The earlier native-child queue rejection was resolved by active same-handle observation;
 it is separate from cleanup, which completed without a tool blocker.
+
+### Final locator and publication check
+
+Scientific disposition and the directly affected shared background/standing were published at
+`7f4c8432ff081692842458d43dedc04b69f6e189`. A final read through the local run locator
+verified all320 canonical artifacts and both compact result hashes again. Both source snapshots
+and all other listed cleanup targets remain absent; no reader, worker or observer is pending.
+
+Locator clarification: the local `runs/uav_fleet_transmission/b01_native_s1_a01/raw` symlink
+is **untracked**, not covered by the repository’s directory-only ignore rule as the prior
+paragraph called it. It is intentionally kept outside Git so the original relative raw paths
+still resolve to the unique canonical data. No file was copied or recreated by this check;
+the stated allocated-byte measurement and retention identities are unchanged. All owned
+tracked source/result files are clean, apart from this final notebook append before publication.
