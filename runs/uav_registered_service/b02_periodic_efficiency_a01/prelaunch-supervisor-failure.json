@@ -1,0 +1,17 @@
+{
+  "status": "PRE_LAUNCH_SUPERVISOR_FAILURE",
+  "outer_task": "registered-service-b02-a01",
+  "exit_code": 2,
+  "pid": 1027349,
+  "source_sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+  "error": "python: can't open file '/home/wu/scripts/hmasd_launch.py': [Errno 2] No such file or directory",
+  "supervisor_reported_duration_seconds": 0,
+  "duration_scope": "whole seconds in supervisor log; observation support additional",
+  "scientific_worker_started": false,
+  "scientific_exposure": 0,
+  "reconciled": {
+    "output_exists": false,
+    "outer_pid_exists": false
+  },
+  "correction": "agent-task joins command argv; pass the fully shell-quoted zsh -lic command as one command argument, retaining published source and panel"
+}

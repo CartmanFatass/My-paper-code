@@ -1043,3 +1043,45 @@ action difference. Actual native/prefix/final-window truth remains evaluator-onl
 The reader materializes each NPZ once and checks all192records and paired endpoints.
 Shared radio kernels and actual-node deadline/resource behavior remain stated
 limits, with the latter to be measured by the fixed complete comparison.
+
+
+### Pre-launch supervisor invocation failure and outcome-blind correction
+
+The published scientific input is8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc.
+Outer task `registered-service-b02-a01` failed at2026-09-30T02:44:57UTC,
+exit2, before Python could open the launcher: it looked for
+`/home/wu/scripts/hmasd_launch.py`. The supervisor joins supplied command arguments,
+so the nested zsh command lost its intended quoting/cwd. Its PID1027349 is absent,
+the scientific output directory is absent, and no launcher or scientific worker
+started. The supervisor records0whole seconds; observation/support took additional
+untimed work. This is not a failed scientific batch or duplicate accepted launch.
+
+I inspected the supervisor's actual command construction, and choose the narrow
+outcome-blind invocation correction: pass the fully quoted `zsh -lic` command as
+one command argument. Keep source, seeds, arms, output and all science unchanged;
+use a new outer task identity to preserve the failed log. No source repair,
+result exposure or extra fit. The retained compact failure record distinguishes
+this known pre-launch failure from uncertain acceptance. The remote existing
+automatic-GC bad-tree/repack warning also recurred on the successful exact-source
+fetch; no canonical checkout/sparse/GC modification was made.
+
+
+### Accepted B02 native operation
+
+Corrected outer task `registered-service-b02-launch-a02` reached native admission
+once, at2026-09-30T02:47:10.653725Z on wsl_4070. Exact science source remains
+8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc. Native identity, invocation, immutable
+snapshot and output are in [launch-manifest.json](../../../../runs/uav_registered_service/b02_periodic_efficiency_a01/launch-manifest.json).
+Fresh actual-node [admission](../../../../runs/uav_registered_service/b02_periodic_efficiency_a01/admission-preflight.json)
+passed with14,675,873,792available physical/effective bytes against4,294,967,296.
+A preceding live-process observation found no research Python worker. Root holds
+N's result/heavy node work until this timed worker releases the calculation node.
+This is accepted execution, not a read scientific result.
+
+The same-handle deterministic observer is armed, generation1, at
+`/home/fires/.local/state/hmasd-wait/01a0f028-0d02-7093-9e46-fef762b6d749`.
+Its first drain witnesses accepted admission, matching live runner/supervisor
+identities and consistent source/records. The native child stays active through
+collection and complete reading, rather than relying on a future App wake.
+No accepted operation is duplicated or rebound. The fixed192complete episodes
+are in progress; no partial endpoint has been interpreted.
