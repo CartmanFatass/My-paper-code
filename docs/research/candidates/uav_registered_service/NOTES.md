@@ -821,3 +821,62 @@ complete comparison over unchanged P-superiority replication or declaring
 temporal scheduling exhausted, while leaving Root's cross-question investment
 choice open. I accept those corrections. The candidate remains a proposal in
 this existing notebook; it has no active batch, implementation or producer.
+
+### Terminal publication, consumers and measured reclamation
+
+Complete evidence, independent diagnosis, disposition and the concrete unlaunched
+G proposal are published at `01e1b6e85b3b69a6403ad660879563845be9aa50`; owned
+RESEARCH standing/routing and directly affected backgrounds2/6 were updated.
+The canonical node's own direction row was then narrowly mirrored to reserve
+from that published entry under its Git lock, preserving the exact lead and all
+other rows/controls. No Root acknowledgment or new result admission was used.
+Root has read this publication and is handling its separate question-selection
+review; this does not launch the proposal.
+
+The scientific worker, both support readers and deterministic observation are
+terminal. The scientific critic released the accepted source snapshot; no Pro,
+helper or other live consumer requires it. Useful O/P implementation, frozen-arm
+reuse, tests and reader remain on published main because they support the retained
+capability, future comparison and reproducible reading. No unused separate
+experimental branch/implementation was created. Raw data are outside the
+snapshot, with all320hash identities verified in the complete reader.
+
+The first exact snapshot-GC preview refused because it could not inspect own
+protected process660 (`/proc/660/cwd`, permission denied). The supported
+`--sudo-process-scan` performs only the read-only process inspection with existing
+passwordless sudo. Its preview found this snapshot eligible with durable
+`refs/remotes/origin/HEAD`; apply rechecked and removed it through the native
+collector, without force or manual snapshot deletion. The prior refusal is
+preserved here. No claims, manifests, outputs, peer source or authoring tree were
+deleted to make the collector pass.
+
+Measured allocated bytes, before → after, for the actual deleted targets:
+
+| Host and exact target | Before | After |
+|---|---:|---:|
+| wsl_4070 `/home/wu/projects/HMASD/.git/hmasd-launch-sources/84cf7f4bc7e043af8ee26c0864f1457f` |805801984|0|
+| wsl_4070 `/home/wu/projects/HMASD/.git/worktrees/84cf7f4bc7e043af8ee26c0864f1457f` |3452928|0|
+| wsl_4070 `/home/wu/projects/HMASD/temp/directions/uav_registered_service` |49152|0|
+| local `experiments/candidates/uav_registered_service/b01/__pycache__` |81920|0|
+| local `tests/experiments/candidates/uav_registered_service/b01/__pycache__` |81920|0|
+| local `temp/directions/uav_registered_service` |8192|0|
+| local redundant `runs/uav_registered_service/b01_periodic_service_a01/reader-a01.log` tail |4096|0|
+
+Remote reclamation is809304064bytes; local reclamation is176128bytes;
+**total net allocated bytes reclaimed from these targets:809480192**. Every
+listed target is absent. These are working-tree/metadata/scratch allocated-byte
+reductions, not a claim about Git object storage or shared host free capacity.
+The original short reader-tail facts survive in the interruption/resource
+records and this notebook, with the original remote supervisor log also intact.
+No tarball, full-tree backup, duplicate retention copy or backup chain was made.
+
+Required unique raw evidence remains at
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_registered_service/b01_periodic_service_a01/raw/`:
+320NPZ files,178488494logical bytes, with per-file SHA256/bytes in summary.json.
+Original claim, manifest, admission, exit, stdout/stderr, summaries and reader
+records remain. Post-GC native status at2026-09-30T01:42:04UTC still reports the
+original exit0, valid witness, absent native runner/supervisor, consistent
+records and no retry allowance. The inherited remote automatic-GC bad-tree
+warning remains a separate repository-maintenance issue; it did not block this
+exact cleanup. No direction-owned cleanup target is left blocked. No unread
+result, active producer or selected successor remains.
