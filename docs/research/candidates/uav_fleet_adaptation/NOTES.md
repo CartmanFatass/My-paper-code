@@ -5058,3 +5058,74 @@ from the already completed scientific selection review and the later
 independent result interpretation. A material premise contradiction returns
 promptly to Root; implementation errors preserve accepted exposure before
 any revised proposal. No new CLAIM is needed for this exploratory study.
+
+**Bounded implementation acceptance and next scope.** I read the new model and
+its focused synthetic tests and accept the kernel handoff:14 tests pass in
+1.95s, including independent CE/order arithmetic, N5 zero count gradients,
+checkpoint continuity and failed-attempt accounting. No original-asset
+forward, native query or production fit was used. Partial attempted forwards
+are charged separately from known completed updates on a failure.
+
+The same sole Implementer may next own only `audit.py` and `test_audit.py`
+inside the new B06 source/test directories. Deliver the pure saved-array
+checker used by the fixed reader and the already charged native fixture:
+N-shaped native reward/connection/motion/terminal reconstruction, local
+observation encoding from saved matrices, features/navigation/held commands,
+saved C label/score consistency and stochastic-address law. No native or
+radio/controller/neural/optimizer call belongs in this checker; the DM-owned
+reader performs only the separately priced430080 final forwards and80
+C/helper spot checks. It must state that saved matrices are not new radio
+replay and that unqueried final helper fallback bits are source/trace checks.
+Use artificial arrays and mutation rejection tests. All other files, models,
+notebook/index and launch remain mine; no concurrent Implementer is added.
+
+**Prospective placement update,22:11 UTC.** Root reports the waiting producer
+and full reader terminal on wsl_4070, with no further heavy work selected there.
+B06 has no accepted operation, so the earlier conditional local placement
+no longer applies. I will use the owner's preferred wsl_4070 subject to fresh
+actual-node admission, with its configured Python3.10.21/NumPy1.26.3/
+Torch2.7 CPU execution and one thread. Both original S assets are already in
+their canonical remote paths and will be bound directly, without local
+weight duplicates. Same-host worker/reader arithmetic is checked; local
+synthetic tests do not promise cross-host bitwise equality. Local accepted
+N8/parent operations remain untouched. Counts, contract and output identity
+are unchanged; actual source/runtime/occupancy are recorded at acceptance.
+
+**Integrated prelaunch acceptance.** I read and accept the second bounded
+Implementer handoff (`audit.py` and its tests): it independently reconstructs
+assignment, reward, observation packing, motion, navigation, supplied-score
+ranking, memo accounting and private draws from saved arrays. Its73 synthetic
+checks passed; the integrated B06 suite, including emitted collector files
+against that auditor, now passes110 checks in3.61s. These are artificial
+weights/arrays, not original S forwards, native quality pilots or result fits.
+The full new executable change is with the independent Engineering Reviewer.
+
+The saved-array reading also explicitly counts work that is neither a radio
+query nor a learned-policy forward: all2,661 assignment histories and all
+observation rows, plus27 clipped four-tick geometric paths whenever a supplied
+C/teacher ranking uses fallback. Across the full reader this is at most419,890
+fallback rankings/11,337,030 geometric paths/45,348,120 geometric ticks, with
+actual counts saved. The immediate worker reading of its five H8 fixture files
+adds at most50 such rankings/1,350 paths/5,400 ticks; its saved-array check
+records are retained and compared by the final reader. These checks belong
+to the already declared full label/hold/native reconstruction and runtime
+estimate. They add no native trajectory, C score/helper/radio query, optimizer
+step or neural replay beyond the published plan. The planned80 numerical
+C/helper contexts remain separately charged. On a failed optimizer attempt,
+raw partial actor/Adam state is retained even if unequal per-parameter steps
+prevent it from satisfying the normal complete-checkpoint contract.
+
+**Independent engineering disposition,22:36 UTC.** The registered Reviewer
+read the entire new executable change against the fixed contract and ran the
+110-test suite independently (3.35s). Two medium findings concerned failure
+preservation: the reader previously reserved its once-only attempt too late,
+and completed-row cost totals omitted a failed episode's already-paid prefix.
+The reader now exclusively creates an INCOMPLETE record before any replay;
+a hard interruption or concurrent caller cannot silently repeat it. Failure
+costs include the in-flight policy/teacher/helper counters once and explicitly
+leave interrupted-call internals unmeasured. The four focused regressions
+passed independently in1.17s; my broader touched-file checks passed27 tests
+in1.62s. The Reviewer reports no remaining material finding after the repairs.
+I accept the implementation. Review was synthetic/source-only, with no real
+asset forward, native episode, production fit or complete production reader.
+This is engineering acceptance, not empirical validation of the conjecture.
