@@ -1,0 +1,102 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-29T23:47:02.358500Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/42ec62eb9cf0453e8400236ffa74119d/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/42ec62eb9cf0453e8400236ffa74119d/experiments/candidates/uav_correction_compression/run_b01.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_correction_compression/b01_mean_deployment_a02",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_correction_compression/b01_mean_deployment_a02",
+    "--launch-sha",
+    "8da8e2df82963daf07c7e32234f7863c6e6f794e",
+    "--seed",
+    "19801",
+    "--parent-checkpoint",
+    "/home/wu/hmasd-inputs/uav-correction-compression-b01/parent.pt",
+    "--endpoint-dir",
+    "/home/wu/hmasd-inputs/uav-correction-compression-b01"
+  ],
+  "claim_key": "c06715aab4a535b4d1caf42e9aec8e983bbad1e78f55d45522b2b5380f430291",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c06715aab4a535b4d1caf42e9aec8e983bbad1e78f55d45522b2b5380f430291.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/42ec62eb9cf0453e8400236ffa74119d/experiments/candidates/uav_correction_compression/run_b01.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_correction_compression/b01_mean_deployment_a02",
+    "--launch-sha",
+    "8da8e2df82963daf07c7e32234f7863c6e6f794e",
+    "--seed",
+    "19801",
+    "--parent-checkpoint",
+    "/home/wu/hmasd-inputs/uav-correction-compression-b01/parent.pt",
+    "--endpoint-dir",
+    "/home/wu/hmasd-inputs/uav-correction-compression-b01"
+  ],
+  "command_sha256": "7b47f0ee8032322f1030aa8dbb8043f53531cd222325409f3ca4ba87635b8434",
+  "control_observation": {
+    "observed_at": "2026-09-29T23:47:02.235515Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "8da8e2df82963daf07c7e32234f7863c6e6f794e"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-29T23:47:02.248376Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/42ec62eb9cf0453e8400236ffa74119d",
+  "direction": "uav_correction_compression",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_correction_compression/run_b01.py",
+    "--launch-sha",
+    "8da8e2df82963daf07c7e32234f7863c6e6f794e",
+    "--seed",
+    "19801",
+    "--parent-checkpoint",
+    "/home/wu/hmasd-inputs/uav-correction-compression-b01/parent.pt",
+    "--endpoint-dir",
+    "/home/wu/hmasd-inputs/uav-correction-compression-b01"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_correction_compression/b01_mean_deployment_a02/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/c06715aab4a535b4d1caf42e9aec8e983bbad1e78f55d45522b2b5380f430291.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_correction_compression/b01_mean_deployment_a02",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_correction_compression/b01_mean_deployment_a02/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1016562,
+      "session_id": 1016562,
+      "start_ticks": 107053964
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1016562,
+    "process_group_id": 1016562
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_correction_compression/b01_mean_deployment_a02/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1016563,
+      "session_id": 1016562,
+      "start_ticks": 107053967
+    },
+    "pid": 1016563,
+    "process_group_id": 1016562,
+    "supervisor_pid": 1016562
+  },
+  "schema_version": 1,
+  "sha": "8da8e2df82963daf07c7e32234f7863c6e6f794e",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/42ec62eb9cf0453e8400236ffa74119d",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_correction_compression/b01_mean_deployment_a02/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_correction_compression/b01_mean_deployment_a02/stdout.log"
+}

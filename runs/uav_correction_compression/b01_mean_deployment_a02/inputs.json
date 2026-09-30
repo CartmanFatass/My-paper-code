@@ -1,0 +1,917 @@
+{
+  "object": "UAV-CORRECTION-COMPRESSION-B01-INPUTS",
+  "selection_source_sha": "b245ef8119d1b9f7487be84923a800f65870a508",
+  "parent": {
+    "sha256": "34871c49874ec716c21438581facfaeca8a25930304a39eb26e001fb2b259da2",
+    "bytes": 463357,
+    "canonical_node": "wsl_4070",
+    "canonical_path": "/home/wu/projects/HMASD/runs/uav_message_content/b02_preserved_scalar/19451/B/final.pt",
+    "source_sha": "02ede8a4a75cc83e6e18d8b6619f1cfa84bc8d92",
+    "master": 19451
+  },
+  "assets": [
+    {
+      "master": 19701,
+      "endpoint": "D19701",
+      "constant": "C19701",
+      "checkpoint": {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19701/D/final.pt",
+        "sha256": "f0870abced86a043d48d0d9a2cbc970412b15773b1a84e65c74cfd20bf865926",
+        "bytes": 568164,
+        "relative_path": "runs/uav_message_content/b06_calibration/19701/D/final.pt",
+        "staged_name": "D19701.pt"
+      },
+      "source_sha": "f288de6416dff6f8b73ea634995bbe163ad9b5fd",
+      "final_tensor_sha256": {
+        "base_actor": "785f5a0e4d2eb8e4c1c5444bdf565b695fd750ae145104693e831a69d1dfd4a5",
+        "critic_old": "8ae62b77bc4ea4b05d7afea1ff4003aa17950c97df3cf93824c3583ee9e17d8e",
+        "critic_forecast": "5c9b37300155c1f3338bc88f17d69c51fb248b0de0155630962ca6504d789bba",
+        "residual_hidden": "af679ed170e57f3b9e20572736531dd8aefe3f65eb96ff81d16676db34b340a9",
+        "residual_output": "76efa7550afce2d002eb2004fe7e2c3a38453d66c5d9d5a7f14d1be56035e2eb"
+      },
+      "calibration_samples_per_coordinate": 40960,
+      "calibration_worlds": [
+        {
+          "episode": 0,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_00.npz",
+          "sha256": "8a9bfdd4dafaa5463ba4a57ba0d0601eb1992cf62eabd4c38bc62fe0c7fd4c27",
+          "bytes": 277381
+        },
+        {
+          "episode": 1,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_01.npz",
+          "sha256": "ffab2c07422de51a70de0c8adcbd40072c6c1d39466fa926add89391e24c7cc5",
+          "bytes": 291688
+        },
+        {
+          "episode": 2,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_02.npz",
+          "sha256": "3b59bf70ebdf5720e8ce87e21776ec23c7d9f68828c65b9b76591ff920d71c1d",
+          "bytes": 288438
+        },
+        {
+          "episode": 3,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_03.npz",
+          "sha256": "a30059d9429b449b34b3ad276f48f3133108b6328556dffacfc0b1851b1acb1b",
+          "bytes": 285340
+        },
+        {
+          "episode": 4,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_04.npz",
+          "sha256": "44f3c87071c1a96c83422d9241b13076ef7d666242abfedb6ee0165b66775676",
+          "bytes": 257362
+        },
+        {
+          "episode": 5,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_05.npz",
+          "sha256": "ed2a29aabb8656662b746ccfacda99a1477bbe962c0907aba081a44771273425",
+          "bytes": 265316
+        },
+        {
+          "episode": 6,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_06.npz",
+          "sha256": "dcd762653a42dba4f51a4b0d9d30f4f465ba477852962257724e9fe3f0b353df",
+          "bytes": 282025
+        },
+        {
+          "episode": 7,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_07.npz",
+          "sha256": "49ba17ac9ae6a254e9d37345c9829ead176b90d8aef28a6ced41f28f1f63bbed",
+          "bytes": 282359
+        },
+        {
+          "episode": 8,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_08.npz",
+          "sha256": "226fe5e3f8c907dfb48191c26c144d7a51a449cbb39618a1bdf80b9eee478a98",
+          "bytes": 272417
+        },
+        {
+          "episode": 9,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_09.npz",
+          "sha256": "a1cd91640ed774e9c5475abcd8d89033ee8e3bc18389ad47d96001f1f237bfbc",
+          "bytes": 279289
+        },
+        {
+          "episode": 10,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_10.npz",
+          "sha256": "a0f8c0d0a745d4fcda62b6c207513537cc7cc258410a18fab952197f44a4efcf",
+          "bytes": 296651
+        },
+        {
+          "episode": 11,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_11.npz",
+          "sha256": "7284871539ce26515da5e8360874eef41fabc515313c2f7aedd0f19e608aca1c",
+          "bytes": 292688
+        },
+        {
+          "episode": 12,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_12.npz",
+          "sha256": "beb4f137fbd7d0f77526324af44ac1041899adae08e700f9e545b867a1638749",
+          "bytes": 271144
+        },
+        {
+          "episode": 13,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_13.npz",
+          "sha256": "75b2162e206971317500235665a01bbd59efc99ddd3226299a4032c043810c1d",
+          "bytes": 295418
+        },
+        {
+          "episode": 14,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_14.npz",
+          "sha256": "f5d9589e862b1dd71eedd480664172b16fdd1401c0a1fb1d2d8e51b59f40f355",
+          "bytes": 278655
+        },
+        {
+          "episode": 15,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_15.npz",
+          "sha256": "919c835e338a70cb3d80889852b489970770be9be926da02fb0062ed8cacbd30",
+          "bytes": 281549
+        },
+        {
+          "episode": 16,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_16.npz",
+          "sha256": "d7df241d7c0a6fa52a76841e6428bb630bb8b9bd7bfa883b770285fed73b18bd",
+          "bytes": 282909
+        },
+        {
+          "episode": 17,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_17.npz",
+          "sha256": "5ff89ea9d185230fb0fba4664354d90ca34fdac6f8c1498696580e941b81ea81",
+          "bytes": 279361
+        },
+        {
+          "episode": 18,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_18.npz",
+          "sha256": "fabff3b7a0506f1242cd6f8ad07136135000132216b2b978b9fd2801b8067975",
+          "bytes": 281314
+        },
+        {
+          "episode": 19,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_19.npz",
+          "sha256": "b36c1c20de64109f60ecf07bb31563610b83b8c2b8b6e2103ab55066a67b0227",
+          "bytes": 270206
+        },
+        {
+          "episode": 20,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_20.npz",
+          "sha256": "db9b2f332dac56a42816b46bd65b894d4f943ce8c3f3b9dbc548629b7276f66e",
+          "bytes": 290029
+        },
+        {
+          "episode": 21,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_21.npz",
+          "sha256": "d34c81566af034c820622602e4a29b57cc1d1651a3f63ba7ab2f7964476637cb",
+          "bytes": 294619
+        },
+        {
+          "episode": 22,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_22.npz",
+          "sha256": "0a36087b8fce8b0aa0d6c99da78d07fe330ce4b453271cab0dacaa3fc534209f",
+          "bytes": 298306
+        },
+        {
+          "episode": 23,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_23.npz",
+          "sha256": "1afda863675f9c3797cd0d31d892927bf0eb43d8d45bdde593c6c94955f99473",
+          "bytes": 294527
+        },
+        {
+          "episode": 24,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_24.npz",
+          "sha256": "d85c4f6d617efc14b062bd8dff5c6039057c539994b419b5fecc12e94d56cc3b",
+          "bytes": 285407
+        },
+        {
+          "episode": 25,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_25.npz",
+          "sha256": "4977bbb9e5f3c0a1bb06b52830a81979adf99cd0d6284e6b0988c532b8a12a32",
+          "bytes": 286581
+        },
+        {
+          "episode": 26,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_26.npz",
+          "sha256": "3844de9ab4dfdc17ac29fc6259926117fe6f9dd000b7a2ba17467679d52352db",
+          "bytes": 275328
+        },
+        {
+          "episode": 27,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_27.npz",
+          "sha256": "5d6458f6b96d638d1bd0f5a612d02e9ac32f188ba6680a515653066bcbcdd675",
+          "bytes": 279281
+        },
+        {
+          "episode": 28,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_28.npz",
+          "sha256": "e892afb3b10a621249f8272032bf89815b0de12ac24d1ce85d4eabfabf42dba6",
+          "bytes": 300266
+        },
+        {
+          "episode": 29,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_29.npz",
+          "sha256": "91a5129046dc5280b843c8eba652eec85b8184b1916bfeba3757b576eb976484",
+          "bytes": 267876
+        },
+        {
+          "episode": 30,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_30.npz",
+          "sha256": "5c744558a1b3069367e93000bbffbe43a1cd463d6c1f01aa2830af7b44094111",
+          "bytes": 297489
+        },
+        {
+          "episode": 31,
+          "raw": "runs/uav_message_content/b06_calibration/19701/D/raw/final_31.npz",
+          "sha256": "06eae385f98e68b9be837034ba328f2c59afaf34ec6248e63c010a6957722300",
+          "bytes": 287632
+        }
+      ],
+      "constant_float64": [
+        -0.08235965961198417,
+        0.0784093785357527,
+        -0.011513991221195851
+      ],
+      "constant_float32": [
+        -0.08235965669155121,
+        0.07840938121080399,
+        -0.01151399128139019
+      ],
+      "old_correction_sd_float64": [
+        0.006212048727914255,
+        0.007445718453598929,
+        0.0022508880784199953
+      ]
+    },
+    {
+      "master": 19702,
+      "endpoint": "D19702",
+      "constant": "C19702",
+      "checkpoint": {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19702/D/final.pt",
+        "sha256": "1a0de628a6c324a5cd0c69f4857b37b4bc1f47c51dc80d2a9a233e7ee7f69840",
+        "bytes": 568164,
+        "relative_path": "runs/uav_message_content/b06_calibration/19702/D/final.pt",
+        "staged_name": "D19702.pt"
+      },
+      "source_sha": "f288de6416dff6f8b73ea634995bbe163ad9b5fd",
+      "final_tensor_sha256": {
+        "base_actor": "785f5a0e4d2eb8e4c1c5444bdf565b695fd750ae145104693e831a69d1dfd4a5",
+        "critic_old": "e801d6182bf8a260f1cd2e943ad0e77d73d0da5eb3ea1859d6e5143bcebbed98",
+        "critic_forecast": "5c9b37300155c1f3338bc88f17d69c51fb248b0de0155630962ca6504d789bba",
+        "residual_hidden": "263830078c0acd1f1613da6cff6f479eb62f41e8b0aefe597af7c73b3fe10904",
+        "residual_output": "73bf175b3d0794a65a005348ca7902086933197e23108c55f17ba66c1e4580f5"
+      },
+      "calibration_samples_per_coordinate": 40960,
+      "calibration_worlds": [
+        {
+          "episode": 0,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_00.npz",
+          "sha256": "1541e33fd96f677e9ff7b3cccbba671b1b825441c12f7716a21bb5bd25f34b15",
+          "bytes": 280783
+        },
+        {
+          "episode": 1,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_01.npz",
+          "sha256": "8c25b7f836ef894214d1b4174fb32a290ccf91a7677258f3cf0899f8cfb78ee2",
+          "bytes": 282003
+        },
+        {
+          "episode": 2,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_02.npz",
+          "sha256": "81547f361fc758b367e339b90d3c74014c2d6ebe5f603ce45a077857675d7ca3",
+          "bytes": 293851
+        },
+        {
+          "episode": 3,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_03.npz",
+          "sha256": "d0ddbf22f1c382dcbe8de63e2eeadab1b4ecf421d4d23bf8879d9cef4256639e",
+          "bytes": 281517
+        },
+        {
+          "episode": 4,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_04.npz",
+          "sha256": "5ca4e0ca37cd119cc8ed639e2e068c4e581ea39a77d7795e7c1476342f50a07a",
+          "bytes": 260371
+        },
+        {
+          "episode": 5,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_05.npz",
+          "sha256": "fc5d18df6e1ed52d0573c436f2e059dc4d48ee762aa45472e6837471072dfffd",
+          "bytes": 268270
+        },
+        {
+          "episode": 6,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_06.npz",
+          "sha256": "a7585d5ad6d187f5f22eb4671032c2c814c5663b6271e7ffd9609009066e9705",
+          "bytes": 282440
+        },
+        {
+          "episode": 7,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_07.npz",
+          "sha256": "6d1b06435d2837fa5d0931992a6cd67d5fafb614ad5ddf94ba962584dfa4b57c",
+          "bytes": 284169
+        },
+        {
+          "episode": 8,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_08.npz",
+          "sha256": "5be8a62845b7f9780181bcb9a54f9a55073eea18bae122e12d6e27ddeb117bcf",
+          "bytes": 272821
+        },
+        {
+          "episode": 9,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_09.npz",
+          "sha256": "36b993c63449b25e21d76b38206392bbb0100a28678f07a899231ae23627b6ee",
+          "bytes": 281133
+        },
+        {
+          "episode": 10,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_10.npz",
+          "sha256": "8e33598d2f9572dfaae08ebd329c1ce1090aa6ef505a6df36637decc24ff13d0",
+          "bytes": 294152
+        },
+        {
+          "episode": 11,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_11.npz",
+          "sha256": "34441285194aa6648931d187f3a069252ae19820676b66c3eeb1dd7447e6f6f8",
+          "bytes": 291488
+        },
+        {
+          "episode": 12,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_12.npz",
+          "sha256": "7dd860dc75a497870c187de9460634f38a93802d5b65f78b123ab845ac870270",
+          "bytes": 274696
+        },
+        {
+          "episode": 13,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_13.npz",
+          "sha256": "8802cc1a2a4536d84461191c72cb3d759a63b8ab99a618d37fda9062cde38fe0",
+          "bytes": 292268
+        },
+        {
+          "episode": 14,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_14.npz",
+          "sha256": "b42f4fbcbb6b4002f7e5d1e7e2ea6857dbc9fa87f2a13d3f633392a1a414d635",
+          "bytes": 275859
+        },
+        {
+          "episode": 15,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_15.npz",
+          "sha256": "9987edf817fc9b5f46692415b9505e05db70c65157fe45ac5ce965d489f0f1d4",
+          "bytes": 282016
+        },
+        {
+          "episode": 16,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_16.npz",
+          "sha256": "9dc620dfb728193c1177c1adb42ce140bd87392cb700fa3d67b733d1060536f0",
+          "bytes": 286660
+        },
+        {
+          "episode": 17,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_17.npz",
+          "sha256": "97cf35364797c3e25940fbdb41e098cc8ae1827b836bdd3e2ea872e6c396b077",
+          "bytes": 275496
+        },
+        {
+          "episode": 18,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_18.npz",
+          "sha256": "040947b9245bdee2960aff3ec41e511d8acced078b8728807cda781744323966",
+          "bytes": 280179
+        },
+        {
+          "episode": 19,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_19.npz",
+          "sha256": "5cb9af23dcd992b98a92db95dc54aa227467e0a73f64433fd92cfec044f81d9d",
+          "bytes": 273773
+        },
+        {
+          "episode": 20,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_20.npz",
+          "sha256": "f5088649d2ed0f2f4020bf0a45f46809a596cdb2c69a59bc95df5504b3679dec",
+          "bytes": 291175
+        },
+        {
+          "episode": 21,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_21.npz",
+          "sha256": "c93e03da305c2fdcb04585607d9baf8c3ffa766dd74bf6393f65e1d06afcbbbc",
+          "bytes": 292115
+        },
+        {
+          "episode": 22,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_22.npz",
+          "sha256": "fb2388b3a895546355a0b4a357342cec774d856fd40f6419f3105bcd98edf706",
+          "bytes": 295671
+        },
+        {
+          "episode": 23,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_23.npz",
+          "sha256": "22156416901605589137041a71b71bf9baa86a424b1f181cdf2074b0b5713c22",
+          "bytes": 297517
+        },
+        {
+          "episode": 24,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_24.npz",
+          "sha256": "ba3d11f0478948109c78a178bdcf4efe2145167251d83733c6570bb7a2756816",
+          "bytes": 292235
+        },
+        {
+          "episode": 25,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_25.npz",
+          "sha256": "45d446fd5e5ac566b646eaf98c41116ac0948fda8135a74d8ca503149cb9f168",
+          "bytes": 282047
+        },
+        {
+          "episode": 26,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_26.npz",
+          "sha256": "2dfe03c8b0bebdc12c2ed6e1ca642a6d3a08d0020f52a8f66e875e75a4c0769a",
+          "bytes": 272288
+        },
+        {
+          "episode": 27,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_27.npz",
+          "sha256": "6e3ae1b96a64ca67943c479830a6a8008d5b16bb013f96b9b8bcd91eda6c9425",
+          "bytes": 279624
+        },
+        {
+          "episode": 28,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_28.npz",
+          "sha256": "95ce57125dd6e8f1ee0605d7a8c4d24a37c98af33a0de2af0ab611ac0a1b0f9e",
+          "bytes": 294077
+        },
+        {
+          "episode": 29,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_29.npz",
+          "sha256": "472d19809901295bb7ec114b2e8c256e4206f76caaa63910061127e245b3af01",
+          "bytes": 268963
+        },
+        {
+          "episode": 30,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_30.npz",
+          "sha256": "c8b97b60c76249f84fa97ebaffe333e017b74f0bb8bf5dfebb7c8ad8d6296825",
+          "bytes": 296632
+        },
+        {
+          "episode": 31,
+          "raw": "runs/uav_message_content/b06_calibration/19702/D/raw/final_31.npz",
+          "sha256": "bcc9506bf1a6ad8ea8acca7a9d591c9b19ff616c19df234ddfa853c49ecdb4ab",
+          "bytes": 284791
+        }
+      ],
+      "constant_float64": [
+        -0.059002463178535434,
+        0.025838025581449493,
+        -0.08444668541114879
+      ],
+      "constant_float32": [
+        -0.05900246277451515,
+        0.02583802491426468,
+        -0.08444668352603912
+      ],
+      "old_correction_sd_float64": [
+        0.006932989478516275,
+        0.012166759235317627,
+        0.006509238629564928
+      ]
+    },
+    {
+      "master": 19703,
+      "endpoint": "D19703",
+      "constant": "C19703",
+      "checkpoint": {
+        "path": "/home/fires/hmasd-wsl/runs/uav_message_content/b06_calibration/19703/D/final.pt",
+        "sha256": "140aee1b9fdbd2708fc787d788d25466bec8f46d9cbbdaaf8f099d0c1d415e13",
+        "bytes": 568164,
+        "relative_path": "runs/uav_message_content/b06_calibration/19703/D/final.pt",
+        "staged_name": "D19703.pt"
+      },
+      "source_sha": "f288de6416dff6f8b73ea634995bbe163ad9b5fd",
+      "final_tensor_sha256": {
+        "base_actor": "785f5a0e4d2eb8e4c1c5444bdf565b695fd750ae145104693e831a69d1dfd4a5",
+        "critic_old": "f74b543ffe01e873856dce274aef7e616d453a426ea41343ff8112507c2255c8",
+        "critic_forecast": "5c9b37300155c1f3338bc88f17d69c51fb248b0de0155630962ca6504d789bba",
+        "residual_hidden": "e796b5f9919ae75858ec7fbe612b1413534cbf143ea554b64f02c389d46f785d",
+        "residual_output": "caff06937eefeb924bdea18ed350965171ca2d5d098a3a290728ad14d4487f9c"
+      },
+      "calibration_samples_per_coordinate": 40960,
+      "calibration_worlds": [
+        {
+          "episode": 0,
+          "raw": "runs/uav_message_content/b06_calibration/19703/D/raw/final_00.npz",
+          "sha256": "1a535ab4008eb604be32fb07f3217913f8072e12a10ddf69c5d12ce0fd0b2be3",
+          "bytes": 276638
+        },
+        {
+          "episode": 1,
+          "raw": "runs/uav_message_content/b06_calibration/19703/D/raw/final_01.npz",
+          "sha256": "a02ac0e57f7118d16384250b962e685d9d6a0575cdf2df50704807d7c9d5aa4d",
+          "bytes": 283777
+        },
+        {
+          "episode": 2,
+          "raw": "runs/uav_message_content/b06_calibration/19703/D/raw/final_02.npz",
+          "sha256": "eea02e665e14af1597260e6cf81aa85e0aaa45bfb0e150fc5d14be0c7c303a15",
+          "bytes": 291054
+        },
+        {
+          "episode": 3,
+          "raw": "runs/uav_message_content/b06_calibration/19703/D/raw/final_03.npz",
+          "sha256": "eded9b6282ac4e99683d1d65c62e125a28071c2845be3138a4f8ed665c2b419e",
+          "bytes": 285871
+        },
+        {
+          "episode": 4,
+          "raw": "runs/uav_message_content/b06_calibration/19703/D/raw/final_04.npz",
+          "sha256": "60b4c83273ff76be03ded11cd1d9115b66826c4683cd7fed0e39b845234a7ca2",
+          "bytes": 253307
+        },
+        {
+          "episode": 5,
+          "raw": "runs/uav_message_content/b06_calibration/19703/D/raw/final_05.npz",
+          "sha256": "0eb34441001a96debad0b53b1c2d6047145852437e15e013e9d7f363f8f9f94a",
+          "bytes": 268633
+        },
+        {
+          "episode": 6,
+          "raw": "runs/uav_message_content/b06_calibration/19703/D/raw/final_06.npz",
+          "sha256": "8a46ad34c267968ab6fc30cf435c6ec5cf1b440ebff67d31aaf55fabc0904361",
+          "bytes": 282767
+        },
+        {
+          "episode": 7,
+          "raw": "runs/uav_message_content/b06_calibration/19703/D/raw/final_07.npz",
+          "sha256": "65eee82eddc0592d06057469d3421f16dd7727fa84c9534564236886aa1e8715",
+          "bytes": 286669
+        },
+        {
+          "episode": 8,
+          "raw": "runs/uav_message_content/b06_calibration/19703/D/raw/final_08.npz",
+          "sha256": "369e1d62dfbd4505a7126cc0dc1f9aff5b03853b718a1b9fe85319c3c95b0a67",
+          "bytes": 277559
+        },
+        {
+          "episode": 9,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_09.npz",
+          "sha256": "9e02aed342b67c8015d287ad7f238309e383e70d3b15c7c86b95b39c90a69042",
+          "bytes": 280802
+        },
+        {
+          "episode": 10,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_10.npz",
+          "sha256": "1190bea90ce712fde954062aa802ca3679a6caa8d9f6e52dec4903489345b6c5",
+          "bytes": 284448
+        },
+        {
+          "episode": 11,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_11.npz",
+          "sha256": "8e439cb3a3bf48eba4399a268a9e8707ff2880d267c13ff6ee6c25d32c0e0ad0",
+          "bytes": 291703
+        },
+        {
+          "episode": 12,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_12.npz",
+          "sha256": "d17b8897b2a5c55e44ecc5408765b36d1475b3bad57d2f080ad29ee0cdef3408",
+          "bytes": 272139
+        },
+        {
+          "episode": 13,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_13.npz",
+          "sha256": "b8510c27730fcad5e1dfaee944216d0870c7d0ec1d4e3c8df558c471fffff1ed",
+          "bytes": 298285
+        },
+        {
+          "episode": 14,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_14.npz",
+          "sha256": "292dad3fd84c70e8941150afe07861c1e2194e6bf704694670ed0255a95487c5",
+          "bytes": 264180
+        },
+        {
+          "episode": 15,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_15.npz",
+          "sha256": "0cd0443c2f9df9e8b22617a018cfe455945b4ad388586c80b89c41e37df6f460",
+          "bytes": 294507
+        },
+        {
+          "episode": 16,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_16.npz",
+          "sha256": "9ed500e5ce1315ae25d33b43464b17fbb6fdabcb703ca4babe62927e641a4390",
+          "bytes": 285066
+        },
+        {
+          "episode": 17,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_17.npz",
+          "sha256": "f2d3bc9c43c671d133b78c753317b8b1ed00ed50e7137c331d27d595693017ce",
+          "bytes": 279405
+        },
+        {
+          "episode": 18,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_18.npz",
+          "sha256": "42814a50515ffba7228f61907d9582fb77540d584cc15f859ea84d360935105b",
+          "bytes": 276640
+        },
+        {
+          "episode": 19,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_19.npz",
+          "sha256": "b5131e10dfed90a906accf11c2b878a8a25c7c29149f0abdc74a56b9fe9bd62f",
+          "bytes": 277050
+        },
+        {
+          "episode": 20,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_20.npz",
+          "sha256": "408c98625b90a60cd87a43d9dc4c07f16aae73eb32e2c241fc1d66f6a2e550b8",
+          "bytes": 288228
+        },
+        {
+          "episode": 21,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_21.npz",
+          "sha256": "6a1aab496243d4d6bbf7246eb54c58f1871f28b66a26c365873e81bb84b0ae64",
+          "bytes": 292744
+        },
+        {
+          "episode": 22,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_22.npz",
+          "sha256": "1b0b6940ff46fafa219bd958efd0cebaeb47d72cc5f513f81aba32f389fad102",
+          "bytes": 295012
+        },
+        {
+          "episode": 23,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_23.npz",
+          "sha256": "3c0437ad866e2642d78f966b9b7292b252e022ee28f666afe325d4e2527d0738",
+          "bytes": 294164
+        },
+        {
+          "episode": 24,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_24.npz",
+          "sha256": "6924c29b521a86eecad80b8c1fbce24c44c9ce8c90f90df5d8fc34ca61fc7848",
+          "bytes": 288764
+        },
+        {
+          "episode": 25,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_25.npz",
+          "sha256": "a7a8d62d9d8caadcf32439c111a31b80d47b7720c0d7108e1c0177aff2ba3b67",
+          "bytes": 290245
+        },
+        {
+          "episode": 26,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_26.npz",
+          "sha256": "b413f2b9afa1654faf85f0dabe8ca8bc0d64ecef0028bebb73b64c1ba8b30aa8",
+          "bytes": 272010
+        },
+        {
+          "episode": 27,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_27.npz",
+          "sha256": "83c6f6af6be296b56a118aa72e5738511ffba31852ad96f966190861179e5c71",
+          "bytes": 276473
+        },
+        {
+          "episode": 28,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_28.npz",
+          "sha256": "ce8be5e5d6f51ac2a2e6b0347cab04f7f994f4d65906027eb3aca54e42238ccb",
+          "bytes": 293531
+        },
+        {
+          "episode": 29,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_29.npz",
+          "sha256": "07be87f5d49f98365b383133aba26c2d1d3acec55e1a21199dec195f0b31f77e",
+          "bytes": 262959
+        },
+        {
+          "episode": 30,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_30.npz",
+          "sha256": "ecfeb16a754cf9fae37eff66d23552c04b4bce70ec53802260d52136dbf6f050",
+          "bytes": 295083
+        },
+        {
+          "episode": 31,
+          "raw": "runs/uav_message_content/b06_eval_recovery_a02/19703/D/raw/final_31.npz",
+          "sha256": "8db320c40061450594bee1583cefc19ddf0294a0ab4947a1ad595626c1ccbbbe",
+          "bytes": 290962
+        }
+      ],
+      "constant_float64": [
+        0.005578897953659254,
+        0.058983473629844206,
+        -0.015483556900202663
+      ],
+      "constant_float32": [
+        0.0055788978934288025,
+        0.05898347496986389,
+        -0.015483557246625423
+      ],
+      "old_correction_sd_float64": [
+        0.010906507800631488,
+        0.030731091672736112,
+        0.006723666028725669
+      ]
+    }
+  ],
+  "horizon": 256,
+  "worlds": [
+    {
+      "world": 0,
+      "scene_seed": 1980002000,
+      "channel_seed": 1980007000,
+      "motion_seed": 1980003000
+    },
+    {
+      "world": 1,
+      "scene_seed": 1980002001,
+      "channel_seed": 1980007001,
+      "motion_seed": 1980003001
+    },
+    {
+      "world": 2,
+      "scene_seed": 1980002002,
+      "channel_seed": 1980007002,
+      "motion_seed": 1980003002
+    },
+    {
+      "world": 3,
+      "scene_seed": 1980002003,
+      "channel_seed": 1980007003,
+      "motion_seed": 1980003003
+    },
+    {
+      "world": 4,
+      "scene_seed": 1980002004,
+      "channel_seed": 1980007004,
+      "motion_seed": 1980003004
+    },
+    {
+      "world": 5,
+      "scene_seed": 1980002005,
+      "channel_seed": 1980007005,
+      "motion_seed": 1980003005
+    },
+    {
+      "world": 6,
+      "scene_seed": 1980002006,
+      "channel_seed": 1980007006,
+      "motion_seed": 1980003006
+    },
+    {
+      "world": 7,
+      "scene_seed": 1980002007,
+      "channel_seed": 1980007007,
+      "motion_seed": 1980003007
+    },
+    {
+      "world": 8,
+      "scene_seed": 1980002008,
+      "channel_seed": 1980007008,
+      "motion_seed": 1980003008
+    },
+    {
+      "world": 9,
+      "scene_seed": 1980002009,
+      "channel_seed": 1980007009,
+      "motion_seed": 1980003009
+    },
+    {
+      "world": 10,
+      "scene_seed": 1980002010,
+      "channel_seed": 1980007010,
+      "motion_seed": 1980003010
+    },
+    {
+      "world": 11,
+      "scene_seed": 1980002011,
+      "channel_seed": 1980007011,
+      "motion_seed": 1980003011
+    },
+    {
+      "world": 12,
+      "scene_seed": 1980002012,
+      "channel_seed": 1980007012,
+      "motion_seed": 1980003012
+    },
+    {
+      "world": 13,
+      "scene_seed": 1980002013,
+      "channel_seed": 1980007013,
+      "motion_seed": 1980003013
+    },
+    {
+      "world": 14,
+      "scene_seed": 1980002014,
+      "channel_seed": 1980007014,
+      "motion_seed": 1980003014
+    },
+    {
+      "world": 15,
+      "scene_seed": 1980002015,
+      "channel_seed": 1980007015,
+      "motion_seed": 1980003015
+    },
+    {
+      "world": 16,
+      "scene_seed": 1980002016,
+      "channel_seed": 1980007016,
+      "motion_seed": 1980003016
+    },
+    {
+      "world": 17,
+      "scene_seed": 1980002017,
+      "channel_seed": 1980007017,
+      "motion_seed": 1980003017
+    },
+    {
+      "world": 18,
+      "scene_seed": 1980002018,
+      "channel_seed": 1980007018,
+      "motion_seed": 1980003018
+    },
+    {
+      "world": 19,
+      "scene_seed": 1980002019,
+      "channel_seed": 1980007019,
+      "motion_seed": 1980003019
+    },
+    {
+      "world": 20,
+      "scene_seed": 1980002020,
+      "channel_seed": 1980007020,
+      "motion_seed": 1980003020
+    },
+    {
+      "world": 21,
+      "scene_seed": 1980002021,
+      "channel_seed": 1980007021,
+      "motion_seed": 1980003021
+    },
+    {
+      "world": 22,
+      "scene_seed": 1980002022,
+      "channel_seed": 1980007022,
+      "motion_seed": 1980003022
+    },
+    {
+      "world": 23,
+      "scene_seed": 1980002023,
+      "channel_seed": 1980007023,
+      "motion_seed": 1980003023
+    },
+    {
+      "world": 24,
+      "scene_seed": 1980002024,
+      "channel_seed": 1980007024,
+      "motion_seed": 1980003024
+    },
+    {
+      "world": 25,
+      "scene_seed": 1980002025,
+      "channel_seed": 1980007025,
+      "motion_seed": 1980003025
+    },
+    {
+      "world": 26,
+      "scene_seed": 1980002026,
+      "channel_seed": 1980007026,
+      "motion_seed": 1980003026
+    },
+    {
+      "world": 27,
+      "scene_seed": 1980002027,
+      "channel_seed": 1980007027,
+      "motion_seed": 1980003027
+    },
+    {
+      "world": 28,
+      "scene_seed": 1980002028,
+      "channel_seed": 1980007028,
+      "motion_seed": 1980003028
+    },
+    {
+      "world": 29,
+      "scene_seed": 1980002029,
+      "channel_seed": 1980007029,
+      "motion_seed": 1980003029
+    },
+    {
+      "world": 30,
+      "scene_seed": 1980002030,
+      "channel_seed": 1980007030,
+      "motion_seed": 1980003030
+    },
+    {
+      "world": 31,
+      "scene_seed": 1980002031,
+      "channel_seed": 1980007031,
+      "motion_seed": 1980003031
+    }
+  ],
+  "retention_rule": {
+    "J_net_margin": 0.001,
+    "served_users_per_tick_margin": 0.1,
+    "one_sided_confidence": 0.95,
+    "t_df": 31,
+    "strict_lower_bound": true,
+    "scope": "per fixed asset, conditional on one parent and inherited D training/calibration"
+  },
+  "old_complete_reading": {
+    "path": "runs/uav_message_content/b06_eval_recovery_a02/reading.json",
+    "sha256": "8906099bd8280c378bb9a520df3f1118eca7fc0095bfac792dd8cba3be94e4b7"
+  },
+  "numerics": {
+    "input_dtype": "float32",
+    "mean_accumulation": "float64 over original correction rows, 40960 samples per coordinate",
+    "deployment_constant": "once rounded to parent float32, no amplitude fitting",
+    "device": "cpu"
+  }
+}

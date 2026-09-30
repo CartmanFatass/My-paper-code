@@ -254,3 +254,323 @@ corrected published source: the same 224 still-unexecuted episodes and frozen as
 not a repeated accepted operation, extra panel or changed interpretation. All other
 inputs/code/rules are unchanged. No new scientific review is needed for this spelling
 repair; the first pre-admission refusal remains part of the complete record.
+
+<a id="b01-complete-reading"></a>
+## 2026-09-29 — B01 complete: old-mean substitution loses usefulness; retain D
+
+**Decision:** end this fixed comparison and do not replace any D by its corresponding
+old-panel mean. All three predeclared mean-retention decisions fail, and every C−D
+J/service two-sided interval is below zero. Retain the three D functions, B40 and the
+fully specified constants as evidence; select no new default and purchase no tuning,
+additional panel or training. Independent result diagnosis below supports this
+disposition with no material dissent. The larger compression question remains open;
+this result closes the tested mean-substitution recipe, not all possible constants
+or cheaper varying representations. Cross-question investment returns to Root.
+
+### Accepted operation, complete reconstruction and evidence identity
+
+Published source `8da8e2df82963daf07c7e32234f7863c6e6f794e` ran once at
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_correction_compression/b01_mean_deployment_a02/`.
+Native acceptance was 2026-09-29 23:47:02.358500 UTC; the worker exited zero at
+23:48:17.379898 UTC. Claim `c06715aab4a535b4d1caf42e9aec8e983bbad1e78f55d45522b2b5380f430291`
+binds source snapshot `42ec62eb9cf0453e8400236ffa74119d`, supervisor1016562 and
+worker1016563. Fresh effective memory was14,674,731,008 bytes against the configured
+4,294,967,296-byte floor. The exact command is in the native manifest; the recorded
+first effect-free refusal remains separate and is not erased by this successful run.
+
+The same-handle deterministic observer's generation1 terminal event was
+`d101c44767b7cada3ba4e21b`; it verified the exit, matching native identities and absent
+supervisor/worker. Native-child queue delivery returned the known −32600 rejection;
+this DM kept its turn active and read the accepted handle directly. The event was
+drained, generation2 rearmed solely to consume it, then observation stopped with no
+events/wake remaining. No worker was restarted and no operation migrated.
+
+The complete pure reader passed all224 saved trajectories: physical reward, service,
+geometry, channel and density reconstruction; actual innovation pairing; each arm's
+own previous executed action, constant/zero-tail values, frozen hashes and exact
+counts. It made **0 native, policy/model or optimizer calls**. Actual exposure is
+7 constructors,224 explicit resets,57,344 team steps,286,720 sampled motion vectors,
+57,344 broadcasts,56,777 delivered and567 censored packets; all training/critic/
+optimization counts are zero. All seven actor states remained exactly frozen.
+
+Compact evidence is [summary.json](../../../../runs/uav_correction_compression/b01_mean_deployment_a02/summary.json)
+and [reading.json](../../../../runs/uav_correction_compression/b01_mean_deployment_a02/reading.json),
+with config/inputs/native manifest/status/exit and observer terminal record alongside.
+The summary SHA256 is `1eeb229cf5dae0d6d2d4dc681d4b6a0873bce0ab332b23f05e403fdc9594e409`;
+the frozen inputs SHA256 remains `c2601ec8175faa9b0b3c26b90993583ee4cb919bb8746168ae2f0f7b843b42fa`.
+The reader SHA256 is `e0d61d7655450efdab8c7d0c2b3e202f9c33d21d05c451ac7cba46fc257a01d1`.
+Summary rows bind every raw digest and byte count. The canonical remote run retains
+224 NPZ trajectories (61,647,628 logical bytes total), seven episode streams and
+per-arm summaries. A temporary local collection supported the reader and independent
+critic; its retirement and the source snapshot's retirement are recorded separately
+below after actual checks/deletion. Required original B06 checkpoints/calibration
+raw and B19451 remain in their original canonical locations.
+
+### Frozen decisions and complete usefulness
+
+All intervals below are descriptive paired-world t95 with df31. Units of service
+are connected users per tick. Each row has the same32 fresh tuples; there are neither
+96 independent worlds nor new independent parents/training replicates.
+
+| Fixed asset | C−D mean J [two-sided95%] | C−D mean service [two-sided95%] | One-sided95% lower J / service | Frozen retention |
+|---|---:|---:|---:|---|
+|19701|−.001649983 [−.002377924,−.000922041]|−.109252930 [−.161039285,−.057466575]|−.002255145 / −.152304736|Both fail|
+|19702|−.002117960 [−.003535104,−.000700816]|−.143554688 [−.243914067,−.043195308]|−.003296081 / −.226986946|Both fail|
+|19703|−.006793451 [−.011385076,−.002201826]|−.404174805 [−.707248397,−.101101212]|−.010610630 / −.656130470|Both fail|
+
+The original strict lower-bound preferences were −.001J and −.10 service; neither
+the tolerances nor the panel were enlarged after exposure. This is evidence of an
+adverse substitution, not only inconclusive noninferiority. However,19701/19702's
+two-sided loss intervals span the chosen loss boundaries: failure to certify retention
+does not prove every population loss exceeds its tolerance.19703's intervals lie
+entirely beyond both boundaries. The fixed-three average C−D is −.003520465J
+[−.005434677,−.001606252] and −.218994141 service [−.347038412,−.090949869],
+formed within world before the interval; it cannot rescue any failed individual asset.
+
+| Program versus B40 | Mean J [two-sided95%] | Mean service [two-sided95%] |
+|---|---:|---:|
+|D19701|+.004334448 [−.005552426,+.014221321]|+.310668945 [−.336933439,+.958271330]|
+|C19701|+.002684465 [−.007101910,+.012470840]|+.201416016 [−.437627950,+.840459981]|
+|D19702|+.007748583 [+.000185802,+.015311364]|+.529541016 [+.012575037,+1.046506994]|
+|C19702|+.005630623 [−.001675397,+.012936643]|+.385986328 [−.115118933,+.887091589]|
+|D19703|+.006694995 [−.000736620,+.014126610]|+.416625977 [−.069457626,+.902709580]|
+|C19703|−.000098456 [−.005605548,+.005408635]|+.012451172 [−.346902254,+.371804597]|
+
+D retains positive sample means in all three fixed assets; D19702 alone has both
+two-sided intervals above zero. This is useful conditional transfer, without selecting
+it from this panel as a new default. C19701/C19702 retain favorable observed means but
+uncertain B40 increments; C19703 removes essentially all observed native increment.
+The fixed-three D−B40 average is +.006259342J [−.001019861,+.013538545] and
++.418945313 service [−.056504440,+.894395065]. C's corresponding average is
++.002738877J [−.003795374,+.009273129] and +.199951172 service
+[−.226631025,+.626533369]. The new panel does not establish a broad all-D transfer
+guarantee, and does not rewrite B06's conditional training uncertainty.
+
+### Adverse worlds, other outcomes and direct raw reading
+
+All32 paired vectors, positive/adverse identities, minima, zero times, path, height
+and boundary statistics remain in reading.json. C−D loses service in22/21/21 worlds
+and J in24/22/21. The worst C−D service/J losses are world5 for19701
+(−.4296875/−.006315001), world15 for19702 (−.6796875/−.009739166), and world25
+for19703 (−2.12109375/−.036578385). C19703 also has a material positive world28
+(+1.12109375 service/+ .015594272J). These local counterexamples prevent an all-world
+dominance statement even though all three mean intervals favor D.
+
+D−B40 loses service in20/18/13 worlds. In19702, the favorable mean coexists with
+18/32 service losses: world29 loses2.2109375 users/tick and .032819412J, while
+world19 gains4.66015625 users/tick and .069210790J. C−B40 loses service in21/16/16
+worlds. Do not replace this distribution with just the most favorable mean/interval.
+
+Total zero-service ticks are D/C=23/20,5/5,26/26, versus B40's19. No C newly creates
+a zero-service WORLD relative to its own D. That is not identical local risk:
+C19703/world8 has7 zero ticks including100–104, versus D's3 isolated ticks; world13
+adds two ticks, while world12 removes six. Equal total zero ticks conceal this
+redistribution. Conversely C19701/world24 reduces the longest gap from13 to9 and
+total zeros14 to11. Both19701 programs create zeros inworld24 absent from B40;
+both19703 programs create zeros inworlds0 and24 absent from B40. C worsens world
+minimum service in4/3/7 worlds relative to D, while their mean minimum changes are
+0/+.03125/−.28125. Mean-retention failure is not universal tail worsening.
+
+C−D mean Q changes are −.000401472/−.000360648/−.003783347; the third interval is
+wholly negative, the first two cross zero. Mean path changes are −.6821/+7.7645/
++8.2492m per UAV, with only19702's interval wholly positive. D−B40 mean paths are
++31.9226/−21.8595/−37.3019m per UAV. D and C all increase height-floor occupancy
+relative to B40; detailed occupancy/height differences remain descriptive geometry,
+not energy/safety claims. Every arm pays the same .001/tick abstract message fee.
+
+Besides accepting the exhaustive pure reader, the DM directly inspected16 raw files
+for eight positive/adverse pairs: C−D19701/world5,19702/world15,19703/world25 and28,
+D19702−B40/worlds19 and29, C−D19703/world8 and D19701−B40/world24. Common initial
+states agree, actual actions differ, and whole-episode score/service/zero counts
+reconstruct. In19703/world25, C−D service by64-tick block is0,−3.515625,−4.71875,
+−.25; no zero service occurs there. The main mean loss is therefore not simply a
+new-zero artifact. Inworld28 its service increments are−.09375,+.1875,+1.859375,
++2.53125. D19702/world19 gains service in all four blocks; world29 loses in all
+four. This direct reading describes actual trajectories, not replayed suffixes or
+identification of the conditioning variable responsible.
+
+### Efficiency and complete investment
+
+The full actor contains56,201 parameters for D versus39,942 for C/B40; C additionally
+holds its three-float buffer and never constructs/forwards the16,259-parameter residual
+MLP. Measured CPU/node/thread scope is the admitted WSL4070 host, Torch2.7.0+cu118 on
+CPU float32 with one Torch/inter-op/BLAS thread. Paired timing intervals favor C.
+
+| Asset | Full actor wall D→C per256-tick episode | C/D actor CPU ratio | Complete instrumented loop wall D→C | C/D loop CPU ratio |
+|---|---:|---:|---:|---:|
+|19701|.047791→.037663s|.791498|.326621→.317725s|.973407|
+|19702|.048044→.037657s|.784101|.325810→.315665s|.970406|
+|19703|.047976→.037256s|.775077|.325982→.313997s|.962443|
+
+Actor wall savings are21.19%/21.62%/22.35%; CPU savings20.85%/21.59%/22.49%.
+Loop wall savings are2.72%/3.11%/3.68%; CPU savings2.66%/2.96%/3.76%. The roughly
+10ms actor saving is per256 team ticks, not per action. Loop measurements include
+native reset/host/channel/sampling, tracing, NPZ compression and raw hashing. They
+exclude separately measured JSON writes and are not bare deployment latency, energy
+or physical radio efficiency. Instrumentation and host may change the fraction.
+
+Admitted-worker preparation through evidence preparation cost74.660701 wall-s,
+73.408444 user+ .712087 system=74.120531 CPU-s; lifetime peak RSS388,620KiB. Native
+accept-to-exit was75.021398s. Within that worker the batch cost73.326283 wall-s/
+73.213339 CPU-s; input/construction .362842 wall-s/.272572 CPU-s and completed JSON
+writes1.085581 wall-s/1.087261 CPU-s are nested costs, not added again. Final summary
+self-report writes are outside their own reported interval.
+
+The local reader's full command cost48.59 wall-s,48.20 user+.35 system=48.55 CPU-s,
+peak225,272KiB. Its internal post-import measurement is48.176639 wall-s/48.136380
+CPU-s and223,736KiB. Worker plus full reader known subtotal is122.670531 CPU-s;
+engineering/tests/independent reconstruction/transfer/publication support were not
+fully metered. The effect-free refusal's subsecond CPU/wall cost remains unknown.
+The lineage is still33 policy fits+3 predictors, now **4,808,704 persisted native
+steps plus0..256 unknown original B06 steps**. These deployment constants inherit
+all paid learning and old-panel calibration;0 new fits is not a zero-training method.
+
+### Explanation update and next-investment judgment
+
+B06's means accounted for99.25%/97.93%/77.18% of D correction second moment. That
+magnitude decomposition did not imply preservation of native return: even the first
+two almost-constant functions lose J/service under this exact replacement. The
+complete intervention establishes that the corresponding varying functions are
+useful relative to these old-visitation means, with their own closed-loop histories.
+This strengthens a conditional representation capability and weakens the proposed
+mean-removal shortcut. It does not identify message mediation, multi-agent
+coordination, a particular conditioning variable, or a generally superior learning
+recipe. Task opportunity, representation and finite learning remain separate.
+
+A competent simpler alternative remains: the old visitation mean minimizes squared
+correction error on that distribution, not the native closed-loop objective. Another
+constant might be better. As a descriptive saved-data check, new D coordinate means
+minus old deployed constants are [.000155,−.000323,−.000076],
+[−.000492,−.000963,−.000359], and [−.000556,−.001792,+.000323]. Gross mean drift
+is not a compelling sole account, but these post-outcome summaries neither optimize
+a new constant nor prove useful state conditioning; threshold-sensitive trajectories
+can respond to small changes. Time, agent differences, ordinary geometry and recurrent
+feedback remain possible sources of the useful variation. B06's actively trained K
+and unresolved D−K continuation inference remain intact.
+
+The completed comparison answered a deployment decision at modest added evaluation
+cost. Replicating the same panel design could narrow intervals but is unlikely to
+change no-replacement, and would not test the stronger native-objective-calibration
+alternative. Tuning constants would introduce development selection/exposure rather
+than repair a broken experiment. A cheaper varying representation might preserve
+the capability but needs a consequential deployment target; approximately3% saving
+in this measured trace-inclusive loop alone does not justify a new purchase now.
+End this recipe, retain useful code/assets and constraints, and leave the larger
+question reserve/idle. A real deployment-cost requirement with a prospective complete
+comparison could justify re-entry. No producer or owner approval is invented as an
+active scientific dependency. Root owns broader allocation, not routine publication.
+
+### Independent result diagnosis and DM disposition
+
+Registered ResearchCritic `/root/dm_correction_compression/critic_complete_result`
+worked in a separate context without DM/Root conversation inheritance. It first
+reconstructed original B06, then read the prospective contract/full selection archive,
+and reconstructed B01 before receiving a DM result interpretation. Its complete
+substantive returned recommendation follows (format adapted, content retained):
+
+> Recommend closing B01 without replacing any D asset by its old-panel mean, and
+> without another panel or tuning run. Retain the D functions, B40 and all positive/
+> adverse evidence. This is a resolved adverse deployment intervention, not merely
+> insufficient precision to demonstrate retention. Every frozen retention test fails;
+> all six two-sided df31 J/service intervals exclude zero negatively. Point losses
+> exceed both chosen tolerances, but failure alone does not establish that every true
+> loss exceeds its tolerance;19703's intervals lie beyond both boundaries. The shared
+> panel is32 deployment tuples per fixed asset, not96 independent worlds or added
+> training replicates.
+>
+> The useful positive survives: D−B40 means are +.004334/+.310669,
+> +.007749/+.529541 and +.006695/+.416626 in J/service. D19702 has both positive
+> two-sided intervals; others cross zero. C19701/C19702 retain positive observed
+> increments, C19703 has essentially none (−.000098J/+.012451 service). This preserves
+> a conditional varying-function capability, not a new default or robust superiority
+> across parents.
+>
+> No C introduces a new zero-service world relative to D; total zeros are23/20,5/5,
+> 26/26 versus B40's19. Yet C19703/world8 has7 zeros including a five-tick gap versus
+> D's3 isolated zeros. Equal totals conceal redistribution. Conversely C19701 reduces
+> world24's longest gap13→9. Both still introduce zeros there absent from B40;
+> D/C19703 introduce zeros inworlds0 and24. D is not uniformly better across outcomes.
+>
+> B06's nearly constant magnitude did not imply that removing variation preserved
+> native usefulness. Even19701/19702 (roughly99%/98% constant second moment) lose
+> complete J/service. Residual paths were active; every policy followed its own
+> observations and executed-action history. The strongest simpler alternative is that
+> the old visitation mean minimizes correction error, not native performance loss.
+> It could be a poor constant for threshold-sensitive closed-loop behavior; other
+> constants could perform better. New D means remain close to old means, weakening
+> gross mean shift but not establishing native-optimal calibration or identifying the
+> useful conditioning variable. Time, agent differences, ordinary geometry and
+> recurrent feedback remain possible. This identifies replacement of these functions
+> by these means, not message-mediated coordination. Active K and unresolved D−K
+> training inference remain unchanged.
+>
+> Full actor CPU savings20.85%/21.59%/22.49% and loop savings2.66%/2.96%/3.76% are
+> real, with paired intervals favoring C. The loop includes tracing/compressed NPZ/
+> hashing, not bare deployment or energy; JSON was separately metered. Removing16,259
+> parameters buys measurable savings while failing the declared usefulness preference.
+>
+> The completed224-episode observation was worthwhile: preservation would support
+> simpler deployment; loss of both programs' B40 increment would weaken transfer;
+> observed D−C losses and retained D capability favor keeping varying functions.
+> Another unchanged panel refines precision without addressing a differently chosen
+> constant and is unlikely to change no-replacement. Stop this mean recipe, not all
+> compression/constant learning. Native-objective constant selection or cheaper varying
+> representation would need its own prediction, development exposure and complete
+> comparison; approximately3% measured loop saving does not justify that purchase now.
+> Broader allocation returns to Root.
+>
+> Actual exposure224 episodes/57,344 steps/0fits/0updates. Worker74.120531 CPU-s/
+> 74.660701 wall-s, full reader48.55 CPU-s/48.59 wall-s, known subtotal122.67 CPU-s
+> excluding incompletely metered support. Lineage33 policy fits+3 predictors,
+> 4,808,704 persisted steps plus unknown0–256. First refusal had no scientific effects;
+> its unmeasured cost stays unknown.
+>
+> Coverage: independently checked source/config/summary-reader bindings, all96 old D
+> raw hashes/exact constants, checkpoint-to-run tensor identities, all seven immutable
+> actors, common tuple witnesses, consequential contrasts/intervals/timing and34 new
+> positive/adverse raw trajectories with actual-action history and zero forecast tails.
+> Reused the complete reader for exhaustive physical/channel/density reconstruction;
+> did not repeat the224-trajectory audit or old training-update audit. Within-scene
+> risk, independent parents, optimal constants and bare deployment timing remain
+> unverified. All evidence reads finished; no remaining local raw/snapshot consumers.
+> **MATERIAL_DISSENT: no.** No additional purchase or expanded claim recommended.
+
+DM accepts this diagnosis and disposition. Its negative substitution judgment,
+retained D capability, non-universal tail ordering and optimal-constant alternative
+match the full evidence. No unresolved material dissent needs Root resolution, and
+no additional Pro consultation offers a distinct decision-relevant need here. This
+is an exploratory asset-use result, not a broadened confirmation claim. Technical
+collection and scientific reading are complete; publication/actual cleanup follow.
+
+### Publication and cleanup at the shared resource boundary
+
+All local scientific consumers have finished: the Implementer, engineering Reviewer,
+result ResearchCritic and DM reader. Both observer PIDs are absent; stopped state
+has no pending wake. Useful frozen evaluator/model/reader and their focused tests
+remain for exact asset reconstruction and evidence checking. No new experiment,
+unread advice or uncollected worker remains.
+
+Actual local deletion removed `temp/directions/uav_correction_compression/`
+(57,344 allocated bytes), the implementation and test `__pycache__/` directories
+(57,344 and49,152 bytes), and the redundant a01 `supervisor.log` (4,096 bytes;
+its complete contents remain in the refusal JSON). Redundant local a02 stdout/stderr
+files were empty and also deleted. Exact-target `du -s -B1` before deletion and
+absence checks after deletion establish **167,936 allocated bytes reclaimed**;
+no archives, retention copies or backups were created.
+
+Final bulk/snapshot retirement is deliberately incomplete at this boundary. Root's
+active `uav_registered_service` batch uses the same node with real planner deadlines.
+Root requests no large snapshot GC or concentrated raw-hash scan until that compute
+window releases, and will return a cleanup-only follow-up to this same native task.
+This is resource coordination, not scientific approval or an additional result gate.
+No cleanup tool has yet refused this target.
+
+The concrete remaining sequence is: after Root's release, verify the canonical
+remote224 raw files/streams against the published hashes (and original asset digests),
+then remove the temporary local seven arm directories, remote redundant four-checkpoint
+stage `/home/wu/hmasd-inputs/uav-correction-compression-b01/`, and the terminal remote
+snapshot `/home/wu/projects/HMASD/.git/hmasd-launch-sources/42ec62eb9cf0453e8400236ffa74119d/`
+using the supported preview/apply collector. Preserve all refusals and unique evidence;
+measure actual net allocated bytes and publish the final cleanup outcome. The known
+remote Git auto-maintenance bad-tree warning was not repaired or tested as a GC blocker
+here. Canonical raw evidence and original B06/B19451 inputs will remain untouched.

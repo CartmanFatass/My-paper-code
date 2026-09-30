@@ -1,0 +1,4 @@
+full_reader_wall_seconds=48.59
+full_reader_user_seconds=48.20
+full_reader_system_seconds=0.35
+lifetime_peak_rss_kib=225272
