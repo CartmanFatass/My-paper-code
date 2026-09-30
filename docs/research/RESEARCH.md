@@ -683,11 +683,31 @@ remains untested. The actor removes full candidate ranking but retains a charged
 navigation helper. Cached C is faster: greedy/sample query CPU is 1.34×/5.26× C. Dense local
 labels and active updates produced native competence in this one fit; extra data and updates
 prevent attributing final−BC progression specifically to aggregation. Preserve this positive,
-all world losses and the earlier imitation/distillation adverses together. Retention makes a
-later learning comparison feasible, without demonstrating recurrence, speedup or reward-training
-benefit. Actual cost is 1 fit/114,688 steps/8,000 updates and 107.544 worker+reader CPU seconds;
-engineering/review labor is unmetered.
+all world losses and the earlier imitation/distillation adverses together. B02 alone made a
+later learning comparison feasible without demonstrating recurrence, speedup or reward-training
+benefit; B03 below revises the narrow construction-recurrence judgment. Actual cost is
+1 fit/114,688 steps/8,000 updates and 107.544 worker+reader CPU seconds; engineering/review
+labor is unmetered.
 [Complete B02 and independent disposition](candidates/uav_fleet_adaptation/NOTES.md#b02-complete-reading).
+
+An unchanged second construction with fresh training worlds, initialization and shuffles now
+passes both fixed competence screens again on the same exposed 32-world/innovation panel.
+B03 greedy−C J/service is +.013964/+1.006226, with both descriptive world intervals crossing
+zero; sampled−C is +.056548/+4.114014, positive in 30/32 J and 28/32 service worlds. Mean
+service-p10 improves 1.765625, but ten worlds lose p10; eleven have lower episode minima,
+mean minimum falls .4375 and path rises 990.661 m/UAV. BC again fails the numeric screens,
+while additional labels and optimization still confound aggregation-specific attribution.
+This strengthens finite construction recurrence, not training-population reliability, unseen-world
+replication or independent sampling replication. Preserve both assets rather than selecting B03
+from their exposed scores. The second fit costs 98,304 new steps/8,000 updates/97.502 measured
+worker+reader CPU seconds; C/C7 are reused source-bound evidence with historical timings.
+The two studies total two fits/212,992 unique steps/205.046 measured CPU seconds. Together
+with the ordinary-randomization positive and reward-learning adverse in topic2, recurrence
+removes a construction concern but does not by itself prioritize reward continuation. The
+already selected parent B04 secondary S_I−Q_I comparison addresses useful learned-distribution
+value on fresh common worlds; it retains original B02 S, exact finite-decoder scope and its
+primary coupling question. No third inheritance fit or automatic PPO follows.
+[Complete B03 and independent disposition](candidates/uav_fleet_adaptation/NOTES.md#b03-independent-disposition).
 
 Risk-learning critics need a competent scalar comparison before attributing value to a richer
 return representation. On native H256 UAV service, three fresh Q32 versus current-eta scalar
@@ -1411,7 +1431,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 | Direction | Question | State | Lead runtime | Standing and next step |
 | --- | --- | --- | --- | --- |
 | `uav_service_age` | Can finite experience reduce cumulative native service age beyond competent lawful ordinary control under the same delayed commitment? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; retain W/M, end unchanged selector investment.** Source d4430e619, compact result0b358981a:1fit/960episodes/245760steps; full frozen reader and 2048 updates per network replayed. L1−M mean age+.269054[+.069315,+.468793], L1−W+.229916; own-initialization gain−.273965 is retained but does not establish training-population or foresight superiority. W−O age−1.086826 with service/travel gains and worse user tails; retain both W/M with their measured compute tradeoff. All choices executed, no deadline misses. No active producer, unread result/advice or selected successor; wider learning question stays open. [Complete evidence/disposition](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup complete:822185984bytes reclaimed](candidates/uav_service_age/NOTES.md#b01-final-cleanup), [routing](#session-routing). |
-| `uav_fleet_adaptation` | Can demonstrated multi-UAV control capability become a competent learned starting policy under lawful local inputs, and support worthwhile further development? | exploring | Codex DM (native child) | **B02 complete: retain one conditional learned starting asset.** One local-C lineage (1 fit/114,688 steps/8,000 updates) passes both fixed point screens. Greedy−C J+.002135/service +.365356 (intervals cross 0); sampled−C J +.046566/service +3.352905,26/32 positive each, with lower minimum service in 21 worlds and higher path/compute. C remains faster; no equivalence, recurrence or later-PPO claim. Root selects the reviewed single independent unchanged-lineage recurrence:1fit/384new episodes/98304steps/8000updates, fresh training/init/shuffle, existing development panel and source-bound retained C/C7. No PPO or automatic further repeats. B01 A/F remains ended. Evidence 269d5d03f; [complete result](candidates/uav_fleet_adaptation/NOTES.md#b02-complete-reading), [disposition/next choice](candidates/uav_fleet_adaptation/NOTES.md#b02-independent-disposition), [cleanup:813293568bytes reclaimed](candidates/uav_fleet_adaptation/NOTES.md#b02-final-cleanup), [routing](#session-routing). |
+| `uav_fleet_adaptation` | Can demonstrated multi-UAV control capability become a competent learned starting policy under lawful local inputs, and support worthwhile further development? | reserve | Codex DM (native child) | **B03 complete/read/independently diagnosed; retain both conditional assets.** One fresh unchanged lineage (1 fit/98,304 new steps/8,000 updates) repeats both fixed point screens on the exposed 32-world/innovation panel, using source-bound retained C/C7. Greedy−C J+.013964/service+1.006226 (intervals cross zero); sampled−C +.056548/+4.114014, with lower minima in 11 worlds and higher path. Two exploratory constructions do not establish training reliability, unseen-world replication, speedup or reward-continuation benefit. No active producer, unread result or further fit selected. Use already selected parent B04 S_I−Q_I evidence to inform investment; original B02 S stays fixed. B01 A/F remains ended. Evidence `6307afcc1`; [complete reading](candidates/uav_fleet_adaptation/NOTES.md#b03-complete-reading), [independent disposition](candidates/uav_fleet_adaptation/NOTES.md#b03-independent-disposition), [B03 cleanup:1,627,717,632 bytes reclaimed](candidates/uav_fleet_adaptation/NOTES.md#b03-final-cleanup), [routing](#session-routing). |
 | `uav_user_waiting` | Can ordinary prospective control reduce typical users’ service interruptions beyond M while retaining the accumulated-fairness capability of R? | reserve | Codex DM (native child) | **B02 complete/read/independently diagnosed; retain M and conditional S, end this fixed A extension.** Evidence87a66f083:256valid episodes/65,536steps/0fits; total65,648 result steps retains112 failed-prefix steps, plus64 correctness steps. Primary A−M mean per-user maximum gap+.628750[−.215564,+1.473064]; A−S−.508438 interval crosses0. S−M primary+1.137188, but maximum gap−8.953125 and worst-user mean age−3.078491, at service−3.662537 in all64 worlds. A−S service+.313477 with2.37× scheduler CPU; preserve the mixed result, not a primary success. Full reader and all644 pair changes verified within declared scope; no deadline misses or runtime-cure claim. Known worker/full-reader2,651.306 CPU seconds, support additional. No producer, unread result or selected successor; re-entry needs a consequential complete continuity/tail/service/compute comparison. [Reading and disposition](candidates/uav_user_waiting/NOTES.md#b02-complete-reading), [cleanup:2,448,371,712bytes reclaimed](candidates/uav_user_waiting/NOTES.md#b02-final-cleanup), [B01](candidates/uav_user_waiting/NOTES.md#b01-complete-reading); [routing](#session-routing). |
 | `uav_parent_adaptation` | How can competent local UAV policies be developed or coordinated to improve complete service under explicit information and action rights? | exploring | Codex DM (native child) | **B03 complete/read/independently diagnosed; end unchanged recipe, retain C/I and all endpoints.** Evidence8b7a3c056:3fits/491520steps. All three Lg−C and Ls−I mean J effects are negative (pooled−.010909/−.077879). Zero-fit I−C gains+.023721J/+1.709106 service, with+1650.708m path and worse within-episode service p10; preserve all losses. Future learning includes I as an ordinary comparator; entropy/credit causes and K-only success remain unresolved. B01/B02 capabilities and adverses stand. Root now selects B04 at28d7c376d:416episodes/106496steps/0fits for fixed ordinary Q and original inherited S under independent/shifted/common draws plus C. Exact finite-grid marginals, equally supplied coordination rights and all physical-cost limits remain explicit. Same DM owns implementation through complete reading/publication; independent selection review has no material dissent. [Allocation decision](#joint-sampling-root-decision-20260930). [Costed proposal](candidates/uav_parent_adaptation/NOTES.md#b04-marginal-coupling-proposal), [full original recommendation](candidates/uav_parent_adaptation/NOTES.md#b04-original-independent-recommendation). [Complete reading](candidates/uav_parent_adaptation/NOTES.md#b03-complete-reading), [independent disposition](candidates/uav_parent_adaptation/NOTES.md#b03-independent-disposition), [cleanup:809914368bytes](candidates/uav_parent_adaptation/NOTES.md#b03-final-cleanup); [routing](#session-routing). |
 | `uav_correction_compression` | Can useful learned residual corrections be deployed as fixed calibrations while preserving complete native behavior and reducing online work? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; no mean replacement.** Published result e17f4fdf9:224 episodes/57344 steps/0fits. All three C−D J/service intervals are below zero and all frozen retention rules fail; D19702 retains a positive conditional B40 increment. Keep D/B40/all adverse outcomes, choose no new default or automatic tuning/panel. Nearly constant magnitude does not imply dispensable variation; optimal constants/message causality remain open. Full actor CPU saves21–22.5%, trace-inclusive loop only2.7–3.8%. Re-entry needs a consequential deployment-cost question and complete comparison. [Evidence/disposition](candidates/uav_correction_compression/NOTES.md#b01-complete-reading); [closure complete](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup), no live work or cleanup blocker. [Routing](#session-routing). |
@@ -1764,56 +1784,60 @@ ordinary reference; R may retain a conditional capability or a cost/performance 
 [Full protocol, sources and independent judgment](archive/2026-09-30/RESEARCH-silent-reserve-repositioning.md#full-independent-oracle-answer),
 [Root decision](archive/2026-09-30/RESEARCH-silent-reserve-repositioning.md#root-decision).
 
-**`uav_fleet_adaptation`: conditional asset retained; one independent recurrence selected.** B02's
-fixed one-lineage construction is fully collected, read, independently reviewed and published
-at 269d5d03f (source e945483b8). N5/all-on/H256 local C supplied dense actual-history labels;
-one 114-input/27-command actor completed 128 expert and two 64 student blocks, then six 32-world
-panels. All 448 episodes/114,688 native steps,8,000 updates and4,096,000 presentations are verified.
-The actor uses lawful local observations, its predecision waypoint and a model-derived fallback
-bit, with no current C command. Its analytic radio/navigation scaffold remains part of the asset.
+**`uav_fleet_adaptation`: B02/B03 complete; retain both conditional assets; reserve.**
+The selected independent unchanged construction is fully collected, read and independently
+diagnosed, with evidence at `6307afcc1` (exact source `4909c9553`). Fresh training worlds, initialization and
+shuffles produced a second 114-input/27-command Student under the same N5/all-on/H256 host.
+Its 128 expert and two 64-student blocks plus four 32-world neural panels cost 1 fit,
+384 new episodes/98,304 native steps, 8,000 updates and 4,096,000 presentations. All 384 new raw
+files/four assets and 64 source-bound retained C/C7 episodes were verified without extra native,
+expert/radio, actor or optimizer execution. Retained controls are already-paid observations,
+not new ordinary-control replication or contemporaneous timing measurements.
 
-Both the primary greedy and separate T=1 sampled starting-asset point screens pass. Greedy−C
-J/service is +.002135/+.365356, with both world intervals crossing 0 and 17 J-loss worlds;
-no population noninferiority or C equivalence follows. Sampled−C is +.046566/+3.352905,
-26/32 positive each, while within-world minimum service drops .781250 and is lower in 21 worlds.
-Its path is 399.327 m/UAV longer than C and 1244.263 m longer than greedy. BC alone fails the
-three numerical margins; final−BC means improve but the intervals cross 0, and added data/
-optimization preclude an aggregation-specific effect. Ordinary randomization around C remains
-a live simpler explanation of the sampled surplus, not a demonstrated cause or an extra B02 arm.
+Both final-greedy and T=1 sampled point competence screens pass again. Greedy−C J/service
+is +.013964/+1.006226, with descriptive intervals crossing zero and 15 J-loss/14 service-loss
+worlds. Sampled−C is +.056548/+4.114014, with 30/32 J and 28/32 service gains. Mean service-p10
+improves 1.765625, but ten worlds lose p10; eleven have lower episode minima, the mean minimum
+falls .4375 and mean path rises 990.661 m/UAV. Native J does not penalize this path cost. The
+complete trajectory reading rejects increased movement as a universal explanation of the gain.
+BC alone again fails the three numerical margins. Final−BC progression is stronger descriptively
+than B02, but still adds 40,960 labels, 5,600 updates and 2,867,200 presentations; aggregation's
+necessity is not isolated. Lawful local inputs omit the current C action and full candidate
+ranking while retaining the charged analytic radio/navigation helper.
 
-Cached full C remains the serious ordinary reference; C7 loses mean service and costs more
-query CPU. Greedy/sample query CPU is .021408/.083940 s per episode versus C's .015969,
-so removing candidate ranking supplies no measured speed gain. Worker+reader cost is 107.544
-CPU seconds; engineering/review/support labor is unmetered. The exact final checkpoint and
-all four lineage assets remain in the single durable run location, with 448 unique raw files and
-compact complete evidence. B02 cleanup reclaimed 813,293,568 allocated bytes; B01's prior
-1,681,186,816 bytes and its two-fit/576,000-step adverse investment remain recorded separately.
+Two constructions on the same exposed 32-world panel and sampling innovations strengthen
+finite learnability and weaken dependence on a single fortunate training sample/init. They do
+not establish unseen-world replication, training-population reliability, C equivalence, speedup
+or later reward-training benefit. Preserve original B02 and new B03 assets; higher exposed
+B03 scores do not select a replacement. B02's contemporaneous query-cost disadvantage remains;
+B03 greedy/sample query CPU is 1.414×/5.699× the retained historical C measurement. B03
+worker+reader cost is 97.502 CPU seconds; the two studies together are 2 fits/212,992 unique native
+steps/205.046 measured CPU seconds, excluding unmetered engineering/review/support labor.
+Earlier B01's 2-fit/576,000-step adverse investment and conditional F−A positive remain incurred.
 
-The independent ResearchCritic supports retaining this conditional asset and recommends
-considering one fixed independent lineage before investing in a reward-training adapter:
-fresh training/init/shuffle, the now-development panel and fixed innovations, and retained C/C7
-controls only if host/source/protocol bindings stay unchanged. That candidate costs 1 fit,
-384 new episodes/98,304 native steps,8,000 updates and4,096,000 presentations. It could change
-confidence in reproducible construction and the next investment; it is not a prerequisite for
-conditional use of today's checkpoint and would not constitute confirmation.
+The fresh-context ResearchCritic finds no material dissent and recommends retention plus
+closure without another fit. Its substantive correction is that repeated construction does not
+itself prioritize a PPO adapter. Ordinary I's gains and all three reward-trained deteriorations
+in parent B03 make a competent stochastic reference consequential, without ranking I versus
+fleet S across different panels or refuting this supervised representation. The already selected
+parent B04 contains the useful secondary S_I−Q_I comparison on fresh common worlds. Preserve
+its primary coupling question, equal public randomness/ranks, exact finite-decoder contract and
+**original B02 S**; B03 S must not substitute. A useful learned-distribution increment would
+strengthen conditional development; comparable ordinary Q would weaken immediate adapter
+investment. Coupling value is a separate conclusion from learned marginal superiority.
 
-Root has read the complete result, learning curves and original independent review and
-**selects that one unchanged independent recurrence** for the same DM. It buys a direct
-construction-recurrence observation at modest measured cost, without assuming that the
-sampled surplus is uniquely learned. The new C-prior result makes randomized C consequential
-for a later superiority comparison, not a reason to discard this construction question.
-Freeze fresh training/init/shuffle identities before exposure; retain S0/BC/final-greedy/
-final-sampled on the existing development panel and fixed innovations. Reuse C/C7 only with
-unchanged host/source/protocol bindings. Selected new cost is exactly 1 fit, 384 episodes,
-98,304 native steps, 8,000 updates and 4,096,000 presentations; no PPO, extra C/C7 panel,
-temperature choice or automatic third lineage follows. Failure to reuse the retained controls
-returns a material cost/scope question before adding exposure. Both repeated competence and
-failure change the next development choice; two lineages remain exploratory.
-The earlier
-N8 B01 A/F recipe remains ended, with its conditional F−A positive and I/C deficits intact.
-[Complete B02](candidates/uav_fleet_adaptation/NOTES.md#b02-complete-reading),
-[independent disposition and next-choice reasoning](candidates/uav_fleet_adaptation/NOTES.md#b02-independent-disposition),
-[retained assets and cleanup](candidates/uav_fleet_adaptation/NOTES.md#b02-final-cleanup),
+No third lineage, diagnostic sweep, extra evaluation, temperature choice or reward fit is
+selected here. There is no active producer, unread result/advice or incomplete collection;
+the broader learned-development question remains open. A future complete reward-learning
+comparison would need the unchanged starting asset and competent ordinary stochastic control,
+not merely S0 or deterministic C. Root owns any new cross-question allocation. B03 closure
+deleted its two unused launch-source snapshots/registrations and local scratch/caches,
+reclaiming 1,627,717,632 allocated bytes, with unique B02/B03 bulk and all useful code retained.
+B02's 813,293,568 and B01's 1,681,186,816 reclaimed bytes remain separate prior cleanups.
+[Complete B03](candidates/uav_fleet_adaptation/NOTES.md#b03-complete-reading),
+[independent diagnosis and next-investment reasoning](candidates/uav_fleet_adaptation/NOTES.md#b03-independent-disposition),
+[retention and cleanup](candidates/uav_fleet_adaptation/NOTES.md#b03-final-cleanup),
+[B02 evidence](candidates/uav_fleet_adaptation/NOTES.md#b02-complete-reading),
 [original selection](archive/2026-09-30/RESEARCH-local-controller-inheritance.md#root-decision),
 [B01 complete evidence](candidates/uav_fleet_adaptation/NOTES.md#b01-complete-reading).
 
@@ -2194,7 +2218,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 
 | 责任 / 原生任务标题 | Task / host | Authoring checkout / branch | 恢复入口 |
 | --- | --- | --- | --- |
-| DM: local-C inheritance and recurrence | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. B02 fully read/reviewed/published 269d5d03f: conditional final asset retained, both fixed screens pass with all adverses/cost limits. Same DM now owns the selected one-fit/98304step independent recurrence through prospective identities, bounded implementation/checks/admission/full reading/publication; existing source-bound C/C7 controls only. No automatic later PPO. B02 cleanup 813,293,568 bytes; B01 cleanup 1,681,186,816 bytes, unchanged A/F ended. [Complete reading](candidates/uav_fleet_adaptation/NOTES.md#b02-complete-reading), [disposition](candidates/uav_fleet_adaptation/NOTES.md#b02-independent-disposition). |
+| DM: local-C inheritance and recurrence (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID 01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. B02/B03 fully read/reviewed/published; B03 evidence `6307afcc1` repeats both fixed competence screens under fresh training/init/shuffle on the same exposed evaluation panel. Both conditional assets retained; original B02 S remains fixed for parent B04. Reserve with no active producer, unread result/advice or selected further fit. Construction recurrence does not establish training reliability, unseen-world replication, speedup or reward-training benefit. B03 cleanup 1,627,717,632 bytes; B02 cleanup 813,293,568 and B01 cleanup 1,681,186,816 separately recorded. [Complete B03](candidates/uav_fleet_adaptation/NOTES.md#b03-complete-reading), [disposition](candidates/uav_fleet_adaptation/NOTES.md#b03-independent-disposition), [cleanup](candidates/uav_fleet_adaptation/NOTES.md#b03-final-cleanup). |
 | DM: individual-user waiting | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_user_waiting` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f5-8634-7e13-b931-e75abdb10d45. Owns `uav_user_waiting` and matching paths. B01 and B02 complete/read/independently diagnosed/cleaned. B02 evidence87a66f083 retains M and conditional S, preserves A's mixed gains/costs and all technical failures; end fixed A extension. Reserve with no producer, unread result, selected successor or approval dependency. [Disposition](candidates/uav_user_waiting/NOTES.md#b02-independent-review-and-disposition), [measured closure](candidates/uav_user_waiting/NOTES.md#b02-final-cleanup). |
 | DM: stochastic coupling after parent adaptation | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. B01–B03 complete/read/independently diagnosed; B03 result8b7a3c056 retains C/I and all learned endpoints. Same DM owns the now-selected source-bound B04 comparison at28d7c376d:416episodes/106496steps/0fits, through implementation, engineering review, actual-node admission, complete reading and publication. Existing Oracle's complete recommendation and integer-grid refinement support the decision. Original S is fixed; inheritance recurrence is independent. [Root decision](#joint-sampling-root-decision-20260930). [Proposal and limits](candidates/uav_parent_adaptation/NOTES.md#b04-marginal-coupling-proposal). B03 cleanup809914368bytes, no blocker; no U/B03 automatic continuation. [Complete reading](candidates/uav_parent_adaptation/NOTES.md#b03-complete-reading), [disposition](candidates/uav_parent_adaptation/NOTES.md#b03-independent-disposition), [cleanup](candidates/uav_parent_adaptation/NOTES.md#b03-final-cleanup). |
 | DM: cumulative native service age | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_service_age` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f0a3-e515-7701-b805-6565d0cc4c07. Owns `uav_service_age` and matching paths. B01 one fit/source d4430e619 fully collected, verified, independently diagnosed and published; reserve, no live worker/reader/observer, unread advice or selected successor. Compact result0b358981a retains conditional W/M capability, own-initialization learning and primary/tail losses. Terminal cleanup reclaimed822185984allocated bytes, required unique evidence retained, no blocker. Returns this substantive boundary and proposed re-entry questions to Root; no automatic extra fit or new track. [Complete result](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup](candidates/uav_service_age/NOTES.md#b01-final-cleanup). |

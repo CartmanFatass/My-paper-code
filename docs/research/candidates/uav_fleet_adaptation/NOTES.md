@@ -1827,3 +1827,214 @@ this result and the original supporting/adverse sources. The factual reading
 above is complete; final investment disposition, shared standing and measured
 cleanup follow that independent diagnosis. No third lineage, extra evaluation,
 PPO adapter or reward fit is selected by this result.
+
+
+<a id="b03-independent-disposition"></a>
+## 2026-09-30 — B03 independent diagnosis and final investment disposition
+
+Fresh-context ResearchCritic `b03_result_review` has returned its complete
+independent answer. It reconstructed B03 before reading the previous review or
+the DM's interpretation, using the original B03/B02 records and the original
+parent-adaptation B03 ordinary-positive and learned-adverse evidence. I read the
+whole answer and accept its recommendation: **retain both conditional learned
+assets, close B03 without another fit, and use the already selected comparison
+with competent ordinary randomization to inform further investment.**
+`MATERIAL_DISSENT: no`. This does not close the broader learning question.
+
+### Independent reconstruction and limits
+
+The reviewer found no consequential discrepancy. It independently checked all
+22 B03 source hashes at the launch commit, the 15 unchanged B02 dependencies,
+control metadata/runtime bindings, all 192 mixed-provenance evaluation raw
+hashes and reductions, all arm means and nine paired contrasts, initial geometry
+and users, lawful feature packing, four-tick holds, all-on masks, common sampling
+innovations, all four new assets and the original B02 S identity. It read all
+70 optimization traces, three recorded training trajectories, and positive and
+adverse parent-adaptation trajectories. It did not replay host/radio physics,
+actor forwards or optimizer arithmetic; broader training-array verification
+uses the complete saved-data reader. No new scientific exposure was incurred.
+
+The independent reconstruction confirms both fixed final-mode point screens,
+actual parameter learning, greedy−S0 gains in every world, and BC's repeated
+failure of the three numerical margins. These establish a second useful finite
+construction under the lawful representation. They do not establish population
+margins, policy-class equivalence, a reliable training program, unseen-world
+replication, independent sampling-tape replication, speedup or benefit from a
+subsequent reward-learning procedure. The two fitted lineages share all 32
+evaluation worlds and their addressed sampling innovations; they are not 64
+independent training observations. The better-looking B03 scores do not select
+it over the frozen B02 asset.
+
+The reviewer also read trajectory counterexamples to an overly simple movement
+explanation. In world 29341006, sampled−C gains .189843 J while travelling less
+(2,114 versus 4,841 m/UAV). In world 29341007, greedy loses .059991 J while
+travelling more (4,721 versus 306 m/UAV). In world 29341014, sampled mean service
+improves while its minimum drops from 17 to 11, with the sampled minimum at
+tick 11. Increased movement is neither sufficient to explain the gain nor a
+universal mediator. The complete motion, quality and temporal-service losses
+in the preceding reading remain material because native J does not price path.
+
+Training supports finite learnability but does not identify aggregation's
+necessity. The reviewer found executed-action/paid-teacher disagreement on
+195/320 and 65/320 decisions in two inspected aggregation episodes: labels do
+address actual student histories. Final−BC nevertheless adds 40,960 labels,
+5,600 updates and 2,867,200 presentations. Additional ordinary supervised
+optimization remains a serious explanation for part of that progression.
+Only 7,616 distinct feature rows underlie the final 81,920-label dataset; the
+ending CE/accuracy are changing-policy training metrics. No attribution run is
+needed merely to retain the constructed asset.
+
+### Changed investment judgment
+
+The prospective both-mode recurrence branch strengthened the case for considering
+reward continuation. The complete result and current ordinary-control evidence
+support a narrower next judgment: recurrence removes one construction concern,
+but **does not itself prioritize a PPO adapter**. Parent-adaptation B03's I−C
+gain and all three learned-endpoint deteriorations are actual competing evidence,
+not a conjectured weak baseline. I gives +.023721 J/+1.709106 mean service across
+three fresh blocks, while mean service-p10 falls from 19.53125 to 17.5; learned
+sampled endpoints then average −.077879 J/−4.675252 service against I, with 93/96
+J losses. Different panels and deployment laws prevent ranking that I against
+fleet S using historical means. Its PPO failure does not refute this supervised
+representation or reward learning in general.
+
+The remaining consequential question is complete learned-distribution value
+beyond competent ordinary stochastic control. A common-world comparison of
+frozen S, ordinary randomized C and deterministic C would directly inform it.
+The reviewer notes that a 32-world/two-realization core would cost 160 episodes,
+40,960 steps and zero fits, but **that core is already contained in Root's
+selected parent-adaptation B04** (416 episodes/106,496 steps/zero fits). Do not
+launch a duplicate here or change B04's primary coupling question. Its declared
+secondary `S_I−Q_I` contrast is relevant, with equally supplied public randomness
+and ranks and its exact finite-decoder contract. Q is not a bitwise replay of old
+I, and the two-draw S decoder is not B03's original inverse-CDF realization.
+**Original B02 S remains the fixed B04 input; B03 S does not substitute.**
+
+The independent recommendation preserves these distinct possible readings:
+
+- A useful S−Q increment with acceptable declared service/motion/compute tradeoffs
+  would strengthen conditional use and a specifically designed continuation.
+- Comparable or better ordinary Q would weaken immediate investment in a learning
+  adapter while leaving demonstrated inheritance intact.
+- A useful coupling effect would establish conditional value of joint dependence
+  under the supplied coordination rights, without establishing learned marginal
+  superiority.
+- Loss of competence on fresh worlds would narrow transfer expectations without
+  erasing the observed training recurrence.
+
+No third inheritance fit, architecture change, diagnostic sweep, extra endpoint,
+temperature search or reward continuation is selected in this batch. A future
+reward-learning comparison remains plausible but must include the unchanged
+starting asset and competent ordinary stochastic control; merely beating S0 or
+deterministic C is insufficient. Its horizon, update law, integration cost and
+risk reading are not fixed by this result. The direction is reserve at this
+completed assigned boundary, with no active producer, unread result or unresolved
+scientific objection. Root owns any new cross-question allocation; B04 belongs
+to its current DM and is useful incoming evidence, not an incomplete B03 task.
+Distinct Pro advice would not improve this settled disposition, so no additional
+consultation was sent.
+
+### Bounded source feasibility supplied to Root's design reviewer
+
+At `/root/deep_report_review`'s concrete request, I inspected current published
+source only and returned one native factual answer. No code, model forward,
+native step or fit was added. The unchanged 114→128→128→27 Student can be paired
+with the ordinary centralized 136→128→128→1 critic in
+`ucope/uav_motion_prefix_b01/policy.py`, keeping `critic_features`' global state
+and commitment features out of the actor. The parent B03 collector/update are
+not callable unchanged: they require 120-input C context, current C indices,
+`actor(context, c_index)` and table/MLP parameter groups. A direction-owned
+adapter would need lawful 114-feature rollouts, sampled indices and old log
+probabilities, 64 sums of four native rewards per H256 episode, differentiable
+Student replay, fresh actor Adam and a new critic/Adam. Existing StudentPolicy
+stores detached logits and uses float64 NumPy temperature-one inverse-CDF
+sampling; behavior/replay probability consistency and episode/version-local
+caches need explicit checks. That is an integration task, not an actor-input or
+architecture obstruction. The rough 2–4 elapsed hours for implementation,
+meaningful tests and independent engineering review was an unmetered planning
+estimate, excluding scientific design and execution, not an actual cost or a
+selected continuation. This feasibility does not override the disposition above.
+
+
+<a id="b03-final-cleanup"></a>
+## 2026-09-30 — B03 final publication and measured cleanup
+
+Useful implementation, tests and exact inputs were published before execution;
+all seven compact original result records and the complete reading were published
+at `6307afcc1e789b419c062491a9d45dce6b0691ab`. Independent scientific reading is
+now complete. The source and readers remain useful evidence and are retained;
+B03 imports the unchanged B02 kernels, and parent-adaptation B04 is a live
+consumer of original B02 S and its policy interface. No unused new source
+module was identified for deletion.
+
+After checking terminal worker/reader status, stopped observation, durable
+published source and live consumers, the supported snapshot collector previewed
+and then removed the two exact B03 source snapshots under the node's shared
+writer lock, with a complete elevated process scan. The first was an explicitly
+unclaimed source-only snapshot from the reconciled pre-admission refusal;
+the second was the completed accepted operation. The collector reported each
+eligible and removed. No process, accepted operation or output was restarted,
+moved or deleted.
+
+All remote paths below are relative to
+`hmasd-wsl-node:/home/wu/projects/HMASD/`. Allocated bytes were measured with
+`du --block-size=1` immediately before and after deletion.
+
+| Deleted target | Before allocated bytes | After |
+|---|---:|---:|
+| `.git/hmasd-launch-sources/08587f6b1f25416c858f8bbc5f020e6f` | 810,172,416 | 0 |
+| `.git/worktrees/08587f6b1f25416c858f8bbc5f020e6f` | 3,551,232 | 0 |
+| `.git/hmasd-launch-sources/b0033bf35d3f4325a8658255763ed430` | 810,180,608 | 0 |
+| `.git/worktrees/b0033bf35d3f4325a8658255763ed430` | 3,563,520 | 0 |
+
+Both trees and both Git registrations are absent. The remote net decrease is
+1,627,467,776 allocated bytes. The output directories, accepted claim and original
+exit/status records remain. Post-removal checks found all 448 B02 NPZ files/four
+assets and all 384 B03 NPZ files/four assets still present in their single
+canonical locations. Both original S file hashes were rechecked exactly:
+B02 `b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`,
+B03 `cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d`.
+This preserves B04's fixed B02 input and all positive/adverse lineage evidence.
+
+The following exact local targets were untracked, had no live scientific/test
+consumer and were deleted after checking their contents. Paths are relative to
+`/home/fires/hmasd-wsl/`.
+
+| Deleted target | Before allocated bytes | After |
+|---|---:|---:|
+| `temp/directions/uav_fleet_adaptation/` (only consumed B03 wait request) | 8,192 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b02/__pycache__/` | 98,304 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b03/__pycache__/` | 57,344 | 0 |
+| `tests/experiments/candidates/uav_fleet_adaptation/b02/__pycache__/` | 32,768 | 0 |
+| `tests/experiments/candidates/uav_fleet_adaptation/b03/__pycache__/` | 53,248 | 0 |
+
+All five targets are absent. The local net decrease is 249,856 allocated bytes;
+**B03 total net reclaimed is 1,627,717,632 bytes**. B01's 1,681,186,816 and
+B02's 813,293,568 bytes remain separate prior cleanups (cumulative 4,122,198,016).
+No backup, tarball, raw-data copy or retention chain was created. The sole bulk
+copies and required compact evidence remain deliberately; there is no cleanup
+blocker or outstanding target from this study. The unrelated pre-existing node
+Git GC missing-tree warning is unchanged and did not block these removals.
+
+The observer is stopped at generation 17 with zero unconsumed events. There is
+no live worker/reader, unread advice, incomplete collection or selected further
+study here. Own RESEARCH standing, result/next-investment reasoning and the
+directly affected shared learnability background are updated with this closure;
+other directions, their selected work and their source-bound inputs are preserved.
+
+The design review later requested a cost clarification for a larger, still
+unselected proposal: two retained-S continuations, each with 256 training
+episodes plus 256 finite-calibration episodes, fresh endpoint comparisons with
+exact duplicate reuse, and 20,480 additional frozen-S shadow actor rows. I
+clarified that the earlier 2–4-hour estimate did not cover that complete
+selection/evidence contract; roughly 4–8 elapsed engineering/review hours is a
+more appropriate unmetered planning range, excluding science design, fits and
+result reading. The extra work is checkpoint provenance, direction-owned
+temperature/randomization wrappers, calibration-winner/tie rules without endpoint
+leakage, exact reuse and paid-count accounting, old-logp/replay-law checks,
+version-local caches, and saved-reader reconstruction of every candidate and
+requested/physical change. Its stated maximum 512 continuation, 512 calibration
+and 320 endpoint episodes is 1,344 episodes/344,064 steps before reuse; shadow
+forwards add actor work but no native steps. This reply supplied feasibility
+facts only; it selected no recipe, performed no extra exposure and did not alter
+B03 closure or the independent investment recommendation.
