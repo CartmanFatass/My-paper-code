@@ -1,0 +1,35 @@
+{
+  "status": "RECONSTRUCTION_COMPLETED",
+  "scope": "one frozen-R saved-input decision, zero native environment calls/fits; traceback lacks original frame operands",
+  "launch_sha": "16500b6f85c8cd20a7765801ed413608c36cf9f0",
+  "host": "Jacob",
+  "python": "3.10.20",
+  "numpy": "1.26.3",
+  "raw_sha256": "a5f6f5a0d907dc15d9186fb47616f851a2e489e910797be75ffcd18d7443c643",
+  "script_sha256": "692d0ee1fbfef327d7b29c54d48624260696483f20ddcaa00f0547c7c4eb41cc",
+  "seed": 29322001,
+  "tick": 112,
+  "candidate_requests": 116,
+  "candidate_plans": 83,
+  "state_reductions": 332,
+  "selected_q": 10,
+  "selected_mask": 15,
+  "key_digest": "56f924ad8d73b871662627d129a836cbd11f6fe39357912ce5aaca055be42a96",
+  "contacts_digest": "abac3220d97d64fcbb8a02a0a81c235641b94d192df65d711bdeaece98267e87",
+  "checks": {
+    "calls": 334,
+    "non_integer_positions": 0,
+    "non_integer_derived_indices": 0,
+    "shapes": [
+      [
+        5,
+        50
+      ]
+    ],
+    "sinr_dtypes": [
+      "<f8"
+    ],
+    "assignment_digest": "2e7c5207eb37637e3b072763cd9f6d8904f1cc73b34a84c9820d3554592c33d3"
+  },
+  "wall_seconds": 0.06615392499952577
+}

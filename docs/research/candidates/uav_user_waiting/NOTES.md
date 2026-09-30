@@ -888,3 +888,128 @@ primary gap endpoint and demonstrated rejection of corrupt Q8, S keys and
 virtual navigation state. I accept this review and the implementation. Shared
 radio kernels and the declared candidate-physics subset remain explicit limits;
 no full-panel result or destination admission is asserted by these checks.
+
+Exact B02 scientific inputs were committed and published at
+`16500b6f85c8cd20a7765801ed413608c36cf9f0`. Current main still records the lifted
+owner pause and this runtime's active `uav_user_waiting` lead. On `wsl_4070`, the
+maintained launcher and compute configuration exactly match published main; the
+RESEARCH backstop was refreshed with an exact-old-hash guard to the published
+control snapshot. Existing native-clone Git repack warnings did not prevent the
+verified fetch/control read and were not repaired as part of this study.
+
+The single detached launcher was submitted as native agent-task
+`uav-user-waiting-b02-continuity-a01`; supervisor acceptance alone is not yet
+runner admission or a read result. Reconcile this same request/manifest; never
+repeat it on uncertain observation. Collection/reading responsibility continues.
+
+**Reader-observation L0 (support only):** restore the previously reviewed B01
+read-only agent-task identity adapter under this direction's disposable scratch,
+with mocked tests under the B02 test directory. The existing pure reader remains
+a direct accepted-source program, not another result-launch admission. Adapter
+inputs are the actual immutable task/PID/boot/start/wrapper binding; it only
+observes the same native task and translates unambiguous facts for `hmasd_wait`.
+It cannot launch, retry or accept science. No native/model experiment is added.
+The Implementer owns only that adapter and its test while the result executes;
+all other paths and Git remain with their writers.
+
+
+<a id="b02-technical-failure-continuation"></a>
+### B02 technical failure and selected bounded continuation — 2026-09-30 UTC
+
+The accepted first attempt `b02_continuity_a01`, input
+`16500b6f85c8cd20a7765801ed413608c36cf9f0`, exited1 after six complete
+H256 episodes and112 steps of R/29322001:1,648 actual steps, seven resets,
+one constructor,0fits/updates. The unchanged native radio assignment raised
+`TypeError: only integer scalar arrays can be converted to a scalar index`
+during the R report112 candidate search. The original failing frame operands
+were not saved. Its operation, source snapshot, six complete raw records and
+partial raw record are retained. This is an incomplete technical collection,
+not evidence that the A hypothesis failed.
+
+All1,648 saved transitions have now been read, including the six complete
+native/C/history/key/continuation records and the partial112-transition record,
+113 observations,28 returned decisions and their delayed deliveries. The reader
+verified zero observation error and added zero native steps/fits. The independent
+engineering Reviewer inspected the partial-reader treatment, original hashes and
+coverage and found no material issue. A bounded pure replay of only the failed
+report was run once locally and once from the original accepted source on the
+same configured node, without constructing an environment or stepping it. Both
+completed116 requests/83 candidates/332 candidate states, selected(q10,mask15),
+and produced identical assignment/contact digests; the original TypeError did
+not reproduce. R-key byte digests differed across hosts, so no cross-host
+bitwise-parity claim follows. Zero-clock replay, added diagnostic allocations
+and a fresh process also mean this does not establish a cure or corruption.
+The after-failure host sample is not a measurement of conditions at failure.
+
+Root selected one bounded continuation on the same configured `wsl_4070`,
+subject to fresh actual-node admission: preserve/reuse the six independently
+validated complete records, restart only partial R/29322001, then finish the
+frozen order. This is250 new H256 episodes/**64,000 new native steps/0fits**.
+The complete panel will contain65,536 valid transitions; the112 failed-prefix
+steps remain additional exposure, making65,648 result-exposure steps across
+both attempts. The earlier64 correctness steps remain separate. Same host avoids
+adding cross-host numerical/deadline scope; this does not assert runtime repair.
+No policy, seed, search, horizon or deadline changes and no automatic further
+retry are selected. No additional native correctness fixture is needed for the
+continuation bookkeeping; tests use mocks and the already-saved evidence.
+
+**Continuation L0.** New code belongs under
+`experiments/candidates/uav_user_waiting/b02_continuation/` and its matching
+tests. All original62 scientific source files, including the original B02
+collector/scheduler/reader, stay byte-identical. A distinct continuation entry
+binds the original accepted operation/source/output, terminal summary/exit and
+all seven raw identities, proves the exact six-row reusable prefix and resumes
+only the fixed250-row suffix into a new output. It never writes the original
+attempt. The final composite reader checks both source groups and all256 raw
+records with the unchanged B02 reconstruction functions, with the original
+partial raw retained as adverse technical evidence and excluded from endpoints.
+Counts distinguish new exposure, prior exposure, valid panel and failed prefix.
+
+The existing launcher's `--retry-of` deliberately accepts only an identical
+source SHA and normalized runner command. It cannot represent this selected
+partial continuation plus new failure instrumentation. Use supported standard
+fresh admission for the explicitly published new scientific object/source/entry,
+with the parent linkage enforced in its own config and records; do not change or
+bypass shared launcher admission. A failure-only helper reads selected traceback
+frame operands/shapes/dtypes after an exception is already raised. It neither
+patches shared radio code nor installs tracing, and does no work on the normal
+policy/search/RNG path. If a second attempt fails, preserve its complete and
+partial evidence and return; no third launch is authorized here.
+
+The existing Implementer owns only `b02_continuation/failure_capture.py` and its
+non-native tests; the DM owns entry/config/composite reader and integration. All
+work uses shared main with disjoint paths; helpers have no Git-index, notebook,
+shared-code, launcher or native-execution ownership. The existing engineering
+Reviewer will independently check binding/accounting and failure instrumentation
+before publication/admission. Collection and scientific reading/diagnosis remain
+with this DM. The current Root Pro-answer subsection is outside this edit scope.
+
+
+**Continuation implementation accepted.** The new entry and composite reader are
+separate from the frozen B02 package. The fixed-parent validation checks all four
+metadata digests, the published reading proof, all seven complete/partial raw
+identities and exact equality of the original62 source/frozen-config bindings.
+It selects the exact suffix after six rows, guards the original output, requires
+the original operation to be definitely stopped, distinguishes all exposure
+counts and allows no implicit resume or further retry. Only already-raised
+exceptions trigger bounded create-only JSON/NPZ operand capture; best-effort
+capture errors remain explicit and do not replace the original failure.
+
+The Implementer's eight synthetic traceback checks passed in.21s; I read and
+accepted both owned files. My five mocked continuation checks passed in2.29s
+(and2.10s after the integration edit); the combined13-check suite passed. Direct
+runner/reader help paths load, and the original62 scientific inputs match byte
+for byte. The independent engineering Reviewer ran13 checks in2.15s, separately
+matched actual parent metadata/proof/seven raw identities and reviewed admission,
+6+250 ordering, source protection, exposure arithmetic, complete composite
+reading and failure-only capture. It found no material issue. I accept this
+implementation. Tests/review added **zero native steps, fits or optimizer updates**.
+Native admission and the actual complete composite read remain execution checks;
+the original runtime exception remains unexplained.
+
+The retained failure support scripts are copied verbatim into the original run
+record for provenance. The partial-reader script's historical raw locator names
+the hash-verified temporary collection; its unique durable inputs are the seven
+canonical `wsl_4070` raw paths in the original summary. These support scripts are
+saved-data reconstructions, not new result entrypoints. Their scratch copies will
+be removed after the accepted continuation and reading have no live consumer.
