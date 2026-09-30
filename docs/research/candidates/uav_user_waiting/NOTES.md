@@ -1062,3 +1062,21 @@ the correction. It changes neither scientific inputs nor native exposure. The
 new selected tag is `b02_continuity_a03`; all prior operations remain terminal and
 unchanged, the observer is stopped, and source publication/fresh admission come
 before this one newly selected execution.
+
+
+**Corrected continuation accepted (2026-09-30T14:39:39.857793Z).** The corrected
+source `db13ccf307e9cf467450fdad8318721fb8db603a` was published, fetched to the
+actual node, and its candidate proof blob independently hash-checked before the
+single new submission `uav-user-waiting-b02-continuity-a03`. Fresh actual-node
+physical/effective available memory was14,649,356,288bytes;4GiB floor passed.
+The admitted snapshot is `97402e6dc42c44dfbac06b78f3c7f145`; supervisor/runner
+PIDs1127510/1127511 are bound by the native manifest. Stable operation:
+`/home/wu/projects/HMASD/.git/hmasd-admission/b54101d5db3d63adf599cba4ee5d1cf64de30e8382a59eb72671c64f82e446a8.json`.
+
+The generation13 stopped observer was explicitly rearmed14, then the new bound
+job registered generation15 for a900s window. First drain at14:40:20Z observed
+consistent accepted/running identities, present summary and zero probe errors.
+No acceptance is inferred from supervisor submission alone. Native child remains
+active through deterministic observation, collection and complete reading;
+checkpoint rearming will never restart the worker. Prior failed attempts are
+unchanged, and this acceptance is not a scientific-result boundary.
