@@ -528,3 +528,342 @@ exact-parent tests can restage the already retained source checkpoint; deleting 
 redundant copy does not change any recorded17/17 validation or claim present reproducibility
 without that input. No training, native evaluation, new policy selection or extra output copy
 was added during interpretation or cleanup.
+
+<a id="search-amortization-design-20260930"></a>
+## 2026-09-30 — Design only: inherit local C as an executable learned policy
+
+Root assigned this question after B01's completed disposition. This is **prospective
+design and saved-data reasoning only**: no new implementation, native transition,
+fit, launch or revival of the A/F actors. B01 stays reserve. Root's existing
+separate-context ResearchCritic `/root/deep_report_review` owns the independent
+cross-question selection review; no duplicate selection critic is commissioned.
+
+The consequential question is whether a finite supervised/interactive imitation
+program can construct a competent local neural initialization that executes without
+C's online candidate ranking. Immediate deployment savings and usefulness as a
+starting asset for later policy development are separate judgments. No deployment
+deadline was supplied. No later policy-gradient continuation is selected or assumed
+to benefit. This is familiar imitation learning applied to a concrete coupled task,
+not a new algorithm or an explanation of prior PPO failures.
+
+### Inherited evidence changes the comparison
+
+Read published main `917d9b694bb97c03c8aa3e2e6bf7d4cb5ba1f667`, especially
+[topic 2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练),
+[topic 3](../../RESEARCH.md#3-marl-增加的是联合行为和信息结构),
+[topic 4](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面), and
+[topic 8](../../RESEARCH.md#8-数学信息与博弈结构怎样帮助dm选择实验).
+Their concrete effects are to retain competent ordinary C, avoid an unsupported
+user-memory repair, distinguish finite optimization from available representation,
+and test the complete joint trajectory rather than label accuracy alone. The
+new information is training access to C's actions; deployment obtains no extra
+physical observation, communication or action right. All five agents' motion and
+interference still change the distribution each learner encounters.
+
+The parent DM's pinned [ordinary-C design](../uav_parent_adaptation/NOTES.md#ordinary-parent-design-20260930)
+at `e1a1171a0cb21c463dcb058dc3d71e946dc75c88` already audited the host/interface.
+Its proposed C-prior learner always calls C and seeks improvement; this proposal
+instead constructs a standalone actor. Inherit `LocalController(history=False)`
+introduced at `ae184f74175b59f6036a06b510be2b70a7205a69`, the unchanged local
+controller source, and historical local-history B02 at
+`ce104088d66dade2aa042619be2e2b59ccde8e60`. Use **N5, all-on, H256 on one current
+host** for all new arms. The current radio implementation differs from those
+historical runs, so their scores are motivation, not fresh matched references.
+N8 C_N/E adds a different manager/information contract and is not a stronger
+version of this local imitation comparison merely because B01 used N8.
+
+The original local-history C means were J .335495108/service 19.916016 in B01
+and J .361942736/service 21.738281 in B02. All 96 B02 learned-endpoint versus C
+world comparisons lost J/service. That establishes an ordinary capability and
+an adverse finite-learning precedent, not unlearnability or weak-parent causality.
+
+Also read the original [coupled-host distillation disposition](../coupled_host_planner_distillation/NOTES.md#2026-09-30-0446-utc--b01-read-student-evaluation-on-dev-10001031--s--4004--64--stop-band-no-purchase-the-coupled-host-leaves-the-claude-learner-substrate-item-9-direction-to-reserve)
+and `runs/coupled_host_planner_distillation/b01_eval_dev_a01/summary.json`,
+published in `663c0972b018b1f7e633cfc97891ebf21cb639aa`. S .400410 versus
+T_M .758656 lost in 32/32 worlds; S−BC .016996 had SE .033401. Online CPU/episode
+was .639017 versus 5.374502, but ordinary T_M-200 retained .732738 at 1.578963s.
+Cheap inference did not establish inherited competence; the cheaper ordinary
+comparison matters. Here the teacher emits dense, deterministic 27-way commands,
+unlike that sparse, multi-layout continuous target. This difference motivates a
+bounded comparison but is not evidence that it will succeed or a reopening of
+Claude's completed/paused work.
+
+### Causal interface and the navigation issue
+
+C's decision at t=0,4,...,252 depends on ordered current FP32 `obs[:103]` and
+its predecision ten-waypoint index. The last observation entry is a clock ignored
+by C. Current rows contain own xyz, at most20 anonymous visible user xy/SINR rows
+and at most4 visible peer xyz/presence rows in the ten-row capacity. With
+`history=False`, ingest replaces the current points; no absent-user cache, previous
+command or earlier SINR is needed to determine the next decision once navigation
+state is known. Initialization chooses the nearest fixed waypoint. Commands are
+the existing norm/lexicographically ordered `{-1,0,1}^3`, held four native ticks
+with componentwise30m/tick motion and the existing clipping bounds.
+
+Crucially, C advances a waypoint only when **all 27 candidates have zero modeled
+service** and current XY is within60m of that waypoint. Advancing at every arrival
+would be a different state machine. A student cannot obtain C's postdecision
+waypoint or nominal command for free by invoking C's search.
+
+There is a cheaper mathematical predicate for the required zero-service bit.
+For visible user u, let r be own received power, P_j the stationary visible-peer
+powers, U the nonnegative unknown interference calibrated exactly as C currently
+does, and N the noise. Own SINR is r/(sum_j P_j+U+N), increasing in r; peer j's
+SINR is P_j/(r+sum_{l!=j}P_l+U+N), decreasing in r. For each k=1..4, candidate
+coordinates form the Cartesian product of `clip(p_l+30*k*a_l)`, a_l in{-1,0,1}.
+Minimum/maximum squared distance to u therefore factor into per-axis minima/maxima
+over three coordinates, followed by extrema over k. These give r_max and r_min.
+There is any eligible candidate link iff own SINR at r_max or some peer SINR at
+r_min reaches C's3dB threshold. Since top10 selection keeps at least one eligible
+link and its service count is nonnegative, this is exactly the mathematical
+complement of C's all-zero-service fallback. Empty current users imply fallback.
+
+This removes 27-command objective ranking from navigation; it does **not** remove
+the local radio model. Per decision it needs current setup powers `(1+p)*n`, up
+to `2*n` extreme powers, coordinate comparisons and threshold checks, n<=20,p<=4.
+Floating-point ordering near3dB and repeated clipping need bounded engineering
+equivalence checks if selected; this is not an implemented or bit-exactly verified
+optimization. No native experiment is required merely to state the derivation.
+
+Proposed actor input is114 floats: ordered `obs[:103]`, the predecision waypoint
+one-hot10, and this fallback bit1. The helper computes next waypoint from the same
+prestate/arrival rule; the network emits the actual command, including fallback
+cases. No current expert action enters features. Holds and all state reset at each
+episode. During aggregation the expert is queried on the **student's actual
+observation and predecision navigation**, not a separate shadow expert trajectory.
+Training and deployment use the same helper, with any numerical mismatch resolved
+before result execution rather than changing labels after outcome exposure.
+
+### Strong ordinary alternatives from preserved trajectories
+
+Root proposed exact episode-reset memoization. The bounded Scout confirmed the
+sufficient key above. I then verified all64 original C raw hashes and scanned
+the two saved32-world panels, with **zero new host/model calls**. At decision
+ticks only, each agent has a separate episode-local map keyed by
+`(ordered obs[:103].tobytes(), pre_nav)` and stores `(command, next_nav)`.
+Pre-nav is initialized from observed own XY and reconstructed with the saved
+fallback bit and60m rule. Row order and float bytes are retained; no permutation,
+rounding or state approximation is asserted. Cache state is never shared between
+agents or worlds. Original full-summary SHA256s are:
+
+- B01 `6506e9692d0310b0538fcd4457fbbed7c8a63ae335a1c41c1c533aa939ec0abd`,
+  `runs/uav_local_history/b01_censor_search_a01/summary.json`.
+- B02 `aa8f2054f9f0233316a6754506b2ab23fc30948b7cb839b49d075c528d4fa84f`,
+  `runs/uav_local_history/b02_same_history_a01/summary.json`.
+
+| Saved C panel | Decisions | Exact hits / misses | Hit rate | Value conflicts | Candidate power links, original → cache misses |
+|---|---:|---:|---:|---:|---:|
+| B01 | 10240 | 9058 / 1182 | .884570 | 0 | 4491288 → 409752 |
+| B02 | 10240 | 8827 / 1413 | .862012 | 0 | 4848336 → 539028 |
+
+Setup links likewise fall45323→4136 and47597→5291 in this accounting. B01
+per-world hit-rate min/median/max=.640625/.921875/.953125; B02=
+.003125/.906250/.956250. In B02 world29102029,319/320 decisions are misses:
+high average reuse is no worst-case guarantee. These are counts on historical C
+trajectories, not measured cached runtime or a current-host replication. C already
+vectorizes all27 candidates. Its original total32-episode wall times were12.673379s
+and13.535354s, further weakening an unqualified latency justification.
+
+The independent critic also proposed C7: rank only hover and the six signed
+coordinate-axis commands, with the same four-tick objective and relative tie order.
+Retain the **full-support analytic fallback predicate** and original navigation
+rule; if C7 has no service while some omitted candidate does, C7 uses its ordinary
+score argmax, not a falsely triggered fallback. On the saved full-C trajectories,
+axis/hover commands occur9642/10240 (94.16%) and9694/10240 (94.67%); exact hover
+alone occurs6993 and7123 times. These facts support a serious cheap comparator,
+not a measured complete C7 result. Its changed trajectories remain unknown.
+
+The proposed ordinary arms are memoized full C and memoized C7. Give both students
+the same exact episode-local cache option, keyed by their deterministic sufficient
+input/prestate, to compare complete competent packages. Each agent needs at most64
+entries per H256 episode. Report requested decisions, actual cache misses, model
+work, cache memory and timing separately. Neither removed searches nor a vectorized
+operation count is a wall/CPU speedup claim.
+
+### A finite complete package, conditional on selection
+
+One shared FP32 MLP114→128→128→27, ReLU hidden layers,34715 parameters. Default
+linear initialization under one declared root seed; no recurrence, prior actor,
+critic, reward update, current-C-action input or new sensing. Train ordinary mean
+cross-entropy on deterministic C category labels, preserving original tie order
+and empirical sample frequency. The high hover share makes aggregate label accuracy
+insufficient: retain per-category confusion, fallback/nonfallback counts, unique
+input counts, and actual commands/displacements. No class balancing, architecture
+or label-law sweep is proposed.
+
+One continuously updated lineage, with Adam(lr3e-4,betas .9/.999,eps1e-8,
+weight_decay0), minibatch512, fixed epoch shuffles, gradient norm cap1:
+
+1. Collect128 fresh complete C episodes:40960 agent decision labels. Fit30epochs
+   (2400 updates); preserve initialization S0 and the resulting BC checkpoint.
+2. Run BC greedily in64 different fresh worlds, all five students active. Query C
+   on each actual decision, add20480 labels, then train20epochs on61440 accumulated
+   cases (2400 updates), continuing the same optimizer.
+3. Run the new student greedily in another64 fresh worlds; add20480 labels and
+   train20epochs on81920 cases (3200 updates). Freeze the final endpoint. No extra
+   round, checkpoint selection, validation tuning or reward fine-tuning follows.
+
+Pure student roll-in after the first expert block is the simple DAgger schedule;
+all agents' subsequent observations/interference evolve jointly. Two fixed
+aggregation rounds permit a second response to the changed visitation distribution;
+they are not a claim that two rounds suffice or a diagnosis of the prior negative.
+World/initialization/shuffle identities must be fixed and checked for disjointness
+before source publication if selected; they are not currently reserved or launched.
+
+Evaluate **S0, BC, final, C_memo, C7_memo** on32 fresh common H256 worlds, using
+deterministic argmax for neural actors and the existing four-tick action hold.
+No stochastic-deployment claim follows. The final−BC comparison is a same-lineage
+milestone with more data/updates, not an isolated DAgger effect; final−S0 identifies
+this finite program's conditional learned change, not training-population recurrence.
+Full J/service distributions, paired descriptive intervals, service-p10, zero-service
+ticks/worlds, quality, path and boundary/altitude exposure remain in the reading.
+Record all losses and actual online cost rather than keeping only means or a
+successful label-fit metric. Final-policy expert-agreement diagnostics are **not**
+included: labels are scored only on already paid training/aggregation data.
+
+| Planned work | Complete episodes | Native team steps | Expert label requests / optimization |
+|---|---:|---:|---|
+| C labels + two student aggregation blocks | 256 | 65536 | 81920 requests;8000 updates;4096000 sample presentations |
+| Five-arm fresh-world evaluation | 160 | 40960 | 10240 full-C decisions;10240 C7 decisions;0 updates |
+| Total | 416 | 106496 | **1 fit**, one initialization, no later RL |
+
+Before cache savings, training labels plus full-C evaluation request at most92160
+full rankings:2488320 candidate trajectories,9953280 modeled ticks,199065600
+candidate power links and9216000 setup links. C7 evaluation adds at most71680
+trajectories,286720 modeled ticks,5734400 candidate links and1024000 setup links.
+The causal helper is additional: at most122880 requests across training features,
+three neural evaluation arms and C7, each at most140 setup/extreme power links
+(17203200 maximum). Shared setup reuse may reduce actual work; do not silently
+deduct it before implementation. Cache-miss counts and actual n/p determine
+real cost. Neural forward rows outside optimizer training are at most71680
+(40960 aggregation plus30720 evaluation), before memoization. The retained reader
+uses saved arrays to verify all hashes, metric reductions, clocks and memo records,
+with zero extra native transitions or expert queries; consequential diagnostics
+that would exceed this scope require a new priced decision.
+
+Planning estimate, **not a benchmark or guaranteed bound**: worker10–40 CPU-min,
+saved-data collection/reading1–5min, engineering plus independent executable
+review2–4hours. The historical unmemorized C cost extrapolates to only101–108s
+for256 episodes; that alone cannot price8000 optimizer batches, student roll-ins
+or serialization. Those unmeasured costs motivate the broad interval. Node/thread
+choice, actual peak memory and admission remain future launch matters. No fresh
+node admission, code or timing probe is needed for this design-only return.
+
+### What would change the development choice
+
+An explicit **exploratory asset screen**, proposed before new exposure, is final−C
+mean J>=−.01 and service>=−.5 user/tick, mean per-world service-p10>=−1 user,
+and no newly zero-service world relative to C (a world with any zero-service tick
+under the student but none under C). The first two tolerances define near-inheritance
+for this research purchase: .5 user is about2–2.5% of historical C's mean, and
+its direct service-reward contribution is .007 J. These are selected research
+tolerances, **not owner deployment preferences, MEI, equivalence margins already
+validated by data, or a guarantee of future RL improvement**. Read intervals and
+all adverses even if point estimates pass; report path/quality tradeoffs separately.
+Also require actual parameter updates/movement and a positive final−S0 complete
+mean J and service change before describing the program as developing competence.
+
+Passing this screen would provide a conditional searchless learned starting asset
+for a later separately chosen policy-development study. Low label error alone,
+faster inference alone or only beating S0 would not. A failed screen means this
+endpoint is not adopted as that near-C starting asset and ends this fixed package;
+it does not refute the broader inheritance question or automatically select more
+data, rounds, capacity or a new optimizer. Partial native gains remain capabilities
+to report, but do not silently pass the stated screen. C7/C's complete performance
+and costs locate any deployment tradeoff even when learned initialization, rather
+than immediate compute adoption, is the intended use.
+
+Fine-tuning the frozen114-input,27-logit actor is structurally feasible without
+changing the actor, helper, observation rights or four-tick native action contract.
+Its logits support a categorical gradient. However, existing local-history B02
+PPO uses `SetActor(context107,points64x7)`; this would **not** be a drop-in
+checkpoint. A future selected continuation needs a bounded rollout/input adapter,
+critic/optimizer and an explicit sampling/deployment law. None is implemented,
+priced as free, or presumed scientifically useful by this proposal.
+
+### Primary-source bridge and current recommendation
+
+Checked the three local title/catalog stores; no novelty is claimed. Read Ross,
+Gordon and Bagnell2011, [DAgger Algorithm3.1 and Theorems2.2/3.1–3.4, pp.630–631](https://proceedings.mlr.press/v15/ross11a/ross11a.pdf):
+aggregate expert labels at learner-visited states rather than rely only on expert
+visitation. The task-loss connection depends on recoverability and learning
+assumptions; the strongly convex/no-regret guarantees do not certify this finite
+nonconvex neural fit. The paper selects a validation policy; this proposal instead
+reads a prospectively fixed final endpoint and makes no imported theorem claim.
+
+Read Tang et al., *Multi-Agent Imitation Learning: Value is Easy, Regret is Hard*,
+`MARL-0590`, pp.2,6–7, original
+[JSON](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0590.json) and
+[PDF](/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0590.pdf).
+Its nonstrategic-agent joint-policy reduction makes inherited team value a
+legitimate objective distinct from robustness to strategic deviations. It does
+not remove our decentralized observation/finite optimization limits or prove a
+small recoverability constant. This task supplies no strategic-deviation claim.
+
+My initial practical judgment was to defer because C is already cheap and exact
+memoization absorbs much repeated search. Root and the independent critic raised
+the constructive alternative: a competent learned initialization is a different
+asset even without a deployment deadline. I accept that correction. **The bounded
+one-lineage comparison above is defensible as an empirical construction question,
+conditionally recommended if Root prioritizes that capability; it is not justified
+as a demonstrated latency need.** Strong ordinary alternatives and adverse prior
+distillation evidence keep expected value modest. The independent cross-question
+review and Root's allocation remain pending; current responsibility returns at
+this design boundary, with no selected successor execution or hidden later PPO.
+
+### Final design correction and independent selection recommendation
+
+Before any implementation or new exposure, the independent critic identified a
+material decoder issue for the learned-initialization purpose: greedy competence
+does not establish competence of the categorical law a future PPO collector might
+sample. Root accepted that correction, and I incorporate **one fixed final-policy
+temperature1 sampled panel on the same32 fresh worlds**. The preceding five-arm
+table was provisional; the following is the single current cost envelope, with
+S0 and sampled-final each included exactly once:
+
+| Current fixed work | Episodes | Native team steps | Other counted work |
+|---|---:|---:|---|
+|128 C-label episodes +64+64 pure-student aggregation episodes|256|65536|81920 requested expert labels;8000 optimizer updates;4096000 sample presentations|
+|S0, BC, final-greedy, final-sampled(T=1), C_memo, C7_memo;32 worlds each|192|49152|10240 full-C decisions;10240 C7 decisions;40960 neural decisions;0 updates|
+|**One complete package**|**448**|**114688**|**1 fit**, one continuously updated lineage|
+
+The92,160 full-teacher request ceiling and all full-C/C7 trajectory, tick and link
+ceilings above are unchanged. The added sampled panel requests no teacher labels.
+The corrected helper ceiling is133120 requests/18636800 setup-plus-extreme power
+links, and neural forward rows outside optimization become81920. Real cache
+misses, n/p, setup reuse, CPU/wall and memory remain measured outputs if selected;
+the same broad worker10–40CPU-min/reader1–5min and engineering2–4h planning
+estimate covers this additional32-episode panel. No actual runtime is claimed.
+
+Sampling uses an independently indexed innovation for each world, decision tick
+and agent, fixed by a separate root before execution. At each decision, sample the
+declared temperature1 categorical probabilities over the existing ordered27
+commands, then hold that sampled command for four ticks. Record the innovations
+and probabilities/law. **A sampled-policy cache stores logits and next navigation,
+not a sampled command**: even identical observations get a fresh indexed draw.
+Ordinary/greedy caches may store their deterministic commands. No rollout mixing,
+temperature adjustment or greedy-versus-sampled winner substitution is allowed.
+
+Final-greedy remains primary. Apply the declared competence screen separately to
+sampled-final before treating the asset as a competent default stochastic starting
+policy. Greedy-pass/sampled-fail preserves a deterministic capability and an
+adverse/unresolved stochastic bridge; it does not count as success for both. No
+sampled-S0 learning-effect claim is made. BC-pass/final-fail likewise preserves
+the BC milestone, without automatic endpoint replacement. C7 superiority in
+complete J/service/tails remains consequential to later investment even if the
+C-only near-inheritance screen passes; the screen does not erase a stronger cheap
+ordinary capability. Further development would still require a new prospective
+comparison against competent ordinary methods and the rollout/critic/sampling
+engineering already described.
+
+The Root-assigned, separate-context ResearchCritic independently recommends buying
+this **one complete developmental-asset screen**, retaining C/C7, all distillation
+adverses,86–88% historical memo hits/data redundancy, one-lineage uncertainty and
+the explicit later PPO adapter gap. It accepts the tolerances only as exploratory
+continuation screens, not operational requirements or noninferiority evidence.
+I accept the recommendation and both concrete corrections (S0, sampled-final);
+no material scientific disagreement remains. The review returns directly to Root,
+which owns the cross-question allocation. Another Pro round adds no distinct
+unresolved expertise for this bounded design; Root's separate parent-C advice is
+not treated as an answer about this student. **Design is complete; execution
+remains unselected, and B01's reserve/cleanup standing is unchanged.**
