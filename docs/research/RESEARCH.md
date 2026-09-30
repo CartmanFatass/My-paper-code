@@ -1904,14 +1904,15 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs own the selected actor-development, temporal-planning, planner-amortization
-and service-continuity questions.** `dm_fleet_adaptation` completes native-consequence learning
-and its independent interpretation; `dm_fleet_transmission` carries the accepted two-opportunity
-study; `dm_parent_adaptation` now owns the selected paid-label approximation below;
-`dm_user_waiting` has completed the full B03 reader, interpretation, publication and cleanup,
-satisfying the recorded condition for its ordinary M/S/U/K study. Existing leads keep their
-questions and accepted handles. Oracle/helpers are not DMs, and four assignments do not imply four admitted
-workers. The completed forecast and service-age DMs remain reserve.
+**Four native DMs own the selected static-count development, temporal-planning,
+planner-amortization and service-continuity questions.** `dm_fleet_adaptation` has closed B05
+and now develops both retained S lineages through the selected F/M acquisition comparison;
+`dm_fleet_transmission` carries the accepted two-opportunity study; `dm_parent_adaptation`
+owns the paid-label approximation; `dm_user_waiting` carries the selected ordinary M/S/U/K
+study after completing B03 verification, interpretation, publication and cleanup. Existing
+leads keep their questions and accepted handles. Oracle/helpers are not DMs, and four
+assignments do not imply four admitted workers. The completed forecast and service-age DMs
+remain reserve.
 
 Astra Max Oracle owns detailed idea discovery and independent criticism using the research
 record, all three local libraries and needed primary web passages. Root selects the scientific
@@ -1925,9 +1926,10 @@ its distinct proposal-consequence question. The complete two-fit comparison now 
 episodes/655360steps, an estimated2–4worker CPUh+15–45reader minutes and5–9support hours.
 Its fixed same-data CAL and transferred all-on CAL/CONT/B* references remain part of the design.
 An optional transfer-only comparison costs384episodes/98304steps/0fits,30–60worker+10–25reader
-CPU minutes and3–6support hours. Neither purchase is selected. Read the underway all-on result
-before reconsidering their marginal value; a positive all-on result is not a new permission gate,
-and a negative one would not refute managed learning. [Full design and independent disposition](https://github.com/CartmanFatass/My-paper-code/blob/1eceb000eb2955e4c7f9f09000025775e3eb5bf9/docs/research/candidates/uav_parent_adaptation/NOTES.md#s2-development-independent-disposition).
+CPU minutes and3–6support hours. Neither purchase is selected. The all-on CAL/CONT comparison
+is now fully read: its active fitting and physical intervention did not establish recurring native
+improvement. That does not refute managed learning; at this boundary Root instead selects the
+count-development question below, with its different acquisition law and complete ordinary controls. [Full design and independent disposition](https://github.com/CartmanFatass/My-paper-code/blob/1eceb000eb2955e4c7f9f09000025775e3eb5bf9/docs/research/candidates/uav_parent_adaptation/NOTES.md#s2-development-independent-disposition).
 
 A separate independent review found no worthwhile new duration/roster purchase at this boundary.
 Root accepts that value/cost judgment while retaining the positive capabilities, adverse evidence
@@ -1936,21 +1938,19 @@ Root decision](archive/2026-09-30/RESEARCH-duration-roster-allocation.md) are re
 review. Its strongest charging-scheduling candidate substantially overlaps the already completed
 persistent-service B05, whose outage repair did not satisfy the full service/energy use contract.
 
-The fourth DM's source assessment is complete and the independently recommended approximation
-study is selected below. Detailed idea discovery remains with Astra Max Oracle. Its next
-source-only question is whether the retained categorical actor supports a worthwhile population
-transfer/development comparison under an explicitly fair interface. Fixed input width alone does
-not establish count portability. No transfer study, S2 acquisition or fifth DM is selected.
+The independently recommended N8 approximation and static-count development studies are now
+selected, with complete source/cost responses and existing DMs. The latter requires a revised,
+fairly shared count interface: the frozen N5 package is not count-portable. Root accepts the
+substantial engineering bills because the two studies test distinct uses of demonstrated
+capabilities against competent ordinary alternatives. Detailed innovation remains with Astra Max
+Oracle; no transfer-only prerequisite, S2 acquisition or fifth DM is selected.
 
 **Actual compute placement.** The configured local_linux and wsl_4070 are distinct physical
-Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). The accepted parent B05 worker and
-full reader reached terminal verified completion at 20:06:39 UTC on September 30, releasing
-local_linux. Waiting retains its remote window through the accepted full reader’s terminal
-handle. The newly selected CAL/CONT and T/G2/A2 studies are untimed and single-compute-thread;
-they may use the released local node, including overlap only when fresh actual-node memory and
-occupancy permit. With the next real-deadline waiting comparison now conditionally selected,
-T/G2/A2 prospectively prefers local overlap and wsl_4070 remains the waiting producer/reader
-window; return a concrete admission conflict rather than disturbing an accepted process.
+Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). The real-deadline waiting M/S/U/K
+producer and full reader retain the remote window. Untimed T/G2/A2, parent B06 approximation
+and fleet B06 development use single-compute-thread execution and prospectively prefer
+local_linux while that window remains occupied. Overlap requires fresh actual-node memory and
+occupancy admission; return a concrete conflict rather than disturbing an accepted process.
 Reported concurrent timings are not uncontended hardware benchmarks. Preserve actual interpreter,
 node identity, source publication and admission; do not migrate accepted operations or create a
 new resource-management mechanism. Original real-deadline comparisons retain their accepted
@@ -2025,42 +2025,94 @@ exploratory. The full original independent answer, primary-source locators, DM r
 features, costs, seeds and L0 are in the [B06 notebook](https://github.com/CartmanFatass/My-paper-code/blob/5e6fed08e/docs/research/candidates/uav_parent_adaptation/NOTES.md#b06-selected-contract).
 MATERIAL_DISSENT: no. This does not reverse the earlier decision to buy T/G2/A2 or activate S2.
 
-**`uav_fleet_adaptation`: B05 fully read; retain S and end the exact CAL/CONT recipe.**
+<a id="fleet-count-development-root-decision-20260930"></a>
 <a id="inherited-native-development-root-decision-20260930"></a>
+**`uav_fleet_adaptation`: selected B06 static-count development.**
+Root read the complete separate-context Astra Max Oracle recommendation, the DM's source/cost
+assessment and its full response, then selected one finite development comparison. The question
+is whether acquiring teacher-imitation experience at different physical fleet sizes develops
+useful interpolation beyond inherited parameter reuse and ordinary further N5 imitation. It
+concerns fixed N within each episode, with held-out N4/N6 and N5 retention; it does not test
+member loss/rejoining or infer that learning is necessary for competent count-aware control.
+
 <a id="native-consequence-root-decision-20260930"></a>
-The complete four-fit comparison at source2e22a2cc and compact reading25fce29b3 used
-4448H256episodes/1138688native steps. CONT−S J is−.005135/−.005498 and
-CONT−same-data-CAL is−.005819/+.001451; all four conditional world intervals span zero.
-The heads improved the sampled objective and changed physical decisions, but neither supplies
-recurring complete native improvement or a default replacement. Preserve both original S,
-C/Q/paid-B*, all four heads and their positive/adverse evidence. S−Q still gives
-+.023534/+.027712J on these fresh panels, with better mean service/p10 and shorter paths;
-S and CAL nevertheless have zero-service ticks in L1 world29483104. The explicit correction
-57cacccc8 supersedes the erroneous no-zero-service sentence; original raw/reader facts were correct.
-No equivalence, common PPO cause, representation failure or general unlearnability follows.
+The retained capability and contrary evidence both matter. B05's unchanged S−Q gives
+J+.023534/+.027712, better mean service/p10 and shorter paths on two fresh lineage panels.
+Its CAL/CONT heads actively fit and change physical choices without recurring complete native
+improvement: CONT−S is−.005135/−.005498 and CONT−CAL−.005819/+.001451, with all intervals
+spanning zero. Preserve both original S, C/Q/paid-B*, all four heads and the explicit zero-service
+adverse in lineage1 world29483104. The independent B05 no-run disposition and measured cleanup
+remain accepted; the exact CAL/CONT recipe ends. Earlier Gaussian mixed-count B20 also reversed
+its development promise in all three fresh F/M training pairs. Different contracts are not pooled,
+and none supplies a common diagnosed failure cause or a universal prohibition on development.
 
-The original independent scientific review supports this no-run disposition with no material
-dissent. Actual enclosing worker/reader CPU is1620.467s, including149.629fit and175.887reader
-CPU-s; local overlap is recorded, not an uncontended benchmark. All unique required evidence
-remains canonical, and terminal snapshot/admin, redundant staged inputs, consumed request and
-caches are gone:1729019904allocated bytes reclaimed, no blocker. B04's stopped PPO recipe and
-all earlier acquisition/adverse costs remain separately preserved.
+Source inspection changes the proposed interface. Frozen controllers reject more than four
+visible peers and infer unseen interference using a hard-coded N5 completeness condition;
+collector shapes, factory and sampling addresses also fix five. The114-wide MLP alone is not
+count portability. New direction-local C_N/helper/Q_N receive the same reliable pre-mission N
+and use the correct visible-peer completeness condition. Original S weights with these helpers
+are **parameter reuse P_N under a revised interface**, not unchanged-package transfer outsideN5.
+Frozen sources and original assets remain immutable. Root directly checked the load-bearing
+controller/helper and114-wide network source; no new actor, controller or native query was made.
 
-Root now assigns the same DM and existing Oracle **source-only** feasibility and full costing
-of count-diverse teacher-imitation continuation, compared with unchanged parameter reuse and
-equal-cost further N5 imitation. Known count, corrected C/helper/Q behavior, actor initialization,
-held-out static counts and N5 retention require an explicit fair interface;114input width alone
-is not portability. Preserve Gaussian mixed-count and availability adverses. This bounded
-assessment keeps question ownership; no successor result study, code change, new actor/teacher/
-controller/model/native query, fit or pilot is selected. The Oracle owns detailed idea discovery
-and independent challenge; the DM supplies actual interface/accounting, with Root choosing the
-next cross-question investment. B05 needs no additional result, review or cleanup.
+For each retained lineage, fit **F on N5 and M on balanced N3/N7 episodes**, four fits total.
+Both use the original128 C-roll-in/64 greedy-student/64 greedy-student acquisition phases,
+row-uniform cross entropy, fresh Adam carried across phases,81920 labels/8000 updates per fit,
+and the fixed final endpoint. Add the same128 zero count weights before the first ReLU while
+preserving the inherited114-wide matrix operation. F's branch remains zero at N5; M can use
+count and newly exposed peer slots. Balanced M episodes give30%/70% label rows, so this is a
+complete acquisition-package comparison, not an isolated count-feature effect. Labels, updates,
+team steps and aggregate UAV steps match; actual CPU need not.
 
-[Full B05 result](candidates/uav_fleet_adaptation/NOTES.md#b05-complete-reading),
-[original independent review and DM disposition](candidates/uav_fleet_adaptation/NOTES.md#b05-independent-disposition),
-[explicit tail correction](candidates/uav_fleet_adaptation/NOTES.md#b05-zero-service-correction),
-[verified cleanup](candidates/uav_fleet_adaptation/NOTES.md#b05-final-cleanup),
-[retired complete selection and cost](archive/2026-09-30/RESEARCH-native-consequence-selected.md).
+Evaluate P/F/M for both lineages, ordinary C_N/Q_N, and already-paid B*0 at temperature2;
+B*1 is P1 by identity. Use32 fresh shared layouts and two fixed private innovation tapes for each
+stochastic program at N4/N5/N6. C/Q are shared only across identical within-N programs.
+Independent addressed50-user and seven-UAV arrays, taking the first N positions, fix actual
+exogenous matching; the native reset's N-dependent random-draw order cannot supply it by seed
+alone. The evaluator refreshes channels/observations and charges discarded resets and refreshes.
+Keep all-on radio,50 users,H256,four-tick holds,27 commands,capacity10,3dB eligibility and nativeJ.
+Different N changes interference and capacity; every policy comparison remains within N.
+
+The selected purchase is **4 fits/2656 H256 episodes/679936 native steps**, comprising1024
+acquisition and1632 evaluation episodes,327680 labels,32000 Adam updates and16384000
+presentations. One necessary initializer/collector fixture adds fiveH8 C_N trajectories:
+**40 native steps/200 UAV ticks**, zero fits or neural asset probes. The fixed complete reader
+checks every saved trajectory/metric/binding and430080 final neural rows, plus80 predeclared
+C/helper contexts; it does not replay all acquisition actors, teacher arithmetic or optimizers.
+Ceilings, source identities, original primary passages, addresses, initializer arithmetic and
+verification limits are fixed in the [complete B06 contract](https://github.com/CartmanFatass/My-paper-code/blob/2687e77336409f6524c4ad6038b6a778fe62a4b0/docs/research/candidates/uav_fleet_adaptation/NOTES.md#b06-count-development-design).
+
+Prospective cost is **15–30 worker CPU minutes plus10–30 reader minutes**, roughly1–3GB of
+unique evidence and sequential working RAM plausibly below1GiB, with fresh admission required.
+The **8–14 support hours** include implementation/review, complete interpretation, publication
+and cleanup. These source-derived estimates are uncertain; severe cache misses can exceed them.
+All original acquisition and failed-development costs remain incurred. Root accepts this bill
+for the new learning/use question over reserved S2 acquisition or an864-episode transfer-only
+prerequisite that would still pay much of the interface engineering. It does not displace N8
+amortization or authorize a new architecture, parameter search or extra fit after viewing scores.
+
+Primary M−F averages N4/N6 and the two inherited-lineage blocks equally, with tapes averaged
+within each of32 world clusters. Read every count/lineage result, M−P/B*, ordinary C/Q, N5
+retention, service and zero-service tails, quality, path and complete computation. A coherent
+increment supports conditional count development; F and M improving P without a coherent
+M increment favors ordinary continued imitation. Competitive P/B* favors reuse; fitting gains
+without native usefulness or consequential losses end this exact mixture while preserving any
+conditional positives. No endpoint, count or tape is retrospectively selected. The two inherited
+lineages do not establish training-population reliability or confirmation.
+
+Root accepts the Oracle's independent recommendation and DM response without material dissent.
+The original advice records searches of all three libraries and the July/external-review record;
+DAgger's primary Algorithm3.1 was also read directly by Root. Its acquisition principle does not
+guarantee this finite neural program's stochastic native outcome, and no novelty/invariance claim
+is supplied. The same DM owns implementation, independent engineering review, admitted execution,
+complete reader, independent result diagnosis, publication and measured cleanup; routine steps
+need no Root acknowledgment. The enduring learned-development question remains revisable.
+
+[Complete original Oracle answer](https://github.com/CartmanFatass/My-paper-code/blob/2687e77336409f6524c4ad6038b6a778fe62a4b0/docs/research/candidates/uav_fleet_adaptation/NOTES.md#count-generalization-original-independent-recommendation),
+[source-derived feasibility and cost](candidates/uav_fleet_adaptation/NOTES.md#count-generalization-source-feasibility),
+[full B05 result and independent disposition](candidates/uav_fleet_adaptation/NOTES.md#b05-independent-disposition),
+[B05 cleanup](candidates/uav_fleet_adaptation/NOTES.md#b05-final-cleanup),
+[retired B05 selection](archive/2026-09-30/RESEARCH-native-consequence-selected.md).
 
 **`uav_fleet_transmission`: selected B04 two-opportunity temporal comparison, T/G2/A2.**
 <a id="n8-continuation-root-decision-20260930"></a>
