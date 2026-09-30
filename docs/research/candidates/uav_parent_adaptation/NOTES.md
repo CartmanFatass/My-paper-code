@@ -6271,3 +6271,122 @@ deletion target or disk reduction arises from this assessment itself. B06's
 verified3469398016-byte cleanup remains the actual completed cleanup. Own
 RESEARCH standing stays reserve, with the costed candidate linked and no live
 result producer, unread advice or technical blocker.
+
+<a id="b07-selected-contract"></a>
+## 2026-09-30 — B07 selected: the fixed ranker allocates two exact continuations
+
+Root selected the complete bounded comparison after reading the preceding
+source assessment and the original B06 critic, now published in RESEARCH at
+ae3b5b3bb. This is the one active result-bearing study. The question is whether
+the unchanged learned ordering allocates a fixed continuation budget better
+than ordinary stationary ordering, conditional on the existing fitted artifact.
+It does not rescue B06's failed direct-L target or claim a new learning method.
+The original B06 critic's full recommendation and my accepted response above
+cover this exact policy-role selection; no duplicate selection review is needed.
+The current published topics3/4 and the N8 temporal result retain the effects
+recorded in the source assessment: competent exact planning, full charged cost,
+service/path tradeoffs and prediction/decision separation. The two-opportunity
+N8 estimand is outside this fixed sole-t40 comparison. No new novelty claim is
+made. Material contradictions return to Root; routine in-scope work proceeds.
+
+**Frozen panel, before generating geometry or evaluating any shortlist.** Use
+world IDs29367000–29367015, each with seed address
+`[260930,67,world_id,stream,*suffix]`, NumPy SeedSequence generating one uint32.
+Streams1/2 generate users/fleet through the inherited RandomState draw order;
+stream3 with suffix8 is the common runtime seed for all four arms. Bind all
+initial arrays in a committed `worlds.json`. These IDs and bootstrap29367991
+were checked against current relevant notebooks and source/config/world files
+without a match. Ascending worlds each run cyclic R/T_E/K2_E/L2_E order beginning
+at world-index mod4. No geometry screening, exposed B06-world shortlist probe,
+new feature, calibration, threshold, training label, fit or update is permitted.
+There are exactly64 complete H500 episodes/32000native steps, N8/50users,
+capacity10/min-SINR0, cadence10 and the unchanged sole t40 opportunity.
+
+**Policy and counterfactual exposure.** Preserve all B06 executable files and
+the immutable ranker SHA256
+`a2b5d1a8c127c50494e8b8aa76ff84ba3ca61e4b5db6281e4713e524ea2fd0c1`.
+L2_E builds its own unchanged stationary bank and uses the original12 features,
+scaler/13 coefficients and score arithmetic. It ranks all available member
+champions by predicted advantage, then stationary served score, shorter path,
+shorter duration, lower member/site. Retain exactly min(2,m), including when
+every predicted advantage is negative, plus stay. A synthetic all-zero-beta
+fixture uses the exact ordinary stationary ordering, reproducing K2_E's menu;
+the actual fitted artifact is never changed. K2_E pays the identical number of
+branches, selecting its top2 by its original stationary order. Every arm pays
+its own bank; both shortlist arms evaluate each branch independently through
+the retained exact recurrence evaluator. Use the existing full-return rank
+and initiate only for strictly greater modeled J than stay. No added R option,
+third branch, adaptive allocation or cross-arm cache. Native commitment, report,
+motion, mask and continuation semantics remain fixed.
+
+**Fixed reading.** Primary contrast is L2_E−K2_E native J. Also read L2_E−R,
+L2_E−T_E, T_E−R, K2_E−R and T_E−K2_E, with the original complete service,
+path, quality, height, all-user service tails and selection/controller/complete
+CPU and wall metrics. Use paired-world percentile bootstrap,10000replicates,
+seed29367991, the same resampled world indices for all contrasts/metrics.
+Prospective suffix diagnostics are mean served, p05, minimum, zero-service
+steps and longest zero-service run over the460 post-action outcomes from
+actions t40–499: `connections[41:]`, not the pre-action t40 snapshot. The
+whole-episode metrics retain `connections[1:]`. Report physical choices,
+initiations, branch/model costs and losses, and all original raw identity,
+prefix and model/native comparisons. Equal branch counts do not imply equal
+CPU. The old75%-retention/half-T_E-cost criterion is not applied here; there is
+no newly invented adoption threshold or automatic confirmation/extension.
+
+Prediction remains modest: a positive average L2_E−K2_E J at similar measured
+cost would support conditional learned allocation; no useful increment favors
+ordinary top2, and little remaining T_E saving weakens shortlist value. B06's
+world-mean-dominated error reduction,17%centered improvement and single-world
+gain concentration are active adverse evidence. A negative result ends this
+fixed-artifact ranking purchase; a positive retains a capability and its limits,
+without selecting refitting, larger archives, features or another panel.
+
+**Cost and boundary.** New fits/updates/training acquisition are0/0/0. Worker
+ceiling224model branches/103040logical model ticks/37972448state-mask requests,
+plus44800stationary rows/1792000separate transit ticks; full independent
+uncompressed reader has the same ceilings,0new native transitions/fits. The
+earlier source assessment supplies the full arithmetic and historical bill.
+Prospective combined worker/reader0.5–0.9CPUh, retained evidence0.10–0.20GB,
+RSS0.40–0.75GiB, one disposable source snapshot1.7–2.0GB, incremental support
+3.5–6hours are estimates, not hard stops or actual measurements. Use configured
+wsl_4070 first, with fresh actual-node admission including the count-development
+producer if still live; local fallback needs a concrete remote limitation.
+Publish all exact inputs first. Keep the native DM active through the accepted
+worker and full reader on the same handle, then independently diagnose the
+complete result, publish own standing/useful shared judgment and measured
+cleanup. No interim completion, extra fit or unselected track follows.
+
+<a id="b07-l0"></a>
+### B07 L0 — versioned shortlist, collector and independent reader
+
+Deliver a runnable single fixed evaluation entry under
+`experiments/candidates/uav_parent_adaptation/b07_shortlist_amortization/`,
+focused matching tests, and `runs/uav_parent_adaptation/b07_shortlist_amortization_a01/`.
+Reuse frozen B06 learning/cycle/fit-validation and earlier native/physics helpers
+by import; do not edit their bound files or any other direction. New versioned
+host, source contract, admission entry, controller, collector and full reader
+bind the fresh arrays, unchanged fit and complete inherited source identities.
+Admission precedes environment/artifact/scientific effects. The full reader
+reconstructs every native snapshot/action/reward, bank, scalar feature/score,
+ordered shortlist and model branch independently; it replays every model branch
+uncompressed and audits all recurrence certificates and ordered totals. Retain
+worker/reader work counters separately, all arrays/traces and readable metrics.
+
+One bounded Implementer may own only the new `controller.py` and
+`tests/.../b07_shortlist_amortization/test_controller.py`, with no index, notebook,
+run, launch or child ownership. Its entry is `make_program(arm, fitted=None,
+reference=False)`, returning the existing R/T_E/K2_E interface unchanged and
+the new L2_E program with matching `select`, `controller`, `plan`, `selection`,
+`selection_timing`, and `take_artifacts` behavior. The DM owns all remaining
+new paths and accepts the returned diff/checks. Both work on shared main with
+disjoint file ownership and preserve concurrent edits.
+
+Focused synthetic checks cover all-negative scores, ties, zero-beta/menu parity,
+zero/one champion, exact final stay ties, lawful selection/commitment mapping,
+fresh RNG/source binding, scalar-reader corruption detection, suffix indexing
+and complete exposure ceilings. No new native correctness fixture or paid B06
+branch is selected. Independent high-risk engineering review covers numerical,
+RNG, lineage, reader and remote entry behavior before execution. Stop for a
+material scope contradiction; preserve technical failures and accepted work,
+and reconcile the same operation before any repair. This is implementation of
+the fixed comparison, not authorization to search for a better result.
