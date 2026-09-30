@@ -1980,10 +1980,10 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 **Four native DMs continue substantive work across static-count development, local service
 allocation, planner amortization and ordinary stochastic control.** `dm_fleet_adaptation` owns
 the admitted four-fit count-development study through complete reading. Root now selects the
-M/S/U saved-trajectory allocator comparison for `dm_user_waiting`. The completed parent B06 DM
-prices a learned-top2 shortlist against ordinary top2; the completed N8 DM checks existing
-coverage, interfaces and cost for a possible competent score-aware stochastic comparator.
-Those last two assignments are source-only, with no successor result purchase selected.
+M/S/U saved-trajectory allocator comparison for `dm_user_waiting`, and the fixed learned-top2
+computation-allocation comparison for `dm_parent_adaptation`. The completed N8 DM checks
+existing coverage, interfaces and cost for a possible competent score-aware stochastic
+comparator; that assignment remains source-only with no successor result purchase selected.
 The existing leads retain question continuity; Oracle/helpers are not DMs and four substantive
 assignments do not imply four admitted workers. Forecast and service-age remain reserve.
 
@@ -2066,15 +2066,61 @@ retained:58420logical model ticks became8599computed ticks across127branches.
 Measured entry cost is1529.662CPU seconds including the fit; the original1222.448CPU-second
 acquisition remains paid history. Required raw/summary has one verified canonical copy;
 cleanup reclaimed3469398016net allocated bytes. No live producer, unread result or cleanup
-blocker remains. The same DM now prices the original critic's concrete learned-top2 shortlist
-use against ordinary K2_E at equal branch resources, retaining the unchanged fitted artifact
-and R/T_E references. That source-only comparison is not yet selected; no new labels, fit,
-model/native probe or panel follows from this result.
+blocker remains. Root has read the complete original critic and the DM's source assessment,
+and selects the concrete learned-top2 use below after considering stopping and its limited
+expected savings. This is a different allocation-of-computation question, not a refit or
+rescue of the direct ranker's failed target.
 
 [Complete result](candidates/uav_parent_adaptation/NOTES.md#b06-complete-reading),
 [full independent diagnosis and response](candidates/uav_parent_adaptation/NOTES.md#b06-independent-disposition),
 [measured cleanup](candidates/uav_parent_adaptation/NOTES.md#b06-final-cleanup),
 [retired complete selected plan](archive/2026-09-30/RESEARCH-parent-amortization-selected.md).
+
+<a id="parent-learned-shortlist-root-decision-20260930"></a>
+**Selected successor: use the fixed learned ordering to allocate two exact continuations.**
+The original independent B06 critic proposed this exact policy-role change; Root reuses that
+complete review and the DM's source/cost response at6ce64d58d. At the same lawful t40 report,
+L2_E builds the unchanged bank and ranks all member champions using the immutable B06
+artifact/features/ties. It retains min(2,m)champions plus stay, including negative predicted
+champions. Ordinary K2_E retains the same number by stationary rank. Both then apply the
+same exact-recurrence continuation and full-return tie order, initiating only above stay.
+No extra R candidate, adaptive third branch, new feature, calibration or training label is
+introduced. Each arm pays its own bank, feature/selection work and continuations.
+
+Compare R/T_E/K2_E/L2_E on16fresh common H500worlds:64episodes/32000native steps,
+zero new fits/optimizer updates/training labels. The DM freezes new world/RNG addresses and
+cyclic arm order before execution, without exposed-world shortlist probes. Preserve B06 source,
+fit and records; new direction-owned adapters handle arms, admission, outputs and the full
+reader. No repeat of the consumed B06 paid correctness branches or extra native fixture is
+selected; focused synthetic checks and the retained verified numerical routines are available.
+
+Primary L2_E−K2_E native J asks whether learned ordering allocates the same branch resource
+more usefully. Read every service/quality/path/height/tail consequence, actual physical choices,
+and selection/controller/complete cost, with R/T_E contrasts. Prospectively retain t40+ suffix
+metrics because shared-prefix minima can hide later effects. Equal branch count is not equal
+CPU: path duration, recurrence and neural feature work remain charged. The direct-L75%/half-
+CPU target is not this study's criterion. Favorable conditional value at similar actual cost
+supports the shortlist use; no useful increment favors ordinary K2_E. Little remaining saving
+against T_E weakens practical value. One fixed artifact/16worlds is exploratory, not replication
+of learning, and no observed branch selects more data, features or fits automatically.
+
+Complete worker ceiling is224branches/103040logical model ticks/37972448requests, plus
+1792000stationary transit ticks. The full reader independently reconstructs native inputs and
+banks, derives all features/top2 choices, and replays every executed model branch uncompressed
+with the same request ceiling and ordered accumulation/reuse checks. New evaluation planning
+is charged and barred from training. Anchored to B06 measured work, prospective worker+reader
+cost is0.5–0.9CPUh; recurrence-free sensitivity is included, not a hard runtime cap. Expected
+new canonical evidence is0.10–0.20GB, process RSS0.40–0.75GiB and one disposable source
+snapshot about1.7–2.0GB. Incremental engineering/review/reading/publication costs3.5–6active
+hours. Broader support remains honestly metered where available, not inferred from estimates.
+
+Root accepts that bill for a distinct constructive use of retained learning and exact planning.
+Expectations remain modest: most B06 MSE improvement could not change within-world ranks,
+and the native gain concentrated in one world. Expected L2_E cost near K2_E leaves materially
+smaller savings against T_E than direct L; that is part of this test. Detailed source bindings,
+forecast formulas and the strongest stopping case are in the [complete DM assessment](candidates/uav_parent_adaptation/NOTES.md#post-b06-shortlist-source-assessment).
+No extra selection review, S2 study or timing extension is implied. DM owns exact input
+publication, fresh remote-first node admission, full reading/independent diagnosis and closure.
 
 <a id="fleet-count-development-root-decision-20260930"></a>
 <a id="inherited-native-development-root-decision-20260930"></a>
@@ -2616,7 +2662,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | --- | --- | --- | --- |
 | DM: inherited-policy native development | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f4-bfe5-7ca0-8b1e-4945c185f49a. B01–B05 fully read/published/cleaned; original S assets immutable. Same DM now owns selected B06 static-count development through implementation, one admitted producer/reader, independent interpretation, publication and cleanup. Four fits/2,656H256 episodes plus the declared40-step native correctness fixture; wsl_4070 CPU/one thread prospectively after the remote real-deadline chain completed, subject to fresh actual-node admission. Frozen B02–B05 and other accepted operations remain unchanged. Root retains cross-question choice. [Fixed B06 scope](candidates/uav_fleet_adaptation/NOTES.md#b06-count-development-design), [L0](candidates/uav_fleet_adaptation/NOTES.md#b06-count-development-l0), [B05 cleanup](candidates/uav_fleet_adaptation/NOTES.md#b05-final-cleanup). |
 | DM: individual-user waiting | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_user_waiting` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f1f5-8634-7e13-b931-e75abdb10d45. B01–B04 complete/read/independently diagnosed/published/cleaned; retain M, costed U, cheaper S and K mixed evidence. Same DM now owns Root-selected immutable M/S/U allocation replay under explicit richer local rights: original/RR/local-LRS,384new allocation outcomes,0new native/model/C calls or fits. Owns prospective contract, implementation/review, admitted replay/full reader, independent interpretation and publication/cleanup. B04 timed window remains released; new execution needs fresh resource admission. [B04 disposition](candidates/uav_user_waiting/NOTES.md#b04-independent-review-and-disposition), [source price](candidates/uav_user_waiting/NOTES.md#post-b04-source-assessment), [selected question](#waiting-local-allocation-root-decision-20260930). |
-| DM: UAV control development and amortization | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. B01–B06 complete/read/independently diagnosed/published/cleaned. B06 result92d8c7ae4 retains ordinary exact planning, recurrence reuse and conditional L; direct retention target failed. Cleanup reclaimed3469398016net allocated bytes with one canonical evidence copy, no live producer or cleanup blocker. Same DM now owns source-only pricing of unchanged-asset learned-top2 against ordinary K2_E; no new fit, labels, queries or panel selected. Actual-S2 defer and fleet count/N8 ownership remain unchanged. [Complete B06](candidates/uav_parent_adaptation/NOTES.md#b06-complete-reading), [independent disposition](candidates/uav_parent_adaptation/NOTES.md#b06-independent-disposition), [cleanup](candidates/uav_parent_adaptation/NOTES.md#b06-final-cleanup), [current allocation](#root-successor-designs-20260930). |
+| DM: UAV control development and amortization | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_parent_adaptation` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn gpt-6-astra/max, native UUID01a0f192-56da-7d31-8bfc-a068c0ddde92. B01–B06 complete/read/independently diagnosed/published/cleaned. B06 result92d8c7ae4 retains ordinary exact planning, recurrence reuse and conditional L; direct retention target failed. Cleanup reclaimed3469398016net allocated bytes with one canonical evidence copy, no live producer or cleanup blocker. Same DM now owns Root-selected unchanged-asset L2_E versus ordinary K2_E with fresh R/T_E references:64H500episodes/32000native steps,0new fits/training labels, complete exact-reuse and uncompressed reader. New versioned source/contract, review, actual-node admission, full reading/publication/cleanup remain DM-owned. Actual-S2 defer and fleet count/N8 ownership remain unchanged. [Complete B06](candidates/uav_parent_adaptation/NOTES.md#b06-complete-reading), [independent disposition](candidates/uav_parent_adaptation/NOTES.md#b06-independent-disposition), [cleanup](candidates/uav_parent_adaptation/NOTES.md#b06-final-cleanup), [selected shortlist question](#parent-learned-shortlist-root-decision-20260930). |
 | DM: cumulative native service age | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_service_age` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; actual first turn verified gpt-6-astra/max, native UUID01a0f0a3-e515-7701-b805-6565d0cc4c07. Owns `uav_service_age` and matching paths. B01 one fit/source d4430e619 fully collected, verified, independently diagnosed and published; reserve, no live worker/reader/observer, unread advice or selected successor. Compact result0b358981a retains conditional W/M capability, own-initialization learning and primary/tail losses. Terminal cleanup reclaimed822185984allocated bytes, required unique evidence retained, no blocker. Returns this substantive boundary and proposed re-entry questions to Root; no automatic extra fit or new track. [Complete result](candidates/uav_service_age/NOTES.md#b01-complete-reading), [cleanup](candidates/uav_service_age/NOTES.md#b01-final-cleanup). |
 | DM: fixed correction deployment | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_correction_compression` | `/home/fires/hmasd-wsl` / `main` | Actual first turn verified gpt-6-astra/max; native UUID01a0ef78-6628-7593-b359-b608f0c80190. B01 fully read/independently diagnosed, reserve; scientific result e17f4fdf9. Cleanup complete: terminal source snapshot/registration, redundant staging, local bulk replicas/scratch/caches removed;874639360allocated bytes reclaimed. Required evidence/assets intact; no live operation, unread review or remaining cleanup dependency. [Result](candidates/uav_correction_compression/NOTES.md#b01-complete-reading), [final cleanup](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup). |
 | Completed DM: registered-user B01 | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | Completed B01 and full cleanup, result01e1b6e85/closureb7216efb9; no live worker, unread result or cleanup blocker. Sole direction ownership now passes to the new periodic-efficiency DM below; this old session is not restored. [Complete inheritance](candidates/uav_registered_service/NOTES.md#b01-investment-decision). |
