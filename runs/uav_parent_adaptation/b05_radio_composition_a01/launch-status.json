@@ -1,0 +1,11 @@
+{
+  "claim_key": "cef85978049ccd07b2785f993337a2b25a688177b87d13066a74266794b9131a",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/cef85978049ccd07b2785f993337a2b25a688177b87d13066a74266794b9131a.json",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b05_radio_composition_a01/launch-manifest.json",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/cef85978049ccd07b2785f993337a2b25a688177b87d13066a74266794b9131a.json",
+  "pid": 1171151,
+  "runner_pid": 1171152,
+  "schema_version": 1,
+  "status": "accepted",
+  "updated_at": "2026-09-30T19:34:53.246168Z"
+}

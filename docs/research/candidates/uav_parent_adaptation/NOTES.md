@@ -4001,3 +4001,28 @@ inspection performed0forwards/0fits and took0.004090CPU-s after imports; transfe
 and imports are separate support cost. Worker and reader repeat the bound identity
 checks before their own use. The staging copy is disposable after worker, reader
 and evidence consumers finish; the original canonical checkpoint remains required.
+
+<a id="b05-accepted-execution"></a>
+### B05 accepted execution, 2026-09-30
+
+Exact source inputs were committed and published at
+`b0731ce69a4f15bc840f560cb1356a1b48a61f7b`. The single operation was accepted
+on configured `local_linux` at19:34:53.235125UTC; its source snapshot, full argv,
+canonical output, native identities and status handle are bound by the
+[launch manifest](../../../../runs/uav_parent_adaptation/b05_radio_composition_a01/launch-manifest.json).
+[Fresh actual-node admission](../../../../runs/uav_parent_adaptation/b05_radio_composition_a01/admission-preflight.json)
+passed with7,126,876,160 effective available bytes against the4GiB floor. The
+prelaunch occupancy inspection found no remaining fleet/N8 scientific worker;
+757,580,308,480 disk bytes were available. This is the selected all-arm local
+execution context, not a claim of isolated or cross-node equivalent timing.
+
+The operation includes the entire collector and separately metered bounded
+reader. Initial saved progress showed15 complete episodes with no error; this is
+runtime progress, not a scientific reading. The deterministic observer adopted
+both manifest-bound running identities at19:36:11UTC with0 observation errors,
+generation14, job`launch-uav-parent-b05-radio-composition`. Its owned request is
+`temp/directions/uav_parent_adaptation/b05-wait-request.json`. Initial arm correctly
+refused the prior, stopped observer state; that completed state was drained and
+rearmed before adding this new job. No old result job was resumed and the accepted
+B05 worker was neither repeated nor moved. The native child remains active through
+terminal collection/full reading; checkpoint rearming retains this same handle.
