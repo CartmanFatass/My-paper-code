@@ -4439,3 +4439,480 @@ There are no remaining disposable targets or concrete cleanup blockers.
 
 Final measured **net reclaimed:1714204672 bytes**:1714212864 removed minus
 4096 for the new cleanup record and4096 for notebook allocation growth.
+
+<a id="s2-development-source-design"></a>
+## 2026-09-30 — Source-only design: developing proposals inside fixed S2
+
+Root accepted B05's unchanged-recipe closure and assigned one bounded design
+task: develop and price the critic's constructive actual-S2 learning candidate,
+then return a distinct proposal or reasoned stop. This is **source-only** work,
+not a selected successor, fit declaration, pilot or launch. The direction stays
+reserve under the same lead. No result code, actor/helper/radio/native query,
+new trajectory reduction or fit is made by this entry. Root's existing
+`/root/oracle_next_capability` owns the independent source/literature challenge
+and a separate possible paid-trace continuity reading; neither task authorizes
+the other's execution. Prospective quantities below are arithmetic/design bounds.
+
+### What this purchase could teach, and what is already known
+
+The consequential question is whether experience with a competent fixed
+coordinator can develop useful local proposals beyond both unchanged inheritance
+and equally data-supplied ordinary calibration. The intended contribution is
+conditional empirical understanding/use of an acquired policy. No new learning
+theorem, masking diagnosis or representation failure is asserted.
+
+Current published main was refreshed at `2954b6617a7c07f087b71beb7b7d6b11d48b3f4a`.
+[Topic 2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练)
+requires retaining C_S2 and the stronger measured C_T2 alternative;
+[topic 4](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面)
+preserves S's all-on capability together with its adverse managed comparison;
+[topic 8](../../RESEARCH.md#structural-research-background) separates the
+information, policy-class and finite-learning questions. These change this
+design: keep the original local information, compare contextual fitting with
+same-data global fitting, and include transfer of the already-selected all-on
+heads before claiming that S2-conditioned acquisition adds value.
+
+The original [B05 reading](#b05-complete-reading) and
+[independent disposition](#b05-independent-disposition) remain binding evidence:
+S_S2−C_S2 J−.00449742, interval[−.01034881,+.00135396]; S_S2−Q_S2
++.00497472[+.00003469,+.00991474]; S_S2−C_T2−.01031097 with lower service.
+All22528 managed rounds met their actual deadlines. Managed S improved over
+its own all-on program, but ordinary management gained more. Its shorter
+travel is useful conditional evidence, not a physical utility or general
+service preference. B01–B03 learning adversity, the failed B04 static coupling
+and the fleet's two failed full-actor PPO continuations are preserved. They
+weaken automatic retraining investment without identifying a common cause.
+
+The constructive **conjecture** is that a local proposal's complete value
+under actual S2 can differ from its immediate all-on value, and a bounded
+contextual update can use those differences better than global calibration.
+The stronger competing explanation is that competent ordinary management has
+already absorbed most useful variation accessible to this inherited proposal
+class; generic all-on development or global calibration may suffice. A smaller
+managed advantage does not identify which explanation is true. There is no
+claim that silence is a new numeric input, that masked training must help,
+or that the114-feature representation is sufficient or insufficient.
+
+### The actual learning action and information boundary
+
+The load-bearing implementation is published B05 source `b0731ce69`:
+`b05_radio_composition/policies.py:LocalTeam.decide`,
+`collection.py:collect_episode`, the original
+`uav_fleet_adaptation/b02/{policies,controllers,model}.py`, and
+`uav_radio_activation/b03/{protocol,scheduler}.py`. Reading these sources
+establishes the following facts without a production query.
+
+The local policy receives103 lawful observation entries, ten navigation
+one-hot entries and the analytic fallback bit. The original114→128→128→27
+student and navigation/helper semantics remain. It produces one of27 proposals
+every four ticks. Five local distributions are completed before their current
+private I innovations are supplied. Masked observations are the actual native
+ones, including empty silent rows. The actor receives no registered map,
+other members' proposals, current mask, delivered command, tick/rotation label,
+pending command, world id, future observation or reward label as an added input.
+
+The fixed S2 process receives the existing rounded400-byte map, five24-byte
+reports of own position/actual command/proposal, and current issued mask. It
+uses its original two sequential search orders, tie order, rotating member,
+136-byte round, two-tick delivery, four-tick commitment and1.456s real compute
+deadline including the local queries. At t=0 proposals also execute for the
+startup two ticks. Later proposals await delivery. At delivery the coordinator
+may replace one rotating member's command; the other four proposals and chosen
+mask execute together. The terminal planned block has two native ticks.
+On a late result the existing actual commands/mask persist. No mask, clock,
+search, map, link or override right is changed for learning or comparison.
+
+Thus the learner's action is the **proposal before S2**, not the command after
+S2. An intervention must be inserted before report formation and search.
+Clamping the delivered command would bypass the very decision coupling under
+study. A rotating member's proposal can affect the sequential search path/ties
+even when its final motion is replaced. Keep all320 member/report addresses,
+all27 categories, equal draws, aliases, overridden proposals and zero labels.
+The actor does not acquire a role/mask feature merely because the trainer can
+record one. The unknown ability to use existing local features is part of the
+finite experiment, not a prerequisite mechanism screen.
+
+### A concrete finite comparison, conditional on later selection
+
+Use only the original B02 S asset already evaluated in parent B04/B05, rather
+than selecting another lineage from scores. Its canonical checkpoint remains
+`wsl_4070:/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt`,
+SHA256 `b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`.
+No overwrite or new acquisition of this asset is proposed. One inherited
+lineage and one dataset give an exploratory finite-development result.
+
+Acquire1024 new paired worlds under unchanged S+S2. Both branches really run
+all256 ticks, including the common-prefix work:2048 episodes/524288 steps.
+Each pair changes one addressed member/report proposal. Use a fixed permutation
+of320 addresses repeated three times plus its first64, with address weight
+`1024/(320*n_d)`, n_d=3 or4. Normal S requests/draws for all five members are
+retained, then the addressed proposal is replaced by an independently addressed
+draw from μ=.5S+.5Uniform(27). The two intervention streams are independent;
+normal future private tapes are paired, while observations, navigation, caches,
+S2 decisions and future proposals follow each branch's actual history. No
+original future commands or masks are copied onto a divergent branch.
+
+The native label is ΔJ=J_a−J_b, where J is the complete256-step mean of
+`.7*served/50+.3*quality`. All labels, including zero and adverse ones, remain.
+A real timed prefix may differ between the two complete runs despite the
+same world/tape; the old no-miss result is not a future timing guarantee.
+Retain both actual intervention contexts x_a/x_b and their μ probabilities.
+Use
+
+`Fθ = ΔJ/2 * [πθ(a|x_a)/μ(a|x_a) − πθ(b|x_b)/μ(b|x_b)]`.
+
+Conditional on the two prefixes and an exogenous continuation tape, each
+importance ratio has expectation1. The expectation of F is the average of
+the two policy-weighted fixed-continuation values minus their μ values. This
+remains true for different contexts; identical contexts permit exact reuse,
+not an assumption or a reason to discard a pair. With uniformly weighted
+addresses, its derivative at unchanged S corresponds to the320-address
+first-order proposal-policy gradient under a fixed execution kernel. No
+additional factor256 or4 is inserted. This is a nominal-categorical algebraic
+bridge, not exact differentiation of finite53-bit draws, hardware elapsed
+time, optimizer behavior or fleet-wide finite deployment.
+
+Use the already-selected fleet B05 head family and objective so the comparison
+concerns where native development is learned, rather than an extra architecture
+sweep. Freeze the original backbone and cache its128-vector and27 logits.
+CAL_S2 has28 global parameters, `zS+.5*tanh(alpha*(zS-mean(zS))+b)`;
+CONT_S2 has3483 parameters, `zS+.5*tanh(W*hS+b)`. Both start at zero. CAL
+is contained in CONT's function class; finite optimizers are not equivalent
+and this is no pure capacity-causality test. The ordinary same-data comparator
+can soften/sharpen logits and shift categories, not just choose a temperature
+on a separate cheaper panel.
+
+Each head receives the same1024 pairs, up to2048 actual contexts, and2048 Adam
+updates, batch128 pairs with replacement, lr.001, β(.9,.999), eps1e−8, no
+weight decay or extra clipping/normalization/schedule. The weighted loss is
+`mean_batch w*(-Fθ+.005*(KL_a+KL_b))` with denominator128, using
+KL(πθ||S). A same-context pair reduces to the fleet's .01 KL contract.
+One-row FP32 head arithmetic and FP64 density/label/loss arithmetic match
+deployment; original-backbone forwards are not repeated during fitting.
+There are **2 fits/4096 updates/524288 pair presentations**, at most1048576
+head-row presentations. Final endpoints only; no tuning, best-checkpoint
+selection, resampling of zero labels, automatic extension or retry.
+
+On32 fresh common final worlds, run C_S2 and C_T2 once each, and two private
+I tapes each for Q_S2, unchanged S_S2, CAL_S2, CONT_S2, CAL_all→S2,
+CONT_all→S2 and the already-paid L0 B*=S_T2 transferred under S2. The two
+all-on heads are the fixed L0 endpoints from the already-selected
+[all-on CAL/CONT study](../uav_fleet_adaptation/NOTES.md#b05-native-consequence-design),
+with no new fit or endpoint selection here. B* remains the original fleet
+B04's eight-candidate all-on calibration choice, not a fresh S2 temperature
+search. Its uncertain service/path tradeoff is retained; a bounded±.5 head
+does not span every temperature2 policy, so omitting this available ordinary
+calibration would weaken a broader development claim. All seven stochastic programs use
+the same B05 I deployment decoder under S2. Transfer denotes frozen parameters
+in this common managed interface, not bitwise identity with that producer's
+all-on inverse-CDF trajectory. Their actual source/tensor identities must be
+available and read before any such future launch; never duplicate that producer.
+If they are unavailable, removing them weakens the question and requires an
+explicit design revision rather than silently calling the panel matched.
+
+This gives512 final episodes/131072 steps, and **2560 complete episodes/
+655360 native steps** including acquisition. The Oracle's paid-B* challenge
+adds64 final episodes to the initial2496-episode source sketch; nothing had
+been selected or executed at that revision. CONT_S2−CAL_S2 tests contextual
+use beyond global fitting; CONT_S2−unchanged S tests development; CONT_S2−C_S2
+and−C_T2 test complete use against retained ordinary competence. Each learned
+endpoint is also compared with fixed B*+S2. The two
+matched-head transfer contrasts, CAL_S2−CAL_all→S2 and CONT_S2−CONT_all→S2,
+test this finite value of S2-conditioned acquisition. Different native histories
+and datasets remain bundled; neither contrast isolates a masking mechanism.
+Q retains the explicit ordinary randomization comparison. C_E remains a useful
+historical low-path/low-CPU alternative; this panel buys no claim of universal
+motion/resource dominance over it or every ordinary planner.
+
+Read J, service/quality, within-episode p10/minimum/team-zero service, travel,
+transmitter exposure, traffic, CPU/wall/deadlines and every adverse world/tape.
+Average the two tapes within a world before paired descriptive intervals.
+Do not pool worlds as independent training seeds or invent an adoption margin.
+Save proposal distributions, baseline S same-row proposals, actual delivered
+commands/masks, override/alias counts and physical trajectories. Original S
+same-row probabilities use the already-computed backbone; no additional S2
+shadow search or native suffix is bought. A changed proposal is distinct from
+a changed executed action, and neither alone establishes useful team value.
+
+### Complete prospective cost and verification scope
+
+| Purchase | Source-derived quantity or explicit ceiling |
+|---|---:|
+| Acquisition / final native episodes |2048 /512|
+| Acquisition / final native transitions |524288 /131072|
+| Total explicit resets / constructor reset |2560 /1|
+| New fits / Adam updates |2 /4096|
+| Unique paired labels / stored intervention contexts |1024 /up to2048|
+| Cached pair / head-row presentations |524288 /up to1048576|
+| All local policy requests |819200|
+| Student/helper/backbone requests before lawful cache |778240|
+| C/Q full-ranking requests before cache |40960|
+| C candidate paths / modeled ticks |1105920 /4423680|
+| S2 / T2 episodes |2528 /32|
+| S2 candidate requests / unique plans ceiling |18767872 /18120704|
+| S2 / T2 mask-state reductions ceiling |71916544 /6803136|
+| T2 candidate requests |1714176|
+| Coordinator scored geometry matrices / user-power links |17556480 /4389120000|
+| Coordinator rounds / recurring bytes ceiling |163840 /22282240|
+| Provisioned map bytes, with shared map identities retained |1024000|
+| Reader native/report/terminal formula states |821760|
+| Reader at-most-five paid joint pairs' state reductions |3251200|
+| Reader intervention/final original-backbone rows |up to2048 /122880|
+| Reader final fitted-head applications |81920|
+| Reader fixed B* temperature transformations |20480|
+| Reader native transitions / full-C rankings / optimizer steps |0 /0 /0|
+
+The helper ceiling is140 user-power links per Student request (100 setup,
+40 extremes), hence108953600 before cache. C adds at most88473600 candidate
+links and4096000 setup links. Native transitions, mask refreshes and explicit/
+constructor resets are separately charged; their250-link full-team ceiling
+is205440250. These are operation scopes, not disjoint statistical samples.
+Private normal draws and the two intervention streams are saved/addressed;
+repeated cached rows do not become new labels. Map/link/flight energy, real
+device acquisition and physical switching costs remain unmodeled, not zero.
+
+The reader covers every complete/incomplete trajectory and every declared
+comparison: hashes and immutable source/assets; world/tape/intervention
+identities; actual prefix agreements or divergences; arrivals/commitments,
+masked observations, native metric/assignment algebra and full per-world
+outcomes. Every final Student decision and both actual intervention contexts
+receive original-backbone/helper replay, up to124928 rows. Other acquisition
+decisions receive saved feature/logit/density/innovation and provenance checks,
+not another forward. All paid candidate arrays and search/tie arithmetic are
+checked, with independent radio recomputation limited to B05's fixed at-most-
+five actually-scored pairs per round. The full physical kernel and optimizer
+are not independently replayed. This is complete result reading with explicit
+bounded numerical verification, not exhaustive duplicate computation. Preserve
+all partial work if a reader fails; a failure does not buy a rerun.
+
+B05's measured mean episode CPU gives the transparent point extrapolation
+`2432*3.011403 +64*3.177318 +32*3.037700 +32*26.434159 =8470.179936s`
+(141.17min), before new fitting/extra serialization. This extrapolates inherited
+S across changed heads/visited histories; it is not a timing measurement or
+actual-node admission. Plan **2–4 worker CPU hours**, including roughly2–15
+fit minutes with one-row autograd, and **15–45 reader CPU minutes**. The
+unchanged S2 search dominates the purchase. Use one compute thread and actual
+wall/peak-memory reporting; shared load and deadline behavior are not portable.
+Expected durable raw is about1–3GB and streaming peak RAM below2GB, both
+planning estimates. A selected operation would need fresh configured-node
+admission and a prospectively fixed failure/envelope policy.
+
+Implementation, synthetic checks and independent engineering review are
+estimated4–7 elapsed person-hours; scientific full reading, independent
+diagnosis and publication add1–2hours: **5–9 support hours**, unmetered now.
+Reusable components are the committed B05 collector/reader and, once published,
+the other DM's fixed head fitter. New risk is correct pre-S2 intervention,
+paired context/probability identity, timing/fallback preservation, source/asset
+binding, counter accounting and complete reading. Source-only design creates
+no executable variant, run folder, observer, production scratch or disposable
+data. Only this notebook changes; no engineering review is required for prose.
+
+The added bill sits atop this direction's18 fits/2891776 native steps/
+5744.062714 measured CPU-s, while original S acquisition and ordinary-radio
+studies keep their separate, overlapping histories. Fleet's selected all-on
+purchase is four fits/4448 episodes/1138688 steps plus its declared reader;
+its transferred heads are reused, not counted as two new acquisitions here.
+
+### Primary-source bridge and present investment question
+
+I read [Sutton et al. 1999 §1, pp1058–1059](https://proceedings.neurips.cc/paper/1999/file/464d828b85b0bed98e80ade0a5c43b0f-Paper.pdf):
+the policy derivative can be weighted by action values, with complete returns
+as sampled targets. Here the action is a proposal and its consequence includes
+fixed S2; no derivative through the discrete search is required by that
+score-function bridge. This is an inference for the augmented execution
+process, not the paper's empirical claim about this UAV system.
+
+[Foerster et al. 2018 §4, pp2976–2977](https://ojs.aaai.org/index.php/AAAI/article/download/11794/11653)
+holds other current actions fixed while varying one agent and distinguishes
+centralized training information from decentralized actor inputs. The mapping
+is one local proposal with other current proposals fixed, not forcing the
+coordinator's output. Our two full native continuations pay for consequences;
+we do not inherit COMA's learned-critic or convergence assumptions.
+
+[Ross and Bagnell 2014 §§2.2–2.4](https://arxiv.org/pdf/1406.5979) uses exploration
+followed by an expert to learn from cost-to-go, while its guarantee depends
+on interactive aggregation, approximation and regret terms. A single frozen-S
+dataset here lacks that guarantee. All members later deploying the fitted head
+changes their joint history distribution; sparse contexts, finite optimization
+and S2 overrides can erase or reverse the first-order opportunity.
+
+The B05 primary-source checks on Foundations B01, DeCOM/MARL-0007 and Decision
+Stacks remain useful scoped analogies, not necessity or novelty claims. The
+three library indexes were checked for relevant policy-gradient, counterfactual,
+residual and shielding antecedents; index coverage is not evidence of absence.
+The existing July/external-review and learned-counterfactual-credit adverse
+records retained in the fleet's independent source review remain contrary
+background. Root's Oracle supplies the focused independent design challenge;
+no extra Pro round or second simultaneous critic is added by routine source work.
+
+This is materially different from the selected all-on study only if it answers
+the **managed conditional-use question**, including fixed transfer references.
+An S2-contextual gain beyond unchanged S, CAL_S2, transferred CONT and the
+ordinary references would support finite development under this coupled
+execution. A gain only over unchanged S is narrower; CAL success without a
+contextual increment favors ordinary calibration for this purchase. A gain
+without beating transferred all-on development does not establish a need to
+buy S2 acquisition. All outcomes retain path/tail/resource tradeoffs. Failure
+of these finite heads does not refute the broader learning question and grants
+no automatic representation change, full-actor retry or larger dataset.
+
+My current priority judgment is cautious: this is a feasible distinct package
+comparison, but its roughly2–4 worker CPU hours and5–9 support hours compete
+with learning from the already-selected all-on result and the other allocated
+questions. The latter may supply a useful managed proposal without this new
+acquisition. This is a reason to consider withholding the purchase, not a claim
+that matched S2 learning is impossible or that a positive toy/pilot is required.
+The independent recommendation and resolved design-only disposition follow.
+
+<a id="s2-development-independent-disposition"></a>
+### Independent source challenge, cheaper competing purchase and disposition
+
+Root's existing registered `hmasd-research-critic`,
+`/root/oracle_next_capability`, provided the focused scientific challenge in
+its separate context, originally created with `fork_turns=none`. This is a
+continuation of its disclosed earlier source/advice work, not blind discovery
+or a new audit of every B05 trajectory. The existing B05 result critic remains
+the original independent result diagnosis. I supplied the actual source
+interface, adverse B05 comparison, proposed learning comparison and full costs;
+the Oracle also read the original selected fleet contract. Its complete
+decision-bearing advice and subsequent corrections are preserved below.
+
+> Focused challenge and exact selected comparator scope: all-on CAL/CONT is
+> already accepted, not merely a design. Canonical contract is
+> docs/research/candidates/uav_fleet_adaptation/NOTES.md#b05-native-consequence-design
+> (lines3510–3740). Two immutable S lineages,1,024 paired worlds each;
+> μ=.5S+.5/27, uniformly weighted320(member,clock)addresses via3/4 repetitions;
+> paired complete-H256 returns with unchanged S continuation; CAL has28
+> parameters (α×centered original logits+27 biases), CONT3483 (27×128 frozen
+> hidden+27biases), both .5tanh bounded offsets. Identical −F+.01KL objective,
+> 2,048 Adam128 steps/head, final only. Four fits;4,448episodes/1,138,688steps;
+> C/Q/S/paid B*/CAL/CONT fresh32-world finals per lineage. L0 B*=S_T2, L1 B*=S.
+> Planning30–60 total worker+reader CPUmin and5–9h support. Full original
+> algebra/assumptions are retained just above at lines3321–3508; it is finite
+> shared-policy development, not a policy-improvement guarantee.
+>
+> Your S2 version is a scientifically distinct deployment mapping: a proposal
+> can affect the coordinator's mask/search even when its own delivered command
+> is overridden, and the actor cannot condition on private coordinator state.
+> Thus count actual coordinator/mask/delivered changes as well as nominal
+> category aliases; do not drop override or zero-effect labels. Fixed S2 changes
+> the action-to-native-consequence mapping, not the actor's information rights.
+>
+> My principal investment challenge is marginal information: new S2-native
+> CONT must beat same-data CAL and useful transferred all-on endpoints, as
+> well as unchanged S and ordinary C_S2/C_T2, to support buying host-targeted
+> development. Improvement over S alone would not answer that. The transferred
+> L0 all-on endpoints must remain preselected by source identity, regardless
+> of their scores. Retaining paid L0 B*=S_T2 as a fixed transfer reference is
+> also useful if claiming development beyond the available ordinary calibration;
+> it adds64final episodes, not another calibration search. Alternatively narrow
+> the claim explicitly rather than implying best ordinary calibration.
+>
+> Your two-context F correction is algebraically valid under conditional
+> independence of the two intervention draws/outcomes from the other branch's
+> intervention: E F=.5[(Vπ(xa)−Vμ(xa))+(Vπ(xb)−Vμ(xb))]. It does not restore
+> an exact hardware-timed gradient identity. Keep distinct contexts/μ values,
+> pre-intervention timing witnesses and every prefix mismatch; charge up to
+> 2,048 row contexts and twice the head rows. Do not silently reuse the
+> one-context variance argument or all-on exact-prefix reading.
+>
+> Recommendation: retain the complete source design as reserve and defer
+> selecting these new two fits until the already-accepted all-on result is
+> fully read. This is an allocation judgment, not a required positive gate.
+> Your2–4worker CPUh+15–45reader min+5–9h support buys one retained lineage,
+> versus the underway two-lineage cheaper comparison. A direct S2 study can
+> still become worthwhile after an all-on negative; that result would simply
+> lower confidence in the shared finite estimator/head recipe. A transfer-only
+> fixed-panel test is an optional cheaper competing purchase, not an automatic
+> prerequisite. No further general literature pass is needed: the existing
+> policy-gradient/COMA/AggreVaTe bridge carries over to a proposal-value
+> function under fixed S2, while finite visitation, shared deployment and
+> unobserved coordinator state remain conjectural.
+
+Its subsequent competing-cost observation was:
+
+> One bounded cost fact to close the competing-investment comparison: a
+> transfer-only panel using Q/S/CAL_all/CONT_all at32worlds×2tapes plus32each
+> C_S2/C_T2 is320episodes/81,920steps/0fits. Using your existing B05 per-family
+> rates gives1724.637 CPU-s (~28.7min) before new-head and reader work; retaining
+> fixed L0 S_T2 would add64eps and~192.73CPU-s. Please price only reader/
+> engineering feasibility from existing scope if available, without any query
+> or benchmark. This alternative would measure conditional transfer, not
+> establish that matched-S2 training is unnecessary; I do not propose it as
+> a mandatory gate.
+
+After the full costs and the B* addition, it supplied the final correction:
+
+> One arithmetic consequence of the accepted two-context formulation to
+> preserve in the same design: regularize with .01×[KL(π(x_a)||S(x_a))+
+> KL(π(x_b)||S(x_b))]/2 per pair, and keep the address-weighted fixed128-pair
+> batch denominator. Summing both KLs without /2 would silently double the
+> regularization relative to the selected all-on objective. Two head
+> evaluations per pair give up to1,048,576 cached head-row presentations
+> across your two fits, not the earlier524,288; paired worlds remain1,024,
+> not2,048 independent acquisitions. Your corrected reserve/defer choice and
+> fully costed optional transfer panel resolve my investment objection; no
+> additional design/review round is requested.
+
+I accept all three substantive corrections. The above final proposed design
+includes B*, the .005×(KL_a+KL_b) term and fixed128 denominator, up to2048
+actual contexts/1048576 head-row presentations, and the conditional-independence
+limit. Its primary-source algebra is not a hardware-timing guarantee or a
+variance advantage. Actual before/after proposal, delivered-command and mask
+records must be read together; no extra counterfactual S2 search is implied
+by recording their observed changes. No material scientific dissent remains.
+
+The **competing transfer-only purchase**, with fixed B* retained, is
+384 complete episodes/98304 native steps/0fits:32 worlds, two I tapes for
+Q/S/CAL_all/CONT_all/B*, plus deterministic C_S2/C_T2. It costs no new
+calibration or labels. The existing episode rates give1917.367008 worker
+CPU-s (31.96min) before added head/application/serialization work; price
+30–60 worker and10–25 reader CPU minutes. Full reading would check123264
+native/report/terminal formula states, at most487680 candidate-state radio
+reductions for the same fixed five paid joint pairs,81920 Student/helper/
+backbone rows,40960 CAL/CONT head rows and20480 B* temperature transforms.
+It buys0 new reader-native transitions, full-C rankings or optimizer updates.
+All raw outcomes/tapes/deadlines and the original positive/adverse B05 evidence
+stay in scope. Raw storage .2–.6GB and streaming RAM below2GB are estimates.
+
+Reusing the existing native collector/reader and the eventually published
+fixed head interface suggests2–4 support hours for implementation, synthetic
+checks and independent engineering review, plus1–2 for full scientific
+reading/review/publication: **3–6 support hours**. There is no benchmark or
+query behind that estimate. This panel could answer whether already-bought
+head development transfers usefully under S2. It cannot establish that further
+S2-conditioned acquisition is unnecessary, or serve as a mandatory gate for it.
+
+**Resolved choice:** finish this source-only assignment and recommend **no
+new fit or native panel now**. Keep the actual-S2 design and the cheaper
+transfer comparison as related reasoning here; select neither experiment.
+The all-on study already buys the same finite estimator/head family on two
+lineages at a substantially lower compute price. Its completed reading can
+change the marginal value of managed acquisition and provide fixed transfer
+assets without duplicate training. This is a portfolio timing/information
+judgment, not an empirical rejection of S2 learning, a required positive
+all-on result, or a permanent dependency of the wider parent question.
+
+Root owns the later cross-question investment choice. A concrete revisit
+condition is a materially useful managed service/resource question after the
+already-selected fleet result is read; a negative all-on outcome can still
+justify a distinct S2 experiment if its predicted observation warrants the
+bill. Direct S2 development, optional transfer-only reading and stopping remain
+different choices, not a staged campaign. No repair, additional seed, new input
+feature, enlarged controller or confirmation follows automatically.
+
+This assignment ends with the direction still reserve and B05 unchanged.
+There is no active producer, pending reader, observer or newly selected run
+here. All original assets/evidence remain at their existing canonical paths.
+Only source reading, primary-paper reading, arithmetic and this notebook were
+used; actual added fits/actor/helper/model/native queries are all0. No code,
+scratch or bulk output was created for cleanup, and no new disk-reclamation
+claim is made. The completed B05 cleanup measurement above is unchanged.
+
+Root subsequently accepted this fully costed reserve/defer disposition and
+asked me to finish publication. It assigned a separate bounded source-only
+assessment of learned amortization of the already-paid N8 T capability, with
+the existing independent `/root/deep_report_review` Oracle. That task grants
+no fit, fresh acquisition, native/model/controller query, executable change
+or fleet-transmission write/handle ownership. Its prospective reasoning stays
+in this same notebook; no result-bearing successor is selected by the handover.
