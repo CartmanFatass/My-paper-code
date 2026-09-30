@@ -1,0 +1,94 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-30T03:18:41.680916Z",
+  "bootstrap_command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3/experiments/candidates/uav_registered_service/b02/run.py",
+    "--output",
+    "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02",
+    "--",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02",
+    "--launch-sha",
+    "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+    "--seed",
+    "29309000"
+  ],
+  "claim_key": "9626ce7ddc190ad3507d1189b71e3308b366e6f1777e4d7bdf4d1d71d4465601",
+  "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/9626ce7ddc190ad3507d1189b71e3308b366e6f1777e4d7bdf4d1d71d4465601.json",
+  "command": [
+    "/home/wu/.venvs/hmasd/bin/python",
+    "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3/experiments/candidates/uav_registered_service/b02/run.py",
+    "--out",
+    "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02",
+    "--launch-sha",
+    "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+    "--seed",
+    "29309000"
+  ],
+  "command_sha256": "c144db271632b7aeeabe4cc4dac61cfb0edfa0e6d3c89ac75532970f56d0571e",
+  "control_observation": {
+    "observed_at": "2026-09-30T03:18:41.571727Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "3e4629867ceeafed4936c152a2dafdde98974f18"
+  },
+  "control_root": "/home/wu/projects/HMASD",
+  "created_at": "2026-09-30T03:18:41.581088Z",
+  "cwd": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3",
+  "direction": "uav_registered_service",
+  "host_identity": "LAPTOP-U9TDKC8A",
+  "identity_command": [
+    "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_registered_service/b02/run.py",
+    "--launch-sha",
+    "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+    "--seed",
+    "29309000"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/launch-manifest.json",
+  "node": "wsl_4070",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/9626ce7ddc190ad3507d1189b71e3308b366e6f1777e4d7bdf4d1d71d4465601.json",
+  "output_root": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02",
+  "preflight": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1029864,
+      "session_id": 1029864,
+      "start_ticks": 108310532
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1029864,
+    "process_group_id": 1029864
+  },
+  "process_exit": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/process-exit.json",
+  "published_remote": "origin",
+  "retry_of": {
+    "claim_key": "7b2c9de4c24d7e5ad9fb59c378d7136d703d0e94581a4b0c7b66084c6cf23413",
+    "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/7b2c9de4c24d7e5ad9fb59c378d7136d703d0e94581a4b0c7b66084c6cf23413.json"
+  },
+  "runner_process": {
+    "identity": {
+      "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1029865,
+      "session_id": 1029864,
+      "start_ticks": 108310534
+    },
+    "pid": 1029865,
+    "process_group_id": 1029864,
+    "supervisor_pid": 1029864
+  },
+  "schema_version": 1,
+  "sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+  "source_root": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/2d9f08d7fc8041ea844836c3966ad4e3",
+  "stderr": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/stderr.log",
+  "stdout": "/home/wu/projects/HMASD/runs/uav_registered_service/b02_periodic_efficiency_a02/stdout.log"
+}

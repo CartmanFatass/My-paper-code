@@ -1269,3 +1269,33 @@ Python3.10.21 executable SHA256ca420bd4614ae7757b4cd4938b3c663e98d2b631bda518610
 and NumPy1.26.3 fromnumeric.py SHA25660cb71381839d5531e9b7f401d716cfb8fef39bd69e3c7a2ee78d77584d127f4.
 The existing remote automatic-GC bad-tree/repack warning recurred on a successful
 fetch; no GC, sparse selection, interpreter or canonical science files were changed.
+
+
+### Explicit retry admitted — scientific source remains frozen
+
+Root resolved the concrete shared-control dependency in reviewed/published
+3e4629867ceeafed4936c152a2dafdde98974f18 (119launcher/snapshot-GC tests passed,
+1skip; interpreter-drift and successor-status findings repaired). Its maintained
+launcher alone was synced to the node; no frozen scientific source or original
+record was rewritten. I read the revised execution method and actual `--retry-of`
+interface, checked all38scientific bytes unchanged again, and used that supported
+operation with original science SHA8ab72e5e2 and the original claim as parent.
+
+The one explicit successor was admitted at2026-09-30T03:18:41.680916Z on wsl_4070.
+[Native manifest](../../../../runs/uav_registered_service/b02_periodic_efficiency_a02/launch-manifest.json)
+binds the parent claim, original SHA/argv, fresh snapshot and live identities.
+[Fresh actual-node admission](../../../../runs/uav_registered_service/b02_periodic_efficiency_a02/admission-preflight.json)
+passed with15,559,409,664physical/effective available bytes against4,294,967,296.
+The new config's38source identities,64seeds, arm order and physical deadlines
+match a01 exactly. Current runner/supervisor identities and native records agree.
+This is accepted execution, not a read result. The prospective a02-only primary
+rule and retained a01 adverse/technical records remain unchanged.
+
+Adding observation initially refused because the prior stopped observer required
+rearm. I drained its already-consumed state, rearmed generation2 to3 without
+resuming the terminal failed job, then added this distinct successor operation;
+its first adopted observation is generation4. No worker was restarted by this
+observer correction. The same-session deterministic observer remains at the
+existing state location and the native DM stays active through complete reading.
+The explicit-retry dependency is now resolved; neither a further launch ACK nor
+a documentation-only scientific SHA change was used.

@@ -1,0 +1,346 @@
+{
+  "launch_sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+  "arms": [
+    "S2",
+    "O",
+    "G"
+  ],
+  "seeds": [
+    29309000,
+    29309001,
+    29309002,
+    29309003,
+    29309004,
+    29309005,
+    29309006,
+    29309007,
+    29309008,
+    29309009,
+    29309010,
+    29309011,
+    29309012,
+    29309013,
+    29309014,
+    29309015,
+    29309016,
+    29309017,
+    29309018,
+    29309019,
+    29309020,
+    29309021,
+    29309022,
+    29309023,
+    29309024,
+    29309025,
+    29309026,
+    29309027,
+    29309028,
+    29309029,
+    29309030,
+    29309031,
+    29309032,
+    29309033,
+    29309034,
+    29309035,
+    29309036,
+    29309037,
+    29309038,
+    29309039,
+    29309040,
+    29309041,
+    29309042,
+    29309043,
+    29309044,
+    29309045,
+    29309046,
+    29309047,
+    29309048,
+    29309049,
+    29309050,
+    29309051,
+    29309052,
+    29309053,
+    29309054,
+    29309055,
+    29309056,
+    29309057,
+    29309058,
+    29309059,
+    29309060,
+    29309061,
+    29309062,
+    29309063
+  ],
+  "horizon": 256,
+  "arm_orders": [
+    [
+      "S2",
+      "O",
+      "G"
+    ],
+    [
+      "O",
+      "G",
+      "S2"
+    ],
+    [
+      "G",
+      "S2",
+      "O"
+    ],
+    [
+      "G",
+      "O",
+      "S2"
+    ],
+    [
+      "O",
+      "S2",
+      "G"
+    ],
+    [
+      "S2",
+      "G",
+      "O"
+    ]
+  ],
+  "order": "world index modulo6 cyclic/reversed cyclic",
+  "planned_fits": 0,
+  "planned_episodes": 192,
+  "planned_steps": 49152,
+  "learning": "fixed deterministic policies; no parameters, gradients or optimizer",
+  "terminal_history_completeness": "all reconstructable post-anchor transitions; unknown prefix excluded from model validity only",
+  "compute_threads": 1,
+  "cpu_limit_seconds": null,
+  "preferred_node": "wsl_4070",
+  "actual_host": "LAPTOP-U9TDKC8A",
+  "actual_platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "actual_python": "/home/wu/.local/share/uv/python/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+  "admission_identity": {
+    "schema_version": 1,
+    "direction": "uav_registered_service",
+    "sha": "8ab72e5e2c2123e6cf0af6744ada24f8188ec2dc",
+    "command_sha256": "c144db271632b7aeeabe4cc4dac61cfb0edfa0e6d3c89ac75532970f56d0571e",
+    "parent_pid": 1029864,
+    "child_pid": 1029865,
+    "accepted_at_epoch": 1790738321.6806846
+  },
+  "host": "N5 U50 static uniform free_space no-shadowing non-FDMA 3dB cap10",
+  "delivery_ticks": {
+    "S2": 2,
+    "O": 2,
+    "G": 2
+  },
+  "hold_ticks": 4,
+  "map_bytes": 400,
+  "report_bytes": 24,
+  "command_bytes": 16,
+  "link_bits_per_second": 2000,
+  "deadline_seconds": {
+    "S2": 1.456,
+    "O": 1.456,
+    "G": 1.456
+  },
+  "score": "S2 native; O age-group/native; G fixed coverage gate selects native iff complete lawful same-window prefix, otherwise O",
+  "gate": "all50 model prefix bits; one64transition window with start>=lawful anchor; computed once before both orders",
+  "evaluator_completion_scope": "actual report contacts through t-1; committed-prefix contacts through t+1; whole window at episode end",
+  "truth_history": "evaluation only; no service ACK",
+  "terminal_history_scope": "separately timed evaluator support outside online deadline; included in worker resources; never actor action",
+  "source_identities": [
+    {
+      "path": ".codex/hmasd-compute.toml",
+      "bytes": 3331,
+      "sha256": "ac465a1357486c96441147b9b2eda3ad75332778877654d50ae86eeb59649ef6"
+    },
+    {
+      "path": "envs/pettingzoo/env_adapter.py",
+      "bytes": 25232,
+      "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40"
+    },
+    {
+      "path": "envs/pettingzoo/uav_env.py",
+      "bytes": 68827,
+      "sha256": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e"
+    },
+    {
+      "path": "envs/pettingzoo/uav_radio.py",
+      "bytes": 5001,
+      "sha256": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc"
+    },
+    {
+      "path": "experiments/candidates/uav_local_history/b01/controller.py",
+      "bytes": 14309,
+      "sha256": "b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/__init__.py",
+      "bytes": 58,
+      "sha256": "b0392e94f590eb0fd016ce26529485215b128b9accff9b1dc5fdd6ffd7d11b8a"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/protocol.py",
+      "bytes": 4643,
+      "sha256": "4976e6739d1e5c919bd298b86091dcf6cf5d62d5c3cc3a7b977fa5b5f0956431"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/read.py",
+      "bytes": 16058,
+      "sha256": "8d9f8d469335d2ac2c7551dd81217b9194c81c6a92d44725b202078c4a7b1347"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/run.py",
+      "bytes": 1619,
+      "sha256": "02ca51bd761be8cbde3706f9f9ae3b3556fdff304480ec1bf45adc92388e971f"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/scheduler.py",
+      "bytes": 4524,
+      "sha256": "2b75232b9b57464b31a113458e9bab6b5c47b00272cf4d255dd670914b05e792"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/study.py",
+      "bytes": 16773,
+      "sha256": "7af060ca82f357722e76588669e7319b10da7254f317bc312f71d25eca14aa24"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/__init__.py",
+      "bytes": 70,
+      "sha256": "3e9e194f32194488a58d2bee13d5be625f5142b2d4330b76c729809924bf950e"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/protocol.py",
+      "bytes": 5120,
+      "sha256": "a1dbec8e5aecead2c702fab54376c95c8b9d1fd134cb0894a3c0eb705ebab69b"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/read.py",
+      "bytes": 18060,
+      "sha256": "ef4baedfe98630064ee1545637dcc932304b39f934b055800ed9c970eaa5a04d"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/run.py",
+      "bytes": 1630,
+      "sha256": "9d8633e865f76f1801611f2026e2264f2198134089fce32d9ebc5e3f1076f1c4"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/scheduler.py",
+      "bytes": 7781,
+      "sha256": "5c748f097a7597806f0adb3e5b49a242f000391c7da9ab7eedb2f7efce7535e7"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/study.py",
+      "bytes": 19057,
+      "sha256": "e6bb046907e195e02c65308015a29eb9c49bb479a22efa4bcac6ddd6dbe1ed75"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/__init__.py",
+      "bytes": 70,
+      "sha256": "e7f16638203ff2d8d5254017185d2b2133c21fc41b1fef22aa4709cbafc9c350"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/protocol.py",
+      "bytes": 5146,
+      "sha256": "3561dd0c2ea274a7e24e5a8bc6da3d6ee03b21fcec8768d18adb45b4f524b2c1"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/read.py",
+      "bytes": 18928,
+      "sha256": "ed137cd753b2961ef1518f22a1a90475f55eef17fb688f574563e0e2cd89c3af"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/run.py",
+      "bytes": 1632,
+      "sha256": "89c0e43aac625199305076a1a3188875e34969cdcb16588fe2d4dc05d1b74558"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/scheduler.py",
+      "bytes": 6844,
+      "sha256": "41cdda90f1bb677c16f1ca12ee57cef2ac656b9b597a146cf8b4e6be9039d54f"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/study.py",
+      "bytes": 19661,
+      "sha256": "aadd16bdac244757edb5736684b3d5432f8b4372b5e36fda124566987801a715"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/__init__.py",
+      "bytes": 62,
+      "sha256": "ef0474c939a8e83168c671d537bd3d6b178b533d268f48eae8cfcf4357218c31"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/history.py",
+      "bytes": 4562,
+      "sha256": "d67ee807bb29fe4346c070f72d9f7110bc0696ef898b24b13bb49b5db9d626ed"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/metrics.py",
+      "bytes": 3542,
+      "sha256": "ca6f5b3895f6101ac2b4bb1e590d2c7b278d90cffe8b4cd4fa614fab0624fbbb"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/read.py",
+      "bytes": 24261,
+      "sha256": "ed9d3a96c538b906f5ef11aec03b0ec934ea8354410a97e5ff14aeab38d86616"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/run.py",
+      "bytes": 1353,
+      "sha256": "0829c43177b19bdd200ab2ce157cd0bb54fe15394e0e16761c8cb8d901aa507d"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/scheduler.py",
+      "bytes": 11880,
+      "sha256": "30c9d7d923a2f89ef61dd3fe2f662ac85dc3e0571240c9989f4c384d845ff1b5"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/study.py",
+      "bytes": 20079,
+      "sha256": "a705d26145cb35d9a9e83d70a45c2206ddc3d04dfa0a99c438a1dbc795aded50"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/__init__.py",
+      "bytes": 56,
+      "sha256": "93e2a4c8326dc374289560fa9c465f59c006c97bd4d17fa888c11bb8c36a2da6"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/metrics.py",
+      "bytes": 5181,
+      "sha256": "7c40bc481c984395abba2c5b915327d94fda6fa63d030f54bb69851c64c35446"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/read.py",
+      "bytes": 27988,
+      "sha256": "75ccbdeacdd17fa29ae426592865354e29a02194821b5735509c98bbfd341eda"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/run.py",
+      "bytes": 1365,
+      "sha256": "234d72c002447686bd526d8de5c62aca6355a14c7bc9eeca2fba722254b8181b"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/scheduler.py",
+      "bytes": 12569,
+      "sha256": "fd12bd64ff076897988042073d75743c063960b665770542168852a5bba4c7b8"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/study.py",
+      "bytes": 18668,
+      "sha256": "c6914962ea2419ffe7f240ed8423bfd86732ce8e1fe4601a8a1cb604f134ec99"
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "bytes": 4819,
+      "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6"
+    },
+    {
+      "path": "scripts/hmasd_admission.py",
+      "bytes": 19793,
+      "sha256": "0faa5d53fba5af9b1a2fc4979bde5bd50bcbcaac2dbef938e90a64680156cf4d"
+    }
+  ],
+  "library_versions": {
+    "numpy": "1.26.3",
+    "scipy": "1.15.2"
+  },
+  "frozen_radio_source": "2bff85091f85f6d52fc0344d0329b4fc39fa6d5c"
+}
