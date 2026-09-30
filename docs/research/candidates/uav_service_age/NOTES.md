@@ -370,3 +370,261 @@ The direction-local read-only observer adapter received a focused independent
 engineering review: no material finding,11 mocked identity/classification cases
 passed,0 remote/native calls. It cannot validate scientific results. Generation5
 has adopted that exact running reader; full reading and interpretation remain.
+
+
+<a id="b01-complete-reading"></a>
+## 2026-09-30 — B01 complete: ordinary age capability retained, unchanged selector investment ended
+
+**The trained instance improved on its initialization but did not improve mean
+service age beyond M or W.** Retain W/M as conditional ordinary references and
+retain the observed learning gain; end this unchanged selector recipe. The wider
+question of learning useful temporal control remains open. This is the complete
+one-fit result boundary, not a confirmation or a request for another fit.
+
+Inputs remain source `d4430e6198f95d599b79f23575445a18e6566c26`; the complete compact
+reading was published as `0b358981a4512238f675a335d6a3467f2469a43f` in
+[result.json](../../../../runs/uav_service_age/b01_age_selector_a01/result.json).
+It preserves every per-world value for all 28 reported metrics and all 616 metric
+contrasts, exposure/work counts, an adverse trajectory, resource scopes and exact
+bulk locators/hashes. All 960 episodes/245,760 native steps and the one selected fit
+completed: 512 training episodes, 2,048 actor and 2,048 critic updates; 448 frozen
+policy evaluation episodes on the fixed 64 fresh worlds, with zero evaluation updates.
+There was no additional panel, fit, endpoint selection, counterfactual or rerun.
+
+### Completed verification and observation
+
+The original saved-data reader ended exit0 and returned `VERIFIED_COMPLETE`.
+It verified all 960 raw files/1,250,600,694 bytes, all 245,760 actual native/C/age/
+periodic transitions, 229,376 legal history-model transitions, causal features and
+selection records, and replayed all 512 saved PPO updates to exactly the final
+actor/critic identities. Candidate physical checks cover the declared subset:
+521,037 candidate/state pairs plus 21,497 additional S2 pairs. Maximum native J
+reconstruction error was 5.55e-17; SINR and observation errors were zero. This is
+complete execution of the frozen reader contract, not an independent proof of the
+shared wireless kernel or a check of every candidate's physics. The reader creates
+zero native steps or fits; optimizer replay verifies the existing training instance.
+
+[Reader status](../../../../runs/uav_service_age/b01_age_selector_a01/reader-status.json)
+and [external accounting](../../../../runs/uav_service_age/b01_age_selector_a01/reader-time.txt)
+bind the original reader supervisor. Observer generation5's checkpoint was consumed
+and rearmed in6; its READY event was consumed in7 and observation stopped. Both
+original jobs are terminal/ready; no accepted worker, reader, pending event or advice
+remains. Native-child queue rejection was handled with this active turn's deterministic
+same-handle observation. Nothing was resent or restarted. This run and its reader had
+no CPython recurrence; finite success does not establish the shared runtime fault's cause
+or prove a cure.
+
+### Complete native comparison
+
+A is mean actual post-step service age over all 50 users and all 256 ticks; lower
+is favorable. The table gives means across the fixed 64 paired worlds. F retains
+the four-window user coverage contract (maximum200); J and service keep their original
+native meanings. Mean age is not a worst-user guarantee.
+
+| Program | A | F | J | Served users/tick | Episode maximum gap | Worst-user mean age |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| L0 | 3.816882 | 199.828125 | .358269 | 21.387390 | 55.343750 | 11.521179 |
+| L1 | 3.542917 | 199.687500 | .381830 | 23.259277 | 59.500000 | 13.537537 |
+| M | 3.273864 | 199.937500 | .397838 | 24.560852 | 55.656250 | 13.001892 |
+| W | 3.313002 | 199.812500 | .399864 | 24.699585 | 59.484375 | 13.652283 |
+| O | 4.399828 | 199.921875 | .325898 | 18.890137 | 52.625000 | 10.829956 |
+| G | 6.501581 | 199.906250 | .406879 | 24.552124 | 70.421875 | 21.844360 |
+| S2 | 26.001744 | 161.593750 | .483739 | 30.104919 | 250.593750 | 123.872437 |
+
+| Mean-age contrast | Mean difference | Descriptive paired t95 | Better / worse / tie worlds |
+| --- | ---: | --- | ---: |
+| **L1−M, primary** | **+.269054** | **[+.069315,+.468793]** | **24 / 40 / 0** |
+| L1−L0 | −.273965 | [−.475866,−.072063] | 47 / 17 / 0 |
+| L1−W | +.229916 | [+.044051,+.415781] | 20 / 44 / 0 |
+| L1−O | −.856910 | [−1.034966,−.678854] | 60 / 4 / 0 |
+| L1−G | −2.958663 | [−3.216709,−2.700618] | 63 / 1 / 0 |
+| L1−S2 | −22.458827 | [−24.258584,−20.659070] | 64 / 0 / 0 |
+| W−O | −1.086826 | [−1.225617,−.948035] | 61 / 3 / 0 |
+| M−W | −.039138 | [−.136963,+.058686] | 31 / 25 / 8 |
+
+These intervals describe world variation conditional on one training instance;
+they do not estimate training-population superiority. No user, window, report slot
+or fitted epoch is counted as an independent world. The largest L1−M age loss is
++5.342578, the largest gain −.916484; neither is removed from the comparison.
+
+The strongest constructive result is ordinary objective-aligned control. W−O adds
+5.809448 served users/tick and .073966 native J while shortening mean travel by
+624.822m/UAV. It also increases mean episode maximum gap by6.859375 ticks
+([1.583915,12.134835],44 worlds worse), worst-user mean age by2.822327
+([1.200992,4.443661],48 worlds worse), and team-transmitter exposure by161.65625 ticks
+(all64 worlds). Mean quality falls .024555. W has12 missed user-windows versus O's5;
+the F mean difference −.109375 has interval [−.323364,+.104614], with7 losses,
+2 gains and55 ties. A lower aggregate waiting cost does not establish protection
+for each user or loss-free periodic coverage.
+
+M has4 missed user-windows. Relative to W, M's mean A is .039138 lower with an
+interval crossing zero, not an equivalence or dominance result. Its mean maximum
+gap is3.828125 ticks lower ([−7.376267,−.279983];32 better/14 worse/18 ties), while
+scheduler CPU is .974147s/episode higher in every world:4.666301 versus3.692153,
+about26.4% more. Both M and W are retained as conditional ordinary references;
+this study supplies no scalar exchange rate between computation and user tails.
+
+L1 retains dual-plan search and averages4.602291 scheduler CPU seconds/episode,
+losing mean A, J and service to W. Its slightly higher mean quality and lower
+transmitter exposure do not erase those losses, and no energy price was modeled.
+All non-S2 programs serve every user at least once in every world; S2 averages
+3.1875 never-served users. Total zero-service steps over64 worlds are L0:4,
+L1:1, M:0, W:1, O:5, G:1, S2:0. S2's higher native service/J coexists with much
+larger age and missed-window costs. All per-user tails, censoring, path, quality,
+transmitter and compute distributions remain in the full reading/raw records.
+
+### Exposure, simpler explanation and retained adverse trajectory
+
+Learning and deployment were active: 27,461 sampled training choices plus5,307
+full-plan aliases; actor/critic parameter displacements2.661307/3.334946. Evaluation
+has3,453 distinct sampled choices for L0 and3,421 for L1; their same-state disagreements
+with M are1,702 and738. All requested choices executed, with zero sampled-late events
+or deadline misses across all960 episodes. Maximum charged pipeline time .148005s
+is below this node's1.456s computation allowance. This does not promise latency on
+other hardware, under other load or in a richer controller. Lack of exposure,
+unchanged parameters and fallback cannot explain the primary loss.
+
+The independent raw reading found L1's mean probability of W .806930 (range
+.672866–.862883), with clock-quartile means .80393/.80882/.80721/.80768, versus
+initialized .5. It sampled W in2,759/3,421 distinct slots; M would choose W in3,285
+of these same visited states. The strongest simpler account of the own-initialization
+gain is learning a broadly useful W preference. State conditioning or longer-horizon
+value may contribute, but this comparison establishes no increment from either.
+A constant-mixture attribution run is not needed to decide the present investment.
+
+World29312024 is the largest primary age loss. L1 has A8.520234/F194/maximum gap189/
+worst-user mean age74.628906, versus M3.177656/200/37/8.582031, W A3.777578/F200/
+gap57 and L0 A3.934063/F200/gap38. L1 users49,26,40 have closed unserved intervals
+[58,247),[63,246),[64,245), of189,183,181 ticks. These are not terminal-censoring
+artifacts. Their settled-model last-service times equal actual times at every report
+anchor, so the long waits were represented in lawful history. Missing knowledge of
+these users' ages is not established as the cause. This witness neither identifies
+which earlier choice caused the loss nor proves an ACK intervention useless.
+
+The older G service/travel benefit and continuity harm remain; this prospectively
+specified panel now measures G's age as6.501581 versus O4.399828, rather than inferring
+that ordering from old maximum gaps. N's configuration dependence, ordinary control
+and immediate-positive/complete-negative examples remain original evidence. Neither
+G nor N supplies a transferred effect size or a diagnosis of a common learning defect.
+
+### Independent scientific diagnosis and DM disposition
+
+The registered ResearchCritic `scientific_result` worked in a separate context without
+DM/Root conversation inheritance, receiving the actual fixed question and original
+G/N supporting/adverse records. It reconstructed comparison and outcomes before reading
+proponents' explanations. It checked all46 source identities, config/summary binding,
+all616 contrasts, the512-update identity chain/checkpoint hashes, all64 L0/L1/M choice
+records and fixed innovations,13 current raw episodes, six prior G raws and two
+consequential N raws. It did not repeat the full960-episode verifier, optimizer replay
+or every physical candidate calculation. Its recommendation is: **retain W/M and
+own-initialization learning; end unchanged B01 selector investment**.
+`MATERIAL_DISSENT: no` for this disposition; it would not support expanded learned
+superiority, a general unlearnability/optimizer/representation diagnosis or an automatic
+extra fit. The substantive simpler-preference and represented-gap observations above
+are retained from that independent reconstruction. Agreement is advice, not additional
+empirical samples.
+
+The DM accepts that recommendation. Task opportunity is now demonstrated by ordinary
+W/M development; lawful age representation operated, including in the adverse witness;
+finite learning changed behavior and improved its own initialization; the complete
+learned package still lost to both competent ordinary references. These are distinct
+judgments. The anticipated constructive branch—useful ordinary capability without a
+learned increment—occurred. No scientific disagreement remains unresolved. One adequate
+independent review covers the actual interpretation and stop; another Pro consultation
+would not add a distinct unresolved decision here. Root's separate cross-question advice
+process is not a permission gate for this result.
+
+An unchanged second fit could test recurrence but is not selected: current L1 loses
+both ordinary mean-age comparisons, retains their search expense and has a substantial
+adverse user tail. Further diagnosis or a targeted optimizer/feature/ACK repair lacks a
+specific supported intermediate-to-native prediction worth buying now. A future question
+could make a consequential deployment-compute saving explicit or posit a reasoned
+multi-step benefit beyond W/M. Its smallest useful complete comparison would preserve
+these competent controls, lawful information/resources, tails and cost; satisfying its
+stated use criterion could retain a conditional capability, while failure would end that
+proposal. No such design, cost or feasibility is yet specified, so this is a re-entry
+condition, not a selected run. Root owns the next cross-question allocation. The direction
+is reserve/idle with no producer or fabricated owner-approval dependency; the broader
+learning question is not refuted and the old G/N conclusions are not rewritten.
+
+### Actual and cumulative cost
+
+Actual planning work was12,353,536 candidate requests,6,961,433 unique plans,
+27,634,552 candidate-state reductions (below the49,028,096 prospective upper bound),
+and6,583,680 geometry snapshots. Settled history225,792 plus terminal3,584 gives
+229,376 model transitions; adding114,688 non-S2 age-prefix reductions gives the
+344,064 declared history/prefix/terminal reductions. Physical prefix ticks including
+S2 total122,880. Explicit cache hits5,223,132 exclude S2; total duplicate requests
+including S2 are5,392,103. Do not treat these different counters as the same quantity.
+
+The worker used4,437.545376 wall seconds,4,565.373851 lifetime user+system CPU seconds,
+and793,032KiB peak RSS. Its post-study-import CPU is4,564.267789s. The complete external
+reader measurement is2,123.46 wall/2,121.84 CPU seconds,707,368KiB peak RSS; the internal
+verification boundary separately records2,060.680904 wall/2,120.442880 CPU seconds and
+668,748KiB lifetime peak at that boundary. Its internal function excludes import/final
+serialization; no cause is assigned to the difference. **Known worker plus complete
+reader CPU is6,687.213851s.** Component CPU counters—scheduler4,058.612067, C75.209501,
+storage231.279198, learner4.108757—overlap that worker total and are not added again.
+
+Previously recorded DM correctness work added640 native fixture steps/zero result fits
+and39.62 measured CPU seconds; all28 distinct tests were checked in the documented scoped
+runs. Root's shared runtime work added696 fixture steps/24 synthetic optimizer calls,
+plus its separately recorded diagnostic/build/stress costs, not scientific fits here.
+The critic's measured saved-data pass added .301935 CPU/.292584 wall seconds excluding
+imports (57,016KiB peak); its other parsing/source checks are unmetered. Compact extraction
+added .121417 CPU/.128603 wall seconds before final write, zero native work. Authoring,
+other review, transfer and cleanup are incompletely metered. These scopes do not support
+an exact all-in cost or energy estimate. Prior G/N exposure remains155,020 steps and
+2,657.133613 measured worker/read CPU seconds plus .187336 diagnostics; registered-service
+B01's earlier2,911.112 CPU seconds also remains sunk, rather than becoming free setup.
+
+<a id="b01-final-cleanup"></a>
+### Durable evidence and completed cleanup
+
+All useful W/M scheduling, learner, feature, collection and full-reader code plus the
+three relevant test files are published and retained. No unused scientific module was
+identified. There is no confirmation claim note because no confirmation was selected.
+The single canonical bulk copy remains on wsl_4070 at
+`/home/wu/projects/HMASD/runs/uav_service_age/b01_age_selector_a01/`:
+960 required raw episodes and the initial/final checkpoints (962 artifacts,
+1,251,260,404 bytes), full summary/reading, native metadata and logs. All960 raws are
+needed by the frozen complete trajectory/update replay contract; the two checkpoints
+bind its initial/final parameters. Compact Git evidence includes every scientific
+comparison and exact source/retention bindings; there is no duplicate bulk backup.
+
+The canonical `summary.json` is8,386,428 bytes, SHA256
+`2dc25c98769738040ec04248060a9ecff7749b42bf7a37f8794d6ef1fa7393f1`;
+`reading.json` is2,767,528 bytes, SHA256
+`fca3bccd3248fd63f9fb437749ce130897f37e6a6db72f6e1b0fd23d8f94cb45`.
+These node files were rechecked against the published compact locators before cleanup.
+Their raw/checkpoint identities remain in the full summary artifact list. No file under
+the canonical run directory was deleted.
+
+After terminal worker/reader identities and live consumers were checked, supported
+snapshot GC removed the actual remote targets
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/3b7b624907224d5e987284297dc9fa95`
+and `/home/wu/projects/HMASD/.git/worktrees/3b7b624907224d5e987284297dc9fa95`.
+The first ordinary process scan could not inspect a permission-protected cwd;
+`--sudo-process-scan` resolved that concrete tool issue and the supported apply succeeded.
+Combined allocated usage went from810,651,648 to0 bytes; both targets are gone.
+The published source remains reachable. Canonical peer edits, maintained launcher,
+old runtime package dependency and the older N checkpoint worktree were preserved.
+
+After the observer was confirmed stopped with both jobs ready and every helper completed,
+local cleanup deleted these exact targets under `/home/fires/hmasd-wsl/`:
+
+- `temp/directions/uav_service_age/`;
+- `runs/uav_service_age/b01_age_selector_a01/summary.json` and `reading.json` (verified
+  temporary replicas of canonical bulk);
+- the same local run directory's `stdout.log`, `stderr.log`, `reader-stdout.log`,
+  `reader-stderr.log` (temporary log replicas);
+- `experiments/candidates/uav_service_age/b01/__pycache__/` and
+  `tests/experiments/candidates/uav_service_age/b01/__pycache__/`.
+
+Every local target was untracked/ignored, was measured before deletion and is now absent.
+Allocated usage went from11,534,336 to0 bytes. **Total actual cleanup reclaimed
+822,185,984 allocated bytes:810,651,648 remote plus11,534,336 local.** This is the
+measured decrease for the deleted targets, not a claim that the whole study consumed
+no disk. Unique required evidence and compact published readings remain. No cleanup
+target or concrete tool blocker remains; no live result process, unread advice or
+selected continuation remains. Other directions' files were untouched.
