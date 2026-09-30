@@ -2038,3 +2038,622 @@ and 320 endpoint episodes is 1,344 episodes/344,064 steps before reuse; shadow
 forwards add actor work but no native steps. This reply supplied feasibility
 facts only; it selected no recipe, performed no extra exposure and did not alter
 B03 closure or the independent investment recommendation.
+
+
+<a id="b04-native-development-design"></a>
+## 2026-09-30 — Prospective native development from both inherited policies: design only
+
+Root's 17:27 UTC assignment retains this DM and the broader question: can useful
+native behavior be developed from a competent learned local policy beyond both
+unchanged sampled use and competent ordinary stochastic control? This entry
+completes **scientific design only: 0 new fits, native transitions, actor/model
+queries, calibration evaluations or result implementation**. B03 is closed as
+recorded above. No third construction or continuation is selected. The existing
+Root-assigned Astra Max Oracle owns the independent construction/investment
+review; its complete original recommendation and subsequent corrections are
+preserved below. I read that answer, checked its load-bearing primary passages
+and actual source interfaces, and did not commission a duplicate review or Pro
+request. Root retains the cross-question investment decision.
+
+This proposed study is called fleet B04/native development only to distinguish
+it from the parent direction's already selected **B04 joint sampling**. It does
+not alter that accepted study, substitute B03 S for its fixed B02 S, change its
+decoder, or purchase any extra evaluation within it.
+
+### Question, current explanation and competing investments
+
+The contribution sought is a **finite learning capability**: reward training
+that improves the inherited command distribution under the same deployment
+information and action rights. It is not a new PPO algorithm, proof of useful
+hidden representations, or a requirement to establish every possible mechanism.
+Full weight updates can change rankings and their dependence on observations;
+temperature preserves those rankings, and uniform departures from C do not learn
+which alternative command to use. Nevertheless, a gain from full updates could
+come from a simpler global bias change. This comparison would not identify
+state-dependent representation changes as necessary.
+
+I used published RESEARCH main through `d6f50217c901ff76f000ae5b2fbbbb9aa7cd0717`
+and the current assignment revision `40caac61a`, especially
+[local information and competent ordinary alternatives](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练),
+[finite learnability and retained inheritance](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面),
+[parent adaptation and skills](../../RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据),
+[scope of empirical replication](../../RESEARCH.md#6-实证研究是在具体条件下缩小解释空间)
+and [mathematical/game structure](../../RESEARCH.md#8-数学信息与博弈结构怎样帮助dm选择实验).
+Their concrete effects are to retain unchanged S and a paid competent ordinary
+comparison, treat two fits as two exploratory constructions, price all native
+and model work, and observe actual command/physical changes alongside scores.
+Recent nonactivation or sparse-action findings in the peer forecasting work
+support that last measurement; they supply no diagnosis of this actor's failure.
+No reusable empirical background is changed by this design-only entry.
+
+The immediate positive is B02/B03 finite local competence, with sampled gains
+on their shared exposed development panel and all temporal/path adverses intact.
+The immediate negative is parent B03: ordinary I improves matched C, while all
+three sampled reward-trained endpoints deteriorate from I (93/96 J losses).
+Different panels and decoders do not rank I against S. Earlier fleet B01 and
+local-history failures also remain incurred; source competence does not erase
+them or predict successful continuation. Entropy, credit, optimization and
+visitation explanations of the prior loss remain unresolved.
+
+The working conjecture is that a competent stochastic S may admit useful
+native changes that exceed both keeping S unchanged and paying for a small
+calibration. Its directional prediction is positive R−S and R−B* J on each
+fresh panel, with changed distributions and consequential requested/physical
+choices. These are uncertain predictions, not expected guarantees or an
+activation threshold. Calibration explaining the useful behavior, reward
+training damaging it, or different outcomes between lineages are substantive
+answers. Parameter movement alone does not satisfy the prediction.
+
+The recurrence reviewer preferred already selected parent B04 S_I−Q_I before
+prioritizing an adapter. That remains a real **investment consideration**, not
+a logical requirement that a frozen asset first beat Q before its developability
+can be tested. Its exact two-draw finite-grid law differs from this original
+private decoder, so its evidence will inform opportunity and cost without being
+pooled into these treatment effects. The Oracle favors the complete direct
+comparison below and declares material allocation dissent. My current preference
+is to advance this fully priced comparison when Root allocates result work:
+the paid ordinary calibration now addresses the major competing explanation
+inside the complete experiment. That is a stronger case than the earlier vague
+PPO extension. I would still use any available complete B04 result to revise the
+investment ranking. This entry does not self-clear the allocation disagreement
+or select execution, and a positive B04 S−Q is not an admission gate.
+
+### Fixed assets, host and lawful decision interface
+
+Both starting assets are used without choosing the historically higher score.
+Their only canonical bulk copies remain on
+`hmasd-wsl-node:/home/wu/projects/HMASD/runs/uav_fleet_adaptation/`.
+
+| Lineage | Canonical relative file | Published scientific source | File SHA256 | Actor-state SHA256 |
+|---|---|---|---|---|
+| 1 / original S | `b02_inheritance_a01/assets/S.pt` | `e945483b85c7f8ddfc315c57f36938d6c14201c7` | `b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a` | `6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c` |
+| 2 / recurrence S | `b03_inheritance_recurrence_a01/assets/S.pt` | `4909c9553300a4a4de6eb79476e818d7b1ceab53` | `cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d` | `c6286dd32097d37b2c2c3039e487a24b756398e3ddffa9dc9e1ec3ef66170699` |
+
+Each file is 424,487 bytes. A future implementation must verify file, architecture,
+dtype and tensor identities before environment construction, load actor tensors
+strictly, and discard inherited supervised Adam state. Both originals stay
+immutable. Original B02 S remains the fixed parent-B04 input independently of
+this proposal.
+
+Host: source-bound native N5, 50 static users, all transmitters on, H=256,
+27 original motion commands, simultaneous decisions at ticks 0,4,…,252 and
+four primitive transitions per commitment. There are 64 team decision clocks
+and 320 agent decisions per complete episode. No roster, horizon, energy price,
+reward, public coordination signal, command support or commitment change is
+introduced. All 27 **requested categories** remain valid even when commands
+alias after clipping at a boundary. Analytic eligibility is a feature and part
+of ordinary C's behavior; it is not a learned-action mask or a rule that skips
+training rows.
+
+The Student stays `114→128 ReLU→128 ReLU→27`, FP32, all 34,715 parameters
+trainable for R. Its feature row is the 103 entries `obs[:103]` of the native
+104-vector (excluding its last clock entry), ten-way one-hot own pre-decision
+navigation state, and the original binary analytic eligibility feature.
+`initial_nav`, `analyze` and the original navigation transition operate on each
+policy's own actual trajectory. Keep the helper's charged local radio work.
+No current C command/ranking, global/user map, peer action, critic input,
+episode identifier, training-progress feature or future observation enters the
+actor. Separate arm/episode/version caches may reuse deterministic analysis or
+logits only; no sampled command or navigation state carries between histories.
+S and R can request any category during ordinary fallback, just as in B02.
+
+The design binds the unchanged B02 source map already recorded in its original
+summary, rather than reconstructing a replacement controller. Consequential
+current file digests checked without executing a model are:
+
+| Source | SHA256 |
+|---|---|
+| `experiments/candidates/uav_fleet_adaptation/b02/model.py` | `c9b95b6718262c65591ed106ca81da0abb15b48ef6a8439438618365efc39934` |
+| `experiments/candidates/uav_fleet_adaptation/b02/controllers.py` | `a2bbbdb877bd988590472a41c336d934a0431b5c560c7e80225cbb630fc3d522` |
+| `experiments/candidates/uav_fleet_adaptation/b02/policies.py` | `fba732164b07d80fc2f901e6545e6ca281c7db39cd89f9e61cc49bdb40ba4efd` |
+| `experiments/candidates/uav_fleet_adaptation/b02/collect.py` | `62a691a3d2b3e0579b84aca73b64fe61cdc11aee64ac2bd2d298db6ba59b44ef` |
+| `envs/pettingzoo/uav_env.py` | `fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e` |
+| `experiments/candidates/ucope/uav_motion_prefix_b01/environment.py` | `fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6` |
+| `experiments/candidates/ucope/uav_motion_prefix_b01/policy.py` | `e324640251d0d025549705ff7541b765e7b96733f422c48ee9c2f5bd07709614` |
+| `experiments/candidates/ucope/uav_motion_prefix_b01/learner.py` | `466ec7b0efabdf474f838b662e781a2b7a3b5e1c1a41096b6ccf0f00eb0471f1` |
+| `experiments/candidates/uav_parent_adaptation/b03_c_prior/update.py` | `e3e5b45572bea389870cc78b78b66af304fd0f1f0890e3f884bae55a9035b650` |
+
+The last source supplies an update pattern, not a callable unchanged adapter:
+it expects 120-feature C-prior contexts, C indices and table/MLP parameter groups.
+Its collector also queries full C. A new direction-owned collector must instead
+save 114-feature Student rows, old behavior densities, team rewards and separate
+critic inputs without C queries for R. No such implementation exists or is
+commissioned by this design entry. Exact source inputs for any later selected
+implementation must be committed and published before result execution.
+
+### Behavior probabilities and differentiable replay
+
+The original operational Student law is retained. For each feature row, run the
+FP32 network on shape `(1,114)`, yielding 27 FP32 logits. Convert those logits
+to NumPy FP64; for temperature T form `exp(z/T−max(z/T))` and divide by their
+FP64 sum. Use FP64 cumulative sums with the last entry set to exactly one, and
+`searchsorted(..., side="right")`. The private draw is the original
+`default_rng(SeedSequence([sampling_root, world_seed, tick, agent])).random()`.
+Draw afresh at every decision, including cache hits. Greedy S uses the original
+first-index `argmax`; it is deterministic. R and unchanged sampled S always use
+T=1 for collection/final comparison. There is no Torch multinomial replacement,
+probability floor, hidden temperature, eligibility mask or hold-dependent draw.
+
+For C with departure ε, put `1−ε` on that arm's actual memoized C category and
+`ε/26` on each other category, and use the same inverse-CDF/indexed-uniform law.
+At ε=0, execute deterministic C directly. The category ordering is the original
+27-command ordering, not C's ranking order. MemoC's full ranking and fallback
+competence remain available and charged. Q denotes precisely ε=.10 here.
+
+Differentiable replay uses one-row FP32 network calls on the saved feature rows,
+stacked without changing their individual forward shape, followed by the FP64
+stable exponential/normalization in Torch. Store collected chosen probabilities
+and log probabilities in FP64, not the parent updater's blanket FP32 cast.
+The ratio is the new nominal categorical probability divided by the saved old
+one, mathematically equivalent to `exp(logp_new−logp_old)`. The gradient flows
+from that FP64 objective into FP32 actor parameters. The immutable first epoch
+before its first update also provides the already-paid density check: identical
+FP32 logits; maximum absolute probability discrepancy ≤5e−14; chosen-logp
+and ratio-from-one discrepancy ≤1e−10. The NumPy/Torch FP64 libraries need not
+be bitwise identical. This tolerance is an engineering requirement to check
+on fixtures and the existing first epoch, not permission for an extra pilot.
+Nonfinite losses/gradients or a failed initial identity check preserve the paid
+prefix as technical incompleteness; they do not authorize replacement exposure.
+
+The smooth categorical probability is the explicitly chosen PPO surrogate
+density. The operational sampler still has FP64 cumulative rounding and the
+PRNG's 53-bit uniform grid. We do not claim that differentiating the smooth
+density is the exact derivative of that finite-bit decoder's piecewise-constant
+induced masses. Both interfaces, old densities and innovations must be saved,
+so that this numerical convention is explicit and replayable rather than a
+silent treatment change. This remains the original B02 deployment law; parent
+B04's two-draw finite-grid construction is not imported.
+
+### One fixed reward continuation per initial asset
+
+Each R consumes exactly 256 complete episodes, in 128 ordered groups of two,
+with no checkpoint selection, minibatch shuffle, episode replacement or extension.
+Both episodes in a group use the same fixed actor version. Each group then has
+four full-rollout epochs: 512 actor and 512 critic Adam steps per lineage.
+Caches end with an episode and are invalidated at every actor version.
+
+The fresh centralized critic is the existing FP32 `136→128 Tanh→128 Tanh→1`
+network (34,177 parameters). Its 136-vector consists of native 116-vector
+global state, five previous three-vector commands and five remaining holds;
+the holds are zero at these synchronous decision clocks. Previous commands
+start at zero vectors on reset. The actor never receives this vector. Collect
+critic values under the current group version; targets and advantages remain
+detached and fixed across its four epochs.
+
+Use separate fresh actor and critic Adam optimizers: lr=3e−4, betas=(.9,.999),
+eps=1e−8, weight_decay=0, amsgrad=False, foreach=False, fused=False, and separate
+gradient-norm clipping at .5. Each epoch updates actor then critic. There is
+no schedule, supervised optimizer state, teacher loss, parent KL, reward
+shaping or entropy term (entropy coefficient exactly zero).
+
+At clock t, sum the four native team-J rewards in FP64 and store that macro
+reward. For the update, convert rewards/values/critic inputs to FP32 as in the
+existing return machinery. Target G_t is the undiscounted complete suffix sum
+of macro rewards divided by 256, with zero terminal bootstrap. Advantage is
+the saved `G_t−V_t`, detached and standardized across the 128 **team** decision
+rows using population standard deviation plus 1e−8. Every agent at a clock
+receives that same standardized advantage; no eligibility/event mask drops a
+row. Fixed feature/critic tensors remain FP32; saved old action densities and
+the actor ratio calculation remain FP64.
+
+For row t and agent i, let ρ_ti be the requested-category ratio. Actor loss is
+the negative mean over 128 rows of the **sum over five agents** of
+`min(ρ_ti A_t, clip(ρ_ti,.8,1.2) A_t)`. It is not clipping a product of five
+ratios. Critic loss is `.5 * mean((V_new−G)^2)`. Save every paid update's loss,
+ratio/clipping/gradient and parameter-movement evidence, including a zero-gradient
+step if it occurs; do not change counts to rescue low exposure. At the unchanged
+policy the sum corresponds to the shared-policy team score terms, but finite
+simultaneous clipped updates have no general multi-agent improvement guarantee.
+This is a familiar complete finite training program, not an isolated test of
+pretraining, representation, entropy removal or optimizer reset.
+
+### Paid calibration, fixed random identities and final comparisons
+
+For each lineage the simpler program receives 256 complete native episodes:
+eight fixed candidates × 32 common worlds. In exact tie order they are
+`C_0, C_.05, C_.10, C_.20, S_greedy, S_T.5, S_T1, S_T2`.
+Choose B* using highest mean complete-episode native J alone, breaking an exact
+tie by that fixed order. Retain all candidates and adverse metrics. The choice
+is **one charged reward-based discrete calibration per lineage**, separate from
+its actor–critic fit. No final-panel score changes it. This finite search is
+a competent ordinary comparison; it does not exhaust ordinary adaptive policies.
+
+The calibration worlds intentionally equal the first 32 worlds of that lineage's
+256-world R-training list. R uses 256 distinct episodes while calibration
+repeatedly compares eight choices on 32 worlds. This difference is part of the
+comparison of equal-native-episode programs; it is not identical data use.
+Training/calibration innovations are separate. The final panel is disjoint
+from the entire training/calibration list and earlier development panels.
+Two independent lineage lists and all domains are frozen as follows; a source
+search found no prior use of these numbers before this entry (in particular,
+the parent-B04 29346000 range is avoided).
+
+| Identity | Lineage 1 | Lineage 2 |
+|---|---|---|
+| Ordered 256 R training worlds | 29350000–29350255 | 29352000–29352255 |
+| Calibration worlds (first 32 above) | 29350000–29350031 | 29352000–29352031 |
+| Fresh 32 final worlds | 29351000–29351031 | 29353000–29353031 |
+| Fresh critic seed | 29354011 | 29354012 |
+| Private training sampling root | 29354021 | 29354031 |
+| Private calibration sampling root | 29354022 | 29354032 |
+| Private final sampling root | 29354023 | 29354033 |
+
+Run master seed is 29354000. If actor construction consumes a seed before strict
+loading, use 29354001/29354002 within a separate saved/restored RNG scope; all
+actor tensors are then overwritten and critic initialization uses its separate
+seed. There is no shuffle RNG. Fixed world order supplies two consecutive
+episodes per training group. Calibration runs world-major, cyclically rotating
+the fixed eight-arm order by world index modulo eight. Each arm has its own
+reset, navigation and cache. Shared calibration innovations pair its stochastic
+candidates at the same `(world,tick,agent)` address without sharing trajectories.
+
+Only after **both** R fits and **both** calibrations finish, collect per lineage
+the fresh final panel for C, Q=.10, unchanged S_T1 and final R_T1, plus B* when
+it is a distinct policy identity. Base arm order is C,Q,S,R, with a distinct B*
+appended; cyclically rotate by world index modulo the number of collected arms.
+All stochastic arms in that lineage use the final sampling root. Reuse the
+already collected reference panel exactly when B*'s source, decoder, category
+law, temperature and innovation identity equal C, Q or S. No equality of
+observed actions/scores is sufficient for reuse, and no duplicated reference
+is counted as replication. No R-greedy or additional temperature endpoint is
+purchased. The final actor is always the 256-episode endpoint.
+
+Primary readings are R−S and R−B* mean J in each lineage and their equal-weight
+mean. Retain R−Q and R−C with their own meanings: a calibration winner may
+transfer worse than a fixed constituent, so positive R−S/R−B* alone does **not**
+establish improvement over Q or C. A claim beyond ordinary Q requires the actual
+matched R−Q comparison. The Oracle explicitly accepted this clarification.
+Also retain B*−S/Q/C and all within-calibration means, without using them to
+rewrite the final choice. Report paired-world effects/intervals, per-world
+losses, service, quality, temporal service p10/minima, zero-service worlds/ticks,
+path per UAV, boundary effects and complete computational cost. Thirty-two
+paired worlds per fitted endpoint estimate conditional evaluation variation;
+the two fitted lineages, not 64 worlds, are the training-level observations.
+
+### Priced behavioral reading and complete evidence
+
+On each R final trajectory, query original frozen S on the **already collected
+R lawful feature row**, including R's actual navigation history, and use the
+same private uniform as R. Across both final panels this adds at most 20,480
+frozen-actor forward rows. Save total-variation/distribution and modal changes,
+requested-category disagreement, and whether the commanded physical path
+differs. For the latter, replay only the known clipped kinematics from the
+actual decision position: for four ticks, `x_next=clip(x+30*command, lower,
+upper)` with lower=(0,0,50), upper=(1000,1000,150), comparing all four positions.
+That is at most 81,920 deterministic shadow motion ticks, zero new radio work
+and zero native counterfactual rollouts. This measures effective action exposure,
+not S's reward on R's history or a causal gain from a particular hidden feature.
+
+A future worker must preserve raw observations/features and pre/post own-nav
+states, helper flags/counters, requested categories, logits/probabilities and
+draws, chosen old densities, separate critic rows/values, four-tick native
+rewards/physical motion, all complete native metric arrays, calibration choice
+inputs, and each update's paid diagnostics. Record initial/final actor and critic
+identities and final optimizer states, without selecting an intermediate actor.
+All successful, adverse, inactive and technically incomplete evidence is retained.
+
+The reader checks source/assets, all unique trajectories and reductions, resets,
+feature packing, recorded eligibility/navigation, command holds and decoder
+replay, fixed calibration winner/ties, exact-reference reuse and paid counts.
+Endpoint/shadow actor replay costs at most 81,920 rows (61,440 in the C-winner
+maximum branch). Reconstructing the shadow kinematics again can add 81,920
+simple motion ticks to reader work. It uses no native transitions, fresh C/radio
+queries or optimizer calls. All training/calibration stored density/update
+records are read; this is not a full independent arithmetic replay of all
+training actor forwards, helper radio calculations or optimizer updates.
+Consequential numerical/source checks receive independent engineering review
+if implementation is selected. Scientific interpretation uses the applicable
+review at its result boundary; this design does not commission another one now.
+
+### Prospective cost, feasibility and stop
+
+Let k be the number (0,1,2) of calibration winners requiring a distinct final
+panel. The complete program costs `1280+32k` episodes and `327680+8192k`
+native steps: **two actor–critic fits plus two charged discrete calibrations**.
+There is no per-fit allowance or automatic retry. The fixed maximum is below;
+the minimum omits exactly the two duplicate 32-world panels and nothing else.
+
+| Work | Proposed count / ceiling |
+|---|---:|
+| Two continuations | 512 episodes / 131,072 native steps |
+| Two eight-candidate calibrations | 512 episodes / 131,072 native steps |
+| Four mandatory final arms per lineage | 256 episodes / 65,536 native steps |
+| At most two distinct B* final panels | 64 episodes / 16,384 native steps |
+| Complete native maximum | 1,344 episodes / 344,064 steps |
+| Actor / critic Adam steps | 1,024 / 1,024 |
+| Actor / critic replay rows | 655,360 / 131,072 |
+| Collected critic rows | 32,768 |
+| Worker frozen-S shadow rows / simple motion ticks | 20,480 / 81,920 |
+| Reader endpoint+shadow actor rows / simple motion ticks | ≤81,920 / ≤81,920 |
+| New teacher labels | 0 |
+
+Before memoization the C-heavy branch requests 143,360 C decisions, 3,870,720
+candidate trajectories and 15,482,880 modeled ticks. Its maximum C power work
+is 323,993,600 links. In that **same** branch 286,720 Student requests add at
+most 40,140,800 analytic-helper links. One environment constructor plus every
+reset and transition adds `(1+1344*257)*275=94,987,475` dense native power
+slots, including A2A diagonal placeholders: **459,121,875 combined slots**.
+These are work counts, not physical link events. Cache requests, hits, misses,
+actual forwards, model trajectories/ticks and helper/native work must be
+reported separately; ceilings are not claimed executed work.
+
+The different S-winner branch maximizes Student requests at 307,200, so it must
+not be added to the C maximum. Adding worker shadows, all actor update replay
+and maximal reader replay gives ≤1,064,960 Student forward rows in that branch
+(≤1,024,000 in the C-heavy branch). Critic collection plus update replay is
+163,840 forward rows. These counts include work outside native transitions.
+
+Runtime is unmeasured. Paid anchors are B02+B03 worker/read CPU 107.544/97.502
+seconds, and parent C-prior approximately 589 CPU seconds including admission
+through worker exit and its reader (worker-resource plus reader scope is about
+588 seconds). They do not bound this differently replayed package. A working
+planning range is **10–30 CPU minutes for worker execution and 1–5 CPU minutes
+for the reader**, with substantial uncertainty from cache misses, one-row
+autograd and artifact I/O. No runtime or speedup claim follows. Previous
+inheritance peak RSS was about 665 MiB; 1–2 GiB is only an indicative future
+worker reservation, not measured admission. Actual node availability comes
+from the configured compute method when a result launch is selected.
+
+The source-only engineering estimate is **4–8 elapsed hours** for the complete
+direction-owned collector/update, calibration/decoder wrappers, immutable
+provenance, exact reuse, saved reader, checks and independent engineering review.
+It excludes current unmetered scientific design/literature work, execution,
+and an indicative **1–2 elapsed hours** for complete scientific result reading,
+independent diagnosis and publication. These are planning estimates, not a
+deadline or measured labor. Raw storage is not yet measured; its packed schema
+must preserve the named evidence. A later run retains one necessary durable
+bulk copy and compact Git evidence, and cleans its unused source snapshot and
+scratch only after checking consumers. This design created no run/scratch
+artifacts or redundant evidence copies, so it has zero new deletion/reclamation
+to report; B03's measured 1,627,717,632-byte cleanup remains separate.
+
+Acquisition is already paid: B02+B03 are two supervised fits, 212,992 unique
+native steps, 16,000 updates, 8.192 million presentations, 163,840 requested
+labels and 205.046 measured worker/reader CPU seconds. If selected, acquisition
+plus this proposal would be 540,672–557,056 native steps, four fits and two
+discrete calibrations; this is not the whole project cost. Earlier fleet B01's
+two fits/576,000 steps and parent-adaptation/other negative investments remain
+separately incurred. Engineering, review and support labor were not metered.
+
+No source implementation or launch is selected here. If Root selects the
+proposal, a concise L0 will bind the direction-owned entrypoints/tests/reader
+to this contract; unchanged shared kernels need no rewrite. Numerical/replay,
+mask/alias, reset/hold, no-leakage, optimizer-count, source-binding, fixed-winner
+and duplicate-reference checks are necessary engineering work, not extra
+scientific exposure. Publish accepted exact inputs, admit on the actual node,
+then observe the same accepted operation through complete collection/reading.
+Technical failure preserves exposure and missingness; neither failure nor
+completion adds replacement fits, worlds, temperatures or epochs.
+
+### Outcomes and investment meaning
+
+If R improves S and B* in both lineages, retain that conditional complete-program
+development capability, checking the actual R−Q/R−C effects before claiming
+ordinary-control superiority and reading every service/temporal/path tradeoff.
+It establishes neither pretraining necessity, transferable features, aggregation
+necessity, reliable training-population improvement nor superiority to every
+ordinary calibration. Small positive point estimates alone do not compel
+confirmation or expansion.
+
+If R improves S but B* matches/exceeds it, reward learning has conditional value
+while calibrated reuse has the stronger immediate cost case. If calibration
+improves S and R fails, retain the calibrated capability and end this recipe.
+If both fail, keep S/C/Q and the adverse evidence. Mixed lineage outcomes stay
+mixed; do not select the favorable initial asset or call their average recurrence.
+A J gain with temporal/service/movement harm remains an objective tradeoff:
+native J does not charge path and this is no energy/deployment acceptance test.
+Technical incompleteness is missing evidence, not zero gain or permission to
+replace a lineage. No branch automatically selects more epochs, entropy tuning,
+KL anchoring, a third lineage or another diagnostic experiment.
+
+This completes the assigned useful preparation. The broader learned-development
+question stays open; the next concrete owner of result allocation is Root. My
+preference for this complete priced comparison and the recurrence reviewer's
+different investment preference are both preserved. No approval request to the
+project owner, fabricated external dependency or recurring idle check is added.
+
+### Primary-source checks informing this design
+
+I checked the following load-bearing passages independently of the Oracle's
+summary. They constrain interpretation and interface choices, not admission:
+
+- Foundations **P16**, metadata `docs/new-libs/corpus/papers/P16/metadata.json`;
+  its indexed local PDF is absent. Primary [HATRPO/HAPPO §§2.2–3.1](https://arxiv.org/pdf/2109.11251)
+  gives simultaneous-update counterexamples and a sequential construction under
+  different assumptions. The ordinary individual clipped loss used here does
+  not inherit that improvement result; clipping is no safety guarantee.
+- Inst-sci **MARL-0018**, `/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0018.json`
+  and `pdf/MARL-0018.pdf`, PDF SHA256
+  `bad31e7088ba67c0cfaedb72a2477fc03f473d8b6d29a2ea3ce821d376802615`.
+  I read PDF pp.3–5, formulation and Algorithm 1 of [the primary article](https://ojs.aaai.org/index.php/AAAI/article/view/25973).
+  Its correction addresses merged offline/online transitions. Here only weights
+  are inherited and new training is on-policy; no replay model/correction is
+  thereby justified.
+- My-lib **icml-2024-pmlr-v235-wolczyk24a**, primary PDF
+  `/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/icml-2024/pmlr-v235-wolczyk24a/arxiv-2402.02868.pdf`,
+  SHA256 `db3fd2b63ef0ad59cfc46a87fbf19e85181a860e3ae5df737b76974036f5a9e3`.
+  PDF pp.2–4 of [the paper](https://proceedings.mlr.press/v235/wolczyk24a.html)
+  support a forgetting risk and differing retention-method results in its studied
+  settings. That is a relevant threat, not evidence that forgetting caused our
+  prior losses or that KL anchoring is the next repair.
+- [PPO §§3,5–6.1](https://arxiv.org/pdf/1707.06347) supports the familiar
+  clipped-surrogate formulation and optional entropy term. Zero entropy here is
+  a prospective package choice, not an empirical explanation of earlier failure.
+
+These are direct source statements with the local inferences separated above.
+The Oracle's July/external-round checks below remain its attributed checks;
+I do not claim a new full historical audit or a novelty result. No paper,
+adviser agreement or source feasibility observation supplies empirical evidence
+that the proposed continuation succeeds.
+
+
+<a id="b04-original-independent-recommendation"></a>
+### Complete original Oracle recommendation and explicit corrections
+
+Root-assigned independent Astra Max Oracle `/root/deep_report_review`, original
+answer 2026-09-30 17:26 UTC, delivered unchanged to this DM at 17:30 UTC.
+The following original answer is retained in full, including its overbroad world
+identity sentence; the separately supplied correction immediately after it and
+the source-bound design above resolve that sentence. This is advice, not a
+selected operation or new empirical result. First-person statements in the
+original answer refer to the Oracle.
+
+---
+
+**Recommend advancing the inheritance DM to one bounded native reward-development study using both retained S assets.** The question is whether reward training can improve their local command choices beyond unchanged sampled use and a paid, competent calibration of randomness.
+
+The proposed ceiling is **two actor–critic training runs, two reward-based calibration selections, and 344,064 native steps**. The substantial investment is approximately **4–8 engineering/review hours**, according to the DM’s source-only assessment. This is a concrete exploration proposal, not an execution authorization.
+
+I read the complete recurrence reviewer’s original answer before settling this recommendation. Its result diagnosis is supported: two competent supervised constructions now exist, but neither transferable hidden features nor useful subsequent reward learning has been demonstrated. I differ on the next allocation: the comparison below addresses ordinary randomization directly, so superiority of frozen S over Q in B04 need not be a prerequisite for testing developability.
+
+The strongest evidence and objection are both consequential. B02 and B03 sampled S improve their common development-panel C means by approximately **+.04657/+ .05655 J** and **+3.353/+4.114 users**, respectively. Their temporal service and movement adverses remain. Conversely, ordinary randomized C already improves its own matched C comparison, while all three parent-adaptation reward-trained sampled endpoints deteriorate relative to their competent initialization. Thus competence supplies an opportunity for exploration, not a prediction that another learner will succeed. [B02 evidence](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b02_inheritance_a01/summary.json), [B03 evidence](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b03_inheritance_recurrence_a01/summary.json), [parent-adaptation evidence](/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b03_c_prior_a01/summary.json).
+
+**The proposed additional capability is native improvement of the learned command distribution.** A full actor update can change action rankings and their dependence on local observations. Temperature calibration can only reshape the existing logits; ordinary C randomization distributes departures uniformly. Whether that additional flexibility is learnable and useful is the experiment’s question.
+
+Use both assets without choosing between their historical scores:
+
+| Initialization | Published source | Checkpoint SHA256 |
+|---|---|---|
+| Original B02 S | `e945483b85c7f8ddfc315c57f36938d6c14201c7` | `b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a` |
+| Recurrence B03 S | `4909c9553300a4a4de6eb79476e818d7b1ceab53` | `cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d` |
+
+These are the canonical `assets/S.pt` files in their respective native run directories. Load their actor tensors exactly; retain both originals. B04 continues using its already fixed B02 asset.
+
+The deployment contract stays the existing N5/H256 contract: 50 static users, all transmitters on, the source-bound 27 commands, and decisions every four primitive ticks. Each actor receives its **114 lawful features**: current local observation excluding its clock entry, its own navigation one-hot, and the charged analytic eligibility feature. Its navigation follows its own actual trajectory. No C command, global map, peer action, public coordination coin, or extra actor feature is added.
+
+Sampling remains independent across agents, using the original addressed private uniform and float64 inverse-CDF categorical law. Evaluation uses fixed temperature one for both unchanged S and the reward-trained endpoint. Caches are private to the episode and actor version; cache hits never reuse sampled commands. This is a separate deployment contract from B04’s two-draw coupling comparison.
+
+For each retained asset, train one complete continuation, R:
+
+- **256 complete episodes**, with no intermediate checkpoint selection or replacement.
+- Unchanged `114→128→128→27` Student architecture; all 34,715 actor parameters trainable.
+- A fresh existing `136→128→128→1` centralized critic, used only during training. Its global state and previous-command inputs never enter the actor.
+- Fresh separate Adam optimizers: learning rate `3e-4`, betas `(.9,.999)`, epsilon `1e-8`, no weight decay, separate gradient-norm clipping at `.5`. Discard the supervised optimizer state.
+- Two complete episodes per collection group, followed by four full-rollout epochs.
+- Sum the four native J rewards in each decision interval. Targets are undiscounted terminal returns divided by 256, without terminal bootstrap. Standardize detached advantages over the 128 collected decision rows.
+- Use the existing agent-summed clipped surrogate, with individual requested-category ratios clipped to `[.8,1.2]`; critic loss is half mean squared target error.
+- **Entropy coefficient zero**, no teacher loss, no frozen-parent KL penalty, no reward shaping.
+
+Zero entropy is a prospective objective choice for an already stochastic starting policy. It does not diagnose the earlier C-prior failure. This is also a complete finite training package, not an isolated test of inherited features or optimizer-state reset.
+
+The implementation must bind old log probabilities and differentiable replay to the actual float64 categorical probabilities used for collection. An unnoticed substitution of the earlier FP32/multinomial sampler would change the treatment. Numerical replay tolerance and initial-ratio checks belong in the engineering checks.
+
+The simpler comparison receives an equal **256 native episodes per lineage**. Evaluate these eight fixed candidates on 32 common, newly generated calibration worlds:
+
+| Family | Four candidates |
+|---|---|
+| Ordinary local C randomization | Departure probability ε = `0, .05, .10, .20`; probability `1−ε` on actual local C’s command and `ε/26` on each alternative |
+| Frozen inherited S | Greedy, temperature `.5`, temperature `1`, temperature `2` |
+
+All candidates execute on their own actual histories, using the same underlying local interfaces. C retains its full, memoized ranking competence. The S candidates retain their original analytic helper and acquisition cost.
+
+Choose the calibration winner, B*, by mean native J alone. Freeze the candidate order above for exact ties. Retain every candidate’s positive and adverse evidence. This is a **charged reward-based selection procedure**, even though it performs no Adam updates.
+
+I recommend using the first 32 worlds of each continuation’s prospectively fixed 256-world training list for calibration. The calibration procedure spends its budget repeatedly comparing eight fixed choices; R spends it adapting across 256 episodes. That difference is part of the comparison between finite programs, not a claim of identical data use. All seed lists, sampling domains and ordering must be frozen before new exposure.
+
+After both continuations and both calibrations finish, evaluate, per lineage, on **32 fresh worlds**:
+
+1. Deterministic C.
+2. Ordinary Q with ε=.10.
+3. Unchanged sampled S.
+4. Selected calibration B*.
+5. Final sampled R.
+
+Within each lineage, use common world identities and addressed sampling innovations. Keep training, calibration and final evaluation identities distinct as declared, and use independent streams across lineages.
+
+When B* is exactly C, Q, or unchanged S—including its source, decoder and sampling identities—reuse that study’s already collected reference trajectory. Do not purchase a duplicate or count it as replication. This gives **1,280 + 32k episodes**, where `k∈{0,1,2}` is the number of distinct calibration winners requiring another evaluation panel: **327,680–344,064 native steps**.
+
+The primary readings are each lineage’s mean **R−S J** and **R−B* J**, with R−Q and R−C retained. Read service, quality, temporal p10/minimum, zero-service episodes and ticks, path, boundary effects, and complete computation alongside J. Report both lineage differences and their equal-weight mean. Paired-world intervals describe each fitted endpoint; 64 evaluation worlds are not 64 independent training replications.
+
+To distinguish parameter movement from an effective intervention, price one additional observation in advance: on R’s final evaluation trajectories, evaluate frozen S on the **already collected lawful features** and decode it using the same private uniform. This costs at most **20,480 frozen-actor forward rows**. Record distribution change, requested-command disagreement, and whether four-tick clipped motion differs. The latter adds at most **81,920 deterministic shadow motion ticks**, without radio queries or native counterfactual rollouts.
+
+Those shadows establish action exposure, not the reward that S would have obtained on another trajectory. They allow an adverse outcome to be distinguished from nonactivation or sparse physical change without buying a separate diagnostic experiment.
+
+The plausible complete outcomes change the choice as follows:
+
+- **R improves S and B* in both lineages:** retain a constructive native development result for this finite program. Examine service and temporal tradeoffs before proposing further investment. This would not establish pretraining necessity, transferable representation, or superiority to every calibration.
+- **R improves S but is matched or exceeded by B*:** native learning worked conditionally, but the simpler calibrated program has the stronger immediate investment case.
+- **Calibration improves S while R fails to improve it:** retain the calibrated capability and end this reward-training recipe.
+- **Both development procedures fail:** retain the original assets and ordinary controls. Additional epochs, entropy changes or anchoring are not automatic repairs.
+- **Mixed lineage results:** preserve the useful conditional positive and the adverse lineage. Do not select the successful parent retrospectively or present their average as reliable recurrence.
+- **J improves with adverse service, temporal or movement consequences:** report a native-objective tradeoff. Path is not charged by J, and neither energy nor deployment acceptability has been established.
+- **Technical incompleteness:** keep missing results explicit; do not replace a failed lineage or impute zero benefit.
+
+This is exploratory. Small positive point estimates alone would not compel confirmation or expansion.
+
+The complete prospective cost is material:
+
+| Component | Maximum new exposure |
+|---|---:|
+| Two reward continuations | 512 episodes / 131,072 native steps |
+| Two eight-candidate calibrations | 512 episodes / 131,072 native steps |
+| Final comparisons | 320 episodes / 81,920 native steps |
+| Total | **1,344 episodes / 344,064 native steps** |
+| Actor / critic Adam calls | 1,024 / 1,024 |
+| Actor / critic replay rows | 655,360 / 131,072 |
+| Collected critic rows | 32,768 |
+| Additional frozen-S shadow forwards | 20,480 |
+| New teacher labels | 0 |
+
+Before memoization, the feasible worst case requests **143,360 C decisions**, corresponding to **3,870,720 candidate trajectories and 15,482,880 modeled ticks**. Its C power-work ceiling is 323,993,600 links. In that same worst-case branch, Student helpers add 40,140,800 links. With one environment constructor and all episode resets/transitions, the dense native calculation adds 94,987,475 power slots: **459,121,875 combined slots** before cache savings. This includes native A2A diagonal placeholders and is a work count, not a count of physical communication links.
+
+The separate maximum for Student rollout/calibration/evaluation requests is 307,200; it occurs under a different calibration-winner branch and must not be added to the C maximum. Shadow forwards and optimizer replay are additional, separately charged work.
+
+The reader should verify all saved trajectories, source/asset identities, native reductions, sampling, calibration selection and duplicate reuse. Budget up to **81,920 endpoint/shadow actor replay rows**, with zero native transitions, fresh C/radio queries or optimizer calls. Training-density and update evidence can be checked from paid saved outputs; this does not claim a complete independent replay of optimizer arithmetic.
+
+There is no measured runtime for this package. Existing inheritance worker-plus-reader costs were 107.544 and 97.502 CPU seconds; the older three-fit C-prior study cost roughly 590 CPU seconds. These are planning anchors, not runtime bounds. Cache behavior, training replay arithmetic, storage and reader implementation still affect cost.
+
+The DM’s **4–8 elapsed engineering/review-hour estimate** covers the fuller package, including calibration, immutable provenance, duplicate reuse, density binding and shadow reconstruction. It excludes scientific design, execution and result reading. Source inspection found no architecture or information obstruction, but the current collector/update cannot be called unchanged: they require 120-input C-prior contexts and table-specific parameter groups. A direction-owned adapter and reader are necessary. [Student implementation](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b02/model.py), [existing policy interface](/home/fires/hmasd-wsl/experiments/candidates/uav_fleet_adaptation/b02/policies.py), [prior update implementation](/home/fires/hmasd-wsl/experiments/candidates/uav_parent_adaptation/b03_c_prior/update.py).
+
+Acquisition remains incurred: B02+B03 used two supervised fits, **212,992 unique native steps, 16,000 updates, 8.192 million presentations, 163,840 requested labels and 205.046 measured worker/reader CPU seconds**. Earlier adverse investments remain separate sunk costs.
+
+The literature supports this as a familiar, testable continuation—not an algorithmic novelty:
+
+- **Foundations P16**, `docs/new-libs/corpus/papers/P16/metadata.json`: I read the primary §§2.2–3.1, including the simultaneous-update counterexamples and sequential improvement construction. **DIRECT:** a clipped shared-policy update does not inherit a general multi-agent monotonic-improvement guarantee. **INFERENCE:** retain an unchanged-asset comparison and permit an active negative result; do not treat clipping as protection. The indexed local PDF was absent, so I used the primary [HATRPO/HAPPO paper](https://arxiv.org/pdf/2109.11251).
+- **Inst-sci MARL-0018**, `/home/fires/projects/Inst-sci/papers/MyLib/{json,pdf}/MARL-0018.*`: I read the load-bearing formulation and Algorithm 1. **DIRECT:** OTC corrects sampling from merged offline/online transition data. **INFERENCE:** it does not justify importing a transition model or replay correction into this weight-initialized, on-policy proposal. [Primary article](https://ojs.aaai.org/index.php/AAAI/article/view/25973).
+- **My-lib `icml-2024-pmlr-v235-wolczyk24a`**, `/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/icml-2024/pmlr-v235-wolczyk24a/arxiv-2402.02868.pdf`: I read the state-coverage/imperfect-cloning argument and retention experiments. **DIRECT:** fine-tuning can lose pretrained capabilities, with different retention methods helping different studied settings. **INFERENCE:** forgetting is a credible risk here, not an established diagnosis or a reason to prescribe KL anchoring without comparison. [Primary article](https://proceedings.mlr.press/v235/wolczyk24a.html).
+- The proposed finite update uses the familiar clipped-surrogate construction; entropy is an optional objective term, not a required part of PPO. [Primary PPO paper, §§3–6.1](https://arxiv.org/pdf/1707.06347).
+
+I also checked the relevant July G30/G31 records and the external fast-anchor treatment-identity clarification. They reinforce specifying the complete target, critic and optimizer package; their toy-family results do not supply a UAV repair. No novelty claim is warranted for imitation followed by native fine-tuning or scalar calibration.
+
+At portfolio level, I favor this concentrated investment by the existing inheritance DM. It asks a capability question complementary to N8 control, C/V/R forecasting and B04 joint sampling. I have not independently reviewed the newly completed C/V/R or N8 results and do not use their preliminary returns to claim either direction is exhausted. B04 evidence can update the allocation when available, while its original asset and frozen primary question remain intact.
+
+I performed source/document/literature inspection and cost arithmetic only. I reused the earlier consequential B02 checks and read the complete fresh B03 independent review; I did not duplicate its raw-result audit, execute models, or purchase new exposure.
+
+**MATERIAL_DISSENT: yes — allocation only. I favor selecting this explicitly priced development comparison over the recurrence reviewer’s preference to await B04 before prioritizing reward continuation. Two competent constructions supply a real starting opportunity, and the proposed comparison directly tests the consequential ordinary-randomization alternative. B03 retention, closure and all accepted operations remain supported.**
+
+---
+
+Separate original clarification, 17:31 UTC, read and adopted by this DM:
+
+> Separate clarification, preserving the original answer unchanged: calibration WORLD identities intentionally equal the first32 worlds of each lineage’s fixed256-world continuation-training list. The final32-world panel is fresh and disjoint from that entire training/calibration world list and prior development panels; lineage lists are independent. The later sentence asking all training/calibration/final identities to remain distinct was overbroad as to world identities. Please correct this explicitly in your source-bound design, alongside the original text. Calibration candidates share calibration innovations within each world; continuation, calibration and final sampling domains remain separately declared, with no endpoint information entering calibration or training. Own trajectories/caches never carry between arms or episodes. Costs and duplicate-reuse branches are unchanged. Your per-agent-clipped/common-team-advantage correction agrees with the law in the original final; I do not recommend changing it to a clipped joint-product ratio. The one-row FP32 deployment / float64 probability and replay issue is likewise an explicit engineering requirement there. Root’s current assignment is DESIGN ONLY; my original investment recommendation does not authorize execution.
+
+DM follow-up identified that a calibration winner may transfer worse than fixed
+Q/C. The original Oracle reply at 17:43 UTC was read in full and adopted:
+
+> Agreed. Calibration selection does not establish holdout dominance over its constituent controls. The matched R−Q and R−C results retain their own meanings; R−S and R−B* alone support only those two improvements. Your refinement preserves the original exposure and strengthens the intended interpretation. The one-row FP32 / FP64 density binding is also consistent with the proposed asset semantics; engineering owns its numerical verification.
+
+The DM design above implements these corrections without extra arms, exposure
+or a new review. The independent investment dissent remains explicit for Root;
+this completes the current design-only task and leaves B03's closed result,
+canonical assets and already accepted parent B04 untouched.
