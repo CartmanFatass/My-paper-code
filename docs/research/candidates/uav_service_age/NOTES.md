@@ -276,3 +276,45 @@ Fresh actual-node memory/load admission is still required at launch. No runtime,
 canonical HEAD, launcher, peer output or sparse-selection change is selected.
 Known test costs above do not measure all authoring, review, dependency-import
 or transfer support; those unmeasured costs are not zero.
+
+### Prelaunch runtime binding after the shared technical hold
+
+The exact scientific implementation/tests were published at
+`dd6cdf780031ac42b5b7097b76456f04a89c4b4d`; no admission, worker, observer,
+training episode or result evaluation existed under that SHA. Root's owner-requested
+runtime investigation held this first launch without changing the selected science.
+Root published its independently engineering-reviewed provisional mitigation at
+`6c930e5c54a2f79f390a6c8a0f8f8e66b237f335` and verified deployment/release at
+`c0ee7967e0391babd35b7970fa37992aaf1f4884`. I read the original diagnosis,
+compatibility limits and current shared-runtime judgment in RESEARCH. The present
+source publication binds that configuration before the first result admission;
+all eight scientific implementation files and three test files remain unchanged
+from dd6cdf780. The existing full fit, seeds, endpoints and stopping rule stand.
+
+Configured wsl_4070 Python is now
+`/home/wu/.venvs/hmasd-gcc-31021/bin/python`, CPython3.10.21 built with GCC13.3
+without PGO/LTO, executable SHA256
+`039033f129d33a69044ceff71ca87b109ad99d511b59946f81ffc3f728b1a3a1`.
+Compute-config SHA256 is
+`2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f`.
+It uses the unchanged original NumPy1.26.3/Torch2.7.0+cu118 package tree;
+the old environment remains a live dependency, not deletion material. The new
+PATH selects this Python and retains the old ninja path. No accepted process was
+migrated or restarted. Fresh native resource/ownership admission still applies.
+
+[Root's compact diagnosis](../../../../runs/runtime_repair/cpython_20260930/diagnosis.json)
+and [complete engineering evidence](../../../../runs/runtime_repair/cpython_20260930/evidence.json)
+record both builds passing30 consumer tests, exact checkpoint/RNG contents and
+crossloads, complete initialized-L0 H256 real-clock fixtures, and128 saved-S2
+real-clock reports per build with0 misses. The new build completed about11% fewer
+saved-S2 reports in its300s sample. These finite checks establish compatibility
+for the observed consumers, not a cure, compiler attribution, uniform latency or
+general reliability. No further pilot is selected. A recurrence preserves the
+failed scientific operation and returns for node/runtime judgment; it does not
+authorize an automatic retry or resume.
+
+Root's shared diagnostic support cost is separate:0 result fits,696 native
+fixture steps and24 synthetic optimizer steps, plus its recorded stress/build/
+reader costs. This direction's earlier640 native support steps remain retained;
+no additional DM test or native transition was run during the hold. This binding
+adds no empirical evidence about the service-age question.
