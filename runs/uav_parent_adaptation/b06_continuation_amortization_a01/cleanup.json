@@ -1,0 +1,56 @@
+{
+  "actual_leftovers": [],
+  "after_allocated_bytes": {
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a89719873d674b3984b71b1e605f3de9": 0,
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f82f3a29e6bf46648b009cc7ad291d81": 0,
+    "/home/fires/hmasd-wsl/.git/worktrees/a89719873d674b3984b71b1e605f3de9": 0,
+    "/home/fires/hmasd-wsl/.git/worktrees/f82f3a29e6bf46648b009cc7ad291d81": 0,
+    "/home/fires/hmasd-wsl/experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/__pycache__": 0,
+    "/home/fires/hmasd-wsl/temp/directions/uav_parent_adaptation": 0,
+    "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/__pycache__": 0
+  },
+  "before_allocated_bytes": {
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a89719873d674b3984b71b1e605f3de9": 1730551808,
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f82f3a29e6bf46648b009cc7ad291d81": 1731502080,
+    "/home/fires/hmasd-wsl/.git/worktrees/a89719873d674b3984b71b1e605f3de9": 3567616,
+    "/home/fires/hmasd-wsl/.git/worktrees/f82f3a29e6bf46648b009cc7ad291d81": 3567616,
+    "/home/fires/hmasd-wsl/experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/__pycache__": 114688,
+    "/home/fires/hmasd-wsl/temp/directions/uav_parent_adaptation": 12288,
+    "/home/fires/hmasd-wsl/tests/experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/__pycache__": 90112
+  },
+  "evidence_published_commit": "92d8c7ae4b4046561b4f12a38fc21f69ecfed4cc",
+  "gross_reclaimed_allocated_bytes": 3469406208,
+  "method": "Allocated st_blocks*512 over exact deleted directories including directory nodes; snapshots contain no multiply linked regular files. Net subtracts the allocated sizes of both new cleanup records. Durable bulk was moved and is not counted as reclaimed. Git object storage and host-wide free-space changes are outside this scope.",
+  "native_processes_absent": true,
+  "net_reclaimed_allocated_bytes": 3469398016,
+  "new_cleanup_record_allocated_bytes": 8192,
+  "observer_stopped": true,
+  "retained_canonical_raw_bytes": 74929496,
+  "retained_canonical_summary_bytes": 3457790,
+  "snapshot_gc": {
+    "mode": "apply",
+    "snapshots": [
+      {
+        "claim": "/home/fires/hmasd-wsl/.git/hmasd-admission/9955539bd12c1f8ae8d45c1de695d44d7d17b90326a9ed8b8bf370e44931f5c0.json",
+        "durable_ref": "refs/heads/main",
+        "eligible": true,
+        "output": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_paid_ranker_fit_a01",
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a89719873d674b3984b71b1e605f3de9",
+        "removed": true,
+        "sha": "92b6e324e254b129cd790fc87749ae1a5761f35f",
+        "snapshot": "a89719873d674b3984b71b1e605f3de9"
+      },
+      {
+        "claim": "/home/fires/hmasd-wsl/.git/hmasd-admission/d1e521279445b11b8df9b7a70a18a1f05dc7b65edeaee8deb898204b694d166b.json",
+        "durable_ref": "refs/heads/main",
+        "eligible": true,
+        "output": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_continuation_amortization_a01",
+        "path": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/f82f3a29e6bf46648b009cc7ad291d81",
+        "removed": true,
+        "sha": "5e44991ca927f7c517c00c58b9354baece72e2e4",
+        "snapshot": "f82f3a29e6bf46648b009cc7ad291d81"
+      }
+    ]
+  },
+  "tool_blocker": null
+}

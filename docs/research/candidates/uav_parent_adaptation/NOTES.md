@@ -5979,3 +5979,44 @@ The maintained snapshot collector's exact two-target preview reports both
 completed source snapshots eligible, with durable main references and original
 claims intact. Source deletion follows evidence publication; a move alone is
 not reported as reclaimed disk. The measured cleanup result is recorded below.
+
+<a id="b06-final-cleanup"></a>
+### Final publication and measured cleanup
+
+Complete evidence, independent diagnosis and disposition were published on main
+at92d8c7ae4b4046561b4f12a38fc21f69ecfed4cc before deletion. All scientific,
+engineering and source-allocation consumers released the disposable inputs.
+The maintained collector, with its read-only elevated process scan, rechecked
+terminal witnesses, clean snapshots, live references and durable main reachability.
+It removed exactly:
+
+- `.git/hmasd-launch-sources/a89719873d674b3984b71b1e605f3de9` (fit source)
+  and its `.git/worktrees/a89719873d674b3984b71b1e605f3de9` registration;
+- `.git/hmasd-launch-sources/f82f3a29e6bf46648b009cc7ad291d81` (evaluation
+  source) and its `.git/worktrees/f82f3a29e6bf46648b009cc7ad291d81` registration;
+- `experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/__pycache__`
+  and the matching `tests/experiments/candidates/` B06 `__pycache__`;
+- `temp/directions/uav_parent_adaptation/`, containing only the two consumed
+  b06-fit-observe.json and b06-evaluate-observe.json requests.
+
+All seven directory targets are absent. The observer is stopped and its daemon,
+both original supervisors and both original runners are absent. Claims,
+manifests, process-exit witnesses, useful source/tests, the immutable fit and
+required unique evidence remain. The bulk move created no second copy and is
+not included in reclaimed bytes. No original raw trajectory or adverse outcome
+was removed, no archive was created, and no cleanup blocker remains.
+
+[Exact before/after and collector result](../../../../runs/uav_parent_adaptation/b06_continuation_amortization_a01/cleanup.json):
+deleted allocated space is3469406208bytes, including directory nodes and source
+registrations; subtract8192allocated bytes for both new cleanup records to give
+**3469398016net allocated bytes reclaimed**. No snapshot regular file had an
+external hard link. This measures the exact targets and new cleanup records,
+not Git object-store changes or host-wide free space under concurrent work.
+Canonical retained raw/summary payload is78387286bytes, with hashes above.
+
+RESEARCH's owned standing and affected topics3/4 now publish the complete
+conditional result and its changed explanation, retaining the original
+question/lead and all earlier contrary evidence. State is reserve/idle with no
+selected producer, unread scientific result or advice. Shortlist use remains
+an unselected candidate for Root's allocation; no owner permission or resource
+failure is manufactured as a dependency.
