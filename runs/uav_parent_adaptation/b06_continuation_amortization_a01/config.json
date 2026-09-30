@@ -1,0 +1,290 @@
+{
+  "admission_command_sha256": "16e4a0040c4d63588512719ea713403872c51d0f81d4fcca54361bfbb57d2660",
+  "arms": [
+    "R",
+    "T_E",
+    "K2_E",
+    "L"
+  ],
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 29366991,
+  "cadence": 10,
+  "capacity": 10,
+  "ceilings": {
+    "candidate_transit_ticks": 1792000,
+    "episodes": 64,
+    "model_branches": 176,
+    "model_physical_transitions": 80960,
+    "native_steps": 32000,
+    "stationary_candidate_rows": 44800,
+    "worker_state_mask_requests": 32706304
+  },
+  "coefficient_count": 13,
+  "direction": "uav_parent_adaptation",
+  "evaluation_refit": false,
+  "feature_count": 12,
+  "fit_artifact": {
+    "bytes": 438494,
+    "path": "runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/ranker.json",
+    "sha256": "a2b5d1a8c127c50494e8b8aa76ff84ba3ca61e4b5db6281e4713e524ea2fd0c1"
+  },
+  "fit_inputs": {
+    "config.json": {
+      "bytes": 9569,
+      "path": "runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/config.json",
+      "sha256": "bf422b8a75b9bb007fad84a7ebbc354fcf33563912b488d04c208b520c581d1b"
+    },
+    "launch-manifest.json": {
+      "bytes": 4030,
+      "path": "runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/launch-manifest.json",
+      "sha256": "3bfb3dfbee70115d213434628ece52297405b920feb106f157c5e09b9fb5f288"
+    },
+    "ranker.json": {
+      "bytes": 438494,
+      "path": "runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/ranker.json",
+      "sha256": "a2b5d1a8c127c50494e8b8aa76ff84ba3ca61e4b5db6281e4713e524ea2fd0c1"
+    },
+    "reading.json": {
+      "bytes": 1316,
+      "path": "runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/reading.json",
+      "sha256": "998d67b26dcbfd065e9cb09f220af4979ba4713b9ac0dde9d9f61a90c0d37fa3"
+    },
+    "summary.json": {
+      "bytes": 11659,
+      "path": "runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/summary.json",
+      "sha256": "400e578fa0eeb2f18e83633c1a1c0217d6bf76bab14f467a59fb74f791db3265"
+    },
+    "training_rows.json": {
+      "bytes": 455360,
+      "path": "runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/training_rows.json",
+      "sha256": "81f06b7627b6bdd0a276cebce193e547e12b78a8009aa5afe9b784da3ae5537d"
+    }
+  },
+  "horizon": 500,
+  "launch_sha": "5e44991ca927f7c517c00c58b9354baece72e2e4",
+  "min_sinr": 0.0,
+  "n": 8,
+  "new_fits": 0,
+  "new_training_acquisition": 0,
+  "numerical_threads": 1,
+  "object_id": "parent_n8_amortization_b06_evaluate",
+  "option_t": 40,
+  "phase": "evaluate",
+  "ridge_penalty_all_coefficients": 0.1,
+  "row_weight": "1/(16*world_champion_count); no penalty rescaling",
+  "source_bindings": {
+    "envs/pettingzoo/env_adapter.py": {
+      "bytes": 25232,
+      "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40"
+    },
+    "envs/pettingzoo/scenario1.py": {
+      "bytes": 7476,
+      "sha256": "e5b3eb7d755a7d7866cc7cd01531383bee821f0c6d72a81a3d4fa9cb5954939e"
+    },
+    "envs/pettingzoo/uav_env.py": {
+      "bytes": 68827,
+      "sha256": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e"
+    },
+    "envs/pettingzoo/uav_radio.py": {
+      "bytes": 5001,
+      "sha256": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc"
+    },
+    "experiments/candidates/agent_count_generalization/adapter.py": {
+      "bytes": 4364,
+      "sha256": "b59d7028771b5acc4148f7dd90b5480c3143ae88580bb1b8154944831e2c0fbc"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/controller.py": {
+      "bytes": 5847,
+      "sha256": "d3766108d55662e0eea19e82227221d11e2ffedf0f971ad526071df2e142afb2"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/host.py": {
+      "bytes": 2791,
+      "sha256": "822745022a2842d4e683a677d2e3fa4c1dfc52db2dd781f4c0afb018cc09e0e3"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/option.py": {
+      "bytes": 9269,
+      "sha256": "dbf1dcb827e881986ccadf65c061662900df80b65cd01494c967773ad0815cc8"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/reader.py": {
+      "bytes": 10409,
+      "sha256": "e0a85eca3bf98784dce92e5d7bb661092b2f730d7ddaeab00d8ef84a598202b3"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/run.py": {
+      "bytes": 879,
+      "sha256": "484c5c36cab36f50273e8d9030beba0f51c0b923e3874b3ec0cc2fbe6b770b8b"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/study.py": {
+      "bytes": 11807,
+      "sha256": "b4e969f8352f27fa1d3dc6aaa76e9eba15f76ce40ce649ec5665ce0645039ced"
+    },
+    "experiments/candidates/uav_fleet_transmission/b02/worlds.json": {
+      "bytes": 83088,
+      "sha256": "b1be4cdb2f187a65e98283d9b72ab457edc63e55378636304de8d09d8ca7cbfa"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/__init__.py": {
+      "bytes": 49,
+      "sha256": "5634cd5f5f6e406f15e82aba5b4df4767c06dba459555aa6a8da5c7a3fa00d74"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/controller.py": {
+      "bytes": 5193,
+      "sha256": "0f79b38ff4216d3a2494995783caa32a8c487a9380a3483da36f13f7618b2d05"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/host.py": {
+      "bytes": 1832,
+      "sha256": "66975b7c3cc05637f95f293ff36a5c072b8eab4dd308ec3addfd2c74a49cddbe"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/option.py": {
+      "bytes": 4830,
+      "sha256": "0cf07104a1bfca09bf1387d11a9b39281975c9a6fd74cd89530c6081a3a3f7a0"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/reader.py": {
+      "bytes": 19396,
+      "sha256": "0741289ec07e3e52b6dc86ef0935c5b29e24d92ab9fe2332fa883e639b07f8fc"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/run.py": {
+      "bytes": 879,
+      "sha256": "3805a684b3f1177c33beff286e52e7ef5b89ec4fbbdbd387b8ab94841d16e6d4"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/study.py": {
+      "bytes": 12577,
+      "sha256": "15ec715647a40486a47ea4cf6c25470974130788f925ee33fbe1e4eba3583a1b"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/surrogate.py": {
+      "bytes": 8167,
+      "sha256": "38882231467ee44fa5203c2fda2f07b47969dd363b9c6aa6f67534e0e2e6d967"
+    },
+    "experiments/candidates/uav_fleet_transmission/b03/worlds.json": {
+      "bytes": 83057,
+      "sha256": "89098497f13b378c380eb0cd3cbd0e6cef24b6ab377bdc38ec44be9457cd8b20"
+    },
+    "experiments/candidates/uav_fleet_transmission/control.py": {
+      "bytes": 10050,
+      "sha256": "8fee671dcdf1183201f6a3e8290347a30e90b20b33955477b638cdbb5e5f36b5"
+    },
+    "experiments/candidates/uav_fleet_transmission/host.py": {
+      "bytes": 4306,
+      "sha256": "f46d4053f6fb0798f2d70e0d6aed3df6b63f012318b4df23207d06dbe0432f76"
+    },
+    "experiments/candidates/uav_fleet_transmission/reader.py": {
+      "bytes": 16221,
+      "sha256": "639dd22d6314067c6a526bc8534d525738a7de46a57b850c3e1c5950b4b86ce2"
+    },
+    "experiments/candidates/uav_fleet_transmission/study.py": {
+      "bytes": 19049,
+      "sha256": "1ce5f91d7ef67b17181a385021f854d2794e7cfb919662efff2b55d4711424cc"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/__init__.py": {
+      "bytes": 80,
+      "sha256": "997d54e01aeb3166bdc3e5d24997407491a701fa97961d68cb20a66ec6e794bb"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/contract.py": {
+      "bytes": 4270,
+      "sha256": "c89a0e9ab456e864bee72d4a5b153580b288e4fce5cd392a3b5668004a962e49"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/controller.py": {
+      "bytes": 5465,
+      "sha256": "90ba3467a5728626820ef72cee8ad1cf10f2bdc000d70dbbb4504eb10acc1be3"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/cycle.py": {
+      "bytes": 9493,
+      "sha256": "bfcc2fedc267505f3b9d53ca8f1159fe8d760ec4c2c74cf1826c80b86ca54ec6"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/fit.py": {
+      "bytes": 12573,
+      "sha256": "d760a439a3c45f838a9aea88ea19b3b5c7c92743a85ab0d98792a5623dc3b5d4"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/host.py": {
+      "bytes": 1934,
+      "sha256": "93c29514db107423e700af94f77e8331bf6f5c53d6bf0e1d21523e9800a44fd7"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/learning.py": {
+      "bytes": 19339,
+      "sha256": "157f002ddd7794c487a85d20ebf7ca11822e669ab00c6833f52d3b188c52ca7a"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/reader.py": {
+      "bytes": 24605,
+      "sha256": "c7213027a7ef8bdfd810c9ab8f9523c6af44d391986436565af767294e8705ed"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/run.py": {
+      "bytes": 1897,
+      "sha256": "7e27225d560984149f5946cdc06a5f4934b3d1318ff19f213d3196d43159e21d"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/study.py": {
+      "bytes": 11084,
+      "sha256": "6c7bd5305e49bf46f3fcf9bd4b02572433cb3efd868b710ede4a03c5ee431551"
+    },
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/worlds.json": {
+      "bytes": 83100,
+      "sha256": "c0129c208810f5423ea66a6840c23a0bc73d89f39c759ef4e5213a3bf4252a51"
+    },
+    "runs/uav_fleet_transmission/b03_complete_continuation_a02/config.json": {
+      "bytes": 5904,
+      "sha256": "a945dcd2fda619d68d8c1a025e5ef2762e50e11fc023c683106434c3a94023be"
+    },
+    "runs/uav_fleet_transmission/b03_complete_continuation_a02/reading.json": {
+      "bytes": 620695,
+      "sha256": "e3cbc277e478d4e17ac6c347d86c776376fd6a50bbe58994c7f125e5a47c97e9"
+    },
+    "runs/uav_fleet_transmission/b03_complete_continuation_a02/summary.json": {
+      "bytes": 776774,
+      "sha256": "df0d60b900d816bc93fed1855feca1afc9050dc2b719b017a7beb5d159a5cd7d"
+    }
+  },
+  "training_raw_root": "/home/fires/hmasd-artifacts/uav_fleet_transmission/b03_complete_continuation_a02/raw",
+  "training_rows": 58,
+  "training_source": "02e8c1adc5a625037490facc6388e4b8bc9fd74e",
+  "training_summary": {
+    "bytes": 776774,
+    "path": "runs/uav_fleet_transmission/b03_complete_continuation_a02/summary.json",
+    "sha256": "df0d60b900d816bc93fed1855feca1afc9050dc2b719b017a7beb5d159a5cd7d"
+  },
+  "training_worlds": [
+    29326000,
+    29326001,
+    29326002,
+    29326003,
+    29326004,
+    29326005,
+    29326006,
+    29326007,
+    29326008,
+    29326009,
+    29326010,
+    29326011,
+    29326012,
+    29326013,
+    29326014,
+    29326015
+  ],
+  "updates": 0,
+  "users": 50,
+  "versions": {
+    "numpy": "1.26.3",
+    "python": "3.10.20",
+    "torch": "2.7.0+cpu"
+  },
+  "world_file": {
+    "bytes": 83100,
+    "path": "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/worlds.json",
+    "sha256": "c0129c208810f5423ea66a6840c23a0bc73d89f39c759ef4e5213a3bf4252a51"
+  },
+  "world_ids": [
+    29366000,
+    29366001,
+    29366002,
+    29366003,
+    29366004,
+    29366005,
+    29366006,
+    29366007,
+    29366008,
+    29366009,
+    29366010,
+    29366011,
+    29366012,
+    29366013,
+    29366014,
+    29366015
+  ],
+  "world_order": "ascending world; cyclic R/T_E/K2_E/L starting at world index mod4"
+}
