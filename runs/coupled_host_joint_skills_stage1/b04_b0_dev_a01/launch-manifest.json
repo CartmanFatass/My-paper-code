@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-30T01:41:55.143199Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5aa472a6cef04a3195b7a055ec19bfde/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5aa472a6cef04a3195b7a055ec19bfde/experiments/candidates/coupled_host_joint_skills_stage1/run_b04.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01",
+    "--",
+    "--worlds",
+    "1000-1031",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01",
+    "--budget",
+    "3000",
+    "--launch-sha",
+    "c8ff47d2c85141f27badaf4353108219373718f5"
+  ],
+  "claim_key": "f8546d9a6511056f46364432a710915b3f3c2bfda4505f294ee3670ba5ec4d21",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/f8546d9a6511056f46364432a710915b3f3c2bfda4505f294ee3670ba5ec4d21.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5aa472a6cef04a3195b7a055ec19bfde/experiments/candidates/coupled_host_joint_skills_stage1/run_b04.py",
+    "--worlds",
+    "1000-1031",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01",
+    "--budget",
+    "3000",
+    "--launch-sha",
+    "c8ff47d2c85141f27badaf4353108219373718f5"
+  ],
+  "command_sha256": "8b3fe98500a0bad156e7d972e48af540f67034d1565f62a9792711ae97f02c84",
+  "control_observation": {
+    "observed_at": "2026-09-30T01:41:54.902964Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "c8ff47d2c85141f27badaf4353108219373718f5"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-30T01:41:54.922867Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5aa472a6cef04a3195b7a055ec19bfde",
+  "direction": "coupled_host_joint_skills_stage1",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/coupled_host_joint_skills_stage1/run_b04.py",
+    "--worlds",
+    "1000-1031",
+    "--budget",
+    "3000",
+    "--launch-sha",
+    "c8ff47d2c85141f27badaf4353108219373718f5"
+  ],
+  "lead": "Claude DM (WSL session)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/f8546d9a6511056f46364432a710915b3f3c2bfda4505f294ee3670ba5ec4d21.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 333988,
+      "session_id": 333988,
+      "start_ticks": 17105960
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 333988,
+    "process_group_id": 333988
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 333989,
+      "session_id": 333988,
+      "start_ticks": 17105964
+    },
+    "pid": 333989,
+    "process_group_id": 333988,
+    "supervisor_pid": 333988
+  },
+  "schema_version": 1,
+  "sha": "c8ff47d2c85141f27badaf4353108219373718f5",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/5aa472a6cef04a3195b7a055ec19bfde",
+  "stderr": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01/stdout.log"
+}
