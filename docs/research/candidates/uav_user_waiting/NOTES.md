@@ -181,3 +181,31 @@ match published bytes; its older canonical index needs narrow synchronization
 before current direction/lead and actual-memory admission. Preserve all unrelated
 dirty files and existing operations. Neither a launch acceptance nor exit0 will
 be reported as a scientific result before full verification and diagnosis.
+
+### B01 original operation accepted
+
+Exact input `86ae782cab3946a14062d3e0825c8597ea4513a7` was published before
+execution. The original `b01_burden_a01` was admitted on wsl_4070 at
+2026-09-30T11:20:41Z; see the
+[native manifest](../../../../runs/uav_user_waiting/b01_burden_a01/launch-manifest.json)
+and [actual-node preflight](../../../../runs/uav_user_waiting/b01_burden_a01/admission-preflight.json).
+It passed the4GiB memory floor with14,682,673,152 bytes available. The manifest
+binds source, command, snapshot, interpreter, operation and native process
+identities; this remains one invocation and one fixed panel.
+
+Prelaunch control preparation required the configured `zsh -lic` for Git network
+operations, including lazy blob retrieval by `git show` in the partial clone.
+Two plain-shell support requests stalled and only those owned prelaunch process
+trees were stopped; no scientific operation existed then. Published controls were
+synchronized under the node writer lock, preserving foreign edits. Fetch completed
+despite the node's pre-existing commit-graph/repack warnings; no Git repair,
+sparse-selection change or extra runtime stress work was performed.
+
+Deterministic observation uses the same original claim handle. An initial request
+was rejected for a relative `ssh` executable and then an incorrect `launch-status`
+reference: the status command requires a manifest or operation claim. These were
+observation errors, not worker failures. The blocked event was consumed in
+generation2 and the corrected same-operation probe registered in generation3.
+Native child queue delivery was explicitly rejected (`-32600`); this DM remains
+active and drains/rearms locally instead of ending the turn or moving its handle.
+The original worker remained running with consistent native identities throughout.
