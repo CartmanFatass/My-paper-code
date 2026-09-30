@@ -1237,3 +1237,35 @@ Verify available interpreter/NumPy identities, without claiming a complete bound
 of originally resident libraries. Use unchanged full read.py on the new completed
 panel before interpretation. Any new technical failure is retained and the route
 reconsidered; this entry selects no subsequent retry or runtime modification.
+
+
+### Explicit retry capability dependency — a02 remains unlaunched
+
+Before any new effect, I reconciled the original accepted operation again: exit1,
+valid witness, absent original runner/supervisor, consistent records. The current
+native status says `explicit_retry_available:false`; the current execution method
+states that explicit new attempts are not implemented. Changing only the notebook
+publication SHA would create a new key without resolving that capability gap.
+I raised this control issue instead of launching around duplicate prevention.
+**No a02 supervisor, admission, worker or result has started.**
+
+Root confirms this is a real shared-control issue and owns the narrow correction:
+an explicit retry-of reference to the original operation, verified nonzero terminal
+exit and absent original native identities, same source/scientific argv, one
+deterministic successor claim, ordinary current policy/source/resource admission,
+and replay returning that successor rather than spawning again. Root will obtain
+independent engineering review, publish and sync maintained control. This is not
+a new scientific approval or an instruction to edit the frozen original records.
+The original science SHA8ab72e5e2 and38source identities remain bound; those include
+scripts/hmasd_admission.py and compute config, which the unchanged reader checks.
+The prospective18c7cb207 publication is the decision record, not permission to
+substitute a documentation-only key for an explicit retry operation.
+
+This is the actual next dependency, owned by Root. Resume the already-selected
+single complete reattempt only through that supported reviewed control operation.
+Original raw/status/source stay preserved; N on separate local_linux is independent.
+Available prelaunch runtime observations on original LAPTOP-U9TDKC8A still match
+Python3.10.21 executable SHA256ca420bd4614ae7757b4cd4938b3c663e98d2b631bda518610071d9a4ca0b509e
+and NumPy1.26.3 fromnumeric.py SHA25660cb71381839d5531e9b7f401d716cfb8fef39bd69e3c7a2ee78d77584d127f4.
+The existing remote automatic-GC bad-tree/repack warning recurred on a successful
+fetch; no GC, sparse selection, interpreter or canonical science files were changed.
