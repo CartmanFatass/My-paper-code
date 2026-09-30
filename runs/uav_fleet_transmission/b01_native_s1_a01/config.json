@@ -1,0 +1,74 @@
+{
+  "admission_operation": null,
+  "arms": [
+    "H6_all",
+    "H6_E",
+    "SET_all",
+    "SET_E",
+    "C_E"
+  ],
+  "checkpoint_root": "/home/fires/hmasd-inputs/uav_fleet_transmission/b01_native_s1_a01",
+  "components": [
+    "coverage_reward",
+    "quality_reward",
+    "energy_penalty",
+    "total_reward"
+  ],
+  "direction": "uav_fleet_transmission",
+  "expected_episodes": 160,
+  "expected_mask_requests": 648000,
+  "expected_motion_requests": 2592000,
+  "expected_native_steps": 80000,
+  "launch_sha": "a2f62e613a12331ad380876a6c764f8a46a893ee",
+  "new_fits": 0,
+  "object_id": "fleet_transmission_b01",
+  "runtime": {
+    "device": "cpu",
+    "numpy": "1.26.3",
+    "python": "3.10.20",
+    "torch": "2.7.0+cpu",
+    "torch_interop_threads": 1,
+    "torch_threads": 4
+  },
+  "source_training_sha": "89486d32ea569728f39d6e21b53f8a7c8854e74c",
+  "spec": {
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 26093014,
+    "cadence": 10,
+    "horizon": 500,
+    "ns": [
+      4,
+      8
+    ],
+    "torch_threads": 4,
+    "world_ids": [
+      29310000,
+      29310001,
+      29310002,
+      29310003,
+      29310004,
+      29310005,
+      29310006,
+      29310007,
+      29310008,
+      29310009,
+      29310010,
+      29310011,
+      29310012,
+      29310013,
+      29310014,
+      29310015
+    ]
+  },
+  "updates": 0,
+  "world_address": [
+    260930,
+    14
+  ],
+  "world_order": "N4 then N8; world increasing; cyclic five-arm order by world index",
+  "world_streams": {
+    "fleet": 2,
+    "runtime": 3,
+    "users": 1
+  }
+}

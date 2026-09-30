@@ -1,0 +1,90 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-30T02:58:03.234736Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/174980a0a43d4508a1a2ab8af097511b/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/174980a0a43d4508a1a2ab8af097511b/experiments/candidates/uav_fleet_transmission/run_b01.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b01_native_s1_a01",
+    "--",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b01_native_s1_a01",
+    "--checkpoint-root",
+    "/home/fires/hmasd-inputs/uav_fleet_transmission/b01_native_s1_a01",
+    "--launch-sha",
+    "a2f62e613a12331ad380876a6c764f8a46a893ee"
+  ],
+  "claim_key": "20a34b1d93cf83572b5ed6adf1ae104c2c6b4ae1c7c1914c1673e00bb1897aa8",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/20a34b1d93cf83572b5ed6adf1ae104c2c6b4ae1c7c1914c1673e00bb1897aa8.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/174980a0a43d4508a1a2ab8af097511b/experiments/candidates/uav_fleet_transmission/run_b01.py",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b01_native_s1_a01",
+    "--checkpoint-root",
+    "/home/fires/hmasd-inputs/uav_fleet_transmission/b01_native_s1_a01",
+    "--launch-sha",
+    "a2f62e613a12331ad380876a6c764f8a46a893ee"
+  ],
+  "command_sha256": "c2061b65aa719aa8796acc7a03fccd425bbd71b856f304e378c0138b152d26c2",
+  "control_observation": {
+    "observed_at": "2026-09-30T02:58:03.031643Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "a2f62e613a12331ad380876a6c764f8a46a893ee"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-30T02:58:03.055536Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/174980a0a43d4508a1a2ab8af097511b",
+  "direction": "uav_fleet_transmission",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_fleet_transmission/run_b01.py",
+    "--checkpoint-root",
+    "/home/fires/hmasd-inputs/uav_fleet_transmission/b01_native_s1_a01",
+    "--launch-sha",
+    "a2f62e613a12331ad380876a6c764f8a46a893ee"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b01_native_s1_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/20a34b1d93cf83572b5ed6adf1ae104c2c6b4ae1c7c1914c1673e00bb1897aa8.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b01_native_s1_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b01_native_s1_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 465922,
+      "session_id": 465922,
+      "start_ticks": 17562773
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 465922,
+    "process_group_id": 465922
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b01_native_s1_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 465924,
+      "session_id": 465922,
+      "start_ticks": 17562776
+    },
+    "pid": 465924,
+    "process_group_id": 465922,
+    "supervisor_pid": 465922
+  },
+  "schema_version": 1,
+  "sha": "a2f62e613a12331ad380876a6c764f8a46a893ee",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/174980a0a43d4508a1a2ab8af097511b",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b01_native_s1_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b01_native_s1_a01/stdout.log"
+}

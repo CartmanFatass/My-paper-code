@@ -247,3 +247,20 @@ No additional copy, model, seed, numerical contract, exposure or node was introd
 actual source and scientific arguments are unchanged except this outcome-blind checkpoint-root
 location correction. A fresh admission invocation may now use the same unused output tag;
 no accepted operation is retried. The move itself reclaimed0 disk bytes.
+
+### Accepted B01 local operation
+
+Native admission accepted the corrected request once at02:58:03.234736UTC on `local_linux`,
+source `a2f62e613a12331ad380876a6c764f8a46a893ee`. The exact invocation, snapshot, claim and
+native process identities are in [launch-manifest.json](../../../../runs/uav_fleet_transmission/b01_native_s1_a01/launch-manifest.json),
+with [fresh admission](../../../../runs/uav_fleet_transmission/b01_native_s1_a01/admission-preflight.json)
+and [runner config](../../../../runs/uav_fleet_transmission/b01_native_s1_a01/config.json).
+The complete160episode collection followed by its full pure reader belongs to this single
+accepted operation. Launch acceptance is not a completed scientific result.
+
+`tools/hmasd_wait.py` generation1 is armed against the manifest's original operation reference,
+owned by this native child (`01a0f02a-2102-7aa3-be5a-adfb99e49910`). First drain at02:58:17UTC
+observed accepted admission, matching live runner/supervisor identities and consistent records.
+The child remains active through same-handle observation and complete reading; no queued App
+wake is assumed to restore an unloaded child. Root has the concrete acceptance fact for node
+allocation. No partial outcome has been used to alter, shorten or extend the fixed panel.
