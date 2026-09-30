@@ -1,0 +1,748 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_joint_skills_stage1",
+  "mode": "macro",
+  "contract": "target",
+  "arm": "SET",
+  "seed": 932201,
+  "launch_sha": "76d5d514b76870f610646617103f3ea3b7bc5345",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_joint_skills_stage1",
+    "sha": "76d5d514b76870f610646617103f3ea3b7bc5345",
+    "command_sha256": "4d8ff50a843c37c99dd281da8f43cffa99fd921b02328462799ea3bed2a32e76",
+    "parent_pid": 238172,
+    "child_pid": 238173,
+    "accepted_at_epoch": 1790729795.7728517
+  },
+  "probe": false,
+  "status": "complete",
+  "fit_started": true,
+  "failure": null,
+  "spec": {
+    "horizon": 500,
+    "train_lanes": 16,
+    "eval_lanes": 16,
+    "rollouts": 45,
+    "panels": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "hidden_size": 256,
+    "n_heads": 8,
+    "n_layers": 2,
+    "ppo_epochs": 15,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "torch_threads": 4,
+    "area_size": 5000,
+    "dev_worlds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014,
+      1015,
+      1016,
+      1017,
+      1018,
+      1019,
+      1020,
+      1021,
+      1022,
+      1023,
+      1024,
+      1025,
+      1026,
+      1027,
+      1028,
+      1029,
+      1030,
+      1031
+    ],
+    "holdout_worlds": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025,
+      2026,
+      2027,
+      2028,
+      2029,
+      2030,
+      2031
+    ],
+    "probe_panel_worlds": [
+      9000,
+      9001,
+      9002,
+      9003,
+      9004,
+      9005,
+      9006,
+      9007,
+      9008,
+      9009,
+      9010,
+      9011,
+      9012,
+      9013,
+      9014,
+      9015,
+      9016,
+      9017,
+      9018,
+      9019,
+      9020,
+      9021,
+      9022,
+      9023,
+      9024,
+      9025,
+      9026,
+      9027,
+      9028,
+      9029,
+      9030,
+      9031
+    ],
+    "probe_rollouts": 3,
+    "continuous_action_distribution": "tanh_gaussian",
+    "continuous_logstd_init": -1.0,
+    "continuous_logstd_min": -5.0,
+    "continuous_logstd_max": 0.0,
+    "lambda_l": 0.0,
+    "contract": "target",
+    "macro_k": 10,
+    "menu_in_inputs": null
+  },
+  "rollouts_run": 45,
+  "panels": [
+    {
+      "after_rollout": 0,
+      "training_team_steps": 0,
+      "training_macro_steps": 0,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_00_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.16277253492766114,
+        "r_mean_final100": 0.15361273292180125,
+        "coverage_backhauled_mean_all": 0.22173375,
+        "coverage_backhauled_mean_final100": 0.20625,
+        "coverage_backhauled_final": 0.20625,
+        "frontend_capacity_with_path_mbps_mean_all": 124.1653095871668,
+        "far_cluster_backhauled_share_mean_all": 0.01253125,
+        "far_cluster_backhauled_share_final": 0.00625,
+        "far_cluster_a2a_path_user_time_share": 0.00371875,
+        "association_changes_per_step_mean": 0.2965,
+        "uav_backhaul_loss_events": 0.0,
+        "user_backhaul_loss_events": 22.59375,
+        "action_clip_events": 0.0
+      },
+      "macro_counters": {
+        "decisions": 9600,
+        "far_target_decisions": 1076,
+        "target_changes": 9408,
+        "redecisions": 9408,
+        "slot_conflicts": 0,
+        "slot_switches": 0,
+        "offset_box_clips": 0,
+        "team_decisions": 1600,
+        "far_target_fraction": 0.11208333333333333,
+        "target_change_rate": 1.0,
+        "slot_conflicts_per_team_decision": 0.0,
+        "episodes": 32,
+        "slot_switches_per_episode": 0.0
+      }
+    },
+    {
+      "after_rollout": 15,
+      "training_team_steps": 120000,
+      "training_macro_steps": 12000,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_15_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.2029787150706325,
+        "r_mean_final100": 0.19055770106513054,
+        "coverage_backhauled_mean_all": 0.26658875000000004,
+        "coverage_backhauled_mean_final100": 0.24538125000000002,
+        "coverage_backhauled_final": 0.2425,
+        "frontend_capacity_with_path_mbps_mean_all": 166.6943002035997,
+        "far_cluster_backhauled_share_mean_all": 0.027050000000000005,
+        "far_cluster_backhauled_share_final": 0.0125,
+        "far_cluster_a2a_path_user_time_share": 0.0045874999999999996,
+        "association_changes_per_step_mean": 1.172875,
+        "uav_backhaul_loss_events": 0.0,
+        "user_backhaul_loss_events": 70.25,
+        "action_clip_events": 0.0
+      },
+      "macro_counters": {
+        "decisions": 9600,
+        "far_target_decisions": 4170,
+        "target_changes": 9408,
+        "redecisions": 9408,
+        "slot_conflicts": 0,
+        "slot_switches": 0,
+        "offset_box_clips": 0,
+        "team_decisions": 1600,
+        "far_target_fraction": 0.434375,
+        "target_change_rate": 1.0,
+        "slot_conflicts_per_team_decision": 0.0,
+        "episodes": 32,
+        "slot_switches_per_episode": 0.0
+      }
+    },
+    {
+      "after_rollout": 30,
+      "training_team_steps": 240000,
+      "training_macro_steps": 24000,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_30_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.2569776922503627,
+        "r_mean_final100": 0.23618426207618026,
+        "coverage_backhauled_mean_all": 0.3493675,
+        "coverage_backhauled_mean_final100": 0.31621875,
+        "coverage_backhauled_final": 0.3175,
+        "frontend_capacity_with_path_mbps_mean_all": 196.8581621138275,
+        "far_cluster_backhauled_share_mean_all": 0.08155,
+        "far_cluster_backhauled_share_final": 0.071875,
+        "far_cluster_a2a_path_user_time_share": 0.048062499999999994,
+        "association_changes_per_step_mean": 0.9916875,
+        "uav_backhaul_loss_events": 4.3125,
+        "user_backhaul_loss_events": 118.78125,
+        "action_clip_events": 0.0
+      },
+      "macro_counters": {
+        "decisions": 9600,
+        "far_target_decisions": 7552,
+        "target_changes": 9408,
+        "redecisions": 9408,
+        "slot_conflicts": 0,
+        "slot_switches": 0,
+        "offset_box_clips": 0,
+        "team_decisions": 1600,
+        "far_target_fraction": 0.7866666666666666,
+        "target_change_rate": 1.0,
+        "slot_conflicts_per_team_decision": 0.0,
+        "episodes": 32,
+        "slot_switches_per_episode": 0.0
+      }
+    },
+    {
+      "after_rollout": 45,
+      "training_team_steps": 360000,
+      "training_macro_steps": 36000,
+      "kind": "dev",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_45_dev_deterministic.json",
+      "means": {
+        "r_mean_all": 0.2606256782592687,
+        "r_mean_final100": 0.2597638754647081,
+        "coverage_backhauled_mean_all": 0.3556575,
+        "coverage_backhauled_mean_final100": 0.3527625,
+        "coverage_backhauled_final": 0.364375,
+        "frontend_capacity_with_path_mbps_mean_all": 198.06137219921823,
+        "far_cluster_backhauled_share_mean_all": 0.10930625000000001,
+        "far_cluster_backhauled_share_final": 0.10625,
+        "far_cluster_a2a_path_user_time_share": 0.07089375,
+        "association_changes_per_step_mean": 0.9901875000000001,
+        "uav_backhaul_loss_events": 5.25,
+        "user_backhaul_loss_events": 127.75,
+        "action_clip_events": 0.0
+      },
+      "macro_counters": {
+        "decisions": 9600,
+        "far_target_decisions": 8273,
+        "target_changes": 9408,
+        "redecisions": 9408,
+        "slot_conflicts": 0,
+        "slot_switches": 0,
+        "offset_box_clips": 0,
+        "team_decisions": 1600,
+        "far_target_fraction": 0.8617708333333334,
+        "target_change_rate": 1.0,
+        "slot_conflicts_per_team_decision": 0.0,
+        "episodes": 32,
+        "slot_switches_per_episode": 0.0
+      }
+    },
+    {
+      "after_rollout": 45,
+      "training_team_steps": 360000,
+      "training_macro_steps": 36000,
+      "kind": "holdout",
+      "mode": "deterministic",
+      "status": "complete",
+      "file": "panel_45_holdout_deterministic.json",
+      "means": {
+        "r_mean_all": 0.2525885862248306,
+        "r_mean_final100": 0.23366209983039826,
+        "coverage_backhauled_mean_all": 0.34956375,
+        "coverage_backhauled_mean_final100": 0.31934375,
+        "coverage_backhauled_final": 0.3125,
+        "frontend_capacity_with_path_mbps_mean_all": 186.12410285611207,
+        "far_cluster_backhauled_share_mean_all": 0.08515,
+        "far_cluster_backhauled_share_final": 0.053125000000000006,
+        "far_cluster_a2a_path_user_time_share": 0.04181875,
+        "association_changes_per_step_mean": 1.026125,
+        "uav_backhaul_loss_events": 4.9375,
+        "user_backhaul_loss_events": 128.1875,
+        "action_clip_events": 0.0
+      },
+      "macro_counters": {
+        "decisions": 9600,
+        "far_target_decisions": 8236,
+        "target_changes": 9408,
+        "redecisions": 9408,
+        "slot_conflicts": 0,
+        "slot_switches": 0,
+        "offset_box_clips": 0,
+        "team_decisions": 1600,
+        "far_target_fraction": 0.8579166666666667,
+        "target_change_rate": 1.0,
+        "slot_conflicts_per_team_decision": 0.0,
+        "episodes": 32,
+        "slot_switches_per_episode": 0.0
+      }
+    },
+    {
+      "after_rollout": 45,
+      "training_team_steps": 360000,
+      "training_macro_steps": 36000,
+      "kind": "holdout",
+      "mode": "sampled",
+      "status": "complete",
+      "file": "panel_45_holdout_sampled.json",
+      "means": {
+        "r_mean_all": 0.25856955224239914,
+        "r_mean_final100": 0.2514814473615451,
+        "coverage_backhauled_mean_all": 0.3546475,
+        "coverage_backhauled_mean_final100": 0.341775,
+        "coverage_backhauled_final": 0.33875,
+        "frontend_capacity_with_path_mbps_mean_all": 194.35087044735278,
+        "far_cluster_backhauled_share_mean_all": 0.1024625,
+        "far_cluster_backhauled_share_final": 0.128125,
+        "far_cluster_a2a_path_user_time_share": 0.05839375,
+        "association_changes_per_step_mean": 1.0325625,
+        "uav_backhaul_loss_events": 4.3125,
+        "user_backhaul_loss_events": 127.8125,
+        "action_clip_events": 0.0
+      },
+      "macro_counters": {
+        "decisions": 9600,
+        "far_target_decisions": 8975,
+        "target_changes": 9408,
+        "redecisions": 9408,
+        "slot_conflicts": 0,
+        "slot_switches": 0,
+        "offset_box_clips": 0,
+        "team_decisions": 1600,
+        "far_target_fraction": 0.9348958333333334,
+        "target_change_rate": 1.0,
+        "slot_conflicts_per_team_decision": 0.0,
+        "episodes": 32,
+        "slot_switches_per_episode": 0.0
+      }
+    }
+  ],
+  "checkpoints": [
+    {
+      "path": "checkpoint_00.pt",
+      "sha256": "eb1da0c89d1ce774d45b5198604a41f16a819c6ab443361c797c9d64c1297dbb",
+      "bytes": 20919107
+    },
+    {
+      "path": "checkpoint_15.pt",
+      "sha256": "76966c897432c974df0c029b387f66729a5ea5de493141b49d1c451c37be8932",
+      "bytes": 20919107
+    },
+    {
+      "path": "checkpoint_30.pt",
+      "sha256": "0974ba30817c3c396a3353a69e2e3fe353f57bb8b86ed1637964c470b7cbf028",
+      "bytes": 20919107
+    },
+    {
+      "path": "checkpoint_45.pt",
+      "sha256": "e19589fea41f4cbf134534102b3e43441c98090890c1bbd6de9a6155e49c622e",
+      "bytes": 20919107
+    }
+  ],
+  "counts": {
+    "training_team_steps": 360000,
+    "training_macro_steps": 36000,
+    "stored_team_steps": 36000,
+    "training_episodes": 720,
+    "updates": 45,
+    "evaluation_team_steps": 96000,
+    "evaluation_macro_steps": 9600,
+    "evaluation_episodes": 192
+  },
+  "memory": {
+    "evaluation_overlap": [
+      {
+        "after_rollout": 0,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 466836,
+          "VmHWM_kib": 475820
+        },
+        "after_target_build": {
+          "VmRSS_kib": 467244,
+          "VmHWM_kib": 475820
+        }
+      },
+      {
+        "after_rollout": 15,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 499560,
+          "VmHWM_kib": 499560
+        },
+        "after_target_build": {
+          "VmRSS_kib": 499704,
+          "VmHWM_kib": 499704
+        }
+      },
+      {
+        "after_rollout": 30,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 479148,
+          "VmHWM_kib": 503580
+        },
+        "after_target_build": {
+          "VmRSS_kib": 479608,
+          "VmHWM_kib": 503580
+        }
+      },
+      {
+        "after_rollout": 45,
+        "kind": "dev",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 472256,
+          "VmHWM_kib": 503580
+        },
+        "after_target_build": {
+          "VmRSS_kib": 472268,
+          "VmHWM_kib": 503580
+        }
+      },
+      {
+        "after_rollout": 45,
+        "kind": "holdout",
+        "mode": "deterministic",
+        "before_target_build": {
+          "VmRSS_kib": 472268,
+          "VmHWM_kib": 503580
+        },
+        "after_target_build": {
+          "VmRSS_kib": 472268,
+          "VmHWM_kib": 503580
+        }
+      },
+      {
+        "after_rollout": 45,
+        "kind": "holdout",
+        "mode": "sampled",
+        "before_target_build": {
+          "VmRSS_kib": 472460,
+          "VmHWM_kib": 503580
+        },
+        "after_target_build": {
+          "VmRSS_kib": 472460,
+          "VmHWM_kib": 503580
+        }
+      }
+    ],
+    "start": {
+      "VmRSS_kib": 299868,
+      "VmHWM_kib": 299868
+    },
+    "matching_table_build": {
+      "before": {
+        "VmRSS_kib": 423868,
+        "VmHWM_kib": 423868
+      },
+      "after": {
+        "VmRSS_kib": 466440,
+        "VmHWM_kib": 475820
+      }
+    }
+  },
+  "reward_units": {
+    "training": "macro scalar = mean over the 10 host steps of the adapter scalar (contract team r / 6)",
+    "readings": "team per-step r = 0.5 * (C_bh + S/D), every host step"
+  },
+  "counter_definitions": {
+    "decisions": "UAV-level macro decisions (6 per macro step)",
+    "far_target_decisions": "decisions whose held target is > 300 m (3-D) from the UAV's position at decision time",
+    "target_changes": "re-decisions (macro step >= 1) whose target differs from the previously held target by > 1e-06 m",
+    "redecisions": "UAV-level decisions at macro steps >= 1 (denominator of the target-change rate)",
+    "slot_conflicts": "slot contract: per macro step, 6 minus the number of distinct slots chosen (UAVs duplicating an already-chosen slot), summed",
+    "slot_switches": "slot contract: re-decisions whose slot differs from the previously held slot",
+    "offset_box_clips": "offset contract: UAV-decisions whose anchor + offset left the arena box and was clipped to it",
+    "team_decisions": "macro steps (team-level decisions)"
+  },
+  "label_reader_definitions": null,
+  "runtime": {
+    "python": "3.10.20 (main, Aug  7 2026, 02:25:15) [Clang 22.1.3 ]",
+    "torch": "2.7.0+cpu",
+    "numpy": "1.26.3",
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_threads": 4,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1"
+    }
+  },
+  "last_boundary": "complete",
+  "wall_seconds": 2009.8440936769766,
+  "menus": {
+    "menu_dir": "runs/coupled_host_joint_skills_stage1/menus",
+    "area_size": 5000,
+    "budget": 3000,
+    "worlds": {},
+    "computed": 0,
+    "loaded": 0,
+    "seconds": 0.0
+  },
+  "config": {
+    "contract_arm": "SET",
+    "algorithm": "mappo",
+    "n_agents": 6,
+    "n_uavs": 6,
+    "n_users": 50,
+    "num_envs": 16,
+    "rollout_length": 50,
+    "episode_length": 50,
+    "k": 1,
+    "n_Z": 1,
+    "n_z": 1,
+    "state_dim": 133,
+    "obs_dim": 90,
+    "action_dim": 3,
+    "action_space_type": "continuous",
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "ppo_epochs": 15,
+    "num_mini_batch": 4,
+    "sequence_batch_size": 32,
+    "coordinator_batch_size": 1280,
+    "high_level_batch_size": 128,
+    "high_level_buffer_size": 800,
+    "batch_size": 1200,
+    "discriminator_batch_size": 1200,
+    "lambda_e": 1.0,
+    "lambda_D": 0.0,
+    "lambda_d": 0.0,
+    "lambda_h": 0.0,
+    "lambda_l": 0.0,
+    "lambda_cd": 0.0,
+    "lambda_mi": 0.0,
+    "lr_coordinator": 0.0001,
+    "lr_discoverer_actor": 0.0001,
+    "lr_discoverer_critic": 0.0001,
+    "lr_discriminator": 0.0001,
+    "weight_decay": 0.0,
+    "clip_epsilon": 0.2,
+    "value_loss_coef": 1.0,
+    "max_grad_norm": 0.5,
+    "hidden_size": 256,
+    "embedding_dim": 256,
+    "n_heads": 8,
+    "n_encoder_layers": 2,
+    "n_decoder_layers": 2,
+    "gru_hidden_size": 256,
+    "use_valuenorm": true,
+    "use_obsnorm": false,
+    "use_statenorm": false,
+    "use_lr_decay": false,
+    "use_entropy_annealing": false,
+    "total_timesteps": 36000,
+    "seed": 932201,
+    "policy_interruption_mode": "off",
+    "interruption_delta": 1,
+    "interruption_cost_c": "inf",
+    "interruption_cost_c_Z": "inf",
+    "skill_cap_k_max": 10,
+    "team_cap_k_Z": null,
+    "age_feature": "off",
+    "continuous_action_distribution": "tanh_gaussian",
+    "continuous_logstd_init": -1.0,
+    "continuous_logstd_min": -5.0,
+    "continuous_logstd_max": 0.0,
+    "use_central_snapshot_in_flat_actor": true,
+    "disable_high_level_training": true,
+    "disable_discriminator_training": true,
+    "disable_discriminator_rewards": true,
+    "collects_high_level_samples": false,
+    "use_process_exploration": false,
+    "use_horizon_window": false,
+    "use_opt_compact": false,
+    "macro_contract": "target"
+  },
+  "route": {
+    "policy_interruption_mode": "off",
+    "d2_enabled": false,
+    "d2_cost_c": "inf",
+    "d2_cost_c_Z": "inf",
+    "d2_k_max": 1,
+    "d2_k_Z": 1,
+    "d2_age_feature": "off",
+    "use_ha_ctse": false,
+    "use_central_snapshot": true
+  },
+  "optimizer_calls": {
+    "coordinator": 0,
+    "discoverer_actor": 101250,
+    "discoverer_critic": 101250,
+    "team_discriminator": 0,
+    "individual_discriminator": 0
+  },
+  "parameter_counts": {
+    "skill_coordinator": 3841604,
+    "skill_discoverer": 1323911
+  },
+  "initial_parameter_digest": "558136b05dbe9e4700b32a5fa5f8c05a8130ce00923871fa6b1717a19d546895",
+  "training_started_wall": 25.30924309400143,
+  "terminal_facts": {
+    "low_level_dones_last_step_all_true": true,
+    "low_level_dones_before_last_any": false,
+    "high_level_valid_rows": 0,
+    "disable_high_level_training": true
+  },
+  "parameter_motion": {
+    "coordinator": {
+      "delta_l2": 0.0,
+      "relative_l2": 0.0
+    },
+    "discoverer_actor": {
+      "delta_l2": 38.763121885893916,
+      "relative_l2": 0.9705057331889111
+    },
+    "discoverer_critic": {
+      "delta_l2": 30.373707334716908,
+      "relative_l2": 0.836738324276592
+    },
+    "coordinator.state_embedding": {
+      "delta_l2": 0.0,
+      "relative_l2": 0.0
+    },
+    "discoverer_actor.base": {
+      "delta_l2": 26.238456721606532,
+      "relative_l2": 1.1965804514505003
+    },
+    "discoverer_actor.base.state_encoder": {
+      "delta_l2": 7.4279884822981606,
+      "relative_l2": 0.49768228935295566
+    },
+    "discoverer_critic.base": {
+      "delta_l2": 14.249969252848517,
+      "relative_l2": 0.9559460364239288
+    }
+  },
+  "last_training_row": {
+    "rollout": 45,
+    "team_steps": 360000,
+    "macro_steps": 36000,
+    "timing": {
+      "collection_seconds": 9.969436650018906,
+      "update_seconds": 27.83574114801013,
+      "policy_seconds": 1.607153618882876,
+      "env_seconds": 8.280017979064723,
+      "menu_seconds": 0.0,
+      "store_seconds": 0.050600540183950216,
+      "cpu_seconds": 126.44055500000013,
+      "wall_seconds": 37.815721172024496
+    },
+    "optimizer_total": {
+      "coordinator": 0,
+      "discoverer_actor": 101250,
+      "discoverer_critic": 101250,
+      "team_discriminator": 0,
+      "individual_discriminator": 0
+    },
+    "action_clip_events": 0,
+    "macro_counters": {
+      "decisions": 4800,
+      "far_target_decisions": 4491,
+      "target_changes": 4704,
+      "redecisions": 4704,
+      "slot_conflicts": 0,
+      "slot_switches": 0,
+      "offset_box_clips": 0,
+      "team_decisions": 800,
+      "far_target_fraction": 0.935625,
+      "target_change_rate": 1.0,
+      "slot_conflicts_per_team_decision": 0.0,
+      "episodes": 16,
+      "slot_switches_per_episode": 0.0
+    }
+  },
+  "final_parameter_digest": "6cb420eb40e792ba3143d31ed72fd68a5537a9047894529d0822cac1a804d25f",
+  "resources": {
+    "wall_seconds_in_run_fit": 2009.839128171996,
+    "command_wall_seconds": 2009.843807363999,
+    "cpu_user_seconds": 6409.530249,
+    "cpu_system_seconds": 31.966614,
+    "cpu_seconds_in_run_fit": 6438.930791,
+    "peak_rss_kib": 503580,
+    "proc_memory_end": {
+      "VmRSS_kib": 472476,
+      "VmHWM_kib": 503580
+    },
+    "rss_scope": "scientific process Linux RUSAGE_SELF",
+    "resources_unmeasured": [
+      "peak_scratch_bytes"
+    ]
+  }
+}

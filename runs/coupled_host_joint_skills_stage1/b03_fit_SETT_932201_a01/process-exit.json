@@ -1,0 +1,22 @@
+{
+  "exit_code": 0,
+  "finished_at_epoch": 1790731806.5464494,
+  "pid": 238173,
+  "process_identity": {
+    "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+    "kind": "linux_pid_start_ticks",
+    "pid": 238173,
+    "session_id": 238172,
+    "start_ticks": 16833773
+  },
+  "schema_version": 1,
+  "status": "exited",
+  "supervisor_identity": {
+    "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+    "kind": "linux_pid_start_ticks",
+    "pid": 238172,
+    "session_id": 238172,
+    "start_ticks": 16833770
+  },
+  "termination": "process_exit"
+}
