@@ -2799,3 +2799,236 @@ interface/coverage/cost facts in this existing notebook; no new study, fit, acto
 query or launch is selected. Parent B06 learning and fleet B06 count contracts remain their
 original leads’ work. No active result producer, unread B04 result/review or cleanup dependency
 remains.
+
+<a id="ordinary-score-source-assessment"></a>
+### Source-only successor assessment: retained S versus score-directed ordinary sampling — 2026-09-30
+
+After closing B04, Root declined the priced early-timing extension and assigned its independent
+Oracle a different allocation question: whether the retained N5/all-on categorical students have
+useful package value beyond competent ordinary stochastic use of C's candidate scores. I own
+the concrete interface, existing-control coverage and full-cost facts below. This is **not a
+selected experiment**. No code, synthetic policy evaluation, outcome probe, actor/controller/
+radio query, fit or native transition was performed for this assessment. Existing saved
+calibration means and cost fields were read; only cost fields were aggregated. Fleet B06's
+accepted count-development contract and the parent DM's separate learned-top2 work
+remain their leads' work.
+
+The current published background was read at main 8d8dbf16320631864587ac6fa0abb70002975090,
+especially RESEARCH topic4's local-inheritance, joint-sampling and native-development evidence.
+It changes the question in three concrete ways. Both original fitted S assets must be retained;
+one cannot select the better exposed endpoint. Their repeated complete S−Q benefits justify a
+capability worth comparing, while the failed PPO and static-consequence continuations do not
+make another fit the default. Finally, Q's fixed uniform tail leaves a specific ordinary
+alternative unresolved; the absence of that comparison is neither a novelty claim nor proof
+that its cost is worthwhile. No new shared empirical judgment is being published here.
+
+#### Actual lawful interface and decision exposure
+
+The relevant C is **LocalController(history=False)** in
+[the original N5 controller](../../../../experiments/candidates/uav_local_history/b01/controller.py),
+not the separate N8 transmission controller. Its immutable source SHA256 is
+b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2.
+The [MemoC wrapper](../../../../experiments/candidates/uav_fleet_adaptation/b02/controllers.py)
+is bound to that source and already returns all27 scores and predicted-service values.
+
+- A decision receives one ordered104-value FP32 local row and private predecision navigation
+  index0..9. The first103 values encode own position, up to20 decoded current users and up
+  to4 visible peers. Absolute time is excluded from the memo key and learned features.
+  The wrapper validates shape, finite first103 values, at most4 peers, integer navigation,
+  and nonnegative four-tick decision boundaries. The collector separately validates the
+  entire finite5×104 observation; no evaluator coordinates enter the policy.
+- Commands are the27 Cartesian products of −1/0/+1 in three coordinates, sorted by squared
+  norm then lexicographic tuple. Each is repeated for4 ticks, with30m increments and clipping
+  to x/y0..1000m and z50..150m. Physical aliases arise at clipped boundaries. They remain
+  distinct ordered categories: merging them would change the sampling law.
+- C forecasts each own trajectory while visible peers remain fixed. Unknown interference
+  is inferred from current observed SINR, visible-peer power and noise when fewer than4
+  peers are visible, then held fixed. Each station stably ranks its eligible local links
+  (SINR>=3dB) and keeps at most10. Its candidate score is the four-tick **mean** of
+  0.7×served/50 +0.3×mean clipped((SINR−3)/30,0,1), with zero quality for no service.
+  These are dimensionless local proxy values, not logits or horizon-summed values.
+  [Native N5 reading](../../../../experiments/candidates/uav_local_history/b01/study.py)
+  uses the same weights and no height/travel penalty. The mismatch is the censored local
+  information/frozen-peer forecast versus simultaneous joint closed-loop motion, not
+  different objective weights. The N8 height term must not be imported into this question.
+- Ordinary selection uses the first score argmax in that command order. If **all27**
+  candidates have zero predicted service, it instead chooses the endpoint nearest its
+  current serpentine waypoint at height50; navigation advances cyclically when within60m.
+  The original waypoint/tie rule and returned next_nav are preserved even if a stochastic
+  wrapper samples a different category. On later ticks the collector holds the sampled
+  command; it does not resample every primitive tick.
+- Each agent has an episode-local exact memo keyed by the first103 ordered FP32 values
+  plus one navigation byte:413bytes. A miss pays the full C ranking; a hit deep-copies the
+  cached action, scores, service, features and next_nav. Neither a random draw nor the
+  sampled category is cached. All27 score values are thus already paid for by a C query;
+  a score-based wrapper adds a distribution calculation, not another radio-model request.
+  New trajectories can still change cache misses, so equal request counts do not imply
+  equal runtime. C stores900 ndarray bytes per entry, excluding key/container overhead.
+- The unchanged student uses114 lawful features: first103 observation entries,10-way
+  navigation one-hot and the full-support fallback bit. Its charged analytic helper
+  establishes that bit with at most(1+p)n setup plus2n extreme links, rather than ranking27
+  trajectories. One-row FP32 MLP logits are cached; probabilities/draws are not cached as
+  actions. It remains an analytic-helper-plus-network package, not a purely neural policy.
+
+The frozen fleet decoder in
+[b02/policies.py](../../../../experiments/candidates/uav_fleet_adaptation/b02/policies.py)
+forms FP64 probabilities, uses one private indexed uniform addressed by
+(root,world,decision tick,agent), accumulates an ordered27-bin FP64 CDF, sets its final boundary
+to1 and takes searchsorted(side="right"). It validates finite nonnegative mass and sum within
+1e-12. Future two-tape pairing can use two distinct frozen roots shared across arms while
+preserving each marginal kernel. This is **not** parent B04's two-draw finite departure/tail
+decoder; silently substituting that decoder would change the implemented program.
+
+#### Existing measured ordinary controls and calibrated packages
+
+The bounded read-only coverage scout found no measured parent/fleet wrapper sampling from
+C's full scores or score gaps. Parent Q uses0.9 on C's current choice and0.1/26 on each other
+category. Parent B04 compared independent, shifted and shared-uniform coupling on32worlds
+29346000..29346031 with2tapes; parent B05 retained that Q law. Coupling changes do not supply
+a score-directed ordinary tail. Fleet B04 tested C departure rates0/.05/.10/.20 and S
+greedy/temperatures.5/1/2. Those temperatures apply to **S logits**, not C scores.
+This is coverage of the scanned relevant implementations, not a repository-wide or literature
+novelty conclusion; the Oracle owns the broader historical/library comparison.
+
+The authoritative saved fleet B04 calibration mean J values are:
+
+| Calibration worlds | C0 | C.05 | C.10 | C.20 | Selected package |
+| --- | ---: | ---: | ---: | ---: | --- |
+| L0:29350000..29350031 |.3439236531|.3588182763|.3614211067|.3535949711|S_L0_T2:.3963116796|
+| L1:29352000..29352031 |.3264835771|.3594455693|.3537689976|.3472814433|S_L1_T1:.3959505514|
+
+Thus C.10 is the best ordinary calibration mean in L0 and C.05 in L1. The earlier conversational
+shorthand that C.05 led both was corrected before selection; no candidate was newly selected
+from these readings. Across all eight candidates the paid B* identities remain S_L0_T2 and
+unchanged S_L1_T1. The former's historical uncertain J gain also incurred more path and lower
+minimum service; it is a retained comparator, not an adopted temperature upgrade.
+The [bound B04 reading](../../../../runs/uav_fleet_adaptation/b04_native_development_a01/reading.json)
+SHA256 is93c681eba38f8fcd7fd9059eb9eaa75142771d085bf645e831099bed63b25a50.
+Its full run has1312episodes/335872steps; final panels were29351000..29351031 and
+29353000..29353031. Calibration and final innovations were separately rooted; candidates
+within each lineage shared the calibration worlds/innovations.
+
+#### Oracle's exact unselected G and the question it could answer
+
+For concrete pricing the Oracle supplied one fixed law, **G**, with c equal to lawful C's
+current choice, including its fallback. Set p(c)=.9; distribute the remaining.1 over the other
+26 categories in proportion to exp((score[a]−max_alt_score)/tau), with FP64 arithmetic and
+**tau=.7/50=.014** in four-tick-mean proxy units. When all scores tie, reuse Q.10's exact
+probability construction. Preserve original category order/aliases, navigation, private
+actual-path memoization, four-tick holds and fleet flat-CDF decoder. This is one prospective
+law, with no temperature grid, calibration or score/outcome probe.
+
+Tau is the proxy increment from one additional served user throughout those four ticks when
+quality is unchanged. It does not come from fitted student logits or observed new score gaps.
+Increasing weight with alternative score raises the real-arithmetic conditional mean tail
+proxy relative to Q.10, while retaining its nominal departure mass. That statement has a
+floating-point/finite-grid tolerance in the implemented decoder: tiny tail probabilities may
+have zero representable CDF width, and nominal.9 is not an exact real-number sampling theorem.
+The all-equal branch preserves Q behavior on zero-service fallback instead of turning navigation
+into uniform27-way movement. No synthetic evaluation of this law has yet occurred.
+
+This supplies a specific discriminating comparison: **G−Q.10** tests score-directed choice
+within the same nominal departure rate; C.05 retains the other useful paid ordinary perturbation;
+both S assets and their B* identities answer the complete retained-package question. A local
+proxy improvement does not guarantee native improvement because all five agents change their
+own future information and each other's interference. Higher native S value after this
+comparison could retain a narrower useful learned package; ordinary G matching or exceeding it
+could remove a default reason to prefer that package on this host. Neither outcome proves
+learned coordination, broad learning superiority/failure, or optimal ordinary control. A G loss
+would reject this fixed tail law, not identify the missing information or exploration mechanism.
+J, mean service, service-p10/minimum/zero ticks, path and full compute all matter because J
+prices neither path nor computing and individual-user continuity remains unmeasured.
+
+I do not recommend a free-running calibration sweep or comparing best historical means from
+different world panels. Any selected experiment should make this complete-package/empirical
+boundary consequential; merely obtaining a new leaderboard row is insufficient. The Oracle's
+independent scientific recommendation and Root's cross-question choice remain separate from
+this feasibility assessment.
+
+#### Complete prospective bill, without a result launch
+
+The priced panel uses32 **new common worlds**, two common private tapes for each stochastic
+program, all-on N5/U50/H256 and the unchanged native objective. It includes C once/world;
+S_L0_T1, S_L1_T1, B*0=S_L0_T2, Q.10, Q.05 and G twice/world. B*1 is exactly S_L1_T1 and reuses that
+output rather than adding a duplicate episode. World/innovation seeds and a launch are not
+selected. These are32 independent world clusters conditional on two fixed fitted assets;
+neither64 tape observations nor two assets create additional training replications.
+
+| New work | Exact configuration count or pre-cache ceiling |
+| --- | ---: |
+| Complete episodes / native team steps |416 /106496|
+| All agent decision requests |133120|
+| Full-C requests: C,Q.10,Q.05,G |71680|
+| Student requests: S_L0,S_L1,B*0 |61440|
+| Indexed categorical draws |122880|
+| New fits / expert labels / calibrations / optimizer steps / native-model shadow branches |0 /0 /0 /0 /0|
+| C candidate trajectories / modeled ticks |1935360 /7741440|
+| C candidate links / setup links |154828800 /7168000|
+| Student helper setup+extreme links / one-row actor forwards |<=8601600 /<=61440|
+| Native dense power slots, if one constructor plus416 resets |29401075|
+
+The link ceilings use n<=20,p<=4; observed cache misses and n/p determine actual work.
+The last line is275 dense U2A/A2A slots per reset/step, including diagonal placeholders,
+not275 extra native transitions. G's deterministic distribution can be cached by the same
+sufficient input; every actual decision still consumes its current private draw. The reader
+has zero added native episodes. For conservative pricing allow reconstruction of all ordinary
+C scores and student helper state up to the same miss/link ceilings again, up to61440 one-row
+student replays, all133120 probability/navigation/cache/decoder records, all106496 saved native
+transitions and metric reductions. The reader can also derive Q.10's same-history/same-uniform
+choice on the20,480 already saved G decisions, then compare at most81,920 four-tick agent
+positions from saved geometry. This is elementary saved-data/kinematic work within the reader
+range, with no new controller, radio, actor or native rollout and no counterfactual reward.
+Record requested departures and physical aliases separately. With the original flat CDF,
+redistributing alternative mass can shift the modal interval; a common uniform does not force
+the same departure event despite identical nominal.9 modal mass. This diagnostic establishes
+whether G changed physical commands on its own histories, not a causal mediation effect.
+Numerical, law and alias correctness checks remain separate support work and must be declared
+before performing them; none was run in this source task.
+
+Existing recorded complete-episode CPU anchors are roughly C.189–.194s, Q.10 .293–.308s,
+S .294–.297s and B*0 .330–.353s in fleet B04/B05; the paid C.05 calibration averages
+.266/.271s by lineage. Scaling those fields suggests roughly120–140CPU-s of episode work
+for this panel, **not a measurement of G**. Allow **2–6worker CPU-min plus1–6reader CPU-min,
+3–12combined CPU-min**, including imports, construction, serialization and conservative
+reconstruction overhead. Single-thread wall would be comparable absent contention; queue,
+admission, support and publication are separate. Historical cache savings are not worst-case
+guarantees, and these ranges are estimates rather than enforced runtime bounds.
+
+A new bounded law adapter, own collector/reader contract, source/asset bindings, meaningful
+synthetic/RNG/alias checks, independent engineering review and publication/cleanup are about
+**4–8support hours**. Existing frozen implementations can be imported unchanged; they should
+not be modified or copied wholesale, particularly while fleet B06 uses them. Scientific/source
+assessment time already spent is additional and unmetered. Budget roughly **.15–.30GB** for
+one canonical raw copy plus compact records, a temporary **1.6–1.9GB** launcher source snapshot,
+and **.6–1.0GB** peak-process planning headroom. These are not current node admission facts.
+Accepted-source lifecycle, durable evidence verification, live-consumer checks and supported
+snapshot retirement still apply if Root selects the study.
+
+The sunk bill is not zero just because the new comparison has no fit. Original S_L0/S_L1 each
+cost one8000-update fit,256 acquisition episodes/65536steps,81920 expert-label requests and
+4096000 optimizer presentations. Together their actual complete B02/B03 studies used
+**2fits/832episodes/212992unique native steps/205.046058286worker+reader CPU-s**, including
+their evaluations and reused-control accounting. The two paid eight-candidate B* calibrations
+add512episodes/131072steps; their saved complete-episode timers sum139.828009008CPU-s and
+139.921819053wall-s, with187724945raw bytes. Those timers exclude apportioned whole-run
+imports/reader/support, so they are not a complete isolated calibration runtime.
+
+The broader already incurred fleet B04 program also paid for two unsuccessful PPO continuation
+fits: through B04 the lineage is4fits+2calibrations/548864steps/722.648864331measured CPU-s.
+B05 then incurred4head fits/1138688steps/1620.467426957chain CPU-s. Through those studies
+the accumulated context is **8fits+2calibrations/1687552steps/2343.116291288measured CPU-s**,
+across differing timing scopes/hosts, before this potential comparison, earlier B01 costs,
+other parent studies and incompletely metered engineering. Those adverse purchases remain
+visible, but are not all charged as necessary acquisition of the unchanged S or G law.
+
+Cost sources are the original B02/B03 summary+reader and B04/B05 complete reading/summary
+fields. Their reader SHA256 identities respectively are
+a3f76992ccb01aa90138eec2272dc2667b7283d32e86742e87bf77e43bd613e9,
+b0c4943bb0b7fe8b7ac70d21f64a8d6805b086815789d35ba3992746aa6a5c20,
+93c681eba38f8fcd7fd9059eb9eaa75142771d085bf645e831099bed63b25a50, and
+4b7f2d5512f0ef21d7ecde24744fe77b065e7dcc38213436ef7a0d7a383a5d5c.
+The canonical retained S files are424487bytes each, SHA256
+b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a and
+cb67a3d46fe9628e1dfef1ef081b89091a13fde3a92295fe198f27555c67364d; original bindings are in
+[the inherited contract](../../../../experiments/candidates/uav_fleet_adaptation/b04_native_development/contract.py).
+No new copy, asset reconstruction or deletion was needed for this source-only assessment.
