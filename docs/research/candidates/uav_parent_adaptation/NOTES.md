@@ -5537,3 +5537,78 @@ timing; another operation's terminal status is not memory admission. Stop
 only the dependent phase for a real implementation/correctness/ownership or
 resource failure, preserving outputs and count. No positive fit screen,
 automatic retry, rescue panel or new teacher budget is authorized.
+
+During implementation Root pointed out constitution§2's one-active-Implementer
+wording. I serialized the two bounded tasks: the recurrence helper completed
+only its initial read-only calls and returned idle with no edit, test, model
+call or live handle; the learning helper proceeds first. Its returned diff and
+checks are accepted before the same recurrence task is rearmed. This corrects
+the handoff schedule without changing the study, inputs or exposure.
+
+The learning helper returned its stable module/tests; I read the implementation
+and decisive independent-feature, augmented-least-squares, zero/tie and source
+checks and accepted it. The54 synthetic checks passed in0.54s. Read-only paid
+extraction verified58 rows/16 worlds/198 referenced artifacts without fitting
+or any scorer/native call. Review corrected the old metadata's full stationary
+candidate count (300/400, not3/4 champions), enforced original FP32 reports and
+reused each arrival distance matrix to meet the declared arithmetic bound.
+The same recurrence Implementer was then rearmed as the sole active code helper;
+whole-study independent engineering review remains outstanding. No scientific
+fit, model/native result operation or final-world evaluation has started.
+
+
+**2026-09-30 21:50 UTC — implementation acceptance and independent engineering review.**
+The serial recurrence Implementer returned cycle.py and test_cycle.py; I read and
+accepted them subject to the whole-study review. Nine synthetic checks passed.
+The three prospectively declared saved-branch checks were executed once and are
+now consumed:29326000 stay,29326000 m2_s23,29326002 m4_s33. Every model array is
+byte-identical and every decision/summary equals the bound original record.
+Logical work was1,380ticks/324,304requests; actual work193ticks/37,145requests,
+with1,187ticks reused. The branches respectively computed41/71/81ticks and
+10,172/12,274/14,699requests; first repetitions41→81,71→111,81→121.
+Measured evaluator-only wall2.201332s, user2.112230s and system.088376s
+(total2.200606CPU-s). No native transition, full-reference rerun or fit occurred.
+Normal tests skip these three paid checks; no repeat is selected.
+
+The DM completed admitted fit/evaluation entries, full storage and readers.
+The fit reader independently calculates scalar features and verifies weighted
+standardization and the13-coefficient ridge equation against augmented least
+squares. The evaluation validates the published complete fit and checks that
+fixed equation without another solve, then reconstructs all full uncompressed
+model branches and all native physics, observations, commands and outcomes.
+Its independently built recurrence keys/certificates also reconstruct each
+source tick and actual versus logical scorer work; identical physical programs
+must have identical native arrays. Feature/inference, bank/selection, controller,
+export and end-to-end times are separate; paired world contrasts cover complete
+outcomes and timing. No learned timing advantage is inferred from export.
+
+The current synthetic suite passes72 checks/3 intentionally skipped paid checks
+in2.18s. It includes synthetic collector→reader integration, corruption and
+admission failure, direct and subset selection, independent scalar/ridge audits,
+recurrence/fallback/barriers/clipped issued commands and FP accumulation order.
+The synthetic collector uses a fabricated host and mocked radio functions:
+0actual native transitions/scorer requests. A further read-only real archive
+check used2.020257CPU-s and independently reproduced all58feature/target rows
+across16worlds/198references, maximum scalar feature discrepancy5.5511e-17;
+0fit/query/native work. All25 inherited executable bindings match the original
+paid B03 summary; source checks now enforce that identity.
+
+The registered independent engineering Reviewer is reading the actual L0,
+source and checks in a separate context. No result phase has yet been launched.
+No new fit choice, native fixture, label acquisition, panel or scientific
+comparator has been added. The fixed study remains1fit then64native episodes.
+
+
+**Engineering review accepted,2026-09-30 21:54 UTC.** The independent Reviewer
+found no remaining material issue after tracing features/objective, strict
+selection and zero-R fallback, recurrence/barriers/accumulation, native
+collection/full replay, cost and paired reading. It independently reproduced
+72synthetic passes/3paid skips in2.29s and checked39source bindings, including
+all25 original frozen files. The one packaging issue is repaired: evaluation
+explicitly hashes the preceding fit launch-manifest.json among its required
+published inputs. The numerical auditor's evaluation path checks the fixed
+normal equation with no solve; its targeted integration suite passed9checks
+in1.70s. I accept the implementation and checks. The CLI and whitespace checks
+are clean. Actual admitted snapshot consumption, fit and evaluation remain
+unexecuted at this source-publication boundary; no extra native fixture is
+needed or selected. This is engineering acceptance, not a scientific result.
