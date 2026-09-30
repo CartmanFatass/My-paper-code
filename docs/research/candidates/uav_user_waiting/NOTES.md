@@ -2876,3 +2876,22 @@ native-child rejection−32600, so the child remains active through deterministi
 observation, same-handle checkpoints and the separately admitted final reader.
 Root's reserved timed-node window continues through that reading. The fixed
 256 episodes/65,536 steps/zero fits and complete/adverse reading remain in force.
+
+
+### Compact B04 evidence extraction prepared without changing accepted inputs
+
+A JSON-only publication extractor, `experiments/candidates/uav_user_waiting/b04_result.py`,
+lives outside the frozen B04 dependency glob. It binds the complete worker and
+reader JSON by digest, retains all256 world scalars, all six paired contrasts,
+per-user age/gap vectors and raw artifact identities, and summarizes per-slot
+verification into per-world counts/extrema with the complete slots retained at
+the canonical node. It performs no policy/radio/native/optimizer query.
+An independent engineering pass found a P2 risk: equal worker/reader source SHAs
+alone would allow the wrong same-source terminal status to name the reader's
+canonical path. Before publication, each status was bound to its own pinned
+record's admission source/direction and parent/child PIDs, plus the configured
+node. Five focused regression checks accept the matched record and reject
+same-source worker, supervisor, node or direction substitutions. The DM and
+Reviewer independently observed five passes; the Reviewer resolved P2 with no
+material remaining finding. Actual extraction awaits the complete producer and
+reader. No accepted B04 input, scientific endpoint or live process changed.
