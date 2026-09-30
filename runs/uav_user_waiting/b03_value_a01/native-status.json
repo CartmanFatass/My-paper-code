@@ -20,18 +20,15 @@
   "claim_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d6a66f057cc5d6e340ac9ee5e1812ede7c01cb08005cfcda34f3779fb6a70003.json",
   "direction": "uav_user_waiting",
   "execution": {
+    "exit_code": 0,
     "exit_witness": {
+      "exit_code": 0,
+      "finished_at_epoch": 1790797634.8383927,
       "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_value_a01/process-exit.json",
-      "state": "absent"
+      "state": "valid",
+      "termination": "process_exit"
     },
     "runner": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1147329,
-        "session_id": 1147328,
-        "start_ticks": 113705558
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -39,17 +36,10 @@
         "session_id": 1147328,
         "start_ticks": 113705558
       },
-      "state": "running"
+      "state": "absent"
     },
-    "state": "running",
+    "state": "exited",
     "supervisor": {
-      "observed_identity": {
-        "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
-        "kind": "linux_pid_start_ticks",
-        "pid": 1147328,
-        "session_id": 1147328,
-        "start_ticks": 113705555
-      },
       "recorded_identity": {
         "boot_id": "bb732fcb-1a33-4659-a786-331110ae41d3",
         "kind": "linux_pid_start_ticks",
@@ -57,7 +47,7 @@
         "session_id": 1147328,
         "start_ticks": 113705555
       },
-      "state": "running"
+      "state": "absent"
     }
   },
   "explicit_retry": {
@@ -73,7 +63,7 @@
   "kind": "hmasd_operation_status",
   "manifest_ref": "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_value_a01/launch-manifest.json",
   "node": "wsl_4070",
-  "observed_at": "2026-09-30T18:54:55.002766Z",
+  "observed_at": "2026-09-30T19:47:25.029644Z",
   "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d6a66f057cc5d6e340ac9ee5e1812ede7c01cb08005cfcda34f3779fb6a70003.json",
   "output_root": "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_value_a01",
   "record_consistency": {

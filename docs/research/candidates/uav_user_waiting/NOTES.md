@@ -2165,3 +2165,52 @@ but unlaunched until a terminal producer summary can be bound by SHA256.
 Root's N8 admission-schema warning was checked against this source: B03 retains
 the actual admission dictionary and validates its `sha`; it has no guessed
 `operation_id` access. No source change or extra exposure followed that check.
+
+### Producer terminal and reader artifact-path adaptation
+
+The producer exited zero at 2026-09-30 19:47:14.838393 UTC. Its complete
+10,610,736-byte summary has SHA256
+`f7b8a56a94c6c07a97071527ae43df6b0c1324f93e90c02815eb9a0ea100b525`.
+Reported exposure is exactly 512 complete episodes/131,072 native steps, two
+scientific fits, 13,182 labels from 256 eligible training episodes, and 4,096
+Adam updates/1,048,576 presentations. These are collected producer facts;
+complete independent reading remains outstanding. Worker lifetime user/system
+CPU is 3293.497397/6.886158 seconds and peak RSS 939,196KiB.
+Observer checkpoints 24/25 were drained and rearmed on the same claim; generation
+26 READY `aa3c864502ea7f0cf7a845a1`, wake
+`a8698e32-8a88-4b38-8c49-472d41f09b64`, supplied matching terminal identities and
+was acknowledged into generation 27. No producer was restarted.
+
+The first reader request, outer task `uav-user-waiting-b03-value-read-a01`,
+exited 4 at 19:49:12 UTC **before admission or reader execution**:
+`absolute author input is absent from published snapshot` for the canonical
+worker directory supplied as `--worker-out`. Same-request reconciliation found
+no reader output directory and no matching admission claim. There are zero
+reader optimization, model or native calls from that refused request. Its source
+snapshot input-rewrite rule recognizes `--generic-summary` for canonical bulk
+artifacts, whereas the frozen reader's own flag is not recognized.
+
+**Bounded L0:** add a sibling `b03_reader/run.py` admission/argument adapter,
+outside the frozen B03 source-identity glob. It accepts the supported canonical
+`--generic-summary` plus its exact digest, validates its own admitted published
+SHA, and calls unchanged `b03.read.read_result` with the summary's parent and
+the fixed original producer SHA `a045bc9b4e3ba9ef211474293c4bc43ad8b16b08`.
+The original 75 scientific source identities, configuration comparison,
+physical/history/value checks and deterministic fit replay remain intact. The
+adapter does not acquire, fit a new scientific model, change a model or rerun
+the producer. Its only optimization is the already-selected reader replay.
+Output remains a separate canonical run directory. This DM owns the adapter,
+focused admission/binding tests and notebook; no shared launch controls or
+frozen B03 files are edited. Independent engineering assessment identified this
+as the smallest supported solution; it rejected routing data through aliases
+or placing reader outputs inside a disposable source snapshot. Review the small
+diff and its checks before corrected first admission. The actual scientific
+comparison and exposure are unchanged, so this is not a new investment decision.
+
+The adapter's four mock-only admission/artifact-binding tests passed in 0.04s;
+independent engineering review reran them (four passed, 0.04s), checked all 75
+original source identities against the producer configuration and found no
+material issue. CLI help and diff checks passed. No test invoked a model, fit,
+reader replay or native transition. I accepted the bounded adapter; the current
+adapter admission identity and original producer/scientific identity remain
+separate. The refused request record is retained in the reader run directory.

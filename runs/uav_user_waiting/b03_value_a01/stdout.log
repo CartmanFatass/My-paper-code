@@ -1,0 +1,512 @@
+{"phase": "acquisition", "seed": 29423000, "episodes": 1, "steps": 256}
+{"phase": "acquisition", "seed": 29423001, "episodes": 2, "steps": 512}
+{"phase": "acquisition", "seed": 29423002, "episodes": 3, "steps": 768}
+{"phase": "acquisition", "seed": 29423003, "episodes": 4, "steps": 1024}
+{"phase": "acquisition", "seed": 29423004, "episodes": 5, "steps": 1280}
+{"phase": "acquisition", "seed": 29423005, "episodes": 6, "steps": 1536}
+{"phase": "acquisition", "seed": 29423006, "episodes": 7, "steps": 1792}
+{"phase": "acquisition", "seed": 29423007, "episodes": 8, "steps": 2048}
+{"phase": "acquisition", "seed": 29423008, "episodes": 9, "steps": 2304}
+{"phase": "acquisition", "seed": 29423009, "episodes": 10, "steps": 2560}
+{"phase": "acquisition", "seed": 29423010, "episodes": 11, "steps": 2816}
+{"phase": "acquisition", "seed": 29423011, "episodes": 12, "steps": 3072}
+{"phase": "acquisition", "seed": 29423012, "episodes": 13, "steps": 3328}
+{"phase": "acquisition", "seed": 29423013, "episodes": 14, "steps": 3584}
+{"phase": "acquisition", "seed": 29423014, "episodes": 15, "steps": 3840}
+{"phase": "acquisition", "seed": 29423015, "episodes": 16, "steps": 4096}
+{"phase": "acquisition", "seed": 29423016, "episodes": 17, "steps": 4352}
+{"phase": "acquisition", "seed": 29423017, "episodes": 18, "steps": 4608}
+{"phase": "acquisition", "seed": 29423018, "episodes": 19, "steps": 4864}
+{"phase": "acquisition", "seed": 29423019, "episodes": 20, "steps": 5120}
+{"phase": "acquisition", "seed": 29423020, "episodes": 21, "steps": 5376}
+{"phase": "acquisition", "seed": 29423021, "episodes": 22, "steps": 5632}
+{"phase": "acquisition", "seed": 29423022, "episodes": 23, "steps": 5888}
+{"phase": "acquisition", "seed": 29423023, "episodes": 24, "steps": 6144}
+{"phase": "acquisition", "seed": 29423024, "episodes": 25, "steps": 6400}
+{"phase": "acquisition", "seed": 29423025, "episodes": 26, "steps": 6656}
+{"phase": "acquisition", "seed": 29423026, "episodes": 27, "steps": 6912}
+{"phase": "acquisition", "seed": 29423027, "episodes": 28, "steps": 7168}
+{"phase": "acquisition", "seed": 29423028, "episodes": 29, "steps": 7424}
+{"phase": "acquisition", "seed": 29423029, "episodes": 30, "steps": 7680}
+{"phase": "acquisition", "seed": 29423030, "episodes": 31, "steps": 7936}
+{"phase": "acquisition", "seed": 29423031, "episodes": 32, "steps": 8192}
+{"phase": "acquisition", "seed": 29423032, "episodes": 33, "steps": 8448}
+{"phase": "acquisition", "seed": 29423033, "episodes": 34, "steps": 8704}
+{"phase": "acquisition", "seed": 29423034, "episodes": 35, "steps": 8960}
+{"phase": "acquisition", "seed": 29423035, "episodes": 36, "steps": 9216}
+{"phase": "acquisition", "seed": 29423036, "episodes": 37, "steps": 9472}
+{"phase": "acquisition", "seed": 29423037, "episodes": 38, "steps": 9728}
+{"phase": "acquisition", "seed": 29423038, "episodes": 39, "steps": 9984}
+{"phase": "acquisition", "seed": 29423039, "episodes": 40, "steps": 10240}
+{"phase": "acquisition", "seed": 29423040, "episodes": 41, "steps": 10496}
+{"phase": "acquisition", "seed": 29423041, "episodes": 42, "steps": 10752}
+{"phase": "acquisition", "seed": 29423042, "episodes": 43, "steps": 11008}
+{"phase": "acquisition", "seed": 29423043, "episodes": 44, "steps": 11264}
+{"phase": "acquisition", "seed": 29423044, "episodes": 45, "steps": 11520}
+{"phase": "acquisition", "seed": 29423045, "episodes": 46, "steps": 11776}
+{"phase": "acquisition", "seed": 29423046, "episodes": 47, "steps": 12032}
+{"phase": "acquisition", "seed": 29423047, "episodes": 48, "steps": 12288}
+{"phase": "acquisition", "seed": 29423048, "episodes": 49, "steps": 12544}
+{"phase": "acquisition", "seed": 29423049, "episodes": 50, "steps": 12800}
+{"phase": "acquisition", "seed": 29423050, "episodes": 51, "steps": 13056}
+{"phase": "acquisition", "seed": 29423051, "episodes": 52, "steps": 13312}
+{"phase": "acquisition", "seed": 29423052, "episodes": 53, "steps": 13568}
+{"phase": "acquisition", "seed": 29423053, "episodes": 54, "steps": 13824}
+{"phase": "acquisition", "seed": 29423054, "episodes": 55, "steps": 14080}
+{"phase": "acquisition", "seed": 29423055, "episodes": 56, "steps": 14336}
+{"phase": "acquisition", "seed": 29423056, "episodes": 57, "steps": 14592}
+{"phase": "acquisition", "seed": 29423057, "episodes": 58, "steps": 14848}
+{"phase": "acquisition", "seed": 29423058, "episodes": 59, "steps": 15104}
+{"phase": "acquisition", "seed": 29423059, "episodes": 60, "steps": 15360}
+{"phase": "acquisition", "seed": 29423060, "episodes": 61, "steps": 15616}
+{"phase": "acquisition", "seed": 29423061, "episodes": 62, "steps": 15872}
+{"phase": "acquisition", "seed": 29423062, "episodes": 63, "steps": 16128}
+{"phase": "acquisition", "seed": 29423063, "episodes": 64, "steps": 16384}
+{"phase": "acquisition", "seed": 29423064, "episodes": 65, "steps": 16640}
+{"phase": "acquisition", "seed": 29423065, "episodes": 66, "steps": 16896}
+{"phase": "acquisition", "seed": 29423066, "episodes": 67, "steps": 17152}
+{"phase": "acquisition", "seed": 29423067, "episodes": 68, "steps": 17408}
+{"phase": "acquisition", "seed": 29423068, "episodes": 69, "steps": 17664}
+{"phase": "acquisition", "seed": 29423069, "episodes": 70, "steps": 17920}
+{"phase": "acquisition", "seed": 29423070, "episodes": 71, "steps": 18176}
+{"phase": "acquisition", "seed": 29423071, "episodes": 72, "steps": 18432}
+{"phase": "acquisition", "seed": 29423072, "episodes": 73, "steps": 18688}
+{"phase": "acquisition", "seed": 29423073, "episodes": 74, "steps": 18944}
+{"phase": "acquisition", "seed": 29423074, "episodes": 75, "steps": 19200}
+{"phase": "acquisition", "seed": 29423075, "episodes": 76, "steps": 19456}
+{"phase": "acquisition", "seed": 29423076, "episodes": 77, "steps": 19712}
+{"phase": "acquisition", "seed": 29423077, "episodes": 78, "steps": 19968}
+{"phase": "acquisition", "seed": 29423078, "episodes": 79, "steps": 20224}
+{"phase": "acquisition", "seed": 29423079, "episodes": 80, "steps": 20480}
+{"phase": "acquisition", "seed": 29423080, "episodes": 81, "steps": 20736}
+{"phase": "acquisition", "seed": 29423081, "episodes": 82, "steps": 20992}
+{"phase": "acquisition", "seed": 29423082, "episodes": 83, "steps": 21248}
+{"phase": "acquisition", "seed": 29423083, "episodes": 84, "steps": 21504}
+{"phase": "acquisition", "seed": 29423084, "episodes": 85, "steps": 21760}
+{"phase": "acquisition", "seed": 29423085, "episodes": 86, "steps": 22016}
+{"phase": "acquisition", "seed": 29423086, "episodes": 87, "steps": 22272}
+{"phase": "acquisition", "seed": 29423087, "episodes": 88, "steps": 22528}
+{"phase": "acquisition", "seed": 29423088, "episodes": 89, "steps": 22784}
+{"phase": "acquisition", "seed": 29423089, "episodes": 90, "steps": 23040}
+{"phase": "acquisition", "seed": 29423090, "episodes": 91, "steps": 23296}
+{"phase": "acquisition", "seed": 29423091, "episodes": 92, "steps": 23552}
+{"phase": "acquisition", "seed": 29423092, "episodes": 93, "steps": 23808}
+{"phase": "acquisition", "seed": 29423093, "episodes": 94, "steps": 24064}
+{"phase": "acquisition", "seed": 29423094, "episodes": 95, "steps": 24320}
+{"phase": "acquisition", "seed": 29423095, "episodes": 96, "steps": 24576}
+{"phase": "acquisition", "seed": 29423100, "episodes": 97, "steps": 24832}
+{"phase": "acquisition", "seed": 29423101, "episodes": 98, "steps": 25088}
+{"phase": "acquisition", "seed": 29423102, "episodes": 99, "steps": 25344}
+{"phase": "acquisition", "seed": 29423103, "episodes": 100, "steps": 25600}
+{"phase": "acquisition", "seed": 29423104, "episodes": 101, "steps": 25856}
+{"phase": "acquisition", "seed": 29423105, "episodes": 102, "steps": 26112}
+{"phase": "acquisition", "seed": 29423106, "episodes": 103, "steps": 26368}
+{"phase": "acquisition", "seed": 29423107, "episodes": 104, "steps": 26624}
+{"phase": "acquisition", "seed": 29423108, "episodes": 105, "steps": 26880}
+{"phase": "acquisition", "seed": 29423109, "episodes": 106, "steps": 27136}
+{"phase": "acquisition", "seed": 29423110, "episodes": 107, "steps": 27392}
+{"phase": "acquisition", "seed": 29423111, "episodes": 108, "steps": 27648}
+{"phase": "acquisition", "seed": 29423112, "episodes": 109, "steps": 27904}
+{"phase": "acquisition", "seed": 29423113, "episodes": 110, "steps": 28160}
+{"phase": "acquisition", "seed": 29423114, "episodes": 111, "steps": 28416}
+{"phase": "acquisition", "seed": 29423115, "episodes": 112, "steps": 28672}
+{"phase": "acquisition", "seed": 29423116, "episodes": 113, "steps": 28928}
+{"phase": "acquisition", "seed": 29423117, "episodes": 114, "steps": 29184}
+{"phase": "acquisition", "seed": 29423118, "episodes": 115, "steps": 29440}
+{"phase": "acquisition", "seed": 29423119, "episodes": 116, "steps": 29696}
+{"phase": "acquisition", "seed": 29423120, "episodes": 117, "steps": 29952}
+{"phase": "acquisition", "seed": 29423121, "episodes": 118, "steps": 30208}
+{"phase": "acquisition", "seed": 29423122, "episodes": 119, "steps": 30464}
+{"phase": "acquisition", "seed": 29423123, "episodes": 120, "steps": 30720}
+{"phase": "acquisition", "seed": 29423124, "episodes": 121, "steps": 30976}
+{"phase": "acquisition", "seed": 29423125, "episodes": 122, "steps": 31232}
+{"phase": "acquisition", "seed": 29423126, "episodes": 123, "steps": 31488}
+{"phase": "acquisition", "seed": 29423127, "episodes": 124, "steps": 31744}
+{"phase": "acquisition", "seed": 29423128, "episodes": 125, "steps": 32000}
+{"phase": "acquisition", "seed": 29423129, "episodes": 126, "steps": 32256}
+{"phase": "acquisition", "seed": 29423130, "episodes": 127, "steps": 32512}
+{"phase": "acquisition", "seed": 29423131, "episodes": 128, "steps": 32768}
+{"phase": "acquisition", "seed": 29423132, "episodes": 129, "steps": 33024}
+{"phase": "acquisition", "seed": 29423133, "episodes": 130, "steps": 33280}
+{"phase": "acquisition", "seed": 29423134, "episodes": 131, "steps": 33536}
+{"phase": "acquisition", "seed": 29423135, "episodes": 132, "steps": 33792}
+{"phase": "acquisition", "seed": 29423136, "episodes": 133, "steps": 34048}
+{"phase": "acquisition", "seed": 29423137, "episodes": 134, "steps": 34304}
+{"phase": "acquisition", "seed": 29423138, "episodes": 135, "steps": 34560}
+{"phase": "acquisition", "seed": 29423139, "episodes": 136, "steps": 34816}
+{"phase": "acquisition", "seed": 29423140, "episodes": 137, "steps": 35072}
+{"phase": "acquisition", "seed": 29423141, "episodes": 138, "steps": 35328}
+{"phase": "acquisition", "seed": 29423142, "episodes": 139, "steps": 35584}
+{"phase": "acquisition", "seed": 29423143, "episodes": 140, "steps": 35840}
+{"phase": "acquisition", "seed": 29423144, "episodes": 141, "steps": 36096}
+{"phase": "acquisition", "seed": 29423145, "episodes": 142, "steps": 36352}
+{"phase": "acquisition", "seed": 29423146, "episodes": 143, "steps": 36608}
+{"phase": "acquisition", "seed": 29423147, "episodes": 144, "steps": 36864}
+{"phase": "acquisition", "seed": 29423148, "episodes": 145, "steps": 37120}
+{"phase": "acquisition", "seed": 29423149, "episodes": 146, "steps": 37376}
+{"phase": "acquisition", "seed": 29423150, "episodes": 147, "steps": 37632}
+{"phase": "acquisition", "seed": 29423151, "episodes": 148, "steps": 37888}
+{"phase": "acquisition", "seed": 29423152, "episodes": 149, "steps": 38144}
+{"phase": "acquisition", "seed": 29423153, "episodes": 150, "steps": 38400}
+{"phase": "acquisition", "seed": 29423154, "episodes": 151, "steps": 38656}
+{"phase": "acquisition", "seed": 29423155, "episodes": 152, "steps": 38912}
+{"phase": "acquisition", "seed": 29423156, "episodes": 153, "steps": 39168}
+{"phase": "acquisition", "seed": 29423157, "episodes": 154, "steps": 39424}
+{"phase": "acquisition", "seed": 29423158, "episodes": 155, "steps": 39680}
+{"phase": "acquisition", "seed": 29423159, "episodes": 156, "steps": 39936}
+{"phase": "acquisition", "seed": 29423160, "episodes": 157, "steps": 40192}
+{"phase": "acquisition", "seed": 29423161, "episodes": 158, "steps": 40448}
+{"phase": "acquisition", "seed": 29423162, "episodes": 159, "steps": 40704}
+{"phase": "acquisition", "seed": 29423163, "episodes": 160, "steps": 40960}
+{"phase": "acquisition", "seed": 29423164, "episodes": 161, "steps": 41216}
+{"phase": "acquisition", "seed": 29423165, "episodes": 162, "steps": 41472}
+{"phase": "acquisition", "seed": 29423166, "episodes": 163, "steps": 41728}
+{"phase": "acquisition", "seed": 29423167, "episodes": 164, "steps": 41984}
+{"phase": "acquisition", "seed": 29423168, "episodes": 165, "steps": 42240}
+{"phase": "acquisition", "seed": 29423169, "episodes": 166, "steps": 42496}
+{"phase": "acquisition", "seed": 29423170, "episodes": 167, "steps": 42752}
+{"phase": "acquisition", "seed": 29423171, "episodes": 168, "steps": 43008}
+{"phase": "acquisition", "seed": 29423172, "episodes": 169, "steps": 43264}
+{"phase": "acquisition", "seed": 29423173, "episodes": 170, "steps": 43520}
+{"phase": "acquisition", "seed": 29423174, "episodes": 171, "steps": 43776}
+{"phase": "acquisition", "seed": 29423175, "episodes": 172, "steps": 44032}
+{"phase": "acquisition", "seed": 29423176, "episodes": 173, "steps": 44288}
+{"phase": "acquisition", "seed": 29423177, "episodes": 174, "steps": 44544}
+{"phase": "acquisition", "seed": 29423178, "episodes": 175, "steps": 44800}
+{"phase": "acquisition", "seed": 29423179, "episodes": 176, "steps": 45056}
+{"phase": "acquisition", "seed": 29423180, "episodes": 177, "steps": 45312}
+{"phase": "acquisition", "seed": 29423181, "episodes": 178, "steps": 45568}
+{"phase": "acquisition", "seed": 29423182, "episodes": 179, "steps": 45824}
+{"phase": "acquisition", "seed": 29423183, "episodes": 180, "steps": 46080}
+{"phase": "acquisition", "seed": 29423184, "episodes": 181, "steps": 46336}
+{"phase": "acquisition", "seed": 29423185, "episodes": 182, "steps": 46592}
+{"phase": "acquisition", "seed": 29423186, "episodes": 183, "steps": 46848}
+{"phase": "acquisition", "seed": 29423187, "episodes": 184, "steps": 47104}
+{"phase": "acquisition", "seed": 29423188, "episodes": 185, "steps": 47360}
+{"phase": "acquisition", "seed": 29423189, "episodes": 186, "steps": 47616}
+{"phase": "acquisition", "seed": 29423190, "episodes": 187, "steps": 47872}
+{"phase": "acquisition", "seed": 29423191, "episodes": 188, "steps": 48128}
+{"phase": "acquisition", "seed": 29423192, "episodes": 189, "steps": 48384}
+{"phase": "acquisition", "seed": 29423193, "episodes": 190, "steps": 48640}
+{"phase": "acquisition", "seed": 29423194, "episodes": 191, "steps": 48896}
+{"phase": "acquisition", "seed": 29423195, "episodes": 192, "steps": 49152}
+{"phase": "evaluation", "arm": "M", "seed": 29424000, "episodes": 193, "steps": 49408, "gap": 17.42}
+{"phase": "evaluation", "arm": "S", "seed": 29424000, "episodes": 194, "steps": 49664, "gap": 21.38}
+{"phase": "evaluation", "arm": "G0", "seed": 29424000, "episodes": 195, "steps": 49920, "gap": 20.98}
+{"phase": "evaluation", "arm": "LR", "seed": 29424000, "episodes": 196, "steps": 50176, "gap": 25.56}
+{"phase": "evaluation", "arm": "LN", "seed": 29424000, "episodes": 197, "steps": 50432, "gap": 40.74}
+{"phase": "evaluation", "arm": "S", "seed": 29424001, "episodes": 198, "steps": 50688, "gap": 19.86}
+{"phase": "evaluation", "arm": "G0", "seed": 29424001, "episodes": 199, "steps": 50944, "gap": 20.52}
+{"phase": "evaluation", "arm": "LR", "seed": 29424001, "episodes": 200, "steps": 51200, "gap": 32.66}
+{"phase": "evaluation", "arm": "LN", "seed": 29424001, "episodes": 201, "steps": 51456, "gap": 27.54}
+{"phase": "evaluation", "arm": "M", "seed": 29424001, "episodes": 202, "steps": 51712, "gap": 20.92}
+{"phase": "evaluation", "arm": "G0", "seed": 29424002, "episodes": 203, "steps": 51968, "gap": 24.04}
+{"phase": "evaluation", "arm": "LR", "seed": 29424002, "episodes": 204, "steps": 52224, "gap": 29.5}
+{"phase": "evaluation", "arm": "LN", "seed": 29424002, "episodes": 205, "steps": 52480, "gap": 26.1}
+{"phase": "evaluation", "arm": "M", "seed": 29424002, "episodes": 206, "steps": 52736, "gap": 15.4}
+{"phase": "evaluation", "arm": "S", "seed": 29424002, "episodes": 207, "steps": 52992, "gap": 18.68}
+{"phase": "evaluation", "arm": "LR", "seed": 29424003, "episodes": 208, "steps": 53248, "gap": 35.16}
+{"phase": "evaluation", "arm": "LN", "seed": 29424003, "episodes": 209, "steps": 53504, "gap": 41.88}
+{"phase": "evaluation", "arm": "M", "seed": 29424003, "episodes": 210, "steps": 53760, "gap": 22.88}
+{"phase": "evaluation", "arm": "S", "seed": 29424003, "episodes": 211, "steps": 54016, "gap": 24.5}
+{"phase": "evaluation", "arm": "G0", "seed": 29424003, "episodes": 212, "steps": 54272, "gap": 30.62}
+{"phase": "evaluation", "arm": "LN", "seed": 29424004, "episodes": 213, "steps": 54528, "gap": 34.34}
+{"phase": "evaluation", "arm": "M", "seed": 29424004, "episodes": 214, "steps": 54784, "gap": 18.08}
+{"phase": "evaluation", "arm": "S", "seed": 29424004, "episodes": 215, "steps": 55040, "gap": 20.14}
+{"phase": "evaluation", "arm": "G0", "seed": 29424004, "episodes": 216, "steps": 55296, "gap": 21.84}
+{"phase": "evaluation", "arm": "LR", "seed": 29424004, "episodes": 217, "steps": 55552, "gap": 33.22}
+{"phase": "evaluation", "arm": "LN", "seed": 29424005, "episodes": 218, "steps": 55808, "gap": 30.78}
+{"phase": "evaluation", "arm": "LR", "seed": 29424005, "episodes": 219, "steps": 56064, "gap": 26.48}
+{"phase": "evaluation", "arm": "G0", "seed": 29424005, "episodes": 220, "steps": 56320, "gap": 40.26}
+{"phase": "evaluation", "arm": "S", "seed": 29424005, "episodes": 221, "steps": 56576, "gap": 17.58}
+{"phase": "evaluation", "arm": "M", "seed": 29424005, "episodes": 222, "steps": 56832, "gap": 23.28}
+{"phase": "evaluation", "arm": "LR", "seed": 29424006, "episodes": 223, "steps": 57088, "gap": 33.6}
+{"phase": "evaluation", "arm": "G0", "seed": 29424006, "episodes": 224, "steps": 57344, "gap": 23.8}
+{"phase": "evaluation", "arm": "S", "seed": 29424006, "episodes": 225, "steps": 57600, "gap": 20.92}
+{"phase": "evaluation", "arm": "M", "seed": 29424006, "episodes": 226, "steps": 57856, "gap": 19.1}
+{"phase": "evaluation", "arm": "LN", "seed": 29424006, "episodes": 227, "steps": 58112, "gap": 31.24}
+{"phase": "evaluation", "arm": "G0", "seed": 29424007, "episodes": 228, "steps": 58368, "gap": 26.72}
+{"phase": "evaluation", "arm": "S", "seed": 29424007, "episodes": 229, "steps": 58624, "gap": 18.98}
+{"phase": "evaluation", "arm": "M", "seed": 29424007, "episodes": 230, "steps": 58880, "gap": 19.5}
+{"phase": "evaluation", "arm": "LN", "seed": 29424007, "episodes": 231, "steps": 59136, "gap": 28.82}
+{"phase": "evaluation", "arm": "LR", "seed": 29424007, "episodes": 232, "steps": 59392, "gap": 25.72}
+{"phase": "evaluation", "arm": "S", "seed": 29424008, "episodes": 233, "steps": 59648, "gap": 20.16}
+{"phase": "evaluation", "arm": "M", "seed": 29424008, "episodes": 234, "steps": 59904, "gap": 20.02}
+{"phase": "evaluation", "arm": "LN", "seed": 29424008, "episodes": 235, "steps": 60160, "gap": 30.68}
+{"phase": "evaluation", "arm": "LR", "seed": 29424008, "episodes": 236, "steps": 60416, "gap": 27.04}
+{"phase": "evaluation", "arm": "G0", "seed": 29424008, "episodes": 237, "steps": 60672, "gap": 24.64}
+{"phase": "evaluation", "arm": "M", "seed": 29424009, "episodes": 238, "steps": 60928, "gap": 21.8}
+{"phase": "evaluation", "arm": "LN", "seed": 29424009, "episodes": 239, "steps": 61184, "gap": 24.34}
+{"phase": "evaluation", "arm": "LR", "seed": 29424009, "episodes": 240, "steps": 61440, "gap": 27.18}
+{"phase": "evaluation", "arm": "G0", "seed": 29424009, "episodes": 241, "steps": 61696, "gap": 23.6}
+{"phase": "evaluation", "arm": "S", "seed": 29424009, "episodes": 242, "steps": 61952, "gap": 18.08}
+{"phase": "evaluation", "arm": "M", "seed": 29424010, "episodes": 243, "steps": 62208, "gap": 23.26}
+{"phase": "evaluation", "arm": "S", "seed": 29424010, "episodes": 244, "steps": 62464, "gap": 18.94}
+{"phase": "evaluation", "arm": "G0", "seed": 29424010, "episodes": 245, "steps": 62720, "gap": 29.86}
+{"phase": "evaluation", "arm": "LR", "seed": 29424010, "episodes": 246, "steps": 62976, "gap": 39.04}
+{"phase": "evaluation", "arm": "LN", "seed": 29424010, "episodes": 247, "steps": 63232, "gap": 48.02}
+{"phase": "evaluation", "arm": "S", "seed": 29424011, "episodes": 248, "steps": 63488, "gap": 25.44}
+{"phase": "evaluation", "arm": "G0", "seed": 29424011, "episodes": 249, "steps": 63744, "gap": 18.86}
+{"phase": "evaluation", "arm": "LR", "seed": 29424011, "episodes": 250, "steps": 64000, "gap": 39.66}
+{"phase": "evaluation", "arm": "LN", "seed": 29424011, "episodes": 251, "steps": 64256, "gap": 32.6}
+{"phase": "evaluation", "arm": "M", "seed": 29424011, "episodes": 252, "steps": 64512, "gap": 21.06}
+{"phase": "evaluation", "arm": "G0", "seed": 29424012, "episodes": 253, "steps": 64768, "gap": 24.68}
+{"phase": "evaluation", "arm": "LR", "seed": 29424012, "episodes": 254, "steps": 65024, "gap": 27.38}
+{"phase": "evaluation", "arm": "LN", "seed": 29424012, "episodes": 255, "steps": 65280, "gap": 21.2}
+{"phase": "evaluation", "arm": "M", "seed": 29424012, "episodes": 256, "steps": 65536, "gap": 17.64}
+{"phase": "evaluation", "arm": "S", "seed": 29424012, "episodes": 257, "steps": 65792, "gap": 20.7}
+{"phase": "evaluation", "arm": "LR", "seed": 29424013, "episodes": 258, "steps": 66048, "gap": 24.7}
+{"phase": "evaluation", "arm": "LN", "seed": 29424013, "episodes": 259, "steps": 66304, "gap": 29.42}
+{"phase": "evaluation", "arm": "M", "seed": 29424013, "episodes": 260, "steps": 66560, "gap": 23.56}
+{"phase": "evaluation", "arm": "S", "seed": 29424013, "episodes": 261, "steps": 66816, "gap": 28.4}
+{"phase": "evaluation", "arm": "G0", "seed": 29424013, "episodes": 262, "steps": 67072, "gap": 21.92}
+{"phase": "evaluation", "arm": "LN", "seed": 29424014, "episodes": 263, "steps": 67328, "gap": 29.54}
+{"phase": "evaluation", "arm": "M", "seed": 29424014, "episodes": 264, "steps": 67584, "gap": 24.64}
+{"phase": "evaluation", "arm": "S", "seed": 29424014, "episodes": 265, "steps": 67840, "gap": 20.96}
+{"phase": "evaluation", "arm": "G0", "seed": 29424014, "episodes": 266, "steps": 68096, "gap": 31.66}
+{"phase": "evaluation", "arm": "LR", "seed": 29424014, "episodes": 267, "steps": 68352, "gap": 38.96}
+{"phase": "evaluation", "arm": "LN", "seed": 29424015, "episodes": 268, "steps": 68608, "gap": 35.6}
+{"phase": "evaluation", "arm": "LR", "seed": 29424015, "episodes": 269, "steps": 68864, "gap": 29.5}
+{"phase": "evaluation", "arm": "G0", "seed": 29424015, "episodes": 270, "steps": 69120, "gap": 22.88}
+{"phase": "evaluation", "arm": "S", "seed": 29424015, "episodes": 271, "steps": 69376, "gap": 14.62}
+{"phase": "evaluation", "arm": "M", "seed": 29424015, "episodes": 272, "steps": 69632, "gap": 15.52}
+{"phase": "evaluation", "arm": "LR", "seed": 29424016, "episodes": 273, "steps": 69888, "gap": 39.02}
+{"phase": "evaluation", "arm": "G0", "seed": 29424016, "episodes": 274, "steps": 70144, "gap": 32.12}
+{"phase": "evaluation", "arm": "S", "seed": 29424016, "episodes": 275, "steps": 70400, "gap": 39.26}
+{"phase": "evaluation", "arm": "M", "seed": 29424016, "episodes": 276, "steps": 70656, "gap": 26.68}
+{"phase": "evaluation", "arm": "LN", "seed": 29424016, "episodes": 277, "steps": 70912, "gap": 44.02}
+{"phase": "evaluation", "arm": "G0", "seed": 29424017, "episodes": 278, "steps": 71168, "gap": 26.52}
+{"phase": "evaluation", "arm": "S", "seed": 29424017, "episodes": 279, "steps": 71424, "gap": 22.34}
+{"phase": "evaluation", "arm": "M", "seed": 29424017, "episodes": 280, "steps": 71680, "gap": 21.06}
+{"phase": "evaluation", "arm": "LN", "seed": 29424017, "episodes": 281, "steps": 71936, "gap": 33.26}
+{"phase": "evaluation", "arm": "LR", "seed": 29424017, "episodes": 282, "steps": 72192, "gap": 32.74}
+{"phase": "evaluation", "arm": "S", "seed": 29424018, "episodes": 283, "steps": 72448, "gap": 22.3}
+{"phase": "evaluation", "arm": "M", "seed": 29424018, "episodes": 284, "steps": 72704, "gap": 17.92}
+{"phase": "evaluation", "arm": "LN", "seed": 29424018, "episodes": 285, "steps": 72960, "gap": 35.42}
+{"phase": "evaluation", "arm": "LR", "seed": 29424018, "episodes": 286, "steps": 73216, "gap": 34.04}
+{"phase": "evaluation", "arm": "G0", "seed": 29424018, "episodes": 287, "steps": 73472, "gap": 29.36}
+{"phase": "evaluation", "arm": "M", "seed": 29424019, "episodes": 288, "steps": 73728, "gap": 17.28}
+{"phase": "evaluation", "arm": "LN", "seed": 29424019, "episodes": 289, "steps": 73984, "gap": 32.56}
+{"phase": "evaluation", "arm": "LR", "seed": 29424019, "episodes": 290, "steps": 74240, "gap": 31.44}
+{"phase": "evaluation", "arm": "G0", "seed": 29424019, "episodes": 291, "steps": 74496, "gap": 22.18}
+{"phase": "evaluation", "arm": "S", "seed": 29424019, "episodes": 292, "steps": 74752, "gap": 19.92}
+{"phase": "evaluation", "arm": "M", "seed": 29424020, "episodes": 293, "steps": 75008, "gap": 20.66}
+{"phase": "evaluation", "arm": "S", "seed": 29424020, "episodes": 294, "steps": 75264, "gap": 20.82}
+{"phase": "evaluation", "arm": "G0", "seed": 29424020, "episodes": 295, "steps": 75520, "gap": 27.0}
+{"phase": "evaluation", "arm": "LR", "seed": 29424020, "episodes": 296, "steps": 75776, "gap": 28.84}
+{"phase": "evaluation", "arm": "LN", "seed": 29424020, "episodes": 297, "steps": 76032, "gap": 36.4}
+{"phase": "evaluation", "arm": "S", "seed": 29424021, "episodes": 298, "steps": 76288, "gap": 22.94}
+{"phase": "evaluation", "arm": "G0", "seed": 29424021, "episodes": 299, "steps": 76544, "gap": 21.54}
+{"phase": "evaluation", "arm": "LR", "seed": 29424021, "episodes": 300, "steps": 76800, "gap": 35.48}
+{"phase": "evaluation", "arm": "LN", "seed": 29424021, "episodes": 301, "steps": 77056, "gap": 29.98}
+{"phase": "evaluation", "arm": "M", "seed": 29424021, "episodes": 302, "steps": 77312, "gap": 23.78}
+{"phase": "evaluation", "arm": "G0", "seed": 29424022, "episodes": 303, "steps": 77568, "gap": 24.72}
+{"phase": "evaluation", "arm": "LR", "seed": 29424022, "episodes": 304, "steps": 77824, "gap": 30.0}
+{"phase": "evaluation", "arm": "LN", "seed": 29424022, "episodes": 305, "steps": 78080, "gap": 40.56}
+{"phase": "evaluation", "arm": "M", "seed": 29424022, "episodes": 306, "steps": 78336, "gap": 18.32}
+{"phase": "evaluation", "arm": "S", "seed": 29424022, "episodes": 307, "steps": 78592, "gap": 21.86}
+{"phase": "evaluation", "arm": "LR", "seed": 29424023, "episodes": 308, "steps": 78848, "gap": 23.9}
+{"phase": "evaluation", "arm": "LN", "seed": 29424023, "episodes": 309, "steps": 79104, "gap": 32.72}
+{"phase": "evaluation", "arm": "M", "seed": 29424023, "episodes": 310, "steps": 79360, "gap": 14.62}
+{"phase": "evaluation", "arm": "S", "seed": 29424023, "episodes": 311, "steps": 79616, "gap": 14.52}
+{"phase": "evaluation", "arm": "G0", "seed": 29424023, "episodes": 312, "steps": 79872, "gap": 20.58}
+{"phase": "evaluation", "arm": "LN", "seed": 29424024, "episodes": 313, "steps": 80128, "gap": 34.16}
+{"phase": "evaluation", "arm": "M", "seed": 29424024, "episodes": 314, "steps": 80384, "gap": 24.52}
+{"phase": "evaluation", "arm": "S", "seed": 29424024, "episodes": 315, "steps": 80640, "gap": 21.66}
+{"phase": "evaluation", "arm": "G0", "seed": 29424024, "episodes": 316, "steps": 80896, "gap": 30.3}
+{"phase": "evaluation", "arm": "LR", "seed": 29424024, "episodes": 317, "steps": 81152, "gap": 39.1}
+{"phase": "evaluation", "arm": "LN", "seed": 29424025, "episodes": 318, "steps": 81408, "gap": 25.96}
+{"phase": "evaluation", "arm": "LR", "seed": 29424025, "episodes": 319, "steps": 81664, "gap": 34.54}
+{"phase": "evaluation", "arm": "G0", "seed": 29424025, "episodes": 320, "steps": 81920, "gap": 22.34}
+{"phase": "evaluation", "arm": "S", "seed": 29424025, "episodes": 321, "steps": 82176, "gap": 16.34}
+{"phase": "evaluation", "arm": "M", "seed": 29424025, "episodes": 322, "steps": 82432, "gap": 18.28}
+{"phase": "evaluation", "arm": "LR", "seed": 29424026, "episodes": 323, "steps": 82688, "gap": 24.3}
+{"phase": "evaluation", "arm": "G0", "seed": 29424026, "episodes": 324, "steps": 82944, "gap": 21.44}
+{"phase": "evaluation", "arm": "S", "seed": 29424026, "episodes": 325, "steps": 83200, "gap": 20.88}
+{"phase": "evaluation", "arm": "M", "seed": 29424026, "episodes": 326, "steps": 83456, "gap": 18.42}
+{"phase": "evaluation", "arm": "LN", "seed": 29424026, "episodes": 327, "steps": 83712, "gap": 31.22}
+{"phase": "evaluation", "arm": "G0", "seed": 29424027, "episodes": 328, "steps": 83968, "gap": 25.84}
+{"phase": "evaluation", "arm": "S", "seed": 29424027, "episodes": 329, "steps": 84224, "gap": 30.36}
+{"phase": "evaluation", "arm": "M", "seed": 29424027, "episodes": 330, "steps": 84480, "gap": 28.16}
+{"phase": "evaluation", "arm": "LN", "seed": 29424027, "episodes": 331, "steps": 84736, "gap": 34.96}
+{"phase": "evaluation", "arm": "LR", "seed": 29424027, "episodes": 332, "steps": 84992, "gap": 24.8}
+{"phase": "evaluation", "arm": "S", "seed": 29424028, "episodes": 333, "steps": 85248, "gap": 15.36}
+{"phase": "evaluation", "arm": "M", "seed": 29424028, "episodes": 334, "steps": 85504, "gap": 20.98}
+{"phase": "evaluation", "arm": "LN", "seed": 29424028, "episodes": 335, "steps": 85760, "gap": 39.94}
+{"phase": "evaluation", "arm": "LR", "seed": 29424028, "episodes": 336, "steps": 86016, "gap": 29.14}
+{"phase": "evaluation", "arm": "G0", "seed": 29424028, "episodes": 337, "steps": 86272, "gap": 20.86}
+{"phase": "evaluation", "arm": "M", "seed": 29424029, "episodes": 338, "steps": 86528, "gap": 24.2}
+{"phase": "evaluation", "arm": "LN", "seed": 29424029, "episodes": 339, "steps": 86784, "gap": 33.02}
+{"phase": "evaluation", "arm": "LR", "seed": 29424029, "episodes": 340, "steps": 87040, "gap": 29.26}
+{"phase": "evaluation", "arm": "G0", "seed": 29424029, "episodes": 341, "steps": 87296, "gap": 29.4}
+{"phase": "evaluation", "arm": "S", "seed": 29424029, "episodes": 342, "steps": 87552, "gap": 22.28}
+{"phase": "evaluation", "arm": "M", "seed": 29424030, "episodes": 343, "steps": 87808, "gap": 18.18}
+{"phase": "evaluation", "arm": "S", "seed": 29424030, "episodes": 344, "steps": 88064, "gap": 16.72}
+{"phase": "evaluation", "arm": "G0", "seed": 29424030, "episodes": 345, "steps": 88320, "gap": 23.56}
+{"phase": "evaluation", "arm": "LR", "seed": 29424030, "episodes": 346, "steps": 88576, "gap": 27.04}
+{"phase": "evaluation", "arm": "LN", "seed": 29424030, "episodes": 347, "steps": 88832, "gap": 24.5}
+{"phase": "evaluation", "arm": "S", "seed": 29424031, "episodes": 348, "steps": 89088, "gap": 17.8}
+{"phase": "evaluation", "arm": "G0", "seed": 29424031, "episodes": 349, "steps": 89344, "gap": 28.16}
+{"phase": "evaluation", "arm": "LR", "seed": 29424031, "episodes": 350, "steps": 89600, "gap": 25.74}
+{"phase": "evaluation", "arm": "LN", "seed": 29424031, "episodes": 351, "steps": 89856, "gap": 27.82}
+{"phase": "evaluation", "arm": "M", "seed": 29424031, "episodes": 352, "steps": 90112, "gap": 18.76}
+{"phase": "evaluation", "arm": "G0", "seed": 29424032, "episodes": 353, "steps": 90368, "gap": 20.18}
+{"phase": "evaluation", "arm": "LR", "seed": 29424032, "episodes": 354, "steps": 90624, "gap": 37.36}
+{"phase": "evaluation", "arm": "LN", "seed": 29424032, "episodes": 355, "steps": 90880, "gap": 39.76}
+{"phase": "evaluation", "arm": "M", "seed": 29424032, "episodes": 356, "steps": 91136, "gap": 20.88}
+{"phase": "evaluation", "arm": "S", "seed": 29424032, "episodes": 357, "steps": 91392, "gap": 19.3}
+{"phase": "evaluation", "arm": "LR", "seed": 29424033, "episodes": 358, "steps": 91648, "gap": 28.12}
+{"phase": "evaluation", "arm": "LN", "seed": 29424033, "episodes": 359, "steps": 91904, "gap": 29.4}
+{"phase": "evaluation", "arm": "M", "seed": 29424033, "episodes": 360, "steps": 92160, "gap": 19.48}
+{"phase": "evaluation", "arm": "S", "seed": 29424033, "episodes": 361, "steps": 92416, "gap": 23.88}
+{"phase": "evaluation", "arm": "G0", "seed": 29424033, "episodes": 362, "steps": 92672, "gap": 18.98}
+{"phase": "evaluation", "arm": "LN", "seed": 29424034, "episodes": 363, "steps": 92928, "gap": 28.38}
+{"phase": "evaluation", "arm": "M", "seed": 29424034, "episodes": 364, "steps": 93184, "gap": 19.12}
+{"phase": "evaluation", "arm": "S", "seed": 29424034, "episodes": 365, "steps": 93440, "gap": 19.04}
+{"phase": "evaluation", "arm": "G0", "seed": 29424034, "episodes": 366, "steps": 93696, "gap": 19.96}
+{"phase": "evaluation", "arm": "LR", "seed": 29424034, "episodes": 367, "steps": 93952, "gap": 28.74}
+{"phase": "evaluation", "arm": "LN", "seed": 29424035, "episodes": 368, "steps": 94208, "gap": 29.04}
+{"phase": "evaluation", "arm": "LR", "seed": 29424035, "episodes": 369, "steps": 94464, "gap": 27.06}
+{"phase": "evaluation", "arm": "G0", "seed": 29424035, "episodes": 370, "steps": 94720, "gap": 22.92}
+{"phase": "evaluation", "arm": "S", "seed": 29424035, "episodes": 371, "steps": 94976, "gap": 16.92}
+{"phase": "evaluation", "arm": "M", "seed": 29424035, "episodes": 372, "steps": 95232, "gap": 18.0}
+{"phase": "evaluation", "arm": "LR", "seed": 29424036, "episodes": 373, "steps": 95488, "gap": 27.92}
+{"phase": "evaluation", "arm": "G0", "seed": 29424036, "episodes": 374, "steps": 95744, "gap": 23.34}
+{"phase": "evaluation", "arm": "S", "seed": 29424036, "episodes": 375, "steps": 96000, "gap": 18.8}
+{"phase": "evaluation", "arm": "M", "seed": 29424036, "episodes": 376, "steps": 96256, "gap": 15.22}
+{"phase": "evaluation", "arm": "LN", "seed": 29424036, "episodes": 377, "steps": 96512, "gap": 32.96}
+{"phase": "evaluation", "arm": "G0", "seed": 29424037, "episodes": 378, "steps": 96768, "gap": 22.78}
+{"phase": "evaluation", "arm": "S", "seed": 29424037, "episodes": 379, "steps": 97024, "gap": 18.68}
+{"phase": "evaluation", "arm": "M", "seed": 29424037, "episodes": 380, "steps": 97280, "gap": 17.02}
+{"phase": "evaluation", "arm": "LN", "seed": 29424037, "episodes": 381, "steps": 97536, "gap": 29.22}
+{"phase": "evaluation", "arm": "LR", "seed": 29424037, "episodes": 382, "steps": 97792, "gap": 28.24}
+{"phase": "evaluation", "arm": "S", "seed": 29424038, "episodes": 383, "steps": 98048, "gap": 22.56}
+{"phase": "evaluation", "arm": "M", "seed": 29424038, "episodes": 384, "steps": 98304, "gap": 21.06}
+{"phase": "evaluation", "arm": "LN", "seed": 29424038, "episodes": 385, "steps": 98560, "gap": 36.82}
+{"phase": "evaluation", "arm": "LR", "seed": 29424038, "episodes": 386, "steps": 98816, "gap": 30.12}
+{"phase": "evaluation", "arm": "G0", "seed": 29424038, "episodes": 387, "steps": 99072, "gap": 27.0}
+{"phase": "evaluation", "arm": "M", "seed": 29424039, "episodes": 388, "steps": 99328, "gap": 25.06}
+{"phase": "evaluation", "arm": "LN", "seed": 29424039, "episodes": 389, "steps": 99584, "gap": 34.2}
+{"phase": "evaluation", "arm": "LR", "seed": 29424039, "episodes": 390, "steps": 99840, "gap": 39.06}
+{"phase": "evaluation", "arm": "G0", "seed": 29424039, "episodes": 391, "steps": 100096, "gap": 22.44}
+{"phase": "evaluation", "arm": "S", "seed": 29424039, "episodes": 392, "steps": 100352, "gap": 25.54}
+{"phase": "evaluation", "arm": "M", "seed": 29424040, "episodes": 393, "steps": 100608, "gap": 16.8}
+{"phase": "evaluation", "arm": "S", "seed": 29424040, "episodes": 394, "steps": 100864, "gap": 21.56}
+{"phase": "evaluation", "arm": "G0", "seed": 29424040, "episodes": 395, "steps": 101120, "gap": 23.8}
+{"phase": "evaluation", "arm": "LR", "seed": 29424040, "episodes": 396, "steps": 101376, "gap": 29.6}
+{"phase": "evaluation", "arm": "LN", "seed": 29424040, "episodes": 397, "steps": 101632, "gap": 40.4}
+{"phase": "evaluation", "arm": "S", "seed": 29424041, "episodes": 398, "steps": 101888, "gap": 20.1}
+{"phase": "evaluation", "arm": "G0", "seed": 29424041, "episodes": 399, "steps": 102144, "gap": 24.5}
+{"phase": "evaluation", "arm": "LR", "seed": 29424041, "episodes": 400, "steps": 102400, "gap": 33.5}
+{"phase": "evaluation", "arm": "LN", "seed": 29424041, "episodes": 401, "steps": 102656, "gap": 26.84}
+{"phase": "evaluation", "arm": "M", "seed": 29424041, "episodes": 402, "steps": 102912, "gap": 21.72}
+{"phase": "evaluation", "arm": "G0", "seed": 29424042, "episodes": 403, "steps": 103168, "gap": 25.3}
+{"phase": "evaluation", "arm": "LR", "seed": 29424042, "episodes": 404, "steps": 103424, "gap": 27.68}
+{"phase": "evaluation", "arm": "LN", "seed": 29424042, "episodes": 405, "steps": 103680, "gap": 30.96}
+{"phase": "evaluation", "arm": "M", "seed": 29424042, "episodes": 406, "steps": 103936, "gap": 22.7}
+{"phase": "evaluation", "arm": "S", "seed": 29424042, "episodes": 407, "steps": 104192, "gap": 19.4}
+{"phase": "evaluation", "arm": "LR", "seed": 29424043, "episodes": 408, "steps": 104448, "gap": 26.96}
+{"phase": "evaluation", "arm": "LN", "seed": 29424043, "episodes": 409, "steps": 104704, "gap": 29.5}
+{"phase": "evaluation", "arm": "M", "seed": 29424043, "episodes": 410, "steps": 104960, "gap": 15.82}
+{"phase": "evaluation", "arm": "S", "seed": 29424043, "episodes": 411, "steps": 105216, "gap": 17.14}
+{"phase": "evaluation", "arm": "G0", "seed": 29424043, "episodes": 412, "steps": 105472, "gap": 24.14}
+{"phase": "evaluation", "arm": "LN", "seed": 29424044, "episodes": 413, "steps": 105728, "gap": 29.92}
+{"phase": "evaluation", "arm": "M", "seed": 29424044, "episodes": 414, "steps": 105984, "gap": 15.88}
+{"phase": "evaluation", "arm": "S", "seed": 29424044, "episodes": 415, "steps": 106240, "gap": 15.64}
+{"phase": "evaluation", "arm": "G0", "seed": 29424044, "episodes": 416, "steps": 106496, "gap": 20.84}
+{"phase": "evaluation", "arm": "LR", "seed": 29424044, "episodes": 417, "steps": 106752, "gap": 35.52}
+{"phase": "evaluation", "arm": "LN", "seed": 29424045, "episodes": 418, "steps": 107008, "gap": 27.44}
+{"phase": "evaluation", "arm": "LR", "seed": 29424045, "episodes": 419, "steps": 107264, "gap": 30.78}
+{"phase": "evaluation", "arm": "G0", "seed": 29424045, "episodes": 420, "steps": 107520, "gap": 22.12}
+{"phase": "evaluation", "arm": "S", "seed": 29424045, "episodes": 421, "steps": 107776, "gap": 18.9}
+{"phase": "evaluation", "arm": "M", "seed": 29424045, "episodes": 422, "steps": 108032, "gap": 18.1}
+{"phase": "evaluation", "arm": "LR", "seed": 29424046, "episodes": 423, "steps": 108288, "gap": 26.12}
+{"phase": "evaluation", "arm": "G0", "seed": 29424046, "episodes": 424, "steps": 108544, "gap": 18.02}
+{"phase": "evaluation", "arm": "S", "seed": 29424046, "episodes": 425, "steps": 108800, "gap": 17.4}
+{"phase": "evaluation", "arm": "M", "seed": 29424046, "episodes": 426, "steps": 109056, "gap": 25.48}
+{"phase": "evaluation", "arm": "LN", "seed": 29424046, "episodes": 427, "steps": 109312, "gap": 28.6}
+{"phase": "evaluation", "arm": "G0", "seed": 29424047, "episodes": 428, "steps": 109568, "gap": 17.68}
+{"phase": "evaluation", "arm": "S", "seed": 29424047, "episodes": 429, "steps": 109824, "gap": 17.18}
+{"phase": "evaluation", "arm": "M", "seed": 29424047, "episodes": 430, "steps": 110080, "gap": 19.6}
+{"phase": "evaluation", "arm": "LN", "seed": 29424047, "episodes": 431, "steps": 110336, "gap": 42.7}
+{"phase": "evaluation", "arm": "LR", "seed": 29424047, "episodes": 432, "steps": 110592, "gap": 27.72}
+{"phase": "evaluation", "arm": "S", "seed": 29424048, "episodes": 433, "steps": 110848, "gap": 17.66}
+{"phase": "evaluation", "arm": "M", "seed": 29424048, "episodes": 434, "steps": 111104, "gap": 18.18}
+{"phase": "evaluation", "arm": "LN", "seed": 29424048, "episodes": 435, "steps": 111360, "gap": 31.68}
+{"phase": "evaluation", "arm": "LR", "seed": 29424048, "episodes": 436, "steps": 111616, "gap": 30.92}
+{"phase": "evaluation", "arm": "G0", "seed": 29424048, "episodes": 437, "steps": 111872, "gap": 18.84}
+{"phase": "evaluation", "arm": "M", "seed": 29424049, "episodes": 438, "steps": 112128, "gap": 13.92}
+{"phase": "evaluation", "arm": "LN", "seed": 29424049, "episodes": 439, "steps": 112384, "gap": 29.26}
+{"phase": "evaluation", "arm": "LR", "seed": 29424049, "episodes": 440, "steps": 112640, "gap": 28.38}
+{"phase": "evaluation", "arm": "G0", "seed": 29424049, "episodes": 441, "steps": 112896, "gap": 16.5}
+{"phase": "evaluation", "arm": "S", "seed": 29424049, "episodes": 442, "steps": 113152, "gap": 20.84}
+{"phase": "evaluation", "arm": "M", "seed": 29424050, "episodes": 443, "steps": 113408, "gap": 22.8}
+{"phase": "evaluation", "arm": "S", "seed": 29424050, "episodes": 444, "steps": 113664, "gap": 21.08}
+{"phase": "evaluation", "arm": "G0", "seed": 29424050, "episodes": 445, "steps": 113920, "gap": 21.44}
+{"phase": "evaluation", "arm": "LR", "seed": 29424050, "episodes": 446, "steps": 114176, "gap": 27.88}
+{"phase": "evaluation", "arm": "LN", "seed": 29424050, "episodes": 447, "steps": 114432, "gap": 28.92}
+{"phase": "evaluation", "arm": "S", "seed": 29424051, "episodes": 448, "steps": 114688, "gap": 21.3}
+{"phase": "evaluation", "arm": "G0", "seed": 29424051, "episodes": 449, "steps": 114944, "gap": 20.34}
+{"phase": "evaluation", "arm": "LR", "seed": 29424051, "episodes": 450, "steps": 115200, "gap": 31.24}
+{"phase": "evaluation", "arm": "LN", "seed": 29424051, "episodes": 451, "steps": 115456, "gap": 27.38}
+{"phase": "evaluation", "arm": "M", "seed": 29424051, "episodes": 452, "steps": 115712, "gap": 24.5}
+{"phase": "evaluation", "arm": "G0", "seed": 29424052, "episodes": 453, "steps": 115968, "gap": 17.22}
+{"phase": "evaluation", "arm": "LR", "seed": 29424052, "episodes": 454, "steps": 116224, "gap": 42.1}
+{"phase": "evaluation", "arm": "LN", "seed": 29424052, "episodes": 455, "steps": 116480, "gap": 32.8}
+{"phase": "evaluation", "arm": "M", "seed": 29424052, "episodes": 456, "steps": 116736, "gap": 17.22}
+{"phase": "evaluation", "arm": "S", "seed": 29424052, "episodes": 457, "steps": 116992, "gap": 19.0}
+{"phase": "evaluation", "arm": "LR", "seed": 29424053, "episodes": 458, "steps": 117248, "gap": 33.5}
+{"phase": "evaluation", "arm": "LN", "seed": 29424053, "episodes": 459, "steps": 117504, "gap": 40.82}
+{"phase": "evaluation", "arm": "M", "seed": 29424053, "episodes": 460, "steps": 117760, "gap": 17.6}
+{"phase": "evaluation", "arm": "S", "seed": 29424053, "episodes": 461, "steps": 118016, "gap": 20.06}
+{"phase": "evaluation", "arm": "G0", "seed": 29424053, "episodes": 462, "steps": 118272, "gap": 19.94}
+{"phase": "evaluation", "arm": "LN", "seed": 29424054, "episodes": 463, "steps": 118528, "gap": 23.9}
+{"phase": "evaluation", "arm": "M", "seed": 29424054, "episodes": 464, "steps": 118784, "gap": 17.46}
+{"phase": "evaluation", "arm": "S", "seed": 29424054, "episodes": 465, "steps": 119040, "gap": 21.66}
+{"phase": "evaluation", "arm": "G0", "seed": 29424054, "episodes": 466, "steps": 119296, "gap": 18.98}
+{"phase": "evaluation", "arm": "LR", "seed": 29424054, "episodes": 467, "steps": 119552, "gap": 27.52}
+{"phase": "evaluation", "arm": "LN", "seed": 29424055, "episodes": 468, "steps": 119808, "gap": 30.02}
+{"phase": "evaluation", "arm": "LR", "seed": 29424055, "episodes": 469, "steps": 120064, "gap": 32.84}
+{"phase": "evaluation", "arm": "G0", "seed": 29424055, "episodes": 470, "steps": 120320, "gap": 28.82}
+{"phase": "evaluation", "arm": "S", "seed": 29424055, "episodes": 471, "steps": 120576, "gap": 19.76}
+{"phase": "evaluation", "arm": "M", "seed": 29424055, "episodes": 472, "steps": 120832, "gap": 20.26}
+{"phase": "evaluation", "arm": "LR", "seed": 29424056, "episodes": 473, "steps": 121088, "gap": 22.52}
+{"phase": "evaluation", "arm": "G0", "seed": 29424056, "episodes": 474, "steps": 121344, "gap": 25.8}
+{"phase": "evaluation", "arm": "S", "seed": 29424056, "episodes": 475, "steps": 121600, "gap": 18.22}
+{"phase": "evaluation", "arm": "M", "seed": 29424056, "episodes": 476, "steps": 121856, "gap": 17.84}
+{"phase": "evaluation", "arm": "LN", "seed": 29424056, "episodes": 477, "steps": 122112, "gap": 35.96}
+{"phase": "evaluation", "arm": "G0", "seed": 29424057, "episodes": 478, "steps": 122368, "gap": 21.44}
+{"phase": "evaluation", "arm": "S", "seed": 29424057, "episodes": 479, "steps": 122624, "gap": 22.28}
+{"phase": "evaluation", "arm": "M", "seed": 29424057, "episodes": 480, "steps": 122880, "gap": 21.58}
+{"phase": "evaluation", "arm": "LN", "seed": 29424057, "episodes": 481, "steps": 123136, "gap": 29.8}
+{"phase": "evaluation", "arm": "LR", "seed": 29424057, "episodes": 482, "steps": 123392, "gap": 38.54}
+{"phase": "evaluation", "arm": "S", "seed": 29424058, "episodes": 483, "steps": 123648, "gap": 23.9}
+{"phase": "evaluation", "arm": "M", "seed": 29424058, "episodes": 484, "steps": 123904, "gap": 20.84}
+{"phase": "evaluation", "arm": "LN", "seed": 29424058, "episodes": 485, "steps": 124160, "gap": 28.76}
+{"phase": "evaluation", "arm": "LR", "seed": 29424058, "episodes": 486, "steps": 124416, "gap": 31.88}
+{"phase": "evaluation", "arm": "G0", "seed": 29424058, "episodes": 487, "steps": 124672, "gap": 26.48}
+{"phase": "evaluation", "arm": "M", "seed": 29424059, "episodes": 488, "steps": 124928, "gap": 22.86}
+{"phase": "evaluation", "arm": "LN", "seed": 29424059, "episodes": 489, "steps": 125184, "gap": 33.84}
+{"phase": "evaluation", "arm": "LR", "seed": 29424059, "episodes": 490, "steps": 125440, "gap": 32.6}
+{"phase": "evaluation", "arm": "G0", "seed": 29424059, "episodes": 491, "steps": 125696, "gap": 21.4}
+{"phase": "evaluation", "arm": "S", "seed": 29424059, "episodes": 492, "steps": 125952, "gap": 19.7}
+{"phase": "evaluation", "arm": "M", "seed": 29424060, "episodes": 493, "steps": 126208, "gap": 18.82}
+{"phase": "evaluation", "arm": "S", "seed": 29424060, "episodes": 494, "steps": 126464, "gap": 23.46}
+{"phase": "evaluation", "arm": "G0", "seed": 29424060, "episodes": 495, "steps": 126720, "gap": 20.34}
+{"phase": "evaluation", "arm": "LR", "seed": 29424060, "episodes": 496, "steps": 126976, "gap": 27.78}
+{"phase": "evaluation", "arm": "LN", "seed": 29424060, "episodes": 497, "steps": 127232, "gap": 23.18}
+{"phase": "evaluation", "arm": "S", "seed": 29424061, "episodes": 498, "steps": 127488, "gap": 19.8}
+{"phase": "evaluation", "arm": "G0", "seed": 29424061, "episodes": 499, "steps": 127744, "gap": 24.06}
+{"phase": "evaluation", "arm": "LR", "seed": 29424061, "episodes": 500, "steps": 128000, "gap": 30.02}
+{"phase": "evaluation", "arm": "LN", "seed": 29424061, "episodes": 501, "steps": 128256, "gap": 30.84}
+{"phase": "evaluation", "arm": "M", "seed": 29424061, "episodes": 502, "steps": 128512, "gap": 20.98}
+{"phase": "evaluation", "arm": "G0", "seed": 29424062, "episodes": 503, "steps": 128768, "gap": 21.8}
+{"phase": "evaluation", "arm": "LR", "seed": 29424062, "episodes": 504, "steps": 129024, "gap": 29.76}
+{"phase": "evaluation", "arm": "LN", "seed": 29424062, "episodes": 505, "steps": 129280, "gap": 31.78}
+{"phase": "evaluation", "arm": "M", "seed": 29424062, "episodes": 506, "steps": 129536, "gap": 20.6}
+{"phase": "evaluation", "arm": "S", "seed": 29424062, "episodes": 507, "steps": 129792, "gap": 20.1}
+{"phase": "evaluation", "arm": "LR", "seed": 29424063, "episodes": 508, "steps": 130048, "gap": 31.86}
+{"phase": "evaluation", "arm": "LN", "seed": 29424063, "episodes": 509, "steps": 130304, "gap": 29.8}
+{"phase": "evaluation", "arm": "M", "seed": 29424063, "episodes": 510, "steps": 130560, "gap": 29.14}
+{"phase": "evaluation", "arm": "S", "seed": 29424063, "episodes": 511, "steps": 130816, "gap": 24.94}
+{"phase": "evaluation", "arm": "G0", "seed": 29424063, "episodes": 512, "steps": 131072, "gap": 31.72}

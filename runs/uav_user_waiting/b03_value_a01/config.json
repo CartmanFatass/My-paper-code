@@ -1,0 +1,1527 @@
+{
+  "object": "UAV-USER-WAITING-B03",
+  "launch_sha": "a045bc9b4e3ba9ef211474293c4bc43ad8b16b08",
+  "pure_seeds": [
+    29423000,
+    29423001,
+    29423002,
+    29423003,
+    29423004,
+    29423005,
+    29423006,
+    29423007,
+    29423008,
+    29423009,
+    29423010,
+    29423011,
+    29423012,
+    29423013,
+    29423014,
+    29423015,
+    29423016,
+    29423017,
+    29423018,
+    29423019,
+    29423020,
+    29423021,
+    29423022,
+    29423023,
+    29423024,
+    29423025,
+    29423026,
+    29423027,
+    29423028,
+    29423029,
+    29423030,
+    29423031,
+    29423032,
+    29423033,
+    29423034,
+    29423035,
+    29423036,
+    29423037,
+    29423038,
+    29423039,
+    29423040,
+    29423041,
+    29423042,
+    29423043,
+    29423044,
+    29423045,
+    29423046,
+    29423047,
+    29423048,
+    29423049,
+    29423050,
+    29423051,
+    29423052,
+    29423053,
+    29423054,
+    29423055,
+    29423056,
+    29423057,
+    29423058,
+    29423059,
+    29423060,
+    29423061,
+    29423062,
+    29423063,
+    29423064,
+    29423065,
+    29423066,
+    29423067,
+    29423068,
+    29423069,
+    29423070,
+    29423071,
+    29423072,
+    29423073,
+    29423074,
+    29423075,
+    29423076,
+    29423077,
+    29423078,
+    29423079,
+    29423080,
+    29423081,
+    29423082,
+    29423083,
+    29423084,
+    29423085,
+    29423086,
+    29423087,
+    29423088,
+    29423089,
+    29423090,
+    29423091,
+    29423092,
+    29423093,
+    29423094,
+    29423095
+  ],
+  "perturbed_seeds": [
+    29423100,
+    29423101,
+    29423102,
+    29423103,
+    29423104,
+    29423105,
+    29423106,
+    29423107,
+    29423108,
+    29423109,
+    29423110,
+    29423111,
+    29423112,
+    29423113,
+    29423114,
+    29423115,
+    29423116,
+    29423117,
+    29423118,
+    29423119,
+    29423120,
+    29423121,
+    29423122,
+    29423123,
+    29423124,
+    29423125,
+    29423126,
+    29423127,
+    29423128,
+    29423129,
+    29423130,
+    29423131,
+    29423132,
+    29423133,
+    29423134,
+    29423135,
+    29423136,
+    29423137,
+    29423138,
+    29423139,
+    29423140,
+    29423141,
+    29423142,
+    29423143,
+    29423144,
+    29423145,
+    29423146,
+    29423147,
+    29423148,
+    29423149,
+    29423150,
+    29423151,
+    29423152,
+    29423153,
+    29423154,
+    29423155,
+    29423156,
+    29423157,
+    29423158,
+    29423159,
+    29423160,
+    29423161,
+    29423162,
+    29423163,
+    29423164,
+    29423165,
+    29423166,
+    29423167,
+    29423168,
+    29423169,
+    29423170,
+    29423171,
+    29423172,
+    29423173,
+    29423174,
+    29423175,
+    29423176,
+    29423177,
+    29423178,
+    29423179,
+    29423180,
+    29423181,
+    29423182,
+    29423183,
+    29423184,
+    29423185,
+    29423186,
+    29423187,
+    29423188,
+    29423189,
+    29423190,
+    29423191,
+    29423192,
+    29423193,
+    29423194,
+    29423195
+  ],
+  "eval_seeds": [
+    29424000,
+    29424001,
+    29424002,
+    29424003,
+    29424004,
+    29424005,
+    29424006,
+    29424007,
+    29424008,
+    29424009,
+    29424010,
+    29424011,
+    29424012,
+    29424013,
+    29424014,
+    29424015,
+    29424016,
+    29424017,
+    29424018,
+    29424019,
+    29424020,
+    29424021,
+    29424022,
+    29424023,
+    29424024,
+    29424025,
+    29424026,
+    29424027,
+    29424028,
+    29424029,
+    29424030,
+    29424031,
+    29424032,
+    29424033,
+    29424034,
+    29424035,
+    29424036,
+    29424037,
+    29424038,
+    29424039,
+    29424040,
+    29424041,
+    29424042,
+    29424043,
+    29424044,
+    29424045,
+    29424046,
+    29424047,
+    29424048,
+    29424049,
+    29424050,
+    29424051,
+    29424052,
+    29424053,
+    29424054,
+    29424055,
+    29424056,
+    29424057,
+    29424058,
+    29424059,
+    29424060,
+    29424061,
+    29424062,
+    29424063
+  ],
+  "perturbations": [
+    {
+      "seed": 29423100,
+      "tick": 0,
+      "pair": [
+        4,
+        11
+      ]
+    },
+    {
+      "seed": 29423101,
+      "tick": 0,
+      "pair": [
+        12,
+        20
+      ]
+    },
+    {
+      "seed": 29423102,
+      "tick": 4,
+      "pair": [
+        13,
+        4
+      ]
+    },
+    {
+      "seed": 29423103,
+      "tick": 4,
+      "pair": [
+        15,
+        28
+      ]
+    },
+    {
+      "seed": 29423104,
+      "tick": 8,
+      "pair": [
+        3,
+        9
+      ]
+    },
+    {
+      "seed": 29423105,
+      "tick": 12,
+      "pair": [
+        13,
+        26
+      ]
+    },
+    {
+      "seed": 29423106,
+      "tick": 12,
+      "pair": [
+        25,
+        13
+      ]
+    },
+    {
+      "seed": 29423107,
+      "tick": 16,
+      "pair": [
+        17,
+        3
+      ]
+    },
+    {
+      "seed": 29423108,
+      "tick": 20,
+      "pair": [
+        13,
+        6
+      ]
+    },
+    {
+      "seed": 29423109,
+      "tick": 20,
+      "pair": [
+        14,
+        11
+      ]
+    },
+    {
+      "seed": 29423110,
+      "tick": 24,
+      "pair": [
+        6,
+        6
+      ]
+    },
+    {
+      "seed": 29423111,
+      "tick": 28,
+      "pair": [
+        26,
+        30
+      ]
+    },
+    {
+      "seed": 29423112,
+      "tick": 28,
+      "pair": [
+        10,
+        11
+      ]
+    },
+    {
+      "seed": 29423113,
+      "tick": 32,
+      "pair": [
+        26,
+        29
+      ]
+    },
+    {
+      "seed": 29423114,
+      "tick": 36,
+      "pair": [
+        12,
+        21
+      ]
+    },
+    {
+      "seed": 29423115,
+      "tick": 36,
+      "pair": [
+        21,
+        4
+      ]
+    },
+    {
+      "seed": 29423116,
+      "tick": 40,
+      "pair": [
+        11,
+        29
+      ]
+    },
+    {
+      "seed": 29423117,
+      "tick": 44,
+      "pair": [
+        26,
+        28
+      ]
+    },
+    {
+      "seed": 29423118,
+      "tick": 44,
+      "pair": [
+        17,
+        16
+      ]
+    },
+    {
+      "seed": 29423119,
+      "tick": 48,
+      "pair": [
+        26,
+        31
+      ]
+    },
+    {
+      "seed": 29423120,
+      "tick": 52,
+      "pair": [
+        22,
+        24
+      ]
+    },
+    {
+      "seed": 29423121,
+      "tick": 52,
+      "pair": [
+        13,
+        12
+      ]
+    },
+    {
+      "seed": 29423122,
+      "tick": 56,
+      "pair": [
+        8,
+        6
+      ]
+    },
+    {
+      "seed": 29423123,
+      "tick": 60,
+      "pair": [
+        6,
+        25
+      ]
+    },
+    {
+      "seed": 29423124,
+      "tick": 60,
+      "pair": [
+        16,
+        11
+      ]
+    },
+    {
+      "seed": 29423125,
+      "tick": 64,
+      "pair": [
+        13,
+        23
+      ]
+    },
+    {
+      "seed": 29423126,
+      "tick": 68,
+      "pair": [
+        19,
+        19
+      ]
+    },
+    {
+      "seed": 29423127,
+      "tick": 68,
+      "pair": [
+        16,
+        12
+      ]
+    },
+    {
+      "seed": 29423128,
+      "tick": 72,
+      "pair": [
+        3,
+        12
+      ]
+    },
+    {
+      "seed": 29423129,
+      "tick": 76,
+      "pair": [
+        17,
+        14
+      ]
+    },
+    {
+      "seed": 29423130,
+      "tick": 76,
+      "pair": [
+        17,
+        19
+      ]
+    },
+    {
+      "seed": 29423131,
+      "tick": 80,
+      "pair": [
+        26,
+        6
+      ]
+    },
+    {
+      "seed": 29423132,
+      "tick": 84,
+      "pair": [
+        19,
+        17
+      ]
+    },
+    {
+      "seed": 29423133,
+      "tick": 84,
+      "pair": [
+        21,
+        2
+      ]
+    },
+    {
+      "seed": 29423134,
+      "tick": 88,
+      "pair": [
+        4,
+        9
+      ]
+    },
+    {
+      "seed": 29423135,
+      "tick": 88,
+      "pair": [
+        15,
+        13
+      ]
+    },
+    {
+      "seed": 29423136,
+      "tick": 92,
+      "pair": [
+        12,
+        16
+      ]
+    },
+    {
+      "seed": 29423137,
+      "tick": 96,
+      "pair": [
+        20,
+        12
+      ]
+    },
+    {
+      "seed": 29423138,
+      "tick": 96,
+      "pair": [
+        5,
+        3
+      ]
+    },
+    {
+      "seed": 29423139,
+      "tick": 100,
+      "pair": [
+        24,
+        29
+      ]
+    },
+    {
+      "seed": 29423140,
+      "tick": 104,
+      "pair": [
+        21,
+        2
+      ]
+    },
+    {
+      "seed": 29423141,
+      "tick": 104,
+      "pair": [
+        14,
+        20
+      ]
+    },
+    {
+      "seed": 29423142,
+      "tick": 108,
+      "pair": [
+        16,
+        11
+      ]
+    },
+    {
+      "seed": 29423143,
+      "tick": 112,
+      "pair": [
+        0,
+        28
+      ]
+    },
+    {
+      "seed": 29423144,
+      "tick": 112,
+      "pair": [
+        3,
+        25
+      ]
+    },
+    {
+      "seed": 29423145,
+      "tick": 116,
+      "pair": [
+        10,
+        23
+      ]
+    },
+    {
+      "seed": 29423146,
+      "tick": 120,
+      "pair": [
+        21,
+        30
+      ]
+    },
+    {
+      "seed": 29423147,
+      "tick": 120,
+      "pair": [
+        16,
+        4
+      ]
+    },
+    {
+      "seed": 29423148,
+      "tick": 124,
+      "pair": [
+        3,
+        19
+      ]
+    },
+    {
+      "seed": 29423149,
+      "tick": 128,
+      "pair": [
+        6,
+        29
+      ]
+    },
+    {
+      "seed": 29423150,
+      "tick": 128,
+      "pair": [
+        15,
+        31
+      ]
+    },
+    {
+      "seed": 29423151,
+      "tick": 132,
+      "pair": [
+        4,
+        28
+      ]
+    },
+    {
+      "seed": 29423152,
+      "tick": 136,
+      "pair": [
+        26,
+        10
+      ]
+    },
+    {
+      "seed": 29423153,
+      "tick": 136,
+      "pair": [
+        3,
+        17
+      ]
+    },
+    {
+      "seed": 29423154,
+      "tick": 140,
+      "pair": [
+        26,
+        8
+      ]
+    },
+    {
+      "seed": 29423155,
+      "tick": 144,
+      "pair": [
+        0,
+        7
+      ]
+    },
+    {
+      "seed": 29423156,
+      "tick": 144,
+      "pair": [
+        5,
+        20
+      ]
+    },
+    {
+      "seed": 29423157,
+      "tick": 148,
+      "pair": [
+        13,
+        26
+      ]
+    },
+    {
+      "seed": 29423158,
+      "tick": 152,
+      "pair": [
+        7,
+        25
+      ]
+    },
+    {
+      "seed": 29423159,
+      "tick": 152,
+      "pair": [
+        6,
+        11
+      ]
+    },
+    {
+      "seed": 29423160,
+      "tick": 156,
+      "pair": [
+        1,
+        12
+      ]
+    },
+    {
+      "seed": 29423161,
+      "tick": 160,
+      "pair": [
+        19,
+        13
+      ]
+    },
+    {
+      "seed": 29423162,
+      "tick": 160,
+      "pair": [
+        26,
+        15
+      ]
+    },
+    {
+      "seed": 29423163,
+      "tick": 164,
+      "pair": [
+        25,
+        20
+      ]
+    },
+    {
+      "seed": 29423164,
+      "tick": 168,
+      "pair": [
+        20,
+        7
+      ]
+    },
+    {
+      "seed": 29423165,
+      "tick": 168,
+      "pair": [
+        19,
+        12
+      ]
+    },
+    {
+      "seed": 29423166,
+      "tick": 172,
+      "pair": [
+        5,
+        17
+      ]
+    },
+    {
+      "seed": 29423167,
+      "tick": 172,
+      "pair": [
+        2,
+        14
+      ]
+    },
+    {
+      "seed": 29423168,
+      "tick": 176,
+      "pair": [
+        19,
+        28
+      ]
+    },
+    {
+      "seed": 29423169,
+      "tick": 180,
+      "pair": [
+        14,
+        8
+      ]
+    },
+    {
+      "seed": 29423170,
+      "tick": 180,
+      "pair": [
+        4,
+        16
+      ]
+    },
+    {
+      "seed": 29423171,
+      "tick": 184,
+      "pair": [
+        5,
+        25
+      ]
+    },
+    {
+      "seed": 29423172,
+      "tick": 188,
+      "pair": [
+        4,
+        10
+      ]
+    },
+    {
+      "seed": 29423173,
+      "tick": 188,
+      "pair": [
+        21,
+        20
+      ]
+    },
+    {
+      "seed": 29423174,
+      "tick": 192,
+      "pair": [
+        6,
+        13
+      ]
+    },
+    {
+      "seed": 29423175,
+      "tick": 196,
+      "pair": [
+        1,
+        15
+      ]
+    },
+    {
+      "seed": 29423176,
+      "tick": 196,
+      "pair": [
+        3,
+        13
+      ]
+    },
+    {
+      "seed": 29423177,
+      "tick": 200,
+      "pair": [
+        7,
+        6
+      ]
+    },
+    {
+      "seed": 29423178,
+      "tick": 204,
+      "pair": [
+        16,
+        15
+      ]
+    },
+    {
+      "seed": 29423179,
+      "tick": 204,
+      "pair": [
+        1,
+        24
+      ]
+    },
+    {
+      "seed": 29423180,
+      "tick": 208,
+      "pair": [
+        3,
+        9
+      ]
+    },
+    {
+      "seed": 29423181,
+      "tick": 212,
+      "pair": [
+        25,
+        31
+      ]
+    },
+    {
+      "seed": 29423182,
+      "tick": 212,
+      "pair": [
+        13,
+        16
+      ]
+    },
+    {
+      "seed": 29423183,
+      "tick": 216,
+      "pair": [
+        4,
+        24
+      ]
+    },
+    {
+      "seed": 29423184,
+      "tick": 220,
+      "pair": [
+        7,
+        24
+      ]
+    },
+    {
+      "seed": 29423185,
+      "tick": 220,
+      "pair": [
+        20,
+        28
+      ]
+    },
+    {
+      "seed": 29423186,
+      "tick": 224,
+      "pair": [
+        8,
+        9
+      ]
+    },
+    {
+      "seed": 29423187,
+      "tick": 228,
+      "pair": [
+        4,
+        13
+      ]
+    },
+    {
+      "seed": 29423188,
+      "tick": 228,
+      "pair": [
+        7,
+        29
+      ]
+    },
+    {
+      "seed": 29423189,
+      "tick": 232,
+      "pair": [
+        23,
+        17
+      ]
+    },
+    {
+      "seed": 29423190,
+      "tick": 236,
+      "pair": [
+        4,
+        1
+      ]
+    },
+    {
+      "seed": 29423191,
+      "tick": 236,
+      "pair": [
+        17,
+        1
+      ]
+    },
+    {
+      "seed": 29423192,
+      "tick": 240,
+      "pair": [
+        4,
+        15
+      ]
+    },
+    {
+      "seed": 29423193,
+      "tick": 244,
+      "pair": [
+        18,
+        23
+      ]
+    },
+    {
+      "seed": 29423194,
+      "tick": 244,
+      "pair": [
+        24,
+        18
+      ]
+    },
+    {
+      "seed": 29423195,
+      "tick": 248,
+      "pair": [
+        19,
+        10
+      ]
+    }
+  ],
+  "arms": [
+    "M",
+    "S",
+    "G0",
+    "LR",
+    "LN"
+  ],
+  "arm_orders": [
+    [
+      "M",
+      "S",
+      "G0",
+      "LR",
+      "LN"
+    ],
+    [
+      "S",
+      "G0",
+      "LR",
+      "LN",
+      "M"
+    ],
+    [
+      "G0",
+      "LR",
+      "LN",
+      "M",
+      "S"
+    ],
+    [
+      "LR",
+      "LN",
+      "M",
+      "S",
+      "G0"
+    ],
+    [
+      "LN",
+      "M",
+      "S",
+      "G0",
+      "LR"
+    ],
+    [
+      "LN",
+      "LR",
+      "G0",
+      "S",
+      "M"
+    ],
+    [
+      "LR",
+      "G0",
+      "S",
+      "M",
+      "LN"
+    ],
+    [
+      "G0",
+      "S",
+      "M",
+      "LN",
+      "LR"
+    ],
+    [
+      "S",
+      "M",
+      "LN",
+      "LR",
+      "G0"
+    ],
+    [
+      "M",
+      "LN",
+      "LR",
+      "G0",
+      "S"
+    ]
+  ],
+  "horizon": 256,
+  "nodes": 5,
+  "users": 50,
+  "planned_fits": 2,
+  "planned_new_episodes": 512,
+  "planned_new_steps": 131072,
+  "reused_episodes": 64,
+  "previously_paid_steps": 16384,
+  "correctness_steps": 40,
+  "correctness_seed": 29425999,
+  "init_seed": 29425000,
+  "sample_seed": 29425001,
+  "bootstrap_seed": 29425991,
+  "bootstrap_samples": 10000,
+  "feature_dim": 805,
+  "hidden": [
+    128,
+    128
+  ],
+  "adam_updates": 4096,
+  "batch_size": 256,
+  "learning_rate": 0.001,
+  "ridge_lambda": 0.001,
+  "weighting": "equal eligible episode, equal row within episode; target native suffix increment /256",
+  "scales": "fixed805 dimensions, H256; no fitted scaler",
+  "deployment": "256*unclipped fit output then clip[0,256-t]; terminal0",
+  "primary": "LN-M mean_user_max_unserved_gap; lower favorable",
+  "experience_use": "LN-G0; LN-LR and LR-G0 retain the ordinary fitted alternative",
+  "fallback": "missing complete-origin maximum uses completed M; any whole-round late/incomplete holds old action/mask",
+  "decision": "full M232requests + value two-order116 + explicit M1; elapsed4 maximum increment/value then elapsedage then delivered4 native ties",
+  "commitment": "pre-C t+4 state carries current candidate through t+5 and previous post-C nav; no future C call",
+  "report_bytes": 125,
+  "command_bytes": 16,
+  "recurring_bytes": 141,
+  "deadline_seconds": 1.436,
+  "source_identities": [
+    {
+      "path": ".codex/hmasd-compute.toml",
+      "bytes": 3542,
+      "sha256": "2bb704e31e08a6a3489e80ea6851826740dfbf71461e0f7e70c4394694e65e6f"
+    },
+    {
+      "path": "envs/pettingzoo/env_adapter.py",
+      "bytes": 25232,
+      "sha256": "8b42c1c3e7ef44cb814f79225b4af944b1018ad764dfeb17e9e1cc294df79d40"
+    },
+    {
+      "path": "envs/pettingzoo/uav_env.py",
+      "bytes": 68827,
+      "sha256": "fb67554cf911adc9d3260a2a7f16d1773921c295646cb46beb4ba1247fec599e"
+    },
+    {
+      "path": "envs/pettingzoo/uav_radio.py",
+      "bytes": 5001,
+      "sha256": "db3464803b1a5aa9c9504096810dc971266a6bd7eba1c31dfe79e7d8d903f3cc"
+    },
+    {
+      "path": "experiments/candidates/uav_local_history/b01/controller.py",
+      "bytes": 14309,
+      "sha256": "b5fdfbfe2718ee693c9ed1d7aeb8bbb6c5c59964ec6c56c5bb35be8b685f23d2"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/__init__.py",
+      "bytes": 58,
+      "sha256": "b0392e94f590eb0fd016ce26529485215b128b9accff9b1dc5fdd6ffd7d11b8a"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/protocol.py",
+      "bytes": 4643,
+      "sha256": "4976e6739d1e5c919bd298b86091dcf6cf5d62d5c3cc3a7b977fa5b5f0956431"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/read.py",
+      "bytes": 16058,
+      "sha256": "8d9f8d469335d2ac2c7551dd81217b9194c81c6a92d44725b202078c4a7b1347"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/run.py",
+      "bytes": 1619,
+      "sha256": "02ca51bd761be8cbde3706f9f9ae3b3556fdff304480ec1bf45adc92388e971f"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/scheduler.py",
+      "bytes": 4524,
+      "sha256": "2b75232b9b57464b31a113458e9bab6b5c47b00272cf4d255dd670914b05e792"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b01/study.py",
+      "bytes": 16773,
+      "sha256": "7af060ca82f357722e76588669e7319b10da7254f317bc312f71d25eca14aa24"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/__init__.py",
+      "bytes": 70,
+      "sha256": "3e9e194f32194488a58d2bee13d5be625f5142b2d4330b76c729809924bf950e"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/protocol.py",
+      "bytes": 5120,
+      "sha256": "a1dbec8e5aecead2c702fab54376c95c8b9d1fd134cb0894a3c0eb705ebab69b"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/read.py",
+      "bytes": 18060,
+      "sha256": "ef4baedfe98630064ee1545637dcc932304b39f934b055800ed9c970eaa5a04d"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/run.py",
+      "bytes": 1630,
+      "sha256": "9d8633e865f76f1801611f2026e2264f2198134089fce32d9ebc5e3f1076f1c4"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/scheduler.py",
+      "bytes": 7781,
+      "sha256": "5c748f097a7597806f0adb3e5b49a242f000391c7da9ab7eedb2f7efce7535e7"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b02/study.py",
+      "bytes": 19057,
+      "sha256": "e6bb046907e195e02c65308015a29eb9c49bb479a22efa4bcac6ddd6dbe1ed75"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/__init__.py",
+      "bytes": 70,
+      "sha256": "e7f16638203ff2d8d5254017185d2b2133c21fc41b1fef22aa4709cbafc9c350"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/protocol.py",
+      "bytes": 5146,
+      "sha256": "3561dd0c2ea274a7e24e5a8bc6da3d6ee03b21fcec8768d18adb45b4f524b2c1"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/read.py",
+      "bytes": 18928,
+      "sha256": "ed137cd753b2961ef1518f22a1a90475f55eef17fb688f574563e0e2cd89c3af"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/run.py",
+      "bytes": 1632,
+      "sha256": "89c0e43aac625199305076a1a3188875e34969cdcb16588fe2d4dc05d1b74558"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/scheduler.py",
+      "bytes": 6844,
+      "sha256": "41cdda90f1bb677c16f1ca12ee57cef2ac656b9b597a146cf8b4e6be9039d54f"
+    },
+    {
+      "path": "experiments/candidates/uav_radio_activation/b03/study.py",
+      "bytes": 19661,
+      "sha256": "aadd16bdac244757edb5736684b3d5432f8b4372b5e36fda124566987801a715"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/__init__.py",
+      "bytes": 62,
+      "sha256": "ef0474c939a8e83168c671d537bd3d6b178b533d268f48eae8cfcf4357218c31"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/history.py",
+      "bytes": 4562,
+      "sha256": "d67ee807bb29fe4346c070f72d9f7110bc0696ef898b24b13bb49b5db9d626ed"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/metrics.py",
+      "bytes": 3542,
+      "sha256": "ca6f5b3895f6101ac2b4bb1e590d2c7b278d90cffe8b4cd4fa614fab0624fbbb"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/read.py",
+      "bytes": 24261,
+      "sha256": "ed9d3a96c538b906f5ef11aec03b0ec934ea8354410a97e5ff14aeab38d86616"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/run.py",
+      "bytes": 1353,
+      "sha256": "0829c43177b19bdd200ab2ce157cd0bb54fe15394e0e16761c8cb8d901aa507d"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/scheduler.py",
+      "bytes": 11880,
+      "sha256": "30c9d7d923a2f89ef61dd3fe2f662ac85dc3e0571240c9989f4c384d845ff1b5"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b01/study.py",
+      "bytes": 20079,
+      "sha256": "a705d26145cb35d9a9e83d70a45c2206ddc3d04dfa0a99c438a1dbc795aded50"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/__init__.py",
+      "bytes": 56,
+      "sha256": "93e2a4c8326dc374289560fa9c465f59c006c97bd4d17fa888c11bb8c36a2da6"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/metrics.py",
+      "bytes": 5181,
+      "sha256": "7c40bc481c984395abba2c5b915327d94fda6fa63d030f54bb69851c64c35446"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/read.py",
+      "bytes": 27988,
+      "sha256": "75ccbdeacdd17fa29ae426592865354e29a02194821b5735509c98bbfd341eda"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/run.py",
+      "bytes": 1365,
+      "sha256": "234d72c002447686bd526d8de5c62aca6355a14c7bc9eeca2fba722254b8181b"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/scheduler.py",
+      "bytes": 12569,
+      "sha256": "fd12bd64ff076897988042073d75743c063960b665770542168852a5bba4c7b8"
+    },
+    {
+      "path": "experiments/candidates/uav_registered_service/b02/study.py",
+      "bytes": 18668,
+      "sha256": "c6914962ea2419ffe7f240ed8423bfd86732ce8e1fe4601a8a1cb604f134ec99"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/__init__.py",
+      "bytes": 71,
+      "sha256": "a30d900ab2439ea58777f157cd60b4ad3dab5f5c6aa8f13363420a647dc097df"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/features.py",
+      "bytes": 5106,
+      "sha256": "55d2b58377019a2edcd3407639047314db58be2bffcbeac31860bf1ddddb28d2"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/learner.py",
+      "bytes": 8669,
+      "sha256": "9ad461b2a64d3439cf7004ad656758b02d3579c7c5b57ec127cbfc9db60f7ac8"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/metrics.py",
+      "bytes": 4240,
+      "sha256": "8e85fc959ff06fb96fd87fe6154155f31d460392d55e74c2f26d934e2a01d6ec"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/read.py",
+      "bytes": 34142,
+      "sha256": "7a6244085d44e126809d9bac63197fb9159b8206154047c4d4b7248026375604"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/run.py",
+      "bytes": 1408,
+      "sha256": "6397b73ea24be7821071553003a034e8a7d979c29915d96897560b2da24541ab"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/scheduler.py",
+      "bytes": 21161,
+      "sha256": "84e506aa6a538a7f8aa0d7d15ce25914345faa642eb9d89e4a88895f645db89e"
+    },
+    {
+      "path": "experiments/candidates/uav_service_age/b01/study.py",
+      "bytes": 21963,
+      "sha256": "9d153bdde6aa7df06806d9168be53f7c1f3bd69160a632d0b9abacb6f3625cd0"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/__init__.py",
+      "bytes": 62,
+      "sha256": "8fde437b9ee3fa4dad6859adbd35c48e75192e32ca1f9ddbc233d7c1f5a94e9f"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/history.py",
+      "bytes": 1480,
+      "sha256": "a839438052c6c57337eade4a1b066802830a5fbd0af78e49f45564160f57a7f4"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/metrics.py",
+      "bytes": 2771,
+      "sha256": "b3e5cf2f0dd5d6246a27ad2a40bfd9e9157895782f1f103dc00fbcc2b5537d53"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/read.py",
+      "bytes": 21847,
+      "sha256": "ac0ab412c19782b98a07127ed4678588fcd02d891385ddcc920e669fdfe63286"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/run.py",
+      "bytes": 1393,
+      "sha256": "f323b7e9448e940e5d373713bda2e48d8885ffbff9bf148b8c2397aa511e9e56"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/scheduler.py",
+      "bytes": 12897,
+      "sha256": "b93213bfb53c01d9d24d6247d2bfb5ef9967eeeb0cef46333ed6c4ed454355f7"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b01/study.py",
+      "bytes": 15855,
+      "sha256": "6608cac2f8c2e7746b66d4919cb3527baf16993802c6801cd63e00ed19f46a00"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/__init__.py",
+      "bytes": 52,
+      "sha256": "419ff3be5e484c47b704cbcaa13eeab4ad652c538833b3619c53c737cacd1da9"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/metrics.py",
+      "bytes": 4385,
+      "sha256": "bf51affe06f92fb45558d12abb4516e2d6b2d3be3d57e0ca161564cfba724629"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/predictor.py",
+      "bytes": 3957,
+      "sha256": "b356a04de8525a24764822044cd72af7c57aa286cd5d873bd8db54ac9be7db10"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/protocol.py",
+      "bytes": 4020,
+      "sha256": "038bddbfa0f694e9b5aa2a6c3f0e659d945369a951b55497a1da2a9ec839e1d4"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/read.py",
+      "bytes": 32455,
+      "sha256": "04e799dce7c0158473d018348d4fe2d2628e60eea1e2f57c2874d01251ca0f15"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/run.py",
+      "bytes": 1393,
+      "sha256": "703db2414a8e7dfd0cc367f2f6a3a9e03b52dde1684e16a1d057c7e628977681"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/scheduler.py",
+      "bytes": 25379,
+      "sha256": "b752521080a9fa12c24a05e696880a2f94e74734fe273d77fee5e20a0df85b41"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/storage.py",
+      "bytes": 3196,
+      "sha256": "0a631080a9f3fc9acf4cd15aa43c29e052652b57dabedabb61e9bf12bf010154"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b02/study.py",
+      "bytes": 18786,
+      "sha256": "e69ccca9d8213a07de56a13b1110365b74545a5312be53e23e84604c4d51753d"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/__init__.py",
+      "bytes": 66,
+      "sha256": "67644b817888e8da2d17b3a798cc34e18f12353991d8a77acd5ad0f21a8280c9"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/collector.py",
+      "bytes": 9994,
+      "sha256": "32677758e00d52debab8e534de4cc4a65feb5dfe0700a8a4787e877c3ff0d3a9"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/correctness.py",
+      "bytes": 3847,
+      "sha256": "a2144beafd501191535f62fcd4389a01ec64cb4f20b98d61ad5ec974c3688911"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/data.py",
+      "bytes": 4511,
+      "sha256": "ddabfacded73359f826446e622f409ddac97cc17287784887c4cc314565744f9"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/features.py",
+      "bytes": 6374,
+      "sha256": "203d9922d0a976a6b3cac5273059c999124429622ea883c14ccf29f6db1c5ec2"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/history.py",
+      "bytes": 941,
+      "sha256": "d3dd63b9c978b92fd19974edbcd0fc5e97adab214bb99c7f43b89c83adcc2257"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/learner.py",
+      "bytes": 13789,
+      "sha256": "2df6815574beb9fe697f6403ba235c30db321095413f1d856c14bf3741425c68"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/read.py",
+      "bytes": 14641,
+      "sha256": "d560b9312af9b59cc27dc73f2bcb385e096a8ff20835cb69c41f561e1c6d594b"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/read_core.py",
+      "bytes": 18575,
+      "sha256": "9f3b32761c9f273ca4b4402e1328947ba2b8d7ef6f2d3f7925c00f5ae86caa16"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/reused_m.json",
+      "bytes": 25256,
+      "sha256": "2894ff08241215ba15d47df6b1320a20213184f29fbea298d6a5b8e1375fdcbc"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/run.py",
+      "bytes": 1340,
+      "sha256": "8a9b73647f0e4de05cee099d9fc67011567720bf100fc4e55dcfa4437211416a"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/scheduler.py",
+      "bytes": 14851,
+      "sha256": "acc7a23a094b5c2f9018a893eb1111e4ae1a3d4c7473c5b541aa566287978d8b"
+    },
+    {
+      "path": "experiments/candidates/uav_user_waiting/b03/study.py",
+      "bytes": 10815,
+      "sha256": "55097eff135b8ae939f69a577053f2e52599246a57d6efbefc574e29a53a84ea"
+    },
+    {
+      "path": "experiments/candidates/ucope/uav_motion_prefix_b01/environment.py",
+      "bytes": 4819,
+      "sha256": "fb25e48857cc8531ac9b80f13243ccd6ca88fa5bf2b194a43dffed21c80690e6"
+    },
+    {
+      "path": "scripts/hmasd_admission.py",
+      "bytes": 19793,
+      "sha256": "0faa5d53fba5af9b1a2fc4979bde5bd50bcbcaac2dbef938e90a64680156cf4d"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "kind": "pre_admission_launch_refusal",
+  "source_sha": "a045bc9b4e3ba9ef211474293c4bc43ad8b16b08",
+  "outer_task": "uav-user-waiting-b03-value-read-a01",
+  "node": "wsl_4070",
+  "started_utc": "2026-09-30T19:49:03Z",
+  "finished_utc": "2026-09-30T19:49:12Z",
+  "outer_exit_code": 4,
+  "refused_argument": [
+    "--worker-out",
+    "/home/wu/projects/HMASD/runs/uav_user_waiting/b03_value_a01"
+  ],
+  "reason": "absolute author input is absent from published snapshot: /home/wu/projects/HMASD/runs/uav_user_waiting/b03_value_a01",
+  "reconciliation": {
+    "canonical_output_exists": false,
+    "matching_admission_claims": [],
+    "reader_started": false
+  },
+  "exposure": {
+    "native_steps": 0,
+    "scientific_fits": 0,
+    "verification_optimizer_updates": 0,
+    "model_queries": 0
+  },
+  "correction": "sibling adapter using supported --generic-summary, same bound worker and unchanged scientific reader"
+}
