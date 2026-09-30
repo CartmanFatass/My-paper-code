@@ -495,3 +495,292 @@ necessary canonical copy of all256 trajectories/full readings remain. There is
 no active worker/reader/observer, unread result/advice, selected successor or
 concrete cleanup blocker. The direction is reserve with the conditional R/O/W/M
 comparison and the re-entry reasoning above available to Root.
+
+<a id="b02-continuity-design"></a>
+## 2026-09-30 — Recommended ordinary continuity comparison; design only
+
+Root selected this bounded design task after the complete B01 return: determine
+whether anticipating service loss offers useful temporal control beyond the
+accumulated-user fairness result. The intended contribution is an ordinary-control
+capability and empirical understanding on the coupled host, not a learning or
+novelty claim. **Recommend one fresh A/S/M/R comparison below for scientific
+selection. No implementation, new native step, fit or result-bearing prototype has
+been performed or selected by this design return.** Root's existing independent
+allocation reviewer covers this decision; Root will take the concrete proposal to
+Pro. These are assigned scientific producers, not a new owner-permission gate.
+
+### Evidence, sources and choice
+
+Published-main [topic 2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练),
+including the B01 update in `8e8ca5391` and Root's continuity plan in `04cf609a6`,
+changes the comparison in two ways. Retain R's worst-user-mean capability and its
+measured temporal costs; do not relabel its correct-history90-tick witness as an
+ACK failure or a global reachability limit. Also, **M is the stronger existing
+reference for the proposed typical-user temporal endpoint**, not O. In B01,
+R/O/W/M mean per-user maximum gaps were27.491875/24.104375/20.475/20.189688;
+pooled age p95 was19.422656/16.923437/15.265625/14.860156; service/step was
+21.576599/18.702637/24.455017/24.316101. R retains the best worst-user mean9.200317,
+versus M11.948669. These are common-panel observations, not universal rankings.
+M already includes O/W alternatives; O and W therefore remain inherited evidence
+without buying two more complete arms. This corrects my initial O/R-only framing
+of the temporal-use comparator, following Root's independent review.
+
+Primary passages read for this choice:
+
+- Bin Li, Ruogu Li and Atilla Eryilmaz, *Throughput-Optimal Scheduling Design with
+  Regular Service Guarantees in Wireless Networks*, [author PDF](https://www.ele.uri.edu/faculty/binli/papers/TON14_RegularService.pdf),
+  §II, Eq.(4)–(6), Lemma1: a counter resetting to0 after service connects mean
+  time-since-service to inter-service second moments under its steady-state
+  assumptions. This supports reading regularity separately from throughput.
+  Their queue arrivals, link-conflict schedules and stationary-channel assumptions
+  are not this finite moving-UAV task; their guarantees do not transfer.
+- Kadota et al., *Scheduling Policies for Minimizing Age of Information in
+  Broadcast Wireless Networks*, TNET2018, [author PDF](https://www.mit.edu/~modiano/papers/CV_J_104.pdf),
+  §IV-D, Eq.(32)–(36), pp.6–7 of the PDF: quadratic-potential drift motivates an
+  ordinary age-weighted scheduler. Their age resets to1, yielding `h(h+2)`;
+  equal weights/reliabilities reduce their rule to oldest-first. Here age resets
+  to0 and multiple users can be served through coupled motion/interference, so
+  neither that expression nor their optimality guarantee is imported.
+- Asghar, Smith and Sundaram, *Multi-Robot Routing for Persistent Monitoring
+  with Latency Constraints*, ACC2019, [author PDF](https://ece.uwaterloo.ca/~sl2smith/papers/2019ACC-Multi-Robot_Routing_w_Latency_Constraints.pdf),
+  §III, DefinitionIII.1 and Fig.1: the spacing of future revisits matters for
+  temporal latency, and adding evenly spaced robots to a repeated walk need not
+  improve every location's latency. Radio service here is not a graph visit;
+  this is a structural analogy for anticipating future opportunities, not a
+  graph-routing reduction or an asserted latency guarantee.
+
+The three local library entry/index searches for age-of-information, peak age,
+service regularity and persistent monitoring did not locate a directly usable
+indexed bridge in that search. This is a coverage-limited retrieval result, not
+a claim that the stores or literature contain no related work. Root also
+identified the already-used *Remembering to Be Fair* source; this design makes
+no new-memory or novelty claim. The load-bearing evidence above is the primary
+passage itself, not a title/hint. No additional toy run is needed: the following
+finite identities already resolve the criterion and its limits.
+
+For pre-transition age `a_u` and service bit `s_u`, native age obeys
+`a'_u=(1-s_u)(a_u+1)`. Consequently
+`sum(a'^2-a^2)=sum(2a+1)-sum(s*(a+1)^2)`. A one-native-tick minimizer of
+quadratic age therefore uses `(a+1)^2` service weight, not `h(h+2)`. For a
+completed unserved streak of length `g` starting just after service, linear age
+cost is `g(g+1)/2`; squared-age cost is `g(g+1)(2g+1)/6`. The latter places
+greater weight on long interruptions without an invented operational cutoff.
+It is still a surrogate: at equal twelve-tick exposure, one length6 gap costs91
+in squared age, while two length5 gaps cost110, although the latter has the
+smaller maximum. Thus neither a smaller predicted squared-age cost nor a smaller
+actual one establishes a maximum-gap improvement. The complete temporal endpoint
+below must be measured. In a one-service symmetric static system a monotone age
+weight would not create a different oldest-first ranking; the essential proposed
+opportunity is this host's coupled service sets, spatial consequences and delayed
+next decision, retained in the complete comparison.
+
+### Actual information and control contract
+
+Retain N5/U50, static native users, H256, the400-byte registered rounded-XY map,
+27 motion commands, all31 nonempty transmitter masks and rotating-member
+replacement. At report `t`, current actual commands execute ticks `t,t+1`; the
+new joint command/mask, if timely, executes `t+2..t+5`. Reports occur every4ticks.
+The other four current C proposals are fixed within a candidate. Initial commands,
+position clipping, terminal truncation, reward, actual service semantics and
+hold-old-command/mask fallback remain those of B01. No service ACK, live hidden
+user coordinate, native future observation, future action or future environment
+state is provided to a controller.
+
+There is one explicit **common richer-information contract**. Source
+`LocalController(history=False)` still retains `_nav_index` for its sweep
+fallback (`controller.py:_sweep_choice,act`). A fresh C instance would falsely
+reset it; reading another actor's live C object centrally would silently cross
+the old report boundary. Each local sender instead appends its current
+**post-C-call waypoint index0..9 as one byte**. All four arms receive the same
+five25-byte reports and16-byte command at2kbit/s:136→141 recurring bytes,
+.544→.564 seconds wire time and **1.436 seconds** charged computation allowance.
+Use a new codec version with range checks; current map acquisition is unchanged.
+C with history=False overwrites its current user rows on every call, so the
+waypoint index is the only retained C state affecting the next decision; its
+counters and old score arrays are not information inputs. The local sender may
+read its own index to serialize it; the receiver only sees decoded bytes.
+
+All actual C computation, encoding, history reconstruction, candidate search,
+virtual observations/C calls and final serialization count within that one
+current deadline. A virtual decision does not receive a second wall-time budget.
+Any overrun or unavailable causal history uses the common physical fallback;
+there is no late partial acceptance. M/R retain their mathematical rankings and
+search semantics under this same codec/deadline. The fixed B01 source/results are
+not rewritten. The study answers use **within this extension**; it does not
+attribute the added byte's value or claim a gain under B01's original rights.
+
+### Fixed policies and the modeled continuation
+
+Define `Q4` as the sum of squared post-transition model ages over the candidate's
+four delivered ticks, shortened to two at report252. There is no tunable exponent,
+discount, terminal weight or gap threshold. All ages are integer int64; predictions
+use existing float64 motion/radio and native greedy service assignment. Settled
+executed history supplies the lawful starting ages; hypothetical updates are
+private and never settle into that history.
+
+**S**, the competent short-block temporal controller, uses the existing two
+search orders, with `(-Q4,J,served,q==proposal_q,popcount(mask),-mask,-q)` at every
+inner and final choice. Motion-first is27 current-mask motions then31 masks;
+mask-first is31 proposal-motion masks then27 motions:116 requests before cache.
+Keep both completed order finalists; S chooses the better one by that same key.
+This is a four-native-tick commitment controller, not literally a one-tick action
+policy. It preserves an ordinary objective-aligned comparator for anticipation.
+
+**A** first makes exactly the same116-request S search on its own current input.
+Its only first-action candidates are the two order finalists, deduplicated by
+identical `(q,mask)`. **S's selected first action is always included.** If only
+one remains or there is no next report before the episode ends, A selects S
+without buying a useless continuation. Otherwise, for each of the two candidates:
+
+1. From the decoded current anchor, propagate the actual two-tick prefix and
+   that candidate's first two delivered ticks to the synthetic report at `t+4`.
+   Build the predicted104-value local observations using the known map, native
+   user/peer SINR thresholds/order/truncation, mask and float32 observation format.
+   Clone each C from its **reported** waypoint byte, call it once at `t+4` on
+   that synthetic observation, then form/decode a synthetic quantized report.
+   These are model-generated proposals, never the real C call from `t+4`.
+2. The first candidate is still active during `t+4,t+5`. Its remaining prefix
+   must execute in the model before the next action is applied. From the private
+   history at `t+4`, run S for the next rotating member with the predicted C
+   proposals, current candidate mask and that two-tick committed prefix.
+   This base-S continuation would start at `t+6` and last through `t+9`.
+3. Score `Q8=Q4(first block)+Q4(base-S next block)` over `t+2..t+9`, clipped
+   at256. At report248 it contains six delivered ticks; at252 there is no
+   continuation and A=S. Rank by `(-Q8, S's current Q4/native/tie key)` and send
+   **only the first action**. At the actual next report A replans as A; the
+   hypothetical base-S continuation is never queued or committed.
+
+This is restricted rollout selection between S's two search-order finalists,
+not exhaustive two-stage MPC, optimal prospective control or a future-policy
+oracle. At most `116+2*116=348` candidate requests occur per A report before
+cache, rather than `116+116^2=13,572`. A/S share objective, first-stage search,
+candidate support, information and deadline; A spends extra model computation on
+one next decision. Their complete contrast tests the value/cost of that bounded
+continuation package, not a computation-free pure mechanism. **M** is the primary
+complete-use reference because of its existing typical-user temporal and service
+capability. **R** preserves the separate worst-user-mean frontier. They receive
+the same extra field/budget even though they do not consume it in ranking.
+
+### Predictions, complete endpoints and disposition
+
+Constructive prediction: some reports have two physically different finalists,
+and the modeled next C/S response reverses their short-block ranking. A then
+occasionally gives up immediate squared-age improvement to retain later service,
+and reduces **mean per-user episode-maximum unserved gap** relative to both S and
+M. The full task prediction is `A−M < 0` on that endpoint; a model score gain or
+changed-action count cannot substitute for it. Some service/quality cost relative
+to M is plausible; R may still have the better worst-user mean because neither
+A nor S compensates accumulated historical burden. No loss-free default is
+predicted or required to recognize a conditional capability.
+
+Adverse alternatives remain concrete: the two finalists may often coincide;
+longer-useful motion plans may be absent from their small support; quantized
+geometry may change future C/assignment choices; or assuming one future S plan
+may be a poor guide once A actually replans. Convex current age alone may explain
+any S/A gain over M. Correct model reports and active rollout can also coexist
+with worse complete gaps or service. None of these outcomes proves global
+unreachability or exhausts prospective control, and none automatically buys a
+new horizon, beam width, penalty, ACK or learner.
+
+Proposed fixed exposure after scientific selection: **64 fresh common worlds,
+seeds29322000..29322063, A/S/M/R**, eight cyclic orders from that sequence and
+its reverse, world index modulo8. This is256 H256 episodes/**65,536 native
+steps/0fits/0updates**, no pilot, extra old-world replay or adaptive panel.
+Sixty-four worlds preserve the prior panel's useful paired world-variation
+resolution at modest complete-run cost; this is exploration, not a power or
+confirmation claim for the unobserved A effect.
+Every world, user, timeout and adverse trajectory remains in the reading.
+Primary world statistic is `G=(1/50)*sum_u max_gap_u[0:256]`, using maximal
+contiguous actually unserved runs, with episode-boundary lengths included as
+observed finite-window gaps and separately marked left/right censored. Primary
+contrast is **A−M:G**; planned A−S:G tests the continuation investment, and
+S−M:G tests the shorter ordinary capability. Report all pairwise contrasts,
+per-world levels/differences, means/SD/ranges, win/loss/tie counts and descriptive
+paired t95 intervals over64 independent worlds, not over users or ticks.
+
+Retain actual squared-age mean, pooled age p95, all per-user gap maxima and
+closed/censored counts, global maximum gap, never-served users, worst-user mean
+age versus R, aggregate age, service/J/quality, service p10/minimum/zero-service,
+four-window coverage, path length and transmitter exposure. Retain all request,
+unique-plan/cache, physics/history/geometry/C-call, wall/CPU/RSS/storage/deadline
+counts. No maximum-gap guarantee, steady-state claim, equivalence threshold,
+battery claim or empirical learning claim is implied.
+
+The activation record includes unique first finalists, A-versus-S requested
+changes, executed command/mask differences and physically distinct delivered
+blocks. Duplicate finalists mean sparse opportunity for this restricted rollout,
+not a general null for anticipation. For A's selected first branch, compare its
+predicted `t+4` geometry and C proposals with the actual report **before the next
+new command takes effect**. Record model/actual age/service errors separately.
+The hypothetical next S action and actual replanned A action can disagree by
+construction; that disagreement alone is not prediction error. Saved-data
+ranking/forecast observations describe the realized policy, not complete native
+counterfactuals for unselected finalists.
+
+If S improves the temporal endpoint against M but A does not improve S enough
+to justify its measured cost, retain S conditionally and decline this rollout
+extension. If A improves S but loses to M on the intended complete tradeoff,
+retain M for that use rather than calling a weak-reference gain useful. A clear
+A/M temporal gain with explicit service/fairness costs could retain a new
+conditional reference beside M/R. A result with intervals spanning both useful
+gain and meaningful loss remains unresolved; no automatic replication follows.
+Full independent reading will separate tested approach, open question and next
+investment without moving a completed rule or requiring an invented hard SLA.
+
+### Full cost, engineering work and scope of this recommendation
+
+All4 arms make64 current report decisions/world. If searches complete, the
+first-stage pre-cache request count is
+`64 worlds *64 reports *(116 A+116 S+232 M+116 R)=2,375,680`. A has at most
+two continuations at each of63 reports with a future report: **935,424** more
+requests, total **3,311,104 before cache**. Terminal lengths give at most
+`64*(254*580 +250*232)=13,140,480` candidate-state radio reductions. These
+are conservative pre-cache counts, not promises that every finalist differs.
+They exclude65,536 actual transitions,65,536 settled-history transitions with
+terminal drain,32,768 current private prefix ticks and at most16,128 additional
+continuation prefix ticks; reusable duplicate prefix arithmetic must be counted
+honestly rather than charged as new physical work twice.
+
+Inherited actual C adds81,920 decisions/2,211,840 trajectories/8,847,360 model
+ticks. A adds at most40,320 virtual C decisions/1,088,640 trajectories/4,354,560
+model ticks plus8,064 five-UAV synthetic observation/report constructions. With
+at most20 visible user rows per C, the virtual C candidate-link upper count is
+87,091,200, plus setup/peer-observation links; actual counts depend on visibility.
+All model-C work is intrinsic algorithm cost, not free verification. Full saved
+data verification is additional, with no new native exposure.
+
+B01's worker plus external reader cost1,824.068 CPU seconds(.506686CPUh), excluding
+engineering/support. This proposal adds at most39.375% first/continuation requests
+over that panel and at most49.219% C decisions, with different caching and
+serialization. A rough planning estimate is **.7–.9 CPU-hours for worker+reader**,
+roughly40–60 minutes in a serial single-thread path; it is neither measured nor
+an upper bound. Construction/review/publication/observation remain additional,
+currently unmetered work. Raw retention is roughly .45–.75GB rather than B01's
+.297GB, likewise an estimate. Actual C/encoding is included in report timing;
+B01's largest M report was.162977s, but a scaled average/max is not evidence that
+the new1.436s deadline will hold. All fallback costs remain task outcomes.
+
+Implementation would stay under this direction's `b02/` source/tests, with a
+versioned codec, synthetic-observation/C-state predictor, private two-finalist
+continuation scheduler and collector/reader adaptation. Reuse the frozen native
+radio kernels and existing actual metrics; do not change environment physics or
+old evidence. High-risk obligations are byte/state sufficiency, synthetic
+observation ordering, the `t+4`/`t+6` commitment distinction, private history,
+int64 arithmetic, R/M semantic preservation, single deadline and independent
+reader/source identities. Plan one16-tick four-arm correctness fixture(64native
+steps, distinct from result exposure), plus non-native codec/recurrence/deadline
+checks and independent engineering review; any extra reviewer reproduction cost
+is recorded separately. No substantial implementation starts before the current
+scientific selection is resolved. A selected run would publish exact inputs,
+admit on configured wsl_4070, execute once, collect and fully read the same
+accepted operation. This paragraph is a design cost/scope estimate, not a launch.
+
+Compared with another unchanged R replication, an attribution-only burden
+ablation, a short-cost-only study or a no-investment choice, this four-arm
+comparison can change two useful decisions in one complete panel: whether an
+ordinary temporal criterion beats the established M reference, and whether one
+affordable next-decision forecast adds enough beyond it. It also exposes the
+richer-information and runtime costs instead of obtaining hidden future-C state.
+That information value justifies recommending the bounded comparison; the actual
+selection remains Root's current allocation-review/Pro task. Broader horizons,
+larger candidate sets and learning are unselected alternatives, not a queue.
