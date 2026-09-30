@@ -184,9 +184,32 @@ def read_episodes(cell, phase):
     return rows
 
 
+def check_saturation(row, correction):
+    """Preserve the collector's FP32 cutoff while exposing the FP64 definition."""
+    assert correction.dtype == np.float32 and correction.size
+    absolute = np.abs(correction)
+    cutoff = np.float32(.095)
+    native = absolute >= cutoff
+    promoted = absolute.astype(np.float64) >= .095
+    fraction = int(native.sum()) / correction.size
+    close(row["correction_saturation_fraction"], fraction, 0)
+    return dict(dtype=str(correction.dtype), stored_cutoff=float(cutoff),
+                recorded_fraction=fraction, float64_fraction=int(promoted.sum()) / correction.size,
+                cutoff_equal_coordinates=int((absolute == cutoff).sum()),
+                predicate_disagreements=int((native != promoted).sum()))
+
+
 def read_trace(row, program, calibration_b=None, expected_log_std=None):
     mapped = "B40" if program in ("I", "P") else program
-    reading = read_retained_trace(row, mapped, calibration_b)
+    with np.load(row["raw"], allow_pickle=False) as raw:
+        saturation = check_saturation(row, raw["correction"])
+    # The inherited reader promotes corrections before this one diagnostic check.
+    # Validate the original above, then adapt only its in-memory numerical view.
+    inherited_row = dict(row, correction_saturation_fraction=saturation["float64_fraction"])
+    reading = read_retained_trace(inherited_row, mapped, calibration_b)
+    reading["saturation_predicate"] = saturation
+    reading["residual"]["correction_saturation_fraction_float64"] = saturation["float64_fraction"]
+    reading["residual"]["correction_saturation_fraction"] = saturation["recorded_fraction"]
     with np.load(row["raw"], allow_pickle=False) as raw:
         assert Path(row["raw"]).stat().st_size == row["raw_bytes"]
         if expected_log_std is not None:

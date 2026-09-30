@@ -259,3 +259,65 @@ relative SSH executable before starting observation; using `/usr/bin/ssh` fixed 
 without changing the operation. Registration and process life are not scientific
 completion. This turn stays active through terminal collection and complete reading;
 checkpoint rearm will never restart the worker.
+
+### 10:08 UTC checkpoint and primary-source verification
+
+Generation1 observed the original operation still running consistently at10:07:22UTC;
+nine fits and256 final-evaluation episodes were complete, the tenth fit3/B had200
+episodes at the count-only checkpoint, and all recorded limits were empty. No
+outcome was used to change the fixed remaining work. The native App queue rejected
+the checkpoint delivery with code-32600 (direct App input unsupported for native
+subagents). This child remained active and drained the recorded event itself;
+generation2 rearms the same accepted handle/window1500s without a worker restart.
+
+During collection I personally verified the load-bearing primary passages in
+[RPL arXiv1812.06298v1 §§IV–IV-C](https://arxiv.org/html/1812.06298v1#S4)
+and [RESPRECT arXiv2401.14858v1 §III-B](https://arxiv.org/html/2401.14858v1#S3.SS2).
+RPL constructs the residual MDP, zero-initializes the final layer, and explicitly
+warns that an uninformed critic can damage a good controller; its POMDP example
+uses a short observation-history approximation. RESPRECT freezes a learned base
+actor and initializes residual SAC critics from pretrained critics. These passages
+support the retained construction bridge, not this study's MARL/PPO effectiveness,
+improvement guarantee or novelty. No new scientific choice or exposure follows.
+
+## 2026-09-30 10:22 UTC — native completion; one reproduced pure-reader repair
+
+The original worker exited0 at10:16:09UTC with12 fits,6144 training episodes,
+384 final evaluations,1,671,168 team steps and18,432 actual Adam calls. All cells
+report COMPLETE and no limits. Generation2 observed terminal native evidence;
+I drained it, consumed the event and stopped observation. The App delivery again
+returned the known native-child code-32600; native collection remained successful.
+This is technical completion; scientific reading remains open below.
+
+Reader-a01 from the exact source stopped on a saturation diagnostic assertion,
+after36.43CPU-s/36.31wall-s (external command). Diagnosis over all384 raw arrays
+reproduced exactly one discrepant trajectory: lineage1/D/world19, raw SHA256
+`37ad460c66258e90018566ff4f53b59ae2f8e7ae52e9693907611ed9fed46a93`.
+One correction is `-0.0949999988079071`, precisely `-float32(.095)`.
+The unchanged B05 collector compares the float32 array with .095, so records
+784/3840=.20416666666666666; the inherited B05 reader promotes the array to
+float64 before comparing with .095, so reconstructs783/3840=.20390625.
+All384 recorded fractions exactly equal their stored-float32 predicates. This is
+a reproduced diagnostic cutoff-promotion mismatch, not missing native evidence,
+an altered action or reward, or a failure of the learning program. The original
+failed read and its cost remain recorded; no worker/evaluation replay is authorized.
+
+L0 repair: only this direction's pure reader and mirrored tests change. Validate
+the original recorded saturation fraction exactly against the immutable raw float32
+predicate first. Pass the independently reconstructed float64 fraction through
+the unchanged inherited reader and report both definitions plus the cutoff-equality
+count. Keep every other strict checkpoint/RNG/density/native-return/trajectory
+check and preserve the original row and file bytes. Test values immediately below,
+at and above the float32 cutoff on both signs, rejection of a corrupted reported
+fraction, and a full-H256 synthetic writer/reader trajectory at the cutoff.
+Independent engineering recheck covers this repair before rereading the same native
+outputs. It changes no fit, score, panel, primary contrast or scientific design.
+
+I accept the focused repair after inspecting the diff and the independent Reviewer's
+recheck: no material finding, with3 targeted checks passing in4.61s. My integrated
+direction suite passes46 tests in8.66s. The Reviewer did not independently read all
+384 remote arrays; that limit remains until the repaired full reader completes.
+The repaired reader is published separately from the immutable native source.
+Its exact published bytes will execute with imports and source-root context from
+the original accepted snapshot; no file in that snapshot is edited. The original
+failed reader's log and external timing stay in the run evidence.

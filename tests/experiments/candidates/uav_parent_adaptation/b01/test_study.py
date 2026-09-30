@@ -142,6 +142,47 @@ def test_full_horizon_evaluation_writer_reader_all_programs(tmp_path):
             assert current == witness
 
 
+def test_saturation_cutoff_uses_stored_dtype_and_rejects_changed_report():
+    cutoff = np.float32(.095)
+    positive = np.array([np.nextafter(cutoff, np.float32(0)), cutoff,
+                         np.nextafter(cutoff, np.float32(1))], dtype=np.float32)
+    correction = np.r_[positive, -positive]
+    row = dict(correction_saturation_fraction=4 / 6)
+    checked = reader.check_saturation(row, correction)
+    assert checked["recorded_fraction"] == 4 / 6
+    assert checked["float64_fraction"] == 2 / 6
+    assert checked["cutoff_equal_coordinates"] == checked["predicate_disagreements"] == 2
+    with pytest.raises(AssertionError):
+        reader.check_saturation(dict(correction_saturation_fraction=2 / 6), correction)
+    assert row == dict(correction_saturation_fraction=4 / 6)
+
+
+def test_full_horizon_writer_reader_at_float32_saturation_cutoff(tmp_path):
+    cells = make_lineage(tmp_path / "fits")
+    parent = cells["B"]["final_checkpoint"]
+    actor, critic = model.build_adaptation(29813, "K", Path(parent["path"]).read_bytes(), parent,
+                                            lineage=1, launch_sha=SOURCE)
+    with torch.no_grad():
+        actor.b.copy_(torch.atanh(torch.tensor([.95, -.95, 0.])))
+    expected = .1 * actor.b.detach().tanh().numpy()
+    assert np.array_equal(np.abs(expected[:2]), np.repeat(np.float32(.095), 2))
+    binding = model.save_checkpoint(tmp_path / "cutoff.pt", actor, critic, lineage=1,
+        stage="K", endpoint="final", master=29813, launch_sha=SOURCE, parent=parent)
+    cell = study.run_evaluation(1, "K", binding, tmp_path / "eval", SOURCE,
+                               factory=lambda seed: NativeInfoFixture(seed, 256), evaluation=1)
+    assert cell["status"] == "COMPLETE", cell["limits"]
+    row = reader.read_episodes(cell, "final_eval")[0]
+    original = dict(row)
+    result = reader.read_trace(row, "K", actor.b.detach().tolist(), actor.log_std.detach().numpy())
+    assert result["saturation_predicate"]["predicate_disagreements"] == 256 * 5 * 2
+    assert result["residual"]["correction_saturation_fraction"] == 2 / 3
+    assert result["residual"]["correction_saturation_fraction_float64"] == 0
+    assert result["levels"]["J_net"] == pytest.approx(.267)
+    assert row == original
+    with pytest.raises(AssertionError):
+        reader.read_trace(dict(row, correction_saturation_fraction=0), "K", actor.b.detach().tolist())
+
+
 def test_partial_failure_preserves_started_fit_and_does_not_replace_root(tmp_path):
     class BrokenFixture(NativeInfoFixture):
         def step(self, actions):
