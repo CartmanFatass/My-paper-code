@@ -311,3 +311,231 @@ then observation was stopped; scientific work is unchanged. Root received the co
 calculation-release fact. Full scientific diagnosis is in progress in the independent
 `hmasd-research-critic` context `/root/dm_fleet_transmission/result_diagnosis`; technical
 completion alone is not the interpretation below.
+
+
+<a id="b01-complete-reading"></a>
+## 2026-09-30 — complete scientific reading, retain conditional capabilities and end this screen
+
+Complete compact evidence is published at `6b51a962e2295b44ea2d79fba128a943e761c39b`,
+from fixed source `a2f62e613a12331ad380876a6c764f8a46a893ee`. All readings below use the
+complete160episode panel. Intervals are paired percentile world-bootstrap95% descriptions
+(10000resamples, seed26093014) conditional on the two old assets, not training-population
+inference, an equivalence test or a deployment acceptance rule. No outcome-dependent extension
+or selected-world policy is included. The original capacity/eligibility background in RESEARCH
+and the original N5 adverse example still apply; current published topic3 is revised by the
+configuration-dependent result here, without replacing those original sources.
+
+### Complete levels and planned contrasts
+
+Path is mean native distance per UAV over H500. Height penalty is the already-weighted
+all-vehicle term in J, including silent vehicles; it is not a battery measurement. p05 is
+the within-episode service quantile averaged across worlds.
+
+| Program | J | Served/tick | Quality | Height penalty | Service p05 | Path/UAV | Active transmitters |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| N4 H6_all | 0.542100 | 34.945250 | 0.233419 | 0.017159 | 32.312500 | 19673.455 | 4.00000 |
+| N4 H6_E | 0.522050 | 33.470875 | 0.243365 | 0.019552 | 30.562500 | 19062.849 | 3.68625 |
+| N4 SET_all | 0.488458 | 32.408750 | 0.210492 | 0.028412 | 26.934375 | 13237.126 | 4.00000 |
+| N4 SET_E | 0.482620 | 31.701500 | 0.231766 | 0.030731 | 28.000000 | 12849.328 | 3.60625 |
+| N4 C_E | 0.555347 | 33.222500 | 0.301040 | 0.000080 | 33.250000 | 643.150 | 3.43500 |
+| N8 H6_all | 0.462094 | 30.488625 | 0.165351 | 0.014352 | 24.618750 | 16032.685 | 8.00000 |
+| N8 H6_E | 0.558437 | 36.723750 | 0.213545 | 0.019759 | 33.996875 | 14690.596 | 4.49125 |
+| N8 SET_all | 0.271645 | 19.372875 | 0.146196 | 0.043435 | 8.306250 | 12096.382 | 8.00000 |
+| N8 SET_E | 0.526565 | 34.402250 | 0.214639 | 0.019458 | 29.934375 | 10990.063 | 4.23625 |
+| N8 C_E | 0.624592 | 39.718875 | 0.228697 | 0.000081 | 39.750000 | 250.817 | 4.37375 |
+
+| E minus all-on | Mean delta J [95%] | Mean delta served [95%] | J positive/negative/zero worlds |
+| --- | --- | --- | --- |
+| N4/H6_E-H6_all | -0.020050 [-0.040268, -0.004164] | -1.474375 [-2.999784, -0.264750] | 3/10/3 |
+| N4/SET_E-SET_all | -0.005838 [-0.021129, +0.009380] | -0.707250 [-1.549512, +0.106259] | 8/8/0 |
+| N8/H6_E-H6_all | +0.096344 [+0.076764, +0.117212] | +6.235125 [+4.917091, +7.647019] | 16/0/0 |
+| N8/SET_E-SET_all | +0.254920 [+0.221640, +0.297995] | +15.029375 [+13.172778, +17.281534] | 16/0/0 |
+
+N8 E improves complete J and service in every world for both assets. The paired N8-minus-N4
+E-increment interactions are H6 +.116393963J [+.087539954,+.150544523] and +7.709500users
+[+5.699612,+10.053675]; SET +.260758551J [+.223566836,+.307823223] and +15.736625users
+[+13.684331,+18.203138]. All16 interaction signs are positive for each asset and endpoint.
+This supports configuration-dependent response. It does not identify a pure fleet-size effect:
+vehicles, total capacity40→80, geometry and feedback all change between the two configurations.
+
+The constructive complete-service/J prediction succeeds at N8 and fails at N4 for H6.
+N4 SET has negative sample means but intervals spanning zero; this is unresolved benefit,
+not an equivalence finding. Muting is active in13/16 H6 N4 worlds; the three entirely all-on
+worlds are exactly unchanged. An absence of activation cannot explain the ten adverse J worlds.
+
+| Asset/E minus ordinary C/E | Mean delta J [95%] | Mean delta served [95%] | J positive/negative worlds |
+| --- | --- | --- | --- |
+| N4/H6_E-C_E | -0.033297 [-0.061608, -0.007155] | +0.248375 [-2.090897, +2.402884] | 5/11 |
+| N4/SET_E-C_E | -0.072727 [-0.090510, -0.054391] | -1.521000 [-2.978387, -0.016853] | 0/16 |
+| N8/H6_E-C_E | -0.066155 [-0.086037, -0.046737] | -2.995125 [-4.669566, -1.339959] | 1/15 |
+| N8/SET_E-C_E | -0.098027 [-0.116327, -0.080007] | -5.316625 [-6.968262, -3.815112] | 0/16 |
+
+C/E has the highest mean J among all five programs at both configurations and the highest
+mean service at N8. Its mean N4 service is below H6/all by1.722750users/tick while J is higher
+by.013246859; H6/E also has a small uncertain mean service advantage over C/E. Five N4 worlds
+have both H6/E J and service above C/E. At N8, H6/E exceeds C/E J in29310002 and service in
+three worlds. These are retained tradeoffs and witnesses, not a usable rule for selecting the
+winning policy by world after observing outcomes. C/E is neither uniformly dominant nor an
+optimality bound. Without C/all-on, its complete usefulness cannot be assigned specifically
+to muting.
+
+H6 still exceeds SET under E: mean J gaps are +.039429834 at N4 and +.031872496 at N8,
+versus +.053641953/+.190449204 under all-on. N8 service gap falls from11.115750 to2.321500.
+That conditional asset gap remains real in this panel, but no longer establishes value beyond
+the competent ordinary alternative. The gap change is not an explained interference fraction
+or evidence that a specific learned skill caused either difference.
+
+### Changed explanation, adverse outcomes and tails
+
+The exact service accounting separates two competing consequences along the observed paths:
+`50-served = ineligible + eligible_unserved`. N4 E reduces ineligible users by.577625/1.523125
+for H6/SET but adds2.052000/2.230375 eligible-unserved users, leaving negative service changes.
+N8 reductions of9.079500/18.935750 exceed the added2.844375/3.906375 eligible-unserved users.
+This makes capacity/assignment conversion consequential even when radio eligibility improves.
+It is an accounting identity over changed trajectories, not a causal decomposition: masks
+change discovery/peer visibility, assignment, local observations, subsequent actions and geometry.
+
+The strongest N4 H6 harm is world29310010: J -.131992964 and service -9.658000.
+All-on serves38.860 on average versus E29.202; ineligible increases5.504→6.644 and
+eligible-unserved5.636→14.154. The E episode holds three active transmitters throughout
+(mask7 initially, mask14 fromt20). At the first boundary, identical actor actions and next
+positions yield actual J .438234482→.446007505 (+.007773022), while service falls31→30.
+The public prediction has the same ranking. Subsequent observations/actions and geometry
+diverge. All-on is always a candidate; positive immediate J did not protect full J or service.
+Across the saved N4 H6/SET E decisions,40/60 of800 boundaries sacrifice immediate predicted
+service relative to all-on at that decision’s own predicted position. Neither N8 asset does.
+These posthoc saved-data readings expose the native objective’s quality/service tradeoff
+before any hypothesis about maladapted recurrent feedback. They do not establish a shared
+cause of every adverse world, nor separate ten-step commitment from changed learned feedback.
+
+All adverse worlds remain in reading.json. For N4 SET, the worst J loss is29310001
+(-.061294606); the worst service loss is29310004 (-3.996000). Preserve the opposite H6 N4
+witness29310004, which gains +.023716863J/+1.452000users. N4 H6 E lowers mean service p05
+by1.750000; SET’s +1.065625 p05 difference is uncertain. No N4 program has a zero-service tick.
+
+The N8 benefit also reaches observed tails: H6/SET E raise mean service p05 by9.378125/
+21.628125. SET/all has192zero-service ticks in five worlds, longest contiguous run111;
+SET/E has none. In29310007 it changes mean service5.972→33.758, J .021348723→.524278050,
+and127zero ticks→0. Every other program has no zero-service ticks. This is useful relief in
+the measured panel, not a safety guarantee. C/E retains higher mean service p05 than either
+asset/E at both N, together with its N4 average-service tradeoff.
+
+C/E’s mean height is50.079982/50.081132 at N4/N8, near the lower bound; mean paths are
+643.150/250.817m per UAV. H6/E remains at69.551964/69.758605 height and19062.849/14690.596m
+paths. These observations are compatible with ordinary model-based placement being useful
+on this static deterministic host. They do not measure physical energy, prove that learned
+coordination is unnecessary generally, or identify a lack of learnability in a revised task.
+
+### Cost and independent scientific diagnosis
+
+Per-program totals below sum the16 recorded episode intervals, including their own recording
+work. The broader collection and full reader totals are recorded above; they also include
+loading/final checks and are not replaced by the table.
+
+| Program | Wall seconds | CPU seconds | Actor CPU | Mask CPU | Motion CPU |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| N4 H6_all | 30.177 | 118.060 | 90.702 | 0.000 | 0.000 |
+| N4 H6_E | 30.386 | 118.390 | 88.770 | 3.202 | 0.000 |
+| N4 SET_all | 36.286 | 142.136 | 114.148 | 0.000 | 0.000 |
+| N4 SET_E | 36.419 | 141.929 | 110.624 | 3.224 | 0.000 |
+| N4 C_E | 31.228 | 31.223 | 0.000 | 0.594 | 24.643 |
+| N8 H6_all | 42.132 | 163.601 | 126.044 | 0.000 | 0.000 |
+| N8 H6_E | 50.195 | 175.654 | 124.833 | 15.335 | 0.000 |
+| N8 SET_all | 50.498 | 195.211 | 156.017 | 0.000 | 0.000 |
+| N8 SET_E | 57.461 | 201.950 | 149.838 | 15.498 | 0.000 |
+| N8 C_E | 82.129 | 82.110 | 0.000 | 6.216 | 65.057 |
+
+C/E uses fewer CPU seconds here but is slower in N8 wall time than H6/E under the declared
+Torch threading. No execution deadline was tested. The two historical final45 fits took
+5423.536504/4065.199846 run-fit wall seconds (158.145606fit-minutes combined), separately
+from the zero-new-fit B01 cost. Broader historical selection, engineering, transfer, independent
+review and publication costs are not fully measured and are not treated as zero.
+
+Independent `hmasd-research-critic` `/root/dm_fleet_transmission/result_diagnosis`, created
+without DM/Root conversation inheritance, reconstructed outputs before reading the archived
+Pro and selection advice. Its substantive recommendation is to revise the explanation, retain
+N8 management capability and C/E, and end unchanged expansion of this two-asset screen.
+It identifies configuration-dependent service conversion plus changed feedback, not an
+established learning defect; training on muted feedback, frequency changes or an architecture
+repair are not established remedies. It specifically objects to a blanket discard of learned
+assets because N4 H6/all retains the measured service tradeoff and H6/E retains positive
+world-level witnesses. I adopt both the recommendation and this limiting objection.
+
+The critic independently recomputed all160 raw episode metrics, exogenous/reset/fleet-prefix
+bindings, motion/mask/horizon checks, capacity identities and raw/decision hashes; all primary
+J/service bootstrap intervals,64 paired first actor outputs/runtime bindings and saved E-choice
+summaries; selected native snapshots/rankings in eight positive/adverse episodes; original
+checkpoints/config/source identities and recorded freeze checks. It read the original N and N5
+sources and adverse records. It did not rerun trained actors, independently replay every GRU
+state or repeat the entire C-coordinate reader, and did not replay the historical raw panels.
+It inspected those source/output checks and separate engineering acceptance; no invalidating
+discrepancy emerged. `MATERIAL_DISSENT: no` for completing B01, retaining conditional
+capabilities and ending unchanged expansion. DM independently verified the added40/60 boundary
+counts, first-transition counterexample and historical fit timings against original saved data.
+
+### DM disposition and next investment
+
+End the fixed five-program B01 screen and put this direction in reserve, with no live producer,
+unread result, outstanding advice or selected successor. Retain C/E as a competent finite
+ordinary reference for this precise contract, N8 E as a demonstrated conditional capability,
+and H6/all’s N4 service tradeoff and all adverse outcomes. Do not promote E to a configuration-
+independent default or claim physical adoption. Preserve the two assets and the useful control/
+reader code; none of this is a new learned-method contribution.
+
+Task opportunity is established at N8 under the added public-model/search/mute rights.
+Representation and learnability remain untested by this zero-update screen. Complete-package
+value favors C/E in mean J at both N, with the stated service/tail/cost tradeoffs. The changed
+explanation therefore directs investment away from assuming an identified learned-policy repair.
+Unchanged replication would narrow fixed-asset world uncertainty without resolving training
+variation or the causal alternatives, so no extra worlds/fits are selected.
+
+A concrete N4 service requirement could justify a later complete controller comparison against
+both C/E and unchanged H6/all: joint J/service gains would be a new package increment, whereas
+J/path/tail losses would remain explicit tradeoffs. It needs a specified use criterion and
+prospective candidate; B01 does not supply a posthoc world gate or require inventing a new
+objective. Root owns that or any cross-question choice at this assigned boundary. This is idle
+with no selected producer, not a pending approval or a fabricated external dependency. The
+fresh independent scientific diagnosis covers this actual changed explanation and bounded
+stop; no unresolved disagreement or distinct additional Pro question remains.
+
+### Canonical evidence and measured terminal cleanup
+
+After both complete readings, retain the unique320 raw/decision files at
+`local_linux:/home/fires/hmasd-artifacts/uav_fleet_transmission/b01_native_s1_a01/raw/`
+(200385686logical bytes). Every file’s size/SHA256 is already bound in summary.json and was
+reverified before and after moving. The SHA256 of the sorted binding lines
+`path + NUL + decimal-bytes + NUL + sha256 + newline` is
+`4addc2b67c9cf2b4b0ea16ab8f1aeef16c94b2bc414c9075125593d41943c0c9`.
+The canonical parent contains verified compact metadata/status/log files so the original
+reader can consume that directory directly. Ignored `runs/.../raw` is a symlink to that one
+canonical raw copy. No raw was deleted or hidden by compression, and no whole tree was copied.
+The original remote final45 files were reverified at both exact hashes above and remain intact;
+original checkpoint staging paths in summary.json are historical invocation records, not
+claims that the now-deleted redundant local input copies still exist.
+
+Useful direction code/tests and all compact evidence were published before cleanup. Consumer
+inspection found only the owned direction and tests; the completed critic needed no further
+local input. A privileged read-only process scan found no matching cwd/argv/file consumers
+and no permission errors. Observer generation2 is stopped with no unconsumed events.
+
+The supported native snapshot collector previewed then removed these exact owned targets,
+with `--unclaimed-source --sudo-process-scan`; no refusal or cleanup blocker remained:
+- `.git/hmasd-launch-sources/a23f403740a04e79acd7cf29c433219e` — unclaimed pre-admission
+  source,1666793472allocated bytes;
+- `.git/hmasd-launch-sources/174980a0a43d4508a1a2ab8af097511b` — reconciled completed
+  operation source,1666813952allocated bytes.
+
+Also actually deleted, after the consumer checks:
+- `/home/fires/hmasd-inputs/uav_fleet_transmission/b01_native_s1_a01/` — redundant checkpoint copies;
+- `temp/directions/uav_fleet_transmission/` — obsolete wait request and scratch;
+- `runs/uav_fleet_transmission/b01_native_s1_a01/runtime_logs/`;
+- the owned implementation and test `__pycache__/` directories.
+
+All seven targets are absent. The allocated-byte measurement includes those targets, the
+run directory and the canonical destination, so the raw move is not counted as reclaimed space:
+**3579494400 before →202317824 after; net3377176576bytes reclaimed.** Remaining evidence
+is the run’s638976allocated bytes plus201678848bytes in the canonical direction artifact
+root. Git object storage and unrelated directions are outside this scoped measurement.
+No other source snapshot, original checkpoint worktree, shared cache or peer output was touched.
+The earlier native-child queue rejection was resolved by active same-handle observation;
+it is separate from cleanup, which completed without a tool blocker.
