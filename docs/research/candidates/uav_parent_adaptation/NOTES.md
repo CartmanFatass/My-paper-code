@@ -1286,3 +1286,487 @@ reproduction; no additional unused source module was identified. There is **no
 remaining cleanup tool blocker**, missing required evidence or active operation.
 The direction's RESEARCH standing/background now records this complete result,
 retention and reserve condition without changing another lead or owner pause.
+
+<a id="ordinary-parent-design-20260930"></a>
+## 2026-09-30 — Design only: developing a competent local ordinary policy
+
+Root assigned this bounded design after accepting B02 and cleanup. **No new
+result study, implementation, pilot, training or native evaluation is selected.**
+B01/B02 remain unchanged. This entry proposes a complete comparison for Root's
+existing independent, separate-context scientific selection review; it does not
+self-clear that choice or commission a duplicate critic. The direction remains
+reserve until a substantive assignment is selected. The design uses the scientific
+comparison method and the engineering method's publication/scope conventions.
+
+**Recommendation:** if Root invests in this question, prefer one fixed **categorical
+C-prior learning comparison** over a new continuous residual actor-critic stack.
+It asks whether experience can develop the already competent local ordinary C
+while retaining its existing 27 commands and deployment information. This is an
+empirical learning-capability question, not a claim of a new residual algorithm or
+of a diagnosed remedy for prior failures. A useful answer would distinguish
+improvement of an existing competent program from training yet another weak parent,
+and distinguish contextual development from a competent simpler calibration learner.
+The smallest useful object includes all five adapting UAVs, the closed-loop host,
+their physical interference and the complete H256 service outcome.
+
+### Evidence that changes this design, and its limits
+
+I read current published RESEARCH at `e82a361eac44f88a81b62fb84e0ed7dfe47e83e5`:
+[topic 2](../../RESEARCH.md#2-部分可观测性要求处理信息不要求每次都重新训练),
+[topic 5](../../RESEARCH.md#5-技能和异步性是组织决策的方式其收益需要证据) and
+[topic 8](../../RESEARCH.md#8-数学信息与博弈结构怎样帮助dm选择实验).
+Topic 2 supplies the competent ordinary asset and blocks treating a legal cache or
+high stochastic entropy as established useful learning. In local-history B02,
+C served 21.738281 users/tick versus the best L1's 12.108521, and all 96 L1−C
+world comparisons lost J and service. These facts establish a useful C under that
+historical contract; they **do not identify weak-parent causality**, an optimizer
+failure or C's remaining headroom. H's mixed means and adverse worlds do not support
+automatically adding a user-memory module. Topic 5 preserves useful U3 and D/K
+capabilities alongside their losses, and prevents equating a bounded correction
+with a service guarantee. Topic 8 makes this a finite-learning/policy-construction
+intervention: it does not add deployment truth or remove the joint-action and
+partial-observation problem.
+
+The previous U repeat remains unselected for the reasons in the B02 disposition.
+This proposal neither reacquires C→B learned parents nor repeats their continuations.
+Its C is `LocalController(history=False)` from local-history B01, whose source
+was introduced at `ae184f74175b59f6036a06b510be2b70a7205a69` and is unchanged in
+current main. The historical local-history B02 source is
+`ce104088d66dade2aa042619be2e2b59ccde8e60`. I read the actual controller, ordinary
+collector, factory and historical categorical collector/update/model. The native
+UAV code has since acquired transmitter-mask/shared-radio changes; Root's independent
+source comparison reports a 146-line host diff. Therefore **bind one current all-on
+host identically for every new arm** and publish its exact launch inputs. Do not
+claim historical environment bytes or scores have been reproduced merely because
+the C/factory/critic-adapter files match. Historical scores motivate the construction;
+the new C panel is the actual comparator.
+
+The design is materially different from this direction's learned-parent D/K:
+the parent is a fixed local search program; there is no parent-acquisition fit;
+commands are the original ternary 4-tick actions; and learning changes a categorical
+decision distribution. It does not inherit the former 40-byte delayed message,
+171/451 actor/critic interface, per-tick Gaussian policy or old .10 action bound.
+It also differs from retired local-history set-PPO: it keeps C running on-policy
+instead of asking a from-scratch actor to rediscover its search/radio/sweep program.
+Reuse of categorical PPO arithmetic is not resurrection of the failed set actor.
+The registered read-only Scout found no ready direction-level TD3/DDPG/MADDPG or
+parameter-space ES trainer to reuse; its scope was optimizer/interface feasibility,
+not scientific selection. Existing central map/radio optimizers are useful elsewhere
+but have different execution information/rights, so their scores are not a lawful
+local-policy comparator here.
+
+### The actual C contract
+
+Each UAV owns a separate C instance. The ordinary collector supplies only its copied
+104-entry native observation row and the primitive clock. That row contains own xyz,
+up to 20 anonymous visible-user relative xy/SINR triples, up to 10 visible-peer
+relative xyz/presence rows, and time. C never receives the environment object, user
+IDs, full map, global state or another UAV's cache. Its current-user array is replaced
+on each ingest; `history=False` retains no absent-user geometry. Persistent behavior
+state is its private sweep-waypoint index and nominal held command. Diagnostics and
+counters are not extra observations.
+
+At clocks divisible by four, C scores the 27 commands in `{-1,0,1}^3` over four
+predicted ticks, using its existing free-space/current-SINR model, c10/3dB rules and
+stationary visible peers. Unobserved interference is inferred from current SINR;
+this does not supply hidden users or future teammate actions. It maximizes its local
+four-tick proxy for `.7*served/50 + .3*quality`, with the existing norm/lexicographic
+command ordering for ties. When every modeled candidate serves zero, it chooses
+the command whose four-tick endpoint approaches its current public sweep waypoint;
+the waypoint advances under the existing 60m rule. This is a sweep fallback, **not
+hold**. The selected FP32 vector is held for four native ticks, with the host's
+physical position bounds. C still ingests the intervening observations.
+
+The proposed wrapper calls this unchanged C once per UAV per primitive tick on
+the wrapper's own actual observations. At a decision it reads C's nominal command
+and resulting private waypoint index, then selects one command and holds that
+command for four ticks. It never advances a shadow C along an unperturbed trajectory,
+replaces the actor's sampled choice with C, or lets C's intervening nominal hold
+overwrite the selected action. Reset creates five independent fresh C states.
+
+### Exact initial deployment and honest exploratory training
+
+Let `c(h)` be the C command index for a lawful local history. Define finite logits
+
+`l_theta(a|h) = log(234) * 1[a=c(h)] + B[c(h),a] + f_theta(x(h),a)`.
+
+The zero-initial calibration table has `B[c,c]=0` and 26 trainable entries per row:
+702 identifiable parameters, with no cross-UAV state. For the contextual arm,
+`x` is the current observation104, nominal C command3, previous command actually
+sent to the host3, and C's private waypoint one-hot10: 120 legal local inputs.
+Use one shared 120→64→64→27 tanh MLP, with zero final weights/bias; hidden weights
+have an independent recorded initialization. It has 13,659 parameters. Subtracting
+the output at `a=c` from all outputs is an equivalent optional identifiability
+convention, not an action override. Fix the convention in source before execution.
+There is no GRU, absent-user cache, normalization fit, new predictor or new sensor.
+
+Deployment always uses argmax of these logits with the fixed COMMANDS ordering.
+At `B=f=0`, C has the unique highest logit. Hence **K0 and D0 are exactly C as
+deterministic deployed policies**, including fallback, state evolution, clipping and
+commitment. This follows inductively on their common observations/actions and must
+also be checked through the live wrapper. Final logits can select any of the 27
+commands; there is no bound confining a learned policy to small motion residuals.
+
+Training instead samples the actual softmax categorical distribution. Initially
+`P(c)=.9` and each other command has probability `.1/26`, to FP32 precision.
+Thus the stochastic training policy is **not deterministic C**: initially the
+probability all five request C at a joint decision is `.9^5=.59049`, with .5
+non-C requested commands expected per joint decision. Boundary clipping may make
+some different labels physically identical, so requested and physical departure
+counts must be separate. This finite prior is an explicit exploration choice, not
+a learned preference, a guarantee of intact C trajectories or a hidden warmup.
+Its strength remains fixed; no annealing, C-forcing period or decoder selection.
+
+Store the exact collected logits, chosen category, categorical log probability,
+local inputs and C state used at each decision. PPO reevaluates those inputs and
+the same finite prior, rather than recomputing C on changed histories. The likelihood
+is that of the sampled 27-category command, including physically aliased labels.
+Greedy evaluation has no policy-gradient likelihood claim. A deterministic Dirac C
+cannot both have positive probability for other sampled actions and remain the
+same stochastic policy; setting a Gaussian variance to zero or applying `atanh` to
+C's ±1 commands does not solve this. This proposal preserves the initial **deployed
+function** and exposes the changed training behavior explicitly. It offers no
+safe-learning or monotonic-improvement guarantee.
+
+### Complete comparison and proposed finite program
+
+Names below are scoped to this proposed categorical study, not the retained B01/B02
+K/D endpoints.
+
+| Arm | Actual learned object | What the comparison answers |
+|---|---|---|
+| C | None; unchanged ordinary program | Primary complete-use baseline and common deterministic initialization |
+| K_cat | The 702-entry C-command-conditioned calibration table; `f=0` | A trained ordinary recalibration can learn arbitrary command substitutions conditional on what C proposes |
+| D_cat | The same table plus the zero-head local MLP | Whether the additional contextual learning package develops C beyond that simpler calibration program |
+
+K_cat is deliberately stronger than a three-vector global offset or a global
+27-logit bias: it can calibrate each complete C command separately, including
+different axes and C's saturated/hold outputs. It has the same C program, command
+support, training worlds, data budget, objective and central training privilege as
+D_cat. D−K still includes differences in representation and finite optimization;
+it would not isolate an abstract causal value of state dependence. C already scores
+every permitted command, so this categorical design does not need a finer-control
+G arm. No added execution information/resource is reserved only for D.
+
+Propose three paired training roots, each training K_cat and D_cat once for 512
+H256 episodes. All five UAVs share that arm's parameters and learn together. Use
+the existing two-complete-episode/full-rollout categorical PPO semantics from the
+historical local-history B02: four epochs, gamma1 terminal return-to-go divided by
+256, standardized detached team advantage, per-agent clipped ratios summed over
+agents, ratio clip .2, entropy coefficient .01, separate actor/critic optimization
+and global norm clip .5 for each. The critic uses the existing normalized native
+136-entry centralized training features and existing Critic class; truth enters
+only the training baseline and evaluator, never C or the actor. No new bootstrap,
+replay buffer, oracle-value estimator or counterfactual host is required.
+
+Proposed actor Adam has table lr `.01` in both arms and MLP lr `.0003` in D_cat;
+critic Adam lr `.0003`; other Adam settings match the prior categorical program
+(`betas=.9/.999`, `eps=1e-8`, no decay/AMSGrad/foreach/fused). The table rate is
+explicitly different from the network rate: a direct logit table must be able to
+overcome the initial 5.455 logit preference within 1,024 updates, while a hidden
+network changes many contributing weights at once. Applying the network's `.0003`
+rate to a direct table would create an unnecessarily sluggish comparator. This
+is a prospective finite-program choice, not a promised rate optimum or a sweep.
+Report actual table/network/critic movement, gradient norms, loss, KL, clipping and
+sampled entropy separately. Initial zero final weights give hidden layers zero
+gradient on the first backward pass; subsequent head movement can activate them.
+
+Within each root, pair reset streams and initial critic weights across K/D; keep
+actor initialization, action sampling and world streams independently addressed.
+One possible disjoint fixed scheme is roots 303031–303033, training world
+`30310000 + 1000*root_index + episode_index`, and evaluation worlds
+30300000–30300031. A selected source must freeze the exact scheme and check it
+against retained exposure before execution. Diverged policies need not visit the
+same states merely because reset streams are paired.
+
+After all fits, evaluate the six fixed final endpoints and C on those 32 common
+fresh worlds, rotating execution order. No best checkpoint, selected root, extra
+parent screen or outcome-dependent extension. On each C trajectory, run the six
+zero-initial actor copies as nonmutating decision shadows and verify exact greedy
+command equality and local input/state provenance. The algebra plus live state-flow
+checks justify reusing that one C deployment panel as all six initial panels;
+there are no six duplicate native initial rollouts. These shadows are counted
+actor work, and do not substitute for checking reset/hold behavior. Retain the
+initial/final checkpoints, training/update streams and every final trajectory.
+
+Primary endpoint: equal-training-root mean complete `D_cat1−C` J on the common
+world distribution. Read paired service, quality, zero-service ticks/runs, lower
+service tails, displacement/path and inference cost alongside it. Actual learning
+is `D_cat1−D_cat0` (with D0=C), with `K_cat1−K_cat0` and D−K as required context.
+Keep each root and world, separate conditional deployment uncertainty from the
+three-training-root uncertainty, and do not call 96 worlds 96 independent fits.
+This is exploration, not confirmation, a new MEI verdict or an adoption rule.
+
+### Predictions, adverse outcomes and what would change the next choice
+
+The constructive conjecture is that C's useful local decisions provide a better
+starting program from which experience can learn whole-episode choices. Its
+stationary-peer/4-tick model and fixed sweep rule leave plausible ways for long-horizon
+reward to favor departures, without establishing any one of them as a bottleneck.
+The predicted intermediate is learned, physically consequential greedy departures
+on the endpoint's own local histories; the native consequence is improved complete
+J/service versus C, with a possible increment over K_cat. Record departure frequency,
+which C and learned commands are involved, waypoint/fallback exposure, and the
+sampled-versus-greedy gap inside the complete study. High entropy, nonzero gradients
+or observation sensitivity alone do not satisfy this prediction.
+
+If K and D improve comparably, ordinary learned calibration is a useful capability
+and a simpler explanation than a necessary contextual correction. D above C but
+not K supports development without paying for a preferred state-dependence story.
+If D improves while K does not, that supports this contextual complete package,
+not causal credit to a diagnosed C modeling error or superiority of residual methods.
+If logits move but greedy execution remains C, there is no deployed improvement;
+the exposure/decoder facts make the limited negative interpretable without an
+automatic prior-strength repair. If departures execute and complete J/service
+degrade or create new long zero-service intervals, preserve every adverse endpoint
+and reject this finite program as an upgrade. Mixed roots/worlds restrict use;
+mean gain does not erase a service/QoS tradeoff. The planned batch ends in all cases.
+Any continuation must change a consequential prediction, not simply lower the prior,
+alter the entropy weight, add history, or spend another 512 episodes by default.
+
+### Prospective cost and stronger alternative
+
+| Paid object for the categorical proposal | Count |
+|---|---:|
+| Fits; training episodes | 6; 3,072 |
+| Training native team steps | 786,432 |
+| Evaluation episodes; native team steps | 224; 57,344 |
+| Total native team steps | **843,776** |
+| PPO rollouts; actor Adam; critic Adam calls | 1,536; 6,144; 6,144 |
+| Training agent decisions; actor replay rows | 983,040; 3,932,160 |
+| Critic replay rows | 786,432 |
+| C primitive act/ingest calls | 4,218,880 |
+| C decisions; candidate four-tick trajectories | 1,054,720; **28,477,440** |
+| C modeled trajectory ticks | 113,909,760 |
+| Additional initial-identity shadow actor rows | 61,440 |
+
+Each C decision considers 27 trajectories; radio-link evaluations depend on the
+actual local user/peer counts and must be measured, not reported as a fixed free
+cost. The C search remains at deployment; this is no controller-compression or
+inference-speed claim. Historical local-history B01 C took 12.673379 elapsed seconds
+for 32 episodes on its node: a straight component extrapolation is about1,305
+seconds over the proposed3,296 episodes, **before** learner/storage/reader costs
+and without a target-node speed promise. Historical set-PPO cost is not an exact
+timer for this much smaller actor plus repeated C search. Report full worker/reader
+CPU, wall, RSS and bytes if selected; node admission remains a launch-time condition.
+The already paid B01+B02 here were15fits/2,162,688 steps/3,136.021884 measured
+worker-plus-reader CPU-s, excluding older local-history work and incompletely
+metered support. The new proposal would add6fits/843,776 steps, not reset that history.
+
+The strongest alternative is continuous development of C, because a sub-grid
+velocity may improve a controller that already enumerates the ternary commands.
+An explicit deterministic residual `clip(C + rho*tanh(f), -1, 1)` with zero head
+can preserve initial deployed C, but requires separately declared training
+exploration. It cannot reuse the old atanh/Gaussian-parent likelihood unchanged.
+Clipping symmetric residuals at ±1 makes inward bias and physical action aliases.
+Root's independent Oracle therefore correctly proposed a **nine-parameter** learned
+axis×C-coordinate calibration K9, and an ordinary zero-fit G that scores the27
+offsets `{-rho,0,+rho}^3` around current C using the same local model, includes C,
+and prefers C on ties/no strict improvement. G is a finite same-support refinement,
+not a claim to search the whole continuous cube optimally. Its C stage plus residual
+stage would cost54 candidate trajectories/decision before alias deduplication.
+
+Three paired continuous K9/D fits at the same horizon, with C/G and six final panels,
+would already require6fits/851,968 native steps and at least29,030,400 C/refinement
+candidate trajectories, before its new actor-critic replay/update costs. The exact
+optimizer exposure is **not specified**, because I do not recommend selecting
+that algorithm stack; a future proposal must supply it before acceptance. A
+parameter-space search could avoid likelihood/critic machinery, but spends complete
+episodes on perturbed policies and introduces a distinct smoothed-policy objective
+and credit design. Neither option is impossible or scientifically refuted. They
+currently add a new action-support comparison and substantial optimizer/exploration
+engineering to a question the categorical program can already answer.
+
+Stopping is also legitimate: C might leave no useful local-policy improvement at
+this cost, and past failures supply no obligation to repair them. My preference for
+the categorical purchase over stopping is that it tests a materially untested
+construction with an already useful ordinary asset and an executable established
+learning core, while retaining a capable trained calibration comparator. It can
+produce a useful ordinary learning capability or a finite empirical limit without
+manufacturing a mechanism explanation. Root's independent review and cross-question
+allocation, including the already selected waiting and fleet work, decide whether
+that information is worth its full cost. Their outcomes are not prerequisites to
+this design and no capacity quota supplies a reason to run it.
+
+### Primary-source bridge and bounded engineering scope
+
+The three library entry points, July experiment record and external-review index
+were checked for relevant precedents; limited matches are coverage facts, not
+novelty evidence. The July record already contains coordinator/actionability
+residuals, so a residual name itself adds nothing. The retained B01/B02 evidence
+above is the nearest project constraint.
+
+I read [RPL arXiv1812.06298v1 §IV](https://arxiv.org/html/1812.06298v1#S4): it
+constructs a residual decision problem around a nondifferentiable controller and
+zero-initializes its correction; its actor-critic discussion explicitly allows
+degradation from a poor value estimate. That motivates retaining C without an
+improvement guarantee. Its continuous single-robot construction is not the
+categorical shared-policy implementation proposed here.
+
+I also read RPI's actual algorithm and §§6.1–6.2 in
+[arXiv2310.01737v3](https://arxiv.org/html/2310.01737v3#S6), including its separate
+oracle-value ensembles and learner/oracle rollouts. Its local source is My-lib id
+`iclr-2024-ea491e2d1c46686b8db5cd11154f5d2c`, PDF
+`/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2024/ea491e2d1c46686b8db5cd11154f5d2c/arxiv-2310.01737.pdf`
+(v3; method pp5–7). This offers a constructive policy-improvement precedent, while
+showing the extra machinery required for an oracle-value approach; I am not
+implementing RPI or transferring its MDP guarantee to this partial-observation team.
+
+Residual-MPPI's actual Algorithm1/§§3.1–3.2 were read in the local v5 PDF, id
+`iclr-2025-83ce241ce40aef32225eb2833ca2363c`,
+`/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2025/83ce241ce40aef32225eb2833ca2363c/arxiv-2407.00898.pdf`
+(pp4–5; [arXiv version](https://arxiv.org/abs/2407.00898v5)). Its method uses a
+prior distribution and a dynamics model; including the nominal plan is useful,
+but its maximum-entropy prior/model premises do not hold merely because C exists.
+This supports charging an ordinary refinement and its model cost, not importing
+a free improvement theorem. The browser v2 and local v5 were distinguished.
+Both single-agent bridges omit simultaneous teammate learning and interference.
+
+If selected, the small implementation scope is a C wrapper/categorical policy,
+fixed rollout/update adapter, runner and pure reader under this direction's new
+`b03_c_prior/` implementation/tests, with NOTES and one runs target. Import retained
+C, native factory, Critic and established clipped-loss/return helpers; do not copy
+a general learner, restore the failed set actor, edit another direction, or build
+oracle-value/dynamics infrastructure. Before launch, the independent engineering
+review must cover live zero-policy identity including fallback/hold/reset, actor
+information isolation, replayed categorical densities, meaningful finite gradients,
+RNG/address pairing, endpoint/source binding and declared count/readout consistency.
+Correctness fixtures need no result pilot. All current C/native bytes and accepted
+parameters must be published before any admitted run. No such code or exposure
+was created during this design task; current work is this notebook proposal only.
+
+<a id="ordinary-parent-allocation-addendum-20260930"></a>
+### Independent selection follow-up: smaller complete-development envelope
+
+Root's existing separate-context Astra Max Oracle recommends the smaller **three-fit
+C/I/Lg/Ls** comparison for the complete-development question. Root proposes that
+allocation **pending a focused Pro innovator reading**, and explicitly has not
+authorized implementation or exposure. Root will pass the settled-law addendum to
+the same Oracle; no new critic is required. Root reports `MATERIAL_DISSENT: no
+outstanding`. The original difference remains visible: I initially preferred paying
+for the additional K/D separation; Oracle regards that as a different marginal
+question which the current capability question does not require. I accept the
+smaller purchase on that scope. The six-fit proposal above, its cost and the
+possibility that a K-only learner could have supplied a later gain are retained.
+
+The table-learning concern was conditional, not an executable defect or observation.
+Oracle raised a possible greedy-lock bound for direct-logit Adam at lr `.0003`
+over 1,024 calls against the initial `log(234)=5.455321115...` margin. The actual
+proposal already specified `.01` for the table, `.0003` for the MLP and
+`betas=(.9,.999)`; Root/Oracle confirm the conditional obstruction does not apply
+to that law. This is not a proof that the selected table will learn, and no rate
+was tuned or changed through an outcome-bearing check. The `.0003` counterfactual
+must not be reported as failure of the proposed program.
+
+**The precise actor retained for the smaller envelope** is D_cat above: one
+trainable `(27,26)` zero table expanded with a structural zero at `[c,c]`, plus
+the shared 120→64→64→27 MLP. At each macro decision, pack the FP32 vector as
+`[0:104]=current native obs`, `[104:107]=C's current nominal xyz command`,
+`[107:110]=previous xyz command sent to the host` (zeros at reset), and
+`[110:120]=one-hot of C's current waypoint0..9`, read after that clock's C call.
+C initializes its waypoint before the first such actor call. These are actor-local
+values; no global critic fields or other UAV state enter this packing.
+
+Fix the identifiability convention to **raw MLP logits without output centering**
+for this proposed envelope; softmax handles the irrelevant common shift. Its first
+two Linear layers have independent FP32 uniform weights/biases on
+`[-1/sqrt(fan_in),+1/sqrt(fan_in)]`, tanh activations, and the last Linear's weights
+and biases are exactly zero. The table's702 parameters and all13,659 MLP parameters
+are trainable from the first update (total14,361); C and the categorical prior
+remain fixed. Actor Adam has the two groups `.01`/`.0003`, the stated betas/epsilon,
+and one combined actor norm clip .5. The independent centralized critic is the
+existing 136→128→128→1 tanh Critic (34,177 parameters), lr `.0003`, separately
+clipped at .5. All optimizer states start fresh; no learned parent weights or
+optimizer moments are imported. Use recorded separate CPU initialization streams
+`100000*master+11` for the actor hidden layers and `100000*master+17` for the
+unchanged Critic initialization. New source must fix tensor construction/draw order
+and save the complete initial state, not rely only on those seed labels.
+
+There are exactly64 learning decisions per H256 episode, at primitive clocks
+`0,4,...,252`. For macro k, `R_k` is the sum of the four actual post-step native
+J values following its held command. Store all64 rewards, actions, finite logits,
+categorical log probabilities, initial decision values, packed actor rows and
+136-entry critic rows. The critic receives the current native normalized state,
+the five previous sent commands and zero remaining commitments at each decision.
+Return target `Y_k=(sum_{j=k}^{63} R_j)/256` has gamma1 and terminal zero bootstrap.
+For each two-episode rollout, subtract the stored detached values and standardize
+the128 team advantages with population standard deviation plus `1e-8`. Each of
+four full-rollout epochs uses the same advantage for the five agent terms: clipped
+per-agent PPO ratios (.8–1.2), summed over agents and averaged over the128 team
+rows, with `.01` times summed categorical entropy subtracted. Critic loss is
+`.5*mean((V-Y)^2)`. One actor and one critic Adam call per epoch yield1,024 of each
+per fit. These are 64 decision-clock samples per episode, not256 independent
+actor updates or per-tick resampling.
+
+Three masters303031–303033 each train this one D actor for512 episodes, using
+training-world rule `30310000+1000*block_index+episode_index`. Root confirms **three
+distinct fresh32-world panels**, with four-arm pairing inside each block and no
+common-world reuse across blocks. Propose evaluation-world rule
+`30300000+100*block_index+world_index` (`block_index=0,1,2`, `world_index=0..31`).
+Freeze the concrete source and check seed non-overlap before execution. Separate
+training/action/evaluation domains; sampled evaluation I/Ls use the same fixed
+block/world/decision/agent-addressed categorical innovations. Those innovations
+are paired primitive random inputs, not matched observations after trajectories
+diverge. Sampling uses the exact finite categorical distribution whose log
+probability is stored; no externally forced C action, dropped draw or changed
+decoding during an episode. Greedy C/Lg have no stochastic action exposure.
+
+| Evaluation arm, for every block/world | Controller and decoder |
+|---|---|
+| C | Ordinary C, deterministic; also the exact greedy initial learned policy |
+| I | That root's zero-initial D actor, sampled from the declared `.9` C prior on its own histories |
+| Lg | The sole final D endpoint, deterministic argmax on its own histories |
+| Ls | The same final endpoint, sampled from its actual learned categorical distribution |
+
+All arms use the same current all-on native host, 4-tick commitments, complete
+objective and evaluator. I is an actual stochastic initial-policy panel, not a
+label for C or a new fit. Run all four complete arms at each of32 worlds in each
+block, rotating their order. C includes a nonmutating zero-initial learned-policy
+shadow for live identity/provenance checking, whose30,720 actor rows are charged
+separately. Each block's final parameters are frozen before its evaluation; no
+decoder or endpoint selection from these outcomes. Preserve every block/world,
+including negative, zero-departure and adverse-tail cases.
+
+The primary complete-development contrast is **Lg−C**. The necessary same-decoder
+learning contrast is **Ls−I**; read Ls−C, Lg−I and Ls−Lg as context, without
+declaring a winner by selecting its better decoder. Lg−C establishes a deterministic
+deployment change from exact C initialization; Ls−I checks that actual trained
+stochastic behavior improved over the explored initial distribution. A gain over
+I alone can be recovery from deliberately exploratory damage while still below C.
+These distinctions directly address the earlier sampled/greedy gap without
+diagnosing its cause. Per-block paired-world intervals describe deployment for a
+fixed training result; the outer three-block interval includes both training and
+each block's fresh-world sampling. It does not isolate pure training variance.
+No source claim of state dependence, weak-parent causality or residual-method
+superiority is added if this smaller complete package succeeds.
+
+| Paid object for Root's proposed smaller envelope | Count |
+|---|---:|
+| Fits; training episodes | 3; 1,536 |
+| Training native steps | 393,216 |
+| Evaluation episodes; native steps | 384; 98,304 |
+| Total episodes; native steps | 1,920; **491,520** |
+| PPO rollouts; actor Adam; critic Adam calls | 768; 3,072; 3,072 |
+| Training agent decisions; actor replay rows | 491,520; 1,966,080 |
+| Critic replay rows | 393,216 |
+| C primitive act/ingest calls | 2,457,600 |
+| C decisions; candidate four-tick trajectories | 614,400; **16,588,800** |
+| C modeled trajectory ticks | 66,355,200 |
+| Learned evaluation actor rows (I/Lg/Ls) | 92,160 |
+| Additional initial-identity shadow actor rows | 30,720 |
+
+The historical C-only elapsed extrapolation for1,920 episodes is about760seconds;
+learner, storage, reader, engineering/review and target-node differences are extra.
+Actual radio-link work and full resources must be measured. Neither zero extra
+fit for C nor reuse of C code makes its16.59million candidate trajectories free.
+The smaller envelope saves3fits/352,256native steps against the six-fit design,
+while buying the extra initial/final stochastic readings and independent block
+panels. It relinquishes K-versus-contextual attribution explicitly.
+
+This addendum supersedes only the proposed allocation/collection details, not the
+six-fit reasoning or any earlier result. The technical scope remains one owned
+C-wrapper/categorical collector/update/reader package if selected. **Current state:
+design ready for the focused Pro boundary; no implementation or exposure.** Root
+owns that pending allocation and advice, rather than a fabricated compute or
+per-fit permission dependency. No new RESEARCH standing or direction takeover is
+made by publishing this notebook-only proposal.
