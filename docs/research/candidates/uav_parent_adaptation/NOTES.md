@@ -3843,3 +3843,161 @@ B04's separately measured cleanup and all existing positive/adverse evidence sta
 intact. Publication of this proposal and the owned RESEARCH standing completes
 the assigned design boundary; the next concrete action belongs to Root's
 cross-question selection/resource disposition.
+
+<a id="b05-selected-l0"></a>
+## 2026-09-30 — B05 selected implementation scope
+
+Root selected the complete ten-program comparison at
+`1e20a66abacbd74d0d24467904604d53a57a4817`
+([decision](../../RESEARCH.md#motion-radio-composition-root-decision-20260930)).
+This replaces the completed design-only assignment. Current published main keeps
+owner pause lifted for this runtime and this direction exploring with the existing
+native DM lead. The full Oracle recommendation and DM disposition above cover the
+unchanged question/comparators; no new selection review or joint-training purchase
+is introduced. B04 A/B closure, conditional original-S capability and all losses stand.
+
+**L0 deliverable and ownership.** Implement one source-bound B05 collector and
+complete bounded reader under
+`experiments/candidates/uav_parent_adaptation/b05_radio_composition/`, with matching
+tests. The DM owns contract, collection, runner/study, saved-data reader, integration,
+NOTES and publication. A bounded registered Implementer owns only `policies.py`
+and its matching `test_policies.py`: one legal five-member decision block preserving
+the inherited C/Q_I/S_I laws and producing auditable proposal records. No shared
+or historical source is edited; no helper stages, commits, launches or writes NOTES.
+Author in the shared main checkout and preserve all concurrent writers.
+
+**Behavior that must stay fixed.** Use only original B02 S and its exact114-field
+features, analytic helper and own navigation; C/Q never query S and S never ranks
+C commands. Policy caches store deterministic helper/logit work only. Query all
+five local distributions before a callback delivers the current private integer
+entries, then use the unchanged B04 I decoder with fresh departure/tail integers
+even on cache hits. Provision the exact64 B04-compatible bundles; the public stream
+is unused by I and supplies no policy information. Silent/empty observations still
+invoke S; no hard waypoint bypass or all-on feedback is added. New state/caches
+belong to each episode. A local decision returns commands plus navigation, features,
+marginals/logits or paid C scores, sampler details and actual query/timing counters.
+
+The collector separately records proposal, actual command, pending delivery,
+commitment and mask. E's original.456s elapsed-wall deadline starts inside E.decide
+after immediate local motion decisions; a late E result keeps only the previous
+mask. S2/T2 use the pre-local1.456s wall clock and retain commands plus mask on a
+late whole round, under original t0 startup. Copy transition radio arrays before
+arrival mutates them. Supply only rounded own xyz and commands/proposals plus the
+provisioned rounded400-byte map to unchanged source-bound coordinators. Keep all
+forecast approximations, ties, clipping, cadence, masks,136-byte traffic and terminal
+truncation. The actor sees only its current lawful local row and own navigation.
+
+**Output and counts.** Fix worlds29347000…31, two Q/S tapes and one C trajectory
+per program/world; C/Q_I/S_I×all/E/S2 plus C_T2,512 full H256 episodes,131072
+native transitions,0fits/labels/updates and the exact balanced order already selected.
+Save one canonical compressed raw file per episode, source/asset/tape identities,
+incomplete/attempt counts and compact config/summary. The reader checks every
+identity/decision/endpoint/statistic and the declared61440 S/helper recomputations,
+without new C rankings; all E scores and only the predeclared at-most-five paid
+S2/T2 pairs receive independent model recomputation. No additional fit, calibration,
+counterfactual actor query or native suffix is admitted by implementation.
+
+**Checks and stop.** Use outcome-blind stub-policy/synthetic-host checks for the
+policy barrier, fresh private draws, fallback/nav/cache behavior, both delivery
+clocks, retained deadline fallbacks, masks/array copying, ties, whole/partial records
+and reader corruption detection. Do not load/forward the production asset or run
+native pilot episodes for these checks. Independent engineering review covers the
+new source, numerics/RNG and complete collector-to-reader path before execution.
+The selected2CPUh worker/1CPUh reader envelopes preserve incompleteness and grant
+no duplicate retry; engineering estimate remains4–8h plus1–2h scientific reading.
+
+Root assigned the actual `wsl_4070` heavy window after the waiting study's already
+ready40-step fixture, producer and full reader have all actually terminated.
+Root resolves that existing-handle release. Implementation/review/publication
+proceed now; no composition operation is accepted, and no outer resource lock or
+manager is created. Fresh node admission and real wall deadlines remain required
+after the release. Exact source inputs will be published before the one detached
+operation, observed and rearmed on the same accepted handle through full reading.
+
+### B05 implementation and proportional verification
+
+The bounded Implementer completed `LocalTeam`; the DM read its implementation and
+independently reran the42 synthetic barrier/cache/navigation/sampler checks
+(42passed in1.01s). A second disjoint assignment under the same selected L0 owns
+only `verify_local.py` and its matching tests: saved native/local-policy provenance,
+the declared one-row S/helper reading, and independent I decoding. The DM retains
+collector/runner, coordinator verification, integration and all notebook/index
+ownership. No helper has Git-index, launch or notebook write rights.
+
+The collector preserves every actual transition before the native mask setter
+mutates radio buffers. E and S2/T2 retain their original, different wall-clock
+scopes. Complete and partial searches are retained, including an accounting limit
+of the unchanged E source: it exposes completed masks and completed state
+reductions, but not entry into a mask evaluation that fails its first deadline
+check. B05 therefore stores a conservative lower/upper interval for late E
+candidate requests; it does not invent an exact attempted count. Completed E
+state/geometry counts and S2/T2 request counts remain exact. CPU envelope checks
+occur between bounded calls, preserving partial work on exhaustion; the possible
+last-call/final-write overrun is not represented as an asynchronous hard kill.
+
+The saved-data reader reconstructs all native endpoints, all policy-used report
+observations and terminal observations under their actual masks. Silent SINR rows
+are negative infinity by the native contract, not missing values. It separately
+reconstructs wire contents, both forecast clocks, both sequential search orders,
+ties, packet absence, startup/held commands, all arrivals and late carryover.
+Its candidate radio recomputation is exactly the prospective E/full versus
+S2/T2/bounded-subset distinction. The local clipping diagnostics are explicitly
+one-step geometry at the actual report/delivery state, not unexecuted service
+suffixes or a claimed causal decomposition. Shared native radio kernels remain
+an explicit verification limit.
+
+Independent engineering review found a reachable synthetic-fixture boundary that
+could accept the production S asset under a nonproduction label. The DM repaired
+both worker and reader guards before model loading: reject the original canonical
+path, file hash or tensor hash in fixture mode. Spy regressions check refusal
+without loading the original asset. The reviewer independently ran the repaired
+guard/admission and initial/partial E/S2/T2 deadline subset:10passed in1.56s.
+Complete integration and final engineering acceptance remain pending here.
+
+Root also reported the related fleet native-development result at source
+`98307b0c5` (reading now published at `978c622c3`): the original S's positive mean
+against ordinary Q recurs with unresolved J precision on one panel, while the
+native-reward continuation does not establish improvement. This leaves the
+selected composition premise conditional and does not justify replacing the
+fixed original S with an outcome-selected temperature or endpoint. No comparison,
+world, clock, fit purchase or result query was added to B05 in response. The
+complete original fleet evidence and its independent diagnosis will inform the
+eventual scientific interpretation, without reopening the unchanged B05 design.
+
+### B05 accepted implementation and prospective node change
+
+The DM has read and accepted both bounded Implementer deliveries and the complete
+collector/reader integration. The complete owned suite passed **103checks in3.97s**
+under the configured local scientific interpreter, after the input-path change
+below. It includes a synthetic H8 complete16-row schedule with an independently
+seeded synthetic actor, pure-NumPy radio host, in-place mask refresh, all declared
+reader counts, corruption detection and worker/reader failure retention. No
+production-asset forward, native-host pilot or empirical fit was used for tests.
+Both CLI help paths and the whitespace check passed. The independent engineering
+reviewer read the finalized helper and narrow node/input change, incorporated the
+full integration evidence and closed review with **no material finding remaining**;
+its10 independently executed checks are recorded above. The DM accepts this source.
+
+Before any B05 acceptance, Root published the prospective placement change at
+`b9a25b9c1`: fleet-development and N8 producer/full-reader chains have actually
+terminated on the physically independent `local_linux` host. B05 now owns that
+node's next producer/reader window; waiting continues on `wsl_4070`. The previous
+waiting-release dependency is superseded. Use configured
+`/home/fires/.venvs/hmasd-linux-cpu/bin/python`, all arms on this one node and
+interpreter, one compute thread, and unchanged real E/S2/T2 wall deadlines and
+late fallbacks. Native timing and numerical performance are not promised equal
+to historical remote measurements. Fresh actual-node admission still applies;
+no new scientific approval, worker movement or repeated acceptance is involved.
+
+The sole necessary external input copy is staged at
+`/home/fires/hmasd-wsl/temp/directions/uav_parent_adaptation/b05-original-S.pt`,
+from the unchanged original remote canonical
+`/home/wu/projects/HMASD/runs/uav_fleet_adaptation/b02_inheritance_a01/assets/S.pt`.
+Independent byte/tensor identity inspection found424487 bytes,
+SHA256`b9e25fca68109bb50fa64fadfc90939ad6a4669058c1c0ccd1351c8bbcefe12a`,
+state SHA256`6fa2eddc542d8f5293f5daf6a989b97a9d7d5f56f484f1eb6bddc6a87d27de0c`,
+and the unchanged114/128/128/27 FP32 ReLU architecture. This identity-only
+inspection performed0forwards/0fits and took0.004090CPU-s after imports; transfer
+and imports are separate support cost. Worker and reader repeat the bound identity
+checks before their own use. The staging copy is disposable after worker, reader
+and evidence consumers finish; the original canonical checkpoint remains required.
