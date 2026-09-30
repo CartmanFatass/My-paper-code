@@ -2657,3 +2657,76 @@ The DM design above implements these corrections without extra arms, exposure
 or a new review. The independent investment dissent remains explicit for Root;
 this completes the current design-only task and leaves B03's closed result,
 canonical assets and already accepted parent B04 untouched.
+
+
+<a id="b04-design-update-after-parent-b04"></a>
+### Parent B04 evidence incorporated before returning the design
+
+After the complete design was published at `8e855d43abb1c722ae231f048b59b635701d9dfe`,
+Root directed incorporation of the now-published parent B04. I read its complete
+[result and disposition](../uav_parent_adaptation/NOTES.md#b04-complete-reading),
+the full original separate-context ResearchCritic answer, the saved primary
+verdict and consequential S_I−Q_I contrast arrays in its original summary.
+I also reread the newly updated RESEARCH topics2/4 on current published main.
+Evidence is `c0a9ddc5a856e83c01583cd17afed3652cb16ef4`, scientific source
+`e7225b0c7c428472b7349b6cce1f64fd42b97049`, with terminal cleanup at `2ef21e272`.
+I reused the completed reader/independent raw audit; this added no model,
+radio, environment or optimizer execution here.
+
+The fixed primary S_A−S_I fails: J−.002998 [−.012536,+.006539], within-episode
+service-p10−.609375 [−1.420082,+.201332], despite 3,051 physical departure
+events and real suppression of coincident departures. Q_A eliminates simultaneous
+categorical departures without improving mean J or service-p10. This supports
+ending the specified A/B coupling recipe; it does not imply that coordination
+is impossible, or identify departure coincidence as a reward mechanism.
+
+The separate **predeclared** original-S_I−Q_I comparison is positive on 32 fresh
+world blocks (two tapes averaged inside each block): J+.024074868
+[+.008176152,+.039973585], service+1.767028809 [+.648007583,+2.886050034],
+within-episode service-p10+3.546875 [+2.025238,+5.068512], and path−1232.241362
+m/UAV [−1674.901922,−789.580803]. J gains in27/32 worlds and p10 in28/32;
+world29346004 nevertheless loses .100149354J,7.037109375service and9.25p10
+against Q_I. Its lower path does not erase that service loss. S_I−C's positive
+p10 point still has an interval crossing harm. Favorable S−Q means across I/A/B
+are correlated views of one fitted asset/panel, not three training replications.
+Whole-team zero-service absence does not measure individual-user continuity.
+
+This strengthens the **conditional usefulness of the original starting asset**
+and weakens fixed .1 ordinary randomization as the complete explanation for its
+native value. It leaves advantage over paid calibration, learnable reward
+improvement, the necessity of imitation/aggregation, modal-versus-tail causality
+and the causes of prior PPO losses unresolved. B04 creates no new learning
+evidence and evaluates no recurrence-S continuation. Its two-draw finite-grid
+decoder/common-device contract remains distinct from this design's original
+private inverse-CDF law; its endpoints are not reused as new-study outcomes or
+numerically pooled with them.
+
+The original B04 ResearchCritic independently checked all416 episode identities,
+all13 contrasts, source/asset/input identities,24 consequential raw episodes
+and384 audit entries. It recommends retaining S_I/Q_I/C, ending A/B, and keeping
+unchanged S plus competent ordinary stochastic control in a worthwhile future
+development comparison. It explicitly does **not** endorse this separate fleet
+proposal's detailed fits/calibration costs. I accept those limits and reuse its
+judgment on the evidence alongside the already completed design Oracle advice;
+there is no duplicate reviewer or additional Pro request.
+
+The recurrence reviewer's requested B04 information has now arrived. That
+investment consideration has therefore been addressed with a conditional
+positive, without retrospectively making it a pass gate. My recommendation to
+Root remains **select the complete two-asset reward-development versus paid
+calibration comparison**, now with a stronger starting-capability premise.
+The original allocation dissent remains part of the record; Root assesses the
+updated recommendation and competing investments. I do not turn either positive
+S−Q or the B04 review into automatic fit authorization.
+
+No design arm, asset, seed, decoder, optimizer, horizon, calibration choice,
+stopping rule or outcome interpretation changes. The prospective cost remains
+two actor–critic fits plus two charged calibrations,327680–344064native steps,
+20480worker shadow rows and at most81920reader actor rows, with all separately
+priced model/kinematic/engineering work above. B04's already-paid cost is
+0new fits/106496steps/115.438290worker-plus-reader CPU seconds; its engineering
+and support are additional. Its reader's61440S forwards/13.723424CPU seconds
+are another planning anchor, not a runtime guarantee for this larger collector
+and one-row gradient replay. Current work still totals **0new fits/native/model
+queries and no result implementation**. This closes the assigned preparation
+with all evidence incorporated; no live operation or unread advice remains here.
