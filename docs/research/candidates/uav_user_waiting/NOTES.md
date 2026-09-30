@@ -1013,3 +1013,52 @@ the hash-verified temporary collection; its unique durable inputs are the seven
 canonical `wsl_4070` raw paths in the original summary. These support scripts are
 saved-data reconstructions, not new result entrypoints. Their scratch copies will
 be removed after the accepted continuation and reading have no live consumer.
+
+
+**A02 support-input failure and one corrected continuation selection.** Exact
+continuation inputs were published at `d19ea9daece1f68c4b9278ce08bccb7706ab95a7`.
+The first supervisor submission hit an implicit Git commit-fetch timeout before
+claim/output/admission; exact reconciliation found none. An explicit fetch made
+the published source available, and the same scientific request was admitted
+once at2026-09-30T14:31:52.099075Z as `b02_continuity_a02`. Fresh physical/effective
+memory was14,663,192,576bytes, exceeding the4GiB floor. It exited1 at
+14:31:54.332493Z:2.233418s acceptance-to-exit; worker CPU/RSS are unmeasured.
+
+A02 failed before writing config, constructing the environment or collecting any
+transition. Its proof-path guard found the Git-published reading under `runs/`
+absent from the sparse snapshot. Direct inspection establishes **skip-worktree S,
+not a filesystem symlink**: the existing node sparse selection includes
+`experiments/` but omits this direction's Git run records. The launcher routes
+output arguments to canonical runs; that does not populate source-side Git run
+inputs. My initial mapping shorthand was corrected after this inspection. A02
+adds **zero constructors, resets, native steps, fits or optimizer updates** and
+has not reproduced the original radio TypeError. All native terminal/error/input
+facts are retained in the A02 run record. The original six complete records and
+112-step failed prefix remain unchanged.
+
+Root explicitly selected one corrected continuation after this located binding
+failure, keeping the exact250H256 episodes/64,000new steps/0fits and original
+node/runtime/policy/seed/search/deadline. **Minimal correction L0:** relocate the
+exact published reading proof, unchanged bytes and SHA256
+`e971cf194942ecc99278e63e8ba64f397242c44a638a5a1acf88fbd5636bbd18`, into the owned
+candidate `b02_continuation/inputs/` and read only that source-bound input. Keep
+one working proof copy; its original published run-record identity remains at
+the A02 source commit. Add a zero-native check importing the actual continuation
+module from a source-layout fixture whose Git runs input is absent and whose
+canonical output is separate. Do not change node sparse selection or the shared
+launcher. Existing independent engineering review covers this narrow correction;
+exact publication and fresh admission precede the one new object at a fresh tag.
+A further failure must be preserved and returned without another automatic retry.
+
+
+**Sparse-layout correction accepted.** The one-line input-path change and
+77,875-byte proof relocation preserve the exact published proof hash. My14
+non-native checks passed in2.37s. The existing independent Reviewer separately
+compared the relocated bytes with the original at `d19ea9da`, ran14 checks in
+2.14s, checked the actual module import under omitted-runs/separate-output layout
+and reverified the original frozen configuration. It found no remaining material
+issue and acknowledged the previously missed sparse-layout dependency. I accept
+the correction. It changes neither scientific inputs nor native exposure. The
+new selected tag is `b02_continuity_a03`; all prior operations remain terminal and
+unchanged, the observer is stopped, and source publication/fresh admission come
+before this one newly selected execution.

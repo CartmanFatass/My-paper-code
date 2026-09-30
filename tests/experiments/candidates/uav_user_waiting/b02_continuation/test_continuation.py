@@ -1,6 +1,7 @@
 """Bookkeeping/identity checks only; fake collection never constructs a native host."""
 
 import copy
+import importlib.util
 import json
 from pathlib import Path
 from types import SimpleNamespace
@@ -142,3 +143,30 @@ def test_failure_preserves_original_and_does_not_retry(parent, tmp_path, monkeyp
 def test_refuses_parent_as_output(parent):
     with pytest.raises(RuntimeError, match='overlaps protected parent'):
         study.run_batch(study.PARENT, 'c' * 40, entry_start=time.perf_counter(), admission={})
+
+
+def test_proof_is_fixed_source_input_when_runs_is_omitted(tmp_path):
+    # Native snapshots inherit sparse selection. This run input is absent from
+    # the source worktree, and launcher output is a separate canonical path.
+    snapshot = tmp_path / 'snapshot'
+    package = snapshot / 'experiments/candidates/uav_user_waiting/b02_continuation'
+    (package / 'inputs').mkdir(parents=True)
+    canonical_out = tmp_path / 'canonical/runs/uav_user_waiting/b02_continuity_a03'
+    canonical_out.mkdir(parents=True)
+    source = package / 'study.py'
+    source.write_bytes(Path(study.__file__).read_bytes())
+    proof = package / 'inputs/parent-reading.json'
+    proof.write_bytes(study.PROOF.read_bytes())
+    assert not (snapshot / 'runs/uav_user_waiting/b02_continuity_a01/failure-reading.json').exists()
+    assert not (canonical_out.parent / 'b02_continuity_a01/failure-reading.json').exists()
+    spec = importlib.util.spec_from_file_location(
+        'experiments.candidates.uav_user_waiting.b02_continuation.snapshot_scope', source)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert module.ROOT == snapshot and module.PROOF == proof
+    assert module.check_digest(module.PROOF, module.PROOF_HASH)['sha256'] == study.PROOF_HASH
+    assert module.read_json(module.PROOF)['verified_native_steps'] == 1648
+    # The same source-bound guard still fails closed on an altered proof.
+    proof.write_bytes(proof.read_bytes() + b'\n')
+    with pytest.raises(RuntimeError, match='digest mismatch'):
+        module.check_digest(module.PROOF, module.PROOF_HASH)

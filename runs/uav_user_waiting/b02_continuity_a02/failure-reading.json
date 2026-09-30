@@ -1,0 +1,62 @@
+{
+  "status": "READ_SUPPORT_INPUT_FAILURE",
+  "launch_sha": "d19ea9daece1f68c4b9278ce08bccb7706ab95a7",
+  "operation_ref": "/home/wu/projects/HMASD/.git/hmasd-admission/d0e14378bf279a1eed78703c2a925e5bbf7d3d110052be9776f20d41f91f822d.json",
+  "exposure": {
+    "constructors": 0,
+    "explicit_resets": 0,
+    "native_steps": 0,
+    "fits": 0,
+    "optimizer_updates": 0
+  },
+  "count_basis": "traceback reaches validate_parent proof guard before config write, factory or collection loop; no config/summary/raw output exists",
+  "original_radio_failure_reproduced": false,
+  "error": "Traceback (most recent call last):\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/074beee0d94642b98af7b8e0db31e0ba/experiments/candidates/uav_user_waiting/b02_continuation/run.py\", line 38, in <module>\n    if main()['status'] != 'COMPLETE':\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/074beee0d94642b98af7b8e0db31e0ba/experiments/candidates/uav_user_waiting/b02_continuation/run.py\", line 34, in main\n    return run_batch(args.out, args.launch_sha, entry_start=started, admission=dict(admission))\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/074beee0d94642b98af7b8e0db31e0ba/experiments/candidates/uav_user_waiting/b02_continuation/study.py\", line 136, in run_batch\n    parent = validate_parent()\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/074beee0d94642b98af7b8e0db31e0ba/experiments/candidates/uav_user_waiting/b02_continuation/study.py\", line 81, in validate_parent\n    check_digest(PROOF, PROOF_HASH)\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/074beee0d94642b98af7b8e0db31e0ba/experiments/candidates/uav_user_waiting/b02_continuation/study.py\", line 48, in check_digest\n    require(Path(path).is_file() and not Path(path).is_symlink(), f'missing or linked input: {path}')\n  File \"/home/wu/projects/HMASD/.git/hmasd-launch-sources/074beee0d94642b98af7b8e0db31e0ba/experiments/candidates/uav_user_waiting/b02_continuation/study.py\", line 40, in require\n    raise RuntimeError(message)\nRuntimeError: missing or linked input: /home/wu/projects/HMASD/.git/hmasd-launch-sources/074beee0d94642b98af7b8e0db31e0ba/runs/uav_user_waiting/b02_continuity_a01/failure-reading.json\n",
+  "failed_input": {
+    "path": "/home/wu/projects/HMASD/.git/hmasd-launch-sources/074beee0d94642b98af7b8e0db31e0ba/runs/uav_user_waiting/b02_continuity_a01/failure-reading.json",
+    "expected_sha256": "e971cf194942ecc99278e63e8ba64f397242c44a638a5a1acf88fbd5636bbd18",
+    "observed": "absent; git ls-files -v prefix S",
+    "snapshot_runs_is_symlink": false,
+    "source_layout": "inherited sparse checkout includes experiments, excludes this direction run record; output argv routed to canonical runs"
+  },
+  "resources": {
+    "accepted_to_exit_seconds": 2.2334182262420654,
+    "cpu_seconds": null,
+    "peak_rss_kib": null,
+    "scope": "native acceptance-to-exit interval only; worker CPU/RSS were not measured"
+  },
+  "prior_transport_refusal": {
+    "scientific_admission": false,
+    "operation_claim": false,
+    "output": false,
+    "native_steps": 0,
+    "reason": "published commit absent locally; implicit cat-file fetch timed out; explicit fetch succeeded before the one accepted a02 operation"
+  },
+  "identities": [
+    {
+      "path": "launch-manifest.json",
+      "bytes": 3818,
+      "sha256": "70701d5d7e29f0cfb355607976b1f54da3f4daaecb124448ff43f876ab8b72da"
+    },
+    {
+      "path": "admission-preflight.json",
+      "bytes": 760,
+      "sha256": "ce954798c10c9db3b3b9ada3f063dc953f20982d5deee9098719f5b77be52c65"
+    },
+    {
+      "path": "process-exit.json",
+      "bytes": 557,
+      "sha256": "976ef058ad6b596f8ac7412c0553b3cfa8174750cf9ae19a5c3da9e84a365488"
+    },
+    {
+      "path": "terminal-status.json",
+      "bytes": 2451,
+      "sha256": "ddfbbb8f433db3e7b4a8583f6f00f57c95fcb0910a6a585b03029e9d5c9adadd"
+    },
+    {
+      "path": "stderr.log",
+      "bytes": 1639,
+      "sha256": "a56b6bbee22807b2eab0a0b542f36d7247cfb312bc652e56e02be98663ddba5f"
+    }
+  ]
+}

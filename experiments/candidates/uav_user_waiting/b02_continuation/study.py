@@ -24,7 +24,7 @@ PARENT_HASHES = {
     'summary.json': 'd9e1060d93d4d8181e371a6ccc7220c74102f6740c797fea09188706366d62a8',
     'process-exit.json': '03ada784587a8beb1b8195a48207151b9d4f392e50b5b1e24fee485ab8f01d0c',
 }
-PROOF = ROOT / 'runs/uav_user_waiting/b02_continuity_a01/failure-reading.json'
+PROOF = Path(__file__).resolve().parent / 'inputs/parent-reading.json'
 PROOF_HASH = 'e971cf194942ecc99278e63e8ba64f397242c44a638a5a1acf88fbd5636bbd18'
 REUSED = 6
 PRIOR_COUNTS = dict(constructors=1, explicit_resets=7, native_step_calls=1648,
