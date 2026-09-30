@@ -321,3 +321,35 @@ The repaired reader is published separately from the immutable native source.
 Its exact published bytes will execute with imports and source-root context from
 the original accepted snapshot; no file in that snapshot is edited. The original
 failed reader's log and external timing stay in the run evidence.
+
+### Second reader-only numerical finding, before interpretation
+
+Reader-a02 (`d97c3f9dc`) passed the saturation case but stopped in lineage3/K on
+the inherited absolute2e-7 FP64 composition comparison. Independent reconstruction
+over every saved trajectory shows **all384 composed means exactly equal the FP32
+sum of their saved base means and corrections**. All64 lineage3 K/D trajectories
+have ordinary FP32 rounding differences above that old absolute tolerance when
+compared with an unrounded FP64 sum; maximum2.384185791015625e-7, with base/composed
+means reaching magnitude4.59. The unchanged independent FP64 density and central
+action checks remain within their original tolerances (max2.95e-6 and3.06e-8).
+No changed raw value, new evaluator or scientific score is involved.
+
+Extend the pure-reader L0 to verify composed means by exact FP32 addition, a stronger
+contract than the inherited scale-specific approximate check. Use the unchanged B04
+geometry/native-outcome/transport reader and B06 innovation verifier; keep the
+residual/density/zero-tail/K-calibration/path/zero-service checks explicitly in this
+direction's reader so numerical checks do not require patching historical readers
+or transforming rows to satisfy their assertions. Preserve both saturation
+definitions, all prior tolerances on smooth quantities and the original artifacts.
+Add rejection of one-ULP composition corruption and a synthetic full-H256 large-mean
+cutoff case. Independent engineering acceptance remains required before rereading.
+
+The same independent Reviewer compared the complete local residual reader against
+the full B05/B06 functions and found no dropped applicable check or material defect;
+its4 focused tests passed in5.53s. I accept the extended repair after inspecting it.
+The full47-test direction suite passes in10.03s. Reader-a02 cost73.38CPU-s/73.14wall-s,
+409,664KiB peak RSS, and its failed output remains retained. The final reader executes
+verified published bytes with the original frozen source-root/import context; its
+result records the actual compiled reader SHA/digest separately from native source
+930a0789d. The accepted snapshot remains unmodified and no model/simulator is invoked
+by the reader. Scientific reading is still pending, rather than a failure outcome.

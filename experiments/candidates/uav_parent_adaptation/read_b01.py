@@ -17,10 +17,9 @@ ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from experiments.candidates.uav_message_content.read_b05 import close, digest, interval
-from experiments.candidates.uav_message_content.read_b06 import (
-    read_trace as read_retained_trace, verify_innovations,
-)
+from experiments.candidates.uav_message_content.read_b04 import read_trace as read_geometry_trace
+from experiments.candidates.uav_message_content.read_b05 import close, digest, interval, longest_zero_interval
+from experiments.candidates.uav_message_content.read_b06 import verify_innovations
 from experiments.candidates.uav_parent_adaptation.b01.protocol import (
     HORIZON, TRAIN, EVAL, LINEAGES, STAGES, PROGRAMS, masters, addresses, rng_table,
     expected_training_counts, expected_evaluation_counts,
@@ -199,27 +198,82 @@ def check_saturation(row, correction):
                 predicate_disagreements=int((native != promoted).sum()))
 
 
+def check_composed_mean(base, correction, mean):
+    assert base.dtype == correction.dtype == mean.dtype == np.float32
+    np.testing.assert_array_equal(mean, base + correction)
+    return float(np.abs(mean.astype(np.float64) -
+                        (base.astype(np.float64) + correction.astype(np.float64))).max())
+
+
 def read_trace(row, program, calibration_b=None, expected_log_std=None):
-    mapped = "B40" if program in ("I", "P") else program
-    with np.load(row["raw"], allow_pickle=False) as raw:
-        saturation = check_saturation(row, raw["correction"])
-    # The inherited reader promotes corrections before this one diagnostic check.
-    # Validate the original above, then adapt only its in-memory numerical view.
-    inherited_row = dict(row, correction_saturation_fraction=saturation["float64_fraction"])
-    reading = read_retained_trace(inherited_row, mapped, calibration_b)
-    reading["saturation_predicate"] = saturation
-    reading["residual"]["correction_saturation_fraction_float64"] = saturation["float64_fraction"]
-    reading["residual"]["correction_saturation_fraction"] = saturation["recorded_fraction"]
+    import torch
+
+    assert program in PROGRAMS
+    reading = read_geometry_trace(row, "G")
     with np.load(row["raw"], allow_pickle=False) as raw:
         assert Path(row["raw"]).stat().st_size == row["raw_bytes"]
+        for key in ("base_mean", "composed_mean", "correction"):
+            assert raw[key].shape == (256, 5, 3) and np.isfinite(raw[key]).all()
+        assert raw["sample_logp"].shape == (256, 5) and np.isfinite(raw["sample_logp"]).all()
+        assert raw["log_std"].shape == (3,) and np.isfinite(raw["log_std"]).all()
+        reading["composed_mean_float64_roundoff_max"] = check_composed_mean(
+            raw["base_mean"], raw["correction"], raw["composed_mean"])
+        reading["composed_mean_fp32_exact"] = True
         if expected_log_std is not None:
             np.testing.assert_array_equal(raw["log_std"], expected_log_std)
+        base, mean, correction, u = (raw[key].astype(np.float64) for key in
+            ("base_mean", "composed_mean", "correction", "pre_tanh_motion"))
+        close(raw["central_motion"], np.tanh(mean), 1e-7)
+        assert np.max(np.abs(correction)) <= .1 + 1e-7
+        log_std = np.clip(raw["log_std"].astype(np.float64), -5, 2)
+        sigma = np.exp(log_std)
+        normal = -.5 * np.square((u - mean) / sigma) - log_std - .5 * math.log(2 * math.pi)
+        jacobian = 2 * (math.log(2) - u - np.logaddexp(0, -2 * u))
+        predicted_logp = (normal - jacobian).sum(-1)
+        close(raw["sample_logp"], predicted_logp, 1e-5)
+        same_noise_change = np.tanh(u) - np.tanh(u - correction)
+        assert np.max(np.abs(same_noise_change)) <= .1 + 1e-7
+        if program in ("I", "P"):
+            close(correction, 0, 0)
+            close(mean, base, 0)
+        if program == "K":
+            expected = .1 * torch.tensor(calibration_b, dtype=torch.float32).tanh().numpy()
+            close(correction, np.broadcast_to(expected, correction.shape), 0)
+        assert not np.any(raw["packet"][:, 7:])
+        assert not np.any(raw["actor_input"][..., 171:])
+        assert not np.any(raw["critic_input"][..., 451:])
+        verify_innovations(row, torch.Generator().manual_seed(row["motion_seed"]), raw)
+        saturation = check_saturation(row, raw["correction"])
+        behavior = dict(
+            correction_rms=float(np.sqrt(np.square(correction).mean())),
+            correction_abs_mean=float(np.abs(correction).mean()),
+            correction_max=float(np.abs(correction).max()),
+            correction_saturation_fraction=saturation["recorded_fraction"],
+            correction_nonzero_fraction=float((correction != 0).mean()),
+            same_noise_action_change_rms=float(np.sqrt(np.square(same_noise_change).mean())))
+        for key, value in behavior.items():
+            close(row[key], value, 0 if key == "correction_saturation_fraction" else 1e-7)
+        behavior["correction_saturation_fraction_float64"] = saturation["float64_fraction"]
+        reading.update(residual=behavior, saturation_predicate=saturation,
+                       log_std=raw["log_std"].tolist(),
+                       density_max_abs_error=float(np.max(np.abs(raw["sample_logp"] - predicted_logp))))
         services = raw["served_users"]
+        reading["levels"].update(zero_service_steps=int((services == 0).sum()),
+                                  longest_zero_service=longest_zero_interval(services))
+        for key in ("zero_service_steps", "longest_zero_service", "worst_tick_service"):
+            close(row[key], reading["levels"][key], 0)
+        assert reading["cache_uses"] == row["valid_future_cache_uses"]
+        reading["correction_mean"] = correction.mean((0, 1)).tolist()
+        reading["correction_std"] = correction.std((0, 1)).tolist()
+        reading["correction_min"] = correction.min((0, 1)).tolist()
+        reading["correction_max_by_coordinate"] = correction.max((0, 1)).tolist()
+        reading["correction_second_moment"] = np.square(correction).mean((0, 1)).tolist()
+        steps = np.diff(raw["position"].astype(np.float64), axis=0) * np.array([1000., 1000., 100.])
+        reading["motion_path_m_per_uav"] = float(np.linalg.norm(steps, axis=-1).sum(0).mean())
+        reading["innovation_sha256"] = row["innovation_sha256"]
         reading["levels"]["service_p05"] = float(np.quantile(services, .05))
         reading["levels"]["motion_path_m_per_uav"] = reading["motion_path_m_per_uav"]
         reading["zero_service_times"] = np.flatnonzero(services == 0).tolist()
-        correction = raw["correction"].astype(np.float64)
-        sigma = np.exp(np.clip(raw["log_std"].astype(np.float64), -5, 2))
         relative = correction / sigma
         reading["correction_relative_sigma_rms"] = np.sqrt(np.square(relative).mean((0, 1))).tolist()
         reading["correction_relative_sigma_max"] = np.abs(relative).max((0, 1)).tolist()

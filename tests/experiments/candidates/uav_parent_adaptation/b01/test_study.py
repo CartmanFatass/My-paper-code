@@ -160,6 +160,13 @@ def test_saturation_cutoff_uses_stored_dtype_and_rejects_changed_report():
 def test_full_horizon_writer_reader_at_float32_saturation_cutoff(tmp_path):
     cells = make_lineage(tmp_path / "fits")
     parent = cells["B"]["final_checkpoint"]
+    parent_actor, parent_critic = model.load_evaluation(Path(parent["path"]).read_bytes(), parent,
+        lineage=1, stage="B", endpoint="final", launch_sha=SOURCE)
+    with torch.no_grad():
+        parent_actor.mean.bias.add_(5.)
+    parent = model.save_checkpoint(tmp_path / "large_mean_parent.pt", parent_actor, parent_critic,
+        lineage=1, stage="B", endpoint="final", master=29812, launch_sha=SOURCE,
+        parent=cells["C"]["final_checkpoint"])
     actor, critic = model.build_adaptation(29813, "K", Path(parent["path"]).read_bytes(), parent,
                                             lineage=1, launch_sha=SOURCE)
     with torch.no_grad():
@@ -177,10 +184,23 @@ def test_full_horizon_writer_reader_at_float32_saturation_cutoff(tmp_path):
     assert result["saturation_predicate"]["predicate_disagreements"] == 256 * 5 * 2
     assert result["residual"]["correction_saturation_fraction"] == 2 / 3
     assert result["residual"]["correction_saturation_fraction_float64"] == 0
+    assert result["composed_mean_fp32_exact"]
+    assert result["composed_mean_float64_roundoff_max"] > 2e-7
     assert result["levels"]["J_net"] == pytest.approx(.267)
     assert row == original
     with pytest.raises(AssertionError):
         reader.read_trace(dict(row, correction_saturation_fraction=0), "K", actor.b.detach().tolist())
+
+
+def test_composition_is_exact_fp32_and_rejects_one_ulp_corruption():
+    base = np.array([5., -5., 0.], dtype=np.float32)
+    correction = np.array([.095, -.095, 0.], dtype=np.float32)
+    mean = base + correction
+    assert reader.check_composed_mean(base, correction, mean) > 2e-7
+    bad = mean.copy()
+    bad[0] = np.nextafter(bad[0], np.float32(10.))
+    with pytest.raises(AssertionError):
+        reader.check_composed_mean(base, correction, bad)
 
 
 def test_partial_failure_preserves_started_fit_and_does_not_replace_root(tmp_path):
