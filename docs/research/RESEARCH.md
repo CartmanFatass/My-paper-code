@@ -1880,21 +1880,21 @@ Root，2026-09-27：已完整读取原答及补充，采纳其对功能式简化
 ### Parallel allocation: independent work and rolling succession
 
 <a id="root-successor-designs-20260930"></a>
-**Four native DMs continue, with two successors executing and a third conditionally selected.**
-The owner’s requested four-DM allocation remains substantive: `dm_fleet_adaptation` develops
-retained local actors through native consequence labels; `dm_fleet_transmission` studies
-anticipation across two relocation opportunities; `dm_parent_adaptation` has completed composition
-and actual-S2 design and now costs a distinct planner-amortization question from source;
-`dm_user_waiting` completes the learned-continuation reader while preparing the conditionally
-selected ordinary service/continuity comparison below. Existing leads keep their questions and
-accepted handles. Oracle/helpers are not DMs, and four assignments do not imply four admitted
+**Four native DMs own the selected actor-development, temporal-planning, planner-amortization
+and service-continuity questions.** `dm_fleet_adaptation` completes native-consequence learning
+and its independent interpretation; `dm_fleet_transmission` carries the accepted two-opportunity
+study; `dm_parent_adaptation` now owns the selected paid-label approximation below;
+`dm_user_waiting` has completed the full B03 reader, interpretation, publication and cleanup,
+satisfying the recorded condition for its ordinary M/S/U/K study. Existing leads keep their
+questions and accepted handles. Oracle/helpers are not DMs, and four assignments do not imply four admitted
 workers. The completed forecast and service-age DMs remain reserve.
 
 Astra Max Oracle owns detailed idea discovery and independent criticism using the research
 record, all three local libraries and needed primary web passages. Root selects the scientific
 objects and cross-question allocation; DMs retain reasoning, implementation, review, actual-node
 admission and complete publication/cleanup. The independent continuity recommendation is
-conditionally selected below. No routine Root run acknowledgment is added.
+selected below, with its prior verification condition now satisfied. No routine Root run
+acknowledgment is added.
 
 Root adopts the independent **reserve/defer** recommendation for actual-S2 learning, preserving
 its distinct proposal-consequence question. The complete two-fit comparison now costs2560H256
@@ -1912,15 +1912,11 @@ Root decision](archive/2026-09-30/RESEARCH-duration-roster-allocation.md) are re
 review. Its strongest charging-scheduling candidate substantially overlaps the already completed
 persistent-service B05, whose outage repair did not satisfy the full service/energy use contract.
 
-The fourth DM and that same independent Oracle now assess **learning to approximate N8 T**:
-can finite experience retain the complete-continuation capability at less decision computation
-than competent ordinary alternatives? This is an independent estimand alongside the accepted
-T/G2/A2 temporal study. The74 paid model branches span16 worlds, with only38 distinct native
-programs; candidate rows are not independent training worlds. An exact-reuse ordinary alternative
-could sharply reduce T's requests but has no measured optimized runtime. The Oracle owns detailed
-design/criticism, the DM actual interface and complete cost. No learner, new labels, optimized T
-implementation or fresh native panel is selected, and fleet-transmission ownership stays intact.
-A reasoned decline remains a valid outcome of this source-only assignment.
+The fourth DM's source assessment is complete and the independently recommended approximation
+study is selected below. Detailed idea discovery remains with Astra Max Oracle. Its next
+source-only question is whether the retained categorical actor supports a worthwhile population
+transfer/development comparison under an explicitly fair interface. Fixed input width alone does
+not establish count portability. No transfer study, S2 acquisition or fifth DM is selected.
 
 **Actual compute placement.** The configured local_linux and wsl_4070 are distinct physical
 Windows hosts (AMD Ryzen 7 8745H and Intel Core i9-13900H). The accepted parent B05 worker and
@@ -1938,6 +1934,72 @@ windows and recorded fallbacks.
 
 The [retired initial four-study allocation](archive/2026-09-30/RESEARCH-four-study-initial-allocation.md)
 preserves its complete selection reasons, costs, resource decisions and source revision.
+
+<a id="n8-planner-amortization-root-decision-20260930"></a>
+**`uav_parent_adaptation`: selected B06 paid-label continuation approximation.**
+Root read the complete independent Astra Max Oracle recommendation and the DM's source-derived
+interface/cost response, then selected this separate learning/use question alongside the accepted
+T/G2/A2 temporal study. Native B03 T−R is+.007400J/+.558625service with a movement tradeoff;
+ordinary known-model planning supplies the retained capability. The new question is whether
+finite experience can preserve useful complete value while reducing decision computation, not
+whether learning is necessary or the approximation inherits T's improvement property.
+
+Use the74 paid modeled branches (58 per-silent-member champions plus16 stay continuations)
+from16 worlds; only38 distinct programs have native execution. Root directly checked all16
+hash-bound T decision records, champion counts, nonempty world groups and the saved-model
+subset arithmetic: top1+stay reproduces R; top2 recovers40.2% of the model increment; T's chosen
+champion has stationary rank3/4 in six worlds. These are paid-model readings, not newly executed
+native counterfactuals. The strong ordinary alternatives and small independent-world support
+are part of the learning comparison.
+
+Fit one fixed13-coefficient FP64 ridge residual on the58 champion rows, with no new training
+acquisition or optimizer loop. Each world has total weight1/16; the objective is weighted mean
+squared residual plus.1 times squared norm of all13 coefficients, including intercept. Weighted
+population feature scaling maps constant columns exactly to zero. The12 prewritten features
+use decoded t40 public geometry, stationary predictions and masks; they exclude native double
+positions, later native reports and complete-continuation targets. Predict the correction to
+stationary advantage divided by500, retain stay at zero, and use strict-positive initiation with
+original ties; zero coefficients explicitly reproduce R. Missing legal command history, compact
+features and16 training worlds remain limitations, not diagnosed failure causes.
+
+Compare **R / T_E / K2_E / L** on16 fresh common worlds29366000–29366015:
+**64 H500 episodes/32000 native steps/one fit**. T_E preserves original full T ranking with
+certified exact recurrence reuse; K2_E evaluates the two top stationary champions plus stay with
+the same reuse; L directly ranks all champions without online complete continuations. Every arm
+pays for its own complete original candidate bank and controller; no cross-arm cache or free
+bank. The fitted coefficients/scaler/manifest are published after the single admitted fit and
+before the separately admitted fixed evaluation/reader. No endpoint selection or evaluation refit.
+The frozen B03 source and the fleet DM's accepted temporal operation remain unchanged.
+
+Exact reuse is inside this purchase, with sufficient physical/controller state, command bits,
+mask, phase and future-event barriers; nonrecurring suffixes execute fully. Preserve the original
+per-tick floating accumulation order and verify the uncompressed semantics independently. Old
+saved-state request savings are not an optimized CPU benchmark. The prospective bill is at most
+32,706,304 worker scoring requests/80960 complete-model ticks plus1792000 separate stationary
+transit ticks, **.75–1.25 worker+full-reader CPUh plus1–5fit minutes**, .10–.25GB raw and
+**9–15 support hours**, including4–7 for exact reuse and its review. Up to3 specified old branches
+may supply correctness checks (1380 logical model ticks/334650 requests/10CPU minutes); no new
+native fixture or final-world pilot is selected. Fresh actual local_linux admission remains
+required; wsl_4070 stays with the timed waiting chain.
+
+Read primary L−R and continuous L−T_E/L−K2_E effects, every world/tail/path/physical-choice
+change, and standalone selection and complete computation. The fixed exploratory target is
+positive mean(T_E−R), mean(L−R)−.75mean(T_E−R)>=0, and mean selection CPU_L<=.5CPU_T_E.
+Bank, feature, continuation/reuse and choice are timed together; logging and full lifecycle cost
+are separately retained. These point targets neither establish equivalence nor override a better
+K2_E benefit–cost position. When fresh T_E−R is nonpositive, no retention ratio is manufactured.
+Useful retention with real savings supports conditional reuse; unchanged R-like choices, native
+loss, ordinary domination or absent savings end this candidate without automatic extra teachers,
+features or refits. An invalid recurrence implementation leaves the intended comparison incomplete.
+
+Root judges this bounded question worth its substantial engineering bill: it develops a native
+planning capability through already-paid experience, tests learning against an improved ordinary
+reference and asks a distinct question from temporal anticipation or actor continuation. The
+primary-source approximate-policy-iteration bridge does not guarantee approximate-policy value;
+all inherited B03/model-error/July/adverse constraints remain. One fit and16 final worlds are
+exploratory. The full original independent answer, primary-source locators, DM response, exact
+features, costs, seeds and L0 are in the [B06 notebook](https://github.com/CartmanFatass/My-paper-code/blob/5e6fed08e/docs/research/candidates/uav_parent_adaptation/NOTES.md#b06-selected-contract).
+MATERIAL_DISSENT: no. This does not reverse the earlier decision to buy T/G2/A2 or activate S2.
 
 **`uav_fleet_adaptation`: selected B05 native-consequence development, CAL versus CONT.**
 <a id="inherited-native-development-root-decision-20260930"></a>
