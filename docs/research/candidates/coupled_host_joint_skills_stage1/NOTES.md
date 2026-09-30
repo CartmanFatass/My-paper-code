@@ -941,6 +941,157 @@ Return: (1) Synthesis in ≤ 12 lines: which beliefs, ordinary references and in
 
 ### Answer
 
+_Pasted verbatim by the fixed procedure `tools/pro_transport/paste_answer.py` at 2026-09-30 04:37 UTC from `temp/directions/coupled_host_joint_skills_stage1/scratch/pro-round-boundary-20260929/answer.txt` (sha256 40faf022361bb0cb…, 6397 chars, chat answer, wait state COMPLETE)._
+
+GitHub 读取成功，但未能写入。 本会话的 GitHub 连接器没有暴露文件更新或提交动作，因此没有修改仓库、也没有创建提交。已通过最新发送记录确认固定源为 2c351cb325d94ec48a54b42a3b102883c790e6c0，并按指定顺序全文读完批次总结、Oracle memo、DM 核验与处置及 critic 原文。最后检查 main 时，指定 ### Answer 仍为空，文件实际 blob 为 809326d73509932c4b178ac5111a1229dfcb02d2。以下按附件规定的备用路径给出完整答复；未执行训练。
+hmasd-pro-question-round-bounda…
+
+Answer 1
+
+b01 把“这个便宜主机是否有值得学习的耦合机会”变成了已建立的事实：P1 达标，hold-out 中继服务增量约 .141，即约 7 个用户；P_relay^on=.780 与 P_flat^on=.639 是保留下来的普通参考，而非理论最优上界。
+两个既有学习包在本次配方与 360k 暴露下均不胜任：P2 各为 0/3；这关闭 b01，不等于关闭所有有界头、接口或暴露下的学习可能性。
+P4 未达标；第三对的正差主要来自 SET 崩到地板以下，不能购买“层级有价值”的结论，也不能购买相反的普遍结论。
+P3 按规则 0/3、不支持；但这不是读数器失灵，更不是胜任策略中不存在角色互补：三次读数都来自不胜任检查点，前两次高于各自零假设分位数也不改变预定判定。
+投资变化是：停止原配方、不给 coordinator-based K/N 工作追认一个不存在的胜任实例、不买 cell 2；cell 2 未运行不是 SeqAU 的负结果。
+本轮不改 S7 的既有判决、FSD 的重开条件、SCC 的关闭、T3 的暂停；D1′ 仍是 RECORDED 候选，而非新贡献。
+我接受纠正后的配方限定与熵／裁剪事实；但仍不同意 R2 中“SET-V-b 激活便说明失败由动作分布、而非接口造成”的因果跳跃。它首先购买的是一个反例实例，不是整个批次的唯一病因。
+低于 .639 说明“已经学会直接服务、只差共同搭链”不是完整描述；它不证明 AND 耦合对优化没有作用，也不使熵增长自动成为已识别的原因。
+代价为六次正式 fit 31.0 CPU-h、P3 采集 1.20、读数约 .01，加技术探针与 gate 合计约 33/35 CPU-h；其中约 1.21 CPU-h 的 P3 工作没有购买到胜任策略的角色判断，工程只知在 40 h 上限内，不能写成实耗 40 h。
+
+Answer 2
+
+SET-V-b 是正确的第一次 fit 购买，但应把“激活”“普通参考水平”“耦合胜任”分开。
+
+它不是名义 CPU 成本最低的 fit；SET-T-b 更便宜。但 SET-V-b 直接检验 owner 的逐步速度接口，而且不依赖 T-W 的宏步包装工程。它能够以约 4.5 CPU-h 回答一个更直接的投资问题：保留原任务、奖励、暴露与逐步动作接口，只替换动作头配方，是否已经能获得值得继续投入的实例？ 因此，“最便宜的反驳性运行”应相对于这个决策计算，而不是单纯选择最便宜的任何运行。
+
+我建议下一轮预先采用以下单实例激活线：
+
+𝐶
+ˉ
+𝑏
+ℎ
+,
+  
+h
+o
+l
+d
+o
+u
+t
+,
+  
+d
+e
+t
+e
+r
+m
+i
+n
+i
+s
+t
+i
+c
+,
+  
+𝑐
+45
+ 
+≥
+ 
+0.40
+C
+ˉ
+bh,holdout,deterministic,c45
+	​
+
+ ≥ 0.40
+	​
+
+
+使用同一套 32 个 hold-out 世界、完整 500 步平均和固定 c45，不挑选最好的中间 checkpoint，不改用 final-100 或 sampled 成绩过线。默认使用既定种子顺序中的 932201，与其冻结的 b01 SET 结果配对；该旧实例的同口径读数为 .21868375。新实例的 c00、sampled、final-100、远簇与路径读数同时报告，但不替换主终点。
+
+参考或决策线	hold-out 
+𝐶
+ˉ
+𝑏
+ℎ
+C
+ˉ
+bh
+	​
+
+	用途
+random	.172	随机行动地板
+stationary	.171	不行动地板
+all-at-BS static	约 .20，critic 算得 .195	防止把简单中心部署当成学习成果；它是静态参考，不等同于 c00 闭环成绩
+建议的单实例激活线	.40	购买继续考察的资格，不授予耦合胜任
+P_flat^on	.639	普通无中继优化布局的闭环服务参考
+原 P2 数值水平	.7095≈.71	.639+½(.780−.639)
+P_relay^on	.780	封存的普通中继规划参考
+
+表中已有参考来自 notebook 与 critic；.40 是我在此次边界提出的投资阈值，不是已有实验结论；.7095 是由原规则计算得到。
+
+选择 .40 而非 .27，是因为它比约 .20 的简单静态参考高 .20，也比所配对旧 SET 实例高约 .181；.27 仅比中心静态参考高约 .07。这仍不是一个显著性检验，但更适合作为“值得购买下一步”的实际差距。原 memo 的 .27 可以保留为描述性刻度，不应继续承担下一轮的激活购买门槛。这不改变 b01 的任何阈值或结论。
+
+种子不确定性有一处必须澄清。 题目把 .02–.09 称为种子 SD，而 memo 与 critic 原文称的是 range/spread。按 notebook 列出的、已取整的 H 三值 .235/.211/.215 与 SET 三值 .219/.225/.132 重算，极差约为 .024/.093，样本 SD 约为 .013/.052。这不是对六个原始 panel 的重新完整审计，而是对已列均值的计算。购买规划可以保守地把 .09 当风险尺度，但不应把它冒充已验证的 SD，更不能据此套一个正态显著性判据。
+
+一个种子能够读什么？ 明显过线能证明“这个固定实例在逐步速度接口下获得了较大的服务水平”，并反驳“该接口下便宜学习必然不可能”的全称说法；它不能估计新配方的种子成功率，也不能证明动作头是 b01 六次失败的唯一原因。刚好贴着 .40 的结果尤其只能作暂定购买读数。新 c00 也必须并列展示，不能把初始化本来就有的能力记为训练收益。
+
+非激活购买什么？ 它以一次有上限的试验，否定“这次预先声明的头替换，在这个种子与暴露下已经足够”的具体购买假设，并激活 SET-T-b 这一更便宜的后续检验。它不购买换种子救分、延长原 fit、熵系数网格搜索或“速度接口无效”的结论。一个种子可以执行这样的单实例停止规则，不能读成整个方法族的非激活。
+
+还有一个限制使因果措辞必须保持克制：源码中的 TanhDiagGaussian 输出逐坐标有界的三维动作，不是单位球内动作；主机仍会把范数大于 1 的速度向量归一化。此外，原生有界头使用经过变换的 log-probability 与熵估计，因此保持 
+𝜆
+𝑙
+=
+.05
+λ
+l
+	​
+
+=.05 不等于保持了同一个熵目标。应保留已有的 action_clip_events 读数，将处理称为“原生有界动作头配方”，而不是“只隔离了裁剪”或“只隔离了 σ”。
+
+Answer 3
+
+修订后的 Q-A 足以作为有上限的能力／底座购买问题；不需要再添加一个训练臂。它仍不足以承担接口因果归因或整个项目的关闭判决。
+
+首先，H 的条件应绑定到相同接口。SET-V-b 激活，优先考虑的是 H-V，而不是因此自动购买 H-T；只有 SET-T-b 激活，才有购买 H-T 的匹配理由。若 SET-V-b 已给出足够好的逐步接口实例，SET-T-b 不再是默认必买项。原记录已经将 H 的购买置于 SET 激活之后；这里需要的是明确该条件的对象，而不是扩大臂数。
+
+其次，保留“no substrate at this interface, head and exposure”，并再明确到已试的实例。若两个 SET 实例都没有激活，准确结论是：“这两个预先声明的 SET 实例，没有在各自接口、动作头与暴露下交付可继续购买的底座。”H 尚未运行，就不能写成 H 在这些新配方下也已经失败；更不能据此宣布所有逐步／目标接口的学习都不可行。
+
+第三，六项共同变化仍需随任何正结果一起携带：决策节拍、PPO／折扣时间尺度、每次更新样本量、执行器行为、动作支撑集，以及执行裁剪机制。即使 V 与 T 使用同一有界头，二者也不是“只改接口名字”的对照。“仅 T 激活”支持购买 T 这个整体包，不识别究竟是目标表示、保持、有效时域还是优化暴露起了作用。
+
+第四，结果区间应按成绩命名，而不是按未测出的行为机制命名。.40–.639 表示“已明显离开简单地板、但低于普通 flat 参考”，不必然表示“只会直接服务、不会搭链”；部分中继服务和不完整直接服务都可能产生这个均值。.639 以上表示达到该普通参考的服务水平；约 .71 及所要求的远簇服务读数，才达到原 P2 的单实例数值水平。即便如此，一个新实例也不能倒过来使 b01 的“至少 2/3”批次规则成立。既有远簇、路径与动作读数应保留，但无需为这次筛选另造一套机制仪器。
+
+目标层接口属于 owner 主线，但属于其中一个受限层级。 在这个设计中，学习者决定多个 UAV 去哪里、何时重选目的地，固定直线执行器负责如何移动；这是目标层的 UAV／集群协同规划，而不是与主线无关的分类任务。但它没有证明逐步轨迹控制能力，也没有自动证明可变技能时长的价值。特别是 H-T 的 k=1 macro，只是在共同节拍上做 label→target 分解，不是已经获得时间延展技能。一个胜任 H-T 可以成为后续研究的候选资产，不能直接兑现 untied-K 的核心论证。
+
+Answer 4
+
+Q-B 应等待，不值得现在购买约 10–14 CPU-h 的完整批次。SET 激活应是预算上的必要门槛，而不是 Q-B 科学可行性的逻辑前提；越过门槛也不应自动触发六个 fit。
+
+修订确实提高了可解释性：SET 的独立确定性 argmax 可以表示无冲突分配，所以比较是有限暴露下的可学习性，而非表示能力；冲突与切换需要在训练和 sampled 行为中读取；coordinator 参数运动、标签熵及 distinct labels 帮助区分“没有激活”与“激活但未显示用途”；held random permutation 区分去重收益和精细分配收益；菜单相对于 b01 的 H actor 是新增信息，相对于 Q-B 内部各臂则不是特权信息。
+
+但这些修订不能替代购买理由。Q-B 把规划器发现的位置与角色菜单交给学习者，主要研究的是在已给出良好位置的情况下，能否学会分配和保持。在当前静态实例上，“长期保持一个 slot”对 untied-K 的联系很薄，菜单支撑的 allocator 也不等于自由目标或逐步路径规划已经胜任。memo 自己把其直接采用价值判为很低，主要暴露在对 coordinator 的理解与后续投资选择上；这不足以使它排在主线底座筛选之前。
+
+同时保留两个读数限制。M 优化 makespan，不是 500 步服务积分，所以可以被合理超过；M+.066 最多是检查菜单与部署过程的提示，不应再变成另一个未经证明的数学上界。把差值阈值扩大到 .05 并将冲突率设为共同主读数，会减少微小差异被过度解释，但也不会自动解决种子不确定性或 coordinator 未激活的问题。
+
+因此，我不同意“Q-B 与 Q-A 独立，所以现在可以并行购买”的投资推论。它们可以科学上独立、预算上排序。 若以后确有一个激活的 SET 实例，而“下一笔 K/N 投资究竟放在 coordinator 还是 flat／anchored 形式”仍因分配能力而悬而未决，再购买预先声明的 Q-B 首对；普通规则与菜单成本先读清楚，不能把研究许可等同于整批采购。反之，两个 SET 实例失败也不能证明菜单脚手架不会有效，只能支持本轮不优先为它付款。训练菜单约 .8 CPU-h、探针、面板和工程成本都应另行显式计入，不能只报学习器更新时间。
+
+Answer 5
+
+没有一个不同问题，能在当前证据和预算下胜过“SET-V-b 先行、非激活再 SET-T-b”的顺序；我不建议另开第三条研究问题。
+
+最接近 owner 偏好的替代方向，是围绕胜任普通规划器做有界规划修正，但它已经是 D1′，RECORDED，不能改名包装成 NEW。它值得拥有的是一个有上限的零 fit headroom 决策，而不是在尚无足够 headroom 证据时直接训练 residual。有限普通搜索发现的改善或未发现改善，都不是所有可学习修正的严格上界；这里能作的是投资停止判断，而非数学不可能性证明。
+
+其他现有资产也没有提供更好的替代购买：冻结 b01 checkpoint 可作匹配参考和后续有限问题的输入，但没有一个已达到本轮所需的耦合胜任水平；继续它们不能不加区别地算成“从胜任冻结策略做有界续接”。P3 读数器已经完成校准并产生了三次正式读数，在缺少胜任 H 实例时重新购买角色解释，仍然绕不过原来的条件缺失。
+
+写入位置核对时，最新 main 已记录 T-G 工程交付，给出了 32 世界 gate 约 .10 CPU-h、上限 .25 CPU-h 的估价；这些是工程与成本信息，不是正式 gate 结果。因此可以完成这项既有的 RECORDED 零 fit 购买，但它不是我提出的新问题，也不应阻塞 SET-V-b。
+
+Answer 6
+
+给 DM 的处置： 下一轮默认执行已有顺序，而不是再请求 owner 选择菜单：第一，先买 SET-V-b / seed 932201 一次，固定 360k 暴露，以 .40 为单实例激活线，fit 加既定面板封顶 5.0 CPU-h；已交付的 D1′ 零 fit gate 可独立完成一次，封顶 .25 CPU-h，不阻塞也不决定 Q-A。第二，只有 SET-V-b 非激活，才买一例 SET-T-b，fit 加面板封顶 2.0 CPU-h；T-W 新增工程、测试与复核封顶 12 工程小时，不能以“宏步 fit 很便宜”掩盖工程采购。第三，H 必须跟随相同接口的 SET；我建议这 24 小时进一步要求 SET 至少达到 .639 才释放一次 H 购买，仅 .40–.639 则保留 checkpoint 和读数、不立刻扩批：H-V 封顶 6.5 CPU-h，或 H-T 在 d2 边界语义检查通过后封顶 3.5 CPU-h。全部新增探针与额外零 fit 面板合计封顶 .5 CPU-h，24 小时合计 CPU 上限 12.5 CPU-h，新增工程与复核合计上限 14 工程小时；这些是建议采购上限，H-T 等宏步成本仍须按计划并发实测，而非当成已实现成本。任何超限或技术失败如实停止，不缩减声明暴露换取“完成”，也不以换种子、追加步数救分；下一笔从已激活 checkpoint 出发的有界续接必须另有明确问题，不能偷偷延长本次运行。这 24 小时明确不买的，是 Q-B 的 10–14 CPU-h 完整批次；剩余预算不是自动购买它的理由，b01 与 cell 2 的关闭状态保持不变。
 
 ### Send record (2026-09-29 15:39 UTC): Pro question `round-boundary-synthesis` sent
 Key `hmasd:c136e7728f8538d2e9e8430bdcfd1f3942d84622e33bdb5e2bfb3748dbeb23e4`; source pinned at 2c351cb32 (this notebook, heading "Pro question 2026-09-29 round-boundary-synthesis"); transport Jev headless, effort pill `6 Pro` verified in a dry run and the send; document sha256 5ab02e42…; `send_effect: sent`, attachment seen; operation directory `temp/directions/coupled_host_joint_skills_stage1/scratch/pro-round-boundary-20260929/`. First send from the moved Jev interpreter (`~/.venvs/jev-ultrafast`, owner commit abf118395): worked. The wait is armed locally; the declarations of SET-V-b (first purchase) and the Q-A/Q-B revisions follow the answer within a bounded window (≤ 50 min), else on the critic disposition alone.
@@ -1269,6 +1420,66 @@ Return (≤ 20 lines, single-instance wording, no new instrument, role or record
 
 ### Answer
 
+_Pasted verbatim by the fixed procedure `tools/pro_transport/paste_answer.py` at 2026-09-30 04:37 UTC from `temp/directions/coupled_host_joint_skills_stage1/scratch/pro-slot-round-boundary-20260929/answer.txt` (sha256 d8c464b2d3840ff7…, 2096 chars, chat answer, wait state COMPLETE)._
+
+写入状态： GitHub 读取成功，但当前连接器没有文件更新或提交动作，未修改仓库；最新 main 的本题 ### Answer 仍为空，文件 blob 为 b8b0d702921c9ac407bbc1036df39b98396fc1e2。
+材料范围： 已按发送记录固定源 6f4c3d5ee27baa4dd9bdf21411a006ee43b6e3a0 读完五组必读条目；以下依据这些记录，未训练，也未独立复算全部原始 JSON 或训练梯度。
+hmasd-pro-question-slot-round-b…
+
+第一：A，但采用下述修订。 一个阴性购买的是“此种子、此菜单接口、此配方与暴露仍未交付足够收益”的停止依据，不是“配方已被识别为病因”；这是一次 RECORDED 家族的有限购买，不恢复原 Q-B 批次。
+第二：C。 它不产生新的实验零结果；购买的是停止追加支出、保留主机／规划器／底线资产，不能写成学习不可能，也不能把尚未选择的主线 successor 算作已有成果。
+第三：B。 先固定降低 
+𝜆
+𝑙
+λ
+l
+	​
+
+ 或改变 lr 中的一项及匹配对照；零增益只否定该改动在该实例中的充分性，不否定所有配方，也不改写 SET-V-b 的旧判决；A 阴性不是 B 的因果许可。
+A 的性质： 我将修订后的 A 判为可购买的一次性能力问题，而非能区分“配方病因／接口病因”的诊断实验；只有预先承诺“大幅恢复则重新考虑主线连续控制问题，否则转 C，不自动追加 B”，分流才真正约束投资。
+阳性边界： 成功说明这个配方在菜单、离散动作和执行器共同提供的条件下能学出有用行为；它反驳“该配方在这里什么也学不会”，但不把 b01/b02 的失败归因给连续接口，更不交付路径规划或 K/N 的胜任证明。
+hmasd-pro-question-slot-round-b…
+
+阴性边界： 失败不识别熵、lr、暴露或信用分配中的哪项有问题；即使优势归一化及均匀分布处 
+∇
+𝐻
+=
+0
+∇H=0 成立，底线间约 .34 的总收益也不是逐 agent 优势信噪比的实测值，“梯度方向平凡”仍只能作假设。
+hmasd-pro-question-slot-round-b…
+
+购买上限： 只买 SET-slot 932201 一次；先做三 rollout 定价探针，探针、720 世界菜单、fit 与面板合计 ≤2 CPU-h；不够则不启动正式 fit，超限不补预算，技术失败不算科学阴性，不换种子或追加步数。
+主面板： 赞成固定 c45 的 hold-out sampled 为主、deterministic 为辅；这是检验采样策略是否学到有用偏好的选择，不是事后挑较差面板；并列已有 c00、训练冲突轨迹与 sampled 冲突数，避免把初始化／执行器收益算成学习。
+hmasd-pro-question-slot-round-b…
+
+下线修正： 每十步重选 slot 的匹配随机底线是 .4274，不能只用 sticky 的 .4182；若保留 .0705 的购买裕量，下线应为 .4274+.0705=.4979，预先取 .50，但它不是显著性门槛。
+区间修正： 
+𝑥
+≤
+.43
+x≤.43：地板水平，不能说“什么也没学”；
+.43
+<
+𝑥
+<
+.50
+.43<x<.50：收益不足购买门槛；
+.50
+≤
+𝑥
+<
+.70
+.50≤x<.70：中间恢复，只有既有冲突数下降才支持“部分去重”；
+𝑥
+≥
+.70
+x≥.70：大幅服务恢复，仍须排除 c00 已有同等能力。
+.70 的含义： 它仍比两个已测排列底线 .7617/.7635 低约 .06，不是“无冲突约定线”；只有已有 sampled 冲突计数确为零，才能说“该面板观察到无冲突”，不能由覆盖率替代这个事实。
+argmax 分歧： deterministic ≥.70 而 sampled <.50，可与“弱而 ego 一致的偏好被 argmax 放大”相容，但须由已有训练／冲突读数支持；记录确定性策略的用途，不授予本题 sampled 激活，也不将它抹成“没有学习”。
+**删除 >.78 不可读：** M 是普通规划参照，不是服务积分的数学上界；保留结果、核对同世界成对差与已有部署读数，不凭单实例宣布优越，也不凭超过 M 宣布无效。
+**另两处记录修正：** .49 只走完 sticky→held-permutation 差距的约 21%，不是“一半”；64 世界是 dev 32＋hold-out 32，世界 SD 不是均值 SE 或种子 SD，单种子不能估计跨种子稳定性。
+与 Answer 4 的分歧： R8 现在陈述公平；改变我判决的是“单 SET、一次性、≤2 CPU-h 的配方能力购买”，不是把“必要门槛”重新解释成已经满足。原 Q-B 的采用价值、薄弱 K/N 联系及菜单分配不等于路径规划胜任的反对理由仍成立。
+第（5）项： C 不排第一，因此本答复不另开 successor；本轮也不购买 H 臂。
 
 ### Send record (2026-09-29 18:57 UTC): Pro question `slot-round-boundary` sent as a follow-up in the `round-boundary-synthesis` conversation
 Key `hmasd:25593344dbe3ad42ba435ba09a0c0b120272c7c5f30fbcda63bc17cb36de0581`; source pinned at 6f4c3d5ee (this notebook, heading "Pro question 2026-09-29 slot-round-boundary"); transport Jev headless, effort pill `6 Pro` verified in the dry run and the send; document sha256 a9bd544e…; `send_effect: sent`, attachment seen (provider display name carries a "(1)" collision suffix; accepted by the driver's collision rule). Two refused pre-send attempts preceded it: the dry run had left its uploaded file as a persisted draft card in this conversation's composer, which the driver refuses ("the composer already contains an attachment"); a Chrome restart did not clear it; the DM removed that one card (name verified, exactly one "Remove" button) with a read-then-click through the driver's browser and resent under the same key. Operation directory `temp/directions/coupled_host_joint_skills_stage1/scratch/pro-slot-round-boundary-20260929/`. The conversation address stays in the local operation file.
@@ -1495,6 +1706,30 @@ Return (≤ 20 lines, single-instance wording, no new instrument/role/record): (
 
 ### Answer
 
+_Pasted verbatim by the fixed procedure `tools/pro_transport/paste_answer.py` at 2026-09-30 04:37 UTC from `temp/directions/coupled_host_joint_skills_stage1/scratch/pro-replan-timing-20260929/answer.txt` (sha256 e32ba9bf12e2fc75…, 2783 chars, chat answer, wait state COMPLETE)._
+
+写入状态： GitHub 读取成功，但当前接口没有文件更新／提交动作，未修改仓库；最新 main 的指定 ### Answer 仍为空，blob 为 c24a5c2ca53f30dfb535f3c01403430d393ef304。
+材料与结论： 已读附件、固定源 77d569d46c2fd5d200515c219306a76d8ba9ade3 的四组完整条目，并核对聚簇生成与静态搜索代码；未运行新主机或测试。R1-lite 修订后可执行零 fit；原样的 oracle 上界和训练放行规则不接受。
+hmasd-pro-question-replan-timin…
+
+（1）D2 的投资结论成立，范围须收紧： 本次 SET-slot 未交付预定收益，按承诺转 reserve、不自动买 B；不能把它扩大为所有接口均已排除，或把配方病因认定为事实；九次 fit 已包含三个 H 实例，不能另加“三个 coordinator”作为独立证据。
+参考没有被整体替换： P1 与封存的 P_relay^on 保留；slot floors 是菜单分配问题的匹配参考，不取代其他接口的参考，也不自动成为事件主机的参考。采用 DM 已核验的名称修正：M 是 min-makespan permutation search，不是 Hungarian。
+“无信息”与费用需纠正： SET-V-b 的 3.26 CPU-h、SET-T-b 的 1.07 都购买了限定实例的非激活结论，不能改称没有 learner facts；执行器增益另由零训练参考支持，SET-slot 的 1.33 购买停止理由。累计 ≈39.3 尚需去重：b02 的 4.52 已包含 D1′ 的 .10，最新总账又列了它及含糊的 floors/gate 项；我未复算全部原始账单，不另报一个伪精确总数。
+（2）rule-2 例外可接受，但理由是成本： 研究对象确实需要外生需求变化，采用廉价方向自有子类有据可依；不能说既有主机根本无法提问，也不能把制造 learner headroom 当作主机变更的理由。
+事件法则可作为预先固定的合成实验，不等于天然“无制造”： 空间重抽符合原聚簇法则，但一次事件及 t_e∈{150…350} 仍是新增实验选择；固定 [world,3]、均匀簇选择，不按距离、远簇或服务损失重抽，不剔除近、混合或未服务事件，且事件前轨迹必须与原主机一致。
+（3）warm 的对象尚未定义充分： 四个未迁移的生成簇不推出“四个不受影响的 UAV 站点”；应由事件前实际关联／路由确定可动 UAV，处理多服务器、共享中继和未服务簇，明确固定的是站点还是 UAV—站点分配，不能随后全局重分配又破坏“保持”的承诺。
+warm 的比较条件须补齐： 两个候选的选优指标、总搜索预算及平局规则事前固定；不能给 warm 两份搜索预算却把 S_cold 当同预算效应。若用完整后续 rollout 选优，该仿真选择程序及成本必须显式计入规则，不能隐藏成免费已知最佳。
+post-event 主窗口正确： 明确第一受影响步、事件可见时点和首次可反应动作；先算每世界窗口均值，再等权作同世界成对比较，避免不同窗口长度暗中改变权重；all-500 与已有远／近拆分保留为次要读数。
+三个 stake 不应混称： S_switch 量的是 warm 重部署相对 KEEP 的收益，不是纯时序收益；S_cold 是冷／暖搜索方案之差，不自动识别纯 layout-discard loss。“best ordinary”应在 dev 选定、hold-out 冻结；逐世界事后最大值只能称参考包络，不能直接称可采用的单条策略。
+比较器对原定广义结论不完整： 2⁶×{0,20,50} 只让选中子集同批出发，未覆盖“UAV 1 在 0 出发、UAV 2 在 20 出发”，更未覆盖每十步独立 KEEP/GO；因此它不是整个拟议 learner 动作空间的收益上界，信息相同也不能补上这个缺口。
+最低成本修正是不扩搜、收紧解释： 保留 192 个候选，但称“小网格最佳”；room 是该网格相对明确普通参考的已发现收益差，不能用小 room 排除其他出发时序。这样可作有限方案的购买筛选，而不是完整的 learner headroom 证明。
+阈值是购买裕量，不是精度保证： .02/.03/.05 可以事前保留；“paired SE≈.005”来自旧静态排列差的尺度，不能迁移成事件实验的已知 SE，应从本次成对世界差报告不确定性，且不把世界差异当训练种子差异。
+低／中区间改写： S_switch<.02 只停止本事件法则与面板上的这笔购买，不宣布整个主机家族“时序无 stake”；S_switch≥.02、room<.03 可读“普通参考存在，本轮不买 learner”，无消费者就不声称采用收益；.03≤room<.05 报告、不训练。
+高区间也不自动许可训练： room≥.05 首先支持进一步审查时序问题；在事件后确定、全信息的设定中，这个网格搜索本身也是应计价的普通替代。先冻结普通参考并读 hold-out，不能用搜索胜过较弱规则，直接推出学习有必要或 untied-K 已获得胜任主机。
+（4）当前零 fit 问题不是诊断后继，但锚定不能豁免“fit ten”审查： TRIED 标注和普通规则 anchor 不足以证明新头值得训练；任何以后声明仍须说明独立投资对象、匹配信息与可达到的收益，并先读取所列最近邻结果，不能把本次批准理解为已批准第十次 fit。
+未来的 95% 条款也须收紧： “≥95% 决策与 anchor 相同”只能描述行为相似，不能单独裁定非激活；一次关键出发时点变化就可能影响很长的服务区间，应与实测收益并读，而不是用大量无关 KEEP 决策抹掉它。
+（5）成本报价尚未验证： 声明上限式已达 32×195×350≈218万 个事件后 host steps，尚有搜索、事件前推进与状态复制；3–4 工程小时、<.5 CPU-h 只能先作报价。两世界探针须涵盖这些开销；静态搜索会改写传入 env，必须用影子状态并检验恢复一致性。
+执行顺序： 先补上述定义及事件／前缀／影子状态的聚焦测试、做两世界定价，再跑 32 dev 的 KEEP／cold／warm；仅 S_switch≥.02 才买网格及条件性 hold-out，且 hold-out 另计成本。建议 dev 总采购封顶 4 工程小时＋.5 CPU-h，超限报告而不偷减搜索；继续删去 HYST、同步规则、额外时钟与训练。批准的是这项收窄后的零 fit 筛选，不是原样的完整时序否定或 learner 放行门槛。
 
 ### Send record (2026-09-29 20:35 UTC): Pro question `replan-timing-round-boundary` sent as a follow-up in the same conversation
 Key `hmasd:6f1124ea0c2e4e792700304de0f6d10a2efa87a29ca0839cea9ac4d41560cb15`; source pinned at 77d569d46 (this notebook, heading "Pro question 2026-09-29 replan-timing-round-boundary"); transport Jev headless, effort pill `6 Pro` verified at the send; document sha256 397ba72f…; `send_effect: sent`, attachment seen; no dry run this time (a dry run in an existing conversation leaves a persisted draft card). Operation directory `temp/directions/coupled_host_joint_skills_stage1/scratch/pro-replan-timing-20260929/`. Concurrently (owner sizing rule 5): the implementer builds R1-lite's code in `experiments/candidates/coupled_host_replan_timing/`; nothing runs on 32 worlds before the Pro disposition.
@@ -1687,6 +1922,46 @@ Question (what your answer can change): (1) any correction to the b03/b04 readin
 Constraints: no training here; no edits outside the empty "### Answer" subsection of this file on branch `main`; read the question at the pinned source, but fetch the latest target file before editing and use its actual blob SHA; preserve all other bytes; stop on overlapping edits; on successful write report the actual commit; on write failure return the complete answer in chat. Single-instance wording; no new instrument, role or record type; ≤ 30 lines; MATERIAL_DISSENT yes/no on the b05 pre-declaration.
 ### Answer
 
+_Pasted verbatim by the fixed procedure `tools/pro_transport/paste_answer.py` at 2026-09-30 04:37 UTC from `temp/directions/coupled_host_joint_skills_stage1/scratch/pro-learner-locus-20260930/answer.txt` (sha256 d5e73a041140cd63…, 4625 chars, chat answer, wait state COMPLETE)._
+
+GitHub 读取成功，但本轮未提供可调用的文件更新／提交动作，未修改仓库、未产生提交。 最新检查时，指定 ### Answer 仍为空。以下为完整答复，另附 
+Markdown 副本
+。
+
+材料与裁决：MATERIAL_DISSENT: yes，针对 b05 的上界及关闭推论，不反对这次有上限的普通参照测量。 附件和固定源 b2cd120e39d8151695d7c7259f0c36a08177f641 的六组 NOTES 已读；RESEARCH 状态已核对，D2 超长行末返回截断，以完整 NOTES 补足本轮依据；未复算全部原始 JSON，未训练。以下新增方案是建议，不是已有结果。
+b03： 保留这次非激活和停止原配方的决定；反驳的是“仅去掉熵奖励就足够”的单实例预测，不是熵从未造成损失或共享奖励已被识别为原因。σ 从 .37 降至 .20 是噪声尺度下降，不是“precision 下降”；日志 entropy=0 是记录分支，σ 也不是 tanh 后策略熵的完整测量。远目标比例不能单独证明 μ“完全没用”精度。
+b04 的数值口径： .8099 是 F 的 all-500，不应并列冒充 final-100；按所报 B0 final-100=.8088 与配对差 .0675，F 同窗口均值应约 .8763（算术核对，非重跑）。cap-20 相对 cap-5 的负 .022 是缺口 S_info0 之差，对应 B0 服务平均增加 .022；三例反向结果保留，不能宣称更多重规划必然更好。
+机制检查： 154/210 未见、56/210 已见是“毛损失用户”的构成，不是净收益缺口的因果分解；扣除102个 gained，净差108/(32×50)=.0675。相关 .62 和末态静态复现支持损失位置的描述，不证明扫视一定收回其中73%，也不排除初始部署或不同规划规则改善；“只能部署后恢复”应撤回。
+b05 没有新主机或新结果指标，无需因此另开一次 section-5 评审；但 D_100 不是已证明的 ceiling。 信息更全保证的是允许忽略信息、优化同一目标的最优策略类不变差，不保证这个有限静态搜索、强制重规划与 min-makespan 分配组成的固定程序占优；搜索局部最优、路径／服务积分和后续重规划都会改变结果。
+最低成本修订： 保留 B0/L/D_100 和既有读数，把 C_ceil 解释为“call-100 全图授予的固定程序差”，不增仪器或穷举。<.03 只支持本轮不继续买 scout；.03–<.05 报告；≥.05 支持审查一个具体 scout，不能自动购买或把其收益除以该差当“上界利用率”。负差和超过 D_100 的合法策略都不自动无效；“任何 sighting rule 都过不了线”删除。
+L 与价格： 同一地图重算可能改变 UAV—站点匹配及过渡损失，“同布局所以 harmless”不能代替闭环核对。原报价32×3×6秒=576秒≈.16 CPU-h，尚未含探针；最新 main 已记录 cap 改至 .25 CPU-h，此为版本更新而非固定源的原预算，探针不是正式结果。
+学习器落点排序：①收窄的 (b) 同信息教师蒸馏；②(d) 第二槽休息；③(a) 有明确新证据才重审 D1′。 (c) 新主机本轮不选；十次失败足以停止这些购买，不自动给“换主机就有学习器”发许可，也不要求先证明全局 headroom 才能问一个有限学习问题。
+第一选择的问题： “把已有普通部署能力转成无需在线规划器的多 UAV 策略，能否保持完整闭环服务并降低在线计算，从而获得一个值得有界 MARL 续接的初始化？”资产是已验证规划器、B0 的合法已见地图、目标执行器及读数，不是一个尚不存在的胜任神经 checkpoint。首阶段是监督能力研究，不把它冒称 MARL 增益；已有规划压缩研究提供方法先例，而非本实例成功保证。
+信息合同必须先选定： 首例沿用 B0 已声明的即时汇集已见地图、已知 UAV 状态，学生另有 ego 和自己的合法历史；各 UAV 分散输出动作，但不是无通信私有观测策略。教师也只用同一已知地图，不用 F 的隐藏用户坐标替学生生成不可辨识的联合目标；纯局部无共享版本本轮不混进来。
+动作合同： 使用同一10步目标接口与直线执行器，教师 T_10 的触发、分配和平局规则先固定；它是接口匹配的普通参照，不能直接冒用旧 B0 的 .7375。学生评价时不得调用教师、得到当步教师目标／菜单或隐含搜索结果，否则只学执行器而非部署决策。
+最便宜的首件： 先两世界零 fit 做 T_10 的接口／计价检查和教师动作回放；它验证复用接口，不检验学生可学性。真正反驳“这个有限学生能保留教师能力”的首件是一例有上限的监督训练，而非再追加一串零 fit 上界、角色或信用测试。
+拟议固定曝光： 同一参数谱系，64个事先固定训练世界的教师闭环轨迹，随后一次事先固定的32世界学生 roll-in／同信息重标和监督续接；两段训练及查询分别记账，不能隐去第二段。保留初始化、初训和最终策略；不得根据 dev 分数增加重标轮次、换种子或扩容量；评价世界不进标签集。DAgger 的依据是策略改变会改变后续数据分布，不是对本例成功的保证。
+Proceedings of Machine Learning Research
+
+完整比较： 最终学生 S、其初始化 S0、同接口 T_10 在一套事先固定的32个共同评价世界上跑满500步，主读数仍为 C̄_bh，保留原奖励、远簇服务及负世界；同时计在线 CPU。F 与旧随机目标地板只作尺度参照。离线目标误差降低、teacher-forcing 好看或训练世界拟合，均不能替代这个闭环结果。
+第一选择的成功购买线（建议，非旧规则）： S 的 C̄_bh≥.71，S−T_10≥−.03，S−S0≥+.10，且学生完整在线循环 CPU≤T_10 的一半，才称“一个有用的规划策略复用实例”；T_10 自己也须在该面板胜任，否则教师充分性的前提不成立。这些是实用容差，不是单种子非劣效证明或 b01 的2/3成功。
+中间与停止区间： S≥.64 但未同时满足上述条件，记录部分能力／成本取舍，不买 RL；S<.64、教师失去参考能力或成本超限，停止这次蒸馏，保留正世界、不救分。即使 S 接近教师，若只是 S0 已有同等能力，也不能称学习收益；技术失败单列，不写成不可学。
+完整价格（估价与帽，不是实测）： 教师轨迹、roll-in 重标约 .5–1.5 CPU-h，监督两段约 .5–1.0，回归与完整评价约 .2–.5；新增工程／复核约4–6小时，全部 CPU 封顶3小时、工程封顶6小时，探针和数据存储处理在内。探针投影超帽即选②，不压缩曝光来伪装完成；b05 的成本另计，不重复算成蒸馏成本。
+MARL 真正落在下一步： 只有 S 交付能力后，才单独声明从同一 S 出发的有界团队回报续接，对照冻结 S、同预算监督续接和同信息普通规划器；问题是经验是否增加完整联合部署收益，而非再学一个 KEEP/GO 标签。此处不批准该续接，更不预先承诺它优于教师。
+“规划器盲处”的限定： .072 是 F 对某一合法普通程序的信息／规划包差，+.068 是重部署相对 KEEP 的差，均不是学生或 RL 可领取的收益池；全知教师不会使不可见坐标变成可推断事实。未知需求搜索需要自己的合法信息和普通对照，不能把教学成功自动接成 scout／新事件购买。
+为什么不是原样 fit eleven： 这仍是新增策略拟合，必须计数；不同在于以现有教师提供明确动作监督，检验完整策略复用，不以同一 PPO 配方换一个小旋钮救旧结论。蒸馏之前并无“胜任策略续接”，真正的有界续接只能从实测可用的 S 开始；偏好 continuation 不等于凭空已有一个可继续的 checkpoint。
+July 先例： R30 的 KEEP/SET／无切换熵是已实施家族；R51 的 specialist 无访问不支持跨 N 共享结论；R54 更直接显示全信息与可计算 oracle 不保证监督决策可学，故不能以“有教师”跳过学生闭环检验，也不重开这些旧合同。
+标签与既往反例： 教师模仿／压缩属 TRIED／RECORDED 家族，energy_relay_imitation 的不利世界及未建立的闭环增量、planning_policy_compression 的实际历史标注和固定 roll-in 设计必须继承；不是新算法。NEW 至多是这一个同信息、同接口的耦合宿主比较实例，不能用新名字恢复旧 BC、加权损失或二选一方案。
+三库缺口须明示： new-libs 本轮读到索引，非所有论文；My-lib README 说明真实 InstSci/MyLib 与 formal-capture 合并索引、页文和 PDF 不跟踪在 Git，实际索引路径读取返回404。未取得这两套本地库的完整检索结果，故这里只依据已读先例保守标注，不作“三库无重复”或完备新颖性保证。
+第二选择 (d)： 第二槽休息，完成已购买且解释修订后的 b05；零新增学习 CPU，保留普通资产，不把 b05 的任何数值当老师或学生已胜任。若第一选择的信息合同或成本不能成立，②立即升至第一；不是等待 Root 提供一个未来结果，也不是为了满槽再建规则。
+第三选择 (a)： D1′ 暂不买。H_static=.00625、H_corr=.00545625 是有限普通搜索结果，不是所有残差的上界；重审需要同信息、同300 m横向／±50 m纵向可行集、完整闭环及强普通修正对照下，一个具体可实现的剩余收益或可区分的有限学习预测和价格。仅引用 .072、+.068、旧 gate 的小数或“anchor 已经胜任”都不够，不要求先证明全局最优。
+hmasd-pro-question-learner-locu…
+
+不选 (c) 的理由： b03 支持停止当前从零连续学习的投入，不证明耦合宿主不能承载上述教学问题；因此本轮没有“必须新主机”的具体研究对象，也没有可辩护的新主机首件。R4 的数值是未建模跨事件 carry-over 的推导，不是重复运动已经被实测排除；仍可合理不买它。
+非重叠与自主性： 本建议仅用 Claude 的耦合宿主资产；已读 Active 表中的 Codex 结果／reserve 状态不转移 native 主机、B19451 或压缩后继的所有权。与规划压缩近邻的关系由 DM 在既有 peer 渠道说明；不再把旧 [DECIDE-B] 写成待 owner 的障碍，也不替 DM 作批准或新 pause/resume 决定。
+hmasd-pro-question-learner-locu…
+
+直答：离开已失败的从零 PPO 配方；现在不必放弃耦合宿主本身，但只保留上述一次有上限、独立计价的同信息教师复用尝试。 若它也不能交付可用的闭环学生，就把这个宿主从当前 Claude 学习器基座中移出、保留普通证据，不再靠 b05/scout/图/触发器链条间接宣称已经找到 MARL 落点。
 
 ### Send record (2026-09-30 02:28 UTC): Pro question `learner-locus-round-boundary` sent as a follow-up in the same conversation as the two replan-timing boundary questions
 Key `hmasd:8b3f4898aa6d916c6730e5f90f188215f4db4773e6f24b6b331b51cc49a8e041`; source pinned at b2cd120e3 (this notebook, heading "Pro question 2026-09-30 learner-locus-round-boundary"); transport Jev headless, effort pill `6 Pro` verified at the send; document sha256 b8d0ffa1…; `send_effect: sent`, attachment seen; no dry run. One pre-send failure under the same key (the DM read the wrong field of the previous operation record for the conversation address — "Cannot navigate to invalid URL"; nothing reached the composer), then the second attempt sent. Operation directory `temp/directions/coupled_host_joint_skills_stage1/scratch/pro-learner-locus-20260930/`; wait armed with the same key. The conversation address stays in the local operation file.
