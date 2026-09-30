@@ -1783,3 +1783,486 @@ positive/adverse/failed evidence, operation claims and B01/B02 canonical evidenc
 No cleanup target, tool blocker, active result producer, unread result or pending B03 review
 remains. Root-authorized source-only next-design work is the next task, with no new
 result-code/query/fit authorization.
+
+<a id="post-b03-source-only-design"></a>
+## 2026-09-30 — Source-only next-question construction after closed B03
+
+Root assigned this continuing question work at19:28UTC to the same DM and original
+independent Astra Max Oracle, `/root/deep_report_review`. B03 remains closed at scientific
+publication `0791f8a25` and cleanup `a749fd6eb`. This entry records prospective source,
+arithmetic and existing-evidence reasoning. It authorizes no new result implementation,
+native/controller/model query, generated world, calibration or fit. Cross-question selection
+remains Root's; a complete independent recommendation and DM disposition follow below.
+
+### Consequential question and inherited constraints
+
+B03 establishes useful selection among complete one-relocation programs. It leaves open
+whether an early relocation can prepare a more valuable later relocation, beyond simply
+allowing the same competent selector a second opportunity. This is an empirical-understanding
+and ordinary-control capability question, not a learning-method claim. The contrasting
+learning question is whether a cheaper learned continuation ranker can preserve complete
+native value after paying for teacher data, fitting and inference. Neither is owed by B03.
+
+I reread current published main `737a50333`, particularly RESEARCH topic3's B01/B02/B03
+[fleet evidence](../../RESEARCH.md#3-marl-增加的是联合行为和信息结构) and topic4's newly
+published [two-lineage native-development losses](../../RESEARCH.md#4-学习理论表示能力和有限训练结果处在不同层面)
+from `711cc0f52`. Topic3 requires the matched ordinary two-opportunity comparator and full
+native outcomes: a larger menu's model maximum is not empirical improvement. It also keeps
+the N4 adverse, B02 startup/quality/path costs, B03 accurately predicted service loss and
+unchanged service tails. Topic4 weakens the premise that a competent starting asset alone
+justifies unrestricted reward continuation. Those N5 losses do not refute learning a new
+N8 ranker; the information, representation and target differ. Conversely, N8's known-model
+positive does not establish learned necessity. Root's separate N5 learning design retains
+its own scope and is not duplicated here.
+
+The original B03 ResearchCritic's complete response above favors a costed approximation/
+amortization candidate, while explicitly calling its data and comparator contract unpriced.
+The next independent review considers that recommendation alongside direct temporal planning,
+exact ordinary reuse, a dynamic host, and a justified stop. No result validity dissent is
+being silently cleared or turned into a mandate for a successor.
+
+### Proposed complete comparison, still subject to Root selection
+
+Keep N8/U50/c10/0dB, static users, free-space radio, H500 and the existing legal public
+report, model and command-history rights. Consider16new common worlds and three complete
+programs,48episodes/24,000native transitions, zero fits/updates, with cyclic arm order:
+
+| Program | t40 decision | t120 decision |
+| --- | --- | --- |
+| T | Original B03 complete-continuation selection; at most one stationary champion per muted member plus C | Ordinary C continues |
+| G2 | The same T choice, valuing each first option followed by C through499 | Recompute the same competent complete selector from the actual new lawful report/history, then C through499 |
+| A2 | Rank the same first menu by its full continuation through a lawful T selection at120 and C thereafter | Recompute T from the actual new report/history, then C through499 |
+
+G2 and A2 have identical two relocation opportunities, sites, commitment durations and
+information rights. Primary A2−G2 asks whether anticipating the later opportunity changes
+useful first choices; G2−T prices the added opportunity. A2−T alone would conflate those
+questions. Nonpositive stationary first champions remain eligible. A2's decline comparator
+is **C through119, then T at120 and C thereafter**, not C forever. Strict full-J improvement
+over that comparator remains necessary to initiate the first option; deterministic service,
+path/duration/member/site tie semantics must be explicit. First-option G2 is in A2's menu,
+so modeled dominance over that finite G2 continuation is a construction property. It is
+not a native improvement theorem.
+
+At most8first candidates and8inner second candidates are priced. The latest first arrival
+is80, leaving ordinary ticks81–119 before the120event:39ticks, not a promised full40ordinary
+ticks or a settling guarantee. The choice of120is a fixed temporal separation, not a tuned
+world-specific trigger. Every actual second decision is fresh, even if it differs from the
+t40forecast. No timing sweep, early favorable-world stop or extra native counterfactual panel
+is implied. Prospective world addresses29497000–29497015 and bootstrap seed29497991
+(10,000paired draws) have no exact integer hits in a source-only text search of
+`docs/research`, `experiments/candidates` and `runs`; no RNG or world was generated. These
+remain provisional pending the complete fixed contract and Root's selection.
+
+### Source feasibility and the nested-state distinction
+
+This is feasible but not two calls to the frozen B03 object. Source inspection shows
+`b03/option.py` embeds460remaining steps and40+L arrival; `b03/surrogate.py` requires a
+controller at next_t40 and simulates from40; inherited `b02/controller.py` indexes committed
+commands relative to40. A new direction-owned executor would parameterize start/remaining
+horizon and relative command offsets while preserving frozen T. At120the expired first
+plan is replaced; actual controller clock, issued commands and lawful state history survive.
+
+For each t40first candidate, the outer model advances its physical coordinates and C history
+through119. Its t120report must use the actual FP32 public codec. Inner T then starts from
+that **decoded report**, with the lawful copied controller history, and selects its second
+option. The outer model executes only that selected option from its own existing, unrounded
+physical coordinates/history. It must not substitute inner decoded coordinates for its
+physical state or expose hidden outer coordinates to inner scoring. Hence each first
+candidate pays an outer post120suffix in addition to its inner candidate suffixes unless
+exact identity reuse is separately established. Outer total-J/service/path accumulators
+consume ticks in their original order; separately summed blocks cannot silently replace the
+existing scalar accumulation. The full reader must verify this distinction and the actual
+second replanning, not only the local maxima.
+
+### Independently checked uncompressed cost
+
+The following are source-derived conservative state/mask **request ceilings**, not measured
+runtime or unique scored-candidate counts. All original menu/transit work is paid. Let
+`B=1+7*100*128=89,601` be one original stationary bank. An ordinary full native episode
+is bounded by`500*216+50*255=120,750`requests. Modeled reward adds one request per tick.
+
+| Model component | Stay | Initiated option ceiling | Full8-candidate bank |
+| --- | ---: | ---: | ---: |
+| t40–499 |111,550|108,792|873,094|
+| t120–499 |92,150|89,392|717,894|
+| Outer t40–119 prefix |19,400|16,642|135,894|
+
+The option ceiling uses the minimum10tick transit, its arrival query and the remaining
+ordinary decisions; the full native bound deliberately does not subtract suppressed C work.
+
+| Complete program | Requests/world |
+| --- | ---: |
+| T: `120750+B+128+873094` |1,083,573|
+| G2: `120750+2*(B+128)+873094+717894` |1,891,196|
+| A2: `120750+2*(B+128)+135894+8*(B+717894+92150)+717894` |8,351,156|
+
+The16world total is**181,214,800requests**,**663,040physical-model transitions** and
+**5,824,000original candidate-transit ticks**, plus the24,000native transitions and
+native physics. Reader reconstruction pays additional work of comparable scope; native
+physics, reports, serialization, imports/support and ordinary position-prediction work are
+not erased by calling this zero-fit. Applying B03's combined worker/reader CPU per worker
+request gives approximately**4.085CPU hours** for this ceiling, not a runtime guarantee.
+Provisional implementation/checking is5–8hours plus2–3independent engineering-review hours,
+**7–11labor hours**, unmetered estimates rather than a fitted timing model or a fit allowance.
+Scientific reading/publication and support remain additional.
+
+Existing B03 raw comprises22,315,248bytes of model arrays/traces for34,040ticks,
+1,858,048bytes of5,800stationary candidate rows, and20,621,812bytes of native/other raw.
+Scaling those components to this ceiling gives about502MB; scaling all44.8MB by the model
+tick ratio gives873MB. Plan roughly**0.5–1.0GBcanonical raw**, with1–2GiBoutput/scratch
+headroom plus one accepted source snapshot (about1.6GBin B03). These extrapolate existing
+NPZ/gzip storage, without computational cycle reuse, and are not hard byte bounds. Stream
+one outer prefix and one inner/selected outer suffix at a time, serializing completed
+branches and retaining only summaries/plans/identities. With that explicit design, B03's
+346.64MiBmeasured peak suggests roughly0.35–0.75GiBplanning peak and a1GiBadmission
+allowance; actual implementation, fresh-node admission and measured RSS would decide.
+Keeping the entire nested tree in RAM is outside this estimate. Worker and full reader
+run sequentially. No fresh-node admission is needed for this source-only reasoning.
+
+### Competing purchases and changed efficiency premise
+
+The Oracle inspected all74**saved** B03 model traces, with no new controller/model/native
+query. It reports exact full-state recurrence at period40after the last nonordinary event,
+first witnessed at81–142, and matching saved actions/masks/positions/estimates/rewards in
+every remaining repeat. Its avoidable-tail accounting is28,963/34,040model ticks and
+7,006,621/7,916,026model requests. This is an existing-artifact reading, not an implemented
+or measured speedup, and does not establish recurrence on a new second-option tail.
+
+The source supports an exact-reuse route: key model physical positions, controller estimated
+positions/users, previous issued commands, entering mask, phase modulo40and fixed user-report
+bits/source. Use it only after a commitment ends and stop at the next scheduled selection;
+t120is a barrier. Report time fields and next_t still advance. Per-tick scalar accumulation
+order must be preserved rather than multiplying a cycle sum. Physical stationarity alone is
+insufficient because issued commands and estimates remain state. A new reviewed certificate
+could verify the preperiod and repeated full-state period, reconstructing logical trajectories
+while separating logical from actually computed work. That engineering is estimated at an
+additional4–7hours and is neither already done nor an obligatory precursor to the temporal
+question. It is a substantive ordinary comparator for any later **efficiency** claim.
+
+A learned ranker retaining the original champions still pays up to89,601online bank requests.
+Lawful data may include the actual133FP32public-report values, entering mask, issued commands/
+copied C history and original candidate descriptors; world IDs, hidden double coordinates
+and future native labels are not inputs. Teacher labels are model predictions for complete
+programs, not native counterfactuals. Acquisition alone costs at most972,355requests,
+40native prefix transitions,3,680model transitions and28,000candidate-transit ticks/context.
+At128contexts this is124,461,440requests/5,120native steps/471,040model steps/3,584,000transit
+ticks, about2.806combined CPU hours at the same crude B03 rate, before learner fitting and
+fresh complete evaluation. A source-only acquisition adaptation is estimated at4–7engineering/
+review hours; architecture, fit count and evaluation cost remain unselected and unpriced.
+This concrete bill and the exact-reuse alternative weaken learning-as-necessary-compression,
+without empirically rejecting a learned ranker or requiring an ordinary-compression pilot.
+
+The reused read-only Scout also mapped a different, already exercised host: native S7-S4
+`energy_relay_availability` has N8/U30RPGM users at8m/s and clusters at10m/s, energy/failures,
+30step replanning and pooled legal observations for H_local. I read its original B01
+information contract and`configuration.py` directly. Hidden waypoints/velocities are not
+granted by that local contract; mobility and faults share RNG, so equal seeds are not exact
+counterfactual path replay. Original evidence is
+`runs/energy_relay_availability/b01_s4_refs_a01/` and its direction notebook. S7-S2 is another
+historical3m/s/H3000host with separate learned/adverse evidence. Both are closed/reserve
+and historically owned, not permission to extend another direction. The existing
+`uav_env.py`3gpp-36777sampler draws LOS/NLOS and optional4/8dBshadowing, with focused
+cache/RNG tests; actual radio-policy studies used free-space. This bounded map establishes
+neither a validated stochastic-radio actor contract, a calibrated learned transition model,
+nor useful predictability from history. A dynamic/uncertain host would be a cross-question
+proposal for Root and would need its own lawful information and complete comparator design.
+
+<a id="b04-original-independent-recommendation"></a>
+### Complete original independent Oracle recommendation
+
+The following is the complete original final from `/root/deep_report_review`, received
+through the native task tree. It preserves the allocation dissent rather than blending it
+into the earlier result critic's different recommendation.
+
+I recommend **one bounded T/G2/A2 study of anticipation across two relocation opportunities**, retaining B03’s T, R and C capabilities. Use the uncompressed evaluator for this first study: **48 fresh H500 episodes, 24,000 native steps, zero fits**, with an estimated **4.1 combined worker–reader CPU-hours and 7–11 engineering/check/review hours**.
+
+The question is whether anticipating a later relocation changes the useful first relocation—not merely whether allowing another relocation improves performance. Exact tail reuse is feasible and now has strong saved-evidence support, but its additional engineering need not become a prerequisite. CAL/CONT’s separate selection does not determine this N8 investment.
+
+This follow-up was conducted separately from the DM’s conversation, but was not blind: Root supplied result headlines, and I retain earlier advice. I reconstructed the new outputs before reading the DM’s interpretation, then read and reused the complete original B03 ResearchCritic. I made no controller, model, actor or native query, fit, implementation or launch.
+
+**B03 establishes a useful finite capability, with clear limits.**
+
+The source-bound [configuration](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a02/config.json), [summary](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a02/summary.json) and [reading](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a02/reading.json) support:
+
+| Complete T−R contrast | Observation |
+|---|---:|
+| Mean J | +.007400167; descriptive interval [.001879057, .014256967] |
+| Mean service | +.558625 users/tick; [.148197, 1.038134] |
+| Mean path per UAV | +22.486 m; [3.144, 45.809] |
+| Mean quality | −.001388; interval crosses zero |
+| Changed physical programs | 9/16: nine positive J contrasts |
+| Identical programs | 7/16 |
+| Initiation decisions | Identical: 13 initiate, three decline |
+| Service fifth percentile and minimum | Identical in every world |
+
+The strongest positive is more than forecast improvement: continuation scoring changed executed choices and improved complete native outcomes. In world `29326002`, stationary scoring preferred R’s option, but complete scoring reversed the ranking; T subsequently gained .045294 J and 2.720 users/tick over R. Resumed C actually reduced R’s value relative to its stationary arrival forecast there. Thus “ordinary resumption adds value” is insufficient as a general explanation; its consequences depend on the selected program.
+
+The adverse evidence is equally consequential. In world `29326011`, T gained only .000014853 J, lost .008 service and added 90.83 m/UAV. The model accurately predicted that tradeoff. World `29326012` gained service while losing .02687 quality and adding 145.64 m/UAV. Native J prices height, not travel energy.
+
+All 48 executed C/R/T suffixes matched their model’s commands, masks and per-tick service; maximum remaining-total-J error was approximately \(1.92\times10^{-6}\). However, the 74 modeled branches contain **38 distinct executed programs and 36 unexecuted forecasts**. Those forecasts are not native counterfactual labels.
+
+The measured study cost was 1,222.45 worker–reader CPU-seconds, 15,062,360 worker score requests and 44.8 MB of raw evidence. T’s measured episode CPU was 4.02 times R’s, including branch recording. A01 failed before result queries; its support costs remain incurred. Across B01–B03, the record contains 256 result episodes, 128,000 native steps and 6,243.41 measured worker–reader CPU-seconds, plus inherited and incompletely metered costs.
+
+I agree with closing B03 and retaining its conditional capability. Neither unchanged replication nor automatic expansion follows from its positive result.
+
+**A new saved-data finding changes the efficiency comparison.**
+
+I inspected all 74 saved model trajectories and decision traces for exact recurrence after their last option event. The recurrence key included:
+
+- Model-physical positions.
+- C’s estimated positions and its static decoded users.
+- Previously issued commands, including commands preserved by clipping.
+- Entering transmission mask.
+- The joint clock phase, \(t\bmod40\).
+- Fixed public-user bits, source and completed-event conditions.
+
+All 74 branches repeated at period 40, first certified between absolute ticks 81 and 142. I verified the remaining saved positions, estimates, actions, masks and rewards **bitwise**, including terminal physical and estimated positions.
+
+The source explains why this matters. After option events finish, C uses time through its eight-member rotation and ten-tick report clock. It ignores the report’s time fraction. A repeated full state therefore permits exact reuse until a future scheduled event or the horizon.
+
+On these existing traces, reuse could avoid:
+
+| Saved logical work | Potentially avoidable after the first certified repeat |
+|---|---:|
+| Model-physical ticks | 28,963 / 34,040: **85.1%** |
+| Model state/mask requests | 7,006,621 / 7,916,026: **88.5%** |
+
+This would leave approximately 3.52 million T requests versus R’s 2.60 million, **not a measured runtime ratio**. Serialization, recurrence detection, reconstruction and other costs remain.
+
+No optimized executable or new speed measurement exists. Recurrence on B03 does not guarantee recurrence equally early after newly coupled choices. Nevertheless, the ordinary alternative is now concrete. The measured 4.02× CPU premium cannot be treated as an irreducible economic argument for learning.
+
+**The proposed scientific object is temporal complementarity between committed relocations.**
+
+Suppose the fleet can schedule a relocation at t40 and another at t120. A first relocation may change which later relocation is useful through coverage, interference, assignment and the intervening C response.
+
+Conceptually, the first-option comparison changes from
+
+\[
+Q_C(p)=\text{return through t119}+V_C(x_{120}^{p})
+\]
+
+to
+
+\[
+Q_T(p)=\text{return through t119}+V_{\text{T at120, then C}}(x_{120}^{p}).
+\]
+
+If the second opportunity contributes essentially the same increment across first options, ordinary greedy replanning should suffice. If that increment varies enough to reverse their ordering, anticipation can matter.
+
+This is a familiar rollout construction, not a new planning theorem. Multiagent rollout and POMDP rollout provide the relevant bridge: evaluate current choices using a specified future policy, and distinguish exact-model improvement arguments from finite approximation. [Bertsekas](https://arxiv.org/html/1910.00120v3), [Bhattacharya et al.](https://arxiv.org/html/2011.04222).
+
+The local sources reinforce its limits:
+
+- Foundation **B03**, §8.2, treats macro behavior, termination and elapsed primitive rewards; it does not guarantee this UAV construction. I used its [catalog identity](/home/fires/hmasd-wsl/docs/new-libs/corpus/papers/B03/metadata.json) and the [author’s primary PDF](https://www.fransoliehoek.net/docs/OliehoekAmato16book.pdf).
+- **MARL-0016**, *Models as Agents*, connects model error and changed policies; its assumptions do not establish accuracy for these nested continuations. [Primary JSON](/home/fires/projects/Inst-sci/papers/MyLib/json/MARL-0016.json), [PDF](/home/fires/projects/Inst-sci/papers/MyLib/pdf/MARL-0016.pdf).
+- My-lib’s **iclr-2024-d74e6bfe9ce029526e69db14d2c281ec**, *Efficient Multi-agent Reinforcement Learning by Planning*, supplies a planning-and-learning antecedent, while explicitly confronting model generalization with depth. It supplies no reason to replace an adequate analytic model here. [Primary PDF](/mnt/c/Projects/My-lib/.local-formal-capture/corpus/papers/iclr-2024/d74e6bfe9ce029526e69db14d2c281ec/arxiv-2405.11778.pdf).
+
+I checked all three library indexes and the relevant primary passages. The [July opportunity-contract review](/home/fires/hmasd-wsl/docs/external-review/rounds/20260720_supplied_executor_opportunity_contract/21_PRO_OPEN_RAW.md) also cautions against treating a restricted myopic frontier as an opportunity bound. The [G48 result](/home/fires/hmasd-wsl/docs/research/cdc/EVIDENCE_NOTES/20260729_G31_REALIZED_SUCCESSOR_CHANNEL_ATTRIBUTION_G48_FORMAL_RESULT.md) concerns its finite credit intervention, not a general rejection of temporal control. None establishes novelty or predicts a positive A2 result.
+
+**The complete comparison should be:**
+
+| Program | First decision at t40 | Second decision at t120 |
+|---|---|---|
+| **T** | Existing complete-continuation selector | Continue C |
+| **G2** | Same choice as T, valuing continuation under C | Recompute the complete selector from the actual lawful report/history |
+| **A2** | Value each first option under its resulting t120 selector and subsequent C | Recompute that same selector from the actual lawful report/history |
+
+The primary contrast is **A2−G2**. Secondary contrasts are **G2−T** and **A2−T**. G2 receives the same additional opportunity as A2, separating its benefit from anticipation.
+
+Freeze these details prospectively:
+
+- Preserve N8/U50, H500, the existing radio/objective law, public reports every ten ticks, primitive commands, site construction and arrival-mask rule.
+- At each decision retain C/stay and one stationary champion per currently muted member. At t120, stationary valuation uses the remaining **380** ticks. Retain nonpositive stationary champions.
+- Commitments retain durations 10/20/30/40, hold other members’ commands at zero during transit, preserve the entering mask, perform the existing arrival choice and then resume C.
+- A2’s **stay-first comparator includes T at120**. It is not C forever.
+- Rank by complete modeled remaining J, service, then the existing first-option path/duration/member/site order. Require strict J improvement over stay-first; equal J declines.
+- The latest first arrival is t80, leaving ordinary ticks **81–119** before the second opportunity. This is 39 ticks, with no settling assumption.
+- Use 16 fresh paired worlds and cyclic T/G2/A2 execution order. Proposed addresses are `29497000–29497015`, with 10,000 paired bootstrap draws using `29497991`. Both repository checks found no exact existing integer use; no worlds or RNG values were drawn.
+
+The numerical distinction inside A2 matters. At modeled t120, the inner selector receives the newly encoded FP32 report and begins its own search from decoded coordinates. After it chooses an option, **only that option** returns to the outer simulation. The outer simulation continues from its existing physical coordinates and controller history. It must not reset its physical state to the inner model’s coordinates or give those unrounded coordinates to the inner selector.
+
+At actual t120, both G2 and A2 replan from their actual reports. Predicted and actual second choices may differ. Accumulate outer rewards in original tick order; do not add separately summarized prefix and suffix blocks.
+
+G2’s first choice is present in A2’s menu. Consequently, modeled A2≥modeled G2 is a construction property under the specified evaluator. **Fresh complete native benefit remains the empirical question.**
+
+**The exposure and reading must preserve that distinction.**
+
+Record both opportunities, entering masks, eligibility, complete stationary candidate rows and physical aliases, retained champions, modeled rankings, strict-decline decisions, commitments and executed masks/commands. For A2, retain each first option’s predicted second selection and the actual second selection.
+
+Read changed **first physical programs**, not merely different identifiers. G2 and T must agree through t119; all programs share the initial t0–39 history. Model errors should be checked against executed continuations, while unexecuted alternatives remain forecasts.
+
+The endpoint is complete H500 native J over all 16 worlds. Read service, quality, service fifth percentile/minimum, zero-service behavior, travel and computation alongside it. The common startup remains charged; subsequent interventions can still worsen service tails.
+
+| Outcome | Consequence |
+|---|---|
+| A2 improves over both G2 and T, with changed first choices and acceptable secondary costs | Retain conditional evidence for useful anticipation; no optimality, learning or automatic confirmation claim |
+| G2 improves over T, while A2 adds little | Retain the cheaper two-opportunity program; decline deeper anticipation without a new reason |
+| A2 beats G2 but does not improve T | Preserve the anticipation contrast, but do not adopt it as a mission upgrade |
+| Choices mostly coincide | Record sparse exposure; neither opportunity exhaustion nor an automatic larger panel follows |
+| Active A2 changes are adverse | Retain the supported reference and stop this finite package; no repair is owed |
+| Technical invalidity | Preserve failure and cost; make no scientific negative claim |
+
+Intervals remain descriptive conditional world intervals. No training replication is purchased because there are no fits.
+
+**The full uncompressed bill is bounded at the request level, with runtime and engineering estimates kept separate.**
+
+The DM independently checked the source arithmetic:
+
+| Work | Prospective amount |
+|---|---:|
+| Complete native evaluation | **48 episodes / 24,000 steps** |
+| Fits / parameter updates | **0 / 0** |
+| T worker requests, all worlds | ≤17,337,168 |
+| G2 worker requests, all worlds | ≤30,259,136 |
+| A2 worker requests, all worlds | ≤133,618,496 |
+| **Total worker state/mask requests** | **≤181,214,800** |
+| Complete-model physical ticks | ≤663,040 |
+| Separate stationary-candidate transit ticks | ≤5,824,000 |
+| Stationary candidate rows | ≤145,600 |
+| Worker plus full-reader CPU | **Approximately 4.085 hours** |
+| Implementation, checks and independent review | **Approximately 7–11 hours** |
+| Canonical raw evidence | Approximately 0.5–1.0 GB |
+| Peak process RSS, assuming streamed branches | Approximately 0.35–0.75 GiB |
+
+The CPU estimate extrapolates B03’s combined rate; it is not a runtime guarantee. Native physics, reconstruction, imports, storage and support remain charged. The reader separately reconstructs the complete branches and native outputs; its work is included in the CPU estimate, not hidden as free verification.
+
+Storage estimates use B03’s measured model, candidate and native-record sizes. Allow 1–2 GiB for output/scratch plus one accepted source snapshot. Stream nested branches; retaining the whole tree in RAM falls outside the estimate. Actual node admission remains required.
+
+The main implementation gap is real but bounded: frozen B03 embeds t40, 460 remaining ticks and `commands[t−40]`. A new owned executor must parameterize decision start, remaining horizon and plan-relative indexing while preserving T’s meaning. Both new programs must replace their expired first commitment before t120. No hard host-interface blocker was found.
+
+Exact tail reuse could be incorporated prospectively into all three programs without changing their choices, provided it:
+
+- Certifies the complete recurring state.
+- Stops at scheduled selections and unfinished commitment/arrival barriers.
+- Advances the absolute clock and regenerates report time fields.
+- Preserves per-tick floating accumulation and tie semantics.
+- Separately reports logical work, actually computed work and reuse.
+- Preserves a complete, independently checked reader.
+
+The DM estimates **another 4–7 engineering/review hours** for reuse and its certificate. For this single study, I do not recommend making that additional investment compulsory. The temporal question must justify its uncompressed bill. Reuse becomes a stronger practical purchase if subsequent repeated use warrants it.
+
+**I considered the original critic’s approximation preference as a real alternative.**
+
+Its strongest cheap version need not acquire 128 new teacher contexts. It could reuse the already-paid 74 model labels across **16 worlds**, fit a small residual predictor or ranker, and evaluate fresh R/T/learned trajectories. Those are 16 independent contexts, not 74 native labels.
+
+For scale, a fresh 16-world R/T/one-candidate panel has a worker ceiling of **24,072,496 requests**, approximately **0.54 combined CPU-hours before fitting and support**. That is substantially cheaper than the temporal study. Learner features, fitting, optimization and their engineering cost remain unselected; this is not a launch-ready protocol.
+
+If fresh acquisition were chosen, 128 C prefixes plus exact T labels would instead cost 5,120 native prefix steps, up to 124,461,440 requests and approximately 2.806 combined CPU-hours before final evaluation and fitting. That is an optional design choice, **not a minimum-data gate**. A champion ranker also continues paying up to 89,601 requests to construct its original menu at deployment.
+
+Learning could still use experience to avoid computation on previously unseen transient states. Exact recurrence does not eliminate that possibility. But its efficiency reference must account for competent exact reuse; an additional identical native arm is unnecessary merely to compare implementation costs.
+
+My preference for T/G2/A2 is therefore a choice of scientific object, not a claim that learning is too expensive or requires a deadline. B03 demonstrated that the value of future control can reverse present choices. The proposed study asks whether **the future decision opportunity itself** changes the correct first choice, with a matched ordinary comparator. Compressing the already-demonstrated single-opportunity decision is useful chiefly as an efficiency question whose ordinary cost reference has now improved substantially.
+
+My direct checks covered the source bindings, compact contrasts, consequential positive/adverse model-versus-native evidence, selector/executor semantics and all 74 saved recurrence traces. I reused the original critic’s broader artifact, candidate and bootstrap reconstruction. I did not rerun physics, scores or training, and no prospective performance, timing or recurrence on the new tails has been measured.
+
+**MATERIAL_DISSENT: yes — on the next N8 investment only.** I recommend the costed temporal-complementarity study over the original result critic’s conditional priority for approximation/amortization. The direct reasons are B03’s demonstrated decision reversals, the matched G2 comparison and the newly established ordinary exact-reuse opportunity. There is no dissent on B03 validity, closure or retention. Root should preserve and resolve this allocation difference; this recommendation does not authorize a run.
+
+<a id="b04-temporal-design"></a>
+### DM response, Root resolution and fixed B04 contract
+
+I read the whole original recommendation and retain both advisers' allocation preferences.
+I accept the temporal question's distinct knowledge purchase: whether making a later
+decision part of the first option's value improves the actual first commitment under the
+same two opportunities. The ordinary G2 comparison and full H500 outcomes are essential.
+I do not infer a learning impossibility, an exhausted one-opportunity task or native
+dominance from finite model maximization. My earlier128context acquisition price is only
+one possible learning bill; it is not a minimum-data or deadline prerequisite. The cheaper
+reuse of74paid model labels/16contexts remains a legitimate unselected alternative.
+
+I independently read Bertsekas(1910.00120v3)§1.1/§2 and Bhattacharya et al.(2011.04222)§3–5
+at their primary links above. They support the conceptual use of a specified base policy's
+future return and acknowledge approximate rollout/policy approximation. Their state/belief,
+evaluation and improvement assumptions are not automatically satisfied by nested rounded
+reports and native execution here. This study is neither their improvement theorem nor a
+new rollout-method claim. The Oracle's three-library and July readings remain attributed
+to that independent review; no novelty verdict or new literature-driven admission gate is
+introduced.
+
+Root explicitly resolved the material allocation dissent in favor of **this one uncompressed
+T/G2/A2 study**, preserving the original critic's approximation preference and the cheap
+label-reuse alternative. Its accepted scope is48H500episodes/24,000native steps/0fits,
+the181,214,800worker-request and663,040model-tick ceilings, approximately4.085combined
+CPU hours and7–11implementation/check/review hours. Root excludes the optional4–7hour
+cycle-reuse implementation. This selects B04 within the existing question; it does not
+reopen B03 or authorize another result batch, fit, sweep, favorable-world stop or retry.
+The independent scientific review and Root's explicit resolution cover this selection.
+Another Pro or scientific selection round would add no identified distinct question.
+
+Freeze the Oracle's complete comparison and readings above with first decision40, second120,
+H500,16worlds29497000–29497015, and10,000paired bootstrap resamples using29497991.
+World generation uses a distinct fixed SeedSequence namespace`[260930,97,world_id,stream,*suffix]`,
+with user/UAV/runtime streams1/2/3and runtime suffix8, retaining the existing uniform
+N8/U50initial-array construction. Committed initial arrays and hashes will bind the exact
+panel before result execution; they are generated once without controller evaluation or
+world selection. Arms cycle T/G2/A2 by world index. No additional holdout/confirmation is
+selected. Primary is complete meanJ(A2−G2), with G2−T and A2−T secondary and all16paired
+worlds retained. Report every native reward component, servicep05/minimum/zero-service
+behavior and path/UAV, actual physical first/second choices, predictions, model/native errors,
+candidate/query/transition work, CPU/wall/RSS and all adverse worlds. Descriptive intervals
+do not become adoption thresholds. The prospective prediction is a changed first physical
+commitment on at least one world and positive complete meanJ(A2−G2); each component can fail.
+All fixed outcomes, including no changed choices, run to the same complete endpoint.
+
+Rank each complete model candidate by total remaining J, total served, then the original
+**first option's** stationary path, duration, member and site with their existing negative
+tie keys; decline on J equality with the complete stay-first program even if service differs.
+The second selector applies the original T convention to its own current menu and380tick
+remaining horizon. No all-site complete search, altered candidate shortlist, new physical
+information, cycle compression or learned model is included. Maintain original FP32 report
+bits and issued commands, float64 model positions/reward reductions, scalar tick-order
+accumulation and frozen native physics. A2 forecasts an actual lawful future selector and
+then executes only its chosen option in the outer physical model; both native arms replan
+at their actual120report regardless of the forecast.
+
+Root preserves the accepted real-deadline resource windows. Its later explicit resource
+message reports parent B05 worker plus full reader terminal/VERIFIED at20:06:39.448902UTC
+with native processes absent, releasing configured local_linux; waiting still owns the
+remote window. B04 may use local after source publication/review and fresh actual admission,
+sharing with untimed single-thread CAL/CONT if actual resources allow. Prefer configured
+remote if both windows are free and suitable at admission. This is a node-selection
+constraint, not permission to disturb either accepted process or migrate a launch.
+
+### L0 — bounded B04 implementation, checks, acceptance and stop
+
+Deliver the selected fixed two-opportunity program and full worker/reader chain under
+`experiments/candidates/uav_fleet_transmission/b04/`, with matching tests under
+`tests/experiments/candidates/uav_fleet_transmission/b04/` and fixed run outputs under
+`runs/uav_fleet_transmission/b04_temporal_complementarity_a01/`. Preserve all B01–B03
+executables, sources, claims and evidence. Reuse frozen ordinary control/radio/physics,
+public codec, candidate primitives and artifact conventions; only the parameterized
+decision-time executor, nested selection, fixed host binding and complete new reading are
+new. The runner entry is `python -m experiments.candidates.uav_fleet_transmission.b04.run`;
+its standard source/seed/out arguments reject changes to this declared panel. It requires
+runner-side admission before scientific effects, runs one worker then its full reader,
+and preserves partial artifacts on failure. Use one CPU thread, no new learner or native
+backend, and no result profiling/pilot/world screening.
+
+The bounded Implementer task is the scientific state machine: new`option.py`,
+`surrogate.py`and`controller.py`plus focused`test_temporal.py`under the B04paths. The DM
+owns host/world bindings, runner, storage, reader, other tests and all records. The helper
+has no Git index/commit/publication authority, no result launch, no notebook writes and
+no children. Both write the existing shared main with disjoint paths; preserve all other
+sessions' edits. Final acceptance remains the DM's after diff/check reading and independent
+engineering review of the complete high-risk executable change.
+
+Checks cover unchanged T, complete T/G2prefix through119, the scheduled40/120clocks,
+expired-plan replacement, nonpositive champions, strict stay-first ties, empty eligible
+sets, candidate/physical aliases, FP32 report versus outer-physical state separation, fresh
+actual120replanning, all stage/branch identities and scalar accumulation. Synthetic small
+fixtures and test doubles may check branch arithmetic without policy-quality evidence.
+Separately declared real correctness exposure is capped at256constructed native transitions
+and corresponding shortened ordinary/model checks; no prospective result worlds or complete
+result-policy episode may be used as a prelaunch test. Account actual correctness work.
+Reader tests must reject dropped/reordered/tampered inner/outer branches, candidates,
+source bindings and native outputs. The complete result reader recomputes every charged
+model branch and all native physics/observations/actions from saved inputs; unexecuted
+branches remain forecasts. Preserve the original T reference independently in its arm and
+verify G2first semantics against its same-world native prefix, without adding an undeclared
+full shadow-result panel.
+
+Stop and return a material source contradiction, impossible law/cost contract or unresolved
+scientific objection to Root. Ordinary implementation defects are corrected within this
+scope and receive relevant checks/review; no extra result exposure follows automatically.
+Commit/publish exact inputs before fresh-node admission. After one accepted worker/reader
+operation, arm deterministic same-handle observation and keep this native DM active through
+collection, complete reading, independent result criticism, publication and measured cleanup.
