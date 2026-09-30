@@ -4219,3 +4219,252 @@ correctly; this was my prose error, not a failed reader or changed result.
 CAL therefore also has a concrete zero-total-service adverse beyond S here.
 Retain this correction with every later tail interpretation. No additional
 model query, episode or reader was performed.
+
+
+<a id="b05-final-cleanup"></a>
+### B05 verified retirement — one canonical evidence copy retained
+
+Useful source/tests were published at2e22a2ccf and the compact complete
+reading/exit at25fce29b3; the explicit zero-service prose correction is57cacccc8.
+The scientific reviewer completed its reads of both staged original-S inputs.
+The original worker/reader are terminal and the observer is stopped with no
+pending event. Fresh remote SHA256 checks still match both canonical S files.
+The source collector's exact-target preview was eligible: terminal native
+identities absent, no live process reference, clean snapshot, outputs outside
+it and source reachable from main. Under the shared writer lock, the maintained
+collector applied its terminal-snapshot path with `--sudo-process-scan` (only
+the protected `/proc` inspection uses read-only sudo).
+
+Deleted targets and measured allocated bytes before→after:
+
+| Exact target relative to repository | Before bytes | After bytes |
+|---|---:|---:|
+| `.git/hmasd-launch-sources/45f17bf37d8a40b0ad39379a066cc2ec` | 1724207104 | 0 |
+| `.git/worktrees/45f17bf37d8a40b0ad39379a066cc2ec` | 3559424 | 0 |
+| `temp/directions/uav_fleet_adaptation` | 868352 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/__pycache__` | 8192 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b02/__pycache__` | 98304 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b04_native_development/__pycache__` | 81920 | 0 |
+| `experiments/candidates/uav_fleet_adaptation/b05_native_consequence/__pycache__` | 122880 | 0 |
+| `tests/experiments/candidates/uav_fleet_adaptation/b05_native_consequence/__pycache__` | 73728 | 0 |
+
+Each scratch/cache target had no tracked content or process reference before
+removal. Scratch held only the two now-redundant local S copies, consumed wait
+request and pre-launch memory observation; authoritative runner admission
+remains in the run. All eight targets are absent. B05 net allocated bytes
+reclaimed are **1729019904** (1727766528 snapshot/admin plus1253376 scratch/
+caches). Prior B01–B04 retirement reclaimed5839450112bytes separately;
+cumulative measured deletion is7568470016bytes. No tarball, moved retention,
+backup chain or full-tree copy was created. No tool blocker or target leftover
+remains. All4448 unique raw trajectories, both datasets, four head/Adam assets,
+complete update traces, original bulk summary, published reading and native
+records remain in the one canonical run directory. The two original S assets
+remain at their verified remote canonical paths. Useful fixed code/tests and
+still-imported B02/B04 modules remain for the retained result; another
+operation's inputs and N8 consumer were not touched.
+
+
+<a id="b05-original-independent-result-review"></a>
+### B05 original independent scientific result review — 2026-09-30
+
+The registered `hmasd-research-critic`, native child
+`/root/dm_fleet_adaptation/b05_result_review`, used a separate context without
+inherited DM/Root conversation. It returned the following complete answer at
+2026-09-30T21:21:54.546715Z. Its wording is retained without replacement by my
+summary; my response follows. Its original assignment supplied the actual
+question, frozen contract and original supporting/adverse evidence, and asked
+for an independent diagnosis before reading my result explanation.
+
+> **Recommend retaining both original S assets and ending this exact B05 CAL/CONT recipe.** The heads learned the sampled objective and changed physical behavior, but neither established additional complete native value. I support the DM’s proposed stop without automatic refitting, additional labels, calibration, or confirmation. The broader native-development question remains open.
+>
+> I received no inherited DM/Root conversation. I recorded my provisional diagnosis before reading the original B05 recommendation, B04 interpretation, and newly published B05 result explanation. The frozen design itself included pre-result selection rationale, so this was an independent-context review, not a blinded review.
+>
+> The comparison remains bound to design commit `a5073c72`, scientific source `2e22a2cc`, and the original [complete reading](/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b05_native_consequence_a01/reading.json). I verified that the current frozen design matches the published selection contract.
+>
+> **The native result supports retention, not replacement.**
+>
+> | Mean native J | L0 | L1 |
+> |---|---:|---:|
+> | C | .326612 | .332437 |
+> | Q | .357172 | .373866 |
+> | Unchanged S | .380706 | .401578 |
+> | Previously paid B* | .382841 | .401578 |
+> | CAL | .381390 | .394629 |
+> | CONT | .375571 | .396080 |
+>
+> The consequential paired contrasts are:
+>
+> | J contrast | L0 mean [conditional t95] | L1 mean [conditional t95] |
+> |---|---|---|
+> | CONT−S | −.005135 [−.021858, +.011589] | −.005498 [−.018206, +.007211] |
+> | CONT−CAL | −.005819 [−.018043, +.006404] | +.001451 [−.013173, +.016075] |
+> | CONT−B* | −.007269 [−.024725, +.010186] | −.005498 [−.018206, +.007211] |
+> | CAL−S | +.000684 [−.014937, +.016306] | −.006949 [−.016153, +.002255] |
+> | S−Q | +.023534 [+.006811, +.040257] | +.027712 [+.009724, +.045700] |
+>
+> These intervals describe paired-world variation conditional on each fitted endpoint. There are two fitted lineage outcomes per head program, not 64 independent training replications. The uncertain contrasts establish neither population harm nor equivalence.
+>
+> CAL is the consequential ordinary comparator: it receives the same native labels, contexts, minibatch sequence, update count, and bounded correction authority. CONT’s larger function class does not consistently improve on it. Neither head’s favorable comparison against C/Q establishes added learning, because unchanged S already supplies that capability.
+>
+> B* also remains an uncertain tradeoff. L0’s +.002135 J over S accompanies −.640625 temporal service-p10 and +1,419.226 m/UAV travel; L1 B* is S by exact identity. There is no demonstrated default temperature upgrade.
+>
+> **The intervention was active, with important positive and adverse outcomes.**
+>
+> CONT changes physical four-tick paths relative to same-history, same-uniform S shadows on **499/10,240 and 436/10,240 decisions**—4.873% and 4.258%. CAL changes 364 and 264. Every head changes physical decisions in every final world. These are modest but real perturbations; failed loading, wholly inactive updates, or action aliases do not explain away the comparison.
+>
+> CONT−S mean service changes are −.349731/−.379150 users per tick; temporal service-p10 changes are +.015625/−.484375; mean episode minima change −.250000/−.125000. Mean travel falls approximately 97 m/UAV in each lineage. CONT−CAL temporal p10 falls .703125/.609375. That small travel reduction is a potential tradeoff, but no physical utility or deployment requirement prices it here.
+>
+> Both CONT endpoints win 17 and lose 15 J worlds. Consequential witnesses include:
+>
+> - L0 world `29481131`: CONT−S loses .112368 J, 7.644531 mean service, and 6.5 p10 users. Against B*, it loses .210862 J and 17 p10 users.
+> - L1 world `29483102`: CONT−S loses .111252 J and 7.859375 mean service.
+> - L0 world `29481125`: CONT gains .132992 J and 10 p10 users over S, while adding 2,093.014 m/UAV. CAL achieves almost the same gain, so this example does not select contextual conditioning.
+> - L1 world `29483116`: CONT gains .063370 J, 4.0625 mean service, and 3 p10 users while reducing travel by 1,938.726 m/UAV.
+>
+> These positives preserve useful possibilities. They provide no prospective selector for the favorable worlds or actions.
+>
+> **One factual correction to the DM’s published prose is required and has been accepted.** The statement that no final arm has zero-total-service ticks is false. In L1 world `29483104`, raw connections and rewards show:
+>
+> - S: zero service at ticks **0 and 6**.
+> - CAL: zero service at ticks **0, 3, 4, and 5**.
+> - C/Q/CONT: no zero-service ticks.
+> - B*1 inherits S’s two ticks by identity, without another episode.
+>
+> The original summary and reader already preserve these facts correctly. This changes the tail account without changing the stop/retain decision or introducing a retrospective adoption gate. No individual-user continuity claim follows from these team-service measurements.
+>
+> **The supported learning diagnosis is a gap between fitting the sampled local-consequence objective and obtaining complete fleet benefit.**
+>
+> Acquisition produced 2,048 paired contexts from 4,096 complete episodes. Nonzero return contrasts occur in 744/1,024 and 793/1,024 pairs. Equal-category draws and additional different-category zero-return pairs were retained. Selected raw cases confirm both substantial positive/negative consequences and exact clipped-path aliases.
+>
+> The near-zero signed mean of \(J_a-J_b\) is expected under symmetric independent a/b sampling. It is not evidence that actions have no consequences.
+>
+> All four fits completed 2,048 Adam updates. CONT’s stronger empirical fitting is real: on the final 128 matched minibatches, its average regularized objective improvement over the zero head is approximately .000525/.000482, versus CAL’s .000111/.000101. I reconstructed the zero-head reference from saved data and the recorded minibatch order. These are changing-head training-stream quantities, not held-out prediction accuracy or endpoint native gains.
+>
+> The interpretation should separate:
+>
+> - **Opportunity:** retained. Original S remains useful, and individual native interventions can materially alter complete return. This does not measure achievable improvement over competent S.
+> - **Representation:** unresolved. CONT expresses changed behavior and fits this empirical objective better; that does not establish useful transferable features or representation insufficiency.
+> - **Finite learnability:** the selected four fits learned a surrogate without establishing fresh complete native improvement.
+> - **Complete package value:** neither fitted program supports default replacement of its original S. Acquisition and deployment costs remain incurred.
+>
+> The strongest simpler explanation is ordinary retained competence plus a finite-data surrogate that does not generalize into an improving deployed fleet policy. Selection noise and changed joint visitation remain plausible contributors. The evidence does not separate them.
+>
+> In particular, the factor-320 identity concerns the derivative at unchanged S. It cannot turn a finite training-score improvement into 320 times a native-return gain. Labels describe one intervention followed by S; deployment repeatedly changes all members’ decisions and later histories. That mismatch was a predeclared risk, and the result leaves it consequential but unproven as the cause. CONT’s greater parameter count alone also does not explain everything: CAL lacks recurring native benefit, and CONT exceeds CAL’s native mean in L1.
+>
+> B05 therefore weakens the sufficiency of this static-data, bounded-head recipe. It neither diagnoses B04’s critic/PPO failure nor establishes general native unlearnability. I checked the original B04 compact evidence and selected positive/adverse raw witnesses; its stopped recipe and retained S capability remain applicable.
+>
+> **The full bill is substantially larger than the four head fits alone.**
+>
+> | B05 work | Actual |
+> |---|---:|
+> | Head fits | 4 |
+> | Acquisition / final episodes | 4,096 / 352 |
+> | Native steps | **1,138,688** |
+> | Adam updates | 8,192 |
+> | Cached fitting presentations | 1,048,576 |
+> | Sum of fit wall / CPU | 151.107 / 149.629 s |
+> | Worker wall / CPU | 1,446.905 / 1,444.100 s |
+> | Reader wall / CPU | 181.925 / 175.887 s |
+> | Enclosing chain wall / CPU | **1,629.310 / 1,620.467 s** |
+> | Whole-process peak RSS | 501,220 KiB |
+> | Retained raw evidence | 2,043,729,923 bytes |
+>
+> Worker collection uses 786,693 actual backbone forwards after memo reuse and 22,656 deployed head forwards. The priced reader adds 73,728 backbone and 40,960 head rows, with zero native, radio, critic, or optimizer calls. Replay presentations create no new labels.
+>
+> CONT query CPU is .137102/.143141 seconds per episode versus S’s .109606/.112584—approximately 25%/27% higher. These are measured program costs with endogenous cache behavior, not an isolated head-cost estimate or deployment deadline test. Full instrumented episode timings additionally include shadows and evidence writing.
+>
+> B02/B03 acquisition through B05 totals **8 fits, 2 paid calibrations, 1,687,552 native steps, and 2,343.116 measured CPU-seconds**, preserving the differing hosts and timer scopes. Older fleet B01 remains separately incurred: 2 fits, 576,000 steps, 31,190.348 CPU-seconds, plus its recorded zero-exposure technical attempt. Engineering, review, publication, and support labor remain unmetered.
+>
+> **The present observation is sufficient for the current investment decision.** The frozen successful branch required useful CONT improvement beyond S, CAL, and B*. That branch was not observed; the active-but-uncertain branch supports retaining S. There is no CAL-only recurring success to adopt either.
+>
+> An unchanged new purchase would cost another 1,138,688 native steps, with roughly 27 CPU-minutes as the current measured anchor, plus support and retention. Additional final worlds would refine these endpoints without supplying additional training units. Neither purchase currently answers a specified adoption or allocation decision, so I recommend neither.
+>
+> A constructive future hypothesis remains possible—for example, changing how consequence data and deployed joint histories are aligned. It need not first prove the cause of this loss. Its complete native prediction and same-resource ordinary comparator would define a new comparison; the present evidence does not select that recipe or establish its cost. A separate local-intervention diagnostic would be worthwhile only if its result would choose such an investment. I do not recommend buying it merely to enumerate surviving causes.
+>
+> Root should therefore retire B05’s current investment priority while retaining the useful assets and evidence. This is a no-run recommendation for the tested package, not closure of the parent question or a ranking of other directions whose current proposals I have not reviewed. Another Pro pass offers no identified distinct value for this disposition.
+>
+> My independent check covered all 36 source hashes against the launch commit; original input byte/tensor identities; four head and update-trace identities and saved Adam counters; all 352 final raw hashes and native metric reductions; paired initial states, actual holds/motion, and 92,160 sampled decisions and indexed innovations; all acquisition dataset labels, addresses, weights and intervention draws against saved records; matched minibatch orders; and 16 acquisition raw branches spanning positive, adverse, equal-action, and aliased cases. I also checked four consequential historical B04 raw episodes.
+>
+> I performed no actor/head/controller/native/radio query, optimizer replay, or second production reader. Full acquisition neural arithmetic, radio calculations, optimizer updates, and the complete older bulk record were not independently replayed. The priced reader and engineering review retain their disclosed scope. I have finished consuming the two scratch S inputs.
+>
+> **MATERIAL_DISSENT: no — the DM’s proposed retention of S and end of this exact package agree with the independently reconstructed native evidence. The accepted zero-service correction must remain explicit; surrogate progress does not support an expanded native-benefit claim or automatic further investment.**
+
+<a id="b05-independent-disposition"></a>
+### B05 disposition — preserve native competence; end this consequence-head recipe
+
+I read the whole original review and accept its recommendation and scope.
+My erroneous zero-service generalization was already corrected explicitly at
+57cacccc8 after reconstructing the raw ticks; it remains visible above rather
+than being silently rewritten. CAL's four zero-service ticks in L1 world
+29483104, compared with S/B*1's two, are part of the adverse evidence. The
+original summary and reader require no correction or repeated execution.
+The independent matched-last128 minibatch calculation strengthens the narrow
+claim that CONT improved the sampled fitting objective beyond its zero head
+and more than CAL. My preceding last256 update summaries use a different,
+declared stream window; neither is held-out endpoint prediction or native
+return. No additional fit, actor/head query, native episode or reader was
+performed to obtain this disposition.
+
+The belief update is specific: directly measured, complete native consequence
+labels and a first-order policy-gradient bridge did not suffice for useful
+finite development by this fixed static-data head program. Its intended
+intervention occurred: nonzero gradients, parameter movement and physical
+decisions changed. This removes complete inactivity as an explanation. It
+does not identify noisy finite labels, frozen features, the objective scale,
+optimization, or altered joint visitation as the cause. The first-order
+identity at S does not guarantee repeated fleet deployment after finite Adam
+steps. Choosing CONT after observing its training advantage would therefore
+replace the stated native comparison with a surrogate criterion.
+
+Unchanged S is still the useful capability to preserve: on these fresh panels
+S−Q gives J+.023534/+.027712 with positive conditional world intervals,
+better mean service/p10 and shorter paths. Both lineages retain substantial
+loss worlds and S itself has the explicit zero-service case. Neither head's
+positive comparison with C/Q demonstrates added development; the unchanged
+asset already supplies it. CONT−S is −.005135/−.005498 and CONT−CAL is
+−.005819/+.001451, all with intervals spanning zero. This supports no default
+replacement, not equivalence or a universal harmful-learning claim. B04 PPO,
+B05 head fitting and other hosts' continuation losses stay distinct.
+
+I end investment in the **exact B05 CAL/CONT recipe**, retain both immutable
+S checkpoints, C/Q/paid-B* references, all four fitted heads and positive/
+adverse trajectories, and select no more labels, epochs, temperature search,
+replication or confirmation. The complete purchase was4fits/4448episodes/
+1138688native steps and1620.467427 enclosing-chain CPU seconds, including
+149.628541 fit CPU seconds and175.887418 reader CPU seconds. These local
+timings overlap the separately accepted N8 operation; they are not an
+uncontended hardware benchmark. All prior acquisition and B01 costs remain
+incurred. Engineering, review and support labor are unmetered.
+
+This no-run choice is consequential rather than a count limit: more final
+worlds narrow conditional endpoint uncertainty without changing training n;
+an unchanged new acquisition/fit purchase would repeat the current unresolved
+finite-development proposition at roughly the present full cost without a
+specified adoption decision. A new constructive question may be worth
+testing without first proving this failure's cause, but the current result
+does not choose that question. Any such proposal must state the native
+prediction, competent same-resource comparator, information/decision changes
+and complete investment. The broader question stays open, with no producer
+or selected result study now active in this direction.
+
+At disposition I read published main5e6fed08e and refreshed throughdd3b2577d,
+including its affected fleet entry and Root's preserved new allocation. The
+newly selected parent B06 paid-label N8 approximation is a
+different allocation with its own lead, target/model labels, ordinary reuse
+controls and cost; I do not appropriate or pool it with these native labels.
+Root subsequently assigned a bounded source-only feasibility/cost assessment
+with the existing Oracle: whether count-diverse teacher-imitation continuation
+of both retained S lineages could buy useful population generalization beyond
+unchanged parameter reuse and equal-cost further N5 imitation. This is an
+unselected candidate, with no code, actor/teacher/controller/model/native
+query, fit or pilot authorized. I therefore keep this direction exploring
+only for that explicit source work, preserve the launch-bound lead and
+native routing, and retire only the superseded substantive B05 result plan. The
+reusable topic4 judgment now separates sampled-consequence fitting from
+complete fleet benefit while retaining the original S capability and zero-
+service adverse. Full source, compact reading, all required unique evidence
+and measured cleanup are preserved. No material dissent or additional Pro
+dependency remains. The assigned result returns to Root; the subsequent
+source-only accounting continues in this notebook for its cross-question
+choice. No successor result study has been selected, and no automatic rescue
+or recurring status check follows from B05's end.
