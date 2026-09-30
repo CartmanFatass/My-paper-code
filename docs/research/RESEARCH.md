@@ -687,6 +687,23 @@ R在14/16世界实际发起且所选成员激活后不再静默，另两条完�
 推理及路径代价。旧N4反例保持。[完整新证据、独立诊断和保留范围](candidates/uav_fleet_transmission/NOTES.md#b02-complete-reading)。
 
 
+B03进一步把“完整后续价值可能改变排序”推进到实际决策证据：16个全新N8/H500世界中，T以
+合法公开模型完整模拟每个静默成员的一个原R冠军及C延续，在9/16世界改变实际搬移程序。
+T−R平均J/服务为+.007400/+.558625，描述世界区间均为正；9个改变世界均增J，8个增服务，
+1个损失服务，另7个完整程序完全相同。两者均13次发起，故本面板收益来自已为正的选项重排，
+非改变发起或挽救负静态冠军。完整模型在48个已执行C/R/T后续上复现全部动作、mask和逐步服务；
+它们仅覆盖38个不同程序，另36个模型分支仍无原生反事实标签。世界29326002还表明恢复C未必
+优于静态目的地：原R后续少于其静态预测，完整排序选中另一程序。有限已知模型规划足以解释
+这些正效应，不证明全700选项最优、T−J新排名、神经学习必要性或其他host的模型精度。
+
+T的代价不能被均值增益隐去：当前实现约为R的4.02倍CPU，平均多22.486m/UAV，质量略降，
+每个世界的服务p05/最小值均不变。29326011仅增.000014853J却少4个user-step、多90.83m/UAV，
+且模型准确预测该取舍；这不是预测故障。保留T及便宜R/C这一有范围的能力—成本选择，不默认
+部署、继续扩大搜索或购买学习。更便宜完整规划与有完整数据/拟合/推理账目的学习近似均可成为
+建设性后继，但需用实际物理选择和完整后果判读。
+[完整B03、原独立判读、代价和下一设计边界](candidates/uav_fleet_transmission/NOTES.md#b03-complete-reading)。
+
+
 ### 4. 学习理论、表示能力和有限训练结果处在不同层面
 
 Bellman/策略梯度关系或表示能力不保证有限神经网络训练的效果。相同信息可有不同的有限学习难度；
@@ -1509,7 +1526,7 @@ T的正均值也不代表两个固定响应都各擅其长。直接学习、有�
 | `uav_parent_adaptation` | How can competent local UAV policies be developed or coordinated to improve complete service under explicit information and action rights? | exploring | Codex DM (native child) | **Root selects B05 at fef50326c: inherited-motion/radio composition.** C/Q_I/S_I × all-on/E/S2 plus C_T2, 32 fresh worlds, 512 H256 episodes/131072 steps/0 new fits. Mean-J S+S2−C/Q+S2 primary, with predeclared C+T2 challenge and all adverse/tail/path/deadline evidence. Exact original S/private I, lawful masked feedback and frozen E/S2/T2 timing retained. Estimated 30–60 worker +10–30 reader CPU minutes and 5–10 engineering/scientific hours; same DM owns implementation through admission/full reading/independent diagnosis/publication. Configured local_linux is now available after both untimed chains completed; B05 takes its next producer/reader window while waiting stays on the independent remote host. No operation admitted by this selection. No joint training. B04's failed A/B stays closed; conditional S_I−Q_I capability and large losses remain. [Root decision](#motion-radio-composition-root-decision-20260930), [full design/advice](candidates/uav_parent_adaptation/NOTES.md#b05-radio-composition-costed-contract), [B04 evidence](candidates/uav_parent_adaptation/NOTES.md#b04-complete-reading), [cleanup:810684416 net bytes](candidates/uav_parent_adaptation/NOTES.md#b04-final-cleanup), [routing](#session-routing). |
 | `uav_correction_compression` | Can useful learned residual corrections be deployed as fixed calibrations while preserving complete native behavior and reducing online work? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; no mean replacement.** Published result e17f4fdf9:224 episodes/57344 steps/0fits. All three C−D J/service intervals are below zero and all frozen retention rules fail; D19702 retains a positive conditional B40 increment. Keep D/B40/all adverse outcomes, choose no new default or automatic tuning/panel. Nearly constant magnitude does not imply dispensable variation; optimal constants/message causality remain open. Full actor CPU saves21–22.5%, trace-inclusive loop only2.7–3.8%. Re-entry needs a consequential deployment-cost question and complete comparison. [Evidence/disposition](candidates/uav_correction_compression/NOTES.md#b01-complete-reading); [closure complete](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup), no live work or cleanup blocker. [Routing](#session-routing). |
 | `uav_registered_service` | Can lawful model-history scheduling improve registered users' periodic native link opportunities at a worthwhile complete-service and execution cost? | reserve | Codex DM (native child) | **B02 complete/read/independently diagnosed; retain conditional G, select no further run.** Primary a02, source8ab72e5e2:192episodes/49152steps/0fits, all raw and full declared reader complete. G-O J+.080997, service+5.734924/tick, path-1599.590m/UAV, but F-.109375 (7 extra missed obligations in6worlds) and maximum gap+21.609ticks. Every world activates; no deadline failures. Two terminal false model-window completions do not explain five other lost obligations. Reject loss-free preservation without inventing an adoption tolerance; keep G for service/travel tradeoff, O for stronger coverage/refresh, S2 for native efficiency. Original a01 failure/102raws retained; cumulative75020steps and1130.943 measured worker/reader CPU seconds, no runtime fix established. B01 O capability, P-O unresolved superiority and adverse gaps stand. Reserve with no producer, unread result or selected successor; re-entry needs a consequential complete service-contract comparison chosen by Root. [Complete B02 evidence and disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading), [closure complete](candidates/uav_registered_service/NOTES.md#b02-final-cleanup):1,619,988,480 allocated bytes reclaimed, no cleanup blocker; [failure/recovery](candidates/uav_registered_service/NOTES.md#b02-recovery-decision), [B01 evidence](candidates/uav_registered_service/NOTES.md#b01-complete-reading), [routing](#session-routing). |
-| `uav_fleet_transmission` | Can complete continuation-aware relocation selection improve native fleet service beyond competent R? | exploring | Codex DM (native child) | **B02 complete; retain R/C/E/J and all costs/adverses. Root selects C/R/T at22c025c52:**16fresh N8/H500 worlds,48episodes/24000steps/0fits. T ranks C-stay and at most7original-R member champions by full lawful-model continuation, preserving the exact physical option. Primary T−R complete J/service, then C references and physical-choice exposure. Ceiling22.637Mworker state/mask requests plus comparable reader; estimated30–60CPUminutes and5–8engineering hours, not measured limits. Same DM owns implementation through local_linux admission/full reading/independent diagnosis/publication/cleanup; it may overlap the other untimed fleet study when actual resources permit. This prospective node choice supersedes the earlier wsl_4070 preference; no worker admitted merely by selection. [Root decision](#n8-continuation-root-decision-20260930), [full design/advice](candidates/uav_fleet_transmission/NOTES.md#b03-design-only), [B02 evidence](candidates/uav_fleet_transmission/NOTES.md#b02-complete-reading), [routing](#session-routing). |
+| `uav_fleet_transmission` | Can complete continuation-aware relocation selection improve native fleet service beyond competent R? | exploring | Codex DM (native child) | **B03 complete; retain conditional T beside cheaper R/C.** Across16fresh N8/H500 worlds, T changes9physical programs; T−R J/service +.007400/+.558625, with one service loss, +22.486m/UAV and4.02×R CPU. All48episodes/24,000steps and74model branches read; independent scientific review supports the scoped capability, not learning or deployment. Root assigns source-only next-question discovery with the original Oracle; no new result code/query/fit is selected. [Complete evidence/review/next boundary](candidates/uav_fleet_transmission/NOTES.md#b03-complete-reading), [current plan](#n8-continuation-root-decision-20260930), [B02](candidates/uav_fleet_transmission/NOTES.md#b02-complete-reading), [routing](#session-routing). |
 | `uav_local_peer_forecast` | Can lawful anticipation of visible teammate motion improve competent decentralized local C at the same information and control cadence? | reserve | Codex DM (native child) | **B01 complete/read/independently diagnosed; end this fixed-sign recipe.** Evidence `d7445071f`: 32 worlds, 96 H256 episodes/24576 steps/0 fits. Primary R−C J−.001195 [−.003726,+.001335], service−.106079; V−C J+.004691, service+.291870, intervals cross zero. R improves broad same-path geometry but V/R change only 5/9 physical decisions against same-input C. First-block and complete-value signs can reverse. Retain C, V conditional gains, R geometric capability and all adverses; no adoption, reliable superiority or learned-predictor claim. No active producer, unread advice or selected successor. Re-entry needs a consequential use decision or reasoned, costed new conjecture retaining competent ordinary alternatives. [Full reading](candidates/uav_local_peer_forecast/NOTES.md#b01-complete-reading), [independent disposition](candidates/uav_local_peer_forecast/NOTES.md#b01-independent-diagnosis), [cleanup:810602496 bytes reclaimed](candidates/uav_local_peer_forecast/NOTES.md#b01-publication-cleanup); [routing](#session-routing). |
 | `uav_radio_activation` | Can ordinary joint motion and transmitter activation develop complete native service beyond competent sequential control under explicit delayed information and commitment rights? | reserve | Codex DM (native child) | **B03 fully read; retain conditional S2 capability and end current clock/search expansion.** S2/T2-R mean J +.016514/+.017367, service +1.504150/+1.667236; T2-S2 +.000853J/+.163086service remains unresolved with9.64x scheduler CPU. S2 is the economical contract-specific J/service reference; R retains quality/travel advantages. Preserve startup/tail/adverse worlds and real local T/T2 capability; no equivalence, learning or pure-latency claim. Source2bff85091:192episodes/49152steps/0fits. Recovery adds no episodes; all192raws/full behavior and declared candidate subset verified, independent diagnosis complete. No unread result or selected successor. [Complete result, review and disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b03-complete-reading), [original selection](archive/2026-09-29/RESEARCH-joint-control-next-investment.md#decision), [routing](#session-routing). |
 | `tail_return_distributional_learning` | Does factual return-distribution fitting improve finite lower-tail UAV learning over a scalar critic explicitly conditioned on the current empirical threshold? | reserve | Codex DM (native child) | **B03 complete and independently read; retain S_eta as finite comparison reference, end this fixed recipe's additional runs.** Q32-S_eta own-tail contrasts -.004159/-.005316/-.025817, mean -.011764, descriptive training-pair t95 [-.042031,+.018503]. Prespecified exploratory scalar recurrence passes, not population superiority; 9623 drives magnitude, 9621 has mean/quality tradeoff, and both arms' adverse worlds remain. Six fits/1,179,648 native steps/768 updates; 46.74 min runner wall/.7433 CPU-hours, support incompletely metered. Same-batch eta/input/init/target differences prevent eta or pure-representation causality; B01 positive/B02 adverse remain unchanged. No producer, unread result, selected successor or approval wait. Re-entry requires a named critic-selection decision or a new costed finite-learning prediction; no automatic replication/repair. [Complete result](candidates/tail_return_distributional_learning/NOTES.md#complete-b03-result---scalar-tail-signal-with-training-uncertainty), [independent diagnosis and decision](candidates/tail_return_distributional_learning/NOTES.md#independent-scientific-reading-and-investment-decision), [routing](#session-routing). |
@@ -1891,67 +1908,41 @@ plan; it is not a retry/fallback. The scientific programs, fixed worlds and comp
 Actual node identities, costs and real deadline misses are retained. No new resource manager,
 lock wrapper, runtime migration or standing execution rule is created.
 
-**`uav_fleet_transmission`: selected continuation-aware relocation choice.**
+**`uav_fleet_transmission`: complete continuation selection is a conditional retained capability.**
 <a id="n8-continuation-root-decision-20260930"></a>
-Root selects the complete C/R/T proposal at `22c025c52`, having read the full DM contract,
-complete original independent Oracle answer, B04 allocation addendum and locator correction.
-B02's R remains the competent reference: its relocation–activation–resumed-control package
-improved mean J/service over C and immediate joint J, with real quality/path/startup-tail
-and adverse-world costs. Twelve of fourteen initiated paths improved after C resumed.
-This motivates testing the value of a different physical choice; selected-option forecast
-underprediction does not establish unchosen-option regret or a broken scorer.
+B03 completed its fixed16fresh N8/c10/0dB/H500 C/R/T worlds:48episodes,24,000native steps,
+zero fits/updates, accepted source `02e8c1adc5a625037490facc6388e4b8bc9fd74e`.
+T changes9/16executed physical programs. T−R mean J is+.007400
+[.001879,.014257] and service+.558625 [.148197,1.038134]; all nine changed worlds gain J,
+eight gain service and one loses service. Seven R/T programs are exactly identical.
+T−C is+.037870J/+3.126500service; R−C remains+.030470/+2.567875. These are descriptive
+paired-world intervals, not confirmation or learning replication.
 
-Buy **16fresh matched N8/H500 worlds × C/R/T =48episodes/24000native steps/0fits**.
-Use the fixed29326000–29326015 world identities, declared streams, arm rotations and
-10,000-draw paired-world bootstrap at29326991. C/R are unchanged source9928d34b5 references.
-J remains retained evidence; no fresh T−J or global-best comparison is purchased. Read T−R
-complete J/service first, then T−C and R−C, all worlds and the full native tradeoffs.
+This is native decision value from ranking the complete relocation–activation–resumed-C
+program, beyond merely forecasting R better. The48executed model/native suffixes match
+commands, masks and per-tick service; only38distinct represented programs have native labels,
+leaving36model-only branches. The finite shortlist is one stationary champion per muted
+member plus C, not all-site optimality. No fresh J comparison or learned necessity follows.
+T costs4.02×R episode CPU and adds22.486m/UAV on average; world29326011 gains only.000014853J,
+loses.008service and adds90.83m/UAV. Quality declines on average and all service p05/minima
+remain unchanged. Native J prices height rather than physical travel energy. The full reader
+and independent ResearchCritic support retention of T alongside economical R/C, with all
+B01/B02 adverse findings preserved. No unchanged replication or expanded search is selected.
 
-T retains the exact C prefix through t39. At t40 it keeps one original stationary-best
-R member/site champion per currently muted member, including nonpositive champions, at
-most seven, plus declining and continuing C/E. Rank their full460-transition public-model
-continuations: unchanged silent transit,128-mask required-member arrival search, original
-zero arrival transition, then C/E to t499. Use the specified J/service/original-path/duration/
-member/site ties and require strictly higher modeled J than C-stay. No additional sites,
-options, clocks, learned selector, early stationary tail or cycle compression is included.
+Worker plus reader cost1222.448CPU-s/1223.314wall-s; worker requests15,062,360 with comparable
+additional reader reconstruction. All260required raw artifacts are uniquely retained at the
+canonical direction/tag location recorded in the notebook. Same DM publishes and completes
+measured source/scratch cleanup. Root's subsequent assignment is **source-only next-question
+discovery** with the original Astra Max Oracle: compare cheaper complete control, useful
+learning objects, other substantive questions and a justified stop. A possible two-opportunity
+anticipation comparison is a candidate, not an accepted new experiment. No new result code,
+native/controller/model queries or fits are authorized by this design work; cross-question
+allocation remains Root's. The fixed B03 result is closed while question ownership continues.
 
-Branches start only from decoded public coordinates and actual issued-command/mask/clock
-history. Keep modeled physical positions separate from C's estimates, exact future synthetic
-FP32 report encoding, motion-before-mask order and absolute clock. No hidden native doubles,
-future reports or future C actions enter planning. Finite candidate inclusion protects only
-the model's ranking relative to represented R, not native return under public-state error.
-Every branch and champion is reconstructed by the reader, not just T's winner. Record
-physical choice exposure, aliases, exact common prefix and identical suffixes when the same
-physical program is selected; unexecuted forecasts are not native counterfactual labels.
-
-The worker ceiling is22,636,832state/mask requests,58,880additional T model transitions,
-at most896,000original option-transit ticks and17,635,968ordinary candidate-position
-predictions. Reader model work is separately comparable. Planning estimates are15–30worker
-plus15–30reader CPU minutes and5–8implementation/check/review labor hours; actual memory,
-bulk, node runtime and support are unmeasured. No-fit model search is not free. Preserve
-B01/B02's208episodes/104000steps/5020.958worker-readerCPU-s and all historical costs.
-
-Root prefers this persistent selection question to the cheaper fixed-path transit-mask
-alternative (at most40affected ticks;10–30CPU minutes and3–4engineering hours). That
-alternative remains untested and is not appended as a sweep. Changed physical choices and
-better complete outcomes would retain a conditional finite-shortlist capability. Better
-forecasts without choice/use gains, active harm, mixed tails or technical incompleteness
-keep their distinct meanings; none automatically buys another panel or repair.
-
-The Oracle's current priority under a one-implementation constraint is inherited development,
-then N8, then learned continuity. Root has selected the three distinct complete questions
-within the ongoing four-DM assignment, with separate actual-node admission, rather than
-imposing that hypothetical one-study restriction. The historical inheritance sequencing
-dissent is explicitly resolved by the available B04 evidence in the current allocation.
-Same N8 DM owns L0, bounded implementation, independent engineering review, exact-source
-publication, **configured local_linux** admission under the current two-host allocation, same-handle complete observation/reading,
-independent diagnosis, its own result/index publication and measured cleanup. Prior local
-execution is not fallback authorization; no worker has been admitted by this selection.
-
-[Full selected design and costs](candidates/uav_fleet_transmission/NOTES.md#b03-design-only),
-[complete original independent recommendation](candidates/uav_fleet_transmission/NOTES.md#b03-original-independent-recommendation),
-[allocation addendum and source correction](candidates/uav_fleet_transmission/NOTES.md#b03-allocation-addendum),
-[B02 capability and adverses](candidates/uav_fleet_transmission/NOTES.md#b02-complete-reading).
+[Complete reading, original independent diagnosis and DM disposition](candidates/uav_fleet_transmission/NOTES.md#b03-complete-reading),
+[original fixed design and advice](candidates/uav_fleet_transmission/NOTES.md#b03-design-only),
+[retired prospective index plan](archive/2026-09-30/RESEARCH.md),
+[B02 retained capability/adverses](candidates/uav_fleet_transmission/NOTES.md#b02-complete-reading).
 
 **`uav_fleet_adaptation`: B04 complete; next-question work is source-only.**
 <a id="inherited-native-development-root-decision-20260930"></a>
@@ -2428,7 +2419,7 @@ Root 已向三个原会话各投递一次明确携带 `model="gpt-6-astra"`、`t
 | DM: fixed correction deployment | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_correction_compression` | `/home/fires/hmasd-wsl` / `main` | Actual first turn verified gpt-6-astra/max; native UUID01a0ef78-6628-7593-b359-b608f0c80190. B01 fully read/independently diagnosed, reserve; scientific result e17f4fdf9. Cleanup complete: terminal source snapshot/registration, redundant staging, local bulk replicas/scratch/caches removed;874639360allocated bytes reclaimed. Required evidence/assets intact; no live operation, unread review or remaining cleanup dependency. [Result](candidates/uav_correction_compression/NOTES.md#b01-complete-reading), [final cleanup](candidates/uav_correction_compression/NOTES.md#b01-final-cleanup). |
 | Completed DM: registered-user B01 | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_registered_service` | `/home/fires/hmasd-wsl` / `main` | Completed B01 and full cleanup, result01e1b6e85/closureb7216efb9; no live worker, unread result or cleanup blocker. Sole direction ownership now passes to the new periodic-efficiency DM below; this old session is not restored. [Complete inheritance](candidates/uav_registered_service/NOTES.md#b01-investment-decision). |
 | DM: periodic-service efficiency | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_periodic_efficiency` | `/home/fires/hmasd-wsl` / `main` | Sole current owner of `uav_registered_service`, B02 G/O/S2; actual first turn verified gpt-6-astra/max, native UUID01a0f028-0d02-7093-9e46-fef762b6d749. Complete a02 primary panel, full reading and independent diagnosis; reserve, no live result producer, unread result, pending advice or selected successor. Original failure and both attempts' required raw evidence retained. Result8e87c58de; exact terminal snapshots/registrations, unused scratch and B02 caches removed,1,619,988,480 allocated bytes reclaimed. No cleanup blocker. [Read result and disposition](candidates/uav_registered_service/NOTES.md#b02-complete-reading), [measured closure](candidates/uav_registered_service/NOTES.md#b02-final-cleanup). |
-| DM: fleet transmission control | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_transmission` | `/home/fires/hmasd-wsl` / `main` | Existing native lead, actual first turn gpt-6-astra/max; UUID01a0f02a-2102-7aa3-be5a-adfb99e49910. B01/B02 fully read/diagnosed/published/cleaned. Same DM now owns selected22c025c52 C/R/T:48episodes/24000steps/0fits, exact public-model continuation of the original-R shortlist, through implementation/review/publication/local_linux admission/full reading/independent diagnosis and own publication/cleanup, with no artificial wait for the other untimed fleet study; Root's new independent-host allocation supersedes the earlier wsl_4070 preference. Original priority advice and B04 addendum preserved; no routine Root run ACK. [Root decision](#n8-continuation-root-decision-20260930), [full design/advice](candidates/uav_fleet_transmission/NOTES.md#b03-design-only), [B02](candidates/uav_fleet_transmission/NOTES.md#b02-complete-reading). |
+| DM: fleet transmission control | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_fleet_transmission` | `/home/fires/hmasd-wsl` / `main` | Existing native lead, actual first turn gpt-6-astra/max; UUID01a0f02a-2102-7aa3-be5a-adfb99e49910. B01/B02 closed; B03 full worker/reader and original independent diagnosis complete, retained T/R/C with explicit costs/adverses. Same DM publishes its result and measured cleanup, then continues Root-assigned source-only next-question design with the original Oracle; no new result code/native/model/controller queries/fits selected. Cross-question choice stays with Root. [B03 complete reading and disposition](candidates/uav_fleet_transmission/NOTES.md#b03-complete-reading), [current plan](#n8-continuation-root-decision-20260930). |
 | DM: lawful local-peer forecasting (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_local_peer_forecast` | `/home/fires/hmasd-wsl` / `main` | Registered `hmasd-direction-manager`; first actual turn verified gpt-6-astra/max, native UUID 01a0f300-8dad-7670-b5df-e98b1806afd7. B01 C/V/R fully read, independently diagnosed and published at `d7445071f`; source `13da38312`, 32 worlds/96 episodes/24576 steps/0 fits. Reserve: retain conditional V gains, R geometry and all adverses; end the unchanged sign recipe with no active producer, unread result/advice or selected successor. Complete cleanup reclaimed 810602496 allocated bytes; sole canonical raw evidence and useful code remain, no blocker. Root owns any cross-question allocation. [Reading](candidates/uav_local_peer_forecast/NOTES.md#b01-complete-reading), [disposition](candidates/uav_local_peer_forecast/NOTES.md#b01-independent-diagnosis), [cleanup](candidates/uav_local_peer_forecast/NOTES.md#b01-publication-cleanup). |
 | DM: timely joint radio control (complete) | parent `01a0ef2b-a391-7693-a748-60e24be246ae` / child `/root/dm_radio_recovery` | `/home/fires/hmasd-wsl` / `main` | Recovered unfinished B03 responsibility with original operation/source intact. Full192/192 saved-data reconstruction and independent diagnosis complete, zero new episodes. Reserve with conditional S2 capability, R tradeoffs and all adverses; no active reader, unread review or successor. [Complete result and disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b03-complete-reading), [original pause handoff](candidates/uav_radio_activation/NOTES.md#owner-pause-and-handoff---2026-09-29-2131-utc). |
 | Prior DM: joint motion and radio activation (complete) | parent `01a0e560-4333-7b03-8ff3-759a4add1d9a` / child `/root/dm_radio_joint_control` | `/home/fires/hmasd-wsl` / `main` | B02 fully collected, reconstructed and independently read. R retained alongside T-S capability and all adverses. No active producer/unread result; cleanup69dc18003 reclaimed1646100480allocated bytes and preserved unique evidence. New successor ownership is above, not a resumed old process. [Full reading and next-investment disposition](candidates/uav_radio_activation/NOTES.md#2026-09-29---b02-complete-reading). |

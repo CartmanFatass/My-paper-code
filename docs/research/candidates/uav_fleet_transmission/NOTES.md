@@ -1419,3 +1419,327 @@ evidence and publish the three-file correction, then execute one outcome-blind
 `b03_complete_continuation_a02` at that new published source with the same16worlds and all48
 complete programs. A01 has no exposed trajectory to repeat, and a new source is needed to
 correct the interface; this is not a same-source retry or a changed scientific study.
+
+### A02 accepted and observed, 19:00 UTC
+
+Repair/A01 evidence published at `02e8c1adc5a625037490facc6388e4b8bc9fd74e`. Fresh A02
+was accepted from this source on `local_linux` at19:00:08UTC after actual-node admission
+measured7,078,412,288available/effective bytes. The preceding18:59:39UTC occupancy sample
+had16affinity CPUs, load `.6216/.5552/.4653`, MemAvailable6,926,108KiB and no observed heavy
+Python process (an older small Python3 process showed1.7%CPU); this remains a snapshot only.
+
+Keep [A02 manifest](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a02/launch-manifest.json),
+[preflight](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a02/admission-preflight.json)
+and immutable [config](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a02/config.json).
+Exact operation reference:
+`.git/hmasd-admission/5f5df023bf6fdb1a8f9bf41f47ebc2923e6d761400b66a820f2f408b62b6138f.json`;
+source snapshot `b70bade3003946de9ca9f65580ebc865`. The first same-handle observer drain
+confirmed native runner1152518 and supervisor1152517 running with matching start identities
+and consistent records, and three completed episodes. Generation1 is armed under the owned
+`b03_wait/state-a02` against that exact status handle. One accepted operation performs all48
+episodes and the full reader. No collection/result conclusion is implied by acceptance; the
+native child remains active through deterministic observation and complete reading.
+
+### A02 complete collection, 19:23 UTC
+
+The original operation exited0 at19:20:34UTC. Native status finds both recorded processes
+absent, a valid exit witness and consistent claim/manifest/source records. Save the original
+[terminal status](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a02/launch-status.json)
+and [exit witness](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a02/process-exit.json).
+The same observer reported READY at19:20:41UTC, event `b8ae5cfbb50d5fc259d2efd8`,
+wake `d379d035-6623-4d88-8603-9cdb8b6c987f`, generation1. Native-child queue delivery again
+returned the known unsupported multi-agent-input error; the still-active DM drained the
+event at19:21:46UTC, consumed its exact generation/wake/event tuple through rearm1→2 and
+stopped the observer. No worker restart or duplicated reading was used.
+
+The worker and inline reader both completed all48episodes/24,000native steps. The reader
+checked24,048native snapshots, all three decision streams, all16common prefixes, all5,800
+original stationary candidates and all74retained complete modeled branches (34,040modeled
+physical transitions). All25bound source files still match accepted/published source
+`02e8c1adc5a625037490facc6388e4b8bc9fd74e`. The DM independently verified262artifact
+bindings including config and reading, all48native endpoint reductions, all16prefixes and identical
+R/T programs, the model-inclusion selection inequality, and15paired bootstrap intervals.
+The independent path reduction used a different summation order and differed by at most
+1.1368683772161603e-13m; J/service/quality/height reductions and prefixes matched exactly.
+This check changed no production tolerance or result. It used saved arrays only, adding
+zero native transitions or controller/model queries.
+
+Complete [summary](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a02/summary.json)
+SHA256 `df0d60b900d816bc93fed1855feca1afc9050dc2b719b017a7beb5d159a5cd7d`;
+full [reading](../../../../runs/uav_fleet_transmission/b03_complete_continuation_a02/reading.json)
+SHA256 `e3cbc277e478d4e17ac6c347d86c776376fd6a50bbe58994c7f125e5a47c97e9`;
+config SHA256 `a945dcd2fda619d68d8c1a025e5ef2762e50e11fc023c683106434c3a94023be`.
+The260unique native/model/candidate bulk files total44,795,108logical bytes. The independent
+ResearchCritic first read the original design, Oracle advice, source and B02 adverse evidence
+without partial A02 outcomes or new queries; after terminal collection it received the complete
+evidence for substantive diagnosis. Scientific disposition and final retention/cleanup follow.
+
+<a id="b03-complete-reading"></a>
+## 2026-09-30 — B03 complete reading: useful continuation selection with a substantial compute premium
+
+The fixed C/R/T comparison is complete at source `02e8c1adc5a625037490facc6388e4b8bc9fd74e`:
+16fresh N8/c10/0dB/H500 worlds,48episodes/24,000native steps, zero fits or updates. The
+published prospective comparison at `22c025c52` and full original independent advice remain
+above. A01 failed before exposure and is retained separately; A02 is the single exposed
+panel. The exact original B02 C/R programs remain unchanged. The complete machine reading
+and all-world artifacts linked above, rather than rounded tables below, are the evidence.
+
+### Complete levels and planned paired comparisons
+
+| Complete H500 level, mean across16worlds | C | R | T |
+| --- | ---: | ---: | ---: |
+| Native J | .619011280 | .649481446 | .656881613 |
+| Served users / step | 39.637000 | 42.204875 | 42.763500 |
+| Connected-user quality | .213869165 | .195614720 | .194226840 |
+| Height penalty | .000067470 | .000071220 | .000075439 |
+| Ineligible users / step | 8.033125 | 6.604750 | 6.388875 |
+| Eligible but unserved / step | 2.329875 | 1.190375 | .847625 |
+| Active transmitters | 4.370000 | 4.861250 | 4.918750 |
+| Complete path, metres / UAV | 226.832502 | 350.254372 | 372.740750 |
+| Mean world service p05 | 39.687500 | 39.687500 | 39.687500 |
+| Mean world minimum service | 35.125000 | 35.125000 | 35.125000 |
+| Zero-service steps / longest zero-service run | 0 / 0 | 0 / 0 | 0 / 0 |
+
+The fixed10,000draw paired-world percentile intervals are descriptive conditional intervals
+for these three deterministic programs. Sixteen worlds are not sixteen training replications,
+and positive lower endpoints are not a confirmation or deployment guarantee.
+
+| Planned contrast | Mean J [95% world interval] | J positive / zero / negative worlds | Mean service [95% world interval] | Service positive / zero / negative worlds |
+| --- | --- | --- | --- | --- |
+| **T−R, primary** | **+.007400167 [.001879057,.014256967]** | **9 / 7 / 0** | **+.558625 [.148197,1.038134]** | **8 / 7 / 1** |
+| T−C | +.037870334 [.023710045,.052083371] | 13 / 3 / 0 | +3.126500 [1.933403,4.309078] | 12 / 4 / 0 |
+| R−C | +.030470166 [.017231835,.044409661] | 13 / 3 / 0 | +2.567875 [1.481369,3.706000] | 12 / 4 / 0 |
+
+T−R quality is−.001387880 [−.006576469,+.003581172], with five negative, four positive
+and seven zero worlds. Extra path is22.486378m/UAV [3.143785,45.808521], seven positive,
+two negative and seven unchanged; extra height penalty is.000004219. Mean service gain
+equals.215875fewer ineligible plus.342750fewer eligible-unserved users. Its J difference
+equals+.007820750coverage contribution,−.000416364quality contribution and−.000004219height
+contribution. These are endpoint accounting identities, not causal shares or a battery model.
+R−C and T−C both reduce average connected-user quality and add travel. Native J does not
+price physical path, battery, completion deadlines or planning CPU. Every world's service
+p05/minimum is unchanged between arms; these tails supply no extra improvement claim.
+
+All worlds are retained below. Member/site identifiers name the original stationary champion;
+`stay` means unchanged C. The seven equal R/T programs have identical complete saved native
+arrays, not merely rounded means. All nine changed programs alter actual commands, masks and
+positions, with460different post-prefix position snapshots each; index aliases do not explain
+the observed exposure.
+
+| World suffix293260xx | C J / service | R J / service | T J / service | T−R J / service | R → T choice |
+| --- | --- | --- | --- | --- | --- |
+| 00 | .646122303 /41.984 | .646122303 /41.984 | .646122303 /41.984 | 0 /0 | stay → stay |
+| 01 | .565681575 /35.992 | .628102167 /41.258 | .629041827 /41.260 | +.000939661 /+.002 | m7s8 → m6s8 |
+| 02 | .622156537 /38.992 | .638771533 /41.644 | .684065114 /44.364 | +.045293582 /+2.720 | m4s33 → m3s34 |
+| 03 | .616280804 /39.984 | .636541727 /41.700 | .666906332 /44.258 | +.030364605 /+2.558 | m6s36 → m2s94 |
+| 04 | .682785724 /44.788 | .683250002 /44.788 | .683250002 /44.788 | 0 /0 | m1s47 → m1s47 |
+| 05 | .595412717 /37.858 | .616326312 /40.558 | .629020535 /41.372 | +.012694223 /+.814 | m6s21 → m5s54 |
+| 06 | .622118358 /39.992 | .622118358 /39.992 | .622118358 /39.992 | 0 /0 | stay → stay |
+| 07 | .609425717 /37.902 | .661754078 /42.198 | .663059730 /42.296 | +.001305652 /+.098 | m5s83 → m0s33 |
+| 08 | .646034065 /41.922 | .646034065 /41.922 | .646034065 /41.922 | 0 /0 | stay → stay |
+| 09 | .634617465 /41.004 | .657056256 /42.762 | .657056256 /42.762 | 0 /0 | m0s33 → m0s33 |
+| 10 | .601735319 /38.922 | .624233339 /39.820 | .624233339 /39.820 | 0 /0 | m6s24 → m6s24 |
+| 11 | .609492996 /38.976 | .679523127 /44.238 | .679537980 /44.230 | +.000014853 /−.008 | m7s28 → m4s67 |
+| 12 | .616491474 /38.992 | .625439305 /39.872 | .641862046 /41.622 | +.016422741 /+1.750 | m6s38 → m4s80 |
+| 13 | .639554623 /40.980 | .671710001 /43.606 | .671710001 /43.606 | 0 /0 | m5s31 → m5s31 |
+| 14 | .602858817 /37.918 | .680495396 /44.798 | .682312893 /44.948 | +.001817497 /+.150 | m7s34 → m6s52 |
+| 15 | .593411980 /37.986 | .674225169 /44.138 | .683775033 /44.992 | +.009549863 /+.854 | m6s62 → m7s85 |
+
+World11 is the explicit service adverse witness: T loses four user-steps over ticks65–67,
+with no positive service tick relative to R, while quality rises. Both end at45served, but
+T adds90.830478m/UAV for only+.000014853mean J. The model correctly predicts that service
+loss; it is not a model/native ranking reversal. World12 gains1.75served and.016422741J,
+but loses.026874196quality and adds145.640808m/UAV, the largest extra path. In contrast,
+world03 gains2.558served with11.516504m/UAV less travel; world15 also shortens travel.
+World02 supplies the largest J/service gain and ends at45served versus R's42. Two large
+gains (02/03) account for much of the average; the complete table preserves the small gains.
+
+### Physical exposure, prediction and changed explanation
+
+R and T both initiate in13/16worlds and decline in00/06/08. The9changed choices are
+rerankings among already-positive original stationary champions; no initiation/decline
+decision changes. All58member champions are modeled, including10nonpositive stationary
+champions, plus16C-stay branches. None of the10nonpositive champions is selected. The
+5,800original member/site candidates contain681physical-alias groups, but no represented
+champion branches alias in physical or complete modeled execution. All26initiated R/T
+members remain transmitting from arrival to horizon with no remuting. Their arrival masks
+equal their stationary predictions. The raw reader retains every champion, rank and branch.
+
+All16C fleets cease actual motion by t32, before selection. The26initiated transit segments'
+native reward components and service traces exactly match their C reference over the same
+ticks. Thus this panel does not expose opportunity cost from freezing still-moving peers;
+it does not establish that such cost is absent in another host. Selecting an option changes
+the subsequent ordinary controller's coupled path, including other vehicles' later motion.
+
+For the48C/actual-R/selected-T branches with matched native execution, saved modeled actions
+and masks exactly equal the460native actions/masks. Full service sums match; the largest
+absolute remaining-J-sum error is1.917972e-6. Model physical coordinates differ from native
+coordinates by at most5.838207e-5m, consistent with the lawful decoded-public-state start.
+These observations support faithful decision prediction for the executed branches on this
+panel. The48native episodes correspond to38distinct represented programs:16C continuations,
+13additional R programs and9additional T programs. The other36modeled branches remain
+unexecuted forecasts. These observations do not turn those forecasts into native labels, prove every
+shortlist branch correct, or establish a native improvement theorem. T's modeled J being
+at least R's is guaranteed by finite candidate inclusion and is not the empirical result.
+
+The evidence now supports **decision value from complete continuation ranking**, beyond
+B02's selected-option underprediction: actual physical choices change and complete native
+J/service means improve relative to unchanged R. It weakens the simpler prediction that
+stationary champions' original global ranking is already sufficient on these worlds. The
+gain applies only to one champion per muted member, not all700possible complete options,
+new timing/sites, an optimal planner, or a learned selector.
+
+The working explanation also needs a correction: resumed C is not uniformly a beneficial
+addition to the selected destination. In world02, R's stationary forecast is297.221601J-sum
+and19,700user-steps, but its native resumed continuation produces294.671176 and19,266.
+Arrival initially serves43; later C motion drops to42 and finishes below the stationary
+arrival J. The complete lawful model predicts that loss and chooses another member/site,
+yielding317.317967J-sum and20,626user-steps. This is evidence about whole executed programs;
+it does not identify a new controller repair or claim a universally harmful C tail.
+
+### Measured cost and cumulative investment
+
+| Worker cost | C | R | T, including all complete model branches |
+| --- | ---: | ---: | ---: |
+| State/mask requests | 1,932,000 | 2,604,752 | 10,525,608 |
+| Actually scored candidates | 1,279,398 | 1,859,122 | 7,121,242 |
+| Cached requests | 652,602 | 745,630 | 3,404,366 |
+| Geometry rows computed | 1,137,798 | 1,107,823 | 6,035,685 |
+| Geometry rows reused | 9,097,386 | 13,765,153 | 50,934,251 |
+| Sum complete episode CPU seconds | 85.570255 | 108.556476 | 436.285998 |
+| Sum complete episode wall seconds | 85.587733 | 108.569572 | 436.397294 |
+
+T uses4.018977times R's measured episode CPU. Its controller-plus-branch-record CPU is
+425.094114s; R controller CPU is97.459537s and C74.340997s. The branch-record term includes
+serialization and cannot be relabeled isolated planning cost. Total worker requests are
+15,062,360, of which7,916,026are complete-model requests including34,040physical-model reward
+queries; original candidate-transit propagation is228,800ticks and ordinary candidate-position
+prediction is12,121,056. All are below the prospective ceilings. The full reader separately
+replays those requests/propagations and verifies native physics, observations and decisions.
+
+Worker CPU/wall is631.790445/632.051672s, reader590.606499/591.212214s; the measured combined
+study is1222.447506CPU-s/1223.314455wall-s. Whole-process lifetime CPU including imports is
+1225.270095s, with.001948child CPU-s separately, and peak RSS354,964KiB. Bulk evidence is
+44,795,108bytes across260files. This one-host cyclic comparison is not a deployment deadline
+or a minimal-cost implementation result. The original30–60CPU-minute planning estimate was
+conservative here; support, authoring/review labor, storage/transfer overhead and A01 CPU/RSS
+were not metered and are not zero. A01's accepted-to-exit wall span is2.419563s, with zero
+result episodes/transitions/controller or model queries. Twenty-six constructed correctness
+native steps were used before launch, separately from the result panel; no new-world pilot.
+
+B01+B02+B03 cumulative exposed result work is256episodes/128,000native steps/zero new fits,
+with6243.405562measured worker-reader CPU-s, plus historical asset training and incompletely
+metered support. A retained capability does not erase this cost or establish learning value.
+Independent diagnosis, final disposition and canonical retention/cleanup are appended below.
+
+### Canonical evidence collected before source cleanup
+
+The independent reader released its raw/source consumers. A privileged read-only scan of
+process cwd/argv/file descriptors found no live references and no permission errors for the
+exact raw/scratch/cache targets. The260required raw/candidate/model files now have one
+canonical copy at
+`/home/fires/hmasd-artifacts/uav_fleet_transmission/b03_complete_continuation_a02/raw`.
+Original `runs/uav_fleet_transmission/b03_complete_continuation_a02/raw` is an untracked
+symlink to those same files, not another copy. All existing artifact bytes/hashes were
+checked before and after the move:44,795,108logical bytes. SHA256 of the path-sorted existing
+binding list encoded with sorted JSON keys and compact separators is
+`b0005426adf89ab388647efb5225514611ef2d96479ee2fd19a7dc08455bf7cd`.
+
+Nine small summary/reading/config/native-manifest/preflight/status/exit/stdout/stderr files
+have byte-identical canonical copies so that the canonical run is independently readable.
+An intentional full replay would use that canonical run root and accepted source, since
+the reader's containment check correctly rejects resolving a local run's bulk outside that
+root. No full replay is currently needed or selected. The failed A01 records remain in
+their original run directory; B01/B02 canonical evidence and historical adverse worlds are
+unchanged. Useful B03 implementation/tests remain published and required by the retained
+capability. This collection is not itself a space-reclamation claim. Source/scratch deletion
+and its net allocated-byte measurement follow publication of the complete compact reading.
+
+### Complete original independent ResearchCritic diagnosis
+
+The following is the original substantive response from the dedicated ResearchCritic in
+its separate context. It independently reconstructed the original supporting/adverse evidence
+before receiving a DM interpretation. No further native, controller, radio or model query
+was used. The response is preserved in full:
+
+**Retain T as a conditional continuation-selection capability, alongside cheaper R and C.** B03 answers the selected question positively: complete continuation scoring changed executed physical choices and improved mean native J and service over frozen R. The computation and travel premiums remain part of that result.
+
+I reconstructed the evidence independently, before receiving a DM result interpretation. Accepted source is `02e8c1adc5a625037490facc6388e4b8bc9fd74e`; the supplied configuration, summary and reading hashes match. The operation completed all **48 episodes, 24,000 native transitions and 74 modeled continuations**, with zero fits or updates. [Native summary](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a02/summary.json), [complete reading](/home/fires/hmasd-wsl/runs/uav_fleet_transmission/b03_complete_continuation_a02/reading.json).
+
+Mean J was **C 0.619011, R 0.649481, T 0.656882**; mean service was **39.6370, 42.2049, 42.7635 users/tick**, respectively.
+
+| Complete contrast | Mean ΔJ [descriptive 95% interval] | Mean Δservice [descriptive 95% interval] |
+|---|---:|---:|
+| T−R | +0.007400 [+0.001879, +0.014257] | +0.558625 [+0.148197, +1.038134] |
+| T−C | +0.037870 [+0.023710, +0.052083] | +3.126500 [+1.933403, +4.309078] |
+| R−C | +0.030470 [+0.017232, +0.044410] | +2.567875 [+1.481369, +3.706000] |
+
+These are the frozen paired-world bootstrap intervals over sixteen evaluation worlds. They establish conditional exploratory evidence, without training replication or a guarantee.
+
+The choice exposure is substantial. **Nine worlds changed physical programs**, with different selected members and actual command, mask and position trajectories. All nine improved J; eight improved service and one lost service. The other seven complete R/T trajectories were exactly identical. Both programs initiated in thirteen worlds and declined in the same three. All initiated members remained active after arrival, without remuting.
+
+Thus the observed increment comes from choosing different relocation–activation–resumed-C programs. It did not come from changing the initiation decision. Ten nonpositive stationary champions were represented, but none was selected. C had stopped moving by t32 in every world, so improving the value assigned to continuing C was also not the operative distinction on this panel.
+
+This changes the working explanation beyond B02. B02 showed that ordinary resumption often added value to the selected relocation; it left unchosen-option ranking unresolved. B03 weakens the simpler prediction that complete continuation would merely improve return estimates while preserving R’s choices. A useful ranking difference now has direct native evidence.
+
+World `29326002` is the strongest witness. Stationary scoring favored R’s `m4_s33` over T’s `m3_s34`: predicted gains over stay were approximately **0.021716 versus 0.016585 J**. Complete continuation reversed that ranking. The executed T program gained **0.045294 J and 2.720 users/tick over R**. World `29326003` supplies another useful positive: **+0.030365 J, +2.558 service and 11.52 m/UAV less travel**.
+
+The model was accurate on the executed continuations. Across all 48 C/R/T suffixes, saved model outputs matched native **commands, masks and per-tick service exactly**. Maximum remaining-total-J error was **1.92×10⁻⁶**; maximum coordinate discrepancy was **5.84×10⁻⁵ m**. This supports the continuation model’s adequacy for these observed decisions. The 74 modeled branches contain only **38 distinct executed programs**; the other 36 remain model predictions without native counterfactual labels.
+
+Ordinary known-model planning is therefore a sufficient explanation of the positive result. No new information rights or learned representation were involved. The supported capability remains selection among one stationary champion per muted member and C. It establishes neither all-site optimality nor a fresh T−J ranking.
+
+The adverse and cost evidence prevents automatic adoption:
+
+- **World `29326011`:** T gained only **0.000014853 J**, lost **0.008 users/tick** and added **90.83 m/UAV**. The service loss was four user-ticks at t65–67. The model predicted it correctly. This is an accurately valued objective tradeoff, not a forecast failure.
+- **World `29326012`:** T gained **1.75 users/tick**, while quality fell **0.02687** and travel increased **145.64 m/UAV**.
+- Across worlds, T−R quality was **−0.001388**, with an interval crossing zero; travel increased **22.486 m/UAV**, approximately **6.4%**, with interval **[3.144, 45.809]**. Seven worlds traveled farther, two less.
+- Every world’s service fifth percentile and minimum were identical across C/R/T. All avoided zero-service ticks. Better complete means did not improve these service tails.
+- T retained R’s marginal choice in world `29326004`: additional travel over C produced a small J gain and no additional service.
+
+Native J prices height, not physical travel energy. These records do not establish battery savings, deployment suitability or a universal controller preference. Earlier B02 quality/startup tradeoffs and B01’s conditional findings remain intact.
+
+Measured worker CPU across sixteen episodes was **85.57 s for C, 108.56 s for R and 436.29 s for T**. T therefore cost about **4.02 times R**, including its branch recording. Its worker used **10,525,608 score requests**, versus R’s **2,604,752**. These are measured implementation costs, rather than a deployment latency benchmark.
+
+The entire worker used **15,062,360 requests**, **10,259,762 actually scored candidates**, **34,040 complete-model transitions** and **228,800 candidate-transit ticks**. Worker plus reader cost **1,222.45 CPU seconds / 1,223.31 wall seconds**, about 20.4 minutes; peak process RSS was **354,964 KiB**. Required raw evidence occupies **44.8 MB**. Reader reconstruction was additional paid computation. A01’s metadata failure occurred before any result/model/controller query; its import and support costs remain incurred and unmetered.
+
+My checks covered all **25 source bindings** against Git, current files and the accepted snapshot; all **262 artifact bindings**; frozen initial arrays and RNG addresses; all 48 native metric reductions; exact prefixes and equivalent trajectories; and all 36 reported bootstrap intervals. I also reconstructed rankings and accounting from all **5,800 saved stationary candidates**, reductions and selection from all **74 saved branches**, and costs from all **122 saved decision traces**. I inspected lawful report encoding and saved motion semantics. I did not rerun candidate scoring, radio evaluation or the full reader. Those execution checks remain the completed reader’s evidence, distinct from my independent saved-data reconstruction. No material inconsistency emerged.
+
+My recommendation is to **close this fixed B03 study and retain the measured C/R/T performance–cost choices**. I do not recommend an unchanged replication or broader option search merely because T succeeded. There is no material validity objection to the scoped capability claim; the strongest consequential qualification concerns its cost and objective tradeoffs.
+
+This is also not scientific exhaustion. B03 makes a constructive learning question more concrete: can an inexpensive continuation-value estimate or ranker preserve useful physical choices while reducing full-suffix computation? If Root allocates further work within this question, I would prioritize that bounded approximation/amortization question over enlarging the search support. An ordinary planner using less computation remains a relevant alternative for an efficiency claim.
+
+The smallest useful successor observation must retain complete fresh R/T/candidate trajectories and charge training-data generation, fitting, inference and travel. A learned candidate needs an explicitly declared exploratory fit; forecast accuracy alone would be insufficient. Preserved native gains with lower complete cost would support the approximation; unchanged choices without savings would supply little use value; adverse changed choices would reject that candidate while preserving B03. Data quantity, fit cost and ordinary-comparison details remain unpriced, so this is a candidate for Root’s next-question choice, not a launch-ready investment.
+
+**MATERIAL_DISSENT: no — direct evidence supports the frozen finite-shortlist capability claim and retention of T with its costs. No expanded claim or additional result investment is endorsed automatically.**
+
+### DM disposition and authorized next boundary
+
+I accept the independent result recommendation and close the fixed B03 study. Retain T as a
+constructive ordinary capability, and retain cheaper R/C and historical J as useful choices
+with their original scopes. The empirical belief change is that complete continuation
+ranking can improve executed relocation programs on this finite N8 host; merely correcting
+selected-option forecasts is no longer the whole explanation. The accurate prediction of
+world11's service/travel tradeoff prevents calling the score gain an unconditional mission
+improvement. The first local draft's naive74−48unexecuted-branch count was corrected before
+publication using the critic's de-duplication:38distinct programs are executed,36modeled
+branches remain unexecuted. No raw result, policy or reader needed changing.
+
+Task opportunity and this finite representation are supported; learnability and a lower-cost
+or physically priced complete package remain open. No fresh J comparison, all-site optimality,
+new information benefit or learned necessity follows. Model/native agreement does not grant
+permission to replace unexecuted native outcomes with model values. The fixed study buys no
+confirmation, unchanged replication, more worlds, repair, expanded option support or new fit.
+The independent review adequately covers this unchanged claim; a second Pro result round
+would duplicate its role without an identified distinct question.
+
+Root has now assigned the original Astra Max Oracle and this existing DM **source-only next-
+question discovery after B03 publication/cleanup**, including cheaper complete control,
+potential learning objects, a different useful question or a justified stop. The critic's
+preference for a costed approximation/amortization question remains an independent candidate,
+not a resolved successor selection. The Oracle is also comparing a possible two-opportunity
+anticipation question and a separate N5 learning branch; cross-question allocation and any
+material direction disagreement return to Root. I will supply exact interfaces, hard gaps,
+ordinary comparators and prospective total cost in this existing notebook, without new
+result code, native/controller/model queries or fits. This is current authorized design
+work with an actual Oracle producer, not idle waiting for invented approval. The B03 result
+and its adverse evidence remain fixed while that next investment is considered.
