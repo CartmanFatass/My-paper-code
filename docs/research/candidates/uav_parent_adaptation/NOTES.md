@@ -6390,3 +6390,76 @@ RNG, lineage, reader and remote entry behavior before execution. Stop for a
 material scope contradiction; preserve technical failures and accepted work,
 and reconcile the same operation before any repair. This is implementation of
 the fixed comparison, not authorization to search for a better result.
+
+<a id="b07-engineering-and-placement"></a>
+### B07 implementation accepted; concrete remote input limit selects local fallback
+
+The bounded Implementer delivered only the new controller and its synthetic
+tests. I read and accepted the diff: original R/T_E/K2_E objects are returned
+unchanged, and L2_E inherits commitment/delivery while changing only the t40
+candidate menu. Its complete direct-ranker record remains diagnostic; neither
+the positive-initiation gate nor its final choice selects the shortlist. The
+new collector, source contract, admission entry, bound worlds and full reader
+are complete. Whole episode CPU/wall includes metric reduction and artifact
+hashing; learned sorting has separate recorded timing, with0for ordinary arms.
+The reader reports new native transitions0 separately from64 reconstructed
+episodes, derives scalar score/order/final-choice checks without the worker
+selector, and retains full uncompressed model replay and recurrence audits.
+The prospectively addressed16world arrays were generated once without native,
+model or learned-policy queries and saved in `worlds.json` (83094bytes,
+SHA256`bd9aaf4482778318b8d3a63cda39fd20f7995b031d42ed3325ce57ac02be5222`).
+
+Focused checks passed **46tests in2.69s** on the configured local scientific
+Python with one numerical thread. They include immutable published fit/source
+validation without solving, synthetic negative/zero/tied/small menus, corruption
+rejection, suffix indexing and admission ordering. Two mocked64-row collector
+paths verify complete cyclic exposure before the reader and preserved reader
+failure; they execute0native/model queries. No repeat B06 correctness branch,
+extra native fixture, fit, training label or result-bearing panel has occurred.
+
+The independent engineering Reviewer inspected all new files and reachable
+inherited commitment/scoring/fit-validation/replay/recurrence code, independently
+passed the original44tests and then the2new mocked collector tests. Its complete
+finding was:
+
+> No material finding remains for the selected local execution path.
+>
+> Remote launch blocker, avoided by local fallback: snapshot preparation inherits
+> remote sparse checkout, omitting inputs required by B07 configuration. Verified
+> an existing remote snapshot marked both the ranker and paid summary S, with the
+> ranker absent. Future remote use needs those published inputs populated before
+> execution. Local checkout includes both.
+>
+> Reviewed all new source/tests and reachable inherited commitment, scoring,
+> fit-validation, model replay and recurrence paths. No additional material issue
+> found in shortlist rules, source bindings, suffix indexing, paired comparisons,
+> or work accounting. Final timing correction includes metric reduction and
+> artifact hashing. Independently passed the original44tests, then both new mocked
+> collector tests. No native/model fixture or result execution performed.
+>
+> Residual limit: complete B07 native/model equivalence remains to be established
+> by its scheduled full reader. Engineering acceptance remains with the DM.
+
+I accept that review and the implementation. The concrete first-choice-node
+limit is input availability, **not memory or an occupied count run**: the remote
+count producer/reader had ended; the node had about15.6GB available memory.
+At existing remote snapshot
+`/home/wu/projects/HMASD/.git/hmasd-launch-sources/e35ec2ed8f434892ab9350874c1eb55e`
+(source f529ba399), sparse checkout is enabled and Git marks both
+`runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/ranker.json` and
+`runs/uav_fleet_transmission/b03_complete_continuation_a02/summary.json` S;
+the ranker is absent. The maintained snapshot preparation inherits this state,
+so unchanged B06 fit validation cannot consume those inputs there. No remote
+B07 request or snapshot was created. I do not change shared sparse selection,
+the shared launcher or frozen B06 to get a launch.
+
+Use the already-authorized local_linux fallback with its configured Python,
+CPU/one thread, same fixed numerical/source/RNG/panel contract and fresh actual
+local admission. The local checkout is not sparse and contains the complete
+published inputs. Local memory observed before admission was about7.93GB
+available; that observation is not admission. Reconciliation after the session
+interruption found no B07 output/producer on either node and no pending old
+observer event; all prior own operations remain terminal. Root received the
+complete concrete blocker/disposition. Exact source publication precedes the
+single result request. Full worker/reader, original independent scientific
+diagnosis, result publication and measured cleanup remain ahead.
