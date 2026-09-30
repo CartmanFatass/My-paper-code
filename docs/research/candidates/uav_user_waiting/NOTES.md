@@ -1985,3 +1985,131 @@ allocation should include that positive alongside N8; neither the new value
 design nor the older failed selector owns the project-wide learning question.
 This refresh adds no run, rescore or changed result to the present design-only
 scope.
+
+<a id="b03-selected-l0"></a>
+## 2026-09-30 — B03 selected implementation and fixed exposure
+
+Root selected the complete design above at published
+`1ab42997a5a805764d5c54e3fdd810fcc2fdf514`
+([decision](../../RESEARCH.md#waiting-value-root-decision-20260930)). The accepted
+exposure is 192 new acquisition plus 320 evaluation episodes (131,072 native
+steps), two scientific fits on one acquisition realization, and all 64 paid B02
+M traces by canonical hash/path reference. The separate necessary correctness
+fixture is five interfaces on one H8 world (40 native steps, zero scientific
+fits). No automatic repair fit, enlarged acquisition or confirmation is bought.
+
+**Fixed identities, before code or execution.** Pure-M acquisition worlds are
+`29423000..29423095`; single-perturbation worlds are `29423100..29423195`;
+evaluation worlds are `29424000..29424063`. The perturbation for index j remains
+report `floor(63*j/96)`; a local NumPy PCG64 stream seeded `29425002` draws each
+encoded q uniformly from 0..26 and mask uniformly from 1..31, in that order for
+j=0..95. Initialization uses `29425000`; episode-then-row PCG64 minibatches use
+`29425001`. The H8 correctness world is `29425999`, never an acquisition or
+evaluation world. Reused B02 M seeds remain `29322000..29322063`. No global RNG
+stream is repurposed. Common evaluation arms rotate the forward and reversed
+M/S/G0/LR/LN orders by world index. Descriptive paired bootstrap, if used, has
+seed `29425991` and 10,000 world resamples shared across contrasts. A source and
+notebook search found no prior assigned worlds in these new ranges; numerical
+substrings in unrelated tables are not world identities.
+
+**L0 deliverable and ownership.** Add direction-owned B03 implementation and
+mirrored tests, without modifying frozen B01/B02 or the shared host. The entry
+will acquire the fixed data, fit the fixed ridge and MLP, evaluate all five
+frozen programs, and retain compact results plus one canonical raw copy. A
+separate reader checks the causal feature/target pipeline, native and bounded
+physical replay, every value/key calculation, and full deterministic fit replay.
+Only this DM edits this notebook, collection/integration/history/scheduler/data/
+reader and run records. The registered Implementer owns only new
+`b03/features.py`, `b03/learner.py` and mirrored `test_values.py`, on shared main,
+with no Git/index mutation, launch, notebook or other-file edit. The independent
+engineering Reviewer receives the completed diff and contract before execution.
+
+The fixed feature interface accepts decoded sites/anchors, effective commands/
+mask, previous report post-C nav, modeled last-service/max/window arrays, tick,
+history start and causal settled boundary. It returns exactly 805 float32
+components or rejects an incomplete history; the formula and H256 scales above
+are unchanged. The learner accepts those rows, native-tick suffix targets and
+episode IDs. Both fits use equal episode weight and equal row weight within
+episode. Ridge is a float64 weighted solve, lambda .001 on weights only; the MLP
+is CPU float32 805–128–128–1 with two ReLUs, seeded ordinary hidden initialization,
+zero final affine, Adam(lr=.001, betas=(.9,.999), eps=1e-8, weight_decay=0), exactly
+4096 updates of 256 rows and final checkpoint only. Saved initial/final movement,
+update losses and sampled row identities allow independent exposure accounting
+and exact same-node numerical replay. Models expose raw tick predictions and
+the prescribed [0,256-t] deployment clipping; no training target is clipped.
+Checkpoint files are pickle-free named numerical arrays. No new fitted scaler,
+validation selection, feature search or hidden hyperparameter is introduced.
+
+**Invariants and checks.** Preserve delayed native commitment, actual pre-mask-
+arrival radio capture, current-only C calls, the M/S laws and four-delivered-tick
+native ties. A new running-maximum history extends atomic executed settlement;
+private candidate copies never settle persistent history. The new key uses the
+two old-prefix plus first two delivered ticks, and pre-next-C features at t+4;
+terminal V is exactly zero. Missing complete-origin history uses a completed M
+only; a late/incomplete whole round holds the old command/mask with no late M
+rescue. M generation has no value calls. G search calls the estimator only for
+its queried pairs, cached per pair, with the explicit M inclusion and maximum
+117 values/report. Record unfinished work, chosen/M pair, visited-set G0 rank,
+clipping and true elapsed/CPU costs. Tests target these causal, numerical,
+RNG/checkpoint and fallback risks, plus the fixed 40-step native fixture after
+source publication and actual-node admission; no outcome-bearing pilot is added.
+Engineering estimates retain the earlier provisional 2–3 CPU-hour calculation
+with new feature/fit/I/O overhead unmeasured and will be updated from actual
+support measurements. Stop on incomplete scientific execution, preserve its
+evidence, and diagnose without silently spending another fit or episode.
+
+### B03 engineering acceptance, before native exposure
+
+The bounded Implementer returned the three assigned feature/learner/test files;
+I inspected their full source and accepted the implementation. The complete
+synthetic suite is **40 passed in 4.09 seconds** on the configured local scientific
+interpreter with one BLAS/OpenMP thread. Independent engineering review reran
+the same suite (**40 passed in 4.17 seconds**) and found no remaining material
+issue. It caught a real reader caller defect: a history-loop temporary overwrote
+the value-model argument. That was corrected before native exposure, with full
+LR/LN decision-reader regressions. The reviewer verified all 62 inherited
+scientific source files remain byte-identical and all 64 reused M references
+match the published B02 artifacts and verification. No scientific/native result
+has been generated during this acceptance. The helper's separate value suite
+passed 30 tests in 2.00 seconds. Per value-suite invocation the synthetic
+arithmetic includes three 805-feature ridge solves, one two-dimensional
+reference solve, nine learner Adam updates plus one manual Adam reference
+update (40 total minibatch presentations); these are toy correctness work,
+not the two selected scientific fits. Geometry tests and reader regressions
+make additional synthetic model calls, with no native environment transition.
+No complete scientific fit or outcome-bearing pilot was added.
+
+Source-only checks cover exact 805-component arithmetic, active-mask geometry,
+complete-origin eligibility, maximum-history copies/atomic settlement, actual
+remaining-increment targets, previous-nav/current-C separation, same-law M/S
+rankings, initial G0 equivalence when computation completes, terminal zeros,
+117-query limit, and late-value fallback after completed M. They also cover
+equal-episode weights, the unregularized ridge intercept, fixed local sampling,
+global RNG isolation, reduced-update deterministic neural replay, checkpoint
+identities and pickle-free storage. Actual-node layout, the 40-step native
+fixture and full-sized deterministic fit replay remain execution evidence.
+
+The worker verifies every required old M raw hash before acquiring a new
+episode. Old raw data remain in their canonical B02 paths; only a compact
+source-bound proof/reference manifest is new. Initial fit predictions are known
+zero algebraically, so no hidden full-row initialization pass is made. Each
+fit retains its already-computed final normalized predictions in the trace;
+the reader uses the replay fit's existing final predictions for its independent
+weighted-error calculation, without another training-row model pass. The
+visited-set zero-value diagnostic covers all physically evaluated M/G pairs;
+it still does not equal a full G0 policy control at that state.
+
+Use the admitted native launch/observation path for three ordered operations:
+the selected correctness fixture, the worker, then its full reader. The reader
+has a separate output directory and binds the canonical worker summary SHA256,
+its original source SHA and every model/data identity before verification
+optimization. This is the already-priced one ridge/4096-Adam replay, not another
+independent scientific fit. Worker outputs are not rewritten. The inherited
+native and navigation readers each reconstruct current C, so reader C calls
+are separately **327,680** on a complete panel, in addition to the worker's
+163,840; no virtual future-C call enters the actor. Fresh-M calibration uses
+at most 8,064 predictions and fit replay's final training predictions at most
+26,364, as designed. The earlier 2–3 CPU-hour planning estimate remains
+provisional; no full-size feature/fit timing has been measured. A read-only
+node process inspection found no active research worker before publication;
+fresh admission and node contention are checked again at launch.

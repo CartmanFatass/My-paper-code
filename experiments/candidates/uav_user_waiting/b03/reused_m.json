@@ -1,0 +1,737 @@
+{
+  "prior_result": {
+    "path": "runs/uav_user_waiting/b02_continuity_a03/result.json",
+    "sha256": "99bcb3e6b16a1d4682f6e3e797f4c4af67f0e35a4ebdf153289b443f9dd5a132"
+  },
+  "prior_verification": {
+    "status": "VERIFIED_COMPLETE",
+    "launch_sha": "db13ccf307e9cf467450fdad8318721fb8db603a",
+    "original_source_sha": "16500b6f85c8cd20a7765801ed413608c36cf9f0",
+    "summary_sha256": "620cad3f8da694615ef4883b8e225c94b54f1a86bb4333c5b64c1fbd5a875df3",
+    "parent_summary_sha256": "d9e1060d93d4d8181e371a6ccc7220c74102f6740c797fea09188706366d62a8",
+    "exposure": {
+      "prior_result_steps": 1648,
+      "new_result_steps": 64000,
+      "total_result_steps": 65648,
+      "valid_panel_steps": 65536,
+      "valid_panel_episodes": 256,
+      "reused_complete_steps": 1536,
+      "failed_prefix_steps": 112,
+      "fits": 0,
+      "optimizer_updates": 0
+    },
+    "verified_raw_files": 256,
+    "verified_raw_bytes": 408643897,
+    "scope": "all256 native/C/age/history/key/continuation records across protected6 and new250; original B02 physical subset; prior112-step failure retained separately; zero new native steps/fits",
+    "wall_seconds": 1055.7657715610694,
+    "cpu_seconds": 1112.7072618050001,
+    "peak_rss_kib": 534556,
+    "rss_scope": "reader lifetime peak; Linux KiB"
+  },
+  "sources": [
+    {
+      "seed": 29322000,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a01/raw/M_29322000.npz",
+        "bytes": 1392932,
+        "sha256": "af6f2ef7b78f79598066943db81a4066c9dbe3610a8eff307549e75fdaa2a871"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 579
+    },
+    {
+      "seed": 29322001,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a01/raw/M_29322001.npz",
+        "bytes": 1366102,
+        "sha256": "0b88b49e4d5a50a44a2e5cf8e26a191cbd6bae808791fe4a0d530f5866927ccd"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 605
+    },
+    {
+      "seed": 29322002,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322002.npz",
+        "bytes": 1427142,
+        "sha256": "879a0f5db359aea9b49c48b152b3fc401953b7179643486eda63576d7a607547"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 609
+    },
+    {
+      "seed": 29322003,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322003.npz",
+        "bytes": 1474437,
+        "sha256": "efdd22f951459779b7b4b9ff128b159309e9f41de95db1a43c1966b6cc4022b1"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 687
+    },
+    {
+      "seed": 29322004,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322004.npz",
+        "bytes": 1404162,
+        "sha256": "de0d89eb34fb4b6a003d6fbce76d6cb868003e4bdf6487d8afc9d9036e8eee2e"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 502
+    },
+    {
+      "seed": 29322005,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322005.npz",
+        "bytes": 1378809,
+        "sha256": "47fe889e81ca928cf0fe0045f43ce3183b057fa03e8e2f92a244cc1292ae46e2"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 603
+    },
+    {
+      "seed": 29322006,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322006.npz",
+        "bytes": 1396491,
+        "sha256": "d50dd5d941c50ba0afdfc57956b6fa96c2360ad3cb2f64a81c46b50ee388e8ce"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 611
+    },
+    {
+      "seed": 29322007,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322007.npz",
+        "bytes": 1452455,
+        "sha256": "63ffd448d7374a3de154f516c753976459dea0646bf3e6ba6937b8e9d6ae1220"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 582
+    },
+    {
+      "seed": 29322008,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322008.npz",
+        "bytes": 1389597,
+        "sha256": "332b14bbf2f7b0cea942ade9e2f8f6394874246214edc11c62b39f6861dccc9f"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 634
+    },
+    {
+      "seed": 29322009,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322009.npz",
+        "bytes": 1367607,
+        "sha256": "9e93e0229e3ff73b6449695e0a553e02337a420a07d676e773b49095379109d2"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 608
+    },
+    {
+      "seed": 29322010,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322010.npz",
+        "bytes": 1435012,
+        "sha256": "9f15b556afe88124f543cddba94c4e3b4a589725c7613dc3029b2ea512b8448e"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 686
+    },
+    {
+      "seed": 29322011,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322011.npz",
+        "bytes": 1425431,
+        "sha256": "f5a457c22cde092477cdbd1f9a8ca2063889e1c3f7fb146fb037a994fd0af61c"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 712
+    },
+    {
+      "seed": 29322012,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322012.npz",
+        "bytes": 1420869,
+        "sha256": "a0d1138690812ef34402fe7d4b90d17ad90ea65d37e2cee3c3ebf9a5337459c6"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 635
+    },
+    {
+      "seed": 29322013,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322013.npz",
+        "bytes": 1445224,
+        "sha256": "ffe3ef4bf26154e7c5136fc0e7475bc5b10c3504c138acee6a47957dae2edee2"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 630
+    },
+    {
+      "seed": 29322014,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322014.npz",
+        "bytes": 1431773,
+        "sha256": "86496a5f0e34d10209832b122bc4c274e1051aac0b856fabb80453202c10ffa5"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 632
+    },
+    {
+      "seed": 29322015,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322015.npz",
+        "bytes": 1397360,
+        "sha256": "e584462bd947821cc52c4cd0828569ce87682f07bb62a809dbea39a925ce9d5f"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 547
+    },
+    {
+      "seed": 29322016,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322016.npz",
+        "bytes": 1431209,
+        "sha256": "3ddf1d2ffe74f23be79dde3684dc1ae09ca401829437664e949c50ecc07c768e"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 606
+    },
+    {
+      "seed": 29322017,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322017.npz",
+        "bytes": 1400459,
+        "sha256": "b2dffe5f4eaf1401f7b32e4a080dc908896830d241e943a86dc05a628bd9d69f"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 607
+    },
+    {
+      "seed": 29322018,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322018.npz",
+        "bytes": 1401287,
+        "sha256": "79d9ebd25bc46cb33e42fa4be45e1fba6fee5565c32090138248e77dbdcaec98"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 714
+    },
+    {
+      "seed": 29322019,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322019.npz",
+        "bytes": 1409731,
+        "sha256": "c6ebe6f3ec101a3f300d933ea26e9673bebf5474d7b332771613681d0a8e80b9"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 548
+    },
+    {
+      "seed": 29322020,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322020.npz",
+        "bytes": 1409860,
+        "sha256": "21d3a26ebe424fc01a2a5132c4b7c44b316c764d00407b4b1ca421e6ecdc3df1"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 555
+    },
+    {
+      "seed": 29322021,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322021.npz",
+        "bytes": 1438732,
+        "sha256": "2eee61d4110a1204c7f68a105ca27b5014de82438eabb9329729d700d951bff7"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 603
+    },
+    {
+      "seed": 29322022,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322022.npz",
+        "bytes": 1362068,
+        "sha256": "c4b42f8fd5db04c261131ff55b525a9261c21313aeb7d9542d00c279f4de2ef3"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 657
+    },
+    {
+      "seed": 29322023,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322023.npz",
+        "bytes": 1397870,
+        "sha256": "ddd6f177cae2c4c6d52d14f9615e2ccada129b577100590ca89bf4c1846c35eb"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 583
+    },
+    {
+      "seed": 29322024,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322024.npz",
+        "bytes": 1457409,
+        "sha256": "9c913e02bf174bc7e006ed66e48b7a290f3df7d8402f86a5c1b2b6ce8585f5b2"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 689
+    },
+    {
+      "seed": 29322025,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322025.npz",
+        "bytes": 1443639,
+        "sha256": "8491ab214c521316ea71602963ce0965d51cb7b874e4abca681e3b34a988eba7"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 523
+    },
+    {
+      "seed": 29322026,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322026.npz",
+        "bytes": 1463254,
+        "sha256": "b6c28bfbaacd99213ef2da0c6490c655ec4d416a61d3cda747e8520dfce9527f"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 606
+    },
+    {
+      "seed": 29322027,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322027.npz",
+        "bytes": 1405307,
+        "sha256": "bbb8bd1634d4c67cb401adaefa8885b849d2ffa2f1012de9b2ce3a27d13b180a"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 691
+    },
+    {
+      "seed": 29322028,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322028.npz",
+        "bytes": 1451181,
+        "sha256": "685db6cfc66427ba1d63d604f24eb1be6c8f8fd5499f7fb5e8a3823a580d9d2d"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 580
+    },
+    {
+      "seed": 29322029,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322029.npz",
+        "bytes": 1372217,
+        "sha256": "b9ff0f436cfff815fee7b947b2e8bd16a372ed54085df83024dff780b447e1b4"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 659
+    },
+    {
+      "seed": 29322030,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322030.npz",
+        "bytes": 1423621,
+        "sha256": "186d39954e3ecf907540bf802a0524df09dd642f609b2647d28731909316f9b9"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 550
+    },
+    {
+      "seed": 29322031,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322031.npz",
+        "bytes": 1319236,
+        "sha256": "95980939ebef3dab758c0f54004a14b54b93273ff5b6eb449c7a8cb12d5dd4f3"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 627
+    },
+    {
+      "seed": 29322032,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322032.npz",
+        "bytes": 1355100,
+        "sha256": "793e2aaa390af9f8ae8c633b823900669f961814c51517dc31524037cb9824b2"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 610
+    },
+    {
+      "seed": 29322033,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322033.npz",
+        "bytes": 1361963,
+        "sha256": "7f8da33db3d31e2c7c8e2bfa5ffba2e9b292d25ccb35117f393ea9b8f5ca35f2"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 606
+    },
+    {
+      "seed": 29322034,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322034.npz",
+        "bytes": 1440717,
+        "sha256": "6165da11e0e88587d5f13daa410dfb5431e06ccf1c8343a9c3c41f558b5351bb"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 583
+    },
+    {
+      "seed": 29322035,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322035.npz",
+        "bytes": 1430293,
+        "sha256": "9ef80d58286cc29db343f1c6dd06fd38ea872a08f7213a0bd92497faa4ed5fde"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 578
+    },
+    {
+      "seed": 29322036,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322036.npz",
+        "bytes": 1404725,
+        "sha256": "0c58d9e942d8673f0fed130105490e789540fbcd24308dbbc6ccfbe300575b38"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 556
+    },
+    {
+      "seed": 29322037,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322037.npz",
+        "bytes": 1394331,
+        "sha256": "72c729a41d8d086b94ff683e296c09d36a88196153fe5e3d70809038376c4b07"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 598
+    },
+    {
+      "seed": 29322038,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322038.npz",
+        "bytes": 1411662,
+        "sha256": "9a82ec0a5ee38abe7b5d24cc44ed42f8b480d782e8f47ee754dc93d5bc694fd9"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 716
+    },
+    {
+      "seed": 29322039,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322039.npz",
+        "bytes": 1439591,
+        "sha256": "0dc1ee8861561976db6bf6729de889a12b16cf6c6321465cb56cebe780f6af4d"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 605
+    },
+    {
+      "seed": 29322040,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322040.npz",
+        "bytes": 1461411,
+        "sha256": "2258fb5c169829564f52bea37eddb23fc5f5ed87d6ca0f4a2d4fda301114f20c"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 659
+    },
+    {
+      "seed": 29322041,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322041.npz",
+        "bytes": 1464836,
+        "sha256": "d0beaf61688216a0987d7014e8ead35158fe2e7a988137a74cde6cb71d509df0"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 719
+    },
+    {
+      "seed": 29322042,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322042.npz",
+        "bytes": 1454509,
+        "sha256": "6e2c0a6271b3d3fac95bf0bdf4aba24102a28db2a68a7ca21d76f5865c60a91a"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 610
+    },
+    {
+      "seed": 29322043,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322043.npz",
+        "bytes": 1450464,
+        "sha256": "3a3936dc3f45d64d94df1fe39b820457b5dba31adc15b5f8d5ccb6108f1d40f1"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 634
+    },
+    {
+      "seed": 29322044,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322044.npz",
+        "bytes": 1506779,
+        "sha256": "f64d3a742c2ac605995b86a5ea3e0268b3efd66593ccb3ad5d9099aec8967de2"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 632
+    },
+    {
+      "seed": 29322045,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322045.npz",
+        "bytes": 1419589,
+        "sha256": "f23ea9b073b32ace7c4a488678aa5f47333d64781700d3eebb26b08691fa866f"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 612
+    },
+    {
+      "seed": 29322046,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322046.npz",
+        "bytes": 1475049,
+        "sha256": "30db8c53f337cd5c823f3473a69a0f923c68813f782f532cf0871d79e18db6c6"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 611
+    },
+    {
+      "seed": 29322047,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322047.npz",
+        "bytes": 1517583,
+        "sha256": "4aa8a170ce4290880db2f54ce069b255e58f41490fc782ca58791269330b4178"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 642
+    },
+    {
+      "seed": 29322048,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322048.npz",
+        "bytes": 1469519,
+        "sha256": "2a75353882f4025ceec9b54c2d6bdf8fc3d3a026dd23b02e0febb1807ce90a7e"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 553
+    },
+    {
+      "seed": 29322049,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322049.npz",
+        "bytes": 1419192,
+        "sha256": "47c4fb9adce66fdba80c02e316ea0f91dfe1a459c51c45a23c76e66fe6006f72"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 657
+    },
+    {
+      "seed": 29322050,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322050.npz",
+        "bytes": 1399314,
+        "sha256": "2eba5ff21b57220de6b26d0813562b16aa2ac09ec4dbb59cd8bb281c90b50333"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 642
+    },
+    {
+      "seed": 29322051,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322051.npz",
+        "bytes": 1383072,
+        "sha256": "1e6dd8d6bf9f1849c24f42f33d93c5007cfb47c4c20d78e4b7d557e30a776422"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 627
+    },
+    {
+      "seed": 29322052,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322052.npz",
+        "bytes": 1441570,
+        "sha256": "8cd26618e8314d506228f1cfa7942754ca3b3244f7345cce3569d877f46d7d47"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 632
+    },
+    {
+      "seed": 29322053,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322053.npz",
+        "bytes": 1394303,
+        "sha256": "c8398933ae1fbc154d7f67334ba180989b9119f0904c7df741708a2ad0b06bb3"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 607
+    },
+    {
+      "seed": 29322054,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322054.npz",
+        "bytes": 1350388,
+        "sha256": "ea1509d0e320ae8d8542004ceae67d9b9cae2468d2845a52c16d208aae330682"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 600
+    },
+    {
+      "seed": 29322055,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322055.npz",
+        "bytes": 1443281,
+        "sha256": "5a5ba30e26a4577d2ff52a372c46da4c3836f2dcfecfb543f1d2adfdaa87e49b"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 664
+    },
+    {
+      "seed": 29322056,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322056.npz",
+        "bytes": 1504471,
+        "sha256": "449bc7a6b439825bf2b557acf2ed7a2bf07919fdf47c909aa00982a0ab29ce47"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 553
+    },
+    {
+      "seed": 29322057,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322057.npz",
+        "bytes": 1489539,
+        "sha256": "40009012b2d9007943076dcb52b3857c1cdb575b1538815b5ed2452d2a374fda"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 660
+    },
+    {
+      "seed": 29322058,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322058.npz",
+        "bytes": 1360673,
+        "sha256": "c57f2c4ff29d0feb125b0b8a9d49b8eff27c591ef577f06c01260e76d1e1d131"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 633
+    },
+    {
+      "seed": 29322059,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322059.npz",
+        "bytes": 1454702,
+        "sha256": "4691fd146d53a2c47b8bb96539a5031ee7d51002f4f15a1bb9cbf645e54cc559"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 661
+    },
+    {
+      "seed": 29322060,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322060.npz",
+        "bytes": 1384842,
+        "sha256": "b3e4f44edf2ad4a3379c042bb6a258755dde25d423659b780a2904a748e1da47"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 690
+    },
+    {
+      "seed": 29322061,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322061.npz",
+        "bytes": 1347044,
+        "sha256": "56350a55e630700b3d7a6248bee16856a4da9c8bc4b75feedadf76f3f4d421fe"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 663
+    },
+    {
+      "seed": 29322062,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322062.npz",
+        "bytes": 1439971,
+        "sha256": "5e46eca79a5ea8e5e87da763c986a857fc23b645bde142f78b07628a034922a4"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 605
+    },
+    {
+      "seed": 29322063,
+      "raw": {
+        "path": "/home/wu/projects/HMASD/runs/uav_user_waiting/b02_continuity_a03/raw/M_29322063.npz",
+        "bytes": 1472127,
+        "sha256": "73877d3e73d3a363e9ac1665bea5fa57d54c3322f7ad311fc28caec58abe12f9"
+      },
+      "perturbation_tick": -1,
+      "prior_verified_steps": 256,
+      "prior_physics_pairs": 665
+    }
+  ]
+}
