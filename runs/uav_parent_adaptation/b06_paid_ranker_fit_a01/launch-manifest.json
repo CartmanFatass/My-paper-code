@@ -1,0 +1,96 @@
+{
+  "acceptance": "accepted",
+  "accepted_at": "2026-09-30T21:53:13.922915Z",
+  "bootstrap_command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a89719873d674b3984b71b1e605f3de9/scripts/hmasd_admission.py",
+    "_run-admitted",
+    "--runner",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a89719873d674b3984b71b1e605f3de9/experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/run.py",
+    "--output",
+    "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_paid_ranker_fit_a01",
+    "--",
+    "--phase",
+    "fit",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_paid_ranker_fit_a01",
+    "--launch-sha",
+    "92b6e324e254b129cd790fc87749ae1a5761f35f",
+    "--seed",
+    "29366991"
+  ],
+  "claim_key": "9955539bd12c1f8ae8d45c1de695d44d7d17b90326a9ed8b8bf370e44931f5c0",
+  "claim_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/9955539bd12c1f8ae8d45c1de695d44d7d17b90326a9ed8b8bf370e44931f5c0.json",
+  "command": [
+    "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a89719873d674b3984b71b1e605f3de9/experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/run.py",
+    "--phase",
+    "fit",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_paid_ranker_fit_a01",
+    "--launch-sha",
+    "92b6e324e254b129cd790fc87749ae1a5761f35f",
+    "--seed",
+    "29366991"
+  ],
+  "command_sha256": "1ad0999e9d4fb1688d74b7fa2687fd5babb516ea6844fedab0460e5707fe9c15",
+  "control_observation": {
+    "observed_at": "2026-09-30T21:53:13.715632Z",
+    "ref": "refs/heads/main",
+    "remote": "origin",
+    "sha": "92b6e324e254b129cd790fc87749ae1a5761f35f"
+  },
+  "control_root": "/home/fires/hmasd-wsl",
+  "created_at": "2026-09-30T21:53:13.740305Z",
+  "cwd": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a89719873d674b3984b71b1e605f3de9",
+  "direction": "uav_parent_adaptation",
+  "host_identity": "Jacob",
+  "identity_command": [
+    "/home/fires/.local/share/uv/python/cpython-3.10.20-linux-x86_64-gnu/bin/python3.10",
+    "experiments/candidates/uav_parent_adaptation/b06_continuation_amortization/run.py",
+    "--phase",
+    "fit",
+    "--launch-sha",
+    "92b6e324e254b129cd790fc87749ae1a5761f35f",
+    "--seed",
+    "29366991"
+  ],
+  "lead": "Codex DM (native child)",
+  "manifest_ref": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/launch-manifest.json",
+  "node": "local_linux",
+  "operation_ref": "/home/fires/hmasd-wsl/.git/hmasd-admission/9955539bd12c1f8ae8d45c1de695d44d7d17b90326a9ed8b8bf370e44931f5c0.json",
+  "output_root": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_paid_ranker_fit_a01",
+  "preflight": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/admission-preflight.json",
+  "process": {
+    "detached": true,
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1243446,
+      "session_id": 1243446,
+      "start_ticks": 24378887
+    },
+    "native_handle_kind": "posix_session",
+    "pid": 1243446,
+    "process_group_id": 1243446
+  },
+  "process_exit": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/process-exit.json",
+  "published_remote": "origin",
+  "runner_process": {
+    "identity": {
+      "boot_id": "16933456-3d53-469c-99a9-e7599f804ba7",
+      "kind": "linux_pid_start_ticks",
+      "pid": 1243447,
+      "session_id": 1243446,
+      "start_ticks": 24378891
+    },
+    "pid": 1243447,
+    "process_group_id": 1243446,
+    "supervisor_pid": 1243446
+  },
+  "schema_version": 1,
+  "sha": "92b6e324e254b129cd790fc87749ae1a5761f35f",
+  "source_root": "/home/fires/hmasd-wsl/.git/hmasd-launch-sources/a89719873d674b3984b71b1e605f3de9",
+  "stderr": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/stderr.log",
+  "stdout": "/home/fires/hmasd-wsl/runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/stdout.log"
+}

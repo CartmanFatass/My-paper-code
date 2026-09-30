@@ -1,0 +1,43 @@
+{
+  "data_audit": {
+    "maximum_scalar_feature_error": 5.551115123125783e-17,
+    "new_native_steps": 0,
+    "new_scorer_requests": 0,
+    "references": 198,
+    "rows": 58,
+    "worlds": 16
+  },
+  "numerical_audit": {
+    "diagnostics": {
+      "coefficient_movement_l2": 0.013647138048915135,
+      "objective": 0.00010330279596159241,
+      "penalty_value": 1.8624437692614723e-05,
+      "prediction_movement_rms": 0.014912945919557108,
+      "system_condition": 44.80634855357793,
+      "weight_sum": 0.9999999999999999,
+      "weighted_mse": 8.467835826897768e-05,
+      "zero_beta_weighted_mse": 0.0003443231896538422
+    },
+    "maximum_beta_error": 6.7220534694101275e-18,
+    "maximum_normal_equation_residual": 3.279711571768651e-18,
+    "new_scientific_fits": 0,
+    "rank": 13,
+    "verification_lstsq_solves": 1
+  },
+  "ranker": {
+    "bytes": 438494,
+    "path": "ranker.json",
+    "sha256": "a2b5d1a8c127c50494e8b8aa76ff84ba3ca61e4b5db6281e4713e524ea2fd0c1"
+  },
+  "source_sha": "92b6e324e254b129cd790fc87749ae1a5761f35f",
+  "status": "complete",
+  "timing": {
+    "cpu_seconds": 1.456626123,
+    "wall_seconds": 1.4566592180053703
+  },
+  "training_rows": {
+    "bytes": 455360,
+    "path": "training_rows.json",
+    "sha256": "81f06b7627b6bdd0a276cebce193e547e12b78a8009aa5afe9b784da3ae5537d"
+  }
+}

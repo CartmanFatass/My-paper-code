@@ -5612,3 +5612,44 @@ in1.70s. I accept the implementation and checks. The CLI and whitespace checks
 are clean. Actual admitted snapshot consumption, fit and evaluation remain
 unexecuted at this source-publication boundary; no extra native fixture is
 needed or selected. This is engineering acceptance, not a scientific result.
+
+
+**2026-09-30 21:54 UTC — single admitted fit complete and read.**
+Source92b6e324e254b129cd790fc87749ae1a5761f35f was published before the
+local_linux kernel accepted the fit at21:53:13.922915UTC. Its exact source,
+command, admission, native identities and output binding are preserved in the
+[fit launch manifest](../../../../runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/launch-manifest.json).
+The preceding engineering-acceptance label21:54 is a clock transcription error:
+acceptance preceded the21:52 source publication, and no result preceded it.
+The maintained observer initially refused adding a job to its stopped prior
+state; I drained empty generation16, rearmed17, and registered the same accepted
+fit handle at18. It observed consistent terminal exit0 and absent native
+processes. Its native-child App queue delivery returned code-32600; I read the
+same local event, consumed it and rearmed19. No worker was relaunched.
+
+The [complete fit reading](../../../../runs/uav_parent_adaptation/b06_paid_ranker_fit_a01/reading.json)
+verifies58rows/16worlds/198references and the independent13-column equation.
+One FP64 scientific solve executed,0optimizer updates,0new scorer requests,
+0new native steps and0training acquisition. The separate augmented-lstsq
+verification is not another selected scientific fit. Maximum coefficient error
+6.7221e-18 and normal-equation residual3.2797e-18; system condition44.80635.
+Beta L2=.01364714, prediction RMS=.01491295; weighted training MSE changes
+from zero-beta.0003443232 to.00008467836. Column5 (current height, zero-based)
+is constant and has exact zero learned coefficient. These establish an active
+numerically checked fit, not native utility, generalization or adoption.
+
+The immutable ranker SHA256 is
+a2b5d1a8c127c50494e8b8aa76ff84ba3ca61e4b5db6281e4713e524ea2fd0c1
+(438,494bytes); training_rows.json is455,360bytes, SHA256
+81f06b7627b6bdd0a276cebce193e547e12b78a8009aa5afe9b784da3ae5537d.
+I verified saved artifact lengths/hashes and read all numerical diagnostics.
+Extraction took.470497CPU-s, fit kernel.005184CPU-s, worker including writes
+.502933CPU-s, independent reader1.456626CPU-s; entry-to-final-summary scope
+1.966261CPU-s/1.978885wall-s. Inclusive process resource reading is3.603048
+selfCPU-s plus.002499childCPU-s and323,900KiB process peakRSS; imports are in
+that broader scope. The scope difference is retained, not added twice.
+
+Publish the complete compact fit/config/reading/row/native records now, then
+execute the already selected64-episode panel against this exact artifact.
+There is no coefficient, feature, penalty, seed, comparator or stopping-rule
+change and no additional fit. No evaluation result has been observed.
