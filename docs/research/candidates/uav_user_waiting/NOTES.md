@@ -3424,3 +3424,307 @@ steps, model/controller queries, allocation replays, outcome reductions
 or code/test changes. Cumulative completed B01–B04 cost remains two fits,
 327,792 result steps,272 correctness steps and13,293.473639 measured
 worker/reader CPU seconds, plus separately described support/fixtures.
+
+<a id="b05-original-oracle-advice"></a>
+## 2026-09-30 — complete allocation Oracle question, advice and DM response
+
+Root requested preservation and full reading of the original source-assessment
+question and recommendation. The complete original texts follow; their
+source-only status is historical. Root subsequently selected the bounded
+allocation replay described below. No result calculation preceded that choice.
+
+### Root's original question to the independent Oracle
+
+> New source-only next-allocation assignment, reusing your independent Astra Max context and the original M/S/U/K recommendation. Waiting B04 is now fully verified, independently diagnosed, published5d6353ff59da4b2b5c796629cacb4820ab0bb986 and closed/reserve atd02e5029f. Root read the complete DM result and the ORIGINAL result critic plus final addendum (agent/root/dm_user_waiting/scientific_reading, window01a0f458-766c-74c0-836d-83f7117e6bcd, items811039568 and678354406). Evidence: NOTES#b04-complete-reading/#b04-independent-review-and-disposition and runs/uav_user_waiting/b04_service_floor_a01/result.json (SHA ccd52d06fe48c7e3f5315b834cb702e1b22b826df25af68a6e2eeb7e3a09707a); full reader SHA69787803…89513, source dd3b2577d. Read original outcomes/adverses before proponents' reasoning; reuse that critic's complete reconstruction, no duplicate result audit.
+> 64worlds/256H256/65,536steps/0fits: K−M service−.036499[t95−.243719,+.170721], max-gap−2.5625[−6.365632,+1.240632], worst-user mean age−1.018494[−2.052410,+.015423]. Joint mean sign fails on service, but mixed near-M evidence is NOT B03's uniform learned loss, equivalence or impossibility. U−S gives service+.486389 and worst-user age−1.599670 (both intervals exclude0), G−1.104375, J+.005405; extra1.353448schedulerCPU-s/episode and lowerquality. U still loses3.069336service vsM in ALL64worlds while improving extreme tails. All4096 K floorshold,289same-stateMphysicaldepartures; +1034modeledservice margin−88 selected prediction residual but full−598 user-ticks because K-state reference sum is1544belowMtrajectory. This is accounting, not an identified cause; first divergenceK06/K34 predictedexact yetlateradverse. Everyroundtimely. Readercomplete154478candidatepairs617014physicaltransitions plusallmetrics/history/choice, sharedradiokernel. Completeworker+reader2342.870991CPU-s; fixture32steps/3.300429CPU-s separate. Retain M, costedU, cheaperS, K'smixedfacts; stop automaticKextension/repair.
+> Question for Root allocation: given this cumulative service/continuity frontier and the active negative finite-learning results, what substantive knowledge/use question is worth this DM's next effort, if any? Give demonstrated ordinary capability genuine development/use consideration, but do not default to another floor/debt/horizon/ACK repair, a parameter sweep or precision-only extension without a real prospective decision. You may recommend a materially independent research question or a reasoned stop; no fixed idea count or manufactured promise. New acquisition/learning is allowed as a proposal only if a complete matched comparison would answer a useful question beyond asset ranking; explain its physical information/action rights and strongest simpler alternative. Owner wants4substantiveDMs, but source preparation is not a selected result study.
+> Use cumulative records, all3local libraries, July/external rounds and load-bearing primary passages/web as needed; no novelty from a library miss. Work with SAME /root/dm_user_waiting for bounded source/interface/full-cost facts; I am rearming it for this source-only question. N8 temporal and planner-amortization results are being considered together by /root/deep_report_review, so coordinate concrete overlap rather than purchase duplicate designs. Fleet B06 count-diverse imitation is already selected/implementing4fits/679936steps+40fixture at2687e773, not available to duplicate. Claude's paused questions remain owned. Return original reasoned recommendation, outcome-dependent decisions, full training/native/model/reader/engineering/support/retention costs and material dissent. No code edits, probes, controller/actor/model/native queries, fits, prototype execution or launch; Root will choose the next cross-question allocation.
+
+### Complete original Oracle recommendation
+
+> **Recommend a bounded pivot: test ordinary local service allocation on the saved M/S/U trajectories.** Buy the complete replay comparison below; do not buy another K extension, learned-value repair or fresh acquisition now.
+>
+> The question is: **How much of the observed continuity cost comes from always assigning capacity to the highest-SINR users, and can ordinary local allocation improve it without changing UAV motion, transmitter use or served counts?** This develops the demonstrated controllers through a materially different control right. It makes no novelty claim for round-robin or recency scheduling.
+>
+> I reviewed B04’s compact outcomes and consequential positive/adverse rows, then read the complete original critic and verifier addendum. I reuse their full reconstruction. K61 preserves a genuine joint-positive example; K34 loses episode service and adds 30 maximum-gap ticks despite exact prediction at its first departure. U’s service/F_user improvement over S remains useful, with additional computation and lower quality. Those results justify retaining the ordinary capability, but identify neither a K repair nor a learning bottleneck. Root supplied result headlines, so this successor review is not blinded to B04.
+>
+> The new comparison has a source-backed separation:
+>
+> - With the frozen non-FDMA interference law and 3 dB threshold, a user cannot be eligible for two UAVs simultaneously. Two eligible transmitters would each need received power greater than the other.
+> - Consequently, any allocator filling each UAV’s eligible set to `min(10, eligible users)` preserves the original per-tick served count.
+> - Associations do not determine interference, physical movement or native observations. C and the manager receive geometry, commands and modeled history; actual connections and reward remain evaluator outputs.
+> - Keeping the manager’s original modeled-greedy history unchanged therefore preserves the recorded physical trajectory. Feeding the new grants back into that history, or changing its forecast law, would invalidate this replay claim.
+>
+> I directly inspected these dependencies and matched seven consequential current source files to B04’s frozen identities, including the [radio law](/home/fires/hmasd-wsl/envs/pettingzoo/uav_radio.py:33), [observation construction](/home/fires/hmasd-wsl/envs/pettingzoo/uav_env.py:405), [collector](/home/fires/hmasd-wsl/experiments/candidates/uav_user_waiting/b04/study.py:119) and [history settlement](/home/fires/hmasd-wsl/experiments/candidates/uav_registered_service/b01/history.py:85). This narrowly satisfies the July review’s warning against replaying action tapes when counterfactual observations would change.
+>
+> **The strongest consequential limitation is mathematical: highest-SINR allocation already maximizes native quality at fixed positions, mask and served count.** An alternative can retain quality through ties or sacrifice it; it cannot improve mathematical native J on that same path. The proposed benefit is service continuity with a measured quality/J price—not an unrestricted improvement of the original reward.
+>
+> The smallest worthwhile complete comparison is all 64 B04 worlds, each of the three immutable physical programs M/S/U, under these three allocation laws:
+>
+> | Law | Causal selection rule |
+> |---|---|
+> | Original | Frozen descending-SINR assignment, capacity 10 |
+> | Cyclic RR | Scan persistent registered IDs cyclically, fill capacity from currently eligible users, advance after the last grant |
+> | Local LRS | Serve users least recently granted service **by this UAV**; break ties by higher current SINR, then ID |
+>
+> Freeze the RR initial cursor and empty-set behavior prospectively; a simple choice is cursor zero and no advancement without a grant. Initialize each LRS timestamp to −1. Reset contacts are unscored and do not initialize grant history.
+>
+> Both new laws receive the same explicitly richer **local** interface: current eligible user identities/SINRs, persistent identity across the mission, and their own previous grants. They receive no future eligibility, other UAV’s grant history, global true age or cross-UAV ACK. At handoff, an arriving user may look locally unserved despite having just received service elsewhere. LRS must preserve that limitation.
+>
+> Grant implies service in this simulator, so recording an own grant needs no additional acknowledgment. Exposing the full eligible-ID list and choosing the capacity subset is nevertheless a new observation/action contract. It is not already an action available to the frozen motion actor. Central reports remain unchanged; hardware discovery, addressing and timing costs are not thereby established as zero.
+>
+> RR is the simpler fairness comparator. LRS tests whether retaining local recency adds useful value under changing eligibility. These can resemble the same cycling discipline with a fixed eligible set; their names alone do not establish different mechanisms. The frozen highest-SINR law remains the competent quality comparator.
+>
+> The declared reading should retain:
+>
+> - Full-episode maximum gap, worst-user mean age, original typical-gap G, overall age, and all censoring boundaries.
+> - Served-count equality at every tick, quality/J, and inherited path/transmitter/manager costs.
+> - Every world, per-user outcomes, changed-grant exposure, capacity exclusions and intervals without any eligible link.
+> - Within-program allocator contrasts, LRS−RR, and the resulting M/S/U operating choices. Use 64 paired world clusters; users, ticks and the 576 resulting rows are not independent replications.
+>
+> These are reused development worlds. No fresh confirmation or population-optimal frontier follows. K’s mixed evidence remains intact outside this proposed intervention; neither K nor other physical controllers are declared inferior under the revised allocation law.
+>
+> The outcomes would change real choices:
+>
+> - **RR improves continuity at an acceptable observed quality price, and LRS adds little:** retain simple RR as the ordinary allocation option. Stop local-history elaboration.
+> - **LRS adds useful continuity beyond RR:** retain that ordinary memory capability and its costs. This establishes no need for learning.
+> - **M with fair allocation reaches the useful tail range of U while retaining M’s service count:** revise the practical comparison toward that combined operating option. The original M/U tradeoff was partly contingent on allocation law.
+> - **U retains a tail advantage after both receive the same allocation right:** retain a distinct contribution from U’s physical program.
+> - **Few grants change:** report sparse capacity-choice exposure and stop this purchase without claiming scheduling is generally ineffective.
+> - **Grants change substantially but continuity remains poor or worsens:** stop these allocation rules. Do not automatically escalate to global ACK, new weights or another learner.
+> - **Source invariance or baseline reconstruction fails:** the affected replay is invalid; no automatic native replacement run follows.
+>
+> A favorable replay would establish complete conditional episode outcomes for this add-on. It would not establish live deadline compliance or authorize adoption. A later integration purchase would require valuing the measured continuity/quality tradeoff.
+>
+> The same DM supplied this complete feasibility response, without calculating new outcomes:
+>
+> | Cost or exposure | Proposed complete study |
+> |---|---|
+> | Inputs | 192 existing H256 traces; 262,741,183 bytes; stat check found no missing files or size mismatches |
+> | New allocation outcomes | 384 H256 outcomes, 98,304 fleet allocation steps |
+> | Original-law reconstruction | 192 outcomes, 49,152 fleet steps |
+> | Producer plus full reader | 294,912 fleet allocator calls; 1,474,560 UAV subdecisions; 294,912 service/quality/age reductions |
+> | Eligibility accounting | Budget up to 49,152,000 threshold entries across both passes |
+> | New fits, native steps/resets, C calls, radio predictions, candidate search | **Zero** |
+> | Worker plus reader estimate | **0.05–0.20 CPU hours**, including input hashing, reads, metrics and serialization |
+> | Memory | Expected ≤0.25 GiB; no GPU |
+> | Engineering and support | **4–6 active hours**, covering rules, causality tests, independent reader/review, interpretation, publication and retention |
+> | New retained bulk | One contact stream per new law/trace: 4,915,200 Boolean bytes, or 688,128 row-packed bytes, plus compact outcomes and bindings |
+>
+> These are source estimates, not profiling measurements. Input hashes must be checked during execution. Reuse original SINR/path files in place. B04’s 65,536 native steps and 2,342.871 worker-plus-reader CPU seconds are already paid evidence; this replay is additional result-bearing work despite zero new native calls. Current review/support time is incompletely metered.
+>
+> Live allocator latency, interference with the manager deadline, integration into the native interface and hardware channel/ACK realism remain unverified and unpriced. The proposed study does not silently include those purchases.
+>
+> I searched all three local library catalogs and the available My-lib hints, and revisited the relevant July/external-review constraints. A search miss supplies no novelty verdict. Primary antecedents already support ordinary fairness/age scheduling: [Han et al., arXiv:2010.07139, §III-A](https://arxiv.org/pdf/2010.07139) analyzes clustered round-robin under specific homogeneous-channel assumptions; [Talak et al., arXiv:1803.06471, §§II/V](https://arxiv.org/pdf/1803.06471) uses centrally available channel state and ages. Neither guarantee transfers to these changing eligibility sets and strictly local grant histories.
+>
+> I prefer this purchase to another motion/value intervention because it tests a distinct causal lever using complete existing trajectories at bounded cost. If Root does not value studying the richer allocation interface, retain waiting in reserve; the present evidence supplies no comparably justified automatic continuation within the old interface.
+>
+> **MATERIAL_DISSENT: no** — Root has selected no new run and requested this assessment. My recommendation is the bounded allocation replay, with explicit new rights, quality/J consequences and live-timing limits.
+
+### DM scientific response and selected scope
+
+I read the complete original question and answer. I accept the bounded
+allocation-rights question and its three-law comparison. The source proof
+removes an unnecessary new physical acquisition; it does not make this a
+free result or establish a favorable tail tradeoff. Root has now explicitly
+selected this purchase because distinguishing allocation loss from physical
+path limitations and developing M/S/U is worth the estimated4–6 support
+hours. The earlier source-only entry and the Oracle's historical unselected
+wording remain intact. B05 is the one active result-bearing study; B01–B04
+and K's positive/adverse evidence remain closed and preserved.
+
+The response to the material premises is:
+
+- **Rights and invariant:** full current local eligible IDs/SINRs and own
+  grants are an explicit new local observation/action contract, common to
+  RR and LRS. No actual global age, other UAV's grant, future eligibility,
+  new BS packet or new C input is supplied. The original manager's
+  modeled-greedy history is an invariant, not an estimate we may update
+  using the new outcomes. Preserve complete original physical programs,
+  delivery/timeliness and all source bindings.
+- **What the intervention identifies:** alternate complete contacts on a
+  fixed eligible-link sequence identify the effect of those allocation
+  rules conditional on each retained physical program. A gap may contain
+  both capacity-denied and no-link ticks; their counts are not a unique
+  additive causal decomposition of its length. Report the actual changed
+  grants and full gaps, plus the eligibility/exclusion exposure, without
+  claiming that all residual waiting is an immutable physical limit.
+- **The ordinary comparison:** original greedy is the quality comparator;
+  cyclic RR is the simpler fairness option; LRS is a competent alternative
+  using own recency under changing eligibility. RR also carries state in
+  its cursor. LRS−RR therefore compares complete scheduling disciplines
+  and their tie rules, not an isolated causal effect of memory. At fixed
+  eligible sets they may agree; naming alone establishes no mechanism.
+- **Native value:** service-count equality and the quality/J ceiling are
+  structural checks, not successful empirical discoveries. No alternative
+  can improve J on its own fixed path. Cross-program combinations may
+  still change useful service/continuity/quality choices; keep their full
+  measured costs. No post hoc acceptable-quality threshold, scalar weight,
+  tolerance or population-optimal frontier will be invented.
+- **Cost and decision:** I accept the4–6 active support-hour purchase as
+  engineering, independent reading, interpretation and publication work,
+  not as zero cost because no native steps are needed. The0.05–0.20 CPUh
+  and≤0.25GiB streaming figures remain uncalibrated planning estimates.
+  Actual allocator/reduction/hash/I/O counts and process resources will
+  be recorded. Sparse exposure or adverse tails can justify a stop with
+  no automatic additional rule, ACK, learner, native fallback or pilot.
+
+I directly read the two cited primary passages. Han et al.
+[arXiv:2010.07139v4, §III-A, PDF p4](https://arxiv.org/pdf/2010.07139)
+assumes homogeneous independent time-varying error probabilities for its
+clustered-RR guarantee and defines clustered RR through longest transmission
+intervals. Talak et al.
+[arXiv:1803.06471v1, §§II/V, PDF pp2/6](https://arxiv.org/pdf/1803.06471)
+uses current link channel states and link ages in its age-weighted activation
+rule, under temporally independent channel states. These are ordinary-model
+antecedents, not guarantees for finite H256 trajectories, changing local
+eligibility or own-UAV grant memory. The waiting metric here resets to0
+after service; the cited packet-age recurrences use a one-slot convention.
+No theorem, novelty verdict or empirical support is transferred. The exact
+arXiv PDFs are the source locations; no matching paper ID was found in the
+three catalog searches made for this direct passage check.
+
+Root's selected closure conditions are adopted: a baseline/source-invariance
+failure stops the affected replay for diagnosis; no automatic native
+replacement follows. Favorable replay remains conditional development
+evidence, with live latency, scheduling interference, hardware discovery/
+addressing and native integration unverified and outside this purchase.
+Reset contacts and unscored mask-refresh associations do not initialize
+or update new grant histories. Only the256 scored postmove transitions do.
+There is no material scientific dissent; the causal and memory-attribution
+limits above narrow the interpretation without changing the selected laws.
+
+<a id="b05-local-allocation-prospective"></a>
+## B05 — selected complete local-allocation replay; prospective contract and L0
+
+Root selects the complete comparison above. The published shared background
+and selection at `d976f4ef8` and the current
+[Root decision](../../RESEARCH.md#waiting-local-allocation-root-decision-20260930)
+are reused: this purchase tests a distinct allocation right while preserving
+the retained physical capabilities, the quality ceiling and all old adverse
+outcomes. It is exploratory development on already exposed worlds, not
+confirmation, a native integration trial or a learning study. No acquisition,
+fit, C/radio-model query or parameter search is included. Code preparation
+starts after this entry; no production allocation outcome has been computed.
+
+**Frozen object and inputs.** Name `UAV-USER-WAITING-B05`; use exactly
+B04 source `dd3b2577d407b57a3b76ea4ba95b6ead4349d0d4`, its complete summary
+and reader at the hashes recorded above, and M/S/U × seeds29426000–29426063.
+Each source trace has256 scored postmove ticks, five UAVs and50 registered
+users. Use canonical remote files in place. Source metadata and every raw
+file are hash-checked before their allocations are consumed; retain their
+identities in the new config/results. The radio, native step/observation,
+adapter, real factory, C, collector and modeled-history/scheduler source
+bindings supporting the separation must match the frozen B04 identities.
+Do not instantiate any old environment, C, scheduler, learner or predictor.
+There is no new native reset or step. A violated binding, non-disjoint
+eligible set, original-allocation mismatch, count violation or quality
+ceiling violation stops the affected replay with its paid prefix/error;
+there is no automatic replacement or native fallback.
+
+**Policies and causal interface.** Programs are M/S/U; allocation laws are
+`ORIGINAL`, `RR`, `LRS`. At every scored tick, each fair allocator sees
+only its own current eligible registered IDs and their actual SINRs, the
+tick and its own state. Eligibility is SINR>=3dB; disabled rows remain
+ineligible. It grants exactly min(10,eligible count) users. Each law/path
+has separate state, reset at the mission boundary. RR starts each UAV at
+cursor0, scans ascending IDs modulo50 from its cursor, stops after the
+last needed grant and advances to the following ID. If no grant is made,
+the cursor is unchanged. LRS starts each own-UAV/user timestamp at−1,
+sorts by earlier own grant, then higher current SINR, then smaller ID,
+and sets selected timestamps to the current scored tick. No reset or
+unscored mask-refresh contacts initialize/update either history. No other
+UAV history, global age, future eligible set, reward or original selected
+connections enter a fair rule. The original manager's modeled-greedy
+history, physical path, observations, reports, masks and delivery remain
+unchanged; only the evaluator's new actual contact streams differ.
+
+**Complete reading.** Produce all576 law/path rows:192 complete original
+reconstructions and384 new complete fair outcomes. Baseline reconstruction
+means all original assigned-user bits and all256 native served/quality/J
+values, plus the original episode age/gap endpoints; it does not rerun the
+already verified old C/search/model histories. Keep full post-transition
+age accounting (initial0, service resets0, otherwise+1), every unserved
+interval `[start,end)`, its left/right mission-boundary censoring, and
+per-user service counts, mean ages and longest gaps. Record F_user,
+episode maximum gap, G=mean per-user maximum gap, A, age_p95, terminal age,
+never-served users, closed and censored gap maxima, mean service, quality
+and J. Preserve inherited physical path, transmitter and manager costs
+separately from new allocation/replay costs.
+
+For each law retain changed-grant user/tick exposure against ORIGINAL,
+per-user capacity-denied versus no-link ticks, and no-link intervals.
+Distinguish an eligible set of size10 from a genuine choice of size>10.
+Every unserved tick must be classified; a mixed gap retains both counts.
+The three-law within-program contrasts and LRS−RR are primary interpretive
+comparisons; preserve all36 unordered comparisons of the nine program/law
+packages to read the complete operating choices without selecting a new
+contrast after seeing results. Report each64-world paired vector, mean,
+sample SD and descriptive t95 interval; the t63 critical value is fixed
+at1.998340542520741 (the inherited SciPy definition checked as arithmetic,
+not a data query). No bootstrap, fitted test, acceptance weight or new
+equivalence/adoption tolerance is added. Numerical array/reduction checks
+use exact integer/contact equality and at most1e−12 absolute floating
+error; report actual maximum discrepancies. This tolerance is numerical,
+not a service/quality noninferiority margin.
+
+**Cost and output contract.** The full prospective cost table above applies:
+producer147,456 fleet allocations/737,280 corresponding UAV decisions and
+147,456 service/quality/age reductions; the independent complete reader
+repeats all. Original-kernel calls and RR/LRS row selections are exposed
+separately from these conceptual UAV allocation components. Count actual
+threshold scans, input hashing/bytes, original/new complete outcomes,
+partial work, all zero native/model/C/fit/update counters and correctness
+fixtures. Up to49,152,000 threshold entries for both passes is the declared
+conservative bill, not a requirement to add redundant scans. The0.05–0.20
+CPUh total estimate and0.25GiB streaming target remain estimates, not a
+fit allowance or outcome-based stop. Instrument complete process user/sys
+CPU, wall and peak RSS, plus allocator-only timing as replay computation,
+not live deadline compliance. The4–6 active support-hour estimate includes
+implementation, independent review/reader, reading, publication and cleanup;
+unmetered support is not reported as zero.
+
+Retain one new Boolean50-user contact stream for each fair law/path, with
+source/member identities; no duplicate original SINR/path/history tree.
+Keep compact complete rows, paired vectors, per-user age/gap/censoring and
+exposure, source bindings and native operation records in
+`runs/uav_user_waiting/b05_local_allocation_a01/`. A separately admitted
+full reader uses `b05_local_allocation_read_a01/`, verifies all192 inputs
+and all576 outcomes independently, and retains its complete reading.
+Durable bulk stays on the canonical node; no whole-tree backup is needed.
+
+**L0 implementation and ownership.** Shared main checkout is
+`/home/fires/hmasd-wsl`. One bounded Implementer owns only new
+`experiments/candidates/uav_user_waiting/b05/{__init__,protocol,allocation,study,run}.py`
+and matching `tests/experiments/candidates/uav_user_waiting/b05/test_allocation.py`
+and `test_study.py`: implement the causal allocation producer with the
+fixed bindings, counts, streaming outputs and admitted CLI. The DM owns
+the numerical reader (`b05/reader.py`, `b05/read.py`, `test_reader.py`),
+NOTES, RESEARCH and run publication. Sharing protocol constants or
+hash/JSON utilities is allowed; the reader must not use producer
+allocators or outcome/paired reducers as numerical proof. Helpers cannot
+write notebooks, old B01–B04 code/evidence, shared core or the Git index,
+commit, launch or read/reduce production raw arrays. Preserve other
+writers; no checkout, branch or source-tree copy is created.
+
+Checks cover capacity/exclusivity, empty/off rows, ties, cyclic wrap,
+changing eligibility, handoff-local history, mission reset, no future/
+other-UAV input, original reconstruction, quality ceiling, exact ages and
+gap censoring, malformed/truncated/hash-mismatched input and complete
+output identity/counts. Use small synthetic correctness fixtures under
+pytest-managed scratch; no saturation pilot or production-data test run.
+The DM reads and accepts the diff/checks. A registered independent
+engineering Reviewer checks the high-risk causal replay and numerical/
+input boundaries before exact input publication and launch. The existing
+ResearchCritic independently diagnoses the complete result afterward.
+The current Oracle review covers this selected scientific decision; no
+additional Pro/review round is needed absent a material change.
+
+After source publication and active direction/lead verification, use the
+configured remote interpreter, native admission and detached worker/reader
+observation. Root reports fleet B06 producer/reader released the node at
+23:07:11UTC; fresh actual occupancy/memory admission still applies. The
+native DM remains active through complete reading and publishes its own
+disposition/background/standing. New live integration, rule elaboration,
+fresh-world confirmation or learning requires a substantive new choice;
+finishing this replay grants none of them.
