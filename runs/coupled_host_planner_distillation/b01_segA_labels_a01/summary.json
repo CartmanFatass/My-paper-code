@@ -1,0 +1,7041 @@
+{
+  "schema": 1,
+  "direction": "coupled_host_planner_distillation",
+  "cell": "b01",
+  "piece": "2 (Markov teacher T_M, zero fit)",
+  "tool": "coupled_host_planner_distillation.run_markov",
+  "launch_sha": "f46151ae6ed7a09a2019ba2f02975c1b92fb489a",
+  "admission": {
+    "schema_version": 1,
+    "direction": "coupled_host_planner_distillation",
+    "sha": "f46151ae6ed7a09a2019ba2f02975c1b92fb489a",
+    "command_sha256": "5b350fb2ceff2ebd5255d3510425ee2276a2f9e923a68045bf4024b0c07b054f",
+    "parent_pid": 581851,
+    "child_pid": 581852,
+    "accepted_at_epoch": 1790740151.6388261
+  },
+  "git_head": "f46151ae6ed7a09a2019ba2f02975c1b92fb489a",
+  "training_fits_performed": 0,
+  "worlds": [
+    3000,
+    3001,
+    3002,
+    3003,
+    3004,
+    3005,
+    3006,
+    3007,
+    3008,
+    3009,
+    3010,
+    3011,
+    3012,
+    3013,
+    3014,
+    3015,
+    3016,
+    3017,
+    3018,
+    3019,
+    3020,
+    3021,
+    3022,
+    3023,
+    3024,
+    3025,
+    3026,
+    3027,
+    3028,
+    3029,
+    3030,
+    3031,
+    3032,
+    3033,
+    3034,
+    3035,
+    3036,
+    3037,
+    3038,
+    3039,
+    3040,
+    3041,
+    3042,
+    3043,
+    3044,
+    3045,
+    3046,
+    3047,
+    3048,
+    3049,
+    3050,
+    3051,
+    3052,
+    3053,
+    3054,
+    3055,
+    3056,
+    3057,
+    3058,
+    3059,
+    3060,
+    3061,
+    3062,
+    3063,
+    3064,
+    3065,
+    3066,
+    3067,
+    3068,
+    3069,
+    3070,
+    3071,
+    3072,
+    3073,
+    3074,
+    3075,
+    3076,
+    3077,
+    3078,
+    3079,
+    3080,
+    3081,
+    3082,
+    3083,
+    3084,
+    3085,
+    3086,
+    3087,
+    3088,
+    3089,
+    3090,
+    3091,
+    3092,
+    3093,
+    3094,
+    3095,
+    3096,
+    3097,
+    3098,
+    3099,
+    3100,
+    3101,
+    3102,
+    3103,
+    3104,
+    3105,
+    3106,
+    3107,
+    3108,
+    3109,
+    3110,
+    3111,
+    3112,
+    3113,
+    3114,
+    3115,
+    3116,
+    3117,
+    3118,
+    3119,
+    3120,
+    3121,
+    3122,
+    3123,
+    3124,
+    3125,
+    3126,
+    3127
+  ],
+  "budget": 3000,
+  "seed": 0,
+  "label_seeds": [
+    0,
+    1,
+    2
+  ],
+  "mode": "segment_A_labels",
+  "worlds_in_dev_panel": [],
+  "worlds_in_holdout_panel": [],
+  "worlds_in_label_set": [
+    3000,
+    3001,
+    3002,
+    3003,
+    3004,
+    3005,
+    3006,
+    3007,
+    3008,
+    3009,
+    3010,
+    3011,
+    3012,
+    3013,
+    3014,
+    3015,
+    3016,
+    3017,
+    3018,
+    3019,
+    3020,
+    3021,
+    3022,
+    3023,
+    3024,
+    3025,
+    3026,
+    3027,
+    3028,
+    3029,
+    3030,
+    3031,
+    3032,
+    3033,
+    3034,
+    3035,
+    3036,
+    3037,
+    3038,
+    3039,
+    3040,
+    3041,
+    3042,
+    3043,
+    3044,
+    3045,
+    3046,
+    3047,
+    3048,
+    3049,
+    3050,
+    3051,
+    3052,
+    3053,
+    3054,
+    3055,
+    3056,
+    3057,
+    3058,
+    3059,
+    3060,
+    3061,
+    3062,
+    3063,
+    3064,
+    3065,
+    3066,
+    3067,
+    3068,
+    3069,
+    3070,
+    3071,
+    3072,
+    3073,
+    3074,
+    3075,
+    3076,
+    3077,
+    3078,
+    3079,
+    3080,
+    3081,
+    3082,
+    3083,
+    3084,
+    3085,
+    3086,
+    3087,
+    3088,
+    3089,
+    3090,
+    3091,
+    3092,
+    3093,
+    3094,
+    3095,
+    3096,
+    3097,
+    3098,
+    3099,
+    3100,
+    3101,
+    3102,
+    3103,
+    3104,
+    3105,
+    3106,
+    3107,
+    3108,
+    3109,
+    3110,
+    3111,
+    3112,
+    3113,
+    3114,
+    3115,
+    3116,
+    3117,
+    3118,
+    3119,
+    3120,
+    3121,
+    3122,
+    3123,
+    3124,
+    3125,
+    3126,
+    3127
+  ],
+  "b04_run": {
+    "path": "/home/fires/hmasd-wsl/runs/coupled_host_joint_skills_stage1/b04_b0_dev_a01",
+    "summary_sha256": "196ee0131f0f7d5d900133a2237bd77c99b8397b1d1191d334e041b69f9bde41",
+    "launch_sha": "c8ff47d2c85141f27badaf4353108219373718f5",
+    "budget": 3000
+  },
+  "information_contract": {
+    "macro_k": 10,
+    "decisions_per_episode": 50,
+    "min_known_for_search": 6,
+    "pooling": "every host step (every rollout call of targets_fn) and once at the terminal state: the union of all six UAVs' env._get_local_users views enters the team map (latest xy per user)",
+    "trigger": "re-plan iff the pooled known set (frozenset of user ids) differs from the set of the last plan (or no plan exists yet) and >= 6 users are known; layout cached by the known set; targets = layout[assign_targets(current positions, layout)] at every decision",
+    "hold_rule": "targets decided at t % 10 == 0 are held for 10 host steps; while fewer than 6 users are known every UAV's target is its spawn position",
+    "planner_cap": null,
+    "planner_seed": "constant --seed (the planner's world argument is only its RNG seed)",
+    "shadow_user_set": "known users only: deep copy of the live host with n_users = n_known and user_positions = the known users' latest sighted xy (index order), channel state recomputed by static_evaluate; unknown users are absent from k-means, association and reward; the host's own contract reward normalises C_bh by n_known (not by 50)",
+    "no_event_t_e": 1000000000,
+    "sightings": "every user env._get_local_users(i) returns (uncapped), read row by row"
+  },
+  "features": {
+    "dim": 168,
+    "layout": "50 x [known, x/5000, y/5000] (user index order; unknown -> 0) + 6 x [x/5000, y/5000, (z-50)/100] (teacher.features without ego)"
+  },
+  "definitions": {
+    "all_mean": "mean C_bh over the 500 host steps of T_M",
+    "final_100_mean": "mean C_bh over steps 400..499 of T_M",
+    "b04_B0_all_mean": "committed b04 B0 all-500 C_bh (budget 3000, world-seeded planner)",
+    "tm_minus_b0": "all_mean - b04_B0_all_mean (a reading, not a gate)",
+    "planner_calls": "control plans (re-plans), one per distinct known set with >= 6 users",
+    "cache_hits": "decisions with >= 6 known whose known set equals the last plan's set",
+    "assignment_changed": "on a cache-hit decision: the assign_targets permutation differs from the previous decision's permutation (same cached layout); None on re-plan and hold decisions",
+    "hold_steps": "host steps whose targets are the spawn positions because no plan exists",
+    "labelled_decisions": "one per re-plan; layouts for every label seed",
+    "labels_z_all_50": "every z of every labelled layout (all seeds) equals 50 m exactly",
+    "layout_box_faces": "labelled-layout components within 1e-9 m of each face of the box",
+    "cpu_s.planner": "process CPU inside the control-seed B4.plan_on_known calls",
+    "cpu_s.label_planner": "process CPU inside the extra label-seed plan_on_known calls",
+    "cpu_s.assign": "process CPU inside B4.assign_targets",
+    "cpu_s.rest": "episode CPU minus planner, label planner and assignment",
+    "replay": "per-decision targets replayed on a second fresh host under the same 10-step hold; C_bh and reward series asserted identical"
+  },
+  "per_world": [
+    {
+      "world": 3000,
+      "all_mean": 0.5855199999999999,
+      "final_100_mean": 0.6399999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        20,
+        40,
+        60,
+        80,
+        90
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 12999,
+      "users_known_terminal": 42,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.939405889000003,
+        "label_planner": 9.435858330999999,
+        "assign": 0.11565286399999986,
+        "rest": 0.49672682899999776,
+        "total": 14.987643913
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 45512,
+      "timing": {
+        "wall_s": 15.433225149987265,
+        "cpu_s": 15.431168
+      }
+    },
+    {
+      "world": 3001,
+      "all_mean": 0.54316,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 1,
+      "plan_steps": [
+        0
+      ],
+      "cache_hits": 49,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 1407,
+      "users_known_terminal": 33,
+      "decisions": 50,
+      "labelled_decisions": 1,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 11,
+        "z_high": 0,
+        "labels": 18,
+        "labels_on_any_face": 11
+      },
+      "cpu_s": {
+        "planner": 0.4924674479999993,
+        "label_planner": 1.1506671689999983,
+        "assign": 0.11627268699998083,
+        "rest": 0.4680446570000214,
+        "total": 2.227451961
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 26256,
+      "timing": {
+        "wall_s": 2.665064489992801,
+        "cpu_s": 2.6645900000000005
+      }
+    },
+    {
+      "world": 3002,
+      "all_mean": 0.6919599999999999,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9738,
+      "users_known_terminal": 44,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 3.594623426999995,
+        "label_planner": 6.984056685999992,
+        "assign": 0.11341002400000377,
+        "rest": 0.48103490000000804,
+        "total": 11.173125036999998
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42199,
+      "timing": {
+        "wall_s": 11.62186521300464,
+        "cpu_s": 11.619843999999997
+      }
+    },
+    {
+      "world": 3003,
+      "all_mean": 0.8859600000000002,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        60
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 12187,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.628954847999992,
+        "label_planner": 9.189871327000006,
+        "assign": 0.11291118899999475,
+        "rest": 0.5072833630000062,
+        "total": 14.439020726999999
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 46658,
+      "timing": {
+        "wall_s": 14.894880834996002,
+        "cpu_s": 14.893076000000004
+      }
+    },
+    {
+      "world": 3004,
+      "all_mean": 0.8734800000000003,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 6261,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 54,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 54
+      },
+      "cpu_s": {
+        "planner": 2.3786930380000015,
+        "label_planner": 4.695485309000006,
+        "assign": 0.1126382560000252,
+        "rest": 0.47950360099996914,
+        "total": 7.666320204000002
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 35279,
+      "timing": {
+        "wall_s": 8.10757735700463,
+        "cpu_s": 8.106518999999999
+      }
+    },
+    {
+      "world": 3005,
+      "all_mean": 0.71676,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 5977,
+      "users_known_terminal": 39,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 54,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 54
+      },
+      "cpu_s": {
+        "planner": 2.197770163999998,
+        "label_planner": 4.531565461999996,
+        "assign": 0.11309102099998825,
+        "rest": 0.4789185420000237,
+        "total": 7.321345189000006
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 34715,
+      "timing": {
+        "wall_s": 7.775704822997795,
+        "cpu_s": 7.759574999999998
+      }
+    },
+    {
+      "world": 3006,
+      "all_mean": 0.64904,
+      "final_100_mean": 0.7199999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 17480,
+      "users_known_terminal": 41,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 1,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 142,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 142
+      },
+      "cpu_s": {
+        "planner": 6.316430021999999,
+        "label_planner": 11.489574608999973,
+        "assign": 0.11743162200002644,
+        "rest": 0.5167629809999994,
+        "total": 18.440199233999998
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 51349,
+      "timing": {
+        "wall_s": 18.902740741003072,
+        "cpu_s": 18.894196
+      }
+    },
+    {
+      "world": 3007,
+      "all_mean": 0.7797200000000002,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 14985,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 4,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 121,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 121
+      },
+      "cpu_s": {
+        "planner": 5.457907163000002,
+        "label_planner": 10.574567889999955,
+        "assign": 0.11166000999996584,
+        "rest": 0.4959116360000735,
+        "total": 16.640046698999996
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 47154,
+      "timing": {
+        "wall_s": 17.0775478919968,
+        "cpu_s": 17.075759000000005
+      }
+    },
+    {
+      "world": 3008,
+      "all_mean": 0.7314400000000002,
+      "final_100_mean": 0.8199999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 10022,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 2,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 3.7230158800000197,
+        "label_planner": 7.5732251400000195,
+        "assign": 0.11174380800001416,
+        "rest": 0.47400461899994184,
+        "total": 11.881989446999995
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 41703,
+      "timing": {
+        "wall_s": 12.360715935006738,
+        "cpu_s": 12.358964999999998
+      }
+    },
+    {
+      "world": 3009,
+      "all_mean": 0.876,
+      "final_100_mean": 1.0,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11519,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.2983862590000115,
+        "label_planner": 8.414237231000001,
+        "assign": 0.11570036300003039,
+        "rest": 0.49196698499996216,
+        "total": 13.320290838000005
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 45611,
+      "timing": {
+        "wall_s": 13.768336395005463,
+        "cpu_s": 13.762280000000004
+      }
+    },
+    {
+      "world": 3010,
+      "all_mean": 0.7718800000000001,
+      "final_100_mean": 0.9000000000000005,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        60,
+        80
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 13937,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 126,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 126
+      },
+      "cpu_s": {
+        "planner": 5.19792869000004,
+        "label_planner": 9.986426020999986,
+        "assign": 0.11423043199995675,
+        "rest": 0.47797397200002933,
+        "total": 15.776559115000012
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 50258,
+      "timing": {
+        "wall_s": 16.23195022100117,
+        "cpu_s": 16.229563999999996
+      }
+    },
+    {
+      "world": 3011,
+      "all_mean": 0.7790000000000002,
+      "final_100_mean": 0.9000000000000005,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 12,
+      "plan_steps": [
+        0,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110,
+        120
+      ],
+      "cache_hits": 38,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 23487,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 12,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 1,
+        "y_high": 0,
+        "z_low": 216,
+        "z_high": 0,
+        "labels": 216,
+        "labels_on_any_face": 216
+      },
+      "cpu_s": {
+        "planner": 8.58252177999998,
+        "label_planner": 17.64682638000008,
+        "assign": 0.11508680499989055,
+        "rest": 0.5225085490000367,
+        "total": 26.866943513999985
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 66483,
+      "timing": {
+        "wall_s": 27.305843368987553,
+        "cpu_s": 27.301922999999988
+      }
+    },
+    {
+      "world": 3012,
+      "all_mean": 0.42724,
+      "final_100_mean": 0.4600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        90
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11607,
+      "users_known_terminal": 28,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 1,
+        "y_high": 0,
+        "z_low": 104,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 104
+      },
+      "cpu_s": {
+        "planner": 4.050167536000004,
+        "label_planner": 7.712948523999984,
+        "assign": 0.11147092400005931,
+        "rest": 0.4832435349999571,
+        "total": 12.357830519000004
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42907,
+      "timing": {
+        "wall_s": 12.834033443999942,
+        "cpu_s": 12.832271999999989
+      }
+    },
+    {
+      "world": 3013,
+      "all_mean": 0.8379200000000001,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 11,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100
+      ],
+      "cache_hits": 39,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 21103,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 11,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 198,
+        "z_high": 0,
+        "labels": 198,
+        "labels_on_any_face": 198
+      },
+      "cpu_s": {
+        "planner": 7.609405696000039,
+        "label_planner": 15.337709698999987,
+        "assign": 0.11398400599998126,
+        "rest": 0.4925008619999858,
+        "total": 23.553600262999993
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 61680,
+      "timing": {
+        "wall_s": 23.997941670997534,
+        "cpu_s": 23.994506
+      }
+    },
+    {
+      "world": 3014,
+      "all_mean": 0.5491999999999999,
+      "final_100_mean": 0.58,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 6245,
+      "users_known_terminal": 31,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 1,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 46,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 46
+      },
+      "cpu_s": {
+        "planner": 2.3354873669999847,
+        "label_planner": 4.445961224000001,
+        "assign": 0.11639149400011206,
+        "rest": 0.47816319999989787,
+        "total": 7.376003284999996
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 33957,
+      "timing": {
+        "wall_s": 7.828135945019312,
+        "cpu_s": 7.827019999999976
+      }
+    },
+    {
+      "world": 3015,
+      "all_mean": 0.7648400000000001,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 7157,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 2.6784143839999786,
+        "label_planner": 5.801641923999995,
+        "assign": 0.1161820569997758,
+        "rest": 0.4881887720002567,
+        "total": 9.084427137000006
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 38315,
+      "timing": {
+        "wall_s": 9.537602482014336,
+        "cpu_s": 9.536326000000003
+      }
+    },
+    {
+      "world": 3016,
+      "all_mean": 0.8455600000000001,
+      "final_100_mean": 0.9200000000000002,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 15257,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 1,
+        "x_high": 1,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 126,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 126
+      },
+      "cpu_s": {
+        "planner": 5.691834598000014,
+        "label_planner": 10.861798302000011,
+        "assign": 0.11137435300003062,
+        "rest": 0.4867642449999323,
+        "total": 17.151771497999988
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 49253,
+      "timing": {
+        "wall_s": 17.594722000998445,
+        "cpu_s": 17.592708000000016
+      }
+    },
+    {
+      "world": 3017,
+      "all_mean": 0.8697200000000002,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 9,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80
+      ],
+      "cache_hits": 41,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 18341,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 9,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 162,
+        "z_high": 0,
+        "labels": 162,
+        "labels_on_any_face": 162
+      },
+      "cpu_s": {
+        "planner": 6.897868388000006,
+        "label_planner": 13.532044235999962,
+        "assign": 0.12000327100020058,
+        "rest": 0.5402368489998537,
+        "total": 21.090152744000022
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 57275,
+      "timing": {
+        "wall_s": 21.55185961400275,
+        "cpu_s": 21.544397999999916
+      }
+    },
+    {
+      "world": 3018,
+      "all_mean": 0.7794,
+      "final_100_mean": 0.8400000000000002,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 17174,
+      "users_known_terminal": 45,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 4,
+        "z_low": 143,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 143
+      },
+      "cpu_s": {
+        "planner": 6.29313963200002,
+        "label_planner": 11.630756372999997,
+        "assign": 0.11109941400013668,
+        "rest": 0.4881186319998392,
+        "total": 18.523114050999993
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 52825,
+      "timing": {
+        "wall_s": 18.967542399012018,
+        "cpu_s": 18.96444699999995
+      }
+    },
+    {
+      "world": 3019,
+      "all_mean": 0.7908799999999999,
+      "final_100_mean": 0.86,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 16358,
+      "users_known_terminal": 48,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 1,
+        "z_low": 144,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 144
+      },
+      "cpu_s": {
+        "planner": 6.002144834000092,
+        "label_planner": 12.149375388000067,
+        "assign": 0.11493262899989531,
+        "rest": 0.48110704699990947,
+        "total": 18.747559897999963
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 51478,
+      "timing": {
+        "wall_s": 19.274487550981576,
+        "cpu_s": 19.22116200000005
+      }
+    },
+    {
+      "world": 3020,
+      "all_mean": 0.73436,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        60
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9073,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 87,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 87
+      },
+      "cpu_s": {
+        "planner": 3.290170253000099,
+        "label_planner": 6.883010148000039,
+        "assign": 0.10988492100017311,
+        "rest": 0.48078491599966355,
+        "total": 10.763850237999975
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 41420,
+      "timing": {
+        "wall_s": 11.22509589898982,
+        "cpu_s": 11.222222000000045
+      }
+    },
+    {
+      "world": 3021,
+      "all_mean": 0.90856,
+      "final_100_mean": 0.9200000000000002,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        40
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 6745,
+      "users_known_terminal": 48,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 2.4960446800000113,
+        "label_planner": 5.408604522000019,
+        "assign": 0.11146333299996058,
+        "rest": 0.49514872100002094,
+        "total": 8.511261256000012
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 39204,
+      "timing": {
+        "wall_s": 8.970618118997663,
+        "cpu_s": 8.96944000000002
+      }
+    },
+    {
+      "world": 3022,
+      "all_mean": 0.68844,
+      "final_100_mean": 0.7199999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11802,
+      "users_known_terminal": 38,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.337212478000083,
+        "label_planner": 9.02267203100007,
+        "assign": 0.11115240900005574,
+        "rest": 0.47593103799977143,
+        "total": 13.94696795599998
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 44621,
+      "timing": {
+        "wall_s": 14.387188041000627,
+        "cpu_s": 14.385234000000025
+      }
+    },
+    {
+      "world": 3023,
+      "all_mean": 0.53324,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 2,
+      "plan_steps": [
+        0,
+        10
+      ],
+      "cache_hits": 48,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 3128,
+      "users_known_terminal": 34,
+      "decisions": 50,
+      "labelled_decisions": 2,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 33,
+        "z_high": 0,
+        "labels": 36,
+        "labels_on_any_face": 33
+      },
+      "cpu_s": {
+        "planner": 1.1038678840000102,
+        "label_planner": 2.318736892000004,
+        "assign": 0.11446048499971084,
+        "rest": 0.49867763500026285,
+        "total": 4.035742895999988
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 29779,
+      "timing": {
+        "wall_s": 4.4866351789969485,
+        "cpu_s": 4.485546999999997
+      }
+    },
+    {
+      "world": 3024,
+      "all_mean": 0.8996800000000001,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11816,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 89,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 89
+      },
+      "cpu_s": {
+        "planner": 4.461436215000049,
+        "label_planner": 8.211424046999923,
+        "assign": 0.10878251800011185,
+        "rest": 0.4859376309998993,
+        "total": 13.267580410999983
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 43401,
+      "timing": {
+        "wall_s": 13.715595329005737,
+        "cpu_s": 13.713746000000015
+      }
+    },
+    {
+      "world": 3025,
+      "all_mean": 0.6145600000000001,
+      "final_100_mean": 0.7399999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 10,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90
+      ],
+      "cache_hits": 40,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 20915,
+      "users_known_terminal": 45,
+      "decisions": 50,
+      "labelled_decisions": 10,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 3,
+        "y_high": 0,
+        "z_low": 180,
+        "z_high": 0,
+        "labels": 180,
+        "labels_on_any_face": 180
+      },
+      "cpu_s": {
+        "planner": 7.5339096440001185,
+        "label_planner": 14.639928525000073,
+        "assign": 0.10935993400016741,
+        "rest": 0.48452083999961815,
+        "total": 22.767718942999977
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 60113,
+      "timing": {
+        "wall_s": 23.240778937994037,
+        "cpu_s": 23.233212999999978
+      }
+    },
+    {
+      "world": 3026,
+      "all_mean": 0.6164400000000001,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 13,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110,
+        190,
+        200
+      ],
+      "cache_hits": 37,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 25457,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 13,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 207,
+        "z_high": 0,
+        "labels": 234,
+        "labels_on_any_face": 207
+      },
+      "cpu_s": {
+        "planner": 9.05473981700004,
+        "label_planner": 18.58299685299994,
+        "assign": 0.11208288800014543,
+        "rest": 0.49061734999986584,
+        "total": 28.240436907999992
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 68306,
+      "timing": {
+        "wall_s": 28.694823252997594,
+        "cpu_s": 28.690676999999994
+      }
+    },
+    {
+      "world": 3027,
+      "all_mean": 0.7795200000000002,
+      "final_100_mean": 0.9000000000000005,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9075,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 3.423705953000024,
+        "label_planner": 6.10918894800011,
+        "assign": 0.11090585299996292,
+        "rest": 0.49376472199986665,
+        "total": 10.137565475999963
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 38608,
+      "timing": {
+        "wall_s": 10.580453081987798,
+        "cpu_s": 10.578975999999955
+      }
+    },
+    {
+      "world": 3028,
+      "all_mean": 0.69896,
+      "final_100_mean": 0.7399999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        70
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9759,
+      "users_known_terminal": 37,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 3,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 3.4835962770000037,
+        "label_planner": 7.33516058500004,
+        "assign": 0.11267369000000826,
+        "rest": 0.4815750649999586,
+        "total": 11.41300561700001
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 40768,
+      "timing": {
+        "wall_s": 11.86253449699143,
+        "cpu_s": 11.85701499999999
+      }
+    },
+    {
+      "world": 3029,
+      "all_mean": 0.8725600000000002,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 11,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110
+      ],
+      "cache_hits": 39,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 19886,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 11,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 3,
+        "y_high": 0,
+        "z_low": 197,
+        "z_high": 0,
+        "labels": 198,
+        "labels_on_any_face": 197
+      },
+      "cpu_s": {
+        "planner": 7.225479289999953,
+        "label_planner": 15.514775211000085,
+        "assign": 0.11108094500025345,
+        "rest": 0.5073965259996953,
+        "total": 23.358731971999987
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 62821,
+      "timing": {
+        "wall_s": 23.84004896201077,
+        "cpu_s": 23.837112999999988
+      }
+    },
+    {
+      "world": 3030,
+      "all_mean": 0.7774799999999998,
+      "final_100_mean": 0.9399999999999996,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 14,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        60,
+        90,
+        100,
+        110,
+        120,
+        150,
+        170,
+        180,
+        190,
+        200
+      ],
+      "cache_hits": 36,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 27440,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 14,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 252,
+        "z_high": 0,
+        "labels": 252,
+        "labels_on_any_face": 252
+      },
+      "cpu_s": {
+        "planner": 9.937998365999988,
+        "label_planner": 19.425342064000063,
+        "assign": 0.11500213999988773,
+        "rest": 0.5206801310000628,
+        "total": 29.999022701
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 74206,
+      "timing": {
+        "wall_s": 30.44507552299183,
+        "cpu_s": 30.440995999999984
+      }
+    },
+    {
+      "world": 3031,
+      "all_mean": 0.72404,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 6287,
+      "users_known_terminal": 41,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 5,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 54,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 54
+      },
+      "cpu_s": {
+        "planner": 2.351907269000037,
+        "label_planner": 4.50073377800004,
+        "assign": 0.11034604200006015,
+        "rest": 0.4862822159998359,
+        "total": 7.449269304999973
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 34659,
+      "timing": {
+        "wall_s": 7.897833406983409,
+        "cpu_s": 7.897096000000033
+      }
+    },
+    {
+      "world": 3032,
+      "all_mean": 0.7672800000000001,
+      "final_100_mean": 0.9200000000000002,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        50,
+        70,
+        80,
+        140
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 13182,
+      "users_known_terminal": 47,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 125,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 125
+      },
+      "cpu_s": {
+        "planner": 4.835916926000095,
+        "label_planner": 10.724294331999943,
+        "assign": 0.11145356800000172,
+        "rest": 0.4804747529999531,
+        "total": 16.152139578999993
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 49533,
+      "timing": {
+        "wall_s": 16.636462827998912,
+        "cpu_s": 16.634398000000033
+      }
+    },
+    {
+      "world": 3033,
+      "all_mean": 0.5141199999999999,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 9,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        100
+      ],
+      "cache_hits": 41,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 15886,
+      "users_known_terminal": 43,
+      "decisions": 50,
+      "labelled_decisions": 9,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 3,
+        "y_high": 0,
+        "z_low": 118,
+        "z_high": 0,
+        "labels": 162,
+        "labels_on_any_face": 118
+      },
+      "cpu_s": {
+        "planner": 5.610436113999867,
+        "label_planner": 11.147062222000272,
+        "assign": 0.11240585499933786,
+        "rest": 0.4744636950005088,
+        "total": 17.344367885999986
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 53462,
+      "timing": {
+        "wall_s": 17.785729458992137,
+        "cpu_s": 17.78294799999992
+      }
+    },
+    {
+      "world": 3034,
+      "all_mean": 0.77696,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 1,
+      "plan_steps": [
+        0
+      ],
+      "cache_hits": 49,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 2069,
+      "users_known_terminal": 44,
+      "decisions": 50,
+      "labelled_decisions": 1,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 18,
+        "z_high": 0,
+        "labels": 18,
+        "labels_on_any_face": 18
+      },
+      "cpu_s": {
+        "planner": 0.7819521760000043,
+        "label_planner": 1.669402305999938,
+        "assign": 0.11286829699997725,
+        "rest": 0.5033420430000888,
+        "total": 3.0675648220000085
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 26972,
+      "timing": {
+        "wall_s": 3.528907587984577,
+        "cpu_s": 3.528554999999983
+      }
+    },
+    {
+      "world": 3035,
+      "all_mean": 0.91188,
+      "final_100_mean": 1.0,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 14907,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 126,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 126
+      },
+      "cpu_s": {
+        "planner": 5.624083303000248,
+        "label_planner": 10.541953679999665,
+        "assign": 0.11201443600032235,
+        "rest": 0.4933330629997954,
+        "total": 16.77138448200003
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 51252,
+      "timing": {
+        "wall_s": 17.214071439026156,
+        "cpu_s": 17.21181899999999
+      }
+    },
+    {
+      "world": 3036,
+      "all_mean": 0.54328,
+      "final_100_mean": 0.58,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 2,
+      "plan_steps": [
+        0,
+        10
+      ],
+      "cache_hits": 48,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 3904,
+      "users_known_terminal": 31,
+      "decisions": 50,
+      "labelled_decisions": 2,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 36,
+        "z_high": 0,
+        "labels": 36,
+        "labels_on_any_face": 36
+      },
+      "cpu_s": {
+        "planner": 1.3488934430000654,
+        "label_planner": 2.84925342300005,
+        "assign": 0.11133418999997957,
+        "rest": 0.46750869399988915,
+        "total": 4.776989749999984
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 30334,
+      "timing": {
+        "wall_s": 5.23823048901977,
+        "cpu_s": 5.2335709999999835
+      }
+    },
+    {
+      "world": 3037,
+      "all_mean": 0.5393199999999999,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        30
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 5149,
+      "users_known_terminal": 39,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 2,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 43,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 43
+      },
+      "cpu_s": {
+        "planner": 1.8513652469999897,
+        "label_planner": 3.699303744999952,
+        "assign": 0.11449361400002545,
+        "rest": 0.49007965200007675,
+        "total": 6.155242258000044
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 34287,
+      "timing": {
+        "wall_s": 6.59333121200325,
+        "cpu_s": 6.592298000000028
+      }
+    },
+    {
+      "world": 3038,
+      "all_mean": 0.69692,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        60
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 6929,
+      "users_known_terminal": 42,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 70,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 70
+      },
+      "cpu_s": {
+        "planner": 2.744600602000105,
+        "label_planner": 5.816789330000233,
+        "assign": 0.11534619299936821,
+        "rest": 0.5251883980002958,
+        "total": 9.201924523000002
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 38257,
+      "timing": {
+        "wall_s": 9.703745202976279,
+        "cpu_s": 9.702837000000045
+      }
+    },
+    {
+      "world": 3039,
+      "all_mean": 0.51548,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        40,
+        50
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 8594,
+      "users_known_terminal": 30,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 1,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 3,
+        "z_low": 75,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 75
+      },
+      "cpu_s": {
+        "planner": 3.098399212000004,
+        "label_planner": 6.350292323000076,
+        "assign": 0.11232412499975908,
+        "rest": 0.5063848100002133,
+        "total": 10.067400470000052
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 39088,
+      "timing": {
+        "wall_s": 10.501432290009689,
+        "cpu_s": 10.500376999999958
+      }
+    },
+    {
+      "world": 3040,
+      "all_mean": 0.8742000000000002,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        80
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 15226,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 144,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 144
+      },
+      "cpu_s": {
+        "planner": 5.690440411000054,
+        "label_planner": 11.679537356000083,
+        "assign": 0.11054315399974257,
+        "rest": 0.5016662900001165,
+        "total": 17.982187210999996
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 53562,
+      "timing": {
+        "wall_s": 18.430912714014994,
+        "cpu_s": 18.424185999999963
+      }
+    },
+    {
+      "world": 3041,
+      "all_mean": 0.7616000000000002,
+      "final_100_mean": 0.8199999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 13,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        100,
+        110,
+        120,
+        130
+      ],
+      "cache_hits": 37,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 23963,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 13,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 234,
+        "z_high": 0,
+        "labels": 234,
+        "labels_on_any_face": 234
+      },
+      "cpu_s": {
+        "planner": 9.016502812999875,
+        "label_planner": 18.205881814999884,
+        "assign": 0.11071022799944785,
+        "rest": 0.5069556520007836,
+        "total": 27.84005050799999
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 71166,
+      "timing": {
+        "wall_s": 28.302002300013555,
+        "cpu_s": 28.290301
+      }
+    },
+    {
+      "world": 3042,
+      "all_mean": 0.9812799999999999,
+      "final_100_mean": 1.0,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11126,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.69006328699993,
+        "label_planner": 9.342162799000107,
+        "assign": 0.11055658199961726,
+        "rest": 0.5164553000004162,
+        "total": 14.65923796800007
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 46610,
+      "timing": {
+        "wall_s": 15.131832607992692,
+        "cpu_s": 15.128709999999955
+      }
+    },
+    {
+      "world": 3043,
+      "all_mean": 0.7496,
+      "final_100_mean": 0.8400000000000002,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 10,
+      "plan_steps": [
+        0,
+        20,
+        40,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110,
+        120
+      ],
+      "cache_hits": 40,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 19800,
+      "users_known_terminal": 42,
+      "decisions": 50,
+      "labelled_decisions": 10,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 180,
+        "z_high": 0,
+        "labels": 180,
+        "labels_on_any_face": 180
+      },
+      "cpu_s": {
+        "planner": 7.499925859000086,
+        "label_planner": 14.74334661000023,
+        "assign": 0.11072558899968499,
+        "rest": 0.503072244000009,
+        "total": 22.85707030200001
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 59476,
+      "timing": {
+        "wall_s": 23.31372032201034,
+        "cpu_s": 23.30961900000011
+      }
+    },
+    {
+      "world": 3044,
+      "all_mean": 0.7745600000000001,
+      "final_100_mean": 0.88,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        60
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11882,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 4,
+        "z_low": 104,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 104
+      },
+      "cpu_s": {
+        "planner": 4.516894985000022,
+        "label_planner": 8.818103132000033,
+        "assign": 0.11529082899994592,
+        "rest": 0.5361865669999588,
+        "total": 13.98647551299996
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 45179,
+      "timing": {
+        "wall_s": 14.474411467002938,
+        "cpu_s": 14.469341999999983
+      }
+    },
+    {
+      "world": 3045,
+      "all_mean": 0.5844799999999999,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 5772,
+      "users_known_terminal": 33,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 54,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 54
+      },
+      "cpu_s": {
+        "planner": 2.130119491000073,
+        "label_planner": 4.186999384000046,
+        "assign": 0.11027469999987716,
+        "rest": 0.484196226999984,
+        "total": 6.91158980199998
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 33943,
+      "timing": {
+        "wall_s": 7.351141243998427,
+        "cpu_s": 7.349377000000004
+      }
+    },
+    {
+      "world": 3046,
+      "all_mean": 0.5114,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9451,
+      "users_known_terminal": 34,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 17,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 84,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 84
+      },
+      "cpu_s": {
+        "planner": 3.4037024409998367,
+        "label_planner": 7.096475876000227,
+        "assign": 0.11083941499998673,
+        "rest": 0.4787994499998831,
+        "total": 11.089817181999933
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 39036,
+      "timing": {
+        "wall_s": 11.538157781003974,
+        "cpu_s": 11.53583900000001
+      }
+    },
+    {
+      "world": 3047,
+      "all_mean": 0.58292,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        30,
+        60,
+        70,
+        80
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 10007,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 98,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 98
+      },
+      "cpu_s": {
+        "planner": 3.822403277000035,
+        "label_planner": 7.959688880000158,
+        "assign": 0.11368410600050538,
+        "rest": 0.4937006939992443,
+        "total": 12.389476956999943
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 46765,
+      "timing": {
+        "wall_s": 12.833418591995724,
+        "cpu_s": 12.832495999999992
+      }
+    },
+    {
+      "world": 3048,
+      "all_mean": 0.9183200000000001,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        40
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 8148,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 3.1462096270000757,
+        "label_planner": 6.018506310000021,
+        "assign": 0.10942210300004263,
+        "rest": 0.4957371149997698,
+        "total": 9.769875154999909
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 39404,
+      "timing": {
+        "wall_s": 10.237296523002442,
+        "cpu_s": 10.236582999999996
+      }
+    },
+    {
+      "world": 3049,
+      "all_mean": 0.7242000000000001,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 6065,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 2,
+        "y_high": 0,
+        "z_low": 54,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 54
+      },
+      "cpu_s": {
+        "planner": 2.40411256699997,
+        "label_planner": 4.388856349999969,
+        "assign": 0.11239810800054784,
+        "rest": 0.49617524699942805,
+        "total": 7.401542271999915
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 33930,
+      "timing": {
+        "wall_s": 7.886630803986918,
+        "cpu_s": 7.885856999999987
+      }
+    },
+    {
+      "world": 3050,
+      "all_mean": 0.6763600000000001,
+      "final_100_mean": 0.7399999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 13150,
+      "users_known_terminal": 44,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.902334707000023,
+        "label_planner": 9.55276180400017,
+        "assign": 0.11351649500011263,
+        "rest": 0.5283441609997226,
+        "total": 15.096957167000028
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 46650,
+      "timing": {
+        "wall_s": 15.541637918999186,
+        "cpu_s": 15.540442000000098
+      }
+    },
+    {
+      "world": 3051,
+      "all_mean": 0.9163200000000001,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        60,
+        70,
+        80,
+        90
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 13541,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 1,
+        "y_high": 0,
+        "z_low": 126,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 126
+      },
+      "cpu_s": {
+        "planner": 5.218490588999998,
+        "label_planner": 10.222719109000082,
+        "assign": 0.11176744000044891,
+        "rest": 0.5020413219993998,
+        "total": 16.05501845999993
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 50029,
+      "timing": {
+        "wall_s": 16.54430342800333,
+        "cpu_s": 16.540160000000014
+      }
+    },
+    {
+      "world": 3052,
+      "all_mean": 0.7242799999999999,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 10,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100
+      ],
+      "cache_hits": 40,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 18627,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 10,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 177,
+        "z_high": 0,
+        "labels": 180,
+        "labels_on_any_face": 177
+      },
+      "cpu_s": {
+        "planner": 7.034997382999904,
+        "label_planner": 13.769259751999925,
+        "assign": 0.11025168800017582,
+        "rest": 0.48656370800006243,
+        "total": 21.401072531000068
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 61566,
+      "timing": {
+        "wall_s": 21.853278718015645,
+        "cpu_s": 21.85121700000002
+      }
+    },
+    {
+      "world": 3053,
+      "all_mean": 0.83064,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 10,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90
+      ],
+      "cache_hits": 40,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 21416,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 10,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 5,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 179,
+        "z_high": 0,
+        "labels": 180,
+        "labels_on_any_face": 179
+      },
+      "cpu_s": {
+        "planner": 7.939416658000027,
+        "label_planner": 14.95450212600008,
+        "assign": 0.11102536800001417,
+        "rest": 0.5106088699999418,
+        "total": 23.515553022000063
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 59249,
+      "timing": {
+        "wall_s": 23.99256120098289,
+        "cpu_s": 23.989573999999948
+      }
+    },
+    {
+      "world": 3054,
+      "all_mean": 0.7663600000000002,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 5309,
+      "users_known_terminal": 41,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 54,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 54
+      },
+      "cpu_s": {
+        "planner": 2.0388671360000217,
+        "label_planner": 4.248073670000053,
+        "assign": 0.11159913800076993,
+        "rest": 0.5012352709992456,
+        "total": 6.899775215000091
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 34485,
+      "timing": {
+        "wall_s": 7.355013519001659,
+        "cpu_s": 7.354412000000025
+      }
+    },
+    {
+      "world": 3055,
+      "all_mean": 0.8635199999999997,
+      "final_100_mean": 0.9399999999999996,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        60
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9334,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 3.6351061489999665,
+        "label_planner": 7.617598996999959,
+        "assign": 0.11132399799998893,
+        "rest": 0.5161277900001551,
+        "total": 11.88015693400007
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42865,
+      "timing": {
+        "wall_s": 12.337767517979955,
+        "cpu_s": 12.33612000000005
+      }
+    },
+    {
+      "world": 3056,
+      "all_mean": 0.69604,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        50,
+        70,
+        80
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 14321,
+      "users_known_terminal": 42,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 2,
+        "z_low": 126,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 126
+      },
+      "cpu_s": {
+        "planner": 5.348359322999954,
+        "label_planner": 10.136546832000022,
+        "assign": 0.1106436410001379,
+        "rest": 0.4967390139998997,
+        "total": 16.092288810000014
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 48271,
+      "timing": {
+        "wall_s": 16.546799236006336,
+        "cpu_s": 16.545208000000002
+      }
+    },
+    {
+      "world": 3057,
+      "all_mean": 0.7515999999999999,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        60
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11146,
+      "users_known_terminal": 41,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.2769712210000534,
+        "label_planner": 8.377798163999955,
+        "assign": 0.11662984099996265,
+        "rest": 0.5653345780000336,
+        "total": 13.336733804000005
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 46347,
+      "timing": {
+        "wall_s": 13.857541379984468,
+        "cpu_s": 13.855032000000051
+      }
+    },
+    {
+      "world": 3058,
+      "all_mean": 0.5092,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 9,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        80,
+        100,
+        110
+      ],
+      "cache_hits": 41,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 17305,
+      "users_known_terminal": 30,
+      "decisions": 50,
+      "labelled_decisions": 9,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 162,
+        "z_high": 0,
+        "labels": 162,
+        "labels_on_any_face": 162
+      },
+      "cpu_s": {
+        "planner": 6.432732393000151,
+        "label_planner": 12.035907228999918,
+        "assign": 0.11333084500029145,
+        "rest": 0.50946110999962,
+        "total": 19.09143157699998
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 52336,
+      "timing": {
+        "wall_s": 19.56602718497743,
+        "cpu_s": 19.563957000000073
+      }
+    },
+    {
+      "world": 3059,
+      "all_mean": 0.66508,
+      "final_100_mean": 0.7399999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        60
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11634,
+      "users_known_terminal": 43,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 4.284427139999934,
+        "label_planner": 8.305579544000238,
+        "assign": 0.11409269300008873,
+        "rest": 0.4993993309997222,
+        "total": 13.203498707999984
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42146,
+      "timing": {
+        "wall_s": 13.654634520993568,
+        "cpu_s": 13.65315099999998
+      }
+    },
+    {
+      "world": 3060,
+      "all_mean": 0.56672,
+      "final_100_mean": 0.6399999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 8668,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 4,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 85,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 85
+      },
+      "cpu_s": {
+        "planner": 3.2322277519999716,
+        "label_planner": 7.3571611289999055,
+        "assign": 0.1104828190001399,
+        "rest": 0.5003366800000322,
+        "total": 11.20020838000005
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 41263,
+      "timing": {
+        "wall_s": 11.66306352999527,
+        "cpu_s": 11.661566999999991
+      }
+    },
+    {
+      "world": 3061,
+      "all_mean": 0.8866799999999996,
+      "final_100_mean": 0.9399999999999996,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        70
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 14428,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 126,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 126
+      },
+      "cpu_s": {
+        "planner": 5.501140028000009,
+        "label_planner": 10.122819609999965,
+        "assign": 0.11113586900012251,
+        "rest": 0.4989846739999848,
+        "total": 16.23408018100008
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 50409,
+      "timing": {
+        "wall_s": 16.685950034996495,
+        "cpu_s": 16.68464700000004
+      }
+    },
+    {
+      "world": 3062,
+      "all_mean": 0.8764400000000002,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        50,
+        60,
+        80,
+        90,
+        100
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 17254,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 143,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 143
+      },
+      "cpu_s": {
+        "planner": 6.900856002999944,
+        "label_planner": 12.622959140000148,
+        "assign": 0.11774769099963578,
+        "rest": 0.5642431620002526,
+        "total": 20.20580599599998
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 55311,
+      "timing": {
+        "wall_s": 20.673724749009125,
+        "cpu_s": 20.671465999999896
+      }
+    },
+    {
+      "world": 3063,
+      "all_mean": 0.6861999999999999,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 17178,
+      "users_known_terminal": 41,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 3,
+        "y_high": 5,
+        "z_low": 143,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 143
+      },
+      "cpu_s": {
+        "planner": 6.376525395999806,
+        "label_planner": 12.236025742999914,
+        "assign": 0.11204795800006195,
+        "rest": 0.5141855290002013,
+        "total": 19.238784625999983
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 51001,
+      "timing": {
+        "wall_s": 19.730707403010456,
+        "cpu_s": 19.7282009999999
+      }
+    },
+    {
+      "world": 3064,
+      "all_mean": 0.5568399999999999,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11851,
+      "users_known_terminal": 37,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.33473630900005,
+        "label_planner": 9.778827591999857,
+        "assign": 0.11656775100027517,
+        "rest": 0.5085827769997877,
+        "total": 14.73871442899997
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 44541,
+      "timing": {
+        "wall_s": 15.208286707988009,
+        "cpu_s": 15.203349000000003
+      }
+    },
+    {
+      "world": 3065,
+      "all_mean": 0.4950400000000001,
+      "final_100_mean": 0.54,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 8019,
+      "users_known_terminal": 30,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 2.9354632859998446,
+        "label_planner": 5.610415147000026,
+        "assign": 0.11008115499998894,
+        "rest": 0.48766860100010945,
+        "total": 9.143628188999969
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 37049,
+      "timing": {
+        "wall_s": 9.621412031992804,
+        "cpu_s": 9.620150999999964
+      }
+    },
+    {
+      "world": 3066,
+      "all_mean": 0.6187999999999999,
+      "final_100_mean": 0.66,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        50,
+        70
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 13483,
+      "users_known_terminal": 34,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.9569911550000825,
+        "label_planner": 8.443609811999863,
+        "assign": 0.11170873299977302,
+        "rest": 0.49632288800034985,
+        "total": 14.008632588000069
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 44695,
+      "timing": {
+        "wall_s": 14.46150161899277,
+        "cpu_s": 14.459626000000071
+      }
+    },
+    {
+      "world": 3067,
+      "all_mean": 0.7647200000000001,
+      "final_100_mean": 0.8400000000000002,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 10827,
+      "users_known_terminal": 45,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 107,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 107
+      },
+      "cpu_s": {
+        "planner": 4.058428198999991,
+        "label_planner": 8.692077923999932,
+        "assign": 0.11128999999993994,
+        "rest": 0.5208934370001543,
+        "total": 13.382689560000017
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 46288,
+      "timing": {
+        "wall_s": 13.85554577500443,
+        "cpu_s": 13.854366999999911
+      }
+    },
+    {
+      "world": 3068,
+      "all_mean": 0.73824,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        40,
+        50,
+        70
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11574,
+      "users_known_terminal": 41,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 103,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 103
+      },
+      "cpu_s": {
+        "planner": 4.248734075000243,
+        "label_planner": 8.344697279000002,
+        "assign": 0.11137527600033081,
+        "rest": 0.4960450069994522,
+        "total": 13.200851637000028
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 44496,
+      "timing": {
+        "wall_s": 13.6556637660251,
+        "cpu_s": 13.654074000000037
+      }
+    },
+    {
+      "world": 3069,
+      "all_mean": 0.7833199999999999,
+      "final_100_mean": 0.86,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 10,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90
+      ],
+      "cache_hits": 40,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 20392,
+      "users_known_terminal": 47,
+      "decisions": 50,
+      "labelled_decisions": 10,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 2,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 180,
+        "z_high": 0,
+        "labels": 180,
+        "labels_on_any_face": 180
+      },
+      "cpu_s": {
+        "planner": 7.537087427000074,
+        "label_planner": 15.132923274000404,
+        "assign": 0.11415865599997232,
+        "rest": 0.5123135939995791,
+        "total": 23.29648295100003
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 58855,
+      "timing": {
+        "wall_s": 23.744987896003295,
+        "cpu_s": 23.74135099999978
+      }
+    },
+    {
+      "world": 3070,
+      "all_mean": 0.8797600000000001,
+      "final_100_mean": 0.9200000000000002,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 5794,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 53,
+        "z_high": 1,
+        "labels": 54,
+        "labels_on_any_face": 54
+      },
+      "cpu_s": {
+        "planner": 2.2104212330000337,
+        "label_planner": 4.054210238999758,
+        "assign": 0.11323115299887831,
+        "rest": 0.4924652870013233,
+        "total": 6.870327911999993
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 34400,
+      "timing": {
+        "wall_s": 7.333992086991202,
+        "cpu_s": 7.332290000000057
+      }
+    },
+    {
+      "world": 3071,
+      "all_mean": 0.5196,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 5928,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 2,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 52,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 52
+      },
+      "cpu_s": {
+        "planner": 2.2502368799996475,
+        "label_planner": 4.741293696999946,
+        "assign": 0.11245658500024547,
+        "rest": 0.5012690230003045,
+        "total": 7.605256185000144
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 33881,
+      "timing": {
+        "wall_s": 8.092487151996465,
+        "cpu_s": 8.09147599999983
+      }
+    },
+    {
+      "world": 3072,
+      "all_mean": 0.7978800000000001,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 11,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110
+      ],
+      "cache_hits": 39,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 22597,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 11,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 193,
+        "z_high": 0,
+        "labels": 198,
+        "labels_on_any_face": 193
+      },
+      "cpu_s": {
+        "planner": 8.352771622999398,
+        "label_planner": 16.73176803699971,
+        "assign": 0.11423968599956424,
+        "rest": 0.49678378300131953,
+        "total": 25.695563128999993
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 64627,
+      "timing": {
+        "wall_s": 26.15515378001146,
+        "cpu_s": 26.150639000000183
+      }
+    },
+    {
+      "world": 3073,
+      "all_mean": 0.9020000000000002,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 13919,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 14,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 126,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 126
+      },
+      "cpu_s": {
+        "planner": 5.324171784000555,
+        "label_planner": 10.574615642000254,
+        "assign": 0.11209983999992801,
+        "rest": 0.5257702049991622,
+        "total": 16.5366574709999
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 49769,
+      "timing": {
+        "wall_s": 17.008179598022252,
+        "cpu_s": 17.006193999999823
+      }
+    },
+    {
+      "world": 3074,
+      "all_mean": 0.6593199999999999,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 12,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100,
+        120,
+        130
+      ],
+      "cache_hits": 38,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 24229,
+      "users_known_terminal": 41,
+      "decisions": 50,
+      "labelled_decisions": 12,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 213,
+        "z_high": 0,
+        "labels": 216,
+        "labels_on_any_face": 213
+      },
+      "cpu_s": {
+        "planner": 9.400374134999538,
+        "label_planner": 18.754131792999942,
+        "assign": 0.11862879499949486,
+        "rest": 0.525416659000939,
+        "total": 28.798551381999914
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 63547,
+      "timing": {
+        "wall_s": 29.260800816991832,
+        "cpu_s": 29.25673699999993
+      }
+    },
+    {
+      "world": 3075,
+      "all_mean": 0.9162,
+      "final_100_mean": 1.0,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        70,
+        90
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 16106,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 2,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 143,
+        "z_high": 1,
+        "labels": 144,
+        "labels_on_any_face": 144
+      },
+      "cpu_s": {
+        "planner": 6.217889564000188,
+        "label_planner": 13.080025131999491,
+        "assign": 0.1156895909996365,
+        "rest": 0.5108181570005854,
+        "total": 19.9244224439999
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 53397,
+      "timing": {
+        "wall_s": 20.39690996200079,
+        "cpu_s": 20.39449099999979
+      }
+    },
+    {
+      "world": 3076,
+      "all_mean": 0.8906000000000002,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 8215,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 5,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 3.281419275999724,
+        "label_planner": 6.394880173999809,
+        "assign": 0.11648483399949328,
+        "rest": 0.5213291820009545,
+        "total": 10.31411346599998
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 38427,
+      "timing": {
+        "wall_s": 10.793689554993762,
+        "cpu_s": 10.792471999999862
+      }
+    },
+    {
+      "world": 3077,
+      "all_mean": 0.8064400000000002,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 16117,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 125,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 125
+      },
+      "cpu_s": {
+        "planner": 6.383460871000352,
+        "label_planner": 11.768999515999894,
+        "assign": 0.11504083799854925,
+        "rest": 0.5269724050010609,
+        "total": 18.794473629999857
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 49996,
+      "timing": {
+        "wall_s": 19.26066287199501,
+        "cpu_s": 19.25750499999981
+      }
+    },
+    {
+      "world": 3078,
+      "all_mean": 0.6778399999999999,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 16997,
+      "users_known_terminal": 42,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 1,
+        "y_high": 0,
+        "z_low": 144,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 144
+      },
+      "cpu_s": {
+        "planner": 6.407173255000316,
+        "label_planner": 12.68111216700072,
+        "assign": 0.11716572900081701,
+        "rest": 0.5325106799982677,
+        "total": 19.73796183100012
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 52112,
+      "timing": {
+        "wall_s": 20.215463373984676,
+        "cpu_s": 20.210203000000092
+      }
+    },
+    {
+      "world": 3079,
+      "all_mean": 0.7298400000000002,
+      "final_100_mean": 0.8199999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        100
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11751,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.645673540999724,
+        "label_planner": 9.40598485500027,
+        "assign": 0.1155993549998584,
+        "rest": 0.5348214660000394,
+        "total": 14.702079216999891
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 45980,
+      "timing": {
+        "wall_s": 15.173201004014118,
+        "cpu_s": 15.167420999999877
+      }
+    },
+    {
+      "world": 3080,
+      "all_mean": 0.8520800000000002,
+      "final_100_mean": 0.9000000000000005,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 10018,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 4.198947219999809,
+        "label_planner": 8.085617960999798,
+        "assign": 0.11576540300052329,
+        "rest": 0.530292290999796,
+        "total": 12.930622874999926
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42041,
+      "timing": {
+        "wall_s": 13.419094005017541,
+        "cpu_s": 13.417544000000134
+      }
+    },
+    {
+      "world": 3081,
+      "all_mean": 0.7358000000000002,
+      "final_100_mean": 0.8199999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11498,
+      "users_known_terminal": 43,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 4.532885653999983,
+        "label_planner": 9.255823279999731,
+        "assign": 0.12075447100028214,
+        "rest": 0.5551761730000635,
+        "total": 14.46463957800006
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42089,
+      "timing": {
+        "wall_s": 14.982099758984987,
+        "cpu_s": 14.93752500000005
+      }
+    },
+    {
+      "world": 3082,
+      "all_mean": 0.7921599999999996,
+      "final_100_mean": 0.9399999999999996,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 11,
+      "plan_steps": [
+        0,
+        20,
+        30,
+        40,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110,
+        130
+      ],
+      "cache_hits": 39,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 21920,
+      "users_known_terminal": 47,
+      "decisions": 50,
+      "labelled_decisions": 11,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 198,
+        "z_high": 0,
+        "labels": 198,
+        "labels_on_any_face": 198
+      },
+      "cpu_s": {
+        "planner": 8.425892932000124,
+        "label_planner": 16.42173561200002,
+        "assign": 0.11668306999831657,
+        "rest": 0.5210288980015321,
+        "total": 25.485340511999993
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 64015,
+      "timing": {
+        "wall_s": 25.96439280701452,
+        "cpu_s": 25.95906600000012
+      }
+    },
+    {
+      "world": 3083,
+      "all_mean": 0.7844,
+      "final_100_mean": 0.86,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 10920,
+      "users_known_terminal": 47,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 1,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 4.340639398000121,
+        "label_planner": 9.2811457170003,
+        "assign": 0.11411007300057463,
+        "rest": 0.5400599199988392,
+        "total": 14.275955107999835
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42652,
+      "timing": {
+        "wall_s": 14.784131961001549,
+        "cpu_s": 14.782002999999804
+      }
+    },
+    {
+      "world": 3084,
+      "all_mean": 0.66364,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        30,
+        50,
+        60
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 10045,
+      "users_known_terminal": 41,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 89,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 89
+      },
+      "cpu_s": {
+        "planner": 3.864163567000105,
+        "label_planner": 7.6550134759997945,
+        "assign": 0.11408225999957722,
+        "rest": 0.5148905490004836,
+        "total": 12.14814985199996
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42288,
+      "timing": {
+        "wall_s": 12.620050023018848,
+        "cpu_s": 12.618657000000212
+      }
+    },
+    {
+      "world": 3085,
+      "all_mean": 0.6846,
+      "final_100_mean": 0.7199999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9933,
+      "users_known_terminal": 41,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 1,
+        "y_high": 0,
+        "z_low": 85,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 85
+      },
+      "cpu_s": {
+        "planner": 3.7389552840002125,
+        "label_planner": 7.389417685999888,
+        "assign": 0.1109560429999874,
+        "rest": 0.5115050419999534,
+        "total": 11.750834055000041
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 41849,
+      "timing": {
+        "wall_s": 12.209458436002024,
+        "cpu_s": 12.207332999999835
+      }
+    },
+    {
+      "world": 3086,
+      "all_mean": 0.66352,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 10,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        80,
+        90,
+        100
+      ],
+      "cache_hits": 40,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 20805,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 10,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 2,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 178,
+        "z_high": 0,
+        "labels": 180,
+        "labels_on_any_face": 178
+      },
+      "cpu_s": {
+        "planner": 7.955389595000497,
+        "label_planner": 15.833525637000093,
+        "assign": 0.11516971300034129,
+        "rest": 0.5263377949991082,
+        "total": 24.43042274000004
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 60473,
+      "timing": {
+        "wall_s": 24.90440679801395,
+        "cpu_s": 24.900270999999975
+      }
+    },
+    {
+      "world": 3087,
+      "all_mean": 0.9126400000000002,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 8518,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 3.4011912889998257,
+        "label_planner": 6.810559965000039,
+        "assign": 0.11277320599947416,
+        "rest": 0.5172176590006075,
+        "total": 10.841742118999946
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 39825,
+      "timing": {
+        "wall_s": 11.314791415992659,
+        "cpu_s": 11.312895000000026
+      }
+    },
+    {
+      "world": 3088,
+      "all_mean": 0.85496,
+      "final_100_mean": 1.0,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 14,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90,
+        100,
+        110,
+        120,
+        130
+      ],
+      "cache_hits": 36,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 27599,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 14,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 252,
+        "z_high": 0,
+        "labels": 252,
+        "labels_on_any_face": 252
+      },
+      "cpu_s": {
+        "planner": 10.435973789000627,
+        "label_planner": 20.33673222799939,
+        "assign": 0.1146235349995095,
+        "rest": 0.5543870040005459,
+        "total": 31.441716556000074
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 71232,
+      "timing": {
+        "wall_s": 31.92804936299217,
+        "cpu_s": 31.922886000000062
+      }
+    },
+    {
+      "world": 3089,
+      "all_mean": 0.47839999999999994,
+      "final_100_mean": 0.58,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 10,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90
+      ],
+      "cache_hits": 40,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 15565,
+      "users_known_terminal": 31,
+      "decisions": 50,
+      "labelled_decisions": 10,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 1,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 140,
+        "z_high": 0,
+        "labels": 180,
+        "labels_on_any_face": 140
+      },
+      "cpu_s": {
+        "planner": 5.614098356000113,
+        "label_planner": 11.101824489999217,
+        "assign": 0.11500979099923825,
+        "rest": 0.5215367740015608,
+        "total": 17.35246941100013
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 56093,
+      "timing": {
+        "wall_s": 17.81508517600014,
+        "cpu_s": 17.799900999999863
+      }
+    },
+    {
+      "world": 3090,
+      "all_mean": 0.5943999999999999,
+      "final_100_mean": 0.66,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        40,
+        50
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9572,
+      "users_known_terminal": 43,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 1,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 87,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 87
+      },
+      "cpu_s": {
+        "planner": 3.6162067460002163,
+        "label_planner": 6.824991178999426,
+        "assign": 0.11572564699895338,
+        "rest": 0.5191797480015339,
+        "total": 11.07610332000013
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 41277,
+      "timing": {
+        "wall_s": 11.563694890995976,
+        "cpu_s": 11.559803000000102
+      }
+    },
+    {
+      "world": 3091,
+      "all_mean": 0.8560000000000002,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 6407,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 54,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 54
+      },
+      "cpu_s": {
+        "planner": 2.699207966000131,
+        "label_planner": 4.95455362700045,
+        "assign": 0.11109502300087115,
+        "rest": 0.5110305369985326,
+        "total": 8.275887152999985
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 35854,
+      "timing": {
+        "wall_s": 8.751716608996503,
+        "cpu_s": 8.74828999999977
+      }
+    },
+    {
+      "world": 3092,
+      "all_mean": 0.7245199999999999,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        30,
+        40,
+        50,
+        60
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 12241,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 100,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 100
+      },
+      "cpu_s": {
+        "planner": 4.622604816000148,
+        "label_planner": 9.66601689700019,
+        "assign": 0.12200213200094367,
+        "rest": 0.5517060479987776,
+        "total": 14.96232989300006
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 45373,
+      "timing": {
+        "wall_s": 15.438244587974623,
+        "cpu_s": 15.432099000000107
+      }
+    },
+    {
+      "world": 3093,
+      "all_mean": 0.6639200000000001,
+      "final_100_mean": 0.7399999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11915,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 3,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.548479094000186,
+        "label_planner": 8.752485198000159,
+        "assign": 0.11204498099937155,
+        "rest": 0.5002824590003456,
+        "total": 13.913291732000062
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 45538,
+      "timing": {
+        "wall_s": 14.367832398012979,
+        "cpu_s": 14.365644999999859
+      }
+    },
+    {
+      "world": 3094,
+      "all_mean": 0.8809600000000002,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 10,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90
+      ],
+      "cache_hits": 40,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 20406,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 10,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 176,
+        "z_high": 0,
+        "labels": 180,
+        "labels_on_any_face": 176
+      },
+      "cpu_s": {
+        "planner": 7.837859812000033,
+        "label_planner": 15.072453269000334,
+        "assign": 0.11328592899940304,
+        "rest": 0.5116140890002043,
+        "total": 23.535213098999975
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 61926,
+      "timing": {
+        "wall_s": 24.01015115500195,
+        "cpu_s": 23.9918160000002
+      }
+    },
+    {
+      "world": 3095,
+      "all_mean": 0.6644800000000001,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        60,
+        70,
+        80,
+        90
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 14840,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 140,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 140
+      },
+      "cpu_s": {
+        "planner": 5.575881537999749,
+        "label_planner": 10.880354279999892,
+        "assign": 0.1122176029991806,
+        "rest": 0.5027189640011329,
+        "total": 17.071172384999954
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 51998,
+      "timing": {
+        "wall_s": 17.531334033992607,
+        "cpu_s": 17.527906999999914
+      }
+    },
+    {
+      "world": 3096,
+      "all_mean": 0.6892,
+      "final_100_mean": 0.8400000000000002,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 17298,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 8,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 1,
+        "z_low": 141,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 141
+      },
+      "cpu_s": {
+        "planner": 6.645007790999898,
+        "label_planner": 13.319204810000201,
+        "assign": 0.11522332799972901,
+        "rest": 0.5226670150002519,
+        "total": 20.60210294400008
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 52660,
+      "timing": {
+        "wall_s": 21.078755641996395,
+        "cpu_s": 21.076252000000068
+      }
+    },
+    {
+      "world": 3097,
+      "all_mean": 0.5763199999999999,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 2,
+      "plan_steps": [
+        0,
+        10
+      ],
+      "cache_hits": 48,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 3827,
+      "users_known_terminal": 31,
+      "decisions": 50,
+      "labelled_decisions": 2,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 2,
+        "z_low": 36,
+        "z_high": 0,
+        "labels": 36,
+        "labels_on_any_face": 36
+      },
+      "cpu_s": {
+        "planner": 1.501247836000175,
+        "label_planner": 2.9524113429999943,
+        "assign": 0.11166486799970698,
+        "rest": 0.501301567000155,
+        "total": 5.066625614000031
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 29896,
+      "timing": {
+        "wall_s": 5.550321549992077,
+        "cpu_s": 5.54969600000004
+      }
+    },
+    {
+      "world": 3098,
+      "all_mean": 0.8979600000000002,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        50
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 10122,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 4.0069940060000135,
+        "label_planner": 7.535429838000255,
+        "assign": 0.11580126399985602,
+        "rest": 0.5587419969999701,
+        "total": 12.216967105000094
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 43452,
+      "timing": {
+        "wall_s": 12.724056063976604,
+        "cpu_s": 12.722459999999955
+      }
+    },
+    {
+      "world": 3099,
+      "all_mean": 0.7499600000000001,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9596,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 3,
+        "y_low": 0,
+        "y_high": 5,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 3.8398905500000637,
+        "label_planner": 7.130242502999863,
+        "assign": 0.11381745699964085,
+        "rest": 0.5118741530004627,
+        "total": 11.59582466300003
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 41831,
+      "timing": {
+        "wall_s": 12.062603016995126,
+        "cpu_s": 12.060762000000068
+      }
+    },
+    {
+      "world": 3100,
+      "all_mean": 0.8387600000000002,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        70,
+        80
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 15161,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 142,
+        "z_high": 1,
+        "labels": 144,
+        "labels_on_any_face": 143
+      },
+      "cpu_s": {
+        "planner": 5.893595659000084,
+        "label_planner": 11.965012255000374,
+        "assign": 0.11401454299948455,
+        "rest": 0.5130524619999051,
+        "total": 18.485674918999848
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 54634,
+      "timing": {
+        "wall_s": 18.973876775009558,
+        "cpu_s": 18.97143200000005
+      }
+    },
+    {
+      "world": 3101,
+      "all_mean": 0.6425599999999999,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 8419,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 3.2015045590001137,
+        "label_planner": 6.0830678269999225,
+        "assign": 0.11289394100117534,
+        "rest": 0.51595018199896,
+        "total": 9.913416509000172
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 39183,
+      "timing": {
+        "wall_s": 10.377698152005905,
+        "cpu_s": 10.376551000000063
+      }
+    },
+    {
+      "world": 3102,
+      "all_mean": 0.8082400000000001,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 10,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        100
+      ],
+      "cache_hits": 40,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 18198,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 10,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 174,
+        "z_high": 0,
+        "labels": 180,
+        "labels_on_any_face": 174
+      },
+      "cpu_s": {
+        "planner": 6.818711054999085,
+        "label_planner": 14.060750394999786,
+        "assign": 0.11553942400018968,
+        "rest": 0.5167643650008813,
+        "total": 21.511765238999942
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 58728,
+      "timing": {
+        "wall_s": 22.012277839996386,
+        "cpu_s": 22.003545999999915
+      }
+    },
+    {
+      "world": 3103,
+      "all_mean": 0.68948,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        70
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11920,
+      "users_known_terminal": 42,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.541310998999961,
+        "label_planner": 9.484934097000178,
+        "assign": 0.11276013000087914,
+        "rest": 0.5224439759990673,
+        "total": 14.661449202000085
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 46091,
+      "timing": {
+        "wall_s": 15.139356686006067,
+        "cpu_s": 15.137334999999894
+      }
+    },
+    {
+      "world": 3104,
+      "all_mean": 0.8337600000000001,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 10,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80,
+        90
+      ],
+      "cache_hits": 40,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 19921,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 10,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 180,
+        "z_high": 0,
+        "labels": 180,
+        "labels_on_any_face": 180
+      },
+      "cpu_s": {
+        "planner": 7.601937372000293,
+        "label_planner": 15.684728030999622,
+        "assign": 0.11650021500099683,
+        "rest": 0.5439877929991326,
+        "total": 23.947153411000045
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 61030,
+      "timing": {
+        "wall_s": 24.424405647994718,
+        "cpu_s": 24.421065999999882
+      }
+    },
+    {
+      "world": 3105,
+      "all_mean": 0.6447999999999999,
+      "final_100_mean": 0.7199999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        20
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 6139,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 54,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 54
+      },
+      "cpu_s": {
+        "planner": 2.3833055469999636,
+        "label_planner": 4.906018506000692,
+        "assign": 0.11183465900057854,
+        "rest": 0.5088951809987066,
+        "total": 7.91005389299994
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 35145,
+      "timing": {
+        "wall_s": 8.37502389898873,
+        "cpu_s": 8.374039000000039
+      }
+    },
+    {
+      "world": 3106,
+      "all_mean": 0.85216,
+      "final_100_mean": 0.9000000000000005,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 11837,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 4.648512525000115,
+        "label_planner": 9.917254724000486,
+        "assign": 0.11286155399989184,
+        "rest": 0.5159001629995146,
+        "total": 15.194528966000007
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 47012,
+      "timing": {
+        "wall_s": 15.668701500981115,
+        "cpu_s": 15.666486000000077
+      }
+    },
+    {
+      "world": 3107,
+      "all_mean": 0.5048800000000001,
+      "final_100_mean": 0.54,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        50,
+        60
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 10229,
+      "users_known_terminal": 30,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 3.817872015000148,
+        "label_planner": 7.42376110400005,
+        "assign": 0.11302609100016525,
+        "rest": 0.5185695309996845,
+        "total": 11.873228741000048
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 39422,
+      "timing": {
+        "wall_s": 12.371456593013136,
+        "cpu_s": 12.370206000000053
+      }
+    },
+    {
+      "world": 3108,
+      "all_mean": 0.5730799999999999,
+      "final_100_mean": 0.6199999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 16324,
+      "users_known_terminal": 31,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 144,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 144
+      },
+      "cpu_s": {
+        "planner": 6.018394008000314,
+        "label_planner": 12.413275596000176,
+        "assign": 0.115234399998144,
+        "rest": 0.5187963990013031,
+        "total": 19.065700402999937
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 50201,
+      "timing": {
+        "wall_s": 19.5369950820168,
+        "cpu_s": 19.534786999999824
+      }
+    },
+    {
+      "world": 3109,
+      "all_mean": 0.7613200000000002,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 7499,
+      "users_known_terminal": 42,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 71,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 71
+      },
+      "cpu_s": {
+        "planner": 3.0551739580000685,
+        "label_planner": 6.921499900000072,
+        "assign": 0.11613217900048767,
+        "rest": 0.5444703949995073,
+        "total": 10.637276432000135
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 38430,
+      "timing": {
+        "wall_s": 11.107620809983928,
+        "cpu_s": 11.10634200000004
+      }
+    },
+    {
+      "world": 3110,
+      "all_mean": 0.6186800000000001,
+      "final_100_mean": 0.7399999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 9,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        80
+      ],
+      "cache_hits": 41,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 17229,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 9,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 4,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 134,
+        "z_high": 0,
+        "labels": 162,
+        "labels_on_any_face": 134
+      },
+      "cpu_s": {
+        "planner": 6.593874327000094,
+        "label_planner": 12.637054937999892,
+        "assign": 0.11211709700000938,
+        "rest": 0.5042483590000302,
+        "total": 19.847294721000026
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 54880,
+      "timing": {
+        "wall_s": 20.30366004401003,
+        "cpu_s": 20.300887000000102
+      }
+    },
+    {
+      "world": 3111,
+      "all_mean": 0.67148,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9874,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 1,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 3.7550497690003795,
+        "label_planner": 7.490127213999813,
+        "assign": 0.1130119869999362,
+        "rest": 0.5127752009998403,
+        "total": 11.870964170999969
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 41236,
+      "timing": {
+        "wall_s": 12.335692058986751,
+        "cpu_s": 12.333919999999807
+      }
+    },
+    {
+      "world": 3112,
+      "all_mean": 0.7864800000000002,
+      "final_100_mean": 0.8199999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 7751,
+      "users_known_terminal": 44,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 3.005582284000184,
+        "label_planner": 5.923540633999892,
+        "assign": 0.11277534699934222,
+        "rest": 0.524217467000426,
+        "total": 9.566115731999844
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 38882,
+      "timing": {
+        "wall_s": 10.19852815498598,
+        "cpu_s": 10.197439000000259
+      }
+    },
+    {
+      "world": 3113,
+      "all_mean": 0.6909200000000001,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        80
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 7059,
+      "users_known_terminal": 40,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 2.845763390000002,
+        "label_planner": 6.3710307009998814,
+        "assign": 0.11334539799986487,
+        "rest": 0.5022356220003985,
+        "total": 9.832375111000147
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 37903,
+      "timing": {
+        "wall_s": 10.306381616013823,
+        "cpu_s": 10.30336299999999
+      }
+    },
+    {
+      "world": 3114,
+      "all_mean": 0.8782000000000002,
+      "final_100_mean": 0.9800000000000004,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 9,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        70,
+        100
+      ],
+      "cache_hits": 41,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 19187,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 9,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 162,
+        "z_high": 0,
+        "labels": 162,
+        "labels_on_any_face": 162
+      },
+      "cpu_s": {
+        "planner": 7.5446740510003565,
+        "label_planner": 13.877204626999628,
+        "assign": 0.11140435499964951,
+        "rest": 0.5147686410005008,
+        "total": 22.048051674000135
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 57997,
+      "timing": {
+        "wall_s": 22.50494563099346,
+        "cpu_s": 22.502037999999857
+      }
+    },
+    {
+      "world": 3115,
+      "all_mean": 0.79044,
+      "final_100_mean": 0.86,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        40,
+        50,
+        60
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 12437,
+      "users_known_terminal": 46,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 5.091421832999913,
+        "label_planner": 10.15989949499999,
+        "assign": 0.13293703299927984,
+        "rest": 0.6018406920009056,
+        "total": 15.986099053000089
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 46381,
+      "timing": {
+        "wall_s": 16.498303272004705,
+        "cpu_s": 16.496385000000146
+      }
+    },
+    {
+      "world": 3116,
+      "all_mean": 0.65276,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 13443,
+      "users_known_terminal": 39,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 5.161111113000061,
+        "label_planner": 9.193725035999933,
+        "assign": 0.1118431459999556,
+        "rest": 0.506584132999933,
+        "total": 14.973263427999882
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 44782,
+      "timing": {
+        "wall_s": 15.4511888550187,
+        "cpu_s": 15.448836999999912
+      }
+    },
+    {
+      "world": 3117,
+      "all_mean": 0.8520800000000002,
+      "final_100_mean": 0.88,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 8194,
+      "users_known_terminal": 48,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 72,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 72
+      },
+      "cpu_s": {
+        "planner": 3.2491151790000004,
+        "label_planner": 6.017894022000064,
+        "assign": 0.11494161800032998,
+        "rest": 0.5287677759995404,
+        "total": 9.910718594999935
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 39184,
+      "timing": {
+        "wall_s": 10.371591310016811,
+        "cpu_s": 10.370311000000129
+      }
+    },
+    {
+      "world": 3118,
+      "all_mean": 0.8881999999999997,
+      "final_100_mean": 0.9399999999999996,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        50
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9758,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 90,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 90
+      },
+      "cpu_s": {
+        "planner": 3.796034764999831,
+        "label_planner": 8.65873024199982,
+        "assign": 0.11538596699983827,
+        "rest": 0.5312902750006288,
+        "total": 13.101441249000118
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 43773,
+      "timing": {
+        "wall_s": 13.590046522993362,
+        "cpu_s": 13.587603999999828
+      }
+    },
+    {
+      "world": 3119,
+      "all_mean": 0.6338799999999999,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        40,
+        50
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9784,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 75,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 75
+      },
+      "cpu_s": {
+        "planner": 3.8040834750001977,
+        "label_planner": 6.931268097999691,
+        "assign": 0.11070559400013735,
+        "rest": 0.5000993129999642,
+        "total": 11.34615647999999
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 42504,
+      "timing": {
+        "wall_s": 11.800272097985726,
+        "cpu_s": 11.798412999999982
+      }
+    },
+    {
+      "world": 3120,
+      "all_mean": 0.7086,
+      "final_100_mean": 0.7999999999999998,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 8,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        60,
+        80
+      ],
+      "cache_hits": 42,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 15762,
+      "users_known_terminal": 44,
+      "decisions": 50,
+      "labelled_decisions": 8,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 1,
+        "y_high": 0,
+        "z_low": 120,
+        "z_high": 0,
+        "labels": 144,
+        "labels_on_any_face": 120
+      },
+      "cpu_s": {
+        "planner": 5.943702027000427,
+        "label_planner": 11.125296315000469,
+        "assign": 0.11350179800024307,
+        "rest": 0.49728060299889876,
+        "total": 17.679780743000038
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 51933,
+      "timing": {
+        "wall_s": 18.131561274989508,
+        "cpu_s": 18.12957499999993
+      }
+    },
+    {
+      "world": 3121,
+      "all_mean": 0.7074799999999999,
+      "final_100_mean": 0.7600000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        90
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 14805,
+      "users_known_terminal": 38,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 7,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 126,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 126
+      },
+      "cpu_s": {
+        "planner": 5.552205580000191,
+        "label_planner": 10.894250419000173,
+        "assign": 0.1154696259998218,
+        "rest": 0.49960498899986305,
+        "total": 17.06153061400005
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 48231,
+      "timing": {
+        "wall_s": 17.528851454000687,
+        "cpu_s": 17.52642199999991
+      }
+    },
+    {
+      "world": 3122,
+      "all_mean": 0.8587600000000002,
+      "final_100_mean": 0.9000000000000005,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        40
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 9158,
+      "users_known_terminal": 50,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 67,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 67
+      },
+      "cpu_s": {
+        "planner": 3.736973008999712,
+        "label_planner": 7.033661670000129,
+        "assign": 0.1146104429992647,
+        "rest": 0.5103517600007308,
+        "total": 11.395596881999836
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 38618,
+      "timing": {
+        "wall_s": 11.860923244006699,
+        "cpu_s": 11.85953100000006
+      }
+    },
+    {
+      "world": 3123,
+      "all_mean": 0.8916000000000002,
+      "final_100_mean": 0.96,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 5,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40
+      ],
+      "cache_hits": 45,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 10447,
+      "users_known_terminal": 49,
+      "decisions": 50,
+      "labelled_decisions": 5,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 3,
+        "y_high": 0,
+        "z_low": 89,
+        "z_high": 0,
+        "labels": 90,
+        "labels_on_any_face": 89
+      },
+      "cpu_s": {
+        "planner": 4.159505591999732,
+        "label_planner": 7.981497996999678,
+        "assign": 0.11537570799941932,
+        "rest": 0.5510423490013636,
+        "total": 12.807421646000194
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 41830,
+      "timing": {
+        "wall_s": 13.38044258498121,
+        "cpu_s": 13.379102999999986
+      }
+    },
+    {
+      "world": 3124,
+      "all_mean": 0.5113199999999999,
+      "final_100_mean": 0.6,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 3,
+      "plan_steps": [
+        0,
+        10,
+        50
+      ],
+      "cache_hits": 47,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 6210,
+      "users_known_terminal": 31,
+      "decisions": 50,
+      "labelled_decisions": 3,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 3,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 54,
+        "z_high": 0,
+        "labels": 54,
+        "labels_on_any_face": 54
+      },
+      "cpu_s": {
+        "planner": 2.374285163000195,
+        "label_planner": 4.367728626000144,
+        "assign": 0.11452932600036547,
+        "rest": 0.5216386169993257,
+        "total": 7.37818173200003
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 32688,
+      "timing": {
+        "wall_s": 7.8418436919746455,
+        "cpu_s": 7.840918999999985
+      }
+    },
+    {
+      "world": 3125,
+      "all_mean": 0.8231200000000002,
+      "final_100_mean": 0.88,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 7,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50,
+        80
+      ],
+      "cache_hits": 43,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 13573,
+      "users_known_terminal": 44,
+      "decisions": 50,
+      "labelled_decisions": 7,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 126,
+        "z_high": 0,
+        "labels": 126,
+        "labels_on_any_face": 126
+      },
+      "cpu_s": {
+        "planner": 5.093734616999882,
+        "label_planner": 9.943677759000366,
+        "assign": 0.11306074000026456,
+        "rest": 0.5518845089993647,
+        "total": 15.702357624999877
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 49315,
+      "timing": {
+        "wall_s": 16.23219762300141,
+        "cpu_s": 16.230031999999937
+      }
+    },
+    {
+      "world": 3126,
+      "all_mean": 0.60832,
+      "final_100_mean": 0.6399999999999999,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 6,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "cache_hits": 44,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 12157,
+      "users_known_terminal": 32,
+      "decisions": 50,
+      "labelled_decisions": 6,
+      "layouts_z_all_50": true,
+      "layout_box_faces": {
+        "x_low": 0,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 108,
+        "z_high": 0,
+        "labels": 108,
+        "labels_on_any_face": 108
+      },
+      "cpu_s": {
+        "planner": 5.1308776170005785,
+        "label_planner": 9.83695712000008,
+        "assign": 0.11974789499868166,
+        "rest": 0.5601662970007055,
+        "total": 15.647748929000045
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 44057,
+      "timing": {
+        "wall_s": 16.1876105350093,
+        "cpu_s": 16.18611400000009
+      }
+    },
+    {
+      "world": 3127,
+      "all_mean": 0.6892,
+      "final_100_mean": 0.7800000000000001,
+      "b04_B0_all_mean": null,
+      "tm_minus_b0": null,
+      "planner_calls": 4,
+      "plan_steps": [
+        0,
+        10,
+        20,
+        30
+      ],
+      "cache_hits": 46,
+      "assignment_changes": 0,
+      "hold_decisions": 0,
+      "hold_steps": 0,
+      "evaluations_used": 7257,
+      "users_known_terminal": 46,
+      "decisions": 50,
+      "labelled_decisions": 4,
+      "layouts_z_all_50": false,
+      "layout_box_faces": {
+        "x_low": 3,
+        "x_high": 0,
+        "y_low": 0,
+        "y_high": 0,
+        "z_low": 67,
+        "z_high": 0,
+        "labels": 72,
+        "labels_on_any_face": 67
+      },
+      "cpu_s": {
+        "planner": 2.9895178790000045,
+        "label_planner": 6.254529458000206,
+        "assign": 0.1250863589984874,
+        "rest": 0.5992853150012252,
+        "total": 9.968419010999924
+      },
+      "replay": {
+        "series_identical": true,
+        "contract_reward_identical": true
+      },
+      "world_json_bytes": 38698,
+      "timing": {
+        "wall_s": 10.464260730979731,
+        "cpu_s": 10.462219999999888
+      }
+    }
+  ],
+  "means": {
+    "TM_all_mean": {
+      "n": 128,
+      "mean": 0.7313021875,
+      "sd": 0.12463515893367036,
+      "min": 0.42724,
+      "max": 0.9812799999999999
+    },
+    "TM_final_100_mean": {
+      "n": 128,
+      "mean": 0.8125,
+      "sd": 0.13339893399330896,
+      "min": 0.4600000000000001,
+      "max": 1.0
+    },
+    "tm_minus_b0": {
+      "n": 0,
+      "mean": null,
+      "sd": null,
+      "min": null,
+      "max": null
+    },
+    "planner_calls": {
+      "n": 128,
+      "mean": 6.3203125,
+      "sd": 2.737702910180257,
+      "min": 1.0,
+      "max": 14.0
+    },
+    "cache_hits": {
+      "n": 128,
+      "mean": 43.6796875,
+      "sd": 2.737702910180257,
+      "min": 36.0,
+      "max": 49.0
+    },
+    "hold_steps": {
+      "n": 128,
+      "mean": 0.0,
+      "sd": 0.0,
+      "min": 0.0,
+      "max": 0.0
+    },
+    "evaluations_used": {
+      "n": 128,
+      "mean": 12582.5859375,
+      "sd": 5462.239822849266,
+      "min": 1407.0,
+      "max": 27599.0
+    },
+    "labelled_decisions": {
+      "n": 128,
+      "mean": 6.3203125,
+      "sd": 2.737702910180257,
+      "min": 1.0,
+      "max": 14.0
+    },
+    "cpu_planner_s": {
+      "n": 128,
+      "mean": 4.759058500367222,
+      "sd": 2.021403075836651,
+      "min": 0.4924674479999993,
+      "max": 10.435973789000627
+    },
+    "cpu_label_planner_s": {
+      "n": 128,
+      "mean": 9.413299075257825,
+      "sd": 3.9743406277802853,
+      "min": 1.1506671689999983,
+      "max": 20.33673222799939
+    },
+    "cpu_teacher_total_s": {
+      "n": 128,
+      "mean": 14.796123694132815,
+      "sd": 5.991526340874596,
+      "min": 2.227451961,
+      "max": 31.441716556000074
+    },
+    "cpu_world_incl_replay_s": {
+      "n": 128,
+      "mean": 15.26207734374999,
+      "sd": 5.990065111414064,
+      "min": 2.6645900000000005,
+      "max": 31.922886000000062
+    },
+    "world_json_bytes_max": 74206
+  },
+  "labels_total": 809,
+  "labels_z_all_50": false,
+  "box_faces": {
+    "x_low": 59,
+    "x_high": 46,
+    "y_low": 27,
+    "y_high": 27,
+    "z_low": 14220,
+    "z_high": 3,
+    "labels": 14562,
+    "labels_on_any_face": 14223
+  },
+  "cpu_projection": {
+    "per_world_cpu_s_incl_replay": 15.26207734374999,
+    "dev_panel_worlds": 32,
+    "dev_panel_cpu_s": 488.3864749999997,
+    "label_worlds": 128,
+    "label_worlds_cpu_s": 1953.5458999999987,
+    "note": "probe-mean basis: per-world CPU (T_M episode, label planners in label mode and the replay check) times the world count; applies to the mode and budget of this run"
+  },
+  "cpu_seconds": {
+    "self_user_s": 1953.908786,
+    "self_sys_s": 1.543746,
+    "children_user_s": 0.0048709999999999995,
+    "children_sys_s": 0.0,
+    "total_s": 1955.457403,
+    "peak_rss_kib": 78972
+  },
+  "start_utc": "2026-09-30T03:49:11+00:00",
+  "end_utc": "2026-09-30T04:21:46+00:00",
+  "wall_clock_s": 1954.5109215349948,
+  "arguments": [
+    "--worlds",
+    "3000-3127",
+    "--out",
+    "/home/fires/hmasd-wsl/runs/coupled_host_planner_distillation/b01_segA_labels_a01",
+    "--budget",
+    "3000",
+    "--seed",
+    "0",
+    "--label-seeds",
+    "0",
+    "1",
+    "2",
+    "--launch-sha",
+    "f46151ae6ed7a09a2019ba2f02975c1b92fb489a"
+  ],
+  "interpreter": {
+    "executable": "/home/fires/.venvs/hmasd-linux-cpu/bin/python",
+    "python": "3.10.20",
+    "numpy": "1.26.3",
+    "host": "Jacob"
+  }
+}
