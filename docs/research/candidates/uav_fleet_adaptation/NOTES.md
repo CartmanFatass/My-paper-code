@@ -2890,3 +2890,267 @@ serialization gaps. No automatic extra read, fit or native episode follows a
 failure. Actual new result exposure is still **0 fits/0 native steps** at this
 acceptance. Engineering/support labor is unmetered; synthetic check times are
 not result costs or an end-to-end engineering measurement.
+
+### B04 native acceptance and observation — 2026-09-30T19:02:55Z
+
+Exact reviewed input `98307b0c5cb6e42763458d780568d105d3f631af` was committed
+and publication verified before launch. The fixed operation was accepted on
+`local_linux` at19:02:55.623994Z. Its native identity, command, output and
+retained source are bound by the [original manifest](../../../../runs/uav_fleet_adaptation/b04_native_development_a01/launch-manifest.json);
+this is the single worker→reader chain, not a completed scientific reading.
+Fresh preflight observed6961229824available/effective bytes against the
+4294967296-byte floor, with no failure reason. The pre-admission CPU context
+was16logical/affinity CPUs and load averages1.9345703125/1.15185546875/
+.7099609375; timing retains the actual concurrent-host scope above.
+
+The first observer registration refused because this session's prior, fully
+consumed B03 observer state was explicitly stopped. I drained that unchanged
+generation17 (no events/wake), rearmed it to18, and registered the new original
+status reference at generation19. The detached observer's first fact reports
+matching live worker/supervisor identities, accepted admission, consistent
+records and no exit witness. No worker or accepted input was changed or
+restarted by observer setup. The native DM remains active through collection
+and reading; registration is not treated as proof of a child wake.
+
+
+<a id="b04-complete-reading"></a>
+## 2026-09-30 — B04 complete: reward continuation does not improve the retained students
+
+The fixed two-lineage study completed once on `local_linux`, from published
+source `98307b0c5cb6e42763458d780568d105d3f631af`. The worker finished at
+19:10:44.859547Z and its same-process, already priced reader finished before
+the native exit-zero witness at 19:11:36.273322Z. The original
+[reading](../../../../runs/uav_fleet_adaptation/b04_native_development_a01/reading.json)
+is **VERIFIED**, and both fits and both paid calibrations are complete. There
+was no replacement fit, added calibration, endpoint selection, extra native
+rollout or second charged reader. DM and independent scientific diagnosis use
+only saved JSON/array reductions after this boundary.
+
+The detached observer exposed READY at 19:11:56Z. Its native-child queue
+attempt returned `-32600` (direct app-server input is unsupported for this
+subagent); the already active deterministic waiter consumed the same event
+`909cbb4f2555524f01a99973`, wake `2f0809e6-45c2-4cef-8d52-933ea3010f75`.
+Generation19 was rearmed to20 to consume it, then observation was explicitly
+stopped. Worker and supervisor identities were absent with a consistent
+terminal witness; no launcher/worker restart occurred. Technical completion
+and the scientific reading below are distinct facts.
+
+### Fixed comparisons and signed outcomes
+
+Each row below is one fitted lineage on its own fresh 32-world final panel.
+L0 inherits the original B02 student and L1 the original B03 student; neither
+was selected by its old score. `S` is unchanged temperature-one use, `R` is
+its fixed final native-reward continuation, `C` is competent memoized local
+control, `Q` is its fixed .10 departure law, and `B*` is the independently
+calibrated candidate. Worlds and private innovations are paired within each
+lineage. The intervals are descriptive t95 intervals over those worlds,
+conditional on a fixed fitted endpoint; 64 worlds are not 64 training seeds.
+
+| Lineage/arm | Mean native J | Mean served/tick | Mean within-episode service p10 | Mean episode minimum | Mean path m/UAV |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| L0 C | .344029105 | 20.687744 | 20.000000 | 12.500000 | 2236.285 |
+| L0 Q | .370187093 | 22.434692 | 17.625000 | 11.562500 | 3985.608 |
+| L0 S | .385023142 | 23.708618 | 21.125000 | 12.031250 | 3090.545 |
+| L0 R | .344745576 | 21.055176 | 18.812500 | 12.343750 | 1984.979 |
+| L0 B*=S_T2 | .392267569 | 24.204102 | 20.187500 | 11.312500 | 4905.457 |
+| L1 C | .324780467 | 19.276245 | 18.328125 | 10.875000 | 2702.194 |
+| L1 Q | .371299364 | 22.586060 | 18.234375 | 9.906250 | 4079.542 |
+| L1 S=B* | .393180638 | 24.143677 | 21.562500 | 10.750000 | 3217.685 |
+| L1 R | .387968160 | 23.853149 | 20.703125 | 10.656250 | 3885.973 |
+
+| Contrast | L0 J [conditional t95] | L1 J [conditional t95] |
+| --- | --- | --- |
+| R−S | −.040277566 [−.063749768,−.016805364] | −.005212479 [−.024293815,+.013868858] |
+| R−B* | −.047521994 [−.067707221,−.027336766] | −.005212479 [−.024293815,+.013868858] |
+| R−Q | −.025441518 [−.047614879,−.003268156] | +.016668796 [−.001487537,+.034825129] |
+| R−C | +.000716470 [−.027594453,+.029027394] | +.063187693 [+.037741396,+.088633991] |
+| B*−S | +.007244428 [−.010900159,+.025389014] | 0 (identical source/decoder/tape reuse) |
+| B*−Q | +.022080476 [+.005555219,+.038605734] | +.021881275 [+.007272547,+.036490002] |
+| B*−C | +.048238464 [+.021878044,+.074598884] | +.068400172 [+.042941000,+.093859343] |
+| S−Q | +.014836049 [−.003725548,+.033397645] | +.021881275 [+.007272547,+.036490002] |
+| Q−C | +.026157988 [+.007546565,+.044769411] | +.046518897 [+.022490024,+.070547770] |
+
+Neither lineage meets the prespecified positive point comparison against both
+S and B*. L0 R−S also loses 2.653442 mean served/tick [−4.334493,−.972392]
+and 2.312500 p10 [−3.887216,−.737784], while shortening path by1105.566m
+[−1612.275,−598.857]. L1 R−S is −.290527 served [−1.610259,+1.029204],
+−.859375 p10 [−2.230151,+.511401], and **+668.288m** path
+[+109.899,+1226.677]. Own-S J is negative in24/32 L0 worlds and21/32 L1;
+p10 is lower in24 and23 worlds. L1's uncertainty does not establish harm or
+equivalence, and its positive R−C/R−Q points do not establish added learning:
+its unchanged S already has the larger corresponding J/service/p10 means.
+Equal-weight descriptive effects are R−S J−.022745022, R−B*−.026367236,
+R−Q−.004386361 and R−C+.031952082; there is no pooled-world training interval.
+
+Retain heterogeneous successes and large losses. L0 world29351014 has R−S
+J−.170115278, served−12.007813 and p10−10; world29351023 loses12p10.
+L0 R−B* world29351019 loses J.179323865, served12.367188 and p10 10.5.
+L1 world29353007 has R−S J−.094176978 and served−5.425781; world29353023
+loses9p10. Positive R−S worlds remain, including L0 world29351015
+(J+.076138828, served+5.164063, p10+6) and L1 world29353015
+(J+.148424828, served+10.953125, p10+11). No arm except C has a zero-total-
+service tick in these final panels; L0 C world29351028 has16. These are
+team-service counts, not individual-user continuity or reliability claims.
+
+### Calibration and preserved capability
+
+All eight candidates ran on32 calibration worlds per lineage, before either
+final panel. Their calibration mean J values in fixed candidate order are:
+
+| Candidate | L0 calibration J | L1 calibration J |
+| --- | ---: | ---: |
+| C_0 | .343923653 | .326483577 |
+| C_.05 | .358818276 | .359445569 |
+| C_.10 | .361421107 | .353768998 |
+| C_.20 | .353594971 | .347281443 |
+| S_greedy | .346160761 | .341969301 |
+| S_T.5 | .381150979 | .381620404 |
+| S_T1 | .385814971 | **.395950551** |
+| S_T2 | **.396311680** | .394868987 |
+
+The fixed mean-J selector chooses S_T2 for L0 and unchanged S_T1 for L1.
+L1 reuse is exact metadata identity, not empirical score/trajectory equality;
+only L0 requires an additional32-episode final B* arm. Calibration is paid
+reward-based selection, not zero-cost tuning. L0 B*−S is positive in16 and
+negative in16 final J worlds; mean J+.007244428 and service+.495483 remain
+uncertain, while p10 falls.9375, episode minimum falls.71875
+[−1.393159,−.044341], and path rises1814.912m [1455.385,2174.438].
+World29351013 loses J.091330982, p10 14 and minimum5 while adding2212.021m.
+There is no demonstrated default temperature upgrade, no evidence that this
+grid exhausts ordinary calibration, and no selection of another temperature
+from the final panel. L1's calibration selects doing nothing to S.
+
+Unchanged S retains a useful comparison to the prespecified ordinary Q on two
+new, disjoint panels: S−Q service+1.273926/+1.557617, p10+3.5/+3.328125
+(intervals [1.830134,5.169866]/[2.040656,4.615594]) and path−895.062/−861.858m
+(intervals [−1394.311,−395.814]/[−1357.764,−365.951]). S−Q mean J is positive
+in21/32 and23/32 worlds, but L0's J interval crosses zero. Preserve original
+parent-B04's different finite decoder/tapes rather than pretending these are
+identical repetitions. These are two retained constructions on fresh worlds,
+not new independently trained lineages or training-population reliability.
+Adverses remain: L0 world29351009 loses J.110627140/served7.429688 againstQ;
+L0 world29351007 loses6.5p10 and6minimum. L1 world29353015 loses
+J.079103695/served5.355469 againstQ; world29353009 loses5.5p10. Both S
+policies retain the analytic helper and acquisition expense.
+
+### Executed change, rather than a new mechanism attribution
+
+Each lineage completed128 two-episode groups with four full actor and critic
+Adam steps per group:512 steps for each network, fresh empty optimizer states,
+no checkpoint choice, no teacher/KL/entropy term. All first-epoch FP32 logits
+match exactly; across both lineages maximum probability error is8.88e−16,
+chosen-logp error1.78e−15 and ratio-from-one8.88e−16. Actor endpoint L2 movement
+is1.737203/1.782680, with25161/25366 of34715 parameter values changed; critic
+L2 is1.332884/1.326359. All recorded actor gradient norms exceed the .5 clip
+threshold, but gradients/steps are finite and nonzero. That describes the
+chosen program, not a diagnosis that its clipping or optimizer caused loss.
+
+On R's own lawful saved inputs, the original S shadow has mean TV
+.464034/.265857 from R. Of10240 agent clocks per lineage, requested categories
+change4908/3129, modal categories4571/2669 and four-tick clipped physical
+paths4761/2955 (46.494%/28.857%). Thus the updates had substantial actual
+behavioral exposure; boundary aliases or a wholly unchanged deployed policy
+do not explain the null improvement. This is a distribution/request/kinematic
+comparison on R history, not S's reward on that history, exact suffix replay,
+or a causal account of which changed decisions lost native service.
+
+L0 final entropy .238182 versus S .437889 accompanies more zero-displacement
+UAV-ticks (1004.125 versus805.063), boundary ticks (209.906 versus123.375)
+and fallback decisions (22.656 versus8.531) per episode. L1 entropy is nearly
+unchanged (.430016 versus.439654) despite its substantial shadow drift.
+These descriptive differences do not identify entropy collapse, a critic or
+credit problem, representation failure, or the value of any repair. Sequential
+training quarters also use different worlds; their changing returns are not
+controlled learning-curve comparisons. The endpoint contrasts carry the
+native-development conclusion.
+
+### Complete exposure, compute and retained evidence
+
+Actual new exposure is **2 actor–critic fits plus2 paid discrete calibrations,
+1312 complete episodes and335872 native steps**:512 training episodes/131072
+steps,512 calibration episodes/131072steps and288 final episodes/73728steps.
+There is one constructor/unscored reset plus1312 explicit scored resets.
+Actor/critic optimizer calls are1024 each; actor replay rows655360, critic
+replay131072 and collected critic rows32768. The163840 first-density-identity
+rows are a subset of paid actor replay, not another replay charge. There are
+0new expert labels. All actual counts agree with the realized fixed branch.
+
+C makes122880 requests, with59932 cache hits/62948 misses,1699596 candidate
+trajectories and6798384 model ticks. Student makes296960 requests,
+144269 cache hits/152691 misses,152691 helper/neural rows and276480 fresh
+sampling draws; greedy rows do not draw. Native dense power slots92725875 plus
+controller/helper links30418389 total123144264 power-work slots. Cache payload
+counts sum episode-local caches, not simultaneous memory or a zero-cost helper.
+Worker S shadows add20480 actor rows/81920 simple motion ticks. The original
+reader adds71680 actor rows (51200 final endpoint and20480 shadow),81920 shadow
+motion ticks,1679360 verified native-agent motion ticks and599940 fallback-
+ranking motion ticks. It uses **0native steps,0radio/expert queries,0training
+or calibration actor rows,0critic forwards and0optimizer calls**. All paid
+actor rows across collection, optimization, worker shadows and reader total
+900211; critic rows total163840. No production read is repeated for diagnosis.
+
+Whole worker wall/CPU is469.369103/467.107003s; reader50.289765/50.267826s;
+outer runner-through-reader chain519.886853/517.602806s, including import and
+serialization gaps but excluding its final self-report write. Worker episode
+CPU is156.289787 training,139.828009 calibration and84.053520 evaluation;
+separate update groups cost78.152967CPU seconds. Remaining worker bookkeeping
+is within the whole-worker timer. Peak430004KiB is the process high-water mark
+including the earlier worker, not incremental reader RAM. These are actual
+one-thread concurrent-host measurements; no online deadline, uncontended
+benchmark or engineering-labor measurement was made.
+
+The prior B02/B03 acquisition remains2fits/212992 unique native steps/16000
+supervised updates/8192000 label presentations/163840 label requests and
+205.046058 worker+reader CPU seconds. Acquisition plus this study therefore
+costs **4fits,2calibrations,548864 unique native steps and722.648864 measured
+CPU seconds**, retaining the two timing scopes and physical-host difference.
+The earlier B01 loss remains a separate2fits/576000steps/31190.348 worker+
+reader CPU seconds, plus its zero-exposure technical attempt/support; no
+successful construction or small new runtime cancels that investment.
+Engineering, scientific review and publication labor remain unmetered.
+
+One canonical full output stays at configured `local_linux`:
+`/home/fires/hmasd-wsl/runs/uav_fleet_adaptation/b04_native_development_a01/`.
+All1312 unique NPZs total506906150 bytes and are named/hashed by the original
+summary and checked by the reader. Their unique complete native/training/
+calibration/final-shadow evidence remains required by this retained fixed
+comparison. Original `summary.json` includes the paid per-episode and optimizer
+traces, so it remains bulk (6626301bytes, SHA256
+`95947d006607ef1dda6269a1f7eae46e861980fa72d71d6d3af3a50e0754de27`), unchanged
+outside Git; the original879195-byte `reading.json` is the compact published
+aggregate and raw-identity reading (SHA256
+`93c681eba38f8fcd7fd9059eb9eaa75142771d085bf645e831099bed63b25a50`).
+`assets/R0.pt` and `R1.pt` are1264725bytes each with hashes
+`97ba5e39e11f62d04757de08a0b05ac782784c293512d6595bcf51ffe7441d29` and
+`2deec512ecd183d462db7f21b95e5f33771b7f670557739c0b9c3da4c3cfef1b`.
+They retain the adverse final actor, critic and optimizer evidence, not
+replacement starting assets. Initial S originals remain unchanged at the
+already recorded B02/B03 `wsl_4070` canonical paths. No archive/duplicate raw
+copy is created for this local result.
+
+### Working explanation before independent result diagnosis
+
+I used current published RESEARCH topic4 at source `98307b0c5` when reading
+this result: its separation of construction, finite optimization and complete
+package value makes unchanged S and the paid ordinary calibration decisive
+comparators. The new data strengthen **retained task capability**, including
+fresh-world S−Q temporal/path evidence, while weakening the prediction that
+this unrestricted finite reward-continuation program improves that capability.
+Lawful local representation supported the original competent behavior and
+allowed substantial changed behavior; neither representation insufficiency nor
+transferable pretrained features are identified. No new native-learning
+benefit is established; this is an informative executed negative, not missing
+technical evidence or a proof that the parent learning question is impossible.
+
+My provisional investment judgment is to preserve both original students and
+all ordinary/adverse outcomes, end this exact full-actor PPO recipe, and avoid
+an automatic extra seed, longer horizon, entropy/KL patch or calibration sweep.
+A third copy would mainly refine this recipe's already nonpositive mean
+comparison; a mechanism diagnosis would need a new consequential decision and
+an intervention prediction, not simply a tunable component. Replicating or
+confirming the retained S capability could matter for a specified use, but no
+such new purchase or deployment tolerance is selected here. A richer native
+contract is a Root cross-question allocation, not silently authorized by this
+batch. The separate-context ResearchCritic receives original supporting and
+adverse sources and owns the independent diagnosis; its recommendation and
+any dissent will be recorded below before the final disposition.
