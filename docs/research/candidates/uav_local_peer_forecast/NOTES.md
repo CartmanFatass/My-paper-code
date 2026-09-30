@@ -1304,3 +1304,50 @@ no proof of mediation, exhaustive suffix replay or successful toy is an admissio
 gate. A future proposal is optional, not owed by the still-open parent question.
 No additional Pro consultation supplies a distinct unresolved role at this
 decision; the evidence-first ResearchCritic review is adequate and uncontested.
+
+The final shared-main refresh at 8b81586a8 also adds the completed second local-C
+inheritance construction to RESEARCH. That strengthens the separately retained
+asset's finite construction recurrence; it does not change this matched C/V/R
+estimand, rank the assets across panels, or select another arm here. The critic's
+ordinary-I and complete-trajectory reasoning still covers the resolved stop.
+
+<a id="b01-publication-cleanup"></a>
+## 2026-09-30 — Publication and measured closure cleanup
+
+Published the complete compact evidence and independent scientific disposition
+at **d7445071f3fa1bed62537f3797abced70298cd26**, verified against origin/main.
+The executable inputs remain the already published source 13da38312. The fixed
+controller, guarded collector, independent reader and meaningful contract tests
+remain useful retained code; no unused direction implementation was identified.
+The configured-node canonical output remains
+`/home/wu/projects/HMASD/runs/uav_local_peer_forecast/b01_cv_reversal_a01/`.
+Its raw 96 files total 7,215,902 bytes, with each size/SHA256 in worker-status.json.
+Keep that sole raw copy for the retained positive/adverse trajectories and
+forecast/decision claims; local Git contains compact readings and source/status.
+
+Before deletion, reconciled the native worker/supervisor's valid terminal exit,
+the consumed/stopped observer (PID 1092013 absent), and the independent critic's
+explicit confirmation that no snapshot/scratch consumer remained. The supported
+exact-target snapshot collector preview and apply both admitted this completed
+source at its durable reference. It removed only snapshot
+`c3b7702e04984830ab4355b038174722`; the accepted claim, manifests and canonical
+output remain. Afterwards, verified snapshot absence, absence of its Git worktree
+registration, and all 96 canonical raw hashes and byte counts again.
+
+Measured allocated bytes for the actual deleted targets, before to after:
+
+| Node | Deleted target | Allocated bytes before | After |
+| --- | --- | ---: | ---: |
+| wsl_4070 | `/home/wu/projects/HMASD/.git/hmasd-launch-sources/c3b7702e04984830ab4355b038174722` | 810348544 | 0 |
+| authoring | `temp/directions/uav_local_peer_forecast/` | 20480 | 0 |
+| authoring | `experiments/candidates/uav_local_peer_forecast/__pycache__/` | 180224 | 0 |
+| authoring | `tests/experiments/candidates/uav_local_peer_forecast/__pycache__/` | 53248 | 0 |
+| authoring | local run `stdout.log` and `stderr.log`, both empty copies | 0 | 0 |
+
+All listed targets are absent. Net measured reduction is **810,602,496 bytes**
+(810,348,544 remote plus 253,952 local; approximately 773.05 MiB), excluding Git
+object storage and unrelated host activity. No backup, archive copy or duplicate
+raw dataset was made. Actual leftovers are the deliberately retained useful code,
+compact published evidence, one canonical raw copy, and native acceptance/exit
+records. **No cleanup tool blocker remains.** The direction is scientifically
+read and closed to this unchanged recipe; no operation or advice is pending.
